@@ -232,7 +232,6 @@ $s_message = 'سنیہا';
 $s_next_status = 'اڳلی حیثیت';
 $s_workflow = 'کم دی چال';
 $s_status_level = 'حالت';
-$s_in_project = 'منصوبے وچ';
 $s_delete_config_button = 'ترتیباں مٹاؤ';
 $s_configuration_option_type = 'قسم';
 $s_configuration_option_value = 'قدر';

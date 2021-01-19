@@ -183,6 +183,11 @@ if( !$g_failed_test ) {
 	define( 'CHECK_DISPLAY_INC_ALLOW', true );
 	include( 'check_display_inc.php' );
 }
+
+if( !$g_failed_test ) {
+	define( 'CHECK_PLUGINS_INC_ALLOW', true );
+	include( 'check_plugins_inc.php' );
+}
 ?>
 </table>
 </div>

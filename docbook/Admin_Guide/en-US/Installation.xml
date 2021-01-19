@@ -104,7 +104,7 @@
 
 				<listitem>
 					<para>Disk</para>
-					<para>The application code is less than 30 MB.
+					<para>The application code is less than 50 MiB.
 					</para>
 					<para>The amount of disk space required for the database
 						will vary depending on the RDBMS and the volume of

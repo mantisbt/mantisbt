@@ -272,7 +272,7 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
 <div id="<?php echo $t_box_title ?>" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-list-alt"></i>
+			<?php print_icon( 'fa-list-alt', 'ace-icon' ); ?>
 <?php
 #-- Box title
 $t_box_url = html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' . $t_url_link_parameters[$t_box_title];
@@ -291,7 +291,7 @@ echo '<span class="badge"> ' . " $v_start - $v_end / $t_bug_count " . ' </span>'
 		</h4>
 		<div class="widget-toolbar">
 			<a data-action="collapse" href="#">
-				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+				<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 			</a>
 		</div>
 		<div class="widget-toolbar no-border hidden-xs">
@@ -348,10 +348,13 @@ for( $i = 0;$i < $t_count; $i++ ) {
 			# choose color based on status
 			$t_status_css = html_get_status_css_fg( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 			$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );
-			echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '" title="' . $t_status . '"></i> ';
+			print_icon( 'fa-square', 'fa-status-box ' . $t_status_css, $t_status );
+			echo ' ';
 
 			if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
-				echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '"><i class="fa fa-pencil bigger-130 padding-2 grey" title="' . lang_get( 'update_bug_button' ) . '"></i></a>';
+				echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '">';
+				print_icon( 'fa-pencil', 'bigger-130 padding-2 grey', lang_get( 'edit' ) );
+				echo '</a>';
 			}
 
 			if( ON == config_get( 'show_priority_text' ) ) {
@@ -364,12 +367,14 @@ for( $i = 0;$i < $t_count; $i++ ) {
 				$t_href = string_get_bug_view_url( $t_bug->id ) . '#attachments';
 				$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $t_bug->id );
 				$t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
-				echo '<a class="attachments" href="' . $t_href . '" title="' . $t_href_title . '">';
-				echo ' <i class="fa fa-paperclip fa-lg grey" title="' . $t_alt_text . '"></i></a>';
+				echo '<a class="attachments" href="' . $t_href . '" title="' . $t_href_title . '"> ';
+				print_icon( 'fa-paperclip', 'fa-lg grey', $t_alt_text );
+				echo '</a>';
 			}
 
 			if( VS_PRIVATE == $t_bug->view_state ) {
-				echo ' <i class="fa fa-lock fa-lg light-grey" title="' . lang_get( 'private' ) . '"></i>';
+				echo ' ';
+				print_icon( 'fa-lock', 'fa-lg light-grey', lang_get( 'private' ) );
 			}
 			?>
 	</td>

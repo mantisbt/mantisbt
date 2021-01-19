@@ -190,6 +190,10 @@ if( $t_priority != 0 ) {
 	$t_issue['priority'] = array( 'id' => $t_priority );
 }
 
+# @TODO decide what to do with projection field - see #27577
+# According to PHPDoc for $g_bug_report_page_fields, projection is not allowed
+# in the list; bug_report_page.php does not display it, so it does not really
+# make sense to process it here.
 $t_projection = gpc_get_int( 'projection', 0 );
 if( $t_projection != 0 ) {
 	$t_issue['projection'] = array( 'id' => $t_projection );

@@ -75,7 +75,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-sitemap"></i>
+				<?php print_icon( 'fa-sitemap', 'ace-icon' ); ?>
 				<?php echo lang_get('edit_project_category_title') ?>
 			</h4>
 		</div>
@@ -85,7 +85,6 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
-			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
 			<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
 			<tr>
 				<td class="category">
@@ -118,16 +117,6 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 	</form>
 	</div>
 </div>
-
-<div class="col-md-12 col-xs-12">
-	<form method="post" action="manage_proj_cat_delete.php" class="pull-right">
-		<fieldset>
-			<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
-			<input type="hidden" name="id" value="<?php echo string_attribute( $f_category_id ) ?>" />
-			<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
-			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
-		</fieldset>
-	</form>
-</div><?php
+<?php
 
 layout_page_end();

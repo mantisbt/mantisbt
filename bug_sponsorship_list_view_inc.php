@@ -85,7 +85,7 @@ if( $t_show_sponsorships ) {
 <table class="width100" cellspacing="1">
 	<tr>
 		<td width="50" rowspan="3">
-			<i class="fa fa-usd" title="<?php echo lang_get( 'sponsor_verb' ) ?>"></i>
+			<?php print_icon( 'fa-usd', '', lang_get( 'sponsor_verb' ) ); ?>
 		</td>
 		<td class="form-title" colspan="2"><?php
 			collapse_icon( 'sponsorship' );

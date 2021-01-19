@@ -90,30 +90,29 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 <?php
 	if( $p_accounts_menu ) {
 		print_account_menu( 'account_prefs_page.php' );
+		echo '<div class="col-md-12 col-xs-12">';
 	}
 ?>
 
-<div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-
-<div id="account-prefs-update-div" class="form-container">
-	<form id="account-prefs-update-form" method="post" action="account_prefs_update.php" class="form-inline">
-		<fieldset>
-			<?php echo form_security_field( 'account_prefs_update' ) ?>
-			<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
-			<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
-
-	<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-sliders"></i>
+			<?php print_icon( 'fa-sliders', 'ace-icon' ); ?>
 			<?php echo lang_get( 'default_account_preferences_title' ) ?>
 		</h4>
 	</div>
 
 	<div class="widget-body">
-	<div class="widget-main no-padding">
-	<div class="table-responsive">
+		<div class="widget-main no-padding">
+			<div id="account-prefs-update-div" class="form-container">
+				<form id="account-prefs-update-form" method="post" action="account_prefs_update.php" class="form-inline">
+					<fieldset>
+						<?php echo form_security_field( 'account_prefs_update' ) ?>
+						<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
+						<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
+
+						<div class="table-responsive">
 	<table class="table table-bordered table-condensed table-striped">
 
 	<tr>
@@ -395,23 +394,32 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 	</tr>
 	<?php event_signal( 'EVENT_ACCOUNT_PREF_UPDATE_FORM', array( $p_user_id ) ); ?>
 	</table>
-	</div>
-	</div>
-	<div class="widget-toolbox padding-8 clearfix">
-		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<button form="account-prefs-update-form"
+					class="btn btn-primary btn-white btn-round">
+				<?php echo lang_get( 'update_prefs_button' ) ?>
+			</button>
 
-		<?php echo form_security_field( 'account_prefs_reset' ) ?>
-		<input type="submit" class="btn btn-primary btn-white btn-round"
-			   formaction="account_prefs_reset.php"
-			   value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
+<?php
+	print_form_button(
+		'account_prefs_reset.php',
+		lang_get( 'reset_prefs_button' ),
+		array( 'user_id' => $p_user_id, 'redirect_url' => $t_redirect_url ),
+		null,
+		'btn btn-primary btn-white btn-round'
+	);
+?>
+		</div>
 	</div>
-	</div>
-	</div>
-		</fieldset>
-	</form>
-</div>
-
 </div>
 
 <?php
+	if( $p_accounts_menu ) {
+		echo '</div>';
+	}
 } # end of edit_account_prefs()

@@ -86,7 +86,7 @@ print_manage_menu( 'manage_proj_page.php' );
 	<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-puzzle-piece"></i>
+			<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
 			<?php echo lang_get( 'projects_title' ) ?>
 		</h4>
 	</div>
@@ -189,7 +189,7 @@ print_manage_menu( 'manage_proj_page.php' );
 	<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-sitemap"></i>
+			<?php print_icon( 'fa-sitemap', 'ace-icon' ); ?>
 			<?php echo lang_get( 'global_categories' ) ?>
 		</h4>
 	</div>
@@ -228,10 +228,10 @@ print_manage_menu( 'manage_proj_page.php' );
 					$t_project_id = urlencode( ALL_PROJECTS );
 					echo '<div class="btn-group inline">';
 					echo '<div class="pull-left">';
-					print_form_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
+					print_form_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit' ) );
 					echo '</div>';
 					echo '<div class="pull-left">';
-					print_form_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
+					print_form_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete' ) );
 					echo '</div>';
 ?>
 				</td>

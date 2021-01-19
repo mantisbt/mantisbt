@@ -487,7 +487,7 @@ function user_pref_db_delete( $p_user_id, $p_project_id ) {
 		. ' WHERE user_id=:user_id AND project_id=:project_id'
 	);
 	$t_query->bind( 'user_id', (int)$p_user_id );
-	$t_query->bind( '$p_project_id', (int)$p_project_id );
+	$t_query->bind( 'project_id', (int)$p_project_id );
 	$t_query->execute();
 }
 

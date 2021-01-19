@@ -467,7 +467,7 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value, $p_requ
 		if( substr( $t_cf_regex, -1 ) != '$' ) {
 			$t_cf_regex .= '.*';
 		}
-		echo ' pattern="' . $t_cf_regex . '"';
+		echo ' pattern="' . string_attribute( $t_cf_regex ) . '"';
 	}
 	echo ' value="' . string_attribute( $p_custom_field_value ) .'" />';
 }

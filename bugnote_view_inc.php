@@ -108,12 +108,12 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <div id="bugnotes" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-comments"></i>
+		<?php print_icon( 'fa-comments', 'ace-icon' ); ?>
 		<?php echo lang_get( 'activities_title' ) ?>
 	</h4>
 	<div class="widget-toolbar">
 		<a data-action="collapse" href="#">
-			<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+			<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 		</a>
 	</div>
 	</div>
@@ -159,15 +159,18 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		<div class="pull-left padding-2">
 		<p class="no-margin">
 			<?php
-			echo '<i class="fa fa-user grey"></i> ';
+			print_icon( 'fa-user', 'grey' );
+			echo ' ';
 			print_user( $t_activity['user_id'] );
 			?>
 		</p>
 		<p class="no-margin small lighter">
-			<i class="fa fa-clock-o grey"></i> <?php echo date( $t_normal_date_format, $t_activity['timestamp'] ); ?>
+			<?php print_icon( 'fa-clock-o', 'grey' ); ?>
+			<?php echo date( $t_normal_date_format, $t_activity['timestamp'] ); ?>
 			<?php if( $t_activity['private'] ) { ?>
 				&#160;&#160;
-				<i class="fa fa-eye red"></i> <?php echo lang_get( 'private' ) ?>
+				<?php print_icon( 'fa-eye', 'red' ); ?>
+				<?php echo lang_get( 'private' ) ?>
 			<?php } ?>
 		</p>
 		<p class="no-margin">
@@ -180,7 +183,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			?>
 			&#160;
 			<?php if( $t_activity['type'] == ENTRY_TYPE_NOTE ) { ?>
-			<i class="fa fa-link grey"></i>
+			<?php print_icon( 'fa-link', 'grey' ); ?>
 			<a rel="bookmark" href="<?php echo string_get_bugnote_view_url( $t_activity['note']->bug_id, $t_activity['note']->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>">
 				<?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_activity['id_formatted'] ?>
 			</a>
@@ -188,11 +191,26 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		</p>
 		<?php
 		if( $t_activity['modified'] ) {
-			echo '<p class="no-margin small lighter"><i class="fa fa-retweet"></i> ' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_activity['last_modified'] ) . '</p>';
-			$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_activity['id'] );
-			if( $t_revision_count >= 1 ) {
-				$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
-				echo '<p class="no-margin"><span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_activity['id'] . '">' . $t_view_num_revisions_text . '</a></span></p>';
+			echo '<p class="no-margin small lighter">';
+			print_icon( 'fa-retweet' );
+			echo ' ' . lang_get( 'last_edited')
+				. lang_get( 'word_separator' )
+				. date( $t_normal_date_format, $t_activity['last_modified'] )
+				. '</p>';
+			if( access_can_view_bugnote_revisions( $t_activity['id'] ) ) {
+				$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_activity['id'] );
+				if( $t_revision_count >= 1 ) {
+					$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
+?>
+		<p class="no-margin">
+			<span class="small bugnote-revisions-link">
+				<a href="bug_revision_view_page.php?bugnote_id=<?php echo $t_activity['id'] ?>">
+					<?php echo $t_view_num_revisions_text ?>
+				</a>
+			</span>
+		</p>
+<?php
+				}
 			}
 		}
 		?>
@@ -205,7 +223,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				echo '<div class="pull-left">';
 				print_form_button(
 					'bugnote_edit_page.php',
-					lang_get( 'bugnote_edit_link' ),
+					lang_get( 'edit' ),
 					array( 'bugnote_id' => $t_activity['id'] ),
 					OFF );
 				echo '</div>';
@@ -222,7 +240,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 					print_form_button(
 						'bugnote_delete.php',
-						lang_get( 'delete_link' ),
+						lang_get( 'delete' ),
 						array( 'bugnote_id' => $t_activity['id'] ),
 						$t_security_token_notes_delete );
 				} else {
@@ -232,7 +250,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 					if( $t_activity['can_delete'] ) {
 						print_link_button( 'bug_file_delete.php?file_id=' . $t_activity['id'] . form_security_param( 'bug_file_delete', $t_security_token_attachments_delete ),
-							lang_get( 'delete_link' ), 'btn-xs' );
+							lang_get( 'delete' ), 'btn-xs' );
 					}
 				}
 
@@ -352,8 +370,13 @@ if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
 <?php
 
 if( $t_total_time > 0 && $t_show_time_tracking ) {
-	echo '<div class="time-tracking-total pull-right"><i class="ace-icon fa fa-clock-o bigger-110 red"></i> ', sprintf( lang_get( 'total_time_for_issue' ), '<span class="time-tracked">' . db_minutes_to_hhmm( $t_total_time ) . '</span>' ), '</div>';
+	echo '<div class="time-tracking-total pull-right">';
+	print_icon( 'fa-clock-o', 'ace-icon bigger-110 red' );
+	echo ' ';
+	printf( lang_get( 'total_time_for_issue' ),
+		'<span class="time-tracked">' . db_minutes_to_hhmm( $t_total_time ) . '</span>'
+	);
+	echo '</div>';
 }
 ?>
 </div>
-

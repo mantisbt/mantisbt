@@ -52,15 +52,15 @@ $f_tag_id = gpc_get_int( 'tag_id' );
 tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
-if( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
-	|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
-		&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) ) {
-	access_denied();
-}
-
-if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
+$t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
+if( $t_can_edit ) {
 	$f_new_user_id = gpc_get_int( 'user_id', $t_tag_row['user_id'] );
 } else {
+	$t_can_edit_own_tag = access_has_global_level( config_get( 'tag_edit_own_threshold' ) );
+	if( !( $t_can_edit_own_tag && auth_get_current_user_id() == $t_tag_row['user_id'] ) ) {
+		access_denied();
+	}
+	# Never change the owner when user is editing their own tag
 	$f_new_user_id = $t_tag_row['user_id'];
 }
 

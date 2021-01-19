@@ -112,14 +112,14 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-filter"></i>
+					<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
 					<?php echo lang_get('filters') ?>
 				</h4>
 
 				<div class="widget-toolbar">
 					<div class="widget-menu">
 						<a href="#" data-action="settings" data-toggle="dropdown">
-							<i class="ace-icon fa fa-bars bigger-125"></i>
+							<?php print_icon( 'fa-bars', 'ace-icon bigger-125' ); ?>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<?php

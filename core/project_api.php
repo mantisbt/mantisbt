@@ -972,17 +972,6 @@ function project_delete_all_files( $p_project_id ) {
 }
 
 /**
- * Pads the project id with the appropriate number of zeros.
- * @param integer $p_project_id A project identifier.
- * @return string
- */
-function project_format_id( $p_project_id ) {
-	$t_padding = config_get( 'display_project_padding' );
-	return( utf8_str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
-}
-
-
-/**
  * Returns the project name as a link formatted for display in menus and buttons.
  *
  * The link is formatted as a link to set_project.php, which can be used to
@@ -1015,4 +1004,20 @@ function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '',
 	}
 
 	return sprintf('<a class="%s" href="%s">%s</a>', $p_class, $t_url, $t_label );
+}
+
+/**
+ * Returns the number of issues associated with the given Project.
+ *
+ * @param int $p_project_id A project identifier.
+ *
+ * @return int
+ */
+function project_get_bug_count( $p_project_id ) {
+	$t_query = new DbQuery();
+	$t_query->sql( 'SELECT COUNT(*) FROM {bug} WHERE project_id='
+		. $t_query->param( $p_project_id )
+	);
+	$t_query->execute();
+	return $t_query->value();
 }

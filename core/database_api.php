@@ -37,10 +37,15 @@ require_api( 'error_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'utility_api.php' );
 
+/**
+ * Main database connection.
+ * @var ADOConnection $g_db
+ */
+$g_db = false;
+
 # An array in which all executed queries are stored.  This is used for profiling
 # @global array $g_queries_array
 $g_queries_array = array();
-
 
 # Stores whether a database connection was successfully opened.
 # @global bool $g_db_connected

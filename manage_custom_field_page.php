@@ -70,7 +70,7 @@ $t_all_defs = multi_sort( $t_all_defs, 'name' );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-flask"></i>
+		<?php print_icon( 'fa-flask', 'ace-icon' ); ?>
 		<?php echo lang_get( 'custom_fields_setup' ) ?>
 	</h4>
 </div>

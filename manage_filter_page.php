@@ -115,10 +115,10 @@ function table_print_filter_row( $p_filter_id ) {
 	echo '</div>';
 	if( $t_editable ) {
 		echo '<div class="pull-left">';
-		print_form_button( 'manage_filter_edit_page.php', lang_get( 'edit_link' ), array( 'filter_id' =>  $p_filter_id ) );
+		print_form_button( 'manage_filter_edit_page.php', lang_get( 'edit' ), array( 'filter_id' =>  $p_filter_id ) );
 		echo '</div>';
 		echo '<div class="pull-left">';
-		print_form_button( 'manage_filter_delete.php', lang_get( 'delete_filter_button' ), array( 'filter_id' =>  $p_filter_id ) );
+		print_form_button( 'manage_filter_delete.php', lang_get( 'delete' ), array( 'filter_id' =>  $p_filter_id ) );
 		echo '</div>';
 	}
 	echo '</div>';
@@ -151,7 +151,7 @@ function table_print_filters( array $p_filter_array ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-filter"></i>
+				<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
 				<?php echo lang_get('available_filter_for_project') . ': ' . string_display_line( project_get_name( $t_project_id ) ) ?>
 			</h4>
 		</div>

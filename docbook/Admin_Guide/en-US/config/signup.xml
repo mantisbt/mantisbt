@@ -21,9 +21,15 @@
 		<varlistentry>
 			<term>$g_max_failed_login_count</term>
 			<listitem>
-				<para>Maximum failing login attempts before the account is locked.
-					Once locked, it's required to reset the password (lost password).
-					Value resets to zero at each successfully login.  Default is OFF.
+				<para>Maximum number of failed login attempts before the
+					user's account is locked.
+					Once locked, it is required to reset the password (lost password).
+					The counter is reset to zero after each successful login.
+				</para>
+				<para>Default is set to 5, in order to prevent brute force attacks
+					attempting to gain access to end users accounts.
+					Set to OFF to disable this feature and allow unlimited
+					failed login attempts.
 				</para>
 			</listitem>
 		</varlistentry>

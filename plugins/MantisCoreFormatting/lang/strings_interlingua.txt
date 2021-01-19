@@ -49,5 +49,7 @@ $s_plugin_format_process_text_warning_notice = 'Non disactivar sin saper precise
 $s_plugin_format_process_urls = 'Tractamento de URL';
 $s_plugin_format_process_buglinks = 'Ligamines interne de MantisBT (problemas e notas)';
 $s_plugin_format_process_buglinks_info = 'Tu configuration defini le etiquetta <em>Issue</em> como "<literal>%s</literal>" e le etiquetta <em>Issue Note</em> como "<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Processamento Markdown';
+$s_plugin_format_process_markdown_info = 'Application de stilo con supporto de Markdown, un syntaxe pro formatar texto de maniera que pote esser convertite in HTML.';
 $s_plugin_format_enabled = 'Active';
 $s_plugin_format_disabled = 'Non active';

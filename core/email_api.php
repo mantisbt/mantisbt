@@ -1335,6 +1335,16 @@ function email_send( EmailData $p_email_data ) {
 			break;
 	}
 
+	# S/MIME signature
+	if( ON == config_get_global( 'email_smime_enable' ) ) {
+		$t_mail->sign(
+			config_get_global( 'email_smime_cert_file' ),
+			config_get_global( 'email_smime_key_file' ),
+			config_get_global( 'email_smime_key_password' ),
+			config_get_global( 'email_smime_extracerts_file' )
+		);
+	}
+
 	#apply DKIM settings
 	if( config_get( 'email_dkim_enable' ) ) {
 		$t_mail->DKIM_domain = config_get( 'email_dkim_domain' );
@@ -1850,7 +1860,14 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 		$t_message .= $t_email_separator1 . " \n";
 
 		foreach( $p_visible_bug_data['history'] as $t_raw_history_item ) {
-			$t_localized_item = history_localize_item( $t_raw_history_item['field'], $t_raw_history_item['type'], $t_raw_history_item['old_value'], $t_raw_history_item['new_value'], false );
+			$t_localized_item = history_localize_item(
+				$t_raw_history_item['bug_id'],
+				$t_raw_history_item['field'],
+				$t_raw_history_item['type'],
+				$t_raw_history_item['old_value'],
+				$t_raw_history_item['new_value'],
+				false
+			);
 
 			$t_message .= utf8_str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 17 ) . utf8_str_pad( $t_raw_history_item['username'], 15 ) . utf8_str_pad( $t_localized_item['note'], 25 ) . utf8_str_pad( $t_localized_item['change'], 20 ) . "\n";
 		}

@@ -78,7 +78,7 @@ layout_page_begin();
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-envelope"></i>
+		<?php print_icon( 'fa-envelope', 'ace-icon' ); ?>
 		<?php echo lang_get( 'bug_reminder' ) ?>
 	</h4>
 </div>
@@ -158,8 +158,9 @@ layout_page_begin();
 	</form>
 	<br>
 	<div class="alert alert-info">
-		<p><i class="fa fa-info-circle fa-lg"> </i>
+		<p>
 		<?php
+			print_icon( 'fa-info-circle', 'fa-lg' ); ?>
 			echo lang_get( 'reminder_explain' ) . ' ';
 			if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
 				echo lang_get( 'reminder_monitor' ) . ' ';

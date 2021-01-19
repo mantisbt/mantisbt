@@ -66,7 +66,5 @@ include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
 layout_page_header( lang_get( 'change_preferences_link' ) );
 
 layout_page_begin();
-
 edit_account_prefs();
-
 layout_page_end();

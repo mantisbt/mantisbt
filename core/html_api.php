@@ -405,14 +405,16 @@ function html_top_banner() {
  * Outputs a message to confirm an operation's result.
  * @param array   $p_buttons     Array of (URL, label) pairs used to generate
  *                               the buttons; if label is null or unspecified,
- *                               the default 'proceed' text will be displayed.
+ *                               the default 'proceed' text will be displayed;
+ *                               If the array is empty or not provided, no
+ *                               buttons will be printed.
  * @param string  $p_message     Message to display to the user. If none is
  *                               provided, a default message will be printed
  * @param integer $p_type        One of the constants CONFIRMATION_TYPE_SUCCESS,
  *                               CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
  * @return void
  */
-function html_operation_confirmation( array $p_buttons, $p_message = '', $p_type = CONFIRMATION_TYPE_SUCCESS ) {
+function html_operation_confirmation( array $p_buttons = null, $p_message = '', $p_type = CONFIRMATION_TYPE_SUCCESS ) {
 	switch( $p_type ) {
 		case CONFIRMATION_TYPE_FAILURE:
 			$t_alert_css = 'alert-danger';
@@ -440,17 +442,20 @@ function html_operation_confirmation( array $p_buttons, $p_message = '', $p_type
 	} else {
 		$t_message = $p_message;
 	}
-	echo '<p class="bold bigger-110">' . $t_message  . '</p><br />';
+	echo '<p class="bold bigger-110">' . $t_message  . '</p>';
 
 	# Print buttons
-	echo '<div class="btn-group">';
-	foreach( $p_buttons as $t_button ) {
-		$t_url = string_sanitize_url( $t_button[0] );
-		$t_label = isset( $t_button[1] ) ? $t_button[1] : lang_get( 'proceed' );
+	if( !empty( $p_buttons ) ) {
+		echo '<br />';
+		echo '<div class="btn-group">';
+		foreach( $p_buttons as $t_button ) {
+			$t_url = string_sanitize_url( $t_button[0] );
+			$t_label = isset( $t_button[1] ) ? $t_button[1] : lang_get( 'proceed' );
 
-		print_link_button( $t_url, $t_label );
+			print_link_button( $t_url, $t_label );
+		}
+		echo '</div>';
 	}
-	echo '</div>';
 
 	echo '</div></div></div>', PHP_EOL;
 }
@@ -572,7 +577,7 @@ function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id,
 				$t_subproject_id == $p_current_project_id,
 				'btn btn-xs btn-white btn-info',
 				$p_parents,
-				'<i class="ace-icon fa fa-angle-double-right"></i>'
+				icon_get( 'fa-angle-double-right', 'ace-icon' )
 			);
 		echo "\n";
 
@@ -600,7 +605,9 @@ function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null 
 
 		echo '<li class="' . $t_active .  '">';
 		if( $t_item['label'] == '' ) {
-			echo '<a href="'. lang_get_defaulted( $t_item['url'] ) .'"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
+			echo '<a href="'. lang_get_defaulted( $t_item['url'] ) .'">';
+			print_icon( 'fa-info-circle', 'blue ace-icon' );
+			echo '</a>';
 		} else {
 			echo '<a href="'. helper_mantis_url( $t_item['url'] ) .'">' . lang_get_defaulted( $t_item['label'] ) . '</a>';
 		}
@@ -641,7 +648,7 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 				$t_active = $p_current_page && strpos( $t_item['url'], $p_current_page ) !== false
 					? 'active' : '';
 				$t_icon = array_key_exists( 'icon', $t_item )
-					? '<i class="fa ' . $t_item['icon'] . '"></i>&nbsp;'
+					? icon_get( $t_item['icon'] ) . '&nbsp;'
 					: '';
 
 				printf( $t_btn_template,
@@ -905,7 +912,7 @@ function print_summary_menu( $p_page = '', array $p_filter = null ) {
  */
 function print_admin_menu_bar( $p_page ) {
 	# Build array with admin menu items, add Upgrade tab if necessary
-	$t_menu_items['index.php'] = '<i class="blue ace-icon fa fa-info-circle"></i>';
+	$t_menu_items['index.php'] = icon_get( 'fa-info-circle', 'blue ace-icon' );
 
 	# At the beginning of admin checks, the DB is not yet loaded so we can't
 	# check the schema to inform user that an upgrade is needed

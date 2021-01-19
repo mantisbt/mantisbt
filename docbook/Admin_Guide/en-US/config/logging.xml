@@ -92,16 +92,15 @@
 				</variablelist>
 
 				<para>
-					The default settings, recommended for use in production will only
-					display and exit on errors and suppress warninga and notices.
+					The default settings are recommended for use in production, and will only
+					display MantisBT fatal errors, suppressing output of all other error types.
 				</para>
 				<para>Recommended <filename>config_inc.php</filename>
 					settings for developers:
 <programlisting>
 $g_display_errors = array(
-	E_USER_WARNING =&gt; DISPLAY_ERROR_HALT,
-	E_WARNING      =&gt; DISPLAY_ERROR_HALT,
-	E_ALL          =&gt; DISPLAY_ERROR_INLINE,
+	E_WARNING           =&gt; DISPLAY_ERROR_HALT,
+	E_ALL               =&gt; DISPLAY_ERROR_INLINE,
 );
 </programlisting>
 				</para>
@@ -120,14 +119,17 @@ $g_display_errors = array(
 );
 </programlisting>
 				</para>
-				<warning><para><literal>E_USER_ERROR</literal>
-					should <emphasis>always</emphasis> be set to
-					<literal>DISPLAY_ERROR_HALT</literal>.
-					Using any other value will cause program execution
-					to continue despite the error, which may lead to data
-					integrity issues and/or cause MantisBT to function
-					incorrectly.
-				</para></warning>
+				<note>
+					<para><literal>E_USER_ERROR</literal>,
+						<literal>E_RECOVERABLE_ERROR</literal> and
+						<literal>E_ERROR</literal> will always be set to
+						<emphasis>DISPLAY_ERROR_HALT</emphasis> internally,
+						regardless of the actual configured value.
+						This ensures that program execution stops,
+						to prevent potential integrity issues and/or
+						MantisBT from functioning incorrectly.
+					</para>
+				</note>
 			</listitem>
 		</varlistentry>
 

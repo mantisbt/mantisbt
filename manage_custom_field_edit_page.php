@@ -76,7 +76,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-flask"></i>
+		<?php print_icon( 'fa-flask', 'ace-icon' ); ?>
 		<?php echo lang_get( 'edit_custom_field_title' ) ?>
 	</h4>
 </div>
@@ -319,7 +319,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-link"></i>
+			<?php print_icon( 'fa-link', 'ace-icon' ); ?>
 			<?php echo lang_get( 'link_custom_field_to_project_title' ) ?>
 		</h4>
 	</div>

@@ -73,7 +73,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-share-alt"></i>
+					<?php print_icon( 'fa-share-alt', 'ace-icon' ); ?>
 					<?php echo lang_get( 'edit_project_version_title' ) ?>
 				</h4>
 			</div>
@@ -101,7 +101,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 						data-picker-locale="<?php echo lang_get_current_datetime_locale() ?>"
 						data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
 						size="16" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'normal_date_format' ), $t_version->date_order ) ) ) ?>" />
-					<i class="fa fa-calendar fa-xlg datetimepicker"></i>
+					<?php print_icon( 'fa-calendar', 'fa-xlg datetimepicker' ); ?>
 				</td>
 			</tr>
 			<tr>

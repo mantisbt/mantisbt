@@ -56,7 +56,7 @@ if( $f_project_id != ALL_PROJECTS ) {
 	project_ensure_exists( $f_project_id );
 }
 
-helper_ensure_confirmed( lang_get( 'delete_config_sure_msg' ), lang_get( 'delete_link' ) );
+helper_ensure_confirmed( lang_get( 'delete_config_sure_msg' ), lang_get( 'delete' ) );
 
 config_delete( $f_config_option, $f_user_id, $f_project_id );
 

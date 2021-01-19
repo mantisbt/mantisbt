@@ -242,7 +242,7 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-filter"></i>
+	<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
 	<?php echo lang_get( 'filters' ) ?>
 </h4>
 </div>
@@ -320,8 +320,8 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-<i class="ace-icon fa fa-database"></i>
-<?php echo lang_get( 'database_configuration' ) ?>
+	<?php print_icon( 'fa-database', 'ace-icon' ); ?>
+	<?php echo lang_get( 'database_configuration' ) ?>
 </h4>
 </div>
 
@@ -420,7 +420,7 @@ while( $t_row = $t_config_query->fetch() ) {
 			$t_action_params['action'] = MANAGE_CONFIG_ACTION_EDIT;
 			$t_url_edit = helper_url_combine( 'adm_config_page.php', http_build_query( $t_action_params ) );
 			echo '<div class="pull-left">';
-			print_link_button( $t_url_edit, lang_get( 'edit_link' ), 'btn-xs' );
+			print_link_button( $t_url_edit, lang_get( 'edit' ), 'btn-xs' );
 			echo '</div>';
 
 			# Clone button
@@ -434,7 +434,7 @@ while( $t_row = $t_config_query->fetch() ) {
 			echo '<div class="pull-left">';
 			print_form_button(
 				'adm_config_delete.php',
-				lang_get( 'delete_link' ),
+				lang_get( 'delete' ),
 				array(
 					'user_id'       => $v_user_id,
 					'project_id'    => $v_project_id,

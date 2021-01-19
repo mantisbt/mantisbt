@@ -340,13 +340,13 @@ $g_crypto_master_salt = '';
 $g_allow_signup			= ON;
 
 /**
- * Max. attempts to login using a wrong password before lock the account.
- * When locked, it's required to reset the password (lost password)
- * Value resets to zero at each successfully login
- * Set to OFF to disable this control
+ * Maximum number of failed login attempts before the user's account is locked.
+ * Once locked, it is required to reset the password (lost password).
+ * The counter is reset to zero after each successful login.
+ * Set to OFF to disable this feature and allow unlimited failed login attempts.
  * @global integer $g_max_failed_login_count
  */
-$g_max_failed_login_count = OFF;
+$g_max_failed_login_count = 5;
 
 /**
  * access level required to be notified when a new user has been created using
@@ -755,6 +755,54 @@ $g_email_dkim_passphrase = '';
  * @global string $g_email_dkim_identity
  */
 $g_email_dkim_identity = 'noreply@example.com';
+
+/**
+ * Enable S/MIME signature.
+ *
+ * @global integer $g_email_smime_enable
+ */
+$g_email_smime_enable = OFF;
+
+/**
+ * Path to the S/MIME certificate.
+ *
+ * The file must contain a PEM-encoded certificate.
+ *
+ * @global string $g_email_smime_cert_file
+ */
+$g_email_smime_cert_file = '';
+
+/**
+ * Path to the S/MIME private key file.
+ *
+ * The file must contain a PEM-encoded private key matching the S/MIME certificate.
+ *
+ * @see $g_email_smime_cert_file
+ *
+ * @global string $g_email_smime_key_file
+ */
+$g_email_smime_key_file = '';
+
+/**
+ * Password for the S/MIME private key.
+ *
+ * Leave blank if the private key is not protected by a passphrase.
+ * @see $g_email_smime_key_file
+ *
+ * @global string $g_email_smime_key_password
+ */
+$g_email_smime_key_password = '';
+
+/**
+ * Optional path to S/MIME extra certificates.
+ *
+ * The file must contain one (or more) PEM-encoded certificates, which will be
+ * included in the signature to help the recipient verify the certificate
+ * specified in {@see $g_email_smime_cert_file} ("CA Chain").
+ *
+ * @global string $g_email_smime_extracerts_file
+ */
+$g_email_smime_extracerts_file = '';
 
 /**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
@@ -1898,11 +1946,15 @@ $g_dropzone_enabled = ON;
 $g_attachments_file_permissions = 0400;
 
 /**
- * Maximum file size (bytes) that can be uploaded.
- * Also check your PHP settings (default is usually 2MBs)
+ * Maximum file size that can be uploaded (in bytes).
+ *
+ * Defaults to 5 MiB. Also check your PHP settings for upload_max_filesize and
+ * post_max_size (defaulted to 2 MiB and 8 MiB respectively), as well as
+ * memory_limit.
+ *
  * @global integer $g_max_file_size
  */
-$g_max_file_size = 5000000;
+$g_max_file_size = 5 * 1024 * 1024;
 
 /**
  * Maximum number of files that can be uploaded simultaneously
@@ -2391,6 +2443,7 @@ $g_enable_product_build = OFF;
  *   - attachments
  *   - category_id
  *   - due_date
+ *   - eta
  *   - handler
  *   - monitors
  *   - os
@@ -2404,6 +2457,7 @@ $g_enable_product_build = OFF;
  *   - severity
  *   - status
  *   - steps_to_reproduce
+ *   - tags
  *   - target_version
  *   - view_state
  *
@@ -2696,7 +2750,14 @@ $g_view_history_threshold = VIEWER;
 $g_bug_reminder_threshold = DEVELOPER;
 
 /**
- * Access lever required to drop bug history revisions
+ * Access level required to view bug history revisions.
+ * Users can always see revisions for the issues and bugnotes they reported.
+ * @global integer $g_bug_revision_view_threshold
+ */
+$g_bug_revision_view_threshold = DEVELOPER;
+
+/**
+ * Access level required to drop bug history revisions.
  * @global integer $g_bug_revision_drop_threshold
  */
 $g_bug_revision_drop_threshold = MANAGER;
@@ -2918,13 +2979,6 @@ $g_report_issues_for_unreleased_versions_threshold = DEVELOPER;
 $g_set_bug_sticky_threshold = MANAGER;
 
 /**
- * The minimum access level for someone to be a member of the development team
- * and appear on the project information page.
- * @global integer $g_development_team_threshold
- */
-$g_development_team_threshold = DEVELOPER;
-
-/**
  * this array sets the access thresholds needed to enter each status listed.
  * if a status is not listed, it falls back to $g_update_bug_status_threshold
  * example:
@@ -3137,13 +3191,6 @@ $g_status_colors = array(
 	'resolved'     => '#d2f5b0', # green  (chameleon   #8ae234)
 	'closed'       => '#c9ccc4'  # grey   (aluminum    #babdb6)
 );
-
-/**
- * The padding level when displaying project ids
- *  The project id will be padded with 0's up to the size given
- * @global integer $g_display_project_padding
- */
-$g_display_project_padding = 3;
 
 /**
  * The padding level when displaying bug ids
@@ -4206,13 +4253,12 @@ $g_show_queries_count = OFF;
  * Recommended config_inc.php settings for developers (these are automatically
  * set if the server is localhost):
  * $g_display_errors = array(
- *     E_RECOVERABLE_ERROR => DISPLAY_ERROR_HALT,
  *     E_WARNING           => DISPLAY_ERROR_HALT,
  *     E_ALL               => DISPLAY_ERROR_INLINE,
  * );
  *
- * NOTICE: E_USER_ERROR, E_RECOVERABLE_ERROR and E_ERROR will always be internally
- * set DISPLAY_ERROR_HALT independent of value configured.
+ * NOTICE: E_USER_ERROR, E_RECOVERABLE_ERROR and E_ERROR will always be set
+ * to DISPLAY_ERROR_HALT internally, regardless of the configured value.
  *
  * @global array $g_display_errors
  */
@@ -4222,8 +4268,8 @@ $g_display_errors = array();
 # Note: intentionally not using SERVER_ADDR as it's not guaranteed to exist
 if( isset( $_SERVER['SERVER_NAME'] ) &&
 	( strcasecmp( $_SERVER['SERVER_NAME'], 'localhost' ) == 0 ||
-	  $_SERVER['SERVER_NAME'] == '127.0.0.1' ) ) {
-	$g_display_errors[E_USER_WARNING] = DISPLAY_ERROR_HALT;
+	  $_SERVER['SERVER_NAME'] == '127.0.0.1' )
+) {
 	$g_display_errors[E_WARNING] = DISPLAY_ERROR_HALT;
 	$g_display_errors[E_ALL] = DISPLAY_ERROR_INLINE;
 }
@@ -4303,32 +4349,103 @@ $g_show_log_threshold = ADMINISTRATOR;
 
 /**
  * The following list of variables should never be in the database.
- * It is used to bypass the database lookup and look here for appropriate global settings.
+ *
+ * It is used to bypass the database lookup and look in this or the
+ * config_inc.php files for appropriate global settings.
+ *
  * @global array $g_global_settings
  */
 $g_global_settings = array(
-	'global_settings', 'admin_checks', 'allow_signup', 'allow_anonymous_login',
-	'anonymous_account', 'compress_html', 'allow_permanent_cookie',
-	'cookie_time_length', 'cookie_path', 'cookie_domain',
-	'cookie_prefix', 'string_cookie', 'project_cookie', 'view_all_cookie',
-	'manage_config_cookie', 'logout_cookie',
-	'bug_list_cookie', 'crypto_master_salt', 'custom_headers',
-	'database_name', 'db_username', 'db_password', 'db_type',
-	'db_table_prefix','db_table_suffix', 'display_errors', 'form_security_validation',
-	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
-	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled',
-	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
-	'show_timer', 'show_memory_usage', 'stop_on_errors', 'version_suffix', 'debug_email',
-	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file',
-	'file_type_icons', 'path', 'short_path', 'absolute_path', 'core_path',
-	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
-	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
-	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
-	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique',
-	'impersonate_user_threshold', 'email_retry_in_days', 'neato_tool', 'dot_tool',
-	'ldap_server', 'ldap_root_dn', 'ldap_organization', 'ldap_protocol_version',
-	'ldap_network_timeout', 'ldap_follow_referrals', 'ldap_bind_dn', 'ldap_bind_passwd',
-	'ldap_uid_field', 'ldap_realname_field', 'use_ldap_realname', 'use_ldap_email'
+	'absolute_path',
+	'absolute_path_default_upload_folder',
+	'admin_checks',
+	'allow_anonymous_login',
+	'allow_permanent_cookie',
+	'allow_signup',
+	'anonymous_account',
+	'bottom_include_page',
+	'bug_list_cookie',
+	'cdn_enabled',
+	'class_path',
+	'compress_html',
+	'cookie_domain',
+	'cookie_path',
+	'cookie_prefix',
+	'cookie_time_length',
+	'core_path',
+	'crypto_master_salt',
+	'css_include_file',
+	'css_rtl_include_file',
+	'custom_headers',
+	'database_name',
+	'db_password',
+	'db_table_prefix',
+	'db_table_suffix',
+	'db_type',
+	'db_username',
+	'debug_email',
+	'default_home_page',
+	'default_language',
+	'display_errors',
+	'dot_tool',
+	'email_ensure_unique',
+	'email_login_enabled',
+	'email_retry_in_days',
+	'email_smime_cert_file',
+	'email_smime_enable',
+	'email_smime_extracerts_file',
+	'email_smime_key_file',
+	'email_smime_key_password',
+	'fallback_language',
+	'file_type_icons',
+	'fileinfo_magic_db_file',
+	'form_security_validation',
+	'global_settings',
+	'hostname',
+	'html_valid_tags',
+	'html_valid_tags_single_line',
+	'impersonate_user_threshold',
+	'language_auto_map',
+	'language_path',
+	'ldap_bind_dn',
+	'ldap_bind_passwd',
+	'ldap_follow_referrals',
+	'ldap_network_timeout',
+	'ldap_organization',
+	'ldap_protocol_version',
+	'ldap_realname_field',
+	'ldap_root_dn',
+	'ldap_server',
+	'ldap_simulation_file_path',
+	'ldap_uid_field',
+	'library_path',
+	'login_method',
+	'logo_url',
+	'logout_cookie',
+	'logout_redirect_page',
+	'manage_config_cookie',
+	'manual_url',
+	'neato_tool',
+	'path',
+	'plugin_path',
+	'plugins_enabled',
+	'project_cookie',
+	'public_config_names',
+	'session_save_path',
+	'session_validation',
+	'short_path',
+	'show_detailed_errors',
+	'show_memory_usage',
+	'show_queries_count',
+	'show_timer',
+	'stop_on_errors',
+	'string_cookie',
+	'top_include_page',
+	'use_ldap_email',
+	'use_ldap_realname',
+	'version_suffix',
+	'view_all_cookie',
+	'wiki_engine_url',
 );
 
 /**
@@ -4381,6 +4498,7 @@ $g_public_config_names = array(
 	'bug_resolution_not_fixed_threshold',
 	'bug_resolved_status_threshold',
 	'bug_revision_drop_threshold',
+	'bug_revision_view_threshold',
 	'bug_submit_status',
 	'bug_update_page_fields',
 	'bug_view_page_fields',
@@ -4460,12 +4578,10 @@ $g_public_config_names = array(
 	'delete_bug_threshold',
 	'delete_bugnote_threshold',
 	'delete_project_threshold',
-	'development_team_threshold',
 	'disallowed_files',
 	'display_bug_padding',
 	'display_bugnote_padding',
 	'display_errors',
-	'display_project_padding',
 	'download_attachments_threshold',
 	'due_date_default',
 	'due_date_update_threshold',

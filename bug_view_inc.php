@@ -117,7 +117,7 @@ echo '<div class="col-md-12 col-xs-12">';
 echo '<div class="widget-box widget-color-blue2">';
 echo '<div class="widget-header widget-header-small">';
 echo '<h4 class="widget-title lighter">';
-echo '<i class="ace-icon fa fa-bars"></i>';
+print_icon( 'fa-bars', 'ace-icon' );
 echo string_display_line( $t_issue_view['form_title'] );
 echo '</h4>';
 echo '</div>';
@@ -366,8 +366,8 @@ if( $t_flags['status_show'] || $t_flags['resolution_show'] ) {
 		$t_status_css = html_get_status_css_fg( $t_issue['status']['id'] );
 
 		echo '<td class="bug-status">';
-		echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '"></i> ';
-		echo string_display_line( $t_issue['status']['label'] ), '</td>';
+		print_icon( 'fa-square', 'fa-status-box ' . $t_status_css );
+		echo ' ' . string_display_line( $t_issue['status']['label'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -636,12 +636,12 @@ if( $t_flags['monitor_show'] ) {
 	<div id="monitoring" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-users"></i>
+				<?php print_icon( 'fa-users', 'ace-icon' ); ?>
 				<?php echo lang_get( 'users_monitoring_bug' ) ?>
 			</h4>
 			<div class="widget-toolbar">
 				<a data-action="collapse" href="#">
-					<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+					<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 				</a>
 			</div>
 		</div>
@@ -670,7 +670,13 @@ if( $t_flags['monitor_show'] ) {
 
 					print_user( $t_monitor_user['id'] );
 					if( $t_flags['monitor_can_delete'] ) {
-						echo ' <a class="btn btn-xs btn-primary btn-white btn-round" href="' . helper_mantis_url( 'bug_monitor_delete.php' ) . '?bug_id=' . $f_issue_id . '&amp;user_id=' . $t_monitor_user['id'] . htmlspecialchars(form_security_param( 'bug_monitor_delete' )) . '"><i class="fa fa-times"></i></a>';
+						echo ' <a class="btn btn-xs btn-primary btn-white btn-round" '
+							. 'href="' . helper_mantis_url( 'bug_monitor_delete.php' )
+							. '?bug_id=' . $f_issue_id . '&amp;user_id=' . $t_monitor_user['id']
+							. htmlspecialchars(form_security_param( 'bug_monitor_delete' ))
+							. '">'
+							. icon_get( 'fa-times' )
+							. '</a>';
 					}
 				 }
 			}
@@ -682,7 +688,7 @@ if( $t_flags['monitor_show'] ) {
 			<?php echo form_security_field( 'bug_monitor_add' ) ?>
 				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
 				<input type="text" class="input-sm" id="bug_monitor_list_user_to_add" name="user_to_add" />
-				<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_user_to_monitor' ) ?>" />
+				<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add' ) ?>" />
 			</form>
 			<?php } ?>
 		</td>
@@ -742,12 +748,12 @@ if( $t_flags['history_show'] && $f_history ) {
 	<div id="history" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-history"></i>
+			<?php print_icon( 'fa-history', 'ace-icon' ); ?>
 			<?php echo lang_get( 'bug_history' ) ?>
 		</h4>
 		<div class="widget-toolbar">
 			<a data-action="collapse" href="#">
-				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+				<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 			</a>
 		</div>
 	</div>
@@ -855,8 +861,8 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 		# choose color based on status
 		$t_status_css = html_get_status_css_fg( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
-		$t_relationship_info_html .= '<td><i class="fa fa-square fa-status-box ' . $t_status_css . '"></i> ';
-		$t_relationship_info_html .= '<span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_display_line( $t_status_string ) . '</span></td>';
+		$t_relationship_info_html .= '<td>' . icon_get( 'fa-square', 'fa-status-box ' . $t_status_css );
+		$t_relationship_info_html .= ' <span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_display_line( $t_status_string ) . '</span></td>';
 	} else {
 		$t_relationship_info_html .= $t_td . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</td>';
 		$t_relationship_info_html .= $t_td . string_display_line( $t_status_string ) . '&#160;</td>';
@@ -878,14 +884,19 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	# add summary
 	$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
 	if( VS_PRIVATE == $t_bug->view_state ) {
-		$t_relationship_info_html .= sprintf( ' <i class="fa fa-lock" title="%s" ></i>', lang_get( 'private' ) );
+		$t_relationship_info_html .= icon_get( 'fa-lock', '', lang_get( 'private' ) );
 	}
 
 	# add delete link if bug not read only and user has access level
 	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			$t_relationship_info_html .= ' <a class="red noprint zoom-130"
-			href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '"><i class="ace-icon fa fa-trash-o bigger-115"></i></a>';
+			$t_relationship_info_html .= ' <a class="red noprint zoom-130"'
+				. 'href="bug_relationship_delete.php?bug_id=' . $p_bug_id
+				. '&amp;rel_id=' . $p_relationship->id
+				. htmlspecialchars( form_security_param( 'bug_relationship_delete' ) )
+				. '">'
+				. icon_get( 'fa-trash-o', 'ace-icon bigger-115' )
+				. '</a>';
 		}
 	}
 
@@ -953,12 +964,12 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 	<div id="relationships" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-sitemap"></i>
+			<?php print_icon( 'fa-sitemap', 'ace-icon' ); ?>
 			<?php echo lang_get( 'bug_relationships' ) ?>
 		</h4>
 		<div class="widget-toolbar">
 			<a data-action="collapse" href="#">
-				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+				<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 			</a>
 		</div>
 	</div>
@@ -1004,7 +1015,7 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 		<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
 		<?php print_relationship_list_box( config_get( 'default_bug_relationship' ) )?>
 		<input type="text" class="input-sm" name="dest_bug_id" value="" />
-		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
+		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add' )?>" />
 		</form>
 <?php
 		} # can update
@@ -1174,7 +1185,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	# UPDATE button
 	if( $p_flags['can_update'] ) {
 		echo '<div class="pull-left padding-right-8">';
-		html_button( string_get_bug_update_page(), lang_get( 'update_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+		html_button( string_get_bug_update_page(), lang_get( 'edit' ), array( 'bug_id' => $p_bug_id ) );
 		echo '</div>';
 	}
 
@@ -1244,7 +1255,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 		echo '<div class="pull-left padding-right-2">';
 		html_button(
 			'bug_change_status_page.php',
-			lang_get( 'close_bug_button' ),
+			lang_get( 'close' ),
 			array( 'id' => $t_bug->id, 'new_status' => $t_closed_status, 'change_type' => BUG_UPDATE_TYPE_CLOSE ) );
 		echo '</div>';
 	}
@@ -1252,14 +1263,14 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	# MOVE button
 	if( $p_flags['can_move'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_actiongroup_page.php', lang_get( 'move_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
+		html_button( 'bug_actiongroup_page.php', lang_get( 'move' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
 		echo '</div>';
 	}
 
 	# DELETE button
 	if( $p_flags['can_delete'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_actiongroup_page.php', lang_get( 'delete_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
+		html_button( 'bug_actiongroup_page.php', lang_get( 'delete' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
 		echo '</div>';
 	}
 

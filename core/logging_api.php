@@ -170,7 +170,7 @@ function log_print_to_page() {
 		echo "\t<div class=\"widget-box widget-color-red\">\n";
 		echo "\t<div class=\"widget-header widget-header-small\">\n";
 		echo "\t<h4 class=\"widget-title lighter\">\n";
-		echo "\t<i class=\"ace-icon fa fa-flag-o\"></i>\n";
+		echo "\t" . icon_get( 'fa-flag-o', 'ace-icon' ) . "\n";
 		echo "Debug Log";
 		echo "</h4>\n";
 		echo "</div>\n";

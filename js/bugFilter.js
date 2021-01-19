@@ -93,8 +93,8 @@ function filter_named_filter_clean() {
 
 function filter_named_filter_dirty() {
 	var stored_query_id = $('[name=source_query_id]').val();
-	if( stored_query_id == -1 ) {
-		/* Only make it dirty if it's a stored filter */
+	if( typeof stored_query_id === 'undefined' || stored_query_id == -1 ) {
+		/* Only make it dirty if any filters exist, and it's a stored filter */
 		return;
 	}
 	/* stored query in filter is tainted */

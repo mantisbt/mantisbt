@@ -73,8 +73,11 @@ if( !$t_access ) {
 
 if( '' != $f_revert ) {
 	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . lang_get( 'word_separator' ) .
-		string_html_specialchars( implode( ', ', $t_revert_vars ) ) . lang_get( 'word_separator' ) . lang_get( 'in_project' ) . lang_get( 'word_separator' ) . project_get_name( $f_project_id ),
+	helper_ensure_confirmed(
+		sprintf( lang_get( 'config_delete_sure' ),
+			string_html_specialchars( implode( ', ', $t_revert_vars ) ),
+			string_attribute( project_get_name( $f_project_id ) )
+		),
 		lang_get( 'delete_config_button' ) );
 
 	foreach ( $t_revert_vars as $t_revert ) {

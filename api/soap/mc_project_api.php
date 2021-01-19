@@ -712,7 +712,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 		    !custom_field_validate( $t_custom_field_id, $t_custom_field_values[$t_name] ) ) {
 			throw new ClientException(
 				"Invalid custom field '$t_name' value.",
-				ERROR_EMPTY_FIELD,
+				ERROR_CUSTOM_FIELD_INVALID_VALUE,
 				array( $t_name )
 			);
 		}

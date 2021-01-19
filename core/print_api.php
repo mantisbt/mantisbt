@@ -499,21 +499,23 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	<div class="widget-box <?php echo $t_news_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-edit"></i>
+				<?php print_icon( 'fa-edit', 'ace-icon' ); ?>
 				<?php echo $t_headline ?>
 			</h4>
 			<div class="widget-toolbar">
 				<a data-action="collapse" href="#">
-					<i class="ace-icon fa fa-chevron-up bigger-125"></i>
+					<?php print_icon( 'fa-chevron-up', 'ace-icon bigger-125' ); ?>
 				</a>
 			</div>
 		</div>
 
 		<div class="widget-body">
 			<div class="widget-toolbox padding-8 clearfix">
-				<i class="fa fa-user"></i> <?php echo prepare_user_name( $p_poster_id ); ?>
+				<?php print_icon( 'fa-user' ); ?>
+				<?php echo prepare_user_name( $p_poster_id ); ?>
 				&#160;&#160;&#160;&#160;
-				<i class="fa fa-clock-o"></i> <?php echo $t_date_posted; ?>
+				<?php print_icon( 'fa-clock-o' ); ?>
+				<?php echo $t_date_posted; ?>
 			</div>
 			<div class="widget-main">
 				<?php
@@ -967,6 +969,7 @@ function print_build_option_list( $p_build = '' ) {
 function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	$t_config_var_name = $p_enum_name . '_enum_string';
 	$t_config_var_value = config_get( $t_config_var_name );
+	$t_string_var = lang_get( $t_config_var_name );
 
 	if( is_array( $p_val ) ) {
 		$t_val = $p_val;
@@ -977,11 +980,11 @@ function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 
 	foreach ( $t_enum_values as $t_key ) {
-		$t_elem2 = get_enum_element( $p_enum_name, $t_key );
+		$t_label = MantisEnum::getLocalizedLabel( $t_config_var_value, $t_string_var, $t_key );
 
 		echo '<option value="' . $t_key . '"';
 		check_selected( $t_val, $t_key );
-		echo '>' . string_html_specialchars( $t_elem2 ) . '</option>';
+		echo '>' . string_html_specialchars( $t_label ) . '</option>';
 	}
 }
 
@@ -1262,12 +1265,14 @@ function print_custom_field_projects_list( $p_field_id ) {
  * @return void
  */
 function print_plugin_priority_list( $p_priority ) {
-	if( $p_priority < 1 || $p_priority > 5 ) {
+	if( $p_priority < PLUGIN_PRIORITY_LOW || $p_priority > PLUGIN_PRIORITY_HIGH ) {
 		echo '<option value="', $p_priority, '" selected="selected">', $p_priority, '</option>';
 	}
 
-	for( $i = 5;$i >= 1;$i-- ) {
-		echo '<option value="', $i, '" ', check_selected( $p_priority, $i ), ' >', $i, '</option>';
+	for( $i = PLUGIN_PRIORITY_HIGH; $i >= PLUGIN_PRIORITY_LOW; $i-- ) {
+		echo '<option value="', $i, '"';
+		check_selected( $p_priority, $i );
+		echo '>', $i, '</option>';
 	}
 }
 
@@ -1375,7 +1380,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
  * @param string  $p_class         The CSS class of the link.
  * @return void
  */
-function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = ALL, $p_search, $p_show_disabled = 0, $p_class = '' ) {
+function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = 'ALL', $p_search = '', $p_show_disabled = 0, $p_class = '' ) {
 	if( $p_sort_by == $p_field ) {
 		# If this is the selected field flip the order
 		if( 'ASC' == $p_dir || ASCENDING == $p_dir ) {
@@ -1752,7 +1757,7 @@ function print_signup_link() {
  * @return void
  */
 function print_login_link() {
-	print_link_button( auth_login_page(), lang_get( 'login_title' ) );
+	print_link_button( auth_login_page(), lang_get( 'login' ) );
 }
 
 /**
@@ -1777,7 +1782,11 @@ function print_lost_password_link() {
  */
 function print_file_icon( $p_filename ) {
 	$t_icon = file_get_icon_url( $p_filename );
-	echo '<i class="fa ' . string_attribute( $t_icon['url'] ) . '" title="' . string_attribute( $t_icon['alt'] ) . ' file icon" ></i>';
+	print_icon(
+		string_attribute( $t_icon['url'] ),
+		'',
+		sprintf( lang_get( 'file_icon_description' ), string_attribute( $t_icon['alt'] ) )
+	);
 }
 
 /**
@@ -1788,7 +1797,9 @@ function print_file_icon( $p_filename ) {
  * @return void
  */
 function print_rss( $p_feed_url, $p_title = '' ) {
-	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><i class="fa fa-rss fa-lg orange" title="', $p_title, '"></i></a>';
+	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '">';
+	print_icon( 'fa-rss', 'fa-lg orange', $p_title );
+	echo '</a>';
 }
 
 /**
@@ -1989,9 +2000,11 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 	}
 
 	if( $p_attachment['can_delete'] ) {
-		echo '<a class="noprint red zoom-130 pull-right" href="bug_file_delete.php?file_id=' . $p_attachment['id'] .
-			form_security_param( 'bug_file_delete', $p_security_token ) . '">
-			<i class="1 ace-icon fa fa-trash-o bigger-115"></i></a>';
+		echo '<a class="noprint red zoom-130 pull-right" '
+			. 'href="bug_file_delete.php?file_id=' . $p_attachment['id']
+			. form_security_param( 'bug_file_delete', $p_security_token ) . '">';
+		print_icon( 'fa-trash-o', '1 ace-icon bigger-115' );
+		echo '</a>';
 	}
 }
 
@@ -2115,21 +2128,20 @@ function print_timezone_option_list( $p_timezone ) {
  * @return string
  */
 function get_filesize_info( $p_size, $p_unit ) {
-	return sprintf( lang_get( 'file_size_info' ), number_format( $p_size ), $p_unit );
+	return sprintf( lang_get( 'max_file_size_info' ), number_format( $p_size ), $p_unit );
 }
 
 /**
- * Print maximum file size information
+ * Print maximum file size information.
+ *
  * @param integer $p_size    Size in bytes.
- * @param integer $p_divider Optional divider, defaults to 1000.
- * @param string  $p_unit    Optional language string of unit, defaults to KB.
+ * @param integer $p_divider Optional divider, defaults to 1024.
+ * @param string  $p_unit    Optional language string of unit, defaults to KiB.
  * @return void
  */
-function print_max_filesize( $p_size, $p_divider = 1000, $p_unit = 'kb' ) {
+function print_max_filesize( $p_size, $p_divider = 1024, $p_unit = 'kib' ) {
 	echo '<span class="small" title="' . get_filesize_info( $p_size, lang_get( 'bytes' ) ) . '">';
-	echo lang_get( 'max_file_size_label' )
-		. lang_get( 'word_separator' )
-		. get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
+	echo get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
 	echo '</span>';
 }
 

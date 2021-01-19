@@ -43,7 +43,7 @@ print_admin_menu_bar( 'system_utils.php' );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-wrench"></i>
+		<?php print_icon( 'fa-wrench', 'ace-icon' ); ?>
 		System Utilities
 	</h4>
 </div>

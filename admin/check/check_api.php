@@ -47,17 +47,15 @@ function check_init_error_handler() {
  * @param string  $p_error   Error number.
  * @param string  $p_file    File error occurred in.
  * @param integer $p_line    Line number.
- * @param string  $p_context Context.
  * @return void
  */
-function check_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
+function check_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	global $g_errors_raised;
 	$g_errors_raised[] = array(
 		'type' => $p_type,
 		'error' => $p_error,
 		'file' => $p_file,
-		'line' => $p_line,
-		'context' => $p_context
+		'line' => $p_line
 	);
 }
 

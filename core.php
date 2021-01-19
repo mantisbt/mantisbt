@@ -45,6 +45,8 @@
  * @uses php_api.php
  * @uses user_pref_api.php
  * @uses wiki_api.php
+ *
+ * @noinspection PhpIncludeInspection
  */
 
 /**
@@ -94,6 +96,7 @@ require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' 
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
 
 # Load user-defined constants (if required)
+global $g_config_path;
 if( file_exists( $g_config_path . 'custom_constants_inc.php' ) ) {
 	require_once( $g_config_path . 'custom_constants_inc.php' );
 }
@@ -269,12 +272,16 @@ require_api( 'config_api.php' );
 # Set the default timezone
 # To reduce overhead, we assume that the timezone configuration is valid,
 # i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
-# be raised. Use admin checks to validate configuration.
-@date_default_timezone_set( config_get_global( 'default_timezone' ) );
-$t_tz = @date_default_timezone_get();
-config_set_global( 'default_timezone', $t_tz, true );
+# be raised and we fall back to the system's default timezone.
+# Use admin checks to validate configuration.
+$t_tz = config_get_global( 'default_timezone' );
+if( empty( $t_tz ) || !date_default_timezone_set( $t_tz )) {
+	$t_tz = date_default_timezone_get();
+}
+config_set_global( 'default_timezone', $t_tz );
 
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	global $g_use_persistent_connections, $g_hostname, $g_db_username, $g_db_password, $g_database_name;
 	if( OFF == $g_use_persistent_connections ) {
 		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	} else {

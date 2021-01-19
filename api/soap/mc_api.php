@@ -647,8 +647,9 @@ function mci_profile_as_array_by_id( $p_profile_id ) {
 		return null;
 	}
 
-	$t_profile = profile_get_row_direct( $t_profile_id );
-	if( $t_profile === false ) {
+	try {
+		$t_profile = profile_get_row( $t_profile_id );
+	} catch (ClientException $e) {
 		return null;
 	}
 
@@ -1014,6 +1015,9 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 			"Category '{$t_cat_desc}' not found." );
 	}
 
+	# Make sure the category belongs to the given project's hierarchy
+	category_ensure_exists_in_project( $t_category_id, $p_project_id );
+
 	return $t_category_id;
 }
 
@@ -1120,10 +1124,9 @@ EOL;
  * @param string  $p_error   Contains the error message, as a string.
  * @param string  $p_file    Contains the filename that the error was raised in, as a string.
  * @param integer $p_line    Contains the line number the error was raised at, as an integer.
- * @param array   $p_context To the active symbol table at the point the error occurred (optional).
  * @return void
  */
-function mc_error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) {
+function mc_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	# check if errors were disabled with @ somewhere in this call chain
 	# also suppress php 5 strict warnings
 	if( 0 == error_reporting() || 2048 == $p_type ) {

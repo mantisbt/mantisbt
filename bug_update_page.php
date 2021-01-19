@@ -168,7 +168,7 @@ layout_page_begin();
 		<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-comments"></i>
+				<?php print_icon( 'fa-comments', 'ace-icon' ); ?>
 				<?php echo lang_get( 'updating_bug_advanced_title' ) ?>
 			</h4>
 			<div class="widget-toolbar no-border">
@@ -294,7 +294,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 				echo '</select>';
 			} else {
 				echo string_attribute( user_get_name( $t_bug->reporter_id ) );
-				echo ' [<a href="#reporter_edit" class="click-url" url="' . string_get_bug_update_url( $f_bug_id ) . '&amp;reporter_edit=true">' . lang_get( 'edit_link' ) . '</a>]';
+				echo ' [<a href="#reporter_edit" class="click-url" url="' . string_get_bug_update_url( $f_bug_id ) . '&amp;reporter_edit=true">' . lang_get( 'edit' ) . '</a>]';
 			}
 		}
 		echo '</td>';
@@ -341,7 +341,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
 				'data-picker-locale="' . lang_get_current_datetime_locale() .  '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
 				'maxlength="16" value="' . $t_date_to_display . '" />';
-			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
+			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $t_bug->due_date );
@@ -424,7 +424,7 @@ if( $t_show_status || $t_show_resolution ) {
 		$t_status_css = html_get_status_css_fg( $t_bug->status );
 
 		echo '<td class="bug-status">';
-		echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '"></i> ';
+		print_icon( 'fa-square', 'fa-status-box ' . $t_status_css );
 		print_status_option_list( 'status', $t_bug->status,
 			access_can_close_bug( $t_bug ),
 			$t_bug->project_id );

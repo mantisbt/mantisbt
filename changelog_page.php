@@ -101,19 +101,19 @@ function print_version_header( $p_version_id ) {
 	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
 	echo '<div class="widget-header widget-header-small">';
 	echo '<h4 class="widget-title lighter">';
-	echo '<i class="ace-icon fa fa-retweet"></i>';
+	print_icon( 'fa-retweet', 'ace-icon' );
 	echo $t_release_title, lang_get( 'word_separator' );
 	echo '</h4>';
 	echo '<div class="widget-toolbar">';
 	echo '<a data-action="collapse" href="#">';
-	echo '<i class="1 ace-icon fa ' . $t_block_icon . ' bigger-125"></i>';
+	print_icon( $t_block_icon, '1 ace-icon bigger-125' );
 	echo '</a>';
 	echo '</div>';
 	echo '</div>';
 
 	echo '<div class="widget-body">';
 	echo '<div class="widget-toolbox padding-8 clearfix">';
-	echo '<div class="pull-left"><i class="fa fa-calendar-o fa-lg"> </i> ' . $t_release_date . '</div>';
+	echo '<div class="pull-left">' . icon_get( 'fa-calendar-o', 'fa-lg' ) . ' ' . $t_release_date . '</div>';
 	echo '<div class="btn-toolbar pull-right">';
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
 	echo 'href="view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
@@ -324,7 +324,9 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 
 			if( !is_blank( $t_description ) ) {
-				echo '<div class="alert alert-warning">', string_display( "$t_description" ), '</div>';
+				echo '<div class="alert alert-warning">',
+					string_display_links( $t_description ),
+					'</div>';
 			}
 		} else {
 			continue;

@@ -91,7 +91,7 @@ function get_section_begin_mcwt( $p_section_name ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
-	echo '            <i class="ace-icon fa fa-sliders"></i>';
+	print_icon( 'fa-sliders', 'ace-icon' );
 	echo $p_section_name;
 	echo '       </h4>';
 	echo '   </div>';
@@ -243,7 +243,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 			$t_show_submit = true;
 		} else {
 			if( $t_project ) {
-				$t_value = '<i class="fa fa-check fa-lg blue"></i>';
+				$t_value = icon_get( 'fa-check', 'fa-lg blue' );
 			} else {
 				$t_value = '&#160;';
 			}
@@ -286,7 +286,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 		$t_show_submit = true;
 	} else {
 		if( ON == config_get( $p_threshold ) ) {
-			$t_value = '<i class="fa fa-check fa-lg blue"></i>';
+			$t_value = icon_get( 'fa-check', 'fa-lg blue' );
 		} else {
 			$t_value = '&#160;';
 		}
@@ -360,7 +360,7 @@ if( ALL_PROJECTS == $g_project_id ) {
 
 echo '<div class="col-md-12 col-xs-12">' . "\n";
 echo '<div class="well">' . "\n";
-echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
+echo '<p class="bold">' . icon_get( 'fa-info-circle' ) . " $t_project_title</p>\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $g_project_id ) {
 	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
@@ -393,6 +393,9 @@ get_capability_row( lang_get( 'update_issue_status' ), 'update_bug_status_thresh
 get_capability_row( lang_get( 'view_private_issues' ), 'private_bug_threshold' );
 get_capability_row( lang_get( 'set_view_status' ), 'set_view_status_threshold' );
 get_capability_row( lang_get( 'update_view_status' ), 'change_view_status_threshold' );
+get_capability_row( lang_get( 'view_issue_revisions' ), 'bug_revision_view_threshold' );
+get_capability_row( lang_get( 'drop_issue_revisions' ), 'bug_revision_drop_threshold' );
+get_capability_row( lang_get( 'set_sticky' ), 'set_bug_sticky_threshold' );
 get_capability_row( lang_get( 'show_list_of_users_monitoring_issue' ), 'show_monitor_list_threshold' );
 get_capability_row( lang_get( 'add_users_monitoring_issue' ), 'monitor_add_others_bug_threshold' );
 get_capability_row( lang_get( 'remove_users_monitoring_issue' ), 'monitor_delete_others_bug_threshold' );

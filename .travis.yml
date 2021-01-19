@@ -4,7 +4,7 @@
 
 language: php
 os: linux
-dist: xenial
+dist: bionic
 
 # -----------------------------------------------------------------------------
 # Environment setup and test scripts execution
@@ -32,12 +32,11 @@ script:
 #
 
 php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
-  - 7.3
+  - 8.0
   - 7.4
+  - 7.3
+  - 7.2
+  - 7.1
 
 env:
   - DB=mysql
@@ -45,6 +44,20 @@ env:
 
 jobs:
   include:
+    # Use 'xenial' build environment for legacy PHP versions
+    - php: 7.0
+      dist: xenial
+      env: DB=mysql
+    - php: 7.0
+      dist: xenial
+      env: DB=pgsql
+    - php: 5.6
+      dist: xenial
+      env: DB=mysql
+    - php: 5.6
+      dist: xenial
+      env: DB=pgsql
+
     # Add a specific build for Documentation
     - name: Documentation
       env: DOCBOOK=1
@@ -56,6 +69,10 @@ jobs:
             - publican
 
   allow_failures:
+    # Known issue with deprecated pgsql function aliases, see #27830
+    - php: 8.0
+      env: DB=pgsql
+
 
 
 # -----------------------------------------------------------------------------

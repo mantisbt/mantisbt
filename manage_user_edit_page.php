@@ -80,6 +80,10 @@ if( is_blank( $f_username ) ) {
 }
 
 $t_user = user_get_row( $t_user_id );
+if( !$t_user ) {
+	error_parameters( $t_user_id );
+	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR);
+}
 
 # Ensure that the account to be updated is of equal or lower access to the
 # current user.
@@ -103,7 +107,7 @@ print_manage_menu( 'manage_user_page.php' );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 					<?php echo lang_get('edit_user_title') ?>
 				</h4>
 			</div>
@@ -283,8 +287,8 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="col-md-6 col-xs-12 no-padding">
 <div class="space-4"></div>
 <div class="alert alert-info">
-	<i class="fa fa-info-circle"></i>
 <?php
+	print_icon( 'fa-info-circle' );
 	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		echo lang_get( 'reset_password_msg' );
 	} else {
@@ -306,15 +310,16 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="space-10"></div>
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
-<h4 class="widget-title lighter">
-<i class="ace-icon fa fa-puzzle-piece"></i>
-<?php echo lang_get('add_user_title') ?>
-</h4>
+	<h4 class="widget-title lighter">
+		<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
+		<?php echo lang_get('add_user_title') ?>
+	</h4>
 </div>
 
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="form-container">
+<form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
 <div class="table-responsive">
 	<table class="table table-bordered table-condensed table-striped">
         <tr>
@@ -323,7 +328,6 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
             </td>
             <td><?php print_project_user_list( $t_user['id'] ) ?></td>
         </tr>
-        <form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
         <fieldset>
             <?php echo form_security_field( 'manage_user_proj_add' ) ?>
             <input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
@@ -353,9 +357,9 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
             </td>
         </tr>
         </fieldset>
-        </form>
 	</table>
 </div>
+</form>
 </div>
 </div>
 </div>
@@ -363,10 +367,21 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <?php
 } # End of PROJECT ACCESS conditional section
-echo '</div>';
+?>
 
+<!-- ACCOUNT PREFERENCES -->
+<?php
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
-edit_account_prefs( $t_user['id'], false, false, 'manage_user_edit_page.php?user_id=' . $t_user_id );
+edit_account_prefs(
+	$t_user['id'],
+	false,
+	false,
+	'manage_user_edit_page.php?user_id=' . $t_user_id
+);
+?>
 
+</div>
+
+<?php
 layout_page_end();
