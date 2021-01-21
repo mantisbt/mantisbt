@@ -424,6 +424,7 @@ $s_set_configuration_option_action_clone = 'Klonē konfigurācijas opciju';
 $s_plugin = 'Spraudnis';
 $s_plugins_installed = 'Uzstādītie spraudņi';
 $s_plugin_description = 'Apraksts';
+$s_plugin_problem_description = 'Problēmas apraksts';
 $s_plugin_priority = 'Prioritāte';
 $s_plugin_protected = 'Aizsargāts konts';
 $s_plugin_actions = 'Darbības';
