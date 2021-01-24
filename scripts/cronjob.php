@@ -17,7 +17,11 @@
 # See the README and LICENSE files for details
 
 /**
- * Cron Script to trigger cronjob work for plugins
+ * Cron script to allow scheduled execution of plugin tasks.
+ *
+ * @package scripts
+ * @copyright Copyright 2021  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link https://mantisbt.org
  */
 
 /**
@@ -30,7 +34,7 @@ require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
 # Make sure this script doesn't run via the webserver
 if( php_sapi_name() != 'cli' ) {
-	echo "cronjob.php is not allowed to run through the webserver.\n";
+	echo basename( __FILE__ ) . " is not allowed to run through the webserver.\n";
 	exit( 1 );
 }
 
