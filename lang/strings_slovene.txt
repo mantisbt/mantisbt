@@ -333,6 +333,7 @@ $s_last_visit = 'Zadnji obisk';
 $s_edit_user_link = 'Uredi uporabnika';
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_status_level = 'Stanje';
+$s_plugin_author = 'Avtor: %1$s';
 $s_project_added_msg = 'Projekt je bila uspešno dodan...';
 $s_category_added_msg = 'Kategorija je bila uspešno dodana...';
 $s_category_deleted_msg = 'Kategorija je bila uspešno izbrisana...';

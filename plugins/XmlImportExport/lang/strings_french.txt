@@ -44,6 +44,7 @@
  * @author Jocelyn
  * @author Urhixidur
  * @author Verdy p
+ * @author Wladek92
  */
 
 $s_plugin_XmlImportExport_title = 'Importer / Exporter des anomalies';
@@ -54,7 +55,7 @@ $s_plugin_XmlImportExport_config_title = 'Configuration des niveaux d’accès d
 $s_plugin_XmlImportExport_import_threshold = 'Importer des anomalies';
 $s_plugin_XmlImportExport_export_threshold = 'Exporter des anomalies';
 $s_plugin_XmlImportExport_action_update = 'Mettre à jour';
-$s_plugin_XmlImportExport_importing_in_project = 'Importation des anomalies vers le projet : « %s »';
+$s_plugin_XmlImportExport_importing_in_project = 'Importation des anomalies dans le projet : « %s »';
 $s_plugin_XmlImportExport_import_options = 'Options d’import';
 $s_plugin_XmlImportExport_cross_references = 'Références croisées';
 $s_plugin_XmlImportExport_default_strategy = 'Stratégie de conversion par défaut :';
