@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Agaafd
  * @author Archaeodontosaurus
  * @author BaRaN6161 TURK
  * @author Burakolik
@@ -664,7 +665,10 @@ $s_show_all_complex = 'Tüm "%1$s" Seçeneklerinin Değerini Göster';
 $s_plugin = 'Eklenti';
 $s_plugins_installed = 'Yüklenen Eklentiler';
 $s_plugins_available = 'Mevcut Eklentiler';
+$s_plugins_missing = 'Eksik veya Geçersiz Eklentiler';
+$s_plugins_missing_description = 'Aşağıdaki listede bulunan Eklentiler kaydedildi, ancak kaynak kodları "%s" içinde bulunamadı veya yüklenemedi. <br> Bunları yeniden yüklemeyi veya kaldırmayı deneyin.';
 $s_plugin_description = 'Açıklama';
+$s_plugin_problem_description = 'Program açıklaması';
 $s_plugin_author = 'Yazar: %1$s';
 $s_plugin_url = 'Web sitesi:';
 $s_plugin_depends = 'Bağımlılıklar';
@@ -675,12 +679,19 @@ $s_plugin_actions = 'Eylemler';
 $s_plugin_install = 'Yükle';
 $s_plugin_upgrade = 'Yükselt';
 $s_plugin_uninstall = 'Kaldır';
+$s_plugin_manual_fix = 'Elle müdahale gerekli';
 $s_plugin_uninstall_message = '"%1$s" eklentisini kaldırmak istediğinizden emin misiniz?';
+$s_plugin_remove_message = 'Geçersiz ya da eksik "%1$s" eklentisini kaldırmak istediğinizden emin misiniz?';
 $s_plugin_key_label = 'Anahtar:';
 $s_plugin_key_met = 'eklentisi hazır';
 $s_plugin_key_unmet = 'karşılanamayan bağımlılıklar';
 $s_plugin_key_dated = 'eski bağımlılıklar';
 $s_plugin_key_upgrade = 'yükseltme gerekli';
+$s_plugin_invalid_description = 'Geçersiz Eklenti';
+$s_plugin_invalid_status_message = 'Aşağıdaki gerekli özellikler Eklenti Sınıfında tanımlanmamıştır: %s.';
+$s_plugin_missing_description = 'Eksik Eklenti';
+$s_plugin_missing_status_message = 'Eklenti Mantis veri tabanına kuruldu, ama yüklenemedi.';
+$s_plugin_missing_class_description = 'Eksik Eklenti Temel Sınıfı';
 $s_project_added_msg = 'Proje başarıyla eklendi...';
 $s_category_added_msg = 'Kategori başarıyla eklendi...';
 $s_category_deleted_msg = 'Kategori başarıyla silindi...';

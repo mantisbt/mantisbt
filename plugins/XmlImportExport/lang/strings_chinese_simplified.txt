@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Colathewikian
  * @author Hydra
  * @author Liuxinyu970226
  * @author Yfdyh000
@@ -51,7 +52,7 @@ $s_plugin_XmlImportExport_config_title = 'XML导入/导出访问等级配置';
 $s_plugin_XmlImportExport_import_threshold = '导入问题';
 $s_plugin_XmlImportExport_export_threshold = '导出问题';
 $s_plugin_XmlImportExport_action_update = '更新';
-$s_plugin_XmlImportExport_importing_in_project = '导入问题到项目:';
+$s_plugin_XmlImportExport_importing_in_project = '导入问题到此项目：%s';
 $s_plugin_XmlImportExport_import_options = '导入选项';
 $s_plugin_XmlImportExport_cross_references = '前后对照';
 $s_plugin_XmlImportExport_default_strategy = '默认转换策略:';
