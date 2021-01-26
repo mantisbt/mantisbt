@@ -98,6 +98,8 @@ event_declare_many( array(
 
 	'EVENT_USER_AVATAR' => EVENT_TYPE_FIRST,
 
+	'EVENT_USER_ADDITIONAL_ATTRIBUTES' => EVENT_TYPE_OUTPUT,
+
 	# Bug filter events
 	'EVENT_FILTER_FIELDS' => EVENT_TYPE_DEFAULT,
 	'EVENT_FILTER_COLUMNS' => EVENT_TYPE_DEFAULT,
@@ -152,4 +154,7 @@ event_declare_many( array(
 
 	# Authentication Events
 	'EVENT_AUTH_USER_FLAGS' => EVENT_TYPE_FIRST,
+
+	# LDAP Events
+	'EVENT_LDAP_USER_FIELDS' => EVENT_TYPE_DEFAULT,
 ) );
