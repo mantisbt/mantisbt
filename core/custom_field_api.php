@@ -540,11 +540,13 @@ function custom_field_create( $p_name ) {
 }
 
 /**
- * Update the field definition
- * return true on success, false on failure
+ * Update the field definition.
+ *
  * @param integer $p_field_id  Custom field identifier.
  * @param array   $p_def_array Custom field definition.
- * @return boolean
+ *
+ * @return boolean true on success, false on failure
+ *
  * @access public
  */
 function custom_field_update( $p_field_id, array $p_def_array ) {
@@ -580,6 +582,27 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 
 	if( !custom_field_is_name_unique( $v_name, $p_field_id ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
+	}
+
+
+	# Validate default date format
+	if( $v_type == CUSTOM_FIELD_TYPE_DATE && $v_default_value && !is_numeric( $v_default_value ) ) {
+		# Allow legacy "{xxx}" format for dynamic dates
+		# @TODO this backwards-compatibility feature should be removed in a future release
+		if( preg_match( '/^{(.*)}$/', $v_default_value, $t_matches ) ) {
+			error_parameters( $v_default_value, $t_matches[1] );
+			trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+			$v_default_value = $t_matches[1];
+		}
+
+		# Check default date format and calculate actual date
+		try {
+			new DateTimeImmutable( $v_default_value );
+		}
+		catch( Exception $e ) {
+			error_parameters( lang_get( 'custom_field_default_value' ) );
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
+		}
 	}
 
 	db_param_push();
