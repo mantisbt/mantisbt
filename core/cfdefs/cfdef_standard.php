@@ -18,6 +18,8 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
+ *
+ * @noinspection PhpUnused
  */
 
 $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_STRING] = array (
@@ -227,8 +229,7 @@ function cfdef_print_float( $p_value ) {
  * @return int The numeric value.
  */
 function cfdef_prepare_numeric( $p_value ) {
-	$t_value = (int)$p_value;
-	return $t_value;
+	return (int)$p_value;
 }
 
 /**
@@ -237,8 +238,7 @@ function cfdef_prepare_numeric( $p_value ) {
  * @return float The float value.
  */
 function cfdef_prepare_float( $p_value ) {
-	$t_value = (float)$p_value;
-	return $t_value;
+	return (float)$p_value;
 }
 
 /**
@@ -393,8 +393,10 @@ function cfdef_input_list( array $p_field_def, $p_custom_field_value, $p_require
  * print_custom_field_input
  * @param array $p_field_def          Custom field definition.
  * @param mixed $p_custom_field_value Custom field value.
- * @param string $p_required          The "required" attribute to add to the field
+ * @param string $p_required          (Unused) The "required" attribute to add to the field
  * @return void
+ *
+ * @noinspection PhpUnusedParameterInspection
  */
 function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value, $p_required = '' ) {
 	$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
@@ -403,7 +405,10 @@ function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value, $p_req
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'] . '[]';
 		echo '<label for="' . $t_input_id . '">' . "\n";
-		echo '<input class="ace" id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
+		echo '<input class="ace" id="' . $t_input_id . '" '
+			. helper_get_tab_index()
+			. ' type="checkbox" name="' . $t_input_name
+			. '" value="' . string_attribute( $t_values[$i] ) . '"';
 		check_checked( $t_checked_values, $t_values[$i] );
 		echo " />\n";
 		echo '<span class="lbl">&#160;' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
@@ -491,13 +496,22 @@ function cfdef_input_textarea( array $p_field_def, $p_custom_field_value, $p_req
 /**
  * Prints the controls for the date selector.
  *
- * @param string $p_field_def          The custom field definition.
+ * @param array  $p_field_def          The custom field definition.
  * @param string $p_custom_field_value The custom field value to print.
  * @param string $p_required           The "required" attribute to add to the field
  * @return void
  */
 function cfdef_input_date( $p_field_def, $p_custom_field_value, $p_required = '' ) {
-	print_date_selection_set( 'custom_field_' . $p_field_def['id'], config_get( 'short_date_format' ), $p_custom_field_value, false, true, 0, 0, 'input-sm', $p_required );
+	print_date_selection_set( 'custom_field_' . $p_field_def['id'],
+		config_get( 'short_date_format' ),
+		$p_custom_field_value,
+		false,
+		true,
+		0,
+		0,
+		'input-sm',
+		$p_required
+	);
 }
 
 /**
