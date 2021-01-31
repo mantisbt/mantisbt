@@ -64,6 +64,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $t_type ) {
+	/** @noinspection PhpIncludeInspection */
 	require_once( config_get_global( 'core_path' ) . 'cfdefs/cfdef_' . $t_type . '.php' );
 }
 unset( $t_type );
@@ -102,7 +103,7 @@ $g_cache_cf_bug_values = array();
  * false, return false if the field can't be found.
  * @param integer $p_field_id       Integer representing custom field id.
  * @param boolean $p_trigger_errors Indicates whether to trigger an error if the field is not found.
- * @return array array representing custom field
+ * @return array|false array representing custom field
  * @access public
  */
 function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
@@ -155,12 +156,12 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 		}
 		db_param_push();
 		$t_params = array();
-		$t_in_caluse_dbparams = array();
+		$t_in_clause_dbparams = array();
 		foreach( $c_cf_id_array as $t_id) {
-			$t_in_caluse_dbparams[] = db_param();
+			$t_in_clause_dbparams[] = db_param();
 			$t_params[] = $t_id;
 		}
-		$t_where_id_in = ' IN (' . implode( ',', $t_in_caluse_dbparams ) . ')';
+		$t_where_id_in = ' IN (' . implode( ',', $t_in_clause_dbparams ) . ')';
 		$t_query = 'SELECT * FROM {custom_field} WHERE id' . $t_where_id_in;
 		$t_result = db_query( $t_query, $t_params );
 	}
@@ -192,7 +193,6 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 	foreach( $t_ids_not_found as $t_id) {
 		$g_cache_custom_field[$t_id] = false;
 	}
-	return;
 }
 
 /**
@@ -378,19 +378,19 @@ function custom_field_type( $p_field_id ) {
 }
 
 /**
- * Check to see whether the field id is defined
- * return true if the field is defined, error otherwise
+ * Check to see whether the field id is defined.
+ *
  * @param integer $p_field_id Custom field id.
- * @return boolean
+ * @return boolean true if the field is defined, error otherwise.
+ *
  * @access public
  */
 function custom_field_ensure_exists( $p_field_id ) {
-	if( custom_field_exists( $p_field_id ) ) {
-		return true;
-	} else {
+	if( !custom_field_exists( $p_field_id ) ) {
 		error_parameters( 'Custom ' . $p_field_id );
 		trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
 	}
+	return true;
 }
 
 /**
@@ -420,18 +420,18 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 }
 
 /**
- * Check to see whether the name is unique
- * return true if the name has not been used, error otherwise
+ * Check to see whether the name is unique.
+ *
  * @param string $p_name Custom field name.
- * @return boolean
+ * @return boolean true if the name has not been used, error otherwise.
+ *
  * @access public
  */
 function custom_field_ensure_name_unique( $p_name ) {
-	if( custom_field_is_name_unique( $p_name ) ) {
-		return true;
-	} else {
+	if( !custom_field_is_name_unique( $p_name ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
 	}
+	return true;
 }
 
 /**
@@ -930,7 +930,7 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	$c_bug_id = (int)$p_bug_id;
 	$c_field_id = (int)$p_field_id;
 
-	$t_row = custom_field_cache_row( $c_field_id );
+	custom_field_cache_row( $c_field_id );
 
 	# first check permissions
 	if( !custom_field_has_read_access( $c_field_id, $c_bug_id, auth_get_current_user_id() ) ) {
