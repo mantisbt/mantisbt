@@ -241,13 +241,20 @@ $s_CODE = STRING;
 					</itemizedlist>
 				</listitem>
 				<listitem>
-					<para>Enumeration possible values (eg: RED|YELLOW|BLUE).
-						Use the pipe ('|') character to separate possible values for an
-						enumeration. One of the possible values can be an
-						empty string.  The set of possible values can also be
-						calculated at runtime.  For example, "=versions" would
+					<para>Possible values for the Custom Field
+						(e.g. <userinput>RED|YELLOW|BLUE</userinput>).
+						Use the pipe (<literal>|</literal>) character to separate
+						the enumeration's values.
+						It is possible for one of the values to be empty
+						(e.g. <userinput>|RED|YELLOW|BLUE</userinput>, note the
+						leading <literal>|</literal>).
+					</para>
+					<para>The set of values can also be calculated at runtime.
+						For example, <literal>=versions</literal> would
 						automatically resolve into all the versions defined
 						for the current project.
+						See <xref linkend="admin.customize.customfields.dynamic" />
+						for more information.
 					</para>
 				</listitem>
 				<listitem>
@@ -536,35 +543,39 @@ switch( $g_active_language ) {
 
 			<itemizedlist>
 				<listitem>
-					<para>=categories - a list of categories defined
-						in the current project (or the project to which the issue
-						belongs).
+					<para>
+						<literal>=categories</literal>
+						a list of categories defined in the current project
+						(or the project to which the issue belongs).
 					</para>
 				</listitem>
 				<listitem>
-					<para>=versions - a list of all versions defined
-						in the current project (or the project to which the issue
-						belongs).
+					<para>
+						<literal>=versions</literal>
+						a list of all versions defined in the current project
+						(or the project to which the issue belongs).
 					</para>
 				</listitem>
 				<listitem>
-					<para>=future_versions - a list of all versions that
-						belong to the current project with
-						released flag set to false.
+					<para>
+						<literal>=future_versions</literal>
+						a list of all versions that belong to the current project
+						with <emphasis>released</emphasis> flag set to false.
 					</para>
 				</listitem>
 				<listitem>
-					<para>=released_versions - a list of all versions
-						that belong to the current project with released flag set to
-						true.
+					<para>
+						<literal>=released_versions</literal>
+						a list of all versions that belong to the current project
+						with <emphasis>released</emphasis> flag set to true.
 					</para>
 				</listitem>
 			</itemizedlist>
 
 			<note>
-				<para>The '=' before the name of the dynamic list of options is used
-					to tell MantisBT that this is a dynamic list, rather than a static
-					list with just one option.
+				<para>The <literal>=</literal> before the list of options
+					tells MantisBT that this is a dynamic list,
+					rather than a static one with a single option.
 				</para>
 			</note>
 
@@ -573,15 +584,17 @@ switch( $g_active_language ) {
 		<section id="admin.customize.customfields.dynamic.custom">
 			<title>Defining Custom Dynamic Possible Values</title>
 
-			<para>If the user selects =versions, the actual custom function
-				that is executed is custom_function_*_enum_versions(). The reason
-				why the "enum_" is not included is to have a fixed prefix for all
-				custom functions used for this purpose and protect against users
-				using custom functions that were not intended for this purpose.
-				For example, you don't want the user to use
-				custom_function_*_issue_delete_notify() which may be overridden
-				by the web master to delete associated data in other
-				databases.
+			<para>If the user selects <literal>=versions</literal>, the actual
+				custom function that is executed is
+				<emphasis>custom_function_*_enum_versions()</emphasis>.
+				The reason why the "enum_" is not included is to have a fixed prefix
+				for all custom functions used for this purpose and protect against
+				users using custom functions that were not intended for this purpose.
+			</para>
+			<para>For example, you would not want the user to use
+				<emphasis>custom_function_*_issue_delete_notify()</emphasis>
+				which may be overridden by the web master to delete associated data
+				in other databases.
 			</para>
 
 			<para>Following is a sample custom function that is used to
@@ -589,11 +602,14 @@ switch( $g_active_language ) {
 				selected project:
 			</para>
 
-<programlisting># --------------------
-# Construct an enumeration for all categories for the current project.
-# The enumeration will be empty if current project is ALL PROJECTS.
-# Enumerations format is: "abc|lmn|xyz"
-# To use this in a custom field type "=categories" in the possible values field.
+<programlisting>
+/**
+ * Construct an enumeration for all categories for the current project.
+ *
+ * The enumeration will be empty if current project is ALL PROJECTS.
+ * Enumerations format is: "abc|lmn|xyz"
+ * To use this in a custom field type "=categories" in the possible values field.
+ */
 function custom_function_override_enum_categories() {
 	$t_categories = category_get_all_rows( helper_get_current_project() );
 
@@ -605,14 +621,13 @@ function custom_function_override_enum_categories() {
 	$t_possible_values = implode( '|', $t_enum );
 
 	return $t_possible_values;
-}</programlisting>
+}
+</programlisting>
 
-			<para>Notice the following:
-
+			<note>
 				<itemizedlist>
 					<listitem>
-						<para>The custom function doesn't take any
-							parameters.
+						<para>The custom function doesn't take any parameters.
 						</para>
 					</listitem>
 					<listitem>
@@ -621,8 +636,7 @@ function custom_function_override_enum_categories() {
 						</para>
 					</listitem>
 					<listitem>
-						<para>The custom function uses the current
-							project.
+						<para>The custom function uses the current project.
 						</para>
 					</listitem>
 					<listitem>
@@ -631,19 +645,20 @@ function custom_function_override_enum_categories() {
 						</para>
 					</listitem>
 				</itemizedlist>
-			</para>
+			</note>
 
-			<para>To define your own function \u201c=mine\u201d, you will have to define it
-				with the following signature:
+
+			<para>To define your own function <literal>mine</literal>,
+				you will have to define it with the following signature:
 			</para>
 
 <programlisting>
-# --------------------
-# To use this in a custom field type "=mine" in the possible values field.
+/**
+ * Use this in a custom field type "=mine" in the possible values field.
+ */
 function custom_function_override_enum_mine() {
+	# Populate $t_enum values as appropriate here
 	$t_enum = array();
-
-	:
 
 	$t_possible_values = implode( '|', $t_enum );
 
@@ -651,15 +666,18 @@ function custom_function_override_enum_mine() {
 }
 </programlisting>
 
-			<para>Notice "override" in the function name. This is because this method is
-				defined by the MantisBT administrator/webmaster and not part of the MantisBT source.
-				It is OK to override a method that doesn't exist.
-			</para>
+			<note>
+				<para>Notice the <emphasis>override</emphasis> in the function name.
+					This is because this method is defined by the MantisBT administrator
+					and not part of the MantisBT source.
+					It is OK to override a method that doesn't exist.
+				</para>
+			</note>
 
 			<para>As usual, when MantisBT is upgraded to future releases, the custom functions
 				will not be overwritten. The difference between the "default" implementation and
-				the "override" implementation is explained in more details in the custom
-				functions section.
+				the "override" implementation is explained in more details in
+				<xref linkend="admin.customize.customfuncs" />.
 			</para>
 
 		</section>
