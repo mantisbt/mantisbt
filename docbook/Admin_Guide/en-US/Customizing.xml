@@ -139,19 +139,106 @@ $s_CODE = STRING;
 					</para></note>
 				</listitem>
 				<listitem>
-					<para>Custom field type (string, numeric, float,
-			enumeration, email, checkbox, radio, list, multi-selection list, date).
+					<para>Custom field type, can be one of:
 					</para>
-			<para>Type 'string' is used for strings of up to 255 characters.</para>
-			<para>Type 'numeric' is used for numerical integer values.</para>
-			<para>Type 'float' is used for real (float / double) numbers.</para>
-			<para>Type 'enumeration' is used when a user selects one entry from a list.  The user interface for such type is a combo-box.</para>
-			<para>Type 'email' is used for storing email addresses.</para>
-			<para>Type 'checkbox' is like enumeration but the list is shown as checkboxes and the user is allowed to tick more than one selection.  The default value and the possible value can contain multiple values like 'RED|YELLOW|BLUE' (without the single quote).</para>
-			<para>Type 'radio' is like enumeration but the list is shown as radio buttons and the user is allowed to tick on of the options.  The possible values can be 'RED|YELLOW|BLUE', where the default value can be 'YELLOW'.  Note that the default value can't contain multiple values.</para>
-			<para>Type 'list' is like enumeration but the list is shown as a list box where the user is only allowed to select one option.  The possible values can be 'RED|YELLOW|BLUE', where the default value can be 'YELLOW'.  Note that the default value can't contain multiple values.</para>
-			<para>Type 'multi-selection list' is like enumeration but the list is shown as a list box where the user is allowed to select multiple options.  The possible values can be 'RED|YELLOW|BLUE', where the default value can be 'RED|BLUE'.  Note that in this case the default value contains multiple values.</para>
-			<para>Type 'date' is for date values.  The default value can be empty, or {tomorrow}, {yesterday}, {next week}, {last week}, {+3 days}, {-2 days}.</para>
+					<itemizedlist>
+						<listitem>
+							<para><literal>string</literal>,
+								for strings of up to 255 characters.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>numeric</literal>,
+								for numerical integer values.
+							</para>
+						</listitem>
+						<listitem>
+							<para><literal>float</literal>,
+								for real (float / double) numbers.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>email</literal>,
+								for storing email addresses.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>enumeration</literal>
+								is used when a user selects one entry from a list.
+								The user interface for this type is a combo-box.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>checkbox</literal>
+								is like enumeration, but the options are shown as checkboxes
+								and the user is allowed to tick more than one item.
+							</para>
+							<para>The default value and the possible value can contain multiple
+								values like <userinput>RED|YELLOW|BLUE</userinput>.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>radio</literal>
+								is like enumeration, but the list is shown as radio buttons
+								and the user is only allowed to tick a single option.
+							</para>
+							<para>The possible values can be <userinput>RED|YELLOW|BLUE</userinput>,
+								and default <userinput>YELLOW</userinput>.
+							</para>
+							<note><para>The default value can't contain multiple values.</para></note>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>list</literal>
+								is like enumeration but the list is shown as a list box
+								where the user is only allowed to select one option.
+							</para>
+							<para>The possible values can be <userinput>RED|YELLOW|BLUE</userinput>,
+								and default <userinput>YELLOW</userinput>.
+							</para>
+							<note><para>The default value can't contain multiple values.</para></note>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>multi-selection list</literal>
+								is like enumeration, but the list is shown as a list box
+								where the user is allowed to select multiple options.
+							</para>
+							<para>The possible values can be <userinput>RED|YELLOW|BLUE</userinput>,
+								and default <userinput>RED|BLUE</userinput>.
+							</para>
+							<note><para>Multiple values are allowed as default.</para></note>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>date</literal>,
+								for date values.
+							</para>
+							<para>The default value can be <emphasis>empty</emphasis>,
+								a numeric <emphasis>UNIX timestamp</emphasis>,
+								or a date in a
+								<ulink url="https://www.php.net/manual/en/datetime.formats.php">valid format</ulink>,
+								including relative indications such as
+								<userinput>tomorrow</userinput>,
+								<userinput>next week</userinput>,
+								<userinput>last month</userinput>,
+								<userinput>+3 days</userinput>,
+								<userinput>last day of this month</userinput>, etc.
+							</para>
+							<note>
+								<para>The legacy format where the dynamic date had to be
+									wrapped in curly brackets (e.g. <literal>{tomorrow}</literal>)
+									is still supported for backwards-compatibility,
+									but no longer necessary.
+								</para>
+							</note>
+						</listitem>
+					</itemizedlist>
 				</listitem>
 				<listitem>
 					<para>Enumeration possible values (eg: RED|YELLOW|BLUE).
@@ -179,12 +266,12 @@ $s_CODE = STRING;
 				</listitem>
 				<listitem>
 					<para>Read Access level: Minimum access level for users to be
-						able to see the value of the custom field.
+						able to <emphasis>see</emphasis> the value of the custom field.
 					</para>
 				</listitem>
 				<listitem>
 					<para>Write Access level: Minimum access level for users to be
-						able to edit the value of the custom field.
+						able to <emphasis>edit</emphasis> the value of the custom field.
 					</para>
 				</listitem>
 				<listitem>
