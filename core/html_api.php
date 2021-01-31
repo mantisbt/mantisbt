@@ -362,7 +362,7 @@ function html_head_end() {
  */
 function html_print_logo( $p_logo = null ) {
 	if( !$p_logo ) {
-		$p_logo = config_get( 'logo_image' );
+		$p_logo = config_get_global( 'logo_image' );
 	}
 
 	if( !is_blank( $p_logo ) ) {
@@ -388,7 +388,7 @@ function html_print_logo( $p_logo = null ) {
  */
 function html_top_banner() {
 	$t_page = config_get_global( 'top_include_page' );
-	$t_logo_image = config_get( 'logo_image' );
+	$t_logo_image = config_get_global( 'logo_image' );
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 		include( $t_page );

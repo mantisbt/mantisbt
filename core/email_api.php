@@ -116,7 +116,7 @@ function email_regex_simple() {
  * @return boolean
  */
 function email_is_valid( $p_email ) {
-	$t_validate_email = config_get( 'validate_email' );
+	$t_validate_email = config_get_global( 'validate_email' );
 
 	# if we don't validate then just accept
 	# If blank email is allowed or current user is admin, then accept blank emails which are useful for
@@ -1346,13 +1346,13 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	#apply DKIM settings
-	if( config_get( 'email_dkim_enable' ) ) {
-		$t_mail->DKIM_domain = config_get( 'email_dkim_domain' );
-		$t_mail->DKIM_private = config_get( 'email_dkim_private_key_file_path' );
-		$t_mail->DKIM_private_string = config_get( 'email_dkim_private_key_string' );
-		$t_mail->DKIM_selector = config_get( 'email_dkim_selector' );
-		$t_mail->DKIM_passphrase = config_get( 'email_dkim_passphrase' );
-		$t_mail->DKIM_identity = config_get( 'email_dkim_identity' );
+	if( config_get_global( 'email_dkim_enable' ) ) {
+		$t_mail->DKIM_domain = config_get_global( 'email_dkim_domain' );
+		$t_mail->DKIM_private = config_get_global( 'email_dkim_private_key_file_path' );
+		$t_mail->DKIM_private_string = config_get_global( 'email_dkim_private_key_string' );
+		$t_mail->DKIM_selector = config_get_global( 'email_dkim_selector' );
+		$t_mail->DKIM_passphrase = config_get_global( 'email_dkim_passphrase' );
+		$t_mail->DKIM_identity = config_get_global( 'email_dkim_identity' );
 	}
 
 	$t_mail->isHTML( false );              # set email format to plain text

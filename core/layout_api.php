@@ -82,7 +82,7 @@ function layout_page_header_begin( $p_page_title = null ) {
 	layout_head_css();
 	html_rss_link();
 
-	$t_favicon_image = config_get( 'favicon_image' );
+	$t_favicon_image = config_get_global( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
@@ -357,7 +357,7 @@ function layout_login_page_begin() {
 	layout_head_css();
 	html_rss_link();
 
-	$t_favicon_image = config_get( 'favicon_image' );
+	$t_favicon_image = config_get_global( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
@@ -1145,7 +1145,7 @@ function layout_footer() {
 	# Show MantisBT version and copyright statement
 	$t_version_suffix = '';
 	$t_copyright_years = ' 2000 - ' . date( 'Y' );
-	if( config_get( 'show_version' ) == ON ) {
+	if( config_get_global( 'show_version' ) == ON ) {
 		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . config_get_global( 'version_suffix' ) );
 	}
 	echo '<div class="col-md-6 col-xs-12 no-padding">' . "\n";
@@ -1154,14 +1154,14 @@ function layout_footer() {
 	echo "<small>Copyright &copy;$t_copyright_years MantisBT Team</small>" . '<br>';
 
 	# Show optional user-specified custom copyright statement
-	$t_copyright_statement = config_get( 'copyright_statement' );
+	$t_copyright_statement = config_get_global( 'copyright_statement' );
 	if( $t_copyright_statement ) {
 		echo '<small>' . $t_copyright_statement . '</small>' . "\n";
 	}
 
 	# Show contact information
 	if( !is_page_name( 'login_page' ) ) {
-		$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get( 'webmaster_email' ) ) );
+		$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get_global( 'webmaster_email' ) ) );
 		echo '<small>' . $t_webmaster_contact_information . '</small>' . '<br>' . "\n";
 	}
 
@@ -1292,7 +1292,7 @@ function layout_scroll_up_button() {
 function layout_login_page_logo() {
 	?>
 	<div class="login-logo">
-		<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+		<img src="<?php echo helper_mantis_url( config_get_global( 'logo_image' ) ); ?>">
 	</div>
 	<?php
 }
