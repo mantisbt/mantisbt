@@ -127,7 +127,7 @@ $s_CODE = STRING;
 					<para>Caption variable name.
 						This value is supplied to the lang_get() API; it is
 						therefore mandatory to set this to a
-						<ulink url="https://www.php.net/language.variables.basics.php">valid PHP identifier</ulink>
+						<ulink url="https://www.php.net/manual/en/language.variables.basics.php">valid PHP identifier</ulink>
 						(i.e. only letters, numbers and underscores; no spaces)
 						if you intend to translate the field label
 						(see <xref linkend="admin.customize.customfields.localize" />).
@@ -433,7 +433,7 @@ $s_CODE = STRING;
 					<para>Define the custom field
 						(see <xref linkend="admin.customize.customfields.definitions" />),
 						keeping in mind that its name must be a
-						<ulink url="https://www.php.net/language.variables.basics.php">valid PHP identifier</ulink>.
+						<ulink url="https://www.php.net/en/language.variables.basics.php">valid PHP identifier</ulink>.
 					</para>
 					<para>As an example, we will use
 						<emphasis>my_start_date</emphasis>
