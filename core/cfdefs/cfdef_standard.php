@@ -290,33 +290,38 @@ function cfdef_prepare_date_value_for_email( $p_value ) {
 }
 
 /**
- * Translates the default date value entered by the creator of the custom
- * field into a date value.  For example, translate '=tomorrow' to tomorrow's
- * date.
+ * Translates the default date value into a timestamp.
+ *
+ * Default date can be any supported Date format
+ * {@see https://www.php.net/manual/en/datetime.formats.php}.
+ * The legacy style with format wrapped in curly bracket (e.g. {tomorrow}) is
+ * still supported for backwards compatibility.
+ *
  * @param string $p_value The default date string.
- * @return string The calculated default date value if $p_value starts with '=', otherwise, returns $p_value.
+ *
+ * @return int Calculated default date's timestamp, or 0 if format is invalid.
  */
 function cfdef_prepare_date_default( $p_value ) {
 	if( is_blank( $p_value ) ) {
-		return '';
+		return 0;
 	}
 
 	$t_value = trim( $p_value );
-	$t_value_length = mb_strlen( $t_value );
 
-	# We are expanding {tomorrow}, {yesterday}, {+3 days}, {-7 days}, {next week}
-	# See strtotime() for more details about supported formats.
-	if( $t_value_length >= 3 && $t_value[0] == '{' && $t_value[$t_value_length - 1] == '}' ) {
-		$t_value = mb_substr( $t_value, 1, $t_value_length - 2 );
-		$t_value = @strtotime( $t_value );
-
-		# Different versions of PHP return different values in case of error.
-		if( $t_value == -1 || $t_value === false ) {
-			return '';
-		}
+	# Allow legacy "{xxx}" format for dynamic dates
+	if( preg_match( '/^{(.*)}$/', $t_value, $t_matches ) ) {
+		$t_value = $t_matches[1];
 	}
 
-	return $t_value;
+	# Check default date format and calculate actual date
+	try {
+		$t_date = new DateTimeImmutable( $t_value );
+	}
+	catch( Exception $e ) {
+		return 0;
+	}
+
+	return $t_date->getTimestamp();
 }
 
 /**

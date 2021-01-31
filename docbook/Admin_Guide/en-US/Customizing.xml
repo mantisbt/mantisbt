@@ -235,6 +235,8 @@ $s_CODE = STRING;
 									wrapped in curly brackets (e.g. <literal>{tomorrow}</literal>)
 									is still supported for backwards-compatibility,
 									but no longer necessary.
+									This is considered a deprecated feature, that will be
+									removed in a future released of MantisBT.
 								</para>
 							</note>
 						</listitem>
