@@ -548,26 +548,37 @@ function custom_field_create( $p_name ) {
  * @access public
  */
 function custom_field_update( $p_field_id, array $p_def_array ) {
-	if( is_blank( $p_def_array['name'] ) ) {
+	/**
+	 * @var string     $v_name
+	 * @var int        $v_type
+	 * @var string|int $v_default_value
+	 * @var int        $v_access_level_r
+	 * @var int        $v_access_level_rw
+	 * @var int        $v_length_min
+	 * @var int        $v_length_max
+	 */
+	extract( $p_def_array, EXTR_PREFIX_ALL, 'v');
+
+	if( is_blank( $v_name ) ) {
 		error_parameters( 'name' );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if( $p_def_array['access_level_rw'] < $p_def_array['access_level_r'] ) {
+	if( $v_access_level_rw < $v_access_level_r ) {
 		error_parameters(
 			lang_get( 'custom_field_access_level_r' ) . ', ' .
 			lang_get( 'custom_field_access_level_rw' ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
 	}
 
-	if( $p_def_array['length_min'] < 0
-		|| ( $p_def_array['length_max'] != 0 && $p_def_array['length_min'] > $p_def_array['length_max'] )
+	if( $v_length_min < 0
+		|| ( $v_length_max != 0 && $v_length_min > $v_length_max )
 	) {
 		error_parameters( lang_get( 'custom_field_length_min' ) . ', ' . lang_get( 'custom_field_length_max' ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
 	}
 
-	if( !custom_field_is_name_unique( $p_def_array['name'], $p_field_id ) ) {
+	if( !custom_field_is_name_unique( $v_name, $p_field_id ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
 	}
 
@@ -582,7 +593,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 			case 'default_value':
 			case 'valid_regexp':
 				# Possible values doesn't apply to textarea fields
-				if( $p_def_array['type'] == CUSTOM_FIELD_TYPE_TEXTAREA && $t_field == 'possible_values' ) {
+				if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA && $t_field == 'possible_values' ) {
 					$t_value = '';
 				}
 
