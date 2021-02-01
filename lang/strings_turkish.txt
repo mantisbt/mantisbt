@@ -692,6 +692,7 @@ $s_plugin_invalid_status_message = 'Aşağıdaki gerekli özellikler Eklenti Sı
 $s_plugin_missing_description = 'Eksik Eklenti';
 $s_plugin_missing_status_message = 'Eklenti Mantis veri tabanına kuruldu, ama yüklenemedi.';
 $s_plugin_missing_class_description = 'Eksik Eklenti Temel Sınıfı';
+$s_plugin_missing_class_status_message = 'Bu Eklenti için bir dizin bulundu, ancak içinde uygun bir Eklenti kodu yok. Dizinin adının Eklentinin temel adıyla uygun olduğuna emin olun (büyük küçük harf duyarlı)';
 $s_project_added_msg = 'Proje başarıyla eklendi...';
 $s_category_added_msg = 'Kategori başarıyla eklendi...';
 $s_category_deleted_msg = 'Kategori başarıyla silindi...';

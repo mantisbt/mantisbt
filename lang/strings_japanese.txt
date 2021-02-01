@@ -43,6 +43,7 @@
  * @author Fryed-peach
  * @author Gulpin
  * @author Hiro884
+ * @author LaMagiaaa
  * @author Macofe
  * @author Mfuji
  * @author Object＊tofu
@@ -484,6 +485,8 @@ $s_bugnote_updated_msg = 'コメントを更新しました...';
 $s_last_edited = '最終編集:';
 $s_hide_content = '非表示';
 $s_show_content = '表示';
+$s_file_icon_description = '%1$s ファイルアイコン';
+$s_unknown_file_extension = '不明';
 $s_webmaster_contact_information = '分からない場合は、<a href="mailto:%1$s" title="メールでウェブマスターに連絡します。">管理者</a>に問い合わせてください';
 $s_total_queries_executed = '実行されたクエリ数の合計: %1$d';
 $s_unique_queries_executed = '固有クエリの実行数: %1$d';
