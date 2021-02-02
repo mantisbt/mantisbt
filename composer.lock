@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "v5.20.19",
+            "version": "v5.20.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
-                "reference": "04845f23bbf2c140a4285c1c47bc5768eb3fd93c"
+                "reference": "66fb9e5300c2b3b84beab1d9d7793ff961c171a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/04845f23bbf2c140a4285c1c47bc5768eb3fd93c",
-                "reference": "04845f23bbf2c140a4285c1c47bc5768eb3fd93c",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/66fb9e5300c2b3b84beab1d9d7793ff961c171a8",
+                "reference": "66fb9e5300c2b3b84beab1d9d7793ff961c171a8",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "library",
                 "php"
             ],
-            "time": "2020-12-15T01:18:43+00:00"
+            "time": "2021-01-31T20:51:30+00:00"
         },
         {
             "name": "dapphp/securimage",
@@ -2116,12 +2116,12 @@
             "version": "1.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
                 "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
                 "shasum": ""
             },
