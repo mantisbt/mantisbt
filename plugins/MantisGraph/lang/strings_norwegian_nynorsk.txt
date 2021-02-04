@@ -42,9 +42,6 @@
 
 $s_plugin_MantisGraph_legend_still_open = 'Enno opne';
 $s_plugin_MantisGraph_legend_resolved = 'Løyste';
-$s_plugin_MantisGraph_legend_assigned = 'Tildelte';
-$s_plugin_MantisGraph_legend_opened = 'Opna';
-$s_plugin_MantisGraph_legend_closed = 'Attlatne';
 $s_plugin_MantisGraph_legend_reported = 'Melde';
 $s_plugin_MantisGraph_period_none = 'Ingen';
 $s_plugin_MantisGraph_period_this_week = 'Denne veka';
@@ -52,10 +49,3 @@ $s_plugin_MantisGraph_period_last_week = 'Førre veka';
 $s_plugin_MantisGraph_period_two_weeks = 'Siste to veker';
 $s_plugin_MantisGraph_period_this_month = 'Denne månaden';
 $s_plugin_MantisGraph_period_last_month = 'Førre månad';
-$s_plugin_MantisGraph_select = 'Vel';
-$s_plugin_MantisGraph_select_bystatus = 'etter stoda';
-$s_plugin_MantisGraph_select_summbystatus = 'Samandrag etter stoda';
-$s_plugin_MantisGraph_select_bycat = 'Samandrag etter kategori';
-$s_plugin_MantisGraph_select_both = 'Samandrag etter stoda og kategori';
-$s_plugin_MantisGraph_show_as_graph = 'Vis som graf';
-$s_plugin_MantisGraph_show_as_table = 'Vis som tabell';
