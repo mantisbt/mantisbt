@@ -38,5 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Meno25
  */
 
+$s_plugin_XmlImportExport_action_update = 'تحديث';

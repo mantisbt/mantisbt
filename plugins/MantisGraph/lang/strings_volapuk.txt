@@ -40,7 +40,6 @@
  *
  */
 
-$s_plugin_MantisGraph_legend_total = 'Valod';
 $s_plugin_MantisGraph_period_none = 'Nonik';
 $s_plugin_MantisGraph_period_this_week = 'Avig';
 $s_plugin_MantisGraph_period_last_week = 'Ävig';
@@ -50,4 +49,3 @@ $s_plugin_MantisGraph_period_last_month = 'Ämul';
 $s_plugin_MantisGraph_period_year_to_date = 'Ayel';
 $s_plugin_MantisGraph_period_select = 'Dats Vilädik';
 $s_plugin_MantisGraph_period_last_year = 'Äyel';
-$s_plugin_MantisGraph_select = 'Välolös';

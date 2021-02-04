@@ -41,7 +41,4 @@
  * @author An13sa
  */
 
-$s_plugin_MantisGraph_graph_bug_page_link = 'Grafikoa';
 $s_plugin_MantisGraph_legend_still_open = 'Oraindik Irekita';
-$s_plugin_MantisGraph_legend_opened = 'Irekita';
-$s_plugin_MantisGraph_legend_closed = 'Itxita';
