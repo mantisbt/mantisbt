@@ -95,7 +95,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<?php echo lang_get( 'custom_field_name' ) ?>
 		</td>
 		<td>
-			<input type="text" id="custom-field-name" name="name" class="input-sm" size="32" maxlength="64" value="<?php echo string_attribute( $t_definition['name'] ) ?>" />
+			<input type="text" id="custom-field-name" name="name"
+				   class="input-sm" size="32" maxlength="64"
+				   value="<?php echo string_attribute( $t_definition['name'] ) ?>"
+			/>
 		</td>
 	</tr>
 	<tr>
@@ -113,8 +116,11 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<?php echo lang_get( 'custom_field_possible_values' ) ?>
 		</td>
 		<td>
-			<input type="text" id="custom-field-possible-values" name="possible_values" class="input-sm" size="80%" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
-            <small><?php echo sprintf( lang_get( 'separate_list_items_by' ), '|' ) ?></small>
+			<input type="text" id="custom-field-possible-values" name="possible_values"
+				   class="input-sm" size="80%"
+				   value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>"
+			/>
+			<small><?php echo sprintf( lang_get( 'separate_list_items_by' ), '|' ) ?></small>
 		</td>
 	</tr>
 	<tr>
@@ -123,11 +129,15 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		</td>
 		<td>
 			<div class="input">
-				<input type="text" id="custom-field-default-value" name="default_value" class="input-sm" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
+				<input type="text" id="custom-field-default-value" name="default_value"
+					   class="input-sm" size="32" maxlength="255"
+					   value="<?php echo string_attribute( $t_definition['default_value'] ) ?>"
+				/>
 			</div>
 			<div class="textarea">
 				<?php # Newline after opening textarea tag is intentional, see #25839 ?>
-				<textarea disabled="disabled" id="custom-field-default-value-textarea" name="default_value" class="form-control" cols="80" rows="10">
+				<textarea id="custom-field-default-value-textarea" name="default_value"
+						  class="form-control" cols="80" rows="10" disabled="disabled">
 <?php echo string_attribute( $t_definition['default_value'] ) ?>
 </textarea>
 			</div>
@@ -138,7 +148,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<?php echo lang_get( 'custom_field_valid_regexp' ) ?>
 		</td>
 		<td>
-			<input type="text" id="custom-field-valid-regexp" name="valid_regexp" class="input-sm" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['valid_regexp'] ) ?>" />
+			<input type="text" id="custom-field-valid-regexp" name="valid_regexp"
+				   class="input-sm" size="32" maxlength="255"
+				   value="<?php echo string_attribute( $t_definition['valid_regexp'] ) ?>"
+			/>
 		</td>
 	</tr>
 
@@ -164,45 +177,56 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-    <tr>
-        <td class="category">
-            <?php echo lang_get( 'custom_field_length_min' ) ?>
-        </td>
-        <td>
-            <input type="text" id="custom-field-length-min" name="length_min" class="input-sm" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" />
-        </td>
-    </tr>
-    <tr>
-        <td class="category">
-            <?php echo lang_get( 'custom_field_length_max' ) ?>
-        </td>
-        <td>
-            <input type="text" id="custom-field-length-max" name="length_max" class="input-sm" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
-        </td>
-    </tr>
-    <tr>
-        <td class="category">
-            <?php echo lang_get( 'custom_field_filter_by' ) ?>
-        </td>
-        <td>
-            <label>
-                <input type="checkbox" class="ace" id="custom-field-filter-by" name="filter_by" value="1"
-                    <?php
-                    if( $t_definition['filter_by'] ) {
-                        echo 'checked="checked"';
-                    }
-                    ?> />
-                <span class="lbl"></span>
-            </label>
-        </td>
-    </tr>
+	<tr>
+		<td class="category">
+			<?php echo lang_get( 'custom_field_length_min' ) ?>
+		</td>
+		<td>
+			<input type="text" id="custom-field-length-min" name="length_min"
+				   class="input-sm" size="32" maxlength="64"
+				   value="<?php echo $t_definition['length_min'] ?>"
+			/>
+		</td>
+	</tr>
+	<tr>
+		<td class="category">
+			<?php echo lang_get( 'custom_field_length_max' ) ?>
+		</td>
+		<td>
+			<input type="text" id="custom-field-length-max" name="length_max"
+				   class="input-sm" size="32" maxlength="64"
+				   value="<?php echo $t_definition['length_max'] ?>"
+			/>
+		</td>
+	</tr>
+	<tr>
+		<td class="category">
+			<?php echo lang_get( 'custom_field_filter_by' ) ?>
+		</td>
+		<td>
+			<label>
+				<input type="checkbox" id="custom-field-filter-by" name="filter_by"
+					   class="ace" value="1"
+					<?php
+					if( $t_definition['filter_by'] ) {
+						echo 'checked="checked"';
+					}
+					?>
+				/>
+				<span class="lbl"></span>
+			</label>
+		</td>
+	</tr>
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_display_report' ) ?>
 		</td>
 		<td>
 			<label>
-				<input type="checkbox" class="ace" id="custom-field-display-report" name="display_report" value="1" <?php check_checked( (bool)$t_definition['display_report'] ) ?> />
+				<input type="checkbox" id="custom-field-display-report" name="display_report"
+					   class="ace" value="1"
+					   <?php check_checked( (bool)$t_definition['display_report'] ) ?>
+				/>
 				<span class="lbl"></span>
 			</label>
 		</td>
@@ -213,7 +237,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		</td>
 		<td>
 			<label>
-				<input type="checkbox" class="ace" id="custom-field-display-update" name="display_update" value="1" <?php check_checked( (bool)$t_definition['display_update'] ) ?> />
+				<input type="checkbox" id="custom-field-display-update" name="display_update"
+					   class="ace" value="1"
+					   <?php check_checked( (bool)$t_definition['display_update'] ) ?>
+				/>
 				<span class="lbl"></span>
 			</label>
 		</td>
@@ -224,7 +251,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		</td>
 		<td>
 			<label>
-				<input type="checkbox" class="ace" id="custom-field-display-resolved" name="display_resolved" value="1" <?php check_checked( (bool)$t_definition['display_resolved'] ) ?> />
+				<input type="checkbox" id="custom-field-display-resolved" name="display_resolved"
+					   class="ace" value="1"
+					   <?php check_checked( (bool)$t_definition['display_resolved'] ) ?>
+				/>
 				<span class="lbl"></span>
 			</label>
 		</td>
@@ -235,7 +265,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		</td>
 		<td>
 			<label>
-				<input type="checkbox" class="ace" id="custom-field-display-closed" name="display_closed" value="1" <?php check_checked( (bool)$t_definition['display_closed'] ) ?> />
+				<input type="checkbox" id="custom-field-display-closed" name="display_closed"
+					   class="ace" value="1"
+					   <?php check_checked( (bool)$t_definition['display_closed'] ) ?>
+				/>
 				<span class="lbl"></span>
 			</label>
 		</td>
@@ -246,7 +279,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		</td>
 		<td>
 			<label>
-				<input type="checkbox" class="ace" id="custom-field-require-report" name="require_report" value="1" <?php check_checked( (bool)$t_definition['require_report'] ) ?> />
+				<input type="checkbox" id="custom-field-require-report" name="require_report"
+					   class="ace" value="1"
+					   <?php check_checked( (bool)$t_definition['require_report'] ) ?>
+				/>
 				<span class="lbl"></span>
 			</label>
 		</td>
@@ -257,7 +293,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		</td>
 		<td>
 			<label>
-				<input type="checkbox" class="ace" id="custom-field-require-update" name="require_update" value="1" <?php check_checked( (bool)$t_definition['require_update'] ) ?> />
+				<input type="checkbox" id="custom-field-require-update" name="require_update"
+					   class="ace" value="1"
+					<?php check_checked( (bool)$t_definition['require_update'] ) ?>
+				/>
 				<span class="lbl"></span>
 			</label>
 		</td>
@@ -268,7 +307,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		</td>
 		<td>
 			<label>
-				<input type="checkbox" class="ace" id="custom-field-require-resolved" name="require_resolved" value="1" <?php check_checked( (bool)$t_definition['require_resolved'] ) ?> />
+				<input type="checkbox" id="custom-field-require-resolved" name="require_resolved"
+					   class="ace" value="1"
+					   <?php check_checked( (bool)$t_definition['require_resolved'] ) ?>
+				/>
 				<span class="lbl"></span>
 			</label>
 		</td>
@@ -279,7 +321,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		</td>
 		<td>
 			<label>
-				<input type="checkbox" class="ace" id="custom-field-require-closed" name="require_closed" value="1" <?php check_checked( (bool)$t_definition['require_closed'] ) ?> />
+				<input type="checkbox" id="custom-field-require-closed" name="require_closed"
+					   class="ace" value="1"
+					   <?php check_checked( (bool)$t_definition['require_closed'] ) ?>
+				/>
 				<span class="lbl"></span>
 			</label>
 		</td>
@@ -290,7 +335,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 </div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
-	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />
+	<input type="submit" class="btn btn-primary btn-white btn-round"
+		   value="<?php echo lang_get( 'update_custom_field_button' ) ?>"
+	/>
 </div>
 </div>
 </form>
@@ -304,13 +351,15 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<?php echo form_security_field( 'manage_custom_field_delete' ); ?>
 			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
 			<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ) ?>" />
-			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
+				   value="<?php echo lang_get( 'delete_custom_field_button' ) ?>"
+			/>
 		</fieldset>
 	</form>
 </div>
 
 <?php /** @todo There is access checking in the ADD action page and at the top of this file.
-           * We may need to add extra checks to exclude projects from the list that the user
+		   * We may need to add extra checks to exclude projects from the list that the user
 		   * can't link/unlink fields from/to. */
 ?>
 <div class="col-md-12 col-xs-12">
@@ -348,7 +397,8 @@ $t_definition = custom_field_get_definition( $f_field_id );
 						<?php echo lang_get( 'projects_title_label' ) ?>
 					</td>
 					<td>
-						<select id="custom-field-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
+						<select id="custom-field-project-id" name="project_id[]"
+								class="input-sm" multiple="multiple" size="5">
 							<?php print_project_option_list( null, false ); ?>
 						</select>
 					</td>
@@ -364,7 +414,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 				<tr>
 					<td colspan="2" class="no-padding">
 					<div class="widget-toolbox padding-8 clearfix">
-						<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>" />
+						<input type="submit" class="btn btn-primary btn-white btn-round"
+							   value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>"
+						/>
 					</div>
 					</td>
 				</tr>
