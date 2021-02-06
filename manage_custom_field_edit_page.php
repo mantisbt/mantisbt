@@ -84,12 +84,12 @@ $t_definition = custom_field_get_definition( $f_field_id );
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="table-responsive">
-<table class="table table-bordered table-condensed table-striped">
+	<fieldset>
+		<?php echo form_security_field( 'manage_custom_field_update' ); ?>
+		<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
+		<input type="hidden" name="return" value="<?php echo $f_return ?>" />
 
-<fieldset>
-			<?php echo form_security_field( 'manage_custom_field_update' ); ?>
-			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-			<input type="hidden" name="return" value="<?php echo $f_return ?>" />
+<table class="table table-bordered table-condensed table-striped">
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_name' ) ?>
@@ -284,8 +284,8 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-</fieldset>
 </table>
+	</fieldset>
 </div>
 </div>
 </div>
@@ -293,8 +293,8 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />
 </div>
 </div>
-</div>
 </form>
+</div>
 </div>
 
 <div class="col-md-12 col-xs-12">
@@ -327,9 +327,13 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	<div class="widget-body">
 		<div class="widget-main no-padding">
 			<div class="table-responsive">
+				<div class="form-container" id="manage-custom-field-link-div">
+					<form id="manage-custom-field-link-form" method="post" action="manage_custom_field_proj_add.php">
+
+						<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
+						<?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
+
 			<table class="table table-bordered table-condensed table-striped">
-			<form id="manage-custom-field-link-form" method="post" action="manage_custom_field_proj_add.php">
-			<div class="form-container" id="manage-custom-field-link-div">
 				<tr id="custom-field-link-project">
 				<td class="category">
 					<?php echo lang_get( 'linked_projects_label' ) ?>
@@ -338,9 +342,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 					<?php print_custom_field_projects_list( $f_field_id ); ?>
 				</td>
 				</tr>
-
-				<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-				<?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
 
 				<tr>
 					<td class="category">
@@ -367,12 +368,13 @@ $t_definition = custom_field_get_definition( $f_field_id );
 					</div>
 					</td>
 				</tr>
-				</form>
 			</table>
+					</form>
+				</div>
 			</div>
 		</div>
-    </div>
-    </div>
-</div><?php
+	</div>
+</div>
 
+<?php
 layout_page_end();
