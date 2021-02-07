@@ -92,7 +92,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 <table class="table table-bordered table-condensed table-striped">
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_name' ) ?>
+			<label for="custom-field-name">
+				<?php echo lang_get( 'custom_field_name' ) ?>
+			</label>
 		</td>
 		<td>
 			<input type="text" id="custom-field-name" name="name"
@@ -103,7 +105,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_type' ) ?>
+			<label for="custom-field-type">
+				<?php echo lang_get( 'custom_field_type' ) ?>
+			</label>
 		</td>
 		<td>
 			<select id="custom-field-type" name="type" class="input-sm">
@@ -113,7 +117,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_possible_values' ) ?>
+			<label for="custom-field-possible-values">
+				<?php echo lang_get( 'custom_field_possible_values' ) ?>
+			</label>
 		</td>
 		<td>
 			<input type="text" id="custom-field-possible-values" name="possible_values"
@@ -125,7 +131,12 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_default_value' ) ?>
+			<label for="custom-field-default-value">
+				<?php echo lang_get( 'custom_field_default_value' ) ?>
+			</label>
+			<label for="custom-field-default-value-textarea">
+				<?php echo lang_get( 'custom_field_default_value' ) ?>
+			</label>
 		</td>
 		<td>
 			<div class="input">
@@ -145,7 +156,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_valid_regexp' ) ?>
+			<label for="custom-field-valid-regexp">
+				<?php echo lang_get( 'custom_field_valid_regexp' ) ?>
+			</label>
 		</td>
 		<td>
 			<input type="text" id="custom-field-valid-regexp" name="valid_regexp"
@@ -157,7 +170,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_access_level_r' ) ?>
+			<label for="custom-field-access-level-r">
+				<?php echo lang_get( 'custom_field_access_level_r' ) ?>
+			</label>
 		</td>
 		<td>
 			<select id="custom-field-access-level-r" name="access_level_r" class="input-sm">
@@ -167,19 +182,21 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_access_level_rw' ) ?>
+			<label for="custom-field-access-level-rw">
+				<?php echo lang_get( 'custom_field_access_level_rw' ) ?>
+			</label>
 		</td>
 		<td>
 			<select id="custom-field-access-level-rw" name="access_level_rw" class="input-sm">
 				<?php print_enum_string_option_list( 'access_levels', (int)$t_definition['access_level_rw'] ) ?>
 			</select>
-				<span class="lbl"></span>
-			</label>
 		</td>
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_length_min' ) ?>
+			<label for="custom-field-length-min">
+				<?php echo lang_get( 'custom_field_length_min' ) ?>
+			</label>
 		</td>
 		<td>
 			<input type="text" id="custom-field-length-min" name="length_min"
@@ -190,7 +207,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_length_max' ) ?>
+			<label for="custom-field-length-max">
+				<?php echo lang_get( 'custom_field_length_max' ) ?>
+			</label>
 		</td>
 		<td>
 			<input type="text" id="custom-field-length-max" name="length_max"
@@ -201,7 +220,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_filter_by' ) ?>
+			<label for="custom-field-filter-by">
+				<?php echo lang_get( 'custom_field_filter_by' ) ?>
+			</label>
 		</td>
 		<td>
 			<label>
@@ -219,7 +240,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_display_report' ) ?>
+			<label for="custom-field-display-report">
+				<?php echo lang_get( 'custom_field_display_report' ) ?>
+			</label>
 		</td>
 		<td>
 			<label>
@@ -233,7 +256,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_display_update' ) ?>
+			<label for="custom-field-display-update">
+				<?php echo lang_get( 'custom_field_display_update' ) ?>
+			</label>
 		</td>
 		<td>
 			<label>
@@ -247,7 +272,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_display_resolved' ) ?>
+			<label for="custom-field-display-resolved">
+				<?php echo lang_get( 'custom_field_display_resolved' ) ?>
+			</label>
 		</td>
 		<td>
 			<label>
@@ -261,7 +288,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_display_closed' ) ?>
+			<label for="custom-field-display-closed">
+				<?php echo lang_get( 'custom_field_display_closed' ) ?>
+			</label>
 		</td>
 		<td>
 			<label>
@@ -275,7 +304,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_require_report' ) ?>
+			<label for="custom-field-require-report">
+				<?php echo lang_get( 'custom_field_require_report' ) ?>
+			</label>
 		</td>
 		<td>
 			<label>
@@ -289,7 +320,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_require_update' ) ?>
+			<label for="custom-field-require-update">
+				<?php echo lang_get( 'custom_field_require_update' ) ?>
+			</label>
 		</td>
 		<td>
 			<label>
@@ -303,7 +336,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_require_resolved' ) ?>
+			<label for="custom-field-require-resolved">
+				<?php echo lang_get( 'custom_field_require_resolved' ) ?>
+			</label>
 		</td>
 		<td>
 			<label>
@@ -317,7 +352,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'custom_field_require_closed' ) ?>
+			<label for="custom-field-require-closed">
+				<?php echo lang_get( 'custom_field_require_closed' ) ?>
+			</label>
 		</td>
 		<td>
 			<label>
@@ -394,7 +431,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'projects_title_label' ) ?>
+						<label for="custom-field-project-id">
+							<?php echo lang_get( 'projects_title_label' ) ?>
+						</label>
 					</td>
 					<td>
 						<select id="custom-field-project-id" name="project_id[]"
@@ -405,7 +444,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 				</tr>
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'custom_field_sequence_label' ) ?>
+						<label for="custom-field-sequence">
+							<?php echo lang_get( 'custom_field_sequence_label' ) ?>
+						</label>
 					</td>
 					<td>
 						<input type="text" id="custom-field-sequence" name="sequence" class="input-sm" value="0" />

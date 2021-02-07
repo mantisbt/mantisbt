@@ -23,8 +23,8 @@ $(function() {
   "use strict";
 
   var type = $('#custom-field-type');
-  var input = $('#custom-field-default-value');
-  var textarea = $('#custom-field-default-value-textarea');
+  var input = $('#custom-field-default-value, label[for=custom-field-default-value]');
+  var textarea = $('#custom-field-default-value-textarea, label[for=custom-field-default-value-textarea]');
 
   type.on('change', function() {
     if($(this).val() === "10") {  // 10: CUSTOM_FIELD_TYPE_TEXTAREA
