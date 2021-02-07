@@ -564,6 +564,16 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	if( is_blank( $v_name ) ) {
 		error_parameters( 'name' );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	} elseif( mb_strpos( $v_name, ',' ) ) {
+		# Commas are not allowed in CF name, it causes issues with columns
+		# selection (see #26665)
+		error_parameters( $v_name );
+		trigger_error( ERROR_CUSTOM_FIELD_NAME_INVALID, ERROR );
+	}
+
+	if( is_blank( $v_name ) ) {
+		error_parameters( 'name' );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	if( $v_access_level_rw < $v_access_level_r ) {

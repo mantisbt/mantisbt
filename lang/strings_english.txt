@@ -1660,6 +1660,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set an issue as a duplicat
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Issue revision not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_INVALID] = 'Invalid custom field name "%1$s": commas are not allowed. See "Localizing Custom Field Names" section in the Admin Guide as a workaround.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition.';
