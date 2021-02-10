@@ -1396,7 +1396,7 @@ function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET
 	echo '<td class="column-status">';
 	echo '<div class="align-left">';
 	print_icon( 'fa-square', 'fa-status-box ' . $t_status_css );
-	printf( '<span title="%s">%s</span>',
+	printf( ' <span title="%s">%s</span>',
 		get_enum_element( 'resolution', $p_bug->resolution, $t_current_user, $p_bug->project_id ),
 		get_enum_element( 'status', $p_bug->status, $t_current_user, $p_bug->project_id )
 	);
