@@ -1508,8 +1508,9 @@ function print_column_summary( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	} else {
 		$t_summary = string_display_line_links( $p_bug->summary );
 	}
-
-	echo '<td class="column-summary">' . $t_summary . '</td>';
+	
+	$t_bug_url = string_get_bug_view_url( $p_bug->id );
+	echo '<td class="column-summary"><a href="' . $t_bug_url . '">' . $t_summary . '</a></td>';
 }
 
 /**
