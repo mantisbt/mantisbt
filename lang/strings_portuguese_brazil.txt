@@ -43,6 +43,7 @@
  * @author Dianakc
  * @author Eduardo Addad de Oliveira
  * @author Eduardo.mps
+ * @author Eduardoaddad
  * @author Elival
  * @author Fasouzafreitas
  * @author Felipe L. Ewald

@@ -38,10 +38,10 @@
  * @ingroup Language
  * @file
  *
- * @author Abijeet Patro
  * @author Amire80
  * @author Guycn2
  * @author Steeve815
+ * @author YaronSh
  */
 
 $s_plugin_MantisGraph_title = 'מנטיס תרשימים';
@@ -86,5 +86,6 @@ $s_plugin_MantisGraph_period_select = 'בחירת תאריכים';
 $s_plugin_MantisGraph_period_last_year = 'השנה הקודמת';
 $s_plugin_MantisGraph_graph_page = 'הצג תרשים היסטוריית באג';
 $s_plugin_MantisGraph_graph_topdev = 'מפתחים מובילים לפי בעיות שתוקנו';
+$s_plugin_MantisGraph_graph_opendev = 'מפתחים לפי בעיות פתוחות';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'מדווחים מובילים לפי בעיות שתוקנו';
 $s_plugin_MantisGraph_other_categories = 'קטגוריות אחרות (%d)';

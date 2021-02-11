@@ -38,7 +38,6 @@
  * @ingroup Language
  * @file
  *
- * @author Abijeet Patro
  * @author Atrol
  * @author Floh
  * @author Metalhead64

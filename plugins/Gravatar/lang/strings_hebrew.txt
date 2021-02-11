@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Brazilian Portuguese (português do Brasil)
+/** Hebrew (עברית)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,9 +38,7 @@
  * @ingroup Language
  * @file
  *
- * @author Eduardo Addad de Oliveira
- * @author Eduardoaddad
+ * @author YaronSh
  */
 
-$s_plugin_Gravatar_title = 'Imagens de perfil através do Gravatar';
-$s_plugin_Gravatar_description = 'Um plugin que mostra os avatares dos usuários com base em seus endereços de email usando o serviço do avatar.';
+$s_plugin_Gravatar_title = 'תמונות ייצוגיות דרך Gravatar';
