@@ -70,6 +70,17 @@ class AuthFlags {
 	private $credentials_page = null;
 
 	/**
+	 * The page to use for validating credentials.  This can be the default validator page
+	 * provided by MantisBT, an auth plugin provided page that validates the credentials 
+	 * against an external source (and creates user if autoprovision is set)
+	 *
+	 * @see $login_page
+	 * @see $logout_page
+	 * @var string|null
+	 */
+	private $authenticator_page = null;
+
+	/**
 	 * The logout page to use instead of the standard MantisBT logout page.  This can be
 	 * a plugin page.
 	 *
@@ -124,6 +135,13 @@ class AuthFlags {
 	 * @var int|null
 	 */
 	private $reauthentication_expiry = null;
+
+	/**
+	 * Indicates the autoprovisioning capability of the plugin
+	 * @var bool
+	 */
+	private $autoprovision_capable = false;
+
 
 	/**
 	 * AuthFlags constructor.
@@ -222,6 +240,27 @@ class AuthFlags {
 	function getCredentialsPage( $p_query_string ) {
 		$t_page = is_null( $this->credentials_page ) ? AUTH_PAGE_CREDENTIAL : $this->credentials_page;
 		return helper_url_combine( $t_page, $p_query_string );
+	}
+
+	/**
+	 * Sets auth page to use instead of the default login.php page that validates the username/password
+	 *
+	 * @param string $p_page The relative url of the page name.
+	 * @return void
+	 * @see getAuthenticatorPage()
+	 */
+	function setAuthenticatorPage( $p_page ) {
+		$this->authenticator_page = $p_page;
+	}
+
+	/**
+	 * Gets the auth page to use.
+	 *
+	 * @return string The relative login page name.
+	 * @see setAuthenticatorPage()
+	 */
+	function getAuthenticatorPage() {
+		return is_null( $this->authenticator_page ) ? AUTH_PAGE_AUTHENTICATOR : $this->authenticator_page;
 	}
 
 	/**
@@ -397,5 +436,31 @@ class AuthFlags {
 
 		return $this->reauthentication_expiry;
 	}
+	
+	/**
+	 * Sets if the auth pugin is capable of provision users
+	 *
+	 * @param bool $p_autoprov True, if the plugin can create users
+	 * @return void
+	 * @see getAutoprovisionCapability()
+	 */
+	function setAutoprovisionCapability( $p_autoprov ) {
+		$this->autoprovision_capable = $p_autoprov;
+	}
+
+	/**
+	 * Gets the plugin autoprovision capability
+	 *
+	 * @return bool
+	 * @see setAutoprovisionCapability()
+	 */
+	function getAutoprovisionCapability() {
+		if( is_null( $this->autoprovision_capable ) ) {
+			return false;
+		}
+
+		return $this->autoprovision_capable;
+	}
+	
 }
 

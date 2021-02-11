@@ -235,6 +235,18 @@ function auth_credential_page( $p_query_string, $p_user_id = null, $p_username =
 }
 
 /**
+ * Gets the page that validates the user credentials based on the standard flow.
+ *
+ * @param int|null $p_user_id The user id or null for current logged in user.
+ * @param string $p_username The username
+ * @return string The authenticator page.
+ */
+function auth_authenticator_page( $p_user_id = null, $p_username = '' ) {
+	$t_auth_flags = auth_flags( $p_user_id, $p_username );
+	return $t_auth_flags->getAuthenticatorPage();
+}
+
+/**
  * Gets the logout page to redirect to for logging out the user, it will return a relative url
  * @return string logout page (e.g. 'logout_page.php' )
  */
@@ -798,13 +810,14 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 }
 
 /**
- * Generate a random 16 character password.
+ * Generate a random password. If no length is supplied, than the default value of 16 will be used.
  * @todo create memorable passwords?
- * @return string 16 character random password
+ * @param int $p_length	Requested password length
+ * @return string random password
  * @access public
  */
-function auth_generate_random_password() {
-	return crypto_generate_uri_safe_nonce( 16 );
+function auth_generate_random_password( $p_length = 16 ) {
+	return crypto_generate_uri_safe_nonce( $p_length );
 }
 
 /**
@@ -1178,4 +1191,15 @@ function auth_http_is_logout_pending() {
 	$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
 	return( $t_cookie > '' );
+}
+
+/**
+ * Check if the plugin provides user autoprovisioning capability
+ *
+ * @return boolean
+ * @access public
+ */
+function auth_can_auto_provision() {
+	$t_auth_flags = auth_flags();
+	return $t_auth_flags->getAutoprovisionCapability();
 }

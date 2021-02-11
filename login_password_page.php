@@ -81,8 +81,13 @@ if( is_blank( $t_username ) ) {
 
 # Get the user id and based on the user decide whether to continue with native password credential
 # page or one provided by a plugin.
+#
+# OR
+#
+# if the plugin provides autoprovisioning, than we can also redirect to the plugin page
+#
 $t_user_id = auth_get_user_id_from_login_name( $t_username );
-if( $t_user_id !== false && auth_credential_page( '', $t_user_id ) != AUTH_PAGE_CREDENTIAL ) {
+if( ( $t_user_id !== false || auth_can_auto_provision() ) && auth_credential_page( '', $t_user_id ) != AUTH_PAGE_CREDENTIAL ) {
 	$t_query_args = array(
 		'username' => $t_username,
         'cookie_error' => $f_cookie_error,
@@ -201,7 +206,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
-	<form id="login-form" method="post" action="login.php">
+	<form id="login-form" method="post" action="<?php echo auth_authenticator_page( $t_user_id, $t_username ); ?>">
 		<fieldset>
 
 			<?php
