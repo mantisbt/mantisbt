@@ -38,8 +38,8 @@
  * @ingroup Language
  * @file
  *
- * @author Abijeet Patro
  * @author Eduardo Addad de Oliveira
+ * @author Eduardoaddad
  * @author Felipe L. Ewald
  * @author Giro720
  * @author Joao Xavier

@@ -54,6 +54,7 @@
  * @author Matěj Grabovský
  * @author Mormegil
  * @author Patriccck
+ * @author Patrik L.
  * @author Quinn
  * @author Rattkin
  * @author Tchoř
