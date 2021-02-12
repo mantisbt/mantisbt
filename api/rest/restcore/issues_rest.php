@@ -368,6 +368,9 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 
 	# Construct full issue from issue from db + patched info
 	$t_issue_patch = $p_request->getParsedBody();
+	if( !$t_issue_patch ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+	}
 	if( isset( $t_issue_patch['id'] ) && $t_issue_patch['id'] != $t_issue_id ) {
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Issue id mismatch' );
 	}
