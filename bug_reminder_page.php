@@ -141,7 +141,7 @@ layout_page_begin();
 				?>
 			</select>
 		</td>
-		<td class="center">
+		<td>
 			<textarea name="bugnote_text" cols="65" rows="10"
 					  class="form-control <?php echo $t_bugnote_class; ?>"></textarea>
 		</td>
