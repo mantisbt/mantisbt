@@ -160,8 +160,8 @@ layout_page_begin();
 	<div class="alert alert-info">
 		<p>
 		<?php
-			print_icon( 'fa-info-circle', 'fa-lg' ); ?>
-			echo lang_get( 'reminder_explain' ) . ' ';
+			print_icon( 'fa-info-circle', 'fa-lg' );
+			echo ' ' . lang_get( 'reminder_explain' ) . ' ';
 			if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
 				echo lang_get( 'reminder_monitor' ) . ' ';
 			}
