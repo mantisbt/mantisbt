@@ -340,6 +340,9 @@ function html_head_javascript() {
 		html_javascript_link( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
 	}
 
+	if (config_get_global('collapse_settings_session_cookie') == ON){
+		html_javascript_link('collapse_settings_session_cookie.js');
+        }
 	html_javascript_link( 'common.js' );
 	foreach ( $g_scripts_included as $t_script_path ) {
 		html_javascript_link( $t_script_path );

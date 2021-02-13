@@ -697,7 +697,12 @@ function SetCookie( p_cookie, p_value ) {
 
 	t_expires.setTime( t_expires.getTime() + (365 * 24 * 60 * 60 * 1000));
 
-	document.cookie = t_cookie_name + "=" + p_value + "; expires=" + t_expires.toUTCString() + ";";
+	if (typeof g_collapse_settings_session_cookie !== "undefined"){
+		document.cookie = t_cookie_name + "=" + p_value ;
+	} else {
+		document.cookie = t_cookie_name + "=" + p_value + "; expires=" +
+		t_expires.toUTCString() + ";";
+	}
 }
 
 function ToggleDiv( p_div ) {
