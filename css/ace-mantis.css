@@ -564,6 +564,11 @@ input.typeahead.scrollable ~ .tt-menu {
     font-size:18px;
 }
 
+hr {
+    /* Set to match body text color */
+    border-color: #393939;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
