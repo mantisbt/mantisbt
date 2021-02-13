@@ -658,6 +658,15 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 function auth_logout() {
 	global $g_cache_current_user_id, $g_cache_cookie_valid;
 
+	if( !user_is_protected( $g_cache_current_user_id ) ) {
+		# Clear the user's cookie string
+		user_set_field(
+			$g_cache_current_user_id,
+			'cookie_string',
+			''
+		);
+	}
+
 	# clear cached userid
 	user_clear_cache( $g_cache_current_user_id );
 	current_user_set( null );
@@ -836,6 +845,13 @@ function auth_generate_confirm_hash( $p_user_id ) {
  */
 function auth_set_cookies( $p_user_id, $p_perm_login = false ) {
 	$t_cookie_string = user_get_field( $p_user_id, 'cookie_string' );
+
+	# If cookie string is not set in DB, generate a new one
+	if( !$t_cookie_string ) {
+		$t_cookie_string = auth_generate_unique_cookie_string();
+		user_set_field( $p_user_id, 'cookie_string', $t_cookie_string );
+	}
+
 	$t_cookie_name = config_get_global( 'string_cookie' );
 	gpc_set_cookie( $t_cookie_name, $t_cookie_string, auth_session_expiry( $p_user_id, $p_perm_login ) );
 }
