@@ -987,20 +987,20 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	$p_issue = ApiObjectFactory::objectToArray( $p_issue );
 
-	$t_project_id = mci_get_project_id( $p_issue['project'] );
-	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : $t_user_id ;
-	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
-	$t_project = $p_issue['project'];
-	$t_summary = isset( $p_issue['summary'] ) ? $p_issue['summary'] : '';
-	$t_description = isset( $p_issue['description'] ) ? $p_issue['description'] : '';
-
-	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
+	# If no project specified, default to the Issue's current project
+	if( isset( $p_issue['project'] ) ) {
+		$t_project = $p_issue['project'];
+		$t_project_id = mci_get_project_id( $t_project );
 		if( $t_project_id == 0 ) {
 			return ApiObjectFactory::faultNotFound( 'Project \'' . $t_project['name'] . '\' does not exist.' );
+		} elseif( !project_exists( $t_project_id ) ) {
+			return ApiObjectFactory::faultNotFound( 'Project \'' . $t_project_id . '\' does not exist.' );
 		}
-
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $t_project_id . '\' does not exist.' );
 	}
+	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : $t_user_id ;
+	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
+	$t_summary = isset( $p_issue['summary'] ) ? $p_issue['summary'] : '';
+	$t_description = isset( $p_issue['description'] ) ? $p_issue['description'] : '';
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
 		return mci_fault_access_denied( $t_user_id, 'Not enough rights to update issues' );
