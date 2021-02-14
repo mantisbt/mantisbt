@@ -710,7 +710,6 @@ define( 'HEADER_USERNAME', 'X-Mantis-Username' );
 define( 'HEADER_VERSION', 'X-Mantis-Version' );
 define( 'HEADER_QUERIES_COUNT', 'X-Mantis-QueriesCount' );
 define( 'HEADER_EXECUTION_TIME', 'X-Mantis-ExecutionTime' );
-define( 'HEADER_QUERIES', 'X-Mantis-Queries' );
 define( 'HEADER_IF_MATCH', 'If-Match' );
 define( 'HEADER_IF_NONE_MATCH', 'If-None-Match' );
 define( 'HEADER_ETAG', 'ETag' );
