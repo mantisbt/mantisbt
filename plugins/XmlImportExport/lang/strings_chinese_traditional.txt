@@ -39,6 +39,7 @@
  * @file
  *
  * @author Cwlin0416
+ * @author Kly
  * @author Mark85296341
  * @author Wehwei
  */
@@ -51,7 +52,7 @@ $s_plugin_XmlImportExport_config_title = 'XML 匯入/匯出存取權限設置';
 $s_plugin_XmlImportExport_import_threshold = '匯入問題';
 $s_plugin_XmlImportExport_export_threshold = '匯出問題';
 $s_plugin_XmlImportExport_action_update = '更新';
-$s_plugin_XmlImportExport_importing_in_project = '匯入問題到專案: \'%s\'';
+$s_plugin_XmlImportExport_importing_in_project = '匯入問題到專案：\'%s\'';
 $s_plugin_XmlImportExport_import_options = '匯入選項';
 $s_plugin_XmlImportExport_cross_references = '交叉參照';
 $s_plugin_XmlImportExport_default_strategy = '預設轉換方式';
