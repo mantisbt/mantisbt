@@ -234,6 +234,7 @@ $s_select_profile = 'Izberi profil';
 $s_edit_profile = 'Uredi profil';
 $s_delete_profile = 'Izbriši profil';
 $s_issues_handled = 'Sponzorirani problemi, h katerim ste bili dodeljeni:';
+$s_sponsor_show = 'Prikaži vse';
 $s_account_updated_msg = 'Vaš račun je uspešno posodobljen...';
 $s_email_updated = 'Elektronski naslov uspešno posodobljen ...';
 $s_realname_updated = 'Pravo ime je bilo uspešno posodobljeno';
