@@ -2087,12 +2087,11 @@ $g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
 
 /**
  * Specifies the LDAP or Active Directory server(s) to connect to.
- * Multiple servers can be specified as a space-separated list.
  *
  * This must be a full LDAP URI (ldap[s]://hostname:port)
  * - Protocol must be either:
- *   - ldap (unencrypted or opportunistic StartTLS)
- *   - ldaps (for TLS encryption)
+ *   - ldap - unencrypted or opportunistic TLS (STARTTLS) {@see $g_ldap_use_starttls}
+ *   - ldaps - for TLS encryption
  * - Port number is optional, and defaults to 389. If this doesn't work, try
  *   using one of the following standard port numbers: 636 (ldaps); for Active
  *   Directory Global Catalog forest-wide search, use 3268 (ldap) or 3269 (ldaps)
@@ -2101,15 +2100,19 @@ $g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
  *   ldap://ldap.example.com
  *   ldaps://ldap.example.com:3269/
  *
+ * Multiple servers can be specified as a space-separated list.
+ *
  * @global string $g_ldap_server
  */
 $g_ldap_server = 'ldap://ldap.example.com/';
 
 /**
- * Decides if the connection will attempt an opportunistic upgrade to
- * a TLS connection (STARTTLS).
- * Be sure to use the ldap:// scheme and not ldaps://
- * if setting this to ON.  For security, a failure aborts the entire connection.
+ * Determines whether the connection will attempt an opportunistic upgrade
+ * to a TLS connection (STARTTLS).
+ *
+ * For security, a failure aborts the entire connection, so make sure your
+ * server supports StartTLS if this setting is ON, and use the ldap:// scheme
+ * (not ldaps://).
  *
  * @global integer $g_ldap_use_starttls
  */
@@ -2117,9 +2120,14 @@ $g_ldap_use_starttls = ON;
 
 /**
  * The minimum version of the TLS protocol to allow.
- * For example, LDAP_OPT_X_TLS_PROTOCOL_TLS1_2. If OFF, then the protocol version
- * is not set. This maps to the LDAP_OPT_X_TLS_PROTOCOL_MIN ldap library option.
- * Requires PHP 7.1 or later. For security, a failure aborts the entire connection.
+ *
+ * This maps to the LDAP_OPT_X_TLS_PROTOCOL_MIN ldap library option.
+ * For example, LDAP_OPT_X_TLS_PROTOCOL_TLS1_2. If OFF (default), then the
+ * protocol version is not set.
+ *
+ * Requires PHP 7.1 or later.
+ * For security, a failure aborts the entire connection.
+ *
  * @see https://www.php.net/manual/en/ldap.constants.php#constant.ldap-opt-x-tls-protocol-min
  *
  * @global int $g_ldap_tls_protocol_min
@@ -2141,10 +2149,13 @@ $g_ldap_organization = '';
 
 /**
  * The LDAP Protocol Version.
- * If 0, then the protocol version is not set, and you get whatever default
- * the underlying ldap library uses. This maps to the LDAP_OPT_PROTOCOL_VERSION
- * ldap library option. In almost all cases you should use 3. LDAPv3 was
- * introduced back in 1997. LDAPv2 was deprecated in 2003 by RFC3494.
+ *
+ * This maps to the LDAP_OPT_PROTOCOL_VERSION ldap library option.
+ *
+ * Possible values are 2, 3 (default) or 0. If 0, then the protocol version is
+ * not set, and you get whatever default the underlying ldap library uses.
+ * In almost all cases you should use 3. LDAPv3 was introduced back in 1997.
+ * LDAPv2 was deprecated in 2003 by RFC3494.
  *
  * @global integer $g_ldap_protocol_version
  */
@@ -2152,7 +2163,9 @@ $g_ldap_protocol_version = 3;
 
 /**
  * Duration of the timeout for TCP connection to the LDAP server (in seconds).
+ *
  * This maps to the LDAP_OPT_NETWORK_TIMEOUT ldap library option.
+ *
  * Set this to a low value when the hostname defined in $g_ldap_server resolves
  * to multiple IP addresses, allowing rapid failover to the next available LDAP
  * server.
@@ -2165,9 +2178,11 @@ $g_ldap_network_timeout = 0;
 /**
  * Determines whether the LDAP library automatically follows referrals returned
  * by LDAP servers or not.
+ *
  * This maps to the LDAP_OPT_REFERRALS ldap library option.
+ *
  * For Active Directory, this should be set to OFF.
- * If you have only one LDAP server, setting to this to OFF is advisible to prevent
+ * If you have only one LDAP server, setting to this to OFF is advisable to prevent
  * any man-in-the-middle attacks.
  *
  * @global integer $g_ldap_follow_referrals
