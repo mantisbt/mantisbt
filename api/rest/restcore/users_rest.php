@@ -20,8 +20,13 @@
  * @package MantisBT
  * @copyright Copyright MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpFullyQualifiedNameUsageInspection
  */
 
+/**
+ * @var \Slim\App $g_app
+ */
 $g_app->group('/users', function() use ( $g_app ) {
 	$g_app->get( '/me', 'rest_user_get_me' );
 
@@ -40,7 +45,10 @@ $g_app->group('/users', function() use ( $g_app ) {
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
  * @param array $p_args Arguments
+ *
  * @return \Slim\Http\Response The augmented response.
+ *
+ * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_result = mci_user_get( auth_get_current_user_id() );
@@ -53,7 +61,10 @@ function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
  * @param array $p_args Arguments
+ *
  * @return \Slim\Http\Response The augmented response.
+ *
+ * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
@@ -76,7 +87,10 @@ function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
  * @param array $p_args Arguments
+ *
  * @return \Slim\Http\Response The augmented response.
+ *
+ * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_user_id = $p_args['id'];
@@ -97,7 +111,10 @@ function rest_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
  * @param array $p_args Arguments
+ *
  * @return \Slim\Http\Response The augmented response.
+ *
+ * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_reset_password( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_user_id = $p_args['id'];
@@ -107,7 +124,7 @@ function rest_user_reset_password( \Slim\Http\Request $p_request, \Slim\Http\Res
 	);
 
 	$t_command = new UserResetPasswordCommand( $t_data );
-	$t_result = $t_command->execute();
+	$t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
