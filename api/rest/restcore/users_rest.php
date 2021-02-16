@@ -68,8 +68,8 @@ function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  */
 function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
-	if( $t_payload === null ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Unable to parse body, specify content type" );
+	if( !$t_payload ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
 	}
 
 	$t_data = array( 'payload' => $t_payload );

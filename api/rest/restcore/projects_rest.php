@@ -248,8 +248,8 @@ function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Htt
  */
 function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
-	if( $t_payload === null ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Unable to parse body, specify content type" );
+	if( !$t_payload ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
 	}
 
 	$t_project_id = mc_project_add( /* username */ '', /* password */ '', (object) $t_payload );
@@ -286,6 +286,9 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 	}
 
 	$t_project_patch = $p_request->getParsedBody();
+	if( !$t_project_patch ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+	}
 
 	if( isset( $t_project_patch['id'] ) && $t_project_patch['id'] != $t_project_id ) {
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Project id mismatch" );
