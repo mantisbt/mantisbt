@@ -156,6 +156,9 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
  */
 function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue = $p_request->getParsedBody();
+	if( !$t_issue ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+	}
 
 	if( isset( $t_issue['files'] ) ) {
 		$t_issue['files'] = files_base64_to_temp( $t_issue['files'] );
