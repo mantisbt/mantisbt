@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full
+FROM gitpod/workspace-mysql
 
 # Install packages
 
@@ -11,8 +11,6 @@ RUN sudo apt-get install -y software-properties-common
 RUN sudo add-apt-repository ppa:ondrej/php 
 
 RUN sudo apt-get update -y
-
-RUN sudo apt-get install -y mysql-server
 
 RUN sudo apt-get install -y php8.0
 
@@ -38,11 +36,11 @@ RUN sudo rm -rf /var/lib/apt/lists/*
 
 # Setup
 
-RUN sudo systemctl start mysql
+RUN sudo systemctl restart apache2
 
 RUN sudo mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('root');"
 
-RUN sudo systemctl restart apache2
+RUN sudo systemctl restart mysql
 
 # Create a database
 
