@@ -32,6 +32,8 @@ RUN apt-get install -y php8.0-cli
 
 RUN apt-get install -y php8.0-dev
 
+RUN apt-get install -y php8.0-xml
+
 # RUN apt-get install -y libapache2-mod-php8.0
 
 RUN rm -rf /var/lib/apt/lists/*
