@@ -38,7 +38,7 @@ RUN sudo rm -rf /var/lib/apt/lists/*
 
 # Setup
 
-RUN sudo mysql.server start
+RUN sudo systemctl start mysql
 
 RUN sudo mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('root');"
 
