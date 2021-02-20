@@ -10,7 +10,6 @@ ports:
     onOpen: ignore
 
 tasks:
-  - name: Setup
-    init: composer update && git submodule update --init
   - name: Server
+    init: composer install && composer dump-autoload && git submodule update --init
     command: php -S 0.0.0.0:8000
