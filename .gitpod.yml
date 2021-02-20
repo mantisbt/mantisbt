@@ -11,5 +11,5 @@ ports:
 
 tasks:
   - name: Server
-    init: composer install && composer dump-autoload && git submodule update --init && echo "Creating database..." && sleep 5 && mysql -u root -e "create database bugtracker" && cp .gitpod/config_inc.php ./config/ && php ./admin/upgrade_unattended.php && mysql -u root bugtracker -e "INSERT INTO mantis_project_table (name, enabled, view_state, access_min, category_id, inherit_global) VALUES ('Test', 1, 10, 10, 1, 1)"
+    init: composer install && composer dump-autoload && git submodule update --init && echo "Creating database..." && sleep 5 && mysql -u root -e "create database bugtracker" && cp .gitpod/config_inc.php ./config/ && php ./admin/upgrade_unattended.php && mysql -u root bugtracker -e "INSERT INTO mantis_project_table (name, enabled, view_state, access_min, category_id, inherit_global, description) VALUES ('Test', 1, 10, 10, 1, 1, '')"
     command: php -S 0.0.0.0:8000
