@@ -14,8 +14,6 @@ RUN sudo apt-get update -y
 
 RUN sudo apt-get install -y php8.0
 
-RUN sudo apt-get install -y libapache2-mod-php8.0
-
 RUN sudo apt-get install -y php8.0-common
 
 RUN sudo apt-get install -y php8.0-gd
@@ -32,15 +30,17 @@ RUN sudo apt-get install -y php8.0-cli
 
 RUN sudo apt-get install -y php8.0-dev
 
+# RUN sudo apt-get install -y libapache2-mod-php8.0
+
 RUN sudo rm -rf /var/lib/apt/lists/*
 
 # Setup
 
-RUN sudo systemctl restart apache2
+# RUN sudo systemctl restart apache2
 
 RUN sudo mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('root');"
 
-RUN sudo systemctl restart mysql
+# RUN sudo systemctl restart mysql
 
 # Create a database
 
