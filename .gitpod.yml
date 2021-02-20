@@ -4,7 +4,13 @@ image:
 ports:
   - port: 8000
     onOpen: open-preview
+  - port: 3306
+    onOpen: ignore
+  - port: 33060
+    onOpen: ignore
 
 tasks:
-  - init: composer install
+  - name: Setup
+    init: composer update && git submodule update --init
+  - name: Server
     command: php -S 0.0.0.0:8000
