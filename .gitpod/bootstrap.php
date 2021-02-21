@@ -1,0 +1,73 @@
+<?php
+# MantisBT phpUnit tests sample bootstrap file
+
+/**
+ * Mantis Webservice Tests
+ *
+ * @package Tests
+ * @subpackage UnitTests
+ * @copyright Copyright (C) 2010-2013 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+
+/**
+ * Enable the test suite
+ * @global bool $GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']
+ * @name MANTIS_TESTSUITE_SOAP_ENABLED
+ */
+$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
+
+/**
+ * URL for SOAP API wsdl file
+ * @global string $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST']
+ * @name MANTIS_TESTSUITE_SOAP_HOST
+ */
+$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://0.0.0.0:8000/api/soap/mantisconnect.php?wsdl';
+
+/**
+ * The user account that will run the tests
+ * @global string $GLOBALS['MANTIS_TESTSUITE_USERNAME']
+ * @name MANTIS_TESTSUITE_USERNAME
+ */
+$GLOBALS['MANTIS_TESTSUITE_USERNAME'] = 'administrator';
+
+/**
+ * The user's Password
+ * @global string $GLOBALS['MANTIS_TESTSUITE_PASSWORD']
+ * @name MANTIS_TESTSUITE_PASSWORD
+ */
+$GLOBALS['MANTIS_TESTSUITE_PASSWORD'] = 'root';
+
+/**
+ * The user's email address
+ * @global string $GLOBALS['MANTIS_TESTSUITE_EMAIL']
+ * @name MANTIS_TESTSUITE_EMAIL
+ */
+$GLOBALS['MANTIS_TESTSUITE_EMAIL'] = 'root@localhost';
+
+/**
+ * Project ID
+ * @global int $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID']
+ * @name MANTIS_TESTSUITE_PROJECT_ID
+ */
+$GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'] = 1;
+
+/**
+ * Set default timestamp to avoid errors in some test environments
+ */
+date_default_timezone_set('America/Los_Angeles');
+
+/**
+ * Enable REST API Tests
+ */
+$GLOBALS['MANTIS_TESTSUITE_REST_ENABLED'] = true;
+
+/**
+ * The base url for Mantis REST APIs
+ */
+$GLOBALS['MANTIS_TESTSUITE_REST_HOST'] = 'http://0.0.0.0:8000/api/rest';
+
+/**
+ * The API token to use
+ */
+$GLOBALS['MANTIS_TESTSUITE_API_TOKEN'] = '';
