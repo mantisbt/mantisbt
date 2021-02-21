@@ -34,21 +34,4 @@ RUN apt-get install -y php8.0-dev
 
 RUN apt-get install -y php8.0-xml
 
-# RUN apt-get install -y libapache2-mod-php8.0
-
 RUN rm -rf /var/lib/apt/lists/*
-
-# Setup
-
-# RUN sudo systemctl restart apache2
-
-# RUN mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('root');"
-
-# RUN sudo systemctl restart mysql
-
-# Create a database
-
-# Create config_inc.php
-
-# Upgrade the database php admin/upgrade_unattended.php
-
