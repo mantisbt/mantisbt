@@ -442,7 +442,7 @@ $s_CODE = STRING;
 					<para>Define the custom field
 						(see <xref linkend="admin.customize.customfields.definitions" />),
 						keeping in mind that its name must be a
-						<ulink url="https://www.php.net/en/language.variables.basics.php">valid PHP identifier</ulink>.
+						<ulink url="https://www.php.net/manual/en/language.variables.basics.php">valid PHP identifier</ulink>.
 					</para>
 					<para>As an example, we will use
 						<emphasis>my_start_date</emphasis>
@@ -510,13 +510,13 @@ switch( $g_active_language ) {
 					<ulink url="https://en.wikipedia.org/wiki/Unix_time">
 						Unix Epoch</ulink> (January 1 1970 00:00:00 UTC),
 					which is the format consumed by the PHP
-					<ulink url="https://www.php.net/date">date()</ulink> method.
+					<ulink url="https://www.php.net/manual/en/function.date.php">date()</ulink> method.
 				</para>
 				<para>The relative scenario expects default values like
 					{tomorrow}, {yesterday}, {+2 days}, {-3 days}, {next week}, etc.
 					The curly brackets indicate that this is a logical value
 					which is then evaluated using the PHP
-					<ulink url="https://www.php.net/strtotime">strtotime()</ulink>
+					<ulink url="https://www.php.net/manual/en/function.strtotime.php">strtotime()</ulink>
 					function.
 				</para>
 			</section>
