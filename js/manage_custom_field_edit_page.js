@@ -19,19 +19,25 @@
  */
 
 // Handle switching between textarea custom field type and other types
-$(document).ready(function() {
-  $('#custom-field-type').on('change', function() {
-    if($(this).val() == 10) {  // 10: CUSTOM_FIELD_TYPE_TEXTAREA
-      $('#custom-field-default-value').closest('.input').hide();
-      $('#custom-field-default-value').attr('disabled', 'disabled');
-      $('#custom-field-default-value-textarea').closest('.textarea').show();
-      $('#custom-field-default-value-textarea').removeAttr('disabled');
+$(function() {
+  "use strict";
+
+  var type = $('#custom-field-type');
+  var input = $('#custom-field-default-value, label[for=custom-field-default-value]');
+  var textarea = $('#custom-field-default-value-textarea, label[for=custom-field-default-value-textarea]');
+
+  type.on('change', function() {
+    if($(this).val() === "10") {  // 10: CUSTOM_FIELD_TYPE_TEXTAREA
+      input.hide();
+      input.attr('disabled', 'disabled');
+      textarea.show();
+      textarea.removeAttr('disabled');
     } else {
-      $('#custom-field-default-value-textarea').closest('.textarea').hide();
-      $('#custom-field-default-value-textarea').attr('disabled', 'disabled');
-      $('#custom-field-default-value').closest('.input').show();
-      $('#custom-field-default-value').removeAttr('disabled');
+      textarea.hide();
+      textarea.attr('disabled', 'disabled');
+      input.show();
+      input.removeAttr('disabled');
     }
   });
-  $('#custom-field-type').trigger('change');
+  type.trigger('change');
 });
