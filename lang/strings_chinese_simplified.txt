@@ -58,6 +58,7 @@
  * @author Xiaomingyan
  * @author Yanmiao liu
  * @author Yfdyh000
+ * @author Zhang8569
  * @author 乌拉跨氪
  * @author 佛壁灯
  * @author 列维劳德
@@ -1323,6 +1324,8 @@ $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '连接至 LDAP 服务器失�
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = '更新 LDAP 记录失败。';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = '没有找到 LDAP 帐号记录。';
 $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP扩展未被加载';
+$MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = '试图在LDAP服务器上开启TLS版本的行动失败了';
+$MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = '无法在LDAP服务器上开启StartTls';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = '数据库连接失败。数据库返回的错误信息是：#%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = '数据库查询失败。数据库返回的错误信息是：#%1$d: %2$s 查询语句：%3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = '数据库选择失败。数据库返回的错误信息是：#%1$d: %2$s。';
