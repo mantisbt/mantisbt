@@ -4,7 +4,8 @@ USER root
 
 # Install packages
 
-RUN add-apt-repository ppa:ondrej/php && \
+RUN rm /etc/php/7.4/cli/php.ini && \
+    add-apt-repository ppa:ondrej/php && \
     apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y \
