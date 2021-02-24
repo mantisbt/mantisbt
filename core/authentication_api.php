@@ -658,6 +658,15 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 function auth_logout() {
 	global $g_cache_current_user_id, $g_cache_cookie_valid;
 
+	if( !user_is_protected( $g_cache_current_user_id ) ) {
+		# Reset the user's cookie string
+		user_set_field(
+			$g_cache_current_user_id,
+			'cookie_string',
+			auth_generate_unique_cookie_string()
+		);
+	}
+
 	# clear cached userid
 	user_clear_cache( $g_cache_current_user_id );
 	current_user_set( null );
