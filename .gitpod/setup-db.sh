@@ -12,3 +12,7 @@ mysql -u root bugtracker -e "INSERT INTO mantis_project_table (name, enabled, vi
 mysql -u root bugtracker -e "INSERT INTO mantis_project_version_table (project_id, version, description, released) VALUES (1, 'v1', 'version 1', 1)"
 mysql -u root bugtracker -e "INSERT INTO mantis_project_version_table (project_id, version, description, released) VALUES (1, 'v2', 'version 2', 1)"
 mysql -u root bugtracker -e "INSERT INTO mantis_project_version_table (project_id, version, description, released) VALUES (1, 'v3', 'version 3', 0)"
+
+# Create 2 tags as needed by test cases
+mysql -u root bugtracker -e "INSERT INTO mantis_tag_table (user_id, name, description, date_created, date_updated) VALUES (0, 'modern-ui', '', 1, 1)"
+mysql -u root bugtracker -e "INSERT INTO mantis_tag_table (user_id, name, description, date_created, date_updated) VALUES (0, 'patch', '', 1, 1)"
