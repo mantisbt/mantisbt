@@ -8,7 +8,6 @@ RUN rm /etc/php/7.4/cli/php.ini && \
     rm /etc/php/7.4/apache2/php.ini && \
     add-apt-repository ppa:ondrej/php && \
     apt-get update -y && \
-    apt-get upgrade -y && \
     apt-get install -y \
         software-properties-common \
         php7.4 \
