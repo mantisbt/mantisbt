@@ -13,8 +13,7 @@ tasks:
   - name: Server
     init: composer install && composer dump-autoload && git submodule update --init && cp .gitpod/config_inc.php ./config/ && gp await-port 3306 && ./.gitpod/setup-db.sh
     command: php -S 0.0.0.0:8000
-  - name: Terminal
-    command: clear && echo "Welcome to MantisBT Development!"
+  - name: DevCli
 
 github:
   prebuilds:
