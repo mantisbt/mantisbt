@@ -70,4 +70,4 @@ $GLOBALS['MANTIS_TESTSUITE_REST_HOST'] = 'http://0.0.0.0:8000/api/rest';
 /**
  * The API token to use
  */
-$GLOBALS['MANTIS_TESTSUITE_API_TOKEN'] = '';
+$GLOBALS['MANTIS_TESTSUITE_API_TOKEN'] = 'test-token';
