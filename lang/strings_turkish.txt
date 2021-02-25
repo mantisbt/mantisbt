@@ -1330,6 +1330,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Bir sorunu birden fazla kez ayarlayam
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Sorun düzeltme bulunamadı.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Özel alan bulunamadı.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Bu yinelenen bir isim.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_INVALID] = 'Geçersiz özel alan ismi "%1$s": virgüle izin verilmiyor. Geçici çözüm olarak Admin Rehberindeki "Özel Alan İsimlerini Yerelleştirmek" bölümüne bakın.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'En az bir proje hala bu alanı kullanır.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '"%1$s" alanı için geçersiz değer.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Özel alan tanımı geçersiz.';

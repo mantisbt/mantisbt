@@ -47,6 +47,8 @@
  * @author Diebuche
  * @author Erdemaslancan
  * @author Exit91
+ * @author FF11
+ * @author Gebu
  * @author Geitost
  * @author Imre
  * @author KarlReichert
@@ -1314,6 +1316,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Sie können keinen Eintrag als Duplik
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Überarbeitung des Eintrags nicht gefunden';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Benutzerdefiniertes Feld nicht gefunden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Name doppelt vorhanden.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_INVALID] = 'Ungültiger benutzerdefinierter Feldname "%1$s": Kommas sind nicht erlaubt. siehe "Benutzerdefinierte Feldnamen lokalisieren" im Admin-Handbuch als Workaround.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Mindestens ein Projekt benutzt noch dieses Feld.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ungültiger Wert für Feld „%1$s“.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Ungültige Definition für benutzerdefiniertes Feld';
@@ -1324,6 +1327,8 @@ $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Verbindung zum LDAP-Server fe
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Aktualisierung des LDAP-Eintrags fehlgeschlagen.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-Benutzereintrag nicht gefunden.';
 $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP-Erweiterung ist nicht geladen.';
+$MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'Das Setzen der minimalen TLS-Version auf dem LDAP-Server ist gescheitert.';
+$MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'Kann StartTLS nicht auf dem LDAP-Server installieren.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Verbindung zur Datenbank fehlgeschlagen. Reportmeldung lautet #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Datenbankabfrage fehlgeschlagen. Die Reportmeldung lautet #%1$d: %2$s für die Abfrage: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Datenbankauswahl fehlgeschlagen. Reportmeldung der Datenbank lautet #%1$d: %2$s.';
