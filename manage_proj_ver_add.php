@@ -91,14 +91,18 @@ foreach ( $t_versions as $t_version ) {
 
 form_security_purge( 'manage_proj_ver_add' );
 
-if( $f_add_and_edit && $t_version_id != 0 ) {
+if( $t_version_id == 0 ) {
+	error_parameters( lang_get( 'version' ) );
+	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+}
+
+if( $f_add_and_edit ) {
 	$t_redirect_url = 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id;
 } else {
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 }
 
 layout_page_header( null, $t_redirect_url );
-
 layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $t_redirect_url );
