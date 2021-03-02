@@ -458,7 +458,7 @@ if ( config_get_global( 'subprojects_enabled') == ON ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<input type="text" name="name" size="32" maxlength="128" class="input-sm" />
+			<input type="text" name="name" required size="32" maxlength="128" class="input-sm" />
 			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_category_button' ) ?>" />
 			<input type="submit" name="add_and_edit_category" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_and_edit_category_button' ) ?>" />
 		</fieldset>
