@@ -935,17 +935,7 @@ function auth_generate_unique_cookie_string() {
  * @throws ClientException
  */
 function auth_is_cookie_string_unique( $p_cookie_string ) {
-	db_param_push();
-	$t_query = 'SELECT COUNT(*) FROM {user} WHERE cookie_string=' . db_param();
-	$t_result = db_query( $t_query, array( $p_cookie_string ) );
-
-	$t_count = db_result( $t_result );
-
-	if( $t_count > 0 ) {
-		return false;
-	} else {
-		return true;
-	}
+	return false === user_get_id_by_cookie( $p_cookie_string );
 }
 
 /**
@@ -1108,17 +1098,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	}
 
 	# look up cookie in the database to see if it is valid
-	db_param_push();
-	$t_query = 'SELECT * FROM {user} WHERE cookie_string=' . db_param();
-	$t_result = db_query( $t_query, array( $p_cookie_string ) );
-
-	# return true if a matching cookie was found
-	if( 1 == db_num_rows( $t_result ) ) {
-		user_cache_database_result( db_fetch_array( $t_result ) );
-		return true;
-	} else {
-		return false;
-	}
+	return false !== user_get_id_by_cookie( $p_cookie_string );
 }
 
 /**
@@ -1145,15 +1125,11 @@ function auth_get_current_user_id() {
 	}
 
 	# @todo error with an error saying they aren't logged in? Or redirect to the login page maybe?
-	db_param_push();
-	$t_query = 'SELECT id FROM {user} WHERE cookie_string=' . db_param();
-	$t_result = db_query( $t_query, array( $t_cookie_string ) );
-
-	$t_user_id = (int)db_result( $t_result );
+	$t_user_id = user_get_id_by_cookie( $t_cookie_string );
 
 	# The cookie was invalid. Clear the cookie (to allow people to log in again)
 	# and give them an Access Denied message.
-	if( !$t_user_id ) {
+	if( $t_user_id === false ) {
 		auth_clear_cookies();
 		access_denied();
 		exit();
@@ -1174,17 +1150,7 @@ function auth_get_current_user_id() {
  * @throws ClientException
  */
 function auth_user_id_from_cookie( $p_cookie_string ) {
-	if( $t_result = user_search_cache( 'cookie_string', $p_cookie_string ) ) {
-		return (int)$t_result['id'];
-	}
-
-	db_param_push();
-	$t_query = 'SELECT id FROM {user} WHERE cookie_string=' . db_param();
-	$t_result = db_query( $t_query, array( $p_cookie_string ) );
-
-	$t_user_id = (int)db_result( $t_result );
-
-	return $t_user_id ? $t_user_id : false;
+	return user_get_id_by_cookie( $p_cookie_string );
 }
 
 /**
