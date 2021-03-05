@@ -808,6 +808,42 @@ function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 }
 
 /**
+ * Get a user id from their cookie string
+ *
+ * @param string  $p_cookie_string The cookie string to retrieve data for.
+ * @param boolean $p_throw         true to throw if not found, false otherwise.
+ *
+ * @return int|false User Id, false if cookie string not found
+ *
+ * @throws ClientException
+ */
+function user_get_id_by_cookie( $p_cookie_string, $p_throw = false ) {
+	if( $t_user = user_search_cache( 'cookie_string', $p_cookie_string ) ) {
+		return (int)$t_user['id'];
+	}
+
+	db_param_push();
+	$t_query = 'SELECT * FROM {user} WHERE cookie_string=' . db_param();
+	$t_result = db_query( $t_query, array( $p_cookie_string ) );
+
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
+		if( $p_throw ) {
+			throw new ClientException(
+				"User Cookie String '$p_cookie_string' not found",
+				ERROR_USER_BY_NAME_NOT_FOUND,
+				array( $p_cookie_string )
+			);
+		}
+		return false;
+	}
+
+	user_cache_database_result( $t_row );
+	return (int)$t_row['id'];
+}
+
+/**
  * Get a user id given an array that may have id, name, real_name, email, or name_or_realname.
  *
  * @param array $p_user The user info.
