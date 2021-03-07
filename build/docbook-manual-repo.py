@@ -18,9 +18,9 @@ manualscript = path.dirname(path.abspath(__file__)) + '/docbook-manual.py'
 # - dependabot branches
 # - 1.x refs except 1.3.x
 ignorelist = [
-              '^origin\/HEAD$',
-              '-1\.[012]+\.[\w\d]+',
-              '^origin\/dependabot\/',
+              r'^origin\/HEAD$',
+              r'-1\.[012]+\.[\w\d]+',
+              r'^origin\/dependabot\/',
              ]
 
 # Script options
@@ -47,8 +47,9 @@ def usage():
 
 
 def ignore(ref):
-    '''Decide which refs to ignore based on regexen listed in 'ignorelist'.
-    '''
+    """
+    Decide which refs to ignore based on regexen listed in 'ignorelist'.
+    """
     for regex in [re.compile(r) for r in ignorelist]:
         if len(regex.findall(ref)) > 0:
             return True
@@ -57,9 +58,10 @@ def ignore(ref):
 
 
 def git_current_branch():
-    ''' Returns the current git branch's name or the current commit SHA
-        if we are in detached HEAD state
-    '''
+    """
+    Returns the current git branch's name or the current commit SHA
+    if we are in detached HEAD state
+    """
     gitcmd = 'git symbolic-ref --quiet --short HEAD || git rev-parse HEAD'
     return os.popen(gitcmd).read().rstrip()
 
@@ -174,7 +176,7 @@ def main():
                 manualpath, ' '.join(languages)
             )
             print("Calling: " + buildcommand)
-            if(os.system(buildcommand)):
+            if os.system(buildcommand):
                 print('here')
 
             f = open(buildfile, 'w')
@@ -195,6 +197,7 @@ def main():
         git_checkout(curbranch)
 
 # end main()
+
 
 if __name__ == '__main__':
     main()
