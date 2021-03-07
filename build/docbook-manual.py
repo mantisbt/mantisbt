@@ -111,11 +111,11 @@ def main():
     buildcount = 0
 
     # Process all existing manuals
-    for dir in next(os.walk(docroot))[1]:
-        if dir == '.svn' or dir == 'template' or dir == 'erd':
+    for directory in next(os.walk(docroot))[1]:
+        if directory == '.svn' or directory == 'template' or directory == 'erd':
             continue
 
-        builddir = path.join(docroot, dir)
+        builddir = path.join(docroot, directory)
         os.chdir(builddir)
 
         # Languages to process
@@ -139,7 +139,7 @@ def main():
             print("\nCopying generated manuals to '{}'".format(installroot))
             for lang in langs:
                 builddir = path.join('tmp', lang)
-                installdir = path.join(installroot, lang, dir)
+                installdir = path.join(installroot, lang, directory)
 
                 # Create target directory tree
                 try:
@@ -167,7 +167,7 @@ def main():
                         source = path.join(builddir, '*.epub')
                     else:
                         source = path.join(builddir, filetype, '*' + filetype)
-                    dest = path.join(installdir, dir + '.' + filetype)
+                    dest = path.join(installdir, directory + '.' + filetype)
                     for sourcefile in glob.glob(source):
                         print("Copying '{}' to '{}'".format(sourcefile, dest))
                         shutil.copy2(sourcefile, dest)
@@ -206,6 +206,7 @@ def main():
     print("Done - {} docbooks built.\n".format(buildcount))
 
 # end main()
+
 
 if __name__ == '__main__':
     main()
