@@ -80,9 +80,9 @@ git config --global alias.ci "commit"
 							official repository.
 						</para>
 						<para>
-							Benefitting from this access requires a special URL
+							Benefiting from this access requires a special URL
 							that uses your SSH key to handle access permissions:
-							<ulink url="git@github.com:mantisbt/mantisbt.git">git@github.com:mantisbt/mantisbt.git</ulink>.
+							<literal>git@github.com:mantisbt/mantisbt.git</literal>.
 							Alternatively, an HTTPS link can be used as well,
 							in which case you will have to provide your GitHub
 							User ID and password when Git requests it:
@@ -103,7 +103,7 @@ git config --global alias.ci "commit"
 						<para>
 							For other people, the MantisBT repository and
 							the related clone URLs
-							<ulink url="git://github.com/mantisbt/mantisbt.git">git://github.com/mantisbt/mantisbt.git</ulink> (SSH)
+							<literal>git@github.com:mantisbt/mantisbt.git</literal> (SSH).
 							or
 							<ulink url="https://github.com/mantisbt/mantisbt.git">https://github.com/mantisbt/mantisbt.git</ulink> (HTTPS)
 							will always be read-only.
@@ -116,7 +116,7 @@ git config --global alias.ci "commit"
 							</emphasis> of MantisBT where you will be able
 							to push your changes, and then use the fork's URL
 							instead to clone, which will look like this:
-							<ulink url="git@github.com:MyGithubId/mantisbt.git">git@github.com:MyGithubId/mantisbt.git</ulink>
+							<literal>git@github.com:MyGithubId/mantisbt.git</literal>.
 							or
 							<ulink url="https://github.com/MyGithubId/mantisbt.git">https://github.com/MyGithubId/mantisbt.git</ulink>
 						</para>
