@@ -19,9 +19,9 @@ build_script_name = 'buildrelease.py'
 # - dependabot branches
 # - 1.x refs
 ignorelist = [
-              '^origin\/HEAD$',
-              '-1\.[\d]+\.[\w\d]+',
-              '^origin\/dependabot\/',
+              r'^origin\/HEAD$',
+              r'-1\.[\d]+\.[\w\d]+',
+              r'^origin\/dependabot\/',
              ]
 
 # Script options
@@ -55,8 +55,9 @@ The following options are passed on to '{1}':
 
 
 def ignore(ref):
-    '''Decide which refs to ignore based on regexen listed in 'ignorelist'.
-    '''
+    """
+    Decide which refs to ignore based on regexen listed in 'ignorelist'.
+    """
     for regex in [re.compile(r) for r in ignorelist]:
         if len(regex.findall(ref)) > 0:
             return True
@@ -176,15 +177,16 @@ def main():
         subprocess.call('git submodule foreach git checkout -- .', shell=True)
 
         # Handle suffix/auto-suffix generation
-        hash = os.popen('git log --pretty="format:%h" -n1').read()
-        if hash != ref:
+        commit_hash = os.popen('git log --pretty="format:%h" -n1').read()
+        print(commit_hash)
+        if commit_hash != ref:
             ref = refnameregex.search(ref).group(1)
-            hash = "{}-{}".format(ref, hash)
+            commit_hash = "{}-{}".format(ref, commit_hash)
 
         if auto_suffix and version_suffix:
-            suffix = "--suffix {}-{}".format(version_suffix, hash)
+            suffix = "--suffix {}-{}".format(version_suffix, commit_hash)
         elif auto_suffix:
-            suffix = "--suffix " + hash
+            suffix = "--suffix " + commit_hash
         elif version_suffix:
             suffix = "--suffix " + version_suffix
         else:
@@ -212,6 +214,7 @@ def main():
     print("\nAll builds completed.")
 
 # end main()
+
 
 if __name__ == "__main__":
     main()

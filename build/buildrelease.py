@@ -61,7 +61,9 @@ Options:
 
 
 def gpg_sign_tarball(filename):
-    ''' Sign the file using GPG '''
+    """
+    Sign the file using GPG
+    """
     gpgsign = "gpg -b -a {}" + path.abspath(path.join(os.curdir, filename))
     try:
         subprocess.check_call(gpgsign.format('--batch --yes '), shell=True)
@@ -71,8 +73,9 @@ def gpg_sign_tarball(filename):
 
 
 def generate_checksum(filename):
-    ''' Generate digest file with checksums for the given filename
-    '''
+    """
+    Generate digest file with checksums for the given filename
+    """
     # Initialize hash objects for each checksum type
     checksums = dict()
     for method in checksum_types:
@@ -163,9 +166,9 @@ def main():
     if not mantis_version:
         f = open(path.join(mantis_path, "core", "constant_inc.php"))
         content = f.read()
-        f.close
+        f.close()
 
-        mantis_version = re.search("'MANTIS_VERSION'[,\s]+'([^']+)'",
+        mantis_version = re.search(r"'MANTIS_VERSION'[,\s]+'([^']+)'",
                                    content).group(1)
 
     # Generate release name
@@ -208,7 +211,7 @@ def main():
     # Apply version suffix
     if version_suffix:
         print("Applying version suffix...")
-        sed_cmd = "s/({}\s*=\s*)'.*'/\\1'{}'/".format(
+        sed_cmd = r"s/({}\s*=\s*)'.*'/\\1'{}'/".format(
             'g_version_suffix',
             version_suffix
         )
@@ -244,6 +247,8 @@ def main():
             tar_cmd = "tar -czf"
         elif ext == "zip":
             tar_cmd = "zip -rq"
+        else:
+            tar_cmd = ""
         tar_cmd += " {} {}"
 
         subprocess.call(tar_cmd.format(tarball, release_name), shell=True)
@@ -265,6 +270,7 @@ def main():
     print("Done!\n")
 
 # end main()
+
 
 if __name__ == "__main__":
     main()
