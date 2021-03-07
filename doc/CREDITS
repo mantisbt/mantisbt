@@ -20,7 +20,6 @@ Developers
 ----------
 
 Damien Regad (dregad)
-Robert Munteanu (rombert)
 Roland Becker (atrol)
 Carlos Proensa (cproensa)
 Rafik Robeal (syncguru)
@@ -43,6 +42,7 @@ Gianluca Sforna (giallu)
 Glenn Henshaw (thraxisp)
 John Reese (jreese, nuclear_eclipse)
 Paul Richards (grangeway, paulr, minimoo, prichards)
+Robert Munteanu (rombert)
 Siebrand Mazeland (siebrand)
 
 
@@ -51,19 +51,19 @@ Contributors
 People who contributed code to MantisBT, listed in reverse order of the
 number of commits authored.
 
-Victor Boctor
 Damien Regad
+Victor Boctor
 Paul Richards
 Kenzaburo Ito
 Carlos Proensa
 Glenn Henshaw
+Roland Becker
 Julian Fitzell
 David Hicks
 John Reese
-Roland Becker
+translatewiki.net
 Rafik Robeal
 Jeroen Latour
-translatewiki.net
 Siebrand Mazeland
 Robert Munteanu
 Gianluca Sforna
@@ -74,6 +74,7 @@ Lincoln Maskey
 Marcello Scata
 Alexey Chumakov
 beerfrick
+dependabot[bot]
 Bastian Pfenningschmidt
 Joel C. Llano
 Kornel Lesinski
@@ -84,7 +85,6 @@ zakman
 jbrugger
 jctrosset
 Kirill Krasnov
-dependabot[bot]
 Bob Le Bricodeur
 ryandesign
 rufinus
@@ -112,6 +112,7 @@ vwegert
 Daniel Tschinder
 James Crickmere
 Manilal
+Sean McBride
 Stefan Pettersson
 Vincent Sels
 Allan Brazute
@@ -145,6 +146,7 @@ elmarculino
 jeckyhl
 mfoXen
 puklos
+Albert ARIBAUD
 Alexander Maringer
 Andreas Schopper
 Andreas Stieger
@@ -166,6 +168,7 @@ ImgBotApp
 Jacky Alcine
 Jacob Hoover
 Jadran Josimovic
+Jean-Sébastien B
 Jeremy Vriens
 Jingshao Chen
 Jonas Nockert
@@ -175,6 +178,7 @@ Larry Lewis
 Laszlo Kovacs
 LeoZandvliet
 MS-Astra
+Marc-Antoine TURBET-DELOF
 Marcin Kłeczek
 Marco Dings
 Marco Ribeiro
@@ -208,6 +212,7 @@ dwethell
 elen-ayanyan
 elpoutro
 epenet
+fuyun
 gcompagnon
 greenius
 l2m83
@@ -219,6 +224,7 @@ rk4n3
 spidgorny
 talentant
 tfromm
+tsz
 wapznw
 watergad
 Adrian Spinei

@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.24.5' );
+define( 'MANTIS_VERSION', '2.25.0' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -656,8 +656,8 @@ define( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' );
 define( 'BOOTSTRAP_VERSION', '3.4.1' );
 define( 'BOOTSTRAP_HASH_JS', 'sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd' );
 define( 'BOOTSTRAP_HASH_CSS', 'sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu' );
-define( 'FONT_AWESOME_VERSION', '4.6.3' );
-define( 'FONT_AWESOME_HASH', 'sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1' );
+define( 'FONT_AWESOME_VERSION', '4.7.0' );
+define( 'FONT_AWESOME_HASH', 'sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' );
 
 # Moment & DateTimePicker
 define( 'MOMENT_VERSION', '2.24.0' );
