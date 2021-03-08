@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -202,7 +202,7 @@ $s_email_label = 'E-poste';
 $s_password = 'Parola';
 $s_new_password = 'Parolaya newiye';
 $s_confirm_password = 'Parola tesdiq ke';
-$s_current_password = 'Parolaya newkên';
+$s_current_password = 'Parolaya nıkayêne';
 $s_access_level = 'Sewiyay resayışi';
 $s_access_level_label = 'Sewiyay resayış';
 $s_update_user_button = 'Karberi bırocne';

@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -361,8 +361,13 @@ $s_timezone = 'Часовой пояс';
 $s_prefs_reset_msg = 'Настройки сброшены...';
 $s_prefs_updated_msg = 'Настройки изменены...';
 $s_select_profile = 'Выбор профиля';
+$s_add_profile = 'Добавить профиль';
 $s_edit_profile = 'Изменить профиль';
+$s_update_profile = 'Обновить профиль';
 $s_delete_profile = 'Удалить профиль';
+$s_delete_profile_confirm_msg = 'Вы уверены, что хотите удалить профиль «%1$s»?';
+$s_global_profile = 'Глобальный профиль';
+$s_default_profile = 'Профиль по умолчанию';
 $s_my_sponsorship = 'Спонсирование';
 $s_update_sponsorship_button = 'Изменить состояние оплаты';
 $s_no_sponsored = 'Не найдено спонсируемых задач, назначенных вам.';
@@ -1403,6 +1408,7 @@ $s_load = 'Загрузить';
 $s_apply_changes = 'Применить изменения';
 $s_undo = 'Отменить';
 $s_edit = 'Изменить';
+$s_submit = 'Отправить';
 $s_update = 'Изменить';
 $s_delete = 'Удалить';
 $s_make_default = 'Использовать по умолчанию';
