@@ -39,7 +39,7 @@ require_once ( __DIR__ . '/../../core/constant_inc.php' );
  * @requires extension curl
  * @group REST
  */
-class RestBase extends PHPUnit_Framework_TestCase {
+class RestBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var string Base path for REST API
 	 */

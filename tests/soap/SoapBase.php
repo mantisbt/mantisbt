@@ -33,7 +33,7 @@ require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
 /**
  * Test cases for SoapEnum class.
  */
-class SoapBase extends PHPUnit_Framework_TestCase {
+class SoapBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var SoapClient Soap Client
 	 */
