@@ -33,7 +33,7 @@
 /** Spanish (español)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -69,6 +69,7 @@
  * @author VegaDark
  * @author Vivaelcelta
  * @author Wifidel
+ * @author ZealousBlaze
  * @author Zobook
  */
 
@@ -370,6 +371,7 @@ $s_delete_profile = 'Eliminar perfil';
 $s_delete_profile_confirm_msg = '¿Confirmas que quieres eliminar el perfil «%1$s»?';
 $s_global_profile = 'Perfil global';
 $s_default_profile = 'Perfil predeterminado';
+$s_profile_description = 'Descripción del Sistema';
 $s_my_sponsorship = 'Mis patrocinios';
 $s_update_sponsorship_button = 'Cambiar el estado de pago';
 $s_no_sponsored = 'No hay incidencias patrocinadas asignadas a Ud.';
@@ -496,6 +498,7 @@ $s_bugnote_updated_msg = 'La nota ha sido actualizada correctamente...';
 $s_last_edited = 'Última edición:';
 $s_hide_content = 'Ocultar contenido';
 $s_show_content = 'Mostrar contenido';
+$s_file_icon_description = 'Ícono del archivo %1$s';
 $s_unknown_file_extension = 'desconocido';
 $s_webmaster_contact_information = 'Contacta con el <a href="mailto:%1$s" title="Contacto con webmaster vía correo electrónico.">administrador</a> por ayuda';
 $s_total_queries_executed = 'Total de consultas ejecutadas: %1$d';
@@ -648,7 +651,7 @@ $s_readonly_status = 'Estado en el que un informe se vuelve de solo lectura';
 $s_reopen_status = 'Estado en el que se establece una incidencia reabierta';
 $s_reopen_resolution = 'Resolución que se establece al reabrir una incidencia';
 $s_limit_view_unless_threshold_option = 'Ver incidencias de otros usuarios (si no se establece, el acceso se verá restringido a las incidencias reportadas, asignadas o monitoreadas por el usuario).';
-$s_config_delete_sure = '¿Confirmas que quieres eliminar la configuración de:';
+$s_config_delete_sure = '¿Estás seguro de querer eliminar la configuración de %1$s en el proyecto %2$s?';
 $s_delete_config_button = 'Borrar Configuración';
 $s_configuration_report = 'Reporte de Configuración';
 $s_database_configuration = 'Configuración de la Base de Datos';
