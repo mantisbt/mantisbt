@@ -25,7 +25,7 @@ Requirements
 ------------
 
  * MySQL 5.5.35+, PostgreSQL 9.2+, or other supported database
- * PHP 5.5.9+
+ * PHP 7.0.0+
  * a webserver (e.g. Apache or IIS)
 
 Please refer to section 2.2 in the administration guide for further details.
