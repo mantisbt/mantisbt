@@ -1447,7 +1447,6 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = nu
 	# instead of via $p_action_page (GET). Then only add the CSRF form token if
 	# arguments are being sent via the POST method.
 	echo '<form method="post" action="', htmlspecialchars( $p_action_page ), '" class="form-inline inline single-button-form">';
-	echo '<fieldset>';
 	if( $p_security_token !== OFF ) {
 		echo form_security_field( $t_form_name[0], $p_security_token );
 	}
@@ -1460,7 +1459,6 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = nu
 	if( $p_args_to_post ) {
 		print_hidden_inputs( $p_args_to_post );
 	}
-	echo '</fieldset>';
 	echo '</form>';
 }
 
