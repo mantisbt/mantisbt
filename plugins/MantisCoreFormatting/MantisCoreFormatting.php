@@ -36,7 +36,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = array(
-			'MantisCore' => '2.1.0',
+			'MantisCore' => '2.25.0',
 		);
 
 		$this->author = 'MantisBT Team';
