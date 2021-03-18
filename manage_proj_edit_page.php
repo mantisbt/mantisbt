@@ -149,6 +149,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<input type="checkbox" id="project-enabled" name="enabled" class="ace"
 						<?php check_checked( (int)$t_row['enabled'], ON ); ?>
 					/>
+					<span class="lbl"></span>
 				</td>
 			</tr>
 			<tr>
@@ -161,6 +162,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<input type="checkbox" id="project-inherit-global" name="inherit_global" class="ace"
 						<?php check_checked( (int)$t_row['inherit_global'], ON ); ?>
 					/>
+					<span class="lbl"></span>
 				</td>
 			</tr>
 
