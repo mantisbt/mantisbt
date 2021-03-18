@@ -39,6 +39,7 @@
  * @file
  *
  * @author Bernat
+ * @author Mguix
  * @author Paucabot
  * @author Pitort
  */
@@ -47,7 +48,7 @@ $s_plugin_XmlImportExport_title = 'Importa/Exporta incidències';
 $s_plugin_XmlImportExport_description = 'Afegeix capacitats d\'importació i exportació XML a MantisBT.';
 $s_plugin_XmlImportExport_import = 'Importació d\'incidències';
 $s_plugin_XmlImportExport_export = 'Exportació XML';
-$s_plugin_XmlImportExport_importing_in_project = 'Importació d\'incidències en el projecte:';
+$s_plugin_XmlImportExport_importing_in_project = 'Importació d\'incidències en el projecte: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Opcions d\'importació';
 $s_plugin_XmlImportExport_cross_references = 'Referències creuades';
 $s_plugin_XmlImportExport_default_strategy = 'Estratègia de conversió per defecte:';
