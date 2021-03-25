@@ -233,7 +233,9 @@ $t_reset = $t_user['id'] != auth_get_current_user_id()
 	&& user_is_enabled( $t_user['id'] )
 	&& !user_is_protected( $t_user['id'] );
 $t_unlock = !user_is_login_request_allowed( $t_user['id'] );
-$t_delete = !( ( user_is_administrator( $t_user_id ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) );
+$t_delete = !( user_is_administrator( $t_user_id )
+	&& user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1
+);
 $t_impersonate = auth_can_impersonate( $t_user['id'] );
 
 if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
@@ -290,7 +292,9 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <?php
 	print_icon( 'fa-info-circle' );
 	echo '&nbsp;';
-	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
+	if( ( ON == config_get( 'send_reset_password' ) )
+		&& ( ON == config_get( 'enable_email_notification' ) )
+	) {
 		echo lang_get( 'reset_password_msg' );
 	} else {
 		echo lang_get( 'reset_password_msg2' );
@@ -402,51 +406,55 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 	<?php echo form_security_field( 'manage_user_proj_add' ) ?>
 	<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 
-<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-blue2">
 
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
-		<?php echo lang_get('add_user_title') ?>
-	</h4>
-</div>
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
+				<?php echo lang_get( 'add_user_title' ) ?>
+			</h4>
+		</div>
 
-<div class="widget-body">
-<div class="widget-main no-padding">
-<div class="table-responsive">
-	<table class="table table-bordered table-condensed table-striped">
-        <tr>
-            <td class="category">
-                <?php echo lang_get( 'unassigned_projects_label' ) ?>
-            </td>
-            <td>
-                <select id="add-user-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
-                    <?php print_project_user_list_option_list2( $t_user['id'] ) ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td class="category">
-                <?php echo lang_get( 'access_level_label' ) ?>
-            </td>
-            <td>
-                <select id="add-user-project-access" name="access_level" class="input-sm">
-                    <?php print_project_access_levels_option_list( (int)config_get( 'default_new_account_access_level' ) ) ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-				<button class="btn btn-primary btn-white btn-round">
-					<?php echo lang_get( 'add_user_button' ) ?>
-				</button>
-            </td>
-        </tr>
-	</table>
-</div>
-</div>
-</div>
-</div>
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+					<table class="table table-bordered table-condensed table-striped">
+						<tr>
+							<td class="category">
+								<?php echo lang_get( 'unassigned_projects_label' ) ?>
+							</td>
+							<td>
+								<select id="add-user-project-id" name="project_id[]"
+										class="input-sm" multiple="multiple" size="5">
+									<?php print_project_user_list_option_list2( $t_user['id'] ) ?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="category">
+								<?php echo lang_get( 'access_level_label' ) ?>
+							</td>
+							<td>
+								<select id="add-user-project-access" name="access_level"
+										class="input-sm">
+									<?php print_project_access_levels_option_list(
+											(int)config_get( 'default_new_account_access_level' ) )
+									?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button class="btn btn-primary btn-white btn-round">
+									<?php echo lang_get( 'add_user_button' ) ?>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </form>
 </div>
 
