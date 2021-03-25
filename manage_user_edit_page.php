@@ -373,7 +373,7 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 				</table>
 			</div>
 		</div>
-		
+
 		<div class="widget-toolbox padding-8 clearfix">
 			<label>
 				<input id="project_id_all" name="project_id_all"
@@ -397,7 +397,13 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 
 <!-- ADD USER TO PROJECT SECTION -->
 <div class="space-10"></div>
+<div id="manage-user-project-add-div" class="form-container">
+<form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
+	<?php echo form_security_field( 'manage_user_proj_add' ) ?>
+	<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+
 <div class="widget-box widget-color-blue2">
+
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
@@ -407,13 +413,8 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 
 <div class="widget-body">
 <div class="widget-main no-padding">
-<div class="form-container">
 <div class="table-responsive">
 	<table class="table table-bordered table-condensed table-striped">
-        <form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
-        <fieldset>
-            <?php echo form_security_field( 'manage_user_proj_add' ) ?>
-            <input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
         <tr>
             <td class="category">
                 <?php echo lang_get( 'unassigned_projects_label' ) ?>
@@ -439,13 +440,12 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
                 <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_user_button' ) ?>" />
             </td>
         </tr>
-        </fieldset>
-        </form>
 	</table>
 </div>
 </div>
 </div>
 </div>
+</form>
 </div>
 
 <?php
