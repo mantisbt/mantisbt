@@ -1069,7 +1069,7 @@ $s_project_user_added_msg = 'Successfully added user to project.';
 $s_project_removed_user_msg = 'Successfully removed user from project.';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = 'Are you sure you wish to remove user "%1$s" from project "%2$s"?';
+$s_remove_user_sure_msg = 'Are you sure you wish to remove user "%1$s" from project(s) "%2$s"?';
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
