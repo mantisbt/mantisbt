@@ -928,12 +928,16 @@ function user_get_row( $p_user_id ) {
  */
 function user_get_field( $p_user_id, $p_field_name ) {
 	if( NO_USER == $p_user_id ) {
-		error_parameters( NO_USER );
+		$t_row = false;
+	} else {
+		$t_row = user_get_row( $p_user_id );
+	}
+
+	if( !$t_row ) {
+		error_parameters( $p_user_id );
 		trigger_error( ERROR_USER_BY_ID_NOT_FOUND, WARNING );
 		return '@null@';
 	}
-
-	$t_row = user_get_row( $p_user_id );
 
 	if( isset( $t_row[$p_field_name] ) ) {
 		switch( $p_field_name ) {
