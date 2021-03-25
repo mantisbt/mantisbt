@@ -289,6 +289,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="alert alert-info">
 <?php
 	print_icon( 'fa-info-circle' );
+	echo '&nbsp;';
 	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		echo lang_get( 'reset_password_msg' );
 	} else {
@@ -319,7 +320,6 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="form-container">
-<form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
 <div class="table-responsive">
 	<table class="table table-bordered table-condensed table-striped">
         <tr>
@@ -328,6 +328,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
             </td>
             <td><?php print_project_user_list( $t_user['id'] ) ?></td>
         </tr>
+        <form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
         <fieldset>
             <?php echo form_security_field( 'manage_user_proj_add' ) ?>
             <input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
@@ -357,9 +358,9 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
             </td>
         </tr>
         </fieldset>
+        </form>
 	</table>
 </div>
-</form>
 </div>
 </div>
 </div>
