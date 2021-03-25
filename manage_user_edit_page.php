@@ -304,10 +304,98 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <div class="clearfix"></div>
 
-<!-- PROJECT ACCESS (if permissions allow) and user is not ADMINISTRATOR -->
-<?php if( access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
-	!user_is_administrator( $t_user_id ) ) {
+<?php
+# Project access sections are only shown if the current user's permissions
+# allow and the user being edited is not an Administrator.
+if( access_has_global_level( config_get( 'manage_user_threshold' ) )
+	&& !user_is_administrator( $t_user_id )
+) {
+
+	$t_projects = user_get_assigned_projects( $t_user['id'] );
+	if( !empty( $t_projects ) ) {
 ?>
+<!-- ASSIGNED PROJECTS SECTION -->
+<div class="space-10"></div>
+<div id="project-access-div" class="form-container">
+<form id="project-access-form" method="post" action="manage_user_proj_delete.php">
+
+	<?php echo form_security_field( 'manage_user_proj_delete' ) ?>
+	<input name="user_id" type="hidden" value="<?php echo (int)$t_user['id'] ?>" />
+
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
+				<?php echo lang_get( 'assigned_projects_label' ) ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+			<div class="widget-main no-padding table-responsive">
+				<table class="table table-bordered table-condensed table-striped">
+					<thead>
+						<tr>
+							<th><?php echo lang_get( 'remove_link' ) ?></th>
+							<th><?php echo lang_get( 'project_name' ) ?></th>
+							<th><?php echo lang_get( 'access_level' ) ?></th>
+							<th><?php echo lang_get( 'view_status' ) ?></th>
+						</tr>
+					</thead>
+					<tbody>
+<?php
+		$t_projects = user_get_assigned_projects( $t_user['id'] );
+		foreach( $t_projects as $t_project_id => $t_project ) {
+			$t_can_remove = access_has_project_level( config_get( 'project_user_threshold' ), $t_project_id );
+			$t_project_name = string_attribute( $t_project['name'] );
+			$t_access_level = get_enum_element( 'access_levels', $t_project['access_level'] );
+			$t_view_state = get_enum_element( 'project_view_state', $t_project['view_state'] );
+?>
+						<tr>
+							<td class="center">
+<?php
+			if( $t_can_remove ) {
+?>
+								<input name="project_id[]" type="checkbox" class="ace"
+									   value="<?php echo $t_project_id ?>"
+								/>
+								<span class="lbl"></span>
+<?php
+			}
+?>
+							</td>
+							<td><?php echo $t_project_name ?></td>
+							<td><?php echo $t_access_level ?></td>
+							<td><?php echo $t_view_state ?></td>
+						</tr>
+<?php
+		} # foreach project
+?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="widget-toolbox padding-8 clearfix">
+			<label>
+				<input id="project_id_all" name="project_id_all"
+					   type="checkbox" class="ace check_all"
+				/>
+				<span class="lbl">
+					<?php echo lang_get( 'select_all' ) ?>
+				</span>
+			</label>
+			&nbsp;
+			<button class="btn btn-primary btn-white btn-round">
+				<?php echo lang_get( 'remove_link' ) ?>
+			</button>
+		</div>
+	</div>
+</form>
+</div>
+<?php
+	} # end if user has assigned projects
+?>
+
+<!-- ADD USER TO PROJECT SECTION -->
 <div class="space-10"></div>
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
@@ -322,12 +410,6 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="form-container">
 <div class="table-responsive">
 	<table class="table table-bordered table-condensed table-striped">
-        <tr>
-            <td class="category">
-                <?php echo lang_get( 'assigned_projects_label' ) ?>
-            </td>
-            <td><?php print_project_user_list( $t_user['id'] ) ?></td>
-        </tr>
         <form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
         <fieldset>
             <?php echo form_security_field( 'manage_user_proj_add' ) ?>
