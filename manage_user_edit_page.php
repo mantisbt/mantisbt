@@ -245,15 +245,11 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <!-- Reset/Unlock Button -->
 <?php if( $t_reset || $t_unlock ) { ?>
 	<form id="manage-user-reset-form" method="post" action="manage_user_reset.php" class="pull-left">
-		<fieldset>
-			<?php echo form_security_field( 'manage_user_reset' ) ?>
-			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-<?php	if( $t_reset ) { ?>
-			<span><input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'reset_password_button' ) ?>" /></span>
-<?php	} else { ?>
-			<span><input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'account_unlock_button' ) ?>" /></span>
-<?php	} ?>
-		</fieldset>
+		<?php echo form_security_field( 'manage_user_reset' ) ?>
+		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+		<button class="btn btn-primary btn-white btn-round">
+			<?php echo lang_get( $t_reset ? 'reset_password_button' : 'account_unlock_button' ) ?>
+		</button>
 	</form>
 <?php } ?>
 
@@ -263,7 +259,9 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_user_delete' ) ?>
 			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-			<span><input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_user_button' ) ?>" /></span>
+			<button class="btn btn-primary btn-white btn-round">
+				<?php echo lang_get( 'delete_user_button' ) ?>
+			</button>
 		</fieldset>
 	</form>
 <?php } ?>
@@ -274,7 +272,9 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_user_impersonate' ) ?>
 			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'impersonate_user_button' ) ?>" />
+			<button class="btn btn-primary btn-white btn-round">
+				<?php echo lang_get( 'impersonate_user_button' ) ?>
+			</button>
 		</fieldset>
 	</form>
 <?php } ?>
@@ -437,7 +437,9 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_user_button' ) ?>" />
+				<button class="btn btn-primary btn-white btn-round">
+					<?php echo lang_get( 'add_user_button' ) ?>
+				</button>
             </td>
         </tr>
 	</table>
