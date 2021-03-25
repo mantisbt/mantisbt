@@ -289,6 +289,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="alert alert-info">
 <?php
 	print_icon( 'fa-info-circle' );
+	echo '&nbsp;';
 	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		echo lang_get( 'reset_password_msg' );
 	} else {
