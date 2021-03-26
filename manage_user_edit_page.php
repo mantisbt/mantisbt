@@ -120,7 +120,7 @@ print_manage_menu( 'manage_user_page.php' );
 
 					<!-- Username -->
 					<tr>
-						<td class="category">
+						<td class="category width-30">
 							<label for="edit-username">
 								<?php echo lang_get( 'username_label' ) ?>
 							</label>
@@ -260,6 +260,7 @@ print_manage_menu( 'manage_user_page.php' );
 <?php
 	if( config_get( 'enable_email_notification' ) == ON ) {
 ?>
+			&nbsp;
 			<label class="inline">
 				<input id="send-email" name="send_email_notification"
 					   type="checkbox" class="ace" checked="checked"
@@ -465,7 +466,7 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 			<div class="widget-main no-padding table-responsive">
 				<table class="table table-bordered table-condensed table-striped">
 					<tr>
-						<td class="category">
+						<td class="category width-30">
 							<label for="add-user-project-id">
 								<?php echo lang_get( 'unassigned_projects_label' ) ?>
 							</label>
