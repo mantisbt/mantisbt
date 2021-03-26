@@ -37,6 +37,8 @@
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
+ *
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 require_once( 'core.php' );
@@ -405,6 +407,7 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 <?php
 			if( $t_can_remove ) {
 ?>
+								<!--suppress HtmlFormInputWithoutLabel -->
 								<input name="project_id[]" type="checkbox" class="ace"
 									   value="<?php echo $t_project_id ?>"
 								/>
