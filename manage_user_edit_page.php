@@ -308,26 +308,22 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <!-- Delete Button -->
 <?php if( $t_delete ) { ?>
 	<form id="manage-user-delete-form" method="post" action="manage_user_delete.php" class="pull-left">
-		<fieldset>
-			<?php echo form_security_field( 'manage_user_delete' ) ?>
-			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-			<button class="btn btn-primary btn-white btn-round">
-				<?php echo lang_get( 'delete_user_button' ) ?>
-			</button>
-		</fieldset>
+		<?php echo form_security_field( 'manage_user_delete' ) ?>
+		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+		<button class="btn btn-primary btn-white btn-round">
+			<?php echo lang_get( 'delete_user_button' ) ?>
+		</button>
 	</form>
 <?php } ?>
 
 <!-- Impersonate Button -->
 <?php if( $t_impersonate ) { ?>
 	<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="pull-left">
-		<fieldset>
-			<?php echo form_security_field( 'manage_user_impersonate' ) ?>
-			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-			<button class="btn btn-primary btn-white btn-round">
-				<?php echo lang_get( 'impersonate_user_button' ) ?>
-			</button>
-		</fieldset>
+		<?php echo form_security_field( 'manage_user_impersonate' ) ?>
+		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+		<button class="btn btn-primary btn-white btn-round">
+			<?php echo lang_get( 'impersonate_user_button' ) ?>
+		</button>
 	</form>
 <?php } ?>
 
