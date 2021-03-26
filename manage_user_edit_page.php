@@ -92,7 +92,6 @@ access_ensure_global_level( $t_user['access_level'] );
 $t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 layout_page_header();
-
 layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_user_page.php' );
@@ -103,127 +102,178 @@ print_manage_menu( 'manage_user_page.php' );
 
 <!-- USER INFO -->
 <div id="edit-user-div" class="form-container">
-	<form id="edit-user-form" method="post" action="manage_user_update.php">
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
-					<?php echo lang_get('edit_user_title') ?>
-				</h4>
-			</div>
+<form id="edit-user-form" method="post" action="manage_user_update.php">
+	<?php echo form_security_field( 'manage_user_update' ) ?>
+	<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-user', 'ace-icon' ); ?>
+				<?php echo lang_get('edit_user_title') ?>
+			</h4>
+		</div>
+
 		<div class="widget-body">
-		<div class="widget-main no-padding">
-		<div class="form-container">
-		<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
-		<fieldset>
-			<?php echo form_security_field( 'manage_user_update' ) ?>
-			<!-- Title -->
-			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+			<div class="widget-main no-padding table-responsive">
+				<table class="table table-bordered table-condensed table-striped">
 
-			<!-- Username -->
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'username_label' ) ?>
-				</td>
-				<td>
-					<input id="edit-username" type="text" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" />
-				</td>
-			</tr>
+					<!-- Username -->
+					<tr>
+						<td class="category">
+							<label for="edit-username">
+								<?php echo lang_get( 'username_label' ) ?>
+							</label>
+						</td>
+						<td>
+							<input id="edit-username" name="username"
+								   type="text" class="input-sm"
+								   size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>"
+								   value="<?php echo string_attribute( $t_user['username'] ) ?>"
+							/>
+						</td>
+					</tr>
 
-			<!-- Realname -->
-			<tr><?php
-			if( $t_ldap && ON == config_get_global( 'use_ldap_realname' ) ) {
-				# With LDAP
-				echo '<td class="category">' . lang_get( 'realname_label' ) . '</td>';
-				echo '<td>';
-				echo string_display_line( user_get_realname( $t_user_id ) );
-				echo '</td>';
-			} else {
-				# Without LDAP ?>
-				<td class="category"><?php echo lang_get( 'realname_label' ) ?></td>
-				<td><input id="edit-realname" type="text" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" /></td><?php
-			}
-		?>
-			</tr>
-			<!-- Email -->
-			<tr><?php
-			if( $t_ldap && ON == config_get_global( 'use_ldap_email' ) ) {
-				# With LDAP
-				echo '<td class="category">' . lang_get( 'email_label' ) . '</td>';
-				echo '<td>' . string_display_line( user_get_email( $t_user_id ) ) . '</td>';
-			} else {
-				# Without LDAP
-				echo '<td class="category">' . lang_get( 'email_label' ) . '</td>';
-				echo '<td>';
-				print_email_input( 'email', $t_user['email'] );
-				echo '</td>';
-			} ?>
-			</tr>
-			<!-- Access Level -->
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'access_level_label' ) ?>
-				</td>
-				<td>
-					<select id="edit-access-level" name="access_level" class="input-sm"><?php
-						$t_access_level = $t_user['access_level'];
-						if( !MantisEnum::hasValue( config_get( 'access_levels_enum_string' ), $t_access_level ) ) {
-							$t_access_level = config_get( 'default_new_account_access_level' );
-						}
-						print_project_access_levels_option_list( (int)$t_access_level ); ?>
-					</select>
-				</td>
-			</tr>
-			<!-- Enabled Checkbox -->
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'enabled_label' ) ?>
-				</td>
-				<td>
-					<label>
-						<input type="checkbox" class="ace" id="edit-enabled" name="enabled" <?php check_checked( (int)$t_user['enabled'], ON ); ?>>
-						<span class="lbl"></span>
-					</label>
-				</td>
-			</tr>
-			<!-- Protected Checkbox -->
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'protected_label' ) ?>
-				</td>
-				<td>
-					<label>
-						<input type="checkbox" class="ace" id="edit-protected" name="protected" <?php check_checked( (int)$t_user['protected'], ON ); ?>>
-						<span class="lbl"></span>
-					</label>
-				</td>
-			</tr>
+					<!-- Realname -->
+					<tr>
+<?php
+	if( $t_ldap && ON == config_get_global( 'use_ldap_realname' ) ) {
+		# With LDAP
+?>
+						<td class="category">
+							<?php echo lang_get( 'realname_label' ) ?>
+						</td>
+						<td>
+							<?php echo string_display_line( user_get_realname( $t_user_id ) ) ?>
+						</td>
+<?php
+	} else {
+		# Without LDAP
+?>
+						<td class="category">
+							<label for="edit-realname">
+								<?php echo lang_get( 'realname_label' ) ?>
+							</label>
+						</td>
+						<td>
+							<input id="edit-realname" name="realname"
+								   type="text" class="input-sm"
+								   size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>"
+								   value="<?php echo string_attribute( $t_user['realname'] ) ?>"
+							/>
+						</td>
+<?php
+	}
+?>
+					</tr>
 
-			<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
+					<!-- Email -->
+					<tr>
+<?php
+	if( $t_ldap && ON == config_get_global( 'use_ldap_email' ) ) {
+		# With LDAP
+?>
+						<td class="category">
+							<?php echo lang_get( 'email_label' ) ?>
+						</td>
+						<td>
+							<?php echo string_display_line( user_get_email( $t_user_id ) ) ?>
+						</td>
+<?php
+	} else {
+		# Without LDAP
+?>
+						<td class="category">
+							<label for="edit-realname">
+								<?php echo lang_get( 'email_label' ) ?>
+							</label>
+						</td>
+						<td>
+							<?php print_email_input( 'email', $t_user['email'] ); ?>
+						</td>
+<?php
+	}
+?>
+					</tr>
 
-			<!-- Submit Button -->
-		</fieldset>
-		</table>
-		</div>
-		</div>
+					<!-- Access Level -->
+					<tr>
+						<td class="category">
+							<label for="edit-access-level">
+								<?php echo lang_get( 'access_level_label' ) ?>
+							</label>
+						</td>
+						<td>
+							<select id="edit-access-level" name="access_level" class="input-sm">
+<?php
+	$t_access_level = $t_user['access_level'];
+	if( !MantisEnum::hasValue( config_get( 'access_levels_enum_string' ), $t_access_level ) ) {
+		$t_access_level = config_get( 'default_new_account_access_level' );
+	}
+	print_project_access_levels_option_list( (int)$t_access_level );
+?>
+							</select>
+						</td>
+					</tr>
+
+					<!-- Enabled Checkbox -->
+					<tr>
+						<td class="category">
+							<?php echo lang_get( 'enabled_label' ) ?>
+						</td>
+						<td>
+							<label>
+								<input id="edit-enabled" name="enabled"
+									   type="checkbox" class="ace"
+									   <?php check_checked( (int)$t_user['enabled'], ON ); ?>
+								/>
+								<span class="lbl"></span>
+							</label>
+						</td>
+					</tr>
+
+					<!-- Protected Checkbox -->
+					<tr>
+						<td class="category">
+							<?php echo lang_get( 'protected_label' ) ?>
+						</td>
+						<td>
+							<label>
+								<input id="edit-protected" name="protected"
+									   type="checkbox" class="ace"
+									   <?php check_checked( (int)$t_user['protected'], ON ); ?>
+								/>
+								<span class="lbl"></span>
+							</label>
+						</td>
+					</tr>
+
+					<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
+				</table>
+			</div>
 		</div>
 
 		<div class="widget-toolbox padding-8 clearfix">
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_user_button' ) ?>" />
-			<?php
-			if( config_get( 'enable_email_notification' ) == ON ) { ?>
-				&nbsp;
-				<label class="inline">
-					<input type="checkbox" class="ace" id="send-email" name="send_email_notification" checked="checked">
-					<span class="lbl"> <?php echo lang_get( 'notify_user' ) ?></span>
-				</label>
-			<?php } ?>
+			<button class="btn btn-primary btn-white btn-round">
+				<?php echo lang_get( 'update_user_button' ) ?>
+			</button>
+<?php
+	if( config_get( 'enable_email_notification' ) == ON ) {
+?>
+			<label class="inline">
+				<input id="send-email" name="send_email_notification"
+					   type="checkbox" class="ace" checked="checked"
+				/>
+				<span class="lbl">
+					<?php echo lang_get( 'notify_user' ) ?>
+				</span>
+			</label>
+<?php } ?>
 		</div>
-		</div>
-		</div>
-	</form>
+	</div>
+</form>
 </div>
+
 <div class="space-10"></div>
 <?php
 # User action buttons: RESET/UNLOCK and DELETE
@@ -416,43 +466,44 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 		</div>
 
 		<div class="widget-body">
-			<div class="widget-main no-padding">
-				<div class="table-responsive">
-					<table class="table table-bordered table-condensed table-striped">
-						<tr>
-							<td class="category">
+			<div class="widget-main no-padding table-responsive">
+				<table class="table table-bordered table-condensed table-striped">
+					<tr>
+						<td class="category">
+							<label for="add-user-project-id">
 								<?php echo lang_get( 'unassigned_projects_label' ) ?>
-							</td>
-							<td>
-								<select id="add-user-project-id" name="project_id[]"
-										class="input-sm" multiple="multiple" size="5">
-									<?php print_project_user_list_option_list2( $t_user['id'] ) ?>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td class="category">
+							</label>
+						</td>
+						<td>
+							<select id="add-user-project-id" name="project_id[]"
+									class="input-sm" multiple="multiple" size="5">
+								<?php print_project_user_list_option_list2( $t_user['id'] ) ?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="category">
+							<label for="add-user-project-access">
 								<?php echo lang_get( 'access_level_label' ) ?>
-							</td>
-							<td>
-								<select id="add-user-project-access" name="access_level"
-										class="input-sm">
-									<?php print_project_access_levels_option_list(
-											(int)config_get( 'default_new_account_access_level' ) )
-									?>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<button class="btn btn-primary btn-white btn-round">
-									<?php echo lang_get( 'add_user_button' ) ?>
-								</button>
-							</td>
-						</tr>
-					</table>
-				</div>
+							</label>
+						</td>
+						<td>
+							<select id="add-user-project-access" name="access_level"
+									class="input-sm">
+								<?php print_project_access_levels_option_list(
+										(int)config_get( 'default_new_account_access_level' ) )
+								?>
+							</select>
+						</td>
+					</tr>
+				</table>
 			</div>
+		</div>
+
+		<div class="widget-toolbox padding-8 clearfix">
+			<button class="btn btn-primary btn-white btn-round">
+				<?php echo lang_get( 'add_user_button' ) ?>
+			</button>
 		</div>
 	</div>
 </form>
