@@ -47,6 +47,7 @@
  * @author Diebuche
  * @author Erdemaslancan
  * @author Exit91
+ * @author FF-11
  * @author FF11
  * @author Gebu
  * @author Geitost
@@ -664,7 +665,7 @@ $s_plugin = 'Plugin';
 $s_plugins_installed = 'Installierte Plugins';
 $s_plugins_available = 'Verfügbare Plugins';
 $s_plugins_missing = 'Fehlende oder ungültige Plugins';
-$s_plugins_missing_description = 'Die Plugins in der Liste unten sind registriert, aber deren Quellcode konte nicht in "%s" gefunden oder von dort geladen werden.<br>Versuche sie neu zu installieren oder zu entfernen.';
+$s_plugins_missing_description = 'Die Plugins in der Liste unten sind registriert, aber deren Quellcode konnte nicht in "%s" gefunden oder von dort geladen werden.<br>Versuchen Sie eine Neuinstallation oder entfernen Sie die Plugins.';
 $s_plugin_description = 'Beschreibung';
 $s_plugin_problem_description = 'Problembeschreibung';
 $s_plugin_author = 'Autor: %1$s';
@@ -677,8 +678,9 @@ $s_plugin_actions = 'Aktionen';
 $s_plugin_install = 'Installation';
 $s_plugin_upgrade = 'Upgrade';
 $s_plugin_uninstall = 'Deinstallation';
+$s_plugin_manual_fix = 'Manuelles Eingreifen notwendig';
 $s_plugin_uninstall_message = 'Sind Sie sicher, dass Sie das Plugin „%1$s“ deinstallieren wollen?';
-$s_plugin_remove_message = 'Bist du dir sicher, dass d das ungültige oder fehlende Plugin "%1$s" entfernen möchtest?';
+$s_plugin_remove_message = 'Sind Sie sicher, dass Sie das ungültige oder fehlende Plugin "%1$s" entfernen möchten?';
 $s_plugin_key_label = 'Schlüsselworte:';
 $s_plugin_key_met = 'Plugin bereit';
 $s_plugin_key_unmet = 'nicht erfüllte Abhängigkeiten';
@@ -688,6 +690,8 @@ $s_plugin_invalid_description = 'Ungültiges Plugin';
 $s_plugin_invalid_status_message = 'Die folgenden erforderlichen Eigenschaften sind nicht in den Klassen des Plugins definiert: %s';
 $s_plugin_missing_description = 'Fehlendes Plugin';
 $s_plugin_missing_status_message = 'Das Plugin ist in der Mantis-Datenbank istalliert, konnte aber nicht geladen werden.';
+$s_plugin_missing_class_description = 'Fehlende Plugin Basisklasse';
+$s_plugin_missing_class_status_message = 'Es wurde ein Verzeichnis für dieses Plugin gefunden, aber kein entsprechender Plugin Quellcode. Stellen Sie sicher, dass der Name des Verzeichnisses dem Namen der Basisklasse entspricht. Beachten Sie dabei Groß-/Kleinschreibung.';
 $s_project_added_msg = 'Projekt wurde hinzugefügt …';
 $s_category_added_msg = 'Kategorie wurde hinzugefügt …';
 $s_category_deleted_msg = 'Kategorie wurde gelöscht …';
