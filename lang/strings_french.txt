@@ -1455,4 +1455,4 @@ $s_proceed = 'Poursuivre';
 $s_move = 'Déplacer';
 $s_close = 'Fermer';
 $s_add = 'Ajouter';
-$s_login = 'Connexion';
+$s_login = 'Se connecter';
