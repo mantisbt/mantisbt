@@ -320,7 +320,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</td>
 		</tr>
 		<tr>
-			<td class="category">
+			<td class="category width-30">
 				<?php echo lang_get( 'email_bugnote_limit' ) ?>
 			</td>
 			<td>
