@@ -38,29 +38,8 @@
  * @ingroup Language
  * @file
  *
- * @author Rudko
  * @author Yardom78
  */
 
-$s_plugin_XmlImportExport_title = 'Import/Export';
-$s_plugin_XmlImportExport_description = 'Dopĺňa MantisBT o import a export funkciu na XML-základe.';
-$s_plugin_XmlImportExport_import = 'Vložiť problém';
-$s_plugin_XmlImportExport_export = 'XML Export';
-$s_plugin_XmlImportExport_config_title = 'XML Import/Export konfigurácia prístupu úrovní';
-$s_plugin_XmlImportExport_import_threshold = 'Importovať problémy';
-$s_plugin_XmlImportExport_export_threshold = 'Exportovať problémy';
-$s_plugin_XmlImportExport_action_update = 'Aktualizovať';
-$s_plugin_XmlImportExport_importing_in_project = 'Importovanie problémov do projektu: %s';
-$s_plugin_XmlImportExport_import_options = 'Možnosti vkladania';
-$s_plugin_XmlImportExport_cross_references = 'Vzájomné odkazy';
-$s_plugin_XmlImportExport_default_strategy = 'Základná stratégia premeny:';
-$s_plugin_XmlImportExport_renumber = 'Prečíslovanie';
-$s_plugin_XmlImportExport_renumber_desc = 'Skúsiť konvertovať referencie prečíslovaním';
-$s_plugin_XmlImportExport_link = 'Odkaz';
-$s_plugin_XmlImportExport_link_desc = 'Konvertovať do odkazu na originálny element';
-$s_plugin_XmlImportExport_disable = 'Deaktivovať';
-$s_plugin_XmlImportExport_disable_desc = 'Deaktivovať odkaz';
-$s_plugin_XmlImportExport_fallback = 'Stratégia Fallback (keď bez prečíslovania):';
-$s_plugin_XmlImportExport_fallback_category = 'Náhradná kategória:';
-$s_plugin_XmlImportExport_keep_same_category = 'Skúsiť ponechanie rovnakej kategórie';
-$s_plugin_XmlImportExport_error_no_xml = 'Nepodarilo sa nájsť rozšírenia xmlreader a xmlwriter';
+$s_plugin_Gravatar_title = 'Avatar cez Gravatar';
+$s_plugin_Gravatar_description = 'Zásuvný modul, ktorý zobrazuje používateľského avatara založeného na jeho emailovej adrese použitím služby poskytujúcej avatarov.';

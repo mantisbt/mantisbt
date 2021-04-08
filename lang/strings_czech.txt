@@ -43,6 +43,7 @@
  * @author Cvanca
  * @author Dvorapa
  * @author FikusModry
+ * @author Georg101
  * @author Ilimanaq29
  * @author Jan Myšák
  * @author Jezevec
@@ -813,7 +814,7 @@ $s_add_file = 'Přidat soubor';
 $s_project_document_updated = 'Projekt byl úspěšně aktualizován';
 $s_project_user_added_msg = 'Uživatel byl úspěšně přiřazen k projektu';
 $s_project_removed_user_msg = 'Uživatel byl úspěšně odebrán z projektu';
-$s_remove_user_sure_msg = 'Skutečně odebrat tohoto uživatele?';
+$s_remove_user_sure_msg = 'Skutečně si přejete odeprat uživatele "%1$s" z projektu(ů) "%2$s"?';
 $s_remove_user_button = 'Odebrat uživatele';
 $s_remove_all_users_sure_msg = 'Opravdu chcete odebrat všechny uživatele tohoto projektu?';
 $s_remove_all_users_button = 'Odebrat všechny uživatele';
