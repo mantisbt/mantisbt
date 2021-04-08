@@ -49,6 +49,7 @@
  * @author Felipe L. Ewald
  * @author Giro720
  * @author Gusta
+ * @author Gustavo.moraes
  * @author Jefersonfoliveira
  * @author Joao Xavier
  * @author Lowvy
@@ -823,7 +824,7 @@ $s_add_file = 'Adicionar Arquivo';
 $s_project_document_updated = 'Projeto atualizado com sucesso';
 $s_project_user_added_msg = 'Usuário adicionado com sucesso ao projeto';
 $s_project_removed_user_msg = 'Usuário removido com sucesso do projeto';
-$s_remove_user_sure_msg = 'Você tem certeza que deseja remover o usuário"%1$s" do projeto "%2$s"?';
+$s_remove_user_sure_msg = 'Você tem certeza que deseja remover o usuário "%1$s" do(s) projeto(s) "%2$s"?';
 $s_remove_user_button = 'Remover Usuário';
 $s_remove_all_users_sure_msg = 'Você tem certeza que deseja remover todos os usuários deste projeto?';
 $s_remove_all_users_button = 'Remover Todos os Usuários';
