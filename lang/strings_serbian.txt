@@ -41,6 +41,7 @@
  * @author Acamicamacaraca
  * @author BadDog
  * @author Charmed94
+ * @author Kizule
  * @author Macofe
  * @author Milicevic01
  * @author Nikola Smolenski
@@ -726,7 +727,7 @@ $s_add_file = 'Додај датотеку';
 $s_project_document_updated = 'Пројекат је ажуриран.';
 $s_project_user_added_msg = 'Корисник је додат у пројекат.';
 $s_project_removed_user_msg = 'Корисник је уклоњен с пројекта.';
-$s_remove_user_sure_msg = 'Желите ли да уклоните овог корисника?';
+$s_remove_user_sure_msg = 'Желите ли да уклоните корисника "%1$s" из пројекта/пројеката "%2$s"?';
 $s_remove_all_users_sure_msg = 'Желите ли да уклоните све кориснике на овом пројекту?';
 $s_remove_all_users_button = 'Уклони све кориснике';
 $s_add_user_title = 'Додавање корисника у пројекат';
