@@ -568,6 +568,14 @@ function user_create( $p_username, $p_password, $p_email = '',
 
 	event_signal( 'EVENT_MANAGE_USER_CREATE', array( $t_user_id ) );
 
+	# Trigger event with more info about user creation
+    $t_modification = array();
+    $t_modification['user_id'] = $t_user_id;
+    $t_modification['project_id'] = 0;
+    $t_modification['old_access_level'] = 0;
+    $t_modification['new_access_level'] = $p_access_level;
+    event_signal('EVENT_MANAGE_USER_ACCESS_MODIFICATION', array('modification' => $t_modification));
+
 	return $t_cookie_string;
 }
 
@@ -667,6 +675,14 @@ function user_delete( $p_user_id ) {
 	user_ensure_unprotected( $p_user_id );
 
 	event_signal( 'EVENT_MANAGE_USER_DELETE', array( $p_user_id ) );
+
+    # Trigger event with more info about user deletion
+    $t_modification = array();
+    $t_modification['user_id'] = $p_user_id;
+    $t_modification['project_id'] = 0;
+    $t_modification['old_access_level'] = user_get_access_level($p_user_id);
+    $t_modification['new_access_level'] = 0;
+    event_signal('EVENT_MANAGE_USER_ACCESS_MODIFICATION', array('modification' => $t_modification));
 
 	# Remove associated profiles
 	user_delete_profiles( $p_user_id );

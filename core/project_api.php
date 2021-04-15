@@ -811,11 +811,18 @@ function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
 function project_add_users( $p_project_id, array $p_changes ) {
 	# normalize input
 	$t_changes = array();
+	$t_modifications = array();
 	foreach( $p_changes as $t_id => $t_value ) {
 		if( DEFAULT_ACCESS_LEVEL == $t_value ) {
 			$t_changes[(int)$t_id] = user_get_access_level( $t_id );
 		} else {
 			$t_changes[(int)$t_id] = (int)$t_value;
+			$t_modification = array();
+			$t_modification['user_id'] = $t_id;
+			$t_modification['project_id'] = $p_project_id;
+			$t_modification['old_access_level'] = user_get_access_level($t_id, $p_project_id);
+			$t_modification['new_access_level'] = $t_value;
+			$t_modifications[$t_id] = $t_modification;
 		}
 	}
 
@@ -845,6 +852,9 @@ function project_add_users( $p_project_id, array $p_changes ) {
 			);
 			$t_update->execute( $t_params );
 			unset( $t_changes[$t_id] );
+
+			# Trigger event for user access modification on project
+			event_signal('EVENT_MANAGE_USER_ACCESS_MODIFICATION', array('modification' => $t_modifications[$t_id]));
 		}
 	}
 	# remaining items are for insert
@@ -856,7 +866,11 @@ function project_add_users( $p_project_id, array $p_changes ) {
 		foreach( $t_changes as $t_id => $t_value ) {
 			$t_insert->bind( 'params', array( $t_project_id, $t_id, $t_value ) );
 			$t_insert->execute();
-		}
+
+            # Trigger event for user added on project, old access level is set to 0.
+            $t_modifications[$t_id]['old_access_level'] = 0;
+            event_signal('EVENT_MANAGE_USER_ACCESS_MODIFICATION', array('modification' => $t_modifications[$t_id]));
+        }
 	}
 }
 
@@ -883,8 +897,15 @@ function project_remove_user( $p_project_id, $p_user_id ) {
 function project_remove_users( $p_project_id, array $p_user_ids ) {
 	# normalize input
 	$t_user_ids = array();
+	$t_modifications = array();
 	foreach( $p_user_ids as $t_id ) {
 		$t_user_ids[] = (int)$t_id;
+        $t_modification = array();
+        $t_modification['user_id'] = $t_id;
+        $t_modification['project_id'] = $p_project_id;
+        $t_modification['old_access_level'] = user_get_access_level($t_id, $p_project_id);
+        $t_modification['new_access_level'] = 0;
+        $t_modifications[$t_id] = $t_modification;
 	}
 	if( empty( $t_user_ids ) ) {
 		return;
@@ -898,6 +919,10 @@ function project_remove_users( $p_project_id, array $p_user_ids ) {
 	$t_query->sql( $t_sql );
 	$t_query->execute();
 
+	# Trigger event for each user deleted from project
+    foreach( $p_user_ids as $t_id ) {
+        event_signal('EVENT_MANAGE_USER_ACCESS_MODIFICATION', array('modification' => $t_modifications[$t_id]));
+    }
 	user_pref_clear_invalid_project_default( $p_project_id );
 }
 

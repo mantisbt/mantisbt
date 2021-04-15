@@ -178,6 +178,16 @@ $t_result = db_query( $t_query, $t_query_params );
 
 event_signal( 'EVENT_MANAGE_USER_UPDATE', array( $c_user_id ) );
 
+if ($t_old_access_level !== $c_access_level) {
+    # Trigger event with more info about user access modification
+    $t_modification = array();
+    $t_modification['user_id'] = $c_user_id;
+    $t_modification['project_id'] = 0;
+    $t_modification['old_access_level'] = $t_old_access_level;
+    $t_modification['new_access_level'] = $c_access_level;
+    event_signal('EVENT_MANAGE_USER_ACCESS_MODIFICATION', array('modification' => $t_modification));
+}
+
 if( $f_send_email_notification ) {
 	lang_push( user_pref_get_language( $f_user_id ) );
 	$t_changes = '';
