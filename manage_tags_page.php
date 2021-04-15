@@ -129,7 +129,7 @@ print_manage_menu( 'manage_tags_page.php' );
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-tags"></i>
+			<?php print_icon( 'fa-tags', 'ace-icon' ); ?>
 			<?php echo lang_get('manage_tags_link') ?>
 			<span class="badge"><?php echo $t_total_tag_count ?></span>
 		</h4>
@@ -176,12 +176,18 @@ print_manage_menu( 'manage_tags_page.php' );
 	</table>
 	</div>
 	</div>
+<?php
+	# Do not display the section's footer if we have only one page of users,
+	# otherwise it will be empty as the navigation controls won't be shown.
+	if( $t_total_tag_count > $t_per_page ) {
+?>
 	<div class="widget-toolbox padding-8 clearfix">
-	<div class="btn-toolbar pull-right"><?php
-		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
-		print_page_links( 'manage_tags_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter ); ?>
+		<div class="btn-toolbar pull-right"><?php
+			# @todo hack - pass in the hide inactive filter via cheating the actual filter value
+			print_page_links( 'manage_tags_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter ); ?>
+		</div>
 	</div>
-</div>
+<?php } ?>
 </div>
 </div>
 
@@ -191,7 +197,7 @@ print_manage_menu( 'manage_tags_page.php' );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-tag"></i>
+				<?php print_icon( 'fa-tag', 'ace-icon' ); ?>
 				<?php echo lang_get('tag_create') ?>
 			</h4>
 		</div>

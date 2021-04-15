@@ -39,6 +39,7 @@
  * @file
  *
  * @author Eduardo Addad de Oliveira
+ * @author Eduardoaddad
  */
 
 $s_plugin_Gravatar_title = 'Imagens de perfil através do Gravatar';

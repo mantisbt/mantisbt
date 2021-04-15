@@ -42,7 +42,7 @@
 					parameters (eg. )The HTML code is allowed to enter the database as
 					is. The $g_allow_href_tags does not have to be enabled to make URL
 					links. The package will automatically hyperlink properly formatted
-					URLs eg. http://blah.blah/ or
+					URLs eg. https://blah.blah/ or
 					mailto://me@more.com/
 				</para>
 			</listitem>
@@ -144,7 +144,7 @@ $g_main_menu_custom_options = array(
 					access level.
 				</para>
 				<para>
-					Use icons from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>.
+					Use icons from <ulink url="https://fontawesome.io/icons/">Font Awesome</ulink>.
 					Add "fa-" prefix to icon name.
 				</para>
 				<para>

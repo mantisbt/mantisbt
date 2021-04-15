@@ -43,11 +43,10 @@
  * @author Siebrand Mazeland
  */
 
-$s_plugin_graph_title = 'Mantis Graphs';
-$s_plugin_graph_description = 'Official graph plugin.';
 $s_plugin_MantisGraph_title = 'Mantis Graphs';
+$s_plugin_MantisGraph_description = 'Official graph plugin.';
 $s_plugin_MantisGraph_config = 'Configuration';
-$s_plugin_MantisGraph_synthesis_link = 'Synthesis';
+$s_plugin_MantisGraph_tab_label = 'Graphs';
 $s_plugin_MantisGraph_status_link = 'By Status';
 $s_plugin_MantisGraph_priority_link = 'By Priority';
 $s_plugin_MantisGraph_severity_link = 'By Severity';

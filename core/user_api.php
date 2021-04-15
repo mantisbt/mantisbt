@@ -596,7 +596,7 @@ function user_signup( $p_username, $p_email = null ) {
 		#  I'll re-enable this once a plan has been properly formulated for LDAP
 		#  account management and creation.
 		#			$t_email = '';
-		#			if( ON == config_get( 'use_ldap_email' ) ) {
+		#			if( ON == config_get_global( 'use_ldap_email' ) ) {
 		#				$t_email = ldap_email_from_username( $p_username );
 		#			}
 		#			if( !is_blank( $t_email ) ) {
@@ -724,7 +724,7 @@ function user_get_id_by_name( $p_username, $p_throw = false ) {
  *
  * @param string $p_email The email address to retrieve data for.
  * @param boolean $p_throw true to throw exception when not found, false otherwise.
- * @return array
+ * @return integer|boolean
  */
 function user_get_id_by_email( $p_email, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'email', $p_email ) ) {
@@ -782,7 +782,7 @@ function user_get_enabled_ids_by_email( $p_email ) {
  *
  * @param string $p_realname The realname to retrieve data for.
  * @param boolean $p_throw true to throw if not found, false otherwise.
- * @return array
+ * @return integer|boolean
  */
 function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'realname', $p_realname ) ) {
@@ -800,6 +800,42 @@ function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 			throw new ClientException( "User realname '$p_realname' not found", ERROR_USER_BY_NAME_NOT_FOUND, array( $p_realname ) );
 		}
 
+		return false;
+	}
+
+	user_cache_database_result( $t_row );
+	return (int)$t_row['id'];
+}
+
+/**
+ * Get a user id from their cookie string
+ *
+ * @param string  $p_cookie_string The cookie string to retrieve data for.
+ * @param boolean $p_throw         true to throw if not found, false otherwise.
+ *
+ * @return int|false User Id, false if cookie string not found
+ *
+ * @throws ClientException
+ */
+function user_get_id_by_cookie( $p_cookie_string, $p_throw = false ) {
+	if( $t_user = user_search_cache( 'cookie_string', $p_cookie_string ) ) {
+		return (int)$t_user['id'];
+	}
+
+	db_param_push();
+	$t_query = 'SELECT * FROM {user} WHERE cookie_string=' . db_param();
+	$t_result = db_query( $t_query, array( $p_cookie_string ) );
+
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
+		if( $p_throw ) {
+			throw new ClientException(
+				"User Cookie String '$p_cookie_string' not found",
+				ERROR_USER_BY_NAME_NOT_FOUND,
+				array( $p_cookie_string )
+			);
+		}
 		return false;
 	}
 
@@ -921,7 +957,7 @@ function user_get_field( $p_user_id, $p_field_name ) {
  */
 function user_get_email( $p_user_id ) {
 	$t_email = '';
-	if( LDAP == config_get_global( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
+	if( LDAP == config_get_global( 'login_method' ) && ON == config_get_global( 'use_ldap_email' ) ) {
 		$t_email = ldap_email( $p_user_id );
 	}
 	if( is_blank( $t_email ) ) {
@@ -954,7 +990,7 @@ function user_get_username( $p_user_id ) {
 function user_get_realname( $p_user_id ) {
 	$t_realname = '';
 
-	if( LDAP == config_get_global( 'login_method' ) && ON == config_get( 'use_ldap_realname' ) ) {
+	if( LDAP == config_get_global( 'login_method' ) && ON == config_get_global( 'use_ldap_realname' ) ) {
 		$t_realname = ldap_realname( $p_user_id );
 	}
 
@@ -1719,21 +1755,19 @@ function user_set_name( $p_user_id, $p_username ) {
  *   - if it is ON, generate a random password and send an email
  *      (unless the second parameter is false)
  *   - if it is OFF, set the password to blank
- *  Return false if the user is protected, true if the password was
- *   successfully reset
  *
  * @param integer $p_user_id    A valid user identifier.
  * @param boolean $p_send_email Whether to send confirmation email.
- * @return boolean
+ * @return boolean True if the password was successfully reset
+ *                 False if the user is protected.
+ * @throws ClientException
  */
 function user_reset_password( $p_user_id, $p_send_email = true ) {
-	$t_protected = user_get_field( $p_user_id, 'protected' );
-
-	# Go with random password and email it to the user
-	if( ON == $t_protected ) {
+	if( user_is_protected( $p_user_id ) ) {
 		return false;
 	}
 
+	# Go with random password and email it to the user
 	# @@@ do we want to force blank password instead of random if
 	#      email notifications are turned off?
 	#     How would we indicate that we had done this with a return value?
@@ -1743,6 +1777,11 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 		$t_email = user_get_field( $p_user_id, 'email' );
 		if( is_blank( $t_email ) ) {
 			trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
+			throw new ClientException(
+				sprintf( "User id '%d' does not have an e-mail address.", (int)$p_user_id ),
+				ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED,
+				array( (int)$p_user_id )
+			);
 		}
 
 		# Create random password
@@ -1755,7 +1794,7 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 		if( $p_send_email ) {
 			$t_confirm_hash = auth_generate_confirm_hash( $p_user_id );
 			token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $p_user_id );
-			email_send_confirm_hash_url( $p_user_id, $t_confirm_hash );
+			email_send_confirm_hash_url( $p_user_id, $t_confirm_hash, true );
 		}
 	} else {
 		# use blank password, no emailing

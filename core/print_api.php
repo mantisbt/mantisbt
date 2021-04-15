@@ -354,7 +354,6 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 ?>
 	<form method="post" action="tag_attach.php" class="form-inline">
 	<?php echo form_security_field( 'tag_attach' )?>
-	<label class="inline small"><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
 	<input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" class="input-sm" />
 	<?php print_tag_input( $p_bug_id, $p_string ); ?>
 	<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="btn btn-primary btn-sm btn-white btn-round" />
@@ -365,12 +364,18 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 
 /**
  * Print the separator comment, input box, and existing tag dropdown menu.
- * @param integer $p_bug_id A bug identifier.
+ *
+ * @param integer $p_bug_id A bug identifier. If not specified or 0, the
+ *                          dropdown list will include all available tags;
+ *                          otherwise tags attached to the given bug will
+ *                          be excluded.
  * @param string  $p_string Default contents of the input box.
+ *
  * @return void
  */
 function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 ?>
+	<label class="inline small"><?php printf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
 	<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
 	<input type="text" name="tag_string" id="tag_string" class="input-sm" size="40" value="<?php echo string_attribute( $p_string )?>" />
 	<select class="input-sm" <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" class="input-sm">
@@ -428,7 +433,7 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 }
 
 /**
- * Get current headlines and id  prefix with v_
+ * Get current headlines and id prefix with v_
  * @return void
  */
 function print_news_item_option_list() {
@@ -494,21 +499,23 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	<div class="widget-box <?php echo $t_news_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-edit"></i>
+				<?php print_icon( 'fa-edit', 'ace-icon' ); ?>
 				<?php echo $t_headline ?>
 			</h4>
 			<div class="widget-toolbar">
 				<a data-action="collapse" href="#">
-					<i class="ace-icon fa fa-chevron-up bigger-125"></i>
+					<?php print_icon( 'fa-chevron-up', 'ace-icon bigger-125' ); ?>
 				</a>
 			</div>
 		</div>
 
 		<div class="widget-body">
 			<div class="widget-toolbox padding-8 clearfix">
-				<i class="fa fa-user"></i> <?php echo prepare_user_name( $p_poster_id ); ?>
+				<?php print_icon( 'fa-user' ); ?>
+				<?php echo prepare_user_name( $p_poster_id ); ?>
 				&#160;&#160;&#160;&#160;
-				<i class="fa fa-clock-o"></i> <?php echo $t_date_posted; ?>
+				<?php print_icon( 'fa-clock-o' ); ?>
+				<?php echo $t_date_posted; ?>
 			</div>
 			<div class="widget-main">
 				<?php
@@ -636,7 +643,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
  * @return void
  */
 function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
-	if ( config_get( 'subprojects_enabled' ) == OFF ) {
+	if ( config_get_global( 'subprojects_enabled' ) == OFF ) {
 		return;
 	}
 
@@ -653,7 +660,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 		}
 
 		if( $p_trace ) {
-			$t_full_id = join( $p_parents, ';' ) . ';' . $t_id;
+			$t_full_id = implode( ';', $p_parents ) . ';' . $t_id;
 		} else {
 			$t_full_id = $t_id;
 		}
@@ -754,25 +761,32 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		echo '<option value="0"';
 		check_selected( $p_category_id, 0 );
 		echo '>';
-		echo category_full_name( 0, false ), '</option>';
+		echo category_full_name( 0, false );
+		echo '</option>', PHP_EOL;
 	} else {
 		if( 0 == $p_category_id ) {
 			if( count( $t_cat_arr ) == 1 ) {
 				$p_category_id = (int) $t_cat_arr[0]['id'];
 			} else {
-				echo '<option value="0"';
-				echo check_selected( $p_category_id, 0 );
+				echo '<option value="0" disabled hidden';
+				check_selected( $p_category_id, 0 );
 				echo '>';
-				echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
+				echo string_attribute( lang_get( 'select_option' ) );
+				echo '</option>', PHP_EOL;
 			}
 		}
 	}
 
 	foreach( $t_cat_arr as $t_category_row ) {
 		$t_category_id = (int)$t_category_row['id'];
+		$t_category_name = category_full_name(
+			$t_category_id,
+			$t_category_row['project_id'] != $t_project_id
+		);
 		echo '<option value="' . $t_category_id . '"';
 		check_selected( $p_category_id, $t_category_id );
-		echo '>' . string_attribute( category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ) ) . '</option>';
+		echo '>';
+		echo string_attribute( $t_category_name ), '</option>', PHP_EOL;
 	}
 }
 
@@ -955,6 +969,7 @@ function print_build_option_list( $p_build = '' ) {
 function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	$t_config_var_name = $p_enum_name . '_enum_string';
 	$t_config_var_value = config_get( $t_config_var_name );
+	$t_string_var = lang_get( $t_config_var_name );
 
 	if( is_array( $p_val ) ) {
 		$t_val = $p_val;
@@ -965,11 +980,11 @@ function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 
 	foreach ( $t_enum_values as $t_key ) {
-		$t_elem2 = get_enum_element( $p_enum_name, $t_key );
+		$t_label = MantisEnum::getLocalizedLabel( $t_config_var_value, $t_string_var, $t_key );
 
 		echo '<option value="' . $t_key . '"';
 		check_selected( $t_val, $t_key );
-		echo '>' . string_html_specialchars( $t_elem2 ) . '</option>';
+		echo '>' . string_html_specialchars( $t_label ) . '</option>';
 	}
 }
 
@@ -1166,7 +1181,6 @@ function print_project_user_list_option_list2( $p_user_id ) {
 					u.user_id IS NULL
 				ORDER BY p.name';
 	$t_result = db_query( $t_query, array( (int)$p_user_id, true ) );
-	$t_category_count = db_num_rows( $t_result );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_project_name = string_attribute( $t_row['name'] );
 		$t_user_id = $t_row['id'];
@@ -1215,7 +1229,6 @@ function print_custom_field_projects_list( $p_field_id ) {
 
 	foreach( $t_project_ids as $t_project_id ) {
 		$t_project_name = project_get_field( $t_project_id, 'name' );
-		$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
 		echo '<strong>', string_display_line( $t_project_name ), '</strong>: ';
 		print_extra_small_button( 'manage_proj_custom_field_remove.php?field_id=' . $c_field_id . '&project_id=' . $t_project_id . '&return=custom_field' . $t_security_token, lang_get( 'remove_link' ) );
 		echo '<br />- ';
@@ -1252,12 +1265,14 @@ function print_custom_field_projects_list( $p_field_id ) {
  * @return void
  */
 function print_plugin_priority_list( $p_priority ) {
-	if( $p_priority < 1 || $p_priority > 5 ) {
+	if( $p_priority < PLUGIN_PRIORITY_LOW || $p_priority > PLUGIN_PRIORITY_HIGH ) {
 		echo '<option value="', $p_priority, '" selected="selected">', $p_priority, '</option>';
 	}
 
-	for( $i = 5;$i >= 1;$i-- ) {
-		echo '<option value="', $i, '" ', check_selected( $p_priority, $i ), ' >', $i, '</option>';
+	for( $i = PLUGIN_PRIORITY_HIGH; $i >= PLUGIN_PRIORITY_LOW; $i-- ) {
+		echo '<option value="', $i, '"';
+		check_selected( $p_priority, $i );
+		echo '>', $i, '</option>';
 	}
 }
 
@@ -1365,7 +1380,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
  * @param string  $p_class         The CSS class of the link.
  * @return void
  */
-function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = ALL, $p_search, $p_show_disabled = 0, $p_class = '' ) {
+function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = 'ALL', $p_search = '', $p_show_disabled = 0, $p_class = '' ) {
 	if( $p_sort_by == $p_field ) {
 		# If this is the selected field flip the order
 		if( 'ASC' == $p_dir || ASCENDING == $p_dir ) {
@@ -1432,7 +1447,6 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = nu
 	# instead of via $p_action_page (GET). Then only add the CSRF form token if
 	# arguments are being sent via the POST method.
 	echo '<form method="post" action="', htmlspecialchars( $p_action_page ), '" class="form-inline inline single-button-form">';
-	echo '<fieldset>';
 	if( $p_security_token !== OFF ) {
 		echo form_security_field( $t_form_name[0], $p_security_token );
 	}
@@ -1445,7 +1459,6 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = nu
 	if( $p_args_to_post ) {
 		print_hidden_inputs( $p_args_to_post );
 	}
-	echo '</fieldset>';
 	echo '</form>';
 }
 
@@ -1742,7 +1755,7 @@ function print_signup_link() {
  * @return void
  */
 function print_login_link() {
-	print_link_button( auth_login_page(), lang_get( 'login_title' ) );
+	print_link_button( auth_login_page(), lang_get( 'login' ) );
 }
 
 /**
@@ -1767,7 +1780,11 @@ function print_lost_password_link() {
  */
 function print_file_icon( $p_filename ) {
 	$t_icon = file_get_icon_url( $p_filename );
-	echo '<i class="fa ' . string_attribute( $t_icon['url'] ) . '" title="' . string_attribute( $t_icon['alt'] ) . ' file icon" ></i>';
+	print_icon(
+		string_attribute( $t_icon['url'] ),
+		'',
+		sprintf( lang_get( 'file_icon_description' ), string_attribute( $t_icon['alt'] ) )
+	);
 }
 
 /**
@@ -1778,7 +1795,9 @@ function print_file_icon( $p_filename ) {
  * @return void
  */
 function print_rss( $p_feed_url, $p_title = '' ) {
-	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><i class="fa fa-rss fa-lg orange" title="', $p_title, '"></i></a>';
+	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '">';
+	print_icon( 'fa-rss', 'fa-lg orange', $p_title );
+	echo '</a>';
 }
 
 /**
@@ -1877,11 +1896,17 @@ function print_bug_attachments_list( $p_bug_id, $p_security_token ) {
  * @return void
  */
 function print_bug_attachment( array $p_attachment, $p_security_token ) {
-	if( $p_attachment['preview'] ) {
+	echo '<div class="well well-xs">';
+
+	if( $p_attachment['preview'] || $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
-		$g_collapse_cache_token[$t_collapse_id] = $p_attachment['type'] == 'image';
-		collapse_open( $t_collapse_id );
+		$g_collapse_cache_token[$t_collapse_id] = 
+			$p_attachment['type'] == 'image' ||
+			$p_attachment['type'] == 'audio' ||
+			$p_attachment['type'] == 'video';
+
+		collapse_open( $t_collapse_id, '');
 	}
 
 	print_bug_attachment_header( $p_attachment, $p_security_token );
@@ -1889,19 +1914,49 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 	if( $p_attachment['preview'] ) {
 		echo lang_get( 'word_separator' );
 		collapse_icon( $t_collapse_id );
-		if( $p_attachment['type'] == 'text' ) {
-			print_bug_attachment_preview_text( $p_attachment );
-		} else if( $p_attachment['type'] === 'image' ) {
-			print_bug_attachment_preview_image( $p_attachment );
+
+		switch( $p_attachment['type'] ) {
+			case 'text':
+				print_bug_attachment_preview_text( $p_attachment );
+				break;
+			case 'image':
+				print_bug_attachment_preview_image( $p_attachment );
+				break;
+			case 'audio':
+			case 'video':
+				print_bug_attachment_preview_audio_video(
+					$p_attachment, $p_attachment['file_type'], $p_attachment['preview'] );
+				break;
 		}
-		collapse_closed( $t_collapse_id );
+
+		collapse_closed( $t_collapse_id, '' );
+
 		print_bug_attachment_header( $p_attachment, $p_security_token );
 		echo lang_get( 'word_separator' );
 		collapse_icon( $t_collapse_id );
 		collapse_end( $t_collapse_id );
 	} else {
-		echo '<br />';
+		# Audio / Video support showing control without preloading.
+		if( $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
+			echo lang_get( 'word_separator' );
+			collapse_icon( $t_collapse_id );
+	
+			print_bug_attachment_preview_audio_video(
+				$p_attachment,
+				$p_attachment['file_type'],
+				$p_attachment['preview'] );
+	
+			collapse_closed( $t_collapse_id );
+			print_bug_attachment_header( $p_attachment, $p_security_token );
+			echo lang_get( 'word_separator' );
+			collapse_icon( $t_collapse_id );
+			collapse_end( $t_collapse_id );	
+		} else {
+			echo '<br />';
+		}
 	}
+
+	echo '</div>';
 }
 
 /**
@@ -1912,12 +1967,12 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
  * a valid security token, previously generated by form_security_token().
  * Use this to avoid performance issues when loading pages having many calls to
  * this function, such as print_bug_attachments_list().
- * @param array $p_attachment An attachment array from within the array returned by the file_get_visible_attachments() function.
+ * @param array $p_attachment An attachment array from within the array returned by
+ *              the file_get_visible_attachments() function.
  * @param string $p_security_token The security token to use for deleting attachments.
  * @return void
  */
 function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
-	echo "\n";
 	if( $p_attachment['exists'] ) {
 		if( $p_attachment['can_download'] ) {
 			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
@@ -1943,16 +1998,18 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 	}
 
 	if( $p_attachment['can_delete'] ) {
-		echo '<a class="noprint" href="bug_file_delete.php?file_id=' . $p_attachment['id'] .
-			form_security_param( 'bug_file_delete', $p_security_token ) . '">
-			<i class="1 ace-icon fa fa-trash-o"></i></a>';
+		echo '<a class="noprint red zoom-130 pull-right" '
+			. 'href="bug_file_delete.php?file_id=' . $p_attachment['id']
+			. form_security_param( 'bug_file_delete', $p_security_token ) . '">';
+		print_icon( 'fa-trash-o', '1 ace-icon bigger-115' );
+		echo '</a>';
 	}
-
 }
 
 /**
  * Prints the preview of a text file attachment.
- * @param array $p_attachment An attachment array from within the array returned by the file_get_visible_attachments() function.
+ * @param array $p_attachment An attachment array from within the array returned by
+ *              the file_get_visible_attachments() function.
  * @return void
  */
 function print_bug_attachment_preview_text( array $p_attachment ) {
@@ -1982,7 +2039,8 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 
 /**
  * Prints the preview of an image file attachment.
- * @param array $p_attachment An attachment array from within the array returned by the file_get_visible_attachments() function.
+ * @param array $p_attachment An attachment array from within the array returned by
+ *              the file_get_visible_attachments() function.
  * @return void
  */
 function print_bug_attachment_preview_image( array $p_attachment ) {
@@ -2002,8 +2060,31 @@ function print_bug_attachment_preview_image( array $p_attachment ) {
 
 	echo "\n<div class=\"bug-attachment-preview-image\">";
 	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
-	echo '<img src="' . string_attribute( $t_image_url ) . '" alt="' . string_attribute( $t_title ) . '" style="' . string_attribute( $t_preview_style ) . '" />';
+	echo '<img src="' . string_attribute( $t_image_url ) . '" alt="' . string_attribute( $t_title ) . '" loading="lazy" style="' . string_attribute( $t_preview_style ) . '" />';
 	echo '</a></div>';
+}
+
+/**
+ * Prints the preview of an audio/video file attachment.
+ * @param array $p_attachment An attachment array from within the array returned by
+ *              the file_get_visible_attachments() function.
+ * @param string $p_file_type mime type
+ * @param boolean $p_preload true to preload audio/video, false otherwise.
+ * @return void
+ */
+function print_bug_attachment_preview_audio_video( array $p_attachment, $p_file_type, $p_preload ) {
+	$t_file_url = $p_attachment['download_url'] . '&show_inline=1' . form_security_param( 'file_show_inline' );
+	$t_preload = $p_preload ? '' : ' preload="none"';
+
+	$t_type = $p_attachment['type'];
+
+	echo "\n<div class=\"bug-attachment-preview-" . $t_type . "\">";
+	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
+	echo '<' . $t_type . ' controls="controls"' . $t_preload . '>';
+	echo '<source src="' . string_attribute( $t_file_url ) . '" type="' . string_attribute( $p_file_type ) . '">';
+  	echo lang_get( 'browser_does_not_support_' . $t_type );
+	echo '</' . $t_type . '>';
+	echo "</a></div>";
 }
 
 /**
@@ -2045,21 +2126,20 @@ function print_timezone_option_list( $p_timezone ) {
  * @return string
  */
 function get_filesize_info( $p_size, $p_unit ) {
-	return sprintf( lang_get( 'file_size_info' ), number_format( $p_size ), $p_unit );
+	return sprintf( lang_get( 'max_file_size_info' ), number_format( $p_size ), $p_unit );
 }
 
 /**
- * Print maximum file size information
+ * Print maximum file size information.
+ *
  * @param integer $p_size    Size in bytes.
- * @param integer $p_divider Optional divider, defaults to 1000.
- * @param string  $p_unit    Optional language string of unit, defaults to KB.
+ * @param integer $p_divider Optional divider, defaults to 1024.
+ * @param string  $p_unit    Optional language string of unit, defaults to KiB.
  * @return void
  */
-function print_max_filesize( $p_size, $p_divider = 1000, $p_unit = 'kb' ) {
+function print_max_filesize( $p_size, $p_divider = 1024, $p_unit = 'kib' ) {
 	echo '<span class="small" title="' . get_filesize_info( $p_size, lang_get( 'bytes' ) ) . '">';
-	echo lang_get( 'max_file_size_label' )
-		. lang_get( 'word_separator' )
-		. get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
+	echo get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
 	echo '</span>';
 }
 
@@ -2131,3 +2211,51 @@ function print_button( $p_action_page, $p_label, array $p_args_to_post = null, $
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	print_form_button( $p_action_page, $p_label, $p_args_to_post, $p_security_token );
 }
+
+/**
+ * Generate an html option list for the given array
+ * @param array  $p_array        Array.
+ * @param string $p_filter_value The selected value.
+ * @return void
+ */
+function print_option_list_from_array( array $p_array, $p_filter_value ) {
+	foreach( $p_array as $t_key => $t_value ) {
+		echo '<option value="' . $t_key . '"';
+		check_selected( (string)$p_filter_value, (string)$t_key );
+		echo '>' . string_attribute( $t_value ) . '</option>' . "\n";
+	}
+}
+
+/**
+ * Print HTML relationship listbox
+ *
+ * @param integer $p_default_rel_type Relationship Type (default -1).
+ * @param string  $p_select_name      List box name (default "rel_type").
+ * @param boolean $p_include_any      Include an ANY option in list box (default false).
+ * @param boolean $p_include_none     Include a NONE option in list box (default false).
+ * @param string  $p_input_css        CSS classes to use with input fields
+ * @return void
+ */
+function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = 'rel_type', $p_include_any = false, $p_include_none = false, $p_input_css = "input-sm" ) {
+	global $g_relationships;
+	?>
+<select class="<?php echo $p_input_css ?>" name="<?php echo $p_select_name?>">
+<?php if( $p_include_any ) {?>
+<option value="<?php echo BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
+<?php
+	}
+
+	if( $p_include_none ) {?>
+<option value="<?php echo BUG_REL_NONE ?>" <?php echo( $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'none' )?>]</option>
+<?php
+	}
+
+	foreach( $g_relationships as $t_type => $t_relationship ) {
+		?>
+<option value="<?php echo $t_type?>"<?php echo( $p_default_rel_type == $t_type ? ' selected="selected"' : '' )?>><?php echo lang_get( $t_relationship['#description'] )?></option>
+<?php
+	}?>
+</select>
+<?php
+}
+

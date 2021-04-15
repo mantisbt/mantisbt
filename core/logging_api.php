@@ -132,22 +132,6 @@ function log_event( $p_level, $p_msg ) {
 			global $g_log_events;
 			$g_log_events[] = array( time(), $p_level, $t_event, $t_caller);
 			break;
-		case 'firebug':
-			if( !class_exists( 'FirePHP' ) ) {
-				if( file_exists( config_get_global( 'library_path' ) . 'FirePHPCore/FirePHP.class.php' ) ) {
-					require_lib( 'FirePHPCore/FirePHP.class.php' );
-				}
-			}
-			if( class_exists( 'FirePHP' ) ) {
-				static $s_firephp;
-				if( $s_firephp === null ) {
-					$s_firephp = FirePHP::getInstance( true );
-				}
-				# Don't use $t_msg, let FirePHP format the message
-				$s_firephp->log( $p_msg, $t_now . ' ' . $t_level );
-				return;
-			}
-			# if firebug is not available, fall through
 		default:
 			# use default PHP error log settings
 			error_log( $t_php_event . PHP_EOL );
@@ -186,7 +170,7 @@ function log_print_to_page() {
 		echo "\t<div class=\"widget-box widget-color-red\">\n";
 		echo "\t<div class=\"widget-header widget-header-small\">\n";
 		echo "\t<h4 class=\"widget-title lighter\">\n";
-		echo "\t<i class=\"ace-icon fa fa-flag-o\"></i>\n";
+		echo "\t" . icon_get( 'fa-flag-o', 'ace-icon' ) . "\n";
 		echo "Debug Log";
 		echo "</h4>\n";
 		echo "</div>\n";

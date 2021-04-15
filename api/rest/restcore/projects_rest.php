@@ -20,8 +20,13 @@
  * @package MantisBT
  * @copyright Copyright MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpFullyQualifiedNameUsageInspection
  */
 
+/**
+ * @var \Slim\App $g_app
+ */
 $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_projects_get' );
 	$g_app->get( '/', 'rest_projects_get' );
@@ -232,15 +237,19 @@ function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Htt
 /**
  * A method to add a new project.
  *
- * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Request  $p_request  The request.
  * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param array               $p_args     Arguments
+ *
  * @return \Slim\Http\Response The augmented response.
+ *
+ * @throws \Mantis\Exceptions\LegacyApiFaultException
+ * @noinspection PhpUnusedParameterInspection
  */
 function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
-	if( $t_payload === null ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Unable to parse body, specify content type" );
+	if( !$t_payload ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
 	}
 
 	$t_project_id = mc_project_add( /* username */ '', /* password */ '', (object) $t_payload );
@@ -257,10 +266,13 @@ function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 /**
  * A method to update a project.
  *
- * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Request  $p_request  The request.
  * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param array               $p_args     Arguments
+ *
  * @return \Slim\Http\Response The augmented response.
+ *
+ * @throws \Mantis\Exceptions\LegacyApiFaultException
  */
 function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
@@ -274,6 +286,9 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 	}
 
 	$t_project_patch = $p_request->getParsedBody();
+	if( !$t_project_patch ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+	}
 
 	if( isset( $t_project_patch['id'] ) && $t_project_patch['id'] != $t_project_id ) {
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Project id mismatch" );

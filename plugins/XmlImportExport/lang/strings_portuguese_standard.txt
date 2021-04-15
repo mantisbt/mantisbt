@@ -44,6 +44,7 @@
  * @author MokaAkashiyaPT
  * @author Vitorvicentevalente
  * @author Waldir
+ * @author Waldyrious
  */
 
 $s_plugin_XmlImportExport_title = 'Importar/Exportar incidências';

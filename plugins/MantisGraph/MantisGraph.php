@@ -24,24 +24,42 @@
 class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
-	 * ChartJS colorschemes plugin
-	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/
+	 * Chart JS
+	 * @see https://www.chartjs.org/ Home page
+	 * @see https://www.jsdelivr.com/package/npm/chart.js CDN
+	 *
+	 * Not using the bundled build anymore, as MantisBT Layout API already
+	 * includes Moment.js, and per documentation this could cause issues.
+	 * @see https://www.chartjs.org/docs/latest/getting-started/installation.html#bundled-build
 	 */
-	const CHARTJS_COLORSCHEMES_VERSION = '0.3.0';
-	const CHARTJS_COLORSCHEMES_HASH = 'sha256-x/VBrVFabQZyhV1G+oKCy98gkqf/pW5aVAhaBRxJ/x4=';
+	const CHARTJS_VERSION = '2.9.3';
+	const CHARTJS_HASH = 'sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=';
+
+	/**
+	 * ChartJS colorschemes plugin
+	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/ Home page
+	 * @see https://www.jsdelivr.com/package/npm/chartjs-plugin-colorschemes CDN
+	 */
+	const CHARTJS_COLORSCHEMES_VERSION = '0.4.0';
+	const CHARTJS_COLORSCHEMES_HASH = 'sha256-Ctym065YsaugUvysT5nHayKynbiDGVpgNBqUePRAL+0=';
+
+	/**
+	 * CDN for Chart.JS libraries
+	 */
+	const CHARTJS_CDN = 'https://cdn.jsdelivr.net';
 
 	/**
 	 * A method that populates the plugin information and minimum requirements.
 	 * @return void
 	 */
 	function register() {
-		$this->name = lang_get( 'plugin_graph_title' );
-		$this->description = lang_get( 'plugin_graph_description' );
+		$this->name = plugin_lang_get( 'title' );
+		$this->description = plugin_lang_get( 'description' );
 		$this->page = '';
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = array(
-			'MantisCore' => '2.0.0',
+			'MantisCore' => '2.25.0',
 		);
 
 		$this->author = 'MantisBT Team';
@@ -68,6 +86,16 @@ class MantisGraphPlugin extends MantisPlugin  {
 	}
 
 	/**
+	 * Plugin events
+	 * @return array
+	 */
+	function events() {
+		return array(
+			'EVENT_MANTISGRAPH_SUBMENU'=> EVENT_TYPE_DEFAULT,
+		);
+	}
+
+	/**
 	 * plugin hooks
 	 * @return array
 	 */
@@ -76,7 +104,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 			'EVENT_REST_API_ROUTES' => 'routes',
 			'EVENT_LAYOUT_RESOURCES' => 'resources',
 			'EVENT_CORE_HEADERS' => 'csp_headers',
-			'EVENT_SUBMENU_SUMMARY' => 'summary_submenu',
+			'EVENT_MENU_SUMMARY' => 'summary_menu',
 			'EVENT_MENU_FILTER' => 'graph_filter_menu'
 		);
 		return $t_hooks;
@@ -85,8 +113,8 @@ class MantisGraphPlugin extends MantisPlugin  {
 	/**
 	 * Add the RESTful routes that are handled by this plugin.
 	 *
-	 * @param $p_event_name The event name
-	 * @param $p_event_args The event arguments
+	 * @param string $p_event_name The event name
+	 * @param array  $p_event_args The event arguments
 	 * @return void
 	 */
 	function routes( $p_event_name, $p_event_args ) {
@@ -115,8 +143,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function csp_headers() {
 		if( config_get_global( 'cdn_enabled' ) == ON ) {
-			http_csp_add( 'script-src', 'https://cdnjs.cloudflare.com' );
-			http_csp_add( 'script-src', 'https://cdn.jsdelivr.net' );
+			http_csp_add( 'script-src', self::CHARTJS_CDN );
 		}
 	}
 
@@ -129,7 +156,39 @@ class MantisGraphPlugin extends MantisPlugin  {
 			return array( '<a class="btn btn-sm btn-primary btn-white btn-round" href="' .
 				plugin_page( 'issues_trend_page.php' ) . '">' . plugin_lang_get( 'issue_trends_link' ) . '</a>', );
 		} else {
-			return '';
+			return array();
+		}
+	}
+
+	/**
+	 * Include Chart.js and plugins.
+	 *
+	 * This function can be called by other plugins that may need to use
+	 * Chart.js.
+	 *
+	 * @return void
+	 */
+	function include_chartjs() {
+		if( config_get_global( 'cdn_enabled' ) == ON ) {
+			$t_cdn_url = self::CHARTJS_CDN . '/npm/%s@%s/dist/';
+
+			# Chart.js library
+			$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
+			html_javascript_cdn_link( $t_link . 'Chart.min.js', self::CHARTJS_HASH );
+
+			# Chart.js color schemes plugin
+			$t_link = sprintf( $t_cdn_url, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
+			html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
+		} else {
+			$t_scripts = array(
+				'Chart-' . self::CHARTJS_VERSION . '.min.js',
+				'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js',
+			);
+			foreach( $t_scripts as $t_script ) {
+				printf( "\t<script src=\"%s\"></script>\n",
+					plugin_file( $t_script, false, $this->basename )
+				);
+			}
 		}
 	}
 
@@ -139,85 +198,93 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function resources() {
 		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
-			if( config_get_global( 'cdn_enabled' ) == ON ) {
-				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH);
-				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH);
-				html_javascript_cdn_link('https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@' . self::CHARTJS_COLORSCHEMES_VERSION . '/dist/chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
-			} else {
-				echo '<script type="text/javascript" src="' . plugin_file('Chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
-				echo '<script type="text/javascript" src="' . plugin_file('Chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
-				echo '<script type="text/javascript" src="' . plugin_file( 'chartjs-plugin-colorschemes.min.js' ) . '"></script>';
-			}
-			echo '<script type="text/javascript" src="' . plugin_file("MantisGraph.js") . '"></script>';
+			$this->include_chartjs();
+			printf( "\t<script src=\"%s\"></script>\n",
+				plugin_file( 'MantisGraph.js' )
+			);
 		}
 	}
 
 	/**
-	 * generate summary submenu
+	 * Retrieve a link to a plugin page with temporary filter parameter.
+	 * @param string $p_page Plugin page name
+	 * @return string
+	 */
+	private function get_url_with_filter( $p_page ) {
+		static $s_filter_param;
+
+		if( $s_filter_param === null ) {
+			$t_filter = summary_get_filter();
+			$s_filter_param = filter_get_temporary_key_param( $t_filter );
+		}
+
+		return helper_url_combine( plugin_page( $p_page ), $s_filter_param );
+	}
+
+	/**
+	 * Event hook to add the plugin's tab to the Summary page menu.
 	 * @return array
 	 */
-	function summary_submenu() {
-		$t_filter = summary_get_filter();
-		$t_filter_param = filter_get_temporary_key_param( $t_filter );
+	function summary_menu() {
+		$t_menu_items[] = '<a href="'
+			. $this->get_url_with_filter( 'developer_graph.php' )
+			. '">'
+			. plugin_lang_get( 'tab_label' )
+			. '</a>';
+		return $t_menu_items;
+	}
+
+	/**
+	 * Print the plugin's submenu
+	 */
+	function print_submenu() {
+		$t_menu_items = array(
+			'developer_graph.php' => array(
+				'icon' => 'fa-bar-chart',
+				'label' => lang_get( 'by_developer' ),
+				'url' => $this->get_url_with_filter( 'developer_graph.php' ),
+			),
+			'reporter_graph.php' => array(
+				'icon' => 'fa-bar-chart',
+				'label' => lang_get( 'by_reporter' ),
+				'url' => $this->get_url_with_filter( 'reporter_graph.php' ),
+			),
+			'status_graph.php' => array(
+				'icon' => 'fa-bar-chart',
+				'label' => plugin_lang_get( 'status_link' ),
+				'url' => $this->get_url_with_filter( 'status_graph.php' ),
+			),
+			'resolution_graph.php' => array(
+				'icon' => 'fa-bar-chart',
+				'label' => plugin_lang_get( 'resolution_link' ),
+				'url' => $this->get_url_with_filter( 'resolution_graph.php' ),
+			),
+			'priority_graph.php' => array(
+				'icon' => 'fa-bar-chart',
+				'label' => plugin_lang_get( 'priority_link' ),
+				'url' => $this->get_url_with_filter( 'priority_graph.php' ),
+			),
+			'severity_graph.php' => array(
+				'icon' => 'fa-bar-chart',
+				'label' => plugin_lang_get( 'severity_link' ),
+				'url' => $this->get_url_with_filter( 'severity_graph.php' ),
+			),
+			'category_graph.php' => array(
+				'icon' => 'fa-bar-chart',
+				'label' => plugin_lang_get( 'category_link' ),
+				'url' => $this->get_url_with_filter( 'category_graph.php' ),
+			),
+			'issues_trend_graph.php' => array(
+				'icon' => 'fa-bar-chart',
+				'label' => plugin_lang_get( 'issue_trends_link' ),
+				'url' => $this->get_url_with_filter( 'issues_trend_graph.php' ),
+			),
+		);
+
+		# Retrieve current page
 		$t_param_page = explode( '/', gpc_get_string( 'page', '' ) );
 		$t_plugin_page_current = end( $t_param_page );
 
-		# Core should implement the automatic highlighting of active links, but that requires
-		# changing the format of the menu and submenu events.
-		# For now, it's responsability of the plugin to detect and render each link properly.
-		$t_menu_items = array();
-		$t_menu_items[] = array( 'icon' => 'fa-table', 'title' => plugin_lang_get( 'synthesis_link' ),
-			'url' => helper_url_combine( helper_mantis_url( 'summary_page.php' ), $t_filter_param ) );
-
-		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => lang_get( 'by_developer' ),
-			'url' => helper_url_combine( plugin_page( 'developer_graph.php' ), $t_filter_param ),
-			'plugin_page' => 'developer_graph.php' );
-
-		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => lang_get( 'by_reporter' ),
-			'url' => helper_url_combine( plugin_page( 'reporter_graph.php' ), $t_filter_param ),
-			'plugin_page' => 'reporter_graph.php' );
-
-		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'status_link' ),
-			'url' => helper_url_combine( plugin_page( 'status_graph.php' ), $t_filter_param ),
-			'plugin_page' => 'status_graph.php' );
-
-		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'resolution_link' ),
-			'url' => helper_url_combine( plugin_page( 'resolution_graph.php' ), $t_filter_param ),
-			'plugin_page' => 'resolution_graph.php' );
-
-		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'priority_link' ),
-			'url' => helper_url_combine( plugin_page( 'priority_graph.php' ), $t_filter_param ),
-			'plugin_page' => 'priority_graph.php' );
-
-		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'severity_link' ),
-			'url' => helper_url_combine( plugin_page( 'severity_graph.php' ), $t_filter_param ),
-			'plugin_page' => 'severity_graph.php' );
-
-		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'category_link' ),
-			'url' => helper_url_combine( plugin_page( 'category_graph.php' ), $t_filter_param ),
-			'plugin_page' => 'category_graph.php' );
-
-		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'issue_trends_link' ),
-			'url' => helper_url_combine( plugin_page( 'issues_trend_graph.php' ), $t_filter_param ),
-			'plugin_page' => 'issues_trend_graph.php' );
-
-		$t_html_links = array();
-		foreach( $t_menu_items as $t_item ) {
-			$t_class_active = '';
-			if( isset( $t_item['plugin_page'] ) )  {
-				if( $t_item['plugin_page'] == $t_plugin_page_current ) {
-					$t_class_active = ' active';
-				}
-			} else {
-				if( 'summary_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
-					$t_class_active = ' active';
-				}
-			}
-			$t_html = '<a class="btn btn-sm btn-primary btn-white' . $t_class_active . '" href="' . $t_item['url'] . '">';
-			$t_html .= ' <i class="fa ' . $t_item['icon'] . '"></i> ';
-			$t_html .= $t_item['title'] . '</a>';
-			$t_html_links[] = $t_html;
-		}
-		return $t_html_links;
+		print_submenu( $t_menu_items, $t_plugin_page_current, 'EVENT_MANTISGRAPH_SUBMENU' );
 	}
 }

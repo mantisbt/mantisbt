@@ -64,6 +64,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $t_type ) {
+	/** @noinspection PhpIncludeInspection */
 	require_once( config_get_global( 'core_path' ) . 'cfdefs/cfdef_' . $t_type . '.php' );
 }
 unset( $t_type );
@@ -102,7 +103,7 @@ $g_cache_cf_bug_values = array();
  * false, return false if the field can't be found.
  * @param integer $p_field_id       Integer representing custom field id.
  * @param boolean $p_trigger_errors Indicates whether to trigger an error if the field is not found.
- * @return array array representing custom field
+ * @return array|false array representing custom field
  * @access public
  */
 function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
@@ -155,12 +156,12 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 		}
 		db_param_push();
 		$t_params = array();
-		$t_in_caluse_dbparams = array();
+		$t_in_clause_dbparams = array();
 		foreach( $c_cf_id_array as $t_id) {
-			$t_in_caluse_dbparams[] = db_param();
+			$t_in_clause_dbparams[] = db_param();
 			$t_params[] = $t_id;
 		}
-		$t_where_id_in = ' IN (' . implode( ',', $t_in_caluse_dbparams ) . ')';
+		$t_where_id_in = ' IN (' . implode( ',', $t_in_clause_dbparams ) . ')';
 		$t_query = 'SELECT * FROM {custom_field} WHERE id' . $t_where_id_in;
 		$t_result = db_query( $t_query, $t_params );
 	}
@@ -192,7 +193,6 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 	foreach( $t_ids_not_found as $t_id) {
 		$g_cache_custom_field[$t_id] = false;
 	}
-	return;
 }
 
 /**
@@ -378,19 +378,19 @@ function custom_field_type( $p_field_id ) {
 }
 
 /**
- * Check to see whether the field id is defined
- * return true if the field is defined, error otherwise
+ * Check to see whether the field id is defined.
+ *
  * @param integer $p_field_id Custom field id.
- * @return boolean
+ * @return boolean true if the field is defined, error otherwise.
+ *
  * @access public
  */
 function custom_field_ensure_exists( $p_field_id ) {
-	if( custom_field_exists( $p_field_id ) ) {
-		return true;
-	} else {
+	if( !custom_field_exists( $p_field_id ) ) {
 		error_parameters( 'Custom ' . $p_field_id );
 		trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
 	}
+	return true;
 }
 
 /**
@@ -420,18 +420,18 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 }
 
 /**
- * Check to see whether the name is unique
- * return true if the name has not been used, error otherwise
+ * Check to see whether the name is unique.
+ *
  * @param string $p_name Custom field name.
- * @return boolean
+ * @return boolean true if the name has not been used, error otherwise.
+ *
  * @access public
  */
 function custom_field_ensure_name_unique( $p_name ) {
-	if( custom_field_is_name_unique( $p_name ) ) {
-		return true;
-	} else {
+	if( !custom_field_is_name_unique( $p_name ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
 	}
+	return true;
 }
 
 /**
@@ -540,35 +540,79 @@ function custom_field_create( $p_name ) {
 }
 
 /**
- * Update the field definition
- * return true on success, false on failure
+ * Update the field definition.
+ *
  * @param integer $p_field_id  Custom field identifier.
  * @param array   $p_def_array Custom field definition.
- * @return boolean
+ *
+ * @return boolean true on success, false on failure
+ *
  * @access public
  */
 function custom_field_update( $p_field_id, array $p_def_array ) {
-	if( is_blank( $p_def_array['name'] ) ) {
+	/**
+	 * @var string     $v_name
+	 * @var int        $v_type
+	 * @var string|int $v_default_value
+	 * @var int        $v_access_level_r
+	 * @var int        $v_access_level_rw
+	 * @var int        $v_length_min
+	 * @var int        $v_length_max
+	 */
+	extract( $p_def_array, EXTR_PREFIX_ALL, 'v');
+
+	if( is_blank( $v_name ) ) {
+		error_parameters( 'name' );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	} elseif( mb_strpos( $v_name, ',' ) ) {
+		# Commas are not allowed in CF name, it causes issues with columns
+		# selection (see #26665)
+		error_parameters( $v_name );
+		trigger_error( ERROR_CUSTOM_FIELD_NAME_INVALID, ERROR );
+	}
+
+	if( is_blank( $v_name ) ) {
 		error_parameters( 'name' );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if( $p_def_array['access_level_rw'] < $p_def_array['access_level_r'] ) {
+	if( $v_access_level_rw < $v_access_level_r ) {
 		error_parameters(
 			lang_get( 'custom_field_access_level_r' ) . ', ' .
 			lang_get( 'custom_field_access_level_rw' ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
 	}
 
-	if( $p_def_array['length_min'] < 0
-		|| ( $p_def_array['length_max'] != 0 && $p_def_array['length_min'] > $p_def_array['length_max'] )
+	if( $v_length_min < 0
+		|| ( $v_length_max != 0 && $v_length_min > $v_length_max )
 	) {
 		error_parameters( lang_get( 'custom_field_length_min' ) . ', ' . lang_get( 'custom_field_length_max' ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
 	}
 
-	if( !custom_field_is_name_unique( $p_def_array['name'], $p_field_id ) ) {
+	if( !custom_field_is_name_unique( $v_name, $p_field_id ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
+	}
+
+
+	# Validate default date format
+	if( $v_type == CUSTOM_FIELD_TYPE_DATE && $v_default_value && !is_numeric( $v_default_value ) ) {
+		# Allow legacy "{xxx}" format for dynamic dates
+		# @TODO this backwards-compatibility feature should be removed in a future release
+		if( preg_match( '/^{(.*)}$/', $v_default_value, $t_matches ) ) {
+			error_parameters( $v_default_value, $t_matches[1] );
+			trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+			$v_default_value = $t_matches[1];
+		}
+
+		# Check default date format and calculate actual date
+		try {
+			new DateTimeImmutable( $v_default_value );
+		}
+		catch( Exception $e ) {
+			error_parameters( lang_get( 'custom_field_default_value' ) );
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
+		}
 	}
 
 	db_param_push();
@@ -582,7 +626,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 			case 'default_value':
 			case 'valid_regexp':
 				# Possible values doesn't apply to textarea fields
-				if( $p_def_array['type'] == CUSTOM_FIELD_TYPE_TEXTAREA && $t_field == 'possible_values' ) {
+				if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA && $t_field == 'possible_values' ) {
 					$t_value = '';
 				}
 
@@ -930,7 +974,7 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	$c_bug_id = (int)$p_bug_id;
 	$c_field_id = (int)$p_field_id;
 
-	$t_row = custom_field_cache_row( $c_field_id );
+	custom_field_cache_row( $c_field_id );
 
 	# first check permissions
 	if( !custom_field_has_read_access( $c_field_id, $c_bug_id, auth_get_current_user_id() ) ) {
@@ -1413,12 +1457,15 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
 		$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
 	} else {
 		$t_custom_field_value = custom_field_get_value( $p_field_def['id'], $p_bug_id );
-		# If the custom field value is undefined and the field cannot hold a null value, use the default value instead
+		# If the custom field value is undefined, and either the field cannot hold a null value
+		# or the field is a date and is required, then use the default value instead
 		if( $t_custom_field_value === null &&
 			( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ||
 				$p_field_def['type'] == CUSTOM_FIELD_TYPE_LIST ||
 				$p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ||
-				$p_field_def['type'] == CUSTOM_FIELD_TYPE_RADIO ) ) {
+				$p_field_def['type'] == CUSTOM_FIELD_TYPE_RADIO ||
+				( $p_field_def['type'] == CUSTOM_FIELD_TYPE_DATE &&
+				  $p_required ) ) ) {
 			$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
 		}
 	}
@@ -1431,6 +1478,21 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
 	} else {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 	}
+}
+
+/*
+ * Returns a valid CSS identifier for the given custom field.
+ *
+ * The string is built based on the custom field's name, replacing any potentially
+ * unsupported character(s) by dashes `-` to ensure its validity. The resulting
+ * identifier can be used as part of a custom CSS class.
+ *
+ * @param string $p_custom_field_name The custom field's name
+ *
+ * @return string The CSS identifier
+ */
+function custom_field_css_name( $p_custom_field_name ) {
+    return 'custom-' . preg_replace( '/[^a-zA-Z0-9_-]+/', '-', $p_custom_field_name );
 }
 
 /**

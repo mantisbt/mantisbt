@@ -51,7 +51,7 @@ function trans_bool( $p_num ) {
 	if( 0 == $p_num ) {
 		return '&#160;';
 	} else {
-		return '<i class="fa fa-check fa-lg"></i>';
+		return icon_get( 'fa-check', 'fa-lg' );
 	}
 }
 

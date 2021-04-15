@@ -215,7 +215,7 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 
 /**
  * Cache version information for an array of project id's
- * @param array $p_project_id_array An array of project identifiers.
+ * @param array $p_project_ids An array of project identifiers.
  * @return void
  */
 function version_cache_array_rows( array $p_project_ids ) {
@@ -504,7 +504,7 @@ function version_remove_all( $p_project_id ) {
  * @return array Array of version rows (in array format)
  */
 function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
-	global $g_cache_versions, $g_cache_versions_project;
+	global $g_cache_versions_project;
 	if( $p_inherit === null && ON == config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) ) {
 		$t_inherit = true;
 	} else {
@@ -569,7 +569,6 @@ function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete =
  * @return integer
  */
 function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
-	global $g_cache_versions;
 
 	if( $p_project_id === null ) {
 		$c_project_id = helper_get_current_project();

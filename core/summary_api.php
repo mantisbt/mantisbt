@@ -504,7 +504,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 		$t_reporters[] = (int)$t_row['reporter_id'];
 		$t_bugs_total_count += $t_row['num'];
 		$t_reporters_count++;
-		if( $t_reporter_summary_limit > 0 && $t_reporters_count > $t_reporter_summary_limit ) {
+		if( $t_reporters_count == $t_reporter_summary_limit ) {
 			break;
 		}
 	}

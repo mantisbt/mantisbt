@@ -366,7 +366,7 @@
 				<para><emphasis>Language</emphasis>:
 					The preferred language of the user.  This
 					language is used by the GUI and in email notifications.  Note
-					that MantisBT uses UTF8 for encoding the data, hence the
+					that MantisBT uses UTF-8 for encoding the data, hence the
 					user could for example use MantisBT with a Chinese interface,
 					while logging issue data in German.
 				</para>

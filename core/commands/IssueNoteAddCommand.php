@@ -150,18 +150,6 @@ class IssueNoteAddCommand extends Command {
 
 		$t_files_included = !empty( $this->files );
 
-		if( $t_files_included ) {
-			# The UI hides the attach controls when the note is marked as private to avoid disclosure of
-			# attachments.  Attaching files to private notes can be re-enabled as proper support for protecting
-			# private attachments is implemented.
-			if( $this->private && count( $this->files ) > 0 ) {
-				throw new ClientException(
-					'Private notes with attachments not allowed',
-					ERROR_INVALID_FIELD_VALUE,
-					array( 'files' ) );
-			}
-		}
-
 		$t_time_tracking = $this->payload( 'time_tracking' );
 		if( is_array( $t_time_tracking ) && isset( $t_time_tracking['duration'] ) ) {
 			$this->time_tracking = $t_time_tracking['duration'];
@@ -242,9 +230,6 @@ class IssueNoteAddCommand extends Command {
 			$g_project_override = $this->issue->project_id;
 		}
 
-		# Handle the file upload
-		$t_file_infos = file_attach_files( $this->issue->id, $this->files );
-
 		# We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
 		# if time tracking is not 0 and the time tracking feature is enabled.
 		$t_note_id = bugnote_add(
@@ -255,17 +240,22 @@ class IssueNoteAddCommand extends Command {
 			BUGNOTE,
 			/* attr */ '',
 			/* user_id */ $this->reporterId,
-			/* send_email */ false );
+			/* send_email */ false,
+			/* date_submitted */ 0,
+			/* last_modified */ 0,
+			/* skip_bug_update */ false,
+			/* log_history */ true,
+			/* trigger_event */ false );
+
 		if( !$t_note_id ) {
 			throw new ClientException( "Unable to add note", ERROR_GENERIC );
 		}
 
+		# Handle the file upload
+		$t_file_infos = file_attach_files( $this->issue->id, $this->files, $t_note_id );
+
 		# Process the mentions in the added note
 		$t_user_ids_that_got_mention_notifications = bugnote_process_mentions( $this->issue->id, $t_note_id, $this->payload( 'text' ) );
-
-		# Send email explicitly from here to have file support, this will move into the API once we have
-		# proper bugnote files support in db schema and object model.
-		email_bugnote_add( $t_note_id, $t_file_infos, /* user_exclude_ids */ $t_user_ids_that_got_mention_notifications );
 
 		# Handle the reassign on feedback feature. Note that this feature generally
 		# won't work very well with custom workflows as it makes a lot of assumptions
@@ -282,6 +272,13 @@ class IssueNoteAddCommand extends Command {
 				bug_set_field( $this->issue->id, 'status', config_get( 'bug_submit_status' ) );
 			}
 		}
+
+		# Send email explicitly from here to have file support, this will move into the API once we have
+		# proper bugnote files support in db schema and object model.
+		email_bugnote_add( $t_note_id, $t_file_infos, /* user_exclude_ids */ $t_user_ids_that_got_mention_notifications );
+
+		# Event integration
+		event_signal( 'EVENT_BUGNOTE_ADD', array( $this->issue->id, $t_note_id, 'files' => $t_file_infos ) );
 
 		return array( 'id' => $t_note_id );
 	}

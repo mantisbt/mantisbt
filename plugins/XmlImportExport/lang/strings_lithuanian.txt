@@ -39,15 +39,17 @@
  * @file
  *
  * @author Eitvys200
+ * @author Unteez
  * @author Zygimantus
  */
 
 $s_plugin_XmlImportExport_title = 'Importuoti/eksportuoti problemas,';
-$s_plugin_XmlImportExport_import = 'Svarbios problemos';
+$s_plugin_XmlImportExport_import = 'Importuoti klaidas';
 $s_plugin_XmlImportExport_export = 'XML eksportas';
 $s_plugin_XmlImportExport_import_threshold = 'Importo klausimai';
 $s_plugin_XmlImportExport_export_threshold = 'Eksporto klausimai';
 $s_plugin_XmlImportExport_action_update = 'Atnaujinti';
+$s_plugin_XmlImportExport_importing_in_project = 'Importuoti klaidas į projektą "%s"';
 $s_plugin_XmlImportExport_import_options = 'Importo nustatymai';
 $s_plugin_XmlImportExport_cross_references = 'Kryžminės nuorodos';
 $s_plugin_XmlImportExport_link = 'Nuorodą';

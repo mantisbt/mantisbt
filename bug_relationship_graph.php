@@ -62,20 +62,27 @@ if( ON != config_get( 'relationship_graph_enable' ) ) {
 $f_bug_id		= gpc_get_int( 'bug_id' );
 $f_type			= gpc_get_string( 'graph', 'relation' );
 $f_orientation	= gpc_get_string( 'orientation', config_get( 'relationship_graph_orientation' ) );
+$f_show_summary	= gpc_get_bool( 'summary', false );
 
 if( 'relation' == $f_type ) {
 	$t_graph_type = 'relation';
+	$t_graph_type_switch = 'dependency';
 	$t_graph_relation = true;
+	$t_title = lang_get( 'relation_graph' );
 } else {
 	$t_graph_type = 'dependency';
+	$t_graph_type_switch = 'relation';
 	$t_graph_relation = false;
+	$t_title = lang_get( 'dependency_graph' );
 }
 
 if( 'horizontal' == $f_orientation ) {
 	$t_graph_orientation = 'horizontal';
+	$t_graph_orientation_switch = 'vertical';
 	$t_graph_horizontal = true;
 } else {
 	$t_graph_orientation = 'vertical';
+	$t_graph_orientation_switch = 'horizontal';
 	$t_graph_horizontal = false;
 }
 
@@ -94,103 +101,102 @@ compress_enable();
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 layout_page_begin();
 ?>
-<br />
 
-<table class="width100" cellspacing="1">
+<div class="col-md-12 col-xs-12">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-sitemap', 'ace-icon' ); ?>
+				<?php echo $t_title ?>
+			</h4>
+		</div>
 
-<tr>
-	<!-- Title -->
-	<td class="bold">
-		<?php
-		if( $t_graph_relation ) {
-			echo lang_get( 'viewing_bug_relationship_graph_title' );
-		} else {
-			echo lang_get( 'viewing_bug_dependency_graph_title' );
-		}
-		?>
-	</td>
-	<!-- Links -->
-	<td class="pull-right">
-		<!-- View Issue -->
-		<span class="small"><?php print_link_button( 'view.php?id=' . $f_bug_id, lang_get( 'view_issue' ) ) ?></span>
+		<div class="widget-body">
+			<!-- Buttons -->
+			<div class="widget-toolbox padding-8 clearfix noprint">
+				<div class="btn-group pull-left">
+<?php
+	# View Issue
 
-		<!-- Relation/Dependency Graph Switch -->
-		<span class="small">
-<?php
-		if( $t_graph_relation ) {
-			print_link_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) );
-		} else {
-			print_link_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=relation', lang_get( 'relation_graph' ) );
-		}
-?>
-		</span>
-<?php
-		if( !$t_graph_relation ) {
-?>
-		<!-- Horizontal/Vertical Switch -->
-		<span class="small">
-<?php
-		if( $t_graph_horizontal ) {
-			print_link_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=vertical', lang_get( 'vertical' ) );
-		} else {
-			print_link_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=horizontal', lang_get( 'horizontal' ) );
-		}
-?>
-		</span>
-<?php
-		}
-?>
-	</td>
-</tr>
+	print_link_button( 'view.php?id=' . $f_bug_id, lang_get( 'view_issue' ) );
 
-<tr>
-	<!-- Graph -->
-	<td colspan="2">
-<?php
-	if( $t_graph_relation ) {
-		$t_graph = relgraph_generate_rel_graph( $f_bug_id );
-	} else {
-		$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal );
+	# Relation/Dependency Graph Switch
+	print_link_button(
+		'bug_relationship_graph.php?bug_id=' . $f_bug_id
+		. '&graph=' . $t_graph_type_switch
+		. '&summary=' . $f_show_summary,
+		lang_get( $t_graph_relation ? 'dependency_graph' : 'relation_graph' )
+	);
+
+	# Horizontal/Vertical Switch
+	if( !$t_graph_relation ) {
+		print_link_button(
+			'bug_relationship_graph.php?bug_id=' . $f_bug_id
+			. '&graph=' . $t_graph_type
+			. '&orientation=' . $t_graph_orientation_switch
+			. '&summary=' . $f_show_summary,
+			lang_get( $t_graph_orientation_switch )
+		);
 	}
 
-	relgraph_output_map( $t_graph, 'relationship_graph_map' );
+	print_link_button(
+		'bug_relationship_graph.php?bug_id=' . $f_bug_id
+		. '&graph=' . $t_graph_type
+		. '&orientation=' . $t_graph_orientation
+		. '&summary=' . !$f_show_summary,
+		lang_get( $f_show_summary ? 'hide_summary' : 'show_summary' )
+	);
 ?>
-		<div class="center relationship-graph">
-			<img src="bug_relationship_graph_img.php?bug_id=<?php echo $f_bug_id ?>&amp;graph=<?php echo $t_graph_type ?>&amp;orientation=<?php echo $t_graph_orientation ?>"
-				border="0" usemap="#relationship_graph_map" />
+				</div>
+			</div>
+
+			<!-- Graph -->
+			<div class="center padding-8">
+<?php
+	if( $t_graph_relation ) {
+		$t_graph = relgraph_generate_rel_graph( $f_bug_id, $f_show_summary );
+	} else {
+		$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal, $f_show_summary );
+	}
+
+	$t_map_name = 'relationship_graph_map';
+	relgraph_output_map( $t_graph, $t_map_name );
+
+	$t_graph_src = "bug_relationship_graph_img.php?bug_id=$f_bug_id&graph=$t_graph_type&orientation=$t_graph_orientation&summary=$f_show_summary";
+?>
+				<img src="<?php echo $t_graph_src ?>"
+					 usemap="#<?php echo $t_map_name ?>"
+					 alt="<?php echo $t_title ?>"
+				/>
+			</div>
+
+			<!-- Legend -->
+			<div class="center widget-toolbox">
+<?php
+	$t_legend = array(
+		'related_to' => 'rel_related.png',
+		'blocks' => 'rel_dependant.png',
+		'duplicate_of' => 'rel_duplicate.png',
+	);
+	foreach( $t_legend as $t_key => $t_image ) {
+		$t_string = lang_get( $t_key );
+?>
+				<span class="padding-8">
+					<img alt="<?php echo $t_string ?>" src="images/<?php echo $t_image ?>" />
+					<?php echo $t_string ?>
+				</span>
+<?php
+	}
+?>
+			</div>
 		</div>
-	</td>
-</tr>
+	</div>
 
-<tr>
-	<!-- Legend -->
-	<td colspan="2">
-		<table class="hide">
-		<tr>
-			<td class="center">
-				<img alt="" src="images/rel_related.png" />
-				<?php echo lang_get( 'related_to' ) ?>
-			</td>
-			<td class="center">
-				<img alt="" src="images/rel_dependant.png" />
-				<?php echo lang_get( 'blocks' ) ?>
-			</td>
-			<td class="center">
-				<img alt="" src="images/rel_duplicate.png" />
-				<?php echo lang_get( 'duplicate_of' ) ?>
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-
-</table>
-
-<br />
+	<div class="space-10"></div>
+</div>
 
 <?php
 $_GET['id'] = $f_bug_id;
-$t_fields_config_option = 'bug_view_page_fields';
 $t_show_page_header = false;
 $t_force_readonly = true;
 $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;

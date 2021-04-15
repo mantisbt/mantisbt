@@ -132,7 +132,7 @@ $t_lang_assigned_to = lang_get( 'assigned_to' );
 $t_lang_platform = lang_get( 'platform' );
 $t_lang_due_date = lang_get( 'due_date' );
 $t_lang_os = lang_get( 'os' );
-$t_lang_os_version = lang_get( 'os_version' );
+$t_lang_os_build = lang_get( 'os_build' );
 $t_lang_fixed_in_version = lang_get( 'fixed_in_version' );
 $t_lang_resolution = lang_get( 'resolution' );
 $t_lang_priority = lang_get( 'priority' );
@@ -148,7 +148,7 @@ $t_lang_description = lang_get( 'description' );
 $t_lang_steps_to_reproduce = lang_get( 'steps_to_reproduce' );
 $t_lang_additional_information = lang_get( 'additional_information' );
 $t_lang_bug_notes_title = lang_get( 'bug_notes_title' );
-$t_lang_system_profile = lang_get( 'system_profile' );
+$t_lang_system_profile = lang_get( 'profile_description' );
 $t_lang_attached_files = lang_get( 'attached_files' );
 $t_lang_tags = lang_get( 'tags' );
 
@@ -297,7 +297,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo get_enum_element( 'priority', $t_bug->priority, auth_get_current_user_id(), $t_bug->project_id ) ?>
 	</td>
 	<td class="bold">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_os_version ) ?>
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_os_build ) ?>
 	</td>
 	<td>
 		<?php echo string_display_line( $t_bug->os_build ) ?>
@@ -449,7 +449,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 <?php
 	# account profile description
 	if( $t_bug->profile_id > 0 ) {
-		$t_profile_row = profile_get_row_direct( $t_bug->profile_id );
+		$t_profile_row = profile_get_row( $t_bug->profile_id );
 		$t_profile_description = string_display( $t_profile_row['description'] );
 
 ?>

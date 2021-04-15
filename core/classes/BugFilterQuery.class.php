@@ -86,6 +86,13 @@ require_api( 'utility_api.php' );
  *   $main_query = new DbQuery( 'SELECT * FROM {bug} WHERE id IN :filter_ids' );
  *   $main_query->bind( 'filter_ids', $subquery );
  *   $main_query->execute();
+ *
+ * Right after the BugFilterQuery object is created, all the internal query parts
+ * are constructed based on the filter, and the actual DbQuery sql is built based
+ * on the query type.
+ * If at a later time, externally new parts are added (where, join, order, etc),
+ * the actual sql will be rebuilt once the DbQuery 'execute' method is used, or
+ * build_query() is explicitly called.
  */
 
 class BugFilterQuery extends DbQuery {
@@ -102,6 +109,7 @@ class BugFilterQuery extends DbQuery {
 	public $use_sticky;
 
 	# internal storage for intermediate data
+	protected $query_type;
 	protected $parts_select = array();
 	protected $parts_from = array();
 	protected $parts_join = array();
@@ -111,10 +119,11 @@ class BugFilterQuery extends DbQuery {
 	protected $filter_operator;
 
 	# runtime variables for building the filter query
-	protected $rt_stop_build;
-	protected $rt_included_projects;
-	protected $rt_table_alias_cf;
-	protected $table_alias_bugnote = null;
+	protected $rt_stop_build; # flag to stop building the query parts, if there is no need to.
+	protected $rt_included_projects; # calculated list of projects in the filter scope, to be reused at each build step
+	protected $rt_table_alias_cf; # keep track of the custom field table joins, to reuse them in order by, or serach matching.
+	protected $rt_table_alias_bugnote = null; # keep track of the bugnote table joins.
+	protected $needs_rebuild; # flag to force a rebuild of the final sql when additions are made after the object is first created.
 
 	/**
 	 * Constructor.
@@ -125,7 +134,7 @@ class BugFilterQuery extends DbQuery {
 	 * - An array of options, for more advanced configuration.
 	 *
 	 * Option array uses "option => value" pairs, supported as:
-	 * - 'query_type':	Any of QUERY_TYPE_xxx class constants, meaning.
+	 * - 'query_type':	Any of QUERY_TYPE_xxx class constants, meaning:
 	 *					QUERY_TYPE_LIST, query listing all fields of matched bugs. This is the default.
 	 *					QUERY_TYPE_COUNT, query to return number of matched bugs.
 	 *					QUERY_TYPE_IDS, query to return only matched bug ids, which may not
@@ -174,6 +183,8 @@ class BugFilterQuery extends DbQuery {
 		} else {
 			$t_query_type = $p_config;
 		}
+		$this->query_type = $t_query_type;
+		$this->needs_rebuild = true;
 
 		# The query string must be built here to have a valid DbQuery object ready for use
 		$this->build_main();
@@ -191,7 +202,17 @@ class BugFilterQuery extends DbQuery {
 	 * @return void
 	 */
 	public function set_query_type( $p_query_type ) {
-		switch( $p_query_type ) {
+		$this->query_type = (int)$p_query_type;
+		$this->build_query();
+	}
+
+	/**
+	 * Builds the actual DbQuery object based on the current query type and query parts
+	 *
+	 * @return void
+	 */
+	public function build_query() {
+		switch( $this->query_type ) {
 			case self::QUERY_TYPE_COUNT:
 				$this->sql( $this->string_query_count() );
 				break;
@@ -206,7 +227,24 @@ class BugFilterQuery extends DbQuery {
 				$this->sql( $this->string_query_list() );
 				break;
 		}
+		$this->needs_rebuild = false;
 		$this->db_result = null;
+	}
+
+	/**
+	 * Override DbQuery execute method to check first if the query is already buils and up to date
+	 * with current query parts.
+	 *
+	 * @param array $p_bind_array	Array for binding values
+	 * @param integer $p_limit		Limit value
+	 * @param integer $p_offset		Offset value
+	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed.
+	 */
+	public function execute( array $p_bind_array = null, $p_limit = null, $p_offset = null ) {
+		if( $this->needs_rebuild ) {
+			$this->build_query();
+		}
+		return parent::execute( $p_bind_array, $p_limit, $p_offset );
 	}
 
 	/**
@@ -236,6 +274,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_select( $p_string ) {
 		$this->parts_select[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -245,6 +284,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_from( $p_string ) {
 		$this->parts_from[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -254,6 +294,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_join( $p_string ) {
 		$this->parts_join[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -264,6 +305,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_where( $p_string ) {
 		$this->parts_where[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -274,6 +316,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_fixed_where( $p_string ) {
 		$this->fixed_where[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -283,6 +326,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_order( $p_string ) {
 		$this->parts_order[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -466,7 +510,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	protected function build_projects() {
 		$this->add_join( 'JOIN {project} ON {project}.id = {bug}.project_id' );
-		$this->add_fixed_where( '{project}.enabled =' . $this->param( true ) );
+		$this->add_fixed_where( '{project}.enabled = ' . $this->param( true ) );
 
 		$t_user_id = $this->user_id;
 		$t_project_id = $this->project_id;
@@ -489,64 +533,140 @@ class BugFilterQuery extends DbQuery {
 			# if no projects are accessible, then stop here
 			if( count( $t_included_project_ids ) == 0 ) {
 				log_event( LOG_FILTERING, 'no accessible projects' );
-				$this->add_fixed_where( '{project}.id =' . $this->param( 0 ) );
+				$this->add_fixed_where( '{project}.id = ' . $this->param( 0 ) );
 				$this->rt_stop_build = true;
 				return;
 			}
 
-			$t_limit_reporters = config_get( 'limit_reporters' );
+			# Arrays for project visibility conditions. Each array will translate
+			# to a set of conditions for visibility.
+			# Based on the user access level, each project will be placed in one
+			# or several of these arrays for later treatment.
 
-			# this array is to be populated with project ids for which we only want to show public issues.  This is due to the limited
-			# access of the current user.
-			$t_public_only_project_ids = array();
-
-			# this array is populated with project ids that the current user has full access to.
+			# this array is populated with projects that the current user
+			# hasfull access to (public and private issues)
 			$t_private_and_public_project_ids = array();
+			# this array is populated with projects to search only public issues.
+			$t_public_only_project_ids = array();
+			# this array is populated with projects to search only accesible private
+			# issues by being the reporter of those.
+			$t_private_is_reporter_project_ids = array();
 
-			# this array is populated with projects where the user can view only bugs for which he is the reporter user
-			$t_limit_reporter_project_ids = array();
+			# these arrays are populated with projects where the user has limited view,
+			# with 'limit_view_unless_threshold' configuration
+
+			# projects where the user has limited view, but can see any private issue
+			$t_limited_public_and_private_project_ids = array();
+			# projects where the user has limited view, and can't see private issues,
+			# only public ones
+			$t_limited_public_only_project_ids = array();
+
+			# these arrays are populated with projects where the user has limited view,
+			# with the old 'limit_reporters' configuration
+
+			# projects where the user has limited view, but can see any private issue
+			$t_old_limit_public_and_private_project_ids = array();
+			# projects where the user has limited view, and can't see private issues,
+			# only public ones
+			$t_old_limit_public_only_project_ids = array();
 
 			# make sure the project rows are cached, as they will be used to check access levels.
 			project_cache_array_rows( $t_included_project_ids );
 
+			# Old 'limit_reporters' option was previously only supported for ALL_PROJECTS,
+			$t_old_limit_reporters = ( ON == config_get( 'limit_reporters', null, $t_user_id, ALL_PROJECTS ) );
+
 			foreach( $t_included_project_ids as $t_pid ) {
-				if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, $t_user_id, $t_pid ) ) + 1, $t_pid, $t_user_id ) ) ) {
-					# project is limited, only view own reported bugs
-					$t_limit_reporter_project_ids[] = $t_pid;
-					# as we will check the user is reporter for each bug, and reporter can view his own private bugs, there's no need to check for private bug access
-					continue;
-				}
 				$t_access_required_to_view_private_bugs = config_get( 'private_bug_threshold', null, null, $t_pid );
-				if( access_has_project_level( $t_access_required_to_view_private_bugs, $t_pid, $t_user_id ) ) {
-					$t_private_and_public_project_ids[] = $t_pid;
+				$t_can_see_private = access_has_project_level( $t_access_required_to_view_private_bugs, $t_pid, $t_user_id );
+
+				if( access_has_limited_view( $t_pid, $t_user_id ) ) {
+					if( $t_old_limit_reporters ) {
+						# we have a reduced access (show only own reported issues)
+						$t_old_limit_public_and_private_project_ids[] = $t_pid;
+						if( !$t_can_see_private ) {
+							$t_old_limit_public_only_project_ids[] = $t_pid;
+						}
+					} else{
+						# we have a reduced access (show only own reported, handled, monitored issues)
+						if( $t_can_see_private ) {
+							$t_limited_public_and_private_project_ids[] = $t_pid;
+						} else {
+							$t_limited_public_only_project_ids[] = $t_pid;
+							# private issues can be seen by the reporter, which is also a valid
+							# case for the limited view configuration
+							$t_private_is_reporter_project_ids[] = $t_pid;
+						}
+					}
 				} else {
-					$t_public_only_project_ids[] = $t_pid;
+					# if there is no special limit, use the general project clauses
+					if( $t_can_see_private ) {
+						$t_private_and_public_project_ids[] = $t_pid;
+					} else {
+						$t_public_only_project_ids[] = $t_pid;
+						$t_private_is_reporter_project_ids[] = $t_pid;
+					}
 				}
 			}
 
-			log_event( LOG_FILTERING, 'project_ids (with access to public/private issues) = @P' . implode( ', @P', $t_private_and_public_project_ids ) );
-			log_event( LOG_FILTERING, 'project_ids (with access limited to public issues) = @P' . implode( ', @P', $t_public_only_project_ids ) );
-			log_event( LOG_FILTERING, 'project_ids (with access limited to own issues) = @P' . implode( ', @P', $t_limit_reporter_project_ids ) );
-
 			$t_query_projects_or = array();
-			# for projects with total visibility
+			# for these projects, search all issues
 			if( !empty( $t_private_and_public_project_ids ) ) {
 				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_private_and_public_project_ids );
 			}
-			# for projects with public visibility, public issues can be shown
+
+			# for these projects, search public issues
 			if( !empty( $t_public_only_project_ids ) ) {
-				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_public_only_project_ids ) . ' AND {bug}.view_state = ' . $this->param( VS_PUBLIC );
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_public_only_project_ids )
+						. ' AND {bug}.view_state = ' . $this->param( VS_PUBLIC );
 			}
-			# for projects with public visibility, the issue can be shown if the user is the reporter, regardless of public/private issue
-			# also, for projects limited to reporters, the same condition applies
-			# combine both arrays for this condition
-			$t_projects_for_reporter_visibility = array_merge( $t_public_only_project_ids, $t_limit_reporter_project_ids );
-			if( !empty( $t_projects_for_reporter_visibility ) ) {
-				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_projects_for_reporter_visibility ) . ' AND {bug}.reporter_id = ' . $this->param( $t_user_id );
+
+			# for these projects, search private issues where the user is reporter
+			if( !empty( $t_private_is_reporter_project_ids ) ) {
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_private_is_reporter_project_ids )
+						. ' AND {bug}.view_state <> ' . $this->param( VS_PUBLIC )
+						. ' AND {bug}.reporter_id = ' . $this->param( $t_user_id );
+			}
+
+			# for these projects, search any issue (public or private) valid for the old 'limit_reporters' configuration
+			if( !empty( $t_old_limit_public_and_private_project_ids ) ) {
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_old_limit_public_and_private_project_ids )
+						. ' AND {bug}.reporter_id = ' . $this->param( $t_user_id );
+			}
+
+			# for these projects, search public issues valid for the old 'limit_reporters' configuration
+			if( !empty( $t_old_limit_public_only_project_ids ) ) {
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_old_limit_public_only_project_ids )
+						. ' AND {bug}.view_state = ' . $this->param( VS_PUBLIC )
+						. ' AND {bug}.reporter_id = ' . $this->param( $t_user_id );
+			}
+
+			# for these projects, search any issue (public or private) valid for limited view
+			if( !empty( $t_limited_public_and_private_project_ids ) ) {
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_limited_public_and_private_project_ids )
+						. ' AND ('
+						. ' {bug}.reporter_id = ' . $this->param( $t_user_id )
+						. ' OR {bug}.handler_id = ' . $this->param( $t_user_id )
+						. ' OR EXISTS ( SELECT 1 FROM {bug_monitor} bm'
+						. ' WHERE bm.user_id = ' . $this->param( $t_user_id )
+						. ' AND bm.bug_id = {bug}.id )'
+						. ' )';
+			}
+
+			# for these projects, search public issues valid for limited view
+			if( !empty( $t_limited_public_only_project_ids ) ) {
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_limited_public_only_project_ids )
+						. ' AND {bug}.view_state = ' . $this->param( VS_PUBLIC )
+						. ' AND ('
+						. ' {bug}.reporter_id = ' . $this->param( $t_user_id )
+						. ' OR {bug}.handler_id = ' . $this->param( $t_user_id )
+						. ' OR EXISTS ( SELECT 1 FROM {bug_monitor} bm'
+						. ' WHERE bm.user_id = ' . $this->param( $t_user_id )
+						. ' AND bm.bug_id = {bug}.id )'
+						. ' )';
 			}
 
 			$t_project_query = '(' . implode( ' OR ', $t_query_projects_or ) . ')';
-			log_event( LOG_FILTERING, 'project query = ' . $t_project_query );
 
 			$this->add_fixed_where( $t_project_query );
 		}
@@ -999,8 +1119,8 @@ class BugFilterQuery extends DbQuery {
 	 * @return string	A table alias for this join clause
 	 */
 	protected function helper_table_alias_for_bugnote() {
-		if( $this->table_alias_bugnote ) {
-			return $this->table_alias_bugnote;
+		if( $this->rt_table_alias_bugnote ) {
+			return $this->rt_table_alias_bugnote;
 		}
 		# Build a condition for determining note visibility, the user can view:
 		# - public notes
@@ -1025,8 +1145,8 @@ class BugFilterQuery extends DbQuery {
 				. $t_view_condition;
 
 		$this->add_join( $t_join );
-		$this->table_alias_bugnote = $t_table_alias;
-		return $this->table_alias_bugnote;
+		$this->rt_table_alias_bugnote = $t_table_alias;
+		return $this->rt_table_alias_bugnote;
 	}
 
 	/**
@@ -1068,6 +1188,7 @@ class BugFilterQuery extends DbQuery {
 		}
 		$t_table_dst = 'rel_dst';
 		$t_table_src = 'rel_src';
+		$t_use_join = true;
 
 		# build conditions for relation type and bug match
 		if( BUG_REL_NONE == $c_rel_type ) {
@@ -1077,11 +1198,13 @@ class BugFilterQuery extends DbQuery {
 				$t_where = $t_table_dst . '.relationship_type IS NULL AND ' . $t_table_src . '.relationship_type IS NULL';
 			} else {
 				# rel NONE, bug ID, those bugs that are not related in any way to bug ID
-				# map to a non-existent relation type -1 to include nulls
-				# not including the self id
-				$t_where = 'NOT COALESCE(' . $t_table_dst . '.source_bug_id, -1) = ' . $this->param( $c_rel_bug )
-						. ' AND NOT COALESCE(' . $t_table_src . '.destination_bug_id, -1) = ' . $this->param( $c_rel_bug )
+				# also, exclude target id from results
+				$t_where = 'NOT EXISTS ( SELECT 1 FROM {bug_relationship} WHERE source_bug_id = ' . $this->param( $c_rel_bug )
+						. ' AND destination_bug_id = {bug}.id'
+						. ' OR destination_bug_id = ' . $this->param( $c_rel_bug )
+						. ' AND source_bug_id = {bug}.id )'
 						. ' AND NOT {bug}.id = ' . $this->param( $c_rel_bug );
+				$t_use_join = false;
 			}
 		} elseif( BUG_REL_ANY == $c_rel_type ) {
 			if( META_FILTER_NONE == $c_rel_bug ) {
@@ -1118,8 +1241,10 @@ class BugFilterQuery extends DbQuery {
 			}
 		}
 
-		$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_dst . ' ON ' . $t_table_dst . '.destination_bug_id = {bug}.id' );
-		$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_src . ' ON ' . $t_table_src . '.source_bug_id = {bug}.id' );
+		if( $t_use_join ) {
+			$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_dst . ' ON ' . $t_table_dst . '.destination_bug_id = {bug}.id' );
+			$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_src . ' ON ' . $t_table_src . '.source_bug_id = {bug}.id' );
+		}
 		$this->add_where( $t_where );
 	}
 
@@ -1364,23 +1489,28 @@ class BugFilterQuery extends DbQuery {
 				foreach( $t_field as $t_filter_member ) {
 					$t_filter_member = stripslashes( $t_filter_member );
 					if( filter_field_is_none( $t_filter_member ) ) {
-						# coerce filter value if selecting META_FILTER_NONE so it will match empty fields
-						$t_filter_member = '';
-
 						# but also add those _not_ present in the custom field string table
-						array_push( $t_filter_array, $t_table_name . '.value IS NULL' );
-					}
+						$t_filter_array[] = $t_table_name . '.value IS NULL';
 
-					switch( $t_def['type'] ) {
-						case CUSTOM_FIELD_TYPE_CHECKBOX:
-						case CUSTOM_FIELD_TYPE_MULTILIST:
-							$t_filter_array[] = $this->sql_like( $t_table_name . '.value', '%|' . $t_filter_member . '|%' );
-							break;
-						case CUSTOM_FIELD_TYPE_TEXTAREA:
-							$t_filter_array[] = $this->sql_like( $t_table_name . '.text', '%' . $t_filter_member . '%' );
-							break;
-						default:
-							$t_filter_array[] = $t_table_name . '.value = ' . $this->param( $t_filter_member );
+						switch( $t_def['type'] ) {
+							case CUSTOM_FIELD_TYPE_TEXTAREA:
+								$t_filter_array[] = $t_table_name . '.text = ' . $this->param( '' );
+								break;
+							default;
+								$t_filter_array[] = $t_table_name . '.value = ' . $this->param( '' );
+						}
+					} else {
+						switch( $t_def['type'] ) {
+							case CUSTOM_FIELD_TYPE_CHECKBOX:
+							case CUSTOM_FIELD_TYPE_MULTILIST:
+								$t_filter_array[] = $this->sql_like( $t_table_name . '.value', '%|' . $t_filter_member . '|%' );
+								break;
+							case CUSTOM_FIELD_TYPE_TEXTAREA:
+								$t_filter_array[] = $this->sql_like( $t_table_name . '.text', '%' . $t_filter_member . '%' );
+								break;
+							default:
+								$t_filter_array[] = $t_table_name . '.value = ' . $this->param( $t_filter_member );
+						}
 					}
 				}
 				$t_custom_where_clause .= '(' . implode( ' OR ', $t_filter_array );
@@ -1645,6 +1775,9 @@ class BugFilterQuery extends DbQuery {
 
 				$t_clauses = $t_column_object->sortquery( $c_dir );
 				if( is_array( $t_clauses ) ) {
+					if( isset( $t_clauses['select'] ) ) {
+						$this->add_select( $t_clauses['select'] );
+					}
 					if( isset( $t_clauses['join'] ) ) {
 						$this->add_join( $t_clauses['join'] );
 					}

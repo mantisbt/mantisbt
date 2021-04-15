@@ -96,14 +96,14 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-filter"></i>
+				<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
 				<?php echo lang_get('edit_filter') ?>
 			</h4>
 
 			<div class="widget-toolbar">
 				<div class="widget-menu">
 					<a href="#" data-action="settings" data-toggle="dropdown">
-						<i class="ace-icon fa fa-bars bigger-125"></i>
+						<?php print_icon( 'fa-bars', 'ace-icon bigger-125' ); ?>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 						<?php

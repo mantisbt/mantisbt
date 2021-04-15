@@ -42,11 +42,10 @@
  * @author Kly
  */
 
-$s_plugin_graph_title = 'Mantis 圖表';
-$s_plugin_graph_description = '官方圖表元件';
 $s_plugin_MantisGraph_title = 'Mantis 圖表';
+$s_plugin_MantisGraph_description = '官方圖表元件';
 $s_plugin_MantisGraph_config = '設置';
-$s_plugin_MantisGraph_synthesis_link = '總覽';
+$s_plugin_MantisGraph_tab_label = '圖表';
 $s_plugin_MantisGraph_status_link = '依狀態';
 $s_plugin_MantisGraph_priority_link = '依優先權';
 $s_plugin_MantisGraph_severity_link = '依嚴重性';

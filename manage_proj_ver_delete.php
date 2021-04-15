@@ -59,9 +59,12 @@ $t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_version_info->pro
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version_info->project_id );
 
 # Confirm with the user
-helper_ensure_confirmed( lang_get( 'version_delete_sure' ) .
-	'<br />' . lang_get( 'version_label' ) . lang_get( 'word_separator' ) . string_display_line( $t_version_info->version ),
-	lang_get( 'delete_version_button' ) );
+helper_ensure_confirmed(
+	sprintf( lang_get( 'version_delete_sure' ),
+		string_display_line( $t_version_info->version )
+	),
+	lang_get( 'delete_version_button' )
+);
 
 version_remove( $f_version_id );
 

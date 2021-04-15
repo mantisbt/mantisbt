@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Admin_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="admin.config.issues" lang="en-US">
+	<title>Issues visibility</title>
+	 <para>
+		By default, all issues are visible to any user within a project. To limit
+		 the visibility of issues there are several mechanisms.
+	</para>
+	 <section id="admin.config.issues.private">
+		<title>Public/Private view status</title>
+		<para>
+			A view status flag can be set, for an issue, to be either public or
+			 private. Private issues are accesible by the user who created it,
+			 and by those users that meet a threshold defined in
+			 <literal>$g_private_bug_threshold</literal>.
+		</para>
+		<para>
+			Refer to the following configuration options related to issue view
+			 status configurations:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>$g_default_bug_view_status</term>
+				 <listitem>
+					<para>
+						The default viewing status for the new bug (VS_PUBLIC or
+						VS_PRIVATE). The default is VS_PUBLIC.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_private_bug_threshold</term>
+				 <listitem>
+					<para>
+						The threshold for a user to be able to view any private
+						issue within a project.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_set_view_status_threshold</term>
+				 <listitem>
+					<para>
+						The threshold for a user to be able to set an issue to Private/Public.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_change_view_status_threshold</term>
+				 <listitem>
+					<para>
+						The threshold for a user to be able to update the view status
+						while updating an issue.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+
+	<section id="admin.config.issues.limitedview">
+		<title>Limited view configuration</title>
+		<para>
+			The <literal>$g_limit_view_unless_threshold</literal> option allows
+			the administrator to configure access limitations for users, letting
+			them view only those issues that they are involved with, i.e. if:
+			<itemizedlist>
+				<listitem>
+					<para>
+						They reported the issue,
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						It is assigned to them,
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Or they are monitoring the issue.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<para>
+			This configuration option can be set individually for each project.
+			 It defaults to ANYBODY, effectively disabling the limitation (i.e.
+			 users can see all issues).
+		</para>
+		<para>
+			The value for this option is an access level threshold, so that those
+			 users that meet that threshold have an unrestricted view of any issue
+			 in the project. A user that doesn't meet this threshold, will have
+			 a restricted view of only those issues in the conditions previously
+			 described.
+		</para>
+		<para>
+			Note that this visibility does not override other restrictions as
+			 <emphasis>private issues</emphasis> or <emphasis>pivate projects</emphasis>
+			 user assignments.
+		</para>
+	</section>
+
+	<section id="admin.config.issues.limitreporters">
+		<title>"Limit reporters" configuration (deprecated)</title>
+		<para>
+			When the option <literal>$g_limit_reporters</literal> is enabled, users
+			that are reporters in a project, or lower access level, are only allowed
+			to see the issues they reported. Issues reported by other users are
+			not accessible by them.
+		</para>
+		<para>
+			This option is only supported for
+			ALL_PROJECTS, this means that it's a global setting that affects all projects
+		</para>
+		<para>
+			Note that the definition of <emphasis>reporter</emphasis> in this context
+			is the actual access level for which a user is able to report issues, and
+			is determined by <literal>$g_report_bug_threshold</literal>. Additionally,
+			that threshold can have different values in each project. Being dependant
+			on that threshold, the behaviour of this option is not well defined when
+			the reporting threshold is configured as discrete values with gaps, instead
+			of a simple threshold. In that scenario, the visibilty is determined by
+			the minimum access level contained in the <literal>$g_report_bug_threshold</literal>
+			access levels array.
+		</para>
+		<note>
+			<para>
+				This option option is deprecated in favour of
+				<literal>$g_limit_view_unless_threshold</literal>. The new option
+				will be available by default on new installations, or after disabling
+				<literal>$g_limit_reporters</literal> if enabled in an existing instance.
+			</para>
+
+		</note>
+	</section>
+
+</section>

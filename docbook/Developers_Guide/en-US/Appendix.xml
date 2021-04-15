@@ -12,7 +12,7 @@
 		<itemizedlist>
 
 			<listitem><para>
-				The <ulink url="http://git-scm.com/documentation/">Git SCM web site</ulink>
+				The <ulink url="https://git-scm.com/documentation/">Git SCM web site</ulink>
 				offers a full reference of Git commands, as well Scott Chacon's
 				excellent <emphasis>Pro Git</emphasis> book.
 			</para></listitem>
@@ -26,15 +26,15 @@
 
 				<itemizedlist>
 					<listitem><para>
-						<ulink url="http://www.kernel.org/pub/software/scm/git/docs/">
+						<ulink url="https://www.kernel.org/pub/software/scm/git/docs/">
 							Manual Page</ulink>
 					</para></listitem>
 					<listitem><para>
-						<ulink url="http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html">
+						<ulink url="https://www.kernel.org/pub/software/scm/git/docs/gittutorial.html">
 							Tutorial</ulink>
 					</para></listitem>
 					<listitem><para>
-						<ulink url="http://www.kernel.org/pub/software/scm/git/docs/everyday.html">
+						<ulink url="https://www.kernel.org/pub/software/scm/git/docs/everyday.html">
 							Everyday Git With 20 Commands</ulink>
 					</para></listitem>
 				</itemizedlist>

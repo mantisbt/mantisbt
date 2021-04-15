@@ -46,16 +46,16 @@
  * @author Koavf
  * @author Locos epraix
  * @author Macofe
+ * @author Zobook
  */
 
-$s_plugin_graph_title = 'Gráficos Mantis';
-$s_plugin_graph_description = 'Plugin oficial de gráficos.';
 $s_plugin_MantisGraph_title = 'Gráficos Mantis';
+$s_plugin_MantisGraph_description = 'Plugin oficial de gráficos.';
 $s_plugin_MantisGraph_config = 'Configuración';
-$s_plugin_MantisGraph_synthesis_link = 'Síntesis';
+$s_plugin_MantisGraph_tab_label = 'Gráficos';
 $s_plugin_MantisGraph_status_link = 'Por estado';
 $s_plugin_MantisGraph_priority_link = 'Por prioridad';
-$s_plugin_MantisGraph_severity_link = 'Por severidad';
+$s_plugin_MantisGraph_severity_link = 'Por gravedad';
 $s_plugin_MantisGraph_category_link = 'Por categoría';
 $s_plugin_MantisGraph_resolution_link = 'Por resolución';
 $s_plugin_MantisGraph_issue_trends_link = 'Tendencias de incidencias';
@@ -69,10 +69,10 @@ $s_plugin_MantisGraph_graph_reporter_title = 'Por gráficos de creadores';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Incidencias abiertas, resueltas y pendientes';
 $s_plugin_MantisGraph_by_status_pct = 'Por porcentaje según estado';
 $s_plugin_MantisGraph_by_priority_pct = 'Por porcentaje según prioridad';
-$s_plugin_MantisGraph_by_severity_pct = 'Por porcentaje según severidad';
+$s_plugin_MantisGraph_by_severity_pct = 'Por porcentaje según gravedad';
 $s_plugin_MantisGraph_by_category_pct = 'Por porcentaje según categoría';
 $s_plugin_MantisGraph_by_resolution_pct = 'Por porcentaje según resolución';
-$s_plugin_MantisGraph_by_severity_mix = 'Por severidad y estado';
+$s_plugin_MantisGraph_by_severity_mix = 'Por gravedad y estado';
 $s_plugin_MantisGraph_by_priority_mix = 'Por prioridad y estado';
 $s_plugin_MantisGraph_by_resolution_mix = 'Por resolución y estado';
 $s_plugin_MantisGraph_legend_still_open = 'Aún abierta';
@@ -89,7 +89,7 @@ $s_plugin_MantisGraph_period_last_quarter = 'Último trimestre';
 $s_plugin_MantisGraph_period_year_to_date = 'Lo que va del año';
 $s_plugin_MantisGraph_period_select = 'Fechas arbitrarias';
 $s_plugin_MantisGraph_period_last_year = 'Último año';
-$s_plugin_MantisGraph_graph_page = 'Historial gráfico de la incidencia';
+$s_plugin_MantisGraph_graph_page = 'Historial gráfico del informe';
 $s_plugin_MantisGraph_graph_topdev = 'Principales desarrolladores por incidencias resueltas';
 $s_plugin_MantisGraph_graph_opendev = 'Desarrolladores por incidencias abiertas';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Principales creadores por incidencias resueltas';

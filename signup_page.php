@@ -73,7 +73,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			<div class="widget-body">
 				<div class="widget-main">
 					<h4 class="header lighter bigger">
-						<i class="ace-icon fa fa-pencil"></i>
+						<?php print_icon( 'fa-pencil', 'ace-icon' ); ?>
 						<?php echo lang_get( 'signup_title' ) ?>
 					</h4>
 					<div class="space-10"></div>
@@ -86,7 +86,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 				<span class="block input-icon input-icon-right">
 					<input id="username" name="username" type="text" placeholder="<?php echo lang_get( 'username' ) ?>"
 						size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control autofocus">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				</span>
 			</label>
 
@@ -94,7 +94,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 				<span class="block input-icon input-icon-right">
 					<input id="email-field" name="email" type="text" placeholder="<?php echo lang_get( 'email_label' ) ?>"
 						size="32" maxlength="64" class="form-control">
-					<i class="ace-icon fa fa-envelope"></i>
+					<?php print_icon( 'fa-envelope', 'ace-icon' ); ?>
 				</span>
 			</label>
 
@@ -141,7 +141,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			if( !$t_allow_passwd_change ) {
 				echo '<div class="space-10"></div>';
 				echo '<div class="alert alert-danger">';
-				echo lang_get( 'no_password_change' );;
+				echo lang_get( 'no_password_change' );
 				echo '</div>';
 			}
 ?>
@@ -157,7 +157,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 </div>
 
 	<div class="toolbar center">
-		<a class="back-to-login-link pull-left" href="<?php echo AUTH_PAGE_USERNAME; ?>"><?php echo lang_get( 'login_link' ); ?></a>
+		<a class="back-to-login-link pull-left" href="<?php echo AUTH_PAGE_USERNAME; ?>"><?php echo lang_get( 'login' ); ?></a>
 		<?php
 		# lost password feature disabled or reset password via email disabled
 		if( ( LDAP != config_get_global( 'login_method' ) ) &&

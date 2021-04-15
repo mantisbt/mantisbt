@@ -42,11 +42,10 @@
  * @author Nghtwlkr
  */
 
-$s_plugin_graph_title = 'Mantis Grafer';
-$s_plugin_graph_description = 'Offisiell grafutvidelse.';
 $s_plugin_MantisGraph_title = 'Mantis Grafer';
+$s_plugin_MantisGraph_description = 'Offisiell grafutvidelse.';
 $s_plugin_MantisGraph_config = 'Konfigurasjon';
-$s_plugin_MantisGraph_synthesis_link = 'Syntese';
+$s_plugin_MantisGraph_tab_label = 'Mantis Grafer';
 $s_plugin_MantisGraph_status_link = 'Per tilstand';
 $s_plugin_MantisGraph_priority_link = 'Per prioritet';
 $s_plugin_MantisGraph_severity_link = 'Per alvorlighetsgrad';

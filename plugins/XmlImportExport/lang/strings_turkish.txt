@@ -38,22 +38,26 @@
  * @ingroup Language
  * @file
  *
+ * @author BaRaN6161 TURK
  * @author Hedda Gabler
  * @author Khutuck
  * @author Korayal
  * @author Uğurkent
  */
 
-$s_plugin_XmlImportExport_title = 'Sorun Al/Ver';
-$s_plugin_XmlImportExport_description = 'MantisBT\'ye XML tabanlı yetenek ekler ve çıkarır.';
-$s_plugin_XmlImportExport_import = 'Alma Sorunları';
+$s_plugin_XmlImportExport_title = 'Sorunları içe/dışa aktar';
+$s_plugin_XmlImportExport_description = 'MantisBT\'ye XML tabanlı içe ve dışa aktarma özellikleri ekler.';
+$s_plugin_XmlImportExport_import = 'İçe aktarma sorunları';
 $s_plugin_XmlImportExport_export = 'XML Ver';
-$s_plugin_XmlImportExport_action_update = 'Güncelleme';
-$s_plugin_XmlImportExport_importing_in_project = 'Projedeki Aktarma Sorunları:';
+$s_plugin_XmlImportExport_config_title = 'XML Alma/Verme Erişim Seviyeleri Yapılandırması';
+$s_plugin_XmlImportExport_import_threshold = 'İçe aktarma sorunları';
+$s_plugin_XmlImportExport_export_threshold = 'Dışa aktarma sorunları';
+$s_plugin_XmlImportExport_action_update = 'Güncelle';
+$s_plugin_XmlImportExport_importing_in_project = 'Sorunları projeye aktarılıyor: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Alma seçenekleri';
 $s_plugin_XmlImportExport_cross_references = 'Çapraz referanslar';
 $s_plugin_XmlImportExport_default_strategy = 'Varsayılan dönüştürme stratejisi:';
-$s_plugin_XmlImportExport_renumber = 'Yeniden Numaralandır';
+$s_plugin_XmlImportExport_renumber = 'Yeniden numaralandır';
 $s_plugin_XmlImportExport_renumber_desc = 'Referansları Numaralandırmaya dönüştürmeyi dene';
 $s_plugin_XmlImportExport_link = 'Bağlantı';
 $s_plugin_XmlImportExport_link_desc = 'Orijinal nesneye bir bağlantıya dönüştür';

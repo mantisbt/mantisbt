@@ -4,26 +4,25 @@
 %BOOK_ENTITIES;
 ]>
 
-<chapter id="integrators">
-	<title>Integrating with MantisBT</title>
+<chapter id="soapapi">
+	<title>MantisBT SOAP API</title>
 
 	<para>
-		The primary means of integrating with MantisBT with web services is
-		with the bundled SOAP API, which is accessible at
+		The now deprecated MantisBT SOAP API is accessible at:
 
-		<literal>http://server.com/mantis/api/soap/mantisconnect.php</literal>.
+		<literal>https://server.com/mantis/api/soap/mantisconnect.php</literal>.
 	</para>
 
-	<section id="integrators.java">
+	<section id="soapapi.java">
 		<title>Java integration</title>
 
-		<section id="integrators.java.soap">
+		<section id="soapapi.java.soap">
 			<title>Prebuilt SOAP stubs using Axis</title>
 
 			<para>
 				For ease of integration of the Java clients, SOAP stubs are
 				maintained and deployed in the
-				<ulink url="http://maven.org/">Maven central repository</ulink>.
+				<ulink url="https://search.maven.org/">Maven central repository</ulink>.
 				For example:
 			</para>
 
@@ -42,19 +41,19 @@
 			</para>
 		</section>
 
-		<section id="integrators.java.osgi">
+		<section id="soapapi.java.osgi">
 				<title>Usage in OSGi environments</title>
 				<para>
 					If you would like to use Axis in an OSGi environment, it
 					is recommended that you use a ready-made bundle, such as
 					the Axis bundle available from
-					<ulink url="http://download.eclipse.org/tools/orbit/downloads/">
+					<ulink url="https://download.eclipse.org/tools/orbit/downloads/">
 						Eclipse Orbit</ulink>
 				</para>
 		</section>
 	</section>
 
-	<section id="integrators.compatibility">
+	<section id="soapapi.compatibility">
 		<title>Compatibility between releases</title>
 
 		<para>
@@ -68,21 +67,21 @@
 			be regenerated if a complex type receives a new property. Such
 			changes will be announced before the release of the new MantisBT
 			version on the
-			<ulink url="http://lists.sourceforge.net/mailman/listinfo/mantisbt-soap-dev">
+			<ulink url="https://sourceforge.net/projects/mantisbt/lists/mantisbt-soap-dev">
 				mantisbt-soap-dev mailing list</ulink>.
 			Typically there will be two weeks time to integrate the new SOAP stubs.
 		</para>
 
 	</section>
 
-	<section id="integrators.support">
+	<section id="soapapi.support">
 		<title>Support</title>
 
 		<para>
 			The primary means of obtaining support for Web Services and the
 			SOAP API is through the
 
-			<ulink url="http://lists.sourceforge.net/mailman/listinfo/mantisbt-soap-dev">
+			<ulink url="https://sourceforge.net/projects/mantisbt/lists/mantisbt-soap-dev">
 				mantisbt-soap-dev mailing list</ulink>.
 		</para>
 	</section>

@@ -39,6 +39,7 @@
  * @file
  *
  * @author Eduardo Addad de Oliveira
+ * @author Eduardoaddad
  * @author Felipe L. Ewald
  * @author Giro720
  * @author Joao Xavier
@@ -47,11 +48,10 @@
  * @author Maxan
  */
 
-$s_plugin_graph_title = 'Gráficos Mantis';
-$s_plugin_graph_description = 'Plugin oficial de gráficos.';
 $s_plugin_MantisGraph_title = 'Gráficos Mantis';
+$s_plugin_MantisGraph_description = 'Plugin oficial de gráficos.';
 $s_plugin_MantisGraph_config = 'Configuração';
-$s_plugin_MantisGraph_synthesis_link = 'Síntese';
+$s_plugin_MantisGraph_tab_label = 'Gráficos';
 $s_plugin_MantisGraph_status_link = 'Por status';
 $s_plugin_MantisGraph_priority_link = 'Por prioridade';
 $s_plugin_MantisGraph_severity_link = 'Por Gravidade';

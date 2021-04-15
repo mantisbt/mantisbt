@@ -51,11 +51,10 @@
  * @author Туллук
  */
 
-$s_plugin_graph_title = 'Система отображения графиков в MantisBT';
-$s_plugin_graph_description = 'Официальный плагин MantisBT для отображения графиков.';
 $s_plugin_MantisGraph_title = 'Графики MantisBT';
+$s_plugin_MantisGraph_description = 'Официальный плагин MantisBT для отображения графиков.';
 $s_plugin_MantisGraph_config = 'Настройка';
-$s_plugin_MantisGraph_synthesis_link = 'Сумарно';
+$s_plugin_MantisGraph_tab_label = 'Графики';
 $s_plugin_MantisGraph_status_link = 'По состоянию';
 $s_plugin_MantisGraph_priority_link = 'По приоритету';
 $s_plugin_MantisGraph_severity_link = 'По уровню серьезности';

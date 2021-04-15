@@ -106,7 +106,7 @@ $t_tags = tag_parse_string( $t_tag_string );
 if( !empty( $t_tags ) ) {
 	$t_issue['tags'] = array();
 	foreach( $t_tags as $t_tag ) {
-		$t_issue['tags'][] = array( 'id' => $t_tag['id'], 'name' => $t_tag['name'] );
+		$t_issue['tags'][] = array( 'name' => $t_tag['name'] );
 	}
 }
 
@@ -190,6 +190,10 @@ if( $t_priority != 0 ) {
 	$t_issue['priority'] = array( 'id' => $t_priority );
 }
 
+# @TODO decide what to do with projection field - see #27577
+# According to PHPDoc for $g_bug_report_page_fields, projection is not allowed
+# in the list; bug_report_page.php does not display it, so it does not really
+# make sense to process it here.
 $t_projection = gpc_get_int( 'projection', 0 );
 if( $t_projection != 0 ) {
 	$t_issue['projection'] = array( 'id' => $t_projection );

@@ -66,7 +66,8 @@ $f_parent_id = gpc_get( 'parent_id', null );
 
 <?php if( project_table_empty() ) { ?>
 	<div class="alert alert-sm alert-warning" role="alert">
-		<i class="ace-icon fa fa-warning fa-lg"></i> <?php echo lang_get( 'create_first_project' ) ?>
+		<?php print_icon( 'fa-warning', 'ace-icon fa-lg' ); ?>
+		<?php echo lang_get( 'create_first_project' ) ?>
 	</div>
 <?php } ?>
 
@@ -75,7 +76,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-puzzle-piece"></i>
+				<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
 				<?php
 				if( null !== $f_parent_id ) {
 					echo lang_get( 'add_subproject_title' );

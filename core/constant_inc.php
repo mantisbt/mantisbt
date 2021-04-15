@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.22.0-dev' );
+define( 'MANTIS_VERSION', '2.25.0' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -233,6 +233,10 @@ define( 'CONFIRMATION_TYPE_SUCCESS', 0 );
 define( 'CONFIRMATION_TYPE_WARNING', 1 );
 define( 'CONFIRMATION_TYPE_FAILURE', 2 );
 
+# Plugin management
+define( 'PLUGIN_PRIORITY_LOW', 1 );
+define( 'PLUGIN_PRIORITY_HIGH', 5 );
+
 # error messages
 define( 'ERROR_PHP', -1 );
 define( 'ERROR_GENERIC', 0 );
@@ -346,6 +350,7 @@ define( 'ERROR_CUSTOM_FIELD_INVALID_VALUE', 1303 );
 define( 'ERROR_CUSTOM_FIELD_INVALID_DEFINITION', 1304 );
 define( 'ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT', 1305 );
 define( 'ERROR_CUSTOM_FIELD_INVALID_PROPERTY', 1306 );
+define( 'ERROR_CUSTOM_FIELD_NAME_INVALID', 1307 );
 
 # ERROR_LDAP_*
 define( 'ERROR_LDAP_AUTH_FAILED', 1400 );
@@ -353,6 +358,8 @@ define( 'ERROR_LDAP_SERVER_CONNECT_FAILED', 1401 );
 define( 'ERROR_LDAP_UPDATE_FAILED', 1402 );
 define( 'ERROR_LDAP_USER_NOT_FOUND', 1403 );
 define( 'ERROR_LDAP_EXTENSION_NOT_LOADED', 1404 );
+define( 'ERROR_LDAP_UNABLE_TO_SET_MIN_TLS', 1405 );
+define( 'ERROR_LDAP_UNABLE_TO_STARTTLS', 1406 );
 
 # ERROR_CATEGORY_*
 define( 'ERROR_CATEGORY_DUPLICATE', 1500 );
@@ -646,24 +653,22 @@ define( 'JQUERY_VERSION', '2.2.4' );
 define( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' );
 
 # Bootstrap & FontAwesome
-define( 'BOOTSTRAP_VERSION', '3.4.0' );
-define( 'BOOTSTRAP_HASH', 'sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw' );
-define( 'FONT_AWESOME_VERSION', '4.6.3' );
+define( 'BOOTSTRAP_VERSION', '3.4.1' );
+define( 'BOOTSTRAP_HASH_JS', 'sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd' );
+define( 'BOOTSTRAP_HASH_CSS', 'sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu' );
+define( 'FONT_AWESOME_VERSION', '4.7.0' );
+define( 'FONT_AWESOME_HASH', 'sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' );
 
 # Moment & DateTimePicker
-define( 'MOMENT_VERSION', '2.15.2' );
-define( 'MOMENT_HASH', 'sha256-K+AZsAFjiBd4piqBmFzaxDsiQiHfREubm1ExNGW1JIA=' );
+define( 'MOMENT_VERSION', '2.24.0' );
+define( 'MOMENT_HASH', 'sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=' );
 define( 'DATETIME_PICKER_VERSION', '4.17.47' );
-define( 'DATETIME_PICKER_HASH', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=' );
-
-# Chart JS
-define( 'CHARTJS_VERSION', '2.7.3' );
-define( 'CHARTJS_HASH', 'sha384-WJu6cbQvbPRsw+66L1nOomDAZzhTALnUlpchFlWHimhJ9o95CMue7xEZXXDRKV2S' );
-define( 'CHARTJSBUNDLE_HASH', 'sha384-e4YKd0O/y4TmH7qskMQzKnOrqN83RJ7TmJ4RsBLHodJ6jHOE30I7J1uZfLdvybhc' );
+define( 'DATETIME_PICKER_HASH_JS', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=' );
+define( 'DATETIME_PICKER_HASH_CSS', 'sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=' );
 
 # Tyeahead JS
-define( 'TYPEAHEAD_VERSION', '1.1.1' );
-define( 'TYPEAHEAD_HASH', 'sha256-qZIhMVBV4/crmcmYXNq5ZE5gPRiiPPMKVYbapf5HDBs=' );
+define( 'TYPEAHEAD_VERSION', '1.3.0' );
+define( 'TYPEAHEAD_HASH', 'sha256-VWMJXexFUMAwIXw/PoOzOleP6q97pIbKWuY4v9gMXoY=' );
 
 # List JS
 define( 'LISTJS_VERSION', '1.5.0' );
@@ -729,6 +734,7 @@ define( 'PAGE_CONFIG_DEFAULT', 'adm_permissions_report.php' );
 define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
 define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
 define( 'MANAGE_CONFIG_ACTION_EDIT', 'edit' );
+define( 'MANAGE_CONFIG_ACTION_VIEW', 'view' );
 
 # Database functional type identifiers.
 define( 'DB_TYPE_UNDEFINED', 0 );

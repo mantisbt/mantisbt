@@ -43,11 +43,10 @@
  * @author Rancher
  */
 
-$s_plugin_graph_title = 'Графикони за MantisBT';
-$s_plugin_graph_description = 'Званични додатак за исцртавање графикона.';
 $s_plugin_MantisGraph_title = 'Графикони за MantisBT';
+$s_plugin_MantisGraph_description = 'Званични додатак за исцртавање графикона.';
 $s_plugin_MantisGraph_config = 'Подешавање';
-$s_plugin_MantisGraph_synthesis_link = 'Синтеза';
+$s_plugin_MantisGraph_tab_label = 'Графикони за MantisBT';
 $s_plugin_MantisGraph_status_link = 'По статусу';
 $s_plugin_MantisGraph_priority_link = 'По важности';
 $s_plugin_MantisGraph_severity_link = 'По озбиљности';

@@ -46,8 +46,6 @@
  * @uses version_api.php
  */
 
-$g_allow_browser_cache = 1;
-
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -120,7 +118,7 @@ $t_show_eta = in_array( 'eta', $t_fields ) && config_get( 'enable_eta' ) == ON;
 $t_show_profiles = config_get( 'enable_profiles' ) == ON;
 $t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields );
 $t_show_os = $t_show_profiles && in_array( 'os', $t_fields );
-$t_show_os_version = $t_show_profiles && in_array( 'os_version', $t_fields );
+$t_show_os_build = $t_show_profiles && in_array( 'os_build', $t_fields );
 $t_show_versions = version_should_show_product_version( $t_bug->project_id );
 $t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
 $t_show_product_build = $t_show_versions && in_array( 'product_build', $t_fields ) && ( config_get( 'enable_product_build' ) == ON );
@@ -170,7 +168,7 @@ layout_page_begin();
 		<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-comments"></i>
+				<?php print_icon( 'fa-comments', 'ace-icon' ); ?>
 				<?php echo lang_get( 'updating_bug_advanced_title' ) ?>
 			</h4>
 			<div class="widget-toolbar no-border">
@@ -208,7 +206,13 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<tr>';
 	echo '<td width="15%" class="category">', $t_show_id ? lang_get( 'id' ) : '', '</td>';
 	echo '<td width="20%" class="category">', $t_show_project ? lang_get( 'email_project' ) : '', '</td>';
-	echo '<td width="15%" class="category">', $t_show_category ? '<label for="category_id">' . lang_get( 'category' ) . '</label>' : '', '</td>';
+	echo '<td width="15%" class="category">';
+	if( $t_show_category ) {
+		$t_allow_no_category = config_get( 'allow_no_category' );
+		echo $t_allow_no_category ? '' : '<span class="required">*</span> ';
+		echo '<label for="category_id">' . lang_get( 'category' ) . '</label>';
+	}
+	echo '</td>';
 	echo '<td width="20%" class="category">', $t_show_view_state ? '<label for="view_state">' . lang_get( 'view_status' ) . '</label>' : '', '</td>';
 	echo '<td width="15%" class="category">', $t_show_date_submitted ? lang_get( 'date_submitted' ) : '', '</td>';
 	echo '<td width="15%" class="category">', $t_show_last_updated ? lang_get( 'last_update' ) : '', '</td>';
@@ -230,7 +234,9 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<td>';
 
 	if( $t_show_category ) {
-		echo '<select ' . helper_get_tab_index() . ' id="category_id" name="category_id" class="input-sm">';
+		echo '<select ' . helper_get_tab_index()
+			. ( $t_allow_no_category ? '' : ' required' )
+			. ' id="category_id" name="category_id" class="input-sm">';
 		print_category_option_list( $t_bug->category_id, $t_bug->project_id );
 		echo '</select>';
 	}
@@ -279,9 +285,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
-		if( ON == config_get( 'limit_reporters' )
-			&&  !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, null, $t_bug->project_id ) ) + 1, $t_bug->project_id )
-		) {
+		if( access_has_limited_view( $t_bug->project_id ) ) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {
 			if ( $f_reporter_edit ) {
@@ -290,7 +294,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 				echo '</select>';
 			} else {
 				echo string_attribute( user_get_name( $t_bug->reporter_id ) );
-				echo ' [<a href="#reporter_edit" class="click-url" url="' . string_get_bug_update_url( $f_bug_id ) . '&amp;reporter_edit=true">' . lang_get( 'edit_link' ) . '</a>]';
+				echo ' [<a href="#reporter_edit" class="click-url" url="' . string_get_bug_update_url( $f_bug_id ) . '&amp;reporter_edit=true">' . lang_get( 'edit' ) . '</a>]';
 			}
 		}
 		echo '</td>';
@@ -321,10 +325,11 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 		# Due Date
 		echo '<th class="category"><label for="due_date">' . lang_get( 'due_date' ) . '</label></th>';
 
-		if( bug_is_overdue( $t_bug_id ) ) {
-			echo '<td class="overdue">';
-		} else {	
+		$t_level = bug_overdue_level( $t_bug_id );
+		if( $t_level === false ) {
 			echo '<td>';
+		} else {
+			echo '<td class="due-', $t_level, '">';
 		}
 
 		if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id ) ) {
@@ -336,7 +341,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
 				'data-picker-locale="' . lang_get_current_datetime_locale() .  '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
 				'maxlength="16" value="' . $t_date_to_display . '" />';
-			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
+			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $t_bug->due_date );
@@ -419,7 +424,8 @@ if( $t_show_status || $t_show_resolution ) {
 		$t_status_css = html_get_status_css_fg( $t_bug->status );
 
 		echo '<td class="bug-status">';
-		echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '"></i> ';
+		print_icon( 'fa-square', 'fa-status-box ' . $t_status_css );
+		echo '&nbsp;';
 		print_status_option_list( 'status', $t_bug->status,
 			access_can_close_bug( $t_bug ),
 			$t_bug->project_id );
@@ -485,7 +491,7 @@ if( $t_show_projection || $t_show_eta ) {
 # Platform, OS, OS Version
 #
 
-if( $t_show_platform || $t_show_os || $t_show_os_version ) {
+if( $t_show_platform || $t_show_os || $t_show_os_build ) {
 	echo '<tr>';
 
 	$t_spacer = 0;
@@ -526,9 +532,9 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 		$t_spacer += 2;
 	}
 
-	if( $t_show_os_version ) {
+	if( $t_show_os_build ) {
 		# OS Version
-		echo '<th class="category"><label for="os_build">' . lang_get( 'os_version' ) . '</label></th>';
+		echo '<th class="category"><label for="os_build">' . lang_get( 'os_build' ) . '</label></th>';
 		echo '<td>';
 
 		if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
@@ -632,17 +638,26 @@ echo '<tr class="hidden"></tr>';
 # Summary
 if( $t_show_summary ) {
 	echo '<tr>';
-	echo '<th class="category"><label for="summary">' . lang_get( 'summary' ) . '</label></th>';
-	echo '<td colspan="5">', '<input ', helper_get_tab_index(), ' type="text" id="summary" name="summary" size="105" maxlength="128" value="', $t_summary_attribute, '" />';
+	echo '<th class="category">';
+	echo '<span class="required">*</span> ';
+	echo '<label for="summary">' . lang_get( 'summary' ) . '</label>';
+	echo '</th>';
+	echo '<td colspan="5">';
+	echo '<input ', helper_get_tab_index(),
+		' type="text" required id="summary" name="summary" size="105" maxlength="128" value="',
+		$t_summary_attribute, '" />';
 	echo '</td></tr>';
 }
 
 # Description
 if( $t_show_description ) {
 	echo '<tr>';
-	echo '<th class="category"><label for="description">' . lang_get( 'description' ) . '</label></th>';
+	echo '<th class="category">';
+	echo '<span class="required">*</span> ';
+	echo '<label for="description">' . lang_get( 'description' ) . '</label>';
+	echo '</th>';
 	echo '<td colspan="5">';
-	echo '<textarea class="form-control" ', helper_get_tab_index(),
+	echo '<textarea class="form-control" required ', helper_get_tab_index(),
 		' cols="80" rows="10" id="description" name="description">', "\n",
 		$t_description_textarea, '</textarea>';
 	echo '</td></tr>';

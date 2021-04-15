@@ -78,39 +78,76 @@ layout_page_begin();
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-envelope"></i>
+		<?php print_icon( 'fa-envelope', 'ace-icon' ); ?>
 		<?php echo lang_get( 'bug_reminder' ) ?>
 	</h4>
 </div>
 <div class="widget-body">
 	<div class="widget-main no-padding">
 		<div class="table-responsive">
+
 <table class="table table-bordered table-condensed table-striped">
-<tr>
-	<th class="category">
-		<?php echo lang_get( 'to' ) ?>
-	</th>
-	<td>
-		<select id="recipient" name="to[]" multiple="multiple" size="9" class="width-100">
-			<?php
-			$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
-			$t_access_level = config_get( 'reminder_receive_threshold' );
-			if( $t_bug->view_state === VS_PRIVATE ) {
-				$t_private_bug_threshold = config_get( 'private_bug_threshold' );
-				if( $t_private_bug_threshold > $t_access_level ) {
-					$t_access_level = $t_private_bug_threshold;
-				}
-			}
-			$t_selected_user_id = 0;
-			print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
+<?php
+	$t_store_reminders = ON == config_get( 'store_reminders' );
+
+	# Only display view status checkbox/info if reminders are stored as bugnotes
+	if( $t_store_reminders ) {
+		$t_default_reminder_view_status = config_get( 'default_reminder_view_status' );
+		$t_bugnote_class = $t_default_reminder_view_status == VS_PRIVATE
+			? 'bugnote-private'
+			: '';
+?>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'view_status' ) ?>
+		</th>
+		<td></td>
+		<td>
+<?php
+		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 			?>
-		</select>
-	</td>
-	<td class="center">
-		<textarea class="form-control" name="body" cols="65" rows="10"></textarea>
-	</td>
-</tr>
+			<input type="checkbox" id="bugnote_add_view_status" class="ace" name="private"
+				<?php check_checked( $t_default_reminder_view_status, VS_PRIVATE ); ?> />
+			<label class="lbl padding-6" for="bugnote_add_view_status"><?php echo lang_get( 'private' ) ?></label>
+			<?php
+		} else {
+			echo get_enum_element( 'view_state', $t_default_reminder_view_status );
+		}
+?>
+		</td>
+	</tr>
+<?php
+	} else {
+		$t_bugnote_class = '';
+	}
+?>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'to' ) ?>
+		</th>
+		<td>
+			<select id="recipient" name="to[]" multiple="multiple" size="9" class="width-100">
+				<?php
+				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
+				$t_access_level = config_get( 'reminder_receive_threshold' );
+				if( $t_bug->view_state === VS_PRIVATE ) {
+					$t_private_bug_threshold = config_get( 'private_bug_threshold' );
+					if( $t_private_bug_threshold > $t_access_level ) {
+						$t_access_level = $t_private_bug_threshold;
+					}
+				}
+				$t_selected_user_id = 0;
+				print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
+				?>
+			</select>
+		</td>
+		<td>
+			<textarea name="bugnote_text" cols="65" rows="10"
+					  class="form-control <?php echo $t_bugnote_class; ?>"></textarea>
+		</td>
+	</tr>
 </table>
+
 	</div>
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
@@ -119,14 +156,16 @@ layout_page_begin();
 	</div>
 	</div>
 	</form>
+	<br>
 	<div class="alert alert-info">
-		<p><i class="fa fa-info-circle fa-lg"> </i>
+		<p>
 		<?php
-			echo lang_get( 'reminder_explain' ) . ' ';
+			print_icon( 'fa-info-circle', 'fa-lg' );
+			echo ' ' . lang_get( 'reminder_explain' ) . ' ';
 			if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
 				echo lang_get( 'reminder_monitor' ) . ' ';
 			}
-			if( ON == config_get( 'store_reminders' ) ) {
+			if( $t_store_reminders ) {
 				echo lang_get( 'reminder_store' );
 			}
 
@@ -140,7 +179,6 @@ layout_page_begin();
 
 <?php
 $_GET['id'] = $f_bug_id;
-$t_fields_config_option = 'bug_view_page_fields';
 $t_show_page_header = false;
 $t_force_readonly = true;
 $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;

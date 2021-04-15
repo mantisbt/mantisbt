@@ -40,6 +40,7 @@
  *
  * @author Jopparn
  * @author Lokal Profil
+ * @author Sabelöga
  * @author Tobulos1
  * @author Warrakkk
  * @author WikiPhoenix
@@ -49,7 +50,7 @@ $s_plugin_format_title = 'MantisBT-formatering';
 $s_plugin_format_description = 'Officiell insticksmodul för textbehandling och formatering.';
 $s_plugin_format_config = 'Konfiguration';
 $s_plugin_format_process_text = 'Textbehandling';
-$s_plugin_format_process_text_warning_notice = 'Stäng inte av såvida du inte verkligen vet vad du gör. Cross site scripting (XSS) attacker är möjliga när avstängt.';
+$s_plugin_format_process_text_warning_notice = 'Stäng inte av såvida du inte verkligen vet vad du gör. Cross site scripting-attacker (XSS) är möjliga när det är avstängt.';
 $s_plugin_format_process_urls = 'URL-bearbetning';
 $s_plugin_format_process_buglinks = 'MantisBT-interna länkar (Buggar och buggkommentarer)';
 $s_plugin_format_process_buglinks_info = 'Din konfiguration definierar <em>Fråge</em>-taggen som "<literal>%s</literal>" och <em>Frågeanteckning</em>-taggen som"<literal>%s</literal>"';

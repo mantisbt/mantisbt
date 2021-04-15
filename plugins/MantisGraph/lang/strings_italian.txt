@@ -45,11 +45,10 @@
  * @author Selven
  */
 
-$s_plugin_graph_title = 'Grafici Mantis';
-$s_plugin_graph_description = 'Plugin ufficiale Grafico';
 $s_plugin_MantisGraph_title = 'Grafici Mantis';
+$s_plugin_MantisGraph_description = 'Plugin ufficiale Grafico';
 $s_plugin_MantisGraph_config = 'Configurazione';
-$s_plugin_MantisGraph_synthesis_link = 'Sintesi';
+$s_plugin_MantisGraph_tab_label = 'Grafici';
 $s_plugin_MantisGraph_status_link = 'Per stato';
 $s_plugin_MantisGraph_priority_link = 'Per priorità';
 $s_plugin_MantisGraph_severity_link = 'Per gravità';

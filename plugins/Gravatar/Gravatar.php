@@ -21,7 +21,7 @@
 /**
  * Mantis Gravatar Plugin
  *
- * This is an avatar provider plugin that is based on http://www.gravatar.com.
+ * This is an avatar provider plugin that is based on https://www.gravatar.com.
  * Users will need to register there the same email address used in this
  * MantisBT installation to have their avatar shown.
  *
@@ -29,16 +29,12 @@
  * the updated gravatar images to show on sites
  */
 class GravatarPlugin extends MantisPlugin {
-	/**
-	 * Gravatar URLs
-	 */
-	const GRAVATAR_URL        = 'http://www.gravatar.com/';
-	const GRAVATAR_URL_SECURE = 'https://secure.gravatar.com/';
+	const GRAVATAR_URL = 'https://secure.gravatar.com/';
 
 	/**
 	 * Default Gravatar image types
 	 *
-	 * @link http://en.gravatar.com/site/implement/images/
+	 * @link https://en.gravatar.com/site/implement/images/
 	 */
 	const GRAVATAR_DEFAULT_MYSTERYMAN = 'mm';
 	const GRAVATAR_DEFAULT_IDENTICON  = 'identicon';
@@ -50,7 +46,7 @@ class GravatarPlugin extends MantisPlugin {
 	/**
 	 * Gravatar Ratings
 	 *
-	 * @link http://en.gravatar.com/site/implement/images/
+	 * @link https://en.gravatar.com/site/implement/images/
 	 */
 	const GRAVATAR_RATING_G  = 'G';
 	const GRAVATAR_RATING_PG = 'PG';
@@ -63,7 +59,7 @@ class GravatarPlugin extends MantisPlugin {
 	 */
 	function register() {
 		$this->name = plugin_lang_get( 'title' );
-		$this->description = lang_get( 'description' );
+		$this->description = plugin_lang_get( 'description' );
 		$this->page = '';
 
 		$this->version = MANTIS_VERSION;
@@ -84,7 +80,7 @@ class GravatarPlugin extends MantisPlugin {
 		return array(
 			/**
 			 * The rating of the avatar to show: 'G', 'PG', 'R', 'X'
-			 * @link http://en.gravatar.com/site/implement/images/
+			 * @link https://en.gravatar.com/site/implement/images/
 			 */
 			'rating' => self::GRAVATAR_RATING_G,
 
@@ -92,7 +88,7 @@ class GravatarPlugin extends MantisPlugin {
 			 * The kind of avatar to use:
 			 *
 			 * - One of Gravatar's defaults (mm, identicon, monsterid, wavatar, retro)
-			 *   @link http://en.gravatar.com/site/implement/images/
+			 *   @link https://en.gravatar.com/site/implement/images/
 			 * - An URL to the default image to be used (for example,
 			 *   "http:/path/to/unknown.jpg" or "%path%images/avatar.png")
 			 */
@@ -115,7 +111,7 @@ class GravatarPlugin extends MantisPlugin {
 	 */
 	function csp_headers() {
 		if( config_get( 'show_avatar' ) !== OFF ) {
-			http_csp_add( 'img-src', self::getAvatarUrl() );
+			http_csp_add( 'img-src', self::GRAVATAR_URL );
 		}
 	}
 
@@ -146,7 +142,7 @@ class GravatarPlugin extends MantisPlugin {
 		}
 
 		# Build Gravatar URL
-		$t_avatar_url = self::getAvatarUrl() .
+		$t_avatar_url = self::GRAVATAR_URL .
 			'avatar/' . $t_email_hash . '?' .
 			http_build_query(
 				array(
@@ -160,20 +156,5 @@ class GravatarPlugin extends MantisPlugin {
 		$t_avatar->image = $t_avatar_url;
 
 		return $t_avatar;
-	}
-
-	/**
-	 * Gets the gravatar base URL
-	 *
-	 * @return string The gravatar URL.
-	 */
-	private static function getAvatarUrl() {
-		if( http_is_protocol_https() ) {
-			$t_avatar_url = self::GRAVATAR_URL_SECURE;
-		} else {
-			$t_avatar_url = self::GRAVATAR_URL;
-		}
-
-		return $t_avatar_url;
 	}
 }

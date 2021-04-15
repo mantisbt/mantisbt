@@ -64,7 +64,7 @@ print_manage_menu( 'manage_user_create_page.php' );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-user"></i>
+				<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				<?php echo lang_get( 'create_new_account_title' ) ?>
 			</h4>
 		</div>
@@ -83,7 +83,7 @@ print_manage_menu( 'manage_user_create_page.php' );
 					<input type="text" id="user-username" name="username" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" />
 				</td>
 			</tr><?php
-			if( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) { ?>
+			if( !$t_ldap || config_get_global( 'use_ldap_realname' ) == OFF ) { ?>
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'realname' ) ?>
@@ -93,7 +93,7 @@ print_manage_menu( 'manage_user_create_page.php' );
 				</td>
 			</tr><?php
 			}
-			if( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) { ?>
+			if( !$t_ldap || config_get_global( 'use_ldap_email' ) == OFF ) { ?>
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'email' ) ?>

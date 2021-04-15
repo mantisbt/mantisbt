@@ -34,6 +34,7 @@
  * @uses email_api.php
  * @uses error_api.php
  * @uses event_api.php
+ * @uses file_api.php
  * @uses helper_api.php
  * @uses history_api.php
  * @uses lang_api.php
@@ -53,6 +54,7 @@ require_api( 'database_api.php' );
 require_api( 'email_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
+require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
@@ -199,7 +201,7 @@ function bugnote_ensure_exists( $p_bugnote_id ) {
  * Check if the given user is the reporter of the bugnote
  * return true if the user is the reporter, false otherwise
  * @param integer $p_bugnote_id A bugnote identifier.
- * @param integer $p_user_id    An user identifier.
+ * @param integer $p_user_id    A user identifier.
  * @return boolean
  * @access public
  */
@@ -226,10 +228,11 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
  * @param integer $p_last_modified   Last modification date (defaults to now()).
  * @param boolean $p_skip_bug_update Skip bug last modification update (useful when importing bugs/bugnotes).
  * @param boolean $p_log_history     Log changes to bugnote history (defaults to true).
+ * @param boolean $p_trigger_event   Trigger extensibility event.
  * @return boolean|integer false or indicating bugnote id added
  * @access public
  */
-function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = true, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = false, $p_log_history = true ) {
+function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = true, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = false, $p_log_history = true, $p_trigger_event = true ) {
 	$c_bug_id = (int)$p_bug_id;
 	$c_time_tracking = helper_duration_to_minutes( $p_time_tracking );
 	$c_type = (int)$p_type;
@@ -251,10 +254,6 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 			}
 
 			$c_type = TIME_TRACKING;
-		} else if( is_blank( $p_bugnote_text ) ) {
-			# This is not time tracking (i.e. it's a normal bugnote)
-			# @todo should we not trigger an error in this case ?
-			return false;
 		}
 	}
 
@@ -307,12 +306,14 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# log new bug
-	if( true == $p_log_history ) {
+	if( $p_log_history ) {
 		history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 	}
 
 	# Event integration
-	event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id ) );
+	if( $p_trigger_event ) {
+		event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id, 'files' => array() ) );
+	}
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
 	if( true == $p_send_email && !is_blank( $t_bugnote_text ) ) {
@@ -370,6 +371,9 @@ function bugnote_delete( $p_bugnote_id ) {
 
 	# log deletion of bug
 	history_log_event_special( $t_bug_id, BUGNOTE_DELETED, bugnote_format_id( $p_bugnote_id ) );
+
+	# Delete attachments linked to bugnote in the db (i.e. bugnote_id is set)
+	file_delete_bugnote_attachments( $t_bug_id, $p_bugnote_id );
 
 	# Event integration
 	event_signal( 'EVENT_BUGNOTE_DELETED', array( $t_bug_id, $p_bugnote_id ) );
@@ -454,7 +458,7 @@ function bugnote_get_latest_id( $p_bug_id ) {
  * @param integer $p_bug_id             A bug identifier.
  * @param integer $p_user_bugnote_order Sort order.
  * @param integer $p_user_bugnote_limit Number of bugnotes to display to user.
- * @param integer $p_user_id            An user identifier.
+ * @param integer $p_user_id            A user identifier.
  * @return array array of bugnotes
  * @access public
  */
@@ -486,12 +490,6 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 			# If the access level specified is not enough to see time tracking information
 			# then reset it to 0.
 			if( !$t_time_tracking_visible ) {
-				# If the time tracking is the only data in the note, then skip it.
-				if( is_blank( $t_bugnote->note ) ) {
-					continue;
-				}
-
-				# otherwise, don't return the time tracking information so that it is not visible.
 				$t_bugnote->time_tracking = 0;
 			}
 
@@ -516,7 +514,7 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
  * @param integer $p_bug_id             A bug identifier.
  * @param integer $p_user_bugnote_order Sort order.
  * @param integer $p_user_bugnote_limit Number of bugnotes to display to user.
- * @param integer $p_user_id            An user identifier.
+ * @param integer $p_user_id            A user identifier.
  * @return string The string containing all visible notes.
  * @access public
  */
@@ -786,7 +784,7 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 				FROM {user} u, {bugnote} bn
 				WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND
 				bn.bug_id = ' . db_param() . $t_from_where . $t_to_where .
-				' GROUP BY u.username, u.realname';
+				' GROUP BY u.id, u.username, u.realname';
 	$t_result = db_query( $t_query, array( $p_bug_id ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -810,9 +808,12 @@ function bugnote_clear_cache( $p_bugnote_id = null ) {
 		$g_cache_bugnotes_by_id = array();
 		$g_cache_bugnotes_by_bug_id = array();
 	} else {
-		if( isset( $g_cache_bugnotes_by_id[(int)$p_bugnote_id] ) ) {
-			$t_note_obj = $g_cache_bugnotes_by_id[(int)$p_bugnote_id];
-			# current note id will be unset in the following call
+		$p_bugnote_id = (int)$p_bugnote_id;
+		if( isset( $g_cache_bugnotes_by_id[$p_bugnote_id] ) ) {
+			$t_note_obj = $g_cache_bugnotes_by_id[$p_bugnote_id];
+			unset($g_cache_bugnotes_by_id[$p_bugnote_id]);
+
+			# Clear the bug-level cache for the bugnote's parent bug
 			bugnote_clear_bug_cache( $t_note_obj->bug_id );
 		}
 	}

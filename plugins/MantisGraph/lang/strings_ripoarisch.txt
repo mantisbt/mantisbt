@@ -41,11 +41,10 @@
  * @author Purodha
  */
 
-$s_plugin_graph_title = 'Manits Dijajramme';
-$s_plugin_graph_description = 'Dat offizjäjje Zohsazprojramm zom erinshtöpselle, för Dijajramme ze maache.';
 $s_plugin_MantisGraph_title = 'Manits Dijajramme';
+$s_plugin_MantisGraph_description = 'Dat offizjäjje Zohsazprojramm zom erinshtöpselle, för Dijajramme ze maache.';
 $s_plugin_MantisGraph_config = 'Enschtällonge';
-$s_plugin_MantisGraph_synthesis_link = 'Zosammejesaz';
+$s_plugin_MantisGraph_tab_label = 'Manits Dijajramme';
 $s_plugin_MantisGraph_status_link = 'Pro Zohshtand';
 $s_plugin_MantisGraph_priority_link = 'Noh de Weeschteschkeit';
 $s_plugin_MantisGraph_severity_link = 'Pro Jeweesch';

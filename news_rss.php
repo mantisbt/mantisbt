@@ -89,7 +89,7 @@ if( $f_username !== null ) {
 }
 
 $t_description = $t_title;
-$t_image_link = config_get_global( 'path' ) . 'images/mantis_logo_button.gif';
+$t_image_link = config_get_global( 'path' ) . config_get_global( 'logo_image' );;
 
 # only rss 2.0
 $t_category = string_rss_links( project_get_name( $f_project_id ) );

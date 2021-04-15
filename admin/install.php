@@ -163,6 +163,7 @@ if( 0 == $t_install_state || 2 == $t_install_state ) {
 <?php
 }
 
+global $g_config_path;
 $t_config_filename = $g_config_path . 'config_inc.php';
 $t_config_exists = file_exists( $t_config_filename );
 
@@ -179,6 +180,11 @@ foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
 	$t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
 }
 
+/**
+ * @var string $f_db_table_prefix'
+ * @var string $f_db_table_plugin_prefix
+ * @var string $f_db_table_suffix
+ */
 if( $t_config_exists && $t_install_state <= 1 ) {
 	# config already exists - probably an upgrade
 	$f_dsn                    = config_get( 'dsn', '' );
@@ -257,13 +263,14 @@ if( $t_config_exists ) {
 		}
 	}
 
+	/** @var ADOConnection $g_db */
 	$g_db = ADONewConnection( $f_db_type );
 	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
 	if( $g_db->IsConnected() ) {
 		$g_db_connected = true;
 	}
 
-	$t_cur_version = config_get( 'database_version', -1 );
+	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS);
 
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
@@ -361,6 +368,7 @@ if( 2 == $t_install_state ) {
 	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 
 	# ADOdb library version check
+	global $ADODB_vers;
 	$t_adodb_version = substr( $ADODB_vers, 1, strpos( $ADODB_vers, ' ' ) - 1 );
 	print_test( 'Checking ADOdb Library version is at least ' . DB_MIN_VERSION_ADODB,
 		version_compare( $t_adodb_version, DB_MIN_VERSION_ADODB, '>=' ),
@@ -515,7 +523,6 @@ if( 2 == $t_install_state ) {
 ?>
 
 </table>
-</table>
 </div>
 </div>
 </div>
@@ -557,7 +564,7 @@ if( !$g_database_upgrade ) {
 <!-- Database type selection list -->
 <tr>
 	<td>
-		Type of Database
+		<label for="db_type">Type of Database</label>
 	</td>
 	<td>
 		<!-- Default values for table prefix/suffix -->
@@ -568,7 +575,7 @@ if( !$g_database_upgrade ) {
 	foreach( $t_prefix_defaults as $t_db_type => $t_defaults ) {
 		echo '<div id="default_' . $t_db_type . '" class="hidden">';
 		foreach( $t_defaults as $t_key => $t_value ) {
-			echo "\n\t" . '<span name="' . $t_key . '">' . $t_value . '</span>';
+			echo "\n\t" . '<span class="' . $t_key . '">' . $t_value . '</span>';
 		}
 		echo "\n" . '</div>' . "\n";
 	}
@@ -586,7 +593,7 @@ if( !$g_database_upgrade ) {
 			);
 
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
-				echo '<option value="' . $t_db . '"' .
+				echo '<option value="' . $t_db . '" ' .
 					( $t_db == $f_db_type ? ' selected="selected"' : '' ) . '>' .
 					$t_db_descr . "</option>\n";
 			}
@@ -598,29 +605,29 @@ if( !$g_database_upgrade ) {
 <!-- Database server hostname -->
 <tr>
 	<td>
-		Hostname (for Database Server)
+		<label for="hostname">Hostname (for Database Server)</label>
 	</td>
 	<td>
-		<input name="hostname" type="text" value="<?php echo string_attribute( $f_hostname ) ?>">
+		<input id="hostname" name="hostname" type="text" value="<?php echo string_attribute( $f_hostname ) ?>">
 	</td>
 </tr>
 
 <!-- Database username and password -->
 <tr>
 	<td>
-		Username (for Database)
+		<label for="db_username">Username (for Database)</label>
 	</td>
 	<td>
-		<input name="db_username" type="text" value="<?php echo string_attribute( $f_db_username ) ?>">
+		<input id="db_username" name="db_username" type="text" value="<?php echo string_attribute( $f_db_username ) ?>">
 	</td>
 </tr>
 
 <tr>
 	<td>
-		Password (for Database)
+		<label for="db_password">Password (for Database)</label>
 	</td>
 	<td>
-		<input name="db_password" type="password" value="<?php
+		<input id="db_password" name="db_password" type="password" value="<?php
 			echo !is_blank( $f_db_password ) && $t_config_exists
 				? CONFIGURED_PASSWORD
 				: $f_db_password;
@@ -631,10 +638,10 @@ if( !$g_database_upgrade ) {
 <!-- Database name -->
 <tr>
 	<td>
-		Database name (for Database)
+		<label for="database_name">Database name (for Database)</label>
 	</td>
 	<td>
-		<input name="database_name" type="text" value="<?php echo string_attribute( $f_database_name ) ?>">
+		<input id="database_name" name="database_name" type="text" value="<?php echo string_attribute( $f_database_name ) ?>">
 	</td>
 </tr>
 <?php
@@ -644,19 +651,27 @@ if( !$g_database_upgrade ) {
 <!-- Admin user and password -->
 <tr>
 	<td>
-		Admin Username (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
+		<label for="admin_username">
+			Admin Username (to
+			<?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?>
+			if required)
+		</label>
 	</td>
 	<td>
-		<input name="admin_username" type="text" value="<?php echo string_attribute( $f_admin_username ) ?>">
+		<input id="admin_username" name="admin_username" type="text" value="<?php echo string_attribute( $f_admin_username ) ?>">
 	</td>
 </tr>
 
 <tr>
 	<td>
-		Admin Password (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
+		<label for="admin_password">
+			Admin Password (to
+			<?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?>
+			if required)
+		</label>
 	</td>
 	<td>
-		<input name="admin_password" type="password" value="<?php
+		<input id="admin_password" name="admin_password" type="password" value="<?php
 			echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
 				? CONFIGURED_PASSWORD
 				: string_attribute( $f_admin_password );
@@ -676,7 +691,15 @@ if( !$g_database_upgrade ) {
 		echo "<tr>\n\t<td>\n";
 		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
 		echo "\t</td>\n\t<td>\n\t\t";
-		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="text" class="db-table-prefix" value="' . $f_db_table_prefix . '">';
+		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix" value="%2$s">',
+			$t_key,
+			${'f_' . $t_key} // The actual value of the corresponding form variable
+		);
+		echo "\n&nbsp;";
+		printf( '<button id="%s" type="button" class="btn btn-sm btn-primary btn-white btn-round reset-prefix">%s</button>',
+			"btn_$t_key",
+			lang_get( 'reset' )
+		);
 		echo "\n&nbsp;";
 		if( $t_key != 'db_table_suffix' ) {
 			$t_id_sample = $t_key. '_sample';
@@ -700,7 +723,7 @@ if( !$g_database_upgrade ) {
 <!-- Timezone -->
 <tr>
 	<td>
-		Default Time Zone
+		<label for="timezone">Default Time Zone</label>
 	</td>
 	<td>
 		<select id="timezone" name="timezone">
@@ -715,10 +738,10 @@ if( !$g_database_upgrade ) {
 <!-- Printing SQL queries -->
 <tr>
 	<td>
-		Print SQL Queries instead of Writing to the Database
+		<label for="log_queries">Print SQL Queries instead of Writing to the Database</label>
 	</td>
 	<td>
-		<input name="log_queries" type="checkbox" class="ace" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
+		<input id="log_queries" name="log_queries" type="checkbox" class="ace" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
 		<span class="lbl"></span>
 	</td>
 </tr>
@@ -768,6 +791,7 @@ if( 3 == $t_install_state ) {
 		Create database if it does not exist
 	</td>
 	<?php
+		global $g_db;
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 
 		$t_db_open = false;
@@ -780,6 +804,7 @@ if( 3 == $t_install_state ) {
 			$g_db = ADONewConnection( $f_db_type );
 			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 
+			/** @var ADODB_DataDict $t_dict */
 			$t_dict = NewDataDictionary( $g_db );
 
 			$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
@@ -863,10 +888,24 @@ if( 3 == $t_install_state ) {
 			# fake out database access routines used by config_get
 		}
 		$t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
+		/** @var array $g_upgrade Upgrade steps defined in schema.php */
 		$t_last_id = count( $g_upgrade ) - 1;
 		$i = $t_last_update + 1;
 		if( $f_log_queries ) {
-			echo '<tr><td> <span class="bigger-120">Database Creation Suppressed, SQL Queries follow</span> <pre>';
+			echo '<tr><td><span class="bigger-120">Database Creation Suppressed, SQL Queries follow</span>';
+
+			echo '<div class="space-6"></div>';
+			echo '<div class="alert alert-warning">';
+			echo "Please note that executing the generated script below <strong>may not result in a fully functional "
+				. "database</strong>, particularly in upgrade scenarios. This is due to the fact that some upgrade "
+				. "steps require the execution of PHP code; these <em>Upgrade Functions</em> are defined in "
+				. '<a href="https://github.com/mantisbt/mantisbt/blob/master/core/install_helper_functions_api.php">install_helper_functions_api.php</a>'
+				. " and cannot be translated to SQL statements. Use at your own risk.";
+			echo '</div>';
+
+			echo '<pre>';
+			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script". PHP_EOL;
+			echo "-- " . date("c") . PHP_EOL . PHP_EOL;
 		}
 
 		# Make sure we do the upgrades using UTF-8 if needed
@@ -874,6 +913,7 @@ if( 3 == $t_install_state ) {
 			$g_db->execute( 'SET NAMES UTF8' );
 		}
 
+		/** @var ADODB_DataDict $t_dict */
 		$t_dict = NewDataDictionary( $g_db );
 
 		# Special processing for specific schema versions
@@ -881,7 +921,7 @@ if( 3 == $t_install_state ) {
 		# not a Mantis schema upgrade but nevertheless required due to
 		# changes in the code
 
-		if( $t_last_update > 51 && $t_last_update < 189 ) {
+		if( $f_db_type == 'pgsql' && $t_last_update > 51 && $t_last_update < 189 ) {
 			# Since MantisBT 1.1.0 / ADOdb 4.96 (corresponding to schema 51)
 			# 'L' columns are BOOLEAN instead of SMALLINT
 			# Check for any DB discrepancies and update columns if needed
@@ -890,36 +930,87 @@ if( 3 == $t_install_state ) {
 				# Some columns need converting
 				$t_msg = "PostgreSQL: check Boolean columns' actual type";
 				if( is_array( $t_bool_columns ) ) {
+					$t_count = count( $t_bool_columns );
 					print_test(
 						$t_msg,
-						count( $t_bool_columns ) == 0,
+						$t_count == 0,
 						false,
-						count( $t_bool_columns ) . ' columns must be converted to BOOLEAN' );
+						"$t_count columns must be converted to BOOLEAN"
+					);
+
+					# Convert the columns
+					foreach( $t_bool_columns as $t_row ) {
+						/**
+						 * @var string $v_table_name
+						 * @var string $v_column_name
+						 * @var boolean $v_is_nullable
+						 * @var boolean $v_column_default
+						 */
+						extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+
+						$t_null = $v_is_nullable ? 'NULL' : 'NOT NULL';
+						$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
+						$t_sqlarray = $t_dict->AlterColumnSQL(
+							$v_table_name,
+							$v_column_name . ' L ' . $t_null . ' DEFAULT ' . $t_default
+						);
+						print_test(
+							'Converting column ' . $v_table_name . '.' . $v_column_name . ' to BOOLEAN',
+							2 == $t_dict->ExecuteSQLArray( $t_sqlarray, false ),
+							true,
+							print_r( $t_sqlarray, true )
+						);
+						/** @noinspection PhpExpressionAlwaysConstantInspection Set by print_test() */
+						if( $g_failed ) {
+							# Error occurred, bail out
+							break;
+						}
+					}
 				} else {
 					# We did not get an array => error occurred
 					print_test( $t_msg, false, true, $t_bool_columns );
 				}
-
-				# Convert the columns
-				foreach( $t_bool_columns as $t_row ) {
-					extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-					$t_null = $v_is_nullable ? 'NULL' : 'NOT NULL';
-					$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
-					$t_sqlarray = $t_dict->AlterColumnSQL(
-						$v_table_name,
-						$v_column_name . ' L ' . $t_null . ' DEFAULT ' . $t_default );
-					print_test(
-						'Converting column ' . $v_table_name . '.' . $v_column_name . ' to BOOLEAN',
-						2 == $t_dict->ExecuteSQLArray( $t_sqlarray, false ),
-						true,
-						print_r( $t_sqlarray, true ) );
-					if( $g_failed ) {
-						# Error occurred, bail out
-						break;
-					}
-				}
 			}
 		}
+		# Follow-up fix for user_pref.redirect_delay, which was incorrectly
+		# set to boolean in check_pgsql_bool_columns() before MantisBT 2.23.0,
+		# so we need to check its type and convert it back to integer if needed.
+		# See issue #26109.
+		elseif( $f_db_type == 'pgsql' && $t_last_update > 43
+			&& version_compare( MANTIS_VERSION, '2.23.0', '<=' )
+		) {
+			$t_table = db_get_table( 'user_pref' );
+			$t_column = 'redirect_delay';
+
+			try {
+				$t_is_integer = pgsql_get_column_type( $t_table, $t_column ) == 'integer';
+				$t_msg = "Column must be converted to INTEGER";
+				$t_exception_occured = false;
+			}
+			catch( Exception $e ) {
+				$t_exception_occured = true;
+				$t_msg = $e->getMessage();
+			}
+
+			print_test(
+				"PostgreSQL: check column '$t_table.$t_column' data type",
+				!$t_exception_occured && $t_is_integer,
+				/* hard fail */ $t_exception_occured,
+				$t_msg
+			);
+			if( !$t_exception_occured && !$t_is_integer ) {
+				$t_sqlarray = $t_dict->AlterColumnSQL( $t_table,
+					'redirect_delay  I  NOTNULL  DEFAULT 0'
+				);
+				print_test(
+					"Converting column '$t_table.$t_column'' to INTEGER",
+					2 == $t_dict->ExecuteSQLArray( $t_sqlarray, false ),
+					true,
+					print_r( $t_sqlarray, true )
+				);
+			}
+		}
+
 		# End of special processing for specific schema versions
 
 		while( ( $i <= $t_last_id ) && !$g_failed ) {
@@ -927,70 +1018,97 @@ if( 3 == $t_install_state ) {
 				echo '<tr><td>';
 			}
 
-			$t_sql = true;
-			$t_target = $g_upgrade[$i][1][0];
+			# No-op upgrade step - required for oci8
+			if( $g_upgrade[$i] === null ) {
+				$t_sql = false;
+				$t_sqlarray = array();
+				$t_operation = 'No operation';
+				$t_target = null;
+			} else {
+				$t_sql = true;
+				$t_operation = $g_upgrade[$i][0];
+				$t_target = $g_upgrade[$i][1][0];
 
-			switch( $g_upgrade[$i][0] ) {
-				case 'InsertData':
-					$t_sqlarray = call_user_func_array( $g_upgrade[$i][0], $g_upgrade[$i][1] );
-					break;
+				switch( $t_operation ) {
+					case 'InsertData':
+						$t_sqlarray = call_user_func_array( $t_operation, $g_upgrade[$i][1] );
+						break;
 
-				case 'UpdateSQL':
-					$t_sqlarray = array(
-						$g_upgrade[$i][1],
-					);
-					$t_target = $g_upgrade[$i][1];
-					break;
+					case 'UpdateSQL':
+						$t_sqlarray = array(
+							$g_upgrade[$i][1],
+						);
+						$t_target = $g_upgrade[$i][1];
+						break;
 
-				case 'UpdateFunction':
-					$t_sqlarray = array(
-						$g_upgrade[$i][1],
-					);
-					if( isset( $g_upgrade[$i][2] ) ) {
-						$t_sqlarray[] = $g_upgrade[$i][2];
-					}
-					$t_sql = false;
-					$t_target = $g_upgrade[$i][1];
-					break;
-
-				case null:
-					# No-op upgrade step - required for oci8
-					break;
-
-				default:
-					$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
-
-					# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
-					if( isset( $g_upgrade[$i][2] ) ) {
-						if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
-							$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
-						} else {
-							$t_sqlarray = array();
+					case 'UpdateFunction':
+						$t_sqlarray = array(
+							$g_upgrade[$i][1],
+						);
+						if( isset( $g_upgrade[$i][2] ) ) {
+							$t_sqlarray[] = $g_upgrade[$i][2];
 						}
-					} else {
-						$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
-					}
-					break;
+						$t_sql = false;
+						$t_target = $g_upgrade[$i][1];
+						break;
+
+					default:
+						$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+
+						# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
+						if( isset( $g_upgrade[$i][2] ) ) {
+							if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
+								$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+							} else {
+								$t_sql = false;
+								$t_sqlarray = array();
+								$t_operation = "No operation";
+							}
+						} else {
+							$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+						}
+						break;
+				}
 			}
 			if( $f_log_queries ) {
+				echo "-- Schema step $i" . PHP_EOL;
 				if( $t_sql ) {
-					foreach( $t_sqlarray as $t_sql ) {
+					foreach( $t_sqlarray as $t_statement ) {
 						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
-						if( $f_db_type == 'oci8' && stripos( $t_sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
+						if( $f_db_type == 'oci8' && stripos( $t_statement, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
 							$t_sql_end = PHP_EOL . '/';
 						} else {
 							$t_sql_end = ';';
 						}
-						echo htmlentities( $t_sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
+						echo htmlentities( $t_statement ) . $t_sql_end;
 					}
+				} elseif( $t_sqlarray ) {
+					echo "-- Execute PHP Update Function: install_" . htmlentities( $t_sqlarray[0] ) . "(";
+					# Convert the parameters array to a printable string
+					if( isset( $t_sqlarray[1] ) ) {
+						$t_params = array();
+						foreach( $t_sqlarray[1] as $t_param ) {
+							$t_value = var_export( $t_param, true );
+							if( is_array( $t_param ) ) {
+								# Remove unnecessary array keys, newlines and the trailing comma
+								$t_value = preg_replace( '/\s*[0-9]+ => /', ' ', $t_value );
+								$t_value = str_replace( ",\n", ' ', $t_value );
+							}
+							$t_params[] = $t_value;
+						}
+						echo htmlentities( implode( ', ', $t_params ) );
+					}
+					echo ")";
+				} else {
+					echo "-- $t_operation";
 				}
+				echo PHP_EOL . PHP_EOL;
 			} else {
-				echo 'Schema step ' . $i . ': ';
-				if( is_null( $g_upgrade[$i][0] ) ) {
-					echo 'No operation';
+				echo 'Schema step ' . $i . ': ' . $t_operation;
+				if( $t_target === null ) {
 					$t_ret = 2;
 				} else {
-					echo $g_upgrade[$i][0] . ' ( ' . $t_target . ' )';
+					echo ' ( ' . $t_target . ' )';
 					if( $t_sql ) {
 						$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 					} else {
@@ -1004,7 +1122,7 @@ if( 3 == $t_install_state ) {
 				echo '</td>';
 				if( $t_ret == 2 ) {
 					print_test_result( GOOD );
-					config_set( 'database_version', $i );
+					config_set( 'database_version', $i, ALL_USERS, ALL_PROJECTS );
 				} else {
 					$t_all_sql = '';
 					if( $t_sql ) {
@@ -1022,8 +1140,26 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $t_last_id . '\', 1, 90, \'database_version\', 0, 0 );' . PHP_EOL;
-			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
+			echo "-- Set database version" . PHP_EOL;
+			if( $t_last_update == -1 ) {
+				echo "INSERT INTO " . db_get_table( 'config' )
+					. " ( value, type, access_reqd, config_id, project_id, user_id )"
+					. " VALUES ($t_last_id, 1, 90, 'database_version', 0, 0 );"
+					. PHP_EOL;
+			} else {
+				echo "UPDATE " . db_get_table( 'config' )
+					. " SET value = $t_last_id"
+					. " WHERE config_id = 'database_version' AND project_id = 0 AND user_id = 0;"
+					. PHP_EOL;
+			}
+			echo '</pre>';
+
+			echo '<div class="space-6"></div>';
+			echo '<div class="alert alert-danger">';
+			echo "<strong>Your database is not ready yet !</strong> "
+				. "Please create it, then install the tables and data using the above script before proceeding.";
+			echo '</div>';
+			echo '</td></tr>';
 		}
 	}
 	if( false == $g_failed ) {
@@ -1134,7 +1270,10 @@ if( 5 == $t_install_state ) {
 	$t_write_failed = true;
 
 	if( !$t_config_exists ) {
-		if( $t_fd = @fopen( $t_config_filename, 'w' ) ) {
+		# Try to create the config file
+		if( is_writable( $g_config_path )
+			&& $t_fd = fopen( $t_config_filename, 'w' )
+		) {
 			fwrite( $t_fd, $t_config );
 			fclose( $t_fd );
 		}
@@ -1171,7 +1310,7 @@ if( 5 == $t_install_state ) {
 ?>
 <tr>
 	<td colspan="2">
-		<table width="50%" cellpadding="10" cellspacing="1">
+		<table>
 			<tr>
 				<td>
 					Please add the following lines to
@@ -1351,12 +1490,17 @@ if( 7 == $t_install_state ) {
 <tr>
 	<td>
 		<span class="bigger-130">
+<?php if( $f_log_queries ) { ?>
+		SQL script generated successfully.
+		Use it to manually create or upgrade your database.
+<?php } else { ?>
 		MantisBT was installed successfully.
-<?php if( $f_db_exists ) {?>
+<?php if( $f_db_exists ) { ?>
 		<a href="../login_page.php">Continue</a> to log in.
 <?php } else { ?>
 		Please log in as the administrator and <a href="../login_page.php">create</a> your first project.
 		</span>
+<?php } ?>
 <?php } ?>
 	</td>
 	<?php print_test_result( GOOD ); ?>
@@ -1400,7 +1544,7 @@ if( $g_failed && $t_install_state != 1 ) {
 				? CONFIGURED_PASSWORD
 				: string_attribute( $f_db_password );
 		?>">
-		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>">
+		<input name="admin_username" type="hidden" value="<?php echo string_attribute( $f_admin_username )?>">
 		<input name="admin_password" type="hidden" value="<?php
 			echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
 				? CONFIGURED_PASSWORD

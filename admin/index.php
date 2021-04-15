@@ -55,7 +55,7 @@ function print_info_row( $p_description, $p_value ) {
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-download"></i>
+		<?php print_icon( 'fa-download', 'ace-icon' ); ?>
 		<?php echo lang_get( 'install_information' ) ?>
 	</h4>
 </div>
@@ -65,7 +65,7 @@ function print_info_row( $p_description, $p_value ) {
 <div class="table-responsive">
 	<table class="table table-bordered table-condensed">
 <?php
-	if( ON == config_get( 'show_version' ) ) {
+	if( ON == config_get_global( 'show_version' ) ) {
 		$t_version_suffix = config_get_global( 'version_suffix' );
 	} else {
 		$t_version_suffix = '';
@@ -79,7 +79,7 @@ function print_info_row( $p_description, $p_value ) {
 			</td>
 		</tr>
 <?php
-	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version' ) );
+	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version', 0,  ALL_USERS, ALL_PROJECTS ) );
 	print_info_row( lang_get( 'adodb_version' ), $g_db->Version() );
 ?>
 		<tr>

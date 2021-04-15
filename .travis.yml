@@ -3,41 +3,64 @@
 # -----------------------------------------------------------------------------
 
 language: php
+os: linux
+dist: bionic
 
 # -----------------------------------------------------------------------------
 # Environment setup and test scripts execution
 #
 
+services:
+  - postgresql
+  - mysql
+
 before_install:
   # If PHP >= 7.0, force use of PHPunit 5.7
   - if php -r "exit( (int)! version_compare( '$TRAVIS_PHP_VERSION', '7.0', '>=' ) );"; then mkdir -p ~/bin && wget -O ~/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar && chmod +x ~/bin/phpunit; fi
 
+install:
+  - composer install
+
 before_script:
-  - ./scripts/travis_before_script.sh
+  - ./build/travis_before_script.sh
 
 script:
-  - ./scripts/travis_script.sh
+  - ./build/travis_script.sh
 
 # -----------------------------------------------------------------------------
 # What to build, and on which platforms
 #
 
 php:
-  - 5.5
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
+  - 8.0
+  - 7.4
   - 7.3
+  - 7.2
+  - 7.1
 
 env:
   - DB=mysql
   - DB=pgsql
 
-matrix:
+jobs:
   include:
+    # Use 'xenial' build environment for legacy PHP versions
+    - php: 7.0
+      dist: xenial
+      env: DB=mysql
+    - php: 7.0
+      dist: xenial
+      env: DB=pgsql
+    - php: 5.6
+      dist: xenial
+      env: DB=mysql
+    - php: 5.6
+      dist: xenial
+      env: DB=pgsql
+
     # Add a specific build for Documentation
-    - env: DOCBOOK=1
+    - name: Documentation
+      env: DOCBOOK=1
       # Using Ruby as it's preinstalled and we don't need PHP to build docs
       language: ruby
       addons:

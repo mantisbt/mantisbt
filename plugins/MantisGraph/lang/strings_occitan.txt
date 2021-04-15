@@ -41,11 +41,10 @@
  * @author Cedric31
  */
 
-$s_plugin_graph_title = 'Grafics Mantis';
-$s_plugin_graph_description = 'Plugin de grafics oficial.';
 $s_plugin_MantisGraph_title = 'Grafics de Mantis';
+$s_plugin_MantisGraph_description = 'Plugin de grafics oficial.';
 $s_plugin_MantisGraph_config = 'Configuracion';
-$s_plugin_MantisGraph_synthesis_link = 'Sintèsi';
+$s_plugin_MantisGraph_tab_label = 'Grafics Mantis';
 $s_plugin_MantisGraph_status_link = 'Per estat';
 $s_plugin_MantisGraph_priority_link = 'Per prioritat';
 $s_plugin_MantisGraph_severity_link = 'Per gravetat';

@@ -46,15 +46,14 @@
  * @author Mirzali
  */
 
-$s_plugin_graph_title = 'Grafikê Mantisi';
-$s_plugin_graph_description = 'Olena grafik de resimi';
 $s_plugin_MantisGraph_title = 'Grafikê Mantisi';
+$s_plugin_MantisGraph_description = 'Olena grafik de resimi';
 $s_plugin_MantisGraph_config = 'Vıraştış';
-$s_plugin_MantisGraph_synthesis_link = 'Sentez';
+$s_plugin_MantisGraph_tab_label = 'Grafiki';
 $s_plugin_MantisGraph_status_link = 'Weziyeti heta';
 $s_plugin_MantisGraph_priority_link = 'Veroren heta';
 $s_plugin_MantisGraph_severity_link = 'Ciddiyeti heta';
-$s_plugin_MantisGraph_category_link = 'Kategori heta';
+$s_plugin_MantisGraph_category_link = 'Goreyê kategoriye ra';
 $s_plugin_MantisGraph_resolution_link = 'Agozni heta';
 $s_plugin_MantisGraph_issue_trends_link = 'Namıyayışê problemi';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Weziyetê Grafiki heta';
@@ -68,7 +67,7 @@ $s_plugin_MantisGraph_graph_issues_trend_title = 'Problemi a biy, hal biy u ê m
 $s_plugin_MantisGraph_by_status_pct = 'Seyin weziyeti heta';
 $s_plugin_MantisGraph_by_priority_pct = 'Seyin verori heta';
 $s_plugin_MantisGraph_by_severity_pct = 'Verorin da seyin heta';
-$s_plugin_MantisGraph_by_category_pct = 'Seyin kategori heta';
+$s_plugin_MantisGraph_by_category_pct = 'Goreyê sed ra kategoriye';
 $s_plugin_MantisGraph_by_resolution_pct = 'Seyina agozgi heta';
 $s_plugin_MantisGraph_by_severity_mix = 'Verori u weziyeti heta';
 $s_plugin_MantisGraph_by_priority_mix = 'Veroroi u weziyeti heta';

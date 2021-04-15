@@ -61,7 +61,7 @@ print_admin_menu_bar( 'test_langs.php' );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-text-width"></i>
+		<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
 		Test Langs
 	</h4>
 </div>
@@ -424,11 +424,10 @@ function checktoken( $p_file, $p_base = false ) {
  * @param string  $p_error   Error code.
  * @param string  $p_file    File error occurred in.
  * @param integer $p_line    Line number error occurred on.
- * @param string  $p_context Context of error.
  * @return void
  */
-function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	print_error( 'error handler thrown: ' . $p_type . '<br />' . $p_error . '<br />' . $p_file . '<br />' . $p_line . '<br />' . $p_context );
+function lang_error_handler( $p_type, $p_error, $p_file, $p_line ) {
+	print_error( 'error handler thrown: ' . $p_type . '<br />' . $p_error . '<br />' . $p_file . '<br />' . $p_line );
 }
 
 /**

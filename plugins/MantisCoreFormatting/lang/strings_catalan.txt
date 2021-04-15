@@ -40,6 +40,7 @@
  *
  * @author Bernat
  * @author Dtamajon
+ * @author Mguix
  * @author Paucabot
  */
 
@@ -49,6 +50,6 @@ $s_plugin_format_config = 'Configuració';
 $s_plugin_format_process_text = 'Processament de text';
 $s_plugin_format_process_text_warning_notice = 'No ho deshabiliti si no està realment segur del què està fent. En estat deshabilitat hi poden haver atacs cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'Processament de la URL';
-$s_plugin_format_process_buglinks = 'Enllaços MantisBT (Incidències/Notes d\'Incidències)';
+$s_plugin_format_process_buglinks = 'Enllaços interns de MantisBT (Incidències i Notes d\'Incidències)';
 $s_plugin_format_enabled = 'Habilitat';
 $s_plugin_format_disabled = 'Deshabilitat';

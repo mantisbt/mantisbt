@@ -425,7 +425,7 @@ function column_get_title( $p_column ) {
 		case 'last_updated':
 			return lang_get( 'updated' );
 		case 'os_build':
-			return lang_get( 'os_version' );
+			return lang_get( 'os_build' );
 		case 'project_id':
 			return lang_get( 'email_project' );
 		case 'reporter_id':
@@ -729,7 +729,7 @@ function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target =
 function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-view-state">';
 	$t_view_state_text = lang_get( 'view_status' );
-	$t_view_state_icon = ' <i class="fa fa-lock" title="' . $t_view_state_text . '"></i>';
+	$t_view_state_icon = ' ' . icon_get( 'fa-lock', '', $t_view_state_text );
 	print_view_bug_sort_link( $t_view_state_icon, 'view_state', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'view_state' );
 	echo '</th>';
@@ -762,7 +762,7 @@ function print_column_title_os( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
  */
 function print_column_title_os_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-os-build">';
-	print_view_bug_sort_link( lang_get( 'os_version' ), 'os_build', $p_sort, $p_dir, $p_columns_target );
+	print_view_bug_sort_link( lang_get( 'os_build' ), 'os_build', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'os_build' );
 	echo '</th>';
 }
@@ -846,7 +846,7 @@ function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target =
  */
 function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_attachment_count_text = lang_get( 'attachment_count' );
-	$t_attachment_count_icon = "<i class=\"fa fa-paperclip blue\" title=\"$t_attachment_count_text\" ></i>";
+	$t_attachment_count_icon = icon_get( 'fa-paperclip', 'blue', $t_attachment_count_text );
 	echo "\t" . '<th class="column-attachments">' . $t_attachment_count_icon . '</th>' . "\n";
 }
 
@@ -971,7 +971,9 @@ function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-bugnotes-count"> <i class="fa fa-comments blue"></i> </th>';
+	echo '<th class="column-bugnotes-count">';
+	print_icon( 'fa-comments', 'blue' );
+	echo '</th>';
 }
 
 /**
@@ -1061,7 +1063,7 @@ function print_column_title_due_date( $p_sort, $p_dir, $p_columns_target = COLUM
 function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-overdue">';
 	$t_overdue_text = lang_get( 'overdue' );
-	$t_overdue_icon = ' <i class="fa fa-times-circle-o" title="' . $t_overdue_text . '"></i>';
+	$t_overdue_icon = ' ' . icon_get( 'fa-times-circle-o', '', $t_overdue_text );
 	print_view_bug_sort_link( $t_overdue_icon, 'due_date', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'due_date' );
 	echo '</th>';
@@ -1079,7 +1081,8 @@ function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TAR
 	global $g_checkboxes_exist;
 
 	echo '<td class="column-selection">';
-	if( # check report_bug_threshold for the actions "copy" or "move" into any other project
+	if( COLUMNS_TARGET_PRINT_PAGE == $p_columns_target ||
+		# check report_bug_threshold for the actions "copy" or "move" into any other project
 		access_has_any_project_level( 'report_bug_threshold' ) ||
 		# !TODO: check if any other projects actually exist for the bug to be moved to
 		access_has_project_level( config_get( 'move_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
@@ -1159,8 +1162,8 @@ function print_column_edit( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_V
 
 	if( !bug_is_readonly( $p_bug->id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
 		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
-		echo '<i class="fa fa-pencil bigger-130 padding-2 grey"';
-		echo ' title="' . lang_get( 'update_bug_button' ) . '"></i></a>';
+		print_icon( 'fa-pencil', 'bigger-130 padding-2 grey', lang_get( 'edit' ) );
+		echo '</a>';
 	} else {
 		echo '&#160;';
 	}
@@ -1232,16 +1235,16 @@ function print_column_bugnotes_count( BugData $p_bug, $p_columns_target = COLUMN
 
 	# grab the bugnote count
 	$t_bugnote_stats = bug_get_bugnote_stats( $p_bug->id );
-	if( null !== $t_bugnote_stats ) {
+	if( is_array( $t_bugnote_stats ) ) {
 		$t_bugnote_count = $t_bugnote_stats['count'];
-		$v_bugnote_updated = $t_bugnote_stats['last_modified'];
+		$t_bugnote_updated = $t_bugnote_stats['last_modified'];
 	} else {
 		$t_bugnote_count = 0;
 	}
 
 	echo '<td class="column-bugnotes-count">';
 	if( $t_bugnote_count > 0 ) {
-		$t_show_in_bold = $v_bugnote_updated > strtotime( '-' . $g_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' );
+		$t_show_in_bold = $t_bugnote_updated > strtotime( '-' . $g_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' );
 		if( $t_show_in_bold ) {
 			echo '<span class="bold">';
 		}
@@ -1392,8 +1395,8 @@ function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET
 	$t_status_css = html_get_status_css_fg( $p_bug->status, $t_current_user, $p_bug->project_id );
 	echo '<td class="column-status">';
 	echo '<div class="align-left">';
-	echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '"></i> ';
-	printf( '<span title="%s">%s</span>',
+	print_icon( 'fa-square', 'fa-status-box ' . $t_status_css );
+	printf( ' <span title="%s">%s</span>',
 		get_enum_element( 'resolution', $p_bug->resolution, $t_current_user, $p_bug->project_id ),
 		get_enum_element( 'status', $p_bug->status, $t_current_user, $p_bug->project_id )
 	);
@@ -1505,8 +1508,9 @@ function print_column_summary( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	} else {
 		$t_summary = string_display_line_links( $p_bug->summary );
 	}
-
-	echo '<td class="column-summary">' . $t_summary . '</td>';
+	
+	$t_bug_url = string_get_bug_view_url( $p_bug->id );
+	echo '<td class="column-summary"><a href="' . $t_bug_url . '">' . $t_summary . '</a></td>';
 }
 
 /**
@@ -1599,7 +1603,7 @@ function print_column_view_state( BugData $p_bug, $p_columns_target = COLUMNS_TA
 
 	if( VS_PRIVATE == $p_bug->view_state ) {
 		$t_view_state_text = lang_get( 'private' );
-		echo ' <i class="fa fa-lock" title="' . $t_view_state_text . '"></i>';
+		print_icon( 'fa-lock', '', $t_view_state_text );
 	} else {
 		echo '&#160;';
 	}
@@ -1634,20 +1638,17 @@ function print_column_tags( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_V
  * @access public
  */
 function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	$t_overdue = '';
-
 	if( !access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ||
 		date_is_null( $p_bug->due_date )
 	) {
+		$t_css = '';
 		$t_value = '&#160;';
 	} else {
-		if( bug_is_overdue( $p_bug->id ) ) {
-			$t_overdue = ' overdue';
-		}
+		$t_css = " due-" . bug_overdue_level( $p_bug->id );
 		$t_value = string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 	}
 
-	printf( '<td class="column-due-date%s">%s</td>', $t_overdue, $t_value );
+	printf( '<td class="column-due-date%s">%s</td>', $t_css, $t_value );
 }
 
 /**
@@ -1663,11 +1664,29 @@ function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	echo '<td class="column-overdue">';
 
 	if( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) &&
-		!date_is_null( $p_bug->due_date ) &&
-		bug_is_overdue( $p_bug->id ) ) {
-		$t_overdue_text = lang_get( 'overdue' );
-		$t_overdue_text_hover = sprintf( lang_get( 'overdue_since' ), date( config_get( 'short_date_format' ), $p_bug->due_date ) );
-		echo '<i class="fa fa-times-circle-o" title="' . string_display_line( $t_overdue_text_hover ) . '"></i>';
+		!date_is_null( $p_bug->due_date )
+	) {
+		$t_level = bug_overdue_level( $p_bug->id );
+		if( $t_level === 0 ) {
+			$t_icon = 'fa-times-circle-o';
+			$t_overdue_text_hover = sprintf(
+				lang_get( 'overdue_since' ),
+				date( config_get( 'short_date_format' ), $p_bug->due_date )
+			);
+		} else {
+			$t_icon = $t_level === false ? 'fa-info-circle' : 'fa-warning';
+
+			$t_duration = $p_bug->due_date - db_now();
+			if( $t_duration <= SECONDS_PER_DAY ) {
+				$t_overdue_text_hover = lang_get( 'overdue_one_day' );
+			} else {
+				$t_overdue_text_hover = sprintf(
+					lang_get( 'overdue_days' ),
+					ceil( $t_duration / SECONDS_PER_DAY )
+				);
+			}
+		}
+		print_icon( $t_icon, '', string_display_line( $t_overdue_text_hover ) );
 	} else {
 		echo '&#160;';
 	}

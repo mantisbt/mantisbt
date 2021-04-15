@@ -1,5 +1,5 @@
 <chapter id="admin.customize">
-    <title>Customizing MantisBT</title>
+	<title>Customizing MantisBT</title>
 
 	<section id="admin.customize.strings">
 		<title>Strings / Translations</title>
@@ -54,79 +54,80 @@ $s_CODE = STRING;
 		</para></warning>
 	</section>
 
-    <section id="admin.customize.customfields">
-        <title>Custom Fields</title>
+	<section id="admin.customize.customfields">
+		<title>Custom Fields</title>
 
 	<section id="admin.customize.customfields.overview">
-	<title>Overview</title>
+		<title>Overview</title>
 
-        <para>Different teams typically like to capture different information
-	as users report issues, in some cases, the data required is even
-	different from one project to another.  Hence, MantisBT provides the
-	ability for managers and administrators to define custom fields as way
-	to extend MantisBT to deal with information that is specific to their
-	teams or their projects.  The aim is for this to keep MantisBT native
-	fields to a minimum.
+		<para>Different teams typically like to capture different information
+			as users report issues, in some cases, the data required is even
+			different from one project to another. Hence, MantisBT provides the
+			ability for managers and administrators to define custom fields as way
+			to extend MantisBT to deal with information that is specific to their
+			teams or their projects. The aim is for this to keep MantisBT native
+			fields to a minimum.
 
-	Following are some facts about the implementation of
-        custom fields in MantisBT:
-            <itemizedlist>
-                <listitem>
-                    <para>Custom fields are defined system wide.</para>
-                </listitem>
-                <listitem>
-                    <para>Custom fields can be linked to multiple
-                        projects.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>The sequence of displaying custom fields can be different
-                        per project.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Custom fields must be defined by users with access level
-                        ADMINISTRATOR.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Custom fields can be linked to projects by users with
-                        access level MANAGER or above (by default, this can be
-                        configurable).
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Number of custom fields is not restricted.</para>
-                </listitem>
-		<listitem>
-		    <para>Users can define filters that include custom fields.</para>
-		</listitem>
-		<listitem>
-		    <para>Custom fields can be included in View Issues, Print
-		    Issues, and CSV exports.</para>
-		</listitem>
-		<listitem>
-		    <para>Enumeration custom fields can have a set of static
-		    values or values that are calculated dynamically based on
-		    a custom function.</para>
-		</listitem>
-            </itemizedlist>
-        </para>
-        </section>
+			Following are some facts about the implementation of
+			custom fields in MantisBT:
+		</para>
+
+		<itemizedlist>
+			<listitem>
+				<para>Custom fields are defined system wide.</para>
+			</listitem>
+			<listitem>
+				<para>Custom fields can be linked to multiple
+					projects.
+				</para>
+			</listitem>
+			<listitem>
+				<para>The sequence of displaying custom fields can be different
+					per project.
+				</para>
+			</listitem>
+			<listitem>
+				<para>Custom fields must be defined by users with access level
+					ADMINISTRATOR.
+				</para>
+			</listitem>
+			<listitem>
+				<para>Custom fields can be linked to projects by users with
+					access level MANAGER or above (by default, this can be
+					configurable).
+				</para>
+			</listitem>
+			<listitem>
+				<para>Number of custom fields is not restricted.</para>
+			</listitem>
+			<listitem>
+				<para>Users can define filters that include custom fields.</para>
+			</listitem>
+			<listitem>
+				<para>Custom fields can be included in View Issues, Print
+				Issues, and CSV exports.</para>
+			</listitem>
+			<listitem>
+				<para>Enumeration custom fields can have a set of static
+				values or values that are calculated dynamically based on
+				a custom function.</para>
+			</listitem>
+		</itemizedlist>
+	</section>
 
 	<section id="admin.customize.customfields.definitions">
-	    <title>Custom Field Definition</title>
+		<title>Custom Field Definition</title>
 
-        <para>
-            The definition of a custom field includes the following logical
-            attributes:
+		<para>
+			The definition of a custom field includes the following logical
+			attributes:
 
-            <itemizedlist>
-                <listitem>
+			<itemizedlist>
+				<listitem>
 					<para>Caption variable name.
 						This value is supplied to the lang_get() API; it is
 						therefore mandatory to set this to a
-						<ulink url="http://php.net/language.variables.basics.php">valid PHP identifier</ulink>
+						<ulink url="https://www.php.net/manual/en/language.variables.basics.php">valid PHP identifier</ulink>
 						(i.e. only letters, numbers and underscores; no spaces)
 						if you intend to translate the field label
 						(see <xref linkend="admin.customize.customfields.localize" />).
@@ -136,204 +137,302 @@ $s_CODE = STRING;
 						<filename>custom_strings_inc.php</filename>,
 						then it will be displayed as-is.
 					</para></note>
-                </listitem>
-                <listitem>
-                    <para>Custom field type (string, numeric, float,
-		    enumeration, email, checkbox, radio, list, multi-selection list, date).
-                    </para>
-		    <para>Type 'string' is used for strings of up to 255 characters.</para>
-		    <para>Type 'numeric' is used for numerical integer values.</para>
-		    <para>Type 'float' is used for real (float / double) numbers.</para>
-		    <para>Type 'enumeration' is used when a user selects one entry from a list.  The user interface for such type is a combo-box.</para>
-		    <para>Type 'email' is used for storing email addresses.</para>
-		    <para>Type 'checkbox' is like enumeration but the list is shown as checkboxes and the user is allowed to tick more than one selection.  The default value and the possible value can contain multiple values like 'RED|YELLOW|BLUE' (without the single quote).</para>
-			<para>Type 'radio' is like enumeration but the list is shown as radio buttons and the user is allowed to tick on of the options.  The possible values can be 'RED|YELLOW|BLUE', where the default value can be 'YELLOW'.  Note that the default value can't contain multiple values.</para>
-		    <para>Type 'list' is like enumeration but the list is shown as a list box where the user is only allowed to select one option.  The possible values can be 'RED|YELLOW|BLUE', where the default value can be 'YELLOW'.  Note that the default value can't contain multiple values.</para>
-		    <para>Type 'multi-selection list' is like enumeration but the list is shown as a list box where the user is allowed to select multiple options.  The possible values can be 'RED|YELLOW|BLUE', where the default value can be 'RED|BLUE'.  Note that in this case the default value contains multiple values.</para>
-		    <para>Type 'date' is for date values.  The default value can be empty, or {tomorrow}, {yesterday}, {next week}, {last week}, {+3 days}, {-2 days}.</para>
-                </listitem>
-                <listitem>
-                    <para>Enumeration possible values (eg: RED|YELLOW|BLUE).
-                        Use the pipe ('|') character to separate possible values for an
-                        enumeration. One of the possible values can be an
-			empty string.  The set of possible values can also be
-			calculated at runtime.  For example, "=versions" would
-			automatically resolve into all the versions defined
-			for the current project.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Default value - see details above for a sample default value for each type.</para>
-                </listitem>
-                <listitem>
-                    <para>Minimum/maximum length for the custom field value (use 0
-                        to disable).  Note that these metrics are not really relevant to custom fields that are based on an enumeration of possible values.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Regular expression to use for validating user input (use <ulink url="http://www.php.net/manual/en/reference.pcre.pattern.syntax.php">PCRE syntax</ulink>).
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Read Access level: Minimum access level for users to be
-                        able to see the value of the custom field.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Write Access level: Minimum access level for users to be
-                        able to edit the value of the custom field.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Display when reporting issues? - If this custom
-		    field should be shown on the Report Issue page.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Display when updating issues? - If this custom
-		    field should be shown on the Update Issue page.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Display when resolving issues? - If this custom
-		    field should be shown when resolving an issue.  For
-		    example, a "root cause" custom field would make sense to
-		    set when resolving the issue.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Display when closing issues? - If this custom
-		    field should be shown when closing an issue.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Required on Report - If this custom
-		    field is a mandatory field on the Report Issue page.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Required on Update - If this custom
-		    field is a mandatory field on the Update Issue page.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Required on Resolve - If this custom
-		    field is a mandatory field when resolving an issue.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Required on Close - If this custom
-		    field is a mandatory field when closing an issue.
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
+				</listitem>
+				<listitem>
+					<para>Custom field type, can be one of:
+					</para>
+					<itemizedlist>
+						<listitem>
+							<para><literal>string</literal>,
+								for strings of up to 255 characters.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>numeric</literal>,
+								for numerical integer values.
+							</para>
+						</listitem>
+						<listitem>
+							<para><literal>float</literal>,
+								for real (float / double) numbers.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>email</literal>,
+								for storing email addresses.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>enumeration</literal>
+								is used when a user selects one entry from a list.
+								The user interface for this type is a combo-box.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>checkbox</literal>
+								is like enumeration, but the options are shown as checkboxes
+								and the user is allowed to tick more than one item.
+							</para>
+							<para>The default value and the possible value can contain multiple
+								values like <userinput>RED|YELLOW|BLUE</userinput>.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>radio</literal>
+								is like enumeration, but the list is shown as radio buttons
+								and the user is only allowed to tick a single option.
+							</para>
+							<para>The possible values can be <userinput>RED|YELLOW|BLUE</userinput>,
+								and default <userinput>YELLOW</userinput>.
+							</para>
+							<note><para>The default value can't contain multiple values.</para></note>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>list</literal>
+								is like enumeration but the list is shown as a list box
+								where the user is only allowed to select one option.
+							</para>
+							<para>The possible values can be <userinput>RED|YELLOW|BLUE</userinput>,
+								and default <userinput>YELLOW</userinput>.
+							</para>
+							<note><para>The default value can't contain multiple values.</para></note>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>multi-selection list</literal>
+								is like enumeration, but the list is shown as a list box
+								where the user is allowed to select multiple options.
+							</para>
+							<para>The possible values can be <userinput>RED|YELLOW|BLUE</userinput>,
+								and default <userinput>RED|BLUE</userinput>.
+							</para>
+							<note><para>Multiple values are allowed as default.</para></note>
+						</listitem>
+						<listitem>
+							<para>
+								<literal>date</literal>,
+								for date values.
+							</para>
+							<para>The default value can be <emphasis>empty</emphasis>,
+								a numeric <emphasis>UNIX timestamp</emphasis>,
+								or a date in a
+								<ulink url="https://www.php.net/manual/en/datetime.formats.php">valid format</ulink>,
+								including relative indications such as
+								<userinput>tomorrow</userinput>,
+								<userinput>next week</userinput>,
+								<userinput>last month</userinput>,
+								<userinput>+3 days</userinput>,
+								<userinput>last day of this month</userinput>, etc.
+							</para>
+							<note>
+								<para>The legacy format where the dynamic date had to be
+									wrapped in curly brackets (e.g. <literal>{tomorrow}</literal>)
+									is still supported for backwards-compatibility,
+									but no longer necessary.
+									This is considered a deprecated feature, that will be
+									removed in a future released of MantisBT.
+								</para>
+							</note>
+						</listitem>
+					</itemizedlist>
+				</listitem>
+				<listitem>
+					<para>Possible values for the Custom Field
+						(e.g. <userinput>RED|YELLOW|BLUE</userinput>).
+						Use the pipe (<literal>|</literal>) character to separate
+						the enumeration's values.
+						It is possible for one of the values to be empty
+						(e.g. <userinput>|RED|YELLOW|BLUE</userinput>, note the
+						leading <literal>|</literal>).
+					</para>
+					<para>The set of values can also be calculated at runtime.
+						For example, <literal>=versions</literal> would
+						automatically resolve into all the versions defined
+						for the current project.
+						See <xref linkend="admin.customize.customfields.dynamic" />
+						for more information.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Default value - see details above for a sample default value for each type.</para>
+				</listitem>
+				<listitem>
+					<para>Minimum/maximum length for the custom field value (use 0
+						to disable).  Note that these metrics are not really relevant
+						to custom fields that are based on an enumeration of possible values.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Regular expression to use for validating user input (use
+						<ulink url="https://www.php.net/manual/en/reference.pcre.pattern.syntax.php">PCRE syntax</ulink>).
+					</para>
+				</listitem>
+				<listitem>
+					<para>Read Access level: Minimum access level for users to be
+						able to <emphasis>see</emphasis> the value of the custom field.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Write Access level: Minimum access level for users to be
+						able to <emphasis>edit</emphasis> the value of the custom field.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Display when reporting issues? - If this custom
+						field should be shown on the Report Issue page.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Display when updating issues? - If this custom
+						field should be shown on the Update Issue page.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Display when resolving issues? - If this custom
+						field should be shown when resolving an issue.  For
+						example, a "root cause" custom field would make sense to
+						set when resolving the issue.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Display when closing issues? - If this custom
+						field should be shown when closing an issue.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Required on Report - If this custom
+						field is a mandatory field on the Report Issue page.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Required on Update - If this custom
+						field is a mandatory field on the Update Issue page.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Required on Resolve - If this custom
+						field is a mandatory field when resolving an issue.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Required on Close - If this custom
+						field is a mandatory field when closing an issue.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
 
-        <para>
-            If the value of a custom field for a certain defect is not found,
-            the default value is assumed.
-        </para>
-    </section>
+		<para>
+			If the value of a custom field for a certain defect is not found,
+			the default value is assumed.
+		</para>
+	</section>
 
-    <section id="admin.customize.customfields.editing">
-        <title>Adding/Editing Custom Fields</title>
+	<section id="admin.customize.customfields.editing">
+		<title>Adding/Editing Custom Fields</title>
 
-            <para>
-                <itemizedlist>
-                    <listitem>
-                        <para>The logged in user needs $g_manage_custom_fields_threshold
-                            access level.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Select "Manage" from the main menu.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Select "Manage Custom Fields" from the management
-                            menu.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>In case of edit, click on the name of an existing
-			custom field to edit its information.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>In case of adding a new one, enter the name of the
-			new custom field then click "New Custom Field".
-                        </para>
-                    </listitem>
-                </itemizedlist>
-            </para>
+			<para>
+				<itemizedlist>
+					<listitem>
+						<para>The logged in user needs $g_manage_custom_fields_threshold
+							access level.
+						</para>
+					</listitem>
+					<listitem>
+						<para>Select "Manage" from the main menu.</para>
+					</listitem>
+					<listitem>
+						<para>Select "Manage Custom Fields" from the management
+							menu.
+						</para>
+					</listitem>
+					<listitem>
+						<para>In case of edit, click on the name of an existing
+							custom field to edit its information.
+						</para>
+					</listitem>
+					<listitem>
+						<para>In case of adding a new one, enter the name of the
+							new custom field then click "New Custom Field".
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
 
-	    <note><para>Added custom fields will not show up in any of the issues
-	    until the added custom field is linked to the appropriate
-	    projects.</para></note>
+		<note><para>Added custom fields will not show up in any of the issues
+		until the added custom field is linked to the appropriate
+		projects.</para></note>
 	</section>
 
 	<section id="admin.customize.customfields.linking">
 		<title>Linking/Unlinking/Ordering Existing Custom Fields in Projects</title>
 
-            <para>
-                <itemizedlist>
-                    <listitem>
-                        <para>The logged in user needs to have access level that is
-                            greater than or equal to $g_custom_field_link_threshold and
-                            $g_manage_project_threshold.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Select "Manage" from the main menu.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Select "Manage Projects".
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Select the name of the project to manage.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Scroll down to the "Custom Fields" box.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Select the field to add from the list, then click "Add
-                            This Existing Custom Field".
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>To change the order of the custom fields, edit the
-                            "Sequence" value and click update. Custom fields with smaller
-                            values are displayed first.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>To unlink a custom field, click on "Remove" link next to
-                            the field.
-                            Unlinking a custom field will not delete the values that are
-                            associated with the issues for this field. These values are only
-                            deleted if the custom field definition is removed (not unlinked!)
-                            from the database. This is useful if you decide to re-link the
-                            custom field. These values may also re-appear if issues are moved to
-                            another project which has this field linked.
-                        </para>
-                    </listitem>
-                </itemizedlist>
-            </para>
+			<para>
+				<itemizedlist>
+					<listitem>
+						<para>The logged in user needs to have access level that is
+							greater than or equal to $g_custom_field_link_threshold and
+							$g_manage_project_threshold.
+						</para>
+					</listitem>
+					<listitem>
+						<para>Select "Manage" from the main menu.</para>
+					</listitem>
+					<listitem>
+						<para>Select "Manage Projects".
+						</para>
+					</listitem>
+					<listitem>
+						<para>Select the name of the project to manage.</para>
+					</listitem>
+					<listitem>
+						<para>Scroll down to the "Custom Fields" box.</para>
+					</listitem>
+					<listitem>
+						<para>Select the field to add from the list, then click "Add
+							This Existing Custom Field".
+						</para>
+					</listitem>
+					<listitem>
+						<para>To change the order of the custom fields, edit the
+							"Sequence" value and click update. Custom fields with smaller
+							values are displayed first.
+						</para>
+					</listitem>
+					<listitem>
+						<para>To unlink a custom field, click on "Remove" link next to
+							the field.
+							Unlinking a custom field will not delete the values that are
+							associated with the issues for this field. These values are only
+							deleted if the custom field definition is removed (not unlinked!)
+							from the database. This is useful if you decide to re-link the
+							custom field. These values may also re-appear if issues are moved to
+							another project which has this field linked.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
 
-        <formalpara>
-            <title>Moving Issues</title>
-            <para>
-                When an issue is moved from one project to another, custom
-                fields that are not defined for the new project are not deleted.
-                These fields will re-appear with their correct values if the issue is
-                moved back to the original project, or if these custom fields are
-                linked to the new project.
-            </para>
-        </formalpara>
+		<formalpara>
+			<title>Moving Issues</title>
+			<para>
+				When an issue is moved from one project to another, custom
+				fields that are not defined for the new project are not deleted.
+				These fields will re-appear with their correct values if the issue is
+				moved back to the original project, or if these custom fields are
+				linked to the new project.
+			</para>
+		</formalpara>
 	</section>
 
- 	<section id="admin.customize.customfields.localize">
-	    <title>Localizing Custom Field Names</title>
+	<section id="admin.customize.customfields.localize">
+		<title>Localizing Custom Field Names</title>
 
 		<para>It is possible to localize the custom fields' labels.
 			This can be done as follows:
@@ -343,7 +442,7 @@ $s_CODE = STRING;
 					<para>Define the custom field
 						(see <xref linkend="admin.customize.customfields.definitions" />),
 						keeping in mind that its name must be a
-						<ulink url="http://php.net/language.variables.basics.php">valid PHP identifier</ulink>.
+						<ulink url="https://www.php.net/manual/en/language.variables.basics.php">valid PHP identifier</ulink>.
 					</para>
 					<para>As an example, we will use
 						<emphasis>my_start_date</emphasis>
@@ -395,11 +494,11 @@ switch( $g_active_language ) {
 		</para></note>
 	</section>
 
-        <section id="admin.customize.customfields.defaults">
-            <title>Dynamic default values</title>
+	<section id="admin.customize.customfields.defaults">
+			<title>Dynamic default values</title>
 
-            <section id="admin.customize.customfields.defaults.date">
-                <title>Dynamic defaults for Date fields</title>
+			<section id="admin.customize.customfields.defaults.date">
+				<title>Dynamic defaults for Date fields</title>
 
 				<para>Custom fields of type date can be defaulted to
 					either specific or relative dates.
@@ -408,165 +507,206 @@ switch( $g_active_language ) {
 				</para>
 				<para>The format for specific dates is an integer which
 					indicates the number of seconds since the
-					<ulink url="http://en.wikipedia.org/wiki/Unix_time">
+					<ulink url="https://en.wikipedia.org/wiki/Unix_time">
 						Unix Epoch</ulink> (January 1 1970 00:00:00 UTC),
 					which is the format consumed by the PHP
-					<ulink url="http://www.php.net/date">date()</ulink> method.
+					<ulink url="https://www.php.net/manual/en/function.date.php">date()</ulink> method.
 				</para>
 				<para>The relative scenario expects default values like
 					{tomorrow}, {yesterday}, {+2 days}, {-3 days}, {next week}, etc.
 					The curly brackets indicate that this is a logical value
 					which is then evaluated using the PHP
-					<ulink url="http://www.php.net/strtotime">strtotime()</ulink>
+					<ulink url="https://www.php.net/manual/en/function.strtotime.php">strtotime()</ulink>
 					function.
 				</para>
-            </section>
-        </section>
+			</section>
+		</section>
 
 	<section id="admin.customize.customfields.dynamic">
-	    <title>Dynamic values for Enumeration Custom Fields</title>
+		<title>Dynamic values for Enumeration Custom Fields</title>
 
-	    <para>As discussed earlier, one of the possible types of a custom
-	    field is "enumeration".  This type of custom field allows the user
-	    to select one value from a provided list of possible values.  The
-	    standard way of defining such custom fields is to provide a '|'
-	    separated list of possible values.  However, this approach has two
-	    limitations: the list is static, and the maximum length of the list
-	    must be no longer than 255 characters.  Hence, the need for the
-	    ability to construct the list of possible values dynamically.</para>
+		<para>As discussed earlier, one of the possible types of a custom
+			field is "enumeration".  This type of custom field allows the user
+			to select one value from a provided list of possible values.  The
+			standard way of defining such custom fields is to provide a '|'
+			separated list of possible values.  However, this approach has two
+			limitations: the list is static, and the maximum length of the list
+			must be no longer than 255 characters.  Hence, the need for the
+			ability to construct the list of possible values dynamically.
+		</para>
 
 
-            <section id="admin.customize.customfields.dynamic.default">
-	       <title>Dynamic possible values included by default</title>
+		<section id="admin.customize.customfields.dynamic.default">
+			<title>Dynamic possible values included by default</title>
 
-	    <para>MantisBT ships with some dynamic possible values, these
-	    include the following:
+			<para>MantisBT ships with some dynamic possible values, these
+				include the following:
+			</para>
 
-	    	<itemizedlist>
-		    <listitem><para>=categories - a list of categories defined
-		    in the current project (or the project to which the issue
-		    belongs).</para></listitem>
-		    <listitem><para>=versions - a list of all versions defined
-		    in the current project (or the project to which the issue
-		    belongs).</para></listitem>
-		    <listitem><para>=future_versions - a list of all versions that
-		    belong to the current project with
-		    released flag set to false.</para></listitem>
-		    <listitem><para>=released_versions - a list of all versions
-		    that belong to the current project with released flag set to
-		    true.</para></listitem>
-		</itemizedlist>
-	    </para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<literal>=categories</literal>
+						a list of categories defined in the current project
+						(or the project to which the issue belongs).
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>=versions</literal>
+						a list of all versions defined in the current project
+						(or the project to which the issue belongs).
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>=future_versions</literal>
+						a list of all versions that belong to the current project
+						with <emphasis>released</emphasis> flag set to false.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>=released_versions</literal>
+						a list of all versions that belong to the current project
+						with <emphasis>released</emphasis> flag set to true.
+					</para>
+				</listitem>
+			</itemizedlist>
 
-	    <note><para>The '=' before the name of the dynamic list of options is used
-	    to tell MantisBT that this is a dynamic list, rather than a static
-	    list with just one option.</para></note>
+			<note>
+				<para>The <literal>=</literal> before the list of options
+					tells MantisBT that this is a dynamic list,
+					rather than a static one with a single option.
+				</para>
+			</note>
 
-	    </section>
+		</section>
 
-	    <section id="admin.customize.customfields.dynamic.custom">
-	        <title>Defining Custom Dynamic Possible Values</title>
+		<section id="admin.customize.customfields.dynamic.custom">
+			<title>Defining Custom Dynamic Possible Values</title>
 
-		<para>If the user selects =versions, the actual custom function
-		that is executed is custom_function_*_enum_versions(). The reason
-		why the "enum_" is not included is to have a fixed prefix for all
-		custom functions used for this purpose and protect against users
-		using custom functions that were not intended for this purpose.
-		For example, you don't want the user to use
-		custom_function_*_issue_delete_notify() which may be overridden
-		by the web master to delete associated data in other
-		databases.</para>
+			<para>If the user selects <literal>=versions</literal>, the actual
+				custom function that is executed is
+				<emphasis>custom_function_*_enum_versions()</emphasis>.
+				The reason why the "enum_" is not included is to have a fixed prefix
+				for all custom functions used for this purpose and protect against
+				users using custom functions that were not intended for this purpose.
+			</para>
+			<para>For example, you would not want the user to use
+				<emphasis>custom_function_*_issue_delete_notify()</emphasis>
+				which may be overridden by the web master to delete associated data
+				in other databases.
+			</para>
 
-		<para>Following is a sample custom function that is used to
-		populate a field with the categories belonging to the currently
-		selected project:
-
-<programlisting># --------------------
-# Construct an enumeration for all categories for the current project.
-# The enumeration will be empty if current project is ALL PROJECTS.
-# Enumerations format is: "abc|lmn|xyz"
-# To use this in a custom field type "=categories" in the possible values field.
-function custom_function_override_enum_categories() {
-    $t_categories = category_get_all_rows( helper_get_current_project() );
-
-    $t_enum = array();
-    foreach( $t_categories as $t_category ) {
-        $t_enum[] = $t_category['category'];
-    }
-
-    $t_possible_values = implode( '|', $t_enum );
-
-    return $t_possible_values;
-}</programlisting>
-</para>
-
-<para>Notice the following:
-
-<itemizedlist>
-	<listitem><para>The custom function doesn't take any
-	parameters.</para></listitem>
-	<listitem><para>The custom function returns the possible values in the
-	format (A|B|C).</para></listitem>
-   	<listitem><para>The custom function uses the current
-	project.</para></listitem>
-	<listitem><para>The custom function builds on top of the already
-	existing APIs.</para></listitem>
-</itemizedlist>
-</para>
-
-<para>To define your own function \u201c=mine\u201d, you will have to define it
-with the following signature:
+			<para>Following is a sample custom function that is used to
+				populate a field with the categories belonging to the currently
+				selected project:
+			</para>
 
 <programlisting>
-# --------------------
-# To use this in a custom field type "=mine" in the possible values field.
-function custom_function_override_enum_mine() {
-    $t_enum = array();
+/**
+ * Construct an enumeration for all categories for the current project.
+ *
+ * The enumeration will be empty if current project is ALL PROJECTS.
+ * Enumerations format is: "abc|lmn|xyz"
+ * To use this in a custom field type "=categories" in the possible values field.
+ */
+function custom_function_override_enum_categories() {
+	$t_categories = category_get_all_rows( helper_get_current_project() );
 
-    :
+	$t_enum = array();
+	foreach( $t_categories as $t_category ) {
+		$t_enum[] = $t_category['category'];
+	}
 
-    $t_possible_values = implode( '|', $t_enum );
+	$t_possible_values = implode( '|', $t_enum );
 
-    return $t_possible_values;
+	return $t_possible_values;
 }
 </programlisting>
-</para>
 
-<para>Notice "override" in the function name. This is because this method is
-defined by the MantisBT administrator/webmaster and not part of the MantisBT source.
-It is OK to override a method that doesn't exist.</para>
+			<note>
+				<itemizedlist>
+					<listitem>
+						<para>The custom function doesn't take any parameters.
+						</para>
+					</listitem>
+					<listitem>
+						<para>The custom function returns the possible values in the
+							format (A|B|C).
+						</para>
+					</listitem>
+					<listitem>
+						<para>The custom function uses the current project.
+						</para>
+					</listitem>
+					<listitem>
+						<para>The custom function builds on top of the already
+							existing APIs.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</note>
 
-<para>As usual, when MantisBT is upgraded to future releases, the custom functions
-will not be overwritten. The difference between the "default" implementation and
-the "override" implementation is explained in more details in the custom
-functions section.</para>
+
+			<para>To define your own function <literal>mine</literal>,
+				you will have to define it with the following signature:
+			</para>
+
+<programlisting>
+/**
+ * Use this in a custom field type "=mine" in the possible values field.
+ */
+function custom_function_override_enum_mine() {
+	# Populate $t_enum values as appropriate here
+	$t_enum = array();
+
+	$t_possible_values = implode( '|', $t_enum );
+
+	return $t_possible_values;
+}
+</programlisting>
+
+			<note>
+				<para>Notice the <emphasis>override</emphasis> in the function name.
+					This is because this method is defined by the MantisBT administrator
+					and not part of the MantisBT source.
+					It is OK to override a method that doesn't exist.
+				</para>
+			</note>
+
+			<para>As usual, when MantisBT is upgraded to future releases, the custom functions
+				will not be overwritten. The difference between the "default" implementation and
+				the "override" implementation is explained in more details in
+				<xref linkend="admin.customize.customfuncs" />.
+			</para>
+
+		</section>
 
 	</section>
 
-        </section>
+	</section>
 
-    </section>
+	<section id="admin.customize.enums">
+		<title>Enumerations</title>
 
-    <section id="admin.customize.enums">
-        <title>Enumerations</title>
+		<para>Enumerations are used in MantisBT to represent a set of
+			possible values for an attribute. Enumerations are used for access
+			levels, severities, priorities, project statuses, project view
+			state, reproducibility, resolution, ETA, and projection.  MantisBT
+			provides the administrator with the flexibility of altering the
+			values in these enumerations. The rest of this topic explains how
+			enumerations work, and then how they can be customised.
+		</para>
 
-
-        <para>Enumerations are used in MantisBT to represent a set of
-            possible values for an attribute. Enumerations are used for access
-            levels, severities, priorities, project statuses, project view
-            state, reproducibility, resolution, ETA, and projection.  MantisBT
-            provides the administrator with the flexibility of altering the
-            values in these enumerations. The rest of this topic explains how
-            enumerations work, and then how they can be customised.
-        </para>
-
-        <formalpara>
+		<formalpara>
 			<title>How do enumerations work?</title>
 
-            <para>
-                <filename>core/constant_inc.php</filename> defines the
-                constants that correspond to those in the enumeration. These are
-                useful to refer to these enumerations in the configs and the code.
+			<para>
+				<filename>core/constant_inc.php</filename> defines the
+				constants that correspond to those in the enumeration. These are
+				useful to refer to these enumerations in the configs and the code.
 <programlisting>
 define( 'VIEWER', 10 );
 define( 'REPORTER', 25 );
@@ -575,13 +715,13 @@ define( 'DEVELOPER', 55 );
 define( 'MANAGER', 70 );
 define( 'ADMINISTRATOR', 90 );
 </programlisting>
-            </para>
-        </formalpara>
+			</para>
+		</formalpara>
 
-        <para>
-            <filename>config_defaults_inc.php</filename> includes the defaults for the
-            enumerations. The configuration options that are defaulted here are
-            used in specifying which enumerations are active and should be used
+		<para>
+			<filename>config_defaults_inc.php</filename> includes the defaults for the
+			enumerations. The configuration options that are defaulted here are
+			used in specifying which enumerations are active and should be used
 			in MantisBT.
 
 <programlisting>
@@ -594,45 +734,45 @@ $g_access_levels_enum_string =
 				enumeration is not found in the corresponding localised string
 				(i.e. 70:manager), then it will be printed to the user as @70@.
 			</para></note>
-        </para>
-        <para>
+		</para>
+		<para>
 			The Language Files (e.g. <filename>lang/strings_german.txt</filename>)
 			provide the localised strings (German in this case) for enumerations.
 			But again, the <emphasis>master list</emphasis> is
 			the enumeration in the configs themselves, the ones in the language files are
-            just used for finding the localised equivalent for an entry. Hence,
-            if a user changes the config to have only two types of users
-            developers and administrators, then only those will be prompted to
-            the users even if the enumerations in the language files still
-            includes the full list.
+			just used for finding the localised equivalent for an entry. Hence,
+			if a user changes the config to have only two types of users
+			developers and administrators, then only those will be prompted to
+			the users even if the enumerations in the language files still
+			includes the full list.
 <programlisting>
 $s_access_levels_enum_string =
 	'10:Betrachter,25:Reporter,40:Updater,55:Entwickler,70:Manager,90:Administrator';
 </programlisting>
-        </para>
+		</para>
 
-        <formalpara>
+		<formalpara>
 			<title>How can they be customised?</title>
 			<para>Let say we want to remove access level
 				"Updater" and add access level "Senior
 				Developer".
 			</para>
-        </formalpara>
-        <para>
-            The file <filename>config/custom_constants_inc.php</filename> is supported for the
-            exclusive purpose of allowing administrators to define their own
-            constants while maintaining a simple upgrade path for future
-            releases of MantisBT. Note that this file is not distributed with
-            MantisBT and you will need to create it if you need such
-            customisation. In our example, we need to define a constant for the
-            new access level.
+		</formalpara>
+		<para>
+			The file <filename>config/custom_constants_inc.php</filename> is supported for the
+			exclusive purpose of allowing administrators to define their own
+			constants while maintaining a simple upgrade path for future
+			releases of MantisBT. Note that this file is not distributed with
+			MantisBT and you will need to create it if you need such
+			customisation. In our example, we need to define a constant for the
+			new access level.
 <programlisting>
 define( 'SENIOR_DEVELOPER', 60 );
 </programlisting>
-        </para>
+		</para>
 
-        <para>
-            In <filename>config/config_inc.php</filename>
+		<para>
+			In <filename>config/config_inc.php</filename>
 <programlisting>
 // Remove Updater and add Senior Developer
 $g_access_levels_enum_string =
@@ -641,9 +781,9 @@ $g_access_levels_enum_string =
 // Give access to Senior developers to create/delete custom field.
 $g_manage_custom_fields_threshold = SENIOR_DEVELOPER;
 </programlisting>
-        </para>
+		</para>
 
-        <para>
+		<para>
 			Update <filename>custom_strings_inc.php</filename>
 			(see <xref linkend="admin.customize.strings"/>)
 <programlisting>
@@ -654,9 +794,9 @@ $s_access_levels_enum_string =
 				entry from the localisation file if the current language
 				is 'English'.
 			</para></note>
-        </para>
+		</para>
 
-        <formalpara>
+		<formalpara>
 			<title>Conclusion</title>
 			<para>We have covered how enumerations work in general, and how
 				to customise one of them. If you are interested in customising
@@ -665,33 +805,33 @@ $s_access_levels_enum_string =
 				<filename>config_defaults_inc.php</filename>. This section
 				defines all enumerations that are used by MantisBT.
 			</para>
-        </formalpara>
+		</formalpara>
 
-    </section>
+	</section>
 
 
-    <section id="admin.customize.email">
-        <title>Email Notifications</title>
+	<section id="admin.customize.email">
+		<title>Email Notifications</title>
 
-        <para>See <xref linkend="admin.config.email" />
-        	in the Configuration section.
-        </para>
+		<para>See <xref linkend="admin.config.email" />
+			in the Configuration section.
+		</para>
 
-        <para>Examples:
-            <itemizedlist>
-                <listitem>
-                    <para>Notify only managers of new issues.
+		<para>Examples:
+			<itemizedlist>
+				<listitem>
+					<para>Notify only managers of new issues.
 <programlisting>
 $g_notify_flags['new'] = array(
 	'threshold_min' => MANAGER,
 	'threshold_max' => MANAGER,
 );
 </programlisting>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Notify Developers and managers of all project events,
-                        except, exclude developers from the 'closed' events.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Notify Developers and managers of all project events,
+						except, exclude developers from the 'closed' events.
 <programlisting>
 $g_default_notify_flags = array(
 	'threshold_min' => DEVELOPER,
@@ -702,47 +842,47 @@ $g_notify_flags['closed'] = array(
 	'threshold_max' => MANAGER,
 );
 </programlisting>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Exclude those who contributed issue notes from getting
-                        messages about other changes in the issue.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Exclude those who contributed issue notes from getting
+						messages about other changes in the issue.
 <programlisting>
 $g_default_notify_flags['bugnotes'] = OFF;
 </programlisting>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Exclude those monitoring issues from seeing the 'closed'
-                        message
+					</para>
+				</listitem>
+				<listitem>
+					<para>Exclude those monitoring issues from seeing the 'closed'
+						message
 <programlisting>
 $g_notify_flags['closed']['monitor'] = OFF;
 </programlisting>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Only notify developers when issue notes are added.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Only notify developers when issue notes are added.
 <programlisting>
 $g_notify_flags['bugnote'] = array(
 	'threshold_min' => DEVELOPER,
 	'threshold_max' => DEVELOPER,
 );
 </programlisting>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Notify managers of changes in sponsorship.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Notify managers of changes in sponsorship.
 <programlisting>
 $g_notify_flags['sponsor'] = array(
 	'threshold_min' => MANAGER,
 	'threshold_max' => MANAGER,
 );
 </programlisting>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>Notify originator and managers of changes in ownership
-                        ("Assigned To:").
+					</para>
+				</listitem>
+				<listitem>
+					<para>Notify originator and managers of changes in ownership
+						("Assigned To:").
 <programlisting>
 $g_notify_flags['owner'] = array(
 	'threshold_min' => MANAGER,
@@ -750,13 +890,13 @@ $g_notify_flags['owner'] = array(
 	'reporter'      => ON,
 );
 </programlisting>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>I'm paranoid about mail. Only send information on issues
-                        to those involved in them. Don't send mail people already know
-                        about. Also send new issue notifications to managers so they can
-                        screen them.
+					</para>
+				</listitem>
+				<listitem>
+					<para>I'm paranoid about mail. Only send information on issues
+						to those involved in them. Don't send mail people already know
+						about. Also send new issue notifications to managers so they can
+						screen them.
 <programlisting>
 $g_email_receive_own = OFF;
 $g_default_notify_flags = array(

@@ -91,8 +91,8 @@ class MantisPrepareTest extends MantisCoreBase {
 		$t_email = self::EMAIL;
 		$t_text = 'Link Text';
 		$t_tooltip = 'Tooltip';
-		$t_button_classes = 'class="btn btn-primary btn-white btn-round btn-xs"';
-		$t_button_text = sprintf( '<i class="fa fa-envelope-o"></i>&nbsp;%s', $t_text );
+		$t_button_classes = 'class="noprint blue zoom-130"';
+		$t_button_text = icon_get( 'fa-envelope-o', 'bigger-115' ) . '&nbsp;' . $t_text;
 
 		$t_test_data = array(
 			'Basic' => array(

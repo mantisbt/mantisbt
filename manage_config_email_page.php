@@ -148,7 +148,7 @@ function show_notify_flag( $p_action, $p_flag ) {
 		$t_set = $t_flag ? 'checked="checked"' : '';
 		return '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name. '" ' . $t_set . ' /><span class="lbl"></span></label>';
 	} else {
-		return ( $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;' );
+		return $t_flag ? icon_get( 'fa-check', 'fa-lg blue' ) : '&#160;';
 	}
 }
 
@@ -198,7 +198,7 @@ function show_notify_threshold( $p_access, $p_action ) {
 		$t_set = $t_flag ? 'checked="checked"' : '';
 		return '<label><input class="ace" type="checkbox" name="flag_threshold[]" value="' . $t_flag_name . '" ' . $t_set . ' />' . '<span class="lbl"></span></label>';
 	} else {
-		return $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;';
+		return $t_flag ? icon_get( 'fa-check', 'fa-lg blue' ) : '&#160;';
 	}
 }
 
@@ -214,7 +214,7 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
-	echo '            <i class="ace-icon fa fa-envelope"></i>';
+	echo '            ' . icon_get( 'fa-envelope', 'ace-icon' );
 	echo $p_section_name;
 	echo '       </h4>';
 	echo '   </div>';
@@ -339,7 +339,9 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	}
 
 	echo '<div class="well">' . "\n";
-	echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
+	echo '<p class="bold">';
+	print_icon( 'fa-info-circle' );
+	echo ' ' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 	if( ALL_PROJECTS <> $t_project ) {
 		echo '<span class="color-project">' . lang_get( 'colour_project' ) . '</span><br />';
@@ -359,6 +361,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	}
 
 	get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relation' );
+	get_capability_row_for_email( lang_get( 'email_on_monitor' ), 'monitor' );
 
 	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	foreach ( $t_statuses as $t_status => $t_label ) {

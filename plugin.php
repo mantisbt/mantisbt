@@ -27,21 +27,11 @@
  * @uses plugin_api.php
  */
 
-$t_allow_caching = isset( $_GET['cache_key'] );
-if( $t_allow_caching ) {
-	# Suppress default headers. This allows caching as defined in server configuration
-	$g_bypass_headers = true;
-}
-
 require_once( 'core.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'plugin_api.php' );
-
-if( $t_allow_caching ) {
-	http_security_headers();
-}
 
 $t_plugin_path = config_get_global( 'plugin_path' );
 
@@ -73,6 +63,11 @@ $t_page = $t_plugin_path . $t_basename . '/pages/' . $t_action . '.php';
 if( !is_file( $t_page ) ) {
 	error_parameters( $t_basename, $t_action );
 	trigger_error( ERROR_PLUGIN_PAGE_NOT_FOUND, ERROR );
+}
+
+# rewrite headers to allow caching
+if( gpc_isset( 'cache_key' ) ) {
+	http_caching_headers( true );
 }
 
 plugin_push_current( $t_basename );

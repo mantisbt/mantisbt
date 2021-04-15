@@ -91,7 +91,7 @@ function access_denied() {
 				}
 				$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
 				echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p><p class="center">';
-				print_link_button( auth_login_page( 'return=' . $t_return_page ), lang_get( 'click_to_login' ) );
+				print_link_button( auth_login_page( 'return=' . $t_return_page ), lang_get( 'login' ) );
 				echo '</p><p class="center">';
 				print_link_button(
 					helper_mantis_url( config_get_global( 'default_home_page' ) ),
@@ -509,41 +509,40 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 		return false;
 	}
 
+	# Check the requested access level, shortcut to fail if not satisfied
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-	$t_bug_is_user_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
 	$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
+	if( !access_compare_level( $t_access_level, $p_access_level ) ){
+		return false;
+	}
 
-	# check limit_Reporter (Issue #4769)
-	# reporters can view just issues they reported
-	$t_limit_reporters = config_get( 'limit_reporters', null, $p_user_id, $t_project_id );
-	if( $t_limit_reporters && !$t_bug_is_user_reporter ) {
-		# Here we only need to check that the current user has an access level
-		# higher than the lowest needed to report issues (report_bug_threshold).
-		# To improve performance, esp. when processing for several projects, we
-		# build a static array holding that threshold for each project
-		static $s_thresholds = array();
-		if( !isset( $s_thresholds[$t_project_id] ) ) {
-			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $p_user_id, $t_project_id );
-			if( empty( $t_report_bug_threshold ) ) {
-				$s_thresholds[$t_project_id] = NOBODY;
-			} else {
-				$s_thresholds[$t_project_id] = access_threshold_min_level( $t_report_bug_threshold ) + 1;
-			}
-		}
-		if( !access_compare_level( $t_access_level, $s_thresholds[$t_project_id] ) ) {
+	# If the level is met, we still need to verify that user has access to the issue
+
+	# Check if the bug is private
+	$t_bug_is_user_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
+	if( !$t_bug_is_user_reporter && bug_get_field( $p_bug_id, 'view_state' ) == VS_PRIVATE ) {
+		$t_private_bug_threshold = config_get( 'private_bug_threshold', null, $p_user_id, $t_project_id );
+		if( !access_compare_level( $t_access_level, $t_private_bug_threshold ) ) {
 			return false;
 		}
 	}
 
-	# If the bug is private and the user is not the reporter, then
-	# they must also have higher access than private_bug_threshold
-	if( !$t_bug_is_user_reporter && bug_get_field( $p_bug_id, 'view_state' ) == VS_PRIVATE ) {
-		$t_private_bug_threshold = config_get( 'private_bug_threshold', null, $p_user_id, $t_project_id );
-		return access_compare_level( $t_access_level, $t_private_bug_threshold )
-			&& access_compare_level( $t_access_level, $p_access_level );
+	# Check special limits
+	# Limited view means this user can only view the issues they reported, is handling, or monitoring
+	if( access_has_limited_view( $t_project_id, $p_user_id ) ) {
+		$t_allowed = $t_bug_is_user_reporter;
+		if( !$t_allowed ) {
+			$t_allowed = bug_is_user_handler( $p_bug_id, $p_user_id );
+		}
+		if( !$t_allowed ) {
+			$t_allowed = user_is_monitoring_bug( $p_user_id, $p_bug_id );
+		}
+		if( !$t_allowed ) {
+			return false;
+		}
 	}
 
-	return access_compare_level( $t_access_level, $p_access_level );
+	return true;
 }
 
 /**
@@ -894,4 +893,100 @@ function access_parse_array( array $p_access ) {
 	}
 
 	return $t_access_level;
+}
+
+/**
+ * Returns true if the user has limited view to issues in the specified project.
+ *
+ * @param integer $p_project_id   Project id, or null for current project
+ * @param integer $p_user_id      User id, or null for current user
+ * @return boolean	Whether limited view applies
+ *
+ * @see $g_limit_view_unless_threshold
+ * @see $g_limit_reporters
+ */
+function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
+	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+	$t_project_id = ( null === $p_project_id ) ? helper_get_current_project() : $p_project_id;
+
+	# Old 'limit_reporters' option was previously only supported for ALL_PROJECTS,
+	# Use this option if set, otherwise, check the new option for "unlimited view" threshold
+	$t_old_limit_reporters = config_get( 'limit_reporters', null, $t_user_id, ALL_PROJECTS );
+	$t_threshold_can_view = NOBODY;
+	if( ON != $t_old_limit_reporters ) {
+		$t_threshold_can_view = config_get( 'limit_view_unless_threshold', null, $t_user_id, $t_project_id );
+	} else {
+		# If old 'limit_reporters' option is enabled, use that setting
+		# Note that the effective threshold can vary for each project, based on
+		# the reporting threshold configuration.
+		# To improve performance, esp. when processing for several projects, we
+		# build a static array holding that threshold for each project
+		static $s_thresholds = array();
+		if( !isset( $s_thresholds[$t_project_id] ) ) {
+			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_project_id );
+			if( empty( $t_report_bug_threshold ) ) {
+				$s_thresholds[$t_project_id] = NOBODY;
+			} else {
+				$s_thresholds[$t_project_id] = access_threshold_min_level( $t_report_bug_threshold ) + 1;
+			}
+		}
+		$t_threshold_can_view = $s_thresholds[$t_project_id];
+	}
+
+	$t_project_level = access_get_project_level( $p_project_id, $p_user_id );
+	return !access_compare_level( $t_project_level, $t_threshold_can_view );
+}
+
+/**
+ * Return true if user is allowed to view bug revisions.
+ *
+ * User must have $g_bug_revision_view_threshold or be the bug's reporter.
+ *
+ * @param int $p_bug_id
+ * @param int $p_user_id
+ *
+ * @return bool
+ */
+function access_can_view_bug_revisions( $p_bug_id, $p_user_id = null ) {
+	if( !bug_exists( $p_bug_id ) ) {
+		return false;
+	}
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	$t_user_id = null === $p_user_id ? auth_get_current_user_id() : $p_user_id;
+
+	$t_has_access = access_has_bug_level(
+		config_get( 'bug_revision_view_threshold', null, $t_user_id, $t_project_id ),
+		$p_bug_id,
+		$t_user_id
+	);
+
+	return $t_has_access || bug_is_user_reporter( $p_bug_id, $t_user_id );
+}
+
+/**
+ * Return true if user is allowed to view bugnote revisions.
+ *
+ * User must have $g_bug_revision_view_threshold or be the bugnote's reporter.
+ *
+ * @param int $p_bugnote_id
+ * @param int $p_user_id
+ *
+ * @return bool
+ */
+function access_can_view_bugnote_revisions( $p_bugnote_id, $p_user_id = null ) {
+	if( !bugnote_exists( $p_bugnote_id ) ) {
+		return false;
+	}
+	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
+	$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+	$t_user_id = null === $p_user_id ? auth_get_current_user_id() : $p_user_id;
+
+	$t_has_access = access_has_bugnote_level(
+		config_get( 'bug_revision_view_threshold', null, $t_user_id, $t_project_id ),
+		$p_bugnote_id,
+		$t_user_id
+	);
+
+
+	return $t_has_access || bugnote_is_user_reporter( $p_bugnote_id, $t_user_id );
 }

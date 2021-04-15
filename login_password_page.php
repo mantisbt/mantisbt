@@ -58,7 +58,7 @@ require_css( 'login.css' );
 $f_error                 = gpc_get_bool( 'error' );
 $f_cookie_error          = gpc_get_bool( 'cookie_error' );
 $f_return                = string_sanitize_url( gpc_get_string( 'return', '' ) );
-$f_username              = gpc_get_string( 'username', '' );
+$f_username              = trim( gpc_get_string( 'username', '' ) );
 $f_reauthenticate        = gpc_get_bool( 'reauthenticate', false );
 $f_perm_login            = gpc_get_bool( 'perm_login', false );
 $f_secure_session        = gpc_get_bool( 'secure_session', false );
@@ -173,7 +173,7 @@ $t_upgrade_required = false;
 if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ ) .'/admin/.' ) ) {
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
-	$t_db_version = config_get( 'database_version', 0 );
+	$t_db_version = config_get( 'database_version', 0, ALL_USERS, ALL_PROJECTS );
 	if( $t_db_version == 0 ) {
 		$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 	}
@@ -197,7 +197,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 		<div class="widget-body">
 			<div class="widget-main">
 				<h4 class="header lighter bigger">
-					<i class="ace-icon fa fa-sign-in"></i>
+					<?php print_icon( 'fa-sign-in', 'ace-icon' ); ?>
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
@@ -224,7 +224,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 					<input id="password" name="password" type="password" placeholder="<?php echo lang_get( 'password' ) ?>"
 						   size="32" maxlength="<?php echo auth_get_password_max_size(); ?>"
 						   class="form-control autofocus">
-					<i class="ace-icon fa fa-lock"></i>
+					<?php print_icon( 'fa-lock', 'ace-icon' ); ?>
 				</span>
 			</label>
 
@@ -251,7 +251,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 
 			<div class="space-10"></div>
 
-			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login_button' ) ?>" />
+			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login' ) ?>" />
 			<div class="clearfix"></div>
 			<?php
 			# lost password feature disabled or reset password via email disabled -> stop here!

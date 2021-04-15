@@ -40,6 +40,7 @@
  *
  * @author Christian List
  * @author Joedalton
+ * @author Saederup92
  * @author Tjernobyl
  */
 
@@ -51,7 +52,7 @@ $s_plugin_XmlImportExport_config_title = 'XML-import/Eksport af adgangsniveaukon
 $s_plugin_XmlImportExport_import_threshold = 'Importer fejlrapporter';
 $s_plugin_XmlImportExport_export_threshold = 'Eksporter fejlrapporter';
 $s_plugin_XmlImportExport_action_update = 'Opdater';
-$s_plugin_XmlImportExport_importing_in_project = 'Importere rapporter i projektet:';
+$s_plugin_XmlImportExport_importing_in_project = 'Importere rapporter i projektet: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Importindstillinger';
 $s_plugin_XmlImportExport_cross_references = 'Krydsreferencer';
 $s_plugin_XmlImportExport_default_strategy = 'Standard konverteringsstrategi:';

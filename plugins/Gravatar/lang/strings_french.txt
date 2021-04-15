@@ -39,7 +39,9 @@
  * @file
  *
  * @author Gomoko
+ * @author Urhixidur
+ * @author Verdy p
  */
 
-$s_plugin_Gravatar_title = 'Avatars vs Gravatar';
-$s_plugin_Gravatar_description = 'Un module qui montre les avatars de l’utilisateur d’après leurs adresses de messagerie utilisant le service avatar.';
+$s_plugin_Gravatar_title = 'Avatars par Gravatar';
+$s_plugin_Gravatar_description = 'Un greffon qui montre les avatars de l’utilisateur d’après leurs adresses de messagerie en utilisant un service avatar.';

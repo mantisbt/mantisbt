@@ -202,7 +202,7 @@ $g_notify_flags['new'] = array(
 				</para>
 				<para>When ON (default), validation is performed using the
 					pattern given by the
-					<ulink url="http://www.w3.org/TR/html5/forms.html#valid-e-mail-address">
+					<ulink url="https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address">
 						HTML5 specification for <emphasis>email</emphasis>
 						type form input elements</ulink>.
 					When OFF, validation is disabled.
@@ -265,7 +265,7 @@ $g_notify_flags['new'] = array(
 			<listitem>
 				<para>Only allow and send email to addresses in the given domain(s).
 					This is useful as a security feature and it is also useful in cases
-					like Sourceforge where its servers are only limited to send emails
+					like Sourceforge where its servers are limited to only sending emails
 					to SourceForge email addresses in order to avoid
 					spam. $g_limit_email_domains =
 					array( 'users.sourceforge.net', 'sourceforge.net' );
@@ -380,82 +380,6 @@ $g_notify_flags['new'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_email_dkim_enable</term>
-			<listitem>
-				<para>Enables DomainKeys Identified Mail (DKIM) Signatures (rfc6376).
-    				To successfully sign mails you need to enable DKIM and provide at least:
-					<emphasis>DKIM domain (see $g_email_dkim_domain)</emphasis>,
-					<emphasis>DKIM private key or key file path (see $g_email_dkim_private_key_file_path
-    					and $g_email_dkim_private_key_string)</emphasis>,
-					<emphasis>DKIM selector (see $g_email_dkim_selector)</emphasis>,
-					<emphasis>DKIM identity (see $g_email_dkim_identity)</emphasis>.
-				</para>
-				<para>The default is OFF.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_email_dkim_domain</term>
-			<listitem>
-				<para>Defines domain for DomainKeys Identified Mail (DKIM) Signatures.
-				</para>
-				<para>Typically same as the host part of the $g_from_email. For example
-    				example.com.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_email_dkim_private_key_file_path</term>
-			<listitem>
-				<para>Path to the private domain key to be used for DomainKeys Identified Mail (DKIM) Signatures.
-				</para>
-				<para>If the key is specified in $g_email_dkim_private_key_string this setting will not be used.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_email_dkim_private_key_string</term>
-			<listitem>
-				<para>Private domain key to be used for DomainKeys Identified Mail (DKIM) Signatures.
-				</para>
-				<para>This string should contain private key for signing. Leave empty
-                    string if you wish to load the key from the file defined with
-                    $g_email_dkim_private_key_file_path.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_email_dkim_selector</term>
-			<listitem>
-				<para>Selector to be used for DomainKeys Identified Mail (DKIM) Signatures.
-				</para>
-				<para>If your domain is example.com, typically DNS TXT field should have:
-                    <emphasis>host: mail.example._domainkey</emphasis>,
-                    <emphasis>value: v=DKIM1; t=s; n=core; k=rsa; p=[public key]</emphasis>.
-                    In this case selector should be mail.example
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_email_dkim_passphrase</term>
-			<listitem>
-				<para>Private DKIM domain key password.
-				</para>
-				<para>Leave empty string if your private key does not have password
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_email_dkim_identity</term>
-			<listitem>
-				<para>Identity to be used for DomainKeys Identified Mail (DKIM) Signatures.
-				</para>
-				<para>This is usually the same as your g_from_email. For example
-    				noreply@example.com 
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_email_retry_in_days</term>
 			<listitem>
 				<para>Duration (in days) to retry failed emails before deleting them from queue.  Default 7 days.</para>
@@ -554,4 +478,215 @@ $g_notify_flags['new'] = array(
 			</listitem>
 		</itemizedlist>
 	</para>
+
+	<section id="admin.config.email.dkim">
+		<title>DKIM signature</title>
+
+		<para>In order to setup
+			<ulink url="https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail"
+				>DomainKeys Identified Mail (DKIM) Signatures</ulink>
+			(as defined in
+			<ulink url="https://tools.ietf.org/html/rfc6376">RFC 6376</ulink>),
+			you need to enable the feature
+			(see <emphasis>$g_email_dkim_enable</emphasis>),
+			and provide at least:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>Domain
+					(see <emphasis>$g_email_dkim_domain</emphasis>),
+				</para>
+			</listitem>
+			<listitem>
+				<para>Private key or key file path
+					(see <emphasis>$g_email_dkim_private_key_file_path</emphasis>
+					and <emphasis>$g_email_dkim_private_key_string</emphasis>),
+				</para>
+			</listitem>
+			<listitem>
+				<para>Selector
+					(see <emphasis>$g_email_dkim_selector</emphasis>),
+				</para>
+			</listitem>
+			<listitem>
+				<para>Identity
+					(see <emphasis>$g_email_dkim_identity</emphasis>).
+				</para>
+			</listitem>
+		</itemizedlist>
+
+		<variablelist>
+			<varlistentry>
+				<term>$g_email_dkim_enable</term>
+				<listitem>
+					<para>Enables DomainKeys Identified Mail (DKIM).
+					</para>
+					<para>The default is OFF.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_dkim_domain</term>
+				<listitem>
+					<para>Defines the domain for DKIM Signatures.
+					</para>
+					<para>This is typically same as the host part of the $g_from_email.
+						For example <emphasis>example.com</emphasis>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_dkim_private_key_file_path</term>
+				<listitem>
+					<para>Path to the private domain key to be used for DKIM Signatures.
+					</para>
+					<para>If the key is specified in $g_email_dkim_private_key_string this setting will not be used.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_dkim_private_key_string</term>
+				<listitem>
+					<para>Private domain key to be used for DKIM Signatures.
+					</para>
+					<para>This string should contain private key for signing. Leave empty
+						string if you wish to load the key from the file defined with
+						$g_email_dkim_private_key_file_path.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_dkim_selector</term>
+				<listitem>
+					<para>Selector to be used for DKIM Signatures.
+					</para>
+					<para>If your domain is example.com, typically DNS TXT field should have:
+						<emphasis>host: mail.example._domainkey</emphasis>,
+						<emphasis>value: v=DKIM1; t=s; n=core; k=rsa; p=[public key]</emphasis>.
+						In this case selector should be mail.example
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_dkim_passphrase</term>
+				<listitem>
+					<para>Private DKIM domain key password.
+					</para>
+					<para>Leave empty string if your private key does not have password
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_dkim_identity</term>
+				<listitem>
+					<para>Identity to be used for DomainKeys Identified Mail (DKIM) Signatures.
+					</para>
+					<para>This is usually the same as <emphasis>$g_from_email</emphasis>.
+						For example, noreply@example.com
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+
+	<section id="admin.config.email.smime">
+		<title>S/MIME signature</title>
+
+		<para>This sections describes the necessary settings to enable
+			<ulink url="https://en.wikipedia.org/wiki/S/MIME">S/MIME</ulink>
+			signature for outgoing MantisBT e-mails.
+		</para>
+
+		<variablelist>
+			<varlistentry>
+				<term>$g_email_smime_enable</term>
+				<listitem>
+					<para>Enables S/MIME signature.
+					</para>
+					<para>Defaults to OFF.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_smime_cert_file</term>
+				<listitem>
+					<para>Path to the S/MIME certificate.</para>
+					<para>The file must contain a
+						<ulink url="https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail">PEM-encoded</ulink>
+						certificate.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_smime_key_file</term>
+				<listitem>
+					<para>Path to the S/MIME private key file.</para>
+					<para>The file must contain a PEM-encoded private key
+						matching the S/MIME certificate.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_smime_key_password</term>
+				<listitem>
+					<para>Password for the S/MIME private key.</para>
+					<para>Leave blank if the private key is not protected
+						by a passphrase.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_email_smime_extracerts_file</term>
+				<listitem>
+					<para>Optional path to S/MIME extra certificates.</para>
+					<para>The file must contain one (or more) PEM-encoded
+						certificates, which will be included in the signature to
+						help the recipient verify the certificate specified in
+						<emphasis>$g_email_smime_cert_file</emphasis>
+						("CA Chain").
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+
+		<note>
+			<para>MantisBT expects the S/MIME certificates and the private key
+				files to be in
+				<ulink url="https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail">PEM</ulink>
+				format.
+				If you have a <ulink url="https://en.wikipedia.org/wiki/PKCS_12">PKCS12</ulink>
+				encrypted certificate (typically with a .pfx or .p12 extension),
+				you may use the following <literal>openssl</literal> commands
+				to extract and convert the individual elements:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>Certificate</para>
+					<programlisting>
+openssl pkcs12 -in cert.pfx -clcerts -nokeys -out cert.crt
+</programlisting>
+				</listitem>
+				<listitem>
+					<para>Extra certificates ("CA chain")</para>
+					<programlisting>
+openssl pkcs12 -in cert.pfx -cacerts -nokeys -out ca-chain.crt
+</programlisting>
+				</listitem>
+				<listitem>
+					<para>Private key
+						(<literal>-passout</literal> specifies the private key's password)
+					</para>
+					<programlisting>
+openssl pkcs12 -in cert.pfx -nocerts -out cert.key -passout pass:
+</programlisting>
+				</listitem>
+			</itemizedlist>
+			<para>If the input file is protected, openssl will ask for the password;
+				alternatively, you can specify it on the command-line with the
+				<emphasis>-passin</emphasis> option, e.g.
+				<literal>-passin pass:PASSWORD</literal>
+			</para>
+		</note>
+
+	</section>
+
 </section>

@@ -86,7 +86,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-user"></i>
+		<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 		<?php echo lang_get('view_account_title') ?>
 	</h4>
 </div>

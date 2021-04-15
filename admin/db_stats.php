@@ -65,7 +65,7 @@ function helper_table_row_count( $p_table ) {
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-database"></i>
+	<?php print_icon( 'fa-database', 'ace-icon' ); ?>
 	<?php echo lang_get( 'mantisbt_database_statistics' ) ?>
 </h4>
 </div>

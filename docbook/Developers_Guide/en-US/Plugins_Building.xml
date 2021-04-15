@@ -8,17 +8,21 @@
 		<title>Building a Plugin</title>
 
 		<para>
-			This section will act as a walk through of how to build a plugin, from the
-			bare basics all the way up to advanced topics.  A general understanding of
-			the concepts covered in the last section is assumed, as well as knowledge
-			of how the event system works.  Later topics in this section will require
-			knowledge of database schemas and how they are used with MantisBT.
+			This section will act as a tutorial to build a new plugin, from the
+			bare basics all the way up to advanced topics.
+		</para>
+		<para>
+			A general understanding of HTML, PHP and the concepts covered in the
+			last section is assumed, as well as knowledge of how the event system works.
+			Later topics in this section will require knowledge of database schemas
+			and how they are used with MantisBT.
 		</para>
 
 		<para>
-			This walk through will be working towards building a single end result: the
-			"Example" plugin as listed in <xref linkend="dev.plugins.building.source" />.
-			You may refer to the final source code along the way,
+			This walk-through will be working towards building a single
+			end result: the <emphasis>Example Plugin</emphasis>.
+			You may refer to the final code along the way
+			(see <xref linkend="dev.plugins.building.source" />),
 			although every part of it will be built up in steps throughout this section.
 		</para>
 
@@ -27,7 +31,7 @@
 
 			<para>
 				This section will introduce the general concepts of plugin structure,
-				and how to get a barebones plugin working with MantisBT.  Not much will be
+				and how to get a bare-bones plugin working with MantisBT.  Not much will be
 				mentioned yet on the topic of adding functionality to plugins, just how to
 				get the development process rolling.
 			</para>
@@ -104,29 +108,32 @@ Example/
 			</para>
 
 			<programlisting><filename>Example/Example.php</filename>
-
-&lt;?php
+<![CDATA[
+<?php
 class ExamplePlugin extends MantisPlugin {
     function register() {
-        $this->name = 'Example';    # Proper name of plugin
-        $this->description = '';    # Short description of the plugin
-        $this->page = '';           # Default plugin page
+        $this->name = 'Example Plugin';      # Proper name of plugin
+        $this->description = 'Example Plugin from MantisBT Developers Guide';
+                                             # Short description of the plugin
+        $this->page = '';                    # Default plugin page
 
-        $this->version = '1.0';     # Plugin version string
-        $this->requires = array(    # Plugin dependencies
-            'MantisCore' => '2.0',  # Should always depend on an appropriate
-                                    # version of MantisBT
+        $this->version = '2.0';              # Plugin version string
+        $this->requires = array(             # Plugin dependencies
+            'MantisCore' => '2.0',           # Should always depend on an appropriate
+                                             # version of MantisBT
         );
 
-        $this->author = '';         # Author/team name
-        $this->contact = '';        # Author/team e-mail address
-        $this->url = '';            # Support webpage
+        $this->author = 'MantisBT Team';     # Author/team name
+        $this->contact = 'mantisbt-dev@lists.sourceforge.net';
+                                             # Author/team e-mail address
+        $this->url = 'https://mantisbt.org'; # Support webpage
     }
 }
+]]>
 			</programlisting>
 
 			<para>
-				This alone will allow the Example plugin to be installed with MantisBT, and
+				This alone will allow our Example plugin to be installed with MantisBT, and
 				is the foundation of any plugin.  More of the plugin development process
 				will be continued in the next sections.
 			</para>
@@ -161,9 +168,10 @@ class ExamplePlugin extends MantisPlugin {
 					<term>page</term>
 					<listitem>
 						<para>The name of a plugin page for further information
-							and administration of the plugin.
-							This is used to create a link to the specified page
-							on Mantis' manage plugin page.
+							and administration of the plugin; this is usually
+							the Plugin's configuration page.
+							MantisBT will create a link to the specified page
+							on the Manage Plugins page.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -174,10 +182,10 @@ class ExamplePlugin extends MantisPlugin {
 						<para>Your plugin's version string.
 							<emphasis>Required value.</emphasis>
 							We recommend following the
-							<ulink url="http://semver.org/">Semantic Versioning</ulink>
+							<ulink url="https://semver.org/">Semantic Versioning</ulink>
 							specification, but you are free to use any
 							versioning scheme that can be handled by PHP's
-							<ulink url="http://php.net/manual/en/function.version-compare.php">
+							<ulink url="https://www.php.net/manual/en/function.version-compare.php">
 								version_compare()
 							</ulink> function.
 						</para>
@@ -190,10 +198,10 @@ class ExamplePlugin extends MantisPlugin {
 						<para>An array of key/value pairs of basename/version
 							plugin dependencies.
 							<note>
-								<para>The special, reserved basename
-									<literal>MantisCore</literal> can be used to
-									specify the minimum requirement for MantisBT
-									core.
+								<para>The special, reserved
+									<literal>MantisCore</literal> basename
+									can be used to specify the minimum requirement
+									for MantisBT core.
 								</para>
 							</note>
 							The version string can be defined as:
@@ -338,34 +346,68 @@ $this->requires = array( 'MantisCore' => '1.3, &lt; 4.0' );
 
 			<para>
 				The plugin API provides a standard hierarchy and process for adding new pages and
-				files to your plugin.  For strict definitions, pages are PHP files that will be
-				executed within the MantisBT core system, while files are defined as a separate
-				set of raw data that will be passed to the client's browser exactly as it appears
-				in the filesystem.
+				files to your plugin.  For strict definitions,
+				<emphasis>pages</emphasis>
+				are PHP files that will be executed within the MantisBT core system, while
+				<emphasis>files</emphasis>
+				are defined as a separate set of raw data that will be passed to the
+				client's browser exactly as it appears in the filesystem.
 			</para>
 
 			<para>
-				New pages for your plugin should be placed in your plugin's
-				<filename>pages/</filename> directory, and should be named using only letters and
-				numbers, and must have a ".php" file extension.  To generate a URI to the new page
-				in MantisBT, the API function <function>plugin_page()</function> should be used.
+				Your Plugin's pages must:
+				<itemizedlist>
+					<listitem>
+						<para>be placed in the <filename>pages/</filename> directory,</para>
+					</listitem>
+					<listitem>
+						<para>be named using only letters, numbers and underscores, and</para>
+					</listitem>
+					<listitem>
+						<para>have a <literal>.php</literal> file extension</para>
+					</listitem>
+				</itemizedlist>
+				To generate a URI to a page in MantisBT, the API function
+				<function>plugin_page()</function> should be used.
 				Our Example plugin will create a page named <filename>foo.php</filename>, which
-				can then be accessed via <literal>plugin_page.php?page=Example/foo</literal>, the
-				same URI that <function>plugin_page()</function> would have generated:
+				can then be accessed via <literal>plugin_page.php?page=Example/foo</literal>:
 			</para>
 
 			<programlisting><filename>Example/pages/foo.php</filename>
+<![CDATA[
+<?php
+layout_page_header();
+layout_page_begin();
+?>
 
-&lt;?php
-echo '&lt;p&gt;Here is a link to &lt;a href="', plugin_page( 'foo' ), '">page foo&lt;/a&gt;.&lt;/p&gt;';
+<p>
+    Here is a link to <a href="<?php echo plugin_page( 'foo' ) ?>">page foo</a>.
+</p>
+
+<?php
+layout_page_end();
+]]>
 			</programlisting>
+			<note>
+				<para>
+					The calls to <function>layout_page_begin()</function> and
+					<function>layout_page_end()</function> trigger the standard MantisBT
+					header and footer portions, respectively, which also displays things
+					such as the menus and triggers other layout-related events.
+					<function>layout_page_header()</function> pulls in the CSS classes for
+					alternating row colors in the table, amongst other things.
+				</para>
+			</note>
 
 			<para>
 				Adding non-PHP files, such as images or CSS stylesheets, follows a very similar
 				pattern as pages.  Files should be placed in the plugin's
 				<filename>files/</filename> directory, and can only contain a single period in
 				the name.  The file's URI is generated with the <function>plugin_file()</function>
-				function.  For our Example plugin, we'll create a basic CSS stylesheet, and modify
+				function.
+			</para>
+			<para>
+				For our Example plugin, we'll create a basic CSS stylesheet, and modify
 				the previously shown page to include the stylesheet:
 			</para>
 
@@ -376,20 +418,26 @@ p.foo {
 }
 			</programlisting>
 
-			<programlisting><filename>Example/pages/foo.php</filename>
+			<programlisting><filename>Example/pages/foo.php</filename><![CDATA[
+...
 
-&lt;?php
-echo '&lt;p&gt;Here is a link to &lt;a href="', plugin_page( 'foo' ), '">page foo&lt;/a&gt;.&lt;/p&gt;';
-echo '&lt;link rel="stylesheet" type="text/css" href="', plugin_file( 'foo.css' ), '"/&gt;',
-     '&lt;p class="foo"&gt;This is red text.&lt;/p&gt;';
+<link rel="stylesheet" type="text/css" href="<?php echo plugin_file( 'foo.css' ) ?>" />
+<p class="foo">
+    Our custom stylesheet paints this text red.
+</p>
+]]>
 			</programlisting>
 
-			<para>
-				Note that while <function>plugin_page()</function> expects only the page's name
-				without the extension, <function>plugin_file()</function> requires the entire
-				filename so that it can distinguish between <filename>foo.css</filename> and
-				a potential file <filename>foo.png</filename>.
-			</para>
+			<note>
+				<para>
+					While <function>plugin_page()</function> expects only
+					the page's name without the extension,
+					<function>plugin_file()</function> on the other hand
+					requires the entire filename, so that it can distinguish
+					e.g. between <filename>foo.css</filename> and
+					a potential image file called <filename>foo.png</filename>.
+				</para>
+			</note>
 
 			<para>
 				The plugin's filesystem structure at this point looks like this:
@@ -416,11 +464,14 @@ Example/
 			</para>
 
 			<para>
-				To declare a new event, or a set of events, that your plugin will trigger, override
+				To declare a new event, or a set of events that your plugin will trigger, override
 				the <function>events()</function> method of your plugin class, and return an
 				associative array with event names as the key, and the event type as the value.
-				Let's add an event "foo" to our Example plugin that does not expect a return value
-				(an "execute" event type), and another event 'bar' that expects a single value that
+			</para>
+			<para>
+				Let's add to our Example plugin, a new event <emphasis>foo</emphasis>
+				that does not expect a return value (an "execute" event type),
+				and another event <emphasis>bar</emphasis> expecting a single value that
 				gets modified by each hooked function (a "chain" event type):
 			</para>
 
@@ -441,18 +492,29 @@ class ExamplePlugin extends MantisPlugin {
 
 			<para>
 				When the Example plugin is loaded, the event system in MantisBT will add these two
-				events to its list of events, and will then allow other plugins or functions to hook
-				them.  Naming the events "EVENT_PLUGINNAME_EVENTNAME" is not necessary, but is considered
-				best practice to avoid conflicts between plugins.
+				items to its list of events, and will then allow other plugins or functions to hook
+				them.
 			</para>
+			<note>
+				<para>
+					Naming the events "EVENT_PLUGINBASENAME_EVENTNAME" is not required,
+					but is considered best practice to avoid conflicts between plugins.
+				</para>
+			</note>
 
 			<para>
-				Hooking other events (or events from your own plugin) is almost identical to declaring
-				them.  Instead of passing an event type as the value, your plugin must pass the name
-				of a class method on your plugin that will be called when the event is triggered. For
-				our Example plugin, we'll create a <function>foo()</function> and
-				<function>bar()</function> method on our plugin class, and hook them to the events we
-				declared earlier.
+				Hooking events, whether they are your own plugin's or defined elsewhere,
+				is almost identical to declaring them.
+				Instead of passing an event type as the value, your plugin must give the name
+				of a class method that will be called when the event is triggered.
+			</para>
+			<para>
+				For our Example plugin, we'll create a <function>foo()</function>
+				and a <function>bar()</function> methods in our plugin class,
+				then hook them to the events we declared earlier.
+				We'll also hook the standard <literal>EVENT_MENU_MAIN</literal> event,
+				to link the custom page we created in
+				<xref linkend="dev.plugins.building.pages" />.
 			</para>
 
 			<programlisting><filename>Example/Example.php</filename>
@@ -463,34 +525,30 @@ class ExamplePlugin extends MantisPlugin {
 
     function hooks() {
         return array(
+            'EVENT_MENU_MAIN' => 'menu',
+
             'EVENT_EXAMPLE_FOO' => 'foo',
             'EVENT_EXAMPLE_BAR' => 'bar',
         );
-    }
-
-    function foo( $p_event ) {
-        ...
-    }
-
-    function bar( $p_event, $p_chained_param ) {
-        ...
-        return $p_chained_param;
     }
 }
 			</programlisting>
 
 			<para>
-				Note that both hooked methods need to accept the <parameter>$p_event</parameter>
-				parameter, as that contains the event name triggering the method (for cases where
-				you may want a method hooked to multiple events).  The <function>bar()</function>
-				method also accepts and returns the chained parameter in order to match the
-				expectations of the "bar" event.
+				Function signatures vary depending on the hooked event's type
+				(see <xref linkend="dev.events.types" />).
+				They generally should accept the <parameter>$p_event</parameter>
+				parameter, which contains the event name triggering the method
+				(allowing a single method to respond to multiple events).
+				The <function>bar()</function> method also accepts and returns
+				a second parameter, in order to match the expectations of
+				<emphasis>chained</emphasis> events.
 			</para>
 
 			<para>
-				Now that we have our plugin's events declared and hooked, let's modify our earlier
-				page so that triggers the events, and add some real processing to the hooked
-				methods:
+				Now that we have our plugin's events declared and hooked,
+				let's define the hook methods and
+				modify our earlier page so it triggers the new events:
 			</para>
 
 			<programlisting><filename>Example/Example.php</filename>
@@ -498,6 +556,15 @@ class ExamplePlugin extends MantisPlugin {
 &lt;?php
 class ExamplePlugin extends MantisPlugin {
     ...
+    function menu() {
+        $t_menu[] = array(
+            'title' => $this->name,
+            'url' => plugin_page( 'foo' ),
+            'access_level' => ANYBODY,
+            'icon' => 'fa-smile-o'
+        );
+        return $t_menu;
+    }
 
     function foo( $p_event ) {
         echo 'In method foo(). ';
@@ -509,19 +576,20 @@ class ExamplePlugin extends MantisPlugin {
 }
 			</programlisting>
 
-			<programlisting><filename>Example/pages/foo.php</filename>
+			<programlisting><filename>Example/pages/foo.php</filename><![CDATA[
+...
 
-&lt;?php
-echo '&lt;p&gt;Here is a link to &lt;a href="', plugin_page( 'foo' ), '">page foo&lt;/a&gt;.&lt;/p&gt;';
-     '&lt;link rel="stylesheet" type="text/css" href="', plugin_file( 'foo.css' ), '"/&gt;',
-     '&lt;p class="foo"&gt;';
-
+<p>
+    Custom event hooks:
+<?php
 event_signal( 'EVENT_EXAMPLE_FOO' );
 
 $t_string = 'A sentence with the word "foo" in it.';
 $t_new_string = event_signal( 'EVENT_EXAMPLE_BAR', array( $t_string ) );
-
-echo $t_new_string, '&lt;/p&gt;';
+echo $t_new_string;
+?>
+</p>
+]]>
 			</programlisting>
 
 			<para>
@@ -571,51 +639,91 @@ class ExamplePlugin extends MantisPlugin {
 				using the plugin API's <function>plugin_config_get()</function> function, and can
 				be set to a modified value in the database using
 				<function>plugin_config_set()</function>.  With these functions, the config option
-				is prefixed with the plugin's name, in attempt to automatically avoid conflicts in
-				naming.  Our Example plugin will demonstrate this by adding a secure form to the
-				"config_page", and handling the form on a separate page "config_update" that will
-				modify the value in the database, and redirect back to page "config_page", just
-				like any other form and action page in MantisBT:
+				is prefixed with the plugin's name, in an attempt to automatically avoid conflicts in
+				naming.
+			</para>
+			<para>Our Example plugin will demonstrate this by adding a secure form to a
+				new configuration page we'll call <literal>config.php</literal>, and
+				handling the form on a separate <literal>config_update.php</literal> page
+				that will modify the value in the database, and redirect back to the config
+				page, just like any other form and action page in MantisBT:
 			</para>
 
-			<programlisting><filename>Example/pages/config_page.php</filename>
+			<note>
+				<para>
+					This code sample is a bare-bones implementation, focusing
+					on functionality and meant for illustration purposes.
+					Please refer to <xref linkend="dev.plugins.building.layout" />
+					for a more realistic example, including layout and styling.
+				</para>
+			</note>
 
-&lt;form action="&lt;?php echo plugin_page( 'config_update' ) ?&gt;" method="post"&gt;
-&lt;?php echo form_security_field( 'plugin_Example_config_update' ) ?&gt;
+			<programlisting><filename>Example/pages/config.php</filename>
+<![CDATA[
+<?php
+$t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
+?>
 
-&lt;label&gt;Foo or Bar?&lt;br/&gt;&lt;input name="foo_or_bar" value="&lt;?php echo string_attribute( $t_foo_or_bar ) ?&gt;"/&gt;&lt;/label&gt;
-&lt;br/&gt;
-&lt;label&gt;&lt;input type="checkbox" name="reset"/&gt; Reset&lt;/label&gt;
-&lt;br/&gt;
-&lt;input type="submit"/&gt;
-
-&lt;/form&gt;
+<form action="<?php echo plugin_page( 'config_update' )?>" method="post">
+    <?php echo form_security_field( 'plugin_Example_config_update' ) ?>
+    <label>
+        Foo or Bar?
+        <input name="foo_or_bar" value="<?php echo string_attribute( $t_foo_or_bar ) ?>" />
+    </label>
+    <br>
+    <label>
+        Reset
+        <input type="checkbox" name="reset" />
+    </label>
+    <br>
+    <input type="submit" />
+</form>
+]]>
 			</programlisting>
-
 			<programlisting><filename>Example/pages/config_update.php</filename>
-
-&lt;?php
+<![CDATA[
+<?php
 form_security_validate( 'plugin_Example_config_update' );
 
 $f_foo_or_bar = gpc_get_string( 'foo_or_bar' );
 $f_reset = gpc_get_bool( 'reset', false );
 
+form_security_purge( 'plugin_Example_config_update' );
+
 if( $f_reset ) {
     plugin_config_delete( 'foo_or_bar' );
+} elseif( $f_foo_or_bar == 'foo' || $f_foo_or_bar == 'bar' ) {
+    plugin_config_set( 'foo_or_bar', $f_foo_or_bar );
 } else {
-    if( $f_foo_or_bar == 'foo' || $f_foo_or_bar == 'bar' ) {
-        plugin_config_set( 'foo_or_bar', $f_foo_or_bar );
-    }
+    error_parameters( 'foo_or_bar', string_attribute( $f_foo_or_bar ) );
+    trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
 }
 
-form_security_purge( 'plugin_Example_config_update' );
-print_successful_redirect( plugin_page( 'foo', true ) );
+print_successful_redirect( plugin_page( 'config', true ) );
+]]>
 			</programlisting>
 
-			<para>
-				Note that the <function>form_security_*()</function> functions are part of the
-				form API, and prevent CSRF attacks against forms that make changes to the system.
+			<note>
+				<para>
+					The <function>form_security_*()</function> functions are part of the
+					Form API, and prevent CSRF attacks against forms that make changes to the system.
+				</para>
+			</note>
+
+			<para>The last step is to add a link our new config page from
+				the Manage Plugins page.
+				This is as simple as referencing the config page's name in the
+				<function>register()</function> method, which will turn
+				the Plugin's name into an hyperlink.
 			</para>
+
+			<programlisting><filename>Example/Example.php</filename>
+
+	function register() {
+		...
+		$this->page = 'config';     # Default plugin page
+			</programlisting>
+
 		</section>
 
 		<section id="dev.plugins.building.language">
@@ -641,70 +749,179 @@ print_successful_redirect( plugin_page( 'foo', true ) );
 			</para>
 
 			<para>
-				We'll use the "configuration" pages from the previous examples, and dress them up
-				with localized language strings, and add a few more flourishes to make the page act
-				like a standard MantisBT page.  First we need to create a language file for English,
-				the default language of MantisBT and the default fallback language in the case that
-				some strings have not yet been localized to the user's language:
+				We'll use the pages from the previous examples,
+				and dress them up with localized language strings.
+				First we need to create a language file for English,
+				MantisBT's default language which is also used as fallback in case
+				some strings have not been localized to the user's language:
 			</para>
 
 			<programlisting><filename>Example/lang/strings_english.txt</filename>
 
 &lt;?php
-
+$s_plugin_Example_title = "Example Plugin";
+$s_plugin_Example_description = "Example Plugin from MantisBT Developers Guide";
 $s_plugin_Example_configuration = "Configuration";
 $s_plugin_Example_foo_or_bar = "Foo or Bar?";
 $s_plugin_Example_reset = "Reset Value";
 			</programlisting>
 
-			<programlisting><filename>Example/pages/config_page.php</filename>
-&lt;?php
+			<para>
+				We can now use these strings to localize our code using the
+				<function>plugin_lang_get()</function> API function,
+				replacing the hardcoded text and adding page title:
+			</para>
 
-layout_page_header( plugin_lang_get( 'configuration' ) );
-layout_page_begin();
-$t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
+			<programlisting><filename>Example/Example.php</filename>
 
-?&gt;
-
-&lt;br/&gt;
-
-&lt;form action="&lt;?php echo plugin_page( 'config_update' ) ?&gt;" method="post"&gt;
-&lt;?php echo form_security_field( 'plugin_Example_config_update' ) ?&gt;
-&lt;table class="width60"&gt;
-
-&lt;tr&gt;
-    &lt;td class="form-title" rowspan="2"&gt;&lt;?php echo plugin_lang_get( 'configuration' ) ?&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
-    &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'foo_or_bar' ) ?&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;input name="foo_or_bar" value="&lt;?php echo string_attribute( $t_foo_or_bar ) ?&gt;"/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
-    &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'reset' ) ?&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;input type="checkbox" name="reset"/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td class="center" rowspan="2"&gt;&lt;input type="submit"/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;/table&gt;
-&lt;/form&gt;
-
-&lt;?php
-
-layout_page_end();
+	function register() {
+		...
+		$this->description = plugin_lang_get( 'title' );
 			</programlisting>
 
+			<programlisting><filename>Example/pages/foo.php</filename>
+				<![CDATA[
+<?php
+layout_page_header( plugin_lang_get( 'title' ) );
+layout_page_begin();
+?>
+...
+]]>
+			</programlisting>
+
+			<programlisting><filename>Example/pages/config.php</filename>
+<![CDATA[
+<?php
+layout_page_header( plugin_lang_get( 'title' ) );
+layout_page_begin();
+
+$t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
+?>
+
+<form action="<?php echo plugin_page( 'config_update' )?>" method="post">
+    <?php echo form_security_field( 'plugin_Example_config_update' ) ?>
+    <label>
+        <?php echo plugin_lang_get( 'foo_or_bar' ) ?>
+        <input name="foo_or_bar" value="<?php echo string_attribute( $t_foo_or_bar ) ?>" />
+    </label>
+    <br>
+    <label>
+        <?php echo plugin_lang_get( 'reset' ) ?>
+        <input type="checkbox" name="reset" />
+    </label>
+    <br>
+    <button type="submit"><?php echo lang_get( 'change_configuration' )?></button>
+</form>
+]]>
+			</programlisting>
+		</section>
+
+		<section id="dev.plugins.building.layout">
+			<title>Layout</title>
+
 			<para>
-				The two calls to <function>layout_page_being()</function> and
-				<function>layout_page_end()</function> trigger the standard MantisBT header and
-				footer portions, respectively, which also displays things such as the menus and
-				triggers other layout-related events.  <function>layout_page_header()</function>
-				pulls in the CSS classes for alternating row colors in the table.  The rest of the
-				HTML and CSS follows the "standard" MantisBT markup styles for content and layout.
+				To finalize our plugin, we'll add some markup and flourishes
+				to make the config page look like a standard MantisBT page.
+			</para>
+
+			<note>
+				<para>
+					Alternating colors are applied automatically to the table's
+					rows with CSS, it is no longer necessary to rely on the
+					now-deprecated <function>helper_alternate_rows()</function>
+					API function.
+				</para>
+			</note>
+
+			<programlisting><filename>Example/pages/config.php</filename>
+<![CDATA[
+<?php
+layout_page_header( plugin_lang_get( 'title' ) );
+layout_page_begin();
+
+$t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
+?>
+
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+
+<div class="form-container">
+    <form action="<?php echo plugin_page( 'config_update' ) ?>" method="post">
+        <?php echo form_security_field( 'plugin_Example_config_update' ) ?>
+        <div class="widget-box widget-color-blue2">
+            <div class="widget-header widget-header-small">
+                <h4 class="widget-title lighter">
+                    <?php
+                    print_icon( 'fa-text-width', 'ace-icon' );
+                    echo "&nbsp;";
+                    echo plugin_lang_get( 'title') . ': '
+                        . plugin_lang_get( 'configuration' );
+                    ?>
+                </h4>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main no-padding table-responsive">
+                    <table class="table table-bordered table-condensed table-striped">
+                        <tr>
+                            <th class="category">
+                                <label for="foo_or_bar">
+                                    <?php echo plugin_lang_get( 'foo_or_bar' ) ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="text" id="foo_or_bar" name="foo_or_bar"
+                                       value="<?php echo string_attribute( $t_foo_or_bar ) ?>"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="category">
+                                <label for="reset">
+                                    <?php echo plugin_lang_get( 'reset' ) ?>
+                                </label>
+                            </th>
+                            <td>
+                                <input type="checkbox" id="reset" name="reset" class="ace" />
+                                <span class="lbl"> </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="widget-toolbox padding-8 clearfix">
+                    <button class="btn btn-primary btn-white btn-round">
+                        <?php echo lang_get( 'change_configuration' )?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</div>
+
+<?php
+layout_page_end();
+]]>
+			</programlisting>
+		</section>
+
+		<section id="dev.plugins.building.source">
+			<title>Example Plugin source code</title>
+
+			<para>
+				The <ulink url="https://github.com/mantisbt-plugins/Example">
+					complete source code</ulink>
+				for the <emphasis>Example Plugin</emphasis> built in this tutorial
+				is available in the <emphasis>mantisbt-plugins</emphasis>
+				GitHub organization.
+			</para>
+			<para>
+				It has been released into the public domain under the
+				<ulink url="https://unlicense.org/">Unlicense</ulink>,
+				which means you are free to use it in any way you want,
+				without warranty of any kind.
 			</para>
 		</section>
 

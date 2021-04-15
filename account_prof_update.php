@@ -50,93 +50,80 @@ if( !config_get( 'enable_profiles' ) ) {
 	trigger_error( ERROR_ACCESS_DENIED, ERROR );
 }
 
-form_security_validate( 'profile_update' );
+$t_form_name = 'account_prof_update';
+form_security_validate( $t_form_name );
 
 auth_ensure_user_authenticated();
-
 current_user_ensure_unprotected();
 
 $f_action = gpc_get_string( 'action' );
+$f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
 if( $f_action != 'add' ) {
 	$f_profile_id = gpc_get_int( 'profile_id' );
-
-	# Make sure user did select an existing profile from the list
-	if( $f_action != 'make_default' && $f_profile_id == 0 ) {
-		error_parameters( lang_get( 'select_profile' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
-	}
 }
 
 switch( $f_action ) {
-	case 'edit':
-		form_security_purge( 'profile_update' );
-		print_header_redirect( 'account_prof_edit_page.php?profile_id=' . $f_profile_id );
-		break;
-
 	case 'add':
 		$f_platform		= gpc_get_string( 'platform' );
 		$f_os			= gpc_get_string( 'os' );
 		$f_os_build		= gpc_get_string( 'os_build' );
 		$f_description	= gpc_get_string( 'description' );
-
 		$t_user_id		= gpc_get_int( 'user_id' );
-		if( ALL_USERS != $t_user_id ) {
-			$t_user_id = auth_get_current_user_id();
-		}
 
 		if( ALL_USERS == $t_user_id ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 		} else {
 			access_ensure_global_level( config_get( 'add_profile_threshold' ) );
+			$t_user_id = auth_get_current_user_id();
 		}
 
 		profile_create( $t_user_id, $f_platform, $f_os, $f_os_build, $f_description );
-		form_security_purge( 'profile_update' );
-
-		if( ALL_USERS == $t_user_id ) {
-			print_header_redirect( 'manage_prof_menu_page.php' );
-		} else {
-			print_header_redirect( 'account_prof_menu_page.php' );
-		}
 		break;
 
 	case 'update':
+		if( profile_is_global( $f_profile_id ) ) {
+			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+			$t_user_id = ALL_USERS;
+		} else {
+			$t_user_id = auth_get_current_user_id();
+		}
+
 		$f_platform = gpc_get_string( 'platform' );
 		$f_os = gpc_get_string( 'os' );
 		$f_os_build = gpc_get_string( 'os_build' );
 		$f_description = gpc_get_string( 'description' );
 
-		if( profile_is_global( $f_profile_id ) ) {
-			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
-
-			profile_update( ALL_USERS, $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
-			form_security_purge( 'profile_update' );
-			print_header_redirect( 'manage_prof_menu_page.php' );
-		} else {
-			profile_update( auth_get_current_user_id(), $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
-			form_security_purge( 'profile_update' );
-			print_header_redirect( 'account_prof_menu_page.php' );
-		}
+		profile_update( $t_user_id, $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
 		break;
 
 	case 'delete':
 		if( profile_is_global( $f_profile_id ) ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
-
-			profile_delete( ALL_USERS, $f_profile_id );
-			form_security_purge( 'profile_update' );
-			print_header_redirect( 'manage_prof_menu_page.php' );
+			$t_user_id = ALL_USERS;
 		} else {
-			profile_delete( auth_get_current_user_id(), $f_profile_id );
-			form_security_purge( 'profile_update' );
-			print_header_redirect( 'account_prof_menu_page.php' );
+			$t_user_id = auth_get_current_user_id();
 		}
+
+		helper_ensure_confirmed(
+			sprintf( lang_get( 'delete_profile_confirm_msg' ),
+				string_attribute( profile_get_name( $f_profile_id ) )
+			),
+			lang_get( 'delete_profile' )
+		);
+
+		profile_delete( $t_user_id, $f_profile_id );
 		break;
 
 	case 'make_default':
 		current_user_set_pref( 'default_profile', $f_profile_id );
-		form_security_purge( 'profile_update' );
-		print_header_redirect( 'account_prof_menu_page.php' );
 		break;
 }
+
+form_security_purge( $t_form_name );
+
+layout_page_header( null, $f_redirect_page );
+layout_page_begin();
+html_operation_successful( $f_redirect_page );
+layout_page_end();
+

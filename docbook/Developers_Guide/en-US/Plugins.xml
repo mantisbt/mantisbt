@@ -48,7 +48,6 @@
 	</section>
 
 	<xi:include href="Plugins_Building.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	<xi:include href="Plugins_Building_Source.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 
 	<section id="dev.plugins.api">
 		<title>API Usage</title>

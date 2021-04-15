@@ -61,6 +61,27 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'relationship_api.php' );
 
+/**
+ * Retrieves a version from form data and ensures it is valid.
+ *
+ * @param BugData $p_bug  Reference issue
+ * @param string $p_field Field name (used for GPC var and BugData property)
+ *
+ * @return string|null
+ */
+function get_valid_version( BugData $p_bug, $p_field ) {
+	$t_reference_version = $p_bug->$p_field;
+	$t_version = gpc_get_string( $p_field, $t_reference_version );
+	if( !is_blank( $t_version )
+		&& $t_version != $t_reference_version
+		&& version_get_id( $t_version, $p_bug->project_id ) === false
+	) {
+		error_parameters( $t_version );
+		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+	}
+	return $t_version;
+}
+
 form_security_validate( 'bug_update' );
 
 $f_bug_id = gpc_get_int( 'bug_id' );
@@ -89,7 +110,6 @@ if( $t_due_date !== null ) {
 }
 $t_updated_bug->duplicate_id = gpc_get_int( 'duplicate_id', 0 );
 $t_updated_bug->eta = gpc_get_int( 'eta', $t_existing_bug->eta );
-$t_updated_bug->fixed_in_version = gpc_get_string( 'fixed_in_version', $t_existing_bug->fixed_in_version );
 $t_updated_bug->handler_id = gpc_get_int( 'handler_id', $t_existing_bug->handler_id );
 $t_updated_bug->last_updated = gpc_get_string( 'last_updated' );
 $t_updated_bug->os = gpc_get_string( 'os', $t_existing_bug->os );
@@ -97,15 +117,40 @@ $t_updated_bug->os_build = gpc_get_string( 'os_build', $t_existing_bug->os_build
 $t_updated_bug->platform = gpc_get_string( 'platform', $t_existing_bug->platform );
 $t_updated_bug->priority = gpc_get_int( 'priority', $t_existing_bug->priority );
 $t_updated_bug->projection = gpc_get_int( 'projection', $t_existing_bug->projection );
-$t_updated_bug->reporter_id = gpc_get_int( 'reporter_id', $t_existing_bug->reporter_id );
+
+$t_reporter_id = gpc_get_int( 'reporter_id', $t_existing_bug->reporter_id );
+# Only validate the reporter if different from the recorded one; this avoids
+# blocking the update when changing another field and the original reporter's
+# account no longer exists.
+if( $t_reporter_id != $t_existing_bug->reporter_id ) {
+	user_ensure_exists( $t_reporter_id );
+	$t_report_bug_threshold = config_get( 'report_bug_threshold',
+		null,
+		$t_reporter_id,
+		$t_existing_bug->project_id
+	);
+	$t_can_report = access_has_project_level(
+		$t_report_bug_threshold,
+		$t_existing_bug->project_id,
+		$t_reporter_id
+	);
+	if( !$t_can_report ) {
+		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+	}
+}
+$t_updated_bug->reporter_id = $t_reporter_id;
+
 $t_updated_bug->reproducibility = gpc_get_int( 'reproducibility', $t_existing_bug->reproducibility );
 $t_updated_bug->resolution = gpc_get_int( 'resolution', $t_existing_bug->resolution );
 $t_updated_bug->severity = gpc_get_int( 'severity', $t_existing_bug->severity );
 $t_updated_bug->status = gpc_get_int( 'status', $t_existing_bug->status );
 $t_updated_bug->steps_to_reproduce = gpc_get_string( 'steps_to_reproduce', $t_existing_bug->steps_to_reproduce );
 $t_updated_bug->summary = gpc_get_string( 'summary', $t_existing_bug->summary );
-$t_updated_bug->target_version = gpc_get_string( 'target_version', $t_existing_bug->target_version );
-$t_updated_bug->version = gpc_get_string( 'version', $t_existing_bug->version );
+
+$t_updated_bug->fixed_in_version = get_valid_version( $t_existing_bug, 'fixed_in_version' );
+$t_updated_bug->target_version = get_valid_version( $t_existing_bug, 'target_version' );
+$t_updated_bug->version = get_valid_version( $t_existing_bug, 'version' );
+
 $t_updated_bug->view_state = gpc_get_int( 'view_state', $t_existing_bug->view_state );
 
 $t_bug_note = new BugNoteData();
@@ -154,24 +199,25 @@ $t_reporter_reopening =
 if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 	switch( $f_update_type ) {
 		case BUG_UPDATE_TYPE_ASSIGN:
-			access_ensure_bug_level( 'update_bug_assign_threshold', $f_bug_id );
+			$t_threshold = 'update_bug_assign_threshold';
 			$t_check_readonly = true;
 			break;
 		case BUG_UPDATE_TYPE_CLOSE:
 		case BUG_UPDATE_TYPE_REOPEN:
-			access_ensure_bug_level( 'update_bug_status_threshold', $f_bug_id );
+			$t_threshold = 'update_bug_status_threshold';
 			$t_check_readonly = false;
 			break;
 		case BUG_UPDATE_TYPE_CHANGE_STATUS:
-			access_ensure_bug_level( 'update_bug_status_threshold', $f_bug_id );
+			$t_threshold = 'update_bug_status_threshold';
 			$t_check_readonly = true;
 			break;
 		case BUG_UPDATE_TYPE_NORMAL:
 		default:
-			access_ensure_bug_level( 'update_bug_threshold', $f_bug_id );
+			$t_threshold = 'update_bug_threshold';
 			$t_check_readonly = true;
 			break;
 	}
+	access_ensure_bug_level( config_get( $t_threshold ), $f_bug_id );
 
 	if( $t_check_readonly ) {
 		# Check if the bug is in a read-only state and whether the current user has
@@ -224,15 +270,16 @@ if( $t_existing_bug->status != $t_updated_bug->status ) {
 }
 
 # Validate any change to the handler of an issue.
+# The new handler is checked at project level.
 if( $t_existing_bug->handler_id != $t_updated_bug->handler_id ) {
 	$t_issue_is_sponsored = config_get( 'enable_sponsorship' )
 		&& sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
 	access_ensure_bug_level( config_get( 'update_bug_assign_threshold' ), $f_bug_id );
-	if( $t_issue_is_sponsored && !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id ) ) {
+	if( $t_issue_is_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ),  $t_updated_bug->project_id, $t_updated_bug->handler_id ) ) {
 		trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
 	}
 	if( $t_updated_bug->handler_id != NO_USER ) {
-		if( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $t_updated_bug->handler_id ) ) {
+		if( !access_has_project_level( config_get( 'handle_bug_threshold' ),  $t_updated_bug->project_id, $t_updated_bug->handler_id ) ) {
 			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
 		}
 		if( $t_issue_is_sponsored && !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
@@ -249,6 +296,12 @@ if( $t_existing_bug->category_id != $t_updated_bug->category_id ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
+
+	# Make sure the category belongs to the given project's hierarchy
+	category_ensure_exists_in_project(
+		$t_updated_bug->category_id,
+		$t_updated_bug->project_id
+	);
 }
 
 # Don't allow changing the Resolution in the following cases:

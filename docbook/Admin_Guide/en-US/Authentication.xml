@@ -21,8 +21,8 @@
         <para>Note: while technically unlimited, the password's length is arbitrarily restricted to 1024 characters (PASSWORD_MAX_SIZE_BEFORE_HASH constant).</para>
         <para>Values for $g_login_method:
             <itemizedlist>
-                <listitem><para><emphasis><ulink url="http://en.wikipedia.org/wiki/MD5">MD5</ulink></emphasis> is the default - and recommended - method</para></listitem>
-                <listitem><para>Support for additional methods (e.g. <ulink url="http://en.wikipedia.org/wiki/SHA-1">SHA-1</ulink>) could be added in the future</para></listitem>
+                <listitem><para><emphasis><ulink url="https://en.wikipedia.org/wiki/MD5">MD5</ulink></emphasis> is the default  method</para></listitem>
+                <listitem><para>Support for additional methods could be added in the future</para></listitem>
             </itemizedlist>
         </para>
 
@@ -32,7 +32,7 @@
         <title>LDAP and Microsoft Active Directory</title>
 
         <para>Value for $g_login_method: <emphasis>LDAP</emphasis></para>
-        <para>Authentication is made against an <ulink url="http://en.wikipedia.org/wiki/LDAP">LDAP</ulink> or <ulink url="http://en.wikipedia.org/wiki/Active_Directory">Active Directory</ulink> server.</para>
+        <para>Authentication is made against an <ulink url="https://en.wikipedia.org/wiki/LDAP">LDAP</ulink> or <ulink url="https://en.wikipedia.org/wiki/Active_Directory">Active Directory</ulink> server.</para>
         <para>The LDAP parameters should be setup as explained in <xref linkend="admin.config.auth.ldap" />.</para>
         <para>An MD5 hash of the user's password will be stored in the database upon successful login, allowing fall-back to Standard Authentication when the LDAP server is not available.</para>
         <para>The user's ID and password is checked against the Directory; if the credentials are valid, then the user is allowed to login and their user account in MantisBT is created automatically.</para>

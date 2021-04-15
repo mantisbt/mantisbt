@@ -36,7 +36,7 @@ class IssueAttachmentTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id   An user identifier.
+	 * @param integer $p_user_id   A user identifier.
 	 * @param integer $p_issue_id  A issue identifier.
 	 * @param string  $p_filename  Attachment's file name.
 	 * @param integer $p_type      Event type (FILE_ADDED, FILE_DELETED)
@@ -73,7 +73,7 @@ class IssueAttachmentTimelineEvent extends TimelineEvent {
 			. sprintf( lang_get( $t_string ),
 				prepare_user_name( $this->user_id ),
 				$t_bug_link,
-				$this->filename
+				string_html_specialchars( $this->filename )
 			)
 			. '</div>';
 		$t_html .= $this->html_end();

@@ -48,25 +48,33 @@ form_security_validate( 'manage_plugin_update' );
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
-$t_query = 'SELECT basename FROM {plugin}';
-$t_result = db_query( $t_query );
+$t_update_query = new DbQuery( 'UPDATE {plugin}
+	SET priority=:priority, protected=:protected
+	WHERE basename=:basename'
+);
 
-while( $t_row = db_fetch_array( $t_result ) ) {
+$t_query = new DbQuery( 'SELECT basename FROM {plugin}' );
+
+foreach( $t_query->fetch_all() as $t_row ) {
 	$t_basename = $t_row['basename'];
 
 	$f_change = gpc_get_bool( 'change_'.$t_basename, 0 );
-
 	if( !$f_change ) {
 		continue;
 	}
 
 	$f_priority = gpc_get_int( 'priority_'.$t_basename, 3 );
+	if( $f_priority < PLUGIN_PRIORITY_LOW || $f_priority > PLUGIN_PRIORITY_HIGH ) {
+		error_parameters( 'priority_' . $t_basename );
+		trigger_error( ERROR_INVALID_FIELD_VALUE, ERROR );
+	}
+
 	$f_protected = gpc_get_bool( 'protected_'.$t_basename, 0 );
 
-	$t_query = 'UPDATE {plugin} SET priority=' . db_param() . ', protected=' . db_param() .
-		' WHERE basename=' . db_param();
-
-	db_query( $t_query, array( $f_priority, $f_protected, $t_basename ) );
+	$t_update_query->bind( 'basename', $t_basename );
+	$t_update_query->bind( 'priority', $f_priority );
+	$t_update_query->bind( 'protected', $f_protected );
+	$t_update_query->execute();
 }
 
 form_security_purge( 'manage_plugin_update' );

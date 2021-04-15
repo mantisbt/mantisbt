@@ -46,15 +46,15 @@
  * @author Macofe
  */
 
-$s_plugin_XmlImportExport_title = 'Importar/Exportar incidencias';
+$s_plugin_XmlImportExport_title = 'Importar/exportar informes';
 $s_plugin_XmlImportExport_description = 'Añade capacidades de importación y exportación basadas en XML a MantisBT.';
-$s_plugin_XmlImportExport_import = 'Importar incidencias';
+$s_plugin_XmlImportExport_import = 'Importar informes';
 $s_plugin_XmlImportExport_export = 'Exportar XML';
 $s_plugin_XmlImportExport_config_title = 'Configuración de niveles de acceso de importación/exportación en XML';
-$s_plugin_XmlImportExport_import_threshold = 'Importar incidencias';
-$s_plugin_XmlImportExport_export_threshold = 'Exportar incidencias';
+$s_plugin_XmlImportExport_import_threshold = 'Importar informes';
+$s_plugin_XmlImportExport_export_threshold = 'Exportar informes';
 $s_plugin_XmlImportExport_action_update = 'Actualizar';
-$s_plugin_XmlImportExport_importing_in_project = 'Importando incidencias en el proyecto: «%s»';
+$s_plugin_XmlImportExport_importing_in_project = 'Importando informes en el proyecto: «%s»';
 $s_plugin_XmlImportExport_import_options = 'Opciones de importación';
 $s_plugin_XmlImportExport_cross_references = 'Referencias cruzadas';
 $s_plugin_XmlImportExport_default_strategy = 'Estrategia de conversión predeterminada:';
@@ -62,7 +62,7 @@ $s_plugin_XmlImportExport_renumber = 'Renumerar';
 $s_plugin_XmlImportExport_renumber_desc = 'Tratar de convertir referencias a la nueva numeración';
 $s_plugin_XmlImportExport_link = 'Enlace';
 $s_plugin_XmlImportExport_link_desc = 'Convertir en un enlace al item original';
-$s_plugin_XmlImportExport_disable = 'Deshabilitar';
+$s_plugin_XmlImportExport_disable = 'Desactivar';
 $s_plugin_XmlImportExport_disable_desc = 'Desactivar el enlace';
 $s_plugin_XmlImportExport_fallback = 'Estrategia alternativa (cuando no se aplique "renumerar"):';
 $s_plugin_XmlImportExport_fallback_category = 'Categoría alternativa:';

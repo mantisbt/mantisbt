@@ -59,7 +59,8 @@ form_security_validate( 'bug_reminder' );
 
 $f_bug_id		= gpc_get_int( 'bug_id' );
 $f_to			= gpc_get_int_array( 'to' );
-$f_body			= gpc_get_string( 'body' );
+$f_body			= gpc_get_string( 'bugnote_text' );
+$f_view_state	= gpc_get_bool( 'private' ) ? VS_PRIVATE : VS_PUBLIC;
 
 $t_bug = bug_get( $f_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
@@ -73,7 +74,16 @@ if( bug_is_readonly( $f_bug_id ) ) {
 	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
+# Abort if user is not authorized to send reminders
 access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
+
+# Ensure target users are allowed to receive reminders
+$t_receive_reminder = config_get( 'reminder_receive_threshold' );
+foreach( $f_to as $t_recipient ) {
+	if( !access_has_bug_level( $t_receive_reminder, $f_bug_id, $t_recipient ) ) {
+		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+	}
+}
 
 # Automatically add recipients to monitor list if they are above the monitor
 # threshold, option is enabled, and not reporter or handler.
@@ -81,7 +91,7 @@ $t_reminder_recipients_monitor_bug = config_get( 'reminder_recipients_monitor_bu
 $t_monitor_bug_threshold = config_get( 'monitor_bug_threshold' );
 $t_handler = bug_get_field( $f_bug_id, 'handler_id' );
 $t_reporter = bug_get_field( $f_bug_id, 'reporter_id' );
-foreach ( $f_to as $t_recipient ) {
+foreach( $f_to as $t_recipient ) {
 	if( ON == $t_reminder_recipients_monitor_bug
 		&& access_has_bug_level( $t_monitor_bug_threshold, $f_bug_id )
 		&& $t_recipient != $t_handler
@@ -109,7 +119,7 @@ if( ON == config_get( 'store_reminders' ) ) {
 		$t_attr .= $t_recipient;
 	}
 
-	bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, null, false );
+	bugnote_add( $f_bug_id, $f_body, 0, $f_view_state == VS_PRIVATE, REMINDER, $t_attr, null, false );
 
 	# Note: we won't trigger mentions here since reminders are triggered.
 }
@@ -117,7 +127,6 @@ if( ON == config_get( 'store_reminders' ) ) {
 form_security_purge( 'bug_reminder' );
 
 layout_page_header( null, string_get_bug_view_url( $f_bug_id ) );
-
 layout_page_begin();
 
 $t_redirect = string_get_bug_view_url( $f_bug_id );

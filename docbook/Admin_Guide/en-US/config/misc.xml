@@ -17,9 +17,9 @@
 					the rules you are using on your site.
 				</para>
 				<para>
-					See <ulink url="http://en.wikipedia.org/wiki/Regular_Expression">Wikipedia</ulink> for more
+					See <ulink url="https://en.wikipedia.org/wiki/Regular_Expression">Wikipedia</ulink> for more
 					details about regular expressions.  For testing regular expressions, use
-					<ulink url="http://rubular.com/">Rubular</ulink>.
+					<ulink url="https://rubular.com/">Rubular</ulink>.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -61,14 +61,6 @@
 				</para>
 				<para>This setting should not be lower than
 					<emphasis>$g_show_monitor_list_threshold</emphasis>.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_limit_reporters</term>
-			<listitem>
-				<para>Limit reporters to only viewing bugs that they
-					report.
 				</para>
 			</listitem>
 		</varlistentry>

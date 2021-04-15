@@ -152,6 +152,23 @@ function set_capability_enum( $p_threshold, $p_all_projects_only = false ) {
 	}
 }
 
+/**
+ * Check if a configuration option, of those rendered as checkbox inputs, was present
+ * in the form. This only applies to threshold and boolean config options.
+ *
+ * Usually, when a checkbox input is submitted unchecked, there is no value in the
+ * receiving post data, so we can't know if the input was present or not.
+ * Those config options add a special hidden input when rendered in the form, so
+ * we can check its existence with this function.
+ *
+ * @param string $p_name	Configuration option name
+ * @return boolean			Whether the option was present in the form.
+ */
+function capability_exists( $p_name ) {
+	$t_flag = 'flag_exists_' . $p_name;
+	return gpc_isset( $t_flag );
+}
+
 # Issues
 set_capability_row( 'report_bug_threshold' );
 set_capability_enum( 'bug_submit_status' );
@@ -173,12 +190,20 @@ set_capability_row( 'update_readonly_bug_threshold' );
 set_capability_row( 'update_bug_status_threshold' );
 set_capability_row( 'set_view_status_threshold' );
 set_capability_row( 'change_view_status_threshold' );
+set_capability_row( 'bug_revision_view_threshold' );
+set_capability_row( 'bug_revision_drop_threshold' );
+set_capability_row( 'set_bug_sticky_threshold' );
 set_capability_row( 'show_monitor_list_threshold' );
 set_capability_row( 'monitor_add_others_bug_threshold' );
 set_capability_row( 'monitor_delete_others_bug_threshold' );
 set_capability_boolean( 'auto_set_status_to_assigned' );
 set_capability_enum( 'bug_assigned_status' );
-set_capability_boolean( 'limit_reporters', true );
+if( capability_exists( 'limit_reporters' ) ) {
+	set_capability_boolean( 'limit_reporters', true );
+}
+if( capability_exists( 'limit_view_unless_threshold' ) ) {
+	set_capability_row( 'limit_view_unless_threshold' );
+}
 
 # Notes
 set_capability_row( 'add_bugnote_threshold' );
@@ -188,6 +213,24 @@ set_capability_row( 'delete_bugnote_threshold' );
 set_capability_row( 'bugnote_user_delete_threshold' );
 set_capability_row( 'private_bugnote_threshold' );
 set_capability_row( 'bugnote_user_change_view_state_threshold' );
+
+# Tags
+
+set_capability_row( 'tag_view_threshold' );
+set_capability_row( 'tag_attach_threshold' );
+set_capability_row( 'tag_detach_threshold' );
+set_capability_row( 'tag_detach_own_threshold' );
+set_capability_row( 'tag_create_threshold' );
+set_capability_row( 'tag_edit_threshold' );
+set_capability_row( 'tag_edit_own_threshold' );
+
+# Attachments
+if( config_get( 'allow_file_upload' ) == ON ) {
+	set_capability_row( 'view_attachments_threshold' );
+	set_capability_row( 'download_attachments_threshold' );
+	set_capability_row( 'delete_attachments_threshold' );
+	set_capability_row( 'upload_bug_file_threshold' );
+}
 
 # Others
 set_capability_row( 'view_changelog_threshold' );

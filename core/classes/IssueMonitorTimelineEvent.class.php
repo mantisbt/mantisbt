@@ -33,7 +33,7 @@ class IssueMonitorTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id   An user identifier.
+	 * @param integer $p_user_id   A user identifier.
 	 * @param integer $p_issue_id  A issue identifier.
 	 * @param boolean $p_monitor   Whether issue was being monitored or unmonitored.
 	 */

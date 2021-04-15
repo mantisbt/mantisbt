@@ -74,6 +74,7 @@ class SoapAllTests extends PHPUnit_Framework_TestSuite
 
 		$t_suite->addTestSuite( 'EnumTest' );
 		$t_suite->addTestSuite( 'IssueAddTest' );
+		$t_suite->addTestSuite( 'IssueHistoryTest' );
 		$t_suite->addTestSuite( 'IssueMonitorTest' );
 		$t_suite->addTestSuite( 'IssueNoteTest' );
 		$t_suite->addTestSuite( 'IssueUpdateTest' );

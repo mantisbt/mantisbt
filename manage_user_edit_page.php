@@ -80,6 +80,10 @@ if( is_blank( $f_username ) ) {
 }
 
 $t_user = user_get_row( $t_user_id );
+if( !$t_user ) {
+	error_parameters( $t_user_id );
+	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR);
+}
 
 # Ensure that the account to be updated is of equal or lower access to the
 # current user.
@@ -103,7 +107,7 @@ print_manage_menu( 'manage_user_page.php' );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 					<?php echo lang_get('edit_user_title') ?>
 				</h4>
 			</div>
@@ -129,7 +133,7 @@ print_manage_menu( 'manage_user_page.php' );
 
 			<!-- Realname -->
 			<tr><?php
-			if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+			if( $t_ldap && ON == config_get_global( 'use_ldap_realname' ) ) {
 				# With LDAP
 				echo '<td class="category">' . lang_get( 'realname_label' ) . '</td>';
 				echo '<td>';
@@ -144,7 +148,7 @@ print_manage_menu( 'manage_user_page.php' );
 			</tr>
 			<!-- Email -->
 			<tr><?php
-			if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+			if( $t_ldap && ON == config_get_global( 'use_ldap_email' ) ) {
 				# With LDAP
 				echo '<td class="category">' . lang_get( 'email_label' ) . '</td>';
 				echo '<td>' . string_display_line( user_get_email( $t_user_id ) ) . '</td>';
@@ -228,7 +232,7 @@ $t_reset = $t_user['id'] != auth_get_current_user_id()
 	&& auth_can_set_password( $t_user['id'] )
 	&& user_is_enabled( $t_user['id'] )
 	&& !user_is_protected( $t_user['id'] );
-$t_unlock = OFF != config_get( 'max_failed_login_count' ) && $t_user['failed_login_count'] > 0;
+$t_unlock = !user_is_login_request_allowed( $t_user['id'] );
 $t_delete = !( ( user_is_administrator( $t_user_id ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) );
 $t_impersonate = auth_can_impersonate( $t_user['id'] );
 
@@ -283,8 +287,9 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="col-md-6 col-xs-12 no-padding">
 <div class="space-4"></div>
 <div class="alert alert-info">
-	<i class="fa fa-info-circle"></i>
 <?php
+	print_icon( 'fa-info-circle' );
+	echo '&nbsp;';
 	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		echo lang_get( 'reset_password_msg' );
 	} else {
@@ -306,10 +311,10 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="space-10"></div>
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
-<h4 class="widget-title lighter">
-<i class="ace-icon fa fa-puzzle-piece"></i>
-<?php echo lang_get('add_user_title') ?>
-</h4>
+	<h4 class="widget-title lighter">
+		<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
+		<?php echo lang_get('add_user_title') ?>
+	</h4>
 </div>
 
 <div class="widget-body">
@@ -363,10 +368,21 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <?php
 } # End of PROJECT ACCESS conditional section
-echo '</div>';
+?>
 
+<!-- ACCOUNT PREFERENCES -->
+<?php
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
-edit_account_prefs( $t_user['id'], false, false, 'manage_user_edit_page.php?user_id=' . $t_user_id );
+edit_account_prefs(
+	$t_user['id'],
+	false,
+	false,
+	'manage_user_edit_page.php?user_id=' . $t_user_id
+);
+?>
 
+</div>
+
+<?php
 layout_page_end();

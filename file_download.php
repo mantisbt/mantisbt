@@ -99,6 +99,18 @@ if( false === $t_row ) {
 	error_parameters( $c_file_id );
 	trigger_error( ERROR_FILE_NOT_FOUND, ERROR );
 }
+/**
+ * @var int    $v_bug_id
+ * @var int    $v_project_id
+ * @var string $v_diskfile
+ * @var string $v_filename
+ * @var int    $v_filesize
+ * @var string $v_file_type
+ * @var string $v_content
+ * @var int    $v_date_added
+ * @var int    $v_user_id
+ * @var int    $v_bugnote_id
+ */
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 if( $f_type == 'bug' ) {
@@ -110,7 +122,9 @@ if( $f_type == 'bug' ) {
 # Check access rights
 switch( $f_type ) {
 	case 'bug':
-		if( !file_can_download_bug_attachments( $v_bug_id, (int)$v_user_id ) ) {
+		if( !file_can_download_bug_attachments( $v_bug_id, $v_user_id )
+		|| !file_can_download_bugnote_attachments( $v_bugnote_id, $v_user_id )
+		) {
 			access_denied();
 		}
 		break;

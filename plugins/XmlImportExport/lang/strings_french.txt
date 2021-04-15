@@ -43,27 +43,29 @@
  * @author IAlex
  * @author Jocelyn
  * @author Urhixidur
+ * @author Verdy p
+ * @author Wladek92
  */
 
-$s_plugin_XmlImportExport_title = 'Importer / Exporter des bogues';
-$s_plugin_XmlImportExport_description = 'Permet d\'importer et exporter des fichiers au format XML compatible avec MantisBT.';
-$s_plugin_XmlImportExport_import = 'Importer des bogues';
+$s_plugin_XmlImportExport_title = 'Importer / Exporter des anomalies';
+$s_plugin_XmlImportExport_description = 'Ajoute à MantisBT des fonctionnalités d’import et d’export de fichiers au format XML.';
+$s_plugin_XmlImportExport_import = 'Importer des anomalies';
 $s_plugin_XmlImportExport_export = 'Export XML';
-$s_plugin_XmlImportExport_config_title = 'Configuration des niveaux d’accès d’import/export XML';
-$s_plugin_XmlImportExport_import_threshold = 'Importer des bogues';
-$s_plugin_XmlImportExport_export_threshold = 'Exporter des bogues';
+$s_plugin_XmlImportExport_config_title = 'Configuration des niveaux d’accès d’import/export en XML';
+$s_plugin_XmlImportExport_import_threshold = 'Importer des anomalies';
+$s_plugin_XmlImportExport_export_threshold = 'Exporter des anomalies';
 $s_plugin_XmlImportExport_action_update = 'Mettre à jour';
-$s_plugin_XmlImportExport_importing_in_project = 'Importation des bogues dans le projet : \'%s\'';
-$s_plugin_XmlImportExport_import_options = 'Options d\'importation';
+$s_plugin_XmlImportExport_importing_in_project = 'Importation des anomalies dans le projet : « %s »';
+$s_plugin_XmlImportExport_import_options = 'Options d’import';
 $s_plugin_XmlImportExport_cross_references = 'Références croisées';
-$s_plugin_XmlImportExport_default_strategy = 'Stratégie de conversion par défaut :';
+$s_plugin_XmlImportExport_default_strategy = 'Stratégie de conversion par défaut :';
 $s_plugin_XmlImportExport_renumber = 'Renuméroter';
-$s_plugin_XmlImportExport_renumber_desc = 'Essayer de convertir les références au nouveau numérotage';
+$s_plugin_XmlImportExport_renumber_desc = 'Essayer de convertir les références avec une nouvelle numérotation';
 $s_plugin_XmlImportExport_link = 'Lien';
-$s_plugin_XmlImportExport_link_desc = 'Convertir vers un lien vers le bogue original';
+$s_plugin_XmlImportExport_link_desc = 'Convertir en un lien vers l’anomalie originale';
 $s_plugin_XmlImportExport_disable = 'Désactiver';
 $s_plugin_XmlImportExport_disable_desc = 'Désactiver le lien';
-$s_plugin_XmlImportExport_fallback = 'Stratégie de secours (quand la renumérotation ne s\'applique pas) :';
-$s_plugin_XmlImportExport_fallback_category = 'Catégorie de secours :';
+$s_plugin_XmlImportExport_fallback = 'Stratégie de repli (quand la renumérotation ne s’applique pas) :';
+$s_plugin_XmlImportExport_fallback_category = 'Catégorie de repli :';
 $s_plugin_XmlImportExport_keep_same_category = 'Essayer de garder les mêmes catégories';
-$s_plugin_XmlImportExport_error_no_xml = 'Impossible de trouver les extensions xmlreader et xmlwriter';
+$s_plugin_XmlImportExport_error_no_xml = 'impossible de trouver les greffons <em>xmlreader</em> et <em>xmlwriter</em>';

@@ -42,10 +42,11 @@
 					attachments,
 					category_id,
 					due_date,
+					eta,
 					handler,
 					monitors,
 					os,
-					os_version,
+					os_build,
 					platform,
 					priority,
 					product_build,
@@ -88,7 +89,7 @@
 			<term>$g_bug_view_page_fields</term>
 			<listitem>
 				<para>
-					An array of optional fields to show on the bug view page.
+					An array of optional fields to show on the issue view page and other pages that include issue details.
 				</para>
 				<para>
 					The following optional fields are allowed:
@@ -104,7 +105,7 @@
 					id,
 					last_updated,
 					os,
-					os_version,
+					os_build,
 					platform,
 					priority,
 					product_build,
@@ -153,7 +154,7 @@
 					id,
 					last_updated,
 					os,
-					os_version,
+					os_build,
 					platform,
 					priority,
 					product_build,
@@ -175,61 +176,6 @@
 					update page. Visibility of custom fields is handled
 					via the Manage =&gt; Manage Custom Fields administrator
 					page.
-				</para>
-				<para>
-					This setting can be set on a per-project basis by
-					using the Manage =&gt; Manage Configuration
-					administrator page.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_bug_change_status_page_fields</term>
-			<listitem>
-				<para>
-					An array of optional fields to show on the bug change
-					status page. This only changes the visibility of
-					fields shown below the form used for updating the
-					status of an issue.
-				</para>
-				<para>
-					The following optional fields are allowed:
-					additional_info,
-					attachments,
-					category_id,
-					date_submitted,
-					description,
-					due_date,
-					eta,
-					fixed_in_version,
-					handler,
-					id,
-					last_updated,
-					os,
-					os_version,
-					platform,
-					priority,
-					product_build,
-					product_version,
-					project,
-					projection,
-					reporter,
-					reproducibility,
-					resolution,
-					severity,
-					status,
-					steps_to_reproduce,
-					summary,
-					tags,
-					target_version,
-					view_state.
-				</para>
-				<para>
-					Fields not listed above cannot be shown on the bug
-					change status page. Visibility of custom fields is
-					handled via the Manage =&gt; Manage Custom Fields
-					administrator page (use the same settings as the bug
-					view page).
 				</para>
 				<para>
 					This setting can be set on a per-project basis by

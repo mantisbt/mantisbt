@@ -172,7 +172,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
-	$t_db_version = config_get( 'database_version', 0 );
+	$t_db_version = config_get( 'database_version', 0, ALL_USERS, ALL_PROJECTS );
 	if( $t_db_version == 0 ) {
 		$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 	}
@@ -203,7 +203,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 		<div class="widget-body">
 			<div class="widget-main">
 				<h4 class="header lighter bigger">
-					<i class="ace-icon fa fa-sign-in"></i>
+					<?php print_icon( 'fa-sign-in', 'ace-icon' ); ?>
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
@@ -227,13 +227,13 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 					<input id="username" name="username" type="text" placeholder="<?php echo $t_username_label ?>"
 						   size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $t_username ); ?>"
 						   class="form-control autofocus">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				</span>
 			</label>
 
 			<div class="space-10"></div>
 
-			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login_button' ) ?>" />
+			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login' ) ?>" />
 		</fieldset>
 	</form>
 

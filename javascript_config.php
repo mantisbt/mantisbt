@@ -27,19 +27,8 @@
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
-$t_allow_caching = isset( $_GET['cache_key'] );
-if( $t_allow_caching ) {
-	# Suppress default headers. This allows caching as defined in server configuration
-	$g_bypass_headers = true;
-}
-
 require_once( 'core.php' );
 require_api( 'config_api.php' );
-
-if( $t_allow_caching ) {
-	# if standard headers were bypassed, add security headers, at least
-	http_security_headers();
-}
 
 /**
  * Print array of configuration option->values for javascript.
@@ -59,6 +48,10 @@ header( 'Content-Type: application/javascript; charset=UTF-8' );
 # http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
 header( 'X-Content-Type-Options: nosniff' );
 
+# rewrite headers to allow caching
+if( gpc_isset( 'cache_key' ) ) {
+	http_caching_headers( true );
+}
 
 # WARNING: DO NOT EXPOSE SENSITIVE CONFIGURATION VALUES!
 #

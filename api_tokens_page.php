@@ -58,7 +58,7 @@ print_account_menu( 'api_tokens_page.php' );
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-plus"></i>
+			<?php print_icon( 'fa-plus', 'ace-icon' ); ?>
 			<?php echo lang_get( 'api_token_create_form_title' ) ?>
 		</h4>
 	</div>
@@ -71,10 +71,16 @@ print_account_menu( 'api_tokens_page.php' );
 
 <tr>
 	<td class="category">
-		<?php echo lang_get( 'api_token_name' ) ?>
+		<span class="required">*</span>
+		<label for="token_name" class="required">
+			<?php echo lang_get( 'api_token_name' ) ?>
+		</label>
 	</td>
 	<td>
-		<input class="input-sm" id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo DB_FIELD_SIZE_API_TOKEN_NAME; ?>" />
+		<input id="token_name" name="token_name"
+			   type="text" required class="input-sm" size="64"
+			   maxlength="<?php echo DB_FIELD_SIZE_API_TOKEN_NAME; ?>"
+		/>
 	</td>
 </tr>
 
@@ -84,7 +90,9 @@ print_account_menu( 'api_tokens_page.php' );
 		</div>
 	</div>
 		<div class="widget-toolbox padding-8 clearfix">
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'api_token_create_button' ) ?>" />
+			<button class="btn btn-primary btn-white btn-round">
+				<?php echo lang_get( 'api_token_create_button' ) ?>
+			</button>
 		</div>
 	</div>
 </div>
@@ -104,7 +112,7 @@ if ( count( $t_tokens ) > 0 ) {
 	<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-ticket"></i>
+			<?php print_icon( 'fa-ticket', 'ace-icon' ); ?>
 			<?php echo lang_get( 'api_tokens_title' ) ?>
 		</h4>
 	</div>

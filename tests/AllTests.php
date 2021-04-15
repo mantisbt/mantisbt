@@ -29,6 +29,7 @@ require_once 'TestConfig.php';
 
 require_once 'Mantis/AllTests.php';
 require_once 'soap/AllTests.php';
+require_once 'rest/AllTests.php';
 
 /**
  * All tests
@@ -44,6 +45,7 @@ class AllTests
 
 		$t_suite->addTest( MantisAllTests::suite() );
 		$t_suite->addTest( SoapAllTests::suite() );
+		$t_suite->addTest( RestAllTests::suite() );
 
 		return $t_suite;
 	}

@@ -23,8 +23,15 @@
  * @link http://www.mantisbt.org
  */
 
+# Includes
+require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
+
+# MantisBT Core API
+require_mantis_core();
+
 require_once( __DIR__ . '/../../vendor/autoload.php' );
 require_once ( __DIR__ . '/../../core/constant_inc.php' );
+
 
 /**
  * Base class for REST API test cases
@@ -128,7 +135,7 @@ class RestBase extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $p_relative_path The relative path under `/api/rest/` e.g. `/issues`.
-	 * @param string $p_payload The payload object, it will be json encoded before sending.
+	 * @param mixed $p_payload The payload object, it will be json encoded before sending.
 	 * @return mixed|string The response object.
 	 */
 	protected function post( $p_relative_path, $p_payload ) {
@@ -182,5 +189,27 @@ class RestBase extends PHPUnit_Framework_TestCase {
 	 */
 	protected function deleteAfterRun( $p_issue_id ) {
 		$this->issueIdsToDelete[] = $p_issue_id;
+	}
+
+	/**
+	 * Utility function to establish DB connection.
+	 *
+	 * PHPUnit seems to kill the connection after each test case execution;
+	 * this allows individual test cases that need the DB to reopen it easily.
+	 *
+	 * @todo Copied from MantisCoreBase class - see if code duplication can be avoided
+	 */
+	public static function dbConnect() {
+		global $g_hostname, $g_db_username, $g_db_password, $g_database_name,
+			   $g_use_persistent_connections;
+
+		db_connect(
+			config_get_global( 'dsn', false ),
+			$g_hostname,
+			$g_db_username,
+			$g_db_password,
+			$g_database_name,
+			$g_use_persistent_connections == ON
+		);
 	}
 }

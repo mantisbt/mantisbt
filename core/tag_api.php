@@ -224,6 +224,7 @@ function tag_is_unique( $p_name ) {
  */
 function tag_ensure_unique( $p_name ) {
 	if( !tag_is_unique( $p_name ) ) {
+		error_parameters( $p_name );
 		trigger_error( ERROR_TAG_DUPLICATE, ERROR );
 	}
 }
@@ -256,6 +257,7 @@ function tag_name_is_valid( $p_name, array &$p_matches, $p_prefix = '' ) {
 function tag_ensure_name_is_valid( $p_name ) {
 	$t_matches = array();
 	if( !tag_name_is_valid( $p_name, $t_matches ) ) {
+		error_parameters( $p_name );
 		trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
 	}
 }
@@ -497,7 +499,7 @@ function tag_get_name( $p_tag_id ) {
 /**
  * Return a tag row for the given name.
  * @param string $p_name The tag name to retrieve from the database.
- * @return array|boolean Tag row
+ * @return array|false Tag row
  */
 function tag_get_by_name( $p_name ) {
 	db_param_push();
@@ -587,9 +589,11 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
  * Update a tag with given name, creator, and description.
  * @param integer $p_tag_id      The tag ID which is being updated.
  * @param string  $p_name        The name of the tag.
- * @param integer $p_user_id     The user ID to set when updating the tag. Note: This replaces the existing user id.
+ * @param integer $p_user_id     The user ID to set when updating the tag.
+ *                               Note: This replaces the existing user id.
  * @param string  $p_description An updated description for the tag.
  * @return boolean
+ * @throws ClientException
  */
 function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	$t_tag_row = tag_get( $p_tag_id );
@@ -609,10 +613,14 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	} else {
 		$t_update_level = config_get( 'tag_edit_threshold' );
 	}
-
 	access_ensure_global_level( $t_update_level );
 
 	tag_ensure_name_is_valid( $p_name );
+
+	# Do not allow assigning a tag to a user who is not allowed to create one
+	if( !access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id ) ) {
+		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+	}
 
 	$t_rename = false;
 	if( mb_strtolower( $p_name ) != mb_strtolower( $t_tag_name ) ) {
@@ -665,48 +673,41 @@ function tag_delete( $p_tag_id ) {
 }
 
 /**
- * Gets the candidates for the specified bug.  These are existing tags
- * that are not associated with the bug already.
+ * Gets the tags that are not associated with the specified bug.
  *
- * @param integer $p_bug_id The bug id, if 0 returns all tags.
- * @return array The array of tag rows, each with id, name, and description.
+ * @param integer $p_bug_id The bug id, if 0 returns all available tags.
+ *
+ * @return array List of tag rows, each with id, name, and description.
  */
 function tag_get_candidates_for_bug( $p_bug_id ) {
 	db_param_push();
+	$t_query = 'SELECT id, name, description FROM {tag}';
 	$t_params = array();
+
 	if( 0 != $p_bug_id ) {
+		$t_assoc_tags_query = 'SELECT tag_id FROM {bug_tag} WHERE bug_id = ' . db_param();
 		$t_params[] = $p_bug_id;
 
+		# Define specific where clause to exclude tags already attached to the bug
+		# Special handling for odbc_mssql which does not support bound subqueries (#14774)
 		if( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
 			db_param_push();
-			$t_query = 'SELECT t.id FROM {tag} t
-					LEFT JOIN {bug_tag} b ON t.id=b.tag_id
-					WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param();
-			$t_result = db_query( $t_query, $t_params );
-
-			$t_params = null;
+			$t_result = db_query( $t_assoc_tags_query, $t_params );
 
 			$t_subquery_results = array();
-
 			while( $t_row = db_fetch_array( $t_result ) ) {
-				$t_subquery_results[] = (int)$t_row['id'];
+				$t_subquery_results[] = (int)$t_row['tag_id'];
 			}
-
-			if( count( $t_subquery_results ) == 0 ) {
-				db_param_pop();
-				return array();
+			if( $t_subquery_results ) {
+				$t_where = ' WHERE id NOT IN (' . implode( ', ', $t_subquery_results ) . ')';
+			} else {
+				$t_where = '';
 			}
-
-			$t_query = 'SELECT id, name, description FROM {tag} WHERE id IN ( ' . implode( ', ', $t_subquery_results ) . ')';
+			$t_params = null;
 		} else {
-			$t_query = 'SELECT id, name, description FROM {tag} WHERE id IN (
-					SELECT t.id FROM {tag} t
-					LEFT JOIN {bug_tag} b ON t.id=b.tag_id
-					WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param() .
-				')';
+			$t_where = " WHERE id NOT IN ($t_assoc_tags_query)";
 		}
-	} else {
-		$t_query = 'SELECT id, name, description FROM {tag}';
+		$t_query .= $t_where;
 	}
 
 	$t_query .= ' ORDER BY name ASC ';
@@ -950,7 +951,7 @@ function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
 		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), string_display_line( $p_tag_row['name'] ) ) );
 		$t_href = 'tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token;
 		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" title="' . $t_tooltip . '" href="' . $t_href . '">';
-		echo '<i class="fa fa-times"></i>';
+		print_icon( 'fa-times' );
 		echo '</a>';
 	}
 
@@ -1021,7 +1022,6 @@ function tag_stats_attached( $p_tag_id ) {
  * @return array Array of tag rows, with share count added
  */
 function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
-	$c_user_id = auth_get_current_user_id();
 
 	# Use a filter to get all visible issues for this tag id
 	$t_filter = array(

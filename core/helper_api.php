@@ -293,7 +293,7 @@ function check_disabled( $p_val = true ) {
  * @return integer
  */
 function helper_begin_long_process( $p_ignore_abort = false ) {
-	$t_timeout = config_get( 'long_process_timeout' );
+	$t_timeout = config_get_global( 'long_process_timeout' );
 
 	# silent errors or warnings reported when safe_mode is ON.
 	@set_time_limit( $t_timeout );
@@ -489,7 +489,7 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 	} else if( 1 == count( $t_project_ids ) ) {
 		$t_project_filter = ' project_id=' . reset( $t_project_ids );
 	} else {
-		$t_project_filter = ' project_id IN (' . join( ',', $t_project_ids ) . ')';
+		$t_project_filter = ' project_id IN (' . implode( ',', $t_project_ids ) . ')';
 	}
 
 	return $t_project_filter;

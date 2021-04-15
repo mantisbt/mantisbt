@@ -38,16 +38,16 @@
  * @ingroup Language
  * @file
  *
+ * @author LongJohn nl
  * @author Mraedis
  * @author Rienkwind
  * @author Siebrand
  */
 
-$s_plugin_graph_title = 'Mantis grafieken';
-$s_plugin_graph_description = 'Officiële plugin voor grafieken.';
 $s_plugin_MantisGraph_title = 'Mantis grafieken';
+$s_plugin_MantisGraph_description = 'Officiële plugin voor grafieken.';
 $s_plugin_MantisGraph_config = 'Instellingen';
-$s_plugin_MantisGraph_synthesis_link = 'Synthese';
+$s_plugin_MantisGraph_tab_label = 'Grafieken';
 $s_plugin_MantisGraph_status_link = 'Op status';
 $s_plugin_MantisGraph_priority_link = 'Op prioriteit';
 $s_plugin_MantisGraph_severity_link = 'Op impact';
@@ -88,3 +88,4 @@ $s_plugin_MantisGraph_graph_page = 'Meldingsgeschiedenis als grafiek';
 $s_plugin_MantisGraph_graph_topdev = 'Top ontwikkelaars van opgeloste meldingen';
 $s_plugin_MantisGraph_graph_opendev = 'Ontwikkelaars van open meldingen';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Top Ontwikkelaars van Opgeloste Meldingen';
+$s_plugin_MantisGraph_other_categories = 'andere categorieën (%d)';

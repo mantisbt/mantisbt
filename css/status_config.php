@@ -28,19 +28,8 @@
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
-$t_allow_caching = isset( $_GET['cache_key'] );
-if( $t_allow_caching ) {
-	# Suppress default headers. This allows caching as defined in server configuration
-	$g_bypass_headers = true;
-}
-
 @require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'config_api.php' );
-
-if( $t_allow_caching ) {
-	# if standard headers were bypassed, add security headers, at least
-	http_security_headers();
-}
 
 /**
  * Send correct MIME Content-Type header for css content.
@@ -75,6 +64,7 @@ $t_referer_page = array_key_exists( 'HTTP_REFERER', $_SERVER )
 
 if( $t_referer_page == auth_login_page() ) {
 	# custom status colors not needed.
+	http_caching_headers( false );
 	exit;
 }
 
@@ -86,7 +76,13 @@ switch( $t_referer_page ) {
 	case 'account_update.php':
 		# We don't need custom status colors on login page, and this is
 		# actually causing an error since we're not authenticated yet.
+		http_caching_headers( false );
 		exit;
+}
+
+# rewrite headers to allow caching
+if( gpc_isset( 'cache_key' ) ) {
+	http_caching_headers( true );
 }
 
 $t_status_string = config_get( 'status_enum_string' );

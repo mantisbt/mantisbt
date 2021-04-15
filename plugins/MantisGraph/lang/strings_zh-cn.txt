@@ -41,11 +41,10 @@
  * @author Yanmiao liu
  */
 
-$s_plugin_graph_title = 'Mantis 图表';
-$s_plugin_graph_description = '官方图表插件。';
 $s_plugin_MantisGraph_title = 'Mantis 图表';
+$s_plugin_MantisGraph_description = '官方图表插件。';
 $s_plugin_MantisGraph_config = '配置';
-$s_plugin_MantisGraph_synthesis_link = '合成';
+$s_plugin_MantisGraph_tab_label = 'Mantis 图表';
 $s_plugin_MantisGraph_status_link = '按状态';
 $s_plugin_MantisGraph_priority_link = '按优先级';
 $s_plugin_MantisGraph_severity_link = '按严重性';

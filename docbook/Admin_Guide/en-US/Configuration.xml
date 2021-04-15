@@ -102,4 +102,5 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/duedate.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/user.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/view.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/issues.xml" />
 </chapter>

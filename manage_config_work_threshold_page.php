@@ -91,7 +91,7 @@ function get_section_begin_mcwt( $p_section_name ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
-	echo '            <i class="ace-icon fa fa-sliders"></i>';
+	print_icon( 'fa-sliders', 'ace-icon' );
 	echo $p_section_name;
 	echo '       </h4>';
 	echo '   </div>';
@@ -226,7 +226,9 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 	echo "<tr>\n";
 
 	# Access levels
-	echo '  <td>' . string_display( $p_caption ) . "</td>\n";
+	echo '  <td>', string_display( $p_caption ),
+			'<input type="hidden" name="flag_exists_' . $p_threshold . '[]" value="1" />',
+			"</td>\n";
 	foreach( $g_access_levels as $t_access_level => $t_access_label ) {
 		$t_file = in_array( $t_access_level, $t_file_exp );
 		$t_global = in_array( $t_access_level, $t_global_exp );
@@ -241,7 +243,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 			$t_show_submit = true;
 		} else {
 			if( $t_project ) {
-				$t_value = '<i class="fa fa-check fa-lg blue"></i>';
+				$t_value = icon_get( 'fa-check', 'fa-lg blue' );
 			} else {
 				$t_value = '&#160;';
 			}
@@ -271,7 +273,9 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $g_project_id, $g_user )
 			  && ( ( ALL_PROJECTS == $g_project_id ) || !$p_all_projects_only );
 
-	echo "<tr>\n\t<td>" . string_display_line( $p_caption ) . "</td>\n";
+	echo "<tr>\n\t<td>", string_display_line( $p_caption ),
+			'<input type="hidden" name="flag_exists_' . $p_threshold . '[]" value="1" />',
+			"</td>\n";
 
 	# Value
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
@@ -282,7 +286,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 		$t_show_submit = true;
 	} else {
 		if( ON == config_get( $p_threshold ) ) {
-			$t_value = '<i class="fa fa-check fa-lg blue"></i>';
+			$t_value = icon_get( 'fa-check', 'fa-lg blue' );
 		} else {
 			$t_value = '&#160;';
 		}
@@ -356,7 +360,7 @@ if( ALL_PROJECTS == $g_project_id ) {
 
 echo '<div class="col-md-12 col-xs-12">' . "\n";
 echo '<div class="well">' . "\n";
-echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
+echo '<p class="bold">' . icon_get( 'fa-info-circle' ) . " $t_project_title</p>\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $g_project_id ) {
 	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
@@ -389,12 +393,19 @@ get_capability_row( lang_get( 'update_issue_status' ), 'update_bug_status_thresh
 get_capability_row( lang_get( 'view_private_issues' ), 'private_bug_threshold' );
 get_capability_row( lang_get( 'set_view_status' ), 'set_view_status_threshold' );
 get_capability_row( lang_get( 'update_view_status' ), 'change_view_status_threshold' );
+get_capability_row( lang_get( 'view_issue_revisions' ), 'bug_revision_view_threshold' );
+get_capability_row( lang_get( 'drop_issue_revisions' ), 'bug_revision_drop_threshold' );
+get_capability_row( lang_get( 'set_sticky' ), 'set_bug_sticky_threshold' );
 get_capability_row( lang_get( 'show_list_of_users_monitoring_issue' ), 'show_monitor_list_threshold' );
 get_capability_row( lang_get( 'add_users_monitoring_issue' ), 'monitor_add_others_bug_threshold' );
 get_capability_row( lang_get( 'remove_users_monitoring_issue' ), 'monitor_delete_others_bug_threshold' );
 get_capability_boolean( lang_get( 'set_status_assigned' ), 'auto_set_status_to_assigned' );
 get_capability_enum( lang_get( 'assigned_status' ), 'bug_assigned_status', 'status' );
-get_capability_boolean( lang_get( 'limit_access' ), 'limit_reporters', true );
+if( ON == config_get( 'limit_reporters', null, ALL_USERS, ALL_PROJECTS ) ) {
+	get_capability_boolean( lang_get( 'limit_access' ), 'limit_reporters', true );
+} else {
+	get_capability_row( lang_get( 'limit_view_unless_threshold_option' ), 'limit_view_unless_threshold' );
+}
 get_section_end();
 
 # Notes
@@ -407,6 +418,27 @@ get_capability_row( lang_get( 'delete_own_bugnotes' ), 'bugnote_user_delete_thre
 get_capability_row( lang_get( 'view_private_notes' ), 'private_bugnote_threshold' );
 get_capability_row( lang_get( 'change_view_state_own_bugnotes' ), 'bugnote_user_change_view_state_threshold' );
 get_section_end();
+
+# Tags
+get_section_begin_mcwt( lang_get( 'tags' ) );
+get_capability_row( lang_get( 'view_tags' ), 'tag_view_threshold' );
+get_capability_row( lang_get( 'attach_tags' ), 'tag_attach_threshold' );
+get_capability_row( lang_get( 'detach_tags' ), 'tag_detach_threshold' );
+get_capability_row( lang_get( 'detach_own_tags' ), 'tag_detach_own_threshold' );
+get_capability_row( lang_get( 'create_new_tags' ), 'tag_create_threshold' );
+get_capability_row( lang_get( 'edit_tags' ), 'tag_edit_threshold' );
+get_capability_row( lang_get( 'edit_own_tags' ), 'tag_edit_own_threshold' );
+get_section_end();
+
+# Attachments
+if( config_get( 'allow_file_upload' ) == ON ) {
+	get_section_begin_mcwt( lang_get( 'attachments' ) );
+	get_capability_row( lang_get( 'view_list_of_attachments' ), 'view_attachments_threshold' );
+	get_capability_row( lang_get( 'download_attachments' ), 'download_attachments_threshold' );
+	get_capability_row( lang_get( 'delete_attachments' ), 'delete_attachments_threshold' );
+	get_capability_row( lang_get( 'upload_issue_attachments' ), 'upload_bug_file_threshold' );
+	get_section_end();
+}
 
 # Others
 get_section_begin_mcwt( lang_get( 'others' ) );

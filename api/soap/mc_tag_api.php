@@ -167,15 +167,15 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 				);
 			}
 		} else if( isset( $t_tag['name'] ) ) {
-			$t_tag = tag_get_by_name( $t_tag['name'] );
-			if( $t_tag === false ) {
+			$t_get_tag = tag_get_by_name( $t_tag['name'] );
+			if( $t_get_tag === false ) {
 				throw new ClientException(
-					"Tag {$t_tag['name']} not found.",
+					"Tag '{$t_tag['name']}' not found.",
 					ERROR_TAG_NOT_FOUND
 				);
 			}
 
-			$t_tag_id = $t_tag['id'];
+			$t_tag_id = $t_get_tag['id'];
 		} else {
 			throw new ClientException(
 				'Tag without id or name.',

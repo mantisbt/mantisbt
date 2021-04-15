@@ -5,6 +5,41 @@
 <section id="admin.config.relationship">
 	<title>Relationship Graphs</title>
 
+	<para>MantisBT can display a graphical representation of the relationships
+		between issues. Two types of interactive visualizations are available,
+		<emphasis>dependencies</emphasis> and a full
+		<emphasis>relationships</emphasis> graph.
+	</para>
+
+	<important>
+		<para>This feature relies on the external
+			<emphasis>dot</emphasis> and <emphasis>neato</emphasis> tools
+			from the <ulink url="https://www.graphviz.org/">GraphViz</ulink>
+			library, which must be installed separately.
+		</para>
+		<para>Most Linux distributions have a GraphViz package available
+			for easy download and install.
+		</para>
+		<para>Under Windows, the software needs to be installed manually.
+			The following post-installation steps
+			<ulink url="https://mantisbt.org/bugs/view.php?id=27584#c64693">may be required</ulink>
+			for proper operations:
+			<itemizedlist>
+				<listitem>
+					<para>Update the system PATH to point to GraphViz's
+						<literal>bin</literal> directory
+					</para>
+				</listitem>
+				<listitem>
+					<para>Initialize the graph engine by running
+						<literal>dot -c</literal>
+						from an <emphasis>Administrator</emphasis> command prompt.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</important>
+
 	<variablelist>
 		<varlistentry>
 			<term>$g_relationship_graph_enable</term>
@@ -13,13 +48,6 @@
 					This enables the relationship graphs feature where issues are represented by
 					nodes and relationships as links between such nodes.  Possible values are ON or OFF.
 					Default is OFF.
-				</para>
-
-				<para>
-					This feature requires installing <ulink url="http://www.research.att.com/sw/tools/graphviz/">GraphViz</ulink>
-					(all OSes except Windows) or <ulink url="http://home.so-net.net.tw/oodtsen/wingraphviz/">WinGraphviz</ulink> (only Windows).
-					Refer to the notes near the top of core/graphviz_api.php and
-					core/relationship_graph_api.php for more information.
 				</para>
 			</listitem>
 		</varlistentry>

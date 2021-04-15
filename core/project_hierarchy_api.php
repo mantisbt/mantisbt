@@ -49,7 +49,7 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
 
 	db_param_push();
 	$t_query = 'INSERT INTO {project_hierarchy}
-		                ( child_id, parent_id, inherit_parent )
+						( child_id, parent_id, inherit_parent )
 						VALUES
 						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query( $t_query, array( $p_child_id, $p_parent_id, $p_inherit_parent ) );
@@ -131,9 +131,9 @@ function project_hierarchy_get_parent( $p_project_id, $p_show_disabled = false )
 		return 0;
 	}
 
-	foreach( $g_cache_project_hierarchy as $t_key => $t_value ) {
-		if( in_array( $p_project_id, $g_cache_project_hierarchy[$t_key] ) ) {
-			return $t_key;
+	foreach( $g_cache_project_hierarchy as $t_parent_id => $t_child_projects ) {
+		if( in_array( $p_project_id, $t_child_projects ) ) {
+			return $t_parent_id;
 		}
 	}
 
@@ -170,28 +170,21 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 	$g_cache_project_inheritance = array();
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( null === $t_row['parent_id'] ) {
-			$t_row['parent_id'] = ALL_PROJECTS;
+		$t_project_id = (int)$t_row['id'];
+		$t_parent_id = ( null === $t_row['parent_id'] ) ? ALL_PROJECTS : (int)$t_row['parent_id'];
+
+		$g_cache_project_hierarchy[$t_parent_id][] = $t_project_id;
+
+		if( !isset( $g_cache_project_inheritance[$t_project_id] ) ) {
+			$g_cache_project_inheritance[$t_project_id] = array();
 		}
 
-		if( isset( $g_cache_project_hierarchy[(int)$t_row['parent_id']] ) ) {
-			$g_cache_project_hierarchy[(int)$t_row['parent_id']][] = (int)$t_row['id'];
-		} else {
-			$g_cache_project_hierarchy[(int)$t_row['parent_id']] = array(
-				(int)$t_row['id'],
-			);
+		if( $t_row['inherit_global'] ) {
+			$g_cache_project_inheritance[$t_project_id][ALL_PROJECTS] = ALL_PROJECTS;
 		}
 
-		if( !isset( $g_cache_project_inheritance[(int)$t_row['id']] ) ) {
-			$g_cache_project_inheritance[(int)$t_row['id']] = array();
-		}
-
-		if( $t_row['inherit_global'] && !isset( $g_cache_project_inheritance[(int)$t_row['id']][ALL_PROJECTS] ) ) {
-			$g_cache_project_inheritance[(int)$t_row['id']][] = ALL_PROJECTS;
-		}
-
-		if( $t_row['inherit_parent'] && !isset( $g_cache_project_inheritance[(int)$t_row['id']][(int)$t_row['parent_id']] ) ) {
-			$g_cache_project_inheritance[(int)$t_row['id']][] = (int)$t_row['parent_id'];
+		if( $t_row['inherit_parent'] ) {
+			$g_cache_project_inheritance[$t_project_id][$t_parent_id] = $t_parent_id;
 		}
 	}
 }

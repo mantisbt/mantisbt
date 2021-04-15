@@ -42,6 +42,7 @@
  * @author Gomoko
  * @author IAlex
  * @author Urhixidur
+ * @author Verdy p
  * @author Wladek92
  */
 
@@ -49,9 +50,9 @@ $s_plugin_format_title = 'Formatage de MantisBT';
 $s_plugin_format_description = 'Greffon officiel de traitement et de formatage de texte.';
 $s_plugin_format_config = 'Configuration';
 $s_plugin_format_process_text = 'Traitement du texte';
-$s_plugin_format_process_text_warning_notice = 'Ne désactivez pas sans savoir ce que vous faites. Dans l\'état désactivé, des attaques de type « cross-site scripting » (XSS) sont possibles.';
+$s_plugin_format_process_text_warning_notice = 'Ne désactivez pas sans savoir ce que vous faites. Dans l\'état désactivé, des attaques de type « cross-site scripting » (XSS) sont possibles.';
 $s_plugin_format_process_urls = 'Traitement des URL';
-$s_plugin_format_process_buglinks = 'Liens internes de MantisBT (bogues et notes sur un bogue)';
+$s_plugin_format_process_buglinks = 'Liens internes de MantisBT (anomalies et notes sur anomalies)';
 $s_plugin_format_process_buglinks_info = 'Votre configuration définit la balise <em>Issue</em> comme « <literal>%s</literal> » et <em>Issue Note</em> comme « <literal>%s</literal> »';
 $s_plugin_format_process_markdown = 'Traitement Markdown';
 $s_plugin_format_process_markdown_info = 'Mise en forme prenant en charge Markdown, la syntaxe de formatage du texte qui permet que celui-ci puisse être converti en HTML.';

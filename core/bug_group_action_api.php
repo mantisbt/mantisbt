@@ -98,7 +98,7 @@ function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
 	foreach( $p_bug_ids_array as $t_bug_id ) {
 		# choose color based on status
 		$t_status_css = html_get_status_css_fg( bug_get_field( $t_bug_id, 'status' ), auth_get_current_user_id(), bug_get_field( $t_bug_id, 'project_id' ) );
-		$t_lead = '<i class="fa fa-square fa-status-box ' . $t_status_css . '"></i> ';
+		$t_lead = icon_get( 'fa-square', 'fa-status-box ' . $t_status_css );
 		$t_lead .= ' ' . string_get_bug_view_link( $t_bug_id );
 		echo sprintf( "<tr> <td>%s</td> <td>%s</td> </tr>\n", $t_lead, string_attribute( bug_get_field( $t_bug_id, 'summary' ) ) );
 	}
@@ -222,8 +222,9 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 		$t_update_bug_status_allowed = access_has_project_level( config_get( 'update_bug_status_threshold', null, $t_user_id, $t_project_id ), $t_project_id );
 
 		if( !isset( $t_commands['MOVE'] ) &&
+			user_has_more_than_one_project( $t_user_id ) &&
 			access_has_project_level( config_get( 'move_bug_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
-			$t_commands['MOVE'] = lang_get( 'actiongroup_menu_move' );
+			$t_commands['MOVE'] = lang_get( 'move' );
 		}
 
 		if( !isset( $t_commands['COPY'] ) &&
@@ -239,12 +240,12 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 		if( !isset( $t_commands['CLOSE'] ) && $t_update_bug_status_allowed &&
 			( access_has_project_level( access_get_status_threshold( config_get( 'bug_closed_status_threshold', null, $t_user_id, $t_project_id ), $t_project_id ), $t_project_id ) ||
 				access_has_project_level( config_get( 'allow_reporter_close', null, $t_user_id, $t_project_id ), $t_project_id ) ) ) {
-			$t_commands['CLOSE'] = lang_get( 'actiongroup_menu_close' );
+			$t_commands['CLOSE'] = lang_get( 'close' );
 		}
 
 		if( !isset( $t_commands['DELETE'] ) &&
 			access_has_project_level( config_get( 'delete_bug_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
-			$t_commands['DELETE'] = lang_get( 'actiongroup_menu_delete' );
+			$t_commands['DELETE'] = lang_get( 'delete' );
 		}
 
 		if( !isset( $t_commands['RESOLVE'] ) && $t_update_bug_status_allowed &&

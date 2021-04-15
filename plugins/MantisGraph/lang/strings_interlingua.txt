@@ -41,21 +41,24 @@
  * @author McDutchie
  */
 
-$s_plugin_graph_title = 'Graphicos de Mantis';
-$s_plugin_graph_description = 'Plug-in official de graphicos.';
 $s_plugin_MantisGraph_title = 'Graphicos de Mantis';
+$s_plugin_MantisGraph_description = 'Plug-in official de graphicos.';
 $s_plugin_MantisGraph_config = 'Configuration';
-$s_plugin_MantisGraph_synthesis_link = 'Synthese';
+$s_plugin_MantisGraph_tab_label = 'Graphicos';
 $s_plugin_MantisGraph_status_link = 'Per stato';
 $s_plugin_MantisGraph_priority_link = 'Per prioritate';
 $s_plugin_MantisGraph_severity_link = 'Per severitate';
 $s_plugin_MantisGraph_category_link = 'Per categoria';
 $s_plugin_MantisGraph_resolution_link = 'Per resolution';
+$s_plugin_MantisGraph_issue_trends_link = 'Tendentias de problemas';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Per graphicos de stato';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Per graphicos de prioritate';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Per graphicos de severitate';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Per graphicos de categoria';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Per graphicos de resolution';
+$s_plugin_MantisGraph_graph_developer_title = 'Graphicos per disveloppator';
+$s_plugin_MantisGraph_graph_reporter_title = 'Graphicos per reportator';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Problemas aperite, resolvite e remanente';
 $s_plugin_MantisGraph_by_status_pct = 'Per percentage de stato';
 $s_plugin_MantisGraph_by_priority_pct = 'Per percentage de prioritate';
 $s_plugin_MantisGraph_by_severity_pct = 'Per percentage de severitate';
@@ -79,3 +82,7 @@ $s_plugin_MantisGraph_period_year_to_date = 'Iste anno';
 $s_plugin_MantisGraph_period_select = 'Qualcunque datas';
 $s_plugin_MantisGraph_period_last_year = 'Ultime anno';
 $s_plugin_MantisGraph_graph_page = 'Facer graphico del historia del problema';
+$s_plugin_MantisGraph_graph_topdev = 'Principal disveloppatores per problemas resolvite';
+$s_plugin_MantisGraph_graph_opendev = 'Disveloppatores per problemas aperte';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Principal reportatores per problemas resolvite';
+$s_plugin_MantisGraph_other_categories = 'altere categorias (%d)';

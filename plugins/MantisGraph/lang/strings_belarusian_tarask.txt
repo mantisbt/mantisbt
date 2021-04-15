@@ -40,15 +40,15 @@
  *
  * @author EugeneZelenko
  * @author Jim-by
+ * @author Nerogaf
  * @author Red Winged Duck
  * @author Renessaince
  */
 
-$s_plugin_graph_title = 'Графікі MantisBT';
-$s_plugin_graph_description = 'Афіцыйнае дапаўненьне для графікаў.';
 $s_plugin_MantisGraph_title = 'Графікі MantisBT';
+$s_plugin_MantisGraph_description = 'Афіцыйнае дапаўненьне для графікаў.';
 $s_plugin_MantisGraph_config = 'Канфігурацыя';
-$s_plugin_MantisGraph_synthesis_link = 'Сынтэз';
+$s_plugin_MantisGraph_tab_label = 'Графікі';
 $s_plugin_MantisGraph_status_link = 'Па статусе';
 $s_plugin_MantisGraph_priority_link = 'Па прыярытэце';
 $s_plugin_MantisGraph_severity_link = 'Па сур’ёзнасьці';

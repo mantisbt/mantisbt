@@ -12,7 +12,7 @@
 		uploaded to the path that is configured in the project
 		properties. In case of problems getting the file upload feature to
 		work, check the following resources:
-		<ulink url="http://www.php.net/manual/en/features.file-upload.php">PHP
+		<ulink url="https://www.php.net/manual/en/features.file-upload.php">PHP
 			Manual
 		</ulink>
 		.
@@ -61,11 +61,11 @@
 		<varlistentry>
 			<term>$g_max_file_size</term>
 			<listitem>
-				<para>Maximum file size that can be uploaded. Default value is
-					about 5MB.
+				<para>Maximum file size that can be uploaded.
+					Default value is about 5 MiB.
 					The maximum size is also affected by the PHP options
-					post_max_size (default 8MB), upload_max_filesize (default 2MB)
-					and memory_limit (default 128MB) specified in php.ini.
+					post_max_size (default 8 MiB), upload_max_filesize (default 2 MiB)
+					and memory_limit (default 128 MiB) specified in php.ini.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -101,11 +101,24 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_preview_text_extensions</term>
+			<listitem>
+				<para>An array of file extensions (not including dots) for text files that can be previewed inline.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_preview_image_extensions</term>
+			<listitem>
+				<para>An array of file extensions (not including dots) for image files that can be previewed inline.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_fileinfo_magic_db_file</term>
 			<listitem>
 				<para>Specify the filename of the magic database file.
-					This is used by PHP 5.3.0 (or earlier versions with the
-					fileinfo PECL extension) to guess what the MIME type of a
+					This is used by PHP to guess what the MIME type of a
 					file is. Usually it is safe to leave this setting as the
 					default (blank) as PHP is usually able to find this file
 					by itself.

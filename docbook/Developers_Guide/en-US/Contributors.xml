@@ -7,7 +7,7 @@
 	<title>Contributing to MantisBT</title>
 
 	<para>
-		MantisBT source code is managed with <ulink url="http://git-scm.com/">Git</ulink>.
+		MantisBT source code is managed with <ulink url="https://git-scm.com/">Git</ulink>.
 		If you are new to this version control system, you can
 		find some good resources for learning and installing it in
 		<xref linkend="dev.appendix.git" />.
@@ -80,9 +80,9 @@ git config --global alias.ci "commit"
 							official repository.
 						</para>
 						<para>
-							Benefitting from this access requires a special URL
+							Benefiting from this access requires a special URL
 							that uses your SSH key to handle access permissions:
-							<ulink url="git@github.com:mantisbt/mantisbt.git">git@github.com:mantisbt/mantisbt.git</ulink>.
+							<literal>git@github.com:mantisbt/mantisbt.git</literal>.
 							Alternatively, an HTTPS link can be used as well,
 							in which case you will have to provide your GitHub
 							User ID and password when Git requests it:
@@ -103,7 +103,7 @@ git config --global alias.ci "commit"
 						<para>
 							For other people, the MantisBT repository and
 							the related clone URLs
-							<ulink url="git://github.com/mantisbt/mantisbt.git">git://github.com/mantisbt/mantisbt.git</ulink> (SSH)
+							<literal>git@github.com:mantisbt/mantisbt.git</literal> (SSH).
 							or
 							<ulink url="https://github.com/mantisbt/mantisbt.git">https://github.com/mantisbt/mantisbt.git</ulink> (HTTPS)
 							will always be read-only.
@@ -116,7 +116,7 @@ git config --global alias.ci "commit"
 							</emphasis> of MantisBT where you will be able
 							to push your changes, and then use the fork's URL
 							instead to clone, which will look like this:
-							<ulink url="git@github.com:MyGithubId/mantisbt.git">git@github.com:MyGithubId/mantisbt.git</ulink>
+							<literal>git@github.com:MyGithubId/mantisbt.git</literal>.
 							or
 							<ulink url="https://github.com/MyGithubId/mantisbt.git">https://github.com/MyGithubId/mantisbt.git</ulink>
 						</para>
@@ -255,7 +255,7 @@ sed -rn "s/^.*path\s*=\s*(.*)$/\1/p" .gitmodules |xargs -n 1 basename |xargs -I{
 				</para>
 				<para>
 					For further reference:
-					<ulink url="http://git-scm.com/book/en/Git-Tools-Submodules#Issues-with-Submodules">
+					<ulink url="https://git-scm.com/book/en/Git-Tools-Submodules#Issues-with-Submodules">
 						Pro Git book
 					</ulink>
 				</para>
@@ -487,7 +487,7 @@ phing test
 					<listitem>
 						<para>
 							Your code follows the
-							<ulink url="http://www.mantisbt.org/wiki/doku.php/mantisbt:coding_guidelines">
+							<ulink url="https://mantisbt.org/wiki/doku.php/mantisbt:coding_guidelines">
 								MantisBT coding guidelines
 							</ulink>
 						</para>
@@ -515,7 +515,7 @@ phing test
 			<para>
 				Since the <ulink url="https://github.com/mantisbt/mantisbt">
 				official MantisBT repository</ulink> is hosted there, using
-				<ulink url="http://github.com">GitHub</ulink> is the
+				<ulink url="https://github.com">GitHub</ulink> is the
 				recommended (and easiest) way to submit your contributions.
 			</para>
 
@@ -590,7 +590,7 @@ git push origin MyBranch
 						of the changes you are submitting, including the
 						reason for it and if possible a reference (link) to
 						an existing issue on
-						<ulink url="http://mantibt.org/bugs/">our bugtracker</ulink>.
+						<ulink url="https://mantisbt.org/bugs/">our bugtracker</ulink>.
 						The team will usually review your changes and provide
 						feedback within 7 days (but your mileage may vary).
 					</para>
@@ -643,7 +643,7 @@ git am --signoff feature_branch.patch
 
 			<para>
 				If you are not able or not willing to make use of a fork of
-				the official <ulink url="http://github.com">GitHub</ulink>
+				the official <ulink url="https://github.com">GitHub</ulink>
 				repository but have another publicly available one to host
 				your changes, for example on a free hosting for public
 				repository such as

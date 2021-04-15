@@ -82,7 +82,7 @@ function layout_page_header_begin( $p_page_title = null ) {
 	layout_head_css();
 	html_rss_link();
 
-	$t_favicon_image = config_get( 'favicon_image' );
+	$t_favicon_image = config_get_global( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
@@ -253,15 +253,15 @@ function layout_head_meta() {
 function layout_head_css() {
 	# bootstrap & fontawesome
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
-		html_css_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/css/bootstrap.min.css' );
-		html_css_cdn_link( 'https://maxcdn.bootstrapcdn.com/font-awesome/' . FONT_AWESOME_VERSION . '/css/font-awesome.min.css' );
+		html_css_cdn_link( 'https://stackpath.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/css/bootstrap.min.css',BOOTSTRAP_HASH_CSS );
+		html_css_cdn_link( 'https://stackpath.bootstrapcdn.com/font-awesome/' . FONT_AWESOME_VERSION . '/css/font-awesome.min.css', FONT_AWESOME_HASH );
 
 		# theme text fonts
 		$t_font_family =  config_get( 'font_family', null, null, ALL_PROJECTS );
 		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=' . urlencode( $t_font_family ) );
 
 		# datetimepicker
-		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css' );
+		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css', DATETIME_PICKER_HASH_CSS );
 	} else {
 		html_css_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.css' );
 		html_css_link( 'font-awesome-' . FONT_AWESOME_VERSION . '.min.css' );
@@ -306,11 +306,11 @@ function layout_user_font_preference() {
 function layout_body_javascript() {
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		# bootstrap
-		html_javascript_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/js/bootstrap.min.js', BOOTSTRAP_HASH );
+		html_javascript_cdn_link( 'https://stackpath.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/js/bootstrap.min.js', BOOTSTRAP_HASH_JS );
 
 		# moment & datetimepicker
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH );
-		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH );
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH_JS );
 
 		# typeahead.js
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/' . TYPEAHEAD_VERSION . '/typeahead.jquery.min.js', TYPEAHEAD_HASH );
@@ -357,7 +357,7 @@ function layout_login_page_begin() {
 	layout_head_css();
 	html_rss_link();
 
-	$t_favicon_image = config_get( 'favicon_image' );
+	$t_favicon_image = config_get_global( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
@@ -456,8 +456,8 @@ function layout_navbar() {
 function layout_navbar_menu_item( $p_url, $p_title, $p_icon ) {
 	echo '<li>';
 	echo '<a href="' . $p_url . '">';
-	echo '<i class="ace-icon fa ' . $p_icon . '"> </i> ' . $p_title;
-	echo '</a>';
+	print_icon( $p_icon, 'ace-icon' );
+	echo ' ' . $p_title . '</a>';
 	echo '</li>';
 }
 
@@ -480,10 +480,10 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
 		echo '<span class="user-info">';
 		echo $t_username;
 		echo '</span>';
-		echo '<i class="ace-icon fa fa-angle-down"></i>';
+		print_icon( 'fa-angle-down', 'ace-icon' );
 	} else {
 		echo '&#160;' . $t_username . '&#160;' . "\n";
-		echo '<i class="ace-icon fa fa-angle-down bigger-110"></i>';
+		print_icon( 'fa-angle-down', 'ace-icon bigger-110' );
 	}
 	echo '</a>';
 	echo '<ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">';
@@ -515,21 +515,24 @@ function layout_navbar_projects_menu() {
 	if( !layout_navbar_can_show_projects_menu() ) {
 		return;
 	}
-	echo '<li class="grey" id="dropdown_projects_menu">' . "\n";
+	echo "\n" . '<li class="grey" id="dropdown_projects_menu">' . "\n";
 	echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
 
 	$t_current_project_id = helper_get_current_project();
-	if( ALL_PROJECTS == $t_current_project_id) {
+
+	# Check user's access to the project, and if not authorized select display
+	# ALL PROJECTS to avoid disclosing the private project's name.
+	if( ALL_PROJECTS == $t_current_project_id || !access_get_project_level( $t_current_project_id ) ) {
 		echo '&#160;' . string_attribute( lang_get( 'all_projects' ) ) . '&#160;' . "\n";
 	} else {
 		echo '&#160;' . string_attribute( project_get_field( $t_current_project_id, 'name' ) ) . '&#160;' . "\n";
 	}
 
-	echo ' <i class="ace-icon fa fa-angle-down bigger-110"></i>' . "\n";
-	echo '</a>' . "\n";
+	print_icon( 'fa-angle-down', 'ace-icon bigger-110' );
+	echo "\n" . '</a>' . "\n";
 
 	echo '<ul id="projects-list" class=" dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">' . "\n";
-	layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
+	layout_navbar_projects_list( implode( ';', helper_get_current_project_trace() ), true, null, true );
 	echo '</ul>' . "\n";
 	echo '</li>' . "\n";
 }
@@ -558,13 +561,15 @@ function layout_navbar_button_bar() {
 	if( $t_show_report_bug_button )  {
 		$t_bug_url = string_get_bug_report_url();
 		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
-		echo '<i class="fa fa-edit"></i> ' . lang_get( 'report_bug_link' );
+		print_icon( 'fa-edit');
+		echo ' ' . lang_get( 'report_bug_link' );
 		echo '</a>';
 	}
 
 	if( $t_show_invite_user_button ) {
 		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
-		echo '<i class="fa fa-user-plus"></i> ' . lang_get( 'invite_users' );
+		print_icon( 'fa-user-plus' );
+		echo ' ' . lang_get( 'invite_users' );
 		echo '</a>';
 	}
 
@@ -579,10 +584,9 @@ function layout_navbar_button_bar() {
  * @param bool $p_include_all_projects  true: include "All Projects", otherwise false.
  * @param int|null $p_filter_project_id  The id of a project to exclude or null.
  * @param string|bool $p_trace  The current project trace, identifies the sub-project via a path from top to bottom.
- * @param bool $p_can_report_only If true, disables projects in which user can't report issues; defaults to false (all projects enabled)
  * @return void
  */
-function layout_navbar_projects_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false ) {
+function layout_navbar_projects_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false ) {
 	$t_user_id = auth_get_current_user_id();
 
 	# Cache all needed projects
@@ -590,40 +594,36 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 
 	# Get top level projects
 	$t_project_ids = user_get_accessible_projects( $t_user_id );
-	$t_can_report = true;
 
 	echo '<li>';
 	echo '<div class="projects-searchbox">';
 	echo '<input class="search form-control input-md" placeholder="' . lang_get( 'search' ) . '" />';
 	echo '</div>';
-	echo '</li>';
+	echo "</li>\n";
+
 	echo '<li class="divider"></li>' . "\n";
+
 	echo '<li>';
-	echo '<div class="scrollable-menu">';
-	echo '<ul class="list dropdown-yellow no-margin">';
+	echo '<div class="scrollable-menu">' . "\n";
+	echo '<ul class="list dropdown-yellow no-margin">' . "\n";
 
 	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
-		echo ALL_PROJECTS == $p_project_id ? '<li class="active">' : '<li>';
-		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . ALL_PROJECTS . '">';
-		echo lang_get( 'all_projects' ) . ' </a></li>' . "\n";
+		echo '<li>';
+		echo project_link_for_menu( ALL_PROJECTS, false, 'project-link' );
+		echo "</li>\n";
 		echo '<li class="divider"></li>' . "\n";
 	}
 
 	foreach( $t_project_ids as $t_id ) {
-		if( $p_can_report_only ) {
-			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
-			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
-		}
-
 		echo 0 == strcmp( $t_id, $p_project_id ) ? '<li class="active">' : '<li>';
-		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_id . '"';
-		echo ' class="project-link"> ' . string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
-		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
+		echo project_link_for_menu( $t_id, false, 'project-link' );
+		echo "</li>\n";
+		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace );
 	}
 
-	echo '</ul>';
-	echo '</div>';
-	echo '</li>';
+	echo "</ul>\n";
+	echo "</div>\n";
+	echo "</li>\n";
 }
 
 /**
@@ -633,34 +633,27 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
  * @param integer $p_project_id        A project identifier.
  * @param integer $p_filter_project_id A filter project identifier.
  * @param boolean $p_trace             Whether to trace parent projects.
- * @param boolean $p_can_report_only   If true, disables projects in which user can't report issues; defaults to false (all projects enabled).
  * @param array   $p_parents           Array of parent projects.
  * @return void
  */
-function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
+function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, array $p_parents = array() ) {
 	array_push( $p_parents, $p_parent_id );
 	$t_user_id = auth_get_current_user_id();
 	$t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
-	$t_can_report = true;
+	$t_indent = str_repeat( '&nbsp;', 4 );
 
 	foreach( $t_project_ids as $t_id ) {
-		if( $p_can_report_only ) {
-			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
-			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
-		}
-
 		if( $p_trace ) {
-			$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
+			$t_full_id = implode( ";", $p_parents ) . ';' . $t_id;
 		} else {
 			$t_full_id = $t_id;
 		}
 
 		echo 0 == strcmp( $p_project_id, $t_full_id ) ? '<li class="active">' : '<li>';
-		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_full_id . '"';
-		echo ' class="project-link"> ' . str_repeat( '&#160;', count( $p_parents ) * 4 );
-		echo string_attribute( project_get_field( $t_id, 'name' ) ) . '</a></li>' . "\n";
+		echo project_link_for_menu( $t_id, false, 'project-link', $p_parents, $t_indent );
+		echo "</li>\n";
 
-		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
+		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 	}
 }
 
@@ -671,7 +664,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
  * @return void
  */
 function layout_navbar_user_avatar( $p_img_class = 'nav' ) {
-	$t_default_avatar = '<i class="ace-icon fa fa-user fa-2x white"></i> ';
+	$t_default_avatar = icon_get( 'fa-user', 'ace-icon fa-2x white' ) . ' ';
 
 	if( OFF === config_get( 'show_avatar' ) ) {
 		echo $t_default_avatar;
@@ -704,85 +697,150 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 	if( auth_is_user_authenticated() ) {
 		$t_current_project = helper_get_current_project();
 
-		# Starting sidebar markup
-		layout_sidebar_begin();
+		# Store all items in an array before outputting
+		$t_sidebar_items = array();
 
 		# Plugin / Event added options
-		$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN_FRONT' );
-		layout_plugin_menu_options_for_sidebar( $t_event_menu_options, $p_active_sidebar_page );
+		$t_event_menu_main_front = event_signal( 'EVENT_MENU_MAIN_FRONT' );
+		$t_plugin_menu_items_front = layout_plugin_menu_options_for_sidebar( $t_event_menu_main_front );
+
+		if( is_array( $t_plugin_menu_items_front ) ) {
+			$t_sidebar_items = $t_plugin_menu_items_front;
+		}
 
 		# Main Page
 		if( config_get( 'news_enabled' ) == ON ) {
-			layout_sidebar_menu( 'main_page.php', 'main_link', 'fa-bullhorn', $p_active_sidebar_page  );
+			$t_sidebar_items[] = array(
+				'url' => 'main_page.php',
+				'title' => 'main_link',
+				'icon' => 'fa-bullhorn'
+			);
 		}
 
 		# My View
-		layout_sidebar_menu( 'my_view_page.php', 'my_view_link', 'fa-dashboard', $p_active_sidebar_page );
+		$t_sidebar_items[] = array(
+			'url' => 'my_view_page.php',
+			'title' => 'my_view_link',
+			'icon' => 'fa-dashboard'
+		);
 
 		# View Bugs
-		layout_sidebar_menu( 'view_all_bug_page.php', 'view_bugs_link', 'fa-list-alt', $p_active_sidebar_page );
+		$t_sidebar_items[] = array(
+			'url' => 'view_all_bug_page.php',
+			'title' => 'view_bugs_link',
+			'icon' => 'fa-list-alt'
+		);
 
 		# Report Bugs
 		if( access_has_any_project_level( 'report_bug_threshold' ) ) {
-			$t_bug_url = string_get_bug_report_url();
-			layout_sidebar_menu( $t_bug_url, 'report_bug_link', 'fa-edit', $p_active_sidebar_page );
+			$t_sidebar_items[] = array(
+				'url' => string_get_bug_report_url(),
+				'title' => 'report_bug_link',
+				'icon' => 'fa-edit'
+			);
 		}
 
 		# Changelog Page
-		if( access_has_project_level( config_get( 'view_changelog_threshold', $t_current_project ) ) ) {
-			layout_sidebar_menu( 'changelog_page.php', 'changelog_link', 'fa-retweet', $p_active_sidebar_page );
-		}
+		$t_sidebar_items[] = array(
+			'url' => 'changelog_page.php',
+			'title' => 'changelog_link',
+			'icon' => 'fa-retweet',
+			'access_level' => config_get( 'view_changelog_threshold' )
+		);
 
 		# Roadmap Page
-		if( access_has_project_level( config_get( 'roadmap_view_threshold' ), $t_current_project ) ) {
-			layout_sidebar_menu( 'roadmap_page.php', 'roadmap_link', 'fa-road', $p_active_sidebar_page );
-		}
+		$t_sidebar_items[] = array(
+			'url' => 'roadmap_page.php',
+			'title' => 'roadmap_link',
+			'icon' => 'fa-road',
+			'access_level' => config_get( 'roadmap_view_threshold' )
+		);
 
 		# Summary Page
-		if( access_has_project_level( config_get( 'view_summary_threshold' ), $t_current_project ) ) {
-			layout_sidebar_menu( 'summary_page.php', 'summary_link', 'fa-bar-chart-o', $p_active_sidebar_page );
-		}
+		$t_sidebar_items[] = array(
+			'url' => 'summary_page.php',
+			'title' => 'summary_link',
+			'icon' => 'fa-bar-chart-o',
+			'access_level' => config_get( 'view_summary_threshold' )
+		);
 
 		# Project Documentation Page
 		if( ON == config_get( 'enable_project_documentation' ) ) {
-			layout_sidebar_menu( 'proj_doc_page.php', 'docs_link', 'fa-book', $p_active_sidebar_page );
+			$t_sidebar_items[] = array(
+				'url' => 'proj_doc_page.php',
+				'title' => 'docs_link',
+				'icon' => 'fa-book'
+			);
 		}
 
 		# Project Wiki
 		if( ON == config_get_global( 'wiki_enable' )  ) {
-			layout_sidebar_menu( 'wiki.php?type=project&amp;id=' . $t_current_project, 'wiki', 'fa-book', $p_active_sidebar_page );
+			$t_sidebar_items[] = array(
+				'url' => 'wiki.php?type=project&amp;id=' . $t_current_project,
+				'title' => 'wiki',
+				'icon' => 'fa-book'
+			);
 		}
 
 		# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
 		$t_link = layout_manage_menu_link();
 		if( !is_blank( $t_link ) ) {
-			layout_sidebar_menu( $t_link , 'manage_link', 'fa-gears', $p_active_sidebar_page );
+			$t_sidebar_items[] = array(
+				'url' => $t_link,
+				'title' => 'manage_link',
+				'icon' => 'fa-gears',
+			);
 		}
 
 		# Time Tracking / Billing
 		if( config_get( 'time_tracking_enabled' ) && access_has_project_level( config_get( 'time_tracking_reporting_threshold', $t_current_project ) ) ) {
-			layout_sidebar_menu( 'billing_page.php', 'time_tracking_billing_link', 'fa-clock-o', $p_active_sidebar_page );
+			$t_sidebar_items[] = array(
+				'url' => 'billing_page.php',
+				'title' => 'time_tracking_billing_link',
+				'icon' => 'fa-clock-o',
+			);
 		}
 
 		# Plugin / Event added options
-		$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN' );
-		layout_plugin_menu_options_for_sidebar( $t_event_menu_options, $p_active_sidebar_page );
+		$t_event_menu_main = event_signal( 'EVENT_MENU_MAIN' );
+		$t_plugin_menu_items_back = layout_plugin_menu_options_for_sidebar( $t_event_menu_main );
+
+		if( is_array( $t_plugin_menu_items_back ) ) {
+			$t_sidebar_items = array_merge( $t_sidebar_items, $t_plugin_menu_items_back );
+		}
 
 		# Config based custom options
-		layout_config_menu_options_for_sidebar( $p_active_sidebar_page );
+		$t_config_menu_items = layout_config_menu_options_for_sidebar();
 
-		# Ending sidebar markup
-		layout_sidebar_end();
+		if( is_array( $t_config_menu_items ) ) {
+			$t_sidebar_items = array_merge( $t_sidebar_items, $t_config_menu_items );
+		}
+
+		# Allow plugins to alter the sidebar items array
+		$t_modified_sidebar_items = event_signal( 'EVENT_MENU_MAIN_FILTER', array( $t_sidebar_items ) );
+		if( is_array( $t_modified_sidebar_items ) && count( $t_modified_sidebar_items ) > 0 ) {
+			$t_sidebar_items = $t_modified_sidebar_items[0];
+		}
+
+		if( count( $t_sidebar_items ) > 0 ) {
+			# Starting sidebar markup
+			layout_sidebar_begin();
+
+			# Output the sidebar items
+			layout_options_for_sidebar( $t_sidebar_items, $p_active_sidebar_page );
+
+			# Ending sidebar markup
+			layout_sidebar_end();
+		}
 	}
 }
 
 /**
  * Process plugin menu options for sidebar
  * @param array $p_plugin_event_response The response from the plugin event signal.
- * @param string $p_active_sidebar_page The active page on the sidebar.
- * @return void
+ * @return array containing sidebar items
  */
-function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response, $p_active_sidebar_page ) {
+function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response ) {
 	$t_menu_options = array();
 
 	foreach( $p_plugin_event_response as $t_plugin => $t_plugin_menu_options ) {
@@ -797,15 +855,14 @@ function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response, $p_ac
 		}
 	}
 
-	layout_options_for_sidebar( $t_menu_options, $p_active_sidebar_page );
+	return $t_menu_options;
 }
 
 /**
  * Process main menu options from config.
- * @param string $p_active_sidebar_page The active page on the sidebar.
- * @return void
+ * @return array containing sidebar items
  */
-function layout_config_menu_options_for_sidebar( $p_active_sidebar_page ) {
+function layout_config_menu_options_for_sidebar( ) {
 	$t_menu_options = array();
 	$t_custom_options = config_get( 'main_menu_custom_options' );
 
@@ -823,7 +880,7 @@ function layout_config_menu_options_for_sidebar( $p_active_sidebar_page ) {
 		$t_menu_options[] = $t_menu_option;
 	}
 
-	layout_options_for_sidebar( $t_menu_options, $p_active_sidebar_page );
+	return $t_menu_options;
 }
 
 /**
@@ -887,8 +944,8 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 	}
 
 	echo '<a href="' . $t_url . '">' . "\n";
-	echo '<i class="menu-icon fa ' . $p_icon . '"></i> ' . "\n";
-	echo '<span class="menu-text"> ' . lang_get_defaulted( $p_title ) . ' </span>' . "\n";
+	print_icon( $p_icon, 'menu-icon' );
+	echo "\n" . '<span class="menu-text"> ' . lang_get_defaulted( $p_title ) . ' </span>' . "\n";
 	echo '</a>' . "\n";
 	echo '<b class="arrow"></b>' . "\n";
 	echo '</li>' . "\n";
@@ -993,11 +1050,13 @@ function layout_breadcrumbs() {
 
 		$t_return_page = string_url( $t_return_page );
 
-		echo ' <li><i class="fa fa-user home-icon active"></i> ' . lang_get( 'anonymous' ) . ' </li>' . "\n";
+		echo ' <li>';
+		print_icon( 'fa-user', 'home-icon active' );
+		echo lang_get( 'anonymous' ) . ' </li>' . "\n";
 
 		echo '<div class="btn-group btn-corner">' . "\n";
 		echo '	<a href="' . helper_mantis_url( auth_login_page( 'return=' . $t_return_page ) ) .
-			'" class="btn btn-primary btn-xs">' . lang_get( 'login_link' ) . '</a>' . "\n";
+			'" class="btn btn-primary btn-xs">' . lang_get( 'login' ) . '</a>' . "\n";
 		if( auth_signup_enabled() ) {
 			echo '	<a href="' . helper_mantis_url( 'signup_page.php' ) . '" class="btn btn-primary btn-xs">' .
 				lang_get( 'signup_link' ) . '</a>' . "\n";
@@ -1011,7 +1070,8 @@ function layout_breadcrumbs() {
 		$t_realname = current_user_get_field( 'realname' );
 		$t_display_realname = is_blank( $t_realname ) ? '' : ' ( ' . string_html_specialchars( $t_realname ) . ' ) ';
 
-		echo '  <li><i class="fa fa-user home-icon active"></i>';
+		echo '  <li>';
+		print_icon( 'fa-user', 'home-icon active' );
 		$t_page = ( OFF == $t_protected ) ? 'account_page.php' : 'my_view_page.php';
 		echo '  <a href="' . helper_mantis_url( $t_page ) . '">' .
 			$t_display_username . $t_display_realname . '</a>' . "\n";
@@ -1048,7 +1108,7 @@ function layout_breadcrumbs() {
 	echo '<form class="form-search" method="post" action="' . helper_mantis_url( 'jump_to_bug.php' ) . '">';
 	echo '<span class="input-icon">';
 	echo '<input type="text" name="bug_id" autocomplete="off" class="nav-search-input" placeholder="' . lang_get( 'issue_id' ) . '">';
-	echo '<i class="ace-icon fa fa-search nav-search-icon"></i>';
+	print_icon( 'fa-search', 'ace-icon nav-search-icon' );
 	echo '</span>';
 	echo '</form>';
 	echo '</div>';
@@ -1085,7 +1145,7 @@ function layout_footer() {
 	# Show MantisBT version and copyright statement
 	$t_version_suffix = '';
 	$t_copyright_years = ' 2000 - ' . date( 'Y' );
-	if( config_get( 'show_version' ) == ON ) {
+	if( config_get_global( 'show_version' ) == ON ) {
 		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . config_get_global( 'version_suffix' ) );
 	}
 	echo '<div class="col-md-6 col-xs-12 no-padding">' . "\n";
@@ -1094,14 +1154,14 @@ function layout_footer() {
 	echo "<small>Copyright &copy;$t_copyright_years MantisBT Team</small>" . '<br>';
 
 	# Show optional user-specified custom copyright statement
-	$t_copyright_statement = config_get( 'copyright_statement' );
+	$t_copyright_statement = config_get_global( 'copyright_statement' );
 	if( $t_copyright_statement ) {
 		echo '<small>' . $t_copyright_statement . '</small>' . "\n";
 	}
 
 	# Show contact information
 	if( !is_page_name( 'login_page' ) ) {
-		$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get( 'webmaster_email' ) ) );
+		$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get_global( 'webmaster_email' ) ) );
 		echo '<small>' . $t_webmaster_contact_information . '</small>' . '<br>' . "\n";
 	}
 
@@ -1139,13 +1199,17 @@ function layout_footer() {
 	# Print the page execution time
 	if( $t_show_timer ) {
 		$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
-		echo '<small><i class="fa fa-clock-o"></i> ' . $t_page_execution_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
+		echo '<small>';
+		print_icon( 'fa-clock-o' );
+		echo ' ' . $t_page_execution_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	# Print the page memory usage
 	if( $t_show_memory_usage ) {
-		$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
-		echo '<small><i class="fa fa-bolt"></i> ' . $t_page_memory_usage . '</small>&#160;&#160;&#160;&#160;' . "\n";
+		$t_page_memory_usage = sprintf( lang_get( 'memory_usage' ), number_format( memory_get_peak_usage() / 1024 ) );
+		echo '<small>';
+		print_icon( 'fa-bolt' );
+		echo ' ' . $t_page_memory_usage . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	# Determine number of unique queries executed
@@ -1166,13 +1230,19 @@ function layout_footer() {
 		}
 
 		$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-		echo '<small><i class="fa fa-database"></i> ' . $t_total_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
+		echo '<small>';
+		print_icon( 'fa-database' );
+		echo ' ' . $t_total_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
 		if( config_get_global( 'db_log_queries' ) ) {
 			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-			echo '<small><i class="fa fa-database"></i> ' . $t_unique_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
+			echo '<small>';
+			print_icon( 'fa-database' );
+			echo ' ' . $t_unique_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
 		}
 		$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-		echo '<small><i class="fa fa-clock-o"></i> ' . $t_total_query_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
+		echo '<small>';
+		print_icon( 'fa-clock-o' );
+		echo ' ' . $t_total_query_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	if( $t_display_debug_info ) {
@@ -1211,8 +1281,8 @@ function layout_footer_end() {
  */
 function layout_scroll_up_button() {
 	echo '<a class="btn-scroll-up btn btn-sm btn-inverse display" id="btn-scroll-up" href="#">' . "\n";
-	echo '<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>' . "\n";
-	echo '</a>' . "\n";
+	print_icon( 'fa-angle-double-up', 'ace-icon icon-only bigger-110');
+	echo "\n" . '</a>' . "\n";
 }
 
 /**
@@ -1222,7 +1292,7 @@ function layout_scroll_up_button() {
 function layout_login_page_logo() {
 	?>
 	<div class="login-logo">
-		<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+		<img src="<?php echo helper_mantis_url( config_get_global( 'logo_image' ) ); ?>">
 	</div>
 	<?php
 }

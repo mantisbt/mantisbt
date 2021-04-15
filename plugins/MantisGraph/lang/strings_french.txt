@@ -44,53 +44,53 @@
  * @author IAlex
  * @author Peter17
  * @author Urhixidur
+ * @author Verdy p
  * @author Vincent
  * @author Wladek92
  */
 
-$s_plugin_graph_title = 'Graphiques Mantis';
-$s_plugin_graph_description = 'Greffon graphique officiel.';
 $s_plugin_MantisGraph_title = 'Graphiques de Mantis';
+$s_plugin_MantisGraph_description = 'Greffon graphique officiel.';
 $s_plugin_MantisGraph_config = 'Configuration';
-$s_plugin_MantisGraph_synthesis_link = 'Synthèse';
+$s_plugin_MantisGraph_tab_label = 'Graphiques';
 $s_plugin_MantisGraph_status_link = 'Par état';
 $s_plugin_MantisGraph_priority_link = 'Par priorité';
-$s_plugin_MantisGraph_severity_link = 'Par gravité';
+$s_plugin_MantisGraph_severity_link = 'Par sévérité';
 $s_plugin_MantisGraph_category_link = 'Par catégorie';
 $s_plugin_MantisGraph_resolution_link = 'Par résolution';
-$s_plugin_MantisGraph_issue_trends_link = 'Tendances des problèmes';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Par graphiques d\'état';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Par graphiques de priorité';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Par graphiques de gravité';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Par graphiques de catégorie';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Par graphiques de résolution';
-$s_plugin_MantisGraph_graph_developer_title = 'Par Développeur De Graphiques';
-$s_plugin_MantisGraph_graph_reporter_title = 'Par graphes de rapporteur';
-$s_plugin_MantisGraph_graph_issues_trend_title = 'Points Ouverts, Résolus, et Restants';
-$s_plugin_MantisGraph_by_status_pct = 'pourcentage par état';
-$s_plugin_MantisGraph_by_priority_pct = 'pourcentage par priorité';
-$s_plugin_MantisGraph_by_severity_pct = 'pourcentage par sévérité';
-$s_plugin_MantisGraph_by_category_pct = 'pourcentage par catégorie';
-$s_plugin_MantisGraph_by_resolution_pct = 'pourcentage par résolution';
-$s_plugin_MantisGraph_by_severity_mix = 'par sévérité et état';
-$s_plugin_MantisGraph_by_priority_mix = 'par priorité et état';
-$s_plugin_MantisGraph_by_resolution_mix = 'par résolution et état';
-$s_plugin_MantisGraph_legend_still_open = 'Encore Ouvert';
-$s_plugin_MantisGraph_legend_resolved = 'Résolu';
-$s_plugin_MantisGraph_legend_reported = 'Rapporté';
-$s_plugin_MantisGraph_period_none = 'Aucun';
+$s_plugin_MantisGraph_issue_trends_link = 'Tendances des anomalies';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Par graphique d’état';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Graphiques par priorité';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Graphiques par sévérité';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Graphiques par catégorie';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Graphiques par résolution';
+$s_plugin_MantisGraph_graph_developer_title = 'Graphiques par développeur';
+$s_plugin_MantisGraph_graph_reporter_title = 'Graphiques par rapporteur';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Anomalies ouvertes, résolues et restantes';
+$s_plugin_MantisGraph_by_status_pct = 'Pourcentage par état';
+$s_plugin_MantisGraph_by_priority_pct = 'Pourcentage par priorité';
+$s_plugin_MantisGraph_by_severity_pct = 'Pourcentage par sévérité';
+$s_plugin_MantisGraph_by_category_pct = 'Pourcentage par catégorie';
+$s_plugin_MantisGraph_by_resolution_pct = 'Pourcentage par résolution';
+$s_plugin_MantisGraph_by_severity_mix = 'Par sévérité et état';
+$s_plugin_MantisGraph_by_priority_mix = 'Par priorité et état';
+$s_plugin_MantisGraph_by_resolution_mix = 'Par résolution et état';
+$s_plugin_MantisGraph_legend_still_open = 'Encore ouvertes';
+$s_plugin_MantisGraph_legend_resolved = 'Résolues';
+$s_plugin_MantisGraph_legend_reported = 'Rapportées';
+$s_plugin_MantisGraph_period_none = 'Néant';
 $s_plugin_MantisGraph_period_this_week = 'Cette semaine';
 $s_plugin_MantisGraph_period_last_week = 'La semaine dernière';
 $s_plugin_MantisGraph_period_two_weeks = 'Les deux dernières semaines';
-$s_plugin_MantisGraph_period_this_month = 'Ce mois';
+$s_plugin_MantisGraph_period_this_month = 'Ce mois-ci';
 $s_plugin_MantisGraph_period_last_month = 'Le mois dernier';
-$s_plugin_MantisGraph_period_this_quarter = 'Ce trimestre';
+$s_plugin_MantisGraph_period_this_quarter = 'Ce trimestre-ci';
 $s_plugin_MantisGraph_period_last_quarter = 'Le trimestre dernier';
-$s_plugin_MantisGraph_period_year_to_date = 'Annuel cumulatif';
-$s_plugin_MantisGraph_period_select = 'Sélectionner les dates';
-$s_plugin_MantisGraph_period_last_year = 'L\'année dernière';
+$s_plugin_MantisGraph_period_year_to_date = 'Cumul annuel';
+$s_plugin_MantisGraph_period_select = 'Dates arbitraires';
+$s_plugin_MantisGraph_period_last_year = 'L’année dernière';
 $s_plugin_MantisGraph_graph_page = 'Afficher le graphique de l’historique';
-$s_plugin_MantisGraph_graph_topdev = 'Développeurs les plus actifs par sujet Corrigé';
-$s_plugin_MantisGraph_graph_opendev = 'Développeurs par sujet Ouvert';
-$s_plugin_MantisGraph_graph_topreporter_fixed = 'Rapporteurs les plus actifs par sujet Corrigé';
+$s_plugin_MantisGraph_graph_topdev = 'Développeurs les plus actifs par anomalies corrigées';
+$s_plugin_MantisGraph_graph_opendev = 'Développeurs par anomalies ouvertes';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Rapporteurs les plus actifs par anomalies corrigées';
 $s_plugin_MantisGraph_other_categories = 'autres catégories (%d)';

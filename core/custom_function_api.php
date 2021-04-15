@@ -103,11 +103,11 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 
 	# choose color based on status
 	$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user, $t_bug->project_id );
-	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
+	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );
 
 	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
-	echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '" title="' . $t_status_title . '"></i> ';
-	echo string_get_bug_view_link( $p_issue_id, false );
+	print_icon( 'fa-square', 'fa-status-box ' . $t_status_css, $t_status_title );
+	echo ' ' . string_get_bug_view_link( $p_issue_id, false );
 	echo ': <span class="label label-light">', $t_category, '</span> ' , string_display_line_links( $t_bug->summary );
 	if( $t_bug->handler_id > 0
 			&& ON == config_get( 'show_assigned_names', null, $t_current_user, $t_bug->project_id )
@@ -162,11 +162,11 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 
 	# choose color based on status
 	$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user, $t_bug->project_id );
-	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
+	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );
 
 	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
-	echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '" title="' . $t_status_title . '"></i> ';
-	echo string_get_bug_view_link( $p_issue_id, false );
+	print_icon( 'fa-square', 'fa-status-box ' . $t_status_css, $t_status_title );
+	echo ' ' . string_get_bug_view_link( $p_issue_id, false );
 	echo ': <span class="label label-light">', $t_category, '</span> ', $t_strike_start, string_display_line_links( $t_bug->summary ), $t_strike_end;
 	if( $t_bug->handler_id > 0
 			&& ON == config_get( 'show_assigned_names', null, $t_current_user, $t_bug->project_id )
@@ -343,7 +343,7 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
 		if( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
-			echo '<th class="column-custom-' . $t_custom_field . '">';
+			echo '<th class="column-' . custom_field_css_name( $t_custom_field ) . '">';
 		}
 
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
@@ -408,7 +408,7 @@ function custom_function_default_print_column_value( $p_column, BugData $p_bug, 
 
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
-		printf( $t_column_start, 'custom-' . $t_custom_field );
+		printf( $t_column_start, custom_field_css_name( $t_custom_field ) );
 
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
 		if( $t_field_id === false ) {

@@ -422,208 +422,52 @@
 
             <para>This page is the base point for managing custom fields. It
                 lists the custom fields defined in the system. There is also a
-                place to enter a new field name to create a new field.The "Edit"
-                links take you to a page where you can define the details of a
-                custom field. These include it's name, type, value, and display
-                information. On the edit page, the following information is defined
-                to control the custom field:
-                <itemizedlist>
-                    <listitem>
-                        <para>name</para>
-                    </listitem>
-                    <listitem>
-                        <para>type. Possible values are listed below.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Value constraints (Possible values, default value,
-                            regular expression, minimum length, maximum length).
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Access (who can read and write the field based on their
-                            access level).
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Display control (where the field will show up and must be
-                            filled in
-                        </para>
-                    </listitem>
-                </itemizedlist>
+                place to enter a new field name to create a new field.
             </para>
+            <para>The "Edit" links take you to a page where you can define the
+                details of a custom field. These include it's name, type, value,
+                and display information.
+                On the edit page, the following information is defined
+                to control the custom field:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>name</para>
+                </listitem>
+                <listitem>
+                    <para>type</para>
+                </listitem>
+                <listitem>
+                    <para>Value constraints (Possible values, default value,
+                        regular expression, minimum length, maximum length).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Access (who can read and write the field based on their
+                        access level).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Display control (where the field will show up and must be
+                        filled in
+                    </para>
+                </listitem>
+            </itemizedlist>
+
             <para>
                 All fields are compared in length to be greater than or equal to
                 the minimum length, and less than or equal to the minimum length,
-                unless these values are 0. If the values are 0, the check is
-                skipped. All fields are also compared against the regular
-                expression. If the value matches the expression, then the value is
-                stored. For example, the expression "^-?([0-9])*$" can be used to
-                constrain an integer.The table below describes the field types and
-                the value constraints.
+                unless these values are 0 in which case the check is skipped.
+                All fields are also compared against the regular expression;
+                if the value matches, then it is valid. For example, the expression
+                <literal>^-?([0-9])*$</literal> can be used to constrain an integer.
             </para>
-            <informaltable>
-                <tgroup cols="3">
-                    <thead>
-                        <row>
-                            <entry>Type</entry>
-                            <entry>Field Contents</entry>
-                            <entry>Value Constraints</entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry>String</entry>
-                            <entry>text string up to 255 characters</entry>
-                            <entry></entry>
-                        </row>
-                        <row>
-                            <entry>Numeric</entry>
-                            <entry>an integer</entry>
-                            <entry></entry>
-                        </row>
-                        <row>
-                            <entry>Float</entry>
-                            <entry>a floating point number</entry>
-                            <entry></entry>
-                        </row>
-                        <row>
-                            <entry>Enumeration</entry>
-                            <entry>one of a list of text strings</entry>
-                            <entry>Enter the list of text strings separated by "|" (pipe
-                                character) in the Possible Values field. The Default value should
-                                match one of these strings as well. This will be displayed as a
-                                dropdown menu.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Email</entry>
-                            <entry>an email address string up to 255 characters</entry>
-                            <entry>When displayed, the value will also be encapsulated in a
-                                mailto: reference.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Checkbox</entry>
-                            <entry>zero or more of a list of text strings</entry>
-                            <entry>Enter the list of text strings separated by "|" (pipe
-                                character) in the Possible Values field. The Default value should
-                                match one of these strings as well. This will be displayed as a
-                                list of text strings with a checkbox beside them.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>List</entry>
-                            <entry>one of a list of text strings</entry>
-                            <entry>Enter the list of text strings separated by "|" (pipe
-                                character) in the Possible Values field. The Default value should
-                                match one of these strings as well. This will be displayed as a
-                                multi-line dropdown menu.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Multiselection List</entry>
-                            <entry>zero or more of a list of text strings</entry>
-                            <entry>Enter the list of text strings separated by "|" (pipe
-                                character) in the Possible Values field. The Default value should
-                                match one of these strings as well. This will be displayed as a
-                                multi-line dropdown menu.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Date</entry>
-                            <entry>text string defining a date</entry>
-                            <entry>This is displayed as a set of dropdown menus for day, month,
-                                and year. Defaults should be defined in yyyy-mm-dd format.
-                            </entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </informaltable>
-
-            <para>The display entries are used as follows:
-            </para>
-            <informaltable>
-                <tgroup cols="2">
-                    <thead>
-                        <row>
-                            <entry>Entry</entry>
-                            <entry>Meaning</entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry>Display Only On Advanced Page</entry>
-                            <entry>If checked, the field will NOT be shown on the simple issue
-                                displays
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Display When Reporting Issues</entry>
-                            <entry>If checked, the field will be shown on the report issues
-                                displays
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Display When Updating Issues</entry>
-                            <entry>If checked, the field will NOT be shown on the update issue
-                                and change status displays
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Display When Resolving Issues</entry>
-                            <entry>If checked, the field will NOT be shown on the update issue
-                                displays and change status displays, if the new status is
-                                resolved.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Display When Closing Issues</entry>
-                            <entry>If checked, the field will NOT be shown on the update issue
-                                displays and change status displays, if the new status is
-                                closed.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Required On Report</entry>
-                            <entry>If checked, the field must be filled in on the issue
-                                reports.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Required On Update</entry>
-                            <entry>If checked, the field must be filled in on the update issue
-                                and change status displays.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Required On Resolve</entry>
-                            <entry>If checked, the field must be filled in on the update issue
-                                and change status displays, if the new status is resolved.
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Required On Close</entry>
-                            <entry>If checked, the field must be filled in on the update issue
-                                and change status displays, if the new status is closed.
-                            </entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </informaltable>
-
-            <para>Notes on Display
-                <itemizedlist>
-                    <listitem>
-                        <para>Be careful not to set both a required attribute and show
-                            only on advanced display. It may be possible to trigger a
-                            validation error that the user cannot recover from (i.e., field is
-                            not filled in).
-                        </para>
-                    </listitem>
-                </itemizedlist>
+            <para>Please refer to <xref linkend="admin.customize.customfields" />
+                for further details about Custom Fields and all the above-mentioned
+                properties.
             </para>
         </section>
-
 
         <section id="admin.pages.manage.profiles">
             <title>Manage Global Profiles</title>
@@ -808,10 +652,16 @@
                                 <entry>status to use when an issue is auto-assigned</entry>
                             </row>
                             <row>
-                                <entry>Limit reporter's access to their own issues</entry>
+                                <entry>Limit reporter's access to their own issues (deprecated option)</entry>
                                 <entry>$g_limit_reporters</entry>
                                 <entry>reporters can see only issues they reported. This setting is
                                     for all projects.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Limit access only to those issues reported, handled, or monitored by the user</entry>
+                                <entry>$g_limit_view_unless_threshold</entry>
+                                <entry>threshold that, if not met, hides other users' issues.
                                 </entry>
                             </row>
                         </tbody>

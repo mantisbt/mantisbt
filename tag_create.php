@@ -31,6 +31,7 @@
 
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
+require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
@@ -46,8 +47,13 @@ $t_tag_user = auth_get_current_user_id();
 if( !is_null( $f_tag_name ) ) {
 	$t_tags = tag_parse_string( $f_tag_name );
 	foreach ( $t_tags as $t_tag_row ) {
-		if( -1 == $t_tag_row['id'] ) {
-			tag_create( $t_tag_row['name'], $t_tag_user, $f_tag_description );
+		switch( $t_tag_row['id'] ) {
+			case -1:
+				tag_create( $t_tag_row['name'], $t_tag_user, $f_tag_description );
+				break;
+			case -2:
+				error_parameters( $t_tag_row['name'] );
+				trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
 		}
 	}
 }

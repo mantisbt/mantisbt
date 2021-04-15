@@ -101,7 +101,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-puzzle-piece "></i>
+	<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
 	<?php echo lang_get('edit_project_title') ?>
 </h4>
 </div>
@@ -115,15 +115,23 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<tr>
 				<td class="category">
-					<span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>
+					<label for="project-name">
+						<span class="required">*</span>
+						<?php echo lang_get( 'project_name' ) ?>
+					</label>
 				</td>
 				<td>
-					<input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" value="<?php echo string_attribute( $t_row['name'] ) ?>" required />
+					<input type="text" id="project-name" name="name" required
+						   class="input-sm" size="60" maxlength="128"
+						   value="<?php echo string_attribute( $t_row['name'] ) ?>"
+					/>
 				</td>
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'status' ) ?>
+					<label for="project-status">
+						<?php echo lang_get( 'status' ) ?>
+					</label>
 				</td>
 				<td>
 					<select id="project-status" name="status" class="input-sm">
@@ -133,30 +141,36 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'enabled' ) ?>
+					<label for="project-enabled">
+						<?php echo lang_get( 'enabled' ) ?>
+					</label>
 				</td>
 				<td>
-					<label>
-						<input type="checkbox" class="ace" id="project-enabled" name="enabled" <?php check_checked( (int)$t_row['enabled'], ON ); ?> />
-						<span class="lbl"></span>
-					</label>
+					<input type="checkbox" id="project-enabled" name="enabled" class="ace"
+						<?php check_checked( (int)$t_row['enabled'], ON ); ?>
+					/>
+					<span class="lbl"></span>
 				</td>
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'inherit_global' ) ?>
+					<label for="project-inherit-global">
+						<?php echo lang_get( 'inherit_global' ) ?>
+					</label>
 				</td>
 				<td>
-					<label>
-						<input type="checkbox" class="ace" id="project-inherit-global" name="inherit_global" <?php check_checked( (int)$t_row['inherit_global'], ON ); ?> />
-						<span class="lbl"></span>
-					</label>
+					<input type="checkbox" id="project-inherit-global" name="inherit_global" class="ace"
+						<?php check_checked( (int)$t_row['inherit_global'], ON ); ?>
+					/>
+					<span class="lbl"></span>
 				</td>
 			</tr>
 
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'view_status' ) ?>
+					<label for="project-view-state">
+						<?php echo lang_get( 'view_status' ) ?>
+					</label>
 				</td>
 				<td>
 					<select id="project-view-state" name="view_state" class="input-sm">
@@ -175,16 +189,23 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				?>
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'upload_file_path' ) ?>
+						<label for="project-file-path">
+							<?php echo lang_get( 'upload_file_path' ) ?>
+						</label>
 					</td>
 					<td>
-						<input type="text" id="project-file-path" name="file_path" class="input-sm" size="60" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" />
+						<input type="text" id="project-file-path" name="file_path"
+							   class="input-sm" size="60" maxlength="250"
+							   value="<?php echo string_attribute( $t_file_path ) ?>"
+						/>
 					</td>
 				</tr><?php
 			} ?>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'description' ) ?>
+					<label for="project-description">
+						<?php echo lang_get( 'description' ) ?>
+					</label>
 				</td>
 				<td>
 					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
@@ -202,7 +223,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
 			<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_project_button' ) ?>" />
+			<input type="submit" class="btn btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'update_project_button' ) ?>"
+			/>
 		</div>
 	</div>
 	</form>
@@ -219,7 +242,9 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_delete' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
+				   value="<?php echo lang_get( 'delete_project_button' ) ?>"
+			/>
 		</fieldset>
 	</form>
 </div>
@@ -227,7 +252,7 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 </div>
 
 <?php
-if ( config_get( 'subprojects_enabled') == ON ) {
+if ( config_get_global( 'subprojects_enabled') == ON ) {
 ?>
 <!-- SUBPROJECTS -->
 <div class="col-md-12 col-xs-12">
@@ -236,7 +261,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-share-alt"></i>
+					<?php print_icon( 'fa-share-alt', 'ace-icon' ); ?>
 					<?php echo lang_get( 'subprojects' ); ?>
 				</h4>
 			</div>
@@ -244,8 +269,13 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<?php
 		# Check the user's global access level before allowing project creation
 		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-			print_form_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ),
-				null, null, 'btn btn-sm btn-primary btn-white btn-round' );
+			print_form_button(
+				'manage_proj_create_page.php?parent_id=' . $f_project_id,
+				lang_get( 'create_new_subproject_link' ),
+				null,
+				null,
+				'btn btn-sm btn-primary btn-white btn-round'
+			);
 		} ?>
 	</div>
 		<form id="manage-project-subproject-add-form" method="post" action="manage_proj_subproj_add.php" class="form-inline">
@@ -254,22 +284,35 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 			<fieldset>
 				<?php echo form_security_field( 'manage_proj_subproj_add' ) ?>
 				<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-				<select name="subproject_id" class="input-sm"><?php
-				$t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id, true );
-				$t_all_subprojects[] = $f_project_id;
-				$t_manage_access = config_get( 'manage_project_threshold' );
-				$t_projects = project_get_all_rows();
-				$t_projects = multi_sort( $t_projects, 'name', ASCENDING );
-				foreach ( $t_projects as $t_project ) {
-					if( in_array( $t_project['id'], $t_all_subprojects ) ||
-						in_array( $f_project_id, project_hierarchy_get_all_subprojects( $t_project['id'] ) ) ||
-						!access_has_project_level( $t_manage_access, $t_project['id'] ) ) {
-						continue;
-					} ?>
-					<option value="<?php echo $t_project['id'] ?>"><?php echo string_attribute( $t_project['name'] ) ?></option><?php
-				} # End looping over projects ?>
+				<!--suppress HtmlFormInputWithoutLabel -->
+				<select name="subproject_id" class="input-sm" required>
+					<option selected disabled value="">
+						<?php echo '[', lang_get( 'select_project_button' ), ']' ?>
+					</option>
+<?php
+	$t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id, true );
+	$t_all_subprojects[] = $f_project_id;
+	$t_manage_access = config_get( 'manage_project_threshold' );
+	$t_projects = project_get_all_rows();
+	$t_projects = multi_sort( $t_projects, 'name' );
+	foreach ( $t_projects as $t_project ) {
+		if( in_array( $t_project['id'], $t_all_subprojects ) ||
+			in_array( $f_project_id, project_hierarchy_get_all_subprojects( $t_project['id'] ) ) ||
+			!access_has_project_level( $t_manage_access, $t_project['id'] )
+		) {
+			continue;
+		}
+?>
+					<option value="<?php echo $t_project['id'] ?>">
+						<?php echo string_attribute( $t_project['name'] ) ?>
+					</option>
+<?php
+	} # End looping over projects
+?>
 				</select>
-				<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_subproject' ); ?>" />
+				<input type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+					   value="<?php echo lang_get( 'add_subproject' ); ?>"
+				/>
 			</fieldset>
 			</div>
 			</div>
@@ -287,7 +330,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-share-alt"></i>
+				<?php print_icon( 'fa-share-alt', 'ace-icon' ); ?>
 				<?php echo lang_get( 'subprojects' ); ?>
 			</h4>
 		</div>
@@ -341,14 +384,18 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 						</td>
 						<td class="center">
 							<div class="inline">
-							<?php print_link_button(
-								'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
-								lang_get( 'edit_link' ), 'btn-xs' );
-							?>
-							<?php print_link_button(
-								"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ),
-								lang_get( 'unlink_link' ), 'btn-xs' );
-							?>
+<?php
+	print_link_button(
+		'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
+		lang_get( 'edit' ), 'btn-xs'
+	);
+	print_link_button(
+		"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id="
+		. $t_subproject['id']
+		. form_security_param( 'manage_proj_subproj_delete' ),
+		lang_get( 'unlink_link' ), 'btn-xs'
+	);
+?>
 							</div>
 						</td>
 					</tr>
@@ -362,7 +409,9 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		</div>
 		</div>
 			<div class="widget-toolbox padding-8 clearfix">
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>" />
+				<input type="submit" class="btn btn-primary btn-white btn-round"
+					   value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>"
+				/>
 			</div>
 		</div>
 	</form>
@@ -384,7 +433,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-sitemap"></i>
+				<?php print_icon( 'fa-sitemap', 'ace-icon' ); ?>
 				<?php echo lang_get( 'categories' ); ?>
 			</h4>
 		</div>
@@ -393,12 +442,19 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_copy' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="other_project_id" class="input-sm" required>
-				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
+				<option selected disabled value="">
+					<?php echo '[', lang_get( 'select_project_button' ), ']' ?>
+				</option>
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
-			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
-			<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_categories_to' ) ?>" />
+			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'copy_categories_from' ) ?>"
+			/>
+			<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'copy_categories_to' ) ?>"
+			/>
 		</fieldset>
 	</form>
 	</div>
@@ -406,7 +462,8 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 			<div class="widget-main no-padding">
 <?php
 	$t_categories = category_get_all_rows( $f_project_id );
-	if( count( $t_categories ) > 0 ) { ?>
+	if( count( $t_categories ) > 0 ) {
+?>
 	<div class="table-responsive">
 	<table class="table table-striped table-bordered table-condensed">
 		<thead>
@@ -427,20 +484,32 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<td class="center">
 					<div class="inline">
-					<?php if( !$t_inherited ) {
-						$t_id = urlencode( $t_id );
-						$t_project_id = urlencode( $f_project_id );
-						echo '<div class="pull-left">';
-						print_form_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ),
-							null, null, 'btn btn-xs btn-primary btn-white btn-round' );
-						echo '</div>';
-					} ?>
-					<?php if( !$t_inherited ) {
-						echo '<div class="pull-left">';
-						print_form_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ),
-							null, null, 'btn btn-xs btn-primary btn-white btn-round' );
-						echo '</div>';
-					} ?>
+<?php
+			if( !$t_inherited ) {
+				$t_id = urlencode( $t_id );
+				$t_project_id = urlencode( $f_project_id );
+				echo '<div class="pull-left">';
+				print_form_button(
+					'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id,
+					lang_get( 'edit' ),
+					null,
+					null,
+					'btn btn-xs btn-primary btn-white btn-round'
+				);
+				echo '</div>';
+			}
+			if( !$t_inherited ) {
+				echo '<div class="pull-left">';
+				print_form_button(
+					'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id,
+					lang_get( 'delete' ),
+					null,
+					null,
+					'btn btn-xs btn-primary btn-white btn-round'
+				);
+				echo '</div>';
+			}
+?>
 					</div>
 				</td>
 			</tr>
@@ -448,8 +517,11 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		} # end for loop
 ?>
 		</tbody>
-	</table></div><?php
-	} ?>
+	</table>
+	</div>
+<?php
+	}
+?>
 </div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
@@ -457,9 +529,15 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<input type="text" name="name" size="32" maxlength="128" class="input-sm" />
-			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_category_button' ) ?>" />
-			<input type="submit" name="add_and_edit_category" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_and_edit_category_button' ) ?>" />
+			<!--suppress HtmlFormInputWithoutLabel -->
+			<input type="text" name="name" required size="32" maxlength="128" class="input-sm" />
+			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'add_category_button' ) ?>"
+			/>
+			<input type="submit" name="add_and_edit_category"
+				   class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'add_and_edit_category_button' ) ?>"
+			/>
 		</fieldset>
 	</form>
 </div>
@@ -474,7 +552,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-share-alt"></i>
+				<?php print_icon( 'fa-share-alt', 'ace-icon' ); ?>
 				<?php echo lang_get( 'versions' ); ?>
 			</h4>
 		</div>
@@ -483,12 +561,17 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_ver_copy' ) ?>
 			<input type="hidden" class="form-control input-sm" name="project_id" value="<?php echo $f_project_id ?>" />
+			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="other_project_id" class="input-sm" required>
 				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
-			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_versions_from' ) ?>" />
-			<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_versions_to' ) ?>" />
+			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'copy_versions_from' ) ?>"
+			/>
+			<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'copy_versions_to' ) ?>"
+			/>
 		</fieldset>
 	</form>
 	</div>
@@ -511,7 +594,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<tbody>
 <?php
 		foreach ( $t_versions as $t_version ) {
-			$t_inherited = ( $t_version['project_id'] != $f_project_id ?  true : false );
+			$t_inherited = $t_version['project_id'] != $f_project_id;
 			$t_name = version_full_name( $t_version['id'], $t_inherited, $f_project_id );
 			$t_released = $t_version['released'];
 			$t_obsolete = $t_version['obsolete'];
@@ -532,11 +615,17 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 					$t_version_id = version_get_id( $t_name, $f_project_id );
 					if( !$t_inherited ) {
 						echo '<div class="pull-left">';
-						print_form_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
+						print_form_button(
+							'manage_proj_ver_edit_page.php?version_id=' . $t_version_id,
+							lang_get( 'edit' )
+						);
 						echo '</div>';
 
 						echo '<div class="pull-left">';
-						print_form_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
+						print_form_button(
+							'manage_proj_ver_delete.php?version_id=' . $t_version_id,
+							lang_get( 'delete' )
+						);
 						echo '</div>';
 					} ?>
 					</div>
@@ -558,9 +647,14 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_ver_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<input type="text" class="input-sm" name="version" size="32" maxlength="64" />
-			<input type="submit" name="add_version" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_version_button' ) ?>" />
-			<input type="submit" name="add_and_edit_version" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_and_edit_version_button' ) ?>" />
+			<!--suppress HtmlFormInputWithoutLabel -->
+			<input type="text" class="input-sm" required name="version" size="32" maxlength="64" />
+			<input type="submit" name="add_version" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'add_version_button' ) ?>"
+			/>
+			<input type="submit" name="add_and_edit_version" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'add_and_edit_version_button' ) ?>"
+			/>
 		</fieldset>
 	</form>
 	</div>
@@ -581,7 +675,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-flask"></i>
+			<?php print_icon( 'fa-flask', 'ace-icon' ); ?>
 			<?php echo lang_get( 'custom_fields_setup' ); ?>
 		</h4>
 	</div>
@@ -590,12 +684,17 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_custom_field_copy' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="other_project_id" class="input-sm" required>
 				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
-			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_from' ) ?>" />
-			<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_to' ) ?>" />
+			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'copy_from' ) ?>"
+			/>
+			<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'copy_to' ) ?>"
+			/>
 		</fieldset>
 	</form>
 	</div>
@@ -627,14 +726,22 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 							<?php echo form_security_field( 'manage_proj_custom_field_update' ) ?>
 							<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 							<input type="hidden" name="field_id" value="<?php echo $t_field_id ?>" />
-							<input type="text" class="input-sm" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
-							<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'update' ) ?>" />
+							<!--suppress HtmlFormInputWithoutLabel -->
+							<input type="text" class="input-sm" name="sequence" size="2"
+								   value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>"
+							/>
+							<input type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+								   value="<?php echo lang_get( 'update' ) ?>"
+							/>
 						</fieldset>
 					</form>
 				</td>
 				<td class="center"><?php
 					# You need global permissions to edit custom field defs
-					print_form_button( "manage_proj_custom_field_remove.php?field_id=$t_field_id&project_id=$f_project_id", lang_get( 'remove_link' ) ); ?>
+					print_form_button(
+						"manage_proj_custom_field_remove.php?field_id=$t_field_id&project_id=$f_project_id",
+						lang_get( 'remove_link' )
+					); ?>
 				</td>
 			</tr>
 <?php
@@ -653,20 +760,28 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_custom_field_add_existing' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="field_id" class="input-sm">
 				<?php
-					$t_custom_fields = custom_field_get_ids();
+					$t_cf_defs = array();
+					foreach( custom_field_get_ids() as $t_cfid ) {
+						$t_cf_defs[] = custom_field_get_definition( $t_cfid );
+					}
+					$t_custom_fields = multi_sort( $t_cf_defs, 'name' );
 
-					foreach( $t_custom_fields as $t_field_id )
+					foreach( $t_custom_fields as $t_field )
 					{
-						if( !custom_field_is_linked( $t_field_id, $f_project_id ) ) {
-							$t_desc = custom_field_get_definition( $t_field_id );
-							echo "<option value=\"$t_field_id\">" . string_attribute( lang_get_defaulted( $t_desc['name'] ) ) . '</option>' ;
+						if( !custom_field_is_linked( $t_field['id'], $f_project_id ) ) {
+							echo '<option value="', $t_field['id'], '">',
+								string_attribute( lang_get_defaulted( $t_field['name'] ) ),
+								'</option>' ;
 						}
 					}
 				?>
 			</select>
-			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_existing_custom_field' ) ?>" />
+			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'add_existing_custom_field' ) ?>"
+			/>
 		</fieldset>
 	</form>
 </div><?php
@@ -683,8 +798,9 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	<div class="space-10"></div>
 	<div class="alert alert-info">
 		<div class="center bigger-110">
-			<i class="fa fa-info-circle"></i>
 	<?php
+	print_icon( 'fa-info-circle' );
+	echo ' ';
 	if( VS_PUBLIC == project_get_field( $f_project_id, 'view_state' ) ) {
 		echo lang_get( 'public_project_msg' );
 	} else {
@@ -700,7 +816,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-users"></i>
+					<?php print_icon( 'fa-users', 'ace-icon' ); ?>
 					<?php echo lang_get( 'manage_accounts_title' ); ?>
 				</h4>
 			</div>
@@ -711,13 +827,20 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 						<fieldset>
 							<?php echo form_security_field( 'manage_proj_user_copy' ) ?>
 							<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+							<!--suppress HtmlFormInputWithoutLabel -->
 							<select name="other_project_id" class="input-sm" required>
-								<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
+								<option selected disabled value="">
+									<?php echo '[', lang_get( 'select_project_button' ), ']' ?>
+								</option>
 								<?php print_project_option_list( null, false, $f_project_id ); ?>
 							</select>
 							<span class=form-inline">
-								<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_users_from' ) ?>" />
-								<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_users_to' ) ?>" />
+								<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round"
+									   value="<?php echo lang_get( 'copy_users_from' ) ?>"
+								/>
+								<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round"
+									   value="<?php echo lang_get( 'copy_users_to' ) ?>"
+								/>
 							</span>
 						</fieldset>
 					</form>
@@ -744,15 +867,19 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 				<div id="manage-project-users-form-toolbox" class="hidden widget-toolbox padding-8 clearfix">
 					<div class="btn-toolbar">
 						<div class="widget-toolbar no-border pull-left">
+							<!--suppress HtmlFormInputWithoutLabel -->
 							<input type="text" class="search input-sm" placeholder="<?php echo lang_get( 'filter_button' ) ?>" />
 						</div>
 						<div class="widget-toolbar pull-left">
-							<label><?php echo lang_get( 'show' ) ?>
-							<input id="input-per-page" type="text" min="5" size="2" class="input-sm" value="<?php echo config_get( 'default_limit_view' ) ?>"/>
-							</label>
 							<label>
-								&nbsp;(<?php echo lang_get( 'total' ), ': ', $t_users_count, ' ', lang_get( 'users_link' ) ?>)
+								<?php echo lang_get( 'show' ) ?>
+								<input id="input-per-page" type="text" min="5" size="2" class="input-sm"
+									   value="<?php echo config_get( 'default_limit_view' ) ?>"
+								/>
 							</label>
+							<?php echo '(', lang_get( 'total' ), ': ',
+								$t_users_count, ' ', lang_get( 'users_link' ), ')'
+							?>
 						</div>
 						<div class="btn-group pull-right">
 							<ul class="pagination small no-margin"></ul>
@@ -768,14 +895,28 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 							<table class="table table-striped table-bordered table-condensed">
 								<thead>
 									<tr>
-										<th><div class="sort" role="button" data-sort="key-name"><?php echo lang_get( 'username' ) ?></div></th>
-										<th><div class="sort" role="button" data-sort="key-email"><?php echo lang_get( 'email' ) ?></div></th>
-										<th class="col-md-4"><div class="sort" role="button" data-sort="key-access"><?php echo lang_get( 'access_level' ) ?></div></th>
-										<th><?php echo lang_get( 'remove_link' ) ?></th>
+										<th>
+											<div class="sort" role="button" data-sort="key-name">
+												<?php echo lang_get( 'username' ) ?>
+											</div>
+										</th>
+										<th>
+											<div class="sort" role="button" data-sort="key-email">
+												<?php echo lang_get( 'email' ) ?>
+											</div>
+										</th>
+										<th class="col-md-4">
+											<div class="sort" role="button" data-sort="key-access">
+												<?php echo lang_get( 'access_level' ) ?>
+											</div>
+										</th>
+										<th>
+											<?php echo lang_get( 'remove_link' ) ?>
+										</th>
 									</tr>
 								</thead>
 								<tbody class="list">
-		<?php
+<?php
 		# If including global users, fetch here all local user to later distinguish them
 		$t_local_users = array();
 		if( $f_show_global_users ) {
@@ -786,8 +927,8 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 			$t_username =  $t_user['display_name'];
 			$t_can_manage_this_user = $t_can_manage_users
 					&& access_has_project_level( $t_user['access_level'], $f_project_id )
-					&& ( !$f_show_global_users || $f_show_global_users && isset( $t_local_users[$t_user['id']]) );
-		?>
+					&& ( !$f_show_global_users || isset( $t_local_users[$t_user['id']]) );
+?>
 		<tr>
 			<td class="key-name" data-sortvalue="<?php echo $t_username ?>">
 				<a href="manage_user_edit_page.php?user_id=<?php echo $t_user['id'] ?>">
@@ -808,10 +949,11 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 				if( $t_can_manage_this_user ) {
 					echo '<div class="editable_access_level">';
 					echo $t_current_level_string . '<span class="hidden unchanged">';
-					echo ' <a href="#" class="edit_link">[' . lang_get( 'edit_link' ) . ']</a>';
+					echo ' <a href="#" class="edit_link">[' . lang_get( 'edit' ) . ']</a>';
 					echo '</span>';
 					$t_arrow = layout_is_rtl() ? 'fa-long-arrow-left' : 'fa-long-arrow-right';
-					echo '<span class="changed_to"> <i class="fa fa-lg ' . $t_arrow . '"></i> ';
+					echo ' <span class="changed_to">';
+					print_icon( $t_arrow, 'fa-lg' );
 					echo '</span>';
 					echo '<select name="user_access_level[' . $t_user['id'] . ']" class="input-xs user_access_level"'
 							. ' data-original_val="' . $t_user['access_level'] . '" data-user_id="' . $t_user['id'] . '">';
@@ -832,7 +974,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 					?>
 					<div class="checkbox no-padding no-margin editable_user_delete">
 						<label>
-							<input type="checkbox" name="user_access_delete[]" value="<?php echo $t_user['id'] ?>" class="ace user_access_delete" />
+							<input type="checkbox" name="user_access_delete[]"
+								   class="ace user_access_delete"
+								   value="<?php echo $t_user['id'] ?>"
+							/>
 							<span class="lbl"></span>
 						</label>
 					</div>
@@ -850,34 +995,51 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 
 						<div class="widget-toolbox padding-8 clearfix">
 							<div class="form-inline pull-left">
-								<input type="submit" name="submit-apply" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'apply_changes' ) ?>" />
+								<input type="submit" name="submit-apply"
+									   class="btn btn-primary btn-white btn-round"
+									   value="<?php echo lang_get( 'apply_changes' ) ?>"
+								/>
 							</div>
 							<div class="form-inline pull-right">
 								<?php echo form_security_field( 'manage_proj_user_remove' ) ?>
-								<input type="submit" name="btn-remove-all" class="btn btn-primary btn-white btn-round btn-xs"
-									formaction="manage_proj_user_remove.php" value="<?php echo lang_get( 'remove_all_link' ) ?>">
+								<input type="submit" name="btn-remove-all"
+									   class="btn btn-primary btn-white btn-round btn-xs"
+									   formaction="manage_proj_user_remove.php"
+									   value="<?php echo lang_get( 'remove_all_link' ) ?>"
+								/>
 								<button name="btn-undo-remove-all" class="hidden btn btn-primary btn-white btn-round btn-xs">
-									<?php echo lang_get( 'undo' ). ': ', lang_get( 'remove_all_link' ) ?></button>
+									<?php echo lang_get( 'undo' ). ': ', lang_get( 'remove_all_link' ) ?>
+								</button>
 							</div>
 						</div>
 					</form>
 				</div>
-	<?php
+<?php
 	} // end if user count > 0
-	?>
+?>
 			</div>
 			<div class="widget-toolbox padding-8 clearfix">
-	<?php
+<?php
 	# You need global or project-specific permissions to remove users
 	#  from this project
 	if( !$f_show_global_users ) {
-		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true", lang_get( 'show_global_users' ),
-			null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
+		print_form_button(
+			"manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true",
+			lang_get( 'show_global_users' ),
+			null,
+			OFF,
+			'btn btn-sm btn-primary btn-white btn-round'
+		);
 	} else {
-		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'hide_global_users' ),
-			null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
+		print_form_button(
+			"manage_proj_edit_page.php?project_id=$f_project_id",
+			lang_get( 'hide_global_users' ),
+			null,
+			OFF,
+			'btn btn-sm btn-primary btn-white btn-round'
+		);
 	}
-	?>
+?>
 			</div>
 		</div>
 	</div>
@@ -896,7 +1058,7 @@ if( count( $t_users ) > 0 ) { ?>
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-user"></i>
+				<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				<?php echo lang_get( 'add_user_title' ); ?>
 			</h4>
 		</div>
@@ -909,24 +1071,37 @@ if( count( $t_users ) > 0 ) { ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<tr>
 				<td class="category">
-				   <span class="required">*</span> <?php echo lang_get( 'username' ) ?>
+					<label for="project-add-users-username">
+						<span class="required">*</span>
+						<?php echo lang_get( 'username' ) ?>
+					</label>
 				</td>
 				<td>
-					<select id="project-add-users-username" name="user_id[]" class="input-sm" multiple="multiple" size="10" required><?php
+					<select id="project-add-users-username" name="user_id[]"
+							class="input-sm" multiple="multiple" size="10" required>
+<?php
 						foreach( $t_users AS $t_user_id=>$t_display_name ) {
 							echo '<option value="', $t_user_id, '">', string_attribute( $t_display_name ), '</option>';
-						} ?>
+						}
+?>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'access_level' ) ?>
+					<label for="project-add-users-access-level">
+						<?php echo lang_get( 'access_level' ) ?>
+					</label>
 				</td>
 				<td>
-					<select id="project-add-users-access-level" name="access_level" class="input-sm"><?php
+					<select id="project-add-users-access-level" name="access_level" class="input-sm">
+<?php
 						# only access levels that are less than or equal current user access level for current project
-						print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ), $f_project_id ); ?>
+						print_project_access_levels_option_list(
+							config_get( 'default_new_account_access_level' ),
+							$f_project_id
+						);
+?>
 					</select>
 				</td>
 			</tr>
@@ -937,7 +1112,9 @@ if( count( $t_users ) > 0 ) { ?>
 		</div>
 			<div class="widget-toolbox padding-8 clearfix">
 				<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_user_button' ) ?>" />
+				<input type="submit" class="btn btn-primary btn-white btn-round"
+					   value="<?php echo lang_get( 'add_user_button' ) ?>"
+				/>
 			</div>
 		</div>
 	</form>

@@ -89,9 +89,10 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
  * This will be visible if the block is collapsed and javascript is enabled.
  * @param string $p_name    Collapse block name.
  * @param string $p_section Collapse block section.
+ * @param string $p_css_class CSS class to apply to the div (defaults to none).
  * @return void
  */
-function collapse_closed( $p_name, $p_section = '' ) {
+function collapse_closed( $p_name, $p_section = '', $p_css_class = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
@@ -107,33 +108,34 @@ function collapse_closed( $p_name, $p_section = '' ) {
 	$g_open_collapse_section = false;
 
 	$t_div_id = $t_block . '_closed';
-	$t_collapse_status_class = $t_display ? 'collapse-open' : 'collapse-closed';
+	$p_css_class .= $t_display ? ' collapse-open' : ' collapse-closed';
 	echo "\n" . '<div id="', $t_div_id,
-		'" class="collapse-section-closed ' . $t_collapse_status_class . '">';
+		'" class="collapse-section-closed ' . $p_css_class . '">';
 }
 
 /**
- * Marks the location where a +/- icon is placed in output
+ * Marks the location where a down/up-arrow icon is placed in output
  * for the user to toggle the collapse block status.
  * This should appear in both the open and closed phase of a block.
  * @param string $p_name    Collapse block name.
- * @param string $p_section Collapse block section.
  * @return void
  */
-function collapse_icon( $p_name, $p_section = '' ) {
+function collapse_icon( $p_name ) {
 	global $g_open_collapse_section;
 
 	if( $g_open_collapse_section === true ) {
-		$t_icon = 'fa-minus-square-o';
+		$t_icon = 'fa-chevron-up';
 		$t_alt = '-';
 		$t_id = $p_name . '_open_link';
 	} else {
-		$t_icon = 'fa-plus-square-o';
+		$t_icon = 'fa-chevron-down';
 		$t_alt = '+';
 		$t_id = $p_name. '_closed_link';
 	}
 
-	echo '<a id="', $t_id, '" class="collapse-link noprint"><i class="fa ', $t_icon, '" title="', $t_alt, '"></i></a>';
+	echo '&nbsp;&nbsp;<a id="', $t_id, '" class="collapse-link noprint">';
+	print_icon( $t_icon, 'bigger-120', $t_alt);
+	echo '</a>';
 }
 
 /**

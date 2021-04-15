@@ -121,7 +121,7 @@ function check_pgsql_bool_columns() {
 		'project'         => array( 'enabled' ),
 		'project_version' => array( 'released' ),
 		'sponsorship'     => array( 'paid' ),
-		'user_pref'       => array( 'advanced_report', 'advanced_view', 'advanced_update', 'redirect_delay', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority' ),
+		'user_pref'       => array( 'advanced_report', 'advanced_view', 'advanced_update', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority' ),
 		'user'            => array( 'enabled', 'protected' ),
 	);
 
@@ -130,7 +130,7 @@ function check_pgsql_bool_columns() {
 	foreach( $t_bool_columns as $t_table_name => $t_columns ) {
 		$t_table = db_get_table( $t_table_name );
 		$t_where .= 'table_name = \'' . $t_table . '\' AND column_name IN ( \''
-			. implode( $t_columns, '\', \'' )
+			. implode( "', '", $t_columns )
 			. '\' ) OR ';
 	}
 	$t_sql = 'SELECT table_name, column_name, data_type, column_default, is_nullable
@@ -149,6 +149,45 @@ function check_pgsql_bool_columns() {
 
 	# Some columns are not BOOLEAN type, return the list
 	return $t_result->GetArray();
+}
+
+/**
+ * Get pgsql column's data type
+ *
+ * @param string $p_table  Table name
+ * @param string $p_column Column name
+ *
+ * @return string column data_type
+ *
+ * @throws Exception
+ */
+function pgsql_get_column_type( $p_table, $p_column ) {
+	global $f_database_name;
+	/** @var ADOConnection $g_db */
+	global $g_db;
+
+	# Generate SQL to check columns against schema
+	$t_sql = 'SELECT data_type
+		FROM information_schema.columns
+		WHERE table_catalog = $1 
+		AND table_name = $2
+		AND column_name = $3';
+	$t_param = array(
+		$f_database_name,
+		db_get_table( $p_table ),
+		$p_column,
+	);
+
+	/** @var ADORecordSet $t_result */
+	$t_result = @$g_db->execute( $t_sql, $t_param );
+	if( $t_result === false ) {
+		throw new Exception( 'Unable to check information_schema' );
+	} else if( $t_result->recordCount() == 0 ) {
+		throw new Exception( "Column '$p_column' not found in table '$p_table'" );
+	}
+
+	$t_rows = $t_result->getAll();
+	return reset( $t_rows[0] );
 }
 
 /**
@@ -370,10 +409,11 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|';
 		$t_update_query = 'UPDATE {custom_field_string}
-			SET value = \'' . $c_value . '\'
-			WHERE field_id = ' . $c_field_id . '
-				AND bug_id = ' . $c_bug_id;
-		db_query( $t_update_query );
+			SET value = ' . db_param() . '
+			WHERE field_id = ' . db_param() . '
+				AND bug_id = ' . db_param();
+		$t_param = array( $c_value, $c_field_id, $c_bug_id );
+		db_query( $t_update_query, $t_param );
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
@@ -390,10 +430,11 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = rtrim( ltrim( $t_row['value'], '|' ), '|' );
 		$t_update_query = 'UPDATE {custom_field_string}
-			SET value = \'' . $c_value . '\'
-			WHERE field_id = ' . $c_field_id . '
-				AND bug_id = ' . $c_bug_id;
-		db_query( $t_update_query );
+			SET value = ' . db_param() . '
+			WHERE field_id = ' . db_param() . '
+		 ]		AND bug_id = ' . db_param();
+		$t_param = array( $c_value, $c_field_id, $c_bug_id );
+		db_query( $t_update_query, $t_param );
 	}
 
 	# Re-enable query logging if we disabled it

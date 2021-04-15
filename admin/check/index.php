@@ -183,6 +183,16 @@ if( !$g_failed_test ) {
 	define( 'CHECK_DISPLAY_INC_ALLOW', true );
 	include( 'check_display_inc.php' );
 }
+
+if( !$g_failed_test ) {
+	define( 'CHECK_CUSTOMFIELDS_INC_ALLOW', true );
+	include( 'check_customfields_inc.php' );
+}
+
+if( !$g_failed_test ) {
+	define( 'CHECK_PLUGINS_INC_ALLOW', true );
+	include( 'check_plugins_inc.php' );
+}
 ?>
 </table>
 </div>
@@ -194,7 +204,7 @@ if( !$g_failed_test ) {
 
 <?php if( $g_failed_test ) { ?>
 	<div class="alert alert-danger" id="check-notice-failed">
-		Some tests failed. Please review and correct these failed tests before using MantisBT.
+		Some tests failed. Please review, correct them and run the checks again before using MantisBT.
 	</div>
 <?php } else if( $g_passed_test_with_warnings ) { ?>
 	<div class="alert alert-warning" id="check-notice-warnings">

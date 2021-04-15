@@ -38,6 +38,17 @@ require_api( 'plugin_api.php' );
 $g_event_cache = array();
 
 /**
+ * Determine if a given event has been declared
+ * @param string $p_name Event name
+ * @return bool True if the even has been declared
+ */
+function event_is_declared( $p_name ) {
+	global $g_event_cache;
+
+	return isset( $g_event_cache[$p_name] );
+}
+
+/**
  * Declare an event of a given type.
  * Will do nothing if event already exists.
  * @param string  $p_name Event name.
@@ -48,7 +59,7 @@ $g_event_cache = array();
 function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
 	global $g_event_cache;
 
-	if( !isset( $g_event_cache[$p_name] ) ) {
+	if( !event_is_declared( $p_name ) ) {
 		$g_event_cache[$p_name] = array(
 			'type' => $p_type,
 			'callbacks' => array(),
@@ -57,7 +68,7 @@ function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
 }
 
 /**
- * Convenience function for declare multiple events.
+ * Convenience function to declare multiple events.
  * @param array $p_events Events.
  * @access public
  * @return void
@@ -75,15 +86,15 @@ function event_declare_many( array $p_events ) {
  * @param string         $p_callback Callback function.
  * @param integer|string $p_plugin   Plugin basename.
  * @access public
- * @return null
+ * @return void
  */
 function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	global $g_event_cache;
 
-	if( !isset( $g_event_cache[$p_name] ) ) {
+	if( !event_is_declared( $p_name ) ) {
 		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
-		return null;
+		return;
 	}
 
 	$g_event_cache[$p_name]['callbacks'][$p_plugin][] = $p_callback;
@@ -135,7 +146,7 @@ function event_clear_callbacks() {
 function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_type = null ) {
 	global $g_event_cache;
 
-	if( !isset( $g_event_cache[$p_name] ) ) {
+	if( !event_is_declared( $p_name ) ) {
 		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
 		return null;

@@ -40,37 +40,37 @@
  *
  * @author Fryed-peach
  * @author Gulpin
+ * @author Mfuji
  * @author Omotecho
  * @author Otokoume
  * @author Ryoon
  * @author Shirayuki
  */
 
-$s_plugin_graph_title = 'Mantis グラフ';
-$s_plugin_graph_description = '公式のグラフ プラグイン。';
 $s_plugin_MantisGraph_title = 'Mantis グラフ';
+$s_plugin_MantisGraph_description = '公式のグラフ プラグイン。';
 $s_plugin_MantisGraph_config = '設定';
-$s_plugin_MantisGraph_synthesis_link = '合成';
-$s_plugin_MantisGraph_status_link = 'ステータスによる';
+$s_plugin_MantisGraph_tab_label = 'グラフ';
+$s_plugin_MantisGraph_status_link = 'ステータス別';
 $s_plugin_MantisGraph_priority_link = '優先度による';
-$s_plugin_MantisGraph_severity_link = '重要度による';
+$s_plugin_MantisGraph_severity_link = '深刻度別';
 $s_plugin_MantisGraph_category_link = 'カテゴリによる';
-$s_plugin_MantisGraph_resolution_link = '解決状況による';
+$s_plugin_MantisGraph_resolution_link = '解決状況別';
 $s_plugin_MantisGraph_issue_trends_link = '課題のトレンド';
-$s_plugin_MantisGraph_graph_imp_status_title = 'ステータスによるグラフ';
+$s_plugin_MantisGraph_graph_imp_status_title = 'ステータス別のグラフ';
 $s_plugin_MantisGraph_graph_imp_priority_title = '優先度によるグラフ';
-$s_plugin_MantisGraph_graph_imp_severity_title = '重要度によるグラフ';
+$s_plugin_MantisGraph_graph_imp_severity_title = '深刻度別のグラフ';
 $s_plugin_MantisGraph_graph_imp_category_title = 'カテゴリによるグラフ';
-$s_plugin_MantisGraph_graph_imp_resolution_title = '解決状況によるグラフ';
+$s_plugin_MantisGraph_graph_imp_resolution_title = '解決状況別のグラフ';
 $s_plugin_MantisGraph_graph_developer_title = '開発者によるグラフ';
-$s_plugin_MantisGraph_graph_reporter_title = '報告者によるグラフ';
+$s_plugin_MantisGraph_graph_reporter_title = '報告者別のグラフ';
 $s_plugin_MantisGraph_graph_issues_trend_title = '未処理、解決済み、処理中の課題';
 $s_plugin_MantisGraph_by_status_pct = 'ステータスの割合';
 $s_plugin_MantisGraph_by_priority_pct = '優先度の割合';
-$s_plugin_MantisGraph_by_severity_pct = '重要度の割合';
+$s_plugin_MantisGraph_by_severity_pct = '深刻度の割合';
 $s_plugin_MantisGraph_by_category_pct = 'カテゴリの割合';
 $s_plugin_MantisGraph_by_resolution_pct = '解決状況の割合';
-$s_plugin_MantisGraph_by_severity_mix = '重要度とステータス';
+$s_plugin_MantisGraph_by_severity_mix = '深刻度とステータス';
 $s_plugin_MantisGraph_by_priority_mix = '優先度とステータス';
 $s_plugin_MantisGraph_by_resolution_mix = '解決状況とステータス';
 $s_plugin_MantisGraph_legend_still_open = '未解決';
@@ -91,3 +91,4 @@ $s_plugin_MantisGraph_graph_page = '課題履歴グラフ';
 $s_plugin_MantisGraph_graph_topdev = 'トップ開発者(解決済み課題順)';
 $s_plugin_MantisGraph_graph_opendev = '開発者(課題登録順)';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'トップ報告者(解決済み課題順)';
+$s_plugin_MantisGraph_other_categories = '他のカテゴリ (%d件)';

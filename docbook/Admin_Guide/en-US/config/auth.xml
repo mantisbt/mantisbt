@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
- <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+ <!ENTITY % BOOK_ENTITIES SYSTEM "../Admin_Guide.ent">
 ]>
 <section id="admin.config.auth">
 	<title>Authentication</title>
@@ -74,8 +74,10 @@
 	<section id="admin.config.auth.ldap">
 		<title>LDAP authentication method parameters</title>
 
-		<para>The parameters below are only used if $g_login_method (see
-		above) is set to LDAP.</para>
+		<para>The parameters below are only used if $g_login_method
+			(see <xref linkend="admin.config.auth.global" /> above)
+			is set to <literal>LDAP</literal>.
+		</para>
 
 		<variablelist>
 			<varlistentry>
@@ -86,33 +88,98 @@
 					</para>
 
 					<para>This must be a full LDAP URI
-						(<filename>ldap[s]://hostname:port</filename>)
+						(<literal>protocol://hostname:port</literal>)
 					</para>
 
 					<itemizedlist>
 						<listitem>
-							<para>Protocol can be either
-								<filename>ldap</filename> or
-								<filename>ldaps</filename> (for SSL encryption).
-								If omitted, then an unencrypted connection will be established on port 389.
+							<para><emphasis>Protocol</emphasis> must be either:
+								<itemizedlist>
+									<listitem>
+										<para><literal>ldap</literal> -
+											unencrypted or opportunistic TLS
+											(<ulink url="https://en.wikipedia.org/wiki/StartTLS">STARTTLS</ulink>)
+										</para>
+									</listitem>
+									<listitem>
+										<para><literal>ldaps</literal> -
+											TLS encryption
+										</para>
+									</listitem>
+								</itemizedlist>
 							</para>
 						</listitem>
 						<listitem>
-							<para>Port number is optional, and defaults to <emphasis>389</emphasis>.
-								If this doesn't work, try using one of the following
-								standard port numbers: 636 (ldaps);
-								for Active Directory Global Catalog forest-wide search,
-								use 3268 (ldap) or 3269 (ldaps).
+							<para><emphasis>Port</emphasis> number is optional,
+								and defaults to <literal>389</literal>.
+							</para>
+							<para>If this doesn't work, try using one of the
+								following standard port numbers:
+								<literal>636</literal> (ldaps);
+								for Active Directory Global Catalog
+								forest-wide search, use
+								<literal>3268</literal> (ldap) or
+								<literal>3269</literal> (ldaps).
 							</para>
 						</listitem>
 					</itemizedlist>
 
 					<para>Examples of valid URI:</para>
 					<programlisting>
-ldap.example.com
 ldap://ldap.example.com/
 ldaps://ldap.example.com:3269/
 </programlisting>
+					<note>
+						<para>Multiple servers can be specified as a
+							space-separated list.
+						</para>
+					</note>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_use_starttls</term>
+
+				<listitem>
+					<para>Determines whether the connection will attempt an
+						opportunistic upgrade to a TLS connection (STARTTLS).
+					</para>
+					<para>Defaults to <literal>ON</literal>.</para>
+					<warning>
+						<para>For security, a failure aborts the entire connection,
+							so make sure your server supports StartTLS if this
+							setting is ON, and use the <literal>ldap://</literal>
+							scheme (not <literal>ldaps://</literal>).
+						</para>
+					</warning>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_tls_protocol_min</term>
+
+				<listitem>
+					<para>An integer indicating the minimum version of the
+						TLS protocol to allow. This maps to the
+						<ulink url="https://www.php.net/manual/en/ldap.constants.php">
+							LDAP_OPT_X_TLS_PROTOCOL_MIN</ulink>
+						LDAP library option.
+					</para>
+					<para>For example,
+						<literal>LDAP_OPT_X_TLS_PROTOCOL_TLS1_2</literal>.
+					</para>
+
+					<para>Defaults to <literal>OFF</literal>
+						(protocol version not set).
+					</para>
+
+					<note>
+						<para>Requires PHP 7.1 or later.</para>
+					</note>
+					<warning>
+						<para>For security, a failure aborts the entire connection.
+						</para>
+					</warning>
 				</listitem>
 			</varlistentry>
 
@@ -121,7 +188,9 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>The root distinguished name for LDAP searches.
-					For example, &quot;dc=example, dc=com&quot;.</para>
+						For example,
+						<literal>dc=example, dc=com</literal>.
+					</para>
 				</listitem>
 			</varlistentry>
 
@@ -129,9 +198,11 @@ ldaps://ldap.example.com:3269/
 				<term>$g_ldap_organization</term>
 
 				<listitem>
-					<para>LDAP search filter for the organization, for
-					example, &quot;(organizationname=*Traffic)&quot;. Defaults to
-					<emphasis>''</emphasis>.</para>
+					<para>LDAP search filter for the organization.
+						For example,
+						<literal>(organizationname=*Traffic)</literal>.
+						Defaults to <literal>''</literal> (empty string).
+					</para>
 				</listitem>
 			</varlistentry>
 
@@ -139,12 +210,22 @@ ldaps://ldap.example.com:3269/
 				<term>$g_ldap_protocol_version</term>
 
 				<listitem>
-					<para>The LDAP Protocol Version. If 0, then the
-					protocol version is not set. Defaults to
-					<emphasis>0</emphasis>.</para>
-
-					<para>For Active Directory use protocol version
-					3.</para>
+					<para>The LDAP Protocol Version to use (2, 3 or 0).
+						This maps to the LDAP_OPT_PROTOCOL_VERSION ldap
+						library option.
+					</para>
+					<para>Defaults to <literal>3</literal>.
+					</para>
+					<note>
+						<para>If <literal>0</literal>, then the protocol version
+							is not set, and you get whatever default the
+							underlying LDAP library uses.
+						</para>
+						<para>In almost all cases you should use <literal>3</literal>.
+							LDAPv3 was introduced back in 1997, and
+							LDAPv2 was deprecated in 2003 by RFC3494.
+						</para>
+					</note>
 				</listitem>
 			</varlistentry>
 
@@ -153,13 +234,16 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>Duration of the timeout for TCP connection to the
-					LDAP server (in seconds). Defaults to
-					<emphasis>0</emphasis> (infinite).</para>
+						LDAP server (in seconds).
+						This maps to LDAP_OPT_NETWORK_TIMEOUT ldap library option.
+						Defaults to <literal>0</literal> (infinite).
+					</para>
 
 					<para>Set this to a low value when the hostname defined
-					in $g_ldap_server resolves to multiple IP addresses,
-					allowing rapid failover to the next available LDAP
-					server.</para>
+						in $g_ldap_server resolves to multiple IP addresses,
+						allowing rapid failover to the next available LDAP
+						server.
+					</para>
 				</listitem>
 			</varlistentry>
 
@@ -168,13 +252,18 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>Determines whether the LDAP library
-					automatically follows referrals returned by LDAP
-					servers or not. This maps to LDAP_OPT_REFERRALS ldap
-					library option. Defaults to
-					<emphasis>ON</emphasis>.</para>
+						automatically follows referrals returned by LDAP
+						servers or not. This maps to LDAP_OPT_REFERRALS ldap
+						library option. Defaults to
+						<literal>ON</literal>.
+					</para>
 
 					<para>For Active Directory, this should be set to
-					OFF.</para>
+						<literal>OFF</literal>.
+						If you have only one LDAP server, setting to
+						this to OFF is advisable to prevent any
+						man-in-the-middle attacks.
+					</para>
 				</listitem>
 			</varlistentry>
 
@@ -183,8 +272,11 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>The distinguished name of the service account to
-					use for binding to the LDAP server. For example,
-					'CN=ldap,OU=Administrators,DC=example,DC=com'.</para>
+						use for binding to the LDAP server.
+						For example,
+						<literal>cn=ldap,ou=Administrators,dc=example,dc=com</literal>.
+						Leave empty for anonymous binding.
+					</para>
 				</listitem>
 			</varlistentry>
 
@@ -193,7 +285,8 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>The password for the service account used to
-					establish the connection to the LDAP server.</para>
+					establish the connection to the LDAP server.
+					For anonymous binding, leave empty.</para>
 				</listitem>
 			</varlistentry>
 
@@ -202,10 +295,11 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>The LDAP field for username. Defaults to
-					<emphasis>uid</emphasis>.</para>
+					<literal>uid</literal>.</para>
 
 					<para>For Active Directory, set to
-					<emphasis>sAMAccountName</emphasis>.</para>
+						<literal>sAMAccountName</literal>.
+					</para>
 				</listitem>
 			</varlistentry>
 
@@ -213,9 +307,10 @@ ldaps://ldap.example.com:3269/
 				<term>$g_ldap_realname_field</term>
 
 				<listitem>
-					<para>The LDAP field for the user's real name (i.e.
-					common name). Defaults to
-					<emphasis>cn</emphasis>.</para>
+					<para>The LDAP field for the user's real name
+						(i.e. common name).
+						Defaults to <literal>cn</literal>.
+					</para>
 				</listitem>
 			</varlistentry>
 
@@ -224,11 +319,15 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>Use the realname specified in LDAP (ON) rather
-					than the one stored in the database (OFF). Defaults to
-					<emphasis>OFF</emphasis>.</para>
+						than the one stored in the database (OFF).
+						Defaults to <literal>OFF</literal>.
+					</para>
 
-					<para>Note that MantisBT will update the database with
-					the data retrieved from LDAP when ON.</para>
+					<note>
+						<para>MantisBT will update the database with
+							the data retrieved from LDAP when ON.
+						</para>
+					</note>
 				</listitem>
 			</varlistentry>
 
@@ -237,11 +336,15 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>Use the email address specified in LDAP (ON)
-					rather than the one stored in the database (OFF).
-					Defaults to <emphasis>OFF</emphasis>.</para>
+						rather than the one stored in the database (OFF).
+						Defaults to <literal>OFF</literal>.
+					</para>
 
-					<para>Note that MantisBT will update the database with
-					the data retrieved from LDAP when ON.</para>
+					<note>
+						<para>MantisBT will update the database with
+							the data retrieved from LDAP when ON.
+						</para>
+					</note>
 				</listitem>
 			</varlistentry>
 
@@ -256,6 +359,9 @@ ldaps://ldap.example.com:3269/
 					<para>The LDAP simulation file format is as follows:</para>
 
 					<itemizedlist>
+						<listitem>
+							<para>No headers</para>
+						</listitem>
 						<listitem>
 							<para>One line per user</para>
 						</listitem>
@@ -283,22 +389,9 @@ ldaps://ldap.example.com:3269/
 
 					<warning>
 						<para>On production systems, this option should be set
-							to '' (This is the default).
+							to <literal>''</literal> (This is the default).
 						</para>
 					</warning>
-				</listitem>
-			</varlistentry>
-
-			<varlistentry>
-				<term>$g_ldap_port</term>
-
-				<listitem>
-					<para><emphasis>Deprecated since MantisBT release
-					1.2.0a1.</emphasis></para>
-
-					<para>The LDAP server port number should be defined as
-					part of the URI in $g_ldap_server instead (see
-					above).</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>

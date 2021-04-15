@@ -171,7 +171,8 @@ function lang_map_auto() {
 }
 
 /**
- * Ensures that a language file has been loaded
+ * Ensures that a language file has been loaded.
+ * Also load the currently active plugin's strings, if there is one.
  * @param string $p_lang The language name.
  * @return void
  */
@@ -180,6 +181,12 @@ function lang_ensure_loaded( $p_lang ) {
 
 	if( !isset( $g_lang_strings[$p_lang] ) ) {
 		lang_load( $p_lang );
+	}
+
+	# Load current plugin's strings
+	$t_plugin_current = plugin_get_current();
+	if( $t_plugin_current !== null ) {
+		lang_load( $p_lang, config_get_global( 'plugin_path' ) . $t_plugin_current . '/lang/' );
 	}
 }
 
@@ -292,24 +299,13 @@ function lang_get( $p_string, $p_lang = null ) {
 
 	if( lang_exists( $p_string, $t_lang ) ) {
 		return $g_lang_strings[$t_lang][$p_string];
+	} elseif( $t_lang != 'english' ) {
+		# If the string was not found in the foreign language, then retry with English.
+		return lang_get( $p_string, 'english' );
 	} else {
-		$t_plugin_current = plugin_get_current();
-		if( !is_null( $t_plugin_current ) ) {
-			lang_load( $t_lang, config_get_global( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
-			if( lang_exists( $p_string, $t_lang ) ) {
-				return $g_lang_strings[$t_lang][$p_string];
-			}
-		}
-
-		if( $t_lang == 'english' ) {
-			error_parameters( $p_string );
-			trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
-			return '';
-		} else {
-
-			# if string is not found in a language other than english, then retry using the english language.
-			return lang_get( $p_string, 'english' );
-		}
+		error_parameters( $p_string );
+		trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
+		return $p_string;
 	}
 }
 
@@ -347,12 +343,13 @@ function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 
 	if( lang_exists( $p_string, $t_lang ) ) {
 		return lang_get( $p_string );
+	} elseif( $t_lang != 'english' ) {
+		# If the string was not found in the foreign language, then retry with English.
+		return lang_get_defaulted( $p_string, $p_default, 'english' );
 	} else {
-		if( null === $p_default ) {
-			return $p_string;
-		} else {
-			return $p_default;
-		}
+		# English string was not found either, return the default,
+		# or the original string if no default was provided
+		return $p_default !== null ? $p_default : $p_string;
 	}
 }
 

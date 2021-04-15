@@ -104,7 +104,7 @@
 
 				<listitem>
 					<para>Disk</para>
-					<para>The application code is less than 30 MB.
+					<para>The application code is less than 50 MiB.
 					</para>
 					<para>The amount of disk space required for the database
 						will vary depending on the RDBMS and the volume of
@@ -137,7 +137,7 @@
 					<para>Web Server</para>
 					<para>MantisBT is mainly tested with
 						<ulink url="https://docs.microsoft.com/en-us/iis">Microsoft IIS</ulink> and
-						<ulink url="http://www.apache.org/">Apache</ulink>.
+						<ulink url="https://www.apache.org/">Apache</ulink>.
 						However, it is expected to work with any recent web
 						server software.
 					</para>
@@ -148,12 +148,12 @@
 						administrator to add support for .PHP files. This should
 						be a trivial modification. Further details can be found
 						in the
-						<ulink url="http://www.php.net/manual/en/install.php">PHP documentation</ulink>
+						<ulink url="https://www.php.net/manual/en/install.php">PHP documentation</ulink>
 					</para>
 				</listitem>
 
 				<listitem>
-					<para><ulink url="http://www.php.net/">PHP</ulink></para>
+					<para><ulink url="https://www.php.net/">PHP</ulink></para>
 					<para>The web server must support PHP.  It can be installed
 						as CGI or any other integration technology.
 					</para>
@@ -181,6 +181,9 @@
 								<listitem><para><emphasis>mbstring</emphasis> -
 									Required for Unicode (UTF-8) support.
 								</para></listitem>
+								<listitem><para><emphasis>date, hash, json, pcre, Reflection, session</emphasis> -
+									Required to run MantisBT in general.
+								</para></listitem>
 							</itemizedlist></listitem>
 						</varlistentry>
 
@@ -194,6 +197,7 @@
 								<listitem><para><emphasis>GD</emphasis> -
 									required for the captcha feature
 								</para></listitem>
+
 								<listitem>
 									<para><emphasis>Fileinfo</emphasis> -
 										Required for file attachments and most of the plugins
@@ -203,7 +207,14 @@
 										as MantisBT won't be able to send
 										the Content-Type header to a browser
 										requesting an attachment.
-									</para></listitem>
+									</para>
+								</listitem>
+
+								<listitem><para><emphasis>LDAP</emphasis> -
+									required for LDAP or Active Directory authentication
+									(see <xref linkend="admin.auth.ldap" />).
+								</para></listitem>
+
 							</itemizedlist></listitem>
 						</varlistentry>
 
@@ -270,13 +281,13 @@
 								<entry morerows='4' valign='middle'>RDBMS</entry>
 								<entry>MySQL</entry>
 								<entry>5.5.35</entry>
-								<entry>5.6 or above</entry>
+								<entry>5.6 or later</entry>
 								<entry>PHP extension: mysqli</entry>
 							</row>
 							<row>
 								<entry>MariaDB</entry>
 								<entry>5.5.35</entry>
-								<entry>10.x or above</entry>
+								<entry>10.x or later</entry>
 								<entry>PHP extension: mysqli</entry>
 							</row>
 							<row>
@@ -302,7 +313,7 @@
 								<entry>PHP</entry>
 								<entry>PHP</entry>
 								<entry>5.5.x</entry>
-								<entry>7.0 or later</entry>
+								<entry>7.2 or later</entry>
 								<entry>See above for PHP extensions</entry>
 							</row>
 
@@ -322,7 +333,7 @@
 							<row>
 								<entry>nginx</entry>
 								<entry>1.10.x</entry>
-								<entry>1.10.x</entry>
+								<entry>1.16.x or later</entry>
 								<entry></entry>
 							</row>
 							<row>
@@ -412,7 +423,7 @@ gunzip <emphasis>filename.tar.gz</emphasis>
 tar -xf <emphasis>filename.tar</emphasis>
 </programlisting>
 					Other file archiving tools such as
-					<ulink url="http://www.7-zip.org/">7-Zip</ulink>
+					<ulink url="https://www.7-zip.org/">7-Zip</ulink>
 					should also be able to handle decompression of the archive.
 				</para>
 				<para>The extraction process should create a new directory like
@@ -668,7 +679,7 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 				repeat this several times, until normal completion.
 			</para>
 			<para>Reference: MantisBT issue
-				<ulink url="http://www.mantisbt.org/bugs/view.php?id=12735">12735</ulink>.
+				<ulink url="https://mantisbt.org/bugs/view.php?id=12735">12735</ulink>.
 			</para>
 		</note>
 	</section>
@@ -759,9 +770,9 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 				<warning>
 					<para>Omitting this important step will leave your MantisBT
 						instance exposed to several potentially severe attacks, e.g.
-						<ulink url="http://mantisbt.org/bugs/view.php?id=23173">
+						<ulink url="https://mantisbt.org/bugs/view.php?id=23173">
 							issue #23173</ulink> (if
-						<ulink url="http://php.net/manual/en/mysqli.configuration.php#ini.mysqli.allow-local-infile">
+						<ulink url="https://www.php.net/manual/en/mysqli.configuration.php#ini.mysqli.allow-local-infile">
 							mysqli.allow_local_infile</ulink>
 						is enabled in php.ini).
 					</para>

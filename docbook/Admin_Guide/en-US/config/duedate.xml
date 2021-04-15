@@ -13,6 +13,7 @@
 				</para>
 			</listitem>
 		</varlistentry>
+
 		<varlistentry>
 			<term>$g_due_date_view_threshold</term>
 			<listitem>
@@ -20,13 +21,46 @@
 				</para>
 			</listitem>
 		</varlistentry>
+
 		<varlistentry>
 			<term>$g_due_date_default</term>
 			<listitem>
 				<para>Default due date value for newly submitted issues:
  					Empty string for no due date set.
- 					Related date that is accepted by <ulink url="http://php.net/manual/en/function.strtotime.php">strtotime()</ulink>, 
+ 					Related date that is accepted by <ulink url="https://www.php.net/manual/en/function.strtotime.php">strtotime()</ulink>, 
  					e.g. 'today' or '+2 days'. Default is ''.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_due_date_warning_levels</term>
+			<listitem>
+				<para>Due date warning levels. A variable number of Levels
+					(defined as a number of seconds going backwards
+					from the current timestamp, compared to an issue's due date) can be defined.
+					Levels must be defined in ascending order.
+					<itemizedlist>
+						<listitem>
+							<para>The first entry (array key 0) defines <emphasis>Overdue</emphasis>.
+								Normally and by default, its value is <literal>0</literal>, meaning
+								that issues will be marked overdue as soon as
+								their due date has passed. However, it is also possible to set it to a
+								higher value to flag overdue issues earlier, or even use a negative value
+								to allow a "grace period" after due date.
+							</para>
+						</listitem>
+						<listitem>
+							<para>Array keys 1 and 2 offer two levels of <emphasis>Due soon</emphasis>:
+								orange and green.
+								By default, only the first one is set, to 7 days.
+							</para>
+						</listitem>
+					</itemizedlist>
+					Out of the box, MantisBT allows for 3 warning levels. Additional ones may
+					be defined, but in that case new <literal>due-N</literal> CSS rules
+					(where N is the array's index) must be created otherwise the extra levels
+					will not be highlighted in the UI.
 				</para>
 			</listitem>
 		</varlistentry>

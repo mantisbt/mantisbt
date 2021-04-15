@@ -78,7 +78,7 @@ layout_login_page_begin();
 	<div class="widget-body">
 	<div class="widget-main">
 		<h4 class="header lighter bigger">
-			<i class="ace-icon fa fa-key"></i>
+			<?php print_icon( 'fa-key', 'ace-icon' ); ?>
 			<?php echo lang_get( 'lost_password_title' ) ?>
 		</h4>
 		<div class="space-10"></div>
@@ -95,7 +95,7 @@ layout_login_page_begin();
 						placeholder="<?php echo lang_get( 'username' ) ?>"
                         value="<?php echo string_html_specialchars( $t_username ) ?>"
                         size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control <?php echo $t_username_field_autofocus ?>">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				</span>
 				</label>
 				<label for="email-field" class="block clearfix">
@@ -103,13 +103,13 @@ layout_login_page_begin();
 					<input id="email-field" name="email" type="text"
 						   placeholder="<?php echo lang_get( 'email' ) ?>"
 						   size="32" maxlength="64" class="form-control <?php echo $t_email_field_autofocus; ?>">
-					<i class="ace-icon fa fa-envelope"></i>
+					<?php print_icon( 'fa-envelope', 'ace-icon' ); ?>
 				</span>
 				</label>
 				<div class="space-10"></div>
 				<?php echo lang_get( 'lost_password_info' ); ?>
 				<div class="space-10"></div>
-				<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110"  value="<?php echo lang_get( 'submit_button' ) ?>" />
+				<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110"  value="<?php echo lang_get( 'submit' ) ?>" />
 			<?php
 			} else {
 				echo '<div class="space-10"></div>';
@@ -121,7 +121,7 @@ layout_login_page_begin();
 	</form>
 	</div>
 		<div class="toolbar center">
-			<a class="back-to-login-link pull-left" href="<?php echo AUTH_PAGE_USERNAME ?>"><?php echo lang_get( 'login_link' ); ?></a>
+			<a class="back-to-login-link pull-left" href="<?php echo AUTH_PAGE_USERNAME ?>"><?php echo lang_get( 'login' ); ?></a>
 			<?php if( auth_signup_enabled() ) { ?>
 			<a class="back-to-login-link pull-right" href="signup_page.php"><?php echo lang_get( 'signup_link' ); ?></a>
 			<?php } ?>

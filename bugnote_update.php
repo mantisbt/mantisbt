@@ -74,7 +74,7 @@ if( bug_is_readonly( $t_bug_id ) ) {
 	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
-$f_bugnote_text = trim( $f_bugnote_text ) . "\n\n";
+$f_bugnote_text = trim( $f_bugnote_text ) . "\n";
 
 bugnote_set_text( $f_bugnote_id, $f_bugnote_text );
 bugnote_set_time_tracking( $f_bugnote_id, $f_time_tracking );
@@ -84,4 +84,4 @@ event_signal( 'EVENT_BUGNOTE_EDIT', array( $t_bug_id, $f_bugnote_id ) );
 
 form_security_purge( 'bugnote_update' );
 
-print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
+print_successful_redirect( string_get_bugnote_view_url( $t_bug_id, $f_bugnote_id ) );

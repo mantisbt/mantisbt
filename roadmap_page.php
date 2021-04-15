@@ -96,12 +96,12 @@ function print_version_header( array $p_version_row ) {
 	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
 	echo '<div class="widget-header widget-header-small">';
 	echo '<h4 class="widget-title lighter">';
-	echo '<i class="ace-icon fa fa-road"></i>';
+	print_icon( 'fa-road', 'ace-icon' );
 	echo $t_release_title, lang_get( 'word_separator' );
 	echo '</h4>';
 	echo '<div class="widget-toolbar">';
 	echo '<a data-action="collapse" href="#">';
-	echo '<i class="1 ace-icon fa ' . $t_block_icon . ' bigger-125"></i>';
+	print_icon( $t_block_icon, '1 ace-icon bigger-125' );
 	echo '</a>';
 	echo '</div>';
 	echo '</div>';
@@ -109,7 +109,9 @@ function print_version_header( array $p_version_row ) {
 	echo '<div class="widget-body">';
 	echo '<div class="widget-toolbox padding-8 clearfix">';
 	if( $t_scheduled_release_date ) {
-		echo '<div class="pull-left"><i class="fa fa-calendar-o fa-lg"> </i> ' . $t_scheduled_release_date . '</div>';
+		echo '<div class="pull-left">';
+		print_icon( 'fa-calendar-o', 'fa-lg' );
+		echo ' ' . $t_scheduled_release_date . '</div>';
 	}
 	echo '<div class="btn-toolbar pull-right">';
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
@@ -245,11 +247,6 @@ category_cache_array_rows_by_project( $t_project_ids );
 
 foreach( $t_project_ids as $t_project_id ) {
 	$t_project_name = project_get_field( $t_project_id, 'name' );
-	$t_can_view_private = access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id );
-
-	$t_limit_reporters = config_get( 'limit_reporters' );
-	$t_user_access_level_is_reporter = ( config_get( 'report_bug_threshold', null, null, $t_project_id ) == access_get_project_level( $t_project_id ) );
-
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
 	$t_version_rows = array_reverse( version_get_all_rows( $t_project_id ) );
@@ -258,6 +255,8 @@ foreach( $t_project_ids as $t_project_id ) {
 	category_get_all_rows( $t_project_id );
 
 	$t_project_header_printed = false;
+
+	$t_view_bug_threshold = config_get( 'view_bug_threshold', null, $t_user_id, $t_project_id );
 
 	foreach( $t_version_rows as $t_version_row ) {
 		if( $t_version_row['released'] == 1 ) {
@@ -293,17 +292,10 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_issue_handlers = array();
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
-			# hide private bugs if user doesn't have access to view them.
-			if( !$t_can_view_private && ( $t_row['view_state'] == VS_PRIVATE ) ) {
-				continue;
-			}
-
 			bug_cache_database_result( $t_row );
 
-			# check limit_Reporter (Issue #4770)
-			# reporters can view just issues they reported
-			if( ON === $t_limit_reporters && $t_user_access_level_is_reporter &&
-				 !bug_is_user_reporter( $t_row['id'], $t_user_id )) {
+			# verify the user can view this issue
+			if( !access_has_bug_level( $t_view_bug_threshold, $t_row['id'] ) ) {
 				continue;
 			}
 
@@ -354,12 +346,14 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 
 			if( !is_blank( $t_description ) ) {
-				echo '<div class="alert alert-warning">', string_display( "$t_description" ), '</div>';
+				echo '<div class="alert alert-warning">',
+					string_display_links( $t_description ),
+					'</div>';
 			}
 
 			echo '<div class="space-4"></div>';
 			echo '<div class="col-md-7 col-xs-12 no-padding">';
-			echo '<div class="progress progress-striped" data-percent="' . $t_progress . '%" >';
+			echo '<div class="progress progress-large progress-striped" data-percent="' . $t_progress . '%" >';
 			echo '<div style="width:' . $t_progress . '%;" class="progress-bar progress-bar-success"></div>';
 			echo '</div></div>';
 			echo '<div class="clearfix"></div>';

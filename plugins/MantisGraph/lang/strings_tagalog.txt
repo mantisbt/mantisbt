@@ -41,11 +41,10 @@
  * @author AnakngAraw
  */
 
-$s_plugin_graph_title = 'Mga Talangguhit ng Mantis';
-$s_plugin_graph_description = 'Opisyal na pampasak ng talangguhit.';
 $s_plugin_MantisGraph_title = 'Mga Talangguhit ng Mantis';
+$s_plugin_MantisGraph_description = 'Opisyal na pampasak ng talangguhit.';
 $s_plugin_MantisGraph_config = 'Pagkakaayos';
-$s_plugin_MantisGraph_synthesis_link = 'Pagbubuo';
+$s_plugin_MantisGraph_tab_label = 'Mga Talangguhit ng Mantis';
 $s_plugin_MantisGraph_status_link = 'Ayon sa kalagayan';
 $s_plugin_MantisGraph_priority_link = 'Ayon sa kahalagahan';
 $s_plugin_MantisGraph_severity_link = 'Ayon sa kalubhaan';

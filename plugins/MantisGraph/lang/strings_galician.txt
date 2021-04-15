@@ -39,14 +39,14 @@
  * @file
  *
  * @author Elisardojm
+ * @author Fitoschido
  * @author Toliño
  */
 
-$s_plugin_graph_title = 'Gráficos Mantis';
-$s_plugin_graph_description = 'Complemento oficial de gráficas.';
 $s_plugin_MantisGraph_title = 'Gráficas de Mantis';
+$s_plugin_MantisGraph_description = 'Complemento oficial de gráficas.';
 $s_plugin_MantisGraph_config = 'Configuración';
-$s_plugin_MantisGraph_synthesis_link = 'Síntese';
+$s_plugin_MantisGraph_tab_label = 'Gráficos';
 $s_plugin_MantisGraph_status_link = 'Por estado';
 $s_plugin_MantisGraph_priority_link = 'Por prioridade';
 $s_plugin_MantisGraph_severity_link = 'Por gravidade';
