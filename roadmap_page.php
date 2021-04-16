@@ -68,11 +68,98 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
 /**
+ * Class RoadmapProgress.
+ *
+ * Handles display of progress as percentage.
+ */
+class RoadmapProgress {
+	/** @var int Number of resolved issues */
+	protected $resolved;
+
+	/** @var int Number of planned issues */
+	protected $planned;
+
+	/** @var int Percentage of resolved issues */
+	protected $percent;
+
+	/**
+	 * RoadmapProgress constructor.
+	 * @param int $p_resolved
+	 * @param int $p_planned
+	 */
+	public function __construct( $p_resolved, $p_planned ) {
+		$this->resolved = $p_resolved;
+		$this->planned = $p_planned;
+
+		if( $this->hasIssues() ) {
+			$this->percent = (int)( $p_resolved * 100 / $p_planned );
+		}
+	}
+
+	/**
+	 * Return true if the version contains any issues.
+	 * @return bool
+	 */
+	public function hasIssues() {
+		return $this->planned > 0;
+	}
+
+	/**
+	 * Progress as percentage.
+	 * @return string
+	 */
+	public function percentage() {
+		return $this->percent . '%';
+	}
+
+	/**
+	 * Progress as a string "x of y issues resolved".
+	 * @return string
+	 */
+	public function string() {
+		return sprintf( lang_get( 'resolved_progress' ),
+			$this->resolved,
+			$this->planned,
+			$this->percentage() # backwards-compat, legacy string has 3 placeholders
+		);
+	}
+
+	/**
+	 * Prints progress in the Roadmap's header.
+	 */
+	public function printHeader() {
+		if( $this->hasIssues() ) {
+			echo '<div class="widget-toolbar" title="' . $this->string() . '">'
+				. $this->percentage()
+				. '</div>';
+		}
+	}
+
+	/**
+	 * Prints the Roadmap's progress bar
+	 */
+	public function printProgressBar() {
+		echo '<div class="space-4"></div>';
+		echo '<div class="col-md-7 col-xs-12 no-padding">';
+		echo '<div class="progress progress-large progress-striped" data-percent="'
+			. $this->percentage() . '" >';
+		echo '<div class="progress-bar progress-bar-success" style="width:'
+			. $this->percentage() . '"></div>';
+		echo '</div></div>';
+		echo '<div class="clearfix"></div>';
+	}
+
+}
+
+/**
  * Print header for the specified project version.
+ *
  * @param array $p_version_row Array containing project version data.
+ * @param RoadmapProgress $p_progress
+ *
  * @return void
  */
-function print_version_header( array $p_version_row ) {
+function print_version_header( array $p_version_row, $p_progress ) {
 	$t_project_id   = $p_version_row['project_id'];
 	$t_version_id   = $p_version_row['id'];
 	$t_version_name = $p_version_row['version'];
@@ -104,6 +191,7 @@ function print_version_header( array $p_version_row ) {
 	print_icon( $t_block_icon, '1 ace-icon bigger-125' );
 	echo '</a>';
 	echo '</div>';
+	$p_progress->printHeader();
 	echo '</div>';
 
 	echo '<div class="widget-body">';
@@ -130,22 +218,20 @@ function print_version_header( array $p_version_row ) {
 
 /**
  * Print footer for the specified project version.
+ *
  * @param array $p_version_row array contain project version data
- * @param int $p_issues_resolved number of issues in resolved state
- * @param int $p_issues_planned number of issues planned for this version
- * @param int $p_progress percentage progress
- * @return void
+ * @param RoadmapProgress $p_progress
  */
-function print_version_footer( $p_version_row, $p_issues_resolved, $p_issues_planned, $p_progress ) {
+function print_version_footer( $p_version_row, $p_progress ) {
 	$t_project_id   = $p_version_row['project_id'];
 	$t_version_id   = $p_version_row['id'];
 	$t_version_name = version_get_field( $t_version_id, 'version' );
 
 	echo '</div>';
 
-	if( $p_issues_planned > 0 ) {
+	if( $p_progress->hasIssues() ) {
 		echo '<div class="widget-toolbox padding-8 clearfix">';
-		echo sprintf( lang_get( 'resolved_progress' ), $p_issues_resolved, $p_issues_planned, $p_progress );
+		echo $p_progress->string();
 		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" ';
 		echo 'href="view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
 			 '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) .
@@ -330,18 +416,16 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		user_cache_array_rows( array_unique( $t_issue_handlers ) );
 
-		$t_progress = $t_issues_planned > 0 ? ( (integer)( $t_issues_resolved * 100 / $t_issues_planned ) ) : 0;
+		$t_progress = new RoadmapProgress( $t_issues_resolved, $t_issues_planned );
 
-		if( $t_issues_planned > 0 ) {
-			$t_progress = (integer)( $t_issues_resolved * 100 / $t_issues_planned );
-
+		if( $t_progress->hasIssues() ) {
 			if( !$t_project_header_printed ) {
 				print_project_header_roadmap( $t_project_name );
 				$t_project_header_printed = true;
 			}
 
 			if( !$t_version_header_printed ) {
-				print_version_header( $t_version_row );
+				print_version_header( $t_version_row, $t_progress );
 				$t_version_header_printed = true;
 			}
 
@@ -351,12 +435,7 @@ foreach( $t_project_ids as $t_project_id ) {
 					'</div>';
 			}
 
-			echo '<div class="space-4"></div>';
-			echo '<div class="col-md-7 col-xs-12 no-padding">';
-			echo '<div class="progress progress-large progress-striped" data-percent="' . $t_progress . '%" >';
-			echo '<div style="width:' . $t_progress . '%;" class="progress-bar progress-bar-success"></div>';
-			echo '</div></div>';
-			echo '<div class="clearfix"></div>';
+			$t_progress->printProgressBar();
 		}
 
 		$t_issue_set_ids = array();
@@ -416,7 +495,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		}
 
 		if( $t_version_header_printed ) {
-			print_version_footer( $t_version_row,  $t_issues_resolved, $t_issues_planned, $t_progress);
+			print_version_footer( $t_version_row, $t_progress );
 		}
 	}
 }

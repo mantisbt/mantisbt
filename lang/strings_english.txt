@@ -1345,7 +1345,7 @@ $s_changelog_empty_manager = 'No Change Log information available.  Issues are i
 
 # Roadmap
 $s_roadmap = 'Roadmap';
-$s_resolved_progress = '%1$d of %2$d issue(s) resolved. Progress (%3$d%%).';
+$s_resolved_progress = '%1$d of %2$d issue(s) resolved';
 $s_roadmap_empty = 'No Roadmap information available';
 $s_roadmap_empty_manager = 'No Roadmap information available.  Issues are included once projects have versions and issues have "target version" set.';
 
