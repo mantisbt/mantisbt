@@ -591,6 +591,8 @@ function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
  * @param integer $p_version_id A valid version identifier.
  * @param string  $p_field_name A valid field name to lookup.
  * @return string
+ *
+ * @throws ClientException
  */
 function version_get_field( $p_version_id, $p_field_name ) {
 	$t_row = version_cache_row( $p_version_id );

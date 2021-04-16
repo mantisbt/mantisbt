@@ -1107,7 +1107,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
  * @return integer user id
  * @access public
  *
- * @throws ClientException
+ * @noinspection PhpDocMissingThrowsInspection
  */
 function auth_get_current_user_id() {
 	global $g_cache_current_user_id;
@@ -1125,6 +1125,7 @@ function auth_get_current_user_id() {
 	}
 
 	# @todo error with an error saying they aren't logged in? Or redirect to the login page maybe?
+	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_user_id = user_get_id_by_cookie( $t_cookie_string );
 
 	# The cookie was invalid. Clear the cookie (to allow people to log in again)
