@@ -43,6 +43,7 @@
  * @author Danutz
  * @author KlaudiuMihaila
  * @author Minisarm
+ * @author Popetedenis
  * @author Saturnian
  * @author Stelistcristi
  */
@@ -722,7 +723,7 @@ $s_add_file = 'Adaugă fișier';
 $s_project_document_updated = 'Proiect modificat cu succes';
 $s_project_user_added_msg = 'Utilizator adăugat cu succes proiectului';
 $s_project_removed_user_msg = 'Utilizator șters din proiect';
-$s_remove_user_sure_msg = 'Sigur dorți ștergerea acestui utilizator?';
+$s_remove_user_sure_msg = 'Sigur doriți ștergerea utilizatorului %1$s din proiectul(ele) %2$s?';
 $s_remove_user_button = 'Șterge utilizator';
 $s_remove_all_users_sure_msg = 'Sigur ștergeți toți utilizatorii acestui proiect?';
 $s_remove_all_users_button = 'Ștergere toți utilizatorii';
