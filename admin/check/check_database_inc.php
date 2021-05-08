@@ -223,6 +223,7 @@ if( db_is_mysql() ) {
 		'5.6' => array( 'GA', '5.6.10', '2013-02-05' ),
 		'5.7' => array( 'GA', '5.7.9', '2015-10-21' ),
 		'6.0' => array( 'Discontinued' ),
+		'8.0' => array( 'GA', '8.0.11', '2018-04-19' ),
 	);
 	$t_support_url = 'http://www.mysql.com/support/';
 
