@@ -210,10 +210,8 @@ $t_date_format = config_get( 'short_date_format' );
 
 # MySQL support checking
 if( db_is_mysql() ) {
-	# Note: the MySQL lifecycle page [1] is no longer available.
-	# The list below was built based on information found in [2].
-	# [1] http://www.mysql.com/about/legal/lifecycle/
-	# [2] http://dev.mysql.com/doc/refman/5.7/en/faqs-general.html#qandaitem-B-1-1-1
+	# The list below was built based on information found in the FAQ [1]
+	# [1]: https://dev.mysql.com/doc/refman/8.0/en/faqs-general.html
 	$t_versions = array(
 		# Series >= Type, GA status, GA date
 		'5.0' => array( 'GA', '5.0.15', '2005-10-19' ),
@@ -225,7 +223,7 @@ if( db_is_mysql() ) {
 		'6.0' => array( 'Discontinued' ),
 		'8.0' => array( 'GA', '8.0.11', '2018-04-19' ),
 	);
-	$t_support_url = 'http://www.mysql.com/support/';
+	$t_support_url = 'https://www.mysql.com/support/';
 
 	# Is it a GA release
 	$t_mysql_ga_release = false;
@@ -241,7 +239,7 @@ if( db_is_mysql() ) {
 	} else {
 		if( 'GA' == $t_versions[$t_db_major_version][0] ) {
 			$t_mysql_ga_release = version_compare( $t_database_server_info['version'], $t_versions[$t_db_major_version][1], '>=' );
-			# Support end-dates as per http://www.mysql.com/support/
+			# Support end-dates as per https://www.mysql.com/support/
 			$t_date_ga = new DateTime( $t_versions[$t_db_major_version][2] );
 			$t_date_premier_end = $t_date_ga->add( new DateInterval( 'P5Y' ) )->format( $t_date_format );
 			$t_date_extended_end = $t_date_ga->add( new DateInterval( 'P3Y' ) )->format( $t_date_format );
