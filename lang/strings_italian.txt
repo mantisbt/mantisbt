@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Ajeje Brazorf
  * @author Albe Albe 460
  * @author Albe Albe460
  * @author Alexmar983
@@ -269,7 +270,7 @@ $s_email_notification_title_for_action_blocks_relationship_deleted = 'La seguent
 $s_email_notification_title_for_action_relationship_child_resolved = 'L\'anomalia %1$s CORRELATA è stata RISOLTA.';
 $s_email_notification_title_for_action_relationship_child_closed = 'L\'anomalia %1$s CORRELATA è stata CHIUSA.';
 $s_email_notification_title_for_action_related_issue_deleted = 'L\'anomalia CORRELATA %1$s è stata CANCELLATA.';
-$s_email_notification_title_for_action_monitor = 'L\'anomalia %1$s adesso é seguita dall\'utente %2$s.';
+$s_email_notification_title_for_action_monitor = 'L\'anomalia %1$s adesso è seguita dall\'utente %2$s.';
 $s_email_reporter = 'Segnalata da';
 $s_email_handler = 'In carico a';
 $s_email_project = 'Progetto';
@@ -506,7 +507,7 @@ $s_warning_security_hazard = 'Questo è un potenziale rischio per la sicurezza, 
 $s_warning_integrity_hazard = 'Questo comporta che MantisBT continuerà quando si verifica un errore e ciò può portare a sistema/problemi di integrità dei dati.';
 $s_warning_debug_email = '<strong>Attenzione:</strong> "<code>debug_email</code>" non è impostato su <code>OFF</code>, tutte le e-mail di notifica sarà inviata a "%1$s".';
 $s_error_database_no_schema_version = '<strong>Errore:</strong> la versione dello schema del tuo database è 0. Ciò può accadere perché il database è danneggiato o il valore di "database_version" non è stato recuperato dalla tabella di configurazione o la struttura del database è da una versione obsoleta di MantisBT (pre 1.0.0).';
-$s_error_database_version_out_of_date_2 = '<strong>Attenzione:</strong> La struttura di database é obsoleta. Per favore, aggiornala <a href="admin/install.php">qui</a> dopo avere effettuato l\'accesso';
+$s_error_database_version_out_of_date_2 = '<strong>Attenzione:</strong> La struttura di database è obsoleta. Per favore, aggiornala <a href="admin/install.php">qui</a> dopo avere effettuato l\'accesso';
 $s_error_code_version_out_of_date = ' <strong>Attenzione:</strong> la struttura del database è più recente del programma installato. Per favore, aggiorna la versione del programma.';
 $s_login_page_info = 'Benvenuti nel software di gestione anomalie e progetti.';
 $s_login_title = 'Accedi';
@@ -615,7 +616,7 @@ $s_access_change = 'Livello minimo di accesso per cambiare questo stato';
 $s_desc_bug_submit_status = 'Stato assegnato a nuova anomalia';
 $s_desc_bug_reopen_status = 'Stato assegnato ad anomalia riaperta';
 $s_desc_bug_resolved_status_threshold = 'Stato in cui una anomalia si considera risolta';
-$s_desc_bug_closed_status_threshold = 'Stato in cui un\'anomalia é considerata chiusa';
+$s_desc_bug_closed_status_threshold = 'Stato in cui un\'anomalia è considerata chiusa';
 $s_workflow_change_access_label = 'Chi può modificare il workflow:';
 $s_access_change_access_label = 'Chi può modificare i livelli di accesso:';
 $s_default_not_in_flow = 'Lo stato di default di %1$s non è previsto nello stato seguente ad %2$s.  Sarà ignorato.';
@@ -647,7 +648,7 @@ $s_configuration_option_value = 'Valore';
 $s_all_users = 'Tutti gli utenti';
 $s_set_configuration_option = 'Imposta opzione di configurazione';
 $s_delete_config_sure_msg = 'Sei sicuro di voler cancellare questa opzione di configurazione?';
-$s_configuration_corrupted = 'La configurazione del database é danneggiata.';
+$s_configuration_corrupted = 'La configurazione del database è danneggiata.';
 $s_set_configuration_option_action_create = 'Crea opzione di configurazione';
 $s_set_configuration_option_action_edit = 'Modifica opzione di configurazione';
 $s_set_configuration_option_action_clone = 'Clona opzione di configurazione';
@@ -761,7 +762,7 @@ $s_account_unlock_msg = 'L\'account è stato sbloccato.';
 $s_manage_user_protected_msg = 'Account protetto. Il "livello di accesso" e "l\'abilitazione" non sono modificabili. Per il resto, l\'account è stato aggiornato...';
 $s_manage_user_updated_msg = 'Account aggiornato correttamente...';
 $s_email_user_updated_subject = 'Utenza aggiornata';
-$s_email_user_updated_msg = 'La tua utenza é stata aggiornata dall\'amministratore. La lista delle modifiche effettuate é riportata sotto. Puoi modificare i dettagli della tua utenza e le preferenze ogni volta che lo desideri visitando il seguente indirizzo:';
+$s_email_user_updated_msg = 'La tua utenza è stata aggiornata dall\'amministratore. La lista delle modifiche effettuate è riportata sotto. Puoi modificare i dettagli della tua utenza e le preferenze ogni volta che lo desideri visitando il seguente indirizzo:';
 $s_main_link = 'Principale';
 $s_view_bugs_link = 'Visualizza anomalie';
 $s_report_bug_link = 'Nuova anomalia';
