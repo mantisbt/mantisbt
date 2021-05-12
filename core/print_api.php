@@ -1447,10 +1447,8 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = nu
 		echo form_security_field( $t_form_name, $p_security_token );
 	}
 
-	if( $p_class !== '') {
-		$t_class = $p_class;
-	} else {
-		$t_class = 'btn btn-primary btn-xs btn-white btn-round';
+	if( $p_class == '') {
+		$p_class = 'btn btn-primary btn-xs btn-white btn-round';
 	}
 	echo '<button type="submit" class="' . $t_class . '">' . $p_label . '</button>';
 	if( $p_args_to_post ) {
