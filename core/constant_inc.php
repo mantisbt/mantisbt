@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.26.0-dev' );
+define( 'MANTIS_VERSION', '2.25.1' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -35,7 +35,7 @@ define( 'GOOD', 1 );
 define( 'WARN', 2 );
 
 # PHP-related constants
-define( 'PHP_MIN_VERSION', '7.0.0' );
+define( 'PHP_MIN_VERSION', '5.5.0' );
 define( 'PHP_CLI', 0 );
 define( 'PHP_CGI', 1 );
 
