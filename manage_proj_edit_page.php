@@ -244,7 +244,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 
 <!-- SUBPROJECTS -->
 <?php
-if ( config_get_global( 'subprojects_enabled' ) == ON ) {
+	if ( config_get_global( 'subprojects_enabled' ) == ON ) {
 ?>
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
@@ -258,10 +258,12 @@ if ( config_get_global( 'subprojects_enabled' ) == ON ) {
 			</div>
 
 			<div class="widget-toolbox padding-8 clearfix">
-				<div class="pull-left padding-right-8">
 <?php
 	# Check the user's global access level before allowing project creation
 	if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+?>
+					<div class="pull-left padding-right-8">
+<?php
 		print_form_button(
 			'manage_proj_create_page.php',
 			lang_get( 'create_new_subproject_link' ),
@@ -269,9 +271,13 @@ if ( config_get_global( 'subprojects_enabled' ) == ON ) {
 			null,
 			'btn btn-sm btn-primary btn-white btn-round'
 		);
-	}
 ?>
-				</div>
+					</div>
+<?php
+	} # Create project button
+
+	# Add existing project as subproject form
+?>
 				<form id="manage-project-subproject-add-form"
 					  action="manage_proj_subproj_add.php"
 					  class="form-inline pull-left">
@@ -314,6 +320,7 @@ if ( config_get_global( 'subprojects_enabled' ) == ON ) {
 			</div>
 
 <?php
+		# Subprojects listing / update form
 		$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true );
 		if( !empty( $t_subproject_ids ) ) {
 ?>
@@ -372,17 +379,17 @@ if ( config_get_global( 'subprojects_enabled' ) == ON ) {
 										</td>
 										<td class="center">
 <?php
-			print_link_button(
-				'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
-				lang_get( 'edit' ),
-				'btn-xs'
-			);
-			print_link_button(
-				"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id']
-				. form_security_param( 'manage_proj_subproj_delete' ),
-				lang_get( 'unlink_link' ),
-				'btn-xs'
-			);
+				print_link_button(
+					'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
+					lang_get( 'edit' ),
+					'btn-xs'
+				);
+				print_link_button(
+					"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id']
+					. form_security_param( 'manage_proj_subproj_delete' ),
+					lang_get( 'unlink_link' ),
+					'btn-xs'
+				);
 ?>
 										</td>
 									</tr>
@@ -402,13 +409,13 @@ if ( config_get_global( 'subprojects_enabled' ) == ON ) {
 					<?php echo lang_get( 'update_subproject_inheritance' ) ?>
 				</button>
 			</div>
-			</form>
+<?php
+		} # End of subprojects listing / update form
+?>
 		</div>
 	</div>
 </div>
-
 <?php
-		} # End of subprojects listing / update form
 	} # Subprojects enabled?
 ?>
 
