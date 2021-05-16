@@ -111,7 +111,9 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 		</div>
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_category_button' ) ?>" />
+			<button class="btn btn-primary btn-white btn-round">
+				<?php echo lang_get( 'update_category_button' ) ?>
+			</button>
 		</div>
 	</div>
 	</form>
