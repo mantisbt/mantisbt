@@ -718,8 +718,9 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id ); ?>
 			<tr>
-				<td><?php echo '<a href="manage_custom_field_edit_page.php?field_id=' . $t_field_id . '">' .
-						custom_field_get_display_name( $t_desc['name'] ) . '</a>' ?></td>
+				<td>
+					<?php echo custom_field_get_display_name( $t_desc['name'] ); ?>
+				</td>
 				<td class="center">
 					<form method="post" action="manage_proj_custom_field_update.php" class="form-inline">
 						<fieldset>
@@ -736,12 +737,26 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 						</fieldset>
 					</form>
 				</td>
-				<td class="center"><?php
+				<td class="center">
+<?php
 					# You need global permissions to edit custom field defs
 					print_form_button(
-						"manage_proj_custom_field_remove.php?field_id=$t_field_id&project_id=$f_project_id",
-						lang_get( 'remove_link' )
-					); ?>
+						'manage_custom_field_edit_page.php?field_id=' . $t_field_id,
+						lang_get( 'edit' ),
+						array(
+							'return' => 'manage_proj_edit_page.php?project_id='
+								. $f_project_id . '#customfields',
+						)
+					);
+					print_form_button(
+						'manage_proj_custom_field_remove.php',
+						lang_get( 'remove_link' ),
+						array(
+							'field_id' => $t_field_id,
+							'project_id' => $f_project_id,
+						)
+					);
+?>
 				</td>
 			</tr>
 <?php
