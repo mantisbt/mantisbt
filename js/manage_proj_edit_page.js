@@ -147,7 +147,7 @@ $(document).ready( function() {
           .appendTo('#manage-project-users-form');
 	});
 
-	var btn_remove_all = $('#manage-project-users-form input[name=btn-remove-all]');
+	var btn_remove_all = $('#manage-project-users-form button[name=btn-remove-all]');
 	var btn_undo_remove_all = $('#manage-project-users-form button[name=btn-undo-remove-all]');
 	// remove hidden class and use jquery functionality.
 	btn_undo_remove_all.hide().removeClass('hidden');

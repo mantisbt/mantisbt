@@ -144,7 +144,9 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 			</div>
 			<div class="widget-toolbox padding-8 clearfix">
 				<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_version_button' ) ?>" />
+				<button class="btn btn-primary btn-white btn-round">
+					<?php echo lang_get( 'update_version_button' ) ?>
+				</button>
 			</div>
 			</div>
 			</div>
@@ -157,7 +159,9 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_ver_delete' ) ?>
 			<input type="hidden" name="version_id" value="<?php echo string_attribute( $t_version->id ) ?>" />
-			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
+			<button class="btn btn-sm btn-primary btn-white btn-round">
+				<?php echo lang_get( 'delete_version_button' ) ?>
+			</button>
 		</fieldset>
 	</form>
 </div>
