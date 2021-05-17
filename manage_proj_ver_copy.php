@@ -69,7 +69,7 @@ if( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	trigger_error( ERROR_VERSION_NO_ACTION, ERROR );
+	trigger_error( ERROR_NO_COPY_ACTION, ERROR );
 }
 
 # Get all active versions (i.e. exclude obsolete ones)
