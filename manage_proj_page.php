@@ -96,7 +96,13 @@ print_manage_menu( 'manage_proj_page.php' );
 		<?php
 		# Check the user's global access level before allowing project creation
 		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-			print_form_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ), null, null, 'btn btn-primary btn-white btn-round' );
+			print_form_button(
+				'manage_proj_create_page.php',
+				lang_get( 'create_new_project_link' ),
+				null,
+				null,
+				'btn btn-primary btn-white btn-round'
+			);
 		} ?>
 	</div>
 	<div class="table-responsive">
@@ -104,23 +110,52 @@ print_manage_menu( 'manage_proj_page.php' );
 		<thead>
 			<tr>
 				<th><?php
-					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort );
+					print_manage_project_sort_link(
+						'manage_proj_page.php', lang_get( 'name' ),
+						'name',
+						$t_direction,
+						$f_sort
+					);
 					print_sort_icon( $t_direction, $f_sort, 'name' ); ?>
 				</th>
 				<th><?php
-					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'status' ), 'status', $t_direction, $f_sort );
+					print_manage_project_sort_link(
+						'manage_proj_page.php',
+						lang_get( 'status' ),
+						'status',
+						$t_direction,
+						$f_sort
+					);
 					print_sort_icon( $t_direction, $f_sort, 'status' ); ?>
 				</th>
 				<th><?php
-					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $t_direction, $f_sort );
+					print_manage_project_sort_link(
+						'manage_proj_page.php',
+						lang_get( 'enabled' ),
+						'enabled',
+						$t_direction,
+						$f_sort
+					);
 					print_sort_icon( $t_direction, $f_sort, 'enabled' ); ?>
 				</th>
 				<th><?php
-					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $t_direction, $f_sort );
+					print_manage_project_sort_link(
+						'manage_proj_page.php',
+						lang_get( 'view_status' ),
+						'view_state',
+						$t_direction,
+						$f_sort
+					);
 					print_sort_icon( $t_direction, $f_sort, 'view_state' ); ?>
 				</th>
 				<th><?php
-					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'description' ), 'description', $t_direction, $f_sort );
+					print_manage_project_sort_link(
+						'manage_proj_page.php',
+						lang_get( 'description' ),
+						'description',
+						$t_direction,
+						$f_sort
+					);
 					print_sort_icon( $t_direction, $f_sort, 'description' ); ?>
 				</th>
 			</tr>
@@ -152,7 +187,10 @@ print_manage_menu( 'manage_proj_page.php' );
 			if( access_has_project_level( $t_manage_project_threshold, $t_project_id, auth_get_current_user_id() ) ) { ?>
 			<tr>
 				<td>
-					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo str_repeat( "&raquo; ", $t_level ) . string_display_line( $t_project['name'] ) ?></a>
+					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>">
+						<?php echo str_repeat( "&raquo; ", $t_level )
+							. string_display_line( $t_project['name'] ) ?>
+					</a>
 				</td>
 				<td><?php echo get_enum_element( 'project_status', $t_project['status'] ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_project['enabled'] ) ?></td>
@@ -228,10 +266,16 @@ print_manage_menu( 'manage_proj_page.php' );
 					$t_project_id = urlencode( ALL_PROJECTS );
 					echo '<div class="btn-group inline">';
 					echo '<div class="pull-left">';
-					print_form_button( "manage_proj_cat_edit_page.php?category_id=$t_id&project_id=$t_project_id", lang_get( 'edit' ) );
+					print_form_button(
+						"manage_proj_cat_edit_page.php?category_id=$t_id&project_id=$t_project_id",
+						lang_get( 'edit' )
+					);
 					echo '</div>';
 					echo '<div class="pull-left">';
-					print_form_button( "manage_proj_cat_delete.php?category_id=$t_id&project_id=$t_project_id", lang_get( 'delete' ) );
+					print_form_button(
+						"manage_proj_cat_delete.php?category_id=$t_id&project_id=$t_project_id",
+						lang_get( 'delete' )
+					);
 					echo '</div>';
 ?>
 				</td>
