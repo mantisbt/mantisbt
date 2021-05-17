@@ -44,6 +44,7 @@
  * @author Cysioland
  * @author Debeet
  * @author Expert3222
+ * @author Kareyac
  * @author Macofe
  * @author Mansoft
  * @author Mazab IZW
@@ -1024,7 +1025,7 @@ $s_changelog = 'Lista zmian';
 $s_changelog_empty = 'Lista zmian niedostępna';
 $s_changelog_empty_manager = 'Brak dostępnych informacji o Liście Zmian. Problemy są uwzględniane, gdy projekty posiadają wersje, oraz są rozwiązywane przy pomocy "naprawiono w wersji".';
 $s_roadmap = 'Plan pracy';
-$s_resolved_progress = '%1$d z %2$d zgłoszeń zrealizowano. Postęp (%3$d%%).';
+$s_resolved_progress = '%1$d z %2$d zgłoszeń zrealizowano.';
 $s_roadmap_empty_manager = 'Brak dostępnych informacji o Planie Pracy. Problemy pojawią się, gdy projekty mają przypisane wersje a problemy posiadają ustawioną "Wersję docelową".';
 $s_http_auth_realm = 'Logowanie do MantisBT';
 $s_bug = 'zgłoszenie';

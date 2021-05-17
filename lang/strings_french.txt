@@ -44,6 +44,7 @@
  * @author Crochet.david
  * @author DavidL
  * @author Dregad
+ * @author Fujimaru-kun
  * @author Gomoko
  * @author Hashar
  * @author Hercule
@@ -1063,7 +1064,7 @@ $s_changelog = 'Liste des changements';
 $s_changelog_empty = 'Liste des changements indisponible';
 $s_changelog_empty_manager = 'Aucune information du journal de modifications disponible. Les anomalies sont incluses une fois que les projets ont des versions et qu’elles sont résolues et définies à l’état « corrigé dans la version ».';
 $s_roadmap = 'Feuille de route';
-$s_resolved_progress = '%1$d anomalie(s) résolue(s) sur %2$d (progrès : %3$d %%).';
+$s_resolved_progress = '%1$d anomalie(s) résolue(s) sur %2$d';
 $s_roadmap_empty = 'Aucune information de feuille de route disponible';
 $s_roadmap_empty_manager = 'Aucune information de feuille de route disponible. Les anomalies sont incluses une fois que les projets ont des versions et que les anomalies ont une « version cible » indiquée.';
 $s_http_auth_realm = 'Accès à MantisBT';
