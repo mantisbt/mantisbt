@@ -297,6 +297,7 @@ print_manage_menu( 'manage_proj_page.php' );
 		<div class="widget-toolbox padding-8 clearfix">
 			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />
+			<!--suppress HtmlFormInputWithoutLabel -->
 			<input type="text" name="name" class="input-sm" size="32" maxlength="128" />
 			<button class="btn btn-primary btn-sm btn-white btn-round">
 				<?php echo lang_get( 'add_category_button' ) ?>
