@@ -178,7 +178,6 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</td>
 			</tr>
 			<?php
-			$g_project_override = $f_project_id;
 			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
 				$t_file_path = $t_row['file_path'];
 				# Don't reveal the absolute path to non-administrators for security reasons
@@ -878,8 +877,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 				<div id="manage-project-users-form-toolbox" class="hidden widget-toolbox padding-8 clearfix">
 					<div class="btn-toolbar">
 						<div class="widget-toolbar no-border pull-left">
-							<!--suppress HtmlFormInputWithoutLabel -->
-							<input type="text" class="search input-sm" placeholder="<?php echo lang_get( 'filter_button' ) ?>" />
+							<label>
+								<input type="text" class="search input-sm"
+									   placeholder="<?php echo lang_get( 'filter_button' ) ?>" />
+							</label>
 						</div>
 						<div class="widget-toolbar pull-left">
 							<label>
