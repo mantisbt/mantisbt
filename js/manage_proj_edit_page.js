@@ -93,7 +93,7 @@ $(document).ready( function() {
 	var userList_options = {
 		valueNames: [
 			{ name: 'key-name', attr: 'data-sortvalue' },
-			'key-email',
+			{ name: 'key-email', attr: 'data-sortvalue' },
 			{ name: 'key-access', attr: 'data-sortvalue' }
 		],
 		page: per_page,
