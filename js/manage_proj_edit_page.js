@@ -49,14 +49,9 @@ function acledit_setup( div ) {
 	jdiv.find('select.user_access_level')
 		.on( 'blur change', function(){
 			try_hide_input( $(this).closest('div.editable_access_level') );
-			var x1 = this.value;
-			var x2 = $(this).closest('.key-access');
-			var x3 = $(this).closest('.key-access').data('textvalue');
 			var selection = $(this).find('option:selected').text();
 			$(this).closest('.key-access').data('textvalue', selection);
-			var x4 = $(this).closest('.key-access').data('textvalue');
-		})
-		;
+		});
 	try_hide_input( div );
 }
 
