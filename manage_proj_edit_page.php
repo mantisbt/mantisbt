@@ -937,21 +937,19 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 
 		foreach( $t_users as $t_user ) {
 			$t_username =  $t_user['display_name'];
+			$t_email = user_get_email( $t_user['id'] );
 			$t_can_manage_this_user = $t_can_manage_users
 					&& access_has_project_level( $t_user['access_level'], $f_project_id )
 					&& ( !$f_show_global_users || isset( $t_local_users[$t_user['id']]) );
 ?>
 		<tr>
-			<td class="key-name" data-sortvalue="<?php echo $t_username ?>">
+			<td class="key-name" data-sortvalue="<?php echo string_attribute( $t_username ) ?>">
 				<a href="manage_user_edit_page.php?user_id=<?php echo $t_user['id'] ?>">
 				<?php echo prepare_user_name( $t_user['id'], false ); ?>
 				</a>
 			</td>
-			<td class="key-email">
-			<?php
-				$t_email = user_get_email( $t_user['id'] );
-				print_email_link( $t_email, $t_email );
-			?>
+			<td class="key-email" data-sortvalue="<?php echo string_attribute( $t_email ) ?>">
+				<?php print_email_link( $t_email, $t_email ); ?>
 			</td>
 			<?php
 			$t_current_level_string = get_enum_element( 'access_levels', $t_user['access_level'] );
