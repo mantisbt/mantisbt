@@ -90,14 +90,19 @@ $(document).ready( function() {
 	$('#manage-project-users-form-toolbox').removeClass('hidden');
 
 	var per_page = $('#input-per-page').val();
-	var userList_options = {  valueNames: [ { name: 'key-name', attr: 'data-sortvalue' }, 'key-email', { name: 'key-access', attr: 'data-sortvalue' } ]
-		, page: per_page,
-			pagination: {
-			  innerWindow: 2,
-			  left: 1,
-			  right: 1,
-			  paginationClass: "pagination",
-			  }
+	var userList_options = {
+		valueNames: [
+			{ name: 'key-name', attr: 'data-sortvalue' },
+			'key-email',
+			{ name: 'key-access', attr: 'data-sortvalue' }
+		],
+		page: per_page,
+		pagination: {
+			innerWindow: 2,
+			left: 1,
+			right: 1,
+			paginationClass: "pagination",
+		}
 	};
 	userList = new List('manage-project-users-list', userList_options);
 	userList.on( 'updated', function(){
