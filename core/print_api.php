@@ -768,7 +768,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 			if( count( $t_cat_arr ) == 1 ) {
 				$p_category_id = (int) $t_cat_arr[0]['id'];
 			} else {
-				echo '<option value="0" disabled hidden';
+				echo '<option value="" disabled hidden';
 				check_selected( $p_category_id, 0 );
 				echo '>';
 				echo string_attribute( lang_get( 'select_option' ) );
