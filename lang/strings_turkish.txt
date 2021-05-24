@@ -56,6 +56,7 @@
  * @author Korayal
  * @author McAang
  * @author Meelo
+ * @author Melissadilara
  * @author MuratTheTurkish
  * @author Rapsar
  * @author Sayginer
@@ -1058,7 +1059,7 @@ $s_changelog = 'Değişiklik Günlüğü';
 $s_changelog_empty = 'Hiç bir değişiklik kayıt bilgisi yok';
 $s_changelog_empty_manager = 'Değişiklik Günlüğü bilgisi yok. Projeler sürümlere sahip olduklarında ve sorunlar "sürümde düzeltildi" setiyle çözüldükten sonra dahil edilmiştir.';
 $s_roadmap = 'Yol haritası';
-$s_resolved_progress = '%2$d adet sorundan %1$d tanesi çözümlendi. İlerleme (%3$d%%).';
+$s_resolved_progress = '%2$d sorundan %1$d tanesi çözümlendi.';
 $s_roadmap_empty = 'Yol Haritası bilgisi yok';
 $s_roadmap_empty_manager = 'Yol Haritası bilgisi yok. Projeler sürümleri ve sorunlar "hedef sürümleri" belirlendikten sonra sorunlar dahil edilir.';
 $s_http_auth_realm = 'MantisBT Giriş';
