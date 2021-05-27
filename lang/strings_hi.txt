@@ -1,0 +1,488 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit https://translatewiki.net  **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Hindi (हिन्दी)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit https://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Ajaysajay
+ * @author Phoenix303
+ * @author Prong$31
+ * @author Sfic
+ * @author Shypoetess
+ * @author Smtchahal
+ */
+
+$s_actiongroup_menu_copy = 'प्रतिलिपि';
+$s_actiongroup_menu_assign = 'नियुक्ति करें';
+$s_actiongroup_menu_resolve = 'समाधान करें';
+$s_actiongroup_menu_update_priority = 'प्राथमिकता बदलें';
+$s_actiongroup_menu_update_status = 'स्थिति बदलें';
+$s_actiongroup_menu_update_severity = 'तीव्रता बदलें';
+$s_actiongroup_menu_update_view_status = 'दिखाई स्थिति बदलें';
+$s_actiongroup_menu_update_category = 'वर्गीकरण बदलें';
+$s_actiongroup_menu_set_sticky = 'नत्थी करें/ हटाएं';
+$s_actiongroup_menu_update_field = '%1$s को संशोधित करें';
+$s_actiongroup_menu_update_product_version = 'उत्पाद अंक परिवर्तित करें';
+$s_actiongroup_menu_update_target_version = 'लक्षित संस्करण परिवर्तित करें';
+$s_actiongroup_menu_update_fixed_in_version = 'संशोधित संस्करण में परिवर्तन करें';
+$s_actiongroup_menu_update_product_build = 'उत्पाद गठन में परिवर्तन करें';
+$s_actiongroup_menu_update_due_date = 'नियत तिथि में परिवर्तन';
+$s_actiongroup_menu_add_note = 'टिप्पणी जोड़ें';
+$s_actiongroup_menu_attach_tags = 'टैग करें';
+$s_actiongroup_bugs = 'चुने हुए बिन्दु';
+$s_actiongroup_error_issue_is_readonly = 'बिन्दु अपरिवर्तनीय है';
+$s_all_projects = 'सभी परियोजनाएं';
+$s_move_bugs = 'बिन्दु स्थानांतरण';
+$s_operation_successful = 'सफल कार्यवाही';
+$s_operation_warnings = 'चेतावनियों के साथ कार्यवाही पूर्ण हुई।';
+$s_operation_failed = 'कार्यवाही सफलतापूर्वक पूरी नहीं हुई।';
+$s_date_order = 'तिथि क्रम';
+$s_print_all_bug_page_link = 'विवरण छापें';
+$s_csv_export = 'सी.एस.वी. प्रारूप में निर्गम';
+$s_excel_export = 'एक्सेल प्रारूप में निर्गम';
+$s_login_anonymously = 'अज्ञातरूप में प्रवेश करें';
+$s_anonymous = 'अज्ञातरूप';
+$s_jump_to_bugnotes = 'टिप्पणी पर जाएं';
+$s_jump_to_history = 'वृतांत पर जाएं';
+$s_display_history = 'वृतांत दिखाएं';
+$s_public_project_msg = 'यह लोक-परियोजना है। सभी प्रयोगकर्ता अधिकृत हैं।';
+$s_private_project_msg = 'यह निजी परियोजना है। इसमें केवल प्रशासक और विशेषतः जोड़े गए प्रयोक्ता की पहुँच है।';
+$s_access_level_project = 'परियोजना में पहुँच का स्तर';
+$s_view_submitted_bug_link = 'प्रस्तुत कार्यबिन्दु %1$s देखें';
+$s_assigned_projects = 'प्रयुक्त परियोजनाएं';
+$s_assigned_projects_label = 'नियत परियोजना';
+$s_unassigned_projects_label = 'अप्रयुक्त परियोजनाएं';
+$s_copy_users = 'प्रयोक्ताओं के प्रतिरूप बनाएं';
+$s_copy_categories_from = 'यहाँ से वर्गीकरणों की प्रतिलिपि बनाएं';
+$s_copy_categories_to = 'यहाँ पर वर्गीकरणों की प्रतिलिपि जोड़ें';
+$s_copy_versions_from = 'यहाँ से अंकों की प्रतिलिपि बनाएं';
+$s_copy_versions_to = 'यहाँ पर प्रारूपों की प्रतिलिपि जोड़ें';
+$s_copy_users_from = 'प्रयोक्ताओं के प्रतिरूप यहाँ से लें';
+$s_copy_users_to = 'यहाँ पर प्रयोक्ताओं की प्रतिलिपि जोड़ें';
+$s_bug_history = 'कार्यबिन्दुओं का वृतांत';
+$s_field = 'फील्ड';
+$s_old_value = 'पुरानी राशि';
+$s_new_value = 'नई राशि';
+$s_date_modified = 'संपादन तिथि';
+$s_bugnote = 'टिप्पणी';
+$s_bugnote_view_state = 'टिप्पणी अवलोकन स्थिति';
+$s_bug_monitor = 'कार्यबिन्दु निगरानी में लिया';
+$s_bug_end_monitor = 'कार्यबिन्दु की निगरानी समाप्त';
+$s_announcement = 'उद्घोषणा';
+$s_stays_on_top = 'सबसे ऊपर रहेगा';
+$s_bugnote_link_title = 'टिप्पणी कि सीधी कड़ी';
+$s_delete_bugnote_button = 'टिप्पणी मिटाएं';
+$s_bug_relationships = 'सम्बन्ध';
+$s_empty_password_button = 'रिक्त कूटशब्द प्रयोग करें';
+$s_reauthenticate_title = 'प्रमाणित करें';
+$s_no_category = '(कोई वर्गीकरण नहीं)';
+$s_global_categories = 'सर्वव्यापक वर्गीकरण';
+$s_inherit = 'वर्गीकरणों को हासिल करें';
+$s_inherit_global = 'सर्वव्यापक वर्गीकरणों को हासिल करें';
+$s_inherit_parent = 'मूल वर्गीकरणों को हासिल करें';
+$s_update_subproject_inheritance = 'उप-परियोजना में मूलाधार लगाएं';
+$s_duplicate_of = 'इसकी प्रतिलिपि';
+$s_has_duplicate = 'प्रतिलिपि है';
+$s_related_to = 'इससे संबंधित';
+$s_dependant_on = 'इसका मूल';
+$s_blocks = 'इसके अधीन';
+$s_new_bug = 'नया कार्यबिन्दु';
+$s_bugnote_added = 'टिप्पणी जोड़ी गई';
+$s_bugnote_edited = 'टिप्पणी संशोधित की गई';
+$s_bugnote_deleted = 'टिप्पणी मिटाई गई';
+$s_summary_updated = 'सारांश परिवर्धित किया';
+$s_description_updated = 'विवरण परिवर्धित किया';
+$s_additional_information_updated = 'अतिरिक्त जानकारी परिवर्धित की गई';
+$s_steps_to_reproduce_updated = 'पुनः प्रदर्शन की विधि परिवर्धित की गई';
+$s_file_added = 'फाइल जोड़ी गई';
+$s_file_deleted = 'फाइल मिटाई';
+$s_bug_deleted = 'कार्यबिन्दु मिटाया';
+$s_make_private = 'निजी बनाएं';
+$s_make_public = 'सार्वजनिक करें';
+$s_create_new_project_link = 'नई परियोजना बनाएं';
+$s_opensearch_id_short = '%s मूलांक';
+$s_opensearch_id_description = '%s: कार्यबिन्दु के मूलांक के आधार पर खोजें';
+$s_opensearch_text_short = '%s लेख';
+$s_opensearch_text_description = '%s: पूर्ण-लेख पर आधारित खोज';
+$s_select_option = '(चुनें)';
+$s_bug_actiongroup_version = 'इस कार्यबिन्दु की परियोजना में इच्छित अंक उपलब्ध नहीं है';
+$s_move_bugs_conf_msg = 'कार्यबिन्दुओं को यहाँ स्थानांतरित करें';
+$s_copy_bugs_conf_msg = 'कार्यबिन्दुओं की यहाँ प्रतिलिपि करें';
+$s_assign_bugs_conf_msg = 'कार्यबिन्दुओं पर नियुक्त करें';
+$s_resolve_bugs_conf_msg = 'कार्यबिन्दु का समाधान चुनें';
+$s_priority_bugs_conf_msg = 'कार्यबिन्दु की प्राथमिकता चुनें';
+$s_status_bugs_conf_msg = 'कार्यबिन्दु की स्थिति चुनें';
+$s_view_status_bugs_conf_msg = 'कार्यबिन्दु की दृश्य स्थिति चुनें';
+$s_category_bugs_conf_msg = 'कार्यबिन्दु का वर्गीकरण चुनें';
+$s_product_version_bugs_conf_msg = 'उत्पाद अंक परिवर्तित करें';
+$s_fixed_in_version_bugs_conf_msg = 'संशोधित संस्करण में परिवर्तन करें';
+$s_target_version_bugs_conf_msg = 'लक्षित अंक परिवर्तित करें';
+$s_due_date_bugs_conf_msg = 'नियत तिथि में परिवर्तन';
+$s_close_group_bugs_button = 'कार्यबिन्दुओं का समापन करें';
+$s_delete_group_bugs_button = 'कार्यबिन्दु मिटाएं';
+$s_move_group_bugs_button = 'कार्यबिन्दुओं का स्थानांतरण करें';
+$s_copy_group_bugs_button = 'कार्यबिन्दुओं की प्रतिलिपि करें';
+$s_assign_group_bugs_button = 'कार्यबन्दु पर नियुक्ति करें';
+$s_resolve_group_bugs_button = 'कार्यबिन्दुओं का समाधान करें';
+$s_priority_group_bugs_button = 'प्राथमिकता बदलें';
+$s_status_group_bugs_button = 'स्थिति बदलें';
+$s_category_group_bugs_button = 'वर्गीकरण बदलें';
+$s_view_status_group_bugs_button = 'दिखाई स्थिति बदलें';
+$s_set_sticky_group_bugs_button = 'नत्थी करें/ हटाएं';
+$s_product_version_group_bugs_button = 'उत्पाद अंक परिवर्तित करें';
+$s_fixed_in_version_group_bugs_button = 'संशोधित अंक में परिवर्तन करें';
+$s_target_version_group_bugs_button = 'लक्षित संस्करण परिवर्तित करें';
+$s_due_date_group_bugs_button = 'नियत तिथि में परिवर्तन';
+$s_update_severity_title = 'तीव्रता बदलें';
+$s_update_severity_msg = 'कार्यबिन्दु की तीव्रता चुनें';
+$s_update_severity_button = 'तीव्रता बदलें';
+$s_hide_button = 'केवल चुनिंदा दिखाएं';
+$s_printing_preferences_title = 'छापने वाले खाने चुनें';
+$s_printing_options_link = 'छापने के विकल्प';
+$s_bugnote_title = 'टिप्पणी कार्यकर्ता';
+$s_bugnote_date = 'टिप्पणी की तिथि';
+$s_bugnote_description = 'टिप्पणी विवरण';
+$s_logged_in_as = 'प्रतिनिधि-स्वरूप प्रवेश';
+$s_prefix_for_deleted_users = 'प्रयोक्ता';
+$s_administrator = 'प्रशासक';
+$s_myself = 'स्वयं';
+$s_default_access_level = 'स्वतः प्रवेश स्तर';
+$s_issue_status_percentage = 'कार्यबिन्दुओं की स्थिति का प्रतिशत';
+$s_no_access = 'प्रवेश निषेध';
+$s_new_account_subject = 'खाता पंजीकरण';
+$s_new_account_username = 'प्रयोक्ता का नाम:';
+$s_new_account_do_not_reply = 'इस संदेश का जवाब न दें';
+$s_new_account_email = 'ई-मेल:';
+$s_new_account_IP = 'दूरस्थ आई.पी. संख्या:';
+$s_new_account_signup_msg = 'निम्न खाता बनाया गया:';
+$s_email_reporter = 'प्रतिवेदक';
+$s_email_handler = 'नियुक्ति';
+$s_email_project = 'परियोजना';
+$s_email_bug = 'कार्यबिन्दु मूलांक';
+$s_email_category = 'श्रेणी';
+$s_email_reproducibility = 'पुनरावृत्ति';
+$s_email_severity = 'तीव्रता';
+$s_email_priority = 'प्राथमिकता';
+$s_email_status = 'स्थिति';
+$s_email_resolution = 'समाधान';
+$s_email_duplicate = 'प्रतिरूप';
+$s_email_fixed_in_version = 'अंक में सुधार';
+$s_email_target_version = 'लक्षित अंक';
+$s_email_date_submitted = 'प्रस्तुत करने की तिथि';
+$s_email_last_modified = 'अंतिम संशोधन';
+$s_email_summary = 'सारांश';
+$s_email_description = 'विवरण';
+$s_email_additional_information = 'अतिरिक्त सूचना';
+$s_email_steps_to_reproduce = 'पुनःपरीक्षण के चरण';
+$s_email_tag = 'चिप्पियाँ';
+$s_email_due_date = 'लक्षित तिथि';
+$s_account_removed_msg = 'आपका खाता हटाया जा चुका है';
+$s_confirm_delete_msg = 'क्या आप अपने खाते को मिटाने का निश्चय कर चुके हैं?';
+$s_delete_account_button = 'खाता मिटाएं';
+$s_manage_profiles_link = 'रूपरेखाएं';
+$s_change_preferences_link = 'वरीयताएं';
+$s_edit_account_title = 'खाता संपादित करें';
+$s_username = 'प्रयोक्ता का नाम';
+$s_username_label = 'प्रयोक्ता नाम';
+$s_realname = 'वास्तविक नाम';
+$s_realname_label = 'वास्तविक नाम';
+$s_email = 'ई-मेल';
+$s_email_label = 'ई-मेल';
+$s_password = 'कूटशब्द';
+$s_new_password = 'नया कूटशब्द';
+$s_confirm_password = 'कूटशब्द की पुष्टि करें';
+$s_current_password = 'वर्तमान कूटशब्द';
+$s_access_level = 'प्रवेश स्तर';
+$s_access_level_label = 'प्रवेश स्तर';
+$s_update_user_button = 'प्रयोक्ता संशोधन सहजें';
+$s_verify_warning = 'आपके खाते की जानकारी सत्यापित हो गई।';
+$s_api_tokens_link = 'ए.पी.आई.टोकन';
+$s_api_token_create_form_title = 'ए.पी.आई.टोकन बनाएं';
+$s_api_token_create_button = 'ए.पी.आई.टोकन बनाएं';
+$s_api_token_name = 'टोकन का नाम';
+$s_api_token_disclose_message = 'ए.पी.आई.तक पहुँच के लिए टोकन';
+$s_api_tokens_title = 'ए.पी.आई.टोकन';
+$s_api_token_revoke_button = 'रद्दीकरण';
+$s_api_token_never_used = 'कभी प्रयोग में नहीं';
+$s_api_token_revoked = 'ए.पी.आई.टोकन "%s" रद्द हुआ।';
+$s_last_used = 'अंतिम प्रयुक्त';
+$s_default_account_preferences_title = 'खाता वरीयताएं';
+$s_default_project = 'पूर्व-मानक परियोजना';
+$s_refresh_delay = 'नवीकरण समय';
+$s_minutes = 'मिनट';
+$s_redirect_delay = 'अग्रसारण समय';
+$s_seconds = 'सेकंड';
+$s_with_minimum_severity = 'न्यूनतम तीव्रता के साथ';
+$s_bugnote_order = 'गतिविधियों का क्रम-बंधन';
+$s_bugnote_order_asc = 'बढ़ता क्रम';
+$s_bugnote_order_desc = 'घटता क्रम';
+$s_email_on_new = 'नए बिन्दु पर ई-मेल';
+$s_email_on_assigned = 'कर्मी के परिवर्तन पर ई-मेल';
+$s_email_on_feedback = 'उत्तर प्राप्ति पर ई-मेल';
+$s_email_on_resolved = 'समाधान होने पर ई-मेल';
+$s_email_on_closed = 'समाप्ति पर ई-मेल';
+$s_email_on_reopened = 'पुनरारंभ पर ई-मेल';
+$s_email_on_bugnote_added = 'नई टिप्पणी पर ई-मेल';
+$s_email_on_status_change = 'स्थिति परिवर्तन पर ई-मेल';
+$s_email_on_priority_change = 'प्राथमिकता परिवर्तन पर ई-मेल';
+$s_email_bugnote_limit = 'ई-मेल टिप्पणियों की सीमा';
+$s_email_full_issue_details = 'कार्यबिन्दु का सम्पूर्ण विवरण का ई-मेल';
+$s_language = 'भाषा';
+$s_font_family = 'अक्षराकार परिवार';
+$s_update_prefs_button = 'वरीयताओं को संशोधित करें';
+$s_reset_prefs_button = 'वरीयताओं का नवीनीकरण करें';
+$s_timezone = 'क्षेत्रीय समय';
+$s_prefs_reset_msg = 'वरीयताओं का नवीनीकरण किया गया';
+$s_prefs_updated_msg = 'वरीयताओं को संशोधित किया गया';
+$s_select_profile = 'रूपरेखा चुनें';
+$s_add_profile = 'रूपरेखा जोड़ें';
+$s_edit_profile = 'रूपरेखा परिवर्तित करें';
+$s_update_profile = 'रूपरेखा संशोधित करें';
+$s_delete_profile = 'रूपरेखा मिटाएं';
+$s_global_profile = 'सर्वव्यापी रूपरेखा';
+$s_default_profile = 'रूपरेखा सुझाव';
+$s_profile_description = 'तंत्र का विवरण';
+$s_my_sponsorship = 'मेरे प्रायोजन';
+$s_update_sponsorship_button = 'भुगतान की स्थिति बदलें';
+$s_sponsor = 'प्रायोजक';
+$s_sponsor_verb = 'प्रायोजक';
+$s_amount = 'राशि';
+$s_total_owing = 'कुल देय';
+$s_total_paid = 'कुल भुगतान';
+$s_sponsor_show = 'सभी दिखाएं';
+$s_new_bug_title = 'नया कार्यबिन्दु';
+$s_feedback_bug_title = 'कार्यबिन्दुओं पर प्रतिक्रिया का अनुरोध करें';
+$s_acknowledged_bug_title = 'कार्यबन्दु स्वीकार करें';
+$s_confirmed_bug_title = 'कार्यबिन्दु की पुष्टि करें';
+$s_assigned_bug_title = 'कार्यबन्दु पर नियुक्ति करें';
+$s_new_bug_button = 'नया कार्यबिन्दु';
+$s_acknowledged_bug_button = 'कार्यबन्दु स्वीकार करें';
+$s_confirmed_bug_button = 'कार्यबिन्दु की पुष्टि करें';
+$s_assigned_bug_button = 'कार्यबन्दु पर नियुक्ति करें';
+$s_closed_bug_title = 'कार्यबिन्दु का समापन करें';
+$s_monitor_bug_button = 'निगरानी में रखें';
+$s_unmonitor_bug_button = 'निगरानी बंद करें';
+$s_upload_file = 'फ़ाइल अपलोड करें';
+$s_upload_files = 'फ़ाइलें अपलोड करें';
+$s_select_file = 'फ़ाइल चुनें';
+$s_select_files = 'फ़ाइलें चुनें';
+$s_upload_file_button = 'फ़ाइल अपलोड करें';
+$s_upload_files_button = 'फ़ाइलें अपलोड करें';
+$s_max_file_size_info = 'अधिकतम आकार: %1$s %2$s';
+$s_resolved_bug_title = 'कार्यबन्दु का समाधान करें';
+$s_resolved_bug_button = 'कार्यबन्दु का समाधान करें';
+$s_bugnote_add_resolve_button = 'टिप्पणी जोड़ें';
+$s_from = 'आरंभ';
+$s_to = 'यहाँ तक';
+$s_bug_send_button = 'भेजिए';
+$s_reminder = 'स्मरण हेतु';
+$s_stick_bug_button = 'जोड़ें';
+$s_unstick_bug_button = 'हटाएं';
+$s_bug_updated_msg = 'कार्यबिन्दु को सफलतापूर्वक सहेजा गया...';
+$s_back_to_bug_link = 'कार्यबन्दु पर वापस जाएं';
+$s_update_simple_link = 'सरल संशोधन करें';
+$s_updating_bug_advanced_title = 'कार्यबन्दु की जानकारी संशोधित की जा रही है';
+$s_id = 'मूलांक';
+$s_category = 'वर्ग';
+$s_severity = 'तीव्रता';
+$s_reproducibility = 'पुनरावृत्ति';
+$s_date_submitted = 'प्रस्तुत करने की तिथि';
+$s_last_update = 'अन्तिम संशोधन';
+$s_reporter = 'प्रतिवेदक';
+$s_assigned_to = 'नियुक्ति';
+$s_priority = 'प्राथमिकता';
+$s_resolution = 'समाधान';
+$s_status = 'स्थिति';
+$s_duplicate_id = 'समरूप कार्यबिन्दु';
+$s_os = 'चलन-तंत्र (ओ.एस.)';
+$s_platform = 'मंच';
+$s_os_build = 'चलन-तंत्र (ओ.एस.) अंक';
+$s_projection = 'अनुमान';
+$s_eta = 'संभावित आगमन तिथि (ई टी ए)';
+$s_product_version = 'उत्पाद अंक';
+$s_build = 'निर्माण';
+$s_fixed_in_version = 'अंक में सुधार';
+$s_target_version = 'लक्षित अंक';
+$s_votes = 'मत-संख्या';
+$s_summary = 'सारांश';
+$s_synthesis = 'संकलन';
+$s_description = 'विवरण';
+$s_steps_to_reproduce = 'पुनःपरीक्षण के चरण';
+$s_update_information_button = 'सूचना परिवर्धित करें';
+$s_sticky_issue = 'नत्थी कार्यबन्दु';
+$s_updating_bug_simple_title = 'कार्यबन्दु की जानकारी संशोधित की जा रही है';
+$s_view_revisions = 'पुनरीक्षण देखें';
+$s_revision_by = '%1$s बटे %2$s';
+$s_revision_drop = 'छोड़ें';
+$s_bug_revision_dropped_history = 'कार्यबिन्दु परिवर्तन त्याग दिया गया है';
+$s_bugnote_revision_dropped_history = 'टिप्पणी परिवर्तन त्याग दिया गया है';
+$s_all_revisions = 'सभी पुनरीक्षण';
+$s_back_to_issue = 'कार्यबन्दु पर वापस जाएं';
+$s_activities_title = 'गतिविधियां';
+$s_bugnote_attached_files = 'फ़ाइलें सलग्न करें:';
+$s_bugnote_deleted_msg = 'कार्यबिन्दु को सफलतापूर्वक मिटाया गया...';
+$s_bug_notes_title = 'टिप्पणियाँ';
+$s_edit_bugnote_title = 'टिप्पणी को परिवर्तित करें';
+$s_add_bugnote_title = 'टिप्पणी जोड़ें';
+$s_add_bugnote_button = 'टिप्पणी जोड़ें';
+$s_closed_bug_button = 'कार्यबिन्दु का समापन करें';
+$s_bugnote_updated_msg = 'टिप्पणी को सफलतापूर्वक सहेजा गया...';
+$s_last_edited = 'अंतिम संपादन';
+$s_unknown_file_extension = 'अज्ञात';
+$s_log_page_number = 'संख्या';
+$s_log_page_caller = 'वार्ताकार';
+$s_log_page_event = 'घटना';
+$s_login_page_info = 'कार्यबिन्दु तालिका में स्वागत है।';
+$s_login_title = 'प्रवेश';
+$s_choose_project = 'परियोजना चुनें';
+$s_username_or_email = 'प्रयोक्ता का नाम अथवा ई-मेल पता';
+$s_select_project_button = 'परियोजना चुनें';
+$s_lost_password_title = 'कूटशब्द पुनरावेदन';
+$s_lost_password_subject = 'कूटशब्द पुनरावेदित';
+$s_newer_news_link = 'नए समाचार';
+$s_older_news_link = 'पुराने समाचार';
+$s_archives = 'स्मारिकाएं';
+$s_rss = 'आर.एस.एस.';
+$s_site_information = 'साइट का विवरण';
+$s_mantis_version = 'मेन्टिस बी.टी. अंक';
+$s_schema_version = 'रूपरेखा अंक';
+$s_site_path = 'साइट पथ';
+$s_core_path = 'मूल पथ';
+$s_plugin_path = 'प्रयुक्ति पथ';
+$s_created_user_part1 = 'प्रयोक्ता बनाया गया';
+$s_created_user_part2 = 'इस प्रवेश स्तर के साथ';
+$s_create_new_account_title = 'नया खाता बनायें';
+$s_verify_password = 'कूटशब्द पुष्टि करें';
+$s_enabled = 'सक्षम';
+$s_enabled_label = 'सक्षम किया गया';
+$s_create_user_button = 'प्रयोक्ता बनाएं';
+$s_manage_users_link = 'प्रयोक्ताओं का प्रबंधन करें';
+$s_manage_projects_link = 'परियोजना प्रबंधन';
+$s_projects_link = 'परियोजनाएं';
+$s_edit_user_link = 'प्रयोक्ता का सम्पादन करें';
+$s_issue_reporter = 'प्रयोक्ता जिसने यह कार्यबिन्दु बताया';
+$s_issue_handler = 'प्रयोक्ता जो इस कार्यबिन्दु को देख रहा है';
+$s_users_added_bugnote = 'प्रयोक्ता जिसने कार्यबिन्दु पर टिप्पणी जोड़ी';
+$s_email_notify_users = 'कोई अधिकृत प्रयोक्ता';
+$s_allowed_access_levels = 'किसी अधिकृत प्रयोक्ता को अनुमति-प्राप्त';
+$s_assign_issue = 'कार्यबिन्दु नियुक्त करें';
+$s_all_users = 'सभी प्रयोक्ता';
+$s_edit_project_title = 'परियोजना संशोधित करें';
+$s_project_name_label = 'परियोजना का नाम:';
+$s_update_project_button = 'परियोजना सहेजें';
+$s_copy_from = 'यहाँ से प्रतिलिपि करें';
+$s_show_global_users = 'सभी व्यापक पहुँच वाले प्रयोक्ताओं को दिखाएं';
+$s_add_project_title = 'परियोजना जोड़ें';
+$s_add_project_button = 'परियोजना जोड़ें';
+$s_projects_title_label = 'परियोजनाएं';
+$s_project_updated_msg = 'परियोजना को सफलतापूर्वक सहेजा गया...';
+$s_edit_project_version_title = 'परियोजना अंक परिवर्तित करें';
+$s_edit_user_title = 'प्रयोक्ता का सम्पादन करें';
+$s_delete_user_button = 'प्रयोक्ता को मिटाएं';
+$s_impersonate_user_button = 'प्रयोक्ता का रूप-धारण करें';
+$s_view_bugs_link = 'कार्यबिन्दुओं को देखें';
+$s_users_link = 'प्रयोक्ता-जन';
+$s_invite_users = 'प्रयोक्ताओं को आमंत्रित करें';
+$s_my_view_title_my_comments = 'कार्यबिन्दु, जिन पर मैंने टिप्पणी की है';
+$s_project_file_deleted_msg = 'परियोजना फ़ाइल मिटाई गई।';
+$s_project_documentation_title = 'परियोजना लेख';
+$s_user_documentation = 'उपयोगकर्ताओं की मार्गदर्शिका';
+$s_project_documentation = 'परियोजना लेख';
+$s_project_document_updated = 'परियोजना को सफलतापूर्वक सहेजा गया।';
+$s_project_user_added_msg = 'प्रयोक्ता को सफलतापूर्वक परियोजना में जोड़ा गया।';
+$s_add_user_title = 'प्रयोक्ता को परियोजना में जोड़ें';
+$s_project_selection_title = 'परियोजना का चुनाव';
+$s_remove_project_user_title = 'परियोजना से प्रयोक्ता की पहुँच हटाएं';
+$s_updated_user_msg = 'प्रयोक्ता को सफलतापूर्वक संशोधित किया गया';
+$s_report_more_bugs = 'और कार्यबिन्दु दर्ज करें';
+$s_enter_report_details_title = 'कार्यबिन्दु का विवरण भरें';
+$s_submit_report_button = 'कार्यबिन्दु दर्ज करें';
+$s_check_report_more_bugs = 'और कार्यबिन्दु दर्ज करने के लिए टिक लगाएं';
+$s_selected_project = 'चुनी गई परियोजना';
+$s_valid_project_msg = 'आपका प्रामाणिक परियोजना को चुनना आवश्यक है।';
+$s_by_project = 'परियोजना के अनुसार';
+$s_viewing_bugs_title = 'कार्यबिन्दुओं को देख रहे हैं';
+$s_sticky = 'नत्थी कार्यबिन्दुओं को दिखाएं';
+$s_issue_id = 'कार्यबिन्दु #';
+$s_current_project = 'वर्तमान परियोजना';
+$s_available_filter_for_project = 'परियोजना के लिए उपलब्ध फ़िल्टर';
+$s_bug_view_title = 'कार्यबिन्दु का विवरण देखें';
+$s_monitoring_user_list = 'प्रयोक्ताओं की सूची';
+$s_custom_field_project_count = 'परियोजना संख्या';
+$s_link_custom_field_to_project_title = 'स्वरचित फील्ड की कड़ी परियोजनाओं से जोड़ें';
+$s_linked_projects_label = 'संबंधित परियोजनाएं';
+$s_bug = 'कार्यबिन्दु';
+$s_this_bug = 'वर्तमान कार्यबिन्दु';
+$s_relationship_with_parent = 'मूल कार्यबिन्दु से सम्बन्ध';
+$s_bug_cloned_to = 'कार्यबिन्दु की प्रतिलिपि बनाई गई';
+$s_copy_from_parent = 'मुख्य कार्यबिन्दु से विस्तृत सूचनाएं लें';
+$s_copy_notes_from_parent = 'कार्यबिन्दु पर टिप्पणियों की प्रतिलिपि बनाएं';
+$s_copy_attachments_from_parent = 'संलग्नक का प्रतिरूप बनाएं';
+$s_with = 'के साथ';
+$s_view_issue = 'कार्यबिन्दु देखें';
+$s_issues = 'कार्यबिन्दु';
+$s_report_issue = 'कार्यबिन्दु लिखें';
+$s_monitor_issue = 'कार्यबिन्दु की निगरानी करें';
+$s_move_issue = 'कार्यबिन्दु को स्थानांतरित करें';
+$s_reopen_issue = 'कार्यबिन्दु को पुनःआरंभ करें';
+$s_update_readonly_issues = 'अपरिवर्तनीय कार्यबिन्दुओं को संशोधित करें';
+$s_view_issue_revisions = 'कार्यबिन्दु अथवा टिप्पणी परिवर्तनों को देखें';
+$s_set_sticky = 'कार्यबिन्दु की चिप्पी लगाएं/ हटाएं';
+$s_show_list_of_users_monitoring_issue = 'जो प्रयोक्ता इस कार्यबिन्दु की निगरानी कर रहे हैं, उनकी सूची दिखाएं';
+$s_upload_issue_attachments = 'कार्यबिन्दु के सलनग्नकों को चढ़ाएं';
+$s_create_project = 'परियोजना बनाएं';
+$s_manage_project = 'परियोजना का प्रबंधन करें';
+$s_manage_user_access_to_project = 'परियोजना में प्रयोक्ता की पहुँच का प्रबंधन करें';
+$s_automatically_included_in_private_projects = 'निजी परियोजनाओं में स्वतः सम्मिलित करें';
+$s_view_project_documents = 'परियोजनाओं के प्रलेख देखें';
+$s_link_custom_fields_to_projects = 'स्वरचित फील्ड की कड़ी परियोजनाओं से जोड़ें';
+$s_sponsor_issue = 'कार्यबिन्दु को प्रायोजित करें';
+$s_assign_sponsored_issue = 'प्रायोजित कार्यबिन्दु को सुपुर्द करें';
+$s_wiki = 'विकी';
+$s_tag_id = 'टैग मूलांक';
+$s_tag_filter_default = 'संलग्न कार्यबिन्दु (%1$s)';
+$s_tag_related_issues = 'साझे कार्यबिन्दु (%1$s)';
+$s_total_time_for_issue = 'कार्यबिन्दु पर कुल समय = %1$s';
+$s_view_issues_columns_title = 'कार्यबिन्दु के कालम देखें';
+$s_copy_columns_from = 'कालम का प्रतिरूप यहाँ से लें';
+$s_view_account_title = 'प्रयोक्ता संबंधी जानकारी';
+$s_manage_user = 'प्रयोक्ताओं का प्रबंधन';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = '"%1$s" ईमेल वाला उपयोगकर्ता नहीं मिला।';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'वास्तविक नाम "%1$s" वाला उपयोगकर्ता नहीं मिला';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'प्रतिरूपण की कोई कार्यवाही नहीं बताई गई';
+$s_save = 'सहेजें';
+$s_load = 'उठायें';
