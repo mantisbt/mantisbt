@@ -516,6 +516,7 @@ $s_prev = 'Naslednja';
 $s_next = 'Naprej';
 $s_first = 'Prva';
 $s_last = 'Zadnja';
+$s_end_date_label = 'Datum konca:';
 $s_use_date_filters = 'Filter po datumu';
 $s_yes = 'Da';
 $s_no = 'Ne';
