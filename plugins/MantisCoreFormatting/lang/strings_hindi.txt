@@ -41,13 +41,13 @@
  * @author Ajaysajay
  */
 
-$s_plugin_format_title = 'मेन्टिस बी.टी. प्रारूप';
+$s_plugin_format_title = 'मैन्टिस बी.टी. प्रारूप';
 $s_plugin_format_description = 'अधिकृत पाठ संसाधन और प्रारूपण युक्ति';
 $s_plugin_format_config = 'विन्यास';
 $s_plugin_format_process_text = 'पाठ संसाधन';
 $s_plugin_format_process_text_warning_notice = 'अगर आप वास्तव में आप जो कर रहे हैं, उसका परिणाम समझते हैं, तभी बंद करें अन्यथा बंद न करें। बंद करने की स्थिति में \'आपसी साइट स्क्रिप्ट (एक्स.एस.एस.)\' हमले संभव हैं।';
 $s_plugin_format_process_urls = 'यू.आर.एल. प्रसंस्करण';
-$s_plugin_format_process_buglinks = 'मेन्टिस बी.टी. आंतरिक कड़ियाँ (कार्यबिन्दु और टिप्पणियाँ)';
+$s_plugin_format_process_buglinks = 'मैन्टिस बी.टी. आंतरिक कड़ियाँ (कार्यबिन्दु और टिप्पणियाँ)';
 $s_plugin_format_process_buglinks_info = 'आपका विन्यास <em>कार्यबिन्दु</em> टैग को "<literal>%s</literal>" की तरह और <em>टिप्पणी</em> को "<literal>%s</literal>" की तरह परिभाषित करता है';
 $s_plugin_format_process_markdown = 'अधो-अँकन (मार्क्डाउन) प्रसंस्करण';
 $s_plugin_format_process_markdown_info = 'अधो-अँकन (मार्क्डाउन) समर्थित पाठ प्रारूप ताकि इसे एच.टी.एम.एल. में परिवर्तित किया जा सके।';
