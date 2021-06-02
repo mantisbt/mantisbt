@@ -63,13 +63,35 @@ Options:
 def gpg_sign_tarball(filename):
     """
     Sign the file using GPG
+
+    The private key's passphrase is read from a file named 'gpg-passphrase' in
+    the user's home directory. If that file is not present, gpg will fall back
+    to using gpg-agent, which may request the passphrase interactively.
     """
-    gpgsign = "gpg -b -a {}" + path.abspath(path.join(os.curdir, filename))
+
+    gpgsign = [
+        'gpg',
+        '--detach-sign',
+        '--armor',
+        '--batch',
+        '--yes',
+        path.abspath(path.join(os.curdir, filename)),
+    ]
+
+    # Insert passphrase option if file exists
+    passphrase = path.expanduser('~/gpg-passphrase')
+    if path.isfile(passphrase):
+        pos = len(gpgsign) - 1
+        gpgsign[pos:pos] = ['--pinentry=loopback',
+                            '--passphrase-file=' + passphrase]
+
     try:
-        subprocess.check_call(gpgsign.format('--batch --yes '), shell=True)
+        subprocess.check_call(gpgsign)
     except subprocess.CalledProcessError:
+        # Remove batch-specific options for warning display
+        gpgsign[3:len(gpgsign) - 1] = []
         print("WARNING: GPG signature failed; to sign manually, run")
-        print("         " + gpgsign.format(''))
+        print("         " + " ".join(gpgsign))
 
 
 def generate_checksum(filename):
