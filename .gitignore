@@ -29,6 +29,10 @@ plugins/*
 *.kdev4
 nbproject/
 
+# Python bytecode
+__pycache__/
+*.py[cod]
+
 # MacOS
 .DS_Store
 
