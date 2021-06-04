@@ -860,9 +860,9 @@ function project_add_users( $p_project_id, array $p_changes ) {
 			$t_insert->bind( 'params', array( $t_project_id, $t_id, $t_value ) );
 			$t_insert->execute();
 
-            # Trigger event for user added on project
-            event_signal('EVENT_MANAGE_PROJECT_USER_CREATE', array('user_id' => $t_id, 'project_id' => $p_project_id));
-        }
+			# Trigger event for user added on project
+			event_signal('EVENT_MANAGE_PROJECT_USER_CREATE', array('user_id' => $t_id, 'project_id' => $p_project_id));
+		}
 	}
 }
 
@@ -896,10 +896,10 @@ function project_remove_users( $p_project_id, array $p_user_ids ) {
 		return;
 	}
 
-    # Trigger event for each user deleted from project
-    foreach( $p_user_ids as $t_id ) {
-        event_signal('EVENT_MANAGE_PROJECT_USER_DELETE', array('user_id' => $t_id, 'project_id' => $p_project_id));
-    }
+	# Trigger event for each user deleted from project
+	foreach( $p_user_ids as $t_id ) {
+		event_signal('EVENT_MANAGE_PROJECT_USER_DELETE', array('user_id' => $t_id, 'project_id' => $p_project_id));
+	}
 
 	# Remove users from the project
 	$t_query = new DbQuery();
