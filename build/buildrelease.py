@@ -113,7 +113,6 @@ def generate_checksum(filename):
     f = open(filename + ".digests", 'w')
     for method in checksum_types:
         checksum = checksums[method].hexdigest()
-        print("      {method}: {hash}".format(method=method, hash=checksum))
         f.write("{hash} *{file}\n".format(file=filename, hash=checksum))
     f.close()
 
@@ -278,7 +277,7 @@ def main():
         print("    Signing the tarball")
         gpg_sign_tarball(tarball)
 
-        print("    Generating checksums...")
+        print("    Generating checksums ({types})".format(types=', '.join(checksum_types)))
         generate_checksum(tarball)
 
     # Cleanup
