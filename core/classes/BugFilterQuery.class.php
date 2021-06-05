@@ -428,6 +428,9 @@ class BugFilterQuery extends DbQuery {
 				case FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED:
 					$this->build_prop_date_created();
 					break;
+				case FILTER_PROPERTY_FILTER_BY_DUE_DATE:
+					$this->build_prop_date_due();
+					break;
 				case FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE:
 					$this->build_prop_date_updated();
 					break;
@@ -770,6 +773,35 @@ class BugFilterQuery extends DbQuery {
 					. $this->param( strtotime( $t_start_string ) ) . ' AND '
 					. $this->param( strtotime( $t_end_string ) ) ;
 			$this->add_fixed_where( $t_query_updated_at );
+		}
+	}
+
+	/**
+	 * Build the query parts for the filter property "due date"
+	 * @return void
+	 */
+	protected function build_prop_date_due() {
+		if( ( gpc_string_to_bool( $this->filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] ) )
+				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_START_MONTH] )
+				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_START_DAY] )
+				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_START_YEAR] )
+				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_END_MONTH] )
+				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_END_DAY] )
+				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_END_YEAR] )
+				) {
+			$t_start_string = $this->filter[FILTER_PROPERTY_DUE_START_YEAR]
+					. '-' . $this->filter[FILTER_PROPERTY_DUE_START_MONTH]
+					. '-' . $this->filter[FILTER_PROPERTY_DUE_START_DAY]
+					. ' 00:00:00';
+			$t_end_string = $this->filter[FILTER_PROPERTY_DUE_END_YEAR]
+					. '-' . $this->filter[FILTER_PROPERTY_DUE_END_MONTH]
+					. '-' . $this->filter[FILTER_PROPERTY_DUE_END_DAY]
+					. ' 23:59:59';
+
+			$t_query_due_at = '{bug}.due_date BETWEEN '
+					. $this->param( strtotime( $t_start_string ) ) . ' AND '
+					. $this->param( strtotime( $t_end_string ) ) ;
+			$this->add_fixed_where( $t_query_due_at );
 		}
 	}
 

@@ -1223,6 +1223,7 @@ $s_start_date_label = 'Start Date:';
 $s_end_date_label = 'End Date:';
 $s_use_date_filters = 'Filter by Date Submitted';
 $s_use_last_updated_date_filters = 'Filter by Last Updated Date';
+$s_use_due_date_filters = 'Filter by Due Date';
 $s_yes = 'Yes';
 $s_no = 'No';
 $s_open_filters = 'Change Filter';

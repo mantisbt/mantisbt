@@ -931,6 +931,7 @@ $s_start_date_label = 'Kezdődátum:';
 $s_end_date_label = 'Záródátum:';
 $s_use_date_filters = 'Szűrés a beküldés dátuma szerint';
 $s_use_last_updated_date_filters = 'Szűrés a frissítés dátuma szerint';
+$s_use_due_date_filters = 'Szűrés az esedékesség dátuma szerint';
 $s_yes = 'Igen';
 $s_no = 'Nem';
 $s_open_filters = 'Szűrő megváltoztatása';
