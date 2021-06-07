@@ -49,27 +49,24 @@ lang_push( 'english' );
 set_time_limit( 0 );
 
 layout_page_header();
-
 layout_admin_page_begin();
-
 print_admin_menu_bar( 'test_langs.php' );
 ?>
 
 <div class="col-md-12 col-xs-12">
-<div class="space-10"></div>
+	<div class="space-10"></div>
 
-<div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
-		Test Langs
-	</h4>
-</div>
+	<!-- CORE LANGUAGE FILES -->
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
+				Testing Core Language Files
+			</h4>
+		</div>
 
-<div class="widget-body">
-<div class="widget-main">
-
-
+		<div class="widget-body">
+			<div class="widget-main">
 
 <?php
 
@@ -92,7 +89,26 @@ if( function_exists( 'scandir' ) ) {
 	asort( $t_lang_files );
 	checklangdir( $t_mantis_dir, $t_lang_files );
 }
+?>
+			</div>
+		</div>
+	</div>
 
+	<div class="space-10"></div>
+
+	<!-- PLUGINS -->
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
+				Testing Plugins Language Files
+			</h4>
+		</div>
+
+		<div class="widget-body">
+			<div class="widget-main">
+
+<?php
 # attempt to find plugin language files
 echo 'Trying to find+check plugin language files...<br />';
 if( function_exists( 'scandir' ) ) {
@@ -102,12 +118,15 @@ if( function_exists( 'scandir' ) ) {
 }
 ?>
 
-</div>
-</div>
-</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <?php
+layout_admin_page_end();
+
+
 /**
  * Check plugin language files
  * @param string $p_path Plugin path.
@@ -444,5 +463,3 @@ function print_error($p_string, $p_type = 'ERROR' ) {
 		echo '<span class="alert-danger">', $p_type . ': ' . $p_string, '</span><br />';
 	}
 }
-
-layout_admin_page_end();
