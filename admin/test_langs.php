@@ -69,26 +69,12 @@ print_admin_menu_bar( 'test_langs.php' );
 			<div class="widget-main">
 
 <?php
-
 if( !checkfile( $t_mantis_dir . 'lang' . DIRECTORY_SEPARATOR, STRINGS_ENGLISH, true ) ) {
 	print_error( "Language file '" . STRINGS_ENGLISH . "' failed.", 'FAILED' );
 	die;
 }
 
-# check core language files
-if( function_exists( 'scandir' ) ) {
-	checklangdir( $t_mantis_dir );
-} else {
-	$t_lang_files = array();
-	foreach( $g_language_choices_arr as $t_lang ) {
-		if( $t_lang == 'auto' ) {
-			continue;
-		}
-		$t_lang_files[] = $t_lang;
-	}
-	asort( $t_lang_files );
-	checklangdir( $t_mantis_dir, $t_lang_files );
-}
+checklangdir( $t_mantis_dir );
 ?>
 			</div>
 		</div>
@@ -107,17 +93,9 @@ if( function_exists( 'scandir' ) ) {
 
 		<div class="widget-body">
 			<div class="widget-main">
-
 <?php
-# attempt to find plugin language files
-echo 'Trying to find+check plugin language files...<br />';
-if( function_exists( 'scandir' ) ) {
-	checkplugins( config_get_global( 'plugin_path' ) );
-} else {
-	echo 'php scandir is disabled - skipping<br />';
-}
+checkplugins( config_get_global( 'plugin_path' ) );
 ?>
-
 			</div>
 		</div>
 	</div>
