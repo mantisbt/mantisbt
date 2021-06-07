@@ -38,12 +38,6 @@ if( function_exists( 'xdebug_disable' ) ) {
 	xdebug_disable();
 }
 
-if( !defined( 'T_ML_COMMENT' ) ) {
-	define( 'T_ML_COMMENT', T_COMMENT );
-} else {
-	define( 'T_DOC_COMMENT', T_ML_COMMENT );
-}
-
 lang_push( 'english' );
 
 set_time_limit( 0 );
@@ -294,7 +288,7 @@ function checktoken( $p_file, $p_base = false ) {
 			# token array
 			list( $t_id, $t_text, $t_line ) = $t_token;
 
-			if( $t_id == T_WHITESPACE || $t_id == T_COMMENT || $t_id == T_DOC_COMMENT || $t_id == T_ML_COMMENT ) {
+			if( $t_id == T_WHITESPACE || $t_id == T_COMMENT || $t_id == T_DOC_COMMENT ) {
 				continue;
 			}
 			if( $t_need_end_variable ) {
