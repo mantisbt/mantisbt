@@ -194,12 +194,14 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 		return true;
 	}
 
-	set_error_handler( 'lang_error_handler' );
-	ob_start();
-	$t_result = eval( 'require_once( \'' . $t_file . '\' );' );
-	$t_data = ob_get_contents();
-	ob_end_clean();
-	restore_error_handler();
+	try {
+		ob_start();
+		$t_result = eval( "require_once( '$t_file' );" );
+		$t_data = ob_get_flush();
+	} catch( ParseError $e ) {
+		ob_end_clean();
+		print_error( $e->getMessage() . ' (line ' . $e->getLine() . ')' );
+	}
 
 	if( $t_result === false ) {
 		print_error( 'Language file \'' . $p_file . '\' failed at eval', 'FAILED' );
