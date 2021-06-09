@@ -118,6 +118,33 @@ function checkplugins( $p_path ) {
 }
 
 /**
+ * Get the language files from the given directory.
+ *
+ * @param $p_path
+ * @return string[] Language file names in ascending order.
+ *
+ * @throws UnexpectedValueException
+ */
+function get_lang_files( $p_path ) {
+	$t_iter = new FileSystemIterator(
+		$p_path,
+		FileSystemIterator::KEY_AS_FILENAME | FileSystemIterator::CURRENT_AS_PATHNAME
+	);
+
+	# Filter language files, excluding 'qqq' pseudo-language
+	# https://translatewiki.net/wiki/FAQ#Special_private_language_codes_qqq,_qqx
+	$t_iter = new RegexIterator( $t_iter,
+		'|strings_(?(?!qqq).+)\.txt|',
+		RegexIterator::MATCH,
+		RegexIterator::USE_KEY
+	);
+
+	$t_files = array_keys( iterator_to_array( $t_iter ) );
+	sort( $t_files );
+	return $t_files;
+}
+
+/**
  * Check directory of language files
  *
  * @param string $p_path Path to language files.
@@ -127,33 +154,30 @@ function checkplugins( $p_path ) {
 function checklangdir( $p_path ) {
 	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 
-	$t_lang_files = @scandir( $t_path );
-	if( false == $t_lang_files ) {
+	try {
+		$t_lang_files = get_lang_files( $t_path );
+	} catch( UnexpectedValueException $e ) {
 		print_error( 'language dir ' . $t_path . ' not found or not accessible' );
-	} else {
-		if( in_array( STRINGS_ENGLISH, $t_lang_files ) ) {
-			echo 'Testing English language file...<br />';
-			flush();
-			# No point testing other languages if English fails
-			if( !checkfile( $t_path, STRINGS_ENGLISH ) ) {
-				return;
-			}
+		return;
+	}
+
+	# Check reference English language file
+	$t_key = array_search( STRINGS_ENGLISH, $t_lang_files );
+	if( $t_key !== false ) {
+		echo 'Testing English language file...<br />';
+		flush();
+		# No point testing other languages if English fails
+		if( !checkfile( $t_path, STRINGS_ENGLISH ) ) {
+			return;
 		}
-		# Skipping english language, readme and hidden files
-		foreach( $t_lang_files as $t_key => $t_lang ) {
-			if( $t_lang[0] == '.'
-			 || $t_lang == 'Web.config'
-			 || $t_lang == 'README'
-			 || $t_lang == STRINGS_ENGLISH
-			) {
-				unset( $t_lang_files[$t_key] );
-			}
-		}
-		if( !empty( $t_lang_files ) ) {
-			echo 'Retrieved ', count( $t_lang_files ), ' languages<br />';
-			foreach( $t_lang_files as $t_lang ) {
-				checkfile( $t_path, $t_lang );
-			}
+		unset( $t_lang_files[$t_key] );
+	}
+
+	# Check foreign language files
+	if( !empty( $t_lang_files ) ) {
+		echo 'Retrieved ', count( $t_lang_files ), ' languages<br />';
+		foreach( $t_lang_files as $t_lang ) {
+			checkfile( $t_path, $t_lang );
 		}
 	}
 }
