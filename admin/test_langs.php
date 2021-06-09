@@ -176,10 +176,7 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 
 	$t_file = $p_path . $p_file;
 
-	set_error_handler( 'lang_error_handler' );
 	$t_result = checktoken( $t_file, ($p_file == STRINGS_ENGLISH ) );
-	restore_error_handler();
-
 	if( !$t_result ) {
 		print_error( 'Language file \'' . $p_file . '\' failed at phase 1.', 'FAILED' );
 		if( $p_quiet ) {
@@ -227,6 +224,14 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
  * @return boolean
  */
 function checktoken( $p_file, $p_base = false ) {
+	$t_source = file_get_contents( $p_file );
+	try {
+		$t_tokens = token_get_all( $t_source, TOKEN_PARSE );
+	} catch( ParseError $e ) {
+		print_error( $e->getMessage() . ' (line ' . $e->getLine() . ')' );
+		return false;
+	}
+
 	$t_in_php_code = false;
 	$t_variables = array();
 	static $s_basevariables;
@@ -236,12 +241,11 @@ function checktoken( $p_file, $p_base = false ) {
 	$t_variable_array = false;
 	$t_two_part_string = false;
 	$t_need_end_variable = false;
-	$t_source = file_get_contents( $p_file );
-	$t_tokens = @token_get_all( $t_source );
 	$t_expect_end_array = false;
 	$t_setting_variable = false;
 	$t_pass = true;
 	$t_fatal = false;
+
 	foreach( $t_tokens as $t_token ) {
 		$t_last_token2 = 0;
 		if( is_string( $t_token ) ) {
