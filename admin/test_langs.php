@@ -25,7 +25,7 @@
 define( 'PLUGINS_DISABLED', true );
 define( 'LANG_LOAD_DISABLED', true );
 define( 'STRINGS_ENGLISH', 'strings_english.txt' );
-$t_mantis_dir = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
+$t_mantis_dir = dirname( dirname( __FILE__ ) ) . '/';
 
 require_once( $t_mantis_dir . 'core.php' );
 
@@ -100,7 +100,7 @@ layout_admin_page_end();
  * @return void
  */
 function checkplugins( $p_path ) {
-	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
+	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . '/';
 
 	$t_plugins = @scandir( $t_path );
 	if( false == $t_plugins ) {
@@ -152,7 +152,7 @@ function get_lang_files( $p_path ) {
  * @return void
  */
 function checklangdir( $p_path ) {
-	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
+	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . '/lang/';
 
 	try {
 		$t_lang_files = get_lang_files( $t_path );
