@@ -412,18 +412,6 @@ function checktoken( $p_file, $p_base = false ) {
 }
 
 /**
- * Error handler for language file checks
- * @param integer $p_type    Error type.
- * @param string  $p_error   Error code.
- * @param string  $p_file    File error occurred in.
- * @param integer $p_line    Line number error occurred on.
- * @return void
- */
-function lang_error_handler( $p_type, $p_error, $p_file, $p_line ) {
-	print_error( 'error handler thrown: ' . $p_type . '<br />' . $p_error . '<br />' . $p_file . '<br />' . $p_line );
-}
-
-/**
  * Print Language File Error messages
  *
  * @param string $p_string Error string.
