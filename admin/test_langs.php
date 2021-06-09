@@ -131,18 +131,14 @@ function checkplugins( $p_path ) {
 /**
  * Check directory of language files
  *
- * @param string $p_path       Path.
- * @param string $p_lang_files Sub path.
+ * @param string $p_path Path to language files.
+ *
  * @return void
  */
-function checklangdir( $p_path, $p_lang_files = null ) {
+function checklangdir( $p_path ) {
 	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 
-	if( is_array( $p_lang_files ) ) {
-		$t_lang_files = $p_lang_files;
-	} else {
-		$t_lang_files = @scandir( $t_path );
-	}
+	$t_lang_files = @scandir( $t_path );
 	if( false == $t_lang_files ) {
 		print_error( 'language dir ' . $t_path . ' not found or not accessible' );
 	} else {
