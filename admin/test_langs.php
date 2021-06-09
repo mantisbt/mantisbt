@@ -169,52 +169,52 @@ function checklangdir( $p_path ) {
  * @return boolean
  */
 function checkfile( $p_path, $p_file, $p_quiet = false ) {
-		if( !$p_quiet ) {
-			echo 'Testing language file \'' . $p_file . '\' (phase 1)...<br />';
-			flush();
+	if( !$p_quiet ) {
+		echo 'Testing language file \'' . $p_file . '\' (phase 1)...<br />';
+		flush();
+	}
+
+	$t_file = $p_path . $p_file;
+
+	set_error_handler( 'lang_error_handler' );
+	$t_result = checktoken( $t_file, ($p_file == STRINGS_ENGLISH ) );
+	restore_error_handler();
+
+	if( !$t_result ) {
+		print_error( 'Language file \'' . $p_file . '\' failed at phase 1.', 'FAILED' );
+		if( $p_quiet ) {
+			return false;
 		}
+	}
 
-		$t_file = $p_path . $p_file;
-
-		set_error_handler( 'lang_error_handler' );
-		$t_result = checktoken( $t_file, ($p_file == STRINGS_ENGLISH ) );
-		restore_error_handler();
-
-		if( !$t_result ) {
-			print_error( 'Language file \'' . $p_file . '\' failed at phase 1.', 'FAILED' );
-			if( $p_quiet ) {
-				return false;
-			}
-		}
-
-		if( !$p_quiet ) {
-			echo 'Testing language file \'' . $p_file . '\' (phase 2)...<br />';
-			flush();
-		} else {
-			return true;
-		}
-
-		set_error_handler( 'lang_error_handler' );
-		ob_start();
-		$t_result = eval( 'require_once( \'' . $t_file . '\' );' );
-		$t_data = ob_get_contents();
-		ob_end_clean();
-		restore_error_handler();
-
-		if( $t_result === false ) {
-			print_error( 'Language file \'' . $p_file . '\' failed at eval', 'FAILED' );
-			if( $p_quiet ) {
-				return false;
-			}
-		}
-
-		if( !empty( $t_data ) ) {
-			print_error( 'Language file \'' . $p_file . '\' failed at require_once (data output: ' . var_export( $t_data, true ) . ')', 'FAILED' );
-			if( $p_quiet ) {
-				return false;
-			}
-		}
+	if( !$p_quiet ) {
+		echo 'Testing language file \'' . $p_file . '\' (phase 2)...<br />';
+		flush();
+	} else {
 		return true;
+	}
+
+	set_error_handler( 'lang_error_handler' );
+	ob_start();
+	$t_result = eval( 'require_once( \'' . $t_file . '\' );' );
+	$t_data = ob_get_contents();
+	ob_end_clean();
+	restore_error_handler();
+
+	if( $t_result === false ) {
+		print_error( 'Language file \'' . $p_file . '\' failed at eval', 'FAILED' );
+		if( $p_quiet ) {
+			return false;
+		}
+	}
+
+	if( !empty( $t_data ) ) {
+		print_error( 'Language file \'' . $p_file . '\' failed at require_once (data output: ' . var_export( $t_data, true ) . ')', 'FAILED' );
+		if( $p_quiet ) {
+			return false;
+		}
+	}
+	return true;
 }
 
 /**
