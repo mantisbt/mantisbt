@@ -63,11 +63,6 @@ print_admin_menu_bar( 'test_langs.php' );
 			<div class="widget-main">
 
 <?php
-if( !checkfile( $t_mantis_dir . 'lang' . DIRECTORY_SEPARATOR, STRINGS_ENGLISH, true ) ) {
-	print_error( "Language file '" . STRINGS_ENGLISH . "' failed.", 'FAILED' );
-	die;
-}
-
 checklangdir( $t_mantis_dir );
 ?>
 			</div>
@@ -139,7 +134,10 @@ function checklangdir( $p_path ) {
 		if( in_array( STRINGS_ENGLISH, $t_lang_files ) ) {
 			echo 'Testing English language file...<br />';
 			flush();
-			checkfile( $t_path, STRINGS_ENGLISH );
+			# No point testing other languages if English fails
+			if( !checkfile( $t_path, STRINGS_ENGLISH ) ) {
+				return;
+			}
 		}
 		# Skipping english language, readme and hidden files
 		foreach( $t_lang_files as $t_key => $t_lang ) {
