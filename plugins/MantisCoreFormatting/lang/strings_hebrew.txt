@@ -39,15 +39,16 @@
  * @file
  *
  * @author Amire80
+ * @author Avma
  * @author YaronSh
  */
 
 $s_plugin_format_title = 'עיצוב MantisBT';
-$s_plugin_format_description = 'התוסף הרשמי לעיבוד ולעיצוב של טקסט.';
+$s_plugin_format_description = 'המתקע הרשמי לעיבוד ולעיצוב מלל.';
 $s_plugin_format_config = 'תצורה';
 $s_plugin_format_process_text = 'עיבוד טקסט';
 $s_plugin_format_process_text_warning_notice = 'אין לכבות את זה, אלא אם כן אתם ממש יודעים מה אתם עושים. במצב כבוי מתאפשרות התקפות חוצות אתרים (XSS).';
 $s_plugin_format_process_urls = 'עיבוד כתובות';
-$s_plugin_format_process_buglinks = 'קישורי מנטיס ( באג/הערה לבאג )';
+$s_plugin_format_process_buglinks = 'קישורי מנטיס פנימיים(סוגיהוהערות סוגיה)';
 $s_plugin_format_enabled = 'פעיל';
 $s_plugin_format_disabled = 'כבוי';

@@ -39,13 +39,14 @@
  * @file
  *
  * @author Amire80
+ * @author Avma
  * @author Guycn2
  * @author Steeve815
  * @author YaronSh
  */
 
 $s_plugin_MantisGraph_title = 'מנטיס תרשימים';
-$s_plugin_MantisGraph_description = 'תוסף תרשימים רשמי.';
+$s_plugin_MantisGraph_description = 'מתקע תרשימים רשמי.';
 $s_plugin_MantisGraph_config = 'הגדרות';
 $s_plugin_MantisGraph_tab_label = 'תרשימים';
 $s_plugin_MantisGraph_status_link = 'לפי מצב';
