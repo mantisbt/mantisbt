@@ -40,6 +40,8 @@
  * @uses user_api.php
  */
 
+use Mantis\Exceptions\StateException;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -78,14 +80,21 @@ require_api( 'user_api.php' );
 
 /**
  * Returns HTML for each filter field, to be used in filter form.
- * $p_filter_target is a field name to match any of "the print_filter_..." functions,
- * excluding those related to custom fields and plugin fields.
- * When $p_show_options is enabled, the form inputs are returned to allow selection,
- * if the option is disabled, returns the current value and a hidden input for that value.
- * @param array $p_filter Filter array
- * @param string $p_filter_target Filter field name
- * @param boolean $p_show_inputs True to return a visible form input or false for a text value.
+ *
+ * $p_filter_target is a field name to match any of "the print_filter_..."
+ * functions, excluding those related to custom fields and plugin fields. When
+ * $p_show_options is enabled, the form inputs are returned to allow selection,
+ * if the option is disabled, returns the current value and a hidden input for
+ * that value.
+ *
+ * @param array   $p_filter        Filter array
+ * @param string  $p_filter_target Filter field name
+ * @param boolean $p_show_inputs   True to return a visible form input or false
+ *                                 for a text value.
+ *
  * @return string The html content for the field requested
+ *
+ * @throws StateException if there is no matching print_filter_... function
  */
 function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_inputs = true ) {
 	if( $p_show_inputs ) {
@@ -112,9 +121,11 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 		return ob_get_clean();
 	} else {
 		# error - no function to populate the target (e.g., print_filter_foo)
-		error_parameters( $p_filter_target );
-		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
-		return false;
+		throw new StateException(
+			"No function to populate the target",
+			ERROR_FILTER_NOT_FOUND,
+			array( $p_filter_target )
+		);
 	}
 }
 
