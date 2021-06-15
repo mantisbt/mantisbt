@@ -85,7 +85,7 @@ checklangdir( $t_mantis_dir );
 			<div class="widget-main no-padding table-responsive">
 				<table class="table table-bordered table-condensed ">
 <?php
-checkplugins( config_get_global( 'plugin_path' ) );
+checkplugins();
 ?>
 				</table>
 			</div>
@@ -99,26 +99,58 @@ layout_admin_page_end();
 
 /**
  * Check plugin language files
- * @param string $p_path Plugin path.
- * @return void
  */
-function checkplugins( $p_path ) {
-	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . '/';
+function checkplugins() {
+	$t_path = config_get_global( 'plugin_path' );
+	echo '<tr><td>';
+	echo "Retrieving Plugins from '$t_path'";
+	echo '</td>';
 
-	$t_plugins = @scandir( $t_path );
-	if( false == $t_plugins ) {
-		print_error( 'plugin path ' . $t_path . ' not found or not accessible' );
-	} else {
-		foreach( $t_plugins as $t_plugin ) {
-			if( $t_plugin[0] == '.' || $t_plugin == 'Web.config' ) {
-				continue;
-			}
-			echo '<tr><th colspan="2">';
-			echo "Checking language files for plugin <strong>$t_plugin</strong>";
-			echo '</th></tr>';
-			checklangdir( $t_path . $t_plugin );
-		}
+	try {
+		$t_plugins = get_plugins( $t_path );
+		print_info( count( $t_plugins ) . " Plugins found" );
+	} catch( UnexpectedValueException $e ) {
+		print_fail( $e->getMessage() );
+		echo '</tr>';
+		return;
 	}
+	echo '</tr>';
+
+	foreach( $t_plugins as $t_plugin => $t_path ) {
+		echo '<tr><th colspan="2">';
+		echo "Checking language files for plugin <strong>$t_plugin</strong>";
+		echo '</th></tr>';
+		checklangdir( $t_path );
+	}
+}
+
+/**
+ * Get the list of plugins.
+ *
+ * @param string $p_path
+ * @return string[] Plugin names in ascending order.
+ *
+ * @throws UnexpectedValueException
+ */
+function get_plugins( $p_path ) {
+	$t_iter = new CallbackFilterIterator(
+		new FileSystemIterator(
+			$p_path,
+			FileSystemIterator::KEY_AS_FILENAME
+		),
+		/**
+		 * Callback filter function
+		 * @param SplFileInfo $p_current
+		 * @return bool
+		 */
+		function( SplFileInfo $p_current ) {
+			return $p_current->isDir();
+		}
+	);
+
+	$t_plugins = iterator_to_array( $t_iter );
+	ksort( $t_plugins, SORT_FLAG_CASE );
+	return $t_plugins;
 }
 
 /**
