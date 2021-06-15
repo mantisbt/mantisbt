@@ -38,8 +38,11 @@
  * @uses relationship_api.php
  * @uses string_api.php
  * @uses user_api.php
+ *
+ * @noinspection HtmlFormInputWithoutLabel, PhpUnused
  */
 
+use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\StateException;
 
 require_api( 'access_api.php' );
@@ -1047,6 +1050,7 @@ function print_filter_show_priority( array $p_filter = null ) {
  * Print the current value of this filter field, as visible string, and as a hidden form input.
  * @param array $p_filter	Filter array
  * @return void
+ * @throws ClientException
  */
 function print_filter_values_show_profile( array $p_filter ) {
 	$t_filter = $p_filter;
@@ -2360,9 +2364,10 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 
 
 /**
- * Draw the table cells to view and edit a filter. This will usually be part of a form.
- * This method only prints the cells, not the table definition, or any other form element
- * outside of that.
+ * Draw the table cells to view and edit a filter.
+ *
+ * This will usually be part of a form. This method only prints the cells, not
+ * the table definition, or any other form element outside of that.
  * A filter array is provided, to populate the fields.
  * The form will use javascript to show dynamic completion of fields (unless the
  * parameter $p_static is provided).
@@ -2372,12 +2377,16 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
  *
  * @param array   $p_filter               Filter array to show.
  * @param boolean $p_for_screen           Type of output
- * @param boolean $p_static               Whether to print a static form (no dynamic fields)
- * @param string  $p_static_fallback_page Page name to use as javascript fallback
- * @param boolean $p_show_search          Whether to render the search field inside
- *                                        the general fields area. If false, the text
- *                                        search should be managed externally.
+ * @param boolean $p_static               Whether to print a static form (no
+ *                                        dynamic fields)
+ * @param string  $p_static_fallback_page Page name to use as javascript
+ *                                        fallback
+ * @param boolean $p_show_search          Whether to render the search field
+ *                                        inside the general fields area. If
+ *                                        false, the text search should be
+ *                                        managed externally.
  * @return void
+ * @throws StateException
  */
 function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = false, $p_static_fallback_page = null, $p_show_search = true ) {
 
