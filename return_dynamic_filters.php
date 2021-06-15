@@ -37,6 +37,8 @@
  * @uses helper_api.php
  */
 
+use Mantis\Exceptions\StateException;
+
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
@@ -88,16 +90,20 @@ function return_dynamic_filters_prepend_headers() {
 $f_filter_target = gpc_get_string( 'filter_target' );
 $filter_target = mb_substr( $f_filter_target, 0, -7 ); # -7 for '_filter'
 $t_found = false;
-$t_content = @call_user_func_array( 'filter_form_get_input', array( $t_filter, $filter_target, true ) );
+try {
+	$t_content = filter_form_get_input( $t_filter, $filter_target );
+} catch( StateException $e ) {
+	$t_content = false;
+}
+
 if( false !== $t_content ) {
 	return_dynamic_filters_prepend_headers();
 	$t_found = true;
 	echo $t_content;
 } else if( 'custom_field' == mb_substr( $f_filter_target, 0, 12 ) ) {
-	# custom function
+	# Check existence of custom field id, and if the user has access to read and filter by
 	$t_custom_id = mb_substr( $f_filter_target, 13, -7 );
-	$t_cfdef = @custom_field_get_definition( $t_custom_id );
-	# Check existence of custom field id, and if the user have access to read and filter by
+	$t_cfdef = custom_field_get_definition( $t_custom_id );
 	if( $t_cfdef && access_has_any_project_level( $t_cfdef['access_level_r'] ) && $t_cfdef['filter_by'] ) {
 		$t_found = true;
 		return_dynamic_filters_prepend_headers();
@@ -122,4 +128,3 @@ if( !$t_found ) {
 	error_parameters( $f_filter_target );
 	trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
 }
-
