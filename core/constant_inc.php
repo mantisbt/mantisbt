@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.25.1' );
+define( 'MANTIS_VERSION', '2.25.2' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
