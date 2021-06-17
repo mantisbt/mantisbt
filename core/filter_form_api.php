@@ -1703,7 +1703,7 @@ function print_filter_values_do_filter_by_due_date( array $p_filter ) {
 }
 
 /**
- * Print filter by last update date fields
+ * Print filter by due date fields
  * @global array $g_filter
  * @param boolean $p_hide_checkbox Hide data filter checkbox.
  * @param array $p_filter Filter array
