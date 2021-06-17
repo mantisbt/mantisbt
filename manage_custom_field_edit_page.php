@@ -87,7 +87,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 	<fieldset>
 		<?php echo form_security_field( 'manage_custom_field_update' ); ?>
 		<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-		<input type="hidden" name="return" value="<?php echo $f_return ?>" />
+		<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ); ?>" />
 
 <table class="table table-bordered table-condensed table-striped">
 	<tr>
