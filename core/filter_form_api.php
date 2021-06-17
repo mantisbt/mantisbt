@@ -2920,13 +2920,15 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			null /* class */,
 			'do_filter_by_last_updated_date_filter_target' /* content id */
 			));
-	$t_row2->add_item( new TableFieldsItem(
-			$get_field_header( 'do_filter_by_due_date_filter', lang_get( 'use_due_date_filters' ) ),
-			filter_form_get_input( $t_filter, 'do_filter_by_due_date', $t_show_inputs ),
-			2 /* colspan */,
-			null /* class */,
-			'do_filter_by_due_date_filter_target' /* content id */
-			));
+	if( access_has_any_project_level( config_get( 'due_date_view_threshold' ) ) ) {
+		$t_row2->add_item( new TableFieldsItem(
+				$get_field_header( 'do_filter_by_due_date_filter', lang_get( 'due_date' ) ),
+				filter_form_get_input( $t_filter, 'do_filter_by_due_date', $t_show_inputs ),
+				2 /* colspan */,
+				null /* class */,
+				'do_filter_by_due_date_filter_target' /* content id */
+				));
+	}
 	if( FILTER_VIEW_TYPE_ADVANCED == $t_view_type ) {
 		$t_row2->add_item( new TableFieldsItem(
 				$get_field_header( 'project_id_filter', lang_get( 'email_project' ) ),
