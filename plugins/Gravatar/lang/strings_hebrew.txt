@@ -38,7 +38,9 @@
  * @ingroup Language
  * @file
  *
+ * @author Avma
  * @author YaronSh
  */
 
-$s_plugin_Gravatar_title = 'תמונות ייצוגיות דרך Gravatar';
+$s_plugin_Gravatar_title = 'יַצְגָן באמצעות Gravatar';
+$s_plugin_Gravatar_description = 'מתקע שמציג יַצְגָני משתמשים על סמך כתובות הדוא"ל שלהם באמצעות שרותי יַצְגָן.';

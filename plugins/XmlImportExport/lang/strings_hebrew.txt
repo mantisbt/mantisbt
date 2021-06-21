@@ -39,17 +39,18 @@
  * @file
  *
  * @author Amire80
+ * @author Avma
  * @author YaronSh
  */
 
-$s_plugin_XmlImportExport_title = 'בעיות יצוא / יבוא';
+$s_plugin_XmlImportExport_title = 'סוגיות יצוא/יבוא';
 $s_plugin_XmlImportExport_description = 'הוספת יכולות יבוא ויצוא XML למנטיס';
-$s_plugin_XmlImportExport_import = 'בעיות יצוא';
+$s_plugin_XmlImportExport_import = 'סוגיות יצוא';
 $s_plugin_XmlImportExport_export = 'יצוא XML';
-$s_plugin_XmlImportExport_import_threshold = 'בעיות ייבוא';
-$s_plugin_XmlImportExport_export_threshold = 'בעיות ייצוא';
+$s_plugin_XmlImportExport_import_threshold = 'סוגיות ייבוא';
+$s_plugin_XmlImportExport_export_threshold = 'סוגיות ייצוא';
 $s_plugin_XmlImportExport_action_update = 'עדכון';
-$s_plugin_XmlImportExport_importing_in_project = 'בעיות ביבוא פרויקט:';
+$s_plugin_XmlImportExport_importing_in_project = 'סוגיות יבוא למיזם: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'אפשרויות יבוא';
 $s_plugin_XmlImportExport_cross_references = 'הפניות צולבות';
 $s_plugin_XmlImportExport_default_strategy = 'אסטרגיית המרה שתופעל לפי בררת מחדל';
