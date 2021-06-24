@@ -183,7 +183,6 @@ class LangCheckFile {
 			return false;
 		}
 
-		$t_in_php_code = false;
 		$t_variables = array();
 		static $s_basevariables;
 		$t_current_var = null;
@@ -269,10 +268,7 @@ class LangCheckFile {
 
 				switch( $t_id ) {
 					case T_OPEN_TAG:
-						$t_in_php_code = true;
-						break;
-					case T_CLOSE_TAG:
-						$t_in_php_code = false;
+						# We expect an initial <?php tag, but it does not require any processing
 						break;
 					case T_INLINE_HTML:
 						$this->logFail( 'Whitespace in language file outside of PHP code block', $t_line );
