@@ -24,7 +24,7 @@
 
 define( 'PLUGINS_DISABLED', true );
 define( 'LANG_LOAD_DISABLED', true );
-define( 'STRINGS_ENGLISH', 'strings_english.txt' );
+
 $t_mantis_dir = dirname( dirname( __FILE__ ) ) . '/';
 
 require_once( $t_mantis_dir . 'core.php' );
@@ -38,6 +38,7 @@ require_once( 'schema.php' );
  * Processes a language strings file (strings_xxx.txt)
  */
 class LangCheckFile {
+	const BASE = 'strings_english.txt';
 
 	/**
 	 * @var string Full path to to the language file
@@ -70,7 +71,7 @@ class LangCheckFile {
 		echo "<tr><td>Testing '$p_file'</td>";
 
 		$this->file = $p_path . $p_file;
-		$this->is_base_language = ( $p_file == STRINGS_ENGLISH );
+		$this->is_base_language = ( $p_file == self::BASE );
 	}
 
 	/**
@@ -536,11 +537,11 @@ function checklangdir( $p_path ) {
 	echo '</tr>';
 
 	# Check reference English language file
-	$t_key = array_search( STRINGS_ENGLISH, $t_lang_files );
+	$t_key = array_search( LangCheckFile::BASE, $t_lang_files );
 	if( $t_key === false ) {
 		print_fail( "File not found" );
 	} else {
-		$t_file = new LangCheckFile( $t_path, STRINGS_ENGLISH );
+		$t_file = new LangCheckFile( $t_path, LangCheckFile::BASE );
 		# No point testing other languages if English fails
 		if( !$t_file->check() ) {
 			return;
