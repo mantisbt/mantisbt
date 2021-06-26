@@ -561,33 +561,8 @@ function checklangdir( $p_path ) {
 	}
 }
 
-/**
-
-/**
- * Print Language File Error messages
- *
- * @param string $p_string Error string.
- * @param string $p_type   Message type to display (default ERROR).
- * @return void
- */
-function print_error($p_string, $p_type = 'ERROR' ) {
-	if ( $p_type === 'WARNING' ) {
-		echo '<span class="alert-warning">', $p_type . ': ' . $p_string, '</span><br />';
-	} else {
-		echo '<span class="alert-danger">', $p_type . ': ' . $p_string, '</span><br />';
-	}
-}
-
 function print_info( $p_message ) {
 	echo '<td class="alert-info">', string_attribute( $p_message ), '</td>';
-}
-
-function print_pass( $p_message = 'PASS') {
-	echo '<td class="alert-success">', string_attribute( $p_message ), '</td>';
-}
-
-function print_warn( $p_message ) {
-	echo '<td class="alert-warning">', string_attribute( $p_message ), '</td>';
 }
 
 function print_fail( $p_message ) {
