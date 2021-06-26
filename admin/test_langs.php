@@ -101,6 +101,8 @@ class LangCheckFile {
 	 * @return bool True if success (possibly with warnings), False if errors
 	 */
 	public function check() {
+		$this->checkConfig();
+
 		if( $this->checkTokens() ) {
 			try {
 				ob_start();
@@ -175,6 +177,39 @@ class LangCheckFile {
 		$t_status = $this->check();
 		$this->printResults();
 		return $t_status;
+	}
+
+	/**
+	 * Check language existence in configuration.
+	 *
+	 * TranslateWiki.net sometimes adds brand new languages; we need to make
+	 * sure that these are properly defined in
+	 * - {@see $g_language_choices_arr}
+	 * - {@see $g_language_auto_map}
+	 */
+	protected function checkConfig() {
+		global /** @noinspection PhpUnusedLocalVariableInspection */
+		$g_language_choices_arr, $g_language_auto_map;
+
+		# Extract language from file name
+		# preg_match() can't fail, get_lang_files() uses the same regex
+		preg_match( '/strings_(.+)\.txt$/', $this->file, $t_matches );
+		$t_lang = $t_matches[1];
+
+		# Check for matching entries in configuration
+		$t_check = ['g_language_choices_arr', 'g_language_auto_map'];
+		foreach( $t_check as $t_key => $t_config ) {
+			if( in_array( $t_lang, $$t_config ) ) {
+				unset( $t_check[$t_key] );
+			}
+		}
+
+		# Report errors
+		if( $t_check ) {
+			$this->logFail( "'$t_lang' language is not defined in "
+				. implode(', ', $t_check )
+			);
+		}
 	}
 
 	/**
