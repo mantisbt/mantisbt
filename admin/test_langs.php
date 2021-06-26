@@ -67,9 +67,6 @@ class LangCheckFile {
 	 * @param string $p_file Language file name
 	 */
 	public function __construct( $p_path, $p_file ) {
-		flush();
-		echo "<tr><td>Testing '$p_file'</td>";
-
 		$this->file = $p_path . $p_file;
 		$this->is_base_language = ( $p_file == self::BASE );
 	}
@@ -123,7 +120,7 @@ class LangCheckFile {
 			}
 		}
 
-		return $this->printResults();
+		return empty( $this->errors );
 	}
 
 	/**
@@ -133,11 +130,11 @@ class LangCheckFile {
 	 * being checked, and the second the outcome of the check including error
 	 * and warning messages as unordered list if any, with a colored background
 	 * depending on overall status (PASS, WARNINGS, ERRORS).
-	 *
-	 * @return bool True if passed or warnings, False if errors.
 	 */
 	public function printResults() {
-		$t_status = true;
+		flush();
+		echo "<tr><td>Testing '" . basename( $this->file ) . "'</td>";
+
 		$t_messages = '';
 
 		if( $this->warnings ) {
@@ -150,7 +147,6 @@ class LangCheckFile {
 		}
 
 		if( $this->errors ) {
-			$t_status = false;
 			$t_class = 'alert-danger';
 			$t_errors = '';
 			foreach( $this->errors as $t_msg ) {
@@ -167,6 +163,17 @@ class LangCheckFile {
 
 		/** @noinspection PhpUndefinedVariableInspection */
 		printf( '<td class="%s">%s</td>', $t_class, $t_messages );
+		echo '</tr>';
+	}
+
+	/**
+	 * Check Language File and print results.
+	 *
+	 * @return bool True if success (possibly with warnings), False if errors
+	 */
+	public function checkAndPrint() {
+		$t_status = $this->check();
+		$this->printResults();
 		return $t_status;
 	}
 
@@ -541,7 +548,7 @@ function checklangdir( $p_path ) {
 	} else {
 		$t_file = new LangCheckFile( $t_path, LangCheckFile::BASE );
 		# No point testing other languages if English fails
-		if( !$t_file->check() ) {
+		if( !$t_file->checkAndPrint() ) {
 			return;
 		}
 		unset( $t_lang_files[$t_key] );
@@ -550,7 +557,7 @@ function checklangdir( $p_path ) {
 	# Check foreign language files
 	foreach( $t_lang_files as $t_lang ) {
 		$t_file = new LangCheckFile( $t_path, $t_lang );
-		$t_file->check();
+		$t_file->checkAndPrint();
 	}
 }
 
