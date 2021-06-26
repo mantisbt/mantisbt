@@ -165,6 +165,7 @@ class LangCheckFile {
 			$t_messages = 'PASS';
 		}
 
+		/** @noinspection PhpUndefinedVariableInspection */
 		printf( '<td class="%s">%s</td>', $t_class, $t_messages );
 		return $t_status;
 	}
@@ -183,6 +184,7 @@ class LangCheckFile {
 			return false;
 		}
 
+		$t_line = 0;
 		$t_variables = array();
 		static $s_basevariables;
 		$t_current_var = null;
