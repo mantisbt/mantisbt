@@ -406,10 +406,6 @@ class LangCheckFile {
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
-if( function_exists( 'xdebug_disable' ) ) {
-	xdebug_disable();
-}
-
 lang_push( 'english' );
 
 set_time_limit( 0 );
