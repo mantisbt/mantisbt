@@ -209,6 +209,7 @@ function require_css( $p_stylesheet_path ) {
 function html_css() {
 	global $g_stylesheets_included;
 	html_css_link( config_get_global( 'css_include_file' ) );
+	html_css_link( 'css/select2.min.css' );
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
 		html_css_link( config_get_global( 'css_rtl_include_file' ) );
@@ -344,6 +345,7 @@ function html_head_javascript() {
 	foreach ( $g_scripts_included as $t_script_path ) {
 		html_javascript_link( $t_script_path );
 	}
+	html_javascript_link( 'select2.min.js ');
 }
 
 /**

@@ -209,6 +209,7 @@ $(document).ready( function() {
 			context: $('#' + targetID),
 			success: function(html) {
 				$(this).html(html);
+				do_update_select2();
 			},
 			error: function(obj,status,error) {
 				$(this).html('<span class="error-msg">' + status + ': ' + error + '</span>');
@@ -839,3 +840,18 @@ function enableDropzone( classPrefix, autoUpload ) {
 
 	return zone_object;
 }
+
+// Select2 Integration
+function do_update_select2() {
+	// skip manage_user_edit_page, because here simple select has advantages
+	if ( document.URL.indexOf("manage_user_edit_page.php") == -1 ) {
+		jQuery("select").each(function() {
+		    if (!this.disabled	&& this.options.length > 12 ) {
+			jQuery(this).select2();
+		    }
+		})
+	}
+};
+
+
+jQuery(document).ready(do_update_select2);
