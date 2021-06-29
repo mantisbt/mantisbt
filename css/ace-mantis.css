@@ -171,6 +171,10 @@ table {
     background-color: #ffffff !important;
 }
 
+table tbody {
+	overflow-wrap: anywhere;
+}
+
 /* Disable printing of link urls */
 a:link:after, a:visited:after {
     content: normal !important;
