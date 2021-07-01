@@ -47,6 +47,7 @@ $s_plugin_XmlImportExport_title = 'סוגיות יצוא/יבוא';
 $s_plugin_XmlImportExport_description = 'הוספת יכולות יבוא ויצוא XML למנטיס';
 $s_plugin_XmlImportExport_import = 'סוגיות יצוא';
 $s_plugin_XmlImportExport_export = 'יצוא XML';
+$s_plugin_XmlImportExport_config_title = 'תצורת רמות גישה של ייבוא/ייצוא XML';
 $s_plugin_XmlImportExport_import_threshold = 'סוגיות ייבוא';
 $s_plugin_XmlImportExport_export_threshold = 'סוגיות ייצוא';
 $s_plugin_XmlImportExport_action_update = 'עדכון';
