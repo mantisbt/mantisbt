@@ -8,20 +8,20 @@
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "v5.20.20",
+            "version": "v5.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
-                "reference": "66fb9e5300c2b3b84beab1d9d7793ff961c171a8"
+                "reference": "199391f639a0b3346a80d66c00c87230fa3e6a07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/66fb9e5300c2b3b84beab1d9d7793ff961c171a8",
-                "reference": "66fb9e5300c2b3b84beab1d9d7793ff961c171a8",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/199391f639a0b3346a80d66c00c87230fa3e6a07",
+                "reference": "199391f639a0b3346a80d66c00c87230fa3e6a07",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": "^5.5.9 || ^7.0 || ^8.0"
             },
             "type": "library",
             "autoload": {
@@ -50,7 +50,7 @@
                 }
             ],
             "description": "ADOdb is a PHP database abstraction layer library",
-            "homepage": "http://adodb.org/",
+            "homepage": "https://adodb.org/",
             "keywords": [
                 "abstraction",
                 "database",
@@ -62,7 +62,7 @@
                 "issues": "https://github.com/ADOdb/ADOdb/issues",
                 "source": "https://github.com/ADOdb/ADOdb"
             },
-            "time": "2021-01-31T20:51:30+00:00"
+            "time": "2021-02-27T11:38:53+00:00"
         },
         {
             "name": "dapphp/securimage",
