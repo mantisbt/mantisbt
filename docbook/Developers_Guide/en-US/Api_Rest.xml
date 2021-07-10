@@ -49,4 +49,21 @@
 			Then follow the standard pull request and checkin process.
 		</para>
 	</section>
+
+	<section id="restapi.performance">
+		<title>Diagnosing API performance</title>
+
+		<para>
+			To analyze the performance of the APIs, the following config option must be set.
+			`$g_show_queries_count = ON`. The API will return `X-Mantis-QueriesCount` with
+			the query count and `X-Mantis-ExecutionTime` with server side execution time.
+		</para>
+
+		<para>
+			To view the exact queries that were executed, the API will have to called in context
+			of an administrator user. In addition, the config option `$g_log_level = LOG_DATABASE`
+			must be set. Given that list of queries can be too large for headers, the queries can
+			replace the response body when including the request query string `return_queries=1`.
+		</para>
+	</section>
 </chapter>

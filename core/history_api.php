@@ -342,158 +342,155 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
 
 /**
  * Gets the next accessible history event for current user and specified db result.
- * @param  object  $p_result      The database result.
+ * @param  array   $p_event_row   The history event row.
  * @param  integer $p_user_id     The user id or null for logged in user.
  * @param  boolean $p_check_access_to_issue true: check that user has access to bugs,
  *                                          false otherwise.
  * @return array|false containing the history event or false if no more matches.
  */
-function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
+function history_get_event_from_row( $p_event_row, $p_user_id = null, $p_check_access_to_issue = true ) {
 	static $s_bug_visible = array();
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
 
-	while ( $t_row = db_fetch_array( $p_result ) ) {
-		/**
-		 * @var int $v_user_id
-		 * @var int $v_bug_id
-		 * @var string $v_field_name
-		 * @var string $v_old_value
-		 * @var string $v_new_value
-		 * @var int $v_type
-		 * @var int $v_date_modified
-		 */
-		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+	/**
+	 * @var int $v_user_id
+	 * @var int $v_bug_id
+	 * @var string $v_field_name
+	 * @var string $v_old_value
+	 * @var string $v_new_value
+	 * @var int $v_type
+	 * @var int $v_date_modified
+	 */
+	extract( $p_event_row, EXTR_PREFIX_ALL, 'v' );
 
-		# Ignore entries related to non-existing bugs (see #20727)
-		if( !bug_exists( $v_bug_id ) ) {
-			continue;
-		}
-
-		if( $p_check_access_to_issue ) {
-			if( !isset( $s_bug_visible[$v_bug_id] ) ) {
-				$s_bug_visible[$v_bug_id] = access_has_bug_level( VIEWER, $v_bug_id );
-			}
-
-			if( !$s_bug_visible[$v_bug_id] ) {
-				continue;
-			}
-		}
-
-		$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
-
-		if( $v_type == NORMAL_TYPE ) {
-			if( !in_array( $v_field_name, columns_get_standard() ) ) {
-				# check that the item should be visible to the user
-				$t_field_id = custom_field_get_id_from_name( $v_field_name );
-				if( false !== $t_field_id && !custom_field_has_read_access( $t_field_id, $v_bug_id, $t_user_id ) ) {
-					continue;
-				}
-			}
-
-			if( ( $v_field_name == 'target_version' ) &&
-				!access_has_bug_level( config_get( 'roadmap_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
-				continue;
-			}
-
-			if( ( $v_field_name == 'due_date' ) &&
-				!access_has_bug_level( config_get( 'due_date_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
-				continue;
-			}
-
-			if( ( $v_field_name == 'handler_id' ) &&
-				!access_has_bug_level( config_get( 'view_handler_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
-				continue;
-			}
-		}
-
-		# bugnotes
-		if( $t_user_id != $v_user_id ) {
-			# bypass if user originated note
-			if( ( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
-				if( !bugnote_exists( $v_old_value ) ) {
-					continue;
-				}
-
-				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
-					continue;
-				}
-			}
-
-			if( $v_type == BUGNOTE_STATE_CHANGED ) {
-				if( !bugnote_exists( $v_new_value ) ) {
-					continue;
-				}
-
-				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
-					continue;
-				}
-			}
-		}
-
-		# tags
-		if( $v_type == TAG_ATTACHED || $v_type == TAG_DETACHED || $v_type == TAG_RENAMED ) {
-			if( !access_has_bug_level( config_get( 'tag_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
-				continue;
-			}
-		}
-
-		# attachments
-		if( $v_type == FILE_ADDED || $v_type == FILE_DELETED ) {
-			if( !access_has_bug_level( config_get( 'view_attachments_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
-				continue;
-			}
-
-			# Files were originally just associated with the issue, then association with specific bugnotes
-			# was added, so handled legacy and new way of handling attachments.
-			if( !empty( $v_new_value ) && (int)$v_new_value != 0 ) {
-				if( !bugnote_exists( $v_new_value ) ) {
-					continue;
-				}
-
-				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
-					continue;
-				}
-			}
-		}
-
-		# monitoring
-		if( $v_type == BUG_MONITOR || $v_type == BUG_UNMONITOR ) {
-			if( !access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $v_bug_id, $t_user_id ) ) {
-				continue;
-			}
-		}
-
-		# relationships
-		if( $v_type == BUG_ADD_RELATIONSHIP || $v_type == BUG_DEL_RELATIONSHIP || $v_type == BUG_REPLACE_RELATIONSHIP ) {
-			$t_related_bug_id = $v_new_value;
-
-			# If bug doesn't exist, then we don't know whether to expose it or not based on the fact whether it was
-			# accessible to user or not.  This also simplifies client code that is accessing the history log.
-			if( !bug_exists( $t_related_bug_id ) || !access_has_bug_level( config_get( 'view_bug_threshold' ), $t_related_bug_id, $t_user_id ) ) {
-				continue;
-			}
-		}
-
-		if( $v_type == BUG_REVISION_DROPPED || $v_type == BUGNOTE_REVISION_DROPPED ) {
-			if( !access_can_view_bug_revisions( $v_bug_id ) ) {
-				continue;
-			}
-		}
-
-		$t_event = array();
-		$t_event['bug_id'] = $v_bug_id;
-		$t_event['date'] = $v_date_modified;
-		$t_event['userid'] = $v_user_id;
-		$t_event['username'] = user_get_name( $v_user_id );
-		$t_event['field'] = $v_field_name;
-		$t_event['type'] = $v_type;
-		$t_event['old_value'] = $v_old_value;
-		$t_event['new_value'] = $v_new_value;
-
-		return $t_event;
+	# Ignore entries related to non-existing bugs (see #20727)
+	if( !bug_exists( $v_bug_id ) ) {
+		return false;
 	}
 
-	return false;
+	if( $p_check_access_to_issue ) {
+		if( !isset( $s_bug_visible[$v_bug_id] ) ) {
+			$s_bug_visible[$v_bug_id] = access_has_bug_level( VIEWER, $v_bug_id );
+		}
+
+		if( !$s_bug_visible[$v_bug_id] ) {
+			return false;
+		}
+	}
+
+	$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
+
+	if( $v_type == NORMAL_TYPE ) {
+		if( !in_array( $v_field_name, columns_get_standard() ) ) {
+			# check that the item should be visible to the user
+			$t_field_id = custom_field_get_id_from_name( $v_field_name );
+			if( false !== $t_field_id && !custom_field_has_read_access( $t_field_id, $v_bug_id, $t_user_id ) ) {
+				return false;
+			}
+		}
+
+		if( ( $v_field_name == 'target_version' ) &&
+			!access_has_bug_level( config_get( 'roadmap_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
+			return false;
+		}
+
+		if( ( $v_field_name == 'due_date' ) &&
+			!access_has_bug_level( config_get( 'due_date_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
+			return false;
+		}
+
+		if( ( $v_field_name == 'handler_id' ) &&
+			!access_has_bug_level( config_get( 'view_handler_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
+			return false;
+		}
+	}
+
+	# bugnotes
+	if( $t_user_id != $v_user_id ) {
+		# bypass if user originated note
+		if( ( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
+			if( !bugnote_exists( $v_old_value ) ) {
+				return false;
+			}
+
+			if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
+				return false;
+			}
+		}
+
+		if( $v_type == BUGNOTE_STATE_CHANGED ) {
+			if( !bugnote_exists( $v_new_value ) ) {
+				return false;
+			}
+
+			if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+				return false;
+			}
+		}
+	}
+
+	# tags
+	if( $v_type == TAG_ATTACHED || $v_type == TAG_DETACHED || $v_type == TAG_RENAMED ) {
+		if( !access_has_bug_level( config_get( 'tag_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
+			return false;
+		}
+	}
+
+	# attachments
+	if( $v_type == FILE_ADDED || $v_type == FILE_DELETED ) {
+		if( !access_has_bug_level( config_get( 'view_attachments_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
+			return false;
+		}
+
+		# Files were originally just associated with the issue, then association with specific bugnotes
+		# was added, so handled legacy and new way of handling attachments.
+		if( !empty( $v_new_value ) && (int)$v_new_value != 0 ) {
+			if( !bugnote_exists( $v_new_value ) ) {
+				return false;
+			}
+
+			if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+				return false;
+			}
+		}
+	}
+
+	# monitoring
+	if( $v_type == BUG_MONITOR || $v_type == BUG_UNMONITOR ) {
+		if( !access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $v_bug_id, $t_user_id ) ) {
+			return false;
+		}
+	}
+
+	# relationships
+	if( $v_type == BUG_ADD_RELATIONSHIP || $v_type == BUG_DEL_RELATIONSHIP || $v_type == BUG_REPLACE_RELATIONSHIP ) {
+		$t_related_bug_id = $v_new_value;
+
+		# If bug doesn't exist, then we don't know whether to expose it or not based on the fact whether it was
+		# accessible to user or not.  This also simplifies client code that is accessing the history log.
+		if( !bug_exists( $t_related_bug_id ) || !access_has_bug_level( config_get( 'view_bug_threshold' ), $t_related_bug_id, $t_user_id ) ) {
+			return false;
+		}
+	}
+
+	# revisions
+	if( $v_type == BUG_REVISION_DROPPED || $v_type == BUGNOTE_REVISION_DROPPED ) {
+		if( !access_can_view_bug_revisions( $v_bug_id ) ) {
+			return false;
+		}
+	}
+
+	$t_event = array();
+	$t_event['bug_id'] = $v_bug_id;
+	$t_event['date'] = $v_date_modified;
+	$t_event['userid'] = $v_user_id;
+	$t_event['username'] = user_get_name( $v_user_id );
+	$t_event['field'] = $v_field_name;
+	$t_event['type'] = $v_type;
+	$t_event['old_value'] = $v_old_value;
+	$t_event['new_value'] = $v_new_value;
+
+	return $t_event;
 }
 
 /**
@@ -515,22 +512,29 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 		'start_time' => $p_start_time,
 		'end_time' => $p_end_time
 		);
+
 	$t_result = history_query_result( $t_query_options );
 
 	$t_raw_history = array();
 
-	$j = 0;
-	while( true ) {
-		$t_event = history_get_event_from_row( $t_result, $t_user_id, /* check access */ true );
-		if ( $t_event === false ) {
-			break;
-		}
-
-		$t_raw_history[$j] = $t_event;
-		$j++;
+	$t_candidate_events = array();
+	$t_user_ids = array();
+	while( $t_event_row = db_fetch_array( $t_result ) ) {
+		$t_candidate_events[] = $t_event_row;
+		$t_user_id = (int)$t_event_row['user_id'];
+		$t_user_ids[$t_user_id] = $t_user_id;
 	}
 
-	# end for loop
+	user_cache_array_rows( $t_user_ids );
+
+	foreach( $t_candidate_events as $t_event_row ) {
+		$t_event = history_get_event_from_row( $t_event_row, $t_user_id, /* check access */ true );
+		if ( $t_event === false ) {
+			continue;
+		}
+
+		$t_raw_history[] = $t_event;
+	}
 
 	return $t_raw_history;
 }
