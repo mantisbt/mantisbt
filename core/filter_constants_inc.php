@@ -49,6 +49,14 @@ define( 'FILTER_PROPERTY_LAST_UPDATED_END_MONTH', 'last_updated_end_month' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_END_YEAR', 'last_updated_end_year' );
 define( 'FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE', 'filter_by_last_updated_date' ); #do_filter_by_last_updated_date
 
+define( 'FILTER_PROPERTY_DUE_START_DAY', 'due_start_day' );
+define( 'FILTER_PROPERTY_DUE_START_MONTH', 'due_start_month' );
+define( 'FILTER_PROPERTY_DUE_START_YEAR', 'due_start_year' );
+define( 'FILTER_PROPERTY_DUE_END_DAY', 'due_end_day' );
+define( 'FILTER_PROPERTY_DUE_END_MONTH', 'due_end_month' );
+define( 'FILTER_PROPERTY_DUE_END_YEAR', 'due_end_year' );
+define( 'FILTER_PROPERTY_FILTER_BY_DUE_DATE', 'filter_by_due_date' ); #do_filter_by_due_date
+
 define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
 define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
 define( 'FILTER_PROPERTY_TAG_STRING', 'tag_string' );
