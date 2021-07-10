@@ -552,7 +552,7 @@ class DbQuery {
 	 */
 	public function sql_in( $p_alias, $p_label_or_values ) {
 		if( is_array( $p_label_or_values ) ) {
-			if( count( $p_label_or_values ) > self::$oracle_in_limit ) {
+			if( db_is_oracle() && count( $p_label_or_values ) > self::$oracle_in_limit ) {
 				$t_sql = $this->helper_in_oracle_fix( $p_alias, $p_label_or_values );
 			} elseif( count( $p_label_or_values ) == 1 ) {
 				$t_sql = $p_alias . ' = ' . $this->param( reset( $p_label_or_values ) );
