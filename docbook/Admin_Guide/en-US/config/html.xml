@@ -93,13 +93,19 @@
 		<varlistentry>
 			<term>$g_css_include_file</term>
 			<listitem>
-				<para>Set this to point to the CSS file of your choice.</para>
+				<para>
+					Set this to point to the user CSS file of your choice which
+					can overwrite default values in default.css.
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_css_rtl_include_file</term>
 			<listitem>
-				<para>Set this to point to the RTL CSS file of your choice.</para>
+				<para>
+					Set this to point to the RTL CSS file of your choice which
+					can overwrite default values in rtl.css.
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

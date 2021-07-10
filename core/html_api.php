@@ -208,10 +208,10 @@ function require_css( $p_stylesheet_path ) {
  */
 function html_css() {
 	global $g_stylesheets_included;
-	html_css_link( config_get_global( 'css_include_file' ) );
+	html_css_link( 'default.css' );
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
-		html_css_link( config_get_global( 'css_rtl_include_file' ) );
+		html_css_link( 'rtl.css' );
 	}
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
 		# status_config.php is a special css file, dynamically generated.
@@ -232,6 +232,18 @@ function html_css() {
 		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css' );
 	} else {
 		html_css_link( 'dropzone-' . DROPZONE_VERSION . '.min.css' );
+	}
+
+	$t_css_include_file = config_get_global( 'css_include_file' );
+	if( $t_css_include_file !== '' && $t_css_include_file !== 'default.css' ) {
+		html_css_link( $t_css_include_file );
+	}
+	# Add right-to-left css if needed
+	if( lang_get( 'directionality' ) == 'rtl' ) {
+		$t_css_rtl_include_file = config_get_global( 'css_rtl_include_file' );
+		if( $t_css_rtl_include_file !== '' && $t_css_rtl_include_file !== 'rtl.css' ) {
+			html_css_link( $t_css_rtl_include_file );
+		}
 	}
 }
 
