@@ -236,7 +236,7 @@
 				<para>
 					This event allows plugins to do post-processing of newly-created
 					users.  This event is triggered for each user created.  The
-					Manage Users create form is one possible case for triggering
+					Users create form is one possible case for triggering
 					such events, but there can be other ways users can be created.
 				</para>
 

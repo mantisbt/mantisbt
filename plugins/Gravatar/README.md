@@ -13,7 +13,7 @@ based on the user's e-mail address.
 ## Installation
 
 1. While logged into your Mantis installation as an administrator, go to
-   'Manage' -> "Manage Plugins".
+   'Manage' -> "Plugins".
 
 2. In the "Available Plugins" list, you'll find the "Gravatar" plugin.
    Click "Install".

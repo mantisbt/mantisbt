@@ -801,7 +801,7 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 			<listitem>
 				<para>Create a new Administrator account
 				</para>
-				<para>Go to <emphasis>Manage &gt; Manage Users</emphasis>
+				<para>Go to <emphasis>Manage &gt; Users</emphasis>
 					and create a new account with 'administrator'
 					access level.
 				</para>
@@ -815,7 +815,7 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 			<listitem>
 				<para>Create a new Project
 				</para>
-				<para>Go to <emphasis>Manage &gt; Manage Projects</emphasis>
+				<para>Go to <emphasis>Manage &gt; Projects</emphasis>
 					and create a new project
 				</para>
 			</listitem>

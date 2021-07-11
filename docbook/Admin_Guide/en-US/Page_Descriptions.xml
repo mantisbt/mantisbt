@@ -336,7 +336,7 @@
         </para>
 
         <section id="admin.pages.manage.users">
-            <title>Manage Users</title>
+            <title>Users</title>
 
 
             <para>This page allow an administrator to manage the users in the
@@ -470,7 +470,7 @@
         </section>
 
         <section id="admin.pages.manage.profiles">
-            <title>Manage Global Profiles</title>
+            <title>Global Profiles</title>
 
             <para>This page allows the definition of global profiles
                 accessible to all users of the system. It is similar to the user
@@ -481,7 +481,7 @@
 
 
         <section id="admin.pages.manage.config">
-            <title>Manage Configuration</title>
+            <title>Configuration</title>
 
 
             <para>This set of pages control the configuration of the MantisBT
