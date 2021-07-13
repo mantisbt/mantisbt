@@ -348,7 +348,7 @@ $s_CODE = STRING;
 						<para>Select "Manage" from the main menu.</para>
 					</listitem>
 					<listitem>
-						<para>Select "Manage Custom Fields" from the management
+						<para>Select "Custom Fields" from the management
 							menu.
 						</para>
 					</listitem>
@@ -385,7 +385,7 @@ $s_CODE = STRING;
 						<para>Select "Manage" from the main menu.</para>
 					</listitem>
 					<listitem>
-						<para>Select "Manage Projects".
+						<para>Select "Projects".
 						</para>
 					</listitem>
 					<listitem>
