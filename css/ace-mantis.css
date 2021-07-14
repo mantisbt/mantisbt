@@ -572,6 +572,17 @@ hr {
     border-color: #393939;
 }
 
+/* Mantis 28826: Remove vertical lines for bordered tables. */
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
