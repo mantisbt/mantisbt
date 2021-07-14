@@ -15,6 +15,8 @@ Earlier releases (1.2.x and older) are not supported anymore.
 If you discover a security issue (or what you think could be one), please 
 [open a new issue](https://mantisbt.org/bugs/bug_report_page.php?category_id=36&view_state=50) 
 in our bug tracker following the guidelines below.
+Please note that you must sign up and be logged in with your 
+mantisbt.org account to report issues.
 
 :warning: **Do not submit GitHub Pull Requests or post on the mailing list** :warning:  
 These are public channels which would effectively disclose the security issue.
