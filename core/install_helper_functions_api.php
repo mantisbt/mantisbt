@@ -704,6 +704,8 @@ function install_check_project_hierarchy() {
  * This ensures it is not possible to execute code during un-serialization
  */
 function install_check_config_serialization() {
+	$t_errors = array();
+
 	$t_update = new DbQuery(
 		'UPDATE {config} SET value=:value '
 		. 'WHERE config_id=:config_id AND project_id=:project_id AND user_id=:user_id'
@@ -714,9 +716,6 @@ function install_check_config_serialization() {
 		. 'FROM {config} WHERE type=3'
 	);
 	foreach( $t_query->fetch_all() as $t_row ) {
-		$t_config_id = $t_row['config_id'];
-		$t_project_id = (int)$t_row['project_id'];
-		$t_user_id = (int)$t_row['user_id'];
 		$t_value = &$t_row['value'];
 
 		# Don't try to convert the value if it's already valid JSON
@@ -728,20 +727,36 @@ function install_check_config_serialization() {
 			$t_config = safe_unserialize( $t_value );
 		}
 		catch( ErrorException $e ) {
-			install_print_unserialize_error(
-				"Config '$t_config_id' for project id $t_project_id, user id $t_user_id",
-				'config',
-				$e->getMessage(),
-				$t_value
-			);
-
-			return 1; # Fatal: invalid data found in config table
+			$t_row['error'] = $e->getMessage();
+			$t_errors[] = $t_row;
+			continue;
 		}
 
 		$t_value = json_encode( $t_config );
 
 		$t_update->bind_values( $t_row );
 		$t_update->execute();
+	}
+
+	if( $t_errors ) {
+		foreach( $t_errors as $t_row ) {
+			/**
+			 * @var string $t_config_id
+			 * @var int $t_project_id
+			 * @var int $t_user_id
+			 * @var string $t_value
+			 * @var string $t_error
+			 */
+			extract( $t_row, EXTR_PREFIX_ALL, 't' );
+			install_print_unserialize_error(
+				"Config '$t_config_id' for project id $t_project_id, user id $t_user_id",
+				'config',
+				$t_error,
+				$t_value
+			);
+		}
+
+		return 1; # Fatal: invalid data found in config table
 	}
 
 	# flush config here as we've changed the format of the configuration table
