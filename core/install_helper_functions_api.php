@@ -704,14 +704,20 @@ function install_check_project_hierarchy() {
  * This ensures it is not possible to execute code during un-serialization
  */
 function install_check_config_serialization() {
-	$query = 'SELECT * FROM {config} WHERE type=3';
+	$t_update = new DbQuery(
+		'UPDATE {config} SET value=:value '
+		. 'WHERE config_id=:config_id AND project_id=:project_id AND user_id=:user_id'
+	);
 
-	$t_result = db_query( $query );
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	$t_query = new DbQuery(
+		'SELECT config_id, project_id, user_id, value '
+		. 'FROM {config} WHERE type=3'
+	);
+	foreach( $t_query->fetch_all() as $t_row ) {
 		$t_config_id = $t_row['config_id'];
 		$t_project_id = (int)$t_row['project_id'];
 		$t_user_id = (int)$t_row['user_id'];
-		$t_value = $t_row['value'];
+		$t_value = &$t_row['value'];
 
 		try {
 			$t_config = safe_unserialize( $t_value );
@@ -727,11 +733,10 @@ function install_check_config_serialization() {
 			return 1; # Fatal: invalid data found in config table
 		}
 
-		$t_json_config = json_encode( $t_config );
+		$t_value = json_encode( $t_config );
 
-		db_param_push();
-		$t_query = 'UPDATE {config} SET value=' .db_param() . ' WHERE config_id=' .db_param() . ' AND project_id=' .db_param() . ' AND user_id=' .db_param();
-		db_query( $t_query, array( $t_json_config, $t_config_id, $t_project_id, $t_user_id ) );
+		$t_update->bind_values( $t_row );
+		$t_update->execute();
 	}
 
 	# flush config here as we've changed the format of the configuration table
