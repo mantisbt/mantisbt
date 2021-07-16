@@ -719,6 +719,11 @@ function install_check_config_serialization() {
 		$t_user_id = (int)$t_row['user_id'];
 		$t_value = &$t_row['value'];
 
+		# Don't try to convert the value if it's already valid JSON
+		if( $t_value === null || json_decode( $t_value ) !== null ) {
+			continue;
+		}
+
 		try {
 			$t_config = safe_unserialize( $t_value );
 		}
