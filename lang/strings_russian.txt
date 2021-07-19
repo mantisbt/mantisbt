@@ -66,6 +66,7 @@
  * @author Redredsonia
  * @author Sabbah
  * @author Semen
+ * @author Thothsum
  * @author Vlad5250
  * @author Volkov
  * @author Wileyfoxyx
@@ -647,6 +648,7 @@ $s_resolved_status = 'Состояние для решенных задач';
 $s_readonly_status = 'Состояние для перевода задачи в режим "только для чтения"';
 $s_reopen_status = 'Состояние для переоткрытой задачи';
 $s_reopen_resolution = 'Вид решения для переоткрытой задачи';
+$s_limit_view_unless_threshold_option = 'Просмотр проблем других пользователей (если не установлен, доступ к проблемам, о которых сообщается, которые обрабатываются или отслеживаются пользователем будет ограничен)';
 $s_config_delete_sure = 'Вы уверены, что хотите удалить настройки для %1$s в проекте %2$s?';
 $s_delete_config_button = 'Удалить настройки';
 $s_configuration_report = 'Отчет о конфигурации';
@@ -662,6 +664,7 @@ $s_set_configuration_option_action_create = 'Создать параметр';
 $s_set_configuration_option_action_edit = 'Изменение параметра конфигурации';
 $s_set_configuration_option_action_clone = 'Клонировать параметр';
 $s_set_configuration_option_action_view = 'Просмотр параметра конфигурации';
+$s_show_all_complex = 'Показать значение для всех параметров "%1$s"';
 $s_plugin = 'Плагин';
 $s_plugins_installed = 'Установленные плагины';
 $s_plugins_available = 'Доступные плагины';
@@ -1217,6 +1220,7 @@ $s_copy_columns_to = 'Скопировать столбцы в';
 $s_due_date = 'Дата окончания';
 $s_overdue = 'Просрочено';
 $s_overdue_since = 'Просрочено с %1$s';
+$s_overdue_days = 'Просрочено через %1$d дн.';
 $s_view_account_title = 'Информация о пользователе';
 $s_manage_user = 'Изменить учётную запись';
 $s_label = '%1$:';
@@ -1421,6 +1425,7 @@ $s_submit = 'Отправить';
 $s_update = 'Изменить';
 $s_delete = 'Удалить';
 $s_make_default = 'Использовать по умолчанию';
+$s_clear_default = 'Очистить по умолчанию';
 $s_print = 'Печать';
 $s_jump = 'Перейти';
 $s_change = 'Изменить';
