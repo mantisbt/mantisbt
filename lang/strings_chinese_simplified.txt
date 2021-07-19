@@ -39,6 +39,7 @@
  * @file
  *
  * @author Bbqyee
+ * @author Crowley666
  * @author Duolaimi
  * @author FakeGreenHand
  * @author Fengchao
@@ -665,6 +666,7 @@ $s_plugin = '插件';
 $s_plugins_installed = '已装插件';
 $s_plugins_available = '可用插件';
 $s_plugins_missing = '缺失或无效的插件';
+$s_plugins_missing_description = '下列插件已注册，但无法从“%s”中找到或加载它们的源代码。<br>尝试重新安装或删除它们。';
 $s_plugin_description = '说明';
 $s_plugin_problem_description = '问题描述';
 $s_plugin_author = '作者： %1$s';
