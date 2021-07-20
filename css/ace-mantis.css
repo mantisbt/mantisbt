@@ -171,12 +171,8 @@ table {
     background-color: #ffffff !important;
 }
 
-td {
-    overflow-wrap: anywhere;
-}
-
-td a {
-    overflow-wrap: normal;
+[class*="description"] {
+	overflow-wrap: anywhere;
 }
 
 /* Disable printing of link urls */
