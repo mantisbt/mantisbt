@@ -60,6 +60,8 @@ class EmailData {
 	 */
 	public $metadata = array(
 		'headers' => array(),
+		'cc' => array(),
+		'bcc' => array(),
 	);
 
 	/**
