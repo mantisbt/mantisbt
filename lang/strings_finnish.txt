@@ -40,6 +40,7 @@
  *
  * @author Crt
  * @author Lliehu
+ * @author MITO
  * @author Nike
  * @author Pyscowicz
  * @author Silvonen
@@ -498,17 +499,17 @@ $s_default_filter = 'Oletussuodatin';
 $s_create_filter_link = 'Luo lyhytlinkki';
 $s_create_short_link = 'Luo lyhytlinkki';
 $s_filter_permalink = 'Pysyvä linkki aktiiviseen muokattuun suodattimeen:';
-$s_manage_users_link = 'Käyttäjähallinta';
-$s_manage_projects_link = 'Projektinhallinta';
-$s_manage_custom_field_link = 'Muokkaa mukautettuja kenttiä';
+$s_manage_users_link = 'Käyttäjät';
+$s_manage_projects_link = 'Projektit';
+$s_manage_custom_field_link = 'Mukautetut kentät';
 $s_manage_global_profiles_link = 'Muokkaa yleisiä profiileja';
-$s_manage_plugin_link = 'Muokkaa laajennuksia';
+$s_manage_plugin_link = 'Lisäosat';
 $s_permissions_summary_report = 'Käyttöoikeusraportti';
 $s_manage_config_link = 'Hallinnoi käyttöoikeuksia';
 $s_manage_threshold_config = 'Tapahtumaketjun kynnysrajat';
 $s_manage_email_config = 'Sähköpostimuistutukset';
 $s_manage_workflow_config = 'Tapahtumaketju';
-$s_manage_tags_link = 'Muokkaa tägejä';
+$s_manage_tags_link = 'Tagit';
 $s_create_new_account_link = 'Luo uusi käyttäjätunnus';
 $s_projects_link = 'Projektit';
 $s_documentation_link = 'Dokumentaatio';
