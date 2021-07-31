@@ -492,7 +492,10 @@ function install_stored_filter_migrate() {
 
 	$t_query = 'SELECT * FROM {filters}';
 	$t_result = db_query( $t_query );
+	$t_errors = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_error = false;
+
 		# Grab Filter Version and data into $t_setting_arr
 		$t_setting_arr = explode( '#', $t_row['filter_string'], 2 );
 
@@ -519,14 +522,21 @@ function install_stored_filter_migrate() {
 						$t_filter_arr = safe_unserialize( $t_setting_arr[1] );
 					}
 					catch( ErrorException $e ) {
-						# Set to null to have a consistent error value
-						$t_filter_arr = null;
 						$t_error = $e->getMessage();
 					}
 					break;
 				default:
 					$t_filter_arr = json_decode( $t_setting_arr[1], /* assoc array */ true );
-					$t_error = 'invalid JSON';
+					if( $t_filter_arr === null ) {
+						$t_error = 'Invalid JSON';
+					}
+			}
+			# Serialized or json encoded data in filter table is invalid.
+			# Log the error for later processing.
+			if( $t_error ) {
+				$t_row['error'] = $t_error;
+				$t_errors[] = $t_row;
+				continue;
 			}
 		} else {
 			db_param_push();
@@ -535,23 +545,8 @@ function install_stored_filter_migrate() {
 			continue;
 		}
 
-		# Serialized or json encoded data in filter table is invalid. Provide
-		# details about the error and abort the upgrade.
-		# Let the user investigate and fix the problem before trying again.
-		if( $t_filter_arr === null ) {
-			$t_id = $t_row['id'];
-			$t_name = $t_row['name'];
-			install_print_unserialize_error(
-				sprintf( "Filter id $t_id %s", $t_name ? "('$t_name') " : '' ),
-				'filters',
-				$t_error,
-				$t_setting_arr[1]
-			);
-
-			return 1; # Fatal: invalid data found in filters table
-		}
-
-		# Ff the filter version does not match the latest version, pass it through filter_ensure_valid_filter to do any updates
+		# If the filter version does not match the latest version,
+		# pass it through filter_ensure_valid_filter to do any updates.
 		# This will set default values for filter fields
 		if( $t_filter_arr['_version'] != FILTER_VERSION ) {
 			$t_filter_arr = filter_ensure_valid_filter( $t_filter_arr );
@@ -573,7 +568,9 @@ function install_stored_filter_migrate() {
 		# Check that this is the case, to before storing the updated filter values.
 		# Abort if the filter is invalid as this should not be possible
 		if( $t_filter_arr['_version'] != FILTER_VERSION ) {
-			return 1; # Fatal: invalid data found in filters table
+			$t_row['error'] = 'Invalid filter';
+			$t_errors[] = $t_row;
+			continue;
 		}
 
 		$t_filter_serialized = json_encode( $t_filter_arr );
@@ -582,6 +579,13 @@ function install_stored_filter_migrate() {
 		db_param_push();
 		$t_update_query = 'UPDATE {filters} SET filter_string=' . db_param() . ' WHERE id=' . db_param();
 		$t_update_result = db_query( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
+	}
+
+	# Errors occurred, provide details and abort the upgrade to
+	# let the user investigate and fix the problem before trying again.
+	if( $t_errors ) {
+		install_print_unserialize_errors_csv( 'filters', $t_errors );
+		return 1; # Fatal: invalid data found in filters table
 	}
 
 	# Re-enable query logging if we disabled it
