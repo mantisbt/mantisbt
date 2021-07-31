@@ -739,23 +739,7 @@ function install_check_config_serialization() {
 	}
 
 	if( $t_errors ) {
-		foreach( $t_errors as $t_row ) {
-			/**
-			 * @var string $t_config_id
-			 * @var int $t_project_id
-			 * @var int $t_user_id
-			 * @var string $t_value
-			 * @var string $t_error
-			 */
-			extract( $t_row, EXTR_PREFIX_ALL, 't' );
-			install_print_unserialize_error(
-				"Config '$t_config_id' for project id $t_project_id, user id $t_user_id",
-				'config',
-				$t_error,
-				$t_value
-			);
-		}
-
+		install_print_unserialize_errors_csv( 'config', $t_errors );
 		return 1; # Fatal: invalid data found in config table
 	}
 
@@ -848,6 +832,47 @@ function install_gravatar_plugin() {
 function InsertData( $p_table, $p_data ) {
 	$t_query = 'INSERT INTO ' . $p_table . $p_data;
 	return array( $t_query );
+}
+
+/**
+ * Print a friendly error message and link to download errors list as CSV.
+ *
+ * @param string $p_table Mantis table name
+ * @param array  $p_data  Errors list
+ *
+ * @return void
+ */
+function install_print_unserialize_errors_csv( $p_table, $p_data ) {
+	# Memory file handle to generate error data as CSV for download
+	$f = fopen( 'php://memory', 'r+' );
+
+	# CSV file headers
+	$t_csv = implode( ',', array_keys( $p_data[0] ) ) . PHP_EOL;
+
+	# Generate CSV data
+	foreach( $p_data as $t_error ) {
+		fputcsv( $f, $t_error );
+	}
+	$t_csv .= stream_get_contents( $f, -1,0 );
+	fclose( $f );
+
+	# Display message and download link
+	printf( "<p><br>%d rows in <em>%s</em> could not be converted because of invalid data.<br>",
+		count( $p_data ),
+		db_get_table( $p_table )
+	);
+	echo "Fix the problem by manually repairing or deleting the offending row(s) "
+		. "as appropriate, then try again.</p>";
+
+	# CSV download (as data URL)
+?>
+	<a href="data:text/csv;charset=UTF-8,<?php echo rawurlencode( $t_csv ) ?>"
+	   download="errors_<?php echo $p_table; ?>.csv"
+	   class="btn btn-primary btn-white btn-round"
+	>
+		Download errors list as CSV
+	</a>
+<?php
 }
 
 /**
