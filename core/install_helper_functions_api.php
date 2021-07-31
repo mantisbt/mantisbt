@@ -490,14 +490,17 @@ function install_stored_filter_migrate() {
 	$t_filter_fields['and_not_assigned'] = null;
 	$t_filter_fields['sticky_issues'] = 'sticky';
 
-	$t_query = 'SELECT * FROM {filters}';
-	$t_result = db_query( $t_query );
+	$t_query = new DbQuery( 'SELECT * FROM {filters}' );
+	$t_delete = new DbQuery( 'DELETE FROM {filters} WHERE id=:id' );
+	$t_update = new DbQuery( 'UPDATE {filters} SET filter_string=:filter_string WHERE id=:id' );
+
 	$t_errors = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	foreach( $t_query->fetch_all() as $t_row ) {
 		$t_error = false;
+		$t_filter_string = &$t_row['filter_string'];
 
 		# Grab Filter Version and data into $t_setting_arr
-		$t_setting_arr = explode( '#', $t_row['filter_string'], 2 );
+		$t_setting_arr = explode( '#', $t_filter_string, 2 );
 
 		switch( $t_setting_arr[0] ) {
 			# Remove any non-upgradeable filters i.e. versions 1 to 4.
@@ -505,9 +508,8 @@ function install_stored_filter_migrate() {
 			case 'v2':
 			case 'v3':
 			case 'v4':
-				db_param_push();
-				$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
-				$t_delete_result = db_query( $t_delete_query, array( $t_row['id'] ) );
+				$t_delete->bind_values( $t_row );
+				$t_delete->execute();
 				continue 2;
 		}
 
@@ -539,9 +541,8 @@ function install_stored_filter_migrate() {
 				continue;
 			}
 		} else {
-			db_param_push();
-			$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
-			$t_delete_result = db_query( $t_delete_query, array( $t_row['id'] ) );
+			$t_delete->bind_values( $t_row );
+			$t_delete->execute();
 			continue;
 		}
 
@@ -573,12 +574,10 @@ function install_stored_filter_migrate() {
 			continue;
 		}
 
-		$t_filter_serialized = json_encode( $t_filter_arr );
-		$t_filter_string = FILTER_VERSION . '#' . $t_filter_serialized;
+		$t_filter_string = FILTER_VERSION . '#' . json_encode( $t_filter_arr );
 
-		db_param_push();
-		$t_update_query = 'UPDATE {filters} SET filter_string=' . db_param() . ' WHERE id=' . db_param();
-		$t_update_result = db_query( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
+		$t_update->bind_values( $t_row );
+		$t_update->execute();
 	}
 
 	# Errors occurred, provide details and abort the upgrade to
