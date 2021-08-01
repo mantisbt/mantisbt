@@ -758,12 +758,12 @@ function install_check_config_serialization() {
  * This ensures it is not possible to execute code during un-serialization
  */
 function install_check_token_serialization() {
-	$query = 'SELECT * FROM {tokens} WHERE type=1 or type=2 or type=5';
+	$t_query = new DbQuery( 'SELECT * FROM {tokens} WHERE type IN (1, 2, 5)' );
+	$t_update = new DbQuery( 'UPDATE {tokens} SET value=:value WHERE id=:id' );
 
-	$t_result = db_query( $query );
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	foreach( $t_query->fetch_all() as $t_row ) {
 		$t_id = $t_row['id'];
-		$t_value = $t_row['value'];
+		$t_value = &$t_row['value'];
 
 		if ( $t_value === null ) {
 			$t_token = null;
@@ -790,11 +790,10 @@ function install_check_token_serialization() {
 			}
 		}
 
-		$t_json_token = json_encode( $t_token );
+		$t_value = json_encode( $t_token );
 
-		db_param_push();
-		$t_query = 'UPDATE {tokens} SET value=' .db_param() . ' WHERE id=' .db_param();
-		db_query( $t_query, array( $t_json_token, $t_id ) );
+		$t_update->bind_values( $t_row );
+		$t_update->execute();
 	}
 
 	# Return 2 because that's what ADOdb/DataDict does when things happen properly
