@@ -219,23 +219,23 @@ function install_category_migrate() {
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
 
-	$t_query = 'SELECT project_id, category, user_id FROM {project_category} ORDER BY project_id, category';
-	$t_category_result = db_query( $t_query );
-
-	$t_query = 'SELECT project_id, category FROM {bug} ORDER BY project_id, category';
-	$t_bug_result = db_query( $t_query );
-
 	$t_data = array();
 
 	# Find categories specified by project
-	while( $t_row = db_fetch_array( $t_category_result ) ) {
+	$t_query = new DbQuery(
+		'SELECT project_id, category, user_id FROM {project_category} ORDER BY project_id, category'
+	);
+	foreach( $t_query->fetch_all() as $t_row ) {
 		$t_project_id = $t_row['project_id'];
 		$t_name = $t_row['category'];
 		$t_data[$t_project_id][$t_name] = $t_row['user_id'];
 	}
 
 	# Find orphaned categories from bugs
-	while( $t_row = db_fetch_array( $t_bug_result ) ) {
+	$t_query = new DbQuery(
+		'SELECT project_id, category FROM {bug} ORDER BY project_id, category'
+	);
+	foreach( $t_query->fetch_all() as $t_row ) {
 		$t_project_id = $t_row['project_id'];
 		$t_name = $t_row['category'];
 
@@ -244,26 +244,32 @@ function install_category_migrate() {
 		}
 	}
 
+	$t_insert = new DbQuery(
+		'INSERT INTO {category} ( name, project_id, user_id ) VALUES ( :name, :project_id, :user_id )'
+	);
+	$t_update = new DbQuery(
+		'UPDATE {bug} SET category_id=:id WHERE project_id=:project_id AND category=:name'
+	);
+
 	# In every project, go through all the categories found, and create them and update the bug
 	foreach( $t_data as $t_project_id => $t_categories ) {
 		$t_inserted = array();
 		foreach( $t_categories as $t_name => $t_user_id ) {
 			$t_lower_name = mb_strtolower( trim( $t_name ) );
+			$t_category = array(
+				'name' => $t_name,
+				'project_id' => $t_project_id,
+				'user_id' => $t_user_id,
+			);
 			if( !isset( $t_inserted[$t_lower_name] ) ) {
-				db_param_push();
-				$t_query = 'INSERT INTO {category} ( name, project_id, user_id ) VALUES ( ' .
-					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-				db_query( $t_query, array( $t_name, $t_project_id, $t_user_id ) );
-				$t_category_id = db_insert_id( db_get_table( 'category' ) );
-				$t_inserted[$t_lower_name] = $t_category_id;
+				$t_insert->execute( $t_category );
+				$t_category['id'] = db_insert_id( db_get_table( 'category' ) );
+				$t_inserted[$t_lower_name] = $t_category['id'];
 			} else {
-				$t_category_id = $t_inserted[$t_lower_name];
+				$t_category['id'] = $t_inserted[$t_lower_name];
 			}
 
-			db_param_push();
-			$t_query = 'UPDATE {bug} SET category_id=' . db_param() . '
-						WHERE project_id=' . db_param() . ' AND category=' . db_param();
-			db_query( $t_query, array( $t_category_id, $t_project_id, $t_name ) );
+			$t_update->execute( $t_category );
 		}
 	}
 
@@ -280,8 +286,6 @@ function install_category_migrate() {
  * @return integer
  */
 function install_date_migrate( array $p_data ) {
-	# $p_data[0] = tablename, [1] id column, [2] = old column, [3] = new column
-
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
 
@@ -292,9 +296,9 @@ function install_date_migrate( array $p_data ) {
 	if( $t_date_array ) {
 		$t_old_column = implode( ',', $p_data[2] );
 		$t_cnt_fields = count( $p_data[2] );
-		$t_query = 'SELECT ' . $t_id_column . ', ' . $t_old_column . ' FROM ' . $t_table;
-
+		$t_sql = "SELECT $t_id_column, $t_old_column FROM $t_table";
 		$t_first_column = true;
+		$t_pairs = array();
 
 		# In order to handle large databases where we may timeout during the upgrade, we don't
 		# start from the beginning every time.  Here we will only pickup rows where at least one
@@ -302,76 +306,63 @@ function install_date_migrate( array $p_data ) {
 		foreach ( $p_data[3] as $t_new_column_name ) {
 			if( $t_first_column ) {
 				$t_first_column = false;
-				$t_query .= ' WHERE ';
+				$t_sql .= ' WHERE ';
 			} else {
-				$t_query .= ' OR ';
+				$t_sql .= ' OR ';
 			}
 
-			$t_query .= $t_new_column_name. ' = 1';
+			$t_sql .= $t_new_column_name. ' = 1';
+			array_push( $t_pairs, "$t_new_column_name = :$t_new_column_name" ) ;
 		}
+		$t_update_columns = implode( ',', $t_pairs );
 	} else {
 		$t_old_column = $p_data[2];
 
 		# The check for timestamp being = 1 is to make sure the field wasn't upgraded
 		# already in a previous run - see bug #12601 for more details.
 		$t_new_column_name = $p_data[3];
-		$t_query = 'SELECT ' . $t_id_column . ', ' . $t_old_column . ' FROM ' . $t_table . ' WHERE ' . $t_new_column_name . ' = 1';
+		$t_sql = "SELECT $t_id_column, $t_old_column FROM $t_table WHERE $t_new_column_name = 1";
+
+		$t_update_columns = "$t_new_column_name = :$t_new_column_name";
 	}
 
-	$t_result = db_query( $t_query );
-
-	if( db_num_rows( $t_result ) > 0 ) {
-		db_param_push();
-		# Build the update query
+	$t_query = new DbQuery( $t_sql );
+	$t_update = new DbQuery(
+		"UPDATE $t_table SET $t_update_columns WHERE $t_id_column = :$t_id_column"
+	);
+	foreach( $t_query->fetch_all() as $t_row ) {
+		$t_values[$t_id_column] = (int)$t_row[$t_id_column];
 		if( $t_date_array ) {
-			$t_pairs = array();
-			foreach( $p_data[3] as $t_var ) {
-				array_push( $t_pairs, $t_var . '=' . db_param() ) ;
-			}
-			$t_new_column = implode( ',', $t_pairs );
-		} else {
-			$t_new_column = $p_data[3] . '=' . db_param();
-		}
-		$t_query = 'UPDATE ' . $t_table . ' SET ' . $t_new_column . ' WHERE ' . $t_id_column . '=' . db_param();
-
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_id = (int)$t_row[$t_id_column];
-
-			if( $t_date_array ) {
-				$t_new_value = array();
-				for( $i=0; $i < $t_cnt_fields; $i++ ) {
-					$t_old_value = $t_row[$p_data[2][$i]];
-
-					if( is_numeric( $t_old_value ) ) {
-						return 1; # Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
-					}
-
-					$t_new_value[$i] = db_unixtimestamp( $t_old_value );
-					if( $t_new_value[$i] < 100000 ) {
-						$t_new_value[$i] = 1;
-					}
-				}
-				$t_values = $t_new_value;
-				$t_values[] = $t_id;
-			} else {
-				$t_old_value = $t_row[$t_old_column];
+			for( $i = 0; $i < $t_cnt_fields; $i++ ) {
+				$t_old_value = $t_row[$p_data[2][$i]];
 
 				if( is_numeric( $t_old_value ) ) {
 					return 1; # Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
 				}
 
+				$t_new_column_name = $p_data[3][$i];
 				$t_new_value = db_unixtimestamp( $t_old_value );
 				if( $t_new_value < 100000 ) {
 					$t_new_value = 1;
 				}
-				$t_values = array( $t_new_value, $t_id );
+				$t_values[$t_new_column_name] = $t_new_value;
+			}
+		} else {
+			$t_old_value = $t_row[$t_old_column];
+
+			if( is_numeric( $t_old_value ) ) {
+				return 1; # Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
 			}
 
-			# Don't pop params since we're in a loop
-			db_query( $t_query, $t_values, -1, -1, false );
+			$t_new_value = db_unixtimestamp( $t_old_value );
+			if( $t_new_value < 100000 ) {
+				$t_new_value = 1;
+			}
+			/** @noinspection PhpUndefinedVariableInspection */
+			$t_values[$t_new_column_name] = $t_new_value;
 		}
-		db_param_pop();
-		
+
+		$t_update->execute( $t_values );
 	}
 
 	# Re-enable query logging if we disabled it
@@ -395,47 +386,46 @@ function install_correct_multiselect_custom_fields_db_format() {
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
 
+	$t_update_query = new DbQuery( 'UPDATE {custom_field_string}
+		SET value = :value
+		WHERE field_id = :field_id AND bug_id = :bug_id'
+	);
+
 	# Ensure multilist and checkbox custom field values have a vertical pipe |
 	# as a prefix and suffix.
-	$t_query = 'SELECT v.field_id, v.bug_id, v.value from {custom_field_string} v
+	$t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value 
+		FROM {custom_field_string} v
 		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE (c.type = ' . CUSTOM_FIELD_TYPE_MULTILIST . ' OR c.type = ' . CUSTOM_FIELD_TYPE_CHECKBOX . ")
 			AND v.value != ''
-			AND v.value NOT LIKE '|%|'";
-	$t_result = db_query( $t_query );
-
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$c_field_id = (int)$t_row['field_id'];
-		$c_bug_id = (int)$t_row['bug_id'];
-		$c_value = '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|';
-		$t_update_query = 'UPDATE {custom_field_string}
-			SET value = ' . db_param() . '
-			WHERE field_id = ' . db_param() . '
-				AND bug_id = ' . db_param();
-		$t_param = array( $c_value, $c_field_id, $c_bug_id );
-		db_query( $t_update_query, $t_param );
+			AND v.value NOT LIKE '|%|'"
+	);
+	foreach( $t_query->fetch_all() as $t_row ) {
+		$t_param = array(
+			'field_id' => (int)$t_row['field_id'],
+			'bug_id' => (int)$t_row['bug_id'],
+			'value' => '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|'
+		);
+		$t_update_query->execute( $t_param );
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
-	$t_query = 'SELECT v.field_id, v.bug_id, v.value from {custom_field_string} v
+	$t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value 
+		FROM {custom_field_string} v
 		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE c.type = ' . CUSTOM_FIELD_TYPE_RADIO . "
 			AND v.value != ''
-			AND v.value LIKE '|%|'";
-	$t_result = db_query( $t_query );
-
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$c_field_id = (int)$t_row['field_id'];
-		$c_bug_id = (int)$t_row['bug_id'];
-		$c_value = rtrim( ltrim( $t_row['value'], '|' ), '|' );
-		$t_update_query = 'UPDATE {custom_field_string}
-			SET value = ' . db_param() . '
-			WHERE field_id = ' . db_param() . '
-		 ]		AND bug_id = ' . db_param();
-		$t_param = array( $c_value, $c_field_id, $c_bug_id );
-		db_query( $t_update_query, $t_param );
+			AND v.value LIKE '|%|'"
+	);
+	foreach( $t_query->fetch_all() as $t_row ) {
+		$t_param = array(
+			'field_id' => (int)$t_row['field_id'],
+			'bug_id' => (int)$t_row['bug_id'],
+			'value' => rtrim( ltrim( $t_row['value'], '|' ), '|' )
+		);
+		$t_update_query->execute( $t_param );
 	}
 
 	# Re-enable query logging if we disabled it
@@ -610,9 +600,8 @@ function install_update_history_long_custom_fields() {
 	$t_log_queries = install_set_log_queries();
 
 	# Build list of custom field names longer than 32 chars for reference
-	$t_query = 'SELECT name FROM {custom_field}';
-	$t_result = db_query( $t_query );
-	while( $t_field = db_fetch_array( $t_result ) ) {
+	$t_query = new DbQuery( 'SELECT name FROM {custom_field}' );
+	foreach( $t_query->fetch_all() as $t_field ) {
 		if( mb_strlen( $t_field['name'] ) > 32 ) {
 			$t_custom_fields[mb_substr( $t_field['name'], 0, 32 )] = $t_field['name'];
 		}
@@ -636,28 +625,29 @@ function install_update_history_long_custom_fields() {
 								'selection', 'edit', 'overdue' );
 	$t_field_list = '';
 	foreach( $t_standard_fields as $t_field ) {
-		$t_field_list .= '\'' . $t_field . '\', ';
+		$t_field_list .= "'$t_field', ";
 	}
 	$t_field_list = rtrim( $t_field_list, ', ' );
 
+	$t_update_query = new DbQuery(
+		'UPDATE {bug_history} SET field_name = :full_name WHERE field_name = :truncated'
+	);
+
 	# Get the list of custom fields from the history table
-	$t_query = 'SELECT DISTINCT field_name
-		FROM {bug_history}
-		WHERE type = ' . NORMAL_TYPE . '
-		AND field_name NOT IN ( ' . $t_field_list . ' )';
-	$t_result = db_query( $t_query );
+	$t_query = new DbQuery( 'SELECT DISTINCT field_name FROM {bug_history}
+		WHERE type = ' . NORMAL_TYPE . ' AND field_name NOT IN ( ' . $t_field_list . ' )'
+	);
 
 	# For each entry, update the truncated custom field name with its full name
 	# if a matching custom field exists
-	while( $t_field = db_fetch_array( $t_result ) ) {
+	foreach( $t_query->fetch_all() as $t_field ) {
+		$t_name = $t_field['field_name'];
 		# If field name's length is 32, then likely it was truncated so we try to match
-		if( mb_strlen( $t_field['field_name'] ) == 32 && array_key_exists( $t_field['field_name'], $t_custom_fields ) ) {
+		if( mb_strlen( $t_name ) == 32 && array_key_exists( $t_name, $t_custom_fields ) ) {
 			# Match found, update all history records with this field name
-			db_param_push();
-			$t_update_query = 'UPDATE {bug_history}
-				SET field_name = ' . db_param() . '
-				WHERE field_name = ' . db_param();
-			db_query( $t_update_query, array( $t_custom_fields[$t_field['field_name']], $t_field['field_name'] ) );
+			$t_update_query->bind( 'truncated', $t_name );
+			$t_update_query->bind( 'full_name', $t_custom_fields[$t_name] );
+			$t_update_query->execute();
 		}
 	}
 
@@ -668,35 +658,39 @@ function install_update_history_long_custom_fields() {
 }
 
 /**
- * Schema update to check that project hierarchy was valid
+ * Schema update to check that project hierarchy was valid.
+ *
+ * Removes possible duplicate rows in the table.
+ *
  * @return integer
  */
 function install_check_project_hierarchy() {
-	$t_query = 'SELECT count(child_id) as count, child_id, parent_id FROM {project_hierarchy} GROUP BY child_id, parent_id';
+	$t_query = new DbQuery(
+		'SELECT count(child_id) as count, child_id, parent_id FROM {project_hierarchy} '
+		. 'GROUP BY child_id, parent_id'
+	);
+	$t_child_projects = new DbQuery(
+		'SELECT inherit_parent, child_id, parent_id FROM {project_hierarchy} '
+		. 'WHERE child_id=:child_id AND parent_id=:parent_id'
+	);
+	$t_delete = new DbQuery(
+		'DELETE FROM {project_hierarchy} WHERE child_id=:child_id AND parent_id=:parent_id'
+	);
+	$t_insert = new DbQuery(
+		'INSERT INTO {project_hierarchy} (child_id, parent_id, inherit_parent) '
+		. 'VALUES ( :child_id, :parent_id, :inherit_parent )'
+	);
 
-	$t_result = db_query( $t_query );
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_count = (int)$t_row['count'];
-		$t_child_id = (int)$t_row['child_id'];
-		$t_parent_id = (int)$t_row['parent_id'];
+	foreach( $t_query->fetch_all() as $t_project ) {
+		$t_count = (int)$t_project['count'];
 
 		if( $t_count > 1 ) {
-			db_param_push();
-			$t_query = 'SELECT inherit_parent, child_id, parent_id FROM {project_hierarchy} WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
-			$t_result2 = db_query( $t_query, array( $t_child_id, $t_parent_id ) );
-
 			# get first result for inherit_parent, discard the rest
-			$t_row2 = db_fetch_array( $t_result2 );
+			$t_child_projects->execute( $t_project );
+			$t_child_project = $t_child_projects->fetch();
 
-			$t_inherit = $t_row2['inherit_parent'];
-
-			db_param_push();
-			$t_query_delete = 'DELETE FROM {project_hierarchy} WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
-			db_query( $t_query_delete, array( $t_child_id, $t_parent_id ) );
-
-			db_param_push();
-			$t_query_insert = 'INSERT INTO {project_hierarchy} (child_id, parent_id, inherit_parent) VALUES (' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-			db_query( $t_query_insert, array( $t_child_id, $t_parent_id, $t_inherit ) );
+			$t_delete->execute( $t_child_project );
+			$t_insert->execute( $t_child_project );
 		}
 	}
 
