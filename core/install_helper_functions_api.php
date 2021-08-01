@@ -66,14 +66,13 @@ function db_null_date() {
  * datetime string to an that represents the number of seconds elapsed since
  * the Unix epoch.
  * @param string  $p_date Formatted datetime string from a database.
- * @param boolean $p_gmt  Whether to use UTC (true) or server timezone (false, default).
  * @return integer Unix timestamp representation of a datetime string
  */
-function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
+function db_unixtimestamp( $p_date = null ) {
 	global $g_db;
 
 	if( null !== $p_date ) {
-		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
+		$p_timestamp = $g_db->UnixTimeStamp( $p_date );
 	} else {
 		$p_timestamp = time();
 	}
