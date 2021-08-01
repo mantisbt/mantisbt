@@ -24,6 +24,8 @@
  * @link http://www.mantisbt.org
  *
  * @uses database_api.php
+ *
+ * @noinspection PhpUnused
  */
 
 require_api( 'database_api.php' );
@@ -98,7 +100,7 @@ function installer_db_now() {
  * The ADOdb library bundled with MantisBT releases prior to 1.1.0 (schema
  * version 51) created type "L" columns in PostgreSQL as SMALLINT, whereas later
  * versions created them as BOOLEAN.
- * @return mixed true if columns check OK
+ * @return bool|string|array true if columns check OK
  *               error message string if errors occurred
  *               array of invalid columns otherwise (empty if all columns check OK)
  */
@@ -162,7 +164,6 @@ function check_pgsql_bool_columns() {
  */
 function pgsql_get_column_type( $p_table, $p_column ) {
 	global $f_database_name;
-	/** @var ADOConnection $g_db */
 	global $g_db;
 
 	# Generate SQL to check columns against schema
@@ -177,7 +178,7 @@ function pgsql_get_column_type( $p_table, $p_column ) {
 		$p_column,
 	);
 
-	/** @var ADORecordSet $t_result */
+	/** @var ADORecordSet|bool $t_result */
 	$t_result = @$g_db->execute( $t_sql, $t_param );
 	if( $t_result === false ) {
 		throw new Exception( 'Unable to check information_schema' );
@@ -195,7 +196,7 @@ function pgsql_get_column_type( $p_table, $p_column ) {
  * queries are logged
  * @global integer $g_db_log_queries
  * @param integer $p_new_state New value to set $g_db_log_queries to (defaults to OFF).
- * @return integer old value of $g_db_log_queries
+ * @return bool old value of $g_db_log_queries
  */
 function install_set_log_queries( $p_new_state = OFF ) {
 	global $g_db_log_queries;
@@ -337,6 +338,7 @@ function install_date_migrate( array $p_data ) {
 			$t_id = (int)$t_row[$t_id_column];
 
 			if( $t_date_array ) {
+				$t_new_value = array();
 				for( $i=0; $i < $t_cnt_fields; $i++ ) {
 					$t_old_value = $t_row[$p_data[2][$i]];
 
@@ -495,6 +497,7 @@ function install_stored_filter_migrate() {
 
 	$t_errors = array();
 	foreach( $t_query->fetch_all() as $t_row ) {
+		$t_filter_arr = null;
 		$t_error = false;
 		$t_filter_string = &$t_row['filter_string'];
 
