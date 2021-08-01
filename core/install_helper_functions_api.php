@@ -870,25 +870,3 @@ function install_print_unserialize_errors_csv( $p_table, $p_data ) {
 	</a>
 <?php
 }
-
-/**
- * Print a friendly error message following an unserialize() error.
- *
- * @param string $p_description Description to identify the offending row
- * @param string $p_table Mantis table name
- * @param string $p_error Error message
- * @param string $p_value The data that could not be unserialized
- * @return void
- */
-function install_print_unserialize_error( $p_description, $p_table, $p_error, $p_value ) {
-	printf('<p><br>%s could not be converted because its data is not valid. '
-		. 'Fix the problem by manually repairing or deleting the '
-		. 'offending %s row as appropriate, then try again.'
-		. '<br>Error: <em>%s</em> occurred because of the string below</p>'
-		. '<pre>%s</pre>',
-		$p_description,
-		db_get_table( $p_table ),
-		$p_error,
-		$p_value
-	);
-}
