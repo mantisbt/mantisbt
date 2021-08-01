@@ -761,39 +761,34 @@ function install_check_token_serialization() {
 	$t_query = new DbQuery( 'SELECT * FROM {tokens} WHERE type IN (1, 2, 5)' );
 	$t_update = new DbQuery( 'UPDATE {tokens} SET value=:value WHERE id=:id' );
 
+	$t_errors = array();
 	foreach( $t_query->fetch_all() as $t_row ) {
-		$t_id = $t_row['id'];
 		$t_value = &$t_row['value'];
 
-		if ( $t_value === null ) {
-			$t_token = null;
-		} else {
-			try {
-				$t_token = safe_unserialize( $t_value );
-			}
-			catch( ErrorException $e ) {
-				# If user hits a page other than install, JSON-encoded tokens
-				# may have been created using new code; just skip them.
-				$t_token = json_decode( $t_value );
-				if( $t_token !== null ) {
-					continue;
-				}
+		# Don't try to convert the value if it's already valid JSON
+		$t_token = json_decode( $t_value );
+		if( $t_value === null || $t_token !== null ) {
+			continue;
+		}
 
-				install_print_unserialize_error(
-					"Token id $t_id",
-					'tokens',
-					$e->getMessage(),
-					$t_value
-				);
-
-				return 1; # Fatal: invalid data found in tokens table
-			}
+		try {
+			$t_token = safe_unserialize( $t_value );
+		}
+		catch( ErrorException $e ) {
+			$t_row['error'] = $e->getMessage();
+			$t_errors[] = $t_row;
+			continue;
 		}
 
 		$t_value = json_encode( $t_token );
 
 		$t_update->bind_values( $t_row );
 		$t_update->execute();
+	}
+
+	if( $t_errors ) {
+		install_print_unserialize_errors_csv( 'tokens', $t_errors );
+		return 1; # Fatal: invalid data found in tokens table
 	}
 
 	# Return 2 because that's what ADOdb/DataDict does when things happen properly
