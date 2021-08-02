@@ -45,6 +45,7 @@
  * @author KhangND
  * @author Max20091
  * @author Minh Nguyen
+ * @author Nguyễn Mạnh An
  * @author Trần Nguyễn Minh Huy
  * @author Tuankiet65
  * @author Vinhtantran
@@ -474,9 +475,9 @@ $s_default_filter = 'Bộ lọc Mặc định';
 $s_create_filter_link = 'Tạo cố định';
 $s_create_short_link = 'Tạo liên kết ngắn';
 $s_filter_permalink = 'Sau đây là một liên kết thường trực đến hiện cấu hình bộ lọc:';
-$s_manage_users_link = 'Quản lý người dùng';
-$s_manage_projects_link = 'Quản lý dự án';
-$s_manage_custom_field_link = 'Quản lý trường tùy biến';
+$s_manage_users_link = 'Người dùng';
+$s_manage_projects_link = 'Dự án';
+$s_manage_custom_field_link = 'Trường tuỳ biến';
 $s_manage_global_profiles_link = 'Quản lý hồ sơ toàn cục';
 $s_manage_plugin_link = 'Quản lý plugin';
 $s_permissions_summary_report = 'Cấp quyền báo cáo';
@@ -484,7 +485,7 @@ $s_manage_config_link = 'Quản lý cấu hình';
 $s_manage_threshold_config = 'Các ngưỡng luồng công việc';
 $s_manage_email_config = 'Các thông báo thư điện tử';
 $s_manage_workflow_config = 'Các chuyển tiếp luồng công việc';
-$s_manage_tags_link = 'Quản lý Tag';
+$s_manage_tags_link = 'Quản lý thẻ';
 $s_create_new_account_link = 'Tạo tài khoản mới';
 $s_projects_link = 'Các dự án';
 $s_documentation_link = 'Tài liệu hướng dẫn';

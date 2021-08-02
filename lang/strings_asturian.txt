@@ -39,6 +39,7 @@
  * @file
  *
  * @author Enolp
+ * @author Tokvo
  * @author Xuacu
  */
 
@@ -523,7 +524,7 @@ $s_default_filter = 'Filtru predetermináu';
 $s_create_filter_link = 'Crear un enllaz permanente';
 $s_create_short_link = 'Crear un enllaz curtiu';
 $s_filter_permalink = 'El siguiente ye un enllaz permanente al filtru configuráu anguaño:';
-$s_manage_users_link = 'Alministrar usuarios';
+$s_manage_users_link = 'Usuarios';
 $s_manage_projects_link = 'Alministrar proyectos';
 $s_manage_custom_field_link = 'Alministrar campos personalizaos';
 $s_manage_global_profiles_link = 'Alministrar perfiles globales';
@@ -534,7 +535,7 @@ $s_manage_threshold_config = 'Llendes del fluxu de trabayu';
 $s_manage_email_config = 'Avisos per corréu';
 $s_manage_workflow_config = 'Transiciones del fluxu de trabayu';
 $s_manage_workflow_graph = 'Gráfica del fluxu de trabayu';
-$s_manage_tags_link = 'Alministrar etiquetes';
+$s_manage_tags_link = 'Etiquetes';
 $s_create_new_account_link = 'Crear una cuenta nueva';
 $s_projects_link = 'Proyeutos';
 $s_documentation_link = 'Documentación';

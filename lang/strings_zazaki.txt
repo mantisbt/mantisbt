@@ -322,6 +322,7 @@ $s_create_user_button = 'Karber vırazê';
 $s_filter_button = 'Parzûn ro ke';
 $s_create_filter_link = 'Daimi adres vıraştış';
 $s_manage_users_link = 'Karbera İdare ke';
+$s_manage_projects_link = 'Proceyi';
 $s_create_new_account_link = 'Hesabo newe vırazê';
 $s_projects_link = 'Proceyi';
 $s_documentation_link = 'Dokumentasyon';

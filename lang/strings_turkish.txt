@@ -59,6 +59,7 @@
  * @author Melissadilara
  * @author MuratTheTurkish
  * @author Rapsar
+ * @author SaldırganSincap
  * @author Sayginer
  * @author Sezgin İbiş
  * @author Stonecy
@@ -246,7 +247,7 @@ Eğer doğrulama İstenirse, şifrenizi değiştirmek için aşağıdaki URL\'yi
 $s_reset_request_admin_msg = 'Parolanız sıfırlandı. Yeni bir URL ayarlamak için lütfen aşağıdaki URL\'yi ziyaret edin:';
 $s_reset_request_in_progress_msg = 'Eğer hesabınız için doğru kullanıcı adı ve e-posta adresi belirttiyseniz, bize vermiş olduğunuz e-posta adresine bir onay mesajı gönderilecektir. Bu mesajı alındıktan sonra, hesabınıza şifre değiştirmek için verilen yönergeleri izleyin.';
 $s_email_notification_title_for_status_bug_new = 'Aşağıdaki sorunun durumu YENİ (tekrar)';
-$s_email_notification_title_for_status_bug_feedback = 'Aşağıdaki sorun için GERİ BİLDİRİM yapmalısınız.';
+$s_email_notification_title_for_status_bug_feedback = 'Aşağıdaki sorun için GERİ BİLDİRİM gerekiyor.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Aşağıdaki sorun KABUL EDİLDİ.';
 $s_email_notification_title_for_status_bug_confirmed = 'Aşağıdaki sorun ONAYLANMIŞTIR.';
 $s_email_notification_title_for_status_bug_assigned = 'Aşağıdaki sorun ATANMIŞTIR.';
@@ -541,7 +542,7 @@ $s_archives = 'Arşivler';
 $s_rss = 'RSS';
 $s_site_information = 'Site Bilgileri';
 $s_mantis_version = 'MantisBT Sürümü';
-$s_schema_version = 'Şema Sürümü';
+$s_schema_version = 'Veritabanı Şema Sürümü';
 $s_site_path = 'Site Yolu';
 $s_core_path = 'Ana Yol';
 $s_plugin_path = 'Eklenti Yolu';
@@ -560,18 +561,18 @@ $s_default_filter = 'Varsayılan Filtre';
 $s_create_filter_link = 'Kalıcı Adres Oluştur';
 $s_create_short_link = 'Kısa Adres Oluştur';
 $s_filter_permalink = 'Düzenlenmiş filtreye ulaşmanız için oluşturulan kalıcı adres şurasıdır:';
-$s_manage_users_link = 'Kullanıcıları Yönet';
-$s_manage_projects_link = 'Projeleri Yönet';
-$s_manage_custom_field_link = 'Özel Alanları Yönet';
-$s_manage_global_profiles_link = 'Genel Profilleri Yönet';
-$s_manage_plugin_link = 'Eklentileri Yönet';
+$s_manage_users_link = 'Kullanıcılar';
+$s_manage_projects_link = 'Projeler';
+$s_manage_custom_field_link = 'Özel Alanları';
+$s_manage_global_profiles_link = 'Küresel Profilleri';
+$s_manage_plugin_link = 'Eklentiler';
 $s_permissions_summary_report = 'İzinlerin Raporu';
-$s_manage_config_link = 'Yapılandırmayı Yönet';
+$s_manage_config_link = 'Yapılandırma';
 $s_manage_threshold_config = 'İş İlerlemesi Sınırı';
 $s_manage_email_config = 'E-posta Bildirimleri';
 $s_manage_workflow_config = 'İş Akışı Geçişleri';
 $s_manage_workflow_graph = 'İş Akışı Grafiği';
-$s_manage_tags_link = 'Etiketleri Yönet';
+$s_manage_tags_link = 'Etiketler';
 $s_create_new_account_link = 'Yeni Hesap Oluştur';
 $s_projects_link = 'Projeler';
 $s_documentation_link = 'Belgelendirme';
