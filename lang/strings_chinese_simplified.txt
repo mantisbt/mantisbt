@@ -45,6 +45,7 @@
  * @author Fengchao
  * @author Fwolf
  * @author Gaoxuewei
+ * @author GuoPC
  * @author Hydra
  * @author Hzy980512
  * @author Liangent
@@ -246,7 +247,7 @@ $s_reset_request_msg = '有人（可能是您）通过电子邮件确认请求�
 $s_reset_request_admin_msg = '您的密码已被重置。请访问以下网址以设置新密码:';
 $s_reset_request_in_progress_msg = '请填好你的用户名和邮件地址，系统将自动发确认邮件到你的信箱，收到邮件后请按邮件里的步骤修改你的密码。';
 $s_email_notification_title_for_status_bug_new = '以下问题现已（再次）属于新建状态';
-$s_email_notification_title_for_status_bug_feedback = '以下问题需要您的反馈。';
+$s_email_notification_title_for_status_bug_feedback = '以下问题需要反馈。';
 $s_email_notification_title_for_status_bug_acknowledged = '以下问题已经被认可。';
 $s_email_notification_title_for_status_bug_confirmed = '以下问题已经被确认。';
 $s_email_notification_title_for_status_bug_assigned = '以下问题已经被分配。';
@@ -541,7 +542,7 @@ $s_archives = '新闻列表';
 $s_rss = 'RSS';
 $s_site_information = '网站信息';
 $s_mantis_version = 'MantisBT版本';
-$s_schema_version = '架构版本';
+$s_schema_version = '数据库架构版本';
 $s_site_path = '网站路径';
 $s_core_path = '核心路径';
 $s_plugin_path = '插件路径';
@@ -560,18 +561,18 @@ $s_default_filter = '默认筛选器';
 $s_create_filter_link = '创建固定链接';
 $s_create_short_link = '创建缩短链接';
 $s_filter_permalink = '以下是当前设置的过滤器的固顶链接：';
-$s_manage_users_link = '用户管理';
-$s_manage_projects_link = '项目管理';
-$s_manage_custom_field_link = '自定义字段管理';
-$s_manage_global_profiles_link = '平台配置管理';
-$s_manage_plugin_link = '插件管理';
+$s_manage_users_link = '用户';
+$s_manage_projects_link = '项目';
+$s_manage_custom_field_link = '自定义字段';
+$s_manage_global_profiles_link = '全域配置';
+$s_manage_plugin_link = '插件';
 $s_permissions_summary_report = '权限报告';
-$s_manage_config_link = '配置管理';
+$s_manage_config_link = '配置';
 $s_manage_threshold_config = '工作流阀值';
 $s_manage_email_config = '邮件提醒';
 $s_manage_workflow_config = '工作流过渡';
 $s_manage_workflow_graph = '工作流图表';
-$s_manage_tags_link = '标签管理';
+$s_manage_tags_link = '标签';
 $s_create_new_account_link = '创建新账户';
 $s_projects_link = '项目';
 $s_documentation_link = '文档';

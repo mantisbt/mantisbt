@@ -45,6 +45,7 @@
  * @author Hiro884
  * @author LaMagiaaa
  * @author Macofe
+ * @author MathXplore
  * @author Mfuji
  * @author Object＊tofu
  * @author Omotecho
@@ -238,7 +239,7 @@ $s_reset_request_msg = '誰か (おそらくあなた) がメール検証でパ�
 $s_reset_request_admin_msg = 'あなたのパスワードはリセットされました。このURLを入力し、新しいパスワードを設定して下さい。';
 $s_reset_request_in_progress_msg = 'あなたのアカウントに対応する正しいユーザー名とメールアドレスを指定していただければ、今すぐ、そのメールアドレスに確認メッセージを送ります。そのメッセージを受け取ったら、指示に従ってあなたのアカウントのパスワードを変更してください。';
 $s_email_notification_title_for_status_bug_new = '次の課題のステータスが再び新規になりました。';
-$s_email_notification_title_for_status_bug_feedback = '次の課題について、もっと情報が必要です。';
+$s_email_notification_title_for_status_bug_feedback = '次の問題にはフィードバックが必要です。';
 $s_email_notification_title_for_status_bug_acknowledged = '次の課題の内容が確認されました。';
 $s_email_notification_title_for_status_bug_confirmed = '次の課題の再現を確認しました。';
 $s_email_notification_title_for_status_bug_assigned = '次の課題の担当が割り当てられました。';
@@ -552,18 +553,18 @@ $s_default_filter = '既定のフィルター';
 $s_create_filter_link = '固定リンクの作成';
 $s_create_short_link = 'ショートリンクの作成';
 $s_filter_permalink = '次のリンクは、このフィルターを表す固定リンクです:';
-$s_manage_users_link = 'ユーザー管理';
-$s_manage_projects_link = 'プロジェクト管理';
+$s_manage_users_link = '利用者';
+$s_manage_projects_link = 'プロジェクト';
 $s_manage_custom_field_link = 'カスタム項目管理';
-$s_manage_global_profiles_link = 'グローバルプロフィール管理';
-$s_manage_plugin_link = 'プラグインを管理';
+$s_manage_global_profiles_link = 'グローバルプロフィール';
+$s_manage_plugin_link = 'プラグイン';
 $s_permissions_summary_report = 'アクセス許可の表示';
-$s_manage_config_link = '設定管理';
+$s_manage_config_link = '設定';
 $s_manage_threshold_config = 'ワークフロー閾値';
 $s_manage_email_config = 'メール通知';
 $s_manage_workflow_config = 'ワークフロー遷移';
 $s_manage_workflow_graph = 'ワークフローグラフ';
-$s_manage_tags_link = 'タグ管理';
+$s_manage_tags_link = 'タグ';
 $s_create_new_account_link = 'アカウント作成';
 $s_projects_link = 'プロジェクト';
 $s_documentation_link = '説明書';
