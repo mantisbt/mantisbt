@@ -170,6 +170,27 @@ class FontDownload {
 	}
 
 	/**
+	 * Update CSS font file with new file names
+	 */
+	public function updateCSS() {
+		echo "  Updating CSS";
+		$t_css = file_get_contents( $this->fonts_css );
+
+		$t_file = fopen( $this->fonts_css, 'w' );
+		fwrite( $t_file,
+			preg_replace(
+				$this->pattern,
+				$this->font_id . '-' . $this->version . '-',
+				$t_css,
+				-1,
+				$t_count
+			)
+		);
+		fclose( $t_file );
+		echo " - $t_count references\n";
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getVersion(): string {
@@ -193,4 +214,6 @@ foreach( FontDownload::getLocalFonts() as $t_font_id ) {
 
 	# Download new font files
 	$t_font->downloadFiles();
+
+	$t_font->updateCSS();
 }
