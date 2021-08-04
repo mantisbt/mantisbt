@@ -44,6 +44,9 @@ class FontDownload {
 	/** @var string Path to local CSS fonts file */
 	protected $fonts_css;
 
+	/** @var css Local CSS file contents */
+	protected $css;
+
 	/** @var GuzzleHttp\Client */
 	static protected $request;
 
@@ -90,7 +93,7 @@ class FontDownload {
 		$this->font_id = $p_font;
 		$this->version = $t_font_info->version;
 		$this->subsets = $t_font_info->subsets;
-		$this->pattern = '/' . $this->font_id . '-(v[0-9]+)-/';
+		$this->pattern = '/(' . $this->font_id . '-)(v[0-9]+)(-.*\.woff2?)/';
 	}
 
 	/**
@@ -111,18 +114,30 @@ class FontDownload {
 		return $t_fonts;
 	}
 
+	public function getFiles() {
+		if( !$this->files ) {
+			$this->files = glob( $this->fonts_dir . $this->font_id . '-*.woff*' );
+		}
+		return $this->files;
+	}
+
+	public function getCSS() {
+		if( !$this->css ) {
+			$this->css = file_get_contents( $this->fonts_css );
+		}
+		return $this->css;
+	}
+
 	/**
 	 * Check if font files already exist.
 	 *
 	 * @return bool|string false if no old files exist, files' version otherwise
 	 */
 	public function checkOldFiles() {
-		$t_files = glob( $this->fonts_dir . $this->font_id . '-*.woff*' );
+		$t_files = $this->getFiles();
 		if( $t_files ) {
-			$this->files = $t_files;
-			$t_pattern = '/' . $this->font_id . '-(v[0-9]+)-/';
-			if( preg_match( $t_pattern, $t_files[0], $t_matches ) ) {
-				return $t_matches[1];
+			if( preg_match( $this->pattern, $t_files[0], $t_matches ) ) {
+				return $t_matches[2];
 			}
 		}
 		return false;
@@ -133,6 +148,7 @@ class FontDownload {
 		foreach( $this->files as $t_file ) {
 			unlink( $t_file );
 		}
+		$this->files = [];
 	}
 
 	/**
@@ -174,20 +190,53 @@ class FontDownload {
 	 */
 	public function updateCSS() {
 		echo "  Updating CSS";
-		$t_css = file_get_contents( $this->fonts_css );
+		$this->css = preg_replace(
+			$this->pattern,
+			'$1' . $this->version . '$3',
+			$this->getCSS(),
+			-1,
+			$t_count
+		);
 
 		$t_file = fopen( $this->fonts_css, 'w' );
-		fwrite( $t_file,
-			preg_replace(
-				$this->pattern,
-				$this->font_id . '-' . $this->version . '-',
-				$t_css,
-				-1,
-				$t_count
-			)
-		);
+		fwrite( $t_file, $this->css );
 		fclose( $t_file );
 		echo " - $t_count references\n";
+
+		# Sanity checks
+		$this->sanityCheck( $t_count );
+	}
+
+	/**
+	 * Sanity check on local font files and CSS.
+	 *
+	 * - Verifies that files referenced in CSS exist in fonts directory, and
+	 *   vice-versa.
+	 * - If $p_count is provided, will compare it with number of downloaded font
+	 *   files.
+	 * Prints warnings if checks fail.
+	 *
+	 * @param int $p_count Reference number of font files
+	 */
+	public function sanityCheck( $p_count = 0 ) {
+		if( $p_count && $p_count != $this->count ) {
+			echo "WARNING: mismatched number of downloaded font files "
+				. "vs updated CSS references\n";
+		}
+
+		# Get font file names
+		$t_files = array_map( 'basename', $this->getFiles());
+
+		# Get font name references in CSS
+		preg_match_all( $this->pattern, $this->getCSS(), $t_matches );
+		$t_refs = $t_matches[0];
+
+		foreach( array_diff( $t_files, $t_refs ) as $t_file ) {
+			echo "WARNING: local font '$t_file' not referenced in CSS\n";
+		}
+		foreach( array_diff( $t_refs, $t_files ) as $t_file ) {
+			echo "WARNING: '$t_file' defined in CSS but local font file not found\n";
+		}
 	}
 
 	/**
@@ -206,6 +255,7 @@ foreach( FontDownload::getLocalFonts() as $t_font_id ) {
 	$t_old_version = $t_font->checkOldFiles();
 	if( $t_font->getVersion() == $t_old_version ) {
 		echo "  $t_old_version files already exist.\n";
+		$t_font->sanityCheck();
 		continue;
 	}
 	if( $t_old_version ) {
