@@ -2007,7 +2007,7 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 	if( $p_attachment['exists'] ) {
 		if( $p_attachment['can_download'] ) {
-			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
+			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '" target=_blank>';
 		}
 		print_file_icon( $p_attachment['display_name'] );
 		if( $p_attachment['can_download'] ) {
@@ -2015,7 +2015,7 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 		}
 		echo lang_get( 'word_separator' );
 		if( $p_attachment['can_download'] ) {
-			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
+			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '" target=_blank>';
 		}
 		echo string_display_line( $p_attachment['display_name'] );
 		if( $p_attachment['can_download'] ) {
@@ -2091,7 +2091,7 @@ function print_bug_attachment_preview_image( array $p_attachment ) {
 	$t_image_url = $p_attachment['download_url'] . '&show_inline=1' . form_security_param( 'file_show_inline' );
 
 	echo "\n<div class=\"bug-attachment-preview-image\">";
-	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
+	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '" target=_blank>';
 	echo '<img src="' . string_attribute( $t_image_url ) . '" alt="' . string_attribute( $t_title ) . '" loading="lazy" style="' . string_attribute( $t_preview_style ) . '" />';
 	echo '</a></div>';
 }
