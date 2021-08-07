@@ -87,7 +87,9 @@ if( !extension_loaded( 'mbstring' ) ) {
 # Ensure that encoding is always UTF-8 independent from any PHP default or ini setting
 mb_internal_encoding('UTF-8');
 
-ob_start();
+if( php_sapi_name() != 'cli' ) {
+	ob_start();
+}
 
 # Load Composer autoloader
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
