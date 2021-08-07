@@ -36,17 +36,21 @@ require_api( 'utility_api.php' );
 $g_compression_started = false;
 
 /**
- * Check if compression handler (ob_gzhandler) should be enabled. Note: this should not be used
- * as an indicator of whether output received by a client will be compressed, only whether an
- * output handler is used to compress output.
+ * Check if compression handler (ob_gzhandler) should be enabled.
+ *
+ * Note: this should not be used as an indicator of whether output received by a
+ * client will be compressed, only whether an output handler is used to compress
+ * output.
+ *
  * @return boolean
  * @access public
  */
 function compress_handler_is_enabled() {
 	global $g_compress_html;
 
-	# indicates compression should be disabled for a page. Note: php.ini may still enable zlib.output_compression.
-	# it may be possible to turn this off through the use of ini_set within that specific page.
+	# indicates compression should be disabled for a page.
+	# Note: php.ini may still enable zlib.output_compression. It may be possible
+	# to turn this off through the use of ini_set within that specific page.
 	if( defined( 'COMPRESSION_DISABLED' ) ) {
 		return false;
 	}
@@ -108,8 +112,11 @@ function compress_start_handler() {
 }
 
 /**
- * Output Buffering handler that either compresses the buffer or just.
- * returns it, depending on the return value of compress_handler_is_enabled()
+ * Output Buffering handler.
+ *
+ * Either compresses the buffer or just returns it as-is, depending on the
+ * return value of compress_handler_is_enabled()
+ *
  * @param string  &$p_buffer Buffer.
  * @param integer $p_mode    Mode.
  * @return string
