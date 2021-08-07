@@ -68,7 +68,7 @@ function compress_handler_is_enabled() {
 	}
 
 	# It's possible to set zlib.output_compression via ini_set.
-	# This method is preferred over ob_gzhandler
+	# This method is preferred over ob_gzhandler, and effectively starts output buffering.
 	if( ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) ) {
 		ini_set( 'zlib.output_compression', true );
 		# do it transparently
@@ -85,6 +85,11 @@ function compress_handler_is_enabled() {
  * @access public
  */
 function compress_start_handler() {
+	# Don't start compression for CLI or when expressly disabled
+	if( php_sapi_name() == 'cli'  || defined( 'COMPRESSION_DISABLED' ) ) {
+		return;
+	}
+
 	# Do not start compress handler if we got any output so far, as this
 	# denotes that an error has occurred. Enabling compression in this case
 	# will likely cause a Content Encoding Error when displaying the page.
@@ -97,9 +102,7 @@ function compress_start_handler() {
 		# headers from being sent if there's a blank line in an included file
 		ob_start( 'compress_handler' );
 	} else if( ini_get_bool( 'zlib.output_compression' ) == true ) {
-		if( defined( 'COMPRESSION_DISABLED' ) ) {
-			return;
-		}
+		# @TODO is this really needed ? We already start buffering in core.php
 		ob_start();
 	}
 }
