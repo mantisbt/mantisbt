@@ -125,6 +125,11 @@ function compress_start_handler() {
 function compress_handler( $p_buffer, $p_mode ) {
 	global $g_compression_started;
 	if( $g_compression_started && compress_handler_is_enabled() ) {
+		/**
+		 * @noinspection PhpComposerExtensionStubsInspection
+		 *               compress_handler_is_enabled() returns false if zlib
+		 *               extension is not available.
+		 */
 		return ob_gzhandler( $p_buffer, $p_mode );
 	} else {
 		return $p_buffer;
