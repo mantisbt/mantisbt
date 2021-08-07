@@ -200,7 +200,7 @@
 
 								<listitem>
 									<para><emphasis>Fileinfo</emphasis> -
-										Required for file attachments and most of the plugins
+										required for file attachments and most of the plugins
 									</para>
 									<para>Without this extension, file attachment
 										previews and downloads do not work
@@ -215,10 +215,23 @@
 									(see <xref linkend="admin.auth.ldap" />).
 								</para></listitem>
 
+								<listitem><para><emphasis>zlib</emphasis> -
+									required to enable output compression
+									(see <xref linkend="admin.config.speed" />).
+								</para></listitem>
+
 							</itemizedlist></listitem>
 						</varlistentry>
 
 					</variablelist>
+					<note>
+						<para>
+							You can check which PHP modules are installed by running
+							<literal>php -m</literal> on the command line,
+							or by using the <literal>php_info()</literal>
+							function in a PHP script.
+						</para>
+					</note>
 				</listitem>
 
 				<listitem>
