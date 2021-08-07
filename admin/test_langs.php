@@ -540,7 +540,7 @@ function get_lang_files( $p_path ) {
 	# Filter language files, excluding 'qqq' pseudo-language
 	# https://translatewiki.net/wiki/FAQ#Special_private_language_codes_qqq,_qqx
 	$t_iter = new RegexIterator( $t_iter,
-		'|strings_(?(?!qqq).+)\.txt|',
+		'|^strings_(?(?!qqq).+)\.txt$|',
 		RegexIterator::MATCH,
 		RegexIterator::USE_KEY
 	);
