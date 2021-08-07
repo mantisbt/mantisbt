@@ -117,12 +117,12 @@ function compress_start_handler() {
  * Either compresses the buffer or just returns it as-is, depending on the
  * return value of compress_handler_is_enabled()
  *
- * @param string  &$p_buffer Buffer.
- * @param integer $p_mode    Mode.
+ * @param string  $p_buffer Buffer.
+ * @param integer $p_mode   Mode.
  * @return string
  * @access public
  */
-function compress_handler( &$p_buffer, $p_mode ) {
+function compress_handler( $p_buffer, $p_mode ) {
 	global $g_compression_started;
 	if( $g_compression_started && compress_handler_is_enabled() ) {
 		return ob_gzhandler( $p_buffer, $p_mode );
