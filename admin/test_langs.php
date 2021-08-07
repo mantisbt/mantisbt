@@ -186,6 +186,8 @@ class LangCheckFile {
 	 * sure that these are properly defined in
 	 * - {@see $g_language_choices_arr}
 	 * - {@see $g_language_auto_map}
+	 * If not, this is reported as a warning as this just means the new language
+	 * cannot be used within MantisBT.
 	 */
 	protected function checkConfig() {
 		global /** @noinspection PhpUnusedLocalVariableInspection */
@@ -206,7 +208,7 @@ class LangCheckFile {
 
 		# Report errors
 		if( $t_check ) {
-			$this->logFail( "'$t_lang' language is not defined in "
+			$this->logWarn( "'$t_lang' language is not defined in "
 				. implode(', ', $t_check )
 			);
 		}
