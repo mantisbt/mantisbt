@@ -561,13 +561,19 @@ function checklangdir( $p_path ) {
 	echo "Retrieving language files from '$t_path'";
 	echo '</td>';
 
-	try {
-		$t_lang_files = get_lang_files( $t_path );
-		print_info( count( $t_lang_files ) . " files found" );
-	} catch( UnexpectedValueException $e ) {
-		print_fail( $e->getMessage() );
+	if( !is_dir( $t_path ) ) {
+		print_info( "Directory does not exist" );
 		echo '</tr>';
 		return;
+	} else {
+		try {
+			$t_lang_files = get_lang_files( $t_path );
+			print_info( count( $t_lang_files ) . " files found" );
+		} catch( UnexpectedValueException $e ) {
+			print_fail( $e->getMessage() );
+			echo '</tr>';
+			return;
+		}
 	}
 
 	echo '</tr>';
