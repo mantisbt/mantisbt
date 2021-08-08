@@ -144,6 +144,10 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	for( $i=0; $i < $t_activities_count; $i++ ) {
 		$t_activity = $t_activities[$i];
 
+		if( $t_activity['type'] === ENTRY_TYPE_ATTACHMENT ) {
+			continue;
+		}
+
 		if( $t_activity['type'] == ENTRY_TYPE_NOTE && $t_activity['note']->time_tracking != 0 ) {
 			$t_time_tracking_hhmm = db_minutes_to_hhmm( $t_activity['note']->time_tracking );
 			$t_total_time += $t_activity['note']->time_tracking;
@@ -328,12 +332,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				echo string_display_links( $t_activity['note']->note );
 				$t_add_space = true;
 			}
-		} else {
-			if ( !isset( $t_security_token_attachments_delete ) ) {
-				$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
-			}
-
-			print_bug_attachment( $t_activity['attachment'], $t_security_token_attachments_delete );
 		}
 
 		if( isset( $t_activity['attachments'] ) && count( $t_activity['attachments'] ) > 0 ) {

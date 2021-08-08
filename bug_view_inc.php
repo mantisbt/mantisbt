@@ -617,7 +617,17 @@ if( !empty( $t_result['issue']['attachments'] ) ) {
 			continue;
 		}
 
+		$t_attachments = array();
+		if( isset( $t_activity['attachment'] ) ) {
+			$t_attachments[(int)($t_activity['attachment']['id'])] = $t_activity['attachment'];
+		}
+
 		foreach( $t_activity['attachments'] as $t_attachment ) {
+			$t_attachments[(int)$t_attachment['id']] = $t_attachment;
+		}
+
+		ksort( $t_attachments, SORT_NUMERIC );
+		foreach( $t_attachments as $t_attachment ) {
 			print_bug_attachment( $t_attachment, $t_security_token_attachments_delete );
 		}
 	}
