@@ -77,9 +77,13 @@ $t_fields = columns_filter_disabled( $t_fields );
 
 $t_show_attachments = in_array( 'attachments', $t_fields );
 
-$t_result = bug_activity_get_all( $f_bug_id, /* include_attachments */ $t_show_attachments );
-$t_activities = $t_result['activities'];
-$t_bugnotes = $t_result['bugnotes'];
+# If included from bug_view_inc.php, then this may already be set.
+if( !isset( $t_bug_activity_get_all_result ) ) {
+	$t_bug_activity_get_all_result = bug_activity_get_all( $f_bug_id, /* include_attachments */ $t_show_attachments );
+}
+
+$t_activities = $t_bug_activity_get_all_result['activities'];
+$t_bugnotes = $t_bug_activity_get_all_result['bugnotes'];
 
 # Pre-cache users
 $t_users_to_cache = array();
@@ -136,11 +140,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 	$t_normal_date_format = config_get( 'normal_date_format' );
 	$t_total_time = 0;
-
-	# Tokens for action buttons are created only once, if needed
-	$t_security_token_state = null;
-	$t_security_token_notes_delete = null;
-	$t_security_token_attachments_delete = null;
 
 	for( $i=0; $i < $t_activities_count; $i++ ) {
 		$t_activity = $t_activities[$i];
@@ -234,7 +233,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				echo '<div class="pull-left">';
 
 				if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
-					if ( !$t_security_token_notes_delete ) {
+					if ( !isset( $t_security_token_notes_delete ) ) {
 						$t_security_token_notes_delete = form_security_token( 'bugnote_delete' );
 					}
 
@@ -244,7 +243,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 						array( 'bugnote_id' => $t_activity['id'] ),
 						$t_security_token_notes_delete );
 				} else {
-					if ( !$t_security_token_attachments_delete ) {
+					if ( !isset( $t_security_token_attachments_delete ) ) {
 						$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
 					}
 
@@ -259,7 +258,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 			# show make public or make private button if the user is allowed to change the view state of this bugnote
 			if( $t_activity['can_change_view_state'] ) {
-				if ( !$t_security_token_state ) {
+				if ( !isset( $t_security_token_state ) ) {
 					$t_security_token_state = form_security_token( 'bugnote_set_view_state' );
 				}
 
@@ -330,7 +329,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				$t_add_space = true;
 			}
 		} else {
-			if ( !$t_security_token_attachments_delete ) {
+			if ( !isset( $t_security_token_attachments_delete ) ) {
 				$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
 			}
 
@@ -338,12 +337,14 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		}
 
 		if( isset( $t_activity['attachments'] ) && count( $t_activity['attachments'] ) > 0 ) {
-			if ( !$t_security_token_attachments_delete ) {
-				$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
-			}
-
-			foreach( $t_activity['attachments'] as $t_attachment ) {
-				print_bug_attachment( $t_attachment, $t_security_token_attachments_delete );
+			if( $t_activity['type'] === ENTRY_TYPE_NOTE ) {
+				if ( !isset( $t_security_token_attachments_delete ) ) {
+					$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
+				}
+	
+				foreach( $t_activity['attachments'] as $t_attachment ) {
+					print_bug_attachment( $t_attachment, $t_security_token_attachments_delete );
+				}
 			}
 		}
 	?>
