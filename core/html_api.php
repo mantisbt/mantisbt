@@ -208,11 +208,16 @@ function require_css( $p_stylesheet_path ) {
  */
 function html_css() {
 	global $g_stylesheets_included;
-	html_css_link( config_get_global( 'css_include_file' ) );
+
+	$t_cache_key = helper_generate_cache_key();
+
+	html_css_link( config_get_global( 'css_include_file' ) . '?cache_key=' . $t_cache_key );
+
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
-		html_css_link( config_get_global( 'css_rtl_include_file' ) );
+		html_css_link( config_get_global( 'css_rtl_include_file' ) . '?cache_key=' . $t_cache_key );
 	}
+
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
 		# status_config.php is a special css file, dynamically generated.
 		# Add a hash to the query string to differentiate content based on its
@@ -224,7 +229,8 @@ function html_css() {
 				'cache_key=' . helper_generate_cache_key( array( 'user' ) )
 			);
 		}
-		html_css_link( $t_stylesheet_path );
+
+		html_css_link( $t_stylesheet_path . $t_version );
 	}
 
 	# dropzone css
