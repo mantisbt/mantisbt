@@ -25,6 +25,7 @@
  * @uses access_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
+ * @uses bug_activity_api.php
  * @uses category_api.php
  * @uses columns_api.php
  * @uses compress_api.php
@@ -64,6 +65,7 @@ if( !defined( 'BUG_VIEW_INC_ALLOW' ) ) {
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
+require_api( 'bug_activity_api.php' );
 require_api( 'category_api.php' );
 require_api( 'columns_api.php' );
 require_api( 'compress_api.php' );
@@ -597,6 +599,29 @@ if( $t_flags['tags_can_attach'] ) {
 	echo '<th class="bug-attach-tags category">', lang_get( 'tag_attach_long' ), '</th>';
 	echo '<td class="bug-attach-tags" colspan="5">';
 	print_tag_attach_form( $f_issue_id );
+	echo '</td></tr>';
+}
+
+# Attachments
+if( !empty( $t_result['issue']['attachments'] ) ) {
+	echo '<tr class="noprint">';
+	echo '<th class="bug-attach-tags category">', lang_get( 'files' ), '</th>';
+	echo '<td class="bug-attach-tags" colspan="5">';
+
+	$t_bug_activity_get_all_result = bug_activity_get_all( $f_issue_id, /* include_attachments */ true );
+	$t_activities = $t_bug_activity_get_all_result['activities'];
+	$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
+
+	foreach( $t_activities as $t_activity ) {
+		if( $t_activity['type'] !== ENTRY_TYPE_ATTACHMENT ) {
+			continue;
+		}
+
+		foreach( $t_activity['attachments'] as $t_attachment ) {
+			print_bug_attachment( $t_attachment, $t_security_token_attachments_delete );
+		}
+	}
+
 	echo '</td></tr>';
 }
 
