@@ -49,6 +49,7 @@
  * @author Ebraminio
  * @author FarsiNevis
  * @author Hosseinblue
+ * @author Jeeputer
  * @author Mjbmr
  * @author Omidh
  * @author Razavi
@@ -235,7 +236,7 @@ $s_reset_request_msg = 'شخصی (شاید شما) درخواست تغییر گ�
 اگر شما درخواست داده‌اید، برای تغییر گذرواژه روی پیوند زیر کلیک کنید:';
 $s_reset_request_in_progress_msg = 'اگر شما نام کاربری و ایمیل درستی را برای حساب‌کاربری خود ارائه داده باشید، ما پیام تأییدیه را به ایمیل شما ارسال کرده‌ایم. زمانی که پیام را دریافت کردید، طبق راهنمایی‌های ارائه شده پیش بروید تا گذرواژه خود را تغییر دهید.';
 $s_email_notification_title_for_status_bug_new = 'مشکل زیر در حال حاضر در وضعیت تازه (دوباره) است';
-$s_email_notification_title_for_status_bug_feedback = 'مسئله زیر بازخورد شما را نیاز دارد.';
+$s_email_notification_title_for_status_bug_feedback = 'مشکل زیر نیازمند بازخورد است.';
 $s_email_notification_title_for_status_bug_acknowledged = 'مسئله زیر تائید اولیه شده است.';
 $s_email_notification_title_for_status_bug_confirmed = 'مسئله زیر تایید شده است.';
 $s_email_notification_title_for_status_bug_assigned = 'مسئله زیر اختصاص داده شده است.';
@@ -508,7 +509,7 @@ $s_archives = 'بایگانی ها';
 $s_rss = 'خبرخوان';
 $s_site_information = 'اطلاعات سایت';
 $s_mantis_version = 'نسخه MantisBT';
-$s_schema_version = 'نسخه Schema';
+$s_schema_version = 'نسخهٔ طرح پایگاه داده';
 $s_site_path = 'Site Path';
 $s_core_path = 'آدرس Core';
 $s_plugin_path = 'آدرس Plugin';
@@ -526,18 +527,18 @@ $s_filter_button = 'اجرا کردن پالایه';
 $s_default_filter = 'پالایه پیش فرض';
 $s_create_filter_link = 'ایجاد لینک دائمی';
 $s_create_short_link = 'ایجاد لینک کوتاه';
-$s_manage_users_link = 'مدیریت کاربران';
-$s_manage_projects_link = 'مدیریت پروژه​ها';
-$s_manage_custom_field_link = 'مدیریت فیلدهای سفارشی';
-$s_manage_global_profiles_link = 'مدیریت نمایه​های سراسری';
-$s_manage_plugin_link = 'مدیریت افزونه​ها';
+$s_manage_users_link = 'کاربران';
+$s_manage_projects_link = 'پروژه‌​ها';
+$s_manage_custom_field_link = 'فیلدهای سفارشی';
+$s_manage_global_profiles_link = 'نمایه‌های سراسری';
+$s_manage_plugin_link = 'افزونه​‌ها';
 $s_permissions_summary_report = 'گزارش مجوزها';
-$s_manage_config_link = 'مدیریت پیکربندی';
+$s_manage_config_link = 'پیکربندی';
 $s_manage_threshold_config = 'تعیین جریان کار';
 $s_manage_email_config = 'اعلان​های ایمیل';
 $s_manage_workflow_config = 'وضعیت جریان کار';
 $s_manage_workflow_graph = 'نمودار جریان کاری';
-$s_manage_tags_link = 'مدیریت برچسب‌ها';
+$s_manage_tags_link = 'برچسب‌ها';
 $s_create_new_account_link = 'ایجاد حساب کاربری جدید';
 $s_projects_link = 'پروژه‌ها';
 $s_documentation_link = 'مستندات';
