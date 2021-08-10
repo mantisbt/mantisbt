@@ -258,6 +258,11 @@ function bug_activity_combine( $p_entries ) {
 				$t_last_entry = $t_activity;
 			}
 		} else {
+			if( isset( $t_activity['attachment'] ) && ( $t_activity['attachment'] !== null ) ) {
+				$t_activity['attachments'][] = $t_activity['attachment'];
+			}
+
+			unset( $t_activity['attachment'] );
 			$t_last_entry = $t_activity;
 		}
 	}
