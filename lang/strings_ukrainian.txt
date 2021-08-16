@@ -42,6 +42,7 @@
  * @author Andriykopanytsia
  * @author Base
  * @author Choomaq
+ * @author DDPAT
  * @author Dovsienko
  * @author Green Zero
  * @author Igorko
@@ -555,7 +556,7 @@ $s_manage_workflow_config = 'Workflow';
 $s_manage_workflow_graph = 'Графік робочого циклу';
 $s_manage_tags_link = 'Управління тегами';
 $s_create_new_account_link = 'Новий запис';
-$s_projects_link = 'Проекти';
+$s_projects_link = 'Проєкти';
 $s_documentation_link = 'Документація';
 $s_new_accounts_title = 'Нові облікові записи';
 $s_1_week_title = 'за тиждень';
@@ -711,8 +712,8 @@ $s_review_changes_empty = 'Зміни не вибрані';
 $s_add_project_title = 'Додати проект';
 $s_upload_file_path = 'Шлях до закачуваних файлів';
 $s_add_project_button = 'Додати проект';
-$s_projects_title = 'Проекти';
-$s_projects_title_label = 'Проекти';
+$s_projects_title = 'Проєкти';
+$s_projects_title_label = 'Проєкти';
 $s_name = 'Назва';
 $s_project_updated_msg = 'Проект був успішно оновлений...';
 $s_version_added_msg = 'Версія була успішно додана...';
