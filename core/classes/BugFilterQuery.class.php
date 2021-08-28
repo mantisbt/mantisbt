@@ -1531,22 +1531,32 @@ class BugFilterQuery extends DbQuery {
 		}
 
 		# break up search terms by spacing or quoting
-		preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $this->filter[FILTER_PROPERTY_SEARCH], $t_matches, PREG_SET_ORDER );
+		# optional "s:, i:, c:" for faster summary only requests
+		preg_match_all( "/-?([sic]:)?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $this->filter[FILTER_PROPERTY_SEARCH], $t_matches, PREG_SET_ORDER );
 
-		# organize terms without quoting, paying attention to negation
-		$t_search_terms = array();
-		foreach( $t_matches as $t_match ) {
-			$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
-		}
 
+		$t_bug_table = $this->helper_table_alias_for_bugnote();
 		$t_bugnote_table = $this->helper_table_alias_for_bugnote();
 
 		# build a big where-clause and param list for all search terms, including negations
 		$t_first = true;
-		$t_textsearch_where_clause = '( ';
-		foreach( $t_search_terms as $t_search_term => $t_negate ) {
-			if( !$t_first ) {
-				$t_textsearch_where_clause .= ' AND ';
+		$t_after_or = false; # if we are after an OR 
+		$t_textsearch_where_clause = "( ( "; # second ( for OR
+		foreach( $t_matches as $t_match ) {
+			# analyse search term
+			$t_search_term = trim( $t_match[2], "\'\"" );
+			$t_negate = ( $t_match[0][0] == '-' );
+			$t_summary_only = ( $t_match[1] && $t_match[1][0] == 's' );
+			$t_id_only = ( $t_match[1] && $t_match[1][0] == 'i' );
+			$t_custom_field_only = ( $t_match[1] && $t_match[1][0] == 'c' );
+			if ( !$t_first && !$t_after_or ) {
+				if ( $t_search_term == 'OR' ) {
+					$t_textsearch_where_clause .= ' ) OR ( ';
+					$t_after_or = true;
+					continue;
+				} else {
+					$t_textsearch_where_clause .= ' AND ';
+				}
 			}
 
 			if( $t_negate ) {
@@ -1554,25 +1564,53 @@ class BugFilterQuery extends DbQuery {
 			}
 
 			$c_search = '%' . $t_search_term . '%';
-			$t_textsearch_where_clause .= '( ' . $this->sql_like( '{bug}.summary', $c_search )
-					. ' OR ' . $this->sql_like( '{bug_text}.description', $c_search )
-					. ' OR ' . $this->sql_like( '{bug_text}.steps_to_reproduce', $c_search )
-					. ' OR ' . $this->sql_like( '{bug_text}.additional_information', $c_search )
-					. ' OR ' . $this->sql_like( '{bugnote_text}.note', $c_search );
+			$t_textsearch_where_clause .= '( ';
+			# search in summary only if not id / custom_field_search
+			if ( !$t_id_only && !$t_custom_field_only ) {
+				$t_textsearch_where_clause .= $this->sql_like( '{bug}.summary', $c_search );
+                        } else {
+				$t_textsearch_where_clause .= '0';
+			}
+			if ( !$t_summary_only && !$t_id_only && !$t_custom_field_only ) {
+				$t_textsearch_where_clause .=
+				  ' OR ' . $this->sql_like( '{bug_text}.description', $c_search ) .
+				  ' OR ' . $this->sql_like( '{bug_text}.steps_to_reproduce', $c_search ) .
+				  ' OR ' . $this->sql_like( '{bug_text}.additional_information', $c_search ) .
+				  ' OR ' . $this->sql_like( '{bugnote_text}.note', $c_search );
+			}
 
-			if( is_numeric( $t_search_term ) ) {
+
+			if( is_numeric( $t_search_term ) && !$t_summary_only && !$t_custom_field_only ) {
 				# Note: no need to test negative values, '-' sign has been removed
 				if( $t_search_term <= DB_MAX_INT ) {
 					$c_search_int = (int)$t_search_term;
 					$t_textsearch_where_clause .= ' OR {bug}.id = ' . $this->param( $c_search_int );
-					$t_textsearch_where_clause .= ' OR ' . $t_bugnote_table . '.id = ' . $this->param( $c_search_int );
+					#  id search only in bugs, not in bugnotes
+					if ( !$t_id_only ) {
+						$t_textsearch_where_clause .= ' OR ' . $t_bugnote_table . '.id = ' . $this->param( $c_search_int );
+					}
 				}
 			}
 
+			if ( $t_custom_field_only ) {
+				$t_textsearch_where_clause .=
+					' OR ' . "({bug}.id IN ( SELECT DISTINCT bug_id from " . db_get_table( 'mantis_custom_field_string_table' ) . " where " . $this->sql_like( "value", $c_search )."))";
+			}
 			$t_textsearch_where_clause .= ' )';
 			$t_first = false;
+			$t_after_or = false;
 		}
-		$t_textsearch_where_clause .= ' )';
+		if ( $t_after_or ) {
+			# avoid SQL error with "XXX OR"
+			$t_textsearch_where_clause .= ' FALSE ';
+		}
+		$t_textsearch_where_clause .= ' ) )';
+
+
+		log_event(LOG_FILTERING,'Clause'.$t_textsearch_where_clause);
+
+
+
 
 		# add text query elements to arrays
 		if( !$t_first ) {
