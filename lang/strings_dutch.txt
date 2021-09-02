@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Danieldegroot2
  * @author Elroy
  * @author Gerardwijngaarden
  * @author HanV
@@ -1296,7 +1297,7 @@ $MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_DUPLICATE] = 'Project "%1$s" is al een su
 $MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_NOT_FOUND] = 'Project "%1$s" is geen subproject van "%2$s".';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'De gebruiker met naam "%1$s" is niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'De gebruikers met nummer "%1$d" is niet gevonden.';
-$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'De gebruiker met email "%1$s" is niet gevonden.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'De gebruiker met e-mail "%1$s" is niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'De gebruiker met naam "%1$s" is niet gevonden.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'De aanmeldinformatie in uw browser is ongeldig. Wellicht is uw gebruiker verwijderd?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'De instellingen voor deze gebruiker kunnen niet gevonden worden.';
