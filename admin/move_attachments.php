@@ -157,19 +157,25 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 	# Build the SQL query based on attachment type
 	switch( $p_type ) {
 		case 'project':
-			$t_query = 'SELECT f.*
+			$t_query = 'SELECT f.id
 				FROM {project_file} f
 				WHERE content <> \'\'
 				  AND f.project_id = ' . db_param() . '
 				ORDER BY f.filename';
+			$t_query2 = 'SELECT *
+				FROM {project_file}
+				WHERE id = ' . db_param();
 			break;
 		case 'bug':
-			$t_query = 'SELECT f.*
+			$t_query = 'SELECT f.id
 				FROM {bug_file} f
 				JOIN {bug} b ON b.id = f.bug_id
 				WHERE content <> \'\'
 				  AND b.project_id = ' . db_param() . '
 				ORDER BY f.bug_id, f.filename';
+			$t_query2 = 'SELECT *
+				FROM {bug_file}
+				WHERE id = ' . db_param();
 			break;
 	}
 
@@ -193,55 +199,58 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 			$t_failures = 0;
 			$t_data = array();
 
-			while( $t_row = db_fetch_array( $t_result ) ) {
-				$t_disk_filename = $t_upload_path . $t_row['diskfile'];
-				if ( file_exists( $t_disk_filename ) ) {
-					$t_status = 'Disk File Already Exists \'' . $t_disk_filename . '\'';
-					$t_failures++;
-				} else {
-					# write file to disk
-					if( file_put_contents( $t_disk_filename, $t_row['content'] ) ) {
-						# successful, update database
-						# @todo do we want to check the size of data transfer matches here?
-						switch( $p_type ) {
-							case 'project':
-								$t_update_query = 'UPDATE {project_file}
-									SET folder = ' . db_param() . ', content = \'\'
-									WHERE id = ' . db_param();
-								break;
-							case 'bug':
-								$t_update_query = 'UPDATE {bug_file}
-									SET folder = ' . db_param() . ', content = \'\'
-									WHERE id = ' . db_param();
-								break;
-						}
-						$t_update_result = db_query(
-							$t_update_query,
-							array( $t_upload_path, $t_row['id'] )
-						);
-
-						if( !$t_update_result ) {
-							$t_status = 'Database update failed';
-							$t_failures++;
-						} else {
-							$t_status = 'Moved to \'' . $t_disk_filename . '\'';
-						}
-					} else {
-						$t_status = 'Copy to \'' . $t_disk_filename . '\' failed';
+			while( $t_row2 = db_fetch_array( $t_result ) ) {
+				$t_result2 = db_query( $t_query2, array( $t_row2['id'] ) );
+				while( $t_row = db_fetch_array( $t_result2 ) ) {
+					$t_disk_filename = $t_upload_path . $t_row['diskfile'];
+					if ( file_exists( $t_disk_filename ) ) {
+						$t_status = 'Disk File Already Exists \'' . $t_disk_filename . '\'';
 						$t_failures++;
-					}
-				}
+					} else {
+						# write file to disk
+						if( file_put_contents( $t_disk_filename, $t_row['content'] ) ) {
+							# successful, update database
+							# @todo do we want to check the size of data transfer matches here?
+							switch( $p_type ) {
+								case 'project':
+									$t_update_query = 'UPDATE {project_file}
+										SET folder = ' . db_param() . ', content = \'\'
+										WHERE id = ' . db_param();
+									break;
+								case 'bug':
+									$t_update_query = 'UPDATE {bug_file}
+										SET folder = ' . db_param() . ', content = \'\'
+										WHERE id = ' . db_param();
+									break;
+							}
+							$t_update_result = db_query(
+								$t_update_query,
+								array( $t_upload_path, $t_row['id'] )
+							);
 
-				# Add the file and status to the list of processed attachments
-				$t_file = array(
-					'id' => $t_row['id'],
-					'filename' => $t_row['filename'],
-					'status' => $t_status,
-				);
-				if( $p_type == 'bug' ) {
-					$t_file['bug_id'] = $t_row['bug_id'];
+							if( !$t_update_result ) {
+								$t_status = 'Database update failed';
+								$t_failures++;
+							} else {
+								$t_status = 'Moved to \'' . $t_disk_filename . '\'';
+							}
+						} else {
+							$t_status = 'Copy to \'' . $t_disk_filename . '\' failed';
+							$t_failures++;
+						}
+					}
+
+					# Add the file and status to the list of processed attachments
+					$t_file = array(
+						'id' => $t_row['id'],
+						'filename' => $t_row['filename'],
+						'status' => $t_status,
+					);
+					if( $p_type == 'bug' ) {
+						$t_file['bug_id'] = $t_row['bug_id'];
+					}
+					$t_data[] = $t_file;
 				}
-				$t_data[] = $t_file;
 			}
 		}
 
