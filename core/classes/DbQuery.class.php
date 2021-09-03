@@ -857,7 +857,7 @@ class DbQuery {
 			$this->fetch();
 		}
 		if( is_numeric( $p_index_or_name ) ) {
-			if( count( $this->current_row ) > $p_index_or_name ) {
+			if( $this->current_row && count( $this->current_row ) > $p_index_or_name ) {
 				# get the element at that numerical position
 				$t_keys = array_keys( $this->current_row );
 				$t_value = $this->current_row[$t_keys[$p_index_or_name]];
