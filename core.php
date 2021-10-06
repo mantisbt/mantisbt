@@ -85,7 +85,7 @@ if( !extension_loaded( 'mbstring' ) ) {
 }
 
 # Ensure that encoding is always UTF-8 independent from any PHP default or ini setting
-mb_internal_encoding('UTF-8');
+mb_internal_encoding( 'UTF-8' );
 
 if( php_sapi_name() != 'cli' ) {
 	ob_start();
@@ -196,7 +196,7 @@ function autoload_mantis( $p_class ) {
 		if( file_exists( $t_require_path ) ) {
 			require_once( $t_require_path );
 			return;
-		}	
+		}
 	}
 
 	# Exceptions
@@ -205,7 +205,7 @@ function autoload_mantis( $p_class ) {
 		if( file_exists( $t_require_path ) ) {
 			require_once( $t_require_path );
 			return;
-		}	
+		}
 	}
 
 	global $g_class_path;
@@ -250,7 +250,7 @@ compress_start_handler();
 if( false === $t_config_inc_found ) {
 	if( php_sapi_name() == 'cli' ) {
 		echo 'Error: ' . $g_config_path . "config_inc.php file not found; ensure MantisBT is properly setup.\n";
-		exit(1);
+		exit( 1 );
 	}
 
 	if( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
@@ -277,7 +277,7 @@ require_api( 'config_api.php' );
 # be raised and we fall back to the system's default timezone.
 # Use admin checks to validate configuration.
 $t_tz = config_get_global( 'default_timezone' );
-if( empty( $t_tz ) || !date_default_timezone_set( $t_tz )) {
+if( empty( $t_tz ) || !date_default_timezone_set( $t_tz ) ) {
 	$t_tz = date_default_timezone_get();
 }
 config_set_global( 'default_timezone', $t_tz );
@@ -295,7 +295,7 @@ if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 shutdown_functions_register();
 
 # Initialise plugins
-require_api( 'plugin_api.php' );  // necessary for some upgrade steps
+require_api( 'plugin_api.php' );  # necessary for some upgrade steps
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	plugin_init_installed();
 }
