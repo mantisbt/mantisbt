@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Antonla
  * @author Christian List
  * @author Joedalton
  * @author Kaare
@@ -539,14 +540,14 @@ $s_manage_users_link = 'Brugere';
 $s_manage_projects_link = 'Projekter';
 $s_manage_custom_field_link = 'Brugerdefinerede felter';
 $s_manage_global_profiles_link = 'Globale profiler';
-$s_manage_plugin_link = 'Plugins';
+$s_manage_plugin_link = 'Udvidelsesmoduler';
 $s_permissions_summary_report = 'Rapport over rettigheder';
-$s_manage_config_link = 'Konfigurationen';
+$s_manage_config_link = 'Konfiguration';
 $s_manage_threshold_config = 'Tærskelværdier for arbejdsforløb';
 $s_manage_email_config = 'E-mail påmindelser';
 $s_manage_workflow_config = 'Overgange for arbejdsforløb';
 $s_manage_workflow_graph = 'Arbejdsforløbgraf';
-$s_manage_tags_link = 'Tags';
+$s_manage_tags_link = 'Mærker';
 $s_create_new_account_link = 'Opret ny konto';
 $s_projects_link = 'Projekter';
 $s_documentation_link = 'Dokumentation';
