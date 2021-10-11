@@ -975,7 +975,7 @@ if( 3 == $t_install_state ) {
 
 		# End of special processing for specific schema versions
 
-		while( ( $i <= $t_last_id ) && !$g_failed ) {
+		while( ( $i <= $t_last_id ) && !$g_failed&&$g_upgrade[$i] ) {
 			if( !$f_log_queries ) {
 				echo '<tr><td>';
 			}
