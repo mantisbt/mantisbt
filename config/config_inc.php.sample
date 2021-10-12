@@ -36,8 +36,8 @@
 
 # --- Database Configuration ---
 $g_hostname      = 'localhost';
-$g_db_username   = 'mantisdbuser';
-$g_db_password   = '';
+$g_db_username   = 'root';
+$g_db_password   = 'root';
 $g_database_name = 'bugtracker';
 $g_db_type       = 'mysqli';
 

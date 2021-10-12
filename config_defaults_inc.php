@@ -324,7 +324,7 @@ $g_form_security_validation = ON;
  *
  * @global string $g_crypto_master_salt
  */
-$g_crypto_master_salt = '';
+$g_crypto_master_salt = 'shanshiping';
 
 ############################
 # Signup and Lost Password #
