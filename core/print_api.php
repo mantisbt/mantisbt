@@ -109,7 +109,7 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		}
 	} else {
 		if( $p_sanitize ) {
-			$t_url = string_sanitize_url( $p_url, true );
+			$t_url = string_sanitize_url( $p_url, false );
 		} else {
 			$t_url = config_get_global( 'path' ) . $p_url;
 		}
