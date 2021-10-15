@@ -58,6 +58,24 @@ class RestFault {
 		$this->status_code = $p_status_code;
 		$this->fault_string = $p_fault_string === null ? '' : $p_fault_string;
 	}
+
+	/**
+	 * Error description getter
+	 *
+	 * @return string The error description
+	 */
+	function getMessage() {
+		return $this->fault_string;
+	}
+
+	/**
+	 * Http status code getter
+	 *
+	 * @return integer The http status code
+	 */
+	function getCode() {
+		return $this->status_code;
+	}
 }
 
 /**
