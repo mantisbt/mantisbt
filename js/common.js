@@ -751,6 +751,7 @@ function enableDropzone( classPrefix, autoUpload ) {
 	var form = zone.closest('form');
 	var max_filesize_bytes = zone.data('max-filesize-bytes');
 	var max_filseize_mb = Math.ceil( max_filesize_bytes / ( 1024*1024) );
+	var max_filename_length = zone.data( 'max-filename-length' );
 	var options = {
 		forceFallback: zone.data('force-fallback'),
 		paramName: "ufile",
@@ -798,24 +799,40 @@ function enableDropzone( classPrefix, autoUpload ) {
 			 * an array with the added files.
 			 */
 			this.on("addedfiles", function (files) {
-				var error_found = false;
-				var text_files = '';
+				var bullet = '-\u00A0';
+				var error_file_too_big = '';
+				var error_filename_too_long = '';
 				for (var i = 0; i < files.length; i++) {
 					if( files[i].size > max_filesize_bytes ) {
-						error_found = true;
 						var size_mb = files[i].size / ( 1024*1024 );
 						var dec = size_mb < 0.01 ? 3 : 2;
-						text_files = text_files + '"' + files[i].name + '" (' + size_mb.toFixed(dec) + ' MiB)\n';
+						error_file_too_big += bullet + '"' + files[i].name + '" (' + size_mb.toFixed(dec) + ' MiB)\n';
 						this.removeFile( files[i] );
+					} else if( files[i].name.length > 250 ) {
+						error_filename_too_long += bullet + '"' + files[i].name + '" (' + files[i].name.length + ')\n';
+						// this.removeFile( files[i] );
 					}
 				}
-				if( error_found ) {
+
+				var text = '';
+				var error_message = '';
+				if( error_file_too_big ) {
 					var max_mb = max_filesize_bytes / ( 1024*1024 );
 					var max_mb_dec = max_mb < 0.01 ? 3 : 2;
-					var text = zone.data( 'dropzone_multiple_files_too_big' );
-					text = text.replace( '{{files}}', '\n' + text_files + '\n' );
+					text = zone.data( 'dropzone_multiple_files_too_big' ) + "\n";
+					text = text.replace( '{{files}}', '\n' + error_file_too_big );
 					text = text.replace( '{{maxFilesize}}', max_mb.toFixed(max_mb_dec) );
-					alert( text );
+					error_message += text;
+				}
+
+				if( error_filename_too_long ) {
+					text = zone.data( 'dropzone_multiple_filenames_too_long' ) + "\n";
+					text = text.replace( '{{maxFilenameLength}}', max_filename_length );
+					text = text.replace( '{{files}}', '\n' + error_filename_too_long );
+					error_message += text;
+				}
+				if( error_message ) {
+					alert(error_message);
 				}
 			});
 		},

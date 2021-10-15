@@ -167,7 +167,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 						<?php echo lang_get( 'upload_file_path' ) ?>
 					</td>
 					<td>
-						<input type="text" id="project-file-path" name="file_path" class="input-sm" size="60" maxlength="250" value="<?php echo $t_file_path ?>" />
+						<input type="text" id="project-file-path" name="file_path" class="input-sm" size="60" maxlength="<?php echo DB_FIELD_SIZE_FILENAME ?>" value="<?php echo $t_file_path ?>" />
 					</td>
 				</tr>
 			<?php
