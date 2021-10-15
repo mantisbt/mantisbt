@@ -1616,6 +1616,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected. You are not
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed. File is not readable by MantisBT. Please check the project settings.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed. This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'File name "%1$s" is too long.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%1$s) was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used. Please go back and select another one.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'That email is already being used. Please go back and select another one.';
@@ -1761,7 +1762,8 @@ $s_dropzone_remove_file = 'Remove file';
 $s_dropzone_remove_file_confirmation = '';
 $s_dropzone_max_files_exceeded = 'You cannot upload any more files.';
 $s_dropzone_not_supported = 'Dropzone.js does not support older browsers!';
-$s_dropzone_multiple_files_too_big = 'The following files:{{files}}exceed the maximum allowed file size ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'The following files exceed the maximum allowed file size ({{maxFilesize}} MiB):{{files}}';
+$s_dropzone_multiple_filenames_too_long = 'The following filenames are too long (max {{maxFilenameLength}} characters):{{files}}';
 
 # Generic actions, short names
 $s_save = 'Save';

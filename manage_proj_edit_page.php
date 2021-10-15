@@ -195,7 +195,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					</td>
 					<td>
 						<input type="text" id="project-file-path" name="file_path"
-							   class="input-sm" size="60" maxlength="250"
+							   class="input-sm" size="60" maxlength="<?php echo DB_FIELD_SIZE_FILENAME ?>"
 							   value="<?php echo string_attribute( $t_file_path ) ?>"
 						/>
 					</td>

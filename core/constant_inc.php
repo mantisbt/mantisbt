@@ -295,6 +295,7 @@ define( 'ERROR_FILE_INVALID_UPLOAD_PATH', 503 );
 define( 'ERROR_FILE_NO_UPLOAD_FAILURE', 504 );
 define( 'ERROR_FILE_MOVE_FAILED', 505 );
 define( 'ERROR_FILE_NOT_FOUND', 506 );
+define( 'ERROR_FILE_NAME_TOO_LONG', 507 );
 
 # ERROR_BUGNOTE_*
 define( 'ERROR_BUGNOTE_NOT_FOUND', 600 );
@@ -623,6 +624,7 @@ define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 define( 'DB_FIELD_SIZE_HISTORY_VALUE', 255 );
+define( 'DB_FIELD_SIZE_FILENAME', 250 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );

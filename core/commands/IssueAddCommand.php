@@ -325,6 +325,17 @@ class IssueAddCommand extends Command {
 					ERROR_ACCESS_DENIED );
 			}
 
+			foreach( $t_issue['files'] as $t_file ) {
+				$t_name = $t_file['name'];
+				if( strlen( $t_name ) > DB_FIELD_SIZE_FILENAME ) {
+					throw new ClientException(
+						"File name too long '$t_name'",
+						ERROR_FILE_NAME_TOO_LONG,
+						array( $t_name )
+					);
+				}
+			}
+
 			$this->files = $t_issue['files'];
 		}
 

@@ -857,6 +857,14 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	file_ensure_uploaded( $p_file );
 	$t_file_name = $p_file['name'];
 
+	if( strlen( $t_file_name ) > DB_FIELD_SIZE_FILENAME ) {
+		throw new ClientException(
+			sprintf( "Filename '%s' is too long", $t_file_name ),
+			ERROR_FILE_NAME_TOO_LONG,
+			array( $t_file_name )
+		);
+	}
+
 	if( !file_type_check( $t_file_name ) ) {
 		throw new ClientException(
 			sprintf( "File '%s' type not allowed", $t_file_name ),

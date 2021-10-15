@@ -79,6 +79,12 @@ if( is_blank( $f_title ) ) {
 if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 	file_ensure_uploaded( $f_file );
 
+	$t_file_name = $f_file['name'];
+	if( strlen( $t_file_name ) > DB_FIELD_SIZE_FILENAME ) {
+		error_parameters( $t_file_name );
+		trigger_error( ERROR_FILE_NAME_TOO_LONG, ERROR );
+	}
+
 	$t_project_id = helper_get_current_project();
 
 	# grab the original file path and name
@@ -118,7 +124,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 		SET title=' . db_param() . ', description=' . db_param() . ', date_added=' . db_param() . ',
 			filename=' . db_param() . ', filesize=' . db_param() . ', file_type=' .db_param() . ', content=' .db_param() . '
 			WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $f_title, $f_description, db_now(), $f_file['name'], $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
+	$t_result = db_query( $t_query, array( $f_title, $f_description, db_now(), $t_file_name, $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
 } else {
 	$t_query = 'UPDATE {project_file}
 			SET title=' . db_param() . ', description=' . db_param() . '
