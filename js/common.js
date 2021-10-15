@@ -750,7 +750,7 @@ function enableDropzone( classPrefix, autoUpload ) {
 	var zone = $( zone_class );
 	var form = zone.closest('form');
 	var max_filesize_bytes = zone.data('max-filesize-bytes');
-	var max_filseize_mb = Math.ceil( max_filesize_bytes / ( 1024*1024) );
+	var max_filesize_mb = Math.ceil( max_filesize_bytes / ( 1024*1024) );
 	var max_filename_length = zone.data( 'max-filename-length' );
 	var options = {
 		forceFallback: zone.data('force-fallback'),
@@ -760,7 +760,7 @@ function enableDropzone( classPrefix, autoUpload ) {
 		previewsContainer: '#' + classPrefix + '-previews-box',
 		uploadMultiple: true,
 		parallelUploads: 100,
-		maxFilesize: max_filseize_mb,
+		maxFilesize: max_filesize_mb,
 		timeout: 0,
 		addRemoveLinks: !autoUpload,
 		acceptedFiles: zone.data('accepted-files'),
