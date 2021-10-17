@@ -1314,7 +1314,6 @@ $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
 $s_monitored_by = 'Monitored By';
 $s_attachments = 'attachment(s)';
-$s_files = 'File(s)';
 $s_bytes = 'bytes';
 $s_kib = 'KiB';
 $s_attachment_missing = 'Attachment missing';
