@@ -96,7 +96,7 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 				'user_id' => $t_attachment['user_id'],
 				'private' => false,
 				'style' => 'bugnote-note',
-				'attachment' => $t_attachment );
+				'attachments' => array( $t_attachment ) );
 	
 			$t_activity['can_edit'] = false;
 			$t_activity['can_delete'] = !$t_bug_readonly && $t_attachment['can_delete'];
@@ -247,29 +247,17 @@ function bug_activity_combine( $p_entries ) {
 	$t_last_entry = null;
 
 	foreach( $p_entries as $t_activity ) {
-		$t_set_last_entry = false;
-
 		if( $t_last_entry != null ) {
 			if( $t_last_entry['user_id'] == $t_activity['user_id'] &&
 				$t_activity['type'] == ENTRY_TYPE_ATTACHMENT &&
 				abs( $t_activity['timestamp'] - $t_last_entry['timestamp'] ) <=
 					$t_threshold_in_seconds ) {
-				$t_last_entry['attachments'][] = $t_activity['attachment'];
+				$t_last_entry['attachments'] = array_merge( $t_last_entry['attachments'], $t_activity['attachments'] );
 			} else {
 				$t_combined_entries[] = $t_last_entry;
-				$t_set_last_entry = true;
+				$t_last_entry = $t_activity;
 			}
 		} else {
-			$t_set_last_entry = true;
-		}
-
-		if( $t_set_last_entry ) {
-			if( isset( $t_activity['attachment'] ) && ( $t_activity['attachment'] !== null ) ) {
-				$t_activity['attachments'][] = $t_activity['attachment'];
-			}
-	
-			unset( $t_activity['attachment'] );
-	
 			$t_last_entry = $t_activity;
 		}
 	}
