@@ -269,7 +269,7 @@ function layout_head_css() {
 		html_css_link( 'font-awesome-' . FONT_AWESOME_VERSION . '.min.css' );
 
 		# theme text fonts
-		html_css_link( 'fonts.css?cache_key=' . $t_cache_key );
+		html_css_link( 'fonts.css', $t_cache_key );
 
 		# datetimepicker
 		html_css_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
@@ -278,12 +278,12 @@ function layout_head_css() {
 	# page specific plugin styles
 
 	# theme styles
-	html_css_link( 'ace.min.css?cache_key=' . $t_cache_key );
-	html_css_link( 'ace-mantis.css?cache_key=' . $t_cache_key );
-	html_css_link( 'ace-skins.min.css?cache_key=' . $t_cache_key );
+	html_css_link( 'ace.min.css', $t_cache_key );
+	html_css_link( 'ace-mantis.css', $t_cache_key );
+	html_css_link( 'ace-skins.min.css', $t_cache_key );
 
 	if( layout_is_rtl() ) {
-		html_css_link( 'ace-rtl.min.css?cache_key=' . $t_cache_key );
+		html_css_link( 'ace-rtl.min.css', $t_cache_key );
 	}
 
 	echo "\n";

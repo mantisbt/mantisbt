@@ -211,11 +211,11 @@ function html_css() {
 
 	$t_cache_key = helper_generate_cache_key();
 
-	html_css_link( config_get_global( 'css_include_file' ) . '?cache_key=' . $t_cache_key );
+	html_css_link( config_get_global( 'css_include_file' ), $t_cache_key );
 
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
-		html_css_link( config_get_global( 'css_rtl_include_file' ) . '?cache_key=' . $t_cache_key );
+		html_css_link( config_get_global( 'css_rtl_include_file' ), $t_cache_key );
 	}
 
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
@@ -230,7 +230,7 @@ function html_css() {
 			);
 		}
 
-		html_css_link( $t_stylesheet_path . $t_version );
+		html_css_link( $t_stylesheet_path );
 	}
 
 	# dropzone css
@@ -244,14 +244,23 @@ function html_css() {
 /**
  * Prints a CSS link
  * @param string $p_filename Filename.
+ * @param string $p_cache_key The cache key to put on query string or empty string.
  * @return void
  */
-function html_css_link( $p_filename ) {
+function html_css_link( $p_filename, $p_cache_key = '' ) {
+	$t_filename = $p_filename;
+
 	# If no path is specified, look for CSS files in default directory
-	if( $p_filename == basename( $p_filename ) ) {
-		$p_filename = 'css/' . $p_filename;
+	if( $t_filename == basename( $t_filename ) ) {
+		$t_filename = 'css/' . $t_filename;
 	}
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $p_filename ), true ), '" />', "\n";
+
+	$t_url = helper_mantis_url( $t_filename );
+	if ( !empty( $p_cache_key ) ) {
+		$t_url = helper_url_combine( $t_url, 'cache_key=' . $p_cache_key );
+	}
+
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( $t_url, true ), '" />', "\n";
 }
 
 /**
