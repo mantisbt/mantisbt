@@ -605,7 +605,7 @@ if( $t_flags['tags_can_attach'] ) {
 # Attachments
 if( !empty( $t_result['issue']['attachments'] ) ) {
 	echo '<tr class="noprint">';
-	echo '<th class="bug-attach-tags category">', lang_get( 'files' ), '</th>';
+	echo '<th class="bug-attach-tags category">', lang_get( 'attached_files' ), '</th>';
 	echo '<td class="bug-attach-tags" colspan="5">';
 
 	$t_bug_activity_get_all_result = bug_activity_get_all( $f_issue_id, /* include_attachments */ true );
