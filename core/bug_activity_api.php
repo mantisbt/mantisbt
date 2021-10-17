@@ -247,6 +247,8 @@ function bug_activity_combine( $p_entries ) {
 	$t_last_entry = null;
 
 	foreach( $p_entries as $t_activity ) {
+		$t_set_last_entry = false;
+
 		if( $t_last_entry != null ) {
 			if( $t_last_entry['user_id'] == $t_activity['user_id'] &&
 				$t_activity['type'] == ENTRY_TYPE_ATTACHMENT &&
@@ -255,14 +257,19 @@ function bug_activity_combine( $p_entries ) {
 				$t_last_entry['attachments'][] = $t_activity['attachment'];
 			} else {
 				$t_combined_entries[] = $t_last_entry;
-				$t_last_entry = $t_activity;
+				$t_set_last_entry = true;
 			}
 		} else {
+			$t_set_last_entry = true;
+		}
+
+		if( $t_set_last_entry ) {
 			if( isset( $t_activity['attachment'] ) && ( $t_activity['attachment'] !== null ) ) {
 				$t_activity['attachments'][] = $t_activity['attachment'];
 			}
-
+	
 			unset( $t_activity['attachment'] );
+	
 			$t_last_entry = $t_activity;
 		}
 	}
