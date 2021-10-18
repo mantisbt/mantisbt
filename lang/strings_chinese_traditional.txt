@@ -53,6 +53,7 @@
  * @author Sanmosa
  * @author Simon Shek
  * @author Smarky
+ * @author Weather Top Wizard
  * @author Wehwei
  * @author Wwycheuk
  * @author Xiplus
@@ -530,7 +531,7 @@ $s_archives = '封存';
 $s_rss = 'RSS';
 $s_site_information = '網站資訊';
 $s_mantis_version = 'MantisBT 版本';
-$s_schema_version = '資料庫版本';
+$s_schema_version = '資料庫架構版本';
 $s_site_path = '網站路徑';
 $s_core_path = '核心路徑';
 $s_plugin_path = '套件路徑';
@@ -1047,7 +1048,7 @@ $s_changelog = '版本更動紀錄';
 $s_changelog_empty = '目前尚無修改日誌資訊';
 $s_changelog_empty_manager = '無可用的版本更動資訊。 專案有設定版本且問題的解決狀態為 "已修正於版本" 時會顯示問題。';
 $s_roadmap = '版本規劃';
-$s_resolved_progress = '%1$d / %2$d 問題已解決。 進度 (%3$d%%)。';
+$s_resolved_progress = '%1$d / %2$d 問題已解決。';
 $s_roadmap_empty = '無可用的版本規劃資訊';
 $s_roadmap_empty_manager = '無可用的版本規劃資訊。 當專案有設定版本且問題有設定 "目標版本" 時會顯示問題。';
 $s_http_auth_realm = 'MantisBT 登入';
