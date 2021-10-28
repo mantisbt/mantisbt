@@ -251,6 +251,8 @@ function layout_head_meta() {
  * @return void
  */
 function layout_head_css() {
+	$t_cache_key = helper_generate_cache_key();
+
 	# bootstrap & fontawesome
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		html_css_cdn_link( 'https://stackpath.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/css/bootstrap.min.css',BOOTSTRAP_HASH_CSS );
@@ -267,7 +269,7 @@ function layout_head_css() {
 		html_css_link( 'font-awesome-' . FONT_AWESOME_VERSION . '.min.css' );
 
 		# theme text fonts
-		html_css_link( 'fonts.css' );
+		html_css_link( 'fonts.css', $t_cache_key );
 
 		# datetimepicker
 		html_css_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
@@ -276,12 +278,12 @@ function layout_head_css() {
 	# page specific plugin styles
 
 	# theme styles
-	html_css_link( 'ace.min.css' );
-	html_css_link( 'ace-mantis.css' );
-	html_css_link( 'ace-skins.min.css' );
+	html_css_link( 'ace.min.css', $t_cache_key );
+	html_css_link( 'ace-mantis.css', $t_cache_key );
+	html_css_link( 'ace-skins.min.css', $t_cache_key );
 
 	if( layout_is_rtl() ) {
-		html_css_link( 'ace-rtl.min.css' );
+		html_css_link( 'ace-rtl.min.css', $t_cache_key );
 	}
 
 	echo "\n";
