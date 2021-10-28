@@ -2224,7 +2224,15 @@ $g_ldap_bind_passwd = '';
 $g_ldap_uid_field = 'uid';
 
 /**
+ * The LDAP field for the user's e-mail address.
+ * @see $g_use_ldap_email
+ * @global string $g_ldap_email_field
+ */
+$g_ldap_email_field = 'mail';
+
+/**
  * The LDAP field for the user's real name (i.e. common name).
+ * @see $g_use_ldap_realname
  * @global string $g_ldap_realname_field
  */
 $g_ldap_realname_field = 'cn';
@@ -2234,6 +2242,7 @@ $g_ldap_realname_field = 'cn';
  * database (OFF).
  * Note that MantisBT will update the database with the data retrieved
  * from LDAP when ON.
+ * @see $g_ldap_realname_field
  * @global integer $g_use_ldap_realname
  */
 $g_use_ldap_realname = OFF;
@@ -2243,6 +2252,7 @@ $g_use_ldap_realname = OFF;
  * in the database (OFF).
  * Note that MantisBT will update the database with the data retrieved
  * from LDAP when ON.
+ * @see $g_ldap_email_field
  * @global integer $g_use_ldap_email
  */
 $g_use_ldap_email = OFF;
@@ -4476,6 +4486,7 @@ $g_global_settings = array(
 	'language_path',
 	'ldap_bind_dn',
 	'ldap_bind_passwd',
+	'ldap_email_field',
 	'ldap_follow_referrals',
 	'ldap_network_timeout',
 	'ldap_organization',

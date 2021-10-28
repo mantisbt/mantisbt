@@ -304,6 +304,16 @@ ldaps://ldap.example.com:3269/
 			</varlistentry>
 
 			<varlistentry>
+				<term>$g_ldap_email_field</term>
+
+				<listitem>
+					<para>The LDAP field for e-mail address.
+						Defaults to <literal>mail</literal>.
+					</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
 				<term>$g_ldap_realname_field</term>
 
 				<listitem>
