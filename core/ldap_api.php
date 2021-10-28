@@ -176,7 +176,10 @@ function ldap_email_from_username( $p_username ) {
 	if( ldap_simulation_is_enabled() ) {
 		$t_email = ldap_simulation_email_from_username( $p_username );
 	} else {
-		$t_email = (string)ldap_get_field_from_username( $p_username, 'mail' );
+		$t_email = (string)ldap_get_field_from_username(
+			$p_username,
+			config_get_global( 'ldap_email_field' )
+		);
 	}
 	return $t_email;
 }
@@ -225,7 +228,7 @@ function ldap_escape_string( $p_string ) {
  * Retrieves user data from LDAP and stores it in cache.
  *
  * Uses a single LDAP query to retrieve the following fields:
- * - email (mail)
+ * - email {@see $g_ldap_email_field}
  * - realname {@see $g_ldap_realname_field}
  *
  * @param string $p_username The username.
@@ -259,7 +262,7 @@ function ldap_cache_user_data( $p_username ) {
 	$t_search_filter = '(&' . $t_ldap_organization
 		. '(' . $t_ldap_uid_field . '=' . ldap_escape_string( $p_username ) . '))';
 	$t_search_attrs = array(
-		'mail',
+		config_get_global( 'ldap_email_field' ),
 		config_get_global( 'ldap_realname_field' )
 	);
 
