@@ -43,6 +43,7 @@
  * @author Chrumps
  * @author Cysioland
  * @author Debeet
+ * @author Dzidek
  * @author Expert3222
  * @author Kareyac
  * @author Macofe
@@ -354,6 +355,7 @@ $s_timezone = 'Strefa czasowa';
 $s_prefs_reset_msg = 'Preferencje zostały przywrócone...';
 $s_prefs_updated_msg = 'Preferencje zostały zaktualizowane...';
 $s_select_profile = 'Wybierz profil';
+$s_add_profile = 'Dodaj profil';
 $s_edit_profile = 'Edytuj profil';
 $s_delete_profile = 'Usuń profil';
 $s_my_sponsorship = 'Moje sponsorowanie';
