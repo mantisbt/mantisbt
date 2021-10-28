@@ -2147,6 +2147,7 @@ function print_dropzone_form_data() {
 	//$t_max_file_size = ceil( file_get_max_file_size() / ( 1024*1024 ) );
 	echo 'data-force-fallback="' . ( config_get( 'dropzone_enabled' ) ? 'false' : 'true' ) . '"' . "\n";
 	echo "\t" . 'data-max-filesize-bytes="'. file_get_max_file_size() . '"' . "\n";
+	echo "\t" . 'data-max-filename-length="'. DB_FIELD_SIZE_FILENAME . '"' . "\n";
 	$t_allowed_files = config_get( 'allowed_files' );
 	if ( !empty ( $t_allowed_files ) ) {
 		$t_allowed_files = '.' . implode ( ',.', explode ( ',', config_get( 'allowed_files' ) ) );
@@ -2165,6 +2166,7 @@ function print_dropzone_form_data() {
 	echo "\t" . 'data-max-files-exceeded="' . htmlspecialchars( lang_get( 'dropzone_max_files_exceeded' ) ) . '"' . "\n";
 	echo "\t" . 'data-dropzone-not-supported="' . htmlspecialchars( lang_get( 'dropzone_not_supported' ) ) . '"';
 	echo "\t" . 'data-dropzone_multiple_files_too_big="' . htmlspecialchars( lang_get( 'dropzone_multiple_files_too_big' ) ) . '"';
+	echo "\t" . 'data-dropzone_multiple_filenames_too_long="' . htmlspecialchars( lang_get( 'dropzone_multiple_filenames_too_long' ) ) . '"';
 }
 
 /**
