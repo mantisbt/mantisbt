@@ -111,17 +111,17 @@ function csv_get_default_filename() {
  * @access public
  */
 function csv_escape_string( $p_string ) {
-		$t_escaped = str_split( '"' . csv_get_separator() . csv_get_newline() );
-		$t_must_escape = false;
-		while( ( $t_char = current( $t_escaped ) ) !== false && !$t_must_escape ) {
-			$t_must_escape = strpos( $p_string, $t_char ) !== false;
-			next( $t_escaped );
-		}
-		if( $t_must_escape ) {
-			$p_string = '"' . str_replace( '"', '""', $p_string ) . '"';
-		}
+	$t_escaped = str_split( '"' . csv_get_separator() . csv_get_newline() );
+	$t_must_escape = false;
+	while( ( $t_char = current( $t_escaped ) ) !== false && !$t_must_escape ) {
+		$t_must_escape = strpos( $p_string, $t_char ) !== false;
+		next( $t_escaped );
+	}
+	if( $t_must_escape ) {
+		$p_string = '"' . str_replace( '"', '""', $p_string ) . '"';
+	}
 
-		return $p_string;
+	return $p_string;
 }
 
 /**
