@@ -32,7 +32,11 @@
  * @uses helper_api.php
  * @uses project_api.php
  * @uses user_api.php
+ *
+ * @noinspection PhpDocMissingThrowsInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -91,6 +95,7 @@ function csv_get_separator() {
  * <projectname>.csv.
  * @return string filename
  * @access public
+ * @throws ClientException
  */
 function csv_get_default_filename() {
 	$t_current_project_id = helper_get_current_project();
@@ -130,8 +135,7 @@ function csv_escape_string( $p_string ) {
  * @access public
  */
 function csv_get_columns() {
-	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE );
-	return $t_columns;
+	return helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE );
 }
 
 /**
@@ -225,6 +229,7 @@ function csv_format_handler_id( BugData $p_bug ) {
  * @param BugData $p_bug A BugData object.
  * @return string formatted priority string
  * @access public
+ * @throws ClientException
  */
 function csv_format_priority( BugData $p_bug ) {
 	$t_priority = get_enum_element( 'priority',
@@ -240,6 +245,7 @@ function csv_format_priority( BugData $p_bug ) {
  * @param BugData $p_bug A BugData object.
  * @return string formatted severity string
  * @access public
+ * @throws ClientException
  */
 function csv_format_severity( BugData $p_bug ) {
 	$t_severity = get_enum_element( 'severity',
@@ -255,6 +261,7 @@ function csv_format_severity( BugData $p_bug ) {
  * @param BugData $p_bug A BugData object.
  * @return string formatted reproducibility string
  * @access public
+ * @throws ClientException
  */
 function csv_format_reproducibility( BugData $p_bug ) {
 	$t_reproducibility = get_enum_element( 'reproducibility',
@@ -316,6 +323,7 @@ function csv_format_tags( BugData $p_bug ) {
  * @param BugData $p_bug A BugData object.
  * @return string formatted projection string
  * @access public
+ * @throws ClientException
  */
 function csv_format_projection( BugData $p_bug ) {
 	$t_projection = get_enum_element( 'projection',
@@ -355,6 +363,7 @@ function csv_format_date_submitted( BugData $p_bug ) {
  * @param BugData $p_bug A BugData object.
  * @return string formatted eta
  * @access public
+ * @throws ClientException
  */
 function csv_format_eta( BugData $p_bug ) {
 	$t_eta = get_enum_element( 'eta',
@@ -410,6 +419,7 @@ function csv_format_platform( BugData $p_bug ) {
  * @param BugData $p_bug A BugData object.
  * @return string formatted view state
  * @access public
+ * @throws ClientException
  */
 function csv_format_view_state( BugData $p_bug ) {
 	$t_view_state = get_enum_element( 'view_state',
@@ -491,6 +501,7 @@ function csv_format_additional_information( BugData $p_bug ) {
  * @param BugData $p_bug A BugData object.
  * @return string formatted status
  * @access public
+ * @throws ClientException
  */
 function csv_format_status( BugData $p_bug ) {
 	$t_status = get_enum_element( 'status',
@@ -506,6 +517,7 @@ function csv_format_status( BugData $p_bug ) {
  * @param BugData $p_bug A BugData object.
  * @return string formatted resolution string
  * @access public
+ * @throws ClientException
  */
 function csv_format_resolution( BugData $p_bug ) {
 	$t_resolution = get_enum_element( 'resolution',
@@ -531,6 +543,7 @@ function csv_format_duplicate_id( BugData $p_bug ) {
  * @param BugData $p_bug A BugData object.
  * @return string
  * @access public
+ * @noinspection PhpUnusedParameterInspection
  */
 function csv_format_selection( BugData $p_bug ) {
 	return csv_escape_string( '' );
@@ -576,7 +589,7 @@ function csv_format_sponsorship_total( BugData $p_bug ) {
 function csv_format_attachment_count( BugData $p_bug ) {
 	# Check for attachments
 	$t_attachment_count = 0;
-	if( file_can_view_bug_attachments( $p_bug->id, null ) ) {
+	if( file_can_view_bug_attachments( $p_bug->id ) ) {
 		$t_attachment_count = file_bug_attachment_count( $p_bug->id );
 	}
 	return csv_escape_string( $t_attachment_count );
