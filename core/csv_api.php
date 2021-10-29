@@ -116,6 +116,13 @@ function csv_get_default_filename() {
  * @access public
  */
 function csv_escape_string( $p_string ) {
+	# Prevent CSV injection by escaping text that could be interpreted as a formula
+	if( $p_string && strpos( '=-+@', $p_string[0] ) !== false ) {
+		# Prefixing with a tab rather than single quote, as Excel does not show
+		# the tab visually in the cell.
+		$p_string = "\t" . $p_string;
+	}
+
 	$t_escaped = str_split( '"' . csv_get_separator() . csv_get_newline() );
 	$t_must_escape = false;
 	while( ( $t_char = current( $t_escaped ) ) !== false && !$t_must_escape ) {
