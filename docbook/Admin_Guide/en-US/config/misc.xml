@@ -232,5 +232,42 @@
 				</warning>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_csv_separator</term>
+			<listitem>
+				<para>The separator to use for CSV exports.
+					The default value is the comma (<literal>,</literal>).
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_csv_injection_protection</term>
+			<listitem>
+				<para>When this setting is <emphasis>ON</emphasis> (default),
+					any data that could be interpreted as a formula by a
+					spreadsheet program such as Excel
+					(i.e. starting with
+					<literal>=</literal>,
+					<literal>@</literal>,
+					<literal>-</literal> or
+					<literal>+</literal>),
+					will be prefixed with a tab character (<literal>\t</literal>)
+					in order to prevent CSV injection.
+				</para>
+				<para>Sometimes this may not be appropriate (e.g. if the CSV needs
+					to be consumed programmatically). In that case,
+					$g_csv_injection_protection can be set to
+					<emphasis>OFF</emphasis>, resulting in raw data to be exported.
+				</para>
+				<warning>
+					<para>Setting this to <emphasis>OFF</emphasis> is a security
+						risk. An attacker could upload a crafted CSV file
+						containing formulas that will be executed when opened
+						with Excel, as described in
+						<ulink url="http://georgemauer.net/2017/10/07/csv-injection.html">this article</ulink>.
+					</para>
+				</warning>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>
