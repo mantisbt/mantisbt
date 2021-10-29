@@ -160,7 +160,8 @@ function csv_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field ) 
 /**
  * Gets the formatted value for the specified plugin column value.
  * @param string  $p_column The plugin column name.
- * @param BugData $p_bug    A bug object to print the column for - needed for the display function of the plugin column.
+ * @param BugData $p_bug    A bug object to print the column for - needed for
+ *                          the display function of the plugin column.
  * @return string The plugin column value.
  */
 function csv_format_plugin_column_value( $p_column, BugData $p_bug ) {
@@ -226,7 +227,12 @@ function csv_format_handler_id( BugData $p_bug ) {
  * @access public
  */
 function csv_format_priority( BugData $p_bug ) {
-	return csv_escape_string( get_enum_element( 'priority', $p_bug->priority, auth_get_current_user_id(), $p_bug->project_id ) );
+	$t_priority = get_enum_element( 'priority',
+		$p_bug->priority,
+		auth_get_current_user_id(),
+		$p_bug->project_id
+	);
+	return csv_escape_string( $t_priority );
 }
 
 /**
@@ -236,7 +242,12 @@ function csv_format_priority( BugData $p_bug ) {
  * @access public
  */
 function csv_format_severity( BugData $p_bug ) {
-	return csv_escape_string( get_enum_element( 'severity', $p_bug->severity, auth_get_current_user_id(), $p_bug->project_id ) );
+	$t_severity = get_enum_element( 'severity',
+		$p_bug->severity,
+		auth_get_current_user_id(),
+		$p_bug->project_id
+	);
+	return csv_escape_string( $t_severity );
 }
 
 /**
@@ -246,7 +257,12 @@ function csv_format_severity( BugData $p_bug ) {
  * @access public
  */
 function csv_format_reproducibility( BugData $p_bug ) {
-	return csv_escape_string( get_enum_element( 'reproducibility', $p_bug->reproducibility, auth_get_current_user_id(), $p_bug->project_id ) );
+	$t_reproducibility = get_enum_element( 'reproducibility',
+		$p_bug->reproducibility,
+		auth_get_current_user_id(),
+		$p_bug->project_id
+	);
+	return csv_escape_string( $t_reproducibility );
 }
 
 /**
@@ -302,7 +318,12 @@ function csv_format_tags( BugData $p_bug ) {
  * @access public
  */
 function csv_format_projection( BugData $p_bug ) {
-	return csv_escape_string( get_enum_element( 'projection', $p_bug->projection, auth_get_current_user_id(), $p_bug->project_id ) );
+	$t_projection = get_enum_element( 'projection',
+		$p_bug->projection,
+		auth_get_current_user_id(),
+		$p_bug->project_id
+	);
+	return csv_escape_string( $t_projection );
 }
 
 /**
@@ -336,7 +357,12 @@ function csv_format_date_submitted( BugData $p_bug ) {
  * @access public
  */
 function csv_format_eta( BugData $p_bug ) {
-	return csv_escape_string( get_enum_element( 'eta', $p_bug->eta, auth_get_current_user_id(), $p_bug->project_id ) );
+	$t_eta = get_enum_element( 'eta',
+		$p_bug->eta,
+		auth_get_current_user_id(),
+		$p_bug->project_id
+	);
+	return csv_escape_string( $t_eta );
 }
 
 /**
@@ -386,7 +412,12 @@ function csv_format_platform( BugData $p_bug ) {
  * @access public
  */
 function csv_format_view_state( BugData $p_bug ) {
-	return csv_escape_string( get_enum_element( 'view_state', $p_bug->view_state, auth_get_current_user_id(), $p_bug->project_id ) );
+	$t_view_state = get_enum_element( 'view_state',
+		$p_bug->view_state,
+		auth_get_current_user_id(),
+		$p_bug->project_id
+	);
+	return csv_escape_string( $t_view_state );
 }
 
 /**
@@ -431,7 +462,7 @@ function csv_format_description( BugData $p_bug ) {
  * @access public
  */
 function csv_format_notes( BugData $p_bug ) {
-	$t_notes = bugnote_get_all_visible_as_string( $p_bug->id, /* user_bugnote_order */ 'DESC', /* user_bugnote_limit */ 0 );
+	$t_notes = bugnote_get_all_visible_as_string( $p_bug->id, 'DESC',0 );
 	return csv_escape_string( $t_notes );
 }
 
@@ -462,7 +493,12 @@ function csv_format_additional_information( BugData $p_bug ) {
  * @access public
  */
 function csv_format_status( BugData $p_bug ) {
-	return csv_escape_string( get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id ) );
+	$t_status = get_enum_element( 'status',
+		$p_bug->status,
+		auth_get_current_user_id(),
+		$p_bug->project_id
+	);
+	return csv_escape_string( $t_status );
 }
 
 /**
@@ -472,7 +508,12 @@ function csv_format_status( BugData $p_bug ) {
  * @access public
  */
 function csv_format_resolution( BugData $p_bug ) {
-	return csv_escape_string( get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ) );
+	$t_resolution = get_enum_element( 'resolution',
+		$p_bug->resolution,
+		auth_get_current_user_id(),
+		$p_bug->project_id
+	);
+	return csv_escape_string( $t_resolution );
 }
 
 /**
@@ -508,7 +549,9 @@ function csv_format_due_date( BugData $p_bug ) {
 	}
 	
 	$t_value = '';
-	if ( !date_is_null( $p_bug->due_date ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ) {
+	if ( !date_is_null( $p_bug->due_date )
+		&& access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id )
+	) {
 		$t_value = date( $s_date_format, $p_bug->due_date );
 	}
 	return csv_escape_string( $t_value );
