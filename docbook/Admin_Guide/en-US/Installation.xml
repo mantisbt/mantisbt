@@ -386,12 +386,17 @@
 
 			<itemizedlist>
 				<listitem><para>Firefox</para></listitem>
-				<listitem><para>Internet Explorer 11</para></listitem>
 				<listitem><para>Edge</para></listitem>
 				<listitem><para>Chrome</para></listitem>
 				<listitem><para>Safari</para></listitem>
 				<listitem><para>Opera</para></listitem>
 			</itemizedlist>
+
+			<note>
+				<para>Support for <emphasis>Internet Explorer 11</emphasis>
+					ended with release 2.22.0.
+				</para>
+			</note>
 		</section>
 	</section>
 
