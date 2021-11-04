@@ -39,6 +39,7 @@
  * @file
  *
  * @author Armando-Martin
+ * @author Biancailin
  * @author Bithunter
  * @author Ciencia Al Poder
  * @author Cproensa
@@ -1293,6 +1294,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta cuenta está protegida. No tiene 
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acceso denegado.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Ha fallado el proceso de carga del archivo.  El archivo no puede ser leído por MantisBT. Verifique la configuración del proyecto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Ha fallado el proceso de carga del archivo.  Posiblemente el tamaño del archivo sea mayor de lo que actualmente está permitido en esta instalación de PHP.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'El nombre del archivo "%1$s" es demasiado largo.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un parámetro requerido en esta página (%1$s) no pudo hallarse.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ese nombre de usuario está en uso. Por favor, vuelva atrás y elija otro.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'El correo electrónico ya está en uso. Por favor, vuelva atrás y elija otro.';
@@ -1434,7 +1436,7 @@ $s_dropzone_cancel_upload_confirmation = '¿Seguro quieres cancelar esta subida?
 $s_dropzone_remove_file = 'Eliminar archivo';
 $s_dropzone_max_files_exceeded = 'No puedes subir más archivos.';
 $s_dropzone_not_supported = 'Dropzone.js no admite navegadores antiguos.';
-$s_dropzone_multiple_files_too_big = 'Los archivos siguientes:{{files}}exceden el tamaño máximo permitido ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'Los siguientes archivos exceden el tamaño máximo permitido ({{maxFilesize}} MiB):{{files}}';
 $s_save = 'Guardar';
 $s_reset = 'Restablecer';
 $s_persist = 'Persiste';
