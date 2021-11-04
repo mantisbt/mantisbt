@@ -1143,6 +1143,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tämä käyttäjätunnus on suojattu. 
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Pääsy kielletty.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Tiedoston lähetys epäonnistui. PHP:n tiedostolähetystoiminnot saattavat olla pois päältä. Ole hyvä ja pyydä järjestelmäsi ylläpitäjää ajamaan admin_check-skripti debuggaustoimenpiteitä varten.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Tiedoston lähetys epäonnistui. Tämä johtuu luutavasti siitä, että tiedoston koko ylittää PHP:n nykyisen enimmäiskoon.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'Tiedoston nimi "%1$s" on liian pitkä.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tämän sivun vaatimaa muuttujaa %1$s ei löydy.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Käyttäjänimi on jo käytössä. Palaa edelliselle sivulla ja valitse uusi käyttäjänimi.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ohjelma-asetus  \'%1$s\' ei löytynyt.';

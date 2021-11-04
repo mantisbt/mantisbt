@@ -405,6 +405,7 @@ $MANTIS_ERROR[ERROR_SQL] = 'SQL-Feeler entdeckt.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Et gëtt schonn e ¨Projet mat deem Numm.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Net valabele Wäert fir \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Dëse Benotzerkont ass gespaart. Dir däerft déi ugefroten Operatioun net maache bis d\'Spär um Benotzerkont opgehuewen ass.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'Numm vum Fichier "%1$s" ass ze laang.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Notiz net fonnt';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projet "%1$s" net fonnt.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Benotzer mam Numm "%1$s" net fonnt.';
