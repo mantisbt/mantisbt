@@ -55,6 +55,7 @@
  * @author Smarky
  * @author Weather Top Wizard
  * @author Wehwei
+ * @author Winston Sung
  * @author Wwycheuk
  * @author Xiplus
  */
@@ -526,7 +527,7 @@ $s_lost_password_confirm_hash_OK = '系統已接受您的確認，請更新你�
 $s_open_and_assigned_to_me_label = '尚未處理且分配給我的問題：';
 $s_open_and_reported_to_me_label = '尚未處理且由我回報的問題：';
 $s_newer_news_link = '較新的最新消息';
-$s_older_news_link = '較舊的最新消息';
+$s_older_news_link = '較早的最新消息';
 $s_archives = '封存';
 $s_rss = 'RSS';
 $s_site_information = '網站資訊';
