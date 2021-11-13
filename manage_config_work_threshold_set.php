@@ -232,6 +232,11 @@ if( config_get( 'allow_file_upload' ) == ON ) {
 	set_capability_row( 'upload_bug_file_threshold' );
 }
 
+# Filters
+set_capability_row( 'stored_query_create_threshold' );
+set_capability_row( 'stored_query_create_shared_threshold' );
+set_capability_row( 'stored_query_use_threshold' );
+
 # Others
 set_capability_row( 'view_changelog_threshold' );
 set_capability_row( 'roadmap_view_threshold' );
