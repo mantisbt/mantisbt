@@ -42,6 +42,7 @@
  * @author Archaeodontosaurus
  * @author BaRaN6161 TURK
  * @author Burakolik
+ * @author DDPAT
  * @author Emperyan
  * @author Erdemaslancan
  * @author Gorizon
@@ -1429,7 +1430,7 @@ $s_dropzone_cancel_upload_confirmation = 'Yüklemeyi iptal etmek istediğinize e
 $s_dropzone_remove_file = 'Dosyayı kaldır';
 $s_dropzone_max_files_exceeded = 'Daha fazla dosya yükleyemezsiniz.';
 $s_dropzone_not_supported = 'Dropzone.js eski tarayıcıları desteklemez!';
-$s_dropzone_multiple_files_too_big = 'Aşağıdaki dosyalar:{{files}}izin verilen maksimum dosya boyutunu aşıyor ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'Aşağıdaki dosyalar izin verilen maksimum dosya boyutunu aşıyor ({{maxFilesize}} MiB):{{files}}';
 $s_save = 'Kaydet';
 $s_reset = 'Sıfırla';
 $s_persist = 'Sürdür';
