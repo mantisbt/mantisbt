@@ -467,6 +467,8 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</div>
 		</div>
 	</div>
+
+	</div>
 </div>
 
 <?php
