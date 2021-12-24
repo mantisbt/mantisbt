@@ -169,8 +169,9 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 	$t_ids_not_found = $c_cf_id_array;
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_id = (int)$t_row['id'];
+		$c_name = mb_strtolower($t_row['name']);
 		$g_cache_custom_field[$c_id] = $t_row;
-		$g_cache_name_to_id_map[$t_row['name']] = $c_id;
+		$g_cache_name_to_id_map[$c_name] = $c_id;
 		$g_cache_custom_field[$c_id]['linked_projects'] = array();
 		unset( $t_ids_not_found[$c_id] );
 	}
@@ -776,9 +777,12 @@ function custom_field_delete_all_values( $p_bug_id ) {
 
 /**
  * Get the id of the custom field with the specified name.
- * false is returned if no custom field found with the specified name.
+ *
+ * Custom field name lookup is case insensitive. Returns false if no custom
+ * field is found with the specified name.
+ *
  * @param string $p_field_name Custom field name.
- * @return boolean|integer false or custom field id
+ * @return int|false custom field id
  * @access public
  */
 function custom_field_get_id_from_name( $p_field_name ) {
@@ -788,24 +792,19 @@ function custom_field_get_id_from_name( $p_field_name ) {
 		return false;
 	}
 
-	if( isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
-		return $g_cache_name_to_id_map[$p_field_name];
+	$p_field_name = mb_strtolower($p_field_name);
+	if( !isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
+		# Build cache of lowercase custom fields names to id
+		if( !$g_cache_name_to_id_map ) {
+			$t_query = new DbQuery( "SELECT id, name FROM {custom_field}" );
+			foreach( $t_query->fetch_all() as $t_row ) {
+				$t_name = mb_strtolower($t_row['name']);
+				$g_cache_name_to_id_map[$t_name] = $t_row['id'];
+			}
+		}
 	}
 
-	db_param_push();
-	$t_query = 'SELECT id FROM {custom_field} WHERE name=' . db_param();
-	$t_result = db_query( $t_query, array( $p_field_name ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
-		$g_cache_name_to_id_map[$p_field_name] = false;
-		return false;
-	}
-
-	$g_cache_name_to_id_map[$p_field_name] = $t_row['id'];
-
-	return $t_row['id'];
+	return $g_cache_name_to_id_map[$p_field_name] ?? false;
 }
 
 /**
