@@ -804,7 +804,10 @@ function custom_field_get_id_from_name( $p_field_name ) {
 		}
 	}
 
-	return $g_cache_name_to_id_map[$p_field_name] ?? false;
+	if( isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
+		return $g_cache_name_to_id_map[$p_field_name];
+	}
+	return false;
 }
 
 /**
