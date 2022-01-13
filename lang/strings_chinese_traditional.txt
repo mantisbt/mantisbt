@@ -1409,6 +1409,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已達到在 %d 秒内允許 %d 次事
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '欄位 "%1$s" 必須小於或等於 %2$d 字元長度。';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API 密鑰名稱 "%s" 已被使用。請返回重新選擇。';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '在 $g_log_destination「%s」指定的檔案不可寫入。';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = '已添加的使用者沒有足夠的存取權限來監視此問題。';
 $s_dropzone_default_message = '透過拖放、選擇、或是貼上來附加檔案。';
 $s_dropzone_fallback_message = '您的瀏覽器不支援托放檔案上傳功能。';
 $s_dropzone_file_too_big = '檔案太大（{{filesize}} MiB）。最大大小：{{maxFilesize}} MiB。';
