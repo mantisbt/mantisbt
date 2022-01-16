@@ -67,9 +67,9 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 		$p_user_id = auth_get_current_user_id();
 	}
 
-	$t_redirect_url = $p_redirect_url;
+	$t_redirect_url = helper_mantis_url($p_redirect_url);
 	if( is_blank( $t_redirect_url ) ) {
-		$t_redirect_url = 'account_prefs_page.php';
+		$t_redirect_url = helper_mantis_url('account_prefs_page.php');
 	}
 
 	# protected account check
@@ -106,7 +106,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 	<div class="widget-body">
 		<div class="widget-main no-padding">
 			<div id="account-prefs-update-div" class="form-container">
-				<form id="account-prefs-update-form" method="post" action="account_prefs_update.php" class="form-inline">
+				<form id="account-prefs-update-form" method="post" action="<?php echo helper_mantis_url("account_prefs_update.php"); ?>" class="form-inline">
 					<fieldset>
 						<?php echo form_security_field( 'account_prefs_update' ) ?>
 						<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
@@ -407,7 +407,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 
 <?php
 	print_form_button(
-		'account_prefs_reset.php',
+		helper_mantis_url('account_prefs_reset.php'),
 		lang_get( 'reset_prefs_button' ),
 		array( 'user_id' => $p_user_id, 'redirect_url' => $t_redirect_url ),
 		null,

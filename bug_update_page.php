@@ -160,7 +160,7 @@ layout_page_begin();
 ?>
 <div class="col-md-12 col-xs-12">
 <div id="bug-update" class="form-container">
-	<form id="update_bug_form" method="post" action="bug_update.php">
+	<form id="update_bug_form" method="post" action="<?php echo helper_mantis_url("bug_update.php"); ?>">
 		<?php echo form_security_field( 'bug_update' ); ?>
 		<input type="hidden" name="bug_id" value="<?php echo $t_bug_id ?>" />
         <input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />

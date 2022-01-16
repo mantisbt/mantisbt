@@ -1227,8 +1227,8 @@ function filter_draw_selection_area() {
 	$t_temporary_icon_html = ( $t_is_temporary && $t_can_persist ) ?
 		icon_get( 'fa-clock-o', 'fa-xs-top' )
 		: '';
-	$t_url_reset_filter = 'view_all_set.php?type=' . FILTER_ACTION_RESET;
-	$t_url_persist_filter = 'view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project();
+	$t_url_reset_filter = helper_mantis_url('view_all_set.php?type=' . FILTER_ACTION_RESET);
+	$t_url_persist_filter = helper_mantis_url('view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project());
 	?>
 
 		<div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">

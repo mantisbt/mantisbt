@@ -81,7 +81,7 @@ $f_password_current = gpc_get_string( 'password_current', '' );
 $f_password        	= gpc_get_string( 'password', '' );
 $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
-$t_redirect_url = 'index.php';
+$t_redirect_url = helper_mantis_url('index.php');
 
 $t_update_email = false;
 $t_update_password = false;

@@ -328,7 +328,7 @@ echo '<div class="space-10"></div>';
 if( config_get( 'enable_email_notification' ) == ON ) {
 
 	if( $g_can_change_flags  || $g_can_change_defaults ) {
-		echo '<form id="mail_config_action" method="post" action="manage_config_email_set.php">' . "\n";
+		echo '<form id="mail_config_action" method="post" action="<?php echo helper_mantis_url("manage_config_email_set.php"); ?>">' . "\n";
 		echo form_security_field( 'manage_config_email_set' );
 	}
 
@@ -381,7 +381,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 		echo "</form>\n";
 
 		echo '<div>' . "\n";
-		echo '<form name="mail_config_action" method="post" action="manage_config_revert.php">' . "\n";
+		echo '<form name="mail_config_action" method="post" action="<?php echo helper_mantis_url("manage_config_revert.php"); ?>">' . "\n";
 		echo form_security_field( 'manage_config_revert' ) . "\n";
 		echo '<input name="revert" type="hidden" value="notify_flags,default_notify_flags" />' . "\n";
 		echo '<input name="project" type="hidden" value="' . $t_project . '" />' . "\n";

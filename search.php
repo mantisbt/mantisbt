@@ -176,9 +176,9 @@ $t_temporary_key = filter_temporary_set( $t_setting_arr );
 
 # redirect to print_all or view_all page
 if( $f_print ) {
-	$t_redirect_url = 'print_all_bug_page.php';
+	$t_redirect_url = helper_mantis_url('print_all_bug_page.php');
 } else {
-	$t_redirect_url = 'view_all_bug_page.php';
+	$t_redirect_url = helper_mantis_url('view_all_bug_page.php');
 }
 $t_redirect_url .= '?' . filter_get_temporary_key_param( $t_temporary_key );
 

@@ -87,7 +87,7 @@ if( '' != $f_revert ) {
 
 form_security_purge( 'manage_config_revert' );
 
-$t_redirect_url = $f_return;
+$t_redirect_url = helper_mantis_url($f_return);
 
 layout_page_header( null, $t_redirect_url );
 

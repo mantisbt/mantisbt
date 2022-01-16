@@ -75,7 +75,7 @@ if( is_blank( $t_username ) ) {
 
 	$t_query_text = http_build_query( $t_query_args, '', '&' );
 
-	$t_redirect_url = auth_login_page( $t_query_text );
+	$t_redirect_url = helper_mantis_url(auth_login_page( $t_query_text ));
 	print_header_redirect( $t_redirect_url );
 }
 
@@ -99,7 +99,7 @@ if( $t_user_id !== false && auth_credential_page( '', $t_user_id ) != AUTH_PAGE_
 
 	$t_query_text = http_build_query( $t_query_args, '', '&' );
 
-	$t_redirect_url = auth_credential_page( $t_query_text, $t_user_id );
+	$t_redirect_url = helper_mantis_url(auth_credential_page( $t_query_text, $t_user_id ));
 	print_header_redirect( $t_redirect_url );
 }
 
@@ -201,7 +201,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
-	<form id="login-form" method="post" action="login.php">
+	<form id="login-form" method="post" action="<?php echo helper_mantis_url("login.php"); ?>">
 		<fieldset>
 
 			<?php

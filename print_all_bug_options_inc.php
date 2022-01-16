@@ -141,7 +141,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 ?>
 <br />
 <div>
-<form method="post" action="print_all_bug_options_update.php">
+<form method="post" action="<?php echo helper_mantis_url("print_all_bug_options_update.php"); ?>">
 <?php echo form_security_field( 'print_all_bug_options_update' ) ?>
 <input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 <input type="hidden" name="redirect_url" value="<?php echo string_attribute( $p_redirect_url ) ?>" />
@@ -191,7 +191,7 @@ for( $i=0; $i <$t_field_name_count; $i++ ) {
 <br />
 
 <div class="border center">
-	<form method="post" action="print_all_bug_options_reset.php">
+	<form method="post" action="<?php echo helper_mantis_url("print_all_bug_options_reset.php"); ?>">
 	<?php echo form_security_field( 'print_all_bug_options_reset' ) ?>
 	<input type="submit" class="button" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
 	</form>

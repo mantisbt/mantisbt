@@ -106,7 +106,7 @@ if( $t_show_sponsorships ) {
 	<tr>
 		<th class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></th>
 		<td>
-			<form method="post" action="bug_set_sponsorship.php">
+			<form method="post" action="<?php echo helper_mantis_url("bug_set_sponsorship.php"); ?>">
 				<?php echo form_security_field( 'bug_set_sponsorship' ) ?>
 				<?php echo sponsorship_get_currency() ?>
 				<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" size="4" />

@@ -51,7 +51,7 @@ form_security_validate( 'manage_config_work_threshold_set' );
 
 auth_reauthenticate();
 
-$t_redirect_url = 'manage_config_work_threshold_page.php';
+$t_redirect_url = helper_mantis_url('manage_config_work_threshold_page.php');
 
 layout_page_header( lang_get( 'manage_threshold_config' ), $t_redirect_url );
 

@@ -103,7 +103,7 @@ print_manage_menu( 'manage_user_page.php' );
 
 <!-- USER INFO -->
 <div id="edit-user-div" class="form-container">
-	<form id="edit-user-form" method="post" action="manage_user_update.php">
+	<form id="edit-user-form" method="post" action="<?php echo helper_mantis_url("manage_user_update.php"); ?>">
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
@@ -244,7 +244,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <!-- Reset/Unlock Button -->
 <?php if( $t_reset || $t_unlock ) { ?>
-	<form id="manage-user-reset-form" method="post" action="manage_user_reset.php" class="pull-left">
+	<form id="manage-user-reset-form" method="post" action="<?php echo helper_mantis_url("manage_user_reset.php"); ?>" class="pull-left">
 		<fieldset>
 			<?php echo form_security_field( 'manage_user_reset' ) ?>
 			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
@@ -259,7 +259,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <!-- Delete Button -->
 <?php if( $t_delete ) { ?>
-	<form id="manage-user-delete-form" method="post" action="manage_user_delete.php" class="pull-left">
+	<form id="manage-user-delete-form" method="post" action="<?php echo helper_mantis_url("manage_user_delete.php"); ?>" class="pull-left">
 		<fieldset>
 			<?php echo form_security_field( 'manage_user_delete' ) ?>
 			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
@@ -270,7 +270,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <!-- Impersonate Button -->
 <?php if( $t_impersonate ) { ?>
-	<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="pull-left">
+	<form id="manage-user-impersonate-form" method="post" action="<?php echo helper_mantis_url("manage_user_impersonate.php"); ?>" class="pull-left">
 		<fieldset>
 			<?php echo form_security_field( 'manage_user_impersonate' ) ?>
 			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
@@ -328,7 +328,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
             </td>
             <td><?php print_project_user_list( $t_user['id'] ) ?></td>
         </tr>
-        <form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
+        <form id="manage-user-project-add-form" method="post" action="<?php echo helper_mantis_url("manage_user_proj_add.php"); ?>">
         <fieldset>
             <?php echo form_security_field( 'manage_user_proj_add' ) ?>
             <input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />

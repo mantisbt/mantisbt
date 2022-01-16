@@ -82,7 +82,7 @@ layout_login_page_begin();
 			<?php echo lang_get( 'lost_password_title' ) ?>
 		</h4>
 		<div class="space-10"></div>
-	<form id="lost-password-form" method="post" action="lost_pwd.php">
+	<form id="lost-password-form" method="post" action="<?php echo helper_mantis_url("lost_pwd.php"); ?>">
 		<fieldset>
 			<?php
 			echo form_security_field( 'lost_pwd' );

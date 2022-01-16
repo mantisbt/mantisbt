@@ -196,11 +196,11 @@ if( !$t_temp_filter ) {
 
 # evaluate redirect
 if( $f_print ) {
-	$t_redirect_url = 'print_all_bug_page.php';
+	$t_redirect_url = helper_mantis_url('print_all_bug_page.php');
 } elseif( $f_summary ) {
-	$t_redirect_url = 'summary_page.php';
+	$t_redirect_url = helper_mantis_url('summary_page.php');
 } else {
-	$t_redirect_url = 'view_all_bug_page.php';
+	$t_redirect_url = helper_mantis_url('view_all_bug_page.php');
 }
 
 if( $t_temp_filter ) {
@@ -214,6 +214,6 @@ if( $t_temp_filter ) {
 		unset( $t_setting_arr['_temporary_key'] );
 	}
 	$t_temporary_key = filter_temporary_set( $t_setting_arr, $t_previous_temporary_key );
-	$t_redirect_url = $t_redirect_url . '?' . filter_get_temporary_key_param( $t_temporary_key );
+	$t_redirect_url = helper_mantis_url($t_redirect_url . '?' . filter_get_temporary_key_param( $t_temporary_key ));
 }
 print_header_redirect( $t_redirect_url );

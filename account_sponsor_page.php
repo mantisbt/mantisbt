@@ -265,7 +265,7 @@ if( $t_sponsor_count === 0 ) {
 <!-- # Edit sponsorship Form BEGIN -->
 <br />
 <div>
-<form method="post" action="account_sponsor_update.php">
+<form method="post" action="<?php echo helper_mantis_url("account_sponsor_update.php"); ?>">
 <?php echo form_security_field( 'account_sponsor_update' ) ?>
 <table class="width100" cellspacing="1">
 	<colgroup>

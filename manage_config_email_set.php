@@ -56,7 +56,7 @@ auth_reauthenticate();
 $t_can_change_level = min( config_get_access( 'notify_flags' ), config_get_access( 'default_notify_flags' ) );
 access_ensure_project_level( $t_can_change_level );
 
-$t_redirect_url = 'manage_config_email_page.php';
+$t_redirect_url = helper_mantis_url('manage_config_email_page.php');
 $t_project = helper_get_current_project();
 
 $f_flags			= gpc_get( 'flag', array() );

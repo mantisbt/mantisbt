@@ -167,7 +167,7 @@ layout_page_begin();
 <?php
 		if( $t_can_edit_own ) {
 ?>
-		<form class="form-inline pull-left" action="tag_update_page.php" method="post">
+		<form class="form-inline pull-left" action="<?php echo helper_mantis_url("tag_update_page.php"); ?>" method="post">
 			<fieldset>
 				<?php # CSRF protection not required here - form does not result in modifications ?>
 				<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
@@ -177,7 +177,7 @@ layout_page_begin();
 		}
 
 		if( $t_can_edit ) { ?>
-		<form class="form-inline pull-left" action="tag_delete.php" method="post">
+		<form class="form-inline pull-left" action="<?php echo helper_mantis_url("tag_delete.php"); ?>" method="post">
 			<fieldset>
 				<?php echo form_security_field( 'tag_delete' ) ?>
 				<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />

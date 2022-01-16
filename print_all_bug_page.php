@@ -103,7 +103,7 @@ layout_page_header();
 	</div>
 </td></tr></table>
 
-<form method="post" action="view_all_set.php">
+<form method="post" action="<?php echo helper_mantis_url("view_all_set.php"); ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 	<input type="hidden" name="type" value="1" />
 	<input type="hidden" name="print" value="1" />
@@ -176,7 +176,7 @@ if( filter_is_temporary( $t_filter ) ) {
 	$t_form_url .='?' . filter_get_temporary_key_param( $t_filter );
 }
 ?>
-<form method="post" action="<?php echo $t_form_url ?>">
+<form method="post" action="<?php echo helper_mantis_url("print_all_bug_page.php"); ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 
 <table id="buglist" class="table table-striped table-bordered table-condensed no-margin">

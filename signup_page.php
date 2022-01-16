@@ -78,7 +78,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 					</h4>
 					<div class="space-10"></div>
 
-	<form id="signup-form" method="post" action="signup.php">
+	<form id="signup-form" method="post" action="<?php echo helper_mantis_url("signup.php"); ?>">
 		<fieldset>
 			<?php echo form_security_field( 'signup' ); ?>
 

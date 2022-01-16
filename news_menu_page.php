@@ -56,7 +56,7 @@ layout_page_begin( 'main_page.php' );
 
 <div class="col-md-12 col-xs-12">
 	<div id="news-add-div" class="form-container">
-	<form id="news-add-form" method="post" action="news_add.php">
+	<form id="news-add-form" method="post" action="<?php echo helper_mantis_url("news_add.php"); ?>">
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
@@ -128,7 +128,7 @@ if( news_get_count( helper_get_current_project(), current_user_is_administrator(
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<div id="news-edit-div" class="form-container">
-	<form id="news-edit-form" method="post" action="news_edit_page.php">
+	<form id="news-edit-form" method="post" action="<?php echo helper_mantis_url("news_edit_page.php"); ?>">
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">

@@ -347,10 +347,12 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 form_security_purge( $t_form_name );
 
+$t_redirect_url = helper_mantis_url('view_all_bug_page.php');
+
 if( count( $t_failed_ids ) > 0 ) {
 	bug_group_action_print_top();
 	bug_group_action_print_results( $t_failed_ids );
 	bug_group_action_print_bottom();
 } else {
-	print_header_redirect( 'view_all_bug_page.php' );
+	print_header_redirect( $t_redirect_url );
 }

@@ -104,7 +104,7 @@ if( config_get( 'time_tracking_enabled' ) &&
 }
 
 # Determine which view page to redirect back to.
-$t_redirect_url = string_get_bug_view_url( $t_bug_id );
+$t_redirect_url = helper_mantis_url(string_get_bug_view_url( $t_bug_id ));
 
 layout_page_header( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 
@@ -114,7 +114,7 @@ $t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC
 ?>
 <div class="col-md-12 col-xs-12">
 
-<form method="post" action="bugnote_update.php">
+<form method="post" action="<?php echo helper_mantis_url("bugnote_update.php"); ?>">
 <?php echo form_security_field( 'bugnote_update' ) ?>
 <input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
 <div class="widget-box widget-color-blue2">

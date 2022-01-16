@@ -83,7 +83,7 @@ print_doc_menu();
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 <div class="form-container">
-<form method="post" enctype="multipart/form-data" action="proj_doc_update.php">
+<form method="post" enctype="multipart/form-data" action="<?php echo helper_mantis_url("proj_doc_update.php"); ?>">
 <?php echo form_security_field( 'proj_doc_update' ) ?>
 <input type="hidden" name="file_id" value="<?php echo $t_file_id ?>"/>
 <div class="widget-box widget-color-blue2">
@@ -154,7 +154,7 @@ print_doc_menu();
 </div>
 
 	<div class="space-10"></div>
-	<form method="post" action="proj_doc_delete.php">
+	<form method="post" action="<?php echo helper_mantis_url("proj_doc_delete.php"); ?>">
 	<?php echo form_security_field( 'proj_doc_delete' ) ?>
 	<input type="hidden" name="file_id" value="<?php echo $t_file_id ?>" />
 	<input type="hidden" name="title" value="<?php echo $v_title ?>" />

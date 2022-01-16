@@ -317,7 +317,7 @@ $t_user_count = count( $t_users );
 		</div>
 		<?php } ?>
 	<div class="pull-right">
-	<form id="manage-user-filter" method="post" action="manage_user_page.php" class="form-inline">
+	<form id="manage-user-filter" method="post" action="<?php echo helper_mantis_url("manage_user_page.php"); ?>" class="form-inline">
 		<fieldset>
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />

@@ -308,6 +308,10 @@ function helper_begin_long_process( $p_ignore_abort = false ) {
 $g_project_override = null;
 $g_cache_current_project = null;
 
+if( !empty($_GET['project_id']) && is_numeric($_GET['project_id']) ){
+	$g_project_override = intval($_GET['project_id']);
+}
+
 /**
  * Return the current project id as stored in a cookie
  * If no cookie exists, the user's default project is returned
@@ -607,8 +611,24 @@ function helper_log_to_page() {
  * @return string
  */
 function helper_mantis_url( $p_url ) {
+	global $g_project_override;
+
 	if( is_blank( $p_url ) ) {
 		return $p_url;
+	}
+
+	if( !empty($g_project_override) ){
+		$t_parsed_url = parse_url($p_url);
+		if(!empty($t_parsed_url['path'])){
+			$p_url = $t_parsed_url['path'];
+		}
+		$p_url = "{$p_url}?project_id={$g_project_override}";
+		if(!empty($t_parsed_url['query'])){
+			$p_url = "{$p_url}&{$t_parsed_url['query']}";
+		}
+		if(!empty($t_parsed_url['fragment'])){
+			$p_url = "{$p_url}#{$t_parsed_url['fragment']}";
+		}
 	}
 
 	# Return URL as-is if it already starts with short path

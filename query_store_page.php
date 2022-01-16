@@ -89,7 +89,7 @@ if( $t_error_msg != null ) {
 ?>
 <div class="widget-body">
 	<div class="widget-main center">
-<form method="post" action="query_store.php" class="form-inline">
+<form method="post" action="<?php echo helper_mantis_url("query_store.php"); ?>" class="form-inline">
 <?php
 echo form_security_field( 'query_store' );
 if( filter_is_temporary( $t_filter ) ) {
@@ -122,7 +122,7 @@ if( access_has_project_level( config_get( 'stored_query_create_shared_threshold'
 	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'save_query' ); ?>" />
 </form>
 <div class="space-10"></div>
-<form action="view_all_bug_page.php">
+<form action="<?php echo helper_mantis_url("view_all_bug_page.php"); ?>">
 <?php # CSRF protection not required here - form does not result in modifications
 if( filter_is_temporary( $t_filter ) ) {
 	echo '<input type="hidden" name="filter" value="' . filter_get_temporary_key( $t_filter ) . '" />';

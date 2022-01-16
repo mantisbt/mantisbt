@@ -66,7 +66,7 @@ layout_page_begin();
 
 <!-- Project Select Form BEGIN -->
 <div id="select-project-div" class="form-container">
-	<form id="select-project-form" method="post" action="set_project.php">
+	<form id="select-project-form" method="post" action="<?php echo helper_mantis_url("set_project.php"); ?>">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">

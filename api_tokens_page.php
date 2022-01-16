@@ -53,7 +53,7 @@ print_account_menu( 'api_tokens_page.php' );
 	<div class="space-10"></div>
 
 <div id="api-token-create-div" class="form-container">
-	<form id="account-create-api-token-form" method="post" action="api_token_create.php">
+	<form id="account-create-api-token-form" method="post" action="<?php echo helper_mantis_url("api_token_create.php"); ?>">
 
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
@@ -145,7 +145,7 @@ if ( count( $t_tokens ) > 0 ) {
 				<td><?php echo string_display_line( $u_date_created ) ?></td>
 				<td><?php echo string_display_line( $u_date_used ) ?></td>
 				<td>
-					<form id="revoke-api-token-form" method="post" action="api_token_revoke.php">
+					<form id="revoke-api-token-form" method="post" action="<?php echo helper_mantis_url("api_token_revoke.php"); ?>">
 						<?php echo form_security_field( 'revoke_api_token_form' ); ?>
 						<fieldset>
 							<input id="token_id" type="hidden" name="token_id" value="<?php echo $u_id ; ?>" />

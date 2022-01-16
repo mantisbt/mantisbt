@@ -193,7 +193,7 @@ print_manage_menu( 'manage_tags_page.php' );
 
 <?php if( $t_can_edit ) { ?>
 <div class="space-10"></div>
-	<form id="manage-tags-create-form" method="post" action="tag_create.php">
+	<form id="manage-tags-create-form" method="post" action="<?php echo helper_mantis_url("tag_create.php"); ?>">
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
