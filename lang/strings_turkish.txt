@@ -42,6 +42,7 @@
  * @author Archaeodontosaurus
  * @author BaRaN6161 TURK
  * @author Burakolik
+ * @author Can
  * @author DDPAT
  * @author Emperyan
  * @author Erdemaslancan
@@ -1289,6 +1290,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu hesap korunuyor. Hesap koruması ka
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Erişim Engellendi.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dosya yükleme başarısız oldu. Dosya MantisBT tarafından okunamaz. Proje ayarlarını gözden geçirin.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Dosya yükleme başarısız oldu. Bu büyük ihtimalle PHP kurulumunun izin verdiğinden daha büyük boyutta dosya kullanıldığından kaynaklanmaktadır.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = '"%1$s", dosya adı için çok uzun.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Bu sayfa için gerekli bir parametre (%1$s) bulunamadı.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Bu kullanıcı adı zaten kullanılıyor. Lütfen başka bir kullanıcı adı seçiniz.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Bu e-posta zaten kullanılıyor. Lütfen geri dönün ve başka bir tane seçin.';
@@ -1420,6 +1422,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Son %d saniye içinde %d olayının izin 
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '"%1$s" alanı daha kısa veya %2$d karakter uzunluğunda olmalı.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API simgesi "%s" adı zaten kullanılıyor. Lütfen geri dönün ve başka bir tane seçin.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '$g_log_destination "%s" içinde belirtilen dosya yazılabilir değil.';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Eklenilen kullanıcı, bu sorunu gözlemek için yeterli erişim haklarına sahip değildir.';
 $s_dropzone_default_message = 'Dosyaları sürükleyip bırakarak, seçerek ve yapıştırarak ekleyin.';
 $s_dropzone_fallback_message = 'Tarayıcınız drag\'n\'drop dosya yüklemelerini desteklemiyor.';
 $s_dropzone_file_too_big = 'Dosya çok büyük ({{filesize}} MiB). Maksimum boyut: {{maxFilesize}} MiB.';
@@ -1431,6 +1434,7 @@ $s_dropzone_remove_file = 'Dosyayı kaldır';
 $s_dropzone_max_files_exceeded = 'Daha fazla dosya yükleyemezsiniz.';
 $s_dropzone_not_supported = 'Dropzone.js eski tarayıcıları desteklemez!';
 $s_dropzone_multiple_files_too_big = 'Aşağıdaki dosyalar izin verilen maksimum dosya boyutunu aşıyor ({{maxFilesize}} MiB):{{files}}';
+$s_dropzone_multiple_filenames_too_long = 'Aşağıdaki dosya adları çok uzun (max {{maxFilenameLength}} characters):{{files}}';
 $s_save = 'Kaydet';
 $s_reset = 'Sıfırla';
 $s_persist = 'Sürdür';
