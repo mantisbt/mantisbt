@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Ajeje Brazorf
  * @author Amdei
  * @author Amire80
  * @author Ayonik
@@ -482,6 +483,7 @@ $s_save = '{{Identical|Save}}';
 $s_reset = '{{Identical|Reset}}';
 $s_load = '{{Identical|Load}}';
 $s_edit = '{{Identical|Edit}}';
+$s_submit = '{{Identical|Submit}}';
 $s_update = '{{Identical|Update}}';
 $s_delete = '{{Identical|Delete}}';
 $s_print = '{{Identical|Print}}';
