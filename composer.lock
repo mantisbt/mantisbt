@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c0d9fb971bfb5fcb285e6a8af25dcff",
+    "content-hash": "26ddcfd2774ae48c94ee49f6c0dd4550",
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "v5.20.20",
+            "version": "v5.20.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
-                "reference": "66fb9e5300c2b3b84beab1d9d7793ff961c171a8"
+                "reference": "6c38e6c614802acd3151444a71191912edcec965"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/66fb9e5300c2b3b84beab1d9d7793ff961c171a8",
-                "reference": "66fb9e5300c2b3b84beab1d9d7793ff961c171a8",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/6c38e6c614802acd3151444a71191912edcec965",
+                "reference": "6c38e6c614802acd3151444a71191912edcec965",
                 "shasum": ""
             },
             "require": {
@@ -62,7 +62,7 @@
                 "issues": "https://github.com/ADOdb/ADOdb/issues",
                 "source": "https://github.com/ADOdb/ADOdb"
             },
-            "time": "2021-01-31T20:51:30+00:00"
+            "time": "2022-01-22T22:38:02+00:00"
         },
         {
             "name": "dapphp/securimage",
@@ -2900,5 +2900,5 @@
     "platform-overrides": {
         "php": "7.0.0"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
