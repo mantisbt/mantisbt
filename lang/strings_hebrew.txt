@@ -1405,6 +1405,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'הגעתם למגבלת הפעילות ה
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'הערך בשדה "%1$s" חייב להיות קצר או שווה ל־%2$d תווים.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'שם אסימון "%s" API נמצא כבר בשימוש. נא לחזור ולבחר אחד אחר.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'הקובץ שצוין ב־ $g_log_destination "%s" לא ניתן לכתיבה.';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'למשתמש שנוסף אין מספיק הרשאות גישה כדי לעקוב אחר התקלה הזאת.';
 $s_dropzone_default_message = 'נא לצרף קבצים על־ידי \'גרירה ושחרור\', בחירה או הדבקה.';
 $s_dropzone_fallback_message = 'הדפדפן אינו תומך בתכונת "גרירה ושחרור" להאלעת קבצים.';
 $s_dropzone_file_too_big = 'הקובץ הזה גדול מדי ({{filesize}} MiB). הגודל המרבי הוא: {{maxFilesize}} MiB.';
