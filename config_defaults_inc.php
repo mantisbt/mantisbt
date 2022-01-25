@@ -3970,7 +3970,7 @@ $g_wiki_enable = OFF;
 
 /**
  * Wiki Engine.
- * Supported engines: 'dokuwiki', 'mediawiki', 'twiki', 'wackowiki', 'wikka', 'xwiki'
+ * Supported engines: 'dokuwiki', 'mediawiki', 'twiki', 'wackowiki', 'xwiki'
  * @global string $g_wiki_engine
  */
 $g_wiki_engine = '';

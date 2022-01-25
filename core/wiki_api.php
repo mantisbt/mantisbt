@@ -73,9 +73,6 @@ function wiki_init() {
 		case 'wackowiki':
 			plugin_child( 'MantisCoreWackowiki' );
 			break;
-		case 'WikkaWiki':
-			plugin_child( 'MantisCoreWikkaWiki' );
-			break;
 		case 'xwiki':
 			plugin_child( 'MantisCoreXwiki' );
 			break;
