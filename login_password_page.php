@@ -83,7 +83,8 @@ if( is_blank( $t_username ) ) {
 # page or one provided by a plugin.
 $t_user_id = auth_get_user_id_from_login_name( $t_username );
 # User id could be false if the user does not exist in DB, should be calling auth_credential_page
-# regardless if the user exists or not to give the plugin an opportunity to handle non-existent users.
+# regardless if the user exists or not to give the plugin an opportunity to handle non-existent
+# users per #29517
 $t_should_redirect = ($t_user_id !== false ? auth_credential_page('', $t_user_id) : auth_credential_page('', NO_USER, $t_username)) != AUTH_PAGE_CREDENTIAL;
 if ($t_should_redirect) {
 	$t_query_args = array(
