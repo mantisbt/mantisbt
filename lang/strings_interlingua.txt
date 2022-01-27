@@ -1390,6 +1390,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Tu ha attingite le limite de %d actiones 
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Le campo "%1$s" debe haber %2$d characteres o minus.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Le nomine de token API "%s" es ja in uso. Per favor retorna e selige un altere.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Le file specificate in $g_log_destination "%s" non es scribibile.';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Le usator addite non ha derectos de accesso sufficiente pro surveliar iste problema.';
 $s_dropzone_default_message = 'Pro annexar files, tu pote traher & deponer, seliger o collar.';
 $s_dropzone_fallback_message = 'Tu navigator non supporta le incargamento de files per traher e deponer.';
 $s_dropzone_file_too_big = 'Le file es troppo grande ({{filesize}} MiB). Dimension maxime: {{maxFilesize}} MiB.';
