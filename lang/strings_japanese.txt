@@ -43,6 +43,7 @@
  * @author Fryed-peach
  * @author Gulpin
  * @author Hiro884
+ * @author Hzy980512
  * @author LaMagiaaa
  * @author Macofe
  * @author MathXplore
@@ -534,7 +535,7 @@ $s_archives = '履歴';
 $s_rss = 'RSS';
 $s_site_information = 'サイト情報';
 $s_mantis_version = 'MantisBT バージョン';
-$s_schema_version = 'スキーマバージョン';
+$s_schema_version = 'データベーススキーマバージョン';
 $s_site_path = 'サイトのパス';
 $s_core_path = 'コアのパス';
 $s_plugin_path = 'プラグインのパス';
@@ -555,7 +556,7 @@ $s_create_short_link = 'ショートリンクの作成';
 $s_filter_permalink = '次のリンクは、このフィルターを表す固定リンクです:';
 $s_manage_users_link = '利用者';
 $s_manage_projects_link = 'プロジェクト';
-$s_manage_custom_field_link = 'カスタム項目管理';
+$s_manage_custom_field_link = 'カスタム項目';
 $s_manage_global_profiles_link = 'グローバルプロフィール';
 $s_manage_plugin_link = 'プラグイン';
 $s_permissions_summary_report = 'アクセス許可の表示';
@@ -1279,6 +1280,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'このアカウントは保護され�
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'アクセスが拒否されました。';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'ファイルのアップロードに失敗しました。MantisBT がファイルを読めません。プロジェクト管理を確認してください。';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'ファイルのアップロードに失敗しました。PHP で設定されているファイルサイズより大きいことが問題です。設定を確認してください。';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'ファイル名前「%1$s」は長すぎます。';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'このページで必須のパラメーター「%1$s」が見つかりません。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'そのユーザー名は既に使用されています。戻って別のユーザー名を選択してください。';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'そのメールアドレスは既に使用されています。戻って別のメールアドレスを選択してください。';
@@ -1410,6 +1412,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '過去 %d 秒の間にイベントの上�
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '項目「%1$s」は%2$d文字以下である必要があります。';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'その API トークン「%s」は既に使用されています。戻って別の API トークンを選択してください。';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '$g_log_destination "%s" に指定したファイルは読み取り専用です。';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = '追加した利用者はこの課題を監視するのに十分なアクセス権限がありません。';
 $s_dropzone_default_message = 'ドラッグ＆ドロップ、選択、貼り付けでファイルを添付';
 $s_dropzone_fallback_message = 'ブラウザがドラッグ&ドロップによるアップロードに対応していません。';
 $s_dropzone_file_too_big = 'ファイルが大きすぎます ({{filesize}} MiB)。ファイルの最大値: {{maxFilesize}} MiB。';
