@@ -89,7 +89,7 @@ function auth_flags( $p_user_id = null, $p_username = '' ) {
 	if (is_null($p_user_id) || ($p_user_id === false && is_null($p_username))) {
 		# If user id is not provided and user is not authenticated return default flags.
 		# Otherwise, we can get into a loop as in #22740
-		# If user is FALSE and username is NULL, display a more user-friendly error per #25061
+		# If user is false and username is null, display a more user-friendly error per #25061
 		if( !auth_is_user_authenticated() ) {
 			return new AuthFlags();
 		}

@@ -82,6 +82,8 @@ if( is_blank( $t_username ) ) {
 # Get the user id and based on the user decide whether to continue with native password credential
 # page or one provided by a plugin.
 $t_user_id = auth_get_user_id_from_login_name( $t_username );
+# User id could be false if the user does not exist in DB, should be calling auth_credential_page
+# regardless if the user exists or not to give the plugin an opportunity to handle non-existent users.
 $t_should_redirect = ($t_user_id !== false ? auth_credential_page('', $t_user_id) : auth_credential_page('', NO_USER, $t_username)) != AUTH_PAGE_CREDENTIAL;
 if ($t_should_redirect) {
 	$t_query_args = array(
@@ -92,14 +94,15 @@ if ($t_should_redirect) {
 
 	if( !is_blank( $f_error ) ) {
 		$t_query_args['error'] = $f_error;
-    }
+	}
 
-    if( !is_blank( $f_cookie_error ) ) {
+	if( !is_blank( $f_cookie_error ) ) {
 		$t_query_args['cookie_error'] = $f_cookie_error;
-    }
+	}
 
 	$t_query_text = http_build_query( $t_query_args, '', '&' );
 
+	# Determine the credential page URL based on user id (if it exists) or username
 	$t_redirect_url = $t_user_id !== false ? auth_credential_page($t_query_text, $t_user_id) : auth_credential_page($t_query_text, NO_USER, $t_username);
 	print_header_redirect( $t_redirect_url );
 }
