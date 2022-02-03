@@ -1402,6 +1402,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Dosiahli ste limit povolených aktivít %
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Políčko %1$s musí byť kratšie, alebo rovné ako %2$d znaky.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Názov API tokenu %s sa už používa. Prosím vráťte sa späť a vyberte iný.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Súbor uvedený v $g_log_destination "%s" sa nedá zapísať.';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Pridaný používateľ nemá dostatočné práva na monitorovanie tohto problému.';
 $s_dropzone_default_message = 'Prílohy pripojíte buď pretiahnutím, alebo vybratím a vložením.';
 $s_dropzone_fallback_message = 'Váš prehliadač nepodporuje nahrávanie súborov pomocou pretiahnutia.';
 $s_dropzone_file_too_big = 'Súbor je príliš veľký ({{filesize}} MB). Maximálna veľkosť: {{maxFilesize}} MB.';
