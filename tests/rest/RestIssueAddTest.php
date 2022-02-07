@@ -463,5 +463,18 @@ class RestIssueAddTest extends RestBase {
 		} while( !tag_is_unique( $this->tag_name ) );
 	}
 
+	public function tearDown() {
+		parent::tearDown();
+
+		# Delete tag if it exists
+		$t_tag = tag_get_by_name( $this->tag_name );
+		if( $t_tag ) {
+			# Must be logged in to delete tag
+			/** @noinspection PhpUnhandledExceptionInspection */
+			auth_attempt_script_login( $this->userName, $this->password );
+
+			tag_delete( $t_tag['id'] );
+		}
+	}
 
 }
