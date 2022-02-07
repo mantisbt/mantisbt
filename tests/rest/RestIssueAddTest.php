@@ -433,6 +433,12 @@ class RestIssueAddTest extends RestBase {
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
 		$this->assertEquals( $t_result, $t_response->getStatusCode() );
+
+		if( $t_response->getStatusCode() == HTTP_STATUS_CREATED ) {
+			$t_body = json_decode( $t_response->getBody(), true );
+			$t_issue = $t_body['issue'];
+			$this->deleteAfterRun( $t_issue['id'] );
+		}
 	}
 
 	public function testCreateIssueNoProject() {
