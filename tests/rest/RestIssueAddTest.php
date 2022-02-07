@@ -424,8 +424,8 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueNoCategory() {
-		global $g_allow_no_category;
-		$t_result = $g_allow_no_category ? HTTP_STATUS_CREATED : HTTP_STATUS_BAD_REQUEST;
+		$t_allow_no_category = config_get( 'allow_no_category' );
+		$t_result = $t_allow_no_category ? HTTP_STATUS_CREATED : HTTP_STATUS_BAD_REQUEST;
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoCategory' );
 		unset( $t_issue_to_add['category'] );
