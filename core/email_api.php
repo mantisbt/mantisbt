@@ -1369,12 +1369,16 @@ function email_send( EmailData $p_email_data ) {
 	$t_mail->AddCustomHeader( 'Auto-Submitted:auto-generated' );
 	$t_mail->AddCustomHeader( 'X-Auto-Response-Suppress: All' );
 
-	if( isset($t_email_data->metadata['cc']) && $t_email_data->metadata['cc'] )
-		foreach( $t_email_data->metadata['cc'] as $cc )
-			$t_mail->addCC(trim($cc));
-	if( isset($t_email_data->metadata['bcc']) && $t_email_data->metadata['bcc'] )
-		foreach( $t_email_data->metadata['bcc'] as $bcc )
-			$t_mail->addBCC(trim($bcc));
+	if( isset( $t_email_data->metadata['cc'] ) && $t_email_data->metadata['cc'] ) {
+		foreach( $t_email_data->metadata['cc'] as $cc ) {
+			$t_mail->addCC( trim( $cc ) );
+		}
+	}
+	if( isset( $t_email_data->metadata['bcc'] ) && $t_email_data->metadata['bcc'] ) {
+		foreach( $t_email_data->metadata['bcc'] as $bcc ) {
+			$t_mail->addBCC( trim( $bcc ) );
+		}
+	}
 
 	$t_mail->Encoding   = 'quoted-printable';
 
