@@ -1161,7 +1161,7 @@ function email_bug_deleted( $p_bug_id ) {
  * @param array   $p_bcc       Array of bcc recipients.
  * @return integer|null
  */
-function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null, $p_force = false, $p_cc = [], $p_bcc = []) {
+function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null, $p_force = false, $p_cc = [], $p_bcc = [] ) {
 	global $g_email_shutdown_processing;
 
 	$t_recipient = trim( $p_recipient );
