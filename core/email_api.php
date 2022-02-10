@@ -1405,7 +1405,11 @@ function email_send( EmailData $p_email_data ) {
 					$t_mail->set( 'MessageID', '<' . $t_value . '>' );
 					break;
 				case 'In-Reply-To':
-					$t_mail->addCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
+					if( preg_match('/<.+@.+>/m', $t_value ) ) {
+						$t_mail->addCustomHeader( $t_key . ': ' . $t_value );
+					} else {
+						$t_mail->addCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
+					}
 					break;
 				default:
 					$t_mail->addCustomHeader( $t_key . ': ' . $t_value );
