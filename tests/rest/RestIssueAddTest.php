@@ -43,6 +43,21 @@ class RestIssueAddTest extends RestBase {
 	 */
 	protected $tag_name;
 
+	/**
+	 * Mark test Skipped if test project does not have enough versions defined.
+	 *
+	 * @param $p_num Number of versions
+	 * @return void
+	 */
+	protected function skipTestIfNotEnoughVersions( $p_num ) {
+		if( count( $this->versions ) < $p_num ) {
+			$this->markTestSkipped(
+				"There must be at least $p_num active versions defined in project $this->projectId"
+			);
+		}
+	}
+
+
 	public function testCreateIssueWithMinimalFields() {
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithMinimalFields' );
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -156,6 +171,8 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionString() {
+		$this->skipTestIfNotEnoughVersions( 3 );
+
 		$t_version_name = $this->versions[2]['version'];
 		$t_target_version_name = $this->versions[1]['version'];
 		$t_fixed_in_version_name = $this->versions[0]['version'];
@@ -182,6 +199,8 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionObjectName() {
+		$this->skipTestIfNotEnoughVersions( 1 );
+
 		$t_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectName' );
@@ -205,6 +224,8 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionObjectId() {
+		$this->skipTestIfNotEnoughVersions( 1 );
+
 		$t_version_name = $this->versions[0]['version'];
 		$t_version_id = $this->versions[0]['id'];
 
@@ -230,6 +251,8 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionObjectIdAndMistatchingName() {
+		$this->skipTestIfNotEnoughVersions( 2 );
+
 		$t_version_id = $this->versions[0]['id'];
 		$t_wrong_version_name = $this->versions[1]['version'];
 		$t_correct_version_name = $this->versions[0]['version'];
@@ -424,8 +447,8 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueNoCategory() {
-		global $g_allow_no_category;
-		$t_result = $g_allow_no_category ? HTTP_STATUS_CREATED : HTTP_STATUS_BAD_REQUEST;
+		$t_allow_no_category = config_get( 'allow_no_category' );
+		$t_result = $t_allow_no_category ? HTTP_STATUS_CREATED : HTTP_STATUS_BAD_REQUEST;
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoCategory' );
 		unset( $t_issue_to_add['category'] );
@@ -433,6 +456,12 @@ class RestIssueAddTest extends RestBase {
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
 		$this->assertEquals( $t_result, $t_response->getStatusCode() );
+
+		if( $t_response->getStatusCode() == HTTP_STATUS_CREATED ) {
+			$t_body = json_decode( $t_response->getBody(), true );
+			$t_issue = $t_body['issue'];
+			$this->deleteAfterRun( $t_issue['id'] );
+		}
 	}
 
 	public function testCreateIssueNoProject() {
@@ -450,12 +479,7 @@ class RestIssueAddTest extends RestBase {
 		# Retrieve the 3 most recent versions
 		$this->dbConnect();
 		$t_versions = version_get_all_rows( $this->projectId, null, true );
-		if( count( $t_versions ) < 3 ) {
-			throw new Exception( "There must be at least 3 active versions defined in project $this->projectId" );
-		}
-		for( $i = 0; $i < 3; $i++) {
-			$this->versions[] = array_shift( $t_versions );
-		}
+		$this->versions = array_slice( $t_versions, 0, 3 );
 
 		# Generate a unique tag name
 		do {
@@ -463,5 +487,18 @@ class RestIssueAddTest extends RestBase {
 		} while( !tag_is_unique( $this->tag_name ) );
 	}
 
+	public function tearDown() {
+		parent::tearDown();
+
+		# Delete tag if it exists
+		$t_tag = tag_get_by_name( $this->tag_name );
+		if( $t_tag ) {
+			# Must be logged in to delete tag
+			/** @noinspection PhpUnhandledExceptionInspection */
+			auth_attempt_script_login( $this->userName, $this->password );
+
+			tag_delete( $t_tag['id'] );
+		}
+	}
 
 }

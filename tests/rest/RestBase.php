@@ -51,6 +51,11 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	protected $userName = 'administrator';
 
 	/**
+	 * @var string Password
+	 */
+	protected $password = 'root';
+
+	/**
 	 * @var string The API token to use for authentication
 	 */
 	protected $token = '';
@@ -93,8 +98,10 @@ class RestBase extends PHPUnit\Framework\TestCase {
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_USERNAME', $GLOBALS ) ) {
 			$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'];
-		} else {
-			$this->userName = 'administrator';
+		}
+
+		if( array_key_exists( 'MANTIS_TESTSUITE_PASSWORD', $GLOBALS ) ) {
+			$this->password = $GLOBALS['MANTIS_TESTSUITE_PASSWORD'];
 		}
 
 		$this->assertTrue( array_key_exists( 'MANTIS_TESTSUITE_API_TOKEN', $GLOBALS ) &&
