@@ -1396,7 +1396,7 @@ function email_send( EmailData $p_email_data ) {
 	if( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
 		foreach( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
 			switch( strtolower( $t_key ) ) {
-				case strtolower( 'Message-ID' ):
+				case 'message-id':
 					# Note: hostname can never be blank here as we set metadata['hostname']
 					# in email_store() where mail gets queued.
 					if( !strchr( $t_value, '@' ) && !is_blank( $t_mail->Hostname ) ) {
@@ -1404,7 +1404,7 @@ function email_send( EmailData $p_email_data ) {
 					}
 					$t_mail->set( 'MessageID', '<' . $t_value . '>' );
 					break;
-				case strtolower( 'In-Reply-To' ):
+				case 'in-reply-to':
 					if( !preg_match( '/<.+@.+>/m', $t_value ) ) {
 						$t_value = '<' . $t_value . '@' . $t_mail->Hostname . '>';
 					}
