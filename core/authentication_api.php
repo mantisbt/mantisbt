@@ -81,14 +81,16 @@ $g_cache_current_user_id = NO_USER;
  * @param int|null|bool $p_user_id  The user id or null for logged in user or
  *                                  NO_USER/false for user that doesn't exist
  *                                  in the system, that may be auto-provisioned.
- * @param string        $p_username The username or email
+ * @param string|null   $p_username The username or email
  * @return AuthFlags The auth flags object to use.
  * @throws ClientException
  */
 function auth_flags( $p_user_id = null, $p_username = '' ) {
-	if( !$p_user_id ) {
+	# If user id is null but username is set, let the plugin handle it per #27836
+	if ( is_null( $p_user_id ) || ( $p_user_id === false && is_null( $p_username ) ) ) {
 		# If user id is not provided and user is not authenticated return default flags.
 		# Otherwise, we can get into a loop as in #22740
+		# If user is false and username is null, display a more user-friendly error per #25061
 		if( !auth_is_user_authenticated() ) {
 			return new AuthFlags();
 		}
