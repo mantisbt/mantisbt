@@ -45,18 +45,18 @@ if (a!= -1) {
 style_display = 'block';
 
 $(document).ready( function() {
-    $('.collapse-open').show();
-    $('.collapse-closed').hide();
-    $('.collapse-link').click( function(event) {
-        event.preventDefault();
-        var id = $(this).attr('id');
-        var t_pos = id.indexOf('_closed_link' );
-        if( t_pos == -1 ) {
-            t_pos = id.indexOf('_open_link' );
-        }
-        var t_div = id.substring(0, t_pos );
-        ToggleDiv( t_div );
-    });
+	$('.collapse-open').show();
+	$('.collapse-closed').hide();
+	$('.collapse-link').click( function(event) {
+		event.preventDefault();
+		var id = $(this).attr('id');
+		var t_pos = id.indexOf('_closed_link' );
+		if( t_pos == -1 ) {
+			t_pos = id.indexOf('_open_link' );
+		}
+		var t_div = id.substring(0, t_pos );
+		ToggleDiv( t_div );
+	});
 
 	/**
 	 * Manage the navbar project menu initializacion and events
@@ -131,31 +131,31 @@ $(document).ready( function() {
 		$('#projects-list .search').focus();
 	});
 
-    $('.widget-box').on('shown.ace.widget' , function(event) {
-       var t_id = $(this).attr('id');
-       var t_cookie = GetCookie( config.collapse_settings_cookie );
-        if ( 1 == g_collapse_clear ) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        t_cookie = t_cookie.replace("|" + t_id + ":1", '' );
-        t_cookie = t_cookie + "|" + t_id + ":0";
-        SetCookie( config.collapse_settings_cookie, t_cookie );
+	$('.widget-box').on('shown.ace.widget' , function(event) {
+		var t_id = $(this).attr('id');
+		var t_cookie = GetCookie( config.collapse_settings_cookie );
+		if ( 1 == g_collapse_clear ) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		}
+		t_cookie = t_cookie.replace("|" + t_id + ":1", '' );
+		t_cookie = t_cookie + "|" + t_id + ":0";
+		SetCookie( config.collapse_settings_cookie, t_cookie );
 	});
 
-    $('.widget-box').on('hidden.ace.widget' , function(event) {
-        var t_id = $(this).attr('id');
-        var t_cookie = GetCookie( config.collapse_settings_cookie );
-        if ( 1 == g_collapse_clear ) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        t_cookie = t_cookie.replace( "|" + t_id + ":0", '' );
-        t_cookie = t_cookie + "|" + t_id + ":1";
-        SetCookie( config.collapse_settings_cookie, t_cookie );
-    });
+	$('.widget-box').on('hidden.ace.widget' , function(event) {
+		var t_id = $(this).attr('id');
+		var t_cookie = GetCookie( config.collapse_settings_cookie );
+		if ( 1 == g_collapse_clear ) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		}
+		t_cookie = t_cookie.replace( "|" + t_id + ":0", '' );
+		t_cookie = t_cookie + "|" + t_id + ":1";
+		SetCookie( config.collapse_settings_cookie, t_cookie );
+	});
 
-    $('#sidebar-btn.sidebar-toggle').on('click', function (event) {
+	$('#sidebar-btn.sidebar-toggle').on('click', function (event) {
 		var t_cookie;
 		var t_sidebar = $(this).closest('.sidebar');
 		var t_id = t_sidebar.attr('id');
@@ -174,10 +174,10 @@ $(document).ready( function() {
 		t_cookie += '|' + t_id + ':' + t_value;
 
 		SetCookie(config.collapse_settings_cookie, t_cookie);
-    });
+	});
 
-    $('input[type=text].typeahead').each(function() {
-        var $this = $(this);
+	$('input[type=text].typeahead').each(function() {
+		var $this = $(this);
 		$(this).typeahead({
 			minLength: 1,
 			highlight: true
@@ -191,7 +191,7 @@ $(document).ready( function() {
 					$.each(data, function (i, value) {
 						results.push(value);
 					});
-	 				callback(results);
+					callback(results);
 				});
 			}
 		});
@@ -728,10 +728,10 @@ function ToggleDiv( p_div ) {
 	}
 
 	if ( t_open_display == "none" ) {
-        t_cookie = t_cookie.replace( "|" + p_div + ":0", '' );
+		t_cookie = t_cookie.replace( "|" + p_div + ":0", '' );
 		t_cookie = t_cookie + "|" + p_div + ":1";
 	} else {
-        t_cookie = t_cookie.replace( "|" + p_div + ":1", '' );
+		t_cookie = t_cookie.replace( "|" + p_div + ":1", '' );
 		t_cookie = t_cookie + "|" + p_div + ":0";
 	}
 
