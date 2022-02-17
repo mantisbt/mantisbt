@@ -96,7 +96,7 @@ function token_get( $p_type, $p_user_id = null ) {
  * Get a token's value or null if not found
  * @param integer $p_type    The token type to retrieve.
  * @param integer $p_user_id The user identifier (null for current user).
- * @return array Token row
+ * @return string Token value
  */
 function token_get_value( $p_type, $p_user_id = null ) {
 	$t_token = token_get( $p_type, $p_user_id );
