@@ -26,6 +26,7 @@ var g_collapse_clear = 1;
 /**
  * MantisBT config options.
  * Initialized in javascript_config.php
+ * @property {string} config.collapse_settings_cookie
  * @property {string} config.cookie_path
  * @property {string} config.cookie_domain
  * @property {string} config.cookie_samesite
@@ -132,26 +133,26 @@ $(document).ready( function() {
 
     $('.widget-box').on('shown.ace.widget' , function(event) {
        var t_id = $(this).attr('id');
-       var t_cookie = GetCookie( "collapse_settings" );
+       var t_cookie = GetCookie( config.collapse_settings_cookie );
         if ( 1 == g_collapse_clear ) {
             t_cookie = "";
             g_collapse_clear = 0;
         }
         t_cookie = t_cookie.replace("|" + t_id + ":1", '' );
         t_cookie = t_cookie + "|" + t_id + ":0";
-        SetCookie( "collapse_settings", t_cookie );
+        SetCookie( config.collapse_settings_cookie, t_cookie );
 	});
 
     $('.widget-box').on('hidden.ace.widget' , function(event) {
         var t_id = $(this).attr('id');
-        var t_cookie = GetCookie( "collapse_settings" );
+        var t_cookie = GetCookie( config.collapse_settings_cookie );
         if ( 1 == g_collapse_clear ) {
             t_cookie = "";
             g_collapse_clear = 0;
         }
         t_cookie = t_cookie.replace( "|" + t_id + ":0", '' );
         t_cookie = t_cookie + "|" + t_id + ":1";
-        SetCookie( "collapse_settings", t_cookie );
+        SetCookie( config.collapse_settings_cookie, t_cookie );
     });
 
     $('#sidebar-btn.sidebar-toggle').on('click', function (event) {
@@ -164,7 +165,7 @@ $(document).ready( function() {
 			g_collapse_clear = 0;
 		} else {
 			// Get collapse state and remove the old value
-			t_cookie = GetCookie("collapse_settings");
+			t_cookie = GetCookie(config.collapse_settings_cookie);
 			t_cookie = t_cookie.replace(new RegExp('\\|' + t_id + ':.'), '');
 		}
 
@@ -172,7 +173,7 @@ $(document).ready( function() {
 		var t_value = !t_sidebar.hasClass("menu-min") | 0;
 		t_cookie += '|' + t_id + ':' + t_value;
 
-		SetCookie("collapse_settings", t_cookie);
+		SetCookie(config.collapse_settings_cookie, t_cookie);
     });
 
     $('input[type=text].typeahead').each(function() {
@@ -680,7 +681,6 @@ function Trim( p_string ) {
  * Cookie functions
  */
 function GetCookie( p_cookie ) {
-	var t_cookie_name = "MANTIS_" + p_cookie;
 	var t_cookies = document.cookie;
 
 	t_cookies = t_cookies.split( ";" );
@@ -690,8 +690,7 @@ function GetCookie( p_cookie ) {
 		var t_cookie = t_cookies[ i ];
 
 		t_cookie = t_cookie.split( "=" );
-
-		if ( Trim( t_cookie[ 0 ] ) == t_cookie_name ) {
+		if ( Trim( t_cookie[ 0 ] ) == p_cookie ) {
 			return( t_cookie[ 1 ] );
 		}
 		i++;
@@ -701,12 +700,11 @@ function GetCookie( p_cookie ) {
 }
 
 function SetCookie( p_cookie, p_value ) {
-	var t_cookie_name = "MANTIS_" + p_cookie;
 	var t_expires = new Date();
 
 	t_expires.setTime( t_expires.getTime() + (365 * 24 * 60 * 60 * 1000));
 
-	document.cookie = t_cookie_name + "=" + p_value +
+	document.cookie = p_cookie + "=" + p_value +
 		"; expires=" + t_expires.toUTCString() +
 		( config.cookie_domain ? "; domain=" + config.cookie_domain : '' ) +
 		"; path=" + config.cookie_path +
@@ -717,7 +715,7 @@ function ToggleDiv( p_div ) {
 	var t_open_div = '#' + p_div + "_open";
 	var t_closed_div = '#' + p_div + "_closed";
 
-	var t_cookie = GetCookie( "collapse_settings" );
+	var t_cookie = GetCookie( config.collapse_settings_cookie );
 	if ( 1 == g_collapse_clear ) {
 		t_cookie = "";
 		g_collapse_clear = 0;
@@ -737,7 +735,7 @@ function ToggleDiv( p_div ) {
 		t_cookie = t_cookie + "|" + p_div + ":0";
 	}
 
-	SetCookie( "collapse_settings", t_cookie );
+	SetCookie( config.collapse_settings_cookie, t_cookie );
 }
 
 function setDisplay(idTag, state)
