@@ -19,12 +19,14 @@
 				</para>
 			</listitem>
 		</varlistentry>
+
 		<varlistentry>
 			<term>$g_cookie_domain</term>
 			<listitem>
 				<para>The domain that the MantisBT cookies are available to.</para>
 			</listitem>
 		</varlistentry>
+
 		<varlistentry>
 			<term>$g_cookie_samesite</term>
 			<listitem>
@@ -44,7 +46,7 @@
 			<term>$g_cookie_prefix</term>
 			<listitem>
 				<para>Prefix for all MantisBT cookies</para>
-				<para>This should be an identifier which does not include
+				<para>This must be an identifier which does not include
 					spaces or periods, and should be unique per MantisBT
 					installation, especially if $g_cookie_path is not
 					restricting the cookies' scope to the actual
@@ -57,31 +59,31 @@
 
 				<itemizedlist>
 					<listitem>
-						<para>$g_string_cookie</para>
-					</listitem>
-					<listitem>
-						<para>$g_project_cookie</para>
-					</listitem>
-					<listitem>
-						<para>$g_view_all_cookie</para>
-					</listitem>
-					<listitem>
-						<para>$g_manage_users_cookie</para>
-						<para>Stores the filter criteria for the
-							Manage Users page
-						</para>
-					</listitem>
-					<listitem>
-						<para>$g_manage_config_cookie</para>
-						<para>Stores the filter criteria for the
-							Manage Config Report page
-						</para>
+						<para>$g_bug_list_cookie</para>
 					</listitem>
 					<listitem>
 						<para>$g_logout_cookie</para>
 					</listitem>
 					<listitem>
-						<para>$g_bug_list_cookie</para>
+						<para>$g_manage_config_cookie</para>
+						<para>Stores the filter criteria for the
+							Manage Config Report page.
+						</para>
+					</listitem>
+					<listitem>
+						<para>$g_manage_users_cookie</para>
+						<para>Stores the filter criteria for the
+							Manage Users page.
+						</para>
+					</listitem>
+					<listitem>
+						<para>$g_project_cookie</para>
+					</listitem>
+					<listitem>
+						<para>$g_string_cookie</para>
+					</listitem>
+					<listitem>
+						<para>$g_view_all_cookie</para>
 					</listitem>
 				</itemizedlist>
 
