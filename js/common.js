@@ -23,6 +23,15 @@
  */
 var g_collapse_clear = 1;
 
+/**
+ * MantisBT config options.
+ * Initialized in javascript_config.php
+ * @property {string} config.cookie_path
+ * @property {string} config.cookie_domain
+ * @property {string} config.cookie_samesite
+ */
+/* global config */
+
 // global code to determine how to set visibility
 var a = navigator.userAgent.indexOf("MSIE");
 var style_display;
@@ -697,7 +706,11 @@ function SetCookie( p_cookie, p_value ) {
 
 	t_expires.setTime( t_expires.getTime() + (365 * 24 * 60 * 60 * 1000));
 
-	document.cookie = t_cookie_name + "=" + p_value + "; expires=" + t_expires.toUTCString() + ";";
+	document.cookie = t_cookie_name + "=" + p_value +
+		"; expires=" + t_expires.toUTCString() +
+		( config.cookie_domain ? "; domain=" + config.cookie_domain : '' ) +
+		"; path=" + config.cookie_path +
+		"; samesite=" + config.cookie_samesite;
 }
 
 function ToggleDiv( p_div ) {
