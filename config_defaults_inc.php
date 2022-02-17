@@ -3339,6 +3339,13 @@ $g_project_cookie = '%cookie_prefix%_PROJECT_COOKIE';
 $g_view_all_cookie = '%cookie_prefix%_VIEW_ALL_COOKIE';
 
 /**
+ * Collapse settings cookie.
+ * Stores the open/closed state of the collapsible sections.
+ * @global string $g_collapse_settings_cookie
+ */
+$g_collapse_settings_cookie = '%cookie_prefix%_collapse_settings';
+
+/**
  * Stores the filter criteria for the Manage User page
  * @global string $g_manage_users_cookie
  */
@@ -4450,6 +4457,7 @@ $g_global_settings = array(
 	'bug_list_cookie',
 	'cdn_enabled',
 	'class_path',
+	'collapse_settings_cookie',
 	'compress_html',
 	'cookie_domain',
 	'cookie_path',
@@ -4615,6 +4623,7 @@ $g_public_config_names = array(
 	'cdn_enabled',
 	'change_view_status_threshold',
 	'check_mx_record',
+	'collapse_settings_cookie',
 	'complete_date_format',
 	'compress_html',
 	'cookie_prefix',

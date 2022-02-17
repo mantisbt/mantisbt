@@ -62,6 +62,11 @@
 						<para>$g_bug_list_cookie</para>
 					</listitem>
 					<listitem>
+						<para>$g_collapse_settings_cookie</para>
+						<para>Stores the open/closed state of the collapsible sections.
+						</para>
+					</listitem>
+					<listitem>
 						<para>$g_logout_cookie</para>
 					</listitem>
 					<listitem>
