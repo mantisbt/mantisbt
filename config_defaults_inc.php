@@ -3300,6 +3300,16 @@ $g_cookie_path = '/';
 $g_cookie_domain = '';
 
 /**
+ * Specifies the SameSite attribute to use for the MantisBT cookies.
+ *
+ * Valid values are Strict (default), Lax or None.
+ * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+ *
+ * @global string $g_cookie_domain
+ */
+$g_cookie_samesite = 'Strict';
+
+/**
  * Prefix for all MantisBT cookies
  * This should be an identifier which does not include spaces or periods,
  * and should be unique per MantisBT installation, especially if
@@ -4443,6 +4453,7 @@ $g_global_settings = array(
 	'compress_html',
 	'cookie_domain',
 	'cookie_path',
+	'cookie_samesite',
 	'cookie_prefix',
 	'cookie_time_length',
 	'copyright_statement',

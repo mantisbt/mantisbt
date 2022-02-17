@@ -26,6 +26,21 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_cookie_samesite</term>
+			<listitem>
+				<para>Specifies the
+					<ulink url="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite">SameSite attribute</ulink>
+					to use for the MantisBT cookies.
+				</para>
+				<para>Valid values are
+					<literal>Strict</literal> (default),
+					<literal>Lax</literal> or
+					<literal>None</literal>.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
 			<term>$g_cookie_prefix</term>
 			<listitem>
 				<para>Prefix for all MantisBT cookies</para>
