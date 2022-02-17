@@ -1410,8 +1410,8 @@ function email_send( EmailData $p_email_data ) {
 
 	if( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
 		foreach( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
-			switch( $t_key ) {
-				case 'Message-ID':
+			switch( strtolower( $t_key ) ) {
+				case 'message-id':
 					# Note: hostname can never be blank here as we set metadata['hostname']
 					# in email_store() where mail gets queued.
 					if( !strchr( $t_value, '@' ) && !is_blank( $t_mail->Hostname ) ) {
@@ -1419,9 +1419,11 @@ function email_send( EmailData $p_email_data ) {
 					}
 					$t_mail->set( 'MessageID', '<' . $t_value . '>' );
 					break;
-				case 'In-Reply-To':
-					$t_mail->addCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
-					break;
+				case 'in-reply-to':
+					if( !preg_match( '/<.+@.+>/m', $t_value ) ) {
+						$t_value = '<' . $t_value . '@' . $t_mail->Hostname . '>';
+					}
+					# Fall-through
 				default:
 					$t_mail->addCustomHeader( $t_key . ': ' . $t_value );
 					break;
