@@ -336,6 +336,7 @@ abstract class PluginForDisplay {
 	protected $basename = '';
 	protected $name = '';
 	protected $description = '';
+	protected $page = '';
 
 	public function __construct( MantisPlugin $p_plugin ) {
 		$this->basename = $p_plugin->basename;
@@ -343,6 +344,7 @@ abstract class PluginForDisplay {
 		if( $p_plugin->version ) {
 			$this->name .= ' ' . $p_plugin->version;
 		}
+		$this->page = $p_plugin->page;
 	}
 
 	public function render() {
@@ -352,8 +354,12 @@ abstract class PluginForDisplay {
 	}
 
 	protected function renderColumns() {
-		echo "<td>$this->name</td>\n";
+		echo "<td>" . $this->pluginName() . "</td>\n";
 		echo "<td>$this->description</td>\n";
+	}
+
+	protected function pluginName() {
+		return string_attribute( $this->name );
 	}
 }
 
@@ -511,16 +517,6 @@ class InstalledPlugin extends AvailablePlugin {
 	public function __construct( MantisPlugin $p_plugin ) {
 		parent::__construct( $p_plugin );
 
-		# Plugin name / page
-		# If plugin is installed and has a config page, we create a link to it
-		if( !is_blank( $p_plugin->page ) ) {
-			$this->name = '<a href="'
-				. string_attribute( plugin_page( $p_plugin->page, false, $p_plugin->basename ) )
-				. '">'
-				. string_display_line( $this->name )
-				. '</a>';
-		}
-
 		$this->priority = plugin_priority( $p_plugin->basename );
 		$this->protected =  plugin_protected( $p_plugin->basename );
 	}
@@ -569,5 +565,18 @@ class InstalledPlugin extends AvailablePlugin {
 			);
 		}
 		echo '</td>', "\n";
+	}
+
+	protected function pluginName() {
+		# If plugin has a config page, we create a link to it
+		if( !is_blank( $this->page ) ) {
+			return '<a href="'
+				. string_attribute( plugin_page( $this->page, false, $this->basename ) )
+				. '">'
+				. string_display_line( $this->name )
+				. '</a>';
+		}
+
+		return parent::pluginName();
 	}
 }
