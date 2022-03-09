@@ -393,7 +393,7 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 		$p_samesite = config_get_global( 'cookie_samesite' );
 	}
 
-	if (PHP_VERSION_ID < 70300) {
+	if ( PHP_VERSION_ID < 70300 ) {
 		# Take advantage of PHP bug #69948 (fixed in PHP 7.3) to inject the
 		# Samesite attribute in the cookie's path
 		if( $p_samesite ) {
@@ -440,10 +440,10 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null, $p_samesit
 	# don't try to send cookie if headers are send (guideweb)
 	if( !headers_sent() ) {
 		# Note: This setcookie() call triggers a console warning in Firefox:
-		# Cookie “MANTIS_collapse_settings” has been rejected because it is already expired.
+		# Cookie “<PREFIX>_collapse_settings” has been rejected because it is already expired.
 		# apparently this is due to bug https://bugzilla.mozilla.org/show_bug.cgi?id=1676651
 
-		if (PHP_VERSION_ID < 70300) {
+		if( PHP_VERSION_ID < 70300 ) {
 			# Take advantage of PHP bug #69948 (fixed in PHP 7.3) to inject the
 			# Samesite attribute in the cookie's path
 			if( $p_samesite ) {
@@ -459,7 +459,7 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null, $p_samesit
 			'domain' => $p_domain,
 			'samesite' => $p_samesite,
 		);
-		return setcookie( $p_name, 'xxxx', $t_options );
+		return setcookie( $p_name, '', $t_options );
 	} else {
 		return false;
 	}
