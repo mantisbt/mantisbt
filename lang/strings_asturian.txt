@@ -39,6 +39,7 @@
  * @file
  *
  * @author Enolp
+ * @author Fitoschido
  * @author Tokvo
  * @author Xuacu
  */
@@ -543,7 +544,7 @@ $s_new_accounts_title = 'Cuentes nueves';
 $s_1_week_title = '1 selmana';
 $s_never_logged_in_title = 'Nunca anició sesión';
 $s_prune_accounts = 'Purgar cuentes';
-$s_hide_inactive = 'Tapecer Inactives';
+$s_hide_inactive = 'Anubrir les inactives';
 $s_show_disabled = 'Amosar los desactivaos';
 $s_manage_accounts_title = 'Alministrar Cuentes';
 $s_date_created = 'Data de creación';
