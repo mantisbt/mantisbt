@@ -73,7 +73,7 @@ echo '<a href="' . $t_safe_url . '">' . $t_safe_url . '</a>';
 $t_create_short_url = config_get( 'create_short_url' );
 
 if( !is_blank( $t_create_short_url ) ) {
-	print_small_button( sprintf( $t_create_short_url, $f_url ), lang_get( 'create_short_link' ), true );
+	print_small_button( helper_mantis_url(sprintf( $t_create_short_url, $f_url ), lang_get( 'create_short_link' )), true );
 }
 ?>
 </div>
