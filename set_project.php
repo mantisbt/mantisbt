@@ -76,9 +76,9 @@ helper_set_current_project( $f_project_id );
 
 # for proxies that clear out HTTP_REFERER
 if( !is_blank( $c_ref ) ) {
-	$t_redirect_url = helper_mantis_url($c_ref);
+	$t_redirect_url = $c_ref;
 } else if( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
-	$t_redirect_url = helper_mantis_url(config_get_global( 'default_home_page' ));
+	$t_redirect_url = config_get_global( 'default_home_page' );
 } else {
 	$t_home_page = config_get_global( 'default_home_page' );
 
@@ -91,10 +91,10 @@ if( !is_blank( $c_ref ) ) {
 		# if view_all_bug_page, pass on filter
 		if( strcasecmp( 'view_all_bug_page.php', $t_referrer_page ) == 0 ) {
 			$t_source_filter_id = filter_db_get_project_current( $t_bottom );
-			$t_redirect_url = helper_mantis_url('view_all_set.php?type=' . FILTER_ACTION_GENERALIZE);
+			$t_redirect_url = 'view_all_set.php?type=' . FILTER_ACTION_GENERALIZE;
 
 			if( $t_source_filter_id !== null ) {
-				$t_redirect_url = helper_mantis_url('view_all_set.php?type=' . FILTER_ACTION_LOAD . '&source_query_id=' . $t_source_filter_id);
+				$t_redirect_url = 'view_all_set.php?type=' . FILTER_ACTION_LOAD . '&source_query_id=' . $t_source_filter_id;
 			}
 		} else if( stripos( $t_referrer_page, '_page.php' ) !== false ) {
 			switch( $t_referrer_page ) {
@@ -108,16 +108,18 @@ if( !is_blank( $c_ref ) ) {
 					$t_path = $t_referrer_page . $t_param;
 					break;
 			}
-			$t_redirect_url = helper_mantis_url($t_path);
+			$t_redirect_url = $t_path;
 		} else if( $t_referrer_page == 'plugin.php' ) {
-			$t_redirect_url = helper_mantis_url($t_referrer_page . $t_param); # redirect to same plugin page
+			$t_redirect_url = $t_referrer_page . $t_param; # redirect to same plugin page
 		} else {
-			$t_redirect_url = helper_mantis_url($t_home_page);
+			$t_redirect_url = $t_home_page;
 		}
 	} else {
-		$t_redirect_url = helper_mantis_url($t_home_page);
+		$t_redirect_url = $t_home_page;
 	}
 }
+
+$t_redirect_url = preg_replace('/project_id=(\d+)/i', "project_id={$f_project_id}", $t_redirect_url);
 
 print_header_redirect( $t_redirect_url, true, true );
 
