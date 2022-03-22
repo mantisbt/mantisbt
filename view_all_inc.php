@@ -113,10 +113,10 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		<?php
 			$t_filter_param = filter_get_temporary_key_param( $t_filter );
 			if( empty( $t_filter_param ) ) {
-				$t_summary_link = 'view_all_set.php?summary=1&temporary=y';
+				$t_summary_link = helper_mantis_url('view_all_set.php?summary=1&temporary=y');
 			} else {
 				$t_filter_param = '?' . $t_filter_param;
-				$t_summary_link = 'summary_page.php' . $t_filter_param;
+				$t_summary_link = helper_mantis_url('summary_page.php' . $t_filter_param);
 			}
 			# -- Print and Export links --
 			print_small_button( 'print_all_bug_page.php' . $t_filter_param, lang_get( 'print_all_bug_page_link' ) );
