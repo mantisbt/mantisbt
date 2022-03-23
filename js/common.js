@@ -627,6 +627,13 @@ $(document).ready( function() {
 		me.data('prev', me.val());
 	});
 
+	$('#project-affinity-toggle').on('click', function(elem){
+		var box = $('#project-affinity-toggle i');
+		box.toggleClass('fa-square');
+		box.toggleClass('fa-check');
+		$('body').toggleClass('show-project-affinity');
+	})
+
 	/**
 	 * Spotlight links/controls that are under the influence of "project affinity" (ie: project_id=###)
 	 */

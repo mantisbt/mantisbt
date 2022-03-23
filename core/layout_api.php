@@ -437,6 +437,8 @@ function layout_navbar() {
 	echo '<div class="navbar-buttons navbar-header navbar-collapse collapse">';
 	echo '<ul class="nav ace-nav">';
 	if (auth_is_user_authenticated()) {
+		# Affinity toggle bar
+		layout_navbar_affinity_button_bar();
 		# shortcuts button bar
 		layout_navbar_button_bar();
 		# projects dropdown menu
@@ -540,6 +542,27 @@ function layout_navbar_projects_menu() {
 	layout_navbar_projects_list( implode( ';', helper_get_current_project_trace() ), true, null, true );
 	echo '</ul>' . "\n";
 	echo '</li>' . "\n";
+}
+
+/**
+ * Print navbar buttons
+ * @return void
+ */
+function layout_navbar_affinity_button_bar() {
+	if( !auth_is_user_authenticated() ) {
+		return;
+	}
+
+	echo '<li class="hidden-sm hidden-xs">';
+	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
+
+	echo '<a class="btn btn-primary btn-sm" id="project-affinity-toggle">';
+	echo '⛳ ';
+	print_icon( 'fa-check' );
+	echo '</a>';
+
+	echo '</div>';
+	echo '</li>';
 }
 
 /**
