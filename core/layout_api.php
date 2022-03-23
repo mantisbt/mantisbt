@@ -418,7 +418,7 @@ function layout_navbar() {
 	echo '</button>';
 
 	echo '<div class="navbar-header">';
-	echo '<a href="' . $t_short_path . $t_logo_url . '" class="navbar-brand">';
+	echo '<a href="' . helper_mantis_url($t_short_path . $t_logo_url) . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
 	echo string_display_line( config_get('window_title') );
 	echo ' </span>';
@@ -572,7 +572,7 @@ function layout_navbar_button_bar() {
 	}
 
 	if( $t_show_invite_user_button ) {
-		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
+		echo '<a class="btn btn-primary btn-sm" href="'.helper_mantis_url('manage_user_create_page.php').'">';
 		print_icon( 'fa-user-plus' );
 		echo ' ' . lang_get( 'invite_users' );
 		echo '</a>';

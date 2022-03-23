@@ -126,6 +126,6 @@ if( $t_new_row_id == -1 ) {
 	if( filter_is_temporary( $t_filter ) ) {
 		$t_params['filter'] = filter_get_temporary_key( $t_filter );
 	}
-	$t_redirect = 'view_all_set.php?' . http_build_query( $t_params );
+	$t_redirect = helper_mantis_url('view_all_set.php?' . http_build_query( $t_params ));
 	print_header_redirect( $t_redirect );
 }

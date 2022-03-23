@@ -49,7 +49,7 @@ auth_impersonate( $f_user_id );
 
 form_security_purge( 'manage_user_impersonate' );
 
-$t_redirect_to = config_get_global( 'default_home_page' );
+$t_redirect_to = helper_mantis_url(config_get_global( 'default_home_page' ));
 
 layout_page_header();
 

@@ -630,8 +630,20 @@ $(document).ready( function() {
 	/**
 	 * Spotlight links/controls that are under the influence of "project affinity" (ie: project_id=###)
 	 */
-	 $('a[href*="project_id="]').each((idx, elem) => {$(elem).addClass('has-project-affinity');});
-	 $('a[href*=".php"]:not([href*="project_id="])').each((idx, elem) => {$(elem).addClass('lacks-project-affinity');});
+	 $('.show-project-affinity a[href*="project_id="]').each((idx, elem) => {$(elem).addClass('has-project-affinity');});
+	 $('.show-project-affinity form[action*="project_id="] *[type="submit"]').each((idx, elem) => {
+		 $(elem).addClass('has-project-affinity');
+		 $(elem).val($(elem).val() + ' ⛳');
+	});
+
+	/**
+	 * Spotlight links/controls that are NOT under the influence of "project affinity" (ie: project_id=###)
+	 */
+	 $('.show-project-affinity a[href*=".php"]:not([href*="project_id="])').each((idx, elem) => {$(elem).addClass('lacks-project-affinity');});
+	 $('.show-project-affinity form[action*=".php"]:not([action*="project_id="]) *[type="submit"]').each((idx, elem) =>{
+		 $(elem).addClass('lacks-project-affinity');
+		 $(elem).val($(elem).val() + ' ⚠');
+	});
 });
 
 function setBugLabel() {

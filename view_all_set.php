@@ -143,7 +143,7 @@ switch( $f_type ) {
 		$t_setting_arr = filter_get( $f_source_query_id, null );
 		if( null === $t_setting_arr ) {
 			# couldn't get the filter, if we were trying to use the filter, clear it and reload
-			error_proceed_url( 'view_all_set.php?type=' . FILTER_ACTION_RESET );
+			error_proceed_url( helper_mantis_url('view_all_set.php?type=' . FILTER_ACTION_RESET) );
 			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
 			exit;
 		} else {

@@ -116,9 +116,12 @@ function print_version_header( $p_version_id ) {
 	echo '<div class="pull-left">' . icon_get( 'fa-calendar-o', 'fa-lg' ) . ' ' . $t_release_date . '</div>';
 	echo '<div class="btn-toolbar pull-right">';
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
-	echo 'href="view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
-		 '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) .
-		 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
+	$t_view_url = helper_mantis_url('view_all_set.php?type=' . 
+		FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
+		'&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) .
+		'&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE
+	);
+	echo 'href="' . $t_view_url . '">';
 	echo lang_get( 'view_bugs_link' );
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
@@ -144,9 +147,12 @@ function print_version_footer( $p_version_id, $p_issues_resolved ) {
 	echo '<div class="widget-toolbox padding-8 clearfix">';
 	echo ' ' . $p_issues_resolved . ' ' . lang_get( $t_bug_string ) . ' ';
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
-	echo 'href="view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
-		 '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) .
-		 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
+	$t_view_url = helper_mantis_url('view_all_set.php?type=' .
+		FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
+		'&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) .
+		'&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE
+	);
+	echo 'href="' . $t_view_url . '">';
 	echo lang_get( 'view_bugs_link' );
 	echo '</a>';
 	echo '</div></div></div>';

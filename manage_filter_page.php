@@ -111,7 +111,7 @@ function table_print_filter_row( $p_filter_id ) {
 	# Actions
 	echo '<td>';
 	echo '<div class="pull-left">';
-	print_form_button( 'view_all_set.php', lang_get( 'apply_filter_button' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ), /* security token */ OFF );
+	print_form_button( helper_mantis_url('view_all_set.php'), lang_get( 'apply_filter_button' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ), /* security token */ OFF );
 	echo '</div>';
 	if( $t_editable ) {
 		echo '<div class="pull-left">';

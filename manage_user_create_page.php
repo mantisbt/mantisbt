@@ -55,7 +55,7 @@ layout_page_header();
 
 layout_page_begin( 'manage_overview_page.php' );
 
-print_manage_menu( 'manage_user_create_page.php' );
+print_manage_menu( helper_mantis_url('manage_user_create_page.php') );
 ?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>

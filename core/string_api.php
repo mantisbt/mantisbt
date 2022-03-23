@@ -621,16 +621,18 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
  * @return string
  */
 function string_get_bug_page( $p_action ) {
+	$t_page = null;
 	switch( $p_action ) {
 		case 'view':
-			return 'bug_view_page.php';
+			$t_page = 'bug_view_page.php'; break;
 		case 'update':
-			return 'bug_update_page.php';
+			$t_page = 'bug_update_page.php'; break;
 		case 'report':
-			return 'bug_report_page.php';
+			$t_page = 'bug_report_page.php'; break;
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
 	}
-
-	trigger_error( ERROR_GENERIC, ERROR );
+	return helper_mantis_url($t_page);
 }
 
 /**
@@ -708,7 +710,7 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info 
  * @return string
  */
 function string_get_bug_view_url( $p_bug_id ) {
-	return 'view.php?id=' . $p_bug_id;
+	return helper_mantis_url('view.php?id=' . $p_bug_id);
 }
 
 /**
@@ -718,7 +720,7 @@ function string_get_bug_view_url( $p_bug_id ) {
  * @return string
  */
 function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
-	return 'view.php?id=' . $p_bug_id . '#c' . $p_bugnote_id;
+	return helper_mantis_url('view.php?id=' . $p_bug_id . '#c' . $p_bugnote_id);
 }
 
 /**
