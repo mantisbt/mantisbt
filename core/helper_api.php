@@ -625,7 +625,9 @@ function helper_mantis_url( $p_url ) {
 		$p_url = "{$p_url}?project_id={$g_project_override}";			
 		if(!empty($t_parsed_url['query'])){
 			$t_parsed_url['query'] = preg_replace('/project_id=\d+/', '', $t_parsed_url['query']);
-			$p_url = "{$p_url}&{$t_parsed_url['query']}";
+			if(!empty($t_parsed_url['query'])){
+				$p_url = "{$p_url}&{$t_parsed_url['query']}";
+			}
 		}
 		if(!empty($t_parsed_url['fragment'])){
 			$p_url = "{$p_url}#{$t_parsed_url['fragment']}";
