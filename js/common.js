@@ -626,6 +626,12 @@ $(document).ready( function() {
 			.addClass(getColorClassName(me.val()));
 		me.data('prev', me.val());
 	});
+
+	/**
+	 * Spotlight links/controls that are under the influence of "project affinity" (ie: project_id=###)
+	 */
+	 $('a[href*="project_id="]').each((idx, elem) => {$(elem).addClass('has-project-affinity');});
+	 $('a[href*=".php"]:not([href*="project_id="])').each((idx, elem) => {$(elem).addClass('lacks-project-affinity');});
 });
 
 function setBugLabel() {

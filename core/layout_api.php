@@ -124,11 +124,16 @@ function layout_page_header_end( $p_page_id = null) {
 		$t_body_id = 'id="' . $p_page_id . '" ';
 	}
 
+	$t_show_project_affinity = '';
+	if(true){
+		$t_show_project_affinity = ' show-project-affinity';
+	}
+
 	# Add right-to-left css if needed
 	if( layout_is_rtl() ) {
-		echo '<body ' . $t_body_id . 'class="skin-3 rtl">', "\n";
+		echo '<body ' . $t_body_id . 'class="skin-3 rtl'.$t_show_project_affinity.'">', "\n";
 	} else {
-		echo '<body ' . $t_body_id . 'class="skin-3">', "\n";
+		echo '<body ' . $t_body_id . 'class="skin-3'.$t_show_project_affinity.'">', "\n";
 	}
 
 	# Set user font preference
