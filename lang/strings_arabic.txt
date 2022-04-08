@@ -40,6 +40,7 @@
  *
  * @author Claw eg
  * @author DRIHEM
+ * @author FiberAhmed
  * @author HitomiAkane
  * @author Maroen1990
  * @author Meno25
@@ -512,7 +513,7 @@ $s_lost_password_info = 'لاسترجاع كلمة سرك المفقودة، م�
 $s_lost_password_confirm_hash_OK = 'تأكيدك تم قبوله. من فضلك حدث كلمة السر الخاصة بك.';
 $s_open_and_assigned_to_me_label = 'فتح وتعيينها لي:';
 $s_open_and_reported_to_me_label = 'تم فتحه و التبليغ عنه من قبلي:';
-$s_newer_news_link = 'أخبار أجدد';
+$s_newer_news_link = 'أحدث الأخبار';
 $s_older_news_link = 'أخبار أقدم';
 $s_archives = 'أرشيفات';
 $s_rss = 'آر إس إس';
