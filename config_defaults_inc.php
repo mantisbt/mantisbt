@@ -216,24 +216,29 @@ if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
 		die;
 	}
-	$t_self = filter_var( $_SERVER['SCRIPT_NAME'], FILTER_SANITIZE_STRING );
-	$t_path = str_replace( basename( $t_self ), '', $t_self );
+
+	# Prevent XSS if the path is displayed later on. This is the equivalent of
+	# FILTER_SANITIZE_STRING, which was deprecated in PHP 8.1:
+	# strip tags and null bytes, then encode quotes into HTML entities
+	$t_path = preg_replace( '/\x00|<[^>]*>?/', '', $_SERVER['SCRIPT_NAME'] );
+	$t_path = str_replace( ["'", '"'], ['&#39;', '&#34;'], $t_path );
+
+	$t_path = dirname( $t_path );
 	switch( basename( $t_path ) ) {
 		case 'admin':
-			$t_path = rtrim( dirname( $t_path ), '/\\' ) . '/';
+			$t_path = dirname( $t_path );
 			break;
 		case 'check':		# admin checks dir
 		case 'soap':
 		case 'rest':
-			$t_path = rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/';
+			$t_path = dirname( $t_path, 2 );
 			break;
 		case 'swagger':
-			$t_path = rtrim( dirname( dirname( dirname( $t_path ) ) ), '/\\' ) . '/';
-			break;
-		case '':
-			$t_path = '/';
+			$t_path = dirname( $t_path, 3 );
 			break;
 	}
+	$t_path = rtrim( $t_path, '/\\' ) . '/';
+
 	if( strpos( $t_path, '&#' ) ) {
 		echo 'Can not safely determine $g_path. Please set $g_path manually in ' . $g_config_path . 'config_inc.php';
 		die;
