@@ -435,7 +435,7 @@ class AvailablePlugin extends PluginForDisplay {
 		}
 
 		# Description
-		$this->description = string_display_line_links( $p_plugin->description )
+		$this->description = string_display_line_links( (string)$p_plugin->description )
 			. '<span class="small">' . $t_author . $t_url . '</span>';
 
 		# Dependencies

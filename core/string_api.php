@@ -546,7 +546,7 @@ function string_insert_hrefs( $p_string ) {
 function string_process_exclude_anchors( $p_string, $p_callback ) {
 	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
 
-	$t_pieces = preg_split( $s_anchor_regex, $p_string, null, PREG_SPLIT_DELIM_CAPTURE );
+	$t_pieces = preg_split( $s_anchor_regex, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
 	$t_string = '';
 	foreach( $t_pieces as $t_piece ) {
