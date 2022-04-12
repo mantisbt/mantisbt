@@ -246,7 +246,7 @@ function event_type_execute( $p_event, array $p_callbacks, $p_params = null ) {
  * @access public
  * @return void
  */
-function event_type_output( $p_event, array $p_callbacks, $p_params = null, $p_format = null ) {
+function event_type_output( $p_event, array $p_callbacks, $p_params = null, $p_format = '' ) {
 	$t_prefix = '';
 	$t_separator = '';
 	$t_postfix = '';
