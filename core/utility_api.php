@@ -73,7 +73,7 @@ function terminate_directory_path( $p_path ) {
  * @access public
  */
 function is_blank( $p_var ) {
-	$p_var = trim( $p_var );
+	$p_var = trim( (string)$p_var );
 	$t_str_len = strlen( $p_var );
 	if( 0 == $t_str_len ) {
 		return true;

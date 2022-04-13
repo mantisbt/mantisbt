@@ -391,7 +391,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 			$t_issue_id = $t_row['id'];
 			$t_issue_parent = $t_row['source_bug_id'];
-			$t_parent_version = $t_row['parent_version'];
+			$t_parent_version = (string)$t_row['parent_version'];
 
 			if( !helper_call_custom_function( 'roadmap_include_issue', array( $t_issue_id ) ) ) {
 				continue;
