@@ -25,6 +25,7 @@ before_script:
   - ./build/travis_before_script.sh
 
 script:
+  - curl http://localhost:8080/api/soap/mantisconnect.php?wsdl
   - ./build/travis_script.sh
 
 # -----------------------------------------------------------------------------
