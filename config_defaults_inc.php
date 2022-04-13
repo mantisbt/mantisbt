@@ -3300,6 +3300,16 @@ $g_cookie_path = '/';
 $g_cookie_domain = '';
 
 /**
+ * Specifies the SameSite attribute to use for the MantisBT cookies.
+ *
+ * Valid values are Strict (default), Lax or None.
+ * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+ *
+ * @global string $g_cookie_samesite
+ */
+$g_cookie_samesite = 'Strict';
+
+/**
  * Prefix for all MantisBT cookies
  * This should be an identifier which does not include spaces or periods,
  * and should be unique per MantisBT installation, especially if
@@ -3327,6 +3337,13 @@ $g_project_cookie = '%cookie_prefix%_PROJECT_COOKIE';
  * @global string $g_view_all_cookie
  */
 $g_view_all_cookie = '%cookie_prefix%_VIEW_ALL_COOKIE';
+
+/**
+ * Collapse settings cookie.
+ * Stores the open/closed state of the collapsible sections.
+ * @global string $g_collapse_settings_cookie
+ */
+$g_collapse_settings_cookie = '%cookie_prefix%_collapse_settings';
 
 /**
  * Stores the filter criteria for the Manage User page
@@ -4440,10 +4457,12 @@ $g_global_settings = array(
 	'bug_list_cookie',
 	'cdn_enabled',
 	'class_path',
+	'collapse_settings_cookie',
 	'compress_html',
 	'cookie_domain',
 	'cookie_path',
 	'cookie_prefix',
+	'cookie_samesite',
 	'cookie_time_length',
 	'copyright_statement',
 	'core_path',
@@ -4604,6 +4623,7 @@ $g_public_config_names = array(
 	'cdn_enabled',
 	'change_view_status_threshold',
 	'check_mx_record',
+	'collapse_settings_cookie',
 	'complete_date_format',
 	'compress_html',
 	'cookie_prefix',

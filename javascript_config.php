@@ -65,3 +65,7 @@ if( gpc_isset( 'cache_key' ) ) {
 echo "var config = new Array();\n";
 print_config_value( 'datetime_picker_format' );
 print_config_value( 'short_path' );
+print_config_value( 'collapse_settings_cookie' );
+print_config_value( 'cookie_path' );
+print_config_value( 'cookie_domain' );
+print_config_value( 'cookie_samesite' );
