@@ -3218,11 +3218,30 @@ $g_user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,18})?)$/i';
 $g_default_manage_tag_prefix = 'ALL';
 
 /**
- * CSV Export
- * Set the csv separator
+ * The separator to use for CSV exports.
  * @global string $g_csv_separator
  */
 $g_csv_separator = ',';
+
+/**
+ * Protection against CSV Injection.
+ *
+ * When this setting is ON (default), any data that could be interpreted as a
+ * formula by a spreadsheet program such as Excel (i.e. starting with `=`, `@`,
+ * `-` or `+`), will be prefixed with a tab character (\t) in order to prevent
+ * CSV injection.
+ *
+ * Sometimes this may not be appropriate (e.g. if the CSV needs to be consumed
+ * programmatically). In that case, $g_csv_injection_protection can be set to OFF,
+ * resulting in raw data to be exported.
+ *
+ * Setting this to OFF is a security risk. An attacker could upload a crafted
+ * CSV file containing formulas that will be executed when opened with Excel,
+ * as described in this article {@link http://georgemauer.net/2017/10/07/csv-injection.html}.
+ *
+ * @global string $g_csv_injection_protection
+ */
+$g_csv_injection_protection = ON;
 
 /**
  * The threshold required for users to be able to manage configuration of a project.
