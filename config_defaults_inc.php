@@ -231,10 +231,10 @@ if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 		case 'check':		# admin checks dir
 		case 'soap':
 		case 'rest':
-			$t_path = dirname( $t_path, 2 );
+			$t_path = dirname( dirname( $t_path ) );
 			break;
 		case 'swagger':
-			$t_path = dirname( $t_path, 3 );
+			$t_path = dirname( dirname( dirname( $t_path ) ) );
 			break;
 	}
 	$t_path = rtrim( $t_path, '/\\' ) . '/';
