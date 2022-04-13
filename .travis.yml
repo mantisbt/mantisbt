@@ -11,7 +11,7 @@ dist: bionic
 #
 
 services:
-  - postgresql
+#  - postgresql
   - mysql
 
 before_install:
@@ -32,41 +32,41 @@ script:
 #
 
 php:
-  - 8.0
-  - 7.4
-  - 7.3
-  - 7.2
-  - 7.1
+#  - 8.0
+#  - 7.4
+#  - 7.3
+#  - 7.2
+#  - 7.1
 
 env:
   - DB=mysql
-  - DB=pgsql
+#  - DB=pgsql
 
 jobs:
   include:
     # Use 'xenial' build environment for legacy PHP versions
-    - php: 7.0
-      dist: xenial
-      env: DB=mysql
-    - php: 7.0
-      dist: xenial
-      env: DB=pgsql
+#    - php: 7.0
+#      dist: xenial
+#      env: DB=mysql
+#    - php: 7.0
+#      dist: xenial
+#      env: DB=pgsql
     - php: 5.6
       dist: xenial
       env: DB=mysql
-    - php: 5.6
-      dist: xenial
-      env: DB=pgsql
-
-    # Add a specific build for Documentation
-    - name: Documentation
-      env: DOCBOOK=1
-      # Using Ruby as it's preinstalled and we don't need PHP to build docs
-      language: ruby
-      addons:
-        apt:
-          packages:
-            - publican
+#    - php: 5.6
+#      dist: xenial
+#      env: DB=pgsql
+#
+#    # Add a specific build for Documentation
+#    - name: Documentation
+#      env: DOCBOOK=1
+#      # Using Ruby as it's preinstalled and we don't need PHP to build docs
+#      language: ruby
+#      addons:
+#        apt:
+#          packages:
+#            - publican
 
   allow_failures:
 
@@ -80,13 +80,13 @@ notifications:
     on_success: change
     on_failure: always
 
-  irc:
-    on_success: change
-    on_failure: always
-    channels:
-       - "chat.freenode.net#mantisbt"
-    skip_join: true
-    template:
-      - "Build #%{build_number}: %{repository} %{branch} (%{commit}) %{author} - %{message}"
-      - "Build details: %{build_url}"
-      - "Code Changes: %{compare_url}"
+#  irc:
+#    on_success: change
+#    on_failure: always
+#    channels:
+#       - "chat.freenode.net#mantisbt"
+#    skip_join: true
+#    template:
+#      - "Build #%{build_number}: %{repository} %{branch} (%{commit}) %{author} - %{message}"
+#      - "Build details: %{build_url}"
+#      - "Code Changes: %{compare_url}"
