@@ -52,6 +52,7 @@
  * @author Hosseinblue
  * @author Jeeputer
  * @author Mjbmr
+ * @author Mohammad ebz
  * @author Omidh
  * @author Razavi
  * @author Reza1615
@@ -536,7 +537,7 @@ $s_manage_plugin_link = 'افزونه​‌ها';
 $s_permissions_summary_report = 'گزارش مجوزها';
 $s_manage_config_link = 'پیکربندی';
 $s_manage_threshold_config = 'تعیین جریان کار';
-$s_manage_email_config = 'اعلان​های ایمیل';
+$s_manage_email_config = 'اعلان​‌های ایمیل';
 $s_manage_workflow_config = 'وضعیت جریان کار';
 $s_manage_workflow_graph = 'نمودار جریان کاری';
 $s_manage_tags_link = 'برچسب‌ها';
@@ -570,7 +571,7 @@ $s_email_notify_users = 'هر کابر با سطح دسترسی';
 $s_change_configuration = 'روزآمدسازی پیکربندی';
 $s_message = 'پیام';
 $s_notify_defaults_change_access = 'کسی که می‌تواند پیش‌فرض‌های اعلان را تغییر دهد';
-$s_notify_actions_change_access = 'کسی که می​تواند اعلان​ها را تغییر دهد:';
+$s_notify_actions_change_access = 'کسی که می​‌تواند اعلان‌​ها را تغییر دهد:';
 $s_revert_to_system = 'حذف همهٔ تنظیمات پروژه‌​ها';
 $s_revert_to_all_project = 'حذف تنظیمات مخصوص پروژه';
 $s_current_status = 'وضعیت فعلی';
