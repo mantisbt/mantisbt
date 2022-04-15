@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "290d5684cd4aa79b2a565bbdfd1963ed",
+    "content-hash": "4d33dac6c110c053b6da13ae32c6ae4b",
     "packages": [
         {
             "name": "adodb/adodb-php",
@@ -1324,12 +1324,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "DeepCopy\\": "src/DeepCopy/"
-                },
                 "files": [
                     "src/DeepCopy/deep_copy.php"
-                ]
+                ],
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1691,23 +1691,23 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "5.3.2",
+            "version": "dev-mantis-5.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "c89677919c5dd6d3b3852f230a663118762218ac"
+                "url": "https://github.com/mantisbt/php-code-coverage",
+                "reference": "7642884eff886bf02cd8b931afad3b433da97be1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c89677919c5dd6d3b3852f230a663118762218ac",
-                "reference": "c89677919c5dd6d3b3852f230a663118762218ac",
+                "url": "https://api.github.com/repos/mantisbt/php-code-coverage/zipball/7642884eff886bf02cd8b931afad3b433da97be1",
+                "reference": "7642884eff886bf02cd8b931afad3b433da97be1",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-xmlwriter": "*",
                 "php": "^7.0",
-                "phpunit/php-file-iterator": "^1.4.2",
+                "phpunit/php-file-iterator": "dev-mantis-1.4@dev",
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-token-stream": "^2.0.1",
                 "sebastian/code-unit-reverse-lookup": "^1.0.1",
@@ -1732,7 +1732,6 @@
                     "src/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1751,23 +1750,22 @@
                 "xunit"
             ],
             "support": {
-                "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/5.3"
+                "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues"
             },
-            "time": "2018-04-06T15:36:58+00:00"
+            "time": "2022-04-15T00:05:14+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "1.4.5",
+            "version": "dev-mantis-1.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "730b01bc3e867237eaac355e06a36b85dd93a8b4"
+                "url": "https://github.com/mantisbt/php-file-iterator",
+                "reference": "89be108433b1b8bac92d797accbf9602588d63ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/730b01bc3e867237eaac355e06a36b85dd93a8b4",
-                "reference": "730b01bc3e867237eaac355e06a36b85dd93a8b4",
+                "url": "https://api.github.com/repos/mantisbt/php-file-iterator/zipball/89be108433b1b8bac92d797accbf9602588d63ce",
+                "reference": "89be108433b1b8bac92d797accbf9602588d63ce",
                 "shasum": ""
             },
             "require": {
@@ -1784,7 +1782,6 @@
                     "src/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1802,11 +1799,10 @@
                 "iterator"
             ],
             "support": {
-                "irc": "irc://irc.freenode.net/phpunit",
                 "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
-                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/1.4.5"
+                "irc": "irc://irc.freenode.net/phpunit"
             },
-            "time": "2017-11-27T13:52:08+00:00"
+            "time": "2022-04-14T15:33:55+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1962,16 +1958,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.5.14",
+            "version": "dev-mantis-6.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "bac23fe7ff13dbdb461481f706f0e9fe746334b7"
+                "url": "https://github.com/mantisbt/phpunit",
+                "reference": "215feef5692289bb3136991ee04d05f580321f2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/bac23fe7ff13dbdb461481f706f0e9fe746334b7",
-                "reference": "bac23fe7ff13dbdb461481f706f0e9fe746334b7",
+                "url": "https://api.github.com/repos/mantisbt/phpunit/zipball/215feef5692289bb3136991ee04d05f580321f2f",
+                "reference": "215feef5692289bb3136991ee04d05f580321f2f",
                 "shasum": ""
             },
             "require": {
@@ -1985,8 +1981,8 @@
                 "phar-io/version": "^1.0",
                 "php": "^7.0",
                 "phpspec/prophecy": "^1.7",
-                "phpunit/php-code-coverage": "^5.3",
-                "phpunit/php-file-iterator": "^1.4.3",
+                "phpunit/php-code-coverage": "dev-mantis-5.3",
+                "phpunit/php-file-iterator": "dev-mantis-1.4",
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-timer": "^1.0.9",
                 "phpunit/phpunit-mock-objects": "^5.0.9",
@@ -2024,7 +2020,15 @@
                     "src/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "classmap": [
+                    "tests/"
+                ],
+                "files": [
+                    "src/Framework/Assert/Functions.php",
+                    "tests/_files/CoveredFunction.php"
+                ]
+            },
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2043,10 +2047,9 @@
                 "xunit"
             ],
             "support": {
-                "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/6.5.14"
+                "issues": "https://github.com/sebastianbergmann/phpunit/issues"
             },
-            "time": "2019-02-01T05:22:47+00:00"
+            "time": "2022-04-14T16:19:48+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -2347,16 +2350,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "3.1.3",
+            "version": "3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "6b853149eab67d4da22291d36f5b0631c0fd856e"
+                "reference": "0c32ea2e40dbf59de29f3b49bf375176ce7dd8db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/6b853149eab67d4da22291d36f5b0631c0fd856e",
-                "reference": "6b853149eab67d4da22291d36f5b0631c0fd856e",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/0c32ea2e40dbf59de29f3b49bf375176ce7dd8db",
+                "reference": "0c32ea2e40dbf59de29f3b49bf375176ce7dd8db",
                 "shasum": ""
             },
             "require": {
@@ -2365,7 +2368,7 @@
             },
             "require-dev": {
                 "ext-mbstring": "*",
-                "phpunit/phpunit": "^6.0"
+                "phpunit/phpunit": "^8.5"
             },
             "type": "library",
             "extra": {
@@ -2412,7 +2415,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/exporter/issues",
-                "source": "https://github.com/sebastianbergmann/exporter/tree/3.1.3"
+                "source": "https://github.com/sebastianbergmann/exporter/tree/3.1.4"
             },
             "funding": [
                 {
@@ -2420,7 +2423,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-30T07:47:53+00:00"
+            "time": "2021-11-11T13:51:24+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -2776,12 +2779,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2925,7 +2928,10 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "dapphp/securimage": 20
+        "dapphp/securimage": 20,
+        "phpunit/phpunit": 20,
+        "phpunit/php-code-coverage": 20,
+        "phpunit/php-file-iterator": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
