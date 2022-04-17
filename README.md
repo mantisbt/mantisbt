@@ -2,7 +2,7 @@ Mantis Bug Tracker (MantisBT)
 =============================
 
 [![Build Status](https://img.shields.io/travis/com/mantisbt/mantisbt/master)](https://app.travis-ci.com/mantisbt/mantisbt)
-[![Gitter](https://img.shields.io/gitter/room/mantisbt/mantisbt.svg)](https://gitter.im/mantisbt/mantisbt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://img.shields.io/gitter/room/mantisbt/mantisbt.svg)](https://gitter.im/mantisbt/mantisbt)
 
 Screenshots
 -----------
