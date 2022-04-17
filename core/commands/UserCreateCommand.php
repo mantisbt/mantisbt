@@ -83,7 +83,7 @@ class UserCreateCommand extends Command {
 	 */
 	function validate() {
 		# Ensure user has access level to create users
-		if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
+		if( !access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 			throw new ClientException( 'Access denied to create users', ERROR_ACCESS_DENIED );
 		}
 
