@@ -1,17 +1,17 @@
 Mantis Bug Tracker (MantisBT)
 =============================
 
-[![Build Status](https://img.shields.io/travis/mantisbt/mantisbt/master.svg)](https://travis-ci.org/mantisbt/mantisbt)
-[![Gitter](https://img.shields.io/gitter/room/mantisbt/mantisbt.svg)](https://gitter.im/mantisbt/mantisbt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://img.shields.io/travis/com/mantisbt/mantisbt/master?logo=travis)](https://app.travis-ci.com/mantisbt/mantisbt)
+[![Gitter](https://img.shields.io/gitter/room/mantisbt/mantisbt.svg?logo=gitter)](https://gitter.im/mantisbt/mantisbt)
 
 Screenshots
 -----------
 
-![Build Status](doc/modern_view_issues.png)
+![Screenshot of View Issues page](doc/modern_view_issues.png)
 
-![Build Status](doc/modern_my_view.png)
+![Screenshot of My View page](doc/modern_my_view.png)
 
-![Build Status](doc/modern_view_issue.png)
+![Screenshot of View Issue Details page](doc/modern_view_issue.png)
 
 Documentation
 -------------
