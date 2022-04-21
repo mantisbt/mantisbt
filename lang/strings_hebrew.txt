@@ -40,6 +40,7 @@
  *
  * @author Amire80
  * @author Avma
+ * @author Ex-Diktator
  * @author Guycn2
  * @author LaG roiL
  * @author Macofe
@@ -1425,7 +1426,7 @@ $s_load = 'טעינה';
 $s_apply_changes = 'החלת שינויים';
 $s_undo = 'החזרה';
 $s_edit = 'עריכה';
-$s_submit = 'הגשה';
+$s_submit = 'שליחה';
 $s_update = 'עדכון';
 $s_delete = 'מחיקה';
 $s_make_default = 'ברירת מחדל';
