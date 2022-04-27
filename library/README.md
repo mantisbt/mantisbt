@@ -19,7 +19,7 @@ The version and status of each is summarized below:
 | bootstrap                         | 3.3.6     | unpatched  |
 | fontawesome                       | 4.7.0     | unpatched  |
 | ace-admin theme                   | 1.4.0     | customized |
-| moment.js                         | 2.29.2    | unpatched  |
+| moment.js                         | 2.29.3    | unpatched  |
 | bootstrap-datetimepicker          | 4.17.47   | unpatched  |
 | dropzone.js                       | 5.5.0     | unpatched  |
 | chart.js                          | 2.8.0     | unpatched  |
