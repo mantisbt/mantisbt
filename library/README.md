@@ -14,19 +14,19 @@ rssbuilder      | RSSBuilder      | 2.2.1     | patched [1][2]
 
 ## Javascript/CSS libraries
 
-library / plugin                  | version   | status
-----------------------------------|-----------|---------------
-jquery                            | 2.2.4     | unpatched
-bootstrap                         | 3.3.6     | unpatched
-fontawesome                       | 4.7.0     | unpatched
-ace-admin theme                   | 1.4.0     | customized
-moment.js                         | 2.29.2    | unpatched
-bootstrap-datetimepicker          | 4.17.47   | unpatched
-dropzone.js                       | 5.5.0     | unpatched
-chart.js                          | 2.8.0     | unpatched
-chartjs-plugin-colorschemes       | 0.4.0     | unpatched
-typeahead.js                      | 1.3.0     | unpatched 
-list.js                           | 1.5.0     | unpatched
+library / plugin                  | version | status
+----------------------------------|---------|---------------
+jquery                            | 2.2.4   | unpatched
+bootstrap                         | 3.3.6   | unpatched
+fontawesome                       | 4.7.0   | unpatched
+ace-admin theme                   | 1.4.0   | customized
+moment.js                         | 2.29.3  | unpatched
+bootstrap-datetimepicker          | 4.17.47 | unpatched
+dropzone.js                       | 5.5.0   | unpatched
+chart.js                          | 2.8.0   | unpatched
+chartjs-plugin-colorschemes       | 0.4.0   | unpatched
+typeahead.js                      | 1.3.0   | unpatched 
+list.js                           | 1.5.0   | unpatched
 
   
 **Notes**
