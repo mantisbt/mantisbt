@@ -110,7 +110,8 @@ $('#db_type')
 		);
 
 		update_sample_table_names();
-	});
+	})
+	.trigger('change');
 
 /**
  * Process changes to prefix/suffix inputs
