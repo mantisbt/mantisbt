@@ -18,22 +18,23 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$(document).ready( function() {
+$(function() {
 'use strict';
 
 /**
  * PrefixInput object
- * @param input
+ * @param inputId
  * @constructor
  */
 function PrefixInput (inputId) {
 	this.input = $('#' + inputId);
 	this.button = $('#btn_' + inputId);
 
+	// noinspection JSUnusedGlobalSymbols
 	/** Corresponding reset button */
 	this.resetButton = function () { return this.button; };
-	this.enableButton = function () { this.button.removeAttr('disabled');};
-	this.disableButton = function () { this.button.attr('disabled', true);};
+	this.enableButton = function () { this.button.removeAttr('disabled'); };
+	this.disableButton = function () { this.button.prop('disabled', true); };
 
 	/** Default value (data attribute) */
 	this.getDefault = function () { return this.input.data('defval'); };
@@ -64,7 +65,7 @@ function PrefixInput (inputId) {
 	 */
 	this.resetValue = function () {
 		this.input.val(this.getDefault());
-		this.input.focus()[0].setSelectionRange(0, this.getValue().length);
+		this.input.trigger('focus')[0].setSelectionRange(0, this.getValue().length);
 		this.disableButton();
 	};
 }
@@ -84,8 +85,8 @@ var inputs = $('input.table-prefix').each(function () {
  * On Change event for database type selection list
  * Preset prefix, plugin prefix and suffix fields when changing db type
  */
-$('#db_type').change(
-	function () {
+$('#db_type')
+	.on('change', function () {
 		var db;
 		if ($(this).val() === 'oci8') {
 			db = 'oci8';
@@ -109,8 +110,7 @@ $('#db_type').change(
 		);
 
 		update_sample_table_names();
-	}
-);
+	});
 
 /**
  * Process changes to prefix/suffix inputs
@@ -131,7 +131,7 @@ inputs.on('input', function () {
 /**
  * Buttons to reset the prefix/suffix to the current default value
  */
-reset_buttons.click(function () {
+reset_buttons.on('click', function () {
 	var input = new PrefixInput($(this).prev('input.table-prefix')[0].id);
 	input.resetValue();
 	update_sample_table_names();
