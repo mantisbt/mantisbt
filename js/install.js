@@ -140,21 +140,32 @@ reset_buttons.click(function () {
 update_sample_table_names();
 
 /**
+ * Returns the field's value with a single '_' appended (prefix) or prepended (suffix).
+ *
+ * @param {string} fieldName jQuery element
+ * @param {boolean} isPrefix True if it's a prefix, false for suffix
+ * @returns {string}
+ */
+function process_table_name_field(fieldName, isPrefix) {
+	var value = $(fieldName).val();
+
+	if(value !== undefined) {
+		value = value.trim();
+		if(value.length > 0) {
+			// Make sure we start or end with a single underscore
+			return value.replace(isPrefix ? /_*$/ : /^_*/, '_');
+		}
+	}
+	return '';
+}
+
+/**
  * Populate sample table names based on given prefix/suffix
  */
 function update_sample_table_names() {
-	var prefix = $('#db_table_prefix').val().trim();
-	if(prefix && prefix.substr(-1) !== '_') {
-		prefix += '_';
-	}
-	var suffix = $('#db_table_suffix').val().trim();
-	if(suffix && suffix.substr(0,1) !== '_') {
-		suffix = '_' + suffix;
-	}
-	var plugin = $('#db_table_plugin_prefix').val().trim();
-	if(plugin && plugin.substr(-1) !== '_') {
-		plugin += '_';
-	}
+	var prefix = process_table_name_field('#db_table_prefix', true);
+	var suffix = process_table_name_field('#db_table_suffix', false);
+	var plugin = process_table_name_field('#db_table_plugin_prefix', true);
 
 	$('#db_table_prefix_sample').val(prefix + '<CORE TABLE>' + suffix);
 	$('#db_table_plugin_prefix_sample').val(prefix + plugin + '<PLUGIN>_<TABLE>' + suffix);
