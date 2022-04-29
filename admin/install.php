@@ -95,7 +95,10 @@ function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_mes
 $t_install_state = gpc_get_int( 'install', 0 );
 
 layout_page_header_begin( 'Administration - Installation' );
-html_javascript_link( 'install.js' );
+# Javascript is only needed to support input of installation options
+if( $t_install_state < 2 ) {
+	html_javascript_link( 'install.js' );
+}
 layout_page_header_end();
 
 layout_admin_page_begin();
