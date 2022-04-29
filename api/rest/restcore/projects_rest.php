@@ -52,7 +52,46 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->patch( '/{id}/subprojects/{subproject_id}/', 'rest_project_hierarchy_update' );
 	$g_app->delete( '/{id}/subprojects/{subproject_id}', 'rest_project_hierarchy_delete' );
 	$g_app->delete( '/{id}/subprojects/{subproject_id}/', 'rest_project_hierarchy_delete' );
+
+	# Project Users that can handle issues
+	$g_app->get( '/{id}/handlers', 'rest_project_handlers' );
 });
+
+/**
+ * A method to get list of users with the specific access level in the specified project.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_handlers(\Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_page_size = isset( $p_args['page_size'] ) ? $p_args['page_size'] : $p_request->getParam( 'page_size' );
+	$t_page = isset( $p_args['page'] ) ? $p_args['page'] : $p_request->getParam( 'page' );
+	$t_access_level = config_get( 'handle_bug_threshold', null, null, $t_project_id );
+
+	$t_data = array(
+		'query' => array(
+			'id'        => $t_project_id,
+			'page_size' => $t_page_size,
+			'page'      => $t_page,
+		),
+		'options' => array(
+			'access_level' => $t_access_level
+		)
+	);
+
+	$t_command = new ProjectUsersGetCommand( $t_data );
+	$t_result = $t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+}
 
 /**
  * A method to get list of projects accessible to user with all their related information.
