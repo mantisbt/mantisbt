@@ -1639,12 +1639,13 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
  * @uses database_api.php
  */
 function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
+	if( empty( $p_bugs_id ) ) {
+		return array();
+	}
+
 	$t_id_array = array();
 	foreach( $p_bugs_id as $t_id ) {
 		$t_id_array[$t_id] = (int)$t_id;
-	}
-	if( empty( $t_id_array ) ) {
-		return array();
 	}
 
 	if ( null === $p_user_id ) {
