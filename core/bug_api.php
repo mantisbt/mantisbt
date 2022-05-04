@@ -1670,6 +1670,12 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 	$t_current_project_id = null;
 	$t_current_bug_id = null;
 	while( $t_query_row = db_fetch_array( $t_result ) ) {
+		/**
+		 * Variables defined in the loop's first iteration
+		 * @var bool $t_private_bugnote_visible
+		 * @var int  $t_note_count
+		 * @var int  $t_last_submit_date
+		 */
 		$c_bug_id = (int)$t_query_row['bug_id'];
 		if( 0 == $t_counter || $t_current_project_id !== $t_query_row['project_id'] ) {
 			# evaluating a new project from the rowset
