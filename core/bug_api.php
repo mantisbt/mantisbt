@@ -1648,12 +1648,7 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 		$t_id_array[$t_id] = (int)$t_id;
 	}
 
-	if ( null === $p_user_id ) {
-		$t_user_id = auth_get_current_user_id();
-	}
-	else {
-		$t_user_id = $p_user_id;
-	}
+	$t_user_id = $p_user_id ?? auth_get_current_user_id();
 
 	db_param_push();
 	$t_params = array();
