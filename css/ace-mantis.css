@@ -189,17 +189,12 @@ pre {
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    overflow-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 /* Disable printing of link urls */
 a:link:after, a:visited:after {
     content: normal !important;
-}
-
-/* Prevent horizontal scrolling when displaying db commands in install screen */
-pre {
-    word-break: break-all !important;
 }
 
 /* Disable theme backgrounds */
