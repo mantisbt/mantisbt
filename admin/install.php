@@ -95,7 +95,10 @@ function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_mes
 $t_install_state = gpc_get_int( 'install', 0 );
 
 layout_page_header_begin( 'Administration - Installation' );
-html_javascript_link( 'install.js' );
+# Javascript is only needed to support input of installation options
+if( $t_install_state < 2 ) {
+	html_javascript_link( 'install.js' );
+}
 layout_page_header_end();
 
 layout_admin_page_begin();
@@ -691,8 +694,10 @@ if( !$g_database_upgrade ) {
 		echo "<tr>\n\t<td>\n";
 		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
 		echo "\t</td>\n\t<td>\n\t\t";
-		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix" value="%2$s">',
+		$t_required = $t_key == 'db_table_plugin_prefix' ? 'required' : '';
+		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix" %2$s value="%3$s">',
 			$t_key,
+			$t_key == 'db_table_plugin_prefix' ? 'required' : '',
 			${'f_' . $t_key} // The actual value of the corresponding form variable
 		);
 		echo "\n&nbsp;";
