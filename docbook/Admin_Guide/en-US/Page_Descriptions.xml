@@ -535,6 +535,11 @@
                                 <entry>$g_update_bug_threshold</entry>
                                 <entry>threshold to update an issue</entry>
                             </row>
+							<row>
+								<entry>Allow reporter to update Issue</entry>
+								<entry>$g_allow_reporter_update</entry>
+								<entry>allow reporter to update issues they reported</entry>
+							</row>
                             <row>
                                 <entry>Allow Reporter to close an issue</entry>
                                 <entry>$g_allow_reporter_close</entry>
