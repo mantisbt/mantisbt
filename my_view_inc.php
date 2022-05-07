@@ -65,7 +65,6 @@ if( $t_filter === false ) {
 $t_sort = $t_filter['sort'];
 $t_dir = $t_filter['dir'];
 
-$t_update_bug_threshold = config_get( 'update_bug_threshold' );
 $t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
 $t_hide_status_default = config_get( 'hide_status_default' );
 $t_default_show_changed = config_get( 'default_show_changed' );
@@ -351,7 +350,9 @@ for( $i = 0;$i < $t_count; $i++ ) {
 			print_icon( 'fa-square', 'fa-status-box ' . $t_status_css, $t_status );
 			echo ' ';
 
-			if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
+			$t_can_update = !bug_is_readonly( $t_bug->id ) &&
+				access_has_bug_level( config_get( 'update_bug_threshold', null, $t_current_user_id, $t_bug->project_id  ), $t_bug->id );
+			if( $t_can_update ) {
 				echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '">';
 				print_icon( 'fa-pencil', 'bigger-130 padding-2 grey', lang_get( 'edit' ) );
 				echo '</a>';
