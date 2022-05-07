@@ -1159,8 +1159,9 @@ function print_column_plugin( $p_column_object, BugData $p_bug, $p_columns_targe
 function print_column_edit( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 
 	echo '<td class="column-edit">';
-
-	if( !bug_is_readonly( $p_bug->id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
+	$t_can_update = !bug_is_readonly( $p_bug->id ) &&
+		access_has_bug_level( config_get( 'update_bug_threshold', null, auth_get_current_user_id(), $p_bug->project_id ), $p_bug->id );
+	if( $t_can_update ) {
 		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
 		print_icon( 'fa-pencil', 'bigger-130 padding-2 grey', lang_get( 'edit' ) );
 		echo '</a>';
