@@ -416,6 +416,7 @@ $s_end_date_label = 'Tarixê qediyayışi:';
 $s_yes = 'Eya';
 $s_no = 'Nê';
 $s_ok = 'TEMAM';
+$s_select_all = 'Pêrune weçine';
 $s_temporary_filter = 'Parzûno demki';
 $s_bug_assign_to_button = 'Çekenen:';
 $s_reopen_bug_button = 'Fına Ake';
