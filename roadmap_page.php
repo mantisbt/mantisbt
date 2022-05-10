@@ -489,15 +489,19 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 		}
 
+		echo '<ul class="roadmap">' . PHP_EOL;
 		$t_count_ids = count( $t_issue_set_ids );
 		for( $j = 0; $j < $t_count_ids; $j++ ) {
 			$t_issue_set_id = $t_issue_set_ids[$j];
 			$t_issue_set_level = $t_issue_set_levels[$j];
 
+			echo '<li>';
 			helper_call_custom_function( 'roadmap_print_issue', array( $t_issue_set_id, $t_issue_set_level ) );
+			echo '</li>' . PHP_EOL;
 
 			$t_issues_found = true;
 		}
+		echo '</ul>' . PHP_EOL;
 
 		if( $t_version_header_printed ) {
 			print_version_footer( $t_version_row, $t_progress );

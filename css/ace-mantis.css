@@ -588,6 +588,15 @@ hr {
     border-color: #393939;
 }
 
+/* Changelog and Roadmap items */
+ul.changelog, ul.roadmap {
+    list-style-type: none;
+    margin-left: 0;
+}
+ul.changelog > li, ul.roadmap > li {
+    margin-bottom: 4px;
+}
+
 /* Mantis 28826: Remove vertical lines for bordered tables. */
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
@@ -732,4 +741,3 @@ hr {
     }
 
 }
-
