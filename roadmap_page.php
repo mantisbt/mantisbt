@@ -182,10 +182,12 @@ function print_version_header( array $p_version_row, $p_progress ) {
 
 	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
 	echo '<div class="widget-header widget-header-small">';
+	echo PHP_EOL;
 	echo '<h4 class="widget-title lighter">';
 	print_icon( 'fa-road', 'ace-icon' );
 	echo $t_release_title, lang_get( 'word_separator' );
 	echo '</h4>';
+	echo PHP_EOL;
 	echo '<div class="widget-toolbar">';
 	echo '<a data-action="collapse" href="#">';
 	print_icon( $t_block_icon, '1 ace-icon bigger-125' );
@@ -193,14 +195,17 @@ function print_version_header( array $p_version_row, $p_progress ) {
 	echo '</div>';
 	$p_progress->printHeader();
 	echo '</div>';
+	echo PHP_EOL;
 
 	echo '<div class="widget-body">';
 	echo '<div class="widget-toolbox padding-8 clearfix">';
 	if( $t_scheduled_release_date ) {
+		echo PHP_EOL;
 		echo '<div class="pull-left">';
 		print_icon( 'fa-calendar-o', 'fa-lg' );
 		echo ' ' . $t_scheduled_release_date . '</div>';
 	}
+	echo PHP_EOL;
 	echo '<div class="btn-toolbar pull-right">';
 	print_extra_small_button(
 		'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW
@@ -218,8 +223,10 @@ function print_version_header( array $p_version_row, $p_progress ) {
 		string_display_line( $t_project_name )
 	);
 	echo '</div>';
+	echo PHP_EOL;
 
 	echo '</div>';
+	echo PHP_EOL;
 	echo '<div class="widget-main">';
 }
 
@@ -255,6 +262,7 @@ function print_version_footer( $p_version_row, $p_progress ) {
 
 	echo '</div></div>';
 	echo '<div class="space-10"></div>';
+	echo PHP_EOL;
 }
 
 /**
@@ -266,6 +274,7 @@ function print_project_header_roadmap( $p_project_name ) {
 	echo '<div class="page-header">';
 	echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'roadmap' ) . '</h1>';
 	echo '</div>';
+	echo PHP_EOL;
 }
 
 $t_issues_found = false;
@@ -433,6 +442,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		if( $t_progress->hasIssues() ) {
 			if( !$t_project_header_printed ) {
+				echo PHP_EOL;
 				print_project_header_roadmap( $t_project_name );
 				$t_project_header_printed = true;
 			}

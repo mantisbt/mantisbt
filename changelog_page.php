@@ -100,20 +100,24 @@ function print_version_header( $p_version_id ) {
 
 	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
 	echo '<div class="widget-header widget-header-small">';
+	echo PHP_EOL;
 	echo '<h4 class="widget-title lighter">';
 	print_icon( 'fa-retweet', 'ace-icon' );
 	echo $t_release_title, lang_get( 'word_separator' );
 	echo '</h4>';
+	echo PHP_EOL;
 	echo '<div class="widget-toolbar">';
 	echo '<a data-action="collapse" href="#">';
 	print_icon( $t_block_icon, '1 ace-icon bigger-125' );
 	echo '</a>';
 	echo '</div>';
 	echo '</div>';
+	echo PHP_EOL;
 
 	echo '<div class="widget-body">';
 	echo '<div class="widget-toolbox padding-8 clearfix">';
 	echo '<div class="pull-left">' . icon_get( 'fa-calendar-o', 'fa-lg' ) . ' ' . $t_release_date . '</div>';
+	echo PHP_EOL;
 	echo '<div class="btn-toolbar pull-right">';
 	print_extra_small_button(
 		'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW
@@ -131,9 +135,12 @@ function print_version_header( $p_version_id ) {
 		string_display_line( $t_project_name )
 	);
 	echo '</div>';
+	echo PHP_EOL;
 
 	echo '</div>';
+	echo PHP_EOL;
 	echo '<div class="widget-main">';
+
 }
 
 /**
@@ -159,6 +166,7 @@ function print_version_footer( $p_version_id, $p_issues_resolved ) {
 	);
 	echo '</div></div></div>';
 	echo '<div class="space-10"></div>';
+	echo PHP_EOL;
 }
 
 /**
@@ -170,6 +178,7 @@ function print_project_header_changelog( $p_project_name ) {
 	echo '<div class="page-header">';
 	echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'changelog' ) . '</h1>';
 	echo '</div>';
+	echo PHP_EOL;
 }
 
 $t_issues_found = false;
@@ -322,6 +331,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		if( $t_issues_resolved > 0 ) {
 			if( !$t_project_header_printed ) {
+				echo PHP_EOL;
 				print_project_header_changelog( $t_project_name );
 				$t_project_header_printed = true;
 			}
