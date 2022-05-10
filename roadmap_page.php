@@ -202,14 +202,21 @@ function print_version_header( array $p_version_row, $p_progress ) {
 		echo ' ' . $t_scheduled_release_date . '</div>';
 	}
 	echo '<div class="btn-toolbar pull-right">';
-	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
-	echo 'href="view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
-		 '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) .
-		 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
-	echo lang_get( 'view_bugs_link' );
-	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
-	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
-	echo '</a>';
+	print_extra_small_button(
+		'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW
+		. '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id
+		. '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name )
+		. '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE,
+		lang_get( 'view_bugs_link' )
+	);
+	print_extra_small_button(
+		'roadmap_page.php?version_id=' . $t_version_id,
+		string_display_line( $t_version_name )
+	);
+	print_extra_small_button(
+		'roadmap_page.php?project_id=' . $t_project_id,
+		string_display_line( $t_project_name )
+	);
 	echo '</div>';
 
 	echo '</div>';
@@ -235,12 +242,14 @@ function print_version_footer( $p_version_row, $p_progress ) {
 	if( $p_progress->hasIssues() ) {
 		echo '<div class="widget-toolbox padding-8 clearfix">';
 		echo $p_progress->string();
-		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" ';
-		echo 'href="view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
-			 '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) .
-			 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
-		echo lang_get( 'view_bugs_link' );
-		echo '</a>';
+		echo ' ';
+		print_extra_small_button(
+			'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW
+			. '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id
+			. '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name )
+			. '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE,
+			lang_get( 'view_bugs_link' )
+		);
 		echo '</div>';
 	}
 
