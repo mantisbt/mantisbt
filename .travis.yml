@@ -31,6 +31,11 @@ script:
 # What to build, and on which platforms
 #
 
+branches:
+  only:
+    - master
+    - /master-[0-9.]+/
+
 php:
   - 8.0
   - 7.4
