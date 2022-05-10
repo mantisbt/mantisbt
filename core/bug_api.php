@@ -1654,7 +1654,12 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 		$t_chunks = array( $t_id_array );
 	}
 
-	$t_user_id = $p_user_id ?? auth_get_current_user_id();
+	if ( null === $p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	}
+	else {
+		$t_user_id = $p_user_id;
+	}
 
 	# We need to check for each bugnote if user has permissions to view in respective project.
 	# bugnotes are grouped by project_id and bug_id to save calls to config_get
