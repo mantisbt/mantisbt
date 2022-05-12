@@ -53,6 +53,15 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
+/**
+ * Variables defined in parent script.
+ * @var array $g_filter
+ * @var array $t_rows
+ * @var array $t_unique_project_ids
+ * @var int $f_page_number
+ * @var int $t_page_count
+ * @var int $t_bug_count
+ */
 $t_filter = current_user_get_bug_filter();
 filter_init( $t_filter );
 
@@ -140,7 +149,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 	ob_start();
 	print_page_links(
 		'view_all_bug_page.php',
-		1, $t_page_count, (int)$f_page_number,
+		1, $t_page_count, $f_page_number,
 		filter_get_temporary_key( $t_filter )
 	);
 	$t_page_number_links = ob_get_clean();
@@ -224,14 +233,18 @@ write_bug_rows( $t_rows );
 ?>
 	<div class="form-inline pull-left">
 <?php
+		/**
+		 * Global $g_checkboxes_exist is set in write_bug_rows() via the
+		 * print_column_value custom function.
+		 * @noinspection PhpConditionAlreadyCheckedInspection
+		 */
 		if( $g_checkboxes_exist ) {
 			echo '<label class="inline">';
 			echo '<input class="ace check_all input-sm" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" />';
 			echo '<span class="lbl padding-6">' . lang_get( 'select_all' ) . ' </span > ';
 			echo '</label>';
-		}
-		if( $g_checkboxes_exist ) {
 ?>
+			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="action" class="input-sm">
 				<?php print_all_bug_action_option_list($t_unique_project_ids) ?>
 			</select>
