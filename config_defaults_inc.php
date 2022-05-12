@@ -2787,7 +2787,7 @@ $g_monitor_delete_others_bug_threshold = DEVELOPER;
  *
  * @global integer $g_print_reports_threshold
  */
-$g_print_reports_threshold = VIEWER;
+$g_print_reports_threshold = UPDATER;
 
 /**
  * Access level required to export issues.

@@ -69,7 +69,7 @@
 			<listitem>
 				<para>Grants users access to the Print Reports functionality
 					(Word/HTML) from the View Issues page.
-					The default value is VIEWER.
+					The default value is UPDATER.
 				</para>
 			</listitem>
 		</varlistentry>
