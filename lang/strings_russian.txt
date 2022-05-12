@@ -75,7 +75,7 @@
  * @author Александр Сигачёв
  */
 
-$s_actiongroup_menu_copy = 'Копировать';
+$s_actiongroup_menu_copy = 'Скопировать';
 $s_actiongroup_menu_assign = 'Назначить';
 $s_actiongroup_menu_resolve = 'Решить';
 $s_actiongroup_menu_update_priority = 'Изменить приоритет';

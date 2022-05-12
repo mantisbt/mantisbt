@@ -39,6 +39,7 @@
  * @file
  *
  * @author A2y4
+ * @author Ajeje Brazorf
  * @author Aotake
  * @author Fryed-peach
  * @author Gulpin
@@ -62,7 +63,7 @@
  * @author 赤城。
  */
 
-$s_directionality = '左書き';
+$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'コピー';
 $s_actiongroup_menu_assign = '担当者決定';
 $s_actiongroup_menu_resolve = '解決済';
