@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Ajeje Brazorf
  * @author Alan ffm
  * @author BeginaFelicysym
  * @author Chrumps
@@ -63,7 +64,7 @@
  * @author Woytecr
  */
 
-$s_directionality = 'ldp';
+$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopiuj';
 $s_actiongroup_menu_assign = 'Przypisz';
 $s_actiongroup_menu_resolve = 'Rozwiąż';
