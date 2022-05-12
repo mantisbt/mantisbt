@@ -209,46 +209,6 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 </thead><tbody>
 
 <?php
-/**
- * Output Bug Rows
- *
- * @param array $p_rows An array of bug objects.
- * @return void
- */
-function write_bug_rows( array $p_rows ) {
-	global $g_columns, $g_filter;
-
-	$t_in_stickies = ( $g_filter && ( 'on' == $g_filter[FILTER_PROPERTY_STICKY] ) );
-
-	# -- Loop over bug rows --
-
-	$t_rows = count( $p_rows );
-	for( $i=0; $i < $t_rows; $i++ ) {
-		$t_row = $p_rows[$i];
-
-		if( ( 0 == $t_row->sticky ) && ( 0 == $i ) ) {
-			$t_in_stickies = false;
-		}
-		if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
-?>
-		   <tr>
-				   <td colspan="<?php echo count( $g_columns ); ?>" bgcolor="#d3d3d3"></td>
-		   </tr>
-<?php
-			$t_in_stickies = false;
-		}
-
-		echo '<tr>';
-
-		$t_column_value_function = 'print_column_value';
-		foreach( $g_columns as $t_column ) {
-			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row ) );
-		}
-		echo '</tr>';
-	}
-}
-
-
 write_bug_rows( $t_rows );
 # -- ====================== end of BUG LIST ========================= --
 ?>
@@ -299,3 +259,36 @@ if( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) 
 	filter_draw_selection_area();
 }
 # -- ====================== end of FILTER FORM ================== --
+
+/**
+ * Output Bug Rows
+ *
+ * @param array $p_rows An array of bug objects.
+ * @return void
+ */
+function write_bug_rows( array $p_rows ) {
+	global $g_columns, $g_filter;
+
+	$t_in_stickies = ( $g_filter && ( 'on' == $g_filter[FILTER_PROPERTY_STICKY] ) );
+
+	# Loop over bug rows
+	$t_rows = count( $p_rows );
+	for( $i = 0; $i < $t_rows; $i++ ) {
+		$t_row = $p_rows[$i];
+
+		if( ( 0 == $t_row->sticky ) && ( 0 == $i ) ) {
+			$t_in_stickies = false;
+		}
+		if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {
+			# demarcate stickies, if any have been shown
+			echo '<tr><td colspan="' . count( $g_columns ) . '" bgcolor="#d3d3d3"></td></tr>';
+			$t_in_stickies = false;
+		}
+
+		echo '<tr>';
+		foreach( $g_columns as $t_column ) {
+			helper_call_custom_function( 'print_column_value', array( $t_column, $t_row ) );
+		}
+		echo '</tr>';
+	}
+}
