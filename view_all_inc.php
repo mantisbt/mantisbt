@@ -93,28 +93,31 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 
 ?>
 <div class="col-md-12 col-xs-12">
-<div class="space-10"></div>
-<form id="bug_action" method="post" action="bug_actiongroup_page.php">
-<?php # CSRF protection not required here - form does not result in modifications ?>
-<div class="widget-box widget-color-blue2">
-	<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<?php print_icon( 'fa-columns', 'ace-icon' ); ?>
-		<?php echo lang_get( 'viewing_bugs_title' ) ?>
-		<?php
-			# -- Viewing range info --
-			$v_start = 0;
-			$v_end = 0;
-			if (count($t_rows) > 0) {
-				$v_start = $g_filter['per_page'] * ($f_page_number - 1) + 1;
-				$v_end = $v_start + count($t_rows) - 1;
-			}
-			echo '<span class="badge"> ' . $v_start . ' - ' . $v_end . ' / ' . $t_bug_count . '</span>' ;
-		?>
-	</h4>
-	</div>
+	<div class="space-10"></div>
+	<form id="bug_action" method="post" action="bug_actiongroup_page.php">
+		<?php # CSRF protection not required here - form does not result in modifications ?>
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+<?php
+	print_icon( 'fa-columns', 'ace-icon' );
+	echo lang_get( 'viewing_bugs_title' );
+
+	# Viewing range info
+	$v_start = 0;
+	$v_end = 0;
+	if (count($t_rows) > 0) {
+		$v_start = $g_filter['per_page'] * ($f_page_number - 1) + 1;
+		$v_end = $v_start + count($t_rows) - 1;
+	}
+	echo '<span class="badge"> ' . $v_start . ' - ' . $v_end . ' / ' . $t_bug_count . '</span>' ;
+?>
+				</h4>
+			</div>
 
 <?php
+	# -- ====================== TOP TOOLBAR ============================ --
+
 	$t_filter_param = filter_get_temporary_key_param( $t_filter );
 	if( empty( $t_filter_param ) ) {
 		$t_summary_link = 'view_all_set.php?summary=1&temporary=y';
@@ -162,10 +165,10 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		|| $t_page_number_links
 	) {
 ?>
-	<div class="widget-body">
-		<div class="widget-toolbox padding-8 clearfix">
-			<div class="btn-toolbar">
-				<div class="btn-group pull-left">
+			<div class="widget-body">
+				<div class="widget-toolbox padding-8 clearfix">
+					<div class="btn-toolbar">
+						<div class="btn-group pull-left">
 <?php
 		if( $t_can_print_reports ) {
 			print_small_button(
@@ -183,29 +186,31 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 
 		echo $t_plugin_menu_items;
 ?>
-				</div>
+						</div>
 <?php
 		if( $t_page_number_links ) {
 ?>
-				<div class="btn-group pull-right">
-					<?php echo $t_page_number_links ?>
-				</div>
+						<div class="btn-group pull-right">
+							<?php echo $t_page_number_links ?>
+						</div>
 <?php
 		}
 ?>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
 <?php
 	}
+
+	# -- ====================== end of TOP TOOLBAR ============================ --
 ?>
 
-<div class="widget-main no-padding">
-	<div class="table-responsive checkbox-range-selection">
-	<table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
-	<thead>
+			<div class="widget-main no-padding">
+				<div class="table-responsive checkbox-range-selection">
+					<table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
+						<thead>
 <?php # -- Bug list column header row -- ?>
-<tr class="buglist-headers">
+							<tr class="buglist-headers">
 <?php
 	$t_title_function = 'print_column_title';
 	$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter, COLUMNS_TARGET_VIEW_PAGE );
@@ -213,25 +218,26 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		helper_call_custom_function( $t_title_function, array( $t_column, COLUMNS_TARGET_VIEW_PAGE, $t_sort_properties ) );
 	}
 ?>
-</tr>
+							</tr>
+						</thead>
 
-</thead><tbody>
+						<tbody>
 
 <?php
-write_bug_rows( $t_rows );
-# -- ====================== end of BUG LIST ========================= --
+	write_bug_rows( $t_rows );
+	# -- ====================== end of BUG LIST ========================= --
 ?>
 
-</tbody>
-</table>
-</div>
+						</tbody>
+					</table>
+				</div>
 
-<div class="widget-toolbox padding-8 clearfix">
+				<div class="widget-toolbox padding-8 clearfix">
 <?php
 # -- ====================== MASS BUG MANIPULATION =================== --
 # @@@ ideally buglist-footer would be in <tfoot>, but that's not possible due to global g_checkboxes_exist set via write_bug_rows()
 ?>
-	<div class="form-inline pull-left">
+					<div class="form-inline pull-left">
 <?php
 		/**
 		 * Global $g_checkboxes_exist is set in write_bug_rows() via the
@@ -254,16 +260,17 @@ write_bug_rows( $t_rows );
 			echo '&#160;';
 		}
 ?>
-			</div>
-			<div class="btn-group pull-right">
-				<?php echo $t_page_number_links ?>
-			</div>
-<?php # -- ====================== end of MASS BUG MANIPULATION ========================= -- ?>
-</div>
+					</div>
 
-</div>
-</div>
-</form>
+					<div class="btn-group pull-right">
+						<?php echo $t_page_number_links ?>
+					</div>
+<?php # -- ====================== end of MASS BUG MANIPULATION ========================= -- ?>
+				</div>
+
+			</div>
+		</div>
+	</form>
 </div>
 <?php
 
