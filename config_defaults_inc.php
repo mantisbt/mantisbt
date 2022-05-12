@@ -2780,13 +2780,20 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 $g_monitor_delete_others_bug_threshold = DEVELOPER;
 
 /**
- * Access level required to print issues
+ * Access level required to print issue reports.
+ *
+ * Grants users access to the Print Reports functionality (Word/HTML) from the
+ * View Issues page (print_all_bug_page.php and print_all_bug_page_word.php).
+ *
  * @global integer $g_print_reports_threshold
  */
 $g_print_reports_threshold = VIEWER;
 
 /**
- * Access level required to export issues
+ * Access level required to export issues.
+ *
+ * Lets user export issues to CSV and Excel from the View Issues page.
+ *
  * @global integer $g_export_issues_threshold
  */
 $g_export_issues_threshold = VIEWER;
