@@ -301,7 +301,7 @@ function write_bug_rows( array $p_rows ) {
 		}
 		if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {
 			# demarcate stickies, if any have been shown
-			echo '<tr><td colspan="' . count( $g_columns ) . '" bgcolor="#d3d3d3"></td></tr>';
+			echo '<tr class="sticky-separator"><td colspan="' . count( $g_columns ) . '"></td></tr>';
 			$t_in_stickies = false;
 		}
 
