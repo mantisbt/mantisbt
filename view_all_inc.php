@@ -105,60 +105,91 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 	</h4>
 	</div>
 
-	<div class="widget-body">
+<?php
+	$t_filter_param = filter_get_temporary_key_param( $t_filter );
+	if( empty( $t_filter_param ) ) {
+		$t_summary_link = 'view_all_set.php?summary=1&temporary=y';
+	} else {
+		$t_filter_param = '?' . $t_filter_param;
+		$t_summary_link = 'summary_page.php' . $t_filter_param;
+	}
 
-	<div class="widget-toolbox padding-8 clearfix">
-		<div class="btn-toolbar">
-			<div class="btn-group pull-left">
-		<?php
-			$t_filter_param = filter_get_temporary_key_param( $t_filter );
-			if( empty( $t_filter_param ) ) {
-				$t_summary_link = 'view_all_set.php?summary=1&temporary=y';
-			} else {
-				$t_filter_param = '?' . $t_filter_param;
-				$t_summary_link = 'summary_page.php' . $t_filter_param;
+	$t_can_print_reports = access_has_project_level( config_get( 'print_reports_threshold' ), $t_current_project );
+	$t_can_export_issues = access_has_project_level( config_get( 'export_issues_threshold' ), $t_current_project );
+	$t_can_view_summary = access_has_project_level( config_get( 'view_summary_threshold' ), $t_current_project );
+
+	# Plugin menu items
+	$t_event_menu_options = event_signal( 'EVENT_MENU_FILTER' );
+	ob_start();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( !is_array( $t_callback_menu_options ) ) {
+				$t_callback_menu_options = array( $t_callback_menu_options );
 			}
 
-			# -- Print link --
-			if( access_has_project_level( config_get( 'print_reports_threshold' ) ) ) {
-				print_small_button( 'print_all_bug_page.php' . $t_filter_param, lang_get( 'print_all_bug_page_link' ) );
-			}
-
-			# -- Export links --
-			if( access_has_project_level( config_get( 'export_issues_threshold' ) ) ) {
-				print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
-				print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
-			}
-
-			if( access_has_project_level( config_get( 'view_summary_threshold' ), $t_current_project ) ) {
-				print_small_button( $t_summary_link, lang_get( 'summary_link' ) );
-			}
-
-			$t_event_menu_options = $t_links = event_signal('EVENT_MENU_FILTER');
-
-			foreach ($t_event_menu_options as $t_plugin => $t_plugin_menu_options) {
-				foreach ($t_plugin_menu_options as $t_callback => $t_callback_menu_options) {
-					if (!is_array($t_callback_menu_options)) {
-						$t_callback_menu_options = array($t_callback_menu_options);
-					}
-
-					foreach ($t_callback_menu_options as $t_menu_option) {
-						if ($t_menu_option) {
-							echo $t_menu_option;
-						}
-					}
+			foreach( $t_callback_menu_options as $t_menu_option ) {
+				if( $t_menu_option ) {
+					echo $t_menu_option;
 				}
 			}
-		?>
-		</div>
-		<div class="btn-group pull-right"><?php
-			# -- Page number links --
-			$t_tmp_filter_key = filter_get_temporary_key( $t_filter );
-			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $t_tmp_filter_key );
-			?>
+		}
+	}
+	$t_plugin_menu_items = ob_get_clean();
+
+	# Page number links
+	ob_start();
+	print_page_links(
+		'view_all_bug_page.php',
+		1, $t_page_count, (int)$f_page_number,
+		filter_get_temporary_key( $t_filter )
+	);
+	$t_page_number_links = ob_get_clean();
+
+	# Only display the toolbar if there's anything to print in it
+	if( $t_can_print_reports
+		|| $t_can_export_issues
+		|| $t_can_view_summary
+		|| $t_plugin_menu_items
+		|| $t_page_number_links
+	) {
+?>
+	<div class="widget-body">
+		<div class="widget-toolbox padding-8 clearfix">
+			<div class="btn-toolbar">
+				<div class="btn-group pull-left">
+<?php
+		if( $t_can_print_reports ) {
+			print_small_button(
+				'print_all_bug_page.php' . $t_filter_param,
+				lang_get( 'print_all_bug_page_link' )
+			);
+		}
+		if( $t_can_export_issues ) {
+			print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
+			print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
+		}
+		if( $t_can_view_summary ) {
+			print_small_button( $t_summary_link, lang_get( 'summary_link' ) );
+		}
+
+		echo $t_plugin_menu_items;
+?>
+				</div>
+<?php
+		if( $t_page_number_links ) {
+?>
+				<div class="btn-group pull-right">
+					<?php echo $t_page_number_links ?>
+				</div>
+<?php
+		}
+?>
+			</div>
 		</div>
 	</div>
-</div>
+<?php
+	}
+?>
 
 <div class="widget-main no-padding">
 	<div class="table-responsive checkbox-range-selection">
@@ -252,15 +283,11 @@ write_bug_rows( $t_rows );
 ?>
 			</div>
 			<div class="btn-group pull-right">
-				<?php
-					$t_tmp_filter_key = filter_get_temporary_key( $t_filter );
-					print_page_links('view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $t_tmp_filter_key );
-				?>
+				<?php echo $t_page_number_links ?>
 			</div>
 <?php # -- ====================== end of MASS BUG MANIPULATION ========================= -- ?>
 </div>
 
-</div>
 </div>
 </div>
 </form>
