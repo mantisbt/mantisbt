@@ -67,8 +67,8 @@
 		<varlistentry>
 			<term>$g_print_reports_threshold</term>
 			<listitem>
-				<para>Access level required to print reports from 
-					MantisBT (HTML and Word). 
+				<para>Grants users access to the Print Reports functionality
+					(Word/HTML) from the View Issues page.
 					The default value is VIEWER.
 				</para>
 			</listitem>
@@ -76,8 +76,8 @@
 		<varlistentry>
 			<term>$g_export_issues_threshold</term>
 			<listitem>
-				<para>Access level required to export issues from 
-					MantisBT to formats like CSV and Excel. 
+				<para>Access level required to export issues to CSV and Excel
+					formats from the View Issues page.
 					The default value is VIEWER.
 				</para>
 			</listitem>
