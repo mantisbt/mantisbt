@@ -29,6 +29,8 @@ tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px;
 #buglist .column-additional-information
 	{ text-align: left; }
 
+.sticky-separator { background-color: lightgrey;}
+
 /* manage_plugin_page.php */
 span.dependency_dated		{ color: maroon; }
 span.dependency_met			{ color: green; }

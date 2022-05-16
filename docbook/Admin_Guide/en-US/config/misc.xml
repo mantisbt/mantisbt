@@ -65,6 +65,24 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_print_reports_threshold</term>
+			<listitem>
+				<para>Grants users access to the Print Reports functionality
+					(Word/HTML) from the View Issues page.
+					The default value is UPDATER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_export_issues_threshold</term>
+			<listitem>
+				<para>Access level required to export issues to CSV and Excel
+					formats from the View Issues page.
+					The default value is VIEWER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_allow_reporter_close</term>
 			<listitem>
 				<para>Allow reporters to close the bugs they reported.</para>

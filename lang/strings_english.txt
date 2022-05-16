@@ -789,6 +789,7 @@ $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_limit_view_unless_threshold_option = 'View other users\' issues (if not set, access will be limited to issues reported, handled, or monitored by the user)';
+$s_export_issues = 'Export issues';
 
 # manage_config_revert_page
 $s_config_delete_sure = 'Are you sure you want to delete the settings for %1$s in project %2$s?';

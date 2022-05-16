@@ -54,6 +54,8 @@ require_api( 'utility_api.php' );
 
 auth_ensure_user_authenticated();
 
+access_ensure_project_level( config_get( 'export_issues_threshold' ) );
+
 $f_export = gpc_get_string( 'export', '' );
 
 helper_begin_long_process();

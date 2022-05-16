@@ -2751,7 +2751,6 @@ $g_view_bug_threshold = VIEWER;
 
 /**
  * Access level needed to monitor bugs.
- * Look in the constant_inc.php file if you want to set a different value.
  * @global integer $g_monitor_bug_threshold
  */
 $g_monitor_bug_threshold = REPORTER;
@@ -2765,7 +2764,6 @@ $g_show_monitor_list_threshold = DEVELOPER;
 /**
  * Access level needed to add other users to the list of users monitoring
  * a bug.
- * Look in the constant_inc.php file if you want to set a different value.
  * This setting should not be lower than $g_show_monitor_list_threshold.
  * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_add_others_bug_threshold
@@ -2775,7 +2773,6 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 /**
  * Access level needed to delete other users from the list of users
  * monitoring a bug.
- * Look in the constant_inc.php file if you want to set a different value.
  * This setting should not be lower than $g_show_monitor_list_threshold.
  * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_delete_others_bug_threshold
@@ -2783,8 +2780,26 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 $g_monitor_delete_others_bug_threshold = DEVELOPER;
 
 /**
+ * Access level required to print issue reports.
+ *
+ * Grants users access to the Print Reports functionality (Word/HTML) from the
+ * View Issues page (print_all_bug_page.php and print_all_bug_page_word.php).
+ *
+ * @global integer $g_print_reports_threshold
+ */
+$g_print_reports_threshold = UPDATER;
+
+/**
+ * Access level required to export issues.
+ *
+ * Lets user export issues to CSV and Excel from the View Issues page.
+ *
+ * @global integer $g_export_issues_threshold
+ */
+$g_export_issues_threshold = VIEWER;
+
+/**
  * access level needed to view private bugs
- * Look in the constant_inc.php file if you want to set a different value
  * @global integer $g_private_bug_threshold
  */
 $g_private_bug_threshold = DEVELOPER;
@@ -2806,7 +2821,6 @@ $g_update_bug_assign_threshold = '%handle_bug_threshold%';
 
 /**
  * access level needed to view private bugnotes
- * Look in the constant_inc.php file if you want to set a different value
  * @global integer $g_private_bugnote_threshold
  */
 $g_private_bugnote_threshold = DEVELOPER;
@@ -4748,6 +4762,7 @@ $g_public_config_names = array(
 	'enable_sponsorship',
 	'eta_enum_string',
 	'excel_columns',
+	'export_issues_threshold',
 	'fallback_language',
 	'favicon_image',
 	'file_download_content_type_overrides',
@@ -4824,6 +4839,7 @@ $g_public_config_names = array(
 	'preview_max_width',
 	'preview_text_extensions',
 	'print_issues_page_columns',
+	'print_reports_threshold',
 	'priority_enum_string',
 	'priority_significant_threshold',
 	'private_bug_threshold',
