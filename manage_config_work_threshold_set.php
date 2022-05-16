@@ -204,6 +204,8 @@ if( capability_exists( 'limit_reporters' ) ) {
 if( capability_exists( 'limit_view_unless_threshold' ) ) {
 	set_capability_row( 'limit_view_unless_threshold' );
 }
+set_capability_row( 'print_reports_threshold' );
+set_capability_row( 'export_issues_threshold' );
 
 # Notes
 set_capability_row( 'add_bugnote_threshold' );
