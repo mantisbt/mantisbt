@@ -406,6 +406,8 @@ if( ON == config_get( 'limit_reporters', null, ALL_USERS, ALL_PROJECTS ) ) {
 } else {
 	get_capability_row( lang_get( 'limit_view_unless_threshold_option' ), 'limit_view_unless_threshold' );
 }
+get_capability_row( lang_get( 'print_all_bug_page_link' ), 'print_reports_threshold' );
+get_capability_row( lang_get( 'export_issues' ), 'export_issues_threshold' );
 get_section_end();
 
 # Notes
