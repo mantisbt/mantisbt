@@ -57,6 +57,7 @@
  * @author Rezonansowy
  * @author Sp5uhe
  * @author Stojex
+ * @author Strebski
  * @author Szmyk
  * @author Tszypowski
  * @author Ty221
@@ -358,7 +359,12 @@ $s_prefs_updated_msg = 'Preferencje zostały zaktualizowane...';
 $s_select_profile = 'Wybierz profil';
 $s_add_profile = 'Dodaj profil';
 $s_edit_profile = 'Edytuj profil';
+$s_update_profile = 'Zaktualizuj profil';
 $s_delete_profile = 'Usuń profil';
+$s_delete_profile_confirm_msg = 'Czy na pewno chcesz usunąć profil „%1$s”?';
+$s_global_profile = 'Profil globalny';
+$s_default_profile = 'Domyślny profil';
+$s_profile_description = 'Opis systemu';
 $s_my_sponsorship = 'Moje sponsorowanie';
 $s_update_sponsorship_button = 'Zmień stan płatności';
 $s_no_sponsored = 'Nie znaleziono sponsorowanych zgłoszeń przypisanych Tobie.';
@@ -419,6 +425,7 @@ $s_reminder_sent_none = 'Przypomnienia nie mogły zostać wysłane';
 $s_reminder_list_truncated = 'lista odbiorców skrócona';
 $s_bug_send_button = 'Wyślij';
 $s_reminder = 'Przypomnienie';
+$s_reminder_mentions = 'Możesz teraz wspomnieć o użytkownikach, aby przekazywać im powiadomienia, zamiast korzystać z funkcji przypomnień. Na przykład inni mogą o Tobie wspomnieć, pisząc %1s w sprawach i notatkach, a Ty otrzymasz powiadomienie e-mailem.';
 $s_reminder_explain = 'Ten komentarz zostanie wysłany do osób obserwujących zgłoszenie.';
 $s_reminder_monitor = 'Następujący odbiorcy zaczną obserwować zgłoszenie. Mogą zrezygnować za pomocą przycisku zakończenia obserwowania.';
 $s_reminder_store = 'Komentarz zostanie zapisany razem ze zgłoszeniem.';
@@ -651,6 +658,7 @@ $s_plugin = 'Wtyczka';
 $s_plugins_installed = 'Zainstalowane wtyczki';
 $s_plugins_available = 'Dostępne wtyczki';
 $s_plugin_description = 'Opis';
+$s_plugin_problem_description = 'Opis problemu';
 $s_plugin_author = 'Autor: %1$s';
 $s_plugin_url = 'Strona internetowa:';
 $s_plugin_depends = 'Zależności';
@@ -661,6 +669,7 @@ $s_plugin_actions = 'Działania';
 $s_plugin_install = 'Instaluj';
 $s_plugin_upgrade = 'Instaluj nowszą wersję';
 $s_plugin_uninstall = 'Odinstaluj';
+$s_plugin_manual_fix = 'Wymagana ręczna interwencja';
 $s_plugin_uninstall_message = 'Czy jesteś pewien, że chcesz odinstalować wtyczkę „%1$s”?';
 $s_plugin_key_label = 'Klucz:';
 $s_plugin_key_met = 'wtyczka gotowa';

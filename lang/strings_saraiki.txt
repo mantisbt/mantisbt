@@ -38,9 +38,11 @@
  * @ingroup Language
  * @file
  *
+ * @author Ajeje Brazorf
  * @author Saraiki
  */
 
+$s_directionality = 'rtl';
 $s_actiongroup_menu_copy = 'نقل کرو';
 $s_actiongroup_menu_assign = 'سپرد کرو';
 $s_actiongroup_menu_update_priority = 'ترجییح کوں تازہ کرو';
