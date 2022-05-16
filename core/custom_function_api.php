@@ -406,22 +406,36 @@ function custom_function_default_print_column_value( $p_column, BugData $p_bug, 
 
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
-		printf( $t_column_start, custom_field_css_name( $t_custom_field ) );
-
+		$t_class = custom_field_css_name( $t_custom_field );
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
+
 		if( $t_field_id === false ) {
-			echo '@', $t_custom_field, '@';
+			$t_value = '@' . $t_custom_field . '@';
+			$t_is_linked = false;
 		} else {
 			$t_issue_id = $p_bug->id;
 			$t_project_id = $p_bug->project_id;
+			$t_is_linked = custom_field_is_linked( $t_field_id, $t_project_id );
 
-			if( custom_field_is_linked( $t_field_id, $t_project_id ) ) {
+			if( $t_is_linked ) {
+				$t_value = false;
 				$t_def = custom_field_get_definition( $t_field_id );
-				print_custom_field_value( $t_def, $t_field_id, $t_issue_id );
+				if( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+					# Add a class to identify textarea custom fields, see #27114
+					$t_class .= ' cftype-textarea';
+				}
 			} else {
 				# field is not linked to project
-				echo $t_column_empty;
+				$t_value = $t_column_empty;
 			}
+		}
+
+		printf( $t_column_start, $t_class );
+		if( $t_is_linked ) {
+			/** @noinspection PhpUndefinedVariableInspection */
+			print_custom_field_value( $t_def, $t_field_id, $t_issue_id );
+		} else {
+			echo $t_value;
 		}
 		echo $t_column_end;
 	} else {

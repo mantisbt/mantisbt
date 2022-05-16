@@ -176,11 +176,11 @@ table {
 }
 
 /* Breaking lines when needed */
-[class*="description"],
-[class*="steps-to-reproduce"],
-[class*="additional-information"],
-[class*="bugnote"],
-[class*="custom-field"] {
+td.column-description, td.bug-description,
+td.column-steps-to-reproduce, td.bug-steps-to-reproduce,
+td.column-additional-information, td.bug-additional-information,
+td.bugnote-note, td.column-notes,
+td.cftype-textarea {
     overflow-wrap: anywhere;
 }
 
