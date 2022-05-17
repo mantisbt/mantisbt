@@ -420,10 +420,22 @@ function custom_function_default_print_column_value( $p_column, BugData $p_bug, 
 			if( $t_is_linked ) {
 				$t_value = false;
 				$t_def = custom_field_get_definition( $t_field_id );
-				if( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ) {
-					# Add a class to identify textarea custom fields, see #27114
-					$t_class .= ' cftype-textarea';
+
+				# Build a map of CF types to corresponding label
+				static $s_cf_types;
+				if( $s_cf_types === null ) {
+					$s_cf_types = MantisEnum::getAssocArrayIndexedByValues(
+						config_get( 'custom_field_type_enum_string' )
+					);
+					# Make sure the type's label is a valid CSS identifier
+					array_walk( $s_cf_types,
+						function( &$t_val ) {
+							$t_val = preg_replace( '/[^a-zA-Z0-9_-]+/', '-', $t_val );
+						}
+					);
 				}
+				# Add CF type CSS class
+				$t_class .= ' cftype-' . $s_cf_types[$t_def['type']];
 			} else {
 				# field is not linked to project
 				$t_value = $t_column_empty;
