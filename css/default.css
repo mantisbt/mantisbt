@@ -26,7 +26,9 @@ tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px;
 #buglist .column-description,
 #buglist .column-notes,
 #buglist .column-steps-to-reproduce,
-#buglist .column-additional-information
+#buglist .column-additional-information,
+#buglist .cftype-string,
+#buglist .cftype-textarea
 	{ text-align: left; }
 
 .sticky-separator { background-color: lightgrey;}
