@@ -554,13 +554,6 @@ define( 'CUSTOM_FIELD_DATE_ON', 5 );
 define( 'CUSTOM_FIELD_DATE_AFTER', 6 );
 define( 'CUSTOM_FIELD_DATE_ONORAFTER', 7 );
 
-# custom field types
-define( 'CUSTOM_FIELD_TYPE_BUG', 0 );
-define( 'CUSTOM_FIELD_TYPE_USER', 1 );
-define( 'CUSTOM_FIELD_TYPE_BUGNOTE', 2 );
-define( 'CUSTOM_FIELD_TYPE_PROJECT', 3 );
-define( 'CUSTOM_FIELD_TYPE_FILE', 4 );
-
 # display types for $g_display_errors
 define( 'DISPLAY_ERROR_HALT', 'halt' );
 define( 'DISPLAY_ERROR_INLINE', 'inline' );
