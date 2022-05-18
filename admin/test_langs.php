@@ -162,7 +162,7 @@ class LangCheckFile {
 
 		/** @noinspection PhpUndefinedVariableInspection */
 		printf( '<td class="%s">%s</td>', $t_class, $t_messages );
-		echo '</tr>';
+		echo '</tr>' . PHP_EOL;
 	}
 
 	/**
@@ -478,12 +478,13 @@ function checkplugins() {
 		print_info( count( $t_plugins ) . " Plugins found" );
 	} catch( UnexpectedValueException $e ) {
 		print_fail( $e->getMessage() );
-		echo '</tr>';
+		echo '</tr>' . PHP_EOL;
 		return;
 	}
-	echo '</tr>';
+	echo '</tr>' . PHP_EOL;
 
 	foreach( $t_plugins as $t_plugin => $t_path ) {
+		echo PHP_EOL;
 		echo '<tr><th colspan="2">';
 		echo "Checking language files for plugin <strong>$t_plugin</strong>";
 		echo '</th></tr>';
@@ -556,13 +557,13 @@ function get_lang_files( $p_path ) {
  */
 function checklangdir( $p_path ) {
 	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . '/lang/';
-	echo '<tr><td>';
+	echo PHP_EOL . '<tr><td>';
 	echo "Retrieving language files from '$t_path'";
 	echo '</td>';
 
 	if( !is_dir( $t_path ) ) {
 		print_info( "Directory does not exist" );
-		echo '</tr>';
+		echo '</tr>' . PHP_EOL;
 		return;
 	} else {
 		try {
@@ -570,12 +571,12 @@ function checklangdir( $p_path ) {
 			print_info( count( $t_lang_files ) . " files found" );
 		} catch( UnexpectedValueException $e ) {
 			print_fail( $e->getMessage() );
-			echo '</tr>';
+			echo '</tr>' . PHP_EOL;
 			return;
 		}
 	}
 
-	echo '</tr>';
+	echo '</tr>' . PHP_EOL;
 
 	# Check reference English language file
 	$t_key = array_search( LangCheckFile::BASE, $t_lang_files );
