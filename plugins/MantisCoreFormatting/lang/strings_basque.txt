@@ -44,4 +44,4 @@
 $s_plugin_format_title = 'MantisBT Formatua';
 $s_plugin_format_description = 'Testu prozesatzaile eta formatu plugin ofiziala.';
 $s_plugin_format_config = 'Konfigurazioa';
-$s_plugin_format_process_buglinks_info = 'Zure konfigurazioak <em>Arazoa</em> etiketa "<literal>%s</literal>" moduan definitzen du eta <em>Arazo Oharra</em> etiketa "<literal>%s</literal>" moduan';
+$s_plugin_format_process_buglinks_info = 'Zure konfigurazioak <em>Arazoa</em> etiketa "%s" moduan definitzen du eta <em>Arazo Oharra</em> etiketa "%s" moduan';
