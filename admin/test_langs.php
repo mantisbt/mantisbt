@@ -254,12 +254,14 @@ class LangCheckFile {
 						break;
 					case '[':
 						if( $t_last_token != T_VARIABLE ) {
+							$this->logFail( "Unexpected opening square bracket '['", $t_line);
 							$t_pass = false;
 						}
 						$t_variable_array = true;
 						break;
 					case ']':
 						if( !$t_expect_end_array ) {
+							$this->logFail( "Unexpected closing square bracket ']'", $t_line);
 							$t_pass = false;
 						}
 						$t_expect_end_array = false;
@@ -276,7 +278,7 @@ class LangCheckFile {
 						if( $t_last_token == T_CONSTANT_ENCAPSED_STRING ) {
 							$t_two_part_string = true;
 						} else {
-							$this->logFail( "string concatenation found at unexpected location", $t_line );
+							$this->logFail( "String concatenation found at unexpected location", $t_line );
 							$t_pass = false;
 						}
 						break;
