@@ -41,6 +41,7 @@
  * @author Alvaro Vidal-Abarca
  * @author Bernat
  * @author BroOk
+ * @author Dregad
  * @author Dtamajon
  * @author Fitoschido
  * @author Jaumeortola
@@ -985,7 +986,7 @@ $s_replace_relationship_button = 'Reemplaça';
 $s_relationship_with_parent = 'Relació amb la incidència pare';
 $s_delete_relationship_sure_msg = 'Estar segur que desitja eliminar aquesta relació?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'No tots els fills d\'aquesta incidència estan resolts o tancats.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '< strong >Atenció:</strong >. No tots els fills d\'aquesta incidència estan resolts o tancats.<br />Abans de <strong>tancar/resoldre</strong> una incidència pare, totes les seves incidències filles han d\'estar resoltes o tancades.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>Atenció:</strong>. No tots els fills d\'aquesta incidència estan resolts o tancats.<br />Abans de <strong>tancar/resoldre</strong> una incidència pare, totes les seves incidències filles han d\'estar resoltes o tancades.';
 $s_create_child_bug_button = 'Clon';
 $s_bug_cloned_to = 'Incidència clonada';
 $s_bug_created_from = 'Incidència generada des de';

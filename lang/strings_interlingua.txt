@@ -619,6 +619,7 @@ $s_readonly_status = 'Stato in que un problema deveni immodificabile';
 $s_reopen_status = 'Stato assignate a un problema reaperite';
 $s_reopen_resolution = 'Resolution assignate a un problema reaperite';
 $s_limit_view_unless_threshold_option = 'Vider le problemas de altere usatores (si non definite, le accesso essera limitate al problemas reportate, gerite, o sequite per le usator)';
+$s_export_issues = 'Exportar problemas';
 $s_config_delete_sure = 'Es tu secur de voler deler le configuration pro %1$s in le projecto %2$s?';
 $s_delete_config_button = 'Deler configuration';
 $s_configuration_report = 'Reporto de configuration';
