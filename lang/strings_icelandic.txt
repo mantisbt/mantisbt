@@ -39,6 +39,7 @@
  * @file
  *
  * @author Atrol
+ * @author LoveIceLang
  * @author Snævar
  * @author Sveinn í Felli
  */
@@ -609,6 +610,7 @@ $s_resolved_status = 'Staða þar sem verkbeiðni er álitin leyst';
 $s_readonly_status = 'Staða þar sem verkbeiðni verður aðeins lesanleg';
 $s_reopen_status = 'Staða sem enduropnuð verkbeiðni fær';
 $s_reopen_resolution = 'Úrlausn sem enduropnaðar verkbeiðnir fá';
+$s_export_issues = 'Flytja út vandamál';
 $s_config_delete_sure = 'Ertu viss um að vilja eyða stillingum fyrir %1$s í verkefninu %2$s?';
 $s_delete_config_button = 'Eyða stillingum';
 $s_configuration_report = 'Skýrsla um stillingar';
