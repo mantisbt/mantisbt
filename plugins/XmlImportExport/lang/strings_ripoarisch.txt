@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dregad
  * @author Purodha
  */
 
@@ -62,4 +63,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Donn dä Lengk affschallde';
 $s_plugin_XmlImportExport_fallback = 'Wat donn, wann et Ömnummereeere nit paß?';
 $s_plugin_XmlImportExport_fallback_category = 'Äsaz (Shtandatt) Zoot:';
 $s_plugin_XmlImportExport_keep_same_category = 'Versöhk, desellve Zoot beizebehaale';
-$s_plugin_XmlImportExport_error_no_xml = 'mer künne de Zohsazprojramme <code lang="en">xmlreader</code> un <code lang="en">xmlwriter</code> nit fenge';
+$s_plugin_XmlImportExport_error_no_xml = 'mer künne de Zohsazprojramme xmlreader un xmlwriter nit fenge';

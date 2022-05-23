@@ -500,7 +500,7 @@ $s_hide_content = 'Masquer le contenu';
 $s_show_content = 'Afficher le contenu';
 $s_file_icon_description = 'icône de fichier %1$s';
 $s_unknown_file_extension = 'inconnu';
-$s_webmaster_contact_information = 'Contactez <a href="mailto:%1$s"title ="Contacter le webmaster par courriel.">l’administrateur</a> pour une assistance.';
+$s_webmaster_contact_information = 'Contactez <a href="mailto:%1$s" title="Contacter le webmaster par courriel.">l’administrateur</a> pour une assistance.';
 $s_total_queries_executed = 'Requêtes exécutées au total : %1$d';
 $s_unique_queries_executed = 'Requêtes uniques exécutées : %1$d';
 $s_total_query_execution_time = 'Temps d’exécution total de la requête : %1$s secondes';
