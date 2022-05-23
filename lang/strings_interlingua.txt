@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dregad
  * @author Macofe
  * @author McDutchie
  */
@@ -619,6 +620,7 @@ $s_readonly_status = 'Stato in que un problema deveni immodificabile';
 $s_reopen_status = 'Stato assignate a un problema reaperite';
 $s_reopen_resolution = 'Resolution assignate a un problema reaperite';
 $s_limit_view_unless_threshold_option = 'Vider le problemas de altere usatores (si non definite, le accesso essera limitate al problemas reportate, gerite, o sequite per le usator)';
+$s_export_issues = 'Exportar problemas';
 $s_config_delete_sure = 'Es tu secur de voler deler le configuration pro %1$s in le projecto %2$s?';
 $s_delete_config_button = 'Deler configuration';
 $s_configuration_report = 'Reporto de configuration';
@@ -954,8 +956,8 @@ $s_bug_status_to_button = 'Cambiar stato in:';
 $s_reopen_bug_button = 'Reaperir';
 $s_attached_files = 'Files annexate';
 $s_publish = 'Publicar';
-$s_browser_does_not_support_audio = 'Tu navigator non supporta le etiquetta <tt>audio</tt>.';
-$s_browser_does_not_support_video = 'Tu navigator non supporta le etiquetta <tt>video</tt>.';
+$s_browser_does_not_support_audio = 'Tu navigator non supporta le etiquetta audio.';
+$s_browser_does_not_support_video = 'Tu navigator non supporta le etiquetta video.';
 $s_bug_view_title = 'Vider detalios del problema';
 $s_no_users_monitoring_bug = 'Nulle usator survelia iste problema.';
 $s_users_monitoring_bug = 'Usatores qui survelia iste problema';

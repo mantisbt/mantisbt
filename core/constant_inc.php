@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * MantisBT Constants
- *
+ * @noinspection PhpDefineCanBeReplacedWithConstInspection
  */
 
 /**
@@ -384,7 +384,6 @@ define( 'ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW', 1704 );
 define( 'ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL', 1705 );
 
 # ERROR RELATIONSHIP
-define( 'ERROR_RELATIONSHIP_ALREADY_EXISTS', 1800 );  # TODO: remove once no longer used in lang files
 define( 'ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW', 1801 );
 define( 'ERROR_RELATIONSHIP_NOT_FOUND', 1802 );
 define( 'ERROR_RELATIONSHIP_SAME_BUG', 1803 );
@@ -433,10 +432,6 @@ define( 'ERROR_COLUMNS_DUPLICATE', 2600 );
 define( 'ERROR_COLUMNS_INVALID', 2601 );
 
 # ERROR_SESSION_*
-define( 'ERROR_SESSION_HANDLER_INVALID', 2700 );
-# ERROR_SESSION_HANDLER_INVALID is no longer used in code
-# but can't be removed as long as it's used in one of the language files
-# for $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID]
 define( 'ERROR_SESSION_VAR_NOT_FOUND', 2701 );
 define( 'ERROR_SESSION_NOT_VALID', 2702 );
 
@@ -663,8 +658,8 @@ define( 'FONT_AWESOME_VERSION', '4.7.0' );
 define( 'FONT_AWESOME_HASH', 'sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' );
 
 # Moment & DateTimePicker
-define( 'MOMENT_VERSION', '2.24.0' );
-define( 'MOMENT_HASH', 'sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=' );
+define( 'MOMENT_VERSION', '2.29.3' );
+define( 'MOMENT_HASH', 'sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g==' );
 define( 'DATETIME_PICKER_VERSION', '4.17.47' );
 define( 'DATETIME_PICKER_HASH_JS', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=' );
 define( 'DATETIME_PICKER_HASH_CSS', 'sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=' );

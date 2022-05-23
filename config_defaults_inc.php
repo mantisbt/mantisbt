@@ -92,35 +92,43 @@ $g_dsn = '';
 
 /**
  * Database Table prefix.
+ *
  * The given string is added with an underscore before the base table name,
  * e.g. 'bug' => 'mantis_bug'.
  * To avoid the 30-char limit on identifiers in Oracle (< 12cR2), the prefix
  * should be set to blank or kept as short as possible (e.g. 'm')
+ *
  * @global string $g_db_table_prefix
  */
 $g_db_table_prefix = 'mantis';
 
 /**
  * Database Table suffix.
+ *
  * The given string is added with an underscore after the base table name,
  * e.g. 'bug' => 'bug_table'.
+ * To avoid the 30-char limit on identifiers in Oracle (< 12cR2), the prefix
+ * should be set to blank or kept as short as possible.
  * @see $g_db_table_prefix for size limitation recommendation
+ *
  * @global string $g_db_table_suffix
  */
 $g_db_table_suffix = '_table';
 
 /**
  * Plugin Table prefix.
+ *
  * The given string is added with an underscore between the table prefix and
  * the base table name, and the plugin basename is added after that
  * e.g. 'Example' plugin's table 'foo' => 'mantis_plugin_Example_foo_table'.
  * To avoid the 30-char limit on identifiers in Oracle (< 12cR2), the prefix
- * should be kept as short as possible (e.g. 'plg'); it is however strongly
- * recommended not to use an empty string here.
+ * should be kept as short as possible (e.g. 'plg').
+ * It is strongly recommended not to use an empty string here.
+ *
  * @see $g_db_table_prefix
- * @global string $g_db_table_prefix
+ * @global string $g_db_table_plugin_prefix
  */
-$g_db_table_plugin_prefix	= 'plugin';
+$g_db_table_plugin_prefix = 'plugin';
 
 ####################
 # Folder Locations #
@@ -216,24 +224,29 @@ if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
 		die;
 	}
-	$t_self = filter_var( $_SERVER['SCRIPT_NAME'], FILTER_SANITIZE_STRING );
-	$t_path = str_replace( basename( $t_self ), '', $t_self );
+
+	# Prevent XSS if the path is displayed later on. This is the equivalent of
+	# FILTER_SANITIZE_STRING, which was deprecated in PHP 8.1:
+	# strip tags and null bytes, then encode quotes into HTML entities
+	$t_path = preg_replace( '/\x00|<[^>]*>?/', '', $_SERVER['SCRIPT_NAME'] );
+	$t_path = str_replace( ["'", '"'], ['&#39;', '&#34;'], $t_path );
+
+	$t_path = dirname( $t_path );
 	switch( basename( $t_path ) ) {
 		case 'admin':
-			$t_path = rtrim( dirname( $t_path ), '/\\' ) . '/';
+			$t_path = dirname( $t_path );
 			break;
 		case 'check':		# admin checks dir
 		case 'soap':
 		case 'rest':
-			$t_path = rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/';
+			$t_path = dirname( $t_path, 2 );
 			break;
 		case 'swagger':
-			$t_path = rtrim( dirname( dirname( dirname( $t_path ) ) ), '/\\' ) . '/';
-			break;
-		case '':
-			$t_path = '/';
+			$t_path = dirname( $t_path, 3 );
 			break;
 	}
+	$t_path = rtrim( $t_path, '/\\' ) . '/';
+
 	if( strpos( $t_path, '&#' ) ) {
 		echo 'Can not safely determine $g_path. Please set $g_path manually in ' . $g_config_path . 'config_inc.php';
 		die;
@@ -2738,7 +2751,6 @@ $g_view_bug_threshold = VIEWER;
 
 /**
  * Access level needed to monitor bugs.
- * Look in the constant_inc.php file if you want to set a different value.
  * @global integer $g_monitor_bug_threshold
  */
 $g_monitor_bug_threshold = REPORTER;
@@ -2752,7 +2764,6 @@ $g_show_monitor_list_threshold = DEVELOPER;
 /**
  * Access level needed to add other users to the list of users monitoring
  * a bug.
- * Look in the constant_inc.php file if you want to set a different value.
  * This setting should not be lower than $g_show_monitor_list_threshold.
  * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_add_others_bug_threshold
@@ -2762,7 +2773,6 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 /**
  * Access level needed to delete other users from the list of users
  * monitoring a bug.
- * Look in the constant_inc.php file if you want to set a different value.
  * This setting should not be lower than $g_show_monitor_list_threshold.
  * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_delete_others_bug_threshold
@@ -2770,8 +2780,26 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 $g_monitor_delete_others_bug_threshold = DEVELOPER;
 
 /**
+ * Access level required to print issue reports.
+ *
+ * Grants users access to the Print Reports functionality (Word/HTML) from the
+ * View Issues page (print_all_bug_page.php and print_all_bug_page_word.php).
+ *
+ * @global integer $g_print_reports_threshold
+ */
+$g_print_reports_threshold = UPDATER;
+
+/**
+ * Access level required to export issues.
+ *
+ * Lets user export issues to CSV and Excel from the View Issues page.
+ *
+ * @global integer $g_export_issues_threshold
+ */
+$g_export_issues_threshold = VIEWER;
+
+/**
  * access level needed to view private bugs
- * Look in the constant_inc.php file if you want to set a different value
  * @global integer $g_private_bug_threshold
  */
 $g_private_bug_threshold = DEVELOPER;
@@ -2793,7 +2821,6 @@ $g_update_bug_assign_threshold = '%handle_bug_threshold%';
 
 /**
  * access level needed to view private bugnotes
- * Look in the constant_inc.php file if you want to set a different value
  * @global integer $g_private_bugnote_threshold
  */
 $g_private_bugnote_threshold = DEVELOPER;
@@ -3213,11 +3240,30 @@ $g_user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,18})?)$/i';
 $g_default_manage_tag_prefix = 'ALL';
 
 /**
- * CSV Export
- * Set the csv separator
+ * The separator to use for CSV exports.
  * @global string $g_csv_separator
  */
 $g_csv_separator = ',';
+
+/**
+ * Protection against CSV Injection.
+ *
+ * When this setting is ON (default), any data that could be interpreted as a
+ * formula by a spreadsheet program such as Excel (i.e. starting with `=`, `@`,
+ * `-` or `+`), will be prefixed with a tab character (\t) in order to prevent
+ * CSV injection.
+ *
+ * Sometimes this may not be appropriate (e.g. if the CSV needs to be consumed
+ * programmatically). In that case, $g_csv_injection_protection can be set to OFF,
+ * resulting in raw data to be exported.
+ *
+ * Setting this to OFF is a security risk. An attacker could upload a crafted
+ * CSV file containing formulas that will be executed when opened with Excel,
+ * as described in this article {@link http://georgemauer.net/2017/10/07/csv-injection.html}.
+ *
+ * @global string $g_csv_injection_protection
+ */
+$g_csv_injection_protection = ON;
 
 /**
  * The threshold required for users to be able to manage configuration of a project.
@@ -3295,6 +3341,16 @@ $g_cookie_path = '/';
 $g_cookie_domain = '';
 
 /**
+ * Specifies the SameSite attribute to use for the MantisBT cookies.
+ *
+ * Valid values are Strict (default), Lax or None.
+ * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+ *
+ * @global string $g_cookie_samesite
+ */
+$g_cookie_samesite = 'Strict';
+
+/**
  * Prefix for all MantisBT cookies
  * This should be an identifier which does not include spaces or periods,
  * and should be unique per MantisBT installation, especially if
@@ -3322,6 +3378,13 @@ $g_project_cookie = '%cookie_prefix%_PROJECT_COOKIE';
  * @global string $g_view_all_cookie
  */
 $g_view_all_cookie = '%cookie_prefix%_VIEW_ALL_COOKIE';
+
+/**
+ * Collapse settings cookie.
+ * Stores the open/closed state of the collapsible sections.
+ * @global string $g_collapse_settings_cookie
+ */
+$g_collapse_settings_cookie = '%cookie_prefix%_collapse_settings';
 
 /**
  * Stores the filter criteria for the Manage User page
@@ -4435,10 +4498,12 @@ $g_global_settings = array(
 	'bug_list_cookie',
 	'cdn_enabled',
 	'class_path',
+	'collapse_settings_cookie',
 	'compress_html',
 	'cookie_domain',
 	'cookie_path',
 	'cookie_prefix',
+	'cookie_samesite',
 	'cookie_time_length',
 	'copyright_statement',
 	'core_path',
@@ -4599,6 +4664,7 @@ $g_public_config_names = array(
 	'cdn_enabled',
 	'change_view_status_threshold',
 	'check_mx_record',
+	'collapse_settings_cookie',
 	'complete_date_format',
 	'compress_html',
 	'cookie_prefix',
@@ -4696,6 +4762,7 @@ $g_public_config_names = array(
 	'enable_sponsorship',
 	'eta_enum_string',
 	'excel_columns',
+	'export_issues_threshold',
 	'fallback_language',
 	'favicon_image',
 	'file_download_content_type_overrides',
@@ -4772,6 +4839,7 @@ $g_public_config_names = array(
 	'preview_max_width',
 	'preview_text_extensions',
 	'print_issues_page_columns',
+	'print_reports_threshold',
 	'priority_enum_string',
 	'priority_significant_threshold',
 	'private_bug_threshold',

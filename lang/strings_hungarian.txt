@@ -41,6 +41,7 @@
  * @author --szabi--
  * @author Csega
  * @author Dj
+ * @author Dregad
  * @author Glanthor Reviol
  * @author Hanna Tardos
  * @author Leiric
@@ -228,7 +229,7 @@ Ha Ön kérte ezt a megerősítést, látogassa meg a következő címet a jelsz
 $s_reset_request_admin_msg = 'A jelszava visszaállításra került. Új beállításához keresse fel a következő URL-t:';
 $s_reset_request_in_progress_msg = 'Ha megadja a helyes felhasználónevét és e-mail címét, azonnal küldünk egy megerősítő üzenetet. Mihelyt megkapja, kövesse a benne található utasításokat a jelszavának megváltoztatásához.';
 $s_email_notification_title_for_status_bug_new = 'A következő ügy ÚJ állapotba került (újra)';
-$s_email_notification_title_for_status_bug_feedback = 'A következő ügy VISSZAJELZÉSÉRE vár.';
+$s_email_notification_title_for_status_bug_feedback = 'A következő ügy VISSZAJELZÉSRE vár.';
 $s_email_notification_title_for_status_bug_acknowledged = 'A következő ügyet NYUGTÁZTÁK.';
 $s_email_notification_title_for_status_bug_confirmed = 'A következő ügyet JÓVÁHAGYTÁK.';
 $s_email_notification_title_for_status_bug_assigned = 'A következő ügyet HOZZÁRENDELTÉK valakihez.';
@@ -523,7 +524,7 @@ $s_archives = 'Archívum';
 $s_rss = 'RSS';
 $s_site_information = 'Oldal információk';
 $s_mantis_version = 'MantisBT verzió';
-$s_schema_version = 'Séma-verzió';
+$s_schema_version = 'Adatbázisséma-verzió';
 $s_site_path = 'Oldal elérési útja';
 $s_core_path = 'Mag elérési útja';
 $s_plugin_path = 'Bővítmények elérési útja';
@@ -542,18 +543,18 @@ $s_default_filter = 'Alapértelmezett szűrő';
 $s_create_filter_link = 'Permalink létrehozása';
 $s_create_short_link = 'Rövid hivatkozás létrehozása';
 $s_filter_permalink = 'Íme az éppen beállított szűrőhöz tartozó permalink:';
-$s_manage_users_link = 'Felhasználók kezelése';
-$s_manage_projects_link = 'Projektek kezelése';
-$s_manage_custom_field_link = 'Egyéni mezők kezelése';
-$s_manage_global_profiles_link = 'Globális profilok kezelése';
-$s_manage_plugin_link = 'Bővítmények kezelése';
+$s_manage_users_link = 'Felhasználók';
+$s_manage_projects_link = 'Projektek';
+$s_manage_custom_field_link = 'Egyéni mezők';
+$s_manage_global_profiles_link = 'Globális profilok';
+$s_manage_plugin_link = 'Bővítmények';
 $s_permissions_summary_report = 'Engedélyek megjelenítése';
-$s_manage_config_link = 'Konfiguráció kezelése';
+$s_manage_config_link = 'Konfiguráció';
 $s_manage_threshold_config = 'Munkafolyamat határértékei';
 $s_manage_email_config = 'E-mail emlékeztetők';
 $s_manage_workflow_config = 'Munkafolyamat átmenetei';
 $s_manage_workflow_graph = 'Munkafolyamat-ábra';
-$s_manage_tags_link = 'Címkék kezelése';
+$s_manage_tags_link = 'Címkék';
 $s_create_new_account_link = 'Új felhasználó létrehozása';
 $s_projects_link = 'Projektek';
 $s_documentation_link = 'Dokumentáció';
@@ -628,6 +629,7 @@ $s_readonly_status = 'A csak olvashatóvá vált ügyekhez beállítandó állap
 $s_reopen_status = 'Az újranyitott ügyekhez beállítandó állapot';
 $s_reopen_resolution = 'Az újranyitott ügyekhez beállítandó döntés';
 $s_limit_view_unless_threshold_option = 'Más felhasználók ügyeinek megtekintése (ha nincs megadva, akkor az ügyek csak a felhasználó által bejelentett, kezelt és figyelt ügyekre korlátozódnak)';
+$s_export_issues = 'Ügyek exportálása';
 $s_config_delete_sure = 'Valóban törölni szeretné a(z) %1$s beállításait a(z) %2$s projektben?';
 $s_delete_config_button = 'Beállítások törlése';
 $s_configuration_report = 'Konfigurációs jelentés';
@@ -1244,7 +1246,7 @@ $s_timeline_issue_note_created = '<span class="username">%1$s</span> megjegyzés
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> figyeli a(z) <span class="issue_id">%2$s</span> ügyet';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> már nem figyeli a(z) <span class="issue_id">%2$s</span> ügyet';
 $s_timeline_issue_tagged = '<span class="username">%1$s</span> megcímkézte a(z) <span class="issue_id">%2$s</span> ügyet a(z) <span class="tag_name">%3$s</span> címkével';
-$s_timeline_issue_untagged = '<span class="username">%1$s</span> eltávolította a(z) <span class="tag_name>%3$s</span> címkét a(z) <span class="issue_id">%2$s</span> ügyről';
+$s_timeline_issue_untagged = '<span class="username">%1$s</span> eltávolította a(z) <span class="tag_name">%3$s</span> címkét a(z) <span class="issue_id">%2$s</span> ügyről';
 $s_timeline_issue_resolved = '<span class="username">%1$s</span> megoldotta a(z) <span class="issue_id">%2$s</span> ügyet';
 $s_timeline_issue_closed = '<span class="username">%1$s</span> lezárta a(z) <span class="issue_id">%2$s</span> ügyet';
 $s_timeline_issue_reopened = '<span class="username">%1$s</span> újranyitotta a(z) <span class="issue_id">%2$s</span> ügyet';
@@ -1268,6 +1270,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ez egy védett fiók. A kért művelet
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Hozzáférés megtagadva.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Sikertelen fájlfeltöltés: a MantisBT nem tudja olvasni a fájlt. Ellenőrizze a projekt beállításait.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Sikertelen fájlfeltöltés: a fájl mérete valószínűleg nagyobb, mint amit a jelenlegi PHP beállítások megengednek.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'A(z) „%1$s” fájlnév túl hosszú.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Egy ezen oldalhoz (%1$s) szükséges paraméter hiányzik.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'A felhasználónév már foglalt. Lépjen vissza, és válasszon másikat.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Az e-mail cím már foglalt. Lépjen vissza, és válasszon másikat.';
@@ -1399,6 +1402,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Elérte a megengedett tevékenységkorlá
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'A(z) „%1$s” mező legfeljebb %2$d karakter hosszú lehet.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'A(z) „%s” API token neve már használatban van. Lépjen vissza, és válasszon egy másikat.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'A(z) $g_log_destination helyen megadott „%s” nem írható.';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'A hozzáadott felhasználónak nincs elég jogosultsága ahhoz, hogy kövesse ezt az ügyet.';
 $s_dropzone_default_message = 'Dobja ide a feltöltendő fájlokat, vagy válassza ki és illessze be azokat.';
 $s_dropzone_fallback_message = 'A böngészője nem támogatja a fogd és vidd fájlfeltöltést.';
 $s_dropzone_file_too_big = 'A fájl túl nagy ({{filesize}} MiB). Legnagyobb fájlméret: {{maxFilesize}} MiB.';
@@ -1409,7 +1413,8 @@ $s_dropzone_cancel_upload_confirmation = 'Valóban megszakítja ezt a feltölté
 $s_dropzone_remove_file = 'Fájl eltávolítása';
 $s_dropzone_max_files_exceeded = 'Nem tölthet fel több fájlt.';
 $s_dropzone_not_supported = 'A dropzone.js nem támogatja a régebbi böngészőket!';
-$s_dropzone_multiple_files_too_big = 'A következő fájlok:{{files}}Túllépik a megengedett maximális fájlméretet ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'A következő fájlok túllépik a megengedett maximális fájlméretet ({{maxFilesize}} MiB):{{files}}';
+$s_dropzone_multiple_filenames_too_long = 'A következő fájlnevek túl hosszúak (legfeljebb {{maxFilenameLength}} karakteres lehet):{{files}}';
 $s_save = 'Mentés';
 $s_reset = 'Visszaállítás';
 $s_persist = 'Beállítás tartósként';

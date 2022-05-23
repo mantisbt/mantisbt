@@ -205,7 +205,8 @@ function collapse_cache_token() {
 
 	$g_collapse_cache_token = $t_data;
 
-	$t_cookie = gpc_get_cookie( 'MANTIS_collapse_settings', '' );
+	$t_collapse_cookie = config_get_global( 'collapse_settings_cookie' );
+	$t_cookie = gpc_get_cookie( $t_collapse_cookie, '' );
 
 	if( false !== $t_cookie && !is_blank( $t_cookie ) ) {
 		$t_update = false;
@@ -231,6 +232,6 @@ function collapse_cache_token() {
 			token_touch( $t_token['id'] );
 		}
 
-		gpc_clear_cookie( 'MANTIS_collapse_settings' );
+		gpc_clear_cookie( $t_collapse_cookie );
 	}
 }

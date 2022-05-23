@@ -675,7 +675,7 @@ function summary_print_by_category( array $p_filter = null ) {
  * @param array   $p_filter   Filter array.
  * @return void
  */
-function summary_print_by_project( array $p_projects = array(), $p_level = 0, array $p_cache = null, array $p_filter = null ) {
+function summary_print_by_project( array $p_projects = array(), int $p_level = 0, array $p_cache = null, array $p_filter = null ) {
 	$t_project_id = helper_get_current_project();
 
 	if( empty( $p_projects ) ) {

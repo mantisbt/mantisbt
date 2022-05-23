@@ -175,14 +175,26 @@ table {
     background-color: #ffffff !important;
 }
 
+/* Breaking lines when needed */
+[class*="description"],
+[class*="steps-to-reproduce"],
+[class*="additional-information"],
+[class*="bugnote"],
+[class*="custom-field"] {
+    overflow-wrap: anywhere;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    overflow-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 /* Disable printing of link urls */
 a:link:after, a:visited:after {
     content: normal !important;
-}
-
-/* Prevent horizontal scrolling when displaying db commands in install screen */
-pre {
-    word-break: break-all !important;
 }
 
 /* Disable theme backgrounds */
@@ -576,6 +588,15 @@ hr {
     border-color: #393939;
 }
 
+/* Changelog and Roadmap items */
+ul.changelog, ul.roadmap {
+    list-style-type: none;
+    margin-left: 0;
+}
+ul.changelog > li, ul.roadmap > li {
+    margin-bottom: 4px;
+}
+
 /* Mantis 28826: Remove vertical lines for bordered tables. */
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
@@ -720,4 +741,3 @@ hr {
     }
 
 }
-

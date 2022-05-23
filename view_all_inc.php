@@ -53,6 +53,15 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
+/**
+ * Variables defined in parent script.
+ * @var array $g_filter
+ * @var array $t_rows
+ * @var array $t_unique_project_ids
+ * @var int $f_page_number
+ * @var int $t_page_count
+ * @var int $t_bug_count
+ */
 $t_filter = current_user_get_bug_filter();
 filter_init( $t_filter );
 
@@ -84,80 +93,124 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 
 ?>
 <div class="col-md-12 col-xs-12">
-<div class="space-10"></div>
-<form id="bug_action" method="post" action="bug_actiongroup_page.php">
-<?php # CSRF protection not required here - form does not result in modifications ?>
-<div class="widget-box widget-color-blue2">
-	<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<?php print_icon( 'fa-columns', 'ace-icon' ); ?>
-		<?php echo lang_get( 'viewing_bugs_title' ) ?>
-		<?php
-			# -- Viewing range info --
-			$v_start = 0;
-			$v_end = 0;
-			if (count($t_rows) > 0) {
-				$v_start = $g_filter['per_page'] * ($f_page_number - 1) + 1;
-				$v_end = $v_start + count($t_rows) - 1;
+	<div class="space-10"></div>
+	<form id="bug_action" method="post" action="bug_actiongroup_page.php">
+		<?php # CSRF protection not required here - form does not result in modifications ?>
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+<?php
+	print_icon( 'fa-columns', 'ace-icon' );
+	echo lang_get( 'viewing_bugs_title' );
+
+	# Viewing range info
+	$v_start = 0;
+	$v_end = 0;
+	if (count($t_rows) > 0) {
+		$v_start = $g_filter['per_page'] * ($f_page_number - 1) + 1;
+		$v_end = $v_start + count($t_rows) - 1;
+	}
+	echo '<span class="badge"> ' . $v_start . ' - ' . $v_end . ' / ' . $t_bug_count . '</span>' ;
+?>
+				</h4>
+			</div>
+
+<?php
+	# -- ====================== TOP TOOLBAR ============================ --
+
+	$t_filter_param = filter_get_temporary_key_param( $t_filter );
+	if( empty( $t_filter_param ) ) {
+		$t_summary_link = 'view_all_set.php?summary=1&temporary=y';
+	} else {
+		$t_filter_param = '?' . $t_filter_param;
+		$t_summary_link = 'summary_page.php' . $t_filter_param;
+	}
+
+	$t_can_print_reports = access_has_project_level( config_get( 'print_reports_threshold' ), $t_current_project );
+	$t_can_export_issues = access_has_project_level( config_get( 'export_issues_threshold' ), $t_current_project );
+	$t_can_view_summary = access_has_project_level( config_get( 'view_summary_threshold' ), $t_current_project );
+
+	# Plugin menu items
+	$t_event_menu_options = event_signal( 'EVENT_MENU_FILTER' );
+	ob_start();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( !is_array( $t_callback_menu_options ) ) {
+				$t_callback_menu_options = array( $t_callback_menu_options );
 			}
-			echo '<span class="badge"> ' . $v_start . ' - ' . $v_end . ' / ' . $t_bug_count . '</span>' ;
-		?>
-	</h4>
-	</div>
 
-	<div class="widget-body">
-
-	<div class="widget-toolbox padding-8 clearfix">
-		<div class="btn-toolbar">
-			<div class="btn-group pull-left">
-		<?php
-			$t_filter_param = filter_get_temporary_key_param( $t_filter );
-			if( empty( $t_filter_param ) ) {
-				$t_summary_link = 'view_all_set.php?summary=1&temporary=y';
-			} else {
-				$t_filter_param = '?' . $t_filter_param;
-				$t_summary_link = 'summary_page.php' . $t_filter_param;
-			}
-			# -- Print and Export links --
-			print_small_button( 'print_all_bug_page.php' . $t_filter_param, lang_get( 'print_all_bug_page_link' ) );
-			print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
-			print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
-			if( access_has_project_level( config_get( 'view_summary_threshold' ), $t_current_project ) ) {
-				print_small_button( $t_summary_link, lang_get( 'summary_link' ) );
-			}
-
-			$t_event_menu_options = $t_links = event_signal('EVENT_MENU_FILTER');
-
-			foreach ($t_event_menu_options as $t_plugin => $t_plugin_menu_options) {
-				foreach ($t_plugin_menu_options as $t_callback => $t_callback_menu_options) {
-					if (!is_array($t_callback_menu_options)) {
-						$t_callback_menu_options = array($t_callback_menu_options);
-					}
-
-					foreach ($t_callback_menu_options as $t_menu_option) {
-						if ($t_menu_option) {
-							echo $t_menu_option;
-						}
-					}
+			foreach( $t_callback_menu_options as $t_menu_option ) {
+				if( $t_menu_option ) {
+					echo $t_menu_option;
 				}
 			}
-		?>
-		</div>
-		<div class="btn-group pull-right"><?php
-			# -- Page number links --
-			$t_tmp_filter_key = filter_get_temporary_key( $t_filter );
-			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $t_tmp_filter_key );
-			?>
-		</div>
-	</div>
-</div>
+		}
+	}
+	$t_plugin_menu_items = ob_get_clean();
 
-<div class="widget-main no-padding">
-	<div class="table-responsive checkbox-range-selection">
-	<table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
-	<thead>
+	# Page number links
+	ob_start();
+	print_page_links(
+		'view_all_bug_page.php',
+		1, $t_page_count, $f_page_number,
+		filter_get_temporary_key( $t_filter )
+	);
+	$t_page_number_links = ob_get_clean();
+
+	# Only display the toolbar if there's anything to print in it
+	if( $t_can_print_reports
+		|| $t_can_export_issues
+		|| $t_can_view_summary
+		|| $t_plugin_menu_items
+		|| $t_page_number_links
+	) {
+?>
+			<div class="widget-body">
+				<div class="widget-toolbox padding-8 clearfix">
+					<div class="btn-toolbar">
+						<div class="btn-group pull-left">
+<?php
+		if( $t_can_print_reports ) {
+			print_small_button(
+				'print_all_bug_page.php' . $t_filter_param,
+				lang_get( 'print_all_bug_page_link' )
+			);
+		}
+		if( $t_can_export_issues ) {
+			print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
+			print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
+		}
+		if( $t_can_view_summary ) {
+			print_small_button( $t_summary_link, lang_get( 'summary_link' ) );
+		}
+
+		echo $t_plugin_menu_items;
+?>
+						</div>
+<?php
+		if( $t_page_number_links ) {
+?>
+						<div class="btn-group pull-right">
+							<?php echo $t_page_number_links ?>
+						</div>
+<?php
+		}
+?>
+					</div>
+				</div>
+			</div>
+<?php
+	}
+
+	# -- ====================== end of TOP TOOLBAR ============================ --
+?>
+
+			<div class="widget-main no-padding">
+				<div class="table-responsive checkbox-range-selection">
+					<table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
+						<thead>
 <?php # -- Bug list column header row -- ?>
-<tr class="buglist-headers">
+							<tr class="buglist-headers">
 <?php
 	$t_title_function = 'print_column_title';
 	$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter, COLUMNS_TARGET_VIEW_PAGE );
@@ -165,11 +218,68 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		helper_call_custom_function( $t_title_function, array( $t_column, COLUMNS_TARGET_VIEW_PAGE, $t_sort_properties ) );
 	}
 ?>
-</tr>
+							</tr>
+						</thead>
 
-</thead><tbody>
+						<tbody>
 
 <?php
+	write_bug_rows( $t_rows );
+	# -- ====================== end of BUG LIST ========================= --
+?>
+
+						</tbody>
+					</table>
+				</div>
+
+				<div class="widget-toolbox padding-8 clearfix">
+<?php
+# -- ====================== MASS BUG MANIPULATION =================== --
+# @@@ ideally buglist-footer would be in <tfoot>, but that's not possible due to global g_checkboxes_exist set via write_bug_rows()
+?>
+					<div class="form-inline pull-left">
+<?php
+		/**
+		 * Global $g_checkboxes_exist is set in write_bug_rows() via the
+		 * print_column_value custom function.
+		 * @noinspection PhpConditionAlreadyCheckedInspection
+		 */
+		if( $g_checkboxes_exist ) {
+			echo '<label class="inline">';
+			echo '<input class="ace check_all input-sm" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" />';
+			echo '<span class="lbl padding-6">' . lang_get( 'select_all' ) . ' </span > ';
+			echo '</label>';
+?>
+			<!--suppress HtmlFormInputWithoutLabel -->
+			<select name="action" class="input-sm">
+				<?php print_all_bug_action_option_list($t_unique_project_ids) ?>
+			</select>
+			<input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get('ok'); ?>"/>
+<?php
+		} else {
+			echo '&#160;';
+		}
+?>
+					</div>
+
+					<div class="btn-group pull-right">
+						<?php echo $t_page_number_links ?>
+					</div>
+<?php # -- ====================== end of MASS BUG MANIPULATION ========================= -- ?>
+				</div>
+
+			</div>
+		</div>
+	</form>
+</div>
+<?php
+
+# -- ====================== FILTER FORM ========================= --
+if( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) {
+	filter_draw_selection_area();
+}
+# -- ====================== end of FILTER FORM ================== --
+
 /**
  * Output Bug Rows
  *
@@ -181,86 +291,24 @@ function write_bug_rows( array $p_rows ) {
 
 	$t_in_stickies = ( $g_filter && ( 'on' == $g_filter[FILTER_PROPERTY_STICKY] ) );
 
-	# -- Loop over bug rows --
-
+	# Loop over bug rows
 	$t_rows = count( $p_rows );
-	for( $i=0; $i < $t_rows; $i++ ) {
+	for( $i = 0; $i < $t_rows; $i++ ) {
 		$t_row = $p_rows[$i];
 
 		if( ( 0 == $t_row->sticky ) && ( 0 == $i ) ) {
 			$t_in_stickies = false;
 		}
-		if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
-?>
-		   <tr>
-				   <td colspan="<?php echo count( $g_columns ); ?>" bgcolor="#d3d3d3"></td>
-		   </tr>
-<?php
+		if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {
+			# demarcate stickies, if any have been shown
+			echo '<tr class="sticky-separator"><td colspan="' . count( $g_columns ) . '"></td></tr>';
 			$t_in_stickies = false;
 		}
 
 		echo '<tr>';
-
-		$t_column_value_function = 'print_column_value';
 		foreach( $g_columns as $t_column ) {
-			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row ) );
+			helper_call_custom_function( 'print_column_value', array( $t_column, $t_row ) );
 		}
 		echo '</tr>';
 	}
 }
-
-
-write_bug_rows( $t_rows );
-# -- ====================== end of BUG LIST ========================= --
-?>
-
-</tbody>
-</table>
-</div>
-
-<div class="widget-toolbox padding-8 clearfix">
-<?php
-# -- ====================== MASS BUG MANIPULATION =================== --
-# @@@ ideally buglist-footer would be in <tfoot>, but that's not possible due to global g_checkboxes_exist set via write_bug_rows()
-?>
-	<div class="form-inline pull-left">
-<?php
-		if( $g_checkboxes_exist ) {
-			echo '<label class="inline">';
-			echo '<input class="ace check_all input-sm" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" />';
-			echo '<span class="lbl padding-6">' . lang_get( 'select_all' ) . ' </span > ';
-			echo '</label>';
-		}
-		if( $g_checkboxes_exist ) {
-?>
-			<select name="action" class="input-sm">
-				<?php print_all_bug_action_option_list($t_unique_project_ids) ?>
-			</select>
-			<input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get('ok'); ?>"/>
-<?php
-		} else {
-			echo '&#160;';
-		}
-?>
-			</div>
-			<div class="btn-group pull-right">
-				<?php
-					$t_tmp_filter_key = filter_get_temporary_key( $t_filter );
-					print_page_links('view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $t_tmp_filter_key );
-				?>
-			</div>
-<?php # -- ====================== end of MASS BUG MANIPULATION ========================= -- ?>
-</div>
-
-</div>
-</div>
-</div>
-</form>
-</div>
-<?php
-
-# -- ====================== FILTER FORM ========================= --
-if( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) {
-	filter_draw_selection_area();
-}
-# -- ====================== end of FILTER FORM ================== --

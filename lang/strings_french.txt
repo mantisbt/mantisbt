@@ -500,7 +500,7 @@ $s_hide_content = 'Masquer le contenu';
 $s_show_content = 'Afficher le contenu';
 $s_file_icon_description = 'icône de fichier %1$s';
 $s_unknown_file_extension = 'inconnu';
-$s_webmaster_contact_information = 'Contactez <a href="mailto:%1$s"title ="Contacter le webmaster par courriel.">l’administrateur</a> pour une assistance.';
+$s_webmaster_contact_information = 'Contactez <a href="mailto:%1$s" title="Contacter le webmaster par courriel.">l’administrateur</a> pour une assistance.';
 $s_total_queries_executed = 'Requêtes exécutées au total : %1$d';
 $s_unique_queries_executed = 'Requêtes uniques exécutées : %1$d';
 $s_total_query_execution_time = 'Temps d’exécution total de la requête : %1$s secondes';
@@ -651,6 +651,7 @@ $s_readonly_status = 'État dans lequel une anomalie ne peut plus être modifié
 $s_reopen_status = 'État à positionner pour une anomalie rouverte';
 $s_reopen_resolution = 'Résolution à positionner pour une anomalie rouverte';
 $s_limit_view_unless_threshold_option = 'Afficher les problèmes des autres utilisateurs (si non positionné, l’accès sera limité aux problèmes signalés, gérés ou suivis par l’utilisateur)';
+$s_export_issues = 'Exporter des anomalies';
 $s_config_delete_sure = 'Voulez-vous vraiment supprimer la configuration pour %1$s dans le projet %2$s ?';
 $s_delete_config_button = 'Supprimer la configuration';
 $s_configuration_report = 'Rapport de configuration';
