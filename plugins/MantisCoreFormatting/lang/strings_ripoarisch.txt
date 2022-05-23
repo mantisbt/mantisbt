@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dregad
  * @author Purodha
  */
 
@@ -46,8 +47,8 @@ $s_plugin_format_description = 'Dat offizjälle Zohsatzprojramm zom enshtöpsell
 $s_plugin_format_config = 'Enschtällonge';
 $s_plugin_format_process_text = 'Et Täx Beärrbeejde';
 $s_plugin_format_process_text_warning_notice = 'Donn dat nit affschallde, ußer De weijß jenou, wat De määß.
-Wann dat ußjeschalldt es, wääde och Anjreffe met <i lang="en" title="cross site scripting - Skrepte vun främbe Rääschner ungerschiebe">XSS</i> müjjelesch, di mer nommahl op keijne Fall hann well.';
-$s_plugin_format_process_urls = 'Et <i lang="en">URL</i> Beärrbeejde';
+Wann dat ußjeschalldt es, wääde och Anjreffe met cross site scripting - Skrepte vun främbe Rääschner ungerschiebe (XSS) müjjelesch, di mer nommahl op keijne Fall hann well.';
+$s_plugin_format_process_urls = 'Et URL Beärrbeejde';
 $s_plugin_format_process_buglinks = 'MantisBT-entärne Lenks (Aanjelääjeheite un Aanmärkonge för Aanjelääjeheite)';
 $s_plugin_format_process_buglinks_info = 'Ding Enschtällong beschtemmp et Kännzeijsche för <em>Aanjelääjeheit</em> als "%s" un för <em>Aanmärkong för en Aanjelääjeheit</em> tag als "%s"';
 $s_plugin_format_enabled = 'Aanjeschalldt';

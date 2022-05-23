@@ -44,6 +44,7 @@
  * @author Burakolik
  * @author Can
  * @author DDPAT
+ * @author Dregad
  * @author Emperyan
  * @author Erdemaslancan
  * @author Gorizon
@@ -1268,7 +1269,7 @@ $s_timeline_issue_monitor = '<span class="username">%1$s</span>, hatayı denetli
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> hata izlemeyi durdurdu <span class="issue_id">%2$s</span>';
 $s_timeline_issue_tagged = '<span class="username">%1$s</span> etiketli sayı <span class="issue_id">%2$s</span>, <span class="tag_name">%3$s</span>';
 $s_timeline_issue_untagged = '<span class="username">%1$s</span> etiketi kaldırıldı <span class="tag_name">%3$s</span>, <span class="issue_id">%2$s</span>';
-$s_timeline_issue_resolved = '<span class = "username">%1$s</span> sorunu çözdü <span class="issue_id">%2$s</span>';
+$s_timeline_issue_resolved = '<span class="username">%1$s</span> sorunu çözdü <span class="issue_id">%2$s</span>';
 $s_timeline_issue_closed = '<span class="username">%1$s</span> sorunu kapattı <span class="issue_id">%2$s</span>';
 $s_timeline_issue_reopened = '<span class="username">%1$s</span> sorunu yeniden açtı <span class="issue_id">%2$s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1$s</span> sorunu atandı <span class="issue_id">%2$s</span>, <span class="username">%3$s</span>';

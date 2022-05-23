@@ -39,6 +39,7 @@
  * @file
  *
  * @author Atrol
+ * @author Dregad
  * @author LoveIceLang
  * @author Snævar
  * @author Sveinn í Felli
@@ -1021,7 +1022,7 @@ $s_replace_relationship_button = 'Endurnýja';
 $s_relationship_with_parent = 'Tengsl við æðri verkbeiðni';
 $s_delete_relationship_sure_msg = 'Ertu viss um að vilja eyða þessum tengslum?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Ekki er búið að leysa eða loka öllum undiratriðum þessarar verkbeiðni.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>ATHUGAÐU</strong>. Ekki hafa öll undiratriði þessarar verkbeiðni enn verið leyst eða lokað.<br />Áður en hægt er að <b>leysa/loka<b> æðri beiðni þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessari beiðni.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>ATHUGAÐU</strong>. Ekki hafa öll undiratriði þessarar verkbeiðni enn verið leyst eða lokað.<br />Áður en hægt er að <strong>leysa/loka</strong> æðri beiðni þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessari beiðni.';
 $s_create_child_bug_button = 'Klóna';
 $s_bug_cloned_to = 'Samrit verkbeiðnar';
 $s_bug_created_from = 'Verkbeiðni mynduð af';

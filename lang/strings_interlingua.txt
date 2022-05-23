@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dregad
  * @author Macofe
  * @author McDutchie
  */
@@ -955,8 +956,8 @@ $s_bug_status_to_button = 'Cambiar stato in:';
 $s_reopen_bug_button = 'Reaperir';
 $s_attached_files = 'Files annexate';
 $s_publish = 'Publicar';
-$s_browser_does_not_support_audio = 'Tu navigator non supporta le etiquetta <tt>audio</tt>.';
-$s_browser_does_not_support_video = 'Tu navigator non supporta le etiquetta <tt>video</tt>.';
+$s_browser_does_not_support_audio = 'Tu navigator non supporta le etiquetta audio.';
+$s_browser_does_not_support_video = 'Tu navigator non supporta le etiquetta video.';
 $s_bug_view_title = 'Vider detalios del problema';
 $s_no_users_monitoring_bug = 'Nulle usator survelia iste problema.';
 $s_users_monitoring_bug = 'Usatores qui survelia iste problema';
