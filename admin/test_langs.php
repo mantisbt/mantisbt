@@ -420,12 +420,19 @@ print_admin_menu_bar( 'test_langs.php' );
 	<div class="space-10"></div>
 
 	<!-- CORE LANGUAGE FILES -->
-	<div class="widget-box widget-color-blue2">
+	<div id="core" class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
 				Testing Core Language Files
 			</h4>
+			<div class="widget-toolbar no-border hidden-xs">
+				<div class="widget-menu">
+					<a href="#plugins" class="btn btn-primary btn-white btn-round btn-sm">
+						Scroll down to Plugins
+					</a>
+				</div>
+			</div>
 		</div>
 
 		<div class="widget-body">
@@ -442,12 +449,19 @@ checklangdir( $t_mantis_dir );
 	<div class="space-10"></div>
 
 	<!-- PLUGINS -->
-	<div class="widget-box widget-color-blue2">
+	<div id="plugins" class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
 				Testing Plugins Language Files
 			</h4>
+			<div class="widget-toolbar no-border hidden-xs">
+				<div class="widget-menu">
+					<a href="#" class="btn btn-primary btn-white btn-round btn-sm">
+						Scroll back to top
+					</a>
+				</div>
+			</div>
 		</div>
 
 		<div class="widget-body">
