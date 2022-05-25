@@ -477,7 +477,12 @@ function checkplugins() {
 
 	try {
 		$t_plugins = get_plugins( $t_path );
-		print_info( count( $t_plugins ) . " Plugins found" );
+		$t_toc = '<ol class="plugins-toc">';
+		foreach( $t_plugins as $t_plugin => $t_path ) {
+			$t_toc .= '<li><a href="#plugin-' . $t_plugin . '">' . $t_plugin . '</a></li>';
+		}
+		$t_toc .= '</ol>';
+		print_info( count( $t_plugins ) . " Plugins found" . $t_toc );
 	} catch( UnexpectedValueException $e ) {
 		print_fail( $e->getMessage() );
 		echo '</tr>' . PHP_EOL;
@@ -488,7 +493,8 @@ function checkplugins() {
 	foreach( $t_plugins as $t_plugin => $t_path ) {
 		echo PHP_EOL;
 		echo '<tr><th colspan="2">';
-		echo "Checking language files for plugin <strong>$t_plugin</strong>";
+		echo '<a id="plugin-' . $t_plugin . '"></a>';
+		echo "Checking language files for plugin <em>$t_plugin</em>";
 		echo '</th></tr>';
 		checklangdir( $t_path );
 	}
@@ -601,7 +607,7 @@ function checklangdir( $p_path ) {
 }
 
 function print_info( $p_message ) {
-	echo '<td class="alert-info">', string_attribute( $p_message ), '</td>';
+	echo '<td class="alert-info">', ( $p_message ), '</td>';
 }
 
 function print_fail( $p_message ) {
