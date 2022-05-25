@@ -44,6 +44,10 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	# Project versions
 	$g_app->post( '/{id}/versions', 'rest_project_version_add' );
 	$g_app->post( '/{id}/versions/', 'rest_project_version_add' );
+	$g_app->delete( '/{id}/versions/{versionId}', 'rest_project_version_remove' );
+	$g_app->delete( '/{id}/versions/{versionId}/', 'rest_project_version_remove' );	
+	$g_app->patch( '/{id}/versions/{versionId}', 'rest_project_version_update' );
+	$g_app->patch( '/{id}/versions/{versionId}/', 'rest_project_version_update' );
 
 	# Project hierarchy (subprojects)
 	$g_app->post( '/{id}/subprojects', 'rest_project_hierarchy_add' );
@@ -125,6 +129,57 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_version_id = (int)$t_result['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version created with id $t_version_id" );
+}
+
+function rest_project_version_remove( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+    $t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+    if( is_blank( $t_project_id ) ) {
+        $t_message = "Project id is missing.";
+        return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+    }
+    
+    $t_old_version_id = isset( $p_args['versionId'] ) ? $p_args['versionId'] : $p_request->getParam( 'versionId' );
+    
+    //$t_version_to_remove = $p_request->getParsedBody();
+    
+    $t_data = array(
+        'query' => array(
+            'project_id' => $t_project_id,
+        ),
+        'payload' => array(
+            'version_id' => $t_old_version_id,
+        )
+    );
+    
+    $t_command = new VersionRemoveCommand( $t_data );
+    $t_result = $t_command->execute();
+    $t_version_id = (int)$t_result['id'];
+    
+    return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version removed from this project $t_project_id" );
+}
+
+function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+    $t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+    if( is_blank( $t_project_id ) ) {
+        $t_message = "Project id is missing.";
+        return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+    }
+    $t_old_version_id = isset( $p_args['versionId'] ) ? $p_args['versionId'] : $p_request->getParam( 'versionId' );
+    $t_version_to_update = $p_request->getParsedBody();
+    
+    $t_data = array(
+        'query' => array(
+            'project_id' => $t_project_id,
+            'version_id' => $t_old_version_id
+        ),
+        'payload' => $t_version_to_update
+    );
+    
+    $t_command = new VersionUpdateCommand( $t_data );
+    $t_result = $t_command->execute();
+    $t_version_id = (int)$t_result['id'];
+    
+    return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version updated with id $t_version_id" );
 }
 
 /**

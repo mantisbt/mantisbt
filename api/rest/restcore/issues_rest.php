@@ -89,8 +89,25 @@ $g_app->group('/issues', function() use ( $g_app ) {
  */
 function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_issue_find_summary = isset( $p_args['summary'] ) ? $p_args['summary'] : $p_request->getParam( 'summary' );
 
-	if( !is_blank( $t_issue_id ) ) {
+	if( !is_blank( $t_issue_find_summary ) ) {		
+		# set the current project to correctly account for user permissions
+		$t_project_id = (int)$p_request->getParam( 'project_id', ALL_PROJECTS );
+		if( $t_project_id != ALL_PROJECTS && !project_exists( $t_project_id ) ) {
+			$t_result = null;
+			$t_message = "Project '$t_project_id' doesn't exist";
+			$p_response = $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
+		} else {
+			# set the current project to correctly account for user permissions
+			helper_set_current_project( $t_project_id );
+
+			$t_issues = mc_issue_get_id_from_summary('', '', $t_issue_find_summary );
+
+			$t_result = array( 'issues' => $t_issues );
+		}
+	}
+	else if( !is_blank( $t_issue_id ) ) {
 		# Get Issue By Id
 
 		# Username and password below are ignored, since middleware already done the auth.
