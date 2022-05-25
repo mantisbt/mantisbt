@@ -430,7 +430,7 @@ print_admin_menu_bar( 'test_langs.php' );
 
 		<div class="widget-body">
 			<div class="widget-main no-padding table-responsive">
-				<table class="table table-bordered table-condensed ">
+				<table class="table table-bordered table-condensed test-langs">
 <?php
 checklangdir( $t_mantis_dir );
 ?>
@@ -452,7 +452,7 @@ checklangdir( $t_mantis_dir );
 
 		<div class="widget-body">
 			<div class="widget-main no-padding table-responsive">
-				<table class="table table-bordered table-condensed ">
+				<table class="table table-bordered table-condensed test-langs">
 <?php
 checkplugins();
 ?>

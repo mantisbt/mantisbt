@@ -31,7 +31,9 @@ tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px;
 #buglist .cftype-textarea
 	{ text-align: left; }
 
-.sticky-separator { background-color: lightgrey;}
+.sticky-separator,
+.test-langs th
+	{ background-color: lightgrey; }
 
 /* manage_plugin_page.php */
 span.dependency_dated		{ color: maroon; }
