@@ -893,6 +893,21 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 								$t_users_count, ' ', lang_get( 'users_link' ), ')'
 							?>
 						</div>
+						<div class="widget-toolbar pull-left">
+<?php
+		# Show users with global access button
+		print_form_button(
+			'manage_proj_edit_page.php',
+			lang_get( $f_show_global_users ? 'hide_global_users' : 'show_global_users' ),
+			array(
+				'project_id' => $f_project_id,
+				'show_global_users' => !$f_show_global_users
+			),
+			OFF,
+			'btn btn-sm btn-primary btn-white btn-round'
+		);
+?>
+						</div>
 						<div class="btn-group pull-right">
 							<ul class="pagination small no-margin"></ul>
 						</div>
@@ -1025,22 +1040,6 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 				</div>
 <?php
 	} // end if user count > 0
-?>
-			</div>
-			<div class="widget-toolbox padding-8 clearfix">
-<?php
-	# You need global or project-specific permissions to remove users
-	# from this project
-	print_form_button(
-		'manage_proj_edit_page.php',
-		lang_get( $f_show_global_users ? 'hide_global_users' : 'show_global_users' ),
-		array(
-			'project_id' => $f_project_id,
-			'show_global_users' => !$f_show_global_users
-		),
-		OFF,
-		'btn btn-sm btn-primary btn-white btn-round'
-	);
 ?>
 			</div>
 		</div>
