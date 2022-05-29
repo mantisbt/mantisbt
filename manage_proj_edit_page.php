@@ -973,8 +973,9 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 				<?php
 				if( $t_can_manage_this_user ) {
 					echo '<div class="editable_access_level">';
-					echo $t_current_level_string . '<span class="hidden unchanged">';
-					echo ' <a href="#" class="edit_link">[' . lang_get( 'edit' ) . ']</a>';
+					echo "<span>$t_current_level_string</span>";
+					echo '<span class="hidden unchanged">';
+					echo '&nbsp;<a href="#" class="edit_link">[' . lang_get( 'edit' ) . ']</a>';
 					echo '</span>';
 					$t_arrow = layout_is_rtl() ? 'fa-long-arrow-left' : 'fa-long-arrow-right';
 					echo ' <span class="changed_to">';
