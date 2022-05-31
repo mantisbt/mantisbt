@@ -540,7 +540,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 <!-- VERSIONS -->
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-<div id="project-versions-div" class="form-container">
+<div id="versions" class="form-container">
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
@@ -573,7 +573,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 	$t_versions = version_get_all_rows( $f_project_id, VERSION_ALL, true );
 	if( count( $t_versions ) > 0 ) { ?>
 	<div class="table-responsive">
-		<table id="versions" class="table table-striped table-bordered table-condensed">
+		<table class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
 				<th><?php echo lang_get( 'version' ) ?></th>
@@ -645,7 +645,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<button name="add_version" class="btn btn-sm btn-primary btn-white btn-round">
 				<?php echo lang_get( 'add_version_button' ) ?>
 			</button>
-			<button name="add_and_edit_version" class="btn btn-sm btn-primary btn-white btn-round">
+			<button name="add_and_edit_version" class="btn btn-sm btn-primary btn-white btn-round" value="1">
 				<?php echo lang_get( 'add_and_edit_version_button' ) ?>
 			</button>
 		</fieldset>
