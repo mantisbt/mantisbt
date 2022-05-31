@@ -180,9 +180,9 @@ check_print_info_row(
 );
 
 check_print_test_row(
-	'post_max_size php.ini directive is at least equal to the upload_max_size directive',
+	'post_max_size php.ini directive is at least equal to the upload_max_filesize directive',
 	ini_get_number( 'post_max_size' ) >= ini_get_number( 'upload_max_filesize' ),
-	array( false => 'The current value of the post_max_size directive is ' . htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes. This value needs to be at least equal to the upload_max_size directive value of ' . htmlentities( ini_get_number( 'upload_max_filesize' ) ) . ' bytes.' )
+	array( false => 'The current value of the post_max_size directive is ' . htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes. This value needs to be at least equal to the upload_max_filesize directive value of ' . htmlentities( ini_get_number( 'upload_max_filesize' ) ) . ' bytes.' )
 );
 
 $t_disabled_functions = explode( ',', ini_get( 'disable_functions' ) );
