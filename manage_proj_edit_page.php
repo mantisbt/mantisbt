@@ -803,6 +803,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 ?>
 
+<!-- MANAGE ACCOUNTS -->
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<div class="alert alert-info">
@@ -815,13 +816,9 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	} else {
 		echo lang_get( 'private_project_msg' );
 	} ?>
+		</div>
 	</div>
-	</div>
-</div>
 
-<!-- MANAGE ACCOUNTS -->
-<div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
 	<div id="manage-project-users-div" class="form-container">
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
