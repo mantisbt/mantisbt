@@ -806,7 +806,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 <!-- MANAGE ACCOUNTS -->
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
-	<div class="alert alert-info">
+	<div id="project-users" class="alert alert-info">
 		<div class="center bigger-110">
 	<?php
 	print_icon( 'fa-info-circle' );
@@ -894,7 +894,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 <?php
 		# Show users with global access button
 		print_form_button(
-			'manage_proj_edit_page.php',
+			'manage_proj_edit_page.php#project-users',
 			lang_get( $f_show_global_users ? 'hide_global_users' : 'show_global_users' ),
 			array(
 				'project_id' => $f_project_id,
