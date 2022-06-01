@@ -96,7 +96,7 @@ if( $f_add_and_edit ) {
 } else if( $f_project_id == ALL_PROJECTS ) {
 	$t_redirect_url = 'manage_proj_page.php';
 } else {
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#categories';
 }
 
 print_header_redirect( $t_redirect_url );
