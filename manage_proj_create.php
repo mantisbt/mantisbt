@@ -74,6 +74,7 @@ if( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator
 	project_add_user( $t_project_id, $t_current_user_id, $t_access_level );
 }
 
+# If parent project id != 0 then we're creating a subproject
 if( 0 != $f_parent_id ) {
 	$t_data = array(
 		'query' => array(
@@ -86,19 +87,20 @@ if( 0 != $f_parent_id ) {
 			'inherit_parent' => (bool)$f_inherit_parent
 		)
 	);
-	
+
 	$t_command = new ProjectHierarchyAddCommand( $t_data );
 	$t_command->execute();
+
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_parent_id . '#subprojects';
+} else {
+	$t_redirect_url = 'manage_proj_page.php';
 }
 
 event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
 
 form_security_purge( 'manage_proj_create' );
 
-$t_redirect_url = 'manage_proj_page.php';
-
 layout_page_header( null, $t_redirect_url );
-
 layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $t_redirect_url );
