@@ -38,6 +38,12 @@ class LangCheckFile {
 	const BASE = 'strings_english.txt';
 
 	/**
+	 * Comma-delimited list of valid tags and attributes for language strings
+	 * @see http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
+	 */
+	const VALID_TAGS = 'em,strong,i,b,br,p,ul,ol,li,table,tr,td,code,a[href|title],span[class],abbr[title]';
+
+	/**
 	 * @var string Full path to to the language file
 	 */
 	protected $file;
@@ -58,6 +64,12 @@ class LangCheckFile {
 	protected $warnings = [];
 
 	/**
+	 * @var HTMLPurifier
+	 * @see http://htmlpurifier.org/
+	 */
+	protected $purifier;
+
+	/**
 	 * CheckLangFile constructor.
 	 *
 	 * @param string $p_path Path to language files
@@ -66,6 +78,16 @@ class LangCheckFile {
 	public function __construct( $p_path, $p_file ) {
 		$this->file = $p_path . $p_file;
 		$this->is_base_language = ( $p_file == self::BASE );
+
+		# Initialize HTML Purifier object
+		# - define list of tags and attributes allowed in language strings
+		# - disable the cache for now, as this is only used sporadically by
+		#   admins/devs, so the performance hit (~ 1-2 sec) is acceptable.
+		$t_purifier_config = HTMLPurifier_Config::create( [
+			'Cache.DefinitionImpl' => null,
+			'HTML.Allowed' => self::VALID_TAGS,
+		] );
+		$this->purifier = new HTMLPurifier( $t_purifier_config );
 	}
 
 	/**
@@ -403,6 +425,8 @@ class LangCheckFile {
 								$this->logWarn( $e->getMessage() . " for string $t_current_var", $t_line );
 							}
 							restore_error_handler();
+
+							$this->checkInvalidTags( $t_current_var, $t_text, $t_line );
 						}
 
 						$t_current_var = null;
@@ -426,6 +450,36 @@ class LangCheckFile {
 		}
 
 		return $t_pass;
+	}
+
+	/**
+	 * Use HTML Purifier to ensure the string does not contain unsupported tags.
+	 *
+	 * Will log an error if the purified string is not equal to the original.
+	 * @see LangCheckFile::compareToPurified()
+	 *
+	 * @param string $p_var  Name of language string variable to check
+	 * @param string $p_text Language string
+	 * @param int    $p_line Line number in language file
+	 *
+	 * @return void
+	 */
+	private function checkInvalidTags( $p_var, $p_text, $p_line ) {
+		$t_pure = $this->purifier->purify( $p_text );
+
+		# Special cases handling
+		# - sprintf variable '%1$s' inside href gets urlencoded
+		if( $p_var == '$s_webmaster_contact_information' ) {
+			$t_pure = str_replace( '%25', '%', $t_pure );
+		}
+
+		# Prepare original language string for comparison with HTML Purifier output
+		# - transform <br> tag with or without trailing '/' into '<br />'
+		$p_text = preg_replace( '#<br\s*/?>#i', '<br />', $p_text );
+
+		if( $t_pure != $p_text ) {
+			$this->logFail( "$p_var contains unsupported or invalid tags or attributes.", $p_line );
+		}
 	}
 
 }
