@@ -12,6 +12,7 @@
         "adodb/adodb-php": "~5.20.21",
         "phpmailer/phpmailer": "~6.0",
         "erusev/parsedown": "^1.7.0, <=1.7.3",
+        "ezyang/htmlpurifier": "^4.14",
         "dapphp/securimage": "dev-mantis"
     },
     "require-dev": {
