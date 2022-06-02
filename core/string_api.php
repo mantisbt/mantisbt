@@ -493,15 +493,15 @@ function string_insert_hrefs( $p_string ) {
 
 		# valid set of characters that may occur in url scheme. Note: - should be first (A-F != -AF).
 		$t_url_valid_chars       = '-_.,!~*\';\/?%^\\\\:@&={\|}+$#[:alnum:]\pL';
-		$t_url_chars             = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)\[\]])";
-		$t_url_chars2            = "(?:${t_url_hex}|[${t_url_valid_chars}])";
-		$t_url_chars_in_brackets = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)])";
-		$t_url_chars_in_parens   = "(?:${t_url_hex}|[${t_url_valid_chars}\[\]])";
+		$t_url_chars             = "(?:{$t_url_hex}|[{$t_url_valid_chars}\(\)\[\]])";
+		$t_url_chars2            = "(?:{$t_url_hex}|[{$t_url_valid_chars}])";
+		$t_url_chars_in_brackets = "(?:{$t_url_hex}|[{$t_url_valid_chars}\(\)])";
+		$t_url_chars_in_parens   = "(?:{$t_url_hex}|[{$t_url_valid_chars}\[\]])";
 
 		$t_url_part1 = $t_url_chars;
-		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
+		$t_url_part2 = "(?:\({$t_url_chars_in_parens}*\)|\[{$t_url_chars_in_brackets}*\]|{$t_url_chars2})";
 
-		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/su";
+		$s_url_regex = "/({$t_url_protocol}({$t_url_part1}*?{$t_url_part2}+))/su";
 
 		# e-mail regex
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
@@ -515,7 +515,7 @@ function string_insert_hrefs( $p_string ) {
 		$s_url_regex,
 		function ( $p_match ) use ( $t_link_attributes ) {
 			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			return "<a ${t_url_href}${t_link_attributes}>${p_match[1]}</a>";
+			return "<a {$t_url_href}{$t_link_attributes}>{$p_match[1]}</a>";
 		},
 		$p_string
 	);
