@@ -372,27 +372,17 @@ $t_definition = custom_field_get_definition( $f_field_id );
 </div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
-	<input type="submit" class="btn btn-primary btn-white btn-round"
-		   value="<?php echo lang_get( 'update_custom_field_button' ) ?>"
-	/>
+	<button class="btn btn-primary btn-white btn-round">
+		<?php echo lang_get( 'update_custom_field_button' ) ?>
+	</button>
+	<button class="btn btn-primary btn-white btn-round"
+			formaction="manage_custom_field_delete.php">
+		<?php echo lang_get( 'delete_custom_field_button' ) ?>
+	</button>
 </div>
 </div>
 </form>
 </div>
-</div>
-
-<div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
-	<form method="post" action="manage_custom_field_delete.php" class="pull-right">
-		<fieldset>
-			<?php echo form_security_field( 'manage_custom_field_delete' ); ?>
-			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-			<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ) ?>" />
-			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
-				   value="<?php echo lang_get( 'delete_custom_field_button' ) ?>"
-			/>
-		</fieldset>
-	</form>
 </div>
 
 <?php /** @todo There is access checking in the ADD action page and at the top of this file.
