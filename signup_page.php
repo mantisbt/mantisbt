@@ -62,7 +62,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 ?>
 
 <div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
-    <div class="login-container">
+<div class="login-container">
 	<div class="space-12 hidden-480"></div>
 	<?php layout_login_page_logo() ?>
 	<div class="space-24 hidden-480"></div>
@@ -154,26 +154,29 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'signup_button' ) ?>" />
 		</fieldset>
 	</form>
-</div>
+				</div>
 
-	<div class="toolbar center">
-		<a class="back-to-login-link pull-left" href="<?php echo AUTH_PAGE_USERNAME; ?>"><?php echo lang_get( 'login' ); ?></a>
-		<?php
+				<div class="toolbar center">
+					<a class="back-to-login-link pull-left" href="<?php echo AUTH_PAGE_USERNAME; ?>">
+						<?php echo lang_get( 'login' ); ?>
+					</a>
+<?php
 		# lost password feature disabled or reset password via email disabled
 		if( ( LDAP != config_get_global( 'login_method' ) ) &&
 			( ON == config_get( 'lost_password_feature' ) ) &&
 			( ON == config_get( 'send_reset_password' ) ) &&
 			( ON == config_get( 'enable_email_notification' ) ) ) {
-			?>
-			<a class="back-to-login-link pull-right" href="lost_pwd_page.php"><?php echo lang_get( 'lost_password_link' ); ?></a>
-		<?php
-		}
-		?>
-		<div class="clearfix"></div>
+?>
+					<a class="back-to-login-link pull-right" href="lost_pwd_page.php">
+						<?php echo lang_get( 'lost_password_link' ); ?>
+					</a>
+<?php } ?>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
 	</div>
-	</div>
-	</div>
-	</div>
+</div>
 </div>
 
 <?php
