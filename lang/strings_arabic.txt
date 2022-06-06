@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Asma
  * @author Claw eg
  * @author DRIHEM
  * @author FiberAhmed
@@ -626,6 +627,7 @@ $s_readonly_status = 'الحالة حيث تصبح قضية ما للقراءة 
 $s_reopen_status = 'الحالة التي يتم ضبط قضية معاد فتحها إليها';
 $s_reopen_resolution = 'الحل الذي يتم ضبط قضية معاد فتحها إليه';
 $s_limit_view_unless_threshold_option = 'عرض مشكلات المستخدمين الآخرين (إذا لم يتم تعيينها، فسيقتصر الوصول على المشكلات التي تم الإبلاغ عنها أو معالجتها أو مراقبتها من قبل المستخدم)';
+$s_export_issues = 'مشكلات التصدير';
 $s_config_delete_sure = 'هل أنت متأكد أنت تريد حذف الإعدادات ل:';
 $s_delete_config_button = 'حذف الإعدادات';
 $s_configuration_report = 'تقرير الضبط';
