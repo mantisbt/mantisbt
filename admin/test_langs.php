@@ -44,6 +44,13 @@ class LangCheckFile {
 	const VALID_TAGS = 'em,strong,i,b,br,p,ul,ol,li,table,tr,td,code,a[href|title],span[class],abbr[title]';
 
 	/**
+	 * @var bool True if HTML syntax checks can be performed
+	 * (i.e. if DOM and libxml PHP extensions are available).
+	 * @see canDoHtmlChecks().
+	 */
+	protected static $can_do_html_check;
+
+	/**
 	 * @var string Full path to to the language file
 	 */
 	protected $file;
@@ -112,6 +119,17 @@ class LangCheckFile {
 			$p_message = "Line $p_line: $p_message";
 		}
 		$this->warnings[] = $p_message;
+	}
+
+	/**
+	 * Returns True if HTML tags validation can be performed.
+	 * @return bool
+	 */
+	public static function canDoHtmlChecks() {
+		if( self::$can_do_html_check === null ) {
+			self::$can_do_html_check = extension_loaded( 'dom' ) && extension_loaded( 'libxml' );
+		}
+		return self::$can_do_html_check;
 	}
 
 	/**
@@ -246,8 +264,6 @@ class LangCheckFile {
 			$this->logFail( $e->getMessage(), $e->getLine() );
 			return false;
 		}
-
-		$t_do_html_check = extension_loaded('dom') && extension_loaded( 'libxml' );
 
 		$t_line = 0;
 		$t_variables = array();
@@ -406,7 +422,9 @@ class LangCheckFile {
 						}
 
 						# Perform HTML tags validation if the string contains any
-						if( $t_do_html_check && preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text) ) {
+						if( $this::canDoHtmlChecks()
+							&& preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text)
+						) {
 							/** @noinspection PhpComposerExtensionStubsInspection */
 							$t_dom = new DOMDocument();
 							set_error_handler(
@@ -518,6 +536,22 @@ print_admin_menu_bar( 'test_langs.php' );
 			<div class="widget-main no-padding table-responsive">
 				<table class="table table-bordered table-condensed test-langs">
 <?php
+if( !LangCheckFile::canDoHtmlChecks() ) {
+?>
+					<tr>
+						<td>
+							Check for required <em>DOM</em> and <em>libxml</em>
+							PHP extensions
+						</td>
+						<td class="alert-warning">HTML syntax checks will not be performed.
+							<br>
+							NOTE: This warning applies to all languages and plugins
+							tested on this page.
+						</td>
+					</tr>
+<?php
+}
+
 checklangdir( $t_mantis_dir );
 ?>
 				</table>
