@@ -46,8 +46,8 @@ require_api( 'logging_api.php' );
  * The internal processing steps for query string are:
  * 1) $query_string: stores the user input string, containing parameter tokens for all
  *   supported formats:
- *     - ":{string}" For labeled parameters. Binded values are stored in $query_bind_array
- *     - "${int}" For anonymous parameters. Binded values are stored in $query_autobind_array
+ *     - ":{string}" For labeled parameters. Bound values are stored in $query_bind_array
+ *     - "${int}" For anonymous parameters. Bound values are stored in $query_autobind_array
  *     - "${string}{int}" For special constructs, eg: $in0 for late binding IN clauses
  * 2) $expanded_query_string: stores the query string after expansion of special constructs
  *   into standard "${int}" parameters
