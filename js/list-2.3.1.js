@@ -621,6 +621,7 @@ module.exports = function (list) {
       sortClass: 'pagination-sort-that-is-not-supposed-to-exist'
     });
     events.bind(pagingList.listContainer, 'click', function (e) {
+      e.preventDefault();
       var target = e.target || e.srcElement,
           page = list.utils.getAttribute(target, 'data-page'),
           i = list.utils.getAttribute(target, 'data-i');
