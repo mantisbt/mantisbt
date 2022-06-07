@@ -662,8 +662,8 @@ define( 'TYPEAHEAD_VERSION', '1.3.0' );
 define( 'TYPEAHEAD_HASH', 'sha256-VWMJXexFUMAwIXw/PoOzOleP6q97pIbKWuY4v9gMXoY=' );
 
 # List JS
-define( 'LISTJS_VERSION', '1.5.0' );
-define( 'LISTJS_HASH', 'sha384-JDmRxRiXkNkskRM5AD4qHRGk9ItwZ9flbqOpsRYs8SOrIRwcMtTGKP2Scnjptzgm' );
+define( 'LISTJS_VERSION', '2.3.1' );
+define( 'LISTJS_HASH', 'sha512-93wYgwrIFL+b+P3RvYxi/WUFRXXUDSLCT2JQk9zhVGXuS2mHl2axj6d+R6pP+gcU5isMHRj1u0oYE/mWyt/RjA==' );
 
 # Dropzone JS
 define( 'DROPZONE_VERSION', '5.5.0' );
