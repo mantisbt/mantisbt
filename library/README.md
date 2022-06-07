@@ -13,24 +13,26 @@ The version and status of each is summarized below:
 
 ## Javascript/CSS libraries
 
-| library / plugin                  | version   | status     |
-|-----------------------------------|-----------|------------|
-| jquery                            | 2.2.4     | unpatched  |
-| bootstrap                         | 3.3.6     | unpatched  |
-| fontawesome                       | 4.7.0     | unpatched  |
-| ace-admin theme                   | 1.4.0     | customized |
-| moment.js                         | 2.29.3    | unpatched  |
-| bootstrap-datetimepicker          | 4.17.47   | unpatched  |
-| dropzone.js                       | 5.5.0     | unpatched  |
-| chart.js                          | 2.8.0     | unpatched  |
-| chartjs-plugin-colorschemes       | 0.4.0     | unpatched  |
-| typeahead.js                      | 1.3.0     | unpatched  |
-| list.js                           | 2.3.1     | unpatched  |
+| library / plugin                  | version | status      |
+|-----------------------------------|---------|-------------|
+| jquery                            | 2.2.4   | unpatched   |
+| bootstrap                         | 3.3.6   | unpatched   |
+| fontawesome                       | 4.7.0   | unpatched   |
+| ace-admin theme                   | 1.4.0   | customized  |
+| moment.js                         | 2.29.3  | unpatched   |
+| bootstrap-datetimepicker          | 4.17.47 | unpatched   |
+| dropzone.js                       | 5.5.0   | unpatched   |
+| chart.js                          | 2.8.0   | unpatched   |
+| chartjs-plugin-colorschemes       | 0.4.0   | unpatched   |
+| typeahead.js                      | 1.3.0   | unpatched   |
+| list.js                           | 2.3.1   | patched [3] |
 
 **Notes**
 
 1. removed `__autoload` function
 2. fixed SYSTEM NOTICE 'Only variables should be passed by reference'
+3. fixed scrolling regression in navigation buttons, 
+   patch submitted upstream https://github.com/javve/list.js/pull/750
 
 Upstream projects
 -----------------
