@@ -29,9 +29,6 @@ $t_mantis_dir = dirname( dirname( __FILE__ ) ) . '/';
 
 require_once( $t_mantis_dir . 'core.php' );
 
-# Load schema version needed to render admin menu bar
-require_once( 'schema.php' );
-
 /**
  * Class CheckLangFile.
  *
@@ -39,6 +36,19 @@ require_once( 'schema.php' );
  */
 class LangCheckFile {
 	const BASE = 'strings_english.txt';
+
+	/**
+	 * Comma-delimited list of valid tags and attributes for language strings
+	 * @see http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
+	 */
+	const VALID_TAGS = 'em,strong,i,b,br,p,ul,ol,li,table,tr,td,code,a[href|title],span[class],abbr[title]';
+
+	/**
+	 * @var bool True if HTML syntax checks can be performed
+	 * (i.e. if DOM and libxml PHP extensions are available).
+	 * @see canDoHtmlChecks().
+	 */
+	protected static $can_do_html_check;
 
 	/**
 	 * @var string Full path to to the language file
@@ -61,6 +71,12 @@ class LangCheckFile {
 	protected $warnings = [];
 
 	/**
+	 * @var HTMLPurifier
+	 * @see http://htmlpurifier.org/
+	 */
+	protected $purifier;
+
+	/**
 	 * CheckLangFile constructor.
 	 *
 	 * @param string $p_path Path to language files
@@ -69,6 +85,16 @@ class LangCheckFile {
 	public function __construct( $p_path, $p_file ) {
 		$this->file = $p_path . $p_file;
 		$this->is_base_language = ( $p_file == self::BASE );
+
+		# Initialize HTML Purifier object
+		# - define list of tags and attributes allowed in language strings
+		# - disable the cache for now, as this is only used sporadically by
+		#   admins/devs, so the performance hit (~ 1-2 sec) is acceptable.
+		$t_purifier_config = HTMLPurifier_Config::create( [
+			'Cache.DefinitionImpl' => null,
+			'HTML.Allowed' => self::VALID_TAGS,
+		] );
+		$this->purifier = new HTMLPurifier( $t_purifier_config );
 	}
 
 	/**
@@ -93,6 +119,17 @@ class LangCheckFile {
 			$p_message = "Line $p_line: $p_message";
 		}
 		$this->warnings[] = $p_message;
+	}
+
+	/**
+	 * Returns True if HTML tags validation can be performed.
+	 * @return bool
+	 */
+	public static function canDoHtmlChecks() {
+		if( self::$can_do_html_check === null ) {
+			self::$can_do_html_check = extension_loaded( 'dom' ) && extension_loaded( 'libxml' );
+		}
+		return self::$can_do_html_check;
 	}
 
 	/**
@@ -165,7 +202,7 @@ class LangCheckFile {
 
 		/** @noinspection PhpUndefinedVariableInspection */
 		printf( '<td class="%s">%s</td>', $t_class, $t_messages );
-		echo '</tr>';
+		echo '</tr>' . PHP_EOL;
 	}
 
 	/**
@@ -257,12 +294,14 @@ class LangCheckFile {
 						break;
 					case '[':
 						if( $t_last_token != T_VARIABLE ) {
+							$this->logFail( "Unexpected opening square bracket '['", $t_line);
 							$t_pass = false;
 						}
 						$t_variable_array = true;
 						break;
 					case ']':
 						if( !$t_expect_end_array ) {
+							$this->logFail( "Unexpected closing square bracket ']'", $t_line);
 							$t_pass = false;
 						}
 						$t_expect_end_array = false;
@@ -279,7 +318,7 @@ class LangCheckFile {
 						if( $t_last_token == T_CONSTANT_ENCAPSED_STRING ) {
 							$t_two_part_string = true;
 						} else {
-							$this->logFail( "string concatenation found at unexpected location", $t_line );
+							$this->logFail( "String concatenation found at unexpected location", $t_line );
 							$t_pass = false;
 						}
 						break;
@@ -352,7 +391,7 @@ class LangCheckFile {
 						$t_expect_end_array = true;
 						break;
 					case T_CONSTANT_ENCAPSED_STRING:
-						if( $t_token[1][0] != '\'' ) {
+						if( $t_text[0] != '\'' ) {
 							$this->logWarn( "Language strings should be single-quoted", $t_line );
 						}
 						if( $t_variable_array ) {
@@ -381,6 +420,33 @@ class LangCheckFile {
 							$t_pass = false;
 							$t_fatal = true;
 						}
+
+						# Perform HTML tags validation if the string contains any
+						if( $this::canDoHtmlChecks()
+							&& preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text)
+						) {
+							/** @noinspection PhpComposerExtensionStubsInspection */
+							$t_dom = new DOMDocument();
+							set_error_handler(
+								function( $p_type, $p_error ) {
+									$t_msg = preg_replace( '/^DOM.*: (.*), line.*$/U', '\\1', $p_error );
+									/** @noinspection PhpUnhandledExceptionInspection See try/catch block below*/
+									throw new Exception( $t_msg );
+								},
+								E_WARNING
+							);
+							try {
+								/** @noinspection PhpComposerExtensionStubsInspection */
+								$t_dom->loadHTML( $t_text, LIBXML_HTML_NOIMPLIED );
+							}
+							catch( Exception $e ) {
+								$this->logWarn( $e->getMessage() . " for string $t_current_var", $t_line );
+							}
+							restore_error_handler();
+
+							$this->checkInvalidTags( $t_current_var, $t_text, $t_line );
+						}
+
 						$t_current_var = null;
 						$t_need_end_variable = true;
 						break;
@@ -404,6 +470,36 @@ class LangCheckFile {
 		return $t_pass;
 	}
 
+	/**
+	 * Use HTML Purifier to ensure the string does not contain unsupported tags.
+	 *
+	 * Will log an error if the purified string is not equal to the original.
+	 * @see LangCheckFile::compareToPurified()
+	 *
+	 * @param string $p_var  Name of language string variable to check
+	 * @param string $p_text Language string
+	 * @param int    $p_line Line number in language file
+	 *
+	 * @return void
+	 */
+	private function checkInvalidTags( $p_var, $p_text, $p_line ) {
+		$t_pure = $this->purifier->purify( $p_text );
+
+		# Special cases handling
+		# - sprintf variable '%1$s' inside href gets urlencoded
+		if( $p_var == '$s_webmaster_contact_information' ) {
+			$t_pure = str_replace( '%25', '%', $t_pure );
+		}
+
+		# Prepare original language string for comparison with HTML Purifier output
+		# - transform <br> tag with or without trailing '/' into '<br />'
+		$p_text = preg_replace( '#<br\s*/?>#i', '<br />', $p_text );
+
+		if( $t_pure != $p_text ) {
+			$this->logFail( "$p_var contains unsupported or invalid tags or attributes.", $p_line );
+		}
+	}
+
 }
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
@@ -421,18 +517,41 @@ print_admin_menu_bar( 'test_langs.php' );
 	<div class="space-10"></div>
 
 	<!-- CORE LANGUAGE FILES -->
-	<div class="widget-box widget-color-blue2">
+	<div id="core" class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
 				Testing Core Language Files
 			</h4>
+			<div class="widget-toolbar no-border hidden-xs">
+				<div class="widget-menu">
+					<a href="#plugins" class="btn btn-primary btn-white btn-round btn-sm">
+						Scroll down to Plugins
+					</a>
+				</div>
+			</div>
 		</div>
 
 		<div class="widget-body">
 			<div class="widget-main no-padding table-responsive">
-				<table class="table table-bordered table-condensed ">
+				<table class="table table-bordered table-condensed test-langs">
 <?php
+if( !LangCheckFile::canDoHtmlChecks() ) {
+?>
+					<tr>
+						<td>
+							Check for required <em>DOM</em> and <em>libxml</em>
+							PHP extensions
+						</td>
+						<td class="alert-warning">HTML syntax checks will not be performed.
+							<br>
+							NOTE: This warning applies to all languages and plugins
+							tested on this page.
+						</td>
+					</tr>
+<?php
+}
+
 checklangdir( $t_mantis_dir );
 ?>
 				</table>
@@ -443,17 +562,24 @@ checklangdir( $t_mantis_dir );
 	<div class="space-10"></div>
 
 	<!-- PLUGINS -->
-	<div class="widget-box widget-color-blue2">
+	<div id="plugins" class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
 				Testing Plugins Language Files
 			</h4>
+			<div class="widget-toolbar no-border hidden-xs">
+				<div class="widget-menu">
+					<a href="#" class="btn btn-primary btn-white btn-round btn-sm">
+						Scroll back to top
+					</a>
+				</div>
+			</div>
 		</div>
 
 		<div class="widget-body">
 			<div class="widget-main no-padding table-responsive">
-				<table class="table table-bordered table-condensed ">
+				<table class="table table-bordered table-condensed test-langs">
 <?php
 checkplugins();
 ?>
@@ -478,17 +604,24 @@ function checkplugins() {
 
 	try {
 		$t_plugins = get_plugins( $t_path );
-		print_info( count( $t_plugins ) . " Plugins found" );
+		$t_toc = '<ol class="plugins-toc">';
+		foreach( $t_plugins as $t_plugin => $t_path ) {
+			$t_toc .= '<li><a href="#plugin-' . $t_plugin . '">' . $t_plugin . '</a></li>';
+		}
+		$t_toc .= '</ol>';
+		print_info( count( $t_plugins ) . " Plugins found" . $t_toc );
 	} catch( UnexpectedValueException $e ) {
 		print_fail( $e->getMessage() );
-		echo '</tr>';
+		echo '</tr>' . PHP_EOL;
 		return;
 	}
-	echo '</tr>';
+	echo '</tr>' . PHP_EOL;
 
 	foreach( $t_plugins as $t_plugin => $t_path ) {
+		echo PHP_EOL;
 		echo '<tr><th colspan="2">';
-		echo "Checking language files for plugin <strong>$t_plugin</strong>";
+		echo '<a id="plugin-' . $t_plugin . '"></a>';
+		echo "Checking language files for plugin <em>$t_plugin</em>";
 		echo '</th></tr>';
 		checklangdir( $t_path );
 	}
@@ -559,13 +692,13 @@ function get_lang_files( $p_path ) {
  */
 function checklangdir( $p_path ) {
 	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . '/lang/';
-	echo '<tr><td>';
+	echo PHP_EOL . '<tr><td>';
 	echo "Retrieving language files from '$t_path'";
 	echo '</td>';
 
 	if( !is_dir( $t_path ) ) {
 		print_info( "Directory does not exist" );
-		echo '</tr>';
+		echo '</tr>' . PHP_EOL;
 		return;
 	} else {
 		try {
@@ -573,12 +706,12 @@ function checklangdir( $p_path ) {
 			print_info( count( $t_lang_files ) . " files found" );
 		} catch( UnexpectedValueException $e ) {
 			print_fail( $e->getMessage() );
-			echo '</tr>';
+			echo '</tr>' . PHP_EOL;
 			return;
 		}
 	}
 
-	echo '</tr>';
+	echo '</tr>' . PHP_EOL;
 
 	# Check reference English language file
 	$t_key = array_search( LangCheckFile::BASE, $t_lang_files );
@@ -601,7 +734,7 @@ function checklangdir( $p_path ) {
 }
 
 function print_info( $p_message ) {
-	echo '<td class="alert-info">', string_attribute( $p_message ), '</td>';
+	echo '<td class="alert-info">', ( $p_message ), '</td>';
 }
 
 function print_fail( $p_message ) {

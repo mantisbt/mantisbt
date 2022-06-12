@@ -31,7 +31,9 @@ tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px;
 #buglist .cftype-textarea
 	{ text-align: left; }
 
-.sticky-separator { background-color: lightgrey;}
+.sticky-separator,
+.test-langs th
+	{ background-color: lightgrey; }
 
 /* manage_plugin_page.php */
 span.dependency_dated		{ color: maroon; }
@@ -163,4 +165,11 @@ table.filters td.category {
 
 .listjs-table .sort:hover {
 	text-decoration: underline;
+}
+
+.test-langs ol.plugins-toc {
+    column-count: auto;
+    column-width: 130px;
+    column-gap: 60px;
+    margin: 10px 15px 10px 30px;
 }
