@@ -258,28 +258,11 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 
 			<div class="widget-toolbox padding-8 clearfix">
 <?php
-	# Check the user's global access level before allowing project creation
-	if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-?>
-					<div class="pull-left padding-right-8">
-<?php
-		print_form_button(
-			'manage_proj_create_page.php',
-			lang_get( 'create_new_subproject_link' ),
-			array( 'parent_id' => $f_project_id ),
-			null,
-			'btn btn-sm btn-primary btn-white btn-round'
-		);
-?>
-					</div>
-<?php
-	} # Create project button
-
-	# Add existing project as subproject form
+	# Add an existing project as subproject form
 ?>
 				<form id="manage-project-subproject-add-form"
 					  action="manage_proj_subproj_add.php"
-					  class="form-inline pull-left">
+					  class="form-inline pull-left padding-right-8">
 					<fieldset>
 						<?php echo form_security_field( 'manage_proj_subproj_add' ) ?>
 						<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
@@ -316,6 +299,18 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 						</button>
 					</fieldset>
 				</form>
+<?php
+	# Create project button, only shown if user's global access level allows
+	if( access_has_global_level( config_get( 'create_project_threshold' ) ) ) {
+		print_form_button(
+			'manage_proj_create_page.php',
+			lang_get( 'create_new_subproject_link' ),
+			array( 'parent_id' => $f_project_id ),
+			null,
+			'btn btn-sm btn-primary btn-white btn-round'
+		);
+	}
+?>
 			</div>
 
 <?php
