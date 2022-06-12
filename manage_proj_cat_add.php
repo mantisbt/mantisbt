@@ -92,11 +92,11 @@ foreach( $t_names as $t_name ) {
 form_security_purge( 'manage_proj_cat_add' );
 
 if( $f_add_and_edit ) {
-	$t_redirect_url = 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_proj_cat_edit_page.php?category_id=' . $t_id . '&project_id=' . $f_project_id;
 } else if( $f_project_id == ALL_PROJECTS ) {
 	$t_redirect_url = 'manage_proj_page.php';
 } else {
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#categories';
 }
 
 print_header_redirect( $t_redirect_url );

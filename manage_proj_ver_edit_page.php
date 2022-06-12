@@ -60,7 +60,6 @@ $t_version = version_get( $f_version_id );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version->project_id );
 
 layout_page_header();
-
 layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_proj_ver_edit_page.php' );
@@ -144,22 +143,19 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 			</div>
 			<div class="widget-toolbox padding-8 clearfix">
 				<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_version_button' ) ?>" />
+				<button class="btn btn-primary btn-white btn-round">
+					<?php echo lang_get( 'update_version_button' ) ?>
+				</button>
+				<?php echo form_security_field( 'manage_proj_ver_delete' ) ?>
+				<button class="btn btn-primary btn-white btn-round"
+						formaction="manage_proj_ver_delete.php">
+					<?php echo lang_get( 'delete_version_button' ) ?>
+				</button>
 			</div>
 			</div>
 			</div>
 	</form>
 </div>
-</div>
-
-<div class="col-md-12 col-xs-12">
-	<form method="post" action="manage_proj_ver_delete.php" class="pull-right">
-		<fieldset>
-			<?php echo form_security_field( 'manage_proj_ver_delete' ) ?>
-			<input type="hidden" name="version_id" value="<?php echo string_attribute( $t_version->id ) ?>" />
-			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
-		</fieldset>
-	</form>
 </div>
 
 <?php

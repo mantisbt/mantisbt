@@ -16,7 +16,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
+
+"use strict"; // jshint ignore:line
 
 var userList;
 
@@ -26,34 +28,30 @@ function acldelete_setup( div ) {
 		function(){
 			var jdivacl = $(div).closest('tr').find('div.editable_access_level');
 			if( this.checked ) {
-				jdivacl.hide()
+				jdivacl.hide();
 			} else {
-				jdivacl.show()
+				jdivacl.show();
 			}
 		};
-	jcheckboxs.change(show_or_hide_select);
+	// noinspection JSCheckFunctionSignatures
+	jcheckboxs.on('change', show_or_hide_select);
 	jcheckboxs.each(show_or_hide_select);
 }
 
 function acledit_setup( div ) {
 	var jdiv = $(div);
 	// add listeners to edit links
-	jdiv.find('span.unchanged a.edit_link').click( function(e){
+	jdiv.find('span.unchanged a.edit_link').on('click', function(e){
 		e.preventDefault();
 		show_input( $(this).closest('div.editable_access_level') );
 	});
 	// add events to manage changes in selection
 	jdiv.find('select.user_access_level')
-		.on( 'blur change', function(e){
+		.on( 'blur change', function(){
 			try_hide_input( $(this).closest('div.editable_access_level') );
-			var x1 = this.value;
-			var x2 = $(this).closest('.key-access');
-			var x3 = $(this).closest('.key-access').data('textvalue');
 			var selection = $(this).find('option:selected').text();
 			$(this).closest('.key-access').data('textvalue', selection);
-			var x4 = $(this).closest('.key-access').data('textvalue');
-		})
-		;
+		});
 	try_hide_input( div );
 }
 
@@ -70,43 +68,49 @@ function try_hide_input( div ) {
 	if( jselect.is(":hidden") ) {
 		return;
 	}
-	var current_val = jselect.val();
+	var current_val = parseInt(jselect.val(), 10);
 	var original_val = jselect.data('original_val');
-	if( current_val == original_val ) {
+	if( current_val === original_val ) {
 		jselect.hide();
 		jdiv.find('span.changed_to').hide();
 		var textonly = jdiv.find('span.unchanged');
 		textonly.removeClass('hidden');
 		textonly.show();
 	}
-};
+}
 
 
-$(document).ready( function() {
+$(function() {
 	if( !$('#manage-project-users-list .listjs-table').length ) {
 		return;
 	}
 
 	$('#manage-project-users-form-toolbox').removeClass('hidden');
 
-	var per_page = $('#input-per-page').val();
-	var userList_options = {  valueNames: [ { name: 'key-name', attr: 'data-sortvalue' }, 'key-email', { name: 'key-access', attr: 'data-sortvalue' } ]
-		, page: per_page,
-			pagination: {
-			  innerWindow: 2,
-			  left: 1,
-			  right: 1,
-			  paginationClass: "pagination",
-			  }
+	var per_page = $('#input-per-page');
+	var userList_options = {
+		valueNames: [
+			{ name: 'key-name', attr: 'data-sortvalue' },
+			{ name: 'key-email', attr: 'data-sortvalue' },
+			{ name: 'key-access', attr: 'data-sortvalue' }
+		],
+		page: per_page.val(),
+		pagination: {
+			innerWindow: 2,
+			left: 1,
+			right: 1,
+			paginationClass: "pagination"
+		}
 	};
-	userList = new List('manage-project-users-list', userList_options);
+	userList = new List('manage-project-users-list', userList_options); // jshint ignore:line
 	userList.on( 'updated', function(){
 		$('div.editable_access_level').each( function(){ acledit_setup(this); } );
 		$('div.editable_user_delete').each( function(){ acldelete_setup(this); } );
 	});
 
-	$('#input-per-page').change( function(e) {
-		if( $.isNumeric( this.value ) && this.value > 0 ) {
+	per_page.on( 'change', function() {
+		this.value = parseInt( this.value ) || 0;
+		if( this.value > 0 ) {
 			userList.page = this.value;
 			userList.update();
 		}
@@ -115,18 +119,18 @@ $(document).ready( function() {
 	$('div.editable_access_level').each( function(){ acledit_setup(this); } );
 	$('div.editable_user_delete').each( function(){ acldelete_setup(this); } );
 
-	$('#manage-project-users-form').submit( function(e){
+	$('#manage-project-users-form').on( 'submit', function(){
 		var items = userList.items;
 
 		// Build an array of all inputs in list
 		// including those hidden under pagination
-		var acl_values = new Object();
-		var delete_ids = new Array();
+		var acl_values = {};
+		var delete_ids = [];
 		$.each(items, function(){
 			var jselect = $(this.elm).find('select.user_access_level');
 			var current_val = jselect.val();
 			var original_val = jselect.data('original_val');
-			if( current_val != original_val ) {
+			if( current_val !== original_val ) {
 				var user_id = jselect.data('user_id');
 				acl_values[user_id] = current_val;
 			}
@@ -136,23 +140,23 @@ $(document).ready( function() {
 			}
 		});
 
-		var json_submit = new Object();
-		json_submit['user_access_level'] = acl_values;
-		json_submit['user_access_delete'] = delete_ids;
+		var json_submit = {};
+		json_submit.user_access_level = acl_values;
+		json_submit.user_access_delete = delete_ids;
 		console.log(JSON.stringify(json_submit));
 
 		$('<input />').attr('type', 'hidden')
 			.attr('name', 'json_submit')
-          .attr('value', JSON.stringify(json_submit) )
-          .appendTo('#manage-project-users-form');
+			.attr('value', JSON.stringify(json_submit) )
+			.appendTo('#manage-project-users-form');
 	});
 
-	var btn_remove_all = $('#manage-project-users-form input[name=btn-remove-all]');
+	var btn_remove_all = $('#manage-project-users-form button[name=btn-remove-all]');
 	var btn_undo_remove_all = $('#manage-project-users-form button[name=btn-undo-remove-all]');
 	// remove hidden class and use jquery functionality.
 	btn_undo_remove_all.hide().removeClass('hidden');
 
-	btn_remove_all.click(function(e){
+	btn_remove_all.on( 'click', function(e){
 		e.preventDefault();
 		var items = userList.items;
 		// Update al checkboxes in list
@@ -169,7 +173,7 @@ $(document).ready( function() {
 		btn_undo_remove_all.show();
 	});
 
-	btn_undo_remove_all.click(function(e){
+	btn_undo_remove_all.on('click', function(e){
 		e.preventDefault();
 		var items = userList.items;
 		// Update al checkboxes in list

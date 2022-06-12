@@ -173,3 +173,8 @@ table.filters td.category {
     column-gap: 60px;
     margin: 10px 15px 10px 30px;
 }
+
+.editable_access_level {
+    display: inline-grid;
+    grid-template-columns: 1fr 20px 1fr;
+}
