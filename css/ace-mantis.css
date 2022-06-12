@@ -167,6 +167,11 @@
     padding: 2px 5px;
 }
 
+.btn-sm,
+.btn-group-sm > .btn {
+    height: 30px;
+}
+
 .bold {
     font-weight: bold;
 }
