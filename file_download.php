@@ -207,11 +207,11 @@ $t_mime_force_inline = array(
 	'image/gif',
 	'image/jpeg',
 	'image/png',
-	'image/svg+xml',
 	'image/tiff',
 );
 $t_mime_force_attachment = array(
 	'application/x-shockwave-flash',
+	'image/svg+xml', # SVG could contain CSS or scripting, see #30384
 	'text/html',
 );
 
