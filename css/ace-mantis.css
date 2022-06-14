@@ -145,15 +145,9 @@
 }
 
 .widget-toolbar > .widget-menu > a {
-    display: inline-block;
     font-size: 11px;
     padding: 0 5px;
     line-height: 20px;
-}
-
-.widget-toolbar > .widget-menu a.btn-xs {
-	font-size: 12px;
-	line-height: 1.5;
 }
 
 .widget-toolbar > .widget-menu form {
@@ -164,6 +158,8 @@
 }
 
 .widget-toolbar > .widget-menu .btn-xs {
+    font-size: 12px;
+    line-height: 1.5;
     padding: 2px 5px;
 }
 
