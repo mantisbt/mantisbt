@@ -525,9 +525,7 @@ print_admin_menu_bar( 'test_langs.php' );
 			</h4>
 			<div class="widget-toolbar no-border hidden-xs">
 				<div class="widget-menu">
-					<a href="#plugins" class="btn btn-primary btn-white btn-round btn-sm">
-						Scroll down to Plugins
-					</a>
+					<?php print_extra_small_button( '#plugins', 'Scroll down to Plugins'); ?>
 				</div>
 			</div>
 		</div>
@@ -570,9 +568,7 @@ checklangdir( $t_mantis_dir );
 			</h4>
 			<div class="widget-toolbar no-border hidden-xs">
 				<div class="widget-menu">
-					<a href="#" class="btn btn-primary btn-white btn-round btn-sm">
-						Scroll back to top
-					</a>
+					<?php print_extra_small_button( '#', 'Scroll back to top'); ?>
 				</div>
 			</div>
 		</div>
