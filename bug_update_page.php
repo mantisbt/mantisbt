@@ -173,7 +173,7 @@ layout_page_begin();
 			</h4>
 			<div class="widget-toolbar no-border">
 				<div class="widget-menu">
-					<?php print_small_button( string_get_bug_view_url( $t_bug_id ), lang_get( 'back_to_bug_link' ) ); ?>
+					<?php print_extra_small_button( string_get_bug_view_url( $t_bug_id ), lang_get( 'back_to_bug_link' ) ); ?>
 				</div>
 			</div>
 		</div>
