@@ -721,7 +721,7 @@ function file_type_check( $p_file_name ) {
 		}
 	}
 
-	# if the allowed list is note populated then the file must be allowed
+	# if the allowed list is not populated then the file must be allowed
 	if( is_blank( $t_allowed_files ) ) {
 		return true;
 	}
