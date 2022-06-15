@@ -1984,19 +1984,31 @@ $g_max_file_size = 5 * 1024 * 1024;
 $g_file_upload_max_num = 10;
 
 /**
- * Files that are allowed or not allowed.  Separate items by commas.
- * eg. 'php,html,java,exe,pl'
- * if $g_allowed_files is filled in NO other file types will be allowed.
- * $g_disallowed_files takes precedence over $g_allowed_files
+ * Authorized file types (whitelist).
+ *
+ * If $g_allowed_files is filled in, NO other file types will be allowed. If
+ * empty, any extensions not specifically excluded by $g_disallowed_files list
+ * will be authorized ($g_disallowed_files takes precedence over $g_allowed_files).
+ * Separate items by commas, e.g. 'bmp,gif,jpg,png,txt,zip'.
+ *
+ * @see $g_allowed_files
  * @global string $g_allowed_files
  */
 $g_allowed_files = '';
 
 /**
+ * Forbidden file types (blacklist).
  *
+ * All file extensions in this list will be unauthorized.
+ * Separate items by commas, e.g. 'php,html,java,exe,pl,svg'.
+ *
+ * SVG files are disabled by default, for security reasons. It is recommended to
+ * also disable all extensions that can be executed by your server;
+ *
+ * @see $g_allowed_files
  * @global string $g_disallowed_files
  */
-$g_disallowed_files = '';
+$g_disallowed_files = 'svg';
 
 /**
  * prefix to be used for the file system names of files uploaded to projects.

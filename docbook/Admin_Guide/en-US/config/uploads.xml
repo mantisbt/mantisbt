@@ -72,22 +72,31 @@
 		<varlistentry>
 			<term>$g_allowed_files</term>
 			<listitem>
-				<para>Files that are allowed. Separate items by commas. eg.
-					&quot;zip,bmp,gif,jpg,txt&quot; If $g_allowed_files is filled in NO other
-					file types will be allowed. If empty it will assume any files are
-					accepted that pass the $g_disallowed_files list.
+				<para>Authorized file types (whitelist).</para>
+				<para>If $g_allowed_files is filled in, NO other file types will be allowed.
+					If empty, any extensions not specifically excluded by
+					<emphasis>$g_disallowed_files list</emphasis> will be authorized
+					($g_disallowed_files takes precedence over $g_allowed_files).
+					Separate items by commas, e.g.
+					<literal>'bmp,gif,jpg,png,txt,zip'</literal>.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_disallowed_files</term>
 			<listitem>
-				<para>Files that are not allowed. Separate items by commas. eg.
-					&quot;php,php3,phtml,html,class,java,exe,pl&quot; $g_disallowed_files takes
-					precedence over $g_allowed_files.
-					It is recommended to disable all extensions that can be executed by
-					your server.
+				<para>Forbidden file types (blacklist).</para>
+				<para>All file extensions in this list will be unauthorized.
+					Separate items by commas, e.g.
+					<literal>'php,html,java,exe,pl,svg'</literal>.
 				</para>
+				<warning>
+					<para><ulink url="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics">SVG files</ulink>
+						are disabled by default, for security reasons.
+						It is recommended to also disable all extensions that
+						can be executed by your server.
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
