@@ -614,7 +614,8 @@ function helper_mantis_url( $p_url ) {
 	global $g_project_override;
 
 	if( is_blank( $p_url ) ) {
-		return $p_url;
+		$p_url_normalizer = new URL\Normalizer( $p_url );
+		return $p_url_normalizer->normalize();
 	}
 
 	if( !empty($g_project_override) ){
@@ -641,10 +642,12 @@ function helper_mantis_url( $p_url ) {
 	# Return URL as-is if it already starts with short path
 	$t_short_path = config_get_global( 'short_path' );
 	if( strpos( $p_url, $t_short_path ) === 0 ) {
-		return $p_url;
+		$p_url_normalizer = new URL\Normalizer( $p_url );
+		return $p_url_normalizer->normalize();
 	}
 
-	return $t_short_path . $p_url;
+	$p_url_normalizer = new URL\Normalizer( $t_short_path . $p_url );
+	return $p_url_normalizer->normalize();
 }
 
 /**
