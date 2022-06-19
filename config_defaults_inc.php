@@ -4882,3 +4882,72 @@ $g_issue_activity_note_attachments_seconds_threshold = 3;
  * the attachment is linked to the note.  Or 0 for disabling this feature.
  */
 $g_issue_activity_note_attachments_seconds_threshold = 3;
+
+###########################
+# Simplified entry screen #
+###########################
+
+/**
+ * Define the level up to which the simplified screen should be used
+ */
+$g_simple_report_level = UPDATER;
+
+/**
+ * Define the fileds to use on the simplified screen
+ * sample setting $g_simple_bug_report_page_fields = array(	'additional_info',	'attachments',	'category_id',);
+ * default value is the same initially as the normal screen
+ * Simplified screen behaves identical to the normal screen
+ * this means that custom fields will show if defined to be shown on the report screen despite the settings here
+ *
+ *
+ * An array of optional fields to show on the simplified bug report page.
+ *
+ * The following optional fields are allowed:
+ *   - additional_info
+ *   - attachments
+ *   - category_id
+ *   - due_date
+ *   - handler
+ *   - os
+ *   - os_version
+ *   - platform
+ *   - priority
+ *   - product_build
+ *   - product_version
+ *   - reproducibility
+ *   - resolution
+ *   - severity
+ *   - status
+ *   - steps_to_reproduce
+ *   - target_version
+ *   - view_state
+ *
+ * The summary and description fields are always shown and do not need to be
+ * listed in this option. Fields not listed above cannot be shown on the bug
+ * report page. Visibility of custom fields is handled via the Manage =>
+ * Manage Custom Fields administrator page.
+ *
+ * This setting can be set on a per-project basis by using the
+ * Manage => Manage Configuration administrator page.
+ *
+ * @global array $g_bug_report_page_fields
+ */
+$g_simple_bug_report_page_fields = array(
+	'additional_info',
+	'attachments',
+	'category_id',
+	'due_date',
+	'handler',
+	'os',
+	'os_version',
+	'platform',
+	'priority',
+	'product_build',
+	'product_version',
+	'reproducibility',
+	'severity',
+	'steps_to_reproduce',
+	'tags',
+	'target_version',
+	'view_state',
+);

@@ -194,7 +194,14 @@ $f_report_stay			= gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent         = gpc_get_bool( 'copy_notes_from_parent', false );
 $f_copy_attachments_from_parent   = gpc_get_bool( 'copy_attachments_from_parent', false );
 
-$t_fields = config_get( 'bug_report_page_fields' );
+$t_user_access_level = user_get_access_level( auth_get_current_user_id(), $t_project_id );
+$t_max_access_level = config_get( 'simple_report_level' );
+if( $t_user_access_level > $t_max_access_level ) {
+	$t_fields = config_get( 'bug_report_page_fields' );
+} else {
+	$t_fields = config_get( 'simple_bug_report_page_fields' );
+}
+
 $t_fields = columns_filter_disabled( $t_fields );
 
 $t_show_category = in_array( 'category_id', $t_fields );
