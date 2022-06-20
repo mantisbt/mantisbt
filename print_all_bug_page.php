@@ -158,8 +158,9 @@ $f_export = implode( ',', $f_bug_arr );
 		if( filter_is_temporary( $t_filter ) ) {
 			$t_params['filter'] = filter_get_temporary_key( $t_filter );
 		}
-
-		echo '<a href="' . $t_icon[0] . '.php?' . http_build_query( $t_params ) . '" ' . $t_icon[2] . '>';
+		
+		$t_url = helper_mantis_url( $t_icon[0] . '.php?' . http_build_query( $t_params ) );
+		echo '<a href="' . $t_url . '" ' . $t_icon[2] . '>';
 		print_icon( $t_icon[3], '', $t_icon[4] );
 		echo '</a> ';
 	}

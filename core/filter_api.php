@@ -1378,10 +1378,11 @@ function filter_draw_selection_area() {
 
 	<?php
 	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
-		$t_url_save_filter = helper_mantis_url('query_store_page.php');
+		$t_url_save_filter = 'query_store_page.php';
 		if( filter_is_temporary( $t_filter ) ) {
 			$t_url_save_filter .= '?filter=' . filter_get_temporary_key( $t_filter );
 		}
+		$t_url_save_filter = helper_mantis_url( $t_url_save_filter );
 	?>
 							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_save_filter ?>">
 								<?php print_icon( 'fa-floppy-o', 'ace-icon' ); ?>

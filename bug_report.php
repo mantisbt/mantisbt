@@ -293,7 +293,7 @@ layout_page_begin( 'bug_report_page.php' );
 
 $t_buttons = array(
 	array( string_get_bug_view_url( $t_issue_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_issue_id ) ),
-	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
+	array( helper_mantis_url( 'view_all_bug_page.php' ), lang_get( 'view_bugs_link' ) ),
 );
 
 if( $f_report_stay ) {

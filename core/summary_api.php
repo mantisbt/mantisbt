@@ -1290,7 +1290,7 @@ function summary_print_filter_info( array $p_filter = null ) {
 	}
 	$t_filter_query = filter_cache_subquery( $p_filter );
 	$t_bug_count = $t_filter_query->get_bug_count();
-	$t_view_issues_link = helper_url_combine( 'view_all_bug_page.php', filter_get_temporary_key_param( $p_filter ) );
+	$t_view_issues_link = helper_mantis_url( helper_url_combine( 'view_all_bug_page.php', filter_get_temporary_key_param( $p_filter ) ) );
 	?>
 	<div class="space-10"></div>
 	<div class="col-md-12 col-xs-12">
