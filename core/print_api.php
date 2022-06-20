@@ -82,6 +82,9 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
+# Load Composer autoloader
+require_once( dirname( __FILE__ ) . '/../vendor/autoload.php' );
+
 /**
  * Print the headers to cause the page to redirect to $p_url
  * If $p_die is true (default), terminate the execution of the script immediately
@@ -115,9 +118,8 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		}
 	}
 
-	// var_dump($t_url);
-	// exit;
-	$t_url = string_prepare_header( $t_url );
+	$t_url_norm = new Url\Normalizer( $t_url ); // expects to be available via "autoload"
+	$t_url = $t_url_norm->normalize();
 
 	# don't send more headers if they have already been sent
 	if( !headers_sent() ) {
@@ -1396,8 +1398,8 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
-        $p_string, false, $p_class );
+	$t_url = helper_mantis_url( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search );
+	print_link( $t_url, $p_string, false, $p_class );
 }
 
 /**
@@ -1423,7 +1425,8 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir, $p_string );
+	$t_url = helper_mantis_url( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir );
+	print_link( $t_url, $p_string );
 }
 
 /**
@@ -1559,10 +1562,11 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 		echo '<li class="pull-right"> ';
 		$t_delimiter = ( strpos( $p_page_url, '?' ) ? '&' : '?' );
 		if( $p_temp_filter_key ) {
-			print_link( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_key . '&page_number=' . $p_page_no, $p_text );
+			$t_url = helper_mantis_url( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_key . '&page_number=' . $p_page_no );
 		} else {
-			print_link( $p_page_url . $t_delimiter . 'page_number=' . $p_page_no, $p_text );
+			$t_url = helper_mantis_url( $p_page_url . $t_delimiter . 'page_number=' . $p_page_no );
 		}
+		print_link($t_url, $p_text);
 		echo ' </li>';
 	} else {
 		echo '<li class="disabled pull-right"><a>' . $p_text . '</a></li>';

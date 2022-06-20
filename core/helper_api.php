@@ -54,7 +54,11 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+# Load Composer autoloader
+require_once( dirname( __FILE__ ) . '/../vendor/autoload.php' );
+
 use Mantis\Exceptions\ClientException;
+use URL\Normalizer;
 
 /**
  * alternate classes for table rows
@@ -613,9 +617,11 @@ function helper_log_to_page() {
 function helper_mantis_url( $p_url ) {
 	global $g_project_override;
 
+	$t_url_norm = new URL\Normalizer(null, true, true);
+
 	if( is_blank( $p_url ) ) {
-		$p_url_normalizer = new URL\Normalizer( $p_url );
-		return $p_url_normalizer->normalize();
+		$t_url_norm->setUrl( $p_url );
+		return $t_url_norm->normalize();
 	}
 
 	if( !empty($g_project_override) ){
@@ -642,12 +648,12 @@ function helper_mantis_url( $p_url ) {
 	# Return URL as-is if it already starts with short path
 	$t_short_path = config_get_global( 'short_path' );
 	if( strpos( $p_url, $t_short_path ) === 0 ) {
-		$p_url_normalizer = new URL\Normalizer( $p_url );
-		return $p_url_normalizer->normalize();
+		$t_url_norm->setUrl( $p_url );
+		return $t_url_norm->normalize();
 	}
 
-	$p_url_normalizer = new URL\Normalizer( $t_short_path . $p_url );
-	return $p_url_normalizer->normalize();
+	$t_url_norm->setUrl( $t_short_path . $p_url );
+	return $t_url_norm->normalize();
 }
 
 /**

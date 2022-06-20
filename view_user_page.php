@@ -179,7 +179,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 	<?php if( $t_can_manage || $t_can_impersonate ) { ?>
 	<div class="widget-toolbox padding-8 clearfix">
 		<?php if( $t_can_manage ) { ?>
-		<form id="manage-user-form" method="get" action="<?php echo helper_mantis_url("manage_user_edit_page.php"); ?>" class="pull-left">
+		<form id="manage-user-form" method="get" action="<?php echo helper_mantis_url( 'manage_user_edit_page.php' ); ?>" class="pull-left">
 			<fieldset>
 				<input type="hidden" name="user_id" value="<?php echo $f_user_id ?>" />
 				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>

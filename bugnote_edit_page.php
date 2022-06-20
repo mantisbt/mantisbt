@@ -104,7 +104,7 @@ if( config_get( 'time_tracking_enabled' ) &&
 }
 
 # Determine which view page to redirect back to.
-$t_redirect_url = helper_mantis_url(string_get_bug_view_url( $t_bug_id ));
+$t_redirect_url = string_get_bug_view_url( $t_bug_id );
 
 layout_page_header( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 

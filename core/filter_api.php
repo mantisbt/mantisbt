@@ -2394,6 +2394,7 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
 	}
 
 	echo '<li>';
+	$t_url = helper_mantis_url( $t_url );
 	printf( '<a href="%s">%s</i>&#160;&#160;%s</a>',
 		$t_url,
 		icon_get( $t_icon, 'ace-icon' ),

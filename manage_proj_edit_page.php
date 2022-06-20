@@ -928,10 +928,11 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 			$t_can_manage_this_user = $t_can_manage_users
 					&& access_has_project_level( $t_user['access_level'], $f_project_id )
 					&& ( !$f_show_global_users || isset( $t_local_users[$t_user['id']]) );
+			$t_user_edit_url = helper_mantis_url( 'manage_user_edit_page.php?user_id=' . $t_user['id'] );
 ?>
 		<tr>
 			<td class="key-name" data-sortvalue="<?php echo $t_username ?>">
-				<a href="manage_user_edit_page.php?user_id=<?php echo $t_user['id'] ?>">
+				<a href="<?php echo $t_user_edit_url ?>">
 				<?php echo prepare_user_name( $t_user['id'], false ); ?>
 				</a>
 			</td>

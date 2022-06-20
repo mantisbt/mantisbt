@@ -396,9 +396,10 @@ $t_user_count = count( $t_users );
 				<td>
 <?php
 		if( access_has_global_level( $v_access_level ) ) {
+			$t_url = helper_mantis_url( 'manage_user_edit_page.php?user_id=' . $v_id );
 			/** @noinspection HtmlUnknownTarget */
 			printf( '<a href="%s">%s</a>',
-				'manage_user_edit_page.php?user_id=' . $v_id,
+				$t_url,
 				string_display_line( $v_username )
 			);
 		} else {

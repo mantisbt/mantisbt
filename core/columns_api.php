@@ -1161,7 +1161,7 @@ function print_column_edit( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_V
 	echo '<td class="column-edit">';
 
 	if( !bug_is_readonly( $p_bug->id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
-		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
+		echo '<a href="' .  string_get_bug_update_url( $p_bug->id ) . '">';
 		print_icon( 'fa-pencil', 'bigger-130 padding-2 grey', lang_get( 'edit' ) );
 		echo '</a>';
 	} else {

@@ -98,7 +98,7 @@ class Avatar
         if( $this->link === null ) {
             if ( $p_user_exists ) {
                 $this->link = config_get_global( 'path' ) .
-                    'view_user_page.php?id=' . $p_user_id;
+                    helper_mantis_url( 'view_user_page.php?id=' . $p_user_id );
             } else {
                 $this->link = '';
             }

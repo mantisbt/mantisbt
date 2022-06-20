@@ -93,8 +93,9 @@ function table_print_filter_row( $p_filter_id ) {
 	echo '<tr>';
 	# Filter name
 	echo '<td>';
+	$t_url = helper_mantis_url( 'view_filters_page.php?filter_id=' . $p_filter_id );
 	$t_name = string_display_line( filter_get_field( $p_filter_id, 'name' ) );
-	print_link( 'view_filters_page.php?filter_id=' . $p_filter_id, $t_name );
+	print_link( $t_url, $t_name );
 	echo '</td>';
 	# RSS
 	if( $t_rss_enabled ) {

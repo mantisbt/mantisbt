@@ -135,7 +135,9 @@ function prepare_user_name( $p_user_id, $p_link = true ) {
 
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 		if( $p_link ) {
-			return '<a' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_name . '</a>';
+			$t_url = string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true );
+			$t_url = helper_mantis_url( $t_url );
+			return '<a' . $t_tooltip . ' href="' . $t_url . '">' . $t_name . '</a>';
 		} else {
 			return '<span ' . $t_tooltip . '>' . $t_name . '</span>';
 		}
