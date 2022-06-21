@@ -888,7 +888,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 				</div>
 
 				<div class="widget-main no-padding" >
-					<form id="manage-project-users-form" method="post" action="manage_proj_user_update.php">
+					<form id="manage-project-users-form" method="post" action="<?php echo helper_mantis_url( 'manage_proj_user_update.php' ); ?>">
 						<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 						<?php echo form_security_field( 'manage_proj_user_update' ) ?>
 						<div class="table-responsive listjs-table">

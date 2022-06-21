@@ -114,7 +114,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 <div class="widget-body">
 	<div class="widget-main no-padding">
 
-<form name="move_attachments_project_select" method="post" action="move_attachments.php">
+<form name="move_attachments_project_select" method="post" action="<?php echo helper_mantis_url( 'move_attachments.php' ); ?>">
 <div class="table-responsive">
 <table class="table table-bordered table-condensed table-hover table-striped">
 	<thead>

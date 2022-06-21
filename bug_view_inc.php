@@ -684,7 +684,7 @@ if( $t_flags['monitor_show'] ) {
 			if( $t_flags['monitor_can_add'] ) {
 	?>
 			<br /><br />
-			<form method="get" action="bug_monitor_add.php" class="form-inline noprint">
+			<form method="get" action="<?php echo helper_mantis_url( 'bug_monitor_add.php' ); ?>" class="form-inline noprint">
 			<?php echo form_security_field( 'bug_monitor_add' ) ?>
 				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
 				<input type="text" class="input-sm" id="bug_monitor_list_user_to_add" name="user_to_add" />
@@ -1009,7 +1009,7 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 <?php
 		if( $p_can_update ) {
 ?>
-		<form method="post" action="bug_relationship_add.php" class="form-inline noprint">
+		<form method="post" action="<?php echo helper_mantis_url( 'bug_relationship_add.php' ); ?>" class="form-inline noprint">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
 		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" />
 		<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
@@ -1065,7 +1065,8 @@ function bug_view_button_bug_change_status( BugData $p_bug ) {
 		$t_default = key( $t_enum_list );
 		ksort( $t_enum_list );
 
-		echo '<form method="post" action="bug_change_status_page.php" class="form-inline">';
+		$t_url = helper_mantis_url( 'bug_change_status_page.php' ); 
+		echo '<form method="post" action="' . $t_url . '" class="form-inline">';
 		# CSRF protection not required here - form does not result in modifications
 
 		$t_button_text = lang_get( 'bug_status_to_button' );
@@ -1123,7 +1124,8 @@ function bug_view_button_bug_assign_to( BugData $p_bug ) {
 		}
 	}
 
-	echo '<form method="post" action="bug_update.php" class="form-inline">';
+	$t_update_url = helper_mantis_url( 'bug_update.php' );
+	echo '<form method="post" action="' . $t_update_url . '" class="form-inline">';
 	echo form_security_field( 'bug_update' );
 	echo '<input type="hidden" name="last_updated" value="' . $p_bug->last_updated . '" />';
 	echo '<input type="hidden" name="action_type" value="' . BUG_UPDATE_TYPE_ASSIGN . '" />';

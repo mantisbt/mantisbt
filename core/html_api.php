@@ -972,7 +972,7 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 		$t_method = 'post';
 	}
 
-	echo '<form method="' . $t_method . '" action="' . $p_action . '" class="form-inline">' . "\n";
+	echo '<form method="' . $t_method . '" action="' . helper_mantis_url( $p_action ) . '" class="form-inline">' . "\n";
 	echo "\t" . '<fieldset>';
 	# Add a CSRF token only when the form is being sent via the POST method
 	if( $t_method == 'post' ) {
