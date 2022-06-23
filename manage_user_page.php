@@ -64,14 +64,9 @@ $f_save          = gpc_get_bool( 'save' );
 $f_filter        = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
-if( substr( $f_filter,0,6 ) === "SEARCH" ) {
-	$f_findname = trim( substr( $f_filter,6 ) );
-} else {
-	$f_findname = gpc_get_string( 'findname', '' ); 
-	if( $f_findname <> "" ) {
-		$f_filter = 'SEARCH';
-		$f_filter .= trim( $f_findname );
-	} 
+$f_findname      = gpc_get_string( 'findname', '' ); 
+if( $f_findname <> "" ) {
+	$f_filter = 'SEARCH';
 }
 
 if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
@@ -195,7 +190,7 @@ echo '<div class="space-10"></div >';
 $t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
-} else if( substr( $f_filter,0,6 ) === 'SEARCH' ) {
+} else if( $f_filter === 'SEARCH' ) {
 	$t_pos = strpos($f_findname, '-');
 	if( $t_pos ) {
 		$t_exclude = trim( substr( $f_findname,$t_pos+1 ) );
