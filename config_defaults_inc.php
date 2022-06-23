@@ -2592,6 +2592,24 @@ $g_bug_report_page_fields = array(
 );
 
 /**
+ * An array of access levels or a threshold to identify who should be presented the extended  report form.
+ * Setting it to an array, one can cherry-pick the access levels that should get the extended report screen.
+ * sample: $g_extended_reporter_levels = array( DEVELOPER, ADMINISTRATOR );
+ * Now only the Developers & Administrators will get the extended report form, all others will get the simplified report form.
+ *
+ * @global array $g_extended_report_levels
+ */
+$g_extended_reporter_levels = REPORTER;
+
+/**
+ *
+ * @see $g_bug_report_page_fields  
+ * 
+ */
+$g_simple_bug_report_page_fields = '%bug_report_page_fields%' ;
+
+
+/**
  * An array of optional fields to show on the bug view page.
  *
  * The following optional fields are allowed:
@@ -2634,6 +2652,7 @@ $g_bug_report_page_fields = array(
  *
  * @global array $g_bug_view_page_fields
  */
+ 
 $g_bug_view_page_fields = array(
 	'additional_info',
 	'attachments',
@@ -4775,6 +4794,7 @@ $g_public_config_names = array(
 	'eta_enum_string',
 	'excel_columns',
 	'export_issues_threshold',
+	'extended_report_levels',
 	'fallback_language',
 	'favicon_image',
 	'file_download_content_type_overrides',
@@ -4917,6 +4937,7 @@ $g_public_config_names = array(
 	'show_version_dates_threshold',
 	'show_version',
 	'signup_use_captcha',
+	'simple_bug_report_page_fields',
 	'sort_by_last_name',
 	'sort_icon_arr',
 	'sponsor_threshold',
@@ -5129,3 +5150,4 @@ $g_webservice_rest_enabled = ON;
  * the attachment is linked to the note.  Or 0 for disabling this feature.
  */
 $g_issue_activity_note_attachments_seconds_threshold = 3;
+

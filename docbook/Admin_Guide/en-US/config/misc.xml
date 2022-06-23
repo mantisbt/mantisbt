@@ -105,6 +105,12 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_extended_report_levels</term>
+			<listitem>
+				<para>Access levels for which users are provided with the extended report form.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_allow_account_delete</term>
 			<listitem>
 				<para>Allow users to delete their own accounts.</para>
