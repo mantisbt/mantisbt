@@ -202,9 +202,18 @@ if( $t_content_type_override ) {
 # https://www.thoughtco.com/mime-types-by-content-type-3469108
 $t_show_inline = $f_show_inline;
 $t_mime_force_inline = array(
-	'image/jpeg', 'image/gif', 'image/tiff', 'image/bmp', 'image/svg+xml', 'image/png',
-	'application/pdf' );
-$t_mime_force_attachment = array( 'application/x-shockwave-flash', 'text/html' );
+	'application/pdf',
+	'image/bmp',
+	'image/gif',
+	'image/jpeg',
+	'image/png',
+	'image/tiff',
+);
+$t_mime_force_attachment = array(
+	'application/x-shockwave-flash',
+	'image/svg+xml', # SVG could contain CSS or scripting, see #30384
+	'text/html',
+);
 
 # extract mime type from content type
 $t_mime_type = explode( ';', $t_content_type, 2 );
