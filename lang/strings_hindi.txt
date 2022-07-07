@@ -42,6 +42,7 @@
  * @author AnupamM
  * @author Phoenix303
  * @author Prong$31
+ * @author Saurmandal
  * @author Sfic
  * @author Shypoetess
  * @author Smtchahal
@@ -283,7 +284,7 @@ $s_manage_profiles_link = 'रूपरेखाएं';
 $s_change_preferences_link = 'वरीयताएं';
 $s_edit_account_title = 'खाता संपादित करें';
 $s_username = 'प्रयोक्ता का नाम';
-$s_username_label = 'प्रयोक्ता नाम';
+$s_username_label = 'सदस्यनाम';
 $s_realname = 'वास्तविक नाम';
 $s_realname_label = 'वास्तविक नाम';
 $s_email = 'ई-मेल';
@@ -1129,7 +1130,7 @@ $s_on_or_after_date = 'पर या बाद';
 $s_from_date = 'आरंभ';
 $s_to_date = 'यहाँ तक';
 $s_on_date = 'प्रारंभ';
-$s_wiki = 'विकी';
+$s_wiki = 'विकि';
 $s_tags = 'टैग';
 $s_tag_details = 'टैग विवरण: %1$s';
 $s_tag_id = 'टैग मूलांक';

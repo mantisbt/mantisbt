@@ -48,6 +48,7 @@
  * @author GuoPC
  * @author Hydra
  * @author Hzy980512
+ * @author Lakejason0
  * @author Liangent
  * @author Linforest
  * @author Liuxinyu970226
@@ -755,7 +756,7 @@ $s_not_released = '未发布';
 $s_scheduled_release = '待发布';
 $s_obsolete = '已过期';
 $s_version_updated_msg = '版本已经成功更新...';
-$s_account_delete_protected_msg = '帐号受保护，无法删除此帐号';
+$s_account_delete_protected_msg = '账号受保护，无法删除此账号';
 $s_account_deleted_msg = '已删除帐号...';
 $s_delete_account_sure_msg = '确定要删除帐号“%1$s”吗？';
 $s_notify_user = '通知此更改的用户';
