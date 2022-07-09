@@ -108,122 +108,6 @@ if( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
 }
 
-
-/**
- * Define an API inclusion function to replace require_once
- *
- * @param string $p_api_name An API file name.
- * @return void
- */
-function require_api( $p_api_name ) {
-	static $s_api_included;
-	global $g_core_path;
-	if( !isset( $s_api_included[$p_api_name] ) ) {
-		require_once( $g_core_path . $p_api_name );
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
-		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
-			$GLOBALS[$t_global_name] = $t_global_value;
-		}
-		$s_api_included[$p_api_name] = 1;
-	}
-}
-
-/**
- * Define an API inclusion function to replace require_once
- *
- * @param string $p_library_name A library file name.
- * @return void
- */
-function require_lib( $p_library_name ) {
-	static $s_libraries_included;
-
-	if( !isset( $s_libraries_included[$p_library_name] ) ) {
-		global $g_library_path;
-		$t_library_file_path = $g_library_path . $p_library_name;
-
-		if( file_exists( $t_library_file_path ) ) {
-			require_once( $t_library_file_path );
-		} else {
-			echo 'External library \'' . $t_library_file_path . '\' not found.';
-			exit;
-		}
-
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
-		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
-			$GLOBALS[$t_global_name] = $t_global_value;
-		}
-
-		$s_libraries_included[$p_library_name] = 1;
-	}
-}
-
-/**
- * Checks to see if script was queried through the HTTPS protocol
- * @return boolean True if protocol is HTTPS
- */
-function http_is_protocol_https() {
-	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
-		return strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) == 'https';
-	}
-
-	if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
-		return true;
-	}
-
-	return false;
-}
-
-/**
- * Define an autoload function to automatically load classes when referenced
- *
- * @param string $p_class Class name being autoloaded.
- * @return void
- */
-function autoload_mantis( $p_class ) {
-	global $g_core_path;
-
-	# Remove namespace from class name
-	$t_end_of_namespace = strrpos( $p_class, '\\' );
-	if( $t_end_of_namespace !== false ) {
-		$p_class = substr( $p_class, $t_end_of_namespace + 1 );
-	}
-
-	# Commands
-	if( substr( $p_class, -7 ) === 'Command' ) {
-		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
-		if( file_exists( $t_require_path ) ) {
-			require_once( $t_require_path );
-			return;
-		}	
-	}
-
-	# Exceptions
-	if( substr( $p_class, -9 ) === 'Exception' ) {
-		$t_require_path = $g_core_path . 'exceptions/' . $p_class . '.php';
-		if( file_exists( $t_require_path ) ) {
-			require_once( $t_require_path );
-			return;
-		}	
-	}
-
-	global $g_class_path;
-	global $g_library_path;
-
-	$t_require_path = $g_class_path . $p_class . '.class.php';
-
-	if( file_exists( $t_require_path ) ) {
-		require_once( $t_require_path );
-		return;
-	}
-
-	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $p_class . '.inc.php';
-
-	if( file_exists( $t_require_path ) ) {
-		require_once( $t_require_path );
-		return;
-	}
-}
-
 # Register the autoload function to make it effective immediately
 spl_autoload_register( 'autoload_mantis' );
 
@@ -348,4 +232,119 @@ if( !defined( 'LANG_LOAD_DISABLED' ) ) {
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'event_api.php' );
 	event_signal( 'EVENT_CORE_READY' );
+}
+
+/**
+ * Define an API inclusion function to replace require_once
+ *
+ * @param string $p_api_name An API file name.
+ * @return void
+ */
+function require_api( $p_api_name ) {
+	static $s_api_included;
+	global $g_core_path;
+	if( !isset( $s_api_included[$p_api_name] ) ) {
+		require_once( $g_core_path . $p_api_name );
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
+		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
+			$GLOBALS[$t_global_name] = $t_global_value;
+		}
+		$s_api_included[$p_api_name] = 1;
+	}
+}
+
+/**
+ * Define an API inclusion function to replace require_once
+ *
+ * @param string $p_library_name A library file name.
+ * @return void
+ */
+function require_lib( $p_library_name ) {
+	static $s_libraries_included;
+
+	if( !isset( $s_libraries_included[$p_library_name] ) ) {
+		global $g_library_path;
+		$t_library_file_path = $g_library_path . $p_library_name;
+
+		if( file_exists( $t_library_file_path ) ) {
+			require_once( $t_library_file_path );
+		} else {
+			echo 'External library \'' . $t_library_file_path . '\' not found.';
+			exit;
+		}
+
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
+		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
+			$GLOBALS[$t_global_name] = $t_global_value;
+		}
+
+		$s_libraries_included[$p_library_name] = 1;
+	}
+}
+
+/**
+ * Checks to see if script was queried through the HTTPS protocol
+ * @return boolean True if protocol is HTTPS
+ */
+function http_is_protocol_https() {
+	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+		return strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) == 'https';
+	}
+
+	if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Define an autoload function to automatically load classes when referenced
+ *
+ * @param string $p_class Class name being autoloaded.
+ * @return void
+ */
+function autoload_mantis( $p_class ) {
+	global $g_core_path;
+
+	# Remove namespace from class name
+	$t_end_of_namespace = strrpos( $p_class, '\\' );
+	if( $t_end_of_namespace !== false ) {
+		$p_class = substr( $p_class, $t_end_of_namespace + 1 );
+	}
+
+	# Commands
+	if( substr( $p_class, -7 ) === 'Command' ) {
+		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
+		if( file_exists( $t_require_path ) ) {
+			require_once( $t_require_path );
+			return;
+		}
+	}
+
+	# Exceptions
+	if( substr( $p_class, -9 ) === 'Exception' ) {
+		$t_require_path = $g_core_path . 'exceptions/' . $p_class . '.php';
+		if( file_exists( $t_require_path ) ) {
+			require_once( $t_require_path );
+			return;
+		}
+	}
+
+	global $g_class_path;
+	global $g_library_path;
+
+	$t_require_path = $g_class_path . $p_class . '.class.php';
+
+	if( file_exists( $t_require_path ) ) {
+		require_once( $t_require_path );
+		return;
+	}
+
+	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $p_class . '.inc.php';
+
+	if( file_exists( $t_require_path ) ) {
+		require_once( $t_require_path );
+		return;
+	}
 }
