@@ -107,14 +107,14 @@ user_ensure_name_valid( $f_username );
 $t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 if( $t_ldap && config_get_global( 'use_ldap_realname' ) ) {
-	$t_realname = ldap_realname_from_username( $f_username );
+	$t_realname = ldap_realname_from_username( $f_username ) ?: $t_old_realname;
 } else {
 	# strip extra space from real name
 	$t_realname = string_normalize( $f_realname );
 }
 
 if( $t_ldap && config_get_global( 'use_ldap_email' ) ) {
-	$t_email = ldap_email( $f_user_id );
+	$t_email = ldap_email( $f_user_id ) ?: $t_old_email;
 } else {
 	$t_email = trim( $f_email );
 	email_ensure_valid( $t_email );
