@@ -76,13 +76,7 @@ if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
 	die();
 }
 
-# Enforce PHP mbstring extension
-if( !extension_loaded( 'mbstring' ) ) {
-	echo '<strong>FATAL ERROR: PHP mbstring extension is not enabled.</strong><br />'
-		. 'MantisBT requires this extension for Unicode (UTF-8) support<br />'
-		. 'http://www.php.net/manual/en/mbstring.installation.php';
-	die();
-}
+ensure_php_extension_loaded( 'mbstring', 'for Unicode (UTF-8) support' );
 
 # Ensure that encoding is always UTF-8 independent from any PHP default or ini setting
 mb_internal_encoding('UTF-8');
@@ -347,4 +341,27 @@ function autoload_mantis( $p_class ) {
 		require_once( $t_require_path );
 		return;
 	}
+}
+
+/**
+ * Ensures the given extension is loaded, dies with an error message if not.
+ *
+ * @param string $p_extension      Extension name
+ * @param string $p_reason_message Justification for requiring the extension
+ * @return bool
+ */
+function ensure_php_extension_loaded( $p_extension, $p_reason_message ) {
+	if( extension_loaded( $p_extension ) ) {
+		return true;
+	}
+
+	/** @noinspection HtmlUnknownTarget */
+	printf( '<strong>FATAL ERROR: PHP <i>%1$s</i> extension is not enabled.</strong><br>'
+		. 'MantisBT requires this extension %2$s.<br>'
+		. '<a href="%3$s">%3$s</a>',
+		$p_extension,
+		$p_reason_message,
+		"https://www.php.net/manual/en/$p_extension.installation.php"
+	);
+	die;
 }
