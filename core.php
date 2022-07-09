@@ -102,6 +102,12 @@ if( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
 }
 
+# Ensure PHP LDAP extension is available when Login Method is LDAP
+global $g_login_method;
+if ( $g_login_method == LDAP ) {
+	ensure_php_extension_loaded( 'ldap', 'when using LDAP as Login Method' );
+}
+
 # Register the autoload function to make it effective immediately
 spl_autoload_register( 'autoload_mantis' );
 
