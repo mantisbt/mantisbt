@@ -81,20 +81,20 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 user_ensure_exists( $f_user_id );
 
 $t_user = user_get_row( $f_user_id );
+/**
+ * @var $t_old_username
+ * @var $t_old_access_level
+ * @var $t_old_realname
+ * @var $t_old_email
+ * @var $t_old_protected
+ */
+extract( $t_user, EXTR_PREFIX_ALL, 't_old');
 
 $f_username	= trim( $f_username );
 
-$t_old_username = $t_user['username'];
-$t_old_access_level = $t_user['access_level'];
-
-if( $f_send_email_notification ) {
-	$t_old_realname = $t_user['realname'];
-	$t_old_email = $t_user['email'];
-}
-
 # Ensure that the account to be updated is of equal or lower access to the
 # current user.
-access_ensure_global_level( $t_user['access_level'] );
+access_ensure_global_level( $t_old_access_level );
 
 # check that the username is unique
 if( 0 != strcasecmp( $t_old_username, $f_username )
@@ -129,8 +129,6 @@ $c_protected = (bool)$f_protected;
 $c_enabled = (bool)$f_enabled;
 $c_user_id = (int)$f_user_id;
 $c_access_level = (int)$f_access_level;
-
-$t_old_protected = $t_user['protected'];
 
 # Ensure that users aren't escalating privileges of accounts beyond their
 # own global access level.
