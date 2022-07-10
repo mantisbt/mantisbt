@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * MantisBT Constants
- *
+ * @noinspection PhpDefineCanBeReplacedWithConstInspection
  */
 
 /**
