@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Slovenian (slovenščina)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -55,7 +55,7 @@ $s_actiongroup_menu_add_note = 'Dodaj beležko';
 $s_actiongroup_menu_attach_tags = 'Pripni oznake';
 $s_actiongroup_bugs = 'Izbrane zadeve';
 $s_all_projects = 'Vsi projekti';
-$s_move_bugs = 'Premakni zadeve';
+$s_move_bugs = 'Prestavi zadeve';
 $s_operation_successful = 'Operacija uspela.';
 $s_date_order = 'Razporedi po datumu';
 $s_print_all_bug_page_link = 'Izpis poročila';
@@ -110,7 +110,7 @@ $s_make_public = 'Označi kot javno';
 $s_create_new_project_link = 'Ustvari nov projekt';
 $s_close_bugs_conf_msg = 'Ali te zadeve res želite zapreti?';
 $s_delete_bugs_conf_msg = 'Ali te zadeve res želite izbrisati?';
-$s_move_bugs_conf_msg = 'Premakni zadeve v';
+$s_move_bugs_conf_msg = 'Prestavi zadeve v';
 $s_copy_bugs_conf_msg = 'Kopiraj zadeve v';
 $s_assign_bugs_conf_msg = 'Dodeli zadeve v';
 $s_resolve_bugs_conf_msg = 'Izberi rešljivost zadev';
@@ -119,7 +119,7 @@ $s_status_bugs_conf_msg = 'Izberi status zadev';
 $s_view_status_bugs_conf_msg = 'Izberi zasebnost zadev';
 $s_close_group_bugs_button = 'Zapri zadeve';
 $s_delete_group_bugs_button = 'Izbriši zadeve';
-$s_move_group_bugs_button = 'Premakni zadeve';
+$s_move_group_bugs_button = 'Prestavi zadeve';
 $s_copy_group_bugs_button = 'Kopiraj zadeve';
 $s_assign_group_bugs_button = 'Dodeli zadeve';
 $s_resolve_group_bugs_button = 'Razreši zadeve';
@@ -213,6 +213,7 @@ $s_update_user_button = 'Posodobi uporabnika';
 $s_default_account_preferences_title = 'Nastavitve računa';
 $s_default_project = 'Privzeti projekt';
 $s_refresh_delay = 'Osvežitev čez';
+$s_minutes = 'minute';
 $s_redirect_delay = 'Preusmeritev čez';
 $s_with_minimum_severity = 'z najmanjšo resnostjo';
 $s_email_on_new = 'Email pri novi zadevi';
@@ -515,12 +516,14 @@ $s_prev = 'Naslednja';
 $s_next = 'Naprej';
 $s_first = 'Prva';
 $s_last = 'Zadnja';
+$s_end_date_label = 'Datum konca:';
 $s_use_date_filters = 'Filter po datumu';
 $s_yes = 'Da';
 $s_no = 'Ne';
 $s_open_filters = 'Spremeni filtre';
 $s_or_unassigned = 'Ali nedodeljeni';
 $s_ok = 'V redu';
+$s_select_all = 'Izberi vse';
 $s_use_query = 'Uporabi filter';
 $s_delete_query = 'Briši filter';
 $s_query_deleted = 'Filter je izbrisan';
@@ -546,6 +549,7 @@ $s_no_users_sponsoring_bug = 'Noben uporabnik ne sponzorira te zadeve.';
 $s_users_sponsoring_bug = 'To zadevo sponzorirajo uporabniki';
 $s_sponsors_list = 'Seznam sponzorjev';
 $s_total_sponsorship_amount = 'Skupaj sponzorskih sredstev = %1$s';
+$s_custom_field_name = 'Ime';
 $s_custom_field_project_count = 'Project count';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date,9:Radio,10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Polje »1%s« je trenutno povezano z najmanj enim projektom. Če boste nadaljevali, se bodo vse vrednosti za to polje trajno izbrisale. Tega dejanja ni mogoče razveljaviti. Če tega polja ne želite izbrisati, v brskalniku kliknite gumb Nazaj. Za nadaljevanje kliknite spodnji gumb.';
@@ -591,6 +595,7 @@ $s_loading = 'Nalaganje ...';
 $s_from_date = 'Od';
 $s_to_date = 'Za';
 $s_on_date = 'zaradi';
+$s_tag_name = 'Ime';
 $s_tag_statistics = 'Statistika uporabe';
 $s_tag_related_issues = 'Skupni problemi (%1$s)';
 $s_view_issues_columns_title = 'Stolpci za prikaz problemov';
@@ -652,7 +657,7 @@ $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Povezava s podatkovno bazo je spodlete
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Poizvedba v podatkovni bazi je spodletela. Napaka iz podatkovne baze #%1$d: %2$s za poizvedbo: %3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Izbira podatkovne baze je spodletela.  Napaka iz podatkovne baze #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorija s tem imenom že obstaja.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Operacija kopiranja ni bila specificirana.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Operacija kopiranja ni bila specificirana.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorija ni bila najdena.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Verzija s tem imenom že obstaja.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Različica »%1$s« ni bila najdena.';
@@ -672,6 +677,7 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'NAPAKA: Zadeva ne more biti v rela
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
 $s_edit = 'Uredi';
+$s_submit = 'Pošlji';
 $s_update = 'Posodobi';
 $s_delete = 'Izbriši';
 $s_make_default = 'Privzeti profil';

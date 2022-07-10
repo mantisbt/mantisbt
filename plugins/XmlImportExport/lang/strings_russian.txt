@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Russian (русский)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -52,7 +52,7 @@ $s_plugin_XmlImportExport_config_title = 'Настройка уровней до
 $s_plugin_XmlImportExport_import_threshold = 'Вопросы по импорту';
 $s_plugin_XmlImportExport_export_threshold = 'Вопросы по экспорту';
 $s_plugin_XmlImportExport_action_update = 'Обновить';
-$s_plugin_XmlImportExport_importing_in_project = 'Bмпортировать задачи в проект \'%s\':';
+$s_plugin_XmlImportExport_importing_in_project = 'Импортировать задачи в проект: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Настройки импорта';
 $s_plugin_XmlImportExport_cross_references = 'Кросс-зависимости';
 $s_plugin_XmlImportExport_default_strategy = 'Стратегия по умолчанию для конвертации:';

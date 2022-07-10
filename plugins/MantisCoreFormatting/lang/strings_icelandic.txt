@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Icelandic (íslenska)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -48,7 +48,7 @@ $s_plugin_format_process_text = 'Textavinnsla';
 $s_plugin_format_process_text_warning_notice = 'Ekki slökkva á þessu nema þú vitir í alvörunni hvað þú sért að gera. Þegar slökkt er á þessu, eru árásir með milli-vefja-skriftun (XSS) mögulegar.';
 $s_plugin_format_process_urls = 'Meðhöndlun URL-slóða';
 $s_plugin_format_process_buglinks = 'Innri tenglar í MantisBT (verkbeiðnir og athugasemdir)';
-$s_plugin_format_process_buglinks_info = 'Uppsetningin þín skilgreinir merkið <em>Verkbeiðni</em> sem "<literal>%s</literal>" og merkið <em>Athugasemd verkbeiðnar</em> sem "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'Uppsetningin þín skilgreinir merkið <em>Verkbeiðni</em> sem "%s" og merkið <em>Athugasemd verkbeiðnar</em> sem "%s"';
 $s_plugin_format_process_markdown = 'Meðhöndlun Markdown-kóða';
 $s_plugin_format_process_markdown_info = 'Hægt er að sníða texta með Markdown-stuðningi, sem er sniðkerfi fyrir texta þannig að einfalt er að umbreyta honum í HTML-kóða';
 $s_plugin_format_enabled = 'Kveikt';

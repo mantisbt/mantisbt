@@ -204,6 +204,8 @@ if( capability_exists( 'limit_reporters' ) ) {
 if( capability_exists( 'limit_view_unless_threshold' ) ) {
 	set_capability_row( 'limit_view_unless_threshold' );
 }
+set_capability_row( 'print_reports_threshold' );
+set_capability_row( 'export_issues_threshold' );
 
 # Notes
 set_capability_row( 'add_bugnote_threshold' );
@@ -231,6 +233,11 @@ if( config_get( 'allow_file_upload' ) == ON ) {
 	set_capability_row( 'delete_attachments_threshold' );
 	set_capability_row( 'upload_bug_file_threshold' );
 }
+
+# Filters
+set_capability_row( 'stored_query_create_threshold' );
+set_capability_row( 'stored_query_create_shared_threshold' );
+set_capability_row( 'stored_query_use_threshold' );
 
 # Others
 set_capability_row( 'view_changelog_threshold' );

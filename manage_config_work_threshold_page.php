@@ -406,6 +406,8 @@ if( ON == config_get( 'limit_reporters', null, ALL_USERS, ALL_PROJECTS ) ) {
 } else {
 	get_capability_row( lang_get( 'limit_view_unless_threshold_option' ), 'limit_view_unless_threshold' );
 }
+get_capability_row( lang_get( 'print_all_bug_page_link' ), 'print_reports_threshold' );
+get_capability_row( lang_get( 'export_issues' ), 'export_issues_threshold' );
 get_section_end();
 
 # Notes
@@ -439,6 +441,13 @@ if( config_get( 'allow_file_upload' ) == ON ) {
 	get_capability_row( lang_get( 'upload_issue_attachments' ), 'upload_bug_file_threshold' );
 	get_section_end();
 }
+
+# Filters
+get_section_begin_mcwt( lang_get( 'filters' ) );
+get_capability_row( lang_get( 'save_filters' ), 'stored_query_create_threshold' );
+get_capability_row( lang_get( 'save_filters_as_shared' ), 'stored_query_create_shared_threshold' );
+get_capability_row( lang_get( 'use_saved_filters' ), 'stored_query_use_threshold' );
+get_section_end();
 
 # Others
 get_section_begin_mcwt( lang_get( 'others' ) );

@@ -58,6 +58,24 @@ class RestFault {
 		$this->status_code = $p_status_code;
 		$this->fault_string = $p_fault_string === null ? '' : $p_fault_string;
 	}
+
+	/**
+	 * Error description getter
+	 *
+	 * @return string The error description
+	 */
+	function getMessage() {
+		return $this->fault_string;
+	}
+
+	/**
+	 * Http status code getter
+	 *
+	 * @return integer The http status code
+	 */
+	function getCode() {
+		return $this->status_code;
+	}
 }
 
 /**
@@ -207,13 +225,12 @@ class ApiObjectFactory {
 			case ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT:
 			case ERROR_CUSTOM_FIELD_INVALID_PROPERTY:
 			case ERROR_CATEGORY_DUPLICATE:
-			case ERROR_CATEGORY_NO_ACTION:
+			case ERROR_NO_COPY_ACTION:
 			case ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT:
 			case ERROR_VERSION_DUPLICATE:
 			case ERROR_SPONSORSHIP_NOT_ENABLED:
 			case ERROR_SPONSORSHIP_AMOUNT_TOO_LOW:
 			case ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL:
-			case ERROR_RELATIONSHIP_ALREADY_EXISTS:
 			case ERROR_RELATIONSHIP_SAME_BUG:
 			case ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID:
 			case ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED:

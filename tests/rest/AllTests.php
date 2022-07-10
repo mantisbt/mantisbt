@@ -35,7 +35,7 @@ require_once __DIR__ . '/RestIssueAddTest.php';
  * @copyright Copyright 2002  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-class RestAllTests extends PHPUnit_Framework_TestSuite
+class RestAllTests extends PHPUnit\Framework\TestSuite
 {
 	/**
 	 * setUp

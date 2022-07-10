@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Basque (euskara)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -698,7 +698,7 @@ $s_name = 'Izena';
 $s_project_updated_msg = 'Proiektua arazorik gabe eguneratu da...';
 $s_version_added_msg = 'Bertsioa arazorik gabe gehitu da...';
 $s_version_deleted_msg = 'Bertsioa arazorik gabe ezabatu da...';
-$s_version_delete_sure = 'Ziur bertsio hau ezabatu nahi duzula?';
+$s_version_delete_sure = 'Ziur "%1$s" bertsioa ezabatu nahi duzula?';
 $s_delete_version_button = 'Bertsioa ezabatu';
 $s_edit_project_version_title = 'Proiektu Bertsioa Editatu';
 $s_update_version_button = 'Bertsioa Eguneratu';
@@ -709,7 +709,7 @@ $s_obsolete = 'Zaharkituta';
 $s_version_updated_msg = 'Bertsioa arazorik gabe eguneratu da...';
 $s_account_delete_protected_msg = 'Kontu babestua. Ezin da kontua ezabatu.';
 $s_account_deleted_msg = 'Kontua arazorik gabe ezabatu da...';
-$s_delete_account_sure_msg = 'Ziur kontu hau ezabatu nahi duzula?';
+$s_delete_account_sure_msg = 'Ziur "%1$s" kontua ezabatu nahi duzula?';
 $s_notify_user = 'Aldaketa hau dela eta, erabiltzailea jakinarazi';
 $s_accounts_pruned_msg = 'Sartzeko inoiz erabili ez diren eta astebete baino gehiago daukaten kontu guztiak ezabatu dira.';
 $s_prune_accounts_button = 'Garbitu';
@@ -775,7 +775,7 @@ $s_file_uploaded_msg = 'Fitxategia arazorik gabe igo da.';
 $s_upload_file_title = 'Fitxategia igo';
 $s_title = 'Izenburua';
 $s_project_file_deleted_msg = 'Proiektuko fitxategia ezabatu.';
-$s_confirm_file_delete_msg = 'Ziur fitxategi hau ezabatu nahi duzula?';
+$s_confirm_file_delete_msg = 'Ziur "%1$s" fitxategia ezabatu nahi duzula?';
 $s_filename = 'Fitxategi izena';
 $s_filename_label = 'Fitxategi izena';
 $s_file_update_button = 'Fitxategia eguneratu';
@@ -909,7 +909,7 @@ $s_query_exists = 'Badirudi dagoeneko iragazkia existitzen dela.';
 $s_query_dupe_name = 'Dagoeneko beste iragazkia batek badauka izen hori. Mesedez aukeratu beste izen bat iragazki honentzako.';
 $s_query_store_error = 'Erroreren bat gertatu da iragazkia gordetzerakoan.';
 $s_open_queries = 'Iragazkiak Kudeatu';
-$s_query_delete_msg = 'Ziur iragazki hau ezabatu nahi duzula?';
+$s_query_delete_msg = 'Ziur "%1$s" iragazkia ezabatu nahi duzula?';
 $s_product_build = 'Produktuaren Konpilazioa';
 $s_bug_assign_to_button = 'Honi Esleitu:';
 $s_bug_status_to_button = 'Egoera Aldatu:';
@@ -1016,8 +1016,8 @@ $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Erabiltzaileak ez dauka be
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Kudeatzaileak ez dauka babestuak dauden arazoak kudeatzeko beharrezkoa den sarbide maila.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Sarbidea Ukatua: Babestutako arazoak esleitzeko sarbide maila altuago bat behar da.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Sarbidea ukatua: %1$d arazoark sarbide maila altuagoa behar du.';
-$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Ezin izan da izen hori duen etiketarik aurkitu.';
-$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Etiketaren izena ez da zuzena.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Ezin izan da "%1$s" etiketa aurkitu.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = '"%1$s" etiketa ez da zuzena.';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Arazo horrek, dagoeneko erantsita du etiketa hori.';
 $s_edit = 'Aldatu';
 $s_update = 'Eguneratu';

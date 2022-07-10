@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,11 +33,12 @@
 /** Dutch (Nederlands)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author McDutchie
  * @author Siebrand
  */
 
@@ -49,7 +50,7 @@ $s_plugin_XmlImportExport_config_title = 'Instellingen voor toegang tot XML-impo
 $s_plugin_XmlImportExport_import_threshold = 'Meldingen importeren';
 $s_plugin_XmlImportExport_export_threshold = 'Meldingen exporteren';
 $s_plugin_XmlImportExport_action_update = 'Bijwerken';
-$s_plugin_XmlImportExport_importing_in_project = 'Bezig met het importeren van meldingen in het project: "%s"';
+$s_plugin_XmlImportExport_importing_in_project = 'Meldingen importeren in project: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Importinstellingen';
 $s_plugin_XmlImportExport_cross_references = 'Kruiskoppelingen';
 $s_plugin_XmlImportExport_default_strategy = 'Standaard conversiestrategie:';

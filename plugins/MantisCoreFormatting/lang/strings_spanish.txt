@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Spanish (español)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -51,7 +51,7 @@ $s_plugin_format_process_text = 'Procesamiento de Texto';
 $s_plugin_format_process_text_warning_notice = 'No lo desactive a menos que sepa lo que está haciendo. Estando desactivado, los ataques "Cross Site Scripting" (XSS) son posibles.';
 $s_plugin_format_process_urls = 'Procesamiento de URL';
 $s_plugin_format_process_buglinks = 'Enlaces internos MantisBT (Incidencias/Notas)';
-$s_plugin_format_process_buglinks_info = 'Su configuración define las etiquedas de la siguiente forma: <em>Incidencia</em> como "<literal>%s</literal>" y <em>Nota</em> como "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'Su configuración define las etiquedas de la siguiente forma: <em>Incidencia</em> como "%s" y <em>Nota</em> como "%s"';
 $s_plugin_format_process_markdown = 'Procesando Markdown';
 $s_plugin_format_process_markdown_info = 'Aplicando estilo con soporte Markdown, la síntaxis de formato de texto diseñada para que pueda ser convertida a HTML.';
 $s_plugin_format_enabled = 'Habilitado';

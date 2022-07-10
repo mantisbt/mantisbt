@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Galician (galego)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -1267,13 +1267,12 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Fallou a autenticación LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Fallou a conexión ao servidor LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Fallou a actualización do rexistro LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Non se atopou o rexistro de usuario LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Non se cargou a extensión LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Fallou a conexión coa base de datos. O erro recibido desde a base de datos foi #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Fallou a pescuda na base de datos. O erro recibido desde a base de datos foi #%1$d: %2$s para a pescuda: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Fallou a selección da base de datos. O erro recibido desde a base de datos foi #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = 'O identificador da base de datos "%1$s" é demasiado longo. Intente reducir o tamaño de g_db_table_prefix/suffix';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Xa existe unha categoría con ese nome.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Non se especificou ningunha acción de copiado.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Non se especificou ningunha acción de copiado.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Non se atopou a categoría.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Non se atopou a categoría "%1$s" no proxecto %2$s".';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Non se pode borrar esta categoría porque está definida como a "categoría predeterminada para os traslados".';

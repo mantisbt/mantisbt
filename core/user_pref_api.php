@@ -563,6 +563,7 @@ function user_pref_clear_invalid_project_default( $p_project_id, array $p_users 
 	$t_users_having_project_as_default = array_column( $t_query->fetch_all(), 'user_id' );
 
 	# Users who can't access the project anymore must have the default cleared
+	user_cache_array_rows( $t_users_having_project_as_default );
 	$t_users_to_clear = array();
 	foreach( $t_users_having_project_as_default as $t_id ) {
 		if( access_get_project_level( $p_project_id, $t_id ) == ANYBODY ) {

@@ -147,7 +147,7 @@
 		<varlistentry>
 			<term>$g_excel_columns</term>
 			<listitem>
-				<para>This configuration option is used to select the columns to be included in the CSV export and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
+				<para>This configuration option is used to select the columns to be included in the Excel export and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
 				<para>By default the following columns are selected: id, project_id, reporter_id, handler_id, priority, severity, reproducibility, version, build, projection, category_id, date_submitted, eta, os, os_build, platform, view_state, last_updated, summary, status, resolution, fixed_in_version, duplicate_id.</para>
 			</listitem>
 		</varlistentry>

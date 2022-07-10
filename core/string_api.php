@@ -492,15 +492,15 @@ function string_insert_hrefs( $p_string ) {
 
 		# valid set of characters that may occur in url scheme. Note: - should be first (A-F != -AF).
 		$t_url_valid_chars       = '-_.,!~*\';\/?%^\\\\:@&={\|}+$#[:alnum:]\pL';
-		$t_url_chars             = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)\[\]])";
-		$t_url_chars2            = "(?:${t_url_hex}|[${t_url_valid_chars}])";
-		$t_url_chars_in_brackets = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)])";
-		$t_url_chars_in_parens   = "(?:${t_url_hex}|[${t_url_valid_chars}\[\]])";
+		$t_url_chars             = "(?:{$t_url_hex}|[{$t_url_valid_chars}\(\)\[\]])";
+		$t_url_chars2            = "(?:{$t_url_hex}|[{$t_url_valid_chars}])";
+		$t_url_chars_in_brackets = "(?:{$t_url_hex}|[{$t_url_valid_chars}\(\)])";
+		$t_url_chars_in_parens   = "(?:{$t_url_hex}|[{$t_url_valid_chars}\[\]])";
 
 		$t_url_part1 = $t_url_chars;
-		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
+		$t_url_part2 = "(?:\({$t_url_chars_in_parens}*\)|\[{$t_url_chars_in_brackets}*\]|{$t_url_chars2})";
 
-		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/su";
+		$s_url_regex = "/({$t_url_protocol}({$t_url_part1}*?{$t_url_part2}+))/su";
 
 		# e-mail regex
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
@@ -516,7 +516,7 @@ function string_insert_hrefs( $p_string ) {
 			} else {
 				$t_url_target = '';
 			}
-			return "<a ${t_url_href}${t_url_target}>${p_match[1]}</a>";
+			return "<a {$t_url_href}{$t_url_target}>{$p_match[1]}</a>";
 		},
 		$p_string
 	);
@@ -546,7 +546,7 @@ function string_insert_hrefs( $p_string ) {
 function string_process_exclude_anchors( $p_string, $p_callback ) {
 	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
 
-	$t_pieces = preg_split( $s_anchor_regex, $p_string, null, PREG_SPLIT_DELIM_CAPTURE );
+	$t_pieces = preg_split( $s_anchor_regex, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
 	$t_string = '';
 	foreach( $t_pieces as $t_piece ) {

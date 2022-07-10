@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Dutch (Nederlands)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -48,7 +48,7 @@ $s_plugin_format_process_text = 'Tekstverwerking';
 $s_plugin_format_process_text_warning_notice = 'Niet uitschakelen tenzij u precies weet wat u doet. Als deze plugin is uitgeschakeld, zijn "cross site scripting"-aanvallen (XSS) mogelijk.';
 $s_plugin_format_process_urls = 'URL-verwerking';
 $s_plugin_format_process_buglinks = 'MantisBT-koppelingen (meldingen/opmerkingen)';
-$s_plugin_format_process_buglinks_info = 'In uw instellingen wordt het label <em>Melding</em> gedefinieerd als "<literal>%s</literal>" en het label <em>Meldingnotitie</em> als "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'In uw instellingen wordt het label <em>Melding</em> gedefinieerd als "%s" en het label <em>Meldingnotitie</em> als "%s"';
 $s_plugin_format_process_markdown = 'Markdownverwerking';
 $s_plugin_format_process_markdown_info = 'Opmaak met ondersteuning voor Markdown, opmaaksyntaxis zodanig ontworpen dat het kan worden omgezet naar HTML.';
 $s_plugin_format_enabled = 'Aan';

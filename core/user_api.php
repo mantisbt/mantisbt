@@ -928,12 +928,16 @@ function user_get_row( $p_user_id ) {
  */
 function user_get_field( $p_user_id, $p_field_name ) {
 	if( NO_USER == $p_user_id ) {
-		error_parameters( NO_USER );
+		$t_row = false;
+	} else {
+		$t_row = user_get_row( $p_user_id );
+	}
+
+	if( !$t_row ) {
+		error_parameters( $p_user_id );
 		trigger_error( ERROR_USER_BY_ID_NOT_FOUND, WARNING );
 		return '@null@';
 	}
-
-	$t_row = user_get_row( $p_user_id );
 
 	if( isset( $t_row[$p_field_name] ) ) {
 		switch( $p_field_name ) {
@@ -1291,12 +1295,6 @@ function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = AL
 
 	if( ALL_PROJECTS == $p_project_id ) {
 		$t_top_projects = user_get_accessible_projects( $p_user_id );
-
-		# Cover the case for PHP < 5.4 where array_combine() returns
-		# false and triggers warning if arrays are empty (see #16187)
-		if( empty( $t_top_projects ) ) {
-			return array();
-		}
 
 		# Create a combined array where key = value
 		$t_project_ids = array_combine( $t_top_projects, $t_top_projects );

@@ -92,35 +92,43 @@ $g_dsn = '';
 
 /**
  * Database Table prefix.
+ *
  * The given string is added with an underscore before the base table name,
  * e.g. 'bug' => 'mantis_bug'.
  * To avoid the 30-char limit on identifiers in Oracle (< 12cR2), the prefix
  * should be set to blank or kept as short as possible (e.g. 'm')
+ *
  * @global string $g_db_table_prefix
  */
 $g_db_table_prefix = 'mantis';
 
 /**
  * Database Table suffix.
+ *
  * The given string is added with an underscore after the base table name,
  * e.g. 'bug' => 'bug_table'.
+ * To avoid the 30-char limit on identifiers in Oracle (< 12cR2), the prefix
+ * should be set to blank or kept as short as possible.
  * @see $g_db_table_prefix for size limitation recommendation
+ *
  * @global string $g_db_table_suffix
  */
 $g_db_table_suffix = '_table';
 
 /**
  * Plugin Table prefix.
+ *
  * The given string is added with an underscore between the table prefix and
  * the base table name, and the plugin basename is added after that
  * e.g. 'Example' plugin's table 'foo' => 'mantis_plugin_Example_foo_table'.
  * To avoid the 30-char limit on identifiers in Oracle (< 12cR2), the prefix
- * should be kept as short as possible (e.g. 'plg'); it is however strongly
- * recommended not to use an empty string here.
+ * should be kept as short as possible (e.g. 'plg').
+ * It is strongly recommended not to use an empty string here.
+ *
  * @see $g_db_table_prefix
- * @global string $g_db_table_prefix
+ * @global string $g_db_table_plugin_prefix
  */
-$g_db_table_plugin_prefix	= 'plugin';
+$g_db_table_plugin_prefix = 'plugin';
 
 ####################
 # Folder Locations #
@@ -216,24 +224,29 @@ if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
 		die;
 	}
-	$t_self = filter_var( $_SERVER['SCRIPT_NAME'], FILTER_SANITIZE_STRING );
-	$t_path = str_replace( basename( $t_self ), '', $t_self );
+
+	# Prevent XSS if the path is displayed later on. This is the equivalent of
+	# FILTER_SANITIZE_STRING, which was deprecated in PHP 8.1:
+	# strip tags and null bytes, then encode quotes into HTML entities
+	$t_path = preg_replace( '/\x00|<[^>]*>?/', '', $_SERVER['SCRIPT_NAME'] );
+	$t_path = str_replace( ["'", '"'], ['&#39;', '&#34;'], $t_path );
+
+	$t_path = dirname( $t_path );
 	switch( basename( $t_path ) ) {
 		case 'admin':
-			$t_path = rtrim( dirname( $t_path ), '/\\' ) . '/';
+			$t_path = dirname( $t_path );
 			break;
 		case 'check':		# admin checks dir
 		case 'soap':
 		case 'rest':
-			$t_path = rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/';
+			$t_path = dirname( $t_path, 2 );
 			break;
 		case 'swagger':
-			$t_path = rtrim( dirname( dirname( dirname( $t_path ) ) ), '/\\' ) . '/';
-			break;
-		case '':
-			$t_path = '/';
+			$t_path = dirname( $t_path, 3 );
 			break;
 	}
+	$t_path = rtrim( $t_path, '/\\' ) . '/';
+
 	if( strpos( $t_path, '&#' ) ) {
 		echo 'Can not safely determine $g_path. Please set $g_path manually in ' . $g_config_path . 'config_inc.php';
 		die;
@@ -894,6 +907,7 @@ $g_language_choices_arr = array(
 	'dutch',
 	'english',
 	'estonian',
+	'esperanto',
 	'finnish',
 	'french',
 	'galician',
@@ -901,6 +915,7 @@ $g_language_choices_arr = array(
 	'german',
 	'greek',
 	'hebrew',
+	'hindi',
 	'hungarian',
 	'icelandic',
 	'interlingua',
@@ -921,6 +936,7 @@ $g_language_choices_arr = array(
 	'ripoarisch',
 	'romanian',
 	'russian',
+	'saraiki',
 	'serbian',
 	'serbian_latin',
 	'slovak',
@@ -959,12 +975,15 @@ $g_language_auto_map = array(
 	'da' => 'danish',
 	'nl-be, nl' => 'dutch',
 	'en-us, en-gb, en-au, en' => 'english',
+	'eo' => 'esperanto',
 	'et' => 'estonian',
 	'fi' => 'finnish',
 	'fr-ca, fr-be, fr-ch, fr' => 'french',
 	'gl' => 'galician',
 	'de-de, de-at, de-ch, de' => 'german',
+	'el' => 'greek',
 	'he' => 'hebrew',
+	'hi' => 'hindi',
 	'hu' => 'hungarian',
 	'is' => 'icelandic',
 	'ia' => 'interlingua',
@@ -986,6 +1005,7 @@ $g_language_auto_map = array(
 	'ksh' => 'ripoarisch',
 	'ro-mo, ro' => 'romanian',
 	'ru-mo, ru-ru, ru-ua, ru' => 'russian',
+	'skr' => 'saraiki', # skr does not actually exist as a browser language code
 	'sr' => 'serbian',
 	'sr-latn' => 'serbian_latin',
 	'sk' => 'slovak',
@@ -996,6 +1016,7 @@ $g_language_auto_map = array(
 	'tl' => 'tagalog',
 	'tr' => 'turkish',
 	'uk' => 'ukrainian',
+	'ur' => 'urdu',
 	'vi' => 'vietnamese',
 	'vo' => 'volapuk',
 	'diq' => 'zazaki',
@@ -1963,19 +1984,31 @@ $g_max_file_size = 5 * 1024 * 1024;
 $g_file_upload_max_num = 10;
 
 /**
- * Files that are allowed or not allowed.  Separate items by commas.
- * eg. 'php,html,java,exe,pl'
- * if $g_allowed_files is filled in NO other file types will be allowed.
- * $g_disallowed_files takes precedence over $g_allowed_files
+ * Authorized file types (whitelist).
+ *
+ * If $g_allowed_files is filled in, NO other file types will be allowed. If
+ * empty, any extensions not specifically excluded by $g_disallowed_files list
+ * will be authorized ($g_disallowed_files takes precedence over $g_allowed_files).
+ * Separate items by commas, e.g. 'bmp,gif,jpg,png,txt,zip'.
+ *
+ * @see $g_allowed_files
  * @global string $g_allowed_files
  */
 $g_allowed_files = '';
 
 /**
+ * Forbidden file types (blacklist).
  *
+ * All file extensions in this list will be unauthorized.
+ * Separate items by commas, e.g. 'php,html,java,exe,pl,svg'.
+ *
+ * SVG files are disabled by default, for security reasons. It is recommended to
+ * also disable all extensions that can be executed by your server;
+ *
+ * @see $g_allowed_files
  * @global string $g_disallowed_files
  */
-$g_disallowed_files = '';
+$g_disallowed_files = 'svg';
 
 /**
  * prefix to be used for the file system names of files uploaded to projects.
@@ -2216,7 +2249,15 @@ $g_ldap_bind_passwd = '';
 $g_ldap_uid_field = 'uid';
 
 /**
+ * The LDAP field for the user's e-mail address.
+ * @see $g_use_ldap_email
+ * @global string $g_ldap_email_field
+ */
+$g_ldap_email_field = 'mail';
+
+/**
  * The LDAP field for the user's real name (i.e. common name).
+ * @see $g_use_ldap_realname
  * @global string $g_ldap_realname_field
  */
 $g_ldap_realname_field = 'cn';
@@ -2226,6 +2267,7 @@ $g_ldap_realname_field = 'cn';
  * database (OFF).
  * Note that MantisBT will update the database with the data retrieved
  * from LDAP when ON.
+ * @see $g_ldap_realname_field
  * @global integer $g_use_ldap_realname
  */
 $g_use_ldap_realname = OFF;
@@ -2235,6 +2277,7 @@ $g_use_ldap_realname = OFF;
  * in the database (OFF).
  * Note that MantisBT will update the database with the data retrieved
  * from LDAP when ON.
+ * @see $g_ldap_email_field
  * @global integer $g_use_ldap_email
  */
 $g_use_ldap_email = OFF;
@@ -2514,7 +2557,7 @@ $g_enable_product_build = OFF;
  * The summary and description fields are always shown and do not need to be
  * listed in this option. Fields not listed above cannot be shown on the bug
  * report page. Visibility of custom fields is handled via the Manage =>
- * Manage Custom Fields administrator page.
+ * Custom Fields administrator page.
  *
  * Note that 'monitors' is not an actual field; adding it to the list will let
  * authorized reporters select users to add to the issue's monitoring list.
@@ -2583,7 +2626,7 @@ $g_bug_report_page_fields = array(
  *   - view_state
  *
  * Fields not listed above cannot be shown on the bug view page. Visibility of
- * custom fields is handled via the Manage => Manage Custom Fields
+ * custom fields is handled via the Manage => Custom Fields
  * administrator page.
  *
  * This setting can be set on a per-project basis by using the
@@ -2656,7 +2699,7 @@ $g_bug_view_page_fields = array(
  *   - view_state
  *
  * Fields not listed above cannot be shown on the bug update page. Visibility
- * of custom fields is handled via the Manage => Manage Custom Fields
+ * of custom fields is handled via the Manage => Custom Fields
  * administrator page.
  *
  * This setting can be set on a per-project basis by using the
@@ -2720,7 +2763,6 @@ $g_view_bug_threshold = VIEWER;
 
 /**
  * Access level needed to monitor bugs.
- * Look in the constant_inc.php file if you want to set a different value.
  * @global integer $g_monitor_bug_threshold
  */
 $g_monitor_bug_threshold = REPORTER;
@@ -2734,7 +2776,6 @@ $g_show_monitor_list_threshold = DEVELOPER;
 /**
  * Access level needed to add other users to the list of users monitoring
  * a bug.
- * Look in the constant_inc.php file if you want to set a different value.
  * This setting should not be lower than $g_show_monitor_list_threshold.
  * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_add_others_bug_threshold
@@ -2744,7 +2785,6 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 /**
  * Access level needed to delete other users from the list of users
  * monitoring a bug.
- * Look in the constant_inc.php file if you want to set a different value.
  * This setting should not be lower than $g_show_monitor_list_threshold.
  * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_delete_others_bug_threshold
@@ -2752,8 +2792,26 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 $g_monitor_delete_others_bug_threshold = DEVELOPER;
 
 /**
+ * Access level required to print issue reports.
+ *
+ * Grants users access to the Print Reports functionality (Word/HTML) from the
+ * View Issues page (print_all_bug_page.php and print_all_bug_page_word.php).
+ *
+ * @global integer $g_print_reports_threshold
+ */
+$g_print_reports_threshold = UPDATER;
+
+/**
+ * Access level required to export issues.
+ *
+ * Lets user export issues to CSV and Excel from the View Issues page.
+ *
+ * @global integer $g_export_issues_threshold
+ */
+$g_export_issues_threshold = VIEWER;
+
+/**
  * access level needed to view private bugs
- * Look in the constant_inc.php file if you want to set a different value
  * @global integer $g_private_bug_threshold
  */
 $g_private_bug_threshold = DEVELOPER;
@@ -2775,7 +2833,6 @@ $g_update_bug_assign_threshold = '%handle_bug_threshold%';
 
 /**
  * access level needed to view private bugnotes
- * Look in the constant_inc.php file if you want to set a different value
  * @global integer $g_private_bugnote_threshold
  */
 $g_private_bugnote_threshold = DEVELOPER;
@@ -3195,11 +3252,30 @@ $g_user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,18})?)$/i';
 $g_default_manage_tag_prefix = 'ALL';
 
 /**
- * CSV Export
- * Set the csv separator
+ * The separator to use for CSV exports.
  * @global string $g_csv_separator
  */
 $g_csv_separator = ',';
+
+/**
+ * Protection against CSV Injection.
+ *
+ * When this setting is ON (default), any data that could be interpreted as a
+ * formula by a spreadsheet program such as Excel (i.e. starting with `=`, `@`,
+ * `-` or `+`), will be prefixed with a tab character (\t) in order to prevent
+ * CSV injection.
+ *
+ * Sometimes this may not be appropriate (e.g. if the CSV needs to be consumed
+ * programmatically). In that case, $g_csv_injection_protection can be set to OFF,
+ * resulting in raw data to be exported.
+ *
+ * Setting this to OFF is a security risk. An attacker could upload a crafted
+ * CSV file containing formulas that will be executed when opened with Excel,
+ * as described in this article {@link http://georgemauer.net/2017/10/07/csv-injection.html}.
+ *
+ * @global string $g_csv_injection_protection
+ */
+$g_csv_injection_protection = ON;
 
 /**
  * The threshold required for users to be able to manage configuration of a project.
@@ -3277,6 +3353,16 @@ $g_cookie_path = '/';
 $g_cookie_domain = '';
 
 /**
+ * Specifies the SameSite attribute to use for the MantisBT cookies.
+ *
+ * Valid values are Strict (default), Lax or None.
+ * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+ *
+ * @global string $g_cookie_samesite
+ */
+$g_cookie_samesite = 'Strict';
+
+/**
  * Prefix for all MantisBT cookies
  * This should be an identifier which does not include spaces or periods,
  * and should be unique per MantisBT installation, especially if
@@ -3304,6 +3390,13 @@ $g_project_cookie = '%cookie_prefix%_PROJECT_COOKIE';
  * @global string $g_view_all_cookie
  */
 $g_view_all_cookie = '%cookie_prefix%_VIEW_ALL_COOKIE';
+
+/**
+ * Collapse settings cookie.
+ * Stores the open/closed state of the collapsible sections.
+ * @global string $g_collapse_settings_cookie
+ */
+$g_collapse_settings_cookie = '%cookie_prefix%_collapse_settings';
 
 /**
  * Stores the filter criteria for the Manage User page
@@ -3952,7 +4045,7 @@ $g_wiki_enable = OFF;
 
 /**
  * Wiki Engine.
- * Supported engines: 'dokuwiki', 'mediawiki', 'twiki', 'wikka', 'xwiki'
+ * Supported engines: 'dokuwiki', 'mediawiki', 'twiki', 'wackowiki', 'wikka', 'xwiki'
  * @global string $g_wiki_engine
  */
 $g_wiki_engine = '';
@@ -4137,7 +4230,7 @@ $g_plugins_enabled = ON;
 $g_plugin_path = $g_absolute_path . 'plugins' . DIRECTORY_SEPARATOR;
 
 /**
- * management threshold.
+ * Threshold needed to manage plugins
  * @global integer $g_manage_plugin_threshold
  */
 $g_manage_plugin_threshold = ADMINISTRATOR;
@@ -4417,10 +4510,12 @@ $g_global_settings = array(
 	'bug_list_cookie',
 	'cdn_enabled',
 	'class_path',
+	'collapse_settings_cookie',
 	'compress_html',
 	'cookie_domain',
 	'cookie_path',
 	'cookie_prefix',
+	'cookie_samesite',
 	'cookie_time_length',
 	'copyright_statement',
 	'core_path',
@@ -4468,6 +4563,7 @@ $g_global_settings = array(
 	'language_path',
 	'ldap_bind_dn',
 	'ldap_bind_passwd',
+	'ldap_email_field',
 	'ldap_follow_referrals',
 	'ldap_network_timeout',
 	'ldap_organization',
@@ -4580,6 +4676,7 @@ $g_public_config_names = array(
 	'cdn_enabled',
 	'change_view_status_threshold',
 	'check_mx_record',
+	'collapse_settings_cookie',
 	'complete_date_format',
 	'compress_html',
 	'cookie_prefix',
@@ -4677,6 +4774,7 @@ $g_public_config_names = array(
 	'enable_sponsorship',
 	'eta_enum_string',
 	'excel_columns',
+	'export_issues_threshold',
 	'fallback_language',
 	'favicon_image',
 	'file_download_content_type_overrides',
@@ -4753,6 +4851,7 @@ $g_public_config_names = array(
 	'preview_max_width',
 	'preview_text_extensions',
 	'print_issues_page_columns',
+	'print_reports_threshold',
 	'priority_enum_string',
 	'priority_significant_threshold',
 	'private_bug_threshold',

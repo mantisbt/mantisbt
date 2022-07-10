@@ -18,22 +18,23 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$(document).ready( function() {
+$(function() {
 'use strict';
 
 /**
  * PrefixInput object
- * @param input
+ * @param inputId
  * @constructor
  */
 function PrefixInput (inputId) {
 	this.input = $('#' + inputId);
 	this.button = $('#btn_' + inputId);
 
+	// noinspection JSUnusedGlobalSymbols
 	/** Corresponding reset button */
 	this.resetButton = function () { return this.button; };
-	this.enableButton = function () { this.button.removeAttr('disabled');};
-	this.disableButton = function () { this.button.attr('disabled', true);};
+	this.enableButton = function () { this.button.removeAttr('disabled'); };
+	this.disableButton = function () { this.button.prop('disabled', true); };
 
 	/** Default value (data attribute) */
 	this.getDefault = function () { return this.input.data('defval'); };
@@ -64,7 +65,7 @@ function PrefixInput (inputId) {
 	 */
 	this.resetValue = function () {
 		this.input.val(this.getDefault());
-		this.input.focus()[0].setSelectionRange(0, this.getValue().length);
+		this.input.trigger('focus')[0].setSelectionRange(0, this.getValue().length);
 		this.disableButton();
 	};
 }
@@ -84,8 +85,8 @@ var inputs = $('input.table-prefix').each(function () {
  * On Change event for database type selection list
  * Preset prefix, plugin prefix and suffix fields when changing db type
  */
-$('#db_type').change(
-	function () {
+$('#db_type')
+	.on('change', function () {
 		var db;
 		if ($(this).val() === 'oci8') {
 			db = 'oci8';
@@ -109,8 +110,8 @@ $('#db_type').change(
 		);
 
 		update_sample_table_names();
-	}
-);
+	})
+	.trigger('change');
 
 /**
  * Process changes to prefix/suffix inputs
@@ -131,7 +132,7 @@ inputs.on('input', function () {
 /**
  * Buttons to reset the prefix/suffix to the current default value
  */
-reset_buttons.click(function () {
+reset_buttons.on('click', function () {
 	var input = new PrefixInput($(this).prev('input.table-prefix')[0].id);
 	input.resetValue();
 	update_sample_table_names();
@@ -140,21 +141,32 @@ reset_buttons.click(function () {
 update_sample_table_names();
 
 /**
+ * Returns the field's value with a single '_' appended (prefix) or prepended (suffix).
+ *
+ * @param {string} fieldName jQuery element
+ * @param {boolean} isPrefix True if it's a prefix, false for suffix
+ * @returns {string}
+ */
+function process_table_name_field(fieldName, isPrefix) {
+	var value = $(fieldName).val();
+
+	if(value !== undefined) {
+		value = value.trim();
+		if(value.length > 0) {
+			// Make sure we start or end with a single underscore
+			return value.replace(isPrefix ? /_*$/ : /^_*/, '_');
+		}
+	}
+	return '';
+}
+
+/**
  * Populate sample table names based on given prefix/suffix
  */
 function update_sample_table_names() {
-	var prefix = $('#db_table_prefix').val().trim();
-	if(prefix && prefix.substr(-1) !== '_') {
-		prefix += '_';
-	}
-	var suffix = $('#db_table_suffix').val().trim();
-	if(suffix && suffix.substr(0,1) !== '_') {
-		suffix = '_' + suffix;
-	}
-	var plugin = $('#db_table_plugin_prefix').val().trim();
-	if(plugin && plugin.substr(-1) !== '_') {
-		plugin += '_';
-	}
+	var prefix = process_table_name_field('#db_table_prefix', true);
+	var suffix = process_table_name_field('#db_table_suffix', false);
+	var plugin = process_table_name_field('#db_table_plugin_prefix', true);
 
 	$('#db_table_prefix_sample').val(prefix + '<CORE TABLE>' + suffix);
 	$('#db_table_plugin_prefix_sample').val(prefix + plugin + '<PLUGIN>_<TABLE>' + suffix);

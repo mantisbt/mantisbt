@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** German (Deutsch)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -47,6 +47,7 @@
  * @author Diebuche
  * @author Erdemaslancan
  * @author Exit91
+ * @author FF-11
  * @author FF11
  * @author Gebu
  * @author Geitost
@@ -243,7 +244,7 @@ Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um I
 $s_reset_request_admin_msg = 'Ihr Passwort wurde zurückgesetzt. Bitte öffnen Sie die folgende URL, um ein neues Passwort zu setzen:';
 $s_reset_request_in_progress_msg = 'Wenn Sie Benutzernamen und E-Mail-Adresse für Ihr Konto richtig angegeben haben, senden wir Ihnen jetzt eine Bestätigungsmail an diese Adresse. Nach dem Erhalt der Meldung befolgen Sie bitte die Anweisungen, um das Passwort Ihres Kontos zu ändern.';
 $s_email_notification_title_for_status_bug_new = 'Der folgende Eintrag hat (erneut) den Status NEU';
-$s_email_notification_title_for_status_bug_feedback = 'Der folgende Eintrag benötigt Ihre Rückmeldung.';
+$s_email_notification_title_for_status_bug_feedback = 'Der folgende Eintrag benötigt Rückmeldung.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Der folgende Eintrag wurde anerkannt.';
 $s_email_notification_title_for_status_bug_confirmed = 'Der folgende Eintrag wurde bestätigt.';
 $s_email_notification_title_for_status_bug_assigned = 'Der folgende Eintrag wurde zugewiesen.';
@@ -491,6 +492,8 @@ $s_bugnote_updated_msg = 'Notiz wurde erfolgreich geändert …';
 $s_last_edited = 'Zuletzt bearbeitet:';
 $s_hide_content = 'Inhalt ausblenden';
 $s_show_content = 'Inhalt einblenden';
+$s_file_icon_description = '%1$s Dateisymbol';
+$s_unknown_file_extension = 'unbekannt';
 $s_webmaster_contact_information = 'Kontaktieren Sie den <a href="mailto:%1$s" title="Den Webmaster per E-Mail kontaktieren.">Administrator</a> bei Problemen';
 $s_total_queries_executed = 'Insgesamt ausgeführte Abfragen: %1$d';
 $s_unique_queries_executed = 'Einzelne Abfragen ausgeführt: %1$d';
@@ -536,7 +539,7 @@ $s_archives = 'Archive';
 $s_rss = 'RSS';
 $s_site_information = 'Informationen zur Website';
 $s_mantis_version = 'MantisBT-Version';
-$s_schema_version = 'Schema-Version';
+$s_schema_version = 'Datenbankschema-Version';
 $s_site_path = 'Pfad der Website';
 $s_core_path = 'Core-Pfad';
 $s_plugin_path = 'Plugin-Pfad';
@@ -555,18 +558,18 @@ $s_default_filter = 'Standardfilter';
 $s_create_filter_link = 'Permalink erzeugen';
 $s_create_short_link = 'Kurzen Link erzeugen';
 $s_filter_permalink = 'Dies ist ein permanenter Link zum derzeit aktiven Filter:';
-$s_manage_users_link = 'Benutzer verwalten';
-$s_manage_projects_link = 'Projekte verwalten';
-$s_manage_custom_field_link = 'Benutzerdefinierte Felder verwalten';
-$s_manage_global_profiles_link = 'Globale Profile verwalten';
-$s_manage_plugin_link = 'Plugins verwalten';
+$s_manage_users_link = 'Benutzer';
+$s_manage_projects_link = 'Projekte';
+$s_manage_custom_field_link = 'Benutzerdefinierte Felder';
+$s_manage_global_profiles_link = 'Globale Profile';
+$s_manage_plugin_link = 'Plugins';
 $s_permissions_summary_report = 'Rechte-Bericht';
-$s_manage_config_link = 'Konfiguration verwalten';
+$s_manage_config_link = 'Konfiguration';
 $s_manage_threshold_config = 'Arbeitsablauf-Schwellenwerte';
 $s_manage_email_config = 'E-Mail-Benachrichtigungen';
 $s_manage_workflow_config = 'Arbeitsablauf';
 $s_manage_workflow_graph = 'Arbeitsablauf-Grafik';
-$s_manage_tags_link = 'Tags verwalten';
+$s_manage_tags_link = 'Tags';
 $s_create_new_account_link = 'Neues Konto erstellen';
 $s_projects_link = 'Projekte';
 $s_documentation_link = 'Dokumentation';
@@ -576,7 +579,7 @@ $s_never_logged_in_title = 'Noch nie angemeldet';
 $s_prune_accounts = 'Konten löschen';
 $s_hide_inactive = 'Inaktive ausblenden';
 $s_show_disabled = 'Deaktivierte anzeigen';
-$s_manage_accounts_title = 'Konten verwalten';
+$s_manage_accounts_title = 'Benutzer verwalten';
 $s_p = 'Änderungsgeschützt';
 $s_date_created = 'Erstellungsdatum';
 $s_last_visit = 'Letzter Besuch';
@@ -661,7 +664,10 @@ $s_show_all_complex = 'Werte aller "%1$s" Optionen anzeigen';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Installierte Plugins';
 $s_plugins_available = 'Verfügbare Plugins';
+$s_plugins_missing = 'Fehlende oder ungültige Plugins';
+$s_plugins_missing_description = 'Die Plugins in der Liste unten sind registriert, aber deren Quellcode konnte nicht in "%s" gefunden oder von dort geladen werden.<br>Versuchen Sie eine Neuinstallation oder entfernen Sie die Plugins.';
 $s_plugin_description = 'Beschreibung';
+$s_plugin_problem_description = 'Problembeschreibung';
 $s_plugin_author = 'Autor: %1$s';
 $s_plugin_url = 'Website:';
 $s_plugin_depends = 'Abhängigkeiten';
@@ -672,12 +678,20 @@ $s_plugin_actions = 'Aktionen';
 $s_plugin_install = 'Installation';
 $s_plugin_upgrade = 'Upgrade';
 $s_plugin_uninstall = 'Deinstallation';
+$s_plugin_manual_fix = 'Manuelles Eingreifen notwendig';
 $s_plugin_uninstall_message = 'Sind Sie sicher, dass Sie das Plugin „%1$s“ deinstallieren wollen?';
+$s_plugin_remove_message = 'Sind Sie sicher, dass Sie das ungültige oder fehlende Plugin "%1$s" entfernen möchten?';
 $s_plugin_key_label = 'Schlüsselworte:';
 $s_plugin_key_met = 'Plugin bereit';
 $s_plugin_key_unmet = 'nicht erfüllte Abhängigkeiten';
 $s_plugin_key_dated = 'veraltete Abhängigkeiten';
 $s_plugin_key_upgrade = 'Upgrade notwendig';
+$s_plugin_invalid_description = 'Ungültiges Plugin';
+$s_plugin_invalid_status_message = 'Die folgenden erforderlichen Eigenschaften sind nicht in den Klassen des Plugins definiert: %s';
+$s_plugin_missing_description = 'Fehlendes Plugin';
+$s_plugin_missing_status_message = 'Das Plugin ist in der Mantis-Datenbank istalliert, konnte aber nicht geladen werden.';
+$s_plugin_missing_class_description = 'Fehlende Plugin Basisklasse';
+$s_plugin_missing_class_status_message = 'Es wurde ein Verzeichnis für dieses Plugin gefunden, aber kein entsprechender Plugin Quellcode. Stellen Sie sicher, dass der Name des Verzeichnisses dem Namen der Basisklasse entspricht. Beachten Sie dabei Groß-/Kleinschreibung.';
 $s_project_added_msg = 'Projekt wurde hinzugefügt …';
 $s_category_added_msg = 'Kategorie wurde hinzugefügt …';
 $s_category_deleted_msg = 'Kategorie wurde gelöscht …';
@@ -819,7 +833,7 @@ $s_add_file = 'Datei hinzufügen';
 $s_project_document_updated = 'Projekt erfolgreich aktualisiert';
 $s_project_user_added_msg = 'Benutzer zum Projekt hinzugefügt';
 $s_project_removed_user_msg = 'Benutzer aus Projekt entfernt';
-$s_remove_user_sure_msg = 'Soll der Benutzer "%1$s" wirklich aus dem Projekt "%2$s" entfernt werden?';
+$s_remove_user_sure_msg = 'Soll der Benutzer "%1$s" wirklich aus dem Projekt / den Projekten "%2$s" entfernt werden?';
 $s_remove_user_button = 'Benutzer entfernen';
 $s_remove_all_users_sure_msg = 'Sind Sie sicher, dass Sie alle Benutzer dieses Projekts entfernen wollen?';
 $s_remove_all_users_button = 'Alle Benutzer entfernen';
@@ -1043,7 +1057,7 @@ $s_changelog = 'Änderungsprotokoll';
 $s_changelog_empty = 'Keine Änderungshistorie verfügbar';
 $s_changelog_empty_manager = 'Keine Änderungsprotokoll-Informationen verfügbar. Einträge werden erst angezeigt wenn in Projekten Versionen konfiguriert sind, und Einträge mit festgelegtem „Behoben in Version“ mit Status "erledigt" vorhanden sind.';
 $s_roadmap = 'Roadmap';
-$s_resolved_progress = '%1$d von %2$d Einträgen erledigt. Fortschritt (%3$d %%).';
+$s_resolved_progress = '%1$d von %2$d Einträgen erledigt.';
 $s_roadmap_empty = 'Keine Roadmap-Informationen verfügbar';
 $s_roadmap_empty_manager = 'Keine Roadmap-Informationen verfügbar. Einträge werden erst angezeigt wenn in Projekten Versionen konfiguriert sind, und Einträge mit festgelegter „Zielversion“ vorhanden sind.';
 $s_http_auth_realm = 'MantisBT anmelden';
@@ -1272,6 +1286,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Dieses Konto ist geschützt. Sie könn
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Zugriff verweigert.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dateiübertragung fehlgeschlagen. Datei konnte nicht von MantisBT gelesen werden. Bitte prüfe die Projekteinstellungen.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Dateiübertragung fehlgeschlagen. Wahrscheinlich liegt die Dateigröße über der erlaubten für diese PHP-Installation.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'Dateiname "%1$s" ist zu lang.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ein erforderlicher Parameter für diese Seite (%1$s) wurde nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Dieser Benutzername ist schon vergeben. Gehen Sie zurück und wählen Sie einen anderen.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Diese E-Mail-Adresse wird bereits verwendet. Gehen Sie bitte zurück und geben Sie eine andere ein.';
@@ -1326,7 +1341,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-Authentifizierung fehlgeschlagen.'
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Verbindung zum LDAP-Server fehlgeschlagen.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Aktualisierung des LDAP-Eintrags fehlgeschlagen.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-Benutzereintrag nicht gefunden.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP-Erweiterung ist nicht geladen.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'Das Setzen der minimalen TLS-Version auf dem LDAP-Server ist gescheitert.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'Kann StartTLS nicht auf dem LDAP-Server installieren.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Verbindung zur Datenbank fehlgeschlagen. Reportmeldung lautet #%1$d: %2$s.';
@@ -1334,7 +1348,7 @@ $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Datenbankabfrage fehlgeschlagen. Die Rep
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Datenbankauswahl fehlgeschlagen. Reportmeldung der Datenbank lautet #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = 'Die Datenbankkennung „%1$s“ ist zu lang. Versuche, die Größe von g_db_table_prefix/suffix zu reduzieren.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Eine Kategorie mit diesem Namen existiert bereits.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kein Kopiervorgang angegeben.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Kein Kopiervorgang angegeben.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie nicht gefunden.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Die Kategorie „%1$s“ wurde für das Projekt „%2$s“ nicht gefunden.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Diese Kategorie kann nicht gelöscht werden, da sie als „Standardkategorie für Verschiebungen“ definiert ist.';
@@ -1403,6 +1417,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Sie haben die erlaubte Aktivitätsgrenze 
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Das Feld „%1$s“ muss kürzer oder gleich als %2$d Zeichen lang sein.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Der Name des API-Tokens „%s“ ist bereits in Verwendung.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Die in $g_log_destination angegebene Datei „%s“ ist nicht beschreibbar.';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Der hinzugefügte Benutzer hat keine ausreichenden Rechte, um diesen Eintrag zu beobachten.';
 $s_dropzone_default_message = 'Dateien hier zum Hochladen ablegen, oder klicken oder einfügen.';
 $s_dropzone_fallback_message = 'Ihr Webbrowser unterstützt keine Dateiuploads durch Ziehen und Ablegen.';
 $s_dropzone_file_too_big = 'Die Datei ist zu groß ({{filesize}} MiB). Maximale Dateigröße: {{maxFilesize}} MiB.';
@@ -1413,7 +1428,8 @@ $s_dropzone_cancel_upload_confirmation = 'Sind Sie sich sicher, dass Sie diesen 
 $s_dropzone_remove_file = 'Datei entfernen';
 $s_dropzone_max_files_exceeded = 'Sie können keine weiteren Dateien hochladen.';
 $s_dropzone_not_supported = 'Dropzone.js unterstützt keine älteren Webbrowser!';
-$s_dropzone_multiple_files_too_big = 'Die folgenden Dateien:{{files}}überschreiten die maximal erlaubte Dateigröße ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'Die folgenden Dateien überschreiten die maximal erlaubte Dateigröße({{maxFilesize}} MiB):{{files}}';
+$s_dropzone_multiple_filenames_too_long = 'Die folgenden Dateinamen sind zu lang (maximal {{maxFilenameLength}} Zeichen):{{files}}';
 $s_save = 'Speichern';
 $s_reset = 'Zurücksetzen';
 $s_persist = 'Merken';

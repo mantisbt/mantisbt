@@ -25,15 +25,15 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца))
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -50,7 +50,7 @@ $s_plugin_format_process_text = 'Апрацоўка тэксту';
 $s_plugin_format_process_text_warning_notice = 'Не выключайце, калі Вы сапраўды не ўпэўнены ў тым што Вы робіце. У выключаным стане ўзьнікае верагоднасьць XSS-атакі на сайт.';
 $s_plugin_format_process_urls = 'Апрацоўка URL-адрасоў';
 $s_plugin_format_process_buglinks = 'Унутраныя спасылкі MantisBT (праблемы і камэнтары)';
-$s_plugin_format_process_buglinks_info = 'Вашая канфігурацыя вызначае метку <em>Issue</em> як «<literal>%s</literal>», а метку <em>Issue Note</em> як «<literal>%s</literal>»';
+$s_plugin_format_process_buglinks_info = 'Вашая канфігурацыя вызначае метку <em>Issue</em> як «%s», а метку <em>Issue Note</em> як «%s»';
 $s_plugin_format_process_markdown = 'Апрацоўка Markdown';
 $s_plugin_format_process_markdown_info = 'Стылі з падтрымкай Markdown, сынтаксыс фарматаваньня тэксту створаны так, каб ён мог быць канвэртаваны ў HTML.';
 $s_plugin_format_enabled = 'Уключанае';

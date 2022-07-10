@@ -1157,9 +1157,11 @@ function email_bug_deleted( $p_bug_id ) {
  * @param array   $p_headers   Array of additional headers to send with the email.
  * @param boolean $p_force     True to force sending of emails in shutdown function,
  *                             even when using cronjob
+ * @param array   $p_cc        Array of cc recipients.
+ * @param array   $p_bcc       Array of bcc recipients.
  * @return integer|null
  */
-function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null, $p_force = false ) {
+function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null, $p_force = false, $p_cc = [], $p_bcc = [] ) {
 	global $g_email_shutdown_processing;
 
 	$t_recipient = trim( $p_recipient );
@@ -1179,6 +1181,8 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 	$t_email_data->body = $t_message;
 	$t_email_data->metadata = array();
 	$t_email_data->metadata['headers'] = $p_headers === null ? array() : $p_headers;
+	$t_email_data->metadata['cc'] = $p_cc;
+	$t_email_data->metadata['bcc'] = $p_bcc;
 
 	# Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_email_data->metadata['charset'] = 'utf-8';
@@ -1365,6 +1369,17 @@ function email_send( EmailData $p_email_data ) {
 	$t_mail->AddCustomHeader( 'Auto-Submitted:auto-generated' );
 	$t_mail->AddCustomHeader( 'X-Auto-Response-Suppress: All' );
 
+	if( isset( $t_email_data->metadata['cc'] ) && $t_email_data->metadata['cc'] ) {
+		foreach( $t_email_data->metadata['cc'] as $cc ) {
+			$t_mail->addCC( trim( $cc ) );
+		}
+	}
+	if( isset( $t_email_data->metadata['bcc'] ) && $t_email_data->metadata['bcc'] ) {
+		foreach( $t_email_data->metadata['bcc'] as $bcc ) {
+			$t_mail->addBCC( trim( $bcc ) );
+		}
+	}
+
 	$t_mail->Encoding   = 'quoted-printable';
 
 	if( isset( $t_email_data->metadata['priority'] ) ) {
@@ -1395,8 +1410,8 @@ function email_send( EmailData $p_email_data ) {
 
 	if( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
 		foreach( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
-			switch( $t_key ) {
-				case 'Message-ID':
+			switch( strtolower( $t_key ) ) {
+				case 'message-id':
 					# Note: hostname can never be blank here as we set metadata['hostname']
 					# in email_store() where mail gets queued.
 					if( !strchr( $t_value, '@' ) && !is_blank( $t_mail->Hostname ) ) {
@@ -1404,9 +1419,11 @@ function email_send( EmailData $p_email_data ) {
 					}
 					$t_mail->set( 'MessageID', '<' . $t_value . '>' );
 					break;
-				case 'In-Reply-To':
-					$t_mail->addCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
-					break;
+				case 'in-reply-to':
+					if( !preg_match( '/<.+@.+>/m', $t_value ) ) {
+						$t_value = '<' . $t_value . '@' . $t_mail->Hostname . '>';
+					}
+					# Fall-through
 				default:
 					$t_mail->addCustomHeader( $t_key . ': ' . $t_value );
 					break;

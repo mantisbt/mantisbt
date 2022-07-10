@@ -444,7 +444,7 @@ function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null 
 		$t_basename = $p_basename;
 	}
 
-	$t_error_code = "plugin_${t_basename}_${p_error_name}";
+	$t_error_code = "plugin_{$t_basename}_{$p_error_name}";
 
 	trigger_error( $t_error_code, $p_error_type );
 }
@@ -1098,7 +1098,7 @@ function plugin_init( $p_basename ) {
 		$t_plugin_errors = $t_plugin->errors();
 
 		foreach( $t_plugin_errors as $t_error_name => $t_error_string ) {
-			$t_error_code = "plugin_${p_basename}_${t_error_name}";
+			$t_error_code = "plugin_{$p_basename}_{$t_error_name}";
 			$g_lang_strings[$t_lang]['MANTIS_ERROR'][$t_error_code] = $t_error_string;
 		}
 

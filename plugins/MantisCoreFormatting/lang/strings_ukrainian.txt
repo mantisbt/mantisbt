@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,24 +33,26 @@
 /** Ukrainian (українська)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Andriykopanytsia
  * @author Base
+ * @author DDPAT
+ * @author Ice bulldog
  * @author Piramidion
  */
 
 $s_plugin_format_title = 'Форматування MantisBT';
-$s_plugin_format_description = 'Офіційний плаґін для обробки та форматування тексту.';
+$s_plugin_format_description = 'Офіційний плагін для обробки та форматування тексту.';
 $s_plugin_format_config = 'Налаштування';
 $s_plugin_format_process_text = 'Обробка тексту';
 $s_plugin_format_process_text_warning_notice = 'Не вимикайте, якщо Ви не впевнені в тому, що робите. У вимкненому стані можлива XSS-атака сайту.';
 $s_plugin_format_process_urls = 'Обробка URL';
 $s_plugin_format_process_buglinks = 'Внутрішні посилання MantisBT (завдання/коментарі)';
-$s_plugin_format_process_buglinks_info = 'Ваша конфігурація визначає теґ <em>Issue</em> «<literal>%s</literal>», а теґ <em>Issue Note</em> - як «<literal>%s</literal>»';
+$s_plugin_format_process_buglinks_info = 'Ваша конфігурація визначає тег <em>Issue</em> «%s», а тег <em>Issue Note</em> — як «%s»';
 $s_plugin_format_process_markdown = 'Опрацювання через Markdown';
 $s_plugin_format_process_markdown_info = 'Налаштування стилю з підтримкою Markdown, синтаксис форматування тексту, розроблений так, щоб його можна було конвертувати в HTML.';
 $s_plugin_format_enabled = 'вкл';

@@ -72,6 +72,7 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 
 auth_ensure_user_authenticated();
+access_ensure_project_level( config_get( 'print_reports_threshold' ) );
 
 $f_type_page	= gpc_get_string( 'type_page', 'word' );
 $f_search		= gpc_get_string( 'search', false ); # @todo need a better default

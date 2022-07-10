@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,13 +33,14 @@
 /** Finnish (suomi)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Crt
  * @author Lliehu
+ * @author MITO
  * @author Nike
  * @author Pyscowicz
  * @author Silvonen
@@ -498,17 +499,17 @@ $s_default_filter = 'Oletussuodatin';
 $s_create_filter_link = 'Luo lyhytlinkki';
 $s_create_short_link = 'Luo lyhytlinkki';
 $s_filter_permalink = 'Pysyvä linkki aktiiviseen muokattuun suodattimeen:';
-$s_manage_users_link = 'Käyttäjähallinta';
-$s_manage_projects_link = 'Projektinhallinta';
-$s_manage_custom_field_link = 'Muokkaa mukautettuja kenttiä';
+$s_manage_users_link = 'Käyttäjät';
+$s_manage_projects_link = 'Projektit';
+$s_manage_custom_field_link = 'Mukautetut kentät';
 $s_manage_global_profiles_link = 'Muokkaa yleisiä profiileja';
-$s_manage_plugin_link = 'Muokkaa laajennuksia';
+$s_manage_plugin_link = 'Lisäosat';
 $s_permissions_summary_report = 'Käyttöoikeusraportti';
 $s_manage_config_link = 'Hallinnoi käyttöoikeuksia';
 $s_manage_threshold_config = 'Tapahtumaketjun kynnysrajat';
 $s_manage_email_config = 'Sähköpostimuistutukset';
 $s_manage_workflow_config = 'Tapahtumaketju';
-$s_manage_tags_link = 'Muokkaa tägejä';
+$s_manage_tags_link = 'Tagit';
 $s_create_new_account_link = 'Luo uusi käyttäjätunnus';
 $s_projects_link = 'Projektit';
 $s_documentation_link = 'Dokumentaatio';
@@ -1142,6 +1143,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tämä käyttäjätunnus on suojattu. 
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Pääsy kielletty.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Tiedoston lähetys epäonnistui. PHP:n tiedostolähetystoiminnot saattavat olla pois päältä. Ole hyvä ja pyydä järjestelmäsi ylläpitäjää ajamaan admin_check-skripti debuggaustoimenpiteitä varten.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Tiedoston lähetys epäonnistui. Tämä johtuu luutavasti siitä, että tiedoston koko ylittää PHP:n nykyisen enimmäiskoon.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'Tiedoston nimi "%1$s" on liian pitkä.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Tämän sivun vaatimaa muuttujaa %1$s ei löydy.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Käyttäjänimi on jo käytössä. Palaa edelliselle sivulla ja valitse uusi käyttäjänimi.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Ohjelma-asetus  \'%1$s\' ei löytynyt.';
@@ -1185,12 +1187,11 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentikaatio epäonnistui';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-palvelinyhteys epäonnistui.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP-tietueen päivittäminen epäonnistui.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-käyttäjätietoja ei löytynyt.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP-laajennusta ei ladattu.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Tietokantayhteys epäonnistui. Tietokanta palautti virheen #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Tietokantakysely epäonnistui. Tietokanta palautti virheen #%1$d: %2$s kyselyllä: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Tietokantavalinta epäonnistui. Tietokanta palautti virheen #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Samanniminen kategoria on jo olemassa.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kopiointitoimea ei ole määritelty.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Kopiointitoimea ei ole määritelty.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategoriaa ei löydy.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategoriaa "%1$s" ei löytynyt projektilta "%2$s".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Samanniminen versio on jo olemassa.';

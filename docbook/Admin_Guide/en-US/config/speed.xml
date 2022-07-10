@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "https://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
  <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
 ]>
 <section id="admin.config.speed">
@@ -12,26 +12,24 @@
 				<para>This option is used to enable buffering/compression of HTML
 					output if the user's browser supports it. Default value is ON.
 					This option will be ignored in the following scenarios:
-					<itemizedlist>
-						<listitem>
-							<para>If php.ini has zlib.output_compression
-								enabled.
-							</para>
-						</listitem>
-						<listitem>
-							<para>If php.ini has output_handler set to a
-								handler.
-							</para>
-						</listitem>
-						<listitem>
-							<para>If PHP does not include the zlib extension (PHP 4.3.0 and
-								later include zlib extension by default).
-							</para>
-						</listitem>
-					</itemizedlist>
-					You can check the loaded modules in your PHP by running &quot;php -m&quot; on
-					the command line, or by using php_info() command in a php script.
 				</para>
+				<itemizedlist>
+					<listitem>
+						<para>php.ini has <emphasis>zlib.output_compression</emphasis> enabled.
+						</para>
+					</listitem>
+					<listitem>
+						<para>php.ini has <emphasis>output_handler</emphasis> set to a handler.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink url="https://www.php.net/manual/en/book.zlib.php">zlib extension</ulink>
+							is not enabled.
+							The Windows version of PHP has built-in support for this extension.
+						</para>
+					</listitem>
+				</itemizedlist>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

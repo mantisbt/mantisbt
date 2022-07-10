@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Hungarian (magyar)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -51,7 +51,7 @@ $s_plugin_format_process_text = 'Szövegfeldolgozás';
 $s_plugin_format_process_text_warning_notice = 'Ne kapcsolja ki, csak ha tényleg tudja, hogy mit csinál. Kikapcsolt állapotban webhelyközi (cross site scripting, XSS) támadások fordulhatnak elő.';
 $s_plugin_format_process_urls = 'URL-feldolgozás';
 $s_plugin_format_process_buglinks = 'MantisBT belső hivatkozások (ügyek és ügymegjegyzések)';
-$s_plugin_format_process_buglinks_info = 'A konfiguráció az <em>Issue</em> címkét „<literal>%s</literal>” értékként, az <em>Issue Note</em> címkét pedig „<literal>%s</literal>” értékként határozza meg.';
+$s_plugin_format_process_buglinks_info = 'A konfiguráció az <em>Issue</em> címkét „%s” értékként, az <em>Issue Note</em> címkét pedig „%s” értékként határozza meg.';
 $s_plugin_format_process_markdown = 'Markdown feldolgozás';
 $s_plugin_format_process_markdown_info = 'Formázás Markdown támogatással, amely egy olyan szövegformázási szintaxis, amely HTML-re alakítható';
 $s_plugin_format_enabled = 'Be';

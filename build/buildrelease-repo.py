@@ -166,7 +166,7 @@ def main():
         if path.isfile('composer.json'):
             print("Installing Composer packages")
             if subprocess.call(
-                    'composer install --no-plugins --no-scripts --no-dev',
+                    'composer install --no-plugins --no-scripts --no-dev --no-progress',
                     shell=True):
                 continue
             print()
@@ -178,7 +178,6 @@ def main():
 
         # Handle suffix/auto-suffix generation
         commit_hash = os.popen('git log --pretty="format:%h" -n1').read()
-        print(commit_hash)
         if commit_hash != ref:
             ref = refnameregex.search(ref).group(1)
             commit_hash = "{}-{}".format(ref, commit_hash)

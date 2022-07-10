@@ -70,6 +70,10 @@
     width: 13%
 }
 
+.width-15 {
+    width: 15%
+}
+
 .padding-2 {
     padding:2px;
 }
@@ -141,15 +145,9 @@
 }
 
 .widget-toolbar > .widget-menu > a {
-    display: inline-block;
     font-size: 11px;
     padding: 0 5px;
     line-height: 20px;
-}
-
-.widget-toolbar > .widget-menu a.btn-xs {
-	font-size: 12px;
-	line-height: 1.5;
 }
 
 .widget-toolbar > .widget-menu form {
@@ -160,7 +158,14 @@
 }
 
 .widget-toolbar > .widget-menu .btn-xs {
+    font-size: 12px;
+    line-height: 1.5;
     padding: 2px 5px;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+    height: 30px;
 }
 
 .bold {
@@ -171,14 +176,26 @@ table {
     background-color: #ffffff !important;
 }
 
+/* Breaking lines when needed */
+td.column-description, td.bug-description,
+td.column-steps-to-reproduce, td.bug-steps-to-reproduce,
+td.column-additional-information, td.bug-additional-information,
+td.bugnote-note, td.column-notes,
+td.cftype-textarea {
+    overflow-wrap: anywhere;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    overflow-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 /* Disable printing of link urls */
 a:link:after, a:visited:after {
     content: normal !important;
-}
-
-/* Prevent horizontal scrolling when displaying db commands in install screen */
-pre {
-    word-break: break-all !important;
 }
 
 /* Disable theme backgrounds */
@@ -572,6 +589,26 @@ hr {
     border-color: #393939;
 }
 
+/* Changelog and Roadmap items */
+ul.changelog, ul.roadmap {
+    list-style-type: none;
+    margin-left: 0;
+}
+ul.changelog > li, ul.roadmap > li {
+    margin-bottom: 4px;
+}
+
+/* Mantis 28826: Remove vertical lines for bordered tables. */
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
@@ -705,4 +742,3 @@ hr {
     }
 
 }
-

@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,11 +33,12 @@
 /** Colognian (Ripoarisch)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Dregad
  * @author Purodha
  */
 
@@ -62,4 +63,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Donn dä Lengk affschallde';
 $s_plugin_XmlImportExport_fallback = 'Wat donn, wann et Ömnummereeere nit paß?';
 $s_plugin_XmlImportExport_fallback_category = 'Äsaz (Shtandatt) Zoot:';
 $s_plugin_XmlImportExport_keep_same_category = 'Versöhk, desellve Zoot beizebehaale';
-$s_plugin_XmlImportExport_error_no_xml = 'mer künne de Zohsazprojramme <code lang="en">xmlreader</code> un <code lang="en">xmlwriter</code> nit fenge';
+$s_plugin_XmlImportExport_error_no_xml = 'mer künne de Zohsazprojramme xmlreader un xmlwriter nit fenge';

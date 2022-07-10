@@ -76,18 +76,14 @@ if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
 	die();
 }
 
-# Enforce PHP mbstring extension
-if( !extension_loaded( 'mbstring' ) ) {
-	echo '<strong>FATAL ERROR: PHP mbstring extension is not enabled.</strong><br />'
-		. 'MantisBT requires this extension for Unicode (UTF-8) support<br />'
-		. 'http://www.php.net/manual/en/mbstring.installation.php';
-	die();
-}
+ensure_php_extension_loaded( 'mbstring', 'for Unicode (UTF-8) support' );
 
 # Ensure that encoding is always UTF-8 independent from any PHP default or ini setting
-mb_internal_encoding('UTF-8');
+mb_internal_encoding( 'UTF-8' );
 
-ob_start();
+if( php_sapi_name() != 'cli' ) {
+	ob_start();
+}
 
 # Load Composer autoloader
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
@@ -108,6 +104,137 @@ if( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
 }
 
+# Ensure PHP LDAP extension is available when Login Method is LDAP
+global $g_login_method;
+if ( $g_login_method == LDAP ) {
+	ensure_php_extension_loaded( 'ldap', 'when using LDAP as Login Method' );
+}
+
+# Register the autoload function to make it effective immediately
+spl_autoload_register( 'autoload_mantis' );
+
+# Include PHP compatibility file
+require_api( 'php_api.php' );
+
+# Ensure that output is blank so far (output at this stage generally denotes
+# that an error has occurred)
+if( ( $t_output = ob_get_contents() ) != '' ) {
+	echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';
+	var_dump( $t_output );
+	die;
+}
+unset( $t_output );
+
+# Start HTML compression handler (if enabled)
+require_api( 'compress_api.php' );
+compress_start_handler();
+
+# If no configuration file exists, redirect the user to the admin page so
+# they can complete installation and configuration of MantisBT
+if( false === $t_config_inc_found ) {
+	if( php_sapi_name() == 'cli' ) {
+		echo 'Error: ' . $g_config_path . "config_inc.php file not found; ensure MantisBT is properly setup.\n";
+		exit( 1 );
+	}
+
+	if( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
+		header( 'Content-Type: text/html' );
+		# Temporary redirect (307) instead of Found (302) default
+		header( 'Location: admin/install.php', true, 307 );
+		# Make sure it's not cached
+		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+		exit;
+	}
+}
+
+# Initialise cryptographic keys
+require_api( 'crypto_api.php' );
+crypto_init();
+
+# Connect to the database
+require_api( 'database_api.php' );
+require_api( 'config_api.php' );
+
+# Set the default timezone
+# To reduce overhead, we assume that the timezone configuration is valid,
+# i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
+# be raised and we fall back to the system's default timezone.
+# Use admin checks to validate configuration.
+$t_tz = config_get_global( 'default_timezone' );
+if( empty( $t_tz ) || !date_default_timezone_set( $t_tz ) ) {
+	$t_tz = date_default_timezone_get();
+}
+config_set_global( 'default_timezone', $t_tz );
+
+if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	global $g_use_persistent_connections, $g_hostname, $g_db_username, $g_db_password, $g_database_name;
+	if( OFF == $g_use_persistent_connections ) {
+		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	} else {
+		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, true );
+	}
+}
+
+# Register global shutdown function
+shutdown_functions_register();
+
+# Initialise plugins
+require_api( 'plugin_api.php' );  # necessary for some upgrade steps
+if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	plugin_init_installed();
+}
+
+# Initialise Wiki integration
+if( config_get_global( 'wiki_enable' ) == ON ) {
+	require_api( 'wiki_api.php' );
+	wiki_init();
+}
+
+if( !isset( $g_login_anonymous ) ) {
+	$g_login_anonymous = true;
+}
+
+if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	require_api( 'authentication_api.php' );
+
+	# Override the default timezone according to user's preferences
+	if( auth_is_user_authenticated() ) {
+		require_api( 'user_pref_api.php' );
+		$t_tz = user_pref_get_pref( auth_get_current_user_id(), 'timezone' );
+		@date_default_timezone_set( $t_tz );
+	}
+}
+unset( $t_tz );
+
+# Cache current user's collapse API data
+if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	require_api( 'collapse_api.php' );
+	collapse_cache_token();
+}
+
+# Load custom functions
+require_api( 'custom_function_api.php' );
+
+if( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
+	require_once( $g_config_path . 'custom_functions_inc.php' );
+}
+
+# Set HTTP response headers
+require_api( 'http_api.php' );
+event_signal( 'EVENT_CORE_HEADERS' );
+http_all_headers();
+
+# Push default language to speed calls to lang_get
+if( !defined( 'LANG_LOAD_DISABLED' ) ) {
+	require_api( 'lang_api.php' );
+	lang_push( lang_get_default() );
+}
+
+# Signal plugins that the core system is loaded
+if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	require_api( 'event_api.php' );
+	event_signal( 'EVENT_CORE_READY' );
+}
 
 /**
  * Define an API inclusion function to replace require_once
@@ -194,7 +321,7 @@ function autoload_mantis( $p_class ) {
 		if( file_exists( $t_require_path ) ) {
 			require_once( $t_require_path );
 			return;
-		}	
+		}
 	}
 
 	# Exceptions
@@ -203,7 +330,7 @@ function autoload_mantis( $p_class ) {
 		if( file_exists( $t_require_path ) ) {
 			require_once( $t_require_path );
 			return;
-		}	
+		}
 	}
 
 	global $g_class_path;
@@ -224,128 +351,25 @@ function autoload_mantis( $p_class ) {
 	}
 }
 
-# Register the autoload function to make it effective immediately
-spl_autoload_register( 'autoload_mantis' );
+/**
+ * Ensures the given extension is loaded, dies with an error message if not.
+ *
+ * @param string $p_extension      Extension name
+ * @param string $p_reason_message Justification for requiring the extension
+ * @return bool
+ */
+function ensure_php_extension_loaded( $p_extension, $p_reason_message ) {
+	if( extension_loaded( $p_extension ) ) {
+		return true;
+	}
 
-# Include PHP compatibility file
-require_api( 'php_api.php' );
-
-# Ensure that output is blank so far (output at this stage generally denotes
-# that an error has occurred)
-if( ( $t_output = ob_get_contents() ) != '' ) {
-	echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';
-	var_dump( $t_output );
+	/** @noinspection HtmlUnknownTarget */
+	printf( '<strong>FATAL ERROR: PHP <i>%1$s</i> extension is not enabled.</strong><br>'
+		. 'MantisBT requires this extension %2$s.<br>'
+		. '<a href="%3$s">%3$s</a>',
+		$p_extension,
+		$p_reason_message,
+		"https://www.php.net/manual/en/$p_extension.installation.php"
+	);
 	die;
-}
-unset( $t_output );
-
-# Start HTML compression handler (if enabled)
-require_api( 'compress_api.php' );
-compress_start_handler();
-
-# If no configuration file exists, redirect the user to the admin page so
-# they can complete installation and configuration of MantisBT
-if( false === $t_config_inc_found ) {
-	if( php_sapi_name() == 'cli' ) {
-		echo 'Error: ' . $g_config_path . "config_inc.php file not found; ensure MantisBT is properly setup.\n";
-		exit(1);
-	}
-
-	if( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
-		header( 'Content-Type: text/html' );
-		# Temporary redirect (307) instead of Found (302) default
-		header( 'Location: admin/install.php', true, 307 );
-		# Make sure it's not cached
-		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-		exit;
-	}
-}
-
-# Initialise cryptographic keys
-require_api( 'crypto_api.php' );
-crypto_init();
-
-# Connect to the database
-require_api( 'database_api.php' );
-require_api( 'config_api.php' );
-
-# Set the default timezone
-# To reduce overhead, we assume that the timezone configuration is valid,
-# i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
-# be raised and we fall back to the system's default timezone.
-# Use admin checks to validate configuration.
-$t_tz = config_get_global( 'default_timezone' );
-if( empty( $t_tz ) || !date_default_timezone_set( $t_tz )) {
-	$t_tz = date_default_timezone_get();
-}
-config_set_global( 'default_timezone', $t_tz );
-
-if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	global $g_use_persistent_connections, $g_hostname, $g_db_username, $g_db_password, $g_database_name;
-	if( OFF == $g_use_persistent_connections ) {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-	} else {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, true );
-	}
-}
-
-# Register global shutdown function
-shutdown_functions_register();
-
-# Initialise plugins
-require_api( 'plugin_api.php' );  // necessary for some upgrade steps
-if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	plugin_init_installed();
-}
-
-# Initialise Wiki integration
-if( config_get_global( 'wiki_enable' ) == ON ) {
-	require_api( 'wiki_api.php' );
-	wiki_init();
-}
-
-if( !isset( $g_login_anonymous ) ) {
-	$g_login_anonymous = true;
-}
-
-if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	require_api( 'authentication_api.php' );
-
-	# Override the default timezone according to user's preferences
-	if( auth_is_user_authenticated() ) {
-		require_api( 'user_pref_api.php' );
-		$t_tz = user_pref_get_pref( auth_get_current_user_id(), 'timezone' );
-		@date_default_timezone_set( $t_tz );
-	}
-}
-unset( $t_tz );
-
-# Cache current user's collapse API data
-if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	require_api( 'collapse_api.php' );
-	collapse_cache_token();
-}
-
-# Load custom functions
-require_api( 'custom_function_api.php' );
-
-if( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
-	require_once( $g_config_path . 'custom_functions_inc.php' );
-}
-
-# Set HTTP response headers
-require_api( 'http_api.php' );
-event_signal( 'EVENT_CORE_HEADERS' );
-http_all_headers();
-
-# Push default language to speed calls to lang_get
-if( !defined( 'LANG_LOAD_DISABLED' ) ) {
-	require_api( 'lang_api.php' );
-	lang_push( lang_get_default() );
-}
-
-# Signal plugins that the core system is loaded
-if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	require_api( 'event_api.php' );
-	event_signal( 'EVENT_CORE_READY' );
 }

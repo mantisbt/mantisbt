@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Brazilian Portuguese (português do Brasil)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -49,6 +49,7 @@
  * @author Felipe L. Ewald
  * @author Giro720
  * @author Gusta
+ * @author Gustavo.moraes
  * @author Jefersonfoliveira
  * @author Joao Xavier
  * @author Lowvy
@@ -560,18 +561,18 @@ $s_default_filter = 'Filtro padrão';
 $s_create_filter_link = 'Criar Link Permanente';
 $s_create_short_link = 'Criar Link Reduzido';
 $s_filter_permalink = 'O endereço a seguir é um link permanente para o filtro atualmente configurado:';
-$s_manage_users_link = 'Gerenciar Usuários';
-$s_manage_projects_link = 'Gerenciar Projetos';
-$s_manage_custom_field_link = 'Gerenciar Campos Personalizados';
-$s_manage_global_profiles_link = 'Gerenciar Perfís Globais';
-$s_manage_plugin_link = 'Gerenciar Plugins';
+$s_manage_users_link = 'Usuários';
+$s_manage_projects_link = 'Projetos';
+$s_manage_custom_field_link = 'Campos personalizados';
+$s_manage_global_profiles_link = 'Perfis globais';
+$s_manage_plugin_link = 'Plugins';
 $s_permissions_summary_report = 'Relatório de Permissões';
-$s_manage_config_link = 'Gerenciar Configuração';
+$s_manage_config_link = 'Configuração';
 $s_manage_threshold_config = 'Limiares do Fluxo de Trabalho';
 $s_manage_email_config = 'Notificações por E-Mail';
 $s_manage_workflow_config = 'Transições de Fluxo de Trabalho';
 $s_manage_workflow_graph = 'Gráfico fluxo de trabalho';
-$s_manage_tags_link = 'Gerenciar Marcadores';
+$s_manage_tags_link = 'Marcadores';
 $s_create_new_account_link = 'Criar nova conta';
 $s_projects_link = 'Projetos';
 $s_documentation_link = 'Documentação';
@@ -823,7 +824,7 @@ $s_add_file = 'Adicionar Arquivo';
 $s_project_document_updated = 'Projeto atualizado com sucesso';
 $s_project_user_added_msg = 'Usuário adicionado com sucesso ao projeto';
 $s_project_removed_user_msg = 'Usuário removido com sucesso do projeto';
-$s_remove_user_sure_msg = 'Você tem certeza que deseja remover o usuário"%1$s" do projeto "%2$s"?';
+$s_remove_user_sure_msg = 'Você tem certeza que deseja remover o usuário "%1$s" do(s) projeto(s) "%2$s"?';
 $s_remove_user_button = 'Remover Usuário';
 $s_remove_all_users_sure_msg = 'Você tem certeza que deseja remover todos os usuários deste projeto?';
 $s_remove_all_users_button = 'Remover Todos os Usuários';
@@ -1328,7 +1329,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Autenticação LDAP Authentication Falh
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Conexão ao Servidor LDAP Falhou';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Atualização de Registro LDAP falhou.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Registro de Usuário LDAP Não Encontrado.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extensão LDAP Não Carregada.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'Falha em estabelecer a versão mínima no servidor LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'Não pôde iniciar StartTLS no servidor LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Conexão ao banco-de-dados falhou. Erro recebido do banco-de-dados foi #%1$d: "%2$s"';
@@ -1336,7 +1336,7 @@ $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Consulta ao banco-de-dados falhou.  Erro
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Seleção de banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%1$d: "%2$s"';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = 'O identificador "%1$s" é muito grande. Tente reduzir o tamanho de g_db_table_prefix/suffix';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Uma categoria com este nome já existe.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Não foi especificada uma ação de cópia.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Não foi especificada uma ação de cópia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria "%1$s" não foi encontrada para o projeto "%2$s".';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Esta Categoria não pode ser eliminada, pois é definida como "Categoria Padrão para Movimentos".';

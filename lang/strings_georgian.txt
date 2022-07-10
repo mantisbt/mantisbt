@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Georgian (ქართული)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -852,7 +852,6 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'არანაკლებ ერ�
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'არასწორი მნიშვნელობა "%1$s" ველის.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP ავტორიხაცია ვერ განხორციელდა.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP სერვერთან კავშირი ვერ განხორციელდა.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP გაფართოება ვერ ჩაიტვირთა.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'მონაცემთა ბაზასთან კავშირი ვერ მოხერდა. მონ.ბაზიდან მიღებული შეცდომა #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'კატეგორია აღნიშნული სახელით უკვე არსებობს.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'კატეგორია ვერ მოიძებნა';

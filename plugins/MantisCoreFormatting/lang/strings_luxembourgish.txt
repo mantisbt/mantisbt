@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Luxembourgish (Lëtzebuergesch)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -48,6 +48,6 @@ $s_plugin_format_process_text = 'Text gëtt verschafft';
 $s_plugin_format_process_text_warning_notice = 'Net ausschalten et sief Dir wësst genee wat Dir maacht. Wann et ausgeschalt ass, si Cross-Site-Scripting (XSS) Attacke méiglech.';
 $s_plugin_format_process_urls = 'URL gëtt verschafft';
 $s_plugin_format_process_buglinks = 'MantisBT intern Linken (Problemer an Notizen zu de Problemer)';
-$s_plugin_format_process_buglinks_info = 'Är Astellung definéiert den <em>Issue</em> Tag als "<literal>%s</literal>" an den <em>Issue Note</em> Tag als "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'Är Astellung definéiert den <em>Issue</em> Tag als "%s" an den <em>Issue Note</em> Tag als "%s"';
 $s_plugin_format_enabled = 'Un';
 $s_plugin_format_disabled = 'Aus';

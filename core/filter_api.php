@@ -1265,10 +1265,11 @@ function filter_draw_selection_area() {
 
 							if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
 								# Add CSRF protection, see #22702
-								$t_permalink_url = urlencode( filter_get_url( $t_filter ) )
+								$t_permalink_url = 'permalink_page.php?filter='
+									. filter_temporary_set( $t_filter )
 									. form_security_param( 'permalink' );
 								echo '<li>';
-								echo '<a href="permalink_page.php?url=' . $t_permalink_url . '">';
+								echo '<a href="' . $t_permalink_url . '">';
 								print_icon( 'fa-link', 'ace-icon' );
 								echo '&#160;&#160;' . lang_get( 'create_filter_link' );
 								echo '</a>';

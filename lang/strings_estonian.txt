@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Estonian (eesti)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -1106,12 +1106,11 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP autentimine ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP serveri ühendus ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP kirje uuendamine ebaõnnestus.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP kasutaja kirjet ei leitud.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP laiendus pole laetud.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Andmebaasi ühendus ebaõnnestus. Andmebaasist tagastatud viga #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Andmebaasi päring ebaõnnestus. Andmebaasist tagastatud viga #%1$d: %2$s päringule: %3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Andmebaasi valik ebaõnnestus.  Andmebaasist tagastatud viga #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Sellise nimega kategooria juba eksisteerib.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kopeerimistoimingut pole määratletud.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Kopeerimistoimingut pole määratletud.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategooriat ei leitud.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategooriat "%1$s" ei leitud projektile "%2$s".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Selle nimega versioon juba eksisteerib.';

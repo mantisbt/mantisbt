@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Korean (한국어)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -711,7 +711,7 @@ $s_timestamp = '생성 시간';
 $s_subprojects = '서브프로젝트';
 $s_add_subproject = '서브프로젝트로 추가';
 $s_create_new_subproject_link = '새 서브프로젝트 생성';
-$s_unlink_link = '링크해제';
+$s_unlink_link = '링크 해제';
 $s_show_global_users = '전체 접근 권한 있는 사용자 표시';
 $s_hide_global_users = '전체 접근 권한 있는 사용자 감추기';
 $s_review_changes = '변경사항 검토';
@@ -1253,6 +1253,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '이 계정은 보호되어 있습니�
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '접근이 거부되었습니다.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '파일 올리기를 실패했습니다. 파일을 MantisBT에서 읽을 수 없습니다. 프로젝트 설정을 확인하십시오.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '파일 올리기를 실패했습니다.  현재 PHP 설치시 허용된 파일 크기보다 업로드하려는 파일이 큰 것 같습니다.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = '"%1$s" 파일 이름이 너무 깁니다.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '이 페이지에 (%1$s) 필요한 인자가 없습니다.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '이미 사용 중인 계정입니다. 다른 계정을 선택하세요.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = '이 이메일은 이미 사용하고 계십니다. 다시 돌아가서 다른 이메일을 골라 주세요.';
@@ -1303,7 +1304,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 인증 실패';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP 서버 연결 실패';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP 사용자 갱신 오류.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP 사용자 레코드가 발견되지 않습니다.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP 확장을 읽어들이지 않았습니다.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'LDAP 서버에서 최소 TLS 버전 설정을 실패했습니다.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'LDAP 서버에서 StartTLS를 초기화할 수 없습니다.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = '데이터베이스 연결이 실패했습니다. 데이터베이스에서 받은 오류는 #%1$d: %2$s.';
@@ -1311,7 +1311,7 @@ $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = '데이터베이스 쿼리 실패. 데이
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = '데이터베이스 셀렉션 실패. 데이터베이스로부터 다음과 같은 오류를 수신했습니다. #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = '"%1$s" 데이터베이스 식별자가 너무 깁니다. g_db_table_prefix/suffix의 크기를 줄여 보십시오.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '해당 이름으로 된 분류가 존재합니다.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '복사 실행을 지정하지 않았습니다.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = '복사 실행을 지정하지 않았습니다.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '카테고리를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = '"%1$s" 분류가 "%2$s" 프로젝트에 없습니다.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = '"이동을 위한 기본 카테고리"로 정의되어 있기 때문에 이 카테고리를 삭제할 수 없습니다.';

@@ -72,6 +72,60 @@ of the [SKS pool](https://sks-keyservers.net/), such as:
 
 ## Keys
 
+### mantisbt.org
+
+This key is used to sign releases built by scheduled batch processes on 
+the mantisbt.org server, e.g. [Nightly Builds](https://mantisbt.org/builds.php).
+
+```
+pub   rsa3072 2021-05-26 [SC] [expires: 2023-05-26]
+      AE13 FBCC 5F55 7C2A D1AA  0391 1665 0919 AE7A 01F2
+uid           [  full  ] MantisBT <mantisbt@mantisbt.org>
+sub   rsa3072 2021-05-26 [E] [expires: 2023-05-26]
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+tGTZcbt18Pc+TVdVnmGBKf1OiCshZEDf
+=Afyg
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
 ### vboctor
 ```
 pub   rsa4096 2015-06-01 [SCEA]

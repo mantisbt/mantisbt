@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Spanish (español)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -46,15 +46,15 @@
  * @author Macofe
  */
 
-$s_plugin_XmlImportExport_title = 'Importar/exportar informes';
+$s_plugin_XmlImportExport_title = 'Importar/exportar incidencias';
 $s_plugin_XmlImportExport_description = 'Añade capacidades de importación y exportación basadas en XML a MantisBT.';
-$s_plugin_XmlImportExport_import = 'Importar informes';
+$s_plugin_XmlImportExport_import = 'Importar incidencias';
 $s_plugin_XmlImportExport_export = 'Exportar XML';
 $s_plugin_XmlImportExport_config_title = 'Configuración de niveles de acceso de importación/exportación en XML';
-$s_plugin_XmlImportExport_import_threshold = 'Importar informes';
-$s_plugin_XmlImportExport_export_threshold = 'Exportar informes';
+$s_plugin_XmlImportExport_import_threshold = 'Importar incidencias';
+$s_plugin_XmlImportExport_export_threshold = 'Exportar incidencias';
 $s_plugin_XmlImportExport_action_update = 'Actualizar';
-$s_plugin_XmlImportExport_importing_in_project = 'Importando informes en el proyecto: «%s»';
+$s_plugin_XmlImportExport_importing_in_project = 'Importando incidencias en el proyecto: «%s»';
 $s_plugin_XmlImportExport_import_options = 'Opciones de importación';
 $s_plugin_XmlImportExport_cross_references = 'Referencias cruzadas';
 $s_plugin_XmlImportExport_default_strategy = 'Estrategia de conversión predeterminada:';

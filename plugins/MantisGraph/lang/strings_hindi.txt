@@ -1,0 +1,88 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit https://translatewiki.net  **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Hindi (हिन्दी)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit https://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Ajaysajay
+ */
+
+$s_plugin_MantisGraph_title = 'मेन्टिस रेखाचित्र';
+$s_plugin_MantisGraph_description = 'अधिकृत रेखाचित्र युक्ति।';
+$s_plugin_MantisGraph_config = 'विन्यास';
+$s_plugin_MantisGraph_tab_label = 'रेखाचित्र';
+$s_plugin_MantisGraph_status_link = 'स्थिति के अनुसार';
+$s_plugin_MantisGraph_priority_link = 'प्राथमिकता के अनुसार';
+$s_plugin_MantisGraph_severity_link = 'तीव्रता के अनुसार';
+$s_plugin_MantisGraph_category_link = 'श्रेणी के अनुसार';
+$s_plugin_MantisGraph_resolution_link = 'समाधान के अनुसार';
+$s_plugin_MantisGraph_issue_trends_link = 'कार्यबिन्दुओं का प्रवाह';
+$s_plugin_MantisGraph_graph_imp_status_title = 'स्थिति के रेखाचित्र';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'प्राथमिकता के रेखाचित्र';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'तीव्रता के रेखाचित्र';
+$s_plugin_MantisGraph_graph_imp_category_title = 'वर्गीकरण के रेखाचित्र';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'समाधान के रेखाचित्र';
+$s_plugin_MantisGraph_graph_developer_title = 'विकासकर्ता के रेखाचित्र';
+$s_plugin_MantisGraph_graph_reporter_title = 'प्रतिवेदक के रेखाचित्र';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'प्रारंभित, सुलझे और शेष कार्यबिन्दु';
+$s_plugin_MantisGraph_by_status_pct = 'प्रतिशत स्थिति';
+$s_plugin_MantisGraph_by_priority_pct = 'प्रतिशत प्राथमिकता';
+$s_plugin_MantisGraph_by_severity_pct = 'प्रतिशत तीव्रता';
+$s_plugin_MantisGraph_by_category_pct = 'प्रतिशत श्रेणी';
+$s_plugin_MantisGraph_by_resolution_pct = 'समाधान वर्गीकरण';
+$s_plugin_MantisGraph_by_severity_mix = 'तीव्रता और स्थिति के अनुसार';
+$s_plugin_MantisGraph_by_priority_mix = 'प्राथमिकता और स्थिति के अनुसार';
+$s_plugin_MantisGraph_by_resolution_mix = 'समाधान और स्थिति के अनुसार';
+$s_plugin_MantisGraph_legend_still_open = 'अभी अनिर्णीत';
+$s_plugin_MantisGraph_legend_resolved = 'समाधान-प्राप्त';
+$s_plugin_MantisGraph_legend_reported = 'सूचित';
+$s_plugin_MantisGraph_period_none = 'कोई नहीं';
+$s_plugin_MantisGraph_period_this_week = 'इस सप्ताह';
+$s_plugin_MantisGraph_period_last_week = 'पिछले सप्ताह';
+$s_plugin_MantisGraph_period_two_weeks = 'पिछले दो सप्ताह';
+$s_plugin_MantisGraph_period_this_month = 'इस माह';
+$s_plugin_MantisGraph_period_last_month = 'पिछले माह';
+$s_plugin_MantisGraph_period_this_quarter = 'इस तिमाही';
+$s_plugin_MantisGraph_period_last_quarter = 'पिछली तिमाही';
+$s_plugin_MantisGraph_period_year_to_date = 'इस वर्ष आज तक';
+$s_plugin_MantisGraph_period_select = 'ऐच्छिक तिथियाँ';
+$s_plugin_MantisGraph_period_last_year = 'पिछले वर्ष';
+$s_plugin_MantisGraph_graph_page = 'कार्यबिन्दु रेखाचित्र वृतांत';
+$s_plugin_MantisGraph_graph_topdev = 'सुलझे कार्यबिन्दुओं के मुख्य विकासकर्ता';
+$s_plugin_MantisGraph_graph_opendev = 'अनसुलझे कार्यबिन्दुओं के विकासकर्ता';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'सुलझे कार्यबिन्दुओं के मुख्य प्रतिवेदक';
+$s_plugin_MantisGraph_other_categories = 'अन्य श्रेणियां (%d)';

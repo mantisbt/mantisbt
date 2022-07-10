@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Volapük (Volapük)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -453,7 +453,7 @@ $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Yümam ad nünodem no eplöpon. Pöl s
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Nünödemaseivid no eplöpon. Pöl pedagetöl se nünödem äbinon #%1$d: %2$s tefü seivid: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Väl nünodema no eplöpon. Pöl se nünodem pedagetöl äbinon: #%1$d: %2%2$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Klad labü nem at ya dabinon.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No kopiedadun pebegon.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'No kopiedadun pebegon.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Klad no petuvon.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Klad: „%1$s“ no petuvon pro proyeg: „%2$s“.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Fomam labü nem at ya dabinon.';

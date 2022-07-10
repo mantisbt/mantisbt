@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,12 +33,13 @@
 /** Breton (brezhoneg)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Dishual
+ * @author Dregad
  * @author Fohanno
  * @author Fulup
  * @author Gwenn-Ael
@@ -465,7 +466,7 @@ $s_bugnote_updated_msg = 'Hizivaet-mat eo bet an notenn...';
 $s_last_edited = 'Kemmet da ziwezhañ :';
 $s_hide_content = 'Kuzhat an endalc\'had';
 $s_show_content = 'Diskouez an endalc\'had';
-$s_webmaster_contact_information = 'Kit e darempred gant <a href="mailto:%1$s"title ="Kit e darempred gant ar mestr-gwiad dre bostel."> ar merour</a> evit bezañ skoazellet';
+$s_webmaster_contact_information = 'Kit e darempred gant <a href="mailto:%1$s" title="Kit e darempred gant ar mestr-gwiad dre bostel.">ar merour</a> evit bezañ skoazellet';
 $s_total_queries_executed = '%1$d reked sevenet en holl.';
 $s_unique_queries_executed = 'Rekedoù dibar sevenet :%1$d';
 $s_total_query_execution_time = 'Amzer seveniñ ar reked en holl : %1$s eilenn';
@@ -1292,13 +1293,12 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Gwiriekadur LDAP c\'hwitet.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'C\'hwitet eo ar c\'hevreadur ouzh ar servijer LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'C\'hwitet eo hizivadenn an enrolladenn LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'An enrolladenn implijer LDAP n\'eo ket bet kavet.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'An astenn LDAP n\'eo ket karget.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'C\'hwitet eo ar gevreadenn ouzh an diaz roadennoù. Ar fazi resevet digant an diaz roadennoù a oa #%1$d : %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'C\'hwitet eo ar reked diaz roadennoù. Ar fazi kaset gant an diaz roadennoù a oa #%1$d : %2$s evit ar reked : %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'C\'hwitet eo diuzadenn an diaz roadennoù. Ar fazi resevet digant an diaz roadennoù a oa #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = 'Re hir eo anavezer an diaz roadennoù "%1$s". Klaskit bihanaat ment g_db_table_prefix/suffix';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Ur rummad en anv-se zo anezhañ dija.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'N\'eus bet diferet ober eilañ ebet.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'N\'eus bet diferet ober eilañ ebet.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'N\'eo ket bet kavet ar rummad.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Ar rummad « %1$s » n\'eo ket bet kavet evit ar raktres « %2$s ».';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Ne c\'haller ket lemel ar rumm-se rak termenet eo evel "Rumm dre ziouer evit  an dilec\'hiadoù".';

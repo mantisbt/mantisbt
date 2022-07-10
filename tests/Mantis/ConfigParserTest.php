@@ -28,7 +28,7 @@
  */
 require_once 'MantisCoreBase.php';
 
-use PHPUnit_Framework_Constraint_IsType as PHPUnit_Type;
+use PHPUnit\Framework\Constraint\IsType;
 
 
 /**
@@ -49,7 +49,7 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 * @throws Exception
 	 */
 	public function testNoTokens() {
-		$this->setExpectedException( 'Exception', 'No more tokens' );
+		$this->expectException( Exception::class );
 		$t_parser = new ConfigParser( '' );
 		$t_parser->parse();
 		$t_parser = new ConfigParser( null );
@@ -62,7 +62,7 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 * @dataProvider providerScalarTypes
 	 *
 	 * @param string $p_string The string to parse
-	 * @param string $p_type   Expected type (PHPUnit_Type::TYPE_xxx constant)
+	 * @param string $p_type   Expected type (IsType::TYPE_xxx constant)
 	 *
 	 * @throws Exception
 	 */
@@ -104,7 +104,8 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 * @throws Exception
 	 */
 	public function testExtraTokensError() {
-		$this->setExpectedExceptionRegExp('Exception', '/^Extra tokens found/');
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessageRegExp('/^Extra tokens found/');
 
 		$t_parser = new ConfigParser( '1; 2' );
 		$t_parser->parse( ConfigParser::EXTRA_TOKENS_ERROR );
@@ -134,7 +135,8 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 * @throws Exception
 	 */
 	public function testSyntaxError() {
-		$this->setExpectedExceptionRegExp('Exception', '/^syntax error/');
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessageRegExp( '/^syntax error/');
 
 		$t_parser = new ConfigParser( 'array(' );
 		$t_parser->parse();
@@ -146,7 +148,8 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 * @throws Exception
 	 */
 	public function testInvalidTokensError() {
-		$this->setExpectedExceptionRegExp('Exception', '/^Unexpected token/');
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessageRegExp('/^Unexpected token/');
 
 		$t_parser = new ConfigParser( 'echo 1;' );
 		$t_parser->parse();
@@ -158,7 +161,8 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 * @throws Exception
 	 */
 	public function testUnknownConstantError() {
-		$this->setExpectedExceptionRegExp('Exception', '/^Unknown string literal/');
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessageRegExp('/^Unknown string literal/');
 
 		# Make sure we have a string that is not a defined constant
 		$t_constant = 'UNDEFINED_CONSTANT';
@@ -199,35 +203,35 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 */
 	public function providerScalarTypes() {
 		return array(
-			'Integer Zero' => array( '0', PHPUnit_Type::TYPE_INT ),
-			'Integer One' => array( '1', PHPUnit_Type::TYPE_INT ),
-			'Integer with whitespace' => array( " 1\n", PHPUnit_Type::TYPE_INT ),
-			'Integer negative' => array( '-1', PHPUnit_Type::TYPE_INT ),
-			'Integer positive' => array( '+1', PHPUnit_Type::TYPE_INT ),
+			'Integer Zero' => array( '0', IsType::TYPE_INT ),
+			'Integer One' => array( '1', IsType::TYPE_INT ),
+			'Integer with whitespace' => array( " 1\n", IsType::TYPE_INT ),
+			'Integer negative' => array( '-1', IsType::TYPE_INT ),
+			'Integer positive' => array( '+1', IsType::TYPE_INT ),
 	
-			'Float' => array( '1.1', PHPUnit_Type::TYPE_FLOAT ),
-			'Float negative' => array( '-1.1', PHPUnit_Type::TYPE_FLOAT ),
-			'Float positive' => array( '+1.1', PHPUnit_Type::TYPE_FLOAT ),
-			'Float scientific' => array( '1.2e3', PHPUnit_Type::TYPE_FLOAT ),
+			'Float' => array( '1.1', IsType::TYPE_FLOAT ),
+			'Float negative' => array( '-1.1', IsType::TYPE_FLOAT ),
+			'Float positive' => array( '+1.1', IsType::TYPE_FLOAT ),
+			'Float scientific' => array( '1.2e3', IsType::TYPE_FLOAT ),
 
-			'String empty double-quote' => array( '""', PHPUnit_Type::TYPE_STRING ),
-			'String empty single-quote' => array( "''", PHPUnit_Type::TYPE_STRING ),
-			'String whitespace' => array( '" "', PHPUnit_Type::TYPE_STRING ),
-			'String number double-quote' => array( '"1"', PHPUnit_Type::TYPE_STRING ),
-			'String number single-quote' => array( "'1'", PHPUnit_Type::TYPE_STRING ),
+			'String empty double-quote' => array( '""', IsType::TYPE_STRING ),
+			'String empty single-quote' => array( "''", IsType::TYPE_STRING ),
+			'String whitespace' => array( '" "', IsType::TYPE_STRING ),
+			'String number double-quote' => array( '"1"', IsType::TYPE_STRING ),
+			'String number single-quote' => array( "'1'", IsType::TYPE_STRING ),
 	
-			'Built-in string literal null' => array( 'null', PHPUnit_Type::TYPE_NULL ),
-			'Built-in string literal false' => array( 'false', PHPUnit_Type::TYPE_BOOL ),
-			'Built-in string literal true' => array( 'true', PHPUnit_Type::TYPE_BOOL ),
+			'Built-in string literal null' => array( 'null', IsType::TYPE_NULL ),
+			'Built-in string literal false' => array( 'false', IsType::TYPE_BOOL ),
+			'Built-in string literal true' => array( 'true', IsType::TYPE_BOOL ),
 	
-			'Constant = null' => array( 'VERSION_ALL', PHPUnit_Type::TYPE_NULL ),
-			'Constant = false' => array( 'VERSION_FUTURE', PHPUnit_Type::TYPE_BOOL ),
-			'Constant = true' => array( 'VERSION_RELEASED', PHPUnit_Type::TYPE_BOOL ),
-			'Constant = 0' => array( 'OFF', PHPUnit_Type::TYPE_INT ),
-			'Constant integer' => array( 'DEVELOPER', PHPUnit_Type::TYPE_INT ),
-			'Constant integer with whitespace' => array( " DEVELOPER\n", PHPUnit_Type::TYPE_INT ),
-			'Constant string' => array( 'MANTIS_VERSION', PHPUnit_Type::TYPE_STRING ),
-			'Constant string with whitespace' => array( " MANTIS_VERSION\n", PHPUnit_Type::TYPE_STRING ),
+			'Constant = null' => array( 'VERSION_ALL', IsType::TYPE_NULL ),
+			'Constant = false' => array( 'VERSION_FUTURE', IsType::TYPE_BOOL ),
+			'Constant = true' => array( 'VERSION_RELEASED', IsType::TYPE_BOOL ),
+			'Constant = 0' => array( 'OFF', IsType::TYPE_INT ),
+			'Constant integer' => array( 'DEVELOPER', IsType::TYPE_INT ),
+			'Constant integer with whitespace' => array( " DEVELOPER\n", IsType::TYPE_INT ),
+			'Constant string' => array( 'MANTIS_VERSION', IsType::TYPE_STRING ),
+			'Constant string with whitespace' => array( " MANTIS_VERSION\n", IsType::TYPE_STRING ),
 		);
 	}
 

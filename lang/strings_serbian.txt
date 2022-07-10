@@ -25,15 +25,15 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Serbian (Cyrillic script) (српски (ћирилица)‎)
+/** Serbian (Cyrillic script) (српски (ћирилица))
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -41,6 +41,7 @@
  * @author Acamicamacaraca
  * @author BadDog
  * @author Charmed94
+ * @author Kizule
  * @author Macofe
  * @author Milicevic01
  * @author Nikola Smolenski
@@ -726,7 +727,7 @@ $s_add_file = 'Додај датотеку';
 $s_project_document_updated = 'Пројекат је ажуриран.';
 $s_project_user_added_msg = 'Корисник је додат у пројекат.';
 $s_project_removed_user_msg = 'Корисник је уклоњен с пројекта.';
-$s_remove_user_sure_msg = 'Желите ли да уклоните овог корисника?';
+$s_remove_user_sure_msg = 'Желите ли да уклоните корисника "%1$s" из пројекта/пројеката "%2$s"?';
 $s_remove_all_users_sure_msg = 'Желите ли да уклоните све кориснике на овом пројекту?';
 $s_remove_all_users_button = 'Уклони све кориснике';
 $s_add_user_title = 'Додавање корисника у пројекат';
@@ -1158,12 +1159,11 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Не могу да проверим и�
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Не могу да се повежем са сервером LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Не могу да ажурирам записе LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Не могу да пронађем кориснички запис LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Не могу да учитам проширење LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Не могу да се повежем с базом података. Од базе је добијена грешка #%1$d: %2$s #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Неисправан упит базе података. Од базе је добијена грешка #%1$d: %2$s за упит: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Не могу да изаберем базу података. Од базе је добијена грешка #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Категорија с тим називом већ постоји.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Није назначен поступак умножавања.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Није назначен поступак умножавања.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Не могу да пронађем категорију.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Не могу да пронађем категорију „%1$s“ у пројекту „%2$s“.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Ова категорија не може да се обрише јер је задата као „Подразумевана категорија за премештања“.';

@@ -41,7 +41,7 @@ require_once 'ConfigParserTest.php';
  * @package    Tests
  * @subpackage UnitTests
  */
-class MantisAllTests extends PHPUnit_Framework_TestSuite {
+class MantisAllTests extends PHPUnit\Framework\TestSuite {
 	/**
 	 * Defines test suite
 	 * @return MantisAllTests

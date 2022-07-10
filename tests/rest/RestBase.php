@@ -39,7 +39,7 @@ require_once ( __DIR__ . '/../../core/constant_inc.php' );
  * @requires extension curl
  * @group REST
  */
-class RestBase extends PHPUnit_Framework_TestCase {
+class RestBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
@@ -49,6 +49,11 @@ class RestBase extends PHPUnit_Framework_TestCase {
 	 * @var string Username
 	 */
 	protected $userName = 'administrator';
+
+	/**
+	 * @var string Password
+	 */
+	protected $password = 'root';
 
 	/**
 	 * @var string The API token to use for authentication
@@ -93,8 +98,10 @@ class RestBase extends PHPUnit_Framework_TestCase {
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_USERNAME', $GLOBALS ) ) {
 			$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'];
-		} else {
-			$this->userName = 'administrator';
+		}
+
+		if( array_key_exists( 'MANTIS_TESTSUITE_PASSWORD', $GLOBALS ) ) {
+			$this->password = $GLOBALS['MANTIS_TESTSUITE_PASSWORD'];
 		}
 
 		$this->assertTrue( array_key_exists( 'MANTIS_TESTSUITE_API_TOKEN', $GLOBALS ) &&

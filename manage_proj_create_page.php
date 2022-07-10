@@ -52,13 +52,10 @@ auth_reauthenticate();
 access_ensure_global_level( config_get( 'create_project_threshold' ) );
 
 layout_page_header();
-
 layout_page_begin( 'manage_overview_page.php' );
-
 print_manage_menu( 'manage_proj_page.php' );
 
 $f_parent_id = gpc_get( 'parent_id', null );
-
 ?>
 
 	<div class="col-md-12 col-xs-12">
@@ -76,13 +73,14 @@ $f_parent_id = gpc_get( 'parent_id', null );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
-				<?php
-				if( null !== $f_parent_id ) {
-					echo lang_get( 'add_subproject_title' );
-				} else {
-					echo lang_get( 'add_project_title' );
-				} ?>
+<?php
+	print_icon( 'fa-puzzle-piece', 'ace-icon' );
+	if( null !== $f_parent_id ) {
+		echo lang_get( 'add_subproject_title' );
+	} else {
+		echo lang_get( 'add_project_title' );
+	}
+?>
 			</h4>
 		</div>
 		<div class="widget-body">
@@ -90,19 +88,22 @@ $f_parent_id = gpc_get( 'parent_id', null );
 		<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
-			<?php
-			echo form_security_field( 'manage_proj_create' );
-			if( null !== $f_parent_id ) {
-				$f_parent_id = (int) $f_parent_id; ?>
-				<input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>" /><?php
-			} ?>
+<?php
+	echo form_security_field( 'manage_proj_create' );
+	if( null !== $f_parent_id ) {
+		$f_parent_id = (int) $f_parent_id;
+?>
+				<input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>" />
+<?php } ?>
 
 			<tr>
 				<td class="category">
-					<span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>
+					<span class="required">*</span>
+					<?php echo lang_get( 'project_name' ) ?>
 				</td>
 				<td>
-					<input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" required />
+					<input type="text" id="project-name" name="name"
+						   class="input-sm" size="60" maxlength="128" required />
 				</td>
 			</tr>
 			<tr>
@@ -121,25 +122,26 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				</td>
 				<td>
 					<label>
-						<input type="checkbox" class="ace" id="project-inherit-global" name="inherit_global" checked="checked">
+						<input id="project-inherit-global" name="inherit_global"
+							   type="checkbox" class="ace" checked="checked">
 						<span class="lbl"></span>
 					</label>
 				</td>
 			</tr>
-			<?php if( !is_null( $f_parent_id ) ) { ?>
+<?php if( !is_null( $f_parent_id ) ) { ?>
 				<tr>
 					<td class="category">
 						<?php echo lang_get( 'inherit_parent' ) ?>
 					</td>
 					<td>
 						<label>
-							<input type="checkbox" class="ace" id="project-inherit-parent" name="inherit_parent" checked="checked">
+							<input id="project-inherit-parent" name="inherit_parent"
+								   type="checkbox" class="ace" checked="checked">
 							<span class="lbl"></span>
 						</label>
 					</td>
 				</tr>
-			<?php
-			} ?>
+<?php } ?>
 
 			<tr>
 				<td class="category">
@@ -147,38 +149,47 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				</td>
 				<td>
 					<select id="project-view-state" name="view_state" class="input-sm">
-						<?php print_enum_string_option_list( 'project_view_state', config_get( 'default_project_view_status', null, ALL_USERS, ALL_PROJECTS ) ) ?>
+<?php
+	print_enum_string_option_list(
+		'project_view_state',
+		config_get( 'default_project_view_status',
+				null,
+				ALL_USERS,
+				ALL_PROJECTS )
+		);
+?>
 					</select>
 				</td>
 			</tr>
 
-			<?php
-
-			$g_project_override = ALL_PROJECTS;
-			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
-				$t_file_path = '';
-				# Don't reveal the absolute path to non-administrators for security reasons
-				if( current_user_is_administrator() ) {
-					$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
-				}
-				?>
+<?php
+	$g_project_override = ALL_PROJECTS;
+	if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
+		$t_file_path = '';
+		# Don't reveal the absolute path to non-administrators for security reasons
+		if( current_user_is_administrator() ) {
+			$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
+		}
+?>
 				<tr>
 					<td class="category">
 						<?php echo lang_get( 'upload_file_path' ) ?>
 					</td>
 					<td>
-						<input type="text" id="project-file-path" name="file_path" class="input-sm" size="60" maxlength="250" value="<?php echo $t_file_path ?>" />
+						<input type="text" id="project-file-path" name="file_path"
+							   class="input-sm" size="60" maxlength="<?php echo DB_FIELD_SIZE_FILENAME ?>"
+							   value="<?php echo $t_file_path ?>" />
 					</td>
 				</tr>
-			<?php
-			} ?>
+<?php } ?>
 
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'description' ) ?>
 				</td>
 				<td>
-					<textarea class="form-control" id="project-description" name="description" cols="70" rows="5"></textarea>
+					<textarea id="project-description" name="description"
+							  class="form-control" cols="70" rows="5"></textarea>
 				</td>
 			</tr>
 
@@ -190,7 +201,8 @@ $f_parent_id = gpc_get( 'parent_id', null );
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
 			<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_project_button' ) ?>" />
+			<input type="submit" class="btn btn-primary btn-white btn-round"
+				   value="<?php echo lang_get( 'add_project_button' ) ?>" />
 		</div>
 	</div>
 	</div>

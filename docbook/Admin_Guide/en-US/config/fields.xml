@@ -65,7 +65,7 @@
 					and do not need to be listed in this option. Fields
 					not listed above cannot be shown on the bug report
 					page. Visibility of custom fields is handled via the
-					Manage =&gt; Manage Custom Fields administrator page.
+					Manage =&gt; Custom Fields administrator page.
 				</para>
 				<para>Note that <emphasis>monitors</emphasis> is not an actual
 					field; adding it to the list will let authorized reporters
@@ -80,7 +80,7 @@
 				</para>
 				<para>
 					This setting can be set on a per-project basis by
-					using the Manage =&gt; Manage Configuration
+					using the Manage =&gt; Configuration
 					administrator page.
 				</para>
 			</listitem>
@@ -126,11 +126,11 @@
 				<para>
 					Fields not listed above cannot be shown on the bug
 					view page. Visibility of custom fields is handled via
-					the Manage =&gt; Manage Custom Fields administrator page.
+					the Manage =&gt; Custom Fields administrator page.
 				</para>
 				<para>
 					This setting can be set on a per-project basis by
-					using the Manage =&gt; Manage Configuration
+					using the Manage =&gt; Configuration
 					administrator page.
 				</para>
 			</listitem>
@@ -174,12 +174,12 @@
 				<para>
 					Fields not listed above cannot be shown on the bug
 					update page. Visibility of custom fields is handled
-					via the Manage =&gt; Manage Custom Fields administrator
+					via the Manage =&gt; Custom Fields administrator
 					page.
 				</para>
 				<para>
 					This setting can be set on a per-project basis by
-					using the Manage =&gt; Manage Configuration
+					using the Manage =&gt; Configuration
 					administrator page.
 				</para>
 			</listitem>

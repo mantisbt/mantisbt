@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Swedish (svenska)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -53,7 +53,7 @@ $s_plugin_format_process_text = 'Textbehandling';
 $s_plugin_format_process_text_warning_notice = 'Stäng inte av såvida du inte verkligen vet vad du gör. Cross site scripting-attacker (XSS) är möjliga när det är avstängt.';
 $s_plugin_format_process_urls = 'URL-bearbetning';
 $s_plugin_format_process_buglinks = 'MantisBT-interna länkar (Buggar och buggkommentarer)';
-$s_plugin_format_process_buglinks_info = 'Din konfiguration definierar <em>Fråge</em>-taggen som "<literal>%s</literal>" och <em>Frågeanteckning</em>-taggen som"<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'Din konfiguration definierar <em>Fråge</em>-taggen som "%s" och <em>Frågeanteckning</em>-taggen som"%s"';
 $s_plugin_format_process_markdown = 'Markdown-behandling';
 $s_plugin_format_process_markdown_info = 'Stilar med Markdown stöds, syntaxen för textformatering är designad så att det kan konverteras till HTML.';
 $s_plugin_format_enabled = 'På';

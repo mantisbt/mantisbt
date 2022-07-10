@@ -25,6 +25,7 @@
  * @uses access_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
+ * @uses bug_activity_api.php
  * @uses category_api.php
  * @uses columns_api.php
  * @uses compress_api.php
@@ -45,7 +46,17 @@
  * @uses tag_api.php
  * @uses utility_api.php
  * @uses version_api.php
+ *
+ * Variables referenced in this include, but declared in the calling script.
+ * @var bool   $t_force_readonly
+ * @var bool   $t_show_page_header
+ * @var string $t_mantis_dir
+
+ * Ignoring warnings caused by includes with a dynamic path
+ * @noinspection PhpIncludeInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 if( !defined( 'BUG_VIEW_INC_ALLOW' ) ) {
 	return;
@@ -54,6 +65,7 @@ if( !defined( 'BUG_VIEW_INC_ALLOW' ) ) {
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
+require_api( 'bug_activity_api.php' );
 require_api( 'category_api.php' );
 require_api( 'columns_api.php' );
 require_api( 'compress_api.php' );
@@ -82,12 +94,12 @@ $f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 
 # compat variables for included pages
 $f_bug_id = $f_issue_id;
-$t_bug = $t_bug = bug_get( $f_bug_id, true );
+$t_bug = bug_get( $f_bug_id, true );
+
 $t_data = array(
 	'query' => array( 'id' => $f_issue_id ),
 	'options' => array( 'force_readonly' => $t_force_readonly )
 );
-
 $t_cmd = new IssueViewPageCommand( $t_data );
 $t_result = $t_cmd->execute();
 
@@ -196,6 +208,7 @@ if( $t_top_buttons_enabled ) {
 	echo '<thead><tr class="bug-nav">';
 	echo '<tr class="top-buttons noprint">';
 	echo '<td colspan="6">';
+	/** @noinspection PhpUnhandledExceptionInspection */
 	bug_view_action_buttons( $f_issue_id, $t_flags );
 	echo '</td>';
 	echo '</tr>';
@@ -205,6 +218,7 @@ if( $t_top_buttons_enabled ) {
 if( $t_bottom_buttons_enabled ) {
 	echo '<tfoot>';
 	echo '<tr class="noprint"><td colspan="6">';
+	/** @noinspection PhpUnhandledExceptionInspection */
 	bug_view_action_buttons( $f_issue_id, $t_flags );
 	echo '</td></tr>';
 	echo '</tfoot>';
@@ -218,12 +232,12 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 
 	# Labels
 	echo '<tr class="bug-header">';
-	echo '<th class="bug-id category" width="15%">', $t_flags['id_show'] ? lang_get( 'id' ) : '', '</th>';
-	echo '<th class="bug-project category" width="20%">', $t_flags['project_show'] ? lang_get( 'email_project' ) : '', '</th>';
-	echo '<th class="bug-category category" width="15%">', $t_flags['category_show'] ? lang_get( 'category' ) : '', '</th>';
-	echo '<th class="bug-view-status category" width="15%">', $t_flags['view_state_show'] ? lang_get( 'view_status' ) : '', '</th>';
-	echo '<th class="bug-date-submitted category" width="15%">', $t_flags['created_at_show'] ? lang_get( 'date_submitted' ) : '', '</th>';
-	echo '<th class="bug-last-modified category" width="20%">', $t_flags['updated_at_show'] ? lang_get( 'last_update' ) : '','</th>';
+	echo '<th class="bug-id category width-15">', $t_flags['id_show'] ? lang_get( 'id' ) : '', '</th>';
+	echo '<th class="bug-project category width-20">', $t_flags['project_show'] ? lang_get( 'email_project' ) : '', '</th>';
+	echo '<th class="bug-category category width-15">', $t_flags['category_show'] ? lang_get( 'category' ) : '', '</th>';
+	echo '<th class="bug-view-status category width-15">', $t_flags['view_state_show'] ? lang_get( 'view_status' ) : '', '</th>';
+	echo '<th class="bug-date-submitted category width-15">', $t_flags['created_at_show'] ? lang_get( 'date_submitted' ) : '', '</th>';
+	echo '<th class="bug-last-modified category width-20">', $t_flags['updated_at_show'] ? lang_get( 'last_update' ) : '','</th>';
 	echo '</tr>';
 
 	echo '<tr class="bug-header-data">';
@@ -542,7 +556,7 @@ echo '<tr class="hidden"></tr>';
 if( $t_flags['summary_show'] && isset( $t_issue['summary'] ) ) {
 	echo '<tr>';
 	echo '<th class="bug-summary category">', lang_get( 'summary' ), '</th>';
-	echo '<td class="bug-summary" colspan="5">', string_display_line( bug_format_id( $f_issue_id ) . ': ' . $t_issue['summary'] ), '</td>';
+	echo '<td class="bug-summary" colspan="5">', bug_format_summary( $f_issue_id, SUMMARY_FIELD ), '</td>';
 	echo '</tr>';
 }
 
@@ -588,6 +602,29 @@ if( $t_flags['tags_can_attach'] ) {
 	echo '</td></tr>';
 }
 
+# Attachments
+if( !empty( $t_result['issue']['attachments'] ) ) {
+	echo '<tr class="noprint">';
+	echo '<th class="bug-attach-tags category">', lang_get( 'attached_files' ), '</th>';
+	echo '<td class="bug-attach-tags" colspan="5">';
+
+	$t_bug_activity_get_all_result = bug_activity_get_all( $f_issue_id, /* include_attachments */ true );
+	$t_activities = $t_bug_activity_get_all_result['activities'];
+	$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
+
+	foreach( $t_activities as $t_activity ) {
+		if( $t_activity['type'] !== ENTRY_TYPE_ATTACHMENT ) {
+			continue;
+		}
+
+		foreach( $t_activity['attachments'] as $t_attachment ) {
+			print_bug_attachment( $t_attachment, $t_security_token_attachments_delete );
+		}
+	}
+
+	echo '</td></tr>';
+}
+
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
 echo '<tr class="hidden"></tr>';
@@ -596,10 +633,11 @@ echo '<tr class="hidden"></tr>';
 if( isset( $t_issue['custom_fields'] ) ) {
 	foreach( $t_issue['custom_fields'] as $t_custom_field ) {
 		$t_def = custom_field_get_definition( $t_custom_field['field']['id'] );
+		$t_class = $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? ' cfdef-textarea' : '';
 
 		echo '<tr>';
 		echo '<th class="bug-custom-field category">', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</th>';
-		echo '<td class="bug-custom-field" colspan="5">';
+		echo '<td class="bug-custom-field' . $t_class . '" colspan="5">';
 		print_custom_field_value( $t_def, $t_custom_field['field']['id'], $f_issue_id );
 		echo '</td></tr>';
 	}
@@ -620,19 +658,20 @@ if( $t_flags['sponsorships_show'] ) {
 
 # Bug Relationships
 if( $t_flags['relationships_show'] ) {
+	/** @noinspection PhpUnhandledExceptionInspection */
 	bug_view_relationship_view_box( $f_issue_id, /* can_update */ $t_flags['relationships_can_update'] );
 }
 
 # User list monitoring the bug
 if( $t_flags['monitor_show'] ) {
-	echo '<div class="col-md-12 col-xs-12">';
-	echo '<a id="monitors"></a>';
-	echo '<div class="space-10"></div>';
-	
 	$t_collapse_block = is_collapsed( 'monitoring' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-	?>
+?>
+	<div class="col-md-12 col-xs-12">
+	<a id="monitors"></a>
+	<div class="space-10"></div>
+
 	<div id="monitoring" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
@@ -645,14 +684,14 @@ if( $t_flags['monitor_show'] ) {
 				</a>
 			</div>
 		</div>
-	
+
 		<div class="widget-body">
 			<div class="widget-main no-padding">
-	
+
 				<div class="table-responsive">
 					<table class="table table-bordered table-condensed table-striped">
 	<tr>
-		<th class="category" width="15%">
+		<th class="category width-15">
 			<?php echo lang_get( 'monitoring_user_list' ); ?>
 		</th>
 		<td>
@@ -687,20 +726,20 @@ if( $t_flags['monitor_show'] ) {
 			<form method="get" action="<?php echo helper_mantis_url( 'bug_monitor_add.php' ); ?>" class="form-inline noprint">
 			<?php echo form_security_field( 'bug_monitor_add' ) ?>
 				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
+				<!--suppress HtmlFormInputWithoutLabel -->
 				<input type="text" class="input-sm" id="bug_monitor_list_user_to_add" name="user_to_add" />
 				<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add' ) ?>" />
 			</form>
 			<?php } ?>
 		</td>
 	</tr>
-	</table>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 	</div>
-	</div>
-	</div>
-	</div>
-	
-	<?php
+<?php
 }
 
 # Bugnotes and "Add Note" box
@@ -738,28 +777,28 @@ if( $t_flags['history_show'] && $f_history ) {
 	<div class="col-md-12 col-xs-12">
 		<a id="history"></a>
 		<div class="space-10"></div>
-	
-	<?php
-		$t_collapse_block = is_collapsed( 'history' );
-		$t_block_css = $t_collapse_block ? 'collapsed' : '';
-		$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-		$t_history = history_get_events_array( $f_issue_id );
-	?>
-	<div id="history" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
-	<div class="widget-header widget-header-small">
-		<h4 class="widget-title lighter">
-			<?php print_icon( 'fa-history', 'ace-icon' ); ?>
-			<?php echo lang_get( 'bug_history' ) ?>
-		</h4>
-		<div class="widget-toolbar">
-			<a data-action="collapse" href="#">
-				<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
-			</a>
-		</div>
-	</div>
-	<div class="widget-body">
-	<div class="widget-main no-padding">
-	<div class="table-responsive">
+<?php
+	$t_collapse_block = is_collapsed( 'history' );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+	$t_history = history_get_events_array( $f_issue_id );
+?>
+		<div id="history" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<?php print_icon( 'fa-history', 'ace-icon' ); ?>
+					<?php echo lang_get( 'bug_history' ) ?>
+				</h4>
+				<div class="widget-toolbar">
+					<a data-action="collapse" href="#">
+						<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
+					</a>
+				</div>
+			</div>
+
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<div class="table-responsive">
 	<table class="table table-bordered table-condensed table-hover table-striped">
 		<thead>
 			<tr>
@@ -779,9 +818,9 @@ if( $t_flags['history_show'] && $f_history ) {
 		</thead>
 	
 		<tbody>
-	<?php
-		foreach( $t_history as $t_item ) {
-	?>
+<?php
+	foreach( $t_history as $t_item ) {
+?>
 			<tr>
 				<td class="small-caption">
 					<?php echo $t_item['date'] ?>
@@ -796,29 +835,34 @@ if( $t_flags['history_show'] && $f_history ) {
 					<?php echo ( $t_item['raw'] ? string_display_line_links( $t_item['change'] ) : $t_item['change'] ) ?>
 				</td>
 			</tr>
-	<?php
-		} # end for loop
-	?>
+<?php
+	} # end for loop
+?>
 		</tbody>
 	</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	
-	<?php
+<?php
 }
 
 layout_page_end();
 
 /**
- * return formatted string with all the details on the requested relationship
+ * Return formatted string with all the details on the requested relationship.
+ *
  * @param integer             $p_bug_id       A bug identifier.
  * @param BugRelationshipData $p_relationship A bug relationship object.
- * @param boolean             $p_html_preview Whether to include style/hyperlinks - if preview is false, we prettify the output.
+ * @param boolean             $p_html_preview Whether to include
+ *                                            style/hyperlinks - if preview is
+ *                                            false, we prettify the output.
  * @param boolean             $p_show_project Show Project details.
+ *
  * @return string
+ *
+ * @throws ClientException
  */
 function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_relationship, $p_html_preview = false, $p_show_project = false ) {
 	if( $p_bug_id == $p_relationship->src_bug_id ) {
@@ -852,14 +896,15 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	}
 
 	# get the information from the related bug and prepare the link
-	$t_bug = bug_get( $t_related_bug_id, false );
-	$t_status_string = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
-	$t_resolution_string = get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id );
+	$t_current_user_id = auth_get_current_user_id();
+	$t_bug = bug_get( $t_related_bug_id );
+	$t_status_string = get_enum_element( 'status', $t_bug->status, $t_current_user_id, $t_bug->project_id );
+	$t_resolution_string = get_enum_element( 'resolution', $t_bug->resolution, $t_current_user_id, $t_bug->project_id );
 
 	$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&#160;</td>';
 	if( $p_html_preview == false ) {
 		# choose color based on status
-		$t_status_css = html_get_status_css_fg( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+		$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user_id, $t_bug->project_id );
 		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
 		$t_relationship_info_html .= '<td>' . icon_get( 'fa-square', 'fa-status-box ' . $t_status_css );
 		$t_relationship_info_html .= ' <span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_display_line( $t_status_string ) . '</span></td>';
@@ -890,7 +935,7 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	# add delete link if bug not read only and user has access level
 	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			$t_relationship_info_html .= ' <a class="red noprint zoom-130"'
+			$t_relationship_info_html .= ' <a class="red noprint zoom-130" '
 				. 'href="bug_relationship_delete.php?bug_id=' . $p_bug_id
 				. '&amp;rel_id=' . $p_relationship->id
 				. htmlspecialchars( form_security_param( 'bug_relationship_delete' ) )
@@ -901,15 +946,16 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	}
 
 	$t_relationship_info_html .= '&#160;</td>';
-	$t_relationship_info_html = '<tr>' . $t_relationship_info_html . '</tr>';
-
-	return $t_relationship_info_html;
+	return '<tr>' . $t_relationship_info_html . '</tr>';
 }
 
 /**
- * print ALL the RELATIONSHIPS OF A SPECIFIC BUG
+ * Print all the relationships of a specific bug.
+ *
  * @param integer $p_bug_id A bug identifier.
  * @return string
+ *
+ * @throws ClientException
  */
 function bug_view_relationship_get_summary_html( $p_bug_id ) {
 	$t_summary = '';
@@ -938,10 +984,13 @@ function bug_view_relationship_get_summary_html( $p_bug_id ) {
 }
 
 /**
- * print HTML relationship form
- * @param integer $p_bug_id A bug identifier.
- * @param bool $p_can_update Can update relationships?
+ * Print HTML relationship form.
+ *
+ * @param integer $p_bug_id     A bug identifier.
+ * @param bool    $p_can_update Can update relationships?
  * @return void
+ *
+ * @throws ClientException
  */
 function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 	$t_relationships_html = bug_view_relationship_get_summary_html( $p_bug_id );
@@ -989,8 +1038,8 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 		}
 
 		# Plugin-added buttons
-		foreach( $t_event_buttons as $t_plugin => $t_plugin_buttons ) {
-			foreach( $t_plugin_buttons as $t_callback => $t_callback_buttons ) {
+		foreach( $t_event_buttons as $t_plugin_buttons ) {
+			foreach( $t_plugin_buttons as $t_callback_buttons ) {
 				if( is_array( $t_callback_buttons ) ) {
 					$t_buttons = array_merge( $t_buttons, $t_callback_buttons );
 				}
@@ -1010,12 +1059,14 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 		if( $p_can_update ) {
 ?>
 		<form method="post" action="<?php echo helper_mantis_url( 'bug_relationship_add.php' ); ?>" class="form-inline noprint">
-		<?php echo form_security_field( 'bug_relationship_add' ) ?>
-		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" />
-		<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
-		<?php print_relationship_list_box( config_get( 'default_bug_relationship' ) )?>
-		<input type="text" class="input-sm" name="dest_bug_id" value="" />
-		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add' )?>" />
+			<?php echo form_security_field( 'bug_relationship_add' ) ?>
+			<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" />
+			<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
+			<?php print_relationship_list_box( config_get( 'default_bug_relationship' ) )?>
+			<!--suppress HtmlFormInputWithoutLabel -->
+			<input type="text" class="input-sm" name="dest_bug_id" value="" />
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
+				   name="add_relationship" value="<?php echo lang_get( 'add' )?>" />
 		</form>
 <?php
 		} # can update
@@ -1042,7 +1093,10 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
  * there is no masking, except for the current state
  *
  * @param BugData $p_bug A valid bug object.
+ *
  * @return void
+ *
+ * @throws ClientException
  */
 function bug_view_button_bug_change_status( BugData $p_bug ) {
 	$t_current_access = access_get_project_level( $p_bug->project_id );
@@ -1091,9 +1145,13 @@ function bug_view_button_bug_change_status( BugData $p_bug ) {
 }
 
 /**
- * Print Assign To: combo box of possible handlers
+ * Print Assign To: combo box of possible handlers.
+ *
  * @param BugData $p_bug Bug object.
+ *
  * @return void
+ *
+ * @throws ClientException
  */
 function bug_view_button_bug_assign_to( BugData $p_bug ) {
 	$t_current_user_id = auth_get_current_user_id();
@@ -1175,10 +1233,14 @@ function bug_view_button_bug_assign_to( BugData $p_bug ) {
 }
 
 /**
- * Print all buttons for view bug pages
+ * Print all buttons for view bug pages.
+ *
  * @param integer $p_bug_id A valid bug identifier.
- * @param array $p_flags Flags from issue view command
+ * @param array   $p_flags  Flags from issue view command
+ *
  * @return void
+ *
+ * @throws ClientException
  */
 function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	$t_bug = bug_get( $p_bug_id );

@@ -46,8 +46,8 @@ require_api( 'logging_api.php' );
  * The internal processing steps for query string are:
  * 1) $query_string: stores the user input string, containing parameter tokens for all
  *   supported formats:
- *     - ":{string}" For labeled parameters. Binded values are stored in $query_bind_array
- *     - "${int}" For anonymous parameters. Binded values are stored in $query_autobind_array
+ *     - ":{string}" For labeled parameters. Bound values are stored in $query_bind_array
+ *     - "${int}" For anonymous parameters. Bound values are stored in $query_autobind_array
  *     - "${string}{int}" For special constructs, eg: $in0 for late binding IN clauses
  * 2) $expanded_query_string: stores the query string after expansion of special constructs
  *   into standard "${int}" parameters
@@ -552,7 +552,7 @@ class DbQuery {
 	 */
 	public function sql_in( $p_alias, $p_label_or_values ) {
 		if( is_array( $p_label_or_values ) ) {
-			if( count( $p_label_or_values ) > self::$oracle_in_limit ) {
+			if( db_is_oracle() && count( $p_label_or_values ) > self::$oracle_in_limit ) {
 				$t_sql = $this->helper_in_oracle_fix( $p_alias, $p_label_or_values );
 			} elseif( count( $p_label_or_values ) == 1 ) {
 				$t_sql = $p_alias . ' = ' . $this->param( reset( $p_label_or_values ) );
@@ -857,7 +857,7 @@ class DbQuery {
 			$this->fetch();
 		}
 		if( is_numeric( $p_index_or_name ) ) {
-			if( count( $this->current_row ) > $p_index_or_name ) {
+			if( $this->current_row && count( $this->current_row ) > $p_index_or_name ) {
 				# get the element at that numerical position
 				$t_keys = array_keys( $this->current_row );
 				$t_value = $this->current_row[$t_keys[$p_index_or_name]];

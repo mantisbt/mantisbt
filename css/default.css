@@ -26,8 +26,14 @@ tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px;
 #buglist .column-description,
 #buglist .column-notes,
 #buglist .column-steps-to-reproduce,
-#buglist .column-additional-information
+#buglist .column-additional-information,
+#buglist .cftype-string,
+#buglist .cftype-textarea
 	{ text-align: left; }
+
+.sticky-separator,
+.test-langs th
+	{ background-color: lightgrey; }
 
 /* manage_plugin_page.php */
 span.dependency_dated		{ color: maroon; }
@@ -190,4 +196,16 @@ html > body.show-project-affinity > div form [type="submit"].lacks-project-affin
 {
   content: ' ⚠' !important;
   font-family: 'Segoe UI Emoji', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.test-langs ol.plugins-toc {
+    column-count: auto;
+    column-width: 130px;
+    column-gap: 60px;
+    margin: 10px 15px 10px 30px;
+}
+
+.editable_access_level {
+    display: inline-grid;
+    grid-template-columns: 1fr 20px 1fr;
 }

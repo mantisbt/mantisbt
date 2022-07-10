@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Macedonian (македонски)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -48,7 +48,7 @@ $s_plugin_format_process_text = 'Обработка на текст';
 $s_plugin_format_process_text_warning_notice = 'Не исклучувајте доколку не сте уверени дека навистина знаете што правите. Во исклучена состојба, можни се меѓумесни напади (XSS) на мрежното место.';
 $s_plugin_format_process_urls = 'Обработка на URL';
 $s_plugin_format_process_buglinks = 'Внатрешни врски на MantisBT (задачи и нивни белешки)';
-$s_plugin_format_process_buglinks_info = 'Во вашата поставка ознаката <em>Issue</em>  е зададена како „<literal>%s</literal>“, а ознаката <em>Issue Note</em> како „<literal>%s</literal>“';
+$s_plugin_format_process_buglinks_info = 'Во вашата поставка ознаката <em>Issue</em>  е зададена како „%s“, а ознаката <em>Issue Note</em> како „%s“';
 $s_plugin_format_process_markdown = 'Обработка со Markdown';
 $s_plugin_format_process_markdown_info = 'Стилизирање со поддршка за Markdown — синтакса за форматирање текст предвидена да може да се претвора во HTML.';
 $s_plugin_format_enabled = 'Вкл.';

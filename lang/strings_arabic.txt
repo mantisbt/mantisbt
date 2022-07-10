@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,13 +33,15 @@
 /** Arabic (العربية)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Asma
  * @author Claw eg
  * @author DRIHEM
+ * @author FiberAhmed
  * @author HitomiAkane
  * @author Maroen1990
  * @author Meno25
@@ -47,6 +49,7 @@
  * @author OsamaK
  * @author Tarawneh
  * @author Test Create account
+ * @author أَحمد
  * @author بدارين
  * @author ديفيد
  * @author زكريا
@@ -512,7 +515,7 @@ $s_lost_password_info = 'لاسترجاع كلمة سرك المفقودة، م�
 $s_lost_password_confirm_hash_OK = 'تأكيدك تم قبوله. من فضلك حدث كلمة السر الخاصة بك.';
 $s_open_and_assigned_to_me_label = 'فتح وتعيينها لي:';
 $s_open_and_reported_to_me_label = 'تم فتحه و التبليغ عنه من قبلي:';
-$s_newer_news_link = 'أخبار أجدد';
+$s_newer_news_link = 'أحدث الأخبار';
 $s_older_news_link = 'أخبار أقدم';
 $s_archives = 'أرشيفات';
 $s_rss = 'آر إس إس';
@@ -624,6 +627,7 @@ $s_readonly_status = 'الحالة حيث تصبح قضية ما للقراءة 
 $s_reopen_status = 'الحالة التي يتم ضبط قضية معاد فتحها إليها';
 $s_reopen_resolution = 'الحل الذي يتم ضبط قضية معاد فتحها إليه';
 $s_limit_view_unless_threshold_option = 'عرض مشكلات المستخدمين الآخرين (إذا لم يتم تعيينها، فسيقتصر الوصول على المشكلات التي تم الإبلاغ عنها أو معالجتها أو مراقبتها من قبل المستخدم)';
+$s_export_issues = 'مشكلات التصدير';
 $s_config_delete_sure = 'هل أنت متأكد أنت تريد حذف الإعدادات ل:';
 $s_delete_config_button = 'حذف الإعدادات';
 $s_configuration_report = 'تقرير الضبط';
@@ -1305,13 +1309,12 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'تحقق LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'الاتصال بخادم LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'تحديث سجل LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'سجل مستخدم LDAP لم يتم العثور عليه.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'امتداد LDAP لم يتم تحميله.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'الاتصال بقاعدة البيانات فشل. الخطأ الذي تم استرجاعه من قاعدة البيانات كان #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'استعلام قاعدة البيانات فشل. الخطأ الذي تم استرجاعه من قاعدة البيانات كان #%1$d: %2$s للاستعلام: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'اختيار قاعدة البيانات فشل. الخطأ الذي تم استرجاعه من قاعدة البيانات كان #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = 'معرف قاعدة البيانات "%1$s" طويل جدا; حاول تقليل حجم اللاحقة g_db_table_prefix/suffix';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'يوجد تصنيف بهذا الاسم بالفعل.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'لا فعل نسخ تم تحديده.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'لا فعل نسخ تم تحديده.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'التصنيف لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'التصنيف "%1$s" لم يتم العثور عليه للمشروع "%2$s".';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'لا يمكن حذف هذه الفئة، لأنها محددة "كفئة أفتراضية للمنقولات".';

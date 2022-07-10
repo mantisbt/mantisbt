@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Zazaki (Zazaki)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -50,7 +50,7 @@ $s_plugin_format_process_text = 'Metin Karfinayış';
 $s_plugin_format_process_text_warning_notice = 'Heqeta şımayê nêzanê sekerê se enay meracnê. Weziyet dê racnayışi de gurbiyayışê çeprez kod gurweynayışa maruz manenê! (cross site scripting (XSS))';
 $s_plugin_format_process_urls = 'URL Karfinayış';
 $s_plugin_format_process_buglinks = 'Gıreyê MantisBTi (Mesele/Nota Meseleyi)';
-$s_plugin_format_process_buglinks_info = 'Sazkerdışê to etiketê <em>Issue</em>- zey „<literal>%s</literal>“ u etiketê <em>Issue Note</em>- zey „<literal>%s</literal>“ şınasneno';
+$s_plugin_format_process_buglinks_info = 'Sazkerdışê to etiketê <em>Issue</em>- zey „%s“ û etiketê <em>Issue Note</em>- zey „%s“ şınasneno';
 $s_plugin_format_process_markdown = 'Markdown Vıraştış';
 $s_plugin_format_process_markdown_info = 'Terzê Markdowni ra peşniyayo, formatkerdışê metıni ra rêza çekuya, tadayışê HTMLyi ra gore dizayn biyo.';
 $s_plugin_format_enabled = 'Ake';

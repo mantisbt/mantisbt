@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Swedish (svenska)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -55,7 +55,7 @@ $s_plugin_XmlImportExport_config_title = 'Konfiguration av tillgångsnivåer fö
 $s_plugin_XmlImportExport_import_threshold = 'Importera problem';
 $s_plugin_XmlImportExport_export_threshold = 'Exportera problem';
 $s_plugin_XmlImportExport_action_update = 'Uppdatera';
-$s_plugin_XmlImportExport_importing_in_project = 'Importerar problem i projektet: \'%s\'';
+$s_plugin_XmlImportExport_importing_in_project = 'Importerar problem till projekt: "%s"';
 $s_plugin_XmlImportExport_import_options = 'Importalternativ';
 $s_plugin_XmlImportExport_cross_references = 'Korsreferenser';
 $s_plugin_XmlImportExport_default_strategy = 'Standard konverteringsstrategi:';

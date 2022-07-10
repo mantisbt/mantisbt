@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Turkish (Türkçe)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -49,7 +49,7 @@ $s_plugin_format_process_text = 'Metin İşleme';
 $s_plugin_format_process_text_warning_notice = 'Ne yaptığınızı gerçekten bilmiyorsanız kapatmayın. Kapalı durumda, siteler arası betik oluşturma (XSS) çaprazı mümkündür.';
 $s_plugin_format_process_urls = 'URL İşleme';
 $s_plugin_format_process_buglinks = 'MantisBT iç bağlantıları (Sorunlar ve Sayı Notları)';
-$s_plugin_format_process_buglinks_info = 'Yapılandırmanız, <em>Sayı</em> etiketini "<literal>%s</literal>" ve <em>Sorun Notu</em> etiketini "<literal>%s</literal>" olarak tanımlar.';
+$s_plugin_format_process_buglinks_info = 'Yapılandırmanız, <em>Sayı</em> etiketini "%s" ve <em>Sorun Notu</em> etiketini "%s" olarak tanımlar.';
 $s_plugin_format_process_markdown = 'Markdown İşlemi';
 $s_plugin_format_process_markdown_info = 'Markdown desteği ile stil, metin biçimlendirme sözdizimi, HTML\'ye çevrilebilecek şekilde tasarlanmıştır.';
 $s_plugin_format_enabled = 'Açık';

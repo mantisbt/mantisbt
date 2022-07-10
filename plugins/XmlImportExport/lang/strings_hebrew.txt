@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,23 +33,25 @@
 /** Hebrew (עברית)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Amire80
+ * @author Avma
  * @author YaronSh
  */
 
-$s_plugin_XmlImportExport_title = 'בעיות יצוא / יבוא';
+$s_plugin_XmlImportExport_title = 'סוגיות יצוא/יבוא';
 $s_plugin_XmlImportExport_description = 'הוספת יכולות יבוא ויצוא XML למנטיס';
-$s_plugin_XmlImportExport_import = 'בעיות יצוא';
+$s_plugin_XmlImportExport_import = 'סוגיות יצוא';
 $s_plugin_XmlImportExport_export = 'יצוא XML';
-$s_plugin_XmlImportExport_import_threshold = 'בעיות ייבוא';
-$s_plugin_XmlImportExport_export_threshold = 'בעיות ייצוא';
+$s_plugin_XmlImportExport_config_title = 'תצורת רמות גישה של ייבוא/ייצוא XML';
+$s_plugin_XmlImportExport_import_threshold = 'סוגיות ייבוא';
+$s_plugin_XmlImportExport_export_threshold = 'סוגיות ייצוא';
 $s_plugin_XmlImportExport_action_update = 'עדכון';
-$s_plugin_XmlImportExport_importing_in_project = 'בעיות ביבוא פרויקט:';
+$s_plugin_XmlImportExport_importing_in_project = 'סוגיות יבוא למיזם: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'אפשרויות יבוא';
 $s_plugin_XmlImportExport_cross_references = 'הפניות צולבות';
 $s_plugin_XmlImportExport_default_strategy = 'אסטרגיית המרה שתופעל לפי בררת מחדל';
@@ -57,7 +59,7 @@ $s_plugin_XmlImportExport_renumber = 'מספור מחדש';
 $s_plugin_XmlImportExport_renumber_desc = 'לנסות להמיר הפניות למספור חדש';
 $s_plugin_XmlImportExport_link = 'קישור';
 $s_plugin_XmlImportExport_link_desc = 'המרה לקישור לפריט המקורי';
-$s_plugin_XmlImportExport_disable = 'כיבוי';
+$s_plugin_XmlImportExport_disable = 'מושבת';
 $s_plugin_XmlImportExport_disable_desc = 'לבטל את הקישור';
 $s_plugin_XmlImportExport_fallback = 'אסטרטגיית מחדל (כאשר „מספור חדש” אינו חל):';
 $s_plugin_XmlImportExport_fallback_category = 'קטגוריה לבררת מחדל:';

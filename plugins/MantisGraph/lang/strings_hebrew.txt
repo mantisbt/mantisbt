@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,19 +33,20 @@
 /** Hebrew (עברית)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Amire80
+ * @author Avma
  * @author Guycn2
  * @author Steeve815
  * @author YaronSh
  */
 
 $s_plugin_MantisGraph_title = 'מנטיס תרשימים';
-$s_plugin_MantisGraph_description = 'תוסף תרשימים רשמי.';
+$s_plugin_MantisGraph_description = 'מתקע תרשימים רשמי.';
 $s_plugin_MantisGraph_config = 'הגדרות';
 $s_plugin_MantisGraph_tab_label = 'תרשימים';
 $s_plugin_MantisGraph_status_link = 'לפי מצב';
@@ -53,15 +54,15 @@ $s_plugin_MantisGraph_priority_link = 'לפי עדיפות';
 $s_plugin_MantisGraph_severity_link = 'לפי חומרה';
 $s_plugin_MantisGraph_category_link = 'לפי קטגוריה';
 $s_plugin_MantisGraph_resolution_link = 'לפי פתרון';
-$s_plugin_MantisGraph_issue_trends_link = 'מגמות של בעיות';
-$s_plugin_MantisGraph_graph_imp_status_title = 'לפי מצבים גרפיים';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'לפי עדיפויות גרפיות';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'לפי חומרה גרפית';
-$s_plugin_MantisGraph_graph_imp_category_title = 'תרשימי קטגוריות גרפיות';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'לפי פתרונות גרפיים';
-$s_plugin_MantisGraph_graph_developer_title = 'לפי מפתחים גרפיים';
-$s_plugin_MantisGraph_graph_reporter_title = 'לפי דו"ח גרפי';
-$s_plugin_MantisGraph_graph_issues_trend_title = 'בעיות פתוחות, פתורות ונותרות';
+$s_plugin_MantisGraph_issue_trends_link = 'מגמת סוגיות';
+$s_plugin_MantisGraph_graph_imp_status_title = 'לפי תרשימי מצב';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'לפי תרשימי עדיפות';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'לפי תרשימי חומרה';
+$s_plugin_MantisGraph_graph_imp_category_title = 'תרשימי תרשימי סוג־אב';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'לפי תרשימי פתרון';
+$s_plugin_MantisGraph_graph_developer_title = 'לפי תרשימי מפתחים';
+$s_plugin_MantisGraph_graph_reporter_title = 'לפי תרשימי מדווח';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'סוגיות שנפתחו, נפתרו ונותרו';
 $s_plugin_MantisGraph_by_status_pct = 'לפי אחוזי מצב';
 $s_plugin_MantisGraph_by_priority_pct = 'לפי אחוז עדיפות';
 $s_plugin_MantisGraph_by_severity_pct = 'לפי אחוז חומרה';
@@ -84,8 +85,8 @@ $s_plugin_MantisGraph_period_last_quarter = 'הרבעון הקודם';
 $s_plugin_MantisGraph_period_year_to_date = 'השנה האחרונה';
 $s_plugin_MantisGraph_period_select = 'בחירת תאריכים';
 $s_plugin_MantisGraph_period_last_year = 'השנה הקודמת';
-$s_plugin_MantisGraph_graph_page = 'הצג תרשים היסטוריית באג';
-$s_plugin_MantisGraph_graph_topdev = 'מפתחים מובילים לפי בעיות שתוקנו';
-$s_plugin_MantisGraph_graph_opendev = 'מפתחים לפי בעיות פתוחות';
-$s_plugin_MantisGraph_graph_topreporter_fixed = 'מדווחים מובילים לפי בעיות שתוקנו';
+$s_plugin_MantisGraph_graph_page = 'תרשים היסטורית סוגיות';
+$s_plugin_MantisGraph_graph_topdev = 'מפתחים מובילים לפי סוגיות שתוקנו';
+$s_plugin_MantisGraph_graph_opendev = 'מפתחים לפי סוגיות פתוחות';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'מדווחים מובילים לפי סוגיות שתוקנו';
 $s_plugin_MantisGraph_other_categories = 'קטגוריות אחרות (%d)';

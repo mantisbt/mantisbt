@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Turkish (Türkçe)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -42,6 +42,9 @@
  * @author Archaeodontosaurus
  * @author BaRaN6161 TURK
  * @author Burakolik
+ * @author Can
+ * @author DDPAT
+ * @author Dregad
  * @author Emperyan
  * @author Erdemaslancan
  * @author Gorizon
@@ -49,6 +52,7 @@
  * @author HakanIST
  * @author Hedda
  * @author Hedda Gabler
+ * @author Ice bulldog
  * @author Incelemeelemani
  * @author Joseph
  * @author Karduelis
@@ -56,8 +60,10 @@
  * @author Korayal
  * @author McAang
  * @author Meelo
+ * @author Melissadilara
  * @author MuratTheTurkish
  * @author Rapsar
+ * @author SaldırganSincap
  * @author Sayginer
  * @author Sezgin İbiş
  * @author Stonecy
@@ -67,7 +73,7 @@
  * @author Vito Genovese
  */
 
-$s_directionality = 'soldan sağa';
+$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopyala';
 $s_actiongroup_menu_assign = 'Ata';
 $s_actiongroup_menu_resolve = 'Çözümle';
@@ -245,7 +251,7 @@ Eğer doğrulama İstenirse, şifrenizi değiştirmek için aşağıdaki URL\'yi
 $s_reset_request_admin_msg = 'Parolanız sıfırlandı. Yeni bir URL ayarlamak için lütfen aşağıdaki URL\'yi ziyaret edin:';
 $s_reset_request_in_progress_msg = 'Eğer hesabınız için doğru kullanıcı adı ve e-posta adresi belirttiyseniz, bize vermiş olduğunuz e-posta adresine bir onay mesajı gönderilecektir. Bu mesajı alındıktan sonra, hesabınıza şifre değiştirmek için verilen yönergeleri izleyin.';
 $s_email_notification_title_for_status_bug_new = 'Aşağıdaki sorunun durumu YENİ (tekrar)';
-$s_email_notification_title_for_status_bug_feedback = 'Aşağıdaki sorun için GERİ BİLDİRİM yapmalısınız.';
+$s_email_notification_title_for_status_bug_feedback = 'Aşağıdaki sorun için GERİ BİLDİRİM gerekiyor.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Aşağıdaki sorun KABUL EDİLDİ.';
 $s_email_notification_title_for_status_bug_confirmed = 'Aşağıdaki sorun ONAYLANMIŞTIR.';
 $s_email_notification_title_for_status_bug_assigned = 'Aşağıdaki sorun ATANMIŞTIR.';
@@ -373,8 +379,8 @@ $s_no_sponsored = 'Üstlenmeniz için atanmış hiç bir sorun bulunamadı.';
 $s_own_sponsored = 'Üstlendiğiniz Sorunlar:';
 $s_issues_handled = 'Üstlenmeniz İçin Size Atanan Sorunlar:';
 $s_no_own_sponsored = 'Hiçbir konuya sponsor olmadınız.';
-$s_sponsor = 'Sponsor';
-$s_sponsor_verb = 'Sponsor';
+$s_sponsor = 'Destekleyen';
+$s_sponsor_verb = 'Destekleyen';
 $s_amount = 'Miktar';
 $s_total_owing = 'Toplam Borç';
 $s_total_paid = 'Toplam Ödeme';
@@ -540,7 +546,7 @@ $s_archives = 'Arşivler';
 $s_rss = 'RSS';
 $s_site_information = 'Site Bilgileri';
 $s_mantis_version = 'MantisBT Sürümü';
-$s_schema_version = 'Şema Sürümü';
+$s_schema_version = 'Veritabanı Şema Sürümü';
 $s_site_path = 'Site Yolu';
 $s_core_path = 'Ana Yol';
 $s_plugin_path = 'Eklenti Yolu';
@@ -559,18 +565,18 @@ $s_default_filter = 'Varsayılan Filtre';
 $s_create_filter_link = 'Kalıcı Adres Oluştur';
 $s_create_short_link = 'Kısa Adres Oluştur';
 $s_filter_permalink = 'Düzenlenmiş filtreye ulaşmanız için oluşturulan kalıcı adres şurasıdır:';
-$s_manage_users_link = 'Kullanıcıları Yönet';
-$s_manage_projects_link = 'Projeleri Yönet';
-$s_manage_custom_field_link = 'Özel Alanları Yönet';
-$s_manage_global_profiles_link = 'Genel Profilleri Yönet';
-$s_manage_plugin_link = 'Eklentileri Yönet';
+$s_manage_users_link = 'Kullanıcılar';
+$s_manage_projects_link = 'Projeler';
+$s_manage_custom_field_link = 'Özel Alanları';
+$s_manage_global_profiles_link = 'Küresel Profilleri';
+$s_manage_plugin_link = 'Eklentiler';
 $s_permissions_summary_report = 'İzinlerin Raporu';
-$s_manage_config_link = 'Yapılandırmayı Yönet';
+$s_manage_config_link = 'Yapılandırma';
 $s_manage_threshold_config = 'İş İlerlemesi Sınırı';
 $s_manage_email_config = 'E-posta Bildirimleri';
 $s_manage_workflow_config = 'İş Akışı Geçişleri';
 $s_manage_workflow_graph = 'İş Akışı Grafiği';
-$s_manage_tags_link = 'Etiketleri Yönet';
+$s_manage_tags_link = 'Etiketler';
 $s_create_new_account_link = 'Yeni Hesap Oluştur';
 $s_projects_link = 'Projeler';
 $s_documentation_link = 'Belgelendirme';
@@ -646,6 +652,7 @@ $s_readonly_status = 'Sorunun yalnızca okunabilir olduğu durum';
 $s_reopen_status = 'Yeniden açılan sorunun durumu';
 $s_reopen_resolution = 'Yeniden açılan sorunun çözümlenme durumu';
 $s_limit_view_unless_threshold_option = 'Diğer kullanıcıların sorunlarını görüntüle (ayarlanmadıysa, erişim kullanıcı tarafından bildirilen, ele alınan veya izlenen sorunlarla sınırlı olacaktır)';
+$s_export_issues = 'Dışa aktarma sorunları';
 $s_config_delete_sure = '%2$s projesindeki %1$s ayarlarını silmek istediğinizden emin misiniz?';
 $s_delete_config_button = 'Ayarları Sil';
 $s_configuration_report = 'Yapılandırma Raporu';
@@ -811,7 +818,7 @@ $s_body = 'Gövde';
 $s_update_news_button = 'Haber Güncelle';
 $s_add_news_title = 'Haber Ekle';
 $s_post_to = 'Yayınlanacak Yer';
-$s_post_news_button = 'Haber Yayınla';
+$s_post_news_button = 'Haber Yayımla';
 $s_edit_or_delete_news_title = 'Haber Düzenle veya Sil';
 $s_edit_post = 'Gönderiyi Düzenle';
 $s_delete_post = 'Haber Sil';
@@ -1005,7 +1012,7 @@ $s_custom_field_project_count = 'Proje Sayısı';
 $s_custom_field_type = 'Tür';
 $s_custom_field_possible_values = 'Olası Değerler';
 $s_custom_field_default_value = 'Varsayılan Değer';
-$s_custom_field_valid_regexp = 'Düzgün İfade';
+$s_custom_field_valid_regexp = 'Düzenli İfade';
 $s_custom_field_access_level_r = 'Okuma Erişimi';
 $s_custom_field_access_level_rw = 'Yazma Erişimi';
 $s_custom_field_length_min = 'Minimum Uzunluk';
@@ -1058,7 +1065,7 @@ $s_changelog = 'Değişiklik Günlüğü';
 $s_changelog_empty = 'Hiç bir değişiklik kayıt bilgisi yok';
 $s_changelog_empty_manager = 'Değişiklik Günlüğü bilgisi yok. Projeler sürümlere sahip olduklarında ve sorunlar "sürümde düzeltildi" setiyle çözüldükten sonra dahil edilmiştir.';
 $s_roadmap = 'Yol haritası';
-$s_resolved_progress = '%2$d adet sorundan %1$d tanesi çözümlendi. İlerleme (%3$d%%).';
+$s_resolved_progress = '%2$d sorundan %1$d tanesi çözümlendi.';
 $s_roadmap_empty = 'Yol Haritası bilgisi yok';
 $s_roadmap_empty_manager = 'Yol Haritası bilgisi yok. Projeler sürümleri ve sorunlar "hedef sürümleri" belirlendikten sonra sorunlar dahil edilir.';
 $s_http_auth_realm = 'MantisBT Giriş';
@@ -1263,7 +1270,7 @@ $s_timeline_issue_monitor = '<span class="username">%1$s</span>, hatayı denetli
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> hata izlemeyi durdurdu <span class="issue_id">%2$s</span>';
 $s_timeline_issue_tagged = '<span class="username">%1$s</span> etiketli sayı <span class="issue_id">%2$s</span>, <span class="tag_name">%3$s</span>';
 $s_timeline_issue_untagged = '<span class="username">%1$s</span> etiketi kaldırıldı <span class="tag_name">%3$s</span>, <span class="issue_id">%2$s</span>';
-$s_timeline_issue_resolved = '<span class = "username">%1$s</span> sorunu çözdü <span class="issue_id">%2$s</span>';
+$s_timeline_issue_resolved = '<span class="username">%1$s</span> sorunu çözdü <span class="issue_id">%2$s</span>';
 $s_timeline_issue_closed = '<span class="username">%1$s</span> sorunu kapattı <span class="issue_id">%2$s</span>';
 $s_timeline_issue_reopened = '<span class="username">%1$s</span> sorunu yeniden açtı <span class="issue_id">%2$s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1$s</span> sorunu atandı <span class="issue_id">%2$s</span>, <span class="username">%3$s</span>';
@@ -1286,6 +1293,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu hesap korunuyor. Hesap koruması ka
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Erişim Engellendi.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dosya yükleme başarısız oldu. Dosya MantisBT tarafından okunamaz. Proje ayarlarını gözden geçirin.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Dosya yükleme başarısız oldu. Bu büyük ihtimalle PHP kurulumunun izin verdiğinden daha büyük boyutta dosya kullanıldığından kaynaklanmaktadır.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = '"%1$s", dosya adı için çok uzun.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Bu sayfa için gerekli bir parametre (%1$s) bulunamadı.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Bu kullanıcı adı zaten kullanılıyor. Lütfen başka bir kullanıcı adı seçiniz.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Bu e-posta zaten kullanılıyor. Lütfen geri dönün ve başka bir tane seçin.';
@@ -1340,7 +1348,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Kimlik Doğrulama Başarısız.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Sunucu Bağlantısı Başarısız.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Kayıt Güncelleme başarısız.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Kullanıcı Kaydı Bulunamadı.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP Uzantısı Yüklenemedi.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'LDAP sunucusunda minimum TLS sürümü ayarlanamadı.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'LDAP sunusunda StartTLS başlatılamadı.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Veritabanı bağlantısı başarısız. Veritabanından gelen hata #%1$d: %2$s.';
@@ -1348,7 +1355,7 @@ $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Veritabanı sorgusu başarısız oldu. V
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Veritabanı bağlantısı başarısız. Veritabanından gelen hata #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = '"%1$s" veritabanı tanımlayıcısı çok uzun. g_db_table_prefix/suffix boyutunu küçültmeyi deneyin';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Bu isimde bir proje zaten mevcut.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Hiçbir kopyalama eylemi belirtilmedi.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Hiçbir kopyalama eylemi belirtilmedi.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategori bulunamadı.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = '"%2$s" projesi için "%1$s" kategorisi bulunamadı.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Bu kategori, "Taşıma Eylemleri için Varsayılan Kategori" olması nedeniyle silinemez.';
@@ -1417,6 +1424,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Son %d saniye içinde %d olayının izin 
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '"%1$s" alanı daha kısa veya %2$d karakter uzunluğunda olmalı.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API simgesi "%s" adı zaten kullanılıyor. Lütfen geri dönün ve başka bir tane seçin.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '$g_log_destination "%s" içinde belirtilen dosya yazılabilir değil.';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Eklenilen kullanıcı, bu sorunu gözlemek için yeterli erişim haklarına sahip değildir.';
 $s_dropzone_default_message = 'Dosyaları sürükleyip bırakarak, seçerek ve yapıştırarak ekleyin.';
 $s_dropzone_fallback_message = 'Tarayıcınız drag\'n\'drop dosya yüklemelerini desteklemiyor.';
 $s_dropzone_file_too_big = 'Dosya çok büyük ({{filesize}} MiB). Maksimum boyut: {{maxFilesize}} MiB.';
@@ -1427,7 +1435,8 @@ $s_dropzone_cancel_upload_confirmation = 'Yüklemeyi iptal etmek istediğinize e
 $s_dropzone_remove_file = 'Dosyayı kaldır';
 $s_dropzone_max_files_exceeded = 'Daha fazla dosya yükleyemezsiniz.';
 $s_dropzone_not_supported = 'Dropzone.js eski tarayıcıları desteklemez!';
-$s_dropzone_multiple_files_too_big = 'Aşağıdaki dosyalar:{{files}}izin verilen maksimum dosya boyutunu aşıyor ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'Aşağıdaki dosyalar izin verilen maksimum dosya boyutunu aşıyor ({{maxFilesize}} MiB):{{files}}';
+$s_dropzone_multiple_filenames_too_long = 'Aşağıdaki dosya adları çok uzun (max {{maxFilenameLength}} characters):{{files}}';
 $s_save = 'Kaydet';
 $s_reset = 'Sıfırla';
 $s_persist = 'Sürdür';

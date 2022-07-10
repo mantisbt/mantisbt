@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Zazaki (Zazaki)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -202,7 +202,7 @@ $s_email_label = 'E-poste';
 $s_password = 'Parola';
 $s_new_password = 'Parolaya newiye';
 $s_confirm_password = 'Parola tesdiq ke';
-$s_current_password = 'Parolaya newkên';
+$s_current_password = 'Parolaya nıkayêne';
 $s_access_level = 'Sewiyay resayışi';
 $s_access_level_label = 'Sewiyay resayış';
 $s_update_user_button = 'Karberi bırocne';
@@ -322,6 +322,7 @@ $s_create_user_button = 'Karber vırazê';
 $s_filter_button = 'Parzûn ro ke';
 $s_create_filter_link = 'Daimi adres vıraştış';
 $s_manage_users_link = 'Karbera İdare ke';
+$s_manage_projects_link = 'Proceyi';
 $s_create_new_account_link = 'Hesabo newe vırazê';
 $s_projects_link = 'Proceyi';
 $s_documentation_link = 'Dokumentasyon';
@@ -370,7 +371,7 @@ $s_reset_password_button = 'Parola newe ke';
 $s_show_all_users = 'Pêro';
 $s_users_unused = 'Nêkaryayo';
 $s_users_new = 'Newe';
-$s_main_link = 'Pela seri';
+$s_main_link = 'Ser';
 $s_summary_link = 'Xulasa';
 $s_account_link = 'Hesabê mı';
 $s_users_link = 'Karberi';
@@ -390,7 +391,7 @@ $s_signup_title = 'Qeydbiyayış';
 $s_signup_button = 'Qeydbiyayış';
 $s_summary_title = 'Xulasa';
 $s_percentage_errors = '% Raşt niyo';
-$s_errors = 'Raşt niyo';
+$s_errors = 'Ğelet';
 $s_opened = 'Abiya';
 $s_resolved = 'Agoziya';
 $s_total = 'Pêro piya';
@@ -415,6 +416,7 @@ $s_end_date_label = 'Tarixê qediyayışi:';
 $s_yes = 'Eya';
 $s_no = 'Nê';
 $s_ok = 'TEMAM';
+$s_select_all = 'Pêrune weçine';
 $s_temporary_filter = 'Parzûno demki';
 $s_bug_assign_to_button = 'Çekenen:';
 $s_reopen_bug_button = 'Fına Ake';
@@ -522,7 +524,7 @@ $s_month_october = 'Tışrino Verên';
 $s_month_november = 'Tışrino Peyên';
 $s_month_december = 'Kanun';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nê vineya.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategori nêvineya.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategoriye nêvêniye.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '"%$1s" ya oleken qeyd nêbiyo';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Oleken de "%$1s" xo ra bar kerde yo.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Pela „%2$s“ Plugin „%1$s“ de nêvêniye.';

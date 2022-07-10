@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Slovak (slovenčina)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -41,22 +41,27 @@
  * @author Nathaniel.skywalker.888
  * @author Rudko
  * @author Wizzard
+ * @author Yardom78
  */
 
 $s_plugin_MantisGraph_title = 'Grafiky Mantis';
 $s_plugin_MantisGraph_description = 'Oficiálny grafický plugin.';
 $s_plugin_MantisGraph_config = 'Nastavenie';
-$s_plugin_MantisGraph_tab_label = 'Grafiky Mantis';
+$s_plugin_MantisGraph_tab_label = 'Grafy';
 $s_plugin_MantisGraph_status_link = 'Podľa stavu';
 $s_plugin_MantisGraph_priority_link = 'Podľa priority';
 $s_plugin_MantisGraph_severity_link = 'Podľa závažnosti';
 $s_plugin_MantisGraph_category_link = 'Podľa kategórie';
 $s_plugin_MantisGraph_resolution_link = 'Podľa riešenia';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Graf podľa stavu';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Graf podľa priority';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Graf podľa dôležitosti';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Graf podľa kategorie';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Graf podľa riešení';
+$s_plugin_MantisGraph_issue_trends_link = 'Problémové trendy';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Podľa grafov statusov';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Podľa grafov priorít';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Podľa grafov závažnosti';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Podľa grafov kategórií';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Podľa grafov riešení';
+$s_plugin_MantisGraph_graph_developer_title = 'Podľa grafov vývojárov';
+$s_plugin_MantisGraph_graph_reporter_title = 'Podľa grafov reportéra';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Otvorené, vyriešený a zostávajúce problémy';
 $s_plugin_MantisGraph_by_status_pct = 'podľa stavu';
 $s_plugin_MantisGraph_by_priority_pct = 'podľa priority';
 $s_plugin_MantisGraph_by_severity_pct = 'podľa dôležitosti';
@@ -80,3 +85,7 @@ $s_plugin_MantisGraph_period_year_to_date = 'Rok podľa Dátumu';
 $s_plugin_MantisGraph_period_select = 'Ľubovoľné Dátumy';
 $s_plugin_MantisGraph_period_last_year = 'Posledný Rok';
 $s_plugin_MantisGraph_graph_page = 'Graf Histórie Problémov';
+$s_plugin_MantisGraph_graph_topdev = 'Vývojári podľa vyriešených problémov';
+$s_plugin_MantisGraph_graph_opendev = 'Vývojári podľa otvorených problémov';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Reportéri podľa vyriešených problémov';
+$s_plugin_MantisGraph_other_categories = 'ostatné kategórie (%d)';

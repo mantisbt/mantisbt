@@ -395,12 +395,12 @@ function category_sort_rows_by_project( $p_category1, array $p_category2 = null 
 		}
 	}
 
-	$t_proj_cmp = strcasecmp( $p_category1['project_name'], $p_category2['project_name'] );
+	$t_proj_cmp = strcasecmp( (string)$p_category1['project_name'], (string)$p_category2['project_name'] );
 	if( $t_proj_cmp != 0 ) {
 		return $t_proj_cmp;
 	}
 
-	return strcasecmp( $p_category1['name'], $p_category2['name'] );
+	return strcasecmp( (string)$p_category1['name'], (string)$p_category2['name'] );
 }
 
 $g_cache_category_project = null;

@@ -176,19 +176,26 @@ if( !db_is_connected() ) {
 
 $t_database_server_info = $g_db->ServerInfo();
 $t_db_version = $t_database_server_info['version'];
-preg_match( '/^[0-9]+\.[0-9+]/', $t_db_version, $t_matches );
+preg_match( '/^([0-9]+)\.[0-9+]/', $t_db_version, $t_matches );
 $t_db_major_version = $t_matches[0];
 
 # MantisBT minimum version
 check_print_info_row(
 	'Database server version',
-	htmlentities( $t_database_server_info['version'] )
+	htmlentities( $t_db_version )
 );
 
 if( db_is_mysql() ) {
 	$t_db_min_version = DB_MIN_VERSION_MYSQL;
 } elseif( db_is_pgsql() ) {
 	$t_db_min_version = DB_MIN_VERSION_PGSQL;
+
+	# Starting with PostgreSQL 10, a major version is indicated by increasing
+	# the first part of the version;  before that a major version was indicated
+	# by increasing either the first or second part of the version number.
+	if( version_compare( $t_db_version, '10', '>=' ) ) {
+		$t_db_major_version = $t_matches[1];
+	}
 } elseif( db_is_mssql() ) {
 	$t_db_min_version = DB_MIN_VERSION_MSSQL;
 } elseif( db_is_oracle() ) {
@@ -210,10 +217,8 @@ $t_date_format = config_get( 'short_date_format' );
 
 # MySQL support checking
 if( db_is_mysql() ) {
-	# Note: the MySQL lifecycle page [1] is no longer available.
-	# The list below was built based on information found in [2].
-	# [1] http://www.mysql.com/about/legal/lifecycle/
-	# [2] http://dev.mysql.com/doc/refman/5.7/en/faqs-general.html#qandaitem-B-1-1-1
+	# The list below was built based on information found in the FAQ [1]
+	# [1]: https://dev.mysql.com/doc/refman/8.0/en/faqs-general.html
 	$t_versions = array(
 		# Series >= Type, GA status, GA date
 		'5.0' => array( 'GA', '5.0.15', '2005-10-19' ),
@@ -223,8 +228,9 @@ if( db_is_mysql() ) {
 		'5.6' => array( 'GA', '5.6.10', '2013-02-05' ),
 		'5.7' => array( 'GA', '5.7.9', '2015-10-21' ),
 		'6.0' => array( 'Discontinued' ),
+		'8.0' => array( 'GA', '8.0.11', '2018-04-19' ),
 	);
-	$t_support_url = 'http://www.mysql.com/support/';
+	$t_support_url = 'https://www.mysql.com/support/';
 
 	# Is it a GA release
 	$t_mysql_ga_release = false;
@@ -240,7 +246,7 @@ if( db_is_mysql() ) {
 	} else {
 		if( 'GA' == $t_versions[$t_db_major_version][0] ) {
 			$t_mysql_ga_release = version_compare( $t_database_server_info['version'], $t_versions[$t_db_major_version][1], '>=' );
-			# Support end-dates as per http://www.mysql.com/support/
+			# Support end-dates as per https://www.mysql.com/support/
 			$t_date_ga = new DateTime( $t_versions[$t_db_major_version][2] );
 			$t_date_premier_end = $t_date_ga->add( new DateInterval( 'P5Y' ) )->format( $t_date_format );
 			$t_date_extended_end = $t_date_ga->add( new DateInterval( 'P3Y' ) )->format( $t_date_format );
@@ -291,16 +297,20 @@ if( db_is_mysql() ) {
 
 	# Version support information
 	$t_versions = array(
-		# Version => EOL date
-		'9.6' => '2021-09-31',
-		'9.5' => '2021-01-31',
-		'9.4' => '2019-12-31',
-		'9.3' => '2018-09-30',
-		'9.2' => '2017-09-30',
-		'9.1' => '2016-09-30',
-		'9.0' => '2015-09-30',
+		# Version => Final release (EOL) date
+		'13'  => '2025-11-13',
+		'12'  => '2024-11-14',
+		'11'  => '2023-11090',
+		'10'  => '2022-11-10',
+		'9.6' => '2021-11-11',
+		'9.5' => '2021-02-11',
+		'9.4' => '2020-02-13',
+		'9.3' => '2018-11-08',
+		'9.2' => '2017-11-09',
+		'9.1' => '2016-10-27',
+		'9.0' => '2015-10-15',
 	);
-	$t_support_url = 'http://www.postgresql.org/support/versioning/';
+	$t_support_url = 'https://www.postgresql.org/support/versioning/';
 
 	# Determine EOL date
 	if( array_key_exists( $t_db_major_version, $t_versions ) ) {
@@ -326,7 +336,7 @@ if( db_is_mysql() ) {
 				false => 'Release information for version ' . $t_db_major_version . ' is not available. '
 					. vsprintf( 'Since it is %s than %s, we assume it is %s. ', $t_assume )
 					. 'Please refer to the <a href="' . $t_support_url
-					. '">PostgreSQL release support policy</a> to make sure.'
+					. '">PostgreSQL Versioning Policy</a> to make sure.'
 			) );
 	}
 

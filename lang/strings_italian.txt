@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,11 +33,12 @@
 /** Italian (italiano)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Ajeje Brazorf
  * @author Albe Albe 460
  * @author Albe Albe460
  * @author Alexmar983
@@ -240,7 +241,7 @@ $s_reset_request_msg = 'Qualcuno (probabilmente te) ha richiesto di cambiare la 
 Se invece hai effettivamente richiesto tu la modifica, visita l\'indirizzo di seguito riportato e potrai cambiare la tua password:';
 $s_reset_request_in_progress_msg = 'Se hai fornito il corretto nome utente e indirizzo email del tuo account, ti verrà inviata una email all\'indirizzo del tuo account con un codice di convalida.  Quando riceverai l\'email, segui le istruzioni in essa riportate.';
 $s_email_notification_title_for_status_bug_new = 'La seguente anomalia è stata ri-posta nello stato NUOVA';
-$s_email_notification_title_for_status_bug_feedback = 'La seguente anomalia è stata posta in DISCUSSIONE.';
+$s_email_notification_title_for_status_bug_feedback = 'La seguente anomalia richiede FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'La seguente anomalia è stata RICONOSCIUTA.';
 $s_email_notification_title_for_status_bug_confirmed = 'La seguente anomalia è stata CONFERMATA.';
 $s_email_notification_title_for_status_bug_assigned = 'La seguente anomalia è stata ASSEGNATA.';
@@ -269,7 +270,7 @@ $s_email_notification_title_for_action_blocks_relationship_deleted = 'La seguent
 $s_email_notification_title_for_action_relationship_child_resolved = 'L\'anomalia %1$s CORRELATA è stata RISOLTA.';
 $s_email_notification_title_for_action_relationship_child_closed = 'L\'anomalia %1$s CORRELATA è stata CHIUSA.';
 $s_email_notification_title_for_action_related_issue_deleted = 'L\'anomalia CORRELATA %1$s è stata CANCELLATA.';
-$s_email_notification_title_for_action_monitor = 'L\'anomalia %1$s adesso é seguita dall\'utente %2$s.';
+$s_email_notification_title_for_action_monitor = 'L\'anomalia %1$s adesso è seguita dall\'utente %2$s.';
 $s_email_reporter = 'Segnalata da';
 $s_email_handler = 'In carico a';
 $s_email_project = 'Progetto';
@@ -506,7 +507,7 @@ $s_warning_security_hazard = 'Questo è un potenziale rischio per la sicurezza, 
 $s_warning_integrity_hazard = 'Questo comporta che MantisBT continuerà quando si verifica un errore e ciò può portare a sistema/problemi di integrità dei dati.';
 $s_warning_debug_email = '<strong>Attenzione:</strong> "<code>debug_email</code>" non è impostato su <code>OFF</code>, tutte le e-mail di notifica sarà inviata a "%1$s".';
 $s_error_database_no_schema_version = '<strong>Errore:</strong> la versione dello schema del tuo database è 0. Ciò può accadere perché il database è danneggiato o il valore di "database_version" non è stato recuperato dalla tabella di configurazione o la struttura del database è da una versione obsoleta di MantisBT (pre 1.0.0).';
-$s_error_database_version_out_of_date_2 = '<strong>Attenzione:</strong> La struttura di database é obsoleta. Per favore, aggiornala <a href="admin/install.php">qui</a> dopo avere effettuato l\'accesso';
+$s_error_database_version_out_of_date_2 = '<strong>Attenzione:</strong> La struttura di database è obsoleta. Per favore, aggiornala <a href="admin/install.php">qui</a> dopo avere effettuato l\'accesso';
 $s_error_code_version_out_of_date = ' <strong>Attenzione:</strong> la struttura del database è più recente del programma installato. Per favore, aggiorna la versione del programma.';
 $s_login_page_info = 'Benvenuti nel software di gestione anomalie e progetti.';
 $s_login_title = 'Accedi';
@@ -528,11 +529,11 @@ $s_open_and_assigned_to_me_label = 'Aperto e assegnato a me:';
 $s_open_and_reported_to_me_label = 'Aperto e segnalato da me:';
 $s_newer_news_link = 'Notizie recenti';
 $s_older_news_link = 'Notizie precedenti';
-$s_archives = 'Archivio';
+$s_archives = 'Archivi';
 $s_rss = 'RSS';
 $s_site_information = 'Informazioni sul sito';
 $s_mantis_version = 'Versione MantisBT';
-$s_schema_version = 'Versione Schema';
+$s_schema_version = 'Versione schema database';
 $s_site_path = 'Percorso Sito';
 $s_core_path = 'Percorso Core';
 $s_plugin_path = 'Percorso Plugin';
@@ -551,18 +552,18 @@ $s_default_filter = 'Filtro predefinito';
 $s_create_filter_link = 'Crea link permanente';
 $s_create_short_link = 'Crea link breve';
 $s_filter_permalink = 'Quello che segue è un link permanente alla configurazione attuale dei filtri:';
-$s_manage_users_link = 'Gestione utenti';
-$s_manage_projects_link = 'Gestione progetti';
-$s_manage_custom_field_link = 'Gestione campi personalizzati';
-$s_manage_global_profiles_link = 'Gestione profili globali';
-$s_manage_plugin_link = 'Gestione Plugins';
+$s_manage_users_link = 'Utenti';
+$s_manage_projects_link = 'Progetti';
+$s_manage_custom_field_link = 'Campi personalizzati';
+$s_manage_global_profiles_link = 'Profili globali';
+$s_manage_plugin_link = 'Plugin';
 $s_permissions_summary_report = 'Report permessi';
 $s_manage_config_link = 'Configurazione';
 $s_manage_threshold_config = 'Workflow e livello di accesso';
 $s_manage_email_config = 'Notifica via e-mail';
 $s_manage_workflow_config = 'Workflow';
 $s_manage_workflow_graph = 'Flusso di lavoro grafico';
-$s_manage_tags_link = 'Gestisci etichette';
+$s_manage_tags_link = 'Etichette';
 $s_create_new_account_link = 'Crea nuovo account';
 $s_projects_link = 'Progetti';
 $s_documentation_link = 'Documentazione';
@@ -615,7 +616,7 @@ $s_access_change = 'Livello minimo di accesso per cambiare questo stato';
 $s_desc_bug_submit_status = 'Stato assegnato a nuova anomalia';
 $s_desc_bug_reopen_status = 'Stato assegnato ad anomalia riaperta';
 $s_desc_bug_resolved_status_threshold = 'Stato in cui una anomalia si considera risolta';
-$s_desc_bug_closed_status_threshold = 'Stato in cui un\'anomalia é considerata chiusa';
+$s_desc_bug_closed_status_threshold = 'Stato in cui un\'anomalia è considerata chiusa';
 $s_workflow_change_access_label = 'Chi può modificare il workflow:';
 $s_access_change_access_label = 'Chi può modificare i livelli di accesso:';
 $s_default_not_in_flow = 'Lo stato di default di %1$s non è previsto nello stato seguente ad %2$s.  Sarà ignorato.';
@@ -647,7 +648,7 @@ $s_configuration_option_value = 'Valore';
 $s_all_users = 'Tutti gli utenti';
 $s_set_configuration_option = 'Imposta opzione di configurazione';
 $s_delete_config_sure_msg = 'Sei sicuro di voler cancellare questa opzione di configurazione?';
-$s_configuration_corrupted = 'La configurazione del database é danneggiata.';
+$s_configuration_corrupted = 'La configurazione del database è danneggiata.';
 $s_set_configuration_option_action_create = 'Crea opzione di configurazione';
 $s_set_configuration_option_action_edit = 'Modifica opzione di configurazione';
 $s_set_configuration_option_action_clone = 'Clona opzione di configurazione';
@@ -702,7 +703,7 @@ $s_copy_from = 'Copia da';
 $s_copy_to = 'Copia su';
 $s_categories_and_version_title = 'Categorie e versioni';
 $s_categories = 'Categorie';
-$s_add_category_button = 'Nuova categoria';
+$s_add_category_button = 'Aggiungi categoria';
 $s_add_and_edit_category_button = 'Aggiungere e Modificare Categoria';
 $s_versions = 'Versioni';
 $s_add_version_button = 'Nuova versione';
@@ -761,7 +762,7 @@ $s_account_unlock_msg = 'L\'account è stato sbloccato.';
 $s_manage_user_protected_msg = 'Account protetto. Il "livello di accesso" e "l\'abilitazione" non sono modificabili. Per il resto, l\'account è stato aggiornato...';
 $s_manage_user_updated_msg = 'Account aggiornato correttamente...';
 $s_email_user_updated_subject = 'Utenza aggiornata';
-$s_email_user_updated_msg = 'La tua utenza é stata aggiornata dall\'amministratore. La lista delle modifiche effettuate é riportata sotto. Puoi modificare i dettagli della tua utenza e le preferenze ogni volta che lo desideri visitando il seguente indirizzo:';
+$s_email_user_updated_msg = 'La tua utenza è stata aggiornata dall\'amministratore. La lista delle modifiche effettuate è riportata sotto. Puoi modificare i dettagli della tua utenza e le preferenze ogni volta che lo desideri visitando il seguente indirizzo:';
 $s_main_link = 'Principale';
 $s_view_bugs_link = 'Visualizza anomalie';
 $s_report_bug_link = 'Nuova anomalia';
@@ -818,7 +819,7 @@ $s_add_file = 'Aggiungi file';
 $s_project_document_updated = 'Progetto aggiornato con successo';
 $s_project_user_added_msg = 'Utente aggiunto al progetto con successo';
 $s_project_removed_user_msg = 'Utente eliminato dal progetto con successo';
-$s_remove_user_sure_msg = 'Sei sicuro di voler rimuovere l\'utente "%1$s" dal progetto "%2$s"?';
+$s_remove_user_sure_msg = 'Sei sicuro di voler rimuovere l\'utente "%1$s" dal progetto/i "%2$s"?';
 $s_remove_user_button = 'Rimuovi utente';
 $s_remove_all_users_sure_msg = 'Sei sicuro di voler rimuovere tutti gli utenti associati a questo progetto?';
 $s_remove_all_users_button = 'Rimuovi tutti gli utenti';
@@ -914,7 +915,7 @@ $s_note_user_id = 'Nota di';
 $s_filter_match_type = 'Tipo di corrispondenza';
 $s_filter_match_all = 'Tutte le condizioni';
 $s_filter_match_any = 'Qualsiasi condizione';
-$s_none = 'in bianco';
+$s_none = 'nessuno';
 $s_current = 'attuale';
 $s_search = 'Ricerca';
 $s_view_prev_link = 'Precedenti';
@@ -1023,7 +1024,7 @@ $s_and_above = 'e sopra';
 $s_advanced_filters = 'Filtro avanzato';
 $s_simple_filters = 'Filtro semplice';
 $s_monitored_by = 'Sotto controllo da';
-$s_attachments = 'Allegati';
+$s_attachments = 'allegato/i';
 $s_bytes = 'byte';
 $s_kib = 'KiB';
 $s_attachment_missing = 'Allegato mancante';
@@ -1042,7 +1043,7 @@ $s_changelog = 'Registro modifiche';
 $s_changelog_empty = 'Il registro non contiene nessuna informazione';
 $s_changelog_empty_manager = 'Nessun registro modifiche disponibile. Le anomalie vengono riportate se i progetti hanno versioni e se le anomalie sono state risolte con "risolto in versione" impostato.';
 $s_roadmap = 'Roadmap';
-$s_resolved_progress = '%1$d di %2$d anomalie risolte (%3$d%%).';
+$s_resolved_progress = '%1$d di %2$d anomalie risolte';
 $s_roadmap_empty = 'Nessuna informazione sui Rilasci è disponibile';
 $s_roadmap_empty_manager = 'Nessuna informazione sui Rilasci è disponibile. Le anomalie vengono riportate se i progetti hanno versioni e se se anomalie hanno impostato "assegnata alla versione"';
 $s_http_auth_realm = 'Accedi a MantisBT';
@@ -1307,7 +1308,7 @@ $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Percorso di upload non valido. 
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Non è stato specificato nessun file.  Torna indietro e seleziona un file prima di procedere.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Non è stato possibile spostare il file caricato nella directory definitiva.  La directory non esiste o non è scrivibile dal server web.';
 $MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Allegato con id "%1$d" non trovato.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Non puoi rendere un\'anomalia duplicata di sè stessa.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Non puoi rendere un\'anomalia duplicata di sé stessa.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Revisione anomalia non trovata';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Campo personalizzato non trovato.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Questo nome è duplicato.';
@@ -1320,13 +1321,12 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Autenticazione LDAP fallita.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Connessione al server LDAP fallita.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Aggiornamento del record LDAP fallito.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Record utente LDAP non trovato.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Estensione LDAP non caricata.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Connessione al database fallita.  L\'errore ricevuto dal database è #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Interrogazione database fallita.  L\'errore ricevuto dal database è #%1$d: %2$s per la query: %3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Selezione del database fallita.  L\'errore ricevuto dal database è #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = 'Identificatore del database "%1$s" troppo lungo. Riduci la dimensione di g_db_table_prefix/suffix';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Una categoria con quel nome esiste già.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Non è stata specificata nessuna azione di copia.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Non è stata specificata nessuna azione di copia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria non trovata.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria "%1$s" non trovata nel progetto "%2$s"';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Questa categoria non può essere eliminata perché è definita come "Categoria predefinita per gli spostamenti".';
@@ -1347,14 +1347,14 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'L\'azione non può essere ef
 $MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Questa anomalia non può essere risolta fino a quando non saranno risolte tutte le anomalie dipendenti. Chiedi all\'amministratore di sistema l\'accesso al progetto se non vedi alcuna anomalia dipendente.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relazione non trovata.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Accesso negato: l\'anomalia %1$d richiede un livello di accesso più alto.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Un\'anomalia non può essere relazionata con sè stessa.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Un\'anomalia non può essere relazionata con sé stessa.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Il codice di convalida inserito non è corretto.  Riprova di nuovo.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funzione non disponibile.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'È possibile eseguire la procedura di recupero password solo per gli account che hanno indicato un indirizzo email';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'I dati inseriti e/o inviati non corrispondono ad alcun utente registrato.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Codice di convalida (hash code) non valido.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Raggiunto il numero massimo di richieste di reset pendenti.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Non puoi cancellare o ridurre il livello di accesso nell\'unico amministratore rimasto a del sistema. Per effettuare questa azione, prima, devi creare un altra utenza di amministrazione.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Non puoi cancellare o ridurre il livello di accesso nell\'unico amministratore rimasto a del sistema. Per effettuare questa azione, prima, devi creare un\'altra utenza di amministrazione.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Errore nella redirezione della pagina, assicurati non ci siani spazi fuori dal blocco PHP (&lt;?php ?&gt;) nel file config_inc.php o nei file custom_*.php';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'L\'etichetta "%1$s" non esiste.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Un\'etichetta chiamata "%1$s" esiste già.';
@@ -1405,7 +1405,7 @@ $s_dropzone_cancel_upload_confirmation = 'Sei sicuro di voler annullare questo c
 $s_dropzone_remove_file = 'Rimuovi file';
 $s_dropzone_max_files_exceeded = 'Non puoi più caricare altri file.';
 $s_dropzone_not_supported = 'Dropzone.js non supporta vecchie versioni di browser!';
-$s_dropzone_multiple_files_too_big = 'I seguenti file:{{files}}superano la dimensione massima consentita ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'I seguenti file superano la dimensione massima consentita ({{maxFilesize}} MiB):{{files}}';
 $s_save = 'Salva';
 $s_reset = 'Reimposta';
 $s_persist = 'Persistono';

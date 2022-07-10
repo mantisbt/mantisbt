@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Luxembourgish (Lëtzebuergesch)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -95,7 +95,7 @@ $s_description_updated = 'Beschreiwung aktualiséiert';
 $s_additional_information_updated = 'Zousatzinformatioun aktuliséiert';
 $s_file_added = 'Fichier derbäigesat';
 $s_file_deleted = 'Fichier geläscht';
-$s_bug_deleted = 'Problem geläscht';
+$s_bug_deleted = 'Probleem geläscht';
 $s_make_private = 'Privat maachen';
 $s_make_public = 'Ëffentlech maachen';
 $s_create_new_project_link = 'Neie Projet uleeën';
@@ -242,7 +242,7 @@ $s_set_configuration_option_action_edit = 'Optioun vun der Konfiguratioun änner
 $s_show_all_complex = 'Wäert fir all "%1$s" Optioune weisen';
 $s_plugin = 'Plugin';
 $s_plugin_description = 'Beschreiwung';
-$s_plugin_problem_description = 'Beschreiwung vum Problem';
+$s_plugin_problem_description = 'Beschreiwung vum Probleem';
 $s_plugin_author = 'Auteur: %1$s';
 $s_plugin_url = 'Internetsite:';
 $s_plugin_priority = 'Prioritéit';
@@ -277,7 +277,7 @@ $s_name = 'Numm';
 $s_delete_version_button = 'Versioun läschen';
 $s_edit_project_version_title = 'Versioun vum Projet änneren';
 $s_update_version_button = 'Versioun aktualiséieren';
-$s_obsolete = 'Vereelst';
+$s_obsolete = 'Vereelzt';
 $s_notify_user = 'Benotzer vun dëser Ännerung informéieren';
 $s_edit_user_title = 'Benotzer änneren';
 $s_reset_password_button = 'Passwuert zrécksetzen';
@@ -405,6 +405,7 @@ $MANTIS_ERROR[ERROR_SQL] = 'SQL-Feeler entdeckt.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Et gëtt schonn e ¨Projet mat deem Numm.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Net valabele Wäert fir \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Dëse Benotzerkont ass gespaart. Dir däerft déi ugefroten Operatioun net maache bis d\'Spär um Benotzerkont opgehuewen ass.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'Numm vum Fichier "%1$s" ass ze laang.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Notiz net fonnt';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projet "%1$s" net fonnt.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Benotzer mam Numm "%1$s" net fonnt.';

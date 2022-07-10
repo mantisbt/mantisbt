@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "https://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
 %BOOK_ENTITIES;
 ]>
@@ -200,7 +200,7 @@
 
 								<listitem>
 									<para><emphasis>Fileinfo</emphasis> -
-										Required for file attachments and most of the plugins
+										required for file attachments and most of the plugins
 									</para>
 									<para>Without this extension, file attachment
 										previews and downloads do not work
@@ -215,10 +215,23 @@
 									(see <xref linkend="admin.auth.ldap" />).
 								</para></listitem>
 
+								<listitem><para><emphasis>zlib</emphasis> -
+									required to enable output compression
+									(see <xref linkend="admin.config.speed" />).
+								</para></listitem>
+
 							</itemizedlist></listitem>
 						</varlistentry>
 
 					</variablelist>
+					<note>
+						<para>
+							You can check which PHP modules are installed by running
+							<literal>php -m</literal> on the command line,
+							or by using the <literal>php_info()</literal>
+							function in a PHP script.
+						</para>
+					</note>
 				</listitem>
 
 				<listitem>
@@ -312,7 +325,7 @@
 							<row>
 								<entry>PHP</entry>
 								<entry>PHP</entry>
-								<entry>5.5.x</entry>
+								<entry>7.0</entry>
 								<entry>7.2 or later</entry>
 								<entry>See above for PHP extensions</entry>
 							</row>
@@ -373,12 +386,17 @@
 
 			<itemizedlist>
 				<listitem><para>Firefox</para></listitem>
-				<listitem><para>Internet Explorer 11</para></listitem>
 				<listitem><para>Edge</para></listitem>
 				<listitem><para>Chrome</para></listitem>
 				<listitem><para>Safari</para></listitem>
 				<listitem><para>Opera</para></listitem>
 			</itemizedlist>
+
+			<note>
+				<para>Support for <emphasis>Internet Explorer 11</emphasis>
+					ended with release 2.22.0.
+				</para>
+			</note>
 		</section>
 	</section>
 
@@ -456,7 +474,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 
 		<para>Once that is done, execute the installation script.
 			From your web browser, access
-			<programlisting>http://yoursite/mantisbt/admin/install.php</programlisting>
+			<programlisting>https://yoursite/mantisbt/admin/install.php</programlisting>
 			The installation procedure will go through the following steps:
 		</para>
 
@@ -631,7 +649,7 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 			<listitem>
 				<para>Execute the upgrade script.
 					From your web browser, access
-					<programlisting>http://yoursite/mantisbt-NEW/admin/install.php</programlisting>
+					<programlisting>https://yoursite/mantisbt-NEW/admin/install.php</programlisting>
 					where <emphasis>mantisbt-NEW</emphasis> is the name of the
 					directory where the new release was extracted
 				</para>
@@ -801,7 +819,7 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 			<listitem>
 				<para>Create a new Administrator account
 				</para>
-				<para>Go to <emphasis>Manage &gt; Manage Users</emphasis>
+				<para>Go to <emphasis>Manage &gt; Users</emphasis>
 					and create a new account with 'administrator'
 					access level.
 				</para>
@@ -815,7 +833,7 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 			<listitem>
 				<para>Create a new Project
 				</para>
-				<para>Go to <emphasis>Manage &gt; Manage Projects</emphasis>
+				<para>Go to <emphasis>Manage &gt; Projects</emphasis>
 					and create a new project
 				</para>
 			</listitem>
@@ -907,13 +925,11 @@ mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database name&gt; &lt; &lt;input
 			</para>
 
 			<para>You can also perform both of these tasks using
-				<ulink url="http://www.phpmyadmin.net/">phpMyAdmin</ulink>
+				<ulink url="https://www.phpmyadmin.net/">phpMyAdmin</ulink>
 			</para>
 
 			<para>A good idea is to make a backup script and run it regularly
-				through cron or a task scheduler (for Windows see
-				<ulink url="http://www.wincron.com/">WinCron</ulink>
-				).
+				through cron or a task scheduler.
 				Using the current date in the filename can prevent overwriting and
 				make cataloguing easier.
 			</para>
@@ -921,13 +937,18 @@ mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database name&gt; &lt; &lt;input
 			<para>References and useful links:
 				<itemizedlist>
 					<listitem><para>
-						<ulink url="http://dev.mysql.com/doc/refman/5.1/en/mysqlhotcopy.html">
-							mysqlhotcopy documentation
+						<ulink url="https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html">
+							mysqldump documentation
 						</ulink></para>
 					</listitem>
 					<listitem><para>
-						<ulink url="http://sourceforge.net/projects/automysqlbackup/">
-							automysqlbackup script
+						<ulink url="https://www.percona.com/software/mysql-database/percona-xtrabackup">
+							Percona XtraBackup
+						</ulink></para>
+					</listitem>
+					<listitem><para>
+						<ulink url="https://sourceforge.net/projects/automysqlbackup/">
+							AutoMySQLBackup  script
 						</ulink></para>
 					</listitem>
 				</itemizedlist>

@@ -279,7 +279,7 @@ $s_reset_request_admin_msg = 'Your password has been reset. Please visit the fol
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and e-mail address for your account, we will now have sent a confirmation message to that e-mail address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
-$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_feedback = 'The following issue requires FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
 $s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
 $s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
@@ -667,7 +667,7 @@ $s_rss = 'RSS';
 # manage_overview_page
 $s_site_information = 'Site Information';
 $s_mantis_version = 'MantisBT Version';
-$s_schema_version = 'Schema Version';
+$s_schema_version = 'Database Schema Version';
 $s_site_path = 'Site Path';
 $s_core_path = 'Core Path';
 $s_plugin_path = 'Plugin Path';
@@ -692,18 +692,18 @@ $s_default_filter = 'Default Filter';
 $s_create_filter_link = 'Create Permalink'; # Permalink = Permanent Link
 $s_create_short_link = 'Create Short Link';
 $s_filter_permalink = 'Following is a permanent link to the currently configured filter:';
-$s_manage_users_link = 'Manage Users';
-$s_manage_projects_link = 'Manage Projects';
-$s_manage_custom_field_link = 'Manage Custom Fields';
-$s_manage_global_profiles_link = 'Manage Global Profiles';
-$s_manage_plugin_link = 'Manage Plugins';
+$s_manage_users_link = 'Users';
+$s_manage_projects_link = 'Projects';
+$s_manage_custom_field_link = 'Custom Fields';
+$s_manage_global_profiles_link = 'Global Profiles';
+$s_manage_plugin_link = 'Plugins';
 $s_permissions_summary_report = 'Permissions Report';
-$s_manage_config_link = 'Manage Configuration';
+$s_manage_config_link = 'Configuration';
 $s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'E-mail Notifications';
 $s_manage_workflow_config = 'Workflow Transitions';
 $s_manage_workflow_graph = 'Workflow Graph';
-$s_manage_tags_link = 'Manage Tags';
+$s_manage_tags_link = 'Tags';
 $s_create_new_account_link = 'Create New Account';
 $s_projects_link = 'Projects';
 $s_documentation_link = 'Documentation';
@@ -789,6 +789,7 @@ $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_limit_view_unless_threshold_option = 'View other users\' issues (if not set, access will be limited to issues reported, handled, or monitored by the user)';
+$s_export_issues = 'Export issues';
 
 # manage_config_revert_page
 $s_config_delete_sure = 'Are you sure you want to delete the settings for %1$s in project %2$s?';
@@ -1069,7 +1070,7 @@ $s_project_user_added_msg = 'Successfully added user to project.';
 $s_project_removed_user_msg = 'Successfully removed user from project.';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = 'Are you sure you wish to remove user "%1$s" from project "%2$s"?';
+$s_remove_user_sure_msg = 'Are you sure you wish to remove user "%1$s" from project(s) "%2$s"?';
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
@@ -1345,7 +1346,7 @@ $s_changelog_empty_manager = 'No Change Log information available.  Issues are i
 
 # Roadmap
 $s_roadmap = 'Roadmap';
-$s_resolved_progress = '%1$d of %2$d issue(s) resolved. Progress (%3$d%%).';
+$s_resolved_progress = '%1$d of %2$d issue(s) resolved';
 $s_roadmap_empty = 'No Roadmap information available';
 $s_roadmap_empty_manager = 'No Roadmap information available.  Issues are included once projects have versions and issues have "target version" set.';
 
@@ -1616,6 +1617,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected. You are not
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed. File is not readable by MantisBT. Please check the project settings.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed. This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'File name "%1$s" is too long.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%1$s) was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used. Please go back and select another one.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'That email is already being used. Please go back and select another one.';
@@ -1670,7 +1672,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Authentication Failed.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP Extension Not Loaded.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'Failed to set minimum TLS version on LDAP server.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'Cannot initiate StartTLS on LDAP server.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Database connection failed. Error received from database was #%1$d: %2$s.';
@@ -1678,7 +1679,7 @@ $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Database query failed. Error received fr
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Database selection failed. Error received from database was #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = 'Database identifier "%1$s" is too long. Try reducing the size of g_db_table_prefix/suffix';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exists.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'No copy action was specified.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Category "%1$s" not found for project "%2$s".';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'This Category cannot be deleted, because it is defined as "Default Category For Moves".';
@@ -1747,6 +1748,8 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity lim
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Field "%1$s" must be shorter or equal to %2$d characters long.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'The file specified in $g_log_destination "%s" is not writable.';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Added user does not have sufficient access rights to monitor this issue.';
+
 
 # dropzone.js - placeholders format is defined by the library
 $s_dropzone_default_message = 'Attach files by dragging & dropping, selecting or pasting them.';
@@ -1761,7 +1764,8 @@ $s_dropzone_remove_file = 'Remove file';
 $s_dropzone_remove_file_confirmation = '';
 $s_dropzone_max_files_exceeded = 'You cannot upload any more files.';
 $s_dropzone_not_supported = 'Dropzone.js does not support older browsers!';
-$s_dropzone_multiple_files_too_big = 'The following files:{{files}}exceed the maximum allowed file size ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'The following files exceed the maximum allowed file size ({{maxFilesize}} MiB):{{files}}';
+$s_dropzone_multiple_filenames_too_long = 'The following filenames are too long (max {{maxFilenameLength}} characters):{{files}}';
 
 # Generic actions, short names
 $s_save = 'Save';

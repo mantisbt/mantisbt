@@ -25,15 +25,15 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Traditional Chinese (中文（繁體）‎)
+/** Traditional Chinese (中文（繁體）)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -53,7 +53,9 @@
  * @author Sanmosa
  * @author Simon Shek
  * @author Smarky
+ * @author Weather Top Wizard
  * @author Wehwei
+ * @author Winston Sung
  * @author Wwycheuk
  * @author Xiplus
  */
@@ -525,12 +527,12 @@ $s_lost_password_confirm_hash_OK = '系統已接受您的確認，請更新你�
 $s_open_and_assigned_to_me_label = '尚未處理且分配給我的問題：';
 $s_open_and_reported_to_me_label = '尚未處理且由我回報的問題：';
 $s_newer_news_link = '較新的最新消息';
-$s_older_news_link = '較舊的最新消息';
+$s_older_news_link = '較早的最新消息';
 $s_archives = '封存';
 $s_rss = 'RSS';
 $s_site_information = '網站資訊';
 $s_mantis_version = 'MantisBT 版本';
-$s_schema_version = '資料庫版本';
+$s_schema_version = '資料庫架構版本';
 $s_site_path = '網站路徑';
 $s_core_path = '核心路徑';
 $s_plugin_path = '套件路徑';
@@ -635,6 +637,7 @@ $s_readonly_status = '此狀態之後不允許修改問題';
 $s_reopen_status = '重新開啟問題後的預設狀態';
 $s_reopen_resolution = '重新開啟問題後的分析';
 $s_limit_view_unless_threshold_option = '檢視其他使用者的問題（若未設定，存取會限制於由使用者回報、處理、或監視的問題）';
+$s_export_issues = '匯出問題';
 $s_config_delete_sure = '您確定要刪除用於專案%2$s的%1$s設定？';
 $s_delete_config_button = '刪除設定值';
 $s_configuration_report = '設置報表';
@@ -1047,7 +1050,7 @@ $s_changelog = '版本更動紀錄';
 $s_changelog_empty = '目前尚無修改日誌資訊';
 $s_changelog_empty_manager = '無可用的版本更動資訊。 專案有設定版本且問題的解決狀態為 "已修正於版本" 時會顯示問題。';
 $s_roadmap = '版本規劃';
-$s_resolved_progress = '%1$d / %2$d 問題已解決。 進度 (%3$d%%)。';
+$s_resolved_progress = '%1$d / %2$d 問題已解決。';
 $s_roadmap_empty = '無可用的版本規劃資訊';
 $s_roadmap_empty_manager = '無可用的版本規劃資訊。 當專案有設定版本且問題有設定 "目標版本" 時會顯示問題。';
 $s_http_auth_realm = 'MantisBT 登入';
@@ -1275,6 +1278,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '此帳號目前被保護。直到帳�
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '拒絕存取。';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '檔案上傳失敗，MantisBT 無法讀取檔案。 請檢查該專案設定。';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '檔案上傳失敗。 可能因檔案大小超過目前 PHP 所允許的範圍。';
+$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = '檔案名稱「%1$s」太長。';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '缺少頁面 (%1$s) 所須的必要的參數。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '此使用者帳號已經存在。 請返回上一頁選擇其他的帳號名稱。';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = '此電子郵件信箱已被使用，請返回上頁重新選擇。';
@@ -1329,7 +1333,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 身份驗證失敗。';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '連線至 LDAP 伺服器失敗。';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = '更新 LDAP 記錄失敗。';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = '找不到 LDAP 使用者記錄。';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = '未載入 LDAP 擴充套件。';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = '在 LDAP 伺服器上設定最低 TLS 版本失敗。';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = '無法在 LDAP 伺服器上初始化 StartTLS。';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = '資料庫連線失敗，資料庫的錯誤訊息為 #%1$d: %2$s。';
@@ -1337,7 +1340,7 @@ $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = '資料庫查詢失敗，資料庫查詢 
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = '選擇資料庫失敗。資料庫的錯誤訊息為 #%1$d: %2$s。';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = '資料庫識別碼 "%1$s" 太長，請試著縮短 g_db_table_prefix/suffix 的大小';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '相同名稱的類別已存在。';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '沒有指定任何複製動作。';
+$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = '沒有指定任何複製動作。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '查無此類別。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = '"%2$s" 專案查無 "%1$s" 類別。';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = '此類別無法刪除，因為此類別被設定為 "移動預設的類別"。';
@@ -1406,6 +1409,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已達到在 %d 秒内允許 %d 次事
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '欄位 "%1$s" 必須小於或等於 %2$d 字元長度。';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API 密鑰名稱 "%s" 已被使用。請返回重新選擇。';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '在 $g_log_destination「%s」指定的檔案不可寫入。';
+$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = '已添加的使用者沒有足夠的存取權限來監視此問題。';
 $s_dropzone_default_message = '透過拖放、選擇、或是貼上來附加檔案。';
 $s_dropzone_fallback_message = '您的瀏覽器不支援托放檔案上傳功能。';
 $s_dropzone_file_too_big = '檔案太大（{{filesize}} MiB）。最大大小：{{maxFilesize}} MiB。';
@@ -1416,7 +1420,8 @@ $s_dropzone_cancel_upload_confirmation = '您確定要取消此次上傳？';
 $s_dropzone_remove_file = '移除檔案';
 $s_dropzone_max_files_exceeded = '您無法上傳更多的檔案。';
 $s_dropzone_not_supported = 'Dropzone.js 不支援較舊的瀏覽器！';
-$s_dropzone_multiple_files_too_big = '已下檔案：{{files}}超過最大允許檔案大小（{{maxFilesize}} MiB）';
+$s_dropzone_multiple_files_too_big = '以下檔案超過最大允許檔案大小（{{maxFilesize}} MiB）：{{files}}';
+$s_dropzone_multiple_filenames_too_long = '以下檔案名稱太長（最多 {{maxFilenameLength}} 個字元）：{{files}}';
 $s_save = '儲存';
 $s_reset = '重設';
 $s_persist = '固定';
@@ -1431,7 +1436,7 @@ $s_make_default = '設定為預設值';
 $s_clear_default = '清除預設';
 $s_print = '列印';
 $s_jump = '前往';
-$s_change = '更改';
+$s_change = '變更';
 $s_go_back = '返回';
 $s_proceed = '繼續';
 $s_move = '移動';
