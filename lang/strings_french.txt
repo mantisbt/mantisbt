@@ -1350,7 +1350,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Échec d’identification par LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Échec de connexion au serveur LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Échec de mise à jour de l’enregistrement LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Enregistrement d’utilisateur LDAP introuvable.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extension LDAP non chargée.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'Échec lors de la définition de la version minimum de TLS sur le serveur LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'Impossible de lancer StartTLS sur le serveur LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Échec de connexion à la base de données. L’erreur renvoyée était #%1$d : %2$s.';

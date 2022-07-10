@@ -1288,7 +1288,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP оторизацията неус�
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Връзката с LDAP сървъра неуспешна';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Обновяването на LDAP записа неуспешно.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Неоткрит LDAP запис за потребителя.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Разширението LDAP не е заредено';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Връзката с базата данни неуспешна. Върната грешка #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Търсенето в базата неуспешно. Върната грешка #%1$d: %2$s за заявката: %3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Изборът на базата данни неуспешен. Върната грешка #%1$d: %2$s';

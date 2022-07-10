@@ -1187,7 +1187,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentikaatio epäonnistui';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-palvelinyhteys epäonnistui.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP-tietueen päivittäminen epäonnistui.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-käyttäjätietoja ei löytynyt.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP-laajennusta ei ladattu.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Tietokantayhteys epäonnistui. Tietokanta palautti virheen #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Tietokantakysely epäonnistui. Tietokanta palautti virheen #%1$d: %2$s kyselyllä: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Tietokantavalinta epäonnistui. Tietokanta palautti virheen #%1$d: %2$s.';

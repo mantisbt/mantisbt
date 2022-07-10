@@ -1146,7 +1146,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Autentificarea LDAP eșuată.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Conexiunea cu serverul LDAP eșuată';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Actualizarea înregistrării LDAP a eșuat.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Înregistrarea utilizatorului LDAP nu este găsită.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extensia LDAP nu este încărcată.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Conectarea la baza de date a eșuat. Eroarea primită de la baza de date a fost # %1$d:  %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Interogarea bazei de date a eșuat. Eroare primită de la baza de date a fost # %1$d :  %2$s pentru interogarea:  %3$s .';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Selectarea bazei de date a eșuat. Eroarea primită de la baza de date a fost #%1$d :  %2$s.';

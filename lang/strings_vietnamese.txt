@@ -1121,7 +1121,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Xác thực LDAP thất bại';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Kết nối máy chủ LDAP thất bại';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Cập nhật hồ sơ LDAP thất bại';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Không tìm thấy hồ sơ người dùng LDAP';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP mở rộng không được nạp';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Kết nối cơ sở dữ liệu không thành công. Lỗi nhận được từ cơ sở dữ liệu đã được #%1$d:%2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Truy vấn cơ sở dữ liệu không thành công. Lỗi nhận được từ cơ sở dữ liệu đã được #%1$d: %2$s cho các truy vấn: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Lựa chọn cơ sở dữ liệu đã thất bại. Lỗi đã nhận được từ cơ sở dữ liệu được #%1$d: %2$s';

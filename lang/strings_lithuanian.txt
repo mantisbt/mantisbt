@@ -1144,7 +1144,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP autentifikavimo klaida';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Prisijungti prie LDAP serverio nepavyko';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Pakeisti LDAP įrašo nepavyko.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP vartotojo įrašas nerastas.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP išplėtimas nepakrautas.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Prisijungti prie duomenų bazės nepavyko. Duomenų bazės klaida #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Nepavyko įvykdyti užklausos.  Duomenų bazės klaida #%1$d: %2$s užklausai: %3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Pasirinkti duomenų bazės nepavyko.  Duomenų bazės klaida #%1$d: %2$s';

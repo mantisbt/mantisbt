@@ -1314,7 +1314,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Autentizace se nezdařila';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nezdařila se komunikace s LDAP serverem';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Chyba při úpravě záznamu.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Nenalezen záznam uživatele.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extenze LDAP není načtena.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Připojení k databázi selhalo. Chyba přijatá z databáze byla #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Databázový dotaz selhal. Chyba přijatá z databáze zní #%1$d: %2$s pro dotaz %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Výběr databáze se nezdařil. Chyba přijatá z databáze zní #%1$d: %2$s.';

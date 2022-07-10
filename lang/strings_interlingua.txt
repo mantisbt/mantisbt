@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit https://translatewiki.net  **
+ * ** To improve a translation please visit http://translatewiki.net   **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,12 +33,11 @@
 /** Interlingua (interlingua)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit https://translatewiki.net
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
- * @author Dregad
  * @author Macofe
  * @author McDutchie
  */
@@ -220,7 +219,7 @@ Si tu requestava iste verification, visita le sequente URL pro cambiar tu contra
 $s_reset_request_admin_msg = 'Tu contrasigno ha essite reinitialisate. Per favor, visita le sequente URL pro definir un nove:';
 $s_reset_request_in_progress_msg = 'Si tu forniva le correcte nomine de usator e adresse de e-mail pro tu conto, nos te ha ora inviate un message de confirmation a iste adresse de e-mail. Quando tu recipe le message, seque le instructiones in illo pro cambiar le contrasigno de tu conto.';
 $s_email_notification_title_for_status_bug_new = 'Le sequente problema es ora in stato NOVE (de novo)';
-$s_email_notification_title_for_status_bug_feedback = 'Le sequente problema require COMMENTARIO.';
+$s_email_notification_title_for_status_bug_feedback = 'Le sequente problema require tu COMMENTARIO.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Le sequente problema ha essite RECOGNOSCITE.';
 $s_email_notification_title_for_status_bug_confirmed = 'Le sequente problema ha essite CONFIRMATE.';
 $s_email_notification_title_for_status_bug_assigned = 'Le sequente problema ha essite ASSIGNATE.';
@@ -468,8 +467,6 @@ $s_bugnote_updated_msg = 'Le nota ha essite actualisate con successo...';
 $s_last_edited = 'Ultime modification:';
 $s_hide_content = 'Celar contento';
 $s_show_content = 'Revelar contento';
-$s_file_icon_description = 'icone de file %1$s';
-$s_unknown_file_extension = 'incognite';
 $s_webmaster_contact_information = 'Contacta le <a href="mailto:%1$s" title="Contactar le administrator del sito per e-mail.">administrator</a> pro adjuta';
 $s_total_queries_executed = 'Total de consultas executate: %1$d';
 $s_unique_queries_executed = 'Consultas unic executate: %1$d';
@@ -515,7 +512,7 @@ $s_archives = 'Archivos';
 $s_rss = 'RSS';
 $s_site_information = 'Information del sito';
 $s_mantis_version = 'Version de MantisBT';
-$s_schema_version = 'Version del schema del base de datos';
+$s_schema_version = 'Version de Schema';
 $s_site_path = 'Cammino del sito';
 $s_core_path = 'Cammino del nucleo';
 $s_plugin_path = 'Cammino de plug-in';
@@ -534,18 +531,18 @@ $s_default_filter = 'Filtro predefinite';
 $s_create_filter_link = 'Crear permaligamine';
 $s_create_short_link = 'Crear ligamine curte';
 $s_filter_permalink = 'Ecce un ligamine permanente al filtro actualmente configurate:';
-$s_manage_users_link = 'Usatores';
-$s_manage_projects_link = 'Projectos';
-$s_manage_custom_field_link = 'Campos personalisate';
-$s_manage_global_profiles_link = 'Profilos global';
-$s_manage_plugin_link = 'Plug-ins';
+$s_manage_users_link = 'Gerer usatores';
+$s_manage_projects_link = 'Gerer projectos';
+$s_manage_custom_field_link = 'Gerer campos personalisate';
+$s_manage_global_profiles_link = 'Gerer profilos global';
+$s_manage_plugin_link = 'Gerer plug-ins';
 $s_permissions_summary_report = 'Reporto de permissiones';
-$s_manage_config_link = 'Configuration';
+$s_manage_config_link = 'Gerer configuration';
 $s_manage_threshold_config = 'Limines de operation';
 $s_manage_email_config = 'Notificationes per e-mail';
 $s_manage_workflow_config = 'Transitiones de operation';
 $s_manage_workflow_graph = 'Graphico de fluxo de travalio';
-$s_manage_tags_link = 'Etiquettas';
+$s_manage_tags_link = 'Gerer etiquettas';
 $s_create_new_account_link = 'Crear nove conto';
 $s_projects_link = 'Projectos';
 $s_documentation_link = 'Documentation';
@@ -620,7 +617,6 @@ $s_readonly_status = 'Stato in que un problema deveni immodificabile';
 $s_reopen_status = 'Stato assignate a un problema reaperite';
 $s_reopen_resolution = 'Resolution assignate a un problema reaperite';
 $s_limit_view_unless_threshold_option = 'Vider le problemas de altere usatores (si non definite, le accesso essera limitate al problemas reportate, gerite, o sequite per le usator)';
-$s_export_issues = 'Exportar problemas';
 $s_config_delete_sure = 'Es tu secur de voler deler le configuration pro %1$s in le projecto %2$s?';
 $s_delete_config_button = 'Deler configuration';
 $s_configuration_report = 'Reporto de configuration';
@@ -640,10 +636,7 @@ $s_show_all_complex = 'Monstrar le valores de tote le optiones "%1$s"';
 $s_plugin = 'Plug-in';
 $s_plugins_installed = 'Plug-ins installate';
 $s_plugins_available = 'Plug-ins disponibile';
-$s_plugins_missing = 'Plug-ins mancante o invalide';
-$s_plugins_missing_description = 'Le plug-ins in le lista sequente es registrate, ma lor codice fonte non pote esser trovate in "%s" ni cargate a partir de la.<br>Tenta reinstallar los o remover los.';
 $s_plugin_description = 'Description';
-$s_plugin_problem_description = 'Description del problema';
 $s_plugin_author = 'Autor: %1$s';
 $s_plugin_url = 'Sito web:';
 $s_plugin_depends = 'Dependentias';
@@ -654,20 +647,12 @@ $s_plugin_actions = 'Actiones';
 $s_plugin_install = 'Installar';
 $s_plugin_upgrade = 'Actualisar';
 $s_plugin_uninstall = 'Disinstallar';
-$s_plugin_manual_fix = 'Intervention manual necessari';
 $s_plugin_uninstall_message = 'Es tu secur de voler disinstallar le plug-in "%1$s"?';
-$s_plugin_remove_message = 'Es tu secur de voler remover le plug-in invalide o mancante "%1$s"?';
 $s_plugin_key_label = 'Clave:';
 $s_plugin_key_met = 'plug-in preste';
 $s_plugin_key_unmet = 'dependentias non satisfacite';
 $s_plugin_key_dated = 'dependentias obsolete';
 $s_plugin_key_upgrade = 'actualisation necessari';
-$s_plugin_invalid_description = 'Plug-in non valide';
-$s_plugin_invalid_status_message = 'Le sequente proprietates obligatori non es definite in le classe del plug-in: %s.';
-$s_plugin_missing_description = 'Plug-in mancante';
-$s_plugin_missing_status_message = 'Le plug-in es installate in le base de datos de Mantis, ma non poteva esser cargate.';
-$s_plugin_missing_class_description = 'Manca le classe de base del plug-in';
-$s_plugin_missing_class_status_message = 'Un directorio pro iste plug-in ha essite trovate, ma il non ha codice de plug-in correspondente in illo. Assecura te que le nomine del directorio corresponde al nomine de base del plug-in (distingue inter majusculas e minusculas).';
 $s_project_added_msg = 'Le projecto ha essite addite con successo...';
 $s_category_added_msg = 'Le categoria ha essite addite con successo...';
 $s_category_deleted_msg = 'Le categoria ha essite delite con successo...';
@@ -809,7 +794,7 @@ $s_add_file = 'Adder file';
 $s_project_document_updated = 'Projecto actualisate con successo.';
 $s_project_user_added_msg = 'Usator addite al projecto con successo.';
 $s_project_removed_user_msg = 'Usator removite del projecto con successo.';
-$s_remove_user_sure_msg = 'Es tu secur de voler remover le usator "%1$s" del projecto(s) "%2$s"?';
+$s_remove_user_sure_msg = 'Es tu secur de voler remover le usator "%1$s" del projecto "%2$s"?';
 $s_remove_user_button = 'Remover usator';
 $s_remove_all_users_sure_msg = 'Es tu secur de voler remover tote le usatores de iste projecto?';
 $s_remove_all_users_button = 'Remover tote le usatores';
@@ -956,8 +941,8 @@ $s_bug_status_to_button = 'Cambiar stato in:';
 $s_reopen_bug_button = 'Reaperir';
 $s_attached_files = 'Files annexate';
 $s_publish = 'Publicar';
-$s_browser_does_not_support_audio = 'Tu navigator non supporta le etiquetta audio.';
-$s_browser_does_not_support_video = 'Tu navigator non supporta le etiquetta video.';
+$s_browser_does_not_support_audio = 'Tu navigator non supporta le etiquetta <tt>audio</tt>.';
+$s_browser_does_not_support_video = 'Tu navigator non supporta le etiquetta <tt>video</tt>.';
 $s_bug_view_title = 'Vider detalios del problema';
 $s_no_users_monitoring_bug = 'Nulle usator survelia iste problema.';
 $s_users_monitoring_bug = 'Usatores qui survelia iste problema';
@@ -1026,13 +1011,13 @@ $s_sponsorship_added = 'Sponsorisation addite';
 $s_sponsorship_updated = 'Sponsorisation actualisate';
 $s_sponsorship_deleted = 'Sponsorship delite';
 $s_sponsorship_paid = 'Sponsorisation pagate';
-$s_sponsorship_more_info = 'Plus information sur le sponsorisation';
+$s_sponsorship_more_info = 'Plus information super le sponsorisation';
 $s_sponsorship_total = 'Total sponsorisate';
 $s_changelog = 'Historia de modificationes';
 $s_changelog_empty = 'Nulle registro de modificationes disponibile';
 $s_changelog_empty_manager = 'Il non ha information disponibile del registro de cambiamentos. Problemas se include un vice que lor projecto ha versiones e se resolve per medio del marca "resolvite in version".';
 $s_roadmap = 'Planification';
-$s_resolved_progress = '%1$d de %2$d problema(s) resolvite';
+$s_resolved_progress = '%1$d de %2$d problema(s) resolvite. Progresso (%3$d%%).';
 $s_roadmap_empty = 'Nulle information sur versiones planificate disponibile';
 $s_roadmap_empty_manager = 'Nulle information sur versiones planificate es disponibile. Problemas se include un vice que lor projecto ha versiones e le problemas ha le parametro "version de destination" definite.';
 $s_http_auth_realm = 'Session MantisBT';
@@ -1078,8 +1063,6 @@ $s_update_readonly_issues = 'Actualisar problemas in lectura sol';
 $s_update_issue_status = 'Actualisar stato del problema';
 $s_set_view_status = 'Specificar le visibilitate pro un nove problema o nota';
 $s_update_view_status = 'Cambiar le visibilitate de un problema o nota existente';
-$s_view_issue_revisions = 'Vider le versiones del problema o nota';
-$s_drop_issue_revisions = 'Eliminar versiones del problema o nota';
 $s_set_sticky = 'Fixar / Disfixar un problema';
 $s_show_list_of_users_monitoring_issue = 'Monstrar lista de usatores que survelia un problema';
 $s_add_users_monitoring_issue = 'Adder surveliantes a un problema';
@@ -1180,7 +1163,7 @@ $s_show_all_tags = 'Totes';
 $s_time_tracking_billing_link = 'Sequimento de tempore';
 $s_time_tracking = 'Sequimento de tempore';
 $s_time_tracking_time_spent = 'Tempore dedicate:';
-$s_time_tracking_get_info_button = 'Obtener information sur le sequimento de tempore';
+$s_time_tracking_get_info_button = 'Obtener information super le sequimento de tempore';
 $s_time_tracking_cost_per_hour = 'Costo per hora';
 $s_time_tracking_cost_per_hour_label = 'Costo per hora:';
 $s_time_tracking_cost = 'Costo';
@@ -1260,7 +1243,6 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Iste conto es protegite. Tu non ha le 
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accesso refusate.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Le incargamento del file ha fallite. Le file non es legibile per MantisBT. Per favor verifica le configuration del projecto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Le incargamento del file ha fallite. Isto es probabilemente proque le file excedeva le grandor permittite per iste installation de PHP.';
-$MANTIS_ERROR[ERROR_FILE_NAME_TOO_LONG] = 'Le nomine de file “%1$s” es troppo longe.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un parametro requirite per iste pagina (%1$s) non esseva trovate.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Iste nomine de usator es ja in uso. Per favor retorna e selige un altere.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Iste adresse de e-mail es ja in uso. Per favor retorna e selige un altere.';
@@ -1305,7 +1287,6 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Tu non pote marcar un problema como d
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Version del problema non trovate.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Campo personalisate non trovate.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Isto e un nomine duplicate.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_INVALID] = 'Le nomine de campo personalisate "%1$s" non es valide: commas non es permittite. Consulta le section "Localizing Custom Field Names" in le guida de administration pro un solution alternative.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Al minus un projecto usa ancora iste campo.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor invalide pro campo "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definition de campo personalisate invalide.';
@@ -1315,15 +1296,12 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Authentication LDAP fallite.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Connexion al servitor LDAP fallite.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Actualisation de registro LDAP fallite.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Registro de usator LDAP non trovate.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extension LDAP non cargate.';
-$MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'Impossibile definir le version minime de TLS sur le servitor LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'Impossibile initiar StartTLS sur le servitor LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Connexion al base de datos fallite. Le error recipite del base de datos esseva #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Consulta del base de datos fallite. Le error recipite del base de datos esseva #%1$d: %2$s pro le consulta: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Selection de base de datos fallite. Le error recipite del base de datos esseva #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = 'Le identificator del base de datos "%1$s" es troppo longe. Essaya reducer le dimension de g_db_table_prefix/suffix';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Existe ja un categoria con iste nomine.';
-$MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Nulle action de copia esseva specificate.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nulle action de copia esseva specificate.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria non trovate.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria "%1$s" non trovate pro le projecto "%2$s".';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Iste categoria non pote esser delite perque illo es definite como "categoria predefinite pro displaciamentos".';
@@ -1392,7 +1370,6 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Tu ha attingite le limite de %d actiones 
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Le campo "%1$s" debe haber %2$d characteres o minus.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Le nomine de token API "%s" es ja in uso. Per favor retorna e selige un altere.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Le file specificate in $g_log_destination "%s" non es scribibile.';
-$MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Le usator addite non ha derectos de accesso sufficiente pro surveliar iste problema.';
 $s_dropzone_default_message = 'Pro annexar files, tu pote traher & deponer, seliger o collar.';
 $s_dropzone_fallback_message = 'Tu navigator non supporta le incargamento de files per traher e deponer.';
 $s_dropzone_file_too_big = 'Le file es troppo grande ({{filesize}} MiB). Dimension maxime: {{maxFilesize}} MiB.';
@@ -1403,8 +1380,7 @@ $s_dropzone_cancel_upload_confirmation = 'Es tu secur de voler cancellar iste in
 $s_dropzone_remove_file = 'Remover file';
 $s_dropzone_max_files_exceeded = 'Tu non pote incargar plus files.';
 $s_dropzone_not_supported = 'Dropzone.js non supporta navigatores ancian!';
-$s_dropzone_multiple_files_too_big = 'Le sequente files excede le dimension maxime de files ({{maxFilesize}} MiB):{{files}}';
-$s_dropzone_multiple_filenames_too_long = 'Le sequente nomines de file es troppo longe (max. {{maxFilenameLength}} characteres):{{files}}';
+$s_dropzone_multiple_files_too_big = 'Le sequente files:{{files}}excede le dimension maxime de files ({{maxFilesize}} MiB)';
 $s_save = 'Salveguardar';
 $s_reset = 'Reinitialisar';
 $s_persist = 'Persister';

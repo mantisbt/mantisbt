@@ -1185,7 +1185,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Fracàs d\'indentificacion per LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Fracàs de connexion al servidor LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Fracàs de mesa a jorn de l\'enregistrament LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Enregistrament d\'utilizaire LDAP introbable.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'L\'extension LDAP es pas cargada.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Fracàs de connexion a la banca de donadas. L\'error renviada èra #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Fracàs de la requèsta de basa de donadas. L\'error renviada per la basa de donadas èra #%1$d: %2$s per la requèsta : %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Fracàs de la seleccion de la basa de donadas. L\'error renviada per la basa de donadas èra #%1$d: %2$s.';
