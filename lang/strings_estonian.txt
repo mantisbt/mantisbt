@@ -1106,7 +1106,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP autentimine ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP serveri ühendus ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP kirje uuendamine ebaõnnestus.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP kasutaja kirjet ei leitud.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP laiendus pole laetud.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Andmebaasi ühendus ebaõnnestus. Andmebaasist tagastatud viga #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Andmebaasi päring ebaõnnestus. Andmebaasist tagastatud viga #%1$d: %2$s päringule: %3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Andmebaasi valik ebaõnnestus.  Andmebaasist tagastatud viga #%1$d: %2$s';

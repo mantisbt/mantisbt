@@ -1104,7 +1104,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Nabigo ang Pagpapatotoo ng LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nabigo ang Pag-ugnay sa Serbidor ng LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Nabigo ang Pagsasapanahon ng Rekord ng LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Hindi natagpuan ang Rekord ng Tagagamit ng LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Hindi Naikarga ang Karugtong na pang-LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Nabigo ang pagkakaugnay sa kalipunan ng dato.  Ang kamaliang natanggap mula sa kalipunan ng dato ay #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Nabigo ang katanungang pangkalipunan ng dato.  Ang natanggap na kamalian mula sa kalipunan ng dato ay #%1$d: %2$s para sa katanungang: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Nabigo ang pagpili na pang-kalipunan ng dato.  Ang kamaliang natanggap mula sa kalipunan ng dato ay #%1$d: %2$s.';

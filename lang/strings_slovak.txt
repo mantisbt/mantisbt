@@ -1326,7 +1326,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Zlyhalo overenie totožnosti cez LDAP';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nenadviazala sa komunikácia s LDAP serverom';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Zlyhalo aktualizovanie záznamu cez LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Záznam užívateľa sa nenašiel.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP Rozšírenie nie je načítané.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'Nepodarilo sa nastaviť minimálnu verziu TLS na serveri LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'Nepodarilo sa spustiť StartTLS na serveri LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Zlyhalo pripojenie k databáze. Chyba databázy #%1$d: %2$s.';

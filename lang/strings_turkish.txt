@@ -1348,7 +1348,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Kimlik Doğrulama Başarısız.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Sunucu Bağlantısı Başarısız.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Kayıt Güncelleme başarısız.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Kullanıcı Kaydı Bulunamadı.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP Uzantısı Yüklenemedi.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'LDAP sunucusunda minimum TLS sürümü ayarlanamadı.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'LDAP sunusunda StartTLS başlatılamadı.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Veritabanı bağlantısı başarısız. Veritabanından gelen hata #%1$d: %2$s.';

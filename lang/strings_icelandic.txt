@@ -1270,7 +1270,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP staðfesting mistókst.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP tenging þjóns mistókst.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Uppfærsla gagna á LDAP mistókst.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-notandafærsla fannst ekki.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP-forritsviðbótinni er ekki hlaðið inn.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Tenging við gagnagrunn mistókst. Villa móttekin frá gagnagrunni var #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Fyrirspurn á gagnagrunni mistókst. Villa móttekin frá gagnagrunni vegna fyrirspurnar um #%1$d: %2$s var %3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Gagnagrunnsval mistókst. Villa móttekinn frá gagnagrunni var #%1$d: %2$s';

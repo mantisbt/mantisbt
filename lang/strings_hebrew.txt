@@ -1330,7 +1330,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'הזדהות LDAP נכשלה.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'קישור לשרת LDAP נכשל.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'עדכון רשומת LDAP נכשל.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'רשומת LDAP למשתמש לא נמצאה.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'הרחבת LDAP לא נטענה.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'הגדרת גרסת TLS מזערית בשרת LDAP כשלה.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'לא ניתן לאתחל StartTLS על שרת LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'קישור למסד הנתונים נכשל. התקבלה שגיאה ממסד הנתונים: #%1$d: %2$s.';

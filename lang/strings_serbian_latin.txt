@@ -1108,7 +1108,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Ne mogu da proverim identitet (LDAP).';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Ne mogu da se povežem sa serverom LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Ne mogu da ažuriram zapise LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Ne mogu da pronađem korisnički zapis LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Ne mogu da učitam proširenje LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Ne mogu da se povežem s bazom podataka. Od baze je dobijena greška #%1$d: %2$s #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Neispravan upit baze podataka. Od baze je dobijena greška #%1$d: %2$s za upit: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Ne mogu da izaberem bazu podataka. Od baze je dobijena greška #%1$d: %2$s.';

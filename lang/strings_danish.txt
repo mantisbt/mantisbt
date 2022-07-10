@@ -1272,7 +1272,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-godkendelse mislykkedes';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'forbindelse til LDAP-server mislykkedes';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Record Update mislykkedes.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record ikke fundet.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP-udvidelse ikke indlæst.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Databaseforbindelsen mislykkedes. Fejl, der er modtaget fra databasen er #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Database-forespørgslen mislykkedes. Fejl, der er modtaget fra databasen er #%1$d: %2$s for forespørgslen: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Valg af database mislykkedes. Fejl, der er modtaget fra databasen er #%1$d: %2$s.';

@@ -76,13 +76,7 @@ if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
 	die();
 }
 
-# Enforce PHP mbstring extension
-if( !extension_loaded( 'mbstring' ) ) {
-	echo '<strong>FATAL ERROR: PHP mbstring extension is not enabled.</strong><br />'
-		. 'MantisBT requires this extension for Unicode (UTF-8) support<br />'
-		. 'http://www.php.net/manual/en/mbstring.installation.php';
-	die();
-}
+ensure_php_extension_loaded( 'mbstring', 'for Unicode (UTF-8) support' );
 
 # Ensure that encoding is always UTF-8 independent from any PHP default or ini setting
 mb_internal_encoding( 'UTF-8' );
@@ -110,120 +104,10 @@ if( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
 }
 
-
-/**
- * Define an API inclusion function to replace require_once
- *
- * @param string $p_api_name An API file name.
- * @return void
- */
-function require_api( $p_api_name ) {
-	static $s_api_included;
-	global $g_core_path;
-	if( !isset( $s_api_included[$p_api_name] ) ) {
-		require_once( $g_core_path . $p_api_name );
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
-		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
-			$GLOBALS[$t_global_name] = $t_global_value;
-		}
-		$s_api_included[$p_api_name] = 1;
-	}
-}
-
-/**
- * Define an API inclusion function to replace require_once
- *
- * @param string $p_library_name A library file name.
- * @return void
- */
-function require_lib( $p_library_name ) {
-	static $s_libraries_included;
-
-	if( !isset( $s_libraries_included[$p_library_name] ) ) {
-		global $g_library_path;
-		$t_library_file_path = $g_library_path . $p_library_name;
-
-		if( file_exists( $t_library_file_path ) ) {
-			require_once( $t_library_file_path );
-		} else {
-			echo 'External library \'' . $t_library_file_path . '\' not found.';
-			exit;
-		}
-
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
-		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
-			$GLOBALS[$t_global_name] = $t_global_value;
-		}
-
-		$s_libraries_included[$p_library_name] = 1;
-	}
-}
-
-/**
- * Checks to see if script was queried through the HTTPS protocol
- * @return boolean True if protocol is HTTPS
- */
-function http_is_protocol_https() {
-	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
-		return strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) == 'https';
-	}
-
-	if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
-		return true;
-	}
-
-	return false;
-}
-
-/**
- * Define an autoload function to automatically load classes when referenced
- *
- * @param string $p_class Class name being autoloaded.
- * @return void
- */
-function autoload_mantis( $p_class ) {
-	global $g_core_path;
-
-	# Remove namespace from class name
-	$t_end_of_namespace = strrpos( $p_class, '\\' );
-	if( $t_end_of_namespace !== false ) {
-		$p_class = substr( $p_class, $t_end_of_namespace + 1 );
-	}
-
-	# Commands
-	if( substr( $p_class, -7 ) === 'Command' ) {
-		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
-		if( file_exists( $t_require_path ) ) {
-			require_once( $t_require_path );
-			return;
-		}
-	}
-
-	# Exceptions
-	if( substr( $p_class, -9 ) === 'Exception' ) {
-		$t_require_path = $g_core_path . 'exceptions/' . $p_class . '.php';
-		if( file_exists( $t_require_path ) ) {
-			require_once( $t_require_path );
-			return;
-		}
-	}
-
-	global $g_class_path;
-	global $g_library_path;
-
-	$t_require_path = $g_class_path . $p_class . '.class.php';
-
-	if( file_exists( $t_require_path ) ) {
-		require_once( $t_require_path );
-		return;
-	}
-
-	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $p_class . '.inc.php';
-
-	if( file_exists( $t_require_path ) ) {
-		require_once( $t_require_path );
-		return;
-	}
+# Ensure PHP LDAP extension is available when Login Method is LDAP
+global $g_login_method;
+if ( $g_login_method == LDAP ) {
+	ensure_php_extension_loaded( 'ldap', 'when using LDAP as Login Method' );
 }
 
 # Register the autoload function to make it effective immediately
@@ -350,4 +234,142 @@ if( !defined( 'LANG_LOAD_DISABLED' ) ) {
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'event_api.php' );
 	event_signal( 'EVENT_CORE_READY' );
+}
+
+/**
+ * Define an API inclusion function to replace require_once
+ *
+ * @param string $p_api_name An API file name.
+ * @return void
+ */
+function require_api( $p_api_name ) {
+	static $s_api_included;
+	global $g_core_path;
+	if( !isset( $s_api_included[$p_api_name] ) ) {
+		require_once( $g_core_path . $p_api_name );
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
+		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
+			$GLOBALS[$t_global_name] = $t_global_value;
+		}
+		$s_api_included[$p_api_name] = 1;
+	}
+}
+
+/**
+ * Define an API inclusion function to replace require_once
+ *
+ * @param string $p_library_name A library file name.
+ * @return void
+ */
+function require_lib( $p_library_name ) {
+	static $s_libraries_included;
+
+	if( !isset( $s_libraries_included[$p_library_name] ) ) {
+		global $g_library_path;
+		$t_library_file_path = $g_library_path . $p_library_name;
+
+		if( file_exists( $t_library_file_path ) ) {
+			require_once( $t_library_file_path );
+		} else {
+			echo 'External library \'' . $t_library_file_path . '\' not found.';
+			exit;
+		}
+
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
+		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
+			$GLOBALS[$t_global_name] = $t_global_value;
+		}
+
+		$s_libraries_included[$p_library_name] = 1;
+	}
+}
+
+/**
+ * Checks to see if script was queried through the HTTPS protocol
+ * @return boolean True if protocol is HTTPS
+ */
+function http_is_protocol_https() {
+	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+		return strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) == 'https';
+	}
+
+	if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Define an autoload function to automatically load classes when referenced
+ *
+ * @param string $p_class Class name being autoloaded.
+ * @return void
+ */
+function autoload_mantis( $p_class ) {
+	global $g_core_path;
+
+	# Remove namespace from class name
+	$t_end_of_namespace = strrpos( $p_class, '\\' );
+	if( $t_end_of_namespace !== false ) {
+		$p_class = substr( $p_class, $t_end_of_namespace + 1 );
+	}
+
+	# Commands
+	if( substr( $p_class, -7 ) === 'Command' ) {
+		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
+		if( file_exists( $t_require_path ) ) {
+			require_once( $t_require_path );
+			return;
+		}
+	}
+
+	# Exceptions
+	if( substr( $p_class, -9 ) === 'Exception' ) {
+		$t_require_path = $g_core_path . 'exceptions/' . $p_class . '.php';
+		if( file_exists( $t_require_path ) ) {
+			require_once( $t_require_path );
+			return;
+		}
+	}
+
+	global $g_class_path;
+	global $g_library_path;
+
+	$t_require_path = $g_class_path . $p_class . '.class.php';
+
+	if( file_exists( $t_require_path ) ) {
+		require_once( $t_require_path );
+		return;
+	}
+
+	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $p_class . '.inc.php';
+
+	if( file_exists( $t_require_path ) ) {
+		require_once( $t_require_path );
+		return;
+	}
+}
+
+/**
+ * Ensures the given extension is loaded, dies with an error message if not.
+ *
+ * @param string $p_extension      Extension name
+ * @param string $p_reason_message Justification for requiring the extension
+ * @return bool
+ */
+function ensure_php_extension_loaded( $p_extension, $p_reason_message ) {
+	if( extension_loaded( $p_extension ) ) {
+		return true;
+	}
+
+	/** @noinspection HtmlUnknownTarget */
+	printf( '<strong>FATAL ERROR: PHP <i>%1$s</i> extension is not enabled.</strong><br>'
+		. 'MantisBT requires this extension %2$s.<br>'
+		. '<a href="%3$s">%3$s</a>',
+		$p_extension,
+		$p_reason_message,
+		"https://www.php.net/manual/en/$p_extension.installation.php"
+	);
+	die;
 }

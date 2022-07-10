@@ -1315,7 +1315,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Authentication LDAP fallite.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Connexion al servitor LDAP fallite.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Actualisation de registro LDAP fallite.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Registro de usator LDAP non trovate.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extension LDAP non cargate.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'Impossibile definir le version minime de TLS sur le servitor LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'Impossibile initiar StartTLS sur le servitor LDAP.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Connexion al base de datos fallite. Le error recipite del base de datos esseva #%1$d: %2$s.';

@@ -1321,7 +1321,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Autenticazione LDAP fallita.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Connessione al server LDAP fallita.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Aggiornamento del record LDAP fallito.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Record utente LDAP non trovato.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Estensione LDAP non caricata.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Connessione al database fallita.  L\'errore ricevuto dal database è #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Interrogazione database fallita.  L\'errore ricevuto dal database è #%1$d: %2$s per la query: %3$s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Selezione del database fallita.  L\'errore ricevuto dal database è #%1$d: %2$s';

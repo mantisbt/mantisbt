@@ -1350,7 +1350,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP авторизация не уда
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Не удалось соединиться с LDAP-сервером.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Обновление записи в LDAP не удалось.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Сведения о пользователе на LDAP-сервере не найдены.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Расширение LDAP не загружено.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_SET_MIN_TLS] = 'Не удалось установить минимальную версию TLS на LDAP-сервере.';
 $MANTIS_ERROR[ERROR_LDAP_UNABLE_TO_STARTTLS] = 'Не удаётся запустить StartTLS на LDAP-сервере.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Соединение с базой данных не удалось. Получена ошибка - #%1$d: %2$s.';

@@ -1300,7 +1300,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Uwierzytelnienie LDAP nie powiodło si�
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Komunikacja z serwerem LDAP nie powiodła się.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Nie udało się uaktualnić rekordu LDAP .';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Rekord użytkownika LDAP nie znaleziony.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Rozszerzenie LDAP nie zostało załadowane';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Błąd połączenia z bazą danych %1$d – %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Błąd wykonania zapytania w bazie danych %1$d – %2$s dla zapytania %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Błąd bazy danych %1$d – %2$s.';

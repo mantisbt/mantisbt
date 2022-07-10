@@ -491,7 +491,6 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Ten minste één projek gebruik nog 
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Verbinding met LDAP-bediener het gefaal.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Die bywerking van die LDAP-rekord het gefaal.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-gebruikersgegewens nie gevind nie.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Die LDAP-uitbreiding is nie gelaai nie.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Hierdie kategorie bestaan reeds.';
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Geen kopie-aksie is verskaf nie.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie is nie gevind nie.';

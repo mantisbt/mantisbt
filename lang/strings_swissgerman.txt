@@ -1140,7 +1140,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-Authentifizierig fähl gschlaa.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Verbindig zum LDAP-Server fähl gschlaa.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Aktualisierig vum LDAP-Yytrag fähl gschlaa.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-Benutzeryytrag nit gfunde.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP-Erwyterig nit glade.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Verbindig zue dr Datebank fähl gschlaa. D Fählermäldig lutet #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Datebankabfrog fähl gschlaa. D Fählermäldig lutet #%1$d: %2$s fir d Abfrog: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Datebankuuswahl fähl gschlaa. D Fählermäldig vu dr Datebank lutet #%1$d: %2$s.';
