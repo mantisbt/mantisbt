@@ -1235,7 +1235,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentisering feilet';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-tjenertilkobling feilet';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Oppdatering av LDAP-posten feilet.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-bruker ikke funnet.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Finner ikke LDAP-utvidelse';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Feil ved tilkobling til database. Feilmelding mottatt fra database var #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Databaseforespørsel feilet. Feilmeldingen var databasen var #%1$d: %2$s for forespørselen: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Feil ved valg av database. Feilmelding fra database-server: #%1$d: %2$s.';

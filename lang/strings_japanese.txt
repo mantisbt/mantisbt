@@ -1317,7 +1317,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 認証に失敗しました。';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP サーバーとの接続に失敗しました。';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP のレコードの更新に失敗しました。';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP のユーザーレコードが見つかりません。';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP 拡張が読み込まれていません。';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'データベースに接続できませんでした。データベースから受け取ったエラー: #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'データベースでのクエリに失敗しました。データベースから受け取ったエラー: #%1$d: %2$s (クエリ: %3$s)';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'データベースの選択に失敗しました。データベースから受け取ったエラー: #%1$d: %2$s';

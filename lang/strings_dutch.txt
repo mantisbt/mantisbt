@@ -1304,7 +1304,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-authenticatie mislukt.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP serververbinding mislukt.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Het bijwerken van het LDAP-record is mislukt.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP-gebruikersgegevens niet gevonden.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'De LDAP-uitbreiding is niet geladen.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Databaseverbinding mislukt. Ontvangen melding van database is #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Databasezoekopdracht mislukt. Ontvangen melding van database is #%1$d: %2$s voor de zoekopdracht: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Het selecteren van de database is mislukt. Ontvangen melding van database is #%1$d: %2$s.';

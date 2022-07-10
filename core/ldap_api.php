@@ -57,11 +57,6 @@ function ldap_log_error( $p_ds ) {
  * @return resource|false
  */
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
-	if( !extension_loaded( 'ldap' ) ) {
-		log_event( LOG_LDAP, 'Error: LDAP extension missing in php' );
-		trigger_error( ERROR_LDAP_EXTENSION_NOT_LOADED, ERROR );
-	}
-
 	$t_ldap_server = config_get_global( 'ldap_server' );
 
 	log_event( LOG_LDAP, 'Checking syntax of LDAP server URI \'' . $t_ldap_server . '\'.' );

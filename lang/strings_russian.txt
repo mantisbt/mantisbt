@@ -1310,7 +1310,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP авторизация не уда
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Не удалось соединиться с LDAP-сервером.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Обновление записи в LDAP не удалось.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Сведения о пользователе на LDAP-сервере не найдены.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Расширение LDAP не загружено.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Соединение с базой данных не удалось. Получена ошибка - #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Запрос к базе данных не удался. Получена ошибка - #%1$d: %2$s, запрос: %3$s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Выборка из базы данных данных не удалась. От БД получена ошибка #%1$d: %2$s.';
