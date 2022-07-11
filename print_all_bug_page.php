@@ -57,6 +57,8 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
+require_css( 'status_config.php' );
+
 auth_ensure_user_authenticated();
 
 access_ensure_project_level( config_get( 'print_reports_threshold' ) );

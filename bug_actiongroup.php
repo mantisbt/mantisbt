@@ -348,6 +348,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 form_security_purge( $t_form_name );
 
 if( count( $t_failed_ids ) > 0 ) {
+	require_css( 'status_config.php' );
 	bug_group_action_print_top();
 	bug_group_action_print_results( $t_failed_ids );
 	bug_group_action_print_bottom();
