@@ -97,8 +97,6 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
-require_css( 'status_config.php' );
-
 use Mantis\Exceptions\ClientException;
 
 /**
@@ -714,5 +712,3 @@ function relationship_can_resolve_bug( $p_bug_id ) {
 
 	return true;
 }
-
-
