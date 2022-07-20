@@ -53,33 +53,6 @@ header( 'X-Content-Type-Options: nosniff' );
  * should only be known internally to the server.
  */
 
-/**
- *	@todo Modify to run sections only on certain pages.
- *	eg. status colors are only necessary on a few pages.(my view, view all bugs, bug view, etc. )
- *	other pages may need to include dynamic css styles as well
- */
-$t_referer_page = array_key_exists( 'HTTP_REFERER', $_SERVER )
-	? basename( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_PATH ) )
-	: basename( __FILE__ );
-
-if( $t_referer_page == auth_login_page() ) {
-	# custom status colors not needed.
-	http_caching_headers( false );
-	exit;
-}
-
-switch( $t_referer_page ) {
-	case AUTH_PAGE_USERNAME:
-	case AUTH_PAGE_CREDENTIAL:
-	case 'signup_page.php':
-	case 'lost_pwd_page.php':
-	case 'account_update.php':
-		# We don't need custom status colors on login page, and this is
-		# actually causing an error since we're not authenticated yet.
-		http_caching_headers( false );
-		exit;
-}
-
 # rewrite headers to allow caching
 if( gpc_isset( 'cache_key' ) ) {
 	http_caching_headers( true );
