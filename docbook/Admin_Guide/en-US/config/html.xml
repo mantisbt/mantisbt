@@ -9,29 +9,49 @@
 		<varlistentry>
 			<term>$g_html_make_links</term>
 			<listitem>
-				<para>This flag controls whether www URLs and email addresses are
-					automatically converted into clickable links as well as where
-					the www links open when clicked. The options are:
-					<itemizedlist>
-						<listitem>
-							<para><emphasis>OFF</emphasis> - do not convert URLs or emails
-							</para>
-						</listitem>
-						<listitem>
-							<para><emphasis>LINKS_SAME_WINDOW</emphasis> -
-								convert to links that open in current tab/window.
-								NOTE: for backwards-compatibility, this is
-								equivalent to <emphasis>ON</emphasis>.
-							</para>
-						</listitem>
-						<listitem>
-							<para><emphasis>LINKS_NEW_WINDOW</emphasis> -
-								convert to links that open in a new tab/window
-							</para>
-						</listitem>
-					</itemizedlist>
-					Default is <emphasis>LINKS_SAME_WINDOW</emphasis>.
+				<para>This flag controls whether URLs and email addresses are automatically
+					converted to clickable links. Additionally, for URL links, it determines
+					where they open when clicked (<emphasis>target</emphasis> attribute)
+					and their type.
 				</para>
+				<para>The options below can be combined using bitwise operators,
+					though not all possible combinations make sense.
+					The default is <emphasis>LINKS_SAME_WINDOW | LINKS_NOOPENER</emphasis>.
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para><emphasis>OFF</emphasis> - do not convert URLs or emails
+						</para>
+					</listitem>
+					<listitem>
+						<para><emphasis>LINKS_SAME_WINDOW</emphasis> -
+							convert to links that open in current tab/window.
+							NOTE: for backwards-compatibility, this is
+							equivalent to <emphasis>ON</emphasis>.
+						</para>
+					</listitem>
+					<listitem>
+						<para><emphasis>LINKS_NEW_WINDOW</emphasis> -
+							convert to links that open in a new tab/window.
+							Overrides <emphasis>LINKS_SAME_WINDOW</emphasis>.
+						</para>
+					</listitem>
+					<listitem>
+						<para><emphasis>LINKS_NOOPENER</emphasis> -
+							Links have the
+							<ulink url="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener">noopener</ulink>
+							type.
+						</para>
+					</listitem>
+					<listitem>
+						<para><emphasis>LINKS_NOREFERRER</emphasis> -
+							Links have the
+							<ulink url="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer">noreferrer</ulink>
+							type, i.e. they omit the <emphasis>Referer</emphasis> header.
+							Implies <emphasis>LINKS_NOOPENER</emphasis>.
+						</para>
+					</listitem>
+				</itemizedlist>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

@@ -2042,15 +2042,25 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
 
 /**
  * Convert URLs and e-mail addresses to html links.
- * This flag controls whether www URLs and email addresses are automatically
- * converted to clickable links as well as where the www links open when
- * clicked. Valid options are:
+ *
+ * This flag controls whether URLs and email addresses are automatically
+ * converted to clickable links. Additionally, for URL links, it determines
+ * where they open when clicked (*target* attribute) and their type.
+ *
+ * The options below can be combined using bitwise operators (not all
+ * possible combinations make sense):
  * - OFF                Do not convert URLs or emails
  * - LINKS_SAME_WINDOW  Convert to links that open in the current window (DEFAULT)
- * - LINKS_NEW_WINDOW   Convert to links that open in a new window
+ * - LINKS_NEW_WINDOW   Convert to links that open in a new window (overrides LINKS_SAME_WINDOW)
+ * - LINKS_NOOPENER     Links have the `noopener` type (DEFAULT)
+ *                      {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener}
+ * - LINKS_NOREFERRER   Links have the `noreferrer` type, i.e. they omit the *Referer*
+ *                      header (implies LINKS_NOOPENER)
+ *                      {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer}
+ *
  * @global integer $g_html_make_links
  */
-$g_html_make_links = LINKS_SAME_WINDOW;
+$g_html_make_links = LINKS_SAME_WINDOW | LINKS_NOOPENER;
 
 /**
  * These are the valid html tags for multi-line fields (e.g. description)
