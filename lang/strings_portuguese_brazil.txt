@@ -41,6 +41,7 @@
  * @author Athena in Wonderland
  * @author Caçador de Palavras
  * @author Dianakc
+ * @author Duke of Wikipädia
  * @author Eduardo Addad de Oliveira
  * @author Eduardo.mps
  * @author Eduardoaddad
@@ -247,7 +248,7 @@ Se você solicitou esta verificação, visite o seguinte endereço para alterar 
 $s_reset_request_admin_msg = 'Sua senha foi alterada. Visite o seguinte URL para definir um novo:';
 $s_reset_request_in_progress_msg = 'Se você forneceu o nome de usuário e endereço de e-mail corretos para a sua conta, nós teremos enviado agora uma mensagem de confirmação para este endereço de e-mail. Assim que a mensagem for recebida, siga as instruções fornecidas para mudar a senha da sua conta.';
 $s_email_notification_title_for_status_bug_new = 'A seguinte tarefa está agora com status NOVO (novamente).';
-$s_email_notification_title_for_status_bug_feedback = 'A seguinte tarefa requer seu RETORNO.';
+$s_email_notification_title_for_status_bug_feedback = 'A seguinte tarefa requer o seu RETORNO.';
 $s_email_notification_title_for_status_bug_acknowledged = 'A seguinte tarefa o foi ADMITIDA.';
 $s_email_notification_title_for_status_bug_confirmed = 'A seguinte tarefa foi CONFIRMADA.';
 $s_email_notification_title_for_status_bug_assigned = 'A seguinte tarefa foi ATRIBUÍDA.';
@@ -542,7 +543,7 @@ $s_archives = 'Arquivos';
 $s_rss = 'RSS';
 $s_site_information = 'Informação do Site';
 $s_mantis_version = 'Versão do MantisBT';
-$s_schema_version = 'Versão do Schema';
+$s_schema_version = 'Versão do banco de dados do Schema';
 $s_site_path = 'Caminho do Site';
 $s_core_path = 'Caminho do Core';
 $s_plugin_path = 'Caminho do Plugin';
@@ -647,6 +648,7 @@ $s_readonly_status = 'Status no qual uma tarefa se torna somente-leitura';
 $s_reopen_status = 'Status para o qual tarefas reabertas são ajustadas';
 $s_reopen_resolution = 'Resolução para a qual tarefas reabertas são ajustadas';
 $s_limit_view_unless_threshold_option = 'Visualizar os problemas de outros usuários (se não definido, o acesso será limitado aos problemas relatados, manipulados ou monitorados pelo usuário)';
+$s_export_issues = 'Exportar tarefas';
 $s_config_delete_sure = 'Você tem certeza que deseja apagar as configurações para %1$s no projeto %2$s?';
 $s_delete_config_button = 'Apagar Configurações';
 $s_configuration_report = 'Relatório de Configuração';
@@ -666,7 +668,10 @@ $s_show_all_complex = 'Mostrar valor para todas as opções "%1$s"';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Plugins Instalados';
 $s_plugins_available = 'Plugins Disponíveis';
+$s_plugins_missing = 'Plugins ausentes ou inválidos';
+$s_plugins_missing_description = 'Os plugins na lista abaixo estão registrados, mas seu código-fonte não foi encontrado ou carregado de "%s".<br>Tente reinstalá-los ou removê-los.';
 $s_plugin_description = 'Descrição';
+$s_plugin_problem_description = 'Descrição do Problema';
 $s_plugin_author = 'Autor: %1$s';
 $s_plugin_url = 'Site:';
 $s_plugin_depends = 'Dependências';
@@ -677,12 +682,18 @@ $s_plugin_actions = 'Ações';
 $s_plugin_install = 'Instalar';
 $s_plugin_upgrade = 'Atualizar';
 $s_plugin_uninstall = 'Desinstalar';
+$s_plugin_manual_fix = 'Intervenção manual necessária';
 $s_plugin_uninstall_message = 'Tem certeza que deseja desinstalar o plugin "%1$s"?';
+$s_plugin_remove_message = 'Tem certeza de que deseja remover o plugin "%1$s" inválido ou ausente?';
 $s_plugin_key_label = 'Chave:';
 $s_plugin_key_met = 'plugin pronto';
 $s_plugin_key_unmet = 'dependências não satisfeitas';
 $s_plugin_key_dated = 'dependências desatualizadas';
 $s_plugin_key_upgrade = 'atualização necessária';
+$s_plugin_invalid_description = 'Plugin inválido';
+$s_plugin_invalid_status_message = 'As seguintes propriedades obrigatórias não estão definidas na Classe do Plugin: %s.';
+$s_plugin_missing_description = 'Faltando plugin';
+$s_plugin_missing_status_message = 'O plugin está instalado no banco de dados do Mantis, mas não pôde ser carregado.';
 $s_project_added_msg = 'O projeto foi adicionado com sucesso...';
 $s_category_added_msg = 'A categoria foi adicionada com sucesso...';
 $s_category_deleted_msg = 'A categoria foi apagada com sucesso...';
