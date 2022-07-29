@@ -12,7 +12,7 @@ span#session-msg {
 #captcha-field {
 	float: left;
 }
-span.captcha-image {
+div.captcha-image {
 	position: relative;
 	display: block;
 	float: left;

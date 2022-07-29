@@ -120,21 +120,21 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 					<strong><?php echo lang_get( 'signup_captcha_request_label' ); ?></strong>
 				</label>
 
-				<span id="captcha-input" class="input">
+				<div id="captcha-input" class="input">
 					<?php print_captcha_input( 'captcha' ); ?>
 
-					<span id="captcha-image" class="captcha-image" style="padding-right:3px;">
+					<div id="captcha-image" class="captcha-image" style="padding-right:3px;">
 						<img src="<?php echo $t_securimage_show; ?>" alt="visual captcha" />
 						<ul id="captcha-refresh"><li><a href="#"><?php
 							echo lang_get( 'signup_captcha_refresh' );
 						?></a></li></ul>
-					</span>
+					</div>
 
 					<object type="application/x-shockwave-flash" width="19" height="19"
 						data="<?php echo $t_securimage_play; ?>">
 						<param name="movie" value="<?php echo $t_securimage_play; ?>" />
 					</object>
-				</span>
+				</div>
 
 <?php
 			}
@@ -175,6 +175,8 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			</div>
 		</div>
 	</div>
+</div>
+
 </div>
 
 <?php
