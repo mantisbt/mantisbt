@@ -56,7 +56,7 @@ if( !auth_signup_enabled() || LDAP == config_get_global( 'login_method' ) ) {
 # signup page shouldn't be indexed by search engines
 html_robots_noindex();
 
-layout_login_page_begin();
+layout_login_page_begin( lang_get( 'signup_title' ) );
 
 $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 ?>
