@@ -19,8 +19,18 @@
  */
 
 $(document).ready( function() {
+	var captcha_image_audioObj = new SecurimageAudio({
+		audioElement: 'captcha_image_audio',
+		controlsElement: 'captcha_image_audio_controls'
+	});
+
+	$('.captcha_play_button').on('click', function () {
+		$('#captcha-field').trigger('focus');
+	});
+
 	// Captcha refresh
-	$('#captcha-image, #captcha-refresh li a').click( function(e) {
+	$('#captcha-image, #captcha-refresh').click( function(e) {
+		captcha_image_audioObj.refresh();
 		var img = $('#captcha-image img');
 		var captcha = img.attr('src');
 		img.attr('src', captcha.split('?', 1) + '?' + Math.random());
