@@ -70,12 +70,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantisbt/securimage.git",
-                "reference": "01d5860a023382b4076cb98e143828357e679874"
+                "reference": "17a390243d831017f9ce9ee23c9dc481e7554ea0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantisbt/securimage/zipball/01d5860a023382b4076cb98e143828357e679874",
-                "reference": "01d5860a023382b4076cb98e143828357e679874",
+                "url": "https://api.github.com/repos/mantisbt/securimage/zipball/17a390243d831017f9ce9ee23c9dc481e7554ea0",
+                "reference": "17a390243d831017f9ce9ee23c9dc481e7554ea0",
                 "shasum": ""
             },
             "require": {
@@ -87,6 +87,7 @@
                 "ext-pdo_mysql": "For MySQL database support",
                 "ext-pdo_sqlite": "For SQLite3 database support"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "classmap": [
@@ -113,7 +114,7 @@
             "support": {
                 "source": "https://github.com/mantisbt/securimage/tree/mantis"
             },
-            "time": "2020-08-19T09:34:22+00:00"
+            "time": "2022-07-24T17:11:14+00:00"
         },
         {
             "name": "erusev/parsedown",
