@@ -49,6 +49,8 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
+require_css( 'status_config.php' );
+
 $f_bug_id = gpc_get_int( 'bug_id' );
 
 $t_bug = bug_get( $f_bug_id, true );
