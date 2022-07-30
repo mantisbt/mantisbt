@@ -18,8 +18,11 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$(document).ready( function() {
-	var captcha_image_audioObj = new SecurimageAudio({
+/* jshint esversion: 6 */
+
+$(function() {
+	/* globals SecurimageAudio */
+	let captcha_image_audioObj = new SecurimageAudio({
 		audioElement: 'captcha_image_audio',
 		controlsElement: 'captcha_image_audio_controls'
 	});
@@ -29,12 +32,12 @@ $(document).ready( function() {
 	});
 
 	// Captcha refresh
-	$('#captcha-image, #captcha-refresh').click( function(e) {
+	$('#captcha-image, #captcha-refresh').on ('click', function(e) {
 		captcha_image_audioObj.refresh();
-		var img = $('#captcha-image img');
-		var captcha = img.attr('src');
+		let img = $('#captcha-image img');
+		let captcha = img.attr('src');
 		img.attr('src', captcha.split('?', 1) + '?' + Math.random());
-		$('#captcha-field').focus();
+		$('#captcha-field').trigger('focus');
 		e.preventDefault();
 	});
 });

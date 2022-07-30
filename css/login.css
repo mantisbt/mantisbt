@@ -16,24 +16,24 @@ div.captcha-image {
 	position: relative;
 	display: block;
 	float: left;
-	margin: 0em 0em 0em 1em;
-	padding: 0em;
+	margin: 0 0 0 1em;
+	padding: 0;
 }
 #login-links,
 #captcha-refresh {
 	list-style: none;
-	margin: 0em;
-	padding: 0em;
+	margin: 0;
+	padding: 0;
 }
 #login-links {
 	position: absolute;
 	top: .5em;
-	right: 0em;
+	right: 0;
 }
 #login-links li,
 #captcha-refresh li {
 	float: left;
-	padding: 0em .25em;
+	padding: 0 .25em;
 }
 #login-links li:before,
 #captcha-refresh li:before {
@@ -45,7 +45,7 @@ div.captcha-image {
 }
 #login-links li a,
 #captcha-refresh li a {
-	padding: 0em .35em;
+	padding: 0 .35em;
 }
 
 #captcha-image {
