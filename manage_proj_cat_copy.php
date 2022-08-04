@@ -65,7 +65,7 @@ if( $f_copy_from ) {
 	trigger_error( ERROR_CATEGORY_NO_ACTION, ERROR );
 }
 
-$t_rows = category_get_all_rows( $t_src_project_id );
+$t_rows = category_get_all_rows( $t_src_project_id, false );
 
 foreach ( $t_rows as $t_row ) {
 	$t_name = $t_row['name'];
