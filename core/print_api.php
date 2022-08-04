@@ -377,7 +377,7 @@ function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 ?>
 	<label class="inline small"><?php printf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
 	<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
-	<input type="text" name="tag_string" id="tag_string" class="input-sm" size="40" value="<?php echo string_attribute( $p_string )?>" />
+	<input type="text" name="tag_string" id="tag_string" class="input-sm" size="40" <?php echo helper_get_tab_index(); ?> value="<?php echo string_attribute( $p_string )?>" />
 	<select class="input-sm" <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" class="input-sm">
 		<?php print_tag_option_list( $p_bug_id );?>
 	</select>
