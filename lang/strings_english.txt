@@ -114,6 +114,7 @@ $s_unassigned_projects_label = 'Unassigned Projects';
 $s_copy_users = 'Copy Users';
 $s_copy_categories_from = 'Copy Categories From';
 $s_copy_categories_to = 'Copy Categories To';
+$s_copy_categories_exclude_inherited = 'Exclude inherited categories';
 $s_copy_versions_from = 'Copy Versions From';
 $s_copy_versions_to = 'Copy Versions To';
 $s_copy_users_from = 'Copy Users From';
