@@ -877,6 +877,7 @@ $s_signup_done_title = 'Enregistrement du compte complété.';
 $s_password_emailed_msg = 'Félicitations. Vous vous êtes inscrit avec succès. Un courriel de confirmation vient de vous être envoyé pour vérifier votre adresse courriel. Votre compte sera activé lorsque vous visiterez le lien fourni dans ce courriel.';
 $s_no_reponse_msg = 'Vous avez sept jours pour terminer le processus de confirmation du compte ; si vous ne parvenez pas à le faire durant cette période, ce compte nouvellement créé pourra être purgé automatiquement.';
 $s_signup_captcha_request_label = 'Entrez le code comme indiqué dans la case à côté :';
+$s_signup_captcha_play = 'Lire l’audio du code Captcha';
 $s_signup_captcha_refresh = 'Générer un nouveau code';
 $s_signup_info = 'Pour compléter ce formulaire et vérifier vos réponses, un message de confirmation vous sera envoyé à l’adresse de courriel spécifiée.<br /> Vous pourrez activer votre compte en visitant le lien contenu dans ce courriel. Si vous ne parvenez pas à le faire dans les sept jours suivants, le compte pourra être purgé.<br /> Vous devez spécifier une adresse valide pour recevoir le courriel de confirmation du compte.';
 $s_signup_title = 'S’inscrire';
