@@ -878,6 +878,7 @@ $s_signup_done_title = 'Hesap kaydı işlenmiş.';
 $s_password_emailed_msg = 'Tebrikler, başarıyla kaydoldunuz! Şimdi size e-posta adresinizi doğrulamak için bir onay e-postası gönderiliyor. Bu e-postada size gönderilen bağlantıyı ziyaret etmek hesabınızı etkinleştirir.';
 $s_no_reponse_msg = 'Hesap onay sürecini tamamlamak için yedi gününüz var; bu süre içinde başarısız olursanız, yeni kaydedilen hesap tasfiye edilebilir.';
 $s_signup_captcha_request_label = 'Kodu sağdaki kutuda gösterildiği şekilde girin:';
+$s_signup_captcha_play = 'Captcha kodunu sesli dinle';
 $s_signup_captcha_refresh = 'Yeni bir kod oluşturun';
 $s_signup_info = 'Bu formun doldurulması ve cevaplarınızın doğrulanması üzerine, belirttiğiniz e-posta adresine bir onay mesajı gönderilecektir.<br />E-postada verilen bağlantıyı kullanarak hesabınızı etkinleştirebileceksiniz. Yedi gün içinde bunu yapmazsanız, tahliye edilebilir.<br />Hesap onay e-postasını almak için geçerli bir e-posta adresi belirtmelisiniz.';
 $s_signup_title = 'Kaydol';
