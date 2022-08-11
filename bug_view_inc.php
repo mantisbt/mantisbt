@@ -684,7 +684,7 @@ if( $t_flags['monitor_show'] ) {
 			if( $t_flags['monitor_can_add'] ) {
 	?>
 			<br /><br />
-			<form method="get" action="bug_monitor_add.php" class="form-inline noprint">
+			<form method="post" action="bug_monitor_add.php" class="form-inline noprint">
 			<?php echo form_security_field( 'bug_monitor_add' ) ?>
 				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
 				<input type="text" class="input-sm" id="bug_monitor_list_user_to_add" name="user_to_add" />
