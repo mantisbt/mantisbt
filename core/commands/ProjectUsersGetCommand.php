@@ -16,6 +16,12 @@
 
 use Mantis\Exceptions\ClientException;
 
+require_api( 'authentication_api.php' );
+require_api( 'user_pref_api.php' );
+
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_account_api.php' );
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_enum_api.php' );
+
 /**
  * A command to get the users within a project with the specified access level.
  */
@@ -42,6 +48,11 @@ class ProjectUsersGetCommand extends Command {
 	private $page_size;
 
 	/**
+	 * Include effective access level of users on the project?
+	 */
+	private $include_access_levels;
+
+	/**
 	 * Constructor
 	 *
 	 * @param array $p_data The command data.
@@ -54,10 +65,11 @@ class ProjectUsersGetCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {
-		$this->project_id = $this->query( 'id' );
-		$this->access_level = $this->option( 'access_level' );
-		$this->page = $this->query( 'page', 1 );
-		$this->page_size = $this->query( 'page_size', 50 );
+		$this->project_id = (int)$this->query( 'id' );
+		$this->access_level = (int)$this->option( 'access_level' );
+		$this->page = (int)$this->query( 'page', 1 );
+		$this->page_size = (int)$this->query( 'page_size', 50 );
+		$this->include_access_levels = (int)$this->option( 'include_access_levels', true );
 
 		if( $this->project_id <= ALL_PROJECTS ) {
 			throw new ClientException(
@@ -97,7 +109,7 @@ class ProjectUsersGetCommand extends Command {
 
 		foreach( $t_users as $t_user ) {
 			$t_user_name = user_get_name_from_row( $t_user );
-			$t_display[] = string_attribute( $t_user_name );
+			$t_display[] = $t_user_name;
 			$t_sort[] = user_get_name_for_sorting_from_row( $t_user );
 		}
 
@@ -108,11 +120,21 @@ class ProjectUsersGetCommand extends Command {
 
 		$t_skip = ( $this->page - 1 ) * $this->page_size;
 		$t_taken = 0;
-		$t_result = array();
-		$t_user_ids = array();
+		$t_users_result = array();
+
+		$t_lang = user_pref_get_pref( auth_get_current_user_id(), 'language' );
 
 		for( $i = $t_skip; $i < count( $t_users ); $i++ ) {
-			$t_user_ids[] = (int)$t_users[$i]['id'];
+			$t_user_id = (int)$t_users[$i]['id'];
+			$t_user = mci_account_get_array_by_id( $t_user_id );
+
+			if( $this->include_access_levels ) {
+				$t_access_level = (int)$t_users[$i]['access_level'];
+				$t_user['access_level'] =
+					mci_enum_get_array_by_id( $t_access_level, 'access_levels', $t_lang );	
+			}
+
+			$t_users_result[] = $t_user;
 			$t_taken++;
 
 			if( $this->page_size != 0 && $t_taken == $this->page_size ) {
@@ -120,7 +142,7 @@ class ProjectUsersGetCommand extends Command {
 			}
 		}
 
-		$t_result = mci_account_get_array_by_ids( $t_user_ids );
+		$t_result = array( 'users' => $t_users_result );
 		return $t_result;
 	}
 }
