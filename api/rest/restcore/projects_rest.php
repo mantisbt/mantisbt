@@ -55,10 +55,52 @@ $g_app->group('/projects', function() use ( $g_app ) {
 
 	# Project Users that can handle issues
 	$g_app->get( '/{id}/handlers', 'rest_project_handlers' );
+
+	# Project Users
+	$g_app->get( '/{id}/users', 'rest_project_users' );
 });
 
 /**
- * A method to get list of users with the specific access level in the specified project.
+ * A method to get list of users with the specified access level in the specified project.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_users(\Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = $p_args['id'];
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_project_id = (int)$t_project_id;
+	$t_page_size = $p_request->getParam( 'page_size' );
+	$t_page = $p_request->getParam( 'page' );
+	$t_access_level = $p_request->getParam( 'access_level' );
+	$t_include_access_levels = $p_request->getParam( 'include_access_levels' );
+
+	$t_data = array(
+		'query' => array(
+			'id'        => $t_project_id,
+			'page_size' => $t_page_size,
+			'page'      => $t_page,
+		),
+		'options' => array(
+			'access_level' => $t_access_level,
+			'include_access_levels' => $t_include_access_levels
+		)
+	);
+
+	$t_command = new ProjectUsersGetCommand( $t_data );
+	$t_result = $t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+}
+
+/**
+ * A method to get list of users with the handler access level in the specified project.
  *
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
