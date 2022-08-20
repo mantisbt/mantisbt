@@ -66,14 +66,17 @@ $g_app->group('/projects', function() use ( $g_app ) {
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_handlers(\Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_project_id = $p_args['id'];
 	if( is_blank( $t_project_id ) ) {
 		$t_message = "Project id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_page_size = isset( $p_args['page_size'] ) ? $p_args['page_size'] : $p_request->getParam( 'page_size' );
-	$t_page = isset( $p_args['page'] ) ? $p_args['page'] : $p_request->getParam( 'page' );
+	$t_project_id = (int)$t_project_id;
+	$t_page_size = $p_request->getParam( 'page_size' );
+	$t_page = $p_request->getParam( 'page' );
+	$t_include_access_levels = $p_request->getParam( 'include_access_levels' );
+
 	$t_access_level = config_get( 'handle_bug_threshold', null, null, $t_project_id );
 
 	$t_data = array(
@@ -83,7 +86,8 @@ function rest_project_handlers(\Slim\Http\Request $p_request, \Slim\Http\Respons
 			'page'      => $t_page,
 		),
 		'options' => array(
-			'access_level' => $t_access_level
+			'access_level' => $t_access_level,
+			'include_access_levels' => $t_include_access_levels
 		)
 	);
 
