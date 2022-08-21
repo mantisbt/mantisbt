@@ -86,8 +86,6 @@ function rest_project_users(\Slim\Http\Request $p_request, \Slim\Http\Response $
 			'id'        => $t_project_id,
 			'page_size' => $t_page_size,
 			'page'      => $t_page,
-		),
-		'options' => array(
 			'access_level' => $t_access_level,
 			'include_access_levels' => $t_include_access_levels
 		)
@@ -126,8 +124,6 @@ function rest_project_handlers(\Slim\Http\Request $p_request, \Slim\Http\Respons
 			'id'        => $t_project_id,
 			'page_size' => $t_page_size,
 			'page'      => $t_page,
-		),
-		'options' => array(
 			'access_level' => $t_access_level,
 			'include_access_levels' => $t_include_access_levels
 		)

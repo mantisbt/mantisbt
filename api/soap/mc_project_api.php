@@ -1297,15 +1297,17 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 
 	$t_data = array(
 		'query' => array(
-			'project_id' => $p_project_id
-		),
-		'options' => array(
-			'access_level' => $p_access
+			'id' => $p_project_id,
+			'page' => 1,
+			'page_size' => 0,
+			'access_level' => $p_access,
+			'include_access_levels' => 0
 		)
 	);
 
 	$cmd = new ProjectUsersGetCommand( $t_data );
 	$t_result = $cmd->execute();
+	$t_result = $t_result['users'];
 
 	return $t_result;
 }
