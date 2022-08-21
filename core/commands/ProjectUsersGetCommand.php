@@ -66,10 +66,10 @@ class ProjectUsersGetCommand extends Command {
 	 */
 	function validate() {
 		$this->project_id = (int)$this->query( 'id' );
-		$this->access_level = (int)$this->option( 'access_level' );
+		$this->access_level = (int)$this->query( 'access_level' );
 		$this->page = (int)$this->query( 'page', 1 );
 		$this->page_size = (int)$this->query( 'page_size', 50 );
-		$this->include_access_levels = (int)$this->option( 'include_access_levels', true );
+		$this->include_access_levels = (int)$this->query( 'include_access_levels', true );
 
 		if( $this->project_id <= ALL_PROJECTS ) {
 			throw new ClientException(
