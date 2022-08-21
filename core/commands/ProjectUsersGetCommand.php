@@ -23,37 +23,63 @@ require_once( dirname( __FILE__ ) . '/../../api/soap/mc_account_api.php' );
 require_once( dirname( __FILE__ ) . '/../../api/soap/mc_enum_api.php' );
 
 /**
- * A command to get the users within a project with the specified access level.
+ * Sample:
+ * {
+ *   "query": {
+ *     'id'        => 1,
+ *     'page'      => 1,
+ *     'page_size' => 50,
+ *     'access_level' => 1,
+ *     'include_access_levels' => 1
+ *   }
+ * }
+ */
+
+/**
+ * A command to get the users within a project with the specified access level
+ * or higher.
  */
 class ProjectUsersGetCommand extends Command {
 	/**
 	 * The project id
+	 *
+	 * @var integer
 	 */
 	private $project_id;
 
 	/**
 	 * The minimum access level, users with access level greater or equal to this access level
 	 * will be returned.
+	 *
+	 * @var integer
 	 */
 	private $access_level;
 
 	/**
 	 * The page number (starts with 1)
+	 *
+	 * @var integer
 	 */
 	private $page;
 
 	/**
 	 * The number of users to return per page.
+	 *
+	 * @var integer
 	 */
 	private $page_size;
 
 	/**
 	 * Include effective access level of users on the project?
+	 *
+	 * @var integer
 	 */
 	private $include_access_levels;
 
 	/**
 	 * The authenticated user id
+	 *
+	 * @var integer
 	 */
 	private $user_id;
 
