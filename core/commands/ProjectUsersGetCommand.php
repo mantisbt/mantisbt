@@ -53,6 +53,11 @@ class ProjectUsersGetCommand extends Command {
 	private $include_access_levels;
 
 	/**
+	 * The authenticated user id
+	 */
+	private $user_id;
+
+	/**
 	 * Constructor
 	 *
 	 * @param array $p_data The command data.
@@ -65,6 +70,7 @@ class ProjectUsersGetCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {
+		$this->user_id = auth_get_current_user_id();
 		$this->project_id = (int)$this->query( 'id' );
 		$this->access_level = (int)$this->query( 'access_level' );
 		$this->page = (int)$this->query( 'page', 1 );
@@ -85,6 +91,14 @@ class ProjectUsersGetCommand extends Command {
 				array( $this->project_id ) );
 		}
 
+		# If user doesn't have access to project, return project doesn't exist
+		if( !access_has_project_level( VIEWER, $this->project_id, $this->user_id ) ) {
+			throw new ClientException(
+				sprintf( "Project '%d' not found", $this->project_id ),
+				ERROR_PROJECT_NOT_FOUND,
+				array( $this->project_id ) );
+		}
+		
 		if( $this->page < 1 ) {
 			$this->page = 1;
 		}
