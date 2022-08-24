@@ -1305,8 +1305,8 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 		)
 	);
 
-	$cmd = new ProjectUsersGetCommand( $t_data );
-	$t_result = $cmd->execute();
+	$t_command = new ProjectUsersGetCommand( $t_data );
+	$t_result = $t_command->execute();
 	$t_result = $t_result['users'];
 
 	return $t_result;
