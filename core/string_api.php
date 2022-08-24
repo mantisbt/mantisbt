@@ -508,19 +508,7 @@ function string_insert_hrefs( $p_string ) {
 	}
 
 	# Set the link's target and type according to configuration
-	$t_link_attributes = '';
-	if( $t_html_make_links & ( LINKS_NOOPENER | LINKS_NOREFERRER ) ) {
-		if( $t_html_make_links & LINKS_NOREFERRER ) {
-			$t_link_attributes .= 'noreferrer';
-			# noreferrer implies noopener, so no need to set the latter
-		} elseif( $t_html_make_links & LINKS_NOOPENER ) {
-			$t_link_attributes .= 'noopener';
-		}
-		$t_link_attributes = ' rel="' . $t_link_attributes . '"';
-	}
-	if( $t_html_make_links & LINKS_NEW_WINDOW ) {
-		$t_link_attributes .= ' target="_blank"';
-	}
+	$t_link_attributes = helper_get_link_attributes( false );
 
 	# Find any URL in a string and replace it with a clickable link
 	$p_string = preg_replace_callback(
