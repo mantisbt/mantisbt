@@ -103,13 +103,6 @@ class ProjectUsersGetCommand extends Command {
 		$this->page_size = (int)$this->query( 'page_size', 50 );
 		$this->include_access_levels = (int)$this->query( 'include_access_levels', true );
 
-		if( $this->project_id <= ALL_PROJECTS ) {
-			throw new ClientException(
-				sprintf( "Must specify a specific project id.", $this->project_id ),
-				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
-		}
-
 		if( !project_exists( $this->project_id ) ) {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
@@ -162,7 +155,7 @@ class ProjectUsersGetCommand extends Command {
 		$t_taken = 0;
 		$t_users_result = array();
 
-		$t_lang = user_pref_get_pref( auth_get_current_user_id(), 'language' );
+		$t_lang = mci_get_user_lang( auth_get_current_user_id() );
 
 		for( $i = $t_skip; $i < count( $t_users ); $i++ ) {
 			$t_user_id = (int)$t_users[$i]['id'];
