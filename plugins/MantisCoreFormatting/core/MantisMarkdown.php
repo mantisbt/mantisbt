@@ -42,7 +42,7 @@
 class MantisMarkdown extends Parsedown
 {
 	/**
-	 * MantisMarkdown singleton instance for MantisMarkdown class.
+	 * @var MantisMarkdown singleton instance for MantisMarkdown class.
 	 */
 	private static $mantis_markdown = null;
 
@@ -69,6 +69,13 @@ class MantisMarkdown extends Parsedown
 
 		# XSS protection
 		$this->setSafeMode( true );
+
+		# Only turn URLs into links if config says so
+		plugin_push_current( 'MantisCoreFormatting' );
+		if( !plugin_config_get( 'process_urls' ) ) {
+			$this->setUrlsLinked( false );
+		}
+		plugin_pop_current();
 	}
 
 	/**
