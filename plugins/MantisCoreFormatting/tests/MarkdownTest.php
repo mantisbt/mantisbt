@@ -134,15 +134,15 @@ no space after `>`:
 EOD;
 
 		$markdown_quote_output = <<<EOD
-<blockquote style="border-color:#847d7d">
+<blockquote>
 <p>quote</p>
 </blockquote>
 <p>indented:</p>
-<blockquote style="border-color:#847d7d">
+<blockquote>
 <p>quote</p>
 </blockquote>
 <p>no space after <code>&gt;</code>:</p>
-<blockquote style="border-color:#847d7d">
+<blockquote>
 <p>quote</p>
 </blockquote>
 EOD;
