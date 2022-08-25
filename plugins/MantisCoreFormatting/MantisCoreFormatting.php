@@ -62,7 +62,9 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 * @return void
 	 */
 	function resources() {
-		echo '<link rel="stylesheet" href="' . plugin_file( 'markdown.css' ) . '" />';
+		if ( ON == plugin_config_get( 'process_markdown' )) {
+			echo '<link rel="stylesheet" href="' . plugin_file( 'markdown.css' ) . '" />';
+		}
 	}
 
 	/**
