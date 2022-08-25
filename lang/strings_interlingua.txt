@@ -846,6 +846,7 @@ $s_signup_done_title = 'Creation de conto succedite.';
 $s_password_emailed_msg = 'Felicitationes. Tu te ha registrate con successo. Tu recipera ora un e-mail de confirmation pro verificar tu adresse de e-mail. Visita le ligamine inviate a te in iste message pro activar tu conto.';
 $s_no_reponse_msg = 'Tu ha septe dies pro completar le processo de confirmation; si tu non lo face durante iste periodo, le nove conto pote esser eliminate.';
 $s_signup_captcha_request_label = 'Entra le codice como appare in le quadro al dextra:';
+$s_signup_captcha_play = 'Reproducer le audio del codice CAPTCHA';
 $s_signup_captcha_refresh = 'Generar un nove codice';
 $s_signup_info = 'Post le completion de iste formulario e verification de tu responsas, tu recipera un messsage de confirmation al adresse de e-mail que tu specificava.<br />Con le ligamine fornite in iste message, tu potera activar tu conto. Si tu non lo face intra septe dies, le conto pote esser eliminate.<br />Tu debe specificar un adresse de e-mail valide pro poter reciper le message de confirmation.';
 $s_signup_title = 'Crear conto';
