@@ -54,7 +54,15 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			'EVENT_DISPLAY_FORMATTED'	=> 'formatted',		# Formatted String Display
 			'EVENT_DISPLAY_RSS'			=> 'rss',			# RSS String Display
 			'EVENT_DISPLAY_EMAIL'		=> 'email',			# Email String Display
+			'EVENT_LAYOUT_RESOURCES'	=> 'resources'		# Load stylesheet
 		);
+	}
+
+	/**
+	 * @return void
+	 */
+	function resources() {
+		echo '<link rel="stylesheet" href="' . plugin_file( 'markdown.css' ) . '" />';
 	}
 
 	/**

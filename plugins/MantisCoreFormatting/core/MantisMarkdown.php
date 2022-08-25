@@ -157,48 +157,6 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Add an inline style on a blockquote markdown elements
-	 *
-	 * @param string $line The Markdown syntax to parse
-	 * @param array $block A block-level element
-	 * @param string $fn the function name to call (blockQuote or blockQuoteContinue)
-	 * @access private
-	 * @return string html representation generated from markdown.
-	 */
-	private function __quote( $line, $block, $fn ) {
-
-		if( $block = call_user_func( 'parent::' . $fn, $line, $block ) ) {
-			# TODO: To open another issue to track css style sheet issue vs. inline style.
-			$block['element']['attributes']['style'] = 'padding:0.13em 1em;color:rgb(119,119,119);border-left:0.25em solid #C0C0C0;font-size:13px;';
-		}
-
-		return $block;
-	}
-
-	/**
-	 * Customize the blockQuote method by adding a style attribute
-	 *
-	 * @param string $line The Markdown syntax to parse
-	 * @access protected
-	 * @return string html representation generated from markdown.
-	 */
-	protected function blockQuote( $line ){
-		return $this->__quote( $line, array(), __FUNCTION__ );
-	}
-
-	/**
-	 * Customize the blockQuoteContinue method by adding a style attribute
-	 *
-	 * @param string $line The Markdown syntax to parse
-	 * @param array $block A block-level element
-	 * @access protected
-	 * @return string html representation generated from markdown.
-	 */
-	protected function blockQuoteContinue( $line, array $block ){
-		return $this->__quote( $line, $block, __FUNCTION__ );
-	}
-
-	/**
 	 * Customize the inlineCode method
 	 *
 	 * @param array $block A block-level element
