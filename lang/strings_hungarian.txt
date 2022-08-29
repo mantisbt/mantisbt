@@ -855,6 +855,7 @@ $s_signup_done_title = 'Fiókregisztráció feldolgozva.';
 $s_password_emailed_msg = 'Gratulálunk, sikeresen regisztrált. Az e-mail címének megerősítése miatt küldtünk egy e-mailt. Az abban található cím meglátogatásával válik a fiókja aktívvá.';
 $s_no_reponse_msg = 'Hét napja van a regisztrációs folyamat befejezéséhez; ha hét napon belül nem tudja befejezni a regisztrációt, az imént létrehozott fiókja törlésre kerülhet.';
 $s_signup_captcha_request_label = 'Írja be a jobb oldali mezőben található kódot:';
+$s_signup_captcha_play = 'Captcha kód hang lejátszása';
 $s_signup_captcha_refresh = 'Új kód előállítása';
 $s_signup_info = 'Ezen űrlap kitöltése és a válaszainak ellenőrzése után küldünk egy megerősítő e-mailt arra a címre, melyet megadott.<br />A megerősítő e-mailben kapott hivatkozás használatával nyílik lehetősége a fiók aktiválására. Ha hét napon belül nem aktiválja a fiókját, akkor törlésre kerülhet.<br />Érvényes e-mail címet kell megadnia ahhoz, hogy megkaphassa a megerősítő e-mailt.';
 $s_signup_title = 'Feliratkozás';

@@ -315,6 +315,7 @@ $s_created_user_part2 = 'z nivojem dostopa';
 $s_create_new_account_title = 'Ustvarjanje novega računa';
 $s_verify_password = 'Ponovi geslo';
 $s_enabled = 'Omogočen';
+$s_enabled_label = 'Omogočeno';
 $s_protected = 'Zaščiten';
 $s_create_user_button = 'Ustvari uporabnika';
 $s_hide_disabled = 'Skrij onemogočene';
