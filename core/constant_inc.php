@@ -622,6 +622,8 @@ define( 'SECONDS_PER_DAY', 86400 );
 # Auto-generated link targets
 define( 'LINKS_SAME_WINDOW', 1 );
 define( 'LINKS_NEW_WINDOW', 2 );
+define( 'LINKS_NOOPENER', 4 );
+define( 'LINKS_NOREFERRER', 8 );
 
 # Auth Related Constants
 define( 'API_TOKEN_LENGTH', 32 );

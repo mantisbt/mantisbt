@@ -842,3 +842,50 @@ function helper_parse_id( $p_id, $p_field_name ) {
 function helper_parse_issue_id( $p_issue_id, $p_field_name = 'issue_id' ) {
 	return helper_parse_id( $p_issue_id, $p_field_name );
 }
+
+/**
+ * Return a link's attributes based on Mantis Config.
+ *
+ * Depending on $p_return_array parameter, return value will either be
+ * - an associative array with attribute => value pairs
+ *   e.g. ['rel'=>'noopener', target=>'_blank'], or
+ * - a string ready to be added to an html <a> tag,
+ *   e.g. ' rel="noopener" target="_blank"'
+ *
+ * @param bool $p_return_array true to return an array (default), false for string
+ * @return array|string
+ *
+ * @see $g_html_make_links
+ */
+function helper_get_link_attributes( $p_return_array = true ) {
+	$t_html_make_links = config_get( 'html_make_links' );
+
+	$t_attributes = array();
+	if( $t_html_make_links ) {
+		# Link target
+		if( $t_html_make_links & LINKS_NEW_WINDOW ) {
+			$t_attributes['target'] = '_blank';
+		}
+
+		# Link relation type
+		if( $t_html_make_links & ( LINKS_NOOPENER | LINKS_NOREFERRER ) ) {
+			if( $t_html_make_links & LINKS_NOREFERRER ) {
+				$t_attributes['rel'] = 'noreferrer';
+				# noreferrer implies noopener, so no need to set the latter
+			}
+			elseif( $t_html_make_links & LINKS_NOOPENER ) {
+				$t_attributes['rel'] = 'noopener';
+			}
+		}
+	}
+
+	if( $p_return_array ) {
+		return $t_attributes;
+	}
+
+	$t_string = '';
+	foreach( $t_attributes as $t_attr => $t_value ) {
+		$t_string .= " $t_attr=\"$t_value\"";
+	}
+	return $t_string;
+}
