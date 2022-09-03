@@ -117,37 +117,4 @@ EOD;
 
 		$this->assertEquals( $markdown_table_output, MantisMarkdown::convert_text( $markdown_table ) );
 	}
-
-	/**
-	 * Test the quote markdown if style attribute is defined
-	 * @return void
-	 */
-	public function testQuoteStyleAttribute() {
-		$markdown_quote = <<<EOD
-> quote
-
-indented:
-	> quote
-
-no space after `>`:
->quote
-EOD;
-
-		$markdown_quote_output = <<<EOD
-<blockquote style="border-color:#847d7d">
-<p>quote</p>
-</blockquote>
-<p>indented:</p>
-<blockquote style="border-color:#847d7d">
-<p>quote</p>
-</blockquote>
-<p>no space after <code>&gt;</code>:</p>
-<blockquote style="border-color:#847d7d">
-<p>quote</p>
-</blockquote>
-EOD;
-
-		$this->assertEquals( $markdown_quote_output, MantisMarkdown::convert_text( $markdown_quote ) );
-	}
-
 }
