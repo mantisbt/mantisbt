@@ -119,6 +119,7 @@ $s_unassigned_projects_label = 'Неназначенные проекты';
 $s_copy_users = 'Копирование пользователей';
 $s_copy_categories_from = 'Копировать категории из';
 $s_copy_categories_to = 'Копировать категории в';
+$s_copy_categories_exclude_inherited = 'Исключить унаследованные категории';
 $s_copy_versions_from = 'Копировать версии из';
 $s_copy_versions_to = 'Копировать версии в';
 $s_copy_users_from = 'Копировать пользователей из';
