@@ -103,6 +103,7 @@ $s_unassigned_projects_label = '尚未分配的專案';
 $s_copy_users = '複製使用者';
 $s_copy_categories_from = '複製指定專案的類別到本專案';
 $s_copy_categories_to = '複製本專案的類別到指定專案';
+$s_copy_categories_exclude_inherited = '排除的繼承分類';
 $s_copy_versions_from = '複製指定專案版本到本專案';
 $s_copy_versions_to = '複製本專案的版本到指定專案';
 $s_copy_users_from = '複製指定專案的使用者到本專案';
