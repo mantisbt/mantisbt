@@ -173,13 +173,13 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 <?php
 		if( $t_can_print_reports ) {
 			print_small_button(
-				'print_all_bug_page.php' . $t_filter_param,
+				helper_mantis_url( 'print_all_bug_page.php' . $t_filter_param ),
 				lang_get( 'print_all_bug_page_link' )
 			);
 		}
 		if( $t_can_export_issues ) {
-			print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
-			print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
+			print_small_button( helper_mantis_url( 'csv_export.php' . $t_filter_param ), lang_get( 'csv_export' ) );
+			print_small_button( helper_mantis_url( 'excel_xml_export.php' . $t_filter_param ), lang_get( 'excel_export' ) );
 		}
 		if( $t_can_view_summary ) {
 			print_small_button( $t_summary_link, lang_get( 'summary_link' ) );

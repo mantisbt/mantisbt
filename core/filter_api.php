@@ -1265,9 +1265,11 @@ function filter_draw_selection_area() {
 
 							if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
 								# Add CSRF protection, see #22702
-								$t_permalink_url = 'permalink_page.php?filter='
+								$t_permalink_url = helper_mantis_url(
+									'permalink_page.php?filter='
 									. filter_temporary_set( $t_filter )
-									. form_security_param( 'permalink' );
+									. form_security_param( 'permalink' )
+								);
 								echo '<li>';
 								echo '<a href="' . $t_permalink_url . '">';
 								print_icon( 'fa-link', 'ace-icon' );
