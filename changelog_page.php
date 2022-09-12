@@ -67,6 +67,8 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
+require_css( 'status_config.php' );
+
 /**
  * Print header for the specified project version.
  * @param integer $p_version_id A valid version identifier.

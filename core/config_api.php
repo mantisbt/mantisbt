@@ -527,7 +527,7 @@ function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = A
 	if( '' !== $p_option ) {
 		unset( $GLOBALS['g_cache_config'][$p_option][$p_user][$p_project] );
 		unset( $GLOBALS['g_cache_config_access'][$p_option][$p_user][$p_project] );
-		unset( $GLOBALS['g_cache_config_eval'][$p_option] );
+		unset( $GLOBALS['g_cache_config_eval']['g_' . $p_option] );
 	} else {
 		unset( $GLOBALS['g_cache_config'] );
 		unset( $GLOBALS['g_cache_config_access'] );

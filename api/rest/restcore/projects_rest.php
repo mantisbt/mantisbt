@@ -52,7 +52,77 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->patch( '/{id}/subprojects/{subproject_id}/', 'rest_project_hierarchy_update' );
 	$g_app->delete( '/{id}/subprojects/{subproject_id}', 'rest_project_hierarchy_delete' );
 	$g_app->delete( '/{id}/subprojects/{subproject_id}/', 'rest_project_hierarchy_delete' );
+
+	# Project Users that can handle issues
+	$g_app->get( '/{id}/handlers', 'rest_project_handlers' );
+
+	# Project Users
+	$g_app->get( '/{id}/users', 'rest_project_users' );
 });
+
+/**
+ * A helper function to get project users with the specified access level or above.
+ * The function will extract the parameters from the request and args.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @param int $p_access_level access level to use or null to extract from request.
+ * @return \Slim\Http\Response The augmented response.
+ */
+function project_users( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args, $p_access_level = null ) {
+	$t_project_id = (int)$p_args['id'];
+	$t_page_size = $p_request->getParam( 'page_size' );
+	$t_page = $p_request->getParam( 'page' );
+	$t_include_access_levels = $p_request->getParam( 'include_access_levels' );
+
+	if( is_null( $p_access_level ) ) {
+		$t_access_level = (int)$p_request->getParam( 'access_level' );
+	} else {
+		$t_access_level = (int)$p_access_level;
+	}
+
+	$t_data = array(
+		'query' => array(
+			'id'        => $t_project_id,
+			'page_size' => $t_page_size,
+			'page'      => $t_page,
+			'access_level' => $t_access_level,
+			'include_access_levels' => $t_include_access_levels
+		)
+	);
+
+	$t_command = new ProjectUsersGetCommand( $t_data );
+	$t_result = $t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+}
+
+/**
+ * A method to get list of users with the specified access level in the specified project.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_users( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	return project_users( $p_request, $p_response, $p_args );
+}
+
+/**
+ * A method to get list of users with the handler access level in the specified project.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_handlers(\Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = (int)$p_args['id'];
+	$t_access_level = config_get( 'handle_bug_threshold', null, null, $t_project_id );
+	return project_users( $p_request, $p_response, $p_args, $t_access_level );
+}
 
 /**
  * A method to get list of projects accessible to user with all their related information.

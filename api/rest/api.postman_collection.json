@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "6ecad46e-cfa0-fb41-c005-2a82c25e74f6",
 		"name": "Mantis Bug Tracker REST API",
-		"description": "Mantis Bug Tracker (MantisHub) REST APIs.\n\nREST API calls have to be authenticated by creating an API token for the user doing the calls, and then passing the API token in the 'Authorization' header.  However, for anonymous access, the API key and header are not needed.  \n\nPostman Environment Variables:\n- {{token}} - The API token to be used for authentication.\n- {{url}} - The base URL for Mantis instance (e.g. 'https://instance-name.mantishub.io').\n\nThere has been significant improvements and feature additions for REST API in each of the recent releases.  Hence, it is highly recommended to use latest release when leveraging the REST APIs.\n\nREST API is enabled by default since MantisBT 2.8.0 release.",
+		"description": "Mantis Bug Tracker (MantisHub) REST APIs.\n\nREST API calls have to be authenticated by creating an API token for the user doing the calls, and then passing the API token in the 'Authorization' header.  However, for anonymous access, the API key and header are not needed.  \n\nPostman Environment Variables:\n- token - The API token to be used for authentication.\n- url - The base URL for Mantis instance (e.g. 'https://mantisbt' or 'https://instance-name.mantishub.io').\n\nThere has been significant improvements and feature additions for REST API in each of the recent releases.  Hence, it is highly recommended to use latest release when leveraging the REST APIs.\n\nREST API is enabled by default since MantisBT 2.8.0 release.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -11,6 +11,17 @@
 			"item": [
 				{
 					"name": "Get an issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -34,6 +45,7 @@
 								{
 									"key": "issue_id",
 									"value": "1234",
+									"type": "string",
 									"description": "The issue id"
 								}
 							]
@@ -65,7 +77,7 @@
 									"variable": [
 										{
 											"key": "issue_id",
-											"value": "21920",
+											"value": "1234",
 											"description": "The issue id"
 										}
 									]
@@ -162,7 +174,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -171,10 +183,10 @@
 									"key": "PHPSESSID"
 								}
 							],
-							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"Sample issue title\",\n            \"description\": \"Sample issue description\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"mantisbt\"\n            },\n            \"category\": {\n                \"id\": 135,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"vboctor\",\n                \"real_name\": \"Victor Boctor\",\n                \"email\": \"vboctor@example.com\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2017-04-23T13:12:28-04:00\",\n            \"updated_at\": \"2017-04-23T13:12:28-04:00\",\n            \"custom_fields\": [\n                {\n                    \"field\": {\n                        \"id\": 4,\n                        \"name\": \"The City\"\n                    },\n                    \"value\": \"Seattle\"\n                }\n            ],\n            \"history\": [\n                {\n                    \"created_at\": \"2017-04-23T13:12:28-04:00\",\n                    \"user\": {\n                        \"id\": 36771,\n                        \"name\": \"vboctor\",\n                        \"real_name\": \"Victor Boctor\",\n                        \"email\": \"vboctor@example.com\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1234,\n            \"summary\": \"Sample issue title\",\n            \"description\": \"Sample issue description\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"mantisbt\"\n            },\n            \"category\": {\n                \"id\": 135,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"vboctor\",\n                \"real_name\": \"Victor Boctor\",\n                \"email\": \"vboctor@example.com\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2017-04-23T13:12:28-04:00\",\n            \"updated_at\": \"2017-04-23T13:12:28-04:00\",\n            \"custom_fields\": [\n                {\n                    \"field\": {\n                        \"id\": 4,\n                        \"name\": \"The City\"\n                    },\n                    \"value\": \"Seattle\"\n                }\n            ],\n            \"history\": [\n                {\n                    \"created_at\": \"2017-04-23T13:12:28-04:00\",\n                    \"user\": {\n                        \"id\": 36771,\n                        \"name\": \"vboctor\",\n                        \"real_name\": \"Victor Boctor\",\n                        \"email\": \"vboctor@example.com\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
 						},
 						{
-							"name": "Not Found",
+							"name": "Issue not found",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -197,7 +209,7 @@
 									"variable": [
 										{
 											"key": "issue_id",
-											"value": "2192022",
+											"value": "1234",
 											"description": "The issue id"
 										}
 									]
@@ -264,7 +276,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -273,7 +285,7 @@
 									"key": "PHPSESSID"
 								}
 							],
-							"body": "{\n    \"message\": \"Issue #200000 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 200000 not found.\"\n}"
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
 						}
 					]
 				},
@@ -303,6 +315,7 @@
 								{
 									"key": "issue_id",
 									"value": "1234",
+									"type": "string",
 									"description": "The issue id to get files for"
 								}
 							]
@@ -310,108 +323,6 @@
 						"description": "Get all files associated with an issue.\n\nAvailable since MantisBT 2.11.0."
 					},
 					"response": [
-						{
-							"name": "Not Found",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{token}}"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/api/rest/issues/:issue_id",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"api",
-										"rest",
-										"issues",
-										":issue_id"
-									],
-									"variable": [
-										{
-											"key": "issue_id",
-											"value": "2192022",
-											"description": "The issue id"
-										}
-									]
-								}
-							},
-							"status": "Issue #2192022 not found",
-							"code": 404,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "private, max-age=10800",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "89",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json;charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 07 Jan 2018 22:53:57 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Last-Modified",
-									"value": "Sun, 31 Dec 2017 19:58:54 GMT",
-									"name": "Last-Modified",
-									"description": "The last modified date for the requested object, in RFC 2822 format"
-								},
-								{
-									"key": "Server",
-									"value": "Apache",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.1.8",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [
-								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
-									"httpOnly": true,
-									"domain": "localhost",
-									"path": "/",
-									"secure": false,
-									"value": "be0edb4fdc0a4378b2ef8cbc368d7e1f",
-									"key": "PHPSESSID"
-								}
-							],
-							"body": "{\n    \"message\": \"Issue #200000 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 200000 not found.\"\n}"
-						},
 						{
 							"name": "Success",
 							"originalRequest": {
@@ -436,7 +347,7 @@
 									"variable": [
 										{
 											"key": "issue_id",
-											"value": "21920",
+											"value": "1234",
 											"description": "The issue id"
 										}
 									]
@@ -533,7 +444,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -542,7 +453,109 @@
 									"key": "PHPSESSID"
 								}
 							],
-							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"Sample issue title\",\n            \"description\": \"Sample issue description\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"mantisbt\"\n            },\n            \"category\": {\n                \"id\": 135,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"vboctor\",\n                \"real_name\": \"Victor Boctor\",\n                \"email\": \"vboctor@example.com\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2017-04-23T13:12:28-04:00\",\n            \"updated_at\": \"2017-04-23T13:12:28-04:00\",\n            \"custom_fields\": [\n                {\n                    \"field\": {\n                        \"id\": 4,\n                        \"name\": \"The City\"\n                    },\n                    \"value\": \"Seattle\"\n                }\n            ],\n            \"history\": [\n                {\n                    \"created_at\": \"2017-04-23T13:12:28-04:00\",\n                    \"user\": {\n                        \"id\": 36771,\n                        \"name\": \"vboctor\",\n                        \"real_name\": \"Victor Boctor\",\n                        \"email\": \"vboctor@example.com\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1234,\n            \"summary\": \"Sample issue title\",\n            \"description\": \"Sample issue description\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"mantisbt\"\n            },\n            \"category\": {\n                \"id\": 135,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"vboctor\",\n                \"real_name\": \"Victor Boctor\",\n                \"email\": \"vboctor@example.com\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2017-04-23T13:12:28-04:00\",\n            \"updated_at\": \"2017-04-23T13:12:28-04:00\",\n            \"custom_fields\": [\n                {\n                    \"field\": {\n                        \"id\": 4,\n                        \"name\": \"The City\"\n                    },\n                    \"value\": \"Seattle\"\n                }\n            ],\n            \"history\": [\n                {\n                    \"created_at\": \"2017-04-23T13:12:28-04:00\",\n                    \"user\": {\n                        \"id\": 36771,\n                        \"name\": \"vboctor\",\n                        \"real_name\": \"Victor Boctor\",\n                        \"email\": \"vboctor@example.com\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "Issue not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id"
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "1234",
+											"description": "The issue id"
+										}
+									]
+								}
+							},
+							"status": "Issue #2192022 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "89",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Jan 2018 22:53:57 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": "Custom header"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Sun, 31 Dec 2017 19:58:54 GMT",
+									"name": "Last-Modified",
+									"description": "The last modified date for the requested object, in RFC 2822 format"
+								},
+								{
+									"key": "Server",
+									"value": "Apache",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
+									"httpOnly": true,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "be0edb4fdc0a4378b2ef8cbc368d7e1f",
+									"key": "PHPSESSID"
+								}
+							],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
 						}
 					]
 				},
@@ -588,6 +601,17 @@
 				},
 				{
 					"name": "Get all issues",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -621,7 +645,106 @@
 						},
 						"description": "Get paginated list of issues.\n\nAvailable since MantisBT 2.3.0.  Issue history included since MantisBT 2.9.0.  A fix was implemented in 2.20.0 to avoid filtering out of some issues (e.g. closed issues)."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/issues?page_size=10&page=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									],
+									"query": [
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "The number of issues to return per page.  Default is 50 but overridable by configuration."
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"description": "The page number (default is 1)"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:50:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "MANTIS_PROJECT_COOKIE=0; expires=Mon, 21-Aug-2023 19:50:12 GMT; Max-Age=31536000; path=/; secure; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "ETag",
+									"value": "36e6f6971f98e7b7bf3accc66ca42476225fc1bd8ab4eddd16bbe2db9d1b5676"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "913"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"This is a test issue\",\n            \"description\": \"This is a test issue\\r\\nThis is a test issue\\r\\nThis is a test issue\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"Test Project\"\n            },\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"administrator\",\n                \"email\": \"root@localhost\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2022-08-20T16:12:56-07:00\",\n            \"updated_at\": \"2022-08-20T16:12:56-07:00\",\n            \"history\": [\n                {\n                    \"created_at\": \"2022-08-20T16:12:56-07:00\",\n                    \"user\": {\n                        \"id\": 1,\n                        \"name\": \"administrator\",\n                        \"email\": \"root@localhost\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Get issues for a project",
@@ -653,7 +776,101 @@
 						},
 						"description": "Get all issues for the specified project.\n\nFiltering by project is supported since MantisBT 2.5.0.  Issue history included since MantisBT 2.9.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/issues?project_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									],
+									"query": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"description": "The project id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:50:44 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "MANTIS_PROJECT_COOKIE=1; expires=Mon, 21-Aug-2023 19:50:44 GMT; Max-Age=31536000; path=/; secure; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "ETag",
+									"value": "36e6f6971f98e7b7bf3accc66ca42476225fc1bd8ab4eddd16bbe2db9d1b5676"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "913"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"This is a test issue\",\n            \"description\": \"This is a test issue\\r\\nThis is a test issue\\r\\nThis is a test issue\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"Test Project\"\n            },\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"administrator\",\n                \"email\": \"root@localhost\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2022-08-20T16:12:56-07:00\",\n            \"updated_at\": \"2022-08-20T16:12:56-07:00\",\n            \"history\": [\n                {\n                    \"created_at\": \"2022-08-20T16:12:56-07:00\",\n                    \"user\": {\n                        \"id\": 1,\n                        \"name\": \"administrator\",\n                        \"email\": \"root@localhost\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Get issues matching filter",
@@ -685,7 +902,101 @@
 						},
 						"description": "Get all issues matching a user defined filter given the filter id.\n\nFiltering by project or filter is supported since MantisBT 2.5.0.  Issue history included since MantisBT 2.9.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/issues?filter_id=reported",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									],
+									"query": [
+										{
+											"key": "filter_id",
+											"value": "reported",
+											"description": "The filter id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:51:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "MANTIS_PROJECT_COOKIE=0; expires=Mon, 21-Aug-2023 19:51:16 GMT; Max-Age=31536000; path=/; secure; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "ETag",
+									"value": "36e6f6971f98e7b7bf3accc66ca42476225fc1bd8ab4eddd16bbe2db9d1b5676"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "913"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"This is a test issue\",\n            \"description\": \"This is a test issue\\r\\nThis is a test issue\\r\\nThis is a test issue\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"Test Project\"\n            },\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"administrator\",\n                \"email\": \"root@localhost\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2022-08-20T16:12:56-07:00\",\n            \"updated_at\": \"2022-08-20T16:12:56-07:00\",\n            \"history\": [\n                {\n                    \"created_at\": \"2022-08-20T16:12:56-07:00\",\n                    \"user\": {\n                        \"id\": 1,\n                        \"name\": \"administrator\",\n                        \"email\": \"root@localhost\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Get issues assigned to me",
@@ -715,9 +1026,103 @@
 								}
 							]
 						},
-						"description": "This is a standard filter that gets all issues assigned to the logged in user.\n\nAvailable since MantisBT 2.10.0."
+						"description": "This is a standard filter that gets issues assigned to the logged in user.\n\nAvailable since MantisBT 2.10.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/issues?filter_id=reported",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									],
+									"query": [
+										{
+											"key": "filter_id",
+											"value": "reported",
+											"description": "The filter id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:51:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "MANTIS_PROJECT_COOKIE=0; expires=Mon, 21-Aug-2023 19:51:16 GMT; Max-Age=31536000; path=/; secure; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "ETag",
+									"value": "36e6f6971f98e7b7bf3accc66ca42476225fc1bd8ab4eddd16bbe2db9d1b5676"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "913"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"This is a test issue\",\n            \"description\": \"This is a test issue\\r\\nThis is a test issue\\r\\nThis is a test issue\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"Test Project\"\n            },\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"administrator\",\n                \"email\": \"root@localhost\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2022-08-20T16:12:56-07:00\",\n            \"updated_at\": \"2022-08-20T16:12:56-07:00\",\n            \"history\": [\n                {\n                    \"created_at\": \"2022-08-20T16:12:56-07:00\",\n                    \"user\": {\n                        \"id\": 1,\n                        \"name\": \"administrator\",\n                        \"email\": \"root@localhost\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Get issues reported by me",
@@ -747,9 +1152,103 @@
 								}
 							]
 						},
-						"description": "This is a standard filter that gets all issues reported by the logged in user.\n\nAvailable since MantisBT 2.10.0."
+						"description": "This is a standard filter that gets issues reported by the logged in user.\n\nAvailable since MantisBT 2.10.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/issues?filter_id=reported",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									],
+									"query": [
+										{
+											"key": "filter_id",
+											"value": "reported",
+											"description": "The filter id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:51:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "MANTIS_PROJECT_COOKIE=0; expires=Mon, 21-Aug-2023 19:51:16 GMT; Max-Age=31536000; path=/; secure; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "ETag",
+									"value": "36e6f6971f98e7b7bf3accc66ca42476225fc1bd8ab4eddd16bbe2db9d1b5676"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "913"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"This is a test issue\",\n            \"description\": \"This is a test issue\\r\\nThis is a test issue\\r\\nThis is a test issue\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"Test Project\"\n            },\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"administrator\",\n                \"email\": \"root@localhost\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2022-08-20T16:12:56-07:00\",\n            \"updated_at\": \"2022-08-20T16:12:56-07:00\",\n            \"history\": [\n                {\n                    \"created_at\": \"2022-08-20T16:12:56-07:00\",\n                    \"user\": {\n                        \"id\": 1,\n                        \"name\": \"administrator\",\n                        \"email\": \"root@localhost\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Get issues monitored by me",
@@ -779,9 +1278,103 @@
 								}
 							]
 						},
-						"description": "This is a standard filter gets all issues monitored by the logged in user.\n\nAvailable since MantisBT 2.10.0."
+						"description": "This is a standard filter gets issues monitored by the logged in user.\n\nAvailable since MantisBT 2.10.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/issues?filter_id=reported",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									],
+									"query": [
+										{
+											"key": "filter_id",
+											"value": "reported",
+											"description": "The filter id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:51:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "MANTIS_PROJECT_COOKIE=0; expires=Mon, 21-Aug-2023 19:51:16 GMT; Max-Age=31536000; path=/; secure; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "ETag",
+									"value": "36e6f6971f98e7b7bf3accc66ca42476225fc1bd8ab4eddd16bbe2db9d1b5676"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "913"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"This is a test issue\",\n            \"description\": \"This is a test issue\\r\\nThis is a test issue\\r\\nThis is a test issue\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"Test Project\"\n            },\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"administrator\",\n                \"email\": \"root@localhost\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2022-08-20T16:12:56-07:00\",\n            \"updated_at\": \"2022-08-20T16:12:56-07:00\",\n            \"history\": [\n                {\n                    \"created_at\": \"2022-08-20T16:12:56-07:00\",\n                    \"user\": {\n                        \"id\": 1,\n                        \"name\": \"administrator\",\n                        \"email\": \"root@localhost\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Get unassigned issues",
@@ -811,9 +1404,103 @@
 								}
 							]
 						},
-						"description": "This is a standard filter that gets all issues monitored by the logged in user.\n\nAvailable since MantisBT 2.10.0."
+						"description": "This is a standard filter that gets unassigned issues.\n\nAvailable since MantisBT 2.10.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/issues?filter_id=reported",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									],
+									"query": [
+										{
+											"key": "filter_id",
+											"value": "reported",
+											"description": "The filter id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:51:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "MANTIS_PROJECT_COOKIE=0; expires=Mon, 21-Aug-2023 19:51:16 GMT; Max-Age=31536000; path=/; secure; HttpOnly; SameSite=Strict"
+								},
+								{
+									"key": "ETag",
+									"value": "36e6f6971f98e7b7bf3accc66ca42476225fc1bd8ab4eddd16bbe2db9d1b5676"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "913"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"This is a test issue\",\n            \"description\": \"This is a test issue\\r\\nThis is a test issue\\r\\nThis is a test issue\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"Test Project\"\n            },\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"administrator\",\n                \"email\": \"root@localhost\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2022-08-20T16:12:56-07:00\",\n            \"updated_at\": \"2022-08-20T16:12:56-07:00\",\n            \"history\": [\n                {\n                    \"created_at\": \"2022-08-20T16:12:56-07:00\",\n                    \"user\": {\n                        \"id\": 1,\n                        \"name\": \"administrator\",\n                        \"email\": \"root@localhost\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Create an issue (minimal)",
@@ -847,42 +1534,9 @@
 						},
 						"description": "Shows the creation of issue with minimal information.\n\nAvailable since MantisBT 2.3.0."
 					},
-					"response": []
-				},
-				{
-					"name": "Create an issue",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"summary\": \"Sample REST issue\",\n    \"description\": \"Description for sample REST issue.\",\n    \"additional_information\": \"More info about the issue\",\n    \"project\": {\n        \"id\": 1,\n        \"name\": \"mantisbt\"\n    },\n    \"category\": {\n        \"id\": 5,\n        \"name\": \"bugtracker\"\n    },\n    \"handler\": {\n        \"name\": \"vboctor\"\n    },\n    \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\"\n    },\n    \"priority\": {\n        \"name\": \"normal\"\n    },\n    \"severity\": {\n        \"name\": \"trivial\"\n    },\n    \"reproducibility\": {\n        \"name\": \"always\"\n    },\n    \"sticky\": false,\n    \"custom_fields\": [\n        {\n            \"field\": {\n                \"id\": 4,\n                \"name\": \"The City\"\n            },\n            \"value\": \"Seattle\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"mantishub\"\n        }\n    ]\n}\n"
-						},
-						"url": {
-							"raw": "{{url}}/api/rest/issues",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"rest",
-								"issues"
-							]
-						},
-						"description": "Create an issue with most fields supplied.\n\nAvailable since MantisBT 2.3.0."
-					},
 					"response": [
 						{
-							"name": "success",
+							"name": "Success",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -996,7 +1650,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -1006,6 +1660,462 @@
 								}
 							],
 							"body": "{\n    \"issue\": {\n        \"id\": 1,\n        \"summary\": \"Sample REST issue\",\n        \"description\": \"Description for sample REST issue.\",\n        \"additional_information\": \"More info about the issue\",\n        \"project\": {\n            \"id\": 1,\n            \"name\": \"mantisbt\"\n        },\n        \"category\": {\n            \"id\": 5,\n            \"name\": \"bugtracker\"\n        },\n        \"reporter\": {\n            \"id\": 2,\n            \"name\": \"GermanReporter\"\n        },\n        \"handler\": {\n            \"id\": 1,\n            \"name\": \"vboctor\"\n        },\n        \"status\": {\n            \"id\": 50,\n            \"name\": \"assigned\",\n            \"label\": \"zugewiesen\",\n            \"color\": \"#c2dfff\"\n        },\n        \"resolution\": {\n            \"id\": 10,\n            \"name\": \"open\",\n            \"label\": \"offen\"\n        },\n        \"view_state\": {\n            \"id\": 10,\n            \"name\": \"public\",\n            \"label\": \"öffentlich\"\n        },\n        \"priority\": {\n            \"id\": 30,\n            \"name\": \"normal\",\n            \"label\": \"normal\"\n        },\n        \"severity\": {\n            \"id\": 20,\n            \"name\": \"trivial\",\n            \"label\": \"Trivial\"\n        },\n        \"reproducibility\": {\n            \"id\": 10,\n            \"name\": \"always\",\n            \"label\": \"immer\"\n        },\n        \"sticky\": false,\n        \"created_at\": \"2018-01-07T18:47:35-05:00\",\n        \"updated_at\": \"2018-01-07T18:47:35-05:00\",\n        \"custom_fields\": [\n            {\n                \"field\": {\n                    \"id\": 4,\n                    \"name\": \"The City\"\n                },\n                \"value\": \"Seattle\"\n            }\n        ],\n        \"tags\": [\n            {\n                \"id\": \"1\",\n                \"name\": \"mantishub\"\n            }\n        ],\n        \"history\": [\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"type\": {\n                    \"id\": 1,\n                    \"name\": \"issue-new\"\n                },\n                \"message\": \"Neuer Eintrag\"\n            },\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"field\": {\n                    \"name\": \"status\",\n                    \"label\": \"Status\"\n                },\n                \"type\": {\n                    \"id\": 0,\n                    \"name\": \"field-updated\"\n                },\n                \"old_value\": {\n                    \"id\": 10,\n                    \"name\": \"new\",\n                    \"label\": \"neu\",\n                    \"color\": \"#fcbdbd\"\n                },\n                \"new_value\": {\n                    \"id\": 50,\n                    \"name\": \"assigned\",\n                    \"label\": \"zugewiesen\",\n                    \"color\": \"#c2dfff\"\n                },\n                \"message\": \"Status\",\n                \"change\": \"neu => zugewiesen\"\n            },\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"field\": {\n                    \"name\": \"handler\",\n                    \"label\": \"Bearbeitung durch\"\n                },\n                \"type\": {\n                    \"id\": 0,\n                    \"name\": \"field-updated\"\n                },\n                \"old_value\": {\n                    \"id\": 0\n                },\n                \"new_value\": {\n                    \"id\": 1,\n                    \"name\": \"vboctor\"\n                },\n                \"message\": \"Bearbeitung durch\",\n                \"change\": \" => vboctor\"\n            },\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"type\": {\n                    \"id\": 25,\n                    \"name\": \"tag-added\"\n                },\n                \"tag\": {\n                    \"id\": \"1\",\n                    \"name\": \"mantishub\"\n                },\n                \"message\": \"Tag zugeordnet: mantishub\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Access Denied",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"summary\": \"Sample REST issue\",\n    \"description\": \"Description for sample REST issue.\",\n    \"additional_information\": \"More info about the issue\",\n    \"project\": {\n        \"id\": 1,\n        \"name\": \"mantisbt\"\n    },\n    \"category\": {\n        \"id\": 5,\n        \"name\": \"bugtracker\"\n    },\n    \"handler\": {\n        \"name\": \"vboctor\"\n    },\n    \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\"\n    },\n    \"priority\": {\n        \"name\": \"normal\"\n    },\n    \"severity\": {\n        \"name\": \"trivial\"\n    },\n    \"reproducibility\": {\n        \"name\": \"always\"\n    },\n    \"sticky\": false,\n    \"custom_fields\": [\n        {\n            \"field\": {\n                \"id\": 4,\n                \"name\": \"The City\"\n            },\n            \"value\": \"Seattle\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"mantishub\"\n        }\n    ]\n}\n"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									]
+								}
+							},
+							"status": "User does not have access right to report issues",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:31:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User does not have access right to report issues\",\n    \"code\": 13,\n    \"localized\": \"Access Denied.\"\n}"
+						},
+						{
+							"name": "Project not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"summary\": \"Sample REST issue\",\n    \"description\": \"Description for sample REST issue.\",\n    \"additional_information\": \"More info about the issue\",\n    \"project\": {\n        \"id\": 5,\n        \"name\": \"mantisbt\"\n    },\n    \"category\": {\n        \"id\": 5,\n        \"name\": \"bugtracker\"\n    },\n    \"handler\": {\n        \"name\": \"vboctor\"\n    },\n    \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\"\n    },\n    \"priority\": {\n        \"name\": \"normal\"\n    },\n    \"severity\": {\n        \"name\": \"trivial\"\n    },\n    \"reproducibility\": {\n        \"name\": \"always\"\n    },\n    \"sticky\": false,\n    \"custom_fields\": [\n        {\n            \"field\": {\n                \"id\": 4,\n                \"name\": \"The City\"\n            },\n            \"value\": \"Seattle\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"mantishub\"\n        }\n    ]\n}\n"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									]
+								}
+							},
+							"status": "Project '5' not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:33:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Project '5' not found\",\n    \"code\": 700,\n    \"localized\": \"Project \\\"5\\\" not found.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create an issue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"summary\": \"Sample REST issue\",\n    \"description\": \"Description for sample REST issue.\",\n    \"additional_information\": \"More info about the issue\",\n    \"project\": {\n        \"id\": 1,\n        \"name\": \"mantisbt\"\n    },\n    \"category\": {\n        \"id\": 5,\n        \"name\": \"bugtracker\"\n    },\n    \"handler\": {\n        \"name\": \"vboctor\"\n    },\n    \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\"\n    },\n    \"priority\": {\n        \"name\": \"normal\"\n    },\n    \"severity\": {\n        \"name\": \"trivial\"\n    },\n    \"reproducibility\": {\n        \"name\": \"always\"\n    },\n    \"sticky\": false,\n    \"custom_fields\": [\n        {\n            \"field\": {\n                \"id\": 4,\n                \"name\": \"The City\"\n            },\n            \"value\": \"Seattle\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"mantishub\"\n        }\n    ]\n}\n"
+						},
+						"url": {
+							"raw": "{{url}}/api/rest/issues",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"rest",
+								"issues"
+							]
+						},
+						"description": "Create an issue with most fields supplied.\n\nAvailable since MantisBT 2.3.0."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"summary\": \"Sample REST issue\",\n    \"description\": \"Description for sample REST issue.\",\n    \"additional_information\": \"More info about the issue\",\n    \"project\": {\n        \"id\": 1,\n        \"name\": \"mantisbt\"\n    },\n    \"category\": {\n        \"id\": 5,\n        \"name\": \"bugtracker\"\n    },\n    \"handler\": {\n        \"name\": \"vboctor\"\n    },\n    \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\"\n    },\n    \"priority\": {\n        \"name\": \"normal\"\n    },\n    \"severity\": {\n        \"name\": \"trivial\"\n    },\n    \"reproducibility\": {\n        \"name\": \"always\"\n    },\n    \"sticky\": false,\n    \"custom_fields\": [\n        {\n            \"field\": {\n                \"id\": 4,\n                \"name\": \"The City\"\n            },\n            \"value\": \"Seattle\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"mantishub\"\n        }\n    ]\n}\n"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									]
+								}
+							},
+							"status": "Issue Created with id 22131",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800",
+									"name": "Cache-Control",
+									"description": ""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0",
+									"name": "Cache-Control",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "2401",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Jan 2018 23:47:34 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": ""
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Sun, 31 Dec 2017 19:58:54 GMT",
+									"name": "Last-Modified",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "Apache",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token",
+									"name": "X-Mantis-LoginMethod",
+									"description": ""
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "EvilMan",
+									"name": "X-Mantis-Username",
+									"description": ""
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.11.0-dev",
+									"name": "X-Mantis-Version",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
+									"httpOnly": true,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "be0edb4fdc0a4378b2ef8cbc368d7e1f",
+									"key": "PHPSESSID"
+								}
+							],
+							"body": "{\n    \"issue\": {\n        \"id\": 1,\n        \"summary\": \"Sample REST issue\",\n        \"description\": \"Description for sample REST issue.\",\n        \"additional_information\": \"More info about the issue\",\n        \"project\": {\n            \"id\": 1,\n            \"name\": \"mantisbt\"\n        },\n        \"category\": {\n            \"id\": 5,\n            \"name\": \"bugtracker\"\n        },\n        \"reporter\": {\n            \"id\": 2,\n            \"name\": \"GermanReporter\"\n        },\n        \"handler\": {\n            \"id\": 1,\n            \"name\": \"vboctor\"\n        },\n        \"status\": {\n            \"id\": 50,\n            \"name\": \"assigned\",\n            \"label\": \"zugewiesen\",\n            \"color\": \"#c2dfff\"\n        },\n        \"resolution\": {\n            \"id\": 10,\n            \"name\": \"open\",\n            \"label\": \"offen\"\n        },\n        \"view_state\": {\n            \"id\": 10,\n            \"name\": \"public\",\n            \"label\": \"öffentlich\"\n        },\n        \"priority\": {\n            \"id\": 30,\n            \"name\": \"normal\",\n            \"label\": \"normal\"\n        },\n        \"severity\": {\n            \"id\": 20,\n            \"name\": \"trivial\",\n            \"label\": \"Trivial\"\n        },\n        \"reproducibility\": {\n            \"id\": 10,\n            \"name\": \"always\",\n            \"label\": \"immer\"\n        },\n        \"sticky\": false,\n        \"created_at\": \"2018-01-07T18:47:35-05:00\",\n        \"updated_at\": \"2018-01-07T18:47:35-05:00\",\n        \"custom_fields\": [\n            {\n                \"field\": {\n                    \"id\": 4,\n                    \"name\": \"The City\"\n                },\n                \"value\": \"Seattle\"\n            }\n        ],\n        \"tags\": [\n            {\n                \"id\": \"1\",\n                \"name\": \"mantishub\"\n            }\n        ],\n        \"history\": [\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"type\": {\n                    \"id\": 1,\n                    \"name\": \"issue-new\"\n                },\n                \"message\": \"Neuer Eintrag\"\n            },\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"field\": {\n                    \"name\": \"status\",\n                    \"label\": \"Status\"\n                },\n                \"type\": {\n                    \"id\": 0,\n                    \"name\": \"field-updated\"\n                },\n                \"old_value\": {\n                    \"id\": 10,\n                    \"name\": \"new\",\n                    \"label\": \"neu\",\n                    \"color\": \"#fcbdbd\"\n                },\n                \"new_value\": {\n                    \"id\": 50,\n                    \"name\": \"assigned\",\n                    \"label\": \"zugewiesen\",\n                    \"color\": \"#c2dfff\"\n                },\n                \"message\": \"Status\",\n                \"change\": \"neu => zugewiesen\"\n            },\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"field\": {\n                    \"name\": \"handler\",\n                    \"label\": \"Bearbeitung durch\"\n                },\n                \"type\": {\n                    \"id\": 0,\n                    \"name\": \"field-updated\"\n                },\n                \"old_value\": {\n                    \"id\": 0\n                },\n                \"new_value\": {\n                    \"id\": 1,\n                    \"name\": \"vboctor\"\n                },\n                \"message\": \"Bearbeitung durch\",\n                \"change\": \" => vboctor\"\n            },\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"type\": {\n                    \"id\": 25,\n                    \"name\": \"tag-added\"\n                },\n                \"tag\": {\n                    \"id\": \"1\",\n                    \"name\": \"mantishub\"\n                },\n                \"message\": \"Tag zugeordnet: mantishub\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Access Denied",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"summary\": \"Sample REST issue\",\n    \"description\": \"Description for sample REST issue.\",\n    \"additional_information\": \"More info about the issue\",\n    \"project\": {\n        \"id\": 1,\n        \"name\": \"mantisbt\"\n    },\n    \"category\": {\n        \"id\": 5,\n        \"name\": \"bugtracker\"\n    },\n    \"handler\": {\n        \"name\": \"vboctor\"\n    },\n    \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\"\n    },\n    \"priority\": {\n        \"name\": \"normal\"\n    },\n    \"severity\": {\n        \"name\": \"trivial\"\n    },\n    \"reproducibility\": {\n        \"name\": \"always\"\n    },\n    \"sticky\": false,\n    \"custom_fields\": [\n        {\n            \"field\": {\n                \"id\": 4,\n                \"name\": \"The City\"\n            },\n            \"value\": \"Seattle\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"mantishub\"\n        }\n    ]\n}\n"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									]
+								}
+							},
+							"status": "User does not have access right to report issues",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:31:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User does not have access right to report issues\",\n    \"code\": 13,\n    \"localized\": \"Access Denied.\"\n}"
+						},
+						{
+							"name": "Project not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"summary\": \"Sample REST issue\",\n    \"description\": \"Description for sample REST issue.\",\n    \"additional_information\": \"More info about the issue\",\n    \"project\": {\n        \"id\": 5,\n        \"name\": \"mantisbt\"\n    },\n    \"category\": {\n        \"id\": 5,\n        \"name\": \"bugtracker\"\n    },\n    \"handler\": {\n        \"name\": \"vboctor\"\n    },\n    \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\"\n    },\n    \"priority\": {\n        \"name\": \"normal\"\n    },\n    \"severity\": {\n        \"name\": \"trivial\"\n    },\n    \"reproducibility\": {\n        \"name\": \"always\"\n    },\n    \"sticky\": false,\n    \"custom_fields\": [\n        {\n            \"field\": {\n                \"id\": 4,\n                \"name\": \"The City\"\n            },\n            \"value\": \"Seattle\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"mantishub\"\n        }\n    ]\n}\n"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									]
+								}
+							},
+							"status": "Project '5' not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:33:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Project '5' not found\",\n    \"code\": 700,\n    \"localized\": \"Project \\\"5\\\" not found.\"\n}"
 						}
 					]
 				},
@@ -1042,7 +2152,7 @@
 					},
 					"response": [
 						{
-							"name": "success",
+							"name": "Success",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -1156,7 +2266,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -1166,6 +2276,154 @@
 								}
 							],
 							"body": "{\n    \"issue\": {\n        \"id\": 1,\n        \"summary\": \"Sample REST issue\",\n        \"description\": \"Description for sample REST issue.\",\n        \"additional_information\": \"More info about the issue\",\n        \"project\": {\n            \"id\": 1,\n            \"name\": \"mantisbt\"\n        },\n        \"category\": {\n            \"id\": 5,\n            \"name\": \"bugtracker\"\n        },\n        \"reporter\": {\n            \"id\": 2,\n            \"name\": \"GermanReporter\"\n        },\n        \"handler\": {\n            \"id\": 1,\n            \"name\": \"vboctor\"\n        },\n        \"status\": {\n            \"id\": 50,\n            \"name\": \"assigned\",\n            \"label\": \"zugewiesen\",\n            \"color\": \"#c2dfff\"\n        },\n        \"resolution\": {\n            \"id\": 10,\n            \"name\": \"open\",\n            \"label\": \"offen\"\n        },\n        \"view_state\": {\n            \"id\": 10,\n            \"name\": \"public\",\n            \"label\": \"öffentlich\"\n        },\n        \"priority\": {\n            \"id\": 30,\n            \"name\": \"normal\",\n            \"label\": \"normal\"\n        },\n        \"severity\": {\n            \"id\": 20,\n            \"name\": \"trivial\",\n            \"label\": \"Trivial\"\n        },\n        \"reproducibility\": {\n            \"id\": 10,\n            \"name\": \"always\",\n            \"label\": \"immer\"\n        },\n        \"sticky\": false,\n        \"created_at\": \"2018-01-07T18:47:35-05:00\",\n        \"updated_at\": \"2018-01-07T18:47:35-05:00\",\n        \"custom_fields\": [\n            {\n                \"field\": {\n                    \"id\": 4,\n                    \"name\": \"The City\"\n                },\n                \"value\": \"Seattle\"\n            }\n        ],\n        \"tags\": [\n            {\n                \"id\": \"1\",\n                \"name\": \"mantishub\"\n            }\n        ],\n        \"history\": [\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"type\": {\n                    \"id\": 1,\n                    \"name\": \"issue-new\"\n                },\n                \"message\": \"Neuer Eintrag\"\n            },\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"field\": {\n                    \"name\": \"status\",\n                    \"label\": \"Status\"\n                },\n                \"type\": {\n                    \"id\": 0,\n                    \"name\": \"field-updated\"\n                },\n                \"old_value\": {\n                    \"id\": 10,\n                    \"name\": \"new\",\n                    \"label\": \"neu\",\n                    \"color\": \"#fcbdbd\"\n                },\n                \"new_value\": {\n                    \"id\": 50,\n                    \"name\": \"assigned\",\n                    \"label\": \"zugewiesen\",\n                    \"color\": \"#c2dfff\"\n                },\n                \"message\": \"Status\",\n                \"change\": \"neu => zugewiesen\"\n            },\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"field\": {\n                    \"name\": \"handler\",\n                    \"label\": \"Bearbeitung durch\"\n                },\n                \"type\": {\n                    \"id\": 0,\n                    \"name\": \"field-updated\"\n                },\n                \"old_value\": {\n                    \"id\": 0\n                },\n                \"new_value\": {\n                    \"id\": 1,\n                    \"name\": \"vboctor\"\n                },\n                \"message\": \"Bearbeitung durch\",\n                \"change\": \" => vboctor\"\n            },\n            {\n                \"created_at\": \"2018-01-07T18:47:35-05:00\",\n                \"user\": {\n                    \"id\": 2,\n                    \"name\": \"GermanReporter\",\n                    \"email\": \"german-reporter@example.com\"\n                },\n                \"type\": {\n                    \"id\": 25,\n                    \"name\": \"tag-added\"\n                },\n                \"tag\": {\n                    \"id\": \"1\",\n                    \"name\": \"mantishub\"\n                },\n                \"message\": \"Tag zugeordnet: mantishub\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Access Denied",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"summary\": \"Sample REST issue\",\n    \"description\": \"Description for sample REST issue.\",\n    \"additional_information\": \"More info about the issue\",\n    \"project\": {\n        \"id\": 1,\n        \"name\": \"mantisbt\"\n    },\n    \"category\": {\n        \"id\": 5,\n        \"name\": \"bugtracker\"\n    },\n    \"handler\": {\n        \"name\": \"vboctor\"\n    },\n    \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\"\n    },\n    \"priority\": {\n        \"name\": \"normal\"\n    },\n    \"severity\": {\n        \"name\": \"trivial\"\n    },\n    \"reproducibility\": {\n        \"name\": \"always\"\n    },\n    \"sticky\": false,\n    \"custom_fields\": [\n        {\n            \"field\": {\n                \"id\": 4,\n                \"name\": \"The City\"\n            },\n            \"value\": \"Seattle\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"mantishub\"\n        }\n    ]\n}\n"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									]
+								}
+							},
+							"status": "User does not have access right to report issues",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:31:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User does not have access right to report issues\",\n    \"code\": 13,\n    \"localized\": \"Access Denied.\"\n}"
+						},
+						{
+							"name": "Project not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"summary\": \"Sample REST issue\",\n    \"description\": \"Description for sample REST issue.\",\n    \"additional_information\": \"More info about the issue\",\n    \"project\": {\n        \"id\": 5,\n        \"name\": \"mantisbt\"\n    },\n    \"category\": {\n        \"id\": 5,\n        \"name\": \"bugtracker\"\n    },\n    \"handler\": {\n        \"name\": \"vboctor\"\n    },\n    \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\"\n    },\n    \"priority\": {\n        \"name\": \"normal\"\n    },\n    \"severity\": {\n        \"name\": \"trivial\"\n    },\n    \"reproducibility\": {\n        \"name\": \"always\"\n    },\n    \"sticky\": false,\n    \"custom_fields\": [\n        {\n            \"field\": {\n                \"id\": 4,\n                \"name\": \"The City\"\n            },\n            \"value\": \"Seattle\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"name\": \"mantishub\"\n        }\n    ]\n}\n"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues"
+									]
+								}
+							},
+							"status": "Project '5' not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:33:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Project '5' not found\",\n    \"code\": 700,\n    \"localized\": \"Project \\\"5\\\" not found.\"\n}"
 						}
 					]
 				},
@@ -1185,7 +2443,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"handler\": {\n    \"name\": \"vboctor\"\n  },\n  \"status\": {\n    \"name\": \"assigned\"\n  }\n}"
+							"raw": "{\n  \"handler\": {\n  \t\"name\": \"vboctor\"\n  },\n  \"status\": {\n  \t\"name\": \"assigned\"\n  } \n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/issues/:issue_id",
@@ -1210,7 +2468,7 @@
 					},
 					"response": [
 						{
-							"name": "Update an issue (access denied)",
+							"name": "Access Denied",
 							"originalRequest": {
 								"method": "PATCH",
 								"header": [
@@ -1243,7 +2501,7 @@
 									"variable": [
 										{
 											"key": "issue_id",
-											"value": "22066",
+											"value": "1234",
 											"description": "The issue id"
 										}
 									]
@@ -1310,7 +2568,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -1319,7 +2577,114 @@
 									"key": "PHPSESSID"
 								}
 							],
-							"body": "{\"message\":\"Access denied for user GermanReporter. Reason: Not enough rights to update issues.\"}"
+							"body": "{\"message\":\"Access denied for user vboctor. Reason: Not enough rights to update issues.\"}"
+						},
+						{
+							"name": "Issue not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id"
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "1234",
+											"description": "The issue id"
+										}
+									]
+								}
+							},
+							"status": "Issue #1234 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800",
+									"name": "Cache-Control",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "89",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Jan 2018 23:35:27 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": ""
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Sun, 31 Dec 2017 19:58:54 GMT",
+									"name": "Last-Modified",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "Apache",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
+									"httpOnly": true,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "be0edb4fdc0a4378b2ef8cbc368d7e1f",
+									"key": "PHPSESSID"
+								}
+							],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
 						}
 					]
 				},
@@ -1339,7 +2704,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"summary\": \"This is a test rest issue\",\n  \"priority\": {\n    \"name\": \"high\"\n  },\n  \"handler\": {\n    \"name\": \"vboctor\"\n  },\n  \"status\": {\n    \"name\": \"assigned\"\n  },\n  \"custom_fields\":\n  [\n    {\n      \"field\": {\n        \"name\": \"Email\"\n      },\n      \"value\": \"vboctor@example.com\"\n    }\n  ],\n  \"notes\": [\n    {\n      \"id\": 54527,\n      \"reporter\": {\n        \"name\": \"vboctor\"\n      },\n      \"text\": \"This is a note from issue update.\",\n      \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\",\n        \"label\": \"public\"\n      },\n      \"type\": \"note\"\n    },\n    {\n      \"reporter\": {\n        \"name\": \"vboctor\"\n      },\n      \"text\": \"another note 1.\",\n      \"view_state\": {\n        \"name\": \"public\"\n      },\n      \"type\": \"note\"\n    },\n    {\n      \"reporter\": {\n        \"name\": \"vboctor\"\n      },\n      \"text\": \"Another note 2\",\n      \"view_state\": {\n        \"name\": \"public\"\n      },\n      \"type\": \"note\"\n    }\n  ]\n}"
+							"raw": "{\n  \"summary\": \"This is a test rest issue\",\n  \"priority\": {\n    \"name\": \"high\"\n  },\n  \"handler\": {\n  \t\"name\": \"vboctor\"\n  },\n  \"status\": {\n  \t\"name\": \"assigned\"\n  },\n  \"custom_fields\":\n  [\n    {\n      \"field\": {\n        \"name\": \"Email\"\n      },\n      \"value\": \"vboctor@example.com\"\n    }\n  ],\n  \"notes\": [\n    {\n      \"id\": 54527,\n      \"reporter\": {\n        \"name\": \"vboctor\"\n      },\n      \"text\": \"This is a note from issue update.\",\n      \"view_state\": {\n        \"id\": 10,\n        \"name\": \"public\",\n        \"label\": \"public\"\n      },\n      \"type\": \"note\"\n    },\n    {\n      \"reporter\": {\n        \"name\": \"vboctor\"\n      },\n      \"text\": \"another note 1.\",\n      \"view_state\": {\n        \"name\": \"public\"\n      },\n      \"type\": \"note\"\n    },\n    {\n      \"reporter\": {\n        \"name\": \"vboctor\"\n      },\n      \"text\": \"Another note 2\",\n      \"view_state\": {\n        \"name\": \"public\"\n      },\n      \"type\": \"note\"\n    }\n  ]\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/issues/:issue_id",
@@ -1364,7 +2729,7 @@
 					},
 					"response": [
 						{
-							"name": "Update an issue (access denied)",
+							"name": "Access Denied",
 							"originalRequest": {
 								"method": "PATCH",
 								"header": [
@@ -1464,7 +2829,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -1473,7 +2838,114 @@
 									"key": "PHPSESSID"
 								}
 							],
-							"body": "{\"message\":\"Access denied for user GermanReporter. Reason: Not enough rights to update issues.\"}"
+							"body": "{\"message\":\"Access denied for user vboctor. Reason: Not enough rights to update issues.\"}"
+						},
+						{
+							"name": "Issue not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id"
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "1234",
+											"description": "The issue id"
+										}
+									]
+								}
+							},
+							"status": "Issue #1234 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800",
+									"name": "Cache-Control",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "89",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Jan 2018 23:35:27 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": ""
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Sun, 31 Dec 2017 19:58:54 GMT",
+									"name": "Last-Modified",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "Apache",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8",
+									"name": "X-Powered-By",
+									"description": ""
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
+									"httpOnly": true,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "be0edb4fdc0a4378b2ef8cbc368d7e1f",
+									"key": "PHPSESSID"
+								}
+							],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
 						}
 					]
 				},
@@ -1514,7 +2986,7 @@
 					},
 					"response": [
 						{
-							"name": "Delete an issue (success)",
+							"name": "Success",
 							"originalRequest": {
 								"method": "DELETE",
 								"header": [
@@ -1645,7 +3117,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -1657,7 +3129,7 @@
 							"body": ""
 						},
 						{
-							"name": "Delete an issue (not found)",
+							"name": "Issue not found",
 							"originalRequest": {
 								"method": "DELETE",
 								"header": [
@@ -1752,7 +3224,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -1781,7 +3253,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"files\": [\n    {\n      \"name\": \"test.txt\",\n      \"content\": \"VGhpcyBpcyBhIFRFU1QuDQpUaGlzIGlzIGEgVEVTVC4NClRoaXMgaXMgYSBURVNULg0KVGhpcyBpcyBhIFRFU1QuDQpUaGlzIGlzIGEgVEVTVC4=\"\n    }    \n  ]\n}"
+							"raw": "{\n  \"files\": [\n  \t{\n  \t\t\"name\": \"test.txt\",\n  \t\t\"content\": \"VGhpcyBpcyBhIFRFU1QuDQpUaGlzIGlzIGEgVEVTVC4NClRoaXMgaXMgYSBURVNULg0KVGhpcyBpcyBhIFRFU1QuDQpUaGlzIGlzIGEgVEVTVC4=\"\n  \t}  \t\n  ]\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/issues/:issue_id/files",
@@ -1823,7 +3295,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"text\": \"test note\",\n  \"view_state\": {\n    \"name\": \"public\"\n  }\n}"
+							"raw": "{\n  \"text\": \"test note\",\n  \"view_state\": {\n  \t\"name\": \"public\"\n  }\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/issues/:issue_id/notes",
@@ -1865,7 +3337,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"text\": \"test note\",\n  \"view_state\": {\n    \"name\": \"public\"\n  },\n  \"time_tracking\": {\n    \"duration\": \"00:15\"\n  }\n}"
+							"raw": "{\n  \"text\": \"test note\",\n  \"view_state\": {\n  \t\"name\": \"public\"\n  },\n  \"time_tracking\": {\n  \t\"duration\": \"00:15\"\n  }\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/issues/:issue_id/notes",
@@ -1907,7 +3379,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"text\": \"test note\",\n  \"view_state\": {\n    \"name\": \"public\"\n  },\n  \"time_tracking\": {\n    \"duration\": \"00:15\"\n  },\n  \"files\": [\n    {\n      \"name\": \"test.txt\",\n      \"content\": \"VGhpcyBpcyBhIFRFU1QuDQpUaGlzIGlzIGEgVEVTVC4NClRoaXMgaXMgYSBURVNULg0KVGhpcyBpcyBhIFRFU1QuDQpUaGlzIGlzIGEgVEVTVC4=\"\n    }    \n  ]\n}"
+							"raw": "{\n  \"text\": \"test note\",\n  \"view_state\": {\n  \t\"name\": \"public\"\n  },\n  \"time_tracking\": {\n  \t\"duration\": \"00:15\"\n  },\n  \"files\": [\n  \t{\n  \t\t\"name\": \"test.txt\",\n  \t\t\"content\": \"VGhpcyBpcyBhIFRFU1QuDQpUaGlzIGlzIGEgVEVTVC4NClRoaXMgaXMgYSBURVNULg0KVGhpcyBpcyBhIFRFU1QuDQpUaGlzIGlzIGEgVEVTVC4=\"\n  \t}  \t\n  ]\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/issues/:issue_id/notes",
@@ -1949,7 +3421,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"text\": \"This is a test rest issue\",\n  \"view_state\": {\n    \"name\": \"private\"\n  },\n  \"reporter\": {\n    \"name\": \"vboctor\"\n  }\n}"
+							"raw": "{\n  \"text\": \"This is a test rest issue\",\n  \"view_state\": {\n  \t\"name\": \"private\"\n  },\n  \"reporter\": {\n  \t\"name\": \"vboctor\"\n  }\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/issues/:issue_id/notes/:issue_note_id",
@@ -2021,7 +3493,91 @@
 						},
 						"description": "Have logged in user monitor the specified issue.\n\nAvailable since MantisBT 2.11.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Issue not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id/monitors",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id",
+										"monitors"
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "1234",
+											"description": "The issue id"
+										}
+									]
+								}
+							},
+							"status": "Issue #1234 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:36:44 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Monitor an issue (for specified users)",
@@ -2039,7 +3595,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"users\": [\n    {\n      \"name\": \"vboctor-admin\"\n    },\n    {\n      \"name_or_realname\": \"Victor Boctor\"\n    }\n  ]\n}"
+							"raw": "{\n\t\"users\": [\n\t\t{\n\t\t\t\"name\": \"vboctor-admin\"\n\t\t},\n\t\t{\n\t\t\t\"name_or_realname\": \"Victor Boctor\"\n\t\t}\n\t]\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/issues/:issue_id/monitors",
@@ -2063,7 +3619,91 @@
 						},
 						"description": "Have one or more users monitor the specified issue.  The users can be identified via:\n\n- id - their user id.\n- name - their username\n- email - their email address\n- name_or_realname - a string that corresponds to their username or real name.\n\nIf user id is not specified, the logged in user id is added to the issue as the monitoring user.\n\nIf user id is not the same as logged in user id, a high access level is required which enables adding other users to the monitor list.\n\nAvailable since MantisBT 2.11.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Issue not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"users\": [\n\t\t{\n\t\t\t\"name\": \"vboctor-admin\"\n\t\t},\n\t\t{\n\t\t\t\"name_or_realname\": \"Victor Boctor\"\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id/monitors",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id",
+										"monitors"
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "1234",
+											"description": "The issue id"
+										}
+									]
+								}
+							},
+							"status": "Issue #1234 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:36:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Attach a tag to issue",
@@ -2081,10 +3721,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"text\": \"test note\",\n  \"view_state\": {\n    \"name\": \"public\"\n  }\n}"
+							"raw": "{\n  \"tags\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"name\": \"tag2\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"tag3\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "{{url}}/api/rest/issues/:issue_id/notes",
+							"raw": "{{url}}/api/rest/issues/:issue_id/tags",
 							"host": [
 								"{{url}}"
 							],
@@ -2093,7 +3738,7 @@
 								"rest",
 								"issues",
 								":issue_id",
-								"notes"
+								"tags"
 							],
 							"variable": [
 								{
@@ -2105,7 +3750,96 @@
 						},
 						"description": "Attach a tag to issue\n\nAvailable since MantisBT 2.11.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Issue not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tags\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"name\": \"tag2\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"tag3\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id/tags",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id",
+										"tags"
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "1234",
+											"description": "The issue id"
+										}
+									]
+								}
+							},
+							"status": "Issue #1234 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:37:14 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Detach a tag from an issue",
@@ -2123,10 +3857,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"text\": \"test note\",\n  \"view_state\": {\n    \"name\": \"public\"\n  }\n}"
+							"raw": "{\n  \"tag_id\": 1\n}"
 						},
 						"url": {
-							"raw": "{{url}}/api/rest/issues/:issue_id/notes",
+							"raw": "{{url}}/api/rest/issues/:issue_id/tags",
 							"host": [
 								"{{url}}"
 							],
@@ -2135,7 +3869,7 @@
 								"rest",
 								"issues",
 								":issue_id",
-								"notes"
+								"tags"
 							],
 							"variable": [
 								{
@@ -2147,50 +3881,91 @@
 						},
 						"description": "Detach a tag from an issue.\n\nAvailable since MantisBT 2.11.0."
 					},
-					"response": []
-				},
-				{
-					"name": "Attach a tag to issue copy",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"issue\": {\n    \"id\": 1235\n  },\n  \"type\": {\n    \"id\": 1,\n    \"name\": \"related-to\"\n  }\n}"
-						},
-						"url": {
-							"raw": "{{url}}/api/rest/issues/:issue_id/relationships/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"rest",
-								"issues",
-								":issue_id",
-								"relationships",
-								""
-							],
-							"variable": [
-								{
-									"key": "issue_id",
-									"value": "1234",
-									"description": "The issue id"
+					"response": [
+						{
+							"name": "Issue not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tag_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id/tags",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id",
+										"tags"
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "1234",
+											"description": "The issue id"
+										}
+									]
 								}
-							]
-						},
-						"description": "Add issue relationship to an issue.  If a relationship with the target issue already exists, it will be updated.\n\nAvailable since MantisBT 2.11.0."
-					},
-					"response": []
+							},
+							"status": "Issue #1234 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:37:27 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Add an issue relatiobship",
@@ -2208,7 +3983,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"issue\": {\n\t\t\"id\": 22030\n\t},\n\t\"type\": {\n\t\t\"name\": \"related-to\"\n\t}\n}"
+							"raw": "{\n\t\"issue\": {\n\t\t\"id\": 1235\n\t},\n\t\"type\": {\n\t\t\"name\": \"related-to\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/issues/:issue_id/relationships/",
@@ -2225,15 +4000,102 @@
 							],
 							"variable": [
 								{
-									"description": "The issue id",
 									"key": "issue_id",
-									"value": "1234"
+									"value": "1234",
+									"type": "string",
+									"description": "The issue id"
 								}
 							]
 						},
 						"description": "Delete an issue relationship.\n\nAvailable since MantisBT 2.6.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Issue not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"issue\": {\n\t\t\"id\": 22030\n\t},\n\t\"type\": {\n\t\t\"name\": \"related-to\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id/relationships/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id",
+										"relationships",
+										""
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "1234",
+											"type": "string",
+											"description": "The issue id"
+										}
+									]
+								}
+							},
+							"status": "Issue #1234 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 19:37:40 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete an issue relationship",
@@ -2281,11 +4143,100 @@
 						},
 						"description": "Delete an issue relationship.\n\nAvailable since MantisBT 2.6.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Issue not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id/relationships/:relationship_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id",
+										"relationships",
+										":relationship_id"
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "1234",
+											"description": "The issue id"
+										},
+										{
+											"key": "relationship_id",
+											"value": "4321",
+											"description": "The relationship id"
+										}
+									]
+								}
+							},
+							"status": "Issue #1234 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 20:29:36 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
+						}
+					]
 				}
 			],
-			"description": "A set of REST API for handling issues.",
-			"protocolProfileBehavior": {}
+			"description": "A set of REST API for handling issues."
 		},
 		{
 			"name": "Projects",
@@ -2424,7 +4375,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -2577,7 +4528,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -2587,6 +4538,482 @@
 								}
 							],
 							"body": "{\n    \"projects\": [\n        {\n            \"id\": 1,\n            \"name\": \"mantisbt\",\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"development\",\n                \"label\": \"development\"\n            },\n            \"description\": \"Mantis Project\",\n            \"enabled\": true,\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"access_level\": {\n                \"id\": 90,\n                \"name\": \"administrator\",\n                \"label\": \"administrator\"\n            },\n            \"custom_fields\": [\n                {\n                    \"id\": 8,\n                    \"name\": \"Email\",\n                    \"type\": \"email\",\n                    \"default_value\": \"\",\n                    \"possible_values\": \"\",\n                    \"valid_regexp\": \"\",\n                    \"length_min\": 0,\n                    \"length_max\": 0,\n                    \"access_level_r\": {\n                        \"id\": 10,\n                        \"name\": \"viewer\",\n                        \"label\": \"viewer\"\n                    },\n                    \"access_level_rw\": {\n                        \"id\": 10,\n                        \"name\": \"viewer\",\n                        \"label\": \"viewer\"\n                    },\n                    \"display_report\": true,\n                    \"display_update\": true,\n                    \"display_resolved\": true,\n                    \"display_closed\": true,\n                    \"require_report\": false,\n                    \"require_update\": false,\n                    \"require_resolved\": false,\n                    \"require_closed\": false\n                }\n            ],\n            \"versions\": [\n                {\n                    \"id\": 258,\n                    \"name\": \"2.0.x\",\n                    \"description\": \"\",\n                    \"released\": false,\n                    \"obsolete\": false,\n                    \"timestamp\": \"2016-10-02T18:45:04-04:00\"\n                }\n            ],\n            \"subProjects\": [\n                {\n                    \"id\": 31,\n                    \"name\": \"SubProject1\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Project Users that can be assigned issues",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/rest/projects/:project_id/handlers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"rest",
+								"projects",
+								":project_id",
+								"handlers"
+							],
+							"query": [
+								{
+									"key": "include_access_levels",
+									"value": "0",
+									"description": "1 to include access level for each user, 0 to skip such information",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "project_id",
+									"value": "1",
+									"description": "The project id"
+								}
+							]
+						},
+						"description": "Get users that can be assigned issues for a project along with their effective project access levels.\n\nThe caller must have VIEWER access to the project, otherwise, project doesn't exist error will be returned.\n\nAvailable since MantisBT 2.26.0."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/projects/:project_id/handlers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"projects",
+										":project_id",
+										"handlers"
+									],
+									"query": [
+										{
+											"key": "include_access_levels",
+											"value": "0",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"description": "The project id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 00:13:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "140"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"administrator\",\n            \"email\": \"root@localhost\",\n            \"access_level\": {\n                \"id\": 90,\n                \"name\": \"administrator\",\n                \"label\": \"administrator\"\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "Success No Access Level",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/projects/:project_id/handlers?include_access_levels=0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"projects",
+										":project_id",
+										"handlers"
+									],
+									"query": [
+										{
+											"key": "include_access_levels",
+											"value": "0"
+										}
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"description": "The project id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 00:14:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"administrator\",\n            \"email\": \"root@localhost\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Project Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/rest/projects/:project_id/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"rest",
+								"projects",
+								":project_id",
+								"users"
+							],
+							"query": [
+								{
+									"key": "access_level",
+									"value": "25",
+									"description": "The access level code. Will show users with access level greater or equal to this value.",
+									"disabled": true
+								},
+								{
+									"key": "include_access_levels",
+									"value": "0",
+									"description": "1 to include access level for each user, 0 to skip such information",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "project_id",
+									"value": "1",
+									"description": "The project id"
+								}
+							]
+						},
+						"description": "Get users that have access to a project along with their effective project access levels. The list can be filtered by minimum access level where users with such access level or higher will be returned.\n\nThe caller must have VIEWER access to the project, otherwise, project doesn't exist error will be returned.\n\nAvailable since MantisBT 2.26.0."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/projects/:project_id/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"projects",
+										":project_id",
+										"users"
+									],
+									"query": [
+										{
+											"key": "access_level",
+											"value": "25",
+											"disabled": true
+										},
+										{
+											"key": "include_access_levels",
+											"value": "0",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"description": "The project id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 00:16:03 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "140"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"administrator\",\n            \"email\": \"root@localhost\",\n            \"access_level\": {\n                \"id\": 90,\n                \"name\": \"administrator\",\n                \"label\": \"administrator\"\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "Success No Access Level",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/projects/:project_id/users?include_access_levels=0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"projects",
+										":project_id",
+										"users"
+									],
+									"query": [
+										{
+											"key": "access_level",
+											"value": "25",
+											"disabled": true
+										},
+										{
+											"key": "include_access_levels",
+											"value": "0"
+										}
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"description": "The project id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 00:16:28 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"users\": [\n        {\n            \"id\": 1,\n            \"name\": \"administrator\",\n            \"email\": \"root@localhost\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -2606,7 +5033,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"id\": 1,\n   \"name\": \"_new2\",\n   \"status\": {\n      \"id\": 10,\n      \"name\": \"development\",\n      \"label\": \"development\"\n    },\n    \"description\": \"Mantis.  Report problems with the actual bug tracker here. (Do not remove this account)\",\n    \"enabled\": true,\n    \"file_path\": \"/tmp/\",\n    \"view_state\": {\n      \"id\": 10,\n      \"name\": \"public\",\n      \"label\": \"public\"\n    }\n}"
+							"raw": "{\n   \"name\": \"New Project\",\n   \"status\": {\n      \"id\": 10,\n      \"name\": \"development\",\n      \"label\": \"development\"\n    },\n    \"description\": \"Mantis.  Report problems with the actual bug tracker here. (Do not remove this account)\",\n    \"enabled\": true,\n    \"file_path\": \"/tmp/\",\n    \"view_state\": {\n      \"id\": 10,\n      \"name\": \"public\",\n      \"label\": \"public\"\n    }\n}"
 						},
 						"url": {
 							"raw": "{{url}}/api/rest/projects/",
@@ -2622,7 +5049,170 @@
 						},
 						"description": "Create a project.\n\nAvailable since MantisBT 2.17.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"New Project\",\n   \"status\": {\n      \"id\": 10,\n      \"name\": \"development\",\n      \"label\": \"development\"\n    },\n    \"description\": \"Mantis.  Report problems with the actual bug tracker here. (Do not remove this account)\",\n    \"enabled\": true,\n    \"file_path\": \"/tmp/\",\n    \"view_state\": {\n      \"id\": 10,\n      \"name\": \"public\",\n      \"label\": \"public\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/projects/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"projects",
+										""
+									]
+								}
+							},
+							"status": "Project created with id 2",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 20:34:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "455"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"project\": {\n        \"id\": 2,\n        \"name\": \"New Project\",\n        \"status\": {\n            \"id\": 10,\n            \"name\": \"development\",\n            \"label\": \"development\"\n        },\n        \"description\": \"Mantis.  Report problems with the actual bug tracker here. (Do not remove this account)\",\n        \"enabled\": true,\n        \"view_state\": {\n            \"id\": 10,\n            \"name\": \"public\",\n            \"label\": \"public\"\n        },\n        \"access_level\": {\n            \"id\": 90,\n            \"name\": \"administrator\",\n            \"label\": \"administrator\"\n        },\n        \"custom_fields\": [],\n        \"versions\": [],\n        \"categories\": [\n            {\n                \"id\": 1,\n                \"name\": \"General\",\n                \"project\": {\n                    \"id\": 0,\n                    \"name\": null\n                }\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Access Denied",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"New Project\",\n   \"status\": {\n      \"id\": 10,\n      \"name\": \"development\",\n      \"label\": \"development\"\n    },\n    \"description\": \"Mantis.  Report problems with the actual bug tracker here. (Do not remove this account)\",\n    \"enabled\": true,\n    \"file_path\": \"/tmp/\",\n    \"view_state\": {\n      \"id\": 10,\n      \"name\": \"public\",\n      \"label\": \"public\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/projects/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"projects",
+										""
+									]
+								}
+							},
+							"status": "Access denied for user reporter.",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 20:33:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Access denied for user vboctor.\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Update a project",
@@ -2656,7 +5246,9 @@
 							"variable": [
 								{
 									"key": "project_id",
-									"value": "12"
+									"value": "1",
+									"type": "string",
+									"description": "The project id"
 								}
 							]
 						},
@@ -2692,7 +5284,8 @@
 							"variable": [
 								{
 									"key": "project_id",
-									"value": "12",
+									"value": "1",
+									"type": "string",
 									"description": "The project id"
 								}
 							]
@@ -2703,15 +5296,19 @@
 						{
 							"name": "Success",
 							"originalRequest": {
-								"method": "GET",
+								"method": "DELETE",
 								"header": [
 									{
 										"key": "Authorization",
 										"value": "{{token}}"
 									}
 								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
 								"url": {
-									"raw": "{{url}}/api/rest/projects/1",
+									"raw": "{{url}}/api/rest/projects/:project_id",
 									"host": [
 										"{{url}}"
 									],
@@ -2719,105 +5316,73 @@
 										"api",
 										"rest",
 										"projects",
-										"1"
+										":project_id"
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "2",
+											"type": "string",
+											"description": "The project id"
+										}
 									]
 								}
 							},
-							"status": "OK",
+							"status": "Project with id 2 deleted.",
 							"code": 200,
-							"_postman_previewlanguage": "json",
+							"_postman_previewlanguage": "html",
 							"header": [
 								{
-									"key": "Cache-Control",
-									"value": "private, max-age=10800",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-store, no-cache, must-revalidate, max-age=0",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "51651",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json;charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
 									"key": "Date",
-									"value": "Sun, 14 Jan 2018 18:01:42 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Last-Modified",
-									"value": "Sun, 14 Jan 2018 01:07:49 GMT",
-									"name": "Last-Modified",
-									"description": "The last modified date for the requested object, in RFC 2822 format"
+									"value": "Sun, 21 Aug 2022 20:36:00 GMT"
 								},
 								{
 									"key": "Server",
-									"value": "Apache",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Mantis-LoginMethod",
-									"value": "api-token",
-									"name": "X-Mantis-LoginMethod",
-									"description": "Custom header"
-								},
-								{
-									"key": "X-Mantis-Username",
-									"value": "vboctoradmin",
-									"name": "X-Mantis-Username",
-									"description": "Custom header"
-								},
-								{
-									"key": "X-Mantis-Version",
-									"value": "2.11.0-dev",
-									"name": "X-Mantis-Version",
-									"description": "Custom header"
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
 								},
 								{
 									"key": "X-Powered-By",
-									"value": "PHP/7.1.8",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [
+									"value": "PHP/7.4.21"
+								},
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
-									"httpOnly": true,
-									"domain": "localhost",
-									"path": "/",
-									"secure": false,
-									"value": "be0edb4fdc0a4378b2ef8cbc368d7e1f",
-									"key": "PHPSESSID"
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
 								}
 							],
-							"body": "{\n    \"projects\": [\n        {\n            \"id\": 1,\n            \"name\": \"mantisbt\",\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"development\",\n                \"label\": \"development\"\n            },\n            \"description\": \"Mantis Project\",\n            \"enabled\": true,\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"access_level\": {\n                \"id\": 90,\n                \"name\": \"administrator\",\n                \"label\": \"administrator\"\n            },\n            \"custom_fields\": [\n                {\n                    \"id\": 8,\n                    \"name\": \"Email\",\n                    \"type\": \"email\",\n                    \"default_value\": \"\",\n                    \"possible_values\": \"\",\n                    \"valid_regexp\": \"\",\n                    \"length_min\": 0,\n                    \"length_max\": 0,\n                    \"access_level_r\": {\n                        \"id\": 10,\n                        \"name\": \"viewer\",\n                        \"label\": \"viewer\"\n                    },\n                    \"access_level_rw\": {\n                        \"id\": 10,\n                        \"name\": \"viewer\",\n                        \"label\": \"viewer\"\n                    },\n                    \"display_report\": true,\n                    \"display_update\": true,\n                    \"display_resolved\": true,\n                    \"display_closed\": true,\n                    \"require_report\": false,\n                    \"require_update\": false,\n                    \"require_resolved\": false,\n                    \"require_closed\": false\n                }\n            ],\n            \"versions\": [\n                {\n                    \"id\": 258,\n                    \"name\": \"2.0.x\",\n                    \"description\": \"\",\n                    \"released\": false,\n                    \"obsolete\": false,\n                    \"timestamp\": \"2016-10-02T18:45:04-04:00\"\n                }\n            ],\n            \"subProjects\": [\n                {\n                    \"id\": 31,\n                    \"name\": \"SubProject1\"\n                }\n            ]\n        }\n    ]\n}"
+							"cookie": [],
+							"body": null
 						}
 					]
 				},
@@ -2854,7 +5419,8 @@
 							"variable": [
 								{
 									"key": "project_id",
-									"value": "12",
+									"value": "1",
+									"type": "string",
 									"description": "The project id"
 								}
 							]
@@ -2970,7 +5536,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -3017,17 +5583,113 @@
 							"variable": [
 								{
 									"key": "project_id",
-									"value": "12"
+									"value": "1",
+									"type": "string",
+									"description": "The project id"
 								},
 								{
 									"key": "subproject_id",
-									"value": "34"
+									"value": "2",
+									"type": "string",
+									"description": "The sub-project id"
 								}
 							]
 						},
 						"description": "Update the subproject relationship properties.\n\nAvailable since MantisBT 2.20.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Project not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"project\": {\n       \"name\": \"Subproject1\"\n   },\n   \"inherit_parent\": true\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/rest/projects/:project_id/subprojects/:subproject_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"projects",
+										":project_id",
+										"subprojects",
+										":subproject_id"
+									],
+									"variable": [
+										{
+											"key": "project_id",
+											"value": "1",
+											"type": "string",
+											"description": "The project id"
+										},
+										{
+											"key": "subproject_id",
+											"value": "2",
+											"type": "string",
+											"description": "The sub-project id"
+										}
+									]
+								}
+							},
+							"status": "Project '2' not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 20:32:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Project '2' not found\",\n    \"code\": 700,\n    \"localized\": \"Project \\\"2\\\" not found.\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete a sub-project",
@@ -3057,7 +5719,8 @@
 							"variable": [
 								{
 									"key": "project_id",
-									"value": "12",
+									"value": "1",
+									"type": "string",
 									"description": "The project id"
 								}
 							]
@@ -3173,7 +5836,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -3219,9 +5882,10 @@
 							],
 							"variable": [
 								{
-									"description": "The project id",
 									"key": "project_id",
-									"value": "12"
+									"value": "1",
+									"type": "string",
+									"description": "The project id"
 								}
 							]
 						},
@@ -3230,8 +5894,7 @@
 					"response": []
 				}
 			],
-			"description": "A set of REST APIs for handling projects.",
-			"protocolProfileBehavior": {}
+			"description": "A set of REST APIs for handling projects."
 		},
 		{
 			"name": "Filters",
@@ -3259,7 +5922,86 @@
 						},
 						"description": "Get all definitions for filters accessible to logged in user.\n\nAvailable since MantisBT 2.10.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/filters",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"filters"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 20:38:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"filters\": []\n}"
+						}
+					]
 				},
 				{
 					"name": "Get a filter",
@@ -3286,6 +6028,7 @@
 								{
 									"key": "filter_id",
 									"value": "123",
+									"type": "string",
 									"description": "The filter id"
 								}
 							]
@@ -3294,7 +6037,7 @@
 					},
 					"response": [
 						{
-							"name": "Filter by Id",
+							"name": "Success",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -3317,7 +6060,7 @@
 									"variable": [
 										{
 											"key": "filter_id",
-											"value": "9222"
+											"value": "123"
 										}
 									]
 								}
@@ -3407,7 +6150,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -3416,7 +6159,7 @@
 									"key": "PHPSESSID"
 								}
 							],
-							"body": "{\n    \"filters\": [\n        {\n            \"id\": 1,\n            \"name\": \"Commented On\",\n            \"owner\": {\n                \"id\": 1,\n                \"name\": \"vboctor\"\n            },\n            \"public\": true,\n            \"project\": {\n                \"id\": 0,\n                \"name\": \"All Projects\"\n            },\n            \"criteria\": {\n                \"commented\": [\n                    {\n                        \"id\": \"[myself]\"\n                    }\n                ],\n                \"hide_status\": {\n                    \"id\": 80,\n                    \"name\": \"resolved\",\n                    \"label\": \"resolved\",\n                    \"color\": \"#d2f5b0\"\n                }\n            },\n            \"url\": \"http://localhost/mantisbt/search.php?project_id=1&note_user_id=-1&sticky=on&sort=last_updated&dir=DESC&per_page=50&hide_status=80&match_type=0\"\n        }\n    ]\n}"
+							"body": "{\n    \"filters\": [\n        {\n            \"id\": 123,\n            \"name\": \"Commented On\",\n            \"owner\": {\n                \"id\": 1,\n                \"name\": \"vboctor\"\n            },\n            \"public\": true,\n            \"project\": {\n                \"id\": 0,\n                \"name\": \"All Projects\"\n            },\n            \"criteria\": {\n                \"commented\": [\n                    {\n                        \"id\": \"[myself]\"\n                    }\n                ],\n                \"hide_status\": {\n                    \"id\": 80,\n                    \"name\": \"resolved\",\n                    \"label\": \"resolved\",\n                    \"color\": \"#d2f5b0\"\n                }\n            },\n            \"url\": \"http://localhost/mantisbt/search.php?project_id=1&note_user_id=-1&sticky=on&sort=last_updated&dir=DESC&per_page=50&hide_status=80&match_type=0\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -3448,7 +6191,7 @@
 							"variable": [
 								{
 									"key": "filter_id",
-									"value": "1",
+									"value": "123",
 									"description": "The filter id"
 								}
 							]
@@ -3458,8 +6201,7 @@
 					"response": []
 				}
 			],
-			"description": "A set of REST APIs for handling filters.",
-			"protocolProfileBehavior": {}
+			"description": "A set of REST APIs for handling filters."
 		},
 		{
 			"name": "Users",
@@ -3639,7 +6381,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -3801,7 +6543,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -3843,6 +6585,7 @@
 								{
 									"key": "user_id",
 									"value": "123",
+									"type": "string",
 									"description": "The user id to delete"
 								}
 							]
@@ -3969,7 +6712,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -4003,17 +6746,107 @@
 								{
 									"key": "user_id",
 									"value": "123",
+									"type": "string",
 									"description": "The user id to reset password for"
 								}
 							]
 						},
 						"description": "Resets password for the specific user.\n\nAvailable since MantisBT 2.24.0."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/users/:user_id/reset",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"users",
+										":user_id",
+										"reset"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "2",
+											"type": "string",
+											"description": "The user id to reset password for"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 21 Aug 2022 20:38:08 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.46 (Unix) mod_fastcgi/mod_fastcgi-SNAP-0910052141 PHP/7.4.21 OpenSSL/1.0.2u mod_wsgi/3.5 Python/2.7.18"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.21"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate, max-age=0"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Mon, 22 Feb 2021 03:58:37 GMT"
+								},
+								{
+									"key": "X-Mantis-Username",
+									"value": "administrator"
+								},
+								{
+									"key": "X-Mantis-LoginMethod",
+									"value": "api-token"
+								},
+								{
+									"key": "X-Mantis-Version",
+									"value": "2.26.0-dev"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				}
 			],
-			"description": "A set of REST APIs for handling users.",
-			"protocolProfileBehavior": {}
+			"description": "A set of REST APIs for handling users."
 		},
 		{
 			"name": "Config",
@@ -4049,7 +6882,7 @@
 					},
 					"response": [
 						{
-							"name": "Config Get",
+							"name": "Success",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -4161,7 +6994,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -4221,7 +7054,7 @@
 					},
 					"response": [
 						{
-							"name": "Config Get Multiple",
+							"name": "Success",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -4349,7 +7182,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -4363,8 +7196,7 @@
 					]
 				}
 			],
-			"description": "A set of REST APIs for handling configurations.",
-			"protocolProfileBehavior": {}
+			"description": "A set of REST APIs for handling configurations."
 		},
 		{
 			"name": "Lang",
@@ -4392,7 +7224,8 @@
 							"query": [
 								{
 									"key": "string",
-									"value": "all_projects"
+									"value": "all_projects",
+									"description": "The name of the localized string"
 								}
 							]
 						},
@@ -4400,7 +7233,7 @@
 					},
 					"response": [
 						{
-							"name": "success",
+							"name": "Success",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -4512,7 +7345,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -4572,7 +7405,7 @@
 					},
 					"response": [
 						{
-							"name": "success",
+							"name": "Success",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -4700,7 +7533,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -4714,8 +7547,7 @@
 					]
 				}
 			],
-			"description": "A set of APIs for handling localized strings.",
-			"protocolProfileBehavior": {}
+			"description": "A set of APIs for handling localized strings."
 		},
 		{
 			"name": "Pages",
@@ -4746,7 +7578,8 @@
 							"variable": [
 								{
 									"key": "issue_id",
-									"value": "22061",
+									"value": "1234",
+									"type": "string",
 									"description": "The issue id"
 								}
 							]
@@ -4754,108 +7587,6 @@
 						"description": "IN DEVELOPMENT - NOT RELEASED YET!\n\nGet information necessary to render an issue view page for the specified issue."
 					},
 					"response": [
-						{
-							"name": "Not Found",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{token}}"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/api/rest/issues/:issue_id",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"api",
-										"rest",
-										"issues",
-										":issue_id"
-									],
-									"variable": [
-										{
-											"key": "issue_id",
-											"value": "2192022",
-											"description": "The issue id"
-										}
-									]
-								}
-							},
-							"status": "Issue #2192022 not found",
-							"code": 404,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "private, max-age=10800",
-									"name": "Cache-Control",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive",
-									"name": "Connection",
-									"description": "Options that are desired for the connection"
-								},
-								{
-									"key": "Content-Length",
-									"value": "89",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json;charset=utf-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 07 Jan 2018 22:53:57 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100",
-									"name": "Keep-Alive",
-									"description": "Custom header"
-								},
-								{
-									"key": "Last-Modified",
-									"value": "Sun, 31 Dec 2017 19:58:54 GMT",
-									"name": "Last-Modified",
-									"description": "The last modified date for the requested object, in RFC 2822 format"
-								},
-								{
-									"key": "Server",
-									"value": "Apache",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.1.8",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [
-								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
-									"httpOnly": true,
-									"domain": "localhost",
-									"path": "/",
-									"secure": false,
-									"value": "be0edb4fdc0a4378b2ef8cbc368d7e1f",
-									"key": "PHPSESSID"
-								}
-							],
-							"body": "{\n    \"message\": \"Issue #200000 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 200000 not found.\"\n}"
-						},
 						{
 							"name": "Success",
 							"originalRequest": {
@@ -4880,7 +7611,7 @@
 									"variable": [
 										{
 											"key": "issue_id",
-											"value": "21920",
+											"value": "1234",
 											"description": "The issue id"
 										}
 									]
@@ -4977,7 +7708,7 @@
 							],
 							"cookie": [
 								{
-									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (PST)",
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
 									"httpOnly": true,
 									"domain": "localhost",
 									"path": "/",
@@ -4986,13 +7717,140 @@
 									"key": "PHPSESSID"
 								}
 							],
-							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1,\n            \"summary\": \"Sample issue title\",\n            \"description\": \"Sample issue description\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"mantisbt\"\n            },\n            \"category\": {\n                \"id\": 135,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"vboctor\",\n                \"real_name\": \"Victor Boctor\",\n                \"email\": \"vboctor@example.com\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2017-04-23T13:12:28-04:00\",\n            \"updated_at\": \"2017-04-23T13:12:28-04:00\",\n            \"custom_fields\": [\n                {\n                    \"field\": {\n                        \"id\": 4,\n                        \"name\": \"The City\"\n                    },\n                    \"value\": \"Seattle\"\n                }\n            ],\n            \"history\": [\n                {\n                    \"created_at\": \"2017-04-23T13:12:28-04:00\",\n                    \"user\": {\n                        \"id\": 36771,\n                        \"name\": \"vboctor\",\n                        \"real_name\": \"Victor Boctor\",\n                        \"email\": \"vboctor@example.com\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+							"body": "{\n    \"issues\": [\n        {\n            \"id\": 1234,\n            \"summary\": \"Sample issue title\",\n            \"description\": \"Sample issue description\",\n            \"project\": {\n                \"id\": 1,\n                \"name\": \"mantisbt\"\n            },\n            \"category\": {\n                \"id\": 135,\n                \"name\": \"General\"\n            },\n            \"reporter\": {\n                \"id\": 1,\n                \"name\": \"vboctor\",\n                \"real_name\": \"Victor Boctor\",\n                \"email\": \"vboctor@example.com\"\n            },\n            \"status\": {\n                \"id\": 10,\n                \"name\": \"new\",\n                \"label\": \"new\",\n                \"color\": \"#fcbdbd\"\n            },\n            \"resolution\": {\n                \"id\": 10,\n                \"name\": \"open\",\n                \"label\": \"open\"\n            },\n            \"view_state\": {\n                \"id\": 10,\n                \"name\": \"public\",\n                \"label\": \"public\"\n            },\n            \"priority\": {\n                \"id\": 30,\n                \"name\": \"normal\",\n                \"label\": \"normal\"\n            },\n            \"severity\": {\n                \"id\": 50,\n                \"name\": \"minor\",\n                \"label\": \"minor\"\n            },\n            \"reproducibility\": {\n                \"id\": 70,\n                \"name\": \"have not tried\",\n                \"label\": \"have not tried\"\n            },\n            \"sticky\": false,\n            \"created_at\": \"2017-04-23T13:12:28-04:00\",\n            \"updated_at\": \"2017-04-23T13:12:28-04:00\",\n            \"custom_fields\": [\n                {\n                    \"field\": {\n                        \"id\": 4,\n                        \"name\": \"The City\"\n                    },\n                    \"value\": \"Seattle\"\n                }\n            ],\n            \"history\": [\n                {\n                    \"created_at\": \"2017-04-23T13:12:28-04:00\",\n                    \"user\": {\n                        \"id\": 36771,\n                        \"name\": \"vboctor\",\n                        \"real_name\": \"Victor Boctor\",\n                        \"email\": \"vboctor@example.com\"\n                    },\n                    \"type\": {\n                        \"id\": 1,\n                        \"name\": \"issue-new\"\n                    },\n                    \"message\": \"New Issue\"\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/rest/issues/:issue_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"rest",
+										"issues",
+										":issue_id"
+									],
+									"variable": [
+										{
+											"key": "issue_id",
+											"value": "2192022",
+											"description": "The issue id"
+										}
+									]
+								}
+							},
+							"status": "Issue #2192022 not found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "private, max-age=10800",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "89",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Jan 2018 22:53:57 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"name": "Keep-Alive",
+									"description": "Custom header"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Sun, 31 Dec 2017 19:58:54 GMT",
+									"name": "Last-Modified",
+									"description": "The last modified date for the requested object, in RFC 2822 format"
+								},
+								{
+									"key": "Server",
+									"value": "Apache",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Mon Jan 18 2038 19:14:07 GMT-0800 (Pacific Standard Time)",
+									"httpOnly": true,
+									"domain": "localhost",
+									"path": "/",
+									"secure": false,
+									"value": "be0edb4fdc0a4378b2ef8cbc368d7e1f",
+									"key": "PHPSESSID"
+								}
+							],
+							"body": "{\n    \"message\": \"Issue #1234 not found\",\n    \"code\": 1100,\n    \"localized\": \"Issue 1234 not found.\"\n}"
 						}
 					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
 	],
-	"protocolProfileBehavior": {}
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Content-Type is present\", function () {",
+					"    pm.response.to.have.header(\"Content-Type\");",
+					"});",
+					"",
+					"pm.test(\"X-Mantis-Version is present\", function () {",
+					"    pm.response.to.have.header(\"X-Mantis-Version\");",
+					"});",
+					""
+				]
+			}
+		}
+	]
 }

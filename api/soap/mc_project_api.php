@@ -1295,29 +1295,19 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 		return mci_fault_login_failed();
 	}
 
-	$g_project_override = $p_project_id;
+	$t_data = array(
+		'query' => array(
+			'id' => $p_project_id,
+			'page' => 1,
+			'page_size' => 0,
+			'access_level' => $p_access,
+			'include_access_levels' => 0
+		)
+	);
 
-	$t_users = project_get_all_user_rows( $p_project_id, $p_access ); # handles ALL_PROJECTS case
+	$t_command = new ProjectUsersGetCommand( $t_data );
+	$t_result = $t_command->execute();
+	$t_result = $t_result['users'];
 
-	$t_display = array();
-	$t_sort = array();
-
-	foreach( $t_users as $t_user ) {
-		$t_user_name = user_get_name_from_row( $t_user );
-		$t_display[] = string_attribute( $t_user_name );
-		$t_sort[] = user_get_name_for_sorting_from_row( $t_user );
-	}
-
-	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-
-	$t_result = array();
-	for( $i = 0;$i < count( $t_sort );$i++ ) {
-		$t_row = $t_users[$i];
-
-		# This is not very performant - But we have to assure that the data returned is exactly
-		# the same as the data that comes with an issue (test for equality - $t_row[] does not
-		# contain email fields).
-		$t_result[] = mci_account_get_array_by_id( $t_row['id'] );
-	}
 	return $t_result;
 }

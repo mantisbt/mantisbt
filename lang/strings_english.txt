@@ -114,6 +114,7 @@ $s_unassigned_projects_label = 'Unassigned Projects';
 $s_copy_users = 'Copy Users';
 $s_copy_categories_from = 'Copy Categories From';
 $s_copy_categories_to = 'Copy Categories To';
+$s_copy_categories_exclude_inherited = 'Exclude inherited categories';
 $s_copy_versions_from = 'Copy Versions From';
 $s_copy_versions_to = 'Copy Versions To';
 $s_copy_users_from = 'Copy Users From';
@@ -1123,6 +1124,7 @@ $s_no_reponse_msg = 'You have seven days to complete the account confirmation pr
 
 # signup_page.php
 $s_signup_captcha_request_label = 'Enter the code as it is shown in the box on the right:';
+$s_signup_captcha_play = 'Play the captcha code\'s audio';
 $s_signup_captcha_refresh = 'Generate a new code';
 $s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation message to the e-mail address you specified.<br />Using the link provided in the e-mail, you will be able to activate your account. If you fail to do so within seven days, it may be purged.<br />You must specify a valid e-mail address in order to receive the account confirmation e-mail.';
 $s_signup_title = 'Signup';

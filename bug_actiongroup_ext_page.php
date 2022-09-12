@@ -47,6 +47,8 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
+require_css( 'status_config.php');
+
 $t_external_action = mb_strtolower( mb_substr( $f_action, mb_strlen( $t_external_action_prefix ) ) );
 $t_form_fields_page = 'bug_actiongroup_' . $t_external_action . '_inc.php';
 $t_form_name = 'bug_actiongroup_' . $t_external_action;

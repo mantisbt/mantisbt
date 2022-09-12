@@ -187,7 +187,7 @@ layout_page_begin();
 if( $t_top_buttons_enabled ) {
 ?>
 				<div class="widget-toolbox padding-8 clearfix">
-					<input <?php helper_get_tab_index(); ?>
+					<input <?php echo helper_get_tab_index(); ?>
 						type="submit" class="btn btn-primary btn-white btn-round"
 						value="<?php echo lang_get( 'update_information_button' ); ?>" />
 				</div>
@@ -754,7 +754,8 @@ if( config_get( 'time_tracking_enabled' ) ) {
 	if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
 		echo '<tr>';
 		echo '<th class="category"><label for="time_tracking">' . lang_get( 'time_tracking' ) . '</label></th>';
-		echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" /></td></tr>';
+		echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" class="input-sm"',
+			helper_get_tab_index(), 'size="5" placeholder="hh:mm" /></td></tr>';
 	}
 }
 
@@ -769,7 +770,7 @@ echo '</div>';
 if( $t_bottom_buttons_enabled ) {
 ?>
 	<div class="widget-toolbox padding-8 clearfix">
-		<input <?php helper_get_tab_index(); ?>
+		<input <?php echo helper_get_tab_index(); ?>
 			type="submit" class="btn btn-primary btn-white btn-round"
 			value="<?php echo lang_get( 'update_information_button' ); ?>" />
 	</div>

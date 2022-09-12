@@ -442,6 +442,12 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<button name="copy_to" class="btn btn-sm btn-primary btn-white btn-round" value="1">
 				<?php echo lang_get( 'copy_categories_to' ) ?>
 			</button>
+			<div class="padding-left-8 inline">
+			<input type="checkbox" class="ace" id="exclude_inherited" name="exclude_inherited">
+			<label for="exclude_inherited" class="lbl">
+				<?php echo lang_get( 'copy_categories_exclude_inherited' ); ?>
+			</label>
+			</div>
 		</fieldset>
 	</form>
 	</div>

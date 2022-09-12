@@ -40,8 +40,6 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
 
-require_css( 'status_config.php' );
-
 /**
  * Initialise bug action group api
  * @param string $p_action Custom action to run.

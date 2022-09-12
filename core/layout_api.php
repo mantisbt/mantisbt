@@ -348,7 +348,7 @@ function layout_body_javascript() {
  * Print opening markup for login/signup/register pages
  * @return void
  */
-function layout_login_page_begin() {
+function layout_login_page_begin( $p_title = '' ) {
 	html_begin();
 	html_head_begin();
 	html_content_type();
@@ -358,7 +358,7 @@ function layout_login_page_begin() {
 		echo "\t", '<meta name="robots" content="', $g_robots_meta, '" />', "\n";
 	}
 
-	html_title();
+	html_title( $p_title );
 	layout_head_meta();
 	html_css();
 	layout_head_css();

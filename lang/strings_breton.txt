@@ -43,6 +43,7 @@
  * @author Fohanno
  * @author Fulup
  * @author Gwenn-Ael
+ * @author Huñvreüs
  * @author Macofe
  * @author Y-M D
  */
@@ -1011,7 +1012,7 @@ $s_sponsorship_deleted = 'Sponsoradur dilamet';
 $s_sponsorship_paid = 'Sponsoradur paeet';
 $s_sponsorship_more_info = 'Gouzout hiroc\'h diwar-benn ar sponsorañ';
 $s_sponsorship_total = 'Hollad sponsorañ';
-$s_changelog = 'Roll ar c\'hemmoù';
+$s_changelog = 'Marilh ar c\'hemmoù';
 $s_changelog_empty = 'N\'eus roll cheñchamant ebet da gaout';
 $s_changelog_empty_manager = 'Ne c\'haller kaout titour ebet eus ar renabl kemmoù. Enklozet e vez ar c\'hudennoù ur wech m\'o deus cr raktresoù stummoù. Diluziet int gant al lec\'hiadur "reizhet er stumm".';
 $s_roadmap = 'Kartenn-hent';

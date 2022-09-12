@@ -47,6 +47,7 @@
  * @author Hzy980512
  * @author LaMagiaaa
  * @author Macofe
+ * @author Makoto Asai
  * @author MathXplore
  * @author Mfuji
  * @author Object＊tofu
@@ -642,6 +643,7 @@ $s_readonly_status = '編集不可にするステータス';
 $s_reopen_status = '差し戻しされた課題に設定するステータス';
 $s_reopen_resolution = '差し戻された課題に設定する解決状況';
 $s_limit_view_unless_threshold_option = '他の利用者の課題を見る。(もし、課題が設定されていない場合、報告、処理、監視されている課題に限定されます。)';
+$s_export_issues = '課題の洗い出し';
 $s_config_delete_sure = 'プロジェクト%2$s%内の%1$sの設定を本当に削除しますか?:';
 $s_delete_config_button = '設定を削除';
 $s_configuration_report = '設定の表示';
@@ -1102,6 +1104,7 @@ $s_set_view_status = '新たなイシューかノートが報告された時の�
 $s_update_view_status = '新たなイシューかノートが報告された時の公開度を変更';
 $s_view_issue_revisions = '問題もしくは留意点の更新版を見る';
 $s_drop_issue_revisions = '問題もしくは留意点の更新を放棄する';
+$s_set_sticky = '課題の貼付け/取り外し';
 $s_show_list_of_users_monitoring_issue = '課題を監視している利用者一覧の表示';
 $s_add_users_monitoring_issue = '課題に監視を追加';
 $s_remove_users_monitoring_issue = '課題の監視をやめる';
@@ -1423,7 +1426,8 @@ $s_dropzone_cancel_upload_confirmation = 'このアップロードを本当に�
 $s_dropzone_remove_file = 'ファイルの除去';
 $s_dropzone_max_files_exceeded = 'これ以上のファイルはアップロードできません。';
 $s_dropzone_not_supported = 'Dropzone.js は、古いブラウザをサポートしていません。';
-$s_dropzone_multiple_files_too_big = '{{files}} は許可されている最大ファイル長 ({{maxFilesize}} MiB) を超えています。';
+$s_dropzone_multiple_files_too_big = '次のファイルは、最大許容ファイルサイズ（{{maxFilesize}} MiB）を超えています：{{files}}';
+$s_dropzone_multiple_filenames_too_long = '次のファイル名が長すぎます（最大{{maxFilenameLength}}文字）：{{files}}';
 $s_save = '保存';
 $s_reset = 'リセット';
 $s_persist = '固定';

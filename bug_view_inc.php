@@ -723,7 +723,7 @@ if( $t_flags['monitor_show'] ) {
 			if( $t_flags['monitor_can_add'] ) {
 	?>
 			<br /><br />
-			<form method="get" action="<?php echo helper_mantis_url( 'bug_monitor_add.php' ); ?>" class="form-inline noprint">
+			<form method="post" action="<?php echo helper_mantis_url( 'bug_monitor_add.php' ); ?>" class="form-inline noprint">
 			<?php echo form_security_field( 'bug_monitor_add' ) ?>
 				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
 				<!--suppress HtmlFormInputWithoutLabel -->

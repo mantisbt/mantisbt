@@ -60,6 +60,8 @@ require_api( 'relationship_api.php' );
 require_api( 'sponsorship_api.php' );
 require_api( 'version_api.php' );
 
+require_css( 'status_config.php' );
+
 $f_bug_id = gpc_get_int( 'id' );
 $t_bug = bug_get( $f_bug_id );
 
