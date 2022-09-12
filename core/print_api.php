@@ -83,7 +83,7 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
 # Load Composer autoloader
-require_once( dirname( __FILE__ ) . '/../vendor/autoload.php' );
+require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
 
 /**
  * Print the headers to cause the page to redirect to $p_url
@@ -118,7 +118,7 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		}
 	}
 
-	$t_url_norm = new Url\Normalizer( $t_url ); // expects to be available via "autoload"
+	$t_url_norm = new \URL\Normalizer( $t_url ); // expects to be available via "autoload"
 	$t_url = $t_url_norm->normalize();
 
 	# don't send more headers if they have already been sent
