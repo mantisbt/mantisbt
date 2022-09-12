@@ -53,6 +53,7 @@
  * @author Jeeputer
  * @author Mjbmr
  * @author Mohammad ebz
+ * @author Mskf1383
  * @author Omidh
  * @author Razavi
  * @author Reza1615
@@ -773,8 +774,8 @@ $s_upload_file_title = 'بارگذاری پرونده';
 $s_title = 'عنوان';
 $s_project_file_deleted_msg = 'پرونده پروژه حذف شد.';
 $s_confirm_file_delete_msg = 'آیا مطمئنید می‌خواهید این پرونده را حذف کنید؟';
-$s_filename = 'نام فايل';
-$s_filename_label = 'نام فایل:';
+$s_filename = 'نام پرونده';
+$s_filename_label = 'نام پرونده:';
 $s_file_update_button = 'روزآمدسازی پرونده';
 $s_file_delete_button = 'حذف پرونده';
 $s_project_documentation_title = 'مستندات پروژه';
