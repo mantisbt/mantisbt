@@ -125,9 +125,9 @@ function layout_page_header_end( $p_page_id = null) {
 	}
 
 	$t_show_project_affinity = '';
-	if(true){
-		$t_show_project_affinity = ' show-project-affinity';
-	}
+	// if(true){
+	// 	$t_show_project_affinity = ' show-project-affinity';
+	// }
 
 	# Add right-to-left css if needed
 	if( layout_is_rtl() ) {
@@ -560,7 +560,7 @@ function layout_navbar_affinity_button_bar() {
 
 	echo '<a class="btn btn-primary btn-sm" id="project-affinity-toggle">';
 	echo '⛳ ';
-	print_icon( 'fa-check' );
+	print_icon( 'fa-square' );
 	echo '</a>';
 
 	echo '</div>';
