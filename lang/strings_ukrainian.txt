@@ -104,6 +104,7 @@ $s_unassigned_projects_label = 'Непризначені проєкти';
 $s_copy_users = 'Скопіювати користувачів';
 $s_copy_categories_from = 'Скопіювати категорії з';
 $s_copy_categories_to = 'Скопіювати категорії в';
+$s_copy_categories_exclude_inherited = 'Виключити успадковані категорії';
 $s_copy_versions_from = 'Копіювати версії з';
 $s_copy_versions_to = 'Копіювати версії в';
 $s_copy_users_from = 'Копіювати користувачів з';
