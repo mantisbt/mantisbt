@@ -86,6 +86,7 @@ $s_unassigned_projects_label = 'Projectos non assignate';
 $s_copy_users = 'Copiar usatores';
 $s_copy_categories_from = 'Copiar categorias ab';
 $s_copy_categories_to = 'Copiar categorias a';
+$s_copy_categories_exclude_inherited = 'Excluder categorias hereditate';
 $s_copy_versions_from = 'Copiar versiones ab';
 $s_copy_versions_to = 'Copiar versiones a';
 $s_copy_users_from = 'Copiar usatores ab';

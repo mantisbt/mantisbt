@@ -52,6 +52,7 @@
  * @author Gebu
  * @author Geitost
  * @author Imre
+ * @author Justman10000
  * @author KarlReichert
  * @author Kghbln
  * @author Luke081515
@@ -110,6 +111,7 @@ $s_unassigned_projects_label = 'Nicht zugewiesene Projekte';
 $s_copy_users = 'Benutzer kopieren';
 $s_copy_categories_from = 'Kategorien kopieren von';
 $s_copy_categories_to = 'Kategorien kopieren nach';
+$s_copy_categories_exclude_inherited = 'Übernommene Kategorien ausschließen';
 $s_copy_versions_from = 'Versionen kopieren von';
 $s_copy_versions_to = 'Versionen kopieren nach';
 $s_copy_users_from = 'Benutzer kopieren von';
