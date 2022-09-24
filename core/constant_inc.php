@@ -34,6 +34,9 @@ define( 'BAD', 0 );
 define( 'GOOD', 1 );
 define( 'WARN', 2 );
 
+define( 'CATEGORY_STATUS_ENABLED', 1 );
+define( 'CATEGORY_STATUS_DISABLED', 0 );
+
 # PHP-related constants
 define( 'PHP_MIN_VERSION', '7.4.0' );
 define( 'PHP_CLI', 0 );

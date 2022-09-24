@@ -760,14 +760,14 @@ function print_profile_option_list_from_profiles( array $p_profiles, $p_select_i
  * @param integer $p_project_id  A project identifier.
  * @return void
  */
-function print_category_option_list( $p_category_id = 0, $p_project_id = null ) {
+function print_category_option_list( $p_category_id = 0, $p_project_id = null, $p_active_only = false ) {
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
 	} else {
 		$t_project_id = $p_project_id;
 	}
 
-	$t_cat_arr = category_get_all_rows( $t_project_id, null, true );
+	$t_cat_arr = category_get_all_rows( $t_project_id, null, true, $p_active_only );
 
 	if( config_get( 'allow_no_category' ) ) {
 		echo '<option value="0"';

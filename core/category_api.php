@@ -205,7 +205,7 @@ function category_add( $p_project_id, $p_name ) {
  * @return void
  * @access public
  */
-function category_update( $p_category_id, $p_name, $p_assigned_to ) {
+function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -228,9 +228,9 @@ function category_update( $p_category_id, $p_name, $p_assigned_to ) {
 	}
 
 	db_param_push();
-	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . '
+	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . ', status=' . db_param() .'
 				  WHERE id=' . db_param();
-	db_query( $t_query, array( $p_name, $p_assigned_to, $p_category_id ) );
+	db_query( $t_query, array( $p_name, $p_assigned_to , $p_status, $p_category_id ) );
 
 	# Add bug history entries if we update the category's name
 	if( $t_old_category['name'] != $p_name ) {
@@ -494,10 +494,11 @@ function category_get_filter_list( $p_project_id = null ) {
  * @param integer $p_project_id      A Project identifier.
  * @param boolean $p_inherit         Indicates whether to inherit categories from parent projects, or null to use configuration default.
  * @param boolean $p_sort_by_project Whether to sort by project.
+ * @param boolean $p_active_only	 Wheter to select all categories or just the active ones
  * @return array array of categories
  * @access public
  */
-function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false ) {
+function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false ,  $p_active_only = false ) {
 	global $g_category_cache, $g_cache_category_project;
 
 	if( isset( $g_cache_category_project[(int)$p_project_id] ) ) {
@@ -537,6 +538,10 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 		$t_project_where = ' project_id=' . $p_project_id . ' ';
 	}
 
+	if( $p_active_only ) {
+		$t_project_where .= ' and c.status = 0 ';
+	}
+	
 	$t_query = 'SELECT c.*, p.name AS project_name FROM {category} c
 				LEFT JOIN {project} p
 					ON c.project_id=p.id
