@@ -46,7 +46,7 @@
  * @author Wladek92
  */
 
-$s_plugin_format_title = 'Formatage de MantisBT';
+$s_plugin_format_title = 'Mise en forme de MantisBT';
 $s_plugin_format_description = 'Greffon officiel de traitement et de formatage de texte.';
 $s_plugin_format_config = 'Configuration';
 $s_plugin_format_process_text = 'Traitement du texte';
