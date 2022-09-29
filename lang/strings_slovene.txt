@@ -605,6 +605,7 @@ $s_loading = 'Nalaganje ...';
 $s_from_date = 'Od';
 $s_to_date = 'Za';
 $s_on_date = 'zaradi';
+$s_wiki = 'Viki';
 $s_tag_name = 'Ime';
 $s_tag_statistics = 'Statistika uporabe';
 $s_tag_related_issues = 'Skupni problemi (%1$s)';
