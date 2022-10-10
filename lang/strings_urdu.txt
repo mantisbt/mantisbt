@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Bgo eiu
  * @author BukhariSaeed
  * @author E THP
  * @author Muhammad Shuaib
@@ -62,7 +63,7 @@ $s_actiongroup_menu_update_fixed_in_version = ' نئ تبدیلی مین تبد�
 $s_actiongroup_menu_add_note = 'معلومات شامل کرو';
 $s_actiongroup_bugs = 'مقررہ ایشوذ';
 $s_all_projects = 'تمام منصوبہے';
-$s_move_bugs = ' مسلۂ ھٹاو';
+$s_move_bugs = ' مسلۂ ہٹاو';
 $s_operation_successful = 'عمل کامیاب.';
 $s_date_order = 'حکم کی تاریخ';
 $s_print_all_bug_page_link = ' معلومات چھاپنا';
