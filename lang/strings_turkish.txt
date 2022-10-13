@@ -117,6 +117,7 @@ $s_unassigned_projects_label = 'Atanmamış Projeler';
 $s_copy_users = 'Kullanıcıları Kopyala';
 $s_copy_categories_from = 'Kategorileri Buradan Kopyala';
 $s_copy_categories_to = 'Kategorileri Buraya Kopyala';
+$s_copy_categories_exclude_inherited = 'Devralınan kategorileri hariç tut';
 $s_copy_versions_from = 'Sürümleri Buradan Kopyala';
 $s_copy_versions_to = 'Sürümleri Buraya Kopyala';
 $s_copy_users_from = 'Kullanıcıları Buradan Kopyala';
