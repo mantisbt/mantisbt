@@ -751,7 +751,7 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 
 	$t_bug_tags = $g_cache_bug_tags[$c_bug_id];
 	if( !$t_bug_tags || !isset( $t_bug_tags[$p_tag_id] ) ) {
-		trigger_error( TAG_NOT_ATTACHED, ERROR );
+		trigger_error( ERROR_TAG_NOT_ATTACHED, ERROR );
 	}
 	return $t_bug_tags[$p_tag_id];
 }
@@ -818,7 +818,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	tag_ensure_exists( $p_tag_id );
 
 	if( tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-		trigger_error( TAG_ALREADY_ATTACHED, ERROR );
+		trigger_error( ERROR_TAG_ALREADY_ATTACHED, ERROR );
 	}
 
 	if( null == $p_user_id ) {
@@ -861,7 +861,7 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	}
 
 	if( !tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-		trigger_error( TAG_NOT_ATTACHED, ERROR );
+		trigger_error( ERROR_TAG_NOT_ATTACHED, ERROR );
 	}
 
 	$t_tag_row = tag_bug_get_row( $p_tag_id, $p_bug_id );
