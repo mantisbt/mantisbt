@@ -57,6 +57,7 @@
  * @author Ssola
  * @author Toniher
  * @author Townie
+ * @author Txemaq
  */
 
 $s_actiongroup_menu_copy = 'Copia';
@@ -658,7 +659,7 @@ $s_add_subproject = 'Afegeix com a Subprojecte';
 $s_create_new_subproject_link = 'Crea un Subprojecte Nou';
 $s_unlink_link = 'Elimina l\'Enllaç';
 $s_show_global_users = 'Mostra els Usuaris amb Accés Global';
-$s_hide_global_users = 'Oculat els Usuaris amb Accés Global';
+$s_hide_global_users = 'Oculta els Usuaris amb Accés Global';
 $s_review_changes_confirmation = 'Esteu segur que voleu aplicar els canvis següents?';
 $s_review_changes_empty = 'No s’ha seleccionat cap canvi';
 $s_add_project_title = 'Afegeix un Projecte';
