@@ -599,6 +599,7 @@ $s_bug_created_from = 'Zadeva ustvarjena iz';
 $s_issues = 'Problemi';
 $s_view_private_issues = 'Ogled zasebnih problemov';
 $s_update_readonly_issues = 'Posodobi probleme samo za branje';
+$s_notes = 'Opombe';
 $s_news = 'Novice';
 $s_filters = 'Filtri';
 $s_see_email_addresses_of_other_users = 'See email addresses of other users';
