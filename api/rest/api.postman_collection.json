@@ -3968,7 +3968,7 @@
 					]
 				},
 				{
-					"name": "Add an issue relatiobship",
+					"name": "Add an issue relationship",
 					"request": {
 						"method": "POST",
 						"header": [
