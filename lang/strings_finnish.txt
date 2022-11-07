@@ -47,6 +47,7 @@
  * @author Str4nd
  * @author Thurenius
  * @author Tkh
+ * @author Valtlai
  * @author Valtlait
  */
 
