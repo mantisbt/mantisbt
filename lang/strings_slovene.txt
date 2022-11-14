@@ -44,11 +44,13 @@
  * @author Wertuose
  */
 
+$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopiraj';
 $s_actiongroup_menu_assign = 'Priredi';
 $s_actiongroup_menu_resolve = 'Razreši';
 $s_actiongroup_menu_update_priority = 'Posodobi prioritete';
 $s_actiongroup_menu_update_status = 'Posodobi status';
+$s_actiongroup_menu_update_severity = 'Posodobi resnost';
 $s_actiongroup_menu_update_view_status = 'Posodobi zasebnost';
 $s_actiongroup_menu_update_field = 'Posodobi %1$s';
 $s_actiongroup_menu_add_note = 'Dodaj beležko';
@@ -343,6 +345,7 @@ $s_date_created = 'Datum ustvarjanja';
 $s_last_visit = 'Zadnji obisk';
 $s_edit_user_link = 'Uredi uporabnika';
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_workflow = 'Delovni tok';
 $s_status_level = 'Stanje';
 $s_configuration_option_type = 'Vrsta';
 $s_configuration_option_value = 'Vrednost';
@@ -508,6 +511,7 @@ $s_developer_by_resolution = 'Razvijalci po razrešitvi';
 $s_percentage_fixed = '% rešenih';
 $s_percentage_errors = '% Napačno';
 $s_errors = 'Napačno';
+$s_resolved = 'Razrešeno';
 $s_total = 'Skupno';
 $s_days = 'Dnevi';
 $s_time_stats = 'Časovna statistika za rešene zadeve (dnevi)';
@@ -549,7 +553,7 @@ $s_reset_query = 'Ponastavi filter';
 $s_query_name = 'Ime filtra';
 $s_query_exists = 'Zdi se, da ta določen filter že obstaja.';
 $s_query_dupe_name = 'Drug filter s tem imenom že obstaja. Prosimo, izberite drugačno ime za ta filter.';
-$s_query_blank_name = 'Ne morete shraniti filtra brez imena. Prosim poimenujte filter.';
+$s_query_blank_name = 'Filtra ne morete shraniti brez imena. Prosimo, poimenujte filter, preden ga shranite.';
 $s_query_store_error = 'Pri shranjevanju filtra je prišlo do napake.';
 $s_open_queries = 'Uredi filtre';
 $s_query_delete_msg = 'Ali filter »%1$s« res želite izbrisati?';
