@@ -95,6 +95,7 @@ $s_unassigned_projects_label = 'Nem hozzárendelt projektek';
 $s_copy_users = 'Felhasználók másolása';
 $s_copy_categories_from = 'Kategóriák másolása innen:';
 $s_copy_categories_to = 'Kategóriák másolása ide:';
+$s_copy_categories_exclude_inherited = 'Öröklött kategóriák kizárása';
 $s_copy_versions_from = 'Verziók másolása innen:';
 $s_copy_versions_to = 'Verziók másolása ide:';
 $s_copy_users_from = 'Felhasználók másolása innen:';
