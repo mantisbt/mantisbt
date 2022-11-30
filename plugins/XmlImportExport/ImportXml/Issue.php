@@ -260,15 +260,16 @@ class ImportXml_Issue implements ImportXml_Interface {
 				bugnote_add(
 					$this->new_id_,
 					$t_bugnote->note,
-					$t_bugnote->time_tracking,
+                    isset($t_bugnote->time_tracking) ? $t_bugnote->time_tracking : '',
 					$t_bugnote->private,
-					$t_bugnote->note_type,
-					$t_bugnote->note_attr,
+                    isset($t_bugnote->note_type) ? $t_bugnote->note_type : BUGNOTE,
+                    isset($t_bugnote->note_attr) ? $t_bugnote->note_attr : '',
 					$t_bugnote->reporter_id,
 					false,
 					$t_bugnote->date_submitted,
-					$t_bugnote->last_modified,
-					true );
+                    isset($t_bugnote->last_modified) ? $t_bugnote->last_modified : $t_bugnote->date_submitted,
+					true
+				);
 			}
 		}
 
