@@ -448,7 +448,7 @@ function config_can_set_in_database( $p_option ) {
  * @return boolean
  */
 function config_can_delete( $p_option ) {
-	return( strtolower( $p_option ) != 'database_version' );
+	return( strtolower(isset($p_option) ? $p_option : '') != 'database_version' );
 }
 
 /**
