@@ -24,6 +24,9 @@
  */
 
 # Bypass default Mantis headers
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
+
 $g_bypass_headers = true;
 $g_bypass_error_handler = true;
 
@@ -43,16 +46,20 @@ require_once( $t_restcore_dir . 'VersionMiddleware.php' );
 # For example, this will disable logic like encoding dates with XSD meta-data.
 ApiObjectFactory::$soap = false;
 
+$g_app = Slim\Factory\AppFactory::create();
+$g_app->addRoutingMiddleware();
+
+
 # Show SLIM detailed errors according to Mantis settings
-$t_config = array();
 
-if( ON == config_get_global( 'show_detailed_errors' ) ) {
-	$t_config['settings'] = array( 'displayErrorDetails' => true );
-}
-
-$t_container = new \Slim\Container( $t_config );
-$t_container['errorHandler'] = function( $p_container ) {
-	return function( $p_request, $p_response, $p_exception ) use ( $p_container ) {
+$t_error_handler = function( ServerRequestInterface $request,
+                             Throwable $exception,
+                             bool $displayErrorDetails,
+                             bool $logErrors,
+                             bool $logErrorDetails,
+                             ?LoggerInterface $logger = null
+) {
+	return function( $p_request, $p_response, $p_exception ) use ( $g_app ) {
 		$t_data = array(
 			'message' => $p_exception->getMessage(),
 		);
@@ -84,14 +91,22 @@ $t_container['errorHandler'] = function( $p_container ) {
 	};
 };
 
-$g_app = new \Slim\App( $t_container );
 
 # Add middleware - executed in reverse order of appearing here.
-$g_app->add( new ApiEnabledMiddleware() );
-$g_app->add( new AuthMiddleware() );
-$g_app->add( new VersionMiddleware() );
-$g_app->add( new OfflineMiddleware() );
-$g_app->add( new CacheMiddleware() );
+
+$t_error_middleware = $g_app->addErrorMiddleware(
+    # Show SLIM detailed errors according to Mantis settings
+    ON == config_get_global( 'show_detailed_errors'  ),
+    true,
+    ON == config_get_global( 'show_detailed_errors' )
+);
+//$g_app->addErrorMiddleware(true, true, true);
+
+$g_app->add( ApiEnabledMiddleware::class );
+//$g_app->add( new AuthMiddleware() );
+//$g_app->add( new VersionMiddleware() );
+//$g_app->add( new OfflineMiddleware() );
+//$g_app->add( new CacheMiddleware() );
 
 require_once( $t_restcore_dir . 'config_rest.php' );
 require_once( $t_restcore_dir . 'filters_rest.php' );
@@ -105,3 +120,7 @@ require_once( $t_restcore_dir . 'pages_rest.php' );
 event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $g_app ) ) );
 
 $g_app->run();
+
+// upgrade notes
+// https://blog.mansonthomas.com/2019/11/upgrade-slimframework-v3-to-v4-how-i.html
+// https://akrabat.com/a-first-look-at-slim-4/

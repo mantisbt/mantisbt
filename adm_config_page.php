@@ -222,15 +222,16 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 					</td>
 					<td>
 						<?php
+                        $c_option_id = string_display_line( $t_option_id );
 						if( $t_modify ) {
 						?>
 						<input type="text" name="config_option" class="input-sm"
-							   value="<?php echo string_display_line( $t_option_id ); ?>"
+							   value="<?php echo $c_option_id ?>"
 							   size="64" maxlength="64" />
-						<input type="hidden" name="original_config_option" value="<?php echo string_display_line( $t_option_id ); ?>" />
+						<input type="hidden" name="original_config_option" value="<?php echo $c_option_id; ?>" />
 						<?php
 						} else {
-							echo string_display_line( $t_option_id );
+							echo $c_option_id;
 						}
 						?>
 					</td>
