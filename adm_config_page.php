@@ -119,11 +119,11 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 	# prepare new or default values
 	$t_option_user_id = $f_edit_user_id;
 	$t_option_project_id = $f_edit_project_id;
-	$t_option_id = $f_edit_option;
+	$t_option_id = $f_edit_option ?? '';
 	$t_option_type = CONFIG_TYPE_DEFAULT;
 	$t_option_value = '';
 
-	if( null != $t_option_id ) {
+	if( '' != $t_option_id ) {
 		# if an option has been provided,
 		# make sure that configuration option specified is a valid one.
 		$t_not_found_value = '***CONFIG OPTION NOT FOUND***';
