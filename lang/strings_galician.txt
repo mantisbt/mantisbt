@@ -485,7 +485,7 @@ $s_warning_change_setting = '<strong>Advertencia:</strong> "%1$s" non está esta
 $s_warning_security_hazard = 'Isto é un risco potencial de seguridade que pode expor información sensible.';
 $s_warning_integrity_hazard = 'Esto fará que MantisBT continúe cando se produzan erros e pode xerar problemas de integridade de sistema ou datos.';
 $s_warning_debug_email = '<strong>Advertencia:</strong> "<code>debug_email</code>" non está establecido en <code>OFF</code>; todas as notificacións por correo electrónico enviaranse a "%1$s".';
-$s_error_database_no_schema_version = '<strong>Error:</strong> a versión do esquema da base de datos é 0. Isto pode producirse debido a que a base de datos estea corrompida, por non poderse obter o valor de «database_version» da táboa de configuración, ou ben, porque a estrutura da base de datos pertence a unha versión desactualizada de MantisBT (anterior á 1.0.0).';
+$s_error_database_no_schema_version = '<strong>Erro:</strong> A versión do esquema da base de datos é 0. Isto pode producirse debido a que a base de datos estea corrompida, por non poderse obter o valor de «database_version» da táboa de configuración, ou ben porque a estrutura da base de datos pertence a unha versión desactualizada de MantisBT (anterior á 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Aviso:</strong> A estrutura da base de datos pode estar desactualizada. Por favor, actualícea <a href="admin/install.php">aquí</a> antes de acceder ao sistema.';
 $s_error_code_version_out_of_date = '<strong>Aviso:</strong> A estrutura da base de datos é máis recente que o código instalado. Por favor, actualice o código.';
 $s_login_page_info = 'Benvido ao sistema de xestión dos problemas.';
