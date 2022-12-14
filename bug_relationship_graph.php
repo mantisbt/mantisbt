@@ -50,6 +50,8 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'relationship_graph_api.php' );
 
+require_css( 'status_config.php' );
+
 # If relationship graphs were made disabled, we disallow any access to
 # this script.
 
