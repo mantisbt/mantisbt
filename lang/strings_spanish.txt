@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author AnupamM
  * @author Armando-Martin
  * @author Biancailin
  * @author Bithunter
@@ -119,6 +120,7 @@ $s_unassigned_projects_label = 'Proyectos sin asignar';
 $s_copy_users = 'Copiar usuarios';
 $s_copy_categories_from = 'Copiar categorías de';
 $s_copy_categories_to = 'Copiar categorías en';
+$s_copy_categories_exclude_inherited = 'Excluir categorías heredadas';
 $s_copy_versions_from = 'Copiar versiones de';
 $s_copy_versions_to = 'Copiar versiones en';
 $s_copy_users_from = 'Copiar usuarios de';
@@ -654,6 +656,7 @@ $s_readonly_status = 'Estado en el que una incidencia pasa a ser de solo lectura
 $s_reopen_status = 'Estado en el que se establece una incidencia reabierta';
 $s_reopen_resolution = 'Resolución que se establece al reabrir una incidencia';
 $s_limit_view_unless_threshold_option = 'Ver incidencias de otros usuarios (si no se establece, el acceso se verá restringido a las incidencias reportadas, asignadas o monitoreadas por el usuario).';
+$s_export_issues = 'Exportar incidencias';
 $s_config_delete_sure = '¿Estás seguro de querer eliminar la configuración de %1$s en el proyecto %2$s?';
 $s_delete_config_button = 'Borrar Configuración';
 $s_configuration_report = 'Reporte de Configuración';
@@ -879,6 +882,7 @@ $s_signup_done_title = 'Registro de cuenta procesado';
 $s_password_emailed_msg = 'Felicidades. Se ha registrado con éxito. Recibirá un mensaje por correo electrónico para verificar su dirección de correo electrónico. Haga click en el enlace que recibirá para activar su cuenta.';
 $s_no_reponse_msg = 'Tienes siete días para completar el proceso de confirmación de cuenta. Si no lo haces en ese plazo, tu nueva cuenta podría eliminarse.';
 $s_signup_captcha_request_label = 'Ingrese el código que se muestra en el cuadro de la derecha:';
+$s_signup_captcha_play = 'Reproduce el audio del código captcha';
 $s_signup_captcha_refresh = 'Generar un nuevo código';
 $s_signup_info = 'Al completar este proceso y la verificación de tus respuestas, te enviaremos un correo electrónico de confirmación a la dirección especificada.<br />Podrás activar tu cuenta usando el enlace incluido en el correo electrónico. Si no lo haces en siete días, la cuenta podrá eliminarse.<br />Debes ingresar una dirección de correo electrónico válida para poder recibir el mensaje de verificación.';
 $s_signup_title = 'Registrarse';
