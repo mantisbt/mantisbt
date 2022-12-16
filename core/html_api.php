@@ -312,6 +312,22 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 }
 
 /**
+ * Print a canonical meta tag.
+ *
+ * @param string  $p_url      The canonical URL: has to be a relative path.
+ * @return boolean
+ */
+function html_meta_canonical( $p_url ) {
+	$t_url = config_get_global( 'path' ) . $p_url;
+
+	$t_url = htmlspecialchars( $t_url );
+
+	echo "\t" . '<link rel="canonical" href="' . $t_url . '" />' . "\n";
+
+	return true;
+}
+
+/**
  * Require a javascript file to be in html page headers
  * @param string $p_script_path Path to javascript file.
  * @return void

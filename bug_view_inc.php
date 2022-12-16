@@ -110,7 +110,7 @@ $t_flags = $t_result['flags'];
 compress_enable();
 
 if( $t_show_page_header ) {
-	layout_page_header( bug_format_summary( $f_issue_id, SUMMARY_CAPTION ), null, 'view-issue-page' );
+	layout_page_header( bug_format_summary( $f_issue_id, SUMMARY_CAPTION ), null, 'view-issue-page', 'view.php?id=' . $f_issue_id );
 	layout_page_begin( 'view_all_bug_page.php' );
 }
 
