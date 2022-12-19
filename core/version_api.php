@@ -111,7 +111,7 @@ class VersionData {
 					if( $p_value == '' ) {
 						$t_value = date_get_null();
 					} else {
-						$t_value = strtotime( $p_value );
+						$t_value = DateTimeImmutable::createFromFormat( config_get('normal_date_format') , $p_value)->getTimestamp();
 						if( $t_value === false ) {
 							throw new ClientException(
 								"Invalid date format '$p_value'",
