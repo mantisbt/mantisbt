@@ -58,6 +58,7 @@
  * @author Winston Sung
  * @author Wwycheuk
  * @author Xiplus
+ * @author 列维劳德
  * @author 捍粵者
  */
 
@@ -158,7 +159,7 @@ $s_opensearch_id_description = '%s:依問題編號搜尋';
 $s_opensearch_text_short = '%s文字';
 $s_opensearch_text_description = '%s:全文搜尋';
 $s_select_option = '(請選擇)';
-$s_bug_actiongroup_access = '您沒有權限執行此動作。';
+$s_bug_actiongroup_access = '您無權這樣做。';
 $s_bug_actiongroup_status = '此問題無法更改為指定的狀態';
 $s_bug_actiongroup_category = '此問題無法變更為指定的類別';
 $s_bug_actiongroup_handler = '指定的使用者不允許處理此問題';
