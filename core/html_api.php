@@ -283,7 +283,7 @@ function html_css_cdn_link( $p_url, $p_hash = '' ) {
  * $p_time is the number of seconds to wait before redirecting.
  * If we have handled any errors on this page return false and don't redirect.
  *
- * @param string  $p_url      The page to redirect: has to be a relative path.
+ * @param string  $p_url      The page to redirect: has to be relative to the install path (@see $g_path).
  * @param integer $p_time     Seconds to wait for before redirecting.
  * @param boolean $p_sanitize Apply string_sanitize_url to passed URL.
  * @return boolean
@@ -314,8 +314,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 /**
  * Print a canonical meta tag.
  *
- * @param string  $p_url      The canonical URL: has to be a relative path.
- * @return boolean
+ * @param string  $p_url      The canonical URL: has to be relative to the install path (@see $g_path).
  */
 function html_meta_canonical( $p_url ) {
 	$t_url = config_get_global( 'path' ) . $p_url;
@@ -323,8 +322,6 @@ function html_meta_canonical( $p_url ) {
 	$t_url = htmlspecialchars( $t_url );
 
 	echo "\t" . '<link rel="canonical" href="' . $t_url . '" />' . "\n";
-
-	return true;
 }
 
 /**
