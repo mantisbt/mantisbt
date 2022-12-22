@@ -309,6 +309,7 @@ $s_no_bugnotes_msg = 'K tej zadevi ni dodanih nobenih beležk.';
 $s_add_bugnote_title = 'Dodajanje beležke';
 $s_add_bugnote_button = 'Dodaj beležko';
 $s_bugnote_updated_msg = 'Beležka je bila uspešno posodobljena...';
+$s_page_execution_time = 'Čas izvedbe strani: %1$s sekunde';
 $s_log_page_number = 'Število';
 $s_login_page_info = 'Pozdravljeni v Sledilniku zahtev';
 $s_login_title = 'Prijava';
