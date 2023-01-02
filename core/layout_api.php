@@ -47,15 +47,19 @@ require_api( 'utility_api.php' );
 
 /**
  * Print the page header section
- * @param string $p_page_title   Html page title.
- * @param string $p_redirect_url URL to redirect to if necessary.
- * @param string $p_page_id      The page id.
+ * @param string $p_page_title    Html page title.
+ * @param string $p_redirect_url  URL to redirect to if necessary: has to be relative to the install path {@see $g_path}.
+ * @param string $p_page_id       The page id.
+ * @param string $p_canonical_url Canonical URL if necessary: has to be relative to the install path {@see $g_path}.
  * @return void
  */
-function layout_page_header( $p_page_title = null, $p_redirect_url = null, $p_page_id = null ) {
+function layout_page_header( $p_page_title = null, $p_redirect_url = null, $p_page_id = null, $p_canonical_url = null ) {
 	layout_page_header_begin( $p_page_title );
 	if( $p_redirect_url !== null ) {
 		html_meta_redirect( $p_redirect_url );
+	}
+	if( $p_canonical_url !== null ) {
+		html_meta_canonical( $p_canonical_url );
 	}
 
 	layout_page_header_end( $p_page_id );
