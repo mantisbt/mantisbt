@@ -53,6 +53,7 @@
  * @author Fitoschido
  * @author Geryescalier
  * @author Guidored
+ * @author Jack30
  * @author Jelou
  * @author Joanmp17
  * @author Ktranz
@@ -882,7 +883,7 @@ $s_signup_done_title = 'Registro de cuenta procesado';
 $s_password_emailed_msg = 'Felicidades. Se ha registrado con éxito. Recibirá un mensaje por correo electrónico para verificar su dirección de correo electrónico. Haga click en el enlace que recibirá para activar su cuenta.';
 $s_no_reponse_msg = 'Tienes siete días para completar el proceso de confirmación de cuenta. Si no lo haces en ese plazo, tu nueva cuenta podría eliminarse.';
 $s_signup_captcha_request_label = 'Ingrese el código que se muestra en el cuadro de la derecha:';
-$s_signup_captcha_play = 'Reproduce el audio del código captcha';
+$s_signup_captcha_play = 'Reproducir el audio del código captcha';
 $s_signup_captcha_refresh = 'Generar un nuevo código';
 $s_signup_info = 'Al completar este proceso y la verificación de tus respuestas, te enviaremos un correo electrónico de confirmación a la dirección especificada.<br />Podrás activar tu cuenta usando el enlace incluido en el correo electrónico. Si no lo haces en siete días, la cuenta podrá eliminarse.<br />Debes ingresar una dirección de correo electrónico válida para poder recibir el mensaje de verificación.';
 $s_signup_title = 'Registrarse';
