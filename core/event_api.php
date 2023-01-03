@@ -203,13 +203,15 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {
 		plugin_push_current( $p_plugin );
 
 		if( method_exists( $g_plugin_cache[$p_plugin], $p_callback ) ) {
-			$t_value = call_user_func_array( array( $g_plugin_cache[$p_plugin], $p_callback ), array_merge( array( $p_event ), $p_params ) );
+  			$function_params = array_merge( [ $p_event ], $p_params );
+			$t_value = call_user_func_array( array( $g_plugin_cache[$p_plugin], $p_callback ), array_values($function_params) );
 		}
 
 		plugin_pop_current();
 	} else {
 		if( function_exists( $p_callback ) ) {
-			$t_value = call_user_func_array( $p_callback, array_merge( array( $p_event ), $p_params ) );
+			$function_params = array_merge( [ $p_event ], $p_params );
+			$t_value = call_user_func_array( $p_callback, array_values($function_params) );
 		}
 	}
 
