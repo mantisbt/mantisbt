@@ -4246,9 +4246,11 @@ $g_due_date_update_threshold = NOBODY;
 $g_due_date_view_threshold = NOBODY;
 
 /**
- * Default due date value for newly submitted issues:
- * Empty string for no due date set.
- * Related date that is accepted by strtotime (http://php.net/manual/en/function.strtotime.php), e.g. 'today' or '+2 days'.
+ * Default due date value for newly submitted issues.
+ *
+ * A valid relative date format {@link https://php.net/manual/en/datetime.formats.relative.php}
+ * e.g. 'today' or '+2 days', or empty string for no due date set (default).
+ *
  * @global string $g_due_date_default
  */
 $g_due_date_default = '';
