@@ -349,7 +349,7 @@ class BugData {
 				break;
 			case 'due_date':
 				if( !is_numeric( $p_value ) ) {
-					$p_value = strtotime( $p_value );
+					$p_value = date_strtotime( $p_value );
 				}
 				break;
 			case 'summary':

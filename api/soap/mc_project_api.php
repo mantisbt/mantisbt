@@ -509,7 +509,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	$t_name = $p_version['name'];
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
-	$t_date_order = isset( $p_version['date_order'] ) ? strtotime( $p_version['date_order'] ) : null;
+	$t_date_order = isset( $p_version['date_order'] ) ? date_strtotime( $p_version['date_order'] ) : null;
 	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 
 	if( is_blank( $t_project_id ) ) {
