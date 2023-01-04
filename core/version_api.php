@@ -96,10 +96,12 @@ class VersionData {
 	}
 
 	/**
-	 * Overloaded function
-	 * @param string         $p_name  A valid property name.
+	 * Setting protected class properties.
+	 *
+	 * @param string $p_name A valid property name.
 	 * @param integer|string $p_value The property value to set.
 	 * @return void
+	 * @throws ClientException
 	 * @private
 	 */
 	public function __set( $p_name, $p_value ) {
@@ -112,7 +114,8 @@ class VersionData {
 	}
 
 	/**
-	 * Overloaded function
+	 * Getting protected class properties.
+	 *
 	 * @param string $p_name A valid property name.
 	 * @return integer|string
 	 * @private
