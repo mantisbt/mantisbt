@@ -103,26 +103,12 @@ class VersionData {
 	 * @private
 	 */
 	public function __set( $p_name, $p_value ) {
-		$t_value = $p_value;
-
-		switch( $p_name ) {
-			case 'date_order':
-				if( !is_numeric( $p_value ) ) {
-					if( $p_value == '' ) {
-						$t_value = date_get_null();
-					} else {
-						$t_value = DateTimeImmutable::createFromFormat( config_get('normal_date_format') , $p_value)->getTimestamp();
-						if( $t_value === false ) {
-							throw new ClientException(
-								"Invalid date format '$p_value'",
-								ERROR_INVALID_DATE_FORMAT,
-								array( $p_value ) );
-						}
-					}
-				}
+		if( $p_name == 'date_order' && !is_numeric( $p_value ) ) {
+			$this->date_order = date_strtotime( $p_value );
+			return;
 		}
 
-		$this->$p_name = $t_value;
+		$this->$p_name = $p_value;
 	}
 
 	/**
