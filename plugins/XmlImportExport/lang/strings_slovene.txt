@@ -1,0 +1,65 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit https://translatewiki.net  **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Slovenian (slovenščina)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit https://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Eleassar
+ */
+
+$s_plugin_XmlImportExport_title = 'Težave z uvozom/izvozom';
+$s_plugin_XmlImportExport_description = 'MantisBT doda možnosti uvoza in izvoza na podlagi XML.';
+$s_plugin_XmlImportExport_import = 'Težave z uvozom';
+$s_plugin_XmlImportExport_export = 'Izvoz XML';
+$s_plugin_XmlImportExport_config_title = 'Konfiguracija ravni dostopa za uvoz/izvoz XML';
+$s_plugin_XmlImportExport_import_threshold = 'Težave z uvozom';
+$s_plugin_XmlImportExport_export_threshold = 'Težave z izvozom';
+$s_plugin_XmlImportExport_action_update = 'Posodobi';
+$s_plugin_XmlImportExport_importing_in_project = 'Uvažanje težav v projekt: »%s«';
+$s_plugin_XmlImportExport_import_options = 'Možnosti uvoza';
+$s_plugin_XmlImportExport_cross_references = 'Navzkrižni sklici';
+$s_plugin_XmlImportExport_default_strategy = 'Privzeta strategija pretvorbe:';
+$s_plugin_XmlImportExport_renumber = 'Preštevilči';
+$s_plugin_XmlImportExport_renumber_desc = 'Poskusi pretvoriti sklice v novo oštevilčenje';
+$s_plugin_XmlImportExport_link = 'Povezava';
+$s_plugin_XmlImportExport_link_desc = 'Pretvori v povezavo do izvornega predmeta';
+$s_plugin_XmlImportExport_disable = 'Onemogoči';
+$s_plugin_XmlImportExport_disable_desc = 'Onemogoči povezavo';
+$s_plugin_XmlImportExport_fallback = 'Nadomestna strategija (če možnost »Preštevilči« ni na voljo):';
+$s_plugin_XmlImportExport_fallback_category = 'Nadomestna kategorija:';
+$s_plugin_XmlImportExport_keep_same_category = 'Poskusi ohraniti isto kategorijo';
+$s_plugin_XmlImportExport_error_no_xml = 'razširitev <em>xmlreader</em> in <em>xmlwriter</em> ni mogoče najti';
