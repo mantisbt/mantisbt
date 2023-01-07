@@ -2828,7 +2828,17 @@ $g_private_bug_threshold = DEVELOPER;
 
 /**
  * access level needed to be able to be listed in the assign to field.
- * @global integer $g_handle_bug_threshold
+ * if a single value provided, this means that all users that have 
+ * access level >= this value, will be listed.
+ * example:
+ * $g_handle_bug_threshold = DEVELOPER;
+ * 
+ * if an array is provided, then user access level need to be in the set
+ * provided in the array, for the user to be listed.
+ * example:
+ * $g_handle_bug_threshold = array(DEVELOPER,MANAGER);
+ *
+ * @global mixed $g_handle_bug_threshold
  */
 $g_handle_bug_threshold = DEVELOPER;
 
