@@ -1260,19 +1260,20 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
  * return an array of sub-project IDs of all sub-projects project to which the user has access
  * @param integer $p_user_id    A valid user identifier.
  * @param integer $p_project_id A valid project identifier.
+ * @param boolean $p_show_disabled Include disabled projects in the resulting array.
  * @return array
  */
-function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
+function user_get_all_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled = false ) {
 	# @todo (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
 	# affects how news and some summaries are generated
-	$t_todo = user_get_accessible_subprojects( $p_user_id, $p_project_id );
+	$t_todo = user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled );
 	$t_subprojects = array();
 
 	while( $t_todo ) {
 		$t_elem = (int)array_shift( $t_todo );
 		if( !in_array( $t_elem, $t_subprojects ) ) {
 			array_push( $t_subprojects, $t_elem );
-			$t_todo = array_merge( $t_todo, user_get_accessible_subprojects( $p_user_id, $t_elem ) );
+			$t_todo = array_merge( $t_todo, user_get_accessible_subprojects( $p_user_id, $t_elem, $p_show_disabled ) );
 		}
 	}
 
@@ -1286,15 +1287,16 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
  * @param integer $p_user_id    A valid user identifier or null for logged in user.
  * @param integer $p_project_id A valid project identifier.  ALL_PROJECTS returns
  *                              all top level projects and sub-projects.
- * @return array
+ * @param boolean $p_show_disabled Whether to include disabled projects in the result array.
+* @return array
  */
-function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = ALL_PROJECTS, $p_show_disabled = false ) {
 	if( $p_user_id === null ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
 	if( ALL_PROJECTS == $p_project_id ) {
-		$t_top_projects = user_get_accessible_projects( $p_user_id );
+		$t_top_projects = user_get_accessible_projects( $p_user_id, $p_show_disabled );
 
 		# Create a combined array where key = value
 		$t_project_ids = array_combine( $t_top_projects, $t_top_projects );
