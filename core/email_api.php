@@ -680,6 +680,11 @@ function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipi
 			lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
 
 			$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
+
+			$t_msg_id = $p_message_id;	
+			if( isset($t_visible_bug_data['message_id']) ) {
+				$t_msg_id = $t_visible_bug_data['message_id'];
+			}
 			email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_user_id, $p_header_optional_params );
 
 			lang_pop();
@@ -2035,6 +2040,11 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	$t_bug_data['relations'] = email_relationship_get_summary_text( $p_bug_id );
 
 	current_user_set( $t_current_user_id );
+
+	$t_function = str_replace('_title_', '_override_', $p_message_id);
+	if( function_exists( $t_function ) ) {
+		return $t_function( $t_bug_data );	
+	}
 
 	return $t_bug_data;
 }
