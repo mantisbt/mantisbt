@@ -54,7 +54,11 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+# Load Composer autoloader
+require_once( dirname( __FILE__ ) . '/../vendor/autoload.php' );
+
 use Mantis\Exceptions\ClientException;
+use URL\Normalizer;
 
 /**
  * alternate classes for table rows
@@ -307,6 +311,10 @@ function helper_begin_long_process( $p_ignore_abort = false ) {
 # project as used by the filters, etc, does not match the bug being viewed.
 $g_project_override = null;
 $g_cache_current_project = null;
+
+if( !empty($_GET['project_id']) && is_numeric($_GET['project_id']) ){
+	$g_project_override = intval($_GET['project_id']);
+}
 
 /**
  * Return the current project id as stored in a cookie
@@ -607,17 +615,45 @@ function helper_log_to_page() {
  * @return string
  */
 function helper_mantis_url( $p_url ) {
+	global $g_project_override;
+
+	$t_url_norm = new URL\Normalizer(null, true, true);
+
 	if( is_blank( $p_url ) ) {
-		return $p_url;
+		$t_url_norm->setUrl( $p_url );
+		return $t_url_norm->normalize();
+	}
+
+	if( !empty($g_project_override) ){
+		$t_parsed_url = parse_url($p_url);
+		if(!empty($t_parsed_url['path'])){
+			$p_url = $t_parsed_url['path'];
+		}
+		$p_url = "{$p_url}?project_id={$g_project_override}";			
+		if(!empty($t_parsed_url['query'])){
+			$t_parsed_url['query'] = preg_replace('/project_id=\d+/', '', $t_parsed_url['query']);
+			if(!empty($t_parsed_url['query'])){
+				$p_url = "{$p_url}&{$t_parsed_url['query']}";
+			}
+		}
+		if(!empty($t_parsed_url['fragment'])){
+			$p_url = "{$p_url}#{$t_parsed_url['fragment']}";
+		}
+	}
+
+	if(strstr($p_url, 'bug_report_page.php')){
+		$foo = 'bar';
 	}
 
 	# Return URL as-is if it already starts with short path
 	$t_short_path = config_get_global( 'short_path' );
 	if( strpos( $p_url, $t_short_path ) === 0 ) {
-		return $p_url;
+		$t_url_norm->setUrl( $p_url );
+		return $t_url_norm->normalize();
 	}
 
-	return $t_short_path . $p_url;
+	$t_url_norm->setUrl( $t_short_path . $p_url );
+	return $t_url_norm->normalize();
 }
 
 /**

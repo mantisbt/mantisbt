@@ -71,7 +71,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<div id="manage-proj-category-update-div" class="form-container">
-	<form id="manage-proj-category-update-form" method="post" action="manage_proj_cat_update.php">
+	<form id="manage-proj-category-update-form" method="post" action="<?php echo helper_mantis_url("manage_proj_cat_update.php"); ?>">
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">

@@ -100,6 +100,8 @@ event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
 
 form_security_purge( 'manage_proj_create' );
 
+$t_redirect_url = helper_mantis_url('manage_proj_page.php');
+
 layout_page_header( null, $t_redirect_url );
 layout_page_begin( 'manage_overview_page.php' );
 

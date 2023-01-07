@@ -488,7 +488,7 @@ foreach ( $t_status_arr as $t_status => $t_status_label ) {
 	}
 }
 
-echo '<form id="workflow_config_action" method="post" action="manage_config_workflow_set.php">' . "\n";
+echo '<form id="workflow_config_action" method="post" action="<?php echo helper_mantis_url("manage_config_workflow_set.php"); ?>">' . "\n";
 echo '<fieldset>';
 echo form_security_field( 'manage_config_workflow_set' );
 echo '</fieldset>';
@@ -575,7 +575,7 @@ echo '</form>' . "\n";
 # Secondary form to revert config - submit button is defined above
 if( $g_can_change_flags && 0 < count( $g_overrides ) ) {
 ?>
-<form id="mail_config_action" method="post" action="manage_config_revert.php">
+<form id="mail_config_action" method="post" action="<?php echo helper_mantis_url( 'manage_config_revert.php' ); ?>">
 	<fieldset>
 		<?php echo form_security_field( 'manage_config_revert' ); ?>
 		<input name="revert" type="hidden" value="<?php echo implode( ',', $g_overrides ) ?>" />

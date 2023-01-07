@@ -9,11 +9,12 @@
         "slim/slim": "^3.0",
         "guzzlehttp/guzzle": "^6.2",
         "vboctor/disposable_email_checker": "^3.0",
-        "adodb/adodb-php": "^5.20.21",
+        "adodb/adodb-php": "^5.20.21, !=5.22.3",
         "phpmailer/phpmailer": "~6.0",
         "erusev/parsedown": "^1.7.0, <=1.7.3",
         "ezyang/htmlpurifier": "^4.14",
-        "dapphp/securimage": "dev-mantis"
+        "dapphp/securimage": "dev-mantis",
+        "glenscott/url-normalizer": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "dev-mantis-6.5",

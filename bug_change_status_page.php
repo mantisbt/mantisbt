@@ -128,7 +128,7 @@ layout_page_begin();
 <div class="col-md-12 col-xs-12">
 
 	<div id="bug-change-status-div" class="form-container">
-	<form id="bug-change-status-form" name="bug_change_status_form" method="post" action="bug_update.php">
+	<form id="bug-change-status-form" name="bug_change_status_form" method="post" action="<?php echo helper_mantis_url("bug_update.php"); ?>">
 
 	<fieldset>
 

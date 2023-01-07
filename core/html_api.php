@@ -633,7 +633,7 @@ function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null 
 
 		echo '<li class="' . $t_active .  '">';
 		if( $t_item['label'] == '' ) {
-			echo '<a href="'. lang_get_defaulted( $t_item['url'] ) .'">';
+			echo '<a href="'. helper_mantis_url( lang_get_defaulted( $t_item['url'] ) ) .'">';
 			print_icon( 'fa-info-circle', 'blue ace-icon' );
 			echo '</a>';
 		} else {
@@ -1000,7 +1000,7 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 		$t_method = 'post';
 	}
 
-	echo '<form method="' . $t_method . '" action="' . $p_action . '" class="form-inline">' . "\n";
+	echo '<form method="' . $t_method . '" action="' . helper_mantis_url( $p_action ) . '" class="form-inline">' . "\n";
 	echo "\t" . '<fieldset>';
 	# Add a CSRF token only when the form is being sent via the POST method
 	if( $t_method == 'post' ) {

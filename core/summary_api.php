@@ -1290,7 +1290,7 @@ function summary_print_filter_info( array $p_filter = null ) {
 	}
 	$t_filter_query = filter_cache_subquery( $p_filter );
 	$t_bug_count = $t_filter_query->get_bug_count();
-	$t_view_issues_link = helper_url_combine( 'view_all_bug_page.php', filter_get_temporary_key_param( $p_filter ) );
+	$t_view_issues_link = helper_mantis_url( helper_url_combine( 'view_all_bug_page.php', filter_get_temporary_key_param( $p_filter ) ) );
 	?>
 	<div class="space-10"></div>
 	<div class="col-md-12 col-xs-12">
@@ -1478,7 +1478,7 @@ function summary_print_by_date( array $p_date_array, array $p_filter = null ) {
 
 function summary_get_link_prefix( array $p_filter = null ) {
 	$t_filter_action = filter_is_temporary( $p_filter ) ? FILTER_ACTION_PARSE_ADD : FILTER_ACTION_PARSE_NEW;
-	$t_link_prefix = 'view_all_set.php?type=' . $t_filter_action . '&temporary=y&new=1';
+	$t_link_prefix = helper_mantis_url('view_all_set.php?type=' . $t_filter_action . '&temporary=y&new=1');
 	$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
 	return $t_link_prefix;
 }

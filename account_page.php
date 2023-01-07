@@ -125,7 +125,7 @@ print_account_menu( 'account_page.php' );
 	<div class="space-10"></div>
 
 <div id="account-update-div" class="form-container">
-	<form id="account-update-form" method="post" action="account_update.php">
+	<form id="account-update-form" method="post" action="<?php echo helper_mantis_url("account_update.php"); ?>">
 
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
@@ -320,7 +320,7 @@ if( ON == config_get( 'allow_account_delete' ) ) { ?>
 
 <!-- Delete Button -->
 <div class="form-container">
-	<form method="post" action="account_delete.php">
+	<form method="post" action="<?php echo helper_mantis_url("account_delete.php"); ?>">
 		<fieldset>
 			<?php echo form_security_field( 'account_delete' ) ?>
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_account_button' ) ?>" />

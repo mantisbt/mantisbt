@@ -96,7 +96,7 @@ $t_result = $t_command->execute();
 form_security_purge( 'manage_user_create' );
 
 $t_user_id = $t_result['id'];
-$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $t_user_id;
+$t_redirect_url = helper_mantis_url('manage_user_edit_page.php?user_id=' . $t_user_id);
 
 layout_page_header( null, $t_redirect_url );
 

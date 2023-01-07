@@ -93,8 +93,9 @@ function table_print_filter_row( $p_filter_id ) {
 	echo '<tr>';
 	# Filter name
 	echo '<td>';
+	$t_url = helper_mantis_url( 'view_filters_page.php?filter_id=' . $p_filter_id );
 	$t_name = string_display_line( filter_get_field( $p_filter_id, 'name' ) );
-	print_link( 'view_filters_page.php?filter_id=' . $p_filter_id, $t_name );
+	print_link( $t_url, $t_name );
 	echo '</td>';
 	# RSS
 	if( $t_rss_enabled ) {
@@ -111,7 +112,7 @@ function table_print_filter_row( $p_filter_id ) {
 	# Actions
 	echo '<td>';
 	echo '<div class="pull-left">';
-	print_form_button( 'view_all_set.php', lang_get( 'apply_filter_button' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ), /* security token */ OFF );
+	print_form_button( helper_mantis_url('view_all_set.php'), lang_get( 'apply_filter_button' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ), /* security token */ OFF );
 	echo '</div>';
 	if( $t_editable ) {
 		echo '<div class="pull-left">';

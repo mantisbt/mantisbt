@@ -79,7 +79,7 @@ foreach( $t_bug_list as $t_bug ) {
 
 form_security_purge( 'account_sponsor_update' );
 
-$t_redirect_url = 'account_sponsor_page.php';
+$t_redirect_url = helper_mantis_url('account_sponsor_page.php');
 layout_page_header( null, $t_redirect_url );
 
 layout_page_begin();

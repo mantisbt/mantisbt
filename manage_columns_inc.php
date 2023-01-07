@@ -94,7 +94,7 @@ if( $t_account_page ) {
 </div>
 
 <div id="manage-columns-div" class="form-container">
-	<form id="manage-columns-form" method="post" action="manage_config_columns_set.php">
+	<form id="manage-columns-form" method="post" action="<?php echo helper_mantis_url("manage_config_columns_set.php"); ?>">
 
 <div class="widget-body">
 <div class="widget-main no-padding">
@@ -194,7 +194,7 @@ if( $t_account_page ) {
 <div class="space-10"></div>
 
 <div id="manage-columns-copy-div" class="form-container">
-	<form id="manage-columns-copy-form" method="post" action="manage_columns_copy.php">
+	<form id="manage-columns-copy-form" method="post" action="<?php echo helper_mantis_url("manage_columns_copy.php"); ?>">
 		<fieldset>
 			<?php echo form_security_field( 'manage_columns_copy' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
@@ -218,7 +218,7 @@ if( $t_account_page ) {
 ?>
 <div class="space-10"></div>
 <div class="form-container">
-	<form method="post" action="manage_config_columns_reset.php">
+	<form method="post" action="<?php echo helper_mantis_url("manage_config_columns_reset.php"); ?>">
 		<fieldset>
 			<?php echo form_security_field( 'manage_config_columns_reset' ) ?>
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'reset_columns_configuration' ) ?>" />

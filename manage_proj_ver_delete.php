@@ -54,7 +54,7 @@ auth_reauthenticate();
 $f_version_id = gpc_get_int( 'version_id' );
 
 $t_version_info = version_get( $f_version_id );
-$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_version_info->project_id . '#versions';
+$t_redirect_url = helper_mantis_url( 'manage_proj_edit_page.php?project_id=' . $t_version_info->project_id . '#versions' );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version_info->project_id );
 

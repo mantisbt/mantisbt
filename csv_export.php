@@ -61,7 +61,7 @@ $t_filter_query = new BugFilterQuery( $t_filter );
 $t_filter_query->set_limit( EXPORT_BLOCK_SIZE );
 
 if( 0 == $t_filter_query->get_bug_count() ) {
-	print_header_redirect( 'view_all_set.php?type=0' );
+	print_header_redirect( helper_mantis_url('view_all_set.php?type=0') );
 }
 
 # Get columns to be exported

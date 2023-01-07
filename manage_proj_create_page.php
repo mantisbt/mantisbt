@@ -69,7 +69,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 <?php } ?>
 
 	<div id="manage-project-create-div" class="form-container">
-	<form method="post" id="manage-project-create-form" action="manage_proj_create.php">
+	<form method="post" id="manage-project-create-form" action="<?php echo helper_mantis_url("manage_proj_create.php"); ?>">
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">

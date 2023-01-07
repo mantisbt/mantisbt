@@ -143,7 +143,7 @@ switch( $f_type ) {
 		$t_setting_arr = filter_get( $f_source_query_id, null );
 		if( null === $t_setting_arr ) {
 			# couldn't get the filter, if we were trying to use the filter, clear it and reload
-			error_proceed_url( 'view_all_set.php?type=' . FILTER_ACTION_RESET );
+			error_proceed_url( helper_mantis_url('view_all_set.php?type=' . FILTER_ACTION_RESET) );
 			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
 			exit;
 		} else {
@@ -196,11 +196,11 @@ if( !$t_temp_filter ) {
 
 # evaluate redirect
 if( $f_print ) {
-	$t_redirect_url = 'print_all_bug_page.php';
+	$t_redirect_url = helper_mantis_url('print_all_bug_page.php');
 } elseif( $f_summary ) {
-	$t_redirect_url = 'summary_page.php';
+	$t_redirect_url = helper_mantis_url('summary_page.php');
 } else {
-	$t_redirect_url = 'view_all_bug_page.php';
+	$t_redirect_url = helper_mantis_url('view_all_bug_page.php');
 }
 
 if( $t_temp_filter ) {
@@ -214,6 +214,6 @@ if( $t_temp_filter ) {
 		unset( $t_setting_arr['_temporary_key'] );
 	}
 	$t_temporary_key = filter_temporary_set( $t_setting_arr, $t_previous_temporary_key );
-	$t_redirect_url = $t_redirect_url . '?' . filter_get_temporary_key_param( $t_temporary_key );
+	$t_redirect_url = helper_mantis_url($t_redirect_url . '?' . filter_get_temporary_key_param( $t_temporary_key ));
 }
 print_header_redirect( $t_redirect_url );

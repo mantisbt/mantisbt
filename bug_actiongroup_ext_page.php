@@ -61,7 +61,7 @@ bug_group_action_print_top();
 <div class="col-md-12 col-xs-12">
 
 <div id="action-group-div" class="form-container" >
-<form method="post" action="bug_actiongroup_ext.php">
+<form method="post" action="<?php echo helper_mantis_url("bug_actiongroup_ext.php"); ?>">
 	<?php echo form_security_field( $t_form_name ); ?>
 	<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
 	<div class="widget-box widget-color-blue2">

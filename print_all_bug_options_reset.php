@@ -75,7 +75,7 @@ $t_result = db_query( $t_query, array( $t_default, $t_user_id ) );
 
 form_security_purge( 'print_all_bug_options_reset' );
 
-$t_redirect_url = 'print_all_bug_options_page.php';
+$t_redirect_url = helper_mantis_url('print_all_bug_options_page.php');
 
 layout_page_header( null, $t_redirect_url );
 

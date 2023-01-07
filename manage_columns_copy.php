@@ -109,5 +109,5 @@ config_set( 'excel_columns', $t_excel_columns, $t_user_id, $t_dst_project_id );
 
 form_security_purge( 'manage_columns_copy' );
 
-$t_redirect_url = $f_manage_page ? 'manage_config_columns_page.php' : 'account_manage_columns_page.php';
+$t_redirect_url = helper_mantis_url($f_manage_page ? 'manage_config_columns_page.php' : 'account_manage_columns_page.php');
 print_header_redirect( $t_redirect_url );

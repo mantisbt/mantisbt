@@ -72,7 +72,7 @@ layout_page_header_begin( lang_get( 'my_view_link' ) );
 
 $t_refresh_delay = current_user_get_pref( 'refresh_delay' );
 if( $t_refresh_delay > 0 ) {
-	html_meta_redirect( 'my_view_page.php?refresh=true', $t_refresh_delay * 60 );
+	html_meta_redirect( helper_mantis_url('my_view_page.php?refresh=true'), $t_refresh_delay * 60 );
 }
 
 layout_page_header_end();

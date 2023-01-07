@@ -71,7 +71,7 @@ file_add( 0, $f_file, 'project', $f_title, $f_description );
 
 form_security_purge( 'proj_doc_add' );
 
-$t_redirect_url = 'proj_doc_page.php';
+$t_redirect_url = helper_mantis_url('proj_doc_page.php');
 
 layout_page_header( null, $t_redirect_url );
 

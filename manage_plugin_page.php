@@ -70,7 +70,7 @@ if( $t_plugins->countInstalled() ) {
 
 <a id="installed"></a>
 <div class="form-container">
-	<form action="manage_plugin_update.php" method="post">
+	<form action="<?php echo helper_mantis_url( 'manage_plugin_update.php' ); ?>" method="post">
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
@@ -384,10 +384,9 @@ class InvalidPluginForDisplay extends PluginForDisplay {
 		# Actions
 		echo '<td class="center">';
 		if( $this->can_remove ) {
+			$t_url = helper_mantis_url( 'manage_plugin_uninstall.php?name=' . $this->basename . form_security_param( 'manage_plugin_uninstall') );
 			print_link_button(
-				'manage_plugin_uninstall.php?name=' . $this->basename
-				. form_security_param( 'manage_plugin_uninstall'
-				),
+				$t_url,
 				lang_get( 'remove_link' ),
 				'btn-xs'
 			);
@@ -499,9 +498,9 @@ class AvailablePlugin extends PluginForDisplay {
 		if( get_class( $this ) == 'AvailablePlugin' ) {
 			echo '<td class="center">';
 			if( $this->can_install ) {
+				$t_url = helper_mantis_url( 'manage_plugin_install.php?name=' . $this->basename . form_security_param( 'manage_plugin_install' ) );
 				print_small_button(
-					'manage_plugin_install.php?name=' . $this->basename
-					. form_security_param( 'manage_plugin_install' ),
+					$t_url,
 					lang_get( 'plugin_install' )
 				);
 			}
@@ -549,17 +548,17 @@ class InstalledPlugin extends AvailablePlugin {
 		# Actions
 		echo '<td class="center">';
 		if( $this->upgrade_needed ) {
+			$t_url = helper_mantis_url( 'manage_plugin_upgrade.php?name=' . $this->basename . form_security_param( 'manage_plugin_upgrade' ) );
 			print_link_button(
-				'manage_plugin_upgrade.php?name=' . $this->basename
-				. form_security_param( 'manage_plugin_upgrade' ),
+				$t_url,
 				lang_get( 'plugin_upgrade' ),
 				'btn-xs'
 			);
 		}
 		if( !$this->protected ) {
+			$t_url = helper_mantis_url( 'manage_plugin_uninstall.php?name=' . $this->basename . form_security_param( 'manage_plugin_uninstall' ) );
 			print_link_button(
-				'manage_plugin_uninstall.php?name=' . $this->basename
-				. form_security_param( 'manage_plugin_uninstall' ),
+				$t_url,
 				lang_get( 'plugin_uninstall' ),
 				'btn-xs'
 			);

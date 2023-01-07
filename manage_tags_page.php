@@ -117,8 +117,9 @@ print_manage_menu( 'manage_tags_page.php' );
 	foreach ( $t_prefix_array as $t_prefix ) {
 		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'show_all_tags' ) : $t_prefix );
 		$t_active = $t_prefix == $f_filter ? 'active' : '';
+		$t_url = helper_mantis_url( 'manage_tags_page.php?filter=' . $t_prefix );
 		echo '<a class="btn btn-xs btn-white btn-primary ' . $t_active .
-		'" href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>' ."\n";
+		'" href="' . $t_url .'">' . $t_caption . '</a>' ."\n";
 	} ?>
 		</div>
 	</div>
@@ -138,7 +139,7 @@ print_manage_menu( 'manage_tags_page.php' );
 	<div class="widget-body">
 		<?php if ($t_can_edit) { ?>
 			<div class="widget-toolbox padding-8 clearfix">
-				<?php print_small_button( '#tagcreate', lang_get('tag_create') ) ?>
+				<?php print_small_button( helper_mantis_url('#tagcreate'), lang_get('tag_create') ) ?>
 			</div>
 		<?php } ?>
 	<div class="widget-main no-padding">
@@ -193,7 +194,7 @@ print_manage_menu( 'manage_tags_page.php' );
 
 <?php if( $t_can_edit ) { ?>
 <div class="space-10"></div>
-	<form id="manage-tags-create-form" method="post" action="tag_create.php">
+	<form id="manage-tags-create-form" method="post" action="<?php echo helper_mantis_url("tag_create.php"); ?>">
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">

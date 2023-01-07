@@ -215,9 +215,9 @@ layout_page_begin();
 					<div class="btn-group pull-right">
 <?php
 if( !$f_bug_id && !$f_bugnote_id ) {
-	print_small_button( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) );
+	print_small_button( helper_mantis_url('?bug_id=' . $t_bug_id), lang_get( 'all_revisions' ) );
 }
-print_small_button( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
+print_small_button( helper_mantis_url('view.php?id=' . $t_bug_id), lang_get( 'back_to_issue' ) );
 ?>
 					</div>
 				</div>

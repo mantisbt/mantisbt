@@ -269,7 +269,7 @@ if( $t_multiple_projects ) {
 }
 ?>
 <div id="action-group-div" class="form-container">
-	<form method="post" action="bug_actiongroup.php">
+	<form method="post" action="<?php echo helper_mantis_url("bug_actiongroup.php"); ?>">
 		<?php echo form_security_field( $t_form_name ); ?>
 		<input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
 <?php

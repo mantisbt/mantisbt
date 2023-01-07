@@ -79,9 +79,9 @@ foreach ( $t_rows as $t_row ) {
 form_security_purge( 'manage_proj_cat_copy' );
 
 if( $f_project_id == ALL_PROJECTS ) {
-	$t_redirect_url = 'manage_proj_page.php';
+	$t_redirect_url = helper_mantis_url( 'manage_proj_page.php' );
 } else {
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#categories';
+	$t_redirect_url = helper_mantis_url( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#categories' );
 }
 
 print_header_redirect( $t_redirect_url );

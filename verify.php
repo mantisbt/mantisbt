@@ -126,7 +126,7 @@ layout_login_page_begin();
 					<!-- Login Form BEGIN -->
 
 		<div id="verify-div" class="form-container">
-			<form id="account-update-form" method="post" action="account_update.php">
+			<form id="account-update-form" method="post" action="<?php echo helper_mantis_url("account_update.php"); ?>">
 				<fieldset>
 					<legend><span><?php echo lang_get( 'edit_account_title' ) . ' - ' . string_display_line( $u_username ) ?></span></legend>
 					<div class="space-10"></div>

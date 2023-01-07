@@ -84,7 +84,7 @@ event_signal( 'EVENT_MANAGE_VERSION_UPDATE', array( $t_version->id ) );
 
 form_security_purge( 'manage_proj_ver_update' );
 
-$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_version->project_id . '#versions';
+$t_redirect_url = helper_mantis_url( 'manage_proj_edit_page.php?project_id=' . $t_version->project_id . '#versions' );
 
 layout_page_header( null, $t_redirect_url );
 

@@ -128,11 +128,16 @@ function layout_page_header_end( $p_page_id = null) {
 		$t_body_id = 'id="' . $p_page_id . '" ';
 	}
 
+	$t_show_project_affinity = '';
+	// if(true){
+	// 	$t_show_project_affinity = ' show-project-affinity';
+	// }
+
 	# Add right-to-left css if needed
 	if( layout_is_rtl() ) {
-		echo '<body ' . $t_body_id . 'class="skin-3 rtl">', "\n";
+		echo '<body ' . $t_body_id . 'class="skin-3 rtl'.$t_show_project_affinity.'">', "\n";
 	} else {
-		echo '<body ' . $t_body_id . 'class="skin-3">', "\n";
+		echo '<body ' . $t_body_id . 'class="skin-3'.$t_show_project_affinity.'">', "\n";
 	}
 
 	# Set user font preference
@@ -419,7 +424,7 @@ function layout_navbar() {
 	echo '</button>';
 
 	echo '<div class="navbar-header">';
-	echo '<a href="' . $t_short_path . $t_logo_url . '" class="navbar-brand">';
+	echo '<a href="' . helper_mantis_url($t_short_path . $t_logo_url) . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
 	echo string_display_line( config_get('window_title') );
 	echo ' </span>';
@@ -438,6 +443,8 @@ function layout_navbar() {
 	echo '<div class="navbar-buttons navbar-header navbar-collapse collapse">';
 	echo '<ul class="nav ace-nav">';
 	if (auth_is_user_authenticated()) {
+		# Affinity toggle bar
+		layout_navbar_affinity_button_bar();
 		# shortcuts button bar
 		layout_navbar_button_bar();
 		# projects dropdown menu
@@ -547,6 +554,27 @@ function layout_navbar_projects_menu() {
  * Print navbar buttons
  * @return void
  */
+function layout_navbar_affinity_button_bar() {
+	if( !auth_is_user_authenticated() ) {
+		return;
+	}
+
+	echo '<li class="hidden-sm hidden-xs">';
+	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
+
+	echo '<a class="btn btn-primary btn-sm" id="project-affinity-toggle">';
+	echo '⛳ ';
+	print_icon( 'fa-square' );
+	echo '</a>';
+
+	echo '</div>';
+	echo '</li>';
+}
+
+/**
+ * Print navbar buttons
+ * @return void
+ */
 function layout_navbar_button_bar() {
 	if( !auth_is_user_authenticated() ) {
 		return;
@@ -573,7 +601,7 @@ function layout_navbar_button_bar() {
 	}
 
 	if( $t_show_invite_user_button ) {
-		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
+		echo '<a class="btn btn-primary btn-sm" href="'.helper_mantis_url('manage_user_create_page.php').'">';
 		print_icon( 'fa-user-plus' );
 		echo ' ' . lang_get( 'invite_users' );
 		echo '</a>';

@@ -86,7 +86,7 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, false, true );
 	} else {
-		print_header_redirect( config_get_global( 'default_home_page' ) );
+		print_header_redirect( helper_mantis_url(config_get_global( 'default_home_page' )) );
 	}
 }
 

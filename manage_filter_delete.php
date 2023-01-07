@@ -49,7 +49,7 @@ form_security_validate( 'manage_filter_delete' );
 auth_ensure_user_authenticated();
 
 $f_filter_id = gpc_get_int( 'filter_id' );
-$t_redirect_url = 'manage_filter_page.php';
+$t_redirect_url = helper_mantis_url('manage_filter_page.php');
 
 if( !filter_db_can_delete_filter( $f_filter_id ) ) {
 	print_header_redirect( $t_redirect_url );

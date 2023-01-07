@@ -620,16 +620,19 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
  * @return string
  */
 function string_get_bug_page( $p_action ) {
+	$t_page = null;
 	switch( $p_action ) {
 		case 'view':
-			return 'bug_view_page.php';
+			$t_page = 'bug_view_page.php'; break;
 		case 'update':
-			return 'bug_update_page.php';
+			$t_page = 'bug_update_page.php'; break;
 		case 'report':
-			return 'bug_report_page.php';
+			$t_page = 'bug_report_page.php'; break;
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
 	}
-
-	trigger_error( ERROR_GENERIC, ERROR );
+	// Note: don't apply helper_mantis_url() around this. Only provide "base page" name.
+	return $t_page;
 }
 
 /**
@@ -645,7 +648,7 @@ function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = f
 		if( $p_fqdn ) {
 			$t_link .= config_get_global( 'path' );
 		} else {
-			$t_link .= config_get_global( 'short_path' );
+			// $t_link .= config_get_global( 'short_path' );
 		}
 		$t_link .= string_get_bug_view_url( $p_bug_id ) . '"';
 		if( $p_detail_info ) {
@@ -683,7 +686,7 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info 
 		if( $p_fqdn ) {
 			$t_link .= config_get_global( 'path' );
 		} else {
-			$t_link .= config_get_global( 'short_path' );
+			// $t_link .= config_get_global( 'short_path' );
 		}
 
 		$t_link .= string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) . '"';
@@ -707,7 +710,7 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info 
  * @return string
  */
 function string_get_bug_view_url( $p_bug_id ) {
-	return 'view.php?id=' . $p_bug_id;
+	return helper_mantis_url( 'view.php?id=' . $p_bug_id );
 }
 
 /**
@@ -717,7 +720,7 @@ function string_get_bug_view_url( $p_bug_id ) {
  * @return string
  */
 function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
-	return 'view.php?id=' . $p_bug_id . '#c' . $p_bugnote_id;
+	return helper_mantis_url( 'view.php?id=' . $p_bug_id . '#c' . $p_bugnote_id );
 }
 
 /**
@@ -751,7 +754,7 @@ function string_get_bug_view_url_with_fqdn( $p_bug_id ) {
  */
 function string_get_bug_update_link( $p_bug_id ) {
 	$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-	return '<a href="' . helper_mantis_url( string_get_bug_update_url( $p_bug_id ) ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
+	return '<a href="' . string_get_bug_update_url( $p_bug_id ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 }
 
 /**
@@ -760,7 +763,7 @@ function string_get_bug_update_link( $p_bug_id ) {
  * @return string
  */
 function string_get_bug_update_url( $p_bug_id ) {
-	return string_get_bug_update_page() . '?bug_id=' . $p_bug_id;
+	return helper_mantis_url( string_get_bug_update_page() . '?bug_id=' . $p_bug_id );
 }
 
 /**
@@ -776,7 +779,7 @@ function string_get_bug_update_page() {
  * @return string
  */
 function string_get_bug_report_link() {
-	return '<a href="' . helper_mantis_url( string_get_bug_report_url() ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
+	return '<a href="' . string_get_bug_report_url() . '">' . lang_get( 'report_bug_link' ) . '</a>';
 }
 
 /**
@@ -784,7 +787,7 @@ function string_get_bug_report_link() {
  * @return string
  */
 function string_get_bug_report_url() {
-	return string_get_bug_page( 'report' );
+	return helper_mantis_url( string_get_bug_page( 'report' ) );
 }
 
 /**
@@ -794,7 +797,7 @@ function string_get_bug_report_url() {
  * @return string
  */
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	return config_get_global( 'path' ) . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
+	return config_get_global( 'path' ) . helper_mantis_url( 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash ) );
 }
 
 /**

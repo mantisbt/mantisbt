@@ -234,7 +234,7 @@ if( $g_global_profiles ) {
 
 <div class="space-10"></div>
 <div id="account-profile-div" class="form-container">
-	<form id="account-profile-form" method="post" action="account_prof_update.php">
+	<form id="account-profile-form" method="post" action="<?php echo helper_mantis_url("account_prof_update.php"); ?>">
 		<fieldset>
 			<?php  echo form_security_field( 'account_prof_update' )?>
 			<input type="hidden" name="action" value="add" />

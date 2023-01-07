@@ -167,6 +167,37 @@ table.filters td.category {
 	text-decoration: underline;
 }
 
+/* OK affinity */
+html > body.show-project-affinity > div a.has-project-affinity,
+html > body.show-project-affinity > div form [type="submit"].has-project-affinity
+{
+  border: 1px solid crimson !important;
+}
+
+html > body.show-project-affinity > div a.has-project-affinity::after,
+html > body.show-project-affinity > div form [type="submit"].has-project-affinity::after,
+html > body.show-project-affinity > div form [type="submit"].has-project-affinity
+{
+  content: ' ⛳' !important;
+  font-family: 'Segoe UI Emoji', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Missing affinity */
+
+html > body.show-project-affinity > div a.lacks-project-affinity,
+html > body.show-project-affinity > div form [type="submit"].lacks-project-affinity
+{
+  border: 2px dotted hotpink  !important;
+}
+
+html > body.show-project-affinity > div a.lacks-project-affinity::after,
+html > body.show-project-affinity > div form [type="submit"].lacks-project-affinity::after,
+html > body.show-project-affinity > div form [type="submit"].lacks-project-affinity
+{
+  content: ' ⚠' !important;
+  font-family: 'Segoe UI Emoji', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .test-langs ol.plugins-toc {
     column-count: auto;
     column-width: 130px;

@@ -216,7 +216,7 @@ if( $f_send_email_notification ) {
 	lang_pop();
 }
 
-$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
+$t_redirect_url = helper_mantis_url( 'manage_user_edit_page.php?user_id=' . $c_user_id );
 
 form_security_purge( 'manage_user_update' );
 

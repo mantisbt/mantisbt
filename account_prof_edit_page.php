@@ -92,7 +92,7 @@ if( $t_global_profile ) {
 
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
-	<form method="post" action="account_prof_update.php">
+	<form method="post" action="<?php echo helper_mantis_url("account_prof_update.php"); ?>">
 		<?php  echo form_security_field( 'account_prof_update' )?>
 		<input type="hidden" name="action" value="update" />
 		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />

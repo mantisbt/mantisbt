@@ -81,10 +81,10 @@ if( null === $f_filter_id ) {
 
 $f_for_screen = gpc_get_bool( 'for_screen', true );
 
-$t_action  = 'view_all_set.php?f=3';
+$t_action  = helper_mantis_url('view_all_set.php?f=3');
 
 if( $f_for_screen == false ) {
-	$t_action  = 'view_all_set.php';
+	$t_action  = helper_mantis_url('view_all_set.php');
 }
 
 $f_static = gpc_get_bool( 'static', false );

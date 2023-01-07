@@ -77,7 +77,7 @@ layout_page_begin();
 ?>
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
-	<form method="post" action="tag_update.php">
+	<form method="post" action="<?php echo helper_mantis_url("tag_update.php"); ?>">
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">

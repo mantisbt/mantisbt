@@ -104,7 +104,7 @@ print_manage_menu( 'manage_user_page.php' );
 
 <!-- USER INFO -->
 <div id="edit-user-div" class="form-container">
-<form id="edit-user-form" method="post" action="manage_user_update.php">
+<form id="edit-user-form" method="post" action="<?php echo helper_mantis_url( 'manage_user_update.php' ); ?>">
 	<?php echo form_security_field( 'manage_user_update' ) ?>
 	<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 
@@ -299,7 +299,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <!-- Reset/Unlock Button -->
 <?php if( $t_reset || $t_unlock ) { ?>
-	<form id="manage-user-reset-form" method="post" action="manage_user_reset.php" class="pull-left">
+	<form id="manage-user-reset-form" method="post" action="<?php echo helper_mantis_url( 'manage_user_reset.php' ); ?>" class="pull-left">
 		<?php echo form_security_field( 'manage_user_reset' ) ?>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 		<button class="btn btn-primary btn-white btn-round">
@@ -310,7 +310,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <!-- Delete Button -->
 <?php if( $t_delete ) { ?>
-	<form id="manage-user-delete-form" method="post" action="manage_user_delete.php" class="pull-left">
+	<form id="manage-user-delete-form" method="post" action="<?php echo helper_mantis_url( 'manage_user_delete.php' ); ?>" class="pull-left">
 		<?php echo form_security_field( 'manage_user_delete' ) ?>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 		<button class="btn btn-primary btn-white btn-round">
@@ -321,7 +321,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <!-- Impersonate Button -->
 <?php if( $t_impersonate ) { ?>
-	<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="pull-left">
+	<form id="manage-user-impersonate-form" method="post" action="<?php echo helper_mantis_url( 'manage_user_impersonate.php' ); ?>" class="pull-left">
 		<?php echo form_security_field( 'manage_user_impersonate' ) ?>
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 		<button class="btn btn-primary btn-white btn-round">
@@ -370,7 +370,7 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 <!-- ASSIGNED PROJECTS SECTION -->
 <div class="space-10"></div>
 <div id="project-access-div" class="form-container">
-<form id="project-access-form" method="post" action="manage_user_proj_delete.php">
+<form id="project-access-form" method="post" action="<?php echo helper_mantis_url( 'manage_user_proj_delete.php' ); ?>">
 
 	<?php echo form_security_field( 'manage_user_proj_delete' ) ?>
 	<input name="user_id" type="hidden" value="<?php echo (int)$t_user['id'] ?>" />
@@ -517,11 +517,12 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 <?php
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
+$t_url = helper_mantis_url( 'manage_user_edit_page.php?user_id=' . $t_user_id );
 edit_account_prefs(
 	$t_user['id'],
 	false,
 	false,
-	'manage_user_edit_page.php?user_id=' . $t_user_id
+	$t_url
 );
 ?>
 

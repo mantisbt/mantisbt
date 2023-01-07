@@ -121,7 +121,7 @@ if( json_encode( config_get( 'excel_columns', '', $t_user_id, $t_project_id ) ) 
 
 form_security_purge( 'manage_config_columns_set' );
 
-$t_redirect_url = $t_account_page ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php';
+$t_redirect_url = helper_mantis_url($t_account_page ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php');
 
 layout_page_header();
 

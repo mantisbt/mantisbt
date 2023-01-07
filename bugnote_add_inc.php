@@ -66,7 +66,7 @@ require_api( 'lang_api.php' );
 ?>
 <form id="bugnoteadd"
 	method="post"
-	action="bugnote_add.php"
+	action="<?php echo helper_mantis_url("bugnote_add.php"); ?>"
 	enctype="multipart/form-data"
 	>
 	<?php echo form_security_field( 'bugnote_add' ) ?>

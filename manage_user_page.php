@@ -309,7 +309,7 @@ $t_user_count = count( $t_users );
 <div class="widget-toolbox padding-8 clearfix">
 	<div id="manage-user-div" class="form-container">
 		<div class="pull-left">
-			<?php print_link_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ),'btn-sm' ) ?>
+			<?php print_link_button( helper_mantis_url('manage_user_create_page.php'), lang_get( 'create_new_account_link' ),'btn-sm' ) ?>
 		</div>
 		<?php if( $f_filter === 'UNUSED' ) { ?>
 		<div class="pull-left">
@@ -317,7 +317,7 @@ $t_user_count = count( $t_users );
 		</div>
 		<?php } ?>
 	<div class="pull-right">
-	<form id="manage-user-filter" method="post" action="manage_user_page.php" class="form-inline">
+	<form id="manage-user-filter" method="post" action="<?php echo helper_mantis_url("manage_user_page.php"); ?>" class="form-inline">
 		<fieldset>
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
@@ -396,9 +396,10 @@ $t_user_count = count( $t_users );
 				<td>
 <?php
 		if( access_has_global_level( $v_access_level ) ) {
+			$t_url = helper_mantis_url( 'manage_user_edit_page.php?user_id=' . $v_id );
 			/** @noinspection HtmlUnknownTarget */
 			printf( '<a href="%s">%s</a>',
-				'manage_user_edit_page.php?user_id=' . $v_id,
+				$t_url,
 				string_display_line( $v_username )
 			);
 		} else {

@@ -293,7 +293,7 @@ print_manage_menu( 'manage_proj_page.php' );
 	</div>
 
 <?php if( $t_can_update_global_cat ) { ?>
-	<form method="post" action="manage_proj_cat_add.php" class="form-inline">
+	<form method="post" action="<?php echo helper_mantis_url("manage_proj_cat_add.php"); ?>" class="form-inline">
 		<div class="widget-toolbox padding-8 clearfix">
 			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />

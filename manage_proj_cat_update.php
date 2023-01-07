@@ -78,9 +78,9 @@ category_update( $f_category_id, $f_name, $f_assigned_to );
 form_security_purge( 'manage_proj_cat_update' );
 
 if( $t_project_id == ALL_PROJECTS ) {
-	$t_redirect_url = 'manage_proj_page.php';
+	$t_redirect_url = helper_mantis_url( 'manage_proj_page.php' );
 } else {
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_project_id . '#categories';
+	$t_redirect_url = helper_mantis_url( 'manage_proj_edit_page.php?project_id=' . $t_project_id . '#categories' );
 }
 
 layout_page_header( null, $t_redirect_url );

@@ -94,7 +94,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 ?>
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
-	<form id="bug_action" method="post" action="bug_actiongroup_page.php">
+	<form id="bug_action" method="post" action="<?php echo helper_mantis_url( 'bug_actiongroup_page.php' ); ?>">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
@@ -125,6 +125,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		$t_filter_param = '?' . $t_filter_param;
 		$t_summary_link = 'summary_page.php' . $t_filter_param;
 	}
+	$t_summary_link = helper_mantis_url( $t_summary_link );
 
 	$t_can_print_reports = access_has_project_level( config_get( 'print_reports_threshold' ), $t_current_project );
 	$t_can_export_issues = access_has_project_level( config_get( 'export_issues_threshold' ), $t_current_project );
@@ -172,13 +173,13 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 <?php
 		if( $t_can_print_reports ) {
 			print_small_button(
-				'print_all_bug_page.php' . $t_filter_param,
+				helper_mantis_url( 'print_all_bug_page.php' . $t_filter_param ),
 				lang_get( 'print_all_bug_page_link' )
 			);
 		}
 		if( $t_can_export_issues ) {
-			print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
-			print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
+			print_small_button( helper_mantis_url( 'csv_export.php' . $t_filter_param ), lang_get( 'csv_export' ) );
+			print_small_button( helper_mantis_url( 'excel_xml_export.php' . $t_filter_param ), lang_get( 'excel_export' ) );
 		}
 		if( $t_can_view_summary ) {
 			print_small_button( $t_summary_link, lang_get( 'summary_link' ) );

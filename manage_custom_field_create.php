@@ -57,9 +57,9 @@ $f_name	= gpc_get_string( 'name' );
 $t_field_id = custom_field_create( $f_name );
 
 if( ON == config_get( 'custom_field_edit_after_create' ) ) {
-	$t_redirect_url = 'manage_custom_field_edit_page.php?field_id=' . $t_field_id;
+	$t_redirect_url = helper_mantis_url('manage_custom_field_edit_page.php?field_id=' . $t_field_id);
 } else {
-	$t_redirect_url = 'manage_custom_field_page.php';
+	$t_redirect_url = helper_mantis_url('manage_custom_field_page.php');
 }
 
 form_security_purge( 'manage_custom_field_create' );

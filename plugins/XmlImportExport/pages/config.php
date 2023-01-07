@@ -17,7 +17,7 @@ function config_set_if_needed( $p_name, $p_value ) {
 	}
 }
 
-$t_redirect_url = plugin_page( 'config_page', true );
+$t_redirect_url = helper_mantis_url(plugin_page( 'config_page', true ));
 layout_page_header( null, $t_redirect_url );
 layout_page_begin();
 

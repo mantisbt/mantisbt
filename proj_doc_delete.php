@@ -78,7 +78,7 @@ file_delete( $f_file_id, 'project' );
 
 form_security_purge( 'proj_doc_delete' );
 
-$t_redirect_url = 'proj_doc_page.php';
+$t_redirect_url = helper_mantis_url('proj_doc_page.php');
 
 layout_page_header( null, $t_redirect_url );
 

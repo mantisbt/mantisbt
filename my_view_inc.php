@@ -275,7 +275,7 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
 <?php
 #-- Box title
 $t_box_url = html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' . $t_url_link_parameters[$t_box_title];
-print_link( $t_box_url, $t_box_title_label, false, 'white' );
+print_link( helper_mantis_url($t_box_url), $t_box_title_label, false, 'white' );
 
 # -- Viewing range info
 if( count( $t_rows ) > 0 ) {
@@ -295,7 +295,7 @@ echo '<span class="badge"> ' . " $v_start - $v_end / $t_bug_count " . ' </span>'
 		</div>
 		<div class="widget-toolbar no-border hidden-xs">
 			<div class="widget-menu">
-				<?php print_extra_small_button( $t_box_url, lang_get( 'view_bugs_link' ) ); ?>
+				<?php print_extra_small_button( helper_mantis_url($t_box_url), lang_get( 'view_bugs_link' ) ); ?>
 			</div>
 		</div>
 	</div>

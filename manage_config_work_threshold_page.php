@@ -368,7 +368,7 @@ if( ALL_PROJECTS <> $g_project_id ) {
 echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 echo '</div>' . "\n";
 
-echo '<form id="mail_config_action" method="post" action="manage_config_work_threshold_set.php">' . "\n";
+echo '<form id="mail_config_action" method="post" action="<?php echo helper_mantis_url("manage_config_work_threshold_set.php"); ?>">' . "\n";
 echo form_security_field( 'manage_config_work_threshold_set' );
 
 # Issues
@@ -468,7 +468,7 @@ if( $t_show_submit ) {
 echo '</form>' . "\n";
 
 if( $t_show_submit && ( 0 < count( $g_overrides ) ) ) {
-	echo '<div class="pull-right"><form id="threshold_config_action" method="post" action="manage_config_revert.php">' . "\n";
+	echo '<div class="pull-right"><form id="threshold_config_action" method="post" action="<?php echo helper_mantis_url("manage_config_revert.php"); ?>">' . "\n";
 	echo form_security_field( 'manage_config_revert' );
 	echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '"></input>';
 	echo '<input name="project" type="hidden" value="' . $g_project_id . '"></input>';

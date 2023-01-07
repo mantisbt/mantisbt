@@ -70,7 +70,7 @@ $t_page_count = null;
 
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
 if( $t_rows === false ) {
-	print_header_redirect( 'view_all_set.php?type=0' );
+	print_header_redirect( helper_mantis_url('view_all_set.php?type=0') );
 }
 
 $t_bugslist = array();

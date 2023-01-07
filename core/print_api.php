@@ -82,6 +82,9 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
+# Load Composer autoloader
+require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
+
 /**
  * Print the headers to cause the page to redirect to $p_url
  * If $p_die is true (default), terminate the execution of the script immediately
@@ -115,7 +118,8 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		}
 	}
 
-	$t_url = string_prepare_header( $t_url );
+	$t_url_norm = new \URL\Normalizer( $t_url ); // expects to be available via "autoload"
+	$t_url = $t_url_norm->normalize();
 
 	# don't send more headers if they have already been sent
 	if( !headers_sent() ) {
@@ -352,7 +356,7 @@ function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
  */
 function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 ?>
-	<form method="post" action="tag_attach.php" class="form-inline">
+	<form method="post" action="<?php echo helper_mantis_url("tag_attach.php"); ?>" class="form-inline">
 	<?php echo form_security_field( 'tag_attach' )?>
 	<input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" class="input-sm" />
 	<?php print_tag_input( $p_bug_id, $p_string ); ?>
@@ -1210,7 +1214,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 	foreach( $t_project_ids as $t_project_id ) {
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 		echo '<strong>', string_display_line( $t_project_name ), '</strong>: ';
-		print_extra_small_button( 'manage_proj_custom_field_remove.php?field_id=' . $c_field_id . '&project_id=' . $t_project_id . '&return=custom_field' . $t_security_token, lang_get( 'remove_link' ) );
+		print_extra_small_button( helper_mantis_url('manage_proj_custom_field_remove.php?field_id=' . $c_field_id . '&project_id=' . $t_project_id . '&return=custom_field' . $t_security_token), lang_get( 'remove_link' ) );
 		echo '<br />- ';
 
 		$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
@@ -1339,7 +1343,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			$t_sort_field = rawurlencode( $p_sort_field );
 			$t_print_parameter = ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) ? '&print=1' : '';
 			$t_filter_parameter = filter_is_temporary( $g_filter ) ? filter_get_temporary_key_param( $g_filter ) . '&' : '';
-			print_link( 'view_all_set.php?' . $t_filter_parameter . 'sort_add=' . $t_sort_field . '&dir_add=' . $p_dir . '&type=' . FILTER_ACTION_PARSE_ADD . $t_print_parameter, $p_string );
+			print_link( helper_mantis_url('view_all_set.php?' . $t_filter_parameter . 'sort_add=' . $t_sort_field . '&dir_add=' . $p_dir . '&type=' . FILTER_ACTION_PARSE_ADD . $t_print_parameter), $p_string );
 			break;
 		default:
 			echo $p_string;
@@ -1374,8 +1378,8 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
-        $p_string, false, $p_class );
+	$t_url = helper_mantis_url( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search );
+	print_link( $t_url, $p_string, false, $p_class );
 }
 
 /**
@@ -1401,7 +1405,8 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir, $p_string );
+	$t_url = helper_mantis_url( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir );
+	print_link( $t_url, $p_string );
 }
 
 /**
@@ -1434,7 +1439,7 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = nu
 	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
 	# instead of via $p_action_page (GET). Then only add the CSRF form token if
 	# arguments are being sent via the POST method.
-	echo '<form method="post" action="', htmlspecialchars( $p_action_page ),
+	echo '<form method="post" action="', helper_mantis_url( htmlspecialchars( $p_action_page ) ),
 		'" class="form-inline inline single-button-form">';
 
 	if( $p_security_token !== OFF ) {
@@ -1557,10 +1562,11 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 		echo '<li class="pull-right"> ';
 		$t_delimiter = ( strpos( $p_page_url, '?' ) ? '&' : '?' );
 		if( $p_temp_filter_key ) {
-			print_link( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_key . '&page_number=' . $p_page_no, $p_text );
+			$t_url = helper_mantis_url( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_key . '&page_number=' . $p_page_no );
 		} else {
-			print_link( $p_page_url . $t_delimiter . 'page_number=' . $p_page_no, $p_text );
+			$t_url = helper_mantis_url( $p_page_url . $t_delimiter . 'page_number=' . $p_page_no );
 		}
+		print_link($t_url, $p_text);
 		echo ' </li>';
 	} else {
 		echo '<li class="disabled pull-right"><a>' . $p_text . '</a></li>';

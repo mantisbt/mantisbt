@@ -1227,8 +1227,8 @@ function filter_draw_selection_area() {
 	$t_temporary_icon_html = ( $t_is_temporary && $t_can_persist ) ?
 		icon_get( 'fa-clock-o', 'fa-xs-top' )
 		: '';
-	$t_url_reset_filter = 'view_all_set.php?type=' . FILTER_ACTION_RESET;
-	$t_url_persist_filter = 'view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project();
+	$t_url_reset_filter = helper_mantis_url('view_all_set.php?type=' . FILTER_ACTION_RESET);
+	$t_url_persist_filter = helper_mantis_url('view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project());
 	?>
 
 		<div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
@@ -1259,15 +1259,17 @@ function filter_draw_selection_area() {
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<?php
 							$t_url = config_get( 'use_dynamic_filters' )
-								? 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . $t_tmp_filter_param . '&view_type='
-								: 'view_filters_page.php?view_type=';
+								? helper_mantis_url('view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . $t_tmp_filter_param . '&view_type=')
+								: helper_mantis_url('view_filters_page.php?view_type=');
 							filter_print_view_type_toggle( $t_url, $t_filter['_view_type'] );
 
 							if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
 								# Add CSRF protection, see #22702
-								$t_permalink_url = 'permalink_page.php?filter='
+								$t_permalink_url = helper_mantis_url(
+									'permalink_page.php?filter='
 									. filter_temporary_set( $t_filter )
-									. form_security_param( 'permalink' );
+									. form_security_param( 'permalink' )
+								);
 								echo '<li>';
 								echo '<a href="' . $t_permalink_url . '">';
 								print_icon( 'fa-link', 'ace-icon' );
@@ -1320,7 +1322,7 @@ function filter_draw_selection_area() {
 				</div>
 				<?php if( count( $t_stored_queries_arr ) > 0 ) { ?>
 				<div class="widget-menu hidden-xs">
-					<form method="post" action="view_all_set.php">
+					<form method="post" action="<?php echo helper_mantis_url('view_all_set.php')?>">
 						<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
 						<select id="filter-bar-query-id" class="input-xs">
 							<option value="-1"></option>
@@ -1338,7 +1340,7 @@ function filter_draw_selection_area() {
 				<?php } ?>
 				<div class="widget-menu margin-right-8">
 
-					<form method="post" action="view_all_set.php">
+					<form method="post" action="<?php echo helper_mantis_url('view_all_set.php')?>">
 						<input type="hidden" name="type" value="<?php echo FILTER_ACTION_PARSE_ADD ?>" />
 						<input id="filter-bar-search-txt" type="text" size="16" class="input-xs"
 							   placeholder="<?php echo lang_get( 'search' ) ?>"
@@ -1362,7 +1364,7 @@ function filter_draw_selection_area() {
 	<?php
 	# Top left toolbar for buttons
 
-	$t_url_reset_filter = 'view_all_set.php?type=' . FILTER_ACTION_RESET;
+	$t_url_reset_filter = helper_mantis_url('view_all_set.php?type=' . FILTER_ACTION_RESET);
 	if( $t_is_temporary && $t_can_persist ) {
 	?>
 							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_persist_filter ?>">
@@ -1383,6 +1385,7 @@ function filter_draw_selection_area() {
 		if( filter_is_temporary( $t_filter ) ) {
 			$t_url_save_filter .= '?filter=' . filter_get_temporary_key( $t_filter );
 		}
+		$t_url_save_filter = helper_mantis_url( $t_url_save_filter );
 	?>
 							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_save_filter ?>">
 								<?php print_icon( 'fa-floppy-o', 'ace-icon' ); ?>
@@ -1395,7 +1398,7 @@ function filter_draw_selection_area() {
 
 	<?php
 	if( count( $t_stored_queries_arr ) > 0 ) { ?>
-						<form id="filter-queries-form" class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+						<form id="filter-queries-form" class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="<?php echo helper_mantis_url('view_all_set.php')?>">
 							<?php # CSRF protection not required here - form does not result in modifications?>
 							<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
 							<label><?php echo lang_get( 'load' ) ?>
@@ -1418,8 +1421,10 @@ function filter_draw_selection_area() {
 					</div>
 				</div>
 			</div>
-
-			<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="view_all_set.php">
+			<?php
+			$t_action_url = helper_mantis_url('view_all_set.php');
+			?>
+			<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="<?php echo $t_action_url ?>">
 				<?php # CSRF protection not required here - form does not result in modifications ?>
 				<input type="hidden" name="type" value="<?php echo FILTER_ACTION_PARSE_NEW ?>" />
 				<?php
@@ -2393,6 +2398,7 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
 	}
 
 	echo '<li>';
+	$t_url = helper_mantis_url( $t_url );
 	printf( '<a href="%s">%s</i>&#160;&#160;%s</a>',
 		$t_url,
 		icon_get( $t_icon, 'ace-icon' ),

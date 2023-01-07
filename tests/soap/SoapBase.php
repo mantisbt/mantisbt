@@ -89,7 +89,7 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 	 */
 	private   $defaultSoapClientOptions = array(  'trace'      => true,
 												  'exceptions' => true,
-												  'cache_wsdl' => WSDL_CACHE_NONE
+												  'cache_wsdl' => WSDL_CACHE_DISK
 											   );
 
 	/**

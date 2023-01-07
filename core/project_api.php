@@ -1007,7 +1007,7 @@ function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '',
 		$t_indent = '';
 	}
 
-	$t_url = helper_mantis_url( 'set_project.php?project_id=' . $t_full_id );
+	$t_url = 'set_project.php?project_id=' . $t_full_id;
 	$t_label = $t_indent . string_html_specialchars( project_get_name( $p_project_id ) );
 
 	if( $p_active ) {

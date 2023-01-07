@@ -162,7 +162,7 @@ function plugin_page( $p_page, $p_redirect = false, $p_base_name = null ) {
 		$t_current = $p_base_name;
 	}
 	if( $p_redirect ) {
-		return 'plugin.php?page=' . $t_current . '/' . $p_page;
+		return helper_mantis_url( 'plugin.php?page=' . $t_current . '/' . $p_page );
 	} else {
 		return helper_mantis_url( 'plugin.php?page=' . $t_current . '/' . $p_page );
 	}

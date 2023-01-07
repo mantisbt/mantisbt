@@ -141,11 +141,11 @@ echo '<div class="btn-group pull-left">';
 
 # Send Bug Reminder
 if( $t_flags['reminder_can_add'] ) {
-	print_small_button( 'bug_reminder_page.php?bug_id=' . $f_issue_id, lang_get( 'bug_reminder' ) );
+	print_small_button( helper_mantis_url('bug_reminder_page.php?bug_id=' . $f_issue_id), lang_get( 'bug_reminder' ) );
 }
 
 if( isset( $t_issue_view['wiki_link'] ) ) {
-	print_small_button( $t_issue_view['wiki_link'], lang_get( 'wiki' ) );
+	print_small_button( helper_mantis_url($t_issue_view['wiki_link']), lang_get( 'wiki' ) );
 }
 
 # TODO: should be moved to command
@@ -156,7 +156,7 @@ foreach ( $t_issue_view['links'] as $t_plugin => $t_hooks ) {
 				if( is_numeric( $t_label ) ) {
 					print_bracket_link_prepared( $t_href );
 				} else {
-					print_small_button( $t_href, $t_label );
+					print_small_button( helper_mantis_url($t_href), $t_label );
 				}
 			}
 		} elseif( !empty( $t_hook ) ) {
@@ -166,7 +166,7 @@ foreach ( $t_issue_view['links'] as $t_plugin => $t_hooks ) {
 }
 
 # Jump to Bugnotes
-print_small_button( '#bugnotes', lang_get( 'jump_to_bugnotes' ) );
+print_small_button( helper_mantis_url('#bugnotes'), lang_get( 'jump_to_bugnotes' ) );
 
 # Display or Jump to History
 if( $t_flags['history_show'] ) {
@@ -177,7 +177,7 @@ if( $t_flags['history_show'] ) {
 		$t_history_link = 'view.php?id=' . $f_issue_id . '&history=1#history';
 		$t_history_label = lang_get( 'display_history' );
 	}
-	print_small_button( $t_history_link, $t_history_label );
+	print_small_button( helper_mantis_url($t_history_link), $t_history_label );
 }
 
 echo '</div>';
@@ -189,11 +189,11 @@ if( $t_bugslist ) {
 	$t_index = array_search( $f_issue_id, $t_bugslist );
 	if( false !== $t_index ) {
 		if( isset( $t_bugslist[$t_index-1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+			print_small_button( helper_mantis_url('view.php?id='.$t_bugslist[$t_index-1]), '&lt;&lt;' );
 		}
 
 		if( isset( $t_bugslist[$t_index+1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
+			print_small_button( helper_mantis_url('view.php?id='.$t_bugslist[$t_index+1]), '&gt;&gt;' );
 		}
 	}
 }
@@ -723,7 +723,7 @@ if( $t_flags['monitor_show'] ) {
 			if( $t_flags['monitor_can_add'] ) {
 	?>
 			<br /><br />
-			<form method="post" action="bug_monitor_add.php" class="form-inline noprint">
+			<form method="post" action="<?php echo helper_mantis_url( 'bug_monitor_add.php' ); ?>" class="form-inline noprint">
 			<?php echo form_security_field( 'bug_monitor_add' ) ?>
 				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
 				<!--suppress HtmlFormInputWithoutLabel -->
@@ -1050,7 +1050,7 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 <?php
 		# Print the buttons, if any
 		foreach( $t_buttons as $t_label => $t_url ) {
-			print_small_button( $t_url, $t_label );
+			print_small_button( helper_mantis_url($t_url), $t_label );
 		}
 ?>
 		</div>
@@ -1058,7 +1058,7 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 <?php
 		if( $p_can_update ) {
 ?>
-		<form method="post" action="bug_relationship_add.php" class="form-inline noprint">
+		<form method="post" action="<?php echo helper_mantis_url( 'bug_relationship_add.php' ); ?>" class="form-inline noprint">
 			<?php echo form_security_field( 'bug_relationship_add' ) ?>
 			<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" />
 			<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
@@ -1119,7 +1119,8 @@ function bug_view_button_bug_change_status( BugData $p_bug ) {
 		$t_default = key( $t_enum_list );
 		ksort( $t_enum_list );
 
-		echo '<form method="post" action="bug_change_status_page.php" class="form-inline">';
+		$t_url = helper_mantis_url( 'bug_change_status_page.php' ); 
+		echo '<form method="post" action="' . $t_url . '" class="form-inline">';
 		# CSRF protection not required here - form does not result in modifications
 
 		$t_button_text = lang_get( 'bug_status_to_button' );
@@ -1181,7 +1182,8 @@ function bug_view_button_bug_assign_to( BugData $p_bug ) {
 		}
 	}
 
-	echo '<form method="post" action="bug_update.php" class="form-inline">';
+	$t_update_url = helper_mantis_url( 'bug_update.php' );
+	echo '<form method="post" action="' . $t_update_url . '" class="form-inline">';
 	echo form_security_field( 'bug_update' );
 	echo '<input type="hidden" name="last_updated" value="' . $p_bug->last_updated . '" />';
 	echo '<input type="hidden" name="action_type" value="' . BUG_UPDATE_TYPE_ASSIGN . '" />';

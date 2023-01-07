@@ -107,7 +107,7 @@ layout_page_header();
 	</div>
 </td></tr></table>
 
-<form method="post" action="view_all_set.php">
+<form method="post" action="<?php echo helper_mantis_url("view_all_set.php"); ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 	<input type="hidden" name="type" value="1" />
 	<input type="hidden" name="print" value="1" />
@@ -162,8 +162,9 @@ $f_export = implode( ',', $f_bug_arr );
 		if( filter_is_temporary( $t_filter ) ) {
 			$t_params['filter'] = filter_get_temporary_key( $t_filter );
 		}
-
-		echo '<a href="' . $t_icon[0] . '.php?' . http_build_query( $t_params ) . '" ' . $t_icon[2] . '>';
+		
+		$t_url = helper_mantis_url( $t_icon[0] . '.php?' . http_build_query( $t_params ) );
+		echo '<a href="' . $t_url . '" ' . $t_icon[2] . '>';
 		print_icon( $t_icon[3], '', $t_icon[4] );
 		echo '</a> ';
 	}
@@ -180,7 +181,7 @@ if( filter_is_temporary( $t_filter ) ) {
 	$t_form_url .='?' . filter_get_temporary_key_param( $t_filter );
 }
 ?>
-<form method="post" action="<?php echo $t_form_url ?>">
+<form method="post" action="<?php echo helper_mantis_url("print_all_bug_page.php"); ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 
 <table id="buglist" class="table table-striped table-bordered table-condensed no-margin">

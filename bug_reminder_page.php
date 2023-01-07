@@ -74,7 +74,7 @@ layout_page_begin();
 <?php # Send reminder Form BEGIN ?>
 
 <div id="send-reminder-div" class="col-md-12 col-xs-12">
-<form method="post" action="bug_reminder.php">
+<form method="post" action="<?php echo helper_mantis_url("bug_reminder.php"); ?>">
 <?php echo form_security_field( 'bug_reminder' ) ?>
 <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 <div class="widget-box widget-color-blue2">

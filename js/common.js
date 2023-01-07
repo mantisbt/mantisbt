@@ -636,7 +636,52 @@ $(document).ready( function() {
 			.addClass(getColorClassName(me.val()));
 		me.data('prev', me.val());
 	});
+
+	$('#project-affinity-toggle').on('click', function(elem){
+		var box = $('#project-affinity-toggle i');
+		box.toggleClass('fa-square');
+		box.toggleClass('fa-check');
+		$('body').toggleClass('show-project-affinity');
+		var showingAffinity = $('body')[0].classList.contains('show-project-affinity');
+		SetCookie('UiShowProjectAffinity', showingAffinity);
+		if(showingAffinity){
+			spotlightAffinityLinks();
+		}
+	})
+
+	var onLoadShowAffinity = GetCookie('UiShowProjectAffinity');
+	if(onLoadShowAffinity === 'true'){
+		var box = $('#project-affinity-toggle i');
+		$('body').addClass('show-project-affinity');
+		box.removeClass('fa-square');
+		box.addClass('fa-check');
+		spotlightAffinityLinks();
+	}
 });
+
+function spotlightAffinityLinks() {
+	/**
+	 * Spotlight links/controls that are under the influence of "project affinity" (ie: project_id=###)
+	 */
+	 $('.show-project-affinity a[href*="project_id="]').each((idx, elem) => {$(elem).addClass('has-project-affinity');});
+	 $('.show-project-affinity form[action*="project_id="] *[type="submit"]').each((idx, elem) => {
+		 $(elem).addClass('has-project-affinity');
+		 if($(elem).val().indexOf('⛳') == -1){
+			$(elem).val($(elem).val() + ' ⛳');
+		 }
+	});
+
+	/**
+	 * Spotlight links/controls that are NOT under the influence of "project affinity" (ie: project_id=###)
+	 */
+	 $('.show-project-affinity a[href*=".php"]:not([href*="project_id="])').each((idx, elem) => {$(elem).addClass('lacks-project-affinity');});
+	 $('.show-project-affinity form[action*=".php"]:not([action*="project_id="]) *[type="submit"]').each((idx, elem) =>{
+		 $(elem).addClass('lacks-project-affinity');
+		 if($(elem).val().indexOf('⚠') == -1){
+			$(elem).val($(elem).val() + ' ⚠');
+		}
+	});
+}
 
 function setBugLabel() {
 	var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();

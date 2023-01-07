@@ -56,7 +56,7 @@ $t_command = new UserResetPasswordCommand( $t_data );
 # trigger an exception, so we do not need any special handling here.
 $t_result = $t_command->execute();
 
-$t_redirect_url = 'manage_user_page.php';
+$t_redirect_url = helper_mantis_url( 'manage_user_page.php' );
 
 form_security_purge( 'manage_user_reset' );
 

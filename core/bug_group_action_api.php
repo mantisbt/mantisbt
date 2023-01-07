@@ -130,7 +130,7 @@ function bug_group_action_print_results( array $p_failed_ids ) {
 	echo '</table>', PHP_EOL;
 	echo '</div>', PHP_EOL;
 
-	print_link_button( 'view_all_bug_page.php', lang_get( 'proceed' ) );
+	print_link_button( helper_mantis_url( 'view_all_bug_page.php' ), lang_get( 'proceed' ) );
 	echo '</div>', PHP_EOL;
 }
 
