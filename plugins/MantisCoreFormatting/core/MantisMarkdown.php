@@ -82,7 +82,7 @@ class MantisMarkdown extends Parsedown
 	 * @param array $Element Properties of a marked element.
 	 * @return string HTML markup of the element.
 	 */
-	protected function element( $Element )
+	protected function element( array $Element )
 	{
 		# Adding CSS classes to tables.
 		if( $Element['name'] === 'table' ) {
