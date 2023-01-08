@@ -50,7 +50,15 @@ class FilterTest extends SoapBase {
 		$t_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
 		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
-		$this->assertEquals( $t_issue_id, $t_issues_count[0]->id, 'issueId' );
+
+		# Get the first non-sticky issue and check if it matches
+		$t_issue = $t_issues_count[0];
+		foreach( $t_issues_count as $t_issue ) {
+			if( !$t_issue->sticky ) {
+				break;
+			}
+		}
+		$this->assertEquals( $t_issue_id, $t_issue->id, 'Created Issue Id not found in filter' );
 	}
 
 	/**
