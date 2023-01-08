@@ -21,6 +21,9 @@
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpIllegalPsrClassPathInspection, PhpComposerExtensionStubsInspection,
+ * @noinspection PhpUndefinedMethodInspection
  */
 
 require_once 'SoapBase.php';
@@ -156,12 +159,13 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "reported" filter type with no target user.
-	 * @expectedException SoapFault
+	 *
 	 * @return void
 	 */
 	public function testGetIssuesForUserReportedNoTargetUser() {
+		$this->expectException( SoapFault::class );
 		$t_target_user = array();
-		$t_initial_issues_count = $this->getIssuesForUser( 'reported', $t_target_user );
+		$this->getIssuesForUser( 'reported', $t_target_user );
 	}
 
 	/**
@@ -250,12 +254,13 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "monitored" filter type with target user.
-	 * @expectedException SoapFault
+	 *
 	 * @return void
 	 */
 	public function testGetIssuesForUserInvalidFilter() {
+		$this->expectException( SoapFault::class );
 		$t_target_user = array( 'name' => $this->userName );
-		$t_initial_issues_count = $this->getIssuesForUser( 'unknown', $t_target_user );
+		$this->getIssuesForUser( 'unknown', $t_target_user );
 	}
 
 	/**
@@ -317,7 +322,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetProjectIssueHeadersCountNotes() {
-		$t_initial_issues = $this->getProjectIssueHeaders();
+		$this->getProjectIssueHeaders();
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.getProjectIssues' );
 
@@ -325,7 +330,7 @@ class FilterTest extends SoapBase {
 
 		$this->deleteAfterRun( $t_issue_id );
 
-		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		$t_note = array(
 			'text' => 'Note text.'
@@ -428,11 +433,38 @@ class FilterTest extends SoapBase {
 		$t_page_size = $t_issue_count - 1;
 
 		# first page should be full
-		self::assertEquals( $t_page_size, count( call_user_func_array( array( $this->client, $p_method_name ), array( $this->userName, $this->password, $this->getProjectId(), 1, $t_page_size ) ) ) );
+		self::assertCount( $t_page_size,
+			call_user_func_array( array( $this->client, $p_method_name ),
+				array(
+					$this->userName,
+					$this->password,
+					$this->getProjectId(),
+					1,
+					$t_page_size
+				) )
+		);
 		# second page should get just one issue, as $t_page_size = $t_issue_count - 1;
-		self::assertEquals( 1, count( call_user_func_array( array( $this->client, $p_method_name ), array( $this->userName, $this->password, $this->getProjectId(), 2, $t_page_size ) ) ) );
+		self::assertCount( 1,
+			call_user_func_array( array( $this->client, $p_method_name ),
+				array(
+					$this->userName,
+					$this->password,
+					$this->getProjectId(),
+					2,
+					$t_page_size
+				) )
+		);
 		# third page should be empty
-		self::assertEquals( 0, count( call_user_func_array( array( $this->client, $p_method_name ), array( $this->userName, $this->password, $this->getProjectId(), 3, $t_page_size ) ) ) );
+		self::assertCount( 0,
+			call_user_func_array( array( $this->client, $p_method_name ),
+				array(
+					$this->userName,
+					$this->password,
+					$this->getProjectId(),
+					3,
+					$t_page_size
+				) )
+		);
 	}
 
 	/**
@@ -632,16 +664,16 @@ class FilterTest extends SoapBase {
 		$t_search_result_ids = $this->client->mc_filter_search_issue_ids( $this->userName, $this->password, $t_filter, 1, -1 );
 		$t_search_result_issues = $this->client->mc_filter_search_issues( $this->userName, $this->password, $t_filter, 1, -1 );
 
-		$this->assertEquals( 1, count( $t_search_result_headers ));
+		$this->assertCount( 1, $t_search_result_headers );
 		$this->assertEquals( VS_PUBLIC, $t_search_result_headers[0]->view_state );
 		$this->assertEquals( $this->getCategory(), $t_search_result_headers[0]->category );
 		$this->assertEquals( 0, $t_search_result_headers[0]->notes_count );
 		$this->assertEquals( 0, $t_search_result_headers[0]->attachments_count );
 		$this->assertEquals( BLOCK, $t_search_result_headers[0]->severity );
 
-		$this->assertEquals( 1, count( $t_search_result_ids ));
+		$this->assertCount( 1, $t_search_result_ids );
 
-		$this->assertEquals( 1, count( $t_search_result_issues ));
+		$this->assertCount( 1, $t_search_result_issues );
 		$this->assertEquals( VS_PUBLIC, $t_search_result_issues[0]->view_state->id);
 		$this->assertEquals( $this->getCategory(), $t_search_result_issues[0]->category );
 		$this->assertEquals( BLOCK, $t_search_result_issues[0]->severity->id );
@@ -653,8 +685,8 @@ class FilterTest extends SoapBase {
 		$t_search_result_ids = $this->client->mc_filter_search_issue_ids( $this->userName, $this->password, $t_filter, 1, -1 );
 		$t_search_result_issues = $this->client->mc_filter_search_issues( $this->userName, $this->password, $t_filter, 1, -1 );
 
-		$this->assertEquals( 0, count( $t_search_result_headers ) );
-		$this->assertEquals( 0, count( $t_search_result_ids ) );
-		$this->assertEquals( 0, count( $t_search_result_issues ) );
+		$this->assertCount( 0, $t_search_result_headers );
+		$this->assertCount( 0, $t_search_result_ids );
+		$this->assertCount( 0, $t_search_result_issues );
 	}
 }
