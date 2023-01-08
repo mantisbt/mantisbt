@@ -486,26 +486,29 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testFilterGetIssuesReturnsIssueMonitors() {
-	    $t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testFilterGetIssuesReturnsIssueMonitors' );
-	    $t_issue_to_add['monitors'] = array(
-	    	array ( 'id' => $this->userId )
-	    );
+		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testFilterGetIssuesReturnsIssueMonitors' );
+		$t_issue_to_add['monitors'] = array(
+			array( 'id' => $this->userId )
+		);
 
-	    $t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-	    $this->deleteAfterRun( $t_issue_id );
+		$this->deleteAfterRun( $t_issue_id );
 
-	    $t_issues = $this->getAllProjectsIssues();
-	    $t_created_issue = null;
-	    foreach ( $t_issues as $t_issue ) {
-	        if( $t_issue->id == $t_issue_id ) {
-	            $t_created_issue = $t_issue;
-	            break;
-	        }
-	    }
+		$t_issues = $this->getAllProjectsIssues();
+		$t_created_issue = null;
+		foreach( $t_issues as $t_issue ) {
+			if( $t_issue->id == $t_issue_id ) {
+				$t_created_issue = $t_issue;
+				break;
+			}
+		}
 
-	    self::assertNotNull( $t_created_issue, 'Created issue with id '. $t_issue_id. ' was not found.' );
-	    self::assertObjectHasAttribute( 'monitors', $t_created_issue, 'Created issue with id ' . $t_issue_id . ' does not have a "monitors" attribute' );
+		self::assertNotNull( $t_created_issue, 'Created issue with id ' . $t_issue_id . ' was not found.' );
+		self::assertObjectHasAttribute( 'monitors',
+			$t_created_issue,
+			'Created issue with id ' . $t_issue_id . ' does not have a "monitors" attribute'
+		);
 		self::assertEquals( $this->userId, $t_created_issue->monitors[0]->id );
 	}
 
@@ -575,83 +578,83 @@ class FilterTest extends SoapBase {
 	}
 
 
-    /**
-     * Test the custom filter search by all possible parameters
-     * methods: mc_filter_search_issue_headers, mc_filter_search_issue_ids and mc_filter_search_issues
-     * @return void
-     */
-    public function testCustomFilterSearchAllPossibleParameters() {
+	/**
+	 * Test the custom filter search by all possible parameters
+	 * methods: mc_filter_search_issue_headers, mc_filter_search_issue_ids and mc_filter_search_issues
+	 * @return void
+	 */
+	public function testCustomFilterSearchAllPossibleParameters() {
+		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testCustomFilterSearchAllPossibleParameters' );
+		$t_issue_to_add['severity'] = array( 'id' => BLOCK );
+		$t_issue_to_add['status'] = array( 'id' => 50 );
+		$t_issue_to_add['priority'] = array( 'id' => NORMAL );
+		$t_issue_to_add['reporter'] = array( 'id' => 1 );
+		$t_issue_to_add['handler'] = array( 'id' => 1 );
+		$t_issue_to_add['resolution'] = array( 'id' => FIXED );
+		$t_issue_to_add['sticky'] = true;
+		$t_issue_to_add['view_state'] = array( 'id' => VS_PUBLIC );
+		$t_issue_to_add['platform'] = 'test_plaform';
+		$t_issue_to_add['os'] = 'test_os';
+		$t_issue_to_add['os_build'] = 'test_6';
 
-        $t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testCustomFilterSearchAllPossibleParameters' );
-        $t_issue_to_add['severity'] = array( 'id' => BLOCK );
-        $t_issue_to_add['status'] = array( 'id' => 50 );
-        $t_issue_to_add['priority'] = array( 'id' => NORMAL );
-        $t_issue_to_add['reporter'] = array( 'id' => 1 );
-        $t_issue_to_add['handler'] = array( 'id' => 1 );
-        $t_issue_to_add['resolution'] = array( 'id' => FIXED );
-        $t_issue_to_add['sticky'] = true;
-        $t_issue_to_add['view_state'] = array( 'id' => VS_PUBLIC );
-        $t_issue_to_add['platform'] = 'test_plaform';
-        $t_issue_to_add['os'] = 'test_os';
-        $t_issue_to_add['os_build'] = 'test_6';
-
-        # Must use valid versions for this to work.
+		# Must use valid versions for this to work.
 		# $t_issue_to_add['fixed_in_version'] = 'test_69';
 		# $t_issue_to_add['target_version'] = 'test_70';
 
-        $t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-        $this->deleteAfterRun( $t_issue_id );
+		$this->deleteAfterRun( $t_issue_id );
 
-        $t_filter = array( 'project_id' => array( 0 ),
-                           'category' => array( $this->getCategory() ),
-                           'severity_id' => array( BLOCK ),
-                           'status_id' => array( 50 ),
-                           'priority_id' => array( NORMAL ),
-                           'reporter_id' => array( 1 ),
-                           'handler_id' => array( 1 ),
-                           'resolution_id' => array( FIXED ),
+		$t_filter = array(
+			'project_id' => array( 0 ),
+			'category' => array( $this->getCategory() ),
+			'severity_id' => array( BLOCK ),
+			'status_id' => array( 50 ),
+			'priority_id' => array( NORMAL ),
+			'reporter_id' => array( 1 ),
+			'handler_id' => array( 1 ),
+			'resolution_id' => array( FIXED ),
 
-                           'hide_status_id' => array( -2 ),
-                           'sort' => 'last_updated',
-                           'sort_direction' => 'DESC',
-                           'sticky' => true,
-                           'view_state' => array( VS_PUBLIC ),
-                           # These versions must exist for this to work
-                           # 'fixed_in_version' => array( 'test_69' ),
-                           # 'target_version' => array( 'test_70' ),
-                           'platform' => array( 'test_plaform' ),
-                           'os' => array( 'test_os' ),
-                           'os_build' => array( 'test_6' )
-                );
+			'hide_status_id' => array( -2 ),
+			'sort' => 'last_updated',
+			'sort_direction' => 'DESC',
+			'sticky' => true,
+			'view_state' => array( VS_PUBLIC ),
+			# These versions must exist for this to work
+			# 'fixed_in_version' => array( 'test_69' ),
+			# 'target_version' => array( 'test_70' ),
+			'platform' => array( 'test_plaform' ),
+			'os' => array( 'test_os' ),
+			'os_build' => array( 'test_6' )
+		);
 
-        $t_search_result_headers = $this->client->mc_filter_search_issue_headers( $this->userName, $this->password, $t_filter, 1, -1 );
-        $t_search_result_ids = $this->client->mc_filter_search_issue_ids( $this->userName, $this->password, $t_filter, 1, -1 );
-        $t_search_result_issues = $this->client->mc_filter_search_issues( $this->userName, $this->password, $t_filter, 1, -1 );
+		$t_search_result_headers = $this->client->mc_filter_search_issue_headers( $this->userName, $this->password, $t_filter, 1, -1 );
+		$t_search_result_ids = $this->client->mc_filter_search_issue_ids( $this->userName, $this->password, $t_filter, 1, -1 );
+		$t_search_result_issues = $this->client->mc_filter_search_issues( $this->userName, $this->password, $t_filter, 1, -1 );
 
-        $this->assertEquals( 1, count( $t_search_result_headers ));
-        $this->assertEquals( VS_PUBLIC, $t_search_result_headers[0]->view_state );
-        $this->assertEquals( $this->getCategory(), $t_search_result_headers[0]->category );
-        $this->assertEquals( 0, $t_search_result_headers[0]->notes_count );
-        $this->assertEquals( 0, $t_search_result_headers[0]->attachments_count );
-        $this->assertEquals( BLOCK, $t_search_result_headers[0]->severity );
+		$this->assertEquals( 1, count( $t_search_result_headers ));
+		$this->assertEquals( VS_PUBLIC, $t_search_result_headers[0]->view_state );
+		$this->assertEquals( $this->getCategory(), $t_search_result_headers[0]->category );
+		$this->assertEquals( 0, $t_search_result_headers[0]->notes_count );
+		$this->assertEquals( 0, $t_search_result_headers[0]->attachments_count );
+		$this->assertEquals( BLOCK, $t_search_result_headers[0]->severity );
 
-        $this->assertEquals( 1, count( $t_search_result_ids ));
+		$this->assertEquals( 1, count( $t_search_result_ids ));
 
-        $this->assertEquals( 1, count( $t_search_result_issues ));
-        $this->assertEquals( VS_PUBLIC, $t_search_result_issues[0]->view_state->id);
-        $this->assertEquals( $this->getCategory(), $t_search_result_issues[0]->category );
-        $this->assertEquals( BLOCK, $t_search_result_issues[0]->severity->id );
+		$this->assertEquals( 1, count( $t_search_result_issues ));
+		$this->assertEquals( VS_PUBLIC, $t_search_result_issues[0]->view_state->id);
+		$this->assertEquals( $this->getCategory(), $t_search_result_issues[0]->category );
+		$this->assertEquals( BLOCK, $t_search_result_issues[0]->severity->id );
 
-        // filter doesn't match any issue
-        $t_filter['severity_id'] = array( FEATURE );
+		// filter doesn't match any issue
+		$t_filter['severity_id'] = array( FEATURE );
 
-        $t_search_result_headers = $this->client->mc_filter_search_issue_headers( $this->userName, $this->password, $t_filter, 1, -1 );
-        $t_search_result_ids = $this->client->mc_filter_search_issue_ids( $this->userName, $this->password, $t_filter, 1, -1 );
-        $t_search_result_issues = $this->client->mc_filter_search_issues( $this->userName, $this->password, $t_filter, 1, -1 );
+		$t_search_result_headers = $this->client->mc_filter_search_issue_headers( $this->userName, $this->password, $t_filter, 1, -1 );
+		$t_search_result_ids = $this->client->mc_filter_search_issue_ids( $this->userName, $this->password, $t_filter, 1, -1 );
+		$t_search_result_issues = $this->client->mc_filter_search_issues( $this->userName, $this->password, $t_filter, 1, -1 );
 
-        $this->assertEquals( 0, count( $t_search_result_headers ) );
-        $this->assertEquals( 0, count( $t_search_result_ids ) );
-        $this->assertEquals( 0, count( $t_search_result_issues ) );
-    }
+		$this->assertEquals( 0, count( $t_search_result_headers ) );
+		$this->assertEquals( 0, count( $t_search_result_ids ) );
+		$this->assertEquals( 0, count( $t_search_result_issues ) );
+	}
 }
