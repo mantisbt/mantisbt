@@ -171,11 +171,10 @@ function prepare_version_string( $p_project_id, $p_version_id, $p_show_project =
 	$t_version_text = version_full_name( $p_version_id, $p_show_project, $p_project_id );
 
 	if( access_has_project_level( config_get( 'show_version_dates_threshold' ), $p_project_id ) ) {
-		$t_short_date_format = config_get( 'short_date_format' );
-
-		$t_version = version_cache_row( $p_version_id );
-		if( 1 == $t_version['released'] ) {
-			$t_version_text .= ' (' . date( $t_short_date_format, $t_version['date_order'] ) . ')';
+		$t_date_order = version_get_field( $p_version_id, 'date_order' );
+		if( $t_date_order != date_get_null() ) {
+			$t_short_date_format = config_get( 'short_date_format' );
+			$t_version_text .= ' (' . date( $t_short_date_format, $t_date_order ) . ')';
 		}
 	}
 
