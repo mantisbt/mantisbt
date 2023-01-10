@@ -33,6 +33,8 @@
  * @uses version_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -145,14 +147,21 @@ function prepare_user_name( $p_user_id, $p_link = true ) {
 }
 
 /**
- * A function that prepares the version string for outputting to the user on view / print issue pages.
- * This function would add the version date, if appropriate.
+ * Prepares Version string for output.
  *
- * @param integer $p_project_id         The project id to use as context.
- * @param integer $p_version_id         The version id. If false then this method will return an empty string.
- * @param boolean|null $p_show_project  Whether to include the project name or not,
- *                                      null means include the project if different from current context.
+ * A function that prepares the version string for outputting to the user on
+ * view / print issue pages. This function will add the version date, if
+ * appropriate {@see $g_show_version_dates_threshold}.
+ *
+ * @param integer      $p_project_id    The project id to use as context.
+ * @param integer      $p_version_id    The version id. If false then this
+ *                                      method will return an empty string.
+ * @param boolean|null $p_show_project  Whether to include the project name or
+ *                                      not, null means include the project if
+ *                                      different from current context.
  * @return string The formatted version string.
+ *
+ * @throws ClientException if the version id does not exist.
  */
 function prepare_version_string( $p_project_id, $p_version_id, $p_show_project = null ) {
 	if( $p_version_id === false ) {
