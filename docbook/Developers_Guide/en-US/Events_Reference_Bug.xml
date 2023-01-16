@@ -202,6 +202,23 @@
 			</blockquote>
 		</blockquote>
 
+        <blockquote id="dev.eventref.bug.action.bugupdateshowcustomfield">
+			<title>EVENT_UPDATE_BUG_SHOW_CUSTOM_FIELD (Default)</title>
+
+			<blockquote>
+				<para>
+				This event allows plugins to show a non-required custom field on the bug_change_status_page, when the bug/ticket is in a custom state (non-native).
+                 It is only possible to show fields, not to hide them trough the plugin.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>>
+					<listitem><para>&lt;Integer&gt;: Customfield ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.bug.action.updatebugdata">
 			<title>EVENT_UPDATE_BUG_DATA (Chain)</title>
 
