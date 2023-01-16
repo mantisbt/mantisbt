@@ -213,7 +213,7 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>>
+					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 					<listitem><para>&lt;Integer&gt;: Customfield ID</para></listitem>
 				</itemizedlist>
 			</blockquote>
