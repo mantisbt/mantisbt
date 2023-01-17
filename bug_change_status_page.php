@@ -279,29 +279,29 @@ layout_page_begin();
 		$t_require = $t_def['require_' . $t_custom_status_label];
 
 		$t_show_custom_field = $t_require;
-		
+
 		if( !$t_show_custom_field ) {
-            if( 'update' != $t_custom_status_label ) {
-                $t_show_custom_field = true;
-            }
-            if( in_array( $t_custom_status_label, array( 'resolved', 'closed' )) && $t_display ) {
-                $t_show_custom_field = true;
-            }
+			if( 'update' != $t_custom_status_label ) {
+				$t_show_custom_field = true;
+			}
+			if( in_array( $t_custom_status_label, array( 'resolved', 'closed' ) ) && $t_display ) {
+				$t_show_custom_field = true;
+			}
 			if( !$t_show_custom_field ) {
 				$t_plugin_Event_result = event_signal( 'EVENT_UPDATE_BUG_SHOW_CUSTOM_FIELD', array( $t_bug, $t_id ) );
-                foreach( $t_plugin_Event_result as $t_event_result ) {
-				    if( in_array( true,$t_event_result ) ) {
-					   $t_show_custom_field = true;
-					   break;
+				foreach( $t_plugin_Event_result as $t_event_result ) {
+					if( in_array( true, $t_event_result ) ) {
+						$t_show_custom_field = true;
+						break;
 					}
 				}
 			}
 		}
-		
+
 		if( !$t_show_custom_field ) {
 			continue;
 		}
-		
+
 		$t_has_write_access = custom_field_has_write_access( $t_id, $f_bug_id );
 ?>
 	<tr>
