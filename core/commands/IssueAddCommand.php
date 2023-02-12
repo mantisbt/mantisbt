@@ -290,7 +290,7 @@ class IssueAddCommand extends Command {
 
 		if( isset( $t_issue['due_date'] ) &&
 			access_has_project_level( config_get( 'due_date_update_threshold' ), $t_project_id ) ) {
-			$this->issue->due_date = date_strtotime( $t_issue['due_date'] );
+			$this->issue->due_date = strtotime( $t_issue['due_date'] );
 		} else {
 			$this->issue->due_date = date_get_null();
 		}

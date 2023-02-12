@@ -1108,7 +1108,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	if( isset( $p_issue['due_date'] ) &&
 		access_has_project_level( config_get( 'due_date_update_threshold' ), $t_bug_data->project_id ) ) {
-		$t_bug_data->due_date = date_strtotime( $p_issue['due_date'] );
+		$t_bug_data->due_date = strtotime( $p_issue['due_date'] );
 	} else {
 		$t_bug_data->due_date = date_get_null();
 	}
