@@ -70,6 +70,8 @@ class IssueViewPageCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 *
+	 * @throws ClientException
 	 */
 	function validate() {
 		$t_issue_id = $this->query( 'id' );
@@ -81,6 +83,8 @@ class IssueViewPageCommand extends Command {
 	 * Process the command.
 	 *
 	 * @returns array Command response
+	 *
+	 * @throws ClientException
 	 */
 	protected function process() {
 		$t_force_readonly = $this->option( 'force_readonly', false );
@@ -211,8 +215,8 @@ class IssueViewPageCommand extends Command {
 			access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $t_issue_id );
 
 		if( $t_flags['monitor_show'] ) {
-			$t_flags['monitor_can_delete'] = access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $t_issue_id ) ? true : false;
-			$t_flags['monitor_can_add'] = access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $t_issue_id ) ? true : false;
+			$t_flags['monitor_can_delete'] = access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $t_issue_id );
+			$t_flags['monitor_can_add'] = access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $t_issue_id );
 		}
 
 		if( !$t_force_readonly && !$t_anonymous_user ) {
