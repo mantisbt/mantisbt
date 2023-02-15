@@ -94,6 +94,11 @@ abstract class MantisSession {
  */
 class MantisPHPSession extends MantisSession {
 	/**
+	 * @var string Session key
+	 */
+	protected $key;
+
+	/**
 	 * Constructor
 	 * @param integer $p_session_id The session id.
 	 */

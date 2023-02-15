@@ -243,9 +243,7 @@ function version_cache_array_rows( array $p_project_ids ) {
 			$g_cache_versions_project[$c_project_id] = array();
 		}
 		$g_cache_versions_project[$c_project_id][] = $c_version_id;
-		if( isset( $t_ids_to_fetch[$c_project_id] ) ) {
-			unset( $t_ids_to_fetch[$c_project_id] );
-		}
+        unset( $t_ids_to_fetch[$c_project_id] );
 	}
 	foreach( $t_ids_to_fetch as $t_id_not_found ) {
 		$g_cache_versions_project[$t_id_not_found] = false;
@@ -613,13 +611,20 @@ function version_get_field( $p_version_id, $p_field_name ) {
 }
 
 /**
- * Gets the full name of a version.  This may include the project name as a prefix (e.g. '[MantisBT] 2.0.0')
+ * Gets the full name of a version.
+ *
+ * This may include the project name as a prefix (e.g. '[MantisBT] 2.0.0')
  *
  * @param integer $p_version_id         The version id.
- * @param boolean $p_show_project       Whether to include the project name or not,
- *                                      null means include the project if different from current.
- * @param integer $p_current_project_id The current project id or null to use the cookie.
+ * @param boolean $p_show_project       Whether to include the project name or
+ *                                      not, null means include the project if
+ *                                      different from current.
+ * @param integer $p_current_project_id The current project id or null to use
+ *                                      the cookie.
+ *
  * @return string The full name of the version.
+ *
+ * @throws ClientException
  */
 function version_full_name( $p_version_id, $p_show_project = null, $p_current_project_id = null ) {
 	if( 0 == $p_version_id ) {
