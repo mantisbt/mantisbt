@@ -33,6 +33,8 @@
  * @uses error_api.php
  * @uses gpc_api.php
  * @uses php_api.php
+ *
+ * @noinspection PhpUnused
  */
 
 require_api( 'config_api.php' );
@@ -88,6 +90,8 @@ abstract class MantisSession {
 }
 
 /**
+ * MantisPHPSession Class.
+ *
  * Implementation of the abstract MantisBT session interface using
  * standard PHP sessions stored on the server's filesystem according
  * to PHP's session.* settings in 'php.ini'.
@@ -160,9 +164,12 @@ class MantisPHPSession extends MantisSession {
 
 	/**
 	 * get session data
+	 *
 	 * @param string $p_name    The name of the value to set.
 	 * @param mixed  $p_default The value to set.
+	 *
 	 * @return string
+	 * @noinspection PhpInconsistentReturnPointsInspection
 	 */
 	function get( $p_name, $p_default = null ) {
 		if( isset( $_SESSION[$this->key][$p_name] ) ) {
@@ -249,7 +256,7 @@ function session_validate( $p_session ) {
 			trigger_error( ERROR_SESSION_NOT_VALID, WARNING );
 
 			$t_url = config_get_global( 'path' ) . config_get_global( 'default_home_page' );
-			echo "\t<meta http-equiv=\"Refresh\" content=\"4; URL=" . $t_url . "\" />\n";
+			echo "\t", '<meta http-equiv="Refresh" content="4; URL=' . $t_url . '" />', "\n";
 
 			die();
 		}
@@ -288,7 +295,7 @@ function session_get_int( $p_name, $p_default = null ) {
  */
 function session_get_bool( $p_name, $p_default = null ) {
 	$t_args = func_get_args();
-	return true && call_user_func_array( 'session_get', $t_args );
+	return (bool)call_user_func_array( 'session_get', $t_args );
 }
 
 /**
@@ -299,7 +306,7 @@ function session_get_bool( $p_name, $p_default = null ) {
  */
 function session_get_string( $p_name, $p_default = null ) {
 	$t_args = func_get_args();
-	return '' . call_user_func_array( 'session_get', $t_args );
+	return (string)call_user_func_array( 'session_get', $t_args );
 }
 
 /**
@@ -342,4 +349,3 @@ if( PHP_CGI == php_mode() ) {
 		session_init( $t_session_id );
 	}
 }
-
