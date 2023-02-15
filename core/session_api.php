@@ -94,6 +94,12 @@ abstract class MantisSession {
  */
 class MantisPHPSession extends MantisSession {
 	/**
+	 * Session key prefix.
+	 * Used with {@see $g_crypto_master_salt} to build a unique Session key.
+	 */
+	const SESSION_KEY_PREFIX = 'session_key_v_2';
+
+	/**
 	 * @var string Session key
 	 */
 	protected $key;
@@ -105,7 +111,9 @@ class MantisPHPSession extends MantisSession {
 	function __construct( $p_session_id = null ) {
 		global $g_cookie_secure_flag_enabled;
 
-		$this->key = hash( 'whirlpool', 'session_key_v_2' . config_get_global( 'crypto_master_salt' ), false );
+		$this->key = hash( 'whirlpool',
+			$this::SESSION_KEY_PREFIX . config_get_global( 'crypto_master_salt' )
+		);
 
 		# Save session information where specified or with PHP's default
 		$t_session_save_path = config_get_global( 'session_save_path' );
