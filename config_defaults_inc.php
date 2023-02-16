@@ -1188,46 +1188,51 @@ $g_severity_significant_threshold = MAJOR;
 
 /**
  * The default columns to be included in the View Issues Page.
- * This can be overridden using Manage -> Manage Configuration -> Manage Columns
- * Also each user can configure their own columns using My Account -> Manage
- * Columns. Some of the columns specified here can be removed automatically if
- * they conflict with other configuration. Or if the current user doesn't have
- * the necessary access level to view them. For example, sponsorship_total will
- * be removed if sponsorships are disabled. To include custom field 'xyz',
- * include the column name as 'custom_xyz'.
  *
- * Standard Column Names (i.e. names to choose from):
- * id, project_id, reporter_id, handler_id, duplicate_id, priority, severity,
- * reproducibility, status, resolution, category_id, date_submitted, last_updated,
- * os, os_build, platform, version, fixed_in_version, target_version, view_state,
- * summary, sponsorship_total, due_date, description, steps_to_reproduce,
- * additional_info, attachment_count, bugnotes_count, selection, edit,
- * overdue
+ * This can be overridden using Manage > Manage Configuration > Manage Columns;
+ * users can also configure their own columns using My Account > Manage Columns.
+ *
+ * The list of all available columns (i.e. the names to choose from) can be
+ * retrieved from the above-mentioned pages. In addition to standard column
+ * names, that will also include:
+ * - Custom Fields: the column name will be the Custom Field's name prefixed
+ *   with custom_, e.g. xyz should be included as custom_xyz.
+ * - Plugin-specific columns (prefixed with the Plugin's basename)
+ *
+ * If one of the columns specified here is not accessible to the logged-in user
+ * or corresponds to a disabled feature, then it will automatically be removed
+ * from the list at runtime. The same configuration may therefore show a
+ * different set of columns depending on the logged in user, the currently
+ * selected project and enabled features.
+ *
+ * For example, the eta column will only be shown if usage of the ETA field is
+ * enabled ({@see $g_enable_eta}), and the custom_xyz column will be removed if
+ * the xyz Custom Field is not available in the current Project.
  *
  * @global array $g_view_issues_page_columns
  */
 $g_view_issues_page_columns = array(
-	'selection', 'edit', 'priority', 'id', 'sponsorship_total',
-	'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status',
-	'last_updated', 'summary'
+	'selection', 'edit', 'priority', 'id', 'bugnotes_count', 'attachment_count',
+	'category_id', 'severity', 'status', 'last_updated', 'summary',
 );
 
 /**
- * The default columns to be included in the Print Issues Page. This can be
- * overridden using Manage -> Manage Configuration -> Manage Columns. Also each
- * user can configure their own columns using My Account -> Manage Columns.
+ * The default columns to be included in the Print Issues Page.
+ *
+ * See {@see $g_view_issues_page_columns} for details.
+ *
  * @global array $g_print_issues_page_columns
  */
 $g_print_issues_page_columns = array(
-	'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count',
-	'attachment_count', 'category_id', 'severity', 'status', 'last_updated',
-	'summary'
+	'selection', 'priority', 'id', 'bugnotes_count', 'attachment_count',
+	'category_id', 'severity', 'status', 'last_updated', 'summary',
 );
 
 /**
- * The default columns to be included in the CSV export. This can be overridden
- * using Manage -> Manage Configuration -> Manage Columns. Also each user can
- * configure their own columns using My Account -> Manage Columns.
+ * The default columns to be included in the CSV export.
+ *
+ * See {@see $g_view_issues_page_columns} for details.
+ *
  * @global array $g_csv_columns
  */
 $g_csv_columns = array(
@@ -1238,9 +1243,10 @@ $g_csv_columns = array(
 );
 
 /**
- * The default columns to be included in the Excel export. This can be
- * overridden using Manage -> Manage Configuration -> Manage Columns. Also each
- * user can configure their own columns using My Account -> Manage Columns
+ * The default columns to be included in the Excel export.
+ *
+ * See {@see $g_view_issues_page_columns} for details.
+ *
  * @global array $g_excel_columns
  */
 $g_excel_columns = array(
