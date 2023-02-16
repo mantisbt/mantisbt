@@ -44,8 +44,8 @@ class ProjectTest extends SoapBase {
 	 * @return void
 	 */
 	public function testAddRenameDeleteProject() {
-		$t_project_name = $this->getOriginalNameProject();
-		$t_project_new_name = $this->getNewNameProject();
+		$t_project_name = $this->getNewProjectName();
+		$t_project_new_name = $t_project_name . '_new';
 
 		$t_project_data_structure = $this->newProjectAsArray( $t_project_name );
 
@@ -83,7 +83,7 @@ class ProjectTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetIdFromName() {
-		$t_project_name = 'TestProjectForIdFromName';
+		$t_project_name = $this->getNewProjectName();
 
 		$t_project_data_structure = $this->newProjectAsArray( $t_project_name );
 
@@ -105,7 +105,7 @@ class ProjectTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetSubprojects() {
-		$t_project_name = $this->getOriginalNameProject();
+		$t_project_name = $this->getNewProjectName();
 		$t_project_data_structure = $this->newProjectAsArray( $t_project_name );
 
 		$t_project_id = $this->client->mc_project_add( $this->userName, $this->password, $t_project_data_structure );
@@ -133,7 +133,7 @@ class ProjectTest extends SoapBase {
 	 * @return void
 	 */
 	public function testSetProjectPrivateLockout() {
-		$t_project_data_structure = $this->newProjectAsArray( $this->getName() . '_' . rand() );
+		$t_project_data_structure = $this->newProjectAsArray( $this->getNewProjectName() );
 
 		# step 1
 		$t_project_id = $this->client->mc_project_add( $this->userName, $this->password, $t_project_data_structure );
@@ -183,18 +183,17 @@ class ProjectTest extends SoapBase {
 	}
 
 	/**
-	 * Return old project name
+	 * Helper function to generate a unique project name for a test.
+	 *
+	 * Project Name will be the Test Case name followed by a random number.
+	 *
 	 * @return string
 	 */
-	private function getOriginalNameProject() {
-		return 'my_project_name';
-	}
-
-	/**
-	 * Return new project name
-	 * @return string
-	 */
-	private function getNewNameProject() {
-		return 'my_new_project_name';
+	protected function getNewProjectName() {
+		do {
+			$t_name = $this->getName() . '_' . rand();
+			$t_id = $this->client->mc_project_get_id_from_name( $this->userName, $this->password, $t_name );
+		} while( $t_id != 0 );
+		return $t_name;
 	}
 }
