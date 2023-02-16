@@ -1199,9 +1199,8 @@ $g_severity_significant_threshold = MAJOR;
  * @global array $g_view_issues_page_columns
  */
 $g_view_issues_page_columns = array(
-	'selection', 'edit', 'priority', 'id', 'sponsorship_total',
-	'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status',
-	'last_updated', 'summary'
+	'selection', 'edit', 'priority', 'id', 'bugnotes_count', 'attachment_count',
+	'category_id', 'severity', 'status', 'last_updated', 'summary',
 );
 
 /**
@@ -1211,9 +1210,8 @@ $g_view_issues_page_columns = array(
  * @global array $g_print_issues_page_columns
  */
 $g_print_issues_page_columns = array(
-	'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count',
-	'attachment_count', 'category_id', 'severity', 'status', 'last_updated',
-	'summary'
+	'selection', 'priority', 'id', 'bugnotes_count', 'attachment_count',
+	'category_id', 'severity', 'status', 'last_updated', 'summary',
 );
 
 /**
