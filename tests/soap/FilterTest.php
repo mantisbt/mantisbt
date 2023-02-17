@@ -43,7 +43,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserForUnassignedNoTargetUser() {
 		$t_target_user = array();
-		$t_initial_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
+		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForUnassignedNoTargetUser' );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
@@ -52,7 +52,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
-		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_issues_before_count ), 'count(issuesCount) - count(initialIssuesCount)' );
 
 		# Get the first non-sticky issue and check if it matches
 		$t_issue = $t_issues_count[0];
@@ -70,7 +70,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserForUnassignedWithTargetUser() {
 		$t_target_user = array( 'name' => $this->userName );
-		$t_initial_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
+		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForUnassignedWithTargetUser' );
 
@@ -80,7 +80,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
-		$this->assertEquals( 0, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 0, count( $t_issues_count ) - count( $t_issues_before_count ), 'count(issuesCount) - count(initialIssuesCount)' );
 	}
 
 	/**
@@ -89,7 +89,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserForAssignedWithNoTargetUser() {
 		$t_target_user = array();
-		$t_initial_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
+		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithNoTargetUser' );
 
@@ -102,7 +102,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
-		$this->assertEquals( 0, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 0, count( $t_issues_count ) - count( $t_issues_before_count ), 'count(issuesCount) - count(initialIssuesCount)' );
 	}
 
 	/**
@@ -111,7 +111,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserForAssignedWithTargetUser() {
 		$t_target_user = array( 'name' => $this->userName );
-		$t_initial_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
+		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithTargetUser' );
 
@@ -124,7 +124,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
-		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_issues_before_count ), 'count(issuesCount) - count(initialIssuesCount)' );
 		$this->assertEquals( $t_issue_id, $t_issues_count[0]->id, 'issueId' );
 	}
 
@@ -135,7 +135,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserForAssignedWithTargetUserNoResolved() {
 		$t_target_user = array( 'name' => $this->userName );
-		$t_initial_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
+		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithTargetUserNoResolved' );
 
@@ -154,7 +154,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 
-		$this->assertEquals( 0, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 0, count( $t_issues_count ) - count( $t_issues_before_count ), 'count(issuesCount) - count(initialIssuesCount)' );
 	}
 
 	/**
@@ -174,7 +174,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserReportedWithTargetUser() {
 		$t_target_user = array( 'name' => $this->userName );
-		$t_initial_issues_count = $this->getIssuesForUser( 'reported', $t_target_user );
+		$t_issues_before = $this->getIssuesForUser( 'reported', $t_target_user );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserReportedWithTargetUser' );
 
@@ -184,7 +184,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'reported', $t_target_user );
 
-		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_issues_before ), 'count(issuesCount) - count(initialIssuesCount)' );
 		$this->assertEquals( $t_issue_id, $t_issues_count[0]->id, 'issueId' );
 	}
 
@@ -194,7 +194,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserMonitoredNoTargetUser() {
 		$t_target_user = array();
-		$t_initial_issues_count = $this->getIssuesForUser( 'monitored', $t_target_user );
+		$t_issues_before = $this->getIssuesForUser( 'monitored', $t_target_user );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserMonitoredNoTargetUser' );
 
@@ -204,7 +204,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'monitored', $t_target_user );
 
-		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_issues_before ), 'count(issuesCount) - count(initialIssuesCount)' );
 	}
 
 	/**
@@ -213,7 +213,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserMonitoredWithTargetUser() {
 		$t_target_user = array( 'name' => $this->userName );
-		$t_initial_issues_count = $this->getIssuesForUser( 'monitored', $t_target_user );
+		$t_issues_before = $this->getIssuesForUser( 'monitored', $t_target_user );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserMonitoredWithTargetUser' );
 
@@ -223,7 +223,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'monitored', $t_target_user );
 
-		$this->assertEquals( 0, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 0, count( $t_issues_count ) - count( $t_issues_before ), 'count(issuesCount) - count(initialIssuesCount)' );
 	}
 
 	/**
@@ -232,7 +232,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserForMonitoredWithTargetUserAndMatch() {
 		$t_target_user = array( 'name' => $this->userName );
-		$t_initial_issues_count = $this->getIssuesForUser( 'monitored', $t_target_user );
+		$t_issues_before = $this->getIssuesForUser( 'monitored', $t_target_user );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForMonitoredWithTargetUserAndMatch' );
 
@@ -248,7 +248,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'monitored', $t_target_user );
 
-		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_issues_before ), 'count(issuesCount) - count(initialIssuesCount)' );
 		$this->assertEquals( $t_issue_id, $t_issues_count[0]->id, 'issueId' );
 	}
 
@@ -273,7 +273,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetProjectIssues() {
-		$t_initial_issues = $this->getProjectIssues();
+		$t_issues_before = $this->getProjectIssues();
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.getProjectIssues' );
 
@@ -283,7 +283,7 @@ class FilterTest extends SoapBase {
 
 		$t_project_issues = $this->getProjectIssues();
 
-		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_initial_issues ), 'count(projectIssues) - count(initialIssues)' );
+		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
 		$this->assertEquals( $t_issue_id, $t_project_issues[0]->id, 'issueId' );
 	}
 
@@ -297,7 +297,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetProjectIssueHeaders() {
-		$t_initial_issues = $this->getProjectIssueHeaders();
+		$t_issues_before = $this->getProjectIssueHeaders();
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.getProjectIssues' );
 
@@ -307,7 +307,7 @@ class FilterTest extends SoapBase {
 
 		$t_project_issues = $this->getProjectIssueHeaders();
 
-		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_initial_issues ), 'count(projectIssues) - count(initialIssues)' );
+		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
 		$this->assertEquals( $t_issue_id, $t_project_issues[0]->id, 'issueId' );
 	}
 
@@ -357,7 +357,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetProjectClosedIssues() {
-		$t_initial_issues = $this->getProjectIssues();
+		$t_issues_before = $this->getProjectIssues();
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetProjectClosedIssues' );
 		$t_issue_to_add['status'] = 'closed';
@@ -369,7 +369,7 @@ class FilterTest extends SoapBase {
 
 		$t_project_issues = $this->getProjectIssues();
 
-		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_initial_issues ), 'count(projectIssues) - count(initialIssues)' );
+		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
 	}
 
 	/**
@@ -480,7 +480,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetAllProjectsIssues() {
-		$t_initial_issues = $this->getAllProjectsIssues();
+		$t_issues_before = $this->getAllProjectsIssues();
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetAllProjectsIssues' );
 
@@ -490,7 +490,7 @@ class FilterTest extends SoapBase {
 
 		$t_project_issues = $this->getAllProjectsIssues();
 
-		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_initial_issues ), 'count(projectIssues) - count(initialIssues)' );
+		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
 		$this->assertEquals( $t_issue_id, $t_project_issues[0]->id, 'issueId' );
 	}
 
@@ -499,7 +499,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetAllProjectsIssueHeaders() {
-		$t_initial_issues = $this->getAllProjectsIssueHeaders();
+		$t_issues_before = $this->getAllProjectsIssueHeaders();
 
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetProjectIssueHeaders' );
 
@@ -509,7 +509,7 @@ class FilterTest extends SoapBase {
 
 		$t_project_issues = $this->getAllProjectsIssueHeaders();
 
-		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_initial_issues ), 'count(projectIssues) - count(initialIssues)' );
+		$this->assertEquals( 1, count( $t_project_issues ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
 		$this->assertEquals( $t_issue_id, $t_project_issues[0]->id, 'issueId' );
 	}
 
