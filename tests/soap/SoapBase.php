@@ -193,16 +193,26 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * getIssueToAdd
-	 * @param string $p_test_case Test case identifier.
+	 * Returns a minimal data structure for tests to create a new Issue.
+	 *
+	 * The Issue Summary is set to TestClass::TestCase with an optional
+	 * suffix, followed by a random number.
+	 *
+	 * @param string $p_suffix Optional Test case suffix.
+	 *
 	 * @return array
 	 */
-	protected function getIssueToAdd( $p_test_case ) {
+	protected function getIssueToAdd( $p_suffix = '' ) {
+		$t_summary = static::class . '::' . $this->getName();
+		if( $p_suffix ) {
+			$t_summary .= '-' . $p_suffix;
+		}
 		return array(
-				'summary' => $p_test_case . ': test issue: ' . rand( 1, 1000000 ),
-				'description' => 'description of test issue.',
-				'project' => array( 'id' => $this->getProjectId() ),
-				'category' => $this->getCategory() );
+			'summary' => $t_summary . ': test issue ' . rand( 1, 1000000 ),
+			'description' => 'description of test issue.',
+			'project' => array( 'id' => $this->getProjectId() ),
+			'category' => $this->getCategory()
+		);
 	}
 
 	/**

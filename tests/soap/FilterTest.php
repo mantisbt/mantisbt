@@ -44,7 +44,7 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserForUnassignedNoTargetUser() {
 		$t_target_user = array();
 		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForUnassignedNoTargetUser' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -71,8 +71,7 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserForUnassignedWithTargetUser() {
 		$t_target_user = array( 'name' => $this->userName );
 		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForUnassignedWithTargetUser' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -90,8 +89,7 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserForAssignedWithNoTargetUser() {
 		$t_target_user = array();
 		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithNoTargetUser' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		# Assign the issue to the reporter.
 		$t_issue_to_add['handler'] = array( 'name' => $this->userName );
@@ -112,8 +110,7 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserForAssignedWithTargetUser() {
 		$t_target_user = array( 'name' => $this->userName );
 		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithTargetUser' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		# Assign the issue to the reporter.
 		$t_issue_to_add['handler'] = $t_target_user;
@@ -136,8 +133,7 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserForAssignedWithTargetUserNoResolved() {
 		$t_target_user = array( 'name' => $this->userName );
 		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithTargetUserNoResolved' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		# Assign the issue to the reporter.
 		$t_issue_to_add['handler'] = $t_target_user;
@@ -175,8 +171,7 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserReportedWithTargetUser() {
 		$t_target_user = array( 'name' => $this->userName );
 		$t_issues_before = $this->getIssuesForUser( 'reported', $t_target_user );
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserReportedWithTargetUser' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -195,8 +190,7 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserMonitoredNoTargetUser() {
 		$t_target_user = array();
 		$t_issues_before = $this->getIssuesForUser( 'monitored', $t_target_user );
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserMonitoredNoTargetUser' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -214,8 +208,7 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserMonitoredWithTargetUser() {
 		$t_target_user = array( 'name' => $this->userName );
 		$t_issues_before = $this->getIssuesForUser( 'monitored', $t_target_user );
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserMonitoredWithTargetUser' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -233,8 +226,7 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserForMonitoredWithTargetUserAndMatch() {
 		$t_target_user = array( 'name' => $this->userName );
 		$t_issues_before = $this->getIssuesForUser( 'monitored', $t_target_user );
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForMonitoredWithTargetUserAndMatch' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -274,8 +266,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetProjectIssues() {
 		$t_issues_before = $this->getProjectIssues();
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.getProjectIssues' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -298,8 +289,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetProjectIssueHeaders() {
 		$t_issues_before = $this->getProjectIssueHeaders();
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.getProjectIssues' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -323,8 +313,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetProjectIssueHeadersCountNotes() {
 		$this->getProjectIssueHeaders();
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.getProjectIssues' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -359,7 +348,7 @@ class FilterTest extends SoapBase {
 	public function testGetProjectClosedIssues() {
 		$t_issues_before = $this->getProjectIssues();
 
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetProjectClosedIssues' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['status'] = 'closed';
 		$t_issue_to_add['resolution'] = 'fixed';
 
@@ -385,7 +374,7 @@ class FilterTest extends SoapBase {
 	public function testGetProjectIssuesWithoutCategory() {
 		$this->skipIfAllowNoCategoryIsDisabled();
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateBugWithNoCategory' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		unset ( $t_issue_to_add['category'] );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
@@ -422,7 +411,7 @@ class FilterTest extends SoapBase {
 			$t_to_add = $t_issue_count - $t_current_issues;
 
 			while( $t_to_add > 0 ) {
-				$t_issue = $this->getIssueToAdd( 'FilterTest.doTestGatePages.' .$p_method_name );
+				$t_issue = $this->getIssueToAdd();
 				$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue );
 				$this->deleteAfterRun( $t_issue_id );
 
@@ -481,8 +470,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetAllProjectsIssues() {
 		$t_issues_before = $this->getAllProjectsIssues();
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetAllProjectsIssues' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -500,8 +488,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetAllProjectsIssueHeaders() {
 		$t_issues_before = $this->getAllProjectsIssueHeaders();
-
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetProjectIssueHeaders' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -518,7 +505,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testFilterGetIssuesReturnsIssueMonitors() {
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testFilterGetIssuesReturnsIssueMonitors' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['monitors'] = array(
 			array( 'id' => $this->userId )
 		);
@@ -616,7 +603,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCustomFilterSearchAllPossibleParameters() {
-		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testCustomFilterSearchAllPossibleParameters' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['severity'] = array( 'id' => BLOCK );
 		$t_issue_to_add['status'] = array( 'id' => 50 );
 		$t_issue_to_add['priority'] = array( 'id' => NORMAL );
