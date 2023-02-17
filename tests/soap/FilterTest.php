@@ -178,8 +178,15 @@ class FilterTest extends SoapBase {
 
 		$t_issues_after = $this->getIssuesForUser( 'reported', $t_target_user );
 
-		$this->assertEquals( 1, count( $t_issues_after ) - count( $t_issues_before ), 'count(issuesCount) - count(initialIssuesCount)' );
-		$this->assertEquals( $t_issue_id, $t_issues_after[0]->id, 'issueId' );
+		$this->assertCount( count( $t_issues_before ) + 1,
+			$t_issues_after,
+			"Number of issues reported by '$this->userName' increased by 1"
+		);
+		$this->assertContains(
+			$t_issue_id,
+			array_column( $t_issues_after, 'id' ),
+			"Added Issue Id exists in filtered list"
+		);
 	}
 
 	/**
@@ -196,7 +203,10 @@ class FilterTest extends SoapBase {
 
 		$t_issues_after = $this->getIssuesForUser( 'monitored', $t_target_user );
 
-		$this->assertEquals( 1, count( $t_issues_after ) - count( $t_issues_before ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertCount( count( $t_issues_before ) + 1,
+			$t_issues_after,
+			"Number of monitored issues increased by 1"
+		);
 	}
 
 	/**
@@ -213,7 +223,10 @@ class FilterTest extends SoapBase {
 
 		$t_issues_after = $this->getIssuesForUser( 'monitored', $t_target_user );
 
-		$this->assertEquals( 0, count( $t_issues_after ) - count( $t_issues_before ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertCount( count( $t_issues_before ),
+			$t_issues_after,
+			"Number of monitored issues did not change"
+		);
 	}
 
 	/**
@@ -236,8 +249,15 @@ class FilterTest extends SoapBase {
 
 		$t_issues_after = $this->getIssuesForUser( 'monitored', $t_target_user );
 
-		$this->assertEquals( 1, count( $t_issues_after ) - count( $t_issues_before ), 'count(issuesCount) - count(initialIssuesCount)' );
-		$this->assertEquals( $t_issue_id, $t_issues_after[0]->id, 'issueId' );
+		$this->assertCount( count( $t_issues_before ) + 1,
+			$t_issues_after,
+			"Number of monitored issues increased by 1"
+		);
+		$this->assertContains(
+			$t_issue_id,
+			array_column( $t_issues_after, 'id' ),
+			"Added Issue Id exists in filtered list"
+		);
 	}
 
 	/**
@@ -269,8 +289,15 @@ class FilterTest extends SoapBase {
 
 		$t_issues_after = $this->getProjectIssues();
 
-		$this->assertEquals( 1, count( $t_issues_after ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
-		$this->assertEquals( $t_issue_id, $t_issues_after[0]->id, 'issueId' );
+		$this->assertCount( count( $t_issues_before ) + 1,
+			$t_issues_after,
+			"Number of issues reported by '$this->userName' increased by 1"
+		);
+		$this->assertContains(
+			$t_issue_id,
+			array_column( $t_issues_after, 'id' ),
+			"Added Issue Id exists in filtered list"
+		);
 	}
 
 	/**
@@ -291,8 +318,15 @@ class FilterTest extends SoapBase {
 
 		$t_issues_after = $this->getProjectIssueHeaders();
 
-		$this->assertEquals( 1, count( $t_issues_after ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
-		$this->assertEquals( $t_issue_id, $t_issues_after[0]->id, 'issueId' );
+		$this->assertCount( count( $t_issues_before ) + 1,
+			$t_issues_after,
+			"Number of issues increased by 1"
+		);
+		$this->assertContains(
+			$t_issue_id,
+			array_column( $t_issues_after, 'id' ),
+			"Added Issue Id exists in filtered list"
+		);
 	}
 
 	/**
@@ -324,7 +358,9 @@ class FilterTest extends SoapBase {
 
 		$t_project_issues = $this->getProjectIssueHeaders();
 
-		$this->assertEquals( 3, $t_project_issues[0]->notes_count, 'notes_count' );
+		$this->assertEquals( $t_note_count,
+			$t_project_issues[0]->notes_count,
+			"Created issue has the expected number of Bugnotes" );
 	}
 
 
@@ -348,7 +384,10 @@ class FilterTest extends SoapBase {
 
 		$t_issues_after = $this->getProjectIssues();
 
-		$this->assertEquals( 1, count( $t_issues_after ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
+		$this->assertCount( count( $t_issues_before ) + 1,
+			$t_issues_after,
+			"Number of Closed Issues increased by 1"
+		);
 	}
 
 	/**
@@ -372,7 +411,10 @@ class FilterTest extends SoapBase {
 
 		$t_project_issues = $this->getProjectIssues();
 
-		$this->assertEquals( $t_issue_id, $t_project_issues[0]->id, 'id' );
+		$this->assertEquals( $t_issue_id,
+			$t_project_issues[0]->id,
+			"Added Issue exists in filtered list"
+		);
 	}
 
 	/**
@@ -466,8 +508,14 @@ class FilterTest extends SoapBase {
 
 		$t_issues_after = $this->getAllProjectsIssues();
 
-		$this->assertEquals( 1, count( $t_issues_after ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
-		$this->assertEquals( $t_issue_id, $t_issues_after[0]->id, 'issueId' );
+		$this->assertCount( count( $t_issues_before ) + 1,
+			$t_issues_after,
+			"Number of issues reported by '$this->userName' increased by 1"
+		);
+		$this->assertEquals( $t_issue_id,
+			$t_issues_after[0]->id,
+			"Added Issue exists in filtered list"
+		);
 	}
 
 	/**
@@ -483,8 +531,14 @@ class FilterTest extends SoapBase {
 
 		$t_issues_after = $this->getAllProjectsIssueHeaders();
 
-		$this->assertEquals( 1, count( $t_issues_after ) - count( $t_issues_before ), 'count(projectIssues) - count(initialIssues)' );
-		$this->assertEquals( $t_issue_id, $t_issues_after[0]->id, 'issueId' );
+		$this->assertCount( count( $t_issues_before ) + 1,
+			$t_issues_after,
+			"Number of issues increased by 1"
+		);
+		$this->assertEquals( $t_issue_id,
+			$t_issues_after[0]->id,
+			"Added Issue exists in filtered list"
+		);
 	}
 
 	/**
