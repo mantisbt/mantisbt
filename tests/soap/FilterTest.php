@@ -174,7 +174,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issues_after = $this->getIssuesForUser( 'reported', $t_target_user );
@@ -193,7 +192,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issues_after = $this->getIssuesForUser( 'monitored', $t_target_user );
@@ -211,7 +209,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issues_after = $this->getIssuesForUser( 'monitored', $t_target_user );
@@ -229,7 +226,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
@@ -269,7 +265,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issues_after = $this->getProjectIssues();
@@ -292,7 +287,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issues_after = $this->getProjectIssueHeaders();
@@ -316,7 +310,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
@@ -324,9 +317,7 @@ class FilterTest extends SoapBase {
 		$t_note = array(
 			'text' => 'Note text.'
 		);
-
 		$t_note_count = 3;
-
 		for( $i = 0; $i < $t_note_count; $i++ ) {
 			$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note );
 		}
@@ -353,7 +344,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add['resolution'] = 'fixed';
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issues_after = $this->getProjectIssues();
@@ -378,7 +368,6 @@ class FilterTest extends SoapBase {
 		unset ( $t_issue_to_add['category'] );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_project_issues = $this->getProjectIssues();
@@ -473,7 +462,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issues_after = $this->getAllProjectsIssues();
@@ -491,7 +479,6 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issues_after = $this->getAllProjectsIssueHeaders();
@@ -536,7 +523,12 @@ class FilterTest extends SoapBase {
 	 * @return array the project issues
 	 */
 	private function getProjectIssues() {
-		return $this->client->mc_project_get_issues( $this->userName, $this->password, $this->getProjectId(), 0, self::ISSUES_TO_RETRIEVE );
+		return $this->client->mc_project_get_issues( $this->userName,
+			$this->password,
+			$this->getProjectId(),
+			0,
+			self::ISSUES_TO_RETRIEVE
+		);
 	}
 
 	/**
@@ -554,7 +546,8 @@ class FilterTest extends SoapBase {
 			$p_filter_type,
 			$p_target_user,
 			1, # page number
-			self::ISSUES_TO_RETRIEVE );
+			self::ISSUES_TO_RETRIEVE
+		);
 	}
 
 	/**
@@ -567,7 +560,8 @@ class FilterTest extends SoapBase {
 			$this->password,
 			0,
 			0,
-			self::ISSUES_TO_RETRIEVE );
+			self::ISSUES_TO_RETRIEVE
+		);
 	}
 
 	/**
@@ -580,7 +574,8 @@ class FilterTest extends SoapBase {
 			$this->password,
 			$this->getProjectId(),
 			0,
-			self::ISSUES_TO_RETRIEVE );
+			self::ISSUES_TO_RETRIEVE
+		);
 	}
 
 	/**
@@ -593,7 +588,8 @@ class FilterTest extends SoapBase {
 			$this->password,
 			0,
 			0,
-			self::ISSUES_TO_RETRIEVE );
+			self::ISSUES_TO_RETRIEVE
+		);
 	}
 
 
