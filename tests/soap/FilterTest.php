@@ -538,7 +538,6 @@ class FilterTest extends SoapBase {
 	 * @return array Matching issues
 	 */
 	private function getIssuesForUser( $p_filter_type, array $p_target_user ) {
-		# mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $filterType, $p_target_user, $p_page_number, $p_per_page )
 		return $this->client->mc_project_get_issues_for_user(
 			$this->userName,
 			$this->password,
