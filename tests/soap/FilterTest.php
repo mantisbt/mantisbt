@@ -35,8 +35,6 @@ require_once 'SoapBase.php';
  * @group SOAP
  */
 class FilterTest extends SoapBase {
-	const ISSUES_TO_RETRIEVE = 50;
-
 	/**
 	 * Test the "assigned" filter type when issue is not assigned and no target user provided.
 	 * @return void
@@ -581,7 +579,7 @@ class FilterTest extends SoapBase {
 			$this->password,
 			$this->getProjectId(),
 			0,
-			self::ISSUES_TO_RETRIEVE
+			$this->maxIssues
 		);
 	}
 
@@ -599,7 +597,7 @@ class FilterTest extends SoapBase {
 			$p_filter_type,
 			$p_target_user,
 			1, # page number
-			self::ISSUES_TO_RETRIEVE
+			$this->maxIssues
 		);
 	}
 
@@ -613,7 +611,7 @@ class FilterTest extends SoapBase {
 			$this->password,
 			0,
 			0,
-			self::ISSUES_TO_RETRIEVE
+			$this->maxIssues
 		);
 		$this->skipIfTooManyIssues( $t_issues );
 		return $t_issues;
@@ -629,7 +627,7 @@ class FilterTest extends SoapBase {
 			$this->password,
 			$this->getProjectId(),
 			0,
-			self::ISSUES_TO_RETRIEVE
+			$this->maxIssues
 		);
 	}
 
@@ -643,7 +641,7 @@ class FilterTest extends SoapBase {
 			$this->password,
 			0,
 			0,
-			self::ISSUES_TO_RETRIEVE
+			$this->maxIssues
 		);
 		$this->skipIfTooManyIssues( $t_issues );
 		return $t_issues;
@@ -653,7 +651,7 @@ class FilterTest extends SoapBase {
 	 * Marks the test case as skipped if the number of issues.
 	 *
 	 * Some tests can't be completed if there are more Issues in the database
-	 * than the maximum number to retrieve {@see ISSUES_TO_RETRIEVE} because
+	 * than the maximum number to retrieve {@see SoapBase::$maxIssues} because
 	 * they compare this number before/after executing the test.
 	 *
 	 * @param array $p_issues Issues as returned by mc_project_get_issues* API
@@ -661,9 +659,9 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	private function skipIfTooManyIssues( $p_issues ) {
-		if( self::ISSUES_TO_RETRIEVE <= count( $p_issues ) ) {
+		if( $this->maxIssues <= count( $p_issues ) ) {
 			$this->markTestSkipped( "Skipping - database contains more than "
-				. self::ISSUES_TO_RETRIEVE . " Issues"
+				. $this->maxIssues . " Issues"
 			);
 		}
 	}

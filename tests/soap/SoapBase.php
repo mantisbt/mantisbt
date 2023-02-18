@@ -70,6 +70,18 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 	protected $projectId = 1;
 
 	/**
+	 * Maximum number of Issues to retrieve during tests.
+	 *
+	 * The default value is fine when running tests on a fresh install with an
+	 * empty database (like with TravisCI), but when using a persistent database
+	 * (e.g. local development) some tests may be skipped or fail if there are
+	 * too many Issues (
+	 *
+	 * @var int $maxIssues
+	 */
+	protected $maxIssues;
+
+	/**
 	 * @var array Array of Issue IDs to delete
 	 */
 	private   $issueIdsToDelete = array();
@@ -116,6 +128,7 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 		$this->password = $GLOBALS['MANTIS_TESTSUITE_PASSWORD'] ?? 'root';
 		$this->email = $GLOBALS['MANTIS_TESTSUITE_EMAIL'] ?? 'root@localhost';
 		$this->projectId = $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'] ?? 1;
+		$this->maxIssues = $GLOBALS['MANTIS_TESTSUITE_MAX_ISSUES'] ?? 50;
 	}
 
 	/**
