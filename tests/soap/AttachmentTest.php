@@ -48,7 +48,7 @@ class AttachmentTest extends SoapBase {
 	 * @return void
 	 */
 	public function testAttachmentIsAdded() {
-		$t_issue_to_add = $this->getIssueToAdd( 'AttachmentTest.testAttachmentIsAdded' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_attachment_contents = 'Attachment contents.';
 

@@ -39,7 +39,7 @@ class IssueHistoryTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreatedIssueHasHistoryEntry() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueHasHistoryEntry' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -71,7 +71,7 @@ class IssueHistoryTest extends SoapBase {
 	 * @return void
 	 */
 	public function testUpdatedIssueHasHistoryEntry() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueHistoryTest.testUpdatedIssueHasHistoryEntry' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -104,7 +104,7 @@ class IssueHistoryTest extends SoapBase {
 	 * @return void
 	 */
 	function testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['status'] = array( 'id' => CONFIRMED ); # confirmed
 		$t_issue_to_add['resolution'] = array ( 'id' => REOPENED ); # reopened
 

@@ -53,9 +53,21 @@ $GLOBALS['MANTIS_TESTSUITE_EMAIL'] = 'root@localhost';
 $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'] = 1;
 
 /**
+ * Maximum number of Issues to retrieve during tests.
+ *
+ * The default value is fine when running tests on a fresh install with an
+ * empty database (like with TravisCI), but when using a persistent database
+ * (e.g. local development) some tests may be skipped or fail if there are
+ * too many Issues (
+ *
+ * @global int $GLOBALS['MANTIS_TESTSUITE_MAX_ISSUES']
+ */
+$GLOBALS['MANTIS_TESTSUITE_MAX_ISSUES'] = 50;
+
+/**
  * Set default timestamp to avoid errors in some test environments
  */
-date_default_timezone_set('America/Los_Angeles');
+date_default_timezone_set('UTC');
 
 /**
  * Enable REST API Tests

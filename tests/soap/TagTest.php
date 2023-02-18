@@ -153,7 +153,7 @@ class TagTest extends SoapBase {
 		$this->deleteTagAfterRun( $t_tag_id );
 
 		# create issue
-		$t_issue_to_create = $this->getIssueToAdd( 'testTestTagsOnIssue' );
+		$t_issue_to_create = $this->getIssueToAdd();
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_create );
 		$this->deleteAfterRun( $t_issue_id );
 
