@@ -608,13 +608,15 @@ class FilterTest extends SoapBase {
 	 * @return array the project issues
 	 */
 	private function getAllProjectsIssues() {
-		return $this->client->mc_project_get_issues(
+		$t_issues = $this->client->mc_project_get_issues(
 			$this->userName,
 			$this->password,
 			0,
 			0,
 			self::ISSUES_TO_RETRIEVE
 		);
+		$this->skipIfTooManyIssues( $t_issues );
+		return $t_issues;
 	}
 
 	/**
@@ -636,15 +638,35 @@ class FilterTest extends SoapBase {
 	 * @return array the project issues
 	 */
 	private function getAllProjectsIssueHeaders() {
-		return $this->client->mc_project_get_issue_headers(
+		$t_issues = $this->client->mc_project_get_issue_headers(
 			$this->userName,
 			$this->password,
 			0,
 			0,
 			self::ISSUES_TO_RETRIEVE
 		);
+		$this->skipIfTooManyIssues( $t_issues );
+		return $t_issues;
 	}
 
+	/**
+	 * Marks the test case as skipped if the number of issues.
+	 *
+	 * Some tests can't be completed if there are more Issues in the database
+	 * than the maximum number to retrieve {@see ISSUES_TO_RETRIEVE} because
+	 * they compare this number before/after executing the test.
+	 *
+	 * @param array $p_issues Issues as returned by mc_project_get_issues* API
+	 *
+	 * @return void
+	 */
+	private function skipIfTooManyIssues( $p_issues ) {
+		if( self::ISSUES_TO_RETRIEVE <= count( $p_issues ) ) {
+			$this->markTestSkipped( "Skipping - database contains more than "
+				. self::ISSUES_TO_RETRIEVE . " Issues"
+			);
+		}
+	}
 
 	/**
 	 * Test the custom filter search by all possible parameters
