@@ -97,43 +97,25 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		if( !isset( $GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] ) ||
-			!$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] ) {
+		if( empty( $GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] ) ) {
 			$this->markTestSkipped( 'The Soap tests are disabled.' );
 		}
 
-		$this->assertTrue( array_key_exists( 'MANTIS_TESTSUITE_SOAP_HOST', $GLOBALS ) &&
-			!empty( $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] ),
-			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file" );
+		$t_wsdl = $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] ?? '';
+		$this->assertTrue( !empty( $t_wsdl ),
+			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file"
+		);
 
-		$this->client = new SoapClient( $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
-			array_merge( $this->defaultSoapClientOptions, $this->extraSoapClientFlags() ) );
+		$this->client = new SoapClient( $t_wsdl,
+			array_merge( $this->defaultSoapClientOptions, $this->extraSoapClientFlags() )
+		);
 
-		$this->mantisPath = substr( $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen( 'api/soap/mantisconnect.php?wsdl' ) );
+		$this->mantisPath = substr( $t_wsdl, 0, -strlen( 'api/soap/mantisconnect.php?wsdl' ) );
 
-		if( array_key_exists( 'MANTIS_TESTSUITE_USERNAME', $GLOBALS ) ) {
-			$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'];
-		} else {
-			$this->userName = 'administrator';
-		}
-
-		if( array_key_exists( 'MANTIS_TESTSUITE_PASSWORD', $GLOBALS ) ) {
-			$this->password = $GLOBALS['MANTIS_TESTSUITE_PASSWORD'];
-		} else {
-			$this->password = 'root';
-		}
-
-		if( array_key_exists( 'MANTIS_TESTSUITE_EMAIL', $GLOBALS ) ) {
-			$this->email = $GLOBALS['MANTIS_TESTSUITE_EMAIL'];
-		} else {
-			$this->email = 'root@localhost';
-		}
-
-		if( array_key_exists( 'MANTIS_TESTSUITE_PROJECT_ID', $GLOBALS ) ) {
-			$this->projectId = $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'];
-		} else {
-			$this->projectId = 1;
-		}
+		$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'] ?? 'administrator';
+		$this->password = $GLOBALS['MANTIS_TESTSUITE_PASSWORD'] ?? 'root';
+		$this->email = $GLOBALS['MANTIS_TESTSUITE_EMAIL'] ?? 'root@localhost';
+		$this->projectId = $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'] ?? 1;
 	}
 
 	/**
