@@ -137,6 +137,19 @@ class IssueViewPageCommand extends Command {
 			in_array( 'target_version', $t_fields ) &&
 			access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_issue_id );
 
+		$t_issue_view['product_version'] = prepare_version_string( $t_project_id,
+			$t_issue['version']['id'],
+			false
+		);
+		$t_issue_view['target_version'] = prepare_version_string( $t_project_id,
+			$t_issue['target_version']['id'],
+			false
+		);
+		$t_issue_view['fixed_in_version'] = prepare_version_string( $t_project_id,
+			$t_issue['fixed_in_version']['id'],
+			false
+		);
+
 		$t_issue_view['form_title'] = lang_get( 'bug_view_title' );
 
 		if( config_get_global( 'wiki_enable' ) == ON ) {

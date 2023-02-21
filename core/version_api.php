@@ -96,37 +96,26 @@ class VersionData {
 	}
 
 	/**
-	 * Overloaded function
-	 * @param string         $p_name  A valid property name.
+	 * Setting protected class properties.
+	 *
+	 * @param string $p_name A valid property name.
 	 * @param integer|string $p_value The property value to set.
 	 * @return void
+	 * @throws ClientException
 	 * @private
 	 */
 	public function __set( $p_name, $p_value ) {
-		$t_value = $p_value;
-
-		switch( $p_name ) {
-			case 'date_order':
-				if( !is_numeric( $p_value ) ) {
-					if( $p_value == '' ) {
-						$t_value = date_get_null();
-					} else {
-						$t_value = strtotime( $p_value );
-						if( $t_value === false ) {
-							throw new ClientException(
-								"Invalid date format '$p_value'",
-								ERROR_INVALID_DATE_FORMAT,
-								array( $p_value ) );
-						}
-					}
-				}
+		if( $p_name == 'date_order' && !is_numeric( $p_value ) ) {
+			$this->date_order = date_strtotime( $p_value );
+			return;
 		}
 
-		$this->$p_name = $t_value;
+		$this->$p_name = $p_value;
 	}
 
 	/**
-	 * Overloaded function
+	 * Getting protected class properties.
+	 *
 	 * @param string $p_name A valid property name.
 	 * @return integer|string
 	 * @private
