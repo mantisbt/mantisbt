@@ -25,10 +25,11 @@
 		<varlistentry>
 			<term>$g_due_date_default</term>
 			<listitem>
-				<para>Default due date value for newly submitted issues:
- 					Empty string for no due date set.
- 					Related date that is accepted by <ulink url="https://www.php.net/manual/en/function.strtotime.php">strtotime()</ulink>, 
- 					e.g. 'today' or '+2 days'. Default is ''.
+				<para>Default due date value for newly submitted issues.
+					A valid
+					<ulink url="https://php.net/manual/en/datetime.formats.relative.php">relative date format</ulink>
+					e.g. <literal>today</literal> or <literal>+2 days</literal>,
+					or empty string for no due date set (default).
 				</para>
 			</listitem>
 		</varlistentry>

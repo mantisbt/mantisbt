@@ -23,9 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-# Start output buffering
-ob_start();
-
 # Include PHPUnit dependencies ; ensure compatibility with 3.5 and 3.6
 @include_once 'PHPUnit/Framework.php';
 

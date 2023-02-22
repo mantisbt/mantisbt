@@ -212,6 +212,10 @@
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
+	</section>
+
+	<section id="dev.eventref.manage.user">
+		<title>Users</title>
 
 		<blockquote id="dev.eventref.manage.user.createform">
 			<title>EVENT_MANAGE_USER_CREATE_FORM (Execute)</title>
