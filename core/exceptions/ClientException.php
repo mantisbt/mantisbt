@@ -16,6 +16,8 @@
 
 namespace Mantis\Exceptions;
 
+use Throwable;
+
 /**
  * An exception that is triggered where the error is caused by
  * client input.

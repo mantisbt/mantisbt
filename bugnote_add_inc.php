@@ -112,10 +112,10 @@ require_api( 'lang_api.php' );
 <?php }?>
 
 			<tr>
-				<th class="category" width="15%">
+				<th class="category width-15">
 					<?php echo lang_get( 'bugnote' ) ?>
 				</th>
-				<td width="85%">
+				<td class="width-85">
 					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" rows="7"></textarea>
 				</td>
 			</tr>

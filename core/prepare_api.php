@@ -33,6 +33,8 @@
  * @uses version_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -145,14 +147,21 @@ function prepare_user_name( $p_user_id, $p_link = true ) {
 }
 
 /**
- * A function that prepares the version string for outputting to the user on view / print issue pages.
- * This function would add the version date, if appropriate.
+ * Prepares Version string for output.
  *
- * @param integer $p_project_id         The project id to use as context.
- * @param integer $p_version_id         The version id. If false then this method will return an empty string.
- * @param boolean|null $p_show_project  Whether to include the project name or not,
- *                                      null means include the project if different from current context.
+ * A function that prepares the version string for outputting to the user on
+ * view / print issue pages. This function will add the version date, if
+ * appropriate {@see $g_show_version_dates_threshold}.
+ *
+ * @param integer      $p_project_id    The project id to use as context.
+ * @param integer      $p_version_id    The version id. If false then this
+ *                                      method will return an empty string.
+ * @param boolean|null $p_show_project  Whether to include the project name or
+ *                                      not, null means include the project if
+ *                                      different from current context.
  * @return string The formatted version string.
+ *
+ * @throws ClientException if the version id does not exist.
  */
 function prepare_version_string( $p_project_id, $p_version_id, $p_show_project = null ) {
 	if( $p_version_id === false ) {
@@ -161,12 +170,12 @@ function prepare_version_string( $p_project_id, $p_version_id, $p_show_project =
 
 	$t_version_text = version_full_name( $p_version_id, $p_show_project, $p_project_id );
 
-	if( access_has_project_level( config_get( 'show_version_dates_threshold' ), $p_project_id ) ) {
-		$t_short_date_format = config_get( 'short_date_format' );
-
-		$t_version = version_cache_row( $p_version_id );
-		if( 1 == $t_version['released'] ) {
-			$t_version_text .= ' (' . date( $t_short_date_format, $t_version['date_order'] ) . ')';
+    $t_show_version_dates = config_get('show_version_dates_threshold', null, null, $p_project_id);
+    if( access_has_project_level( $t_show_version_dates, $p_project_id ) ) {
+		$t_date_order = version_get_field( $p_version_id, 'date_order' );
+		if( $t_date_order != date_get_null() ) {
+			$t_short_date_format = config_get( 'short_date_format', null, null, $p_project_id );
+			$t_version_text .= ' (' . date( $t_short_date_format, $t_date_order ) . ')';
 		}
 	}
 

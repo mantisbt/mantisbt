@@ -25,6 +25,11 @@ use Mantis\Exceptions\ClientException;
  */
 class VersionAddCommand extends Command {
 	/**
+	 * @var int|null $timestamp
+	 */
+	protected $timestamp;
+
+	/**
 	 * $p_data['query'] is expected to contain:
 	 * - project_id (integer)
 	 *
@@ -43,8 +48,9 @@ class VersionAddCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 * @throws ClientException
 	 */
-	function validate() {		
+	function validate() {
 		$t_project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
 
 		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $t_project_id ) ) {
@@ -55,6 +61,9 @@ class VersionAddCommand extends Command {
 		if( is_blank( $t_name ) ) {
 			throw new ClientException( 'Invalid version name', ERROR_EMPTY_FIELD, array( 'name' ) );
 		}
+
+		$t_timestamp = $this->payload( 'timestamp', '' );
+		$this->timestamp = is_blank( $t_timestamp ) ? null : strtotime( $t_timestamp );
 	}
 
 	/**
@@ -77,22 +86,14 @@ class VersionAddCommand extends Command {
 		$t_released = $this->payload( 'released', false );
 		$t_obsolete = $this->payload( 'obsolete', false );
 
-		$t_timestamp = $this->payload( 'timestamp', '' );
-		if( is_blank( $t_timestamp ) ) {
-			$t_timestamp = null;
-		} else {
-			$t_timestamp = strtotime( $t_timestamp );
-		}
-
 		$t_version_id = version_add(
 			$t_project_id,
 			$t_name,
 			$t_released ? VERSION_RELEASED : VERSION_FUTURE,
 			$t_description,
-			$t_timestamp,
+			$this->timestamp,
 			$t_obsolete );
 
 		return array( 'id' => $t_version_id );
 	}
 }
-
