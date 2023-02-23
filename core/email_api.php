@@ -973,6 +973,7 @@ function email_bug_updated( $p_bug_id ) {
 }
 
 /**
+ * Generates md5 used in "In-Reply-To" header for emails
  * @param int $p_bug_id
  * @param int $p_date_submitted
  * @return string
@@ -1056,11 +1057,7 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 
 		$t_contents = $t_message . "\n";
 
-		$t_mail_headers = [
-			'In-Reply-To' => $t_message_md5
-		];
-
-		email_store( $t_user_email, $t_subject, $t_contents, $t_mail_headers );
+		email_store( $t_user_email, $t_subject, $t_contents, [ 'In-Reply-To' => $t_message_md5 ] );
 
 		log_event( LOG_EMAIL_VERBOSE, 'queued bugnote email for note ~' . $p_bugnote_id .
 			' issue #' . $t_bugnote->bug_id . ' by U' . $t_user_id );
