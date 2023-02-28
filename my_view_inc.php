@@ -238,6 +238,9 @@ $c_filter['my_comments'] = array(
 	),
 );
 
+$c_modified_filters = event_signal( 'EVENT_MY_VIEW_FILTERS' , [$c_filter]);
+$c_filter = $c_modified_filters ?? $c_filter;
+
 $t_url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
