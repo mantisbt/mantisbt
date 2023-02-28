@@ -1095,11 +1095,13 @@ $g_window_title = 'MantisBT';
 
 /**
  * OpenSearch engine title prefix.
+ *
  * This is used to describe Browser Search entries, and must be short enough
  * so that when inserted into the 'opensearch_XXX_short' language string, the
  * resulting text is 16 characters or less, to be compliant with the limit for
  * the ShortName element as defined in the OpenSearch specification.
- * @link http://www.opensearch.org/Specifications/OpenSearch/1.1
+ *
+ * @link https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md
  * @see $g_window_title
  * @global string $g_search_title
  */
