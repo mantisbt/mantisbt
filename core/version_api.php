@@ -657,30 +657,25 @@ function version_get_field( $p_version_id, $p_field_name ) {
  *
  * @return string The full name of the version.
  *
- * @throws ClientException
+ * @throws ClientException if the Version does not exist.
  */
 function version_full_name( $p_version_id, $p_show_project = null, $p_current_project_id = null ) {
-	if( 0 == $p_version_id ) {
-		# No Version
-		return '';
+	$t_row = version_cache_row( $p_version_id );
+	$t_project_id = $t_row['project_id'];
+
+	$t_current_project_id = is_null( $p_current_project_id ) ? helper_get_current_project() : $p_current_project_id;
+
+	if( $p_show_project === null ) {
+		$t_show_project = $t_project_id != $t_current_project_id;
 	} else {
-		$t_row = version_cache_row( $p_version_id );
-		$t_project_id = $t_row['project_id'];
-
-		$t_current_project_id = is_null( $p_current_project_id ) ? helper_get_current_project() : $p_current_project_id;
-
-		if( $p_show_project === null ) {
-			$t_show_project = $t_project_id != $t_current_project_id;
-		} else {
-			$t_show_project = $p_show_project;
-		}
-
-		if( $t_show_project ) {
-			return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['version'];
-		}
-
-		return $t_row['version'];
+		$t_show_project = $p_show_project;
 	}
+
+	if( $t_show_project ) {
+		return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['version'];
+	}
+
+	return $t_row['version'];
 }
 
 /**
