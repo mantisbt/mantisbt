@@ -159,15 +159,11 @@ function prepare_user_name( $p_user_id, $p_link = true ) {
  * @param boolean|null $p_show_project  Whether to include the project name or
  *                                      not, null means include the project if
  *                                      different from current context.
- * @return string The formatted version string.
  *
+ * @return string The formatted version string.
  * @throws ClientException if the version id does not exist.
  */
 function prepare_version_string( $p_project_id, $p_version_id, $p_show_project = null ) {
-	if( $p_version_id === false ) {
-		return '';
-	}
-
 	$t_version_text = version_full_name( $p_version_id, $p_show_project, $p_project_id );
 
     $t_show_version_dates = config_get('show_version_dates_threshold', null, null, $p_project_id);
