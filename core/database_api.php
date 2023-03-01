@@ -373,7 +373,7 @@ function db_affected_rows() {
 /**
  * Retrieve the next row returned from a specific database query
  * @param IteratorAggregate &$p_result Database Query Record Set to retrieve next result for.
- * @return array Database result
+ * @return array|false Database result or false if
  */
 function db_fetch_array( IteratorAggregate &$p_result ) {
 	global $g_db_functional_type;
