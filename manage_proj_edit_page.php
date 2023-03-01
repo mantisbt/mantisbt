@@ -1067,8 +1067,8 @@ if( count( $t_users ) > 0 ) { ?>
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
+        <fieldset>
 		<table class="table table-bordered table-condensed table-striped">
-		<fieldset>
 			<?php echo form_security_field( 'manage_proj_user_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<tr>
@@ -1107,8 +1107,8 @@ if( count( $t_users ) > 0 ) { ?>
 					</select>
 				</td>
 			</tr>
-		</fieldset>
 		</table>
+        </fieldset>
 		</div>
 		</div>
 		</div>
