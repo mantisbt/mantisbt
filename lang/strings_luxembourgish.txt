@@ -41,6 +41,7 @@
  * @author Les Meloures
  * @author Robby
  * @author Soued031
+ * @author Volvox
  */
 
 $s_actiongroup_menu_copy = 'Kopéieren';
@@ -434,7 +435,7 @@ $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Net valabelen Datumsformat';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'D\'Zäitzon konnt net aktualiséiert ginn-';
 $s_dropzone_invalid_file_type = 'Dir kënnt keng Fichiere vun dësem Typ eroplueden.';
 $s_dropzone_cancel_upload = 'Eroplueden ofbriechen';
-$s_dropzone_cancel_upload_confirmation = 'Sidd Dir sécher datt Dir d\'Eroplueden ofbrieche wëllt?';
+$s_dropzone_cancel_upload_confirmation = 'Sidd Dir sécher, datt Dir d\'Eroplueden ofbrieche wëllt?';
 $s_dropzone_remove_file = 'Fichier ewechhuelen';
 $s_dropzone_max_files_exceeded = 'Dir kënnt net méi Fichieren eroplueden.';
 $s_dropzone_not_supported = 'Dropzone.js ënnertstëtzt keng al Browseren!';

@@ -55,6 +55,7 @@
  * @author Romaine
  * @author Siebrand
  * @author Sjoerddebruin
+ * @author Steven.w
  * @author Tvdm
  */
 
@@ -262,7 +263,7 @@ $s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'De 
 $s_email_notification_title_for_action_related_to_relationship_deleted = 'De volgende melding is NIET LANGER GERELATEERD aan melding %1$s.';
 $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'De volgende melding BEVAT melding %1$s NIET LANGER.';
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'De volgende melding MAAKT GEEN DEEL MEER UIT van melding %1$s.';
-$s_email_notification_title_for_action_relationship_child_resolved = 'De GERELATEERDE melding %1$s is OPLGELOST.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'De GERELATEERDE melding %1$s is OPGELOST.';
 $s_email_notification_title_for_action_relationship_child_closed = 'De GERELATEERDE melding %1$s is AFGESLOTEN.';
 $s_email_notification_title_for_action_related_issue_deleted = 'De GERELATEERDE melding %1$s is VERWIJDERD.';
 $s_email_notification_title_for_action_monitor = 'Melding %1$s wordt nu gevolgd door gebruiker %2$s.';
