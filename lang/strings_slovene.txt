@@ -89,6 +89,7 @@ $s_bug_monitor = 'Opazovanje zadeve';
 $s_bug_end_monitor = 'Konec opazovanja zadeve';
 $s_announcement = 'Obvestilo';
 $s_stays_on_top = 'Ostani na vrhu';
+$s_bugnote_link_title = 'Neposredna povezava do opombe';
 $s_delete_bugnote_button = 'Izbriši beležko';
 $s_delete_bugnote_sure_msg = 'Ali to beležko res želite izbrisati?';
 $s_bug_relationships = 'Povezave';
