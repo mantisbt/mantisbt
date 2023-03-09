@@ -39,6 +39,7 @@
  * @file
  *
  * @author Robby
+ * @author Volvox
  */
 
 $s_plugin_MantisGraph_config = 'Astellung';
@@ -58,5 +59,7 @@ $s_plugin_MantisGraph_period_last_week = 'Lescht Woch';
 $s_plugin_MantisGraph_period_two_weeks = 'Lescht 2 Wochen';
 $s_plugin_MantisGraph_period_this_month = 'Dëse Mount';
 $s_plugin_MantisGraph_period_last_month = 'Leschte Mount';
-$s_plugin_MantisGraph_period_this_quarter = 'Dëst Trimester';
+$s_plugin_MantisGraph_period_this_quarter = 'Dëst Quartal';
+$s_plugin_MantisGraph_period_last_quarter = 'Lescht Quartal';
 $s_plugin_MantisGraph_period_last_year = 'Lescht Joer';
+$s_plugin_MantisGraph_other_categories = 'aner Kategorien (%d)';
