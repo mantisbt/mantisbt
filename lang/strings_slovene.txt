@@ -44,7 +44,6 @@
  * @author Wertuose
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopiraj';
 $s_actiongroup_menu_assign = 'Priredi';
 $s_actiongroup_menu_resolve = 'Razreši';

@@ -58,7 +58,6 @@
  * @author WikiPhoenix
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopiera';
 $s_actiongroup_menu_assign = 'Tilldela';
 $s_actiongroup_menu_resolve = 'Lös';

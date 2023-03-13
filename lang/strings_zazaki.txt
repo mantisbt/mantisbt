@@ -49,7 +49,6 @@
  * @author Orbot707
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopya ke';
 $s_actiongroup_menu_assign = 'Çeke';
 $s_actiongroup_menu_resolve = 'Agoznê';

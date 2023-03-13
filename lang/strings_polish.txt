@@ -65,7 +65,6 @@
  * @author Woytecr
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopiuj';
 $s_actiongroup_menu_assign = 'Przypisz';
 $s_actiongroup_menu_resolve = 'Rozwiąż';

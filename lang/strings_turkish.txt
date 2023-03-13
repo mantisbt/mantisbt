@@ -73,7 +73,6 @@
  * @author Vito Genovese
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopyala';
 $s_actiongroup_menu_assign = 'Ata';
 $s_actiongroup_menu_resolve = 'Çözümle';
