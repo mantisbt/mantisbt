@@ -44,7 +44,6 @@
  * @author Vlad5250
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Копирај';
 $s_actiongroup_menu_assign = 'Додели';
 $s_actiongroup_menu_resolve = 'Реши';

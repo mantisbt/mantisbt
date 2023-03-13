@@ -42,7 +42,6 @@
  * @author Purodha
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopeere';
 $s_actiongroup_menu_assign = 'Zohdeile';
 $s_actiongroup_menu_resolve = 'Fädesch maache';

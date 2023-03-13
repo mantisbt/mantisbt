@@ -44,7 +44,6 @@
  * @author Сербијана
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Umnoži';
 $s_actiongroup_menu_assign = 'Dodeli';
 $s_actiongroup_menu_resolve = 'Reši';

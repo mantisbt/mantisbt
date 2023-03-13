@@ -72,7 +72,6 @@
  * @author Zetud
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Copier';
 $s_actiongroup_menu_assign = 'Assigner';
 $s_actiongroup_menu_resolve = 'Résoudre';
