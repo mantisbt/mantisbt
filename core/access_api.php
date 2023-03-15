@@ -337,20 +337,24 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
 }
 
 /**
- * Filters an array of project ids, based on an access level, returning an array
- * containing only those projects which meet said access level.
- * An optional limit for the number of results is provided as a shortcut for access checks.
+ * Filters an array of project ids based on an access level.
+ *
+ * Returns an array containing only those projects which meet said access level.
+ * An optional limit for the number of results is provided as a shortcut for
+ * access checks.
  *
  * @param integer|array|string  $p_access_level Parameter representing access level threshold, may be:
  *                                              - integer: for a simple threshold
  *                                              - array: for an array threshold
  *                                              - string: for a threshold option which will be evaluated
- *                                                 for each project context
+ *                                                for each project context
  * @param array                 $p_project_ids  Array of project ids to check access against, default to null
  *                                               to use all user accessible projects
  * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
  * @param integer               $p_limit        Maximum number of results, default is 0 for all results
+ *
  * @return array                The filtered array of project ids
+ * @throws ClientException
  */
 function access_project_array_filter( $p_access_level, array $p_project_ids = null, $p_user_id = null, $p_limit = 0 ) {
 	# Short circuit the check in this case
@@ -375,6 +379,8 @@ function access_project_array_filter( $p_access_level, array $p_project_ids = nu
 			$t_default = config_get_global( $p_access_level );
 		}
 	}
+
+	project_cache_array_rows( $p_project_ids );
 
 	$t_check_level = $p_access_level;
 	$t_filtered_projects = array();
