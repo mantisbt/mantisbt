@@ -4,54 +4,97 @@
 	<section id="admin.customize.strings">
 		<title>Strings / Translations</title>
 
-		<para>All strings used in MantisBT, including those defined in
-			plugins, can be customized or translated differently.
+		<para>All the strings used in MantisBT including error messages,
+			as well as those defined in plugins,
+			can be customized or translated differently.
 			This is achieved by overriding them in the
 			<emphasis>Custom Strings File</emphasis>
 			(<filename>config/custom_strings_inc.php</filename>),
 			which is automatically detected and included by MantisBT code.
 		</para>
 
-		<para>Defining custom strings here provides a simple upgrade path,
-			and avoids having to re-do the changes when upgrading to the
-			next release.
+		<para>Defining custom strings in this file provides a simple upgrade path,
+			and avoids having to re-apply changes to modified core language files
+			when upgrading MantisBT to the next release.
 		</para>
 
 		<note><para>The standard MantisBT language strings are sometimes reused
 			in different contexts.
 			If you are planning to override some strings to meet your specific
-			requirements, make sure to analyze where they are used to avoids
+			requirements, make sure to analyze where and how they are used to avoid
 			unexpected issues.
 		</para></note>
 
-		<para>Format
-<programlisting>
-$s_CODE = STRING;
-</programlisting>
-		</para>
+		<section id="admin.customize.strings.format">
+			<title>Custom Strings File Format</title>
 
-		<para>Where
-			<itemizedlist>
-				<listitem>
-					<para>CODE = string code, as called by
-						lang_get() function.
-						Search in lang/strings_english.txt for existing codes.
-					</para>
-				</listitem>
-				<listitem>
-					<para>STRING = string value / translation
-					</para>
-				</listitem>
-			</itemizedlist>
-		</para>
-		<warning><para>NEVER call <emphasis>lang_get_current()</emphasis>
-			from the <filename>custom_strings_inc.php</filename>, as doing so
-			will reset the active_language, causing the code to return
-			incorrect translations if the default language is different
-			from English.
-			Always use the <emphasis>$g_active_language</emphasis>
-			global variable instead.
-		</para></warning>
+			<para>This is a regular PHP script, containing variable assignments
+				and optionally some control structures to conditionally
+				define strings based on specific criteria
+				(see <xref linkend="admin.customize.customfields.localize" />
+				for an example).
+			</para>
+<programlisting>
+&lt;?php
+$s_CODE = STRING;
+$MANTIS_ERROR[ERROR_NUMBER] = STRING;
+</programlisting>
+
+			<para>Where
+				<itemizedlist>
+					<listitem>
+						<para><emphasis>CODE</emphasis> = language string code, as called by
+							<literal>lang_get()</literal> function. Search in
+							<filename>lang/strings_english.txt</filename> for existing codes.
+						</para>
+					</listitem>
+					<listitem>
+						<para><emphasis>ERROR_NUMBER</emphasis> = error number or constant,
+							see <filename>constant_inc.php</filename>.
+						</para>
+					</listitem>
+					<listitem>
+						<para><emphasis>STRING</emphasis> = string value / translation.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+
+			<note>
+				<para>The <filename>custom_strings_inc.php</filename> file
+					should only contain variable assignments and basic PHP
+					control structures. In particular,
+					<emphasis>calling MantisBT core functions in it is not recommended</emphasis>,
+					as it could lead to unexpected behavior and even errors
+					depending on context.
+				</para>
+				<para>
+					If you <emphasis>must</emphasis> use API calls, then
+					anything that expects an active database connection needs
+					to be protected, e.g.
+				</para>
+<programlisting>
+&lt;?php
+if( db_is_connected() ) {
+	if( helper_get_current_project() == 1 ) {
+		$s_summary = 'Title';
+	}
+}
+</programlisting>
+			</note>
+
+			<warning>
+				<para>NEVER call <literal>lang_get_current()</literal>
+					from the <filename>custom_strings_inc.php</filename>.
+					Doing so will reset the active_language, causing the code
+					to return incorrect translations if the default language
+					is different from English.
+					Always use the <literal>$g_active_language</literal>
+					global variable instead.
+				</para>
+			</warning>
+		</section>
+
 	</section>
 
 	<section id="admin.customize.customfields">
