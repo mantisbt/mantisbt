@@ -376,6 +376,8 @@ function access_project_array_filter( $p_access_level, array $p_project_ids = nu
 		}
 	}
 
+	project_cache_array_rows( $p_project_ids );
+
 	$t_check_level = $p_access_level;
 	$t_filtered_projects = array();
 	foreach( $p_project_ids as $t_project_id ) {
