@@ -508,6 +508,11 @@ class ExamplePlugin extends MantisPlugin {
 				Instead of passing an event type as the value, your plugin must give the name
 				of a class method that will be called when the event is triggered.
 			</para>
+			<note>
+				<para>
+					In order to hook an event from another plugin the plugin with the event musst be set as required.
+				</para>
+			</note>
 			<para>
 				For our Example plugin, we'll create a <function>foo()</function>
 				and a <function>bar()</function> methods in our plugin class,
