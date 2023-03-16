@@ -45,7 +45,6 @@
  * @author Sveinn í Felli
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Afrita';
 $s_actiongroup_menu_assign = 'Úthlutað';
 $s_actiongroup_menu_resolve = 'Leyst';

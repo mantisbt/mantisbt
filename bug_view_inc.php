@@ -89,6 +89,13 @@ require_api( 'version_api.php' );
 
 require_css( 'status_config.php' );
 
+/**
+ * Variables defined in parent script including this one.
+ * @var string $t_mantis_dir
+ * @var bool $t_show_page_header
+ * @var bool $t_force_readonly
+ */
+
 $f_issue_id = gpc_get_int( 'id' );
 $f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 
@@ -110,7 +117,7 @@ $t_flags = $t_result['flags'];
 compress_enable();
 
 if( $t_show_page_header ) {
-	layout_page_header( bug_format_summary( $f_issue_id, SUMMARY_CAPTION ), null, 'view-issue-page' );
+	layout_page_header( bug_format_summary( $f_issue_id, SUMMARY_CAPTION ), null, 'view-issue-page', 'view.php?id=' . $f_issue_id );
 	layout_page_begin( 'view_all_bug_page.php' );
 }
 
@@ -486,7 +493,7 @@ if( ( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) 
 	# Product Version
 	if( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) ) {
 		echo '<th class="bug-product-version category">', lang_get( 'product_version' ), '</th>';
-		echo '<td class="bug-product-version">', string_display_line( $t_issue['version']['name'] ), '</td>';
+		echo '<td class="bug-product-version">', string_display_line( $t_issue_view['product_version'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -519,7 +526,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 	if( $t_flags['versions_target_version_show'] && isset( $t_issue['target_version'] ) ) {
 		# Target Version
 		echo '<th class="bug-target-version category">', lang_get( 'target_version' ), '</th>';
-		echo '<td class="bug-target-version">', string_display_line( $t_issue['target_version']['name'] ), '</td>';
+		echo '<td class="bug-target-version">', string_display_line( $t_issue_view['target_version'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -527,7 +534,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 	# fixed in version
 	if( $t_flags['versions_fixed_in_version_show'] && isset( $t_issue['fixed_in_version'] ) ) {
 		echo '<th class="bug-fixed-in-version category">', lang_get( 'fixed_in_version' ), '</th>';
-		echo '<td class="bug-fixed-in-version">', string_display_line( $t_issue['fixed_in_version']['name'] ), '</td>';
+		echo '<td class="bug-fixed-in-version">', string_display_line( $t_issue_view['fixed_in_version'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -692,9 +699,11 @@ if( $t_flags['monitor_show'] ) {
 					<table class="table table-bordered table-condensed table-striped">
 	<tr>
 		<th class="category width-15">
-			<?php echo lang_get( 'monitoring_user_list' ); ?>
+			<label for="bug_monitor_list_user_to_add">
+				<?php echo lang_get( 'monitoring_user_list' ); ?>
+			</label>
 		</th>
-		<td>
+		<td class="width-85">
 	<?php
 			if( !isset( $t_issue['monitors'] ) || count( $t_issue['monitors'] ) == 0 ) {
 				echo lang_get( 'no_users_monitoring_bug' );
@@ -724,7 +733,7 @@ if( $t_flags['monitor_show'] ) {
 	?>
 			<br /><br />
 			<form method="post" action="bug_monitor_add.php" class="form-inline noprint">
-			<?php echo form_security_field( 'bug_monitor_add' ) ?>
+				<?php echo form_security_field( 'bug_monitor_add' ) ?>
 				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
 				<!--suppress HtmlFormInputWithoutLabel -->
 				<input type="text" class="input-sm" id="bug_monitor_list_user_to_add" name="user_to_add" />
@@ -816,7 +825,7 @@ if( $t_flags['history_show'] && $f_history ) {
 				</th>
 			</tr>
 		</thead>
-	
+
 		<tbody>
 <?php
 	foreach( $t_history as $t_item ) {
@@ -889,7 +898,7 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 		return '';
 	}
 
-	if( $p_html_preview == false ) {
+	if( !$p_html_preview ) {
 		$t_td = '<td>';
 	} else {
 		$t_td = '<td class="print">';
@@ -902,7 +911,7 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	$t_resolution_string = get_enum_element( 'resolution', $t_bug->resolution, $t_current_user_id, $t_bug->project_id );
 
 	$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&#160;</td>';
-	if( $p_html_preview == false ) {
+	if( !$p_html_preview ) {
 		# choose color based on status
 		$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user_id, $t_bug->project_id );
 		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
@@ -933,7 +942,7 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	}
 
 	# add delete link if bug not read only and user has access level
-	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
+	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && !$p_html_preview ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			$t_relationship_info_html .= ' <a class="red noprint zoom-130" '
 				. 'href="bug_relationship_delete.php?bug_id=' . $p_bug_id
@@ -973,7 +982,7 @@ function bug_view_relationship_get_summary_html( $p_bug_id ) {
 	}
 
 	if( !is_blank( $t_summary ) ) {
-		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
+		if( !relationship_can_resolve_bug( $p_bug_id ) ) {
 			$t_summary .= '<tr><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' .
 				lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
 		}

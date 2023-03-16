@@ -72,7 +72,6 @@
  * @author Zetud
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Copier';
 $s_actiongroup_menu_assign = 'Assigner';
 $s_actiongroup_menu_resolve = 'Résoudre';
@@ -696,7 +695,7 @@ $s_plugin_key_dated = 'dépendances périmées';
 $s_plugin_key_upgrade = 'mise à niveau requise';
 $s_plugin_invalid_description = 'Greffon non valide';
 $s_plugin_invalid_status_message = 'Les propriétés obligatoires suivantes ne sont pas définies dans la classe du greffon : %s.';
-$s_plugin_missing_description = 'Greffon absent';
+$s_plugin_missing_description = 'Greffon manquant';
 $s_plugin_missing_status_message = 'Le greffon est installé dans la base de données de Mantis, mais n’a pas pu être chargé.';
 $s_plugin_missing_class_description = 'Classe de base du greffon absente';
 $s_plugin_missing_class_status_message = 'Un répertoire pour ce greffon a été trouvé, mais il n’y avait pas de code correspondant au greffon dedans. Assurez-vous que le nom du répertoire correspond au nom de base du greffon (sensible à la casse).';

@@ -48,7 +48,8 @@ check_print_test_warn_row(
 	array( false => 'Either shorten the "search_title" configuration option to '
 		. 'a maximum  of ' . ( 16 - $t_shortname_length + strlen( $t_prefix ) )
 		. ' characters, or alter the "opensearch_XXX_short" language strings '
-		. 'as appropriate to meet the <a href="http://www.opensearch.org/">'
+		. 'as appropriate to meet the '
+		. '<a href="https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md">'
 		. 'OpenSearch 1.1</a> specification for the ShortName element.'
 	)
 );

@@ -319,7 +319,7 @@ class Graph {
 			echo "\t" . $t_src . ' -- ' . $t_dst . ' ' . $t_attr . ";\n";
 		}
 
-		echo "};\n";
+		echo "}\n";
 	}
 
 	/**
@@ -487,6 +487,6 @@ class Digraph extends Graph {
 			echo "\t" . $t_src . ' -> ' . $t_dst . ' ' . $t_attr . ";\n";
 		}
 
-		echo "};\n";
+		echo "}\n";
 	}
 }

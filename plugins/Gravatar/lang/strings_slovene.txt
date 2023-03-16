@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Zazaki (Zazaki)
+/** Slovenian (slovenščina)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit https://translatewiki.net
@@ -38,31 +38,8 @@
  * @ingroup Language
  * @file
  *
- * @author Erdemaslancan
- * @author Kumkumuk
- * @author Marmase
- * @author Mirzali
+ * @author Eleassar
  */
 
-$s_plugin_XmlImportExport_title = 'Mesele Bıgi/Bıdı';
-$s_plugin_XmlImportExport_description = 'MantisBT rê zerin da XML ra huner dekeno u veceno.';
-$s_plugin_XmlImportExport_import = 'Meseleyê grotışi';
-$s_plugin_XmlImportExport_export = 'XML Bıdı';
-$s_plugin_XmlImportExport_config_title = 'Konfigurasyona sewiyeya hesabii de XML ateberd/azered';
-$s_plugin_XmlImportExport_import_threshold = 'Meseleyê grotışi';
-$s_plugin_XmlImportExport_export_threshold = 'Meseler ateberd';
-$s_plugin_XmlImportExport_action_update = 'Rocane ke';
-$s_plugin_XmlImportExport_importing_in_project = 'Proce dı meselê teberdara:';
-$s_plugin_XmlImportExport_import_options = 'Weçinıkan zerre ke';
-$s_plugin_XmlImportExport_cross_references = 'Çaprez referansi';
-$s_plugin_XmlImportExport_default_strategy = 'Strateciya çerexnayışê hesabiyayiye:';
-$s_plugin_XmlImportExport_renumber = 'Fına nımre ke';
-$s_plugin_XmlImportExport_renumber_desc = 'Referansa çarnayışê nımra rê bıcerbnê';
-$s_plugin_XmlImportExport_link = 'Gıre';
-$s_plugin_XmlImportExport_link_desc = 'Orcinal nesi  açarn jew gri';
-$s_plugin_XmlImportExport_disable = 'Dewrera vec';
-$s_plugin_XmlImportExport_disable_desc = 'Grey meqefilne';
-$s_plugin_XmlImportExport_fallback = 'Strateciya peyd amayışi ("Fına nımrekerdış" dezge nêbose)';
-$s_plugin_XmlImportExport_fallback_category = 'Kategoriyo peyên:';
-$s_plugin_XmlImportExport_keep_same_category = 'Eyni kategori de tapêşê';
-$s_plugin_XmlImportExport_error_no_xml = 'Derganeya xmlreader u xmlwriter nevineya';
+$s_plugin_Gravatar_title = 'Avatarji prek Gravatarja';
+$s_plugin_Gravatar_description = 'Vtičnik, ki prikazuje uporabniške avatarje na podlagi njihovih e-poštnih naslovov z uporabo storitve avatarjev.';

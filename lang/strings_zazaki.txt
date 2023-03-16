@@ -49,7 +49,6 @@
  * @author Orbot707
  */
 
-$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Kopya ke';
 $s_actiongroup_menu_assign = 'Çeke';
 $s_actiongroup_menu_resolve = 'Agoznê';
@@ -359,7 +358,7 @@ $s_categories = 'Kategoriyi';
 $s_add_category_button = 'Kategoriye cı ke';
 $s_actions = 'Kerdışi';
 $s_version = 'Versiyon';
-$s_unlink_link = 'Linki Wedarne';
+$s_unlink_link = 'Gıreyi wedare';
 $s_review_changes = 'Vurriyayışan bıvêne';
 $s_add_project_title = 'Proce cı ke';
 $s_projects_title = 'Proceyi';

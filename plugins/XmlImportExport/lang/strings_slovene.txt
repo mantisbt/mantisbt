@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Zazaki (Zazaki)
+/** Slovenian (slovenščina)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit https://translatewiki.net
@@ -38,31 +38,28 @@
  * @ingroup Language
  * @file
  *
- * @author Erdemaslancan
- * @author Kumkumuk
- * @author Marmase
- * @author Mirzali
+ * @author Eleassar
  */
 
-$s_plugin_XmlImportExport_title = 'Mesele Bıgi/Bıdı';
-$s_plugin_XmlImportExport_description = 'MantisBT rê zerin da XML ra huner dekeno u veceno.';
-$s_plugin_XmlImportExport_import = 'Meseleyê grotışi';
-$s_plugin_XmlImportExport_export = 'XML Bıdı';
-$s_plugin_XmlImportExport_config_title = 'Konfigurasyona sewiyeya hesabii de XML ateberd/azered';
-$s_plugin_XmlImportExport_import_threshold = 'Meseleyê grotışi';
-$s_plugin_XmlImportExport_export_threshold = 'Meseler ateberd';
-$s_plugin_XmlImportExport_action_update = 'Rocane ke';
-$s_plugin_XmlImportExport_importing_in_project = 'Proce dı meselê teberdara:';
-$s_plugin_XmlImportExport_import_options = 'Weçinıkan zerre ke';
-$s_plugin_XmlImportExport_cross_references = 'Çaprez referansi';
-$s_plugin_XmlImportExport_default_strategy = 'Strateciya çerexnayışê hesabiyayiye:';
-$s_plugin_XmlImportExport_renumber = 'Fına nımre ke';
-$s_plugin_XmlImportExport_renumber_desc = 'Referansa çarnayışê nımra rê bıcerbnê';
-$s_plugin_XmlImportExport_link = 'Gıre';
-$s_plugin_XmlImportExport_link_desc = 'Orcinal nesi  açarn jew gri';
-$s_plugin_XmlImportExport_disable = 'Dewrera vec';
-$s_plugin_XmlImportExport_disable_desc = 'Grey meqefilne';
-$s_plugin_XmlImportExport_fallback = 'Strateciya peyd amayışi ("Fına nımrekerdış" dezge nêbose)';
-$s_plugin_XmlImportExport_fallback_category = 'Kategoriyo peyên:';
-$s_plugin_XmlImportExport_keep_same_category = 'Eyni kategori de tapêşê';
-$s_plugin_XmlImportExport_error_no_xml = 'Derganeya xmlreader u xmlwriter nevineya';
+$s_plugin_XmlImportExport_title = 'Težave z uvozom/izvozom';
+$s_plugin_XmlImportExport_description = 'MantisBT doda možnosti uvoza in izvoza na podlagi XML.';
+$s_plugin_XmlImportExport_import = 'Težave z uvozom';
+$s_plugin_XmlImportExport_export = 'Izvoz XML';
+$s_plugin_XmlImportExport_config_title = 'Konfiguracija ravni dostopa za uvoz/izvoz XML';
+$s_plugin_XmlImportExport_import_threshold = 'Težave z uvozom';
+$s_plugin_XmlImportExport_export_threshold = 'Težave z izvozom';
+$s_plugin_XmlImportExport_action_update = 'Posodobi';
+$s_plugin_XmlImportExport_importing_in_project = 'Uvažanje težav v projekt: »%s«';
+$s_plugin_XmlImportExport_import_options = 'Možnosti uvoza';
+$s_plugin_XmlImportExport_cross_references = 'Navzkrižni sklici';
+$s_plugin_XmlImportExport_default_strategy = 'Privzeta strategija pretvorbe:';
+$s_plugin_XmlImportExport_renumber = 'Preštevilči';
+$s_plugin_XmlImportExport_renumber_desc = 'Poskusi pretvoriti sklice v novo oštevilčenje';
+$s_plugin_XmlImportExport_link = 'Povezava';
+$s_plugin_XmlImportExport_link_desc = 'Pretvori v povezavo do izvornega predmeta';
+$s_plugin_XmlImportExport_disable = 'Onemogoči';
+$s_plugin_XmlImportExport_disable_desc = 'Onemogoči povezavo';
+$s_plugin_XmlImportExport_fallback = 'Nadomestna strategija (če možnost »Preštevilči« ni na voljo):';
+$s_plugin_XmlImportExport_fallback_category = 'Nadomestna kategorija:';
+$s_plugin_XmlImportExport_keep_same_category = 'Poskusi ohraniti isto kategorijo';
+$s_plugin_XmlImportExport_error_no_xml = 'razširitev <em>xmlreader</em> in <em>xmlwriter</em> ni mogoče najti';

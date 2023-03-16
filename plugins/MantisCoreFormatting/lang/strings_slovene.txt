@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Zazaki (Zazaki)
+/** Slovenian (slovenščina)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit https://translatewiki.net
@@ -38,31 +38,18 @@
  * @ingroup Language
  * @file
  *
- * @author Erdemaslancan
- * @author Kumkumuk
- * @author Marmase
- * @author Mirzali
+ * @author Eleassar
  */
 
-$s_plugin_XmlImportExport_title = 'Mesele Bıgi/Bıdı';
-$s_plugin_XmlImportExport_description = 'MantisBT rê zerin da XML ra huner dekeno u veceno.';
-$s_plugin_XmlImportExport_import = 'Meseleyê grotışi';
-$s_plugin_XmlImportExport_export = 'XML Bıdı';
-$s_plugin_XmlImportExport_config_title = 'Konfigurasyona sewiyeya hesabii de XML ateberd/azered';
-$s_plugin_XmlImportExport_import_threshold = 'Meseleyê grotışi';
-$s_plugin_XmlImportExport_export_threshold = 'Meseler ateberd';
-$s_plugin_XmlImportExport_action_update = 'Rocane ke';
-$s_plugin_XmlImportExport_importing_in_project = 'Proce dı meselê teberdara:';
-$s_plugin_XmlImportExport_import_options = 'Weçinıkan zerre ke';
-$s_plugin_XmlImportExport_cross_references = 'Çaprez referansi';
-$s_plugin_XmlImportExport_default_strategy = 'Strateciya çerexnayışê hesabiyayiye:';
-$s_plugin_XmlImportExport_renumber = 'Fına nımre ke';
-$s_plugin_XmlImportExport_renumber_desc = 'Referansa çarnayışê nımra rê bıcerbnê';
-$s_plugin_XmlImportExport_link = 'Gıre';
-$s_plugin_XmlImportExport_link_desc = 'Orcinal nesi  açarn jew gri';
-$s_plugin_XmlImportExport_disable = 'Dewrera vec';
-$s_plugin_XmlImportExport_disable_desc = 'Grey meqefilne';
-$s_plugin_XmlImportExport_fallback = 'Strateciya peyd amayışi ("Fına nımrekerdış" dezge nêbose)';
-$s_plugin_XmlImportExport_fallback_category = 'Kategoriyo peyên:';
-$s_plugin_XmlImportExport_keep_same_category = 'Eyni kategori de tapêşê';
-$s_plugin_XmlImportExport_error_no_xml = 'Derganeya xmlreader u xmlwriter nevineya';
+$s_plugin_format_title = 'Oblikovanje MantisBT';
+$s_plugin_format_description = 'Uradni vtičnik za obdelavo in oblikovanje besedila.';
+$s_plugin_format_config = 'Konfiguracija';
+$s_plugin_format_process_text = 'Obdelava besedila';
+$s_plugin_format_process_text_warning_notice = 'Ne izklopite, razen če res veste, kaj počnete. V izklopljenem stanju so mogoči napadi XSS (cross site scripting).';
+$s_plugin_format_process_urls = 'Obdelava URL-jev';
+$s_plugin_format_process_buglinks = 'Notranje povezave MantisBT (težave in opombe o težavah)';
+$s_plugin_format_process_buglinks_info = 'Vaša konfiguracija opredeljuje znaćko <em>Issue</em> kot »%s« in značko <em>Issue Note</em> kot »%s«';
+$s_plugin_format_process_markdown = 'Obdelava Markdown';
+$s_plugin_format_process_markdown_info = 'Oblikovanje s podporo za Markdown, skladnja oblikovanja besedila, zasnovana tako, da jo je mogoče pretvoriti v HTML.';
+$s_plugin_format_enabled = 'Vklopljeno';
+$s_plugin_format_disabled = 'Izklopljeno';
