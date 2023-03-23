@@ -129,7 +129,14 @@ function html_rss_link() {
  * @return void
  */
 function html_javascript_link( $p_filename ) {
-	echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'js/' . $p_filename ), '"></script>', "\n";
+	$t_filename = $p_filename;
+
+	# If no path is specified, look for JavaScript files in default directory
+	if( $t_filename == basename( $t_filename ) ) {
+		$t_filename = 'js/' . $t_filename;
+	}
+	
+	echo "\t", '<script type="text/javascript" src="', string_sanitize_url( helper_mantis_url( $t_filename ), true ), '"></script>', "\n";
 }
 
 /**
