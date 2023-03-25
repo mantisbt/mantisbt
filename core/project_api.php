@@ -376,8 +376,6 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
  * @return void
  */
 function project_delete( $p_project_id ) {
-	event_signal( 'EVENT_MANAGE_PROJECT_DELETE', array( $p_project_id ) );
-
 	$t_email_notifications = config_get( 'enable_email_notification' );
 
 	# temporarily disable all notifications
