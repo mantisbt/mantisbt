@@ -334,7 +334,7 @@ function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 	$t_project_id = $t_result['project']['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Project created with id $t_project_id" )->
-		withJson( $t_result );
+		withJson( array( 'project' => $t_result['project'] ) );
 }
 
 /**
