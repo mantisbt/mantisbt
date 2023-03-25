@@ -1113,78 +1113,52 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
  * @return boolean returns true or false depending on the success of the update action
  */
 function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p_project ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_fault_access_denied();
 	}
 
-	if( !mci_has_administrator_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-
-	$g_project_override = $p_project_id;
-
 	$p_project = ApiObjectFactory::objectToArray( $p_project );
 
-	if( !isset( $p_project['name'] ) ) {
-		return ApiObjectFactory::faultBadRequest( 'Missing required field \'name\'.' );
+	$t_project_data = array();
+
+	if( isset( $p_project['name'] ) ) {
+		$t_project_data['name'] = $p_project['name'];
 	}
 
-	$t_name = $p_project['name'];
-
-	# check to make sure project doesn't already exist
-	if( $t_name != project_get_name( $p_project_id ) ) {
-		if( !project_is_name_unique( $t_name ) ) {
-			return ApiObjectFactory::faultConflict( 'Project name conflict' );
-		}
+	if( isset( $p_project['description'] ) ) {
+		$t_project_data['description'] = $project['description'];
 	}
 
-	if( !isset( $p_project['description'] ) ) {
-		$t_description = project_get_field( $p_project_id, 'description' );
-	} else {
-		$t_description = $p_project['description'];
+	if( isset( $p_project['status'] ) ) {
+		$t_project_data['status'] = array( 'id' => $p_project['status'] );
 	}
 
-	if( !isset( $p_project['status'] ) ) {
-		$t_status = project_get_field( $p_project_id, 'status' );
-	} else {
-		$t_status = $p_project['status'];
+	if( isset( $p_project['view_state'] ) ) {
+		$t_project_data['view_state'] = array( 'id' => $p_project['view_state'] );
 	}
 
-	if( !isset( $p_project['view_state'] ) ) {
-		$t_view_state = project_get_field( $p_project_id, 'view_state' );
-	} else {
-		$t_view_state = $p_project['view_state'];
+	if( isset( $p_project['file_path'] ) ) {
+		$t_project_data['file_path'] = $p_project['file_path'];
 	}
 
-	if( !isset( $p_project['file_path'] ) ) {
-		$t_file_path = project_get_field( $p_project_id, 'file_path' );
-	} else {
-		$t_file_path = $p_project['file_path'];
+	if( isset( $p_project['enabled'] ) ) {
+		$t_project_data['enabled'] = $p_project['enabled'];
 	}
 
-	if( !isset( $p_project['enabled'] ) ) {
-		$t_enabled = project_get_field( $p_project_id, 'enabled' );
-	} else {
-		$t_enabled = $p_project['enabled'];
+	if( isset( $p_project['inherit_global'] ) ) {
+		$t_project_data['inherit_global'] = $p_project['inherit_global'];
 	}
 
-	if( !isset( $p_project['inherit_global'] ) ) {
-		$t_inherit_global = project_get_field( $p_project_id, 'inherit_global' );
-	} else {
-		$t_inherit_global = $p_project['inherit_global'];
-	}
+	$t_data = array(
+		'query' => array(
+			'id' => $p_project_id,
+		),
+		'payload' => $t_project_data,
+	);
 
-	$t_project_status = mci_get_project_status_id( $t_status );
-	$t_project_view_state = mci_get_project_view_state_id( $t_view_state );
-
-	project_update( $p_project_id, $t_name, $t_description, $t_project_status, $t_project_view_state, $t_file_path, $t_enabled, $t_inherit_global );
+	$t_command = new ProjectUpdateCommand( $t_data );
+	$t_command->execute();
 
 	return true;
 }
