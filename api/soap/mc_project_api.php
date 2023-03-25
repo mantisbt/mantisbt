@@ -1205,17 +1205,16 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 		return mci_fault_login_failed();
 	}
 
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
+	$t_data = array(
+		'query' => array(
+			'id' => (int)$p_project_id,
+		),
+	);
 
-	$g_project_override = $p_project_id;
+	$t_command = new ProjectDeleteCommand( $t_data );
+	$t_command->execute();
 
-	if( !mci_has_administrator_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
-
-	return project_delete( $p_project_id );
+	return true;
 }
 
 /**
