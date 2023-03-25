@@ -170,6 +170,9 @@ class ProjectAddCommand extends Command {
 			project_add_user( $t_project_id, $t_user_id, $t_access_level );
 		}
 
+		global $g_project_override;
+		$g_project_override = $t_project_id;
+
 		event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
 
 		$t_result = array();
