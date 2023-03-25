@@ -16,6 +16,9 @@
 
 require_api( 'project_api.php' );
 
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_enum_api.php' );
+
 use Mantis\Exceptions\ClientException;
 
 /**
@@ -141,7 +144,7 @@ class ProjectAddCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @return void
+	 * @return array the command result
 	 */
 	function process() {
 		$t_project_id = project_create(
@@ -174,5 +177,7 @@ class ProjectAddCommand extends Command {
 		} else {
 			$t_result['id'] = $t_project_id;
 		}
+
+		return $t_result;
 	}
 }
