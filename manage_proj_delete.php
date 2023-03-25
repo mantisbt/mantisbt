@@ -53,7 +53,14 @@ auth_reauthenticate();
 
 $f_project_id = gpc_get_int( 'project_id' );
 
-access_ensure_project_level( config_get( 'delete_project_threshold' ), $f_project_id );
+$t_data = array(
+	'query' => array(
+		'id' => $f_project_id,
+	),
+);
+
+$t_command = new ProjectDeleteCommand( $t_data );
+$t_command->validate();
 
 $t_message = sprintf( lang_get( 'project_delete_msg' ),
 	string_attribute( project_get_name( $f_project_id ) ),
@@ -61,7 +68,7 @@ $t_message = sprintf( lang_get( 'project_delete_msg' ),
 );
 helper_ensure_confirmed( $t_message, lang_get( 'project_delete_button' ) );
 
-project_delete( $f_project_id );
+$t_command->execute();
 
 form_security_purge( 'manage_proj_update' );
 
