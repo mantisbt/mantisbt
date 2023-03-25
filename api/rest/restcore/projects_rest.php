@@ -252,15 +252,19 @@ function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
 	}
 
-	$t_project_id = mc_project_add( /* username */ '', /* password */ '', (object) $t_payload );
-	ApiObjectFactory::throwIfFault( $t_project_id );
+	$t_data = array(
+		'payload' => $t_payload,
+		'options' => array(
+			'return_project' => true
+		),
+	);
 
-	$t_user_id = auth_get_current_user_id();
-	$t_lang = mci_get_user_lang( $t_user_id );
-	$t_project = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
+	$t_command = new ProjectAddCommand( $t_data );
+	$t_result = $t_command->execute();
+	$t_project_id = $t_result['project']['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Project created with id $t_project_id" )->
-		withJson( array( 'project' => $t_project ) );
+		withJson( $t_result );
 }
 
 /**
