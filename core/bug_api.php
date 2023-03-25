@@ -824,6 +824,7 @@ class BugData {
 
 $g_cache_bug = array();
 $g_cache_bug_text = array();
+$g_cache_bug_attachments = array();
 
 /**
  * Cache a database result-set containing full contents of bug_table row.
@@ -1014,6 +1015,22 @@ function bug_text_clear_cache( $p_bug_id = null ) {
 	}
 
 	return true;
+}
+
+/**
+ * Clear a bug's attachments from the cache.
+ * @param integer $p_bug_id A bug identifier to clear all (optional).
+ * @return void
+ * @access public
+ */
+function bug_attachments_clear_cache( $p_bug_id = null ) {
+	global $g_cache_bug_attachments;
+
+	if( null === $p_bug_id ) {
+		$g_cache_bug_attachments = array();
+	} else {
+		unset( $g_cache_bug_attachments[(int)$p_bug_id] );
+	}
 }
 
 /**
@@ -1757,7 +1774,15 @@ function bug_get_bugnote_stats( $p_bug_id ) {
  * @uses file_api.php
  */
 function bug_get_attachments( $p_bug_id ) {
+	$p_bug_id = (int)$p_bug_id;
+
+	global $g_cache_bug_attachments;
+	if( isset( $g_cache_bug_attachments[$p_bug_id] ) ) {
+		return $g_cache_bug_attachments[$p_bug_id];
+	}
+
 	db_param_push();
+
 	$t_query = 'SELECT id, title, diskfile, filename, filesize, file_type, date_added, user_id, bugnote_id
 		                FROM {bug_file}
 		                WHERE bug_id=' . db_param() . '
@@ -1769,6 +1794,8 @@ function bug_get_attachments( $p_bug_id ) {
 	while( $t_row = db_fetch_array( $t_db_result ) ) {
 		$t_result[] = $t_row;
 	}
+
+	$g_cache_bug_attachments[$p_bug_id] = $t_result;
 
 	return $t_result;
 }
@@ -2272,6 +2299,7 @@ function bug_clear_cache_all( $p_bug_id = null ) {
 	bugnote_clear_bug_cache( $p_bug_id );
 	tag_clear_cache_bug_tags( $p_bug_id );
 	custom_field_clear_cache_values( $p_bug_id );
+	bug_attachments_clear_cache( $p_bug_id );
 
 	$t_plugin_objects = columns_get_plugin_columns();
 	foreach( $t_plugin_objects as $t_plugin_column ) {
