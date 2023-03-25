@@ -106,8 +106,6 @@ if( 0 != $f_parent_id ) {
 	$t_redirect_url = 'manage_proj_page.php';
 }
 
-event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
-
 form_security_purge( 'manage_proj_create' );
 
 layout_page_header( null, $t_redirect_url );
