@@ -475,6 +475,10 @@ function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
 		$t_project['enabled'] = (int)$t_row['enabled'] != 0;
 		$t_project['view_state'] = mci_enum_get_array_by_id( (int)$t_row['view_state'], 'view_state', $p_lang );
 
+		if( !ApiObjectFactory::$soap ) {
+			$t_project['inherit_global'] = $t_row['inherit_global'] != 0;
+		}
+
 		# access_min field is not used
 		# $t_project['access_min'] = mci_enum_get_array_by_id( (int)$t_row['access_min'], 'access_levels', $p_lang );
 
