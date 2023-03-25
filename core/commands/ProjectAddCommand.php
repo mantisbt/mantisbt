@@ -170,6 +170,8 @@ class ProjectAddCommand extends Command {
 			project_add_user( $t_project_id, $t_user_id, $t_access_level );
 		}
 
+		event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
+
 		$t_result = array();
 		if( $this->option('return_project', false ) ) {
 			$t_lang = mci_get_user_lang( $t_user_id );
