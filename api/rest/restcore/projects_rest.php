@@ -285,30 +285,28 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 	}
 
 	$t_project_id = (int)$t_project_id;
-	if( $t_project_id == ALL_PROJECTS || $t_project_id < 1 ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid project id." );
-	}
 
-	$t_project_patch = $p_request->getParsedBody();
-	if( !$t_project_patch ) {
+	$t_payload = $p_request->getParsedBody();
+	if( !$t_payload ) {
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
 	}
 
-	if( isset( $t_project_patch['id'] ) && $t_project_patch['id'] != $t_project_id ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Project id mismatch" );
-	}
+	$t_data = array(
+		'query' => array(
+			'id' => $t_project_id
+		),
+		'payload' => $t_payload,
+		'options' => array(
+			'return_project' => true
+		),
+	);
 
-	$t_user_id = auth_get_current_user_id();
-	$t_lang = mci_get_user_lang( $t_user_id );
-
-	$t_project = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
-	$t_project = array_merge( $t_project, $t_project_patch );
-
-	$success = mc_project_update( /* username */ '', /* password */ '', $t_project_id, (object)$t_project );
-	ApiObjectFactory::throwIfFault( $success );
+	$t_command = new ProjectUpdateCommand( $t_data );
+	$t_result = $t_command->execute();
+	$t_project_id = $t_result['project']['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id Updated" )
-		->withJson( array( 'project' => $t_project ) );
+		->withJson( array( 'project' => $t_result['project'] ) );
 }
 
 /**
