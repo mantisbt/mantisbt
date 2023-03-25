@@ -67,6 +67,8 @@ class ProjectDeleteCommand extends Command {
 	 * @return void
 	 */
 	protected function process() {
+		event_signal( 'EVENT_MANAGE_PROJECT_DELETE', array( $this->id ) );
+
 		project_delete( $this->id );
 	}
 }
