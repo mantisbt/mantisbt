@@ -1070,11 +1070,11 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 	}
 
 	if( isset( $p_project['status'] ) ) {
-		$t_project_data['status'] = array( 'id' => $p_project['status'] );
+		$t_project_data['status'] = $p_project['status'];
 	}
 
 	if( isset( $p_project['view_state'] ) ) {
-		$t_project_data['view_state'] = array( 'id' => $p_project['view_state'] );
+		$t_project_data['view_state'] = $p_project['view_state'];
 	}
 
 	if( isset( $p_project['enabled'] ) ) {
@@ -1127,15 +1127,15 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 	}
 
 	if( isset( $p_project['description'] ) ) {
-		$t_project_data['description'] = $project['description'];
+		$t_project_data['description'] = $p_project['description'];
 	}
 
 	if( isset( $p_project['status'] ) ) {
-		$t_project_data['status'] = array( 'id' => $p_project['status'] );
+		$t_project_data['status'] = $p_project['status'];
 	}
 
 	if( isset( $p_project['view_state'] ) ) {
-		$t_project_data['view_state'] = array( 'id' => $p_project['view_state'] );
+		$t_project_data['view_state'] = $p_project['view_state'];
 	}
 
 	if( isset( $p_project['file_path'] ) ) {
@@ -1172,8 +1172,6 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
  * @return boolean returns true or false depending on the success of the delete action
  */
 function mc_project_delete( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
