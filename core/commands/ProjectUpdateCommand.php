@@ -35,7 +35,6 @@ class ProjectUpdateCommand extends Command {
 	 * Project Name
 	 * @var string
 	 */
-	 */
 	private $name;
 
 	/**
@@ -106,7 +105,14 @@ class ProjectUpdateCommand extends Command {
 	 * Validate the inputs and access level.
 	 */
 	protected function validate() {
-		$this->id = $this->query( 'id' );
+		$this->id = (int)$this->query( 'id' );
+		if( $this->id == ALL_PROJECTS || $this->id < 1 ) {
+			throw new ClientException(
+				'Project id is invalid',
+				ERROR_INVALID_FIELD_VALUE,
+				array( 'id' ) );
+		}
+
 		$t_project = $this->data['payload'];
 		if( isset( $t_project['id'] ) && (int)$t_project['id'] != (int)$this->id ) {
 			throw new ClientException(
@@ -115,7 +121,6 @@ class ProjectUpdateCommand extends Command {
 				array( 'id' ) );
 		}
 
-		// ensure that the project exists
 		if( !project_exists( $this->id ) ) {
 			throw new ClientException(
 				'Project not found',
@@ -180,6 +185,8 @@ class ProjectUpdateCommand extends Command {
 			$this->inherit_global
 		);
 
+		project_clear_cache( $this->id );
+
 		event_signal( 'EVENT_MANAGE_PROJECT_UPDATE', array( $this->id ) );
 
 		$t_result = array();
@@ -191,5 +198,7 @@ class ProjectUpdateCommand extends Command {
 		} else {
 			$t_result['id'] = $this->id;
 		}
+
+		return $t_result;
 	}
 }
