@@ -268,6 +268,7 @@ class ApiObjectFactory {
 			case ERROR_FILTER_NOT_FOUND:
 			case ERROR_TAG_NOT_FOUND:
 			case ERROR_TOKEN_NOT_FOUND:
+			case ERROR_USER_TOKEN_NOT_FOUND:
 				return ApiObjectFactory::faultNotFound( $p_exception->getMessage() );
 				
 			case ERROR_ACCESS_DENIED:
