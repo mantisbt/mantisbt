@@ -141,6 +141,19 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	}
 
 	$t_user_id = auth_get_current_user_id();
+
+	if( $t_project_id != ALL_PROJECTS ) {
+		$t_message = "Project '$t_project_id' doesn't exist";
+
+		if (!project_exists( $t_project_id ) ) {
+			return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
+		}
+
+		if( !access_has_project_level( VIEWER, $t_project_id, $t_user_id ) ) {
+			return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
+		}
+	}
+
 	$t_lang = mci_get_user_lang( $t_user_id );
 
 	$t_project_ids = user_get_all_accessible_projects( $t_user_id, $t_project_id );
