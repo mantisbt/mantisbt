@@ -43,10 +43,11 @@ function api_token_can_create( $p_user_id = null ) {
  *
  * @param string $p_token_name The name (description) identifying what the token is going to be used for.
  * @param integer $p_user_id The user id.
- * @return string The plain token.
+ * @param bool $p_return_id if true, returns an associate array with id and token.
+ * @return string|array The plain token or array of id and token.
  * @access public
  */
-function api_token_create( $p_token_name, $p_user_id ) {
+function api_token_create( $p_token_name, $p_user_id, $p_return_id = false ) {
 	if( is_blank( $p_token_name ) ) {
 		error_parameters( lang_get( 'api_token_name' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -69,6 +70,11 @@ function api_token_create( $p_token_name, $p_user_id ) {
 					( user_id, name, hash, date_created )
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query( $t_query, array( $p_user_id, (string)$t_token_name, $t_hash, $t_date_created ) );
+
+	if( $p_return_id ) {
+		$t_id = db_insert_id( db_get_table( 'api_token' ) );
+		return array( 'id' => $t_id, 'token' => $t_plain_token );
+	}
 
 	return $t_plain_token;
 }
