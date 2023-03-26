@@ -141,7 +141,7 @@ function execute_create_token_command( \Slim\Http\Request $p_request, \Slim\Http
 		'payload' => $t_payload
 	);
 
-	$t_command = new UserCreateTokenCommand( $t_data );
+	$t_command = new UserTokenCreateCommand( $t_data );
 	$t_result = $t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "User token created" )->

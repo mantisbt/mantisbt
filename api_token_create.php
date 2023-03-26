@@ -48,7 +48,7 @@ $t_data = array(
 	),
 );
 
-$t_command = new UserCreateTokenCommand( $t_data );
+$t_command = new UserTokenCreateCommand( $t_data );
 $t_result = $t_command->execute();
 
 $t_token = $t_result['token'];
