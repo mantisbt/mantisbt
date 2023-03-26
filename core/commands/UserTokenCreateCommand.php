@@ -25,7 +25,7 @@ require_once( dirname( __FILE__ ) . '/../../api/soap/mc_account_api.php' );
 /**
  * A command that creates a user API token.
  */
-class UserCreateTokenCommand extends Command {
+class UserTokenCreateCommand extends Command {
 	/**
 	 * @var integer The user id.
 	 */
@@ -77,11 +77,21 @@ class UserCreateTokenCommand extends Command {
 		// get or generate token name
 		$this->name = $this->payload( 'name', '' );
 		if( is_blank( $this->name ) ) {
+			$t_date_format = config_get( 'complete_date_format' );
 			$t_current_user_name = user_get_field( $t_current_user_id, 'username' );
-			$this->name = sprintf(
-				"%s created on %s",
-				$t_current_user_name,
-				date( 'Y-m-d H:i:s' ) );
+			$t_count = 1;
+			do {
+				$this->name = sprintf(
+					"%s created on %s",
+					$t_current_user_name,
+					date( $t_date_format ) );
+				
+				if( $t_count > 1 ) {
+					$this->name .= ' ' . $t_count;
+				}
+
+				$t_count++;
+			} while ( !api_token_name_is_unique( $this->name, $this->user_id ) );
 		}
 
 		// make sure token name is unique
