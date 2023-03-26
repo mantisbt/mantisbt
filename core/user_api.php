@@ -678,6 +678,9 @@ function user_delete( $p_user_id ) {
 	user_delete_project_specific_access_levels( $p_user_id );
 	user_clear_cache( $p_user_id );
 
+	# Revoke all API tokens
+	api_token_revoke_all( $p_user_id );
+
 	# Remove account
 	db_param_push();
 	$t_query = 'DELETE FROM {user} WHERE id=' . db_param();
