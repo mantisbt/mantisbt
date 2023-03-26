@@ -39,6 +39,22 @@ function api_token_can_create( $p_user_id = null ) {
 }
 
 /**
+ * Get token row given its id.
+ * 
+ * @param integer $p_token_id The id of the token
+ * @return array|false The token row or false if not found.
+ */
+function api_token_get( $p_token_id ) {
+	db_param_push();
+
+	$t_query = 'SELECT * FROM {api_token} WHERE id=' . db_param();
+	$t_result = db_query( $t_query, array( $p_token_id ) );
+	$t_row = db_fetch_array( $t_result );
+
+	return $t_row;
+}
+
+/**
  * Create an API token
  *
  * @param string $p_token_name The name (description) identifying what the token is going to be used for.
