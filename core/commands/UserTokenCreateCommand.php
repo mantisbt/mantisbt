@@ -64,6 +64,15 @@ class UserTokenCreateCommand extends Command {
 					ERROR_ACCESS_DENIED
 				);
 			}
+
+			$t_current_user_access_level = access_get_global_level( $t_current_user_id );
+			$t_target_user_access_level = access_get_global_level( $this->user_id );
+			if( $t_current_user_access_level < $t_target_user_access_level ) {
+				throw new ClientException(
+					"User can't create tokens for other users with higher access level.",
+					ERROR_ACCESS_DENIED
+				);
+			}
 		}
 
 		// Check if it possible to create tokens for target user - e.g. user is not protected.
