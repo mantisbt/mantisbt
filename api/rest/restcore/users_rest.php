@@ -38,6 +38,11 @@ $g_app->group('/users', function() use ( $g_app ) {
 	$g_app->post( '/{id}/token/', 'rest_user_create_token' );
 	$g_app->post( '/{id}/token', 'rest_user_create_token' );
 
+	$g_app->delete( '/me/token/{id}/', 'rest_user_delete_token_for_current_user' );
+	$g_app->delete( '/me/token/{id}', 'rest_user_delete_token_for_current_user' );
+	$g_app->delete( '/{user_id}/token/{id}/', 'rest_user_delete_token' );
+	$g_app->delete( '/{user_id}/token/{id}', 'rest_user_delete_token' );
+
 	$g_app->delete( '/{id}', 'rest_user_delete' );
 	$g_app->delete( '/{id}/', 'rest_user_delete' );
 
@@ -146,6 +151,69 @@ function execute_create_token_command( \Slim\Http\Request $p_request, \Slim\Http
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "User token created" )->
 		withJson( $t_result );
+}
+
+/**
+ * A method that deletes a user token for another user.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ *
+ * @return \Slim\Http\Response The augmented response.
+ *
+ * @noinspection PhpUnusedParameterInspection
+ */
+function rest_user_delete_token( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_token_id = $p_args['id'];
+	$t_user_id = $p_args['user_id'];
+	return execute_delete_token_command( $p_request, $p_response, $t_user_id, $t_token_id );
+}
+
+/**
+ * A method that deletes a user token for current user.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ *
+ * @return \Slim\Http\Response The augmented response.
+ *
+ * @noinspection PhpUnusedParameterInspection
+ */
+function rest_user_delete_token_for_current_user( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_token_id = $p_args['id'];
+	$t_user_id = auth_get_current_user_id();
+	return execute_delete_token_command( $p_request, $p_response, $t_user_id, $t_token_id );
+}
+
+/**
+ * Helper method for creation of user tokens
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param integer $p_user_id The id of the user to create token for.
+ *
+ * @return \Slim\Http\Response The augmented response.
+ */
+function execute_delete_token_command( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, $p_user_id, $p_token_id ) {
+	// if body is empty or {} it will fail, this is acceptable for this API.
+	$t_payload = $p_request->getParsedBody();
+	if( !$t_payload ) {
+		$t_payload = array();
+	}
+
+	$t_data = array(
+		'query' => array(
+			'id' => $p_token_id,
+			'user_id' => (int)$p_user_id
+		)
+	);
+
+	$t_command = new UserTokenDeleteCommand( $t_data );
+	$t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "User token deleted" );
 }
 
 /**
