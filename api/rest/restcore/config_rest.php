@@ -25,6 +25,9 @@
 $g_app->group('/config', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_config_get' );
 	$g_app->get( '/', 'rest_config_get' );
+
+	$g_app->patch( '', 'rest_config_set' );
+	$g_app->patch( '/', 'rest_config_set' );
 });
 
 /**
@@ -50,3 +53,26 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
 
+/**
+ * A method that does the work to handle setting a set of configs via REST API.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_config_set( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_payload = $p_request->getParsedBody();
+	if( !$t_payload ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+	}
+
+	$t_data = array(
+		'payload' => $t_payload,
+	);
+
+	$t_command = new ConfigsSetCommand( $t_data );
+	$t_command->execute( $t_data );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS );
+}
