@@ -37,8 +37,6 @@ class ConfigsSetCommand extends Command {
 	 */
 	private $user_id;
 
-	private $configs;
-
 	/**
 	 * Constructor
 	 *
@@ -81,7 +79,8 @@ class ConfigsSetCommand extends Command {
 		if( $this->project_id != ALL_PROJECTS && !project_exists( $this->project_id ) ) {
 			throw new ClientException(
 				"Project doesn't exist",
-				ERROR_PROJECT_NOT_FOUND );
+				ERROR_PROJECT_NOT_FOUND,
+				array( $this->project_id ) );
 		}
 
 		# This check is redundant if command is limited to administrator, but it is
@@ -95,7 +94,6 @@ class ConfigsSetCommand extends Command {
 				ERROR_ACCESS_DENIED );
 		}
 
-		global $g_global_settings;
 		$t_set_of_configs = $this->payload( 'configs' );
 		foreach( $t_set_of_configs as $t_config ) {
 			if( !isset( $t_config['name'] ) || is_blank( $t_config['name']) ) {
@@ -119,17 +117,6 @@ class ConfigsSetCommand extends Command {
 				continue;
 			}
 
-			# It is not allowed to set configs that are not public.
-			/*
-			global $g_public_config_names
-			if( !in_array( $t_name, $g_public_config_names ) ) {
-				throw new ClientException(
-					sprintf( "Config '%s' is not public", $t_name ),
-					ERROR_INVALID_FIELD_VALUE,
-					array( $t_name ) );
-			}
-			*/
-
 			# It is not allowed to set configs that are global and don't support db overrides
 			if( !config_can_set_in_database( $t_name ) ) {
 				throw new ClientException(
@@ -142,9 +129,12 @@ class ConfigsSetCommand extends Command {
 				$t_config['value'] = null;
 			}
 
-			# TODO: handle advanced configs like enums that may be set as string or array
+			if( ConfigsSetCommand::config_is_enum( $t_name ) &&
+			    is_array( $t_config['value'] ) ) {
+				$t_config['value'] = ConfigsSetCommand::array_to_enum_string( $t_name, $t_config['value'] );
+			}
 
-			$this->configs[] = $t_config;
+			$this->options[] = $t_config;
 		}
 	}
 
@@ -154,12 +144,75 @@ class ConfigsSetCommand extends Command {
 	 * @returns void
 	 */
 	protected function process() {
-		foreach( $this->configs as $t_config ) {
-			if( is_null( $t_config['value'] ) ) {
-				config_delete( $t_config['name'], $this->user_id, $this->project_id );
+		foreach( $this->options as $t_option ) {
+			if( is_null( $t_option['value'] ) ) {
+				config_delete( $t_option['name'], $this->user_id, $this->project_id );
 			} else {
-				config_set( $t_config['name'], $t_config['value'], $this->user_id, $this->project_id );
+				config_set( $t_option['name'], $t_option['value'], $this->user_id, $this->project_id );
 			}
 		}
+	}
+
+	/**
+	 * Checks if the specific config option is an enum.
+	 *
+	 * @param string $p_option The option name.
+	 * @return bool true enum, false otherwise.
+	 */
+	private static function config_is_enum( $p_option ) {
+		return stripos( $p_option, '_enum_string' ) !== false;
+	}
+
+	/**
+	 * Convert an enum array into an enum string representation.
+	 * 
+	 * Input: 
+	 * - array of enum entries. Each enum entry has an id and name.
+	 * - Note that label (localized name) is not settable and hence not expected.
+	 */
+	private static function array_to_enum_string( $p_enum_name, $p_enum_array ) {
+		$t_enum_string = '';
+
+		foreach( $p_enum_array as $t_entry ) {
+			if( !isset( $t_entry['id'] ) || !isset( $t_entry['name'] ) ) {
+				throw new ClientException(
+					sprintf( "Enum '%s' missing 'id' or 'name' field for an entry", $p_enum_name ),
+					ERROR_INVALID_FIELD_VALUE,
+					array( $p_enum_name )
+				);
+			}
+
+			if( !is_numeric( $t_entry['id'] ) ) {
+				throw new ClientException(
+					sprintf( "Enum '%s' has 'id' that is not numeric", $p_enum_name ),
+					ERROR_INVALID_FIELD_VALUE,
+					array( $p_enum_name )
+				);
+			}
+
+			if( isset( $t_entry['label'] ) ) {
+				throw new ClientException(
+					sprintf( "Enum '%s' has 'label' property which is not supported", $p_enum_name ),
+					ERROR_INVALID_FIELD_VALUE,
+					array( $p_enum_name )
+				);
+			}
+
+			if( !preg_match('/^[a-zA-Z0-9_-]+$/', $t_entry['name'] ) ) {
+				throw new ClientException(
+					sprintf( "Enum '%s' has invalid enum entry name '%s'.", $p_enum_name, $t_entry['name'] ),
+					ERROR_INVALID_FIELD_VALUE,
+					array( $p_enum_name )
+				);
+			}
+
+			if( !empty( $t_enum_string ) ) {
+				$t_enum_string .= ',';
+			}
+
+			$t_enum_string .= (int)$t_entry['id'] . ':' . $t_entry['name'];
+		}
+
+		return $t_enum_string;
 	}
 }
