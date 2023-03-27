@@ -96,14 +96,14 @@ class ConfigsSetCommand extends Command {
 
 		$t_set_of_configs = $this->payload( 'configs' );
 		foreach( $t_set_of_configs as $t_config ) {
-			if( !isset( $t_config['name'] ) || is_blank( $t_config['name']) ) {
+			if( !isset( $t_config['option'] ) || is_blank( $t_config['option']) ) {
 				throw new ClientException(
-					'Config name not provided',
+					'Config option not provided',
 					ERROR_EMPTY_FIELD,
-					array( 'name' ) );
+					array( 'option' ) );
 			};
 
-			$t_name = $t_config['name'];
+			$t_name = $t_config['option'];
 
 			# Silently ignore unknown configs - similar to get configs. This may be useful for
 			# compatibility with different MantisBT versions.
@@ -146,9 +146,9 @@ class ConfigsSetCommand extends Command {
 	protected function process() {
 		foreach( $this->options as $t_option ) {
 			if( is_null( $t_option['value'] ) ) {
-				config_delete( $t_option['name'], $this->user_id, $this->project_id );
+				config_delete( $t_option['option'], $this->user_id, $this->project_id );
 			} else {
-				config_set( $t_option['name'], $t_option['value'], $this->user_id, $this->project_id );
+				config_set( $t_option['option'], $t_option['value'], $this->user_id, $this->project_id );
 			}
 		}
 	}
