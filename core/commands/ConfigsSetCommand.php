@@ -16,6 +16,8 @@
 
 use Mantis\Exceptions\ClientException;
 
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
+
 /**
  * A command that sets config options.
  * 
@@ -113,6 +115,12 @@ class ConfigsSetCommand extends Command {
 				continue;
 			}
 
+			# make sure that configuration option specified is a valid one.
+			$t_not_found_value = '***CONFIG OPTION NOT FOUND***';
+			if( config_get( $t_name, $t_not_found_value ) === $t_not_found_value ) {
+				continue;
+			}
+
 			# these are config options that are stored in the database, but can't be deleted
 			# or modified. For example, database_version (schema version).
 			if( !config_can_delete( $t_name ) ) {
@@ -138,6 +146,23 @@ class ConfigsSetCommand extends Command {
 
 			$this->options[] = $t_config;
 		}
+
+		# This mode is only for web UI and it will always have a single config option
+		if( MANAGE_CONFIG_ACTION_EDIT === $this->option( 'edit_action', MANAGE_CONFIG_ACTION_CREATE ) ) {
+			$t_original_option = $this->option( 'original_option', '' );
+			$t_original_user_id = (int)$this->option( 'original_user_id', '' );
+			$t_original_project_id = (int)$this->option( 'original_project_id', '' );
+
+			if( count( $this->options ) != 1 ||
+				is_blank( $t_original_option ) ||
+				is_blank( $t_original_user_id ) ||
+				is_blank( $t_original_project_id ) ) {
+				throw new ClientException(
+					'Invalid parameters for edit action',
+					ERROR_INVALID_FIELD_VALUE,
+					array( 'edit_action' ) );
+			}
+		}
 	}
 
 	/**
@@ -146,7 +171,23 @@ class ConfigsSetCommand extends Command {
 	 * @returns void
 	 */
 	protected function process() {
-		foreach( $this->options as $t_option ) {
+		# The edit case is internal only to web UI and it will always have a single config option
+		if( MANAGE_CONFIG_ACTION_EDIT === $this->option( 'edit_action', MANAGE_CONFIG_ACTION_CREATE ) ) {
+			$t_original_option = $this->option( 'original_option' );
+			$t_original_user_id = (int)$this->option( 'original_user_id' );
+			$t_original_project_id = (int)$this->option( 'original_project_id' );
+
+			$t_option = $this->options[0];
+
+			# EDIT action doesn't keep original if key values are different.
+			if ( $t_original_option !== $t_option['option']
+					|| $t_original_user_id !== $this->user_id
+					|| $t_original_project_id !== $this->project_id ) {
+				config_delete( $t_original_option, $t_original_user_id, $t_original_project_id );
+			}
+		}
+
+		foreach( $this->options as $t_option ) {			
 			if( is_null( $t_option['value'] ) ) {
 				config_delete( $t_option['option'], $this->user_id, $this->project_id );
 			} else {
