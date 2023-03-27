@@ -48,12 +48,14 @@ class ConfigsSetCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 * 
+	 * @return void
 	 */
 	function validate() {
 		$t_current_user_id = auth_get_current_user_id();
 
-		// verify that user has administrator access
-		$t_access_level_required = config_get_global( 'admin_site_threshold' );
+		// verify that user has appropriate access level to set configuration via database
+		$t_access_level_required = config_get_global( 'set_configuration_threshold' );
 		if( !access_has_global_level( $t_access_level_required, $t_current_user_id ) ) {
 			throw new ClientException(
 				"User doesn't have access to set configs.",
