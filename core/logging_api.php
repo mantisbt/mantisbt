@@ -83,9 +83,15 @@ function log_event( $p_level, $p_msg ) {
 	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
 
-	$t_plugin_event = '[' . $t_level . '] ' . $t_msg;
-	if( function_exists( 'event_signal' ) ) {
+	# Prevent recursion from plugins hooked on EVENT_LOG
+	static $s_event_log_called = false;
+	# Checking existence of event_signal function is required, because Logging
+	# API is loaded before Event API.
+	if( !$s_event_log_called && function_exists( 'event_signal' ) ) {
+		$t_plugin_event = '[' . $t_level . '] ' . $t_msg;
+		$s_event_log_called = true;
 		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
+		$s_event_log_called = false;
 	}
 
 	$t_log_destination = config_get_global( 'log_destination' );
