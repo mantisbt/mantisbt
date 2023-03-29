@@ -197,12 +197,6 @@ function rest_user_delete_token_for_current_user( \Slim\Http\Request $p_request,
  * @return \Slim\Http\Response The augmented response.
  */
 function execute_delete_token_command( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, $p_user_id, $p_token_id ) {
-	// if body is empty or {} it will fail, this is acceptable for this API.
-	$t_payload = $p_request->getParsedBody();
-	if( !$t_payload ) {
-		$t_payload = array();
-	}
-
 	$t_data = array(
 		'query' => array(
 			'id' => $p_token_id,
