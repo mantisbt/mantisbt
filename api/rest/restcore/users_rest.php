@@ -35,13 +35,13 @@ $g_app->group('/users', function() use ( $g_app ) {
 
 	$g_app->post( '/me/token/', 'rest_user_create_token_for_current_user' );
 	$g_app->post( '/me/token', 'rest_user_create_token_for_current_user' );
-	$g_app->post( '/{id}/token/', 'rest_user_create_token' );
-	$g_app->post( '/{id}/token', 'rest_user_create_token' );
+	$g_app->post( '/{user_id}/token/', 'rest_user_create_token' );
+	$g_app->post( '/{user_id}/token', 'rest_user_create_token' );
 
-	$g_app->delete( '/me/token/{id}/', 'rest_user_delete_token_for_current_user' );
-	$g_app->delete( '/me/token/{id}', 'rest_user_delete_token_for_current_user' );
-	$g_app->delete( '/{user_id}/token/{id}/', 'rest_user_delete_token' );
-	$g_app->delete( '/{user_id}/token/{id}', 'rest_user_delete_token' );
+	$g_app->delete( '/me/token/{token_id}/', 'rest_user_delete_token_for_current_user' );
+	$g_app->delete( '/me/token/{token_id}', 'rest_user_delete_token_for_current_user' );
+	$g_app->delete( '/{user_id}/token/{token_id}/', 'rest_user_delete_token' );
+	$g_app->delete( '/{user_id}/token/{token_id}', 'rest_user_delete_token' );
 
 	$g_app->delete( '/{id}', 'rest_user_delete' );
 	$g_app->delete( '/{id}/', 'rest_user_delete' );
@@ -103,7 +103,7 @@ function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_create_token( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_user_id = $p_args['id'];
+	$t_user_id = $p_args['user_id'];
 	return execute_create_token_command( $p_request, $p_response, $t_user_id );
 }
 
@@ -165,7 +165,7 @@ function execute_create_token_command( \Slim\Http\Request $p_request, \Slim\Http
  * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_delete_token( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_token_id = $p_args['id'];
+	$t_token_id = $p_args['token_id'];
 	$t_user_id = $p_args['user_id'];
 	return execute_delete_token_command( $p_request, $p_response, $t_user_id, $t_token_id );
 }
@@ -182,7 +182,7 @@ function rest_user_delete_token( \Slim\Http\Request $p_request, \Slim\Http\Respo
  * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_delete_token_for_current_user( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_token_id = $p_args['id'];
+	$t_token_id = $p_args['token_id'];
 	$t_user_id = auth_get_current_user_id();
 	return execute_delete_token_command( $p_request, $p_response, $t_user_id, $t_token_id );
 }
