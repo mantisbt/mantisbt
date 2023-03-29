@@ -57,6 +57,14 @@ class UserTokenDeleteCommand extends Command {
 					ERROR_ACCESS_DENIED
 				);
 			}
+
+			// Make sure $this->user_id
+			if( !user_exists( $this->user_id ) ) {
+				throw new ClientException(
+					"User doesn't exist",
+					ERROR_USER_BY_ID_NOT_FOUND
+				);
+			}
 		}
 
 		// ensure target user is not protected
@@ -69,18 +77,11 @@ class UserTokenDeleteCommand extends Command {
 
 		$t_row = api_token_get( $t_token_id );
 
-		if( $t_row === false ) {
+		// Return not found if token doesn't exist or target user doesn't own token with specified id.
+		if( $t_row === false || (int)$t_row['user_id'] != $this->user_id ) {
 			throw new ClientException(
 				"Token doesn't exist",
 				ERROR_USER_TOKEN_NOT_FOUND
-			);
-		}
-
-		// Target user doesn't own token with specified id.
-		if( (int)$t_row['user_id'] != $this->user_id ) {
-			throw new ClientException(
-				"User can't revoke token",
-				ERROR_ACCESS_DENIED
 			);
 		}
 	}
