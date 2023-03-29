@@ -32,11 +32,6 @@ class UserTokenDeleteCommand extends Command {
 	private $user_id;
 
 	/**
-	 * @var string The token name.
-	 */
-	private $name;
-
-	/**
 	 * Constructor
 	 *
 	 * @param array $p_data The command data.
@@ -49,16 +44,14 @@ class UserTokenDeleteCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {
-		// acting user id
 		$t_current_user_id = auth_get_current_user_id();
-
-		// user is to create token for
-		$this->user_id = (int)$this->query( 'user_id' );
+		$t_token_id = $this->query( 'id' );
+		$this->user_id = (int)$this->query( 'user_id', $t_current_user_id );
 
 		// any user can create a token for themselves, but only an admin can create for other users.
 		if( $t_current_user_id != $this->user_id ) {
 			// if not administrator, throw a client exception
-			if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
+			if( !access_has_global_level( config_get_global( 'impersonate_user_threshold' ) ) ) {
 				throw new ClientException(
 					"User can't create tokens for other users",
 					ERROR_ACCESS_DENIED
@@ -74,7 +67,6 @@ class UserTokenDeleteCommand extends Command {
 			);
 		}
 
-		$t_token_id = $this->query( 'id' );
 		$t_row = api_token_get( $t_token_id );
 
 		if( $t_row === false ) {
