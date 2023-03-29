@@ -66,6 +66,15 @@ class UserTokenCreateCommand extends Command {
 				);
 			}
 
+			// Make sure $this->user_id
+			if( !user_exists( $this->user_id ) ) {
+				throw new ClientException(
+					"User doesn't exist",
+					ERROR_USER_BY_ID_NOT_FOUND
+				);
+			}
+
+			// User is not creating an access token for a user with higher access level
 			$t_current_user_access_level = access_get_global_level( $t_current_user_id );
 			$t_target_user_access_level = access_get_global_level( $this->user_id );
 			if( $t_current_user_access_level < $t_target_user_access_level ) {
