@@ -70,7 +70,8 @@ class UserTokenCreateCommand extends Command {
 			if( !user_exists( $this->user_id ) ) {
 				throw new ClientException(
 					"User doesn't exist",
-					ERROR_USER_BY_ID_NOT_FOUND
+					ERROR_USER_BY_ID_NOT_FOUND,
+					array( $this->user_id ),
 				);
 			}
 

@@ -62,7 +62,8 @@ class UserTokenDeleteCommand extends Command {
 			if( !user_exists( $this->user_id ) ) {
 				throw new ClientException(
 					"User doesn't exist",
-					ERROR_USER_BY_ID_NOT_FOUND
+					ERROR_USER_BY_ID_NOT_FOUND,
+					array( $this->user_id ),
 				);
 			}
 		}
@@ -81,7 +82,8 @@ class UserTokenDeleteCommand extends Command {
 		if( $t_row === false || (int)$t_row['user_id'] != $this->user_id ) {
 			throw new ClientException(
 				"Token doesn't exist",
-				ERROR_USER_TOKEN_NOT_FOUND
+				ERROR_USER_TOKEN_NOT_FOUND,
+				array( $t_token_id ),
 			);
 		}
 	}
