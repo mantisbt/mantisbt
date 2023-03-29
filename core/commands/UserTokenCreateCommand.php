@@ -55,12 +55,13 @@ class UserTokenCreateCommand extends Command {
 		// user is to create token for
 		$this->user_id = $this->query( 'user_id' );
 
-		// any user can create a token for themselves, but only an admin can create for other users.
+		// any user can create a token for themselves, but further checks are needed to
+		// create tokens for other users.
 		if( $t_current_user_id != $this->user_id ) {
-			// if not administrator, throw a client exception
-			if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
+			// User has access level to impersonate other users
+			if( !access_has_global_level( config_get_global( 'impersonate_user_threshold' ) ) ) {
 				throw new ClientException(
-					"User can't create tokens for other users",
+					"User doesn't have access level to impersonate other users.",
 					ERROR_ACCESS_DENIED
 				);
 			}
