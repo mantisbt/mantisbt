@@ -164,9 +164,10 @@ function mci_filter_delete( $p_filter_id ) {
  *                               or standard filter (see FILTER_STANDARD_* constants).
  * @param integer $p_page_number Start with the given page number (zero-based).
  * @param integer $p_per_page    Number of issues to display per page.
+ * @param array|null $p_fields   The list of fields to retrieve for the issues, or null for all.
  * @return array that represents an IssueDataArray structure
  */
-function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
+function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page, $p_fields = null ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
@@ -218,7 +219,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 
 	$t_result = array();
 	foreach( $t_rows as $t_issue_data ) {
-		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
+		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang, $p_fields );
 	}
 
 	return $t_result;
