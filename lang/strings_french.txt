@@ -72,6 +72,7 @@
  * @author Zetud
  */
 
+$s_directionality = 'ltr';
 $s_actiongroup_menu_copy = 'Copier';
 $s_actiongroup_menu_assign = 'Assigner';
 $s_actiongroup_menu_resolve = 'Résoudre';
@@ -1428,6 +1429,7 @@ $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Le champ « %1$s » doit comporter mo
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Le nom de jeton de l’API « %s » est déjà utilisé. Veuillez revenir en arrière et en sélectionner un autre.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Le fichier spécifié dans $g_log_destination « %s » ne peut pas être écrit.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'L’utilisateur ajouté n’a pas les droits d’accès suffisants pour suivre ce problème.';
+$MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'Jeton de l’API pour l’utilisateur non trouvé avec l’identifiant « %d ».';
 $s_dropzone_default_message = 'Joignez les fichiers en les glissant-déposant, en les sélectionnant ou en les collant.';
 $s_dropzone_fallback_message = 'Votre navigateur ne prend pas en charge le téléversement de fichiers par glisser-déposer.';
 $s_dropzone_file_too_big = 'Le fichier est trop gros ({{filesize}} Mio). Taille maximale : {{maxFilesize}} Mio.';

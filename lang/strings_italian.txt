@@ -1395,6 +1395,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'È stato raggiunto il limite di attività
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'il campo "%1$s" deve avere una lunghezza massima di %2$d carattere/i.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Il nome del token API "%s" è già in uso. Si prega di tornare indietro e selezionarne un altro.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Il file specificato in $g_log_destination "%s" non è scrivibile.';
+$MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'Token API utente con ID "%d" non trovato.';
 $s_dropzone_default_message = 'Allega i file trascinandoli, selezionandoli e incollandoli.';
 $s_dropzone_fallback_message = 'Il tuo browser non supporta il caricamento dei file mediante il <i>drag and drop</i>.';
 $s_dropzone_file_too_big = 'Il file è troppo grande ({{filesize}} MiB). Dimensione massima: {{maxFilesize}} MiB.';
