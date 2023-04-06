@@ -1257,6 +1257,7 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'No es pot accedir a aquesta pàgi
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Camp d\'ordenació no vàlid.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Format de la data no vàlid.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'No es pot actualitzar el fus horari.';
+$MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'No s\'ha trobat el testimoni de l\'API d\'usuari amb l\'identificador " %d ".';
 $s_dropzone_default_message = 'Adjunteu fitxers arrossegant-los i soltant-los, seleccionant-los i enganxant-los.';
 $s_dropzone_fallback_message = 'El teu navegador no admet la pujada d\'arxius mitjançant arrossegament i deixar anar.';
 $s_dropzone_invalid_file_type = 'Vostè no pot pujar arxius d\'aquest tipus.';
