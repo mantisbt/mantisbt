@@ -1422,6 +1422,7 @@ $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Das Feld „%1$s“ muss kürzer oder gle
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Der Name des API-Tokens „%s“ ist bereits in Verwendung.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Die in $g_log_destination angegebene Datei „%s“ ist nicht beschreibbar.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Der hinzugefügte Benutzer hat keine ausreichenden Rechte, um diesen Eintrag zu beobachten.';
+$MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'Benutzer API-Token mit ID "%d" nicht gefunden.';
 $s_dropzone_default_message = 'Dateien hier zum Hochladen ablegen, oder klicken oder einfügen.';
 $s_dropzone_fallback_message = 'Ihr Webbrowser unterstützt keine Dateiuploads durch Ziehen und Ablegen.';
 $s_dropzone_file_too_big = 'Die Datei ist zu groß ({{filesize}} MiB). Maximale Dateigröße: {{maxFilesize}} MiB.';
