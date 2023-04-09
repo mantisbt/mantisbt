@@ -48,7 +48,7 @@ $f_inherit_global = gpc_get_bool( 'inherit_global', 0 );
 
 $t_data = array(
 	'query' => array(
-		'id' => $f_project_id,
+		'id' => $f_project_id
 	),
 	'payload' => array(
 		'name' => $f_name,
@@ -57,7 +57,7 @@ $t_data = array(
 		'view_state' => array( 'id' => $f_view_state ),
 		'file_path' => $f_file_path,
 		'enabled' => $f_enabled,
-		'inherit_global' => $f_inherit_global,
+		'inherit_global' => $f_inherit_global
 	)
 );
 

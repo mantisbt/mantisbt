@@ -55,8 +55,8 @@ $f_project_id = gpc_get_int( 'project_id' );
 
 $t_data = array(
 	'query' => array(
-		'id' => $f_project_id,
-	),
+		'id' => $f_project_id
+	)
 );
 
 $t_command = new ProjectDeleteCommand( $t_data );
@@ -66,6 +66,7 @@ $t_message = sprintf( lang_get( 'project_delete_msg' ),
 	string_attribute( project_get_name( $f_project_id ) ),
 	project_get_bug_count( $f_project_id )
 );
+
 helper_ensure_confirmed( $t_message, lang_get( 'project_delete_button' ) );
 
 $t_command->execute();
