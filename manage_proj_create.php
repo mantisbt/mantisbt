@@ -69,10 +69,10 @@ $t_data = array(
 		'file_path' => $f_file_path,
 		'inherit_global' => $f_inherit_global,
 		'view_state' => array( 'id' => $f_view_state ),
-		'status' => array( 'id' => $f_status ),
+		'status' => array( 'id' => $f_status )
 	),
 	'options' => array(
-		'return_project' => false,
+		'return_project' => false
 	)
 );
 

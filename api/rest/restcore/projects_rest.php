@@ -269,7 +269,7 @@ function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 		'payload' => $t_payload,
 		'options' => array(
 			'return_project' => true
-		),
+		)
 	);
 
 	$t_command = new ProjectAddCommand( $t_data );
@@ -311,7 +311,7 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 		'payload' => $t_payload,
 		'options' => array(
 			'return_project' => true
-		),
+		)
 	);
 
 	$t_command = new ProjectUpdateCommand( $t_data );
