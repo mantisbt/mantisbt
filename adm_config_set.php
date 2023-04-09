@@ -105,8 +105,8 @@ $t_data = array(
 			array(
 				'option' => $f_config_option,
 				'value' => $t_value,
-			),
-		),	
+			)
+		)
 	),
 	'options' => array(
 		'edit_action' => $f_edit_action,
