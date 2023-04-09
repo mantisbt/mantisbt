@@ -56,9 +56,9 @@ $t_data = array(
 			array(
 				'option' => $f_config_option,
 				'value' => null,
-			),
-		),
-	),
+			)
+		)
+	)
 );
 
 $t_command = new ConfigsSetCommand( $t_data );
