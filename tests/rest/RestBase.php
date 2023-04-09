@@ -127,7 +127,7 @@ class RestBase extends PHPUnit\Framework\TestCase {
 		}
 	}
 
-	protected function delete( $p_relative_path, $p_query_string ) {
+	protected function delete( $p_relative_path, $p_query_string = null ) {
 		$t_client = new \GuzzleHttp\Client();
 		$t_options = array(
 			'allow_redirects' => false,
@@ -137,7 +137,30 @@ class RestBase extends PHPUnit\Framework\TestCase {
 			),
 		);
 
-		return $t_client->request( 'DELETE', $this->base_path . $p_relative_path . '?' . $p_query_string, $t_options );
+		$t_url = $this->base_path . $p_relative_path;
+		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
+			$t_url .= '?' . $p_query_string;
+		}
+
+		return $t_client->request( 'DELETE', $t_url, $t_options );
+	}
+
+	protected function get( $p_relative_path, $p_query_string = null ) {
+		$t_client = new \GuzzleHttp\Client();
+		$t_options = array(
+			'allow_redirects' => false,
+			'http_errors' => false,
+			'headers' => array(
+				'Authorization' => $this->token,
+			),
+		);
+
+		$t_url = $this->base_path . $p_relative_path;
+		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
+			$t_url .= '?' . $p_query_string;
+		}
+
+		return $t_client->request( 'GET', $t_url, $t_options );
 	}
 
 	/**
@@ -157,6 +180,25 @@ class RestBase extends PHPUnit\Framework\TestCase {
 		);
 
 		return $t_client->request( 'POST', $this->base_path . $p_relative_path, $t_options );
+	}
+
+	/**
+	 * @param string $p_relative_path The relative path under `/api/rest/` e.g. `/issues`.
+	 * @param mixed $p_payload The payload object, it will be json encoded before sending.
+	 * @return mixed|string The response object.
+	 */
+	protected function patch( $p_relative_path, $p_payload ) {
+		$t_client = new \GuzzleHttp\Client();
+		$t_options = array(
+			'allow_redirects' => false,
+			'http_errors' => false,
+			'json' => $p_payload,
+			'headers' => array(
+				'Authorization' => $this->token,
+			),
+		);
+
+		return $t_client->request( 'PATCH', $this->base_path . $p_relative_path, $t_options );
 	}
 
 	/**
