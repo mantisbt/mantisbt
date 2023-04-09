@@ -68,11 +68,11 @@ function rest_config_set( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 	}
 
 	$t_data = array(
-		'payload' => $t_payload,
+		'payload' => $t_payload
 	);
 
 	$t_command = new ConfigsSetCommand( $t_data );
-	$t_command->execute( $t_data );
+	$t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS );
 }
