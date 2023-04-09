@@ -29,6 +29,7 @@
  */
 $g_app->group('/users', function() use ( $g_app ) {
 	$g_app->get( '/me', 'rest_user_get_me' );
+	$g_app->get( '/{user_id}', 'rest_user_get' );
 
 	$g_app->post( '/', 'rest_user_create' );
 	$g_app->post( '', 'rest_user_create' );
@@ -62,6 +63,33 @@ $g_app->group('/users', function() use ( $g_app ) {
  */
 function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_result = mci_user_get( auth_get_current_user_id() );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+}
+
+/**
+ * A method that does the work to get information about the specified user.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ *
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_user_id = $p_args['user_id'];
+	if( $t_user_id <= 0 ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid user id $t_user_id" );
+	}
+
+	if( !access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+		return $p_response->withStatus( HTTP_STATUS_FORBIDDEN, "Access denied" );
+	}
+
+	if( !user_exists( $t_user_id ) ) {
+		return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, "User $t_user_id not found" );
+	}
+
+	$t_result = mci_user_get( $t_user_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
 
