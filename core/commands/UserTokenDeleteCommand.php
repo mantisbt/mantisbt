@@ -63,7 +63,7 @@ class UserTokenDeleteCommand extends Command {
 				throw new ClientException(
 					"User doesn't exist",
 					ERROR_USER_BY_ID_NOT_FOUND,
-					array( $this->user_id ),
+					array( $this->user_id )
 				);
 			}
 		}
@@ -83,7 +83,7 @@ class UserTokenDeleteCommand extends Command {
 			throw new ClientException(
 				"Token doesn't exist",
 				ERROR_USER_TOKEN_NOT_FOUND,
-				array( $t_token_id ),
+				array( $t_token_id )
 			);
 		}
 	}
@@ -98,4 +98,3 @@ class UserTokenDeleteCommand extends Command {
 		api_token_revoke( $t_token_id, $this->user_id );
 	}
 }
-
