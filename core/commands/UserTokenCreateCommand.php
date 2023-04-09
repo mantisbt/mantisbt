@@ -71,7 +71,7 @@ class UserTokenCreateCommand extends Command {
 				throw new ClientException(
 					"User doesn't exist",
 					ERROR_USER_BY_ID_NOT_FOUND,
-					array( $this->user_id ),
+					array( $this->user_id )
 				);
 			}
 
@@ -132,10 +132,9 @@ class UserTokenCreateCommand extends Command {
 			'id' => $t_token_result['id'],
 			'name' => $this->name,
 			'token' => $t_token_result['token'],
-			'user' => mci_account_get_array_by_id( $this->user_id ),
+			'user' => mci_account_get_array_by_id( $this->user_id )
 		);
 
 		return $t_result;
 	}
 }
-
