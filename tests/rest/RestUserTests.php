@@ -33,11 +33,6 @@ require_once 'RestBase.php';
  */
 class RestUserTests extends RestBase {
 	/**
-	 * @var array List of user ids to delete in tearDown()
-	 */
-	private $usersToDelete = array();
-
-	/**
 	 * Setup test fixture
 	 *
 	 * @return void
@@ -76,7 +71,7 @@ class RestUserTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->anonymous()->send();
-		$this->deleteUserIfCreated( $t_response );
+		$this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 401, $t_response->getStatusCode() );
 	}
 
@@ -91,7 +86,7 @@ class RestUserTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
-		$this->deleteUserIfCreated( $t_response );
+		$this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
 		$t_body = json_decode( $t_response->getBody(), true );
@@ -126,7 +121,7 @@ class RestUserTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
-		$this->deleteUserIfCreated( $t_response );
+		$this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
 		$t_body = json_decode( $t_response->getBody(), true );
@@ -154,7 +149,7 @@ class RestUserTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
-		$this->deleteUserIfCreated( $t_response );
+		$this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
@@ -170,7 +165,7 @@ class RestUserTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
-		$t_user_id = $this->deleteUserIfCreated( $t_response );
+		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
@@ -199,7 +194,7 @@ class RestUserTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
-		$t_user_id = $this->deleteUserIfCreated( $t_response );
+		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->anonymous()->send();
@@ -255,7 +250,7 @@ class RestUserTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
-		$t_user_id = $this->deleteUserIfCreated( $t_response );
+		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
@@ -277,7 +272,7 @@ class RestUserTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
-		$t_user_id = $this->deleteUserIfCreated( $t_response );
+		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
@@ -343,7 +338,7 @@ class RestUserTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
-		$this->deleteUserIfCreated( $t_response );
+		$this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
@@ -384,29 +379,6 @@ class RestUserTests extends RestBase {
 	 * Tear down the test fixture.
 	 */
 	public function tearDown() {
-		foreach( $this->usersToDelete as $t_user_id ) {
-			$t_response = $this->builder()->delete( '/users/' . $t_user_id, '' )->send();
-			$this->assertEquals( 204, $t_response->getStatusCode() );
-		}
-
 		parent::tearDown();
-	}
-
-	/**
-	 * Capture user id to be deleted in tearDown
-	 *
-	 * return int|bool The user id or false if no user was created.
-	 */
-	private function deleteUserIfCreated( $p_response ) {
-		$t_user_id = false;
-
-		if( $p_response->getStatusCode() == 201 ) {
-			$t_body = json_decode( $p_response->getBody(), true );
-			$t_user = $t_body['user'];
-			$t_user_id = (int)$t_user['id'];
-			$this->usersToDelete[] = $t_user_id;
-		}
-
-		return $t_user_id;
 	}
 }

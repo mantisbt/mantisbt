@@ -110,7 +110,7 @@ class RestIssueTests extends RestBase {
 		$this->assertTrue( isset( $t_issue['created_at'] ), 'created at' );
 		$this->assertTrue( isset( $t_issue['updated_at'] ), 'updated at' );
 
-		$this->deleteAfterRun( $t_issue['id'] );
+		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
 	public function testCreateIssueWithEnumIds() {
@@ -167,7 +167,7 @@ class RestIssueTests extends RestBase {
 		$this->assertTrue( isset( $t_issue['created_at'] ), 'created at' );
 		$this->assertTrue( isset( $t_issue['updated_at'] ), 'updated at' );
 
-		$this->deleteAfterRun( $t_issue['id'] );
+		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
 	public function testCreateIssueWithVersionString() {
@@ -195,7 +195,7 @@ class RestIssueTests extends RestBase {
 		$this->assertEquals( $t_target_version_name, $t_issue['target_version']['name'] );
 		$this->assertEquals( $t_fixed_in_version_name, $t_issue['fixed_in_version']['name'] );
 
-		$this->deleteAfterRun( $t_issue['id'] );
+		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
 	public function testCreateIssueWithVersionObjectName() {
@@ -220,7 +220,7 @@ class RestIssueTests extends RestBase {
 		$this->assertFalse( isset( $t_issue['target_version'] ), 'target_version set' );
 		$this->assertFalse( isset( $t_issue['fixed_in_version'] ), 'fixed_in_version set' );
 
-		$this->deleteAfterRun( $t_issue['id'] );
+		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
 	public function testCreateIssueWithVersionObjectId() {
@@ -247,7 +247,7 @@ class RestIssueTests extends RestBase {
 		$this->assertFalse( isset( $t_issue['target_version'] ), 'target_version set' );
 		$this->assertFalse( isset( $t_issue['fixed_in_version'] ), 'fixed_in_version set' );
 
-		$this->deleteAfterRun( $t_issue['id'] );
+		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
 	public function testCreateIssueWithVersionObjectIdAndMistatchingName() {
@@ -275,7 +275,7 @@ class RestIssueTests extends RestBase {
 		$this->assertFalse( isset( $t_issue['target_version'] ), 'target_version set' );
 		$this->assertFalse( isset( $t_issue['fixed_in_version'] ), 'fixed_in_version set' );
 
-		$this->deleteAfterRun( $t_issue['id'] );
+		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
 	public function testCreateIssueWithVersionObjectIdNotFound() {
@@ -333,7 +333,7 @@ class RestIssueTests extends RestBase {
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
 
-		$this->deleteAfterRun( $t_issue_id );
+		$this->deleteIssueAfterRun( $t_issue_id );
 	}
 
 	public function testCreateIssueWithTagExisting() {
@@ -345,7 +345,7 @@ class RestIssueTests extends RestBase {
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
 
-		$this->deleteAfterRun( $t_issue_id );
+		$this->deleteIssueAfterRun( $t_issue_id );
 
 		# Tag by id
 		$t_tag = tag_get_by_name( $this->tag_name );
@@ -354,7 +354,7 @@ class RestIssueTests extends RestBase {
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
 
-		$this->deleteAfterRun( $t_issue_id );
+		$this->deleteIssueAfterRun( $t_issue_id );
 	}
 
 	/**
@@ -460,7 +460,7 @@ class RestIssueTests extends RestBase {
 		if( $t_response->getStatusCode() == HTTP_STATUS_CREATED ) {
 			$t_body = json_decode( $t_response->getBody(), true );
 			$t_issue = $t_body['issue'];
-			$this->deleteAfterRun( $t_issue['id'] );
+			$this->deleteIssueAfterRun( $t_issue['id'] );
 		}
 	}
 

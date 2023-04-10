@@ -82,6 +82,10 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	private $issueIdsToDelete = array();
 
 	/**
+	 * @var array List of user ids to delete in tearDown()
+	 */
+	private $usersToDelete = array();
+	/**
 	 * setUp
 	 * @return void
 	 */
@@ -123,6 +127,11 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	 * @return void
 	 */
 	protected function tearDown() {
+		foreach( $this->usersToDelete as $t_user_id ) {
+			$t_response = $this->builder()->delete( '/users/' . $t_user_id, '' )->send();
+			$this->assertEquals( 204, $t_response->getStatusCode() );
+		}
+
 		foreach ( $this->issueIdsToDelete as $t_issue_id_to_delete ) {
 			$this->builder()->delete( '/issues', 'id=' . $t_issue_id_to_delete )->send();
 		}
@@ -177,8 +186,27 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	 * @param integer $p_issue_id Issue identifier.
 	 * @return void
 	 */
-	protected function deleteAfterRun( $p_issue_id ) {
+	protected function deleteIssueAfterRun( $p_issue_id ) {
 		$this->issueIdsToDelete[] = $p_issue_id;
+	}
+
+	/**
+	 * Capture user id to be deleted in tearDown
+	 *
+	 * return int|bool The user id or false if no user was created.
+	 */
+	protected function deleteAfterRunUserIfCreated( $p_response ) {
+		$t_user_id = false;
+		$t_response_code = $p_response->getStatusCode();
+
+		if( $t_response_code >= 200 && $t_response_code < 300 ) {
+			$t_body = json_decode( $p_response->getBody(), true );
+			$t_user = $t_body['user'];
+			$t_user_id = (int)$t_user['id'];
+			$this->usersToDelete[] = $t_user_id;
+		}
+
+		return $t_user_id;
 	}
 
 	/**
