@@ -26,8 +26,8 @@
 /**
  * Test config
  */
-require_once __DIR__ . '/RestIssueAddTest.php';
-require_once __DIR__ . '/RestUserTest.php';
+require_once __DIR__ . '/RestIssueTests.php';
+require_once __DIR__ . '/RestUserTests.php';
 
 /**
  * Soap Test Suite
@@ -52,8 +52,8 @@ class RestAllTests extends PHPUnit\Framework\TestSuite
 	public static function suite() {
 		$t_suite = new RestAllTests( 'REST API' );
 
-		$t_suite->addTestSuite( 'RestIssueAddTest' );
-		$t_suite->addTestSuite( 'RestUserTest' );
+		$t_suite->addTestSuite( 'RestIssueTests' );
+		$t_suite->addTestSuite( 'RestUserTests' );
 
 		return $t_suite;
 	}
