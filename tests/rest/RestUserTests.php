@@ -169,7 +169,11 @@ class RestUserTests extends RestBase {
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
 		$this->assertEquals( 200, $t_response->getStatusCode() );
 
-		$t_user = json_decode( $t_response->getBody(), true );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->assertTrue( isset( $t_body['users'] ) );
+		$this->assertEquals( 1, count( $t_body['users'] ) );
+
+		$t_user = $t_body['users'][0];
 		$this->assertTrue( isset( $t_user['id'] ) );
 		$this->assertTrue( is_numeric( $t_user['id'] ) );
 		$this->assertEquals( $t_user_to_create['name'], $t_user['name'] );
@@ -177,9 +181,41 @@ class RestUserTests extends RestBase {
 		$this->assertEquals( 25, $t_user['access_level']['id'] );
 		$this->assertEquals( "reporter", $t_user['access_level']['name'] );
 		$this->assertEquals( "reporter", $t_user['access_level']['label'] );
+	}
+
+	/**
+	 * Test getting an existing user by id.
+	 */
+	public function testGetUserByIdSelect() {
+		$t_user_to_create = array(
+			'name' => Faker::username()
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+
+		$t_response = $this->builder()->
+			get( '/users/' . $t_user_id, 'select=id,name,projects' )->
+			send();
+		$this->assertEquals( 200, $t_response->getStatusCode() );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->assertTrue( isset( $t_body['users'] ) );
+		$this->assertEquals( 1, count( $t_body['users'] ) );
+		$t_user = $t_body['users'][0];
+		$this->assertTrue( isset( $t_user['id'] ) );
+		$this->assertTrue( is_numeric( $t_user['id'] ) );
+		$this->assertEquals( $t_user_to_create['name'], $t_user['name'] );
+		$this->assertFalse( isset( $t_user['language'] ) );
+		$this->assertFalse( isset( $t_user['access_level'] ) );
 		$this->assertGreaterThanOrEqual( 1, count( $t_user['projects'] ) );
 		$this->assertTrue( isset( $t_user['projects'][0]['id'] ) );
 		$this->assertTrue( isset( $t_user['projects'][0]['name'] ) );
+
+		# TODO: Showing of email and realname is dependent on the following thresholds
+		# $g_show_user_email_threshold = NOBODY;
+		# $g_show_user_realname_threshold = NOBODY;
 	}
 
 	/**

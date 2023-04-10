@@ -414,9 +414,10 @@ function mc_login( $p_username, $p_password ) {
  * When calling this method make sure that the caller has the right to retrieve
  * information about the target user.
  * @param integer $p_user_id  A valid user identifier.
+ * @param array $p_select     An array of fields to be returned.
  * @return array array of user data for the supplied user id
  */
-function mci_user_get( $p_user_id ) {
+function mci_user_get( $p_user_id, $p_select = null ) {
 	$t_user_data = array();
 
 	# if user doesn't exist, then mci_account_get_array_by_id() will throw.
@@ -427,23 +428,40 @@ function mci_user_get( $p_user_id ) {
 	} else {
 		$t_account_data = mci_account_get_array_by_id( $p_user_id );
 		foreach( $t_account_data as $t_key => $t_value ) {
-			$t_user_data[$t_key] = $t_value;
+			if( is_null( $p_select ) || in_array( $t_key, $p_select ) ) {
+				$t_user_data[$t_key] = $t_value;
+			}
 		}
 
-		$t_user_data['language'] = mci_get_user_lang( $p_user_id );
-		$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
-
-		$t_access_level = access_get_global_level( $p_user_id );
-		$t_user_data['access_level'] = mci_enum_get_array_by_id(
-			$t_access_level, 'access_levels', $t_user_data['language'] );
-
-		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
-		$t_projects = array();
-		foreach( $t_project_ids as $t_project_id ) {
-			$t_projects[] = mci_project_get( $t_project_id, $t_user_data['language'], /* detail */ false );
+		# Put language in a temp variable since it is used later in access level and projects
+		$t_language = mci_get_user_lang( $p_user_id );
+		if( is_null( $p_select ) || in_array( 'language', $p_select ) ) {
+			$t_user_data['language'] = $t_language;
 		}
 
-		$t_user_data['projects'] = $t_projects;
+		if( is_null( $p_select ) || in_array( 'timezone', $p_select ) ) {
+			$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
+		}
+
+		if( is_null( $p_select ) || in_array( 'access_level', $p_select ) ) {
+			$t_access_level = access_get_global_level( $p_user_id );
+			$t_user_data['access_level'] = mci_enum_get_array_by_id(
+				$t_access_level, 'access_levels', $t_language );
+		}
+
+		if( is_null( $p_select ) || in_array( 'created_at', $p_select ) ) {
+			$t_user_data['created_at'] = ApiObjectFactory::datetime( user_get_field( $p_user_id, 'date_created' ) );
+		}
+
+		if( is_null( $p_select ) || in_array( 'projects', $p_select ) ) {
+			$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
+			$t_projects = array();
+			foreach( $t_project_ids as $t_project_id ) {
+				$t_projects[] = mci_project_get( $t_project_id, $t_language, /* detail */ false );
+			}
+
+			$t_user_data['projects'] = $t_projects;
+		}
 	}
 
 	return $t_user_data;

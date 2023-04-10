@@ -201,8 +201,17 @@ class RestBase extends PHPUnit\Framework\TestCase {
 
 		if( $t_response_code >= 200 && $t_response_code < 300 ) {
 			$t_body = json_decode( $p_response->getBody(), true );
-			$t_user = $t_body['user'];
-			$t_user_id = (int)$t_user['id'];
+
+			if( isset( $t_body['users'] ) ) {
+				$t_users = $t_body['users'];
+				$t_user_id = (int)$t_users[0]['id'];	
+			} if( isset( $t_body['user'] ) ) {
+				$t_user = $t_body['user'];
+				$t_user_id = (int)$t_user['id'];	
+			} else {
+				$t_user_id = (int)$t_body['id'];
+			}
+
 			$this->usersToDelete[] = $t_user_id;
 		}
 
