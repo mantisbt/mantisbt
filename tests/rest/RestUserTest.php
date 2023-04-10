@@ -25,6 +25,7 @@
 
 require_once 'RestBase.php';
 require_once __DIR__ . '/../core/Faker.php';
+require_once __DIR__ . '/../core/RequestBuilder.php';
 
 /**
  * Test fixture for user update webservice methods.
@@ -51,7 +52,7 @@ class RestUserTest extends RestBase {
 	 * Test /users/me API which users use to get information about themselves.
 	 */
 	public function testGetCurrentUser() {
-		$t_response = $this->get( '/users/me' );
+		$t_response = $this->builder()->get( '/users/me' )->send();
 		$this->assertEquals( 200, $t_response->getStatusCode() );
 
 		$t_user = json_decode( $t_response->getBody(), true );
@@ -69,6 +70,19 @@ class RestUserTest extends RestBase {
 	}
 
 	/**
+	 * Test creating a user as an anonymous user
+	 */
+	public function testCreateUserAnonymous() {
+		$t_user_to_create = array(
+			'name' => Faker::username()
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->anonymous()->send();
+		$this->deleteUserIfCreated( $t_response );
+		$this->assertEquals( 401, $t_response->getStatusCode() );
+	}
+
+	/**
 	 * Test the use of POST /users to create users with just a username
 	 *
 	 * @dataProvider providerValidUserNames
@@ -78,7 +92,7 @@ class RestUserTest extends RestBase {
 			'name' => Faker::username()
 		);
 
-		$t_response = $this->post( '/users', $t_user_to_create );
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
@@ -113,7 +127,7 @@ class RestUserTest extends RestBase {
 			'enabled' => false,
 		);
 
-		$t_response = $this->post( '/users', $t_user_to_create );
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
@@ -141,11 +155,11 @@ class RestUserTest extends RestBase {
 			'name' => Faker::username()
 		);
 
-		$t_response = $this->post( '/users', $t_user_to_create );
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
-		$t_response = $this->post( '/users', $t_user_to_create );
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
@@ -157,11 +171,11 @@ class RestUserTest extends RestBase {
 			'name' => Faker::username()
 		);
 
-		$t_response = $this->post( '/users', $t_user_to_create );
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
-		$t_response = $this->get( '/users/' . $t_user_id );
+		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
 		$this->assertEquals( 200, $t_response->getStatusCode() );
 
 		$t_user = json_decode( $t_response->getBody(), true );
@@ -181,8 +195,32 @@ class RestUserTest extends RestBase {
 	/**
 	 * Test getting a non-existent user by id.
 	 */
+	public function testGetUserByIdAnonymous() {
+		$t_user_to_create = array(
+			'name' => Faker::username()
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$t_user_id = $this->deleteUserIfCreated( $t_response );
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+
+		$t_response = $this->builder()->get( '/users/' . $t_user_id )->anonymous()->send();
+		$this->assertEquals( 401, $t_response->getStatusCode() );
+	}
+
+	/**
+	 * Test getting a non-existent user by id.
+	 */
+	public function testGetUserByIdNotFoundAnonymous() {
+		$t_response = $this->builder()->get( '/users/1000000' )->anonymous()->send();
+		$this->assertEquals( 401, $t_response->getStatusCode() );
+	}
+
+	/**
+	 * Test getting a non-existent user by id.
+	 */
 	public function testGetUserByIdNotFound() {
-		$t_response = $this->get( '/users/1000000' );
+		$t_response = $this->builder()->get( '/users/1000000' )->send();
 		$this->assertEquals( 404, $t_response->getStatusCode() );
 	}
 
@@ -190,7 +228,7 @@ class RestUserTest extends RestBase {
 	 * Test getting a user by id zero
 	 */
 	public function testGetUserByIdZero() {
-		$t_response = $this->get( '/users/0' );
+		$t_response = $this->builder()->get( '/users/0' )->send();
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
@@ -198,7 +236,7 @@ class RestUserTest extends RestBase {
 	 * Test getting a user by a negative id
 	 */
 	public function testGetUserByIdNegative() {
-		$t_response = $this->get( '/users/-1' );
+		$t_response = $this->builder()->get( '/users/-1' )->send();
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
@@ -210,17 +248,17 @@ class RestUserTest extends RestBase {
 			'name' => Faker::username()
 		);
 
-		$t_response = $this->post( '/users', $t_user_to_create );
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
-		$t_response = $this->get( '/users/' . $t_user_id );
+		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
 		$this->assertEquals( 200, $t_response->getStatusCode() );
 
-		$t_response = $this->delete( '/users/' . $t_user_id );
+		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
 		$this->assertEquals( 204, $t_response->getStatusCode() );
 
-		$t_response = $this->get( '/users/' . $t_user_id );
+		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
 		$this->assertEquals( 404, $t_response->getStatusCode() );
 	}
 
@@ -228,7 +266,7 @@ class RestUserTest extends RestBase {
 	 * Test deleting a non-existent user by id.
 	 */
 	public function testDeleteUserByIdNotFound() {
-		$t_response = $this->delete( '/users/1000000' );
+		$t_response = $this->builder()->delete( '/users/1000000' )->send();
 		$this->assertEquals( 204, $t_response->getStatusCode() );
 	}
 
@@ -236,7 +274,7 @@ class RestUserTest extends RestBase {
 	 * Test deleting a user by id zero.
 	 */
 	public function testDeleteUserByIdZero() {
-		$t_response = $this->delete( '/users/0' );
+		$t_response = $this->builder()->delete( '/users/0' )->send();
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
@@ -244,12 +282,12 @@ class RestUserTest extends RestBase {
 	 * Test deleting the current logged in user.
 	 */
 	public function testDeleteCurrentUser() {
-		$t_response = $this->get( '/users/me' );
+		$t_response = $this->builder()->get( '/users/me' )->send();
 		$this->assertEquals( 200, $t_response->getStatusCode() );
 		$t_user = json_decode( $t_response->getBody(), true );
 		$t_user_id = $t_user['id'];
 
-		$t_response = $this->delete( '/users/' . $t_user_id );
+		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
@@ -261,7 +299,7 @@ class RestUserTest extends RestBase {
 			'name' => $p_username
 		);
 
-		$t_response = $this->post( '/users', $t_user_to_create );
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteUserIfCreated( $t_response );
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
@@ -304,7 +342,7 @@ class RestUserTest extends RestBase {
 	 */
 	public function tearDown() {
 		foreach( $this->usersToDelete as $t_user_id ) {
-			$t_response = $this->delete( '/users/' . $t_user_id, '' );
+			$t_response = $this->builder()->delete( '/users/' . $t_user_id, '' )->send();
 			$this->assertEquals( 204, $t_response->getStatusCode() );
 		}
 
