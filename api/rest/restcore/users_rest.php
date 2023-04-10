@@ -29,7 +29,7 @@
  */
 $g_app->group('/users', function() use ( $g_app ) {
 	$g_app->get( '/me', 'rest_user_get_me' );
-	$g_app->get( '/{user_id}', 'rest_user_get' );
+	$g_app->get( '/{ref}', 'rest_user_get' );
 
 	$g_app->post( '/', 'rest_user_create' );
 	$g_app->post( '', 'rest_user_create' );
@@ -106,7 +106,7 @@ function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_user_id = $p_args['user_id'];
+	$t_user_ref = $p_args['ref'];
 
 	$t_select = $p_request->getParam( 'select', null );
 	if( is_null( $t_select ) ) {
@@ -126,7 +126,7 @@ function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_re
 
 	$t_data = array(
 		'query' => array(
-			'id' => $t_user_id,
+			'ref' => $t_user_ref,
 			'select' => $t_select
 		),
 		'options' => array(
