@@ -41,6 +41,7 @@
  * @author Cyklopas
  * @author Eitvys200
  * @author Nersip
+ * @author Nokeoo
  */
 
 $s_plugin_MantisGraph_config = 'Konfigūracija';

@@ -1365,6 +1365,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Wycofana funkcja: "%1$s", zamiast 
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Ostrzeżenie: system jest skonfigurowany do wyświetlania błędów MantisBT (E_USER_ERROR) w tekście. Realizacja programu będzie kontynuowana; może to prowadzić do problemów z integralnością systemu/danych.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Niezgodność typu danych. Włącz szczegółowe komunikaty o błędach, aby uzyskać więcej informacji.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Ten problem został zaktualizowany przez innego użytkownika, wróć do problemu i prześlij zmiany ponownie.';
+$MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'Nie znaleziono tokena API użytkownika o identyfikatorze "%d".';
 $s_dropzone_default_message = 'Dołączaj pliki, przeciągając je i upuszczając, wybierając je lub wklejając.';
 $s_dropzone_fallback_message = 'Twoja przeglądarka nie wspiera metody drag\'n\'drop.';
 $s_dropzone_file_too_big = 'Plik jest za duży ({{filesize}}MiB). Maksymalny rozmiar pliku: {{maxFilesize}}MiB.';
