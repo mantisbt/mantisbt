@@ -32,6 +32,7 @@ require_mantis_core();
 require_once( __DIR__ . '/../../vendor/autoload.php' );
 require_once ( __DIR__ . '/../../core/constant_inc.php' );
 require_once __DIR__ . '/../core/RequestBuilder.php';
+require_once __DIR__ . '/../core/Faker.php';
 
 /**
  * Base class for REST API test cases
@@ -123,86 +124,12 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	 */
 	protected function tearDown() {
 		foreach ( $this->issueIdsToDelete as $t_issue_id_to_delete ) {
-			$this->delete( '/issues', 'id=' . $t_issue_id_to_delete );
+			$this->builder()->delete( '/issues', 'id=' . $t_issue_id_to_delete )->send();
 		}
 	}
 
 	public function builder() {
 		return new RequestBuilder( $this->base_path, $this->token );
-	}
-
-	protected function delete( $p_relative_path, $p_query_string = null ) {
-		$t_client = new \GuzzleHttp\Client();
-		$t_options = array(
-			'allow_redirects' => false,
-			'http_errors' => false,
-			'headers' => array(
-				'Authorization' => $this->token,
-			),
-		);
-
-		$t_url = $this->base_path . $p_relative_path;
-		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
-			$t_url .= '?' . $p_query_string;
-		}
-
-		return $t_client->request( 'DELETE', $t_url, $t_options );
-	}
-
-	protected function get( $p_relative_path, $p_query_string = null ) {
-		$t_client = new \GuzzleHttp\Client();
-		$t_options = array(
-			'allow_redirects' => false,
-			'http_errors' => false,
-			'headers' => array(
-				'Authorization' => $this->token,
-			),
-		);
-
-		$t_url = $this->base_path . $p_relative_path;
-		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
-			$t_url .= '?' . $p_query_string;
-		}
-
-		return $t_client->request( 'GET', $t_url, $t_options );
-	}
-
-	/**
-	 * @param string $p_relative_path The relative path under `/api/rest/` e.g. `/issues`.
-	 * @param mixed $p_payload The payload object, it will be json encoded before sending.
-	 * @return mixed|string The response object.
-	 */
-	protected function post( $p_relative_path, $p_payload ) {
-		$t_client = new \GuzzleHttp\Client();
-		$t_options = array(
-			'allow_redirects' => false,
-			'http_errors' => false,
-			'json' => $p_payload,
-			'headers' => array(
-				'Authorization' => $this->token,
-			),
-		);
-
-		return $t_client->request( 'POST', $this->base_path . $p_relative_path, $t_options );
-	}
-
-	/**
-	 * @param string $p_relative_path The relative path under `/api/rest/` e.g. `/issues`.
-	 * @param mixed $p_payload The payload object, it will be json encoded before sending.
-	 * @return mixed|string The response object.
-	 */
-	protected function patch( $p_relative_path, $p_payload ) {
-		$t_client = new \GuzzleHttp\Client();
-		$t_options = array(
-			'allow_redirects' => false,
-			'http_errors' => false,
-			'json' => $p_payload,
-			'headers' => array(
-				'Authorization' => $this->token,
-			),
-		);
-
-		return $t_client->request( 'PATCH', $this->base_path . $p_relative_path, $t_options );
 	}
 
 	/**

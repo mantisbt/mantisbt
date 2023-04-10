@@ -25,7 +25,6 @@
 
 require_once 'RestBase.php';
 require_once __DIR__ . '/../core/Faker.php';
-require_once __DIR__ . '/../core/RequestBuilder.php';
 
 /**
  * Test fixture for user update webservice methods.

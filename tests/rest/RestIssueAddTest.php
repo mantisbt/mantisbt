@@ -60,7 +60,7 @@ class RestIssueAddTest extends RestBase {
 
 	public function testCreateIssueWithMinimalFields() {
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
@@ -123,7 +123,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add['reproducibility']['id'] = 10; # always
 		$t_issue_to_add['sticky'] = true;
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
@@ -182,7 +182,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add['target_version'] = $t_target_version_name;
 		$t_issue_to_add['fixed_in_version'] = $t_fixed_in_version_name;
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
@@ -206,7 +206,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
@@ -232,7 +232,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
@@ -260,7 +260,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id, 'name' => $t_wrong_version_name );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
@@ -284,7 +284,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
@@ -295,7 +295,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
@@ -306,7 +306,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = $t_version_name;
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
@@ -320,7 +320,7 @@ class RestIssueAddTest extends RestBase {
 
 		# Change threshold to disable tag creation
 		$t_threshold = config_set( 'tag_create_threshold', NOBODY );
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$this->assertEquals(
 			HTTP_STATUS_NOT_FOUND,
 			$t_response->getStatusCode(),
@@ -330,7 +330,7 @@ class RestIssueAddTest extends RestBase {
 		# Reset threshold and try again
 		config_set( 'tag_create_threshold', $t_threshold );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
 
 		$this->deleteAfterRun( $t_issue_id );
@@ -342,7 +342,7 @@ class RestIssueAddTest extends RestBase {
 		# Tag by name
 		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
 
 		$this->deleteAfterRun( $t_issue_id );
@@ -351,7 +351,7 @@ class RestIssueAddTest extends RestBase {
 		$t_tag = tag_get_by_name( $this->tag_name );
 		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag['id'] ) );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
 
 		$this->deleteAfterRun( $t_issue_id );
@@ -389,7 +389,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['tags'] = array( $p_tag );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$this->assertEquals( $p_status_code, $t_response->getStatusCode() );
 	}
 
@@ -441,7 +441,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['description'] );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
@@ -453,7 +453,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['category'] );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( $t_result, $t_response->getStatusCode() );
 
@@ -468,7 +468,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['project'] );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
@@ -500,5 +500,4 @@ class RestIssueAddTest extends RestBase {
 			tag_delete( $t_tag['id'] );
 		}
 	}
-
 }
