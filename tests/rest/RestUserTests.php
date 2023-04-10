@@ -223,6 +223,14 @@ class RestUserTests extends RestBase {
 	}
 
 	/**
+	 * Test getting a non-existent user by id.
+	 */
+	public function testGetUserByIdZeroAnonymous() {
+		$t_response = $this->builder()->get( '/users/0' )->anonymous()->send();
+		$this->assertEquals( 401, $t_response->getStatusCode() );
+	}
+
+	/**
 	 * Test getting a user by id zero
 	 */
 	public function testGetUserByIdZero() {
@@ -261,6 +269,28 @@ class RestUserTests extends RestBase {
 	}
 
 	/**
+	 * Test delete an existing user by id.
+	 */
+	public function testDeleteUserByIdAnonymous() {
+		$t_user_to_create = array(
+			'name' => Faker::username()
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$t_user_id = $this->deleteUserIfCreated( $t_response );
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+
+		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
+		$this->assertEquals( 200, $t_response->getStatusCode() );
+
+		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->anonymous()->send();
+		$this->assertEquals( 401, $t_response->getStatusCode() );
+
+		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
+		$this->assertEquals( 200, $t_response->getStatusCode() );
+	}
+
+	/**
 	 * Test deleting a non-existent user by id.
 	 */
 	public function testDeleteUserByIdNotFound() {
@@ -285,6 +315,21 @@ class RestUserTests extends RestBase {
 		$t_user = json_decode( $t_response->getBody(), true );
 		$t_user_id = $t_user['id'];
 
+		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
+		$this->assertEquals( 400, $t_response->getStatusCode() );
+	}
+
+	/**
+	 * Test deleting the current logged in user (anonymous).
+	 */
+	public function testDeleteCurrentUserAnonymous() {
+		$t_response = $this->builder()->get( '/users/me' )->send();
+		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$t_user = json_decode( $t_response->getBody(), true );
+		$t_user_id = $t_user['id'];
+
+		# if anonymous login enabled, this will not give 401
+		# TODO: adapt / test with different settings for anonymous login
 		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
