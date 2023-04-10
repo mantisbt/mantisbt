@@ -31,7 +31,7 @@ require_mantis_core();
 
 require_once( __DIR__ . '/../../vendor/autoload.php' );
 require_once ( __DIR__ . '/../../core/constant_inc.php' );
-
+require_once __DIR__ . '/../core/RequestBuilder.php';
 
 /**
  * Base class for REST API test cases
@@ -125,6 +125,10 @@ class RestBase extends PHPUnit\Framework\TestCase {
 		foreach ( $this->issueIdsToDelete as $t_issue_id_to_delete ) {
 			$this->delete( '/issues', 'id=' . $t_issue_id_to_delete );
 		}
+	}
+
+	public function builder() {
+		return new RequestBuilder( $this->base_path, $this->token );
 	}
 
 	protected function delete( $p_relative_path, $p_query_string = null ) {
