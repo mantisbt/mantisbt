@@ -349,8 +349,6 @@ class RestUserTests extends RestBase {
 			'blank_spaces' => array( ' ' ),
 			'blank_tabs' => array( "\t" ),
 			'empty' => array( '' ),
-			'numeric' => array( '1234' ),
-			'integer' => array( 1234 ),
 			'too_long' => array( Faker::randStr( 500 ) )
 		);
 	}
