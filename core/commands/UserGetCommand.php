@@ -40,6 +40,16 @@ class UserGetCommand extends Command {
 	private $target_user_id;
 
 	/**
+	 * Fields to show if no `select` query parameter is specified.
+	 * 
+	 * @var array
+	 */
+	private $select;
+
+	# TODO: add support for enabled flag
+	# TODO: add supoprt for protected flag
+
+	/**
 	 * Constructor
 	 *
 	 * @param array $p_data The command data.
@@ -64,6 +74,40 @@ class UserGetCommand extends Command {
 		if( !$t_same_user && !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
 			throw new ClientException( 'Access denied to get other users', ERROR_ACCESS_DENIED );
 		}
+
+		if( !user_exists( $this->target_user_id ) ) {
+			throw new ClientException(
+				'User not found',
+				ERROR_USER_BY_ID_NOT_FOUND,
+				array( $this->target_user_id ) );
+		}
+
+		$t_select = $this->query( 'select', null );
+		if( !is_null( $t_select ) ) {
+			$t_select = array_map( 'trim', $t_select );
+			$t_select = array_map( 'strtolower', $t_select );
+			$t_select = array_unique( $t_select );
+
+			if( empty( $t_select ) ) {
+				$this->select = null;
+			} else {
+				$this->select = $t_select;
+			}
+		}
+
+		# if select field is not specified or empty, then use defaults
+		if( is_null( $this->select ) ) {
+			$this->select = array(
+				'id',
+				'name',
+				'real_name',
+				'email',
+				'access_level',
+				'language',
+				'timezone',
+				'created_at'
+			);
+		}
 	}
 
 	/**
@@ -72,10 +116,10 @@ class UserGetCommand extends Command {
 	 * @return array Command response
 	 */
 	protected function process() {
-		$t_result = mci_user_get( $this->target_user_id );
+		$t_result = mci_user_get( $this->target_user_id, $this->select );
 
-		if( $this->option( 'include_in_user_element', true ) ) {
-			$t_result = array( 'user' => $t_result );
+		if( $this->option( 'return_as_users', true ) ) {
+			$t_result = array( 'users' => array( $t_result ) );
 		}
 
 		return $t_result;

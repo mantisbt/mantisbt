@@ -62,9 +62,31 @@ $g_app->group('/users', function() use ( $g_app ) {
  * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_default_select = array(
+		'id',
+		'name',
+		'real_name',
+		'email',
+		'access_level',
+		'language',
+		'timezone',
+		'created_at',
+		'projects'
+	);
+
+	$t_select = $p_request->getParam( 'select', null );
+	if( $t_select == null ) {
+		$t_select = $t_default_select;
+	} else {
+		$t_select = explode( ',', $t_select );
+	}
+
 	$t_data = array(
+		'query' => array(
+			'select' => $t_select
+		),
 		'options' => array(
-			'include_in_user_element' => false
+			'return_as_users' => false
 		)
 	);
 
@@ -86,9 +108,29 @@ function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_user_id = $p_args['user_id'];
 
+	$t_select = $p_request->getParam( 'select', null );
+	if( is_null( $t_select ) ) {
+		$t_select = array(
+			'id',
+			'name',
+			'real_name',
+			'email',
+			'access_level',
+			'language',
+			'timezone',
+			'created_at'
+		);
+	} else {
+		$t_select = explode( ',', $t_select );
+	}
+
 	$t_data = array(
 		'query' => array(
 			'id' => $t_user_id,
+			'select' => $t_select
+		),
+		'options' => array(
+			'return_as_users' => true
 		)
 	);
 
