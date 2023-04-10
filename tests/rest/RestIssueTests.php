@@ -26,12 +26,12 @@
 require_once 'RestBase.php';
 
 /**
- * Test fixture for issue creation webservice methods.
+ * Test fixture for issue webservice methods.
  *
  * @requires extension curl
  * @group REST
  */
-class RestIssueAddTest extends RestBase {
+class RestIssueTests extends RestBase {
 
 	/**
 	 * @var array $versions
@@ -432,7 +432,7 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['summary'] );
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}

@@ -24,7 +24,6 @@
  */
 
 require_once 'RestBase.php';
-require_once __DIR__ . '/../core/Faker.php';
 
 /**
  * Test fixture for user update webservice methods.
@@ -32,7 +31,7 @@ require_once __DIR__ . '/../core/Faker.php';
  * @requires extension curl
  * @group REST
  */
-class RestUserTest extends RestBase {
+class RestUserTests extends RestBase {
 	/**
 	 * @var array List of user ids to delete in tearDown()
 	 */
