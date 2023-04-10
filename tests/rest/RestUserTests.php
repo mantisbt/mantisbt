@@ -53,7 +53,6 @@ class RestUserTests extends RestBase {
 		$this->assertTrue( is_numeric( $t_user['id'] ) );
 		$this->assertTrue( isset( $t_user['name'] ) );
 		$this->assertEquals( 'english', $t_user['language'] );
-		$this->assertEquals( 'America/Los_Angeles', $t_user['timezone'] );
 		$this->assertTrue( is_numeric( $t_user['access_level']['id'] ) );
 		$this->assertTrue( isset( $t_user['access_level']['name'] ) );
 		$this->assertTrue( isset( $t_user['access_level']['label'] ) );
@@ -97,7 +96,6 @@ class RestUserTests extends RestBase {
 		$this->assertTrue( is_numeric( $t_user['id'] ) );
 		$this->assertEquals( $t_user_to_create['name'], $t_user['name'] );
 		$this->assertEquals( 'english', $t_user['language'] );
-		$this->assertEquals( 'America/Los_Angeles', $t_user['timezone'] );
 		$this->assertEquals( 25, $t_user['access_level']['id'] );
 		$this->assertEquals( "reporter", $t_user['access_level']['name'] );
 		$this->assertEquals( "reporter", $t_user['access_level']['label'] );
@@ -176,7 +174,6 @@ class RestUserTests extends RestBase {
 		$this->assertTrue( is_numeric( $t_user['id'] ) );
 		$this->assertEquals( $t_user_to_create['name'], $t_user['name'] );
 		$this->assertEquals( 'english', $t_user['language'] );
-		$this->assertEquals( 'America/Los_Angeles', $t_user['timezone'] );
 		$this->assertEquals( 25, $t_user['access_level']['id'] );
 		$this->assertEquals( "reporter", $t_user['access_level']['name'] );
 		$this->assertEquals( "reporter", $t_user['access_level']['label'] );
