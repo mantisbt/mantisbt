@@ -1298,15 +1298,13 @@ function email_send( EmailData $p_email_data ) {
 		if( $t_mailer_method == PHPMAILER_METHOD_SMTP ) {
 			register_shutdown_function( 'email_smtp_close' );
 		}
-		$t_mail = new PHPMailer( true );
+		$g_phpMailer = new PHPMailer( true );
 
 		// Set e-mail addresses validation pattern. The 'html5' setting is
 		// consistent with the regex defined in email_regex_simple().
 		PHPMailer::$validator  = 'html5';
-
-	} else {
-		$t_mail = $g_phpMailer;
 	}
+	$t_mail = $g_phpMailer;
 
 	if( isset( $t_email_data->metadata['hostname'] ) ) {
 		$t_mail->Hostname = $t_email_data->metadata['hostname'];
