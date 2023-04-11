@@ -48,6 +48,8 @@
  * @uses utility_api.php
  *
  * @uses PHPMailerAutoload.php PHPMailer library
+ *
+ * @noinspection PhpMissingReturnTypeInspection, PhpMissingParamTypeInspection
  */
 
 require_api( 'access_api.php' );
@@ -77,6 +79,7 @@ require_api( 'utility_api.php' );
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as phpmailerException;
 use Mantis\Exceptions\ClientException;
+use VBoctor\Email\DisposableEmailChecker;
 
 /** @global PHPMailer $g_phpMailer reusable PHPMailer object */
 $g_phpMailer = null;
@@ -201,7 +204,7 @@ function email_ensure_valid( $p_email ) {
  * @return boolean
  */
 function email_is_disposable( $p_email ) {
-	return \VBoctor\Email\DisposableEmailChecker::is_disposable_email( $p_email );
+	return DisposableEmailChecker::is_disposable_email( $p_email );
 }
 
 /**
@@ -362,7 +365,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	# add users as specified by plugins
 	$t_recipients_include_data = event_signal( 'EVENT_NOTIFY_USER_INCLUDE', array( $p_bug_id, $p_notify_type ) );
 	foreach( $t_recipients_include_data as $t_plugin => $t_recipients_include_data2 ) {
-		foreach( $t_recipients_include_data2 as $t_callback => $t_recipients_included ) {
+		foreach( $t_recipients_include_data2 as $t_recipients_included ) {
 			# only handle if we get an array from the callback
 			if( is_array( $t_recipients_included ) ) {
 				foreach( $t_recipients_included as $t_user_id ) {
@@ -472,7 +475,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		$t_recipient_exclude_data = event_signal( 'EVENT_NOTIFY_USER_EXCLUDE', array( $p_bug_id, $p_notify_type, $t_id ) );
 		$t_exclude = false;
 		foreach( $t_recipient_exclude_data as $t_plugin => $t_recipient_exclude_data2 ) {
-			foreach( $t_recipient_exclude_data2 as $t_callback => $t_recipient_excluded ) {
+			foreach( $t_recipient_exclude_data2 as $t_recipient_excluded ) {
 				# exclude if any plugin returns true (excludes the user)
 				if( $t_recipient_excluded ) {
 					$t_exclude = true;
@@ -671,19 +674,17 @@ function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipi
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
-	if( is_array( $p_recipients ) ) {
-		# send email to every recipient
-		foreach( $p_recipients as $t_user_id => $t_user_email ) {
-			log_event( LOG_EMAIL_VERBOSE, 'Issue = #%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.', $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email );
+	# send email to every recipient
+	foreach( $p_recipients as $t_user_id => $t_user_email ) {
+		log_event( LOG_EMAIL_VERBOSE, 'Issue = #%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.', $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email );
 
-			# load (push) user language here as build_visible_bug_data assumes current language
-			lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
+		# load (push) user language here as build_visible_bug_data assumes current language
+		lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
 
-			$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
-			email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_user_id, $p_header_optional_params );
+		$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
+		email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_user_id, $p_header_optional_params );
 
-			lang_pop();
-		}
+		lang_pop();
 	}
 }
 
@@ -1230,9 +1231,12 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
  * - immediately after queueing messages in case of synchronous emails
  * - from a cronjob in case of asynchronous emails
  * If a failure occurs, then the function exits.
- * @todo In case of synchronous email sending, we may get a race condition where two requests send the same email.
+ *
  * @param boolean $p_delete_on_failure Indicates whether to remove email from queue on failure (default false).
+ *
  * @return void
+ * @throws phpmailerException
+ * @todo In case of synchronous email sending, we may get a race condition where two requests send the same email.
  */
 function email_send_all( $p_delete_on_failure = false ) {
 	$t_ids = email_queue_get_ids();
@@ -1278,7 +1282,9 @@ function email_send_all( $p_delete_on_failure = false ) {
  * This function sends an email message based on the supplied email data.
  *
  * @param EmailData $p_email_data Email Data object representing the email to send.
+ *
  * @return boolean
+ * @throws phpmailerException
  */
 function email_send( EmailData $p_email_data ) {
 	global $g_phpMailer;
@@ -1405,7 +1411,7 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	try {
-		$t_mail->addAddress( $t_recipient, '' );
+		$t_mail->addAddress( $t_recipient );
 	}
 	catch ( phpmailerException $e ) {
 		log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
@@ -1430,6 +1436,7 @@ function email_send( EmailData $p_email_data ) {
 					}
 					$t_mail->set( 'MessageID', '<' . $t_value . '>' );
 					break;
+				/** @noinspection PhpMissingBreakStatementInspection */
 				case 'in-reply-to':
 					if( !preg_match( '/<.+@.+>/m', $t_value ) ) {
 						$t_value = '<' . $t_value . '@' . $t_mail->Hostname . '>';
@@ -1505,6 +1512,7 @@ function email_build_subject( $p_bug_id ) {
 	$t_email_subject = '[' . $p_project_name . ' ' . $t_bug_id . ']: ' . $p_subject;
 
 	# update subject as defined by plugins
+	/** @noinspection PhpUnnecessaryLocalVariableInspection */
 	$t_email_subject = event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, array( 'bug_id' => $p_bug_id ) );
 
 	return $t_email_subject;
@@ -1671,7 +1679,7 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 	$t_subject = email_build_subject( $p_visible_bug_data['email_bug'] );
 
 	# build message
-	$t_message = lang_get_defaulted( $p_message_id, null );
+	$t_message = lang_get_defaulted( $p_message_id );
 
 	if( is_array( $p_header_optional_params ) ) {
 		$t_message = vsprintf( $t_message, $p_header_optional_params );
@@ -1697,8 +1705,6 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 
 	# send mail
 	email_store( $t_user_email, $t_subject, $t_message, $t_mail_headers );
-
-	return;
 }
 
 /**
@@ -1807,7 +1813,7 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	# custom fields formatting
 	foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
-		$t_message .= utf8_str_pad( lang_get_defaulted( $t_custom_field_name, null ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
+		$t_message .= utf8_str_pad( lang_get_defaulted( $t_custom_field_name ) . ': ', $t_email_padding_length );
 		$t_message .= string_custom_field_value_for_email( $t_custom_field_data['value'], $t_custom_field_data['type'] );
 		$t_message .= " \n";
 	}
@@ -1912,7 +1918,8 @@ function email_format_bug_message( array $p_visible_bug_data ) {
  */
 function email_format_attribute( array $p_visible_bug_data, $p_attribute_id ) {
 	if( array_key_exists( $p_attribute_id, $p_visible_bug_data ) ) {
-		return utf8_str_pad( lang_get( $p_attribute_id ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ) . $p_visible_bug_data[$p_attribute_id] . "\n";
+		return utf8_str_pad( lang_get( $p_attribute_id ) . ': ', config_get( 'email_padding_length' ) )
+			. $p_visible_bug_data[$p_attribute_id] . "\n";
 	}
 	return '';
 }
@@ -2079,7 +2086,7 @@ function email_relationship_get_details( $p_bug_id, BugRelationshipData $p_relat
 	}
 
 	# get the information from the related bug and prepare the link
-	$t_bug = bug_get( $t_related_bug_id, false );
+	$t_bug = bug_get( $t_related_bug_id );
 
 	$t_relationship_info_text = utf8_str_pad( $t_relationship_descr, 20 );
 	$t_relationship_info_text .= utf8_str_pad( bug_format_id( $t_related_bug_id ), 8 );
@@ -2123,7 +2130,9 @@ function email_relationship_get_summary_text( $p_bug_id ) {
  * Will send any queued emails, except when $g_email_send_using_cronjob = ON.
  * If $g_email_shutdown_processing EMAIL_SHUTDOWN_FORCE flag is set, emails
  * will be sent regardless of cronjob setting.
+ *
  * @return void
+ * @throws phpmailerException
  */
 function email_shutdown_function() {
 	global $g_email_shutdown_processing;
@@ -2165,7 +2174,6 @@ function email_get_actions() {
 
 	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	ksort( $t_statuses );
-	reset( $t_statuses );
 
 	foreach( $t_statuses as $t_label ) {
 		$t_actions[] = $t_label;
