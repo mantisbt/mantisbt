@@ -1290,12 +1290,11 @@ function email_send( EmailData $p_email_data ) {
 	$t_message = string_email_links( trim( $t_email_data->body ) );
 
 	$t_debug_email = config_get_global( 'debug_email' );
-	$t_mailer_method = config_get( 'phpMailer_method' );
 
 	$t_log_msg = 'ERROR: Message could not be sent - ';
 
 	if( is_null( $g_phpMailer ) ) {
-		if( $t_mailer_method == PHPMAILER_METHOD_SMTP ) {
+		if( PHPMAILER_METHOD_SMTP == config_get( 'phpMailer_method' ) ) {
 			register_shutdown_function( 'email_smtp_close' );
 		}
 		$g_phpMailer = new PHPMailer( true );
@@ -1410,12 +1409,11 @@ function email_send( EmailData $p_email_data ) {
 	}
 	catch ( phpmailerException $e ) {
 		log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
-		$t_success = false;
 		$t_mail->clearAllRecipients();
 		$t_mail->clearAttachments();
 		$t_mail->clearReplyTos();
 		$t_mail->clearCustomHeaders();
-		return $t_success;
+		return false;
 	}
 
 	$t_mail->Subject = $t_subject;
@@ -1447,15 +1445,12 @@ function email_send( EmailData $p_email_data ) {
 	try {
 		$t_success = $t_mail->send();
 		if( $t_success ) {
-			$t_success = true;
-
 			if( $t_email_data->email_id > 0 ) {
 				email_queue_delete( $t_email_data->email_id );
 			}
 		} else {
 			# We should never get here, as an exception is thrown after failures
 			log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
-			$t_success = false;
 		}
 	}
 	catch ( phpmailerException $e ) {
