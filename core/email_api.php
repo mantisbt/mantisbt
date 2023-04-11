@@ -733,31 +733,13 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type, $p
 		$g_relationships[$p_rel_type]['#description'] );
 
 	# Source issue email notification
+	$t_message_id = $g_relationships[$p_rel_type]['#notify_added'];
 	if( $p_email_for_source ) {
-		$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
-
-		# Recipient has to have access to both bugs to get the notification.
-		$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
-		$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
-
-		$t_opt = array();
-		$t_opt[] = bug_format_id( $p_related_bug_id );
-
-		email_generic_to_recipients(
-			$p_bug_id, 'relation', $t_recipients, $g_relationships[$p_rel_type]['#notify_added'], $t_opt );
+		email_relationship_send( $p_bug_id, $p_related_bug_id, $t_message_id );
 	}
 
 	# Destination issue email notification
-	$t_recipients = email_collect_recipients( $p_related_bug_id, 'relation' );
-
-	# Recipient has to have access to both bugs to get the notification.
-	$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
-	$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
-
-	$t_opt = array();
-	$t_opt[] = bug_format_id( $p_bug_id );
-	email_generic_to_recipients(
-		$p_related_bug_id, 'relation', $t_recipients, $g_relationships[$t_rev_rel_type]['#notify_added'], $t_opt );
+	email_relationship_send( $p_related_bug_id, $p_bug_id, $t_message_id );
 }
 
 /**
@@ -783,7 +765,29 @@ function email_filter_recipients_for_bug( $p_bug_id, array $p_recipients ) {
 }
 
 /**
- * send notices when a relationship is DELETED
+ * Helper function to collect recipients and send relationship notifications.
+ *
+ * @param int    $p_bug_id
+ * @param int    $p_related_bug_id
+ * @param string $p_message_id
+ *
+ * @access private
+ */
+function email_relationship_send( int $p_bug_id, int $p_related_bug_id, $p_message_id ) {
+	$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
+
+	# Recipient has to have access to both bugs to get the notification.
+	$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
+	$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
+
+	$t_opt = [ bug_format_id( $p_related_bug_id ) ];
+
+	email_generic_to_recipients( $p_bug_id, 'relation', $t_recipients, $p_message_id, $t_opt );
+}
+
+/**
+ * Send notices when a relationship is DELETED.
+ *
  * @param integer $p_bug_id         A bug identifier.
  * @param integer $p_related_bug_id Related bug identifier.
  * @param integer $p_rel_type       Relationship type.
@@ -808,38 +812,13 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, 
 		$p_related_bug_id,
 		$g_relationships[$p_rel_type]['#description'] );
 
+	$t_message_id = $g_relationships[$p_rel_type]['#notify_deleted'];
 	if( $p_bug_id != $p_skip_email_for_issue_id ) {
-		$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
-
-		# Recipient has to have access to both bugs to get the notification.
-		$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
-		$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
-
-		$t_opt = array();
-		$t_opt[] = bug_format_id( $p_related_bug_id );
-		email_generic_to_recipients(
-			$p_bug_id,
-			'relation',
-			$t_recipients,
-			$g_relationships[$p_rel_type]['#notify_deleted'],
-			$t_opt );
+		email_relationship_send( $p_bug_id, $p_related_bug_id, $t_message_id );
 	}
 
 	if( $p_bug_id != $p_related_bug_id && bug_exists( $p_related_bug_id) ) {
-		$t_recipients = email_collect_recipients( $p_related_bug_id, 'relation' );
-
-		# Recipient has to have access to both bugs to get the notification.
-		$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
-		$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
-
-		$t_opt = array();
-		$t_opt[] = bug_format_id( $p_bug_id );
-		email_generic_to_recipients(
-			$p_related_bug_id,
-			'relation',
-			$t_recipients,
-			$g_relationships[$t_rev_rel_type]['#notify_deleted'],
-			$t_opt );
+		email_relationship_send( $p_related_bug_id, $p_bug_id, $t_message_id );
 	}
 }	
 
