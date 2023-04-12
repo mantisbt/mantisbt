@@ -85,12 +85,12 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		if( is_null( $p_old_value ) ) {
 			$c_old_value = '';
 		} else {
-			$c_old_value = mb_strimwidth( $p_old_value, 0, DB_FIELD_SIZE_HISTORY_VALUE, '...' );
+			$c_old_value = string_truncate( $p_old_value, DB_FIELD_SIZE_HISTORY_VALUE, '…' );
 		}
 		if( is_null( $p_new_value ) ) {
 			$c_new_value = '';
 		} else {
-			$c_new_value = mb_strimwidth( $p_new_value, 0, DB_FIELD_SIZE_HISTORY_VALUE, '...' );
+			$c_new_value = string_truncate( $p_new_value, DB_FIELD_SIZE_HISTORY_VALUE, '…' );
 		}
 
 		db_param_push();
@@ -130,13 +130,13 @@ function history_log_event_special( $p_bug_id, $p_type, $p_old_value = '', $p_ne
 	if( is_null( $p_old_value ) ) {
 		$c_old_value = '';
 	} else {
-		$c_old_value = mb_strimwidth( $p_old_value, 0, DB_FIELD_SIZE_HISTORY_VALUE, '...' );
+		$c_old_value = string_truncate( $p_old_value, DB_FIELD_SIZE_HISTORY_VALUE, '…' );
 	}
 
 	if( is_null( $p_new_value ) ) {
 		$c_new_value = '';
 	} else {
-		$c_new_value = mb_strimwidth( $p_new_value, 0, DB_FIELD_SIZE_HISTORY_VALUE, '...' );
+		$c_new_value = string_truncate( $p_new_value, DB_FIELD_SIZE_HISTORY_VALUE, '…' );
 	}
 
 	db_param_push();
