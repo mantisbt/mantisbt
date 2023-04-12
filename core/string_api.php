@@ -916,6 +916,31 @@ function string_prepare_header( $p_string ) {
 }
 
 /**
+ * Truncate a string to the specified length, optionally appending a marker.
+ *
+ * This is similar to {@see mb_strimwidth()}, but working on the string's length
+ * (i.e. number of chars) instead of its width.
+ *
+ * @param string $p_string The string to truncate
+ * @param int $p_length    Number of chars to keep. If negative, remove this
+ *                         many chars from the end of the string.
+ * @param string $p_marker If set, the string's last chars are replaced by this
+ *                         to match the given length.
+ *
+ * @return string
+ */
+function string_truncate( $p_string, $p_length, $p_marker = '') {
+	$t_string_length = mb_strlen( $p_string );
+	$t_marker_length = mb_strlen( $p_marker );
+	$t_truncate_length = $p_length - $t_marker_length;
+	if( $t_string_length <= $t_truncate_length ) {
+		return $p_string;
+	}
+
+	return mb_substr( $p_string, 0, $t_truncate_length ) . $p_marker;
+}
+
+/**
  * Replacement for str_pad. $padStr may contain multi-byte characters.
  *
  * @author Oliver Saunders <oliver (a) osinternetservices.com>
