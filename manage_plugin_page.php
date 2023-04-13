@@ -440,7 +440,7 @@ class AvailablePlugin extends PluginForDisplay {
 
 		# Dependencies
 		if( is_array( $p_plugin->requires ) && !empty( $p_plugin->requires ) ) {
-			$_all_plugins = plugin_find_all();
+			$t_all_plugins = plugin_find_all();
 			foreach( $p_plugin->requires as $t_required_basename => $t_version ) {
 				$this->can_install = false;
 
@@ -468,8 +468,8 @@ class AvailablePlugin extends PluginForDisplay {
 						break;
 				}
 
-				$t_dependency_name = array_key_exists( $t_required_basename, $_all_plugins )
-					? $_all_plugins[$t_required_basename]->name
+				$t_dependency_name = array_key_exists( $t_required_basename, $t_all_plugins )
+					? $t_all_plugins[$t_required_basename]->name
 					: $t_required_basename;
 				$t_dependency_name .= ' ' . $t_version;
 
