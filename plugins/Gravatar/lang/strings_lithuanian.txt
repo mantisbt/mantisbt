@@ -38,16 +38,8 @@
  * @ingroup Language
  * @file
  *
- * @author Eitvys200
  * @author Nokeoo
  */
 
-$s_plugin_format_title = 'MantisBT formatuojamas';
-$s_plugin_format_description = 'Oficialus teksto apdorojimo ir formatavimo įskiepis.';
-$s_plugin_format_config = 'Konfigūracija';
-$s_plugin_format_process_text = 'Tekstas apdorojamas';
-$s_plugin_format_process_urls = 'URL apdorojamas';
-$s_plugin_format_process_buglinks = 'MantisBT vidinės nuorodos (problemos ir problemų pastabos)';
-$s_plugin_format_process_buglinks_info = 'Jūsų konfigūracija apibrėžia <em>problemos</em> žymą kaip „%s“, o <em>problemos pastabą</em> kaip „%s“';
-$s_plugin_format_enabled = 'Įjungti';
-$s_plugin_format_disabled = 'Išjungti';
+$s_plugin_Gravatar_title = 'Avatarai per Gravatar';
+$s_plugin_Gravatar_description = 'Įskiepis, kuris rodo naudotojų avatarus remaintis jų el. pašto adresais, naudojant avatarų paslaugą.';

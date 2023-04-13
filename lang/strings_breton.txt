@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Adriendelucca
  * @author Dishual
  * @author Dregad
  * @author Fohanno
@@ -225,7 +226,7 @@ M\'hoc\'h eus goulennet ar gwiriadur-mañ, kit d\'an URL-mañ evit cheñch ho ke
 $s_reset_request_admin_msg = 'Adderaouekaet eo bet ho ker-tremen. Kit war an URL da heul evit spisaat unan nevez :';
 $s_reset_request_in_progress_msg = 'M\'hoc\'h eus pourchaset an anv implijer hag ar chomlec\'h postel reizh evit ho kont, hon eus kaset deoc\'h ur postel kadarnaat d\'ar chomlec\'h-se. Ur wech ma vo resevet ar gemennadenn, grit diouzh an titouroù pourchaset evit cheñch ger-tremen ho kont.';
 $s_email_notification_title_for_status_bug_new = 'An draen-mañ zo bremañ er statud NEVEZ (adarre)';
-$s_email_notification_title_for_status_bug_feedback = 'An draen-mañ en deus ezhomm eus hoc\'h evezhiadenn.';
+$s_email_notification_title_for_status_bug_feedback = 'Ar gudenn-mañ en deus ezhomm deus un evezhiadenn.';
 $s_email_notification_title_for_status_bug_acknowledged = 'An draen-mañ zo bet ANAVEZET.';
 $s_email_notification_title_for_status_bug_confirmed = 'An draen-mañ zo bet KADARNAET.';
 $s_email_notification_title_for_status_bug_assigned = 'An draen-mañ zo bet DEVERKET.';
@@ -339,8 +340,12 @@ $s_timezone = 'Gwerzhid-eur';
 $s_prefs_reset_msg = 'Adderaouekaet eo bet ar penndibaboù...';
 $s_prefs_updated_msg = 'Hizivaet eo bet ar penndibaboù...';
 $s_select_profile = 'Diuzañ ar profil';
+$s_add_profile = 'Ouzhpennañ ar profil';
 $s_edit_profile = 'Aozañ ar profil';
+$s_update_profile = 'Hizivaat ar profil';
 $s_delete_profile = 'Dilemel ar profil';
+$s_global_profile = 'Profil hollek';
+$s_default_profile = 'Profil dre ziouer';
 $s_my_sponsorship = 'Ma sponsoradurioù';
 $s_update_sponsorship_button = 'Cheñch ar statud paeamant';
 $s_no_sponsored = 'N\'eus bet kavet draen ebet sponsoret ha deverket deoc\'h.';
@@ -467,6 +472,7 @@ $s_bugnote_updated_msg = 'Hizivaet-mat eo bet an notenn...';
 $s_last_edited = 'Kemmet da ziwezhañ :';
 $s_hide_content = 'Kuzhat an endalc\'had';
 $s_show_content = 'Diskouez an endalc\'had';
+$s_unknown_file_extension = 'dianav';
 $s_webmaster_contact_information = 'Kit e darempred gant <a href="mailto:%1$s" title="Kit e darempred gant ar mestr-gwiad dre bostel.">ar merour</a> evit bezañ skoazellet';
 $s_total_queries_executed = '%1$d reked sevenet en holl.';
 $s_unique_queries_executed = 'Rekedoù dibar sevenet :%1$d';
@@ -531,18 +537,18 @@ $s_default_filter = 'Sil dre ziouer';
 $s_create_filter_link = 'Krouiñ ul liamm pad';
 $s_create_short_link = 'Krouiñ ul liamm berr';
 $s_filter_permalink = 'Amañ dindan ez eus ul liamm pad war-du ar sil red :';
-$s_manage_users_link = 'Merañ an implijerien';
-$s_manage_projects_link = 'Merañ ar raktresoù';
-$s_manage_custom_field_link = 'Merañ ar maeziennoù personelaet';
-$s_manage_global_profiles_link = 'Merañ ar profiloù hollek';
-$s_manage_plugin_link = 'Merañ al lugantoù';
+$s_manage_users_link = 'Implijerien';
+$s_manage_projects_link = 'Raktresoù';
+$s_manage_custom_field_link = 'Maeziennoù personelaet';
+$s_manage_global_profiles_link = 'Profiloù hollek';
+$s_manage_plugin_link = 'Adveziantoù';
 $s_permissions_summary_report = 'Danevell an aotreoù';
-$s_manage_config_link = 'Merañ ar c\'hefluniadur';
+$s_manage_config_link = 'Kefluniañ';
 $s_manage_threshold_config = 'Treuzeier hent al labour';
 $s_manage_email_config = 'Kemennoù dre bostel';
 $s_manage_workflow_config = 'Hent al labour';
 $s_manage_workflow_graph = 'Grafik kas al labourioù';
-$s_manage_tags_link = 'Merañ an tikedennoù';
+$s_manage_tags_link = 'Tikedennoù';
 $s_create_new_account_link = 'Krouiñ ur gont nevez';
 $s_projects_link = 'Raktresoù';
 $s_documentation_link = 'Teuliadur';
@@ -617,7 +623,8 @@ $s_readonly_status = 'Statud ma teu un draen da vezañ da lenn hepken';
 $s_reopen_status = 'Statud a vez lakaet d\'un draen addigoret';
 $s_reopen_resolution = 'Diskoulm a vez lakaet d\'un draen addigoret';
 $s_limit_view_unless_threshold_option = 'Diskouez kudennoù an implijerien all (ma n\'eo ket resisaet e vo bevennet ar moned ouzh ar c\'hudennoù titouret, meret pe heuliet gant an implijer)';
-$s_config_delete_sure = 'Ha sur oc\'h hoc\'h eus c\'hoant da ziverkañ an arventennoù evit :';
+$s_export_issues = 'Kudennoù ezporzhiañ';
+$s_config_delete_sure = 'Ha sur oc\'h hoc\'h eus c\'hoant da ziverkañ an arventennoù evit %1$s er raktres %2$s?';
 $s_delete_config_button = 'Dilemel an arventennoù';
 $s_configuration_report = 'Danevell kefluniadur';
 $s_database_configuration = 'Kefluniadur an diaz roadennoù';
@@ -1001,6 +1008,7 @@ $s_simple_filters = 'Siloù eeun';
 $s_monitored_by = 'Evezhiet gant';
 $s_attachments = 'pezh stag';
 $s_bytes = 'okted';
+$s_kib = 'KiB';
 $s_attachment_missing = 'Mankout a ra ar restr stag';
 $s_attachment_count = 'Niver a restroù da-heul';
 $s_view_attachments_for_issue = 'Gwelet %1$d pezh stag evit an draen #%2$d';
@@ -1016,7 +1024,7 @@ $s_changelog = 'Marilh ar c\'hemmoù';
 $s_changelog_empty = 'N\'eus roll cheñchamant ebet da gaout';
 $s_changelog_empty_manager = 'Ne c\'haller kaout titour ebet eus ar renabl kemmoù. Enklozet e vez ar c\'hudennoù ur wech m\'o deus cr raktresoù stummoù. Diluziet int gant al lec\'hiadur "reizhet er stumm".';
 $s_roadmap = 'Kartenn-hent';
-$s_resolved_progress = '%1$d eus %2$d draen diskoulmet. Mont war-raok (%3$d%%).';
+$s_resolved_progress = '%1$d eus %2$d draen diskoulmet';
 $s_roadmap_empty = 'N\'haller kaout titour ebet war ar gartenn hent.';
 $s_roadmap_empty_manager = 'N\'haller kaout titour ebet war ar gartenn hent. Enklozet e vez ar c\'hudennoù ur wech m\'o deus cr raktresoù stummoù, ha "tummoù moned lec\'hiet o deus.';
 $s_http_auth_realm = 'Kevreañ ouzh MantisBT';
@@ -1386,6 +1394,7 @@ $s_load = 'Kargañ';
 $s_apply_changes = 'Lakaat ar c\'hemmoù da dalvezout';
 $s_undo = 'Dizober';
 $s_edit = 'Aozañ';
+$s_submit = 'Kas';
 $s_update = 'Hizivaat';
 $s_delete = 'Dilemel';
 $s_make_default = 'Lakaat dre ziouer';
