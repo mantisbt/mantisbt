@@ -69,7 +69,7 @@ class GravatarPlugin extends MantisPlugin {
 
 		$this->author = 'Victor Boctor';
 		$this->contact = 'vboctor@mantisbt.org';
-		$this->url = 'http://www.mantisbt.org';
+		$this->url = 'https://mantisbt.org';
 	}
 
 	/**
