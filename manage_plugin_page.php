@@ -439,7 +439,7 @@ class AvailablePlugin extends PluginForDisplay {
 			. '<span class="small">' . $t_author . $t_url . '</span>';
 
 		# Dependencies
-		if( is_array( $p_plugin->requires ) ) {
+		if( is_array( $p_plugin->requires ) && !empty( $p_plugin->requires ) ) {
 			$_all_plugins = plugin_find_all();
 			foreach( $p_plugin->requires as $t_required_basename => $t_version ) {
 				$this->can_install = false;
@@ -483,6 +483,7 @@ class AvailablePlugin extends PluginForDisplay {
 			$this->dependencies[] = '<span class="dependency_met">'
 				. lang_get( 'plugin_no_depends' )
 				. '</span>';
+            $this->can_install = true;
 		}
 
 		$this->upgrade_needed = plugin_needs_upgrade( $p_plugin );
