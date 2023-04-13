@@ -295,6 +295,10 @@ abstract class MantisPlugin {
 	/**
 	 * Check the plugin's validity status.
 	 *
+	 * A plugin is considered valid if:
+	 * - its base name is set {@see self::$name}
+	 * - it has a version number {@see self::$version}
+	 *
 	 * @return bool True if the plugin is valid.
 	 */
 	public function isValid() {
