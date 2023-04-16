@@ -41,7 +41,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 		$this->author = 'MantisBT Team';
 		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
-		$this->url = 'http://www.mantisbt.org';
+		$this->url = 'https://mantisbt.org';
 	}
 
 	/**
