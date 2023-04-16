@@ -44,6 +44,33 @@ def usage():
 # end usage()
 
 
+def run_publican(args):
+    """
+    Run Publican with the given arguments.
+    Prints an error message and exits with return code 1 if execution failed.
+
+    :param args: Publican Command and arguments (as a list)
+    :return:
+    """
+    publican = shutil.which('publican')
+    cmd = [publican]
+    if type(args) is list:
+        cmd.extend(args)
+    else:
+        cmd.append(args)
+
+    try:
+        print("Running", " ".join(cmd))
+        ret = subprocess.run(cmd, capture_output=True, check=True)
+        print(ret.stdout.decode().strip())
+        print()
+    except subprocess.CalledProcessError as e:
+        print(e.output.decode().strip())
+        print("ERROR:", e)
+        exit(1)
+
+
+
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], options, long_options)
@@ -132,11 +159,12 @@ def main():
             # Build docbook with PUBLICAN
 
             print("Building manual in '{}'\n".format(builddir))
-            os.system('publican clean')
-            os.system('publican build --formats={} --langs={}'.format(
-                      types[PUBLICAN], ','.join(langs)))
+            run_publican('clean')
+            run_publican(['build',
+                          '--formats=' + types[PUBLICAN],
+                          '--langs=' + ','.join(langs)])
 
-            print("\nCopying generated manuals to '{}'".format(installroot))
+            print("Copying generated manuals to '{}'".format(installroot))
             for lang in langs:
                 builddir = path.join('tmp', lang)
                 installdir = path.join(installroot, lang, directory)
@@ -171,9 +199,10 @@ def main():
                     for sourcefile in glob.glob(source):
                         print("Copying '{}' to '{}'".format(sourcefile, dest))
                         shutil.copy2(sourcefile, dest)
+            print()
 
-            os.system('publican clean')
-            print("\nBuild complete\n")
+            run_publican('clean')
+            print("{} Build complete\n".format(directory))
             buildcount += len(langs)
         else:
             # Build docbook with MAKE
