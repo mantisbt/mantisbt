@@ -184,9 +184,9 @@ class RestUserTests extends RestBase {
 	}
 
 	/**
-	 * Test getting an existing user by id.
+	 * Test getting an existing user by username.
 	 */
-	public function testGetUserByRef() {
+	public function testGetUserByUsername() {
 		$t_user_to_create = array(
 			'name' => Faker::username(),
 			'email' => Faker::email(),
@@ -197,42 +197,17 @@ class RestUserTests extends RestBase {
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
-		# Get by Id
-		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode(), 'get_user_by_id' );
-
-		$t_body = json_decode( $t_response->getBody(), true );
-		$this->assertTrue( isset( $t_body['users'] ), 'users element exists by id' );
-		$this->assertEquals( 1, count( $t_body['users'] ), 'users count by id' );
-
-		# Get by Name
-		$t_response = $this->builder()->get( '/users/' . $t_user_to_create['name'] )->send();
+		$t_response = $this->builder()->get( '/users/username/' . $t_user_to_create['name'] )->send();
 		$this->assertEquals( 200, $t_response->getStatusCode(), 'get_user_by_name' );
 
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['users'] ), 'users element exists by name' );
 		$this->assertEquals( 1, count( $t_body['users'] ), 'users count by name' );
 
-		# Get by Email
-		$t_response = $this->builder()->get( '/users/' . $t_user_to_create['email'] )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode(), 'get_user_by_email' );
-
-		$t_body = json_decode( $t_response->getBody(), true );
-		$this->assertTrue( isset( $t_body['users'] ), 'users element exists by email' );
-		$this->assertEquals( 1, count( $t_body['users'] ), 'users count by email' );
-
-		# Get by Real Name
-		$t_response = $this->builder()->get( '/users/' . $t_user_to_create['real_name'] )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode(), 'get_user_by_realname' );
-
-		$t_body = json_decode( $t_response->getBody(), true );
-		$this->assertTrue( isset( $t_body['users'] ), 'users element exists by realname' );
-		$this->assertEquals( 1, count( $t_body['users'] ), 'users count by realname' );
-
 		$t_user = $t_body['users'][0];
-		$this->assertTrue( isset( $t_user['id'] ), 'user id element exists by realname' );
-		$this->assertEquals( $t_user_id, $t_user['id'], 'user id as expected by realname' );
-		$this->assertEquals( $t_user_to_create['name'], $t_user['name'], 'user name as expected by realname' );
+		$this->assertTrue( isset( $t_user['id'] ), 'user id element exists by username' );
+		$this->assertEquals( $t_user_id, $t_user['id'], 'user id as expected by username' );
+		$this->assertEquals( $t_user_to_create['name'], $t_user['name'], 'user name as expected by username' );
 	}
 
 	/**
@@ -248,7 +223,7 @@ class RestUserTests extends RestBase {
 		$this->assertEquals( 201, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->
-			get( '/users/' . $t_user_id, 'select=id,name,projects' )->
+			get( '/users/' . $t_user_id . '?select=id,name,projects' )->
 			send();
 		$this->assertEquals( 200, $t_response->getStatusCode() );
 
@@ -315,7 +290,7 @@ class RestUserTests extends RestBase {
 	 */
 	public function testGetUserByIdZero() {
 		$t_response = $this->builder()->get( '/users/0' )->send();
-		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -323,7 +298,7 @@ class RestUserTests extends RestBase {
 	 */
 	public function testGetUserByIdNegative() {
 		$t_response = $this->builder()->get( '/users/-1' )->send();
-		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
 	/**

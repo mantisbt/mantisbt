@@ -63,7 +63,7 @@ class UserGetCommand extends Command {
 	 */
 	function validate() {
 		$t_current_user_id = auth_get_current_user_id();
-		$t_user_id = $this->query( 'id', null );
+		$t_user_id = $this->query( 'user_id', null );
 		if( !is_null( $t_user_id ) && $t_user_id <= 0 ) {
 			throw new ClientException(
 				"Invalid user id '$t_user_id'",
@@ -71,40 +71,38 @@ class UserGetCommand extends Command {
 				array( 'id' ) );
 		}
 
-		$t_user_ref = $this->query( 'ref', null );
+		$this->target_user_id = null;
 
-		$this->target_user_id = 0;
-
-		if( is_null( $t_user_id ) ) {
-			if( is_null( $t_user_ref ) ) {
-				$this->target_user_id = $t_current_user_id;
-			} else {
-				$t_lookup_user_id = user_get_id_by_name( $t_user_ref );
-				if( $t_lookup_user_id !== false ) {
-					$this->target_user_id = $t_lookup_user_id;
-				} else {
-					$t_lookup_user_id = user_get_id_by_email( $t_user_ref );
-					if( $t_lookup_user_id !== false ) {
-						$this->target_user_id = $t_lookup_user_id;
-					} else {
-						$t_lookup_user_id = user_get_id_by_realname( $t_user_ref );
-						if( $t_lookup_user_id !== false ) {
-							$this->target_user_id = $t_lookup_user_id;
-						} else if( is_numeric( $t_user_ref ) ) {
-							$this->target_user_id = (int)$t_user_ref;
-						}
-					}
-				}
+		$t_username = $this->query( 'username' );
+		if( !is_null( $t_username ) && !is_blank( $t_username ) ) {
+			$t_user_id = user_get_id_by_name( $t_username );
+			if( $t_user_id === false ) {
+				throw new ClientException(
+					'User not found',
+					ERROR_USER_BY_NAME_NOT_FOUND,
+					array( $t_username ) );
 			}
-		} else {
-			$this->target_user_id = (int)$t_user_id;
-		}
 
-		if( !is_null( $t_user_ref ) && $this->target_user_id == 0 ) {
-			throw new ClientException(
-				"User not found with id, name, realname or email equal to '$t_user_ref'",
-				ERROR_USER_BY_NAME_NOT_FOUND,
-				array( $t_user_ref ) );
+			$this->target_user_id = $t_user_id;
+		}
+		
+		if ( is_null( $this->target_user_id ) ) {
+			$t_user_id = $this->query( 'user_id' );
+			if( !is_null( $t_user_id ) && !is_blank( $t_user_id ) ) {
+				if( !user_exists( $t_user_id ) ) {
+					throw new ClientException(
+						'User not found',
+						ERROR_USER_BY_ID_NOT_FOUND,
+						array( $t_user_id ) );	
+				}
+
+				$this->target_user_id = (int)$t_user_id;
+			} else {
+				throw new ClientException(
+					'User not specified',
+					ERROR_INVALID_FIELD_VALUE,
+					array( 'user_id' ) );
+			}
 		}
 
 		$t_same_user = $t_current_user_id == $this->target_user_id;
@@ -136,16 +134,7 @@ class UserGetCommand extends Command {
 
 		# if select field is not specified or empty, then use defaults
 		if( is_null( $this->select ) ) {
-			$this->select = array(
-				'id',
-				'name',
-				'real_name',
-				'email',
-				'access_level',
-				'language',
-				'timezone',
-				'created_at'
-			);
+			$this->select = UserGetCommand::getDefaultFields();
 		}
 	}
 
@@ -162,6 +151,26 @@ class UserGetCommand extends Command {
 		}
 
 		return $t_result;
+	}
+
+	/**
+	 * Get the default fields to select for the response.
+	 * 
+	 * NOTE: removing fields from this list will break backward compatibility.
+	 * 
+	 * @return array List of fields to select.
+	 */
+	public static function getDefaultFields() {
+		return array(
+			'id',
+			'name',
+			'real_name',
+			'email',
+			'access_level',
+			'language',
+			'timezone',
+			'created_at'
+		);
 	}
 }
 
