@@ -106,7 +106,22 @@ class VersionUpdateCommand extends Command {
 
 		$t_name = $this->payload( 'name' );
 		if( !is_null( $t_name ) ) {
+			if( is_blank( $t_name ) ) {
+				throw new ClientException(
+					"Version name can't be empty",
+					ERROR_EMPTY_FIELD,
+					array( 'name' ) );
+			}
+
 			$t_version->version = trim( $t_name );
+
+			# check for duplicates
+			if( ( strtolower( $t_version->name ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $this->project_id ) ) {
+				throw new ClientException(
+					"Version name is not unique",
+					ERROR_VERSION_DUPLICATE,
+					array( $t_version->version ) );
+			}
 		}
 
 		$t_description = $this->payload( 'description' );
