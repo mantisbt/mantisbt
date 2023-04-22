@@ -82,6 +82,11 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	private $issueIdsToDelete = array();
 
 	/**
+	 * @var array Array of version IDs to delete
+	 */
+	private $versionIdsToDelete = array();
+
+	/**
 	 * @var array List of user ids to delete in tearDown()
 	 */
 	private $usersToDelete = array();
@@ -134,6 +139,10 @@ class RestBase extends PHPUnit\Framework\TestCase {
 
 		foreach ( $this->issueIdsToDelete as $t_issue_id_to_delete ) {
 			$this->builder()->delete( '/issues', 'id=' . $t_issue_id_to_delete )->send();
+		}
+
+		foreach( $this->versionIdsToDelete as $t_version_id_to_delete ) {
+			$this->builder()->delete( '/projects/' . $t_version_id_to_delete[0] . '/versions/' . $t_version_id_to_delete[1] )->send();
 		}
 	}
 
@@ -188,6 +197,20 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	 */
 	protected function deleteIssueAfterRun( $p_issue_id ) {
 		$this->issueIdsToDelete[] = $p_issue_id;
+	}
+
+	/**
+	 * Registers a version id to be deleted in tearDown
+	 *
+	 * @param integer $p_version_id Version identifier.
+	 * @return void
+	 */
+	protected function deleteAfterRunVersion( $p_version_id, $p_project_id = null ) {
+		if( is_null( $p_project_id ) ) {
+			$p_project_id = $this->getProjectId();
+		}
+
+		$this->versionIdsToDelete[] = array( $p_project_id, $p_version_id );
 	}
 
 	/**

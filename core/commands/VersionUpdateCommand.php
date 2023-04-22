@@ -94,13 +94,20 @@ class VersionUpdateCommand extends Command {
     /**
      * Process the command.
      *
-     * @return void
+     * @return array Command response
      */
     protected function process() {
 		global $g_project_override;
 
 		$t_prev_project_id = $g_project_override;
 		$g_project_override = $this->project_id;
+
+		if( !version_exists( $this->version_id ) ) {
+			throw new ClientException(
+				"Version with id '$this->version_id' not found",
+				ERROR_VERSION_NOT_FOUND,
+				array( $this->version_id ) );
+		}
 
         $t_version = version_get( $this->version_id );
 
@@ -113,10 +120,17 @@ class VersionUpdateCommand extends Command {
 					array( 'name' ) );
 			}
 
-			$t_version->version = trim( $t_name );
+			$t_version->version = $t_name = trim( $t_name );
+	
+			if( !version_is_valid_name( $t_name ) ) {
+				throw new ClientException(
+					'Invalid version name',
+					ERROR_INVALID_FIELD_VALUE,
+					array( 'name' ) );
+			}
 
 			# check for duplicates
-			if( ( strtolower( $t_version->name ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $this->project_id ) ) {
+			if( ( strtolower( $t_version->version ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $this->project_id ) ) {
 				throw new ClientException(
 					"Version name is not unique",
 					ERROR_VERSION_DUPLICATE,
@@ -149,6 +163,12 @@ class VersionUpdateCommand extends Command {
 
 		event_signal( 'EVENT_MANAGE_VERSION_UPDATE', array( $this->version_id ) );
 
+		version_cache_clear_row( $this->version_id );
+		$t_version = version_get( $this->version_id );
+		$t_result = array( 'version' => VersionGetCommand::VersionToArray( $t_version ) );
+
 		$g_project_override = $t_prev_project_id;
+
+		return $t_result;
     }
 }
