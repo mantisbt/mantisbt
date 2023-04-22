@@ -479,13 +479,13 @@ function version_remove_all( $p_project_id ) {
  * Return all versions for the specified project or projects list
  * Returned versions are ordered by reverse 'date_order'
  * @param integer|array $p_project_ids  A valid project id, or array of ids
- * @param boolean $p_released   Whether to show only released, unreleased, or both.
+ * @param boolean|null $p_released   Whether to show only released, unreleased, or both.
  *                  For this parameter, use constants defined as:
  *                  VERSION_ALL (null): returns any
  *                  VERSION_FUTURE (false): returns only unreleased versions
  *                  VERSION_RELEASED (true): returns only released versions
- * @param boolean $p_obsolete   Whether to include obsolete versions.
- * @param boolean $p_inherit    True to include versions from parent projects,
+ * @param boolean|null $p_obsolete   Whether to include obsolete versions.
+ * @param boolean|null $p_inherit    True to include versions from parent projects,
  *                              false not to, or null to use configuration
  *                              setting ($g_subprojects_inherit_versions).
  * @return array Array of version rows (in array format)
