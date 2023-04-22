@@ -524,36 +524,23 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+			'version_id' => $p_version_id
+		),
+		'payload' => array(
+			'name' => $t_name,
+			'description' => $t_description,
+			'released' => $t_released,
+			'obsolete' => $t_obsolete,
+			'timestamp' => $t_date_order
+		)
+	);
 
-	if( is_blank( $t_name ) ) {
-		return ApiObjectFactory::faultBadRequest( 'Mandatory field "name" was missing' );
-	}
+	$t_command = new VersionUpdateCommand( $t_data );
+	$t_command->execute();
 
-	# check for duplicates
-	$t_old_version_name = version_get_field( $p_version_id, 'version' );
-	if( ( strtolower( $t_old_version_name ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $t_project_id ) ) {
-		return ApiObjectFactory::faultConflict( 'Version exists for project' );
-	}
-
-	if( $t_released === false ) {
-		$t_released = VERSION_FUTURE;
-	} else {
-		$t_released = VERSION_RELEASED;
-	}
-
-	$t_version_data = new VersionData();
-	$t_version_data->id = $p_version_id;
-	$t_version_data->project_id = $t_project_id;
-	$t_version_data->version = $t_name;
-	$t_version_data->description = $t_description;
-	$t_version_data->released = $t_released;
-	$t_version_data->date_order = $t_date_order;
-	$t_version_data->obsolete = $t_obsolete;
-
-	version_update( $t_version_data );
 	return true;
 }
 
