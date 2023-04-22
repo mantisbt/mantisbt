@@ -56,8 +56,6 @@ $f_version_id = gpc_get_int( 'version_id' );
 $t_version_info = version_get( $f_version_id );
 $t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_version_info->project_id . '#versions';
 
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version_info->project_id );
-
 # Confirm with the user
 helper_ensure_confirmed(
 	sprintf( lang_get( 'version_delete_sure' ),
@@ -66,7 +64,15 @@ helper_ensure_confirmed(
 	lang_get( 'delete_version_button' )
 );
 
-version_remove( $f_version_id );
+$t_data = array(
+	'query' => array(
+		'project_id' => $t_version_info->project_id,
+		'version_id' => $f_version_id,
+	)
+);
+
+$t_command = new VersionDeleteCommand( $t_data );
+$t_command->execute();
 
 form_security_purge( 'manage_proj_ver_delete' );
 
