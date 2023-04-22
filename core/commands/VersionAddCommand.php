@@ -93,7 +93,10 @@ class VersionAddCommand extends Command {
 			$t_description,
 			$this->timestamp,
 			$t_obsolete );
+		
+		$t_version = version_get( $t_version_id );
+		$t_result = array( 'version' => VersionGetCommand::VersionToArray( $t_version ) );
 
-		return array( 'id' => $t_version_id );
+		return $t_result;
 	}
 }
