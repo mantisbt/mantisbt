@@ -25,6 +25,13 @@ use Mantis\Exceptions\ClientException;
  */
 class VersionAddCommand extends Command {
 	/**
+	 * The project id
+	 * 
+	 * @var integer
+	 */
+	protected $project_id;
+
+	/**
 	 * @var int|null $timestamp
 	 */
 	protected $timestamp;
@@ -51,15 +58,26 @@ class VersionAddCommand extends Command {
 	 * @throws ClientException
 	 */
 	function validate() {
-		$t_project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
+		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
 
-		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $t_project_id ) ) {
+		if( !project_exists( $this->project_id ) ) {
+			throw new ClientException(
+				"Project $this->project_id not found",
+				ERROR_PROJECT_NOT_FOUND,
+				array( $this->project_id ) );
+		}
+
+		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $this->project_id ) ) {
 			throw new ClientException( 'Access denied to add versions', ERROR_ACCESS_DENIED );
 		}
 
-		$t_name = $this->payload( 'name' );
-		if( is_blank( $t_name ) ) {
-			throw new ClientException( 'Invalid version name', ERROR_EMPTY_FIELD, array( 'name' ) );
+		$t_name = $this->payload( 'name', '' );
+		$t_name = trim( $t_name );
+		if( !version_is_valid_name( $t_name ) ) {
+			throw new ClientException(
+				'Invalid version name',
+				ERROR_INVALID_FIELD_VALUE,
+				array( 'name' ) );
 		}
 
 		$t_timestamp = $this->payload( 'timestamp', '' );
@@ -72,14 +90,10 @@ class VersionAddCommand extends Command {
 	 * @return array Command response
 	 */
 	protected function process() {
-		$t_project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
-		if( $t_project_id != helper_get_current_project() ) {
-			# in case the current project is not the same project of the bug we are
-			# viewing, override the current project. This to avoid problems with
-			# categories and handlers lists etc.
-			global $g_project_override;
-			$g_project_override = $t_project_id;
-		}
+		global $g_project_override;
+
+		$t_prev_project_id = $g_project_override;
+		$g_project_override = $this->project_id;
 
 		$t_name = trim( $this->payload( 'name' ) );
 		$t_description = trim( $this->payload( 'description', '' ) );
@@ -87,15 +101,18 @@ class VersionAddCommand extends Command {
 		$t_obsolete = $this->payload( 'obsolete', false );
 
 		$t_version_id = version_add(
-			$t_project_id,
+			$this->project_id,
 			$t_name,
 			$t_released ? VERSION_RELEASED : VERSION_FUTURE,
 			$t_description,
 			$this->timestamp,
 			$t_obsolete );
-		
+
+		version_cache_clear_row( $t_version_id );
 		$t_version = version_get( $t_version_id );
 		$t_result = array( 'version' => VersionGetCommand::VersionToArray( $t_version ) );
+
+		$g_project_override = $t_prev_project_id;
 
 		return $t_result;
 	}
