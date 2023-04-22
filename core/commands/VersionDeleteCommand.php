@@ -107,6 +107,9 @@ class VersionDeleteCommand extends Command {
 		$t_prev_project_id = $g_project_override;
 		$g_project_override = $this->project_id;
 
+		# The remove API triggers the EVENT_VERSION_DELETE event
+		# will leave it there so that it is triggered when a project
+		# is deleted, and it deletes all versions.
 		version_remove( $this->version_id, null );
 
 		$g_project_override = $t_prev_project_id;

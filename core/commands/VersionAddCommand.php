@@ -69,7 +69,7 @@ class VersionAddCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		$t_project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
