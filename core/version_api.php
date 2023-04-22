@@ -161,13 +161,38 @@ $g_cache_versions = array();
 $g_cache_versions_project  = array();
 
 /**
+ * Clear version cache
+ *
+ * @return void
+ */
+function version_cache_clear() {
+	global $g_cache_versions_project, $g_cache_versions;
+	$g_cache_versions_project = array();
+	$g_cache_versions = array();
+}
+
+/**
+ * Remove specified version from version cache
+ *
+ * @param integer $p_version_id The version id to remove from cache.
+ * @return void
+ */
+function version_cache_clear_row( $p_version_id ) {
+	global $g_cache_versions;
+
+	$c_version_id = (int)$p_version_id;
+
+	unset( $g_cache_versions[$c_version_id] );
+}
+
+/**
  * Cache a version row if necessary and return the cached copy
  * If the second parameter is true (default), trigger an error
  * if the version can't be found.  If the second parameter is
  * false, return false if the version can't be found.
  * @param integer $p_version_id     A version identifier to look up.
  * @param boolean $p_trigger_errors Whether to generate errors if not found.
- * @return array
+ * @return array|false The version row or false if not found.
  */
 function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 	global $g_cache_versions;
@@ -259,6 +284,19 @@ function version_exists( $p_version_id ) {
  */
 function version_is_unique( $p_version, $p_project_id = null ) {
 	return version_get_id( $p_version, $p_project_id ) === false;
+}
+
+function version_is_valid_name( $p_version_name ) {
+	if( is_null( $p_version_name ) ||
+		is_blank( $p_version_name ) ||
+		stripos( $p_version_name, "\r" ) !== false ||
+		stripos( $p_version_name, "\n" ) !== false ||
+		trim( $p_version_name ) !== $p_version_name ||
+		strlen( $p_version_name ) > 64 ) {
+		return false;
+	}
+
+	return true;
 }
 
 /**

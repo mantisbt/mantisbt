@@ -20,6 +20,8 @@ require_api( 'helper_api.php' );
 
 use Mantis\Exceptions\ClientException;
 
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
+
 /**
  * A command that gets project versions.
  */
@@ -59,6 +61,13 @@ class VersionGetCommand extends Command {
 	function validate() {
 		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
 
+		if( !project_exists( $this->project_id ) ) {
+			throw new ClientException(
+				"Project $this->project_id not found",
+				ERROR_PROJECT_NOT_FOUND,
+				array( $this->project_id ) );
+		}
+
 		if( !access_has_project_level( VIEWER, $this->project_id ) ) {
 			throw new ClientException( 'Access denied to get versions', ERROR_ACCESS_DENIED );
 		}
@@ -97,9 +106,13 @@ class VersionGetCommand extends Command {
 			$t_versions = array_map( 'VersionGetCommand::VersionRowToArray', $t_versions );
 		} else {
 			$t_version = version_get( $this->version_id );
-			$t_version = VersionGetCommand::VersionToArray( $t_version );
 
-			$t_versions = array( $t_version );
+			if( $t_version->project_id == $this->project_id ) {
+				$t_version = VersionGetCommand::VersionToArray( $t_version );
+				$t_versions = array( $t_version );
+			} else {
+				$t_versions = array();
+			}
 		}
 
 		$g_project_override = $t_prev_project_id;

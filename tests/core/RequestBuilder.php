@@ -99,7 +99,7 @@ class RequestBuilder {
 	/**
 	 * Build a GET request with optional query string
 	 *
-	 * @param string $p_body The request body
+	 * @param string|null $p_query_string The query string or null.
 	 * @return RequestBuilder
 	 */
 	public function get( $p_relative_path, $p_query_string = null ) {
@@ -115,7 +115,8 @@ class RequestBuilder {
 	/**
 	 * Build a PUT request with body and optional query string
 	 *
-	 * @param string $p_body The request body
+	 * @param array $p_body The request body
+	 * @param string|null $p_query_string The query string or null.
 	 * @return RequestBuilder
 	 */
 	public function put( $p_relative_path, $p_body, $p_query_string = null ) {
@@ -133,7 +134,8 @@ class RequestBuilder {
 	/**
 	 * Build a POST request with body and optional query string
 	 *
-	 * @param string $p_body The request body
+	 * @param array $p_body The request body
+	 * @param string|null $p_query_string The query string or null.
 	 * @return RequestBuilder
 	 */
 	public function post( $p_relative_path, $p_body, $p_query_string = null ) {
@@ -151,7 +153,8 @@ class RequestBuilder {
 	/**
 	 * Build a PATCH request with body and optional query string
 	 *
-	 * @param string $p_body The request body
+	 * @param array $p_body The request body
+	 * @param string|null $p_query_string The query string or null.
 	 * @return RequestBuilder
 	 */
 	public function patch( $p_relative_path, $p_body, $p_query_string = null ) {
@@ -169,14 +172,14 @@ class RequestBuilder {
 	/**
 	 * Build a DELETE request with optional query string
 	 *
-	 * @param string $p_body The request body
+	 * @param string|null $p_query_string The query string or null.
 	 * @return RequestBuilder
 	 */
 	public function delete( $p_relative_path, $p_query_string = null ) {
 		$this->method = 'DELETE';
 		$this->relative_path = $p_relative_path;
 
-		if( $p_query_string ) {
+		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
 			$this->relative_path .= '?' . $p_query_string;
 		}
 
