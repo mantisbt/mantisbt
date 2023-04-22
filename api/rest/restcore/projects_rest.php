@@ -44,6 +44,8 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	# Project versions
 	$g_app->post( '/{id}/versions', 'rest_project_version_add' );
 	$g_app->post( '/{id}/versions/', 'rest_project_version_add' );
+	$g_app->patch( '/{id}/versions/{version_id}', 'rest_project_version_update' );
+	$g_app->patch( '/{id}/versions/{version_id}/', 'rest_project_version_update' );
 	$g_app->delete( '/{id}/versions/{version_id}', 'rest_project_version_remove' );
 	$g_app->delete( '/{id}/versions/{version_id}/', 'rest_project_version_remove' );	
 
@@ -210,6 +212,38 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_version_id = (int)$t_result['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version created with id $t_version_id" );
+}
+
+/**
+ * A method to update a project version.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+    $t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+    if( is_blank( $t_project_id ) ) {
+        $t_message = "Project id is missing.";
+        return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+    }
+
+	$t_version_id = isset( $p_args['version_id'] ) ? $p_args['version_id'] : $p_request->getParam( 'version_id' );
+    $t_version_to_update = $p_request->getParsedBody();
+
+    $t_data = array(
+        'query' => array(
+            'project_id' => $t_project_id,
+            'version_id' => $t_version_id
+        ),
+        'payload' => $t_version_to_update
+    );
+
+    $t_command = new VersionUpdateCommand( $t_data );
+    $t_command->execute();
+
+    return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version updated" );
 }
 
 /**
