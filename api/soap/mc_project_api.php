@@ -583,17 +583,21 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 	}
 
 	$t_project_id = version_get_field( $p_version_id, 'project_id' );
-	$g_project_override = $t_project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+			'version_id' => $p_version_id
+		)
+	);
 
-	version_remove( $p_version_id );
+	$t_command = new VersionDeleteCommand( $t_data );
+	$t_command->execute();
+
 	return true;
 }
 
