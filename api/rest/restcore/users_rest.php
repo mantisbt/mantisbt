@@ -28,8 +28,16 @@
  * @var \Slim\App $g_app
  */
 $g_app->group('/users', function() use ( $g_app ) {
+	# These 4 cases are just to avoid html errors in case of incomplete urls
+	$g_app->get( '', 'rest_user_get' );
+	$g_app->get( '/', 'rest_user_get' );
+	$g_app->get( '/username/', 'rest_user_get' );
+	$g_app->get( '/username', 'rest_user_get' );
+
+	# This are the real cases for get users
 	$g_app->get( '/me', 'rest_user_get_me' );
-	$g_app->get( '/{ref}', 'rest_user_get' );
+	$g_app->get( '/username/{username}', 'rest_user_get' );
+	$g_app->get( '/{user_id}', 'rest_user_get' );
 
 	$g_app->post( '/', 'rest_user_create' );
 	$g_app->post( '', 'rest_user_create' );
@@ -62,27 +70,22 @@ $g_app->group('/users', function() use ( $g_app ) {
  * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_default_select = array(
-		'id',
-		'name',
-		'real_name',
-		'email',
-		'access_level',
-		'language',
-		'timezone',
-		'created_at',
-		'projects'
-	);
-
 	$t_select = $p_request->getParam( 'select', null );
-	if( $t_select == null ) {
-		$t_select = $t_default_select;
+	if( is_null( $t_select ) ) {
+		$t_select = UserGetCommand::getDefaultFields();
+
+		// The `project` field is part of this API's response, but it is not longer a default field
+		// for newer APIs to get user information, so add it here for backward compatibility.
+		if( !in_array( 'projects', $t_select ) ) {
+			$t_select[] = 'projects';
+		}
 	} else {
 		$t_select = explode( ',', $t_select );
 	}
 
 	$t_data = array(
 		'query' => array(
+			'user_id' => auth_get_current_user_id(),
 			'select' => $t_select
 		),
 		'options' => array(
@@ -106,29 +109,26 @@ function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_user_ref = $p_args['ref'];
+	$t_query = array();
+
+	$t_user_id = isset( $p_args['user_id'] ) ? $p_args['user_id'] : null;
+	if( !is_null( $t_user_id ) ) {
+		$t_query['user_id'] = (int)$t_user_id;
+	}
+
+	$t_username = isset( $p_args['username'] ) ? $p_args['username'] : null;
+	if( !is_null( $t_username ) ) {
+		$t_query['username'] = $t_username;
+	}
 
 	$t_select = $p_request->getParam( 'select', null );
-	if( is_null( $t_select ) ) {
-		$t_select = array(
-			'id',
-			'name',
-			'real_name',
-			'email',
-			'access_level',
-			'language',
-			'timezone',
-			'created_at'
-		);
-	} else {
+	if( !is_null( $t_select ) ) {
 		$t_select = explode( ',', $t_select );
+		$t_query['select'] = $t_select;
 	}
 
 	$t_data = array(
-		'query' => array(
-			'ref' => $t_user_ref,
-			'select' => $t_select
-		),
+		'query' => $t_query,
 		'options' => array(
 			'return_as_users' => true
 		)
