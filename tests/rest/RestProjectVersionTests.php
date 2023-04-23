@@ -50,6 +50,8 @@ class RestProjectVersionTests extends RestBase {
 
 	/**
 	 * Test add a version by name
+	 *
+	 * @return void
 	 */
 	public function testProjectAddVersionWithName() {
 		$this->createVersion();
@@ -57,6 +59,8 @@ class RestProjectVersionTests extends RestBase {
 
 	/**
 	 * Test add a version by name and desc
+	 *
+	 * @return void
 	 */
 	public function testProjectAddVersionWithNameAndDesc() {
 		$t_version_to_create = array(
@@ -77,6 +81,11 @@ class RestProjectVersionTests extends RestBase {
 		$this->assertEquals( $t_version_to_create['description'], $t_version['description'] );
 	}
 
+	/**
+	 * Test getting a version
+	 *
+	 * @return void
+	 */
 	public function testProjectGetVersion() {
 		$t_version = $this->createVersion();
 
@@ -91,6 +100,11 @@ class RestProjectVersionTests extends RestBase {
 		$this->assertEquals( $t_version['name'], $t_returned_version['name'] );
 	}
 
+	/**
+	 * Testing getting versions belong to a project.
+	 *
+	 * @return void
+	 */
 	public function testProjectGetVersions() {
 		$this->createVersion();
 
@@ -101,22 +115,42 @@ class RestProjectVersionTests extends RestBase {
 		$this->assertGreaterThanOrEqual( 1, count( $t_result['versions'] ) );
 	}
 
+	/**
+	 * Test getting versions for a project that doesn't exist.
+	 *
+	 * @return void
+	 */
 	public function testProjectGetVersionsForNonExistentProject() {
 		$t_response = $this->builder()->get( '/projects/1000000/versions' )->send();
 		$this->assertEquals( 404, $t_response->getStatusCode() );
 	}
 
+	/**
+	 * Test getting a version that doesn't exist.
+	 *
+	 * @return void
+	 */
 	public function testProjectGetVersionForNonExistentVersion() {
 		$t_response = $this->builder()->get( $this->ver_base_url . '1000000' )->send();
 		$this->assertEquals( 404, $t_response->getStatusCode() );
 	}
 
+	/**
+	 * Test adding a version for a project that doesn't exist.
+	 *
+	 * @return void
+	 */
 	public function testProjectAddVersionForNonExistentProject() {
 		$t_version_to_create = array( 'name' => $this->versionName() );
 		$t_response = $this->builder()->post( '/projects/1000000/versions', $t_version_to_create )->send();
 		$this->assertEquals( 404, $t_response->getStatusCode() );
 	}
 
+	/**
+	 * Test deleting a version.
+	 *
+	 * @return void
+	 */
 	public function testProjectDeleteVersion() {
 		$t_version = $this->createVersion();
 
@@ -137,7 +171,12 @@ class RestProjectVersionTests extends RestBase {
 		$this->assertEquals( 204, $t_response->getStatusCode() );
 	}
 
-	public function testProjectVersionAnonymous() {
+	/**
+	 * Test that an anonymous user can't delete a version.
+	 *
+	 * @return void
+	 */
+	public function testProjectDeleteVersionAnonymous() {
 		$t_version = $this->createVersion();
 
 		// anonymous users can't update a version
@@ -253,6 +292,12 @@ class RestProjectVersionTests extends RestBase {
 		$this->assertTrue( $t_version_result['released'] );
 	}
 
+	/**
+	 * Data provider for version names that should be rejected by
+	 * create/update version APIs.
+	 *
+	 * @return array The test data
+	 */
 	public function providerVersionInvalidNames() {
 		return array(
 			'empty' =>array( '' ),
@@ -265,10 +310,21 @@ class RestProjectVersionTests extends RestBase {
 		);
 	}
 
+	/**
+	 * Generate a random version name
+	 *
+	 * @return string The version name
+	 */
 	private function versionName() {
 		return 'Test Version ' . rand( 1, 1000000 );
 	}
 
+	/**
+	 * Create a version, validate that it was created successfully, and
+	 * return the version information.
+	 *
+	 * @return array The version information
+	 */
 	private function createVersion() {
 		$t_version_to_create = array( 'name' => $this->versionName() );
 

@@ -146,12 +146,18 @@ class RestBase extends PHPUnit\Framework\TestCase {
 		}
 	}
 
+	/**
+	 * Creates a RequestBuilder instance for building a http request.
+	 *
+	 * @return RequestBuilder
+	 */
 	public function builder() {
 		return new RequestBuilder( $this->base_path, $this->token );
 	}
 
 	/**
-	 * return integer The default project id.
+	 * Gets the id of the default project used for testing.
+	 *
 	 * @return integer
 	 */
 	protected function getProjectId() {
@@ -159,7 +165,7 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * return string The default category.
+	 * Gets the default category used for testing.
 	 * @return string
 	 */
 	protected function getCategory() {
