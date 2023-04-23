@@ -59,7 +59,7 @@ class VersionTest extends SoapBase {
 			'released' => true,
 			'description' => 'Test version',
 			'obsolete' => false,
-			'date_order'=> $this->date_order,
+			'date_order' => $this->date_order
 		);
 	}
 

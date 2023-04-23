@@ -27,6 +27,7 @@
  * Test config
  */
 require_once __DIR__ . '/RestIssueTests.php';
+require_once __DIR__ . '/RestProjectVersionTests.php';
 require_once __DIR__ . '/RestUserTests.php';
 
 /**
@@ -53,6 +54,7 @@ class RestAllTests extends PHPUnit\Framework\TestSuite
 		$t_suite = new RestAllTests( 'REST API' );
 
 		$t_suite->addTestSuite( 'RestIssueTests' );
+		$t_suite->addTestSuite( 'RestProjectVersionTests' );
 		$t_suite->addTestSuite( 'RestUserTests' );
 
 		return $t_suite;

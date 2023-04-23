@@ -28,7 +28,6 @@ require_once 'RestBase.php';
 /**
  * Test fixture for project related APIs.
  *
- * @requires extension curl
  * @group REST
  */
 class RestProjectVersionTests extends RestBase {
