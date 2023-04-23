@@ -466,14 +466,14 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 			'description' => $p_version['description'],
 			'released' => $p_version['released'],
 			'obsolete' => isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false,
-			'timestamp' => $p_version['date_order'],
+			'timestamp' => $p_version['date_order']
 		)
 	);
 
 	$t_command = new VersionAddCommand( $t_data );
 	$t_result = $t_command->execute();
 
-	return $t_result['id'];
+	return $t_result['version']['id'];
 }
 
 /**
@@ -486,8 +486,6 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
  * @return boolean returns true or false depending on the success of the update action
  */
 function mc_project_version_update( $p_username, $p_password, $p_version_id, stdClass $p_version ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -505,11 +503,10 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	$p_version = ApiObjectFactory::objectToArray( $p_version );
 
 	$t_project_id = $p_version['project_id'];
-	$g_project_override = $t_project_id;
 	$t_name = $p_version['name'];
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
-	$t_date_order = isset( $p_version['date_order'] ) ? strtotime( $p_version['date_order'] ) : null;
+	$t_date_order = is_blank( $p_version['date_order'] ) ? null : $p_version['date_order'];
 	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 
 	if( is_blank( $t_project_id ) ) {
@@ -553,8 +550,6 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
  * @return boolean returns true or false depending on the success of the delete action
  */
 function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
