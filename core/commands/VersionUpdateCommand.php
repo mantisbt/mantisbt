@@ -36,28 +36,28 @@ class VersionUpdateCommand extends Command {
 	 */
 	private $version_id;
 
-    /**
-     * $p_data['query'] is expected to contain:
-     * - project_id (integer)
+	/**
+	 * $p_data['query'] is expected to contain:
+	 * - project_id (integer)
 	 * - version_id (integer)
-     *
-     * $p_data['payload'] is expected to contain:
-     * - name (string)
-     * - description (string)
-     * - released (bool)
-     * - obsolete (bool)
-     * - timestamp (timestamp) - e.g. 2018-05-21T15:00:00-08:00
-     *
-     * @param array $p_data The command data.
-     */
-    function __construct( array $p_data ) {
-        parent::__construct( $p_data );
-    }
+	 *
+	 * $p_data['payload'] is expected to contain:
+	 * - name (string)
+	 * - description (string)
+	 * - released (bool)
+	 * - obsolete (bool)
+	 * - timestamp (timestamp) - e.g. 2018-05-21T15:00:00-08:00
+	 *
+	 * @param array $p_data The command data.
+	 */
+	function __construct( array $p_data ) {
+		parent::__construct( $p_data );
+	}
 
-    /**
-     * Validate the data.
-     */
-    function validate() {
+	/**
+	 * Validate the data.
+	 */
+	function validate() {
 		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
 
 		if( !project_exists( $this->project_id ) ) {
@@ -89,14 +89,14 @@ class VersionUpdateCommand extends Command {
 				ERROR_VERSION_NOT_FOUND,
 				array( $this->version_id ) );
 		}
-    }
+	}
 
-    /**
-     * Process the command.
-     *
-     * @return array Command response
-     */
-    protected function process() {
+	/**
+	 * Process the command.
+	 *
+	 * @return array Command response
+	 */
+	protected function process() {
 		global $g_project_override;
 
 		$t_prev_project_id = $g_project_override;
@@ -109,7 +109,7 @@ class VersionUpdateCommand extends Command {
 				array( $this->version_id ) );
 		}
 
-        $t_version = version_get( $this->version_id );
+		$t_version = version_get( $this->version_id );
 
 		$t_name = $this->payload( 'name' );
 		if( !is_null( $t_name ) ) {
@@ -121,7 +121,7 @@ class VersionUpdateCommand extends Command {
 			}
 
 			$t_version->version = $t_name = trim( $t_name );
-	
+
 			if( !version_is_valid_name( $t_name ) ) {
 				throw new ClientException(
 					'Invalid version name',
@@ -143,7 +143,7 @@ class VersionUpdateCommand extends Command {
 			$t_version->description = trim( $t_description );
 		}
 
-        $t_released = $this->payload( 'released' );
+		$t_released = $this->payload( 'released' );
 		if( !is_null( $t_released ) ) {
 			$t_version->released = $t_released ? VERSION_RELEASED : VERSION_FUTURE;
 		}
@@ -153,13 +153,13 @@ class VersionUpdateCommand extends Command {
 			$t_version->obsolete = $t_obsolete;
 		}
 
-        $t_timestamp = $this->payload( 'timestamp' );
-        if( !is_null( $t_timestamp ) && !is_blank( $t_timestamp ) ) {
-            $t_timestamp = strtotime( $t_timestamp );
+		$t_timestamp = $this->payload( 'timestamp' );
+		if( !is_null( $t_timestamp ) && !is_blank( $t_timestamp ) ) {
+			$t_timestamp = strtotime( $t_timestamp );
 			$t_version->date_order = $t_timestamp;
-        }
+		}
 
-        version_update( $t_version );
+		version_update( $t_version );
 
 		event_signal( 'EVENT_MANAGE_VERSION_UPDATE', array( $this->version_id ) );
 
@@ -170,5 +170,5 @@ class VersionUpdateCommand extends Command {
 		$g_project_override = $t_prev_project_id;
 
 		return $t_result;
-    }
+	}
 }
