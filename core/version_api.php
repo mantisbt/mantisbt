@@ -286,6 +286,12 @@ function version_is_unique( $p_version, $p_project_id = null ) {
 	return version_get_id( $p_version, $p_project_id ) === false;
 }
 
+/**
+ * Validate the specified version name
+ *
+ * @param string $p_version_name Version name to validate.
+ * @return boolean true: valid, false: otherwise.
+ */
 function version_is_valid_name( $p_version_name ) {
 	if( is_null( $p_version_name ) ||
 		is_blank( $p_version_name ) ||
