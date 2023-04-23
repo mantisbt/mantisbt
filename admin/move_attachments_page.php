@@ -23,7 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
+require_once( dirname( __FILE__, 2 ) . '/core.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
@@ -120,13 +120,16 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 	<thead>
 		<tr>
 			<th>Project name</th>
-			<th width="28%">File Path</th>
-			<th width="5%">Disk</th>
-			<th width="5%">Database</th>
-			<th width="5%">Attachments</th>
-			<th width="5%">Storage</th>
-			<th width="7%">To Disk</th>
-			<th width="7%">To Database</th>
+			<th>File Path</th>
+			<th class="center">Disk</th>
+			<th class="center">Database</th>
+			<th class="center">Attachments</th>
+			<th class="center"
+				title="As defined by file_upload_method config for the project">
+				Storage
+			</th>
+			<th class="center">To Disk</th>
+			<th class="center">To Database</th>
 		</tr>
 	</thead>
 	
@@ -147,9 +150,11 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 		$t_upload_method = config_get( 'file_upload_method', null, ALL_USERS, $t_id );
 		if( $t_upload_method == DISK ) {
 			$t_method = 'Disk';
+			$t_target = 'disk';
 		} else {
 			# Must be DATABASE
 			$t_method = 'Database';
+			$t_target = 'db';
 		}
 
 		$t_file_path = $t_project['file_path'];
@@ -165,20 +170,26 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 		echo '<td class="center">' . ( $t_db_count + $t_disk_count ) . '</td>';
 		echo '<td class="center">' . $t_method . '</td>';
 
+		$t_cell_checkbox = sprintf( '<td class="center">'
+			. '<input type="checkbox" name="to_move[]" value="%s:%d" title="Tick to move '
+			. $t_type . '" /></td>',
+			$t_target,
+			$t_id
+		);
+		$t_cell_noaction = '<td class="center" title="No ' . $t_type . ' need moving"">-</td>';
+
 		if( $t_upload_method == DISK ) {
-			if ( !is_blank( $t_file_path ) && $t_db_count > 0 ) {
-				echo '<td class="center"><input type="checkbox" name="to_move[]" value="disk:' . $t_id . '" /></td>';
-			} else {
-				echo '<td class="center">-</td>';
-			}
-			echo '<td class="center">-</td>';
+			# To Database column
+			echo !is_blank( $t_file_path ) && $t_db_count > 0 ? $t_cell_checkbox : $t_cell_noaction;
+
+			# To Disk column
+			echo $t_cell_noaction;
 		} else {
-			echo '<td class="center">-</td>';
-			if ( $t_disk_count > 0 ) {
-				echo '<td class="center"><input type="checkbox" name="to_move[]" value="db:' . $t_id . '" /></td>';
-			} else {
-				echo '<td class="center">-</td>';
-			}
+			# To Database column
+			echo $t_cell_noaction;
+
+			# To Disk column
+			echo $t_disk_count ? $t_cell_checkbox : $t_cell_noaction;
 		}
 		echo "</tr>\n";
 	}
@@ -189,7 +200,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 </table>
 <div class="widget-toolbox padding-8 clearfix">
 	<input name="type" type="hidden" value="<?php echo string_attribute( $f_file_type); ?>" />
-	<input type="submit" class="btn btn-primary btn-white btn-round" value="Move Attachments" />
+	<input type="submit" class="btn btn-primary btn-white btn-round" value="Move <?php echo $t_type ?>" />
 </div>
 </div>
 </form>
