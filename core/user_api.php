@@ -288,18 +288,20 @@ function user_is_email_unique( $p_email, $p_user_id = null ) {
 	}
 
 	$p_email = trim( $p_email );
+	// Escape SQL LIKE pattern chars to ensure exact match
+	$p_email = preg_replace( '/([%_])/', '\\\\$1', $p_email );
 
-	db_param_push();
-	if ( $p_user_id === null ) {
-		$t_query = 'SELECT email FROM {user} WHERE email=' . db_param();
-		$t_result = db_query( $t_query, array( $p_email ), 1 );
-	} else {
-		$t_query = 'SELECT email FROM {user} WHERE id<>' . db_param() .
-			' AND email=' . db_param();
-		$t_result = db_query( $t_query, array( $p_user_id, $p_email ), 1 );
+	$t_query = new DbQuery;
+	$t_query->sql( 'SELECT email FROM {user} WHERE '
+		// Case-insensitive like
+		. $t_query->sql_ilike( 'email', $p_email, '\\' )
+	);
+	if( $p_user_id !== null ) {
+		$t_query->append_sql( ' AND id<>' . $t_query->param( $p_user_id ) );
 	}
 
-	return !db_result( $t_result );
+	$t_query->execute();
+	return !$t_query->value();
 }
 
 /**
