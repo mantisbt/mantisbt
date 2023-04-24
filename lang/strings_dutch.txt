@@ -1414,6 +1414,7 @@ $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Veld "%1$s" mag maximaal %2$d tekens lang
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'De API-tokennaam "%s" wordt al gebruikt. Ga terug en selecteer een andere.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Naar het bestand dat is opgegeven in $g_log_destination "%s" kan niet geschreven worden.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'De toegevoegde gebruiker heeft niet voldoende toegangsrechten om deze melding te volgen.';
+$MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'Token voor User-API met id "%d" niet gevonden.';
 $s_dropzone_default_message = 'Voeg bestanden toe via slepen, selecteren of plakken.';
 $s_dropzone_fallback_message = 'Uw browser heeft geen ondersteuning voor het uploaden van bestanden via slepen.';
 $s_dropzone_file_too_big = 'Het bestand is te groot ({{filesize}} MiB). Maximumgrootte: {{maxFilesize}} MiB.';
