@@ -45,7 +45,7 @@ require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
  *       "enabled": true,
  *       "protected": false
  *     },
- *     "notify_user": true
+ *     "notify_user": false
  *   }
  * }
  */
@@ -221,10 +221,7 @@ class UserUpdateCommand extends Command {
 		}
 
 		# Notify User
-		$this->notify_user = $this->payload( 'notify_user', true );
-		if( config_get( 'enable_email_notification' ) == OFF ) {
-			$this->notify_user = false;
-		}
+		$this->notify_user = $this->payload( 'notify_user', false );
 
 		# Authorization
 		if( $t_actor_user_id === $this->user_id && !$t_actor_is_admin ) {
