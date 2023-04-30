@@ -525,6 +525,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
  * @return void
  */
 function email_user_changed( $p_user_id, $p_old_user, $p_new_user ) {
+	if( config_get( 'enable_email_notification' ) == OFF ) {
+		return;
+	}
+
 	lang_push( user_pref_get_language( $p_user_id ) );
 	$t_changes = '';
 
