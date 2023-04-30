@@ -517,6 +517,54 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 }
 
 /**
+ * Send an email notification to a user when their information is changed by another user.
+ *
+ * @param int $p_user_id The user id of the user whose information was changed.
+ * @param array $p_old_user The user's information before the change.
+ * @param array $p_new_user The user's information after the change.
+ * @return void
+ */
+function email_user_changed( $p_user_id, $p_old_user, $p_new_user ) {
+	lang_push( user_pref_get_language( $p_user_id ) );
+	$t_changes = '';
+
+	if( strcmp( $p_new_user['username'], $p_old_user['username'] ) ) {
+		$t_changes .= lang_get( 'username_label' ) . ' ' . $p_old_user['username'] . ' => ' . $p_new_user['username'] . "\n";
+	}
+
+	if( strcmp( $p_old_user['real_name'], $p_new_user['real_name'] ) ) {
+		$t_changes .= lang_get( 'realname_label' ) . ' ' . $p_old_user['real_name'] . ' => ' . $p_new_user['real_name'] . "\n";
+	}
+
+	if( strcmp( $p_old_user['email'], $p_new_user['email'] ) ) {
+		$t_changes .= lang_get( 'email_label' ) . ' ' . $p_old_user['email'] . ' => ' . $p_new_user['email'] . "\n";
+	}
+
+	if( $p_old_user['access_level'] !== $p_new_user['access_level'] ) {
+		$t_old_access_string = get_enum_element( 'access_levels', $p_old_user['access_level'] );
+		$t_new_access_string = get_enum_element( 'access_levels', $p_new_user['access_level'] );
+		$t_changes .= lang_get( 'access_level_label' ) . ' ' . $t_old_access_string . ' => ' . $t_new_access_string . "\n\n";
+	}
+
+	if( !empty( $t_changes ) ) {
+		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
+		$t_updated_msg = lang_get( 'email_user_updated_msg' );
+		$t_message = $t_updated_msg . "\n\n" . config_get_global( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
+
+		if( null === email_store( $p_new_user['email'], $t_subject, $t_message ) ) {
+			log_event( LOG_EMAIL, 'Notification was NOT sent to ' . $p_new_user['username'] );
+		} else {
+			log_event( LOG_EMAIL, 'Account update notification sent to ' . $p_new_user['username'] . ' (' . $p_new_user['email'] . ')' );
+			if( config_get( 'email_send_using_cronjob' ) == OFF ) {
+				email_send_all();
+			}
+		}
+	}
+
+	lang_pop();
+}
+
+/**
  * Send password to user.
  *
  * @param integer $p_user_id      A valid user identifier.

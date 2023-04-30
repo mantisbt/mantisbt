@@ -449,6 +449,14 @@ function mci_user_get( $p_user_id, $p_select = null ) {
 				$t_access_level, 'access_levels', $t_language );
 		}
 
+		if( !is_null( $p_select ) && in_array( 'enabled', $p_select ) ) {
+			$t_user_data['enabled'] = user_is_enabled( $p_user_id );
+		}
+
+		if( !is_null( $p_select ) && in_array( 'protected', $p_select ) ) {
+			$t_user_data['protected'] = user_is_protected( $p_user_id );
+		}
+
 		if( is_null( $p_select ) || in_array( 'created_at', $p_select ) ) {
 			$t_user_data['created_at'] = ApiObjectFactory::datetime( user_get_field( $p_user_id, 'date_created' ) );
 		}
