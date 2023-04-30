@@ -132,14 +132,6 @@ class UserUpdateCommand extends Command {
 			throw new ClientException( 'Missing user data', ERROR_EMPTY_FIELD, array( 'user' ) );
 		}
 
-		# Don't allow updating accounts to access levels higher than that of
-		# the user creating the account.
-		if( !access_has_global_level( $this->access_level ) ) {
-			throw new ClientException(
-				'Access denied to create users with higher access level',
-				ERROR_ACCESS_DENIED );
-		}
-
 		# Protected
 		$t_old_protected = user_is_protected( $this->user_id );
 		$t_new_protected = isset( $t_user['protected'] ) ? (int)$t_user['protected'] : null;
@@ -167,7 +159,11 @@ class UserUpdateCommand extends Command {
 
 		# Real Name
 		$t_old_realname = user_get_realname( $this->user_id );
-		$t_new_realname = isset( $t_user['real_name'] ) ? trim( $t_user['real_name'] ) : null;
+		$t_new_realname = isset( $t_user['real_name'] ) ? $t_user['real_name'] : null;
+
+		if( !is_null( $t_new_realname ) ) {
+			$t_new_realname = string_normalize( $t_new_realname );
+		}
 
 		# ... if realname should be set by LDAP, then fetch it.
 		if( $t_ldap && config_get_global( 'use_ldap_realname' ) ) {
@@ -179,7 +175,7 @@ class UserUpdateCommand extends Command {
 		}
 
 		if( !is_null( $t_new_realname ) && $t_old_realname !== $t_new_realname ) {
-			$this->realname = string_normalize( $t_new_realname );
+			$this->realname = $t_new_realname;
 		}
 
 		# Email
@@ -240,6 +236,15 @@ class UserUpdateCommand extends Command {
 			if( !$t_actor_can_manage_users ) {
 				throw new ClientException( 'Access denied to update users', ERROR_ACCESS_DENIED );
 			}
+		}
+
+		# Don't allow updating accounts to access levels higher than that of
+		# the user actor's the account.
+		if( !access_has_global_level( $t_old_access_level ) ||
+		    ( !is_null( $t_new_access_level ) && !access_has_global_level( $t_new_access_level ) ) ) {
+			throw new ClientException(
+				'Access denied to update users with higher access level',
+				ERROR_ACCESS_DENIED );
 		}
 
 		# check that we are not downgrading the last administrator
