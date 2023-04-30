@@ -42,6 +42,8 @@ $g_app->group('/users', function() use ( $g_app ) {
 	$g_app->post( '/', 'rest_user_create' );
 	$g_app->post( '', 'rest_user_create' );
 
+	$g_app->patch( '/{id}', 'rest_user_update' );
+
 	$g_app->post( '/me/token/', 'rest_user_create_token_for_current_user' );
 	$g_app->post( '/me/token', 'rest_user_create_token_for_current_user' );
 	$g_app->post( '/{user_id}/token/', 'rest_user_create_token' );
@@ -164,6 +166,42 @@ function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "User created with id $t_user_id" )->
 		withJson( array( 'user' => mci_user_get( $t_user_id ) ) );
+}
+
+/**
+ * A method that updates a user.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ *
+ * @return \Slim\Http\Response The augmented response.
+ *
+ * @noinspection PhpUnusedParameterInspection
+ */
+function rest_user_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_query = array();
+
+	$t_user_id = isset( $p_args['id'] ) ? $p_args['id'] : null;
+	if( !is_null( $t_user_id ) ) {
+		$t_query['user_id'] = (int)$t_user_id;
+	}
+
+	$t_payload = $p_request->getParsedBody();
+	if( !$t_payload ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+	}
+
+	$t_data = array(
+		'query' => $t_query,
+		'payload' => $t_payload );
+
+	$t_command = new UserUpdateCommand( $t_data );
+	$t_result = $t_command->execute();
+	$t_user_id = $t_result['user']['id'];
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "User with id $t_user_id updated" )->
+		withJson( $t_result );
 }
 
 /**
