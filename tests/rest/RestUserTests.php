@@ -155,6 +155,145 @@ class RestUserTests extends RestBase {
 	}
 
 	/**
+	 * Test updating user
+	 */
+	public function testUpdateUser() {
+		$t_user_to_create = array(
+			'name' => Faker::username()
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( 201, $t_response->getStatusCode(), 'create_user' );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->assertTrue( isset( $t_body['user'] ) );
+		$t_user_id = $t_body['user']['id'];
+
+		$t_updated_user = array(
+			'name' => Faker::username(),
+			'email' => Faker::email(),
+			'real_name' => Faker::realname(),
+			'access_level' => array( 'name' => 'manager' ),
+			'enabled' => false,
+			'protected' => false
+		);
+
+		$t_user_update = array(
+			'user' => $t_updated_user
+		);
+
+		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
+		$this->assertEquals( 200, $t_response->getStatusCode() );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->assertTrue( isset( $t_body['user'] ) );
+
+		$t_user = $t_body['user'];
+		$this->assertTrue( isset( $t_user['id'] ) );
+		$this->assertTrue( is_numeric( $t_user['id'] ) );
+		$this->assertEquals( $t_user_id, $t_user['id'] );
+		$this->assertEquals( $t_updated_user['name'], $t_user['name'] );
+	}
+
+	/**
+	 * Test updating user with duplicate username
+	 */
+	public function testUpdateUserDuplicateUsername() {
+		$t_username_1 = Faker::username();
+		$t_username_2 = Faker::username();
+
+		$t_user_to_create = array(
+			'name' => $t_username_1
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( 201, $t_response->getStatusCode(), 'create_user' );
+
+		$t_user_to_create = array(
+			'name' => $t_username_2
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( 201, $t_response->getStatusCode(), 'create_user' );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->assertTrue( isset( $t_body['user'] ) );
+		$t_user_id = $t_body['user']['id'];
+
+		$t_updated_user = array(
+			'name' => $t_username_1
+		);
+
+		$t_user_update = array(
+			'user' => $t_updated_user
+		);
+
+		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
+		$this->assertEquals( 400, $t_response->getStatusCode() );
+	}
+
+	/**
+	 * Test updating user with invalid username
+	 *
+	 * @dataProvider providerInvalidUserNames
+	 */
+	public function testUpdateUserInvalidName( $p_username ) {
+		$t_user_to_create = array(
+			'name' => Faker::username()
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( 201, $t_response->getStatusCode(), 'create_user' );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->assertTrue( isset( $t_body['user'] ) );
+		$t_user_id = $t_body['user']['id'];
+
+		$t_updated_user = array(
+			'name' => $p_username
+		);
+
+		$t_user_update = array(
+			'user' => $t_updated_user
+		);
+
+		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
+		$this->assertEquals( 400, $t_response->getStatusCode() );
+	}
+
+	/**
+	 * Test updating user with invalid username
+	 */
+	public function testUpdateUserAnonymous() {
+		$t_user_to_create = array(
+			'name' => Faker::username()
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( 201, $t_response->getStatusCode(), 'create_user' );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->assertTrue( isset( $t_body['user'] ) );
+		$t_user_id = $t_body['user']['id'];
+
+		$t_updated_user = array(
+			'name' => Faker::username()
+		);
+
+		$t_user_update = array(
+			'user' => $t_updated_user
+		);
+
+		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->anonymous()->send();
+		$this->assertEquals( 401, $t_response->getStatusCode() );
+	}
+
+	/**
 	 * Test getting an existing user by id.
 	 */
 	public function testGetUserById() {
