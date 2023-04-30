@@ -97,6 +97,17 @@ class RequestBuilder {
 	}
 
 	/**
+	 * Impersonates the specified user
+	 *
+	 * @param string $p_username The username of user to impersonate
+	 * @return RequestBuilder
+	 */
+	public function impersonate( $p_username ) {
+		$this->headers['X-Mantis-Username'] = $p_username;
+		return $this;
+	}
+
+	/**
 	 * Build a GET request with optional query string
 	 *
 	 * @param string|null $p_query_string The query string or null.

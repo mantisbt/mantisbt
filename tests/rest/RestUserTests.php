@@ -375,6 +375,26 @@ class RestUserTests extends RestBase {
 	}
 
 	/**
+	 * Test attempt to delete self.
+	 * 
+	 * @return void
+	 */
+	public function testDeleteCurrentUserWithImpersonation() {
+		$t_username = Faker::username();
+		$t_user_to_create = array(
+			'name' => $t_username,
+			'access_level' => array( 'name' => 'administrator' )
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+
+		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->impersonate( $t_username )->send();
+		$this->assertEquals( 400, $t_response->getStatusCode() );
+	}
+
+	/**
 	 * Test deleting the current logged in user (anonymous).
 	 */
 	public function testDeleteCurrentUserAnonymous() {

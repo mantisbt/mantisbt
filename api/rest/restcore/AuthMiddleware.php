@@ -81,6 +81,35 @@ class AuthMiddleware {
 			return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'Access denied' );
 		}
 
+		$t_impersonation_header = $request->getHeaderLine( HEADER_USERNAME );
+		if( !empty( $t_impersonation_header ) && $t_login_method == LOGIN_METHOD_API_TOKEN ) {
+			$t_username = $t_impersonation_header;
+			$t_impersonation_user_id = user_get_id_by_name( $t_username );
+			if( $t_impersonation_user_id === false ) {
+				return $response->withStatus( HTTP_STATUS_NOT_FOUND, 'Invalid impersonation username' );
+			}
+
+			if( $t_impersonation_user_id === auth_get_current_user_id() ) {
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, "Can't impersonate self" );
+			}
+
+			if( !access_has_global_level( config_get( 'impersonate_user_threshold' ) ) ) {
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, "User can't impersonate other users" );
+			}
+
+			if( (int)user_get_field( $t_impersonation_user_id, 'access_level' ) > current_user_get_field( 'access_level' ) ) {
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, "User can't impersonate users with higher access level" );
+			}
+
+			# Token is valid, then login the user without worrying about a password.
+			if( auth_attempt_script_login( $t_username, null ) === false ) {
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'Login failed for impersonated user' );
+			}
+
+			# Set language to user's language
+			lang_push( lang_get_default() );
+		}
+
 		# Now that user is logged in, check if they have the right access level to access the REST API.
 		# Don't treat web UI calls with cookies as API calls that need to be disabled for certain access levels.
 		if( $t_login_method != LOGIN_METHOD_COOKIE && !mci_has_readonly_access() ) {
