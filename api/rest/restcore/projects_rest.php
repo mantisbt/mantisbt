@@ -61,11 +61,15 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->delete( '/{id}/subprojects/{subproject_id}', 'rest_project_hierarchy_delete' );
 	$g_app->delete( '/{id}/subprojects/{subproject_id}/', 'rest_project_hierarchy_delete' );
 
+	# Project Users
+	$g_app->group( '/{id}/users[/]', function() use ( $g_app ) {
+		$g_app->post( '', 'rest_project_user_add' );
+		$g_app->put( '', 'rest_project_user_add' );
+		$g_app->get( '', 'rest_project_users' );
+	});
+
 	# Project Users that can handle issues
 	$g_app->get( '/{id}/handlers', 'rest_project_handlers' );
-
-	# Project Users
-	$g_app->get( '/{id}/users', 'rest_project_users' );
 });
 
 /**
@@ -130,6 +134,35 @@ function rest_project_handlers(\Slim\Http\Request $p_request, \Slim\Http\Respons
 	$t_project_id = (int)$p_args['id'];
 	$t_access_level = config_get( 'handle_bug_threshold', null, null, $t_project_id );
 	return project_users( $p_request, $p_response, $p_args, $t_access_level );
+}
+
+/**
+ * A method to add user to a project with specified access level. If user already has access to the project,
+ * their access level will be updated.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_user_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = (int)$p_args['id'];
+
+	$t_payload = $p_request->getParsedBody();
+	if( !$t_payload ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+	}
+
+	$t_payload['project'] = array( 'id' => $t_project_id );
+
+	$t_data = array(
+		'payload' => $t_payload
+	);
+
+	$t_command = new ProjectUsersAddCommand( $t_data );
+	$t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
 
 /**

@@ -39,16 +39,12 @@ require_once( dirname( __FILE__, 3 ) . '/api/soap/mc_enum_api.php' );
  */
 class ProjectUsersAddCommand extends Command {
 	/**
-	 * The project id
-	 *
-	 * @var integer
+	 * @var integer The project id
 	 */
 	private $project_id;
 
 	/**
-	 * The authenticated user id
-	 *
-	 * @var integer
+	 * @var integer The user id
 	 */
 	private $user_id;
 
