@@ -851,13 +851,14 @@ function user_get_id_by_cookie( $p_cookie_string, $p_throw = false ) {
  *
  * @param array $p_user The user info.
  * @param boolean $p_throw_if_id_not_found If id specified and doesn't exist, then throw.
+ * @param boolean $p_allow_all_users Allow user id 0 to be returned.
  * @return integer user id
  * @throws ClientException
  */
-function user_get_id_by_user_info( array $p_user, $p_throw_if_id_not_found = false ) {
-	if( isset( $p_user['id'] ) && (int)$p_user['id'] != 0 ) {
+function user_get_id_by_user_info( array $p_user, $p_throw_if_id_not_found = false, $p_allow_all_users = false ) {
+	if( isset( $p_user['id'] ) && ( $p_allow_all_users || ( (int)$p_user['id'] != 0 ) ) ) {
 		$t_user_id = (int)$p_user['id'];
-		if( $p_throw_if_id_not_found && !user_exists( $t_user_id ) ) {
+		if( $t_user_id != 0 && $p_throw_if_id_not_found && !user_exists( $t_user_id ) ) {
 			throw new ClientException(
 				sprintf( "User with id '%d' doesn't exist", $t_user_id ),
 				ERROR_USER_BY_ID_NOT_FOUND,

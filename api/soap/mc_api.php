@@ -660,17 +660,19 @@ function mci_get_project_view_state_id( $p_view_state ) {
 /**
  * Return user id
  * @param stdClass|array $p_user User.
+ * @param integer|null $p_default Default value on error.
+ * @param boolean $p_allow_all_users Allow user id 0 to be returned.
  * @return integer user id or 0 if not found.
  */
-function mci_get_user_id( $p_user ) {
+function mci_get_user_id( $p_user, $p_default = 0, $p_allow_all_users = false ) {
 	if( is_object( $p_user ) ) {
 		$p_user = ApiObjectFactory::objectToArray( $p_user );
 	}
 
 	try {
-		return user_get_id_by_user_info( $p_user );
+		return user_get_id_by_user_info( $p_user, /* throw if not found */ false, $p_allow_all_users );
 	} catch( Exception $e ) {
-		return 0;
+		return $p_default;
 	}
 }
 
