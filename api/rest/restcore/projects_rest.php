@@ -24,6 +24,8 @@
  * @noinspection PhpFullyQualifiedNameUsageInspection
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * @var \Slim\App $g_app
  */
@@ -62,10 +64,11 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->delete( '/{id}/subprojects/{subproject_id}/', 'rest_project_hierarchy_delete' );
 
 	# Project Users
-	$g_app->group( '/{id}/users[/]', function() use ( $g_app ) {
-		$g_app->post( '', 'rest_project_user_add' );
-		$g_app->put( '', 'rest_project_user_add' );
-		$g_app->get( '', 'rest_project_users' );
+	$g_app->group( '/{id}/users', function() use ( $g_app ) {
+		$g_app->post( '[/]', 'rest_project_user_add' );
+		$g_app->put( '[/]', 'rest_project_user_add' );
+		$g_app->get( '[/]', 'rest_project_users' );
+		$g_app->delete( '/{user_id}[/]', 'rest_project_user_delete' );
 	});
 
 	# Project Users that can handle issues
@@ -160,6 +163,39 @@ function rest_project_user_add( \Slim\Http\Request $p_request, \Slim\Http\Respon
 	);
 
 	$t_command = new ProjectUsersAddCommand( $t_data );
+	$t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
+}
+
+/**
+ * A method to remove user access to a project.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = (int)$p_args['id'];
+
+	# a user id or 0 to delete all users, don't cast right away, just in case an invalid value is passed
+	# that can cast to 0.
+	$t_user = $p_args['user_id'];
+	if( !is_numeric( $t_user ) ) {
+		throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'user_id' ) );
+	}
+
+	$t_user_id = (int)$t_user;
+
+	$t_data = array(
+		'payload' => array(
+			'project' => array( 'id' => $t_project_id ),
+			'user' => array( 'id' => $t_user_id )
+		)
+	);
+
+	$t_command = new ProjectUsersDeleteCommand( $t_data );
 	$t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
