@@ -1111,7 +1111,11 @@ function mci_get_time_tracking_from_note( $p_issue_id, array $p_note ) {
 		return '00:00';
 	}
 
-	return db_minutes_to_hhmm( $p_note['time_tracking'] );
+	if( is_numeric( $p_note['time_tracking'] ) ) {
+		return db_minutes_to_hhmm( $p_note['time_tracking'] );
+	}
+
+	return $p_note['time_tracking']['duration'];
 }
 
 /**
