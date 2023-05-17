@@ -194,14 +194,16 @@ function rest_user_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 
 	$t_data = array(
 		'query' => $t_query,
-		'payload' => $t_payload );
+		'payload' => $t_payload
+	);
 
 	$t_command = new UserUpdateCommand( $t_data );
 	$t_result = $t_command->execute();
 	$t_user_id = $t_result['user']['id'];
 
-	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "User with id $t_user_id updated" )->
-		withJson( $t_result );
+	return $p_response
+		->withStatus( HTTP_STATUS_SUCCESS, "User with id $t_user_id updated" )
+		->withJson( $t_result );
 }
 
 /**
