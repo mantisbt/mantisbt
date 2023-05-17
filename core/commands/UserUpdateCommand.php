@@ -29,7 +29,7 @@ require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
  * A command that updates a user account.
  *
  * Note that only fields to be updated need to be provided. If extra fields
- * are provided and it matches current state, it will be ignored.
+ * are provided and it matches current state, they will be ignored.
  *
  * Sample:
  * {
@@ -134,8 +134,8 @@ class UserUpdateCommand extends Command {
 
 		# Protected
 		$t_old_protected = user_is_protected( $this->user_id );
-		$t_new_protected = isset( $t_user['protected'] ) ? (int)$t_user['protected'] : null;
-		if( !is_null( $t_new_protected ) && $t_old_protected !== $t_new_protected ) {
+		$t_new_protected = isset( $t_user['protected'] ) ? (bool)$t_user['protected'] : null;
+		if( !is_null( $t_new_protected ) && $t_old_protected != $t_new_protected ) {
 			$this->protected = $t_new_protected ? true : false;
 		}
 
@@ -238,12 +238,12 @@ class UserUpdateCommand extends Command {
 			}
 		}
 
-		# Don't allow updating accounts to access levels higher than that of
-		# the user actor's the account.
+		# Don't allow updating accounts to access levels that are higher than
+		# the actor's access level.
 		if( !access_has_global_level( $t_old_access_level ) ||
 		    ( !is_null( $t_new_access_level ) && !access_has_global_level( $t_new_access_level ) ) ) {
 			throw new ClientException(
-				'Access denied to update users with higher access level',
+				'Access denied to update users that have higher access level',
 				ERROR_ACCESS_DENIED );
 		}
 
@@ -255,7 +255,9 @@ class UserUpdateCommand extends Command {
 			if( $t_admin_count <= 1 ) {
 				if( ( !is_null( $this->enabled ) && !$this->enabled ) ||
 				    ( !is_null( $this->access_level ) && $this->access_level < $t_admin_threshold ) ) {
-						throw new ClientException( "Disabling or reducing access level of last admin not allowed.", ERROR_USER_CHANGE_LAST_ADMIN );
+						throw new ClientException(
+							'Disabling or reducing access level of last admin not allowed.',
+							ERROR_USER_CHANGE_LAST_ADMIN );
 				}
 			}
 		}
