@@ -74,7 +74,7 @@ class ProjectUsersAddCommand extends Command {
 	function validate() {
 		$t_project = $this->payload( 'project' );
 		if( is_null( $t_project ) ) {
-			throw new ClientException( 'User not specified', ERROR_EMPTY_FIELD, array( 'project' ) );
+			throw new ClientException( 'Project not specified', ERROR_EMPTY_FIELD, array( 'project' ) );
 		}
 
 		$this->project_id = mci_get_project_id( $t_project );
