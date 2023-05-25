@@ -718,7 +718,6 @@ $s_users_new = 'NY';
 $s_account_reset_msg = 'En bekreftelse har blitt sendt til epostadressen din ...';
 $s_account_reset_msg2 = 'Kontopassordet er satt til blank ...';
 $s_account_unlock_msg = 'Kontoen har blitt låst opp.';
-$s_manage_user_protected_msg = 'Kontoen er beskyttet; feltene \'Tilgangsnivå\' og \'Aktivert\' kan ikke endres. Andre felt ble oppdatert.';
 $s_manage_user_updated_msg = 'Kontoen er oppdatert ...';
 $s_email_user_updated_subject = 'Konto oppdatert';
 $s_email_user_updated_msg = 'Din konto har blitt oppdatert av en administrator. En liste av disse endringene er gitt under. Du kan oppdatere dine kontodetaljer og innstillinger når som helst ved å besøke følgende URL:';

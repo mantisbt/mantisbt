@@ -767,7 +767,6 @@ $s_users_new = 'Nieuw';
 $s_account_reset_msg = 'Er is een bevestigingsbericht verstuurd naar het e-mailadres van gebruiker. Hiermee kan de gebruiker het wachtwoord wijzigen.';
 $s_account_reset_msg2 = 'Het wachtwoord voor de gebruiker ingesteld op leeg.';
 $s_account_unlock_msg = 'De account is ontgrendeld.';
-$s_manage_user_protected_msg = 'Deze gebruiker is beschermd. De velden "Toegangsniveau" en "Ingeschakeld" kunnen niet gewijzigd worden. Eventuele overige velden zijn bijgewerkt.';
 $s_manage_user_updated_msg = 'De account is bijgewerkt.';
 $s_email_user_updated_subject = 'Account bijgemaakt';
 $s_email_user_updated_msg = 'Uw gebruiker is bijgewerkt door een beheerder. Een lijst van deze wijzigingen vindt u hieronder. U kunt uw gebruikersgegevens en voorkeuren op elk gewenst moment bijwerken via de volgende URL:';

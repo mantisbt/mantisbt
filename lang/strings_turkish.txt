@@ -781,7 +781,6 @@ $s_users_new = 'Yeni';
 $s_account_reset_msg = 'Seçilen kullanıcının e-posta adresine bir onay isteği gönderildi. Bunu kullanarak kullanıcı parolayı değiştirebilecektir.';
 $s_account_reset_msg2 = 'Hesap şifresi boş olarak düzenlendi...';
 $s_account_unlock_msg = 'Hesap kilidi açıldı.';
-$s_manage_user_protected_msg = 'Bu hesap korumalıdır, "Erişim Seviyesi" ve "Aktif" alanları değiştirilemez. Bunun dışındaki alanlar başarıyla güncellendi.';
 $s_manage_user_updated_msg = 'Hesap başarıyla güncellendi...';
 $s_email_user_updated_subject = 'Hesap güncellendi';
 $s_email_user_updated_msg = 'Hesabınız bir yönetici tarafından güncellendi. Bu değişikliklerin bir listesi aşağıda verilmiştir. Aşağıdaki URL\'yi ziyaret ederek hesap ayrıntılarınızı ve tercihlerinizi istediğiniz zaman güncelleyebilirsiniz:';

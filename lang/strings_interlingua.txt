@@ -750,7 +750,6 @@ $s_users_new = 'Nove';
 $s_account_reset_msg = 'Un requesta de confirmation ha essite inviate al adresse de e-mail del usator seligite. Usante iste, le usator potera cambiar su contrasigno.';
 $s_account_reset_msg2 = 'Le contrasigno del conto ha essite mittite in blanco...';
 $s_account_unlock_msg = 'Le conto ha essite disblocate.';
-$s_manage_user_protected_msg = 'Conto protegite; le campos \'Nivello de accesso\' e \'Activate\' non pote esser modificate. Le altere campos ha essite actualisate con successo.';
 $s_manage_user_updated_msg = 'Conto actualisate con successo...';
 $s_email_user_updated_subject = 'Conto actualisate';
 $s_email_user_updated_msg = 'Tu conto ha essite actualisate per un administrator. Un lista de iste cambios se trova hic infra. Tu pote actualisar le detalios e preferentias de tu conto a qualcunque momento via le sequente URL:';

@@ -665,7 +665,6 @@ $s_users_new = 'Nou';
 $s_account_reset_msg = 'Mesajul de confirmare a fost trimis pe adresa dumneavoastră de e-mail...';
 $s_account_reset_msg2 = 'Noua parolă este nulă...';
 $s_account_unlock_msg = 'Contul a fost deblocat.';
-$s_manage_user_protected_msg = 'Cont protejat; câmpurile „Nivel de acces” și „Activat” nu pot fi modificate. Alte câmpuri au fost actualizate cu succes.';
 $s_manage_user_updated_msg = 'Cont modificat cu succes...';
 $s_email_user_updated_subject = 'Cont actualizat';
 $s_email_user_updated_msg = 'Contul dumneavoastră a fost modificat de către un administrator. Mai jos este furnizată o listă a acestor modificări. Aveți posibilitatea să actualizați dvs. detaliile de cont și preferințele în orice moment vizitând următorul URL:';

@@ -759,7 +759,6 @@ $s_users_new = 'Új';
 $s_account_reset_msg = 'Egy megerősítési kérés lett küldve a kiválasztott felhasználó e-mail címére, melynek használatával megváltoztathatja a jelszavát.';
 $s_account_reset_msg2 = 'A fiók jelszava üresre lett állítva…';
 $s_account_unlock_msg = 'A fiók zárolása feloldva.';
-$s_manage_user_protected_msg = 'Védett fiók, a „Hozzáférési szint” és az „Engedélyezett” mezők nem módosíthatók. A többi mező sikeresen frissítve lett.';
 $s_manage_user_updated_msg = 'Fiók sikeresen frissítve…';
 $s_email_user_updated_subject = 'Felhasználói fiók frissítve';
 $s_email_user_updated_msg = 'A fiókját frissítette egy adminisztrátor. A változások listáját alább láthatja. Bármikor frissítheti a fiókja részleteit és beállításait a következő URL felkeresésével:';

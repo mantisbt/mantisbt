@@ -771,7 +771,6 @@ $s_users_new = '新規';
 $s_account_reset_msg = '選択したユーザーのメールアドレスに、確認のメールを送付しました。メールの指示に従うとパスワードを変更できます。';
 $s_account_reset_msg2 = 'アカウントのパスワードを空にしました...';
 $s_account_unlock_msg = 'アカウントのロックを解除しました。';
-$s_manage_user_protected_msg = 'アカウントを保護しました。「アクセスレベル」と「有効」欄は変更できません。他の欄は正常に更新されました。';
 $s_manage_user_updated_msg = 'アカウントを更新しました...';
 $s_email_user_updated_subject = 'アカウント更新';
 $s_email_user_updated_msg = '管理者によりあなたのアカウントが更新されました。変更一覧は下を参照してください。次の URL を開けば、いつでもアカウントの詳細や設定を更新することができます。';

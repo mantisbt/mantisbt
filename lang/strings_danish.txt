@@ -734,7 +734,6 @@ $s_users_new = 'Ny';
 $s_account_reset_msg = 'En bekræftigelsesmeddelelse er blevet sendt til den valgte brugers e-mailadresse. Ved hjælp af den kan brugeren ændre sin adgangskode.';
 $s_account_reset_msg2 = 'Kontoens adgangskode nulstillet...';
 $s_account_unlock_msg = 'Kontoen er blevet låst op.';
-$s_manage_user_protected_msg = 'Beskyttet konto. Kontorettigheder og aktivering kan ikke ændres. Ellers er kontoen blevet opdateret...';
 $s_manage_user_updated_msg = 'Kontoen er blevet opdateret...';
 $s_email_user_updated_subject = 'Konto opdateret';
 $s_email_user_updated_msg = 'Din konto er blevet opdateret af en administrator. Nedenfor er der en liste over disse ændringer. Du kan opdatere dine kontooplysninger og indstillinger når som helst ved at besøge følgende Webadresse:';

@@ -749,7 +749,6 @@ $s_users_new = 'Novo';
 $s_account_reset_msg = 'Unha solicitude de confirmación foi enviada ao enderezo de correo electrónico do usuario seleccionado. Mediante isto, o usuario será capaz de cambiar o seu contrasinal.';
 $s_account_reset_msg2 = 'O contrasinal da conta foi establecido en branco...';
 $s_account_unlock_msg = 'A conta foi desbloqueada.';
-$s_manage_user_protected_msg = 'Conta protexida. Os campos "Nivel de acceso" e "Activado" non se poden modificar. Actualizáronse os outros campos.';
 $s_manage_user_updated_msg = 'Conta actualizada correctamente...';
 $s_email_user_updated_subject = 'Conta actualizada';
 $s_email_user_updated_msg = 'A súa conta foi actualizada por un administrador. A continuación proporciónase unha lista destas modificacións. Pode actualizar os detalles da súa conta e preferencias en calquera momento visitando o seguinte enderezo:';

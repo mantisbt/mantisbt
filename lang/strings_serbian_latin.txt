@@ -631,7 +631,6 @@ $s_users_new = 'Novo';
 $s_account_reset_msg = 'Na e-adresu izabranog korisnika je poslat zahtev za potvrdu. Uz pomoć ovog zahteva, korisnik može da promeni svoju lozinku.';
 $s_account_reset_msg2 = 'Lozinka je postavljena kao prazna.';
 $s_account_unlock_msg = 'Nalog je otključan.';
-$s_manage_user_protected_msg = 'Nalog je zaštićen. Polja „Nivo pristupa“ i „Omogućeno“ ne mogu da se menjaju. Druga polja su uspešno ažurirana.';
 $s_manage_user_updated_msg = 'Nalog je ažuriran.';
 $s_email_user_updated_subject = 'Nalog je ažuriran';
 $s_email_user_updated_msg = 'Vaš nalog je ažurirao administrator. Dole se nalazi spisak tih izmena. Možete da ažurirate podatke i postavke naloga kad god želite, tako što ćete posetite sledeću adresu:';

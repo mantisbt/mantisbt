@@ -699,7 +699,6 @@ $s_users_new = 'Nou';
 $s_account_reset_msg = 'S\'ha enviat un correu de confirmació a l\'adreça de correu electrònic...';
 $s_account_reset_msg2 = 'La contrasenya s\'ha establert en blanc...';
 $s_account_unlock_msg = 'El compta ha estat desbloquejat.';
-$s_manage_user_protected_msg = 'Compte Protegit; els camps \'Nivell d\'accés\' i \'Activat\' no poden ser modificats. La resta dels camps han estat actualitzats.';
 $s_manage_user_updated_msg = 'El compte ha estat actualitzat...';
 $s_email_user_updated_subject = 'Compte actualitzat';
 $s_email_user_updated_msg = 'El vostre compte ha estat actualitzat per l\'administrador. La llista dels canvis es mostra a sota. Pot actualitzar els detalls i preferències del compte en qualsevol moment visitant la següent URL:';

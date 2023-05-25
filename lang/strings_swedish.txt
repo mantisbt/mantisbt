@@ -766,7 +766,6 @@ $s_users_new = 'Ny';
 $s_account_reset_msg = 'Godkännandelänk har blivit skickat till angiven användares e-postadress. Med hjälp av denna kommer användaren att kunna ändra sitt lösenord.';
 $s_account_reset_msg2 = 'Lösenordet för kontot är tomt...';
 $s_account_unlock_msg = 'Kontot har låsts upp.';
-$s_manage_user_protected_msg = 'Kontot är skyddat. Fälten \'Åtkomstnivå\' och \'Aktivering\' kan inte ändras. Andra fält har uppdaterats...';
 $s_manage_user_updated_msg = 'Kontot uppdaterat...';
 $s_email_user_updated_subject = 'Användarkonto uppdaterat';
 $s_email_user_updated_msg = 'Ditt konto har blivit uppdaterat av en administrator. En lista av ändringar är bifogad nedanför. Du kan uppdatera dina kontodetaljer och preferenser när du önskar genom att besöka följande URL:';

@@ -786,7 +786,6 @@ $s_users_new = 'NUEVO';
 $s_account_reset_msg = 'Se ha enviado un correo electrónico de solicitud de confirmación a las direcciones de correo electrónico del usuario seleccionado. Utilizándolo, el usuario podrá cambiar si contraseña.';
 $s_account_reset_msg2 = 'La contraseña de la cuenta fue establecida en blanco...';
 $s_account_unlock_msg = 'Se ha desbloqueado la cuenta.';
-$s_manage_user_protected_msg = 'Cuenta protegida. Los campos "Nivel de acceso" y "Activado" no se pueden modificar. Los demás campos se actualizaron satisfactoriamente.';
 $s_manage_user_updated_msg = 'La cuenta ha sido actualizada...';
 $s_email_user_updated_subject = 'Cuenta actualizada';
 $s_email_user_updated_msg = 'Tu cuenta ha sido actualizada por un administrador. Una lista de esos cambios es proveída debajo. Puedes actualizar los detalles y preferencias de tu cuenta en cualquier momento visitando el siguiente URL:';

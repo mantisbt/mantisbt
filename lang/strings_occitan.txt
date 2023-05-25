@@ -683,7 +683,6 @@ $s_users_new = 'NOVÈL';
 $s_account_reset_msg = 'Lo messatge de confirmacion es estat mandat a vòstra adreça de corrièr electronic...';
 $s_account_reset_msg2 = 'Lo senhal del compte es estat mes a void...';
 $s_account_unlock_msg = 'Lo compte es estat desverrolhat.';
-$s_manage_user_protected_msg = 'Compte protegit; los camps \'Nivèl d’accès\' e \'Activat\' pòdon pas èsser modificats. Los autres camps son ben estats meses a jorn.';
 $s_manage_user_updated_msg = 'Lo compte es estat mes a jorn...';
 $s_email_user_updated_subject = 'Compte mes a jorn';
 $s_email_user_updated_msg = 'Vòstre compte es estat mes a jorn per un administrator. Una lista de las modificacions es afichada çaijós. Podètz metre a jorn los detalhs e preferéncias de vòstre compte en visitant l\'URL seguenta :';
