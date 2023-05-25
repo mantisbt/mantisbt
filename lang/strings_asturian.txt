@@ -721,7 +721,6 @@ $s_users_new = 'Nuevu';
 $s_account_reset_msg = 'Unvióse una solicitú de confirmación a les direcciones de corréu electrónicu del usuariu escoyíu. Utilizándolo, l\'usuariu podrá camudar la contraseña.';
 $s_account_reset_msg2 = 'La contraseña de la cuenta púnxose\'n blancu...';
 $s_account_unlock_msg = 'Desbloquióse la cuenta.';
-$s_manage_user_protected_msg = 'Cunta protexía; los campos "Nivel d\'accesu" y "Activada" nun pueden cambiase. Los otros campos actualizáronse correutamente.';
 $s_manage_user_updated_msg = 'Cuenta actualizada correutamente...';
 $s_email_user_updated_subject = 'Cuenta actualizada';
 $s_email_user_updated_msg = 'Un alministrador actualizó la to cuenta. Más abaxo dase una llista d\'esos cambeos. Puedes actualizar los detalles y preferencies de la cuenta en cualquier momentu visitando la siguiente URL:';

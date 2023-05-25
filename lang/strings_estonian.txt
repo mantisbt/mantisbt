@@ -638,7 +638,6 @@ $s_users_unused = 'Pole kasutuses';
 $s_users_new = 'Uus';
 $s_account_reset_msg = 'Kinnitusteade on saadetud kasutajakonto e-posti aadressile...';
 $s_account_reset_msg2 = 'Kasutajale on antud tühi parool...';
-$s_manage_user_protected_msg = 'Kasutajatunnus on kaitstud. Juurdepääsu ja kasutusõiguste tase kaitstud. Teised kasutaja andmed uuendatud...';
 $s_manage_user_updated_msg = 'Kasutaja andmed uuendatud...';
 $s_email_user_updated_subject = 'Konto uuendatud';
 $s_email_user_updated_msg = 'Sinu konto on uuendatud administraatori poolt. Loend nendest muudatustest on allpool. Sa saad uuendada oma konto detaile ja eelistusi igal ajal külastades järgmist URL-i:';

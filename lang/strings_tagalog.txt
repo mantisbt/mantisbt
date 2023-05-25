@@ -634,7 +634,6 @@ $s_users_new = 'BAGO';
 $s_account_reset_msg = 'Ipinadala na ang isang kahilingan ng pagpapatunay patungo sa napiling adres ng e-liham ng tagagamit. Sa paggamit nito, magkakaroon ng kakayahan ang tagagamit na baguhin ang kanilang hudyat.';
 $s_account_reset_msg2 = 'Nakatakda bilang walang laman ang hudyat...';
 $s_account_unlock_msg = 'Tinanggal na ang kandado at nabuksan na ang akawnt.';
-$s_manage_user_protected_msg = 'Nakasanggalang na akawnt. Nakasanggalang ang antas ng pagpunta at pagpapagana. At kung hindi, naisapanahon na ang kuwenta...';
 $s_manage_user_updated_msg = 'Matagumpay na naisapanahon ang account...';
 $s_email_user_updated_subject = 'Naisapanahon ang akawnt';
 $s_email_user_updated_msg = 'Isipanahon ng isang tagapangasiwa ang akawnt mo.  Ibinigay sa ibaba ang isang talaan ng mga pagbabagong ito.  Maaari mong isapanahon ang mga detalye ng iyong akawnt at mga nais anumang oras sa pamamagitan ng pagdalaw sa sumusunod na URL:';

@@ -745,7 +745,6 @@ $s_users_new = 'Novo';
 $s_account_reset_msg = 'Um pedido de confirmação foi enviado para o email do utilizador. Através deste pedido, o utilizador poderá modificar a sua palavra-passe.';
 $s_account_reset_msg2 = 'Palavra-chave da conta definida para vazia...';
 $s_account_unlock_msg = 'A conta foi desbloqueada.';
-$s_manage_user_protected_msg = 'Conta protegida; os campos \'Nível de acesso\' e \'Ativa\' não podem ser modificados. Os outros campos foram atualizados com sucesso.';
 $s_manage_user_updated_msg = 'Conta atualizada com sucesso...';
 $s_email_user_updated_subject = 'Conta atualizada';
 $s_email_user_updated_msg = 'A sua conta foi atualizada por um administrador. Segue-se uma lista destas alterações. Pode atualizar os detalhes e preferências da sua conta em qualquer altura através do URL:';

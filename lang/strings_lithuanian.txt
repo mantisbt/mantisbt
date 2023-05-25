@@ -750,7 +750,6 @@ $s_users_new = 'Naujas';
 $s_account_reset_msg = 'Patvirtinimo kodas nusiųstas į jūsų el. pašto dėžutę...';
 $s_account_reset_msg2 = 'Slaptažodis pakeistas į tuščią...';
 $s_account_unlock_msg = 'Paskyra atrakinta.';
-$s_manage_user_protected_msg = 'Paskyra apsaugota; laukų „Prieigos lygis“ ir „Įjungta“ keisti negalima. Kiti laukai buvo sėkmingai atnaujinti.';
 $s_manage_user_updated_msg = 'Vartotojo duomenys sėkmingai atnaujinti...';
 $s_email_user_updated_subject = 'Anketa atnaujinta';
 $s_email_user_updated_msg = 'Jūsų paskyra buvo atnaujinta administratorius. Šių pokyčių, sąrašas pateikiamas žemiau. Jūs galite atnaujinti savo sąskaitos duomenis ir pageidavimus bet kuriuo metu, apsilankę šiuo adresu:';

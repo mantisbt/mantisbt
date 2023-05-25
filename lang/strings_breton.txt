@@ -741,7 +741,6 @@ $s_users_new = 'Nevez';
 $s_account_reset_msg = 'Kaset ez eus bet ur goulenn kadarnaat da chomlec\'h postel an implijer diuzet. Gant se e c\'hallo an implijer cheñch e c\'her-tremen.';
 $s_account_reset_msg2 = 'Goulloet eo bet ger-tremen ar gont...';
 $s_account_unlock_msg = 'Dibrennet eo bet ar gont.';
-$s_manage_user_protected_msg = 'Kont warezet. N\'hall ket ar maeziennoù \'liveoù moned\' ha \'gweredekaet\' bezañ kemmet. A-hend-all, hizivaet eo bet ar maeziennoù ervat.';
 $s_manage_user_updated_msg = 'Hizivaet-mat eo bet ar gont...';
 $s_email_user_updated_subject = 'Hizivaet eo ar gont';
 $s_email_user_updated_msg = 'Hizivaet eo bet ho kont gant ur merour. Kavout a reot ur roll eus ar c\'hemmoù amañ dindan. Gallout a rit hizivaat munudoù ha penndibaboù ho kont forzh pegoulz en ur weladenniñ an URL-mañ :';

@@ -755,7 +755,6 @@ $s_users_new = 'NOWY';
 $s_account_reset_msg = 'Wiadomość potwierdzającą wysłano na adres e-mail wybranego użytkownika. Postępując zgodnie z jej zawartością użytkownik będzie mógł zmienić swoje hasło.';
 $s_account_reset_msg2 = 'Konto nie wymaga podawania hasła...';
 $s_account_unlock_msg = 'Konto zostało odblokowane.';
-$s_manage_user_protected_msg = 'Konto zostało zabezpieczone; pola \'Poziomu dostępu\' i \'Włączenia\' nie mogą być zmienione. Inne pola zostały pomyślnie zaktualizowane.';
 $s_manage_user_updated_msg = 'Konto zostało zaktualizowane...';
 $s_email_user_updated_subject = 'Konto zaktualizowane';
 $s_email_user_updated_msg = 'Konto zostało zaktualizowane przez administratora. Lista zmian znajduje się poniżej. Możesz zmienić dane i preferencje swojego konta w dowolnym momencie, wchodząc na adres URL:';

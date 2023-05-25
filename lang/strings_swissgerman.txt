@@ -656,7 +656,6 @@ $s_users_new = 'NEJ';
 $s_account_reset_msg = 'Bstätigungsnochricht isch an Dyy E-Mail-Adräss gschickt wore …';
 $s_account_reset_msg2 = 'Läär Passwort isch gsetzt wore …';
 $s_account_unlock_msg = 'S Benutzerkonto isch entsperrt wore';
-$s_manage_user_protected_msg = 'Konto gschützt. Zuegriffsrächt und Aktivitätsflag sind gschützt. Anderi Optione si erfolgrich gänderet worde.';
 $s_manage_user_updated_msg = 'Konto aktualisiert …';
 $s_email_user_updated_subject = 'Benutzerkonto aktualisiert';
 $s_email_user_updated_msg = 'Dyy benutzerkonto isch dur e Administrator aktualisiert wore. E Lischt vu dr Änderige het s do unte. Du chasch Dyy Benutzerkonto un Dyy Yystellige alliwyl aktualisiere iber die URL:';

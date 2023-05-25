@@ -781,7 +781,6 @@ $s_users_new = 'Nouveau';
 $s_account_reset_msg = 'Un message de confirmation a été envoyé à l’adresse courriel de l’utilisateur sélectionné. Grace à ceci, l’utilisateur sera en mesure de modifier son mot de passe.';
 $s_account_reset_msg2 = 'Mot de passe du compte a été mis à blanc...';
 $s_account_unlock_msg = 'Le compte a été déverrouillé.';
-$s_manage_user_protected_msg = 'Ce compte est protégé : les champs « Niveau d’accès » et « Activé » ne peuvent pas être modifiés. Les autres champs ont bien été mis à jour.';
 $s_manage_user_updated_msg = 'Le compte a été mis à jour...';
 $s_email_user_updated_subject = 'Compte mis à jour';
 $s_email_user_updated_msg = 'Votre compte a été mis à jour par un administrateur. Une liste des modifications est affichée ci-dessous. Vous pouvez mettre à jour les détails et préférences de votre compte en visitant l’URL suivante :';

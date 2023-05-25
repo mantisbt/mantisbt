@@ -776,7 +776,6 @@ $s_users_new = '新的';
 $s_account_reset_msg = '一封确认请求已发往选定用户的电子邮件地址。通过使用它，用户将可以更改他们的密码。';
 $s_account_reset_msg2 = '账号密码已经置为空...';
 $s_account_unlock_msg = '该帐户已解锁。';
-$s_manage_user_protected_msg = '帐号受保护；“用户级别”和“是否启用”信息不能修改；其他信息已成功更新。';
 $s_manage_user_updated_msg = '帐号成功更新...';
 $s_email_user_updated_subject = '帐户已更新';
 $s_email_user_updated_msg = '您的帐户已被管理员更新。下面提供了这些更改的列表。可以在任何时候更新您的帐户的详细信息和首选项，请访问下面的 URL：';

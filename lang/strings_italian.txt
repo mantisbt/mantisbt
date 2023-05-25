@@ -759,7 +759,6 @@ $s_users_new = 'Nuovo';
 $s_account_reset_msg = 'Il codice di convalida è stata inviato via email all\'utente...  Con quello l\'utente sarà in grado di cambiare la propria password.';
 $s_account_reset_msg2 = 'La password è stata rimossa...';
 $s_account_unlock_msg = 'L\'account è stato sbloccato.';
-$s_manage_user_protected_msg = 'Account protetto. Il "livello di accesso" e "l\'abilitazione" non sono modificabili. Per il resto, l\'account è stato aggiornato...';
 $s_manage_user_updated_msg = 'Account aggiornato correttamente...';
 $s_email_user_updated_subject = 'Utenza aggiornata';
 $s_email_user_updated_msg = 'La tua utenza è stata aggiornata dall\'amministratore. La lista delle modifiche effettuate è riportata sotto. Puoi modificare i dettagli della tua utenza e le preferenze ogni volta che lo desideri visitando il seguente indirizzo:';

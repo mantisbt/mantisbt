@@ -726,7 +726,6 @@ $s_users_new = 'Nýtt';
 $s_account_reset_msg = 'Beiðni um staðfestingu hefur verið send í tölvupósti til notandans. Notandinn getur því breytt lykilorði sínu.';
 $s_account_reset_msg2 = 'Aðgangs lykilorðið hefur verið núllstillt...';
 $s_account_unlock_msg = 'Aðgangnum hefur verið aflæst.';
-$s_manage_user_protected_msg = 'Aðgangur varinn; ekki er hægt að breyta \'Aðgangsstig\' og \'Virkt\' reitunum. Aðrir reitir hafa verið uppfærðir.';
 $s_manage_user_updated_msg = 'Aðgangsheimild uppfærð...';
 $s_email_user_updated_subject = 'Aðgangur uppfærður';
 $s_main_link = 'Aðalsíða';

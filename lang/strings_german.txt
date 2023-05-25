@@ -776,7 +776,6 @@ $s_users_new = 'NEU';
 $s_account_reset_msg = 'Bestätigungsnachricht wurde an Ihre E-Mail-Adresse geschickt …';
 $s_account_reset_msg2 = 'Leeres Passwort wurde gesetzt …';
 $s_account_unlock_msg = 'Das Benutzerkonto wurde entsperrt';
-$s_manage_user_protected_msg = 'Konto geschützt. Die Felder \'Zugangsberechtigung\' und \'Aktiv\' können nicht geändert werden. Andere Felder wurden erfolgreich aktualisiert.';
 $s_manage_user_updated_msg = 'Konto aktualisiert …';
 $s_email_user_updated_subject = 'Benutzerkonto aktualisiert';
 $s_email_user_updated_msg = 'Ihr Benutzerkonto wurde von einem Administrator aktualisiert. Eine Liste der Änderungen wird unten aufgelistet. Sie können Ihre Kontodetails und Einstellungen jederzeit unter der folgenden URL ändern:';

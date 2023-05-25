@@ -755,7 +755,6 @@ $s_users_new = '새 사용자';
 $s_account_reset_msg = '지정된 사용자 이메일 주소로 확인 요청을 보냈습니다. 사용자는 이 정보를 이용하여 비밀번호를 변경할 수 있습니다.';
 $s_account_reset_msg2 = '계정을 비밀번호가 없는 상태로 초기화합니다...';
 $s_account_unlock_msg = '계정 잠금 상태가 해제되었습니다.';
-$s_manage_user_protected_msg = '보호된 계정입니다. \'접근 레벨\' 및 \'사용\' 필드를 수정할 수 없습니다. 다른 필드는 성공적으로 업데이트했습니다.';
 $s_manage_user_updated_msg = '계정이 갱신되었습니다...';
 $s_email_user_updated_subject = '계정 바꿈';
 $s_email_user_updated_msg = '관리자가 내 계정을 변경했습니다. 아래는 변경한 내역 목록입니다. 다음 URL에서 계정 상세 정보 또는 설정을 언제든지 바꿀 수 있습니다.';

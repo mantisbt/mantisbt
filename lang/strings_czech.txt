@@ -754,7 +754,6 @@ $s_users_new = 'Nové';
 $s_account_reset_msg = 'Potvrzovací dopis byl odeslán na vaši elektronickou adresu...';
 $s_account_reset_msg2 = 'Heslo k účtu bylo nastaveno na prázdné...';
 $s_account_unlock_msg = 'Účet byl odemčen.';
-$s_manage_user_protected_msg = 'Účet je chráněn; „Přístupová úroveň“ a „Povolení“ nemohou být upraveny. Ostatní pole byla úspěšně aktualizována.';
 $s_manage_user_updated_msg = 'Účet byl úspěšně aktualizován...';
 $s_email_user_updated_subject = 'Účet aktualizován';
 $s_email_user_updated_msg = 'Váš účet byl aktualizován správcem. Seznam provedených změn je níže. Kdykoliv můžete aktualizovat podrobnosti o vašem účtu a nastavení navštívením této adresy:';

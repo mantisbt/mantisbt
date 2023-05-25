@@ -648,7 +648,6 @@ $s_users_new = 'Mới';
 $s_account_reset_msg = 'Một yêu cầu xác nhận đã được gửi tới địa chỉ e-mail của người sử dụng lựa chọn. Sử dụng này, người sử dụng sẽ có thể thay đổi mật khẩu của họ.';
 $s_account_reset_msg2 = 'Mật khẩu của tài khoản đã được thiết lập để trống...';
 $s_account_unlock_msg = 'Tài khoản đã được mở khóa';
-$s_manage_user_protected_msg = 'Tài khoản được bảo vệ; mục \'Mức độ truy cập\' và \'Kích hoạt\' không thể sửa. Các mục còn lại đã được cập nhật thành công.';
 $s_manage_user_updated_msg = 'Tài khoản cập nhật thành công ...';
 $s_email_user_updated_subject = 'Cập nhật tài khoản';
 $s_email_user_updated_msg = 'Tài khoản của bạn đã được cập nhật bởi một quản trị viên. Một danh sách các thay đổi này được cung cấp dưới đây. Bạn có thể cập nhật chi tiết tài khoản và sở thích của bạn tại bất kỳ thời gian bằng cách truy cập vào URL sau đây:';

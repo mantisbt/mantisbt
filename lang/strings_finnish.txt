@@ -684,7 +684,6 @@ $s_users_new = 'Uusi';
 $s_account_reset_msg = 'Vahvistusviesti on lähetetty sähköpostiosoitteeseesi...';
 $s_account_reset_msg2 = 'Käyttäjätunnukselle on asetettu tyhjä salasana...';
 $s_account_unlock_msg = 'Tilin lukitus on poistettu.';
-$s_manage_user_protected_msg = 'Käyttäjätunnus on suojattu. Kenttiö ”käyttöoikeustaso” ja ”käytössä” ei voi muuttaa. Muut kentät päivitettiin.';
 $s_manage_user_updated_msg = 'Käyttäjätunnus päivitetty...';
 $s_email_user_updated_subject = 'Tili päivitetty';
 $s_email_user_updated_msg = 'Ylläpito on päivittänyt tilisi. Lista tehdyistä muutoksista on alla. Voit päivittää tilitietosi ja oletusarvosi käymällä seuraavassa osoitteessa:';
