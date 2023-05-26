@@ -47,6 +47,8 @@
  * @uses tag_api.php
  * @uses user_api.php
  * @uses utility_api.php
+ *
+ * @noinspection PhpUnused, PhpUnusedPrivateFieldInspection
  */
 
 require_api( 'access_api.php' );
@@ -107,6 +109,7 @@ use Mantis\Exceptions\ClientException;
  * @property int sticky
  * @property int due_date
  * @property int profile_id
+ * @property int bug_text_id
  * @property string description
  * @property string steps_to_reproduce
  * @property string additional_information
@@ -253,6 +256,11 @@ class BugData {
 	protected $profile_id = 0;
 
 	/**
+	 * Bug text ID
+	 */
+	protected $bug_text_id;
+
+	/**
 	 * Description
 	 */
 	protected $description = '';
@@ -294,10 +302,8 @@ class BugData {
 	public function get_attachment_count() {
 		if( $this->attachment_count === null ) {
 			$this->attachment_count = file_bug_attachment_count( $this->id );
-			return $this->attachment_count;
-		} else {
-			return $this->attachment_count;
 		}
+		return $this->attachment_count;
 	}
 
 	/**
@@ -307,10 +313,8 @@ class BugData {
 	public function get_bugnotes_count() {
 		if( $this->bugnotes_count === null ) {
 			$this->bugnotes_count = self::bug_get_bugnote_count();
-			return $this->bugnotes_count;
-		} else {
-			return $this->bugnotes_count;
 		}
+		return $this->bugnotes_count;
 	}
 
 	/**
@@ -337,6 +341,7 @@ class BugData {
 			case 'eta':
 			case 'projection':
 			case 'category_id':
+			case 'bug_text_id':
 				$p_value = (int)$p_value;
 				break;
 			case 'target_version':
@@ -352,6 +357,7 @@ class BugData {
 					$p_value = date_strtotime( $p_value );
 				}
 				break;
+			/** @noinspection PhpMissingBreakStatementInspection */
 			case 'summary':
 				# MySQL 4-bytes UTF-8 chars workaround #21101
 				$p_value = db_mysql_fix_utf8( $p_value );
@@ -406,7 +412,7 @@ class BugData {
 		$this->loading = true;
 
 		foreach( $p_row as $t_var => $t_val ) {
-			$this->__set( $t_var, $p_row[$t_var] );
+			$this->__set( $t_var, $t_val );
 		}
 		$this->loading = false;
 	}
@@ -417,6 +423,7 @@ class BugData {
 	 */
 	private function fetch_extended_info() {
 		if( $this->description == '' ) {
+			/** @noinspection PhpUnhandledExceptionInspection */
 			$t_text = bug_text_cache_row( $this->id );
 
 			$this->description = $t_text['description'];
@@ -509,7 +516,7 @@ class BugData {
 	 * @uses lang_api.php
 	 */
 	function create() {
-		self::validate( true );
+		$this->validate();
 
 		antispam_check();
 
@@ -799,7 +806,7 @@ class BugData {
 		bug_update_date( $c_bug_id );
 
 		# allow bypass if user is sending mail separately
-		if( false == $p_bypass_mail ) {
+		if( !$p_bypass_mail ) {
 			# If handler changes, send out owner change email
 			if( $t_old_data->handler_id != $this->handler_id ) {
 				email_owner_changed( $c_bug_id, $t_old_data->handler_id, $this->handler_id );
@@ -839,7 +846,7 @@ $g_cache_bug_attachments = array();
 function bug_cache_database_result( array $p_bug_database_result, $p_stats = null ) {
 	global $g_cache_bug;
 
-	if( !is_array( $p_bug_database_result ) || isset( $g_cache_bug[(int)$p_bug_database_result['id']] ) ) {
+	if( isset( $g_cache_bug[(int)$p_bug_database_result['id']] ) ) {
 		if( !is_null($p_stats) ) {
 			# force store the bugnote statistics
 			return bug_add_to_cache( $p_bug_database_result, $p_stats );
@@ -914,7 +921,6 @@ function bug_cache_array_rows( array $p_bug_id_array ) {
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		bug_add_to_cache( $t_row );
 	}
-	return;
 }
 
 /**
@@ -1284,7 +1290,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 		while( $t_bug_custom = db_fetch_array( $t_result ) ) {
 			$c_field_id = (int)$t_bug_custom['field_id'];
-			$c_new_bug_id = (int)$t_new_bug_id;
+			$c_new_bug_id = $t_new_bug_id;
 			$c_value = $t_bug_custom['value'];
 			$c_text = $t_bug_custom['text'];
 
@@ -1494,7 +1500,7 @@ function bug_delete( $p_bug_id ) {
  * @param integer $p_project_id Integer representing a project identifier.
  * @access public
  * @uses database_api.php
- * @return void
+ * @noinspection PhpDocMissingThrowsInspection
  */
 function bug_delete_all( $p_project_id ) {
 	$c_project_id = (int)$p_project_id;
@@ -1504,6 +1510,7 @@ function bug_delete_all( $p_project_id ) {
 	$t_result = db_query( $t_query, array( $c_project_id ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
+		/** @noinspection PhpUnhandledExceptionInspection */
 		bug_delete( $t_row['id'] );
 	}
 
@@ -1815,11 +1822,6 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 	$c_value = null;
 
 	switch( $p_field_name ) {
-		# boolean
-		case 'sticky':
-			$c_value = $p_value;
-			break;
-
 		# integer
 		case 'project_id':
 		case 'reporter_id':
@@ -1838,6 +1840,9 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'sponsorship_total':
 			$c_value = (int)$p_value;
 			break;
+
+		# boolean
+		case 'sticky':
 
 		# string
 		case 'os':
