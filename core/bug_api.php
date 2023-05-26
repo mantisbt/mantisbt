@@ -107,6 +107,7 @@ use Mantis\Exceptions\ClientException;
  * @property int sticky
  * @property int due_date
  * @property int profile_id
+ * @property int bug_text_id
  * @property string description
  * @property string steps_to_reproduce
  * @property string additional_information
@@ -253,6 +254,11 @@ class BugData {
 	protected $profile_id = 0;
 
 	/**
+	 * Bug text ID
+	 */
+	protected $bug_text_id;
+
+	/**
 	 * Description
 	 */
 	protected $description = '';
@@ -337,6 +343,7 @@ class BugData {
 			case 'eta':
 			case 'projection':
 			case 'category_id':
+			case 'bug_text_id':
 				$p_value = (int)$p_value;
 				break;
 			case 'target_version':
