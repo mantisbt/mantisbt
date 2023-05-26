@@ -296,8 +296,9 @@ class BugData {
 	private $loading = false;
 
 	/**
-	 * return number of file attachment's linked to current bug
-	 * @return integer
+	 * Return number of file attachment's linked to current bug.
+	 *
+	 * @return int Number of attachments
 	 */
 	public function get_attachment_count() {
 		if( $this->attachment_count === null ) {
@@ -307,8 +308,9 @@ class BugData {
 	}
 
 	/**
-	 * return number of bugnotes's linked to current bug
-	 * @return integer
+	 * Return number of bugnotes linked to current bug.
+	 *
+	 * @return int Number of bugnotes
 	 */
 	public function get_bugnotes_count() {
 		if( $this->bugnotes_count === null ) {
@@ -322,8 +324,8 @@ class BugData {
 	 *
 	 * @param string $p_name  Property name.
 	 * @param string $p_value Value to set.
-	 * @private
-	 * @return void
+	 *
+	 * @throws ClientException If due_date is not valid
 	 */
 	public function __set( $p_name, $p_value ) {
 		switch( $p_name ) {
@@ -382,8 +384,8 @@ class BugData {
 	 * Overloaded Function handling property get
 	 *
 	 * @param string $p_name Property name.
-	 * @private
-	 * @return string|integer|boolean
+	 *
+	 * @return string|int|bool
 	 */
 	public function __get( $p_name ) {
 		if( $this->is_extended_field( $p_name ) ) {
@@ -396,17 +398,19 @@ class BugData {
 	 * Overloaded Function handling property isset
 	 *
 	 * @param string $p_name Property name.
-	 * @private
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	public function __isset( $p_name ) {
 		return isset( $this->{$p_name} );
 	}
 
 	/**
-	 * fast-load database row into bugobject
+	 * Fast-load database row into the object.
+	 *
 	 * @param array $p_row Database result to load into a bug object.
-	 * @return void
+	 *
+	 * @throws ClientException If due_date is not valid
 	 */
 	public function loadrow( array $p_row ) {
 		$this->loading = true;
@@ -418,8 +422,9 @@ class BugData {
 	}
 
 	/**
-	 * Retrieves extended information for bug (e.g. bug description)
-	 * @return void
+	 * Retrieves extended information for bug (e.g. bug description).
+	 *
+	 * @noinspection PhpDocMissingThrowsInspection
 	 */
 	private function fetch_extended_info() {
 		if( $this->description == '' ) {
@@ -436,7 +441,8 @@ class BugData {
 	 * Returns if the field is an extended field which needs fetch_extended_info()
 	 *
 	 * @param string $p_field_name Field Name.
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	private function is_extended_field( $p_field_name ) {
 		switch( $p_field_name ) {
@@ -450,10 +456,9 @@ class BugData {
 	}
 
 	/**
-	 * Returns the number of bugnotes for the given bug_id
-	 * @return integer number of bugnotes
-	 * @access private
-	 * @uses database_api.php
+	 * Returns the number of bugnotes for the given bug_id.
+	 *
+	 * @return int Number of bugnotes
 	 */
 	private function bug_get_bugnote_count() {
 		if( !access_has_project_level( config_get( 'private_bugnote_threshold' ), $this->project_id ) ) {
@@ -471,12 +476,13 @@ class BugData {
 	}
 
 	/**
-	 * validate current bug object for database insert/update
-	 * triggers error on failure
-	 * @param boolean $p_update_extended Whether to validate extended fields.
-	 * @return void
+	 * Validate the bug object.
+	 *
+	 * Use before database insert/update. Triggers error on failure
+	 *
+	 * @param bool $p_update_extended Whether to validate extended fields.
 	 */
-	function validate( $p_update_extended = true ) {
+	public function validate( $p_update_extended = true ) {
 		# Summary cannot be blank
 		if( is_blank( $this->summary ) ) {
 			error_parameters( lang_get( 'summary' ) );
@@ -509,13 +515,12 @@ class BugData {
 	}
 
 	/**
-	 * Insert a new bug into the database
-	 * @return integer integer representing the bug identifier that was created
-	 * @access public
-	 * @uses database_api.php
-	 * @uses lang_api.php
+	 * Insert a new bug into the database.
+	 *
+	 * @return int Identifier of the bug that was created
+	 * @throws ClientException If user submitting is a known spammer.
 	 */
-	function create() {
+	public function create() {
 		$this->validate();
 
 		antispam_check();
@@ -542,7 +547,7 @@ class BugData {
 
 		# Get the id of the text information we just inserted
 		# NOTE: this is guaranteed to be the correct one.
-		# The value LAST_INSERT_ID is stored on a per connection basis.
+		# The value LAST_INSERT_ID is stored on a per-connection basis.
 
 		$t_text_id = db_insert_id( db_get_table( 'bug_text' ) );
 
@@ -551,8 +556,8 @@ class BugData {
 
 		# if not assigned, check if it should auto-assigned.
 		if( 0 == $this->handler_id ) {
-			# if a default user is associated with the category and we know at this point
-			# that that the bug was not assigned to somebody, then assign it automatically.
+			# If a default user is associated with the category and we know that
+			# the bug was not assigned to somebody, then assign it automatically.
 			db_param_push();
 			$t_query = 'SELECT user_id FROM {category} WHERE id=' . db_param();
 			$t_result = db_query( $t_query, array( $this->category_id ) );
@@ -600,11 +605,11 @@ class BugData {
 	}
 
 	/**
-	 * Process mentions in the current issue, for example, after the issue is created.
-	 * @return void
-	 * @access public
+	 * Process mentions in the current issue.
+	 *
+	 * For example, after the issue is created.
 	 */
-	function process_mentions() {
+	public function process_mentions() {
 		# Now that the issue is added process the @ mentions
 		$t_all_mentioned_user_ids = array();
 
@@ -653,15 +658,18 @@ class BugData {
 	}
 
 	/**
-     * Update a bug from the given data structure
-     *  If the third parameter is true, also update the longer strings table
-     * @param boolean $p_update_extended Whether to update extended fields.
-     * @param boolean $p_bypass_mail     Whether to bypass sending email notifications.
-     * @internal param boolean $p_bypass_email Default false, set to true to avoid generating emails (if sending elsewhere)
-     * @return boolean (always true)
-     * @access public
+	 * Update a bug from the given data structure.
+	 *
+	 * Throws errors if the bug's data is not valid.
+	 * If the third parameter is true, also update the longer strings table.
+	 *
+	 * @param bool $p_update_extended Whether to update extended fields.
+	 * @param bool $p_bypass_mail     Whether to bypass sending email notifications.
+	 *
+	 * @return true
+	 * @throws ClientException if the bug does not exist.
 	 */
-	function update( $p_update_extended = false, $p_bypass_mail = false ) {
+	public function update( $p_update_extended = false, $p_bypass_mail = false ) {
 		self::validate( $p_update_extended );
 
 		$c_bug_id = $this->id;
@@ -673,10 +681,9 @@ class BugData {
 		$t_old_data = bug_get( $this->id, true );
 
 		# Update all fields
-		# Ignore date_submitted and last_updated since they are pulled out
-		#  as unix timestamps which could confuse the history log and they
-		#  shouldn't get updated like this anyway.  If you really need to change
-		#  them use bug_set_field()
+		# Ignore date_submitted and last_updated, since they are pulled out as Unix
+		# timestamps which could confuse the history log. They shouldn't get updated
+		# like this anyway; if you really need to change them use bug_set_field().
 		db_param_push();
 		$t_query = 'UPDATE {bug}
 					SET project_id=' . db_param() . ', reporter_id=' . db_param() . ',
@@ -835,11 +842,16 @@ $g_cache_bug_attachments = array();
 
 /**
  * Cache a database result-set containing full contents of bug_table row.
+ *
  * $p_stats parameter is an optional array representing bugnote statistics.
- * This parameter can be "false" if the bug has no bugnotes, so the cache can differentiate
- * from a still not cached stats registry.
- * @param array $p_bug_database_result  Database row containing all columns from mantis_bug_table.
- * @param array|boolean|null $p_stats   Optional: array representing bugnote statistics, or false to store empty cache value
+ * This parameter can be "false" if the bug has no bugnotes, so the cache can
+ * differentiate from a still not cached stats registry.
+ *
+ * @param array $p_bug_database_result Database row containing all columns
+ *                                     from mantis_bug_table.
+ * @param array|bool|null $p_stats     Optional: array representing bugnote statistics,
+ *                                     or false to store empty cache value
+ *
  * @return array returns an array representing the bug row if bug exists
  * @access public
  */
@@ -859,12 +871,15 @@ function bug_cache_database_result( array $p_bug_database_result, $p_stats = nul
 }
 
 /**
- * Cache a bug row if necessary and return the cached copy
- * @param integer $p_bug_id         Identifier of bug to cache from mantis_bug_table.
- * @param boolean $p_trigger_errors Set to true to trigger an error if the bug does not exist.
- * @return boolean|array returns an array representing the bug row if bug exists or false if bug does not exist
+ * Cache a bug row if necessary and return the cached copy.
+ *
+ * @param int  $p_bug_id         Identifier of bug to cache from mantis_bug_table.
+ * @param bool $p_trigger_errors Set to true to trigger an error if the bug does not exist.
+ *
+ * @return array|false Array representing the bug row if the bug exists, false if it does not.
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
- * @uses database_api.php
  */
 function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	global $g_cache_bug;
@@ -895,11 +910,11 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 }
 
 /**
- * Cache a set of bugs
- * @param array $p_bug_id_array Integer array representing bug identifiers to cache.
- * @return void
+ * Cache a set of bugs.
+ *
+ * @param array $p_bug_id_array List of bug identifiers to cache.
+ *
  * @access public
- * @uses database_api.php
  */
 function bug_cache_array_rows( array $p_bug_id_array ) {
 	global $g_cache_bug;
@@ -925,12 +940,17 @@ function bug_cache_array_rows( array $p_bug_id_array ) {
 
 /**
  * Inject a bug into the bug cache.
+ *
  * $p_stats parameter is an optional array representing bugnote statistics.
  * This parameter can be "false" if the bug has no bugnotes, so the cache can differentiate
  * from a still not cached stats registry.
- * @param array $p_bug_row A bug row to cache.
- * @param array|boolean|null $p_stats   Array of Bugnote stats to cache, false to store empty value, null to skip
+ *
+ * @param array $p_bug_row         A bug row to cache.
+ * @param array|bool|null $p_stats Array of Bugnote stats to cache, false to
+ *                                 store empty value, null to skip.
+ *
  * @return array
+ *
  * @access private
  */
 function bug_add_to_cache( array $p_bug_row, $p_stats = null ) {
@@ -947,8 +967,11 @@ function bug_add_to_cache( array $p_bug_row, $p_stats = null ) {
 
 /**
  * Clear a bug from the cache or all bugs if no bug id specified.
- * @param integer $p_bug_id A bug identifier to clear (optional).
- * @return boolean
+ *
+ * @param int $p_bug_id A bug identifier to clear (optional).
+ *
+ * @return bool
+ *
  * @access public
  */
 function bug_clear_cache( $p_bug_id = null ) {
@@ -964,12 +987,16 @@ function bug_clear_cache( $p_bug_id = null ) {
 }
 
 /**
- * Cache a bug text row if necessary and return the cached copy
- * @param integer $p_bug_id         Integer bug id to retrieve text for.
- * @param boolean $p_trigger_errors If the second parameter is true (default), trigger an error if bug text not found.
- * @return boolean|array returns false if not bug text found or array of bug text
+ * Cache a bug text row if necessary and return the cached copy.
+ *
+ * @param int $p_bug_id          Int bug id to retrieve text for.
+ * @param bool $p_trigger_errors If the second parameter is true (default),
+ *                               trigger an error if bug text not found.
+ *
+ * @return array|false Array of bug text data, false if not found.
+ * @throws ClientException If bug text data not found
+ *
  * @access public
- * @uses database_api.php
  */
 function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	global $g_cache_bug_text;
@@ -1007,8 +1034,11 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 
 /**
  * Clear a bug's bug text from the cache or all bug text if no bug id specified.
- * @param integer $p_bug_id A bug identifier to clear (optional).
- * @return boolean
+ *
+ * @param int $p_bug_id A bug identifier to clear (optional).
+ *
+ * @return bool
+ *
  * @access public
  */
 function bug_text_clear_cache( $p_bug_id = null ) {
@@ -1025,8 +1055,9 @@ function bug_text_clear_cache( $p_bug_id = null ) {
 
 /**
  * Clear a bug's attachments from the cache.
- * @param integer $p_bug_id A bug identifier to clear all (optional).
- * @return void
+ *
+ * @param int $p_bug_id A bug identifier to clear all (optional).
+ *
  * @access public
  */
 function bug_attachments_clear_cache( $p_bug_id = null ) {
@@ -1040,9 +1071,13 @@ function bug_attachments_clear_cache( $p_bug_id = null ) {
 }
 
 /**
- * Check if a bug exists
- * @param integer $p_bug_id Integer representing bug identifier.
- * @return boolean true if bug exists, false otherwise
+ * Check if a bug exists.
+ *
+ * @param int $p_bug_id Int representing bug identifier.
+ *
+ * @return bool true if bug exists, false otherwise
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
  */
 function bug_exists( $p_bug_id ) {
@@ -1062,9 +1097,12 @@ function bug_exists( $p_bug_id ) {
 }
 
 /**
- * Check if a bug exists. If it doesn't then trigger an error
- * @param integer $p_bug_id Integer representing bug identifier.
- * @return void
+ * Check if a bug exists, trigger an error if it does not.
+ *
+ * @param int $p_bug_id Int representing bug identifier.
+ *
+ * @throws ClientException
+ *
  * @access public
  */
 function bug_ensure_exists( $p_bug_id ) {
@@ -1077,10 +1115,14 @@ function bug_ensure_exists( $p_bug_id ) {
 }
 
 /**
- * check if the given user is the reporter of the bug
- * @param integer $p_bug_id  Integer representing bug identifier.
- * @param integer $p_user_id Integer representing a user identifier.
- * @return boolean return true if the user is the reporter, false otherwise
+ * Check if the given user is the reporter of the bug.
+ *
+ * @param int $p_bug_id  Int representing bug identifier.
+ * @param int $p_user_id Int representing a user identifier.
+ *
+ * @return bool True if the user is the reporter, false otherwise
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
  */
 function bug_is_user_reporter( $p_bug_id, $p_user_id ) {
@@ -1092,10 +1134,14 @@ function bug_is_user_reporter( $p_bug_id, $p_user_id ) {
 }
 
 /**
- * check if the given user is the handler of the bug
- * @param integer $p_bug_id  Integer representing bug identifier.
- * @param integer $p_user_id Integer representing a user identifier.
- * @return boolean return true if the user is the handler, false otherwise
+ * Check if the given user is the handler of the bug.
+ *
+ * @param int $p_bug_id  Int representing bug identifier.
+ * @param int $p_user_id Int representing a user identifier.
+ *
+ * @return bool True if the user is the handler, false otherwise.
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
  */
 function bug_is_user_handler( $p_bug_id, $p_user_id ) {
@@ -1107,14 +1153,17 @@ function bug_is_user_handler( $p_bug_id, $p_user_id ) {
 }
 
 /**
- * Check if the bug is readonly and shouldn't be modified
+ * Check if the bug is readonly and shouldn't be modified.
+ *
  * For a bug to be readonly the status has to be >= bug_readonly_status_threshold and
  * current user access level < update_readonly_bug_threshold.
- * @param integer $p_bug_id Integer representing bug identifier.
- * @return boolean
+ *
+ * @param int $p_bug_id Int representing bug identifier.
+ *
+ * @return bool
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
- * @uses access_api.php
- * @uses config_api.php
  */
 function bug_is_readonly( $p_bug_id ) {
 	$t_status = bug_get_field( $p_bug_id, 'status' );
@@ -1130,11 +1179,14 @@ function bug_is_readonly( $p_bug_id ) {
 }
 
 /**
- * Check if a given bug is resolved
- * @param integer $p_bug_id Integer representing bug identifier.
- * @return boolean true if bug is resolved, false otherwise
+ * Check if a given bug is resolved.
+ *
+ * @param int $p_bug_id Int representing bug identifier.
+ *
+ * @return bool true if bug is resolved, false otherwise
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
- * @uses config_api.php
  */
 function bug_is_resolved( $p_bug_id ) {
 	$t_bug = bug_get( $p_bug_id );
@@ -1142,11 +1194,14 @@ function bug_is_resolved( $p_bug_id ) {
 }
 
 /**
- * Check if a given bug is closed
- * @param integer $p_bug_id Integer representing bug identifier.
- * @return boolean true if bug is closed, false otherwise
+ * Check if a given bug is closed.
+ *
+ * @param int $p_bug_id Int representing bug identifier.
+ *
+ * @return bool true if bug is closed, false otherwise
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
- * @uses config_api.php
  */
 function bug_is_closed( $p_bug_id ) {
 	$t_bug = bug_get( $p_bug_id );
@@ -1155,6 +1210,7 @@ function bug_is_closed( $p_bug_id ) {
 
 /**
  * Return a bug's overdue warning level.
+ *
  * Determines the level based on the difference between the bug's due date
  * and the current date/time, based on the defined delays
  * @see $g_due_date_warning_levels
@@ -1162,6 +1218,7 @@ function bug_is_closed( $p_bug_id ) {
  * @param $p_bug_id
  *
  * @return int|false Warning level (0 = overdue), false if N/A.
+ * @throws ClientException if the bug does not exist.
  */
 function bug_overdue_level( $p_bug_id ) {
 	if( bug_is_resolved( $p_bug_id ) ) {
@@ -1190,24 +1247,28 @@ function bug_overdue_level( $p_bug_id ) {
 }
 
 /**
- * Check if a given bug is overdue
- * @param integer $p_bug_id Integer representing bug identifier.
- * @return boolean true if bug is overdue, false otherwise
+ * Check if a given bug is overdue.
+ *
+ * @param int $p_bug_id Int representing bug identifier.
+ *
+ * @return bool true if bug is overdue, false otherwise
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
- * @uses database_api.php
  */
 function bug_is_overdue( $p_bug_id ) {
 	return bug_overdue_level( $p_bug_id ) === 0;
 }
 
 /**
- * Validate workflow state to see if bug can be moved to requested state
- * @param integer $p_bug_status    Current bug status.
- * @param integer $p_wanted_status New bug status.
- * @return boolean
+ * Validate workflow state to see if bug can be moved to requested state.
+ *
+ * @param int $p_bug_status    Current bug status.
+ * @param int $p_wanted_status New bug status.
+ *
+ * @return bool
+ *
  * @access public
- * @uses config_api.php
- * @uses utility_api.php
  */
 function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 	$t_status_enum_workflow = config_get( 'status_enum_workflow' );
@@ -1234,17 +1295,23 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 }
 
 /**
- * Copy a bug from one project to another. Also make copies of issue notes, attachments, history,
+ * Copy a bug from one project to another.
+ *
+ * Also make copies of issue notes, attachments, history,
  * email notifications etc.
- * @param integer $p_bug_id                A bug identifier.
- * @param integer $p_target_project_id     A target project identifier.
- * @param boolean $p_copy_custom_fields    Whether to copy custom fields.
- * @param boolean $p_copy_relationships    Whether to copy relationships.
- * @param boolean $p_copy_history          Whether to copy history.
- * @param boolean $p_copy_attachments      Whether to copy attachments.
- * @param boolean $p_copy_bugnotes         Whether to copy bugnotes.
- * @param boolean $p_copy_monitoring_users Whether to copy monitoring users.
- * @return integer representing the new bug identifier
+ *
+ * @param int  $p_bug_id                A bug identifier.
+ * @param int  $p_target_project_id     A target project identifier.
+ * @param bool $p_copy_custom_fields    Whether to copy custom fields.
+ * @param bool $p_copy_relationships    Whether to copy relationships.
+ * @param bool $p_copy_history          Whether to copy history.
+ * @param bool $p_copy_attachments      Whether to copy attachments.
+ * @param bool $p_copy_bugnotes         Whether to copy bugnotes.
+ * @param bool $p_copy_monitoring_users Whether to copy monitoring users.
+ *
+ * @return int New bug identifier
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
  */
 function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields = false, $p_copy_relationships = false, $p_copy_history = false, $p_copy_attachments = false, $p_copy_bugnotes = false, $p_copy_monitoring_users = false ) {
@@ -1268,7 +1335,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	# MASC ATTENTION: IF THE SOURCE BUG HAS TO HANDLER THE bug_create FUNCTION CAN TRY TO AUTO-ASSIGN THE BUG
 	# WE FORCE HERE TO DUPLICATE THE SAME HANDLER OF THE SOURCE BUG
-	# @todo VB: Shouldn't we check if the handler in the source project is also a handler in the destination project?
+	# @todo VB: Shouldn't we check if the handler in the source project is also a
+	#   handler in the destination project?
 	bug_set_field( $t_new_bug_id, 'handler_id', $t_bug_data->handler_id );
 
 	bug_set_field( $t_new_bug_id, 'duplicate_id', $t_bug_data->duplicate_id );
@@ -1356,7 +1424,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	# COPY HISTORY
 	history_delete( $t_new_bug_id );	# should history only be deleted inside the if statement below?
 	if( $p_copy_history ) {
-		# @todo problem with this code: the generated history trail is incorrect because the note IDs are those of the original bug, not the copied ones
+		# @todo problem with this code: the generated history trail is incorrect
+		#   because the note IDs are those of the original bug, not the copied ones
 		# @todo actually, does it even make sense to copy the history ?
 		db_param_push();
 		$t_query = 'SELECT * FROM {bug_history} WHERE bug_id = ' . db_param();
@@ -1387,9 +1456,12 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
  * Moves an issue from a project to another.
  *
  * @todo Validate with sub-project / category inheritance scenarios.
- * @param integer $p_bug_id            The bug to be moved.
- * @param integer $p_target_project_id The target project to move the bug to.
- * @return void
+ *
+ * @param int $p_bug_id            The bug to be moved.
+ * @param int $p_target_project_id The target project to move the bug to.
+ *
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
  */
 function bug_move( $p_bug_id, $p_target_project_id ) {
@@ -1428,10 +1500,14 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 }
 
 /**
- * allows bug deletion :
- * delete the bug, bugtext, bugnote, and bugtexts selected
- * @param integer $p_bug_id Integer representing bug identifier.
- * @return void
+ * Delete a bug.
+ *
+ * Delete the bug record including all related data (bugtext, bugnote, etc).
+ *
+ * @param int $p_bug_id Int representing bug identifier.
+ *
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
  */
 function bug_delete( $p_bug_id ) {
@@ -1448,9 +1524,11 @@ function bug_delete( $p_bug_id ) {
 	email_bug_deleted( $p_bug_id );
 	email_relationship_bug_deleted( $p_bug_id );
 
-	# call post-deletion custom function.  We call this here to allow the custom function to access the details of the bug before
-	# they are deleted from the database given it's id.  The other option would be to move this to the end of the function and
-	# provide it with bug data rather than an id, but this will break backward compatibility.
+	# Call post-deletion custom function.
+	# We do this here to allow the custom function to access the bug's details
+	# before they are deleted from the database given its id. The other option
+	# would be to move this to the end of the function and provide it with bug
+	# data rather than an id, but this would break backward compatibility.
 	helper_call_custom_function( 'issue_delete_notify', array( $p_bug_id ) );
 
 	# Unmonitor bug for all users
@@ -1496,10 +1574,11 @@ function bug_delete( $p_bug_id ) {
 }
 
 /**
- * Delete all bugs associated with a project
- * @param integer $p_project_id Integer representing a project identifier.
+ * Delete all bugs associated with a project.
+ *
+ * @param int $p_project_id Int representing a project identifier.
+ *
  * @access public
- * @uses database_api.php
  * @noinspection PhpDocMissingThrowsInspection
  */
 function bug_delete_all( $p_project_id ) {
@@ -1515,18 +1594,22 @@ function bug_delete_all( $p_project_id ) {
 	}
 
 	# @todo should we check the return value of each bug_delete() and
-	#  return false if any of them return false? Presumable bug_delete()
-	#  will eventually trigger an error on failure so it won't matter...
+	#    return false if any of them return false? Presumable bug_delete()
+	#    will eventually trigger an error on failure so it won't matter...
 }
 
 /**
- * Returns the extended record of the specified bug, this includes
- * the bug text fields
+ * Returns the extended record of the specified bug, including bug text fields.
+ *
  * @todo include reporter name and handler name, the problem is that
  *      handler can be 0, in this case no corresponding name will be
  *      found.  Use equivalent of (+) in Oracle.
- * @param integer $p_bug_id Integer representing bug identifier.
+ *
+ * @param int $p_bug_id Int representing bug identifier.
+ *
  * @return array
+ * @throws ClientException
+ *
  * @access public
  */
 function bug_get_extended_row( $p_bug_id ) {
@@ -1538,9 +1621,13 @@ function bug_get_extended_row( $p_bug_id ) {
 }
 
 /**
- * Returns the record of the specified bug
- * @param integer $p_bug_id Integer representing bug identifier.
+ * Returns the record of the specified bug.
+ *
+ * @param int $p_bug_id Int representing bug identifier.
+ *
  * @return array
+ * @throws ClientException
+ *
  * @access public
  */
 function bug_get_row( $p_bug_id ) {
@@ -1548,10 +1635,14 @@ function bug_get_row( $p_bug_id ) {
 }
 
 /**
- * Returns an object representing the specified bug
- * @param integer $p_bug_id       Integer representing bug identifier.
- * @param boolean $p_get_extended Whether to include extended information (including bug_text).
+ * Returns an object representing the specified bug.
+ *
+ * @param int  $p_bug_id       Int representing bug identifier.
+ * @param bool $p_get_extended Whether to include extended information (including bug_text).
+ *
  * @return BugData BugData Object
+ * @throws ClientException
+ *
  * @access public
  */
 function bug_get( $p_bug_id, $p_get_extended = false ) {
@@ -1567,9 +1658,12 @@ function bug_get( $p_bug_id, $p_get_extended = false ) {
 }
 
 /**
- * Convert row [from database] to bug object
+ * Convert mantis_bug_table row to BugData object.
+ *
  * @param array $p_row Bug database row.
  * @return BugData
+ *
+ * @throws ClientException
  */
 function bug_row_to_object( array $p_row ) {
 	$t_bug_data = new BugData;
@@ -1578,11 +1672,16 @@ function bug_row_to_object( array $p_row ) {
 }
 
 /**
- * return the specified field of the given bug
- *  if the field does not exist, display a warning and return ''
- * @param integer $p_bug_id     Integer representing bug identifier.
- * @param string  $p_field_name Field name to retrieve.
+ * Return the specified field of the given bug.
+ *
+ * If the field does not exist, display a warning and return ''
+ *
+ * @param int    $p_bug_id     Int representing bug identifier.
+ * @param string $p_field_name Field name to retrieve.
+ *
  * @return string
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
  */
 function bug_get_field( $p_bug_id, $p_field_name ) {
@@ -1598,11 +1697,16 @@ function bug_get_field( $p_bug_id, $p_field_name ) {
 }
 
 /**
- * return the specified text field of the given bug
- *  if the field does not exist, display a warning and return ''
- * @param integer $p_bug_id     Integer representing bug identifier.
- * @param string  $p_field_name Field name to retrieve.
+ * Return the specified text field of the given bug.
+ *
+ * If the field does not exist, display a warning and return ''
+ *
+ * @param int    $p_bug_id     Int representing bug identifier.
+ * @param string $p_field_name Field name to retrieve.
+ *
  * @return string
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
  */
 function bug_get_text_field( $p_bug_id, $p_field_name ) {
@@ -1618,25 +1722,30 @@ function bug_get_text_field( $p_bug_id, $p_field_name ) {
 }
 
 /**
- * return the bug summary
- *  this is a wrapper for the custom function
- * @param integer $p_bug_id  Integer representing bug identifier.
- * @param integer $p_context Representing SUMMARY_CAPTION, SUMMARY_FIELD.
+ * Return the bug's summary.
+ *
+ * This is a wrapper for the custom function.
+ *
+ * @param int $p_bug_id  Bug identifier.
+ * @param int $p_context Representing SUMMARY_CAPTION, SUMMARY_FIELD.
+ *
  * @return string
+ *
  * @access public
- * @uses helper_api.php
  */
 function bug_format_summary( $p_bug_id, $p_context ) {
 	return helper_call_custom_function( 'format_issue_summary', array( $p_bug_id, $p_context ) );
 }
 
 /**
- * return the timestamp for the most recent time at which a bugnote
- *  associated with the bug was modified
- * @param integer $p_bug_id Integer representing bug identifier.
- * @return boolean|integer false or timestamp in integer format representing newest bugnote timestamp
+ * Return the timestamp for the most recent bugnote.
+ *
+ * @param int $p_bug_id Bug identifier.
+ *
+ * @return int|false Unix Timestamp of the newest bugnote timestamp,
+ *                   false if there are no bugnotes.
+ *
  * @access public
- * @uses database_api.php
  */
 function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
 	$c_bug_id = (int)$p_bug_id;
@@ -1655,12 +1764,15 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
 
 /**
  * For a list of bug ids, returns an array of bugnote stats.
+ *
  * If a bug has no visible bugnotes, returns "false" as the stats item for that bug id.
- * @param array $p_bugs_id         Array of Integer representing bug identifiers.
- * @param integer|null $p_user_id  User for checking access levels. null defaults to current user
- * @return array                   Array of bugnote stats
+ *
+ * @param array    $p_bugs_id List of bug identifiers.
+ * @param int|null $p_user_id User for checking access levels. null defaults to current user
+ *
+ * @return array Array of bugnote stats
+ *
  * @access public
- * @uses database_api.php
  */
 function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 	if( empty( $p_bugs_id ) ) {
@@ -1749,13 +1861,16 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 }
 
 /**
- * return the timestamp for the most recent time at which a bugnote
- * associated with the bug was modified and the total bugnote
- * count in one db query
- * @param integer $p_bug_id Integer representing bug identifier.
+ * Return the bug's bugnote statistics.
+ *
+ * - Timestamp for the bug's most recent bugnote
+ * - Total bugnote count.
+ *
+ * @param int $p_bug_id Bug identifier.
+ *
  * @return array|false Bugnote stats, false if no bugnotes
+ *
  * @access public
- * @uses database_api.php
  */
 function bug_get_bugnote_stats( $p_bug_id ) {
 	global $g_cache_bug;
@@ -1771,14 +1886,17 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 }
 
 /**
- * Get array of attachments associated with the specified bug id.  The array will be
- * sorted in terms of date added (ASC).  The array will include the following fields:
+ * Get array of attachments associated with the specified bug id.
+ *
+ * The array will be sorted in terms of date added (ASC).
+ * The array will include the following fields:
  * id, title, diskfile, filename, filesize, file_type, date_added, user_id.
- * @param integer $p_bug_id Integer representing bug identifier.
+ *
+ * @param int $p_bug_id Bug identifier.
+ *
  * @return array array of results or empty array
+ *
  * @access public
- * @uses database_api.php
- * @uses file_api.php
  */
 function bug_get_attachments( $p_bug_id ) {
 	$p_bug_id = (int)$p_bug_id;
@@ -1808,14 +1926,16 @@ function bug_get_attachments( $p_bug_id ) {
 }
 
 /**
- * Set the value of a bug field
- * @param integer                $p_bug_id     Integer representing bug identifier.
- * @param string                 $p_field_name Pre-defined field name.
- * @param boolean|integer|string $p_value      Value to set.
- * @return boolean (always true)
+ * Set the value of a bug field.
+ *
+ * @param int             $p_bug_id     Bug identifier.
+ * @param string          $p_field_name Pre-defined field name.
+ * @param bool|int|string $p_value      Value to set.
+ *
+ * @return true
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
- * @uses database_api.php
- * @uses history_api.php
  */
 function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 	$c_bug_id = (int)$p_bug_id;
@@ -1908,14 +2028,17 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 }
 
 /**
- * assign the bug to the given user
- * @param integer $p_bug_id          A bug identifier.
- * @param integer $p_user_id         A user identifier.
- * @param string  $p_bugnote_text    The bugnote text.
- * @param boolean $p_bugnote_private Indicate whether bugnote is private.
- * @return boolean
+ * Assign the bug to the given user.
+ *
+ * @param int    $p_bug_id          A bug identifier.
+ * @param int    $p_user_id         A user identifier.
+ * @param string $p_bugnote_text    The bugnote text.
+ * @param bool   $p_bugnote_private Indicate whether bugnote is private.
+ *
+ * @return bool
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
- * @uses database_api.php
  */
 function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_private = false ) {
 	if( $p_user_id != NO_USER ) {
@@ -1969,12 +2092,16 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 }
 
 /**
- * close the given bug
- * @param integer $p_bug_id          A bug identifier.
+ * Close the given bug.
+ *
+ * @param int     $p_bug_id          A bug identifier.
  * @param string  $p_bugnote_text    The bugnote text.
- * @param boolean $p_bugnote_private Whether the bugnote is private.
+ * @param bool    $p_bugnote_private Whether the bugnote is private.
  * @param string  $p_time_tracking   Time tracking value.
- * @return boolean (always true)
+ *
+ * @return true
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
  */
 function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
@@ -1997,17 +2124,21 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 }
 
 /**
- * resolve the given bug
- * @param integer $p_bug_id           A bug identifier.
- * @param integer $p_resolution       Resolution status.
- * @param string  $p_fixed_in_version Fixed in version.
- * @param string  $p_bugnote_text     The bugnote text.
- * @param integer $p_duplicate_id     A duplicate identifier.
- * @param integer $p_handler_id       A handler identifier.
- * @param boolean $p_bugnote_private  Whether this is a private bugnote.
- * @param string  $p_time_tracking    Time tracking value.
+ * Resolve the given bug.
+ *
+ * @param int    $p_bug_id           A bug identifier.
+ * @param int    $p_resolution       Resolution status.
+ * @param string $p_fixed_in_version Fixed in version.
+ * @param string $p_bugnote_text     The bugnote text.
+ * @param int    $p_duplicate_id     A duplicate identifier.
+ * @param int    $p_handler_id       A handler identifier.
+ * @param bool   $p_bugnote_private  Whether this is a private bugnote.
+ * @param string $p_time_tracking    Time tracking value.
+ *
+ * @return bool
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
- * @return boolean
  */
 function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 	$c_resolution = (int)$p_resolution;
@@ -2069,17 +2200,17 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 }
 
 /**
- * reopen the given bug
- * @param integer $p_bug_id          A bug identifier.
+ * Reopen the given bug.
+ *
+ * @param int     $p_bug_id          A bug identifier.
  * @param string  $p_bugnote_text    The bugnote text.
  * @param string  $p_time_tracking   Time tracking value.
- * @param boolean $p_bugnote_private Whether this is a private bugnote.
- * @return boolean (always true)
+ * @param bool    $p_bugnote_private Whether this is a private bugnote.
+ *
+ * @return true
+ * @throws ClientException if the bug does not exist.
+ *
  * @access public
- * @uses database_api.php
- * @uses email_api.php
- * @uses bugnote_api.php
- * @uses config_api.php
  */
 function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00', $p_bugnote_private = false ) {
 	$p_bugnote_text = trim( $p_bugnote_text );
@@ -2101,11 +2232,13 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 }
 
 /**
- * updates the last_updated field
- * @param integer $p_bug_id Integer representing bug identifier.
- * @return boolean (always true)
+ * Updates the last_updated field.
+ *
+ * @param int $p_bug_id Bug identifier.
+ *
+ * @return true
+ *
  * @access public
- * @uses database_api.php
  */
 function bug_update_date( $p_bug_id ) {
 	db_param_push();
@@ -2118,14 +2251,14 @@ function bug_update_date( $p_bug_id ) {
 }
 
 /**
- * enable monitoring of this bug for the user
- * @param integer $p_bug_id  Integer representing bug identifier.
- * @param integer $p_user_id Integer representing user identifier.
- * @return boolean true if successful, false if unsuccessful
+ * Enable monitoring of this bug for the user.
+ *
+ * @param int $p_bug_id  Bug identifier.
+ * @param int $p_user_id User identifier.
+ *
+ * @return bool true if successful, false if unsuccessful
+ *
  * @access public
- * @uses database_api.php
- * @uses history_api.php
- * @uses user_api.php
  */
 function bug_monitor( $p_bug_id, $p_user_id ) {
 	$c_bug_id = (int)$p_bug_id;
@@ -2158,9 +2291,10 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 }
 
 /**
- * Returns the list of users monitoring the specified bug
+ * Returns the list of users monitoring the specified bug.
  *
- * @param integer $p_bug_id Integer representing bug identifier.
+ * @param int $p_bug_id Bug identifier.
+ *
  * @return array
  */
 function bug_get_monitors( $p_bug_id ) {
@@ -2187,14 +2321,12 @@ function bug_get_monitors( $p_bug_id ) {
 }
 
 /**
- * Copy list of users monitoring a bug to the monitor list of a second bug
- * @param integer $p_source_bug_id Integer representing the bug identifier of the source bug.
- * @param integer $p_dest_bug_id   Integer representing the bug identifier of the destination bug.
- * @return void
+ * Copy list of users monitoring a bug to the monitor list of a second bug.
+ *
+ * @param int $p_source_bug_id Source bug identifier.
+ * @param int $p_dest_bug_id   Destination bug identifier.
+ *
  * @access public
- * @uses database_api.php
- * @uses history_api.php
- * @uses user_api.php
  */
 function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 	$c_source_bug_id = (int)$p_source_bug_id;
@@ -2217,14 +2349,14 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 }
 
 /**
- * disable monitoring of this bug for the user
- * if $p_user_id = null, then bug is unmonitored for all users.
- * @param integer $p_bug_id  Integer representing bug identifier.
- * @param integer $p_user_id Integer representing user identifier.
- * @return boolean (always true)
+ * Disable monitoring of this bug for the user.
+ *
+ * @param int      $p_bug_id  Bug identifier.
+ * @param int|null $p_user_id User identifier, null for all users.
+ *
+ * @return true
+ *
  * @access public
- * @uses database_api.php
- * @uses history_api.php
  */
 function bug_unmonitor( $p_bug_id, $p_user_id ) {
 	# Delete monitoring record
@@ -2250,10 +2382,12 @@ function bug_unmonitor( $p_bug_id, $p_user_id ) {
 
 /**
  * Pads the bug id with the appropriate number of zeros.
- * @param integer $p_bug_id A bug identifier.
+ *
+ * @param int $p_bug_id Bug identifier.
+ *
  * @return string
+ *
  * @access public
- * @uses config_api.php
  */
 function bug_format_id( $p_bug_id ) {
 	$t_padding = config_get( 'display_bug_padding' );
@@ -2264,13 +2398,16 @@ function bug_format_id( $p_bug_id ) {
 
 /**
  * Returns the resulting status for a bug after an assignment action is performed.
+ *
  * If the option "auto_set_status_to_assigned" is enabled, the resulting status
  * is calculated based on current handler and status , and requested modifications.
- * @param integer $p_current_handler	Current handler user id
- * @param integer $p_new_handler		New handler user id
- * @param integer $p_current_status		Current bug status
- * @param integer $p_new_status			New bug status (as being part of a status change combined action)
- * @return integer		Calculated status after assignment
+ *
+ * @param int $p_current_handler Current handler user id
+ * @param int $p_new_handler     New handler user id
+ * @param int $p_current_status  Current bug status
+ * @param int $p_new_status      New bug status (as being part of a status change combined action)
+ *
+ * @return int Calculated status after assignment
  */
 function bug_get_status_for_assign( $p_current_handler, $p_new_handler, $p_current_status, $p_new_status = null ) {
 	if( null === $p_new_status ) {
@@ -2293,8 +2430,11 @@ function bug_get_status_for_assign( $p_current_handler, $p_new_handler, $p_curre
 
 /**
  * Clear a bug from all the related caches or all bugs if no bug id specified.
- * @param integer $p_bug_id A bug identifier to clear (optional).
- * @return boolean
+ *
+ * @param int $p_bug_id A bug identifier to clear (optional).
+ *
+ * @return bool
+ *
  * @access public
  */
 function bug_clear_cache_all( $p_bug_id = null ) {
@@ -2314,9 +2454,10 @@ function bug_clear_cache_all( $p_bug_id = null ) {
 }
 
 /**
- * Populate the caches related to the selected columns
- * @param array $p_bugs	Array of BugData objects
- * @param array $p_selected_columns	Array of columns to show
+ * Populate the caches related to the selected columns.
+ *
+ * @param BugData[] $p_bugs         Array of BugData objects
+ * @param array $p_selected_columns Array of columns to show
  */
 function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 	$t_bug_ids = array();
