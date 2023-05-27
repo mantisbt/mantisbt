@@ -728,22 +728,36 @@ function user_get_id_by_name( $p_username, $p_throw = false ) {
 }
 
 /**
- * Get a user id from their email address
+ * Get a user's id from their email address.
+ *
+ * The check is case insensitive.
+ *
+ * This function should not be used when {@see $g_email_ensure_unique} is OFF:
+ * if there are multiple users found matching the given email, the function will
+ * not consider that to be an error, and arbitrarily return one of them (exactly
+ * which one is undetermined).
  *
  * @param string $p_email The email address to retrieve data for.
- * @param boolean $p_throw true to throw exception when not found, false otherwise.
- * @return integer|boolean
+ * @param bool   $p_throw True to throw exception when not found, false otherwise.
+ *
+ * @return int|false User Id or false if the email does not exist.
+ * @throws ClientException
  */
 function user_get_id_by_email( $p_email, $p_throw = false ) {
-	if( $t_user = user_search_cache( 'email', $p_email ) ) {
+	if( $t_user = user_search_cache( 'email', $p_email, false ) ) {
 		return (int)$t_user['id'];
 	}
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {user} WHERE email=' . db_param();
-	$t_result = db_query( $t_query, array( $p_email ) );
+	// Escape SQL LIKE pattern chars to ensure exact match
+	$p_email = preg_replace( '/([%_])/', '\\\\$1', $p_email );
 
-	$t_row = db_fetch_array( $t_result );
+	$t_query = new DbQuery;
+	$t_query->sql( 'SELECT * FROM {user} WHERE '
+		// Case-insensitive like
+		. $t_query->sql_ilike( 'email', $p_email, '\\' )
+	);
+	$t_row = $t_query->fetch();
+
 	if( $t_row ) {
 		user_cache_database_result( $t_row );
 		return (int)$t_row['id'];
