@@ -193,13 +193,16 @@ function user_update_cache( $p_user_id, $p_field, $p_value ) {
  *
  * @param string $p_field The user object field name to search the cache for.
  * @param mixed  $p_value The field value to look for in the cache.
+ * @param bool   $p_case_sensitive False to perform case-insensitive search; defaults to true.
+ *
  * @return integer|boolean
  */
-function user_search_cache( $p_field, $p_value ) {
+function user_search_cache( $p_field, $p_value, $p_case_sensitive = true ) {
 	global $g_cache_user;
 	if( isset( $g_cache_user ) ) {
+		$t_compare = $p_case_sensitive ? 'strcmp' : 'strcasecmp';
 		foreach( $g_cache_user as $t_user ) {
-			if( $t_user && $t_user[$p_field] == $p_value ) {
+			if( $t_user && 0 == $t_compare( $t_user[$p_field], $p_value ) ) {
 				return $t_user;
 			}
 		}
