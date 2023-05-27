@@ -35,6 +35,7 @@ if( !defined( 'CHECK_EMAIL_INC_ALLOW' ) ) {
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 require_api( 'utility_api.php' );
+require_api( 'database_api.php' );
 
 check_print_section_header_row( 'Email' );
 
@@ -77,4 +78,41 @@ check_print_test_row(
 check_print_test_row(
 	'allow_signup = ON requires send_reset_password = ON',
 	!config_get_global( 'allow_signup' ) || config_get_global( 'send_reset_password' )
+);
+
+// Check for duplicate email addresses (case insensitive)
+$t_sql = <<< ENDSQL
+SELECT lower(email) email, username
+FROM mantis_user_table 
+WHERE lower(email) IN (
+	SELECT lower(email) 
+	FROM mantis_user_table 
+	GROUP BY lower(email) HAVING COUNT(*) > 1
+	)
+ORDER BY lower(email), username
+ENDSQL;
+$t_query = new DbQuery( $t_sql );
+$t_rows = $t_query->fetch_all();
+
+$t_duplicate_emails = array();
+foreach( $t_rows as $t_row ) {
+	/**
+	 * @var string $v_email
+	 * @var string $v_username
+	 */
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+	$t_duplicate_emails[$v_email][] = $v_username;
+}
+foreach( $t_duplicate_emails as $t_email => &$t_usernames ) {
+	$t_usernames = "$t_email (" . implode(', ', $t_usernames ) . ")";
+}
+var_dump($t_rows, $t_duplicate_emails);
+// Fail check if emails should be unique, just issue a warning otherwise
+$t_function = config_get_global( 'email_ensure_unique' )
+	? 'check_print_test_row'
+	: 'check_print_test_warn_row';
+$t_function(
+	'There are no duplicate email addresses, regardless of case',
+	count( $t_duplicate_emails ) == 0,
+	'Duplicates found: ' . implode('; ', $t_duplicate_emails )
 );
