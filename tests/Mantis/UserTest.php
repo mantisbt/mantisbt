@@ -26,6 +26,8 @@
  */
 
 # Includes
+use Mantis\Exceptions\ClientException;
+
 require_once 'MantisCoreBase.php';
 
 /**
@@ -93,6 +95,50 @@ class MantisUserApiTest extends MantisCoreBase {
 			"Non-existing email"
 				=> array( 'unique@uniqueness.test', null, true ),
 		];
+	}
+
+	/**
+	 * Tests user_get_id_by_email()
+	 *
+	 * @noinspection PhpUnhandledExceptionInspection
+	 */
+	public function testGetIdByEmail() {
+		$t_user_id = $this::$user_id;
+		$t_email_with_case_variation = ucfirst( self::TEST_EMAIL );
+
+		$this->assertEquals( $t_user_id,
+			user_get_id_by_email( self::TEST_EMAIL ),
+			"User email found with exact case"
+			 );
+		$this->assertEquals( $t_user_id,
+			user_get_id_by_email( $t_email_with_case_variation ),
+			"User email found with different case"
+		);
+
+		// Allow non-unique emails and create a new user with duplicate email
+		config_set_global( 'email_ensure_unique', false );
+		$t_cookie = user_create(
+			'DupeMail' . rand(),
+			'password',
+			$t_email_with_case_variation
+		);
+		$t_user_id = user_get_id_by_cookie( $t_cookie );
+
+		$this->assertNotFalse(
+			user_get_id_by_email( self::TEST_EMAIL ),
+			"User found when multiple accounts with same email exist"
+		);
+		user_delete( $t_user_id );
+
+		// Expected failures
+		$this->assertFalse(
+			user_get_id_by_email( rand() . self::TEST_EMAIL ),
+			"Non-existing email not found"
+			 );
+
+		// Same test but with exception
+		$this->expectException( ClientException::class );
+		user_get_id_by_email( rand() . self::TEST_EMAIL, true );
 	}
 
 }
