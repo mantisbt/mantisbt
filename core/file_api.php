@@ -1323,7 +1323,11 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 			}
 			chmod( $t_disk_file_name_to, config_get( 'attachments_file_permissions' ) );
 			# Don't pop the parameters after query execution since we're in a loop
-			db_query( $t_query_disk_attachment_update, array( db_prepare_string( $t_path_to ), $c_bug_id, (int)$t_row['id'] ), -1, -1, false );
+			db_query( $t_query_disk_attachment_update,
+				array( $t_path_to, $c_bug_id, (int)$t_row['id'] ),
+				-1, -1,
+				false
+			);
 		} else {
 			trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 		}
