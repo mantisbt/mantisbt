@@ -87,6 +87,7 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 	if( !isset( $g_cache_user[$c_user_id] ) ) {
 		user_cache_array_rows( array( $c_user_id ) );
 
+		/** @noinspection PhpConditionAlreadyCheckedInspection */
 		if( !isset( $g_cache_user[$c_user_id] ) ) {
 			if( $p_trigger_errors ) {
 				throw new ClientException(
@@ -193,7 +194,7 @@ function user_clear_cache( $p_user_id = null ) {
 function user_update_cache( $p_user_id, $p_field, $p_value ) {
 	global $g_cache_user;
 
-	if( isset( $g_cache_user[$p_user_id] ) && isset( $g_cache_user[$p_user_id][$p_field] ) ) {
+	if( isset( $g_cache_user[$p_user_id][$p_field] ) ) {
 		$g_cache_user[$p_user_id][$p_field] = $p_value;
 	} else {
 		user_clear_cache( $p_user_id );
@@ -273,13 +274,13 @@ function user_ensure_exists( $p_user_id ) {
 function user_is_name_unique( $p_username, $p_user_id = null ) {
 	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_existing_user_id = user_get_id_by_name( $p_username );
-	if( $t_existing_user_id !== false && ( $p_user_id === null || (int)$t_existing_user_id !== $p_user_id ) ) {
+	if( $t_existing_user_id !== false && $t_existing_user_id !== $p_user_id ) {
 		return false;
 	}
 
 	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_existing_user_id = user_get_id_by_realname( $p_username );
-	if( $t_existing_user_id !== false && ( $p_user_id === null || (int)$t_existing_user_id !== $p_user_id ) ) {
+	if( $t_existing_user_id !== false && $t_existing_user_id !== $p_user_id ) {
 		return false;
 	}
 
@@ -527,9 +528,7 @@ function user_count_level( $p_level = ANYBODY, $p_enabled = null ) {
 
 	# Get the number of users
 	$t_result = db_query( $t_query, $t_param );
-	$t_count = db_result( $t_result );
-
-	return $t_count;
+	return db_result( $t_result );
 }
 
 /**
@@ -546,7 +545,7 @@ function user_count_level( $p_level = ANYBODY, $p_enabled = null ) {
  * @noinspection PhpUnused
  */
 function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
-	$t_session_duration_in_minutes = (integer)$p_session_duration_in_minutes;
+	$t_session_duration_in_minutes = (int)$p_session_duration_in_minutes;
 
 	# if session duration is 0, then there is no logged in users.
 	if( $t_session_duration_in_minutes == 0 ) {
@@ -554,7 +553,10 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	}
 
 	# Generate timestamp
-	$t_last_timestamp_threshold = mktime( date( 'H' ), date( 'i' ) - 1 * $t_session_duration_in_minutes, date( 's' ), date( 'm' ), date( 'd' ), date( 'Y' ) );
+	$t_last_timestamp_threshold = mktime(
+		date( 'H' ), date( 'i' ) - $t_session_duration_in_minutes, date( 's' ),
+		date( 'm' ), date( 'd' ), date( 'Y' )
+	);
 
 	# Execute query
 	db_param_push();
@@ -1007,9 +1009,7 @@ function user_get_row_by_name( $p_username ) {
 		return false;
 	}
 
-	$t_row = user_get_row( $t_user_id );
-
-	return $t_row;
+	return user_get_row( $t_user_id );
 }
 
 /**
@@ -1091,7 +1091,7 @@ function user_get_email( $p_user_id ) {
 function user_get_username( $p_user_id ) {
 	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_row = user_cache_row( $p_user_id, false );
-	if( false == $t_row ) {
+	if( false === $t_row ) {
 		return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
 	}
 
@@ -1142,7 +1142,7 @@ function user_get_name( $p_user_id ) {
 	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_row = user_cache_row( $p_user_id, false );
 
-	if( false == $t_row ) {
+	if( false === $t_row ) {
 		return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
 	}
 
@@ -1258,7 +1258,10 @@ $g_user_accessible_projects_cache = null;
 function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 	global $g_user_accessible_projects_cache;
 
-	if( null !== $g_user_accessible_projects_cache && auth_get_current_user_id() == $p_user_id && false == $p_show_disabled ) {
+	if( null !== $g_user_accessible_projects_cache
+		&& auth_get_current_user_id() == $p_user_id
+		&& !$p_show_disabled
+	) {
 		return $g_user_accessible_projects_cache;
 	}
 
@@ -1322,12 +1325,8 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled = false ) {
 	global $g_user_accessible_subprojects_cache;
 
-	if( null !== $g_user_accessible_subprojects_cache && auth_get_current_user_id() == $p_user_id && false == $p_show_disabled ) {
-		if( isset( $g_user_accessible_subprojects_cache[$p_project_id] ) ) {
-			return $g_user_accessible_subprojects_cache[$p_project_id];
-		} else {
-			return array();
-		}
+	if( null !== $g_user_accessible_subprojects_cache && auth_get_current_user_id() == $p_user_id && !$p_show_disabled ) {
+		return $g_user_accessible_subprojects_cache[$p_project_id] ?? array();
 	}
 
 	db_param_push();
@@ -1372,7 +1371,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 			$t_projects[(int)$t_row['parent_id']] = array();
 		}
 
-		array_push( $t_projects[(int)$t_row['parent_id']], (int)$t_row['id'] );
+		$t_projects[(int)$t_row['parent_id']][] = (int)$t_row['id'];
 	}
 
 	if( auth_get_current_user_id() == $p_user_id ) {
@@ -1403,7 +1402,7 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 	while( $t_todo ) {
 		$t_elem = (int)array_shift( $t_todo );
 		if( !in_array( $t_elem, $t_subprojects ) ) {
-			array_push( $t_subprojects, $t_elem );
+			$t_subprojects[] = $t_elem;
 			$t_todo = array_merge( $t_todo, user_get_accessible_subprojects( $p_user_id, $t_elem ) );
 		}
 	}
@@ -1792,7 +1791,7 @@ function user_set_fields( $p_user_id, array $p_fields ) {
 	}
 
 	$t_query .= ' WHERE id=' . db_param();
-	array_push( $t_parameters, (int)$p_user_id );
+	$t_parameters[] = (int)$p_user_id;
 
 	db_query( $t_query, $t_parameters );
 
