@@ -628,33 +628,6 @@ function db_close() {
 }
 
 /**
- * prepare a string before DB insertion
- * @param string $p_string Unprepared string.
- * @return string prepared database query string
- * @deprecated db_query should be used in preference to this function. This function may be removed in 1.2.0 final
- */
-function db_prepare_string( $p_string ) {
-	global $g_db;
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'mssqlnative':
-		case 'odbc_mssql':
-			return addslashes( $p_string );
-		case 'mysqli':
-			$t_escaped = $g_db->qstr( $p_string, false );
-			return mb_substr( $t_escaped, 1, mb_strlen( $t_escaped ) - 2 );
-		case 'pgsql':
-			return pg_escape_string( $p_string );
-		case 'oci8':
-			return $p_string;
-		default:
-			error_parameters( 'db_type', $t_db_type );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-	}
-}
-
-/**
  * Prepare a binary string before DB insertion
  * Use of this function is required for some DB types, to properly encode
  * BLOB fields prior to calling db_query()

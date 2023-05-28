@@ -1635,15 +1635,9 @@ function user_set_fields( $p_user_id, array $p_fields ) {
 	$t_parameters = array();
 
 	foreach ( $p_fields as $t_field_name => $t_field_value ) {
-		$c_field_name = db_prepare_string( $t_field_name );
-
-		if( count( $t_parameters ) == 0 ) {
-			$t_query .= ' SET '. $c_field_name. '=' . db_param();
-		} else {
-			$t_query .= ' , ' . $c_field_name. '=' . db_param();
-		}
-
-		array_push( $t_parameters, $t_field_value );
+		$t_query .= ( empty( $t_parameters ) ? ' SET ' :  ', ' )
+			. $t_field_name. '=' . db_param();
+		$t_parameters[] = $t_field_value;
 	}
 
 	$t_query .= ' WHERE id=' . db_param();
