@@ -67,14 +67,17 @@ $g_cache_user = array();
 $g_user_accessible_subprojects_cache = null;
 
 /**
- * Cache a user row if necessary and return the cached copy
+ * Cache a user row if necessary and return the cached copy.
+ *
  * If the second parameter is true (default), trigger an error
  * if the user can't be found.  If the second parameter is
  * false, return false if the user can't be found.
  *
- * @param integer $p_user_id        A valid user identifier.
- * @param boolean $p_trigger_errors Trigger an error is the user does not exist.
- * @return array|boolean array of database data or false if not found
+ * @param int $p_user_id         A valid user identifier.
+ * @param bool $p_trigger_errors Trigger an error is the user does not exist.
+ *
+ * @return array|false array of database data or false if not found
+ * @throws ClientException
  */
 function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 	global $g_cache_user;
@@ -101,9 +104,12 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 }
 
 /**
- * Loads user rows in cache for a set of User ID's
+ * Loads user rows in cache for a set of User ID's.
+ * 
  * Store false if the user does not exists
+ * 
  * @param array $p_user_id_array An array of user identifiers.
+ *                               
  * @return void
  */
 function user_cache_array_rows( array $p_user_id_array ) {
@@ -143,8 +149,10 @@ function user_cache_array_rows( array $p_user_id_array ) {
 }
 
 /**
- * Cache a user row
+ * Cache a user row.
+ * 
  * @param array $p_user_database_result A user row to cache.
+ *
  * @return void
  */
 function user_cache_database_result( array $p_user_database_result ) {
@@ -154,9 +162,12 @@ function user_cache_database_result( array $p_user_database_result ) {
 }
 
 /**
- * Clear the user cache (or just the given id if specified)
- * @param integer $p_user_id A valid user identifier or the default of null to clear cache for all users.
- * @return boolean
+ * Clear the user cache (or just the given id if specified).
+ *
+ * @param int $p_user_id A valid user identifier or the default of null to clear
+ *                       cache for all users.
+ *
+ * @return bool
  */
 function user_clear_cache( $p_user_id = null ) {
 	global $g_cache_user;
@@ -171,10 +182,12 @@ function user_clear_cache( $p_user_id = null ) {
 }
 
 /**
- * Update Cache entry for a given user and field
- * @param integer $p_user_id A valid user id to update.
+ * Update Cache entry for a given user and field.
+ *
+ * @param int $p_user_id A valid user id to update.
  * @param string  $p_field   The name of the field on the user object to update.
  * @param mixed   $p_value   The updated value for the user object field.
+ *
  * @return void
  */
 function user_update_cache( $p_user_id, $p_field, $p_value ) {
@@ -188,14 +201,15 @@ function user_update_cache( $p_user_id, $p_field, $p_value ) {
 }
 
 /**
- * Searches the cache for a given field and value pair against any user,
- * and returns the first user id that matches
+ * Searches the cache for a given field and value pair.
+ *
+ * Returns the first user id that matches.
  *
  * @param string $p_field The user object field name to search the cache for.
  * @param mixed  $p_value The field value to look for in the cache.
  * @param bool   $p_case_sensitive False to perform case-insensitive search; defaults to true.
  *
- * @return integer|boolean
+ * @return int|bool User Id, false if not found
  */
 function user_search_cache( $p_field, $p_value, $p_case_sensitive = true ) {
 	global $g_cache_user;
@@ -211,13 +225,16 @@ function user_search_cache( $p_field, $p_value, $p_case_sensitive = true ) {
 }
 
 /**
- * check to see if user exists by id
- * return true if it does, false otherwise
+ * Check to see if user exists by id.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return bool True if user exists, false if not.
+ *
+ * @noinspection PhpDocMissingThrowsInspection
  */
 function user_exists( $p_user_id ) {
+	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_row = user_cache_row( $p_user_id, false );
 
 	if( false === $t_row ) {
@@ -228,11 +245,12 @@ function user_exists( $p_user_id ) {
 }
 
 /**
- * check to see if user exists by id
- * if the user does not exist, trigger an error
+ * Check to see if user exists by id.
  *
- * @param integer $p_user_id A valid user identifier.
+ * @param int $p_user_id A valid user identifier.
+ *
  * @return void
+ * @throws ClientException if the user does not exist
  */
 function user_ensure_exists( $p_user_id ) {
 	$c_user_id = (integer)$p_user_id;
@@ -243,17 +261,23 @@ function user_ensure_exists( $p_user_id ) {
 }
 
 /**
- * return true if the username is unique, false if there is already a user with that username
- * @param string $p_username The username to check.
- * @param integer|null The user id allowed to conflict, otherwise null.
- * @return boolean
+ * Check username uniqueness.
+ *
+ * @param string   $p_username The username to check.
+ * @param int|null $p_user_id  The user id allowed to conflict, otherwise null.
+ *
+ * @return bool true if the username is unique, false if there is already a user with that username
+ *
+ * @noinspection PhpDocMissingThrowsInspection
  */
 function user_is_name_unique( $p_username, $p_user_id = null ) {
+	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_existing_user_id = user_get_id_by_name( $p_username );
 	if( $t_existing_user_id !== false && ( $p_user_id === null || (int)$t_existing_user_id !== $p_user_id ) ) {
 		return false;
 	}
 
+	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_existing_user_id = user_get_id_by_realname( $p_username );
 	if( $t_existing_user_id !== false && ( $p_user_id === null || (int)$t_existing_user_id !== $p_user_id ) ) {
 		return false;
@@ -263,10 +287,13 @@ function user_is_name_unique( $p_username, $p_user_id = null ) {
 }
 
 /**
- * Check if the username is unique and trigger an ERROR if it isn't
- * @param string $p_username The username to check.
- * @param integer|null $p_user_id The user id allowed to conflict, otherwise null.
+ * Check if the username is unique.
+ *
+ * @param string   $p_username The username to check.
+ * @param int|null $p_user_id  The user id allowed to conflict, otherwise null.
+ *
  * @return void
+ * @throws ClientException if username is not unique
  */
 function user_ensure_name_unique( $p_username, $p_user_id = null ) {
 	if( !user_is_name_unique( $p_username, $p_user_id ) ) {
@@ -279,11 +306,11 @@ function user_ensure_name_unique( $p_username, $p_user_id = null ) {
 /**
  * Checks if the email address is unique.
  *
- * @param string $p_email The email to check.
- * @param integer $p_user_id The user id that we are validating for or null for
- *                           the case of a new user.
+ * @param string $p_email   The email to check.
+ * @param int    $p_user_id The user id that we are validating for or null for
+ *                          the case of a new user.
  *
- * @return boolean true: unique or blank, false: otherwise
+ * @return bool true: unique or blank, false: otherwise
  */
 function user_is_email_unique( $p_email, $p_user_id = null ) {
 	if( is_blank( $p_email ) ) {
@@ -308,13 +335,14 @@ function user_is_email_unique( $p_email, $p_user_id = null ) {
 }
 
 /**
- * Check if the email is unique and trigger an ERROR if it isn't
+ * Check if the email address is unique and trigger an error if not.
  *
  * @param string $p_email The email address to check.
- * @param integer $p_user_id The user id that we are validating for or null for
+ * @param int $p_user_id The user id that we are validating for or null for
  *                           the case of a new user.
  *
  * @return void
+ * @throws ClientException if email is not unique
  */
 function user_ensure_email_unique( $p_email, $p_user_id = null ) {
 	if( !config_get_global( 'email_ensure_unique' ) ) {
@@ -329,9 +357,13 @@ function user_ensure_email_unique( $p_email, $p_user_id = null ) {
 }
 
 /**
- * Check if the username is a valid username (does not account for uniqueness) realname can match
+ * Check if the username is a valid username.
+ *
+ * Does not account for uniqueness.
+ *
  * @param string $p_username The username to check.
- * @return boolean return true if user name is valid, false otherwise
+ *
+ * @return bool true if username is valid, false otherwise
  */
 function user_is_name_valid( $p_username ) {
 	# The DB field is hard-coded. DB_FIELD_SIZE_USERNAME should not be modified.
@@ -354,10 +386,14 @@ function user_is_name_valid( $p_username ) {
 }
 
 /**
- * Check if the username is a valid username (does not account for uniqueness)
- * Trigger an error if the username is not valid
+ * Check if the username is a valid username, trigger error if not.
+ *
+ * Does not account for uniqueness.
+ *
  * @param string $p_username The username to check.
+ *
  * @return void
+ * @throws ClientException if the username is not valid
  */
 function user_ensure_name_valid( $p_username ) {
 	if( !user_is_name_valid( $p_username ) ) {
@@ -368,10 +404,12 @@ function user_ensure_name_valid( $p_username ) {
 }
 
 /**
- * return whether user is monitoring bug for the user id and bug id
- * @param integer $p_user_id A valid user identifier.
- * @param integer $p_bug_id  A valid bug identifier.
- * @return boolean
+ * Check whether user is monitoring bug.
+ * 
+ * @param int $p_user_id A valid user identifier.
+ * @param int $p_bug_id  A valid bug identifier.
+ *
+ * @return bool
  */
 function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 	db_param_push();
@@ -388,9 +426,14 @@ function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 }
 
 /**
- * Check if the specified user is an enabled user with admin access level or above.
- * @param integer $p_user_id A valid user identifier.
- * @return boolean true: admin, false: otherwise.
+ * Check if the specified user is an administrator.
+ *
+ * Must be an enabled user with admin access level or above.
+ *
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return bool true: admin, false: otherwise.
+ * @throws ClientException
  */
 function user_is_administrator( $p_user_id ) {
 	if( !user_is_enabled( $p_user_id ) ) {
@@ -402,15 +445,17 @@ function user_is_administrator( $p_user_id ) {
 }
 
 /**
- * Check if a user has a protected user account.
+ * Check if a user's account is protected.
+ *
  * Protected user accounts cannot be updated without manage_user_threshold
  * permission. If the user ID supplied is that of the anonymous user, this
  * function will always return true. The anonymous user account is always
  * considered to be protected.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean true: user is protected; false: user is not protected.
- * @access public
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return bool true: user is protected; false: user is not protected.
+ * @throws ClientException
  */
 function user_is_protected( $p_user_id ) {
 	return user_is_anonymous( $p_user_id ) || ON == user_get_field( $p_user_id, 'protected' );
@@ -418,10 +463,12 @@ function user_is_protected( $p_user_id ) {
 
 /**
  * Check if a user is the anonymous user account.
+ *
  * When anonymous logins are disabled this function will always return false.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean true: user is the anonymous user; false: user is not the anonymous user.
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return bool true: user is the anonymous user; false: user is not the anonymous user.
  * @access public
  */
 function user_is_anonymous( $p_user_id ) {
@@ -429,10 +476,12 @@ function user_is_anonymous( $p_user_id ) {
 }
 
 /**
- * Trigger an ERROR if the user account is protected
+ * Check if a user's account is protected, throw an error if not.
  *
- * @param integer $p_user_id A valid user identifier.
+ * @param int $p_user_id A valid user identifier.
+ *
  * @return void
+ * @throws ClientException
  */
 function user_ensure_unprotected( $p_user_id ) {
 	if( user_is_protected( $p_user_id ) ) {
@@ -443,10 +492,12 @@ function user_ensure_unprotected( $p_user_id ) {
 }
 
 /**
- * return true is the user account is enabled, false otherwise
+ * return true is the user account is enabled, false otherwise.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return bool
+ * @throws ClientException
  */
 function user_is_enabled( $p_user_id ) {
 	if( ON == user_get_field( $p_user_id, 'enabled' ) ) {
@@ -457,11 +508,12 @@ function user_is_enabled( $p_user_id ) {
 }
 
 /**
- * Count the number of users at or greater than a specific level
+ * Count the number of users at or greater than a specific level.
  *
- * @param integer $p_level   Access Level to count users. The default is to include ANYBODY.
- * @param bool    $p_enabled true: must be enabled, false: must be disabled, null: don't care.
- * @return integer The number of users.
+ * @param int  $p_level   Access Level to count users. The default is to include ANYBODY.
+ * @param bool $p_enabled true: must be enabled, false: must be disabled, null: don't care.
+ *
+ * @return int The number of users.
  */
 function user_count_level( $p_level = ANYBODY, $p_enabled = null ) {
 	db_param_push();
@@ -482,11 +534,16 @@ function user_count_level( $p_level = ANYBODY, $p_enabled = null ) {
 
 /**
  * Return an array of user ids that are logged in.
+ *
  * A user is considered logged in if the last visit timestamp is within the
  * specified session duration.
+ *
  * If the session duration is 0, then no users will be returned.
- * @param integer $p_session_duration_in_minutes The duration to return logged in users for.
+ *
+ * @param int $p_session_duration_in_minutes The duration to return logged in users for.
+ *
  * @return array
+ * @noinspection PhpUnused
  */
 function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	$t_session_duration_in_minutes = (integer)$p_session_duration_in_minutes;
@@ -515,17 +572,18 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 
 /**
  * Create a user.
- * returns false if error, the generated cookie string if valid
  *
- * @param string  $p_username     A valid username.
- * @param string  $p_password     The password to set for the user.
- * @param string  $p_email        The Email Address of the user.
- * @param integer $p_access_level The global access level for the user.
- * @param boolean $p_protected    Whether the account is protected from modifications (default false).
- * @param boolean $p_enabled      Whether the account is enabled.
- * @param string  $p_realname     The realname of the user.
- * @param string  $p_admin_name   The name of the administrator creating the account.
+ * @param string $p_username     A valid username.
+ * @param string $p_password     The password to set for the user.
+ * @param string $p_email        The Email Address of the user.
+ * @param int    $p_access_level The global access level for the user.
+ * @param bool   $p_protected    Whether the account is protected from modifications (default false).
+ * @param bool   $p_enabled      Whether the account is enabled.
+ * @param string $p_realname     The realname of the user.
+ * @param string $p_admin_name   The name of the administrator creating the account.
+ *
  * @return string Cookie String
+ * @throws ClientException if error
  */
 function user_create( $p_username, $p_password, $p_email = '',
 	$p_access_level = null, $p_protected = false, $p_enabled = true,
@@ -578,12 +636,15 @@ function user_create( $p_username, $p_password, $p_email = '',
 
 /**
  * Signup a user.
+ *
  * If the use_ldap_email config option is on then tries to find email using
  * ldap. $p_email may be empty, but the user won't get any emails.
- * returns false if error, the generated cookie string if ok
+ *
  * @param string $p_username The username to sign up.
  * @param string $p_email    The email address of the user signing up.
- * @return string|boolean cookie string or false on error
+ *
+ * @return string Cookie string or false on error
+ * @throws ClientException
  */
 function user_signup( $p_username, $p_email = null ) {
 	if( null === $p_email ) {
@@ -622,11 +683,12 @@ function user_signup( $p_username, $p_email = null ) {
 }
 
 /**
- * delete project-specific user access levels.
- * returns true when successfully deleted
+ * Delete project-specific user access levels.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean Always true
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return true
+ * @throws ClientException if user is protected
  */
 function user_delete_project_specific_access_levels( $p_user_id ) {
 	user_ensure_unprotected( $p_user_id );
@@ -641,10 +703,12 @@ function user_delete_project_specific_access_levels( $p_user_id ) {
 }
 
 /**
- * delete profiles for the specified user
- * returns true when successfully deleted
- * @param integer $p_user_id A valid user identifier.
- * @return boolean
+ * Delete profiles for the specified user.
+ *
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return true
+ * @throws ClientException if user is protected
  */
 function user_delete_profiles( $p_user_id ) {
 	user_ensure_unprotected( $p_user_id );
@@ -660,11 +724,15 @@ function user_delete_profiles( $p_user_id ) {
 }
 
 /**
- * delete a user account (account, profiles, preferences, project-specific access levels)
- * returns true when the account was successfully deleted
+ * Delete a user account.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean Always true
+ * Related information is also deleted (profiles, preferences, project-specific
+ * access levels).
+ *
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return true
+ * @throws ClientException if user is protected or error occurred
  */
 function user_delete( $p_user_id ) {
 	$c_user_id = (int)$p_user_id;
@@ -695,12 +763,13 @@ function user_delete( $p_user_id ) {
 }
 
 /**
- * get a user id from a username
- * return false if the username does not exist
+ * Get a user id from a username.
  *
  * @param string $p_username The username to retrieve data for.
- * @param boolean $p_throw true to throw if not found, false otherwise.
- * @return integer|boolean
+ * @param bool   $p_throw    true to throw if not found, false otherwise.
+ *
+ * @return int|false User Id or false if the username does not exist.
+ * @throws ClientException
  */
 function user_get_id_by_name( $p_username, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'username', $p_username ) ) {
@@ -774,9 +843,9 @@ function user_get_id_by_email( $p_email, $p_throw = false ) {
 }
 
 /**
- * Given an email address, this method returns the ids of the enabled users with
- * that address.
+ * Get ids of enabled users with a given email address.
  *
+ * E-mail address comparison is case-insensitive.
  * The returned list will be sorted by higher access level first.
  *
  * @param string $p_email The email address, can be an empty string to get users
@@ -786,9 +855,11 @@ function user_get_id_by_email( $p_email, $p_throw = false ) {
  */
 function user_get_enabled_ids_by_email( $p_email ) {
 	db_param_push();
-	$t_query = 'SELECT * FROM {user} WHERE email=' . db_param() .
-		' AND enabled=' . db_param() . ' ORDER BY access_level DESC';
-	$t_result = db_query( $t_query, array( $p_email, 1 ) );
+	$t_query = 'SELECT * FROM {user} '
+		. 'WHERE lower(email)=' . db_param()
+		. ' AND enabled=' . db_param()
+		. ' ORDER BY access_level DESC';
+	$t_result = db_query( $t_query, array( strtolower( $p_email ), 1 ) );
 
 	$t_user_ids = array();
 	while ( $t_row = db_fetch_array( $t_result ) ) {
@@ -803,8 +874,10 @@ function user_get_enabled_ids_by_email( $p_email ) {
  * Get a user id from their real name
  *
  * @param string $p_realname The realname to retrieve data for.
- * @param boolean $p_throw true to throw if not found, false otherwise.
- * @return integer|boolean
+ * @param bool   $p_throw    true to throw if not found, false otherwise.
+ *
+ * @return int|false
+ * @throws ClientException
  */
 function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'realname', $p_realname ) ) {
@@ -833,7 +906,7 @@ function user_get_id_by_realname( $p_realname, $p_throw = false ) {
  * Get a user id from their cookie string
  *
  * @param string  $p_cookie_string The cookie string to retrieve data for.
- * @param boolean $p_throw         true to throw if not found, false otherwise.
+ * @param bool $p_throw         true to throw if not found, false otherwise.
  *
  * @return int|false User Id, false if cookie string not found
  *
@@ -866,11 +939,15 @@ function user_get_id_by_cookie( $p_cookie_string, $p_throw = false ) {
 }
 
 /**
- * Get a user id given an array that may have id, name, real_name, email, or name_or_realname.
+ * Get a user id given user information
+ *
+ * Information is an array with one or more of the following keys, checked in
+ * this order of priority: id, name, real_name, email, or name_or_realname.
  *
  * @param array $p_user The user info.
- * @param boolean $p_throw_if_id_not_found If id specified and doesn't exist, then throw.
- * @param boolean $p_allow_all_users Allow user id 0 to be returned.
+ * @param bool  $p_throw_if_id_not_found If id specified and doesn't exist, then throw.
+ * @param bool  $p_allow_all_users Allow user id 0 to be returned.
+ *
  * @return integer user id
  * @throws ClientException
  */
@@ -914,13 +991,16 @@ function user_get_id_by_user_info( array $p_user, $p_throw_if_id_not_found = fal
 }
 
 /**
- * return all data associated with a particular user name
- * return false if the username does not exist
+ * Return all data associated with a particular username.
  *
- * @param integer $p_username The username to retrieve data for.
- * @return array
+ * @param int $p_username The username to retrieve data for.
+ *
+ * @return array|false User data or false if username does not exist.
+ *
+ * @throws ClientException
  */
 function user_get_row_by_name( $p_username ) {
+	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_user_id = user_get_id_by_name( $p_username );
 
 	if( false === $t_user_id ) {
@@ -933,21 +1013,25 @@ function user_get_row_by_name( $p_username ) {
 }
 
 /**
- * return a user row
+ * Return a user row.
  *
- * @param integer $p_user_id A valid user identifier.
+ * @param int $p_user_id A valid user identifier.
+ *
  * @return array
+ * @throws ClientException
  */
 function user_get_row( $p_user_id ) {
 	return user_cache_row( $p_user_id );
 }
 
 /**
- * return the specified user field for the user id
+ * Return the specified user field for the user id.
  *
- * @param integer $p_user_id    A valid user identifier.
- * @param string  $p_field_name The field name to retrieve.
+ * @param int    $p_user_id    A valid user identifier.
+ * @param string $p_field_name The field name to retrieve.
+ *
  * @return string
+ * @throws ClientException
  */
 function user_get_field( $p_user_id, $p_field_name ) {
 	if( NO_USER == $p_user_id ) {
@@ -977,10 +1061,12 @@ function user_get_field( $p_user_id, $p_field_name ) {
 }
 
 /**
- * lookup the user's email in LDAP or the db as appropriate
+ * Lookup the user's email in LDAP or the db as appropriate
  *
- * @param integer $p_user_id A valid user identifier.
+ * @param int $p_user_id A valid user identifier.
+ *
  * @return string
+ * @throws ClientException
  */
 function user_get_email( $p_user_id ) {
 	$t_email = '';
@@ -994,12 +1080,16 @@ function user_get_email( $p_user_id ) {
 }
 
 /**
- * Lookup the user's login name (username)
+ * Lookup the user's login name (username).
  *
- * @param integer $p_user_id A valid user identifier.
- * @return string
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return string Username
+ *
+ * @noinspection PhpDocMissingThrowsInspection
  */
 function user_get_username( $p_user_id ) {
+	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_row = user_cache_row( $p_user_id, false );
 	if( false == $t_row ) {
 		return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
@@ -1009,10 +1099,12 @@ function user_get_username( $p_user_id ) {
 }
 
 /**
- * lookup the user's realname
+ * Lookup the user's real name.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return string
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return string realname
+ * @throws ClientException
  */
 function user_get_realname( $p_user_id ) {
 	$t_realname = '';
@@ -1043,8 +1135,11 @@ function user_get_realname( $p_user_id ) {
  * @param integer $p_user_id A valid user identifier.
  *
  * @return string
+ *
+ * @noinspection PhpDocMissingThrowsInspection
  */
 function user_get_name( $p_user_id ) {
+	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_row = user_cache_row( $p_user_id, false );
 
 	if( false == $t_row ) {
@@ -1055,7 +1150,7 @@ function user_get_name( $p_user_id ) {
 }
 
 /**
- * Should realnames be shown to logged in user?
+ * Should realname be shown to logged in user?
  *
  * @return bool true to show, false otherwise.
  */
@@ -1064,10 +1159,13 @@ function user_show_realname() {
 }
 
 /**
- * Return the user's name for display.  If user_show_realname() is true and realname is not empty
- * return realname otherwise return username.
+ * Return the user's name for display.
+ *
+ * If user_show_realname() is true and realname is not empty then return the
+ * realname otherwise return username.
  *
  * @param array $p_user_row The user row with 'realname' and 'username' fields
+ *
  * @return string display name
  */
 function user_get_name_from_row( array $p_user_row ) {
@@ -1081,10 +1179,13 @@ function user_get_name_from_row( array $p_user_row ) {
 }
 
 /**
- * Return display name in format "realname (username)" if user_show_realname() is true and
+ * Return display name.
+ *
+ * The format is "realname (username)" if user_show_realname() is true and
  * realname is not empty otherwise return username
  *
  * @param array $p_user_row The user row with 'realname' and 'username' fields
+ *
  * @return string display name
  */
 function user_get_expanded_name_from_row( array $p_user_row ) {
@@ -1100,6 +1201,7 @@ function user_get_expanded_name_from_row( array $p_user_row ) {
  * Get name used for sorting.
  * 
  * @param array $p_user_row The user row with 'realname' and 'username' fields
+ *
  * @return string name for sorting
  */
 function user_get_name_for_sorting_from_row( array $p_user_row ) {
@@ -1118,12 +1220,15 @@ function user_get_name_for_sorting_from_row( array $p_user_row ) {
 }
 
 /**
- * return the user's access level
- * account for private project and the project user lists
+ * Return the user's access level
  *
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
+ * Account for private project and the project user lists.
+ *
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return integer
+ * @throws ClientException
  */
 function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_access_level = user_get_field( $p_user_id, 'access_level' );
@@ -1146,8 +1251,8 @@ $g_user_accessible_projects_cache = null;
 /**
  * return an array of project IDs to which the user has access
  *
- * @param integer $p_user_id       A valid user identifier.
- * @param boolean $p_show_disabled Whether to include disabled projects in the result array.
+ * @param int $p_user_id       A valid user identifier.
+ * @param bool $p_show_disabled Whether to include disabled projects in the result array.
  * @return array
  */
 function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
@@ -1206,11 +1311,13 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 }
 
 /**
- * return an array of sub-project IDs of a certain project to which the user has access
- * @param integer $p_user_id       A valid user identifier.
- * @param integer $p_project_id    A valid project identifier.
- * @param boolean $p_show_disabled Include disabled projects in the resulting array.
- * @return array
+ * Get a list of a project's sub-projects to which the user has access.
+ *
+ * @param int $p_user_id       A valid user identifier.
+ * @param int $p_project_id    A valid project identifier.
+ * @param bool $p_show_disabled Include disabled projects in the resulting array.
+ *
+ * @return array List of project Id.
  */
 function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled = false ) {
 	global $g_user_accessible_subprojects_cache;
@@ -1281,9 +1388,11 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 
 /**
  * return an array of sub-project IDs of all sub-projects project to which the user has access
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
- * @return array
+ *
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
+ * @return array List of Project Ids
  */
 function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 	# @todo (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
@@ -1306,9 +1415,10 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
  * Returns an array of project and sub-project IDs of all projects to which the
  * user has access and that are children of the specified project.
  *
- * @param integer $p_user_id    A valid user identifier or null for logged in user.
- * @param integer $p_project_id A valid project identifier.  ALL_PROJECTS returns
+ * @param int $p_user_id    A valid user identifier or null for logged in user.
+ * @param int $p_project_id A valid project identifier.  ALL_PROJECTS returns
  *                              all top level projects and sub-projects.
+ *
  * @return array
  */
 function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
@@ -1340,9 +1450,11 @@ function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = AL
 
 /**
  * Get a list of projects the specified user is assigned to.
- * @param integer $p_user_id A valid user identifier.
+ *
+ * @param int $p_user_id A valid user identifier.
+ *
  * @return array An array of projects by project id the specified user is assigned to.
- *		The array contains the id, name, view state, and project access level for the user.
+ * The array contains the id, name, view state, and project access level for the user.
  */
 function user_get_assigned_projects( $p_user_id ) {
 	db_param_push();
@@ -1363,10 +1475,13 @@ function user_get_assigned_projects( $p_user_id ) {
 }
 
 /**
- * List of users that are NOT in the specified project and that are enabled
- * if no project is specified use the current project
- * also exclude any administrators
- * @param integer $p_project_id A valid project identifier.
+ * List of users that are NOT in the specified project and that are enabled.
+ *
+ * If no project is specified use the current project.
+ * Administrators are excluded from the list.
+ *
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return array List of users not assigned to the specified project
  */
 function user_get_unassigned_by_project_id( $p_project_id = null ) {
@@ -1406,11 +1521,12 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 }
 
 /**
- * return the number of open assigned bugs to a user in a project
+ * Return the number of open assigned bugs to a user in a project.
  *
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
- * @return integer
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
+ * @return int
  */
 function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . ' AND';
@@ -1429,11 +1545,12 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 }
 
 /**
- * return the number of open reported bugs by a user in a project
+ * Return the number of open reported bugs by a user in a project.
  *
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
- * @return integer
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
+ * @return int
  */
 function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . ' AND';
@@ -1451,10 +1568,11 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 }
 
 /**
- * return a profile row
+ * Return a profile row.
  *
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_profile_id The profile identifier to retrieve.
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_profile_id The profile identifier to retrieve.
+ *
  * @return array
  */
 function user_get_profile_row( $p_user_id, $p_profile_id ) {
@@ -1474,10 +1592,12 @@ function user_get_profile_row( $p_user_id, $p_profile_id ) {
 }
 
 /**
- * Get failed login attempts
+ * Get failed login attempts.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return bool
+ * @throws ClientException
  */
 function user_is_login_request_allowed( $p_user_id ) {
 	$t_max_failed_login_count = config_get( 'max_failed_login_count' );
@@ -1486,10 +1606,12 @@ function user_is_login_request_allowed( $p_user_id ) {
 }
 
 /**
- * Get 'lost password' in progress attempts
+ * Get 'lost password' in progress attempts.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return bool
+ * @throws ClientException
  */
 function user_is_lost_password_request_allowed( $p_user_id ) {
 	if( OFF == config_get( 'lost_password_feature' ) ) {
@@ -1501,10 +1623,11 @@ function user_is_lost_password_request_allowed( $p_user_id ) {
 }
 
 /**
- * return the bug filter parameters for the specified user
+ * Return the bug filter parameters for the specified user.
  *
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return array The user filter, or default filter if not valid.
  */
 function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
@@ -1532,10 +1655,11 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 }
 
 /**
- * Update the last_visited field to be now
+ * Update the last_visited field to be now.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean always true
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return true
  */
 function user_update_last_visit( $p_user_id ) {
 	$c_user_id = (int)$p_user_id;
@@ -1551,11 +1675,13 @@ function user_update_last_visit( $p_user_id ) {
 }
 
 /**
- * Increment the number of times the user has logged in
- * This function is only called from the login.php script
+ * Increment the number of times the user has logged in.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean always true
+ * This function is only called from the login.php script.
+ *
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return true
  */
 function user_increment_login_count( $p_user_id ) {
 	db_param_push();
@@ -1568,10 +1694,11 @@ function user_increment_login_count( $p_user_id ) {
 }
 
 /**
- * Reset to zero the failed login attempts
+ * Reset to zero the failed login attempts.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean always true
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return true
  */
 function user_reset_failed_login_count_to_zero( $p_user_id ) {
 	db_param_push();
@@ -1584,10 +1711,11 @@ function user_reset_failed_login_count_to_zero( $p_user_id ) {
 }
 
 /**
- * Increment the failed login count by 1
+ * Increment the failed login count by 1.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean always true
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return true
  */
 function user_increment_failed_login_count( $p_user_id ) {
 	db_param_push();
@@ -1600,10 +1728,11 @@ function user_increment_failed_login_count( $p_user_id ) {
 }
 
 /**
- * Reset to zero the 'lost password' in progress attempts
+ * Reset to zero the 'lost password' in progress attempts.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean always true
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return true
  */
 function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
 	db_param_push();
@@ -1616,10 +1745,11 @@ function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
 }
 
 /**
- * Increment the failed login count by 1
+ * Increment the lost password attempts count by 1.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return boolean always true
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return true
  */
 function user_increment_lost_password_in_progress_count( $p_user_id ) {
 	db_param_push();
@@ -1634,11 +1764,13 @@ function user_increment_lost_password_in_progress_count( $p_user_id ) {
 }
 
 /**
- * Sets multiple fields on a user
+ * Sets multiple fields on a user.
  *
- * @param integer $p_user_id A valid user identifier.
- * @param array   $p_fields  Keys are the field names and the values are the field values.
+ * @param int   $p_user_id A valid user identifier.
+ * @param array $p_fields  Keys are the field names and the values are the field values.
+ *
  * @return void
+ * @throws ClientException
  */
 function user_set_fields( $p_user_id, array $p_fields ) {
 	if( empty( $p_fields ) ) {
@@ -1668,12 +1800,14 @@ function user_set_fields( $p_user_id, array $p_fields ) {
 }
 
 /**
- * Set a user field
+ * Set a user field.
  *
- * @param integer $p_user_id     A valid user identifier.
- * @param string  $p_field_name  A valid field name to set.
- * @param string  $p_field_value The field value to set.
- * @return boolean always true
+ * @param int    $p_user_id     A valid user identifier.
+ * @param string $p_field_name  A valid field name to set.
+ * @param string $p_field_value The field value to set.
+ *
+ * @return true
+ * @throws ClientException
  */
 function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 	user_set_fields( $p_user_id, array ( $p_field_name => $p_field_value ) );
@@ -1682,9 +1816,11 @@ function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 }
 
 /**
- * Set Users Default project in preferences
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
+ * Set Users Default project in preferences.
+ *
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return void
  */
 function user_set_default_project( $p_user_id, $p_project_id ) {
@@ -1692,12 +1828,15 @@ function user_set_default_project( $p_user_id, $p_project_id ) {
 }
 
 /**
- * Set the user's password to the given string, encoded as appropriate
+ * Set the user's password to the given string, encoded as appropriate.
  *
- * @param integer $p_user_id         A valid user identifier.
- * @param string  $p_password        A password to set.
- * @param boolean $p_allow_protected Whether Allow password change to a protected account. This defaults to false.
- * @return boolean always true
+ * @param int    $p_user_id         A valid user identifier.
+ * @param string $p_password        A password to set.
+ * @param bool   $p_allow_protected Whether Allow password change to a
+ *                                  protected account. This defaults to false.
+ *
+ * @return true
+ * @throws ClientException
  */
 function user_set_password( $p_user_id, $p_password, $p_allow_protected = false ) {
 	if( !$p_allow_protected ) {
@@ -1722,10 +1861,13 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 }
 
 /**
- * Set the user's email to the given string after checking that it is a valid email
- * @param integer $p_user_id A valid user identifier.
- * @param string  $p_email   An email address to set.
- * @return boolean
+ * Set the user's email after checking that it is valid.
+ *
+ * @param int    $p_user_id A valid user identifier.
+ * @param string $p_email   An email address to set.
+ *
+ * @return bool
+ * @throws ClientException
  */
 function user_set_email( $p_user_id, $p_email ) {
 	$p_email = trim( $p_email );
@@ -1742,20 +1884,28 @@ function user_set_email( $p_user_id, $p_email ) {
 }
 
 /**
- * Set the user's realname to the given string after checking validity
- * @param integer $p_user_id  A valid user identifier.
- * @param string  $p_realname A realname to set.
- * @return boolean
+ * Set the user's realname to the given string after checking validity.
+ *
+ * @param int    $p_user_id  A valid user identifier.
+ * @param string $p_realname A realname to set.
+ *
+ * @return bool
+ * @throws ClientException
  */
 function user_set_realname( $p_user_id, $p_realname ) {
 	return user_set_field( $p_user_id, 'realname', $p_realname );
 }
 
 /**
- * Set the user's username to the given string after checking that it is valid
- * @param integer $p_user_id  A valid user identifier.
- * @param string  $p_username A valid username to set.
- * @return boolean
+ * Set the user's username to the given string after checking that it is valid.
+ *
+ * @param int    $p_user_id  A valid user identifier.
+ * @param string $p_username A valid username to set.
+ *
+ * @return bool
+ * @throws ClientException
+ *
+ * @noinspection PhpUnused
  */
 function user_set_name( $p_user_id, $p_username ) {
 	user_ensure_name_valid( $p_username );
@@ -1765,16 +1915,18 @@ function user_set_name( $p_user_id, $p_username ) {
 }
 
 /**
- * Reset the user's password
- *  Take into account the 'send_reset_password' setting
+ * Reset the user's password.
+ *
+ * Take into account the 'send_reset_password' setting
  *   - if it is ON, generate a random password and send an email
  *      (unless the second parameter is false)
  *   - if it is OFF, set the password to blank
  *
- * @param integer $p_user_id    A valid user identifier.
- * @param boolean $p_send_email Whether to send confirmation email.
- * @return boolean True if the password was successfully reset
- *                 False if the user is protected.
+ * @param int  $p_user_id    A valid user identifier.
+ * @param bool $p_send_email Whether to send confirmation email.
+ *
+ * @return bool True if the password was successfully reset
+ *              False if the user is protected.
  * @throws ClientException
  */
 function user_reset_password( $p_user_id, $p_send_email = true ) {
@@ -1824,12 +1976,14 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 }
 
 /**
- * Helper function to check if the user has access to more than one project
- * (any kind of project or subproject). This can be used to simplify logic when
- * the user only has one project to choose from.
+ * Helper function to check if the user has access to more than one project.
  *
- * @param integer $p_user_id	A valid user identifier.
- * @return boolean	True if the user has access to more than one project.
+ * Checks for any kind of project or subproject. This can be used to simplify
+ * logic when the user only has one project to choose from.
+ *
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return bool	True if the user has access to more than one project.
  */
 function user_has_more_than_one_project( $p_user_id ) {
 	$t_project_ids = user_get_accessible_projects( $p_user_id );
