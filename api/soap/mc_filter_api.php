@@ -222,7 +222,10 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang, $p_fields );
 	}
 
-	return $t_result;
+	return array(
+		'total_count' => $t_bug_count,
+		'issues' => $t_result
+	);
 }
 
 /**

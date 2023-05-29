@@ -127,14 +127,20 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		helper_set_current_project( $t_project_id );
 
 		if( !empty( $t_filter_id ) ) {
-			$t_issues = mc_filter_get_issues(
+			$t_issues_result = mc_filter_get_issues(
 				'', '', $t_project_id, $t_filter_id, $t_page_number, $t_page_size, $t_select );
 		} else {
-			$t_issues = mc_filter_get_issues(
+			$t_issues_result = mc_filter_get_issues(
 				'', '', $t_project_id, FILTER_STANDARD_ANY, $t_page_number, $t_page_size, $t_select );
 		}
 
-		$t_result = array( 'issues' => $t_issues );
+		$t_issues = $t_issues_result['issues'];
+		$t_total_count = $t_issues_result['total_count'];
+
+		$t_result = array(
+			'total_count' => $t_total_count,
+			'issues' => $t_issues
+		);
 	}
 
 	$t_etag = mc_issue_hash( $t_issue_id, $t_result );

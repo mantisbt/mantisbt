@@ -13,7 +13,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: X-API-KEY, X-Mantis-Version, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization");
+header("Access-Control-Expose-Headers: X-Mantis-Version");
+header('Content-Type: application/json');
 
+$method = $_SERVER['REQUEST_METHOD'];
+if ($method == "OPTIONS") {
+	header('Access-Control-Allow-Origin: *');
+	header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization");
+	header("HTTP/1.1 200 OK");
+	die();
+}
 /**
  * A webservice interface to Mantis Bug Tracker
  *
