@@ -9,6 +9,9 @@ docbook/*/*/install
 docbook/*/tmp
 !docbook/Admin_Guide/*/config
 
+# Local docbook from release tarballs
+doc/en-US
+
 # Untracked plugins
 plugins/*
 !plugins/MantisCoreFormatting
@@ -35,9 +38,6 @@ __pycache__/
 
 # MacOS
 .DS_Store
-
-# IIS7
-web.config
 
 # Libraries (outdated or installed via Composer)
 library/FirePHPCore
