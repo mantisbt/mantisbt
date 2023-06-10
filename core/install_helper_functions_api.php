@@ -31,27 +31,6 @@
 require_api( 'database_api.php' );
 
 /**
- * Checks a PHP version number against the version of PHP currently in use
- * @param string $p_version Version string to compare.
- * @return boolean true if the PHP version in use is equal to or greater than the supplied version string
- */
-function check_php_version( $p_version ) {
-	if( $p_version == PHP_MIN_VERSION ) {
-		return true;
-	} else {
-		if( function_exists( 'version_compare' ) ) {
-			if( version_compare( phpversion(), PHP_MIN_VERSION, '>=' ) ) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-}
-
-/**
  * Legacy pre-1.2 date function used for upgrading from datetime to integer
  * representation of dates in the database.
  * @return string Formatted date representing unixtime(0) + 1 second, ready for database insertion
