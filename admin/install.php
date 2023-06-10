@@ -287,17 +287,8 @@ if( $t_config_exists ) {
 
 if( 0 == $t_install_state ) {
 	?>
-
-<!-- Check PHP Version -->
+<!-- Check UTF-8 support -->
 <?php
-	print_test(
-		'Checking PHP version (your version is ' . phpversion() . ')',
-		version_compare( phpversion(), PHP_MIN_VERSION, '>=' ),
-		true,
-		'Upgrade to a more recent version of PHP'
-	);
-
-	# UTF-8 support check
 	# We need the 'mbstring' extension
 	print_test(
 		'Checking UTF-8 support',
