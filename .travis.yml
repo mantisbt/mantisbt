@@ -40,7 +40,6 @@ php:
   - 7.4
   - 7.3
   - 7.2
-  - 7.1
 
 env:
   - DB=mysql
@@ -48,14 +47,6 @@ env:
 
 jobs:
   include:
-    # Use 'xenial' build environment for legacy PHP versions
-    - php: 7.0
-      dist: xenial
-      env: DB=mysql
-    - php: 7.0
-      dist: xenial
-      env: DB=pgsql
-
     # Add a specific build for Documentation
     - name: Documentation
       env: DOCBOOK=1
