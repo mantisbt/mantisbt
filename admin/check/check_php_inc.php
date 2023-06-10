@@ -38,12 +38,6 @@ require_api( 'utility_api.php' );
 
 check_print_section_header_row( 'PHP' );
 
-check_print_test_row(
-	'Version of <a href="http://en.wikipedia.org/wiki/PHP">PHP</a> installed is at least ' . PHP_MIN_VERSION,
-	version_compare( phpversion(), PHP_MIN_VERSION, '>=' ),
-	'PHP version ' . phpversion() . ' is currently installed on this server.'
-);
-
 # $t_extensions_required lists the extensions required to run Mantis in general
 $t_extensions_required = array(
 	'date',
