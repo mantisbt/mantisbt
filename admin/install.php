@@ -292,7 +292,7 @@ if( 0 == $t_install_state ) {
 <?php
 	print_test(
 		'Checking PHP version (your version is ' . phpversion() . ')',
-		check_php_version( phpversion() ),
+		version_compare( phpversion(), PHP_MIN_VERSION, '>=' ),
 		true,
 		'Upgrade to a more recent version of PHP'
 	);
