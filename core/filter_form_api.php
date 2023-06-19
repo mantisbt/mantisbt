@@ -2279,6 +2279,61 @@ function print_filter_project_id( array $p_filter = null ) {
  * @param array $p_filter	Filter array
  * @return void
  */
+function print_filter_values_projection( array $p_filter ) {
+	$t_filter = $p_filter;
+	$t_output = '';
+	$t_any_found = false;
+	if( count( $t_filter[FILTER_PROPERTY_PROJECTION] ) == 0 ) {
+		echo lang_get( 'any' );
+	} else {
+		$t_first_flag = true;
+		foreach( $t_filter[FILTER_PROPERTY_PROJECTION] as $t_current ) {
+			echo '<input type="hidden" name="', FILTER_PROPERTY_PROJECTION, '[]" value="', string_attribute( $t_current ), '" />';
+			$t_this_string = '';
+			if( filter_field_is_any( $t_current ) ) {
+				$t_any_found = true;
+			} else {
+				$t_this_string = get_enum_element( 'projection', $t_current );
+			}
+			if( $t_first_flag != true ) {
+				$t_output = $t_output . '<br />';
+			} else {
+				$t_first_flag = false;
+			}
+			$t_output = $t_output . string_display_line( $t_this_string );
+		}
+		if( true == $t_any_found ) {
+			echo lang_get( 'any' );
+		} else {
+			echo $t_output;
+		}
+	}
+}
+
+/**
+ * Print projection field
+ * @global array $g_filter
+ * @param array $p_filter Filter array
+ * @return void
+ */
+function print_filter_projection( array $p_filter = null ) {
+	global $g_filter;
+	if( null === $p_filter ) {
+		$p_filter = $g_filter;
+	}
+	?><!-- Projection -->
+			<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_PROJECTION;?>[]">
+				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_PROJECTION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+				<?php print_enum_string_option_list( 'projection', $p_filter[FILTER_PROPERTY_PROJECTION] )?>
+			</select>
+		<?php
+}
+
+/**
+ * Print the current value of this filter field, as visible string, and as a hidden form input.
+ * @param array $p_filter	Filter array
+ * @return void
+ */
 function print_filter_values_match_type( array $p_filter ) {
 	$t_filter = $p_filter;
 	switch( $t_filter[FILTER_PROPERTY_MATCH_TYPE] ) {
@@ -2578,6 +2633,14 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	}
 
 	$t_row3 = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
+
+	$t_row3->add_item( new TableFieldsItem(
+			$get_field_header( 'projection_filter', lang_get( 'projection' ) ),
+			filter_form_get_input( $t_filter, 'projection', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'projection_filter_target' /* content id */
+			));
 
 	if( ON == config_get( 'enable_profiles' ) ) {
 		$t_row3->add_item( new TableFieldsItem(
