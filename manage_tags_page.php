@@ -59,15 +59,12 @@ $f_filter = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage
 $f_page_number = gpc_get_int( 'page_number', 1 );
 
 # Start Index Menu
-$t_prefix_array = array( 'ALL' );
+$t_prefix_array = array_merge(
+	array( 'ALL' ),
+	range( 'A', 'Z' ),
+	range( '0', '9' )
+);
 
-for( $i = 'A'; $i != 'AA'; $i++ ) {
-	$t_prefix_array[] = $i;
-}
-
-for( $i = 0; $i <= 9; $i++ ) {
-	$t_prefix_array[] = (string)$i;
-}
 if( $f_filter === 'ALL' ) {
 	$t_name_filter = '';
 } else {
