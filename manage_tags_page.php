@@ -61,13 +61,13 @@ $f_page_number = gpc_get_int( 'page_number', 1 );
 # Start Index Menu
 $t_prefix_array = array( 'ALL' );
 
-for( $i = 'A'; $i != 'AA'; $i++ ) {
-	$t_prefix_array[] = $i;
-}
+// Uppercase letters
+$u = range('A', 'Z');
+// Digits
+$d = range('0', '9');
 
-for( $i = 0; $i <= 9; $i++ ) {
-	$t_prefix_array[] = (string)$i;
-}
+$t_prefix_array = array_merge($t_prefix_array, $u, $d);
+
 if( $f_filter === 'ALL' ) {
 	$t_name_filter = '';
 } else {
