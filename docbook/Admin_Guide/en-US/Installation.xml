@@ -225,6 +225,11 @@
 									(see <xref linkend="admin.auth.ldap" />).
 								</para></listitem>
 
+								<listitem><para><emphasis>SOAP</emphasis> -
+									required to use the SOAP API
+									(see <xref linkend="admin.config.api" />).
+								</para></listitem>
+
 								<listitem><para><emphasis>zlib</emphasis> -
 									required to enable output compression
 									(see <xref linkend="admin.config.speed" />).
