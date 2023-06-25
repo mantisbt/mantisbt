@@ -2554,16 +2554,16 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			'show_resolution_filter_target' /* content id */
 			));
 	$t_row2->add_item( new TableFieldsItem(
-			$get_field_header( 'do_filter_by_date_filter', lang_get( 'use_date_filters' ) ),
+			$get_field_header( 'do_filter_by_date_filter', lang_get( 'date_submitted' ) ),
 			filter_form_get_input( $t_filter, 'do_filter_by_date', $t_show_inputs ),
-			2 /* colspan */,
+			1 /* colspan */,
 			null /* class */,
 			'do_filter_by_date_filter_target' /* content id */
 			));
 	$t_row2->add_item( new TableFieldsItem(
-			$get_field_header( 'do_filter_by_last_updated_date_filter', lang_get( 'use_last_updated_date_filters' ) ),
+			$get_field_header( 'do_filter_by_last_updated_date_filter', lang_get( 'last_update' ) ),
 			filter_form_get_input( $t_filter, 'do_filter_by_last_updated_date', $t_show_inputs ),
-			2 /* colspan */,
+			1 /* colspan */,
 			null /* class */,
 			'do_filter_by_last_updated_date_filter_target' /* content id */
 			));
