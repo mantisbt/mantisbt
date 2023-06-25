@@ -82,7 +82,7 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 }
 
 # Check for an error
-$t_error_msg = strip_tags( gpc_get_string( 'error_msg', null ) );
+$t_error_msg = strip_tags( gpc_get_string( 'error_msg', '' ) );
 if( $t_error_msg != null ) {
 	print '<br />' . $t_error_msg . '<br /><br />';
 }
