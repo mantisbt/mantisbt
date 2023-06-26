@@ -2608,13 +2608,15 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			null /* class */,
 			'show_resolution_filter_target' /* content id */
 			));
-	$t_row2->add_item( new TableFieldsItem(
-			$get_field_header( 'projection_filter', lang_get( 'projection' ) ),
-			filter_form_get_input( $t_filter, 'projection', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'projection_filter_target' /* content id */
-			));
+	if( ON == config_get( 'enable_projection' ) ) {
+		$t_row2->add_item( new TableFieldsItem(
+				$get_field_header( 'projection_filter', lang_get( 'projection' ) ),
+				filter_form_get_input( $t_filter, 'projection', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'projection_filter_target' /* content id */
+				));
+	}
 	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'do_filter_by_date_filter', lang_get( 'use_date_filters' ) ),
 			filter_form_get_input( $t_filter, 'do_filter_by_date', $t_show_inputs ),
