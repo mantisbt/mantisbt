@@ -170,6 +170,10 @@ function filter_get_url( array $p_custom_filter ) {
 		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_PROJECT_ID, $t_project_id );
 	}
 
+	if( ! filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PROJECTION] ) ) {
+		$t_query[] = filter_encode_filed_and_value( FILTER_PROPERTY_PROJECTION, $p_custom_filter[FILTER_PROPERTY_PROJECTION] );
+	}
+
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEARCH] ) ) {
 		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_SEARCH, $p_custom_filter[FILTER_PROPERTY_SEARCH] );
 	}
@@ -721,7 +725,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		FILTER_PROPERTY_PLATFORM => 'string',
 		FILTER_PROPERTY_OS => 'string',
 		FILTER_PROPERTY_OS_BUILD => 'string',
-		FILTER_PROPERTY_PROJECT_ID => 'int'
+		FILTER_PROPERTY_PROJECT_ID => 'int',
+		FILTER_PROPERTY_PROJECTION => 'int'
 	);
 	foreach( $t_array_values_list as $t_multi_field_name => $t_multi_field_type ) {
 		if( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
@@ -867,6 +872,7 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_REPORTER_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_HANDLER_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_PROJECT_ID => array( META_FILTER_CURRENT ),
+		FILTER_PROPERTY_PROJECTION => $t_meta_filter_any_array,
 		FILTER_PROPERTY_RESOLUTION => $t_meta_filter_any_array,
 		FILTER_PROPERTY_BUILD => $t_meta_filter_any_array,
 		FILTER_PROPERTY_VERSION => $t_meta_filter_any_array,
@@ -2005,6 +2011,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	$f_reporter_id = gpc_get( FILTER_PROPERTY_REPORTER_ID, $t_filter[FILTER_PROPERTY_REPORTER_ID] );
 	$f_handler_id = gpc_get( FILTER_PROPERTY_HANDLER_ID, $t_filter[FILTER_PROPERTY_HANDLER_ID] );
 	$f_project_id = gpc_get( FILTER_PROPERTY_PROJECT_ID, $t_filter[FILTER_PROPERTY_PROJECT_ID] );
+	$f_projection = gpc_get( FILTER_PROPERTY_PROJECTION, $t_filter[FILTER_PROPERTY_PROJECTION] );
 	$f_show_resolution = gpc_get( FILTER_PROPERTY_RESOLUTION, $t_filter[FILTER_PROPERTY_RESOLUTION] );
 	$f_show_build = gpc_get( FILTER_PROPERTY_BUILD, $t_filter[FILTER_PROPERTY_BUILD] );
 	$f_show_version = gpc_get( FILTER_PROPERTY_VERSION, $t_filter[FILTER_PROPERTY_VERSION] );
@@ -2243,6 +2250,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	$t_filter_input[FILTER_PROPERTY_REPORTER_ID] 			= $f_reporter_id;
 	$t_filter_input[FILTER_PROPERTY_HANDLER_ID] 				= $f_handler_id;
 	$t_filter_input[FILTER_PROPERTY_PROJECT_ID] 				= $f_project_id;
+	$t_filter_input[FILTER_PROPERTY_PROJECTION] 				= $f_projection;
 	$t_filter_input[FILTER_PROPERTY_SORT_FIELD_NAME] 		= $f_sort;
 	$t_filter_input[FILTER_PROPERTY_SORT_DIRECTION] 			= $f_dir;
 	$t_filter_input[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] 			= $f_do_filter_by_date;

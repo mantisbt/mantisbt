@@ -476,6 +476,9 @@ class BugFilterQuery extends DbQuery {
 				case FILTER_PROPERTY_RELATIONSHIP_TYPE:
 					$this->build_prop_relationship();
 					break;
+				case FILTER_PROPERTY_PROJECTION:
+					$this->build_prop_projection();
+					break;
 			}
 		}
 		# these have several properties that must be built only once
@@ -921,6 +924,18 @@ class BugFilterQuery extends DbQuery {
 			return;
 		}
 		$t_query = $this->sql_in( '{bug}.priority', $this->filter[FILTER_PROPERTY_PRIORITY] );
+		$this->add_where( $t_query );
+	}
+
+	/**
+	 * Build the query parts for the filter property "projection"
+	 * @return void
+	 */
+	protected function build_prop_projection() {
+		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_PROJECTION] ) ) {
+			return;
+		}
+		$t_query = $this->sql_in( '{bug}.projection', $this->filter[FILTER_PROPERTY_PROJECTION] );
 		$this->add_where( $t_query );
 	}
 
