@@ -64,6 +64,11 @@ $f_perm_login            = gpc_get_bool( 'perm_login', false );
 $f_secure_session        = gpc_get_bool( 'secure_session', false );
 $f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', null );
 
+$f_user_id = auth_get_user_id_from_login_name( $f_username );
+
+#Update user string_cookie
+user_update_string_cookie($f_user_id);
+
 # Set username to blank if invalid to prevent possible XSS exploits
 $t_username = auth_prepare_username( $f_username );
 

@@ -1513,6 +1513,24 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 }
 
 /**
+ * Update user string cookie
+ *
+ * @param integer $p_user_id A valid user identifier.
+ * @return boolean always true
+ */
+function user_update_string_cookie( $p_user_id ) {
+    $c_user_id = (int)$p_user_id;
+
+    $t_cookie_string = auth_generate_unique_cookie_string();
+
+    db_param_push();
+    $t_query = 'UPDATE {user} SET cookie_string=' . db_param() . ' WHERE id=' . db_param();
+    db_query( $t_query, array( $t_cookie_string, $c_user_id ) );
+
+    return true;
+}
+
+/**
  * Update the last_visited field to be now
  *
  * @param integer $p_user_id A valid user identifier.
