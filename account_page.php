@@ -216,6 +216,16 @@ print_account_menu( 'account_page.php' );
 					# Without LDAP
 					$t_show_update_button = true;
 					print_email_input( 'email', $u_email );
+					if( config_get_global( 'email_ensure_unique' )
+						&& !user_is_email_unique( $u_email, $u_id )
+					) {
+						echo '<span class="padding-8">';
+						print_icon('fa-exclamation-triangle',
+							'ace-icon bigger-125 red padding-right-4'
+						);
+						echo lang_get( 'email_not_unique' );
+						echo '</span>';
+					}
 				} ?>
 				</td>
 			</tr>
