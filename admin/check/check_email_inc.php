@@ -80,14 +80,20 @@ check_print_test_row(
 	!config_get_global( 'allow_signup' ) || config_get_global( 'send_reset_password' )
 );
 
-// Check for duplicate email addresses (case insensitive)
+# Check for duplicate email addresses (case insensitive)
+# Using a sub-query within the IN clause's SELECT statement, as a workaround for
+# MySQL >= 5.7 with sql_mode=only_full_group_by throwing ERROR 1055 (42000):
+# Expression #1 of HAVING clause is not in GROUP BY clause
 $t_sql = <<< ENDSQL
 SELECT lower(email) email, username
 FROM mantis_user_table 
 WHERE lower(email) IN (
-	SELECT lower(email) 
-	FROM mantis_user_table 
-	GROUP BY lower(email) HAVING COUNT(*) > 1
+	SELECT email 
+	FROM (
+		SELECT lower(email) email, COUNT(*)
+		FROM mantis_user_table 
+		GROUP BY lower(email) HAVING COUNT(*) > 1
+		) tmp
 	)
 ORDER BY lower(email), username
 ENDSQL;
@@ -106,7 +112,7 @@ foreach( $t_rows as $t_row ) {
 foreach( $t_duplicate_emails as $t_email => &$t_usernames ) {
 	$t_usernames = "$t_email (" . implode(', ', $t_usernames ) . ")";
 }
-var_dump($t_rows, $t_duplicate_emails);
+
 // Fail check if emails should be unique, just issue a warning otherwise
 $t_function = config_get_global( 'email_ensure_unique' )
 	? 'check_print_test_row'
