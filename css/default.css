@@ -7,7 +7,14 @@
 span.print { font-size: 8pt; }
 span.required 		{ font-size: 8pt; color: #bb0000; }
 
-td.category, th.category		{ background-color: #edf3f4 !important; color: #000000; font-weight: bold; vertical-align : top; }
+td.category, th.category,
+td.category label, th.category label
+{
+    background-color: #edf3f4 !important;
+    color: #000000;
+    font-weight: bold;
+    vertical-align : top;
+}
 td.category .small, th.category .small	{ font-weight: normal;  }
 
 .small-caption	{
