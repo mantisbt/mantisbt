@@ -255,9 +255,32 @@ $g_notify_flags['new'] = array(
 			<listitem>
 				<para>
 					When enabled, the uniqueness of email addresses will be enforced for new
-					users as well as updates to existing ones.  Note that there can be duplicate
-					emails before this option was turned ON.  Default is ON.
+					users as well as updates to existing ones.
+					Default is ON.
 				</para>
+				<warning>
+					<para>
+						When this setting changes from OFF to ON (which will
+						de facto occur when upgrading to MantisBT 1.3.0 or later
+						from an older version), there could be existing
+						user accounts sharing the same email address.
+					</para>
+					<para>
+						It important that such duplicates are identified and fixed,
+						to avoid unexpected and unpredictable behavior when
+						looking up users with their email address, as the system
+						expects them to be unique.
+					</para>
+					<para>
+						To facilitate this task, the <emphasis>Administration Checks</emphasis>
+						will detect duplicate email addresses and identify the
+						related user accounts.
+						A warning will also be displayed in the Manage Users page
+						(see <xref linkend="admin.pages.manage.users" />) and
+						when editing a user account whose email address is associated
+						with one or more other accounts.
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
