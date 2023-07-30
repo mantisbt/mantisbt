@@ -64,6 +64,7 @@ use Mantis\Exceptions\ClientException;
 # If id does not exists, a value of 'false' is stored
 $g_cache_user = array();
 
+$g_user_all_accessible_subprojects_cache = array();
 $g_user_accessible_subprojects_cache = null;
 
 /**
@@ -1200,7 +1201,7 @@ function user_get_expanded_name_from_row( array $p_user_row ) {
 
 /**
  * Get name used for sorting.
- * 
+ *
  * @param array $p_user_row The user row with 'realname' and 'username' fields
  *
  * @return string name for sorting
@@ -1395,6 +1396,12 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
  * @return array List of Project Ids
  */
 function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
+	global $g_user_all_accessible_subprojects_cache;
+
+	if (isset($g_user_all_accessible_subprojects_cache[$p_user_id][$p_project_id])) {
+		return $g_user_all_accessible_subprojects_cache[$p_user_id][$p_project_id];
+	}
+
 	# @todo (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
 	# affects how news and some summaries are generated
 	$t_todo = user_get_accessible_subprojects( $p_user_id, $p_project_id );
@@ -1408,6 +1415,7 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 		}
 	}
 
+	$g_user_all_accessible_subprojects_cache[$p_user_id][$p_project_id] = $t_subprojects;
 	return $t_subprojects;
 }
 
