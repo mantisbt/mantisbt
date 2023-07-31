@@ -291,6 +291,7 @@
 			<term>$g_zip_attachments</term>
 			<listitem>
 				<para>Indicator to zip all attachments with the exception of the filetypes defined with $g_zip_excludes
+					and files smaller than $g_zip_threshold.
 					The default value is OFF.
 				</para>
 				<warning>
@@ -300,18 +301,18 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_zip_excludes</term>
+			<term>$g_zip_attachments_excluded_extensions</term>
 			<listitem>
 				<para>Aa array of filetype extensions which should be excluded from the zipping process.
-					The default value is array('pdf','zip','docx','xlsx','pptx').
+					The default value is 'pdf','zip','docx','xlsx','pptx'.
 				</para>
 			</listitem>
 		</varlistentry>
 			<varlistentry>
-			<term>$g_zip_theshold</term>
+			<term>$g_zip_attachments_minimum_size</term>
 			<listitem>
 				<para>Define minimum size of attachment for the zip process to become active.
-				The default value = 1024.
+				The default value = 1024 (bytes).
 				</para>
 			</listitem>
 		</varlistentry>

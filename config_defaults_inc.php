@@ -1956,26 +1956,26 @@ $g_allow_file_upload = ON;
 $g_file_upload_method = DATABASE;
 
 /**
- * Use Zip_attachments: zip attachments in order to optimize  
+ * Zip_attachments in order to optimize  
  * network performance and save disk/db space.
  * @global integer $g_zip_attachments
  */
 $g_zip_attachments		=	OFF;
 
 /**
- * Use Zip_excludes: define the file types to omit from the zipping process 
+ * Zip_excludes defines the file types to omit from the zipping process 
  * because the files are already compressed and/or one does not want to
  * compress a specific file type.
  * Values should be provided in lowercase.
  * @global integer $g_zip_excludes
  */
-$g_zip_excludes			= array('pdf','zip','docx','xlsx','pptx');
+$g_zip_attachments_excluded_extensions		= array('pdf','zip','docx','xlsx','pptx');
 
 /**
  * Use Zip_threshold: define minimal size of the attachment for the zipping process.
  * @global integer $g_zip_excludes
  */
-$g_zip_threshold		= 1024;
+$g_zip_attachments_minimum_size		= 1024;
 
 /**
  * Use File dropzone: enable drag and drop into a drop zone functionality for

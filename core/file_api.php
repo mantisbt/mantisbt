@@ -70,26 +70,19 @@ function file_attach_files( $p_bug_id, $p_files, $p_bugnote_id = 0 ) {
 
 	$t_file_infos = array();
 	$t_zip_attachments = config_get( 'zip_attachments' );
-	$t_zip_go = false;
 	if ( ON == $t_zip_attachments && extension_loaded( 'zip' ) ) {
-		$t_excluded_files = array_map( 'strtolower', config_get( 'zip_excludes' ) );
-		$t_zip_go = true;
+		$t_zip_attachments_excluded_extensions = array_map( 'strtolower', config_get( 'zip_attachments_excluded_extensions' ) );
+		$t_zip__attachments_minimum_size = config_get( '$g_zip_attachments_minimum_size' ) ;
+	} else {
+		$t_zip_attachments = OFF;
 	}
 	foreach( $p_files as $t_file ) {
 		if( !empty( $t_file['name'] ) ) {
-			if ( $t_file['size'] > config_get( 'zip_threshold' ) ) {
-				if ( $t_zip_go ) {
-
-					# check if this file is excluded from the zipping excercise
-					$t_zip = true ;
-
-					# grab extension
-					$t_extension = strtolower( pathinfo( $t_file['name'] , PATHINFO_EXTENSION ) );
-					# check against excluded files
-					if ( in_array( $t_extension , $t_excluded_files ) ) {
-						$t_zip = false ;
-					}
-
+			if ( $t_zip_attachments  && $t_file['size'] > $t_zip__attachments_minimum_size ) {
+				# grab extension
+				$t_extension = strtolower( pathinfo( $t_file['name'] , PATHINFO_EXTENSION ) );
+				# check against excluded files
+				if ( !in_array( $t_extension , $t_zip_attachments_excluded_extensions ) ) {
 					## zip attached file 
 					if( $t_zip ) {
 						# Creating a ZIP compressed archive of uploaded file
@@ -98,16 +91,16 @@ function file_attach_files( $p_bug_id, $p_files, $p_bugnote_id = 0 ) {
 						$zip = new ZipArchive();
 						$zip->open( $t_new_filename, ZIPARCHIVE::CREATE );
 						#add file
-						$t_datafile =  $t_file['tmp_name'];
-						$zip->addFile( "$t_datafile" );
+						$zip->addFile( $t_file['tmp_name'] );
 						# close archive
 						$zip->close();
 						# file to be used for mantis
 						$t_file['name'] 	.=".zip";
 						$t_file['tmp_name'] .=".zip";
-					} 			
+					} 
 				}
-			}			
+			}
+						
 	
 			
 			# $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false, $p_bugnote_id = 0
