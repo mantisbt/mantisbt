@@ -69,8 +69,50 @@ function file_attach_files( $p_bug_id, $p_files, $p_bugnote_id = 0 ) {
 	}
 
 	$t_file_infos = array();
+	$t_excluded_files = config_get( 'zip_excludes' );
+	$t_excluded_arr = explode( ',', $t_excluded_files );
+	$t_zipfiles = config_get( 'zip_attachments' );
 	foreach( $p_files as $t_file ) {
 		if( !empty( $t_file['name'] ) ) {
+			# check if this file is excluded from the zipping excercise
+			$t_zip = true ;
+
+			# grab extension
+			$t_extension = $t_file['type'];
+			if ( ( $pos = strpos($t_extension, "/" ) ) !== FALSE) { 
+				$t_extension = substr( $t_extension, $pos+1 );  ; 
+			}
+			# check against excluded files
+			if( !is_blank( $t_excluded_files ) ) {
+				foreach( $t_excluded_arr as $t_val ) {
+					if( 0 == strcasecmp($t_val, $t_extension ) ) {
+						$t_zip = false ;
+					}
+				}
+			}
+			
+			## zip attached file 
+			if( ON == $t_zipfiles and $t_zip == true ) {
+				if ( extension_loaded( 'zip' ) ) {
+					// Creating a ZIP compressed archive of uploaded file
+					$t_new_filename  = $t_file['tmp_name'];
+					$t_new_filename .= ".zip";
+					// make zip archive
+					$zip = new ZipArchive();
+					$zip->open( $t_new_filename, ZIPARCHIVE::CREATE );
+					//add file
+					$t_datafile =  $t_file['tmp_name'];
+					$zip->addFile( "$t_datafile" );
+					// close archive
+					$zip->close();
+					// file to be used for mantis
+					$t_name = $t_file['name'];
+					$t_name .=".zip";
+					$t_file['name'] = $t_name;
+					$t_file['tmp_name'] = $t_new_filename;
+				}
+			} 			
+				
 			# $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false, $p_bugnote_id = 0
 			$t_file_infos[] = file_add(
 				$p_bug_id,

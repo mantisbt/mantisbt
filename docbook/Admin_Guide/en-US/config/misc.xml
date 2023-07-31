@@ -287,5 +287,25 @@
 				</warning>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_zip_attachments</term>
+			<listitem>
+				<para>Indicator to zip all attachments with the exception of the filetypes defined with $g_zip_excludes
+					The default value is ON.
+				</para>
+				<warning>
+					<para>Be aware that zipped files cannot be viewed online.
+					</para>
+				</warning>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_zip_excludes</term>
+			<listitem>
+				<para>A list of filetype extensions (separated by comma) which should be excluded from the zipping process.
+					The default value is "pdf,zip,jpg,docx,xlsx,pptx,x-zip-compressed".
+				</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>

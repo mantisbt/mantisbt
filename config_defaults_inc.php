@@ -1956,6 +1956,20 @@ $g_allow_file_upload = ON;
 $g_file_upload_method = DATABASE;
 
 /**
+ * Use Zip_attachments: zip selected file types in order to optimize performance 
+ * and save disk/db space
+ * @global integer $g_zip_attachments
+ */
+$g_zip_attachments		=	ON;
+
+/**
+ * Use Zip_excludes: define the file types to ommit from the zipping process 
+ * because the files are already compressed and/or one does not want to compress a specific file type
+ * @global integer $g_zip_excludes
+ */
+$g_zip_excludes			=	"pdf,zip,jpg,docx,xlsx,pptx,x-zip-compressed";
+
+/**
  * Use File dropzone: enable drag and drop into a drop zone functionality for
  * file upload fields
  * @global integer $g_dropzone_enabled
