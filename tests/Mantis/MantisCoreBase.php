@@ -44,7 +44,7 @@ abstract class MantisCoreBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * MantisCore tests setup
 	 */
-	public static function setUpBeforeClass() {
+	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_USERNAME', $GLOBALS ) ) {
