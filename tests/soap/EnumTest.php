@@ -57,9 +57,9 @@ class EnumTest extends SoapBase {
 	 * Tests the mc_enum_access_levels with invalid credentials.
 	 *
 	 * @return void
-	 * @expectedException SoapFault
 	 */
 	public function testAccessLevelAccessDenied() {
+		$this->expectException( SoapFault::class );
 		$this->client->mc_enum_access_levels( 'administrator', '' );
 	}
 
@@ -89,9 +89,9 @@ class EnumTest extends SoapBase {
 	 * Tests mc_enum_status method with invalid credentials.
 	 *
 	 * @return void
-	 * @expectedException SoapFault
 	 */
 	public function testStatusAccessDenied() {
+		$this->expectException( SoapFault::class );
 		$this->client->mc_enum_status( 'administrator', '' );
 	}
 
@@ -118,10 +118,10 @@ class EnumTest extends SoapBase {
 	/**
 	 * Tests mc_enum_priorities method with invalid credentials.
 	 *
-	 * @expectedException SoapFault
 	 * @return void
 	 */
 	public function testPriorityAccessDenied() {
+		$this->expectException( SoapFault::class );
 		$this->client->mc_enum_priorities( 'administrator', '' );
 	}
 
@@ -148,10 +148,10 @@ class EnumTest extends SoapBase {
 	/**
 	 * Tests mc_enum_reproducibilities method with invalid credentials.
 	 *
-	 * @expectedException SoapFault
 	 * @return void
 	 */
 	public function testReproducibilityAccessDenied() {
+		$this->expectException( SoapFault::class );
 		$this->client->mc_enum_reproducibilities( 'administrator', '' );
 	}
 
@@ -181,10 +181,10 @@ class EnumTest extends SoapBase {
 	/**
 	 * Tests mc_enum_severities method with invalid credentials.
 	 *
-	 * @expectedException SoapFault
 	 * @return void
 	 */
 	public function testSeverityAccessDenied() {
+		$this->expectException( SoapFault::class );
 		$this->client->mc_enum_severities( 'administrator', '' );
 	}
 
@@ -211,10 +211,10 @@ class EnumTest extends SoapBase {
 	/**
 	 * Tests mc_enum_projections method with invalid credentials.
 	 *
-	 * @expectedException SoapFault
 	 * @return void
 	 */
 	public function testProjectionAccessDenied() {
+		$this->expectException( SoapFault::class );
 		$this->client->mc_enum_projections( 'administrator', '' );
 	}
 
@@ -242,10 +242,10 @@ class EnumTest extends SoapBase {
 	/**
 	 * Tests mc_enum_etas method with invalid credentials.
 	 *
-	 * @expectedException SoapFault
 	 * @return void
 	 */
 	public function testEtaAccessDenied() {
+		$this->expectException( SoapFault::class );
 		$this->client->mc_enum_etas( 'administrator', '' );
 	}
 
@@ -276,10 +276,10 @@ class EnumTest extends SoapBase {
 	/**
 	 * Tests mc_enum_resolutions method with invalid credentials.
 	 *
-	 * @expectedException SoapFault
 	 * @return void
 	 */
 	public function testResolutionAccessDenied() {
+		$this->expectException( SoapFault::class );
 		$this->client->mc_enum_resolutions( 'administrator', '' );
 	}
 
