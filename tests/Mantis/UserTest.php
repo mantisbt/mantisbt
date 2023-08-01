@@ -39,7 +39,7 @@ class MantisUserApiTest extends MantisCoreBase {
 
 	protected static $user_id;
 
-	public static function setUpBeforeClass() {
+	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
 
 		$t_cookie = user_create(
@@ -51,7 +51,7 @@ class MantisUserApiTest extends MantisCoreBase {
 		self::$user_id = user_get_id_by_cookie( $t_cookie );
 	}
 
-	public static function tearDownAfterClass() {
+	public static function tearDownAfterClass(): void {
 		user_delete( self::$user_id );
 	}
 

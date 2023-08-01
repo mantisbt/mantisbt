@@ -41,7 +41,7 @@ class VersionTest extends SoapBase {
 	/**
 	 * Sets up the fixture.
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		# Define the test version's date order (used for assertion)
