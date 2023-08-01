@@ -72,7 +72,7 @@ class MantisConfigParserTest extends MantisCoreBase {
 		$t_parser = new ConfigParser( $p_string );
 		$t_parsed_result = $t_parser->parse();
 
-		$this->assertInternalType( $p_type, $t_parsed_result );
+		$this->assertThat( $t_parsed_result, $this->isType( $p_type ) );
 		$this->assertEquals( $t_parsed_result, $t_reference_result, $this->errorMessage( $p_string ) );
 	}
 
