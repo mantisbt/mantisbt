@@ -1,0 +1,21 @@
+	$t_zip_attachments_included_extensions = array_map( 'strtolower', config_get( 'zip_attachments_included_extensions' ) );
+	$t_whitelist = sizeof( $t_zip_attachments_included_extensions ) ;
+	if ( $t_whitelist > 0 && extension_loaded( 'zip' ) ) {
+		$t_zip__attachments_minimum_size = config_get( 'zip_attachments_minimum_size' ) ;
+	} else {
+		$t_whitelist = 0;
+	}
+	foreach( $p_files as $t_file ) {
+		if( !empty( $t_file['name'] ) ) {
+			if ( $t_whitelist > 0 && $t_file['size'] > $t_zip_attachments_minimum_size ) {
+				$t_extension = strtolower( pathinfo( $t_file['name'] , PATHINFO_EXTENSION ) );
+				if ( in_array( $t_extension , $t_zip_attachments_included_extensions ) ) {
+					$t_new_filename  = $t_file['tmp_name'].".zip";
+					$zip = new ZipArchive();
+					$zip->open( $t_new_filename, ZIPARCHIVE::CREATE );
+					$zip->addFile( $t_file['tmp_name'] );
+					$zip->close();
+					$t_file['name'] 	.=".zip";
+					$t_file['tmp_name'] .=".zip";
+				}
+			}

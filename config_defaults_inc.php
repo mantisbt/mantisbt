@@ -1963,17 +1963,17 @@ $g_file_upload_method = DATABASE;
 $g_zip_attachments		=	OFF;
 
 /**
- * Zip_excludes defines the file types to omit from the zipping process 
+ * zip_attachments_excluded_extensions defines the file types to omit from the zipping process 
  * because the files are already compressed and/or one does not want to
  * compress a specific file type.
  * Values should be provided in lowercase.
- * @global integer $g_zip_excludes
+ * @global array $g_zip__attachments_excluded_extensions
  */
 $g_zip_attachments_excluded_extensions		= array('pdf','zip','docx','xlsx','pptx');
 
 /**
- * Use Zip_threshold: define minimal size of the attachment for the zipping process.
- * @global integer $g_zip_excludes
+ * zip_attachments_minimum_size defines minimal size of the attachment for the zipping process.
+ * @global integer $g_zip__attachments_minimum_size
  */
 $g_zip_attachments_minimum_size		= 1024;
 

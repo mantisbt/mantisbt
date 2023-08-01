@@ -69,35 +69,33 @@ function file_attach_files( $p_bug_id, $p_files, $p_bugnote_id = 0 ) {
 	}
 
 	$t_file_infos = array();
-	$t_zip_attachments = config_get( 'zip_attachments' );
+	$t_zip_attachments = config_get_global( 'zip_attachments' );
 	if ( ON == $t_zip_attachments && extension_loaded( 'zip' ) ) {
-		$t_zip_attachments_excluded_extensions = array_map( 'strtolower', config_get( 'zip_attachments_excluded_extensions' ) );
-		$t_zip__attachments_minimum_size = config_get( '$g_zip_attachments_minimum_size' ) ;
+		$t_zip_attachments_excluded_extensions = array_map( 'strtolower', config_get_global( 'zip_attachments_excluded_extensions' ) );
+		$t_zip__attachments_minimum_size = config_get_global( 'zip_attachments_minimum_size' ) ;
 	} else {
 		$t_zip_attachments = OFF;
 	}
 	foreach( $p_files as $t_file ) {
 		if( !empty( $t_file['name'] ) ) {
-			if ( $t_zip_attachments  && $t_file['size'] > $t_zip__attachments_minimum_size ) {
+			if ( $t_zip_attachments  && $t_file['size'] > $t_zip_attachments_minimum_size ) {
 				# grab extension
 				$t_extension = strtolower( pathinfo( $t_file['name'] , PATHINFO_EXTENSION ) );
 				# check against excluded files
 				if ( !in_array( $t_extension , $t_zip_attachments_excluded_extensions ) ) {
 					## zip attached file 
-					if( $t_zip ) {
-						# Creating a ZIP compressed archive of uploaded file
-						$t_new_filename  = $t_file['tmp_name'].".zip";
-						# make zip archive
-						$zip = new ZipArchive();
-						$zip->open( $t_new_filename, ZIPARCHIVE::CREATE );
-						#add file
-						$zip->addFile( $t_file['tmp_name'] );
-						# close archive
-						$zip->close();
-						# file to be used for mantis
-						$t_file['name'] 	.=".zip";
-						$t_file['tmp_name'] .=".zip";
-					} 
+					# Creating a ZIP compressed archive of uploaded file
+					$t_new_filename  = $t_file['tmp_name'].".zip";
+					# make zip archive
+					$zip = new ZipArchive();
+					$zip->open( $t_new_filename, ZIPARCHIVE::CREATE );
+					#add file
+					$zip->addFile( $t_file['tmp_name'] );
+					# close archive
+					$zip->close();
+					# file to be used for mantis
+					$t_file['name'] 	.=".zip";
+					$t_file['tmp_name'] .=".zip";
 				}
 			}
 						
