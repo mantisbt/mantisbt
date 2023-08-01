@@ -105,7 +105,7 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 */
 	public function testExtraTokensError() {
 		$this->expectException(Exception::class);
-		$this->expectExceptionMessageRegExp('/^Extra tokens found/');
+		$this->expectExceptionMessageMatches('/^Extra tokens found/');
 
 		$t_parser = new ConfigParser( '1; 2' );
 		$t_parser->parse( ConfigParser::EXTRA_TOKENS_ERROR );
@@ -136,7 +136,7 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 */
 	public function testSyntaxError() {
 		$this->expectException(Exception::class);
-		$this->expectExceptionMessageRegExp( '/^syntax error/');
+		$this->expectExceptionMessageMatches( '/^syntax error/');
 
 		$t_parser = new ConfigParser( 'array(' );
 		$t_parser->parse();
@@ -149,7 +149,7 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 */
 	public function testInvalidTokensError() {
 		$this->expectException(Exception::class);
-		$this->expectExceptionMessageRegExp('/^Unexpected token/');
+		$this->expectExceptionMessageMatches('/^Unexpected token/');
 
 		$t_parser = new ConfigParser( 'echo 1;' );
 		$t_parser->parse();
@@ -162,7 +162,7 @@ class MantisConfigParserTest extends MantisCoreBase {
 	 */
 	public function testUnknownConstantError() {
 		$this->expectException(Exception::class);
-		$this->expectExceptionMessageRegExp('/^Unknown string literal/');
+		$this->expectExceptionMessageMatches('/^Unknown string literal/');
 
 		# Make sure we have a string that is not a defined constant
 		$t_constant = 'UNDEFINED_CONSTANT';
