@@ -303,7 +303,7 @@
 		<varlistentry>
 			<term>$g_zip_attachments_excluded_extensions</term>
 			<listitem>
-				<para>Aa array of filetype extensions which should be excluded from the zipping process.
+				<para>An array of filetype extensions which should be excluded from the zipping process.
 					The default value is 'pdf','zip','docx','xlsx','pptx'.
 				</para>
 			</listitem>
