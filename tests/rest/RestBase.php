@@ -244,10 +244,10 @@ class RestBase extends PHPUnit\Framework\TestCase {
 
 			if( isset( $t_body['users'] ) ) {
 				$t_users = $t_body['users'];
-				$t_user_id = (int)$t_users[0]['id'];	
+				$t_user_id = (int)$t_users[0]['id'];
 			} if( isset( $t_body['user'] ) ) {
 				$t_user = $t_body['user'];
-				$t_user_id = (int)$t_user['id'];	
+				$t_user_id = (int)$t_user['id'];
 			} else {
 				$t_user_id = (int)$t_body['id'];
 			}
