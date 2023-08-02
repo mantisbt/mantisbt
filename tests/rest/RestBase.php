@@ -94,7 +94,7 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	 * setUp
 	 * @return void
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		if( !isset( $GLOBALS['MANTIS_TESTSUITE_REST_ENABLED'] ) ||
 			!$GLOBALS['MANTIS_TESTSUITE_REST_ENABLED'] ) {
 			$this->markTestSkipped( 'The REST API tests are disabled.' );
@@ -131,7 +131,7 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	 * tearDown
 	 * @return void
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 		foreach( $this->usersToDelete as $t_user_id ) {
 			$t_response = $this->builder()->delete( '/users/' . $t_user_id, '' )->send();
 			$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
