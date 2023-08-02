@@ -72,7 +72,7 @@ function file_attach_files( $p_bug_id, $p_files, $p_bugnote_id = 0 ) {
 	$t_zip_attachments = config_get_global( 'zip_attachments' );
 	if ( ON == $t_zip_attachments && extension_loaded( 'zip' ) ) {
 		$t_zip_attachments_excluded_extensions = array_map( 'strtolower', config_get_global( 'zip_attachments_excluded_extensions' ) );
-		$t_zip__attachments_minimum_size = config_get_global( 'zip_attachments_minimum_size' ) ;
+		$t_zip_attachments_minimum_size = config_get_global( 'zip_attachments_minimum_size' ) ;
 	} else {
 		$t_zip_attachments = OFF;
 	}
