@@ -53,7 +53,7 @@ class RestImpersonateUserTest extends RestBase {
 	 */
 	public function testWithoutImpersonation() {
 		$t_response = $this->builder()->get( '/users/me' )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -61,7 +61,7 @@ class RestImpersonateUserTest extends RestBase {
 	 */
 	public function testImpersonateUserDoesntExist() {
 		$t_response = $this->builder()->get( '/users/me' )->impersonate( 'DoesNotExist' )->send();
-		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class RestImpersonateUserTest extends RestBase {
 	 */
 	public function testImpersonateSelf() {
 		$t_response = $this->builder()->get( '/users/me' )->impersonate( 'administrator' )->send();
-		$this->assertEquals( 403, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -86,17 +86,17 @@ class RestImpersonateUserTest extends RestBase {
 		# Create a user
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 
 		# Validate admin user information
 		$t_response = $this->builder()->get( '/users/me' )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_user = json_decode( $t_response->getBody(), true );
 		$this->assertNotEquals( $t_username, $t_user['name'] );
 
 		# Validate impersonated user information
 		$t_response = $this->builder()->get( '/users/me' )->impersonate( $t_username )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_user = json_decode( $t_response->getBody(), true );
 		$this->assertEquals( $t_username, $t_user['name'] );
 		$this->assertEquals( $t_user_to_create['access_level']['name'], $t_user['access_level']['name'] );
@@ -117,11 +117,11 @@ class RestImpersonateUserTest extends RestBase {
 		# Create a user
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 
 		# Validate impersonated user information
 		$t_response = $this->builder()->get( '/users/me' )->impersonate( $t_username )->send();
-		$this->assertEquals( 403, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -139,20 +139,20 @@ class RestImpersonateUserTest extends RestBase {
 		# Create a user
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['user'] ) );
 		$t_user = $t_body['user'];
 
 		# Create API token for user
 		$t_response = $this->builder()->post( '/users/' . $t_user['id'] . '/token', $t_user_to_create )->send();
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['user'] ) );
 		$t_token = $t_body['token'];
 
 		# Validate impersonating disabled user fails
 		$t_response = $this->builder()->get( '/users/me' )->token( $t_token )->impersonate( 'administrator' )->send();
-		$this->assertEquals( 403, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
 	}
 }
