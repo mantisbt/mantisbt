@@ -51,7 +51,7 @@ SQL_CREATE_ANONYMOUS_USER="INSERT INTO mantis_user_table
 	 enabled, protected, access_level, last_visit, date_created)
 	VALUES
 	('$MANTIS_ANONYMOUS', 'Anonymous User', '$MANTIS_ANONYMOUS@localhost',
-	 MD5('123456'), '$COOKIE_STRING', 1, 1, 10, $TIMESTAMP, $TIMESTAMP);"
+	 MD5('123456'), '$COOKIE_STRING', '1', '1', 10, $TIMESTAMP, $TIMESTAMP);"
 
 
 # -----------------------------------------------------------------------------
