@@ -177,20 +177,31 @@ class RestProjectVersionTests extends RestBase {
 	 * @return void
 	 */
 	public function testProjectDeleteVersionAnonymous() {
+		// Skip test if anonymous login is not enabled
+		if( ! auth_anonymous_enabled() ) {
+			$this->markTestSkipped( 'Anonymous access is not enabled' );
+		};
+
 		$t_version = $this->createVersion();
 
 		// anonymous users can't update a version
 		$t_version_patch = array( 'name' => 'should fail' );
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->anonymous()->send();
-		$this->assertEquals( 401, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode(),
+			"Anonymous users can't update a version"
+		);
 
 		// anonymous users can't delete a version
 		$t_response = $this->builder()->delete( $this->ver_base_url . $t_version['id'] )->anonymous()->send();
-		$this->assertEquals( 401, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode(),
+			"Anonymous users can't delete a version"
+		);
 
 		// Confirm that version exists
 		$t_response = $this->builder()->get( $this->ver_base_url . $t_version['id'] )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );		
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+			"Confirm that version has not been deleted"
+		);
 	}
 
 	/**
