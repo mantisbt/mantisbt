@@ -65,13 +65,15 @@ class RestUserTest extends RestBase {
 	 * Test creating a user as an anonymous user
 	 */
 	public function testCreateUserAnonymous() {
+		$this->skipTestIfAnonymousDisabled();
+
 		$t_user_to_create = array(
 			'name' => Faker::username()
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->anonymous()->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
-		$this->assertEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -269,6 +271,8 @@ class RestUserTest extends RestBase {
 	 * Test updating user with invalid username
 	 */
 	public function testUpdateUserAnonymous() {
+		$this->skipTestIfAnonymousDisabled();
+
 		$t_user_to_create = array(
 			'name' => Faker::username()
 		);
@@ -290,7 +294,7 @@ class RestUserTest extends RestBase {
 		);
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->anonymous()->send();
-		$this->assertEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -388,6 +392,8 @@ class RestUserTest extends RestBase {
 	 * Test getting a non-existent user by id.
 	 */
 	public function testGetUserByIdAnonymous() {
+		$this->skipTestIfAnonymousDisabled();
+
 		$t_user_to_create = array(
 			'name' => Faker::username()
 		);
@@ -397,15 +403,17 @@ class RestUserTest extends RestBase {
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->anonymous()->send();
-		$this->assertEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
 	}
 
 	/**
 	 * Test getting a non-existent user by id.
 	 */
 	public function testGetUserByIdNotFoundAnonymous() {
+		$this->skipTestIfAnonymousDisabled();
+
 		$t_response = $this->builder()->get( '/users/1000000' )->anonymous()->send();
-		$this->assertEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -420,8 +428,10 @@ class RestUserTest extends RestBase {
 	 * Test getting a non-existent user by id.
 	 */
 	public function testGetUserByIdZeroAnonymous() {
+		$this->skipTestIfAnonymousDisabled();
+
 		$t_response = $this->builder()->get( '/users/0' )->anonymous()->send();
-		$this->assertEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -466,6 +476,8 @@ class RestUserTest extends RestBase {
 	 * Test delete an existing user by id.
 	 */
 	public function testDeleteUserByIdAnonymous() {
+		$this->skipTestIfAnonymousDisabled();
+
 		$t_user_to_create = array(
 			'name' => Faker::username()
 		);
@@ -478,7 +490,7 @@ class RestUserTest extends RestBase {
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->anonymous()->send();
-		$this->assertEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
