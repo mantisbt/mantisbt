@@ -134,7 +134,7 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	protected function tearDown() {
 		foreach( $this->usersToDelete as $t_user_id ) {
 			$t_response = $this->builder()->delete( '/users/' . $t_user_id, '' )->send();
-			$this->assertEquals( 204, $t_response->getStatusCode() );
+			$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
 		}
 
 		foreach ( $this->issueIdsToDelete as $t_issue_id_to_delete ) {

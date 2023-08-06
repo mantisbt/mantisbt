@@ -62,7 +62,7 @@ class RestIssueTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 		# file_put_contents( '/tmp/response.txt', var_export( $t_body, true ) );
@@ -125,7 +125,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 
@@ -184,7 +184,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 
@@ -208,7 +208,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 
@@ -234,7 +234,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 
@@ -262,7 +262,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_body = json_decode( $t_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 
@@ -286,7 +286,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
 	public function testCreateIssueWithVersionObjectNameNotFound() {
@@ -297,7 +297,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
 	public function testCreateIssueWithVersionStringNotFound() {
@@ -308,7 +308,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -366,7 +366,7 @@ class RestIssueTest extends RestBase {
 	 * @return integer Created issue Id
 	 */
 	protected function assertIssueCreatedWithTag( $p_tag_name, $p_response ) {
-		$this->assertEquals( 201, $p_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $p_response->getStatusCode() );
 
 		$t_body = json_decode( $p_response->getBody(), true );
 		$t_issue = $t_body['issue'];
@@ -434,7 +434,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
 	public function testCreateIssueNoDescription() {
@@ -443,7 +443,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
 	public function testCreateIssueNoCategory() {
@@ -470,7 +470,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
 	public function setUp() {
