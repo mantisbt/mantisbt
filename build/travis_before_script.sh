@@ -22,6 +22,7 @@ PORT=8080
 MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
 MANTIS_CONFIG=config/config_inc.php
+MANTIS_ANONYMOUS=anonymous
 
 TIMESTAMP=$(date "+%s")
 
@@ -41,6 +42,15 @@ SQL_CREATE_TAGS="INSERT INTO mantis_tag_table
 	VALUES
 	(0, 'modern-ui', '', $TIMESTAMP, $TIMESTAMP),
 	(0, 'patch', '', $TIMESTAMP, $TIMESTAMP);"
+# Anonymous user account - to ensure we are not hit by unique key constraint, we
+# generate a random cookie_string like auth_generate_unique_cookie_string() does.
+SQL_CREATE_ANONYMOUS_USER="INSERT INTO mantis_user_table
+	(username, realname, email, password, cookie_string,
+	 enabled, protected, access_level, last_visit, date_created)
+	VALUES
+	('$MANTIS_ANONYMOUS', 'Anonymous User', '$MANTIS_ANONYMOUS@localhost',
+	 MD5('123456'), REPLACE(REPLACE(TO_BASE64(RANDOM_BYTES(48)), '+', '-'), '/', '_'),
+	 1, 1, 10, $TIMESTAMP, $TIMESTAMP);"
 
 
 # -----------------------------------------------------------------------------
@@ -155,6 +165,7 @@ echo "Creating project, versions and tags"
 $DB_CMD "$SQL_CREATE_PROJECT" $DB_CMD_SCHEMA
 $DB_CMD "$SQL_CREATE_VERSIONS" $DB_CMD_SCHEMA
 $DB_CMD "$SQL_CREATE_TAGS" $DB_CMD_SCHEMA
+$DB_CMD "$SQL_CREATE_ANONYMOUS_USER" $DB_CMD_SCHEMA
 
 echo "Creating API Token"
 TOKEN=$($myphp tests/travis_create_api_token.php)
@@ -181,6 +192,9 @@ cat <<-EOF >> $MANTIS_CONFIG
 	\$g_enable_product_build = ON;
 	\$g_enable_project_documentation = ON;
 	\$g_time_tracking_enabled = ON;
+	\$g_time_tracking_enabled = ON;
+	\$g_allow_anonymous_login = ON;
+  \$g_anonymous_account = '$MANTIS_ANONYMOUS';
 	EOF
 
 step "Before-script execution completed successfully"
