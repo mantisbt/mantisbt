@@ -196,6 +196,17 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * Marks a test as skipped if there is no configured Anonymous account.
+	 *
+	 * @return void
+	 */
+	protected function skipTestIfAnonymousDisabled(){
+		if( ! auth_anonymous_enabled() ) {
+			$this->markTestSkipped( 'Anonymous access is not enabled' );
+		}
+	}
+
+	/**
 	 * Registers an issue for deletion after the test method has run
 	 *
 	 * @param integer $p_issue_id Issue identifier.
