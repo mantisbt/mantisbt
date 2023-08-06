@@ -69,7 +69,7 @@ class RestProjectVersionTests extends RestBase {
 		);
 
 		$t_response = $this->builder()->post( $this->ver_base_url, $t_version_to_create )->send();
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_version = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_version['version'] ) );
 		$t_version = $t_version['version'];
@@ -90,7 +90,7 @@ class RestProjectVersionTests extends RestBase {
 		$t_version = $this->createVersion();
 
 		$t_response = $this->builder()->get( $this->ver_base_url . $t_version['id'] )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_result = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_result['versions'] ) );
 		$this->assertEquals( 1, count( $t_result['versions'] ) );
@@ -109,7 +109,7 @@ class RestProjectVersionTests extends RestBase {
 		$this->createVersion();
 
 		$t_response = $this->builder()->get( $this->ver_base_url )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_result = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_result['versions'] ) );
 		$this->assertGreaterThanOrEqual( 1, count( $t_result['versions'] ) );
@@ -122,7 +122,7 @@ class RestProjectVersionTests extends RestBase {
 	 */
 	public function testProjectGetVersionsForNonExistentProject() {
 		$t_response = $this->builder()->get( '/projects/1000000/versions' )->send();
-		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -132,7 +132,7 @@ class RestProjectVersionTests extends RestBase {
 	 */
 	public function testProjectGetVersionForNonExistentVersion() {
 		$t_response = $this->builder()->get( $this->ver_base_url . '1000000' )->send();
-		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -143,7 +143,7 @@ class RestProjectVersionTests extends RestBase {
 	public function testProjectAddVersionForNonExistentProject() {
 		$t_version_to_create = array( 'name' => $this->versionName() );
 		$t_response = $this->builder()->post( '/projects/1000000/versions', $t_version_to_create )->send();
-		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -156,19 +156,19 @@ class RestProjectVersionTests extends RestBase {
 
 		// Confirm that version exists
 		$t_response = $this->builder()->get( $this->ver_base_url . $t_version['id'] )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 
 		// Delete a version that exists
 		$t_response = $this->builder()->delete( $this->ver_base_url . $t_version['id'] )->send();
-		$this->assertEquals( 204, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
 
 		// Confirm version is deleted
 		$t_response = $this->builder()->get( $this->ver_base_url . $t_version['id'] )->send();
-		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 
 		// Delete a version that doesn't exists
 		$t_response = $this->builder()->delete( $this->ver_base_url . $t_version['id'] )->send();
-		$this->assertEquals( 204, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -216,7 +216,7 @@ class RestProjectVersionTests extends RestBase {
 		$t_version_patch = array( 'name' => $p_name );
 
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -227,7 +227,7 @@ class RestProjectVersionTests extends RestBase {
 	public function testProjectUpdateDoesNotExists() {
 		$t_version_patch = array( 'description' => 'whatever' );
 		$t_response = $this->builder()->patch( $this->ver_base_url . '1000000', $t_version_patch )->send();
-		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -240,7 +240,7 @@ class RestProjectVersionTests extends RestBase {
 		$t_version = $this->createVersion();
 		$t_version_patch = array( 'name' => $p_name );
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -252,7 +252,7 @@ class RestProjectVersionTests extends RestBase {
 		$t_version = $this->createVersion();
 		$t_version_patch = array( 'name' => strtoupper( $t_version['name'] ) );
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -265,10 +265,10 @@ class RestProjectVersionTests extends RestBase {
 
 		$t_version_patch = array( 'description' => 'test description' );
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 
 		$t_response = $this->builder()->get( $this->ver_base_url . $t_version['id'] )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_version_result = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_version_result['versions'] ) );
 		$t_version_result = $t_version_result['versions'][0];
@@ -277,7 +277,7 @@ class RestProjectVersionTests extends RestBase {
 
 		$t_version_patch = array( 'obsolete' => true );
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_version_result = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_version_result['version'] ) );
 		$t_version_result = $t_version_result['version'];
@@ -286,7 +286,7 @@ class RestProjectVersionTests extends RestBase {
 
 		$t_version_patch = array( 'released' => true );
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_version_result = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_version_result['version'] ) );
 		$t_version_result = $t_version_result['version'];
@@ -295,7 +295,7 @@ class RestProjectVersionTests extends RestBase {
 
 		$t_version_patch = array( 'timestamp' => time() );
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_version_result = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_version_result['version'] ) );
 		$t_version_result = $t_version_result['version'];
@@ -340,7 +340,7 @@ class RestProjectVersionTests extends RestBase {
 		$t_version_to_create = array( 'name' => $this->versionName() );
 
 		$t_response = $this->builder()->post( $this->ver_base_url, $t_version_to_create )->send();
-		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		$t_version = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_version['version'] ) );
 		$t_version = $t_version['version'];
@@ -358,7 +358,7 @@ class RestProjectVersionTests extends RestBase {
 
 		// Confirm version is created
 		$t_response = $this->builder()->get( $this->ver_base_url . $t_version['id'] )->send();
-		$this->assertEquals( 200, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		
 		return $t_version;
 	}
