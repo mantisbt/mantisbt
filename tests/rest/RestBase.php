@@ -40,7 +40,7 @@ require_once __DIR__ . '/../core/Faker.php';
  * @requires extension curl
  * @group REST
  */
-class RestBase extends PHPUnit\Framework\TestCase {
+abstract class RestBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
