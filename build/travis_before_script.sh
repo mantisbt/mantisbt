@@ -26,6 +26,10 @@ MANTIS_ANONYMOUS=anonymous
 
 TIMESTAMP=$(date "+%s")
 
+# To ensure we are not hit by unique key constraint when creating anonymous account,
+# we generate a random cookie_string like auth_generate_unique_cookie_string() does.
+COOKIE_STRING=$(head -c48 /dev/urandom |base64 |tr '+' '-' |tr '/' '_')
+
 SQL_CREATE_DB="CREATE DATABASE $MANTIS_DB_NAME;"
 SQL_CREATE_PROJECT="INSERT INTO mantis_project_table
 	(name, inherit_global, description)
@@ -42,15 +46,12 @@ SQL_CREATE_TAGS="INSERT INTO mantis_tag_table
 	VALUES
 	(0, 'modern-ui', '', $TIMESTAMP, $TIMESTAMP),
 	(0, 'patch', '', $TIMESTAMP, $TIMESTAMP);"
-# Anonymous user account - to ensure we are not hit by unique key constraint, we
-# generate a random cookie_string like auth_generate_unique_cookie_string() does.
 SQL_CREATE_ANONYMOUS_USER="INSERT INTO mantis_user_table
 	(username, realname, email, password, cookie_string,
 	 enabled, protected, access_level, last_visit, date_created)
 	VALUES
 	('$MANTIS_ANONYMOUS', 'Anonymous User', '$MANTIS_ANONYMOUS@localhost',
-	 MD5('123456'), REPLACE(REPLACE(TO_BASE64(RANDOM_BYTES(48)), '+', '-'), '/', '_'),
-	 1, 1, 10, $TIMESTAMP, $TIMESTAMP);"
+	 MD5('123456'), '$COOKIE_STRING', 1, 1, 10, $TIMESTAMP, $TIMESTAMP);"
 
 
 # -----------------------------------------------------------------------------
