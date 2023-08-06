@@ -30,7 +30,7 @@ require_once 'RestBase.php';
  *
  * @group REST
  */
-class RestProjectVersionTests extends RestBase {
+class RestProjectVersionTest extends RestBase {
 	/**
 	 * A prefix for project version APIs for the test project.
 	 * @var integer
