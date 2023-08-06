@@ -31,7 +31,7 @@ require_once 'RestBase.php';
  * @requires extension curl
  * @group REST
  */
-class RestUserTests extends RestBase {
+class RestUserTest extends RestBase {
 	/**
 	 * Setup test fixture
 	 *

@@ -26,10 +26,10 @@
 /**
  * Test config
  */
-require_once __DIR__ . '/RestImpersonateUserTests.php';
-require_once __DIR__ . '/RestIssueTests.php';
-require_once __DIR__ . '/RestProjectVersionTests.php';
-require_once __DIR__ . '/RestUserTests.php';
+require_once __DIR__ . '/RestImpersonateUserTest.php';
+require_once __DIR__ . '/RestIssueTest.php';
+require_once __DIR__ . '/RestProjectVersionTest.php';
+require_once __DIR__ . '/RestUserTest.php';
 
 /**
  * Soap Test Suite
@@ -54,10 +54,10 @@ class RestAllTests extends PHPUnit\Framework\TestSuite
 	public static function suite() {
 		$t_suite = new RestAllTests( 'REST API' );
 
-		$t_suite->addTestSuite( 'RestImpersonateUserTests' );
-		$t_suite->addTestSuite( 'RestIssueTests' );
-		$t_suite->addTestSuite( 'RestProjectVersionTests' );
-		$t_suite->addTestSuite( 'RestUserTests' );
+		$t_suite->addTestSuite( 'RestImpersonateUserTest' );
+		$t_suite->addTestSuite( 'RestIssueTest' );
+		$t_suite->addTestSuite( 'RestProjectVersionTest' );
+		$t_suite->addTestSuite( 'RestUserTest' );
 
 		return $t_suite;
 	}

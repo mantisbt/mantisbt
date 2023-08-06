@@ -31,7 +31,7 @@ require_once 'RestBase.php';
  * @requires extension curl
  * @group REST
  */
-class RestIssueTests extends RestBase {
+class RestIssueTest extends RestBase {
 
 	/**
 	 * @var array $versions
