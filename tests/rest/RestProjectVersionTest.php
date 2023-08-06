@@ -177,10 +177,7 @@ class RestProjectVersionTest extends RestBase {
 	 * @return void
 	 */
 	public function testProjectDeleteVersionAnonymous() {
-		// Skip test if anonymous login is not enabled
-		if( ! auth_anonymous_enabled() ) {
-			$this->markTestSkipped( 'Anonymous access is not enabled' );
-		};
+		$this->skipTestIfAnonymousDisabled();
 
 		$t_version = $this->createVersion();
 
