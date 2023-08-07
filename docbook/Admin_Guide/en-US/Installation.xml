@@ -340,8 +340,8 @@
 							<row>
 								<entry>PHP</entry>
 								<entry>PHP</entry>
-								<entry>7.0</entry>
-								<entry>7.4 or later</entry>
+								<entry>7.2.5</entry>
+								<entry>8.0 or later</entry>
 								<entry>See above for PHP extensions</entry>
 							</row>
 
