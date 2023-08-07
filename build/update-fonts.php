@@ -17,8 +17,8 @@
 /**
  * Download fonts files in WOFF, WOFF2 formats for local usage.
  *
- * Files are retrieved using google-webfonts-helper's REST API
- * @link https://google-webfonts-helper.herokuapp.com/fonts
+ * Files are retrieved using Mario Ranftl's google-webfonts-helper REST API
+ * @link https://gwfh.mranftl.com/fonts
  *
  * @package MantisBT
  * @copyright Copyright 2021  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -34,7 +34,7 @@ require_once( $g_mantis_root . 'core.php' );
  * Class FontDownload
  */
 class FontDownload {
-	const FONT_API_ROOT = 'https://google-webfonts-helper.herokuapp.com/api/fonts/';
+	const FONT_API_ROOT = 'https://gwfh.mranftl.com/api/fonts/';
 	const FONT_FORMATS = 'woff,woff2';
 	const FONT_VARIANTS = 'regular';
 
