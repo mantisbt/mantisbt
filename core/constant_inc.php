@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.25.8-dev' );
+define( 'MANTIS_VERSION', '2.26.0-dev' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -35,7 +35,7 @@ define( 'GOOD', 1 );
 define( 'WARN', 2 );
 
 # PHP-related constants
-define( 'PHP_MIN_VERSION', '5.5.0' );
+define( 'PHP_MIN_VERSION', '7.2.5' );
 define( 'PHP_CLI', 0 );
 define( 'PHP_CGI', 1 );
 
@@ -264,6 +264,7 @@ define( 'ERROR_SPAM_SUSPECTED', 27 );
 define( 'ERROR_FIELD_TOO_LONG', 28 );
 define( 'ERROR_INVALID_FIELD_VALUE', 29 );
 define( 'ERROR_LOGFILE_NOT_WRITABLE', 30 );
+define( 'ERROR_MONITOR_ACCESS_TOO_LOW', 31 );
 
 # ERROR_CONFIG_*
 define( 'ERROR_CONFIG_OPT_NOT_FOUND', 100 );
@@ -324,6 +325,7 @@ define( 'ERROR_USER_CURRENT_PASSWORD_MISMATCH', 812 );
 define( 'ERROR_USER_EMAIL_NOT_UNIQUE', 813 );
 define( 'ERROR_USER_BY_EMAIL_NOT_FOUND', 814 );
 define( 'ERROR_USER_BY_REALNAME_NOT_FOUND', 815 );
+define( 'ERROR_USER_TOKEN_NOT_FOUND', 816 );
 
 # ERROR_AUTH_*
 define( 'ERROR_AUTH_INVALID_COOKIE', 900 );
@@ -363,7 +365,7 @@ define( 'ERROR_LDAP_UNABLE_TO_STARTTLS', 1406 );
 
 # ERROR_CATEGORY_*
 define( 'ERROR_CATEGORY_DUPLICATE', 1500 );
-define( 'ERROR_CATEGORY_NO_ACTION', 1501 );
+define( 'ERROR_NO_COPY_ACTION', 1501 );
 define( 'ERROR_CATEGORY_NOT_FOUND', 1502 );
 define( 'ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT', 1503 );
 define( 'ERROR_CATEGORY_CANNOT_DELETE_DEFAULT', 1504 );
@@ -382,7 +384,6 @@ define( 'ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW', 1704 );
 define( 'ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL', 1705 );
 
 # ERROR RELATIONSHIP
-define( 'ERROR_RELATIONSHIP_ALREADY_EXISTS', 1800 );  # TODO: remove once no longer used in lang files
 define( 'ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW', 1801 );
 define( 'ERROR_RELATIONSHIP_NOT_FOUND', 1802 );
 define( 'ERROR_RELATIONSHIP_SAME_BUG', 1803 );
@@ -431,10 +432,6 @@ define( 'ERROR_COLUMNS_DUPLICATE', 2600 );
 define( 'ERROR_COLUMNS_INVALID', 2601 );
 
 # ERROR_SESSION_*
-define( 'ERROR_SESSION_HANDLER_INVALID', 2700 );
-# ERROR_SESSION_HANDLER_INVALID is no longer used in code
-# but can't be removed as long as it's used in one of the language files
-# for $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID]
 define( 'ERROR_SESSION_VAR_NOT_FOUND', 2701 );
 define( 'ERROR_SESSION_NOT_VALID', 2702 );
 
@@ -557,13 +554,6 @@ define( 'CUSTOM_FIELD_DATE_ON', 5 );
 define( 'CUSTOM_FIELD_DATE_AFTER', 6 );
 define( 'CUSTOM_FIELD_DATE_ONORAFTER', 7 );
 
-# custom field types
-define( 'CUSTOM_FIELD_TYPE_BUG', 0 );
-define( 'CUSTOM_FIELD_TYPE_USER', 1 );
-define( 'CUSTOM_FIELD_TYPE_BUGNOTE', 2 );
-define( 'CUSTOM_FIELD_TYPE_PROJECT', 3 );
-define( 'CUSTOM_FIELD_TYPE_FILE', 4 );
-
 # display types for $g_display_errors
 define( 'DISPLAY_ERROR_HALT', 'halt' );
 define( 'DISPLAY_ERROR_INLINE', 'inline' );
@@ -674,8 +664,8 @@ define( 'TYPEAHEAD_VERSION', '1.3.0' );
 define( 'TYPEAHEAD_HASH', 'sha256-VWMJXexFUMAwIXw/PoOzOleP6q97pIbKWuY4v9gMXoY=' );
 
 # List JS
-define( 'LISTJS_VERSION', '1.5.0' );
-define( 'LISTJS_HASH', 'sha384-JDmRxRiXkNkskRM5AD4qHRGk9ItwZ9flbqOpsRYs8SOrIRwcMtTGKP2Scnjptzgm' );
+define( 'LISTJS_VERSION', '2.3.1' );
+define( 'LISTJS_HASH', 'sha512-93wYgwrIFL+b+P3RvYxi/WUFRXXUDSLCT2JQk9zhVGXuS2mHl2axj6d+R6pP+gcU5isMHRj1u0oYE/mWyt/RjA==' );
 
 # Dropzone JS
 define( 'DROPZONE_VERSION', '5.5.0' );
