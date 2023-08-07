@@ -193,13 +193,16 @@ function user_update_cache( $p_user_id, $p_field, $p_value ) {
  *
  * @param string $p_field The user object field name to search the cache for.
  * @param mixed  $p_value The field value to look for in the cache.
+ * @param bool   $p_case_sensitive False to perform case-insensitive search; defaults to true.
+ *
  * @return integer|boolean
  */
-function user_search_cache( $p_field, $p_value ) {
+function user_search_cache( $p_field, $p_value, $p_case_sensitive = true ) {
 	global $g_cache_user;
 	if( isset( $g_cache_user ) ) {
+		$t_compare = $p_case_sensitive ? 'strcmp' : 'strcasecmp';
 		foreach( $g_cache_user as $t_user ) {
-			if( $t_user && $t_user[$p_field] == $p_value ) {
+			if( $t_user && 0 == $t_compare( $t_user[$p_field], $p_value ) ) {
 				return $t_user;
 			}
 		}
@@ -288,18 +291,20 @@ function user_is_email_unique( $p_email, $p_user_id = null ) {
 	}
 
 	$p_email = trim( $p_email );
+	// Escape SQL LIKE pattern chars to ensure exact match
+	$p_email = preg_replace( '/([%_])/', '\\\\$1', $p_email );
 
-	db_param_push();
-	if ( $p_user_id === null ) {
-		$t_query = 'SELECT email FROM {user} WHERE email=' . db_param();
-		$t_result = db_query( $t_query, array( $p_email ), 1 );
-	} else {
-		$t_query = 'SELECT email FROM {user} WHERE id<>' . db_param() .
-			' AND email=' . db_param();
-		$t_result = db_query( $t_query, array( $p_user_id, $p_email ), 1 );
+	$t_query = new DbQuery;
+	$t_query->sql( 'SELECT email FROM {user} WHERE '
+		// Case-insensitive like
+		. $t_query->sql_ilike( 'email', $p_email, '\\' )
+	);
+	if( $p_user_id !== null ) {
+		$t_query->append_sql( ' AND id<>' . $t_query->param( $p_user_id ) );
 	}
 
-	return !db_result( $t_result );
+	$t_query->execute();
+	return !$t_query->value();
 }
 
 /**
@@ -723,22 +728,36 @@ function user_get_id_by_name( $p_username, $p_throw = false ) {
 }
 
 /**
- * Get a user id from their email address
+ * Get a user's id from their email address.
+ *
+ * The check is case insensitive.
+ *
+ * This function should not be used when {@see $g_email_ensure_unique} is OFF:
+ * if there are multiple users found matching the given email, the function will
+ * not consider that to be an error, and arbitrarily return one of them (exactly
+ * which one is undetermined).
  *
  * @param string $p_email The email address to retrieve data for.
- * @param boolean $p_throw true to throw exception when not found, false otherwise.
- * @return integer|boolean
+ * @param bool   $p_throw True to throw exception when not found, false otherwise.
+ *
+ * @return int|false User Id or false if the email does not exist.
+ * @throws ClientException
  */
 function user_get_id_by_email( $p_email, $p_throw = false ) {
-	if( $t_user = user_search_cache( 'email', $p_email ) ) {
+	if( $t_user = user_search_cache( 'email', $p_email, false ) ) {
 		return (int)$t_user['id'];
 	}
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {user} WHERE email=' . db_param();
-	$t_result = db_query( $t_query, array( $p_email ) );
+	// Escape SQL LIKE pattern chars to ensure exact match
+	$p_email = preg_replace( '/([%_])/', '\\\\$1', $p_email );
 
-	$t_row = db_fetch_array( $t_result );
+	$t_query = new DbQuery;
+	$t_query->sql( 'SELECT * FROM {user} WHERE '
+		// Case-insensitive like
+		. $t_query->sql_ilike( 'email', $p_email, '\\' )
+	);
+	$t_row = $t_query->fetch();
+
 	if( $t_row ) {
 		user_cache_database_result( $t_row );
 		return (int)$t_row['id'];
