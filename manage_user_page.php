@@ -371,6 +371,7 @@ $t_user_count = count( $t_users );
 		<tbody>
 <?php
 	$t_date_format = config_get( 'normal_date_format' );
+	$t_unique_emails = config_get_global( 'email_ensure_unique' );
 	$t_access_level = array();
 	foreach( $t_users as $t_user ) {
 		/**
@@ -407,7 +408,15 @@ $t_user_count = count( $t_users );
 ?>
 				</td>
 				<td><?php echo string_display_line( $v_realname ) ?></td>
-				<td><?php print_email_link( $v_email, $v_email ) ?></td>
+				<td><?php
+					if( $t_unique_emails && !user_is_email_unique( $v_email, $v_id ) ) {
+						print_icon( 'fa-exclamation-triangle',
+							'ace-icon bigger-125 red padding-right-4',
+							lang_get( 'email_not_unique' )
+						);
+					}
+					print_email_link( $v_email, $v_email )
+				?></td>
 				<td><?php echo $t_access_level[$v_access_level] ?></td>
 				<td class="center"><?php echo trans_bool( $v_enabled ) ?></td>
 				<td class="center"><?php
