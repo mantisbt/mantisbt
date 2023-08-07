@@ -16,6 +16,7 @@
         "dapphp/securimage": "dev-mantis"
     },
     "require-dev": {
+        "ext-zip": "*",
         "phpunit/phpunit": "dev-mantis-6.5",
         "phpunit/php-code-coverage": "@dev",
         "phpunit/php-file-iterator": "@dev"
