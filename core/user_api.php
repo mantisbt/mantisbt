@@ -216,7 +216,7 @@ function user_search_cache( $p_field, $p_value, $p_case_sensitive = true ) {
 	global $g_cache_user;
 	if( isset( $g_cache_user ) ) {
 		$t_compare = $p_case_sensitive ? 'strcmp' : 'strcasecmp';
-		$t_value = $p_value ?? '';
+		$t_value = $p_value === null ? '' : $p_value;
 		foreach( $g_cache_user as $t_user ) {
 			if( $t_user && 0 == $t_compare( $t_user[$p_field], $t_value ) ) {
 				return $t_user;
