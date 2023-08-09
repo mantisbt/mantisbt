@@ -99,10 +99,7 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var array Soap Client Options Array
 	 */
-	private   $defaultSoapClientOptions = array(  'trace'      => true,
-												  'exceptions' => true,
-												  'cache_wsdl' => WSDL_CACHE_NONE
-											   );
+	private $defaultSoapClientOptions;
 
 	/**
 	 * setUp
@@ -116,6 +113,12 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 		$t_wsdl = $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] ?? '';
 		$this->assertTrue( !empty( $t_wsdl ),
 			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file"
+		);
+
+		$this->defaultSoapClientOptions = array(
+			'trace'      => true,
+			'exceptions' => true,
+			'cache_wsdl' => WSDL_CACHE_NONE,
 		);
 
 		$this->client = new SoapClient( $t_wsdl,
