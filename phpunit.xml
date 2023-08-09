@@ -1,0 +1,23 @@
+<!--
+    MantisBT PHPUnit configuration
+-->
+<phpunit
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+    >
+
+    <testsuites>
+        <testsuite name="mantis">
+            <directory>tests/Mantis</directory>
+        </testsuite>
+
+        <testsuite name="soap">
+            <directory>tests/soap</directory>
+        </testsuite>
+
+        <testsuite name="rest">
+            <directory>tests/rest</directory>
+        </testsuite>
+    </testsuites>
+
+</phpunit>
