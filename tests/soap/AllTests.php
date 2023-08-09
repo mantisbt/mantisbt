@@ -56,16 +56,6 @@ require_once 'MentionTest.php';
 class SoapAllTests extends PHPUnit\Framework\TestSuite
 {
 	/**
-	 * setUp
-	 * @return void
-	 */
-	protected function setUp() {
-		if( ! extension_loaded( 'soap' ) ) {
-			$this->markTestSuiteSkipped( 'The SOAP extension is not available.' );
-		}
-	}
-
-	/**
 	 * Initialises Soap Test Suite
 	 * @return SoapAllTests
 	 */
