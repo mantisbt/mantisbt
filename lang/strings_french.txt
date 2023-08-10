@@ -778,6 +778,7 @@ $s_reset_password_msg2 = 'Réinitialiser le mot de passe le laisse à blanc : 
 $s_show_all_users = 'Tous';
 $s_users_unused = 'Inutilisé';
 $s_users_new = 'Nouveau';
+$s_email_not_unique = 'L’adresse de messagerie est associée avec au moins un autre compte utilisateur';
 $s_account_reset_msg = 'Un message de confirmation a été envoyé à l’adresse courriel de l’utilisateur sélectionné. Grace à ceci, l’utilisateur sera en mesure de modifier son mot de passe.';
 $s_account_reset_msg2 = 'Mot de passe du compte a été mis à blanc...';
 $s_account_unlock_msg = 'Le compte a été déverrouillé.';

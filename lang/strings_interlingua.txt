@@ -747,6 +747,7 @@ $s_reset_password_msg2 = 'Le reinitialisation del contrasigno lo rende vacue.';
 $s_show_all_users = 'Totes';
 $s_users_unused = 'Non usate';
 $s_users_new = 'Nove';
+$s_email_not_unique = 'Le adresse de e-mail es associate con al minus un altere conto de usator';
 $s_account_reset_msg = 'Un requesta de confirmation ha essite inviate al adresse de e-mail del usator seligite. Usante iste, le usator potera cambiar su contrasigno.';
 $s_account_reset_msg2 = 'Le contrasigno del conto ha essite mittite in blanco...';
 $s_account_unlock_msg = 'Le conto ha essite disblocate.';
