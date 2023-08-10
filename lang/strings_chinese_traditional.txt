@@ -766,6 +766,7 @@ $s_reset_password_msg2 = '重新設定密碼為空白。';
 $s_show_all_users = '全部';
 $s_users_unused = '未使用';
 $s_users_new = '新增';
+$s_email_not_unique = '電子郵件地址至少要與一名其他使用者帳號相關';
 $s_account_reset_msg = '確認訊息已寄送至選擇使用者的電子郵件信箱，
 使用此功能，使用者將可以更改自己的密碼。';
 $s_account_reset_msg2 = '此帳號的密碼已設為空白...';
