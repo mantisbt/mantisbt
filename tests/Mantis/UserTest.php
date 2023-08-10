@@ -35,6 +35,7 @@ require_once 'MantisCoreBase.php';
  */
 class MantisUserApiTest extends MantisCoreBase {
 
+	/** @var string Use of reserved TLD '.test' per RFC2606 */
 	const TEST_EMAIL = 'test@uniqueness.test';
 
 	protected static $user_id;
@@ -81,6 +82,9 @@ class MantisUserApiTest extends MantisCoreBase {
 	 * @return array [email_address, user_id, unique]
 	 */
 	public function providerEmailUnique() {
+		[$t_user, $t_domain] = explode( '@', self::TEST_EMAIL );
+		$t_user_sql_like_pattern = substr_replace( $t_user, '_', 1, 1 );
+
 		return [
 			"Existing email, new user"
 				=> array( self::TEST_EMAIL, null, false ),
@@ -91,9 +95,9 @@ class MantisUserApiTest extends MantisCoreBase {
 			"Existing email with different case"
 				=> array( ucfirst(self::TEST_EMAIL), null, false ),
 			"Email matching SQL LIKE pattern"
-				=> array( 't_st@uniqueness.test', null, true ),
+				=> array( "$t_user_sql_like_pattern@$t_domain", null, true ),
 			"Non-existing email"
-				=> array( 'unique@uniqueness.test', null, true ),
+				=> array( "unique@$t_domain", null, true ),
 		];
 	}
 
