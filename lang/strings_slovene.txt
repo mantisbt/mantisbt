@@ -472,6 +472,7 @@ $s_reset_password_msg = 'Ponastavljanje gesla ustvari naključno ustvarjeno gesl
 $s_reset_password_msg2 = 'Ponastavljanje gesla nastavi prazno geslo.';
 $s_show_all_users = 'Vsi';
 $s_users_new = 'Novo';
+$s_email_not_unique = 'E-poštni naslov je povezan z vsaj enim drugim uporabniškim računom';
 $s_account_reset_msg = 'Ustvaril sem novo geslo in ga poslal uporabniku..';
 $s_account_reset_msg2 = 'Geslo je bilo postavljeno na prazno...';
 $s_manage_user_updated_msg = 'Račun uspešno posodobljen...';
