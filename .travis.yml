@@ -20,6 +20,13 @@ install:
 before_script:
   # Ignore E_DEPRECATED notices when running PHP 8.1 builds
   - if php -r "exit( (int)! version_compare( '$TRAVIS_PHP_VERSION', '8.1', '>=' ) );"; then echo 'error_reporting = E_ALL & ~E_DEPRECATED' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/mantis_php81.ini; fi
+
+  # sendmail replacement
+  - chmod +x "$TRAVIS_BUILD_DIR/tests/fakesendmail.sh"
+  - echo 'sendmail_path = $TRAVIS_BUILD_DIR/tests/fakesendmail.sh' > ./tests/sendmail.ini
+  - phpenv config-add ./tests/sendmail.ini
+
+  # MantisBT setup
   - ./build/travis_before_script.sh
 
 script:
