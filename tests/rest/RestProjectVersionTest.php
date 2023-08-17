@@ -168,7 +168,7 @@ class RestProjectVersionTest extends RestBase {
 
 		// Delete a version that doesn't exists
 		$t_response = $this->builder()->delete( $this->ver_base_url . $t_version['id'] )->send();
-		$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
 
 	/**
