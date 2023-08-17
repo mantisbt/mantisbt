@@ -77,12 +77,9 @@ class VersionDeleteCommand extends Command {
 			throw new ClientException( 'Access denied to delete version', ERROR_ACCESS_DENIED );
 		}
 
-		$this->version_id = helper_parse_id( $this->query( 'version_id' ), 'version_id' );
-		if( !version_exists( $this->version_id ) ) {
-			return;
-		}
-
 		# Make sure that version belongs to the project
+		# No need to check if version exists, version_get_field() will take care of it
+		$this->version_id = helper_parse_id( $this->query( 'version_id' ), 'version_id' );
 		$t_project_id_from_version = version_get_field( $this->version_id, 'project_id' );
 		if( $t_project_id_from_version !== $this->project_id ) {
 			throw new ClientException(
@@ -98,10 +95,6 @@ class VersionDeleteCommand extends Command {
 	 * @return void
 	 */
 	protected function process() {
-		if( !version_exists( $this->version_id ) ) {
-			return;
-		}
-
 		global $g_project_override;
 
 		$t_prev_project_id = $g_project_override;
