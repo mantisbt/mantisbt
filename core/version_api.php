@@ -209,17 +209,18 @@ function version_cache_row( $p_version_id ) {
 
 	$c_version_id = (int)$p_version_id;
 
-	if( isset( $g_cache_versions[$c_version_id] ) ) {
-		return $g_cache_versions[$c_version_id];
+	if( empty( $g_cache_versions[$c_version_id] ) ) {
+		db_param_push();
+		$t_query = 'SELECT * FROM {project_version} WHERE id=' . db_param();
+		$t_result = db_query( $t_query, array( $c_version_id ) );
+		$t_row = db_fetch_array( $t_result );
+
+		$g_cache_versions[$c_version_id] = $t_row;
+	} else {
+		$t_row = $g_cache_versions[$c_version_id];
 	}
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {project_version} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $c_version_id ) );
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
-		$g_cache_versions[$c_version_id] = false;
+	if( false === $t_row ) {
 		throw new ClientException(
 			"Version with id $p_version_id not found",
 			ERROR_VERSION_NOT_FOUND,
@@ -227,7 +228,6 @@ function version_cache_row( $p_version_id ) {
 		);
 	}
 
-	$g_cache_versions[$c_version_id] = $t_row;
 	return $t_row;
 }
 
@@ -279,11 +279,11 @@ function version_cache_array_rows( array $p_project_ids ) {
  */
 function version_exists( $p_version_id ) {
 	try {
-		version_cache_row( $p_version_id );
+		$t_exists = (bool)version_cache_row( $p_version_id );
 	} catch( ClientException $e ) {
 		return false;
 	}
-	return true;
+	return $t_exists;
 }
 
 /**
