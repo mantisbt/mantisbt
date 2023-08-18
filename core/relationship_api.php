@@ -687,13 +687,13 @@ function relationship_get_description_dest_side( $p_relationship_type ) {
 /**
  * Get class description of a relationship as it's stored in the history.
  *
- * @param int $p_relationship_code Relationship Type.
+ * @param int $p_relationship_type Relationship Type.
  *
  * @return string Relationship description
  * @throws ClientException if the relationship type does not exist.
  */
-function relationship_get_description_for_history( $p_relationship_code ) {
-	return relationship_get_description_src_side( $p_relationship_code );
+function relationship_get_description_for_history( $p_relationship_type ) {
+	return relationship_get_description_src_side( $p_relationship_type );
 }
 
 /**
