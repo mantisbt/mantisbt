@@ -31,15 +31,7 @@ require_once 'RestBase.php';
  * @requires extension curl
  * @group REST
  */
-class RestUserTest extends RestBase {
-	/**
-	 * Setup test fixture
-	 *
-	 * @return void
-	 */
-	public function setUp() {
-		parent::setUp();
-	}
+class RestUserTests extends RestBase {
 
 	/**
 	 * Test /users/me API which users use to get information about themselves.
@@ -604,10 +596,4 @@ class RestUserTest extends RestBase {
 		);
 	}
 
-	/**
-	 * Tear down the test fixture.
-	 */
-	public function tearDown() {
-		parent::tearDown();
-	}
 }

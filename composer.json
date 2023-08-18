@@ -7,7 +7,7 @@
         "ext-mbstring": "*",
         "ext-json": "*",
         "slim/slim": "^3.0",
-        "guzzlehttp/guzzle": "^6.2",
+        "guzzlehttp/guzzle": "^7.5",
         "vboctor/disposable_email_checker": "^3.0",
         "adodb/adodb-php": "^5.20.21",
         "phpmailer/phpmailer": "~6.0",
@@ -17,29 +17,12 @@
     },
     "require-dev": {
         "ext-zip": "*",
-        "phpunit/phpunit": "dev-mantis-6.5",
-        "phpunit/php-code-coverage": "@dev",
-        "phpunit/php-file-iterator": "@dev"
+        "phpunit/phpunit": "^8.5"
     },
     "repositories": [
         {
             "type": "vcs",
             "url": "https://github.com/mantisbt/securimage",
-            "no-api": true
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/mantisbt/phpunit",
-            "no-api": true
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/mantisbt/php-code-coverage",
-            "no-api": true
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/mantisbt/php-file-iterator",
             "no-api": true
         }
     ],

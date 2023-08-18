@@ -398,12 +398,25 @@ git merge master
 			MantisBT has a suite of
 			<ulink url="https://www.phpunit.de">PHPUnit</ulink> tests,
 			which can be found in the <literal>/tests</literal> directory.
-			It is organized in 3 main sections:
+			It is organized in 3 distinct <emphasis>Test Suites</emphasis>,
+			defined in the <literal>phpunit.xml</literal> file:
 		</para>
 		<itemizedlist>
-			<listitem><para>MantisBT Core tests</para></listitem>
-			<listitem><para>SOAP API tests</para></listitem>
-			<listitem><para>REST API tests</para></listitem>
+			<listitem>
+				<para>
+					<literal>mantis</literal>: MantisBT Core tests
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>soap</literal>: SOAP API tests
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>rest</literal>: REST API tests
+				</para>
+			</listitem>
 		</itemizedlist>
 
 		<warning>
@@ -419,6 +432,20 @@ git merge master
 			You are encouraged to improve the test suite, by adding new tests
 			for the patches you are submitting.
 			Please remember that your changes must not break existing tests.
+		</para>
+		<para>
+			New Tests should be stored in the subdirectory corresponding to the
+			Test Suite they belong to; the file should be named
+			<literal>XxxxxTest.php</literal>, where
+			<emphasis>Xxxxx</emphasis> is the Test's name.
+			The <emphasis>Test.php</emphasis> suffix allows the script to be
+			automatically picked up by PHPUnit when running the Test Suite.
+			Without this suffix, the new script will have to be
+			<ulink url="https://docs.phpunit.de/en/8.5/configuration.html#the-testsuite-element">
+				declared manually</ulink>
+			with a <literal>&lt;file&gt;</literal> tag
+			in the <literal>phpunit.xml</literal> file's
+			relevant <literal>&lt;testsuite&gt;</literal> section.
 		</para>
 
 		<section id="dev.contrib.test.setup">
@@ -545,7 +572,8 @@ $g_anonymous_account = 'username'; # of the anonymous account created above
 					<term>SOAP extension</term>
 					<listitem>
 						<para>
-							The <ulink url="https://www.php.net/manual/en/book.soap.php">PHP SOAP extension</ulink>
+							The <ulink url="https://www.php.net/manual/en/book.soap.php">
+								PHP SOAP extension</ulink>
 							is required to run the SOAP tests.
 						</para>
 					</listitem>
@@ -563,20 +591,21 @@ $g_anonymous_account = 'username'; # of the anonymous account created above
 				repository's root
 			</para>
 			<programlisting>
-./vendor/bin/phpunit --bootstrap tests/bootstrap.php tests
+./vendor/bin/phpunit
 			</programlisting>
 
 			<para>
 				Execution can be limited to a subset or individual test units
 			</para>
 			<programlisting>
-./vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/rest
-./vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/core/Mantis/ConfigParserTest.php
+./vendor/bin/phpunit --testsuite rest
+./vendor/bin/phpunit tests/Mantis/ConfigParserTest.php
 			</programlisting>
 
 			<para>
 				For further details and options, refer to the
-				<ulink url="https://docs.phpunit.de/en/8.5/">PHPUnit manual</ulink>.
+				<ulink url="https://docs.phpunit.de/en/9.6/textui.html#command-line-options">
+					PHPUnit manual</ulink>.
 			</para>
 
 		</section>

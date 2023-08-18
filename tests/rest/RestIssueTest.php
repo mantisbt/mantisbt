@@ -473,7 +473,7 @@ class RestIssueTest extends RestBase {
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
 
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		# Retrieve the 3 most recent versions
@@ -487,7 +487,7 @@ class RestIssueTest extends RestBase {
 		} while( !tag_is_unique( $this->tag_name ) );
 	}
 
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 
 		# Delete tag if it exists

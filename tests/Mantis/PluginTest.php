@@ -55,7 +55,7 @@ class MantisPluginTest extends MantisCoreBase {
 	/**
 	 * Tests setup.
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		plugin_register(self::MANTISCORE);
 	}
 
