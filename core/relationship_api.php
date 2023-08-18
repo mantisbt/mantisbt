@@ -614,7 +614,10 @@ function relationship_get_linked_bug_id( $p_relationship_id, $p_bug_id ) {
 		return $t_bug_relationship_data->src_bug_id;
 	}
 
-	trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+	throw new ClientException(
+		sprintf( "Unknown relationship '%d' for issue '%d'", $p_relationship_id, $p_bug_id ),
+		ERROR_RELATIONSHIP_NOT_FOUND
+	);
 }
 
 /**
