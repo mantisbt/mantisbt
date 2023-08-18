@@ -40,7 +40,7 @@ require_once __DIR__ . '/../core/Faker.php';
  * @requires extension curl
  * @group REST
  */
-class RestBase extends PHPUnit\Framework\TestCase {
+abstract class RestBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
@@ -94,7 +94,7 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	 * setUp
 	 * @return void
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		if( !isset( $GLOBALS['MANTIS_TESTSUITE_REST_ENABLED'] ) ||
 			!$GLOBALS['MANTIS_TESTSUITE_REST_ENABLED'] ) {
 			$this->markTestSkipped( 'The REST API tests are disabled.' );
@@ -131,7 +131,7 @@ class RestBase extends PHPUnit\Framework\TestCase {
 	 * tearDown
 	 * @return void
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 		foreach( $this->usersToDelete as $t_user_id ) {
 			$t_response = $this->builder()->delete( '/users/' . $t_user_id, '' )->send();
 			$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
@@ -244,10 +244,10 @@ class RestBase extends PHPUnit\Framework\TestCase {
 
 			if( isset( $t_body['users'] ) ) {
 				$t_users = $t_body['users'];
-				$t_user_id = (int)$t_users[0]['id'];	
+				$t_user_id = (int)$t_users[0]['id'];
 			} if( isset( $t_body['user'] ) ) {
 				$t_user = $t_body['user'];
-				$t_user_id = (int)$t_user['id'];	
+				$t_user_id = (int)$t_user['id'];
 			} else {
 				$t_user_id = (int)$t_body['id'];
 			}

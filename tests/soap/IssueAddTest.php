@@ -350,7 +350,10 @@ class IssueAddTest extends SoapBase {
 
 			$this->fail( 'Invalid version did not raise error.' );
 		} catch ( SoapFault $e ) {
-			$this->assertContains( "Version 'noSuchVersion' does not exist in project", $e->getMessage() );
+			$this->assertStringContainsString(
+				"Version 'noSuchVersion' does not exist in project",
+				$e->getMessage()
+			);
 		}
 	}
 
@@ -525,8 +528,8 @@ class IssueAddTest extends SoapBase {
         $t_search_result_headers = $this->client->mc_issues_get_header( $this->userName, $this->password, array( $t_issue_id, $t_issue_id_2 ) );
 
         $this->assertEquals( 2, count( $t_search_result_headers ));
-        $this->assertContains( 'testIssuesGet-1', $t_search_result_headers[0]->summary );
-        $this->assertContains( 'testIssuesGet-2', $t_search_result_headers[1]->summary );
+        $this->assertStringContainsString( 'testIssuesGet-1', $t_search_result_headers[0]->summary );
+        $this->assertStringContainsString( 'testIssuesGet-2', $t_search_result_headers[1]->summary );
 
         $this->assertEquals( VS_PUBLIC, $t_search_result_headers[0]->view_state );
         $this->assertEquals( 0, $t_search_result_headers[0]->notes_count );
@@ -534,8 +537,8 @@ class IssueAddTest extends SoapBase {
         $this->assertEquals( 10, $t_search_result_headers[0]->status );
 
         $this->assertEquals( 2, count( $t_search_result_issues ));
-        $this->assertContains( 'testIssuesGet-1', $t_search_result_issues[0]->summary );
-        $this->assertContains( 'testIssuesGet-2', $t_search_result_issues[1]->summary );
+        $this->assertStringContainsString( 'testIssuesGet-1', $t_search_result_issues[0]->summary );
+        $this->assertStringContainsString( 'testIssuesGet-2', $t_search_result_issues[1]->summary );
 
         $this->assertEquals( VS_PUBLIC, $t_search_result_issues[0]->view_state->id);
         $this->assertEquals( 10, $t_search_result_issues[0]->status->id );

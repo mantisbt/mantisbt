@@ -31,22 +31,7 @@ require_once 'RestBase.php';
  * @requires extension curl
  * @group REST
  */
-class RestImpersonateUserTest extends RestBase {
-	/**
-	 * Setup test fixture
-	 *
-	 * @return void
-	 */
-	public function setUp() {
-		parent::setUp();
-	}
-
-	/**
-	 * Tear down the test fixture.
-	 */
-	public function tearDown() {
-		parent::tearDown();
-	}
+class RestImpersonateUserTests extends RestBase {
 
 	/**
 	 * Test /users/me API without impersonation

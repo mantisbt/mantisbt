@@ -42,7 +42,7 @@ class RestProjectVersionTest extends RestBase {
 	 *
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->ver_base_url = '/projects/' . $this->getProjectId() . '/versions/';
