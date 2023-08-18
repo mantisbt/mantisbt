@@ -227,6 +227,41 @@ function relationship_get_complementary_type( $p_relationship_type ) {
 }
 
 /**
+ * Prepare source and destination bug id and relationship type for assignment.
+ *
+ * Directional relationships (e.g. parent/child) must be normalized to the
+ * "forward" direction prior to creating or updating a relationship record.
+ * If $p_relationship_type is backwards, we get the type's complement and swap
+ * the source and destination bug ids.
+ *
+ * @param int $p_src_bug_id
+ * @param int $p_dest_bug_id
+ * @param int $p_relationship_type
+ *
+ * @return array Prepared data for database insert/update query
+ * @internal
+ */
+function relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
+	global $g_relationships;
+
+	if( $g_relationships[$p_relationship_type]['#forward'] === false ) {
+		# Invert backwards relationships
+		$t_data = array(
+			(int)$p_dest_bug_id,
+			(int)$p_src_bug_id,
+			relationship_get_complementary_type( $p_relationship_type )
+		);
+	} else {
+		$t_data = array(
+			(int)$p_src_bug_id,
+			(int)$p_dest_bug_id,
+			(int)$p_relationship_type
+		);
+	}
+	return $t_data;
+}
+
+/**
  * Add a new relationship.
  *
  * @param int  $p_src_bug_id        Source Bug Id.
@@ -237,23 +272,13 @@ function relationship_get_complementary_type( $p_relationship_type ) {
  * @return int The new bug relationship id.
  */
 function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
-	global $g_relationships;
-	if( $g_relationships[$p_relationship_type]['#forward'] === false ) {
-		$c_src_bug_id = (int)$p_dest_bug_id;
-		$c_dest_bug_id = (int)$p_src_bug_id;
-		$c_relationship_type = (int)relationship_get_complementary_type( $p_relationship_type );
-	} else {
-		$c_src_bug_id = (int)$p_src_bug_id;
-		$c_dest_bug_id = (int)$p_dest_bug_id;
-		$c_relationship_type = (int)$p_relationship_type;
-	}
-
 	db_param_push();
 	$t_query = 'INSERT INTO {bug_relationship}
 				( source_bug_id, destination_bug_id, relationship_type )
 				VALUES
 				( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-	db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
+	$t_param = relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+	db_query( $t_query, $t_param );
 
 	$t_relationship_id = db_insert_id( db_get_table( 'bug_relationship' ) );
 
@@ -280,24 +305,15 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, 
  * @return void
  */
 function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
-	global $g_relationships;
-	if( $g_relationships[$p_relationship_type]['#forward'] === false ) {
-		$c_src_bug_id = (int)$p_dest_bug_id;
-		$c_dest_bug_id = (int)$p_src_bug_id;
-		$c_relationship_type = (int)relationship_get_complementary_type( $p_relationship_type );
-	} else {
-		$c_src_bug_id = (int)$p_src_bug_id;
-		$c_dest_bug_id = (int)$p_dest_bug_id;
-		$c_relationship_type = (int)$p_relationship_type;
-	}
-
 	db_param_push();
 	$t_query = 'UPDATE {bug_relationship}
 				SET source_bug_id=' . db_param() . ',
 					destination_bug_id=' . db_param() . ',
 					relationship_type=' . db_param() . '
 				WHERE id=' . db_param();
-	db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, (int)$p_relationship_id ) );
+	$t_param = relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+	$t_param[] = (int)$p_relationship_id;
+	db_query( $t_query, $t_param );
 
 	history_log_event_special( $p_src_bug_id, BUG_REPLACE_RELATIONSHIP, $p_relationship_type, $p_dest_bug_id );
 	history_log_event_special( $p_dest_bug_id, BUG_REPLACE_RELATIONSHIP, relationship_get_complementary_type( $p_relationship_type ), $p_src_bug_id );
