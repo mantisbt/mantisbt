@@ -331,6 +331,7 @@ function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_typ
  * @param integer $p_relationship_id Relationship Id to update.
  * @param bool $p_send_email Send email?
  * @return void
+ * @throws ClientException If the relationship does not exist.
  */
 function relationship_delete( $p_relationship_id, $p_send_email = true ) {
 	$t_relationship = relationship_get( $p_relationship_id );
@@ -401,9 +402,12 @@ function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
 }
 
 /**
- * get a relationship from id
+ * Get a relationship's data from its Id.
+ *
  * @param integer $p_relationship_id Relationship Identifier.
- * @return null|BugRelationshipData BugRelationshipData object
+ *
+ * @return BugRelationshipData BugRelationshipData object
+ * @throws ClientException If the relationship does not exist.
  */
 function relationship_get( $p_relationship_id ) {
 	db_param_push();
@@ -419,7 +423,10 @@ function relationship_get( $p_relationship_id ) {
 		$t_bug_relationship_data->dest_bug_id = $t_relationship['destination_bug_id'];
 		$t_bug_relationship_data->type = $t_relationship['relationship_type'];
 	} else {
-		$t_bug_relationship_data = null;
+		throw new ClientException(
+			sprintf( "Unknown relationship '%d'", $p_relationship_id ),
+			ERROR_RELATIONSHIP_NOT_FOUND
+		);
 	}
 
 	return $t_bug_relationship_data;
@@ -563,14 +570,16 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
  * @param integer $p_dest_bug_id Destination Bug Id.
  * @param integer $p_rel_type    Relationship Type.
  * @return integer 0, -1 or id
+ *
+ * @noinspection PhpDocMissingThrowsInspection
  */
 function relationship_same_type_exists( $p_src_bug_id, $p_dest_bug_id, $p_rel_type ) {
 	# Check if there is already a relationship set between them
 	$t_id_relationship = relationship_exists( $p_src_bug_id, $p_dest_bug_id );
 
 	if( $t_id_relationship > 0 ) {
-		# if there is...
-		# get all the relationship info
+		# The relationship exists, get all the info
+		/** @noinspection PhpUnhandledExceptionInspection */
 		$t_relationship = relationship_get( $t_id_relationship );
 
 		if( $t_relationship->src_bug_id == $p_src_bug_id && $t_relationship->dest_bug_id == $p_dest_bug_id ) {
@@ -591,6 +600,8 @@ function relationship_same_type_exists( $p_src_bug_id, $p_dest_bug_id, $p_rel_ty
  * @param integer $p_relationship_id Relationship id.
  * @param integer $p_bug_id          A bug identifier.
  * @return int Complementary bug id
+ *
+ * @throws ClientException If the relationship does not exist.
  */
 function relationship_get_linked_bug_id( $p_relationship_id, $p_bug_id ) {
 	$t_bug_relationship_data = relationship_get( $p_relationship_id );
