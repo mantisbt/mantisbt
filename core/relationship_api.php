@@ -206,7 +206,8 @@ function relationship_type_ensure_valid( $p_relationship_type ) {
 	if( !is_numeric( $p_relationship_type ) || !isset( $g_relationships[$p_relationship_type] ) ) {
 		throw new ClientException(
 			sprintf( "Relation type '%s' not found.", $p_relationship_type ),
-			ERROR_RELATIONSHIP_NOT_FOUND
+			ERROR_INVALID_FIELD_VALUE,
+			['relationship_type']
 		);
 	}
 }
