@@ -198,6 +198,7 @@ if( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.
  * @param int $p_relationship_type The relationship type id.
  *
  * @return void
+ * @throws ClientException if the relationship type is not valid.
  */
 function relationship_type_ensure_valid( $p_relationship_type ) {
 	global $g_relationships;
@@ -378,6 +379,7 @@ function relationship_delete( $p_relationship_id, $p_send_email = true ) {
  * @param int $p_bug_id A bug Identifier.
  *
  * @return void
+ * @throws ClientException
  */
 function relationship_delete_all( $p_bug_id ) {
 	$t_is_different_projects = false;
@@ -394,6 +396,7 @@ function relationship_delete_all( $p_bug_id ) {
  * @param int $p_new_bug_id Destination bug identifier.
  *
  * @return void
+ * @throws ClientException if the bug does not exist.
  */
 function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
 	$t_relationships = relationship_get_all_src( $p_bug_id );
@@ -452,6 +455,7 @@ function relationship_get( $p_relationship_id ) {
  * @param int $p_src_bug_id Source Bug identifier.
  *
  * @return array Array of BugRelationshipData objects
+ * @throws ClientException if the bug does not exist.
  */
 function relationship_get_all_src( $p_src_bug_id ) {
 	db_param_push();
@@ -495,6 +499,7 @@ function relationship_get_all_src( $p_src_bug_id ) {
  * @param int $p_dest_bug_id Destination bug identifier.
  *
  * @return BugRelationshipData[]
+ * @throws ClientException if the bug does not exist.
  */
 function relationship_get_all_dest( $p_dest_bug_id ) {
 	db_param_push();
@@ -539,6 +544,7 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
  *                                       some relationships cross project boundaries.
  *
  * @return array Array of BugRelationshipData objects
+ * @throws ClientException if the bug does not exist.
  */
 function relationship_get_all( $p_bug_id, &$p_is_different_projects ) {
 	$t_src = relationship_get_all_src( $p_bug_id );
@@ -653,6 +659,7 @@ function relationship_get_linked_bug_id( $p_relationship_id, $p_bug_id ) {
  * @param int $p_relationship_type Relationship type.
  *
  * @return string Relationship description
+ * @throws ClientException if the relationship type does not exist.
  */
 function relationship_get_description_src_side( $p_relationship_type ) {
 	global $g_relationships;
@@ -666,6 +673,7 @@ function relationship_get_description_src_side( $p_relationship_type ) {
  * @param int $p_relationship_type Relationship type.
  *
  * @return string Relationship description
+ * @throws ClientException if the relationship type does not exist.
  */
 function relationship_get_description_dest_side( $p_relationship_type ) {
 	global $g_relationships;
@@ -682,6 +690,7 @@ function relationship_get_description_dest_side( $p_relationship_type ) {
  * @param int $p_relationship_code Relationship Type.
  *
  * @return string Relationship description
+ * @throws ClientException if the relationship type does not exist.
  */
 function relationship_get_description_for_history( $p_relationship_code ) {
 	return relationship_get_description_src_side( $p_relationship_code );
@@ -693,6 +702,7 @@ function relationship_get_description_for_history( $p_relationship_code ) {
  * @param int $p_relationship_type Relationship Type.
  *
  * @return string Relationship API name
+ * @throws ClientException if the relationship type does not exist.
  */
 function relationship_get_name_for_api( $p_relationship_type ) {
 	global $g_relationships;
@@ -747,6 +757,7 @@ function relationship_get_id_from_api_name( $p_relationship_type_name ) {
  * @param int $p_bug_id A bug identifier.
  *
  * @return bool
+ * @throws ClientException if the bug does not exist.
  */
 function relationship_can_resolve_bug( $p_bug_id ) {
 	# retrieve all the relationships in which the bug is the source bug
