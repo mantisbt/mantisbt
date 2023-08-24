@@ -747,6 +747,7 @@ $s_reset_password_msg2 = 'Ši galimybė pakeičia slaptažodį tuščiu.';
 $s_show_all_users = 'VISI';
 $s_users_unused = 'Nenaudotas';
 $s_users_new = 'Naujas';
+$s_email_not_unique = 'El. pašto adresas susijęs su dar bent viena naudotojo paskyra';
 $s_account_reset_msg = 'Patvirtinimo kodas nusiųstas į jūsų el. pašto dėžutę...';
 $s_account_reset_msg2 = 'Slaptažodis pakeistas į tuščią...';
 $s_account_unlock_msg = 'Paskyra atrakinta.';
