@@ -576,22 +576,11 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
-	if( is_blank( $t_project_id ) ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Mandatory field 'id' is missing." );
-	}
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
-	$t_project_id = (int)$t_project_id;
-	if( $t_project_id == ALL_PROJECTS || $t_project_id < 1 ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid project id." );
-	}
+	$t_data = array( 'query' => array( 'id' => $t_project_id ) );
+	$t_command = new ProjectDeleteCommand( $t_data );
+	$t_command->execute();
 
-	$t_user_id = auth_get_current_user_id();
-	if( !project_exists( $t_project_id ) || !access_has_project_level( config_get( 'delete_project_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
-		return $p_response->withStatus( HTTP_STATUS_FORBIDDEN, "Access denied for deleting project." );
-	}
-
-	project_delete( $t_project_id );
-
-	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id deleted." );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Project with id $t_project_id deleted." );
 }
