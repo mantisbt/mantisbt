@@ -72,10 +72,12 @@ class RestUserTests extends RestBase {
 	 * Test the use of POST /users to create users with just a username
 	 *
 	 * @dataProvider providerValidUserNames
+	 *
+	 * @param string $p_username
 	 */
 	public function testCreateUserMinimal( $p_username ) {
 		$t_user_to_create = array(
-			'name' => Faker::username()
+			'name' => $p_username
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
