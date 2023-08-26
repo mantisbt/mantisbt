@@ -55,8 +55,10 @@ class TagDetachCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 *
+	 * @throws ClientException
 	 */
-	function validate() {		
+	function validate() {
 		$this->issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
 		$this->tag_id = $this->query( 'tag_id' );
 		$this->user_id = auth_get_current_user_id();
@@ -67,6 +69,8 @@ class TagDetachCommand extends Command {
 				ERROR_INVALID_FIELD_VALUE,
 				array( 'tag_id' ) );
 		}
+
+		tag_ensure_exists( $this->tag_id );
 	}
 
 	/**
@@ -81,4 +85,3 @@ class TagDetachCommand extends Command {
 		}
 	}
 }
-
