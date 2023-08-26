@@ -93,7 +93,7 @@ class RestProjectVersionTest extends RestBase {
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_result = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_result['versions'] ) );
-		$this->assertEquals( 1, count( $t_result['versions'] ) );
+		$this->assertCount( 1, $t_result['versions'] );
 		$t_returned_version = $t_result['versions'][0];
 
 		$this->assertEquals( $t_version['id'], $t_returned_version['id'] );
