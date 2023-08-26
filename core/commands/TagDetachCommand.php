@@ -77,6 +77,7 @@ class TagDetachCommand extends Command {
 	 * Process the command.
 	 *
 	 * @returns array Command response
+	 * @throws ClientException
 	 */
 	protected function process() {
 		if( tag_bug_is_attached( $this->tag_id, $this->issue_id ) ) {
