@@ -1076,9 +1076,9 @@ function bug_attachments_clear_cache( $p_bug_id = null ) {
  * @param int $p_bug_id Int representing bug identifier.
  *
  * @return bool true if bug exists, false otherwise
- * @throws ClientException if the bug does not exist.
  *
  * @access public
+ * @noinspection PhpDocMissingThrowsInspection
  */
 function bug_exists( $p_bug_id ) {
 	$c_bug_id = (int)$p_bug_id;
@@ -1089,6 +1089,7 @@ function bug_exists( $p_bug_id ) {
 	}
 
 	# bug exists if bug_cache_row returns any value
+	/** @noinspection PhpUnhandledExceptionInspection */
 	if( bug_cache_row( $c_bug_id, false ) ) {
 		return true;
 	} else {
