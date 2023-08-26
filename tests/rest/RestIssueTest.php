@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Psr\Http\Message\ResponseInterface;
+
 require_once 'RestBase.php';
 
 /**
@@ -331,7 +333,7 @@ class RestIssueTest extends RestBase {
 		config_set( 'tag_create_threshold', $t_threshold );
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
-		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
 
 		$this->deleteIssueAfterRun( $t_issue_id );
 	}
@@ -343,7 +345,7 @@ class RestIssueTest extends RestBase {
 		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
-		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
 
 		$this->deleteIssueAfterRun( $t_issue_id );
 
@@ -352,7 +354,7 @@ class RestIssueTest extends RestBase {
 		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag['id'] ) );
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
-		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
 
 		$this->deleteIssueAfterRun( $t_issue_id );
 	}
@@ -360,12 +362,11 @@ class RestIssueTest extends RestBase {
 	/**
 	 * Checks that the issue was created successfully and the tag was properly attached.
 	 *
-	 * @param string $p_tag_name
-	 * @param \GuzzleHttp\Psr7\Response $p_response
+	 * @param ResponseInterface $p_response
 	 *
 	 * @return integer Created issue Id
 	 */
-	protected function assertIssueCreatedWithTag( $p_tag_name, $p_response ) {
+	protected function assertIssueCreatedWithTag( $p_response ) {
 		$this->assertEquals( HTTP_STATUS_CREATED, $p_response->getStatusCode() );
 
 		$t_body = json_decode( $p_response->getBody(), true );
