@@ -462,6 +462,12 @@ class RestUserTests extends RestBase {
 		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
 		$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
 
+		# Try to delete user again
+		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
+			"Deleting non-existing user"
+		);
+
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
@@ -495,7 +501,7 @@ class RestUserTests extends RestBase {
 	 */
 	public function testDeleteUserByIdNotFound() {
 		$t_response = $this->builder()->delete( '/users/1000000' )->send();
-		$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
 
 	/**
