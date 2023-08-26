@@ -214,4 +214,39 @@ class RestIssueRelationshipsTest extends RestBase
 		);
 	}
 
+	/**
+	 * It should not be possible to resolve a parent issue having unresolved
+	 * children.
+	 *
+	 * @return void
+	 */
+	public function testResolveIssueWithChildRelationships()
+	{
+		# Create a Parent-child relationship
+		$t_data = $this->createRelationshipData( BUG_DEPENDANT );
+		$t_response = $this->builder()->post( $this->getBaseURL(), $t_data )->send();
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
+			"Create parent-child relationship"
+		);
+
+		# Attempt to resolve the parent issue should fail
+		$t_data = ['status' => ['id' => RESOLVED]];
+		$t_response = $this->builder()->patch( '/issues/' . $this->src_id, $t_data)->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
+			"Resolve parent issue with unresolved children"
+		);
+
+		# Resolve the child issue
+		$t_response = $this->builder()->patch( '/issues/' . $this->tgt_id, $t_data)->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+			"Resolving child issue"
+		);
+
+		# Resolving the parent should work now
+		$t_response = $this->builder()->patch( '/issues/' . $this->src_id, $t_data)->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+			"Resolve parent issue with resolved children"
+		);
+	}
+
 }
