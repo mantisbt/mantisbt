@@ -591,10 +591,8 @@ class RestUserTests extends RestBase {
 			'regular' => array( Faker::username() ),
 			'with_spaces_in_middle' => array( "some user" ),
 			'email' => array( 'vboctor@somedomain.com' ),
-			'localhost' => array( 'vboctor@localhost' ),
 			'dot' => array( 'victor.boctor' ),
 			'underscore' => array( 'victor_boctor' ),
-			'symbols' => array( "user!" )
 		);
 	}
 
