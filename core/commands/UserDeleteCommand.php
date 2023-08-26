@@ -56,6 +56,8 @@ class UserDeleteCommand extends Command {
 			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
 		}
 
+		user_ensure_exists( $this->user_id_to_delete );
+
 		if( $this->user_id_to_delete == auth_get_current_user_id() ) {
 			throw new ClientException( 'Deleting own account not allowed', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
 		}
