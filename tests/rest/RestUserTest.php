@@ -306,7 +306,7 @@ class RestUserTests extends RestBase {
 
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['users'] ), 'users_element_exists' );
-		$this->assertEquals( 1, count( $t_body['users'] ), 'users_count' );
+		$this->assertCount( 1, $t_body['users'], 'users_count' );
 
 		$t_user = $t_body['users'][0];
 		$this->assertTrue( isset( $t_user['id'] ), 'user id exists' );
@@ -337,7 +337,7 @@ class RestUserTests extends RestBase {
 
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['users'] ), 'users element exists by name' );
-		$this->assertEquals( 1, count( $t_body['users'] ), 'users count by name' );
+		$this->assertCount( 1, $t_body['users'], 'users count by name' );
 
 		$t_user = $t_body['users'][0];
 		$this->assertTrue( isset( $t_user['id'] ), 'user id element exists by username' );
@@ -364,7 +364,7 @@ class RestUserTests extends RestBase {
 
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['users'] ) );
-		$this->assertEquals( 1, count( $t_body['users'] ) );
+		$this->assertCount( 1, $t_body['users'] );
 		$t_user = $t_body['users'][0];
 		$this->assertTrue( isset( $t_user['id'] ) );
 		$this->assertTrue( is_numeric( $t_user['id'] ) );

@@ -106,7 +106,7 @@ class RestIssueTest extends RestBase {
 		$this->assertEquals( 'have not tried', $t_issue['reproducibility']['name'], 'reproducibility name' );
 		$this->assertEquals( 'have not tried', $t_issue['reproducibility']['label'], 'reproducibility label' );
 
-		$this->assertEquals( false, $t_issue['sticky'], 'sticky' );
+		$this->assertFalse( $t_issue['sticky'], 'sticky' );
 		$this->assertTrue( isset( $t_issue['created_at'] ), 'created at' );
 		$this->assertTrue( isset( $t_issue['updated_at'] ), 'updated at' );
 
@@ -163,7 +163,7 @@ class RestIssueTest extends RestBase {
 		$this->assertEquals( 'always', $t_issue['reproducibility']['name'], 'reproducibility name' );
 		$this->assertEquals( 'always', $t_issue['reproducibility']['label'], 'reproducibility label' );
 
-		$this->assertEquals( true, $t_issue['sticky'], 'sticky' );
+		$this->assertTrue( $t_issue['sticky'], 'sticky' );
 		$this->assertTrue( isset( $t_issue['created_at'] ), 'created at' );
 		$this->assertTrue( isset( $t_issue['updated_at'] ), 'updated at' );
 
