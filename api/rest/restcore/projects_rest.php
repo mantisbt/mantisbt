@@ -171,9 +171,9 @@ function rest_project_user_add( \Slim\Http\Request $p_request, \Slim\Http\Respon
 /**
  * A method to remove user access to a project.
  *
- * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Request  $p_request  The request.
  * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param array               $p_args     Arguments
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
@@ -330,27 +330,27 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-    $t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
-    if( is_blank( $t_project_id ) ) {
-        $t_message = "Project id is missing.";
-        return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
-    }
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
 
 	$t_version_id = isset( $p_args['version_id'] ) ? $p_args['version_id'] : $p_request->getParam( 'version_id' );
-    $t_version_to_update = $p_request->getParsedBody();
+	$t_version_to_update = $p_request->getParsedBody();
 
-    $t_data = array(
-        'query' => array(
-            'project_id' => $t_project_id,
-            'version_id' => $t_version_id
-        ),
-        'payload' => $t_version_to_update
-    );
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+			'version_id' => $t_version_id
+		),
+		'payload' => $t_version_to_update
+	);
 
-    $t_command = new VersionUpdateCommand( $t_data );
-    $t_result = $t_command->execute();
+	$t_command = new VersionUpdateCommand( $t_data );
+	$t_result = $t_command->execute();
 
-    return $p_response
+	return $p_response
 		->withStatus( HTTP_STATUS_SUCCESS, "Version updated" )
 		->withJson( $t_result );
 }
@@ -364,25 +364,25 @@ function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-    $t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
-    if( is_blank( $t_project_id ) ) {
-        $t_message = "Project id is missing.";
-        return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
-    }
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
 
-    $t_version_id = isset( $p_args['version_id'] ) ? $p_args['version_id'] : $p_request->getParam( 'version_id' );
+	$t_version_id = isset( $p_args['version_id'] ) ? $p_args['version_id'] : $p_request->getParam( 'version_id' );
 
-    $t_data = array(
-        'query' => array(
-            'project_id' => $t_project_id,
-            'version_id' => $t_version_id,
-        )
-    );
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+			'version_id' => $t_version_id,
+		)
+	);
 
-    $t_command = new VersionDeleteCommand( $t_data );
-    $t_command->execute();
+	$t_command = new VersionDeleteCommand( $t_data );
+	$t_command->execute();
 
-    return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version deleted" );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version deleted" );
 }
 
 /**
