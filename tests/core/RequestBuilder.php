@@ -23,7 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( __DIR__ . '/../../vendor/autoload.php' );
 
 /**
  * A builder class for test case requests.
@@ -116,7 +115,7 @@ class RequestBuilder {
 	public function get( $p_relative_path, $p_query_string = null ) {
 		$this->method = 'GET';
 		$this->relative_path = $p_relative_path;
-		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
+		if( !empty( $p_query_string ) ) {
 			$this->relative_path .= '?' . $p_query_string;
 		}
 
@@ -134,7 +133,7 @@ class RequestBuilder {
 		$this->method = 'PUT';
 		$this->relative_path = $p_relative_path;
 
-		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
+		if( !empty( $p_query_string ) ) {
 			$this->relative_path .= '?' . $p_query_string;
 		}
 
@@ -153,7 +152,7 @@ class RequestBuilder {
 		$this->method = 'POST';
 		$this->relative_path = $p_relative_path;
 
-		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
+		if( !empty( $p_query_string ) ) {
 			$this->relative_path .= '?' . $p_query_string;
 		}
 
@@ -172,7 +171,7 @@ class RequestBuilder {
 		$this->method = 'PATCH';
 		$this->relative_path = $p_relative_path;
 
-		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
+		if( !empty( $p_query_string ) ) {
 			$this->relative_path .= '?' . $p_query_string;
 		}
 
@@ -190,7 +189,7 @@ class RequestBuilder {
 		$this->method = 'DELETE';
 		$this->relative_path = $p_relative_path;
 
-		if( !is_null( $p_query_string ) && !empty( $p_query_string ) ) {
+		if( !empty( $p_query_string ) ) {
 			$this->relative_path .= '?' . $p_query_string;
 		}
 
@@ -202,10 +201,12 @@ class RequestBuilder {
 	 *
 	 * @param string $p_name  The header name
 	 * @param string $p_value The header value
+	 *
 	 * @return RequestBuilder
+	 * @noinspection PhpUnused
 	 */
-	public function addHeader( $name, $value ) {
-		$this->headers[$name] = $value;
+	public function addHeader( $p_name, $p_value ) {
+		$this->headers[$p_name] = $p_value;
 		return $this;
 	}
 
@@ -213,13 +214,14 @@ class RequestBuilder {
 	 * Send the request
 	 *
 	 * @return Psr\Http\Message\ResponseInterface The response
+	 * @noinspection PhpDocMissingThrowsInspection
 	 */
 	public function send() {
 		$t_headers = array(
 			'User-Agent' => 'MantisTests'
 		);
 
-		if( !is_null( $this->token ) && !empty( $this->token ) ) {
+		if( !empty( $this->token ) ) {
 			$t_headers['Authorization'] = $this->token;
 		}
 
@@ -239,7 +241,8 @@ class RequestBuilder {
 
 		$t_url = rtrim( $this->base_url, '/' ) . '/' . ltrim( $this->relative_path, '/' );
 
-		$t_client = new \GuzzleHttp\Client();
+		$t_client = new GuzzleHttp\Client();
+		/** @noinspection PhpUnhandledExceptionInspection */
 		return $t_client->request( $this->method, $t_url, $t_options );
 	}
 }
