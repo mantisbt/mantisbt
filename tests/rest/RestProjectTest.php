@@ -121,6 +121,9 @@ class RestProjectTest extends RestBase
 		$t_project = $this->createProject();
 		$this->deleteProjectAfterRun( $t_project->id );
 		$t_response = $this->builder()->get( $this->getEndpoint() )->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+			"Failed to retrieve all projects"
+		);
 		$t_projects = json_decode( $t_response->getBody() )->projects;
 		$this->assertGreaterThanOrEqual(2, count( $t_projects ),
 			"Expected to retrieve at least 2 projects"
