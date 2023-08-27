@@ -103,6 +103,8 @@ class ProjectUpdateCommand extends Command {
 
 	/**
 	 * Validate the inputs and access level.
+	 *
+	 * @throws ClientException
 	 */
 	protected function validate() {
 		$this->id = (int)$this->query( 'id' );
@@ -114,7 +116,7 @@ class ProjectUpdateCommand extends Command {
 		}
 
 		$t_project = $this->data['payload'];
-		if( isset( $t_project['id'] ) && (int)$t_project['id'] != (int)$this->id ) {
+		if( isset( $t_project['id'] ) && (int)$t_project['id'] != $this->id ) {
 			throw new ClientException(
 				'Project id in payload does not match id in query',
 				ERROR_INVALID_FIELD_VALUE,
@@ -171,7 +173,7 @@ class ProjectUpdateCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @return void
+	 * @return array
 	 */
 	protected function process() {
 		project_update(

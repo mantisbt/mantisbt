@@ -23,8 +23,11 @@
  * @link http://www.mantisbt.org
  */
 
+use GuzzleHttp\Exception\GuzzleException;
+use PHPUnit\Framework\TestCase;
+
 # Includes
-require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
+require_once dirname( __FILE__, 2 ) . '/TestConfig.php';
 
 # MantisBT Core API
 require_mantis_core();
@@ -40,7 +43,7 @@ require_once __DIR__ . '/../core/Faker.php';
  * @requires extension curl
  * @group REST
  */
-abstract class RestBase extends PHPUnit\Framework\TestCase {
+abstract class RestBase extends TestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
@@ -130,18 +133,25 @@ abstract class RestBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * tearDown
 	 * @return void
+	 * @throws GuzzleException
 	 */
 	protected function tearDown(): void {
 		foreach( $this->usersToDelete as $t_user_id ) {
-			$this->builder()->delete( '/users/' . $t_user_id, '' )->send();
+			$this->builder()
+				 ->delete( '/users/' . $t_user_id, '' )
+				 ->send();
 		}
 
 		foreach ( $this->issueIdsToDelete as $t_issue_id_to_delete ) {
-			$this->builder()->delete( '/issues', 'id=' . $t_issue_id_to_delete )->send();
+			$this->builder()
+				 ->delete( '/issues', 'id=' . $t_issue_id_to_delete )
+				 ->send();
 		}
 
 		foreach( $this->versionIdsToDelete as $t_version_id_to_delete ) {
-			$this->builder()->delete( '/projects/' . $t_version_id_to_delete[0] . '/versions/' . $t_version_id_to_delete[1] )->send();
+			$this->builder()
+				 ->delete( '/projects/' . $t_version_id_to_delete[0] . '/versions/' . $t_version_id_to_delete[1] )
+				 ->send();
 		}
 	}
 
@@ -244,7 +254,7 @@ abstract class RestBase extends PHPUnit\Framework\TestCase {
 			if( isset( $t_body['users'] ) ) {
 				$t_users = $t_body['users'];
 				$t_user_id = (int)$t_users[0]['id'];
-			} if( isset( $t_body['user'] ) ) {
+			} elseif( isset( $t_body['user'] ) ) {
 				$t_user = $t_body['user'];
 				$t_user_id = (int)$t_user['id'];
 			} else {
