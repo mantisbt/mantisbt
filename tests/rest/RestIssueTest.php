@@ -350,6 +350,7 @@ class RestIssueTest extends RestBase {
 		$this->deleteIssueAfterRun( $t_issue_id );
 
 		# Tag by id
+		# TODO: replace internal call by GET /tag request when implemented (see #32863)
 		$t_tag = tag_get_by_name( $this->tag_name );
 		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag['id'] ) );
 
@@ -440,6 +441,7 @@ class RestIssueTest extends RestBase {
 
 		$t_url_base = "/issues/$t_issue_id/tags/";
 
+		# TODO: replace internal call by GET /tag request when implemented (see #32863)
 		$this->assertFalse( tag_get_by_name( $this->tag_name ), "The Tag already exists" );
 
 		# Attach the tag - it will be created
@@ -449,6 +451,7 @@ class RestIssueTest extends RestBase {
 			"Failed to attach the tag"
 		);
 
+		# TODO: replace internal call by GET /tag request when implemented (see #32863)
 		$t_tag_id = tag_get_by_name( $this->tag_name )['id'];
 		$this->assertNotFalse( $t_tag_id, "Tag has not been created" );
 
@@ -499,6 +502,7 @@ class RestIssueTest extends RestBase {
 			"Attaching a tag to a non-existing issue should have failed"
 		);
 
+		# TODO: replace internal calls by GET /tag request when implemented (see #32863)
 		$t_tag_id = tag_create( $this->tag_name );
 		$this->assertTrue( tag_exists( $t_tag_id ) );
 		$t_response = $this->builder()->delete( $t_url_base . $t_tag_id )->send();
@@ -570,6 +574,7 @@ class RestIssueTest extends RestBase {
 		parent::tearDown();
 
 		# Delete tag if it exists
+		# TODO: replace internal calls by GET /tag request when implemented (see #32863)
 		$t_tag = tag_get_by_name( $this->tag_name );
 		if( $t_tag ) {
 			# Must be logged in to delete tag
