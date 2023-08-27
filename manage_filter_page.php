@@ -74,14 +74,14 @@ function table_print_filter_headers() {
 ?>
 	<thead>
 		<tr>
-			<th><?php echo lang_get( 'query_name' ) ?></td>
+			<th><?php echo lang_get( 'query_name' ) ?></th>
 			<?php if( $t_rss_enabled ) { ?>
-				<th><?php echo lang_get( 'rss' ) ?></td>
+				<th><?php echo lang_get( 'rss' ) ?></th>
 			<?php } ?>
-			<th><?php echo lang_get( 'email_project' ) ?></td>
-			<th><?php echo lang_get( 'public' ) ?></td>
-			<th><?php echo lang_get( 'owner' ) ?></td>
-			<th><?php echo lang_get( 'actions' ) ?></td>
+			<th><?php echo lang_get( 'email_project' ) ?></th>
+			<th><?php echo lang_get( 'public' ) ?></th>
+			<th><?php echo lang_get( 'owner' ) ?></th>
+			<th><?php echo lang_get( 'actions' ) ?></th>
 		</tr>
 	</thead>
 <?php
