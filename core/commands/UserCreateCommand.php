@@ -70,6 +70,11 @@ class UserCreateCommand extends Command {
 	private $enabled;
 
 	/**
+	 * @var int user's access level
+	 */
+	private $access_level;
+
+	/**
 	 * Constructor
 	 *
 	 * @param array $p_data The command data.

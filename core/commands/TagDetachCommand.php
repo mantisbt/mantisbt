@@ -55,8 +55,10 @@ class TagDetachCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 *
+	 * @throws ClientException
 	 */
-	function validate() {		
+	function validate() {
 		$this->issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
 		$this->tag_id = $this->query( 'tag_id' );
 		$this->user_id = auth_get_current_user_id();
@@ -67,12 +69,15 @@ class TagDetachCommand extends Command {
 				ERROR_INVALID_FIELD_VALUE,
 				array( 'tag_id' ) );
 		}
+
+		tag_ensure_exists( $this->tag_id );
 	}
 
 	/**
 	 * Process the command.
 	 *
 	 * @returns array Command response
+	 * @throws ClientException
 	 */
 	protected function process() {
 		if( tag_bug_is_attached( $this->tag_id, $this->issue_id ) ) {
@@ -81,4 +86,3 @@ class TagDetachCommand extends Command {
 		}
 	}
 }
-

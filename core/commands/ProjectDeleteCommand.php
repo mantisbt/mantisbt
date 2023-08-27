@@ -43,6 +43,7 @@ class ProjectDeleteCommand extends Command {
 	 * Validate the inputs and user access level.
 	 *
 	 * @return void
+	 * @throws ClientException
 	 */
 	function validate() {
 		$t_user_id = auth_get_current_user_id();

@@ -171,10 +171,13 @@ function rest_project_user_add( \Slim\Http\Request $p_request, \Slim\Http\Respon
 /**
  * A method to remove user access to a project.
  *
- * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Request  $p_request  The request.
  * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param array               $p_args     Arguments
  * @return \Slim\Http\Response The augmented response.
+ *
+ * @throws ClientException
+ * @noinspection PhpUnusedParameterInspection
  */
 function rest_project_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = (int)$p_args['id'];
@@ -210,7 +213,7 @@ function rest_project_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Res
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
 		$t_project_id = ALL_PROJECTS;
 	} else {
@@ -265,13 +268,13 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_version_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
 		$t_message = "Project id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_version_id = isset( $p_args['version_id'] ) ? $p_args['version_id'] : $p_request->getParam( 'version_id' );
+	$t_version_id = $p_args['version_id'] ?? $p_request->getParam( 'version_id' );
 
 	$t_data = array(
 		'query' => array(
@@ -297,7 +300,7 @@ function rest_project_version_get( \Slim\Http\Request $p_request, \Slim\Http\Res
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
 		$t_message = "Project id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
@@ -330,27 +333,27 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-    $t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
-    if( is_blank( $t_project_id ) ) {
-        $t_message = "Project id is missing.";
-        return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
-    }
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
 
-	$t_version_id = isset( $p_args['version_id'] ) ? $p_args['version_id'] : $p_request->getParam( 'version_id' );
-    $t_version_to_update = $p_request->getParsedBody();
+	$t_version_id = $p_args['version_id'] ?? $p_request->getParam( 'version_id' );
+	$t_version_to_update = $p_request->getParsedBody();
 
-    $t_data = array(
-        'query' => array(
-            'project_id' => $t_project_id,
-            'version_id' => $t_version_id
-        ),
-        'payload' => $t_version_to_update
-    );
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+			'version_id' => $t_version_id
+		),
+		'payload' => $t_version_to_update
+	);
 
-    $t_command = new VersionUpdateCommand( $t_data );
-    $t_result = $t_command->execute();
+	$t_command = new VersionUpdateCommand( $t_data );
+	$t_result = $t_command->execute();
 
-    return $p_response
+	return $p_response
 		->withStatus( HTTP_STATUS_SUCCESS, "Version updated" )
 		->withJson( $t_result );
 }
@@ -364,25 +367,25 @@ function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-    $t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
-    if( is_blank( $t_project_id ) ) {
-        $t_message = "Project id is missing.";
-        return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
-    }
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
 
-    $t_version_id = isset( $p_args['version_id'] ) ? $p_args['version_id'] : $p_request->getParam( 'version_id' );
+	$t_version_id = $p_args['version_id'] ?? $p_request->getParam( 'version_id' );
 
-    $t_data = array(
-        'query' => array(
-            'project_id' => $t_project_id,
-            'version_id' => $t_version_id,
-        )
-    );
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+			'version_id' => $t_version_id,
+		)
+	);
 
-    $t_command = new VersionDeleteCommand( $t_data );
-    $t_command->execute();
+	$t_command = new VersionDeleteCommand( $t_data );
+	$t_command->execute();
 
-    return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version deleted" );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version deleted" );
 }
 
 /**
@@ -394,7 +397,7 @@ function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_hierarchy_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
 		$t_message = "Project id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
@@ -424,15 +427,13 @@ function rest_project_hierarchy_add( \Slim\Http\Request $p_request, \Slim\Http\R
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
 		$t_message = "Project id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_subproject_id = isset( $p_args['subproject_id'] )
-		? $p_args['subproject_id']
-		: $p_request->getParam( 'subproject_id' );
+	$t_subproject_id = $p_args['subproject_id'] ?? $p_request->getParam( 'subproject_id' );
 	if( is_blank( $t_subproject_id ) ) {
 		$t_message = "Subproject id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
@@ -464,15 +465,13 @@ function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Htt
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
 		$t_message = "Project id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_subproject_id = isset( $p_args['subproject_id'] )
-		? $p_args['subproject_id']
-		: $p_request->getParam( 'subproject_id' );
+	$t_subproject_id = $p_args['subproject_id'] ?? $p_request->getParam( 'subproject_id' );
 	if( is_blank( $t_subproject_id ) ) {
 		$t_message = "Subproject id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
@@ -501,7 +500,6 @@ function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Htt
  *
  * @return \Slim\Http\Response The augmented response.
  *
- * @throws \Mantis\Exceptions\LegacyApiFaultException
  * @noinspection PhpUnusedParameterInspection
  */
 function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
@@ -533,11 +531,9 @@ function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @param array               $p_args     Arguments
  *
  * @return \Slim\Http\Response The augmented response.
- *
- * @throws \Mantis\Exceptions\LegacyApiFaultException
  */
 function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Mandatory field 'id' is missing." );
 	}
@@ -576,22 +572,11 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
-	if( is_blank( $t_project_id ) ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Mandatory field 'id' is missing." );
-	}
+	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
-	$t_project_id = (int)$t_project_id;
-	if( $t_project_id == ALL_PROJECTS || $t_project_id < 1 ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid project id." );
-	}
+	$t_data = array( 'query' => array( 'id' => $t_project_id ) );
+	$t_command = new ProjectDeleteCommand( $t_data );
+	$t_command->execute();
 
-	$t_user_id = auth_get_current_user_id();
-	if( !project_exists( $t_project_id ) || !access_has_project_level( config_get( 'delete_project_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
-		return $p_response->withStatus( HTTP_STATUS_FORBIDDEN, "Access denied for deleting project." );
-	}
-
-	project_delete( $t_project_id );
-
-	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id deleted." );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Project with id $t_project_id deleted." );
 }

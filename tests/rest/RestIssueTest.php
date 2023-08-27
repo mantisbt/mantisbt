@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Psr\Http\Message\ResponseInterface;
+
 require_once 'RestBase.php';
 
 /**
@@ -106,7 +108,7 @@ class RestIssueTest extends RestBase {
 		$this->assertEquals( 'have not tried', $t_issue['reproducibility']['name'], 'reproducibility name' );
 		$this->assertEquals( 'have not tried', $t_issue['reproducibility']['label'], 'reproducibility label' );
 
-		$this->assertEquals( false, $t_issue['sticky'], 'sticky' );
+		$this->assertFalse( $t_issue['sticky'], 'sticky' );
 		$this->assertTrue( isset( $t_issue['created_at'] ), 'created at' );
 		$this->assertTrue( isset( $t_issue['updated_at'] ), 'updated at' );
 
@@ -163,7 +165,7 @@ class RestIssueTest extends RestBase {
 		$this->assertEquals( 'always', $t_issue['reproducibility']['name'], 'reproducibility name' );
 		$this->assertEquals( 'always', $t_issue['reproducibility']['label'], 'reproducibility label' );
 
-		$this->assertEquals( true, $t_issue['sticky'], 'sticky' );
+		$this->assertTrue( $t_issue['sticky'], 'sticky' );
 		$this->assertTrue( isset( $t_issue['created_at'] ), 'created at' );
 		$this->assertTrue( isset( $t_issue['updated_at'] ), 'updated at' );
 
@@ -331,7 +333,7 @@ class RestIssueTest extends RestBase {
 		config_set( 'tag_create_threshold', $t_threshold );
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
-		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
 
 		$this->deleteIssueAfterRun( $t_issue_id );
 	}
@@ -343,16 +345,17 @@ class RestIssueTest extends RestBase {
 		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
-		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
 
 		$this->deleteIssueAfterRun( $t_issue_id );
 
 		# Tag by id
+		# TODO: replace internal call by GET /tag request when implemented (see #32863)
 		$t_tag = tag_get_by_name( $this->tag_name );
 		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag['id'] ) );
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
-		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
 
 		$this->deleteIssueAfterRun( $t_issue_id );
 	}
@@ -360,12 +363,11 @@ class RestIssueTest extends RestBase {
 	/**
 	 * Checks that the issue was created successfully and the tag was properly attached.
 	 *
-	 * @param string $p_tag_name
-	 * @param \GuzzleHttp\Psr7\Response $p_response
+	 * @param ResponseInterface $p_response
 	 *
 	 * @return integer Created issue Id
 	 */
-	protected function assertIssueCreatedWithTag( $p_tag_name, $p_response ) {
+	protected function assertIssueCreatedWithTag( $p_response ) {
 		$this->assertEquals( HTTP_STATUS_CREATED, $p_response->getStatusCode() );
 
 		$t_body = json_decode( $p_response->getBody(), true );
@@ -425,6 +427,87 @@ class RestIssueTest extends RestBase {
 				array( 'name' => '' ),
 				HTTP_STATUS_BAD_REQUEST
 			),
+		);
+	}
+
+	public function testTagAttachDetach() {
+		# Create test issue
+		$t_issue_to_add = $this->getIssueToAdd();
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue_id = $t_body['issue']['id'];
+		$this->deleteIssueAfterRun( $t_issue_id );
+
+		$t_url_base = "/issues/$t_issue_id/tags/";
+
+		# TODO: replace internal call by GET /tag request when implemented (see #32863)
+		$this->assertFalse( tag_get_by_name( $this->tag_name ), "The Tag already exists" );
+
+		# Attach the tag - it will be created
+		$t_data = $this->getTagData();
+		$t_response = $this->builder()->post( $t_url_base, $t_data )->send();
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
+			"Failed to attach the tag"
+		);
+
+		# TODO: replace internal call by GET /tag request when implemented (see #32863)
+		$t_tag_id = tag_get_by_name( $this->tag_name )['id'];
+		$this->assertNotFalse( $t_tag_id, "Tag has not been created" );
+
+		$t_body = json_decode( $t_response->getBody() );
+		$t_issue_tags = array_column( $t_body->issues[0]->tags ?? [], 'id' );
+		$this->assertContains( $t_tag_id, $t_issue_tags,
+			"Tag does not exist in created Issue data"
+		);
+
+		# Attach the same tag again
+		$t_response = $this->builder()->post( $t_url_base, $t_data )->send();
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
+			"Failed to attach the same tag"
+		);
+
+		# Detach the tag
+		$t_response = $this->builder()->delete( $t_url_base . $t_tag_id )->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+			"Tag was not detached"
+		);
+
+		# Try to detach the same tag again
+		$t_response = $this->builder()->delete( $t_url_base . $t_tag_id )->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+			"Attempting to detach an unattached tag should have succeeded"
+		);
+
+		# Try to detach a non-existing tag
+		$t_tag_id = 99999;
+		while( tag_exists( $t_tag_id ) ) {
+			$t_tag_id++;
+		}
+		$t_response = $this->builder()->delete( "/issues/$t_issue_id/tags/$t_tag_id" )->send();
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
+			"Detaching a non-existing tag should have failed"
+		);
+	}
+
+	public function testTagAttachDetachNonExistingIssue() {
+		$t_nonexistent_issue_id = 99999;
+		while( bug_exists( $t_nonexistent_issue_id ) ) {
+			$t_nonexistent_issue_id++;
+		}
+		$t_url_base = "/issues/$t_nonexistent_issue_id/tags/";
+
+		$t_response = $this->builder()->post( $t_url_base, $this->getTagData() )->send();
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
+			"Attaching a tag to a non-existing issue should have failed"
+		);
+
+		# TODO: replace internal calls by GET /tag request when implemented (see #32863)
+		$t_tag_id = tag_create( $this->tag_name );
+		$this->assertTrue( tag_exists( $t_tag_id ) );
+		$t_response = $this->builder()->delete( $t_url_base . $t_tag_id )->send();
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
+			"Detaching an existing tag from a non-existing issue should have failed"
 		);
 	}
 
@@ -491,6 +574,7 @@ class RestIssueTest extends RestBase {
 		parent::tearDown();
 
 		# Delete tag if it exists
+		# TODO: replace internal calls by GET /tag request when implemented (see #32863)
 		$t_tag = tag_get_by_name( $this->tag_name );
 		if( $t_tag ) {
 			# Must be logged in to delete tag
@@ -499,5 +583,18 @@ class RestIssueTest extends RestBase {
 
 			tag_delete( $t_tag['id'] );
 		}
+	}
+
+	/**
+	 * Generates Tag Data payload for Tag Attach endpoint.
+	 *
+	 * @return array[]
+	 */
+	private function getTagData(): array {
+		return [
+			'tags' => [
+				[ 'name' => $this->tag_name ],
+			]
+		];
 	}
 }

@@ -72,10 +72,12 @@ class RestUserTests extends RestBase {
 	 * Test the use of POST /users to create users with just a username
 	 *
 	 * @dataProvider providerValidUserNames
+	 *
+	 * @param string $p_username
 	 */
 	public function testCreateUserMinimal( $p_username ) {
 		$t_user_to_create = array(
-			'name' => Faker::username()
+			'name' => $p_username
 		);
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
@@ -306,7 +308,7 @@ class RestUserTests extends RestBase {
 
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['users'] ), 'users_element_exists' );
-		$this->assertEquals( 1, count( $t_body['users'] ), 'users_count' );
+		$this->assertCount( 1, $t_body['users'], 'users_count' );
 
 		$t_user = $t_body['users'][0];
 		$this->assertTrue( isset( $t_user['id'] ), 'user id exists' );
@@ -337,7 +339,7 @@ class RestUserTests extends RestBase {
 
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['users'] ), 'users element exists by name' );
-		$this->assertEquals( 1, count( $t_body['users'] ), 'users count by name' );
+		$this->assertCount( 1, $t_body['users'], 'users count by name' );
 
 		$t_user = $t_body['users'][0];
 		$this->assertTrue( isset( $t_user['id'] ), 'user id element exists by username' );
@@ -364,7 +366,7 @@ class RestUserTests extends RestBase {
 
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['users'] ) );
-		$this->assertEquals( 1, count( $t_body['users'] ) );
+		$this->assertCount( 1, $t_body['users'] );
 		$t_user = $t_body['users'][0];
 		$this->assertTrue( isset( $t_user['id'] ) );
 		$this->assertTrue( is_numeric( $t_user['id'] ) );
@@ -460,6 +462,12 @@ class RestUserTests extends RestBase {
 		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
 		$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
 
+		# Try to delete user again
+		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
+			"Deleting non-existing user"
+		);
+
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
@@ -493,7 +501,7 @@ class RestUserTests extends RestBase {
 	 */
 	public function testDeleteUserByIdNotFound() {
 		$t_response = $this->builder()->delete( '/users/1000000' )->send();
-		$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
 
 	/**
@@ -589,10 +597,8 @@ class RestUserTests extends RestBase {
 			'regular' => array( Faker::username() ),
 			'with_spaces_in_middle' => array( "some user" ),
 			'email' => array( 'vboctor@somedomain.com' ),
-			'localhost' => array( 'vboctor@localhost' ),
 			'dot' => array( 'victor.boctor' ),
 			'underscore' => array( 'victor_boctor' ),
-			'symbols' => array( "user!" )
 		);
 	}
 
