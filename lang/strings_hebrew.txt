@@ -54,6 +54,7 @@
  * @author דגש
  * @author דגש חזק
  * @author ישראל קלר
+ * @author נדב ס
  */
 
 $s_directionality = 'rtl';
@@ -119,7 +120,7 @@ $s_stays_on_top = 'תמיד עליון';
 $s_bugnote_link_title = 'קישור ישיר להערה';
 $s_delete_bugnote_button = 'מחיקת הערה';
 $s_delete_bugnote_sure_msg = 'האם למחוק הערה זו?';
-$s_bug_relationships = 'קישרי-גומלין';
+$s_bug_relationships = 'קשרי-גומלין';
 $s_empty_password_sure_msg = 'ססמת החשבון ריקה. האם זו אכן הכוונה?';
 $s_empty_password_button = 'שימוש בססמה ריקה';
 $s_reauthenticate_title = 'הזדהות';
@@ -177,9 +178,9 @@ $s_due_date_bugs_conf_msg = 'עדכון תאריך תחולה ל־';
 $s_close_group_bugs_button = 'סגירת סוגיות';
 $s_delete_group_bugs_button = 'מחיקת סוגיות';
 $s_move_group_bugs_button = 'העברת סוגיות';
-$s_copy_group_bugs_button = 'העתקת סוגיה';
+$s_copy_group_bugs_button = 'העתקת סוגיות';
 $s_assign_group_bugs_button = 'הקצאת סוגיות';
-$s_resolve_group_bugs_button = 'פתרון סוגיה';
+$s_resolve_group_bugs_button = 'פתרון סוגיות';
 $s_priority_group_bugs_button = 'עדיפות עדכון';
 $s_status_group_bugs_button = 'מצב עדכון';
 $s_category_group_bugs_button = 'עדכון סוג־אב';
@@ -198,7 +199,7 @@ $s_printing_options_link = 'אפשרויות הדפסה';
 $s_bugnote_title = 'כותב הערה';
 $s_bugnote_date = 'תאריך הערה';
 $s_bugnote_description = 'תוכן הערה';
-$s_error_no_proceed = 'נא ללחוץ על כפתור „חזרה” של הדפדפן כדי לחזור לעמוד הקודם. שם עליך לתקן את הדרוש לפי הודעת השגיאה לעיל. כמו־כן באפשרותך לבצע פעולה אחרת או לעבור למסך אחר דרך התפריט הראשי.';
+$s_error_no_proceed = 'נא ללחוץ על כפתור „חזרה” של הדפדפן כדי לחזור לעמוד הקודם. שם עליך לתקן את הדרוש לפי הודעת השגיאה לעיל. באפשרותך גם לבצע פעולה אחרת או לעבור למסך אחר דרך התפריט הראשי.';
 $s_login_error = 'יתכן שהחשבון הושבת, נחסם או שהשם/הססמה שהוזנו שגויים.';
 $s_login_cookies_disabled = 'הדפדפן שלך אינו תומך ב-Cookies, או שהוגדר לסרב להן.';
 $s_logged_in_as = 'התחברות כ-';
