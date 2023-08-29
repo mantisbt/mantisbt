@@ -880,7 +880,7 @@ function print_doc_menu( $p_page = '' ) {
 		);
 	}
 
-	print_menu( $t_pages, $p_page );
+	print_menu( $t_pages, $p_page, 'EVENT_MENU_DOCS' );
 }
 
 /**
