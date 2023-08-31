@@ -126,10 +126,5 @@ if( ON == config_get( 'store_reminders' ) ) {
 
 form_security_purge( 'bug_reminder' );
 
-layout_page_header( null, string_get_bug_view_url( $f_bug_id ) );
-layout_page_begin();
-
 $t_redirect = string_get_bug_view_url( $f_bug_id );
-html_operation_successful( $t_redirect );
-
-layout_page_end();
+print_header_redirect( $t_redirect );

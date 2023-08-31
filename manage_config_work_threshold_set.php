@@ -51,12 +51,6 @@ form_security_validate( 'manage_config_work_threshold_set' );
 
 auth_reauthenticate();
 
-$t_redirect_url = 'manage_config_work_threshold_page.php';
-
-layout_page_header( lang_get( 'manage_threshold_config' ), $t_redirect_url );
-
-layout_page_begin();
-
 $g_access = current_user_get_access_level();
 $g_project = helper_get_current_project();
 
@@ -250,6 +244,4 @@ set_capability_row( 'reminder_receive_threshold' );
 
 form_security_purge( 'manage_config_work_threshold_set' );
 
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( 'manage_config_work_threshold_page.php' );

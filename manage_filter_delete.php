@@ -67,11 +67,4 @@ filter_db_delete_filter( $f_filter_id );
 
 form_security_purge( 'manage_filter_delete' );
 
-$t_redirect_page = 'manage_filter_page.php';
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin();
-
-html_operation_successful( $t_redirect_page );
-
-layout_page_end();
+print_header_redirect( 'manage_filter_page.php' );

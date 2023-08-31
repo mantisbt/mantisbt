@@ -139,10 +139,5 @@ user_pref_set( $f_user_id, $t_prefs, ALL_PROJECTS );
 
 form_security_purge( 'account_prefs_update' );
 
-layout_page_header( null, $f_redirect_url );
+print_header_redirect( $f_redirect_url );
 
-layout_page_begin();
-
-html_operation_successful( $f_redirect_url );
-
-layout_page_end();

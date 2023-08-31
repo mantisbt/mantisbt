@@ -73,7 +73,4 @@ $t_command->execute();
 form_security_purge( 'manage_proj_ver_update' );
 
 $t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_version->project_id . '#versions';
-layout_page_header( null, $t_redirect_url );
-layout_page_begin( 'manage_overview_page.php' );
-html_operation_successful( $t_redirect_url );
-layout_page_end();
+print_header_redirect( $t_redirect_url );

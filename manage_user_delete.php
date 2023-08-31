@@ -80,10 +80,4 @@ $t_command->execute();
 
 form_security_purge( 'manage_user_delete' );
 
-layout_page_header( null, 'manage_user_page.php' );
-
-layout_page_begin( 'manage_overview_page.php' );
-
-html_operation_successful( 'manage_user_page.php' );
-
-layout_page_end();
+print_header_redirect( 'manage_user_page.php' );
