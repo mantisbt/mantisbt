@@ -163,10 +163,11 @@ function print_successful_redirect_to_bug( $p_bug_id ) {
  * If the show query count is OFF, redirect right away.
  *
  * @param string $p_redirect_to URI to redirect to.
+ * @param bool $p_force_show Force showing operation successful
  * @return void
  */
-function print_successful_redirect( $p_redirect_to ) {
-	if( helper_log_to_page() ) {
+function print_successful_redirect( $p_redirect_to, $p_force_show = false ) {
+	if( $p_force_show || helper_log_to_page() ) {
 		layout_page_header( null, $p_redirect_to );
 		layout_page_begin();
 		echo '<br /><div class="center">';
