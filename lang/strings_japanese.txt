@@ -46,6 +46,7 @@
  * @author Hiro884
  * @author Hzy980512
  * @author LaMagiaaa
+ * @author M1660661
  * @author Macofe
  * @author Makoto Asai
  * @author MathXplore
@@ -107,6 +108,7 @@ $s_unassigned_projects_label = '未割り当てプロジェクト';
 $s_copy_users = 'ユーザーをコピー';
 $s_copy_categories_from = 'このプロジェクトからカテゴリをコピー';
 $s_copy_categories_to = 'このプロジェクトへカテゴリをコピー';
+$s_copy_categories_exclude_inherited = '継承されたカテゴリを除外する';
 $s_copy_versions_from = 'このプロジェクトからバージョンをコピー';
 $s_copy_versions_to = 'このプロジェクトへバージョンをコピー';
 $s_copy_users_from = 'このプロジェクトからユーザーをコピー';
@@ -768,6 +770,7 @@ $s_reset_password_msg2 = 'パスワードのリセットを行うと、パスワ
 $s_show_all_users = 'すべて';
 $s_users_unused = '未使用';
 $s_users_new = '新規';
+$s_email_not_unique = '電子メール アドレスは少なくとも 1 つの他のユーザー アカウントに関連付けられています';
 $s_account_reset_msg = '選択したユーザーのメールアドレスに、確認のメールを送付しました。メールの指示に従うとパスワードを変更できます。';
 $s_account_reset_msg2 = 'アカウントのパスワードを空にしました...';
 $s_account_unlock_msg = 'アカウントのロックを解除しました。';
@@ -867,6 +870,7 @@ $s_signup_done_title = 'アカウント登録を処理しました。';
 $s_password_emailed_msg = 'おめでとうございます。登録に成功しました。メールアドレスを確認するために、ただいまメールを送信しています。このメールに含まれるリンクにアクセスすることで、あなたのアカウントは有効化されます。';
 $s_no_reponse_msg = 'アカウント確認処理の終了まで 7 日間待ちます。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは除去される場合があります。';
 $s_signup_captcha_request_label = '右側のボックスに表示されている文字列をそのまま入力してください。';
+$s_signup_captcha_play = 'キャプチャ コードの音声を再生する';
 $s_signup_captcha_refresh = '新しいコードを生成する';
 $s_signup_info = 'このフォームへの入力を完了し、入力内容を検証するとすぐに、指定したメールアドレスに確認メッセージをお送りします。<br />確認メールのリンクに従うと、アカウントを有効にできます。7 日以内にアカウントを有効にできなかった場合は、アカウントは無効になります。<br />アカウントの確認メールを受信するために、有効なメールアドレスを指定する必要があります。';
 $s_signup_title = 'ユーザー登録';
@@ -1414,6 +1418,7 @@ $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '項目「%1$s」は%2$d文字以下であ
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'その API トークン「%s」は既に使用されています。戻って別の API トークンを選択してください。';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '$g_log_destination "%s" に指定したファイルは読み取り専用です。';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = '追加した利用者はこの課題を監視するのに十分なアクセス権限がありません。';
+$MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'ID「 %d 」のユーザー API トークンが見つかりません。';
 $s_dropzone_default_message = 'ドラッグ＆ドロップ、選択、貼り付けでファイルを添付';
 $s_dropzone_fallback_message = 'ブラウザがドラッグ&ドロップによるアップロードに対応していません。';
 $s_dropzone_file_too_big = 'ファイルが大きすぎます ({{filesize}} MiB)。ファイルの最大値: {{maxFilesize}} MiB。';

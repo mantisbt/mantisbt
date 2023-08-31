@@ -120,7 +120,7 @@ $s_stays_on_top = 'תמיד עליון';
 $s_bugnote_link_title = 'קישור ישיר להערה';
 $s_delete_bugnote_button = 'מחיקת הערה';
 $s_delete_bugnote_sure_msg = 'האם למחוק הערה זו?';
-$s_bug_relationships = 'קשרי-גומלין';
+$s_bug_relationships = 'קשרי־גומלין';
 $s_empty_password_sure_msg = 'ססמת החשבון ריקה. האם זו אכן הכוונה?';
 $s_empty_password_button = 'שימוש בססמה ריקה';
 $s_reauthenticate_title = 'הזדהות';
@@ -1254,8 +1254,7 @@ $s_timeline_issue_note_created = '<span class="username">%1$s</span> הגיב/ה
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> מנטר/ת סוגיה <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> הפסיק/ה לנטר סוגיה <span class="issue_id">%2$s</span>';
 $s_timeline_issue_tagged = '<span class="username">%1$s</span> סוגיה מתוייגת <span class="tag_name">%2$s</span> עם <span class="tag_name">%3$s</span>';
-$s_timeline_issue_untagged = '
-<span class="username">%1$s</span>תג הוסר<span class="tag_name">%3$s</span>מ־<span class="issue_id">%2$s</span>';
+$s_timeline_issue_untagged = '<span class="username">%1$s</span>תג הוסר<span class="tag_name">%3$s</span>מ־<span class="issue_id">%2$s</span>';
 $s_timeline_issue_resolved = '<span class="username">%1$s</span> פתר/ה סוגיה <span class="issue_id">%2$s</span>';
 $s_timeline_issue_closed = '<span class="username">%1$s</span> סגר/ה סוגיה <span class="issue_id">%2$s</span>';
 $s_timeline_issue_reopened = '<span class="username">%1$s</span> פתח/ה סוגיה <span class="issue_id">%2$s</span> מחדש';
