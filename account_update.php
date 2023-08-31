@@ -81,8 +81,6 @@ $f_password_current = gpc_get_string( 'password_current', '' );
 $f_password        	= gpc_get_string( 'password', '' );
 $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
-$t_redirect_url = 'index.php';
-
 $t_update_email = false;
 $t_update_password = false;
 $t_update_realname = false;
@@ -136,21 +134,12 @@ if( !is_blank( $f_password ) ) {
 	}
 }
 
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin();
-
-$t_message = '';
-
 if( $t_update_email ) {
 	user_set_email( $t_user_id, $f_email );
-	$t_message .= lang_get( 'email_updated' );
 }
 
 if( $t_update_password ) {
 	user_set_password( $t_user_id, $f_password );
-	$t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
-	$t_message .= lang_get( 'password_updated' );
 
 	# Clear the verification token
 	if( $t_account_verification ) {
@@ -160,12 +149,8 @@ if( $t_update_password ) {
 
 if( $t_update_realname ) {
 	user_set_realname( $t_user_id, $t_realname );
-	$t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
-	$t_message .= lang_get( 'realname_updated' );
 }
 
 form_security_purge( 'account_update' );
 
-html_operation_successful( $t_redirect_url, $t_message );
-
-layout_page_end();
+print_header_redirect( 'index.php' );

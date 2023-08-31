@@ -49,12 +49,5 @@ auth_impersonate( $f_user_id );
 
 form_security_purge( 'manage_user_impersonate' );
 
-$t_redirect_to = config_get_global( 'default_home_page' );
-
-layout_page_header();
-
-layout_page_begin( null );
-
-html_operation_successful( $t_redirect_to );
-
-layout_page_end();
+$t_redirect_url = config_get_global( 'default_home_page' );
+print_header_redirect( $t_redirect_url );

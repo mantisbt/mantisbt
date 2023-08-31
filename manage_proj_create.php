@@ -108,9 +108,4 @@ if( 0 != $f_parent_id ) {
 
 form_security_purge( 'manage_proj_create' );
 
-layout_page_header( null, $t_redirect_url );
-layout_page_begin( 'manage_overview_page.php' );
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( $t_redirect_url );

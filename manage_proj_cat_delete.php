@@ -84,7 +84,4 @@ if( $t_project_id == ALL_PROJECTS ) {
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_project_id . '#categories';
 }
 
-layout_page_header( null, $t_redirect_url );
-layout_page_begin( 'manage_overview_page.php' );
-html_operation_successful( $t_redirect_url );
-layout_page_end();
+print_header_redirect( $t_redirect_url );

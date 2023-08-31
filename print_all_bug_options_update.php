@@ -86,17 +86,16 @@ $t_result = db_query( $t_query, array( $c_export, $t_user_id ) );
 
 form_security_purge( 'print_all_bug_options_update' );
 
-layout_page_header( null, $f_redirect_url );
-
-layout_page_begin();
-
 if( $t_result ) {
-	html_operation_successful( $f_redirect_url );
+	print_header_redirect( $f_redirect_url );
 } else {
+	layout_page_header( null, $f_redirect_url );
+	layout_page_begin();
+
 	echo '<div class="failure-msg">';
 	print error_string( ERROR_GENERIC ) . '<br />';
 	print_link_button( $f_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
-}
 
-layout_page_end();
+	layout_page_end();
+}

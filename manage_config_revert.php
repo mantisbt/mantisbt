@@ -87,12 +87,4 @@ if( '' != $f_revert ) {
 
 form_security_purge( 'manage_config_revert' );
 
-$t_redirect_url = $f_return;
-
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin();
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( $f_return );

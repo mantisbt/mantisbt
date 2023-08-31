@@ -85,10 +85,4 @@ custom_field_update( $f_field_id, $t_values );
 
 form_security_purge( 'manage_custom_field_update' );
 
-layout_page_header( null, $f_return );
-
-layout_page_begin( 'manage_overview_page.php' );
-
-html_operation_successful( $f_return );
-
-layout_page_end();
+print_header_redirect( $f_return );

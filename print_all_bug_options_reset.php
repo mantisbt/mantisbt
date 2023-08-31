@@ -77,17 +77,16 @@ form_security_purge( 'print_all_bug_options_reset' );
 
 $t_redirect_url = 'print_all_bug_options_page.php';
 
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin();
-
 if( $t_result ) {
-	html_operation_successful( $t_redirect_url );
+	print_header_redirect( $t_redirect_url );
 } else {
+	layout_page_header( null, $t_redirect_url );
+	layout_page_begin();
+
 	echo '<div class="failure-msg">';
 	echo error_string( ERROR_GENERIC ) . '<br />';
 	print_link_button( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
-}
 
-layout_page_end();
+	layout_page_end();
+}

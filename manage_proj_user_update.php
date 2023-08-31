@@ -302,10 +302,7 @@ if( !$f_confirmed ) {
 	}
 
 	form_security_purge( 'manage_proj_user_update' );
+	
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#project-users';
-	layout_page_header( null, $t_redirect_url );
-	layout_page_begin( 'manage_overview_page.php' );
-	html_operation_successful( $t_redirect_url );
-	layout_page_end();
-
+	print_header_redirect( $t_redirect_url );
 }
