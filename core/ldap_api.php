@@ -100,19 +100,17 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	}
 
 	# Set minimum TLS protocol version flag (ex: LDAP_OPT_X_TLS_PROTOCOL_TLS1_2).
-	if( version_compare( PHP_VERSION, '7.1.0', '>=' ) ) {
-		$t_tls_protocol_min = config_get_global( 'ldap_tls_protocol_min' );
-		if( $t_tls_protocol_min > 0 ) {
-			log_event( LOG_LDAP, 'Attempting to set minimum TLS protocol' );
-			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_X_TLS_PROTOCOL_MIN, $t_tls_protocol_min );
-			if( !$t_result ) {
-				ldap_log_error( $t_ds );
-				log_event( LOG_LDAP, "Error: Failed to set minimum TLS version on LDAP server" );
-				trigger_error( ERROR_LDAP_UNABLE_TO_SET_MIN_TLS, ERROR );
+	$t_tls_protocol_min = config_get_global( 'ldap_tls_protocol_min' );
+	if( $t_tls_protocol_min > 0 ) {
+		log_event( LOG_LDAP, 'Attempting to set minimum TLS protocol' );
+		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_X_TLS_PROTOCOL_MIN, $t_tls_protocol_min );
+		if( !$t_result ) {
+			ldap_log_error( $t_ds );
+			log_event( LOG_LDAP, "Error: Failed to set minimum TLS version on LDAP server" );
+			trigger_error( ERROR_LDAP_UNABLE_TO_SET_MIN_TLS, ERROR );
 
-				# Return required as function may be called with error suppressed
-				return false;
-			}
+			# Return required as function may be called with error suppressed
+			return false;
 		}
 	}
 
