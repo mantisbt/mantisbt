@@ -75,17 +75,6 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
 		}
 	}
 
-	# Attempt to use mcrypt_create_iv - this is built into newer versions of php on windows
-	# if the mcrypt extension is enabled on Linux, it takes random data from /dev/urandom
-	if( !isset( $t_random_string ) ) {
-		if( function_exists( 'mcrypt_create_iv' ) ) {
-			$t_random_bytes = mcrypt_create_iv( $p_bytes, MCRYPT_DEV_URANDOM );
-			if( $t_random_bytes !== false && strlen( $t_random_bytes ) === $p_bytes ) {
-				$t_random_string = $t_random_bytes;
-			}
-		}
-	}
-
 	# Next we try to use the /dev/urandom PRNG provided on Linux systems. This
 	# is nowhere near as secure as /dev/random but it is still satisfactory for
 	# the needs of MantisBT, especially given the fact that we don't want this
