@@ -1403,7 +1403,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'セッション変数「%1$s」が
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'あなたのセッションは無効になりました。';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'セキュリティ トークンが無効です。セッションがタイムアウトした、または実行を二度押してしまった可能性があります。';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'セキュリティー上の理由により、 $g_crypto_master_salt の設定が config_inc.php で間違っているあるいは 16 文字以下の場合、 MantisBT はwill は作動しません。';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = '暗号化のため、強いランダム性の原因を見つけることができません。';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'この画面はこのメソッドでは参照できません。';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = '並べ替え項目が無効です。';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = '日付の書式が無効です。';

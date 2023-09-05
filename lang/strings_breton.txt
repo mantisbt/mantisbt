@@ -1361,7 +1361,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'An argemmenn dalc\'h « %1$s » n\
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Nullet eo bet ho talc\'h.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Direizh eo jedouer surentez ar furmskrid. Marteze hoc\'h aet en tu all d\'an termen resissaet evit an dalc\'h pe hoc\'h eus kaset ar furmskrid div wezh dre fazi.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Evit abegoù surentez ned a ket MantisBT en-dro pa ne vez spisaet mat $g_crypto_master_salt e config_inc.php pe pa\'z eus nebeutoc\'h eget 16 arouezenn ennañ.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'N\'haller ket kavout ur vammenn zargouezhek-kenañ evit ar rinegouriezh.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Ne c\'haller ket mont d\'ar bajenn-mañ oc\'h implijout an hentenn-mañ.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Maezienn urzhiañ direizh.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Direizh eo furmad an deiziad.';

@@ -1397,7 +1397,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'متغير الجلسة "%1$s" ل�
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'جلستك أصبحت غير صحيحة.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استمارة سرية غير صحيح. قد يرجع السبب إلى انتهاء وقت الجلسة، أو إرسال النموذج عن طريق الخطأ مرتين.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'لأسباب تتعلق بالأمان; لن تعمل MantisBT عندما لا يتم تحديد $g_crypto_master_salt بشكل صحيح في config_inc.php أو أقصر من 16 حرفا.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'تعذر العثور على مصدر العشوائية القوية لأغراض التشفير.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'هذه الصفحة لا يمكن الوصول إليها باستخدام هذه الطريقة.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'حقل ترتيب غير صحيح.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'نسق تاريخ غير صالح.';

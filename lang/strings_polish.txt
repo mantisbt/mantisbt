@@ -1355,7 +1355,6 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole „%1$s” zawiera nieprawidłowe p
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Zmienna sesyjna „%1$s” nie została znaleziona.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Twoja sesja została unieważniona.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Niewłaściwy token bezpieczeństwa. Może być to spowodowane wygaśnięciem sesji lub przypadkowo wysłanym dwukrotnie formularzem.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Nie można znaleźć źródła silnej losowości do celów kryptograficznych.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Tej strony nie moża uzyskać za pomocą tej metody.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Nieprawidłowe pole sortowania.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Nieprawidłowy format daty.';

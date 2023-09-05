@@ -1417,7 +1417,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Un parámetro de sesión esperado 
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Su sesión ya no es válida.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de seguridad del formulario no válido. Esto podría ser causado por haberse agotado el tiempo de espera de la sesión, o por enviar el formulario dos veces por accidente.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Por razones de seguridad MantisBT no funcionará cuando $g_crypto_master_salt no se haya especificado correctamente en config_inc.php o tenga una longitud menor a 16 caracteres.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'No es posible encontrar una fuente de aleatoriedad fuerte para propósitos criptográficos.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Esta página no puede ser accedida utilizando este método.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Campo no válido para ordenamiento.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Formato de fecha no válido';

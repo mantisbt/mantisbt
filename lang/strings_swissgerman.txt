@@ -1190,7 +1190,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session-Variable „%1$s“ isch n
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Dyy Sitzig isch uugiltig wore.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Nit giltig Formular Sicherheits-Token. Villt het d Sitzig e Momänt uusgsetzt. Oder Du hesch s Formular us Versäh zweimol abgeschickt.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Us Sicherheitsgrind stoht MantisBT nit z Verfiegig, wänn $g_crypto_master_salt in config_inc.php nit korräkt gsetzt isch.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'S isch kei Quälle fir sicheri Zuefallszahle gfunde wore fir d Verschlisslig.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Uf die Syte cha nit mit däre Methode zuegriffe wäre.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Nit giltig Sortierfäld.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Nit giltig Dateformat';

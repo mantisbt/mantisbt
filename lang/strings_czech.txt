@@ -1373,7 +1373,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Proměnná spojení "%1$s" nebyla 
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Spojení je neplatné.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný zabezpečující token formuláře. Buď byl nechtě formulář odeslán dvakrát nebo došlo k vypršení časového limitu relace.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Z bezpečnostních důvodů MantisBT nebude fungovat, pokud není $g_crypto_master_salt správně uveden v config_inc.php nebo je kratší než 16 znaků.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Nelze najít zdroj silné náhodnosti pro kryptografické účely.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Tato stránka není touto metodou přístupná.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Neplatné řadicí pole.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neplatný formát data.';

@@ -1395,7 +1395,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'משנתה השיח „%1$s” ל�
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'השיח שלך איבד את תקינותו.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'אסימון שליחת טופס בלתי־תקין. זה היה יכול להיגרם על־ידי פקיעת זמן השיחה או שליחה של הטופס פעמיים.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'מטעמי אבטחה MantisBT לא יפעל כאשר $ g_crypto_master_salt לא הוגדר כהלכה ב־config_inc.php או שאורכו קצר מ־16 תווים.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'לא ניתן למצוא מקור לאקראיות חזקה למטרות הצפנה.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'לא ניתן לגשת לדף הזה בשיטה הזאת.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'שדה מיון לא תקין.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'תבנית תאריך לא תקין';
