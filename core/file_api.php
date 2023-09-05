@@ -761,7 +761,7 @@ function file_clean_name( $p_filename ) {
  */
 function file_generate_unique_name( $p_filepath ) {
 	do {
-		$t_string = md5( crypto_generate_random_string( 32, false ) );
+		$t_string = md5( random_bytes( 32 ) );
 	} while( !diskfile_is_name_unique( $t_string, $p_filepath ) );
 
 	return $t_string;
