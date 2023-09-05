@@ -61,8 +61,11 @@ function crypto_init() {
  * @param integer $p_bytes                    Number of bytes of randomness required.
  * @param boolean $p_require_strong_generator Whether or not a weak source of randomness can be used by this function.
  * @return string|null Raw binary string containing the requested number of bytes of random output or null if the output couldn't be created
+ * @deprecated random_bytes() should be used in preference to this function
  */
 function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = true ) {
+	error_parameters( __FUNCTION__ . '()', 'random_bytes()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	return random_bytes( $p_bytes );
 }
 
@@ -76,8 +79,11 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
  * source of randomness should always be used.
  * @param integer $p_bytes Number of bytes of strong randomness required.
  * @return string Raw binary string containing the requested number of bytes of random output
+ * @deprecated random_bytes() should be used in preference to this function
  */
 function crypto_generate_strong_random_string( $p_bytes ) {
+	error_parameters( __FUNCTION__ . '()', 'random_bytes()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	return random_bytes( $p_bytes );
 }
 
