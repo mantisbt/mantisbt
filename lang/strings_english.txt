@@ -1736,7 +1736,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session variable "%1$s" not found.
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Your session has become invalidated.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Invalid form security token. This could be caused by a session timeout, or accidentally submitting the form twice.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'For security reasons MantisBT will not operate when $g_crypto_master_salt is not specified correctly in config_inc.php or is shorter than 16 characters long.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Unable to find a source of strong randomness for cryptographic purposes.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'This page cannot be accessed using this method.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Invalid sort field.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Invalid date format.';

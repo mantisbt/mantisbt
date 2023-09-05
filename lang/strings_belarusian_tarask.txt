@@ -1377,7 +1377,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Зьменная сэсіі «%1$s
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Вашая сэсія стала нядзейнай.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Няслушны ключ бясьпекі. Верагодна, выпадкова, Вы двойчы даслалі форму?';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Дзеля прычынаў бясьпекі MantisBT ня будзе працаваць, калі $g_crypto_master_salt ня вызначаны карэктна ў config_inc.php або яго даўжыня менш за 16 сымбаляў.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Не атрымалася знайсьці крыніцу генэрацыі трывалай выпадковай пасьлядоўнасьці для крыптаграфічных мэтаў.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Доступ да гэтай старонкі ня можа быць атрыманы праз гэты мэтад.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Няслушнае поле сартаваньня.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Няслушны фармат даты.';

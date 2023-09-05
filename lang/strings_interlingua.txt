@@ -1379,7 +1379,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Variabile de session "%1$s" non tr
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Tu session ha devenite invalide.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Le token de securitate del formulario es invalide. Isto pote esser causate per un expiration del session, o per submitter le formulario duo vices per accidente.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Pro rationes de securitate, MantisBT non functiona si $g_crypto_master_salt non es specificate correctemente in config_inc.php o es plus curte que 16 characteres.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Impossibile trovar un fonte de aleatorietate forte pro fines cryptographic.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Non es possibile acceder a iste pagina usante iste methodo.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Campo de ordinamento invalide.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Formato de data invalide.';

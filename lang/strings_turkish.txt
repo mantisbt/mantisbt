@@ -1410,7 +1410,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = '"%1$s" oturum değişkeni bulunama
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Uzun süredir sayfaya bakılmadığı için oturumunuz sonlandırılmıştır.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Geçersiz form güvenlik anahtarı. Bunun nedeni bir oturum zaman aşımı veya yanlışlıkla formu iki kez göndermeniz olabilir.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Güvenlik nedeniyle MantisBT, $g_crypto_master_salt config_inc.php dosyasında doğru bir şekilde belirtilmediğinde veya 16 karakterden kısa olduğunda çalışmaz.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Kriptografik amaçlar için güçlü bir rastgelelik kaynağı bulamıyor.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Bu sayfaya bu şekilde erişilemez.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Geçersiz alan sıralaması.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Geçersiz tarih biçimi.';

@@ -1389,7 +1389,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Premenná sedenia "%1$s" nebola n�
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sedenie je neplatné.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný bezpečnostný kód formulára. Príčinou môže byť uplynutie časového limitu alebo náhodné odosielanie formulára dvakrát.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Z bezpečnostných dôvodov ManitsBT nebude pracovať pokiaľ $g_crypto_master_salt nebude správne nastavený v config_inc.php, alebo je kratší než 16 znakov.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Nedá sa nájsť zdroj silnej náhodnosti pre kryptografické účely.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Táto stránka nie je touto metódou prístupná.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Neplatné radiace pole.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neplatný formát dátumu.';

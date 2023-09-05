@@ -1399,7 +1399,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = '查無工作階段變數 "%1$s"  �
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = '您的工作階段已經失效。';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = '無效的表單安全權杖，可能因工作階段逾時或重複送出表單所造成。';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = '基於安全性考量 MantisBT，在 config_inc.php 中的 $g_crypto_master_salt 尚未被正確設定或者字元長度小於 16 個字時不允許執行。';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = '無法取得足夠隨機強度的加密來源。';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = '無法使用此方式存取該頁面。';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = '無效的排序欄位。';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = '無效的日期格式。';
