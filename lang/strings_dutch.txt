@@ -1399,7 +1399,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'De sessievariabele "%1$s" is niet 
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Uw sessie is niet langer geldig.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Het beveiligingstoken heeft een ongeldige opmaak. Dit kan veroorzaakt zijn door een timeout van de sessie of het per ongeluk twee keer opsturen van het formulier.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Om veiligheidsredenen werkt MantisBT niet als $g_crypto_master_salt niet correct is opgegeven in config_inc.php of korter is dan 16 tekens.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Kan geen bron voor goede willekeurige getallen voor versleuteling vinden.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Deze pagina kan niet benaderd worden via deze methode.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Ongeldig sorteringsveld.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Ongeldige datumopmaak.';

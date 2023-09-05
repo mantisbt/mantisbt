@@ -1351,7 +1351,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Sesijos kintamasis "%1$s" nerastas
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Jūsų sesija tapo negaliojančiais.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neteisingas formą saugumo raktas. Ar jūs turėjote pateikti formą du kartus dėl nelaimingo atsitikimo?';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Saugumo sumetimais MantisBT neveiks, kai $g_crypto_master_salt yra neteisingai nurodytas config_inc.php arba yra trumpesnis nei 16 simbolių.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Nepavyko rasti didelio atsitiktinumo šaltinio kriptografijos tikslais.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Šis puslapis negali būti pasiekiamas naudojantis šiuo metodu.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Neteisingas rūšiuoti srityje.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neteisingas datos formatas.';

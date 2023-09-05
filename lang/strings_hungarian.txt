@@ -1388,7 +1388,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A(z) „%1$s” munkamenet-változ
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'A munkamenete érvénytelenítetté vált.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Érvénytelen biztonsági token. Ezt a munkamenet időtúllépése, vagy az űrlap véletlenül kétszer történő elküldése okozhatja.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Biztonsági okokból a MantisBT nem működik, ha a $g_crypto_master_salt nincs helyesen megadva a config_inc.php-ban, vagy ha rövidebb mint 16 karakter.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Nem található erős véletlenszerűséget biztosító forrás a kriptográfiai célokhoz.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Ez a lap nem érhető el ezzel a módszerrel.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Érvénytelen rendezési mező.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Érvénytelen dátumformátum.';

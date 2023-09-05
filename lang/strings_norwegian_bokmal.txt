@@ -1361,7 +1361,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Finner ikke sesjons-variabelen "%1
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Din brukersesjon er ikke lenger gyldig';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ugyldig sikkerhetselement i skjema. Dette kan skyldes at sesjonen gikk ut på dato, eller at du sendte inn skjemaet to ganger ved en tilfeldighet.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Av sikkerhetsårsaker vil ikke MantisBT kjøre når $g_crypto_master_salt ikke er oppgitt korrekt i config_inc.php eller er kortere enn 16 tegn';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Kunne ikke finne en kilde til sterk tilfeldighet for kryptografiske formål.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Siden kan ikke åpnes med denne metoden';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Ugyldig sorteringsfelt';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Ugyldig datoformat.';
