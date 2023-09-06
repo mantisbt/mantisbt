@@ -48,7 +48,7 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 	);
 
 	$t_command = new ConfigsGetCommand( $t_data );
-	$t_result = $t_command->execute( $t_data );
+	$t_result = $t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
