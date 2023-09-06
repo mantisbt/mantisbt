@@ -164,6 +164,7 @@ class VersionGetCommand extends Command {
 
 		$t_version['released'] =(bool)$p_version->released;
 		$t_version['obsolete'] = (bool)$p_version->obsolete;
+		ApiObjectFactory::$soap = false;
 		$t_version['timestamp'] = ApiObjectFactory::datetime( $p_version->date_order );
 
 		return $t_version;
