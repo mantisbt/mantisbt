@@ -262,8 +262,6 @@ $t_issue_id = (int)$t_result['issue_id'];
 
 form_security_purge( 'bug_report' );
 
-layout_page_header_begin();
-
 if( $f_report_stay ) {
 	$t_fields = array(
 		'category_id', 'severity', 'reproducibility', 'profile_id', 'platform',
@@ -282,24 +280,7 @@ if( $f_report_stay ) {
 
 	$t_report_more_bugs_url = string_get_bug_report_url() . '?' . http_build_query( $t_data );
 
-	html_meta_redirect( $t_report_more_bugs_url );
+	print_header_redirect( $t_report_more_bugs_url );
 } else {
-	html_meta_redirect( string_get_bug_view_url( $t_issue_id ) );
+	print_header_redirect_view( $t_issue_id );
 }
-
-layout_page_header_end();
-
-layout_page_begin( 'bug_report_page.php' );
-
-$t_buttons = array(
-	array( string_get_bug_view_url( $t_issue_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_issue_id ) ),
-	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
-);
-
-if( $f_report_stay ) {
-	$t_buttons[] = array( $t_report_more_bugs_url, lang_get( 'report_more_bugs' ) );
-}
-
-html_operation_confirmation( $t_buttons, '', CONFIRMATION_TYPE_SUCCESS );
-
-layout_page_end();
