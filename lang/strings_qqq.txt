@@ -73,6 +73,7 @@
  * @author Vuh
  * @author Waldir
  * @author Waldyrious
+ * @author Zexmax
  */
 
 $s_directionality = '{{Optional}}
@@ -80,46 +81,44 @@ This message define the directionality to be used for the given language.
 The only two possible values are:
 * ltr : for left-to-right scripts
 * rtl : for right-to-left scripts (eg: arabic, hebrew,...)';
-$s_actiongroup_menu_copy = '{{Identical|Copy}}';
-$s_actiongroup_menu_assign = '{{Identical|Assign}}';
-$s_actiongroup_menu_resolve = '{{Identical|Resolve}}';
-$s_actiongroup_menu_update_severity = 'in View issues, in a dropdown list of mass issue actions right below the issue list';
-$s_actiongroup_menu_update_view_status = 'Isto refere-se à visibilidade do bug (Privado ou público).
-
-This refers to the bug\'s visibility (private or public).';
-$s_actiongroup_menu_update_category = '{{Identical|Update category}}';
-$s_actiongroup_menu_update_field = '{{Identical|Update}}';
-$s_actiongroup_menu_add_note = '{{Identical|Add note}}';
-$s_actiongroup_menu_attach_tags = '{{Identical|Attach tag}}';
-$s_actiongroup_error_issue_is_readonly = '';
+$s_actiongroup_menu_copy = '{{Identical|Kopiraj}}';
+$s_actiongroup_menu_assign = '{{Identical|Dodeli}}';
+$s_actiongroup_menu_resolve = '{{Identical|Reši}}';
+$s_actiongroup_menu_update_severity = 'u prikazu problema, na padajućoj listi masovnih radnji za probleme odmah ispod liste problema';
+$s_actiongroup_menu_update_view_status = 'Ovo se odnosi na vidljivost greške (privatna ili javna).';
+$s_actiongroup_menu_update_category = '{{Identical|Ažuriraj kategoriju}}';
+$s_actiongroup_menu_update_field = '{{Identical|Ažuriraj}}';
+$s_actiongroup_menu_add_note = '{{Identical|Dodaj belešku}}';
+$s_actiongroup_menu_attach_tags = '{{Identical|Zakači oznaku}}';
+$s_actiongroup_error_issue_is_readonly = 'Problem je samo za čitanje.';
 $s_date_order = '[[File:MantisBT-filter.png|150px|right]]
-Option in bug report filter. See screenshot.';
+Opcija u filteru izveštaja o greškama. Pogledajte snimak ekrana.';
 $s_print_all_bug_page_link = '[[File:MantisBT-filter.png|150px|right]]
-Link on bug report. See screenshot.';
+Link za izveštaj o grešci. Pogledajte snimak ekrana.';
 $s_csv_export = '[[File:MantisBT-filter.png|150px|right]]
-Link on bug report. See screenshot.';
+Link za izveštaj o grešci. Pogledajte snimak ekrana.';
 $s_excel_export = '[[File:MantisBT-filter.png|150px|right]]
-Link on bug report. See screenshot.
+Link za izveštaj o grešci. Pogledajte snimak ekrana.
 
-“Excel” is the name of a program; do not translate it unless Microsoft has translated the program’s name into your language (e.g., 엑셀 in Korean).';
-$s_anonymous = '{{Identical|Anonymous}}';
-$s_assigned_projects = '{{Identical|Assigned project}}';
-$s_assigned_projects_label = '{{Identical|Assigned project}}';
-$s_copy_versions_from = 'No es un lugar, es un objeto al que se hace referencia. No es "desde", es "de".';
-$s_field = '{{Identical|Field}}';
-$s_bugnote = '{{Identical|Note}}';
-$s_announcement = '{{Identical|Announcement}}';
-$s_bug_relationships = '{{Identical|Relationship}}';
-$s_global_categories = '{{Identical|Global category}}';
+„Eksel“ je naziv programa; nemojte ga prevoditi osim ako Microsoft nije preveo naziv programa na vaš jezik (npr. 엑셀 na korejskom).';
+$s_anonymous = '{{Identical|Anonimni}}';
+$s_assigned_projects = '{{Identical|Dodeljeni projekat}}';
+$s_assigned_projects_label = '{{Identical|Dodeljeni projekti}}';
+$s_copy_versions_from = 'To nije mesto, to je objekat na koji se upućuje. Nije „od“, već „od“.';
+$s_field = '{{Identical|Polje}}';
+$s_bugnote = '{{Identical|Beleška}}';
+$s_announcement = '{{Identical|Najava}}';
+$s_bug_relationships = '{{Identical|Odnosi}}';
+$s_global_categories = '{{Identical|Globalna kategorija}}';
 $s_opensearch_id_short = '{{Identical|ID}}';
-$s_opensearch_text_short = '{{Identical|Text}}';
-$s_select_option = '{{Identical|Select}}';
-$s_view_status_bugs_conf_msg = 'Something to do with public vs. private bugs...';
-$s_category_group_bugs_button = '{{Identical|Update category}}';
-$s_login_cookies_disabled = 'J\'ai mis "cookies" au lieu de "témoins" car c\'est le terme utilisé dans les paramètres des navigateurs (firefox, chrome).';
-$s_prefix_for_deleted_users = '{{Identical|User}}';
+$s_opensearch_text_short = '{{Identical|Tekst}}';
+$s_select_option = '{{Identical|Izaberi}}';
+$s_view_status_bugs_conf_msg = 'Nešto u vezi sa javnim i privatnim greškama...';
+$s_category_group_bugs_button = '{{Identical|Ažurirajte kategoriju}}';
+$s_login_cookies_disabled = 'Stavio sam „kolačiće“ umesto „svedoci“ jer je to termin koji se koristi u podešavanjima pretraživača (fajrefoks, chrom).';
+$s_prefix_for_deleted_users = '{{Identical|Korisnik}}';
 $s_administrator = '{{Identical|Administrator}}';
-$s_myself = '{{Identical|Myself}}';
+$s_myself = '{{Identical|Ja}}';
 $s_reproducibility_enum_string = 'Traduction de N/A (not applicable, not available) modifiée de S/O en sans objet.
 S/O n\'est pas une abréviation claire.';
 $s_new_account_username = '{{Identical|Username}}';
@@ -249,6 +248,7 @@ $s_show_disabled = 'Should be consistent with {{msg-mantis|S hide disabled}}';
 $s_p = '{{Optional}}';
 $s_date_created = '{{Identical|Date created}}';
 $s_edit_user_link = '{{Identical|Edit user}}';
+$s_search_user_hint = 'Korisničko ime, pravo ime ili e-mail';
 $s_message = '{{Identical|Message}}';
 $s_current_status = '{{Identical|Current status}}';
 $s_workflow = '{{Identical|Workflow}}';
