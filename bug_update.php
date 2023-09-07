@@ -509,4 +509,4 @@ if( $t_resolve_issue ) {
 
 form_security_purge( 'bug_update' );
 
-print_successful_redirect_to_bug( $f_bug_id );
+print_header_redirect_view( $f_bug_id );

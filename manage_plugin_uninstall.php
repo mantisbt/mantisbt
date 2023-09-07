@@ -81,4 +81,4 @@ if( !is_null( $t_plugin ) ) {
 
 form_security_purge( 'manage_plugin_uninstall' );
 
-print_successful_redirect( 'manage_plugin_page.php' );
+print_header_redirect( 'manage_plugin_page.php' );

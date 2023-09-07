@@ -54,5 +54,5 @@ helper_ensure_confirmed( lang_get( 'confirm_revision_drop' ), lang_get( 'revisio
 bug_revision_drop( $f_revision_id );
 form_security_purge( 'bug_revision_drop' );
 
-print_successful_redirect_to_bug( $t_revision['bug_id'] );
+print_header_redirect_view( $t_revision['bug_id'] );
 

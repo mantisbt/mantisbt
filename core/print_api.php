@@ -151,11 +151,11 @@ function print_header_redirect_view( $p_bug_id ) {
  *
  * @param integer $p_bug_id A bug identifier.
  * @return void
+ * @deprecated Use print_header_redirect() instead.
  */
 function print_successful_redirect_to_bug( $p_bug_id ) {
 	$t_url = string_get_bug_view_url( $p_bug_id );
-
-	print_successful_redirect( $t_url );
+	print_header_redirect( $t_url );
 }
 
 /**
@@ -165,19 +165,10 @@ function print_successful_redirect_to_bug( $p_bug_id ) {
  * @param string $p_redirect_to URI to redirect to.
  * @param bool $p_force_show Force showing operation successful
  * @return void
+ * @deprecated Use print_header_redirect() instead.
  */
 function print_successful_redirect( $p_redirect_to, $p_force_show = false ) {
-	if( $p_force_show || helper_log_to_page() ) {
-		layout_page_header( null, $p_redirect_to );
-		layout_page_begin();
-		echo '<br /><div class="center">';
-		echo lang_get( 'operation_successful' ) . '<br />';
-		print_link_button( $p_redirect_to, lang_get( 'proceed' ) );
-		echo '</div>';
-		layout_page_end();
-	} else {
-		print_header_redirect( $p_redirect_to );
-	}
+	print_header_redirect( $p_redirect_to );
 }
 
 /**

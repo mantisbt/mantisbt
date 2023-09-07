@@ -100,4 +100,4 @@ if( $f_add_and_edit ) {
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#versions';
 }
 
-print_successful_redirect( $t_redirect_url );
+print_header_redirect( $t_redirect_url );
