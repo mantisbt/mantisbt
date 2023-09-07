@@ -50,4 +50,4 @@ if( plugin_config_get( 'process_markdown' ) != $f_process_markdown ) {
 
 form_security_purge( 'plugin_format_config_edit' );
 
-print_successful_redirect( plugin_page( 'config', true ) );
+print_header_redirect( plugin_page( 'config', true ) );

@@ -48,4 +48,4 @@ $t_command->execute();
 
 form_security_purge( 'tag_detach' );
 
-print_successful_redirect_to_bug( $f_bug_id );
+print_header_redirect_view( $f_bug_id );

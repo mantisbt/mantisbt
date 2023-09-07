@@ -706,7 +706,7 @@ if( $f_reset ) {
     trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
 }
 
-print_successful_redirect( plugin_page( 'config', true ) );
+print_header_redirect( plugin_page( 'config', true ) );
 ]]>
 			</programlisting>
 

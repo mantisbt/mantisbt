@@ -67,4 +67,4 @@ foreach ( $t_subproject_ids as $t_subproject_id ) {
 
 form_security_purge( 'manage_proj_update_children' );
 
-print_successful_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#subprojects');
+print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#subprojects' );
