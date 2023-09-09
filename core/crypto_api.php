@@ -26,13 +26,11 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses error_api.php
- * @uses utility_api.php
  */
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
-require_api( 'utility_api.php' );
 
 /**
  * Initialise the CryptoAPI subsystem. This function checks whether the master
