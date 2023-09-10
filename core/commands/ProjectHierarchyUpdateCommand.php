@@ -108,7 +108,7 @@ class ProjectHierarchyUpdateCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		if( $this->project_id != helper_get_current_project() ) {

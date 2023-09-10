@@ -76,7 +76,7 @@ class TagDetachCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 * @throws ClientException
 	 */
 	protected function process() {

@@ -108,7 +108,7 @@ class MonitorAddCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		if( $this->projectId != helper_get_current_project() ) {
