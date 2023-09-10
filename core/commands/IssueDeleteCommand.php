@@ -75,6 +75,7 @@ class IssueDeleteCommand extends Command {
 	protected function process() {
 		log_event( LOG_WEBSERVICE, "deleting issue '" . $this->id . "'" );
 		bug_delete( $this->id );
+		return [];
 	}
 }
 
