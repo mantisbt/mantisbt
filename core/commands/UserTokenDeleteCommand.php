@@ -91,10 +91,11 @@ class UserTokenDeleteCommand extends Command {
 	/**
 	 * Process the command.
 	 * 
-	 * @return void
+	 * @return array Command response
 	 */
 	function process() {
 		$t_token_id = $this->query( 'id' );
 		api_token_revoke( $t_token_id, $this->user_id );
+		return [];
 	}
 }

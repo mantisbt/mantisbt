@@ -65,7 +65,7 @@ class ProjectDeleteCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @return void
+	 * @return array Command response
 	 */
 	protected function process() {
 		global $g_project_override;
@@ -74,5 +74,6 @@ class ProjectDeleteCommand extends Command {
 		event_signal( 'EVENT_MANAGE_PROJECT_DELETE', array( $this->id ) );
 
 		project_delete( $this->id );
+		return [];
 	}
 }

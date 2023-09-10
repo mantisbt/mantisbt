@@ -84,5 +84,7 @@ class TagDetachCommand extends Command {
 			tag_bug_detach( $this->tag_id, $this->issue_id );
 			event_signal( 'EVENT_TAG_DETACHED', array( $this->issue_id, array( $this->tag_id ) ) );
 		}
+
+		return [];
 	}
 }

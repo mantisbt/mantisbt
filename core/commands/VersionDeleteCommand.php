@@ -92,7 +92,7 @@ class VersionDeleteCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @return void
+	 * @return array Command response
 	 */
 	protected function process() {
 		global $g_project_override;
@@ -106,6 +106,7 @@ class VersionDeleteCommand extends Command {
 		version_remove( $this->version_id, '' );
 
 		$g_project_override = $t_prev_project_id;
+		return [];
 	}
 }
 

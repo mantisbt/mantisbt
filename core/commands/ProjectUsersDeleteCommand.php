@@ -117,7 +117,7 @@ class ProjectUsersDeleteCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @return void
+	 * @return array Command response
 	 */
 	protected function process() {
 		if( $this->user_id === ALL_USERS ) {
@@ -127,6 +127,8 @@ class ProjectUsersDeleteCommand extends Command {
 		} else {
 			project_remove_user( $this->project_id, $this->user_id );
 		}
+
+		return [];
 	}
 }
 
