@@ -1108,7 +1108,7 @@ function mci_project_version_as_array( array $p_version ) {
  * @param integer $p_issue_id The id of the issue.
  * @param array   $p_note     A note as passed to the soap api methods.
  *
- * @return String the string time entry to be added to the bugnote, in 'HH:mm' format
+ * @return string the string time entry to be added to the bugnote, in 'HH:mm' format
  */
 function mci_get_time_tracking_from_note( $p_issue_id, array $p_note ) {
 	if( !access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id ) ) {
