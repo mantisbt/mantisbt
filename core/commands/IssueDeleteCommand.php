@@ -70,7 +70,7 @@ class IssueDeleteCommand extends Command {
  	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		log_event( LOG_WEBSERVICE, "deleting issue '" . $this->id . "'" );

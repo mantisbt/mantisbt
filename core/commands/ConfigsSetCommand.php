@@ -168,7 +168,7 @@ class ConfigsSetCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns void
+	 * @return void
 	 */
 	protected function process() {
 		# The edit case is internal only to web UI and it will always have a single config option

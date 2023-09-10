@@ -132,7 +132,7 @@ class UserCreateCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		# Need to send the user creation mail in the tracker language, not in the creating admin's language

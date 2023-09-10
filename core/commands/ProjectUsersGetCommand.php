@@ -126,7 +126,7 @@ class ProjectUsersGetCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		global $g_project_override;

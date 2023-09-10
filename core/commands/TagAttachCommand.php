@@ -121,7 +121,7 @@ class TagAttachCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		$t_attached_tags = array();
