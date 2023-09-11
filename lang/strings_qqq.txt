@@ -84,13 +84,27 @@ The only two possible values are:
 $s_actiongroup_menu_copy = '{{Identical|Kopiraj}}';
 $s_actiongroup_menu_assign = '{{Identical|Dodeli}}';
 $s_actiongroup_menu_resolve = '{{Identical|Reši}}';
+$s_actiongroup_menu_update_priority = 'Prioritet ažuriranja';
+$s_actiongroup_menu_update_status = 'Ažuriraj status';
 $s_actiongroup_menu_update_severity = 'u prikazu problema, na padajućoj listi masovnih radnji za probleme odmah ispod liste problema';
 $s_actiongroup_menu_update_view_status = 'Ovo se odnosi na vidljivost greške (privatna ili javna).';
 $s_actiongroup_menu_update_category = '{{Identical|Ažuriraj kategoriju}}';
+$s_actiongroup_menu_set_sticky = 'Postavi/poništi ljepljivost';
 $s_actiongroup_menu_update_field = '{{Identical|Ažuriraj}}';
+$s_actiongroup_menu_update_product_version = 'Ažuriraj verziju proizvoda';
+$s_actiongroup_menu_update_target_version = 'Ažuriraj ciljnu verziju';
+$s_actiongroup_menu_update_fixed_in_version = 'Ažuriranje popravljeno u verziji';
+$s_actiongroup_menu_update_product_build = 'Ažuriraj proizvodnu verziju';
+$s_actiongroup_menu_update_due_date = 'Datum dospeća ažuriranja';
 $s_actiongroup_menu_add_note = '{{Identical|Dodaj belešku}}';
 $s_actiongroup_menu_attach_tags = '{{Identical|Zakači oznaku}}';
+$s_actiongroup_bugs = 'Odabrani problemi';
 $s_actiongroup_error_issue_is_readonly = 'Problem je samo za čitanje.';
+$s_all_projects = 'Svi projekti';
+$s_move_bugs = 'Premesti problem';
+$s_operation_successful = 'Operacija uspela.';
+$s_operation_warnings = 'Operacija je završena sa upozorenjima.';
+$s_operation_failed = 'Operacija nije uspešno završena.';
 $s_date_order = '[[File:MantisBT-filter.png|150px|right]]
 Opcija u filteru izveštaja o greškama. Pogledajte snimak ekrana.';
 $s_print_all_bug_page_link = '[[File:MantisBT-filter.png|150px|right]]
@@ -101,399 +115,495 @@ $s_excel_export = '[[File:MantisBT-filter.png|150px|right]]
 Link za izveštaj o grešci. Pogledajte snimak ekrana.
 
 „Eksel“ je naziv programa; nemojte ga prevoditi osim ako Microsoft nije preveo naziv programa na vaš jezik (npr. 엑셀 na korejskom).';
+$s_login_anonymously = 'Prijavite se anonimno';
 $s_anonymous = '{{Identical|Anonimni}}';
+$s_jump_to_bugnotes = 'Idi na beleške';
+$s_jump_to_history = 'Idi na istoriju';
+$s_display_history = 'Prikaži istoriju';
+$s_public_project_msg = 'Ovaj projekat je javan. Svi korisnici imaju pristup.';
+$s_private_project_msg = 'Ovaj projekat je privatan. Pristup imaju samo administratori i ručno dodati korisnici.';
+$s_access_level_project = 'Nivo pristupa projektu';
+$s_view_submitted_bug_link = 'Prikaži poslati problem %1$s';
 $s_assigned_projects = '{{Identical|Dodeljeni projekat}}';
 $s_assigned_projects_label = '{{Identical|Dodeljeni projekti}}';
+$s_unassigned_projects_label = 'Nedodeljeni projekti';
+$s_copy_users = 'Kopiraj korisnike';
+$s_copy_categories_from = 'Kopiraj kategorije iz';
+$s_copy_categories_to = 'Kopiraj kategorije u';
+$s_copy_categories_exclude_inherited = 'Izuzmi nasleđene kategorije';
 $s_copy_versions_from = 'To nije mesto, to je objekat na koji se upućuje. Nije „od“, već „od“.';
+$s_copy_versions_to = 'Kopiraj verzije u';
+$s_copy_users_from = 'Kopiraj korisnike iz';
+$s_copy_users_to = 'Kopiraj korisnike u';
+$s_bug_history = 'Istorija problema';
 $s_field = '{{Identical|Polje}}';
+$s_old_value = 'Stara vrednost';
+$s_new_value = 'Nova vrednost';
+$s_date_modified = 'Datum izmene';
 $s_bugnote = '{{Identical|Beleška}}';
+$s_bugnote_view_state = 'Napomena stanja prikaza';
+$s_bug_monitor = 'Problem praćen';
+$s_bug_end_monitor = 'Prati kraj problema';
 $s_announcement = '{{Identical|Najava}}';
+$s_stays_on_top = 'Ostani na vrhu';
+$s_bugnote_link_title = 'Direktan link do beleške';
+$s_delete_bugnote_button = 'Obriši belešku';
+$s_delete_bugnote_sure_msg = 'Da li ste sigurni da želite da obrišete ovu belešku?';
 $s_bug_relationships = '{{Identical|Odnosi}}';
+$s_empty_password_sure_msg = 'Korisnik ima praznu lozinku. Jeste li sigurni da je to ono što želite?';
+$s_empty_password_button = 'Koristite praznu lozinku';
+$s_reauthenticate_title = 'Potvrdi';
+$s_reauthenticate_message = 'Posećujete bezbednu stranicu i vaša bezbedna sesija je istekla. Potvrdite se da biste nastavili.';
+$s_no_category = '(nema kategorije)';
 $s_global_categories = '{{Identical|Globalna kategorija}}';
+$s_inherit = 'Nasledi kategorije';
+$s_inherit_global = 'Nasledi globalne kategorije';
+$s_inherit_parent = 'Nasledi roditeljske kategorije';
+$s_update_subproject_inheritance = 'Ažurirajte nasleđivanje potprojekta';
+$s_duplicate_of = 'duplikat od';
+$s_has_duplicate = 'ima duplikat';
+$s_related_to = 'povezan sa';
+$s_dependant_on = 'roditelj od';
+$s_blocks = 'dete od';
+$s_new_bug = 'Novi problem';
+$s_bugnote_added = 'Dodata beleška';
+$s_bugnote_edited = 'Beleška izmenjena';
+$s_bugnote_deleted = 'Beleška obrisana';
+$s_summary_updated = 'Rezime ažuriran';
+$s_description_updated = 'Opis ažuriran';
+$s_additional_information_updated = 'Dodatne informacije ažurirane';
+$s_steps_to_reproduce_updated = 'Koraci za ponavljanje ažurirani';
+$s_file_added = 'Dodata datoteka';
+$s_file_deleted = 'Datoteka je obrisana';
+$s_bug_deleted = 'Problem obrisan';
+$s_make_private = 'Učini privatnim';
+$s_make_public = 'Učini javnim';
+$s_create_new_project_link = 'Kreiraj novi projekat';
 $s_opensearch_id_short = '{{Identical|ID}}';
+$s_opensearch_id_description = '%s: pretraga prema ID-u problema';
 $s_opensearch_text_short = '{{Identical|Tekst}}';
+$s_opensearch_text_description = '%s: pretraga celog teksta';
 $s_select_option = '{{Identical|Izaberi}}';
-$s_view_status_bugs_conf_msg = 'Nešto u vezi sa javnim i privatnim greškama...';
+$s_bug_actiongroup_access = 'Niste imali odgovarajuće dozvole da izvršite tu radnju.';
+$s_bug_actiongroup_status = 'Ovaj problem se ne može promeniti u traženi status';
+$s_bug_actiongroup_category = 'Ovaj problem se ne može promeniti u traženu kategoriju';
+$s_bug_actiongroup_handler = 'Traženom korisniku nije dozvoljeno da se bavi ovim problemom';
+$s_bug_actiongroup_version = 'Tražena verzija ne postoji u projektu ovog izdanja';
+$s_close_bugs_conf_msg = 'Da li ste sigurni da želite da zatvorite ove probleme?';
+$s_delete_bugs_conf_msg = 'Da li ste sigurni da želite da obrišete ove probleme?';
+$s_move_bugs_conf_msg = 'Premesti probleme u';
+$s_copy_bugs_conf_msg = 'Kopiraj probleme u';
+$s_assign_bugs_conf_msg = 'Dodeli probleme';
+$s_resolve_bugs_conf_msg = 'Izaberite rešenje problema';
+$s_priority_bugs_conf_msg = 'Izaberite prioritet problema';
+$s_status_bugs_conf_msg = 'Izaberite status problema';
+$s_view_status_bugs_conf_msg = 'en: Something to do with public vs. private bugs...
+cs: Nešto u vezi sa javnim i privatnim greškama...';
+$s_category_bugs_conf_msg = 'Izaberite kategoriju problema';
+$s_set_sticky_bugs_conf_msg = 'Da li ste sigurni da želite da za ove probleme postavite/poništite lepljivost?';
+$s_product_version_bugs_conf_msg = 'Ažuriraj verziju proizvoda na';
+$s_fixed_in_version_bugs_conf_msg = 'Ažuriraj "Popravljeno u verziji" na';
+$s_target_version_bugs_conf_msg = 'Ažuriraj ciljnu verziju na';
+$s_due_date_bugs_conf_msg = 'Ažuriraj rok do';
+$s_close_group_bugs_button = 'Zatvori probleme';
+$s_delete_group_bugs_button = 'Obriši probleme';
+$s_move_group_bugs_button = 'Premesti probleme';
+$s_copy_group_bugs_button = 'Kopiraj probleme';
+$s_assign_group_bugs_button = 'Dodeli probleme';
+$s_resolve_group_bugs_button = 'Reši probleme';
+$s_priority_group_bugs_button = 'Prioritet ažuriranja';
+$s_status_group_bugs_button = 'Ažuriraj status';
 $s_category_group_bugs_button = '{{Identical|Ažurirajte kategoriju}}';
+$s_view_status_group_bugs_button = 'Ažuriraj status prikaza';
+$s_set_sticky_group_bugs_button = 'Postavi/poništi ljepljivost';
+$s_product_version_group_bugs_button = 'Ažuriraj verziju proizvoda';
+$s_fixed_in_version_group_bugs_button = 'Ažuriranje popravljeno u verziji';
+$s_target_version_group_bugs_button = 'Ažuriraj ciljnu verziju';
+$s_due_date_group_bugs_button = 'Ažuriraj rok';
+$s_update_severity_title = 'Ažuriraj težinu';
+$s_update_severity_msg = 'Odaberite težinu problema';
+$s_update_severity_button = 'Ažuriraj težinu';
+$s_hide_button = 'Prikaz samo odabranih';
+$s_printing_preferences_title = 'Izaberite polja za štampanje';
+$s_printing_options_link = 'Opcije štampanja';
 $s_login_cookies_disabled = 'Stavio sam „kolačiće“ umesto „svedoci“ jer je to termin koji se koristi u podešavanjima pretraživača (fajrefoks, chrom).';
 $s_prefix_for_deleted_users = '{{Identical|Korisnik}}';
 $s_administrator = '{{Identical|Administrator}}';
 $s_myself = '{{Identical|Ja}}';
-$s_reproducibility_enum_string = 'Traduction de N/A (not applicable, not available) modifiée de S/O en sans objet.
-S/O n\'est pas une abréviation claire.';
-$s_new_account_username = '{{Identical|Username}}';
+$s_reproducibility_enum_string = 'Prevod N/A (nije primenljivo, nije dostupno) promenjeno iz S/O u neprimenljivo.
+N/A nije jasna skraćenica.';
+$s_new_account_username = '{{Identical|Korisničko ime}}';
 $s_new_account_email = '{{Identical|E-mail}}';
-$s_email_project = '{{Identical|Project}}';
-$s_email_category = '{{Identical|Category}}';
-$s_email_severity = '{{Identical|Severity}}';
-$s_email_priority = '{{Identical|Priority}}';
+$s_email_project = '{{Identical|Projekat}}';
+$s_email_category = '{{Identical|Kategorija}}';
+$s_email_severity = '{{Identical|Težina}}';
+$s_email_priority = '{{Identical|Prioritet}}';
 $s_email_status = '{{Identical|Status}}';
-$s_email_resolution = '{{Identical|Resolution}}';
-$s_email_duplicate = '{{Identical|Duplicate}}';
-$s_email_summary = '{{Identical|Summary}}';
-$s_email_description = '{{Identical|Description}}';
-$s_email_additional_information = '{{Identical|Additional information}}';
-$s_email_tag = '{{Identical|Tag}}';
-$s_manage_profiles_link = '{{Identical|Profile}}';
-$s_change_preferences_link = '{{Identical|Preferences}}';
-$s_username = '{{Identical|Username}}';
-$s_username_label = '{{Identical|Username}}';
-$s_realname = '{{Identical|Real name}}';
-$s_realname_label = '{{Identical|Real name}}';
+$s_email_resolution = '{{Identical|Rešavanje}}';
+$s_email_duplicate = '{{Identical|Duplikat}}';
+$s_email_summary = '{{Identical|Rezime}}';
+$s_email_description = '{{Identical|Opis}}';
+$s_email_additional_information = '{{Identical|Dodatne informacije}}';
+$s_email_tag = '{{Identical|Oznaka}}';
+$s_manage_profiles_link = '{{Identical|Profil}}';
+$s_change_preferences_link = '{{Identical|Postavke}}';
+$s_username = '{{Identical|Korisničko ime}}';
+$s_username_label = '{{Identical|Korisničko ime}}';
+$s_realname = '{{Identical|Pravo ime}}';
+$s_realname_label = '{{Identical|Pravo ime}}';
 $s_email = '{{Identical|E-mail}}';
 $s_email_label = '{{Identical|E-mail}}';
-$s_password = '{{Identical|Password}}';
-$s_confirm_password = '{{Identical|Confirm password}}';
-$s_current_password = '{{Identical|Current password}}';
-$s_access_level = '{{Identical|Access level}}';
-$s_access_level_label = '{{Identical|Access level}}';
-$s_api_token_revoke_button = '{{Identical|Revoke}}';
-$s_minutes = '{{Identical|Minute}}';
-$s_seconds = '{{Identical|Second}}';
-$s_bugnote_order_asc = '{{Identical|Ascending}}';
-$s_bugnote_order_desc = '{{Identical|Descending}}';
-$s_language = '{{Identical|Language}}';
-$s_timezone = '{{Identical|Time zone}}';
+$s_password = '{{Identical|Lozinka}}';
+$s_confirm_password = '{{Identical|Potvrdi lozinku}}';
+$s_current_password = '{{Identical|Trenutna lozinka}}';
+$s_access_level = '{{Identical|Nivo pristupa}}';
+$s_access_level_label = '{{Identical|Nivo pristupa}}';
+$s_api_token_revoke_button = '{{Identical|Opozovi}}';
+$s_minutes = '{{Identical|Minuta}}';
+$s_seconds = '{{Identical|Sekundi}}';
+$s_bugnote_order_asc = '{{Identical|Rastuće}}';
+$s_bugnote_order_desc = '{{Identical|Opadajuće}}';
+$s_language = '{{Identical|Jezik}}';
+$s_timezone = '{{Identical|Vremenska zona}}';
 $s_select_profile = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
-Legend for drop-down box. See screenshot.';
-$s_edit_profile = '{{Identical|Edit profile}}';
-$s_sponsor = '';
-$s_sponsor_verb = '';
-$s_amount = '{{Identical|Amount}}';
-$s_sponsor_show = '{{Identical|Show all}}';
-$s_monitor_bug_button = '{{Identical|Monitor}}';
-$s_upload_file = '{{Identical|Upload file}}';
-$s_upload_files = '{{Identical|Upload file}}';
-$s_select_file = '{{Identical|Select file}}';
-$s_select_files = '{{Identical|Select file}}';
-$s_upload_file_button = '{{Identical|Upload file}}';
-$s_upload_files_button = '{{Identical|Upload file}}';
-$s_max_file_size_info = 'Displays maximum file size information, where $1 is the size and $2 is the unit';
-$s_bugnote_add_resolve_button = '{{Identical|Add note}}';
-$s_from = '{{Identical|From}}';
-$s_to = '{{Identical|To}}';
-$s_reminder_list_truncated = '"To truncate" means "to shorten something as if by cutting off part of it".
+Legenda za padajući okvir. Pogledajte snimak ekrana.';
+$s_edit_profile = '{{Identical|Izmeni profil}}';
+$s_sponsor = 'Sponzor';
+$s_sponsor_verb = 'Sponzor';
+$s_amount = '{{Identical|Iznos}}';
+$s_sponsor_show = '{{Identical|Pokaži sve}}';
+$s_monitor_bug_button = '{{Identical|Prati}}';
+$s_upload_file = '{{Identical|Otpremi datoteku}}';
+$s_upload_files = '{{Identical|Otpremi datoteku}}';
+$s_select_file = '{{Identical|Odaberi datoteku}}';
+$s_select_files = '{{Identical|Odaberi datoteku}}';
+$s_upload_file_button = '{{Identical|Otpremi datoteku}}';
+$s_upload_files_button = '{{Identical|Otpremi datoteku}}';
+$s_max_file_size_info = 'Prikazuje informacije o maksimalnoj veličini datoteke, gde je $1 veličina, a $2 jedinica';
+$s_bugnote_add_resolve_button = '{{Identical|Dodaj belešku}}';
+$s_from = '{{Identical|Od}}';
+$s_to = '{{Identical|Za}}';
+$s_reminder_list_truncated = '„Skratiti“ znači „skratiti nešto kao da se odseče deo toga“.
 
-"refer to Issue History for full list" means "Take a look at the history of the issue if you need to compile a full list", i.e. a full list can be derived from the issue history.';
-$s_bug_send_button = '{{Identical|Send}}';
-$s_reminder = '{{Identical|Reminder}}';
-$s_stick_bug_button = 'Button label to mark an issue sticky.
-{{Identical|Stick}}';
-$s_unstick_bug_button = 'Button label to mark an issue unsticky.';
+„pogledajte istoriju problema za punu listu“ znači „Pogledajte istoriju problema ako treba da sastavite punu listu“, tj. potpuna lista se može izvesti iz istorije problema.';
+$s_bug_send_button = '{{Identical|Pošalji}}';
+$s_reminder = '{{Identical|Podseti}}';
+$s_stick_bug_button = 'Oznaka dugmeta za označavanje problema kao lepljivog.
+{{Identical|Lepljivo}}';
+$s_unstick_bug_button = 'Oznaka dugmeta za označavanje problema kao nelepljivog.';
 $s_id = '[[File:MantisBT-filter.png|150px|right]]
-Column header in bug report. See screenshot.
+Zaglavlje kolone u izveštaju o grešci. Pogledajte snimak ekrana.
 
-ID = Identification number of a bug.
+ID = Identifikacioni broj greške.
 {{Identical|ID}}';
-$s_category = '{{Identical|Category}}';
-$s_severity = '{{Identical|Severity}}';
-$s_last_update = '{{Identical|Last update}}';
-$s_reporter = '{{Identical|Reporter}}';
-$s_priority = '{{Identical|Priority}}';
-$s_resolution = '{{Identical|Resolution}}';
+$s_category = '{{Identical|Kategorija}}';
+$s_severity = '{{Identical|Težina}}';
+$s_last_update = '{{Identical|Poslednje ažuriranje}}';
+$s_reporter = '{{Identical|Izvestilac}}';
+$s_priority = '{{Identical|Prioritet}}';
+$s_resolution = '{{Identical|Rešavanje}}';
 $s_status = '{{Identical|Status}}';
 $s_os = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 See screenshots.
 [[File:MantisBT-filter.png|150px|right]]';
-$s_os_build = 'J\'ai ajouté - de l\'OS- à l\'ancienne traduction car plusieurs champs version existent :
-"Product Version", "Fixed in Version", "Target Version"';
-$s_build = '{{Identical|Build}}';
-$s_votes = '{{Identical|Vote}}';
-$s_summary = '{{Identical|Summary}}';
-$s_description = '{{Identical|Description}}';
-$s_profile = '{{Identical|Profile}}';
-$s_revision = '{{Identical|Revision}}';
-$s_revision_by = 'Parameters:
-* %1$s is a date
-* %2$s is a username
-{{Identical|By}}';
-$s_revision_drop = '{{Identical|Drop}}';
-$s_activities_title = '{{Identical|Activity}}';
-$s_bug_notes_title = '{{Identical|Note}}';
-$s_add_bugnote_title = '{{Identical|Add note}}';
-$s_add_bugnote_button = '{{Identical|Add note}}';
-$s_hide_content = '{{identical|Hide content}}';
-$s_show_content = '{{identical|Show content}}';
-$s_log_page_number = '{{Identical|Number}}';
-$s_log_page_event = '{{Identical|Event}}';
-$s_please_report = 'Is displayed whenever an SQL error occurs.
-* $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text';
-$s_login_title = '{{Identical|Login}}';
-$s_save_login = '';
-$s_lost_password_title = '{{Identical|Password reset}}';
-$s_lost_password_subject = '{{Identical|Password reset}}';
-$s_archives = '{{Identical|Archive}}';
+$s_os_build = 'Dodao sam -sa OS-a na stari prevod jer postoji nekoliko polja verzije:
+„Verzija proizvoda“, „Popravljeno u verziji“, „Ciljna verzija“';
+$s_build = '{{Identical|Napravio}}';
+$s_votes = '{{Identical|Glasanje}}';
+$s_summary = '{{Identical|Rezime}}';
+$s_description = '{{Identical|Opis}}';
+$s_profile = '{{Identical|Profil}}';
+$s_revision = '{{Identical|Izmene}}';
+$s_revision_by = 'Parametri:
+* %1$s je datum
+* %2$s je korisničko ime
+{{Identical|Od}}';
+$s_revision_drop = '{{Identical|Odbaci}}';
+$s_activities_title = '{{Identical|Aktivnost}}';
+$s_bug_notes_title = '{{Identical|Beleška}}';
+$s_add_bugnote_title = '{{Identical|Dodaj belešku}}';
+$s_add_bugnote_button = '{{Identical|Dodaj belešku}}';
+$s_hide_content = '{{identical|Sakrij sadržaj}}';
+$s_show_content = '{{identical|Prikaži sadržaj}}';
+$s_log_page_number = '{{Identical|Broj}}';
+$s_log_page_event = '{{Identical|Dogadjaj}}';
+$s_please_report = 'Prikazuje se kad god dođe do SKL greške.
+* $1 je mailto: veza sa {{msg-mantis|s_administrator}} kao tekstom veze';
+$s_login_title = '{{Identical|Prijavi se}}';
+$s_save_login = 'Ostavi me prijavljenog';
+$s_lost_password_title = '{{Identical|Reset lozinke}}';
+$s_lost_password_subject = '{{Identical|Reset lozinke}}';
+$s_archives = '{{Identical|Arhiva}}';
 $s_rss = '{{Identical|RSS}}';
-$s_site_information = '{{Identical|Site information}}';
-$s_created_user_part1 = '{{Identical|Created user}}';
-$s_create_new_account_title = '{{Identical|Create account}}';
-$s_enabled = '{{Identical|Enabled}}';
-$s_enabled_label = '{{Identical|Enabled}}';
-$s_protected = '{{Identical|Protected}}';
-$s_protected_label = '{{Identical|Protected}}';
-$s_create_user_button = '{{Identical|Create user}}';
-$s_hide_disabled = 'Should be consistent with {{msg-mantis|S show disabled}}';
+$s_site_information = '{{Identical|Informacije o sajtu}}';
+$s_created_user_part1 = '{{Identical|Kreiran korisnik}}';
+$s_create_new_account_title = '{{Identical|Kreiran nalog}}';
+$s_enabled = '{{Identical|Uključeno}}';
+$s_enabled_label = '{{Identical|Uključeno}}';
+$s_protected = '{{Identical|Zaštićeno}}';
+$s_protected_label = '{{Identical|Zaštićeno}}';
+$s_create_user_button = '{{Identical|Kreiran korisnik}}';
+$s_hide_disabled = 'Trebalo bi da bude u skladu sa {{msg-mantis|S prikaži onemogućeno}}';
 $s_filter_button = '[[File:MantisBT-filter.png|150px|right]]
-Button label on bug report filter screen. See screenshot.
-{{Identical|Apply filter}}';
+Oznaka dugmeta na ekranu filtera izveštaja o grešci. Pogledajte snimak ekrana.
+{{Identical|Primeni filter}}';
 $s_create_filter_link = '[[File:MantisBT-filter.png|150px|right]]
-Link on bug report. See screenshot.
+Link za izveštaj o grešci. Pogledajte snimak ekrana.
 
-For an explanation of "permalink" see [http://en.wikipedia.org/wiki/Permalink Wikipedia].';
-$s_manage_email_config = '{{Identical|Email notification}}';
-$s_create_new_account_link = '{{Identical|Create account}}';
-$s_projects_link = '{{Identical|Project}}';
-$s_documentation_link = '{{Identical|Documentation}}';
-$s_show_disabled = 'Should be consistent with {{msg-mantis|S hide disabled}}';
-$s_p = '{{Optional}}';
-$s_date_created = '{{Identical|Date created}}';
-$s_edit_user_link = '{{Identical|Edit user}}';
+Za objašnjenje "stalne veze" pogledajte [http://en.wikipedia.org/wiki/Permalink Wikipedia].';
+$s_manage_email_config = '{{Identical|E-mail obaveštenja}}';
+$s_create_new_account_link = '{{Identical|Kreiran nalog}}';
+$s_projects_link = '{{Identical|Projekti}}';
+$s_documentation_link = '{{Identical|Documentacija}}';
+$s_show_disabled = 'Trebalo bi da bude u skladu sa {{msg-mantis|S sakrij onemogućeno}}';
+$s_p = '{{Opciono}}';
+$s_date_created = '{{Identical|Datum kreiranja}}';
+$s_edit_user_link = '{{Identical|Izmeni korisnika}}';
 $s_search_user_hint = 'Korisničko ime, pravo ime ili e-mail';
-$s_message = '{{Identical|Message}}';
-$s_current_status = '{{Identical|Current status}}';
-$s_workflow = '{{Identical|Workflow}}';
+$s_message = '{{Identical|Poruka}}';
+$s_current_status = '{{Identical|Trenutni status}}';
+$s_workflow = '{{Identical|Proces rada}}';
 $s_status_level = '{{Identical|Status}}';
-$s_access_levels = '{{Identical|Access level}}';
-$s_access_change = 'Niveau d’accès minimal pour atteindre cet état';
+$s_access_levels = '{{Identical|Nivo pristupa}}';
+$s_access_change = 'Minimalni nivo pristupa za dostizanje ovog stanja';
 $s_limit_access = '{{doc-singularthey}}';
-$s_configuration_option_type = '{{Identical|Type}}';
-$s_configuration_option_value = '{{Identical|Value}}';
-$s_all_users = '{{Identical|All users}}';
-$s_plugin = '{{Identical|Plugin}}';
-$s_plugin_description = '{{Identical|Description}}';
-$s_plugin_author = '{{Identical|Author}}';
-$s_plugin_url = '{{Identical|Website}}';
-$s_plugin_priority = '{{Identical|Priority}}';
-$s_plugin_protected = '{{Identical|Protected}}';
-$s_plugin_actions = '{{Identical|Action}}';
-$s_plugin_install = '{{Identical|Install}}';
-$s_plugin_upgrade = '{{Identical|Upgrade}}';
-$s_plugin_uninstall = '{{Identical|Uninstall}}';
-$s_plugin_key_label = '{{Identical|Key}}';
-$s_delete_category_button = '{{Identical|Delete category}}';
-$s_update_category_button = '{{Identical|Update category}}';
-$s_project_name = '{{Identical|Project name}}';
-$s_view_status = '* [fr]: Modifier la traduction "Afficher les statuts" en "Visibilité". L\'état d\'un projet est "public" ou "privé" ce qui conditionne sa visibilité. C\'est aussi la traduction de "View Status".';
-$s_public = '{{Identical|Public}}';
-$s_private = '{{Identical|Private}}';
-$s_categories = '{{Identical|Category}}';
-$s_add_category_button = '{{Identical|Add category}}';
-$s_versions = '{{Identical|Version}}';
-$s_actions = '{{Identical|Action}}';
-$s_version = '{{Identical|Version}}';
-$s_version_label = '{{Identical|Version}}';
-$s_timestamp = '{{Identical|Timestamp}}';
-$s_unlink_link = '{{Identical|Unlink}}';
-$s_projects_title = '{{Identical|Project}}';
-$s_projects_title_label = '{{Identical|Project}}';
-$s_name = '{{Identical|Name}}';
-$s_edit_user_title = '{{Identical|Edit user}}';
-$s_reset_password_button = '{{Identical|Reset password}}';
-$s_show_all_users = '{{Identical|All}}';
-$s_users_new = '{{Identical|New}}';
+$s_configuration_option_type = '{{Identical|Tip}}';
+$s_configuration_option_value = '{{Identical|Vrednost}}';
+$s_all_users = '{{Identical|Svi korisnici}}';
+$s_plugin = '{{Identical|Dodatak}}';
+$s_plugin_description = '{{Identical|Opis}}';
+$s_plugin_author = '{{Identical|Autor}}';
+$s_plugin_url = '{{Identical|Web sajt}}';
+$s_plugin_priority = '{{Identical|Prioritet}}';
+$s_plugin_protected = '{{Identical|Zaštićen}}';
+$s_plugin_actions = '{{Identical|Akcija}}';
+$s_plugin_install = '{{Identical|Instaliraj}}';
+$s_plugin_upgrade = '{{Identical|Ažuriraj}}';
+$s_plugin_uninstall = '{{Identical|Deinstaliraj}}';
+$s_plugin_key_label = '{{Identical|Ključ}}';
+$s_delete_category_button = '{{Identical|Obriši kategoriju}}';
+$s_update_category_button = '{{Identical|Ažuriraj kategoriju}}';
+$s_project_name = '{{Identical|Naziv projekta}}';
+$s_view_status = '* [sr]: Promenite prevod „Prikaži statuse“ u „Vidljivost“. Status projekta je „javni“ ili „privatan“ što određuje njegovu vidljivost. To je takođe prevod "Prikaži status".';
+$s_public = '{{Identical|Javno}}';
+$s_private = '{{Identical|Privatno}}';
+$s_categories = '{{Identical|Kategorija}}';
+$s_add_category_button = '{{Identical|Dodaj kategoriju}}';
+$s_versions = '{{Identical|Verzija}}';
+$s_actions = '{{Identical|Akcija}}';
+$s_version = '{{Identical|Verzija}}';
+$s_version_label = '{{Identical|Verzija}}';
+$s_timestamp = '{{Identical|Vremenska oznaka}}';
+$s_unlink_link = '{{Identical|Prekini link}}';
+$s_projects_title = '{{Identical|Projekti}}';
+$s_projects_title_label = '{{Identical|Projekti}}';
+$s_name = '{{Identical|Naziv}}';
+$s_edit_user_title = '{{Identical|Izmeni korisnika}}';
+$s_reset_password_button = '{{Identical|Reset lozinke}}';
+$s_show_all_users = '{{Identical|Svi}}';
+$s_users_new = '{{Identical|Novi}}';
 $s_account_reset_msg = '{{doc-singularthey}}';
-$s_main_link = '{{Identical|Main}}';
-$s_changelog_link = '{{Identical|Change log}}';
-$s_summary_link = '{{Identical|Summary}}';
-$s_account_link = '{{Identical|My account}}';
-$s_users_link = '{{Identical|User}}';
-$s_manage_link = '{{Identical|Manage}}';
-$s_logout_link = '{{Identical|Log out}}';
-$s_my_view_title_unassigned = '{{Identical|Unassigned}}';
-$s_my_view_title_resolved = '{{Identical|Resolved}}';
-$s_headline = '{{Identical|Headline}}';
-$s_body = '{{Identical|Body}}';
-$s_edit_post = '{{Identical|Edit post}}';
-$s_delete_post = '{{Identical|Delete post}}';
-$s_back_link = '{{Identical|Back}}';
-$s_upload_file_title = '{{Identical|Upload file}}';
-$s_title = '{{Identical|Title}}';
-$s_filename = '{{Identical|Filename}}';
-$s_filename_label = '{{Identical|Filename}}';
-$s_file_delete_button = '{{Identical|Delete file}}';
-$s_add_file = '{{Identical|Add file}}';
-$s_remove_user_button = '{{Identical|Remove user}}';
-$s_add_user_button = '{{Identical|Add user}}';
-$s_remove_link = '{{Identical|Remove}}';
-$s_remove_all_link = '{{Identical|Remove all}}';
-$s_required = '{{Identical|Required}}';
-$s_select_category = '{{Identical|Select category}}';
+$s_main_link = '{{Identical|Glavni}}';
+$s_changelog_link = '{{Identical|Dnevnik promena}}';
+$s_summary_link = '{{Identical|Rezime}}';
+$s_account_link = '{{Identical|Moj nalog}}';
+$s_users_link = '{{Identical|Korisnik}}';
+$s_manage_link = '{{Identical|Upravljaj}}';
+$s_logout_link = '{{Identical|Odjavi se}}';
+$s_my_view_title_unassigned = '{{Identical|Nedodeljen}}';
+$s_my_view_title_resolved = '{{Identical|Rešen}}';
+$s_headline = '{{Identical|Naslov}}';
+$s_body = '{{Identical|Tekst}}';
+$s_edit_post = '{{Identical|Izmeni post}}';
+$s_delete_post = '{{Identical|Obriši post}}';
+$s_back_link = '{{Identical|Nazad}}';
+$s_upload_file_title = '{{Identical|Otpremi datoteku}}';
+$s_title = '{{Identical|Naslov}}';
+$s_filename = '{{Identical|Naziv datoteke}}';
+$s_filename_label = '{{Identical|Naziv datoteke}}';
+$s_file_delete_button = '{{Identical|Obriši datoteku}}';
+$s_add_file = '{{Identical|Dodaj datoteku}}';
+$s_remove_user_button = '{{Identical|Ukloni korisnika}}';
+$s_add_user_button = '{{Identical|Dodaj korisnika}}';
+$s_remove_link = '{{Identical|Ukloni}}';
+$s_remove_all_link = '{{Identical|Ukloni sve}}';
+$s_required = '{{Identical|Potreban}}';
+$s_select_category = '{{Identical|Odaberi kategoriju}}';
 $s_or_fill_in = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
-Heading for set of drop-down boxes. See screenshot.';
-$s_additional_information = '{{Identical|Additional information}}';
-$s_signup_title = '{{Identical|Signup}}';
-$s_signup_button = '{{Identical|Signup}}';
-$s_save_settings_button = '{{Identical|Save settings}}';
-$s_site_settings_title = '{{Identical|Site settings}}';
-$s_site_settings_link = '{{Identical|Site settings}}';
-$s_summary_title = '{{Identical|Summary}}';
-$s_percentage_fixed = '{{Identical|Fixed}}';
-$s_errors = '{{Identical|False}}';
-$s_opened = 'Is used in summary screen for status by date: Column for newly opened issues.
-{{Identical|Opened}}';
-$s_resolved = '{{Identical|Resolved}}';
-$s_total = '{{Identical|Total}}';
-$s_balance = '{{Identical|Balance}}';
-$s_score = '{{Identical|Score}}';
-$s_days = '{{Identical|Day}}';
-$s_time_stats = 'Is used in summary screen as a headline for the statistic, that indicates the time from opening a ticket until its last change to the "resolved" status. Only tickets, that are in resolved status or later are considered in the statistic.';
+Idete prema skupu padajućih okvira. Pogledajte snimak ekrana.';
+$s_additional_information = '{{Identical|Dodatne informacije}}';
+$s_signup_title = '{{Identical|Otvori nalog}}';
+$s_signup_button = '{{Identical|Otvori nalog}}';
+$s_save_settings_button = '{{Identical|Sačuvaj podešavanja}}';
+$s_site_settings_title = '{{Identical|Podešavanja sajta}}';
+$s_site_settings_link = '{{Identical|Podešavanja sajta}}';
+$s_summary_title = '{{Identical|Rezime}}';
+$s_percentage_fixed = '{{Identical|Rešeno}}';
+$s_errors = '{{Identical|Neuspelo}}';
+$s_opened = 'Koristi se na ekranu rezimea za status po datumu: Kolona za novootvorene probleme.
+{{Identical|Otvoren}}';
+$s_resolved = '{{Identical|Rešen}}';
+$s_total = '{{Identical|Ukupno}}';
+$s_balance = '{{Identical|Balans}}';
+$s_score = '{{Identical|Rezultat}}';
+$s_days = '{{Identical|Dana}}';
+$s_time_stats = 'Koristi se na ekranu rezimea kao naslov za statistiku, koji označava vreme od otvaranja tiketa do poslednje promene u status „rešeno“. U statistici se uzimaju u obzir samo karte koje su u rešenom statusu ili kasnije.';
 $s_any = '[[File:MantisBT-filter.png|150px|right]]
-Option in bug report filter. See screenshot.
-{{Identical|Any}}';
-$s_all = '{{Identical|All}}';
-$s_show = '{{Identical|Show}}';
+Opcija u filteru izveštaja o greškama. Pogledajte snimak ekrana.
+{{Identical|Bilo koji}}';
+$s_all = '{{Identical|Svi}}';
+$s_show = '{{Identical|Prikaži}}';
 $s_changed = '[[File:MantisBT-filter.png|150px|right]]
-Filter label in bug report filter screen. See screenshot.';
+Oznaka filtera na ekranu filtera izveštaja o grešci. Pogledajte snimak ekrana.';
 $s_viewing_bugs_title = '[[File:MantisBT-filter.png|150px|right]]
-Report heading. See screenshot.';
+Naslov izveštaja. Pogledajte snimak ekrana.';
 $s_updated = '[[File:MantisBT-filter.png|150px|right]]
-Column header for column of dates. See screenshot.
-{{Identical|Updated}}';
+Zaglavlje kolone za kolonu sa datumima. Pogledajte snimak ekrana.
+{{Identical|Ažuriran}}';
 $s_sticky = '[[File:MantisBT-filter.png|150px|right]]
-Filter label in bug report filter screen. See screenshot.';
+Oznaka filtera na ekranu filtera izveštaja o grešci. Pogledajte snimak ekrana.';
 $s_sort = '[[File:MantisBT-filter.png|150px|right]]
-Filter label in bug report filter screen. See screenshot.
-{{Identical|Sort by}}';
-$s_priority_abbreviation = '{{Optional}}';
-$s_none = '{{Identical|None}}';
-$s_current = '{{Identical|Current}}';
-$s_search = '{{Identical|Search}}';
+Oznaka filtera na ekranu filtera izveštaja o grešci. Pogledajte snimak ekrana.
+{{Identical|Sortiraj po}}';
+$s_priority_abbreviation = '{{Opciono}}';
+$s_none = '{{Identical|Beleška}}';
+$s_current = '{{Identical|Trenutni}}';
+$s_search = '{{Identical|Pretraga}}';
 $s_prev = '[[File:MantisBT-filter.png|150px|right]]
-Page navigation link on multi-page report. See screenshot.
-{{Identical|Prev}}';
+Veza za navigaciju na više stranica izveštaja. Pogledajte snimak ekrana.
+{{Identical|Prethodni}}';
 $s_next = '[[File:MantisBT-filter.png|150px|right]]
-Page navigation link on multi-page report. See screenshot.
-{{Identical|Next}}';
+Veza za navigaciju na više stranica izveštaja. Pogledajte snimak ekrana.
+{{Identical|Sledeći}}';
 $s_first = '[[File:MantisBT-filter.png|150px|right]]
-Page navigation link on multi-page report. See screenshot.
-{{Identical|First}}';
+Veza za navigaciju na više stranica izveštaja. Pogledajte snimak ekrana.
+{{Identical|Prvi}}';
 $s_last = '[[File:MantisBT-filter.png|150px|right]]
-Page navigation link on multi-page report. See screenshot.
-
-{{Identical|Last}}';
-$s_start_date_label = '{{Identical|Start date}}';
-$s_end_date_label = '{{Identical|End date}}';
+Veza za navigaciju na više stranica izveštaja. Pogledajte snimak ekrana.
+{{Identical|Poslednji}}';
+$s_start_date_label = '{{Identical|Datum početka}}';
+$s_end_date_label = '{{Identical|Datum završetka}}';
 $s_use_date_filters = '[[File:MantisBT-filter.png|150px|right]]
-Filter label in bug report filter screen. See screenshot.';
-$s_yes = '{{Identical|Yes}}';
-$s_no = '{{Identical|No}}';
+Oznaka filtera na ekranu filtera izveštaja o grešci. Pogledajte snimak ekrana.';
+$s_yes = '{{Identical|Da}}';
+$s_no = '{{Identical|Ne}}';
 $s_ok = '{{Identical|OK}}';
-$s_select_all = '{{Identical|Select all}}';
+$s_select_all = '{{Identical|Označi sve}}';
 $s_use_query = '[[File:MantisBT-filter.png|150px|right]]
-Button label on bug report filter screen. See screenshot.';
+Oznaka dugmeta na ekranu filtera izveštaja o grešci. Pogledajte snimak ekrana.';
 $s_save_query = '[[File:MantisBT-filter.png|150px|right]]
-Button label on bug report filter screen. See screenshot.';
+Oznaka dugmeta na ekranu filtera izveštaja o grešci. Pogledajte snimak ekrana.';
 $s_open_queries = '[[File:MantisBT-filter.png|150px|right]]
-Button label on bug report filter screen. See screenshot.';
-$s_owner = '{{Identical|Owner}}';
-$s_publish = '{{Identical|Publish}}';
-$s_custom_field = '{{Identical|Field}}';
-$s_custom_field_label = '{{Identical|Field}}';
-$s_custom_field_name = '{{Identical|Name}}';
-$s_custom_field_type = '{{Identical|Type}}';
-$s_custom_field_valid_regexp = '{{Identical|Regular expression}}';
-$s_custom_field_sequence = '{{Identical|Sequence}}';
-$s_custom_field_sequence_label = '{{Identical|Sequence}}';
-$s_filter_closed = '{{Identical|Closed}}';
-$s_filter_resolved = '{{Identical|Resolved}}';
+Oznaka dugmeta na ekranu filtera izveštaja o grešci. Pogledajte snimak ekrana.';
+$s_owner = '{{Identical|Vlasnik}}';
+$s_publish = '{{Identical|Javno}}';
+$s_custom_field = '{{Identical|Polje}}';
+$s_custom_field_label = '{{Identical|Polje}}';
+$s_custom_field_name = '{{Identical|Naziv}}';
+$s_custom_field_type = '{{Identical|Tip}}';
+$s_custom_field_valid_regexp = '{{Identical|Regularni izraz}}';
+$s_custom_field_sequence = '{{Identical|Niz}}';
+$s_custom_field_sequence_label = '{{Identical|Niz}}';
+$s_filter_closed = '{{Identical|Zatvoreno}}';
+$s_filter_resolved = '{{Identical|Rešeno}}';
 $s_advanced_filters = '[[File:MantisBT-filter.png|150px|right]]
-Link on bug report filter screen. See screenshot.';
-$s_attachments = '{{Identical|Attachment}}';
-$s_kib = 'IEEE 1541 unit kibibytes (1024 bytes), see https://en.wikipedia.org/wiki/Kibibyte';
-$s_phpmailer_language = '{{Optional}}';
+Veza na ekranu filtera izveštaja o greškama. Pogledajte snimak ekrana.';
+$s_attachments = '{{Identical|Prilog}}';
+$s_kib = 'IEEE 1541 jedinica kibibajta (1024 bajta), vidi https://en.wikipedia.org/wiki/Kibibyte';
+$s_phpmailer_language = '{{Opciono}}';
 $s_sponsorship_process_url = '{{Optional}}';
-$s_changelog = '{{Identical|Change log}}';
-$s_resolved_progress = '<code>%3$d%%</code> is a percentage with a % escaped with %. Maybe you have to add a blank for your language (<code>{{int:percent|%3$d}}%</code>)';
-$s_bug = '{{Identical|Issue}}';
-$s_bugs = '{{Identical|Issue}}';
-$s_replace_relationship_button = '{{Identical|Replace}}';
-$s_create_child_bug_button = '{{Identical|Clone}}';
+$s_changelog = '{{Identical|Dnevnik promena}}';
+$s_resolved_progress = '<code>%3$d%%</code> je procenat sa % prebačenim sa %. Možda morate da dodate prazno mesto za svoj jezik (<code>{{int:percent|%3$d}}%</code>)';
+$s_bug = '{{Identical|Problem}}';
+$s_bugs = '{{Identical|Problem}}';
+$s_replace_relationship_button = '{{Identical|Zameni}}';
+$s_create_child_bug_button = '{{Identical|Kloniraj}}';
 $s_copy_notes_from_parent = 'MantisBT HP:
 https://en.wikipedia.org/wiki/Mantis_Bug_Tracker
 
-To find the idea of " issue" & " note " , refer:
+Da biste pronašli ideju „problema“ i „napomene“, pogledajte:
 https://translatewiki.net/w/i.php?title=Special%3ASearch&profile=advanced&search=Issue+note+%2Fen&fulltext=Search&ns0=1&ns6=1&ns7=1&ns4=1&ns5=1&ns1210=1&profile=advanced';
-$s_with = '{{Identical|With}}';
-$s_vertical = '{{Identical|Vertical}}';
-$s_view = '{{Identical|View}}';
-$s_issues = '{{Identical|Issue}}';
-$s_update_view_status = 'This is a button text for the "private/public" toggle for an issue.';
-$s_notes = '{{Identical|Note}}';
-$s_add_notes = '{{Identical|Add note}}';
-$s_news = '{{Identical|News}}';
+$s_with = '{{Identical|Sa}}';
+$s_vertical = '{{Identical|Verticalni}}';
+$s_view = '{{Identical|Pregled}}';
+$s_issues = '{{Identical|Problem}}';
+$s_update_view_status = 'Ovo je tekst dugmeta za opciju „privatno/javno“ za problem.';
+$s_notes = '{{Identical|Beleška}}';
+$s_add_notes = '{{Identical|Dodaj belešku}}';
+$s_news = '{{Identical|Novosti}}';
 $s_filters = '{{Identical|Filter}}';
-$s_create_project = '{{Identical|Create project}}';
-$s_others = '{{Identical|Other}}';
-$s_email_notification = '{{Identical|Email notification}}';
-$s_email_on_updated = 'E-mail on Updated';
-$s_loading = '{{Identical|Loading}}';
-$s_between_date = '{{Identical|Between}}';
-$s_before_date = '{{Identical|Before}}';
-$s_after_date = '{{Identical|After}}';
-$s_from_date = '{{Identical|From}}';
-$s_to_date = '{{Identical|To}}';
-$s_on_date = '{{Identical|On}}';
+$s_create_project = '{{Identical|Kreiraj projekat}}';
+$s_others = '{{Identical|Ostali}}';
+$s_email_notification = '{{Identical|Email obaveštenja}}';
+$s_email_on_updated = 'E-mail na Ažurirano';
+$s_loading = '{{Identical|Učitavanje}}';
+$s_between_date = '{{Identical|Između}}';
+$s_before_date = '{{Identical|Pre}}';
+$s_after_date = '{{Identical|Posle}}';
+$s_from_date = '{{Identical|Od}}';
+$s_to_date = '{{Identical|Za}}';
+$s_on_date = '{{Identical|Na}}';
 $s_wiki = '{{Identical|Wiki}}';
-$s_tags = '{{Identical|Tag}}';
-$s_tag_name = '{{Identical|Name}}';
-$s_tag_creator = '{{Identical|Creator}}';
-$s_tag_created = '{{Identical|Date created}}';
-$s_tag_updated = '{{Identical|Last updated}}';
-$s_tag_statistics = '{{Identical|Usage statistics}}';
-$s_tag_attach = '{{Identical|Attach}}';
-$s_tag_attach_long = '{{Identical|Attach tag}}';
-$s_show_all_tags = '{{Identical|All}}';
-$s_time_tracking_cost = '{{Identical|Cost}}';
-$s_time_tracking_cost_label = '{{Identical|Cost}}';
-$s_time_tracking_stopwatch_start = '{{Identical|Start}}';
+$s_tags = '{{Identical|Oznaka}}';
+$s_tag_name = '{{Identical|Naziv}}';
+$s_tag_creator = '{{Identical|Kreator}}';
+$s_tag_created = '{{Identical|Datum kreiranja}}';
+$s_tag_updated = '{{Identical|Poslednje ažuriran}}';
+$s_tag_statistics = '{{Identical|Statistika korišćenja}}';
+$s_tag_attach = '{{Identical|Zakači}}';
+$s_tag_attach_long = '{{Identical|Zakači oznaku}}';
+$s_show_all_tags = '{{Identical|Svi}}';
+$s_time_tracking_cost = '{{Identical|Trošak}}';
+$s_time_tracking_cost_label = '{{Identical|Trošak}}';
+$s_time_tracking_stopwatch_start = '{{Identical|Početak}}';
 $s_time_tracking_stopwatch_stop = '{{Identical|Stop}}';
 $s_time_tracking_stopwatch_reset = '{{Identical|Reset}}';
-$s_access_denied = '{{Identical|Access denied}}';
-$s_due_date = '{{Identical|Due date}}';
-$s_overdue = '{{Identical|Overdue}}';
-$s_word_separator = '{{Optional}}';
-$s_label = '{{optional}}';
-$s_month_january = '{{Identical|January}}';
-$s_month_february = '{{Identical|February}}';
-$s_month_march = '{{Identical|March}}';
+$s_access_denied = '{{Identical|Pristup odbijen}}';
+$s_due_date = '{{Identical|Rok}}';
+$s_overdue = '{{Identical|Istekao}}';
+$s_word_separator = '{{Opciono}}';
+$s_label = '{{opciono}}';
+$s_month_january = '{{Identical|Januar}}';
+$s_month_february = '{{Identical|Februar}}';
+$s_month_march = '{{Identical|Mart}}';
 $s_month_april = '{{Identical|April}}';
-$s_month_may = '{{Identical|May}}';
-$s_month_june = '{{Identical|June}}';
-$s_month_july = '{{Identical|July}}';
-$s_month_august = '{{Identical|August}}';
-$s_month_september = '{{Identical|September}}';
-$s_month_october = '{{Identical|October}}';
-$s_month_november = '{{Identical|November}}';
-$s_month_december = '{{Identical|December}}';
-$s_timeline_issue_tagged = 'Parameters:
-* %1s - username
-* %2s - issue ID
-* %3s - tag name';
-$s_timeline_issue_untagged = 'Parameters:
-* %1s - username
-* %2s - issue ID
-* %3s - tag name';
-$s_timeline_issue_assigned_to_self = 'Parameters:
-* %1s - username
-* %2s - issue ID';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = '{{Identical|Access denied}}';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Should "in MantisBT" be appended?';
-$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expected parameter in string, we just need to write something like "Lalal %2$s bububu %1$d", where 1 and 2 - the index number in argument list (actually, expected in original message)';
-$s_save = '{{Identical|Save}}';
-$s_reset = '{{Identical|Reset}}';
-$s_load = '{{Identical|Load}}';
-$s_edit = '{{Identical|Edit}}';
-$s_submit = '{{Identical|Submit}}';
-$s_update = '{{Identical|Update}}';
-$s_delete = '{{Identical|Delete}}';
-$s_print = '{{Identical|Print}}';
-$s_jump = 'Usado no contexto de escrever um nº de problema e ir para a página correspondente.
-{{Identical|Jump}}';
-$s_change = '{{Identical|Change}}';
-$s_go_back = '{{Identical|Go back}}';
-$s_proceed = 'Message displayed after adding/editing/deleting something
-{{Identical|Proceed}}';
-$s_move = '{{Identical|Move}}';
-$s_close = '{{Identical|Close}}';
-$s_add = '{{Identical|Add}}';
-$s_login = '{{Identical|Login}}';
+$s_month_may = '{{Identical|Maj}}';
+$s_month_june = '{{Identical|Jun}}';
+$s_month_july = '{{Identical|Jul}}';
+$s_month_august = '{{Identical|Avgust}}';
+$s_month_september = '{{Identical|Septembar}}';
+$s_month_october = '{{Identical|Oktobar}}';
+$s_month_november = '{{Identical|Novembar}}';
+$s_month_december = '{{Identical|Decembar}}';
+$s_timeline_issue_tagged = 'Parametri:
+* %1s - korisničko ime
+* %2s - ID problema
+* %3s - ime oznake';
+$s_timeline_issue_untagged = 'Parametri:
+* %1s - korisničko ime
+* %2s - ID problema
+* %3s - ime oznake';
+$s_timeline_issue_assigned_to_self = 'Parametri:
+* %1s - korisničko ime
+* %2s - ID problema';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = '{{Identical|Pristup odbijen}}';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Da li treba dodati u „MantisBT“?';
+$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ako treba da navedemo broj očekivanog parametra u stringu, samo treba da napišemo nešto poput "Lalal %2$s bububu %1$d", gde su 1 i 2 - broj indeksa u listi argumenata (zapravo, očekivano u originalu poruka)';
+$s_save = '{{Identical|Sačuvaj}}';
+$s_reset = '{{Identical|Resetuj}}';
+$s_load = '{{Identical|Učitaj}}';
+$s_edit = '{{Identical|Izmeni}}';
+$s_submit = '{{Identical|Prihvati}}';
+$s_update = '{{Identical|Ažuriraj}}';
+$s_delete = '{{Identical|Obriši}}';
+$s_print = '{{Identical|Štampanje}}';
+$s_jump = 'Koristi se u kontekstu pisanja broja # i odlaska na odgovarajuću stranicu.
+{{Identical|Idi}}';
+$s_change = '{{Identical|Izmeni}}';
+$s_go_back = '{{Identical|Nazad}}';
+$s_proceed = 'Poruka se prikazuje nakon dodavanja/uređivanja/brisanja nečega
+{{Identical|Nastavi}}';
+$s_move = '{{Identical|Premesti}}';
+$s_close = '{{Identical|Zatvori}}';
+$s_add = '{{Identical|Dodaj}}';
+$s_login = '{{Identical|Prijavi se}}';
