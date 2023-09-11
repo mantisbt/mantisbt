@@ -4596,6 +4596,8 @@ $g_global_settings = array(
 	'ldap_uid_field',
 	'ldap_use_starttls',
 	'library_path',
+	'log_destination',
+	'log_level',
 	'login_method',
 	'logo_image',
 	'logo_url',
