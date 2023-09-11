@@ -1385,7 +1385,6 @@ $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Promenljiva sesije „%1$s“ nije
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Vaša sesija je postala neispravna.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neispravan sigurnosni token. Možda je istekla sesija ili ste slučajno podneli obrazac dvaput.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Iz bezbednosnih razloga MantisBT neće raditi kada $g_crypto_master_salt nije tačno naveden u datoteci config_inc.php ili je kraći od 16 znakova.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Nije moguće pronaći izvor jake slučajnosti za kriptografske svrhe.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Ova stranica ne može da se otvori sa ovom metodom.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Nevažeće polje za sortiranje.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neispravan format datuma.';
