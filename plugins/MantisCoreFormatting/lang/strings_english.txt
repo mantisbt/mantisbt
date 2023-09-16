@@ -39,7 +39,7 @@
  *
  * @author Damien Regad
  * @author David Hicks
- * @author John Reese
+ * @author Amethyst Reese
  * @author Siebrand Mazeland
  */
 
