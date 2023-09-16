@@ -83,17 +83,32 @@ check_print_test_row(
 # Check for duplicate email addresses (case-insensitive)
 $t_duplicate_emails = user_get_duplicate_emails();
 
-# Format usernames for display
-foreach( $t_duplicate_emails as $t_email => &$t_usernames ) {
-	$t_usernames = "$t_email (" . implode(', ', $t_usernames ) . ")";
+# Format usernames for display with link to user edit page
+$t_user_edit_page = helper_mantis_url( 'manage_user_edit_page.php' ) . '?user_id=';
+foreach( $t_duplicate_emails as &$t_users ) {
+	foreach( $t_users as $t_id => &$t_username ) {
+		$t_username = sprintf( '<a href="%s">%s</a>',
+			$t_user_edit_page . $t_id,
+			string_display_line( $t_username )
+		);
+	}
 }
 
 # Fail check if emails should be unique, just issue a warning otherwise
 $t_function = config_get_global( 'email_ensure_unique' )
 	? 'check_print_test_row'
 	: 'check_print_test_warn_row';
+$t_list = '<ul>';
+foreach( $t_duplicate_emails as $t_email => $t_usernames ) {
+	$t_list .= '<li>'
+		. ( $t_email ?: '(no e-mail)' )
+		. ' (' . count( $t_usernames ) . '): '
+		. implode( ', ', $t_usernames )
+		. '</li>';
+}
+$t_list .= '</ul>';
 $t_function(
 	'There are no duplicate email addresses, regardless of case',
 	count( $t_duplicate_emails ) == 0,
-	'Duplicates found: ' . implode('; ', $t_duplicate_emails )
+	count( $t_duplicate_emails ) . ' duplicate e-mail addresses found: ' . $t_list
 );
