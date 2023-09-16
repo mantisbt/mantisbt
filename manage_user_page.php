@@ -72,25 +72,13 @@ if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
 	$f_hide_inactive = (bool)$t_manage_arr[0];
 
 	# Sort field
-	if ( isset( $t_manage_arr[1] ) ) {
-		$f_sort = $t_manage_arr[1];
-	} else {
-		$f_sort = 'username';
-	}
+	$f_sort = $t_manage_arr[1] ?? 'username';
 
 	# Sort order
-	if ( isset( $t_manage_arr[2] ) ) {
-		$f_dir = $t_manage_arr[2];
-	} else {
-		$f_dir = 'DESC';
-	}
+	$f_dir = $t_manage_arr[2] ?? 'DESC';
 
 	# Show Disabled
-	if ( isset( $t_manage_arr[3] ) ) {
-		$f_show_disabled = $t_manage_arr[3];
-	} else {
-		$f_show_disabled = false;
-	}
+	$f_show_disabled = $t_manage_arr[3] ?? false;
 } else {
 	$f_sort          = gpc_get_string( 'sort', 'username' );
 	$f_dir           = gpc_get_string( 'dir', 'ASC' );
@@ -309,11 +297,19 @@ $t_user_count = count( $t_users );
 <div class="widget-toolbox padding-8 clearfix">
 	<div id="manage-user-div" class="form-container">
 		<div class="pull-left">
-			<?php print_link_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ),'btn-sm' ) ?>
+			<?php print_link_button( 'manage_user_create_page.php',
+				lang_get( 'create_new_account_link' ),
+				'btn-sm' )
+			?>
 		</div>
 		<?php if( $f_filter === 'UNUSED' ) { ?>
 		<div class="pull-left">
-			<?php print_form_button('manage_user_prune.php', lang_get('prune_accounts'), null, null, 'btn btn-primary btn-sm btn-white btn-round') ?>
+			<?php print_form_button('manage_user_prune.php',
+				lang_get('prune_accounts'),
+				null,
+				null,
+				'btn btn-primary btn-sm btn-white btn-round')
+			?>
 		</div>
 		<?php } ?>
 	<div class="pull-right">
@@ -326,17 +322,26 @@ $t_user_count = count( $t_users );
 			<input type="hidden" name="filter" value="<?php echo string_attribute( $f_filter ); ?>" />
 			<input type="hidden" name="search" value="<?php echo string_attribute( $f_search ); ?>" />
 			<label class="inline">
-			<input type="checkbox" class="ace" name="hideinactive" value="<?php echo ON ?>" <?php check_checked( (int)$c_hide_inactive, ON ); ?> />
-			<span class="lbl padding-6"><?php echo lang_get( 'hide_inactive' ) ?></span>
+				<input type="checkbox" class="ace" name="hideinactive" value="<?php echo ON ?>"
+					<?php check_checked( $c_hide_inactive, ON ); ?>
+				/>
+				<span class="lbl padding-6"><?php echo lang_get( 'hide_inactive' ) ?></span>
 			</label>
 			<label class="inline">
-			<input type="checkbox" class="ace" name="showdisabled" value="<?php echo ON ?>" <?php check_checked( (int)$c_show_disabled, ON ); ?> />
-			<span class="lbl padding-6"><?php echo lang_get( 'show_disabled' ) ?></span>
+				<input type="checkbox" class="ace" name="showdisabled" value="<?php echo ON ?>"
+					<?php check_checked( $c_show_disabled, ON ); ?>
+				/>
+				<span class="lbl padding-6"><?php echo lang_get( 'show_disabled' ) ?></span>
 			</label>
-			<input id="search" type="text" size="45" name="search" class="input-sm"
-				   value="<?php echo string_attribute ( $f_search );?>" placeholder="<?php echo lang_get( 'search_user_hint' ) ?>"
+			<label for="search">
+				<input id="search" type="text" size="45" name="search" class="input-sm"
+					   value="<?php echo string_attribute ( $f_search );?>"
+					   placeholder="<?php echo lang_get( 'search_user_hint' ) ?>"
+				/>
+				</label>
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
+				   value="<?php echo lang_get( 'filter_button' ) ?>"
 			/>
-			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</fieldset>
 	</form>
 		</div>
@@ -449,8 +454,12 @@ $t_user_count = count( $t_users );
 	<div class="btn-toolbar pull-right">
 <?php
 		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
-		print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number,
-			$f_filter . "&amp;search=$f_search" . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
+		print_page_links( 'manage_user_page.php',
+			1, $t_page_count, (int)$f_page_number,
+			$f_filter
+			. "&amp;search=$f_search" . $t_hide_inactive_filter . $t_show_disabled_filter
+			. "&amp;sort=$c_sort&amp;dir=$c_dir"
+		);
 ?>
 	</div>
 </div>
