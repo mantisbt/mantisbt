@@ -64,4 +64,4 @@ custom_field_set_sequence( $f_field_id, $f_project_id, $f_sequence );
 form_security_purge( 'manage_proj_custom_field_update' );
 
 $t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . "#customfields";
-print_successful_redirect( $t_redirect_url, /* force_show */ true );
+print_header_redirect( $t_redirect_url );
