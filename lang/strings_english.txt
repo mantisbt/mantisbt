@@ -46,7 +46,7 @@
  * @author Glenn Henshaw
  * @author Jeroen Latour
  * @author Jim Hanley
- * @author John Reese
+ * @author Amethyst Reese
  * @author Julian Fitzell
  * @author Kenzaburo Ito
  * @author Lincoln Maskey
