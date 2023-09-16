@@ -151,9 +151,12 @@ function print_header_redirect_view( $p_bug_id ) {
  *
  * @param integer $p_bug_id A bug identifier.
  * @return void
- * @deprecated Use print_header_redirect() instead.
+ * @deprecated 2.26.0 Use print_header_redirect() instead.
  */
 function print_successful_redirect_to_bug( $p_bug_id ) {
+	error_parameters( __FUNCTION__ . '()', 'print_header_redirect()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	$t_url = string_get_bug_view_url( $p_bug_id );
 	print_header_redirect( $t_url );
 }
@@ -165,9 +168,12 @@ function print_successful_redirect_to_bug( $p_bug_id ) {
  * @param string $p_redirect_to URI to redirect to.
  * @param bool $p_force_show Force showing operation successful
  * @return void
- * @deprecated Use print_header_redirect() instead.
+ * @deprecated 2.26.0 Use print_header_redirect() instead.
  */
 function print_successful_redirect( $p_redirect_to, $p_force_show = false ) {
+	error_parameters( __FUNCTION__ . '()', 'print_header_redirect()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	print_header_redirect( $p_redirect_to );
 }
 
