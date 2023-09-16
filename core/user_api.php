@@ -306,7 +306,65 @@ function user_ensure_name_unique( $p_username, $p_user_id = null ) {
 }
 
 /**
+ * Returns a list of duplicate email addresses (case-insensitive).
+ *
+ * Each array entry's key is the e-mail address, and the value is an array
+ * listing the associated user accounts, with key=id and value=username.
+ *
+ * Note that the complex query used by this function is quite expensive (average
+ * execution time of about 0.3 seconds for 50K users with 1000 duplicates).
+ *
+ * @return array
+ */
+function user_get_duplicate_emails() {
+	static $s_duplicate_emails;
+
+	if( $s_duplicate_emails === null ) {
+		$t_user_table = db_get_table( 'user' );
+
+		# Using a sub-query within the IN clause's SELECT statement, as a workaround for
+		# MySQL >= 5.7 with sql_mode=only_full_group_by throwing ERROR 1055 (42000):
+		# Expression #1 of HAVING clause is not in GROUP BY clause
+		$t_sql = <<< ENDSQL
+SELECT lower(email) email, id, username
+FROM {$t_user_table} 
+WHERE lower(email) IN (
+	SELECT email 
+	FROM (
+		SELECT lower(email) email, COUNT(*)
+		FROM {$t_user_table}
+		GROUP BY lower(email) HAVING COUNT(*) > 1
+		) tmp
+	)
+ORDER BY lower(email), username
+ENDSQL;
+		$t_query = new DbQuery( $t_sql );
+		$t_rows = $t_query->fetch_all();
+
+		$s_duplicate_emails = array();
+		if( $t_rows ) {
+			foreach( $t_rows as $t_row ) {
+				/**
+				 * @var int $v_id
+				 * @var string $v_email
+				 * @var string $v_username
+				 */
+				extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+				$s_duplicate_emails[$v_email][$v_id] = $v_username;
+			}
+		}
+	}
+
+	return $s_duplicate_emails;
+}
+
+/**
  * Checks if the email address is unique.
+ *
+ * Note on performance: this function's execution time is about 0.05 seconds.
+ * If it must be called multiple times in a given page, it is generally more
+ * efficient to adopt a global approach and check for duplicates instead
+ * {@see user_get_duplicate_emails()}.
  *
  * @param string $p_email   The email to check.
  * @param int    $p_user_id The user id that we are validating for or null for
