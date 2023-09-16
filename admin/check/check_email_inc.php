@@ -94,6 +94,15 @@ foreach( $t_duplicate_emails as &$t_users ) {
 	}
 }
 
+if( OFF == config_get_global( 'allow_empty_email' ) ) {
+	check_print_test_row(
+		'All users must have an e-mail address',
+		!array_key_exists( null, $t_duplicate_emails ),
+		count( $t_duplicate_emails[null] ) . " users without e-mail address found: "
+		. implode( ', ', $t_duplicate_emails[null] )
+	);
+}
+
 # Fail check if emails should be unique, just issue a warning otherwise
 $t_function = config_get_global( 'email_ensure_unique' )
 	? 'check_print_test_row'
