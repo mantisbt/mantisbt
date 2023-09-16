@@ -57,4 +57,4 @@ if( !is_null( $t_plugin ) && $t_plugin->status != MantisPlugin::STATUS_MISSING_P
 
 form_security_purge( 'manage_plugin_upgrade' );
 
-print_successful_redirect( 'manage_plugin_page.php' );
+print_header_redirect( 'manage_plugin_page.php' );
