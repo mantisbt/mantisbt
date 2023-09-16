@@ -371,7 +371,9 @@ $t_user_count = count( $t_users );
 		<tbody>
 <?php
 	$t_date_format = config_get( 'normal_date_format' );
-	$t_unique_emails = config_get_global( 'email_ensure_unique' );
+	$t_duplicate_emails =  config_get_global( 'email_ensure_unique' )
+		? user_get_duplicate_emails()
+		: [];
 	$t_access_level = array();
 	foreach( $t_users as $t_user ) {
 		/**
@@ -409,7 +411,8 @@ $t_user_count = count( $t_users );
 				</td>
 				<td><?php echo string_display_line( $v_realname ) ?></td>
 				<td><?php
-					if( $t_unique_emails && !user_is_email_unique( $v_email, $v_id ) ) {
+					# Display warning icon if emails should be unique and a duplicate exists
+					if( array_key_exists( $v_email, $t_duplicate_emails ) ) {
 						print_icon( 'fa-exclamation-triangle',
 							'ace-icon bigger-125 red padding-right-4',
 							lang_get( 'email_not_unique' )
