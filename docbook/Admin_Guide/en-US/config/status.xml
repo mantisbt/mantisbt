@@ -211,14 +211,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_allow_reporter_close</term>
-			<listitem>
-				<para>If set, the bug reporter is allowed to close their own bugs,
-					regardless of their access level. The default is OFF.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_allow_reporter_reopen</term>
 			<listitem>
 				<para>If set, the bug reporter is allowed to reopen their own bugs
