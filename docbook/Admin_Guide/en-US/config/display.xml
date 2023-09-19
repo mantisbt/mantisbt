@@ -318,12 +318,7 @@
 		<varlistentry>
 			<term>$g_show_avatar</term>
 			<listitem>
-				<para>Show the users' avatar</para>
-				<para>In addition to enabling this configuration option it is
-					necessary to install an avatar plugin like the
-					<ulink url="https://www.gravatar.com">Gravatar</ulink>
-					plugin which is bundled out of the box.
-				</para>
+				<para>Show the users' avatar via <ulink url="https://www.gravatar.com">Gravatar</ulink>.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
