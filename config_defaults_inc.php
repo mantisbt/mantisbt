@@ -44,17 +44,20 @@
  * @global string $g_hostname
  */
 $g_hostname				= 'localhost';
+
 /**
  * User name to use for connecting to the database. The user needs to have
  * read/write access to the MantisBT database. The default user name is "root".
  * @global string $g_db_username
  */
 $g_db_username			= 'root';
+
 /**
  * Password for the specified user name. The default password is empty.
  * @global string $g_db_password
  */
 $g_db_password			= '';
+
 /**
  * Name of database that contains MantisBT tables.
  * The default database name is "bugtracker".
@@ -524,7 +527,6 @@ $g_email_notifications_verbose = OFF;
  * @see $g_notify_flags
  * @global array $g_default_notify_flags
  */
-
 $g_default_notify_flags = array(
 	'reporter'      => ON,
 	'handler'       => ON,
@@ -831,11 +833,13 @@ $g_email_send_using_cronjob = OFF;
  * @global string $g_email_separator1
  */
 $g_email_separator1 = str_pad('', 70, '=');
+
 /**
  * email separator and padding
  * @global string $g_email_separator2
  */
 $g_email_separator2 = str_pad('', 70, '-');
+
 /**
  * email separator and padding
  * @global integer $g_email_padding_length
@@ -3525,6 +3529,7 @@ $g_view_state_enum_string = '10:public,50:private';
  * @global string $g_priority_enum_string
  */
 $g_priority_enum_string = '10:none,20:low,30:normal,40:high,50:urgent,60:immediate';
+
 /**
  *
  * @global string $g_severity_enum_string
@@ -3699,6 +3704,7 @@ $g_custom_headers = array();
  * @global integer $g_allow_browser_cache
  */
 # $g_allow_browser_cache = ON;
+
 /**
  * File caching - This will allow the browser to cache downloaded files.
  * Without this set, there may be issues with IE receiving files, and launching
@@ -3953,6 +3959,7 @@ $g_relationship_graph_enable = OFF;
  * @global string $g_dot_tool
  */
 $g_dot_tool = '/usr/bin/dot';
+
 /**
  * Complete path to dot and neato tools. Your webserver must have execute
  * permission to these programs in order to generate relationship graphs.
