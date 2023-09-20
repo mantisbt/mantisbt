@@ -157,6 +157,79 @@
 				</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_attachments_file_permissions</term>
+			<listitem>
+				<para>When using DISK for storing uploaded files, this setting control
+					the access permissions they will have on the web server: with the default
+					value (0400) files will be read-only, and accessible only by the user
+					running the apache process (probably "apache" in Linux and "Administrator"
+					in Windows).
+					For more details on unix style permissions:
+					<ulink url="http://www.perlfect.com/articles/chmod.shtml">http://www.perlfect.com/articles/chmod.shtml</ulink>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_absolute_path_default_upload_folder</term>
+			<listitem>
+				<para>Absolute path to the default upload folder.  Requires trailing / or \.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_preview_max_width</term>
+			<listitem>
+				<para>Specifies the maximum width for the auto-preview feature. If no maximum
+					width should be imposed then it should be set to 0.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_preview_max_height</term>
+			<listitem>
+				<para>Specifies the maximum height for the auto-preview feature. If no maximum
+					height should be imposed then it should be set to 0.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_attachments_threshold</term>
+			<listitem>
+				<para>Access level needed to view bugs attachments.  View means to see the file
+					names, sizes, and timestamps of the attachments.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_download_attachments_threshold</term>
+			<listitem>
+				<para>Access level needed to download bug attachments.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_delete_attachments_threshold</term>
+			<listitem>
+				<para>Access level needed to delete bug attachments.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_view_own_attachments</term>
+			<listitem>
+				<para>Allow users to view attachments uploaded by themselves even if their access
+					level is below view_attachments_threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_download_own_attachments</term>
+			<listitem>
+				<para>Allow users to download attachments uploaded by themselves even if their
+					access level is below download_attachments_threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_delete_own_attachments</term>
+			<listitem>
+				<para>Allow users to delete attachments uploaded by themselves even if their access
+					level is below delete_attachments_threshold.</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 
 </section>

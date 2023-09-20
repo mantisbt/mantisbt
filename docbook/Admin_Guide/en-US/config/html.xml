@@ -173,5 +173,28 @@ $g_main_menu_custom_options = array(
 				</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_html_valid_tags_single_line</term>
+			<listitem>
+				<para>These are the valid html tags for single line fields (e.g. issue summary).
+					do NOT include a or img tags here.
+					do NOT include tags that require attributes.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_max_dropdown_length</term>
+			<listitem>
+				<para>Maximum length of the description in a dropdown menu (for search)
+					set to 0 to disable truncations</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_wrap_in_preformatted_text</term>
+			<listitem>
+				<para>This flag controls whether pre-formatted text (delimited by HTML pre tags
+					is wrapped to a maximum linelength (defaults to 100 chars in strings_api).
+					If turned off, the display may be wide when viewing the text.</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>

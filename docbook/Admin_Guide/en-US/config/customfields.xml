@@ -23,7 +23,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$$g_custom_field_edit_after_create</term>
+			<term>$g_custom_field_edit_after_create</term>
 			<listitem>
 				<para>This flag determines whether to start editing a custom field
 					immediately after creating it, or return to the definition list.

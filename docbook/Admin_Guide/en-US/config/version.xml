@@ -14,5 +14,23 @@
 				</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_version_suffix</term>
+			<listitem>
+				<para>String appended to the MantisBT version when displayed to the user.
+					Default is ''.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_copyright_statement</term>
+			<listitem>
+				<para> Custom copyright and licensing statement shown at the footer of each page.
+					Can contain HTML elements that are valid children of the &lt;address&gt; element.
+					This string is treated as raw HTML and thus you must use &amp;amp; instead of &amp;.
+					Default is ''.
+				</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>

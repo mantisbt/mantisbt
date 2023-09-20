@@ -55,6 +55,14 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_admin_checks</term>
+			<listitem>
+				<para>Check for admin directory, database upgrades, etc.
+					It defaults to ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_favicon_image</term>
 			<listitem>
 				<para>Path to the favorites icon relative to MantisBT root folder
@@ -284,6 +292,24 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_filter_position</term>
+			<listitem>
+				<para>Position of the filter box, can be: POSITION_*
+				  (POSITION_TOP, POSITION_BOTTOM, or POSITION_NONE for none).
+					Default is FILTER_POSITION_TOP.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_action_button_position</term>
+			<listitem>
+				<para> Position of action buttons when viewing issues.
+					Can be: POSITION_TOP, POSITION_BOTTOM, or POSITION_BOTH.
+					Default is POSITION_BOTTOM.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_show_product_version</term>
 			<listitem>
 				<para>This controls display of the product version in the
@@ -316,6 +342,15 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_sort_by_last_name</term>
+			<listitem>
+				<para>Sorting for names in dropdown lists.
+					If turned on, "Jane Doe" will be sorted with the "D"s.
+ 					It defaults to OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_show_avatar</term>
 			<listitem>
 				<para>Show the users' avatar</para>
@@ -336,5 +371,43 @@
 				</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_show_changelog_dates</term>
+			<listitem>
+				<para>Show release dates on changelog.
+					It defaults to ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_roadmap_dates</term>
+			<listitem>
+				<para>Show release dates on roadmap.
+					It defaults to ON.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_status_colors</term>
+			<listitem>
+				<para>Status color codes, using the Tango color palette.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_display_bug_padding</term>
+			<listitem>
+				<para>The padding level when displaying bug ids.
+					 The bug id will be padded with 0's up to the size given.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_display_bugnote_padding</term>
+			<listitem>
+				<para>The padding level when displaying bugnote ids.
+					 The bugnote id will be padded with 0's up to the size given.</para>
+			</listitem>
+		</varlistentry>
+
 	</variablelist>
 </section>

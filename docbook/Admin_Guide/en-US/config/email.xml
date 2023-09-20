@@ -305,6 +305,15 @@ $g_notify_flags['new'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_show_user_realname_threshold</term>
+			<listitem>
+				<para>This specifies the access level that is needed to see realnames on user view
+ 				  page.
+ 				  The default value is NOBODY, hence, even administrators won't have this feature enabled.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_phpMailer_method</term>
 			<listitem>
 				<para>Select the method to send mail:
