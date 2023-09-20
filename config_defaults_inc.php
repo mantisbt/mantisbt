@@ -3854,7 +3854,8 @@ $g_file_type_icons = array(
 	'xlt'	=> 'fa-file-excel-o',
 	'xml'	=> 'fa-file-code-o',
 	'zip'	=> 'fa-file-archive-o',
-	'?'	=> 'fa-file-o' );
+	'?'	=> 'fa-file-o'
+);
 
 /**
  *
