@@ -3066,13 +3066,13 @@ $g_update_readonly_bug_threshold = MANAGER;
 $g_view_changelog_threshold = VIEWER;
 
 /**
-* threshold for viewing timeline
-* @global integer $g_timeline_view_threshold
-*/
+ * Threshold for viewing timeline
+ * @global integer $g_timeline_view_threshold
+ */
 $g_timeline_view_threshold = VIEWER;
 
 /**
- * threshold for viewing roadmap
+ * Threshold for viewing roadmap
  * @global integer $g_roadmap_view_threshold
  */
 $g_roadmap_view_threshold = VIEWER;
@@ -4261,10 +4261,10 @@ $g_plugin_path = $g_absolute_path . 'plugins' . DIRECTORY_SEPARATOR;
 $g_manage_plugin_threshold = ADMINISTRATOR;
 
 /**
-* A mapping of file extensions to mime types, used when serving resources from plugins
-*
-* @global array $g_plugin_mime_types
-*/
+ * A mapping of file extensions to mime types, used when serving resources from plugins
+ *
+ * @global array $g_plugin_mime_types
+ */
 $g_plugin_mime_types = array(
 	    'css' => 'text/css',
 	    'js'  => 'text/javascript',
