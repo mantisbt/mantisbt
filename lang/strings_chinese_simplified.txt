@@ -51,6 +51,7 @@
  * @author Lakejason0
  * @author Liangent
  * @author Linforest
+ * @author LittlePaw365
  * @author Liuxinyu970226
  * @author Mmyangfl
  * @author Myy730
@@ -134,7 +135,7 @@ $s_delete_bugnote_button = '删除问题注释';
 $s_delete_bugnote_sure_msg = '确定要删除这条问题注释吗？';
 $s_bug_relationships = '关联';
 $s_empty_password_sure_msg = '确定要设置用户密码为空吗？';
-$s_empty_password_button = '使用空白密码';
+$s_empty_password_button = '使用空密码';
 $s_reauthenticate_title = '认证';
 $s_reauthenticate_message = '您正在访问一个安全页面，并且您的安全会话已过期。要继续操作请输入您的认证信息。';
 $s_no_category = '（无分类）';
@@ -569,7 +570,7 @@ $s_manage_global_profiles_link = '全域配置';
 $s_manage_plugin_link = '插件';
 $s_permissions_summary_report = '权限报告';
 $s_manage_config_link = '配置';
-$s_manage_threshold_config = '工作流阀值';
+$s_manage_threshold_config = '工作流阈值';
 $s_manage_email_config = '邮件提醒';
 $s_manage_workflow_config = '工作流过渡';
 $s_manage_workflow_graph = '工作流图表';
@@ -612,7 +613,7 @@ $s_non_existent = '不存在';
 $s_current_status = '当前状态';
 $s_next_status = '下一状态';
 $s_workflow = '工作流';
-$s_workflow_thresholds = '影响工作流的阀值';
+$s_workflow_thresholds = '影响工作流的阈值';
 $s_threshold = '阈值';
 $s_status_level = '状态';
 $s_alter_level = '有权修改该值的人';
@@ -1004,7 +1005,7 @@ $s_custom_fields_setup = '自定义字段';
 $s_custom_field_name = '名称';
 $s_custom_field_project_count = '项目名称';
 $s_custom_field_type = '类型';
-$s_custom_field_possible_values = '可能取值';
+$s_custom_field_possible_values = '可能值';
 $s_custom_field_default_value = '默认值';
 $s_custom_field_valid_regexp = '正则表达式';
 $s_custom_field_access_level_r = '读权限';
@@ -1281,7 +1282,7 @@ $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '没有指定文件';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '此类型的文件不允许上传';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = '目录不存在；请检查项目设置。';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '已经存在一个同名的项目。';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '字段“%1$s”是必须填写的，不能为空白，请重新填写。';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '必填字段“%1$s”为空。请重新检查您的输入。';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = '用于“%1$s”的值无效';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '该帐号设置为被保护状态，在账户保护解除之前，您不能执行所要求的操作。';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '无权访问。';
@@ -1316,7 +1317,7 @@ $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '密码与确认信的内�
 $MANTIS_ERROR[ERROR_USER_CURRENT_PASSWORD_MISMATCH] = '当前密码不正确。';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = '预期 %1$s 接收到的是数组，但实际收到的是字符串。';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '预期 %1$s 接收到的是字符串，但实际收到的是数组。';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '预期 %1$s 接收到的数据为数值。';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%1$s 应为数字。';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = '没有找到问题 %1$d 。';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = '没有找到过滤器 %1$d 。';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = '无效的 Email 地址';
@@ -1334,7 +1335,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '没有找到自定义字段';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '名称重复。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_INVALID] = '无效的自定义字段名称“%1$s”：不允许逗号。请在管理指南中查看“本地化自定义字段名称”章节作为解决方法。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '最少还有一个项目仍然在使用该字段。';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '该数值对字段"%1$s" 无效。';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '字段“%1$s”有无效值。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '自定义字段定义无效';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = '无效的自定义字段属性 (%1$s)。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT] = '自定义字段“%1$s”（ID：%2$s）未连接至当前活跃的项目。';
@@ -1365,7 +1366,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '资助金额﹝%1$s﹞低于�
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = '主持人没有必要的操作权限处理资助问题。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = '拒绝存取：指派受资助的问题需要更高的操作权限。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = '资助者没有提供 Email 地址；请更新你的个人设置。';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '设置选项“%1$s”的数值“%2$s”无效';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '配置选项“%1$s”有无效值“%2$s”。';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '由于问题“%1$d”是只读的，操作无法执行';
 $MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = '此问题直到所有从属问题解决后才能被解决。请求您的系统管理员项目访问权，如果您并未看到任何从属问题的话。';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = '没有找到关联。';
