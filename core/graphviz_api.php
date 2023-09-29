@@ -349,56 +349,66 @@ class Graph {
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
-		$t_binary = $this->formats[$p_format]['binary'];
-		$t_type = $this->formats[$p_format]['type'];
-		$t_mime = $this->formats[$p_format]['mime'];
-
-		# Send Content-Type header, if requested.
-		if( $p_headers ) {
-			header( 'Content-Type: ' . $t_mime );
+		# Graphviz tool missing or not executable
+		if( !is_executable( $this->graphviz_tool ) ) {
+			trigger_error( ERROR_GENERIC, ERROR );
 		}
+
 		# Retrieve the source dot document into a buffer
 		ob_start();
 		$this->generate();
-		$t_dot_source = ob_get_contents();
-		ob_end_clean();
+		$t_dot_source = ob_get_clean();
 
 		# Start dot process
-
 		$t_command = escapeshellcmd( $this->graphviz_tool . ' -T' . $p_format );
+		$t_stderr = tempnam( sys_get_temp_dir(), 'graphviz' );
 		$t_descriptors = array(
 			0 => array( 'pipe', 'r', ),
 			1 => array( 'pipe', 'w', ),
-			2 => array( 'file', 'php://stderr', 'w', ),
-			);
+			# Writing to file instead of pipe to avoid locking issues
+			2 => array( 'file', $t_stderr, 'w', ),
+		);
 
 		$t_pipes = array();
 		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes );
 
-		if( is_resource( $t_process ) ) {
-			# Filter generated output through dot
-			fwrite( $t_pipes[0], $t_dot_source );
-			fclose( $t_pipes[0] );
-
-			if( $p_headers ) {
-				# Headers were requested, use another output buffer to
-				# retrieve the size for Content-Length.
-				ob_start();
-				while( !feof( $t_pipes[1] ) ) {
-					echo fgets( $t_pipes[1], 1024 );
-				}
-				header( 'Content-Length: ' . ob_get_length() );
-				ob_end_flush();
-			} else {
-				# No need for headers, send output directly.
-				while( !feof( $t_pipes[1] ) ) {
-					print( fgets( $t_pipes[1], 1024 ) );
-				}
-			}
-
-			fclose( $t_pipes[1] );
-			proc_close( $t_process );
+		if( !is_resource( $t_process ) ) {
+			# proc_open failed
+			trigger_error( ERROR_GENERIC, ERROR );
 		}
+
+		# Check for output in stderr
+		# Wait a bit to ensure the file has been written before attempting to read it
+		usleep( 5000 );
+		$t_error = file_get_contents( $t_stderr );
+		unlink( $t_stderr );
+		if( $t_error ) {
+			trigger_error( ERROR_GENERIC, ERROR );
+		}
+
+		# Filter the generated document through dot
+		fwrite( $t_pipes[0], $t_dot_source );
+		fclose( $t_pipes[0] );
+
+		if( $p_headers ) {
+			header( 'Content-Type: ' . $this->formats[$p_format]['mime'] );
+
+			# Use an output buffer to retrieve the size for Content-Length
+			ob_start();
+		}
+
+		# Send the output
+		while( !feof( $t_pipes[1] ) ) {
+			echo fgets( $t_pipes[1], 1024 );
+		}
+
+		if( $p_headers ) {
+			header( 'Content-Length: ' . ob_get_length() );
+			ob_end_flush();
+		}
+
+		fclose( $t_pipes[1] );
+		proc_close( $t_process );
 	}
 
 	/**
