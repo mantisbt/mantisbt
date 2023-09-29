@@ -54,6 +54,7 @@ class Graph {
 	 */
 	const TOOL_DOT = 'dot';
 	const TOOL_NEATO = 'neato';
+	const TOOL_CIRCO = 'circo';
 
 	/**
 	 * Constant(s) defining the output formats supported by dot and neato.
