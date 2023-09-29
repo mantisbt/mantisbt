@@ -233,9 +233,7 @@ class Graph {
 	 * @return void
 	 */
 	public function set_attributes( array $p_attributes ) {
-		if( is_array( $p_attributes ) ) {
-			$this->attributes = $p_attributes;
-		}
+		$this->attributes = $p_attributes;
 	}
 
 	/**
@@ -246,9 +244,7 @@ class Graph {
 	 * @return void
 	 */
 	public function set_default_node_attr( array $p_attributes ) {
-		if( is_array( $p_attributes ) ) {
-			$this->default_node = $p_attributes;
-		}
+		$this->default_node = $p_attributes;
 	}
 
 	/**
@@ -259,9 +255,7 @@ class Graph {
 	 * @return void
 	 */
 	public function set_default_edge_attr( array $p_attributes ) {
-		if( is_array( $p_attributes ) ) {
-			$this->default_edge = $p_attributes;
-		}
+		$this->default_edge = $p_attributes;
 	}
 
 	/**
