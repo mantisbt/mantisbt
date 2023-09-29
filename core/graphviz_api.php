@@ -47,6 +47,15 @@ require_api( 'utility_api.php' );
 class Graph {
 
 	/**
+	 * Constants defining the Graphviz tools' names.
+	 *
+	 * These are the names of the executables in the directory defined by
+	 * {@see $g_graphviz_path}.
+	 */
+	const TOOL_DOT = 'dot';
+	const TOOL_NEATO = 'neato';
+
+	/**
 	 * Constant(s) defining the output formats supported by dot and neato.
 	 */
 	const GRAPHVIZ_ATTRIBUTED_DOT = 0;
@@ -215,14 +224,15 @@ class Graph {
 	 * @param array  $p_attributes Attributes
 	 * @param string $p_tool       Graph generation tool (one of the TOOL_* constants)
 	 */
-	public function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = 'neato' ) {
+	public function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = Graph::TOOL_NEATO ) {
 		if( is_string( $p_name ) ) {
 			$this->name = $p_name;
 		}
 
 		$this->set_attributes( $p_attributes );
 
-		$this->graphviz_tool = $p_tool;
+		$t_graphviz_path = config_get_global( 'graphviz_path' );
+		$this->graphviz_tool = $t_graphviz_path . $p_tool;
 	}
 
 	/**

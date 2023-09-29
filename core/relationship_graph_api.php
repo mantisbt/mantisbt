@@ -156,7 +156,6 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 	$t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
 	$t_graph_fontpath = get_font_path();
 	$t_view_on_click = config_get( 'relationship_graph_view_on_click' );
-	$t_neato_tool = config_get_global( 'neato_tool' );
 
 	$t_graph_attributes = array(
 		'overlap'	=> 'false',
@@ -167,7 +166,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 		$t_graph_attributes['fontpath'] = $t_graph_fontpath;
 	}
 
-	$t_graph = new Graph( $t_id_string, $t_graph_attributes, $t_neato_tool );
+	$t_graph = new Graph( $t_id_string, $t_graph_attributes );
 
 	$t_graph->set_default_node_attr( array (
 			'fontname'	=> $t_graph_fontname,
@@ -287,7 +286,6 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 	$t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
 	$t_graph_fontpath = get_font_path();
 	$t_view_on_click = config_get( 'relationship_graph_view_on_click' );
-	$t_dot_tool = config_get_global( 'dot_tool' );
 
 	$t_graph_attributes = array();
 
@@ -302,7 +300,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 		$t_graph_orientation = 'vertical';
 	}
 
-	$t_graph = new Digraph( $t_id_string, $t_graph_attributes, $t_dot_tool );
+	$t_graph = new Digraph( $t_id_string, $t_graph_attributes, Graph::TOOL_DOT );
 
 	$t_graph->set_default_node_attr( array (
 			'fontname'	=> $t_graph_fontname,

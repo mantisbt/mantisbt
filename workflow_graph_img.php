@@ -50,7 +50,6 @@ $t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_e
 $t_graph_fontname = config_get( 'relationship_graph_fontname' );
 $t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
 $t_graph_fontpath = get_font_path();
-$t_dot_tool = config_get_global( 'dot_tool' );
 
 $t_graph_attributes = array();
 
@@ -58,7 +57,7 @@ if( !empty( $t_graph_fontpath ) ) {
 	$t_graph_attributes['fontpath'] = $t_graph_fontpath;
 }
 
-$t_graph = new Graph( 'workflow', $t_graph_attributes, $t_dot_tool );
+$t_graph = new Graph( 'workflow', $t_graph_attributes, Graph::TOOL_DOT );
 
 $t_graph->set_default_node_attr( array ( 'fontname' => $t_graph_fontname,
 										 'fontsize' => $t_graph_fontsize,
