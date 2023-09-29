@@ -38,35 +38,38 @@
 require_api( 'constant_inc.php' );
 require_api( 'utility_api.php' );
 
-# constant(s) defining the output formats supported by dot and neato.
-define( 'GRAPHVIZ_ATTRIBUTED_DOT', 0 );
-define( 'GRAPHVIZ_PS', 1 );
-define( 'GRAPHVIZ_HPGL', 2 );
-define( 'GRAPHVIZ_PCL', 3 );
-define( 'GRAPHVIZ_MIF', 4 );
-define( 'GRAPHVIZ_PLAIN', 6 );
-define( 'GRAPHVIZ_PLAIN_EXT', 7 );
-define( 'GRAPHVIZ_GIF', 11 );
-define( 'GRAPHVIZ_JPEG', 12 );
-define( 'GRAPHVIZ_PNG', 13 );
-define( 'GRAPHVIZ_WBMP', 14 );
-define( 'GRAPHVIZ_XBM', 15 );
-define( 'GRAPHVIZ_ISMAP', 16 );
-define( 'GRAPHVIZ_IMAP', 17 );
-define( 'GRAPHVIZ_CMAP', 18 );
-define( 'GRAPHVIZ_CMAPX', 19 );
-define( 'GRAPHVIZ_VRML', 20 );
-define( 'GRAPHVIZ_SVG', 25 );
-define( 'GRAPHVIZ_SVGZ', 26 );
-define( 'GRAPHVIZ_CANONICAL_DOT', 27 );
-define( 'GRAPHVIZ_PDF', 28 );
-
 /**
  * Base class for graph creation and manipulation. By default,
  * undirected graphs are generated. For directed graphs, use Digraph
  * class.
  */
 class Graph {
+
+	/**
+	 * Constant(s) defining the output formats supported by dot and neato.
+	 */
+	const GRAPHVIZ_ATTRIBUTED_DOT = 0;
+	const GRAPHVIZ_PS = 1;
+	const GRAPHVIZ_HPGL = 2;
+	const GRAPHVIZ_PCL = 3;
+	const GRAPHVIZ_MIF = 4;
+	const GRAPHVIZ_PLAIN = 6;
+	const GRAPHVIZ_PLAIN_EXT = 7;
+	const GRAPHVIZ_GIF = 11;
+	const GRAPHVIZ_JPEG = 12;
+	const GRAPHVIZ_PNG = 13;
+	const GRAPHVIZ_WBMP = 14;
+	const GRAPHVIZ_XBM = 15;
+	const GRAPHVIZ_ISMAP = 16;
+	const GRAPHVIZ_IMAP = 17;
+	const GRAPHVIZ_CMAP = 18;
+	const GRAPHVIZ_CMAPX = 19;
+	const GRAPHVIZ_VRML = 20;
+	const GRAPHVIZ_SVG = 25;
+	const GRAPHVIZ_SVGZ = 26;
+	const GRAPHVIZ_CANONICAL_DOT = 27;
+	const GRAPHVIZ_PDF = 28;
+
 	/**
 	 * Name
 	 */
@@ -108,97 +111,97 @@ class Graph {
 	public $formats = array(
 		'dot' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_ATTRIBUTED_DOT,
+			'type' => self::GRAPHVIZ_ATTRIBUTED_DOT,
 			'mime' => 'text/x-graphviz',
 		),
 		'ps' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_PS,
+			'type' => self::GRAPHVIZ_PS,
 			'mime' => 'application/postscript',
 		),
 		'hpgl' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_HPGL,
+			'type' => self::GRAPHVIZ_HPGL,
 			'mime' => 'application/vnd.hp-HPGL',
 		),
 		'pcl' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_PCL,
+			'type' => self::GRAPHVIZ_PCL,
 			'mime' => 'application/vnd.hp-PCL',
 		),
 		'mif' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_MIF,
+			'type' => self::GRAPHVIZ_MIF,
 			'mime' => 'application/vnd.mif',
 		),
 		'gif' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_GIF,
+			'type' => self::GRAPHVIZ_GIF,
 			'mime' => 'image/gif',
 		),
 		'jpg' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_JPEG,
+			'type' => self::GRAPHVIZ_JPEG,
 			'mime' => 'image/jpeg',
 		),
 		'jpeg' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_JPEG,
+			'type' => self::GRAPHVIZ_JPEG,
 			'mime' => 'image/jpeg',
 		),
 		'png' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_PNG,
+			'type' => self::GRAPHVIZ_PNG,
 			'mime' => 'image/png',
 		),
 		'wbmp' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_WBMP,
+			'type' => self::GRAPHVIZ_WBMP,
 			'mime' => 'image/vnd.wap.wbmp',
 		),
 		'xbm' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_XBM,
+			'type' => self::GRAPHVIZ_XBM,
 			'mime' => 'image/x-xbitmap',
 		),
 		'ismap' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_ISMAP,
+			'type' => self::GRAPHVIZ_ISMAP,
 			'mime' => 'text/plain',
 		),
 		'imap' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_IMAP,
+			'type' => self::GRAPHVIZ_IMAP,
 			'mime' => 'application/x-httpd-imap',
 		),
 		'cmap' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_CMAP,
+			'type' => self::GRAPHVIZ_CMAP,
 			'mime' => 'text/html',
 		),
 		'cmapx' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_CMAPX,
+			'type' => self::GRAPHVIZ_CMAPX,
 			'mime' => 'application/xhtml+xml',
 		),
 		'vrml' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_VRML,
+			'type' => self::GRAPHVIZ_VRML,
 			'mime' => 'x-world/x-vrml',
 		),
 		'svg' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_SVG,
+			'type' => self::GRAPHVIZ_SVG,
 			'mime' => 'image/svg+xml',
 		),
 		'svgz' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_SVGZ,
+			'type' => self::GRAPHVIZ_SVGZ,
 			'mime' => 'image/svg+xml',
 		),
 		'pdf' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_PDF,
+			'type' => self::GRAPHVIZ_PDF,
 			'mime' => 'application/pdf',
 		),
 	);
