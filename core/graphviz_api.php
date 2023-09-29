@@ -39,9 +39,10 @@ require_api( 'constant_inc.php' );
 require_api( 'utility_api.php' );
 
 /**
- * Base class for graph creation and manipulation. By default,
- * undirected graphs are generated. For directed graphs, use Digraph
- * class.
+ * Base class for graph creation and manipulation.
+ *
+ * Generates undirected graphs are generated.
+ * For directed graphs, use {@see Digraph} class.
  */
 class Graph {
 
@@ -71,42 +72,43 @@ class Graph {
 	const GRAPHVIZ_PDF = 28;
 
 	/**
-	 * Name
+	 * @var string Name
 	 */
 	protected $name = 'G';
 
 	/**
-	 * Attributes
+	 * @var array Attributes
 	 */
 	protected $attributes = array();
 
 	/**
-	 * Default node
+	 * @var array Default node attributes
 	 */
 	protected $default_node = null;
 
 	/**
-	 * Default edge
+	 * @var array Default edge attributes
 	 */
 	protected $default_edge = null;
 
 	/**
-	 * Nodes
+	 * @var array Nodes
 	 */
 	protected $nodes = array();
 
 	/**
-	 * Edges
+	 * @var array Edges
 	 */
 	protected $edges = array();
 
 	/**
-	 * Graphviz tool
+	 * @var string Graphviz tool
 	 */
 	protected $graphviz_tool;
 
 	/**
-	 * Formats
+	 * Graphviz output formats
+	 * @see https://graphviz.org/docs/outputs/
 	 */
 	protected $formats = array(
 		'dot' => array(
@@ -208,9 +210,10 @@ class Graph {
 
 	/**
 	 * Constructor for Graph objects.
-	 * @param string $p_name       Graph name.
-	 * @param array  $p_attributes Attributes.
-	 * @param string $p_tool       Graph generation tool.
+	 *
+	 * @param string $p_name       Graph name
+	 * @param array  $p_attributes Attributes
+	 * @param string $p_tool       Graph generation tool (one of the TOOL_* constants)
 	 */
 	public function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = 'neato' ) {
 		if( is_string( $p_name ) ) {
@@ -224,7 +227,9 @@ class Graph {
 
 	/**
 	 * Sets graph attributes.
+	 *
 	 * @param array $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
 	public function set_attributes( array $p_attributes ) {
@@ -235,7 +240,9 @@ class Graph {
 
 	/**
 	 * Sets default attributes for all nodes of the graph.
+	 *
 	 * @param array $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
 	public function set_default_node_attr( array $p_attributes ) {
@@ -246,7 +253,9 @@ class Graph {
 
 	/**
 	 * Sets default attributes for all edges of the graph.
+	 *
 	 * @param array $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
 	public function set_default_edge_attr( array $p_attributes ) {
@@ -257,8 +266,10 @@ class Graph {
 
 	/**
 	 * Adds a node to the graph.
+	 *
 	 * @param string $p_name       Node name.
 	 * @param array  $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
 	public function add_node( $p_name, array $p_attributes = array() ) {
@@ -269,9 +280,11 @@ class Graph {
 
 	/**
 	 * Adds an edge to the graph.
+	 *
 	 * @param string $p_src        Source.
 	 * @param string $p_dst        Destination.
 	 * @param array  $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
 	public function add_edge( $p_src, $p_dst, array $p_attributes = array() ) {
@@ -286,8 +299,10 @@ class Graph {
 
 	/**
 	 * Check if an edge is already present.
+	 *
 	 * @param string $p_src Source.
 	 * @param string $p_dst Destination.
+	 *
 	 * @return boolean
 	 */
 	public function is_edge_present( $p_src, $p_dst ) {
@@ -301,6 +316,7 @@ class Graph {
 
 	/**
 	 * Generates an undirected graph representation (suitable for neato).
+	 *
 	 * @return void
 	 */
 	public function generate() {
@@ -327,8 +343,10 @@ class Graph {
 
 	/**
 	 * Outputs a graph image or map in the specified format.
+	 *
 	 * @param string  $p_format  Graphviz output format.
 	 * @param boolean $p_headers Whether to sent http headers.
+	 *
 	 * @return void
 	 */
 	public function output( $p_format = 'dot', $p_headers = false ) {
@@ -393,6 +411,7 @@ class Graph {
 	 * Build a node or edge attribute list.
 	 *
 	 * @param array $p_attributes Attributes.
+	 *
 	 * @return string
 	 */
 	protected function build_attribute_list( array $p_attributes ) {
@@ -455,12 +474,15 @@ class Graph {
 	}
 }
 
+
 /**
  * Directed graph creation and manipulation.
  */
 class Digraph extends Graph {
+
 	/**
 	 * Constructor for Digraph objects.
+	 *
 	 * @param string $p_name       Name of the graph.
 	 * @param array  $p_attributes Attributes.
 	 * @param string $p_tool       Graphviz tool.
@@ -471,6 +493,7 @@ class Digraph extends Graph {
 
 	/**
 	 * Generates a directed graph representation (suitable for dot).
+	 *
 	 * @return void
 	 */
 	public function generate() {
