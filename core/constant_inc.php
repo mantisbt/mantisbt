@@ -449,6 +449,9 @@ define( 'ERROR_CRYPTO_MASTER_SALT_INVALID', 2900 );
 # ERROR_API_TOKEN_*
 define( 'ERROR_API_TOKEN_NAME_NOT_UNIQUE', 3000 );
 
+# ERROR_GRAPH_*
+define( 'ERROR_GRAPH_TOOL_NOT_FOUND', 3100 );
+
 # Generic position constants
 define( 'POSITION_NONE', 0 );
 define( 'POSITION_TOP', 1 );

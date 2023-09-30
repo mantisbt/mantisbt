@@ -362,12 +362,14 @@ class Graph {
 	public function output( $p_format = 'dot', $p_headers = false ) {
 		# Check if it is a recognized format.
 		if( !isset( $this->formats[$p_format] ) ) {
+			error_parameters( "Invalid Graph format '$p_format'." );
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
 		# Graphviz tool missing or not executable
 		if( !is_executable( $this->tool_path() ) ) {
-			trigger_error( ERROR_GENERIC, ERROR );
+			error_parameters( $this->graphviz_tool );
+			trigger_error( ERROR_GRAPH_TOOL_NOT_FOUND, ERROR );
 		}
 
 		# Retrieve the source dot document into a buffer
@@ -399,6 +401,7 @@ class Graph {
 		$t_error = file_get_contents( $t_stderr );
 		unlink( $t_stderr );
 		if( $t_error ) {
+			error_parameters( $t_error );
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
