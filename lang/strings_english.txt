@@ -1610,7 +1610,8 @@ $s_timeline_more = 'More events...';
  */
 $s_missing_error_string = 'Missing Error String: %1$s';
 
-$MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action. You may wish to report this error to your local administrator.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action. You may wish to report it to your local administrator.';
+$MANTIS_ERROR[ERROR_GENERIC_DETAILS] = 'Error details: %s';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.';
 $MANTIS_ERROR[ERROR_REPORT] = 'There was an error in your report.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'No file specified.';

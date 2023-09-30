@@ -646,6 +646,13 @@ function error_string( $p_error ) {
 		}
 	}
 
+	# Special handling for generic error type
+	# Append detailed error information if a parameter has been provided.
+	if( $p_error == ERROR_GENERIC && $g_error_parameters ) {
+		$t_error .= PHP_EOL . error_string( ERROR_GENERIC_DETAILS );
+		$g_error_parameters = [];
+	}
+
 	# Prepare error parameters for display
 	$t_parameters = $g_error_parameters;
 	foreach( $t_parameters as &$t_value ) {

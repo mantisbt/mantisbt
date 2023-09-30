@@ -244,6 +244,7 @@ define( 'PLUGIN_PRIORITY_HIGH', 5 );
 # error messages
 define( 'ERROR_PHP', -1 );
 define( 'ERROR_GENERIC', 0 );
+define( 'ERROR_GENERIC_DETAILS', 32 );
 define( 'ERROR_SQL', 1 );
 define( 'ERROR_REPORT', 3 );
 define( 'ERROR_NO_FILE_SPECIFIED', 4 );
