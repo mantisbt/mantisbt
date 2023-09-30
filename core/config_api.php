@@ -132,6 +132,8 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 			if( isset( $g_cache_config[$p_option] ) ) {
 				$t_found = false;
+				$t_value = '';
+
 				foreach( $t_users as $t_user ) {
 					foreach( $t_projects as $t_project ) {
 						if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
