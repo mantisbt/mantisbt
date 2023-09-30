@@ -112,6 +112,11 @@ class Graph {
 	protected $edges = array();
 
 	/**
+	 * @var string Graphviz path
+	 */
+	protected $graphviz_path;
+
+	/**
 	 * @var string Graphviz tool
 	 */
 	protected $graphviz_tool;
@@ -232,8 +237,8 @@ class Graph {
 
 		$this->set_attributes( $p_attributes );
 
-		$t_graphviz_path = config_get_global( 'graphviz_path' );
-		$this->graphviz_tool = $t_graphviz_path . $p_tool;
+		$this->graphviz_path = config_get_global( 'graphviz_path' );
+		$this->graphviz_tool = $p_tool;
 	}
 
 	/**
@@ -361,7 +366,7 @@ class Graph {
 		}
 
 		# Graphviz tool missing or not executable
-		if( !is_executable( $this->graphviz_tool ) ) {
+		if( !is_executable( $this->tool_path() ) ) {
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
@@ -371,7 +376,7 @@ class Graph {
 		$t_dot_source = ob_get_clean();
 
 		# Start dot process
-		$t_command = escapeshellcmd( $this->graphviz_tool . ' -T' . $p_format );
+		$t_command = escapeshellcmd( $this->tool_path() . ' -T' . $p_format );
 		$t_stderr = tempnam( sys_get_temp_dir(), 'graphviz' );
 		$t_descriptors = array(
 			0 => array( 'pipe', 'r', ),
@@ -486,6 +491,15 @@ class Graph {
 			$t_attr = $this->build_attribute_list( $this->default_edge );
 			echo "\t" . 'edge ' . $t_attr . ";\n";
 		}
+	}
+
+	/**
+	 * Gets the path to the Graphviz tool.
+	 *
+	 * @return string
+	 */
+	protected function tool_path() {
+		return $this->graphviz_path . $this->graphviz_tool;
 	}
 }
 
