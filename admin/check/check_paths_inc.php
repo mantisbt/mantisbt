@@ -54,7 +54,8 @@ $t_path_config_names = array(
 	'class_path',
 	'library_path',
 	'config_path',
-	'language_path'
+	'language_path',
+	'graphviz_path',
 );
 
 # Handle file upload default path only if attachments stored on disk
