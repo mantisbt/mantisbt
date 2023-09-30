@@ -318,8 +318,8 @@ function custom_function_default_get_columns_to_view( $p_columns_target = COLUMN
 /**
  * Print the title of a column given its name.
  *
- * @global type $t_sort             (deprecated) main sort column in use from filter
- * @global type $t_dir              (deprecated) main sort dir in use from filter
+ * @global string $t_sort           (deprecated) main sort column in use from filter
+ * @global string $t_dir            (deprecated) main sort dir in use from filter
  * @param string  $p_column         Custom_xxx for custom field xxx, or otherwise field name as in bug table.
  * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
  * @param array $p_sort_properties  Array of filter sortin gproeprties, in the format returned from filter_get_visible_sort_properties_array()
