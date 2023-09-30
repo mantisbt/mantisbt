@@ -168,7 +168,7 @@ class ConfigsSetCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @return void
+	 * @return array Command response
 	 */
 	protected function process() {
 		# The edit case is internal only to web UI and it will always have a single config option
@@ -194,6 +194,8 @@ class ConfigsSetCommand extends Command {
 				config_set( $t_option['option'], $t_option['value'], $this->user_id, $this->project_id );
 			}
 		}
+
+		return [];
 	}
 
 	/**
