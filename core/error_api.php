@@ -275,8 +275,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			$t_error_description = $p_error . ' (' . $t_error_location . ')';
 	}
 
-	$t_error_description = nl2br( $t_error_description );
-
 	if( php_sapi_name() == 'cli' ) {
 		if( DISPLAY_ERROR_NONE != $t_method ) {
 			echo $t_error_type . ': ' . $t_error_description . "\n";
@@ -290,6 +288,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			exit(1);
 		}
 	} else {
+		$t_error_description = nl2br( $t_error_description );
+
 		switch( $t_method ) {
 			case DISPLAY_ERROR_HALT:
 				# disable any further event callbacks
