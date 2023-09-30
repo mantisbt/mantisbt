@@ -32,8 +32,12 @@ if( !defined( 'CHECK_CONFIG_INC_ALLOW' ) ) {
 # MantisBT Check API
 require_once( 'check_api.php' );
 
+global $g_config_path, $g_absolute_path, $g_log_level, $g_log_destination,
+	   $g_show_detailed_errors, $g_debug_email, $g_limit_reporters;
+
 check_print_section_header_row( 'Configuration' );
 
+/** @noinspection HtmlUnknownTarget */
 check_print_test_row( 'config_inc.php configuration file exists',
 	file_exists( $g_config_path . 'config_inc.php' ),
 	array( false => 'Please use <a href="install.php">install.php</a> to perform the initial installation of MantisBT.' )
