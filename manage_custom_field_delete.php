@@ -73,10 +73,4 @@ custom_field_destroy( $f_field_id );
 
 form_security_purge( 'manage_custom_field_delete' );
 
-layout_page_header( null, $f_return );
-
-layout_page_begin( 'manage_overview_page.php' );
-
-html_operation_successful( $f_return );
-
-layout_page_end();
+print_header_redirect( $f_return );

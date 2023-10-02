@@ -138,12 +138,4 @@ if( !$t_result ) {
 
 form_security_purge( 'proj_doc_update' );
 
-$t_redirect_url = 'proj_doc_page.php';
-
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin( 'proj_doc_page.php' );
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( 'proj_doc_page.php' );

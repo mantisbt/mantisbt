@@ -79,4 +79,4 @@ foreach( $t_query->fetch_all() as $t_row ) {
 
 form_security_purge( 'manage_plugin_update' );
 
-print_successful_redirect( 'manage_plugin_page.php' );
+print_header_redirect( 'manage_plugin_page.php' );

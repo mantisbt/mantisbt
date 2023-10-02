@@ -56,16 +56,11 @@ auth_reauthenticate();
 $t_can_change_level = min( config_get_access( 'notify_flags' ), config_get_access( 'default_notify_flags' ) );
 access_ensure_project_level( $t_can_change_level );
 
-$t_redirect_url = 'manage_config_email_page.php';
 $t_project = helper_get_current_project();
 
 $f_flags			= gpc_get( 'flag', array() );
 $f_thresholds		= gpc_get( 'flag_threshold', array() );
 $f_actions_access	= gpc_get_int( 'notify_actions_access' );
-
-layout_page_header( lang_get( 'manage_email_config' ), $t_redirect_url );
-
-layout_page_begin();
 
 $t_access = current_user_get_access_level();
 $t_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
@@ -171,6 +166,4 @@ if( isset( $t_notify_flags ) ) {
 
 form_security_purge( 'manage_config_email_set' );
 
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( 'manage_config_email_page.php' );

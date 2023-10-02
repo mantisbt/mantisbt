@@ -95,12 +95,11 @@ if( $t_version_id == 0 ) {
 }
 
 if( $f_add_and_edit ) {
-	$t_redirect_url = 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id;
+	$t_redirect_url =
+		'manage_proj_ver_edit_page.php?version_id=' . $t_version_id;
 } else {
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#versions';
+	$t_redirect_url =
+		'manage_proj_edit_page.php?project_id=' . $f_project_id . '#versions';
 }
 
-layout_page_header( null, $t_redirect_url );
-layout_page_begin( 'manage_overview_page.php' );
-html_operation_successful( $t_redirect_url );
-layout_page_end();
+print_header_redirect( $t_redirect_url );

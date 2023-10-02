@@ -59,5 +59,5 @@ if( !is_null( $f_tag_name ) ) {
 }
 
 form_security_purge( 'tag_create' );
-print_successful_redirect( 'manage_tags_page.php' );
 
+print_header_redirect( 'manage_tags_page.php' );

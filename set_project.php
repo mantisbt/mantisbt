@@ -120,11 +120,3 @@ if( !is_blank( $c_ref ) ) {
 }
 
 print_header_redirect( $t_redirect_url, true, true );
-
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin();
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();

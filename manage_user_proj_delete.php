@@ -82,8 +82,4 @@ foreach( $f_projects as $t_project_id ) {
 form_security_purge( 'manage_user_proj_delete' );
 
 $t_redirect_url = 'manage_user_edit_page.php?user_id=' . $f_user_id;
-
-layout_page_header( null, $t_redirect_url );
-layout_page_begin( 'manage_overview_page.php' );
-html_operation_successful( $t_redirect_url );
-layout_page_end();
+print_header_redirect( $t_redirect_url );

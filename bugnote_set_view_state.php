@@ -87,4 +87,4 @@ bugnote_set_view_state( $f_bugnote_id, $f_private );
 
 form_security_purge( 'bugnote_set_view_state' );
 
-print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
+print_header_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );

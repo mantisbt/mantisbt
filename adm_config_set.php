@@ -121,4 +121,4 @@ $t_command->execute();
 
 form_security_purge( 'adm_config_set' );
 
-print_successful_redirect( 'adm_config_report.php' );
+print_header_redirect( 'adm_config_report.php' );

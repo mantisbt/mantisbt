@@ -122,11 +122,4 @@ if( json_encode( config_get( 'excel_columns', '', $t_user_id, $t_project_id ) ) 
 form_security_purge( 'manage_config_columns_set' );
 
 $t_redirect_url = $t_account_page ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php';
-
-layout_page_header();
-
-layout_page_begin();
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( $t_redirect_url );
