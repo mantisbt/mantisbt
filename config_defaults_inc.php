@@ -3701,18 +3701,19 @@ $g_custom_headers = array();
  * information is displayed. Note that this will be bypassed (and caching is
  * allowed) for the bug report pages.
  *
+ * @todo The code that references this config considers it ON if it is set (doesn't use config_get_global() / $g_global_settings)
  * @global integer $g_allow_browser_cache
  */
-## TODO - the code that references this config considers it ON if it is set (doesn't use config_get_global() / $g_global_settings)
 # $g_allow_browser_cache = ON;
 
 /**
  * File caching - This will allow the browser to cache downloaded files.
  * Without this set, there may be issues with IE receiving files, and launching
  * support programs.
+ *
+ * @todo The code that references this config considers it ON if it is set (doesn't use config_get_global() / $g_global_settings)
  * @global integer $g_allow_file_cache
  */
-## TODO - the code that references this config considers it ON if it is set (doesn't use config_get_global() / $g_global_settings)
 # $g_allow_file_cache = ON;
 
 #################
