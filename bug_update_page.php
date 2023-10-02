@@ -87,7 +87,11 @@ if( bug_is_readonly( $f_bug_id ) ) {
 	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
-access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+if ( ON == config_get( 'allow_reporter_update') && bug_is_user_reporter( $f_bug_id, auth_get_current_user_id() ) ) {
+	access_ensure_bug_level( 'report_bug_threshold', $f_bug_id );
+} else {
+	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+}
 
 $t_fields = config_get( 'bug_update_page_fields' );
 $t_fields = columns_filter_disabled( $t_fields );
@@ -285,7 +289,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
-		if( access_has_limited_view( $t_bug->project_id ) ) {
+		if( access_has_limited_view( $t_bug->project_id ) || !access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id ) ) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {
 			if ( $f_reporter_edit ) {

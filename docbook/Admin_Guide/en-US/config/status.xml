@@ -160,6 +160,14 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_allow_reporter_update</term>
+			<listitem>
+				<para>If set, the bug reporter is allowed to update their own bugs
+					The default is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_handle_bug_threshold</term>
 			<listitem>
 				<para>This is the access level generally required to be access

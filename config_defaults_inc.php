@@ -3183,6 +3183,12 @@ $g_allow_reporter_close	 = OFF;
 $g_allow_reporter_reopen = ON;
 
 /**
+ * reporter can update. Allow reporters to update the bugs they reported
+ * @global integer $g_allow_reporter_update
+ */
+$g_allow_reporter_update = OFF;
+
+/**
  * reporter can upload
  * Allow reporters to upload attachments to bugs they reported.
  * @global integer $g_allow_reporter_upload
@@ -4660,6 +4666,7 @@ $g_public_config_names = array(
 	'allow_permanent_cookie',
 	'allow_reporter_close',
 	'allow_reporter_reopen',
+	'allow_reporter_update',
 	'allow_reporter_upload',
 	'allow_signup',
 	'allowed_files',

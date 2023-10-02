@@ -173,6 +173,7 @@ function capability_exists( $p_name ) {
 set_capability_row( 'report_bug_threshold' );
 set_capability_enum( 'bug_submit_status' );
 set_capability_row( 'update_bug_threshold' );
+set_capability_boolean( 'allow_reporter_update' );
 set_capability_boolean( 'allow_reporter_close' );
 set_capability_row( 'monitor_bug_threshold' );
 set_capability_row( 'handle_bug_threshold' );

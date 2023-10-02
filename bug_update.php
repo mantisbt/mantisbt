@@ -213,7 +213,12 @@ if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 			$t_check_readonly = true;
 			break;
 	}
-	access_ensure_bug_level( config_get( $t_threshold ), $f_bug_id );
+
+	if ( $t_threshold == 'update_bug_threshold' && ON == config_get( 'allow_reporter_update' ) && bug_is_user_reporter( $f_bug_id, $t_current_user_id ) ) {
+		access_ensure_bug_level( 'report_bug_threshold', $f_bug_id );
+	} else {
+		access_ensure_bug_level( config_get( $t_threshold ), $f_bug_id );
+	}
 
 	if( $t_check_readonly ) {
 		# Check if the bug is in a read-only state and whether the current user has

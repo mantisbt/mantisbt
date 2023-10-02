@@ -255,8 +255,12 @@ class IssueViewPageCommand extends Command {
 		$t_flags['severity_show'] = in_array( 'severity', $t_fields ) && isset( $t_issue['severity'] );
 		$t_flags['status_show'] = in_array( 'status', $t_fields ) && isset( $t_issue['status'] );
 		$t_flags['view_state_show'] = in_array( 'view_state', $t_fields ) && isset( $t_issue['view_state'] );
-
-		$t_flags['can_update'] = !$t_issue_readonly && access_has_bug_level( config_get( 'update_bug_threshold' ), $t_issue_id );
+		$t_flags['can_update'] = !$t_issue_readonly &&
+			( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_issue_id ) ||
+				ON == config_get( 'allow_reporter_update', null, $t_user_id, $t_project_id ) &&
+				bug_is_user_reporter( $t_issue_id, $t_user_id ) &&
+				access_has_project_level( config_get( 'report_bug_threshold', null, $t_user_id, $t_project_id ), $t_project_id, $t_user_id )
+			);
 		$t_flags['can_assign'] = !$t_issue_readonly &&
 			access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $t_issue_id );
 		$t_flags['can_change_status'] = !$t_issue_readonly && access_has_bug_level( config_get( 'update_bug_status_threshold' ), $t_issue_id );

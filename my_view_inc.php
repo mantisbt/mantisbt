@@ -351,7 +351,11 @@ for( $i = 0;$i < $t_count; $i++ ) {
 			echo ' ';
 
 			$t_can_update = !bug_is_readonly( $t_bug->id ) &&
-				access_has_bug_level( config_get( 'update_bug_threshold', null, $t_current_user_id, $t_bug->project_id  ), $t_bug->id );
+				( access_has_bug_level( config_get( 'update_bug_threshold', null, $t_current_user_id, $t_bug->project_id  ), $t_bug->id ) ||
+				  ON == config_get( 'allow_reporter_update', null, $t_current_user_id, $t_bug->project_id ) &&
+				  bug_is_user_reporter( $t_bug->id, $t_current_user_id ) &&
+				  access_has_project_level( config_get( 'report_bug_threshold', null, $t_current_user_id, $t_bug->project_id ), $t_bug->project_id, $t_current_user_id )
+				);
 			if( $t_can_update ) {
 				echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '">';
 				print_icon( 'fa-pencil', 'bigger-130 padding-2 grey', lang_get( 'edit' ) );

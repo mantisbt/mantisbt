@@ -776,6 +776,7 @@ $s_allowed_access_levels = 'Allowed for any user with access level';
 $s_assign_issue = 'Assign an issue';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_allow_reporter_update = 'Allow Reporter to update Issue';
 $s_set_status_assigned = 'Set status on assignment of Handler';
 $s_edit_others_bugnotes = 'Edit others\' notes';
 $s_edit_own_bugnotes = 'Edit own notes';
