@@ -19,7 +19,7 @@
  *
  * @package CoreAPI
  * @subpackage EventAPI
- * @author John Reese
+ * @author Amethyst Reese
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *

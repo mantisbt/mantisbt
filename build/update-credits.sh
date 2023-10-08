@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #------------------------------------------------------------------------------
 #
 # update-credits.sh
@@ -56,13 +56,52 @@ fi
 
 
 #------------------------------------------------------------------------------
+# Check if .mailmap needs to be updated
+#
+
+# Get list of author names or e-mails
+# Params
+# - 1: Git log format string
+# - 2: Optional awk FS delimiter
+get_list() {
+	local OPT=${2:+-F"$2"}
+	# shellcheck disable=SC2086
+	git log --format="$1" | sort -u | awk $OPT '{print $1}' | uniq -c | grep -v '^ *1 '| cut -c9-
+}
+
+# Author names having more than one e-mail address not already aliased
+readarray -t AUTHORS < <(get_list "%aN <%aE>" "<")
+
+# Author e-mails linked to more than one name, and not already aliased
+readarray -t EMAILS < <(get_list "%aE %aN")
+
+# If we have any matches, display them and abort
+if [[ ${#AUTHORS[@]} -gt 0 || ${#EMAILS[@]} -gt 0 ]]
+then
+	echo "The following commit Authors/e-mails should be defined in .mailmap."
+	echo "See https://git-scm.com/docs/gitmailmap for details."
+	echo
+
+	for author in "${AUTHORS[@]}" "${EMAILS[@]}"
+	do
+		git log --author="$author" --format="%aN <%aE>" | sort -u
+	done
+
+	echo
+	echo "Please fix and run this script again."
+	exit 1
+else
+	echo "No duplicate authors found in Git history"
+fi
+
+#------------------------------------------------------------------------------
 # Main
 #
 
 # Generate new Contributors list
 echo "Generating the Contributors list from git shortlog"
 FILE_TMP=$(mktemp)
-git shortlog -s -n |cut -f2 >$FILE_TMP
+git shortlog -s -n |cut -f2 >"$FILE_TMP"
 
 # Replace old Contributors list
 echo "Updating Credits file '$FILE_CREDITS'"
@@ -73,7 +112,7 @@ sed -n -i.bak "
 	" $FILE_CREDITS
 
 # Cleanup
-rm $FILE_TMP
-rm $FILE_CREDITS.bak
+rm "$FILE_TMP"
+rm "$FILE_CREDITS.bak"
 
 echo "Done"
