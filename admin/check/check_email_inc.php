@@ -95,11 +95,12 @@ foreach( $t_duplicate_emails as &$t_users ) {
 }
 
 if( OFF == config_get_global( 'allow_blank_email' ) ) {
+	$t_users_without_email = $t_duplicate_emails[null] ?? [];
 	check_print_test_row(
 		'All users must have an e-mail address',
-		!array_key_exists( null, $t_duplicate_emails ),
-		count( $t_duplicate_emails[null] ) . " users without e-mail address found: "
-		. implode( ', ', $t_duplicate_emails[null] )
+		empty( $t_users_without_email ),
+		count( $t_users_without_email ) . " users without e-mail address found: "
+		. implode( ', ', $t_users_without_email ),
 	);
 }
 
