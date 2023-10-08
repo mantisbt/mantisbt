@@ -26,7 +26,7 @@
 global $g_bypass_headers;
 $g_bypass_headers = true;
 
-require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
+require_once( dirname( __FILE__, 2 ) . '/core.php' );
 require_api( 'api_token_api.php' );
 
 # Make sure this script doesn't run via the webserver

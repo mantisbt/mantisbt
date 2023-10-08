@@ -28,7 +28,7 @@
 # This can not be a configuration option, then MantisConnect configuration
 # needs MantisBT to be included first to make use of the constants and possibly
 # configuration defined in MantisBT.
-$t_mantis_dir = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
+$t_mantis_dir = dirname( __FILE__, 3 ) . DIRECTORY_SEPARATOR;
 
 # Overrides for behaviors for core.php and its dependencies
 $g_bypass_headers = true;

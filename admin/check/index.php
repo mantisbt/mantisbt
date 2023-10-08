@@ -40,7 +40,7 @@ define( 'MANTIS_MAINTENANCE_MODE', true );
 # of the tests, ensuring that the testing process hasn't frozen.
 define( 'COMPRESSION_DISABLED', true );
 
-require_once( dirname( dirname( dirname( __FILE__ ) ) ) . '/core.php' );
+require_once( dirname( __FILE__, 3 ) . '/core.php' );
 
 require_once( 'check_api.php' );
 

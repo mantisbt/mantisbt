@@ -24,7 +24,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
+require_once( dirname( __FILE__, 2 ) . '/core.php' );
 
 # Load schema version needed to render admin menu bar
 require_once( 'schema.php' );

@@ -29,7 +29,7 @@
 # and plugins will not be loaded.
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
-require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
+require_once( dirname( __FILE__, 2 ) . '/core.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
@@ -98,7 +98,7 @@ $t_db_type = config_get_global( 'db_type' );
 
 # install the tables
 if( !preg_match( '/^[a-zA-Z0-9_]+$/', $t_db_type ) ||
-	!file_exists( dirname( dirname( __FILE__ ) ) . '/vendor/adodb/adodb-php/drivers/adodb-' . $t_db_type . '.inc.php' ) ) {
+	!file_exists( dirname( __FILE__, 2 ) . '/vendor/adodb/adodb-php/drivers/adodb-' . $t_db_type . '.inc.php' ) ) {
 	echo 'Invalid db type ' . htmlspecialchars( $t_db_type ) . '.';
 	exit;
 }
