@@ -23,15 +23,6 @@
 		</para>
 		<variablelist>
 			<varlistentry>
-				<term>$g_default_bug_view_status</term>
-				 <listitem>
-					<para>
-						The default viewing status for the new bug (VS_PUBLIC or
-						VS_PRIVATE). The default is VS_PUBLIC.
-					</para>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
 				<term>$g_private_bug_threshold</term>
 				 <listitem>
 					<para>
