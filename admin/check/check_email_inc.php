@@ -94,7 +94,7 @@ foreach( $t_duplicate_emails as &$t_users ) {
 	}
 }
 
-if( OFF == config_get_global( 'allow_empty_email' ) ) {
+if( OFF == config_get_global( 'allow_blank_email' ) ) {
 	check_print_test_row(
 		'All users must have an e-mail address',
 		!array_key_exists( null, $t_duplicate_emails ),
