@@ -188,6 +188,18 @@
 					</warning>
 				</listitem>
 			</varlistentry>
+
+			<varlistentry>
+				<term>$g_dsn</term>
+				<listitem>
+					<para>Adodb Data Source Name
+						This is an EXPERIMENTAL field.
+						If the above database settings, do not provide enough flexibility, it is
+						possible to specify a dsn for the database connection.
+						NOTE: the installer does not yet fully support the use of dsn's</para>
+				</listitem>
+			</varlistentry>
+
 		</variablelist>
 	</section>
 
