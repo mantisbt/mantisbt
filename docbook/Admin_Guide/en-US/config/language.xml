@@ -37,6 +37,12 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_language_auto_map</term>
+			<listitem>
+				<para>Browser language mapping for 'auto' language selection</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_fallback_language</term>
 			<listitem>
 				<para>This is the language used if MantisBT cannot determine the

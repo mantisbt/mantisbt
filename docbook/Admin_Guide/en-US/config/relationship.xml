@@ -121,5 +121,32 @@
 				</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_backward_year_count</term>
+			<listitem>
+				<para>Number of years in the past that custom date fields will display in
+					drop down boxes.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_forward_year_count</term>
+			<listitem>
+				<para>Number of years in the future that custom date fields will display in
+					drop down boxes.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_custom_group_actions</term>
+			<listitem>
+				<para>This extensibility model allows developing new group custom actions.  This
+					can be implemented with a totally custom form and action pages or with a
+					pre-implemented form and action page and call-outs to some functions.  These
+					functions are to be implemented in a predefined file whose name is based on
+					the action name. For example, for an action to add a note, the action would
+					be EXT_ADD_NOTE and the file implementing it would be
+					bug_actiongroup_add_note_inc.php. See implementation of this file for
+					details.</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>

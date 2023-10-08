@@ -94,6 +94,55 @@
 
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_string_cookie</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_project_cookie</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_all_cookie</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_collapse_settings_cookie</term>
+			<listitem>
+				<para>Collapse settings cookie.
+					Stores the open/closed state of the collapsible sections.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_users_cookie</term>
+			<listitem>
+				<para>Stores the filter criteria for the Manage User page</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_config_cookie</term>
+			<listitem>
+				<para>Stores the filter criteria for the Manage Config Report page</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_logout_cookie</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_list_cookie</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 
 </section>

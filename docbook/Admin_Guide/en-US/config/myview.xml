@@ -45,5 +45,11 @@ $g_my_view_boxes = array(
 				</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_logout_redirect_page</term>
+			<listitem>
+				<para>Specify where the user should be sent after logging out.</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>

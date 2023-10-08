@@ -68,6 +68,14 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_vendor_path</term>
+			<listitem>
+				<para>Path to vendor folder for 3rd party libraries.
+					Requires trailing DIRECTORY_SEPARATOR character.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_language_path</term>
 			<listitem>
 				<para>This is the path to the language directory of your installation.
