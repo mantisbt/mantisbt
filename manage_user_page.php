@@ -417,7 +417,7 @@ $t_user_count = count( $t_users );
 				<td><?php echo string_display_line( $v_realname ) ?></td>
 				<td><?php
 					# Display warning icon if emails should be unique and a duplicate exists
-					if( array_key_exists( $v_email, $t_duplicate_emails ) ) {
+					if( array_key_exists( strtolower( $v_email ), $t_duplicate_emails ) ) {
 						print_icon( 'fa-exclamation-triangle',
 							'ace-icon bigger-125 red padding-right-4',
 							lang_get( 'email_not_unique' )

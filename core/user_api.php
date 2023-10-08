@@ -308,7 +308,7 @@ function user_ensure_name_unique( $p_username, $p_user_id = null ) {
 /**
  * Returns a list of duplicate email addresses (case-insensitive).
  *
- * Each array entry's key is the e-mail address, and the value is an array
+ * Each array entry's key is the lowercase e-mail address, and the value is an array
  * listing the associated user accounts, with key=id and value=username.
  *
  * Note that the complex query used by this function is quite expensive (average
