@@ -21,7 +21,7 @@
  * @package MantisBT
  */
 
-$t_api_path = dirname( dirname( dirname( __FILE__) ) ) . '/api/';
+$t_api_path = dirname( __FILE__, 3 ) . '/api/';
 require_once( $t_api_path . 'soap/mc_api.php' );
 require_once( $t_api_path . 'soap/mc_account_api.php' );
 require_once( $t_api_path . 'soap/mc_enum_api.php' );

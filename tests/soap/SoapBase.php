@@ -25,7 +25,7 @@
  */
 
 
-$t_root_path = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
+$t_root_path = dirname( __FILE__, 3 ) . DIRECTORY_SEPARATOR;
 
 # MantisBT constants
 require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );

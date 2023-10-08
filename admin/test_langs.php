@@ -25,7 +25,7 @@
 define( 'PLUGINS_DISABLED', true );
 define( 'LANG_LOAD_DISABLED', true );
 
-$t_mantis_dir = dirname( dirname( __FILE__ ) ) . '/';
+$t_mantis_dir = dirname( __FILE__, 2 ) . '/';
 
 require_once( $t_mantis_dir . 'core.php' );
 

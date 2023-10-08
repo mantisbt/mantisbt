@@ -522,7 +522,7 @@ function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
  * @return true: offline, false: online
  */
 function mci_is_mantis_offline() {
-	$t_offline_file = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'mantis_offline.php';
+	$t_offline_file = dirname( __FILE__, 2 ) . DIRECTORY_SEPARATOR . 'mantis_offline.php';
 	return file_exists( $t_offline_file );
 }
 

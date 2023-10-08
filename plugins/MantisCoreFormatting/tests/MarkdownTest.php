@@ -24,8 +24,8 @@
  */
 
 # Includes
-require_once( dirname( dirname( __FILE__ ) ) . '../../../tests/TestConfig.php' );
-require_once( dirname( dirname( __FILE__ ) ) . '/core/MantisMarkdown.php' );
+require_once( dirname( __FILE__, 2 ) . '../../../tests/TestConfig.php' );
+require_once( dirname( __FILE__, 2 ) . '/core/MantisMarkdown.php' );
 
 # MantisBT Core API
 require_mantis_core();
