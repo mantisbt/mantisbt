@@ -76,6 +76,7 @@ function mode_url( $p_all, $p_errors ) {
 	] );
 }
 
+/** @noinspection HtmlUnknownTarget */
 $t_link = '<a href="%s">%s %s</a>';
 $t_show_all_mode_link = sprintf( $t_link,
 	mode_url( !$g_show_all, $g_show_errors ),
@@ -178,7 +179,7 @@ foreach( $t_checks_list as $t_check ) {
 <div class="alert alert-danger" id="notice-delete-admin">
 	For security reasons, you should delete (or at least restrict access to) the
 	<em>admin</em> directory.
-	Refer to the <a href="http://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.install.postcommon">
+	Refer to the <a href="https://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.install.postcommon">
 		MantisBT Admin Guide</a>
 	for further details.
 </div>
