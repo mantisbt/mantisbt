@@ -164,9 +164,12 @@ if( !$g_failed_test ) {
 	include( 'check_L10n_inc.php' );
 }
 
+$t_email_failed_test = false;
 if( !$g_failed_test ) {
 	define( 'CHECK_EMAIL_INC_ALLOW', true );
 	include( 'check_email_inc.php' );
+	$t_email_failed_test = $g_failed_test;
+	$g_failed_test = false;
 }
 
 if( !$g_failed_test ) {
@@ -202,7 +205,7 @@ if( !$g_failed_test ) {
 
 <div class="space-10"></div>
 
-<?php if( $g_failed_test ) { ?>
+<?php if( $g_failed_test || $t_email_failed_test ) { ?>
 	<div class="alert alert-danger" id="check-notice-failed">
 		Some tests failed. Please review, correct them and run the checks again before using MantisBT.
 	</div>
