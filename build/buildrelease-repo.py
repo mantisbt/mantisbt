@@ -121,7 +121,10 @@ def main():
     if fresh_clone:
         print("Origin MantisBT repository:", clone_url)
         if repo_path == ".":
-            repo_path = tempfile.mkdtemp(prefix="mantisbt-", suffix=".git")
+            if not path.isdir(release_path):
+                print("Creating release path...")
+                os.mkdir(release_path)
+            repo_path = tempfile.mkdtemp(dir=release_path, prefix="mantisbt-", suffix=".git")
             delete_clone = True
         ret = subprocess.call('git clone {} {}'.format(clone_url, repo_path),
                               shell=True)
