@@ -37,8 +37,11 @@
 			<term>$g_copyright_statement</term>
 			<listitem>
 				<para> Custom copyright and licensing statement shown at the footer of each page.
-					Can contain HTML elements that are valid children of the &lt;address&gt; element.
-					This string is treated as raw HTML and thus you must use &amp;amp; instead of &amp;.
+				</para>
+				<para>Can contain HTML elements that are valid children of the
+					<literal>&lt;address&gt;</literal> element.
+					This string is treated as raw HTML and thus you must use
+					<literal>&amp;amp;</literal> instead of <literal>&amp;</literal>.
 					Default is ''.
 				</para>
 			</listitem>
