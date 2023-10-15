@@ -857,7 +857,16 @@ $g_email_retry_in_days = 7;
 ###########################
 
 /**
- * Set to off by default to not expose version to users
+ * Display MantisBT Version number to users in the page footer.
+ *
+ * This is more of a cosmetic setting and should NOT be considered as a security
+ * measure to avoid disclosure of version information to users. OFF by default.
+ *
+ * NOTE: When the REST API is enabled {@see $g_webservice_rest_enabled},
+ * accessing an endpoint will always return the version number in the
+ * `X-Mantis-Version` header, even if the request fails.
+ *
+ * @see MANTIS_VERSION
  * @global integer $g_show_version
  */
 $g_show_version = OFF;
