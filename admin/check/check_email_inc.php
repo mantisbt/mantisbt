@@ -80,48 +80,45 @@ check_print_test_row(
 	!config_get_global( 'allow_signup' ) || config_get_global( 'send_reset_password' )
 );
 
-# Check for duplicate email addresses (case insensitive)
-# Using a sub-query within the IN clause's SELECT statement, as a workaround for
-# MySQL >= 5.7 with sql_mode=only_full_group_by throwing ERROR 1055 (42000):
-# Expression #1 of HAVING clause is not in GROUP BY clause
-$t_user_table = db_get_table( 'user' );
-$t_sql = <<< ENDSQL
-SELECT lower(email) email, username
-FROM {$t_user_table} 
-WHERE lower(email) IN (
-	SELECT email 
-	FROM (
-		SELECT lower(email) email, COUNT(*)
-		FROM {$t_user_table}
-		GROUP BY lower(email) HAVING COUNT(*) > 1
-		) tmp
-	)
-ORDER BY lower(email), username
-ENDSQL;
-$t_query = new DbQuery( $t_sql );
-$t_rows = $t_query->fetch_all();
+# Check for duplicate email addresses (case-insensitive)
+$t_duplicate_emails = user_get_duplicate_emails();
 
-$t_duplicate_emails = array();
-if( $t_rows ) {
-	foreach( $t_rows as $t_row ) {
-		/**
-		 * @var string $v_email
-		 * @var string $v_username
-		 */
-		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-		$t_duplicate_emails[$v_email][] = $v_username;
-	}
-	foreach( $t_duplicate_emails as $t_email => &$t_usernames ) {
-		$t_usernames = "$t_email (" . implode(', ', $t_usernames ) . ")";
+# Format usernames for display with link to user edit page
+$t_user_edit_page = helper_mantis_url( 'manage_user_edit_page.php' ) . '?user_id=';
+foreach( $t_duplicate_emails as &$t_users ) {
+	foreach( $t_users as $t_id => &$t_username ) {
+		$t_username = sprintf( '<a href="%s">%s</a>',
+			$t_user_edit_page . $t_id,
+			string_display_line( $t_username )
+		);
 	}
 }
 
-// Fail check if emails should be unique, just issue a warning otherwise
+if( OFF == config_get_global( 'allow_blank_email' ) ) {
+	$t_users_without_email = $t_duplicate_emails[null] ?? [];
+	check_print_test_row(
+		'All users must have an e-mail address',
+		empty( $t_users_without_email ),
+		count( $t_users_without_email ) . " users without e-mail address found: "
+		. implode( ', ', $t_users_without_email ),
+	);
+}
+
+# Fail check if emails should be unique, just issue a warning otherwise
 $t_function = config_get_global( 'email_ensure_unique' )
 	? 'check_print_test_row'
 	: 'check_print_test_warn_row';
+$t_list = '<ul>';
+foreach( $t_duplicate_emails as $t_email => $t_usernames ) {
+	$t_list .= '<li>'
+		. ( $t_email ?: '(no e-mail)' )
+		. ' (' . count( $t_usernames ) . '): '
+		. implode( ', ', $t_usernames )
+		. '</li>';
+}
+$t_list .= '</ul>';
 $t_function(
 	'There are no duplicate email addresses, regardless of case',
 	count( $t_duplicate_emails ) == 0,
-	'Duplicates found: ' . implode('; ', $t_duplicate_emails )
+	count( $t_duplicate_emails ) . ' duplicate e-mail addresses found: ' . $t_list
 );

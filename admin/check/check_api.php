@@ -42,21 +42,31 @@ function check_init_error_handler() {
 }
 
 /**
- * Implement Error handler for check framework
+ * Implement Error handler for check framework.
+ *
  * @param integer $p_type    Error type.
  * @param string  $p_error   Error number.
  * @param string  $p_file    File error occurred in.
  * @param integer $p_line    Line number.
- * @return void
+ *
+ * @return bool True if error was handled, false to have it processed by PHP.
  */
 function check_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	global $g_errors_raised;
+
+	# Do not handle PHP errors that have already been caught by MantisBT. These
+	# are likely triggered by the admin checks script itself, so we let PHP
+	# process them, otherwise the check will fail silently.x§
+	if( $p_type == E_USER_ERROR && $p_error == ERROR_PHP ) {
+		return false;
+	}
 	$g_errors_raised[] = array(
 		'type' => $p_type,
 		'error' => $p_error,
 		'file' => $p_file,
 		'line' => $p_line
 	);
+	return true;
 }
 
 /**
