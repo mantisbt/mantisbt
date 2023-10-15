@@ -872,15 +872,18 @@ $g_email_retry_in_days = 7;
 $g_show_version = OFF;
 
 /**
- * String appended to the MantisBT version when displayed to the user
+ * String appended to the MantisBT version when displayed to the user.
+ *
  * @global string $g_version_suffix
  */
 $g_version_suffix = '';
 
 /**
  * Custom copyright and licensing statement shown at the footer of each page.
- * Can contain HTML elements that are valid children of the <address> element.
- * This string is treated as raw HTML and thus you must use &amp; instead of &.
+ *
+ * Can contain HTML elements that are valid children of the `<address>` element.
+ * This string is treated as raw HTML and thus you must use `&amp;` instead of `&`.
+ *
  * @global string $g_copyright_statement
  */
 $g_copyright_statement = '';
