@@ -20,6 +20,16 @@
 	<para>The following options are used to control the behaviour of the MantisBT SOAP API:</para>
 	<variablelist>
 		<varlistentry>
+			<term>$g_webservice_rest_enabled</term>
+			<listitem>
+				<para>
+					Whether the REST API is enabled or not.  Note that this flag only
+					impacts API Token based auth.  Hence, even if the API is disabled, it can still be
+					used from the Web UI using cookie based authentication.  Default ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_webservice_readonly_access_level_threshold</term>
 			<listitem>
 				<para>Minimum global access level required to access webservice for readonly operations.</para>
@@ -42,16 +52,6 @@
 			<listitem>
 				<para>Minimum project access level required for caller to be able to
 				specify reporter when adding issues or issue notes. Defaults to DEVELOPER.</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_webservice_rest_enabled</term>
-			<listitem>
-				<para>
-					Whether the REST API is enabled or not.  Note that this flag only
-					impacts API Token based auth.  Hence, even if the API is disabled, it can still be
-					used from the Web UI using cookie based authentication.  Default ON.
-				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

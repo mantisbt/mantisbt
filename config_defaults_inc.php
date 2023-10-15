@@ -5055,6 +5055,15 @@ unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );
 ############################
 
 /**
+ * Whether the REST API is enabled or not.  Note that this flag only
+ * impacts API Token based auth.  Hence, even if the API is disabled, it can still be
+ * used from the Web UI using cookie based authentication.
+ *
+ * @global integer $g_webservice_rest_enabled
+ */
+$g_webservice_rest_enabled = ON;
+
+/**
  * Minimum global access level required to access webservice for readonly operations.
  *
  * @global integer $g_webservice_readonly_access_level_threshold
@@ -5155,15 +5164,6 @@ $g_webservice_error_when_version_not_found = ON;
  * @global string $g_webservice_version_when_not_found
  */
 $g_webservice_version_when_not_found = '';
-
-/**
- * Whether the REST API is enabled or not.  Note that this flag only
- * impacts API Token based auth.  Hence, even if the API is disabled, it can still be
- * used from the Web UI using cookie based authentication.
- *
- * @global integer $g_webservice_rest_enabled
- */
-$g_webservice_rest_enabled = ON;
 
 ####################
 # Issue Activities #
