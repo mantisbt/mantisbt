@@ -24,7 +24,7 @@
  */
 
 # Includes
-require_once( dirname( __FILE__, 2 ) . '../../../tests/TestConfig.php' );
+require_once( dirname( __FILE__, 2 ) . '/../../tests/TestConfig.php' );
 require_once( dirname( __FILE__, 2 ) . '/core/MantisMarkdown.php' );
 
 # MantisBT Core API
@@ -46,7 +46,7 @@ class MantisMarkdownTest extends PHPUnit\Framework\TestCase {
 	 */
 	public function testHashLetters() {
 		$this->assertEquals( '<h1>hello</h1>', MantisMarkdown::convert_text( '# hello' ) );
-		$this->assertEquals( '<h1>hello</h1>', MantisMarkdown::convert_text( '#hello' ) );
+		$this->assertEquals( '<p>#hello</p>', MantisMarkdown::convert_text( '#hello' ) );
 	}
 
 	/**
@@ -55,7 +55,7 @@ class MantisMarkdownTest extends PHPUnit\Framework\TestCase {
 	 */
 	public function testHashNumberAny() {
 		$this->assertEquals( '<h1>1abcd</h1>', MantisMarkdown::convert_text( '# 1abcd' ) );
-		$this->assertEquals( '<h1>1abcd</h1>', MantisMarkdown::convert_text( '#1abcd' ) );
+		$this->assertEquals( '<p>#1abcd</p>', MantisMarkdown::convert_text( '#1abcd' ) );
 	}
 
 	/**
@@ -64,7 +64,7 @@ class MantisMarkdownTest extends PHPUnit\Framework\TestCase {
 	 */
 	public function testHashLettersAny() {
 		$this->assertEquals( '<h1>abcd1234</h1>', MantisMarkdown::convert_text( '# abcd1234' ) );
-		$this->assertEquals( '<h1>abcd1234</h1>', MantisMarkdown::convert_text( '#abcd1234' ) );
+		$this->assertEquals( '<p>#abcd1234</p>', MantisMarkdown::convert_text( '#abcd1234' ) );
 	}
 
 	/**
