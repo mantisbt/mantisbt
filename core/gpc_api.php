@@ -212,9 +212,9 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			}
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
 			if( is_array( $t_values ) ) {
-				return implode( '|', $t_values );
+				$t_value = trim( implode( '|', $t_values ), '|' );
 			} else {
-				return '';
+				$t_value = '';
 			}
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
@@ -223,17 +223,20 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			$t_year = gpc_get_int( $p_var_name . '_year', 0 );
 			if( ( $t_year == 0 ) || ( $t_month == 0 ) || ( $t_day == 0 ) ) {
 				if( $p_default == null ) {
-					return '';
+					$t_value = '';
 				} else {
-					return $p_default;
+					$t_value = $p_default;
 				}
 			} else {
-				return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
+				$t_value = strtotime( $t_year . '-' . $t_month . '-' . $t_day );
 			}
 			break;
 		default:
-			return gpc_get_string( $p_var_name, $p_default );
+			$t_value = gpc_get_string( $p_var_name, $p_default );
+			break;
 	}
+
+	return $t_value;
 }
 
 /**
