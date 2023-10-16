@@ -171,7 +171,7 @@ function filter_get_url( array $p_custom_filter ) {
 	}
 
 	if( ! filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PROJECTION] ) ) {
-		$t_query[] = filter_encode_filed_and_value( FILTER_PROPERTY_PROJECTION, $p_custom_filter[FILTER_PROPERTY_PROJECTION] );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_PROJECTION, $p_custom_filter[FILTER_PROPERTY_PROJECTION] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEARCH] ) ) {
