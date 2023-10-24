@@ -40,8 +40,8 @@ Installation
 * Select the database type and enter the credentials to access the database
 * Click install/upgrade
 * Installation is complete -- you may need to copy the default configuration
-  to mantisbt/config/config_inc.php if your web server does not have write access
-* Remove the admin/ directory from within the MantisBT installation path. The
+  to `mantisbt/config/config_inc.php` if your web server does not have write access
+* Remove the `admin` directory from within the MantisBT installation path. The
   scripts within this directory should not be accessible on a live MantisBT
   site or on any installation that is accessible via the Internet.
 
@@ -52,14 +52,14 @@ UPGRADING
 * Extract the tarball into a clean directory; do not extract into an existing
   installation, as some files have been moved or deleted between releases
 * Copy your configuration from the old installation to the new directory,
-  including config_inc.php, custom_strings_inc.php, custom_relationships_inc.php,
-  custom_functions_inc.php and custom_constants_inc.php if they exist
+  including `config_inc.php`, `custom_strings_inc.php`, `custom_relationships_inc.php`,
+  `custom_functions_inc.php` and `custom_constants_inc.php` if they exist
 * Point your browser to https://path/to/mantisbt/admin/check/index.php to ensure that
   your webserver is compatible with MantisBT and configured correctly
 * Point your browser to https://path/to/mantisbt/admin/install.php to upgrade
   the database schema
 * Click install/upgrade
-* Remove the admin/ directory from within the MantisBT installation path. The
+* Remove the `admin` directory from within the MantisBT installation path. The
   scripts within this directory should not be accessible on a live MantisBT
   site or on any installation that is accessible via the Internet.
 * Upgrading is complete
@@ -85,7 +85,7 @@ detailed doc can be found at https://www.mantisbt.org/docs/
 * form variables are prefixed with `f_`
 * variables that have been cleaned for db insertiong are prefixed with `c_`
 * temporary variables are prefixed with `t_`.
-* count variables have the word count in the variable name
+* count variables have the word `count` in the variable name
 
 More detail can be seen in the coding guidelines at:
 https://www.mantisbt.org/guidelines.php
@@ -96,11 +96,6 @@ https://www.mantisbt.org/guidelines.php
   themselves should make their purpose apparent.  The approach used is to break the
   work into many small files rather than have a small number of really
   large files.
-
-* Most of the action scripts have a confirmation page to make sure the action
-  completed successfully.  The pages will automatically redirect you after a
-  short amount of time.  You can shorten of lengthen the time by editing
-  `$g_default_redirect_delay` in `config_inc.php`.
 
 * You can set `$g_top_include_page` and `$g_bottom_include_page`
   to alter what should be visible at the top and bottom of each page.
