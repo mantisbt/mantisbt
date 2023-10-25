@@ -1,0 +1,88 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit https://translatewiki.net  **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Slovenian (slovenščina)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit https://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Eleassar
+ */
+
+$s_plugin_MantisGraph_title = 'Grafikoni Mantis';
+$s_plugin_MantisGraph_description = 'Uradni vtičnik za grafikone.';
+$s_plugin_MantisGraph_config = 'Konfiguracija';
+$s_plugin_MantisGraph_tab_label = 'Grafikoni';
+$s_plugin_MantisGraph_status_link = 'Po stanju';
+$s_plugin_MantisGraph_priority_link = 'Po prioriteti';
+$s_plugin_MantisGraph_severity_link = 'Po resnosti';
+$s_plugin_MantisGraph_category_link = 'Po kategoriji';
+$s_plugin_MantisGraph_resolution_link = 'Po razrešenosti';
+$s_plugin_MantisGraph_issue_trends_link = 'Trendi težav';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Grafikoni po stanju';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafikoni po prioriteti';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafikoni po resnosti';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafikoni po kategoriji';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafikoni po ločljivosti';
+$s_plugin_MantisGraph_graph_developer_title = 'Grafikoni po razvijalcu';
+$s_plugin_MantisGraph_graph_reporter_title = 'Grafikoni po sporočevalcu';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Odprte, razrešene in preostale težave';
+$s_plugin_MantisGraph_by_status_pct = 'Delež po stanju';
+$s_plugin_MantisGraph_by_priority_pct = 'Delež po prioriteti';
+$s_plugin_MantisGraph_by_severity_pct = 'Delež po resnosti';
+$s_plugin_MantisGraph_by_category_pct = 'Delež po kategoriji';
+$s_plugin_MantisGraph_by_resolution_pct = 'Delež po razrešitvi';
+$s_plugin_MantisGraph_by_severity_mix = 'Po renosti in stanju';
+$s_plugin_MantisGraph_by_priority_mix = 'Po prioriteti in stanju';
+$s_plugin_MantisGraph_by_resolution_mix = 'Po razrešitvi in stanju';
+$s_plugin_MantisGraph_legend_still_open = 'Še vedno odprte';
+$s_plugin_MantisGraph_legend_resolved = 'Razrešeno';
+$s_plugin_MantisGraph_legend_reported = 'Sporočene';
+$s_plugin_MantisGraph_period_none = 'Nobeno';
+$s_plugin_MantisGraph_period_this_week = 'Ta teden';
+$s_plugin_MantisGraph_period_last_week = 'Prejšnji teden';
+$s_plugin_MantisGraph_period_two_weeks = 'Zadnja dva tedna';
+$s_plugin_MantisGraph_period_this_month = 'Ta mesec';
+$s_plugin_MantisGraph_period_last_month = 'Prejšnji mesec';
+$s_plugin_MantisGraph_period_this_quarter = 'To četrtletje';
+$s_plugin_MantisGraph_period_last_quarter = 'Prejšnje četrtletje';
+$s_plugin_MantisGraph_period_year_to_date = 'Datumsko leto';
+$s_plugin_MantisGraph_period_select = 'Poljubni datumi';
+$s_plugin_MantisGraph_period_last_year = 'Prejšnje leto';
+$s_plugin_MantisGraph_graph_page = 'Zgodovina težav z grafikoni';
+$s_plugin_MantisGraph_graph_topdev = 'Najboljši razvijalci po odpravljenih težavah';
+$s_plugin_MantisGraph_graph_opendev = 'Razvijalci po odprtih težavah';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Najboljši sporočevalci po odpravljenih težavah';
+$s_plugin_MantisGraph_other_categories = 'druge kategorije (%d)';

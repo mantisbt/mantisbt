@@ -973,6 +973,16 @@ function email_bug_updated( $p_bug_id ) {
 }
 
 /**
+ * Generates md5 used in "In-Reply-To" header for emails
+ * @param int $p_bug_id
+ * @param int $p_date_submitted
+ * @return string
+ */
+function email_generate_bug_md5( $p_bug_id, $p_date_submitted ) {
+	return md5( $p_bug_id . $p_date_submitted );
+}
+
+/**
  * send notices when a new bugnote
  * @param int $p_bugnote_id  The bugnote id.
  * @param array $p_files The array of file information (keys: name, size)
@@ -992,6 +1002,7 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 	log_event( LOG_EMAIL, sprintf( 'Note ~%d added to issue #%d', $p_bugnote_id, $t_bugnote->bug_id ) );
 
 	$t_project_id = bug_get_field( $t_bugnote->bug_id, 'project_id' );
+	$t_date_submitted = bug_get_field( $t_bugnote->bug_id, 'date_submitted' );
 	$t_separator = config_get( 'email_separator2' );
 	$t_time_tracking_access_threshold = config_get( 'time_tracking_view_threshold' );
 	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
@@ -1044,7 +1055,11 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 
 		$t_contents = $t_message . "\n";
 
-		email_store( $t_user_email, $t_subject, $t_contents );
+		$t_mail_headers = [
+			'In-Reply-To' => email_generate_bug_md5( $t_bugnote->bug_id, $t_date_submitted )
+		];
+
+		email_store( $t_user_email, $t_subject, $t_contents, $t_mail_headers );
 
 		log_event( LOG_EMAIL_VERBOSE, 'queued bugnote email for note ~' . $p_bugnote_id .
 			' issue #' . $t_bugnote->bug_id . ' by U' . $t_user_id );
@@ -1677,7 +1692,7 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 
 	# build headers
 	$t_bug_id = $p_visible_bug_data['email_bug'];
-	$t_message_md5 = md5( $t_bug_id . $p_visible_bug_data['email_date_submitted'] );
+	$t_message_md5 = email_generate_bug_md5( $t_bug_id, $p_visible_bug_data['email_date_submitted'] );
 	$t_mail_headers = array(
 		'keywords' => $p_visible_bug_data['set_category'],
 	);

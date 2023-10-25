@@ -87,3 +87,4 @@ $s_plugin_MantisGraph_graph_page = 'Historial gráfico do erro';
 $s_plugin_MantisGraph_graph_topdev = 'Desenvolvedores máis activos por problema resolto';
 $s_plugin_MantisGraph_graph_opendev = 'Desenvolvedores por problema aberto';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Reporteiros máis activos por problema resolto';
+$s_plugin_MantisGraph_other_categories = 'outras categorías (%d)';

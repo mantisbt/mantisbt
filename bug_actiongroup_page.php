@@ -94,7 +94,7 @@ foreach( $f_bug_arr as $t_key => $t_bug_id ) {
 	}
 
 	# Remove any issues the user doesn't have access to
-	if( !access_has_bug_level( $t_view_bug_threshold[$t_bug->project_id], $t_bug_id ) ) {
+	if( !access_has_bug_level( $t_view_bug_threshold[$t_bug->project_id], $t_bug_id, $t_user ) ) {
 		unset( $f_bug_arr[$t_key] );
 		continue;
 	}

@@ -264,16 +264,15 @@ if( $t_show_attachments ) {
 		$t_allow_no_category = config_get( 'allow_no_category' );
 ?>
 	<tr>
-		<th class="category" width="30%">
-			<?php
-			echo $t_allow_no_category ? '' : '<span class="required">*</span> ';
-			echo '<label for="category_id">';
-			print_documentation_link( 'category' );
-			echo '</label>';
-			?>
+		<th class="category width-30">
+			<?php echo $t_allow_no_category ? '' : '<span class="required">*</span> '; ?>
+			<label for="category_id">
+				<?php print_documentation_link( 'category' ); ?>
+			</label>
 		</th>
-		<td width="70%">
+		<td>
 			<?php if( $t_changed_project ) {
+				/** @noinspection PhpUndefinedVariableInspection */
 				echo '[' . project_get_field( $t_bug->project_id, 'name' ) . '] ';
 			} ?>
 			<select id="category_id" name="category_id" class="autofocus input-sm" <?php
@@ -386,7 +385,7 @@ if( $t_show_attachments ) {
 			<?php echo lang_get( 'or_fill_in' ); collapse_icon( 'profile' ); ?>
 			<table class="table-bordered table-condensed">
 				<tr>
-					<th class="category" width="30%">
+					<th class="category width-30">
 						<label for="platform"><?php echo lang_get( 'platform' ) ?></label>
 					</th>
 					<td>
@@ -510,7 +509,7 @@ if( $t_show_attachments ) {
 			<label for="status"><?php echo lang_get( 'status' ) ?></label>
 		</th>
 		<td>
-			<select <?php echo helper_get_tab_index() ?> name="status" class="input-sm">
+			<select id="status" <?php echo helper_get_tab_index() ?> name="status" class="input-sm">
 			<?php
 			$t_resolution_options = get_status_option_list(
 				access_get_project_level( $t_project_id ),
@@ -535,7 +534,7 @@ if( $t_show_attachments ) {
 			<label for="resolution"><?php echo lang_get( 'resolution' ) ?></label>
 		</th>
 		<td>
-			<select <?php echo helper_get_tab_index() ?> name="resolution" class="input-sm">
+			<select id="resolution" <?php echo helper_get_tab_index() ?> name="resolution" class="input-sm">
 				<?php
 				print_enum_string_option_list( 'resolution', config_get( 'default_bug_resolution' ) );
 				?>
@@ -616,7 +615,7 @@ if( $t_show_attachments ) {
 					# pre-fill tag string when cloning from master bug
 					$t_tags = [];
 					foreach( tag_bug_get_attached( $f_master_bug_id ) as $t_tag ) {
-						array_push( $t_tags, $t_tag["name"] );
+						$t_tags[] = $t_tag["name"];
 					}
 					$t_tag_string = implode(
 						config_get( 'tag_separator' ), $t_tags

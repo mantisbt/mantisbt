@@ -59,7 +59,7 @@ class RestIssueAddTest extends RestBase {
 
 
 	public function testCreateIssueWithMinimalFields() {
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithMinimalFields' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
 		$this->assertEquals( 201, $t_response->getStatusCode() );
@@ -114,7 +114,7 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithEnumIds() {
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithEnumIds' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['status']['id'] = 50; # assigned
 		$t_issue_to_add['resolution']['id'] = 30; # reopened
 		$t_issue_to_add['view_state']['id'] = 50; # private
@@ -177,7 +177,7 @@ class RestIssueAddTest extends RestBase {
 		$t_target_version_name = $this->versions[1]['version'];
 		$t_fixed_in_version_name = $this->versions[0]['version'];
 
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionString' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = $t_version_name;
 		$t_issue_to_add['target_version'] = $t_target_version_name;
 		$t_issue_to_add['fixed_in_version'] = $t_fixed_in_version_name;
@@ -203,7 +203,7 @@ class RestIssueAddTest extends RestBase {
 
 		$t_version_name = $this->versions[0]['version'];
 
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectName' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -229,7 +229,7 @@ class RestIssueAddTest extends RestBase {
 		$t_version_name = $this->versions[0]['version'];
 		$t_version_id = $this->versions[0]['id'];
 
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectId' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -257,7 +257,7 @@ class RestIssueAddTest extends RestBase {
 		$t_wrong_version_name = $this->versions[1]['version'];
 		$t_correct_version_name = $this->versions[0]['version'];
 
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectIdAndMistatchingName' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id, 'name' => $t_wrong_version_name );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -281,7 +281,7 @@ class RestIssueAddTest extends RestBase {
 	public function testCreateIssueWithVersionObjectIdNotFound() {
 		# Test case assumes webservice_error_when_version_not_found = ON.
 		$t_version_id = 10000;
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectIdNotFound' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -292,7 +292,7 @@ class RestIssueAddTest extends RestBase {
 	public function testCreateIssueWithVersionObjectNameNotFound() {
 		# Test case assumes webservice_error_when_version_not_found = ON.
 		$t_version_name = 'VersionNotFound';
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectNameNotFound' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -303,7 +303,7 @@ class RestIssueAddTest extends RestBase {
 	public function testCreateIssueWithVersionStringNotFound() {
 		# Test case assumes webservice_error_when_version_not_found = ON.
 		$t_version_name = 'VersionNotFound';
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectNameNotFound' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = $t_version_name;
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -315,7 +315,7 @@ class RestIssueAddTest extends RestBase {
 	 * New tag should be created and attached to a new issue
 	 */
 	public function testCreateIssueWithTagNotExisting() {
-		$t_issue_to_add = $this->getIssueToAdd( __METHOD__ );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
 
 		# Change threshold to disable tag creation
@@ -337,7 +337,7 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithTagExisting() {
-		$t_issue_to_add = $this->getIssueToAdd( __METHOD__ );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		# Tag by name
 		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
@@ -386,7 +386,7 @@ class RestIssueAddTest extends RestBase {
 	 * @dataProvider providerTagsInvalid
 	 */
 	public function testCreateIssueWithTagInvalid( $p_tag, $p_status_code ) {
-		$t_issue_to_add = $this->getIssueToAdd( __METHOD__ );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['tags'] = array( $p_tag );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -429,7 +429,7 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueNoSummary() {
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoSummary' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['summary'] );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -438,7 +438,7 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueNoDescription() {
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoDescription' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['description'] );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -450,7 +450,7 @@ class RestIssueAddTest extends RestBase {
 		$t_allow_no_category = config_get( 'allow_no_category' );
 		$t_result = $t_allow_no_category ? HTTP_STATUS_CREATED : HTTP_STATUS_BAD_REQUEST;
 
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoCategory' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['category'] );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -465,7 +465,7 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueNoProject() {
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoProject' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['project'] );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
