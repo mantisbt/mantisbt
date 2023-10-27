@@ -412,7 +412,7 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 				throw new ClientException(
 					$t_msg,
 					ERROR_EMPTY_FIELD,
-					"custom_field['id']" );
+					["custom_field['id']"] );
 			}
 
 			# get custom field id from object ref
@@ -421,7 +421,7 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 				throw new ClientException(
 					"Custom field '" . $t_field['name'] . "' not found.",
 					ERROR_CUSTOM_FIELD_NOT_FOUND,
-					"custom_field['id']" );
+					["custom_field['id']"] );
 			}
 
 			# skip if current user doesn't have login access.
@@ -437,14 +437,14 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 				throw new ClientException(
 					"Invalid value for custom field '$t_name'",
 					ERROR_INVALID_FIELD_VALUE,
-					"value" );
+					['value'] );
 			}
 
 			if( !custom_field_set_value( $t_custom_field_id, $p_issue_id, $t_value, $p_log_insert ) ) {
 				throw new ClientException(
 					"Invalid value for custom field '$t_name'.",
 					ERROR_INVALID_FIELD_VALUE,
-					"value" );
+					['value'] );
 			}
 		}
 	}
