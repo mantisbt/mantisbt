@@ -35,6 +35,8 @@
  * @uses history_api.php
  * @uses project_api.php
  * @uses utility_api.php
+ *
+ * @noinspection PhpComposerExtensionStubsInspection FileInfo is optional
  */
 
 require_api( 'access_api.php' );
@@ -62,6 +64,8 @@ $g_cache_file_count = array();
  * @param array $p_files   The array of files, if null, then do nothing.
  * @param int $p_bugnote_id The bugnote id, or 0 if issue attachments.
  * @return array Array of file info arrays.
+ * @throws ClientException
+ * @throws ServiceException
  */
 function file_attach_files( $p_bug_id, $p_files, $p_bugnote_id = 0 ) {
 	if( $p_files === null || count( $p_files ) == 0 ) {
@@ -105,11 +109,7 @@ function file_get_display_name( $p_filename ) {
 	} else {
 		$t_bug_match = '/^\d{7}-/';
 		$t_name = preg_split( $t_bug_match, $p_filename );
-		if( isset( $t_name[1] ) ) {
-			return $t_name[1];
-		} else {
-			return $p_filename;
-		}
+		return $t_name[1] ?? $p_filename;
 	}
 }
 
@@ -221,6 +221,7 @@ function file_bug_has_attachments( $p_bug_id ) {
  * @param int|null $p_bugnote_id        If specified, will check at bugnote level
  *
  * @return bool
+ * @throws ClientException
  *
  * @internal Should not be used outside of File API.
  */
@@ -236,6 +237,7 @@ function file_can_view_or_download( $p_action, $p_bug_id, $p_uploader_user_id, $
 			break;
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
+			return false;
 	}
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -262,6 +264,7 @@ function file_can_view_or_download( $p_action, $p_bug_id, $p_uploader_user_id, $
  * @param integer $p_uploader_user_id A user identifier.
  *
  * @return boolean
+ * @throws ClientException
  */
 function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	return file_can_view_or_download( 'view', $p_bug_id, $p_uploader_user_id );
@@ -275,6 +278,7 @@ function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) 
  * @param integer $p_bug_id           The bug id, if null, will be retrieved from bugnote record.
  *
  * @return boolean
+ * @throws ClientException
  */
 function file_can_view_bugnote_attachments( $p_bugnote_id, $p_uploader_user_id = null, $p_bug_id = null ) {
 	if( $p_bugnote_id == 0 ) {
@@ -297,6 +301,7 @@ function file_can_view_bugnote_attachments( $p_bugnote_id, $p_uploader_user_id =
  * @param integer $p_uploader_user_id The user who uploaded the attachment.
  *
  * @return boolean
+ * @throws ClientException
  */
 function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	return file_can_view_or_download( 'download', $p_bug_id, $p_uploader_user_id );
@@ -309,6 +314,7 @@ function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = nul
  * @param integer $p_uploader_user_id The user who uploaded the attachment.
  *
  * @return boolean
+ * @throws ClientException
  */
 function file_can_download_bugnote_attachments( $p_bugnote_id, $p_uploader_user_id = null ) {
 	if( $p_bugnote_id == 0 ) {
@@ -323,6 +329,7 @@ function file_can_download_bugnote_attachments( $p_bugnote_id, $p_uploader_user_
  * @param integer $p_bug_id           A bug identifier.
  * @param integer $p_uploader_user_id A user identifier.
  * @return boolean
+ * @throws ClientException
  */
 function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	if( bug_is_readonly( $p_bug_id ) ) {
@@ -330,8 +337,7 @@ function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null 
 	}
 	$t_uploaded_by_me = auth_get_current_user_id() === $p_uploader_user_id;
 	$t_can_delete = access_has_bug_level( config_get( 'delete_attachments_threshold' ), $p_bug_id );
-	$t_can_delete = $t_can_delete || ( $t_uploaded_by_me && config_get( 'allow_delete_own_attachments' ) );
-	return $t_can_delete;
+	return $t_can_delete || ( $t_uploaded_by_me && config_get( 'allow_delete_own_attachments' ) );
 }
 
 /**
@@ -448,6 +454,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
  *
  * @param integer $p_bug_id A bug identifier.
  * @return array
+ * @throws ClientException
  */
 function file_get_visible_attachments( $p_bug_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_bug_id );
@@ -463,7 +470,6 @@ function file_get_visible_attachments( $p_bug_id ) {
 	$t_preview_text_ext = config_get( 'preview_text_extensions' );
 	$t_preview_image_ext = config_get( 'preview_image_extensions' );
 
-	$t_image_previewed = false;
 	foreach( $t_attachment_rows as $t_row ) {
 		$t_user_id = (int)$t_row['user_id'];
 		$t_attachment_note_id = (int)$t_row['bugnote_id'];
@@ -495,10 +501,6 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 		if( $t_attachment['can_download'] ) {
 			$t_attachment['download_url'] = 'file_download.php?file_id=' . $t_id . '&type=bug';
-		}
-
-		if( $t_image_previewed ) {
-			$t_image_previewed = false;
 		}
 
 		$t_attachment['exists'] = config_get( 'file_upload_method' ) != DISK || file_exists( $t_diskfile );
@@ -538,6 +540,7 @@ function file_get_visible_attachments( $p_bug_id ) {
  * delete all files that are associated with the given bug
  * @param integer $p_bug_id A bug identifier.
  * @return boolean
+ * @throws ClientException
  */
 function file_delete_attachments( $p_bug_id ) {
 	$t_method = config_get( 'file_upload_method' );
@@ -575,6 +578,7 @@ function file_delete_attachments( $p_bug_id ) {
  * @param integer $p_bug_id A bug identifier.
  * @param integer $p_bugnote_id A bugnote identifier.
  * @return boolean
+ * @throws ClientException
  */
 function file_delete_bugnote_attachments( $p_bug_id, $p_bugnote_id ) {
 	db_param_push();
@@ -672,6 +676,7 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
  * @param string  $p_table   Table identifier.
  * @param integer $p_bugnote_id The bugnote id the file is attached to or 0 if attached to issue.
  * @return boolean
+ * @throws ClientException
  */
 function file_delete( $p_file_id, $p_table = 'bug', $p_bugnote_id = 0 ) {
 	$t_upload_method = config_get( 'file_upload_method' );
@@ -758,6 +763,7 @@ function file_clean_name( $p_filename ) {
  * The string returned should be 32 characters in length
  * @param string $p_filepath File path.
  * @return string
+ * @throws Exception If no randomness source available.
  */
 function file_generate_unique_name( $p_filepath ) {
 	do {
@@ -835,6 +841,9 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
  * @param boolean $p_skip_bug_update Skip bug last modification update (useful when importing bug attachments).
  * @param int     $p_bugnote_id      The bugnote id or 0 if associated with the issue.
  * @return array The file info array (keys: name, size)
+ * @throws ClientException
+ * @throws ServiceException
+ * @throws Exception
  */
 function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false, $p_bugnote_id = 0 ) {
 	$t_file_info = array();
@@ -1038,11 +1047,8 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
  * @return boolean
  */
 function file_is_uploading_enabled() {
-	if( ini_get_bool( 'file_uploads' ) && ( ON == config_get( 'allow_file_upload' ) ) ) {
-		return true;
-	} else {
-		return false;
-	}
+	return ini_get_bool( 'file_uploads' )
+		&& ( ON == config_get( 'allow_file_upload' ) );
 }
 
 /**
@@ -1074,6 +1080,7 @@ function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
  * @param integer $p_user_id A user identifier.
  * @param integer $p_project_id The project id to check for or null for bug project or current project.
  * @return boolean
+ * @throws ClientException
  */
 function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null, $p_project_id = null ) {
 	if( null === $p_user_id ) {
@@ -1111,6 +1118,7 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null, $p_project_
  * checks whether the specified upload path exists and is writable
  * @param string $p_upload_path Upload path.
  * @return void
+ * @throws ServiceException
  */
 function file_ensure_valid_upload_path( $p_upload_path ) {
 	if( !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
@@ -1127,6 +1135,7 @@ function file_ensure_valid_upload_path( $p_upload_path ) {
  *
  * @param array $p_file The uploaded file info, as retrieved from gpc_get_file().
  * @return void
+ * @throws ClientException
  */
 function file_ensure_uploaded( array $p_file ) {
 	switch( $p_file['error'] ) {
@@ -1202,6 +1211,7 @@ function file_get_mime_type_for_content( $p_content ) {
  * @param integer $p_file_id File identifier.
  * @param string  $p_type    File type (either 'bug' or 'doc').
  * @return array|boolean array containing file type and content or false on failure to retrieve file
+ * @throws ClientException
  */
 function file_get_content( $p_file_id, $p_type = 'bug' ) {
 	# we handle the case where the file is attached to a bug
@@ -1243,7 +1253,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 				return array( 'type' => $t_content_type, 'content' => file_get_contents( $t_local_disk_file ) );
 			}
 			return false;
-			break;
+
 		case DATABASE:
 			$t_file_info_type = file_get_mime_type_for_content( $t_row['content'] );
 
@@ -1252,10 +1262,11 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			}
 
 			return array( 'type' => $t_content_type, 'content' => $t_row['content'] );
-			break;
+
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
+	return false;
 }
 
 /**
@@ -1265,6 +1276,8 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
  * @param integer $p_project_id_to Destination project ID for the bug.
  * @return void
  *
+ * @throws ClientException
+ * @throws ServiceException
  * @todo: this function can't cope with source or target storing attachments in DB
  */
 function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
@@ -1343,6 +1356,8 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
  * @param integer $p_source_bug_id Source Bug.
  * @param integer $p_dest_bug_id   Destination Bug.
  * @return void
+ * @throws ClientException
+ * @throws Exception
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 	db_param_push();
@@ -1419,5 +1434,9 @@ function file_get_content_type_override( $p_filename ) {
  * @return integer	File size in bytes
  */
 function file_get_max_file_size() {
-	return (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	return (int)min(
+		ini_get_number( 'upload_max_filesize' ),
+		ini_get_number( 'post_max_size' ),
+		config_get( 'max_file_size' )
+	);
 }
