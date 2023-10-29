@@ -154,9 +154,9 @@ function bugnote_exists( $p_bugnote_id ) {
 
 	db_param_push();
 	$t_query = 'SELECT b.*, t.note
-			          	FROM      {bugnote} b
-			          	LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
-						WHERE b.id = ' . db_param();
+				FROM {bugnote} b
+				LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
+				WHERE b.id = ' . db_param();
 	$t_result = db_query( $t_query, array( $c_bugnote_id ) );
 	$t_row = db_fetch_array( $t_result );
 
@@ -187,6 +187,7 @@ function bugnote_cache( BugnoteData $p_bugnote ) {
  * @param integer $p_bugnote_id A bugnote identifier.
  * @access public
  * @return void
+ * @throws ClientException if bugnote does not exist
  */
 function bugnote_ensure_exists( $p_bugnote_id ) {
 	if( !bugnote_exists( $p_bugnote_id ) ) {
@@ -203,19 +204,15 @@ function bugnote_ensure_exists( $p_bugnote_id ) {
  * @param integer $p_bugnote_id A bugnote identifier.
  * @param integer $p_user_id    A user identifier.
  * @return boolean
+ * @throws ClientException
  * @access public
  */
 function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
-	if( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) == $p_user_id ) {
-		return true;
-	} else {
-		return false;
-	}
+	return bugnote_get_field( $p_bugnote_id, 'reporter_id' ) == $p_user_id;
 }
 
 /**
  * Add a bugnote to a bug
- * return the ID of the new bugnote
  * @param integer $p_bug_id          A bug identifier.
  * @param string  $p_bugnote_text    The bugnote text to add.
  * @param string  $p_time_tracking   Time tracking value - hh:mm string.
@@ -229,7 +226,10 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
  * @param boolean $p_skip_bug_update Skip bug last modification update (useful when importing bugs/bugnotes).
  * @param boolean $p_log_history     Log changes to bugnote history (defaults to true).
  * @param boolean $p_trigger_event   Trigger extensibility event.
- * @return boolean|integer false or indicating bugnote id added
+ *
+ * @return int ID of the new bugnote
+ * @throws ClientException
+ *
  * @access public
  */
 function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = true, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = false, $p_log_history = true, $p_trigger_event = true ) {
@@ -316,7 +316,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
-	if( true == $p_send_email && !is_blank( $t_bugnote_text ) ) {
+	if( $p_send_email && !is_blank( $t_bugnote_text ) ) {
 		email_bugnote_add( $t_bugnote_id );
 	}
 
@@ -353,6 +353,7 @@ function bugnote_process_mentions( $p_bug_id, $p_bugnote_id, $p_bugnote_text ) {
  * Delete a bugnote
  * @param integer $p_bugnote_id A bug note identifier.
  * @return boolean
+ * @throws ClientException
  * @access public
  */
 function bugnote_delete( $p_bugnote_id ) {
@@ -411,6 +412,8 @@ function bugnote_delete_all( $p_bug_id ) {
  * Get the text associated with the bugnote
  * @param integer $p_bugnote_id A bugnote identifier.
  * @return string bugnote text
+ * @throws ClientException
+ *
  * @access public
  */
 function bugnote_get_text( $p_bugnote_id ) {
@@ -429,6 +432,8 @@ function bugnote_get_text( $p_bugnote_id ) {
  * @param integer $p_bugnote_id A bugnote identifier.
  * @param string  $p_field_name Field name to retrieve.
  * @return string field value
+ * @throws ClientException
+ *
  * @access public
  */
 function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
@@ -460,6 +465,7 @@ function bugnote_get_latest_id( $p_bug_id ) {
  * @param integer $p_user_bugnote_limit Number of bugnotes to display to user.
  * @param integer $p_user_id            A user identifier.
  * @return array array of bugnotes
+ * @throws ClientException 
  * @access public
  */
 function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit, $p_user_id = null ) {
@@ -516,6 +522,7 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
  * @param integer $p_user_bugnote_limit Number of bugnotes to display to user.
  * @param integer $p_user_id            A user identifier.
  * @return string The string containing all visible notes.
+ * @throws ClientException
  * @access public
  */
 function bugnote_get_all_visible_as_string( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit, $p_user_id = null ) {
@@ -626,7 +633,9 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
  * Gets the bugnote object given its id.
  *
  * @param int $p_bugnote_id The bugnote id.
- * @return BugnoteData The bugnote object.
+ *
+ * @return BugnoteData|void The bugnote object.
+ * @throws ClientException
  */
 function bugnote_get( $p_bugnote_id ) {
 	# If bugnote exists but not in cache, it will be added to cache.
@@ -649,6 +658,7 @@ function bugnote_get( $p_bugnote_id ) {
  * @param integer $p_bugnote_id    A bugnote identifier.
  * @param string  $p_time_tracking Timetracking string (hh:mm format).
  * @return void
+ * @throws ClientException
  * @access public
  */
 function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
@@ -676,6 +686,7 @@ function bugnote_date_update( $p_bugnote_id ) {
  * @param integer $p_bugnote_id   A bugnote identifier.
  * @param string  $p_bugnote_text The bugnote text to set.
  * @return boolean
+ * @throws ClientException
  * @access public
  */
 function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
@@ -721,6 +732,7 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
  * @param integer $p_bugnote_id A bugnote identifier.
  * @param boolean $p_private    Whether bugnote should be set to private status.
  * @return boolean
+ * @throws ClientException
  * @access public
  */
 function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
@@ -782,9 +794,12 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 	db_param_push();
 	$t_query = 'SELECT u.id AS user_id, username, realname, SUM(time_tracking) AS sum_time_tracking
 				FROM {user} u, {bugnote} bn
-				WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND
-				bn.bug_id = ' . db_param() . $t_from_where . $t_to_where .
-				' GROUP BY u.id, u.username, u.realname';
+				WHERE u.id = bn.reporter_id 
+				AND bn.time_tracking != 0 
+				AND bn.bug_id = ' . db_param()
+		. $t_from_where
+		. $t_to_where . ' 
+				GROUP BY u.id, u.username, u.realname';
 	$t_result = db_query( $t_query, array( $p_bug_id ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
