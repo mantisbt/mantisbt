@@ -312,7 +312,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 
 	# Event integration
 	if( $p_trigger_event ) {
-		event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id, 'files' => array() ) );
+		event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id, array() ) );
 	}
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
