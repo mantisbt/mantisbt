@@ -297,7 +297,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
  * If the configuration option does not exist, an ERROR is triggered
  *
  * @param string  $p_option  Configuration option name.
- * @param string  $p_value   Configuration option value.
+ * @param string|array  $p_value   Configuration option value.
  * @param integer $p_user    A user identifier. Defaults to NO_USER.
  * @param integer $p_project A project identifier. Defaults to ALL_PROJECTS.
  * @param integer $p_access  Access level. Defaults to DEFAULT_ACCESS_LEVEL.

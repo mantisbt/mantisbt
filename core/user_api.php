@@ -210,7 +210,7 @@ function user_update_cache( $p_user_id, $p_field, $p_value ) {
  * @param mixed  $p_value The field value to look for in the cache.
  * @param bool   $p_case_sensitive False to perform case-insensitive search; defaults to true.
  *
- * @return int|bool User Id, false if not found
+ * @return array|bool User Id, false if not found
  */
 function user_search_cache( $p_field, $p_value, $p_case_sensitive = true ) {
 	global $g_cache_user;
@@ -1290,7 +1290,7 @@ function user_get_name_for_sorting_from_row( array $p_user_row ) {
  * @throws ClientException
  */
 function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	$t_access_level = user_get_field( $p_user_id, 'access_level' );
+	$t_access_level = (int)user_get_field( $p_user_id, 'access_level' );
 
 	if( user_is_administrator( $p_user_id ) ) {
 		return $t_access_level;

@@ -123,6 +123,7 @@ $t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_e
 # process the workflow by reversing the flags to a matrix and creating the appropriate string
 if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	$f_value = gpc_get( 'flag', array() );
+	$f_value = $f_value ?? [];
 	$f_access = gpc_get( 'workflow_access' );
 	$t_matrix = array();
 

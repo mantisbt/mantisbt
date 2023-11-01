@@ -1325,7 +1325,6 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 				return array( 'type' => $t_content_type, 'content' => file_get_contents( $t_local_disk_file ) );
 			}
 			return false;
-
 		case DATABASE:
 			$t_file_info_type = file_get_mime_type_for_content( $t_row['content'] );
 
@@ -1334,7 +1333,6 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			}
 
 			return array( 'type' => $t_content_type, 'content' => $t_row['content'] );
-
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
 	}

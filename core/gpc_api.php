@@ -53,7 +53,7 @@ $g_cookie_secure_flag_enabled = http_is_protocol_https();
  *
  * @param string $p_var_name Variable name.
  * @param mixed  $p_default  Default value.
- * @return null
+ * @return null|string
  */
 function gpc_get( $p_var_name, $p_default = null ) {
 	if( isset( $_POST[$p_var_name] ) ) {
@@ -216,7 +216,6 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			} else {
 				return '';
 			}
-			break;
 		case CUSTOM_FIELD_TYPE_DATE:
 			$t_day = gpc_get_int( $p_var_name . '_day', 0 );
 			$t_month = gpc_get_int( $p_var_name . '_month', 0 );
@@ -230,7 +229,6 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			} else {
 				return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
 			}
-			break;
 		default:
 			return gpc_get_string( $p_var_name, $p_default );
 	}

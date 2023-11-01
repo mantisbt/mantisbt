@@ -178,7 +178,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 
 /**
  * Returns whether a connection to the database exists
- * @global stores database connection state
+ * @global $g_db_connected stores database connection state
  * @return boolean indicating if the a database connection has been made
  */
 function db_is_connected() {
@@ -303,9 +303,6 @@ function db_query_bound() {
  * This will pop the database parameter stack {@see MantisDbParam} after a
  * successful execution, unless specified otherwise
  *
- * @global array of previous executed queries for profiling
- * @global adodb database connection object
- * @global boolean indicating whether queries array is populated
  * @param string  $p_query     Parameterlised Query string to execute.
  * @param array   $p_arr_parms Array of parameters matching $p_query.
  * @param integer $p_limit     Number of results to return.
@@ -642,16 +639,13 @@ function db_prepare_binary_string( $p_string ) {
 		case 'odbc_mssql':
 			$t_content = unpack( 'H*hex', $p_string );
 			return '0x' . $t_content['hex'];
-			break;
 		case 'pgsql':
 			return $g_db->BlobEncode( $p_string );
-			break;
 		case 'mssqlnative':
 		case 'oci8':
 			# Fall through, mssqlnative, oci8 store raw data in BLOB
 		default:
 			return $p_string;
-			break;
 	}
 }
 

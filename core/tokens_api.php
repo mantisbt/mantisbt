@@ -72,7 +72,7 @@ function token_ensure_exists( $p_token_id ) {
  * Get a token's information
  * @param integer $p_type    The token type to retrieve.
  * @param integer $p_user_id A valid user identifier.
- * @return array Token row
+ * @return array|null Token row
  */
 function token_get( $p_type, $p_user_id = null ) {
 	token_purge_expired_once();

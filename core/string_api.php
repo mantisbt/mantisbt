@@ -286,7 +286,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 		foreach( $t_pairs as $t_key => $t_value ) {
 			if( is_array( $t_value ) ) {
 				foreach( $t_value as $t_value_each ) {
-					$t_clean_pairs[] .= rawurlencode( $t_key ) . '[]=' . rawurlencode( $t_value_each );
+					$t_clean_pairs[] = rawurlencode( $t_key ) . '[]=' . rawurlencode( $t_value_each );
 				}
 			} else {
 				$t_clean_pairs[] = rawurlencode( $t_key ) . '=' . rawurlencode( $t_value );

@@ -146,6 +146,8 @@ class TagAttachCommand extends Command {
 		if( !empty( $t_attached_tags ) ) {
 			event_signal( 'EVENT_TAG_ATTACHED', array( $this->issue_id, $t_attached_tags ) );
 		}
+
+		return [];
 	}
 }
 

@@ -374,7 +374,7 @@ function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
  * Sort categories based on what project they're in.
  * Call beforehand with a single parameter to set a 'preferred' project.
  * @param int|array $p_category1 Id of preferred project or array containing category details.
- * @param array $p_category2 Array containing category details.
+ * @param array|null $p_category2 Array containing category details.
  * @return integer|null An integer representing sort order.
  * @access public
  */
@@ -510,6 +510,8 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 			if( $p_sort_by_project ) {
 				category_sort_rows_by_project( $p_project_id );
 				usort( $t_categories, 'category_sort_rows_by_project' );
+
+				# TODO: passing null may be a bug here
 				category_sort_rows_by_project( null );
 			}
 		}
@@ -549,6 +551,8 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 	if( $p_sort_by_project ) {
 		category_sort_rows_by_project( $p_project_id );
 		usort( $t_rows, 'category_sort_rows_by_project' );
+
+		# TODO: passing null may be a bug here
 		category_sort_rows_by_project( null );
 	}
 

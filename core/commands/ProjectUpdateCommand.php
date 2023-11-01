@@ -153,11 +153,11 @@ class ProjectUpdateCommand extends Command {
 		$this->enabled = (int)$this->payload( 'enabled', project_get_field( $this->id, 'enabled' ) );
 		$this->file_path = $this->payload( 'file_path', project_get_field( $this->id, 'file_path' ) );
 
-		$this->view_state = $this->payload( 'view_state', array( 'id' => project_get_field( $this->id, 'view_state' ) ) );
-		$this->view_state = mci_get_project_view_state_id( $this->view_state );
+		$t_view_state_ref = $this->payload( 'view_state', array( 'id' => project_get_field( $this->id, 'view_state' ) ) );
+		$this->view_state = mci_get_project_view_state_id( $t_view_state_ref );
 
-		$this->status = $this->payload( 'status', array( 'id' => project_get_field( $this->id, 'status' ) ) );
-		$this->status = mci_get_project_status_id( $this->status );
+		$t_status_ref = $this->payload( 'status', array( 'id' => project_get_field( $this->id, 'status' ) ) );
+		$this->status = mci_get_project_status_id( $t_status_ref );
 
 		# check to make sure a modified project doesn't already exist
 		if( $this->name != project_get_name( $this->id ) ) {
