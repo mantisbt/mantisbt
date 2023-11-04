@@ -17,7 +17,7 @@
     },
     "require-dev": {
         "ext-zip": "*",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^9.6"
     },
     "repositories": [
         {
