@@ -89,6 +89,11 @@ if( version_compare( Slim\App::VERSION, '4.0', '<' )
 		string $p_file,
 		int    $p_line
 	): bool {
+		if( is_windows_server() ) {
+			# Convert to Unix-style path
+			$p_file = str_replace( '\\', '/', $p_file );
+		}
+
 		if( preg_match( '~/vendor/(?:\w+/){2}(.*)$~', $p_file, $t_matches ) ) {
 			# Selectively handle deprecation warnings
 			switch( $t_matches[1] ) {

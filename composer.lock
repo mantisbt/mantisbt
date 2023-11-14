@@ -72,7 +72,7 @@
             "version": "dev-mantis",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mantisbt/securimage.git",
+                "url": "https://github.com/mantisbt/securimage",
                 "reference": "17a390243d831017f9ce9ee23c9dc481e7554ea0"
             },
             "dist": {
@@ -114,9 +114,6 @@
                 "forms",
                 "security"
             ],
-            "support": {
-                "source": "https://github.com/mantisbt/securimage/tree/mantis"
-            },
             "time": "2022-07-24T17:11:14+00:00"
         },
         {
