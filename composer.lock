@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acad50d04de7da0edbd12a154e5f1187",
+    "content-hash": "2476e42f81a627703141713f8b4fb3f1",
     "packages": [
         {
             "name": "adodb/adodb-php",
@@ -72,7 +72,7 @@
             "version": "dev-mantis",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mantisbt/securimage.git",
+                "url": "https://github.com/mantisbt/securimage",
                 "reference": "17a390243d831017f9ce9ee23c9dc481e7554ea0"
             },
             "dist": {
@@ -114,9 +114,6 @@
                 "forms",
                 "security"
             ],
-            "support": {
-                "source": "https://github.com/mantisbt/securimage/tree/mantis"
-            },
             "time": "2022-07-24T17:11:14+00:00"
         },
         {
@@ -2617,7 +2614,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4 || ^8.0",
+        "php": "^7.2.5 || ^8.0",
         "ext-mbstring": "*",
         "ext-json": "*"
     },
