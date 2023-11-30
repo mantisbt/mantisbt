@@ -281,13 +281,9 @@ layout_page_begin();
 		$t_show_custom_field = $t_require;
 
 		if( !$t_show_custom_field ) {
-			if( 'update' != $t_custom_status_label ) {
-				$t_show_custom_field = true;
-			}
 			if( in_array( $t_custom_status_label, array( 'resolved', 'closed' ) ) && $t_display ) {
 				$t_show_custom_field = true;
-			}
-			if( !$t_show_custom_field ) {
+			} else {
 				$t_plugin_Event_result = event_signal( 'EVENT_UPDATE_BUG_SHOW_CUSTOM_FIELD', array( $t_bug, $t_id ) );
 				foreach( $t_plugin_Event_result as $t_event_result ) {
 					if( in_array( true, $t_event_result ) ) {
