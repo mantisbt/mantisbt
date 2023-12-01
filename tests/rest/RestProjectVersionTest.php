@@ -291,7 +291,8 @@ class RestProjectVersionTest extends RestBase {
 		$this->assertTrue( $t_version_result['obsolete'] );
 		$this->assertTrue( $t_version_result['released'] );
 
-		$t_version_patch = array( 'timestamp' => time() );
+		$t_now = new DateTimeImmutable();
+		$t_version_patch = array( 'timestamp' => $t_now->format( 'c' ) );
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_version_result = json_decode( $t_response->getBody(), true );
