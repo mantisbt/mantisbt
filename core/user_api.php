@@ -331,7 +331,7 @@ FROM {$t_user_table}
 WHERE lower(email) IN (
 	SELECT email 
 	FROM (
-		SELECT lower(email) email, COUNT(*)
+		SELECT lower(email) AS email, COUNT(*) AS mycount
 		FROM {$t_user_table}
 		GROUP BY lower(email) HAVING COUNT(*) > 1
 		) tmp
