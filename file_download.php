@@ -151,17 +151,6 @@ http_security_headers();
 # Make sure that IE can download the attachments under https.
 header( 'Pragma: public' );
 
-# To fix an IE bug which causes problems when downloading
-# attached files via HTTPS, we disable the "Pragma: no-cache"
-# command when IE is used over HTTPS.
-global $g_allow_file_cache;
-if( http_is_protocol_https() && is_browser_internet_explorer() ) {
-	# Suppress "Pragma: no-cache" header.
-} else {
-	if( !isset( $g_allow_file_cache ) ) {
-		header( 'Pragma: no-cache' );
-	}
-}
 header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 
 header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
