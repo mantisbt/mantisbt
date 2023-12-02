@@ -148,11 +148,7 @@ if( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
 
 http_security_headers();
 
-# Make sure that IE can download the attachments under https.
-header( 'Pragma: public' );
-
 header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
-
 header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
 
 $t_upload_method = config_get( 'file_upload_method' );
