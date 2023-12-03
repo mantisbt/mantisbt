@@ -3706,7 +3706,7 @@ $g_custom_headers = array();
 /**
  * Browser Caching Control
  * By default, we try to prevent the browser from caching anything.
- * $g_allow_browser_cache & $g_allow_file_cache will defeat this for some cases.
+ * $g_allow_browser_cache will defeat this for some cases.
  *
  * Browser Page caching - This will allow the browser to cache all pages. The
  * upside will be better performance, but there may be cases where obsolete
@@ -3717,16 +3717,6 @@ $g_custom_headers = array();
  * @global integer $g_allow_browser_cache
  */
 # $g_allow_browser_cache = ON;
-
-/**
- * File caching - This will allow the browser to cache downloaded files.
- * Without this set, there may be issues with IE receiving files, and launching
- * support programs.
- *
- * @todo The code that references this config considers it ON if it is set (doesn't use config_get_global() / $g_global_settings)
- * @global integer $g_allow_file_cache
- */
-# $g_allow_file_cache = ON;
 
 #################
 # Custom Fields #
