@@ -1156,6 +1156,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 				if( array_key_exists( $t_bugnote_id, $t_bugnotes_by_id ) ) {
 					$t_bugnote_changed = false;
+					$t_bugnote = $t_bugnotes_by_id[$t_bugnote_id];
 
 					if( $t_bugnote->note !== $t_note['text'] ) {
 						bugnote_set_text( $t_bugnote_id, $t_note['text'] );
