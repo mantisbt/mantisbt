@@ -97,7 +97,7 @@ class MonitorAddCommand extends Command {
 				/* user */ null,
 				$this->projectId );
 
-			if( !access_has_bug_level( $t_access_level, $t_issue_id, $t_user_id ) ) {
+			if( !access_has_project_level( $t_access_level, $this->projectId, $t_user_id ) ) {
 				throw new ClientException( 'access denied', ERROR_MONITOR_ACCESS_TOO_LOW );
 			}
 
