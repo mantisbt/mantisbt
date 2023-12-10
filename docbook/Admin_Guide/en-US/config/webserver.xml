@@ -94,14 +94,6 @@ $g_custom_headers = array( 'Content-Security-Policy:' );
  					allowed) for the bug report pages.</para>
 			</listitem>
 		</varlistentry>
-		<varlistentry>
-			<term>$g_allow_file_cache</term>
-			<listitem>
-				<para>This will allow the browser to cache downloaded files.
- 					Without this set, there may be issues with IE receiving files, and launching
- 					support programs.</para>
-			</listitem>
-		</varlistentry>
 
 	</variablelist>
 </section>

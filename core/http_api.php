@@ -119,18 +119,17 @@ function http_caching_headers( $p_allow_caching = null ) {
 	}
 
 	if( $t_allow_caching ) {
-			if( is_browser_internet_explorer() ) {
-				header( 'Cache-Control: private, proxy-revalidate' );
-			} else {
-				header( 'Cache-Control: private, must-revalidate' );
-			}
-			# set an expire time to +10 days
-			header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time()+864000 ) );
+		if( is_browser_internet_explorer() ) {
+			header( 'Cache-Control: private, proxy-revalidate' );
+		} else {
+			header( 'Cache-Control: private, must-revalidate' );
+		}
+		# set an expire time to +10 days
+		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time()+864000 ) );
 	} else {
 		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 		header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
-
 	}
 }
 
