@@ -40,6 +40,7 @@ check_print_section_header_row( 'PHP' );
 
 # $t_extensions_required lists the extensions required to run Mantis in general
 $t_extensions_required = array(
+	'ctype', # required by PHPMailer
 	'date',
 	'hash',
 	'pcre',

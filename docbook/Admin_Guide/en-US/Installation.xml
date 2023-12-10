@@ -183,6 +183,7 @@
 								</para></listitem>
 								<listitem><para>
 									<emphasis>
+										ctype,
 										filter,
 										hash,
 										json,
