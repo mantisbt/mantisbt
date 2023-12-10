@@ -1161,7 +1161,7 @@ function db_mysql_fix_utf8( $p_string ) {
 		# replace with U+FFFD to avoid potential Unicode XSS attacks,
 		# see http://unicode.org/reports/tr36/#Deletion_of_Noncharacters
 		"\xEF\xBF\xBD",
-		$p_string
+		(string)$p_string
 	);
 }
 
