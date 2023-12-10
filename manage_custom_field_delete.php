@@ -49,7 +49,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-form_security_validate( 'manage_custom_field_delete' );
+form_security_validate( 'manage_custom_field_update' );
 
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
@@ -71,6 +71,6 @@ helper_ensure_confirmed(
 
 custom_field_destroy( $f_field_id );
 
-form_security_purge( 'manage_custom_field_delete' );
+form_security_purge( 'manage_custom_field_update' );
 
 print_header_redirect( $f_return );
