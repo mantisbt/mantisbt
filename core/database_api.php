@@ -1145,9 +1145,11 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 }
 
 /**
- * Replace 4-byte UTF-8 chars
+ * Replace 4-byte UTF-8 chars.
+ *
  * This is a workaround to avoid data getting truncated on MySQL databases
- * using native utf8 encoding, which only supports 3 bytes chars (see #20431)
+ * using native utf8 encoding, which only supports 3 bytes chars (see #20431).
+ *
  * @param string $p_string
  * @return string
  */
@@ -1161,7 +1163,7 @@ function db_mysql_fix_utf8( $p_string ) {
 		# replace with U+FFFD to avoid potential Unicode XSS attacks,
 		# see http://unicode.org/reports/tr36/#Deletion_of_Noncharacters
 		"\xEF\xBF\xBD",
-		$p_string
+		(string)$p_string
 	);
 }
 
