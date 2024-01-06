@@ -43,27 +43,27 @@
  * If you need to supply a port to connect to, set hostname as 'localhost:3306'.
  * @global string $g_hostname
  */
-$g_hostname				= 'localhost';
+$g_hostname = 'localhost';
 
 /**
  * User name to use for connecting to the database. The user needs to have
  * read/write access to the MantisBT database. The default user name is "root".
  * @global string $g_db_username
  */
-$g_db_username			= 'root';
+$g_db_username = 'root';
 
 /**
  * Password for the specified user name. The default password is empty.
  * @global string $g_db_password
  */
-$g_db_password			= '';
+$g_db_password = '';
 
 /**
  * Name of database that contains MantisBT tables.
  * The default database name is "bugtracker".
  * @global string $g_database_name
  */
-$g_database_name		= 'bugtracker';
+$g_database_name = 'bugtracker';
 
 /**
  * Defines the database type. Supported types are listed below;
@@ -78,7 +78,7 @@ $g_database_name		= 'bugtracker';
  *
  * @global string $g_db_type
  */
-$g_db_type				= 'mysqli';
+$g_db_type = 'mysqli';
 
 /**
  * Adodb Data Source Name
@@ -263,7 +263,7 @@ if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
  * requires trailing /
  * @global string $g_path
  */
-$g_path	= $t_protocol . '://' . $t_host . $t_path;
+$g_path = $t_protocol . '://' . $t_host . $t_path;
 
 /**
  * Short web path without the domain name
@@ -353,7 +353,7 @@ $g_crypto_master_salt = '';
  * @see $g_send_reset_password
  * @global integer $g_allow_signup
  */
-$g_allow_signup			= ON;
+$g_allow_signup = ON;
 
 /**
  * Maximum number of failed login attempts before the user's account is locked.
@@ -378,13 +378,13 @@ $g_notify_new_user_created_threshold_min = ADMINISTRATOR;
  * creating new accounts, and the password will be set to blank when reset.
  * @global integer $g_send_reset_password
  */
-$g_send_reset_password	= ON;
+$g_send_reset_password = ON;
 
 /**
  * Use captcha image to validate subscription it requires GD library installed
  * @global integer $g_signup_use_captcha
  */
-$g_signup_use_captcha	= ON;
+$g_signup_use_captcha = ON;
 
 /**
  * Absolute path (with trailing slash!) to folder which contains your
@@ -392,7 +392,7 @@ $g_signup_use_captcha	= ON;
  * and the Workflow Graphs
  * @global string $g_system_font_folder
  */
-$g_system_font_folder	= '';
+$g_system_font_folder = '';
 
 /**
  * Setting to disable the 'lost your password' feature.
@@ -435,25 +435,25 @@ $g_antispam_time_window_in_seconds = 3600;
  * and thus may be susceptible to being detected by spam email harvesters.
  * @global string $g_webmaster_email
  */
-$g_webmaster_email		= 'webmaster@example.com';
+$g_webmaster_email = 'webmaster@example.com';
 
 /**
  * The sender email, part of 'From: ' header in emails
  * @global string $g_from_email
  */
-$g_from_email			= 'noreply@example.com';
+$g_from_email = 'noreply@example.com';
 
 /**
  * The sender name, part of 'From: ' header in emails
  * @global string $g_from_name
  */
-$g_from_name			= 'Mantis Bug Tracker';
+$g_from_name = 'Mantis Bug Tracker';
 
 /**
  * The return address for bounced mail
  * @global string $g_return_path_email
  */
-$g_return_path_email	= 'admin@example.com';
+$g_return_path_email = 'admin@example.com';
 
 /**
  * Allow email notification.
@@ -464,7 +464,7 @@ $g_return_path_email	= 'admin@example.com';
  * accounts are not sent to users.
  * @global integer $g_enable_email_notification
  */
-$g_enable_email_notification	= ON;
+$g_enable_email_notification = ON;
 
 /**
  * When enabled, the email notifications will send the full issue with
@@ -844,7 +844,7 @@ $g_email_separator2 = str_pad('', 70, '-');
  * Email separator and padding
  * @global integer $g_email_padding_length
  */
-$g_email_padding_length	= 28;
+$g_email_padding_length = 28;
 
 /**
  * Duration (in days) to retry failed emails before deleting them from queue.
@@ -2430,7 +2430,7 @@ $g_bug_closed_status_threshold = CLOSED;
  * the bug is in progress, rather than just put in a person's queue.
  * @global integer $g_auto_set_status_to_assigned
  */
-$g_auto_set_status_to_assigned	= ON;
+$g_auto_set_status_to_assigned = ON;
 
 /**
  * 'status_enum_workflow' defines the workflow, and reflects a simple
@@ -3189,7 +3189,7 @@ $g_limit_view_unless_threshold = ANYBODY;
  * they are marked resolved.
  * @global integer $g_allow_reporter_close
  */
-$g_allow_reporter_close	 = OFF;
+$g_allow_reporter_close = OFF;
 
 /**
  * Reporter can reopen. Allow reporters to reopen the bugs they reported, after
@@ -3442,13 +3442,13 @@ $g_collapse_settings_cookie = '%cookie_prefix%_collapse_settings';
  * Stores the filter criteria for the Manage User page
  * @global string $g_manage_users_cookie
  */
-$g_manage_users_cookie		= '%cookie_prefix%_MANAGE_USERS_COOKIE';
+$g_manage_users_cookie = '%cookie_prefix%_MANAGE_USERS_COOKIE';
 
 /**
  * Stores the filter criteria for the Manage Config Report page
  * @global string $g_manage_config_cookie
  */
-$g_manage_config_cookie		= '%cookie_prefix%_MANAGE_CONFIG_COOKIE';
+$g_manage_config_cookie = '%cookie_prefix%_MANAGE_CONFIG_COOKIE';
 
 /**
  *
@@ -3795,77 +3795,65 @@ $g_main_menu_custom_options = array();
  * @global array $g_file_type_icons
  */
 $g_file_type_icons = array(
-	''		=> 'fa-file-text-o',
-	'7z'	=> 'fa-file-archive-o',
-	'ace'	=> 'fa-file-archive-o',
-	'arj'	=> 'fa-file-archive-o',
-	'bz2'	=> 'fa-file-archive-o',
-	'c'		=> 'fa-file-code-o',
-	'chm'	=> 'fa-file-o',
-	'cpp'	=> 'fa-file-code-o',
-	'css'	=> 'fa-file-code-o',
-	'csv'	=> 'fa-file-text-o',
-	'cxx'	=> 'fa-file-code-o',
-	'diff'	=> 'fa-file-text-o',
-	'doc'	=> 'fa-file-word-o',
-	'docx'	=> 'fa-file-word-o',
-	'dot'	=> 'fa-file-word-o',
-	'eml'	=> 'fa-envelope-o',
-	'htm'	=> 'fa-file-code-o',
-	'html'	=> 'fa-file-code-o',
-	'gif'	=> 'fa-file-image-o',
-	'gz'	=> 'fa-file-archive-o',
-	'jpe'	=> 'fa-file-image-o',
-	'jpg'	=> 'fa-file-image-o',
-	'jpeg'	=> 'fa-file-image-o',
-	'log'	=> 'fa-file-text-o',
-	'lzh'	=> 'fa-file-archive-o',
-	'md'	=> 'fa-file-text-o',
-	'mhtml'	=> 'fa-file-code-o',
-	'mid'	=> 'fa-file-audio-o',
-	'midi'	=> 'fa-file-audio-o',
-	'mov'	=> 'fa-file-movie-o',
-	'mp3'	=> 'fa-file-audio-o',
-	'mp4'	=> 'fa-file-movie-o',
-	'msg'	=> 'fa-envelope-o',
-	'one'	=> 'fa-file-o',
-	'ogg'	=> 'fa-file-movie-o',
-	'patch'	=> 'fa-file-text-o',
-	'pcx'	=> 'fa-file-image-o',
-	'pdf'	=> 'fa-file-pdf-o',
-	'png'	=> 'fa-file-image-o',
-	'pot'	=> 'fa-file-word-o',
-	'pps'	=> 'fa-file-powerpoint-o',
-	'ppt'	=> 'fa-file-powerpoint-o',
-	'pptx'	=> 'fa-file-powerpoint-o',
-	'pub'	=> 'fa-file-o',
-	'rar'	=> 'fa-file-archive-o',
-	'reg'	=> 'fa-file',
-	'rtf'	=> 'fa-file-word-o',
-	'tar'	=> 'fa-file-archive-o',
-	'tgz'	=> 'fa-file-archive-o',
-	'txt'	=> 'fa-file-text-o',
-	'uc2'	=> 'fa-file-archive-o',
-	'vsd'	=> 'fa-file-o',
-	'vsl'	=> 'fa-file-o',
-	'vss'	=> 'fa-file-o',
-	'vst'	=> 'fa-file-o',
-	'vsu'	=> 'fa-file-o',
-	'vsw'	=> 'fa-file-o',
-	'vsx'	=> 'fa-file-o',
-	'vtx'	=> 'fa-file-o',
-	'wav'	=> 'fa-file-audio-o',
-	'wbk'	=> 'fa-file-word-o',
-	'wma'	=> 'fa-file-audio-o',
-	'wmv'	=> 'fa-file-movie-o',
-	'wri'	=> 'fa-file-word-o',
-	'xlk'	=> 'fa-file-excel-o',
-	'xls'	=> 'fa-file-excel-o',
-	'xlsx'	=> 'fa-file-excel-o',
-	'xlt'	=> 'fa-file-excel-o',
-	'xml'	=> 'fa-file-code-o',
-	'zip'	=> 'fa-file-archive-o',
-	'?'	=> 'fa-file-o'
+	''      => 'fa-file-text-o',
+	'7z'    => 'fa-file-archive-o',
+	'ace'   => 'fa-file-archive-o',
+	'arj'   => 'fa-file-archive-o',
+	'bz2'   => 'fa-file-archive-o',
+	'c'     => 'fa-file-code-o',
+	'chm'   => 'fa-file-o',
+	'cpp'   => 'fa-file-code-o',
+	'css'   => 'fa-file-code-o',
+	'csv'   => 'fa-file-text-o',
+	'cxx'   => 'fa-file-code-o',
+	'diff'  => 'fa-file-text-o',
+	'doc'   => 'fa-file-word-o',
+	'docx'  => 'fa-file-word-o',
+	'dot'   => 'fa-file-word-o',
+	'eml'   => 'fa-envelope-o',
+	'htm'   => 'fa-file-code-o',
+	'html'  => 'fa-file-code-o',
+	'gif'   => 'fa-file-image-o',
+	'gz'    => 'fa-file-archive-o',
+	'jpe'   => 'fa-file-image-o',
+	'jpg'   => 'fa-file-image-o',
+	'jpeg'  => 'fa-file-image-o',
+	'log'   => 'fa-file-text-o',
+	'lzh'   => 'fa-file-archive-o',
+	'md'    => 'fa-file-text-o',
+	'mhtml' => 'fa-file-code-o',
+	'mid'   => 'fa-file-audio-o',
+	'midi'  => 'fa-file-audio-o',
+	'mov'   => 'fa-file-movie-o',
+	'mp3'   => 'fa-file-audio-o',
+	'mp4'   => 'fa-file-movie-o',
+	'msg'   => 'fa-envelope-o',
+	'one'   => 'fa-file-o',
+	'ogg'   => 'fa-file-movie-o',
+	'patch' => 'fa-file-text-o',
+	'pcx'   => 'fa-file-image-o',
+	'pdf'   => 'fa-file-pdf-o',
+	'png'   => 'fa-file-image-o',
+	'pot'   => 'fa-file-word-o',
+	'pps'   => 'fa-file-powerpoint-o',
+	'ppt'   => 'fa-file-powerpoint-o',
+	'pptx'  => 'fa-file-powerpoint-o',
+	'pub'   => 'fa-file-o',
+	'rar'   => 'fa-file-archive-o',
+	'reg'   => 'fa-file',
+	'rtf'   => 'fa-file-word-o',
+	'tar'   => 'fa-file-archive-o',
+	'tgz'   => 'fa-file-archive-o',
+	'txt'   => 'fa-file-text-o',
+	'uc2'   => 'fa-file-archive-o',
+	'vsd'   => 'fa-file-o',
+	'vsl'   => 'fa-file-o',
+	'vss'   => 'fa-file-o',
+	'vst'   => 'fa-file-o',
+	'vsu'   => 'fa-file-o',
+	'vsw'   => 'fa-file-o',
+	'vsx'   => 'fa-file-o',
+	'?'     => 'fa-file-o'
 );
 
 /**
