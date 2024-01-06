@@ -953,13 +953,15 @@ $g_email_smime_extracerts_file = '';
 /**
  * Use a cron scheduler to send emails.
  *
- * It is recommended to use a cronjob or a scheduler task to send emails. The
- * cronjob should typically run every 5 minutes.
+ * When this is ON (recommended), instead of sending of emails as soon as an
+ * action is performed (typically at the end of each page), emails are queued
+ * and must be sent manually by executing 'scripts/send_emails.php'. This script
+ * can only be run from the CLI, not from the web interface, for security reasons.
+ * The script's execution is typically handled by a cron job or a scheduler task,
+ * set to run every few minutes.
  *
- * If no cronjob is used, then user will have to wait for emails to be sent
- * after performing an action which triggers notifications (generally at the end
- * of each page).  This slows user performance, particularly on busy sites
- * and when many messages are pending in the email queue.
+ * If no cronjob is used (default), then the user will have to wait for MantisBT
+ * to process the email queue after each page load.
  *
  * @global int $g_email_send_using_cronjob
  */
@@ -1198,9 +1200,9 @@ $g_fallback_language = 'english';
 /**
  * Name of font family to use.
  *
- * Name of a {@link https://fonts.google.com/ Google font}.
+ * For a list of all available fonts, see {@link https://fonts.google.com/}.
  *
- * The chosen font should listed in {@see $g_font_family_choices_local} to
+ * The chosen font should be listed in {@see $g_font_family_choices_local} to
  * ensure correct display even if {@see $g_cdn_enabled} option is OFF.
  *
  * @global string $g_font_family
@@ -2268,10 +2270,10 @@ $g_dropzone_enabled = ON;
 /**
  * File permissions for uploaded files.
  *
- * When using DISK destination, this setting controls the access permissions
- * uploaded files will have on the web server: with the default value (0400),
- * files will be read-only, and accessible only by the user running the web
- * server process (probably "apache" in Linux and "Administrator"
+ * When using DISK for storing uploaded files, this setting controls
+ * the access permissions they will have on the web server: with the default
+ * value (0400) files will be read-only, and accessible only by the user
+ * running the apache process (probably "apache" in Linux and "Administrator"
  * in Windows).
  *
  * For more details on unix style permissions:
@@ -2399,8 +2401,9 @@ $g_html_make_links = LINKS_SAME_WINDOW | LINKS_NOOPENER;
 /**
  * Valid html tags for multi-line fields (e.g. description).
  *
- * - do NOT include 'a' or 'img' tags here
- * - do NOT include tags that require attributes
+ * WARNING: For security reasons, do NOT include
+ * - 'a' or 'img' tags
+ * - tags that require attributes
  *
  * @global string $g_html_valid_tags
  */
@@ -2409,8 +2412,9 @@ $g_html_valid_tags = 'p, li, ul, ol, br, pre, i, b, u, em, strong';
 /**
  * Valid html tags for single line fields (e.g. issue summary).
  *
- * - do NOT include 'a' or 'img' tags here
- * - do NOT include tags that require attributes
+ * WARNING: For security reasons, do NOT include
+ *  - 'a' or 'img' tags
+ *  - tags that require attributes
  *
  * @global string $g_html_valid_tags_single_line
  */

@@ -57,16 +57,39 @@
 		<varlistentry>
 			<term>$g_html_valid_tags</term>
 			<listitem>
-				<para>This is the list of HTML tags that are allowed.Do NOT
-					include href or img tags here.Do NOT include tags that have
-					parameters (eg. )The HTML code is allowed to enter the database as
-					is. The $g_allow_href_tags does not have to be enabled to make URL
-					links. The package will automatically hyperlink properly formatted
-					URLs eg. https://blah.blah/ or
-					mailto://me@more.com/
+				<para>This is the list of HTML tags that are allowed for
+					multi-line fields (e.g. description).
 				</para>
+				<warning>
+					<para>
+						For security reasons, do NOT include
+						<literal>href</literal> or
+						<literal>img</literal>
+						or any tags that have parameters, as the HTML code
+						is stored in the database as-is.
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
+
+		<varlistentry>
+			<term>$g_html_valid_tags_single_line</term>
+			<listitem>
+				<para>This is the list of HTML tags that are allowed for
+					single line fields (e.g. issue summary).
+				</para>
+				<warning>
+					<para>
+						For security reasons, do NOT include
+						<literal>href</literal> or
+						<literal>img</literal>
+						or any tags that have parameters, as the HTML code
+						is stored in the database as-is.
+					</para>
+				</warning>
+			</listitem>
+		</varlistentry>
+
 		<varlistentry>
 			<term>$g_bottom_include_page</term>
 			<listitem>
@@ -171,14 +194,6 @@ $g_main_menu_custom_options = array(
 					Access level is an optional field, and no check will be done if it is not set.
 					Icon is an optional field, and 'fa-plug' will be used if it is not set.
 				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_html_valid_tags_single_line</term>
-			<listitem>
-				<para>These are the valid html tags for single line fields (e.g. issue summary).
-					do NOT include a or img tags here.
-					do NOT include tags that require attributes.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

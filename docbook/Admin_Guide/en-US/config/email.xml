@@ -242,12 +242,17 @@ $g_notify_flags['new'] = array(
 		<varlistentry>
 			<term>$g_email_login_enabled</term>
 			<listitem>
+				<para>Allow login with email address.</para>
 				<para>
-					Enable support for logging in by email and password, in addition to
-					username and password.  This will only work as long as there is a single
-					user with the specified email address and the email address is not blank.
-					The default value is OFF.
+					When this is ON, users can log in with their registered
+					email address, in addition to their username.
 				</para>
+				<para>
+					This will only work as long as there is a single user
+					with the specified email address, and the email address is
+					not blank.
+				</para>
+				<para>The default value is OFF.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
@@ -420,14 +425,33 @@ $g_notify_flags['new'] = array(
 		<varlistentry>
 			<term>$g_email_send_using_cronjob</term>
 			<listitem>
-				<para>Disables sending of emails as soon as an action is performed.
-		Emails are instead queued and must be sent by running
-		scripts/send_emails.php periodically. This script can only be
-		executed from the CLI, not from the web interface, for security
-		reasons.</para>
-		<para>Enabling this option can help with performance problems if large
-		numbers of emails are generated or mail delivery is slow by not
-		delaying page execution when sending emails.</para>
+				<para>Use a cron scheduler to send emails.</para>
+				<para>When this is ON (recommended), instead of sending of emails
+					as soon as an action is performed (typically at the end of each
+					page), emails are queued and must be sent manually by executing
+					<literal>scripts/send_emails.php</literal>.
+					This script can only be run from the CLI, not from the
+					web interface, for security reasons.
+				</para>
+				<para>The script's execution is typically handled by a cron job or
+					a scheduler task, set to run every few minutes.
+				</para>
+				<para>
+					If no cronjob is used (default), then the user will have to
+					wait for MantisBT to process the email queue after each page
+					load.
+				</para>
+				<note>
+					<para>
+						Considering that processing the email queue can take a
+						significant amount of time on
+						systems generating large numbers of notifications,
+						when the queue contains many undeliverable emails or
+						when mail delivery is slow,
+						enabling this option can significantly improve
+						MantisBT's performance.
+					</para>
+				</note>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

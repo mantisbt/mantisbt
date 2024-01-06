@@ -363,7 +363,7 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>This configuration option allows replacing the
-					ldap server with a comma-delimited text file for
+					ldap server with a comma-delimited text file, useful for
 					development or testing purposes.</para>
 
 					<para>The LDAP simulation file format is as follows:</para>
