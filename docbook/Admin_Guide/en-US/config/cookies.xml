@@ -4,6 +4,7 @@
 ]>
 <section id="admin.config.cookies">
 	<title>Cookies</title>
+	<para></para>
 
 	<variablelist>
 		<varlistentry>
@@ -35,10 +36,25 @@
 					to use for the MantisBT cookies.
 				</para>
 				<para>Valid values are
-					<literal>Strict</literal> (default),
-					<literal>Lax</literal> or
+					<literal>Strict</literal>,
+					<literal>Lax</literal> (default) or
 					<literal>None</literal>.
 				</para>
+				<para>If this setting is changed, users with a non-expired
+					Session cookie (see <emphasis>$g_string_cookie</emphasis> below)
+					may need to log out and log back in, to switch the cookie's
+					secure attribute to the new value.
+				</para>
+				<note>
+					<para>
+						While <literal>Strict</literal> provides stronger
+						protection against CSRF attacks, it actually prevents
+						the user's session from being recognized when clicking
+						a link from a notification e-mail, causing MantisBT to
+						start an anonymous session even if the user is already
+						logged in.
+					</para>
+				</note>
 			</listitem>
 		</varlistentry>
 

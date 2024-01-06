@@ -3390,6 +3390,12 @@ $g_cookie_domain = '';
  * Specifies the SameSite attribute to use for the MantisBT cookies.
  *
  * Valid values are Strict, Lax (default) or None.
+ *
+ * NOTE: While 'Strict' provides stronger protection against CSRF attacks, it
+ * actually prevents the user's session from being recognized when clicking a
+ * link from a notification e-mail, causing MantisBT to start an anonymous
+ * session even if the user is already logged in.
+ *
  * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
  *
  * @global string $g_cookie_samesite
