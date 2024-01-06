@@ -4046,11 +4046,12 @@ $g_create_permalink_threshold = DEVELOPER;
 /**
  * The service to use to create a short URL.
  *
- * The %s will be replaced by the long URL. To disable the feature set to ''.
- * 
+ * The %s will be replaced by the long URL.
+ * To disable the feature set to ''.
+ *
  * @global string $g_create_short_url
  */
-$g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
+$g_create_short_url = 'https://tinyurl.com/create.php?url=%s';
 
 #########################
 # MantisBT Enum Strings #
