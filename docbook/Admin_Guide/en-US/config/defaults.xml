@@ -9,8 +9,8 @@
 		<varlistentry>
 			<term>$g_default_new_account_access_level</term>
 			<listitem>
-				<para>This is the default access level users are given when their
-					account is created by email. The default access level is REPORTER.
+				<para>Default access level assigned to new sign-up users.
+					The default access level is REPORTER.
 					Look in constant_inc.php for other values.
 				</para>
 			</listitem>

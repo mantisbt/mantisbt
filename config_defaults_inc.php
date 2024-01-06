@@ -486,10 +486,10 @@ $g_max_lost_password_in_progress_count = 3;
 #############
 
 /**
- * Max number of events to allow for users with default access level when signup is enabled.
+ * Max number of events to allow for users with default access level.
  *
- * Use 0 for no limit.
- * 
+ * Use 0 for no limit. Default is 10.
+ *
  * @global int $g_antispam_max_event_count
  * @see $g_default_new_account_access_level
  */
@@ -499,7 +499,7 @@ $g_antispam_max_event_count = 10;
  * Time window to enforce max events within.
  *
  * Default is 3600 seconds (1 hour).
- * 
+ *
  * @global int $g_antispam_time_window_in_seconds
  */
 $g_antispam_time_window_in_seconds = 3600;
@@ -1708,7 +1708,7 @@ $g_private_news_threshold = DEVELOPER;
 /**
  * Default access level assigned to new accounts when signing up.
  *
- * Look in constant_inc.php for values
+ * Look in constant_inc.php for values.
  *
  * @global int $g_default_new_account_access_level
  */
