@@ -3389,12 +3389,12 @@ $g_cookie_domain = '';
 /**
  * Specifies the SameSite attribute to use for the MantisBT cookies.
  *
- * Valid values are Strict (default), Lax or None.
+ * Valid values are Strict, Lax (default) or None.
  * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
  *
  * @global string $g_cookie_samesite
  */
-$g_cookie_samesite = 'Strict';
+$g_cookie_samesite = 'Lax';
 
 /**
  * Prefix for all MantisBT cookies
