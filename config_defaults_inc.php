@@ -4377,30 +4377,38 @@ $g_subprojects_inherit_categories = ON;
  */
 $g_subprojects_inherit_versions = ON;
 
-##################################
-# Debugging / Developer Settings #
-##################################
+#########################################
+# System Logging and Debugging Settings #
+#########################################
 
 /**
  * Time page loads.
+ *
  * The page execution timer shows at the bottom of each page.
  *
- * @global integer $g_show_timer
+ * @global int $g_show_timer
  */
 $g_show_timer = OFF;
 
 /**
  * Show memory usage for each page load in the footer.
  *
- * @global integer $g_show_memory_usage
+ * @global int $g_show_memory_usage
  */
 $g_show_memory_usage = OFF;
 
 /**
- * This is used for debugging the e-mail features in mantis. By default this is blank.
- * This can be set to a valid email address when diagnosing problems with emails.
- * All e-mails are sent to this address with the original To, Cc, Bcc included in the message body.
- * Note: The email is NOT send to the recipients, only to the debug email address.
+ * Email address to use for debugging purposes.
+ *
+ * This option is used for debugging problems with the email features in mantis,
+ * and can be set to a valid email address.
+ *
+ * This is blank by default, meaning that email notifications are sent to their
+ * intended recipients (normal system behavior).
+ *
+ * If set, emails will only be sent to the specified address instead, and the
+ * original recipients (To, Cc and Bcc) will be included in the message body.
+ *
  * @global string $g_debug_email
  */
 $g_debug_email = '';
@@ -4408,17 +4416,18 @@ $g_debug_email = '';
 /**
  * Shows the total number/unique number of queries executed to serve the page.
  *
- * @global integer $g_show_queries_count
+ * @global int $g_show_queries_count
  */
 $g_show_queries_count = OFF;
 
 /**
- * Errors Display method
+ * Errors Display method.
+ *
  * Defines what {@link http://php.net/errorfunc.constants errors}
  * are displayed and how. Available options are:
  * - DISPLAY_ERROR_HALT    Stop and display error message (including
  *                         variables and backtrace if
- *                         {@link $g_show_detailed_errors} is ON).
+ *                         {@see $g_show_detailed_errors} is ON).
  * - DISPLAY_ERROR_INLINE  Display a one line error and continue execution.
  * - DISPLAY_ERROR_NONE    Suppress the error (no display). This is the default
  *                         behavior for unspecified errors constants.
@@ -4433,7 +4442,7 @@ $g_show_queries_count = OFF;
  *     E_ALL               => DISPLAY_ERROR_INLINE,
  * );
  *
- * NOTICE: E_USER_ERROR, E_RECOVERABLE_ERROR and E_ERROR will always be set
+ * NOTE: E_USER_ERROR, E_RECOVERABLE_ERROR and E_ERROR will always be set
  * to DISPLAY_ERROR_HALT internally, regardless of the configured value.
  *
  * @global array $g_display_errors
@@ -4451,32 +4460,40 @@ if( isset( $_SERVER['SERVER_NAME'] ) &&
 }
 
 /**
- * Detailed error messages
- * Shows a list of variables and their values when an error is triggered.
+ * Detailed error messages.
+ *
+ * Shows a list of variables and their values, as well as an execution stack
+ * trace whenever a fatal error is triggered.
+ *
  * Only applies to error types configured to DISPLAY_ERROR_HALT in
- * {@link $g_display_errors}
+ * {@see $g_display_errors}.
  *
- * WARNING: Potential security hazard.  Only turn this on when you really
- * need it for debugging
+ * WARNING: Setting this to ON is a potential security hazard, as it can expose
+ * sensitive system information. Only enable it when needed for debugging purposes.
  *
- * @global integer $g_show_detailed_errors
+ * @global int $g_show_detailed_errors
  */
 $g_show_detailed_errors = OFF;
 
 /**
- * Debug messages
- * If this option is turned OFF (default) page redirects will continue to
- * function even if a non-fatal error occurs.  For debugging purposes, you
- * can set this to ON so that any non-fatal error will prevent page redirection,
- * allowing you to see the errors.
- * Only turn this option on when debugging
+ * Prevent page redirections when non-fatal errors occur.
  *
- * @global integer $g_stop_on_errors
+ * If this option is turned OFF (default) page redirects will function normally,
+ * preventing display of non-fatal error messages.
+ *
+ * It should only be set to ON during development or for debugging purposes.
+ * This will prevent page redirections, allowing you to see the errors.
+ *
+ * NOTE: Non-fatal errors are those configured as DISPLAY_ERROR_INLINE in
+ * {@see $g_display_errors}.
+ *
+ * @global int $g_stop_on_errors
  */
 $g_stop_on_errors = OFF;
 
 /**
- * System logging
+ * System logging.
+ *
  * This controls the type of logging information recorded.
  * The available log channels are:
  *
@@ -4485,14 +4502,14 @@ $g_stop_on_errors = OFF;
  *
  * and can be combined using
  * {@link http://php.net/language.operators.bitwise PHP bitwise operators}
- * Refer to {@link $g_log_destination} for details on where to save the logs.
+ * Refer to {@see $g_log_destination} for details on where to save the logs.
  *
- * @global integer $g_log_level
+ * @global int $g_log_level
  */
 $g_log_level = LOG_NONE;
 
 /**
- * Specifies where the log data goes
+ * Specifies where the log data goes.
  *
  * The following five options are available:
  * - '':        The empty string means {@link http://php.net/error_log
@@ -4510,12 +4527,14 @@ $g_log_level = LOG_NONE;
 $g_log_destination = '';
 
 /**
- * Indicates the access level required for a user to see the log output
- * (if {@link $g_log_destination} is 'page').
+ * Indicates the access level required for a user to see the log output.
+ *
+	 * This is only used when {@see $g_log_destination} is 'page'.
+ *
  * Note that this threshold is compared against the user's global access level,
  * rather than the one from the currently active project.
  *
- * @global integer $g_show_log_threshold
+ * @global int $g_show_log_threshold
  */
 $g_show_log_threshold = ADMINISTRATOR;
 
