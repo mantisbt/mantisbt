@@ -4281,18 +4281,14 @@ $g_custom_headers = array();
 /**
  * Browser Caching Control.
  *
- * By default, we try to prevent the browser from caching anything.
- * $g_allow_browser_cache will defeat this for some cases.
+ * By default, we try to prevent the browser from caching anything. This setting
+ * will allow the browser to cache all pages. The upside will be better
+ * performance overall, but there may be cases where outdated information is
+ * displayed.
  *
- * Browser Page caching - This will allow the browser to cache all pages. The
- * upside will be better performance, but there may be cases where obsolete
- * information is displayed. Note that this will be bypassed (and caching is
- * allowed) for the bug report pages.
- *
- * @todo The code that references this config considers it ON if it is set (doesn't use config_get_global() / $g_global_settings)
  * @global int $g_allow_browser_cache
  */
-# $g_allow_browser_cache = ON;
+$g_allow_browser_cache = OFF;
 
 #################
 # Custom Fields #
@@ -5199,6 +5195,7 @@ $g_global_settings = array(
 	'absolute_path_default_upload_folder',
 	'admin_checks',
 	'allow_anonymous_login',
+	'allow_browser_cache',
 	'allow_permanent_cookie',
 	'allow_signup',
 	'anonymous_account',
