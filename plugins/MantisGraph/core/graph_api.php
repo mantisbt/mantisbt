@@ -573,3 +573,45 @@ function graph_date_format( $p_date ) {
 	return date( config_get( 'short_date_format' ), $p_date );
 }
 
+/**
+ * Create summary table of projects.
+ *
+ * @param array|null $p_filter Filter array.
+ *
+ * @return array
+ */
+function create_project_summary( array $p_filter = null ) {
+	$t_project_id = helper_get_current_project();
+	$t_user_id = auth_get_current_user_id();
+	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
+
+	$t_query_cat = new DBQuery();
+	$t_sql = 'SELECT id, name FROM {project} ';
+	$t_query_cat->sql( $t_sql );
+	$t_query_cat->bind( 'all_projects', ALL_PROJECTS );
+
+	$t_metrics = array();
+	$t_query_cnt = new DBQuery();
+	$t_query_cnt->sql( 'SELECT COUNT(*) FROM {bug} WHERE project_id = :proj_id AND ' . $t_specific_where );
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_query_cnt->append_sql( ' AND {bug}.id IN :filter' );
+		$t_query_cnt->bind( 'filter', $t_subquery );
+	}
+
+	while( $t_row = $t_query_cat->fetch() ) {
+		$t_proj_name = $t_row['name'];
+		$t_proj_id = $t_row['id'];
+		$t_query_cnt->bind( 'proj_id', (int)$t_proj_id );
+		$t_query_cnt->execute();
+		$t_bugcount = (int)$t_query_cnt->value();
+
+		if( isset( $t_metrics[$t_proj_name] ) ) {
+			$t_metrics[$t_proj_name] = $t_metrics[$t_proj_name] + $t_bugcount;
+		} elseif( $t_bugcount > 0 ) {
+			$t_metrics[$t_proj_name] = $t_bugcount;
+		}
+	}
+
+	return $t_metrics;
+}
