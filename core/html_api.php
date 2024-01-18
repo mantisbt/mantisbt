@@ -694,7 +694,23 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 		# Plugins menu items - these are html hyperlinks (<a> tags)
 		# The plugin is responsible for setting the 'active' class as appropriate
 		foreach( plugin_menu_items( $p_event ) as $t_item ) {
-			echo $t_item;
+			if( is_array( $t_item ) ) {
+				$t_active = $p_current_page && strpos( $t_item['url'], $p_current_page ) !== false
+					? 'active' : '';
+				$t_icon = array_key_exists( 'icon', $t_item )
+					? icon_get( $t_item['icon'] ) . '&nbsp;'
+					: '';
+
+				printf( $t_btn_template,
+					$t_active,
+					$t_item['url'],
+					$t_icon,
+					lang_get_defaulted( $t_item['label'] )
+				);
+			} else {
+				# Cooked link
+				echo $t_item;
+			}
 		}
 
 		echo '</div></div>', "\n";
