@@ -83,6 +83,43 @@ function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_mes
 	echo '</tr>' . "\n";
 }
 
+/**
+ * @param $p_db_type
+ * @return void
+ */
+function print_db_support_tests( $p_db_type ): void {
+	print_test( 'Checking PHP support for database type',
+		db_check_database_support( $p_db_type ),
+		true,
+		'Database is not supported by PHP. Check that it has been compiled into your server.'
+	);
+
+	switch( $p_db_type ) {
+		case 'mssql':
+			print_test( 'Checking PHP support for Microsoft SQL Server driver',
+				BAD,
+				true,
+				'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead'
+			);
+			break;
+		case 'mysql':
+			# Legacy mysql driver
+			print_test( 'Checking PHP support for MySQL driver',
+				BAD,
+				true,
+				'mysql driver is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0.0. The driver is no longer supported by MantisBT, please use mysqli instead'
+			);
+			break;
+		case 'mysqli':
+			print_test( 'Checking PHP support for MySQL Native Driver',
+				function_exists( 'mysqli_stmt_get_result' ),
+				true,
+				'Check that the MySQL Native Driver (mysqlnd) has been compiled into your server.'
+			);
+			break;
+	}
+}
+
 # install_state
 #   0 = no checks done
 #   1 = server ok, get database information
@@ -249,21 +286,7 @@ if( $t_config_exists ) {
 			true,
 			'database connection settings do not exist?' );
 
-		print_test( 'Checking PHP support for database type',
-			db_check_database_support( $f_db_type ), true,
-			'database is not supported by PHP. Check that it has been compiled into your server.' );
-
-		if( $f_db_type == 'mssql' ) {
-			print_test( 'Checking PHP support for Microsoft SQL Server driver',
-				BAD, true,
-				'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead' );
-		}
-
-		if( $f_db_type == 'mysql' ) {
-			print_test( 'Checking PHP support for MySQL driver',
-				BAD, true,
-				'mysql driver is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0.0. The driver is no longer supported by MantisBT, please use mysqli instead' );
-		}
+		print_db_support_tests( $f_db_type );
 	}
 
 	/** @var ADOConnection $g_db */
@@ -359,7 +382,7 @@ if( 2 == $t_install_state ) {
 <?php
 	print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
 
-	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
+	print_db_support_tests( $f_db_type );
 
 	# ADOdb library version check
 	global $ADODB_vers;
@@ -403,6 +426,10 @@ if( 2 == $t_install_state ) {
 	?>
 </tr>
 
+<?php
+	# Don't try to connect to the DB if we have failed checks at this stage,
+	# as this probably means the DB extension is missing.
+	if( !$g_failed ) { ?>
 <!-- connect to db -->
 <tr>
 	<td>
@@ -508,6 +535,8 @@ if( 2 == $t_install_state ) {
 
 <?php
 	} # end if db open
+	} # end if failed DB checks
+	
 	if( false == $g_failed ) {
 		$t_install_state++;
 	} else {
