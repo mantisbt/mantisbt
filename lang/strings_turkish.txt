@@ -47,6 +47,7 @@
  * @author Dregad
  * @author Emperyan
  * @author Erdemaslancan
+ * @author GolyatGeri
  * @author Gorizon
  * @author Grkn gll
  * @author HakanIST
@@ -778,6 +779,7 @@ $s_reset_password_msg2 = 'Parolayı Sıfırlamak parolanın boş olmasını sıf
 $s_show_all_users = 'Hepsi';
 $s_users_unused = 'Kullanılmamış';
 $s_users_new = 'Yeni';
+$s_email_not_unique = 'E-posta adresi en az bir başka kullanıcı hesabıyla ilişkilidir';
 $s_account_reset_msg = 'Seçilen kullanıcının e-posta adresine bir onay isteği gönderildi. Bunu kullanarak kullanıcı parolayı değiştirebilecektir.';
 $s_account_reset_msg2 = 'Hesap şifresi boş olarak düzenlendi...';
 $s_account_unlock_msg = 'Hesap kilidi açıldı.';
@@ -1424,6 +1426,7 @@ $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '"%1$s" alanı daha kısa veya %2$d karakt
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API simgesi "%s" adı zaten kullanılıyor. Lütfen geri dönün ve başka bir tane seçin.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '$g_log_destination "%s" içinde belirtilen dosya yazılabilir değil.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Eklenilen kullanıcı, bu sorunu gözlemek için yeterli erişim haklarına sahip değildir.';
+$MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = '" %d " kimliğine sahip Kullanıcı API belirteci bulunamadı.';
 $s_dropzone_default_message = 'Dosyaları sürükleyip bırakarak, seçerek ve yapıştırarak ekleyin.';
 $s_dropzone_fallback_message = 'Tarayıcınız drag\'n\'drop dosya yüklemelerini desteklemiyor.';
 $s_dropzone_file_too_big = 'Dosya çok büyük ({{filesize}} MiB). Maksimum boyut: {{maxFilesize}} MiB.';
