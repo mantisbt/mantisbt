@@ -26,8 +26,7 @@
 /**
  * Includes
  */
-require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
-
+require_once 'MantisCoreBase.php';
 require_once 'MantisEnum.class.php';
 
 /**
@@ -35,7 +34,8 @@ require_once 'MantisEnum.class.php';
  * @package    Tests
  * @subpackage Enum
  */
-class MantisEnumTest extends PHPUnit_Framework_TestCase {
+class MantisEnumTest extends MantisCoreBase {
+
 	const ACCESS_LEVELS_ENUM = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
 	const ACCESS_LEVELS_ENUM_EXTRA = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator,100:missing';
 	const ACCESS_LEVELS_LOCALIZED_ENUM = '10:viewer_x,25:reporter_x,40:updater_x,55:developer_x,70:manager_x,90:administrator_x,95:extra_x';

@@ -90,11 +90,11 @@ if( !is_blank( $c_ref ) ) {
 
 		# if view_all_bug_page, pass on filter
 		if( strcasecmp( 'view_all_bug_page.php', $t_referrer_page ) == 0 ) {
-			$t_source_filter_id = filter_db_get_project_current( $f_project_id );
-			$t_redirect_url = 'view_all_set.php?type=4';
+			$t_source_filter_id = filter_db_get_project_current( $t_bottom );
+			$t_redirect_url = 'view_all_set.php?type=' . FILTER_ACTION_GENERALIZE;
 
 			if( $t_source_filter_id !== null ) {
-				$t_redirect_url = 'view_all_set.php?type=3&source_query_id=' . $t_source_filter_id;
+				$t_redirect_url = 'view_all_set.php?type=' . FILTER_ACTION_LOAD . '&source_query_id=' . $t_source_filter_id;
 			}
 		} else if( stripos( $t_referrer_page, '_page.php' ) !== false ) {
 			switch( $t_referrer_page ) {
@@ -120,11 +120,3 @@ if( !is_blank( $c_ref ) ) {
 }
 
 print_header_redirect( $t_redirect_url, true, true );
-
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin();
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();

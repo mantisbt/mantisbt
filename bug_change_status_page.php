@@ -41,8 +41,6 @@
  * @uses version_api.php
  */
 
-$g_allow_browser_cache = 1;
-
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -62,6 +60,8 @@ require_api( 'relationship_api.php' );
 require_api( 'sponsorship_api.php' );
 require_api( 'version_api.php' );
 
+require_css( 'status_config.php' );
+
 $f_bug_id = gpc_get_int( 'id' );
 $t_bug = bug_get( $f_bug_id );
 
@@ -69,7 +69,6 @@ $t_file = __FILE__;
 $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $t_show_page_header = false;
 $t_force_readonly = true;
-$t_fields_config_option = 'bug_change_status_page_fields';
 
 if( $t_bug->project_id != helper_get_current_project() ) {
 	# in case the current project is not the same project of the bug we are viewing...
@@ -109,11 +108,11 @@ if( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 	}
 
 	if( $f_handler_id != NO_USER ) {
-		if( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
+		# The new handler is checked at project level
+		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
 			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
 		}
-
-		if( $t_bug_sponsored && !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
+		if( $t_bug_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
 			trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
 		}
 	}
@@ -153,6 +152,9 @@ layout_page_begin();
 			<?php
 				if( $f_new_status >= $t_resolved ) {
 					if( relationship_can_resolve_bug( $f_bug_id ) == false ) {
+						if( OFF == config_get( 'allow_parent_of_unresolved_to_close' ) ) {
+							trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
+						}
 						echo '<tr><td colspan="2">' . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . '</td></tr>';
 					}
 				}
@@ -245,7 +247,7 @@ layout_page_begin();
 				data-picker-locale="<?php lang_get_current_datetime_locale() ?>"
 				data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
 				<?php helper_get_tab_index() ?> value="<?php echo $t_date_to_display ?>" />
-			<i class="fa fa-calendar fa-xlg datetimepicker"></i>
+			<?php print_icon( 'fa-calendar', 'fa-xlg datetimepicker' ); ?>
 		</td>
 	</tr>
 
@@ -276,12 +278,26 @@ layout_page_begin();
 		$t_display = $t_def['display_' . $t_custom_status_label];
 		$t_require = $t_def['require_' . $t_custom_status_label];
 
-		if( ( 'update' == $t_custom_status_label ) && ( !$t_require ) ) {
+		$t_show_custom_field = $t_require;
+
+		if( !$t_show_custom_field ) {
+			if( in_array( $t_custom_status_label, array( 'resolved', 'closed' ) ) && $t_display ) {
+				$t_show_custom_field = true;
+			} else {
+				$t_plugin_Event_result = event_signal( 'EVENT_UPDATE_BUG_SHOW_CUSTOM_FIELD', array( $t_bug, $t_id ) );
+				foreach( $t_plugin_Event_result as $t_event_result ) {
+					if( in_array( true, $t_event_result ) ) {
+						$t_show_custom_field = true;
+						break;
+					}
+				}
+			}
+		}
+
+		if( !$t_show_custom_field ) {
 			continue;
 		}
-		if( in_array( $t_custom_status_label, array( 'resolved', 'closed' ) ) && !( $t_display || $t_require ) ) {
-			continue;
-		}
+
 		$t_has_write_access = custom_field_has_write_access( $t_id, $f_bug_id );
 ?>
 	<tr>
@@ -352,7 +368,7 @@ layout_page_begin();
 			<label class="lbl padding-6" for="bugnote_add_view_status"><?php echo lang_get( 'private' ) ?></label>
 <?php
 		} else {
-			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+			echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
 		}
 ?>
 				</td>

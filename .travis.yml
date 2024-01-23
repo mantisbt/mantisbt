@@ -3,40 +3,56 @@
 # -----------------------------------------------------------------------------
 
 language: php
+os: linux
+dist: bionic
 
 # -----------------------------------------------------------------------------
 # Environment setup and test scripts execution
 #
 
-before_install:
-  # If PHP >= 7.0, force use of PHPunit 5.7
-  - if php -r "exit( (int)! version_compare( '$TRAVIS_PHP_VERSION', '7.0', '>=' ) );"; then mkdir -p ~/bin && wget -O ~/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar && chmod +x ~/bin/phpunit; fi
+services:
+  - postgresql
+  - mysql
+
+install:
+  - composer install
 
 before_script:
-  - ./scripts/travis_before_script.sh
+  # sendmail replacement
+  - chmod +x "$TRAVIS_BUILD_DIR/tests/fakesendmail.sh"
+  - echo 'sendmail_path = $TRAVIS_BUILD_DIR/tests/fakesendmail.sh' > ./tests/sendmail.ini
+  - phpenv config-add ./tests/sendmail.ini
+
+  # MantisBT setup
+  - ./build/travis_before_script.sh
 
 script:
-  - ./scripts/travis_script.sh
+  - ./build/travis_script.sh
 
 # -----------------------------------------------------------------------------
 # What to build, and on which platforms
 #
 
+branches:
+  only:
+    - master
+    - /master-[0-9.]+/
+
 php:
-  - 5.5
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
+  - 8.2
+  - 8.1
+  - 8.0
+  - 7.4
 
 env:
   - DB=mysql
   - DB=pgsql
 
-matrix:
+jobs:
   include:
     # Add a specific build for Documentation
-    - env: DOCBOOK=1
+    - name: Documentation
+      env: DOCBOOK=1
       # Using Ruby as it's preinstalled and we don't need PHP to build docs
       language: ruby
       addons:
@@ -44,8 +60,7 @@ matrix:
           packages:
             - publican
 
-  allow_failures:
-    - php: 7.2
+  allow_failures: []
 
 
 # -----------------------------------------------------------------------------

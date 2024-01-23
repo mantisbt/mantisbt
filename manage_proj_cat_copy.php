@@ -51,6 +51,7 @@ $f_project_id		= gpc_get_int( 'project_id' );
 $f_other_project_id	= gpc_get_int( 'other_project_id' );
 $f_copy_from		= gpc_get_bool( 'copy_from' );
 $f_copy_to			= gpc_get_bool( 'copy_to' );
+$f_exclude_inherited = gpc_get_bool( 'exclude_inherited' );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_other_project_id );
@@ -62,10 +63,10 @@ if( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	trigger_error( ERROR_CATEGORY_NO_ACTION, ERROR );
+	trigger_error( ERROR_NO_COPY_ACTION, ERROR );
 }
 
-$t_rows = category_get_all_rows( $t_src_project_id );
+$t_rows = category_get_all_rows( $t_src_project_id, !$f_exclude_inherited );
 
 foreach ( $t_rows as $t_row ) {
 	$t_name = $t_row['name'];
@@ -80,7 +81,7 @@ form_security_purge( 'manage_proj_cat_copy' );
 if( $f_project_id == ALL_PROJECTS ) {
 	$t_redirect_url = 'manage_proj_page.php';
 } else {
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#categories';
 }
 
 print_header_redirect( $t_redirect_url );

@@ -162,8 +162,3 @@ foreach( $t_developer_directories as $t_developer_directory ) {
 		array( false => 'The ' . $t_developer_directory . ' directory within the MantisBT root is for development use and is not included in official releases of MantisBT.' )
 	);
 }
-
-check_print_test_warn_row(
-	'Directory <em><a href="' . htmlentities( config_get_global( 'short_path' ) ) . 'api">api</a></em> should be removed from the MantisBT root if you do not plan on using <a href="http://en.wikipedia.org/wiki/SOAP">SOAP</a>',
-	!is_dir( $t_paths['absolute_path']['config_value'] . 'api' )
-);

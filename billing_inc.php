@@ -102,72 +102,61 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <div class="col-md-12 col-xs-12">
 <div id="time_tracking_stats" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 <div class="widget-header widget-header-small">
-    <h4 class="widget-title lighter">
-        <i class="ace-icon fa fa-clock-o"></i>
-        <?php echo lang_get( 'time_tracking' ) ?>
-    </h4>
+	<h4 class="widget-title lighter">
+		<?php print_icon( 'fa-clock-o', 'ace-icon' ); ?>
+		<?php echo lang_get( 'time_tracking' ) ?>
+	</h4>
 	<div class="widget-toolbar">
 		<a data-action="collapse" href="#">
-			<i class="1 ace-icon <?php echo $t_block_icon ?> fa bigger-125"></i>
+			<?php print_icon( $t_block_icon, 'ace-icon 1 bigger-125' ); ?>
 		</a>
 	</div>
 </div>
 
-
 <div class="widget-body">
 <form method="post" action="">
+	<div class="widget-main">
 	<input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
-	<table class="width100" cellspacing="0">
-		<tr class="row-2">
-			<td class="category" width="25%">
-				<?php
-					$t_filter = array();
-					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] = $t_bugnote_stats_from_y;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] = $t_bugnote_stats_to_d;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] = $t_bugnote_stats_to_m;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] = $t_bugnote_stats_to_y;
-					filter_init( $t_filter );
-					print_filter_do_filter_by_date( true );
-				?>
-			</td>
-		</tr>
+		<?php
+			$t_filter = array();
+			$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
+			$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
+			$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
+			$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] = $t_bugnote_stats_from_y;
+			$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] = $t_bugnote_stats_to_d;
+			$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] = $t_bugnote_stats_to_m;
+			$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] = $t_bugnote_stats_to_y;
+			filter_init( $t_filter );
+			print_filter_do_filter_by_date( true );
+		?>
+
 <?php
 	if( $t_cost_col ) {
 ?>
-		<tr class="row-1">
-			<td>
-				<?php echo lang_get( 'time_tracking_cost_per_hour_label' ) ?>
-				<input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />
-			</td>
-		</tr>
+		<div class="space-6"></div>
+		<?php echo lang_get( 'time_tracking_cost_per_hour_label' ) ?>
+		<input type="text" name="bugnote_cost" class="input-sm" value="<?php echo $f_bugnote_cost ?>" />
 <?php
 	}
 ?>
 <?php
 	if( $f_project_id != ALL_PROJECTS ) {
 ?>
-		<tr class="row-1">
-			<td>
-				<input type="checkbox" name="include_subprojects" value="1" <?php check_checked( $f_include_subprojects, true ); ?> />
-				<?php echo lang_get( 'subprojects' ) ?>
-			</td>
-		</tr>
+		<div class="space-6"></div>
+		<label>
+			<input type="checkbox" name="include_subprojects" class="ace"
+				   <?php check_checked( $f_include_subprojects, true ); ?> />
+			<span class="lbl padding-6"><?php echo lang_get( 'subprojects' ) ?></span>
+		</label>
 <?php
 	}
 ?>
-		<tr>
-			<td class="center" colspan="2">
-				<input type="submit" class="button btn-primary btn-xs btn-round noprint"
-					name="get_bugnote_stats_button"
-					value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>"
-				/>
-			</td>
-		</tr>
-	</table>
-</form>
+	</div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<input name="get_bugnote_stats_button" class="btn btn-primary btn-sm btn-white btn-round"
+			value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" type="submit">
+	</div>
+	</form>
 </div>
 </div>
 
@@ -190,18 +179,19 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		);
 
 		foreach( $t_exports as $t_export_label => $t_export_page ) {
-			echo '[ <a href="' . $t_export_page . '?';
+			echo '<a class="btn btn-primary btn-sm btn-white btn-round" ';
+			echo ' <a href="' . $t_export_page . '?';
 			echo 'from=' . $t_from . '&amp;to=' . $t_to;
 			echo '&amp;cost=' . $f_bugnote_cost;
 			echo '&amp;project_id=' . $f_project_id;
 			echo '&amp;include_subprojects=' . $f_include_subprojects;
-			echo '">' . lang_get( $t_export_label ) . '</a> ] ';
+			echo '">' . lang_get( $t_export_label ) . '</a>';
 		}
 
 		echo '</div><br />';
 
 ?>
-<div class="space-10"></div>
+<div class="space-6"></div>
 <div class="table-responsive">
 <table class="table table-bordered table-condensed table-striped">
 	<tr>
@@ -221,8 +211,15 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <?php
 		foreach ( $t_bugnote_stats['issues'] as $t_issue_id => $t_issue ) {
 			$t_project_info = ( !isset( $f_bug_id ) && ( $f_project_id == ALL_PROJECTS || $f_include_subprojects ) ) ? '[' . project_get_name( $t_issue['project_id'] ) . ']' . lang_get( 'word_separator' ) : '';
-			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_issue_id ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display( $t_issue['summary'] );
+			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_issue_id ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display_line( $t_issue['summary'] );
 			echo '<tr class="row-category-history"><td colspan="4">' . $t_link . '</td></tr>';
+
+			uksort(
+				$t_issue['users'],
+				function ( $a, $b ) {
+					return strcasecmp( user_get_name( $a ), user_get_name( $b ) );
+				}
+			);
 
 			foreach( $t_issue['users'] as $t_user_id => $t_user_info ) {
 ?>
@@ -259,7 +256,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</tr>
 </table>
 
-<div class="space-10"></div>
+<div class="space-6"></div>
 
 <div class="table-responsive">
 <table class="table table-bordered table-condensed table-striped">
@@ -278,6 +275,13 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</tr>
 
 <?php
+	uksort(
+		$t_bugnote_stats['users'],
+		function ( $a, $b ) {
+			return strcasecmp( user_get_name( $a ), user_get_name( $b ) );
+		}
+	);
+
 	foreach ( $t_bugnote_stats['users'] as $t_user_id => $t_user_info ) {
 ?>
 	<tr>

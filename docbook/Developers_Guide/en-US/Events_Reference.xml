@@ -175,6 +175,18 @@
 					for more details.
 				</para>
 			</blockquote>
+
+			<blockquote id="dev.eventref.cronjob">
+				<title>EVENT_CRONJOB (Execute)</title>
+
+				<blockquote>
+					<para>
+						This is an event that is triggered by the scripts/cronjob.php on
+						some recurring schedule (once an hour is recommended). Plugins
+						handle this event to execute recurring tasks.
+					</para>
+				</blockquote>
+			</blockquote>
 		</blockquote>
 	</section>
 

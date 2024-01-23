@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,25 +33,28 @@
 /** Japanese (日本語)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Aotake
  * @author Fryed-peach
+ * @author Gulpin
  * @author Mirinano
  * @author Omotecho
  * @author Shirayuki
  */
 
-$s_plugin_format_title = 'MantisBT フォーマティング';
+$s_plugin_format_title = 'MantisBT フォーマッティング';
 $s_plugin_format_description = '公式のテキストの処理および整形のプラグイン。';
 $s_plugin_format_config = '設定';
 $s_plugin_format_process_text = 'テキスト処理';
 $s_plugin_format_process_text_warning_notice = '何をしているかを完全には理解していない場合は OFF にしないでください。OFF の状態ではクロス サイト スクリプティング (XSS) 攻撃ができてしまいます。';
 $s_plugin_format_process_urls = 'URL 処理';
 $s_plugin_format_process_buglinks = 'MantisBT 内部リンク (課題と課題コメント)';
-$s_plugin_format_process_buglinks_info = 'あなたの設定により<em>Issue</em>タグは「<literal>%s</literal>」と、<em>Issue Note</em>タグは「<literal>%s</literal>」と定義されました。';
+$s_plugin_format_process_buglinks_info = 'あなたの設定により<em>Issue</em>タグは「%s」と、<em>Issue Note</em>タグは「%s」と定義されました。';
+$s_plugin_format_process_markdown = 'Markdown処理';
+$s_plugin_format_process_markdown_info = 'Markdownをサポートし、スタイル付けすることができます。MarkdownはHTMLに変換できるように設計されたテキスト形式です。';
 $s_plugin_format_enabled = 'ON';
 $s_plugin_format_disabled = 'OFF';

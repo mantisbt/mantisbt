@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Catalan (català)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -42,24 +42,25 @@
  * @author Dtamajon
  * @author Fitoschido
  * @author Jaumeortola
+ * @author Mguix
  * @author Paucabot
  */
 
-$s_plugin_graph_title = 'Gràfics de Mantis';
-$s_plugin_graph_description = 'Plugin de gràfics oficial.';
 $s_plugin_MantisGraph_title = 'Gràfics de Mantis';
+$s_plugin_MantisGraph_description = 'Plugin de gràfics oficial.';
 $s_plugin_MantisGraph_config = 'Configuració';
-$s_plugin_MantisGraph_synthesis_link = 'Síntesi';
+$s_plugin_MantisGraph_tab_label = 'Diagrames';
 $s_plugin_MantisGraph_status_link = 'Per Estat';
 $s_plugin_MantisGraph_priority_link = 'Per Prioritat';
 $s_plugin_MantisGraph_severity_link = 'Per Severitat';
 $s_plugin_MantisGraph_category_link = 'Per Categoria';
 $s_plugin_MantisGraph_resolution_link = 'Per Resolució';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Gràfics per l\'Estat';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Gràfics per Prioritat';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Gràfics per Gravetat';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Gràfics per Categoria';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Gràfics per Resolució';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Per Gràfics d\'Estat';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Per Gràfics de Prioritat';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Per Gràfics de Gravetat';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Per Gràfics de Categoria';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Per Gràfics de Resolució';
+$s_plugin_MantisGraph_graph_developer_title = 'Per Gràfics de Desenvolupador';
 $s_plugin_MantisGraph_by_status_pct = 'percentatge per Estat';
 $s_plugin_MantisGraph_by_priority_pct = 'percentatge per Prioritat';
 $s_plugin_MantisGraph_by_severity_pct = 'percentatge per Gravetat';
@@ -83,3 +84,4 @@ $s_plugin_MantisGraph_period_year_to_date = 'Aquest any';
 $s_plugin_MantisGraph_period_select = 'Dates arbitràries';
 $s_plugin_MantisGraph_period_last_year = 'L\'últim any';
 $s_plugin_MantisGraph_graph_page = 'Historial gràfic de la comanda';
+$s_plugin_MantisGraph_other_categories = 'altres categories (%d)';

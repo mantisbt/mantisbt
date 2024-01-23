@@ -81,20 +81,19 @@ abstract class MantisColumn {
 	abstract public function display( BugData $p_bug, $p_columns_target );
 
 	/**
-	 * Function to return column value for a given bug row.  This should be overridden
-	 * to provide value without processing for html display or escaping for a specific target
-	 * output.  Default implementation is to capture display output for backward compatibility
-	 * with target COLUMNS_TARGET_CSV_PAGE.  The output will be escaped by calling code to the
-	 * appropriate format.
-	 *
+	 * Function to return column value for a given bug row.
+	 * This should be overridden to provide value without processing for html
+	 * display or escaping for a specific target output. The output will be
+	 * escaped by calling code to the appropriate format.
+	 * Default implementation is to capture display output, for backward
+	 * compatibility with target COLUMNS_TARGET_CSV_PAGE.
 	 * @param BugData $p_bug            A BugData object.
 	 * @param integer $p_columns_target Column display target.
 	 * @return string The column value.
 	 */
-	public function value( BugData $p_bug, $p_columns_target ) {
+	public function value( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_CSV_PAGE ) {
 		ob_start();
-		$this->display( $p_bug, COLUMNS_TARGET_CSV_PAGE );
+		$this->display( $p_bug, $p_columns_target );
 		return ob_get_clean();
 	}
 }
-

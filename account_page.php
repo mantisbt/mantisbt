@@ -74,14 +74,10 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-$t_account_verification = defined( 'ACCOUNT_VERIFICATION_INC' );
-
 #============ Permissions ============
 auth_ensure_user_authenticated();
 
-if( !$t_account_verification ) {
-	auth_reauthenticate();
-}
+auth_reauthenticate();
 
 current_user_ensure_unprotected();
 
@@ -134,7 +130,7 @@ print_account_menu( 'account_page.php' );
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-user"></i>
+			<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 			<?php echo lang_get( 'edit_account_title' ) ?>
 		</h4>
 	</div>
@@ -176,39 +172,33 @@ print_account_menu( 'account_page.php' );
 				<td>
 					<?php echo string_display_line( $u_username ) ?>
 				</td>
-			</tr><?php
-			# When verifying account, set a token and don't display current password
-			if( $t_account_verification ) {
-				token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
-			} else {
-				# If the current password is blank, do not require the field
-				# so the user can reset the password (#23507)
-				$t_required = auth_does_password_match( $u_id, '' ) ? '' : 'required';
+			</tr>
+			<?php
+			    $t_required = $t_force_pw_reset ? 'required' : '';
+			    $t_class = $t_force_pw_reset ? 'class="required"' : '';
 			?>
 			<tr>
 				<td class="category">
-					<span class="<?php echo $t_required ?>"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
+					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
 				</td>
 				<td>
 					<input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
 				</td>
 			</tr>
-			<?php
-			} ?>
 			<tr>
 				<td class="category">
-					<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'new_password' ) ?>
+					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'new_password' ) ?>
 				</td>
 				<td>
-					<input class="input-sm" id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" required />
+					<input class="input-sm" id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
 				</td>
 			</tr>
 			<tr>
 				<td class="category">
-					<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'confirm_password' ) ?>
+					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'confirm_password' ) ?>
 				</td>
 				<td>
-					<input class="input-sm" id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" required />
+					<input class="input-sm" id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
 				</td>
 			</tr>
 			<?php
@@ -219,18 +209,28 @@ print_account_menu( 'account_page.php' );
 				</td>
 				<td>
 				<?php
-				if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+				if( $t_ldap && ON == config_get_global( 'use_ldap_email' ) ) {
 					# With LDAP
 					echo string_display_line( $u_email );
 				} else {
 					# Without LDAP
 					$t_show_update_button = true;
 					print_email_input( 'email', $u_email );
+					if( config_get_global( 'email_ensure_unique' )
+						&& !user_is_email_unique( $u_email, $u_id )
+					) {
+						echo '<span class="padding-8">';
+						print_icon('fa-exclamation-triangle',
+							'ace-icon bigger-125 red padding-right-4'
+						);
+						echo lang_get( 'email_not_unique' );
+						echo '</span>';
+					}
 				} ?>
 				</td>
 			</tr>
 			<tr><?php
-				if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+				if( $t_ldap && ON == config_get_global( 'use_ldap_realname' ) ) {
 					# With LDAP
 					echo '<td class="category">' . lang_get( 'realname' ) . '</td>';
 					echo '<td>';
@@ -285,7 +285,7 @@ if( !empty( $t_projects ) ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-puzzle-piece"></i>
+				<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
 				<?php echo lang_get( 'assigned_projects' ) ?>
 			</h4>
 		</div>

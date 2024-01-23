@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Slovak (slovenčina)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -41,6 +41,7 @@
  * @author Kusavica
  * @author Rudko
  * @author Wizzard
+ * @author Yardom78
  */
 
 $s_plugin_format_title = 'Formátovanie MantisBT';
@@ -50,5 +51,8 @@ $s_plugin_format_process_text = 'Textové Spracovanie';
 $s_plugin_format_process_text_warning_notice = 'Nevypínajte, ak naozaj neviete, čo robíte. Vo vypnutom stave hrozia útoky typu cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'URL Spracovanie';
 $s_plugin_format_process_buglinks = 'MantisBT - interné odkazy (Problém a poznámka o probléme)';
+$s_plugin_format_process_buglinks_info = 'Vaša konfigurácia definuje značku <em>problému</em> ako "%s" a značku <em>problému</em> ako "%s"';
+$s_plugin_format_process_markdown = 'Spracovanie markdown';
+$s_plugin_format_process_markdown_info = 'Štylizovanie pomocou Markown umožňuje formátovanie dizajnu syntaxu tak, aby mohol byť konvertovaný do HTML.';
 $s_plugin_format_enabled = 'Zapnuté';
 $s_plugin_format_disabled = 'Vypnuté';

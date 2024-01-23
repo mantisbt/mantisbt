@@ -38,12 +38,12 @@ class XmlImportExportPlugin extends MantisPlugin {
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = array(
-			'MantisCore' => '2.0.0',
+			'MantisCore' => '2.25.0',
 		);
 
 		$this->author = 'MantisBT Team';
 		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
-		$this->url = 'http://www.mantisbt.org';
+		$this->url = 'https://mantisbt.org';
 	}
 
 	/**

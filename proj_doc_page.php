@@ -117,66 +117,76 @@ print_doc_menu( 'proj_doc_page.php' );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-file"></i>
+		<?php print_icon( 'fa-file', 'ace-icon' ); ?>
 		<?php echo lang_get('project_documentation_title') ?>
 	</h4>
 </div>
 
 <div class="widget-body">
-<div class="widget-main">
+<div class="widget-main no-padding">
 <div class="table-responsive">
 <table class="table table-bordered table-condensed table-striped">
-<tr>
-	<th><?php echo lang_get( 'filename' ); ?></th>
-	<th><?php echo lang_get( 'description' ); ?></th>
-</tr>
-
+	<thead>
+		<tr>
+			<th><?php echo lang_get( 'filename' ); ?></th>
+			<th><?php echo lang_get( 'description' ); ?></th>
+			<th><?php echo lang_get( 'project_name' ); ?></th>
+			<th><?php echo lang_get( 'date_created' ); ?></th>
+			<th><?php echo lang_get( 'actions' ); ?></th>
+		</tr>
+	</thead>
 <?php
+$t_form_token_delete = form_security_token( 'proj_doc_delete' );
+
 $i = 0;
 while( $t_row = db_fetch_array( $t_result ) ) {
 	$i++;
 	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-	$v_filesize = number_format( $v_filesize );
-	$v_title = string_display( $v_title );
-	$v_description = string_display_links( $v_description );
-	$v_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
-
+	$t_download_url = "file_download.php?file_id=$v_id&amp;type=doc";
+	$t_filesize = number_format( $v_filesize ) . ' ' . lang_get( 'bytes' );
+	$t_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
 ?>
 <tr>
 	<td>
-		<span class="floatleft">
-<?php
-	$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
-	echo $t_href;
-	print_file_icon( $v_filename );
-	echo '</a>&#160;' . $t_href . $v_title . '</a> (' . $v_filesize . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
-?>
-			<br />
-			<span class="small">
-<?php
-	if( $v_project_id == ALL_PROJECTS ) {
-		echo lang_get( 'all_projects' ) . '<br />';
-	} else if( $v_project_id != $f_project_id ) {
-		$t_project_name = project_get_name( $v_project_id );
-		echo $t_project_name . '<br />';
-	}
-	echo '(' . $v_date_added . ')';
-?>
-			</span>
-		</span>
-		<span class="floatright">
-<?php
-	if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
-		echo '&#160;';
-		print_form_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
-		echo '&#160;';
-		print_form_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
-	}
-?>
-		</span>
+		<a href="<?php echo $t_download_url ?>">
+			<?php print_file_icon( $v_filename ); ?>
+		</a>
+		<?php
+			/** @noinspection HtmlUnknownTarget */
+			printf( '<a href="%s">%s</a> (%s)',
+				$t_download_url,
+				string_display_line( $v_title ),
+				$t_filesize
+			);
+		?>
 	</td>
 	<td>
-		<?php echo $v_description ?>
+		<?php echo string_display_links( $v_description ); ?>
+	</td>
+	<td>
+		<?php
+			if( $v_project_id == ALL_PROJECTS ) {
+				echo lang_get( 'all_projects' );
+			} elseif( $v_project_id != $f_project_id ) {
+				echo string_attribute( project_get_name( $v_project_id ) );
+			}
+		?>
+	</td>
+	<td>
+		<?php echo $t_date_added; ?>
+	</td>
+	<td class="center">
+<?php
+		if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
+			print_link_button( 'proj_doc_edit_page.php?file_id=' . $v_id, lang_get( 'edit' ), 'btn-xs' );
+			echo '&#160;';
+			print_form_button( 'proj_doc_delete.php',
+				lang_get( 'delete' ),
+				['file_id' => $v_id],
+				$t_form_token_delete
+			);
+		}
+?>
 	</td>
 </tr>
 <?php

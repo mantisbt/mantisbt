@@ -23,6 +23,16 @@
  */
 var g_collapse_clear = 1;
 
+/**
+ * MantisBT config options.
+ * Initialized in javascript_config.php
+ * @property {string} config.collapse_settings_cookie
+ * @property {string} config.cookie_path
+ * @property {string} config.cookie_domain
+ * @property {string} config.cookie_samesite
+ */
+/* global config */
+
 // global code to determine how to set visibility
 var a = navigator.userAgent.indexOf("MSIE");
 var style_display;
@@ -35,70 +45,139 @@ if (a!= -1) {
 style_display = 'block';
 
 $(document).ready( function() {
-    $('.collapse-open').show();
-    $('.collapse-closed').hide();
-    $('.collapse-link').click( function(event) {
-        event.preventDefault();
-        var id = $(this).attr('id');
-        var t_pos = id.indexOf('_closed_link' );
-        if( t_pos == -1 ) {
-            t_pos = id.indexOf('_open_link' );
-        }
-        var t_div = id.substring(0, t_pos );
-        ToggleDiv( t_div );
-    });
-
-    var options = {
-    	valueNames: [ 'project-link' ]
-    };
-    var list = new List('projects-list', options);
-    if(list.items.length <= 10) {
-    	$('#projects-list .searchbox').hide();
-    }
-
-    $('.widget-box').on('shown.ace.widget' , function(event) {
-       var t_id = $(this).attr('id');
-       var t_cookie = GetCookie( "collapse_settings" );
-        if ( 1 == g_collapse_clear ) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        t_cookie = t_cookie.replace("|" + t_id + ":1", '' );
-        t_cookie = t_cookie + "|" + t_id + ":0";
-        SetCookie( "collapse_settings", t_cookie );
+	$('.collapse-open').show();
+	$('.collapse-closed').hide();
+	$('.collapse-link').click( function(event) {
+		event.preventDefault();
+		var id = $(this).attr('id');
+		var t_pos = id.indexOf('_closed_link' );
+		if( t_pos == -1 ) {
+			t_pos = id.indexOf('_open_link' );
+		}
+		var t_div = id.substring(0, t_pos );
+		ToggleDiv( t_div );
 	});
 
-    $('.widget-box').on('hidden.ace.widget' , function(event) {
-        var t_id = $(this).attr('id');
-        var t_cookie = GetCookie( "collapse_settings" );
-        if ( 1 == g_collapse_clear ) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        t_cookie = t_cookie.replace( "|" + t_id + ":0", '' );
-        t_cookie = t_cookie + "|" + t_id + ":1";
-        SetCookie( "collapse_settings", t_cookie );
-    });
+	/**
+	 * Manage the navbar project menu initializacion and events
+	 * for focus and key presses.
+	 */
 
-    $('#sidebar.sidebar-toggle').on('click', function (event) {
-        var t_id = $(this).attr('id');
-        var t_cookie = GetCookie("collapse_settings");
-        if (1 == g_collapse_clear) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        if( $(this).parent().hasClass( "menu-min" ) ) {
-            t_cookie = t_cookie.replace("|" + t_id + ":1", '');
-            t_cookie = t_cookie + "|" + t_id + ":0";
-        } else {
-            t_cookie = t_cookie.replace("|" + t_id + ":0", '');
-            t_cookie = t_cookie + "|" + t_id + ":1";
-        }
-        SetCookie("collapse_settings", t_cookie);
-    });
+	/* initialize the list */
+	var projects_list_options = {
+		valueNames: [ 'project-link' ]
+	};
+	var listprojects = new List('projects-list', projects_list_options);
+	if( listprojects.items.length <= 10 ) {
+		$('#projects-list .projects-searchbox').hide();
+	}
 
-    $('input[type=text].typeahead').each(function() {
-        var $this = $(this);
+	/**
+	 * Events to manage focus when displaying the dropdown.
+	 * - Focus on the active item to position the scrollable list on that item.
+	 * - If there is no items to show, focus on the search box.
+	 */
+	$(document).on('shown.bs.dropdown', '#dropdown_projects_menu', function() {
+		var li_active = $(this).find('.dropdown-menu li.active a');
+		if( li_active.length ) {
+			li_active.focus();
+		} else {
+			$('#projects-list .search').focus();
+		}
+	});
+
+	/**
+	 * When pressing a key in the search box, targeted at navigating the list,
+	 * switch focus to the list.
+	 * When pressing Escape, close the dropdown.
+	 */
+	$('#projects-list .search').keydown( function(event){
+		switch (event.key) {
+			case 'ArrowDown':
+			case 'ArrowUp':
+			case 'Down':
+			case 'Up':
+			case 'PageDown':
+			case 'PageUp':
+				var list = $('#projects-list .list');
+				if( list.find('li.active').length ) {
+					list.find('li.active a').focus();
+				} else {
+					list.find('li a').first().focus();
+				}
+				break;
+			case 'Escape':
+				$('#dropdown_projects_menu').removeClass('open');
+		}
+	});
+
+	/**
+	 * When pressing a key in the list, which is not targeted at navigating the list,
+	 * for example, typing a string, toggle focus to the search box.
+	 */
+	$('#projects-list .list').keydown( function(event){
+		switch (event.key) {
+			case 'Enter':
+			case 'ArrowDown':
+			case 'ArrowUp':
+			case 'Down':
+			case 'Up':
+			case 'PageDown':
+			case 'PageUp':
+			case 'Home':
+			case 'End':
+				return;
+		}
+		$('#projects-list .search').focus();
+	});
+
+	$('.widget-box').on('shown.ace.widget' , function(event) {
+		var t_id = $(this).attr('id');
+		var t_cookie = GetCookie( config.collapse_settings_cookie );
+		if ( 1 == g_collapse_clear ) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		}
+		t_cookie = t_cookie.replace("|" + t_id + ":1", '' );
+		t_cookie = t_cookie + "|" + t_id + ":0";
+		SetCookie( config.collapse_settings_cookie, t_cookie );
+	});
+
+	$('.widget-box').on('hidden.ace.widget' , function(event) {
+		var t_id = $(this).attr('id');
+		var t_cookie = GetCookie( config.collapse_settings_cookie );
+		if ( 1 == g_collapse_clear ) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		}
+		t_cookie = t_cookie.replace( "|" + t_id + ":0", '' );
+		t_cookie = t_cookie + "|" + t_id + ":1";
+		SetCookie( config.collapse_settings_cookie, t_cookie );
+	});
+
+	$('#sidebar-btn.sidebar-toggle').on('click', function (event) {
+		var t_cookie;
+		var t_sidebar = $(this).closest('.sidebar');
+		var t_id = t_sidebar.attr('id');
+
+		if (1 == g_collapse_clear) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		} else {
+			// Get collapse state and remove the old value
+			t_cookie = GetCookie(config.collapse_settings_cookie);
+			t_cookie = t_cookie.replace(new RegExp('\\|' + t_id + ':.'), '');
+		}
+
+		// Save the new collapse state
+		var t_value = !t_sidebar.hasClass("menu-min") | 0;
+		t_cookie += '|' + t_id + ':' + t_value;
+
+		SetCookie(config.collapse_settings_cookie, t_cookie);
+	});
+
+	$('input[type=text].typeahead').each(function() {
+		var $this = $(this);
 		$(this).typeahead({
 			minLength: 1,
 			highlight: true
@@ -107,12 +186,12 @@ $(document).ready( function() {
 				var params = {};
 				params['field'] = $this[0].id;
 				params['prefix'] = query;
-				$.getJSON('api/rest/internal/autocomplete', params, function (data) {
+				$.getJSON('api/rest/index.php/internal/autocomplete', params, function (data) {
 					var results = [];
 					$.each(data, function (i, value) {
 						results.push(value);
 					});
-	 				callback(results);
+					callback(results);
 				});
 			}
 		});
@@ -122,12 +201,16 @@ $(document).ready( function() {
 		event.preventDefault();
 		var fieldID = $(this).attr('id');
 		var filter_id = $(this).data('filter_id');
+		var filter_tmp_id = $(this).data('filter');
 		var targetID = fieldID + '_target';
 		var viewType = $('#filters_form_open input[name=view_type]').val();
 		$('#' + targetID).html('<span class="dynamic-filter-loading">' + translations['loading'] + "</span>");
 		var params = 'view_type=' + viewType + '&filter_target=' + fieldID;
 		if( undefined !== filter_id ) {
 			params += '&filter_id=' + filter_id;
+		}
+		if( undefined !== filter_tmp_id ) {
+			params += '&filter=' + filter_tmp_id;
 		}
 		$.ajax({
 			url: 'return_dynamic_filters.php',
@@ -166,6 +249,83 @@ $(document).ready( function() {
 			$(this).closest('form').find(':checkbox[name="' + baseFieldName + '[]"]').prop('checked', $(this).is(':checked'));
 		});
 	}
+
+	/**
+	 * Prepare a table where the checkboxes range selection has been applied
+	 * Save row and column index in each cell for easier iteration.
+	 * This assumes no rowspan or colspan is used in the area where the ckecboxes are rendered.
+	 */
+	$('table.checkbox-range-selection').each(function(){
+		$(this).find('tr').each( function(row_index){
+			$(this).children('th, td').each(function(col_index){
+				$(this).data('col_index', col_index);
+				$(this).data('row_index', row_index);
+			});
+		});
+	});
+
+	/**
+	 * Enable range selection for checkboxes, inside a container having class "checkbox-range-selection"
+	 * Assumes the bootstrap/ace styled checkboxes:
+	 *		<label>
+	 *			<input type="checkbox" class="ace">
+	 *			<span class="lbl"></span>
+	 *		</label>
+	 */
+	$('.checkbox-range-selection').on('click', 'label', function (e) {
+		if( $(this).children('input:checkbox').length == 0 ) {
+			return;
+		}
+		var jcontainer = $(this).closest('.checkbox-range-selection');
+		var last_clicked = jcontainer.data('checkbox-range-last-clicked');
+		if (!last_clicked) {
+			last_clicked = this;
+		}
+		if (e.shiftKey) {
+			// Because shift-click is triggered in a label/span, some browsers
+			// will activate a text selection. Remove text selection.
+			window.getSelection().removeAllRanges();
+			var cb_label_list = jcontainer.find('label').has('input:checkbox');
+			// The actual input hasn't been changed yet, so we want to set the
+			// opposite value for all the checkboxes
+			var clicked_current_st = $(this).find('input:checkbox').first().prop('checked');
+			// The currently clicked one is also modified, becasue shift-click is not
+			// recognised correctly by the framework. See #25215
+			if( jcontainer.is('table') ) {
+				// Special case for a table container:
+				// we traverse the table cells for a rectangular area
+				var cell_1 = $(this).closest('th, td');
+				var row_1 = cell_1.data('row_index');
+				var col_1 = cell_1.data('col_index');
+				var cell_2 = $(last_clicked).closest('th, td');
+				var row_2 = cell_2.data('row_index');
+				var col_2 = cell_2.data('col_index');
+				var row_start = Math.min(row_1, row_2);
+				var row_end = Math.max(row_1, row_2);
+				var col_start = Math.min(col_1, col_2);
+				var col_end = Math.max(col_1, col_2);
+				for (i = 0 ; i <= cb_label_list.length ; i++) {
+					var it_td = $(cb_label_list[i]).closest('th, td');
+					var it_row = it_td.data('row_index');
+					var it_col = it_td.data('col_index');
+					if(    row_start <= it_row && it_row <= row_end
+						&& col_start <= it_col && it_col <= col_end ) {
+						$(cb_label_list[i]).find('input:checkbox').prop('checked', !clicked_current_st);
+					}
+				}
+			} else {
+				// General case: we traverse the items by their relative index
+				var start = cb_label_list.index(this);
+				var end = cb_label_list.index(last_clicked);
+				var index_start = Math.min(start, end);
+				var index_end = Math.max(start, end);
+				for (i = index_start ; i <= index_end ; i++) {
+					$(cb_label_list[i]).find('input:checkbox').prop('checked', !clicked_current_st);
+				}
+			}
+		}
+		jcontainer.data('checkbox-range-last-clicked', this);
+	});
 
 	var stopwatch = {
 		timerID: 0,
@@ -259,7 +419,19 @@ $(document).ready( function() {
 	$( 'form .dropzone' ).each(function(){
 		var classPrefix = 'dropzone';
 		var autoUpload = $(this).hasClass('auto-dropzone');
-		enableDropzone( classPrefix, autoUpload );
+		var zoneObj = enableDropzone( classPrefix, autoUpload );
+		if( zoneObj ) {
+			/* Attach image paste handler to report-bug & add-note forms */
+			$( '#bugnoteadd, #report_bug_form' ).bind( 'paste', function( event ) {
+				var items = ( event.clipboardData || event.originalEvent.clipboardData ).items;
+				for( index in items ) {
+					var item = items[index];
+					if( item.kind === 'file' ) {
+						zoneObj.addFile( item.getAsFile() )
+					}
+				}
+			});
+		}
 	});
 
 	$('.bug-jump').find('[name=bug_id]').focus( function() {
@@ -277,7 +449,7 @@ $(document).ready( function() {
 		}
 	});
 	$('[name=source_query_id]').change( function() {
-		$(this).parent().submit();
+		$(this.form).submit();
 	});
 
 	/* Project selector: auto-switch on select */
@@ -351,7 +523,8 @@ $(document).ready( function() {
 		var currentTagString = $('#tag_string').val();
 		var newTagOptionID = $(this).val();
 		var newTag = $('#tag_select option[value=' + newTagOptionID + ']').text();
-		if (currentTagString.indexOf(newTag) == -1) {
+		var tagArray = currentTagString.split(tagSeparator);
+		if (tagArray.indexOf(newTag) == -1) {
 			if (currentTagString.length > 0) {
 				$('#tag_string').val(currentTagString + tagSeparator + newTag);
 			} else {
@@ -368,16 +541,10 @@ $(document).ready( function() {
 	$('input[name=private].ace').bind("click", function() {
 		if ($(this).is(":checked")){
 			$('textarea[name=bugnote_text]').addClass("bugnote-private");
-			$('tr[id=bugnote-attach-files]').hide();
 		} else {
 			$('textarea[name=bugnote_text]').removeClass("bugnote-private");
-			$('tr[id=bugnote-attach-files]').show();
 		}
 	});
-
-	$(document).on('shown.bs.dropdown', '#dropdown_projects_menu', function() {
-		$(this).find(".dropdown-menu li.active a").focus();
-	 });
 
 	/**
 	 * Manage visiblity on hover trigger objects
@@ -393,6 +560,82 @@ $(document).ready( function() {
 		);
 		$('.visible-on-hover').addClass('invisible');
 	}
+
+	/**
+	 * Enhance tables with sortable columns using list.js
+	 */
+	$('.table-responsive.sortable').each(function(){
+		var jtable = $(this).find('table').first();
+		var ths = jtable.find('thead > tr > th');
+		if( !ths.length ) {
+			// exit if there is no headers
+			return;
+		}
+		var th_count = ths.length
+
+		var trs = jtable.find('tbody > tr');
+		if( trs.length > 1000 ) {
+			// don't run on big tables to avoid perfomance issues in client side
+			return;
+		}
+
+		var options_valuenames = [];
+		var exclude_index = [];
+		ths.each(function(index){
+			if( $(this).hasClass('no-sort') ) {
+				// if the column says no sorting, save this index for later checks and skip
+				exclude_index.push(index);
+				return;
+			}
+			// wrap the contents into a crafted div
+			var new_div = $('<div />').addClass('sort')
+					.attr('data-sort','sortkey_'+index)
+					.attr('role','button')
+					.html($(this).html());
+			$(this).html(new_div);
+
+			options_valuenames.push( { name:'sortkey_'+index, attr:'data-sortval' } );
+		});
+		trs.each(function(){
+			var tds = $(this).children('td');
+			if( tds.length != th_count ) {
+				// exit if different number of cells than headers, possibly colspan, etc
+				return;
+			}
+			tds.each(function(index){
+				if( exclude_index.indexOf(index) >= 0 ) {
+					// if this column was marked as no-sorting, skip.
+					return;
+				}
+				$(this).addClass( 'sortkey_'+index ).attr( 'data-sortval', $(this).text() );
+			});
+		});
+		jtable.find('tbody').addClass('list');
+
+		var listoptions = { valueNames: options_valuenames };
+		var listobject =  new List( this, listoptions );
+		$(this).data('listobject',listobject).data('listoptions',listoptions).addClass('listjs-table');
+	});
+
+	/**
+	 * Change status color box's color when a different status is selected.
+	 * To achieve that we need to store the current value in a data attribute,
+	 * to compute the class name to remove in the change event.
+	 */
+	var statusColor = $('#status');
+	// Store current value
+	statusColor.data('prev', statusColor.val());
+	statusColor.change(function () {
+		function getColorClassName (statusCode) {
+			return  'status-' + statusCode + '-fg';
+		}
+
+		var me = $(this);
+		me.siblings('i')
+			.removeClass(getColorClassName(me.data('prev')))
+			.addClass(getColorClassName(me.val()));
+		me.data('prev', me.val());
+	});
 });
 
 function setBugLabel() {
@@ -438,7 +681,6 @@ function Trim( p_string ) {
  * Cookie functions
  */
 function GetCookie( p_cookie ) {
-	var t_cookie_name = "MANTIS_" + p_cookie;
 	var t_cookies = document.cookie;
 
 	t_cookies = t_cookies.split( ";" );
@@ -448,8 +690,7 @@ function GetCookie( p_cookie ) {
 		var t_cookie = t_cookies[ i ];
 
 		t_cookie = t_cookie.split( "=" );
-
-		if ( Trim( t_cookie[ 0 ] ) == t_cookie_name ) {
+		if ( Trim( t_cookie[ 0 ] ) == p_cookie ) {
 			return( t_cookie[ 1 ] );
 		}
 		i++;
@@ -459,19 +700,22 @@ function GetCookie( p_cookie ) {
 }
 
 function SetCookie( p_cookie, p_value ) {
-	var t_cookie_name = "MANTIS_" + p_cookie;
 	var t_expires = new Date();
 
 	t_expires.setTime( t_expires.getTime() + (365 * 24 * 60 * 60 * 1000));
 
-	document.cookie = t_cookie_name + "=" + p_value + "; expires=" + t_expires.toUTCString() + ";";
+	document.cookie = p_cookie + "=" + p_value +
+		"; expires=" + t_expires.toUTCString() +
+		( config.cookie_domain ? "; domain=" + config.cookie_domain : '' ) +
+		"; path=" + config.cookie_path +
+		"; samesite=" + config.cookie_samesite;
 }
 
 function ToggleDiv( p_div ) {
 	var t_open_div = '#' + p_div + "_open";
 	var t_closed_div = '#' + p_div + "_closed";
 
-	var t_cookie = GetCookie( "collapse_settings" );
+	var t_cookie = GetCookie( config.collapse_settings_cookie );
 	if ( 1 == g_collapse_clear ) {
 		t_cookie = "";
 		g_collapse_clear = 0;
@@ -484,14 +728,14 @@ function ToggleDiv( p_div ) {
 	}
 
 	if ( t_open_display == "none" ) {
-        t_cookie = t_cookie.replace( "|" + p_div + ":0", '' );
+		t_cookie = t_cookie.replace( "|" + p_div + ":0", '' );
 		t_cookie = t_cookie + "|" + p_div + ":1";
 	} else {
-        t_cookie = t_cookie.replace( "|" + p_div + ":1", '' );
+		t_cookie = t_cookie.replace( "|" + p_div + ":1", '' );
 		t_cookie = t_cookie + "|" + p_div + ":0";
 	}
 
-	SetCookie( "collapse_settings", t_cookie );
+	SetCookie( config.collapse_settings_cookie, t_cookie );
 }
 
 function setDisplay(idTag, state)
@@ -516,54 +760,110 @@ function enableDropzone( classPrefix, autoUpload ) {
 	var zone_class =  '.' + classPrefix;
 	var zone = $( zone_class );
 	var form = zone.closest('form');
-	try {
-		var zone_object = new Dropzone( form[0], {
-			forceFallback: zone.data('force-fallback'),
-			paramName: "ufile",
-			autoProcessQueue: autoUpload,
-			clickable: zone_class,
-			previewsContainer: '#' + classPrefix + '-previews-box',
-			uploadMultiple: true,
-			parallelUploads: 100,
-			maxFilesize: zone.data('max-filesize'),
-			addRemoveLinks: !autoUpload,
-			acceptedFiles: zone.data('accepted-files'),
-			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
-			dictDefaultMessage: zone.data('default-message'),
-			dictFallbackMessage: zone.data('fallback-message'),
-			dictFallbackText: zone.data('fallback-text'),
-			dictFileTooBig: zone.data('file-too-big'),
-			dictInvalidFileType: zone.data('invalid-file-type'),
-			dictResponseError: zone.data('response-error'),
-			dictCancelUpload: zone.data('cancel-upload'),
-			dictCancelUploadConfirmation: zone.data('cancel-upload-confirmation'),
-			dictRemoveFile: zone.data('remove-file'),
-			dictRemoveFileConfirmation: zone.data('remove-file-confirmation'),
-			dictMaxFilesExceeded: zone.data('max-files-exceeded'),
+	var max_filesize_bytes = zone.data('max-filesize-bytes');
+	var max_filesize_mb = Math.ceil( max_filesize_bytes / ( 1024*1024) );
+	var max_filename_length = zone.data( 'max-filename-length' );
+	var options = {
+		forceFallback: zone.data('force-fallback'),
+		paramName: "ufile",
+		autoProcessQueue: autoUpload,
+		clickable: zone_class,
+		previewsContainer: '#' + classPrefix + '-previews-box',
+		uploadMultiple: true,
+		parallelUploads: 100,
+		maxFilesize: max_filesize_mb,
+		timeout: 0,
+		addRemoveLinks: !autoUpload,
+		acceptedFiles: zone.data('accepted-files'),
+		thumbnailWidth: 150,
+		thumbnailMethod: 'contain',
+		dictDefaultMessage: zone.data('default-message'),
+		dictFallbackMessage: zone.data('fallback-message'),
+		dictFallbackText: zone.data('fallback-text'),
+		dictFileTooBig: zone.data('file-too-big'),
+		dictInvalidFileType: zone.data('invalid-file-type'),
+		dictResponseError: zone.data('response-error'),
+		dictCancelUpload: zone.data('cancel-upload'),
+		dictCancelUploadConfirmation: zone.data('cancel-upload-confirmation'),
+		dictRemoveFile: zone.data('remove-file'),
+		dictRemoveFileConfirmation: zone.data('remove-file-confirmation'),
+		dictMaxFilesExceeded: zone.data('max-files-exceeded'),
 
-			init: function () {
-				var dropzone = this;
-				var form = $( this.options.clickable ).closest('form');
-				form.on('submit', function (e) {
-					if( dropzone.getQueuedFiles().length ) {
-						e.preventDefault();
-						e.stopPropagation();
-						dropzone.processQueue();
-					}
-				});
-				this.on( "successmultiple", function( files, response ) {
-					document.open();
-					document.write( response );
-					document.close();
-				});
-			},
-			fallback: function() {
-				if( $( "." + classPrefix ).length ) {
-					$( "." + classPrefix ).hide();
+		init: function () {
+			var dropzone = this;
+			var form = $( this.options.clickable ).closest('form');
+			form.on('submit', function (e) {
+				if( dropzone.getQueuedFiles().length ) {
+					e.preventDefault();
+					e.stopPropagation();
+					dropzone.processQueue();
 				}
+			});
+			this.on( "successmultiple", function( files, response ) {
+				document.open();
+				document.write( response );
+				document.close();
+			});
+			/**
+			 * 'addedfiles' is undocumented but works similar to 'addedfile'
+			 * It's triggered once after a multiple file addition, and receives
+			 * an array with the added files.
+			 */
+			this.on("addedfiles", function (files) {
+				var bullet = '-\u00A0';
+				var error_file_too_big = '';
+				var error_filename_too_long = '';
+				for (var i = 0; i < files.length; i++) {
+					if( files[i].size > max_filesize_bytes ) {
+						var size_mb = files[i].size / ( 1024*1024 );
+						var dec = size_mb < 0.01 ? 3 : 2;
+						error_file_too_big += bullet + '"' + files[i].name + '" (' + size_mb.toFixed(dec) + ' MiB)\n';
+						this.removeFile( files[i] );
+					} else if( files[i].name.length > 250 ) {
+						error_filename_too_long += bullet + '"' + files[i].name + '" (' + files[i].name.length + ')\n';
+						// this.removeFile( files[i] );
+					}
+				}
+
+				var text = '';
+				var error_message = '';
+				if( error_file_too_big ) {
+					var max_mb = max_filesize_bytes / ( 1024*1024 );
+					var max_mb_dec = max_mb < 0.01 ? 3 : 2;
+					text = zone.data( 'dropzone_multiple_files_too_big' ) + "\n";
+					text = text.replace( '{{files}}', '\n' + error_file_too_big );
+					text = text.replace( '{{maxFilesize}}', max_mb.toFixed(max_mb_dec) );
+					error_message += text;
+				}
+
+				if( error_filename_too_long ) {
+					text = zone.data( 'dropzone_multiple_filenames_too_long' ) + "\n";
+					text = text.replace( '{{maxFilenameLength}}', max_filename_length );
+					text = text.replace( '{{files}}', '\n' + error_filename_too_long );
+					error_message += text;
+				}
+				if( error_message ) {
+					alert(error_message);
+				}
+			});
+		},
+		fallback: function() {
+			if( $( "." + classPrefix ).length ) {
+				$( "." + classPrefix ).hide();
 			}
-		});
+		}
+	};
+	var preview_template = document.getElementById('dropzone-preview-template');
+	if( preview_template ) {
+		options.previewTemplate = preview_template.innerHTML;
+	}
+
+	var zone_object = null;
+	try {
+		zone_object = new Dropzone( form[0], options );
 	} catch (e) {
 		alert( zone.data('dropzone-not-supported') );
 	}
+
+	return zone_object;
 }

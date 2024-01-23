@@ -33,9 +33,9 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp  Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id    An user identifier.
+	 * @param integer $p_user_id    A user identifier.
 	 * @param integer $p_issue_id   A issue identifier.
-	 * @param integer $p_handler_id An user identifier.
+	 * @param integer $p_handler_id A user identifier.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_handler_id ) {
 		parent::__construct( $p_timestamp, $p_user_id );
@@ -51,13 +51,13 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 	public function html() {
 		if( $this->user_id == $this->handler_id ) {
 			$t_html = $this->html_start( 'fa-flag-o' );
-			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		} else if( $this->handler_id != NO_USER ) {
 			$t_html = $this->html_start( 'fa-hand-o-right' );
-			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), user_get_name( $this->handler_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), prepare_user_name( $this->handler_id ) );
 		} else {
             $t_html = $this->html_start( 'fa-flag-o' );
-			$t_string = sprintf( lang_get( 'timeline_issue_unassigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_unassigned' ), prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		}
 
 		$t_html .= '<div class="action">' . $t_string . '</div>';

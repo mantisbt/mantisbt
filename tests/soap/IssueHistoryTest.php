@@ -39,7 +39,7 @@ class IssueHistoryTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreatedIssueHasHistoryEntry() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueHasHistoryEntry' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -71,7 +71,7 @@ class IssueHistoryTest extends SoapBase {
 	 * @return void
 	 */
 	public function testUpdatedIssueHasHistoryEntry() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueHistoryTest.testUpdatedIssueHasHistoryEntry' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -100,11 +100,11 @@ class IssueHistoryTest extends SoapBase {
 	/**
 	 * A test case that tests the following:
 	 * 1. Creates a new issue with non-default status and resolution
-	 * 2. Validates that history entries are created for the status and resolution
+	 * 2. Validates that a single history entry is created.
 	 * @return void
 	 */
 	function testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['status'] = array( 'id' => CONFIRMED ); # confirmed
 		$t_issue_to_add['resolution'] = array ( 'id' => REOPENED ); # reopened
 
@@ -114,29 +114,7 @@ class IssueHistoryTest extends SoapBase {
 
 		$t_issue_history = $this->getIssueHistory( $t_issue_id );
 
-		$this->assertEquals( 3, count( $t_issue_history ) );
-
-		# History entries logged simultaneously may not be returned in
-		# the same order, so we need to individually check for each one
-		foreach( $t_issue_history as $t_entry ) {
-			if( $t_entry->type != NORMAL_TYPE ) {
-				# Ignore unwanted history types
-				continue;
-			}
-			$t_field = $t_entry->field;
-			switch( $t_field ) {
-				case 'status':
-					$t_old_value = NEW_;
-					break;
-				case 'resolution':
-					$t_old_value = OPEN;
-					break;
-				default:
-					# We shouldn't get there, but just in case...
-					continue 2;
-			}
-			$this->assertPropertyHistoryEntry( $t_entry, $t_field, $t_issue_to_add[$t_field]['id'], $t_old_value );
-		}
+		$this->assertEquals( 1, count( $t_issue_history ) );
 	}
 
 	/**

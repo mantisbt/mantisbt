@@ -72,7 +72,7 @@ function token_ensure_exists( $p_token_id ) {
  * Get a token's information
  * @param integer $p_type    The token type to retrieve.
  * @param integer $p_user_id A valid user identifier.
- * @return array Token row
+ * @return array|null Token row
  */
 function token_get( $p_type, $p_user_id = null ) {
 	token_purge_expired_once();
@@ -96,7 +96,7 @@ function token_get( $p_type, $p_user_id = null ) {
  * Get a token's value or null if not found
  * @param integer $p_type    The token type to retrieve.
  * @param integer $p_user_id The user identifier (null for current user).
- * @return array Token row
+ * @return string Token value
  */
 function token_get_value( $p_type, $p_user_id = null ) {
 	$t_token = token_get( $p_type, $p_user_id );
@@ -113,7 +113,7 @@ function token_get_value( $p_type, $p_user_id = null ) {
  * @param integer $p_type    The token type.
  * @param string  $p_value   The token value.
  * @param integer $p_expiry  Token expiration in seconds.
- * @param integer $p_user_id An user identifier.
+ * @param integer $p_user_id A user identifier.
  * @return int Token ID
  */
 function token_set( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
@@ -144,7 +144,7 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 /**
  * Delete a token.
  * @param integer $p_type    The token type.
- * @param integer $p_user_id An user identifier or null for current logged in user.
+ * @param integer $p_user_id A user identifier or null for current logged in user.
  * @return void
  */
 function token_delete( $p_type, $p_user_id = null ) {
@@ -161,7 +161,7 @@ function token_delete( $p_type, $p_user_id = null ) {
 
 /**
  * Delete all tokens owned by a specified user.
- * @param integer $p_user_id An user identifier or null for current logged in user.
+ * @param integer $p_user_id A user identifier or null for current logged in user.
  * @return void
  */
 function token_delete_by_owner( $p_user_id = null ) {

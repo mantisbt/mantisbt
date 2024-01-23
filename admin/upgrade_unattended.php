@@ -29,7 +29,7 @@
 # and plugins will not be loaded.
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
-require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
+require_once( dirname( __FILE__, 2 ) . '/core.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
@@ -88,7 +88,7 @@ if( false == $t_result ) {
 
 # TODO: Enhance this check to support the mode where this script is called on an empty database.
 # check to see if the new installer was used
-if( -1 == config_get( 'database_version', -1 ) ) {
+if( -1 == config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS ) ) {
 		echo 'Upgrade from the current installed MantisBT version is no longer supported.  If you are using MantisBT version older than 1.0.0, then upgrade to v1.0.0 first.';
 		exit( 1 );
 }
@@ -98,7 +98,7 @@ $t_db_type = config_get_global( 'db_type' );
 
 # install the tables
 if( !preg_match( '/^[a-zA-Z0-9_]+$/', $t_db_type ) ||
-	!file_exists( dirname( dirname( __FILE__ ) ) . '/vendor/adodb/adodb-php/drivers/adodb-' . $t_db_type . '.inc.php' ) ) {
+	!file_exists( dirname( __FILE__, 2 ) . '/vendor/adodb/adodb-php/drivers/adodb-' . $t_db_type . '.inc.php' ) ) {
 	echo 'Invalid db type ' . htmlspecialchars( $t_db_type ) . '.';
 	exit;
 }
@@ -180,7 +180,7 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 
 	if( $t_ret == 2 ) {
 		print_test_result( GOOD );
-		config_set( 'database_version', $i );
+		config_set( 'database_version', $i, ALL_USERS, ALL_PROJECTS );
 	} else {
 		$t_msg = $t_sqlarray[0];
 		if( !is_blank( $g_db->ErrorMsg() ) ) {

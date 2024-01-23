@@ -217,3 +217,21 @@ config_obsolete( 'meta_include_file' );
 
 # changes in 2.11.0
 config_obsolete( 'differentiate_duplicates' );
+
+# changes in 2.12.0
+config_obsolete( 'session_handler' );
+
+# changes in 2.17.0
+config_obsolete( 'default_manage_user_prefix' );
+
+# changes in 2.21.0
+config_obsolete( 'my_view_boxes_fixed_position' );
+
+# changes in 2.24.0
+config_obsolete( 'bug_change_status_page_fields', 'bug_view_page_fields' );
+
+# changes in 2.25.0
+config_obsolete( 'display_project_padding' );
+
+# changes in 2.27.0
+config_obsolete( 'allow_file_cache' );

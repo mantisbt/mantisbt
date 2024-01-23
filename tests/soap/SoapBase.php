@@ -25,7 +25,7 @@
  */
 
 
-$t_root_path = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
+$t_root_path = dirname( __FILE__, 3 ) . DIRECTORY_SEPARATOR;
 
 # MantisBT constants
 require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
@@ -33,7 +33,7 @@ require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
 /**
  * Test cases for SoapEnum class.
  */
-class SoapBase extends PHPUnit_Framework_TestCase {
+class SoapBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var SoapClient Soap Client
 	 */
@@ -70,6 +70,18 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $projectId = 1;
 
 	/**
+	 * Maximum number of Issues to retrieve during tests.
+	 *
+	 * The default value is fine when running tests on a fresh install with an
+	 * empty database (like with TravisCI), but when using a persistent database
+	 * (e.g. local development) some tests may be skipped or fail if there are
+	 * too many Issues (
+	 *
+	 * @var int $maxIssues
+	 */
+	protected $maxIssues;
+
+	/**
 	 * @var array Array of Issue IDs to delete
 	 */
 	private   $issueIdsToDelete = array();
@@ -87,53 +99,39 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var array Soap Client Options Array
 	 */
-	private   $defaultSoapClientOptions = array(  'trace'      => true,
-												  'exceptions' => true,
-												  'cache_wsdl' => WSDL_CACHE_NONE
-											   );
+	private $defaultSoapClientOptions;
 
 	/**
 	 * setUp
 	 * @return void
 	 */
-	protected function setUp() {
-		if( !isset( $GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] ) ||
-			!$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] ) {
+	protected function setUp(): void {
+		if( empty( $GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] ) ) {
 			$this->markTestSkipped( 'The Soap tests are disabled.' );
 		}
 
-		$this->assertTrue( array_key_exists( 'MANTIS_TESTSUITE_SOAP_HOST', $GLOBALS ) &&
-			!empty( $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] ),
-			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file" );
+		$t_wsdl = $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] ?? '';
+		$this->assertTrue( !empty( $t_wsdl ),
+			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file"
+		);
 
-		$this->client = new SoapClient( $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
-			array_merge( $this->defaultSoapClientOptions, $this->extraSoapClientFlags() ) );
+		$this->defaultSoapClientOptions = array(
+			'trace'      => true,
+			'exceptions' => true,
+			'cache_wsdl' => WSDL_CACHE_NONE,
+		);
 
-		$this->mantisPath = substr( $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen( 'api/soap/mantisconnect.php?wsdl' ) );
+		$this->client = new SoapClient( $t_wsdl,
+			array_merge( $this->defaultSoapClientOptions, $this->extraSoapClientFlags() )
+		);
 
-		if( array_key_exists( 'MANTIS_TESTSUITE_USERNAME', $GLOBALS ) ) {
-			$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'];
-		} else {
-			$this->userName = 'administrator';
-		}
+		$this->mantisPath = substr( $t_wsdl, 0, -strlen( 'api/soap/mantisconnect.php?wsdl' ) );
 
-		if( array_key_exists( 'MANTIS_TESTSUITE_PASSWORD', $GLOBALS ) ) {
-			$this->password = $GLOBALS['MANTIS_TESTSUITE_PASSWORD'];
-		} else {
-			$this->password = 'root';
-		}
-
-		if( array_key_exists( 'MANTIS_TESTSUITE_EMAIL', $GLOBALS ) ) {
-			$this->email = $GLOBALS['MANTIS_TESTSUITE_EMAIL'];
-		} else {
-			$this->email = 'root@localhost';
-		}
-
-		if( array_key_exists( 'MANTIS_TESTSUITE_PROJECT_ID', $GLOBALS ) ) {
-			$this->projectId = $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'];
-		} else {
-			$this->projectId = 1;
-		}
+		$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'] ?? 'administrator';
+		$this->password = $GLOBALS['MANTIS_TESTSUITE_PASSWORD'] ?? 'root';
+		$this->email = $GLOBALS['MANTIS_TESTSUITE_EMAIL'] ?? 'root@localhost';
+		$this->projectId = $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'] ?? 1;
+		$this->maxIssues = $GLOBALS['MANTIS_TESTSUITE_MAX_ISSUES'] ?? 50;
 	}
 
 	/**
@@ -148,7 +146,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * tearDown
 	 * @return void
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 		foreach ( $this->versionIdsToDelete as $t_version_id_to_delete ) {
 			$this->client->mc_project_version_delete( $this->userName, $this->password, $t_version_id_to_delete );
 		}
@@ -193,16 +191,26 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * getIssueToAdd
-	 * @param string $p_test_case Test case identifier.
+	 * Returns a minimal data structure for tests to create a new Issue.
+	 *
+	 * The Issue Summary is set to TestClass::TestCase with an optional
+	 * suffix, followed by a random number.
+	 *
+	 * @param string $p_suffix Optional Test case suffix.
+	 *
 	 * @return array
 	 */
-	protected function getIssueToAdd( $p_test_case ) {
+	protected function getIssueToAdd( $p_suffix = '' ) {
+		$t_summary = static::class . '::' . $this->getName();
+		if( $p_suffix ) {
+			$t_summary .= '-' . $p_suffix;
+		}
 		return array(
-				'summary' => $p_test_case . ': test issue: ' . rand( 1, 1000000 ),
-				'description' => 'description of test issue.',
-				'project' => array( 'id' => $this->getProjectId() ),
-				'category' => $this->getCategory() );
+			'summary' => $t_summary . ': test issue ' . rand( 1, 1000000 ),
+			'description' => 'description of test issue.',
+			'project' => array( 'id' => $this->getProjectId() ),
+			'category' => $this->getCategory()
+		);
 	}
 
 	/**

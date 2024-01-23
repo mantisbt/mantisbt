@@ -65,12 +65,7 @@ form_security_purge( 'news_add' );
 $t_news_row = news_get_row( $t_news_id );
 
 layout_page_header();
-
 layout_page_begin( 'main_page.php' );
-
-echo '<div class="space-10"></div>';
 html_operation_successful( 'main_page.php' );
-
 print_news_entry_from_row( $t_news_row );
-
 layout_page_end();

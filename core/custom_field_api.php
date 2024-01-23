@@ -64,6 +64,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $t_type ) {
+	/** @noinspection PhpIncludeInspection */
 	require_once( config_get_global( 'core_path' ) . 'cfdefs/cfdef_' . $t_type . '.php' );
 }
 unset( $t_type );
@@ -102,7 +103,7 @@ $g_cache_cf_bug_values = array();
  * false, return false if the field can't be found.
  * @param integer $p_field_id       Integer representing custom field id.
  * @param boolean $p_trigger_errors Indicates whether to trigger an error if the field is not found.
- * @return array array representing custom field
+ * @return array|false array representing custom field
  * @access public
  */
 function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
@@ -155,12 +156,12 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 		}
 		db_param_push();
 		$t_params = array();
-		$t_in_caluse_dbparams = array();
+		$t_in_clause_dbparams = array();
 		foreach( $c_cf_id_array as $t_id) {
-			$t_in_caluse_dbparams[] = db_param();
+			$t_in_clause_dbparams[] = db_param();
 			$t_params[] = $t_id;
 		}
-		$t_where_id_in = ' IN (' . implode( ',', $t_in_caluse_dbparams ) . ')';
+		$t_where_id_in = ' IN (' . implode( ',', $t_in_clause_dbparams ) . ')';
 		$t_query = 'SELECT * FROM {custom_field} WHERE id' . $t_where_id_in;
 		$t_result = db_query( $t_query, $t_params );
 	}
@@ -168,8 +169,9 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 	$t_ids_not_found = $c_cf_id_array;
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_id = (int)$t_row['id'];
+		$c_name = mb_strtolower($t_row['name']);
 		$g_cache_custom_field[$c_id] = $t_row;
-		$g_cache_name_to_id_map[$t_row['name']] = $c_id;
+		$g_cache_name_to_id_map[$c_name] = $c_id;
 		$g_cache_custom_field[$c_id]['linked_projects'] = array();
 		unset( $t_ids_not_found[$c_id] );
 	}
@@ -192,7 +194,6 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 	foreach( $t_ids_not_found as $t_id) {
 		$g_cache_custom_field[$t_id] = false;
 	}
-	return;
 }
 
 /**
@@ -264,13 +265,15 @@ function custom_field_cache_values( array $p_bug_id_array, array $p_field_id_arr
 		if( !isset( $g_cache_cf_bug_values[$c_bug_id] ) ) {
 			$g_cache_cf_bug_values[$c_bug_id] = array();
 		}
+
 		$c_field_id = (int)$t_row['field_id'];
 		$t_value_column = ( $f_cf_defs[$c_field_id]['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
 		$t_value = $t_row[$t_value_column];
 		if( null !== $t_value ) {
 			$t_value = custom_field_database_to_value( $t_value, $f_cf_defs[$c_field_id]['type'] );
 		}
-		# non-existant will be stored as null
+
+		# non-existent will be stored as null
 		$g_cache_cf_bug_values[$c_bug_id][$c_field_id] = $t_value;
 	}
 }
@@ -376,19 +379,19 @@ function custom_field_type( $p_field_id ) {
 }
 
 /**
- * Check to see whether the field id is defined
- * return true if the field is defined, error otherwise
+ * Check to see whether the field id is defined.
+ *
  * @param integer $p_field_id Custom field id.
- * @return boolean
+ * @return boolean true if the field is defined, error otherwise.
+ *
  * @access public
  */
 function custom_field_ensure_exists( $p_field_id ) {
-	if( custom_field_exists( $p_field_id ) ) {
-		return true;
-	} else {
+	if( !custom_field_exists( $p_field_id ) ) {
 		error_parameters( 'Custom ' . $p_field_id );
 		trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
 	}
+	return true;
 }
 
 /**
@@ -418,18 +421,18 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 }
 
 /**
- * Check to see whether the name is unique
- * return true if the name has not been used, error otherwise
+ * Check to see whether the name is unique.
+ *
  * @param string $p_name Custom field name.
- * @return boolean
+ * @return boolean true if the name has not been used, error otherwise.
+ *
  * @access public
  */
 function custom_field_ensure_name_unique( $p_name ) {
-	if( custom_field_is_name_unique( $p_name ) ) {
-		return true;
-	} else {
+	if( !custom_field_is_name_unique( $p_name ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
 	}
+	return true;
 }
 
 /**
@@ -538,35 +541,79 @@ function custom_field_create( $p_name ) {
 }
 
 /**
- * Update the field definition
- * return true on success, false on failure
+ * Update the field definition.
+ *
  * @param integer $p_field_id  Custom field identifier.
  * @param array   $p_def_array Custom field definition.
- * @return boolean
+ *
+ * @return boolean true on success, false on failure
+ *
  * @access public
  */
 function custom_field_update( $p_field_id, array $p_def_array ) {
-	if( is_blank( $p_def_array['name'] ) ) {
+	/**
+	 * @var string     $v_name
+	 * @var int        $v_type
+	 * @var string|int $v_default_value
+	 * @var int        $v_access_level_r
+	 * @var int        $v_access_level_rw
+	 * @var int        $v_length_min
+	 * @var int        $v_length_max
+	 */
+	extract( $p_def_array, EXTR_PREFIX_ALL, 'v');
+
+	if( is_blank( $v_name ) ) {
+		error_parameters( 'name' );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	} elseif( mb_strpos( $v_name, ',' ) ) {
+		# Commas are not allowed in CF name, it causes issues with columns
+		# selection (see #26665)
+		error_parameters( $v_name );
+		trigger_error( ERROR_CUSTOM_FIELD_NAME_INVALID, ERROR );
+	}
+
+	if( is_blank( $v_name ) ) {
 		error_parameters( 'name' );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if( $p_def_array['access_level_rw'] < $p_def_array['access_level_r'] ) {
+	if( $v_access_level_rw < $v_access_level_r ) {
 		error_parameters(
 			lang_get( 'custom_field_access_level_r' ) . ', ' .
 			lang_get( 'custom_field_access_level_rw' ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
 	}
 
-	if( $p_def_array['length_min'] < 0
-		|| ( $p_def_array['length_max'] != 0 && $p_def_array['length_min'] > $p_def_array['length_max'] )
+	if( $v_length_min < 0
+		|| ( $v_length_max != 0 && $v_length_min > $v_length_max )
 	) {
 		error_parameters( lang_get( 'custom_field_length_min' ) . ', ' . lang_get( 'custom_field_length_max' ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
 	}
 
-	if( !custom_field_is_name_unique( $p_def_array['name'], $p_field_id ) ) {
+	if( !custom_field_is_name_unique( $v_name, $p_field_id ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
+	}
+
+
+	# Validate default date format
+	if( $v_type == CUSTOM_FIELD_TYPE_DATE && $v_default_value && !is_numeric( $v_default_value ) ) {
+		# Allow legacy "{xxx}" format for dynamic dates
+		# @TODO this backwards-compatibility feature should be removed in a future release
+		if( preg_match( '/^{(.*)}$/', $v_default_value, $t_matches ) ) {
+			error_parameters( $v_default_value, $t_matches[1] );
+			trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+			$v_default_value = $t_matches[1];
+		}
+
+		# Check default date format and calculate actual date
+		try {
+			new DateTimeImmutable( $v_default_value );
+		}
+		catch( Exception $e ) {
+			error_parameters( lang_get( 'custom_field_default_value' ) );
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
+		}
 	}
 
 	db_param_push();
@@ -580,7 +627,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 			case 'default_value':
 			case 'valid_regexp':
 				# Possible values doesn't apply to textarea fields
-				if( $p_def_array['type'] == CUSTOM_FIELD_TYPE_TEXTAREA && $t_field == 'possible_values' ) {
+				if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA && $t_field == 'possible_values' ) {
 					$t_value = '';
 				}
 
@@ -730,9 +777,12 @@ function custom_field_delete_all_values( $p_bug_id ) {
 
 /**
  * Get the id of the custom field with the specified name.
- * false is returned if no custom field found with the specified name.
+ *
+ * Custom field name lookup is case insensitive. Returns false if no custom
+ * field is found with the specified name.
+ *
  * @param string $p_field_name Custom field name.
- * @return boolean|integer false or custom field id
+ * @return int|false custom field id
  * @access public
  */
 function custom_field_get_id_from_name( $p_field_name ) {
@@ -742,24 +792,19 @@ function custom_field_get_id_from_name( $p_field_name ) {
 		return false;
 	}
 
-	if( isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
-		return $g_cache_name_to_id_map[$p_field_name];
+	$p_field_name = mb_strtolower($p_field_name);
+	if( !isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
+		# Build cache of lowercase custom fields names to id
+		if( !$g_cache_name_to_id_map ) {
+			$t_query = new DbQuery( "SELECT id, name FROM {custom_field}" );
+			foreach( $t_query->fetch_all() as $t_row ) {
+				$t_name = mb_strtolower($t_row['name']);
+				$g_cache_name_to_id_map[$t_name] = $t_row['id'];
+			}
+		}
 	}
 
-	db_param_push();
-	$t_query = 'SELECT id FROM {custom_field} WHERE name=' . db_param();
-	$t_result = db_query( $t_query, array( $p_field_name ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
-		$g_cache_name_to_id_map[$p_field_name] = false;
-		return false;
-	}
-
-	$g_cache_name_to_id_map[$p_field_name] = $t_row['id'];
-
-	return $t_row['id'];
+	return $g_cache_name_to_id_map[$p_field_name] ?? false;
 }
 
 /**
@@ -779,7 +824,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 
 	if( ALL_PROJECTS == $p_project_id ) {
 		$t_user_id = auth_get_current_user_id();
-		# Select all projects accesible by the user
+		# Select all projects accessible by the user
 		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
 	} elseif( !is_array( $p_project_id ) ) {
 		$t_project_ids = array( $p_project_id );
@@ -824,7 +869,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 			unset( $t_uncached_projects[$t_project_id] );
 		}
 
-		# save empty array for those projects that dont appear in the results
+		# save empty array for those projects that don't appear in the results
 		if( !empty( $t_uncached_projects ) ) {
 			foreach( $t_uncached_projects as $t_pr_id ) {
 				$g_cache_cf_linked[$t_pr_id] = array();
@@ -911,7 +956,7 @@ function custom_field_get_display_name( $p_name ) {
 		$p_name .= ' (' . $t_local_name . ')';
 	}
 
-	return string_display( $p_name );
+	return string_display_line( $p_name );
 }
 
 /**
@@ -928,7 +973,7 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	$c_bug_id = (int)$p_bug_id;
 	$c_field_id = (int)$p_field_id;
 
-	$t_row = custom_field_cache_row( $c_field_id );
+	custom_field_cache_row( $c_field_id );
 
 	# first check permissions
 	if( !custom_field_has_read_access( $c_field_id, $c_bug_id, auth_get_current_user_id() ) ) {
@@ -1063,7 +1108,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 	$t_length_max = $t_row['length_max'];
 
 	$t_valid = true;
-	$t_length = utf8_strlen( $p_value );
+	$t_length = mb_strlen( $p_value );
 	switch( $t_type ) {
 		case CUSTOM_FIELD_TYPE_STRING:
 		case CUSTOM_FIELD_TYPE_TEXTAREA:
@@ -1158,7 +1203,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
  */
 function custom_field_prepare_possible_values( $p_possible_values ) {
 	if( !is_blank( $p_possible_values ) && ( $p_possible_values[0] == '=' ) ) {
-		return helper_call_custom_function( 'enum_' . utf8_substr( $p_possible_values, 1 ), array() );
+		return helper_call_custom_function( 'enum_' . mb_substr( $p_possible_values, 1 ), array() );
 	}
 
 	return $p_possible_values;
@@ -1166,6 +1211,9 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
 
 /**
  * Get All Possible Values for a Field.
+ * Optionally, a subset of projects can be specified to get values only appearing in those.
+ * The values are always those visible to the user, based on view permissions.
+ *
  * @param array         $p_field_def   Custom field definition.
  * @param integer|array $p_project_id  Project identifier, or array of project ids
  * @return boolean|array
@@ -1208,23 +1256,8 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 			'_view_type' => FILTER_VIEW_TYPE_ADVANCED,
 		);
 		$t_filter = filter_ensure_valid_filter( $t_filter );
-		# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
-		$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, null, null, null );
-		# if the query can't be formed, there are no results
-		if( empty( $t_query_clauses ) ) {
-			# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
-			db_param_pop();
-			return false;
-		}
-		$t_select_string = 'SELECT {bug}.id ';
-		$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
-		$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
-		$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
-		if( count( $t_query_clauses['where'] ) > 0 ) {
-			$t_where_string .= ' AND ( ' . implode( $t_query_clauses['operator'], $t_query_clauses['where'] ) . ' ) ';
-		}
-		$t_filter_in = ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
-		$t_params = $t_query_clauses['where_values'];
+
+		$t_filter_subquery = new BugFilterQuery( $t_filter, BugFilterQuery::QUERY_TYPE_IDS );
 
 		# which types need special type cast
 		switch( $p_field_def['type'] ) {
@@ -1240,16 +1273,17 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 					$t_select_expr = 'cfst.value';
 		}
 
-		$t_query = 'SELECT DISTINCT ' . $t_select_expr . ' AS cast_value FROM {custom_field_string} cfst'
-			. ' WHERE cfst.bug_id IN ' . $t_filter_in
-			. ' AND cfst.field_id = ' . db_param()
+		$t_sql = 'SELECT DISTINCT ' . $t_select_expr . ' AS cast_value'
+			. ' FROM {custom_field_string} cfst'
+			. ' WHERE cfst.field_id = :cfid AND cfst.bug_id IN :filter'
 			. ' ORDER BY cast_value';
-		$t_params[] = (int)$p_field_def['id'];
-		$t_result = db_query( $t_query, $t_params );
+		$t_query = new DbQuery( $t_sql );
+		$t_query->bind( array( 'filter' => $t_filter_subquery, 'cfid' => (int)$p_field_def['id'] ) );
 
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			if( !is_blank( trim( $t_row['cast_value'] ) ) ) {
-				array_push( $t_return_arr, $t_row['cast_value'] );
+		while( $t_query->fetch() ) {
+			$t_val = $t_query->field( 'cast_value' );
+			if( !is_blank( trim( $t_val ) ) ) {
+				$t_return_arr[] = $t_val;
 			}
 		}
 
@@ -1409,7 +1443,7 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
  * Print an input field
  * $p_field_def contains the definition of the custom field (including it's field id
  * $p_bug_id    contains the bug where this field belongs to. If it's left
- * away, it'll default to 0 and thus belongs to a new (i.e. non-existant) bug
+ * away, it'll default to 0 and thus belongs to a new (i.e. non-existent) bug
  * NOTE: This probably belongs in the print_api.php
  * @param array   $p_field_def Custom field definition.
  * @param integer $p_bug_id    A bug identifier.
@@ -1422,12 +1456,15 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
 		$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
 	} else {
 		$t_custom_field_value = custom_field_get_value( $p_field_def['id'], $p_bug_id );
-		# If the custom field value is undefined and the field cannot hold a null value, use the default value instead
+		# If the custom field value is undefined, and either the field cannot hold a null value
+		# or the field is a date and is required, then use the default value instead
 		if( $t_custom_field_value === null &&
 			( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ||
 				$p_field_def['type'] == CUSTOM_FIELD_TYPE_LIST ||
 				$p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ||
-				$p_field_def['type'] == CUSTOM_FIELD_TYPE_RADIO ) ) {
+				$p_field_def['type'] == CUSTOM_FIELD_TYPE_RADIO ||
+				( $p_field_def['type'] == CUSTOM_FIELD_TYPE_DATE &&
+				  $p_required ) ) ) {
 			$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
 		}
 	}
@@ -1440,6 +1477,21 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
 	} else {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 	}
+}
+
+/*
+ * Returns a valid CSS identifier for the given custom field.
+ *
+ * The string is built based on the custom field's name, replacing any potentially
+ * unsupported character(s) by dashes `-` to ensure its validity. The resulting
+ * identifier can be used as part of a custom CSS class.
+ *
+ * @param string $p_custom_field_name The custom field's name
+ *
+ * @return string The CSS identifier
+ */
+function custom_field_css_name( $p_custom_field_name ) {
+    return 'custom-' . preg_replace( '/[^a-zA-Z0-9_-]+/', '-', $p_custom_field_name );
 }
 
 /**

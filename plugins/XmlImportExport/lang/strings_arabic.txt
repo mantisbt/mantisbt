@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Arabic (العربية)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -53,7 +53,7 @@ $s_plugin_XmlImportExport_config_title = 'استيراد/تصدير XML تهيئ
 $s_plugin_XmlImportExport_import_threshold = 'استورد قضايا';
 $s_plugin_XmlImportExport_export_threshold = 'تصدير القضايا';
 $s_plugin_XmlImportExport_action_update = 'تحديث';
-$s_plugin_XmlImportExport_importing_in_project = 'أستيراد القضايا في المشروع:';
+$s_plugin_XmlImportExport_importing_in_project = 'استيراد القضايا في المشروع: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'خيارات الاستيراد';
 $s_plugin_XmlImportExport_cross_references = 'تقاطع المراجع';
 $s_plugin_XmlImportExport_default_strategy = 'استراتيجية التحويل الافتراضي:';

@@ -22,7 +22,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( dirname( dirname( __FILE__ ) ) ) . '/soap/mc_filter_api.php'  );
+require_once( dirname( __FILE__, 3 ) . '/soap/mc_filter_api.php'  );
 
 use \Slim\Http\Request as SlimRequest;
 use \Slim\Http\Response as SlimResponse;

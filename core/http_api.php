@@ -99,25 +99,34 @@ function http_content_disposition_header( $p_filename, $p_inline = false ) {
 
 /**
  * Set caching headers that will allow or prevent browser caching.
- * @param boolean $p_allow_caching Allow caching.
+ *
+ * @param bool|null $p_allow_caching True to force caching, false to disable it;
+ *                                   If null, use default behavior defined by
+ *                                   {@see $g_allow_browser_cache}.
+ *
  * @return void
  */
-function http_caching_headers( $p_allow_caching = false ) {
-	global $g_allow_browser_cache;
+function http_caching_headers( $p_allow_caching = null ) {
+	if( headers_sent() ) {
+		return;
+	}
 
-	# Headers to prevent caching
-	# with option to bypass if running from script
-	if( !headers_sent() ) {
-		if( $p_allow_caching || ( isset( $g_allow_browser_cache ) && ON == $g_allow_browser_cache ) ) {
-			if( is_browser_internet_explorer() ) {
-				header( 'Cache-Control: private, proxy-revalidate' );
-			} else {
-				header( 'Cache-Control: private, must-revalidate' );
-			}
+	if( $p_allow_caching === null ) {
+		$t_allow_caching = ON == config_get_global( 'allow_browser_cache' );
+	} else {
+		$t_allow_caching = $p_allow_caching;
+	}
+
+	if( $t_allow_caching ) {
+		if( is_browser_internet_explorer() ) {
+			header( 'Cache-Control: private, proxy-revalidate' );
 		} else {
-			header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+			header( 'Cache-Control: private, must-revalidate' );
 		}
-
+		# set an expire time to +10 days
+		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time()+864000 ) );
+	} else {
+		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 		header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 	}
@@ -174,6 +183,15 @@ function http_csp_value() {
 
 	$t_csp_value = '';
 
+	# frame-ancestors can't have 'none' together with other values.
+	if( isset( $g_csp['frame-ancestors'] ) ) {
+		$t_frame_ancestors = &$g_csp['frame-ancestors'];
+		if( count( $t_frame_ancestors ) > 1 ) {
+			$t_key_none = array_search( "'none'", $t_frame_ancestors );
+			unset( $t_frame_ancestors[$t_key_none] );
+		}
+	}
+
 	foreach ( $g_csp as $t_key => $t_values ) {
 		$t_csp_value .= $t_key . ' ' . implode( ' ', $t_values ) . '; ';
 	}
@@ -209,19 +227,20 @@ function http_security_headers() {
 		http_csp_add( 'style-src', "'unsafe-inline'" );
 		http_csp_add( 'script-src', "'self'" );
 		http_csp_add( 'img-src', "'self'" );
+		http_csp_add( 'img-src', "'self' data:" );
 
 		# White list the CDN urls (if enabled)
 		if ( config_get_global( 'cdn_enabled' ) == ON ) {
 			http_csp_add( 'style-src', 'ajax.googleapis.com' );
-			http_csp_add( 'style-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'style-src', 'stackpath.bootstrapcdn.com' );
 			http_csp_add( 'style-src', 'fonts.googleapis.com' );
 			http_csp_add( 'style-src', 'cdnjs.cloudflare.com' );
 
 			http_csp_add( 'font-src', 'fonts.gstatic.com' );
-			http_csp_add( 'font-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'font-src', 'stackpath.bootstrapcdn.com' );
 
 			http_csp_add( 'script-src', 'ajax.googleapis.com' );
-			http_csp_add( 'script-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'script-src', 'stackpath.bootstrapcdn.com' );
 			http_csp_add( 'script-src', 'cdnjs.cloudflare.com' );
 
 			http_csp_add( 'img-src', 'ajax.googleapis.com' );

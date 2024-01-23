@@ -89,7 +89,7 @@ if( $f_username !== null ) {
 }
 
 $t_description = $t_title;
-$t_image_link = config_get_global( 'path' ) . 'images/mantis_logo_button.gif';
+$t_image_link = config_get_global( 'path' ) . config_get_global( 'logo_image' );;
 
 # only rss 2.0
 $t_category = string_rss_links( project_get_name( $f_project_id ) );
@@ -129,7 +129,7 @@ $t_base = (string)date( 'Y-m-d\TH:i:sO' );
 # add missing : in the O part of the date.  @todo PHP 5 supports a 'c' format which will output the format
 # exactly as we want it.
 # 2002-10-02T10:00:00-0500 -> 2002-10-02T10:00:00-05:00
-$t_base = utf8_substr( $t_base, 0, 22 ) . ':' . utf8_substr( $t_base, -2 );
+$t_base = mb_substr( $t_base, 0, 22 ) . ':' . mb_substr( $t_base, -2 );
 
 $t_rssfile->addSYdata( $t_period, $t_frequency, $t_base );
 

@@ -72,6 +72,7 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 
 auth_ensure_user_authenticated();
+access_ensure_project_level( config_get( 'print_reports_threshold' ) );
 
 $f_type_page	= gpc_get_string( 'type_page', 'word' );
 $f_search		= gpc_get_string( 'search', false ); # @todo need a better default
@@ -132,7 +133,7 @@ $t_lang_assigned_to = lang_get( 'assigned_to' );
 $t_lang_platform = lang_get( 'platform' );
 $t_lang_due_date = lang_get( 'due_date' );
 $t_lang_os = lang_get( 'os' );
-$t_lang_os_version = lang_get( 'os_version' );
+$t_lang_os_build = lang_get( 'os_build' );
 $t_lang_fixed_in_version = lang_get( 'fixed_in_version' );
 $t_lang_resolution = lang_get( 'resolution' );
 $t_lang_priority = lang_get( 'priority' );
@@ -148,7 +149,7 @@ $t_lang_description = lang_get( 'description' );
 $t_lang_steps_to_reproduce = lang_get( 'steps_to_reproduce' );
 $t_lang_additional_information = lang_get( 'additional_information' );
 $t_lang_bug_notes_title = lang_get( 'bug_notes_title' );
-$t_lang_system_profile = lang_get( 'system_profile' );
+$t_lang_system_profile = lang_get( 'profile_description' );
 $t_lang_attached_files = lang_get( 'attached_files' );
 $t_lang_tags = lang_get( 'tags' );
 
@@ -241,7 +242,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_reporter ) ?>
 	</td>
 	<td>
-		<?php print_user_with_subject( $t_bug->reporter_id, $t_id ) ?>
+		<?php print_user( $t_bug->reporter_id, false ) ?>
 	</td>
 	<td class="bold">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_platform ) ?>
@@ -277,7 +278,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	<td>
 		<?php
 			if( access_has_bug_level( config_get( 'view_handler_threshold' ), $t_id ) ) {
-				print_user_with_subject( $t_bug->handler_id, $t_id );
+				print_user( $t_bug->handler_id, false );
 			}
 		?>
 	</td>
@@ -297,7 +298,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo get_enum_element( 'priority', $t_bug->priority, auth_get_current_user_id(), $t_bug->project_id ) ?>
 	</td>
 	<td class="bold">
-		<?php echo sprintf( lang_get( 'label' ), $t_lang_os_version ) ?>
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_os_build ) ?>
 	</td>
 	<td>
 		<?php echo string_display_line( $t_bug->os_build ) ?>
@@ -449,7 +450,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 <?php
 	# account profile description
 	if( $t_bug->profile_id > 0 ) {
-		$t_profile_row = profile_get_row_direct( $t_bug->profile_id );
+		$t_profile_row = profile_get_row( $t_bug->profile_id );
 		$t_profile_description = string_display( $t_profile_row['description'] );
 
 ?>
@@ -487,7 +488,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
 				echo $c_filename . ' (' . $c_filesize . ' ' . lang_get( 'bytes' )
 					. ') <span class="italic-small">' . $c_date_added . '</span><br />'
-					. string_display_links( $t_path . $c_download_url );
+					. string_display_line_links( $t_path . $c_download_url );
 
 				if( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
 					echo '<br /><img src="', $c_download_url, '" alt="', $t_attachment['alt'], '" /><br />';
@@ -536,7 +537,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 	<td width="12%">
 				(<?php echo bugnote_format_id( $t_bugnote->id ) ?>)
 			<br />
-				<?php print_user( $t_bugnote->reporter_id ) ?>&#160;&#160;&#160;
+				<?php print_user( $t_bugnote->reporter_id, false ) ?>&#160;&#160;&#160;
 			<br />
 				<?php echo $t_date_submitted ?>&#160;&#160;&#160;
 				<?php if( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
@@ -548,7 +549,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 					switch ( $t_bugnote->note_type ) {
 						case REMINDER:
 							echo lang_get( 'reminder_sent_to' ) . ': ';
-							$t_note_attr = utf8_substr( $t_bugnote->note_attr, 1, utf8_strlen( $t_bugnote->note_attr ) - 2 );
+							$t_note_attr = mb_substr( $t_bugnote->note_attr, 1, mb_strlen( $t_bugnote->note_attr ) - 2 );
 							$t_to = array();
 							foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
 								$t_to[] = prepare_user_name( $t_recipient );

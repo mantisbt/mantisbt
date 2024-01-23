@@ -21,7 +21,7 @@
  * @package MantisBT
  */
 
-$t_api_path = dirname( dirname( dirname( __FILE__) ) ) . '/api/';
+$t_api_path = dirname( __FILE__, 3 ) . '/api/';
 require_once( $t_api_path . 'soap/mc_api.php' );
 require_once( $t_api_path . 'soap/mc_account_api.php' );
 require_once( $t_api_path . 'soap/mc_enum_api.php' );
@@ -90,7 +90,6 @@ class FilterConverter {
 	 */
 	private function filterCriteriaToJson( $p_criteria, $p_project_id ) {
 		$t_criteria = $p_criteria;
-		$p_lang = $this->lang;
 	
 		$this->renameField( $t_criteria, FILTER_PROPERTY_HANDLER_ID, 'handler' );
 		$this->renameField( $t_criteria, FILTER_PROPERTY_REPORTER_ID, 'reporter' );
@@ -120,6 +119,7 @@ class FilterConverter {
 		$this->convertEnumToJson( $t_criteria, FILTER_PROPERTY_SEVERITY, 'severity' );
 		$this->convertEnumToJson( $t_criteria, FILTER_PROPERTY_RESOLUTION, 'resolution' );
 		$this->convertEnumToJson( $t_criteria, FILTER_PROPERTY_VIEW_STATE, 'view_state' );
+		$this->convertEnumToJson( $t_criteria, FILTER_PROPERTY_PROJECTION, 'projection' );
 
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_VERSION, $p_project_id );
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_FIXED_IN_VERSION, $p_project_id );
@@ -363,6 +363,7 @@ class FilterConverter {
 	 *
 	 * @param array  $p_criteria  The criteria to be updated.
 	 * @param string $p_field     The field name in the criteria array.
+	 * @param integer $p_project_id Integer representing project id.
 	 * @return void
 	 */
 	private function convertVersionArrayToJson( &$p_criteria, $p_field, $p_project_id ) {
@@ -391,7 +392,6 @@ class FilterConverter {
 	 * Convert sort order from internal to API format.
 	 *
 	 * @param array  $p_criteria  The criteria to be updated.
-	 * @param string $p_field     The field name in the criteria array.
 	 * @return void
 	 */
 	private function convertSortOrder( &$p_criteria ) {
@@ -573,7 +573,6 @@ class FilterConverter {
 	 * Convert hide status from internal to API format.
 	 *
 	 * @param array  $p_criteria  The criteria to be updated.
-	 * @param string $p_field     The field name in the criteria array.
 	 * @return void
 	 */
 	private function convertHideStatusToJson( &$p_criteria ) {
@@ -614,6 +613,7 @@ class FilterConverter {
 		unset( $p_criteria['_version'] );
 		unset( $p_criteria['_source_query_id'] );
 		unset( $p_criteria['_view_type'] );
+		unset( $p_criteria['_filter_id'] );
 	}
 
 	/**

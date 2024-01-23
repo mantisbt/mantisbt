@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,21 +33,25 @@
 /** Hebrew (עברית)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Amire80
+ * @author Avma
  * @author YaronSh
  */
 
 $s_plugin_format_title = 'עיצוב MantisBT';
-$s_plugin_format_description = 'התוסף הרשמי לעיבוד ולעיצוב של טקסט.';
+$s_plugin_format_description = 'המתקע הרשמי לעיבוד ולעיצוב מלל.';
 $s_plugin_format_config = 'תצורה';
-$s_plugin_format_process_text = 'עיבוד טקסט';
-$s_plugin_format_process_text_warning_notice = 'אין לכבות את זה, אלא אם כן אתם ממש יודעים מה אתם עושים. במצב כבוי מתאפשרות התקפות חוצות אתרים (XSS).';
-$s_plugin_format_process_urls = 'עיבוד כתובות';
-$s_plugin_format_process_buglinks = 'קישורי מנטיס ( באג/הערה לבאג )';
+$s_plugin_format_process_text = 'עיבוד מלל';
+$s_plugin_format_process_text_warning_notice = 'נא לא לכבות, אלא אם כן אתם יודעים מה אתם עושים. במצב כבוי,התקפות חוצות אתרים (XSS)מתאפשרות.';
+$s_plugin_format_process_urls = 'עיבוד מעני URL';
+$s_plugin_format_process_buglinks = 'קישורי MantisBT פנימיים(סוגיה והערות סוגיה)';
+$s_plugin_format_process_buglinks_info = 'התצורה מגדירה את התג <em>נושא</em> כ־"%s" ואת תג <em>הערת סוגיה</em> כ־"%s"';
+$s_plugin_format_process_markdown = 'עיבוד Markdown';
+$s_plugin_format_process_markdown_info = 'עיצוב בתמיכת Markdown, תחביר עיצוב מלל עוצב כך שניתן יהיה להמירו ל־HTML.';
 $s_plugin_format_enabled = 'פעיל';
 $s_plugin_format_disabled = 'כבוי';

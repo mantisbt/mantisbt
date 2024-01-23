@@ -23,7 +23,7 @@ body {
     background-color: #E4E6E9;
     min-height: 100%;
     padding-bottom: 0;
-    font-family: 'Open Sans';
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 13px;
     color: #393939;
     line-height: 1.5;
@@ -8730,7 +8730,7 @@ input[type=radio].ace.disabled + .lbl::before {
 input[type=radio].ace @{lbl}::before {
 	border-radius:100%;
 	font-size: 34px;
-	font-family: Helvetica, Arial, "Sans-Serif";//looks better but incosistent
+	font-family: Helvetica, Arial, "Sans-Serif";//looks better but inconsistent
 	line-height: 13px;
 }
 */
@@ -8771,7 +8771,7 @@ input[type=checkbox].ace.ace-switch + .lbl {
     min-height: 24px;
 }
 input[type=checkbox].ace.ace-switch + .lbl::before {
-    font-family: 'Open Sans';
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     content: "ON\a0\a0\a0\a0\a0\a0\a0\a0\a0OFF";
     color: #999;
     text-shadow: 0 0 0 #999;
@@ -8797,7 +8797,7 @@ input[type=checkbox].ace.ace-switch + .lbl::before {
     top: auto;
 }
 input[type=checkbox].ace.ace-switch + .lbl::after {
-    font-family: 'Open Sans';
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     content: 'III';
     font-size: 12px;
     font-weight: normal;
@@ -12952,7 +12952,7 @@ li.item-default {
     line-height: 26px;
     font-size: 13px;
     font-weight: bold;
-    font-family: "Open Sans";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding: 0 8px;
 }
 .profile-users .user {

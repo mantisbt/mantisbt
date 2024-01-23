@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Bulgarian (български)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -51,7 +51,7 @@ $s_plugin_format_process_text = 'Обработка на текст';
 $s_plugin_format_process_text_warning_notice = 'Не изключвайте освен ако наистина знаете какво точно правите. В изключено състояние са възможни cross site scripting (XSS) атаки.';
 $s_plugin_format_process_urls = 'Обработка на URL';
 $s_plugin_format_process_buglinks = 'Вътрешни връзки на MantisBT (проблеми и бележките към тях)';
-$s_plugin_format_process_buglinks_info = 'Конфигурацията ви дефинира тага <em>Issue</em> като <literal>%s</literal>", a <em>Issue Note</em> - като "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'Конфигурацията ви дефинира тага <em>Issue</em> като %s", a <em>Issue Note</em> - като "%s"';
 $s_plugin_format_process_markdown = 'Обработка с Markdown';
 $s_plugin_format_process_markdown_info = 'Синтаксиса на форматирането с поддръжка на Markdown е разработен така, че текстът да може да се преобразува в HTML.';
 $s_plugin_format_enabled = 'Вкл.';

@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Urdu (اردو)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -55,10 +55,4 @@ $s_plugin_MantisGraph_by_priority_mix = 'خصوصیت اور مقامکے لہا
 $s_plugin_MantisGraph_by_resolution_mix = ' ساہز اور مقامکے لہاظ سے';
 $s_plugin_MantisGraph_legend_still_open = 'ابھی کھلا ھوا ھے';
 $s_plugin_MantisGraph_legend_resolved = 'حل ھو گیا ھے';
-$s_plugin_MantisGraph_legend_assigned = 'سپرد ھو گہے';
-$s_plugin_MantisGraph_legend_total = 'تمام';
-$s_plugin_MantisGraph_legend_opened = 'کھلا ھوا ھے';
-$s_plugin_MantisGraph_legend_closed = 'بند ھے';
 $s_plugin_MantisGraph_legend_reported = 'خبر ھو گی ھے';
-$s_plugin_MantisGraph_cumulative = 'مجموعی';
-$s_plugin_MantisGraph_not_enough_data = 'اعداد تھوڈے ھین گراف بنانے کے لے';

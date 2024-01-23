@@ -24,426 +24,715 @@
 
 define( 'PLUGINS_DISABLED', true );
 define( 'LANG_LOAD_DISABLED', true );
-define( 'STRINGS_ENGLISH', 'strings_english.txt' );
-$t_mantis_dir = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
+
+$t_mantis_dir = dirname( __FILE__, 2 ) . '/';
 
 require_once( $t_mantis_dir . 'core.php' );
 
-# Load schema version needed to render admin menu bar
-require_once( 'schema.php' );
+/**
+ * Class CheckLangFile.
+ *
+ * Processes a language strings file (strings_xxx.txt)
+ */
+class LangCheckFile {
+	const BASE = 'strings_english.txt';
+
+	/**
+	 * Comma-delimited list of valid tags and attributes for language strings
+	 * @see http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
+	 */
+	const VALID_TAGS = 'em,strong,i,b,br,p,ul,ol,li,table,tr,td,code,a[href|title],span[class],abbr[title]';
+
+	/**
+	 * @var bool True if HTML syntax checks can be performed
+	 * (i.e. if DOM and libxml PHP extensions are available).
+	 * @see canDoHtmlChecks().
+	 */
+	protected static $can_do_html_check;
+
+	/**
+	 * @var string Full path to to the language file
+	 */
+	protected $file;
+
+	/**
+	 * @var bool True if file is base language (i.e. English)
+	 */
+	protected $is_base_language;
+
+	/**
+	 * @var string[] List of errors messages detected during checks.
+	 */
+	protected $errors = [];
+
+	/**
+	 * @var string[] List of warning messages detected during checks.
+	 */
+	protected $warnings = [];
+
+	/**
+	 * @var HTMLPurifier
+	 * @see http://htmlpurifier.org/
+	 */
+	protected $purifier;
+
+	/**
+	 * CheckLangFile constructor.
+	 *
+	 * @param string $p_path Path to language files
+	 * @param string $p_file Language file name
+	 */
+	public function __construct( $p_path, $p_file ) {
+		$this->file = $p_path . $p_file;
+		$this->is_base_language = ( $p_file == self::BASE );
+
+		# Initialize HTML Purifier object
+		# - define list of tags and attributes allowed in language strings
+		# - disable the cache for now, as this is only used sporadically by
+		#   admins/devs, so the performance hit (~ 1-2 sec) is acceptable.
+		$t_purifier_config = HTMLPurifier_Config::create( [
+			'Cache.DefinitionImpl' => null,
+			'HTML.Allowed' => self::VALID_TAGS,
+		] );
+		$this->purifier = new HTMLPurifier( $t_purifier_config );
+	}
+
+	/**
+	 * Log an error.
+	 *
+	 * @param string $p_message
+	 */
+	protected function logFail( $p_message, $p_line = 0 ) {
+		if( $p_line ) {
+			$p_message = "Line $p_line: $p_message";
+		}
+		$this->errors[] = $p_message;
+	}
+
+	/**
+	 * Log a warning.
+	 *
+	 * @param string $p_message
+	 */
+	protected function logWarn( $p_message, $p_line = 0  ) {
+		if( $p_line ) {
+			$p_message = "Line $p_line: $p_message";
+		}
+		$this->warnings[] = $p_message;
+	}
+
+	/**
+	 * Returns True if HTML tags validation can be performed.
+	 * @return bool
+	 */
+	public static function canDoHtmlChecks() {
+		if( self::$can_do_html_check === null ) {
+			self::$can_do_html_check = extension_loaded( 'dom' ) && extension_loaded( 'libxml' );
+		}
+		return self::$can_do_html_check;
+	}
+
+	/**
+	 * Check Language File.
+	 *
+	 * @return bool True if success (possibly with warnings), False if errors
+	 */
+	public function check() {
+		$this->checkConfig();
+
+		if( $this->checkTokens() ) {
+			try {
+				ob_start();
+				$t_result = eval( "require_once( '$this->file' );" );
+				$t_data = ob_get_flush();
+
+				if( $t_result === false ) {
+					$this->logFail( 'Failed at eval' );
+				} elseif( !empty( $t_data ) ) {
+					$this->logFail(
+						'Failed at require_once (data output: ' . var_export( $t_data, true ) . ')'
+					);
+				}
+			} catch( ParseError $e ) {
+				ob_end_clean();
+				$this->logFail( $e->getMessage(), $e->getLine() );
+			}
+		}
+
+		return empty( $this->errors );
+	}
+
+	/**
+	 * Print check results.
+	 *
+	 * Prints a table row with 2 cells, the first contains the name of the file
+	 * being checked, and the second the outcome of the check including error
+	 * and warning messages as unordered list if any, with a colored background
+	 * depending on overall status (PASS, WARNINGS, ERRORS).
+	 */
+	public function printResults() {
+		flush();
+		echo "<tr><td>Testing '" . basename( $this->file ) . "'</td>";
+
+		$t_messages = '';
+
+		if( $this->warnings ) {
+			$t_class = 'alert-warning';
+			$t_warnings = '';
+			foreach( $this->warnings as $t_msg ) {
+				$t_warnings .= '<li>' . string_attribute( $t_msg ) . '</li>';
+			}
+			$t_messages = sprintf( 'WARNINGS<ul>%s</ul>', $t_warnings );
+		}
+
+		if( $this->errors ) {
+			$t_class = 'alert-danger';
+			$t_errors = '';
+			foreach( $this->errors as $t_msg ) {
+				$t_errors .= '<li>' . string_attribute( $t_msg ) . '</li>';
+			}
+			$t_messages = sprintf( 'ERRORS<ul>%s</ul>', $t_errors )
+				. $t_messages;
+		}
+
+		if( !$t_messages ) {
+			$t_class = 'alert-success';
+			$t_messages = 'PASS';
+		}
+
+		/** @noinspection PhpUndefinedVariableInspection */
+		printf( '<td class="%s">%s</td>', $t_class, $t_messages );
+		echo '</tr>' . PHP_EOL;
+	}
+
+	/**
+	 * Check Language File and print results.
+	 *
+	 * @return bool True if success (possibly with warnings), False if errors
+	 */
+	public function checkAndPrint() {
+		$t_status = $this->check();
+		$this->printResults();
+		return $t_status;
+	}
+
+	/**
+	 * Check language existence in configuration.
+	 *
+	 * TranslateWiki.net sometimes adds brand new languages; we need to make
+	 * sure that these are properly defined in
+	 * - {@see $g_language_choices_arr}
+	 * - {@see $g_language_auto_map}
+	 * If not, this is reported as a warning as this just means the new language
+	 * cannot be used within MantisBT.
+	 */
+	protected function checkConfig() {
+		global /** @noinspection PhpUnusedLocalVariableInspection */
+		$g_language_choices_arr, $g_language_auto_map;
+
+		# Extract language from file name
+		# preg_match() can't fail, get_lang_files() uses the same regex
+		preg_match( '/strings_(.+)\.txt$/', $this->file, $t_matches );
+		$t_lang = $t_matches[1];
+
+		# Check for matching entries in configuration
+		$t_check = ['g_language_choices_arr', 'g_language_auto_map'];
+		foreach( $t_check as $t_key => $t_config ) {
+			if( in_array( $t_lang, $$t_config ) ) {
+				unset( $t_check[$t_key] );
+			}
+		}
+
+		# Report errors
+		if( $t_check ) {
+			$this->logWarn( "'$t_lang' language is not defined in "
+				. implode(', ', $t_check )
+			);
+		}
+	}
+
+	/**
+	 * Check Language File Tokens
+	 *
+	 * @return boolean
+	 */
+	protected function checkTokens() {
+		$t_source = file_get_contents( $this->file );
+		try {
+			$t_tokens = token_get_all( $t_source, TOKEN_PARSE );
+		} catch( ParseError $e ) {
+			$this->logFail( $e->getMessage(), $e->getLine() );
+			return false;
+		}
+
+		$t_line = 0;
+		$t_variables = array();
+		static $s_basevariables;
+		$t_current_var = null;
+		$t_last_token = 0;
+		$t_set_variable = false;
+		$t_variable_array = false;
+		$t_two_part_string = false;
+		$t_need_end_variable = false;
+		$t_expect_end_array = false;
+		$t_expect_double_quote = false;
+		$t_setting_variable = false;
+		$t_pass = true;
+		$t_fatal = false;
+
+		foreach( $t_tokens as $t_token ) {
+			$t_last_token2 = 0;
+			if( is_string( $t_token ) ) {
+				switch( $t_token ) {
+					case '=':
+						#
+						if( $t_last_token != T_VARIABLE ) {
+							$this->logFail( "'=' sign without variable", $t_line );
+							$t_pass = false;
+						}
+						$t_set_variable = true;
+						break;
+					case '[':
+						if( $t_last_token != T_VARIABLE ) {
+							$this->logFail( "Unexpected opening square bracket '['", $t_line);
+							$t_pass = false;
+						}
+						$t_variable_array = true;
+						break;
+					case ']':
+						if( !$t_expect_end_array ) {
+							$this->logFail( "Unexpected closing square bracket ']'", $t_line);
+							$t_pass = false;
+						}
+						$t_expect_end_array = false;
+						$t_variable_array = false;
+						break;
+					case ';':
+						if( !$t_need_end_variable ) {
+							$this->logFail( "Unexpected semicolon", $t_line );
+							$t_pass = false;
+						}
+						$t_need_end_variable = false;
+						break;
+					case '.':
+						if( $t_last_token == T_CONSTANT_ENCAPSED_STRING ) {
+							$t_two_part_string = true;
+						} else {
+							$this->logFail( "String concatenation found at unexpected location", $t_line );
+							$t_pass = false;
+						}
+						break;
+					case '"':
+						$t_expect_double_quote = !$t_expect_double_quote;
+						break;
+					default:
+						$this->logFail( "Unknown token '$t_token'", $t_line );
+						$t_pass = false;
+						break;
+				}
+			} else {
+				# token array
+				list( $t_id, $t_text, $t_line ) = $t_token;
+
+				if( $t_id == T_WHITESPACE || $t_id == T_COMMENT || $t_id == T_DOC_COMMENT ) {
+					continue;
+				}
+				if( $t_need_end_variable ) {
+					if( $t_two_part_string && $t_id == T_CONSTANT_ENCAPSED_STRING ) {
+						$t_two_part_string = false;
+						continue;
+					}
+					if( $t_setting_variable && $t_id == T_STRING ) {
+						$t_last_token = T_VARIABLE;
+						$t_expect_end_array = true;
+						continue;
+					}
+					$this->logFail( "Unexpected " . token_name( $t_id ) . " token '$t_text'", $t_line );
+					$t_pass = false;
+				}
+
+				switch( $t_id ) {
+					case T_OPEN_TAG:
+						# We expect an initial <?php tag, but it does not require any processing
+						break;
+					case T_INLINE_HTML:
+						$this->logFail( 'Whitespace in language file outside of PHP code block', $t_line );
+						$t_pass = false;
+						break;
+					case T_VARIABLE:
+						if( $t_expect_double_quote ) {
+							$this->logFail( "Unexpected " . token_name( $t_id ) . " token '$t_text'", $t_line );
+							break;
+						}
+						if( $t_set_variable && $t_current_var != null ) {
+							$t_need_end_variable = true;
+							$t_setting_variable = true;
+							$t_current_var = null;
+							break;
+						}
+						$t_current_var = $t_text;
+						break;
+					case T_STRING:
+						if( $t_variable_array ) {
+							$t_current_var .= $t_text;
+							if( !defined( $t_text ) ) {
+								$this->logFail( "undefined constant: '$t_text'", $t_line );
+							}
+						} else {
+							$this->logFail( "T_STRING token found at unexpected location", $t_line );
+							$t_pass = false;
+						}
+						if( strpos( $t_current_var, "\n" ) !== false ) {
+							$this->logFail( "NEW LINE in string: $t_id " . token_name( $t_id ) . " = $t_text", $t_line );
+							$t_pass = false;
+							$t_fatal = true;
+						}
+						$t_last_token2 = T_VARIABLE;
+						$t_expect_end_array = true;
+						break;
+					case T_CONSTANT_ENCAPSED_STRING:
+						if( $t_text[0] != '\'' ) {
+							$this->logWarn( "Language strings should be single-quoted", $t_line );
+						}
+						if( $t_variable_array ) {
+							$t_current_var .= $t_text;
+							$t_last_token2 = T_VARIABLE;
+							$t_expect_end_array = true;
+							break;
+						}
+
+						if( $t_last_token == T_VARIABLE && $t_set_variable && $t_current_var != null ) {
+							if( isset( $t_variables[$t_current_var] ) ) {
+								$this->logFail( "Duplicate language string '$t_current_var'", $t_line );
+							} else {
+								$t_variables[$t_current_var] = $t_text;
+							}
+
+							if( $this->is_base_language ) {
+								$s_basevariables[$t_current_var] = true;
+							} elseif( !isset( $s_basevariables[$t_current_var] ) ) {
+								$this->logWarn( "String '$t_current_var' not defined in English language file" );
+							}
+
+						}
+						if( strpos( $t_current_var, "\n" ) !== false ) {
+							$this->logFail( "NEW LINE in string: $t_id " . token_name( $t_id ) . " = $t_text", $t_line );
+							$t_pass = false;
+							$t_fatal = true;
+						}
+
+						# Perform HTML tags validation if the string contains any
+						if( $this::canDoHtmlChecks()
+							&& preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text)
+						) {
+							/** @noinspection PhpComposerExtensionStubsInspection */
+							$t_dom = new DOMDocument();
+							set_error_handler(
+								function( $p_type, $p_error ) {
+									$t_msg = preg_replace( '/^DOM.*: (.*), line.*$/U', '\\1', $p_error );
+									/** @noinspection PhpUnhandledExceptionInspection See try/catch block below*/
+									throw new Exception( $t_msg );
+								},
+								E_WARNING
+							);
+							try {
+								/** @noinspection PhpComposerExtensionStubsInspection */
+								$t_dom->loadHTML( $t_text, LIBXML_HTML_NOIMPLIED );
+							}
+							catch( Exception $e ) {
+								$this->logWarn( $e->getMessage() . " for string $t_current_var", $t_line );
+							}
+							restore_error_handler();
+
+							$this->checkInvalidTags( $t_current_var, $t_text, $t_line );
+						}
+
+						$t_current_var = null;
+						$t_need_end_variable = true;
+						break;
+					default:
+						$this->logFail( "Unexpected " . token_name( $t_id ) . " token '$t_text'", $t_line );
+						$t_pass = false;
+						break;
+				}
+
+				$t_last_token = $t_id;
+				if( $t_last_token2 > 0 ) {
+					$t_last_token = $t_last_token2;
+				}
+			}
+
+			if( $t_fatal ) {
+				break;
+			}
+		}
+
+		return $t_pass;
+	}
+
+	/**
+	 * Use HTML Purifier to ensure the string does not contain unsupported tags.
+	 *
+	 * Will log an error if the purified string is not equal to the original.
+	 * @see LangCheckFile::compareToPurified()
+	 *
+	 * @param string $p_var  Name of language string variable to check
+	 * @param string $p_text Language string
+	 * @param int    $p_line Line number in language file
+	 *
+	 * @return void
+	 */
+	private function checkInvalidTags( $p_var, $p_text, $p_line ) {
+		$t_pure = $this->purifier->purify( $p_text );
+
+		# Special cases handling
+		# - sprintf variable '%1$s' inside href gets urlencoded
+		if( $p_var == '$s_webmaster_contact_information' ) {
+			$t_pure = str_replace( '%25', '%', $t_pure );
+		}
+
+		# Prepare original language string for comparison with HTML Purifier output
+		# - transform <br> tag with or without trailing '/' into '<br />'
+		$p_text = preg_replace( '#<br\s*/?>#i', '<br />', $p_text );
+
+		if( $t_pure != $p_text ) {
+			$this->logFail( "$p_var contains unsupported or invalid tags or attributes.", $p_line );
+		}
+	}
+
+}
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
-
-if( function_exists( 'xdebug_disable' ) ) {
-	xdebug_disable();
-}
-
-if( !defined( 'T_ML_COMMENT' ) ) {
-	define( 'T_ML_COMMENT', T_COMMENT );
-} else {
-	define( 'T_DOC_COMMENT', T_ML_COMMENT );
-}
 
 lang_push( 'english' );
 
 set_time_limit( 0 );
 
 layout_page_header();
-
 layout_admin_page_begin();
-
 print_admin_menu_bar( 'test_langs.php' );
 ?>
 
-<div class="col-md-12 col-xs-12">
-<div class="space-10"></div>
+<div class="page-content col-md-12 col-xs-12">
+	<div class="space-10"></div>
 
-<div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-text-width"></i>
-		Test Langs
-	</h4>
-</div>
+	<!-- CORE LANGUAGE FILES -->
+	<div id="core" class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
+				Testing Core Language Files
+			</h4>
+			<div class="widget-toolbar no-border hidden-xs">
+				<div class="widget-menu">
+					<?php print_extra_small_button( '#plugins', 'Scroll down to Plugins'); ?>
+				</div>
+			</div>
+		</div>
 
-<div class="widget-body">
-<div class="widget-main">
-
-
-
+		<div class="widget-body">
+			<div class="widget-main no-padding table-responsive">
+				<table class="table table-bordered table-condensed test-langs">
 <?php
-
-if( !checkfile( $t_mantis_dir . 'lang' . DIRECTORY_SEPARATOR, STRINGS_ENGLISH, true ) ) {
-	print_error( "Language file '" . STRINGS_ENGLISH . "' failed.", 'FAILED' );
-	die;
-}
-
-# check core language files
-if( function_exists( 'scandir' ) ) {
-	checklangdir( $t_mantis_dir );
-} else {
-	$t_lang_files = array();
-	foreach( $g_language_choices_arr as $t_lang ) {
-		if( $t_lang == 'auto' ) {
-			continue;
-		}
-		$t_lang_files[] = $t_lang;
-	}
-	asort( $t_lang_files );
-	checklangdir( $t_mantis_dir, $t_lang_files );
-}
-
-# attempt to find plugin language files
-echo 'Trying to find+check plugin language files...<br />';
-if( function_exists( 'scandir' ) ) {
-	checkplugins( config_get_global( 'plugin_path' ) );
-} else {
-	echo 'php scandir is disabled - skipping<br />';
-}
+if( !LangCheckFile::canDoHtmlChecks() ) {
 ?>
+					<tr>
+						<td>
+							Check for required <em>DOM</em> and <em>libxml</em>
+							PHP extensions
+						</td>
+						<td class="alert-warning">HTML syntax checks will not be performed.
+							<br>
+							NOTE: This warning applies to all languages and plugins
+							tested on this page.
+						</td>
+					</tr>
+<?php
+}
 
-</div>
-</div>
-</div>
+checklangdir( $t_mantis_dir );
+?>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="space-10"></div>
+
+	<!-- PLUGINS -->
+	<div id="plugins" class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
+				Testing Plugins Language Files
+			</h4>
+			<div class="widget-toolbar no-border hidden-xs">
+				<div class="widget-menu">
+					<?php print_extra_small_button( '#', 'Scroll back to top'); ?>
+				</div>
+			</div>
+		</div>
+
+		<div class="widget-body">
+			<div class="widget-main no-padding table-responsive">
+				<table class="table table-bordered table-condensed test-langs">
+<?php
+checkplugins();
+?>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
 
 <?php
+layout_admin_page_end();
+
+
 /**
  * Check plugin language files
- * @param string $p_path Plugin path.
- * @return void
  */
-function checkplugins( $p_path ) {
-	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
+function checkplugins() {
+	$t_path = config_get_global( 'plugin_path' );
+	echo '<tr><td>';
+	echo "Retrieving Plugins from '$t_path'";
+	echo '</td>';
 
-	$t_plugins = @scandir( $t_path );
-	if( false == $t_plugins ) {
-		print_error( 'plugin path ' . $t_path . ' not found or not accessible' );
-	} else {
-		foreach( $t_plugins as $t_plugin ) {
-			if( $t_plugin[0] == '.' || $t_plugin == 'Web.config' ) {
-				continue;
-			}
-			echo '<tr><td>';
-			echo 'Checking language files for plugin ' . $t_plugin . ':<br />';
-			checklangdir( $t_path . $t_plugin );
+	try {
+		$t_plugins = get_plugins( $t_path );
+		$t_toc = '<ol class="plugins-toc">';
+		foreach( $t_plugins as $t_plugin => $t_path ) {
+			$t_toc .= '<li><a href="#plugin-' . $t_plugin . '">' . $t_plugin . '</a></li>';
 		}
+		$t_toc .= '</ol>';
+		print_info( count( $t_plugins ) . " Plugins found" . $t_toc );
+	} catch( UnexpectedValueException $e ) {
+		print_fail( $e->getMessage() );
+		echo '</tr>' . PHP_EOL;
+		return;
 	}
+	echo '</tr>' . PHP_EOL;
+
+	foreach( $t_plugins as $t_plugin => $t_path ) {
+		echo PHP_EOL;
+		echo '<tr><th colspan="2">';
+		echo '<a id="plugin-' . $t_plugin . '"></a>';
+		echo "Checking language files for plugin <em>$t_plugin</em>";
+		echo '</th></tr>';
+		checklangdir( $t_path );
+	}
+}
+
+/**
+ * Get the list of plugins.
+ *
+ * @param string $p_path
+ * @return string[] Plugin names in ascending order.
+ *
+ * @throws UnexpectedValueException
+ */
+function get_plugins( $p_path ) {
+	$t_iter = new CallbackFilterIterator(
+		new FileSystemIterator(
+			$p_path,
+			FileSystemIterator::KEY_AS_FILENAME
+		),
+		/**
+		 * Callback filter function
+		 * @param SplFileInfo $p_current
+		 * @return bool
+		 */
+		function( SplFileInfo $p_current ) {
+			return $p_current->isDir();
+		}
+	);
+
+	$t_plugins = iterator_to_array( $t_iter );
+	ksort( $t_plugins, SORT_FLAG_CASE );
+	return $t_plugins;
+}
+
+/**
+ * Get the language files from the given directory.
+ *
+ * @param $p_path
+ * @return string[] Language file names in ascending order.
+ *
+ * @throws UnexpectedValueException
+ */
+function get_lang_files( $p_path ) {
+	$t_iter = new FileSystemIterator(
+		$p_path,
+		FileSystemIterator::KEY_AS_FILENAME | FileSystemIterator::CURRENT_AS_PATHNAME
+	);
+
+	# Filter language files, excluding 'qqq' pseudo-language
+	# https://translatewiki.net/wiki/FAQ#Special_private_language_codes_qqq,_qqx
+	$t_iter = new RegexIterator( $t_iter,
+		'|^strings_(?(?!qqq).+)\.txt$|',
+		RegexIterator::MATCH,
+		RegexIterator::USE_KEY
+	);
+
+	$t_files = array_keys( iterator_to_array( $t_iter ) );
+	sort( $t_files );
+	return $t_files;
 }
 
 /**
  * Check directory of language files
  *
- * @param string $p_path       Path.
- * @param string $p_lang_files Sub path.
+ * @param string $p_path Path to language files.
+ *
  * @return void
  */
-function checklangdir( $p_path, $p_lang_files = null ) {
-	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
+function checklangdir( $p_path ) {
+	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . '/lang/';
+	echo PHP_EOL . '<tr><td>';
+	echo "Retrieving language files from '$t_path'";
+	echo '</td>';
 
-	if( is_array( $p_lang_files ) ) {
-		$t_lang_files = $p_lang_files;
+	if( !is_dir( $t_path ) ) {
+		print_info( "Directory does not exist" );
+		echo '</tr>' . PHP_EOL;
+		return;
 	} else {
-		$t_lang_files = @scandir( $t_path );
+		try {
+			$t_lang_files = get_lang_files( $t_path );
+			print_info( count( $t_lang_files ) . " files found" );
+		} catch( UnexpectedValueException $e ) {
+			print_fail( $e->getMessage() );
+			echo '</tr>' . PHP_EOL;
+			return;
+		}
 	}
-	if( false == $t_lang_files ) {
-		print_error( 'language dir ' . $t_path . ' not found or not accessible' );
+
+	echo '</tr>' . PHP_EOL;
+
+	# Check reference English language file
+	$t_key = array_search( LangCheckFile::BASE, $t_lang_files );
+	if( $t_key === false ) {
+		print_fail( "File not found" );
 	} else {
-		if( in_array( STRINGS_ENGLISH, $t_lang_files ) ) {
-			echo 'Testing English language file...<br />';
-			flush();
-			checkfile( $t_path, STRINGS_ENGLISH );
+		$t_file = new LangCheckFile( $t_path, LangCheckFile::BASE );
+		# No point testing other languages if English fails
+		if( !$t_file->checkAndPrint() ) {
+			return;
 		}
-		# Skipping english language, readme and hidden files
-		foreach( $t_lang_files as $t_key => $t_lang ) {
-			if( $t_lang[0] == '.'
-			 || $t_lang == 'Web.config'
-			 || $t_lang == 'README'
-			 || $t_lang == STRINGS_ENGLISH
-			) {
-				unset( $t_lang_files[$t_key] );
-			}
-		}
-		if( !empty( $t_lang_files ) ) {
-			echo 'Retrieved ', count( $t_lang_files ), ' languages<br />';
-			foreach( $t_lang_files as $t_lang ) {
-				checkfile( $t_path, $t_lang );
-			}
-		}
+		unset( $t_lang_files[$t_key] );
+	}
+
+	# Check foreign language files
+	foreach( $t_lang_files as $t_lang ) {
+		$t_file = new LangCheckFile( $t_path, $t_lang );
+		$t_file->checkAndPrint();
 	}
 }
 
-/**
- * Check Language File
- *
- * @param string  $p_path  Path.
- * @param string  $p_file  File.
- * @param boolean $p_quiet Quiet output.
- * @return boolean
- */
-function checkfile( $p_path, $p_file, $p_quiet = false ) {
-		if( !$p_quiet ) {
-			echo 'Testing language file \'' . $p_file . '\' (phase 1)...<br />';
-			flush();
-		}
-
-		$t_file = $p_path . $p_file;
-
-		set_error_handler( 'lang_error_handler' );
-		$t_result = checktoken( $t_file, ($p_file == STRINGS_ENGLISH ) );
-		restore_error_handler();
-
-		if( !$t_result ) {
-			print_error( 'Language file \'' . $p_file . '\' failed at phase 1.', 'FAILED' );
-			if( $p_quiet ) {
-				return false;
-			}
-		}
-
-		if( !$p_quiet ) {
-			echo 'Testing language file \'' . $p_file . '\' (phase 2)...<br />';
-			flush();
-		} else {
-			return true;
-		}
-
-		set_error_handler( 'lang_error_handler' );
-		ob_start();
-		$t_result = eval( 'require_once( \'' . $t_file . '\' );' );
-		$t_data = ob_get_contents();
-		ob_end_clean();
-		restore_error_handler();
-
-		if( $t_result === false ) {
-			print_error( 'Language file \'' . $p_file . '\' failed at eval', 'FAILED' );
-			if( $p_quiet ) {
-				return false;
-			}
-		}
-
-		if( !empty( $t_data ) ) {
-			print_error( 'Language file \'' . $p_file . '\' failed at require_once (data output: ' . var_export( $t_data, true ) . ')', 'FAILED' );
-			if( $p_quiet ) {
-				return false;
-			}
-		}
-		return true;
+function print_info( $p_message ) {
+	echo '<td class="alert-info">', ( $p_message ), '</td>';
 }
 
-/**
- * Check Language File Tokens
- *
- * @param string  $p_file Language file to tokenize.
- * @param boolean $p_base Whether language file is default (aka english).
- * @return boolean
- */
-function checktoken( $p_file, $p_base = false ) {
-	$t_in_php_code = false;
-	$t_variables = array();
-	static $s_basevariables;
-	$t_current_var = null;
-	$t_last_token = 0;
-	$t_set_variable = false;
-	$t_variable_array = false;
-	$t_two_part_string = false;
-	$t_need_end_variable = false;
-	$t_source = file_get_contents( $p_file );
-	$t_tokens = @token_get_all( $t_source );
-	$t_expect_end_array = false;
-	$t_setting_variable = false;
-	$t_pass = true;
-	$t_fatal = false;
-	foreach( $t_tokens as $t_token ) {
-		$t_last_token2 = 0;
-		if( is_string( $t_token ) ) {
-			switch( $t_token ) {
-				case '=':
-					if( $t_last_token != T_VARIABLE ) {
-						print_error( '\'=\' sign without variable (line ' . $t_line . ')' );
-						$t_pass = false;
-					}
-					$t_set_variable = true;
-					break;
-				case '[':
-					if( $t_last_token != T_VARIABLE ) {
-						$t_pass = false;
-					}
-					$t_variable_array = true;
-					break;
-				case ']':
-					if( !$t_expect_end_array ) {
-						$t_pass = false;
-					}
-					$t_expect_end_array = false;
-					$t_variable_array = false;
-					break;
-				case ';':
-					if( !$t_need_end_variable ) {
-						print_error( 'function separator found at unexpected location (line ' . $t_line . ')' );
-						$t_pass = false;
-					}
-					$t_need_end_variable = false;
-					break;
-				case '.':
-					if( $t_last_token == T_CONSTANT_ENCAPSED_STRING ) {
-						$t_two_part_string = true;
-					} else {
-						print_error( 'string concatenation found at unexpected location (line ' . $t_line . ')' );
-						$t_pass = false;
-					}
-					break;
-				default:
-					print_error( 'unknown token ' . $t_token );
-					$t_pass = false;
-					break;
-			}
-		} else {
-			# token array
-			list( $t_id, $t_text, $t_line ) = $t_token;
-
-			if( $t_id == T_WHITESPACE || $t_id == T_COMMENT || $t_id == T_DOC_COMMENT || $t_id == T_ML_COMMENT ) {
-				continue;
-			}
-			if( $t_need_end_variable ) {
-				if( $t_two_part_string && $t_id == T_CONSTANT_ENCAPSED_STRING ) {
-					$t_two_part_string = false;
-					continue;
-				}
-				if( $t_setting_variable && $t_id == T_STRING ) {
-					$t_last_token = T_VARIABLE;
-					$t_expect_end_array = true;
-					continue;
-				}
-
-				print_error( 'token# ' . $t_id . ': ' . token_name( $t_id ) . ' = ' . $t_text . ' (line ' . $t_line . ')' );
-				$t_pass = false;
-			}
-
-			switch( $t_id ) {
-				case T_OPEN_TAG:
-					$t_in_php_code = true;
-					break;
-				case T_CLOSE_TAG:
-					$t_in_php_code = false;
-					break;
-				case T_INLINE_HTML:
-					print_error( 'Whitespace in language file outside of PHP code block (line ' . $t_line . ')' );
-					$t_pass = false;
-					break;
-				case T_VARIABLE:
-					if( $t_set_variable && $t_current_var != null ) {
-						$t_need_end_variable = true;
-						$t_setting_variable = true;
-						$t_current_var = null;
-						break;
-					}
-					$t_current_var = $t_text;
-					break;
-				case T_STRING:
-					if( $t_variable_array ) {
-						$t_current_var .= $t_text;
-						if( !defined( $t_text ) ) {
-							print_error( 'undefined constant: ' . $t_text . ' (line ' . $t_line . ')' );
-						}
-					} else {
-						print_error( 'T_STRING found at unexpected location (line ' . $t_line . ')' );
-						$t_pass = false;
-					}
-					if( strpos( $t_current_var, "\n" ) !== false ) {
-						print_error( 'NEW LINE in string: ' . $t_id . ' ' . token_name( $t_id ) . ' = ' . $t_text . ' (line ' . $t_line . ')', 'PARSER' );
-						$t_pass = false;
-						$t_fatal = true;
-					}
-					$t_last_token2 = T_VARIABLE;
-					$t_expect_end_array = true;
-					break;
-				case T_CONSTANT_ENCAPSED_STRING:
-					if( $t_token[1][0] != '\'' ) {
-							print_error( 'Language strings should be single-quoted (line ' . $t_line . ')' );
-					}
-					if( $t_variable_array ) {
-						$t_current_var .= $t_text;
-						$t_last_token2 = T_VARIABLE;
-						$t_expect_end_array = true;
-						break;
-					}
-
-					if( $t_last_token == T_VARIABLE && $t_set_variable && $t_current_var != null ) {
-						if( isset( $t_variables[$t_current_var] ) ) {
-							print_error( 'duplicate language string (' . $t_current_var . ' ) (line ' . $t_line . ')' );
-						} else {
-							$t_variables[$t_current_var] = $t_text;
-						}
-
-						if( $p_base ) {
-							# english
-							#if( isset( $s_basevariables[$t_current_var] ) ) {
-							#	print_error( "WARN: english string redefined - plugin? $t_current_var" );
-							#}
-							$s_basevariables[$t_current_var] = true;
-						} else {
-							if( !isset( $s_basevariables[$t_current_var] ) ) {
-								print_error( '\'' . $t_current_var . '\' is not defined in the English language file', 'WARNING' );
-							#} else {
-							#  missing translation
-							}
-						}
-
-					}
-					if( strpos( $t_current_var, "\n" ) !== false ) {
-						print_error( 'NEW LINE in string: ' . $t_id . ' ' . token_name( $t_id ) . ' = ' . $t_text . ' (line ' . $t_line . ')', 'PARSER' );
-						$t_pass = false;
-						$t_fatal = true;
-					}
-					$t_current_var = null;
-					$t_need_end_variable = true;
-					break;
-				default:
-					print_error( $t_id . ' ' . token_name( $t_id ) . ' = ' . $t_text . ' (line ' . $t_line . ')', 'PARSER' );
-					$t_pass = false;
-					break;
-			}
-
-			$t_last_token = $t_id;
-			if( $t_last_token2 > 0 ) {
-				$t_last_token = $t_last_token2;
-			}
-		}
-
-		if( $t_fatal ) {
-			break;
-		}
-	}
-
-	return $t_pass;
+function print_fail( $p_message ) {
+	echo '<td class="alert-danger">', string_attribute( $p_message ), '</td>';
 }
-
-/**
- * Error handler for language file checks
- * @param integer $p_type    Error type.
- * @param string  $p_error   Error code.
- * @param string  $p_file    File error occurred in.
- * @param integer $p_line    Line number error occurred on.
- * @param string  $p_context Context of error.
- * @return void
- */
-function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	print_error( 'error handler thrown: ' . $p_type . '<br />' . $p_error . '<br />' . $p_file . '<br />' . $p_line . '<br />' . $p_context );
-}
-
-/**
- * Print Language File Error messages
- *
- * @param string $p_string Error string.
- * @param string $p_type   Message type to display (default ERROR).
- * @return void
- */
-function print_error($p_string, $p_type = 'ERROR' ) {
-	if ( $p_type === 'WARNING' ) {
-		echo '<span class="alert-warning">', $p_type . ': ' . $p_string, '</span><br />';
-	} else {
-		echo '<span class="alert-danger">', $p_type . ': ' . $p_string, '</span><br />';
-	}
-}
-
-layout_admin_page_end();

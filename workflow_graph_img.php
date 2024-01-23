@@ -50,7 +50,7 @@ $t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_e
 $t_graph_fontname = config_get( 'relationship_graph_fontname' );
 $t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
 $t_graph_fontpath = get_font_path();
-$t_dot_tool = config_get( 'dot_tool' );
+$t_dot_tool = config_get_global( 'dot_tool' );
 
 $t_graph_attributes = array();
 

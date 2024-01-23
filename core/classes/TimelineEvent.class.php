@@ -33,7 +33,7 @@ class TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp   Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id     An user identifier.
+	 * @param integer $p_user_id     A user identifier.
 	 */
 	public function __construct( $p_timestamp, $p_user_id ) {
 		$this->timestamp = $p_timestamp;
@@ -79,7 +79,7 @@ class TimelineEvent {
 		if( !empty( $t_avatar ) ) {
 			$t_html .= prepare_avatar( $t_avatar, 'profile-activity', 40 );
 		} else {
-			$t_html .= '<i class="pull-left thumbicon fa ' . $p_action_icon . ' btn-primary no-hover"></i>';
+			$t_html .= icon_get( $p_action_icon, 'pull-left thumbicon btn-primary no-hover' );
 		}
 		return $t_html;
 	}
@@ -89,7 +89,10 @@ class TimelineEvent {
 	 * @return string
 	 */
 	public function html_end() {
-		$t_html = '<div class="time"><i class="ace-icon fa fa-clock-o bigger-110"></i> ' .  $this->format_timestamp( $this->timestamp ) . '</div>';
+		$t_html = '<div class="time">'
+			. icon_get( 'fa-clock-o', 'ace-icon bigger-110' )
+			. ' ' . $this->format_timestamp( $this->timestamp )
+			. '</div>';
 		$t_html .= '</div>';
 		return $t_html;
 	}

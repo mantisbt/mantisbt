@@ -24,10 +24,7 @@
  */
 
 # Includes
-require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
-
-# MantisBT Core API
-require_mantis_core();
+require_once 'MantisCoreBase.php';
 
 /**
  * Mantis string handling test cases
@@ -36,7 +33,7 @@ require_mantis_core();
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-class MantisStringTest extends PHPUnit_Framework_TestCase {
+class MantisStringTest extends MantisCoreBase {
 
 	/**
 	 * Tests string_sanitize_url()

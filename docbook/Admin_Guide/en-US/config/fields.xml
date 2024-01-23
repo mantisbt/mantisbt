@@ -42,9 +42,11 @@
 					attachments,
 					category_id,
 					due_date,
+					eta,
 					handler,
+					monitors,
 					os,
-					os_version,
+					os_build,
 					platform,
 					priority,
 					product_build,
@@ -63,11 +65,22 @@
 					and do not need to be listed in this option. Fields
 					not listed above cannot be shown on the bug report
 					page. Visibility of custom fields is handled via the
-					Manage =&gt; Manage Custom Fields administrator page.
+					Manage =&gt; Custom Fields administrator page.
+				</para>
+				<para>Note that <emphasis>monitors</emphasis> is not an actual
+					field; adding it to the list will let authorized reporters
+					(see <emphasis>monitor_add_others_bug_threshold</emphasis>
+					in <xref linkend="admin.config.misc" />)
+					select users to add to the issue's monitoring list.
+					Monitors will only be notified of the submission if both
+					their e-mail preferencess and the <emphasis>notify_flags</emphasis>
+					configuration (see <xref linkend="admin.config.email" />)
+					allows it, i.e.
+					<programlisting>$g_notify_flags['new']['monitor'] = ON;</programlisting>
 				</para>
 				<para>
 					This setting can be set on a per-project basis by
-					using the Manage =&gt; Manage Configuration
+					using the Manage =&gt; Configuration
 					administrator page.
 				</para>
 			</listitem>
@@ -76,7 +89,7 @@
 			<term>$g_bug_view_page_fields</term>
 			<listitem>
 				<para>
-					An array of optional fields to show on the bug view page.
+					An array of optional fields to show on the issue view page and other pages that include issue details.
 				</para>
 				<para>
 					The following optional fields are allowed:
@@ -92,7 +105,7 @@
 					id,
 					last_updated,
 					os,
-					os_version,
+					os_build,
 					platform,
 					priority,
 					product_build,
@@ -113,11 +126,11 @@
 				<para>
 					Fields not listed above cannot be shown on the bug
 					view page. Visibility of custom fields is handled via
-					the Manage =&gt; Manage Custom Fields administrator page.
+					the Manage =&gt; Custom Fields administrator page.
 				</para>
 				<para>
 					This setting can be set on a per-project basis by
-					using the Manage =&gt; Manage Configuration
+					using the Manage =&gt; Configuration
 					administrator page.
 				</para>
 			</listitem>
@@ -141,7 +154,7 @@
 					id,
 					last_updated,
 					os,
-					os_version,
+					os_build,
 					platform,
 					priority,
 					product_build,
@@ -161,67 +174,12 @@
 				<para>
 					Fields not listed above cannot be shown on the bug
 					update page. Visibility of custom fields is handled
-					via the Manage =&gt; Manage Custom Fields administrator
+					via the Manage =&gt; Custom Fields administrator
 					page.
 				</para>
 				<para>
 					This setting can be set on a per-project basis by
-					using the Manage =&gt; Manage Configuration
-					administrator page.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_bug_change_status_page_fields</term>
-			<listitem>
-				<para>
-					An array of optional fields to show on the bug change
-					status page. This only changes the visibility of
-					fields shown below the form used for updating the
-					status of an issue.
-				</para>
-				<para>
-					The following optional fields are allowed:
-					additional_info,
-					attachments,
-					category_id,
-					date_submitted,
-					description,
-					due_date,
-					eta,
-					fixed_in_version,
-					handler,
-					id,
-					last_updated,
-					os,
-					os_version,
-					platform,
-					priority,
-					product_build,
-					product_version,
-					project,
-					projection,
-					reporter,
-					reproducibility,
-					resolution,
-					severity,
-					status,
-					steps_to_reproduce,
-					summary,
-					tags,
-					target_version,
-					view_state.
-				</para>
-				<para>
-					Fields not listed above cannot be shown on the bug
-					change status page. Visibility of custom fields is
-					handled via the Manage =&gt; Manage Custom Fields
-					administrator page (use the same settings as the bug
-					view page).
-				</para>
-				<para>
-					This setting can be set on a per-project basis by
-					using the Manage =&gt; Manage Configuration
+					using the Manage =&gt; Configuration
 					administrator page.
 				</para>
 			</listitem>

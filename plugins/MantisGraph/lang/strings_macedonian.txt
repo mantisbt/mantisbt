@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Macedonian (македонски)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -42,23 +42,22 @@
  * @author Rancher
  */
 
-$s_plugin_graph_title = 'Графикони за MantisBT';
-$s_plugin_graph_description = 'Официјален приклучок за исцртување на графикони.';
 $s_plugin_MantisGraph_title = 'Mantis графикони';
+$s_plugin_MantisGraph_description = 'Официјален приклучок за исцртување на графикони.';
 $s_plugin_MantisGraph_config = 'Местења';
-$s_plugin_MantisGraph_synthesis_link = 'Синтеза';
+$s_plugin_MantisGraph_tab_label = 'Графикони';
 $s_plugin_MantisGraph_status_link = 'По состојба';
 $s_plugin_MantisGraph_priority_link = 'По приоритет';
 $s_plugin_MantisGraph_severity_link = 'По сериозност';
 $s_plugin_MantisGraph_category_link = 'По категорија';
 $s_plugin_MantisGraph_resolution_link = 'По разделност';
-$s_plugin_MantisGraph_issue_trends_link = 'Трендови за проблеми';
+$s_plugin_MantisGraph_issue_trends_link = 'Склоности на проблеми';
 $s_plugin_MantisGraph_graph_imp_status_title = 'По графикони за состојба';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'По графикони за приоритет';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'По графикони за сериозност';
 $s_plugin_MantisGraph_graph_imp_category_title = 'По графикони за категорија';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'По графикони за разделност';
-$s_plugin_MantisGraph_graph_developer_title = 'По графикони на развојници';
+$s_plugin_MantisGraph_graph_developer_title = 'По разработувачки графикони';
 $s_plugin_MantisGraph_graph_reporter_title = 'По графикони за известувачи';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Отворени, решени и преостанати проблеми';
 $s_plugin_MantisGraph_by_status_pct = 'По статус (%)';
@@ -87,3 +86,4 @@ $s_plugin_MantisGraph_graph_page = 'Историја на проблеми со 
 $s_plugin_MantisGraph_graph_topdev = 'Најдобри разработувачи по поправени проблеми';
 $s_plugin_MantisGraph_graph_opendev = 'Разработувачи по отворени проблеми';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Најдобри пријавувачи по поправени проблеми';
+$s_plugin_MantisGraph_other_categories = 'други категории (%d)';

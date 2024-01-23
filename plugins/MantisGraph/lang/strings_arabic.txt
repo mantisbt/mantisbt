@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Arabic (العربية)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -44,21 +44,24 @@
  * @author ديفيد
  */
 
-$s_plugin_graph_title = 'رسومات مانتيس';
-$s_plugin_graph_description = 'الملحق الرسومي الرسمي.';
 $s_plugin_MantisGraph_title = 'رسومات مانتيس';
+$s_plugin_MantisGraph_description = 'الملحق الرسومي الرسمي.';
 $s_plugin_MantisGraph_config = 'ضبط';
-$s_plugin_MantisGraph_synthesis_link = 'صناعي';
+$s_plugin_MantisGraph_tab_label = 'الرسوم البيانية';
 $s_plugin_MantisGraph_status_link = 'حسب الحالة';
 $s_plugin_MantisGraph_priority_link = 'حسب الأهمية';
-$s_plugin_MantisGraph_severity_link = 'حسب الشدة';
+$s_plugin_MantisGraph_severity_link = 'حسب الخطورة';
 $s_plugin_MantisGraph_category_link = 'حسب التصنيف';
-$s_plugin_MantisGraph_resolution_link = 'لكل حل';
-$s_plugin_MantisGraph_graph_imp_status_title = 'صناعة الرسومات حسب الحالة';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'صناعة الرسومات حسب الأولوية';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'صناعة الرسومات حسب الشدة';
-$s_plugin_MantisGraph_graph_imp_category_title = 'صناعة الرسومات حسب التصنيف';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'صناعة الرسومات حسب الحل';
+$s_plugin_MantisGraph_resolution_link = 'حسب القرار';
+$s_plugin_MantisGraph_issue_trends_link = 'اتجاهات القضية';
+$s_plugin_MantisGraph_graph_imp_status_title = 'حسب الرسوم البيانية للحالة';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'حسب الرسوم البيانية للأولوية';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'حسب الرسوم البيانية للخطورة';
+$s_plugin_MantisGraph_graph_imp_category_title = 'حسب الرسوم البيانية للفئة';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'حسب الرسوم البيانية للدقة';
+$s_plugin_MantisGraph_graph_developer_title = 'حسب الرسوم البيانية للمطور';
+$s_plugin_MantisGraph_graph_reporter_title = 'حسب الرسوم البيانية للمبلغ';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'القضايا المفتوحة والمحلولة والمتبقية';
 $s_plugin_MantisGraph_by_status_pct = 'حسب النسبة المئوية للحالة';
 $s_plugin_MantisGraph_by_priority_pct = 'حسب النسبة المئوية للأولوية';
 $s_plugin_MantisGraph_by_severity_pct = 'حسب النسبة المئوية للشدة';
@@ -82,3 +85,7 @@ $s_plugin_MantisGraph_period_year_to_date = 'السنة لتاريخه';
 $s_plugin_MantisGraph_period_select = 'تواريخ افتراضية';
 $s_plugin_MantisGraph_period_last_year = 'آخر سنة';
 $s_plugin_MantisGraph_graph_page = 'تاريخ رسومات المشكلة';
+$s_plugin_MantisGraph_graph_topdev = 'كبار المطورين حسب القضايا المحلولة';
+$s_plugin_MantisGraph_graph_opendev = 'المطورون حسب القضايا المفتوحة';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'كبار المبلغين حسب القضايا المحلولة';
+$s_plugin_MantisGraph_other_categories = 'تصنيفات أخرى (%d)';

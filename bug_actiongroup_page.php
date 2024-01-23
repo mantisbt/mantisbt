@@ -59,6 +59,8 @@ require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
+require_css( 'status_config.php' );
+
 auth_ensure_user_authenticated();
 
 $f_action = gpc_get_string( 'action', '' );
@@ -72,18 +74,32 @@ if( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
 # run through the issues to see if they are all from one project
 $t_project_id = ALL_PROJECTS;
 $t_multiple_projects = false;
+$t_user = auth_get_current_user_id();
 $t_projects = array();
-
-# Array of parameters to be used with plugin event
-$t_event_params = array();
-$t_event_params['bug_ids'] = $f_bug_arr;
-$t_event_params['action'] = $f_action;
-$t_event_params['has_bugnote'] = false;
+$t_view_bug_threshold = array();
 
 bug_cache_array_rows( $f_bug_arr );
 
-foreach( $f_bug_arr as $t_bug_id ) {
+foreach( $f_bug_arr as $t_key => $t_bug_id ) {
 	$t_bug = bug_get( $t_bug_id );
+
+	# Per-project cache of the access threshold
+	if( !isset( $t_view_bug_threshold[$t_bug->project_id] ) ) {
+		$t_view_bug_threshold[$t_bug->project_id] = config_get(
+			'view_bug_threshold',
+			null,
+			$t_user,
+			$t_bug->project_id
+		);
+	}
+
+	# Remove any issues the user doesn't have access to
+	if( !access_has_bug_level( $t_view_bug_threshold[$t_bug->project_id], $t_bug_id, $t_user ) ) {
+		unset( $f_bug_arr[$t_key] );
+		continue;
+	}
+
+	# Multiple projects check
 	if( $t_project_id != $t_bug->project_id ) {
 		if( ( $t_project_id != ALL_PROJECTS ) && !$t_multiple_projects ) {
 			$t_multiple_projects = true;
@@ -93,6 +109,12 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		}
 	}
 }
+
+# Array of parameters to be used with plugin event
+$t_event_params = array();
+$t_event_params['bug_ids'] = $f_bug_arr;
+$t_event_params['action'] = $f_action;
+$t_event_params['has_bugnote'] = false;
 $t_event_params['multiple_projects'] = $t_multiple_projects;
 
 if( $t_multiple_projects ) {
@@ -130,7 +152,7 @@ foreach( $t_custom_group_actions as $t_custom_group_action ) {
 # Check if user selected to update a custom field.
 $t_custom_fields_prefix = 'custom_field_';
 if( strpos( $f_action, $t_custom_fields_prefix ) === 0 ) {
-	$t_custom_field_id = (int)substr( $f_action, utf8_strlen( $t_custom_fields_prefix ) );
+	$t_custom_field_id = (int)substr( $f_action, mb_strlen( $t_custom_fields_prefix ) );
 	$f_action = 'CUSTOM';
 	$t_event_params['action'] = $f_action;
 }
@@ -225,7 +247,9 @@ switch( $f_action ) {
 		break;
 	case 'CUSTOM' :
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
-		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
+		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ),
+			string_attribute( lang_get_defaulted( $t_custom_field_def['name'] ) )
+		);
 		$t_button_title = $t_question_title;
 		$t_form = 'custom_field_' . $t_custom_field_id;
 		$t_event_params['custom_field_id'] = $t_custom_field_id;
@@ -301,9 +325,9 @@ if( $t_multiple_projects ) {
 				'data-picker-locale="' . lang_get_current_datetime_locale() .
 				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '"' .
 				'" value="' . $t_date_to_display . '" />';
-			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
+			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
 		} else {
-			echo '<select name="' . $t_form . '" class="input-sm">';
+			echo '<select name="' . $t_form . '" class="input-sm" required>';
 
 			switch( $f_action ) {
 				case 'COPY':
@@ -330,11 +354,11 @@ if( $t_multiple_projects ) {
 					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
 					break;
 				case 'UP_TARGET_VERSION':
-					print_version_option_list( '', $t_project_id, VERSION_FUTURE, true, true );
+					print_version_option_list( '', $t_projects, VERSION_FUTURE, true );
 					break;
 				case 'UP_PRODUCT_VERSION':
 				case 'UP_FIXED_IN_VERSION':
-					print_version_option_list( '', $t_project_id, VERSION_ALL, true, true );
+					print_version_option_list( '', $t_projects, VERSION_ALL, true );
 					break;
 			}
 
@@ -409,7 +433,7 @@ if( $t_multiple_projects ) {
 						<label class="lbl padding-6"><?php echo lang_get( 'private' ); ?></label>
 <?php
 			} else {
-				echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+				echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
 			}
 ?>
 					</td>

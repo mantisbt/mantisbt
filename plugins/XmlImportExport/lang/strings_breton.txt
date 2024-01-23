@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,11 +33,12 @@
 /** Breton (brezhoneg)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Adriendelucca
  * @author Fohanno
  * @author Gwenn-Ael
  */
@@ -50,7 +51,7 @@ $s_plugin_XmlImportExport_config_title = 'Kefluniañ al liveoù moned enporzhia�
 $s_plugin_XmlImportExport_import_threshold = 'Kudennoù enporzhiañ';
 $s_plugin_XmlImportExport_export_threshold = 'Kudennoù ezporzhiañ';
 $s_plugin_XmlImportExport_action_update = 'Hizivaat';
-$s_plugin_XmlImportExport_importing_in_project = 'Oc\'h enporzhiañ drein er raktres :';
+$s_plugin_XmlImportExport_importing_in_project = 'Oc\'h enporzhiañ drein er raktres: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Dibarzhioù enporzhiañ';
 $s_plugin_XmlImportExport_cross_references = 'Daveoù kroaziet';
 $s_plugin_XmlImportExport_default_strategy = 'Strategiezh amdreiñ dre ziouer :';

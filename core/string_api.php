@@ -66,7 +66,7 @@ function string_preserve_spaces_at_bol( $p_string ) {
 		$t_count = 0;
 		$t_prefix = '';
 
-		$t_char = utf8_substr( $t_lines[$i], $t_count, 1 );
+		$t_char = mb_substr( $t_lines[$i], $t_count, 1 );
 		$t_spaces = 0;
 		while( ( $t_char == ' ' ) || ( $t_char == "\t" ) ) {
 			if( $t_char == ' ' ) {
@@ -78,14 +78,14 @@ function string_preserve_spaces_at_bol( $p_string ) {
 			# 1 tab = 4 spaces, can be configurable.
 
 			$t_count++;
-			$t_char = utf8_substr( $t_lines[$i], $t_count, 1 );
+			$t_char = mb_substr( $t_lines[$i], $t_count, 1 );
 		}
 
 		for( $j = 0;$j < $t_spaces;$j++ ) {
 			$t_prefix .= '&#160;';
 		}
 
-		$t_lines[$i] = $t_prefix . utf8_substr( $t_lines[$i], $t_count );
+		$t_lines[$i] = $t_prefix . mb_substr( $t_lines[$i], $t_count );
 	}
 	return implode( "\n", $t_lines );
 }
@@ -112,9 +112,9 @@ function string_no_break( $p_string ) {
  * @return string
  */
 function string_nl2br( $p_string, $p_wrap = 100 ) {
-	$t_output = '';
 	$t_pieces = preg_split( '/(<pre[^>]*>.*?<\/pre>)/is', $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 	if( isset( $t_pieces[1] ) ) {
+		$t_output = '';
 		foreach( $t_pieces as $t_piece ) {
 			if( preg_match( '/(<pre[^>]*>.*?<\/pre>)/is', $t_piece ) ) {
 				$t_piece = preg_replace( '/<br[^>]*?>/', '', $t_piece );
@@ -144,8 +144,7 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
  * @return string
  */
 function string_display( $p_string ) {
-	$t_data = event_signal( 'EVENT_DISPLAY_TEXT', $p_string, true );
-	return $t_data;
+	return event_signal( 'EVENT_DISPLAY_TEXT', $p_string, true );
 }
 
 /**
@@ -154,8 +153,7 @@ function string_display( $p_string ) {
  * @return string
  */
 function string_display_line( $p_string ) {
-	$t_data = event_signal( 'EVENT_DISPLAY_TEXT', $p_string, false );
-	return $t_data;
+	return event_signal( 'EVENT_DISPLAY_TEXT', $p_string, false );
 }
 
 /**
@@ -165,8 +163,7 @@ function string_display_line( $p_string ) {
  * @return string
  */
 function string_display_links( $p_string ) {
-	$t_data = event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string, true );
-	return $t_data;
+	return event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string, true );
 }
 
 /**
@@ -176,8 +173,7 @@ function string_display_links( $p_string ) {
  * @return string
  */
 function string_display_line_links( $p_string ) {
-	$t_data = event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string, false );
-	return $t_data;
+	return event_signal( 'EVENT_DISPLAY_FORMATTED', $p_string, false );
 }
 
 /**
@@ -290,7 +286,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 		foreach( $t_pairs as $t_key => $t_value ) {
 			if( is_array( $t_value ) ) {
 				foreach( $t_value as $t_value_each ) {
-					$t_clean_pairs[] .= rawurlencode( $t_key ) . '[]=' . rawurlencode( $t_value_each );
+					$t_clean_pairs[] = rawurlencode( $t_key ) . '[]=' . rawurlencode( $t_value_each );
 				}
 			} else {
 				$t_clean_pairs[] = rawurlencode( $t_key ) . '=' . rawurlencode( $t_value );
@@ -298,7 +294,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 		}
 
 		if( !empty( $t_clean_pairs ) ) {
-			$t_query = '?' . join( '&', $t_clean_pairs );
+			$t_query = '?' . implode( '&', $t_clean_pairs );
 		}
 	}
 
@@ -480,7 +476,8 @@ function string_insert_hrefs( $p_string ) {
 	static $s_url_regex = null;
 	static $s_email_regex = null;
 
-	if( !config_get( 'html_make_links' ) ) {
+	$t_html_make_links = config_get( 'html_make_links' );
+	if( !$t_html_make_links ) {
 		return $p_string;
 	}
 
@@ -496,31 +493,29 @@ function string_insert_hrefs( $p_string ) {
 
 		# valid set of characters that may occur in url scheme. Note: - should be first (A-F != -AF).
 		$t_url_valid_chars       = '-_.,!~*\';\/?%^\\\\:@&={\|}+$#[:alnum:]\pL';
-		$t_url_chars             = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)\[\]])";
-		$t_url_chars2            = "(?:${t_url_hex}|[${t_url_valid_chars}])";
-		$t_url_chars_in_brackets = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)])";
-		$t_url_chars_in_parens   = "(?:${t_url_hex}|[${t_url_valid_chars}\[\]])";
+		$t_url_chars             = "(?:{$t_url_hex}|[{$t_url_valid_chars}\(\)\[\]])";
+		$t_url_chars2            = "(?:{$t_url_hex}|[{$t_url_valid_chars}])";
+		$t_url_chars_in_brackets = "(?:{$t_url_hex}|[{$t_url_valid_chars}\(\)])";
+		$t_url_chars_in_parens   = "(?:{$t_url_hex}|[{$t_url_valid_chars}\[\]])";
 
 		$t_url_part1 = $t_url_chars;
-		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
+		$t_url_part2 = "(?:\({$t_url_chars_in_parens}*\)|\[{$t_url_chars_in_brackets}*\]|{$t_url_chars2})";
 
-		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/su";
+		$s_url_regex = "/({$t_url_protocol}({$t_url_part1}*?{$t_url_part2}+))/su";
 
 		# e-mail regex
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
 	}
 
+	# Set the link's target and type according to configuration
+	$t_link_attributes = helper_get_link_attributes( false );
+
 	# Find any URL in a string and replace it with a clickable link
 	$p_string = preg_replace_callback(
 		$s_url_regex,
-		function ( $p_match ) {
+		function ( $p_match ) use ( $t_link_attributes ) {
 			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			if( config_get( 'html_make_links' ) == LINKS_NEW_WINDOW ) {
-				$t_url_target = ' target="_blank"';
-			} else {
-				$t_url_target = '';
-			}
-			return "<a ${t_url_href}${t_url_target}>${p_match[1]}</a>";
+			return "<a {$t_url_href}{$t_link_attributes}>{$p_match[1]}</a>";
 		},
 		$p_string
 	);
@@ -550,7 +545,7 @@ function string_insert_hrefs( $p_string ) {
 function string_process_exclude_anchors( $p_string, $p_callback ) {
 	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
 
-	$t_pieces = preg_split( $s_anchor_regex, $p_string, null, PREG_SPLIT_DELIM_CAPTURE );
+	$t_pieces = preg_split( $s_anchor_regex, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
 	$t_string = '';
 	foreach( $t_pieces as $t_piece ) {
@@ -615,9 +610,7 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 
 	$p_string = preg_replace( '/&lt;(' . $t_tags . ')\s*&gt;/ui', '<\\1>', $p_string );
 	$p_string = preg_replace( '/&lt;\/(' . $t_tags . ')\s*&gt;/ui', '</\\1>', $p_string );
-	$p_string = preg_replace( '/&lt;(' . $t_tags . ')\s*\/&gt;/ui', '<\\1 />', $p_string );
-
-	return $p_string;
+	return preg_replace( '/&lt;(' . $t_tags . ')\s*\/&gt;/ui', '<\\1 />', $p_string );
 }
 
 /**
@@ -801,8 +794,7 @@ function string_get_bug_report_url() {
  * @return string
  */
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	$t_path = config_get_global( 'path' );
-	return $t_path . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
+	return config_get_global( 'path' ) . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
 }
 
 /**
@@ -829,7 +821,7 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_max = (int)$p_max;
 	}
 
-	if( ( $t_max > 0 ) && ( utf8_strlen( $p_string ) > $t_max ) ) {
+	if( ( $t_max > 0 ) && ( mb_strlen( $p_string ) > $t_max ) ) {
 		$t_pattern = '/([\s|.|,|\-|_|\/|\?]+)/';
 		$t_bits = preg_split( $t_pattern, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
@@ -838,11 +830,11 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_last_len = strlen( $t_last );
 
 		if( count( $t_bits ) == 1 ) {
-			$t_string .= utf8_substr( $t_last, 0, $t_max - 3 );
+			$t_string .= mb_substr( $t_last, 0, $t_max - 3 );
 			$t_string .= '...';
 		} else {
 			foreach( $t_bits as $t_bit ) {
-				if( ( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
+				if( ( mb_strlen( $t_string ) + mb_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
 					$t_string .= $t_bit;
 				} else {
 					break;
@@ -906,10 +898,6 @@ function string_html_entities( $p_string ) {
  * @return string
  */
 function string_html_specialchars( $p_string ) {
-	# Remove any invalid character from the string per XML 1.0 specification
-	# http://www.w3.org/TR/2008/REC-xml-20081126/#NT-Char
-	$p_string = preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_string );
-
 	# achumakov: @ added to avoid warning output in unsupported codepages
 	# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
 	# This is VERY important for Eastern European, Baltic and Korean languages
@@ -925,4 +913,115 @@ function string_prepare_header( $p_string ) {
 	$t_string= explode( "\n", $p_string, 2 );
 	$t_string= explode( "\r", $t_string[0], 2 );
 	return $t_string[0];
+}
+
+/**
+ * Truncate a string to the specified length, optionally appending a marker.
+ *
+ * This is similar to {@see mb_strimwidth()}, but working on the string's length
+ * (i.e. number of chars) instead of its width.
+ *
+ * @param string $p_string The string to truncate
+ * @param int $p_length    Number of chars to keep. If negative, remove this
+ *                         many chars from the end of the string.
+ * @param string $p_marker If set, the string's last chars are replaced by this
+ *                         to match the given length.
+ *
+ * @return string
+ */
+function string_truncate( $p_string, $p_length, $p_marker = '') {
+	$t_string_length = mb_strlen( $p_string );
+	$t_marker_length = mb_strlen( $p_marker );
+	$t_truncate_length = $p_length - $t_marker_length;
+	if( $t_string_length <= $t_truncate_length ) {
+		return $p_string;
+	}
+
+	return mb_substr( $p_string, 0, $t_truncate_length ) . $p_marker;
+}
+
+/**
+ * Replacement for str_pad. $padStr may contain multi-byte characters.
+ *
+ * @author Oliver Saunders <oliver (a) osinternetservices.com>
+ * @param string $input
+ * @param int $length
+ * @param string $padStr
+ * @param int $type ( same constants as str_pad )
+ * @return string
+ * @see http://www.php.net/str_pad
+ * @see utf8_substr
+ */
+function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
+
+    $inputLen = mb_strlen($input);
+    if ($length <= $inputLen) {
+        return $input;
+    }
+
+    $padStrLen = mb_strlen($padStr);
+    $padLen = $length - $inputLen;
+
+    if ($type == STR_PAD_RIGHT) {
+        $repeatTimes = ceil($padLen / $padStrLen);
+        return mb_substr($input . str_repeat($padStr, $repeatTimes), 0, $length);
+    }
+
+    if ($type == STR_PAD_LEFT) {
+        $repeatTimes = ceil($padLen / $padStrLen);
+        return mb_substr(str_repeat($padStr, $repeatTimes), 0, floor($padLen)) . $input;
+    }
+
+    if ($type == STR_PAD_BOTH) {
+
+        $padLen/= 2;
+        $padAmountLeft = floor($padLen);
+        $padAmountRight = ceil($padLen);
+        $repeatTimesLeft = ceil($padAmountLeft / $padStrLen);
+        $repeatTimesRight = ceil($padAmountRight / $padStrLen);
+
+        $paddingLeft = mb_substr(str_repeat($padStr, $repeatTimesLeft), 0, $padAmountLeft);
+        $paddingRight = mb_substr(str_repeat($padStr, $repeatTimesRight), 0, $padAmountLeft);
+        return $paddingLeft . $input . $paddingRight;
+    }
+
+    trigger_error('utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR);
+}
+
+/**
+ * Return the number of UTF-8 characters in a string
+ * @param string $p_string
+ * @return integer number of UTF-8 characters in string
+ * @deprecated mb_strlen() should be used in preference to this function
+ */
+function utf8_strlen( $p_string ) {
+    error_parameters( __FUNCTION__ . '()', 'mb_strlen()' );
+    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+    return mb_strlen( $p_string );
+}
+
+/**
+ * Get part of string
+ * @param string $p_string
+ * @param integer $p_offset
+ * @param integer $p_length
+ * @return mixed string or FALSE if failure
+ * @deprecated mb_substr() should be used in preference to this function
+ */
+function utf8_substr( $p_string, $p_offset, $p_length = NULL ) {
+    error_parameters( __FUNCTION__ . '()', 'mb_substr()' );
+    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+    return mb_substr( $p_string, $p_offset, $p_length );
+}
+
+/**
+ * Make a string lowercase
+ * @param string $p_string
+ * @return string with all alphabetic characters converted to lowercase
+ * @deprecated mb_strtolower() should be used in preference to this function
+ */
+function utf8_strtolower( $p_string ) {
+    error_parameters( __FUNCTION__ . '()', 'mb_strtolower()' );
+    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+    return mb_strtolower( $p_string );
 }

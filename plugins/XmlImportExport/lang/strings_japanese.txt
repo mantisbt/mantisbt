@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,12 +33,13 @@
 /** Japanese (日本語)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Fryed-peach
+ * @author Gulpin
  * @author Ryoon
  * @author Shirayuki
  * @author 赤城。
@@ -52,7 +53,7 @@ $s_plugin_XmlImportExport_config_title = 'XMLインポート/エクスポート�
 $s_plugin_XmlImportExport_import_threshold = '課題を読み込む';
 $s_plugin_XmlImportExport_export_threshold = '課題を書き出す';
 $s_plugin_XmlImportExport_action_update = '更新';
-$s_plugin_XmlImportExport_importing_in_project = '以下のプロジェクト内の課題をインポート:';
+$s_plugin_XmlImportExport_importing_in_project = '課題を次のプロジェクトにインポート: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'インポートのオプション';
 $s_plugin_XmlImportExport_cross_references = '相互参照';
 $s_plugin_XmlImportExport_default_strategy = '既定の変換戦略:';

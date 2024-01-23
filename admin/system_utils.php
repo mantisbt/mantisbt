@@ -24,7 +24,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
+require_once( dirname( __FILE__, 2 ) . '/core.php' );
 
 # Load schema version needed to render admin menu bar
 require_once( 'schema.php' );
@@ -43,7 +43,7 @@ print_admin_menu_bar( 'system_utils.php' );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-wrench"></i>
+		<?php print_icon( 'fa-wrench', 'ace-icon' ); ?>
 		System Utilities
 	</h4>
 </div>
@@ -59,19 +59,25 @@ print_admin_menu_bar( 'system_utils.php' );
 	</thead>
 	<tbody>
 		<tr>
-			<td>Move attachments stored in database schema to disk files.</td>
+			<td>Move attachments stored in database schema to disk files and vice versa</td>
 			<td class="center">
-				<?php html_button( 'move_attachments_page.php', 'Move Attachments to Disk', array( 'type' => 'bug' ) );?>
+				<?php html_button( 'move_attachments_page.php',
+					'Move Attachments',
+					array( 'type' => 'bug' ) );
+				?>
 			</td>
 		</tr>
 		<tr>
-			<td>Move project files stored in database schema to disk.</td>
+			<td>Move project files stored in database schema to disk and vice versa</td>
 			<td class="center">
-				<?php html_button( 'move_attachments_page.php', 'Move Project Files to Disk', array( 'type' => 'project' ) );?>
+				<?php html_button( 'move_attachments_page.php',
+					'Move Project Files',
+					array( 'type' => 'project' ) );
+				?>
 			</td>
 		</tr>
 		<tr>
-			<td>Show database statistics.</td>
+			<td>Show database statistics</td>
 			<td class="center">
 				<?php html_button( 'db_stats.php', 'Display', array() );?>
 			</td>

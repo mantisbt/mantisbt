@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,21 +33,22 @@
 /** Ukrainian (українська)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Andriykopanytsia
+ * @author Movses
  * @author Piramidion
  * @author SteveR
+ * @author Ата
  */
 
-$s_plugin_graph_title = 'Mantis графіки';
-$s_plugin_graph_description = 'Офіційний модуль для графіків.';
 $s_plugin_MantisGraph_title = 'Mantis графіки';
+$s_plugin_MantisGraph_description = 'Офіційний модуль для графіків.';
 $s_plugin_MantisGraph_config = 'Налаштування';
-$s_plugin_MantisGraph_synthesis_link = 'Синтез';
+$s_plugin_MantisGraph_tab_label = 'Графіки';
 $s_plugin_MantisGraph_status_link = 'За статусом';
 $s_plugin_MantisGraph_priority_link = 'За пріоритетом';
 $s_plugin_MantisGraph_severity_link = 'За серйозністю';
@@ -61,7 +62,7 @@ $s_plugin_MantisGraph_graph_imp_category_title = 'Діаграми за кате
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Діаграми за рішенням';
 $s_plugin_MantisGraph_graph_developer_title = 'Діаграми за розробниками';
 $s_plugin_MantisGraph_graph_reporter_title = 'Діаграми за доповідачами';
-$s_plugin_MantisGraph_graph_issues_trend_title = 'Питання відкриті, вирішені й ті, що залишилися';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Відкриті, вирішені й ті, що залишилися проблеми';
 $s_plugin_MantisGraph_by_status_pct = 'Статуси у відсотках';
 $s_plugin_MantisGraph_by_priority_pct = 'Пріоритети у відсотках';
 $s_plugin_MantisGraph_by_severity_pct = 'Серйозність у відсотках';
@@ -88,3 +89,4 @@ $s_plugin_MantisGraph_graph_page = 'Графік історії проблем';
 $s_plugin_MantisGraph_graph_topdev = 'Найкращі розробники за кількістю виправлених проблем';
 $s_plugin_MantisGraph_graph_opendev = 'Розробники за відкритими проблемами';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Найкращі доповідачі за виправленими проблемами';
+$s_plugin_MantisGraph_other_categories = 'інші категорії (%d)';

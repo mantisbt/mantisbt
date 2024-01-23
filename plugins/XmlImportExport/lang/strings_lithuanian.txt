@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,24 +33,34 @@
 /** Lithuanian (lietuvių)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Eitvys200
+ * @author Nokeoo
+ * @author Unteez
  * @author Zygimantus
  */
 
 $s_plugin_XmlImportExport_title = 'Importuoti/eksportuoti problemas,';
-$s_plugin_XmlImportExport_import = 'Svarbios problemos';
+$s_plugin_XmlImportExport_description = 'Prideda XML paremtas importavimo ir eksportavimo galimybes į MantisBT.';
+$s_plugin_XmlImportExport_import = 'Importuoti klaidas';
 $s_plugin_XmlImportExport_export = 'XML eksportas';
+$s_plugin_XmlImportExport_config_title = 'XML importavimo/eksportavimo prieigos lygio konfigūracija';
 $s_plugin_XmlImportExport_import_threshold = 'Importo klausimai';
 $s_plugin_XmlImportExport_export_threshold = 'Eksporto klausimai';
 $s_plugin_XmlImportExport_action_update = 'Atnaujinti';
+$s_plugin_XmlImportExport_importing_in_project = 'Importuojamos problemos į projektą: „%s“';
 $s_plugin_XmlImportExport_import_options = 'Importo nustatymai';
 $s_plugin_XmlImportExport_cross_references = 'Kryžminės nuorodos';
+$s_plugin_XmlImportExport_default_strategy = 'Numatytoji konversijos strategija:';
+$s_plugin_XmlImportExport_renumber = 'Pernumeruoti';
+$s_plugin_XmlImportExport_renumber_desc = 'Pabandykite konvertuoti nuorodas į naują numeraciją';
 $s_plugin_XmlImportExport_link = 'Nuorodą';
+$s_plugin_XmlImportExport_link_desc = 'Konvertuoti į pradinio elemento nuorodą';
 $s_plugin_XmlImportExport_disable = 'Išjungti';
 $s_plugin_XmlImportExport_disable_desc = 'Išjungti nuorodą';
 $s_plugin_XmlImportExport_keep_same_category = 'Bandykite išlaikyti tą pačią kategoriją';
+$s_plugin_XmlImportExport_error_no_xml = 'negaliu rasti xmlreader ir xmlwriter plėtinių';

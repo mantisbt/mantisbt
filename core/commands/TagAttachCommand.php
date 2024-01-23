@@ -121,7 +121,7 @@ class TagAttachCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		$t_attached_tags = array();
@@ -146,6 +146,8 @@ class TagAttachCommand extends Command {
 		if( !empty( $t_attached_tags ) ) {
 			event_signal( 'EVENT_TAG_ATTACHED', array( $this->issue_id, $t_attached_tags ) );
 		}
+
+		return [];
 	}
 }
 

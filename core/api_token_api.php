@@ -39,21 +39,38 @@ function api_token_can_create( $p_user_id = null ) {
 }
 
 /**
+ * Get token row given its id.
+ * 
+ * @param integer $p_token_id The id of the token
+ * @return array|false The token row or false if not found.
+ */
+function api_token_get( $p_token_id ) {
+	db_param_push();
+
+	$t_query = 'SELECT * FROM {api_token} WHERE id=' . db_param();
+	$t_result = db_query( $t_query, array( $p_token_id ) );
+	$t_row = db_fetch_array( $t_result );
+
+	return $t_row;
+}
+
+/**
  * Create an API token
  *
  * @param string $p_token_name The name (description) identifying what the token is going to be used for.
  * @param integer $p_user_id The user id.
- * @return string The plain token.
+ * @param bool $p_return_id if true, returns an associate array with id and token.
+ * @return string|array The plain token or array of id and token.
  * @access public
  */
-function api_token_create( $p_token_name, $p_user_id ) {
+function api_token_create( $p_token_name, $p_user_id, $p_return_id = false ) {
 	if( is_blank( $p_token_name ) ) {
 		error_parameters( lang_get( 'api_token_name' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	$t_token_name = trim( $p_token_name );
-	if( utf8_strlen( $t_token_name ) > DB_FIELD_SIZE_API_TOKEN_NAME ) {
+	if( mb_strlen( $t_token_name ) > DB_FIELD_SIZE_API_TOKEN_NAME ) {
 		error_parameters( lang_get( 'api_token_name' ), DB_FIELD_SIZE_API_TOKEN_NAME );
 		trigger_error( ERROR_FIELD_TOO_LONG, ERROR );
 	}
@@ -70,6 +87,11 @@ function api_token_create( $p_token_name, $p_user_id ) {
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query( $t_query, array( $p_user_id, (string)$t_token_name, $t_hash, $t_date_created ) );
 
+	if( $p_return_id ) {
+		$t_id = db_insert_id( db_get_table( 'api_token' ) );
+		return array( 'id' => $t_id, 'token' => $t_plain_token );
+	}
+
 	return $t_plain_token;
 }
 
@@ -84,6 +106,24 @@ function api_token_hash( $p_token ) {
 }
 
 /**
+ * Checks that the specified token name is unique to the user.
+ *
+ * @param string $p_token_name The token name.
+ * @param string $p_user_id    The user id.
+ *
+ * @return bool True if unique, False if token already exists
+ */
+function api_token_name_is_unique( $p_token_name, $p_user_id ) {
+	db_param_push();
+	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND name=' . db_param();
+	$t_result = db_query( $t_query, array( $p_user_id, $p_token_name ) );
+
+	$t_row = db_fetch_array( $t_result );
+
+	return $t_row === false;
+}
+
+/**
  * Ensure that the specified token name is unique to the user, otherwise,
  * prompt the user with an error.
  *
@@ -91,13 +131,7 @@ function api_token_hash( $p_token ) {
  * @param string $p_user_id The user id.
  */
 function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
-	db_param_push();
-	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND name=' . db_param();
-	$t_result = db_query( $t_query, array( $p_user_id, $p_token_name ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if ( $t_row ) {
+	if ( !api_token_name_is_unique( $p_token_name, $p_user_id ) ) {
 		error_parameters( $p_token_name );
 		trigger_error( ERROR_API_TOKEN_NAME_NOT_UNIQUE, ERROR );
 	}
@@ -113,7 +147,7 @@ function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
 function api_token_get_user( $p_token ) {
 	# If the supplied token doesn't look like a valid one, then fail the check w/o doing db lookups.
 	# This is likely called from code that supports both tokens and passwords.
-	if( is_blank( $p_token ) || utf8_strlen( $p_token ) != API_TOKEN_LENGTH ) {
+	if( is_blank( $p_token ) || mb_strlen( $p_token ) != API_TOKEN_LENGTH ) {
 		return false;
 	}
 
@@ -144,7 +178,7 @@ function api_token_get_user( $p_token ) {
 function api_token_validate( $p_username, $p_token ) {
 	# If the supplied token doesn't look like a valid one, then fail the check w/o doing db lookups.
 	# This is likely called from code that supports both tokens and passwords.
-	if( is_blank( $p_token ) || utf8_strlen( $p_token ) != API_TOKEN_LENGTH ) {
+	if( is_blank( $p_token ) || mb_strlen( $p_token ) != API_TOKEN_LENGTH ) {
 		return false;
 	}
 
@@ -230,3 +264,15 @@ function api_token_revoke( $p_api_token_id, $p_user_id ) {
 	db_query( $t_query, array( $p_api_token_id, $p_user_id ) );
 }
 
+/**
+ * Revoke all api tokens for the specified user.
+ *
+ * @param integer $p_user_id The user id.
+ * @return void
+ * @access public
+ */
+function api_token_revoke_all( $p_user_id ) {
+	db_param_push();
+	$t_query = 'DELETE FROM {api_token} WHERE user_id = ' . db_param();
+	db_query( $t_query, array( $p_user_id ) );
+}

@@ -37,7 +37,7 @@ require_api( 'database_api.php' );
  * @param string  $p_value      Value.
  * @param integer $p_bugnote_id A Bugnote ID.
  * @param integer $p_timestamp  Integer Timestamp.
- * @return int Revision ID
+ * @return int|null Revision ID
  */
 function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_id = 0, $p_timestamp = null ) {
 	if( $p_type <= REV_ANY ) {

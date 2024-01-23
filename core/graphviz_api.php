@@ -22,10 +22,8 @@
  * enough just to support relationship_graph_api.php. They don't
  * support subgraphs yet.
  *
- * The original Graphviz package is available at:
- * 	- http://www.graphviz.org/
- * Additional documentation can be found at:
- * 	- http://www.graphviz.org/Documentation.html
+ * The original Graphviz package including documentation is available at:
+ * 	- https://www.graphviz.org/
  *
  * @package CoreAPI
  * @subpackage GraphVizAPI
@@ -321,7 +319,7 @@ class Graph {
 			echo "\t" . $t_src . ' -- ' . $t_dst . ' ' . $t_attr . ";\n";
 		}
 
-		echo "};\n";
+		echo "}\n";
 	}
 
 	/**
@@ -352,7 +350,7 @@ class Graph {
 
 		# Start dot process
 
-		$t_command = $this->graphviz_tool . ' -T' . $p_format;
+		$t_command = escapeshellcmd( $this->graphviz_tool . ' -T' . $p_format );
 		$t_descriptors = array(
 			0 => array( 'pipe', 'r', ),
 			1 => array( 'pipe', 'w', ),
@@ -360,9 +358,9 @@ class Graph {
 			);
 
 		$t_pipes = array();
-		$t_proccess = proc_open( $t_command, $t_descriptors, $t_pipes );
+		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes );
 
-		if( is_resource( $t_proccess ) ) {
+		if( is_resource( $t_process ) ) {
 			# Filter generated output through dot
 			fwrite( $t_pipes[0], $t_dot_source );
 			fclose( $t_pipes[0] );
@@ -384,7 +382,7 @@ class Graph {
 			}
 
 			fclose( $t_pipes[1] );
-			proc_close( $t_proccess );
+			proc_close( $t_process );
 		}
 	}
 
@@ -416,7 +414,7 @@ class Graph {
 			$t_result[] = $t_name . '=' . $t_value;
 		}
 
-		return '[ ' . join( ', ', $t_result ) . ' ]';
+		return '[ ' . implode( ', ', $t_result ) . ' ]';
 	}
 
 	/**
@@ -489,6 +487,6 @@ class Digraph extends Graph {
 			echo "\t" . $t_src . ' -> ' . $t_dst . ' ' . $t_attr . ";\n";
 		}
 
-		echo "};\n";
+		echo "}\n";
 	}
 }

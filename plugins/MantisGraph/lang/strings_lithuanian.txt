@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Lithuanian (lietuvių)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -41,23 +41,27 @@
  * @author Cyklopas
  * @author Eitvys200
  * @author Nersip
+ * @author Nokeoo
  */
 
+$s_plugin_MantisGraph_title = 'Mantis grafikai';
+$s_plugin_MantisGraph_description = 'Oficialus grafikų įskiepis.';
 $s_plugin_MantisGraph_config = 'Konfigūracija';
-$s_plugin_MantisGraph_synthesis_link = 'Sintezė';
+$s_plugin_MantisGraph_tab_label = 'Grafikai';
 $s_plugin_MantisGraph_status_link = 'Pagal Būseną';
 $s_plugin_MantisGraph_priority_link = 'Pagal Prioritetą';
-$s_plugin_MantisGraph_severity_link = 'Pagal Sunkumą';
+$s_plugin_MantisGraph_severity_link = 'Pagal sunkumą';
 $s_plugin_MantisGraph_category_link = 'Pagal Kategoriją';
 $s_plugin_MantisGraph_resolution_link = 'Pagal Rezoliuciją';
-$s_plugin_MantisGraph_issue_trends_link = 'Problemų Tendencijos';
+$s_plugin_MantisGraph_issue_trends_link = 'Problemų tendencijos';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Pagal Būsenos Grafikus';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Pagalio Prioriteto Grafikus';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Pagal Svarbumo Grafikus';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Pagal prioriteto grafikus';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Pagal svarbumo grafikus';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Pagal Kategorijos Grafikus';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Sukurti grafiką pagal sprendimą';
-$s_plugin_MantisGraph_graph_developer_title = 'Pagal Kūrėjo Grafikus';
-$s_plugin_MantisGraph_graph_issues_trend_title = 'Atidarytos, Išspręstos ir Likusios Problemos';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Pagal rezoliucijos grafikus';
+$s_plugin_MantisGraph_graph_developer_title = 'Pagal kūrėjo grafikus';
+$s_plugin_MantisGraph_graph_reporter_title = 'Pagal pranešėjo grafikus';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Atidarytos, išspręstos ir likusios problemos';
 $s_plugin_MantisGraph_by_status_pct = 'pagal būseną santykinai';
 $s_plugin_MantisGraph_by_priority_pct = 'pagal prioritetą santykinai';
 $s_plugin_MantisGraph_by_severity_pct = 'pagal svarbą santykinai';
@@ -80,3 +84,8 @@ $s_plugin_MantisGraph_period_last_quarter = 'Praeitą ketvirtį';
 $s_plugin_MantisGraph_period_year_to_date = 'Nuo metų pradžios';
 $s_plugin_MantisGraph_period_select = 'Pasirinkta data';
 $s_plugin_MantisGraph_period_last_year = 'Praeitais metais';
+$s_plugin_MantisGraph_graph_page = 'Atvaizduoti problemų istoriją grafike';
+$s_plugin_MantisGraph_graph_topdev = 'Geriausi kūrėjai pagal išspręstas problemas';
+$s_plugin_MantisGraph_graph_opendev = 'Kūrėjai pagal atviras problemas';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Geriausi pranešėjai pagal išspręstas problemas';
+$s_plugin_MantisGraph_other_categories = 'kitos kategorijos (%d)';

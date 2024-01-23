@@ -117,20 +117,20 @@ function error_stack_trace( $p_exception = null ) {
 }
 
 /**
- * Default error handler
+ * Default error handler.
  *
  * This handler will not receive E_ERROR, E_PARSE, E_CORE_*, or E_COMPILE_*
- *  errors.
+ * errors.
  *
- * E_USER_* are triggered by us and will contain an error constant in $p_error
- * The others, being system errors, will come with a string in $p_error
- *
- * @access private
- * @param integer $p_type    Contains the level of the error raised, as an integer.
- * @param string  $p_error   Contains the error message, as a string.
- * @param string  $p_file    Contains the filename that the error was raised in, as a string.
- * @param integer $p_line    Contains the line number the error was raised at, as an integer.
+ * @internal
+ * @param integer    $p_type  Contains the level of the error raised, as an integer.
+ * @param int|string $p_error For Mantis internal errors (i.e. of type E_USER_*),
+ *                            contains the error number (see ERROR_* constants);
+ *                            otherwise (system errors), the error message as a string.
+ * @param string     $p_file  Contains the filename that the error was raised in, as a string.
+ * @param integer    $p_line  Contains the line number the error was raised at, as an integer.
  * @return void
+ *
  * @uses lang_api.php
  * @uses config_api.php
  * @uses compress_api.php
@@ -142,7 +142,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	global $g_error_send_page_header;
 
 	# check if errors were disabled with @ somewhere in this call chain
-	if( 0 == error_reporting() ) {
+	if( !( error_reporting() & $p_type ) ) {
 		return;
 	}
 
@@ -181,6 +181,27 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	# Force errors to use HALT method.
 	if( $p_type == E_USER_ERROR || $p_type == E_ERROR || $p_type == E_RECOVERABLE_ERROR ) {
 		$t_method = DISPLAY_ERROR_HALT;
+	}
+
+	# Special handling for missing language strings, as we do not want to
+	# display information about lang_get() call; instead, we need details
+	# about the actual location of the missing string.
+	if( $p_error == ERROR_LANG_STRING_NOT_FOUND ) {
+		# Loop through the call stack, until we find the first call to
+		# lang_get() outside of lang API.
+		foreach( error_stack_trace() as $t_error ) {
+			/**
+			 * @var string $v_file
+			 * @var string $v_line
+			 * @var string $v_function
+			 */
+			extract( $t_error, EXTR_PREFIX_ALL, 'v' );
+			if( basename( $v_file ) != 'lang_api.php' && $v_function == 'lang_get' ) {
+				$p_file = $v_file;
+				$p_line = $v_line;
+				break;
+			}
+		}
 	}
 
 	# build an appropriate error string
@@ -231,25 +252,18 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			$t_error_type = 'DEBUG';
 			break;
 		case E_USER_DEPRECATED:
-			# Get the parent of the call that triggered the error to facilitate
-			# debugging with a more useful filename and line number
+			# Get details about the error, to facilitate debugging with a more
+			# useful message including filename and line number.
 			$t_stack = error_stack_trace();
-			if( isset( $t_stack[2] ) ) {
-				$t_caller = $t_stack[2];
-			} else {
-				# If called from main page body, there is no stack block for the funcion, use the page block instead
-				$t_caller = $t_stack[1];
-			}
+			$t_caller = $t_stack[0];
 
 			$t_error_type = 'WARNING';
 			$t_error_description =  error_string( $p_error )
 				. ' (in ' . $t_caller['file']
 				. ' line ' . $t_caller['line'] . ')';
 
-			if( $t_method == DISPLAY_ERROR_INLINE && php_sapi_name() != 'cli') {
-				# Enqueue messages for later display with error_print_delayed()
-				global $g_errors_delayed;
-				$g_errors_delayed[] = $t_error_description;
+			if( $t_method == DISPLAY_ERROR_INLINE && php_sapi_name() != 'cli' ) {
+				error_log_delayed( $t_error_description );
 				$g_error_handled = true;
 				return;
 			}
@@ -404,18 +418,49 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	$g_error_proceed_url = null;
 }
 
+
 /**
- * Prints messages from the delayed errors queue
+ * Error handler to convert PHP errors to Exceptions.
+ * This is used to temporarily override the default error handler, when it is
+ * required to catch a PHP error (e.g. when unserializing data in install
+ * helper functions).
+ * @param integer $p_type    Level of the error raised.
+ * @param string  $p_error   Error message.
+ * @param string  $p_file    Filename that the error was raised in.
+ * @param integer $p_line    Line number the error was raised at.
+ * @throws ErrorException
+ */
+function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
+	throw new ErrorException( $p_error, 0, $p_type, $p_file, $p_line );
+}
+
+/**
+ * Enqueues an error message for later display.
+ * @see error_print_delayed()
+ *
+ * @param string $p_message Error message
+ *
+ * @return void
+ */
+function error_log_delayed( $p_message ) {
+	global $g_errors_delayed;
+	$g_errors_delayed[] = $p_message;
+}
+
+/**
+ * Prints messages from the delayed errors queue.
  * The error handler enqueues deprecation warnings that would be printed inline,
- * to avoid display issues when they are triggered within html tags.
+ * to avoid display issues when they are triggered within html tags. Only unique
+ * messages are printed.
  * @return void
  */
 function error_print_delayed() {
 	global $g_errors_delayed;
 
 	if( !empty( $g_errors_delayed ) ) {
-		echo '<div id="delayed-errors">';
-		foreach( $g_errors_delayed as $t_error ) {
+		echo '<div class="space-10 clearfix"></div>', "\n";
+		echo '<div id="delayed-errors" class="alert alert-warning">';
+		foreach( array_unique( $g_errors_delayed ) as $t_error ) {
 			echo "\n" . '<div class="error-inline">', $t_error, '</div>';
 		}
 		echo "\n" . '</div>';
@@ -473,7 +518,7 @@ function error_stack_trace_as_string( $p_exception = null ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
 
-			$t_output .= '( ' . implode( $t_args, ', ' ) . " )\n";
+			$t_output .= '( ' . implode( ', ', $t_args ) . " )\n";
 		} else {
 			$t_output .= "()\n";
 		}
@@ -526,7 +571,7 @@ function error_print_stack_trace( $p_exception = null ) {
 			isset( $t_frame['class'] ) ? $t_frame['class'] : '-',
 			isset( $t_frame['type'] ) ? $t_frame['type'] : '-',
 			isset( $t_frame['function'] ) ? $t_frame['function'] : '-',
-			htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, 'UTF-8' )
+			htmlentities( implode( ', ', $t_args ), ENT_COMPAT, 'UTF-8' )
 		);
 
 	}
@@ -552,7 +597,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 			$t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
 		}
 
-		return '<array> { ' . implode( $t_results, ', ' ) . ' }';
+		return '<array> { ' . implode( ', ', $t_results ) . ' }';
 	} else if( is_object( $p_param ) ) {
 		$t_results = array();
 
@@ -563,7 +608,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 			$t_results[] = '[' . $t_name . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
 		}
 
-		return '<Object><' . $t_class_name . '> ( ' . implode( $t_results, ', ' ) . ' )';
+		return '<Object><' . $t_class_name . '> ( ' . implode( ', ', $t_results ) . ' )';
 	} else {
 		if( $p_showtype ) {
 			return '<' . gettype( $p_param ) . '>' . var_export( $p_param, true );
@@ -583,6 +628,7 @@ function error_string( $p_error ) {
 	global $g_error_parameters;
 
 	$t_lang = null;
+	$t_error = '';
 	while( true ) {
 		$t_err_msg = lang_get( 'MANTIS_ERROR', $t_lang );
 		if( array_key_exists( $p_error, $t_err_msg ) ) {
@@ -600,13 +646,24 @@ function error_string( $p_error ) {
 		}
 	}
 
-	# We pad the parameter array to make sure that we don't get errors if
-	#  the caller didn't give enough parameters for the error string
-	$t_padding = array_pad( array(), 10, '' );
+	# Prepare error parameters for display
+	$t_parameters = $g_error_parameters;
+	foreach( $t_parameters as &$t_value ) {
+		# Logic copied from string_html_specialchars(), to enable output of
+		# error messages even if core is not fully initialized.
+		# Modified to allow <br> tags
+		$t_value = preg_replace(
+			[ '/&amp;(#[0-9]+|[a-z]+);/i', '|&lt;(br)\s*/?&gt;|i' ],
+			[ '&$1;', '<&$1>' ],
+			@htmlspecialchars( $t_value, ENT_COMPAT, 'UTF-8' )
+		);
+	}
 
-	# ripped from string_api
-	$t_string = vsprintf( $t_error, array_merge( $g_error_parameters, $t_padding ) );
-	return preg_replace( '/&amp;(#[0-9]+|[a-z]+);/i', '&$1;', @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
+	# We pad the parameter array to make sure that we don't get errors in
+	# case the caller didn't provide enough for the error string.
+	$t_parameters = array_pad( $t_parameters, 10, '' );
+
+	return vsprintf( $t_error, $t_parameters );
 }
 
 /**

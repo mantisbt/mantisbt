@@ -47,36 +47,39 @@ require_api( 'utility_api.php' );
 form_security_validate( 'permalink' );
 
 layout_page_header();
-
 layout_page_begin();
 
 access_ensure_project_level( config_get( 'create_permalink_threshold' ) );
 
-$f_url = string_sanitize_url( gpc_get_string( 'url' ) );
+$f_filter = gpc_get_string( 'filter' );
+
+$t_url = filter_get_url( filter_temporary_get( $f_filter ) );
+
 ?>
+
 <div class="col-md-12 col-xs-12">
-<div class="space-10"></div>
+	<div class="space-10"></div>
 	<p class="lead">
-<?php
-echo lang_get( 'filter_permalink' ), '<br />';
-?>
-</p>
-<p>
-<?php
-$t_safe_url = string_display_line( $f_url );
-echo '<a href="' . $t_safe_url . '">' . $t_safe_url . '</a>';
-?>
-</p>
-<div class="space-10"></div>
-<?php
+		<?php echo lang_get( 'filter_permalink' ); ?>
+	</p>
+	<p>
+		<?php printf( '<a href="%1$s">%1$s</a>', string_attribute( $t_url ) ); ?>
+	</p>
+	<div class="space-10"></div>
 
+<?php
 $t_create_short_url = config_get( 'create_short_url' );
-
 if( !is_blank( $t_create_short_url ) ) {
-	print_small_button( sprintf( $t_create_short_url, $f_url ), lang_get( 'create_short_link' ), true );
+	print_small_button(
+		sprintf( $t_create_short_url, $t_url ),
+		lang_get( 'create_short_link' ),
+		true
+	);
 }
 ?>
+
 </div>
+
 <?php
 form_security_purge( 'permalink' );
 layout_page_end();

@@ -37,10 +37,15 @@ require_api( 'error_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'utility_api.php' );
 
+/**
+ * Main database connection.
+ * @var ADOConnection $g_db
+ */
+$g_db = false;
+
 # An array in which all executed queries are stored.  This is used for profiling
 # @global array $g_queries_array
 $g_queries_array = array();
-
 
 # Stores whether a database connection was successfully opened.
 # @global bool $g_db_connected
@@ -173,7 +178,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 
 /**
  * Returns whether a connection to the database exists
- * @global stores database connection state
+ * @global $g_db_connected stores database connection state
  * @return boolean indicating if the a database connection has been made
  */
 function db_is_connected() {
@@ -211,7 +216,7 @@ function db_check_database_support( $p_db_type ) {
 }
 
 /**
- * Maps a db driver type to the functional databse type
+ * Maps a db driver type to the functional database type
  * @param string	$p_driver_type Database driver name
  * @return int		Database type
  */
@@ -298,9 +303,6 @@ function db_query_bound() {
  * This will pop the database parameter stack {@see MantisDbParam} after a
  * successful execution, unless specified otherwise
  *
- * @global array of previous executed queries for profiling
- * @global adodb database connection object
- * @global boolean indicating whether queries array is populated
  * @param string  $p_query     Parameterlised Query string to execute.
  * @param array   $p_arr_parms Array of parameters matching $p_query.
  * @param integer $p_limit     Number of results to return.
@@ -309,94 +311,8 @@ function db_query_bound() {
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
 function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1, $p_pop_param = true ) {
-	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param;
-
-	$t_db_type = config_get_global( 'db_type' );
-
-	static $s_check_params;
-	if( $s_check_params === null ) {
-		$s_check_params = ( db_is_pgsql() || $t_db_type == 'odbc_mssql' || $t_db_type == 'mssqlnative' );
-	}
-
-	$t_start = microtime( true );
-
-	# This ensures that we don't get an error from ADOdb if $p_arr_parms == null,
-	# as Execute() expects either an array or false if there are no parameters -
-	# null actually gets treated as array( 0 => null )
-	if( is_null( $p_arr_parms ) ) {
-		$p_arr_parms = array();
-	}
-
-	if( !empty( $p_arr_parms ) && $s_check_params ) {
-		$t_params = count( $p_arr_parms );
-		for( $i = 0;$i < $t_params;$i++ ) {
-			if( $p_arr_parms[$i] === false ) {
-				$p_arr_parms[$i] = 0;
-			} elseif( $p_arr_parms[$i] === true && $t_db_type == 'mssqlnative' ) {
-				$p_arr_parms[$i] = 1;
-			}
-		}
-	}
-
-	static $s_prefix;
-	static $s_suffix;
-	if( $s_prefix === null ) {
-		# Determine table prefix and suffixes including trailing and leading '_'
-		$s_prefix = trim( config_get_global( 'db_table_prefix' ) );
-		$s_suffix = trim( config_get_global( 'db_table_suffix' ) );
-
-		if( !empty( $s_prefix ) && '_' != substr( $s_prefix, -1 ) ) {
-			$s_prefix .= '_';
-		}
-		if( !empty( $s_suffix ) && '_' != substr( $s_suffix, 0, 1 ) ) {
-			$s_suffix = '_' . $s_suffix;
-		}
-	}
-
-	$p_query = strtr($p_query, array(
-							'{' => $s_prefix,
-							'}' => $s_suffix,
-							) );
-
-	# Pushing params to safeguard the ADOdb parameter count (required for pgsql)
-	$g_db_param->push();
-
-	if( db_is_oracle() ) {
-		$p_query = db_oracle_adapt_query_syntax( $p_query, $p_arr_parms );
-	}
-
-	if( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
-		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset, $p_arr_parms );
-	} else {
-		$t_result = $g_db->Execute( $p_query, $p_arr_parms );
-	}
-
-	# Restore ADOdb parameter count
-	$g_db_param->pop();
-
-	$t_elapsed = number_format( microtime( true ) - $t_start, 4 );
-
-	if( ON == $g_db_log_queries ) {
-		$t_query_text = db_format_query_log_msg( $p_query, $p_arr_parms );
-		log_event( LOG_DATABASE, array( $t_query_text, $t_elapsed ) );
-	} else {
-		# If not logging the queries the actual text is not needed
-		$t_query_text = '';
-	}
-	array_push( $g_queries_array, array( $t_query_text, $t_elapsed ) );
-
-	# Restore param stack: only pop if asked to AND the query has params
-	if( $p_pop_param && !empty( $p_arr_parms ) ) {
-		$g_db_param->pop();
-	}
-
-	if( !$t_result ) {
-		db_error( $p_query );
-		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
-		return false;
-	} else {
-		return $t_result;
-	}
+	# Use DbQuery class to execute the query
+	return DbQuery::compat_db_query( $p_query, $p_arr_parms, $p_limit, $p_offset, $p_pop_param );
 }
 
 /**
@@ -454,7 +370,7 @@ function db_affected_rows() {
 /**
  * Retrieve the next row returned from a specific database query
  * @param IteratorAggregate &$p_result Database Query Record Set to retrieve next result for.
- * @return array Database result
+ * @return array|false Database result or false if
  */
 function db_fetch_array( IteratorAggregate &$p_result ) {
 	global $g_db_functional_type;
@@ -537,32 +453,41 @@ function db_result( $p_result, $p_row_index = 0, $p_col_index = 0 ) {
 }
 
 /**
- * return the last inserted id for a specific database table
+ * Return the last inserted ID after a insert statement.
+ * Warning: this function must be used immediately after the insert statement
+ *
+ * This relies on ADOdb to get the entity id when this functionality is available
+ * for the specific driver, and it makes sense in our model.
+ * Natively supported:
+ * - mysqli, using: mysqli_insert_id(connection).
+ * - mssqlnative, using SCOPE_IDENTITY().
+ * Not natively supported:
+ * - pgsql, oracle, using the underlying sequence for the table.
+ *
+ * Since the table is needed for those drivers where a sequence is used, the
+ * $p_table parameter is mandatory to ensure portability.
+ * Warning: $p_table is not expected to be a different table than the one used
+ * for the previous insert. Note that it's not even used by some drivers.
+ *
  * @param string $p_table A valid database table name.
  * @param string $p_field A valid field name (default 'id').
  * @return integer last successful insert id
  */
-function db_insert_id( $p_table = null, $p_field = 'id' ) {
+function db_insert_id( $p_table, $p_field = 'id' ) {
 	global $g_db, $g_db_functional_type;
 
-	if( isset( $p_table ) ) {
-		switch( $g_db_functional_type ) {
+	switch( $g_db_functional_type ) {
 			case DB_TYPE_ORACLE:
 				$t_query = 'SELECT seq_' . $p_table . '.CURRVAL FROM DUAL';
 				break;
 			case DB_TYPE_PGSQL:
 				$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
 				break;
-			case DB_TYPE_MSSQL:
-				$t_query = 'SELECT IDENT_CURRENT(\'' . $p_table . '\')';
-				break;
-		}
-		if( isset( $t_query ) ) {
-			$t_result = db_query( $t_query );
-			return (int)db_result( $t_result );
-		}
+			default:
+				return $g_db->Insert_ID();
 	}
-	return $g_db->Insert_ID();
+	$t_result = db_query( $t_query );
+	return (int)db_result( $t_result );
 }
 
 /**
@@ -581,9 +506,9 @@ function db_table_exists( $p_table_name ) {
 	}
 
 	# Can't use in_array() since it is case sensitive
-	$t_table_name = utf8_strtolower( $p_table_name );
+	$t_table_name = mb_strtolower( $p_table_name );
 	foreach( $t_tables as $t_current_table ) {
-		if( utf8_strtolower( $t_current_table ) == $t_table_name ) {
+		if( mb_strtolower( $t_current_table ) == $t_table_name ) {
 			return true;
 		}
 	}
@@ -612,9 +537,9 @@ function db_index_exists( $p_table_name, $p_index_name ) {
 
 	if( !empty( $t_indexes ) ) {
 		# Can't use in_array() since it is case sensitive
-		$t_index_name = utf8_strtolower( $p_index_name );
+		$t_index_name = mb_strtolower( $p_index_name );
 		foreach( $t_indexes as $t_current_index_name => $t_current_index_obj ) {
-			if( utf8_strtolower( $t_current_index_name ) == $t_index_name ) {
+			if( mb_strtolower( $t_current_index_name ) == $t_index_name ) {
 				return true;
 			}
 		}
@@ -700,33 +625,6 @@ function db_close() {
 }
 
 /**
- * prepare a string before DB insertion
- * @param string $p_string Unprepared string.
- * @return string prepared database query string
- * @deprecated db_query should be used in preference to this function. This function may be removed in 1.2.0 final
- */
-function db_prepare_string( $p_string ) {
-	global $g_db;
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'mssqlnative':
-		case 'odbc_mssql':
-			return addslashes( $p_string );
-		case 'mysqli':
-			$t_escaped = $g_db->qstr( $p_string, false );
-			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
-		case 'pgsql':
-			return pg_escape_string( $p_string );
-		case 'oci8':
-			return $p_string;
-		default:
-			error_parameters( 'db_type', $t_db_type );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
-	}
-}
-
-/**
  * Prepare a binary string before DB insertion
  * Use of this function is required for some DB types, to properly encode
  * BLOB fields prior to calling db_query()
@@ -741,16 +639,13 @@ function db_prepare_binary_string( $p_string ) {
 		case 'odbc_mssql':
 			$t_content = unpack( 'H*hex', $p_string );
 			return '0x' . $t_content['hex'];
-			break;
 		case 'pgsql':
 			return $g_db->BlobEncode( $p_string );
-			break;
 		case 'mssqlnative':
 		case 'oci8':
 			# Fall through, mssqlnative, oci8 store raw data in BLOB
 		default:
 			return $p_string;
-			break;
 	}
 }
 
@@ -1068,7 +963,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 	#   To do so, we will assume that the "AS" following a "CAST", is safe to be kept.
 	#   Using a counter for "CAST" appearances to allow nesting: CAST(CAST(x AS y) AS z)
 
-	# split the string by the relevant delimiters. The delimiters will be part of the splitted array
+	# split the string by the relevant delimiters. The delimiters will be part of the split array
 	$t_parts = preg_split("/(')|( AS )|(CAST\s*\()/mi", $p_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 	$t_is_literal = false;
 	$t_cast = 0;
@@ -1244,9 +1139,11 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 }
 
 /**
- * Replace 4-byte UTF-8 chars
+ * Replace 4-byte UTF-8 chars.
+ *
  * This is a workaround to avoid data getting truncated on MySQL databases
- * using native utf8 encoding, which only supports 3 bytes chars (see #20431)
+ * using native utf8 encoding, which only supports 3 bytes chars (see #20431).
+ *
  * @param string $p_string
  * @return string
  */
@@ -1260,7 +1157,7 @@ function db_mysql_fix_utf8( $p_string ) {
 		# replace with U+FFFD to avoid potential Unicode XSS attacks,
 		# see http://unicode.org/reports/tr36/#Deletion_of_Noncharacters
 		"\xEF\xBF\xBD",
-		$p_string
+		(string)$p_string
 	);
 }
 
@@ -1281,7 +1178,7 @@ function db_empty_result() {
  * @return string             Processed query string
  */
 function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
-	global $g_db;
+	global $g_db, $g_db_functional_type;
 
 	$t_lastoffset = 0;
 	$i = 0;
@@ -1297,14 +1194,22 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 			# Realign the offset returned by preg_match as it is byte-based,
 			# which causes issues with UTF-8 characters in the query string
 			# (e.g. from custom fields names)
-			$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $t_match_param[1] ), mb_internal_encoding() );
+			$t_utf8_offset = mb_strlen( substr( $p_query, 0, $t_match_param[1] ), mb_internal_encoding() );
 			if( $i <= count( $p_arr_parms ) ) {
-				if( db_is_pgsql() ) {
-					# For pgsql, the bound value is indexed by the parameter name
-					$t_index = (int)$t_matches['index'][0];
-					$t_value = $p_arr_parms[$t_index-1];
-				} else {
-					$t_value = $p_arr_parms[$i];
+				switch( $g_db_functional_type ) {
+					case DB_TYPE_PGSQL:
+						# For pgsql, the bound value is indexed by the parameter name (1-based)
+						$t_index = (int)$t_matches['index'][0];
+						$t_value = $p_arr_parms[$t_index-1];
+						break;
+					case DB_TYPE_ORACLE:
+						# For oracle, the value is indexed by the label
+						$t_index = $t_matches['index'][0];
+						$t_value = $p_arr_parms[$t_index];
+						break;
+					default:
+						# otherwise, the value is positional
+						$t_value = $p_arr_parms[$i];
 				}
 				if( is_null( $t_value ) ) {
 					$t_replace = 'NULL';
@@ -1320,9 +1225,9 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 					# Skip this token, so replacing it with itself.
 					$t_replace = $t_match_param[0];
 				}
-				$p_query = utf8_substr( $p_query, 0, $t_utf8_offset )
+				$p_query = mb_substr( $p_query, 0, $t_utf8_offset )
 					. $t_replace
-					. utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_match_param[0] ) );
+					. mb_substr( $p_query, $t_utf8_offset + mb_strlen( $t_match_param[0] ) );
 				$t_lastoffset = $t_match_param[1] + strlen( $t_replace ) + 1;
 			} else {
 				$t_lastoffset = $t_match_param[1] + 1;
@@ -1331,4 +1236,56 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 		}
 	}
 	return $p_query;
+}
+
+/**
+ * Returns true if a specific capability is suported in the current database server,
+ * false otherwise.
+ *
+ * @param integer $p_capability   See DB_CAPABILITY_* constants
+ * @return boolean    True if the capability is supported, false otherwise.
+ */
+function db_has_capability( $p_capability ) {
+	static $s_cache = array();
+	if( !isset( $s_cache[$p_capability] ) ) {
+		$s_cache[$p_capability] = db_test_capability( $p_capability );
+	}
+	return $s_cache[$p_capability];
+}
+
+/**
+ * Tests if a specific capability is suported in the current database server.
+ *
+ * @param integer $p_capability   See DB_CAPABILITY_* constants
+ * @return boolean    True if the capability is supported, false otherwise.
+ */
+function db_test_capability( $p_capability ) {
+	global $g_db, $g_db_functional_type;
+	$t_server_info = $g_db->ServerInfo();
+
+	switch( $p_capability ) {
+		case DB_CAPABILITY_WINDOW_FUNCTIONS:
+			switch( $g_db_functional_type ) {
+				case DB_TYPE_ORACLE: # since 8i
+				case DB_TYPE_PGSQL: # since 8.4
+				case DB_TYPE_MSSQL: # since 2008
+					return true;
+				case DB_TYPE_MYSQL:
+					# mysql, since 8.0.2
+					if( version_compare( $t_server_info['version'], '8.0.2', '>=' )
+							&& false !== stripos( $t_server_info['description'], 'mysql' ) ) {
+						return true;
+					}
+					# mariaDB, since 10.2
+					if( version_compare( $t_server_info['version'], '10.2', '>=' )
+							&& false !== stripos( $t_server_info['description'], 'mariadb' ) ) {
+						return true;
+					}
+					# if server info cant provide enough information to identify the type,
+					# default to "not supported"
+			}
+	}
+
+	# if nothing was found, return false
+	return false;
 }

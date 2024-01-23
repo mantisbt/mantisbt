@@ -28,17 +28,7 @@ $g_app->group('/lang', function() use ( $g_app ) {
 });
 
 /**
- * A method that does the work to handle getting a set of configs via REST API.
- *
- * The following query string parameters are supported:
- * - string/string[]: can be a string or an array
- *
- * The response will include a config key that is an array of requested configs.  Configs
- * that are not public or are not defined will be filtered out, and request will still succeed.
- * This is to make it easier to request configs that maybe defined in some versions of MantisBT
- * but not others.
- *
- * Note that only users with ADMINISTRATOR access can fetch configuration for other users.
+ * A method that does the work to handle getting a set of localized strings via REST API.
  *
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
@@ -46,23 +36,14 @@ $g_app->group('/lang', function() use ( $g_app ) {
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_lang_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_strings = $p_request->getParam( 'string' );
-	if( !is_array( $t_strings ) ) {
-		$t_strings = array( $t_strings );
-	}
+	$t_data = array(
+		'query' => array(
+			'string' => $p_request->getParam( 'string' )
+		)
+	);
 
-	$t_current_language = lang_get_current();
-	$t_localized_strings = array();
-	foreach( $t_strings as $t_string ) {
-		if( !lang_exists( $t_string, $t_current_language) ) {
-			continue;
-		}
-
-		$t_localized_strings[] = array( 'name' => $t_string, 'localized' => lang_get( $t_string ) );
-	}
-
-	$t_result = array( 'strings' => $t_localized_strings );
-	$t_result['language'] = $t_current_language;
+	$t_command = new LocalizedStringsGetCommand( $t_data );
+	$t_result = $t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }

@@ -22,7 +22,7 @@
 	            <para>Click "Manage" on Main Menu.</para>
                 </listitem>
                 <listitem>
-                    <para>Click "Manage Users" (if not selected by default).</para>
+                    <para>Click "Users" (if not selected by default).</para>
                 </listitem>
                 <listitem>
                     <para>Click "Create New Account" button just below the alphabet
@@ -51,12 +51,11 @@
 	    </listitem>
 	    <listitem>
 	        <para>If email notifications ($g_enable_email_notification) is
-		set to ON, users with access level about
-		$g_notify_new_user_created_threshold_min will get a
+		set to ON, users with access level of
+		$g_notify_new_user_created_threshold_min and above will get a
 		notification that a user account has been created.  Information
-		about the user like user name and email address are provided.
-		The IP of the user that created the account is also
-		included.</para>
+		about the user like user name, email address, IP address are included in
+		the email notification.</para>
 	    </listitem>
 	</itemizedlist></para>
 
@@ -121,7 +120,7 @@
 	directly on the database must take this into consideration.</para>
 
 	<para>By default administrators are the only users who can delete user
-	accounts.  They can delete accounts by clicking Manage, Manage Users,
+	accounts.  They can delete accounts by clicking Manage, Users,
 	locating the user to be deleted and opening it details page, then
 	clicking on the "Delete User" button which deletes the user.</para>
 
@@ -148,8 +147,8 @@
 	(see <xref linkend="admin.config.email" />).
 	</para>
 	<para>If email notifications ($g_enable_email_notification) is
-	set to ON, users with access level about
-	$g_notify_new_user_created_threshold_min will get a
+	set to ON, users with access level of
+	$g_notify_new_user_created_threshold_min and above will get a
 	notification that a user account has been created.  Information
 	about the user like user name, email address, IP address are included in
 	the email notification.</para>
@@ -172,7 +171,7 @@
 	administrator that they are not able to login into MantisBT anymore.
 	This can be due to forgetting their password and possibly user name or
 	email address that they used when signing up.  The administrator then
-	goes to Manage, Manage Users, locates the user account and opens its
+	goes to Manage, Users, locates the user account and opens its
 	details.  Under the user account details, there is a "Reset Password"
 	button which the administrator can click to reset the password and
 	trigger an email to the user to allow them to get into MantisBT and set
@@ -214,7 +213,7 @@
 	or with a typo in their email address address.</para>
 
 	<para>The account pruning can be done by administrators by going to
-	"Manage", "Manage Users", and clicking the "Prune Accounts" button
+	"Manage", "Users", and clicking the "Prune Accounts" button
 	inside the "Never Logged In" box.</para>
     </section>
 
@@ -367,7 +366,7 @@
 				<para><emphasis>Language</emphasis>:
 					The preferred language of the user.  This
 					language is used by the GUI and in email notifications.  Note
-					that MantisBT uses UTF8 for encoding the data, hence the
+					that MantisBT uses UTF-8 for encoding the data, hence the
 					user could for example use MantisBT with a Chinese interface,
 					while logging issue data in German.
 				</para>

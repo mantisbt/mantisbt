@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "https://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
 %BOOK_ENTITIES;
 ]>
@@ -104,7 +104,7 @@
 
 				<listitem>
 					<para>Disk</para>
-					<para>The application code is less than 30 MB.
+					<para>The application code is less than 50 MiB.
 					</para>
 					<para>The amount of disk space required for the database
 						will vary depending on the RDBMS and the volume of
@@ -127,7 +127,7 @@
 			<itemizedlist>
 				<listitem>
 					<para>Operating System</para>
-					<para>MantisBT runs on Windows, MacOS, OS/2, Linux, Solaris,
+					<para>MantisBT runs on Windows, macOS, Linux, Solaris,
 						the BSDs, and just about anything that supports the
 						required server software.
 					</para>
@@ -136,8 +136,8 @@
 				<listitem>
 					<para>Web Server</para>
 					<para>MantisBT is mainly tested with
-						<ulink url="http://www.microsoft.com/iis">Microsoft IIS</ulink> and
-						<ulink url="http://www.apache.org/">Apache</ulink>.
+						<ulink url="https://docs.microsoft.com/en-us/iis">Microsoft IIS</ulink> and
+						<ulink url="https://www.apache.org/">Apache</ulink>.
 						However, it is expected to work with any recent web
 						server software.
 					</para>
@@ -148,12 +148,12 @@
 						administrator to add support for .PHP files. This should
 						be a trivial modification. Further details can be found
 						in the
-						<ulink url="http://www.php.net/manual/en/installation.php">PHP documentation</ulink>
+						<ulink url="https://www.php.net/manual/en/install.php">PHP documentation</ulink>
 					</para>
 				</listitem>
 
 				<listitem>
-					<para><ulink url="http://www.php.net/">PHP</ulink></para>
+					<para><ulink url="https://www.php.net/">PHP</ulink></para>
 					<para>The web server must support PHP.  It can be installed
 						as CGI or any other integration technology.
 					</para>
@@ -181,18 +181,19 @@
 								<listitem><para><emphasis>mbstring</emphasis> -
 									Required for Unicode (UTF-8) support.
 								</para></listitem>
-								<listitem>
-									<para><emphasis>Fileinfo</emphasis> -
-										Guesses the MIME type of attachments
-									</para>
-									<para>Without this extension, file attachment
-										previews and downloads do not work
-										as MantisBT won't be able to send
-										the Content-Type header to a browser
-										requesting an attachment.
-									</para>
-									<para>This extension is included by default from
-										PHP version 5.3.x and above.
+								<listitem><para>
+									<emphasis>
+										ctype,
+										filter,
+										hash,
+										json,
+										session
+									</emphasis>
+									- Required to run MantisBT in general.
+									These are bundled with PHP, and enabled by default.
+									Note that
+									<emphasis>hash</emphasis> is a core extension since PHP 7.4.0, and
+									<emphasis>json</emphasis> is a core extension since PHP 8.0.0.
 									</para></listitem>
 							</itemizedlist></listitem>
 						</varlistentry>
@@ -208,11 +209,45 @@
 									required for the captcha feature
 								</para></listitem>
 
+								<listitem>
+									<para><emphasis>Fileinfo</emphasis> -
+										required for file attachments and most of the plugins
+									</para>
+									<para>Without this extension, file attachment
+										previews and downloads do not work
+										as MantisBT won't be able to send
+										the Content-Type header to a browser
+										requesting an attachment.
+									</para>
+								</listitem>
+
+								<listitem><para><emphasis>LDAP</emphasis> -
+									required for LDAP or Active Directory authentication
+									(see <xref linkend="admin.auth.ldap" />).
+								</para></listitem>
+
+								<listitem><para><emphasis>SOAP</emphasis> -
+									required to use the SOAP API
+									(see <xref linkend="admin.config.api" />).
+								</para></listitem>
+
+								<listitem><para><emphasis>zlib</emphasis> -
+									required to enable output compression
+									(see <xref linkend="admin.config.speed" />).
+								</para></listitem>
 
 							</itemizedlist></listitem>
 						</varlistentry>
 
 					</variablelist>
+					<note>
+						<para>
+							You can check which PHP modules are installed by running
+							<literal>php -m</literal> on the command line,
+							or by using the <literal>php_info()</literal>
+							function in a PHP script.
+						</para>
+					</note>
 				</listitem>
 
 				<listitem>
@@ -275,39 +310,39 @@
 								<entry morerows='4' valign='middle'>RDBMS</entry>
 								<entry>MySQL</entry>
 								<entry>5.5.35</entry>
-								<entry>5.6 or above</entry>
+								<entry>5.6 or later</entry>
 								<entry>PHP extension: mysqli</entry>
 							</row>
 							<row>
 								<entry>MariaDB</entry>
 								<entry>5.5.35</entry>
-								<entry>10.x or above</entry>
+								<entry>10.4 or later</entry>
 								<entry>PHP extension: mysqli</entry>
 							</row>
 							<row>
 								<entry>PostgreSQL</entry>
 								<entry>9.2</entry>
-								<entry>9.2 or later</entry>
+								<entry>11.20 or later</entry>
 								<entry>PHP extension: pgsql</entry>
 							</row>
 							<row>
 								<entry>MS SQL Server</entry>
 								<entry>2012</entry>
-								<entry>2012 or later</entry>
+								<entry>2019 or later</entry>
 								<entry>PHP extension: sqlsrv</entry>
 							</row>
 							<row>
 								<entry>Oracle</entry>
 								<entry>11gR2</entry>
-								<entry>11gR2 or later</entry>
+								<entry>19c or later</entry>
 								<entry>PHP extension: oci8</entry>
 							</row>
 
 							<row>
 								<entry>PHP</entry>
 								<entry>PHP</entry>
-								<entry>5.5.x</entry>
-								<entry>7.0 or later</entry>
+								<entry>7.4</entry>
+								<entry>8.0 or later</entry>
 								<entry>See above for PHP extensions</entry>
 							</row>
 
@@ -327,14 +362,14 @@
 							<row>
 								<entry>nginx</entry>
 								<entry>1.10.x</entry>
-								<entry>1.10.x</entry>
+								<entry>1.16.x or later</entry>
 								<entry></entry>
 							</row>
 							<row>
 								<entry>IIS</entry>
 								<entry>7.5</entry>
-								<entry>8.0</entry>
-								<entry>Windows Server 2008 R2 SP1 or later</entry>
+								<entry>10</entry>
+								<entry>Windows Server 2016 or later</entry>
 							</row>
 						</tbody>
 					</tgroup>
@@ -366,12 +401,18 @@
 			</para>
 
 			<itemizedlist>
-				<listitem><para>Firefox 45 and above</para></listitem>
-				<listitem><para>Internet Explorer 10 and above</para></listitem>
+				<listitem><para>Firefox</para></listitem>
+				<listitem><para>Edge</para></listitem>
 				<listitem><para>Chrome</para></listitem>
 				<listitem><para>Safari</para></listitem>
 				<listitem><para>Opera</para></listitem>
 			</itemizedlist>
+
+			<note>
+				<para>Support for <emphasis>Internet Explorer 11</emphasis>
+					ended with release 2.22.0.
+				</para>
+			</note>
 		</section>
 	</section>
 
@@ -416,7 +457,7 @@ gunzip <emphasis>filename.tar.gz</emphasis>
 tar -xf <emphasis>filename.tar</emphasis>
 </programlisting>
 					Other file archiving tools such as
-					<ulink url="http://www.7-zip.org/">7-Zip</ulink>
+					<ulink url="https://www.7-zip.org/">7-Zip</ulink>
 					should also be able to handle decompression of the archive.
 				</para>
 				<para>The extraction process should create a new directory like
@@ -449,7 +490,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 
 		<para>Once that is done, execute the installation script.
 			From your web browser, access
-			<programlisting>http://yoursite/mantisbt/admin/install.php</programlisting>
+			<programlisting>https://yoursite/mantisbt/admin/install.php</programlisting>
 			The installation procedure will go through the following steps:
 		</para>
 
@@ -499,7 +540,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 
 			<listitem>
 				<para>The script attempts to write a basic
-					<emphasis>config_inc.php</emphasis>
+					<filename>config_inc.php</filename>
 					file to define the database connection parameters.
 				</para>
 				<para>This operation may fail if the web server's user account
@@ -557,23 +598,74 @@ tar -xf <emphasis>filename.tar</emphasis>
 				<para>Copy the configuration files
 				</para>
 				<para>To preserve your system settings, you should copy the
-					files listed below to subdirectory config of the new directory.
-					You might have to copy as well other custom files such as logo, favicon, css, etc.
+					files listed below to subdirectory <filename>config</filename>
+					of the new installation.
 				</para>
-				<para>
-					<filename>config_inc.php</filename>,
-					the <emphasis>Custom Strings File</emphasis>
-					(<filename>custom_strings_inc.php</filename> by default,
-					see <xref linkend="admin.customize.strings"/>),
-					<filename>custom_constants_inc.php</filename> and
-					<filename>custom_functions_inc.php</filename>
+				<itemizedlist>
+					<listitem>
+						<para><filename>config_inc.php</filename>,</para>
+					</listitem>
+					<listitem>
+						<para><filename>custom_strings_inc.php</filename>,</para>
+					</listitem>
+					<listitem>
+						<para><filename>custom_constants_inc.php</filename> and</para>
+					</listitem>
+					<listitem>
+						<para><filename>custom_functions_inc.php</filename>.</para>
+					</listitem>
+				</itemizedlist>
+				<note>
+					<para>The above list is not exhaustive. You might also
+						have to copy other custom files specific to your
+						installation such as logo, favicon, css, etc.
+					</para>
+				</note>
+			</listitem>
+
+			<listitem>
+				<para>Copy third party plugins
 				</para>
+				<para>To maintain system functionality, you should copy any
+					additional plugins in the <filename>plugins</filename>
+					subdirectory.
+				</para>
+				<para>For example on Unix, you could use the following command;
+					it will copy all installed plugins (in local subdirectories
+					or symlinked), excluding bundled ones.
+				</para>
+				<programlisting>
+cd /path/to/mantisbt-OLD/plugins
+find -maxdepth 1 ! -path . -type d -o -type l |
+    grep -Pv "(Gravatar|MantisCoreFormatting|MantisGraph|XmlImportExport)" |
+    xargs -Idirs cp -r dirs /path/to/mantisbt-NEW/plugins
+</programlisting>
+				<warning>
+					<para>Make sure that you
+						<emphasis>do not overwrite any of the bundled plugins</emphasis>
+						as per the list below, with an older version.
+					</para>
+					<itemizedlist>
+						<listitem>
+							<para>Avatars via Gravatar (<filename>Gravatar</filename>)</para>
+						</listitem>
+						<listitem>
+							<para>MantisBT Formatting (<filename>MantisCoreFormatting</filename>)</para>
+						</listitem>
+						<listitem>
+							<para>Mantis Graphs (<filename>MantisGraph</filename>)</para>
+						</listitem>
+						<listitem>
+							<para>Import/Export issues (<filename>XmlImportExport</filename>)</para>
+						</listitem>
+					</itemizedlist>
+				</warning>
 			</listitem>
 
 			<listitem>
 				<para>Execute the upgrade script.
 					From your web browser, access
-					<programlisting>http://yoursite/mantisbt-NEW/admin/install.php</programlisting>
+					<programlisting>https://yoursite/mantisbt-NEW/admin/install.php</programlisting>
 					where <emphasis>mantisbt-NEW</emphasis> is the name of the
 					directory where the new release was extracted
 				</para>
@@ -621,7 +713,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 				repeat this several times, until normal completion.
 			</para>
 			<para>Reference: MantisBT issue
-				<ulink url="http://www.mantisbt.org/bugs/view.php?id=12735">12735</ulink>.
+				<ulink url="https://mantisbt.org/bugs/view.php?id=12735">12735</ulink>.
 			</para>
 		</note>
 	</section>
@@ -633,7 +725,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 		<para>There are many settings that you can adjust to configure
 			and customize MantisBT.
 			Refer to <xref linkend="admin.config" />, as well as the
-			<emphasis>config_defaults_inc.php</emphasis> file
+			<filename>config_defaults_inc.php</filename> file
 			for in depth explanations of the available options.
 			Check out also
 			<xref linkend="admin.customize" />
@@ -645,22 +737,34 @@ tar -xf <emphasis>filename.tar</emphasis>
 			new configuration options.
 		</para>
 
-		<para>Open or create the file <emphasis>config_inc.php</emphasis> in
+		<para>Open or create the file <filename>config_inc.php</filename> in
 			subfolder config in an editor and add or modify any values as
 			required. These will override the default values.
 		</para>
 
 		<para>You may want to use the provided
-			<emphasis>config_inc.php.sample</emphasis> file
+			<filename>config_inc.php.sample</filename> file
 			as a starting point.
 		</para>
 
 		<warning>
 			<para>you should never edit the
-				<emphasis>config_defaults_inc.php</emphasis> file
+				<filename>config_defaults_inc.php</filename> file
 				directly, as it could cause issues with future upgrades.
 				Always store your custom configuration in your own
-				<emphasis>config_inc.php</emphasis> file.
+				<filename>config_inc.php</filename> file.
+			</para>
+		</warning>
+
+		<warning>
+			<para>The MantisBT configuration files
+				(<filename>config_inc.php</filename> as well as
+				<filename>custom_strings_inc.php</filename>,
+				<filename>custom_constants_inc.php</filename>,
+				<filename>custom_functions_inc.php</filename>, etc.)
+				should always be saved as
+				<emphasis>UTF-8 without BOM</emphasis>.
+				Failure to do so may lead to unexpected display issues.
 			</para>
 		</warning>
 
@@ -700,9 +804,9 @@ tar -xf <emphasis>filename.tar</emphasis>
 				<warning>
 					<para>Omitting this important step will leave your MantisBT
 						instance exposed to several potentially severe attacks, e.g.
-						<ulink url="http://mantisbt.org/bugs/view.php?id=23173">
+						<ulink url="https://mantisbt.org/bugs/view.php?id=23173">
 							issue #23173</ulink> (if
-						<ulink url="http://php.net/manual/en/mysqli.configuration.php#ini.mysqli.allow-local-infile">
+						<ulink url="https://www.php.net/manual/en/mysqli.configuration.php#ini.mysqli.allow-local-infile">
 							mysqli.allow_local_infile</ulink>
 						is enabled in php.ini).
 					</para>
@@ -731,7 +835,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 			<listitem>
 				<para>Create a new Administrator account
 				</para>
-				<para>Go to <emphasis>Manage &gt; Manage Users</emphasis>
+				<para>Go to <emphasis>Manage &gt; Users</emphasis>
 					and create a new account with 'administrator'
 					access level.
 				</para>
@@ -745,7 +849,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 			<listitem>
 				<para>Create a new Project
 				</para>
-				<para>Go to <emphasis>Manage &gt; Manage Projects</emphasis>
+				<para>Go to <emphasis>Manage &gt; Projects</emphasis>
 					and create a new project
 				</para>
 			</listitem>
@@ -837,13 +941,11 @@ mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database name&gt; &lt; &lt;input
 			</para>
 
 			<para>You can also perform both of these tasks using
-				<ulink url="http://www.phpmyadmin.net/">phpMyAdmin</ulink>
+				<ulink url="https://www.phpmyadmin.net/">phpMyAdmin</ulink>
 			</para>
 
 			<para>A good idea is to make a backup script and run it regularly
-				through cron or a task scheduler (for Windows see
-				<ulink url="http://www.wincron.com/">WinCron</ulink>
-				).
+				through cron or a task scheduler.
 				Using the current date in the filename can prevent overwriting and
 				make cataloguing easier.
 			</para>
@@ -851,13 +953,18 @@ mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database name&gt; &lt; &lt;input
 			<para>References and useful links:
 				<itemizedlist>
 					<listitem><para>
-						<ulink url="http://dev.mysql.com/doc/refman/5.1/en/mysqlhotcopy.html">
-							mysqlhotcopy documentation
+						<ulink url="https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html">
+							mysqldump documentation
 						</ulink></para>
 					</listitem>
 					<listitem><para>
-						<ulink url="http://sourceforge.net/projects/automysqlbackup/">
-							automysqlbackup script
+						<ulink url="https://www.percona.com/software/mysql-database/percona-xtrabackup">
+							Percona XtraBackup
+						</ulink></para>
+					</listitem>
+					<listitem><para>
+						<ulink url="https://sourceforge.net/projects/automysqlbackup/">
+							AutoMySQLBackup  script
 						</ulink></para>
 					</listitem>
 				</itemizedlist>

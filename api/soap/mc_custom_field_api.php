@@ -38,7 +38,7 @@ function mci_get_custom_field_id_from_objectref( stdClass $p_object_ref ) {
 	if( isset( $p_object_ref['id'] ) && (int) $p_object_ref['id'] != 0 ) {
 		$t_id = (int)$p_object_ref['id'];
 	} else {
-		if( !is_blank( $p_object_ref['name'] ) ) {
+		if( isset( $p_object_ref['name'] ) && !is_blank( $p_object_ref['name'] ) ) {
 			$t_id = custom_field_get_id_from_name( $p_object_ref['name'] );
 		} else {
 			$t_id = 0;

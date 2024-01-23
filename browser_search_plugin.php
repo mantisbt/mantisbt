@@ -38,7 +38,7 @@ $f_type = strtolower( gpc_get_string( 'type', 'text' ) );
 
 $t_path = config_get_global( 'path' );
 $t_title = config_get( 'search_title' );
-$t_icon = $t_path . config_get( 'favicon_image' );
+$t_icon = $t_path . config_get_global( 'favicon_image' );
 $t_searchform = $t_path . 'view_all_bug_page.php';
 
 # Localized ShortName and Description elements
@@ -48,16 +48,16 @@ $t_description = sprintf( lang_get( "opensearch_{$f_type}_description" ), $t_tit
 if( $f_type == 'id' ) {
 	$t_url = $t_path . 'view.php?id={searchTerms}';
 } else {
-	$t_url = $t_path . 'view_all_set.php?type=1&amp;temporary=y&amp;handler_id=[all]&amp;search={searchTerms}';
+	$t_url = $t_path . 'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&amp;temporary=y&amp;handler_id=[all]&amp;search={searchTerms}';
 }
 
 header( 'Content-Type: application/opensearchdescription+xml' );
-echo '<?xml version="1.0" encoding="UTF-8" ?>';
+echo '<?xml version="1.0" encoding="UTF-8" ?>' . PHP_EOL;
 ?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-	<ShortName><?php echo $t_shortname; ?></ShortName>
-	<Description><?php echo $t_description; ?></Description>
+	<ShortName><?php echo htmlspecialchars( $t_shortname, ENT_XML1 | ENT_QUOTES); ?></ShortName>
+	<Description><?php echo htmlspecialchars( $t_description, ENT_XML1 | ENT_QUOTES); ?></Description>
 	<InputEncoding>UTF-8</InputEncoding>
 	<Image width="16" height="16" type="image/x-icon"><?php echo $t_icon; ?></Image>
 	<Url type="text/html" method="GET" template="<?php echo $t_url; ?>"></Url>';

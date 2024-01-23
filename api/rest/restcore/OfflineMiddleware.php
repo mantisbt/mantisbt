@@ -23,7 +23,7 @@
  */
 
 /**
- * A middleware class that handles checks if MatnisBT is offline or not.
+ * A middleware class that checks if MantisBT is offline or not.
  * If offline, then fail API calls.
  */
 class OfflineMiddleware {

@@ -24,35 +24,14 @@
  */
 
 # Includes
-require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
-
-# MantisBT Core API
-require_mantis_core();
+require_once 'MantisCoreBase.php';
 
 /**
  * Helper API tests
  * @package Tests
  * @subpackage String
  */
-class MantisHelperTest extends PHPUnit_Framework_TestCase {
-
-	/**
-	 * Custom assertion to evaluate whether the given exception was a
-	 * Mantis error of the specific type(s)
-	 *
-	 * @param Exception $e
-	 * @param array     $p_expected_errors List of expected Mantis error codes.
-	 */
-	public function assertMantisError( Exception $e, array $p_expected_errors = array( ERROR_GENERIC ) ) {
-		$this->assertEquals( E_USER_ERROR, $e->getCode(),
-			'Unexpected error occurred: ' . $e->getMessage()
-		);
-
-		$t_code = $e->getMessage();
-		$this->assertContains( $t_code, $p_expected_errors,
-			"Unexpected Mantis error #$t_code occurred: " . error_string( $t_code )
-		);
-	}
+class MantisHelperTest extends MantisCoreBase {
 
 	/**
 	 * Tests helper_array_transpose() with good values.
@@ -76,19 +55,10 @@ class MantisHelperTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider providerArrayTransposeInvalid
 	 */
 	public function testArrayTransposeInvalid( $p_in ) {
-		try {
-			helper_array_transpose( $p_in );
-		}
-		catch( PHPUnit_Framework_Error $e ) {
-			$this->assertMantisError( $e );
-			# This is the "normal" exit path as we expect all transpositions
-			# to fail with an error
-			return;
-		}
-
-		# Since the provider only contains invalid values, the transposition
-		# should always fail and we should never get here
-		$this->fail('The transposition was successful but should have failed.');
+		$this->expectException(PHPUnit\Framework\Error\Error::class);
+		$this->expectExceptionCode(E_USER_ERROR);
+		$this->expectExceptionMessage((string)ERROR_GENERIC);
+		helper_array_transpose( $p_in );
 	}
 
 	/**

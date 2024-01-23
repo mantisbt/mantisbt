@@ -60,10 +60,10 @@ if( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
 }
 
 $t_filter_ids_available =
-		filter_db_get_queries( ALL_PROJECTS, $t_user_id, false ) +
-		filter_db_get_queries( ALL_PROJECTS, null, true ) +
-		filter_db_get_queries( $t_project_id, $t_user_id, false ) +
-		filter_db_get_queries( $t_project_id, null, true )
+		filter_db_get_named_filters( ALL_PROJECTS, $t_user_id, false ) +
+		filter_db_get_named_filters( ALL_PROJECTS, null, true ) +
+		filter_db_get_named_filters( $t_project_id, $t_user_id, false ) +
+		filter_db_get_named_filters( $t_project_id, null, true )
 		;
 filter_cache_rows( $t_filter_ids_available );
 
@@ -74,14 +74,14 @@ function table_print_filter_headers() {
 ?>
 	<thead>
 		<tr>
-			<th><?php echo lang_get( 'query_name' ) ?></td>
+			<th><?php echo lang_get( 'query_name' ) ?></th>
 			<?php if( $t_rss_enabled ) { ?>
-				<th><?php echo lang_get( 'rss' ) ?></td>
+				<th><?php echo lang_get( 'rss' ) ?></th>
 			<?php } ?>
-			<th><?php echo lang_get( 'email_project' ) ?></td>
-			<th><?php echo lang_get( 'public' ) ?></td>
-			<th><?php echo lang_get( 'owner' ) ?></td>
-			<th><?php echo lang_get( 'actions' ) ?></td>
+			<th><?php echo lang_get( 'email_project' ) ?></th>
+			<th><?php echo lang_get( 'public' ) ?></th>
+			<th><?php echo lang_get( 'owner' ) ?></th>
+			<th><?php echo lang_get( 'actions' ) ?></th>
 		</tr>
 	</thead>
 <?php
@@ -93,7 +93,7 @@ function table_print_filter_row( $p_filter_id ) {
 	echo '<tr>';
 	# Filter name
 	echo '<td>';
-	$t_name = string_display( filter_get_field( $p_filter_id, 'name' ) );
+	$t_name = string_display_line( filter_get_field( $p_filter_id, 'name' ) );
 	print_link( 'view_filters_page.php?filter_id=' . $p_filter_id, $t_name );
 	echo '</td>';
 	# RSS
@@ -103,7 +103,7 @@ function table_print_filter_row( $p_filter_id ) {
 		echo '</td>';
 	}
 	# Project
-	echo '<td>' . project_get_name( filter_get_field( $p_filter_id, 'project_id' )) . '</td>';
+	echo '<td>' . string_display_line( project_get_name( filter_get_field( $p_filter_id, 'project_id' ) ) ) . '</td>';
 	# Public
 	echo '<td class="center">' . trans_bool( filter_get_field( $p_filter_id, 'is_public' ) ) . '</td>';
 	# Owner
@@ -115,10 +115,10 @@ function table_print_filter_row( $p_filter_id ) {
 	echo '</div>';
 	if( $t_editable ) {
 		echo '<div class="pull-left">';
-		print_form_button( 'manage_filter_edit_page.php', lang_get( 'edit_link' ), array( 'filter_id' =>  $p_filter_id ) );
+		print_form_button( 'manage_filter_edit_page.php', lang_get( 'edit' ), array( 'filter_id' =>  $p_filter_id ) );
 		echo '</div>';
 		echo '<div class="pull-left">';
-		print_form_button( 'manage_filter_delete.php', lang_get( 'delete_filter_button' ), array( 'filter_id' =>  $p_filter_id ) );
+		print_form_button( 'manage_filter_delete.php', lang_get( 'delete' ), array( 'filter_id' =>  $p_filter_id ) );
 		echo '</div>';
 	}
 	echo '</div>';
@@ -151,8 +151,8 @@ function table_print_filters( array $p_filter_array ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-filter"></i>
-				<?php echo lang_get('available_filter_for_project') . ': ' . project_get_name( $t_project_id ) ?>
+				<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
+				<?php echo lang_get('available_filter_for_project') . ': ' . string_display_line( project_get_name( $t_project_id ) ) ?>
 			</h4>
 		</div>
 

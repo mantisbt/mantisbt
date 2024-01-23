@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,12 +33,19 @@
 /** Greek (Ελληνικά)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author NikosLikomitros
+ * @author Nikosgranturismogt
  * @author Omnipaedista
  */
 
 $s_plugin_format_title = 'Μορφοποίηση MantisBT';
+$s_plugin_format_config = 'Διαμόρφωση';
+$s_plugin_format_process_text = 'Επεξεργασία κειμένου';
+$s_plugin_format_process_urls = 'Επεξεργασία διεύθυνσης URL';
+$s_plugin_format_enabled = 'Στις';
+$s_plugin_format_disabled = 'Εκτός';

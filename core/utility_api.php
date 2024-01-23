@@ -51,7 +51,7 @@ function trans_bool( $p_num ) {
 	if( 0 == $p_num ) {
 		return '&#160;';
 	} else {
-		return '<i class="fa fa-check fa-lg"></i>';
+		return icon_get( 'fa-check', 'fa-lg' );
 	}
 }
 
@@ -73,7 +73,7 @@ function terminate_directory_path( $p_path ) {
  * @access public
  */
 function is_blank( $p_var ) {
-	$p_var = trim( $p_var );
+	$p_var = trim( (string)$p_var );
 	$t_str_len = strlen( $p_var );
 	if( 0 == $t_str_len ) {
 		return true;
@@ -99,13 +99,11 @@ function ini_get_bool( $p_name ) {
 			case '':
 			case '0':
 				return false;
-				break;
 			case 'on':
 			case 'true':
 			case 'yes':
 			case '1':
 				return true;
-				break;
 		}
 	}
 	return (bool)$t_result;
@@ -294,4 +292,28 @@ function get_font_path() {
 			}
 		}
 		return $t_font_path;
+}
+
+/**
+ * unserialize() with Exception instead of PHP notice.
+ *
+ * When given invalid data, unserialize() throws a PHP notice; this function
+ * relies on a custom error handler to throw an Exception instead.
+ *
+ * @param string $p_string The serialized string.
+ * @return mixed The converted value
+ *
+ * @throws ErrorException
+ */
+function safe_unserialize( $p_string ) {
+	set_error_handler( 'error_convert_to_exception' );
+	try {
+		$t_data = unserialize( $p_string );
+	}
+	catch( ErrorException $e ) {
+		restore_error_handler();
+		throw $e;
+	}
+	restore_error_handler();
+	return $t_data;
 }

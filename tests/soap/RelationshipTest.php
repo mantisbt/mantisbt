@@ -38,23 +38,19 @@ class RelationshipTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssuesAndAddRelation() {
-	    $t_first_issue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
-
+		$t_first_issue = $this->getIssueToAdd( '1' );
 		$t_first_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_first_issue );
-
 		$this->deleteAfterRun( $t_first_issue_id );
 
-	    $t_second_issue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation2' );
-
+		$t_second_issue = $this->getIssueToAdd( '2' );
 		$t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_second_issue );
-
 		$this->deleteAfterRun( $t_second_issue_id );
 
 		$t_relationship = array (
-		    'type' => array (
-		        'id' => 0 # BUG_DUPLICATE
-		    ),
-		    'target_id' => $t_second_issue_id
+			'type' => array (
+				'id' => 0 # BUG_DUPLICATE
+			),
+			'target_id' => $t_second_issue_id
 		);
 
 		$this->client->mc_issue_relationship_add( $this->userName, $this->password, $t_first_issue_id, $t_relationship );
@@ -79,23 +75,19 @@ class RelationshipTest extends SoapBase {
 	 * @return void
 	 */
 	public function testDeleteRelation() {
-	    $t_first_issue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
-
+		$t_first_issue = $this->getIssueToAdd( '1' );
 		$t_first_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_first_issue );
-
 		$this->deleteAfterRun( $t_first_issue_id );
 
-	    $t_second_issue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation2' );
-
+		$t_second_issue = $this->getIssueToAdd( '2' );
 		$t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_second_issue );
-
 		$this->deleteAfterRun( $t_second_issue_id );
 
 		$t_relationship = array (
-		    'type' => array (
-		        'id' => 0 # BUG_DUPLICATE
-		    ),
-		    'target_id' => $t_second_issue_id
+			'type' => array (
+				'id' => 0 # BUG_DUPLICATE
+			),
+			'target_id' => $t_second_issue_id
 		);
 
 		$t_relationship_id = $this->client->mc_issue_relationship_add( $this->userName, $this->password, $t_first_issue_id, $t_relationship );

@@ -33,6 +33,8 @@
  * @uses error_api.php
  * @uses gpc_api.php
  * @uses php_api.php
+ *
+ * @noinspection PhpUnused
  */
 
 require_api( 'config_api.php' );
@@ -88,11 +90,24 @@ abstract class MantisSession {
 }
 
 /**
+ * MantisPHPSession Class.
+ *
  * Implementation of the abstract MantisBT session interface using
  * standard PHP sessions stored on the server's filesystem according
  * to PHP's session.* settings in 'php.ini'.
  */
 class MantisPHPSession extends MantisSession {
+	/**
+	 * Session key prefix.
+	 * Used with {@see $g_crypto_master_salt} to build a unique Session key.
+	 */
+	const SESSION_KEY_PREFIX = 'session_key_v_2';
+
+	/**
+	 * @var string Session key
+	 */
+	protected $key;
+
 	/**
 	 * Constructor
 	 * @param integer $p_session_id The session id.
@@ -100,7 +115,9 @@ class MantisPHPSession extends MantisSession {
 	function __construct( $p_session_id = null ) {
 		global $g_cookie_secure_flag_enabled;
 
-		$this->key = hash( 'whirlpool', 'session_key_v_2' . config_get_global( 'crypto_master_salt' ), false );
+		$this->key = hash( 'whirlpool',
+			$this::SESSION_KEY_PREFIX . config_get_global( 'crypto_master_salt' )
+		);
 
 		# Save session information where specified or with PHP's default
 		$t_session_save_path = config_get_global( 'session_save_path' );
@@ -110,7 +127,18 @@ class MantisPHPSession extends MantisSession {
 
 		# Handle session cookie and caching
 		session_cache_limiter( 'private_no_expire' );
-		session_set_cookie_params( 0, config_get_global( 'cookie_path' ), config_get_global( 'cookie_domain' ), $g_cookie_secure_flag_enabled, true );
+		$t_path = config_get_global( 'cookie_path' );
+		$t_domain = config_get_global( 'cookie_domain' );
+		$t_samesite = config_get_global( 'cookie_samesite' );
+		$t_options = array(
+			'lifetime' => 0,
+			'path' => $t_path,
+			'domain' => $t_domain,
+			'samesite' => $t_samesite,
+			'secure' => $g_cookie_secure_flag_enabled,
+			'httponly' => true,
+		);
+		session_set_cookie_params( $t_options );
 
 		# Handle existent session ID
 		if( !is_null( $p_session_id ) ) {
@@ -129,9 +157,12 @@ class MantisPHPSession extends MantisSession {
 
 	/**
 	 * get session data
+	 *
 	 * @param string $p_name    The name of the value to set.
 	 * @param mixed  $p_default The value to set.
+	 *
 	 * @return string
+	 * @noinspection PhpInconsistentReturnPointsInspection
 	 */
 	function get( $p_name, $p_default = null ) {
 		if( isset( $_SESSION[$this->key][$p_name] ) ) {
@@ -184,18 +215,9 @@ class MantisPHPSession extends MantisSession {
  * @return void
  */
 function session_init( $p_session_id = null ) {
-	global $g_session, $g_session_handler;
+	global $g_session;
 
-	switch( utf8_strtolower( $g_session_handler ) ) {
-		case 'php':
-			$g_session = new MantisPHPSession( $p_session_id );
-			break;
-		case 'memcached':
-			# Not yet implemented
-		default:
-			trigger_error( ERROR_SESSION_HANDLER_INVALID, ERROR );
-			break;
-	}
+	$g_session = new MantisPHPSession( $p_session_id );
 
 	if( ON == config_get_global( 'session_validation' ) && session_get( 'secure_session', false ) ) {
 		session_validate( $g_session );
@@ -227,7 +249,7 @@ function session_validate( $p_session ) {
 			trigger_error( ERROR_SESSION_NOT_VALID, WARNING );
 
 			$t_url = config_get_global( 'path' ) . config_get_global( 'default_home_page' );
-			echo "\t<meta http-equiv=\"Refresh\" content=\"4; URL=" . $t_url . "\" />\n";
+			echo "\t", '<meta http-equiv="Refresh" content="4; URL=' . $t_url . '" />', "\n";
 
 			die();
 		}
@@ -266,7 +288,7 @@ function session_get_int( $p_name, $p_default = null ) {
  */
 function session_get_bool( $p_name, $p_default = null ) {
 	$t_args = func_get_args();
-	return true && call_user_func_array( 'session_get', $t_args );
+	return (bool)call_user_func_array( 'session_get', $t_args );
 }
 
 /**
@@ -277,7 +299,7 @@ function session_get_bool( $p_name, $p_default = null ) {
  */
 function session_get_string( $p_name, $p_default = null ) {
 	$t_args = func_get_args();
-	return '' . call_user_func_array( 'session_get', $t_args );
+	return (string)call_user_func_array( 'session_get', $t_args );
 }
 
 /**
@@ -320,4 +342,3 @@ if( PHP_CGI == php_mode() ) {
 		session_init( $t_session_id );
 	}
 }
-

@@ -115,19 +115,21 @@ function action_attach_tags_validate( $p_bug_id ) {
 function action_attach_tags_process( $p_bug_id ) {
 	global $g_action_attach_tags_attach, $g_action_attach_tags_create;
 
-	$t_user_id = auth_get_current_user_id();
-
 	foreach( $g_action_attach_tags_create as $t_tag_row ) {
-		$t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id );
-		$g_action_attach_tags_attach[] = $t_tag_row;
+		$g_action_attach_tags_attach[] = array( 'name' => $t_tag_row['name'] );
 	}
+
 	$g_action_attach_tags_create = array();
 
-	foreach( $g_action_attach_tags_attach as $t_tag_row ) {
-		if( !tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
-			tag_bug_attach( $t_tag_row['id'], $p_bug_id, $t_user_id );
-		}
-	}
+	$t_data = array(
+		'query' => array( 'issue_id' => $p_bug_id ),
+		'payload' => array(
+			'tags' => $g_action_attach_tags_attach
+		)
+	);
+
+	$t_command = new TagAttachCommand( $t_data );
+	$t_command->execute();
 
 	return null;
 }

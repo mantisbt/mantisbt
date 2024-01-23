@@ -9,8 +9,40 @@
 		<varlistentry>
 			<term>$g_show_version</term>
 			<listitem>
-				<para>Whether to show the MantisBT version at the bottom of each
-					page or not. Default is OFF.
+				<para>Display MantisBT Version number to users in the page footer.
+				</para>
+				<para>This is more of a cosmetic setting and should NOT be
+					considered as a security measure to avoid disclosure of
+					version information to users.
+					Default is OFF.
+				</para>
+				<note><para>
+					When the REST API is enabled
+					(see <xref linkend="admin.config.api" />),
+					accessing an endpoint will always return the version number
+					in the <literal>X-Mantis-Version</literal> header,
+					even if the request fails.
+				</para></note>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_version_suffix</term>
+			<listitem>
+				<para>String appended to the MantisBT version when displayed to the user.
+					Default is ''.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_copyright_statement</term>
+			<listitem>
+				<para> Custom copyright and licensing statement shown at the footer of each page.
+				</para>
+				<para>Can contain HTML elements that are valid children of the
+					<literal>&lt;address&gt;</literal> element.
+					This string is treated as raw HTML and thus you must use
+					<literal>&amp;amp;</literal> instead of <literal>&amp;</literal>.
+					Default is ''.
 				</para>
 			</listitem>
 		</varlistentry>

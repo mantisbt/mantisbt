@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Russian (русский)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -42,18 +42,19 @@
  * @author Irus
  * @author Kareyac
  * @author Kirill
+ * @author Lega4
  * @author Lockal
+ * @author Movses
  * @author Nitch
  * @author Okras
  * @author Александр Сигачёв
  * @author Туллук
  */
 
-$s_plugin_graph_title = 'Система отображения графиков в MantisBT';
-$s_plugin_graph_description = 'Официальный плагин MantisBT для отображения графиков.';
 $s_plugin_MantisGraph_title = 'Графики MantisBT';
-$s_plugin_MantisGraph_config = 'настройка';
-$s_plugin_MantisGraph_synthesis_link = 'Сумарно';
+$s_plugin_MantisGraph_description = 'Официальный плагин MantisBT для отображения графиков.';
+$s_plugin_MantisGraph_config = 'Настройка';
+$s_plugin_MantisGraph_tab_label = 'Графики';
 $s_plugin_MantisGraph_status_link = 'По состоянию';
 $s_plugin_MantisGraph_priority_link = 'По приоритету';
 $s_plugin_MantisGraph_severity_link = 'По уровню серьезности';
@@ -94,3 +95,4 @@ $s_plugin_MantisGraph_graph_page = 'График истории инцидент
 $s_plugin_MantisGraph_graph_topdev = 'Лучшие разработчики по исправленным инцидентам';
 $s_plugin_MantisGraph_graph_opendev = 'Разработчики по открытым инцидентам';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Лучшие докладчики исправленных инцидентов';
+$s_plugin_MantisGraph_other_categories = 'другие категории (%d)';

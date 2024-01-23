@@ -42,7 +42,7 @@ require_api( 'utility_api.php' );
 form_security_validate( 'bug_monitor_add' );
 
 $f_bug_id = gpc_get_int( 'bug_id' );
-$f_usernames = trim( gpc_get_string( 'username', '' ) );
+$f_usernames = trim( gpc_get_string( 'user_to_add', '' ) );
 
 $t_payload = array();
 
@@ -66,4 +66,4 @@ $t_command->execute();
 
 form_security_purge( 'bug_monitor_add' );
 
-print_successful_redirect_to_bug( $f_bug_id );
+print_header_redirect_view( $f_bug_id );

@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,17 +33,21 @@
 /** Lithuanian (lietuvių)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Eitvys200
+ * @author Nokeoo
  */
 
 $s_plugin_format_title = 'MantisBT formatuojamas';
+$s_plugin_format_description = 'Oficialus teksto apdorojimo ir formatavimo įskiepis.';
 $s_plugin_format_config = 'Konfigūracija';
 $s_plugin_format_process_text = 'Tekstas apdorojamas';
 $s_plugin_format_process_urls = 'URL apdorojamas';
+$s_plugin_format_process_buglinks = 'MantisBT vidinės nuorodos (problemos ir problemų pastabos)';
+$s_plugin_format_process_buglinks_info = 'Jūsų konfigūracija apibrėžia <em>problemos</em> žymą kaip „%s“, o <em>problemos pastabą</em> kaip „%s“';
 $s_plugin_format_enabled = 'Įjungti';
 $s_plugin_format_disabled = 'Išjungti';

@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,20 +33,20 @@
 /** Galician (galego)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Elisardojm
+ * @author Fitoschido
  * @author Toliño
  */
 
-$s_plugin_graph_title = 'Gráficos Mantis';
-$s_plugin_graph_description = 'Complemento oficial de gráficas.';
 $s_plugin_MantisGraph_title = 'Gráficas de Mantis';
+$s_plugin_MantisGraph_description = 'Complemento oficial de gráficas.';
 $s_plugin_MantisGraph_config = 'Configuración';
-$s_plugin_MantisGraph_synthesis_link = 'Síntese';
+$s_plugin_MantisGraph_tab_label = 'Gráficos';
 $s_plugin_MantisGraph_status_link = 'Por estado';
 $s_plugin_MantisGraph_priority_link = 'Por prioridade';
 $s_plugin_MantisGraph_severity_link = 'Por gravidade';
@@ -59,16 +59,16 @@ $s_plugin_MantisGraph_graph_imp_severity_title = 'Por gráficos de gravidade';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Por gráficos de categoría';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Por gráficos de resolución';
 $s_plugin_MantisGraph_graph_developer_title = 'Por gráficos de desenvolvedores';
-$s_plugin_MantisGraph_graph_reporter_title = 'Por gráficos de informes';
+$s_plugin_MantisGraph_graph_reporter_title = 'Por gráficos de informadores';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Incidencias abertas, resoltas e pendentes';
-$s_plugin_MantisGraph_by_status_pct = 'polo estado da porcentaxe';
-$s_plugin_MantisGraph_by_priority_pct = 'pola prioridade da porcentaxe';
-$s_plugin_MantisGraph_by_severity_pct = 'pola severidade da porcentaxe';
-$s_plugin_MantisGraph_by_category_pct = 'pola categoría da porcentaxe';
-$s_plugin_MantisGraph_by_resolution_pct = 'pola resolución da porcentaxe';
-$s_plugin_MantisGraph_by_severity_mix = 'por severidade e estado';
-$s_plugin_MantisGraph_by_priority_mix = 'por prioridade e estado';
-$s_plugin_MantisGraph_by_resolution_mix = 'por resolución e estado';
+$s_plugin_MantisGraph_by_status_pct = 'Pola porcentaxe de estado';
+$s_plugin_MantisGraph_by_priority_pct = 'Pola porcentaxe de prioridade';
+$s_plugin_MantisGraph_by_severity_pct = 'Pola porcentaxe de severidade';
+$s_plugin_MantisGraph_by_category_pct = 'Pola porcentaxe de categoría';
+$s_plugin_MantisGraph_by_resolution_pct = 'Pola porcentaxe de resolución';
+$s_plugin_MantisGraph_by_severity_mix = 'Por gravidade e estado';
+$s_plugin_MantisGraph_by_priority_mix = 'Por prioridade e estado';
+$s_plugin_MantisGraph_by_resolution_mix = 'Por resolución e estado';
 $s_plugin_MantisGraph_legend_still_open = 'Aínda abertos';
 $s_plugin_MantisGraph_legend_resolved = 'Resolto';
 $s_plugin_MantisGraph_legend_reported = 'Reportado';
@@ -86,4 +86,5 @@ $s_plugin_MantisGraph_period_last_year = 'Último ano';
 $s_plugin_MantisGraph_graph_page = 'Historial gráfico do erro';
 $s_plugin_MantisGraph_graph_topdev = 'Desenvolvedores máis activos por problema resolto';
 $s_plugin_MantisGraph_graph_opendev = 'Desenvolvedores por problema aberto';
-$s_plugin_MantisGraph_graph_topreporter_fixed = 'Reporteiros máis activos por problema resolto';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Informadores máis activos por problemas resoltos';
+$s_plugin_MantisGraph_other_categories = 'outras categorías (%d)';

@@ -24,8 +24,8 @@
  */
 
 # Includes
-require_once( dirname( dirname( __FILE__ ) ) . '../../../tests/TestConfig.php' );
-require_once( dirname( dirname( __FILE__ ) ) . '/core/MantisMarkdown.php' );
+require_once( dirname( __FILE__, 2 ) . '../../../tests/TestConfig.php' );
+require_once( dirname( __FILE__, 2 ) . '/core/MantisMarkdown.php' );
 
 # MantisBT Core API
 require_mantis_core();
@@ -38,7 +38,7 @@ require_mantis_core();
  * @link http://www.mantisbt.org
  */
 
-class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
+class MantisMarkdownTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * Test If string starts with hash character followed by letters
@@ -78,76 +78,15 @@ class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	* Test if table class attribute is defined
+	 * Test if table class attribute is defined
 	 * @return void
 	 */
 	public function testTableClassDefined() {
 		$markdown_table = <<<EOD
-| _header_ 1   | header 2     |
-| ------------ | ------------ |
-| _cell_ 1.1   | ~~cell~~ 1.2 |
-| `|` 2.1      | \| 2.2       |
-| `\|` 2.1     | [link](/)    |
+| header |
+| ---    |
+| cell   |
 EOD;
-
-		$markdown_table_output = <<<EOD
-<table class="table table-nonfluid">
-<thead>
-<tr>
-<th><em>header</em> 1</th>
-<th>header 2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><em>cell</em> 1.1</td>
-<td><del>cell</del> 1.2</td>
-</tr>
-<tr>
-<td><code>|</code> 2.1</td>
-<td>| 2.2</td>
-</tr>
-<tr>
-<td><code>\|</code> 2.1</td>
-<td><a href="/">link</a></td>
-</tr>
-</tbody>
-</table>
-EOD;
-
-		$this->assertEquals( $markdown_table_output, MantisMarkdown::convert_text( $markdown_table ) );
+		$this->assertTrue( false !== strpos( MantisMarkdown::convert_text( $markdown_table ), 'class="table table-nonfluid"' ));
 	}
-
-	/**
-	 * Test the quote markdown if style attribute is defined
-	 * @return void
-	 */
-	public function testQuoteStyleAttribute() {
-		$markdown_quote = <<<EOD
-> quote
-
-indented:
-	> quote
-
-no space after `>`:
->quote
-EOD;
-
-		$markdown_quote_output = <<<EOD
-<blockquote style="border-color:#847d7d">
-<p>quote</p>
-</blockquote>
-<p>indented:</p>
-<blockquote style="border-color:#847d7d">
-<p>quote</p>
-</blockquote>
-<p>no space after <code>&gt;</code>:</p>
-<blockquote style="border-color:#847d7d">
-<p>quote</p>
-</blockquote>
-EOD;
-
-		$this->assertEquals( $markdown_quote_output, MantisMarkdown::convert_text( $markdown_quote ) );
-	}
-
 }

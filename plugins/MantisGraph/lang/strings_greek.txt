@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,20 +33,22 @@
 /** Greek (Ελληνικά)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author FirehawkV17
+ * @author NikosLikomitros
+ * @author Nikosgranturismogt
  * @author Omnipaedista
  * @author Ανώνυμος Βικιπαιδιστής
  */
 
-$s_plugin_graph_title = 'Γράφημα Mantis';
 $s_plugin_MantisGraph_title = 'Γράφημα Mantis';
+$s_plugin_MantisGraph_description = 'Επίσημο πρόσθετο γραφήματος.';
 $s_plugin_MantisGraph_config = 'Διαμόρφωση';
-$s_plugin_MantisGraph_synthesis_link = 'Σύνθεση';
+$s_plugin_MantisGraph_tab_label = 'Γράφημα Mantis';
 $s_plugin_MantisGraph_status_link = 'Ανά Κατάσταση';
 $s_plugin_MantisGraph_priority_link = 'Ανά Προτεραιότητα';
 $s_plugin_MantisGraph_severity_link = 'Ανά Σπουδαιότητα';
@@ -61,9 +63,29 @@ $s_plugin_MantisGraph_graph_imp_resolution_title = 'Γραφήματα ανά Α
 $s_plugin_MantisGraph_graph_developer_title = 'Γραφήματα ανά Προγραμματιστή';
 $s_plugin_MantisGraph_graph_reporter_title = 'Γραφήματα ανά Αναφορά';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Ζητήματα Ανοιχτά, Επιλυμένα και Εναπομείναντα';
+$s_plugin_MantisGraph_by_status_pct = 'Ανά ποσοστό κατάστασης';
+$s_plugin_MantisGraph_by_priority_pct = 'Ανά ποσοστό προτεραιότητας';
+$s_plugin_MantisGraph_by_severity_pct = 'Ανά ποσοστό σοβαρότητας';
+$s_plugin_MantisGraph_by_category_pct = 'Ανά ποσοστό κατηγορίας';
+$s_plugin_MantisGraph_by_resolution_pct = 'Ανά ποσοστό επίλυσης';
+$s_plugin_MantisGraph_by_severity_mix = 'Ανά σοβαρότητα και κατάσταση';
+$s_plugin_MantisGraph_by_priority_mix = 'Ανά προτεραιότητα και κατάσταση';
+$s_plugin_MantisGraph_by_resolution_mix = 'Ανά επίλυση και κατάσταση';
+$s_plugin_MantisGraph_legend_still_open = 'Ακόμα ανοιχτό';
 $s_plugin_MantisGraph_legend_resolved = 'Επιλυμένος';
 $s_plugin_MantisGraph_legend_reported = 'Αναφερόμενος';
 $s_plugin_MantisGraph_period_none = 'Κανένα';
 $s_plugin_MantisGraph_period_this_week = 'Αυτή τη Βδομάδα';
+$s_plugin_MantisGraph_period_last_week = 'Προηγούμενη εβδομάδα';
+$s_plugin_MantisGraph_period_two_weeks = 'Τελευταίες δύο εβδομάδες';
 $s_plugin_MantisGraph_period_this_month = 'Αυτό το Μήνα';
+$s_plugin_MantisGraph_period_last_month = 'Τελευταίος μήνας';
+$s_plugin_MantisGraph_period_this_quarter = 'Αυτό το τέταρτο';
+$s_plugin_MantisGraph_period_last_quarter = 'Τελευταίο τέταρτο';
+$s_plugin_MantisGraph_period_year_to_date = 'Έτος σε ημερομηνία';
+$s_plugin_MantisGraph_period_select = 'Διαιτητικές ημερομηνίες';
 $s_plugin_MantisGraph_period_last_year = 'Πέρυσι';
+$s_plugin_MantisGraph_graph_page = 'Ιστορικό έκδοσης γραφημάτων';
+$s_plugin_MantisGraph_graph_topdev = 'Κορυφαίοι προγραμματιστές ανά επιλυμένα ζητήματα.';
+$s_plugin_MantisGraph_graph_opendev = 'Προγραμματιστές ανά επιλυμένα ζητήματα.';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Κορυφαίοι προγραμματιστές ανά επιλυμένα ζητήματα.';

@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,17 +33,18 @@
 /** Romanian (română)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Andreyyshore
  * @author KlaudiuMihaila
  * @author Saturnian
  */
 
 $s_plugin_XmlImportExport_title = 'Probleme de Import/Export';
-$s_plugin_XmlImportExport_description = 'Adaugă XML la MantisBT pe baza capabilităţilor de import şi export.';
+$s_plugin_XmlImportExport_description = 'Adaugă XML la MantisBT pe baza capabilităților de import și export.';
 $s_plugin_XmlImportExport_import = 'Importă probleme';
 $s_plugin_XmlImportExport_export = 'Export XML';
 $s_plugin_XmlImportExport_importing_in_project = 'Se importă probleme în proiect:';

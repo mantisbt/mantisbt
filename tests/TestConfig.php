@@ -23,13 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
-# Start output buffering
-ob_start();
-
 # Include PHPUnit dependencies ; ensure compatibility with 3.5 and 3.6
 @include_once 'PHPUnit/Framework.php';
-
-define( 'MANTIS_MAINTENANCE_MODE', true );
 
 /**
  * Parse file and retrieve distinct T_VARIABLE tokens with 'g_' prefix
@@ -105,7 +100,7 @@ error_reporting( E_ALL | E_STRICT );
 
 # Determine the root, library, and tests directories of the framework
 # distribution.
-$g_mantisRoot = dirname( dirname( __FILE__ ) );
+$g_mantisRoot = dirname( __FILE__, 2 );
 $g_mantisCore = $g_mantisRoot . '/core';
 $g_mantisLibrary = $g_mantisRoot . '/library';
 $g_mantisClasses = $g_mantisRoot . '/core/classes';

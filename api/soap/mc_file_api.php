@@ -26,7 +26,7 @@
 /**
  * Check if the current user can download attachments for the specified bug.
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id An user identifier.
+ * @param integer $p_user_id A user identifier.
  * @return boolean
  */
 function mci_file_can_download_bug_attachments( $p_bug_id, $p_user_id ) {
@@ -85,7 +85,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	}
 
 	$t_file_size = strlen( $p_content );
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	$t_max_file_size = file_get_max_file_size();
 	if( $t_file_size > $t_max_file_size ) {
 		return ApiObjectFactory::faultBadRequest( 'File is too big. Max size is "' . $t_max_file_size . '" bytes.' );
 	}
@@ -163,7 +163,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	}
 
 	$t_query = 'INSERT INTO ' . $t_file_table . '
-		( ' . implode(', ', array_keys( $t_param ) ) . ' )
+		( ' . implode( ', ', array_keys( $t_param ) ) . ' )
 	VALUES
 		( ' . $t_query_param . ' )';
 	db_query( $t_query, array_values( $t_param ) );

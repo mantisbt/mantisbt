@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Italian (italiano)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -45,11 +45,10 @@
  * @author Selven
  */
 
-$s_plugin_graph_title = 'Grafici Mantis';
-$s_plugin_graph_description = 'Plugin ufficiale Grafico';
 $s_plugin_MantisGraph_title = 'Grafici Mantis';
+$s_plugin_MantisGraph_description = 'Plugin ufficiale Grafico';
 $s_plugin_MantisGraph_config = 'Configurazione';
-$s_plugin_MantisGraph_synthesis_link = 'Sintesi';
+$s_plugin_MantisGraph_tab_label = 'Grafici';
 $s_plugin_MantisGraph_status_link = 'Per stato';
 $s_plugin_MantisGraph_priority_link = 'Per priorità';
 $s_plugin_MantisGraph_severity_link = 'Per gravità';
@@ -90,3 +89,4 @@ $s_plugin_MantisGraph_graph_page = 'Grafico della storia delle anomalie';
 $s_plugin_MantisGraph_graph_topdev = 'Migliori sviluppatori per problemi risolti';
 $s_plugin_MantisGraph_graph_opendev = 'Sviluppatori per problemi aperti';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Migliori segnalatori per problemi risolti';
+$s_plugin_MantisGraph_other_categories = 'altre categorie (%d)';

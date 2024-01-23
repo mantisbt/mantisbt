@@ -26,10 +26,7 @@
 /**
  * Includes
  */
-require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
-
-require_mantis_core();
-
+require_once 'MantisCoreBase.php';
 require_api( 'mention_api.php' );
 
 /**
@@ -37,7 +34,7 @@ require_api( 'mention_api.php' );
  * @package    Tests
  * @subpackage Mention
  */
-class MentionParsingTest extends PHPUnit_Framework_TestCase {
+class MentionParsingTest extends MantisCoreBase {
 
 	/**
 	 * Tests user mentions

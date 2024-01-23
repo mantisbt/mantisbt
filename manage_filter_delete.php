@@ -56,18 +56,15 @@ if( !filter_db_can_delete_filter( $f_filter_id ) ) {
 	exit;
 }
 
-helper_ensure_confirmed( lang_get( 'query_delete_msg' ) . '<br>"' . filter_get_field( $f_filter_id, 'name' ) . '"',
-		lang_get( 'delete_query' ) );
+helper_ensure_confirmed(
+	sprintf( lang_get( 'query_delete_msg' ),
+		string_attribute( filter_get_field( $f_filter_id, 'name' ) )
+	),
+	lang_get( 'delete_query' )
+);
 
 filter_db_delete_filter( $f_filter_id );
 
 form_security_purge( 'manage_filter_delete' );
 
-$t_redirect_page = 'manage_filter_page.php';
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin();
-
-html_operation_successful( $t_redirect_page );
-
-layout_page_end();
+print_header_redirect( 'manage_filter_page.php' );

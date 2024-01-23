@@ -56,9 +56,12 @@ auth_reauthenticate();
 $f_user_id	= gpc_get_int( 'user_id' );
 
 $t_user = user_get_row( $f_user_id );
-helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ) .
-	'<br />' . lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_user['username'],
-	lang_get( 'delete_account_button' ) );
+helper_ensure_confirmed(
+	sprintf( lang_get( 'delete_account_sure_msg' ),
+		string_attribute( $t_user['username'] )
+	),
+	lang_get( 'delete_account_button' )
+);
 
 # If an administrator is trying to delete their own account, use
 # account_delete.php instead as it is handles logging out and redirection
@@ -77,10 +80,4 @@ $t_command->execute();
 
 form_security_purge( 'manage_user_delete' );
 
-layout_page_header( null, 'manage_user_page.php' );
-
-layout_page_begin( 'manage_overview_page.php' );
-
-html_operation_successful( 'manage_user_page.php' );
-
-layout_page_end();
+print_header_redirect( 'manage_user_page.php' );

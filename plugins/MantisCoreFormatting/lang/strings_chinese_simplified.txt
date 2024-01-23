@@ -25,15 +25,15 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Simplified Chinese (中文（简体）‎)
+/** Simplified Chinese (中文（简体）)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -49,7 +49,7 @@ $s_plugin_format_process_text = '文本处理';
 $s_plugin_format_process_text_warning_notice = '除非您真的知道您在做什么，否则请不要关闭。在关闭状态下，将可能产生跨站脚本（XSS）攻击。';
 $s_plugin_format_process_urls = 'URL 处理';
 $s_plugin_format_process_buglinks = 'MantisBT内部链接（问题与问题注释）';
-$s_plugin_format_process_buglinks_info = '您将标签<em>Issue</em>配置为“<literal>%s</literal>”，并将标签<em>Issue Note</em>配置为“<literal>%s</literal>”';
+$s_plugin_format_process_buglinks_info = '您将标签<em>Issue</em>配置为“%s”，并将标签<em>Issue Note</em>配置为“%s”';
 $s_plugin_format_process_markdown = 'Markdown处理';
 $s_plugin_format_process_markdown_info = '通过Markdown支持、文本格式化语法设计样式，这样它可以转换为HTML。';
 $s_plugin_format_enabled = '开';

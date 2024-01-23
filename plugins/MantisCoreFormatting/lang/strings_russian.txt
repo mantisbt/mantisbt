@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,12 +33,13 @@
 /** Russian (русский)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Kirill
+ * @author Lega4
  * @author Nitch
  * @author Okras
  * @author Александр Сигачёв
@@ -46,13 +47,13 @@
 
 $s_plugin_format_title = 'Форматирование MantisBT';
 $s_plugin_format_description = 'Официальный плагин для обработки и форматирования текста.';
-$s_plugin_format_config = 'настройка';
-$s_plugin_format_process_text = 'обрабатывать текст';
+$s_plugin_format_config = 'Настройка';
+$s_plugin_format_process_text = 'Обработка текста';
 $s_plugin_format_process_text_warning_notice = 'Не выключайте, если не уверены в том, что делаете. В выключенном состоянии возможна XSS атака на сайт.';
-$s_plugin_format_process_urls = 'обрабатывать URL';
+$s_plugin_format_process_urls = 'Обработка URL';
 $s_plugin_format_process_buglinks = 'Внутренние ссылки MantisBT (задачи/комментарии)';
-$s_plugin_format_process_buglinks_info = 'Ваша конфигурация определяет тег <em>Issue</em> как «<literal>%s</literal>», а тег <em>Issue Note</em> — как «<literal>%s</literal>»';
-$s_plugin_format_process_markdown = 'Markdown выполняет обработку';
+$s_plugin_format_process_buglinks_info = 'Ваша конфигурация определяет тег <em>Issue</em> как «%s», а тег <em>Issue Note</em> — как «%s»';
+$s_plugin_format_process_markdown = 'Обработка Markdown';
 $s_plugin_format_process_markdown_info = 'Синтаксис форматирования с поддержкой Markdown разработан таким образом, что текст может быть преобразован в HTML.';
-$s_plugin_format_enabled = 'вкл';
-$s_plugin_format_disabled = 'выкл';
+$s_plugin_format_enabled = 'Вкл';
+$s_plugin_format_disabled = 'Выкл';

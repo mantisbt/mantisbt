@@ -28,7 +28,6 @@
  * @uses filter_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
- * @uses tokens_api.php
  * @uses user_api.php
  * @uses user_pref_api.php
  * @uses utility_api.php
@@ -39,7 +38,6 @@ require_api( 'constant_inc.php' );
 require_api( 'filter_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
-require_api( 'tokens_api.php' );
 require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
@@ -55,12 +53,14 @@ function current_user_set( $p_user_id ) {
 	global $g_cache_current_user_id;
 	global $g_cache_current_user_pref;
 
-	if( $p_user_id == $g_cache_current_user_id ) {
-		return $p_user_id;
+	$t_user_id = (int)$p_user_id;
+
+	if( $t_user_id == $g_cache_current_user_id ) {
+		return $t_user_id;
 	}
 
 	$t_old_current = $g_cache_current_user_id;
-	$g_cache_current_user_id = $p_user_id;
+	$g_cache_current_user_id = $t_user_id;
 
 	# Clear current user preferences cache
 	$g_cache_current_user_pref = array();
@@ -228,34 +228,79 @@ function current_user_ensure_unprotected() {
 }
 
 /**
- * Returns the issue filter parameters for the current user
+ * Returns the issue filter for the current user, which is retrieved by
+ * evaluating these steps:
+ * 1) Reads gpc vars for a token id, which means to load a temporary filter
+ * 2) Otherwise, get the filter saved as current, for the user, project 
  *
- * @param integer $p_project_id Project id. This argument is only used if a 'filter' string is not passed via the web request.
- *                              The default value is null meaning return the current filter for user's current project
-                                if a filter string is not supplied.
- * @return array User filter, if not set, then default filter.
+ * @param integer $p_project_id Project id to get the user's filter from, if needed.
+ * @return array	A filter array
  * @access public
  */
 function current_user_get_bug_filter( $p_project_id = null ) {
-	$f_filter_string = gpc_get_string( 'filter', '' );
-	$t_filter = array();
+	$f_tmp_key = gpc_get_string( 'filter', null );
 
-	if( !is_blank( $f_filter_string ) ) {
-		if( is_numeric( $f_filter_string ) ) {
-			$t_token = token_get_value( TOKEN_FILTER );
-			if( null != $t_token ) {
-				$t_filter = json_decode( $t_token, true );
-			}
-		} else {
-			$t_filter = json_decode( $f_filter_string, true );
+	if( null !== $f_tmp_key ) {
+		$t_filter = filter_temporary_get( $f_tmp_key, null );
+		# if filter doesn't exist or can't be loaded, return a default filter (doesn't throw error)
+		if( null === $t_filter ) {
+			$t_filter = filter_get_default();
 		}
-		$t_filter = filter_ensure_valid_filter( $t_filter );
-	} else if( !filter_is_cookie_valid() ) {
-		$t_filter = filter_get_default();
 	} else {
 		$t_user_id = auth_get_current_user_id();
 		$t_filter = user_get_bug_filter( $t_user_id, $p_project_id );
 	}
 
 	return $t_filter;
+}
+
+/**
+ * Returns true if the user has access to more that one project
+ *
+ * @return boolean
+ */
+function current_user_has_more_than_one_project() {
+	return user_has_more_than_one_project( auth_get_current_user_id() );
+}
+
+/**
+ * Checks if the user has only one, or none, visible project and modify his
+ * current and default project to be coherent.
+ * - If current project is ALL_PROJECTS, sets the the visible project as current.
+ * - If default project is ALL_PROJECTS, sets the visible project as his default
+ *   project for future sessions.
+ * - If default project is not the visible one, modify it to be that project,
+ *   or ALL_PROJECTS if the user has no accessible projects.
+ *
+ * These changes only apply to users who can't use the project selection.
+ *
+ * @return void
+ */
+function current_user_modify_single_project_default() {
+	# The user must not be able to use the project selector
+	if( layout_navbar_can_show_projects_menu() ) {
+		return;
+	}
+	# The user must have one, or none, projects
+	$t_user_id = auth_get_current_user_id();
+	if( user_has_more_than_one_project( $t_user_id ) ) {
+		return;
+	}
+	$t_default = user_pref_get_pref( $t_user_id, 'default_project' );
+	$t_current = helper_get_current_project();
+	$t_projects = user_get_all_accessible_projects( $t_user_id );
+	$t_count = count( $t_projects );
+
+	if( 0 == $t_count ) {
+		$t_project_id = ALL_PROJECTS;
+	} else {
+		$t_project_id = reset( $t_projects );
+	}
+
+	if( $t_project_id != $t_current ) {
+		helper_set_current_project( $t_project_id );
+	}
+	if( $t_project_id != $t_default ) {
+		user_pref_set_pref( $t_user_id, 'default_project', (int)$t_project_id, ALL_PROJECTS, false /* skip protected check */ );
+	}
 }

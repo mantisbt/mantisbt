@@ -1,0 +1,65 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit https://translatewiki.net  **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Hindi (हिन्दी)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit https://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Ajaysajay
+ */
+
+$s_plugin_XmlImportExport_title = 'कार्यबिन्दुओं का आयात/निर्यात';
+$s_plugin_XmlImportExport_description = 'एक्स.एम.एल. आधारित आयात और निर्यात क्षमताओं को मैन्टिस बी.टी. में जोड़ें।';
+$s_plugin_XmlImportExport_import = 'कार्यबिन्दुओ का आयात करें';
+$s_plugin_XmlImportExport_export = 'एक्स.एम.एल. में निर्यात करें';
+$s_plugin_XmlImportExport_config_title = 'एक्स.एम.एल. आयात/निर्यात प्रवेश स्तरीय विन्यास';
+$s_plugin_XmlImportExport_import_threshold = 'कार्यबिन्दुओं को आयात करें';
+$s_plugin_XmlImportExport_export_threshold = 'कार्यबिन्दुओ का निर्यात करें';
+$s_plugin_XmlImportExport_action_update = 'सुधारें';
+$s_plugin_XmlImportExport_importing_in_project = '\'%s\' परियोजना में कार्यबिन्दु आयात किये जा रहे हैं';
+$s_plugin_XmlImportExport_import_options = 'आयात के विकल्प';
+$s_plugin_XmlImportExport_cross_references = 'आपसी संदर्भ';
+$s_plugin_XmlImportExport_default_strategy = 'मानक परिवर्तन पद्धति:';
+$s_plugin_XmlImportExport_renumber = 'अंक पुनःर्निधारण';
+$s_plugin_XmlImportExport_renumber_desc = 'संदर्भों का नया संख्यांकन करने का प्रयास करें';
+$s_plugin_XmlImportExport_link = 'कड़ी';
+$s_plugin_XmlImportExport_link_desc = 'मूल वस्तु की कड़ी में बदलें';
+$s_plugin_XmlImportExport_disable = 'अक्षम करें';
+$s_plugin_XmlImportExport_disable_desc = 'कड़ी अक्षम करें';
+$s_plugin_XmlImportExport_fallback = 'पलटाव की नीति (जब "नया संख्यांकन" लागू न हो):';
+$s_plugin_XmlImportExport_fallback_category = 'पलटाव की श्रेणी:';
+$s_plugin_XmlImportExport_keep_same_category = 'उसी श्रेणी को रखने का प्रयत्न करें';
+$s_plugin_XmlImportExport_error_no_xml = 'एक्स.एम.एल.रीडर (xmlreader) और एक्स.एम.एल. राइटर (xmlwriter) विस्तार-युक्तियाँ नहीं मिलीं';

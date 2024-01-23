@@ -65,7 +65,7 @@ function get_field_names() {
 				'eta',
 				'platform',
 				'os',
-				'os_version',
+				'os_build',
 				'product_version',
 				'resolution',
 				'duplicate_id',

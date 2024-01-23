@@ -7,20 +7,6 @@
 
 	<variablelist>
 		<varlistentry>
-			<term>$g_session_handler</term>
-			<listitem>
-				<para>Session handler. Possible values are as per the
-				list below; the default is <emphasis>php</emphasis>.
-					<itemizedlist>
-						<listitem><para><emphasis>php</emphasis>: PHP filesystem sessions</para></listitem>
-						<listitem><para><emphasis>adodb</emphasis>: Database storage sessions</para></listitem>
-						<listitem><para><emphasis>memcached</emphasis>: Memcached storage sessions</para></listitem>
-					</itemizedlist>
-				</para>
-			</listitem>
-		</varlistentry>
-
-		<varlistentry>
 			<term>$g_session_save_path</term>
 			<listitem>
 				<para>Location where session files are stored.
@@ -46,7 +32,7 @@
 			<term>$g_form_security_validation</term>
 			<listitem>
 				<para>Form security validation, defaults to <emphasis>ON</emphasis>.
-				This protects against <ulink url="http://en.wikipedia.org/wiki/Cross-site_request_forgery">
+				This protects against <ulink url="https://en.wikipedia.org/wiki/Cross-site_request_forgery">
 					Cross-Site Request Forgery</ulink>.
 				Some proxy servers may not correctly work with this option enabled
 				because they cache pages incorrectly.
@@ -89,6 +75,23 @@ $g_custom_headers = array( 'Content-Security-Policy:' );
 						recommended that you leave it as Mantis defines it.
 					</para>
 				</warning>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_logout_redirect_page</term>
+			<listitem>
+				<para>Specify where the user should be sent after logging out.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_allow_browser_cache</term>
+			<listitem>
+				<para>This will allow the browser to cache all pages. The
+					upside will be better performance, but there may be cases where obsolete
+ 					information is displayed. Note that this will be bypassed (and caching is
+ 					allowed) for the bug report pages.</para>
 			</listitem>
 		</varlistentry>
 

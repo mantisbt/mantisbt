@@ -39,7 +39,7 @@
  *
  * @author Damien Regad
  * @author David Hicks
- * @author John Reese
+ * @author Amethyst Reese
  * @author Siebrand Mazeland
  */
 
@@ -51,7 +51,7 @@ $s_plugin_format_process_text = 'Text Processing';
 $s_plugin_format_process_text_warning_notice = 'Do not turn off unless you really know what you\'re doing. In the off state, cross site scripting (XSS) attacks are possible.';
 $s_plugin_format_process_urls = 'URL Processing';
 $s_plugin_format_process_buglinks = 'MantisBT internal links (Issues and Issue Notes)';
-$s_plugin_format_process_buglinks_info = 'Your configuration defines the <em>Issue</em> tag as "<literal>%s</literal>" and the <em>Issue Note</em> tag as "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'Your configuration defines the <em>Issue</em> tag as "%s" and the <em>Issue Note</em> tag as "%s"';
 $s_plugin_format_process_markdown = 'Markdown Processing';
 $s_plugin_format_process_markdown_info = 'Styling with Markdown support, text formatting syntax designed so that it can be converted to HTML.';
 $s_plugin_format_enabled = 'On';

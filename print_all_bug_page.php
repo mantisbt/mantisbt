@@ -57,7 +57,11 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
+require_css( 'status_config.php' );
+
 auth_ensure_user_authenticated();
+
+access_ensure_project_level( config_get( 'print_reports_threshold' ) );
 
 $f_search		= gpc_get_string( FILTER_PROPERTY_SEARCH, false ); # @todo need a better default
 $f_offset		= gpc_get_int( 'offset', 0 );
@@ -70,23 +74,13 @@ $t_project_id 			= 0;
 $t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
 $t_num_of_columns = count( $t_columns );
 
-# Initialize the filter from the cookie, use default if not set
-$t_cookie_value_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
-$t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
-if( is_blank( $t_cookie_value ) ) {
-	$t_filter_cookie_arr = filter_get_default();
-} else {
-	# check to see if new cookie is needed
-	if( !filter_is_cookie_valid() ) {
-		print_header_redirect( 'view_all_set.php?type=0&print=1' );
-	}
-	$t_setting_arr = explode( '#', $t_cookie_value, 2 );
-	$t_filter_cookie_arr = json_decode( $t_setting_arr[1], true );
-}
+# Get the filter in use
+$t_filter = current_user_get_bug_filter();
+filter_init( $t_filter );
 
-$f_highlight_changed = $t_filter_cookie_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
-$f_sort              = $t_filter_cookie_arr[FILTER_PROPERTY_SORT_FIELD_NAME];
-$f_dir               = $t_filter_cookie_arr[FILTER_PROPERTY_SORT_DIRECTION];
+$f_highlight_changed = $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
+$f_sort              = $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
+$f_dir               = $t_filter[FILTER_PROPERTY_SORT_DIRECTION];
 $t_project_id        = helper_get_current_project();
 
 # This replaces the actual search that used to be here
@@ -109,7 +103,7 @@ layout_page_header();
 
 <table class="table table-condensed no-margin"><tr><td class="bold bigger-120">
 	<div class="center">
-		<?php echo string_display( config_get( 'window_title' ) ) . ' - ' . string_display( project_get_name( $t_project_id ) ); ?>
+		<?php echo string_display_line( config_get( 'window_title' ) ) . ' - ' . string_display_line( project_get_name( $t_project_id ) ); ?>
 	</div>
 </td></tr></table>
 
@@ -157,14 +151,21 @@ $f_export = implode( ',', $f_bug_arr );
 		array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'fa-internet-explorer', 'Word View' ) );
 
 	foreach ( $t_icons as $t_icon ) {
-		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
-			'&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . '=' . $f_sort .
-			'&amp;' . FILTER_PROPERTY_SORT_DIRECTION . '=' . $t_new_dir .
-			'&amp;type_page=' . $t_icon[1] .
-			'&amp;export=' . $f_export .
-			'&amp;show_flag=' . $t_show_flag .
-			'" ' . $t_icon[2] . '>' .
-			'<i class="fa ' . $t_icon[3] . '" alt="' . $t_icon[4] . '"></i></a> ';
+		$t_params = array(
+			FILTER_PROPERTY_SEARCH => $t_search,
+			FILTER_PROPERTY_SORT_FIELD_NAME => $f_sort,
+			FILTER_PROPERTY_SORT_DIRECTION => $t_new_dir,
+			'type_page' => $t_icon[1],
+			'export' => $f_export,
+			'show_flag' => $t_show_flag,
+		);
+		if( filter_is_temporary( $t_filter ) ) {
+			$t_params['filter'] = filter_get_temporary_key( $t_filter );
+		}
+
+		echo '<a href="' . $t_icon[0] . '.php?' . http_build_query( $t_params ) . '" ' . $t_icon[2] . '>';
+		print_icon( $t_icon[3], '', $t_icon[4] );
+		echo '</a> ';
 	}
 ?>
 
@@ -173,7 +174,13 @@ $f_export = implode( ',', $f_bug_arr );
 </table>
 </form>
 
-<form method="post" action="print_all_bug_page.php">
+<?php
+$t_form_url = 'print_all_bug_page.php';
+if( filter_is_temporary( $t_filter ) ) {
+	$t_form_url .='?' . filter_get_temporary_key_param( $t_filter );
+}
+?>
+<form method="post" action="<?php echo $t_form_url ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 
 <table id="buglist" class="table table-striped table-bordered table-condensed no-margin">
@@ -197,7 +204,7 @@ $f_export = implode( ',', $f_bug_arr );
 </tr>
 <tr class="row-category">
 	<?php
-		$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter_cookie_arr, COLUMNS_TARGET_PRINT_PAGE );
+		$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter, COLUMNS_TARGET_PRINT_PAGE );
 		foreach( $t_columns as $t_column ) {
 			helper_call_custom_function( 'print_column_title', array( $t_column, COLUMNS_TARGET_PRINT_PAGE, $t_sort_properties ) );
 		}

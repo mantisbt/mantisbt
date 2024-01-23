@@ -70,13 +70,9 @@ if( null === $f_filter_id ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
-$t_filter_string = filter_db_get_filter( $f_filter_id );
-if( !$t_filter_string ) {
+$t_filter = filter_get( $f_filter_id, null );
+if( null === $t_filter ) {
 	access_denied();
-} else {
-	$t_filter = filter_deserialize( $t_filter_string );
-	$t_filter['_source_query_id'] = $f_filter_id;
-	filter_cache_row( $f_filter_id );
 }
 
 $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
@@ -100,14 +96,14 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-filter"></i>
+				<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
 				<?php echo lang_get('edit_filter') ?>
 			</h4>
 
 			<div class="widget-toolbar">
 				<div class="widget-menu">
 					<a href="#" data-action="settings" data-toggle="dropdown">
-						<i class="ace-icon fa fa-bars bigger-125"></i>
+						<?php print_icon( 'fa-bars', 'ace-icon bigger-125' ); ?>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 						<?php
@@ -128,7 +124,7 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 						<div class="form-inline">
 							<label>
 								<?php echo lang_get( 'query_name' ) ?>&nbsp;
-								<input type="text" size="25" name="filter_name" maxlength="64" value="<?php echo filter_get_field( $f_filter_id, 'name' ) ?>">
+								<input type="text" size="25" name="filter_name" maxlength="64" value="<?php echo string_display_line( filter_get_field( $f_filter_id, 'name' ) ) ?>">
 							</label>
 						</div>
 					</div>
@@ -140,18 +136,6 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 					$t_static = gpc_get_bool( 'static', false );
 					filter_form_draw_inputs( $t_filter, $t_for_screen, $t_static );
 					?>
-				</div>
-
-				<div class="widget-toolbox padding-8 clearfix">
-					<div class="btn-toolbar pull-left">
-						<div class="form-inline">
-							<label><?php echo lang_get( 'search' ) ?>&nbsp;
-								<input type="text" id="filter-search-txt" class="input-sm" size="16"
-									   name="<?php echo FILTER_PROPERTY_SEARCH ?>"
-									   value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ) ?>">
-							</label>
-						</div>
-					</div>
 				</div>
 
 				<div class="table-responsive">
@@ -189,14 +173,14 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 								<?php if( ALL_PROJECTS != $t_filter_project_id ) { ?>
 								<label>
 									<input type="radio" class="ace input-sm" name="filter_project_id" value="<?php echo $t_filter_project_id ?>" <?php check_checked( ALL_PROJECTS != $t_filter_project_id ) ?>>
-									<span class="lbl padding-6"><?php echo lang_get( 'stored_project' ) . ' (' . project_get_name( $t_filter_project_id ) . ')' ?></span>
+									<span class="lbl padding-6"><?php echo lang_get( 'stored_project' ) . ' (' . string_display_line( project_get_name( $t_filter_project_id ) ) . ')' ?></span>
 								</label>
 								<br>
 								<?php } ?>
 								<?php if( $t_filter_project_id != $t_current_project_id ) { ?>
 								<label>
 									<input type="radio" class="ace input-sm" name="filter_project_id" value="<?php echo $t_current_project_id ?>">
-									<span class="lbl padding-6"><?php echo lang_get( 'current_project' ) . ' (' . project_get_name( $t_current_project_id ) . ')' ?></span>
+									<span class="lbl padding-6"><?php echo lang_get( 'current_project' ) . ' (' . string_display_line( project_get_name( $t_current_project_id ) ) . ')' ?></span>
 								</label>
 								<?php } ?>
 							</td>

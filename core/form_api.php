@@ -169,7 +169,7 @@ function form_security_validate( $p_form_name ) {
 	}
 
 	# Get the date claimed by the token
-	$t_date = utf8_substr( $t_input, 0, 8 );
+	$t_date = mb_substr( $t_input, 0, 8 );
 
 	# Check if the token exists
 	if( isset( $t_tokens[$p_form_name][$t_date][$t_input] ) ) {
@@ -204,7 +204,7 @@ function form_security_purge( $p_form_name ) {
 	$t_input = gpc_get_string( $t_form_token, '' );
 
 	# Get the date claimed by the token
-	$t_date = utf8_substr( $t_input, 0, 8 );
+	$t_date = mb_substr( $t_input, 0, 8 );
 
 	# Generate a date string of three days ago
 	$t_purge_date = date( 'Ymd', time() - ( 3 * 24 * 60 * 60 ) );

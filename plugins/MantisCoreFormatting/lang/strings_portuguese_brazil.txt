@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,13 +33,14 @@
 /** Brazilian Portuguese (português do Brasil)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Eduardo Addad de Oliveira
  * @author Eduardo.mps
+ * @author Eduardoaddad
  * @author Giro720
  * @author Webysther
  */
@@ -51,7 +52,7 @@ $s_plugin_format_process_text = 'Processamento de Texto';
 $s_plugin_format_process_text_warning_notice = 'Não desligue, a menos que você esteja tenha certeza do que está fazendo. Quando desligado, tornam-se possíveis ataques de \'\'cross site scripting\'\' (XSS).';
 $s_plugin_format_process_urls = 'Processamento de URL';
 $s_plugin_format_process_buglinks = 'MantisBT links internos (Problemas/Anotações)';
-$s_plugin_format_process_buglinks_info = 'Sua configuração define o <em>problema</em> marcado como "<literal>%s</literal>" e <em>notas do problema</em> marcado como "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'Sua configuração define o <em>problema</em> marcado como "%s" e <em>notas do problema</em> marcado como "%s"';
 $s_plugin_format_process_markdown = 'Processamento de Markdown';
 $s_plugin_format_process_markdown_info = 'Styling com suporte ao Markdown, sintaxe de formatação de texto projetada para que possa ser convertida em HTML.';
 $s_plugin_format_enabled = 'Ligado';

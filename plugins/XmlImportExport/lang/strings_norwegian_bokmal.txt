@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,11 +33,12 @@
 /** Norwegian Bokmål (norsk bokmål)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Jon Harald Søby
  * @author Kingu
  * @author Nghtwlkr
  */
@@ -50,7 +51,7 @@ $s_plugin_XmlImportExport_config_title = 'Oppsett av tilgangsnivåer for XML-imp
 $s_plugin_XmlImportExport_import_threshold = 'Importer saker';
 $s_plugin_XmlImportExport_export_threshold = 'Exporter saker';
 $s_plugin_XmlImportExport_action_update = 'Oppdater';
-$s_plugin_XmlImportExport_importing_in_project = 'Importerer problemer i prosjektet:';
+$s_plugin_XmlImportExport_importing_in_project = 'Importerer problemer til prosjektet: «%s»';
 $s_plugin_XmlImportExport_import_options = 'Importer valg';
 $s_plugin_XmlImportExport_cross_references = 'Kryssreferanser';
 $s_plugin_XmlImportExport_default_strategy = 'Standard konverteringsstrategi:';

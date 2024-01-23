@@ -58,7 +58,7 @@ require_css( 'login.css' );
 $f_error                 = gpc_get_bool( 'error' );
 $f_cookie_error          = gpc_get_bool( 'cookie_error' );
 $f_return                = string_sanitize_url( gpc_get_string( 'return', '' ) );
-$f_username              = gpc_get_string( 'username', '' );
+$f_username              = trim( gpc_get_string( 'username', '' ) );
 $f_reauthenticate        = gpc_get_bool( 'reauthenticate', false );
 $f_perm_login            = gpc_get_bool( 'perm_login', false );
 $f_secure_session        = gpc_get_bool( 'secure_session', false );
@@ -82,24 +82,33 @@ if( is_blank( $t_username ) ) {
 # Get the user id and based on the user decide whether to continue with native password credential
 # page or one provided by a plugin.
 $t_user_id = auth_get_user_id_from_login_name( $t_username );
-if( $t_user_id !== false && auth_credential_page( '', $t_user_id ) != AUTH_PAGE_CREDENTIAL ) {
+# User id could be false if the user does not exist in DB, should be calling auth_credential_page
+# regardless if the user exists or not to give the plugin an opportunity to handle non-existent
+# users per #29517
+$t_should_redirect = AUTH_PAGE_CREDENTIAL != ( $t_user_id !== false
+		? auth_credential_page( '', $t_user_id )
+		: auth_credential_page( '', NO_USER, $t_username ) );
+if( $t_should_redirect ) {
 	$t_query_args = array(
 		'username' => $t_username,
-        'cookie_error' => $f_cookie_error,
-        'reauthenticate' => $f_reauthenticate,
+		'cookie_error' => $f_cookie_error,
+		'reauthenticate' => $f_reauthenticate,
 	);
 
 	if( !is_blank( $f_error ) ) {
 		$t_query_args['error'] = $f_error;
-    }
+	}
 
-    if( !is_blank( $f_cookie_error ) ) {
+	if( !is_blank( $f_cookie_error ) ) {
 		$t_query_args['cookie_error'] = $f_cookie_error;
-    }
+	}
 
 	$t_query_text = http_build_query( $t_query_args, '', '&' );
 
-	$t_redirect_url = auth_credential_page( $t_query_text, $t_user_id );
+	# Determine the credential page URL based on user id (if it exists) or username
+	$t_redirect_url = $t_user_id !== false
+		? auth_credential_page( $t_query_text, $t_user_id )
+		: auth_credential_page( $t_query_text, NO_USER, $t_username );
 	print_header_redirect( $t_redirect_url );
 }
 
@@ -170,10 +179,10 @@ if( $f_error || $f_cookie_error || $f_reauthenticate ) {
 }
 
 $t_upgrade_required = false;
-if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ ) .'/admin' ) ) {
+if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ ) .'/admin/.' ) ) {
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
-	$t_db_version = config_get( 'database_version', 0 );
+	$t_db_version = config_get( 'database_version', 0, ALL_USERS, ALL_PROJECTS );
 	if( $t_db_version == 0 ) {
 		$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 	}
@@ -197,7 +206,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 		<div class="widget-body">
 			<div class="widget-main">
 				<h4 class="header lighter bigger">
-					<i class="ace-icon fa fa-sign-in"></i>
+					<?php print_icon( 'fa-sign-in', 'ace-icon' ); ?>
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
@@ -213,19 +222,18 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 				echo '<input type="hidden" name="install" value="true" />';
 			}
 
-			echo '<input type="hidden" name="username" value="', string_html_specialchars( $t_username ), '" />';
 
 			echo sprintf( lang_get( 'enter_password' ), string_html_specialchars( $t_username ) );
 
 			# CSRF protection not required here - form does not result in modifications
 			?>
-
+			<input hidden readonly type="text" name="username" class="hidden" tabindex="-1" value="<?php echo string_html_specialchars( $t_username ) ?>" id="hidden_username" />
 			<label for="password" class="block clearfix">
 				<span class="block input-icon input-icon-right">
 					<input id="password" name="password" type="password" placeholder="<?php echo lang_get( 'password' ) ?>"
 						   size="32" maxlength="<?php echo auth_get_password_max_size(); ?>"
 						   class="form-control autofocus">
-					<i class="ace-icon fa fa-lock"></i>
+					<?php print_icon( 'fa-lock', 'ace-icon' ); ?>
 				</span>
 			</label>
 
@@ -252,7 +260,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 
 			<div class="space-10"></div>
 
-			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login_button' ) ?>" />
+			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login' ) ?>" />
 			<div class="clearfix"></div>
 			<?php
 			# lost password feature disabled or reset password via email disabled -> stop here!

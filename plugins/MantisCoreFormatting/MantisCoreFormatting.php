@@ -36,12 +36,12 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = array(
-			'MantisCore' => '2.1.0',
+			'MantisCore' => '2.25.0',
 		);
 
 		$this->author = 'MantisBT Team';
 		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
-		$this->url = 'http://www.mantisbt.org';
+		$this->url = 'https://mantisbt.org';
 	}
 
 	/**
@@ -54,7 +54,17 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			'EVENT_DISPLAY_FORMATTED'	=> 'formatted',		# Formatted String Display
 			'EVENT_DISPLAY_RSS'			=> 'rss',			# RSS String Display
 			'EVENT_DISPLAY_EMAIL'		=> 'email',			# Email String Display
+			'EVENT_LAYOUT_RESOURCES'	=> 'resources'		# Load stylesheet
 		);
+	}
+
+	/**
+	 * @return void
+	 */
+	function resources() {
+		if ( ON == plugin_config_get( 'process_markdown' )) {
+			echo '<link rel="stylesheet" href="' . plugin_file( 'markdown.css' ) . '" />';
+		}
 	}
 
 	/**
@@ -170,6 +180,15 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			}
 		}
 
+		# Process Markdown
+		if( ON == $s_markdown ) {
+			if( $p_multiline ) {
+				$t_string = MantisMarkdown::convert_text( $t_string );
+			} else {
+				$t_string = MantisMarkdown::convert_line( $t_string );
+			}
+		}
+
 		if( ON == $s_urls && OFF == $s_markdown ) {
 			$t_string = string_insert_hrefs( $t_string );
 		}
@@ -179,15 +198,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		}
 
 		$t_string = mention_format_text( $t_string, /* html */ true );
-
-		# Process Markdown
-		if( ON == $s_markdown ) {
-			if( $p_multiline ) {
-				$t_string = MantisMarkdown::convert_text( $t_string );
-			} else {
-				$t_string = MantisMarkdown::convert_line( $t_string );
-			}
-		}
 
 		return $t_string;
 	}

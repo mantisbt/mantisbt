@@ -13,7 +13,8 @@
 	<xi:include href="Events.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Plugins.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Events_Reference.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	<xi:include href="Integrating.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Api_Rest.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Api_Soap.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Appendix.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </book>

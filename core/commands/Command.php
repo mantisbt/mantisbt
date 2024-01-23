@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * A base class for intent based commands that can accomplish a task.
  * Such commands will be used from web ui action pages, REST API, SOAP API, etc.
@@ -111,15 +113,16 @@ abstract class Command
 	}
 
 	/**
-	 * Execute the command.  This may throw a CommandException is execution is interrupted.
-	 * The command is expected to trigger events that are handled by plugins as part of
-	 * exection.
+	 * Execute the command.  This may throw a CommandException is execution is
+	 * interrupted. The command is expected to trigger events that are handled
+	 * by plugins as part of execution.
 	 *
 	 * @return array Execution result
+	 * @throws ClientException
 	 */
 	public function execute() {
 		# For now, all commands require user to be authenticated
-		auth_ensure_user_authenticated();		
+		auth_ensure_user_authenticated();
 
 		if( !isset( $this->data['payload'] ) ) {
 			$this->data['payload'] = array();

@@ -100,7 +100,7 @@ class IssueRelationshipDeleteCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		$t_relationship_id = helper_parse_id( $this->query( 'relationship_id' ), 'relationship_id' );

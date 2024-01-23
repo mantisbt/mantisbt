@@ -54,7 +54,7 @@ auth_ensure_user_authenticated();
 helper_begin_long_process();
 
 $f_action = gpc_get_string( 'action' );
-$f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
+$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 
 $t_form_name = 'bug_actiongroup_' . $f_action;
 
@@ -64,14 +64,32 @@ bug_group_action_init( $f_action );
 
 # group bugs by project
 $t_projects_bugs = array();
-foreach( $f_bug_arr as $t_bug_id ) {
+$t_view_bug_threshold = array();
+$t_user = auth_get_current_user_id();
+foreach( $f_bug_arr as $t_key => $t_bug_id ) {
 	bug_ensure_exists( $t_bug_id );
 	$t_bug = bug_get( $t_bug_id, true );
 
+	# Per-project cache of the access threshold
+	if( !isset( $t_view_bug_threshold[$t_bug->project_id] ) ) {
+		$t_view_bug_threshold[$t_bug->project_id] = config_get(
+			'view_bug_threshold',
+			null,
+			$t_user,
+			$t_bug->project_id
+		);
+	}
+
+	# Remove any issues the user doesn't have access to
+	if( !access_has_bug_level( $t_view_bug_threshold[$t_bug->project_id], $t_bug_id, $t_user ) ) {
+		unset( $f_bug_arr[$t_key] );
+		continue;
+	}
+
 	if( isset( $t_projects_bugs[$t_bug->project_id] ) ) {
-	  $t_projects_bugs[$t_bug->project_id][] = $t_bug_id;
+		$t_projects_bugs[$t_bug->project_id][] = $t_bug_id;
 	} else {
-	  $t_projects_bugs[$t_bug->project_id] = array( $t_bug_id );
+		$t_projects_bugs[$t_bug->project_id] = array( $t_bug_id );
 	}
 }
 
@@ -98,20 +116,10 @@ $g_project_override = null;
 form_security_purge( $t_form_name );
 
 if( count( $t_failed_ids ) > 0 ) {
-	layout_page_header();
-	layout_page_begin();
-
-	echo '<div>';
-	$t_word_separator = lang_get( 'word_separator' );
-	foreach( $t_failed_ids as $t_id => $t_reason ) {
-		$t_label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $t_word_separator;
-		printf( "<p>%s%s</p>\n", $t_label, $t_reason );
-	}
-
-	print_link_button( 'view_all_bug_page.php', lang_get( 'proceed' ) );
-	echo '</div>';
-
-	layout_page_end();
+	require_css( 'status_config.php' );
+	bug_group_action_print_top();
+	bug_group_action_print_results( $t_failed_ids );
+	bug_group_action_print_bottom();
 } else {
 	print_header_redirect( 'view_all_bug_page.php' );
 }

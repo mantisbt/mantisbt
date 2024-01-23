@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,30 +33,33 @@
 /** Polish (polski)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author BeginaFelicysym
+ * @author Stojex
+ * @author WaldiSt
  * @author Woytecr
  */
 
-$s_plugin_graph_title = 'Wykresy Mantis';
-$s_plugin_graph_description = 'Oficjalna wtyczka wykresów.';
 $s_plugin_MantisGraph_title = 'Wykresy Mantis';
+$s_plugin_MantisGraph_description = 'Oficjalna wtyczka wykresów.';
 $s_plugin_MantisGraph_config = 'Konfiguracja';
-$s_plugin_MantisGraph_synthesis_link = 'Synteza';
+$s_plugin_MantisGraph_tab_label = 'Wykresy';
 $s_plugin_MantisGraph_status_link = 'Według statusu';
 $s_plugin_MantisGraph_priority_link = 'Według priorytetu';
 $s_plugin_MantisGraph_severity_link = 'Według ważności';
 $s_plugin_MantisGraph_category_link = 'Według kategorii';
 $s_plugin_MantisGraph_resolution_link = 'Według rozwiązania';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Wykres podsumowujący wg statusu';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Wykres podsumowujący wg priorytetu';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Wykres podsumowujący wg ważności';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Wykres podsumowujący wg kategorii';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Wykres podsumowujący wg rozwiązania';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Wykres wg statusu';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Wykres wg priorytetu';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Wykres wg ważności';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Wykres wg kategorii';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Wykres wg rozwiązania';
+$s_plugin_MantisGraph_graph_developer_title = 'Wykres wg programistów';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Problemy otwarte, rozwiązane i pozostałe';
 $s_plugin_MantisGraph_by_status_pct = 'Wg statusu procentowo';
 $s_plugin_MantisGraph_by_priority_pct = 'Wg priorytetu procentowo';
 $s_plugin_MantisGraph_by_severity_pct = 'Wg ważności procentowo';
@@ -80,3 +83,7 @@ $s_plugin_MantisGraph_period_year_to_date = 'Rok do daty';
 $s_plugin_MantisGraph_period_select = 'Wybrane daty';
 $s_plugin_MantisGraph_period_last_year = 'Poprzedni rok';
 $s_plugin_MantisGraph_graph_page = 'Wykres historii błędów';
+$s_plugin_MantisGraph_graph_topdev = 'Najlepsi Wykonawcy według Rozwiązanych zgłoszeń';
+$s_plugin_MantisGraph_graph_opendev = 'Wykonawcy według Otwartych zgłoszeń';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Najlepsi Zgłaszający według Rozwiązanych zgłoszeń';
+$s_plugin_MantisGraph_other_categories = 'inne kategorie (%d)';

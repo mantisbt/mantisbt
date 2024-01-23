@@ -35,14 +35,9 @@
  */
 
 require_once( 'core.php' );
-require_api( 'access_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
-require_api( 'project_api.php' );
 require_api( 'utility_api.php' );
 
 form_security_validate( 'adm_config_set' );
@@ -56,38 +51,6 @@ $f_original_user_id = gpc_get_int( 'original_user_id' );
 $f_original_project_id = gpc_get_int( 'original_project_id' );
 $f_original_config_option = gpc_get_string( 'original_config_option' );
 $f_edit_action = gpc_get_string( 'action' );
-
-
-if( is_blank( $f_config_option ) ) {
-	error_parameters( 'config_option' );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
-}
-
-access_ensure_global_level( config_get( 'set_configuration_threshold' ) );
-
-if( $f_project_id != ALL_PROJECTS ) {
-	project_ensure_exists( $f_project_id );
-}
-
-# make sure that configuration option specified is a valid one.
-$t_not_found_value = '***CONFIG OPTION NOT FOUND***';
-if( config_get( $f_config_option, $t_not_found_value ) === $t_not_found_value ) {
-	error_parameters( $f_config_option );
-	trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
-}
-
-# make sure that configuration option specified can be stored in the database
-if( !config_can_set_in_database( $f_config_option ) ) {
-	error_parameters( $f_config_option );
-	trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
-}
-
-if( !config_can_delete( $f_config_option ) ) {
-	error_parameters( $f_config_option );
-	# @TODO define an error code for values that can't be set in DB, nor config_inc
-	trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
-}
-
 
 # For 'default', behavior is based on the global variable's type
 # If value is empty, process as per default to ensure proper typecast
@@ -134,17 +97,28 @@ if( $t_type != CONFIG_TYPE_STRING ) {
 	}
 }
 
-if( MANAGE_CONFIG_ACTION_EDIT === $f_edit_action ){
-	# EDIT action doesn't keep original if key values are different.
-	if ( $f_original_config_option !== $f_config_option
-			|| $f_original_user_id !== $f_user_id
-			|| $f_original_project_id !== $f_project_id ){
-		config_delete( $f_original_config_option, $f_original_user_id, $f_original_project_id );
-		}
-}
+$t_data = array(
+	'payload' => array(
+		'user' => array( 'id' => $f_user_id ),
+		'project' => array( 'id' => $f_project_id ),
+		'configs' => array(
+			array(
+				'option' => $f_config_option,
+				'value' => $t_value,
+			)
+		)
+	),
+	'options' => array(
+		'edit_action' => $f_edit_action,
+		'original_user_id' => $f_original_user_id,
+		'original_project_id' => $f_original_project_id,
+		'original_option' => $f_original_config_option,
+	)
+);
 
-config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
+$t_command = new ConfigsSetCommand( $t_data );
+$t_command->execute();
 
 form_security_purge( 'adm_config_set' );
 
-print_successful_redirect( 'adm_config_report.php' );
+print_header_redirect( 'adm_config_report.php' );

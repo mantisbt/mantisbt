@@ -78,20 +78,27 @@ class MonitorAddCommand extends Command {
 				throw new ClientException( "anonymous account can't monitor issues", ERROR_PROTECTED_ACCOUNT );
 			}
 
-			if( $t_logged_in_user == $t_user_id ) {
-				$t_access_level_config = 'monitor_bug_threshold';
-			} else {
-				$t_access_level_config = 'monitor_add_others_bug_threshold';
+			if( $t_logged_in_user != $t_user_id ) {
+				$t_access_level = config_get(
+					'monitor_add_others_bug_threshold',
+					/* default */ null,
+					/* user */ null,
+					$this->projectId );
+
+				if( !access_has_bug_level( $t_access_level, $t_issue_id, $t_logged_in_user ) ) {
+					throw new ClientException( 'access denied', ERROR_ACCESS_DENIED );
+				}
+
 			}
 
 			$t_access_level = config_get(
-				$t_access_level_config,
+				'monitor_bug_threshold',
 				/* default */ null,
 				/* user */ null,
 				$this->projectId );
 
-			if( !access_has_bug_level( $t_access_level, $t_issue_id ) ) {
-				throw new ClientException( 'access denied', ERROR_ACCESS_DENIED );
+			if( !access_has_bug_level( $t_access_level, $t_issue_id, $t_user_id ) ) {
+				throw new ClientException( 'access denied', ERROR_MONITOR_ACCESS_TOO_LOW );
 			}
 
 			$this->userIdsToAdd[] = $t_user_id;
@@ -101,7 +108,7 @@ class MonitorAddCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		if( $this->projectId != helper_get_current_project() ) {

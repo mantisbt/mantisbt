@@ -101,6 +101,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		config_flush_cache(); # flush the config cache so that configs are refetched
 	}
 
+	# Make sure user has access to the bug
+	access_ensure_bug_level( config_get( 'view_bug_threshold' ), $t_bug_id );
+
 	$t_status = $t_bug->status;
 
 	switch( $f_action ) {
@@ -122,7 +125,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'DELETE':
 			if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $t_bug_id ) ) {
-				bug_delete( $t_bug_id );
+				$t_data = array( 'query' => array( 'id' => $t_bug_id ) );
+				$t_command = new IssueDeleteCommand( $t_data );
+				$t_command->execute();
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
@@ -155,7 +160,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			#  that current user has rights to assign the issue
 			$t_threshold = access_get_status_threshold( $t_assign_status, $t_bug->project_id );
 			if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $t_bug_id ) ) {
-				if( access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id, $f_assign ) ) {
+				# The new handler is checked at project level
+				if( access_has_project_level( config_get( 'handle_bug_threshold' ), $t_bug->project_id, $f_assign ) ) {
 					if( bug_check_workflow( $t_status, $t_assign_status ) ) {
 						# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 						bug_assign( $t_bug_id, $f_assign, $f_bug_notetext, $f_bug_noteprivate );
@@ -225,7 +231,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		case 'UP_CATEGORY':
 			$f_category_id = gpc_get_int( 'category' );
 			if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
-				if( category_exists( $f_category_id ) ) {
+				if( category_exists( $f_category_id )
+					|| $f_category_id == 0 && config_get( 'allow_no_category' )
+				) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'category_id', $f_category_id );
 					email_bug_updated( $t_bug_id );
@@ -339,26 +347,11 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 form_security_purge( $t_form_name );
 
-$t_redirect_url = 'view_all_bug_page.php';
-
 if( count( $t_failed_ids ) > 0 ) {
-	layout_page_header();
-	layout_page_begin();
-
-	echo '<div><br />';
-	echo '<div class="table-responsive">';
-	echo '<table class="table table-bordered table-condensed table-striped">';
-	$separator = lang_get( 'word_separator' );
-	foreach( $t_failed_ids as $t_id => $t_reason ) {
-		$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $separator;
-		printf( "<tr><td width=\"50%%\">%s%s</td><td>%s</td></tr>\n", $label, bug_get_field( $t_id, 'summary' ), $t_reason );
-	}
-	echo '</div>';
-	echo '</table><br />';
-	print_link_button( $t_redirect_url, lang_get( 'proceed' ) );
-	echo '</div>';
-
-	layout_page_end();
+	require_css( 'status_config.php' );
+	bug_group_action_print_top();
+	bug_group_action_print_results( $t_failed_ids );
+	bug_group_action_print_bottom();
 } else {
-	print_header_redirect( $t_redirect_url );
+	print_header_redirect( 'view_all_bug_page.php' );
 }

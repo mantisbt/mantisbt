@@ -39,7 +39,7 @@ class IssueMonitorTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueHasEmptyMonitorList() {
-	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testCreateIssueHasEmptyMonitorList' );
+	    $t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -62,7 +62,7 @@ class IssueMonitorTest extends SoapBase {
 	 * @return void
 	 */
 	public function testAddMonitorWhenCreatingAnIssue() {
-	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
+	    $t_issue_to_add = $this->getIssueToAdd();
 	    $t_issue_to_add['monitors'] = array(
 	        array ('id' =>  $this->userId )
 		);
@@ -91,7 +91,7 @@ class IssueMonitorTest extends SoapBase {
 	 * @return void
 	 */
 	public function testAddMonitorToExistingIssue() {
-	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
+	    $t_issue_to_add = $this->getIssueToAdd();
 
 	    $t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -125,7 +125,7 @@ class IssueMonitorTest extends SoapBase {
 	 * @return void
 	 */
 	public function testRemoveMonitor() {
-	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
+	    $t_issue_to_add = $this->getIssueToAdd();
 	    $t_issue_to_add['monitors'] = array(
 	        array ('id' =>  $this->userId )
 		);
@@ -155,7 +155,7 @@ class IssueMonitorTest extends SoapBase {
 	 * @return void
 	 */
 	public function testUpdateKeepsMonitor() {
-	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testUpdateKeepsMonitor' );
+	    $t_issue_to_add = $this->getIssueToAdd();
 	    $t_issue_to_add['monitors'] = array(
 	        array ('id' =>  $this->userId )
 		);

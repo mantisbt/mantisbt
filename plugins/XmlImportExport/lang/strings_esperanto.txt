@@ -1,0 +1,65 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit https://translatewiki.net  **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Esperanto (Esperanto)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit https://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Mirin
+ */
+
+$s_plugin_XmlImportExport_title = 'Problemoj pri Enportado/Elportado';
+$s_plugin_XmlImportExport_description = 'Aldoni XML-bazan enportadan kaj elportadan kapablojn al MantisBT.';
+$s_plugin_XmlImportExport_import = 'Problemoj pri enportado';
+$s_plugin_XmlImportExport_export = 'XML-Elporto';
+$s_plugin_XmlImportExport_config_title = 'Agordado pri Aliro-Niveloj de XML-Enportado/Elportado';
+$s_plugin_XmlImportExport_import_threshold = 'Problemoj pri enportado';
+$s_plugin_XmlImportExport_export_threshold = 'Problemoj pri elportado';
+$s_plugin_XmlImportExport_action_update = 'Ĝisdatigi';
+$s_plugin_XmlImportExport_importing_in_project = 'Enportante problemojn en projekton: \'%s\'';
+$s_plugin_XmlImportExport_import_options = 'Opcioj pri enportado';
+$s_plugin_XmlImportExport_cross_references = 'Krucreferencoj';
+$s_plugin_XmlImportExport_default_strategy = 'Implicita strategio por konvertado:';
+$s_plugin_XmlImportExport_renumber = 'Renombri';
+$s_plugin_XmlImportExport_renumber_desc = 'Provi konvertadon de referencoj al nova numerado';
+$s_plugin_XmlImportExport_link = 'Ligilo';
+$s_plugin_XmlImportExport_link_desc = 'Konverti en ligilon al la originala ero';
+$s_plugin_XmlImportExport_disable = 'Malŝalti';
+$s_plugin_XmlImportExport_disable_desc = 'Malŝalti la ligilon';
+$s_plugin_XmlImportExport_fallback = 'Retropaŝa strategio (kiam "Renumeri" ne aplikiĝas)';
+$s_plugin_XmlImportExport_fallback_category = 'Implicita kategorio:';
+$s_plugin_XmlImportExport_keep_same_category = 'Provi uzadon de la sama kategorio';
+$s_plugin_XmlImportExport_error_no_xml = 'ne troviĝis etendaĵoj xmlreader kaj xmlwriter';

@@ -33,6 +33,8 @@
  * @uses version_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -41,31 +43,83 @@ require_api( 'user_api.php' );
 require_api( 'version_api.php' );
 
 /**
- * return the mailto: href string link
- * @param string $p_email Email address to prepare.
- * @param string $p_text  Display text for the hyperlink.
+ * Return a ready-to-use mailto: URL.
+ *
+ * No validation is performed on the e-mail address, it is the caller's
+ * responsibility to ensure it is valid and not empty.
+ *
+ * @param string $p_email   Target e-mail address
+ * @param string $p_subject Optional e-mail subject
+ *
  * @return string
  */
-function prepare_email_link( $p_email, $p_text ) {
-	if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
-		return string_display_line( $p_text );
+function prepare_mailto_url ( $p_email, $p_subject = '' ) {
+	# If we apply string_url() to the whole mailto: link then the @ gets
+	# turned into a %40 and you can't right click in browsers to use the
+	# Copy Email Address functionality.
+	if( $p_subject ) {
+		# URL-encoding the subject is required otherwise special characters
+		# (ampersand for example) will truncate the text
+		$p_subject = '?subject=' . string_url( $p_subject );
 	}
+	$t_mailto = 'mailto:' . $p_email . $p_subject;
 
-	# If we apply string_url() to the whole mailto: link then the @
-	#  gets turned into a %40 and you can't right click in browsers to
-	#  do Copy Email Address.
-	$t_mailto = string_attribute( 'mailto:' . $p_email );
-	$p_text = string_display_line( $p_text );
-
-	return '<a href="' . $t_mailto . '">' . $p_text . '</a>';
+	return string_attribute( $t_mailto );
 }
 
 /**
- * prepares the name of the user given the id.  also makes it an email link.
- * @param integer $p_user_id A valid user identifier.
+ * return an HTML link with mailto: href.
+ *
+ * If user does not have access level required to see email addresses, the
+ * function will only return the display text (with tooltip if provided).
+ *
+ * @param string $p_email           Email address to prepare.
+ * @param string $p_text            Display text for the hyperlink.
+ * @param string $p_subject         Optional e-mail subject
+ * @param string  $p_tooltip        Optional tooltip to show.
+ * @param boolean $p_show_as_button If true, show link as button with envelope
+ *                                  icon, otherwise display a plain-text link.
+ *
  * @return string
  */
-function prepare_user_name( $p_user_id ) {
+function prepare_email_link( $p_email, $p_text, $p_subject = '', $p_tooltip ='', $p_show_as_button = false ) {
+	$t_text = string_display_line( $p_text );
+	if( !is_blank( $p_tooltip ) && $p_tooltip != $p_text ) {
+		$t_tooltip = ' title="' . string_display_line( $p_tooltip ) . '"';
+	} else {
+		$t_tooltip = '';
+	}
+
+	if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
+		return $t_tooltip ? '<a' . $t_tooltip . '>' . $t_text . '</a>' : $t_text;
+	}
+
+	$t_mailto = prepare_mailto_url( $p_email, $p_subject );
+
+	if( $p_show_as_button ) {
+		$t_class = ' class="noprint blue zoom-130"';
+		$t_text = icon_get( 'fa-envelope-o', 'bigger-115' )
+			. ( $t_text ? "&nbsp;$t_text" : '' );
+	} else {
+		$t_class = '';
+	}
+
+	return sprintf( '<a href="%s"%s%s>%s</a>',
+		$t_mailto,
+		$t_tooltip,
+		$t_class,
+		$t_text
+	);
+}
+
+/**
+ * Prepares the name of the user given the id.
+ * Also can make it a link to user info page.
+ * @param integer $p_user_id  A valid user identifier.
+ * @param boolean $p_link     Whether to include an html link
+ * @return string
+ */
+function prepare_user_name( $p_user_id, $p_link = true ) {
 	# Catch a user_id of NO_USER (like when a handler hasn't been assigned)
 	if( NO_USER == $p_user_id ) {
 		return '';
@@ -74,40 +128,51 @@ function prepare_user_name( $p_user_id ) {
 	$t_username = user_get_username( $p_user_id );
 	$t_name = user_get_name( $p_user_id );
 	if( $t_username != $t_name ) {
-		$t_tooltip = ' title="' . string_attribute( $t_name ) . '"';
+		$t_tooltip = ' title="' . string_attribute( $t_username ) . '"';
 	} else {
 		$t_tooltip = '';
 	}
 
-	$t_username = string_display_line( $t_username );
+	$t_name = string_display_line( $t_name );
 
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
-		return '<a class="user"' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_username . '</a>';
+		if( $p_link ) {
+			return '<a' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_name . '</a>';
+		} else {
+			return '<span ' . $t_tooltip . '>' . $t_name . '</span>';
+		}
 	}
 
-	return '<del class="user"' . $t_tooltip . '>' . $t_username . '</del>';
+	return '<del ' . $t_tooltip . '>' . $t_name . '</del>';
 }
 
 /**
- * A function that prepares the version string for outputting to the user on view / print issue pages.
- * This function would add the version date, if appropriate.
+ * Prepares Version string for output.
  *
- * @param integer $p_project_id The project id.
- * @param integer $p_version_id The version id.  If false then this method will return an empty string.
+ * A function that prepares the version string for outputting to the user on
+ * view / print issue pages. This function will add the version date, if
+ * appropriate {@see $g_show_version_dates_threshold}.
+ *
+ * @param integer      $p_project_id    The project id to use as context.
+ * @param integer      $p_version_id    The version id. If false then this
+ *                                      method will return an empty string.
+ * @param boolean|null $p_show_project  Whether to include the project name or
+ *                                      not, null means include the project if
+ *                                      different from current context.
+ *
  * @return string The formatted version string.
+ * @throws ClientException if the version id does not exist.
  */
-function prepare_version_string( $p_project_id, $p_version_id ) {
-	if( $p_version_id === false ) {
-		return '';
-	}
+function prepare_version_string( $p_project_id, $p_version_id, $p_show_project = null ) {
+	$t_version_text = version_full_name( $p_version_id, $p_show_project, $p_project_id );
 
-	$t_version_text = version_full_name( $p_version_id, null, $p_project_id );
-
-	if( access_has_project_level( config_get( 'show_version_dates_threshold' ), $p_project_id ) ) {
-		$t_short_date_format = config_get( 'short_date_format' );
-
-		$t_version = version_get( $p_version_id );
-		$t_version_text .= ' (' . date( $t_short_date_format, $t_version->date_order ) . ')';
+    $t_show_version_dates = config_get('show_version_dates_threshold', null, null, $p_project_id);
+    if( access_has_project_level( $t_show_version_dates, $p_project_id ) ) {
+		$t_date_order = version_get_field( $p_version_id, 'date_order' );
+		if( $t_date_order != date_get_null() ) {
+			$t_short_date_format = config_get( 'short_date_format', null, null, $p_project_id );
+			$t_version_text .= ' (' . date( $t_short_date_format, $t_date_order ) . ')';
+		}
 	}
 
 	return $t_version_text;

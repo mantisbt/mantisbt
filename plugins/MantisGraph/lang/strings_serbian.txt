@@ -25,38 +25,39 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Serbian (Cyrillic script) (српски (ћирилица)‎)
+/** Serbian (Cyrillic script) (српски (ћирилица))
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Acamicamacaraca
+ * @author BadDog
+ * @author Kizule
  * @author Rancher
  */
 
-$s_plugin_graph_title = 'Графикони за MantisBT';
-$s_plugin_graph_description = 'Званични додатак за исцртавање графикона.';
 $s_plugin_MantisGraph_title = 'Графикони за MantisBT';
+$s_plugin_MantisGraph_description = 'Званични додатак за исцртавање графикона.';
 $s_plugin_MantisGraph_config = 'Подешавање';
-$s_plugin_MantisGraph_synthesis_link = 'Синтеза';
+$s_plugin_MantisGraph_tab_label = 'Графикони';
 $s_plugin_MantisGraph_status_link = 'По статусу';
 $s_plugin_MantisGraph_priority_link = 'По важности';
 $s_plugin_MantisGraph_severity_link = 'По озбиљности';
 $s_plugin_MantisGraph_category_link = 'По категорији';
 $s_plugin_MantisGraph_resolution_link = 'По резолуцији';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Синтетички графикони по стању';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Синтетички графикони по важности';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Синтетички графикони по озбиљности';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Синтетички графикони по категорији';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Синтетички графикони по резолуцији';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Од стране графикона о статусу';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Од стране графикона о приоритету';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Од стране графикона о озбиљности';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Од стране графикона о категорији';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Од стране графикона о резолуцији';
 $s_plugin_MantisGraph_by_status_pct = 'По стању (%)';
 $s_plugin_MantisGraph_by_priority_pct = 'По важности (%)';
 $s_plugin_MantisGraph_by_severity_pct = 'По озбиљности (%)';
@@ -80,3 +81,4 @@ $s_plugin_MantisGraph_period_year_to_date = 'За тачно једну годи
 $s_plugin_MantisGraph_period_select = 'Произвољни датуми';
 $s_plugin_MantisGraph_period_last_year = 'Претходна година';
 $s_plugin_MantisGraph_graph_page = 'Историја проблема с графиконом';
+$s_plugin_MantisGraph_other_categories = 'друге категорије (%d)';

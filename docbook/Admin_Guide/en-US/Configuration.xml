@@ -21,7 +21,7 @@
 			Values stored in the database take precedence over values defined
 			in <emphasis>config_inc.php</emphasis>. The former can also be
 			viewed and updated on the <emphasis>Configuration Report</emphasis>
-			page (Manage > Manage Configuration > Configuration Report).
+			page (Manage > Configuration > Configuration Report).
 		</para>
 
 		<para>To determine which value to use, MantisBT follows the list below,
@@ -102,4 +102,5 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/duedate.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/user.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/view.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/issues.xml" />
 </chapter>

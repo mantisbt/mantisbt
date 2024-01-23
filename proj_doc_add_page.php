@@ -50,7 +50,7 @@ if( OFF == config_get( 'enable_project_documentation' ) ||
 
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 
-$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+$t_max_file_size = file_get_max_file_size();
 
 layout_page_header();
 
@@ -67,7 +67,7 @@ print_doc_menu('proj_doc_add_page.php');
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-upload"></i>
+				<?php print_icon( 'fa-upload', 'ace-icon' ); ?>
 				<?php echo lang_get( 'upload_file_title' ) ?>
 			</h4>
 		</div>

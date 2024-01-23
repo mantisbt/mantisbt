@@ -31,6 +31,7 @@
 
 require_api( 'api_token_api.php' );
 
+use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\LegacyApiFaultException;
 
 /**
@@ -56,6 +57,24 @@ class RestFault {
 	function __construct( $p_status_code, $p_fault_string = '' ) {
 		$this->status_code = $p_status_code;
 		$this->fault_string = $p_fault_string === null ? '' : $p_fault_string;
+	}
+
+	/**
+	 * Error description getter
+	 *
+	 * @return string The error description
+	 */
+	function getMessage() {
+		return $this->fault_string;
+	}
+
+	/**
+	 * Http status code getter
+	 *
+	 * @return integer The http status code
+	 */
+	function getCode() {
+		return $this->status_code;
 	}
 }
 
@@ -191,7 +210,6 @@ class ApiObjectFactory {
 			case ERROR_USER_CREATE_PASSWORD_MISMATCH:
 			case ERROR_USER_NAME_INVALID:
 			case ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS:
-			case ERROR_USER_REAL_MATCH_USER:
 			case ERROR_USER_CHANGE_LAST_ADMIN:
 			case ERROR_USER_REAL_NAME_INVALID:
 			case ERROR_USER_EMAIL_NOT_UNIQUE:
@@ -207,13 +225,12 @@ class ApiObjectFactory {
 			case ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT:
 			case ERROR_CUSTOM_FIELD_INVALID_PROPERTY:
 			case ERROR_CATEGORY_DUPLICATE:
-			case ERROR_CATEGORY_NO_ACTION:
+			case ERROR_NO_COPY_ACTION:
 			case ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT:
 			case ERROR_VERSION_DUPLICATE:
 			case ERROR_SPONSORSHIP_NOT_ENABLED:
 			case ERROR_SPONSORSHIP_AMOUNT_TOO_LOW:
 			case ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL:
-			case ERROR_RELATIONSHIP_ALREADY_EXISTS:
 			case ERROR_RELATIONSHIP_SAME_BUG:
 			case ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID:
 			case ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED:
@@ -227,6 +244,8 @@ class ApiObjectFactory {
 			case ERROR_COLUMNS_INVALID:
 			case ERROR_API_TOKEN_NAME_NOT_UNIQUE:
 			case ERROR_INVALID_FIELD_VALUE:
+			case ERROR_PROJECT_SUBPROJECT_DUPLICATE:
+			case ERROR_PROJECT_SUBPROJECT_NOT_FOUND:
 				return ApiObjectFactory::faultBadRequest( $p_exception->getMessage() );
 
 			case ERROR_BUG_NOT_FOUND:
@@ -249,6 +268,7 @@ class ApiObjectFactory {
 			case ERROR_FILTER_NOT_FOUND:
 			case ERROR_TAG_NOT_FOUND:
 			case ERROR_TOKEN_NOT_FOUND:
+			case ERROR_USER_TOKEN_NOT_FOUND:
 				return ApiObjectFactory::faultNotFound( $p_exception->getMessage() );
 				
 			case ERROR_ACCESS_DENIED:
@@ -285,14 +305,20 @@ class ApiObjectFactory {
 	/**
 	 * Convert a soap object to an array
 	 * @param stdClass|array $p_object Object.
+	 * @param boolean $p_recursive
 	 * @return array
 	 */
-	static function objectToArray($p_object ) {
-		if( is_object( $p_object ) ) {
-			return get_object_vars( $p_object );
+	static function objectToArray( $p_object, $p_recursive = false ) {
+		$t_object = is_object( $p_object ) ? get_object_vars( $p_object ) : $p_object;
+		if( $p_recursive && is_array( $t_object ) ) {
+			foreach( $t_object as $t_key => $t_value ) {
+				if( is_object( $t_object[$t_key] ) || is_array( $t_object[$t_key] ) ) {
+					$t_object[$t_key] = ApiObjectFactory::objectToArray( $t_object[$t_key], $p_recursive );
+				}
+			}
 		}
 
-		return $p_object;
+		return $t_object;
 	}
 
 	/**
@@ -349,11 +375,11 @@ class ApiObjectFactory {
 	 *
 	 * @param mixed $p_maybe_fault Object to check whether it is a SOAP/REST fault.
 	 * @return void
-	 * @throws LogacyApiFaultException
+	 * @throws LegacyApiFaultException
 	 */
 	static function throwIfFault( $p_maybe_fault ) {
 		if( ApiObjectFactory::isFault( $p_maybe_fault ) ) {
-			throw new LegacyApiFaultException( $p_maybe_fault->fault_string, $p_maybe_fault->status_code );
+			throw new LegacyApiFaultException( $p_maybe_fault->getMessage(), $p_maybe_fault->getCode() );
 		}
 	}
 }
@@ -388,9 +414,10 @@ function mc_login( $p_username, $p_password ) {
  * When calling this method make sure that the caller has the right to retrieve
  * information about the target user.
  * @param integer $p_user_id  A valid user identifier.
+ * @param array $p_select     An array of fields to be returned.
  * @return array array of user data for the supplied user id
  */
-function mci_user_get( $p_user_id ) {
+function mci_user_get( $p_user_id, $p_select = null ) {
 	$t_user_data = array();
 
 	# if user doesn't exist, then mci_account_get_array_by_id() will throw.
@@ -401,23 +428,48 @@ function mci_user_get( $p_user_id ) {
 	} else {
 		$t_account_data = mci_account_get_array_by_id( $p_user_id );
 		foreach( $t_account_data as $t_key => $t_value ) {
-			$t_user_data[$t_key] = $t_value;
+			if( is_null( $p_select ) || in_array( $t_key, $p_select ) ) {
+				$t_user_data[$t_key] = $t_value;
+			}
 		}
 
-		$t_user_data['language'] = mci_get_user_lang( $p_user_id );
-		$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
-
-		$t_access_level = access_get_global_level( $p_user_id );
-		$t_user_data['access_level'] = mci_enum_get_array_by_id(
-			$t_access_level, 'access_levels', $t_user_data['language'] );
-
-		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
-		$t_projects = array();
-		foreach( $t_project_ids as $t_project_id ) {
-			$t_projects[] = mci_project_get( $t_project_id, $t_user_data['language'], /* detail */ false );
+		# Put language in a temp variable since it is used later in access level and projects
+		$t_language = mci_get_user_lang( $p_user_id );
+		if( is_null( $p_select ) || in_array( 'language', $p_select ) ) {
+			$t_user_data['language'] = $t_language;
 		}
 
-		$t_user_data['projects'] = $t_projects;
+		if( is_null( $p_select ) || in_array( 'timezone', $p_select ) ) {
+			$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
+		}
+
+		if( is_null( $p_select ) || in_array( 'access_level', $p_select ) ) {
+			$t_access_level = access_get_global_level( $p_user_id );
+			$t_user_data['access_level'] = mci_enum_get_array_by_id(
+				$t_access_level, 'access_levels', $t_language );
+		}
+
+		if( !is_null( $p_select ) && in_array( 'enabled', $p_select ) ) {
+			$t_user_data['enabled'] = user_is_enabled( $p_user_id );
+		}
+
+		if( !is_null( $p_select ) && in_array( 'protected', $p_select ) ) {
+			$t_user_data['protected'] = user_is_protected( $p_user_id );
+		}
+
+		if( is_null( $p_select ) || in_array( 'created_at', $p_select ) ) {
+			$t_user_data['created_at'] = ApiObjectFactory::datetime( user_get_field( $p_user_id, 'date_created' ) );
+		}
+
+		if( is_null( $p_select ) || in_array( 'projects', $p_select ) ) {
+			$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
+			$t_projects = array();
+			foreach( $t_project_ids as $t_project_id ) {
+				$t_projects[] = mci_project_get( $t_project_id, $t_language, /* detail */ false );
+			}
+
+			$t_user_data['projects'] = $t_projects;
+		}
 	}
 
 	return $t_user_data;
@@ -449,6 +501,10 @@ function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
 		$t_project['enabled'] = (int)$t_row['enabled'] != 0;
 		$t_project['view_state'] = mci_enum_get_array_by_id( (int)$t_row['view_state'], 'view_state', $p_lang );
 
+		if( !ApiObjectFactory::$soap ) {
+			$t_project['inherit_global'] = $t_row['inherit_global'] != 0;
+		}
+
 		# access_min field is not used
 		# $t_project['access_min'] = mci_enum_get_array_by_id( (int)$t_row['access_min'], 'access_levels', $p_lang );
 
@@ -466,7 +522,7 @@ function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
  * @return true: offline, false: online
  */
 function mci_is_mantis_offline() {
-	$t_offline_file = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'mantis_offline.php';
+	$t_offline_file = dirname( __FILE__, 3 ) . DIRECTORY_SEPARATOR . 'mantis_offline.php';
 	return file_exists( $t_offline_file );
 }
 
@@ -570,9 +626,10 @@ function mci_has_administrator_access( $p_user_id, $p_project_id = ALL_PROJECTS 
 /**
  * Given an object, return the project id
  * @param object $p_project Project Object.
- * @return integer project id
+ * @param integer|boolean $p_default The default value or false if the default should not be applied.
+ * @return null|integer project id
  */
-function mci_get_project_id( $p_project ) {
+function mci_get_project_id( $p_project, $p_default = ALL_PROJECTS ) {
 	if( is_object( $p_project ) ) {
 		$p_project = get_object_vars( $p_project );
 	}
@@ -580,9 +637,11 @@ function mci_get_project_id( $p_project ) {
 	if( isset( $p_project['id'] ) && (int)$p_project['id'] != 0 ) {
 		$t_project_id = (int)$p_project['id'];
 	} else if( isset( $p_project['name'] ) && !is_blank( $p_project['name'] ) ) {
-		$t_project_id = project_get_id_by_name( $p_project['name'] );
+		$t_project_id = project_get_id_by_name( $p_project['name'], $p_default );
+	} else if( $p_default === false ) {
+		$t_project_id = null;
 	} else {
-		$t_project_id = ALL_PROJECTS;
+		$t_project_id = $p_default;
 	}
 
 	return $t_project_id;
@@ -609,17 +668,19 @@ function mci_get_project_view_state_id( $p_view_state ) {
 /**
  * Return user id
  * @param stdClass|array $p_user User.
+ * @param integer|null $p_default Default value on error.
+ * @param boolean $p_allow_all_users Allow user id 0 to be returned.
  * @return integer user id or 0 if not found.
  */
-function mci_get_user_id( $p_user ) {
+function mci_get_user_id( $p_user, $p_default = 0, $p_allow_all_users = false ) {
 	if( is_object( $p_user ) ) {
 		$p_user = ApiObjectFactory::objectToArray( $p_user );
 	}
 
 	try {
-		return user_get_id_by_user_info( $p_user );
+		return user_get_id_by_user_info( $p_user, /* throw if not found */ false, $p_allow_all_users );
 	} catch( Exception $e ) {
-		return 0;
+		return $p_default;
 	}
 }
 
@@ -636,8 +697,9 @@ function mci_profile_as_array_by_id( $p_profile_id ) {
 		return null;
 	}
 
-	$t_profile = profile_get_row_direct( $t_profile_id );
-	if( $t_profile === false ) {
+	try {
+		$t_profile = profile_get_row( $t_profile_id );
+	} catch (ClientException $e) {
 		return null;
 	}
 
@@ -695,7 +757,7 @@ function mci_related_issue_as_array_by_id( $p_issue_id ) {
 function mci_get_user_lang( $p_user_id ) {
 	$t_lang = user_pref_get_pref( $p_user_id, 'language' );
 	if( $t_lang == 'auto' ) {
-		$t_lang = config_get_global( 'fallback_language' );
+		$t_lang = lang_map_auto();
 	}
 	return $t_lang;
 }
@@ -876,9 +938,10 @@ function mci_get_version( $p_version, $p_project_id ) {
  *
  * @param string|object $p_version The version string or object with name or id or both.
  * @param int $p_project_id The project id.
+ * @param string $p_field_name Version field name (e.g. version, target_version, fixed_in_version)
  * @return int|RestFault|SoapFault The version id, 0 if not supplied.
  */
-function mci_get_version_id( $p_version, $p_project_id ) {
+function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version' ) {
 	$t_version_id = 0;
 	$t_version_for_error = '';
 
@@ -903,7 +966,11 @@ function mci_get_version_id( $p_version, $p_project_id ) {
 		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $p_project_id );
-			return ApiObjectFactory::faultBadRequest( "Version '$t_version_for_error' does not exist in project '$t_project_name'." );
+			throw new ClientException(
+				"Version '$t_version_for_error' does not exist in project '$t_project_name'.",
+				ERROR_INVALID_FIELD_VALUE,
+				array( 'version' )
+			);
 		}
 
 		$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
@@ -983,7 +1050,11 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 	$t_category_id = $fn_get_category_id_internal( $p_category, $p_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( !isset( $p_category ) ) {
-			return ApiObjectFactory::faultBadRequest( 'Category field must be supplied.' );
+			throw new ClientException(
+				'Category field must be supplied.',
+				ERROR_EMPTY_FIELD,
+				array( 'category' )
+			);
 		}
 
 		# category may be a string, array with id, array with name, or array
@@ -993,6 +1064,9 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 		return ApiObjectFactory::faultBadRequest(
 			"Category '{$t_cat_desc}' not found." );
 	}
+
+	# Make sure the category belongs to the given project's hierarchy
+	category_ensure_exists_in_project( $t_category_id, $p_project_id );
 
 	return $t_category_id;
 }
@@ -1034,7 +1108,7 @@ function mci_project_version_as_array( array $p_version ) {
  * @param integer $p_issue_id The id of the issue.
  * @param array   $p_note     A note as passed to the soap api methods.
  *
- * @return String the string time entry to be added to the bugnote, in 'HH:mm' format
+ * @return string the string time entry to be added to the bugnote, in 'HH:mm' format
  */
 function mci_get_time_tracking_from_note( $p_issue_id, array $p_note ) {
 	if( !access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id ) ) {
@@ -1045,7 +1119,11 @@ function mci_get_time_tracking_from_note( $p_issue_id, array $p_note ) {
 		return '00:00';
 	}
 
-	return db_minutes_to_hhmm( $p_note['time_tracking'] );
+	if( is_numeric( $p_note['time_tracking'] ) ) {
+		return db_minutes_to_hhmm( $p_note['time_tracking'] );
+	}
+
+	return $p_note['time_tracking']['duration'];
 }
 
 /**
@@ -1100,10 +1178,9 @@ EOL;
  * @param string  $p_error   Contains the error message, as a string.
  * @param string  $p_file    Contains the filename that the error was raised in, as a string.
  * @param integer $p_line    Contains the line number the error was raised at, as an integer.
- * @param array   $p_context To the active symbol table at the point the error occurred (optional).
  * @return void
  */
-function mc_error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) {
+function mc_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	# check if errors were disabled with @ somewhere in this call chain
 	# also suppress php 5 strict warnings
 	if( 0 == error_reporting() || 2048 == $p_type ) {
@@ -1172,7 +1249,9 @@ function error_get_stack_trace() {
 
 		#remove the call to this function from the stack trace
 		foreach( $t_stack as $t_frame ) {
-			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
+			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' )
+				. ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' )
+				. ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
 
 			$t_args = array();
 			if( isset( $t_frame['params'] ) && ( count( $t_frame['params'] ) > 0 ) ) {
@@ -1181,7 +1260,7 @@ function error_get_stack_trace() {
 					$t_args[] = error_build_parameter_string( $t_value );
 				}
 
-				$t_trace .= '(' . implode( $t_args, ', ' ) . ')';
+				$t_trace .= '(' . implode( ', ', $t_args ) . ')';
 			} else {
 				$t_trace .= '()';
 			}
@@ -1195,7 +1274,9 @@ function error_get_stack_trace() {
 		array_shift( $t_stack ); #remove the call to the error handler from the stack trace
 
 		foreach( $t_stack as $t_frame ) {
-			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
+			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' )
+				. ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' )
+				. ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
 
 			$t_args = array();
 			if( isset( $t_frame['args'] ) ) {
@@ -1203,7 +1284,7 @@ function error_get_stack_trace() {
 					$t_args[] = error_build_parameter_string( $t_value );
 				}
 
-				$t_trace .= '(' . implode( $t_args, ', ' ) . ')';
+				$t_trace .= '(' . implode( ', ', $t_args ) . ')';
 			} else {
 				$t_trace .= '()';
 			}

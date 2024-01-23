@@ -44,7 +44,6 @@ $g_cache_config_eval = array();
 $g_cache_config_access = array();
 $g_cache_bypass_lookup = array();
 $g_cache_filled = false;
-$g_cache_can_set_in_database = '';
 
 # cache environment to speed up lookups
 $g_cache_db_table_exists = false;
@@ -70,15 +69,10 @@ $g_cache_config_project = null;
  * @return mixed
  */
 function config_get( $p_option, $p_default = null, $p_user = null, $p_project = null ) {
-	global $g_cache_config, $g_cache_config_access, $g_cache_db_table_exists, $g_cache_filled;
+	global $g_cache_config, $g_cache_db_table_exists, $g_cache_filled;
 	global $g_cache_config_user, $g_cache_config_project, $g_project_override;
 
-	# @@ debug @@ echo "lu o=$p_option ";
-	# bypass table lookup for certain options
-	$t_bypass_lookup = !config_can_set_in_database( $p_option );
-
-	# @@ debug @@ if( $t_bypass_lookup ) { echo "bp=$p_option match=$t_match_pattern <br />"; }
-	if( !$t_bypass_lookup ) {
+	if( config_can_set_in_database( $p_option ) ) {
 		if( $g_project_override !== null && $p_project === null ) {
 			$p_project = $g_project_override;
 		}
@@ -138,6 +132,8 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 			if( isset( $g_cache_config[$p_option] ) ) {
 				$t_found = false;
+				$t_value = '';
+
 				foreach( $t_users as $t_user ) {
 					foreach( $t_projects as $t_project ) {
 						if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
@@ -154,19 +150,15 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 					switch( $t_type ) {
 						case CONFIG_TYPE_FLOAT:
-							$t_value = (float)$t_raw_value;
-							break;
+							return (float)$t_raw_value;
 						case CONFIG_TYPE_INT:
-							$t_value = (int)$t_raw_value;
-							break;
+							return (int)$t_raw_value;
 						case CONFIG_TYPE_COMPLEX:
-							$t_value = json_decode( $t_raw_value, true );
-							break;
+							return json_decode( $t_raw_value, true );
 						case CONFIG_TYPE_STRING:
 						default:
-							$t_value = config_eval( $t_raw_value );
+							return config_eval( $t_raw_value );
 					}
-					return $t_value;
 				}
 			}
 		}
@@ -179,16 +171,18 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
  *
  * @param string $p_option  Configuration option to retrieve.
  * @param string $p_default Default value if not set.
- * @return string
+ * @return mixed
  */
 function config_get_global( $p_option, $p_default = null ) {
 	global $g_cache_config_eval;
-	if( isset( $GLOBALS['g_' . $p_option] ) ) {
-		if( !isset( $g_cache_config_eval['g_' . $p_option] ) ) {
-			$t_value = config_eval( $GLOBALS['g_' . $p_option], true );
-			$g_cache_config_eval['g_' . $p_option] = $t_value;
+
+	$t_var_name = 'g_' . $p_option;
+	if( isset( $GLOBALS[$t_var_name] ) ) {
+		if( !isset( $g_cache_config_eval[$t_var_name] ) ) {
+			$t_value = config_eval( $GLOBALS[$t_var_name], true );
+			$g_cache_config_eval[$t_var_name] = $t_value;
 		} else {
-			$t_value = $g_cache_config_eval['g_' . $p_option];
+			$t_value = $g_cache_config_eval[$t_var_name];
 		}
 		return $t_value;
 	} else {
@@ -238,20 +232,17 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 		$t_projects[] = $p_project;
 	}
 
-	$t_found = false;
 	if( isset( $g_cache_config[$p_option] ) ) {
 		foreach( $t_users as $t_user ) {
 			foreach( $t_projects as $t_project ) {
 				if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
-					$t_access = $g_cache_config_access[$p_option][$t_user][$t_project];
-					$t_found = true;
-					break 2;
+					return $g_cache_config_access[$p_option][$t_user][$t_project];
 				}
 			}
 		}
 	}
 
-	return $t_found ? $t_access : config_get_global( 'admin_site_threshold' );
+	return config_get_global( 'admin_site_threshold' );
 }
 
 /**
@@ -290,18 +281,12 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 		$t_projects[] = $p_project;
 	}
 
-	$t_found = false;
 	foreach( $t_users as $t_user ) {
 		foreach( $t_projects as $t_project ) {
 			if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
-				$t_found = true;
-				break 2;
+				return true;
 			}
 		}
-	}
-
-	if( $t_found ) {
-		return true;
 	}
 
 	return isset( $GLOBALS['g_' . $p_option] );
@@ -312,7 +297,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
  * If the configuration option does not exist, an ERROR is triggered
  *
  * @param string  $p_option  Configuration option name.
- * @param string  $p_value   Configuration option value.
+ * @param string|array  $p_value   Configuration option value.
  * @param integer $p_user    A user identifier. Defaults to NO_USER.
  * @param integer $p_project A project identifier. Defaults to ALL_PROJECTS.
  * @param integer $p_access  Access level. Defaults to DEFAULT_ACCESS_LEVEL.
@@ -353,7 +338,6 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 		$t_result = db_query( $t_query, array( $p_option, (int)$p_project, (int)$p_user ) );
 
 		db_param_push();
-		$t_params = array();
 		if( 0 < db_result( $t_result ) ) {
 			$t_set_query = 'UPDATE {config}
 					SET value=' . db_param() . ', type=' . db_param() . ', access_reqd=' . db_param() . '
@@ -445,17 +429,14 @@ function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_p
  * @return boolean
  */
 function config_can_set_in_database( $p_option ) {
-	global $g_cache_can_set_in_database, $g_cache_bypass_lookup;
+	global $g_cache_bypass_lookup, $g_global_settings;
 
 	if( isset( $g_cache_bypass_lookup[$p_option] ) ) {
 		return !$g_cache_bypass_lookup[$p_option];
 	}
 
 	# bypass table lookup for certain options
-	if( $g_cache_can_set_in_database == '' ) {
-		$g_cache_can_set_in_database = config_get_global( 'global_settings' );
-	}
-	$t_bypass_lookup = in_array( $p_option, $g_cache_can_set_in_database, true );
+	$t_bypass_lookup = in_array( $p_option, $g_global_settings, true );
 
 	$g_cache_bypass_lookup[$p_option] = $t_bypass_lookup;
 
@@ -469,7 +450,7 @@ function config_can_set_in_database( $p_option ) {
  * @return boolean
  */
 function config_can_delete( $p_option ) {
-	return( strtolower( $p_option ) != 'database_version' );
+	return( strtolower( $p_option ?? '' ) != 'database_version' );
 }
 
 /**
@@ -548,7 +529,7 @@ function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = A
 	if( '' !== $p_option ) {
 		unset( $GLOBALS['g_cache_config'][$p_option][$p_user][$p_project] );
 		unset( $GLOBALS['g_cache_config_access'][$p_option][$p_user][$p_project] );
-		unset( $GLOBALS['g_cache_config_eval'][$p_option] );
+		unset( $GLOBALS['g_cache_config_eval']['g_' . $p_option] );
 	} else {
 		unset( $GLOBALS['g_cache_config'] );
 		unset( $GLOBALS['g_cache_config_access'] );
@@ -629,39 +610,55 @@ function env_obsolete( $p_env_variable, $p_new_env_variable ) {
 }
 
 /**
- * check for recursion in defining configuration variables
- * If there is a %text% in the returned value, re-evaluate the "text" part and replace the string
+ * Check for recursion in defining configuration variables.
+ *
+ * If there is a %text% in the returned value, re-evaluate the "text" part and
+ * replace the string. It is possible to escape the '%' with backslash when
+ * evaluation is not wanted, e.g. '\%test\%'.
  *
  * @param string  $p_value  Configuration variable to evaluate.
  * @param boolean $p_global If true, gets %text% as a global configuration, defaults to false.
+ *
  * @return string
  */
 function config_eval( $p_value, $p_global = false ) {
 	$t_value = $p_value;
 	if( !empty( $t_value ) && is_string( $t_value ) && !is_numeric( $t_value ) ) {
-		if( 0 < preg_match_all( '/(?:^|[^\\\\])(%([^%]+)%)/U', $t_value, $t_matches ) ) {
-			$t_count = count( $t_matches[0] );
-			for( $i = 0;$i < $t_count;$i++ ) {
+		$t_count = preg_match_all(
+			'/(?:^|[^\\\\])(%([^%]+)%)/U',
+			$t_value,
+			$t_matches,
+			PREG_SET_ORDER
+		);
 
-				# $t_matches[0][$i] is the matched string including the delimiters
-				# $t_matches[1][$i] is the target parameter string
+		if( $t_count > 0 ) {
+			foreach( $t_matches as $t_match ) {
+				list(, $t_match_with_delimiters, $t_config ) = $t_match;
+
+				# Make sure the config actually exists before retrieving it
+				if( !isset( $GLOBALS['g_' . $t_config ] ) ) {
+					continue;
+				}
+
 				if( $p_global ) {
-					$t_repl = config_get_global( $t_matches[2][$i] );
+					$t_repl = config_get_global( $t_config );
 				} else {
-					$t_repl = config_get( $t_matches[2][$i] );
+					$t_repl = config_get( $t_config );
 				}
 
 				# Handle the simple case where there is no need to do string replace.
 				# This will resolve the case where the $t_repl value is of non-string
 				# type, e.g. array of access levels.
-				if( $t_count == 1 && $p_value == '%' . $t_matches[2][$i] . '%' ) {
+				if( $t_count == 1 && $p_value == $t_match_with_delimiters ) {
 					$t_value = $t_repl;
 					break;
 				}
 
-				$t_value = str_replace( $t_matches[1][$i], $t_repl, $t_value );
+				$t_value = str_replace( $t_match_with_delimiters, $t_repl, $t_value );
 			}
 		}
+
+		# Remove escaped '%'
 		$t_value = str_replace( '\\%', '%', $t_value );
 	}
 	return $t_value;
@@ -725,7 +722,7 @@ function config_cache_all() {
 
 	$t_config_rows = array();
 
-	# With oracle databse, ADOdb maps column type "L" to clob.
+	# With oracle database, ADOdb maps column type "L" to clob.
 	# Because reading clobs is significantly slower, cast them to varchar for faster query execution
 	# Standard max size for varchar is 4000 bytes, so a safe limit is used as 1000 charancters
 	# for multibyte strings (up to 4 bytes per char)
@@ -758,5 +755,76 @@ function config_cache_all() {
 		$t_project = $t_row['project_id'];
 		$g_cache_config[$t_config][$t_user][$t_project] = $t_row['type'] . ';' . $t_row['value'];
 		$g_cache_config_access[$t_config][$t_user][$t_project] = $t_row['access_reqd'];
+	}
+}
+
+/**
+ * Display a given config value appropriately
+ * @param integer $p_type        Configuration type id.
+ * @param mixed   $p_value       Configuration value.
+ * @param boolean $p_for_display Whether to pass the value via string attribute for web browser display.
+ * @return string
+ */
+function config_get_value_as_string( $p_type, $p_value, $p_for_display = true ) {
+	$t_corrupted = false;
+
+	switch( $p_type ) {
+		case CONFIG_TYPE_DEFAULT:
+			return '';
+		case CONFIG_TYPE_FLOAT:
+			return (string)(float)$p_value;
+		case CONFIG_TYPE_INT:
+			return (string)(integer)$p_value;
+		case CONFIG_TYPE_STRING:
+			$t_value = string_html_specialchars( config_eval( $p_value ) );
+			if( $p_for_display ) {
+				$t_value = '<p id="adm-config-value">\'' . string_nl2br( $t_value ) . '\'</p>';
+			}
+			return $t_value;
+		case CONFIG_TYPE_COMPLEX:
+			$t_value = @json_decode( $p_value, true );
+			if( $t_value === false ) {
+				$t_corrupted = true;
+			}
+			break;
+		default:
+			$t_value = config_eval( $p_value );
+			break;
+	}
+
+	if( $t_corrupted ) {
+		$t_output = $p_for_display ? lang_get( 'configuration_corrupted' ) : '';
+	} else {
+		$t_output = var_export( $t_value, true );
+	}
+
+	if( $p_for_display ) {
+		return '<pre id="adm-config-value">' . string_attribute( $t_output ) . '</pre>';
+	} else {
+		return string_attribute( $t_output );
+	}
+}
+
+function config_get_types() {
+	return array(
+		CONFIG_TYPE_DEFAULT => 'default',
+		CONFIG_TYPE_INT     => 'integer',
+		CONFIG_TYPE_FLOAT   => 'float',
+		CONFIG_TYPE_COMPLEX => 'complex',
+		CONFIG_TYPE_STRING  => 'string',
+		);
+}
+
+/**
+ * returns the configuration type for a given configuration type id
+ * @param integer $p_type Configuration type identifier to check.
+ * @return string configuration type
+ */
+function config_get_type_string( $p_type ) {
+	$t_config_types = config_get_types();
+	if( array_key_exists( $p_type, $t_config_types ) ) {
+		return $t_config_types[$p_type];
+	} else {
+		return $t_config_types[CONFIG_TYPE_DEFAULT];
 	}
 }

@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Bulgarian (български)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -52,7 +52,7 @@ $s_plugin_XmlImportExport_config_title = 'Създаване на нива на 
 $s_plugin_XmlImportExport_import_threshold = 'Импортиране на проблеми';
 $s_plugin_XmlImportExport_export_threshold = 'Изнасяне на проблеми';
 $s_plugin_XmlImportExport_action_update = 'Обновяване';
-$s_plugin_XmlImportExport_importing_in_project = 'Импортиране на проблеми в проекта:';
+$s_plugin_XmlImportExport_importing_in_project = 'Импортиране на проблеми в проект: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Импортиране на опции';
 $s_plugin_XmlImportExport_cross_references = 'Кръстосани препратки';
 $s_plugin_XmlImportExport_default_strategy = 'Стратегия за преобразуване по подразбиране:';

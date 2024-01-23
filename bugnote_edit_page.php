@@ -120,7 +120,7 @@ $t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-comment"></i>
+			<?php print_icon( 'fa-comment', 'ace-icon' ); ?>
 		<?php echo lang_get( 'edit_bugnote_title' ) ?>
 	</h4>
 	</div>

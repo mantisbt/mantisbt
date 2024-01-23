@@ -1,0 +1,80 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit https://translatewiki.net  **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Persian (فارسی)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit https://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author FarsiNevis
+ * @author Reza1615
+ * @author Sjazz
+ * @author جواد
+ */
+
+$s_plugin_MantisGraph_config = 'تنظیمات';
+$s_plugin_MantisGraph_tab_label = 'نمودارها';
+$s_plugin_MantisGraph_status_link = 'براساس وضعیت';
+$s_plugin_MantisGraph_priority_link = 'براساس اولویت';
+$s_plugin_MantisGraph_severity_link = 'براساس شدت';
+$s_plugin_MantisGraph_category_link = 'براساس دسته';
+$s_plugin_MantisGraph_resolution_link = 'براساس تحلیل';
+$s_plugin_MantisGraph_issue_trends_link = 'مسیر مسائل';
+$s_plugin_MantisGraph_by_status_pct = 'براساس درصد وضعیت';
+$s_plugin_MantisGraph_by_priority_pct = 'براساس درصد اولویت';
+$s_plugin_MantisGraph_by_severity_pct = 'براساس درصد شدت';
+$s_plugin_MantisGraph_by_category_pct = 'براساس درصد دسته';
+$s_plugin_MantisGraph_by_resolution_pct = 'براساس درصد تحلیل';
+$s_plugin_MantisGraph_by_severity_mix = 'براساس شدت و وضعیت';
+$s_plugin_MantisGraph_by_priority_mix = 'براساس اولویت و وضعیت';
+$s_plugin_MantisGraph_by_resolution_mix = 'براساس تحلیل و وضعیت';
+$s_plugin_MantisGraph_legend_still_open = 'هنوز باز';
+$s_plugin_MantisGraph_legend_resolved = 'حل شده';
+$s_plugin_MantisGraph_legend_reported = 'گزارش شد.';
+$s_plugin_MantisGraph_period_none = 'هیچ';
+$s_plugin_MantisGraph_period_this_week = 'این هفته';
+$s_plugin_MantisGraph_period_last_week = 'هفتهٔ گذشته';
+$s_plugin_MantisGraph_period_two_weeks = 'دو هفتهٔ گذشته';
+$s_plugin_MantisGraph_period_this_month = 'این ماه';
+$s_plugin_MantisGraph_period_last_month = 'ماه گذشته';
+$s_plugin_MantisGraph_period_this_quarter = 'این فصل';
+$s_plugin_MantisGraph_period_last_quarter = 'فصل گذشته';
+$s_plugin_MantisGraph_period_select = 'تاریخ‌های اختیاری';
+$s_plugin_MantisGraph_period_last_year = 'سال پیش';
+$s_plugin_MantisGraph_graph_page = 'نمودار تاریخچه مسائل';
+$s_plugin_MantisGraph_graph_topdev = 'برترین برنامه‌نویس ها براساس مسائل حل شده';
+$s_plugin_MantisGraph_graph_opendev = 'برنامه‌نویس ها براساس مسائل باز';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'برترین گزارش دهنده ها براساس مسائل حل شده';
+$s_plugin_MantisGraph_other_categories = 'رده‌های دیگر(%d)';

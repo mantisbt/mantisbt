@@ -30,11 +30,17 @@
 		<varlistentry>
 			<term>$g_debug_email</term>
 			<listitem>
-				<para>Used for debugging e-mail notifications.
-					When it is '', the emails are sent normally.
-					If set to an e-mail address, all messages are sent
-					to it, with the original recipients (To, Cc, Bcc)
-					included in the message body.
+				<para>Email address to use for debugging purposes.
+				</para>
+				<para>This option is used for debugging problems with the email
+					features in mantis, and can be set to a valid email address.
+				</para>
+				<para>This is blank by default, meaning that email notifications
+					are sent to their intended recipients (normal system behavior).
+				</para>
+				<para>If set, emails will only be sent to the specified address
+					instead, and the original recipients (To, Cc and Bcc) will
+					be included in the message body.
 				</para>
 				<para>Default is ''.</para>
 			</listitem>
@@ -54,7 +60,7 @@
 			<term>$g_display_errors</term>
 			<listitem>
 				<para>Errors Display Method.
-					Defines what <ulink url="http://php.net/errorfunc.constants">
+					Defines what <ulink url="https://www.php.net/errorfunc.constants">
 						errors</ulink>
 					are displayed and how.
 					Available options are:
@@ -84,7 +90,7 @@
 						<listitem>
 							<para>Suppress the error (no display).
 								This is the default behavior for unspecified
-								<ulink url="http://php.net/errorfunc.constants">
+								<ulink url="https://www.php.net/errorfunc.constants">
 									errors constants</ulink>.
 							</para>
 						</listitem>
@@ -92,16 +98,15 @@
 				</variablelist>
 
 				<para>
-					The default settings, recommended for use in production will only
-					display and exit on errors and suppress warninga and notices.
+					The default settings are recommended for use in production, and will only
+					display MantisBT fatal errors, suppressing output of all other error types.
 				</para>
 				<para>Recommended <filename>config_inc.php</filename>
 					settings for developers:
 <programlisting>
 $g_display_errors = array(
-	E_USER_WARNING =&gt; DISPLAY_ERROR_HALT,
-	E_WARNING      =&gt; DISPLAY_ERROR_HALT,
-	E_ALL          =&gt; DISPLAY_ERROR_INLINE,
+	E_WARNING           =&gt; DISPLAY_ERROR_HALT,
+	E_ALL               =&gt; DISPLAY_ERROR_INLINE,
 );
 </programlisting>
 				</para>
@@ -120,31 +125,35 @@ $g_display_errors = array(
 );
 </programlisting>
 				</para>
-				<warning><para><literal>E_USER_ERROR</literal>
-					should <emphasis>always</emphasis> be set to
-					<literal>DISPLAY_ERROR_HALT</literal>.
-					Using any other value will cause program execution
-					to continue despite the error, which may lead to data
-					integrity issues and/or cause MantisBT to function
-					incorrectly.
-				</para></warning>
+				<note>
+					<para><literal>E_USER_ERROR</literal>,
+						<literal>E_RECOVERABLE_ERROR</literal> and
+						<literal>E_ERROR</literal> will always be set to
+						<emphasis>DISPLAY_ERROR_HALT</emphasis> internally,
+						regardless of the actual configured value.
+						This ensures that program execution stops,
+						to prevent potential integrity issues and/or
+						MantisBT from functioning incorrectly.
+					</para>
+				</note>
 			</listitem>
 		</varlistentry>
 
 		<varlistentry>
 			<term>$g_show_detailed_errors</term>
 			<listitem>
-				<para>Shows a list of variables and their values
-					whenever an error is triggered.
-					Only applies to error types configured to
+				<para>Shows a list of variables and their values,
+					as well as an execution stack trace whenever a
+					fatal error is triggered.
+				</para>
+				<para>Only applies to error types configured to
 					<literal>DISPLAY_ERROR_HALT</literal>
 					in <emphasis>$g_display_errors</emphasis>.
 				</para>
 				<para>Default is OFF.</para>
-				<warning><para>Setting this to ON is a potential security
-					hazard, as it can expose sensitive information.
-					Only enable this setting for debugging purposes
-					when you really need it.
+				<warning><para>Setting this to ON is a potential security hazard,
+					as it can expose sensitive system information.
+					Only enable it when needed for debugging purposes.
 				</para></warning>
 			</listitem>
 		</varlistentry>
@@ -152,16 +161,23 @@ $g_display_errors = array(
 		<varlistentry>
 			<term>$g_stop_on_errors</term>
 			<listitem>
-				<para>Debug messages.
-					If this option is turned OFF, page redirects will
-					function if a non-fatal error occurs.
-					For debugging purposes, you can set this to ON so
-					that any non-fatal error will prevent page redirection,
-					allowing you to see the errors.
+				<para>Prevent page redirections when non-fatal errors occur.
+				</para>
+				<para>If this option is turned OFF (default)
+					page redirects will function normally,
+					preventing display of non-fatal error messages.
+				</para>
+				<para>It should only be set to ON during development
+					or for debugging purposes. This will prevent page
+					redirections, allowing you to see the errors.
 				</para>
 				<para>Default is OFF.</para>
-				<note><para>This should only be turned on when debugging.
-				</para></note>
+				<note>
+					<para>Non-fatal errors are those configured as
+						<literal>DISPLAY_ERROR_INLINE</literal> in
+						<emphasis>$g_display_errors</emphasis>.
+					</para>
+				</note>
 			</listitem>
 		</varlistentry>
 
@@ -266,7 +282,7 @@ $g_display_errors = array(
 				</variablelist>
 				<para>Default is LOG_NONE.</para>
 				<note><para>Multiple log channels can be combined using
-					<ulink url="http://php.net/language.operators.bitwise">
+					<ulink url="https://www.php.net/language.operators.bitwise">
 						PHP bitwise operators
 					</ulink>, e.g.
 <programlisting>$g_log_level = LOG_EMAIL | LOG_EMAIL_RECIPIENT;</programlisting>
@@ -288,7 +304,7 @@ or
 						<term>''</term>
 						<listitem>
 							<para>The empty string means
-								<ulink url="http://php.net/error_log">
+								<ulink url="https://www.php.net/error_log">
 									default PHP error log settings
 								</ulink>
 							</para>
@@ -319,17 +335,6 @@ or
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>'firebug'</term>
-						<listitem>
-							<para>make use of Firefox
-								<ulink url="http://getfirebug.com/">
-									Firebug Add-on</ulink>.
-								If user is not running firefox, this options
-								falls back to the default php error log settings.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
 						<term>'page'</term>
 						<listitem>
 							<para>Display log output at bottom of the page.
@@ -349,8 +354,10 @@ or
 			<term>$g_show_log_threshold</term>
 			<listitem>
 				<para>Indicates the access level required for a user
-					to see the log output (if
-					<emphasis>$g_log_destination</emphasis> is 'page').
+					to see the log output.
+				</para>
+				<para>This is only used when
+					<emphasis>$g_log_destination</emphasis> is 'page'.
 				</para>
 				<para>Default is ADMINISTRATOR.</para>
 				<note><para>This threshold is compared against the user's

@@ -99,6 +99,18 @@ if( false === $t_row ) {
 	error_parameters( $c_file_id );
 	trigger_error( ERROR_FILE_NOT_FOUND, ERROR );
 }
+/**
+ * @var int    $v_bug_id
+ * @var int    $v_project_id
+ * @var string $v_diskfile
+ * @var string $v_filename
+ * @var int    $v_filesize
+ * @var string $v_file_type
+ * @var string $v_content
+ * @var int    $v_date_added
+ * @var int    $v_user_id
+ * @var int    $v_bugnote_id
+ */
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 if( $f_type == 'bug' ) {
@@ -110,7 +122,9 @@ if( $f_type == 'bug' ) {
 # Check access rights
 switch( $f_type ) {
 	case 'bug':
-		if( !file_can_download_bug_attachments( $v_bug_id, (int)$v_user_id ) ) {
+		if( !file_can_download_bug_attachments( $v_bug_id, $v_user_id )
+		|| !file_can_download_bugnote_attachments( $v_bugnote_id, $v_user_id )
+		) {
 			access_denied();
 		}
 		break;
@@ -134,22 +148,7 @@ if( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
 
 http_security_headers();
 
-# Make sure that IE can download the attachments under https.
-header( 'Pragma: public' );
-
-# To fix an IE bug which causes problems when downloading
-# attached files via HTTPS, we disable the "Pragma: no-cache"
-# command when IE is used over HTTPS.
-global $g_allow_file_cache;
-if( http_is_protocol_https() && is_browser_internet_explorer() ) {
-	# Suppress "Pragma: no-cache" header.
-} else {
-	if( !isset( $g_allow_file_cache ) ) {
-		header( 'Pragma: no-cache' );
-	}
-}
 header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
-
 header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
 
 $t_upload_method = config_get( 'file_upload_method' );
@@ -188,9 +187,18 @@ if( $t_content_type_override ) {
 # https://www.thoughtco.com/mime-types-by-content-type-3469108
 $t_show_inline = $f_show_inline;
 $t_mime_force_inline = array(
-	'image/jpeg', 'image/gif', 'image/tiff', 'image/bmp', 'image/svg+xml', 'image/png',
-	'application/pdf' );
-$t_mime_force_attachment = array( 'application/x-shockwave-flash', 'text/html' );
+	'application/pdf',
+	'image/bmp',
+	'image/gif',
+	'image/jpeg',
+	'image/png',
+	'image/tiff',
+);
+$t_mime_force_attachment = array(
+	'application/x-shockwave-flash',
+	'image/svg+xml', # SVG could contain CSS or scripting, see #30384
+	'text/html',
+);
 
 # extract mime type from content type
 $t_mime_type = explode( ';', $t_content_type, 2 );

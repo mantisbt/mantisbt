@@ -211,14 +211,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_allow_reporter_close</term>
-			<listitem>
-				<para>If set, the bug reporter is allowed to close their own bugs,
-					regardless of their access level. The default is OFF.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_allow_reporter_reopen</term>
 			<listitem>
 				<para>If set, the bug reporter is allowed to reopen their own bugs
@@ -235,6 +227,21 @@
 					which allows the parent to be closed whether or not the children
 					have been resolved. The default is OFF.
 				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_readonly_status_threshold</term>
+			<listitem>
+				<para>Bug becomes readonly if its status is >= this status.  The bug becomes
+					read/write again if re-opened and its status becomes less than this
+					threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_closed_status_threshold</term>
+			<listitem>
+				<para>Bug is closed.  In some custom installations a bug may be considered as
+					closed when it is moved to a custom (COMPLETED or IMPLEMENTED) status.</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

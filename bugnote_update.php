@@ -50,6 +50,7 @@ require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
+require_api( 'helper_api.php' );
 
 form_security_validate( 'bugnote_update' );
 
@@ -60,6 +61,12 @@ $f_time_tracking = gpc_get_string( 'time_tracking', '0:00' );
 # Check if the current user is allowed to edit the bugnote
 $t_user_id = auth_get_current_user_id();
 $t_reporter_id = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
+$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
+$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+
+if( helper_get_current_project() != $t_project_id ) {
+	$g_project_override = $t_project_id;
+}
 
 if( $t_user_id == $t_reporter_id ) {
 	access_ensure_bugnote_level( config_get( 'bugnote_user_edit_threshold' ), $f_bugnote_id );
@@ -68,13 +75,12 @@ if( $t_user_id == $t_reporter_id ) {
 }
 
 # Check if the bug is readonly
-$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 if( bug_is_readonly( $t_bug_id ) ) {
 	error_parameters( $t_bug_id );
 	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
-$f_bugnote_text = trim( $f_bugnote_text ) . "\n\n";
+$f_bugnote_text = trim( $f_bugnote_text ) . "\n";
 
 bugnote_set_text( $f_bugnote_id, $f_bugnote_text );
 bugnote_set_time_tracking( $f_bugnote_id, $f_time_tracking );
@@ -84,4 +90,4 @@ event_signal( 'EVENT_BUGNOTE_EDIT', array( $t_bug_id, $f_bugnote_id ) );
 
 form_security_purge( 'bugnote_update' );
 
-print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
+print_header_redirect( string_get_bugnote_view_url( $t_bug_id, $f_bugnote_id ) );

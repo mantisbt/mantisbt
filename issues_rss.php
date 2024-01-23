@@ -102,7 +102,7 @@ $t_path = config_get_global( 'path' );
 $t_encoding = 'utf-8';
 $t_about = $t_path;
 $t_title = config_get( 'window_title' );
-$t_image_link = $t_path . 'images/mantis_logo_button.gif';
+$t_image_link = $t_path . config_get_global( 'logo_image' );
 
 # only rss 2.0
 $t_category = project_get_name( $f_project_id );
@@ -156,7 +156,7 @@ $t_base = date( 'Y-m-d\TH:i:sO' );
 # add missing : in the O part of the date.  PHP 5 supports a 'c' format which will output the format
 # exactly as we want it.
 # 2002-10-02T10:00:00-0500 -> 2002-10-02T10:00:00-05:00
-$t_base = utf8_substr( $t_base, 0, 22 ) . ':' . utf8_substr( $t_base, -2 );
+$t_base = mb_substr( $t_base, 0, 22 ) . ':' . mb_substr( $t_base, -2 );
 
 $t_rssfile->addSYdata( $t_period, $t_frequency, $t_base );
 
@@ -172,17 +172,18 @@ if( $f_username !== null ) {
 }
 $t_show_sticky = null;
 
+# Override current user
+current_user_set( $t_user_id );
+
 if( $f_filter_id == 0 ) {
 	$t_custom_filter = filter_get_default();
 	$t_custom_filter['sort'] = $c_sort_field;
 } else {
 	# null will be returned if the user doesn't have access right to access the filter.
-	$t_custom_filter = filter_db_get_filter( $f_filter_id, $t_user_id );
+	$t_custom_filter = filter_get( $f_filter_id, null );
 	if( null === $t_custom_filter ) {
 		access_denied();
 	}
-
-	$t_custom_filter = filter_deserialize( $t_custom_filter );
 }
 
 $t_issues = filter_get_bug_rows( $t_page_number, $t_issues_per_page, $t_page_count, $t_issues_count,

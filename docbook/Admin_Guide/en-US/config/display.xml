@@ -9,10 +9,17 @@
 		<varlistentry>
 			<term>$g_font_family</term>
 			<listitem>
-				<para>Name of the google font family for the browser to use. For all available fonts, see:
+				<para>Name of the google font family to use.</para>
+				<para>For a list of all available fonts, see
 					<ulink url="https://fonts.google.com/">
 						fonts.google.com
 					</ulink>.
+				</para>
+				<para>
+					The chosen font should be listed in
+					<emphasis>$g_font_family_choices_local</emphasis>}
+					to ensure correct display even if <emphasis>$g_cdn_enabled</emphasis>
+					option is OFF.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -27,8 +34,10 @@
 		<varlistentry>
 			<term>$g_font_family_choices_local</term>
 			<listitem>
-				<para>This is a small subset of <emphasis>$g_font_family_choices</emphasis> in which font
-					files are part of MantisBT installation.
+				<para>This is a small subset of
+					<emphasis>$g_font_family_choices</emphasis>,
+					that are bundled with MantisBT, to be used when
+					<emphasis>$g_cdn_enabled</emphasis> is OFF.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -47,11 +56,19 @@
 					'opensearch_XXX_short' language string, the resulting text
 					is 16 characters or less, to be compliant with the limit for
 					the ShortName element as defined in the
-					<ulink url="http://www.opensearch.org/Specifications/OpenSearch/1.1">
+					<ulink url="https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md">
 						OpenSearch specification
 					</ulink>.
 				</para>
 				<para>Defaults to the value of $g_window_title.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_admin_checks</term>
+			<listitem>
+				<para>Check for admin directory, database upgrades, etc.
+					It defaults to ON.
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
@@ -125,30 +142,154 @@
 		<varlistentry>
 			<term>$g_view_issues_page_columns</term>
 			<listitem>
-				<para>This configuration option is used to select the columns to be included in the View Issues page and in which order.  If one of the column is not accessible to the logged in user, or corresponds to a disabled feature, then it will be automatically removed from the list at runtime.  Hence, the same column list may show a different set of columns based on the logged in user, the currently selected project and enabled features (e.g. sponsorship_total is only shown if the sponsorship feature is enabled).</para>
-				<para>The supported columns are: selection, edit, id, project_id, reporter_id, handler_id, priority, reproducibility, projection, eta, resolution, fixed_in_version, view_state, os, os_build, build (for product build), platform, version, date_submitted, attachment_count, category, sponsorship_total, severity, status, last_updated, summary, bugnotes_count, description, steps_to_reproduce, additional_info.  As for custom fields they can be referenced by adding a 'custom_' to their name (e.g. xyz would be custom_xyz).</para>
-				<para>By default the following columns are selected: selection, edit, priority, id, sponsorship_total, bugnotes_count, attachment_count, category_id, severity, status, last_updated, summary.</para>
+				<para>This configuration option is used to set the columns to
+					be included in the <emphasis>View Issues page</emphasis>,
+					and the order in which they will be displayed.
+				</para>
+				<para>This can be overridden using
+					<emphasis>Manage > Manage Configuration > Manage Columns</emphasis>;
+					users can also configure their own columns using
+					<emphasis>My Account > Manage Columns</emphasis>.
+				</para>
+				<para>The list of all available columns (i.e. the names to choose from)
+					can be retrieved from the above-mentioned pages.
+					In addition to standard column names, that will also include:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>Custom Fields:
+							the column name will be the Custom Field's name prefixed
+							with <literal>custom_</literal>,
+							e.g. <emphasis>xyz</emphasis> should be included as
+							<literal>custom_xyz</literal>.
+						</para>
+					</listitem>
+					<listitem>
+						<para>Plugin-specific columns
+							(prefixed with the Plugin's basename)
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>If one of the columns specified here is not accessible to
+					the logged-in user or corresponds to a disabled feature, then
+					it will automatically be removed from the list at runtime.
+					The same configuration may therefore show a different set of
+					columns depending on the logged in user, the currently selected
+					project and enabled features.
+				</para>
+				<para>For example, the <literal>eta</literal> column will only
+					be shown if usage of the ETA field is enabled
+					(see $g_enable_eta in <xref linkend="admin.config.fields" />),
+					and the <literal>custom_xyz</literal> column will be removed
+					if the <emphasis>xyz</emphasis> Custom Field is not
+					available in the current Project.
+				</para>
+				<para>By default the following columns are selected:
+					selection,
+					edit,
+					priority,
+					id,
+					bugnotes_count,
+					attachment_count,
+					category_id,
+					severity,
+					status,
+					last_updated,
+					summary.
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_print_issues_page_columns</term>
 			<listitem>
-				<para>This configuration option is used to select the columns to be included in the Print Issues page and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
-				<para>By default the following columns are selected: selection, priority, id, sponsorship_total, bugnotes_count, attachment_count, category_id, severity, status, last_updated, summary</para>
+				<para>This configuration option is used to set the columns to
+					be included in the <emphasis>Print Issues page</emphasis>,
+					and the order in which they will be displayed.
+				</para>
+				<para>See $g_view_issues_page_columns for details.
+				</para>
+				<para>By default the following columns are selected:
+					selection,
+					priority,
+					id,
+					bugnotes_count,
+					attachment_count,
+					category_id,
+					severity,
+					status,
+					last_updated,
+					summary.
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_csv_columns</term>
 			<listitem>
-				<para>This configuration option is used to select the columns to be included in the CSV export and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
-				<para>By default the following columns are selected: id, project_id, reporter_id, handler_id, priority, severity, reproducibility, version, build, projection, category_id, date_submitted, eta, os, os_build, platform, view_state, last_updated, summary, status, resolution, fixed_in_version, duplicate_id.</para>
+				<para>This configuration option is used to set the columns to
+					be included in <emphasis>CSV exports</emphasis>,
+					and the order in which they will be displayed.
+				</para>
+				<para>See $g_view_issues_page_columns for details.
+				</para>
+				<para>By default the following columns are selected:
+					id,
+					project_id,
+					reporter_id,
+					handler_id,
+					priority,
+					severity,
+					reproducibility,
+					version,
+					build,
+					projection,
+					category_id,
+					date_submitted,
+					eta,
+					os,
+					os_build,
+					platform,
+					view_state,
+					last_updated,
+					summary,
+					status,
+					resolution,
+					fixed_in_version.
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_excel_columns</term>
 			<listitem>
-				<para>This configuration option is used to select the columns to be included in the CSV export and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
-				<para>By default the following columns are selected: id, project_id, reporter_id, handler_id, priority, severity, reproducibility, version, build, projection, category_id, date_submitted, eta, os, os_build, platform, view_state, last_updated, summary, status, resolution, fixed_in_version, duplicate_id.</para>
+				<para>This configuration option is used to set the columns to
+					be included in <emphasis>Excel exports</emphasis>,
+					and the order in which they will be displayed.
+				</para>
+				<para>See $g_view_issues_page_columns for details.
+				</para>
+				<para>By default the following columns are selected:
+					id,
+					project_id,
+					reporter_id,
+					handler_id,
+					priority,
+					severity,
+					reproducibility,
+					version,
+					build,
+					projection,
+					category_id,
+					date_submitted,
+					eta,
+					os,
+					os_build,
+					platform,
+					view_state,
+					last_updated,
+					summary,
+					status,
+					resolution,
+					fixed_in_version.
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
@@ -156,6 +297,24 @@
 			<listitem>
 				<para>Show project links when in All Projects mode. Default is
 					ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_filter_position</term>
+			<listitem>
+				<para>Position of the filter box, can be: POSITION_*
+				  (POSITION_TOP, POSITION_BOTTOM, or POSITION_NONE for none).
+					Default is FILTER_POSITION_TOP.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_action_button_position</term>
+			<listitem>
+				<para> Position of action buttons when viewing issues.
+					Can be: POSITION_TOP, POSITION_BOTTOM, or POSITION_BOTH.
+					Default is POSITION_BOTTOM.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -192,12 +351,21 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_sort_by_last_name</term>
+			<listitem>
+				<para>Sorting for names in dropdown lists.
+					If turned on, "Jane Doe" will be sorted with the "D"s.
+ 					It defaults to OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_show_avatar</term>
 			<listitem>
 				<para>Show the users' avatar</para>
 				<para>In addition to enabling this configuration option it is
 					necessary to install an avatar plugin like the
-					<ulink url="http://www.gravatar.com">Gravatar</ulink>
+					<ulink url="https://www.gravatar.com">Gravatar</ulink>
 					plugin which is bundled out of the box.
 				</para>
 			</listitem>
@@ -212,5 +380,43 @@
 				</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_show_changelog_dates</term>
+			<listitem>
+				<para>Show release dates on changelog.
+					It defaults to ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_roadmap_dates</term>
+			<listitem>
+				<para>Show release dates on roadmap.
+					It defaults to ON.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_status_colors</term>
+			<listitem>
+				<para>Status color codes, using the Tango color palette.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_display_bug_padding</term>
+			<listitem>
+				<para>The padding level when displaying bug ids.
+					 The bug id will be padded with 0's up to the size given.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_display_bugnote_padding</term>
+			<listitem>
+				<para>The padding level when displaying bugnote ids.
+					 The bugnote id will be padded with 0's up to the size given.</para>
+			</listitem>
+		</varlistentry>
+
 	</variablelist>
 </section>

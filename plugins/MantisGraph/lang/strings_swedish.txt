@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Swedish (svenska)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -46,11 +46,10 @@
  * @author WikiPhoenix
  */
 
-$s_plugin_graph_title = 'Mantis-grafer';
-$s_plugin_graph_description = 'Officiell insticksmodul för grafer.';
 $s_plugin_MantisGraph_title = 'Mantis-grafer';
+$s_plugin_MantisGraph_description = 'Officiell insticksmodul för grafer.';
 $s_plugin_MantisGraph_config = 'Konfiguration';
-$s_plugin_MantisGraph_synthesis_link = 'Syntes';
+$s_plugin_MantisGraph_tab_label = 'Diagram';
 $s_plugin_MantisGraph_status_link = 'Efter status';
 $s_plugin_MantisGraph_priority_link = 'Efter prioritet';
 $s_plugin_MantisGraph_severity_link = 'Efter storlek';
@@ -91,3 +90,4 @@ $s_plugin_MantisGraph_graph_page = 'Visa ärendehistorik som graf';
 $s_plugin_MantisGraph_graph_topdev = 'Populära utvecklare efter åtgärdade ärenden';
 $s_plugin_MantisGraph_graph_opendev = 'Utvecklare efter öppna ärenden';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Populära rapportörer efter åtgärdade ärenden';
+$s_plugin_MantisGraph_other_categories = 'andra kategorier (%d)';

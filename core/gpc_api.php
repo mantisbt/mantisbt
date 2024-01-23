@@ -53,7 +53,7 @@ $g_cookie_secure_flag_enabled = http_is_protocol_https();
  *
  * @param string $p_var_name Variable name.
  * @param mixed  $p_default  Default value.
- * @return null
+ * @return null|string
  */
 function gpc_get( $p_var_name, $p_default = null ) {
 	if( isset( $_POST[$p_var_name] ) ) {
@@ -216,7 +216,6 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			} else {
 				return '';
 			}
-			break;
 		case CUSTOM_FIELD_TYPE_DATE:
 			$t_day = gpc_get_int( $p_var_name . '_day', 0 );
 			$t_month = gpc_get_int( $p_var_name . '_month', 0 );
@@ -230,7 +229,6 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			} else {
 				return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
 			}
-			break;
 		default:
 			return gpc_get_string( $p_var_name, $p_default );
 	}
@@ -349,24 +347,29 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
 }
 
 /**
- * Set a cookie variable
+ * Set a cookie variable.
+ *
  * If $p_expire is false instead of a number, the cookie will expire when
  * the browser is closed; if it is true, the default time from the config
  * file will be used.
- * If $p_path or $p_domain are omitted, defaults are used.
+ * If $p_path, $p_domain or $p_samesite are omitted, defaults are used.
  * Set $p_httponly to false if client-side Javascript needs to read/write
  * the cookie. Otherwise it is safe to leave this value unspecified, as
  * the default value is true.
  * @todo this function is to be modified by Victor to add CRC... for now it just passes the parameters through to setcookie()
+ *
  * @param string  $p_name     Cookie name to set.
  * @param string  $p_value    Cookie value to set.
  * @param boolean|integer $p_expire true: current browser session, false/0: cookie_time_length, otherwise: expiry time.
  * @param string  $p_path     Cookie Path - default cookie_path configuration variable.
  * @param string  $p_domain   Cookie Domain - default is cookie_domain configuration variable.
  * @param boolean $p_httponly Default true.
+ * @param string  $p_samesite SameSite attribute: Strict, Lax or None -
+ *                            default cookie_samesite configuration variable.
+ *
  * @return boolean - true on success, false on failure
  */
-function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $p_domain = null, $p_httponly = true ) {
+function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $p_domain = null, $p_httponly = true, $p_samesite = null ) {
 	global $g_cookie_secure_flag_enabled;
 
 	if( false === $p_expire ) {
@@ -384,22 +387,38 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 		$p_domain = config_get_global( 'cookie_domain' );
 	}
 
-	return setcookie( $p_name, $p_value, $p_expire, $p_path, $p_domain, $g_cookie_secure_flag_enabled, true );
+	if( null === $p_samesite ) {
+		$p_samesite = config_get_global( 'cookie_samesite' );
+	}
+
+	$t_options = array(
+		'expires' => $p_expire,
+		'path' => $p_path,
+		'domain' => $p_domain,
+		'samesite' => $p_samesite,
+		'secure' => $g_cookie_secure_flag_enabled,
+		'httponly' => $p_httponly,
+	);
+	return setcookie( $p_name, $p_value, $t_options );
 }
 
 /**
  * Clear a cookie variable
- * @param string $p_name   Cookie clear to set.
- * @param string $p_path   Cookie path.
- * @param string $p_domain Cookie domain.
+ * @param string $p_name     Cookie clear to set.
+ * @param string $p_path     Cookie path.
+ * @param string $p_domain   Cookie domain.
+ * @param string $p_samesite SameSite attribute.
  * @return boolean
  */
-function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
+function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null, $p_samesite = null ) {
 	if( null === $p_path ) {
 		$p_path = config_get_global( 'cookie_path' );
 	}
 	if( null === $p_domain ) {
 		$p_domain = config_get_global( 'cookie_domain' );
+	}
+	if( null === $p_samesite ) {
+		$p_samesite = config_get_global( 'cookie_samesite' );
 	}
 
 	if( isset( $_COOKIE[$p_name] ) ) {
@@ -408,7 +427,17 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
 
 	# don't try to send cookie if headers are send (guideweb)
 	if( !headers_sent() ) {
-		return setcookie( $p_name, '', -1, $p_path, $p_domain );
+		# Note: This setcookie() call triggers a console warning in Firefox:
+		# Cookie “<PREFIX>_collapse_settings” has been rejected because it is already expired.
+		# apparently this is due to bug https://bugzilla.mozilla.org/show_bug.cgi?id=1676651
+
+		$t_options = array(
+			'expires' => 1,
+			'path' => $p_path,
+			'domain' => $p_domain,
+			'samesite' => $p_samesite,
+		);
+		return setcookie( $p_name, '', $t_options );
 	} else {
 		return false;
 	}
@@ -464,9 +493,16 @@ function gpc_make_array( $p_var_name ) {
  * @return boolean
  */
 function gpc_string_to_bool( $p_string ) {
-	if( 0 == strcasecmp( 'off', $p_string ) || 0 == strcasecmp( 'no', $p_string ) || 0 == strcasecmp( 'false', $p_string ) || 0 == strcasecmp( '', $p_string ) || 0 == strcasecmp( '0', $p_string ) ) {
-		return false;
-	} else {
-		return true;
+	$t_value = trim( strtolower( $p_string ) );
+	switch ( $t_value ) {
+		case 'off':
+		case 'no':
+		case 'n':
+		case 'false':
+		case '0':
+		case '':
+			return false;
+		default:
+			return true;
 	}
 }

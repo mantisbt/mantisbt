@@ -67,20 +67,15 @@ $t_result = db_query( $t_query, array( $f_file_id ) );
 $t_title = db_result( $t_result );
 
 # Confirm with the user
-helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ) .
-	'<br />' . lang_get( 'filename_label' ) . lang_get( 'word_separator' ) . string_display( $t_title ),
-	lang_get( 'file_delete_button' ) );
+helper_ensure_confirmed(
+	sprintf( lang_get( 'confirm_file_delete_msg' ),
+		string_display_line( $t_title )
+	),
+	lang_get( 'file_delete_button' )
+);
 
 file_delete( $f_file_id, 'project' );
 
 form_security_purge( 'proj_doc_delete' );
 
-$t_redirect_url = 'proj_doc_page.php';
-
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin( 'proj_doc_page.php' );
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( 'proj_doc_page.php' );

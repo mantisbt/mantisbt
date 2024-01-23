@@ -106,7 +106,7 @@
 			states are accessible from any other, by anyone.
 		</para>
 
-		<para>The "Manage &gt; Manage Configuration &gt; Workflow
+		<para>The "Manage &gt; Configuration &gt; Workflow
 			Transitions" page allows users with ADMINISTRATOR access level to do the
 			following tasks:
 
@@ -137,7 +137,7 @@
 	    <para>Note that the scope of the applied change is
 	    dependent on the selected project.  If "All Projects" is selected,
 	    then the configuration is to be used as the default for all
-			projects, unless overidden by a specific project.  To configure for
+			projects, unless overridden by a specific project.  To configure for
 			a specific project, switch to it via the combobox at the
 			top right corner of the screen.
 		</para>
@@ -176,7 +176,7 @@ $g_status_enum_workflow[CLOSED]         ='20:feedback,50:assigned';
 	<section id="admin.lifecycle.workflow.thresholds">
 		<title>Workflow Thresholds</title>
 
-		<para>The "Manage &gt; Manage Configuration &gt; Workflow
+		<para>The "Manage &gt; Configuration &gt; Workflow
 			Thresholds" page allows users with ADMINISTRATOR access level to
 			define the thresholds required to do certain actions.  Following is
 			a list of such actions and what they mean:

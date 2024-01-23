@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Basque (euskara)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -41,7 +41,4 @@
  * @author An13sa
  */
 
-$s_plugin_MantisGraph_graph_bug_page_link = 'Grafikoa';
 $s_plugin_MantisGraph_legend_still_open = 'Oraindik Irekita';
-$s_plugin_MantisGraph_legend_opened = 'Irekita';
-$s_plugin_MantisGraph_legend_closed = 'Itxita';

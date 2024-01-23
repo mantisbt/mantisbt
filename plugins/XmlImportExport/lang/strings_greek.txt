@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,11 +33,12 @@
 /** Greek (Ελληνικά)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author NikosLikomitros
  * @author Nikosgranturismogt
  * @author Omnipaedista
  */
@@ -45,6 +46,8 @@
 $s_plugin_XmlImportExport_title = 'Εισαγωγή/εξαγωγή ζητημάτων';
 $s_plugin_XmlImportExport_import = 'εισαγωγή ζητημάτων';
 $s_plugin_XmlImportExport_export = 'Εξαγωγή XML';
+$s_plugin_XmlImportExport_import_threshold = 'εισαγωγή ζητημάτων';
+$s_plugin_XmlImportExport_export_threshold = 'Εξαγωγή ζητημάτων';
 $s_plugin_XmlImportExport_action_update = 'Ενημέρωση';
 $s_plugin_XmlImportExport_import_options = 'Επιλογές εισαγωγής';
 $s_plugin_XmlImportExport_renumber = 'Επαναρίθμηση';

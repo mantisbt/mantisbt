@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Korean (한국어)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -47,21 +47,24 @@
  * @author 아라
  */
 
-$s_plugin_graph_title = '맨티스 그래프';
-$s_plugin_graph_description = '공식 그래프 플러그인.';
 $s_plugin_MantisGraph_title = '맨티스 그래프';
+$s_plugin_MantisGraph_description = '공식 그래프 플러그인.';
 $s_plugin_MantisGraph_config = '설정';
-$s_plugin_MantisGraph_synthesis_link = '합성';
+$s_plugin_MantisGraph_tab_label = '그래프';
 $s_plugin_MantisGraph_status_link = '상태별';
 $s_plugin_MantisGraph_priority_link = '우선 순위별';
 $s_plugin_MantisGraph_severity_link = '심각도별';
 $s_plugin_MantisGraph_category_link = '분류별';
-$s_plugin_MantisGraph_resolution_link = '해결 상태별';
-$s_plugin_MantisGraph_graph_imp_status_title = '상태별 종합 그래프';
-$s_plugin_MantisGraph_graph_imp_priority_title = '우선 순위별 종합 그래프';
-$s_plugin_MantisGraph_graph_imp_severity_title = '심각도별 종합 그래프';
-$s_plugin_MantisGraph_graph_imp_category_title = '카테고리별 종합 그래프';
-$s_plugin_MantisGraph_graph_imp_resolution_title = '해결별 종합 그래프';
+$s_plugin_MantisGraph_resolution_link = '해결상태별';
+$s_plugin_MantisGraph_issue_trends_link = '이슈 추이';
+$s_plugin_MantisGraph_graph_imp_status_title = '상태별 그래프';
+$s_plugin_MantisGraph_graph_imp_priority_title = '우선 순위별 그래프';
+$s_plugin_MantisGraph_graph_imp_severity_title = '심각도별 그래프';
+$s_plugin_MantisGraph_graph_imp_category_title = '카테고리별 그래프';
+$s_plugin_MantisGraph_graph_imp_resolution_title = '해결상태별 그래프';
+$s_plugin_MantisGraph_graph_developer_title = '개발자별 그래프';
+$s_plugin_MantisGraph_graph_reporter_title = '보고자별 그래프';
+$s_plugin_MantisGraph_graph_issues_trend_title = '신규/해결/잔여 이슈';
 $s_plugin_MantisGraph_by_status_pct = '상태별 백분율';
 $s_plugin_MantisGraph_by_priority_pct = '우선 순위별 백분율';
 $s_plugin_MantisGraph_by_severity_pct = '심각도별 백분율';
@@ -75,7 +78,7 @@ $s_plugin_MantisGraph_legend_resolved = '해결됨';
 $s_plugin_MantisGraph_legend_reported = '보고됨';
 $s_plugin_MantisGraph_period_none = '없음';
 $s_plugin_MantisGraph_period_this_week = '이번 주';
-$s_plugin_MantisGraph_period_last_week = '지난주';
+$s_plugin_MantisGraph_period_last_week = '지난 주';
 $s_plugin_MantisGraph_period_two_weeks = '지난 2주';
 $s_plugin_MantisGraph_period_this_month = '이번 달';
 $s_plugin_MantisGraph_period_last_month = '지난 달';
@@ -85,3 +88,7 @@ $s_plugin_MantisGraph_period_year_to_date = '올해 현재까지';
 $s_plugin_MantisGraph_period_select = '임의의 날짜';
 $s_plugin_MantisGraph_period_last_year = '지난 해';
 $s_plugin_MantisGraph_graph_page = '이슈 기록을 그래프로 그리기';
+$s_plugin_MantisGraph_graph_topdev = '이슈를 제일 많이 수정한 사람';
+$s_plugin_MantisGraph_graph_opendev = '이슈를 가장 많이 올린 사람';
+$s_plugin_MantisGraph_graph_topreporter_fixed = '수정된 이슈가 많은 보고자';
+$s_plugin_MantisGraph_other_categories = '다른 분류 (%d)';

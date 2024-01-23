@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** German (Deutsch)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -50,7 +50,7 @@ $s_plugin_format_process_text = 'Textverarbeitung';
 $s_plugin_format_process_text_warning_notice = 'Deinstallieren Sie nur, wenn Sie genau wissen was Sie tun. In deinstalliertem Zustand sind Angriffe mittels Cross-Site Scripting (XSS) möglich.';
 $s_plugin_format_process_urls = 'URL-Verarbeitung';
 $s_plugin_format_process_buglinks = 'Interne MantisBT-Links (Einträge und Eintragsnotizen)';
-$s_plugin_format_process_buglinks_info = 'Deine Konfiguration definiert das <em>Issue</em>-Tag als „<literal>%s</literal>“ und das <em>Issue Note</em>-Tag als „<literal>%s</literal>“';
+$s_plugin_format_process_buglinks_info = 'Deine Konfiguration definiert das <em>Issue</em>-Tag als „%s“ und das <em>Issue Note</em>-Tag als „%s“';
 $s_plugin_format_process_markdown = 'Markdown-Verarbeitung';
 $s_plugin_format_process_markdown_info = 'Gestaltung mit Markdown-Unterstützung und einer Text-Formatierungs-Syntax, die so gestaltet wurde, dass sie in HTML konvertiert werden kann.';
 $s_plugin_format_enabled = 'An';

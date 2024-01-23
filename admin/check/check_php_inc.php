@@ -38,20 +38,16 @@ require_api( 'utility_api.php' );
 
 check_print_section_header_row( 'PHP' );
 
-check_print_test_row(
-	'Version of <a href="http://en.wikipedia.org/wiki/PHP">PHP</a> installed is at least ' . PHP_MIN_VERSION,
-	version_compare( phpversion(), PHP_MIN_VERSION, '>=' ),
-	'PHP version ' . phpversion() . ' is currently installed on this server.'
-);
-
+# $t_extensions_required lists the extensions required to run Mantis in general
 $t_extensions_required = array(
+	'ctype', # required by PHPMailer
 	'date',
 	'hash',
 	'pcre',
 	'Reflection',
 	'session',
 	'mbstring',
-	'fileinfo'
+	'json'
 );
 
 foreach( $t_extensions_required as $t_extension ) {
@@ -59,6 +55,43 @@ foreach( $t_extensions_required as $t_extension ) {
 		$t_extension . ' PHP extension is available',
 		extension_loaded( $t_extension ),
 		array( false => 'MantisBT requires the ' . $t_extension . ' extension to either be compiled into PHP or loaded as an extension.' )
+	);
+}
+
+$t_fileinfo_loaded = extension_loaded( 'fileinfo' );
+
+if( config_get_global( 'allow_file_upload' ) ) {
+	check_print_test_row(
+		'Fileinfo PHP extension is available to support file uploads',
+		$t_fileinfo_loaded,
+		array( false => 'Ensure that the fileinfo extension is installed and enabled' )
+	);
+} else {
+	# most of the plugins need this extensions as they use functions plugin_file /  plugin_file_include
+	check_print_test_warn_row(
+		'Fileinfo PHP extension is available to support plugins',
+		$t_fileinfo_loaded,
+		array( false => 'Ensure that the fileinfo extension is installed and enabled' )
+	);
+}
+
+if ( $t_fileinfo_loaded ) {
+	$t_fileinfo_magic_db_file = config_get_global( 'fileinfo_magic_db_file' );
+	if( $t_fileinfo_magic_db_file ) {
+		check_print_info_row(
+			'Name of magic.db file set with the fileinfo_magic_db_file configuration value',
+			config_get_global( 'fileinfo_magic_db_file' ) );
+		check_print_test_row(
+			'fileinfo_magic_db_file configuration value points to an existing magic.db file',
+			file_exists( $t_fileinfo_magic_db_file ) );
+		$t_finfo = new finfo( FILEINFO_MIME, $t_fileinfo_magic_db_file );
+	} else {
+		$t_finfo = new finfo( FILEINFO_MIME );
+	}
+	check_print_test_row(
+		'Fileinfo extension can find and load a valid magic.db file',
+		$t_finfo !== false,
+		array( false => 'Ensure that the fileinfo_magic_db_file configuration value points to a valid magic.db file.' )
 	);
 }
 
@@ -76,18 +109,6 @@ check_print_test_row(
 		stripos( $t_variables_order, 'C' ) !== false &&
 		stripos( $t_variables_order, 'S' ) !== false,
 	array( false => 'The value of this directive is currently: ' . $t_variables_order )
-);
-
-check_print_test_row(
-	'magic_quotes_gpc php.ini directive is disabled',
-	!( function_exists( 'get_magic_quotes_gpc' ) && @get_magic_quotes_gpc() ),
-	array( false => 'PHP\'s magic quotes feature is <a href="http://www.php.net/manual/en/security.magicquotes.whynot.php">deprecated in PHP 5.3.0</a> and should not be used.' )
-);
-
-check_print_test_row(
-	'magic_quotes_runtime php.ini directive is disabled',
-	!( function_exists( 'get_magic_quotes_runtime' ) && @get_magic_quotes_runtime() ),
-	array( false => 'PHP\'s magic quotes feature is <a href="http://www.php.net/manual/en/security.magicquotes.whynot.php">deprecated in PHP 5.3.0</a> and should not be used.' )
 );
 
 check_print_test_warn_row(
@@ -136,9 +157,10 @@ check_print_info_row(
 	check_format_number( ini_get_number( 'post_max_size' ) )
 );
 
+$t_memory_limit = ini_get_number( 'memory_limit' );
 check_print_test_row(
 	'memory_limit php.ini directive is at least equal to the post_max_size directive',
-	ini_get_number( 'memory_limit' ) >= ini_get_number( 'post_max_size' ),
+	$t_memory_limit >= ini_get_number( 'post_max_size' ) || $t_memory_limit == -1,
 	array( false => 'The current value of the memory_limit directive is ' . htmlentities( ini_get_number( 'memory_limit' ) ) . ' bytes. This value needs to be at least equal to the post_max_size directive value of ' . htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes.' )
 );
 
@@ -153,9 +175,9 @@ check_print_info_row(
 );
 
 check_print_test_row(
-	'post_max_size php.ini directive is at least equal to the upload_max_size directive',
+	'post_max_size php.ini directive is at least equal to the upload_max_filesize directive',
 	ini_get_number( 'post_max_size' ) >= ini_get_number( 'upload_max_filesize' ),
-	array( false => 'The current value of the post_max_size directive is ' . htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes. This value needs to be at least equal to the upload_max_size directive value of ' . htmlentities( ini_get_number( 'upload_max_filesize' ) ) . ' bytes.' )
+	array( false => 'The current value of the post_max_size directive is ' . htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes. This value needs to be at least equal to the upload_max_filesize directive value of ' . htmlentities( ini_get_number( 'upload_max_filesize' ) ) . ' bytes.' )
 );
 
 $t_disabled_functions = explode( ',', ini_get( 'disable_functions' ) );

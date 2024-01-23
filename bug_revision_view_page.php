@@ -62,51 +62,82 @@ $f_rev_id = gpc_get_int( 'rev_id', 0 );
 $t_title = '';
 
 if( $f_bug_id ) {
-	$t_bug_id = $f_bug_id;
-	$t_bug_data = bug_get( $t_bug_id, true );
-	$t_bug_revisions = array_reverse( bug_revision_list( $t_bug_id ), true );
+	$t_bug_id = (int)$f_bug_id;
+	$t_bugnote_id = false;
+	$t_bug_revisions = bug_revision_list( $t_bug_id );
 
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
-} else if( $f_bugnote_id ) {
-	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
-	$t_bug_data = bug_get( $t_bug_id, true );
+} elseif( $f_bugnote_id ) {
+	$t_bugnote_id = (int)$f_bugnote_id;
+	$t_bug_id = bugnote_get_field( $t_bugnote_id, 'bug_id' );
 
 	$t_bug_revisions = bug_revision_list( $t_bug_id, REV_ANY, $f_bugnote_id );
 
 	$t_title = lang_get( 'bugnote' ) . ' ' . $f_bugnote_id;
 
-} else if( $f_rev_id ) {
+} elseif( $f_rev_id ) {
 	$t_bug_revisions = bug_revision_like( $f_rev_id );
 
 	if( count( $t_bug_revisions ) < 1 ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	$t_bug_id = $t_bug_revisions[$f_rev_id]['bug_id'];
-	$t_bug_data = bug_get( $t_bug_id, true );
+	$t_rev = $t_bug_revisions[$f_rev_id];
+	$t_bug_id = $t_rev['bug_id'];
+	$t_bugnote_id = $t_rev['bugnote_id'];
 
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
 } else {
 	trigger_error( ERROR_GENERIC, ERROR );
+	exit;
 }
+
+# Make sure user is allowed to view revisions
+# If processing a bugnote, we don't need to check bug-level access as it is
+# already done at the lower level, and in fact we must not do it as a user may
+# be allowed to view their own bugnote's history, but not the parent issue's.
+if( $t_bugnote_id ) {
+	if( !access_can_view_bugnote_revisions( $t_bugnote_id ) ) {
+		access_denied();
+	}
+} elseif( $t_bug_id && !access_can_view_bug_revisions( $t_bug_id ) ) {
+	access_denied();
+}
+
 
 /**
  * Show Bug revision
  *
  * @param array $p_revision Bug Revision Data.
- * @return null
  */
 function show_revision( array $p_revision ) {
+	static $s_view_bug_threshold = null;
 	static $s_can_drop = null;
-	static $s_user_access = null;
+	static $s_date_format = null;
+
+	/**
+	 * @var int    $v_id
+	 * @var int    $v_bug_id
+	 * @var int    $v_bugnote_id
+	 * @var int    $v_type
+	 * @var int    $v_user_id
+	 * @var int    $v_timestamp
+	 * @var string $v_value
+	 */
+	extract( $p_revision, EXTR_PREFIX_ALL, 'v' );
 
 	if( is_null( $s_can_drop ) ) {
-		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $p_revision['bug_id'] );
+		$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
+
+		$t_bug_revision_drop_threshold = config_get( 'bug_revision_drop_threshold', null, null, $t_project_id );
+		$s_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $t_project_id );
+		$s_can_drop = access_has_bug_level( $t_bug_revision_drop_threshold, $v_bug_id );
+		$s_date_format = config_get( 'normal_date_format', null, null, $t_project_id );
 	}
 
-	switch( $p_revision['type'] ) {
+	switch( $v_type ) {
 		case REV_DESCRIPTION:
 			$t_label = lang_get( 'description' );
 			break;
@@ -117,12 +148,8 @@ function show_revision( array $p_revision ) {
 			$t_label = lang_get( 'additional_information' );
 			break;
 		case REV_BUGNOTE:
-			if( is_null( $s_user_access ) ) {
-				$s_user_access = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_revision['bug_id'] );
-			}
-
-			if( !$s_user_access ) {
-				return null;
+			if( !access_has_bugnote_level( $s_view_bug_threshold, $v_bugnote_id ) ) {
+				return;
 			}
 
 			$t_label = lang_get( 'bugnote' );
@@ -131,75 +158,93 @@ function show_revision( array $p_revision ) {
 			$t_label = '';
 	}
 
-	$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $p_revision['timestamp'] ) ), prepare_user_name( $p_revision['user_id'] ) );
+	$t_by_string = sprintf( lang_get( 'revision_by' ),
+		string_display_line( date( $s_date_format, $v_timestamp ) ),
+		prepare_user_name( $v_user_id )
+	);
 
 ?>
-<tr class="spacer"><td><a id="revision-<?php echo $p_revision['id'] ?>"></a></td></tr>
+	<tr class="spacer">
+		<td><a id="revision-<?php echo $v_id ?>"></a></td>
+	</tr>
 
-<tr>
-<th class="category"><?php echo lang_get( 'revision' ) ?></th>
-<td colspan="2"><?php echo $t_by_string ?></td>
-<td class="center" width="5%">
-<?php if( $s_can_drop ) {
-	$t_drop_token = form_security_param( 'bug_revision_drop' );
-	print_small_button( 'bug_revision_drop.php?id=' . $p_revision['id'] . $t_drop_token, lang_get( 'revision_drop' ) );
-} ?>
-</tr>
+	<tr>
+		<th class="category"><?php echo lang_get( 'revision' ) ?></th>
+		<td>
+<?php
+	echo $t_by_string;
 
-<tr>
-<th class="category"><?php echo $t_label ?></th>
-<td colspan="3"><?php echo string_display_links( $p_revision['value'] ) ?></td>
-</tr>
+	if( $s_can_drop ) {
+		$t_drop_token = form_security_param( 'bug_revision_drop' );
+		print_link_button(
+			'bug_revision_drop.php?id=' . $v_id . $t_drop_token,
+			lang_get( 'revision_drop' ),
+			'btn-sm pull-right'
+		);
+	}
+?>
+		</td>
+	</tr>
 
-	<?php
-}
+	<tr>
+		<th class="category"><?php echo $t_label ?></th>
+		<td>
+			<?php echo string_display_links( $v_value ) ?>
+		</td>
+	</tr>
+<?php
+} # End show_revision()
 
 layout_page_header( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
-
 layout_page_begin();
 
 ?>
 
 <div class="col-md-12 col-xs-12">
-<div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-<h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-history"></i>
-	<?php echo lang_get( 'view_revisions' ), ': ', $t_title ?>
-</h4>
-</div>
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-history', 'ace-icon' ); ?>
+				<?php echo lang_get( 'view_revisions' ), ': ', $t_title ?>
+			</h4>
+		</div>
 
-<div class="widget-body">
-<div class="widget-toolbox">
-	<div class="btn-toolbar">
-		<div class="btn-group pull-right">
+		<div class="widget-body">
+			<div class="widget-toolbox">
+				<div class="btn-toolbar">
+					<div class="btn-group pull-right">
 <?php
 if( !$f_bug_id && !$f_bugnote_id ) {
 	print_small_button( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) );
 }
 print_small_button( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
 ?>
+					</div>
+				</div>
+			</div>
+
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+					<table class="table table-bordered table-condensed table-striped">
+						<tr>
+							<th class="category width-20">
+								<?php echo lang_get( 'summary' ) ?>
+							</th>
+							<td>
+								<?php echo bug_format_summary( $t_bug_id, SUMMARY_FIELD ) ?>
+							</td>
+						</tr>
+<?php
+foreach( $t_bug_revisions as $t_rev ) {
+	show_revision( $t_rev );
+}
+?>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
-</div>
-<div class="widget-main no-padding">
-<div class="table-responsive">
-<table class="table table-bordered table-condensed table-striped">
-<tr>
-<th class="category" width="15%"><?php echo lang_get( 'summary' ) ?></th>
-<td colspan="3"><?php echo bug_format_summary( $t_bug_id, SUMMARY_FIELD ) ?></td>
-</tr>
 
-<?php foreach( $t_bug_revisions as $t_rev ) {
-	show_revision( $t_rev );
-} ?>
-
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
 <?php
 layout_page_end();
-

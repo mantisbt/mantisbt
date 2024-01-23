@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,19 +33,24 @@
 /** Finnish (suomi)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Centerlink
  * @author Nike
+ * @author Pyscowicz
+ * @author Thurenius
  * @author Tkh
  */
 
+$s_plugin_XmlImportExport_title = 'Tuo/vie tapahtumia';
 $s_plugin_XmlImportExport_import = 'Tuo tapahtumia';
 $s_plugin_XmlImportExport_export = 'XML-vienti';
 $s_plugin_XmlImportExport_import_threshold = 'Tuo ongelmia';
+$s_plugin_XmlImportExport_export_threshold = 'Tuo tapahtumia';
+$s_plugin_XmlImportExport_action_update = 'Päivitä';
 $s_plugin_XmlImportExport_import_options = 'Tuontivalitsimet';
 $s_plugin_XmlImportExport_cross_references = 'Ristiviitteet';
 $s_plugin_XmlImportExport_default_strategy = 'Oletusmuunnosstrategia:';
@@ -54,3 +59,4 @@ $s_plugin_XmlImportExport_renumber_desc = 'Yritä muuttaa viitteet uudeksi numer
 $s_plugin_XmlImportExport_link = 'Linkki';
 $s_plugin_XmlImportExport_disable = 'Pois käytöstä';
 $s_plugin_XmlImportExport_disable_desc = 'Poista linkki';
+$s_plugin_XmlImportExport_keep_same_category = 'Yritä säilyttää sama luokka';

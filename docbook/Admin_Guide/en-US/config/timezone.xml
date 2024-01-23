@@ -13,12 +13,12 @@
 					This configuration is normally initialized when
 					installing Mantis.
 					It should be set to one of the values specified in the
-					<ulink url="http://php.net/timezones">
+					<ulink url="https://www.php.net/timezones">
 						List of Supported Timezones</ulink>.
 				</para>
 				<para>If this config is left blank, the timezone
 					will be initialized by calling function
-					<ulink url="http://php.net/date-default-timezone-get">
+					<ulink url="https://www.php.net/date-default-timezone-get">
 						date_default_timezone_get()</ulink>,
 					which will fall back to <emphasis>UTC</emphasis>
 					if unable to determine the timezone.
@@ -28,9 +28,6 @@
 					Users can override the default timezone under user
 					their preferences.
 				</para>
-				<note><para>Note that this function's behavior was modified in
-					PHP 5.4.0.
-				</para></note>
 			</listitem>
 		</varlistentry>
 	</variablelist>

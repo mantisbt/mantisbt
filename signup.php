@@ -58,7 +58,7 @@ $f_captcha		= gpc_get_string( 'captcha', '' );
 
 $f_username = trim( $f_username );
 $f_email = trim( $f_email );
-$f_captcha = utf8_strtolower( trim( $f_captcha ) );
+$f_captcha = mb_strtolower( trim( $f_captcha ) );
 
 # force logout on the current user if already authenticated
 if( auth_is_user_authenticated() ) {
@@ -102,7 +102,7 @@ layout_login_page_begin();
 					<div class="widget-body">
 						<div class="widget-main">
 							<h4 class="header lighter bigger">
-								<i class="ace-icon fa fa-pencil"></i>
+								<?php print_icon( 'fa-pencil', 'ace-icon' ); ?>
 								<?php echo lang_get( 'signup_title' ) ?>
 							</h4>
 							<div class="space-10"></div>

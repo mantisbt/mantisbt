@@ -4,6 +4,7 @@
 ]>
 <section id="admin.config.cookies">
 	<title>Cookies</title>
+	<para></para>
 
 	<variablelist>
 		<varlistentry>
@@ -19,17 +20,49 @@
 				</para>
 			</listitem>
 		</varlistentry>
+
 		<varlistentry>
 			<term>$g_cookie_domain</term>
 			<listitem>
 				<para>The domain that the MantisBT cookies are available to.</para>
 			</listitem>
 		</varlistentry>
+
+		<varlistentry>
+			<term>$g_cookie_samesite</term>
+			<listitem>
+				<para>Specifies the
+					<ulink url="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite">SameSite attribute</ulink>
+					to use for the MantisBT cookies.
+				</para>
+				<para>Valid values are
+					<literal>Strict</literal>,
+					<literal>Lax</literal> (default) or
+					<literal>None</literal>.
+				</para>
+				<para>If this setting is changed, users with a non-expired
+					Session cookie (see <emphasis>$g_string_cookie</emphasis> below)
+					may need to log out and log back in, to switch the cookie's
+					secure attribute to the new value.
+				</para>
+				<note>
+					<para>
+						While <literal>Strict</literal> provides stronger
+						protection against CSRF attacks, it actually prevents
+						the user's session from being recognized when clicking
+						a link from a notification e-mail, causing MantisBT to
+						start an anonymous session even if the user is already
+						logged in.
+					</para>
+				</note>
+			</listitem>
+		</varlistentry>
+
 		<varlistentry>
 			<term>$g_cookie_prefix</term>
 			<listitem>
 				<para>Prefix for all MantisBT cookies</para>
-				<para>This should be an identifier which does not include
+				<para>This must be an identifier which does not include
 					spaces or periods, and should be unique per MantisBT
 					installation, especially if $g_cookie_path is not
 					restricting the cookies' scope to the actual
@@ -42,34 +75,88 @@
 
 				<itemizedlist>
 					<listitem>
-						<para>$g_string_cookie</para>
+						<para>$g_bug_list_cookie</para>
 					</listitem>
 					<listitem>
-						<para>$g_project_cookie</para>
-					</listitem>
-					<listitem>
-						<para>$g_view_all_cookie</para>
-					</listitem>
-					<listitem>
-						<para>$g_manage_users_cookie</para>
-						<para>Stores the filter criteria for the
-							Manage Users page
-						</para>
-					</listitem>
-					<listitem>
-						<para>$g_manage_config_cookie</para>
-						<para>Stores the filter criteria for the
-							Manage Config Report page
+						<para>$g_collapse_settings_cookie</para>
+						<para>Stores the open/closed state of the collapsible sections.
 						</para>
 					</listitem>
 					<listitem>
 						<para>$g_logout_cookie</para>
 					</listitem>
 					<listitem>
-						<para>$g_bug_list_cookie</para>
+						<para>$g_manage_config_cookie</para>
+						<para>Stores the filter criteria for the
+							Manage Config Report page.
+						</para>
+					</listitem>
+					<listitem>
+						<para>$g_manage_users_cookie</para>
+						<para>Stores the filter criteria for the
+							Manage Users page.
+						</para>
+					</listitem>
+					<listitem>
+						<para>$g_project_cookie</para>
+					</listitem>
+					<listitem>
+						<para>$g_string_cookie</para>
+					</listitem>
+					<listitem>
+						<para>$g_view_all_cookie</para>
 					</listitem>
 				</itemizedlist>
 
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_string_cookie</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_project_cookie</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_all_cookie</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_collapse_settings_cookie</term>
+			<listitem>
+				<para>Collapse settings cookie.
+					Stores the open/closed state of the collapsible sections.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_users_cookie</term>
+			<listitem>
+				<para>Stores the filter criteria for the Manage User page</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_config_cookie</term>
+			<listitem>
+				<para>Stores the filter criteria for the Manage Config Report page</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_logout_cookie</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_list_cookie</term>
+			<listitem>
+				<para>TODO</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

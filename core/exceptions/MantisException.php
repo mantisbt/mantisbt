@@ -16,6 +16,8 @@
 
 namespace Mantis\Exceptions;
 
+use Throwable;
+
 /**
  * A base exception for all Mantis exceptions.
  */
