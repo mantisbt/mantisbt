@@ -559,7 +559,8 @@ if( $t_show_attachments ) {
 <?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id ) ) ?>
 	<tr>
 		<th class="category">
-			<span class="required">*</span><label for="summary"><?php print_documentation_link( 'summary' ) ?></label>
+			<span class="required">*</span>
+			<label for="summary"><?php print_documentation_link( 'summary' ) ?></label>
 		</th>
 		<td>
 			<input <?php echo helper_get_tab_index() ?> type="text" id="summary" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" required />
@@ -567,7 +568,8 @@ if( $t_show_attachments ) {
 	</tr>
 	<tr>
 		<th class="category">
-			<span class="required">*</span><label for="description"><?php print_documentation_link( 'description' ) ?></label>
+			<span class="required">*</span>
+			<label for="description"><?php print_documentation_link( 'description' ) ?></label>
 		</th>
 		<td>
 			<?php # Newline after opening textarea tag is intentional, see #25839 ?>

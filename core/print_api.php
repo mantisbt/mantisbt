@@ -96,7 +96,17 @@ require_api( 'version_api.php' );
  * @return boolean
  */
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
-	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
+	if( error_handled() ) {
+		# Display a basic "proceed" page to show any pending errors, regardless
+		# of $g_stop_on_errors setting which is actually handled in
+		# html_meta_redirect(), called by layout_page_header().
+		layout_page_header( null, $p_url );
+		layout_page_begin();
+		html_operation_successful( $p_url );
+		echo '<br /><div class="center">';
+		print_link_button( $p_url, lang_get( 'proceed' ) );
+		echo '</div>';
+		layout_page_end();
 		return false;
 	}
 
