@@ -452,7 +452,6 @@ $s_log_page_time = 'Temps d\'execucion';
 $s_log_page_caller = 'Apelant';
 $s_log_page_event = 'Eveniment';
 $s_please_report = 'Raportatz aquò a l\'%1$, sens vos comandar.';
-$s_warning_plain_password_authentication = '<strong>ATENCION :</strong> l\'autentificacion per senhal en clar es utilizada, aquò expausarà vòstre senhal als administrators.';
 $s_warning_default_administrator_account_present = '<strong>ATENCION :</strong> Vos caldriá desactivar lo compte per defaut « administrator » o cambiar son senhal.';
 $s_warning_admin_directory_present = '<strong>ATENCION :</strong> lo repertòri Admin deuriá èsser suprimit.';
 $s_error_database_no_schema_version = '<strong>Error :</strong> L\'estructura de la basa de donadas sembla obsoleta (config(databaseversion) es a 0) o corrompuda. Verificatz que vòstra basa de donadas es en cors d\'execucion - podèm pas trobar la version de l\'esquèma de la basa de donadas. La taula « Config » a pas renviat una version valida de l\'esquèma - demandatz d\'ajuda sus la lista de difusion mantis-help se besonh.';

@@ -419,7 +419,6 @@ $s_total_queries_executed = '%1$d kabuoan ng mga katanungang nasagot na.';
 $s_unique_queries_executed = '%1$d natatanging mga katanungang nasagot na.';
 $s_memory_usage = 'paggamit ng alaala: %1$s KiB';
 $s_please_report = 'Pakiulat ito sa %1$s.';
-$s_warning_plain_password_authentication = '<strong>BABALA:</strong> Ginagamit ang payak na pagpapatotoo ng hudyat, ilalantad nito sa mga tagapangasiwa ang iyong mga hudyat.';
 $s_warning_default_administrator_account_present = '<strong>BABALA:</strong> Dapat na huwag mong paganahin ang likas na nakatakdang akawnt ng \'tagapangasiwa\' o baguhin ang hudyat nito.';
 $s_warning_admin_directory_present = '<strong>BABALA:</strong> Dapat tanggalin ang direktoryo ng tagapangasiwa.';
 $s_error_database_no_schema_version = '<strong>KAMALIAN:</strong> Tila wala na sa panahon ang kayarian ng kalipunan ng dato (ang konpigurasyon o pagkakaayos [bersyon ng kalipunan ng dato] ay 0 at hindi umiiral ang lumang mga tabla ng pagtataas ng uri). Pakisuri kung tumatakbo ang iyong kalipunan ng dato - hindi namin makuha ang bersyon ng plano ng kalipunan ng dato. Hindi nagpabalik ang Tabla ng Konpigurasyon o Pagkakaayos ng isang tanggap na bersyon ng plano ng kalipunan ng dato - humiling lamang ng suporta sa talaan ng mga susulatan ng mantis-saklolo (mantis-tulong) kung kailangan.';

@@ -426,7 +426,6 @@ $s_total_queries_executed = '%1$d insgesamt düregfüehrti Abfrage';
 $s_unique_queries_executed = '%1$d einzelni Abfrage düregfüehrt.';
 $s_memory_usage = 'Spycherverbruuch: %1$s KiB';
 $s_please_report = 'Bitte mäld des dr %1$e.';
-$s_warning_plain_password_authentication = '<strong>WARNIG:</strong> Eifachi Passwort-Authentifizierig wird brucht, des zeigt dr Admischtratore s Passwort.';
 $s_warning_default_administrator_account_present = '<strong>WARNUNG:</strong> Du sottsch s Standard-Adminischtrator-Konto uschalte oder s Passwort ändere.';
 $s_warning_admin_directory_present = '<strong>WARNUNG:</strong> Administrator-Verzeichnis sött entfernt wärde.';
 $s_error_database_no_schema_version = '<strong>Error:</strong> Dini Datebank Schema Version isch 0. Das cha passiere, wenn entweder d\'Datebank korrupt isch oder ds Feld "database_version" nit het chönne us der Config-Table usegläse werde oder d\'Datebankstruktur is vore alte Version vo MantisBT (pre 1.0.0).';

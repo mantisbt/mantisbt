@@ -493,7 +493,6 @@ $s_log_page_time = '실행 시간';
 $s_log_page_caller = '콜러';
 $s_log_page_event = '이벤트';
 $s_please_report = '이 이슈를 %1$s에게 알려 주십시오.';
-$s_warning_plain_password_authentication = '<strong>경고:</strong> 일반 텍스트 비밀번호 인증을 사용하면 관리자에게 비밀번호가 노출됩니다.';
 $s_warning_default_administrator_account_present = '<strong>경고:</strong> 기본 \'administrator\' 계정을 비활성화하거나 그 비밀번호를 바꿔야 합니다.';
 $s_warning_admin_directory_present = '<strong>경고:</strong> Admin 디렉토리를 삭제해야 합니다.';
 $s_warning_change_setting = '<strong>경고:</strong> "%1$s" 이(가) 기본값 (%2$s)으로 설정되지 않았습니다.';

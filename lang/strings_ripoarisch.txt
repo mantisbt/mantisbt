@@ -408,7 +408,6 @@ $s_log_page_number = 'Nommer';
 $s_log_page_time = 'Loufzigg';
 $s_log_page_caller = 'Oprohfer';
 $s_please_report = 'bes esu jood un donn dat aan de %1$s wigger jävve.';
-$s_warning_plain_password_authentication = '<strong>Opjepaß:</strong> Do bruchs e Paßwoot em Klohtäx, doh künne ävver de verantwootlesche Administratoore Ding Passwoot lässe.';
 $s_warning_default_administrator_account_present = '<strong>Opjepaß:</strong> De sullts dä schandatmähßejje Zohjang för ene Verwallder affschallde udder dämm sing Paßwoot veränndere.';
 $s_warning_admin_directory_present = '<strong>Opjepaß:</strong> Däm Verwallder sing Verzeijschneß sullt fött jedonn wähde.';
 $s_warning_change_setting = '<strong>Opjepaß:</strong> "%1$s" es nidd op der Schtandattwäät %2$s jesaz.';

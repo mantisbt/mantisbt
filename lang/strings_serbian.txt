@@ -442,7 +442,6 @@ $s_memory_usage = 'искоришћено меморије: %1$s KiB';
 $s_log_page_number = 'Број';
 $s_log_page_event = 'Догађај';
 $s_please_report = 'Пријавите ово на %1$s.';
-$s_warning_plain_password_authentication = '<strong>Упозорење:</strong> користи се проста провера лозинке. Ова лозинка ће бити видљива администраторима.';
 $s_warning_default_administrator_account_present = '<strong>Упозорење:</strong> требало би да онемогућите подразумевани налог администратора или да промените лозинку.';
 $s_warning_admin_directory_present = '<strong>Упозорење:</strong> Директоријум „admin” треба да се уклони или приступ њему ограничи.';
 $s_error_database_no_schema_version = '<strong>Грешка:</strong> изгледа да је структура базе података застарела (config(databaseversion) је једнако нули и не постоји стара табела за доградњу). Проверите да ли ваша база ради (немогуће добити верзију базне шеме). Config Table није пријавио исправну верзију шеме. Ако вам треба помоћ, потражите подршку на дописној листи „mantis-help“.';

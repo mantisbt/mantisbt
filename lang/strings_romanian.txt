@@ -441,7 +441,6 @@ $s_log_page_time = 'Timp de execuție';
 $s_log_page_caller = 'Apelant';
 $s_log_page_event = 'Eveniment';
 $s_please_report = 'Te rog raportează acest lucru la %1$s.';
-$s_warning_plain_password_authentication = '<strong>Avertizare:</strong> Se utilizează autentificare prin parolă simplă; aceasta vă va expune parolele dvs administratorilor.';
 $s_warning_default_administrator_account_present = '<strong>Avertizare:</strong>Trebuie să dezactivat contul implicit \'administrator\' sau schimbă parola lui.';
 $s_warning_admin_directory_present = '<strong>Avertisment:</strong> Directorul Admin ar trebui să fie eliminat.';
 $s_warning_change_setting = '<strong>Avertisment:</strong> „%1$s” nu este setat la valoare sa implicită (%2$s).';

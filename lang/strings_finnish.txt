@@ -457,7 +457,6 @@ $s_log_page_number = 'Numero';
 $s_log_page_time = 'Suoritusaika';
 $s_log_page_event = 'Tapahtuma';
 $s_please_report = 'Ole hyvä, ja raportoi tämä kohteelle %1$s.';
-$s_warning_plain_password_authentication = '<strong>Varoitus:</strong> Käytössä oleva salasanojen autentikointi jättää salasanat näkyviin selkokielisinä ylläpitäjille.';
 $s_warning_default_administrator_account_present = '<strong>Varoitus:</strong> Oletusylläpitotili \'administrator\' tulisi poistaa käytöstä tai sen salasana vaihtaa.';
 $s_warning_admin_directory_present = '<strong>Varoitus:</strong> Kansio Admin tulisi poistaa tai rajata sen käyttöoikeuksia.';
 $s_error_database_no_schema_version = '<strong>Virhe:</strong> Tietokannan rakenne ei ole ajan tasalla (config(databaseversion) on 0 ja vanhoja päivitystauluja ei ole olemassa). Ole hyvä, ja varmista että tietokanta on käynnissä, muuten tietokannan schemaa ei voi ladata. Config -taulu ei palauttanut voimassaolevaa tietokannan scheman versiota. Kysy apua mantis-help -postituslistalla tarvittaessa.';

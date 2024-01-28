@@ -412,7 +412,6 @@ $s_total_queries_executed = 'الاستعلامات الاجماليه اللى 
 $s_unique_queries_executed = 'الاستعلامات الفريده اللى اتنفذت %1$d';
 $s_memory_usage = 'استخدام الذاكره: %1$s كيلوبايت';
 $s_please_report = 'من فضلك أبلغ هذا إلى %1$.';
-$s_warning_plain_password_authentication = '<strong>تحذير:</strong> تحقيق كلمه السر الصافى مستخدم، هذا سيكشف كلمات سرك للإداريين.';
 $s_warning_default_administrator_account_present = '<strong>تحذير:</strong> ينبغى عليك تعطيل حساب \'administrator\' الافتراضى أو تغيير كلمه سره.';
 $s_warning_admin_directory_present = '<strong>تحذير:</strong> مجلد الإداره ينبغى إزالته.';
 $s_error_database_no_schema_version = '<strong>خطأ:</strong> هيكل قاعده البيانات هو 0. ده ممكن يحصل لو ان الداتا بيز باظت او ان قيمه "database_version" ما نفعش تتقرى او ان الداتا بيز قديمه جدا من ايام MantisBT (pre 1.0.0).';
