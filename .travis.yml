@@ -19,6 +19,10 @@ addons:
     packages:
       - postgresql-12
       - postgresql-client-12
+env:
+  global:
+  - PGPORT=5433
+  - PGUSER=travis
 
 install:
   - composer install
