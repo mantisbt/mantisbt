@@ -4,7 +4,7 @@
 
 language: php
 os: linux
-dist: bionic
+dist: focal
 
 # -----------------------------------------------------------------------------
 # Environment setup and test scripts execution
