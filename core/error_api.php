@@ -628,6 +628,7 @@ function error_string( $p_error ) {
 	global $g_error_parameters;
 
 	$t_lang = null;
+	$t_error = '';
 	while( true ) {
 		$t_err_msg = lang_get( 'MANTIS_ERROR', $t_lang );
 		if( array_key_exists( $p_error, $t_err_msg ) ) {

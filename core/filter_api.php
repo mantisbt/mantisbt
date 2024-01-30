@@ -1630,7 +1630,7 @@ function filter_db_get_filter_string( $p_filter_id, $p_user_id = null ) {
  * get current filter for given project and user
  * @param integer $p_project_id A project identifier.
  * @param integer $p_user_id    A valid user identifier.
- * @return integer
+ * @return integer|null
  */
 function filter_db_get_project_current( $p_project_id = null, $p_user_id = null ) {
 	if( null === $p_project_id ) {

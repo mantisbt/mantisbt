@@ -282,6 +282,7 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 	# notes and issues in responses.
 	$t_note_id = $t_command_response['id'];
 
+	$t_note = null;
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	foreach( $t_issue['notes'] as $t_current_note ) {
 		if( $t_current_note['id'] == $t_note_id ) {
@@ -290,7 +291,6 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 		}
 	}
 
-	/** @noinspection PhpUndefinedVariableInspection */
 	return $p_response
 		->withStatus( HTTP_STATUS_CREATED, "Issue Note Created with id $t_issue_id" )
 		->withJson( array( 'note' => $t_note, 'issue' => $t_issue ) );

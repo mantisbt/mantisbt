@@ -130,22 +130,15 @@ class MantisPHPSession extends MantisSession {
 		$t_path = config_get_global( 'cookie_path' );
 		$t_domain = config_get_global( 'cookie_domain' );
 		$t_samesite = config_get_global( 'cookie_samesite' );
-		if (PHP_VERSION_ID < 70300) {
-			# Take advantage of PHP bug #69948 (fixed in PHP 7.3) to inject the
-			# Samesite attribute in the cookie's path
-			$t_path .= '; samesite=' . $t_samesite;
-			session_set_cookie_params( 0, $t_path, $t_domain, $g_cookie_secure_flag_enabled, true );
-		} else {
-			$t_options = array(
-				'lifetime' => 0,
-				'path' => $t_path,
-				'domain' => $t_domain,
-				'samesite' => $t_samesite,
-				'secure' => $g_cookie_secure_flag_enabled,
-				'httponly' => true,
-			);
-			session_set_cookie_params( $t_options );
-		}
+		$t_options = array(
+			'lifetime' => 0,
+			'path' => $t_path,
+			'domain' => $t_domain,
+			'samesite' => $t_samesite,
+			'secure' => $g_cookie_secure_flag_enabled,
+			'httponly' => true,
+		);
+		session_set_cookie_params( $t_options );
 
 		# Handle existent session ID
 		if( !is_null( $p_session_id ) ) {

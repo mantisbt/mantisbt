@@ -96,7 +96,17 @@ require_api( 'version_api.php' );
  * @return boolean
  */
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
-	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
+	if( error_handled() ) {
+		# Display a basic "proceed" page to show any pending errors, regardless
+		# of $g_stop_on_errors setting which is actually handled in
+		# html_meta_redirect(), called by layout_page_header().
+		layout_page_header( null, $p_url );
+		layout_page_begin();
+		html_operation_successful( $p_url );
+		echo '<br /><div class="center">';
+		print_link_button( $p_url, lang_get( 'proceed' ) );
+		echo '</div>';
+		layout_page_end();
 		return false;
 	}
 
@@ -869,7 +879,7 @@ function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
  *
  * @param string              $p_version       The currently selected version.
  * @param integer|array|null  $p_project_ids   A project id, or array of ids, or null to use current project.
- * @param integer             $p_released      One of VERSION_ALL, VERSION_FUTURE or VERSION_RELEASED
+ * @param bool|null           $p_released      One of VERSION_ALL, VERSION_FUTURE or VERSION_RELEASED
  *                                             to define which versions to include in the list (defaults to ALL).
  * @param boolean $p_leading_blank Allow selection of no version.
  *
@@ -1604,7 +1614,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	if( $p_current < $p_end ) {
 		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_key );
 	} else {
-		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_key );
+		print_page_link( $p_page, $t_next, 0, 0, $p_temp_filter_key );
 	}
 
 	# Page numbers ...
@@ -1702,7 +1712,7 @@ function print_hidden_inputs( array $p_assoc_array ) {
  * Print hidden html input tag <input type=hidden>
  *
  * @param string $p_field_key Name parameter.
- * @param string $p_field_val Value parameter.
+ * @param string|array $p_field_val Value parameter.
  * @return void
  */
 function print_hidden_input( $p_field_key, $p_field_val ) {
@@ -1843,7 +1853,7 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 	}
 	$t_info = sprintf( '<select class="input-sm" %s name="%s" id="%s"%s>', $t_multiple, $p_control_name, $p_control_name, $t_size );
 	if( $p_add_any ) {
-		array_unshift_assoc( $p_control_array, META_FILTER_ANY, lang_trans( '[any]' ) );
+		array_unshift( $p_control_array, [ META_FILTER_ANY => '[any]' ] );
 	}
 	foreach ( $p_control_array as $t_name => $t_desc ) {
 		$t_sel = '';

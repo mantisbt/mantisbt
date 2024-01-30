@@ -213,7 +213,7 @@ function access_get_global_level( $p_user_id = null ) {
 		return false;
 	}
 
-	return user_get_field( $p_user_id, 'access_level' );
+	return (int)user_get_field( $p_user_id, 'access_level' );
 }
 
 /**

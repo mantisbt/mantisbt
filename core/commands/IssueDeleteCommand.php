@@ -52,7 +52,7 @@ class IssueDeleteCommand extends Command {
 			throw new ClientException(
 				"Issue '" . $this->id . "' does not exist.",
 				ERROR_BUG_NOT_FOUND,
-				$this->id
+				[ $this->id ]
 			);
 		}
 

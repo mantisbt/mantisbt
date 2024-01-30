@@ -43,6 +43,7 @@
  * @author Atrol
  * @author Ayonik
  * @author Campmaster
+ * @author Cupkake4Yoshi
  * @author Das Schäfchen
  * @author Diebuche
  * @author Erdemaslancan
@@ -773,6 +774,7 @@ $s_reset_password_msg2 = 'Passwort zurücksetzen setzt ein leeres Passwort.';
 $s_show_all_users = 'ALLE';
 $s_users_unused = 'UNBENUTZT';
 $s_users_new = 'NEU';
+$s_email_not_unique = 'E-Mail-Adresse ist mindestens mit einem weiteren Benutzer-Account assoziiert';
 $s_account_reset_msg = 'Bestätigungsnachricht wurde an Ihre E-Mail-Adresse geschickt …';
 $s_account_reset_msg2 = 'Leeres Passwort wurde gesetzt …';
 $s_account_unlock_msg = 'Das Benutzerkonto wurde entsperrt';

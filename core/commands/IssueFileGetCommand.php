@@ -29,8 +29,17 @@ use Mantis\Exceptions\ClientException;
 class IssueFileGetCommand extends Command {
 	/**
 	 * The issue id.
+	 *
+	 * @var int
 	 */
 	private $issue_id;
+
+	/**
+	 * The user id.
+	 *
+	 * @var int
+	 */
+	private $user_id;
 
 	/**
 	 * Constructor

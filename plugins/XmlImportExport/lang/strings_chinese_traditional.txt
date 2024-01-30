@@ -40,6 +40,7 @@
  *
  * @author Cwlin0416
  * @author Kly
+ * @author Lionpancake
  * @author Mark85296341
  * @author Wehwei
  */
@@ -61,7 +62,7 @@ $s_plugin_XmlImportExport_renumber_desc = '嘗試轉換參照為新編號';
 $s_plugin_XmlImportExport_link = '連結';
 $s_plugin_XmlImportExport_link_desc = '轉換為連結至原來項目';
 $s_plugin_XmlImportExport_disable = '關閉';
-$s_plugin_XmlImportExport_disable_desc = '關閉連結';
+$s_plugin_XmlImportExport_disable_desc = '禁用連結';
 $s_plugin_XmlImportExport_fallback = '還原方式 (當 重新編號 無法使用時):';
 $s_plugin_XmlImportExport_fallback_category = '備用類別:';
 $s_plugin_XmlImportExport_keep_same_category = '嘗試使用在相同類別';

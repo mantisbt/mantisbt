@@ -119,6 +119,7 @@ class FilterConverter {
 		$this->convertEnumToJson( $t_criteria, FILTER_PROPERTY_SEVERITY, 'severity' );
 		$this->convertEnumToJson( $t_criteria, FILTER_PROPERTY_RESOLUTION, 'resolution' );
 		$this->convertEnumToJson( $t_criteria, FILTER_PROPERTY_VIEW_STATE, 'view_state' );
+		$this->convertEnumToJson( $t_criteria, FILTER_PROPERTY_PROJECTION, 'projection' );
 
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_VERSION, $p_project_id );
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_FIXED_IN_VERSION, $p_project_id );

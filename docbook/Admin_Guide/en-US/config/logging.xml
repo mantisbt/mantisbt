@@ -30,11 +30,17 @@
 		<varlistentry>
 			<term>$g_debug_email</term>
 			<listitem>
-				<para>Used for debugging e-mail notifications.
-					When it is '', the emails are sent normally.
-					If set to an e-mail address, all messages are sent
-					to it, with the original recipients (To, Cc, Bcc)
-					included in the message body.
+				<para>Email address to use for debugging purposes.
+				</para>
+				<para>This option is used for debugging problems with the email
+					features in mantis, and can be set to a valid email address.
+				</para>
+				<para>This is blank by default, meaning that email notifications
+					are sent to their intended recipients (normal system behavior).
+				</para>
+				<para>If set, emails will only be sent to the specified address
+					instead, and the original recipients (To, Cc and Bcc) will
+					be included in the message body.
 				</para>
 				<para>Default is ''.</para>
 			</listitem>
@@ -136,17 +142,18 @@ $g_display_errors = array(
 		<varlistentry>
 			<term>$g_show_detailed_errors</term>
 			<listitem>
-				<para>Shows a list of variables and their values
-					whenever an error is triggered.
-					Only applies to error types configured to
+				<para>Shows a list of variables and their values,
+					as well as an execution stack trace whenever a
+					fatal error is triggered.
+				</para>
+				<para>Only applies to error types configured to
 					<literal>DISPLAY_ERROR_HALT</literal>
 					in <emphasis>$g_display_errors</emphasis>.
 				</para>
 				<para>Default is OFF.</para>
-				<warning><para>Setting this to ON is a potential security
-					hazard, as it can expose sensitive information.
-					Only enable this setting for debugging purposes
-					when you really need it.
+				<warning><para>Setting this to ON is a potential security hazard,
+					as it can expose sensitive system information.
+					Only enable it when needed for debugging purposes.
 				</para></warning>
 			</listitem>
 		</varlistentry>
@@ -154,16 +161,23 @@ $g_display_errors = array(
 		<varlistentry>
 			<term>$g_stop_on_errors</term>
 			<listitem>
-				<para>Debug messages.
-					If this option is turned OFF, page redirects will
-					function if a non-fatal error occurs.
-					For debugging purposes, you can set this to ON so
-					that any non-fatal error will prevent page redirection,
-					allowing you to see the errors.
+				<para>Prevent page redirections when non-fatal errors occur.
+				</para>
+				<para>If this option is turned OFF (default)
+					page redirects will function normally,
+					preventing display of non-fatal error messages.
+				</para>
+				<para>It should only be set to ON during development
+					or for debugging purposes. This will prevent page
+					redirections, allowing you to see the errors.
 				</para>
 				<para>Default is OFF.</para>
-				<note><para>This should only be turned on when debugging.
-				</para></note>
+				<note>
+					<para>Non-fatal errors are those configured as
+						<literal>DISPLAY_ERROR_INLINE</literal> in
+						<emphasis>$g_display_errors</emphasis>.
+					</para>
+				</note>
 			</listitem>
 		</varlistentry>
 
@@ -340,8 +354,10 @@ or
 			<term>$g_show_log_threshold</term>
 			<listitem>
 				<para>Indicates the access level required for a user
-					to see the log output (if
-					<emphasis>$g_log_destination</emphasis> is 'page').
+					to see the log output.
+				</para>
+				<para>This is only used when
+					<emphasis>$g_log_destination</emphasis> is 'page'.
 				</para>
 				<para>Default is ADMINISTRATOR.</para>
 				<note><para>This threshold is compared against the user's

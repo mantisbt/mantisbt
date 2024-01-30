@@ -53,7 +53,7 @@ $g_cookie_secure_flag_enabled = http_is_protocol_https();
  *
  * @param string $p_var_name Variable name.
  * @param mixed  $p_default  Default value.
- * @return null
+ * @return null|string
  */
 function gpc_get( $p_var_name, $p_default = null ) {
 	if( isset( $_POST[$p_var_name] ) ) {
@@ -216,7 +216,6 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			} else {
 				return '';
 			}
-			break;
 		case CUSTOM_FIELD_TYPE_DATE:
 			$t_day = gpc_get_int( $p_var_name . '_day', 0 );
 			$t_month = gpc_get_int( $p_var_name . '_month', 0 );
@@ -230,7 +229,6 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			} else {
 				return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
 			}
-			break;
 		default:
 			return gpc_get_string( $p_var_name, $p_default );
 	}
@@ -393,16 +391,6 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 		$p_samesite = config_get_global( 'cookie_samesite' );
 	}
 
-	if ( PHP_VERSION_ID < 70300 ) {
-		# Take advantage of PHP bug #69948 (fixed in PHP 7.3) to inject the
-		# Samesite attribute in the cookie's path
-		if( $p_samesite ) {
-			$p_path .= '; samesite=' . $p_samesite;
-		}
-		return setcookie( $p_name, $p_value, $p_expire, $p_path, $p_domain, $g_cookie_secure_flag_enabled, $p_httponly );
-	}
-
-	# Use new function signature available since PHP 7.3
 	$t_options = array(
 		'expires' => $p_expire,
 		'path' => $p_path,
@@ -443,16 +431,6 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null, $p_samesit
 		# Cookie “<PREFIX>_collapse_settings” has been rejected because it is already expired.
 		# apparently this is due to bug https://bugzilla.mozilla.org/show_bug.cgi?id=1676651
 
-		if( PHP_VERSION_ID < 70300 ) {
-			# Take advantage of PHP bug #69948 (fixed in PHP 7.3) to inject the
-			# Samesite attribute in the cookie's path
-			if( $p_samesite ) {
-				$p_path .= '; samesite=' . $p_samesite;
-			}
-			return setcookie( $p_name, '', 1, $p_path, $p_domain );
-		}
-
-		# Use new function signature available since PHP 7.3
 		$t_options = array(
 			'expires' => 1,
 			'path' => $p_path,

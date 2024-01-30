@@ -704,7 +704,7 @@ function auth_logout() {
 
 	# clear cached userid
 	user_clear_cache( $g_cache_current_user_id );
-	current_user_set( null );
+	current_user_set( NO_USER );
 	$g_cache_cookie_valid = null;
 
 	# clear cookies, if they were set
@@ -1126,7 +1126,7 @@ function auth_get_current_user_id() {
 		return $t_user_id;
 	}
 
-	# @todo error with an error saying they aren't logged in? Or redirect to the login page maybe?
+	# TODO: error with an error saying they aren't logged in? Or redirect to the login page maybe?
 	/** @noinspection PhpUnhandledExceptionInspection */
 	$t_user_id = user_get_id_by_cookie( $t_cookie_string );
 

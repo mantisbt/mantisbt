@@ -99,38 +99,36 @@ function http_content_disposition_header( $p_filename, $p_inline = false ) {
 
 /**
  * Set caching headers that will allow or prevent browser caching.
- * Use an explicit true/false value for the parameter to force the caching behavior.
- * Otherwise, use null or omit the oparameter to use default behavior.
- * The default behavior is to not cache, or the specified in the option $g_allow_browser_cache
- * @param null|boolean $p_allow_caching Force or not caching. Omitting or null, will use default behavior.
+ *
+ * @param bool|null $p_allow_caching True to force caching, false to disable it;
+ *                                   If null, use default behavior defined by
+ *                                   {@see $g_allow_browser_cache}.
+ *
  * @return void
  */
 function http_caching_headers( $p_allow_caching = null ) {
-	global $g_allow_browser_cache;
-
 	if( headers_sent() ) {
 		return;
 	}
 
 	if( $p_allow_caching === null ) {
-		$t_allow_caching = ( isset( $g_allow_browser_cache ) && ON == $g_allow_browser_cache );
+		$t_allow_caching = ON == config_get_global( 'allow_browser_cache' );
 	} else {
 		$t_allow_caching = $p_allow_caching;
 	}
 
 	if( $t_allow_caching ) {
-			if( is_browser_internet_explorer() ) {
-				header( 'Cache-Control: private, proxy-revalidate' );
-			} else {
-				header( 'Cache-Control: private, must-revalidate' );
-			}
-			# set an expire time to +10 days
-			header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time()+864000 ) );
+		if( is_browser_internet_explorer() ) {
+			header( 'Cache-Control: private, proxy-revalidate' );
+		} else {
+			header( 'Cache-Control: private, must-revalidate' );
+		}
+		# set an expire time to +10 days
+		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time()+864000 ) );
 	} else {
 		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 		header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
-
 	}
 }
 

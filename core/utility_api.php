@@ -99,13 +99,11 @@ function ini_get_bool( $p_name ) {
 			case '':
 			case '0':
 				return false;
-				break;
 			case 'on':
 			case 'true':
 			case 'yes':
 			case '1':
 				return true;
-				break;
 		}
 	}
 	return (bool)$t_result;

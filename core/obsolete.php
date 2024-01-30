@@ -232,3 +232,6 @@ config_obsolete( 'bug_change_status_page_fields', 'bug_view_page_fields' );
 
 # changes in 2.25.0
 config_obsolete( 'display_project_padding' );
+
+# changes in 2.27.0
+config_obsolete( 'allow_file_cache' );

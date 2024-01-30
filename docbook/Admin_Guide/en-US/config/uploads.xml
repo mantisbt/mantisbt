@@ -14,8 +14,7 @@
 		work, check the following resources:
 		<ulink url="https://www.php.net/manual/en/features.file-upload.php">PHP
 			Manual
-		</ulink>
-		.
+		</ulink>.
 	</para>
 
 	<variablelist>
@@ -36,9 +35,7 @@
 					(configured in the project) and temporary upload path (used by
 					PHP).
 				</para>
-				<para>Values: DISK or DATABASE
-				</para>
-				<para>Default: DATABASE
+				<para>Values: DISK or DATABASE (default)
 				</para>
 			</listitem>
 		</varlistentry>
@@ -160,13 +157,13 @@
 		<varlistentry>
 			<term>$g_attachments_file_permissions</term>
 			<listitem>
-				<para>When using DISK for storing uploaded files, this setting control
+				<para>When using DISK for storing uploaded files, this setting controls
 					the access permissions they will have on the web server: with the default
 					value (0400) files will be read-only, and accessible only by the user
 					running the apache process (probably "apache" in Linux and "Administrator"
 					in Windows).
 					For more details on unix style permissions:
-					<ulink url="http://www.perlfect.com/articles/chmod.shtml">http://www.perlfect.com/articles/chmod.shtml</ulink>
+					<ulink url="https://en.wikipedia.org/wiki/Chmod">chmod on Wikipedia</ulink>
 				</para>
 			</listitem>
 		</varlistentry>

@@ -9,10 +9,17 @@
 		<varlistentry>
 			<term>$g_font_family</term>
 			<listitem>
-				<para>Name of the google font family for the browser to use. For all available fonts, see:
+				<para>Name of the google font family to use.</para>
+				<para>For a list of all available fonts, see
 					<ulink url="https://fonts.google.com/">
 						fonts.google.com
 					</ulink>.
+				</para>
+				<para>
+					The chosen font should be listed in
+					<emphasis>$g_font_family_choices_local</emphasis>}
+					to ensure correct display even if <emphasis>$g_cdn_enabled</emphasis>
+					option is OFF.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -27,8 +34,10 @@
 		<varlistentry>
 			<term>$g_font_family_choices_local</term>
 			<listitem>
-				<para>This is a small subset of <emphasis>$g_font_family_choices</emphasis> in which font
-					files are part of MantisBT installation.
+				<para>This is a small subset of
+					<emphasis>$g_font_family_choices</emphasis>,
+					that are bundled with MantisBT, to be used when
+					<emphasis>$g_cdn_enabled</emphasis> is OFF.
 				</para>
 			</listitem>
 		</varlistentry>

@@ -189,7 +189,7 @@ function columns_get_plugin_columns() {
 
 /**
  * Get all columns for existing custom_fields
- * @return string Array of column names
+ * @return array Array of column names
  */
 function columns_get_custom_fields() {
 	static $t_col_names = null;

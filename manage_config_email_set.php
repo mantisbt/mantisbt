@@ -58,8 +58,8 @@ access_ensure_project_level( $t_can_change_level );
 
 $t_project = helper_get_current_project();
 
-$f_flags			= gpc_get( 'flag', array() );
-$f_thresholds		= gpc_get( 'flag_threshold', array() );
+$f_flags			= gpc_get( 'flag', array() ) ?? [];
+$f_thresholds		= gpc_get( 'flag_threshold', array() ) ?? [];
 $f_actions_access	= gpc_get_int( 'notify_actions_access' );
 
 $t_access = current_user_get_access_level();
