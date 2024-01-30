@@ -88,6 +88,13 @@ jobs:
         - postgresql
       env:
         DB=pgsql
+    - name: "PHP 8.0 and PostgreSQL"
+      group: dev
+      php: 8.0
+      services:
+        - postgresql
+      env:
+        DB=pgsql
     - name: "PHP 7.4 and PostgreSQL"
       group: dev
       php: 7.4
