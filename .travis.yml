@@ -37,12 +37,43 @@ branches:
 # Explicit job definitions - Postgres to use `group: dev` while Trvais issue is resolved for stable build environment.
 jobs:
   include:
+    - name: "PHP 8.3 and MySQL"
+      php: 8.3
+      services:
+        - mysql
+      env:
+        DB=mysql
     - name: "PHP 8.2 and MySQL"
       php: 8.2
       services:
         - mysql
       env:
         DB=mysql
+    - name: "PHP 8.1 and MySQL"
+      php: 8.1
+      services:
+        - mysql
+      env:
+        DB=mysql
+    - name: "PHP 8.0 and MySQL"
+      php: 8.0
+      services:
+        - mysql
+      env:
+        DB=mysql
+    - name: "PHP 7.4 and MySQL"
+      php: 7.4
+      services:
+        - mysql
+      env:
+        DB=mysql
+    - name: "PHP 8.3 and PostgreSQL"
+      group: dev
+      php: 8.3
+      services:
+        - postgresql
+      env:
+        DB=pgsql
     - name: "PHP 8.2 and PostgreSQL"
       group: dev
       php: 8.2
@@ -50,15 +81,16 @@ jobs:
         - postgresql
       env:
         DB=pgsql
-    - name: "PHP 8.3 and MySQL"
-      php: 8.3
-      services:
-        - mysql
-      env:
-        DB=mysql
-    - name: "PHP 8.3 and PostgreSQL"
+    - name: "PHP 8.1 and PostgreSQL"
       group: dev
-      php: 8.3.0
+      php: 8.1
+      services:
+        - postgresql
+      env:
+        DB=pgsql
+    - name: "PHP 7.4 and PostgreSQL"
+      group: dev
+      php: 7.4
       services:
         - postgresql
       env:
