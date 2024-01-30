@@ -58,7 +58,7 @@ jobs:
         DB=mysql
     - name: "PHP 8.3 and PostgreSQL"
       group: dev
-      php: 8.3
+      php: 8.3.0
       services:
         - postgresql
       env:
