@@ -331,6 +331,14 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 	</form>
 <?php } ?>
 
+<!-- Information Button -->
+	<form id="view-user-form" method="get" action="view_user_page.php" class="pull-left">
+		<input type="hidden" name="id" value="<?php echo $t_user['id'] ?>" />
+		<button class="btn btn-primary btn-white btn-round">
+			<?php echo lang_get( 'view_account_title' ) ?>
+		</button>
+	</form>
+
 <!-- Impersonate Button -->
 <?php if( $t_impersonate ) { ?>
 	<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="pull-left">
