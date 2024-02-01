@@ -39,6 +39,7 @@
  * @file
  *
  * @author Cedric31
+ * @author Lhanars
  * @author Nicolas Eynaud
  */
 
@@ -265,7 +266,7 @@ $s_delete_account_button = 'Suprimir lo compte';
 $s_manage_profiles_link = 'Perfils';
 $s_change_preferences_link = 'Preferéncias';
 $s_edit_account_title = 'Modificar un compte';
-$s_username = 'Utilizaire';
+$s_username = 'Utilizator';
 $s_username_label = 'Nom d\'utilizaire';
 $s_realname = 'Nom vertadièr';
 $s_realname_label = 'Nom vertadièr';
