@@ -172,7 +172,7 @@
 							<term>Mandatory extensions</term>
 							<listitem><itemizedlist>
 								<listitem><para>The extension for the RDBMS being used (
-										mysqli,
+										mysqli with mysqlnd,
 										pgsql,
 										oci8,
 										sqlsrv
@@ -311,7 +311,9 @@
 								<entry>MySQL</entry>
 								<entry>5.5.35</entry>
 								<entry>5.6 or later</entry>
-								<entry>PHP extension: mysqli</entry>
+								<entry>PHP extension: mysqli
+									with MySQL Native driver (mysqlnd)
+								</entry>
 							</row>
 							<row>
 								<entry>MariaDB</entry>
