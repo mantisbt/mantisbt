@@ -55,6 +55,8 @@ require_api( 'user_api.php' );
 require_api( 'layout_api.php' );
 require_css( 'status_config.php' );
 
+
+
 auth_ensure_user_authenticated();
 
 $t_current_user_id = auth_get_current_user_id();
