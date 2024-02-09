@@ -13,12 +13,6 @@ dist: focal
 services:
   - mysql
   - postgresql
-addons:
-  postgresql: "12"
-  apt:
-    packages:
-      - postgresql-12
-      - postgresql-client-12
 
 install:
   - composer install
