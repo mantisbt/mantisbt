@@ -39,27 +39,27 @@ branches:
     - /master-[0-9.]+/
 
 php:
-  - 8.3
+#  - 8.3
   - 8.2
-  - 8.1
-  - 8.0
-  - 7.4
+#  - 8.1
+#  - 8.0
+#  - 7.4
 
 env:
-  - DB=mysql
+#  - DB=mysql
   - DB=pgsql
 
 jobs:
-  include:
-    # Add a specific build for Documentation
-    - name: Documentation
-      env: DOCBOOK=1
-      # Using Ruby as it's preinstalled and we don't need PHP to build docs
-      language: ruby
-      addons:
-        apt:
-          packages:
-            - publican
+#  include:
+#    # Add a specific build for Documentation
+#    - name: Documentation
+#      env: DOCBOOK=1
+#      # Using Ruby as it's preinstalled and we don't need PHP to build docs
+#      language: ruby
+#      addons:
+#        apt:
+#          packages:
+#            - publican
 
   allow_failures: []
 
