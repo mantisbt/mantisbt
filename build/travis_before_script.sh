@@ -82,16 +82,15 @@ case $DB in
 		;;
 
 	pgsql)
-		DB_HOSTNAME=$HOSTNAME:$PGPORT
-		DB_TYPE='pgsql'
-		DB_USER=$PGUSER
-		DB_PASSWORD=''
+		export DB_HOSTNAME=$HOSTNAME:$PGPORT
+		export DB_TYPE='pgsql'
+		export DB_USER=$PGUSER
+		export DB_PASSWORD=''
 		DB_CMD="psql -U $DB_USER -c"
 		DB_CMD_SCHEMA="-d $MANTIS_DB_NAME"
 
 		echo "DEBUG $PGUSER"
 		pwd
-		export DB_HOSTNAME, DB_TYPE, DB_USER, DB_PASSWORD
     php ./build/test_db_connect.php
 
 		# Wait a bit to make sure Postgres has started
