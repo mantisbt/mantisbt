@@ -91,6 +91,7 @@ case $DB in
 
 		echo "DEBUG $PGUSER"
 		pwd
+		export DB_HOSTNAME, DB_TYPE, DB_USER, DB_PASSWORD
     php ./build/test_db_connect.php
 
 		# Wait a bit to make sure Postgres has started
