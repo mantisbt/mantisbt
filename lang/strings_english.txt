@@ -680,6 +680,7 @@ $s_create_new_account_title = 'Create New Account';
 $s_verify_password = 'Verify Password';
 $s_enabled = 'Enabled';
 $s_enabled_label = 'Enabled';
+$s_disabled = 'Disabled';
 $s_protected = 'Protected';
 $s_protected_label = 'Protected';
 $s_create_user_button = 'Create User';
