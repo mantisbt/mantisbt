@@ -1258,6 +1258,36 @@ if( 5 == $t_install_state ) {
 <div class="widget-main no-padding">
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
+
+<?php
+	$t_crypto_master_salt = '';
+	if( !$t_config_exists ) {
+?>
+	<tr>
+		<td>
+			Generating Crypto Master Salt
+		</td>
+<?php
+		# Automatically generate a strong master salt/nonce for MantisBT
+		# cryptographic purposes.
+		try {
+			$t_crypto_master_salt = base64_encode( random_bytes( 32 ) );
+			print_test_result( GOOD );
+		}
+		# With PHP 8.2 and later this should catch Random\RandomException instead
+		catch( Exception $e ) {
+			$t_crypto_failed_msg = "No appropriate source of randomness found. "
+				. "You will need to generate the Master Salt yourself "
+				. "and add it to the configuration file manually.";
+			print_test_result( BAD, false, $t_crypto_failed_msg );
+
+		}
+?>
+	</tr>
+<?php
+	} # End crypto master salt generation
+?>
+
 <tr>
     <td>
         <?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
@@ -1266,11 +1296,7 @@ if( 5 == $t_install_state ) {
 <?php
 	# Generating the config_inc.php file
 
-	# Automatically generate a strong master salt/nonce for MantisBT
-	# cryptographic purposes.
-	$t_crypto_master_salt = base64_encode( random_bytes( 32 ) );
-
-$t_config = '<?php' . PHP_EOL
+	$t_config = '<?php' . PHP_EOL
 		. '$g_hostname               = \'' . addslashes( $f_hostname ) . '\';' . PHP_EOL
 		. '$g_db_type                = \'' . addslashes( $f_db_type ) . '\';' . PHP_EOL
 		. '$g_database_name          = \'' . addslashes( $f_database_name ) . '\';' . PHP_EOL
@@ -1295,6 +1321,7 @@ $t_config = '<?php' . PHP_EOL
 	$t_config .=
 		  '$g_default_timezone       = \'' . addslashes( $f_timezone ) . '\';' . PHP_EOL
 		. PHP_EOL
+		. (!$t_crypto_master_salt ? "# The installer could not generate the Master Salt; please set it manually.\n" : '')
 		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
 
 	$t_write_failed = true;
