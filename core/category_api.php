@@ -546,7 +546,7 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 	}
 
 	if( $p_active_only ) {
-		$t_project_where .= ' and c.status = 0 ';
+		$t_project_where .= ' and c.status = ' . CATEGORY_STATUS_DISABLED;
 	}
 	
 	$t_query = 'SELECT c.*, p.name AS project_name FROM {category} c
