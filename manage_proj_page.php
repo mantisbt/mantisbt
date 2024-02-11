@@ -243,11 +243,11 @@ print_manage_menu( 'manage_proj_page.php' );
 ?>
 		<thead>
 			<tr>
-				<td><?php echo lang_get( 'category' ) ?></td>
-				<td class="center"><?php echo lang_get( 'enabled' ) ?></td>
-				<td><?php echo lang_get( 'assign_to' ) ?></td>
+				<th><?php echo lang_get( 'category' ) ?></th>
+				<th class="center"><?php echo lang_get( 'enabled' ) ?></th>
+				<th><?php echo lang_get( 'assign_to' ) ?></th>
 				<?php if( $t_can_update_global_cat ) { ?>
-				<td class="center"><?php echo lang_get( 'actions' ) ?></td>
+				<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 				<?php } ?>
 			</tr>
 		</thead>
