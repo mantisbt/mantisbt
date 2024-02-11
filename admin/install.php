@@ -21,6 +21,12 @@
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpMethodParametersCountMismatchInspection For some reason,
+ *  PHPStorm incorrectly matches the ADOConnection object to the ADODB_text
+ *  subclass, which has a different signature for Connect() method; this
+ *  inconsistency should be fixed in a future version of ADOdb, but for now we
+ *  can just suppress the inspection to avoid the false positive warnings.
  */
 
 error_reporting( E_ALL );
@@ -29,7 +35,7 @@ error_reporting( E_ALL );
 # Load the MantisDB core in maintenance mode. This mode will assume that
 # config/config_inc.php hasn't been specified. Thus the database will not be opened
 # and plugins will not be loaded.
-define( 'MANTIS_MAINTENANCE_MODE', true );
+const MANTIS_MAINTENANCE_MODE = true;
 
 require_once( dirname( __FILE__, 2 ) . '/core.php' );
 require_api( 'install_helper_functions_api.php' );
@@ -355,6 +361,8 @@ print_test( 'Checking if safe mode is enabled for install script',
 			case 'contents':
 				$t_message = 'Move contents to config_inc.php file.';
 				break;
+			default:
+				$t_message = '';
 		}
 
 		print_test(
@@ -367,7 +375,7 @@ print_test( 'Checking if safe mode is enabled for install script',
 ?>
 
 <?php
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$t_install_state++;
 	}
 } # end install_state == 0
@@ -474,7 +482,7 @@ if( 2 == $t_install_state ) {
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
 
-		if( $t_result == true ) {
+		if( $t_result ) {
 			$t_db_open = true;
 			print_test_result( GOOD );
 		} else {
@@ -537,7 +545,7 @@ if( 2 == $t_install_state ) {
 	} # end if db open
 	} # end if failed DB checks
 	
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$t_install_state++;
 	} else {
 		$t_install_state--; # a check failed, redisplay the questions
@@ -715,6 +723,7 @@ if( !$g_database_upgrade ) {
 		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
 		echo "\t</td>\n\t<td>\n\t\t";
 		$t_required = $t_key == 'db_table_plugin_prefix' ? 'required' : '';
+		/** @noinspection HtmlUnknownAttribute */
 		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix" %2$s value="%3$s">',
 			$t_key,
 			$t_key == 'db_table_plugin_prefix' ? 'required' : '',
@@ -821,7 +830,7 @@ if( 3 == $t_install_state ) {
 
 		$t_db_open = false;
 
-		if( $t_result == true ) {
+		if( $t_result ) {
 			print_test_result( GOOD );
 			$t_db_open = true;
 		} else {
@@ -877,7 +886,7 @@ if( 3 == $t_install_state ) {
 	<?php
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
-		if( $t_result == true ) {
+		if( $t_result ) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result(
@@ -893,7 +902,7 @@ if( 3 == $t_install_state ) {
 	}
 
 	# install the tables
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$g_db_connected = false;
 
 		# fake out database access routines used by config_get
@@ -1017,6 +1026,7 @@ if( 3 == $t_install_state ) {
 				$t_msg = $e->getMessage();
 			}
 
+			/** @noinspection PhpUndefinedVariableInspection */
 			print_test(
 				"PostgreSQL: check column '$t_table.$t_column' data type",
 				!$t_exception_occured && $t_is_integer,
@@ -1147,7 +1157,7 @@ if( 3 == $t_install_state ) {
 				echo '</td>';
 				if( $t_ret == 2 ) {
 					print_test_result( GOOD );
-					config_set( 'database_version', $i, ALL_USERS, ALL_PROJECTS );
+					config_set( 'database_version', $i, ALL_USERS );
 				} else {
 					$t_all_sql = '';
 					if( $t_sql ) {
@@ -1187,7 +1197,7 @@ if( 3 == $t_install_state ) {
 			echo '</td></tr>';
 		}
 	}
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$t_install_state++;
 	} else {
 		$t_install_state--;
@@ -1260,7 +1270,7 @@ if( 5 == $t_install_state ) {
 	# cryptographic purposes.
 	$t_crypto_master_salt = base64_encode( random_bytes( 32 ) );
 
-	$t_config = '<?php' . PHP_EOL
+$t_config = '<?php' . PHP_EOL
 		. '$g_hostname               = \'' . addslashes( $f_hostname ) . '\';' . PHP_EOL
 		. '$g_db_type                = \'' . addslashes( $f_db_type ) . '\';' . PHP_EOL
 		. '$g_database_name          = \'' . addslashes( $f_database_name ) . '\';' . PHP_EOL
@@ -1320,7 +1330,7 @@ if( 5 == $t_install_state ) {
 	?>
 </tr>
 <?php
-	if( true == $t_write_failed ) {
+	if( $t_write_failed ) {
 ?>
 <tr>
 	<td colspan="2">
@@ -1352,7 +1362,7 @@ if( 5 == $t_install_state ) {
 </div>
 
 <?php
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$t_install_state++;
 	}
 }
@@ -1384,7 +1394,7 @@ if( 6 == $t_install_state ) {
 		$g_db = ADONewConnection( $f_db_type );
 	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
 
-	if( $t_result == true ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1403,7 +1413,7 @@ if( 6 == $t_install_state ) {
 	$t_query = 'SELECT COUNT(*) FROM ' . db_get_table( 'config' );
 	$t_result = @$g_db->Execute( $t_query );
 
-	if( $t_result != false ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1422,7 +1432,7 @@ if( 6 == $t_install_state ) {
 		$t_query = 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'test\', 1, 90, \'database_test\', 20, 0 )';
 	$t_result = @$g_db->Execute( $t_query );
 
-	if( $t_result != false ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1441,7 +1451,7 @@ if( 6 == $t_install_state ) {
 		$t_query = 'UPDATE ' . db_get_table( 'config' ) . ' SET value=\'test_update\' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
-	if( $t_result != false ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1460,7 +1470,7 @@ if( 6 == $t_install_state ) {
 		$t_query = 'DELETE FROM ' . db_get_table( 'config' ) . ' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
-	if( $t_result != false ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1479,7 +1489,7 @@ if( 6 == $t_install_state ) {
 </div>
 
 <?php
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$t_install_state++;
 	}
 }
