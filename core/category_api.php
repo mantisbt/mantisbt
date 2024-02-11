@@ -505,7 +505,7 @@ function category_get_filter_list( $p_project_id = null ) {
  * @return array array of categories
  * @access public
  */
-function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false ,  $p_active_only = false ) {
+function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false, $p_active_only = false ) {
 	global $g_category_cache, $g_cache_category_project;
 
 	if( isset( $g_cache_category_project[(int)$p_project_id] ) ) {

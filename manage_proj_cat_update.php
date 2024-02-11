@@ -53,10 +53,10 @@ form_security_validate( 'manage_proj_cat_update' );
 
 auth_reauthenticate();
 
-$f_category_id		= gpc_get_int( 'category_id' );
-$f_name				= trim( gpc_get_string( 'name' ) );
-$f_assigned_to		= gpc_get_int( 'assigned_to', 0 );
-$f_category_status	= gpc_get_int( 'category_status', CATEGORY_STATUS_DISABLED );
+$f_category_id     = gpc_get_int( 'category_id' );
+$f_name            = trim( gpc_get_string( 'name' ) );
+$f_assigned_to     = gpc_get_int( 'assigned_to', 0 );
+$f_category_status = gpc_get_int( 'category_status', CATEGORY_STATUS_DISABLED );
 
 if( is_blank( $f_name ) ) {
 	error_parameters( 'name' );

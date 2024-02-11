@@ -51,8 +51,8 @@ require_api( 'string_api.php' );
 
 auth_reauthenticate();
 
-$f_category_id		= gpc_get_int( 'category_id' );
-$f_project_id		= gpc_get_int( 'project_id' );
+$f_category_id = gpc_get_int( 'category_id' );
+$f_project_id  = gpc_get_int( 'project_id' );
 
 $t_row = category_get_row( $f_category_id );
 $t_assigned_to = (int)$t_row['user_id'];
@@ -100,12 +100,20 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 					<?php echo lang_get( 'category_status' ) ?>
 				</td>
 				<td>
-					<label><input type="radio" name="category_status" value="0" <?php echo ( $t_category_status == CATEGORY_STATUS_DISABLED ) ? 'checked="checked" ' : ''?>/>
-					<?php echo lang_get( 'category_active' ) ?></label>
-					&nbsp; &nbsp; &nbsp; 
-					<label><input type="radio" name="category_status" value="1" <?php echo ( $t_category_status == CATEGORY_STATUS_ENABLED) ? 'checked="checked" ' : ''?>/>
-					<?php echo lang_get( 'category_not_active' ) ?></label>
-				</td>			
+					<label>
+						<input type="radio" name="category_status" value="0"
+							<?php echo ( $t_category_status == CATEGORY_STATUS_DISABLED ) ? 'checked="checked" ' : '' ?>
+						/>
+						<?php echo lang_get( 'category_active' ) ?>
+					</label>
+					&nbsp; &nbsp; &nbsp;
+					<label>
+						<input type="radio" name="category_status" value="1"
+							<?php echo ( $t_category_status == CATEGORY_STATUS_ENABLED ) ? 'checked="checked" ' : '' ?>
+						/>
+						<?php echo lang_get( 'category_not_active' ) ?>
+					</label>
+				</td>
 			</tr>
 			<tr>
 				<td class="category">
