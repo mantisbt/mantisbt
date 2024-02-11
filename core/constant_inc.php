@@ -34,9 +34,6 @@ define( 'BAD', 0 );
 define( 'GOOD', 1 );
 define( 'WARN', 2 );
 
-define( 'CATEGORY_STATUS_ENABLED', 1 );
-define( 'CATEGORY_STATUS_DISABLED', 0 );
-
 # PHP-related constants
 define( 'PHP_MIN_VERSION', '7.4.0' );
 define( 'PHP_CLI', 0 );
@@ -131,6 +128,10 @@ define( 'ETA_TWO_TO_THREE_DAYS', 30 );
 define( 'ETA_UNDER_ONE_WEEK', 40 );
 define( 'ETA_UNDER_ONE_MONTH', 50 );
 define( 'ETA_OVER_ONE_MONTH', 60 );
+
+# Category status
+define( 'CATEGORY_STATUS_DISABLED', 0 );
+define( 'CATEGORY_STATUS_ENABLED', 1 );
 
 # project view_state
 define( 'VS_PUBLIC', 10 );
