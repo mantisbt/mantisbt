@@ -198,10 +198,13 @@ function category_add( $p_project_id, $p_name ) {
 }
 
 /**
- * Update the name and user associated with the category
- * @param integer $p_category_id Category identifier.
- * @param string  $p_name        Category Name.
- * @param integer $p_assigned_to User ID that category is assigned to.
+ * Update the name and user associated with the category.
+ *
+ * @param int    $p_category_id Category identifier.
+ * @param string $p_name        Category Name.
+ * @param int    $p_assigned_to User ID that category is assigned to.
+ * @param int    $p_status      Category status (see CATEGORY_STATUS_* constants)
+ *
  * @return void
  * @access public
  */
@@ -490,11 +493,15 @@ function category_get_filter_list( $p_project_id = null ) {
 
 /**
  * Return all categories for the specified project id.
+ *
  * Obeys project hierarchies and such.
- * @param integer $p_project_id      A Project identifier.
- * @param boolean $p_inherit         Indicates whether to inherit categories from parent projects, or null to use configuration default.
- * @param boolean $p_sort_by_project Whether to sort by project.
- * @param boolean $p_active_only	 Wheter to select all categories or just the active ones
+ *
+ * @param int  $p_project_id      A Project identifier.
+ * @param bool $p_inherit         Indicates whether to inherit categories from parent projects,
+ *                                or null to use configuration default.
+ * @param bool $p_sort_by_project Whether to sort by project.
+ * @param bool $p_active_only     False to select all categories or True for just the active ones.
+ *
  * @return array array of categories
  * @access public
  */

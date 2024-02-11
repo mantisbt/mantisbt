@@ -752,12 +752,16 @@ function print_profile_option_list_from_profiles( array $p_profiles, $p_select_i
 }
 
 /**
+ * Print categories option list.
+ *
  * Since categories can be orphaned we need to grab all unique instances of category
  * We check in the project category table and in the bug table
- * We put them all in one array and make sure the entries are unique
+ * We put them all in one array and make sure the entries are unique.
  *
  * @param integer $p_category_id A category identifier.
- * @param integer $p_project_id  A project identifier.
+ * @param null    $p_project_id  A project identifier.
+ * @param bool    $p_active_only True to exclude inactive categories.
+ *
  * @return void
  */
 function print_category_option_list( $p_category_id = 0, $p_project_id = null, $p_active_only = false ) {
