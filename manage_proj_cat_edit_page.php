@@ -58,7 +58,7 @@ $t_row = category_get_row( $f_category_id );
 $t_assigned_to = (int)$t_row['user_id'];
 $t_project_id = (int)$t_row['project_id'];
 $t_name = $t_row['name'];
-$t_category_status = $t_row['status'];
+$t_status = (int)$t_row['status'];
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
 
@@ -97,22 +97,15 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'category_status' ) ?>
+					<label for="category-status">
+						<?php echo lang_get( 'enabled' ) ?>
+					</label>
 				</td>
 				<td>
-					<label>
-						<input type="radio" name="category_status" value="0"
-							<?php echo ( $t_category_status == CATEGORY_STATUS_DISABLED ) ? 'checked="checked" ' : '' ?>
-						/>
-						<?php echo lang_get( 'category_active' ) ?>
-					</label>
-					&nbsp; &nbsp; &nbsp;
-					<label>
-						<input type="radio" name="category_status" value="1"
-							<?php echo ( $t_category_status == CATEGORY_STATUS_ENABLED ) ? 'checked="checked" ' : '' ?>
-						/>
-						<?php echo lang_get( 'category_not_active' ) ?>
-					</label>
+					<input type="checkbox" id="proj-category-status" name="status" class="ace"
+						<?php check_checked( $t_status, CATEGORY_STATUS_ENABLED ); ?>
+					/>
+					<span class="lbl"></span>
 				</td>
 			</tr>
 			<tr>

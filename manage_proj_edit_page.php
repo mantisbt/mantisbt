@@ -462,7 +462,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		<thead>
 			<tr>
 				<th><?php echo lang_get( 'category' ) ?></th>
-				<td><?php echo lang_get( 'category_status' ) ?></td>
+				<th class="center"><?php echo lang_get( 'enabled' ) ?></th>
 				<th><?php echo lang_get( 'assign_to' ) ?></th>
 				<th colspan="2" class="center"><?php echo lang_get( 'actions' ) ?></th>
 			</tr>
@@ -473,15 +473,10 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		foreach ( $t_categories as $t_category ) {
 			$t_id = $t_category['id'];
 			$t_inherited = ( $t_category['project_id'] != $f_project_id );
-			if( $t_category['status'] == OFF ){
-				$t_category_status = lang_get( 'category_active' ) ;
-			} else {
-				$t_category_status = lang_get( 'category_not_active' ) ;
-			}
 ?>
 			<tr>
 				<td><?php echo string_display_line( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
-				<td><?php echo $t_category_status ?></td>
+				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<td class="center">
 					<div class="inline">

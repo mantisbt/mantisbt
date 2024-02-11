@@ -500,12 +500,12 @@ function category_get_filter_list( $p_project_id = null ) {
  * @param bool $p_inherit         Indicates whether to inherit categories from parent projects,
  *                                or null to use configuration default.
  * @param bool $p_sort_by_project Whether to sort by project.
- * @param bool $p_active_only     False to select all categories or True for just the active ones.
+ * @param bool $p_enabled_only    False to select all categories or True for just the active ones.
  *
  * @return array array of categories
  * @access public
  */
-function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false, $p_active_only = false ) {
+function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false, $p_enabled_only = false ) {
 	global $g_category_cache, $g_cache_category_project;
 
 	if( isset( $g_cache_category_project[(int)$p_project_id] ) ) {
@@ -545,8 +545,8 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 		$t_project_where = ' project_id=' . $p_project_id . ' ';
 	}
 
-	if( $p_active_only ) {
-		$t_project_where .= ' and c.status = ' . CATEGORY_STATUS_DISABLED;
+	if( $p_enabled_only ) {
+		$t_project_where .= ' and c.status = ' . CATEGORY_STATUS_ENABLED;
 	}
 	
 	$t_query = 'SELECT c.*, p.name AS project_name FROM {category} c

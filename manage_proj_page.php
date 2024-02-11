@@ -128,7 +128,7 @@ print_manage_menu( 'manage_proj_page.php' );
 					);
 					print_sort_icon( $t_direction, $f_sort, 'status' ); ?>
 				</th>
-				<th><?php
+				<th class="center"><?php
 					print_manage_project_sort_link(
 						'manage_proj_page.php',
 						lang_get( 'enabled' ),
@@ -244,7 +244,7 @@ print_manage_menu( 'manage_proj_page.php' );
 		<thead>
 			<tr>
 				<td><?php echo lang_get( 'category' ) ?></td>
-				<td><?php echo lang_get( 'category_status' ) ?></td>
+				<td class="center"><?php echo lang_get( 'enabled' ) ?></td>
 				<td><?php echo lang_get( 'assign_to' ) ?></td>
 				<?php if( $t_can_update_global_cat ) { ?>
 				<td class="center"><?php echo lang_get( 'actions' ) ?></td>
@@ -256,15 +256,10 @@ print_manage_menu( 'manage_proj_page.php' );
 <?php
 			foreach( $t_categories as $t_category ) {
 				$t_id = $t_category['id'];
-				if( $t_category['status'] == OFF ){
-					$t_category_status = lang_get( 'category_active' ) ;
-				} else {
-					$t_category_status = lang_get( 'category_not_active' ) ;
-				}
 ?>
 			<tr>
 				<td><?php echo string_display_line( category_full_name( $t_id, false ) )  ?></td>
-				<td><?php echo $t_category_status ?></td>
+				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<?php if( $t_can_update_global_cat ) { ?>
 				<td class="center">

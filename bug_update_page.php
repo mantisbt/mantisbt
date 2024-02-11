@@ -237,7 +237,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 		echo '<select ' . helper_get_tab_index()
 			. ( $t_allow_no_category ? '' : ' required' )
 			. ' id="category_id" name="category_id" class="input-sm">';
-		print_category_option_list( $t_bug->category_id, $t_bug->project_id, /* active_only */ true );
+		print_category_option_list( $t_bug->category_id, $t_bug->project_id, true );
 		echo '</select>';
 	}
 
