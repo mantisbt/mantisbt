@@ -774,7 +774,9 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 	$t_cat_arr = category_get_all_rows( $t_project_id, null, true, $p_enabled_only );
 
 	# Add the current category if it is not in the list
-	if( !in_array( $p_category_id, array_column( $t_cat_arr, 'id' ) ) ) {
+	if( $p_category_id != 0
+        && !in_array( $p_category_id, array_column( $t_cat_arr, 'id' ) )
+    ) {
 		$t_category_row = category_get_row( $p_category_id );
 		$t_category_row['project_name'] = project_get_name( $t_category_row['project_id'] );
 		$t_cat_arr[] = $t_category_row;
@@ -808,7 +810,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 			$t_category_row['project_id'] != $t_project_id
 		);
 		if( $t_disabled ) {
-			$t_category_name .= ' [' . lang_get( 'disabled' ) . ']';
+//			$t_category_name .= ' [' . lang_get( 'disabled' ) . ']';
 		}
 		echo '<option value="' . $t_category_id . '"';
 		check_selected( $p_category_id, $t_category_id );
