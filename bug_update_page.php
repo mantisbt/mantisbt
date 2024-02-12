@@ -234,6 +234,13 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<td>';
 
 	if( $t_show_category ) {
+        if( !category_is_enabled( $t_bug->category_id ) ) {
+			print_icon( 'warning',
+				'fa-status-box bigger-125 red',
+				lang_get( 'category_disabled' )
+			);
+			echo "&nbsp;";
+		}
 		echo '<select ' . helper_get_tab_index()
 			. ( $t_allow_no_category ? '' : ' required' )
 			. ' id="category_id" name="category_id" class="input-sm">';

@@ -145,6 +145,7 @@ $s_inherit = 'Inherit Categories';
 $s_inherit_global = 'Inherit Global Categories';
 $s_inherit_parent = 'Inherit Parent Categories';
 $s_update_subproject_inheritance = 'Update Subproject Inheritance';
+$s_category_disabled = 'Category has been disabled, please select another one';
 
 $s_duplicate_of = 'duplicate of';
 $s_has_duplicate = 'has duplicate';

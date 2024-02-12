@@ -715,3 +715,14 @@ function category_ensure_can_delete( $p_category_id ) {
 		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES, ERROR );
 	}
 }
+
+/**
+ * Check if category is enabled.
+ *
+ * @param int $p_category_id Category identifier.
+ *
+ * @return bool True if enabled, false otherwise
+ */
+function category_is_enabled( $p_category_id ) {
+	return category_get_field( $p_category_id, 'status' ) == CATEGORY_STATUS_ENABLED;
+}
