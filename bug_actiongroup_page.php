@@ -348,7 +348,7 @@ if( $t_multiple_projects ) {
 					print_enum_string_option_list( 'status', config_get( 'bug_submit_status' ) );
 					break;
 				case 'UP_CATEGORY':
-					print_category_option_list();
+					print_category_option_list( 0, null, true );
 					break;
 				case 'VIEW_STATUS':
 					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );

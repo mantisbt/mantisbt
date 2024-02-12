@@ -127,7 +127,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 		<?php echo plugin_lang_get( 'fallback_category' );?>
 		<select class="input-sm" name="defaultcategory">
-			<?php print_category_option_list( );?>
+			<?php print_category_option_list( 0, null, true );?>
 		</select>
 	</td>
 </tr>
