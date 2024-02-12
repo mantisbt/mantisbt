@@ -200,15 +200,16 @@ function category_add( $p_project_id, $p_name ) {
 /**
  * Update the name and user associated with the category.
  *
- * @param int    $p_category_id Category identifier.
- * @param string $p_name        Category Name.
- * @param int    $p_assigned_to User ID that category is assigned to.
- * @param int    $p_status      Category status (see CATEGORY_STATUS_* constants)
+ * @param int      $p_category_id Category identifier.
+ * @param string   $p_name        Category Name.
+ * @param int      $p_assigned_to User ID that category is assigned to.
+ * @param int|null $p_status      Optional category status (see CATEGORY_STATUS_* constants)
+ *                                or null to leave status unchanged.
  *
  * @return void
  * @access public
  */
-function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status ) {
+function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = null ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -228,6 +229,11 @@ function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status ) {
 			error_parameters( $p_assigned_to );
 			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
 		}
+	}
+
+	# Keep existing status
+	if( $p_status === null ) {
+		$p_status = $t_old_category['status'];
 	}
 
 	db_param_push();
