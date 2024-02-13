@@ -6,9 +6,9 @@ The version and status of each is summarized below:
 
 ## PHP libraries
 
-| directory  | project    | version | status         |
-|------------|------------|---------|----------------|
-| rssbuilder | RSSBuilder | 2.2.1   | patched [1][2] |
+| directory  | project    | version | status              |
+|------------|------------|---------|---------------------|
+| rssbuilder | RSSBuilder | 2.2.1   | patched [1],[2],[4] |
 
 
 ## Javascript/CSS libraries
@@ -30,10 +30,10 @@ The version and status of each is summarized below:
 **Notes**
 
 1. removed `__autoload` function
-2. fixed SYSTEM NOTICE 'Only variables should be passed by reference'
+2. fixed SYSTEM NOTICE 'Only variables should be passed by reference' (#25213)
 3. fixed scrolling regression in navigation buttons, 
    patch submitted upstream https://github.com/javve/list.js/pull/750
-
+4. fixed TypeError when creating empty feed on PHP 8 (#33634)
 
 
 ## Upstream projects
