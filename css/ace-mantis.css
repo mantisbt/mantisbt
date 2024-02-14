@@ -716,6 +716,12 @@ ul.changelog > li, ul.roadmap > li {
         left: 43px;
     }
 
+    .sidebar.menu-min .nav-list > li > a > .menu-text {
+        min-width: 176px;
+        width: max-content;
+        padding-right: 12px;
+    }
+
     .rtl .sidebar.compact + .main-content {
         margin-left: auto !important;
         margin-right: 125px !important;
