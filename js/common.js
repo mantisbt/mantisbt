@@ -636,6 +636,16 @@ $(document).ready( function() {
 			.addClass(getColorClassName(me.val()));
 		me.data('prev', me.val());
 	});
+
+	/**
+	 * Add a title attribute to collapsed menu items overflowing the menu's width,
+	 * so user can view the ellipsified text.
+	 */
+	$('..sidebar.menu-min .nav-list > li > a > .menu-text').forEach(function (elem) {
+		if (parseFloat(window.getComputedStyle(elem).width) === parseFloat(window.getComputedStyle(elem.parentElement).width)) {
+			elem.setAttribute('title', elem.textContent);
+		}
+	});
 });
 
 function setBugLabel() {

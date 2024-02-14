@@ -704,6 +704,13 @@ ul.changelog > li, ul.roadmap > li {
         margin-left: 43px !important;
     }
 
+    .sidebar.menu-min .nav-list > li > a > .menu-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-right: 8px;
+    }
+
     .sidebar.compact, .sidebar.compact.navbar-collapse {
         width: 125px;
     }
