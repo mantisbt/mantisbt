@@ -169,7 +169,8 @@ function category_can_remove( $p_category_id ) {
  */
 function category_ensure_can_remove( $p_category_id ) {
 	if( !category_can_remove( $p_category_id ) ) {
-		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_DEFAULT, ERROR );
+		error_parameters( category_get_name( $p_category_id) );
+		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
 	}
 }
 
