@@ -867,10 +867,11 @@ function mci_project_categories( $p_project_id ) {
 			'id' => (int)$t_category['id'],
 			'name' => $t_category['name'],
 			'project' => array( 'id' => $t_project_id, 'name' => $t_category['project_name'] ),
+			'status' => $t_category['status'],
 		);
 
-		# Do access check here to take into consider the project id that the category is associated with
-		# in case of inherited categories.
+		# Do access check here to take into consideration the project id that the
+		# category is associated with in case of inherited categories.
 		$t_default_handler_id = (int)$t_category['user_id'];
 		if( $t_default_handler_id != 0 &&
 		    access_has_project_level( config_get( 'manage_project_threshold', null, null, $t_project_id ), $t_project_id ) ) {
