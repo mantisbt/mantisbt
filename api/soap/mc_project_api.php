@@ -214,6 +214,43 @@ function mci_project_get_row( $p_project_id, $p_user_id, $p_lang ) {
 }
 
 /**
+ * Performs initial checks for Project Categories.
+ *
+ * @param string $p_username   The name of the user trying to access the categories.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project for which to add the category.
+ * @param string $p_readonly   Access: True for readonly, False for manage project
+ *
+ * @return RestFault|SoapFault|true True if caller can proceed
+ */
+function mci_project_initial_checks( $p_username, $p_password, $p_project_id, $p_readonly ) {
+	global $g_project_override;
+
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_fault_access_denied();
+	}
+
+	if( !project_exists( $p_project_id ) ) {
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
+	}
+
+	$g_project_override = $p_project_id;
+
+	if( $p_readonly ) {
+		if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+			return mci_fault_access_denied( $t_user_id );
+		}
+	} else {
+		if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
+			return mci_fault_access_denied();
+		}
+	}
+
+	return true;
+}
+
+/**
  * Get all categories of a project.
  *
  * @param string $p_username   The name of the user trying to access the categories.
@@ -223,20 +260,9 @@ function mci_project_get_row( $p_project_id, $p_user_id, $p_lang ) {
  * @return array|RestFault|SoapFault An array of category names
  */
 function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_login_failed();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
+	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, true );
+	if( $t_result !== true ) {
+		return $t_result;
 	}
 
 	$t_result = array();
@@ -258,20 +284,9 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
  * @return int|RestFault|SoapFault Id of the new category
  */
 function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_category_name ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_access_denied();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied();
+	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, false );
+	if( $t_result !== true ) {
+		return $t_result;
 	}
 
 	return category_add( $p_project_id, $p_category_name );
@@ -287,22 +302,10 @@ function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_ca
  *
  * @return bool|RestFault|SoapFault True or false depending on the success of the delete action.
  */
-function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $p_category_name ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_access_denied();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied();
+function mc_project_delete_category( $p_username, $p_password, $p_project_id, $p_category_name ) {
+	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, false );
+	if( $t_result !== true ) {
+		return $t_result;
 	}
 
 	# find the id of the category
