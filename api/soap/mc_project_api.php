@@ -369,32 +369,35 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
  * @param string $p_username   The name of the user trying to access the versions.
  * @param string $p_password   The password of the user.
  * @param int    $p_project_id The id of the project to retrieve the versions for.
+ * @param bool   $p_released   Released status (one of VERSION_* constants)
  *
  * @return array|RestFault|SoapFault Array representing a ProjectVersionDataArray structure.
  */
-function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_login_failed();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
+function mci_project_get_versions( $p_username, $p_password, $p_project_id, $p_released = VERSION_ALL ) {
+	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, true );
+	if( $t_result !== true ) {
+		return $t_result;
 	}
 
 	$t_result = array();
-	foreach( version_get_all_rows( $p_project_id, VERSION_ALL ) as $t_version ) {
+	foreach( version_get_all_rows( $p_project_id, $p_released ) as $t_version ) {
 		$t_result[] = mci_project_version_as_array( $t_version );
 	}
 
 	return $t_result;
+}
+
+/**
+ * Get all versions of a project.
+ *
+ * @param string $p_username   The name of the user trying to access the versions.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project to retrieve the versions for.
+ *
+ * @return array|RestFault|SoapFault Array representing a ProjectVersionDataArray structure.
+ */
+function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
+	return mci_project_get_versions( $p_username, $p_password, $p_project_id );
 }
 
 /**
@@ -407,29 +410,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
  * @return array|RestFault|SoapFault Array representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_released_versions( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_login_failed();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-
-	$g_project_override = $p_project_id;
-	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
-
-	$t_result = array();
-
-	foreach( version_get_all_rows( $p_project_id, VERSION_RELEASED ) as $t_version ) {
-		$t_result[] = mci_project_version_as_array( $t_version );
-	}
-
-	return $t_result;
+	return mci_project_get_versions( $p_username, $p_password, $p_project_id, VERSION_RELEASED );
 }
 
 /**
@@ -442,30 +423,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
  * @return array|RestFault|SoapFault Array representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_unreleased_versions( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_login_failed();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
-
-	$t_result = array();
-
-	foreach( version_get_all_rows( $p_project_id, VERSION_FUTURE ) as $t_version ) {
-		$t_result[] = mci_project_version_as_array( $t_version );
-	}
-
-	return $t_result;
+	return mci_project_get_versions( $p_username, $p_password, $p_project_id, VERSION_FUTURE );
 }
 
 /**
