@@ -232,6 +232,15 @@ function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = n
 		}
 	}
 
+	# Disabling category is not authorized if it is used as default
+	$t_default_category_id = config_get_global( 'default_category_for_moves', null );
+	if( $p_category_id == $t_default_category_id
+		|| config_is_defined( 'default_category_for_moves', $p_category_id )
+	) {
+		error_parameters( $t_old_category['name'] );
+		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
+	}
+
 	# Keep existing status
 	if( $p_status === null ) {
 		$p_status = $t_old_category['status'];
