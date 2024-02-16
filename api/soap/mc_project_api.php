@@ -181,21 +181,36 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
 
 	$t_result = array();
 	foreach( user_get_accessible_projects( $t_user_id ) as $t_project_id ) {
-		$t_project_row = project_cache_row( $t_project_id );
-		$t_project = array();
-		$t_project['id'] = $t_project_id;
-		$t_project['name'] = $t_project_row['name'];
-		$t_project['status'] = mci_enum_get_array_by_id( $t_project_row['status'], 'project_status', $t_lang );
-		$t_project['enabled'] = $t_project_row['enabled'];
-		$t_project['view_state'] = mci_enum_get_array_by_id( $t_project_row['view_state'], 'project_view_state', $t_lang );
-		$t_project['access_min'] = mci_enum_get_array_by_id( $t_project_row['access_min'], 'access_levels', $t_lang );
-		$t_project['file_path'] = array_key_exists( 'file_path', $t_project_row ) ? $t_project_row['file_path'] : '';
-		$t_project['description'] = array_key_exists( 'description', $t_project_row ) ? $t_project_row['description'] : '';
-		$t_project['subprojects'] = mci_user_get_accessible_subprojects( $t_user_id, $t_project_id, $t_lang );
-		$t_result[] = $t_project;
+		$t_result[] = mci_project_get_row( $t_project_id, $t_user_id, $t_lang );
 	}
 
 	return $t_result;
+}
+
+/**
+ * Retrieves project data.
+ * 
+ * @param int    $p_project_id
+ * @param int    $p_user_id
+ * @param string $p_lang
+ *
+ * @return array
+ * @throws ClientException
+ */
+function mci_project_get_row( $p_project_id, $p_user_id, $p_lang ) {
+	$t_project = project_cache_row( $p_project_id );
+
+	return array(
+		'id' => $p_project_id,
+		'name' => $t_project['name'],
+		'status' => mci_enum_get_array_by_id( $t_project['status'], 'project_status', $p_lang ),
+		'enabled' => $t_project['enabled'],
+		'view_state' => mci_enum_get_array_by_id( $t_project['view_state'], 'project_view_state', $p_lang ),
+		'access_min' => mci_enum_get_array_by_id( $t_project['access_min'], 'access_levels', $p_lang ),
+		'file_path' => array_key_exists( 'file_path', $t_project ) ? $t_project['file_path'] : '',
+		'description' => array_key_exists( 'description', $t_project ) ? $t_project['description'] : '',
+		'subprojects' => mci_user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_lang ),
+	);
 }
 
 /**
