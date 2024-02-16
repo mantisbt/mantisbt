@@ -21,6 +21,9 @@
  * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
  * @copyright Copyright 2005  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpComposerExtensionStubsInspection
+ * @noinspection PhpUnused
  */
 
 use Mantis\Exceptions\ClientException;
@@ -60,11 +63,10 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
-	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
+	$t_orig_page_number = max( $p_page_number, 1 );
 	$t_page_count = 0;
 	$t_bug_count = 0;
 	$t_target_user_id = mci_get_user_id( $p_target_user );
-	$t_show_sticky = true;
 
 	if( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
 		# If user is filtering on handlers, then they must have access to view handlers
@@ -91,7 +93,7 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 
 	$t_rows = filter_get_bug_rows(
 		$p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter,
-		$p_project_id, $t_user_id, $t_show_sticky );
+		$p_project_id, $t_user_id, true );
 
 	$t_result = array();
 
@@ -135,7 +137,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
+	$t_orig_page_number = max( $p_page_number, 1 );
 	$t_page_count = 0;
 	$t_bug_count = 0;
 	$g_project_override = $p_project_id;
@@ -300,7 +302,8 @@ function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $
 	}
 
 	# delete the category and link all the issues to the default category
-	return category_remove( $p_category_id, config_get( 'default_category_for_moves' ) );
+	category_remove( $p_category_id, config_get( 'default_category_for_moves' ) );
+	return true;
 }
 
 /**
@@ -341,7 +344,8 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 	$p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
 
 	# update the category
-	return category_update( $p_category_id, $p_category_name_new, $p_assigned_to );
+	category_update( $p_category_id, $p_category_name_new, $p_assigned_to );
+	return true;
 }
 
 /**
@@ -483,7 +487,7 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 			'name' => $p_version['name'],
 			'description' => $p_version['description'],
 			'released' => $p_version['released'],
-			'obsolete' => isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false,
+			'obsolete' => $p_version['obsolete'] ?? false,
 			'timestamp' => $p_version['date_order']
 		)
 	);
@@ -528,7 +532,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
 	$t_date_order = is_blank( $p_version['date_order'] ) ? null : $p_version['date_order'];
-	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
+	$t_obsolete = $p_version['obsolete'] ?? false;
 
 	if( is_blank( $t_project_id ) ) {
 		return ApiObjectFactory::faultBadRequest( 'Mandatory field "project_id" was missing' );
@@ -636,8 +640,10 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
  * @param array $p_custom_fields The custom fields (by reference).
  *                               May be unset; if so, will be set to null.
  *
- * @return bool true or error.
+ * @return void
  * @throws ClientException
+ *
+ * @noinspection PhpParameterByRefIsNotUsedAsReferenceInspection
  */
 function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) {
 	# Load custom field definitions for the specified project
@@ -728,8 +734,6 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 			);
 		}
 	}
-
-	return true;
 }
 
 /**
@@ -936,8 +940,6 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_pub = VS_PUBLIC;
-	$t_priv = VS_PRIVATE;
 	$t_admin = config_get_global( 'admin_site_threshold' );
 
 	if( $p_project_id == ALL_PROJECTS ) {
@@ -975,7 +977,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		( ut.access_level = ' . db_param() . ' ) )
 		ORDER BY pt.name ASC, pft.title ASC';
 
-	$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
+	$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, VS_PUBLIC, $t_user_id, $t_admin ) );
 	$t_num_files = db_num_rows( $t_result );
 
 	$t_attachments = array();
@@ -1120,10 +1122,9 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 
 	$t_command = new ProjectAddCommand( $t_data );
 	$t_result = $t_command->execute();
-	$t_project_id = $t_result['id'];
 
 	# project_create returns the new project's id, spit that out to web service caller
-	return $t_project_id;
+	return $t_result['id'];
 }
 
 /**
@@ -1244,7 +1245,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
+	$t_orig_page_number = max( $p_page_number, 1 );
 	$t_page_count = 0;
 	$t_bug_count = 0;
 
@@ -1275,8 +1276,6 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
  * @throws ClientException
  */
 function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_access ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -1295,7 +1294,5 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 
 	$t_command = new ProjectUsersGetCommand( $t_data );
 	$t_result = $t_command->execute();
-	$t_result = $t_result['users'];
-
-	return $t_result;
+	return $t_result['users'];
 }
