@@ -251,7 +251,7 @@ function mci_project_initial_checks( $p_username, $p_password, $p_project_id, $p
 }
 
 /**
- * Get all categories of a project.
+ * Get all enabled categories of a project.
  *
  * @param string $p_username   The name of the user trying to access the categories.
  * @param string $p_password   The password of the user.
@@ -266,7 +266,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	}
 
 	$t_result = array();
-	$t_cat_array = category_get_all_rows( $p_project_id );
+	$t_cat_array = category_get_all_rows( $p_project_id, null, false, true );
 	foreach( $t_cat_array as $t_category_row ) {
 		$t_result[] = $t_category_row['name'];
 	}
