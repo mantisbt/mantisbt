@@ -125,6 +125,11 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 			array_merge( $this->defaultSoapClientOptions, $this->extraSoapClientFlags() )
 		);
 
+		# Set Xdebug session cookie
+		if( !empty( $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION'] ) ) {
+			$this->client->__setCookie('XDEBUG_SESSION', $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION']);
+		}
+
 		$this->mantisPath = substr( $t_wsdl, 0, -strlen( 'api/soap/mantisconnect.php?wsdl' ) );
 
 		$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'] ?? 'administrator';

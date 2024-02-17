@@ -50,6 +50,11 @@ abstract class RestBase extends TestCase {
 	protected $base_path = '';
 
 	/**
+	 * @var string Xdebug session value to enable, empty to disable debugging.
+	 */
+	protected $xdebug_session;
+
+	/**
 	 * @var string Username
 	 */
 	protected $userName = 'administrator';
@@ -123,6 +128,8 @@ abstract class RestBase extends TestCase {
 
 		$this->token = $GLOBALS['MANTIS_TESTSUITE_API_TOKEN'];
 
+		$this->xdebug_session = $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION'] ?? '';
+
 		if( array_key_exists( 'MANTIS_TESTSUITE_PROJECT_ID', $GLOBALS ) ) {
 			$this->projectId = $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'];
 		} else {
@@ -161,7 +168,7 @@ abstract class RestBase extends TestCase {
 	 * @return RequestBuilder
 	 */
 	public function builder() {
-		return new RequestBuilder( $this->base_path, $this->token );
+		return new RequestBuilder( $this->base_path, $this->token, $this->xdebug_session );
 	}
 
 	/**
