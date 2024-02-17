@@ -137,6 +137,12 @@ if( false === $t_config_inc_found ) {
 		exit( 1 );
 	}
 
+	# Do not load Core for dynamic javascript files when MantisBT is not installed
+	if( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'javascript' ) ) ) {
+		http_response_code( HTTP_STATUS_NO_CONTENT );
+		exit;
+	}
+
 	if( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
 		header( 'Content-Type: text/html' );
 		# Temporary redirect (307) instead of Found (302) default
