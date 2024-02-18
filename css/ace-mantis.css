@@ -717,7 +717,6 @@ ul.changelog > li, ul.roadmap > li {
     }
 
     .sidebar.menu-min .nav-list > li > a > .menu-text {
-        min-width: 176px;
         width: max-content;
         padding-right: 12px;
     }
