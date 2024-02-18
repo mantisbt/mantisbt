@@ -887,18 +887,7 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 
 	$t_result = array();
 	foreach( user_get_accessible_subprojects( $p_user_id, $p_parent_project_id ) as $t_subproject_id ) {
-		$t_subproject_row = project_cache_row( $t_subproject_id );
-		$t_subproject = array();
-		$t_subproject['id'] = $t_subproject_id;
-		$t_subproject['name'] = $t_subproject_row['name'];
-		$t_subproject['status'] = mci_enum_get_array_by_id( $t_subproject_row['status'], 'project_status', $t_lang );
-		$t_subproject['enabled'] = $t_subproject_row['enabled'];
-		$t_subproject['view_state'] = mci_enum_get_array_by_id( $t_subproject_row['view_state'], 'project_view_state', $t_lang );
-		$t_subproject['access_min'] = mci_enum_get_array_by_id( $t_subproject_row['access_min'], 'access_levels', $t_lang );
-		$t_subproject['file_path'] = array_key_exists( 'file_path', $t_subproject_row ) ? $t_subproject_row['file_path'] : '';
-		$t_subproject['description'] = array_key_exists( 'description', $t_subproject_row ) ? $t_subproject_row['description'] : '';
-		$t_subproject['subprojects'] = mci_user_get_accessible_subprojects( $p_user_id, $t_subproject_id, $t_lang );
-		$t_result[] = $t_subproject;
+		$t_result[] = mci_project_get_row( $t_subproject_id, $p_user_id, $t_lang );
 	}
 
 	return $t_result;
