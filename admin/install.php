@@ -139,7 +139,7 @@ $t_install_state = gpc_get_int( 'install', 0 );
 
 layout_page_header_begin( 'Administration - Installation' );
 # Javascript is only needed to support input of installation options
-if( $t_install_state < 2 ) {
+if( $t_install_state <= 2 ) {
 	html_javascript_link( 'install.js' );
 }
 layout_page_header_end();
