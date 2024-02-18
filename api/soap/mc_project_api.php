@@ -251,7 +251,7 @@ function mci_project_initial_checks( $p_username, $p_password, $p_project_id, $p
 }
 
 /**
- * Get all categories of a project.
+ * Get all enabled categories of a project.
  *
  * @param string $p_username   The name of the user trying to access the categories.
  * @param string $p_password   The password of the user.
@@ -266,7 +266,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	}
 
 	$t_result = array();
-	$t_cat_array = category_get_all_rows( $p_project_id );
+	$t_cat_array = category_get_all_rows( $p_project_id, null, false, true );
 	foreach( $t_cat_array as $t_category_row ) {
 		$t_result[] = $t_category_row['name'];
 	}
@@ -867,10 +867,11 @@ function mci_project_categories( $p_project_id ) {
 			'id' => (int)$t_category['id'],
 			'name' => $t_category['name'],
 			'project' => array( 'id' => $t_project_id, 'name' => $t_category['project_name'] ),
+			'status' => $t_category['status'],
 		);
 
-		# Do access check here to take into consider the project id that the category is associated with
-		# in case of inherited categories.
+		# Do access check here to take into consideration the project id that the
+		# category is associated with in case of inherited categories.
 		$t_default_handler_id = (int)$t_category['user_id'];
 		if( $t_default_handler_id != 0 &&
 		    access_has_project_level( config_get( 'manage_project_threshold', null, null, $t_project_id ), $t_project_id ) ) {

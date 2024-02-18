@@ -169,7 +169,8 @@ function category_can_remove( $p_category_id ) {
  */
 function category_ensure_can_remove( $p_category_id ) {
 	if( !category_can_remove( $p_category_id ) ) {
-		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_DEFAULT, ERROR );
+		error_parameters( category_get_name( $p_category_id) );
+		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
 	}
 }
 
@@ -198,14 +199,18 @@ function category_add( $p_project_id, $p_name ) {
 }
 
 /**
- * Update the name and user associated with the category
- * @param integer $p_category_id Category identifier.
- * @param string  $p_name        Category Name.
- * @param integer $p_assigned_to User ID that category is assigned to.
+ * Update the name and user associated with the category.
+ *
+ * @param int      $p_category_id Category identifier.
+ * @param string   $p_name        Category Name.
+ * @param int      $p_assigned_to User ID that category is assigned to.
+ * @param int|null $p_status      Optional category status (see CATEGORY_STATUS_* constants)
+ *                                or null to leave status unchanged.
+ *
  * @return void
  * @access public
  */
-function category_update( $p_category_id, $p_name, $p_assigned_to ) {
+function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = null ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -227,10 +232,24 @@ function category_update( $p_category_id, $p_name, $p_assigned_to ) {
 		}
 	}
 
+	# Disabling category is not authorized if it is used as default
+	$t_default_category_id = config_get_global( 'default_category_for_moves', null );
+	if( $p_category_id == $t_default_category_id
+		|| config_is_defined( 'default_category_for_moves', $p_category_id )
+	) {
+		error_parameters( $t_old_category['name'] );
+		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
+	}
+
+	# Keep existing status
+	if( $p_status === null ) {
+		$p_status = $t_old_category['status'];
+	}
+
 	db_param_push();
-	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . '
+	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . ', status=' . db_param() .'
 				  WHERE id=' . db_param();
-	db_query( $t_query, array( $p_name, $p_assigned_to, $p_category_id ) );
+	db_query( $t_query, array( $p_name, $p_assigned_to , $p_status, $p_category_id ) );
 
 	# Add bug history entries if we update the category's name
 	if( $t_old_category['name'] != $p_name ) {
@@ -490,14 +509,19 @@ function category_get_filter_list( $p_project_id = null ) {
 
 /**
  * Return all categories for the specified project id.
+ *
  * Obeys project hierarchies and such.
- * @param integer $p_project_id      A Project identifier.
- * @param boolean $p_inherit         Indicates whether to inherit categories from parent projects, or null to use configuration default.
- * @param boolean $p_sort_by_project Whether to sort by project.
+ *
+ * @param int  $p_project_id      A Project identifier.
+ * @param bool $p_inherit         Indicates whether to inherit categories from parent projects,
+ *                                or null to use configuration default.
+ * @param bool $p_sort_by_project Whether to sort by project.
+ * @param bool $p_enabled_only    False to select all categories or True for just the active ones.
+ *
  * @return array array of categories
  * @access public
  */
-function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false ) {
+function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false, $p_enabled_only = false ) {
 	global $g_category_cache, $g_cache_category_project;
 
 	if( isset( $g_cache_category_project[(int)$p_project_id] ) ) {
@@ -537,6 +561,10 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 		$t_project_where = ' project_id=' . $p_project_id . ' ';
 	}
 
+	if( $p_enabled_only ) {
+		$t_project_where .= ' and c.status = ' . CATEGORY_STATUS_ENABLED;
+	}
+	
 	$t_query = 'SELECT c.*, p.name AS project_name FROM {category} c
 				LEFT JOIN {project} p
 					ON c.project_id=p.id
@@ -696,4 +724,15 @@ function category_ensure_can_delete( $p_category_id ) {
 		error_parameters( $t_category_name );
 		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES, ERROR );
 	}
+}
+
+/**
+ * Check if category is enabled.
+ *
+ * @param int $p_category_id Category identifier.
+ *
+ * @return bool True if enabled, false otherwise
+ */
+function category_is_enabled( $p_category_id ) {
+	return category_get_field( $p_category_id, 'status' ) == CATEGORY_STATUS_ENABLED;
 }

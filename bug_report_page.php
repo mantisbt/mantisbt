@@ -280,7 +280,7 @@ if( $t_show_attachments ) {
 				echo $t_allow_no_category ? '' : ' required';
 			?>>
 				<?php
-					print_category_option_list( $f_category_id );
+					print_category_option_list( $f_category_id, null, true );
 				?>
 			</select>
 		</td>

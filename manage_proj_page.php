@@ -128,7 +128,7 @@ print_manage_menu( 'manage_proj_page.php' );
 					);
 					print_sort_icon( $t_direction, $f_sort, 'status' ); ?>
 				</th>
-				<th><?php
+				<th class="center"><?php
 					print_manage_project_sort_link(
 						'manage_proj_page.php',
 						lang_get( 'enabled' ),
@@ -243,10 +243,11 @@ print_manage_menu( 'manage_proj_page.php' );
 ?>
 		<thead>
 			<tr>
-				<td><?php echo lang_get( 'category' ) ?></td>
-				<td><?php echo lang_get( 'assign_to' ) ?></td>
+				<th><?php echo lang_get( 'category' ) ?></th>
+				<th class="center"><?php echo lang_get( 'enabled' ) ?></th>
+				<th><?php echo lang_get( 'assign_to' ) ?></th>
 				<?php if( $t_can_update_global_cat ) { ?>
-				<td class="center"><?php echo lang_get( 'actions' ) ?></td>
+				<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 				<?php } ?>
 			</tr>
 		</thead>
@@ -258,6 +259,7 @@ print_manage_menu( 'manage_proj_page.php' );
 ?>
 			<tr>
 				<td><?php echo string_display_line( category_full_name( $t_id, false ) )  ?></td>
+				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<?php if( $t_can_update_global_cat ) { ?>
 				<td class="center">

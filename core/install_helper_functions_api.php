@@ -846,3 +846,20 @@ function install_print_unserialize_errors_csv( $p_table, $p_data ) {
 	</a>
 <?php
 }
+
+/**
+ * Set existing categories' status to new default 1.
+ *
+ * Prior to 2.27.0, categories.status column was defaulted to 0. With the
+ * implementation of #31017, status == 0 means disabled, so we need to update
+ * all existing categories to prevent regressions.
+ *
+ * @return integer
+ */
+function install_category_status_default() {
+	$t_update_query = new DbQuery(
+		'UPDATE {category} SET status = 1 WHERE status = 0'
+	);
+
+	return $t_update_query->execute() ? 2 : 1;
+}

@@ -897,6 +897,12 @@ $g_upgrade[211] = array( 'AlterColumnSQL', array( db_get_table( 'email' ), "
 
 # Release marker: 2.25.0
 
+# New default value for category status, see #31017
+$g_upgrade[212] = array( 'AlterColumnSQL', array( db_get_table( 'category' ), "
+	status					I		UNSIGNED NOTNULL DEFAULT '1' ") );
+$g_upgrade[213] = array( 'UpdateFunction', 'category_status_default' );
+
+
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
 #

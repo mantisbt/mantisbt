@@ -752,22 +752,35 @@ function print_profile_option_list_from_profiles( array $p_profiles, $p_select_i
 }
 
 /**
+ * Print categories option list.
+ *
  * Since categories can be orphaned we need to grab all unique instances of category
  * We check in the project category table and in the bug table
- * We put them all in one array and make sure the entries are unique
+ * We put them all in one array and make sure the entries are unique.
  *
- * @param integer $p_category_id A category identifier.
- * @param integer $p_project_id  A project identifier.
+ * @param integer $p_category_id  A category identifier.
+ * @param null    $p_project_id   A project identifier.
+ * @param bool    $p_enabled_only True to exclude disabled categories.
+ *
  * @return void
  */
-function print_category_option_list( $p_category_id = 0, $p_project_id = null ) {
+function print_category_option_list( $p_category_id = 0, $p_project_id = null, $p_enabled_only = false ) {
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
 	} else {
 		$t_project_id = $p_project_id;
 	}
 
-	$t_cat_arr = category_get_all_rows( $t_project_id, null, true );
+	$t_cat_arr = category_get_all_rows( $t_project_id, null, true, $p_enabled_only );
+
+	# Add the current category if it is not in the list
+	if( $p_category_id != 0
+        && !in_array( $p_category_id, array_column( $t_cat_arr, 'id' ) )
+    ) {
+		$t_category_row = category_get_row( $p_category_id );
+		$t_category_row['project_name'] = project_get_name( $t_category_row['project_id'] );
+		$t_cat_arr[] = $t_category_row;
+	}
 
 	if( config_get( 'allow_no_category' ) ) {
 		echo '<option value="0"';
@@ -791,12 +804,17 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 
 	foreach( $t_cat_arr as $t_category_row ) {
 		$t_category_id = (int)$t_category_row['id'];
+		$t_disabled = $t_category_row['status'] == CATEGORY_STATUS_DISABLED;
 		$t_category_name = category_full_name(
 			$t_category_id,
 			$t_category_row['project_id'] != $t_project_id
 		);
+		if( $t_disabled ) {
+//			$t_category_name .= ' [' . lang_get( 'disabled' ) . ']';
+		}
 		echo '<option value="' . $t_category_id . '"';
 		check_selected( $p_category_id, $t_category_id );
+		check_disabled( $t_disabled );
 		echo '>';
 		echo string_attribute( $t_category_name ), '</option>', PHP_EOL;
 	}
