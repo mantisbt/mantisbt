@@ -602,6 +602,11 @@ ul.changelog > li, ul.roadmap > li {
   border-right-width: 0px;
 }
 
+.sidebar.menu-min .nav-list > li > a > .menu-text {
+    width: max-content;
+    padding-right: 12px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
@@ -714,11 +719,6 @@ ul.changelog > li, ul.roadmap > li {
 
     .sidebar.menu-min ~ .footer .footer-inner {
         left: 43px;
-    }
-
-    .sidebar.menu-min .nav-list > li > a > .menu-text {
-        width: max-content;
-        padding-right: 12px;
     }
 
     .rtl .sidebar.compact + .main-content {
