@@ -602,6 +602,16 @@ ul.changelog > li, ul.roadmap > li {
   border-right-width: 0px;
 }
 
+.sidebar:not(.menu-min) {
+    min-width: 190px;
+    width: auto;
+}
+
+.sidebar.menu-min .nav-list > li > a > .menu-text {
+    width: max-content;
+    padding-right: 12px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
@@ -641,6 +651,10 @@ ul.changelog > li, ul.roadmap > li {
     .sidebar.menu-min + .main-content {
         margin-right: auto  !important;
         margin-left: 43px !important;
+    }
+
+    .sidebar:not(.min-width) {
+        min-width: auto;
     }
 
     .sidebar.compact, .sidebar.compact.navbar-collapse {
