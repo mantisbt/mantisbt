@@ -185,7 +185,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 				'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js',
 			);
 			foreach( $t_scripts as $t_script ) {
-				printf( "\t<script src=\"%s\"></script>\n",
+				printf( "\t<script type=\"text/javascript\" src=\"%s\"></script>\n",
 					plugin_file( $t_script, false, $this->basename )
 				);
 			}
