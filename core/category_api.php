@@ -729,10 +729,13 @@ function category_ensure_can_delete( $p_category_id ) {
 /**
  * Check if category is enabled.
  *
+ * Category 0 (no category) is always considered as enabled.
+ *
  * @param int $p_category_id Category identifier.
  *
  * @return bool True if enabled, false otherwise
  */
 function category_is_enabled( $p_category_id ) {
-	return category_get_field( $p_category_id, 'status' ) == CATEGORY_STATUS_ENABLED;
+	return $p_category_id == 0
+		|| category_get_field( $p_category_id, 'status' ) == CATEGORY_STATUS_ENABLED;
 }
