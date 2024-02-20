@@ -70,15 +70,22 @@ function PrefixInput (inputId) {
 	};
 }
 
-var reset_buttons = $('button.reset-prefix');
+var reset_buttons = $('button.reset').each( function () {
+	this.title = "Reset the field to its default value";
+});
 
 /**
  * Initialize all input's default values and disable the reset buttons
  */
-var inputs = $('input.table-prefix').each(function () {
+$('input.table-prefix').each(function () {
 	var input = new PrefixInput(this.id);
 	input.setDefault(input.getValue());
-	input.disableButton();
+});
+var inputs = $('input.reset').each(function () {
+	var input = new PrefixInput(this.id);
+	if (input.isValueDefault()) {
+		input.disableButton();
+	}
 });
 
 /**
@@ -133,7 +140,7 @@ inputs.on('input', function () {
  * Buttons to reset the prefix/suffix to the current default value
  */
 reset_buttons.on('click', function () {
-	var input = new PrefixInput($(this).prev('input.table-prefix')[0].id);
+	var input = new PrefixInput($(this).prev('input.reset')[0].id);
 	input.resetValue();
 	update_sample_table_names();
 });
