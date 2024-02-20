@@ -194,83 +194,34 @@ unset( $t_local_config );
 # MantisBT Path Settings #
 ##########################
 
-$t_protocol = 'http';
-$t_host = 'localhost';
-if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
-	$t_protocol = http_is_protocol_https() ? 'https' : 'http';
-
-	# $_SERVER['SERVER_PORT'] is not defined in case of php-cgi.exe
-	if( isset( $_SERVER['SERVER_PORT'] ) ) {
-		$t_port = ':' . $_SERVER['SERVER_PORT'];
-		if( ( ':80' == $t_port && 'http' == $t_protocol )
-		  || ( ':443' == $t_port && 'https' == $t_protocol )) {
-			$t_port = '';
-		}
-	} else {
-		$t_port = '';
-	}
-
-	if( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { # Support ProxyPass
-		$t_hosts = explode( ',', $_SERVER['HTTP_X_FORWARDED_HOST'] );
-		$t_host = $t_hosts[0];
-	} else if( isset( $_SERVER['HTTP_HOST'] ) ) {
-		$t_host = $_SERVER['HTTP_HOST'];
-	} else if( isset( $_SERVER['SERVER_NAME'] ) ) {
-		$t_host = $_SERVER['SERVER_NAME'] . $t_port;
-	} else if( isset( $_SERVER['SERVER_ADDR'] ) ) {
-		$t_host = $_SERVER['SERVER_ADDR'] . $t_port;
-	}
-
-	if( !isset( $_SERVER['SCRIPT_NAME'] )) {
-		echo 'Invalid server configuration detected. Please set $g_path manually in ' . $g_config_path . 'config_inc.php.';
-		if( isset( $_SERVER['SERVER_SOFTWARE'] ) && ( stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false ) )
-			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
-		die;
-	}
-
-	# Prevent XSS if the path is displayed later on. This is the equivalent of
-	# FILTER_SANITIZE_STRING, which was deprecated in PHP 8.1:
-	# strip tags and null bytes, then encode quotes into HTML entities
-	$t_path = preg_replace( '/\x00|<[^>]*>?/', '', $_SERVER['SCRIPT_NAME'] );
-	$t_path = str_replace( ["'", '"'], ['&#39;', '&#34;'], $t_path );
-
-	$t_path = dirname( $t_path );
-	switch( basename( $t_path ) ) {
-		case 'admin':
-			$t_path = dirname( $t_path );
-			break;
-		case 'check':		# admin checks dir
-		case 'soap':
-		case 'rest':
-			$t_path = dirname( $t_path, 2 );
-			break;
-		case 'swagger':
-			$t_path = dirname( $t_path, 3 );
-			break;
-	}
-	$t_path = rtrim( $t_path, '/\\' ) . '/';
-
-	if( strpos( $t_path, '&#' ) ) {
-		echo 'Can not safely determine $g_path. Please set $g_path manually in ' . $g_config_path . 'config_inc.php';
-		die;
-	}
-} else {
-	$t_path = 'mantisbt/';
-}
-
 /**
- * Path to your installation as seen from the web browser
- * requires trailing /
+ * Full URL to your installation as seen from the web browser.
+ *
+ * Requires trailing `/`.
+ *
+ * If not set, MantisBT will default this to a working URL valid for most
+ * installations.
+ *
+ * WARNING: The default is built based on headers from the HTTP request
+ * ({@see set_default_path()} in core.php). This is a potential security risk,
+ * as the system will be exposed to Host Header injection attacks, so it is
+ * strongly recommended to initialize this in config_inc.php.
+ *
  * @global string $g_path
  */
-$g_path	= $t_protocol . '://' . $t_host . $t_path;
+$g_path	= '';
 
 /**
- * Short web path without the domain name
- * requires trailing /
+ * Short web path without the domain name.
+ *
+ * requires trailing `/`.
+ *
+ * This is defined by MantisBT core based on the script being executed, and
+ * should not be set in config_inc.php.
+ *
  * @global string $g_short_path
  */
-$g_short_path = $t_path;
+$g_short_path = '';
 
 /**
  * Used to link to manual for User Documentation.
@@ -5051,10 +5002,6 @@ $g_public_config_names = array(
 	'window_title',
 	'wrap_in_preformatted_text'
 );
-
-# Temporary variables should not remain defined in global scope
-unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );
-
 
 ############################
 # Webservice Configuration #

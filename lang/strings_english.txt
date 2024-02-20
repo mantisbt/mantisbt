@@ -627,6 +627,7 @@ $s_please_report = 'Please report this to the %1$s.';
 $s_warning_plain_password_authentication = '<strong>Warning:</strong> Plain password authentication is used, this will expose your passwords to administrators.';
 $s_warning_default_administrator_account_present = '<strong>Warning:</strong> You should disable the default \'administrator\' account or change its password.';
 $s_warning_admin_directory_present = '<strong>Warning:</strong> "admin" directory should be removed, or access to it restricted.';
+$s_warning_host_header_injection_hazard = '<strong>Warning:</strong> "path" was not defined in config_inc.php. Leaving it empty is a security risk, as the path will be set based on headers from the HTTP request, exposing your system to Host Header Injection attacks.';
 $s_warning_change_setting = '<strong>Warning:</strong> "%1$s" is not set to its default value (%2$s).';
 $s_warning_security_hazard = 'This is a potential security hazard as it can expose sensitive information.';
 $s_warning_integrity_hazard = 'This will cause MantisBT to continue when errors occurs and may lead to system/data integrity issues.';

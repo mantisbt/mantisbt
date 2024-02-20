@@ -99,10 +99,15 @@ if( file_exists( $g_config_path . 'custom_constants_inc.php' ) ) {
 
 # config_inc may not be present if this is a new install
 $t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
-
 if( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
 }
+
+# Set global path variables
+# NOTE: We store whether $g_path was defaulted, so we can later warn the admin
+# about the exposure to host header injection attacks if they didn't set it.
+global $g_defaulted_path;
+$g_defaulted_path = set_default_path();
 
 # Ensure PHP LDAP extension is available when Login Method is LDAP
 global $g_login_method;
@@ -304,6 +309,89 @@ function http_is_protocol_https() {
 	}
 
 	return false;
+}
+
+/**
+ * Set Global Path variables.
+ *
+ * @see $g_path
+ * @see $g_short_path
+ *
+ * @return bool True if default $g_path was assigned, false if it was already set.
+ */
+function set_default_path() {
+	global $g_path, $g_short_path, $g_config_path;
+
+	# $g_path is set in config_inc.php
+	if( $g_path ) {
+		# Derive $g_short_path from $g_path if not set
+		if( !$g_short_path ) {
+			$g_short_path = parse_url( $g_path, PHP_URL_PATH );
+		}
+		return false;
+	}
+
+	$t_protocol = 'http';
+	$t_host = 'localhost';
+	if( isset( $_SERVER['SCRIPT_NAME'] ) ) {
+		$t_protocol = http_is_protocol_https() ? 'https' : 'http';
+
+		# $_SERVER['SERVER_PORT'] is not defined in case of php-cgi.exe
+		if( isset( $_SERVER['SERVER_PORT'] ) ) {
+			$t_port = ':' . $_SERVER['SERVER_PORT'];
+			if( ( ':80' == $t_port && 'http' == $t_protocol )
+				|| ( ':443' == $t_port && 'https' == $t_protocol )) {
+				$t_port = '';
+			}
+		} else {
+			$t_port = '';
+		}
+
+		if( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { # Support ProxyPass
+			$t_hosts = explode( ',', $_SERVER['HTTP_X_FORWARDED_HOST'] );
+			$t_host = $t_hosts[0];
+		} else if( isset( $_SERVER['HTTP_HOST'] ) ) {
+			$t_host = $_SERVER['HTTP_HOST'];
+		} else if( isset( $_SERVER['SERVER_NAME'] ) ) {
+			$t_host = $_SERVER['SERVER_NAME'] . $t_port;
+		} else if( isset( $_SERVER['SERVER_ADDR'] ) ) {
+			$t_host = $_SERVER['SERVER_ADDR'] . $t_port;
+		}
+
+		# Prevent XSS if the path is displayed later on. This is the equivalent of
+		# FILTER_SANITIZE_STRING, which was deprecated in PHP 8.1:
+		# strip tags and null bytes, then encode quotes into HTML entities
+		$t_path = preg_replace( '/\x00|<[^>]*>?/', '', $_SERVER['SCRIPT_NAME'] );
+		$t_path = str_replace( ["'", '"'], ['&#39;', '&#34;'], $t_path );
+
+		$t_path = dirname( $t_path );
+		switch( basename( $t_path ) ) {
+			case 'admin':
+				$t_path = dirname( $t_path );
+				break;
+			case 'check': # admin checks dir
+			case 'soap':
+			case 'rest':
+				$t_path = dirname( $t_path, 2 );
+				break;
+			case 'swagger':
+				$t_path = dirname( $t_path, 3 );
+				break;
+		}
+		$t_path = rtrim( $t_path, '/\\' ) . '/';
+
+		if( strpos( $t_path, '&#' ) ) {
+			echo 'Can not safely determine $g_path. Please set $g_path manually in ' . $g_config_path . 'config_inc.php';
+			die;
+		}
+	} else {
+		$t_path = 'mantisbt/';
+	}
+
+	$g_path	= $t_protocol . '://' . $t_host . $t_path;
+	$g_short_path = $t_path;
+
+	return true;
 }
 
 /**

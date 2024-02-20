@@ -152,6 +152,12 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 		}
 	}
 
+	# $g_path was defaulted - risk of Host Header injection attack
+	global $g_defaulted_path;
+	if( $g_defaulted_path ) {
+		$t_warnings[] = lang_get( 'warning_host_header_injection_hazard' );
+	}
+
 	/**
 	 * Display Warnings for enabled debugging / developer settings
 	 * @param string $p_type    Message Type.
@@ -161,8 +167,8 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	 */
 	function debug_setting_message ( $p_type, $p_setting, $p_value ) {
 		return sprintf( lang_get( 'warning_change_setting' ), $p_setting, $p_value )
-			. sprintf( lang_get( 'word_separator' ) )
-			. sprintf( lang_get( "warning_{$p_type}_hazard" ) );
+			. lang_get( 'word_separator' )
+			. lang_get( "warning_{$p_type}_hazard" );
 	}
 
 	$t_config = 'show_detailed_errors';
@@ -180,6 +186,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
 	if( $t_admin_dir_is_accessible ) {
 		require_once( 'admin/schema.php' );
+		/** @var array $g_upgrade */
 		$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
 		if( ( 0 < $t_db_version ) &&
