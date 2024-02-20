@@ -240,6 +240,7 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_db_username            = config_get_global( 'db_username', '' );
 	$f_db_password            = config_get_global( 'db_password', '' );
 	$f_timezone               = config_get( 'default_timezone', '' );
+	$f_path                   = config_get_global( 'path', '' );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
 	$t_prefix_type = 'other';
@@ -258,6 +259,7 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 		$f_db_password = config_get_global( 'db_password' );
 	}
 	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
+	$f_path               = gpc_get( 'path', config_get_global( 'path', '' ) );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
 	$t_prefix_type = $f_db_type == 'oci8' ? $f_db_type : 'other';
@@ -469,6 +471,40 @@ if( 2 == $t_install_state ) {
 		);
 		$t_version_info = null;
 	}
+	?>
+</tr>
+<tr>
+	<td>
+		Checking URL to installation
+	</td>
+	<?php
+		$t_url_check = '';
+		if( !$f_path ) {
+			# Empty URL - warn admin about security risk
+			$t_url_check = "Using an empty path is a security risk, as MantisBT "
+				. "will dynamically set it based on headers from the HTTP request, "
+				. "exposing your system to Host Header Injection attacks.";
+			$t_hard_fail = false;
+		} else {
+			# Make sure we have a trailing '/'
+			$f_path = rtrim( $f_path, '/' ) . '/';
+
+			# Check that the URL is valid
+			if( !filter_var( $f_path, FILTER_VALIDATE_URL ) ) {
+				$t_url_check = "'$f_path' is not a valid URL.";
+			} else {
+				require_api( 'url_api.php' );
+				$t_page_contents = url_get( $f_path );
+				if( !$t_page_contents ) {
+					$t_url_check = "Can't retrieve web page at '$f_path'.";
+				} elseif( false === strpos( $t_page_contents, 'MantisBT') ) {
+					$t_url_check = "Web page at '$f_path' does not appear to be a MantisBT site.";
+				}
+			}
+			$t_hard_fail = true;
+		}
+
+		print_test_result( $t_url_check ? BAD : GOOD, $t_hard_fail, $t_url_check );
 	?>
 </tr>
 <?php
@@ -724,13 +760,13 @@ if( !$g_database_upgrade ) {
 		echo "\t</td>\n\t<td>\n\t\t";
 		$t_required = $t_key == 'db_table_plugin_prefix' ? 'required' : '';
 		/** @noinspection HtmlUnknownAttribute */
-		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix" %2$s value="%3$s">',
+		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix reset" %2$s value="%3$s">',
 			$t_key,
 			$t_key == 'db_table_plugin_prefix' ? 'required' : '',
 			${'f_' . $t_key} // The actual value of the corresponding form variable
 		);
 		echo "\n&nbsp;";
-		printf( '<button id="%s" type="button" class="btn btn-sm btn-primary btn-white btn-round reset-prefix">%s</button>',
+		printf( '<button id="%s" type="button" class="btn btn-sm btn-primary btn-white btn-round reset">%s</button>',
 			"btn_$t_key",
 			lang_get( 'reset' )
 		);
@@ -765,6 +801,27 @@ if( !$g_database_upgrade ) {
 		</select>
 	</td>
 </tr>
+
+<!-- URL to installation ($g_path) -->
+<tr>
+	<td>
+		<label for="path">URL to your installation (<em>$g_path</em>, see
+			<a href="https://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.config.path"
+			   target="_blank">documentation</a>)
+		</label>
+	</td>
+	<td>
+		<input id="path" name="path" type="text" size="50" class="reset"
+			   value="<?php echo string_attribute( $f_path ) ?>"
+			   data-defval="<?php global $g_path; echo string_attribute( $g_path ); ?>"
+		/>
+
+		<button id="btn_path" type="button" class="btn btn-sm btn-primary btn-white btn-round reset">
+			<?php echo lang_get( 'reset' ); ?>
+		</button>
+	</td>
+</tr>
+
 <?php
 } # end install-only fields
 ?>
@@ -1323,6 +1380,11 @@ if( 5 == $t_install_state ) {
 		. PHP_EOL
 		. (!$t_crypto_master_salt ? "# The installer could not generate the Master Salt; please set it manually.\n" : '')
 		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
+
+	if( $f_path ) {
+		$t_config .= PHP_EOL
+			. "\$g_path                   = '" . addslashes( $f_path ) . "';" . PHP_EOL;
+	}
 
 	$t_write_failed = true;
 
