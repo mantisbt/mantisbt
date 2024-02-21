@@ -96,7 +96,7 @@ class RelationshipTest extends SoapBase {
 		$t_retrieved_first_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_first_issue_id );
 		$t_retrieved_second_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_second_issue_id );
 
-		$this->assertObjectNotHasAttribute( 'relationships', $t_retrieved_first_issue );
-		$this->assertObjectNotHasAttribute( 'relationships', $t_retrieved_second_issue );
+		$this->assertObjectNotHasProperty( 'relationships', $t_retrieved_first_issue );
+		$this->assertObjectNotHasProperty( 'relationships', $t_retrieved_second_issue );
 	}
 }

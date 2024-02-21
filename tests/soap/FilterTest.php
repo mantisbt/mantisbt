@@ -563,7 +563,7 @@ class FilterTest extends SoapBase {
 		}
 
 		self::assertNotNull( $t_created_issue, 'Created issue with id ' . $t_issue_id . ' was not found.' );
-		self::assertObjectHasAttribute( 'monitors',
+		self::assertObjectHasProperty( 'monitors',
 			$t_created_issue,
 			'Created issue with id ' . $t_issue_id . ' does not have a "monitors" attribute'
 		);
