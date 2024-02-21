@@ -31,7 +31,7 @@ require_once 'MantisCoreBase.php';
  * @package Tests
  * @subpackage String
  */
-class MantisHelperTest extends MantisCoreBase {
+class HelperTest extends MantisCoreBase {
 
 	/**
 	 * Tests helper_array_transpose() with good values.

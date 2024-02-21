@@ -33,7 +33,7 @@ require_once 'MantisCoreBase.php';
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-class MantisStringTest extends MantisCoreBase {
+class StringTest extends MantisCoreBase {
 
 	/**
 	 * Tests string_sanitize_url()

@@ -31,7 +31,7 @@ require_once 'RestBase.php';
  * @requires extension curl
  * @group REST
  */
-class RestImpersonateUserTests extends RestBase {
+class RestImpersonateUserTest extends RestBase {
 
 	/**
 	 * Test /users/me API without impersonation
