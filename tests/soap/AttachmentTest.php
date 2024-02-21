@@ -90,7 +90,7 @@ class AttachmentTest extends SoapBase {
 				-1 );
 			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
-			$this->assertRegexp( '/Unable to find an attachment/', $e->getMessage() );
+			$this->assertMatchesRegularExpression( '/Unable to find an attachment/', $e->getMessage() );
 		}
 	}
 
@@ -153,7 +153,7 @@ class AttachmentTest extends SoapBase {
 				-1 );
 			$this->fail( 'Should have failed.' );
 		} catch( SoapFault $e ) {
-			$this->assertRegexp( '/Unable to find an attachment/', $e->getMessage() );
+			$this->assertMatchesRegularExpression( '/Unable to find an attachment/', $e->getMessage() );
 		}
 	}
 
