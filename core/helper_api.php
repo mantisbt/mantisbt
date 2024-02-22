@@ -88,14 +88,18 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
  * becomes array('k1'=>array('a'=>1,'b'=>3),'k2'=>array('a'=>2,'b'=>4))
  *
  * @param array $p_array The array to transpose.
+ *
  * @return array|mixed transposed array or $p_array if not 2-dimensional array
+ * @throws ClientException
  */
 function helper_array_transpose( array $p_array ) {
 	$t_out = array();
 	foreach( $p_array as $t_key => $t_sub ) {
 		if( !is_array( $t_sub ) ) {
-			# This function can only handle bidimensional arrays
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new ClientException(
+				__FUNCTION__ . " can only handle bidimensional arrays",
+				ERROR_GENERIC
+			);
 		}
 
 		foreach( $t_sub as $t_subkey => $t_value ) {

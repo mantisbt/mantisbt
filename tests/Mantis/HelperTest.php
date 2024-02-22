@@ -24,6 +24,8 @@
  */
 
 # Includes
+use Mantis\Exceptions\ClientException;
+
 require_once 'MantisCoreBase.php';
 
 /**
@@ -31,7 +33,7 @@ require_once 'MantisCoreBase.php';
  * @package Tests
  * @subpackage String
  */
-class MantisHelperTest extends MantisCoreBase {
+class HelperTest extends MantisCoreBase {
 
 	/**
 	 * Tests helper_array_transpose() with good values.
@@ -41,6 +43,7 @@ class MantisHelperTest extends MantisCoreBase {
 	 * @return void
 	 *
 	 * @dataProvider providerArrayTransposeValid
+	 * @throws ClientException
 	 */
 	public function testArrayTransposeValid( $p_in, $p_out ) {
 		$this->assertEquals( $p_out, helper_array_transpose( $p_in ) );
@@ -55,9 +58,9 @@ class MantisHelperTest extends MantisCoreBase {
 	 * @dataProvider providerArrayTransposeInvalid
 	 */
 	public function testArrayTransposeInvalid( $p_in ) {
-		$this->expectException(PHPUnit\Framework\Error\Error::class);
-		$this->expectExceptionCode(E_USER_ERROR);
-		$this->expectExceptionMessage((string)ERROR_GENERIC);
+		$this->expectException( ClientException::class );
+		$this->expectExceptionMessage( 'helper_array_transpose can only handle bidimensional arrays' );
+
 		helper_array_transpose( $p_in );
 	}
 

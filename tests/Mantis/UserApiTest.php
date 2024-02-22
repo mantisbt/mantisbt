@@ -33,7 +33,7 @@ require_once 'MantisCoreBase.php';
 /**
  * PHPUnit tests for User API
  */
-class MantisUserApiTest extends MantisCoreBase {
+class UserApiTest extends MantisCoreBase {
 
 	/** @var string Use of reserved TLD '.test' per RFC2606 */
 	const TEST_EMAIL = 'test@uniqueness.test';

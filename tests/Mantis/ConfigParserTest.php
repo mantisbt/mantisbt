@@ -41,7 +41,7 @@ use PHPUnit\Framework\Constraint\IsType;
  * @package    Tests
  * @subpackage ConfigParser
  */
-class MantisConfigParserTest extends MantisCoreBase {
+class ConfigParserTest extends MantisCoreBase {
 
 	/**
 	 * Test with empty string or null
