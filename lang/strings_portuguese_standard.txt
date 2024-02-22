@@ -54,6 +54,7 @@
  * @author Mansil alfalb
  * @author McDutchie
  * @author Mmgseabra
+ * @author Urhixidur
  * @author Vitorvicentevalente
  * @author Waldir
  * @author Waldyrious
@@ -438,7 +439,7 @@ $s_resolution = 'Solução';
 $s_status = 'Estado';
 $s_duplicate_id = 'ID Duplicado';
 $s_os = 'Sistema Operativo';
-$s_platform = 'Computador (CPU, RAM, disco, etc)';
+$s_platform = 'Computador (CPU, RAM, disco, etc.)';
 $s_os_build = 'Versão do Sist. Operativo';
 $s_projection = 'Projeção';
 $s_eta = 'Estimado';
