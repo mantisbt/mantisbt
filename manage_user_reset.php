@@ -41,7 +41,7 @@ require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-form_security_validate( 'manage_user_reset' );
+form_security_validate( 'manage_user_update' );
 
 auth_reauthenticate();
 
