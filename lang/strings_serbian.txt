@@ -477,6 +477,7 @@ $s_created_user_part2 = 'са степеном приступа од';
 $s_create_new_account_title = 'Отварање налога';
 $s_verify_password = 'Потврди лозинку';
 $s_enabled = 'Омогућено';
+$s_disabled = 'Онемогућено';
 $s_protected = 'Заштићено';
 $s_protected_label = 'Заштићено';
 $s_create_user_button = 'Направи корисника';
