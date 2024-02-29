@@ -39,6 +39,7 @@
  * @file
  *
  * @author Changwoo
+ * @author Dr1t jg
  * @author Hong3e
  * @author Jerrykim306
  * @author SeoJeongHo
@@ -62,6 +63,7 @@ $s_plugin_MantisGraph_graph_imp_priority_title = '우선 순위별 그래프';
 $s_plugin_MantisGraph_graph_imp_severity_title = '심각도별 그래프';
 $s_plugin_MantisGraph_graph_imp_category_title = '카테고리별 그래프';
 $s_plugin_MantisGraph_graph_imp_resolution_title = '해결상태별 그래프';
+$s_plugin_MantisGraph_graph_project_title = '프로젝트 그래프별';
 $s_plugin_MantisGraph_graph_developer_title = '개발자별 그래프';
 $s_plugin_MantisGraph_graph_reporter_title = '보고자별 그래프';
 $s_plugin_MantisGraph_graph_issues_trend_title = '신규/해결/잔여 이슈';
@@ -92,3 +94,4 @@ $s_plugin_MantisGraph_graph_topdev = '이슈를 제일 많이 수정한 사람';
 $s_plugin_MantisGraph_graph_opendev = '이슈를 가장 많이 올린 사람';
 $s_plugin_MantisGraph_graph_topreporter_fixed = '수정된 이슈가 많은 보고자';
 $s_plugin_MantisGraph_other_categories = '다른 분류 (%d)';
+$s_plugin_MantisGraph_other_projects = '다른 프로젝트(%d)';
