@@ -52,6 +52,8 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+const TIMELINE_INC_ALLOW = true;
+
 auth_ensure_user_authenticated();
 
 # extracts the user information for the currently logged in user
