@@ -210,7 +210,7 @@ if( $t_timeline_view_threshold_access ) {
 	$g_timeline_user = $f_user_id;
 	?>
 	<div class="col-md-5 col-xs-12">
-		<?php include( $g_core_path . 'timeline_inc.php' ); ?>
+		<?php include( 'timeline_inc.php' ); ?>
 		<div class="space-10"></div>
 	</div>
 <?php } ?>
