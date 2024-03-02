@@ -66,7 +66,7 @@ if( file_exists( 'mantis_offline.php' ) && !isset( $_GET['mbadmin'] ) ) {
 $g_request_time = microtime( true );
 
 # Load supplied constants
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
+require_once( __DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
 
 # Enforce our minimum PHP requirements
 if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
@@ -86,10 +86,10 @@ if( php_sapi_name() != 'cli' ) {
 }
 
 # Load Composer autoloader
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
+require_once( __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
 
 # Include default configuration settings
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
+require_once( __DIR__ . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
 
 # Load user-defined constants (if required)
 global $g_config_path;

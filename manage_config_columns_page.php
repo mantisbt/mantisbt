@@ -47,6 +47,6 @@ print_manage_config_menu( 'manage_config_columns_page.php' );
 define( 'MANAGE_COLUMNS', true );
 
 define( 'MANAGE_COLUMNS_INC_ALLOW', true );
-include ( dirname( __FILE__ ) . '/manage_columns_inc.php' );
+include( __DIR__ . '/manage_columns_inc.php' );
 
 layout_page_end();

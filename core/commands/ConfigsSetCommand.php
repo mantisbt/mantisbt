@@ -16,7 +16,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
+require_once( __DIR__ . '/../../api/soap/mc_api.php' );
 
 /**
  * A command that sets config options.

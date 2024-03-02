@@ -109,6 +109,6 @@ layout_page_header_end();
 layout_page_begin( __FILE__ );
 
 define( 'VIEW_ALL_INC_ALLOW', true );
-include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view_all_inc.php' );
+include( __DIR__ . DIRECTORY_SEPARATOR . 'view_all_inc.php' );
 
 layout_page_end();

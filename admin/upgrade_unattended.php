@@ -104,7 +104,7 @@ if( !preg_match( '/^[a-zA-Z0-9_]+$/', $t_db_type ) ||
 }
 
 $GLOBALS['g_db_type'] = $t_db_type; # database_api references this
-require_once( dirname( __FILE__ ) . '/schema.php' );
+require_once( __DIR__ . '/schema.php' );
 $g_db = ADONewConnection( $t_db_type );
 
 echo "\nPost 1.0 schema changes\n";
