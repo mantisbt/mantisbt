@@ -720,6 +720,7 @@ $s_p = 'p';
 $s_date_created = 'Date Created';
 $s_last_visit = 'Last Visit';
 $s_last_visit_label = 'Last Visit:';
+$s_failed_login_count = 'Failed Logins';
 $s_edit_user_link = 'Edit User';
 $s_search_user_hint = 'Username, Real Name or E-mail';
 
