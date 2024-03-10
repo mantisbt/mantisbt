@@ -20,8 +20,6 @@ require_api( 'helper_api.php' );
 
 use Mantis\Exceptions\ClientException;
 
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
-
 /**
  * A command that gets project versions.
  */
