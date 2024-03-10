@@ -86,7 +86,18 @@ class MantisGraphPlugin extends MantisPlugin  {
 	}
 
 	/**
-	 * Plugin events
+	 * Plugin events.
+	 *
+	 * - EVENT_MANTISGRAPH_SUBMENU (Default): allows 3rd-party plugins to add
+	 *   additional graphs {@see https://mantisbt.org/bugs/view.php?id=26139#c62802}.
+	 *   NOTE: If the child plugin wishes to use the chart.js library to display
+	 *   its graphs, then it is responsible to
+	 *     1. include the library as appropriate for its needs
+	 *        (the {@see include_chartjs()} method can be used for this purpose)
+	 *     2. initialize the <canvas> elements containing the graphs
+	 *   This is typically done in the hook for EVENT_LAYOUT_RESOURCES,
+	 *   ({@see resources()} method for details).
+	 *
 	 * @return array
 	 */
 	function events() {
