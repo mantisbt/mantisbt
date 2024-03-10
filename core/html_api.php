@@ -948,8 +948,8 @@ function print_admin_menu_bar( $p_page ) {
 		# Relative URL up one level to ensure valid links on Admin Checks page
 		$t_path = '../';
 	} else {
-		global $g_upgrade;
-		include_once( 'schema.php' );
+		global $g_absolute_path, $g_upgrade;
+		require_once( $g_absolute_path . 'admin/schema.php' );
 		if( count( $g_upgrade ) - 1 != config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS ) ) {
 			$t_menu_items['install.php'] = 'Upgrade your installation';
 		}
