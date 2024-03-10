@@ -103,6 +103,11 @@ if( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
 }
 
+# Ensure we always have a consistent current working directory.
+# IIS with FastCGI seems to set CWD to directory where php.exe resides (see #33906).
+global $g_absolute_path;
+chdir( $g_absolute_path );
+
 # Set global path variables
 # NOTE: We store whether $g_path was defaulted, so we can later warn the admin
 # about the exposure to host header injection attacks if they didn't set it.
