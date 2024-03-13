@@ -447,13 +447,15 @@ function create_category_summary( array $p_filter = null ) {
 }
 
 /**
- * Create cumulative graph by date
- * @param array $p_filter Filter array.
- * @return array | null
+ * Generate cumulative graph data by date.
+ *
+ * @param array|null $p_filter Filter array.
+ *
+ * @return array|null
  */
 function create_cumulative_bydate( array $p_filter = null ) {
-	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
+	$t_seconds_per_day = SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -467,98 +469,85 @@ function create_cumulative_bydate( array $p_filter = null ) {
 
 	# Get all the submitted dates
 	$t_query = new DBQuery();
-	$t_sql = 'SELECT date_submitted FROM {bug} WHERE ' . $t_specific_where;
+	$t_sql = <<< SQL
+		SELECT
+			FLOOR(date_submitted / $t_seconds_per_day) date_index,
+			COUNT(*) num
+		FROM {bug}
+		WHERE $t_specific_where
+		SQL;
 	if( $p_filter ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' ORDER BY date_submitted';
+	$t_sql .= ' GROUP BY date_index';
 	$t_query->sql( $t_sql );
 
 	$t_calc_metrics = array();
 	while( $t_row = $t_query->fetch() ) {
-		# rationalise the timestamp to a day to reduce the amount of data
-		$t_date = $t_row['date_submitted'];
-		$t_date = (int)( $t_date / SECONDS_PER_DAY );
-
-		if( isset( $t_calc_metrics[$t_date] ) ) {
-			$t_calc_metrics[$t_date][0]++;
-		} else {
-			$t_calc_metrics[$t_date] = array( 1, 0, 0, );
-		}
+		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+		$t_calc_metrics[$v_date_index] = [ $v_num, 0, 0 ];
 	}
 
-	# ## Get all the dates where a transition from not resolved to resolved may have happened
-	#    also, get the last updated date for the bug as this may be all the information we have
+	# Get a count of resolved issues.
+	# Query explanation:
+	# - Use a sub-query against the history table, to retrieve the most recent
+	#   date_modified for a transition to a status higher than resolved.
+	# - If there are no history records (i.e. with pre 0.18 data), date_modified
+	#   will be NULL, so we fall back to the bug's last_updated date
+	# - Group by day to reduce the amount of data
 	$t_query = new DBQuery();
-	$t_sql = 'SELECT {bug}.id, last_updated, date_modified, new_value, old_value'
-		. ' FROM {bug} LEFT JOIN {bug_history} ON {bug}.id = {bug_history}.bug_id'
-		. ' WHERE ' . $t_specific_where
-		. ' AND {bug}.status >= :int_resolved'
-		. ' AND ( ( {bug_history}.new_value >= :str_resolved AND {bug_history}.old_value < :str_resolved AND {bug_history}.field_name = :field_name )'
-		. ' OR {bug_history}.id is NULL )';
+	$t_sql = <<< SQL
+		SELECT
+			FLOOR(COALESCE(max_date_modified, last_updated) / $t_seconds_per_day ) date_index,
+			COUNT(*) num
+		FROM {bug}
+		LEFT JOIN(
+			SELECT bug_id, MAX(date_modified) max_date_modified
+			FROM {bug_history}
+			WHERE field_name = :field_name AND new_value >= :str_resolved AND old_value < :str_resolved
+			GROUP BY bug_id
+		) hist ON hist.bug_id ={bug}.id
+		WHERE $t_specific_where
+			AND {bug}.status >= :int_resolved
+		SQL;
 	if( $p_filter ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' ORDER BY {bug}.id, date_modified ASC';
+	$t_sql .= ' GROUP BY date_index';
 	$t_query->sql( $t_sql );
 	$t_query->bind( array(
 		'int_resolved' => (int)$t_res_val,
 		'str_resolved' => (string)$t_res_val,
-		'field_name' => 'status'
-		) );
-
-	$t_last_id = 0;
-	$t_last_date = 0;
+		'field_name' => 'status',
+	) );
 
 	while( $t_row = $t_query->fetch() ) {
-		$t_id = $t_row['id'];
-
-		# if h_last_updated is NULL, there were no appropriate history records
-		#  (i.e. pre 0.18 data), use last_updated from bug table instead
-		if( null == $t_row['date_modified'] ) {
-			$t_date = $t_row['last_updated'];
+		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+		if( isset( $t_calc_metrics[$v_date_index] ) ) {
+			$t_calc_metrics[$v_date_index][1] = $v_num;
 		} else {
-			if( $t_res_val > $t_row['old_value'] ) {
-				$t_date = $t_row['date_modified'];
-			}
+			$t_calc_metrics[$v_date_index] = [ 0, $v_num, 0 ];
 		}
-		if( $t_id <> $t_last_id ) {
-			if( 0 <> $t_last_id ) {
-
-				# rationalise the timestamp to a day to reduce the amount of data
-				$t_date_index = (int)( $t_last_date / SECONDS_PER_DAY );
-
-				if( isset( $t_calc_metrics[$t_date_index] ) ) {
-					$t_calc_metrics[$t_date_index][1]++;
-				} else {
-					$t_calc_metrics[$t_date_index] = array(
-						0,
-						1,
-						0,
-					);
-				}
-			}
-			$t_last_id = $t_id;
-		}
-		$t_last_date = $t_date;
 	}
 
-	if ( $t_last_id == 0 ) {
+	if( !$t_calc_metrics ) {
 		return null;
 	}
 	ksort( $t_calc_metrics );
 
+	# Consolidate metrics data
+	$t_metrics = [];
 	$t_last_opened = 0;
 	$t_last_resolved = 0;
-	foreach( $t_calc_metrics as $i => $t_values ) {
-		$t_date = $i * SECONDS_PER_DAY;
-		$t_metrics[0][$t_date] = $t_last_opened = $t_last_opened + $t_calc_metrics[$i][0];
-		$t_metrics[1][$t_date] = $t_last_resolved = $t_last_resolved + $t_calc_metrics[$i][1];
-		$t_metrics[2][$t_date] = $t_metrics[0][$t_date] - $t_metrics[1][$t_date];
+	foreach( $t_calc_metrics as $t_date_index => $t_values ) {
+		$t_date = $t_date_index * SECONDS_PER_DAY;
+		$t_metrics[0][$t_date] = $t_last_opened = $t_last_opened + $t_values[0];
+		$t_metrics[1][$t_date] = $t_last_resolved = $t_last_resolved + $t_values[1];
+		$t_metrics[2][$t_date] = $t_last_opened - $t_last_resolved;
 	}
 	return $t_metrics;
 }
