@@ -69,6 +69,7 @@
  * @author Windes
  * @author Wladek92
  * @author Wyz
+ * @author Yanniick
  * @author Zetud
  */
 
@@ -77,7 +78,7 @@ $s_actiongroup_menu_copy = 'Copier';
 $s_actiongroup_menu_assign = 'Affecter';
 $s_actiongroup_menu_resolve = 'Résoudre';
 $s_actiongroup_menu_update_priority = 'Mettre à jour la priorité';
-$s_actiongroup_menu_update_status = 'Mettre à jour le statut';
+$s_actiongroup_menu_update_status = 'Mettre à jour l’État';
 $s_actiongroup_menu_update_severity = 'Mettre à jour l’impact';
 $s_actiongroup_menu_update_view_status = 'Mettre à jour l’état d’affichage';
 $s_actiongroup_menu_update_category = 'Mettre à jour la catégorie';
@@ -85,7 +86,7 @@ $s_actiongroup_menu_set_sticky = 'Activer / désactiver l’épinglage';
 $s_actiongroup_menu_update_field = 'Mettre à jour %1$s';
 $s_actiongroup_menu_update_product_version = 'Mettre à jour la version du produit';
 $s_actiongroup_menu_update_target_version = 'Mettre à jour la version ciblée';
-$s_actiongroup_menu_update_fixed_in_version = 'Mettre à jour la version résolue';
+$s_actiongroup_menu_update_fixed_in_version = 'Mettre à jour Résolu dans la version';
 $s_actiongroup_menu_update_product_build = 'Mettre à jour la compilation';
 $s_actiongroup_menu_update_due_date = 'Mettre à jour la date d’échéance';
 $s_actiongroup_menu_add_note = 'Ajouter une note';
@@ -146,6 +147,7 @@ $s_inherit = 'Hériter des catégories';
 $s_inherit_global = 'Hériter des catégories globales';
 $s_inherit_parent = 'Hériter des catégories parentes';
 $s_update_subproject_inheritance = 'Mettre à jour l’héritage du sous-projet';
+$s_category_disabled = 'La catégorie a été désactivée, veuillez en sélectionner une autre';
 $s_duplicate_of = 'doublon de';
 $s_has_duplicate = 'a pour doublon';
 $s_related_to = 'relatif à';
@@ -182,7 +184,7 @@ $s_copy_bugs_conf_msg = 'Copier les anomalies vers';
 $s_assign_bugs_conf_msg = 'Affecter les problèmes à';
 $s_resolve_bugs_conf_msg = 'Choisir la résolution des anomalies';
 $s_priority_bugs_conf_msg = 'Choisir la priorité des anomalies';
-$s_status_bugs_conf_msg = 'Choisir le statut des anomalies';
+$s_status_bugs_conf_msg = 'Choisir l\'état des anomalies';
 $s_view_status_bugs_conf_msg = 'Choisir l’état d’affichage des anomalies';
 $s_category_bugs_conf_msg = 'Choisir la catégorie des anomalies';
 $s_set_sticky_bugs_conf_msg = 'Voulez-vous vraiment épingler / désépingler ces anomalies ?';
@@ -197,7 +199,7 @@ $s_copy_group_bugs_button = 'Copier les anomalies';
 $s_assign_group_bugs_button = 'Affecter les anomalies';
 $s_resolve_group_bugs_button = 'Résoudre les anomalies';
 $s_priority_group_bugs_button = 'Mettre à jour la priorité';
-$s_status_group_bugs_button = 'Mettre à jour le statut';
+$s_status_group_bugs_button = 'Mettre à jour l\'État';
 $s_category_group_bugs_button = 'Mettre à jour la catégorie';
 $s_view_status_group_bugs_button = 'Mettre à jour le statut d’affichage';
 $s_set_sticky_group_bugs_button = 'Épingler / désépingler';
@@ -514,6 +516,7 @@ $s_log_page_event = 'Événement';
 $s_please_report = 'Veuillez rapporter ceci à l’%1$s.';
 $s_warning_default_administrator_account_present = '<strong>Attention :</strong> vous devriez désactiver le compte « administrator » par défaut ou changer son mot de passe.';
 $s_warning_admin_directory_present = '<strong>Attention :</strong> le répertoire « admin » par défaut devrait être supprimé ou son accès devrait être restreint.';
+$s_warning_host_header_injection_hazard = '<strong>Attention :</strong> le "chemin" n\'a pas été défini dans config_inc.php. Le laisser vide constitue un risque pour la sécurité, car le chemin sera défini en fonction des en-têtes de la requête HTTP, exposant votre système aux attaques par injection d\'en-tête d\'hôte.';
 $s_warning_change_setting = '<strong>Avertissement :</strong> « %1$s » n’est pas défini à sa valeur par défaut (%2$s).';
 $s_warning_security_hazard = 'Ceci constitue un risque potentiel de sécurité puisque des informations sensibles peuvent être exposées.';
 $s_warning_debug_email = '<strong>Avertissement :</strong> « <code>debug_email</code> » n’est pas défini à <code>OFF</code>, tous les courriels de notification seront envoyés à « %1$s ».';
@@ -554,6 +557,7 @@ $s_create_new_account_title = 'Créer un nouveau compte';
 $s_verify_password = 'Vérifier le mot de passe';
 $s_enabled = 'Activé';
 $s_enabled_label = 'Activé';
+$s_disabled = 'Désactivé';
 $s_protected = 'Protégé';
 $s_protected_label = 'Protégé';
 $s_create_user_button = 'Créer l’utilisateur';
@@ -1108,7 +1112,7 @@ $s_delete_issue = 'Supprimer une anomalie';
 $s_reopen_issue = 'Rouvrir une anomalie';
 $s_view_private_issues = 'Voir les anomalies privées';
 $s_update_readonly_issues = 'Mettre à jour les anomalies en lecture seule';
-$s_update_issue_status = 'Mettre à jour le statut d’une anomalie';
+$s_update_issue_status = 'Mettre à jour l’état d’une anomalie';
 $s_set_view_status = 'Définir l’état d’affichage lors du rapport d’une nouvelle anomalie ou d’une note';
 $s_update_view_status = 'Mettre à jour la visibilité d’une anomalie ou d’une note existante.';
 $s_view_issue_revisions = 'Voir les versions d’un problème ou d’une note.';
@@ -1360,7 +1364,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Une catégorie avec ce nom existe dé
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Aucune action de copie n’a été spécifiée.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Catégorie introuvable.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Catégorie « %1$s » introuvable pour le projet « %2$s ».';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'Cette catégorie ne peut pas être supprimée, car elle est définie comme « catégorie par défaut pour les déplacements ».';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'L\'opération ne peut pas être effectuée, car la catégorie "%1$s" est définie comme catégorie par défaut pour les déplacements dans au moins un projet ou globalement.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'La catégorie « %1$s » n’a pas pu être supprimée, parce qu’elle est associée avec une ou plusieurs questions.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Une version avec ce nom existe déjà.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version « %1$s » introuvable.';
