@@ -942,6 +942,36 @@ $g_email_padding_length = 28;
  */
 $g_email_retry_in_days = 7;
 
+/**
+ * Use a HTML template to format emails
+ * When this OFF ( default) mails will be fully text based.
+ * If set to ON, tremplates will be used (to be maintained locally)
+ *
+ * @global int $g_email_use_template
+ */
+ $g_email_use_template = OFF;
+ 
+/**
+ * use the escape sequence for the mail template
+ * When this OFF ( default) mails, an escape sequence will not be used
+ *
+ * @global int $g_email_escape_template
+ */
+$g_email_escape_template = OFF;
+
+/**
+ * Set the physical location for the 3 templates.
+ * These locations can be outside the webroot but do ensure that the web-user has access to them.
+ * The available templates for new and existing bug are initially the same.
+ *
+ * @global string $g_email_newbug_template
+ * @global string $g_email_bug_template
+ * @global string $g_email_note_template
+ */
+$g_email_newbug_template = "/var/www/html/mantis2/core/templates/newbug_mailtemplate.html";
+$g_email_bug_template = "/var/www/html/mantis2/core/templates/bug_mailtemplate.html";
+$g_email_note_template = "/var/www/html/mantis2/core/templates/note_mailtemplate.html";
+
 ###########################
 # MantisBT Version String #
 ###########################
