@@ -158,6 +158,19 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 		$t_string = $p_string;
 
+		if( null === $s_markdown ) {
+			$s_markdown = plugin_config_get( 'process_markdown' );
+		}
+
+		# Process Markdown and return content, no further text processing.
+		if( ON == $s_markdown ) {
+			if( $p_multiline ) {
+				return MantisMarkdown::convert_text( $t_string );
+			} else {
+				return MantisMarkdown::convert_line( $t_string );
+			}
+		}
+
 		if( null === $s_text ) {
 			$s_text = plugin_config_get( 'process_text' );
 		}
@@ -167,25 +180,12 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$s_buglinks = plugin_config_get( 'process_buglinks' );
 		}
 
-		if( null === $s_markdown ) {
-			$s_markdown = plugin_config_get( 'process_markdown' );
-		}
-
 		if( ON == $s_text ) {
 			$t_string = $this->processText( $t_string );
 
 			if( $p_multiline && OFF == $s_markdown ) {
 				$t_string = string_preserve_spaces_at_bol( $t_string );
 				$t_string = string_nl2br( $t_string );
-			}
-		}
-
-		# Process Markdown
-		if( ON == $s_markdown ) {
-			if( $p_multiline ) {
-				$t_string = MantisMarkdown::convert_text( $t_string );
-			} else {
-				$t_string = MantisMarkdown::convert_line( $t_string );
 			}
 		}
 
