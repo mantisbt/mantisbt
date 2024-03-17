@@ -63,7 +63,9 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 */
 	function resources() {
 		if ( ON == plugin_config_get( 'process_markdown' )) {
-			echo '<link rel="stylesheet" href="' . plugin_file( 'markdown.css' ) . '" />';
+			echo '<link rel="stylesheet" href="' . plugin_file( 'markdown.css' ) . '" />' .
+				'<script async src="' . plugin_file( 'prism.js' ) . '"></script>' .
+				'<link rel="stylesheet" href="' . plugin_file( 'prism.css' ) . '" />';
 		}
 	}
 
