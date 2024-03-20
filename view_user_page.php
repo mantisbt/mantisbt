@@ -174,6 +174,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 				</td>
 			</tr>
 	<?php } ?>
+	<?php event_signal( 'EVENT_USER_ADDITIONAL_ATTRIBUTES', $u_username ); ?>
 	</fieldset>
 </table>
 	</div>

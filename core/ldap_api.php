@@ -261,6 +261,21 @@ function ldap_cache_user_data( $p_username ) {
 		config_get_global( 'ldap_realname_field' )
 	);
 
+	# add attrs specified by plugins
+	$t_all_plugin_fields_event = event_signal( 'EVENT_LDAP_USER_FIELDS' );
+	foreach( $t_all_plugin_fields_event as $t_plugin => $t_all_plugin_fields_event2 ) {
+		foreach( $t_all_plugin_fields_event2 as $t_callback => $t_all_plugin_fields ) {
+			if( is_array( $t_all_plugin_fields ) ) {
+				foreach( $t_all_plugin_fields as $t_plugin_field ) {
+					if( ! in_array( $t_plugin_field, $t_search_attrs, true ) ) {
+						array_push( $t_search_attrs, $t_plugin_field );
+						log_event( LOG_LDAP, 'Attribute = %d, added (by %d plugin)', $t_plugin_field, $t_plugin );
+					}
+				}
+			}
+		}
+	}
+
 	log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
 	$t_sr = @ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 	if( $t_sr === false ) {
