@@ -96,6 +96,7 @@ check_print_test_row( 'Default move category must exists ("default_category_for_
 );
 
 $t_field_options = array(
+	'simple_bug_report_page_fields',
 	'bug_report_page_fields',
 	'bug_view_page_fields',
 	'bug_update_page_fields'
