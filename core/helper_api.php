@@ -772,7 +772,15 @@ function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_strin
  * @return integer view state id
  * @throws ClientException if view state is invalid or array is empty.
  */
-function helper_parse_view_state( array $p_view_state ) {
+function helper_parse_view_state( $p_view_state ) {
+	if( ! is_array( $p_view_state ) ) {
+		throw new ClientException(
+			"Invalid view state",
+			ERROR_INVALID_FIELD_VALUE,
+			array( lang_get( 'bugnote_view_state' ) )
+		);
+	}
+
 	$t_view_state_enum = config_get( 'view_state_enum_string' );
 
 	$t_view_state_id = VS_PUBLIC;
