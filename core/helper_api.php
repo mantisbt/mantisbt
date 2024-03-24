@@ -791,7 +791,8 @@ function helper_parse_view_state( $p_view_state ) {
 			throw new ClientException(
 				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
 				ERROR_INVALID_FIELD_VALUE,
-				array( lang_get( 'view_state' ) ) );
+				array( lang_get( 'bugnote_view_state' ) )
+			);
 		}
 	} else if( isset( $p_view_state['name' ] ) ) {
 		$t_enum_by_labels = MantisEnum::getAssocArrayIndexedByLabels( $t_view_state_enum );
@@ -800,14 +801,17 @@ function helper_parse_view_state( $p_view_state ) {
 			throw new ClientException(
 				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
 				ERROR_INVALID_FIELD_VALUE,
-				array( lang_get( 'view_state' ) ) );
+				array( lang_get( 'bugnote_view_state' ) )
+			);
 		}
 
 		$t_view_state_id = $t_enum_by_labels[$t_name];
 	} else {
 		throw new ClientException(
 			"Empty view state",
-			ERROR_EMPTY_FIELD );
+			ERROR_EMPTY_FIELD,
+			array( lang_get( 'bugnote_view_state' ) )
+		);
 	}
 
 	return $t_view_state_id;
