@@ -91,10 +91,10 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 *
 	 * @return string valid formatted text
 	 */
-	private function processText( $p_string, $p_multiline = true ){
-
+	private function processText( $p_string, $p_multiline = true ) {
 		$t_string = string_strip_hrefs( $p_string );
 		$t_string = string_html_specialchars( $t_string );
+
 		return string_restore_valid_html_tags( $t_string, $p_multiline );
 	}
 
@@ -104,9 +104,9 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 *
 	 * @return string Formatted text
 	 */
-	private function processBugAndNoteLinks( $p_string ){
-
+	private function processBugAndNoteLinks( $p_string ) {
 		$t_string = string_process_bug_link( $p_string );
+
 		return string_process_bugnote_link( $t_string );
 	}
 
@@ -164,13 +164,12 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$s_markdown = plugin_config_get( 'process_markdown' );
 		}
 
-		# Process Markdown and return content, no further text processing.
+		# Parse input and return finished HTML markup, no further processing.
 		if( ON == $s_markdown ) {
-			if( $p_multiline ) {
-				return MantisMarkdown::convert_text( $t_string );
-			} else {
-				return MantisMarkdown::convert_line( $t_string );
-			}
+			return $p_multiline
+				? MantisMarkdown::convert_text( $t_string )
+				: MantisMarkdown::convert_line( $t_string )
+			;
 		}
 
 		if( null === $s_text ) {
@@ -185,13 +184,13 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		if( ON == $s_text ) {
 			$t_string = $this->processText( $t_string );
 
-			if( $p_multiline && OFF == $s_markdown ) {
+			if( $p_multiline ) {
 				$t_string = string_preserve_spaces_at_bol( $t_string );
 				$t_string = string_nl2br( $t_string );
 			}
 		}
 
-		if( ON == $s_urls && OFF == $s_markdown ) {
+		if( ON == $s_urls ) {
 			$t_string = string_insert_hrefs( $t_string );
 		}
 
@@ -199,9 +198,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = $this->processBugAndNoteLinks( $t_string );
 		}
 
-		$t_string = mention_format_text( $t_string, /* html */ true );
-
-		return $t_string;
+		return mention_format_text( $t_string, /* html */ true );
 	}
 
 	/**
