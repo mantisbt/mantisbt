@@ -71,6 +71,7 @@ step "Create database $MANTIS_DB_NAME"
 case $DB in
 
 	mysql)
+		DB_HOSTNAME=$HOSTNAME
 		DB_TYPE='mysqli'
 		DB_USER='root'
 		DB_PASSWORD=''
@@ -81,11 +82,16 @@ case $DB in
 		;;
 
 	pgsql)
-		DB_TYPE='pgsql'
-		DB_USER='postgres'
-		DB_PASSWORD=''
+		export DB_HOSTNAME=$HOSTNAME:$PGPORT
+		export DB_TYPE='pgsql'
+		export DB_USER=$PGUSER
+		export DB_PASSWORD=''
 		DB_CMD="psql -U $DB_USER -c"
 		DB_CMD_SCHEMA="-d $MANTIS_DB_NAME"
+
+		echo "DEBUG $PGUSER"
+		pwd
+    php ./build/test_db_connect.php
 
 		# Wait a bit to make sure Postgres has started
 		sleep 5
@@ -122,7 +128,7 @@ step "MantisBT Installation"
 declare -A query=(
 	[install]=2
 	[db_type]=$DB_TYPE
-	[hostname]=$HOSTNAME
+	[hostname]=$DB_HOSTNAME
 	[database_name]=$MANTIS_DB_NAME
 	[db_username]=$DB_USER
 	[db_password]=$DB_PASSWORD

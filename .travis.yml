@@ -11,8 +11,14 @@ dist: focal
 #
 
 services:
-  - postgresql
   - mysql
+  - postgresql
+addons:
+  postgresql: "12"
+  apt:
+    packages:
+      - postgresql-12
+      - postgresql-client-12
 
 install:
   - composer install
@@ -39,27 +45,27 @@ branches:
     - /master-[0-9.]+/
 
 php:
-  - 8.3
+#  - 8.3
   - 8.2
-  - 8.1
-  - 8.0
-  - 7.4
+#  - 8.1
+#  - 8.0
+#  - 7.4
 
 env:
-  - DB=mysql
-  - DB=pgsql
+#  - DB=mysql
+  - DB=pgsql PGPORT=5433 PGUSER=travis
 
 jobs:
-  include:
-    # Add a specific build for Documentation
-    - name: Documentation
-      env: DOCBOOK=1
-      # Using Ruby as it's preinstalled and we don't need PHP to build docs
-      language: ruby
-      addons:
-        apt:
-          packages:
-            - publican
+#  include:
+#    # Add a specific build for Documentation
+#    - name: Documentation
+#      env: DOCBOOK=1
+#      # Using Ruby as it's preinstalled and we don't need PHP to build docs
+#      language: ruby
+#      addons:
+#        apt:
+#          packages:
+#            - publican
 
   allow_failures: []
 
