@@ -43,14 +43,10 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 */
 	public function testCanSetConfigProcessUrls(): void
 	{
-		$this->parser->setConfigProcessUrls(OFF);
-		$this->assertSame(OFF, $this->parser->getConfigProcessUrls());
-
-		$this->parser->setConfigProcessUrls(ON);
-		$this->assertSame(ON, $this->parser->getConfigProcessUrls());
-
-		$this->parser->setConfigProcessUrls(OFF);
-		$this->assertSame(OFF, $this->parser->getConfigProcessUrls());
+		foreach([OFF, ON, OFF] as $config) {
+			$this->parser->setConfigProcessUrls($config);
+			$this->assertSame($config, $this->parser->getConfigProcessUrls());
+		}
 	}
 
 	/**
@@ -99,6 +95,7 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	public function testProcessURls(string $sample, int $config, string $needle, bool $contains): void
 	{
 		$this->parser->setConfigProcessUrls($config);
+
 		if ($contains) {
 			$this->assertStringContainsString($needle, $this->parser->text($sample));
 		} else {
@@ -192,6 +189,24 @@ Markdown;
 			$this->parser->text($markdown_table),
 			'class="table table-nonfluid"'
 		));
+	}
+
+	/**
+	 * The "convert_line()" and "convert_text()" methods returns the
+	 * finalized HTML markup.
+	 *
+	 * @note The samples do not cover "mentions" of "bugs", "bug notes" or "users",
+	 *       as their processing is covered by core tests.
+	 *
+	 * - convert_line should not have p tags
+	 * - convert_text should have p tags
+	 * - code blocks should untouched
+	 */
+	public function testConvert(): void
+	{
+		$this->assertSame('I am <strong>strong</strong>', MantisMarkdown::convert_line('I am **strong**'));
+		$this->assertSame('<p>I am <strong>strong</strong></p>', MantisMarkdown::convert_text('I am **strong**'));
+		$this->assertSame('<p>I am <code>**strong**</code></p>', MantisMarkdown::convert_text('I am `**strong**`'));
 	}
 
 	public function provideHeaders(): Generator
