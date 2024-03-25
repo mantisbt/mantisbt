@@ -1221,6 +1221,7 @@ $s_database_information = 'Податоци за базата';
 $s_path_information = 'Директориуми за MantisBT';
 $s_mantisbt_database_statistics = 'Статистики на базата на MantisBT';
 $s_php_version = 'Верзија на PHP';
+$s_os_information = 'Информации за ОС';
 $s_adodb_version = 'Верзија на ADOdb';
 $s_database_driver = 'Погон на базата';
 $s_database_version_description = 'Верзија на базата, Опис';

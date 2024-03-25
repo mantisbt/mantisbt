@@ -50,6 +50,7 @@
  * @author Dgstranz
  * @author DiegoAmbrocio
  * @author Dtamajon
+ * @author Eulalio
  * @author Fitoschido
  * @author Geryescalier
  * @author Guidored
@@ -1253,6 +1254,7 @@ $s_database_information = 'Información de la base de datos de MantisBT';
 $s_path_information = 'Información de la Ruta de MantisBT';
 $s_mantisbt_database_statistics = 'Estadísticas de la base de datos de MantisBT';
 $s_php_version = 'Versión de PHP';
+$s_os_information = 'Información del OS';
 $s_adodb_version = 'Versión de ADOdb';
 $s_database_driver = 'Controlador de base de datos';
 $s_database_version_description = 'Versión de base de datos; Descripción';

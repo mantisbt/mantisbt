@@ -1233,6 +1233,7 @@ $s_database_information = 'מידע מסד הנתונים MantisBT';
 $s_path_information = 'מידע על נתיב מנטיס';
 $s_mantisbt_database_statistics = 'סטטיסטיקת מסד נתוני MantisBT';
 $s_php_version = 'גרסת ה־PHP';
+$s_os_information = 'מידע על מערכת ההפעלה';
 $s_adodb_version = 'גרסת ה־ADOdb';
 $s_database_driver = 'מנהל התקן מסד נתונים';
 $s_database_version_description = 'גרסת מסד נתונים, תאור';
