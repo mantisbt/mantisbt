@@ -14,16 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Test cases for markdown handling within mantis
- *
- * @package    Tests
- * @subpackage String
- * @copyright Copyright 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- */
-
-# Includes
 require_once( dirname( __FILE__, 2 ) . '/../../tests/TestConfig.php' );
 require_once( dirname( __FILE__, 2 ) . '/core/MantisMarkdown.php' );
 
@@ -31,61 +21,302 @@ require_once( dirname( __FILE__, 2 ) . '/core/MantisMarkdown.php' );
 require_mantis_core();
 
 /**
- * Mantis markdown handling test cases
- * @package    Tests
+ * Mantis markdown handling test cases.
+ *
+ * @package Tests
  * @subpackage Markdown
  * @copyright Copyright 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
+ * @link https://www.mantisbt.org
  */
 class MarkdownTest extends PHPUnit\Framework\TestCase {
 
-	/**
-	 * Test If string starts with hash character followed by letters
-	 * @return void
-	 */
-	public function testHashLetters() {
-		$this->assertEquals( '<h1>hello</h1>', MantisMarkdown::convert_text( '# hello' ) );
-		$this->assertEquals( '<p>#hello</p>', MantisMarkdown::convert_text( '#hello' ) );
+	private ?MantisMarkdown $parser = null;
+
+	protected function setUp(): void
+	{
+		$this->parser = new MantisMarkdown();
 	}
 
 	/**
-	 * Test If string starts with hash character followed by number and letters
-	 * @return void
+	 * Tests whether the configuration "process_urls" can
+	 * be changed during runtime.
 	 */
-	public function testHashNumberAny() {
-		$this->assertEquals( '<h1>1abcd</h1>', MantisMarkdown::convert_text( '# 1abcd' ) );
-		$this->assertEquals( '<p>#1abcd</p>', MantisMarkdown::convert_text( '#1abcd' ) );
+	public function testCanSetConfigProcessUrls(): void
+	{
+		$this->parser->setConfigProcessUrls(OFF);
+		$this->assertSame(OFF, $this->parser->getConfigProcessUrls());
+
+		$this->parser->setConfigProcessUrls(ON);
+		$this->assertSame(ON, $this->parser->getConfigProcessUrls());
+
+		$this->parser->setConfigProcessUrls(OFF);
+		$this->assertSame(OFF, $this->parser->getConfigProcessUrls());
 	}
 
 	/**
-	 * Test If string starts with hash character followed by letters and numbers
-	 * @return void
+	 * The Parser class implements the CommonMark specifications for headers,
+	 * as Parsedown does not respect it. This test ensures the implementation.
+	 *
+	 * @see https://spec.commonmark.org/0.31.2/#example-62
+	 * @see https://parsedown.org/demo
+	 *
+	 * @dataProvider provideHeaders
 	 */
-	public function testHashLettersAny() {
-		$this->assertEquals( '<h1>abcd1234</h1>', MantisMarkdown::convert_text( '# abcd1234' ) );
-		$this->assertEquals( '<p>#abcd1234</p>', MantisMarkdown::convert_text( '#abcd1234' ) );
+	public function testCommonMarkImplementationOfHeaders(string $sample, string $expected): void
+	{
+		$this->assertSame($expected, $this->parser->text($sample));
 	}
 
 	/**
-	 * Test If string starts with hash character followed by numbers
-	 * since the class overrides the default Markdown parsing on Header
-	 * then the methods should return the standard text.
-	 * @return void
+	 * The switch `process_urls` should only affect "unmarked" email addresses.
+	 * Email addresses noted within Markdown tags, should always be converted
+	 * to links.
+	 *
+	 * - "<user@example.com>" - always converted to a link.
+	 * - "user@example.com" - only converted to a link if "process_urls = ON".
+	 *
+	 * @dataProvider provideEmails
 	 */
-	public function testHashNumbers() {
-		$this->assertEquals( '<p>#1</p>', MantisMarkdown::convert_text( '#1' ) );
+	public function testProcessEmails(string $sample, int $config, string $expected): void
+	{
+		$this->parser->setConfigProcessUrls($config);
+		$this->assertSame($expected, $this->parser->text($sample));
 	}
 
 	/**
-	 * Test if table class attribute is defined
-	 * @return void
+	 * The switch `process_urls` should only affect "unmarked" URLs.
+	 * URls noted within Markdown tags, should always be converted
+	 * to links.
+	 *
+	 * - "<https://example.com>" - always converted to a link.
+	 * - "[Text](https://example.com)" - always converted to a link.
+	 * - "https://example.com" - only converted to a link if "process_urls = ON".
+	 *
+	 * @todo take care of input with HTML links?
+	 *
+	 * @dataProvider provideUrls
 	 */
-	public function testTableClassDefined() {
-		$markdown_table = <<<EOD
+	public function testProcessURls(string $sample, int $config, string $needle, bool $contains): void
+	{
+		$this->parser->setConfigProcessUrls($config);
+		if ($contains) {
+			$this->assertStringContainsString($needle, $this->parser->text($sample));
+		} else {
+			$this->assertStringNotContainsString($needle, $this->parser->text($sample));
+		}
+	}
+
+	/**
+	 * Are attributes to an anchor are correctly added.
+	 *
+	 * @todo This test covers a core function, and therefore it
+	 *       should move to the core tests.
+	 *
+	 * @todo is it okay changing the config with config_set
+	 *
+	 * @dataProvider provideAttributes
+	 */
+	public function testAddLinkAttributes(int $config, string $expected) {
+		config_set( 'html_make_links', $config );
+
+		$this->assertStringContainsString($expected, $this->parser->text('<https://example.com>'));
+	}
+
+	/**
+	 * Is inline code replaced by its hash value.
+	 */
+	public function testInlineCode(): void
+	{
+		$code = 'the mention of "@user" is untouched';
+		$hash = $this->parser->hash($code);
+
+		$this->assertSame(
+			'<p>lorem <code>'.$hash.'</code> @user ipsum</p>',
+			 $this->parser->text( 'lorem `'.$code.'` @user ipsum' )
+		);
+
+		$this->assertArrayHasKey($hash, $this->parser->getCodeblocks());
+		$this->assertSame($code, $this->parser->getCodeblocks()[$hash]);
+	}
+
+	/**
+	 * Is a code block replaced by its hash value.
+	 *
+	 * @todo find a solution for nicer looking samples. String concat with PHP_EOL?
+	 */
+	public function testCodeBlock(): void
+	{
+		$code = <<<Code
+ const theTruth = () => {
+    fetch('https://api.chucknorris.io/jokes/random')
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json.value);
+        })
+}
+theTruth();
+Code;
+
+		$input = <<<Markdown
+lorem ipsum
+```
+$code
+```
+dolor sit amet
+Markdown;
+
+		$hash = $this->parser->hash($code);
+		$expected = <<<HTML
+<p>lorem ipsum</p>
+<pre><code>$hash</code></pre>
+<p>dolor sit amet</p>
+HTML;
+
+		$this->assertSame($expected, $this->parser->text($input));
+		$this->assertArrayHasKey($hash, $this->parser->getCodeblocks());
+		$this->assertSame($code, $this->parser->getCodeblocks()[$hash]);
+	}
+
+	/**
+	 * Test if css class is applied to a table.
+	 */
+	public function testTableClassIsApplied(): void
+	{
+		$markdown_table = <<<Markdown
 | header |
 | ---    |
 | cell   |
-EOD;
-		$this->assertTrue( false !== strpos( MantisMarkdown::convert_text( $markdown_table ), 'class="table table-nonfluid"' ));
+Markdown;
+
+		$this->assertTrue(false !== strpos(
+			$this->parser->text($markdown_table),
+			'class="table table-nonfluid"'
+		));
+	}
+
+	public function provideHeaders(): Generator
+	{
+		# valid headers
+		yield  'valid: # foo' => ['# foo', '<h1>foo</h1>'];
+		yield  'valid: ## foo' => ['## foo', '<h2>foo</h2>'];
+		yield  'valid: ### foo' => ['### foo', '<h3>foo</h3>'];
+		yield  'valid: #### foo' => ['#### foo', '<h4>foo</h4>'];
+		yield  'valid: ##### foo' => ['##### foo', '<h5>foo</h5>'];
+		yield  'valid: ###### foo' => ['###### foo', '<h6>foo</h6>'];
+
+		# invalid headers
+		yield  'invalid: ####### foo' => ['####### foo', '<p>####### foo</p>'];
+		yield  'invalid: #foo' => ['#foo', '<p>#foo</p>'];
+		yield  'invalid: #123' => ['#123', '<p>#123</p>'];
+	}
+
+	public function provideEmails(): Generator
+	{
+		yield 'process_urls = ON; lorem <user@exmaple.com> ipsum' => [
+			'lorem <user@exmaple.com> ipsum',
+			ON,
+			'<p>lorem <a href="mailto:user@exmaple.com">user@exmaple.com</a> ipsum</p>'
+		];
+
+		yield 'process_urls = OFF; lorem <user@exmaple.com> ipsum' => [
+			'lorem <user@exmaple.com> ipsum',
+			OFF,
+			'<p>lorem <a href="mailto:user@exmaple.com">user@exmaple.com</a> ipsum</p>'
+		];
+
+		yield 'process_urls = ON; lorem user@exmaple.com ipsum' => [
+			'lorem user@exmaple.com ipsum',
+			ON,
+			'<p>lorem <a href="mailto:user@exmaple.com">user@exmaple.com</a> ipsum</p>'
+		];
+
+		yield 'process_urls = OFF; lorem user@exmaple.com ipsum' => [
+			'lorem user@exmaple.com ipsum',
+			OFF,
+			'<p>lorem user@exmaple.com ipsum</p>'
+		];
+	}
+
+	public function provideUrls(): Generator
+	{
+		yield 'process_urls = ON; lorem <https://exmaple.com> ipsum' => [
+			'lorem <https://exmaple.com> ipsum',
+			ON,
+			'<a href="https://exmaple.com"',
+			true
+		];
+
+		yield 'process_urls = OFF; lorem <https://exmaple.com> ipsum' => [
+			'lorem <https://exmaple.com> ipsum',
+			OFF,
+			'<a href="https://exmaple.com"',
+			true
+		];
+
+		yield 'process_urls = ON; lorem [link](https://exmaple.com) ipsum' => [
+			'lorem [link](https://exmaple.com) ipsum',
+			ON,
+			'<a href="https://exmaple.com"',
+			true
+		];
+
+		yield 'process_urls = OFF; lorem [link](https://exmaple.com) ipsum' => [
+			'lorem [link](https://exmaple.com) ipsum',
+			ON,
+			'<a href="https://exmaple.com"',
+			true
+		];
+
+		yield 'process_urls = ON; lorem https://exmaple.com ipsum' => [
+			'lorem https://exmaple.com ipsum',
+			ON,
+			'<a href="https://exmaple.com"',
+			true
+		];
+
+		yield 'process_urls = OFF; lorem https://exmaple.com ipsum' => [
+			'lorem https://exmaple.com ipsum',
+			OFF,
+			'<a href="https://exmaple.com"',
+			false
+		];
+	}
+
+	public function provideAttributes(): Generator
+	{
+		yield 'LINKS_NEW_WINDOW' => [
+			LINKS_NEW_WINDOW,
+			'target="_blank"',
+		];
+
+		yield 'LINKS_NOOPENER' => [
+			LINKS_NOOPENER,
+			'rel="noopener"',
+		];
+
+		yield 'LINKS_NOREFERRER' => [
+			LINKS_NOREFERRER,
+			'rel="noreferrer"',
+		];
+
+		yield 'LINKS_NOOPENER | LINKS_NOREFERRER' => [
+			LINKS_NOOPENER | LINKS_NOREFERRER,
+			'rel="noreferrer"',
+		];
+
+		yield 'LINKS_NEW_WINDOW | LINKS_NOOPENER' => [
+			LINKS_NEW_WINDOW | LINKS_NOOPENER,
+			'target="_blank" rel="noopener"',
+		];
+
+		yield 'LINKS_NEW_WINDOW | LINKS_NOREFERRER' => [
+			LINKS_NEW_WINDOW | LINKS_NOREFERRER,
+			'target="_blank" rel="noreferrer"',
+		];
+
+		yield 'LINKS_NEW_WINDOW | LINKS_NOOPENER | LINKS_NOREFERRER' => [
+			LINKS_NEW_WINDOW | LINKS_NOOPENER | LINKS_NOREFERRER,
+			'target="_blank" rel="noreferrer"',
+		];
 	}
 }
