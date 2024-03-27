@@ -62,7 +62,7 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * The Parser class implements the CommonMark specifications for headers,
-	 * as Parsedown does not respect it.
+	 * as Parsedown does not.
 	 *
 	 * @see https://spec.commonmark.org/0.31.2/#example-62
 	 * @see https://parsedown.org/demo
@@ -89,19 +89,23 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * The switch `process_urls` should only affect "unmarked" URLs.
-	 * URls noted within Markdown tags, should always be converted
+	 * The configuration of `process_urls` should only affect "unmarked" URLs.
+	 *
+	 * This tests for the presence of the string `<a href=…` to avoid conflicts
+	 * with the attributes of the link.
+	 *
+	 * URLs noted within Markdown tags, should always be converted
 	 * to links.
 	 *
 	 * - "<https://example.com>" - always converted to a link.
 	 * - "[Text](https://example.com)" - always converted to a link.
 	 * - "https://example.com" - only converted to a link if "process_urls = ON".
 	 *
-	 * @todo take care of input with HTML links?
+	 * @todo take care of input of HTML links?
 	 *
 	 * @dataProvider provideUrls
 	 */
-	public function testProcessURls(string $p_sample, int $p_config, string $p_needle, bool $p_contains): void
+	public function testProcessUrls(string $p_sample, int $p_config, string $p_needle, bool $p_contains): void
 	{
 		$this->parser->setConfigProcessUrls($p_config);
 
@@ -148,7 +152,8 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * Is a code block replaced by its hash value.
 	 *
-	 * @todo find a solution for nicer looking samples. String concat with PHP_EOL?
+	 * @todo find a solution for nicer looking samples.
+	 *       String concatenations with PHP_EOL look too wild?
 	 */
 	public function testCodeBlock(): void
 	{
