@@ -37,13 +37,26 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * Tests whether the configuration "process_urls" can
-	 * be changed during runtime.
+	 * The configuration for "process_urls" can be changed during runtime.
 	 */
 	public function testCanSetConfigProcessUrls(): void {
-		foreach ([OFF, ON, OFF] as $t_config ) {
-			$this->parser->setConfigProcessUrls( $t_config );
-			$this->assertSame( $t_config, $this->parser->getConfigProcessUrls() );
+		foreach ([OFF, ON, OFF] as $t_expected ) {
+			$this->parser->setConfigProcessUrls( $t_expected );
+			$this->assertSame( $t_expected, $this->parser->getConfigProcessUrls() );
+		}
+	}
+
+	/**
+	 * The configuration value for "process_urls" must be the value of the
+	 * constant "ON" (1) or "OFF" (0),
+	 */
+	public function testCanNotSetInvalidValuesAsConfigProcessUrls(): void {
+		$t_expected = OFF;
+		$this->parser->setConfigProcessUrls( $t_expected );
+
+		foreach ([-1, 2, 3] as $t_value ) {
+			$this->parser->setConfigProcessUrls( $t_value );
+			$this->assertSame( $t_expected, $this->parser->getConfigProcessUrls() );
 		}
 	}
 
