@@ -27,6 +27,8 @@ require_mantis_core();
  * @subpackage Markdown
  * @copyright Copyright 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link https://www.mantisbt.org
+ *
+ * @todo add annotation "@covers MantisMarkdown" to determine the coverage goal?
  */
 class MarkdownTest extends PHPUnit\Framework\TestCase {
 
@@ -147,9 +149,6 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * Is a code block replaced by its hash value.
-	 *
-	 * @todo find a solution for nicer looking samples.
-	 *       String concatenations with PHP_EOL look too wild?
 	 */
 	public function testCodeBlock(): void {
 		$t_code = <<<Code
