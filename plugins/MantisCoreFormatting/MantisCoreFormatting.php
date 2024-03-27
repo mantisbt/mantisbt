@@ -76,7 +76,23 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			'process_text'		=> ON,
 			'process_urls'		=> ON,
 			'process_buglinks'	=> ON,
-			'process_markdown'	=> OFF
+			'process_markdown'	=> OFF,
+			'safe_links'		=> array(
+				'http://',
+				'https://',
+				'ftp://',
+				'ftps://',
+				'mailto:',
+				'data:image/png;base64,',
+				'data:image/gif;base64,',
+				'data:image/jpeg;base64,',
+				'irc:',
+				'ircs:',
+				'git:',
+				'ssh:',
+				'news:',
+				'steam:',
+			),
 		);
 	}
 
