@@ -105,8 +105,7 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 *
 	 * @dataProvider provideUrls
 	 */
-	public function testProcessUrls(string $p_sample, int $p_config, string $p_needle, bool $p_contains): void
-	{
+	public function testProcessUrls(string $p_sample, int $p_config, string $p_needle, bool $p_contains): void {
 		$this->parser->setConfigProcessUrls($p_config);
 
 		if( $p_contains ) {
@@ -122,8 +121,6 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 * @todo This test covers a core function, and therefore it
 	 *       should move to the core tests.
 	 *
-	 * @todo is it okay changing the config with config_set
-	 *
 	 * @dataProvider provideAttributes
 	 */
 	public function testAddLinkAttributes( int $p_config, string $p_expected ) {
@@ -135,8 +132,7 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * Is inline code replaced by its hash value.
 	 */
-	public function testInlineCode(): void
-	{
+	public function testInlineCode(): void {
 		$t_code = 'the mention of "@user" is untouched';
 		$t_hash = $this->parser->hash( $t_code );
 
@@ -155,8 +151,7 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 * @todo find a solution for nicer looking samples.
 	 *       String concatenations with PHP_EOL look too wild?
 	 */
-	public function testCodeBlock(): void
-	{
+	public function testCodeBlock(): void {
 		$t_code = <<<Code
  const theTruth = () => {
     fetch('https://api.chucknorris.io/jokes/random')
@@ -191,8 +186,7 @@ HTML;
 	/**
 	 * Test if css class is applied to a table.
 	 */
-	public function testTableClassIsApplied(): void
-	{
+	public function testTableClassIsApplied(): void {
 		$t_table = <<<Markdown
 | header |
 | ---    |
@@ -216,15 +210,13 @@ Markdown;
 	 * - convert_text should have p tags
 	 * - code blocks should untouched
 	 */
-	public function testConvert(): void
-	{
+	public function testConvert(): void {
 		$this->assertSame( 'I am <strong>strong</strong>', MantisMarkdown::convert_line('I am **strong**') );
 		$this->assertSame( '<p>I am <strong>strong</strong></p>', MantisMarkdown::convert_text('I am **strong**') );
 		$this->assertSame( '<p>I am <code>**strong**</code></p>', MantisMarkdown::convert_text('I am `**strong**`') );
 	}
 
-	public function provideHeaders(): Generator
-	{
+	public function provideHeaders(): Generator {
 		# valid headers
 		yield  'valid: # foo' => [ '# foo', '<h1>foo</h1>' ];
 		yield  'valid: ## foo' => [ '## foo', '<h2>foo</h2>' ];
@@ -239,8 +231,7 @@ Markdown;
 		yield  'invalid: #123' => [ '#123', '<p>#123</p>' ];
 	}
 
-	public function provideEmails(): Generator
-	{
+	public function provideEmails(): Generator {
 		yield 'process_urls = ON; lorem <user@exmaple.com> ipsum' => [
 			'lorem <user@exmaple.com> ipsum',
 			ON,
@@ -266,8 +257,7 @@ Markdown;
 		];
 	}
 
-	public function provideUrls(): Generator
-	{
+	public function provideUrls(): Generator {
 		yield 'process_urls = ON; lorem <https://exmaple.com> ipsum' => [
 			'lorem <https://exmaple.com> ipsum',
 			ON,
@@ -311,8 +301,7 @@ Markdown;
 		];
 	}
 
-	public function provideAttributes(): Generator
-	{
+	public function provideAttributes(): Generator {
 		yield 'LINKS_NEW_WINDOW' => [
 			LINKS_NEW_WINDOW,
 			'target="_blank"',
