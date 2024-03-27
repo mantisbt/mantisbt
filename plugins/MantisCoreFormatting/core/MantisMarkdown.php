@@ -139,9 +139,10 @@ class MantisMarkdown extends Parsedown
 	 * @param int $p_value Value of constant "ON" (1) or "OFF" (0)
 	 */
 	public function setConfigProcessUrls( int $p_value ): void {
-		# @todo test for is 0 or 1?
-		$this->config_process_urls = $p_value;
-		$this->setUrlsLinked( (bool) $this->config_process_urls );
+		if( in_array( $p_value, [ ON, OFF ], true) ) {
+			$this->config_process_urls = $p_value;
+			$this->setUrlsLinked( (bool) $this->config_process_urls );
+		}
 	}
 
 	/**
