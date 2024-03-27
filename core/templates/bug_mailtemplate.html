@@ -1,0 +1,83 @@
+<!--
+Available fields to this template:
+	[email_bug] 					=> bug_id
+	[email_bug_view_url]			=> url
+	[email_handler]					=> handler
+	[email_reporter]				=> reporter
+	[email_project]					=> project
+	[email_category]				=> category
+	[email_tag]						=> tags
+	[email_date_submitted]			=> submitted
+	[email_last_modified]			=> modified
+	[email_due_date]				=> due_date
+	[email_status]					=> status
+	[email_severity]				=> severity
+	[email_priority]				=> priority
+	[email_reproducibility]			=> repro
+	[email_summary]					=> summary
+	[email_description] 			=> description
+	[email_additional_information]	=> info
+	[email_steps_to_reproduce]		=> steps
+	Custom fields					=> cfdata		
+	Notes							=> notedata ( as table )
+	Relations						=> reldata	( as table )
+	History							=> hisdata		
+	History (last entries)			=> lasthisdata	
+
+	## following 2 fields are available for testing purposes
+	Referer page					=> reference
+	Available data					=> mail_data
+
+	## how to use the fields
+	all elements ( only those you need of course) need to be referenced inbetween "{{" and "}}"
+
+	## changes
+	modification of contents takes place within core/template_api.php, function email_template_bug_message
+-->
+<style>
+body {
+    background-color: #93B874;
+}
+h1 {
+    background-color: #00b33c;
+}
+p {
+    background-color: #FFFFFF);
+}
+table, th, td {    margin: 0; padding: 0;font-size: 100%; font: inherit; vertical-align: baseline;border: 1px solid black;}
+</style>
+<body>
+<h2 style="color:red; background:black;">
+{{ top_line }}
+</h2>
+<br>
+<table>
+<tr><td><b>Issue-id </b> </td><td>{{ bug_id }} <a href={{ url }}> View all details inside the Issue Tracker</a></td></tr>
+<tr><td><b>Status </b></td><td> {{ status }}</td></tr>
+<tr><td><b>Submitted </b></td><td> {{ submitted }}</td></tr>
+<tr><td><b>Last Modified </b></td><td> {{ modified }}</td></tr>
+<tr><td><b>Priority </b></td><td> {{ priority }}</td></tr>
+<tr><td><b>Severity </b></td><td> {{ severity }}</td></tr>
+<tr><td><b>Reproducibility </b></td><td> {{ repro }}</td></tr>
+<tr><td><b>Reporter </b></td><td> {{ reporter }}</td></tr>
+<tr><td><b>Project</b></td><td> {{ project }}</td></tr>
+<tr><td><b>Category </b></td><td> {{ category }}</td></tr>
+<tr><td><b>Summary</b></td><td> {{ summary }}</td></tr>
+<tr><td><b>Description</B</td><td> {{ description }} </td></tr>
+<tr><td><b>Steps to reproduce </b></td><td>{{ steps }}</td></tr>
+<tr><td><b>Additional Information</b></td><td> {{ info }} </td></tr>
+<tr><td><b>Due-Date</b></td><td> {{ due_date }}</td></tr>
+<tr><td><b>Tags</b></td><td> {{ tags }}</td></tr>
+<tr><td><b>Custom Fields</b></td><td> {{ cfdata }} </td></tr>
+<tr><td><b>Relations</b></td><td> {{ reldata }} </td></tr>
+<tr><td><b>Notes</b></td><td> {{ notedata }} </td></tr>
+<tr><td><b>Last History</b></td><td>{{ lasthisdata }}</td></tr>
+<!-- skip for now, feel free to use
+<tr><td><b>All History</b></td><td>{{ hisdata }}</td></tr>
+<tr><td><b>Referer</b></td><td> {{ reference }}</td></tr>
+<tr><td><b>Available data</b></td><td><pre> {{ mail_data }}</pre></td></tr>
+-->
+<tr><td><b>On The Web </b> </td><td><a href={{ url }}> View all details inside the Issue Tracker</a></td></tr>
+</table>
+</body>
+</html>
