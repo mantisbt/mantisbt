@@ -78,7 +78,7 @@ class MantisMarkdown extends Parsedown
 		$this->setSafeMode( true );
 
 		# Plugin configuration
-		# @todo decoupling the parser, inserting config values via constructor or setter.
+		# @todo Decoupling the parser, insert configuration values via constructor and/or with setter.
 		plugin_push_current( 'MantisCoreFormatting' );
 		$this->config_process_urls = plugin_config_get('process_urls');
 		$this->config_process_buglinks = plugin_config_get('process_buglinks');
@@ -98,9 +98,9 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Convert a field that supports multiple lines form Markdown to html.
+	 * Convert a field that supports multiple lines form Markdown to HTML.
 	 *
-	 * @param string $p_text The input to parse
+	 * @param string $p_text The input to convert
 	 * @return string HTML markup
 	 */
 	public static function convert_text( string $p_text ): string {
@@ -112,7 +112,7 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Convert a field that supports a single line only from Markdown to html.
+	 * Convert a field that supports a single line only from Markdown to HTML.
 	 *
 	 * @param string $p_text The input to convert
 	 * @return string HTML markup
@@ -134,18 +134,18 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Activating or deactivating the "process_urls" functionality.
+	 * Enable or disable the processing of urls.
 	 *
-	 * @param int $p_value value of constant "ON" (1) or "OFF" (0)
+	 * @param int $p_value Value of constant "ON" (1) or "OFF" (0)
 	 */
 	public function setConfigProcessUrls( int $p_value ): void {
-		// @todo test for is 0 or 1?
+		# @todo test for is 0 or 1?
 		$this->config_process_urls = $p_value;
 		$this->setUrlsLinked( (bool) $this->config_process_urls );
 	}
 
 	/**
-	 * @return int value of constant "ON" (1) or "OFF" (0)
+	 * @return int Value of constant "ON" (1) or "OFF" (0)
 	 */
 	public function getConfigProcessUrls(): int {
 		return $this->config_process_urls;
@@ -159,9 +159,9 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Build the HTML markup from an array of elements data.
+	 * Convert an array of element data into the HTML markup.
 	 *
-	 * @param array $Element data for an element
+	 * @param array $Element Data for an element
 	 * @return string HTML markup for an element
 	 */
 	protected function element( array $Element ): string {
@@ -181,7 +181,10 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Converting email addresses in unmarked text.
+	 * Convert an email addresses in unmarked text into a link.
+	 *
+	 * Unlike unmarked URLs, unmarked email addresses are not
+	 * processed by Parsedown.
 	 */
 	protected function unmarkedText( $text ): string {
 		if( ON == $this->config_process_urls && false !== strpos( $text, '@' ) ) {
@@ -212,7 +215,7 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Add Link attributes to element data.
+	 * Add link attributes to element data.
 	 *
 	 * - [link](http://example.com)
 	 *
@@ -225,7 +228,7 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Add Link attributes to element data.
+	 * Add link attributes to element data.
 	 *
 	 * - <http://example.com>
 	 * - <user@example.com>
@@ -239,7 +242,7 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Add Link attributes to element data.
+	 * Add link attributes to element data.
 	 *
 	 * - Not marked URLs. "https://example.com"
 	 *
