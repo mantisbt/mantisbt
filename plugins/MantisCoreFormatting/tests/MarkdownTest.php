@@ -32,8 +32,7 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 
 	private ?MantisMarkdown $parser = null;
 
-	protected function setUp(): void
-	{
+	protected function setUp(): void {
 		$this->parser = new MantisMarkdown();
 	}
 
@@ -41,26 +40,24 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 * Tests whether the configuration "process_urls" can
 	 * be changed during runtime.
 	 */
-	public function testCanSetConfigProcessUrls(): void
-	{
-		foreach([OFF, ON, OFF] as $config) {
-			$this->parser->setConfigProcessUrls($config);
-			$this->assertSame($config, $this->parser->getConfigProcessUrls());
+	public function testCanSetConfigProcessUrls(): void {
+		foreach ([OFF, ON, OFF] as $t_config ) {
+			$this->parser->setConfigProcessUrls( $t_config );
+			$this->assertSame( $t_config, $this->parser->getConfigProcessUrls() );
 		}
 	}
 
 	/**
 	 * The Parser class implements the CommonMark specifications for headers,
-	 * as Parsedown does not respect it. This test ensures the implementation.
+	 * as Parsedown does not respect it.
 	 *
 	 * @see https://spec.commonmark.org/0.31.2/#example-62
 	 * @see https://parsedown.org/demo
 	 *
 	 * @dataProvider provideHeaders
 	 */
-	public function testCommonMarkImplementationOfHeaders(string $sample, string $expected): void
-	{
-		$this->assertSame($expected, $this->parser->text($sample));
+	public function testCommonMarkImplementationOfHeaders(string $p_sample, string $p_expected): void {
+		$this->assertSame( $p_expected, $this->parser->text( $p_sample ) );
 	}
 
 	/**
@@ -73,10 +70,9 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 *
 	 * @dataProvider provideEmails
 	 */
-	public function testProcessEmails(string $sample, int $config, string $expected): void
-	{
-		$this->parser->setConfigProcessUrls($config);
-		$this->assertSame($expected, $this->parser->text($sample));
+	public function testProcessEmails(string $p_sample, int $p_config, string $p_expected): void {
+		$this->parser->setConfigProcessUrls( $p_config );
+		$this->assertSame( $p_expected, $this->parser->text( $p_sample));
 	}
 
 	/**
@@ -92,14 +88,14 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 *
 	 * @dataProvider provideUrls
 	 */
-	public function testProcessURls(string $sample, int $config, string $needle, bool $contains): void
+	public function testProcessURls(string $p_sample, int $p_config, string $p_needle, bool $p_contains): void
 	{
-		$this->parser->setConfigProcessUrls($config);
+		$this->parser->setConfigProcessUrls($p_config);
 
-		if ($contains) {
-			$this->assertStringContainsString($needle, $this->parser->text($sample));
+		if( $p_contains ) {
+			$this->assertStringContainsString( $p_needle, $this->parser->text( $p_sample ) );
 		} else {
-			$this->assertStringNotContainsString($needle, $this->parser->text($sample));
+			$this->assertStringNotContainsString( $p_needle, $this->parser->text( $p_sample ) );
 		}
 	}
 
@@ -113,10 +109,10 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 *
 	 * @dataProvider provideAttributes
 	 */
-	public function testAddLinkAttributes(int $config, string $expected) {
-		config_set( 'html_make_links', $config );
+	public function testAddLinkAttributes( int $p_config, string $p_expected ) {
+		config_set( 'html_make_links', $p_config );
 
-		$this->assertStringContainsString($expected, $this->parser->text('<https://example.com>'));
+		$this->assertStringContainsString( $p_expected, $this->parser->text( '<https://example.com>' ) );
 	}
 
 	/**
@@ -124,16 +120,16 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 */
 	public function testInlineCode(): void
 	{
-		$code = 'the mention of "@user" is untouched';
-		$hash = $this->parser->hash($code);
+		$t_code = 'the mention of "@user" is untouched';
+		$t_hash = $this->parser->hash( $t_code );
 
 		$this->assertSame(
-			'<p>lorem <code>'.$hash.'</code> @user ipsum</p>',
-			 $this->parser->text( 'lorem `'.$code.'` @user ipsum' )
+			'<p>lorem <code>' . $t_hash . '</code> @user ipsum</p>',
+			 $this->parser->text( 'lorem `' . $t_code . '` @user ipsum' )
 		);
 
-		$this->assertArrayHasKey($hash, $this->parser->getCodeblocks());
-		$this->assertSame($code, $this->parser->getCodeblocks()[$hash]);
+		$this->assertArrayHasKey( $t_hash, $this->parser->getCodeblocks() );
+		$this->assertSame( $t_code, $this->parser->getCodeblocks()[$t_hash] );
 	}
 
 	/**
@@ -143,7 +139,7 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 	 */
 	public function testCodeBlock(): void
 	{
-		$code = <<<Code
+		$t_code = <<<Code
  const theTruth = () => {
     fetch('https://api.chucknorris.io/jokes/random')
         .then((response) => response.json())
@@ -154,24 +150,24 @@ class MarkdownTest extends PHPUnit\Framework\TestCase {
 theTruth();
 Code;
 
-		$input = <<<Markdown
+		$t_input = <<<Markdown
 lorem ipsum
 ```
-$code
+$t_code
 ```
 dolor sit amet
 Markdown;
 
-		$hash = $this->parser->hash($code);
-		$expected = <<<HTML
+		$t_hash = $this->parser->hash( $t_code );
+		$t_expected = <<<HTML
 <p>lorem ipsum</p>
-<pre><code>$hash</code></pre>
+<pre><code>$t_hash</code></pre>
 <p>dolor sit amet</p>
 HTML;
 
-		$this->assertSame($expected, $this->parser->text($input));
-		$this->assertArrayHasKey($hash, $this->parser->getCodeblocks());
-		$this->assertSame($code, $this->parser->getCodeblocks()[$hash]);
+		$this->assertSame( $t_expected, $this->parser->text( $t_input ) );
+		$this->assertArrayHasKey( $t_hash, $this->parser->getCodeblocks() );
+		$this->assertSame( $t_code, $this->parser->getCodeblocks()[$t_hash] );
 	}
 
 	/**
@@ -179,14 +175,14 @@ HTML;
 	 */
 	public function testTableClassIsApplied(): void
 	{
-		$markdown_table = <<<Markdown
+		$t_table = <<<Markdown
 | header |
 | ---    |
 | cell   |
 Markdown;
 
-		$this->assertTrue(false !== strpos(
-			$this->parser->text($markdown_table),
+		$this->assertTrue(false !== strpos (
+			$this->parser->text( $t_table),
 			'class="table table-nonfluid"'
 		));
 	}
@@ -204,25 +200,25 @@ Markdown;
 	 */
 	public function testConvert(): void
 	{
-		$this->assertSame('I am <strong>strong</strong>', MantisMarkdown::convert_line('I am **strong**'));
-		$this->assertSame('<p>I am <strong>strong</strong></p>', MantisMarkdown::convert_text('I am **strong**'));
-		$this->assertSame('<p>I am <code>**strong**</code></p>', MantisMarkdown::convert_text('I am `**strong**`'));
+		$this->assertSame( 'I am <strong>strong</strong>', MantisMarkdown::convert_line('I am **strong**') );
+		$this->assertSame( '<p>I am <strong>strong</strong></p>', MantisMarkdown::convert_text('I am **strong**') );
+		$this->assertSame( '<p>I am <code>**strong**</code></p>', MantisMarkdown::convert_text('I am `**strong**`') );
 	}
 
 	public function provideHeaders(): Generator
 	{
 		# valid headers
-		yield  'valid: # foo' => ['# foo', '<h1>foo</h1>'];
-		yield  'valid: ## foo' => ['## foo', '<h2>foo</h2>'];
-		yield  'valid: ### foo' => ['### foo', '<h3>foo</h3>'];
-		yield  'valid: #### foo' => ['#### foo', '<h4>foo</h4>'];
-		yield  'valid: ##### foo' => ['##### foo', '<h5>foo</h5>'];
-		yield  'valid: ###### foo' => ['###### foo', '<h6>foo</h6>'];
+		yield  'valid: # foo' => [ '# foo', '<h1>foo</h1>' ];
+		yield  'valid: ## foo' => [ '## foo', '<h2>foo</h2>' ];
+		yield  'valid: ### foo' => [ '### foo', '<h3>foo</h3>' ];
+		yield  'valid: #### foo' => [ '#### foo', '<h4>foo</h4>' ];
+		yield  'valid: ##### foo' => [ '##### foo', '<h5>foo</h5>' ];
+		yield  'valid: ###### foo' => [ '###### foo', '<h6>foo</h6>' ];
 
 		# invalid headers
-		yield  'invalid: ####### foo' => ['####### foo', '<p>####### foo</p>'];
-		yield  'invalid: #foo' => ['#foo', '<p>#foo</p>'];
-		yield  'invalid: #123' => ['#123', '<p>#123</p>'];
+		yield  'invalid: ####### foo' => [ '####### foo', '<p>####### foo</p>' ];
+		yield  'invalid: #foo' => [ '#foo', '<p>#foo</p>' ];
+		yield  'invalid: #123' => [ '#123', '<p>#123</p>' ];
 	}
 
 	public function provideEmails(): Generator
