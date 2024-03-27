@@ -44,7 +44,7 @@ class MantisMarkdown extends Parsedown
 	/**
 	 * singleton instance for MantisMarkdown class.
 	 */
-	private static ?MantisMarkdown $mantis_markdown = null;
+	private static ?MantisMarkdown $parser = null;
 
 	/**
 	 * CSS class for tables
@@ -92,8 +92,8 @@ class MantisMarkdown extends Parsedown
 	 * Initialize the singleton static instance.
 	 */
 	private static function init(): void {
-		if ( null === static::$mantis_markdown ) {
-			static::$mantis_markdown = new MantisMarkdown();
+		if ( null === static::$parser ) {
+			static::$parser = new MantisMarkdown();
 		}
 	}
 
@@ -106,8 +106,8 @@ class MantisMarkdown extends Parsedown
 	public static function convert_text( string $p_text ): string {
 		self::init();
 
-		return self::$mantis_markdown->finalizeMarkup(
-			self::$mantis_markdown->text( $p_text )
+		return self::$parser->finalizeMarkup(
+			self::$parser->text( $p_text )
 		);
 	}
 
@@ -120,8 +120,8 @@ class MantisMarkdown extends Parsedown
 	public static function convert_line( string $p_text ): string {
 		self::init();
 
-		return self::$mantis_markdown->finalizeMarkup(
-			self::$mantis_markdown->line( $p_text )
+		return self::$parser->finalizeMarkup(
+			self::$parser->line( $p_text )
 		);
 	}
 
@@ -290,7 +290,7 @@ class MantisMarkdown extends Parsedown
 	private function finalizeMarkup( string $p_markup ): string {
 		$t_markup = $p_markup;
 
-		if( ON == self::$mantis_markdown->config_process_buglinks ) {
+		if( ON == self::$parser->config_process_buglinks ) {
 			$t_markup = string_process_bugnote_link( $t_markup );
 			$t_markup = string_process_bug_link( $t_markup );
 		}
@@ -299,7 +299,7 @@ class MantisMarkdown extends Parsedown
 
 		$t_markup = mention_format_text( $t_markup );
 
-		foreach( self::$mantis_markdown->codeblocks as $t_hash => $t_code ) {
+		foreach(self::$parser->codeblocks as $t_hash => $t_code ) {
 			$t_markup = str_replace( $t_hash, htmlspecialchars($t_code), $t_markup );
 		}
 
