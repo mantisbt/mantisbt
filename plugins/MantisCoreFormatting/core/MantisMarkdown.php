@@ -47,7 +47,7 @@ class MantisMarkdown extends Parsedown
 	private static ?MantisMarkdown $mantis_markdown = null;
 
 	/**
-	 * table class to add
+	 * CSS class for tables
 	 */
 	private string $table_class = 'table table-nonfluid';
 
@@ -78,7 +78,7 @@ class MantisMarkdown extends Parsedown
 		$this->setSafeMode( true );
 
 		# Plugin configuration
-		# @todo Decoupling the parser, insert configuration values via constructor and/or with setter.
+		# @todo Decoupling the parser, insert configuration values via constructor and/or setter.
 		plugin_push_current( 'MantisCoreFormatting' );
 		$this->config_process_urls = plugin_config_get('process_urls');
 		$this->config_process_buglinks = plugin_config_get('process_buglinks');
