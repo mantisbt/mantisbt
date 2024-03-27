@@ -267,7 +267,7 @@ function print_filter_values_user_monitor( array $p_filter ) {
 		} else if( true == $t_none_found ) {
 			echo lang_get( 'none' );
 		} else {
-			echo string_display( $t_output );
+			echo $t_output;
 		}
 	}
 }
@@ -343,7 +343,7 @@ function print_filter_values_handler_id( array $p_filter ) {
 		if( true == $t_any_found ) {
 			echo lang_get( 'any' );
 		} else {
-			echo string_display( $t_output );
+			echo $t_output;
 		}
 	}
 }
