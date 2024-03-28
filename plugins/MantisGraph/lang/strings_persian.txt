@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Ebraminio
  * @author FarsiNevis
  * @author Reza1615
  * @author Sjazz
@@ -74,7 +75,7 @@ $s_plugin_MantisGraph_period_last_quarter = 'فصل گذشته';
 $s_plugin_MantisGraph_period_select = 'تاریخ‌های اختیاری';
 $s_plugin_MantisGraph_period_last_year = 'سال پیش';
 $s_plugin_MantisGraph_graph_page = 'نمودار تاریخچه مسائل';
-$s_plugin_MantisGraph_graph_topdev = 'برترین برنامه‌نویس ها براساس مسائل حل شده';
-$s_plugin_MantisGraph_graph_opendev = 'برنامه‌نویس ها براساس مسائل باز';
-$s_plugin_MantisGraph_graph_topreporter_fixed = 'برترین گزارش دهنده ها براساس مسائل حل شده';
+$s_plugin_MantisGraph_graph_topdev = 'برترین برنامه‌نویس‌ها براساس مسائل حل شده';
+$s_plugin_MantisGraph_graph_opendev = 'برنامه‌نویس‌ها براساس مسائل باز';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'برترین گزارش‌دهنده‌ها براساس مسائل حل شده';
 $s_plugin_MantisGraph_other_categories = 'رده‌های دیگر(%d)';

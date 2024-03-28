@@ -45,6 +45,7 @@
  * @author DDPAT
  * @author DevilishSkull
  * @author Diralik
+ * @author Dirruw'o
  * @author Dregad
  * @author Edible Melon
  * @author Eleferen
@@ -1249,6 +1250,7 @@ $s_database_information = 'Информация о базе данных MantisB
 $s_path_information = 'Путь к MantisBT';
 $s_mantisbt_database_statistics = 'Статистика базы данных MantisBT';
 $s_php_version = 'Версия PHP';
+$s_os_information = 'Информация о провайдере';
 $s_adodb_version = 'Версия ADOdb';
 $s_database_driver = 'Драйвер базы данных';
 $s_database_version_description = 'Версия база данных, описание';

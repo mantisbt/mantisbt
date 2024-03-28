@@ -1238,6 +1238,7 @@ $s_database_information = 'MantisBT 資料庫訊息';
 $s_path_information = 'MantisBT 路徑資訊';
 $s_mantisbt_database_statistics = 'MantisBT 資料庫統計資訊';
 $s_php_version = 'PHP 版本';
+$s_os_information = '作業系統資訊';
 $s_adodb_version = 'ADOdb 版本';
 $s_database_driver = '資料庫驅動程式';
 $s_database_version_description = '資料庫版本、描述';
