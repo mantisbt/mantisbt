@@ -28,7 +28,7 @@ require_mantis_core();
  * @copyright Copyright 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link https://www.mantisbt.org
  *
- * @todo add annotation "@covers MantisMarkdown" to determine the coverage goal?
+ * @todo add annotation "@covers MantisMarkdown" to determine the coverage target?
  */
 class MarkdownTest extends PHPUnit\Framework\TestCase {
 
