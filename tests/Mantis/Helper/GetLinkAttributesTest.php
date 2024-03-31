@@ -41,6 +41,10 @@ class GetLinkAttributesTest extends MantisCoreBase
 	 * 2. Helper returns the attributes as a string if the
 	 *    argument "p_return_array" is set to false.
 	 *
+	 * @param int $p_config                  The configuration for "$g_html_make_links"
+	 * @param string $p_string               The expected result as a string
+	 * @param array<string, string> $p_array The expected result as an array
+	 *
 	 * @dataProvider provideConfigurations
 	 */
 	public function testHelperReturnsArrayOrString( int $p_config, string $p_string, array $p_array ): void {
