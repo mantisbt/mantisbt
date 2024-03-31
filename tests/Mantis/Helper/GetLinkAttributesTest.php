@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 # MantisBT - a php based bugtracking system
 
 # MantisBT is free software: you can redistribute it and/or modify
@@ -25,6 +22,8 @@ declare(strict_types=1);
  * @link https://www.mantisbt.org
  */
 
+declare(strict_types=1);
+
 require_once dirname( __FILE__, 2 ) . '/MantisCoreBase.php';
 
 /**
@@ -35,7 +34,7 @@ require_once dirname( __FILE__, 2 ) . '/MantisCoreBase.php';
 class GetLinkAttributesTest extends MantisCoreBase
 {
 	/**
-	 * Link attributes are correctly created accordingly to the
+	 * Link attributes are correctly created according to the
 	 * configuration of "$g_html_make_links"
 	 *
 	 * 1. Helper returns an array on default.
