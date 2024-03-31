@@ -64,52 +64,37 @@ class GetLinkAttributesTest extends MantisCoreBase
 		yield 'LINKS_NOOPENER' => [
 			LINKS_NOOPENER,
 			'rel="noopener"',
-			[
-				'rel' => 'noopener'
-			]
+			['rel' => 'noopener']
 		];
 
 		yield 'LINKS_NOREFERRER' => [
 			LINKS_NOREFERRER,
 			'rel="noreferrer"',
-			[
-				'rel' => 'noreferrer'
-			]
+			['rel' => 'noreferrer']
 		];
 
 		yield 'LINKS_NOOPENER | LINKS_NOREFERRER' => [
 			LINKS_NOOPENER | LINKS_NOREFERRER,
 			'rel="noreferrer"',
-			[
-				'rel' => 'noreferrer'
-			]
+			['rel' => 'noreferrer']
 		];
 
 		yield 'LINKS_NEW_WINDOW | LINKS_NOOPENER' => [
 			LINKS_NEW_WINDOW | LINKS_NOOPENER,
 			'target="_blank" rel="noopener"',
-			[
-				'target' => '_blank',
-				'rel' => 'noopener'
-			]
+			['target' => '_blank', 'rel' => 'noopener']
 		];
 
 		yield 'LINKS_NEW_WINDOW | LINKS_NOREFERRER' => [
 			LINKS_NEW_WINDOW | LINKS_NOREFERRER,
 			'target="_blank" rel="noreferrer"',
-			[
-				'target' => '_blank',
-				'rel' => 'noreferrer'
-			]
+			['target' => '_blank', 'rel' => 'noreferrer']
 		];
 
 		yield 'LINKS_NEW_WINDOW | LINKS_NOOPENER | LINKS_NOREFERRER' => [
 			LINKS_NEW_WINDOW | LINKS_NOOPENER | LINKS_NOREFERRER,
 			'target="_blank" rel="noreferrer"',
-			[
-				'target' => '_blank',
-				'rel' => 'noreferrer'
-			]
+			['target' => '_blank', 'rel' => 'noreferrer']
 		];
 	}
 }
