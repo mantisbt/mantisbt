@@ -90,12 +90,12 @@ class ConfigParserTest extends MantisCoreBase {
 		# Check that the parsed array matches the model array
 		$t_parser = new ConfigParser( $p_string );
 		$t_parsed_1 = $t_parser->parse();
-		$this->assertEquals( $t_parsed_1, $t_reference_result, $this->errorMessage( $p_string )  );
+		$this->assertEquals(  $t_reference_result, $t_parsed_1, $this->errorMessage( $p_string )  );
 
 		# Export converted array and parse again: result should match the model
 		$t_parser = new ConfigParser( var_export( $t_parsed_1 , true ) );
 		$t_parsed_2 = $t_parser->parse();
-		$this->assertEquals( $t_parsed_2, $t_reference_result, $this->errorMessage( $p_string )  );
+		$this->assertEquals(  $t_reference_result, $t_parsed_2, $this->errorMessage( $p_string )  );
 	}
 
 	/**
@@ -122,11 +122,11 @@ class ConfigParserTest extends MantisCoreBase {
 	public function testExtraTokensIgnore() {
 		$t_parser = new ConfigParser( '1; 2' );
 		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
-		$this->assertEquals( $t_result, 1 );
+		$this->assertEquals( 1, $t_result);
 
 		$t_parser = new ConfigParser( 'array(); 2' );
 		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
-		$this->assertEquals( $t_result, array() );
+		$this->assertEquals( array(), $t_result);
 	}
 
 	/**
