@@ -15,49 +15,47 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Mantis Unit Tests
- * @package Tests
  * MantisBT Core Unit Tests
+ * @package Tests
  * @subpackage Helper
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
+ * @link https://www.mantisbt.org
  */
 
-# Includes
+declare( strict_types = 1 );
+
 use Mantis\Exceptions\ClientException;
 
-require_once 'MantisCoreBase.php';
+require_once dirname( __FILE__, 2 ) . '/MantisCoreBase.php';
 
 /**
- * Helper API tests
- * @package Tests
- * @subpackage String
+ * Test for helper_api::helper_array_transpose
+ *
+ * @see helper_array_transpose()
  */
 class ArrayTransposeTest extends MantisCoreBase {
 
 	/**
 	 * Tests helper_array_transpose() with good values.
 	 *
-	 * @param mixed $p_in  Input array.
-	 * @param mixed $p_out Output array.
-	 * @return void
+	 * @param array $p_in  Input array.
+	 * @param array $p_out Output array.
 	 *
 	 * @dataProvider providerArrayTransposeValid
 	 * @throws ClientException
 	 */
-	public function testArrayTransposeValid( $p_in, $p_out ) {
-		$this->assertEquals( $p_out, helper_array_transpose( $p_in ) );
+	public function testArrayTransposeValid( array $p_in, array $p_out ): void {
+		$this->assertSame( $p_out, helper_array_transpose( $p_in ) );
 	}
 
 	/**
 	 * Tests helper_array_transpose() with invalid values.
 	 *
-	 * @param mixed $p_in  Input value.
-	 * @return void
+	 * @param array $p_in Input value.
 	 *
 	 * @dataProvider providerArrayTransposeInvalid
 	 */
-	public function testArrayTransposeInvalid( $p_in ) {
+	public function testArrayTransposeInvalid( array $p_in ): void {
 		$this->expectException( ClientException::class );
 		$this->expectExceptionMessage( 'helper_array_transpose can only handle bidimensional arrays' );
 
@@ -72,50 +70,47 @@ class ArrayTransposeTest extends MantisCoreBase {
 	 *
 	 * helper_array_transpose() should successfully transpose <test matrix>
 	 * into <expected transposition>.
-	 *
-	 * @return array List of test cases
 	 */
-	public function providerArrayTransposeValid() {
-		return array(
-			'Bidimensional simple array' => array(
-				array( array( 'a' ), array( 'b' ) ),
-				array( array ( 'a', 'b', ) )
-			),
+	public function providerArrayTransposeValid(): Generator
+	{
+		yield 'Bidimensional simple array' => [
+			[['a'], ['b']],
+			[['a', 'b']]
+		];
 
-			'Bidimensional array with numeric indices' => array(
-				array( 10 => array( 100 => 'a' ), 20 => array( 100 => 'b' ) ),
-				array( 100 => array ( 10 => 'a', 20 => 'b', ) )
-			),
+		yield 'Bidimensional array with numeric indices' => [
+			[10 => [100 => 'a' ], 20 => [100 => 'b']],
+			[100 => [10 => 'a', 20 => 'b']]
+		];
 
-			'Bidimensional array with numeric indices and missing keys' => array(
-				#    |  0  |  1  |  2  |            |  0  |  1  |
-				# ---+-----+-----+-----+         ---+-----+-----+
-				#  0 | 111 | 222 |  -  |          0 | 111 | 333 |
-				# ---+-----+-----+-----+   ==>   ---+-----+-----+
-				#  1 | 333 |  -  | 444 |          1 | 222 |  -  |
-				# ---+-----+-----+-----+         ---+-----+-----+
-				#                                 2 |  -  | 444 |
-				#                                ---+-----+-----+
-				array( array( 111, 222 ), array( 333, 2 => 444 ) ),
-				array( array ( 111, 333 ), array( 222 ), array( 1 => 444 ) )
-			),
+		yield 'Bidimensional array with numeric indices and missing keys' => [
+			#    |  0  |  1  |  2  |            |  0  |  1  |
+			# ---+-----+-----+-----+         ---+-----+-----+
+			#  0 | 111 | 222 |  -  |          0 | 111 | 333 |
+			# ---+-----+-----+-----+   ==>   ---+-----+-----+
+			#  1 | 333 |  -  | 444 |          1 | 222 |  -  |
+			# ---+-----+-----+-----+         ---+-----+-----+
+			#                                 2 |  -  | 444 |
+			#                                ---+-----+-----+
+			[[111, 222], [333, 2 => 444]],
+			[[111, 333], [222], [1 => 444]],
+		];
 
-			'Bidimensional associative array' => array(
-				array( 'a' => array( 'k1' => 1, 'k2' => 2 ),'b' => array( 'k1' => 3,'k2' => 4) ),
-				array( 'k1' => array( 'a' => 1, 'b' => 3 ), 'k2' => array( 'a' => 2, 'b' => 4) )
-			),
+		yield 'Bidimensional associative array' => [
+			['a' => ['k1' => 1, 'k2' => 2], 'b' => ['k1' => 3,'k2' => 4]],
+			['k1' => ['a' => 1, 'b' => 3], 'k2' => ['a' => 2, 'b' => 4]]
+		];
 
-			'Bidimensional array with arrays as data' => array(
-				array(
-					'a' => array( 'k1' => array( 1, 2, 3 ), 'k2' => 2),
-					'b' => array( 'k1' => array( 4, 5, 6 ), 'k2' => 4)
-				),
-				array(
-					'k1' => array( 'a' => array( 1, 2, 3 ), 'b' => array( 4, 5, 6 ) ),
-					'k2' => array( 'a' => 2, 'b' => 4 )
-				)
-			),
-		);
+		yield 'Bidimensional array with arrays as data' => [
+			[
+				'a' => ['k1' => [1, 2, 3], 'k2' => 2],
+				'b' => ['k1' => [4, 5, 6], 'k2' => 4]
+			],
+			[
+				'k1' => ['a' => [1, 2, 3], 'b' => [4, 5, 6]],
+				'k2' => ['a' => 2, 'b' => 4]
+			],
+		];
 	}
 
 	/**
@@ -128,18 +123,16 @@ class ArrayTransposeTest extends MantisCoreBase {
 	 * Note: we don't need to test non-array types as these would throw a
 	 * TypeError exception or an E_RECOVERABLE_ERROR (depending on PHP version).
 	 *
-	 * @return array List of test cases
+	 * @return Generator List of test cases
 	 */
-	public function providerArrayTransposeInvalid() {
-		return array(
-			'Simple array' => array(
-				array( 1, 2 )
-			),
+	public function providerArrayTransposeInvalid(): Generator {
+		yield 'Simple array' => [
+			[1, 2]
+		];
 
-			# 1st element array, 2nd scalar
-			'Mixed, "non-square" array' => array(
-				array( 'a' => array( 'k1' => 1, 'k2' => 2 ), 'b' => 123 )
-			),
-		);
+		# 1st element array, 2nd scalar
+		yield 'Mixed, "non-square" array' => [
+			['a' => ['k1' => 1, 'k2' => 2], 'b' => 123]
+		];
 	}
 }
