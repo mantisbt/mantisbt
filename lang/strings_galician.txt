@@ -1226,6 +1226,7 @@ $s_database_information = 'Información da base de datos de MantisBT';
 $s_path_information = 'Información da ruta de MantisBT';
 $s_mantisbt_database_statistics = 'Estatísticas da base de datos de MantisBT';
 $s_php_version = 'Versión de PHP';
+$s_os_information = 'Información do sistema operativo';
 $s_adodb_version = 'Versión de ADOdb';
 $s_database_driver = 'Controlador de base de datos';
 $s_database_version_description = 'Versión da base de datos; Descrición';
