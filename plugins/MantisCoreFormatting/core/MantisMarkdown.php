@@ -17,7 +17,7 @@
 /**
  * MantisMarkdown class
  * @copyright Copyright 2016 MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
+ * @link https://www.mantisbt.org
  * @package MantisBT
  * @subpackage parsedown
  */
@@ -27,8 +27,8 @@
  * This class serves which functions needs to customize and methods to override from Parsedown library
  *
  * To meet and match the MantisBT styles and logic requirements, we have to override and control with it
- * For example: #2 is treated as header markdown
- * So, to make sure #2 treated as bug link (not a header), then we have to change the logic in blockHeader and blockSetextHeader method
+ * For example: #2 is treated as header Markdown
+ * So, to make sure #2 treated as bug link (not a header), then we have to change the logic in blockHeader method
  *
  * @package MantisBT
  * @subpackage parsedown
@@ -42,48 +42,118 @@
 class MantisMarkdown extends Parsedown
 {
 	/**
-	 * @var MantisMarkdown singleton instance for MantisMarkdown class.
+	 * Singleton instance for MantisMarkdown class.
 	 */
-	private static $mantis_markdown = null;
+	private static ?MantisMarkdown $instance = null;
 
 	/**
-	 * @var string table class
+	 * CSS class for tables.
 	 */
-	private $table_class = null;
+	private string $table_class = 'table table-nonfluid';
 
 	/**
-	 * @var string inline style
+	 * Plugin configuration
+	 * The value of the constant "ON" (1) or "OFF" (0).
 	 */
-	private $inline_style = null;
+	private int $config_process_buglinks = OFF;
 
 	/**
-	 * MantisMarkdown constructor.
+	 * Plugin configuration
+	 * The value of the constant "ON" (1) or "OFF" (0).
 	 */
-	public function __construct() {
+	private int $config_process_urls = OFF;
 
-		# enable line break by default
+	/**
+	 * Collection of the captured code blocks.
+	 *
+	 * @var array<string, string>
+	 */
+	private array $codeblocks = [];
+
+	public function __construct( ?int $p_process_urls = OFF, ?int $p_process_buglinks = OFF ) {
+		# Plugin configuration
+		if( in_array( $p_process_urls, [OFF, ON], true ) ) {
+			$this->config_process_urls = $p_process_urls;
+		}
+
+		if( in_array( $p_process_buglinks, [OFF, ON], true ) ) {
+			$this->config_process_buglinks = $p_process_buglinks;
+		}
+
+		# Parser configuration
+		# Enable line break by default
 		$this->breaksEnabled = true;
-
-		# set the table class
-		$this->table_class = 'table table-nonfluid';
-
 		# XSS protection
 		$this->setSafeMode( true );
-
 		# Only turn URLs into links if config says so
-		plugin_push_current( 'MantisCoreFormatting' );
-		if( !plugin_config_get( 'process_urls' ) ) {
-			$this->setUrlsLinked( false );
+		$this->setUrlsLinked( (bool) $this->config_process_urls );
+	}
+
+	public static function getInstance( ?int $p_process_urls = OFF, ?int $p_process_buglinks = OFF ): self {
+		if ( null === static::$instance ) {
+			static::$instance = new MantisMarkdown( $p_process_urls, $p_process_buglinks );
 		}
-		plugin_pop_current();
+
+		return static::$instance;
 	}
 
 	/**
-	 * @param array $Element Properties of a marked element.
-	 * @return string HTML markup of the element.
+	 * Convert text input form Markdown to HTML.
+	 *
+	 * @param string $p_string The input to convert
+	 * @param bool $p_multiline Determines the method for parsing.
+	 * @return string HTML markup
 	 */
-	protected function element( array $Element )
-	{
+	public function convert( string $p_string, bool $p_multiline = false ): string {
+		return $this->finalizeMarkup($p_multiline
+			? parent::text( $p_string )
+			: parent::line( $p_string )
+		);
+	}
+
+	/**
+	 * Hash value of a piece of code that is used as the
+	 * key for $this->codeblocks collection.
+	 */
+	public function hash( string $p_string ): string {
+		return md5( $p_string );
+	}
+
+	/**
+	 * @return int Value of constant "ON" (1) or "OFF" (0)
+	 */
+	public function getConfigProcessUrls(): int {
+		return $this->config_process_urls;
+	}
+
+	/**
+	 * @return int Value of constant "ON" (1) or "OFF" (0)
+	 */
+	public function getConfigProcessBugLinks(): int {
+		return $this->config_process_buglinks;
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public function getCodeblocks(): array {
+		return $this->codeblocks;
+	}
+
+	/**
+	 * Convert an array of element data into the HTML markup.
+	 *
+	 * @param array $Element Data for an element
+	 * @return string HTML markup for an element
+	 */
+	protected function element( array $Element ): string {
+		# Capture the code blocks to prevent them from being processed further.
+		if( $Element['name'] === 'code' ) {
+			$t_hash = $this->hash( $Element['text'] );
+			$this->codeblocks[$t_hash] = $Element['text'];
+			$Element['text'] = $t_hash;
+		}
+
 		# Adding CSS classes to tables.
 		if( $Element['name'] === 'table' ) {
 			$Element['attributes']['class'] = $this->table_class;
@@ -93,169 +163,91 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Convert a field that supports multiple lines form markdown to html.
-	 * @param string $p_text The text to convert.
-	 * @return string  The html text.
-	 */
-	public static function convert_text( $p_text ) {
-		self::init();
-
-		# Enabled quote conversion
-		# Text processing converts special character to entity name
-		# Make sure to restore "&gt;" entity name to its characted result ">"
-		$p_text = str_replace( "&gt;", ">", $p_text );
-
-		return self::$mantis_markdown->text( $p_text );
-	}
-
-	/**
-	 * Convert a field that supports a single line only form markdown to html.
-	 * @param string $p_text The text to convert.
-	 * @return string  The html text.
-	 */
-	public static function convert_line( $p_text ) {
-		self::init();
-		return self::$mantis_markdown->line( $p_text );
-	}
-
-	/**
-	 * Customize the blockHeader markdown
+	 * Convert an email addresses in unmarked text into a link.
 	 *
-	 * @param string $line The Markdown syntax to parse
-	 * @access protected
-	 * @return string|null HTML representation generated from markdown or null
-	 *                if text is not a valid header per CommonMark spec
+	 * Unlike unmarked URLs, unmarked email addresses are not
+	 * processed by Parsedown.
 	 */
-	protected function blockHeader( $line ) {
-		# Header detection logic
+	protected function unmarkedText( $text ): string {
+		if( ON == $this->config_process_urls && false !== strpos( $text, '@' ) ) {
+			$text = string_insert_hrefs( $text );
+		}
+
+		return parent::unmarkedText( $text );
+	}
+
+	/**
+	 * Implementation of the CommonMark specification for headers,
+	 * as Parsedown does not follow the specifications.
+	 *
+	 * @see https://spec.commonmark.org/0.31.2/#example-62
+	 * @see https://parsedown.org/demo
+	 *
+	 * @param array $Line Data for the block element
+	 * @return array|void Only return data for the header element if it matches
+	 *                    the specification
+	 */
+	protected function blockHeader( $Line ) {
 		# - the opening # may be indented 0-3 spaces
 		# - a sequence of 1–6 '#' characters
-		# - The #'s must be followed by a space or a newline
-		if ( preg_match( '/^ {0,3}#{1,6}(?: |$)/', $line['text'] ) ) {
-			return parent::blockHeader($line);
+		# - The #'s must be followed by a space, a tab or a newline
+		if ( preg_match( '/^ {0,3}#{1,6}(?:[ \t]|$)/', $Line['text'] ) ) {
+			return parent::blockHeader( $Line );
 		}
 	}
 
 	/**
-	 * Customize the inlineCode method
+	 * Add link attributes to element data.
 	 *
-	 * @param array $block A block-level element
-	 * @access protected
-	 * @return string html representation generated from markdown.
-	 */
-	protected function inlineCode( $block ) {
-
-		$block = parent::inlineCode( $block );
-
-		if( isset( $block['element']['text'] )) {
-			$this->processAmpersand( $block['element']['text'] );
-		}
-
-		return $block;
-	}
-
-	/**
-	 * Customize the blockFencedCodeComplete method
+	 * - [link](http://example.com)
 	 *
-	 * @param array $block A block-level element
-	 * @access protected
-	 * @return string html representation generated from markdown.
+	 * @param array $Excerpt Element data
+	 * @return array|null Element data or nothing
 	 */
-	protected function blockFencedCodeComplete( $block = null ) {
-
-		$block = parent::blockFencedCodeComplete( $block );
-
-		if( isset( $block['element']['text']['text'] )) {
-			$this->processAmpersand( $block['element']['text']['text'] );
-		}
-
-		return $block;
-	}
-
-	/**
-	 * Customize the blockCodeComplete method
-	 *
-	 * @param array $block A block-level element
-	 * @access protected
-	 * @return string html representation generated from markdown.
-	 */
-	protected function blockCodeComplete( $block ) {
-
-		$block = parent::blockCodeComplete( $block );
-
-		if( isset( $block['element']['text']['text'] )) {
-			$this->processAmpersand( $block['element']['text']['text'] );
-		}
-
-		return $block;
-	}
-
-	/**
-	 * Customize the inlineLink method
-	 *
-	 * @param array $Excerpt A block-level element
-	 * @access protected
-	 * @return array html representation generated from markdown.
-	 */
-	protected function inlineLink( $Excerpt ) {
+	protected function inlineLink( $Excerpt ): ?array
+	{
 		return $this->processUrl( parent::inlineLink( $Excerpt ) );
 	}
 
-	protected function inlineUrl( $Excerpt ) {
-		return $this->processUrl( parent::inlineUrl( $Excerpt ) );
-	}
-
-	protected function inlineUrlTag( $Excerpt ) {
-		# @FIXME
-		# This function is supposed to process links like `<http://example.com>`
-		# on single-line texts, but it does not actually work: the function is
-		# never called (see Parsedown::line() 1077), because
-		# MantisCoreFormattingPlugin::formatted() applies html_specialchars()
-		# first, so the < > are converted to &lt;/&gt;.
+	/**
+	 * Add link attributes to element data.
+	 *
+	 * - <http://example.com>
+	 * - <user@example.com>
+	 *
+	 * @param array $Excerpt Element data
+	 * @return array|null Element data or nothing
+	 */
+	protected function inlineUrlTag( $Excerpt ): ?array
+	{
 		return $this->processUrl( parent::inlineUrlTag( $Excerpt ) );
 	}
 
-
 	/**
-	 * Initialize the singleton static instance.
+	 * Add link attributes to element data.
+	 *
+	 * - Not marked URLs. "https://example.com"
+	 *
+	 * @param array $Excerpt Element data
+	 * @return array|null Element data or nothing
 	 */
-	private static function init() {
-		if ( null === static::$mantis_markdown ) {
-			static::$mantis_markdown = new MantisMarkdown();
-		}
-		return static::$mantis_markdown;
+	protected function inlineUrl( $Excerpt ): ?array
+	{
+		return $this->processUrl( parent::inlineUrl( $Excerpt ) );
 	}
 
 	/**
-	 * Replace any '&amp;' entity in the given string by '&'.
+	 * Set the attributes "target" and "rel" of a link according to
+	 * the configuration of "g_html_make_links".
 	 *
-	 * MantisBT text processing replaces '&' signs by their entity name. Within
-	 * code blocks or backticks, Parsedown applies the same transformation again,
-	 * so they ultimately become '&amp;amp;'. This reverts the initial conversion
-	 * so ampersands are displayed correctly.
-	 *
-	 * @param string $p_text Text block to process
-	 * @return void
-	 */
-	private function processAmpersand( &$p_text ) {
-		$p_text = str_replace( '&amp;', '&', $p_text );
-	}
-
-	/**
-	 * Set a link's target and rel attributes as appropriate.
+	 * @see helper_get_link_attributes()
 	 *
 	 * @param array|null $Excerpt
 	 * @return array|null
-	 *
-	 * @see helper_get_link_attributes()
 	 */
-	private function processUrl( $Excerpt ) {
-		if( isset( $Excerpt['element']['attributes']['href'] ) ) {
-			$this->processAmpersand( $Excerpt['element']['attributes']['href'] );
-		}
-
+	private function processUrl( ?array $Excerpt = null ): ?array
+	{
 		if( isset( $Excerpt['element']['attributes'] ) ) {
-			# Set the link's attributes according to configuration
 			$Excerpt['element']['attributes'] = array_replace(
 				$Excerpt['element']['attributes'],
 				helper_get_link_attributes()
@@ -265,4 +257,43 @@ class MantisMarkdown extends Parsedown
 		return $Excerpt;
 	}
 
+	/**
+	 * Finalize the HTML markup.
+	 *
+	 * - process mentions of bugs and bug notes
+	 * - restore valid html tags
+	 * - process mentions of users
+	 * - restore the captured codeblocks
+	 *
+	 * @param string $p_markup The prepared HTML markup
+	 * @return string The finalized HTML markup
+	 */
+	private function finalizeMarkup( string $p_markup ): string {
+		$t_markup = $p_markup;
+
+		if( ON == $this->config_process_buglinks ) {
+			$t_markup = string_process_bugnote_link( $t_markup );
+			$t_markup = string_process_bug_link( $t_markup );
+		}
+
+		$t_markup = string_restore_valid_html_tags( $t_markup );
+
+		$t_markup = mention_format_text( $t_markup );
+
+		foreach( $this->codeblocks as $t_hash => $t_code ) {
+			$t_markup = str_replace( $t_hash, $this->disarmCode( $t_code ), $t_markup );
+		}
+
+		return $t_markup;
+	}
+
+	/**
+	 * Encode special chars to their HTML entities.
+	 *
+	 * @param string $p_markup
+	 * @return string The encoded HTML markup
+	 */
+	public function disarmCode( string $p_markup ): string {
+		return htmlspecialchars( $p_markup );
+	}
 }
