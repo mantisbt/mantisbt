@@ -96,3 +96,4 @@ $s_plugin_MantisGraph_graph_topdev = 'Лучшие разработчики по
 $s_plugin_MantisGraph_graph_opendev = 'Разработчики по открытым инцидентам';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Лучшие докладчики исправленных инцидентов';
 $s_plugin_MantisGraph_other_categories = 'другие категории (%d)';
+$s_plugin_MantisGraph_other_projects = 'другие проекты (%d)';

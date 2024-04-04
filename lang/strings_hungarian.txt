@@ -1227,6 +1227,7 @@ $s_database_information = 'MantisBT adatbázis-információk';
 $s_path_information = 'MantisBT elérésiút-információk';
 $s_mantisbt_database_statistics = 'MantisBT adatbázis-statisztikák';
 $s_php_version = 'PHP verzió';
+$s_os_information = 'OS információ';
 $s_adodb_version = 'ADOdb verzió';
 $s_database_driver = 'Adatbázis-meghajtó';
 $s_database_version_description = 'Adatbázis verzió, leírás';

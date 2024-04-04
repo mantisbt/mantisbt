@@ -1204,6 +1204,7 @@ $s_database_information = 'Titouroù diwar-benn diaz roadennoù MantisBT';
 $s_path_information = 'Titouroù war hentoù moned MantisBT';
 $s_mantisbt_database_statistics = 'Stadegoù an diaz roadennoù MantisBT';
 $s_php_version = 'Stumm PHP';
+$s_os_information = 'Titouroù OS';
 $s_adodb_version = 'Stumm ADOdb';
 $s_database_driver = 'Sturier diaz roadennoù';
 $s_database_version_description = 'Stumm an diaz roadennoù, deskrivadur';
