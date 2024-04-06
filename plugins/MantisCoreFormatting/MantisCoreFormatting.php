@@ -62,8 +62,21 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 * @return void
 	 */
 	function resources() {
-		if ( ON == plugin_config_get( 'process_markdown' )) {
+		if ( ON == plugin_config_get( 'process_markdown' ) ) {
 			echo '<link rel="stylesheet" href="' . plugin_file( 'markdown.css' ) . '" />';
+
+			if ( ON == plugin_config_get( 'syntax_highlighting' ) ) {
+				$t_plugins = plugin_config_get( 'syntax_highlighting_plugins' );
+				echo '<script
+					id="mantis-core-formatting-syntax-highlighter-init"
+					data-cdn="' . config_get('cdn_enabled') . '"
+					data-theme="' . plugin_config_get( 'syntax_highlighting_theme' ) . '"
+					data-plugins="' . implode( ',', array_map(
+						'trim',
+						is_array( $t_plugins ) ? $t_plugins : []
+					)) . '"
+					src="' . plugin_file( 'syntax-highlighting/init.js' ) . '"></script>';
+			}
 		}
 	}
 

@@ -31,7 +31,7 @@
  * **********************************************************************
  */
 /** German (Deutsch)
- * 
+ *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit https://translatewiki.net
  *
@@ -55,3 +55,16 @@ $s_plugin_format_process_markdown = 'Markdown-Verarbeitung';
 $s_plugin_format_process_markdown_info = 'Gestaltung mit Markdown-Unterstützung und einer Text-Formatierungs-Syntax, die so gestaltet wurde, dass sie in HTML konvertiert werden kann.';
 $s_plugin_format_enabled = 'An';
 $s_plugin_format_disabled = 'Aus';
+$s_plugin_format_syntax_highlighting = 'Syntaxhervorhebung für Code-Blöcke';
+$s_plugin_format_syntax_highlighting_info = 'Diese Einstellung wird nur berücksichtigt, wenn die "Markdown-Verarbeitung" aktiviert wurde.';
+$s_plugin_format_syntax_highlighting_theme = 'Darstellung der Code-Blöcke';
+$s_plugin_format_syntax_highlighting_plugins = 'Erweiterungen für die Code-Blöcke';
+$s_plugin_format_syntax_highlighting_plugin_clipboard_desc = 'Inhalt des Code-Blocks in die Zwischenablage kopieren.';
+$s_plugin_format_syntax_highlighting_plugin_language_desc = 'Die im code block dargestellte Sprache anzeigen.';
+$s_plugin_format_syntax_highlighting_plugin_numbers_desc = 'Zeilennummern anzeigen.';
+$s_plugin_format_syntax_highlighting_plugin_invisible_desc = 'Verborgene Zeichen werden angezeigt (z.B. bei Einrückungen).';
+$s_plugin_format_syntax_highlighting_plugin_trim_desc = 'Entfernt leere Zeilen vor und nach dem eigentlichen Code.';
+$s_plugin_format_syntax_highlighting_plugin_braces_desc = 'Zeigt bei Klammern die Paarung an, wenn man mit der Maus darüberfährt. Inklusive "rainbow braces" (Paare werden in jeweils gleicher Farbe dargestellt).';
+$s_plugin_format_syntax_highlighting_plugin_diff_desc = 'Hinzugefügte und entfernte Zeilen werden farblich hervorgehoben.';
+$s_plugin_format_syntax_highlighting_plugin_colors_desc = 'Ein kleines farbiges Quadrat wird vor Farbdefinitionen angezeigt (z.B. #000).';
+$s_plugin_format_syntax_highlighting_plugin_preview_desc = 'Beim überfahren mit der Maus wird eine Vorschau für "angle", "color", "gradient", "easing" oder "time" Definitionen angezeigt.';

@@ -1,0 +1,16 @@
+/*
+ * Config > user | Font Family
+ *
+ * <style>
+ *  * { font-family: "Open Sans" }
+ * </style>
+ *
+ * This inline style applies to the <span> elements which
+ * wraps the language tokens, within the <code> element.
+ *
+ * This rule reapplies/forces the monospace font-family to them.
+ */
+pre,
+pre * {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
+}

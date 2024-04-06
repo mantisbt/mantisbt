@@ -31,6 +31,9 @@ $f_process_text = gpc_get_int( 'process_text', ON );
 $f_process_urls = gpc_get_int( 'process_urls', ON );
 $f_process_buglinks = gpc_get_int( 'process_buglinks', ON );
 $f_process_markdown = gpc_get_int( 'process_markdown', OFF );
+$f_syntax_highlighting = gpc_get_int( 'syntax_highlighting', OFF );
+$f_syntax_highlighting_theme = gpc_get_string( 'syntax_highlighting_theme', 'default' );
+$f_syntax_highlighting_plugins = gpc_get_string_array( 'syntax_highlighting_plugins',null );
 
 if( plugin_config_get( 'process_text' ) != $f_process_text ) {
 	plugin_config_set( 'process_text', $f_process_text );
@@ -46,6 +49,18 @@ if( plugin_config_get( 'process_buglinks' ) != $f_process_buglinks ) {
 
 if( plugin_config_get( 'process_markdown' ) != $f_process_markdown ) {
 	plugin_config_set( 'process_markdown', $f_process_markdown );
+}
+
+if( plugin_config_get( 'syntax_highlighting' ) != $f_syntax_highlighting ) {
+	plugin_config_set( 'syntax_highlighting', $f_syntax_highlighting );
+}
+
+if( plugin_config_get( 'syntax_highlighting_theme' ) != $f_syntax_highlighting_theme ) {
+	plugin_config_set( 'syntax_highlighting_theme', $f_syntax_highlighting_theme );
+}
+
+if( plugin_config_get( 'syntax_highlighting_plugins' ) != $f_syntax_highlighting_plugins ) {
+	plugin_config_set( 'syntax_highlighting_plugins', $f_syntax_highlighting_plugins );
 }
 
 form_security_purge( 'plugin_format_config_edit' );

@@ -117,6 +117,83 @@ print_manage_menu( 'manage_plugin_page.php' );
 	</td>
 </tr>
 
+<tr>
+	<th class="category width-40">
+		<?php echo lang_get( 'plugin_format_syntax_highlighting' )?>
+		<br />
+		<span class="small">
+			<?php echo lang_get( 'plugin_format_syntax_highlighting_info' )?>
+		</span>
+	</th>
+	<td class="center">
+		<label><input type="radio" class="ace" name="syntax_highlighting" value="1" <?php echo( ON == plugin_config_get( 'syntax_highlighting' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
+	</td>
+	<td class="center">
+		<label><input type="radio" class="ace" name="syntax_highlighting" value="0" <?php echo( OFF == plugin_config_get( 'syntax_highlighting' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
+	</td>
+</tr>
+
+<tr>
+	<th class="category width-40">
+		<?php echo lang_get( 'plugin_format_syntax_highlighting_theme' )?>
+	</th>
+	<td>
+		<label>
+			<select name="syntax_highlighting_theme" class="input-sm">
+			<?php
+				$t_current_theme = plugin_config_get( 'syntax_highlighting_theme' );
+				foreach( glob( __DIR__ . '/../files/syntax-highlighting/themes/*' ) as $file ): ?>
+					<option value="<?php echo basename( $file ) ?>"
+						<?php echo basename( $file ) === $t_current_theme ? ' selected' : ''?>>
+						<?php echo str_replace( ['prism-', '.min.css'], '', basename( $file ) ) ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+		</label>
+	</td>
+</tr>
+<tr>
+	<th class="category width-40">
+		<?php echo lang_get( 'plugin_format_syntax_highlighting_plugins' ) ?>
+	</th>
+	<td colspan="2">
+		<?php
+			$t_current_plugins = plugin_config_get( 'syntax_highlighting_plugins' );
+			if ( !is_array( $t_current_plugins ) ) {
+				$t_current_plugins = [];
+			}
+		?>
+		<?php foreach( [
+			'copy-to-clipboard' => lang_get( 'plugin_format_syntax_highlighting_plugin_clipboard_desc' ),
+			'show-language' => lang_get( 'plugin_format_syntax_highlighting_plugin_language_desc' ),
+			'line-numbers' => lang_get( 'plugin_format_syntax_highlighting_plugin_numbers_desc' ),
+			'show-invisibles' => lang_get( 'plugin_format_syntax_highlighting_plugin_invisible_desc' ),
+			'normalize-whitespace' => lang_get( 'plugin_format_syntax_highlighting_plugin_trim_desc' ),
+			'match-braces' => lang_get( 'plugin_format_syntax_highlighting_plugin_braces_desc' ),
+			'diff-highlight' => lang_get( 'plugin_format_syntax_highlighting_plugin_diff_desc' ),
+			'inline-color' => lang_get( 'plugin_format_syntax_highlighting_plugin_colors_desc' ),
+			'previewers' => lang_get( 'plugin_format_syntax_highlighting_plugin_preview_desc' )
+		] as $t_name => $t_description ): ?>
+			<label style="cursor:pointer; margin-bottom: .8rem">
+				<input
+					name="syntax_highlighting_plugins[]"
+					type="checkbox"
+					class="ace input-sm"
+					value="<?php echo $t_name ?>"
+					<?php echo in_array( $t_name, $t_current_plugins, true ) ? ' checked' : '' ?>
+				/>
+				<span class="lbl"></span>
+				<span><?php echo ucfirst( str_replace( '-', ' ', $t_name ) ) ?></span>
+				<small style="margin-left: 2.3rem; display: block; max-width: 350px">
+					<?php echo $t_description ?>
+				</small>
+			</label><br>
+		<?php endforeach; ?>
+	</td>
+</tr>
+
 </table>
 </div>
 </div>
