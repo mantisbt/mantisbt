@@ -17,7 +17,8 @@
     },
     "require-dev": {
         "ext-zip": "*",
-        "phpunit/phpunit": "^9.6"
+        "phpunit/phpunit": "^9.6",
+        "symplify/easy-coding-standard": "^12.1"
     },
     "repositories": [
         {
