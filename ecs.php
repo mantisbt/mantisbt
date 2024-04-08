@@ -42,8 +42,6 @@ return ECSConfig::configure()
 		 *
 		 * All PHP files must use same line ending. Default is "\n"
 		 *
-		 * Sniff: LineEndingsSniff with ['eolChar' => "\n"]
-		 *
 		 * @see https://cs.symfony.com/doc/rules/whitespace/line_ending.html
 		 */
 		\PhpCsFixer\Fixer\Whitespace\LineEndingFixer::class,
@@ -63,8 +61,6 @@ return ECSConfig::configure()
 		 * Whitespace: Single blank line at eof
 		 *
 		 * A PHP file without end tag must always end with a single empty line feed.
-		 *
-		 * Sniff: PSR2.Files.EndFileNewline
 		 *
 		 * @see https://cs.symfony.com/doc/rules/whitespace/single_blank_line_at_eof.html
 		 */
@@ -153,18 +149,21 @@ return ECSConfig::configure()
 		 *
 		 * "FOREACH( $a AS $B )" > "foreach( $a as $B )"
 		 *
-		 * Sniff: Generic.PHP.LowerCaseKeyword
-		 *
 		 * @see https://cs.symfony.com/doc/rules/casing/lowercase_keywords.html
 		 */
 		\PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer::class,
+	])
 
-		/**
-		 * Import: no_unused_imports
-		 * Unused use statements must be removed.
-		 *
-		 * @see https://cs.symfony.com/doc/rules/import/no_unused_imports.html
-		 */
-		\PhpCsFixer\Fixer\Import\NoUnusedImportsFixer::class,
+	/**
+	 * Whitespace: Spaces inside parentheses
+	 *
+	 * "function foo($bar, $baz)" > "function foo( $bar, $baz )"
+	 * "if($bar === $baz)"        > "if( $bar === $baz )"
+	 * "foo( )"                   > "foo()"
+	 *
+	 * @see https://cs.symfony.com/doc/rules/whitespace/spaces_inside_parentheses.html
+	 */
+	->withConfiguredRule(\PhpCsFixer\Fixer\Whitespace\SpacesInsideParenthesesFixer::class, [
+		'space' => 'single',
 	])
 ;
