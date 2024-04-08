@@ -27,5 +27,7 @@ return ECSConfig::configure()
 		__DIR__ . '/config',
 		__DIR__ . '/library',
 	])
-    ->withRules([])
+    ->withRules([
+		\PhpCsFixer\Fixer\Import\NoUnusedImportsFixer::class
+	])
 ;
