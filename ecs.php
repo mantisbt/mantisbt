@@ -28,6 +28,24 @@ return ECSConfig::configure()
 		__DIR__ . '/library',
 	])
     ->withRules([
-		\PhpCsFixer\Fixer\Import\NoUnusedImportsFixer::class
+		/**
+		 * Operator: binary_operator_spaces
+		 *
+		 * Configurable. Default value: 'single_space'
+		 * Different operators can be configured separately.
+		 *
+		 * "$a=1+2;" > "$a = 1 + 2;"
+		 *
+		 * @see https://cs.symfony.com/doc/rules/operator/binary_operator_spaces.html
+		 */
+		\PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer::class,
+
+		/**
+		 * Import: no_unused_imports
+		 * Unused use statements must be removed.
+		 *
+		 * @see https://cs.symfony.com/doc/rules/import/no_unused_imports.html
+		 */
+		\PhpCsFixer\Fixer\Import\NoUnusedImportsFixer::class,
 	])
 ;
