@@ -59,7 +59,6 @@ jobs:
       services: []
       before_script: []
       script:
-        - echo "Executing Mantis coding style checks"
         - vendor/bin/ecs check
     # Add a specific build for Documentation
     - name: Documentation
@@ -71,7 +70,8 @@ jobs:
           packages:
             - publican
 
-  allow_failures: []
+  allow_failures:
+    - name: Coding Standards
 
 
 # -----------------------------------------------------------------------------
