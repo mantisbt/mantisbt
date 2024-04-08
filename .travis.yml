@@ -51,6 +51,16 @@ env:
 
 jobs:
   include:
+    - name: Coding Standards
+      # stage: cs
+      php:
+        - 8.3
+      env: []
+      services: []
+      before_script: []
+      script:
+        - echo "Executing Mantis coding style checks"
+        - vendor/bin/ecs check
     # Add a specific build for Documentation
     - name: Documentation
       env: DOCBOOK=1
