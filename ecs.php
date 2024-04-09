@@ -16,6 +16,7 @@
 
 declare( strict_types = 1 );
 
+use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer;
@@ -168,5 +169,16 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/casing/lowercase_keywords.html
 		 */
 		LowercaseKeywordsFixer::class,
+
+		/**
+		 * Alias: No mixed echo and print
+		 *
+		 * Either language construct print or echo should be used.
+		 *
+		 * "print()" > "echo()"
+		 *
+		 * @see https://cs.symfony.com/doc/rules/alias/no_mixed_echo_print.html
+		 */
+		NoMixedEchoPrintFixer::class,
 	] )
 ;

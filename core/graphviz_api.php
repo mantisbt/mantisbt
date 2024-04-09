@@ -377,7 +377,7 @@ class Graph {
 			} else {
 				# No need for headers, send output directly.
 				while( !feof( $t_pipes[1] ) ) {
-					print( fgets( $t_pipes[1], 1024 ) );
+					echo( fgets( $t_pipes[1], 1024 ) );
 				}
 			}
 

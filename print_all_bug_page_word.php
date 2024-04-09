@@ -264,7 +264,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		}
 		if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( $t_short_date_format, $t_bug->due_date );
-		print "\t\t</td>\n";
+		echo "\t\t</td>\n";
 		}
 	} else {
 ?>

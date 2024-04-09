@@ -1223,7 +1223,7 @@ function print_filter_view_state( array $p_filter = null ) {
 function print_filter_values_sticky_issues( array $p_filter ) {
 	$t_filter = $p_filter;
 	$t_sticky_filter_state = gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] );
-	print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
+	echo( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
 	?>
 	<input type="hidden" name="<?php
 		echo FILTER_PROPERTY_STICKY; ?>" value="<?php
@@ -1394,17 +1394,17 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 	}
 	?>
@@ -1422,17 +1422,17 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 	}
 	?>
@@ -1548,17 +1548,17 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 	}
 	?>
@@ -1576,17 +1576,17 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 	}
 	?>
@@ -2270,9 +2270,9 @@ function print_filter_custom_field_date( $p_field_id, array $p_filter = null ) {
 	echo "</td></tr>\n<tr><td>";
 
 	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
-	print "</td></tr>\n<tr><td>";
+	echo "</td></tr>\n<tr><td>";
 	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
-	print "</td></tr>\n</table>";
+	echo "</td></tr>\n</table>";
 }
 
 /**

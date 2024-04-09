@@ -104,8 +104,8 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 	<input type="hidden" name="view_type" value="<?php echo $t_filter['_view_type']; ?>" />
 	<?php
 		if( $f_for_screen == false ) {
-			print '<input type="hidden" name="print" value="1" />';
-			print '<input type="hidden" name="offset" value="0" />';
+			echo '<input type="hidden" name="print" value="1" />';
+			echo '<input type="hidden" name="offset" value="0" />';
 		}
 	?>
 

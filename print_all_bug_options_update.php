@@ -93,7 +93,7 @@ if( $t_result ) {
 	layout_page_begin();
 
 	echo '<div class="failure-msg">';
-	print error_string( ERROR_GENERIC ) . '<br />';
+	echo error_string( ERROR_GENERIC ) . '<br />';
 	print_link_button( $f_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 

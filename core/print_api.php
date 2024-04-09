@@ -1625,7 +1625,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 	$t_page_links = 10;
 
-	print( '<ul class="pagination small no-margin"> ' );
+	echo( '<ul class="pagination small no-margin"> ' );
 
 	# Next and Last links
 	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_key );
@@ -1645,7 +1645,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	$t_last_page = min( $t_last_page, $p_end );
 
 	if( $t_last_page < $p_end ) {
-		print( '<li class="pull-right"><a> ... </a></li>' );
+		echo( '<li class="pull-right"><a> ... </a></li>' );
 	}
 
 	for( $i = $t_last_page;$i >= $t_first_page;$i-- ) {
@@ -1661,7 +1661,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	echo implode( '&#160;', $t_items );
 
 	if( $t_first_page > 1 ) {
-		print( '<li class="pull-right"><a> ... </a></li>' );
+		echo( '<li class="pull-right"><a> ... </a></li>' );
 	}
 
 
@@ -1669,7 +1669,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_key );
 	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_key );
 
-	print( ' </ul>' );
+	echo( ' </ul>' );
 }
 
 /**
