@@ -109,7 +109,7 @@ class IssueAddCommand extends Command {
 			}
 		}
 
-		if( !isset( $t_issue['summary'] ) || is_blank( $t_issue['summary'] ) )  {
+		if( !isset( $t_issue['summary'] ) || is_blank( $t_issue['summary'] ) ) {
 			throw new ClientException(
 				'Summary not specified',
 				ERROR_EMPTY_FIELD,
@@ -118,7 +118,7 @@ class IssueAddCommand extends Command {
 
 		$t_summary = $t_issue['summary'];
 
-		if( !isset( $t_issue['description'] ) || is_blank( $t_issue['description'] ) )  {
+		if( !isset( $t_issue['description'] ) || is_blank( $t_issue['description'] ) ) {
 			throw new ClientException(
 				'Description not specified',
 				ERROR_EMPTY_FIELD,
@@ -127,7 +127,7 @@ class IssueAddCommand extends Command {
 
 		$t_description = $t_issue['description'];
 
-		if( !isset( $t_issue['project'] ) )  {
+		if( !isset( $t_issue['project'] ) ) {
 			throw new ClientException(
 				'Project not specified',
 				ERROR_EMPTY_FIELD,

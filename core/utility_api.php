@@ -233,7 +233,7 @@ function getClassProperties( $p_classname, $p_type = 'public', $p_return_object 
 	$t_ref = new ReflectionClass( $p_classname );
 	$t_props = $t_ref->getProperties();
 	$t_props_arr = array();
-	foreach( $t_props as $t_prop ){
+	foreach( $t_props as $t_prop ) {
 		$t_name = $t_prop->getName();
 		if( $t_prop->isPublic() and (stripos( $p_type, 'public' ) === false) ) {
 			continue;

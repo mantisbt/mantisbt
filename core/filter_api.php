@@ -2621,7 +2621,7 @@ function filter_update_source_properties( array $p_filter ) {
 	if( isset( $p_filter['_source_query_id'] ) && $t_filter_id != $p_filter['_source_query_id'] ) {
 		$t_source_query_id = $p_filter['_source_query_id'];
 		# check if filter id is a proper named filter, and is accessible
-		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ){
+		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ) {
 			# replace filter with the referenced one
 			$t_new_filter = filter_deserialize( filter_db_get_filter_string( $t_source_query_id ) );
 			if( is_array( $t_new_filter ) ) {

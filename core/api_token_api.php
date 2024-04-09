@@ -217,8 +217,7 @@ function api_token_get_all( $p_user_id ) {
 	$t_result = db_query( $t_query, array( $p_user_id ) );
 
 	$t_rows = array();
-	while ( ( $t_row = db_fetch_array( $t_result ) ) !== false )
-	{
+	while ( ( $t_row = db_fetch_array( $t_result ) ) !== false ) {
 		$t_rows[] = $t_row;
 	}
 

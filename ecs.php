@@ -17,6 +17,7 @@
 declare( strict_types = 1 );
 
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
+use PhpCsFixer\Fixer\Basic\BracesPositionFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer;
@@ -240,4 +241,19 @@ return ECSConfig::configure()
 		 */
 		ControlStructureBracesFixer::class,
 	] )
+
+	/**
+	 * Basic: Position of braces
+	 *
+	 * Opening braces on same line
+	 *
+	 * "Class Name {}"
+	 * "function name() {}"
+	 *
+	 * @see https://cs.symfony.com/doc/rules/basic/braces_position.html
+	 */
+	->withConfiguredRule(BracesPositionFixer::class, [
+		'classes_opening_brace' => 'same_line',
+		'functions_opening_brace' => 'same_line',
+	])
 ;

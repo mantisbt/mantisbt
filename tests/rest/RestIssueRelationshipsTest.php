@@ -29,8 +29,7 @@ require_once 'RestBase.php';
  *
  * @group REST
  */
-class RestIssueRelationshipsTest extends RestBase
-{
+class RestIssueRelationshipsTest extends RestBase {
 	/** @var int Source Issue Id */
 	protected $src_id;
 
@@ -220,8 +219,7 @@ class RestIssueRelationshipsTest extends RestBase
 	 *
 	 * @return void
 	 */
-	public function testResolveIssueWithChildRelationships()
-	{
+	public function testResolveIssueWithChildRelationships() {
 		# Create a Parent-child relationship
 		$t_data = $this->createRelationshipData( BUG_DEPENDANT );
 		$t_response = $this->builder()->post( $this->getBaseURL(), $t_data )->send();

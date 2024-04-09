@@ -31,8 +31,7 @@ require_once 'RestBase.php';
  *
  * @group REST
  */
-class RestProjectTest extends RestBase
-{
+class RestProjectTest extends RestBase {
 	/**
 	 * @var string API Endpoint, should start with a '/'.
 	 */

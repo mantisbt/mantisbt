@@ -25,8 +25,7 @@ use Mantis\Exceptions\ClientException;
  * The command pattern will build on top of model, APIs, configurations, and
  * authorization.
  */
-abstract class Command
-{
+abstract class Command {
 	/**
 	 * This is the data for the command.  Modelled after the REST
 	 * it has the following sub-arrays:

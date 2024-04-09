@@ -111,7 +111,7 @@ class CategoryTest extends SoapBase {
 	protected function tearDown(): void {
 		parent::tearDown();
 
-		foreach( $this->categoryNamesToDelete as $t_category_name )  {
+		foreach( $this->categoryNamesToDelete as $t_category_name ) {
 			$this->client->mc_project_delete_category(
 				$this->userName,
 				$this->password,

@@ -135,7 +135,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 		$t_field = $t_history_row['field'];
 		if( !is_blank( $t_field ) ) {
 			# map field names to external names
-			switch( $t_field )  {
+			switch( $t_field ) {
 				case 'reporter_id':
 					$t_field = 'reporter';
 					break;
@@ -1986,7 +1986,8 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
     foreach( $p_issue_ids as $t_id ) {
 
         if( mci_check_access_to_bug( $t_user_id, $t_id ) === false ) {
-            continue; }
+            continue;
+        }
 
         log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 

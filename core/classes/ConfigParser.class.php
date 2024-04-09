@@ -33,8 +33,7 @@
  *
  * @uses Tokenizer
  */
-class ConfigParser
-{
+class ConfigParser {
 	/**
 	 * Define how extra tokens should be handled by parse() method
 	 */

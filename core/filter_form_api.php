@@ -2042,7 +2042,7 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 			# Print possible values
 			$t_included_projects = filter_get_included_projects( $p_filter );
 			$t_values = custom_field_distinct_values( $t_cfdef, $t_included_projects );
-			if( is_array( $t_values ) ){
+			if( is_array( $t_values ) ) {
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_values as $t_val ) {
 					if( filter_field_is_any($t_val) || filter_field_is_none( $t_val ) ) {

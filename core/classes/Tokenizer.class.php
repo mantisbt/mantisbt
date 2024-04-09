@@ -32,8 +32,7 @@
  * @package MantisBT
  * @subpackage classes
  */
-class Tokenizer
-{
+class Tokenizer {
 	/**
 	 * @var array $tokens
 	 */
@@ -46,8 +45,7 @@ class Tokenizer
 	 * @param string $p_code PHP code to tokenize
 	 * @throws Exception if given code is not valid
 	 */
-	public function __construct( $p_code )
-	{
+	public function __construct( $p_code ) {
 		# Check syntax to make sure we get valid PHP code
 		# prepend 'return' statement to ensure the code is not actually executed
 		$t_code = 'return; ' . $p_code . ';';

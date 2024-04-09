@@ -71,8 +71,7 @@ class ArrayTransposeTest extends MantisCoreBase {
 	 * helper_array_transpose() should successfully transpose <test matrix>
 	 * into <expected transposition>.
 	 */
-	public function providerArrayTransposeValid(): Generator
-	{
+	public function providerArrayTransposeValid(): Generator {
 		yield 'Bidimensional simple array' => [
 			[['a'], ['b']],
 			[['a', 'b']]

@@ -75,7 +75,7 @@ if( !filter_name_valid_length( $f_query_name ) ) {
 # Check and make sure they don't already have a
 # query with the same name
 $t_query_arr = filter_db_get_available_queries();
-foreach( $t_query_arr as $t_id => $t_name )	{
+foreach( $t_query_arr as $t_id => $t_name ) {
 	if( $f_query_name == $t_name ) {
 		$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
 			. urlencode( lang_get( 'query_dupe_name' ) );

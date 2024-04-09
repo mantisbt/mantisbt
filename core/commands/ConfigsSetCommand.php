@@ -74,7 +74,7 @@ class ConfigsSetCommand extends Command {
 		}
 
 		// parse project id from payload, if not provided default to ALL_PROJECTS
-		if( isset( $t_payload['project'] ) )  {
+		if( isset( $t_payload['project'] ) ) {
 			$this->project_id = mci_get_project_id( $t_payload['project'] );
 		} else {
 			$this->project_id = ALL_PROJECTS;

@@ -39,8 +39,7 @@
 /**
  * A class that overrides default Markdown parsing for Mantis specific scenarios.
  */
-class MantisMarkdown extends Parsedown
-{
+class MantisMarkdown extends Parsedown {
 	/**
 	 * Singleton instance for MantisMarkdown class.
 	 */
@@ -204,8 +203,7 @@ class MantisMarkdown extends Parsedown
 	 * @param array $Excerpt Element data
 	 * @return array|null Element data or nothing
 	 */
-	protected function inlineLink( $Excerpt ): ?array
-	{
+	protected function inlineLink( $Excerpt ): ?array {
 		return $this->processUrl( parent::inlineLink( $Excerpt ) );
 	}
 
@@ -218,8 +216,7 @@ class MantisMarkdown extends Parsedown
 	 * @param array $Excerpt Element data
 	 * @return array|null Element data or nothing
 	 */
-	protected function inlineUrlTag( $Excerpt ): ?array
-	{
+	protected function inlineUrlTag( $Excerpt ): ?array {
 		return $this->processUrl( parent::inlineUrlTag( $Excerpt ) );
 	}
 
@@ -231,8 +228,7 @@ class MantisMarkdown extends Parsedown
 	 * @param array $Excerpt Element data
 	 * @return array|null Element data or nothing
 	 */
-	protected function inlineUrl( $Excerpt ): ?array
-	{
+	protected function inlineUrl( $Excerpt ): ?array {
 		return $this->processUrl( parent::inlineUrl( $Excerpt ) );
 	}
 
@@ -245,8 +241,7 @@ class MantisMarkdown extends Parsedown
 	 * @param array|null $Excerpt
 	 * @return array|null
 	 */
-	private function processUrl( ?array $Excerpt = null ): ?array
-	{
+	private function processUrl( ?array $Excerpt = null ): ?array {
 		if( isset( $Excerpt['element']['attributes'] ) ) {
 			$Excerpt['element']['attributes'] = array_replace(
 				$Excerpt['element']['attributes'],

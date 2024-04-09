@@ -21,7 +21,7 @@
 /**
  * Mantis Graph plugin
  */
-class MantisGraphPlugin extends MantisPlugin  {
+class MantisGraphPlugin extends MantisPlugin {
 
 	/**
 	 * Chart JS

@@ -590,7 +590,7 @@ class BugFilterQuery extends DbQuery {
 						if( !$t_can_see_private ) {
 							$t_old_limit_public_only_project_ids[] = $t_pid;
 						}
-					} else{
+					} else {
 						# we have a reduced access (show only own reported, handled, monitored issues)
 						if( $t_can_see_private ) {
 							$t_limited_public_and_private_project_ids[] = $t_pid;

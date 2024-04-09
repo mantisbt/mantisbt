@@ -782,8 +782,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 					}
 					$t_custom_fields = multi_sort( $t_cf_defs, 'name' );
 
-					foreach( $t_custom_fields as $t_field )
-					{
+					foreach( $t_custom_fields as $t_field ) {
 						if( !custom_field_is_linked( $t_field['id'], $f_project_id ) ) {
 							echo '<option value="', $t_field['id'], '">',
 								string_attribute( lang_get_defaulted( $t_field['name'] ) ),

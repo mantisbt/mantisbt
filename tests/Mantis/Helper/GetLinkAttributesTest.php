@@ -31,8 +31,7 @@ require_once dirname( __FILE__, 2 ) . '/MantisCoreBase.php';
  *
  * @see helper_get_link_attributes()
  */
-class GetLinkAttributesTest extends MantisCoreBase
-{
+class GetLinkAttributesTest extends MantisCoreBase {
 	/**
 	 * Link attributes are correctly created according to the
 	 * configuration of "$g_html_make_links"

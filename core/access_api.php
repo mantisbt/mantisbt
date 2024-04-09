@@ -518,7 +518,7 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	# Check the requested access level, shortcut to fail if not satisfied
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
-	if( !access_compare_level( $t_access_level, $p_access_level ) ){
+	if( !access_compare_level( $t_access_level, $p_access_level ) ) {
 		return false;
 	}
 

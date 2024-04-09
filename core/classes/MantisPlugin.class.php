@@ -112,7 +112,8 @@ abstract class MantisPlugin {
 	 * that will be called after all plugins have been initialized.
 	 * @return void
 	 */
-	public function init() {}
+	public function init() {
+	}
 
 	/**
 	 * This function allows plugins to add new error messages for Mantis usage

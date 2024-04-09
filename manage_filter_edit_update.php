@@ -61,7 +61,7 @@ if( $f_filter_name != filter_get_field( $f_filter_id, 'name' ) ) {
 	}
 	# Check and make sure they don't already have a query with the same name
 	$t_query_arr = filter_db_get_available_queries();
-	foreach( $t_query_arr as $t_name )	{
+	foreach( $t_query_arr as $t_name ) {
 		if( $f_filter_name == string_normalize( $t_name ) ) {
 			$t_errors[] = lang_get( 'query_dupe_name' );
 			break;

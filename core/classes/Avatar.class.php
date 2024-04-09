@@ -34,8 +34,7 @@ require_api( 'user_api.php' );
 /**
  * A class that represents information about a user's avatar.
  */
-class Avatar
-{
+class Avatar {
     public $image = null;
     public $link = null;
     public $text = null;
