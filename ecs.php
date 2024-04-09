@@ -285,7 +285,7 @@ return ECSConfig::configure()
 	 *
 	 * "$bar = ( string )  $a;" > "$bar = (string)$a;"
 	 *
-	 * @see https://mlocati.github.io/php-cs-fixer-configurator/#version:3.52|fixer:cast_spaces
+	 * @see https://cs.symfony.com/doc/rules/cast_notation/cast_spaces.html
 	 */
 	->withConfiguredRule(
 		CastSpacesFixer::class, [
