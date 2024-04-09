@@ -1985,8 +1985,8 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
     $t_result = array();
     foreach( $p_issue_ids as $t_id ) {
 
-        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
-            continue;
+        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false ) {
+            continue; }
 
         log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 

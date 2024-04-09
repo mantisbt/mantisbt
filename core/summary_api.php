@@ -289,7 +289,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '='
 					. META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
 			}
-			if( 'status' == $p_enum )  $t_bugs_ratio[0] = '-';
+			if( 'status' == $p_enum ) {  $t_bugs_ratio[0] = '-'; }
 		}
 		summary_helper_print_row( get_enum_element( $p_enum, $t_enum ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
 	}

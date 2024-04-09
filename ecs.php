@@ -20,6 +20,7 @@ use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer;
+use PhpCsFixer\Fixer\ControlStructure\ControlStructureBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
 use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
 use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
@@ -219,5 +220,24 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/control_structure/control_structure_continuation_position.html
 		 */
 		ControlStructureContinuationPositionFixer::class,
+
+		/**
+		 * Control structure: No inline control structure
+		 *
+		 * The body of each control structure MUST be enclosed within braces.
+		 *
+		 * <input>
+		 * if( $foo === $bar )
+		 *     echo 'same'
+		 * </input>
+		 * <output>
+		 *  if( $foo === $bar ) {
+		 *      echo 'same'
+		 *  }
+		 * </output>
+		 *
+		 * @see https://cs.symfony.com/doc/rules/control_structure/control_structure_braces.html
+		 */
+		ControlStructureBracesFixer::class,
 	] )
 ;
