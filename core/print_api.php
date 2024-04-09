@@ -1949,12 +1949,12 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 		if( $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
 			echo lang_get( 'word_separator' );
 			collapse_icon( $t_collapse_id );
-	
+
 			print_bug_attachment_preview_audio_video(
 				$p_attachment,
 				$p_attachment['file_type'],
 				$p_attachment['preview'] );
-	
+
 			collapse_closed( $t_collapse_id );
 			print_bug_attachment_header( $p_attachment, $p_security_token );
 			echo lang_get( 'word_separator' );

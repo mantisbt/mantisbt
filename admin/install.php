@@ -580,7 +580,7 @@ if( 2 == $t_install_state ) {
 <?php
 	} # end if db open
 	} # end if failed DB checks
-	
+
 	if( !$g_failed ) {
 		$t_install_state++;
 	} else {

@@ -105,7 +105,7 @@ class UserTokenCreateCommand extends Command {
 					"%s created on %s",
 					$t_current_user_name,
 					date( $t_date_format ) );
-				
+
 				if( $t_count > 1 ) {
 					$this->name .= ' ' . $t_count;
 				}

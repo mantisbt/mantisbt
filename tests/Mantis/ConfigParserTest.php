@@ -208,7 +208,7 @@ class ConfigParserTest extends MantisCoreBase {
 			'Integer with whitespace' => array( " 1\n", IsType::TYPE_INT ),
 			'Integer negative' => array( '-1', IsType::TYPE_INT ),
 			'Integer positive' => array( '+1', IsType::TYPE_INT ),
-	
+
 			'Float' => array( '1.1', IsType::TYPE_FLOAT ),
 			'Float negative' => array( '-1.1', IsType::TYPE_FLOAT ),
 			'Float positive' => array( '+1.1', IsType::TYPE_FLOAT ),
@@ -219,11 +219,11 @@ class ConfigParserTest extends MantisCoreBase {
 			'String whitespace' => array( '" "', IsType::TYPE_STRING ),
 			'String number double-quote' => array( '"1"', IsType::TYPE_STRING ),
 			'String number single-quote' => array( "'1'", IsType::TYPE_STRING ),
-	
+
 			'Built-in string literal null' => array( 'null', IsType::TYPE_NULL ),
 			'Built-in string literal false' => array( 'false', IsType::TYPE_BOOL ),
 			'Built-in string literal true' => array( 'true', IsType::TYPE_BOOL ),
-	
+
 			'Constant = null' => array( 'VERSION_ALL', IsType::TYPE_NULL ),
 			'Constant = false' => array( 'VERSION_FUTURE', IsType::TYPE_BOOL ),
 			'Constant = true' => array( 'VERSION_RELEASED', IsType::TYPE_BOOL ),

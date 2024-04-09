@@ -97,11 +97,11 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 				'private' => false,
 				'style' => 'bugnote-note',
 				'attachments' => array( $t_attachment ) );
-	
+
 			$t_activity['can_edit'] = false;
 			$t_activity['can_delete'] = !$t_bug_readonly && $t_attachment['can_delete'];
 			$t_activity['can_change_view_state'] = false;
-	
+
 			$t_activities[] = $t_activity;
 		} else {
 			if( !isset( $t_bugnote_attachments[$t_bugnote_id] ) ) {

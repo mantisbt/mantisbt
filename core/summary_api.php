@@ -217,7 +217,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 		$t_status = $t_row['status'];
 		$t_bugcount = $t_row['bugcount'];
 		$t_bugs_total_count += $t_bugcount;
-		
+
 		summary_helper_build_bugcount( $t_cache, $t_enum, $t_status, $t_bugcount );
 	}
 
@@ -252,7 +252,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 		if( !is_blank( $t_bug_link ) ) {
 			$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
 			$t_closed_val = config_get( 'bug_closed_status_threshold' );
-			
+
 			if( 0 < $t_bugs_open ) {
 				$t_bugs_open = '<a class="subtle" href="' . $t_bug_link
 					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_resolved_val . '">'
@@ -723,7 +723,7 @@ function summary_print_by_project( array $p_projects = array(), int $p_level = 0
 		$t_bugs_resolved = isset( $t_pdata['resolved'] ) ? $t_pdata['resolved'] : 0;
 		$t_bugs_closed = isset( $t_pdata['closed'] ) ? $t_pdata['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		
+
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
 # FILTER_PROPERTY_PROJECT_ID filter by project does not work ??

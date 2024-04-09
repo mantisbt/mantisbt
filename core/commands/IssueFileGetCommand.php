@@ -85,7 +85,7 @@ class IssueFileGetCommand extends Command {
 			$t_result = file_get_content( $t_attachment['id'] );
 			$t_attachment['content_type'] = $t_result['type'];
 			$t_attachment['content'] = $t_result['content'];
-	
+
 			$t_matching_attachments[] = $t_attachment;
 		}
 

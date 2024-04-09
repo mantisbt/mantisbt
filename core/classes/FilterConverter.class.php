@@ -90,7 +90,7 @@ class FilterConverter {
 	 */
 	private function filterCriteriaToJson( $p_criteria, $p_project_id ) {
 		$t_criteria = $p_criteria;
-	
+
 		$this->renameField( $t_criteria, FILTER_PROPERTY_HANDLER_ID, 'handler' );
 		$this->renameField( $t_criteria, FILTER_PROPERTY_REPORTER_ID, 'reporter' );
 		$this->renameField( $t_criteria, FILTER_PROPERTY_MONITOR_USER_ID, 'monitored' );
@@ -124,7 +124,7 @@ class FilterConverter {
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_VERSION, $p_project_id );
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_FIXED_IN_VERSION, $p_project_id );
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_TARGET_VERSION, $p_project_id );
-		
+
 		$this->convertProfileToJson( $t_criteria );
 		$this->convertStringArrayToJson( $t_criteria, FILTER_PROPERTY_PLATFORM );
 		$this->convertStringArrayToJson( $t_criteria, FILTER_PROPERTY_BUILD );
@@ -138,7 +138,7 @@ class FilterConverter {
 
 		$this->convertViewOptionsToJson( $t_criteria );
 		$this->convertSortOrder( $t_criteria );
-		
+
 		return $t_criteria;
 	}
 
@@ -155,7 +155,7 @@ class FilterConverter {
 			if( !is_array( $p_criteria[$p_field] ) ) {
 				$p_criteria[$p_field] = array( $p_criteria[$p_field] );
 			}
-	
+
 			$t_result = array();
 			foreach( $p_criteria[$p_field] as $t_enum_code ) {
 				switch( $t_enum_code ) {
@@ -528,7 +528,7 @@ class FilterConverter {
 					'type' => relationship_get_name_for_api( $p_criteria['relationship_type'] ),
 					'issue' => array( 'id' => $t_issue_id )
 				);
-	
+
 				$p_criteria['relationship'] = $t_result;
 			}
 
@@ -644,7 +644,7 @@ class FilterConverter {
 			$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] = (int)$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_MONTH];
 			$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] = (int)$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_YEAR];
 		}
-	
+
 		if( isset( $p_criteria[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) ) {
 			$t_start_date = sprintf( '%04d-%02d-%02d',
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR],
@@ -655,7 +655,7 @@ class FilterConverter {
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
-			
+
 				$p_criteria['created_at'] = array( 'from' => $t_start_date, 'to' => $t_end_date );
 				$this->removeDateSubmitted( $p_criteria );
 		}
@@ -670,7 +670,7 @@ class FilterConverter {
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_YEAR],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
-			
+
 			$p_criteria['updated_at'] = array( 'from' => $t_start_date, 'to' => $t_end_date );
 			$this->remoteDateLastUpdated( $p_criteria );
 		}

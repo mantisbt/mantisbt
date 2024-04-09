@@ -278,9 +278,9 @@ if( null == $f_project_to_move ) {
 } else {
 
 	$t_moved = array();
-	
+
 	foreach( $f_project_to_move as $t_project_to_move ) {
-		
+
 		$t_array = explode( ':', $t_project_to_move );
 
 		if( isset( $t_array[1] ) ) {
@@ -296,7 +296,7 @@ if( null == $f_project_to_move ) {
 			}
 		}
 	}
-	
+
 	# Display results
 	if( empty( $t_moved ) ) {
 		echo '<div class="alert alert-danger">';

@@ -117,7 +117,7 @@ class ProjectUsersGetCommand extends Command {
 				ERROR_PROJECT_NOT_FOUND,
 				array( $this->project_id ) );
 		}
-		
+
 		if( $this->page < 1 ) {
 			$this->page = 1;
 		}

@@ -1830,7 +1830,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 
 		$t_result = db_query( $t_query, array( true, $t_user_id ) );
 	}
-	
+
 	$t_filters = array();
 
 	# first build the id=>name array

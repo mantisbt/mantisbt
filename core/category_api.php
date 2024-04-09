@@ -564,7 +564,7 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 	if( $p_enabled_only ) {
 		$t_project_where .= ' and c.status = ' . CATEGORY_STATUS_ENABLED;
 	}
-	
+
 	$t_query = 'SELECT c.*, p.name AS project_name FROM {category} c
 				LEFT JOIN {project} p
 					ON c.project_id=p.id

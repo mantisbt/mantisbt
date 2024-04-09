@@ -735,7 +735,7 @@ if( $t_flags['monitor_show'] ) {
 					}
 				 }
 			}
-	
+
 			if( $t_flags['monitor_can_add'] ) {
 	?>
 			<br /><br />

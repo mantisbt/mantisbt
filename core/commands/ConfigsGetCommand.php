@@ -70,14 +70,14 @@ class ConfigsGetCommand extends Command {
 		if( is_null( $this->project_id ) ) {
 			$this->project_id = ALL_PROJECTS;
 		}
-	
+
 		if( $this->project_id != ALL_PROJECTS && !project_exists( $this->project_id ) ) {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
 				ERROR_PROJECT_NOT_FOUND,
 				array( $this->project_id ) );
 		}
-	
+
 		$this->user_id = $this->query( 'user_id' );
 		if( is_null( $this->user_id ) ) {
 			$this->user_id = auth_get_current_user_id();
@@ -89,7 +89,7 @@ class ConfigsGetCommand extends Command {
 					'Admin access required to get configs for other users',
 					ERROR_ACCESS_DENIED );
 			}
-	
+
 			if( $this->user_id != ALL_USERS && !user_exists( $this->user_id ) ) {
 				throw new ClientException(
 					sprintf( "User '%d' not found.", $this->user_id ),
@@ -113,25 +113,25 @@ class ConfigsGetCommand extends Command {
 			if( !config_is_set( $t_option ) ) {
 				continue;
 			}
-	
+
 			# Filter out private configs, since they can be private in some configs but public in others.
 			if( config_is_private( $t_option ) ) {
 				continue;
 			}
-	
+
 			$t_value = config_get( $t_option, /* default */ null, $this->user_id, $this->project_id );
 			if( ConfigsGetCommand::config_is_enum( $t_option ) ) {
 				$t_value = ConfigsGetCommand::config_get_enum_as_array( $t_option, $t_value );
 			}
-	
+
 			$t_config_pair = array(
 				'option' => $t_option,
 				'value' => $t_value
 			);
-	
+
 			$t_configs[] = $t_config_pair;
 		}
-	
+
 		# wrap all configs into a configs attribute to allow adding other information if needed in the future
 		# that belongs outside the configs response.
 		return array( 'configs' => $t_configs );

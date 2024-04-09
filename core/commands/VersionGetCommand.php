@@ -78,7 +78,7 @@ class VersionGetCommand extends Command {
 			if( is_blank( $this->version_id ) ) {
 				throw new ClientException( 'Invalid version name', ERROR_EMPTY_FIELD, array( 'id' ) );
 			}
-			
+
 			if( !version_exists( $this->version_id ) ) {
 				throw new ClientException( 'Version not found', ERROR_VERSION_NOT_FOUND, array( $this->version_id ) );
 			}

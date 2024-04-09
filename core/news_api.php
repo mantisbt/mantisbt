@@ -274,7 +274,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 	switch( config_get( 'news_limit_method' ) ) {
 		case 0:
 			db_param_push();
-			
+
 			# BY_LIMIT - Select the news posts
 			$t_query = 'SELECT * FROM {news}';
 
@@ -292,7 +292,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 			break;
 		case 1:
 			db_param_push();
-			
+
 			# BY_DATE - Select the news posts
 			$t_query = 'SELECT * FROM {news} WHERE
 						( ' . db_helper_compare_time( db_param(), '<', 'date_posted', $t_news_view_limit_days ) . '

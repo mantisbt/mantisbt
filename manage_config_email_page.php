@@ -348,7 +348,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	}
 	echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 	echo '</div>' . "\n";
-	
+
 	get_section_begin_for_email( lang_get( 'email_notification' ) );
 #		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'
 	get_capability_row_for_email( lang_get( 'email_on_updated' ), 'updated' );

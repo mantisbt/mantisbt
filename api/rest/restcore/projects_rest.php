@@ -413,7 +413,7 @@ function rest_project_hierarchy_add( \Slim\Http\Request $p_request, \Slim\Http\R
 	$t_command = new ProjectHierarchyAddCommand( $t_data );
 	$t_command->execute();
 	$t_subproject_id = mci_get_project_id( $t_data['payload'][ 'project'], false );
-	
+
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
 		"Subproject '$t_subproject_id' added to project '$t_project_id'" );
 }

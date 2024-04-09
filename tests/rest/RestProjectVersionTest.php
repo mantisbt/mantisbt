@@ -358,7 +358,7 @@ class RestProjectVersionTest extends RestBase {
 		// Confirm version is created
 		$t_response = $this->builder()->get( $this->ver_base_url . $t_version['id'] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
-		
+
 		return $t_version;
 	}
 }

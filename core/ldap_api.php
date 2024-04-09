@@ -127,7 +127,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 			return false;
 		}
 	}
-	
+
 	# If no Bind DN and Password is set, attempt to login as the configured
 	# Bind DN.
 	if( is_blank( $p_binddn ) && is_blank( $p_password ) ) {

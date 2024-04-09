@@ -626,7 +626,7 @@ class BugData {
 
 		$t_mentioned_user_ids = mention_get_users( $this->summary );
 		$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
-		
+
 		$t_mentioned_user_ids = mention_get_users( $this->description );
 		$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
 

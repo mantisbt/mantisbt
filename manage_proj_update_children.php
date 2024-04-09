@@ -60,7 +60,7 @@ foreach ( $t_subproject_ids as $t_subproject_id ) {
 			'inherit_parent' => (bool)$f_inherit_child
 		)
 	);
-	
+
 	$t_command = new ProjectHierarchyUpdateCommand( $t_data );
 	$t_command->execute();
 }

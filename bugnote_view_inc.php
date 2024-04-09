@@ -335,7 +335,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		if ( !isset( $t_security_token_attachments_delete ) ) {
 			$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
 		}
-	
+
 		foreach( $t_activity['attachments'] as $t_attachment ) {
 			print_bug_attachment( $t_attachment, $t_security_token_attachments_delete );
 		}

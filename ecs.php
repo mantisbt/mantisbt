@@ -23,6 +23,7 @@ use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
+use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
@@ -112,5 +113,23 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/whitespace/no_trailing_whitespace.html
 		 */
 		NoTrailingWhitespaceFixer::class,
+
+		/**
+		 * Whitespaces: No whitespace in blank lines
+		 *
+		 * Remove trailing whitespace at the end of blank lines.
+		 *
+		 * <input>
+		 * ···
+		 * $a = 1;"
+		 * </input>
+		 * <output>
+		 *
+		 *  $a = 1;"
+		 * </output>
+		 *
+		 * @see https://cs.symfony.com/doc/rules/whitespace/no_whitespace_in_blank_line.html
+		 */
+		NoWhitespaceInBlankLineFixer::class,
 	] )
 ;

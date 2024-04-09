@@ -85,7 +85,7 @@ class UserGetCommand extends Command {
 
 			$this->target_user_id = $t_user_id;
 		}
-		
+
 		if ( is_null( $this->target_user_id ) ) {
 			$t_user_id = $this->query( 'user_id' );
 			if( !is_null( $t_user_id ) && !is_blank( $t_user_id ) ) {
