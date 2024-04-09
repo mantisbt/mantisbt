@@ -671,7 +671,7 @@ function mci_issue_note_data_as_array( $p_bugnote_row ) {
 				unset( $t_bugnote['time_tracking'] );
 			} else {
 				$t_bugnote['time_tracking'] = array( 'duration' => db_minutes_to_hhmm( $t_bugnote['time_tracking'] ) );
-			}	
+			}
 		}
 
 		$t_bugnote['created_at'] = $t_created_at;
@@ -1635,7 +1635,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
 		}
 
 		# null it out, so it doesn't get used by mistake
-		$p_fields = null;	
+		$p_fields = null;
 	}
 
 	$t_issue = array();

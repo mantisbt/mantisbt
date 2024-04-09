@@ -22,6 +22,7 @@ use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
+use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
@@ -100,5 +101,16 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/php_tag/no_closing_tag.html
 		 */
 		NoClosingTagFixer::class,
+
+		/**
+		 * Whitespace: No trailing whitespaces
+		 *
+		 * Remove trailing whitespace at the end of non-blank lines.
+		 *
+		 * "$foo = 'bar'···" > "$foo = 'bar'"
+		 *
+		 * @see https://cs.symfony.com/doc/rules/whitespace/no_trailing_whitespace.html
+		 */
+		NoTrailingWhitespaceFixer::class,
 	] )
 ;

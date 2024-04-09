@@ -158,7 +158,7 @@ function summary_helper_build_buglinks( $p_bug_link, &$p_bugs_open, &$p_bugs_res
 	}
 	if( 0 < $p_bugs_total ) {
 		$p_bugs_total = '<a class="subtle" href="' . $p_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $p_bugs_total . '</a>';
-	}	
+	}
 }
 
 /**
@@ -174,7 +174,7 @@ function summary_helper_get_bugratio( $p_bugs_open, $p_bugs_resolved, $p_bugs_cl
 	$t_bugs_resolved_ratio = ( $p_bugs_resolved + $p_bugs_closed ) / ( $t_bugs_total == 0 ? 1 : $t_bugs_total );
 	$t_bugs_ratio = $t_bugs_total / ( $p_bugs_total_count == 0 ? 1 : $p_bugs_total_count );
 	$t_bugs_resolved_ratio = sprintf( "%.1f%%", $t_bugs_resolved_ratio * 100 );
-	$t_bugs_ratio = sprintf( "%.1f%%", $t_bugs_ratio * 100 );	
+	$t_bugs_ratio = sprintf( "%.1f%%", $t_bugs_ratio * 100 );
 	return array($t_bugs_resolved_ratio, $t_bugs_ratio);
 }
 
@@ -288,8 +288,8 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 				$t_bugs_total = '<a class="subtle" href="' . $t_bug_link
 					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '='
 					. META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
-			}	
-			if( 'status' == $p_enum )  $t_bugs_ratio[0] = '-';		
+			}
+			if( 'status' == $p_enum )  $t_bugs_ratio[0] = '-';
 		}
 		summary_helper_print_row( get_enum_element( $p_enum, $t_enum ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
 	}
@@ -643,7 +643,7 @@ function summary_print_by_category( array $p_filter = null ) {
 		$t_label = $t_row['category_name'];
 		if( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 			$t_label = sprintf( '[%s] %s', project_get_name( $t_row['project_id'] ), $t_label );
-		} 
+		}
 
 		summary_helper_build_bugcount( $t_cache, $t_label, $t_status, $t_bugcount );
 	}

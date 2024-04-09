@@ -187,7 +187,7 @@ class ConfigsSetCommand extends Command {
 			}
 		}
 
-		foreach( $this->options as $t_option ) {			
+		foreach( $this->options as $t_option ) {
 			if( is_null( $t_option['value'] ) ) {
 				config_delete( $t_option['option'], $this->user_id, $this->project_id );
 			} else {

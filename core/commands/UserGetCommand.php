@@ -93,7 +93,7 @@ class UserGetCommand extends Command {
 					throw new ClientException(
 						'User not found',
 						ERROR_USER_BY_ID_NOT_FOUND,
-						array( $t_user_id ) );	
+						array( $t_user_id ) );
 				}
 
 				$this->target_user_id = (int)$t_user_id;

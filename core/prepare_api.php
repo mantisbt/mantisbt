@@ -219,9 +219,9 @@ function prepare_avatar( $p_avatar, $p_class_prefix, $p_size ) {
 	$t_link = htmlspecialchars( $p_avatar->link );
 
 	$t_container_class = $p_class_prefix . '-avatar-container' . '-' . $p_size;
-	return '<div class="' . $t_container_class . '">' . 
+	return '<div class="' . $t_container_class . '">' .
 			'<a rel="nofollow" href="' . $t_link . '">' .
-			prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size ) . 
+			prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size ) .
 			'</a></div>';
 }
 

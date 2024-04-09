@@ -201,7 +201,7 @@ function email_queue_delete( $p_email_id, $p_reason = '' ) {
 	if( is_blank( $p_reason ) ) {
 		log_event( LOG_EMAIL_VERBOSE, sprintf( 'message %d deleted from queue', $p_email_id ) );
 	} else {
-		log_event( LOG_EMAIL_VERBOSE, sprintf( 'message %d deleted from queue. reason: %s', $p_email_id, $p_reason ) ); 
+		log_event( LOG_EMAIL_VERBOSE, sprintf( 'message %d deleted from queue. reason: %s', $p_email_id, $p_reason ) );
 	}
 }
 

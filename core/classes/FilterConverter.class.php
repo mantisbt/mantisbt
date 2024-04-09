@@ -529,7 +529,7 @@ class FilterConverter {
 					'issue' => array( 'id' => $t_issue_id )
 				);
 	
-				$p_criteria['relationship'] = $t_result;				
+				$p_criteria['relationship'] = $t_result;
 			}
 
 			unset( $p_criteria['relationship_type'] );
@@ -646,12 +646,12 @@ class FilterConverter {
 		}
 	
 		if( isset( $p_criteria[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) ) {
-			$t_start_date = sprintf( '%04d-%02d-%02d', 
+			$t_start_date = sprintf( '%04d-%02d-%02d',
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
 
-			$t_end_date = sprintf( '%04d-%02d-%02d', 
+			$t_end_date = sprintf( '%04d-%02d-%02d',
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
@@ -661,12 +661,12 @@ class FilterConverter {
 		}
 
 		if( isset( $p_criteria[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) ) {
-			$t_start_date = sprintf( '%04d-%02d-%02d', 
+			$t_start_date = sprintf( '%04d-%02d-%02d',
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_YEAR],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_MONTH],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
 
-			$t_end_date = sprintf( '%04d-%02d-%02d', 
+			$t_end_date = sprintf( '%04d-%02d-%02d',
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_YEAR],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );

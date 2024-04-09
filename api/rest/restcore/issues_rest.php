@@ -455,7 +455,7 @@ function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_command = new MonitorAddCommand( $t_data );
 	$t_command->execute();
 
-	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Users are now monitoring issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );
@@ -480,7 +480,7 @@ function rest_issue_tag_attach( \Slim\Http\Request $p_request, \Slim\Http\Respon
 	$t_command = new TagAttachCommand( $t_data );
 	$t_command->execute();
 
-	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Tag attached to issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );
@@ -508,7 +508,7 @@ function rest_issue_tag_detach( \Slim\Http\Request $p_request, \Slim\Http\Respon
 	$t_command = new TagDetachCommand( $t_data );
 	$t_command->execute();
 
-	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Tag detached from issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );

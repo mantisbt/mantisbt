@@ -53,7 +53,7 @@ class MonitorAddCommand extends Command {
 	/**
 	 * Validate the data.
 	 */
-	function validate() {		
+	function validate() {
 		$t_issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
 
 		$this->projectId = bug_get_field( $t_issue_id, 'project_id' );

@@ -53,7 +53,7 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->patch( '/{id}/versions/{version_id}', 'rest_project_version_update' );
 	$g_app->patch( '/{id}/versions/{version_id}/', 'rest_project_version_update' );
 	$g_app->delete( '/{id}/versions/{version_id}', 'rest_project_version_delete' );
-	$g_app->delete( '/{id}/versions/{version_id}/', 'rest_project_version_delete' );	
+	$g_app->delete( '/{id}/versions/{version_id}/', 'rest_project_version_delete' );
 
 	# Project hierarchy (subprojects)
 	$g_app->post( '/{id}/subprojects', 'rest_project_hierarchy_add' );
@@ -439,7 +439,7 @@ function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Htt
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_subproject_update = $p_request->getParsedBody();	
+	$t_subproject_update = $p_request->getParsedBody();
 
 	$t_data = array(
 		'query' => array(

@@ -1132,7 +1132,7 @@ function mc_error_exception_handler( $p_exception ) {
 		$t_log = true;
 	} else {
 		$t_cause = 'Server';
-		$t_message = 'Internal Service Error';		
+		$t_message = 'Internal Service Error';
 		$t_log = true;
 	}
 

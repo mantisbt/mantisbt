@@ -900,7 +900,7 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, 
 	if( $p_bug_id != $p_related_bug_id && bug_exists( $p_related_bug_id) ) {
 		email_relationship_send( $p_related_bug_id, $p_bug_id, $t_message_id );
 	}
-}	
+}
 
 /**
  * Email related issues when a bug is deleted.
@@ -1907,11 +1907,11 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	if ( isset( $p_visible_bug_data[ 'email_status' ] ) ) {
 		$t_status = $p_visible_bug_data['email_status'];
-		$p_visible_bug_data['email_status'] = get_enum_element( 'status', $t_status );	
+		$p_visible_bug_data['email_status'] = get_enum_element( 'status', $t_status );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
 	}
 
-	if ( isset( $p_visible_bug_data[ 'email_target_version' ] ) ) {	
+	if ( isset( $p_visible_bug_data[ 'email_target_version' ] ) ) {
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_target_version' );
 	}
 
@@ -2098,15 +2098,15 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 		$t_bug_data['email_due_date'] = date( config_get( 'short_date_format' ), $t_row['due_date'] );
 	}
 
-	if ( in_array( 'status', $t_bug_view_fields ) ) {	
+	if ( in_array( 'status', $t_bug_view_fields ) ) {
 		$t_bug_data['email_status'] = $t_row['status'];
 	}
 	
-	if ( in_array( 'severity', $t_bug_view_fields ) ) {	
+	if ( in_array( 'severity', $t_bug_view_fields ) ) {
 		$t_bug_data['email_severity'] = $t_row['severity'];
 	}
 	
-	if ( in_array( 'priority', $t_bug_view_fields ) ) {	
+	if ( in_array( 'priority', $t_bug_view_fields ) ) {
 		$t_bug_data['email_priority'] = $t_row['priority'];
 	}
 
@@ -2114,7 +2114,7 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 		$t_bug_data['email_reproducibility'] = $t_row['reproducibility'];
 	}
 	
-	if ( in_array( 'resolution', $t_bug_view_fields ) ) {	
+	if ( in_array( 'resolution', $t_bug_view_fields ) ) {
 		$t_bug_data['email_resolution'] = $t_row['resolution'];
 	}
 		

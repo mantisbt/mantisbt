@@ -1910,7 +1910,7 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 	if( $p_attachment['preview'] || $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
-		$g_collapse_cache_token[$t_collapse_id] = 
+		$g_collapse_cache_token[$t_collapse_id] =
 			$p_attachment['type'] == 'image' ||
 			$p_attachment['type'] == 'audio' ||
 			$p_attachment['type'] == 'video';
@@ -1959,7 +1959,7 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 			print_bug_attachment_header( $p_attachment, $p_security_token );
 			echo lang_get( 'word_separator' );
 			collapse_icon( $t_collapse_id );
-			collapse_end( $t_collapse_id );	
+			collapse_end( $t_collapse_id );
 		} else {
 			echo '<br />';
 		}
