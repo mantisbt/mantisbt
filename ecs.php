@@ -18,6 +18,7 @@ declare( strict_types = 1 );
 
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
+use PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer;
 use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
 use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
@@ -146,5 +147,16 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/casing/constant_case.html
 		 */
 		ConstantCaseFixer::class,
+
+		/**
+		 * Casing: Lowercase keywords
+		 *
+		 * PHP keywords MUST be in lower case.
+		 *
+		 * "FOREACH( $a AS $B )" > "foreach( $a as $B )"
+		 *
+		 * @see https://cs.symfony.com/doc/rules/casing/lowercase_keywords.html
+		 */
+		LowercaseKeywordsFixer::class,
 	] )
 ;

@@ -526,7 +526,7 @@ function install_stored_filter_migrate() {
 
 		# For any fields that are being renamed, we can now perform the rename and migrate existing data.
 		# We unset the old field when done to ensure the filter contains only current optimised data.
-		foreach( $t_filter_fields AS $t_old=>$t_new ) {
+		foreach( $t_filter_fields as $t_old=>$t_new ) {
 			if( isset( $t_filter_arr[$t_old] ) ) {
 				$t_value = $t_filter_arr[$t_old];
 				unset( $t_filter_arr[$t_old] );

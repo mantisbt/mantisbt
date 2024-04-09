@@ -1084,7 +1084,7 @@ if( count( $t_users ) > 0 ) { ?>
 					<select id="project-add-users-username" name="user_id[]"
 							class="input-sm" multiple="multiple" size="10" required>
 <?php
-						foreach( $t_users AS $t_user_id=>$t_display_name ) {
+						foreach( $t_users as $t_user_id=>$t_display_name ) {
 							echo '<option value="', $t_user_id, '">', string_attribute( $t_display_name ), '</option>';
 						}
 ?>

@@ -252,7 +252,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 if( count( $t_warnings ) > 0 ) {
 	echo '<div class="space-10"></div>';
 	echo '<div class="alert alert-warning">';
-	foreach( $t_warnings AS $t_warning ) {
+	foreach( $t_warnings as $t_warning ) {
 		echo '<p>' . $t_warning . '</p>';
 	}
 	echo '</div>';
