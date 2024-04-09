@@ -791,7 +791,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 	} else {
 		if( 0 == $p_category_id ) {
 			if( count( $t_cat_arr ) == 1 ) {
-				$p_category_id = (int) $t_cat_arr[0]['id'];
+				$p_category_id = (int)$t_cat_arr[0]['id'];
 			} else {
 				echo '<option value="" disabled hidden';
 				check_selected( $p_category_id, 0 );

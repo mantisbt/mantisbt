@@ -279,7 +279,7 @@ class FilterConverter {
 
 					$t_def = custom_field_get_definition( $t_cf_id );
 					$t_cf = array(
-						'field' => array( 'id' => (int) $t_cf_id, 'name' => $t_def['name'] ),
+						'field' => array( 'id' => (int)$t_cf_id, 'name' => $t_def['name'] ),
 						'value' => $t_values );
 				}
 

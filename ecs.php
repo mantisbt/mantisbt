@@ -21,6 +21,7 @@ use PhpCsFixer\Fixer\Basic\BracesPositionFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer;
+use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
 use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
@@ -268,4 +269,17 @@ return ECSConfig::configure()
 	->withConfiguredRule(ConcatSpaceFixer::class, [
 		'spacing' => 'one',
 	])
+
+	/**
+	 * Cast: No space after cast
+	 *
+	 * "$bar = ( string )  $a;" > "$bar = (string)$a;"
+	 *
+	 * @see https://mlocati.github.io/php-cs-fixer-configurator/#version:3.52|fixer:cast_spaces
+	 */
+	->withConfiguredRule(
+		CastSpacesFixer::class, [
+			'space' => 'none'
+		]
+	)
 ;

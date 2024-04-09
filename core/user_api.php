@@ -2050,7 +2050,7 @@ function user_has_more_than_one_project( $p_user_id ) {
 		return false;
 	}
 	if( 1 == $t_count ) {
-		$t_project_id = (int) $t_project_ids[0];
+		$t_project_id = (int)$t_project_ids[0];
 		if( count( user_get_accessible_subprojects( $p_user_id, $t_project_id ) ) == 0 ) {
 			return false;
 		}
