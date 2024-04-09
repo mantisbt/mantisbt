@@ -17,6 +17,7 @@
 declare( strict_types = 1 );
 
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
+use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
 use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
 use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
@@ -131,5 +132,19 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/whitespace/no_whitespace_in_blank_line.html
 		 */
 		NoWhitespaceInBlankLineFixer::class,
+
+		/**
+		 * Casing: Constant case: lower
+		 *
+		 * The PHP constants true, false, and null MUST be written
+		 * using the correct casing.
+		 *
+		 * Configurable. Default is "lower"
+		 *
+		 * "$a = FALse" > "a = false"
+		 *
+		 * @see https://cs.symfony.com/doc/rules/casing/constant_case.html
+		 */
+		ConstantCaseFixer::class,
 	] )
 ;

@@ -1008,7 +1008,7 @@ function utf8_strlen( $p_string ) {
  * @return mixed string or FALSE if failure
  * @deprecated mb_substr() should be used in preference to this function
  */
-function utf8_substr( $p_string, $p_offset, $p_length = NULL ) {
+function utf8_substr( $p_string, $p_offset, $p_length = null ) {
     error_parameters( __FUNCTION__ . '()', 'mb_substr()' );
     trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
     return mb_substr( $p_string, $p_offset, $p_length );
