@@ -1008,7 +1008,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 	if( is_array( $p_arr_parms ) ) {
 		preg_match( '/^[\s\n\r]*insert[\s\n\r]+(into){0,1}[\s\n\r]+(?P<table>[a-z0-9_]+)[\s\n\r]*\([\s\n\r]*[\s\n\r]*(?P<fields>[a-z0-9_,\s\n\r]+)[\s\n\r]*\)[\s\n\r]*values[\s\n\r]*\([\s\n\r]*(?P<values>[:a-z0-9_,\s\n\r]+)\)/i', $p_query, $t_matches );
 
-		if( isset( $t_matches['values'] ) ) { #if statement is a INSERT INTO ... (...) VALUES(...)
+		if( isset( $t_matches['values'] ) ) { # if statement is a INSERT INTO ... (...) VALUES(...)
 			# iterates non-empty bind variables
 			$i = 0;
 			$t_fields_left = $t_matches['fields'];
@@ -1112,7 +1112,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 				$t_removed_set_where = $t_matches['set_where'];
 				$p_query = $t_matches['before_set_where'] . $t_set_where_template_str . $t_matches['after_set_where'];
 
-				#Replace "SET fld1=:1" to "SET fld1=DEFAULT" if bind array value is empty
+				# Replace "SET fld1=:1" to "SET fld1=DEFAULT" if bind array value is empty
 				$t_removed_set_where_parsing = $t_removed_set_where;
 
 				while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r,]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[,\s\n\r]*[\d\D]*\z)/i', $t_removed_set_where_parsing, $t_matches ) > 0 ) {

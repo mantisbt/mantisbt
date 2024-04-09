@@ -55,7 +55,7 @@ $t_mantisgraph->print_submenu();
 			</div>
 <?php
 			$t_metrics = create_reporter_summary( $t_filter );
-			graph_bar( $t_metrics, 2 /*wfactor*/ );
+			graph_bar( $t_metrics, 2 /* wfactor */ );
 ?>
 		</div>
 	</div>

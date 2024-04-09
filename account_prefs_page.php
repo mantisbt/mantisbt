@@ -52,10 +52,10 @@ require_api( 'current_user_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-#============ Parameters ============
+# ============ Parameters ============
 # (none)
 
-#============ Permissions ============
+# ============ Permissions ============
 auth_ensure_user_authenticated();
 
 current_user_ensure_unprotected();

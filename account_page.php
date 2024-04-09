@@ -74,7 +74,7 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-#============ Permissions ============
+# ============ Permissions ============
 auth_ensure_user_authenticated();
 
 auth_reauthenticate();

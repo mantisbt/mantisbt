@@ -65,7 +65,7 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
-#precache access levels
+# precache access levels
 access_cache_matrix_project( helper_get_current_project() );
 
 $t_show_time_tracking = config_get( 'time_tracking_enabled' )

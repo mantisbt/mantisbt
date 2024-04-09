@@ -486,7 +486,7 @@ foreach( $t_project_ids as $t_project_id ) {
 				if( $l !== false ) {
 					/** @noinspection PhpStatementHasEmptyBodyInspection */
 					for( $m = $l+1; $m < count( $t_issue_set_ids ) && $t_issue_set_levels[$m] > $t_issue_set_levels[$l]; $m++ ) {
-						#do nothing
+						# do nothing
 					}
 					$t_issue_set_ids_end = array_splice( $t_issue_set_ids, $m );
 					$t_issue_set_levels_end = array_splice( $t_issue_set_levels, $m );

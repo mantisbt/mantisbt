@@ -788,7 +788,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] = META_FILTER_NONE;
 	}
 
-	#If view_type is simple, resolve conflicts between show_status and hide_status
+	# If view_type is simple, resolve conflicts between show_status and hide_status
 	if( $p_filter_arr['_view_type'] == FILTER_VIEW_TYPE_SIMPLE
 			&& !filter_field_is_none( $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] ) ) {
 		# get array of hidden status ids
@@ -1010,7 +1010,7 @@ function filter_deserialize( $p_serialized_filter ) {
 		return false;
 	}
 
-	#@TODO cproensa, we could accept a pure json array, without version prefix
+	# @TODO cproensa, we could accept a pure json array, without version prefix
 	# in this case, the filter version field inside the array is to be used
 	# and if not present, set the current filter version
 

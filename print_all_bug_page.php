@@ -117,10 +117,10 @@ layout_page_header();
 
 <table class="table table-striped table-bordered table-condensed no-margin">
 <?php
-#<SQLI> Excel & Print export
-#$f_bug_array stores the number of the selected rows
-#$t_bug_arr_sort is used for displaying
-#$f_export is a string for the word and excel pages
+# <SQLI> Excel & Print export
+# $f_bug_array stores the number of the selected rows
+# $t_bug_arr_sort is used for displaying
+# $f_export is a string for the word and excel pages
 
 $f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 $f_bug_arr[$t_row_count]=-1;

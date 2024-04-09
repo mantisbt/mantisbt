@@ -313,7 +313,7 @@ function column_is_sortable( $p_column ) {
 		return $t_plugin_obj->sortable;
 	}
 
-	#standard fields: define exceptions here
+	# standard fields: define exceptions here
 	switch( $p_column ) {
 		case 'selection':
 		case 'edit':

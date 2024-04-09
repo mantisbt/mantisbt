@@ -264,7 +264,7 @@ abstract class MantisPlugin {
 	public function uninstall() {
 	}
 
-	### Core plugin functionality ###
+	# ## Core plugin functionality ###
 
 	/**
 	 * Plugin Basename

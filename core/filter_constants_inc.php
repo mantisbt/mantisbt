@@ -21,9 +21,9 @@
  * @link http://www.mantisbt.org
  */
 
-###########################################################################
+# ##########################################################################
 # Filter Property Names
-###########################################################################
+# ##########################################################################
 
 # filter meta fields
 define( 'FILTER_PROPERTY_SEARCH', 'search' );
@@ -39,7 +39,7 @@ define( 'FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR', 'start_year' );
 define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_DAY', 'end_day' );
 define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH', 'end_month' );
 define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR', 'end_year' );
-define( 'FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED', 'filter_by_date' ); #do_filter_by_date
+define( 'FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED', 'filter_by_date' ); # do_filter_by_date
 
 define( 'FILTER_PROPERTY_LAST_UPDATED_START_DAY', 'last_updated_start_day' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_START_MONTH', 'last_updated_start_month' );
@@ -47,7 +47,7 @@ define( 'FILTER_PROPERTY_LAST_UPDATED_START_YEAR', 'last_updated_start_year' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_END_DAY', 'last_updated_end_day' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_END_MONTH', 'last_updated_end_month' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_END_YEAR', 'last_updated_end_year' );
-define( 'FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE', 'filter_by_last_updated_date' ); #do_filter_by_last_updated_date
+define( 'FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE', 'filter_by_last_updated_date' ); # do_filter_by_last_updated_date
 
 define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
 define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
@@ -59,17 +59,17 @@ define( 'FILTER_PROPERTY_NOTE_USER_ID', 'note_user_id' );
 define( 'FILTER_PROPERTY_MONITOR_USER_ID', 'monitor_user_id' ); # user_monitor
 
 # bug fields
-define( 'FILTER_PROPERTY_CATEGORY_ID', 'category_id' ); #show_category
-define( 'FILTER_PROPERTY_SEVERITY', 'severity' ); #show_severity
-define( 'FILTER_PROPERTY_STATUS', 'status' ); #show_status
-define( 'FILTER_PROPERTY_PRIORITY', 'priority' ); #show_priority
+define( 'FILTER_PROPERTY_CATEGORY_ID', 'category_id' ); # show_category
+define( 'FILTER_PROPERTY_SEVERITY', 'severity' ); # show_severity
+define( 'FILTER_PROPERTY_STATUS', 'status' ); # show_status
+define( 'FILTER_PROPERTY_PRIORITY', 'priority' ); # show_priority
 define( 'FILTER_PROPERTY_REPORTER_ID', 'reporter_id' );
 define( 'FILTER_PROPERTY_HANDLER_ID', 'handler_id' );
 define( 'FILTER_PROPERTY_PROJECT_ID', 'project_id' );
 define( 'FILTER_PROPERTY_PROJECTION', 'projection' );
-define( 'FILTER_PROPERTY_RESOLUTION', 'resolution' ); #show_resolution
-define( 'FILTER_PROPERTY_BUILD', 'build' ); #show_build
-define( 'FILTER_PROPERTY_VERSION', 'version' ); #show_version
+define( 'FILTER_PROPERTY_RESOLUTION', 'resolution' ); # show_resolution
+define( 'FILTER_PROPERTY_BUILD', 'build' ); # show_build
+define( 'FILTER_PROPERTY_VERSION', 'version' ); # show_version
 define( 'FILTER_PROPERTY_STICKY', 'sticky' );
 define( 'FILTER_PROPERTY_VIEW_STATE', 'view_state' ); # view_state
 define( 'FILTER_PROPERTY_FIXED_IN_VERSION', 'fixed_in_version' );

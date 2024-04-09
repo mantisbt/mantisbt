@@ -1462,7 +1462,7 @@ function email_send( EmailData $p_email_data ) {
 		);
 	}
 
-	#apply DKIM settings
+	# apply DKIM settings
 	if( config_get_global( 'email_dkim_enable' ) ) {
 		$t_mail->DKIM_domain = config_get_global( 'email_dkim_domain' );
 		$t_mail->DKIM_private = config_get_global( 'email_dkim_private_key_file_path' );

@@ -2156,7 +2156,7 @@ function print_max_filesize( $p_size, $p_divider = 1024, $p_unit = 'kib' ) {
  * @return void
  */
 function print_dropzone_form_data() {
-	//$t_max_file_size = ceil( file_get_max_file_size() / ( 1024*1024 ) );
+	// $t_max_file_size = ceil( file_get_max_file_size() / ( 1024*1024 ) );
 	echo 'data-force-fallback="' . ( config_get( 'dropzone_enabled' ) ? 'false' : 'true' ) . '"' . "\n";
 	echo "\t" . 'data-max-filesize-bytes="' . file_get_max_file_size() . '"' . "\n";
 	echo "\t" . 'data-max-filename-length="' . DB_FIELD_SIZE_FILENAME . '"' . "\n";

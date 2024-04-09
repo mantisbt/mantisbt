@@ -111,7 +111,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 	$t_row = db_fetch_array( $t_result );
 
-	## OOPS, No entry in the database yet.	Lets make one
+	# # OOPS, No entry in the database yet.	Lets make one
 	if( !$t_row ) {
 		# create a default array, same size than $t_field_name
 		for( $i=0; $i<$t_field_name_count; $i++ ) {

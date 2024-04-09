@@ -22,6 +22,7 @@ use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
+use PhpCsFixer\Fixer\Comment\SingleLineCommentSpacingFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
 use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
@@ -242,6 +243,15 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/control_structure/control_structure_braces.html
 		 */
 		ControlStructureBracesFixer::class,
+
+		/**
+		 * Comment: Spacing of single line comment
+		 *
+		 * #comment > # comment
+		 *
+		 * @see https://cs.symfony.com/doc/rules/comment/single_line_comment_spacing.html
+		 */
+		SingleLineCommentSpacingFixer::class,
 	] )
 
 	/**

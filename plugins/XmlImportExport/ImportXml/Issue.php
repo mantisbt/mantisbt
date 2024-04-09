@@ -293,7 +293,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 			}
 		}
 
-		#echo "\nnew bug: $this->new_id_\n";
+		# echo "\nnew bug: $this->new_id_\n";
 	}
 
 	/**

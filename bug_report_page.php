@@ -92,7 +92,7 @@ if( $f_master_bug_id > 0 ) {
 
 	$t_bug = bug_get( $f_master_bug_id, true );
 
-	#@@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
+	# @@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
 	#       what the current project is set to.
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...

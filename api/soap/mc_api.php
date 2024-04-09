@@ -1207,7 +1207,7 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			$t_error_description = $p_error;
 			break;
 		default:
-			#shouldn't happen, just display the error just in case
+			# shouldn't happen, just display the error just in case
 			$t_error_type = '';
 			$t_error_description = $p_error;
 	}
@@ -1228,7 +1228,7 @@ function error_get_stack_trace() {
 
 	if( extension_loaded( 'xdebug' ) ) {
 
-		#check for xdebug presence
+		# check for xdebug presence
 		$t_stack = xdebug_get_function_stack();
 
 		# reverse the array in a separate line of code so the
@@ -1236,7 +1236,7 @@ function error_get_stack_trace() {
 		$t_stack = array_reverse( $t_stack );
 		array_shift( $t_stack );
 
-		#remove the call to this function from the stack trace
+		# remove the call to this function from the stack trace
 		foreach( $t_stack as $t_frame ) {
 			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' )
 				. ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' )
@@ -1259,8 +1259,8 @@ function error_get_stack_trace() {
 	} else {
 		$t_stack = debug_backtrace();
 
-		array_shift( $t_stack ); #remove the call to this function from the stack trace
-		array_shift( $t_stack ); #remove the call to the error handler from the stack trace
+		array_shift( $t_stack ); # remove the call to this function from the stack trace
+		array_shift( $t_stack ); # remove the call to the error handler from the stack trace
 
 		foreach( $t_stack as $t_frame ) {
 			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' )

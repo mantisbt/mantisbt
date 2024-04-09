@@ -626,13 +626,13 @@ class DbQuery {
 		if( is_array( $this->db_param_array ) ) {
 			preg_match( '/^[\s\n\r]*insert[\s\n\r]+(into){0,1}[\s\n\r]+(?P<table>[a-z0-9_]+)[\s\n\r]*\([\s\n\r]*[\s\n\r]*(?P<fields>[a-z0-9_,\s\n\r]+)[\s\n\r]*\)[\s\n\r]*values[\s\n\r]*\([\s\n\r]*(?P<values>[:a-z0-9_,\s\n\r]+)\)/i', $t_query, $t_matches );
 
-			if( isset( $t_matches['values'] ) ) { #if statement is a INSERT INTO ... (...) VALUES(...)
+			if( isset( $t_matches['values'] ) ) { # if statement is a INSERT INTO ... (...) VALUES(...)
 				# iterates non-empty bind variables
 				$i = 0;
 				$t_fields_left = $t_matches['fields'];
 				$t_values_left = $t_matches['values'];
 
-				//for( $t_arr_index = 0; $t_arr_index < count( $this->db_param_array ); $t_arr_index++ ) {
+				// for( $t_arr_index = 0; $t_arr_index < count( $this->db_param_array ); $t_arr_index++ ) {
 				foreach( $this->db_param_array as $t_arr_index => $t_arr_value ) {
 					# inserting fieldname search
 					if( preg_match( '/^[\s\n\r]*([a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i', $t_fields_left, $t_fieldmatch ) ) {
@@ -645,7 +645,7 @@ class DbQuery {
 						$t_values_arr[$i] = $t_valuematch[1];
 					}
 					# skip unsetting if bind array value not empty
-					//if( $this->db_param_array[$t_arr_index] !== '' ) {
+					// if( $this->db_param_array[$t_arr_index] !== '' ) {
 					if( $t_arr_value !== '' ) {
 						$i++;
 					} else {
@@ -739,7 +739,7 @@ class DbQuery {
 					$t_removed_set_where = $t_matches['set_where'];
 					$t_query = $t_matches['before_set_where'] . $t_set_where_template_str . $t_matches['after_set_where'];
 
-					#Replace "SET fld1=:1" to "SET fld1=DEFAULT" if bind array value is empty
+					# Replace "SET fld1=:1" to "SET fld1=DEFAULT" if bind array value is empty
 					$t_removed_set_where_parsing = $t_removed_set_where;
 
 					while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r,]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[,\s\n\r]*[\d\D]*\z)/i', $t_removed_set_where_parsing, $t_matches ) > 0 ) {
