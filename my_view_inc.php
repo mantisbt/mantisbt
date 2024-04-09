@@ -419,4 +419,3 @@ for( $i = 0;$i < $t_count; $i++ ) {
 <?php
 # Free the memory allocated for the rows in this box since it is not longer needed.
 unset( $t_rows );
-

@@ -184,4 +184,3 @@ function mention_format_text( $p_text, $p_html = true ) {
 
 	return $t_text;
 }
-

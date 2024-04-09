@@ -110,4 +110,3 @@ class ProjectHierarchyDeleteCommand extends Command {
 		return array();
 	}
 }
-

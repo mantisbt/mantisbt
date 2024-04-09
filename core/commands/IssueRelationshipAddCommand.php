@@ -183,4 +183,3 @@ class IssueRelationshipAddCommand extends Command {
 		return $t_type_id;
 	}
 }
-

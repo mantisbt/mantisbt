@@ -704,4 +704,3 @@ function error_proceed_url( $p_url ) {
 
 	$g_error_proceed_url = $p_url;
 }
-

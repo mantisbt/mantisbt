@@ -157,4 +157,3 @@ class UserCreateCommand extends Command {
 		return array( 'id' => user_get_id_by_name( $this->username ) );
 	}
 }
-

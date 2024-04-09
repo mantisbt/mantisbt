@@ -162,4 +162,3 @@ do {
 } while ( false === $t_end_of_results );
 
 echo excel_get_footer();
-

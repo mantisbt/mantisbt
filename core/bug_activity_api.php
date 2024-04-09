@@ -296,4 +296,3 @@ function bug_activity_bugnote_link_attachments( $p_bugnote_id ) {
 		history_link_file_to_bugnote( $t_bug_id, $t_file['display_name'], $p_bugnote_id );
 	}
 }
-

@@ -108,4 +108,3 @@ class IssueRelationshipDeleteCommand extends Command {
 		return array();
 	}
 }
-

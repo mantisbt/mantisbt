@@ -93,4 +93,3 @@ abstract class MantisFilter {
 		return array();
 	}
 }
-

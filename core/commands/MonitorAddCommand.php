@@ -126,4 +126,3 @@ class MonitorAddCommand extends Command {
 		return array();
 	}
 }
-

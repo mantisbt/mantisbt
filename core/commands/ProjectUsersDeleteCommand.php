@@ -131,4 +131,3 @@ class ProjectUsersDeleteCommand extends Command {
 		return [];
 	}
 }
-

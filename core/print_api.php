@@ -2269,4 +2269,3 @@ function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_sele
 </select>
 <?php
 }
-

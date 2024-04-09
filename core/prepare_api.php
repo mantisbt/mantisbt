@@ -224,4 +224,3 @@ function prepare_avatar( $p_avatar, $p_class_prefix, $p_size ) {
 			prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size ) .
 			'</a></div>';
 }
-

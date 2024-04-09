@@ -105,4 +105,3 @@ abstract class MantisCoreBase extends PHPUnit\Framework\TestCase {
 	}
 
 }
-

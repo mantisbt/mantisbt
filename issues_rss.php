@@ -238,4 +238,3 @@ for( $i = 0; $i < $t_issues_count; $i++ ) {
 $t_version = '2.0';
 
 $t_rssfile->outputRSS( $t_version );
-

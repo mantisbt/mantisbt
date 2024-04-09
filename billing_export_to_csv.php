@@ -87,5 +87,3 @@ foreach( $t_billing_rows as $t_billing ) {
 	echo csv_escape_string( $t_billing['note'] );
 	echo $t_new_line;
 }
-
-

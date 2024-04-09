@@ -92,4 +92,3 @@ class IssueFileGetCommand extends Command {
 		return $t_matching_attachments;
 	}
 }
-

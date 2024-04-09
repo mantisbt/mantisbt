@@ -49,4 +49,3 @@ define( 'BILLING_INC_ALLOW', true );
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'billing_inc.php' );
 
 layout_page_end();
-

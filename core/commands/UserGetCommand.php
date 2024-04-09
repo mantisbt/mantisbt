@@ -173,4 +173,3 @@ class UserGetCommand extends Command {
 		);
 	}
 }
-

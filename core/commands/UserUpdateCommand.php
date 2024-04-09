@@ -344,4 +344,3 @@ class UserUpdateCommand extends Command {
 		db_query( $t_query, $t_query_params );
 	}
 }
-

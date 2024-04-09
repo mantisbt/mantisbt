@@ -321,4 +321,3 @@ class IssueNoteAddCommand extends Command {
 		}
 	}
 }
-

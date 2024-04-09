@@ -26,6 +26,7 @@ use PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
+use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
@@ -133,6 +134,15 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/whitespace/no_whitespace_in_blank_line.html
 		 */
 		NoWhitespaceInBlankLineFixer::class,
+
+		/**
+		 * Whitespace: Single blank line at eof
+		 *
+		 * A PHP file without end tag must always end with a single empty line feed.
+		 *
+		 * @see https://cs.symfony.com/doc/rules/whitespace/single_blank_line_at_eof.html
+		 */
+		SingleBlankLineAtEofFixer::class,
 
 		/**
 		 * Casing: Constant case: lower

@@ -109,4 +109,3 @@ class VersionDeleteCommand extends Command {
 		return [];
 	}
 }
-

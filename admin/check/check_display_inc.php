@@ -65,4 +65,3 @@ check_print_test_row(
 	config_get_global( 'bugnote_link_tag' ),
 	array( false => 'The value of the bugnote_link_tag option cannot be blank/null.' )
 );
-

@@ -134,4 +134,3 @@ print_manage_menu( 'manage_overview_page.php' );
 </div>
 <?php
 layout_page_end();
-

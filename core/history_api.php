@@ -1005,4 +1005,3 @@ function history_link_file_to_bugnote( $p_bug_id, $p_filename, $p_bugnote_id ) {
 
 	db_query( $t_query, array( (int)$p_bugnote_id, (int)$p_bug_id, $p_filename, FILE_ADDED, FILE_DELETED ) );
 }
-

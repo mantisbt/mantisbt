@@ -108,4 +108,3 @@ class IssueNoteDeleteCommand extends Command {
         );
 	}
 }
-

@@ -140,4 +140,3 @@ user_pref_set( $f_user_id, $t_prefs, ALL_PROJECTS );
 form_security_purge( 'account_prefs_update' );
 
 print_header_redirect( $f_redirect_url );
-

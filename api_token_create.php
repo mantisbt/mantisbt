@@ -73,4 +73,3 @@ layout_page_begin();
 </div>
 <?php
 layout_page_end();
-

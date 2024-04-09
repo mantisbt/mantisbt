@@ -150,4 +150,3 @@ class TagAttachCommand extends Command {
 		return [];
 	}
 }
-
