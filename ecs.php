@@ -24,6 +24,7 @@ use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
 use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer;
+use PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
@@ -180,5 +181,17 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/alias/no_mixed_echo_print.html
 		 */
 		NoMixedEchoPrintFixer::class,
+
+		/**
+		 * Semicolon: No empty statement
+		 *
+		 * Remove useless (semicolon) statements.
+		 *
+		 * "$a = 1;;"        > "$a = 1;"
+		 * "<?php echo 1;2;" > "<?php echo 1;"
+		 *
+		 * @see https://cs.symfony.com/doc/rules/semicolon/no_empty_statement.html
+		 */
+		NoEmptyStatementFixer::class,
 	] )
 ;

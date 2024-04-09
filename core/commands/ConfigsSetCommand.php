@@ -105,7 +105,7 @@ class ConfigsSetCommand extends Command {
 					'Config option not provided',
 					ERROR_EMPTY_FIELD,
 					array( 'option' ) );
-			};
+			}
 
 			$t_name = $t_config['option'];
 
