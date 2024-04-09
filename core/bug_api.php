@@ -1890,8 +1890,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 
 	if( array_key_exists( '_stats', $g_cache_bug[$c_bug_id] ) ) {
 		return $g_cache_bug[$c_bug_id]['_stats'];
-	}
-	else {
+	} else {
 		$t_stats = bug_get_bugnote_stats_array( array( $p_bug_id ) );
 		return $t_stats[$p_bug_id];
 	}

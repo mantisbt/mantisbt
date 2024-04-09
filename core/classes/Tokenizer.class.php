@@ -53,8 +53,7 @@ class Tokenizer
 		$t_code = 'return; ' . $p_code . ';';
 		try {
 			eval( $t_code );
-		}
-		catch( ParseError $e ) {
+		} catch( ParseError $e ) {
 			throw new Exception( $e->getMessage() );
 		}
 

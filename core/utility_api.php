@@ -309,8 +309,7 @@ function safe_unserialize( $p_string ) {
 	set_error_handler( 'error_convert_to_exception' );
 	try {
 		$t_data = unserialize( $p_string );
-	}
-	catch( ErrorException $e ) {
+	} catch( ErrorException $e ) {
 		restore_error_handler();
 		throw $e;
 	}

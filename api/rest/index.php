@@ -184,8 +184,7 @@ try {
 	event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $g_app ) ) );
 
 	$g_app->run();
-}
-catch( Throwable $e ) {
+} catch( Throwable $e ) {
 	header( 'Content-type: text/plain');
 	http_response_code( HTTP_STATUS_INTERNAL_SERVER_ERROR );
 	echo $e;

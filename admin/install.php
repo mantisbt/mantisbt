@@ -1077,8 +1077,7 @@ if( 3 == $t_install_state ) {
 				$t_is_integer = pgsql_get_column_type( $t_table, $t_column ) == 'integer';
 				$t_msg = "Column must be converted to INTEGER";
 				$t_exception_occured = false;
-			}
-			catch( Exception $e ) {
+			} catch( Exception $e ) {
 				$t_exception_occured = true;
 				$t_msg = $e->getMessage();
 			}

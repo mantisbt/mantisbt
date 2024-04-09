@@ -291,8 +291,7 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 		foreach( $p_filter_search['project_id'] as $t_id ) {
 			if( mci_has_readonly_access( $p_user_id, $t_id ) ) {
 				$t_project_id[] = $t_id;
-			}
-			else {
+			} else {
 				error_log( 'User: ' . $p_user_id . ' has not access right to project: ' . $t_id . '.' );
 			}
 		}
@@ -300,8 +299,7 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 		if( count( $t_project_id ) < 1 ) {
 			return mci_fault_access_denied( $p_user_id );
 		}
-	}
-	else {
+	} else {
 		if( !mci_has_readonly_access( $p_user_id, ALL_PROJECTS ) ) {
 			return mci_fault_access_denied( $p_user_id );
 		}
@@ -338,8 +336,7 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 			// if is set custom_field's id, use it primary
 			if( isset( $t_field['id'] ) ) {
 				$t_custom_field_id = $t_field['id'];
-			}
-			else {
+			} else {
 				$t_custom_field_id = custom_field_get_id_from_name( $t_field['name'] );
 			}
 

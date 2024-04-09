@@ -888,8 +888,7 @@ function helper_get_link_attributes( $p_return_array = true ) {
 			if( $t_html_make_links & LINKS_NOREFERRER ) {
 				$t_attributes['rel'] = 'noreferrer';
 				# noreferrer implies noopener, so no need to set the latter
-			}
-			elseif( $t_html_make_links & LINKS_NOOPENER ) {
+			} elseif( $t_html_make_links & LINKS_NOOPENER ) {
 				$t_attributes['rel'] = 'noopener';
 			}
 		}

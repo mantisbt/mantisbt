@@ -1156,8 +1156,7 @@ function plugin_menu_items( $p_event ) {
 			foreach( $t_plugin_items as $t_callback => $t_callback_items ) {
 				if( is_array( $t_callback_items ) ) {
 					$t_items = array_merge( $t_items, $t_callback_items );
-				}
-				else {
+				} else {
 					if( $t_callback_items !== null ) {
 						$t_items[] = $t_callback_items;
 					}

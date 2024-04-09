@@ -20,6 +20,7 @@ use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer;
+use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
 use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
 use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
@@ -193,5 +194,30 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/semicolon/no_empty_statement.html
 		 */
 		NoEmptyStatementFixer::class,
+
+		/**
+		 * Control structure: Continuation position: same line
+		 *
+		 * Configurable. Default is "same_line"
+		 *
+		 * <input>
+		 * if( $baz == true ) {
+		 *     echo "foo";
+		 * }
+		 * else {
+		 *     echo "bar";
+		 * }
+		 * </input>
+		 * <output>
+		 * if( $baz == true ) {
+		 *     echo "foo";
+		 * } else {
+		 *     echo "bar";
+		 * }
+		 * </output>
+		 *
+		 * @see https://cs.symfony.com/doc/rules/control_structure/control_structure_continuation_position.html
+		 */
+		ControlStructureContinuationPositionFixer::class,
 	] )
 ;

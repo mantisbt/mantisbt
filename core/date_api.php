@@ -91,8 +91,7 @@ function date_strtotime( $p_date_string ) {
 		# date is not in expected format, try with default formats
 		try {
 			$t_dt = new DateTimeImmutable( $p_date_string );
-		}
-		catch( Exception $e ) {
+		} catch( Exception $e ) {
 			throw new ClientException(
 				"Invalid date format '$p_date_string'",
 				ERROR_INVALID_DATE_FORMAT,

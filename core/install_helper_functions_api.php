@@ -493,8 +493,7 @@ function install_stored_filter_migrate() {
 				case 'v8':
 					try {
 						$t_filter_arr = safe_unserialize( $t_setting_arr[1] );
-					}
-					catch( ErrorException $e ) {
+					} catch( ErrorException $e ) {
 						$t_error = $e->getMessage();
 					}
 					break;
@@ -703,8 +702,7 @@ function install_check_config_serialization() {
 
 		try {
 			$t_config = safe_unserialize( $t_value );
-		}
-		catch( ErrorException $e ) {
+		} catch( ErrorException $e ) {
 			$t_row['error'] = $e->getMessage();
 			$t_errors[] = $t_row;
 			continue;
@@ -748,8 +746,7 @@ function install_check_token_serialization() {
 
 		try {
 			$t_token = safe_unserialize( $t_value );
-		}
-		catch( ErrorException $e ) {
+		} catch( ErrorException $e ) {
 			$t_row['error'] = $e->getMessage();
 			$t_errors[] = $t_row;
 			continue;

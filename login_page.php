@@ -196,8 +196,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 				$t_warnings[] = lang_get( 'error_database_version_out_of_date_2'
 				);
 				$t_upgrade_required = true;
-			}
-			else {
+			} else {
 				$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
 			}
 		}

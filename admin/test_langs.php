@@ -438,8 +438,7 @@ class LangCheckFile {
 							try {
 								/** @noinspection PhpComposerExtensionStubsInspection */
 								$t_dom->loadHTML( $t_text, LIBXML_HTML_NOIMPLIED );
-							}
-							catch( Exception $e ) {
+							} catch( Exception $e ) {
 								$this->logWarn( $e->getMessage() . " for string $t_current_var", $t_line );
 							}
 							restore_error_handler();

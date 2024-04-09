@@ -1443,8 +1443,7 @@ function email_send( EmailData $p_email_data ) {
 
 			if( is_blank( config_get( 'smtp_connection_mode' ) ) ) {
 				$t_mail->SMTPAutoTLS = false;
-			}
-			else {
+			} else {
 				$t_mail->SMTPSecure = config_get( 'smtp_connection_mode' );
 			}
 
@@ -1508,8 +1507,7 @@ function email_send( EmailData $p_email_data ) {
 
 	try {
 		$t_mail->addAddress( $t_recipient );
-	}
-	catch ( phpmailerException $e ) {
+	} catch ( phpmailerException $e ) {
 		log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
 		$t_mail->clearAllRecipients();
 		$t_mail->clearAttachments();
@@ -1555,8 +1553,7 @@ function email_send( EmailData $p_email_data ) {
 			# We should never get here, as an exception is thrown after failures
 			log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
 		}
-	}
-	catch ( phpmailerException $e ) {
+	} catch ( phpmailerException $e ) {
 		log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
 		$t_success = false;
 	}
