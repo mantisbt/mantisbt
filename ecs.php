@@ -16,18 +16,35 @@
 
 declare( strict_types = 1 );
 
+use PhpCsFixer\Fixer\Basic\EncodingFixer;
+use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
+use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
+use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
+use PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer;
+use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
+use Symplify\EasyCodingStandard\ValueObject\Option;
+
+/**
+ * MantisBT coding standards
+ *
+ * @see https://mantisbt.org/wiki/doku.php/mantisbt:coding_guidelines
+ */
 
 return ECSConfig::configure()
-    ->withPaths([
+    ->withPaths( [
         __DIR__ . '/',
-    ])
-	->withSkip([
+    ] )
+	->withSkip( [
 		__DIR__ . '/build',
 		__DIR__ . '/config',
 		__DIR__ . '/library',
-	])
-    ->withRules([
+	] )
+	->withSpacing(
+		Option::INDENTATION_TAB,
+		"\n",
+	)
+    ->withRules( [
 		/**
 		 * Basic: Encoding
 		 *
@@ -35,7 +52,7 @@ return ECSConfig::configure()
 		 *
 		 * @see https://cs.symfony.com/doc/rules/basic/encoding.html
 		 */
-		\PhpCsFixer\Fixer\Basic\EncodingFixer::class,
+		EncodingFixer::class,
 
 		/**
 		 * Whitespace: Line encoding
@@ -44,60 +61,7 @@ return ECSConfig::configure()
 		 *
 		 * @see https://cs.symfony.com/doc/rules/whitespace/line_ending.html
 		 */
-		\PhpCsFixer\Fixer\Whitespace\LineEndingFixer::class,
-
-		/**
-		 * Whitespace: No trailing whitespaces
-		 *
-		 * Remove trailing whitespace at the end of non-blank lines.
-		 *
-		 * "$foo = 'bar'···" > "$foo = 'bar'"
-		 *
-		 * @see https://cs.symfony.com/doc/rules/whitespace/no_trailing_whitespace.html
-		 */
-		\PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer::class,
-
-		/**
-		 * Whitespace: Single blank line at eof
-		 *
-		 * A PHP file without end tag must always end with a single empty line feed.
-		 *
-		 * @see https://cs.symfony.com/doc/rules/whitespace/single_blank_line_at_eof.html
-		 */
-		\PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::class,
-
-		/**
-		 * Whitespaces: No whitespace in blank lines
-		 *
-		 * Remove trailing whitespace at the end of blank lines.
-		 *
-		 * <input>
-		 * ···
-		 * $a = 1;"
-		 * </input>
-		 * <output>
-		 *
-		 *  $a = 1;"
-		 * </output>
-		 *
-		 * @see https://cs.symfony.com/doc/rules/whitespace/no_whitespace_in_blank_line.html
-		 */
-		\PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer::class,
-
-		/**
-		 * String: Single quotes
-		 *
-		 * Convert double quotes to single quotes for simple strings.
-		 *
-		 * Configurable. Default is keep double-quoted strings if they contain a
-		 * single-quoted string.
-		 *
-		 * $a = "sample"                       > $a = 'sample'
-		 * $b = "sample with 'single-quotes'"  > $b = "sample with 'single-quotes'"
-		 *
-		 * @see https://cs.symfony.com/doc/rules/string_notation/single_quote.html
-		 */
-		\PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer::class,
+		LineEndingFixer::class,
 
 		/**
 		 * PHP tag: Full opening tag
@@ -106,7 +70,16 @@ return ECSConfig::configure()
 		 *
 		 * @see https://cs.symfony.com/doc/rules/php_tag/full_opening_tag.html
 		 */
-		\PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer::class,
+		FullOpeningTagFixer::class,
+
+		/**
+		 * PHP tag: Linebreak after opening tag
+		 *
+		 * Ensure there is no code on the same line as the PHP open tag.
+		 *
+		 * @see https://cs.symfony.com/doc/rules/php_tag/linebreak_after_opening_tag.html
+		 */
+		LinebreakAfterOpeningTagFixer::class,
 
 		/**
 		 * PHP tag: Echo tag syntax
@@ -117,7 +90,7 @@ return ECSConfig::configure()
 		 *
 		 * @see https://cs.symfony.com/doc/rules/php_tag/echo_tag_syntax.html
 		 */
-		\PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer::class,
+		EchoTagSyntaxFixer::class,
 
 		/**
 		 * PHP tag: No closing tag
@@ -126,44 +99,6 @@ return ECSConfig::configure()
 		 *
 		 * @see https://cs.symfony.com/doc/rules/php_tag/no_closing_tag.html
 		 */
-		\PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer::class,
-
-		/**
-		 * Casing: Constant case: lower
-		 *
-		 * The PHP constants true, false, and null MUST be written
-		 * using the correct casing.
-		 *
-		 * Configurable. Default is "lower"
-		 *
-		 * "$a = FALse" > "a = false"
-		 *
-		 * @see https://cs.symfony.com/doc/rules/casing/constant_case.html
-		 */
-		\PhpCsFixer\Fixer\Casing\ConstantCaseFixer::class,
-
-		/**
-		 * Casing: Lowercase keywords
-		 *
-		 * PHP keywords MUST be in lower case.
-		 *
-		 * "FOREACH( $a AS $B )" > "foreach( $a as $B )"
-		 *
-		 * @see https://cs.symfony.com/doc/rules/casing/lowercase_keywords.html
-		 */
-		\PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer::class,
-	])
-
-	/**
-	 * Whitespace: Spaces inside parentheses
-	 *
-	 * "function foo($bar, $baz)" > "function foo( $bar, $baz )"
-	 * "if($bar === $baz)"        > "if( $bar === $baz )"
-	 * "foo( )"                   > "foo()"
-	 *
-	 * @see https://cs.symfony.com/doc/rules/whitespace/spaces_inside_parentheses.html
-	 */
-	->withConfiguredRule(\PhpCsFixer\Fixer\Whitespace\SpacesInsideParenthesesFixer::class, [
-		'space' => 'single',
-	])
+		NoClosingTagFixer::class,
+	] )
 ;

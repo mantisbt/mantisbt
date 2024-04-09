@@ -39,5 +39,9 @@
         "platform": {
             "php": "7.4.33"
         }
+    },
+    "scripts": {
+        "check-cs": "vendor/bin/ecs check --ansi",
+        "fix-cs": "vendor/bin/ecs check --fix --ansi"
     }
 }
