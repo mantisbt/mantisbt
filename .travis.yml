@@ -10,6 +10,7 @@ branches:
 jobs:
   include:
     - name: Coding Standards
+      php: 8.3
       script:
         - composer check-cs
   allow_failures:
