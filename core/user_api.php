@@ -670,7 +670,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string, realname )
 				  VALUES
-				    ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param()  . ',
+				    ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',
 				     ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
 	db_query( $t_query, array( $p_username, $p_email, $t_password, db_now(), db_now(), $c_enabled, (int)$p_access_level, 0, $t_cookie_string, $p_realname ) );
 
@@ -1845,7 +1845,7 @@ function user_set_fields( $p_user_id, array $p_fields ) {
 
 	foreach ( $p_fields as $t_field_name => $t_field_value ) {
 		$t_query .= ( empty( $t_parameters ) ? ' SET ' :  ', ' )
-			. $t_field_name. '=' . db_param();
+			. $t_field_name . '=' . db_param();
 		$t_parameters[] = $t_field_value;
 	}
 

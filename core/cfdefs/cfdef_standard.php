@@ -375,9 +375,9 @@ function cfdef_input_list( array $p_field_def, $p_custom_field_value, $p_require
 	}
 
 	if( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
-		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple"' . $p_required .'>';
+		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple"' . $p_required . '>';
 	} else {
-		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '"' . $p_required .'>';
+		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '"' . $p_required . '>';
 	}
 
 	$t_selected_values = explode( '|', $p_custom_field_value );
@@ -459,7 +459,7 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value, $p_requ
 			, '" name="custom_field_', $p_field_def['id'], '" ', $p_required;
 	if( $p_field_def['length_max'] > 0 ) {
 		echo ' maxlength="' . $p_field_def['length_max'] . '"'
-				, ' size="' .  min( 80, $p_field_def['length_max'] ) . '"';
+				, ' size="' . min( 80, $p_field_def['length_max'] ) . '"';
 	} else {
 		echo ' maxlength="255" size="80"';
 	}
@@ -476,7 +476,7 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value, $p_requ
 		}
 		echo ' pattern="' . string_attribute( $t_cf_regex ) . '"';
 	}
-	echo ' value="' . string_attribute( $p_custom_field_value ) .'" />';
+	echo ' value="' . string_attribute( $p_custom_field_value ) . '" />';
 }
 
 /**

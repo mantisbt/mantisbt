@@ -1306,7 +1306,7 @@ function mci_fault_login_failed() {
 function mci_fault_access_denied($p_user_id = 0, $p_detail = '' ) {
 	if( $p_user_id ) {
 		$t_user_name = user_get_name( $p_user_id );
-		$t_reason = 'Access denied for user '. $t_user_name . '.';
+		$t_reason = 'Access denied for user ' . $t_user_name . '.';
 	} else {
 		$t_reason = 'Access denied';
 	}

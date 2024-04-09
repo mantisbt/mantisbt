@@ -188,7 +188,7 @@ if( $t_sponsor_count === 0 ) {
 		# choose color based on status
 		$t_status_css = html_get_status_css_bg( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 
-		echo '<tr class="' . $t_status_css .  '">';
+		echo '<tr class="' . $t_status_css . '">';
 		echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
 		echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
 		echo '<td>' . $t_released_label . '&#160;</td>';
@@ -317,7 +317,7 @@ if( $t_sponsor_count === 0 ) {
 		# choose color based on status
 		$t_status_css = html_get_status_css_bg( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 
-		echo '<tr class="' . $t_status_css .  '">';
+		echo '<tr class="' . $t_status_css . '">';
 		echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
 		echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
 		echo '<td>' . $t_released_label . '&#160;</td>';

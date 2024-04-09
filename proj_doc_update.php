@@ -122,7 +122,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 	}
 	$t_query = 'UPDATE {project_file}
 		SET title=' . db_param() . ', description=' . db_param() . ', date_added=' . db_param() . ',
-			filename=' . db_param() . ', filesize=' . db_param() . ', file_type=' .db_param() . ', content=' .db_param() . '
+			filename=' . db_param() . ', filesize=' . db_param() . ', file_type=' . db_param() . ', content=' . db_param() . '
 			WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $f_title, $f_description, db_now(), $t_file_name, $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
 } else {

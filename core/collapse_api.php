@@ -130,7 +130,7 @@ function collapse_icon( $p_name ) {
 	} else {
 		$t_icon = 'fa-chevron-down';
 		$t_alt = '+';
-		$t_id = $p_name. '_closed_link';
+		$t_id = $p_name . '_closed_link';
 	}
 
 	echo '&nbsp;&nbsp;<a id="', $t_id, '" class="collapse-link noprint">';

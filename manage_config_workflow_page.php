@@ -176,16 +176,16 @@ function section_begin( $p_section_name ) {
 	echo "\t<table  class=\"table table-striped table-bordered table-condensed\">\n";
 	echo "\t\t<thead>\n";
 	echo "\t\t" . '<tr>' . "\n";
-	echo "\t\t\t" . '<th class="bold" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
+	echo "\t\t\t" . '<th class="bold" rowspan="2">' . lang_get( 'current_status' ) . '</th>' . "\n";
 	echo "\t\t\t" . '<th class="bold" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
 		. lang_get( 'next_status' ) . '</th>';
-	echo "\n\t\t" . '</tr>'. "\n";
+	echo "\n\t\t" . '</tr>' . "\n";
 	echo "\t\t" . '<tr>' . "\n";
 
 	foreach( $t_enum_statuses as $t_status ) {
 		echo "\t\t\t" . '<th class="bold" style="text-align:center">&#160;'
 			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) )
-			. '&#160;</th>' ."\n";
+			. '&#160;</th>' . "\n";
 	}
 
 	echo "\t\t\t" . '<th class="bold" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</th>' . "\n";
@@ -202,7 +202,7 @@ function section_begin( $p_section_name ) {
 function capability_row( $p_from_status ) {
 	global $g_file_workflow, $g_global_workflow, $g_project_workflow, $g_can_change_workflow;
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	echo "\t\t" .'<tr><td>' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_from_status ) ) . '</td>' . "\n";
+	echo "\t\t" . '<tr><td>' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_from_status ) ) . '</td>' . "\n";
 	foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
 		echo show_flag( $p_from_status, $t_to_status_id );
 	}
@@ -504,7 +504,7 @@ echo '<div class="well">' . "\n";
 echo '<p class="bold">' . icon_get( 'fa-info-circle' ) . " $t_project_title</p>\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $t_project ) {
-	echo '<span class="' . COLOR_PROJECT . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="' . COLOR_PROJECT . '">' . lang_get( 'colour_project' ) . '</span><br />';
 }
 echo '<span class="' . COLOR_GLOBAL . '">' . lang_get( 'colour_global' ) . '</span></p>';
 echo '</div>' . "\n";

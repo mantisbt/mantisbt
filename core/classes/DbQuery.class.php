@@ -714,7 +714,7 @@ class DbQuery {
 					$t_bind_num = $t_matches['bind_name'];
 
 					$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
-					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name']. $t_matches['after_var'];
+					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name'] . $t_matches['after_var'];
 
 					if( $this->db_param_array[$t_bind_num] === '' ) {
 						unset( $this->db_param_array[$t_bind_num] );

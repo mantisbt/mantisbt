@@ -88,7 +88,7 @@ layout_page_begin();
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="widget-toolbox padding-8 clearfix">
-			<?php print_link_button( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ),
+			<?php print_link_button( 'tag_view_page.php?tag_id=' . $f_tag_id, lang_get( 'tag_update_return' ),
 				'btn-sm pull-right' ); ?>
 		</div>
 		<div class="form-container">

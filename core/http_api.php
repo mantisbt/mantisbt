@@ -291,7 +291,7 @@ function http_build_url( array $p_url ) {
 	return
 		  ( isset( $p_url['scheme'] )   ? $p_url['scheme'] . '://' : '' )
 		. ( isset( $p_url['user'] )
-			? $p_url['user'] . ( isset( $p_url['pass'] ) ? ':' . $p_url['pass'] : '' ) .'@'
+			? $p_url['user'] . ( isset( $p_url['pass'] ) ? ':' . $p_url['pass'] : '' ) . '@'
 			: ''
 		  )
 		. ( isset( $p_url['host'] )     ? $p_url['host'] : '' )

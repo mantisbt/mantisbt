@@ -23,6 +23,7 @@ use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
+use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
 use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
 use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
@@ -255,5 +256,16 @@ return ECSConfig::configure()
 	->withConfiguredRule(BracesPositionFixer::class, [
 		'classes_opening_brace' => 'same_line',
 		'functions_opening_brace' => 'same_line',
+	])
+
+	/**
+	 * Operator: Concat spaces
+	 *
+	 * Spacing to apply around concatenation operator.
+	 *
+	 * @see https://cs.symfony.com/doc/rules/operator/concat_space.html
+	 */
+	->withConfiguredRule(ConcatSpaceFixer::class, [
+		'spacing' => 'one',
 	])
 ;

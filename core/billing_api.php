@@ -81,7 +81,7 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 		}
 	} else {
 		$t_project_ids = user_get_all_accessible_projects();
-		$t_project_where = ' AND b.project_id in (' . implode( ', ', $t_project_ids ). ')';
+		$t_project_where = ' AND b.project_id in (' . implode( ', ', $t_project_ids ) . ')';
 	}
 
 	if( !is_blank( $c_from ) ) {

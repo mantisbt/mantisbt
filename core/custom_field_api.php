@@ -638,7 +638,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 			case 'access_level_rw':
 			case 'length_min':
 			case 'length_max':
-				$t_update .= $t_field  . '=' . db_param() . ', ';
+				$t_update .= $t_field . '=' . db_param() . ', ';
 				$t_params[] = (int)$t_value;
 				break;
 			case 'filter_by':
@@ -736,7 +736,7 @@ function custom_field_destroy( $p_field_id ) {
 
 	# delete the definition
 	db_param_push();
-	$t_query = 'DELETE FROM {custom_field} WHERE id=' .  db_param();
+	$t_query = 'DELETE FROM {custom_field} WHERE id=' . db_param();
 	db_query( $t_query, array( $p_field_id ) );
 
 	custom_field_clear_cache( $p_field_id );

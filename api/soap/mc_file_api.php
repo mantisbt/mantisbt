@@ -206,7 +206,7 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			$t_query = 'SELECT * FROM {project_file} WHERE id=' . db_param();
 			break;
 		default:
-			return ApiObjectFactory::faultServerError( 'Invalid file type '. $p_type . ' .' );
+			return ApiObjectFactory::faultServerError( 'Invalid file type ' . $p_type . ' .' );
 	}
 
 	$t_result = db_query( $t_query, array( $p_file_id ) );

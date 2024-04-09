@@ -580,7 +580,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 
 		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
 		if( 0 < $t_stats['open'] ) {
-			$t_bugs_open = '<a class="subtle" href="' . $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_resolved_status . '">'. $t_stats['open'] . '</a>';
+			$t_bugs_open = '<a class="subtle" href="' . $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_resolved_status . '">' . $t_stats['open'] . '</a>';
 		} else {
 			$t_bugs_open = 0;
 		}

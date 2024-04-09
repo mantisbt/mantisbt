@@ -238,7 +238,7 @@ $c_filter['my_comments'] = array(
 	),
 );
 
-$t_url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID . '=' . META_FILTER_MYSELF . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
 # Improve performance by caching category data in one pass
@@ -274,7 +274,7 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
 			<?php print_icon( 'fa-list-alt', 'ace-icon' ); ?>
 <?php
 #-- Box title
-$t_box_url = html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' . $t_url_link_parameters[$t_box_title];
+$t_box_url = html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ) . '&' . $t_url_link_parameters[$t_box_title];
 print_link( $t_box_url, $t_box_title_label, false, 'white' );
 
 # -- Viewing range info

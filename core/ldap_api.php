@@ -503,7 +503,7 @@ function ldap_simulation_email_from_username( $p_username ) {
 		return '';
 	}
 
-	log_event( LOG_LDAP, 'ldap_simulation_email_from_username: user \'' . $p_username . '\' has email \'' . $t_user['email'] .'\'.' );
+	log_event( LOG_LDAP, 'ldap_simulation_email_from_username: user \'' . $p_username . '\' has email \'' . $t_user['email'] . '\'.' );
 	return $t_user['email'];
 }
 

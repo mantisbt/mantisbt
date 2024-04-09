@@ -44,7 +44,7 @@ $t_regex = '/^'
 	# File must start with plugin name, ending with /
 	. '([a-zA-Z0-9_-]+)\/'
 	# Path must not start with a '.' to avoid arbitrary includes higher in the file system
-	. '('. '(?:(?:[a-zA-Z0-9_-][.a-zA-Z0-9_-]*\/)*)'
+	. '(' . '(?:(?:[a-zA-Z0-9_-][.a-zA-Z0-9_-]*\/)*)'
 	# Same goes for filename
 	. '(?:[a-zA-Z0-9_-][.a-zA-Z0-9_-]*)'
 	. ')$/';

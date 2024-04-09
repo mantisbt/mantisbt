@@ -84,7 +84,7 @@ layout_page_begin();
 <div class="widget-body">
 <div class="widget-main no-padding">
 	<div class="widget-toolbox padding-8 clearfix">
-		<?php print_link_button( 'search.php?tag_string='.urlencode($t_tag_row['name']),
+		<?php print_link_button( 'search.php?tag_string=' . urlencode($t_tag_row['name']),
 			sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ),
 			'btn-sm pull-right'); ?>
 	</div>
@@ -144,7 +144,7 @@ layout_page_begin();
 			$t_name = string_display_line( $t_tag['name'] );
 			$t_description = string_display_line( $t_tag['description'] );
 			$t_count = $t_tag['count'];
-			$t_link = string_html_specialchars( 'search.php?tag_string='.urlencode( '+' . $t_tag_row['name'] . config_get( 'tag_separator' ) . '+' . $t_name ) );
+			$t_link = string_html_specialchars( 'search.php?tag_string=' . urlencode( '+' . $t_tag_row['name'] . config_get( 'tag_separator' ) . '+' . $t_name ) );
 			$t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ); ?>
 			<div class="col-md-3 col-xs-6 no-padding"><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></a></div>
 			<div class="col-md-9 col-xs-6 no-padding"><a href="<?php echo $t_link; ?>" class="btn btn-xs btn-primary btn-white btn-round"><?php echo $t_label; ?></a></div>

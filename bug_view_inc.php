@@ -196,11 +196,11 @@ if( $t_bugslist ) {
 	$t_index = array_search( $f_issue_id, $t_bugslist );
 	if( false !== $t_index ) {
 		if( isset( $t_bugslist[$t_index-1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+			print_small_button( 'view.php?id=' . $t_bugslist[$t_index-1], '&lt;&lt;' );
 		}
 
 		if( isset( $t_bugslist[$t_index+1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
+			print_small_button( 'view.php?id=' . $t_bugslist[$t_index+1], '&gt;&gt;' );
 		}
 	}
 }

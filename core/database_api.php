@@ -1088,7 +1088,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 				$t_bind_num = $t_matches['bind_name'];
 
 				$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
-				$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name']. $t_matches['after_var'];
+				$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name'] . $t_matches['after_var'];
 
 				if( $p_arr_parms[$t_bind_num] === '' ) {
 					for( $n = $t_bind_num + 1; $n < count( $p_arr_parms ); $n++ ) {

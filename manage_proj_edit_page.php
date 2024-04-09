@@ -1033,7 +1033,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 									<?php echo lang_get( 'remove_all_link' ) ?>
 								</button>
 								<button name="btn-undo-remove-all" class="hidden btn btn-primary btn-white btn-round">
-									<?php echo lang_get( 'undo' ). ': ', lang_get( 'remove_all_link' ) ?>
+									<?php echo lang_get( 'undo' ) . ': ', lang_get( 'remove_all_link' ) ?>
 								</button>
 							</div>
 						</div>

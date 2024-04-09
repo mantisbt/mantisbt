@@ -91,9 +91,9 @@ foreach ( $t_rows as $t_row ) {
 # type = 0 and field=status are status changes
 # type = 1 are new bugs
 $t_select = 'SELECT bug_id, type, field_name, old_value, new_value, date_modified FROM {bug_history}
-	WHERE bug_id in (' . implode( ',', $t_bug ) . ') and '.
-		'( (type=' . NORMAL_TYPE . ' and field_name=\'category\') or '.
-			'(type=' . NORMAL_TYPE . ' and field_name=\'status\') or type='.NEW_BUG.' ) and '.
+	WHERE bug_id in (' . implode( ',', $t_bug ) . ') and ' .
+		'( (type=' . NORMAL_TYPE . ' and field_name=\'category\') or ' .
+			'(type=' . NORMAL_TYPE . ' and field_name=\'status\') or type=' . NEW_BUG . ' ) and ' .
 			'date_modified >= ' . db_param() .
 		' order by date_modified DESC';
 $t_result = db_query( $t_select, array( $t_start ) );
@@ -194,13 +194,13 @@ echo '<div class="space-10"></div>';
 echo '<div class="table-responsive">';
 echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
 foreach ( $t_category as $t_cat ) {
-	echo '<th>'.$t_cat.'</th>';
+	echo '<th>' . $t_cat . '</th>';
 }
 echo '</tr>';
 for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
-	echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
+	echo '<tr class="row-' . ($t_ptr%2+1) . '"><td>' . $t_ptr . ' (' . date( $t_date_format, $t_marker[$t_ptr] ) . ')' . '</td>';
 	foreach ( $t_category as $t_cat ) {
-		echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
+		echo '<td>' . (isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0) . '</td>';
 	}
 	echo '</tr>';
 }

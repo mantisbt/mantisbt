@@ -337,7 +337,7 @@ class BugFilterQuery extends DbQuery {
 	protected function helper_string_query_inner() {
 		$t_from_string = ' FROM ' . implode( ', ', $this->parts_from );
 		$t_join_string = count( $this->parts_join ) > 0 ? ' ' . implode( ' ', $this->parts_join ) : '';
-		$t_where_string = ' WHERE '. implode( ' AND ', $this->fixed_where );
+		$t_where_string = ' WHERE ' . implode( ' AND ', $this->fixed_where );
 		if( count( $this->parts_where ) > 0 ) {
 			$t_where_string .= ' AND ( ';
 			$t_where_string .= implode( $this->filter_operator, $this->parts_where );
@@ -1814,7 +1814,7 @@ class BugFilterQuery extends DbQuery {
 					$this->add_order( 'due_date_sort_null ASC' );
 				}
 				# main sort clause for due date
-				$this->add_order( $t_sort_col . ' ' .$c_dir );
+				$this->add_order( $t_sort_col . ' ' . $c_dir );
 			}
 		}
 

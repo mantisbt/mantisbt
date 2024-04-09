@@ -122,7 +122,7 @@ print_doc_menu();
 	</th>
 	<td>
 		<?php
-			$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
+			$t_href = '<a href="file_download.php?file_id=' . $v_id . '&amp;type=doc">';
 			echo $t_href;
 			print_file_icon( $v_filename );
 			echo '</a>&#160;' . $t_href . string_html_specialchars( file_get_display_name( $v_filename ) ) . '</a>';

@@ -247,7 +247,7 @@ function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = n
 	}
 
 	db_param_push();
-	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . ', status=' . db_param() .'
+	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . ', status=' . db_param() . '
 				  WHERE id=' . db_param();
 	db_query( $t_query, array( $p_name, $p_assigned_to , $p_status, $p_category_id ) );
 

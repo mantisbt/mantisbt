@@ -772,7 +772,7 @@ if( !$g_database_upgrade ) {
 		);
 		echo "\n&nbsp;";
 		if( $t_key != 'db_table_suffix' ) {
-			$t_id_sample = $t_key. '_sample';
+			$t_id_sample = $t_key . '_sample';
 			echo '<label for="' . $t_id_sample . '">Sample table name:</label>';
 			echo "\n", '<input id="' . $t_id_sample . '" type="text" size="40" disabled>';
 		} else {
@@ -995,7 +995,7 @@ if( 3 == $t_install_state ) {
 			echo '</div>';
 
 			echo '<pre>';
-			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script". PHP_EOL;
+			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script" . PHP_EOL;
 			echo "-- " . date("c") . PHP_EOL . PHP_EOL;
 		}
 
@@ -1223,7 +1223,7 @@ if( 3 == $t_install_state ) {
 							}
 						}
 					}
-					print_test_result( BAD, true, $t_all_sql  . $g_db->ErrorMsg() );
+					print_test_result( BAD, true, $t_all_sql . $g_db->ErrorMsg() );
 				}
 				echo '</tr>';
 			}

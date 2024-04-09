@@ -205,7 +205,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	}
 
 	# build an appropriate error string
-	$t_error_location = 'in \'' . $p_file .'\' line ' . $p_line;
+	$t_error_location = 'in \'' . $p_file . '\' line ' . $p_line;
 	$t_error_description = '\'' . $p_error . '\' ' . $t_error_location;
 	switch( $p_type ) {
 		case E_WARNING:
@@ -271,7 +271,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 		default:
 			# shouldn't happen, just display the error just in case
 			$t_error_type = 'UNHANDLED ERROR TYPE (' .
-				'<a href="http://php.net/errorfunc.constants">' . $p_type. '</a>)';
+				'<a href="http://php.net/errorfunc.constants">' . $p_type . '</a>)';
 			$t_error_description = $p_error . ' (' . $t_error_location . ')';
 	}
 

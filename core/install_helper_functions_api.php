@@ -290,7 +290,7 @@ function install_date_migrate( array $p_data ) {
 				$t_sql .= ' OR ';
 			}
 
-			$t_sql .= $t_new_column_name. ' = 1';
+			$t_sql .= $t_new_column_name . ' = 1';
 			array_push( $t_pairs, "$t_new_column_name = :$t_new_column_name" ) ;
 		}
 		$t_update_columns = implode( ',', $t_pairs );

@@ -105,7 +105,7 @@ $t_show_disabled_filter = '&amp;showdisabled=' . $c_show_disabled;
 
 # set cookie values for hide inactive, sort by, dir and show disabled
 if( $f_save ) {
-	$t_manage_string = $c_hide_inactive.':'.$c_sort.':'.$c_dir.':'.$c_show_disabled;
+	$t_manage_string = $c_hide_inactive . ':' . $c_sort . ':' . $c_dir . ':' . $c_show_disabled;
 	gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
 }
 

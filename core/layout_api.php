@@ -1181,7 +1181,7 @@ function layout_footer() {
 		echo '<div class="col-md-6 col-xs-12">' . "\n";
 		echo '<div class="pull-right" id="powered-by-mantisbt-logo">' . "\n";
 		$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
-		echo '<a href="https://www.mantisbt.org" '.
+		echo '<a href="https://www.mantisbt.org" ' .
 			'title="Mantis Bug Tracker: a free and open source web based bug tracking system.">' .
 			'<img src="' . $t_mantisbt_logo_url . '" width="102" height="35" ' .
 			'alt="Powered by Mantis Bug Tracker: a free and open source web based bug tracking system." />' .

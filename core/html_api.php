@@ -470,7 +470,7 @@ function html_operation_confirmation( array $p_buttons = null, $p_message = '', 
 	} else {
 		$t_message = $p_message;
 	}
-	echo '<p class="bold bigger-110">' . $t_message  . '</p>';
+	echo '<p class="bold bigger-110">' . $t_message . '</p>';
 
 	# Print buttons
 	if( !empty( $p_buttons ) ) {
@@ -631,13 +631,13 @@ function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null 
 	foreach( $p_menu_items as $t_item ) {
 		$t_active = $p_current_page && strpos( $t_item['url'], $p_current_page ) !== false ? 'active' : '';
 
-		echo '<li class="' . $t_active .  '">';
+		echo '<li class="' . $t_active . '">';
 		if( $t_item['label'] == '' ) {
-			echo '<a href="'. lang_get_defaulted( $t_item['url'] ) .'">';
+			echo '<a href="' . lang_get_defaulted( $t_item['url'] ) . '">';
 			print_icon( 'fa-info-circle', 'blue ace-icon' );
 			echo '</a>';
 		} else {
-			echo '<a href="'. helper_mantis_url( $t_item['url'] ) .'">' . lang_get_defaulted( $t_item['label'] ) . '</a>';
+			echo '<a href="' . helper_mantis_url( $t_item['url'] ) . '">' . lang_get_defaulted( $t_item['label'] ) . '</a>';
 		}
 		echo '</li>' . "\n";
 	}
@@ -830,7 +830,7 @@ function print_manage_config_menu( $p_page = '' ) {
 
 	foreach ( $t_pages as $t_page ) {
 		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
-		echo '<a class="btn btn-sm btn-white btn-primary ' . $t_active . '" href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
+		echo '<a class="btn btn-sm btn-white btn-primary ' . $t_active . '" href="' . helper_mantis_url( $t_page['url'] ) . '">' . "\n";
 		echo lang_get_defaulted( $t_page['label'] );
 		echo '</a>' . "\n";
 	}

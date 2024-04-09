@@ -457,17 +457,17 @@ function version_update( VersionData $p_version_info ) {
 
 		db_param_push();
 		$t_query = 'UPDATE {bug_history}
-			SET old_value='.db_param().'
+			SET old_value=' . db_param() . '
 			WHERE field_name IN (\'version\',\'fixed_in_version\',\'target_version\')
-				AND old_value='.db_param().'
+				AND old_value=' . db_param() . '
 				AND bug_id IN (SELECT id FROM {bug} WHERE project_id IN ( ' . $t_project_list . ' ))';
 		db_query( $t_query, array( $c_version_name, $c_old_version_name ) );
 
 		db_param_push();
 		$t_query = 'UPDATE {bug_history}
-			SET new_value='.db_param().'
+			SET new_value=' . db_param() . '
 			WHERE field_name IN (\'version\',\'fixed_in_version\',\'target_version\')
-				AND new_value='.db_param().'
+				AND new_value=' . db_param() . '
 				AND bug_id IN (SELECT id FROM {bug} WHERE project_id IN ( ' . $t_project_list . ' ))';
 		db_query( $t_query, array( $c_version_name, $c_old_version_name ) );
 
