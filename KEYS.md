@@ -63,10 +63,9 @@ To append your Public Key to this file, follow the instructions below.
     ) >> KEYS.md
     ```
 
-Please also submit your key on a **public keyserver**, preferably one that is part 
-of the [SKS pool](https://sks-keyservers.net/), such as:
-- http://keys.gnupg.net/
+Please also submit your key on a **public keyserver**, such as:
 - https://keyserver.ubuntu.com/
+- https://keys.openpgp.org
 - https://pgp.mit.edu/
 
 
