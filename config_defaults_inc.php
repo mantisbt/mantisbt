@@ -1304,6 +1304,18 @@ $g_show_changelog_dates = ON;
  */
 $g_show_roadmap_dates = ON;
 
+/**
+ * Customizable toolbar buttons
+ * @global array $g_toolbar_buttons
+ */
+$g_toolbar_buttons =array(array(
+    'any_project_level_threshold' => DEVELOPER,
+    'url'       => 'https://github.com/mantisbt',
+    'title'     => 'GitHub',
+    'icon'      => 'fa-code-fork',
+    'label'     => 'GitHub'
+));
+
 ##########################
 # MantisBT Time Settings #
 ##########################

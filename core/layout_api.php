@@ -579,6 +579,22 @@ function layout_navbar_button_bar() {
 		echo '</a>';
 	}
 
+	$t_toolbar_buttons = config_get_global('toolbar_buttons');
+	foreach( $t_toolbar_buttons as $t_button ) {
+		if ( array_key_exists('any_project_level_threshold', $t_button) && !access_has_any_project_level( $t_button['any_project_level_threshold'] ) ) {
+			continue;
+		}
+		$t_title = $t_button['title'];
+		$t_label = $t_button['label'];
+		$t_html_title = empty( $t_title ) ? '' : ' title="' . string_html_specialchars( $t_title ) . '"';
+		echo '<a class="btn btn-primary btn-sm" href="' . $t_button['url'] . '"' . $t_html_title . '>';
+		print_icon( $t_button['icon'] );
+		if ( !empty( $t_label ) ) {
+			echo ' ' . string_html_specialchars( $t_label );
+		}
+		echo '</a>';
+	}
+
 	echo '</div>';
 	echo '</li>';
 }
