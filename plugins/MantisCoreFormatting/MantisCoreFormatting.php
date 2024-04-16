@@ -89,7 +89,10 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			'process_text'		=> ON,
 			'process_urls'		=> ON,
 			'process_buglinks'	=> ON,
-			'process_markdown'	=> OFF
+			'process_markdown'	=> OFF,
+			'syntax_highlighting' => OFF,
+			'syntax_highlighting_theme' => 'prism.min.css',
+			'syntax_highlighting_plugins' => []
 		);
 	}
 
