@@ -1105,16 +1105,20 @@ function auth_reauthentication_expiry() {
 }
 
 /**
- * Check for authentication tokens, and redirect to login page for
- * re-authentication. Currently, if using BASIC or HTTP authentication methods,
- * or if logged in anonymously, this function will always "authenticate" the
- * user (do nothing).
+ * Check for authentication tokens, and redirect to login page for re-authentication.
+ *
+ * Currently, if using BASIC or HTTP authentication methods, or if logged in
+ * anonymously, this function will always "authenticate" the user (do nothing).
+ *
+ * @param string $p_return_page The page to redirect to after authentication.
+ *                              If not specified, will redirect to the current
+ *                              page (REQUEST_URI).
  *
  * @return void
- * @access public
  * @throws ClientException
+ * @access public
  */
-function auth_reauthenticate() {
+function auth_reauthenticate( $p_return_page = '' ) {
 	$t_login_method = config_get_global( 'login_method' );
 	if( !auth_reauthentication_enabled() || BASIC_AUTH == $t_login_method || HTTP_AUTH == $t_login_method ) {
 		return;
@@ -1139,7 +1143,7 @@ function auth_reauthenticate() {
 		$t_query_params = [
 			'reauthenticate' => 1,
 			'username' => $t_username,
-			'return' => $_SERVER['REQUEST_URI'],
+			'return' => $p_return_page ?: $_SERVER['REQUEST_URI'],
 		];
 
 		# redirect to login page
