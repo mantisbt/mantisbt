@@ -564,6 +564,8 @@ function layout_navbar_button_bar() {
 	echo '<li class="hidden-sm hidden-xs">';
 	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
 
+	event_signal( 'EVENT_LAYOUT_NAVBAR_BUTTONS_BEGIN' );
+
 	if( $t_show_report_bug_button )  {
 		$t_bug_url = string_get_bug_report_url();
 		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
@@ -578,6 +580,8 @@ function layout_navbar_button_bar() {
 		echo ' ' . lang_get( 'invite_users' );
 		echo '</a>';
 	}
+
+	event_signal( 'EVENT_LAYOUT_NAVBAR_BUTTONS_END' );
 
 	echo '</div>';
 	echo '</li>';
