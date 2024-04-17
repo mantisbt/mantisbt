@@ -67,6 +67,7 @@ if( isset( $g_global_profiles ) ) {
 
 auth_ensure_user_authenticated();
 current_user_ensure_unprotected();
+auth_reauthenticate();
 
 $t_manage_global_profile_threshold = config_get( 'manage_global_profile_threshold' );
 $t_can_manage_global_profile = access_has_global_level( $t_manage_global_profile_threshold );

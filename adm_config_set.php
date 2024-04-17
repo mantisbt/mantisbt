@@ -45,6 +45,7 @@ require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'utility_api.php' );
 
+auth_reauthenticate( 'adm_config_report.php' );
 form_security_validate( 'adm_config_set' );
 
 $f_user_id = gpc_get_int( 'user_id' );

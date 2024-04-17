@@ -52,6 +52,7 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
+auth_reauthenticate();
 access_ensure_global_level( config_get( 'view_configuration_threshold' ) );
 
 $t_read_write_access = access_has_global_level( config_get( 'set_configuration_threshold' ) );

@@ -40,6 +40,10 @@ require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
+$t_redirect_page = 'adm_config_report.php';
+
+auth_reauthenticate( $t_redirect_page );
+
 form_security_validate( 'adm_config_delete' );
 
 $f_user_id = gpc_get_int( 'user_id' );
@@ -66,5 +70,5 @@ $t_command->execute();
 
 form_security_purge( 'adm_config_delete' );
 
-print_header_redirect( 'adm_config_report.php' );
+print_header_redirect( $t_redirect_page );
 

@@ -50,6 +50,7 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
+auth_reauthenticate();
 access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 
 compress_enable();

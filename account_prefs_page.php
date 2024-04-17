@@ -57,8 +57,8 @@ require_api( 'lang_api.php' );
 
 #============ Permissions ============
 auth_ensure_user_authenticated();
-
 current_user_ensure_unprotected();
+auth_reauthenticate();
 
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
 include( __DIR__ . '/account_prefs_inc.php' );
