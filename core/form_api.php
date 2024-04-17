@@ -238,6 +238,4 @@ function form_security_purge( $p_form_name ) {
 	}
 
 	session_set( 'form_security_tokens', $t_tokens );
-
-	return;
 }
