@@ -564,24 +564,41 @@ function layout_navbar_button_bar() {
 	echo '<li class="hidden-sm hidden-xs">';
 	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
 
-	event_signal( 'EVENT_LAYOUT_NAVBAR_BUTTONS_BEGIN' );
+	$t_navbar_items = array();
 
 	if( $t_show_report_bug_button )  {
-		$t_bug_url = string_get_bug_report_url();
-		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
-		print_icon( 'fa-edit');
-		echo ' ' . lang_get( 'report_bug_link' );
-		echo '</a>';
+		$t_navbar_items[] = [
+			'url' => string_get_bug_report_url(),
+			'icon' => 'fa-edit',
+			'label' => lang_get( 'report_bug_link' )
+		];
 	}
 
 	if( $t_show_invite_user_button ) {
-		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
-		print_icon( 'fa-user-plus' );
-		echo ' ' . lang_get( 'invite_users' );
-		echo '</a>';
+		$t_navbar_items[] = [
+			'url' => 'manage_user_create_page.php',
+			'icon' => 'fa-user-plus',
+			'label' => lang_get( 'invite_users' )
+		];
 	}
 
-	event_signal( 'EVENT_LAYOUT_NAVBAR_BUTTONS_END' );
+	$t_modified_navbar_items = event_signal( 'EVENT_LAYOUT_NAVBAR_BUTTONS_FILTER', array( $t_navbar_items ) );
+	if( is_array( $t_modified_navbar_items ) && count( $t_modified_navbar_items ) > 0 ) {
+		$t_navbar_items = $t_modified_navbar_items[0];
+	}
+
+	foreach( $t_navbar_items as $t_navbar_item ) {
+		echo '<a class="btn btn-primary btn-sm" href="' . $t_navbar_item['url'] . '"';
+		if (!empty( $t_navbar_item['title'] )) {
+			echo ' title="' . string_html_specialchars( $t_navbar_item['title'] ) . '"';
+		}
+		echo '>';
+		print_icon( $t_navbar_item['icon'] );
+		if (!empty( $t_navbar_item['label'] )) {
+			echo ' ' . string_html_specialchars( $t_navbar_item['label'] );
+		}
+		echo '</a>';
+	}
 
 	echo '</div>';
 	echo '</li>';
