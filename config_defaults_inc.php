@@ -2388,13 +2388,6 @@ $g_max_dropdown_length = 40;
  */
 $g_wrap_in_preformatted_text = ON;
 
-/**
- * Controls whether attachment links redirect users t a new tab or not
- * If turned off, a click on a link will not redirect to a new tab
- * @global integer $g_attachment_to_new_tab
- */
-$g_attachment_to_new_tab = OFF;
-
 #############################################
 # MantisBT Authentication and LDAP Settings #
 #############################################
@@ -2888,6 +2881,13 @@ $g_allow_download_own_attachments = ON;
  * @global int $g_allow_delete_own_attachments
  */
 $g_allow_delete_own_attachments = OFF;
+
+/**
+ * Controls whether attachment links redirect users t a new tab or not
+ * If turned off, a click on a link will not redirect to a new tab
+ * @global integer $g_attachment_to_new_tab
+ */
+$g_attachment_to_new_tab = OFF;
 
 ####################
 # Field Visibility #
