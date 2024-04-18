@@ -2388,6 +2388,13 @@ $g_max_dropdown_length = 40;
  */
 $g_wrap_in_preformatted_text = ON;
 
+/**
+ * Controls whether attachment links redirect users t a new tab or not
+ * If turned off, a click on a link will not redirect to a new tab
+ * @global integer $g_attachment_to_new_tab
+ */
+$g_attachment_to_new_tab = OFF;
+
 #############################################
 # MantisBT Authentication and LDAP Settings #
 #############################################
@@ -5289,6 +5296,7 @@ $g_public_config_names = array(
 	'antispam_max_event_count',
 	'antispam_time_window_in_seconds',
 	'assign_sponsored_bugs_threshold',
+	'attachment_to_new_tab',
 	'auto_set_status_to_assigned',
 	'backward_year_count',
 	'bottom_include_page',
