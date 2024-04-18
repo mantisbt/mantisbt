@@ -2136,10 +2136,10 @@ function get_filesize_info( $p_size, $p_unit ) {
 }
 
 /**
- * Returns target tag to be added in attachment links
+ * Returns target attribute to be added in attachment links
  * @return string
  */
-function get_attachment_link_target() {
+function print_attachment_link_target() {
 	if( config_get( 'attachment_to_new_tab' ) ) {
 		return ' target="_blank"';
 	}
