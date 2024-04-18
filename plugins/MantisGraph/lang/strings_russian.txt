@@ -66,6 +66,7 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Диаграмма по при
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Диаграмма по критичности';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Диаграмма по категориям';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Диаграмма по решениям';
+$s_plugin_MantisGraph_graph_project_title = 'Диаграмма по проектам';
 $s_plugin_MantisGraph_graph_developer_title = 'Диаграмма по разработчикам';
 $s_plugin_MantisGraph_graph_reporter_title = 'Диаграмма по инициаторам';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Задачи открытые, отработанные и оставшиеся';
