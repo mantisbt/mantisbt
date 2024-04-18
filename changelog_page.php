@@ -199,6 +199,7 @@ if( is_blank( $f_project ) ) {
 }
 
 $f_version = gpc_get_string( 'version', '' );
+$f_obsolete = gpc_get_bool( 'obsolete', false );
 
 if( is_blank( $f_version ) ) {
 	$f_version_id = gpc_get_int( 'version_id', -1 );
@@ -262,7 +263,7 @@ foreach( $t_project_ids as $t_project_id ) {
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
 	# grab versions info for later use, excluding obsolete ones
-	$t_version_rows = version_get_all_rows( $t_project_id, VERSION_ALL, false );
+	$t_version_rows = version_get_all_rows( $t_project_id, VERSION_ALL, $f_obsolete );
 
 	# cache category info, but ignore the results for now
 	category_get_all_rows( $t_project_id );
