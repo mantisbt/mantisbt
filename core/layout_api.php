@@ -552,19 +552,12 @@ function layout_navbar_button_bar() {
 		return;
 	}
 
+	$t_navbar_items = array();
+
 	$t_show_report_bug_button = access_has_any_project_level( 'report_bug_threshold' ) &&
 		!is_page_name( string_get_bug_page( "report" ) ) &&
 		!is_page_name( string_get_bug_page( "update" ) );
 	$t_show_invite_user_button = access_has_global_level( config_get( 'manage_user_threshold' ) );
-
-	if( !$t_show_report_bug_button && !$t_show_invite_user_button ) {
-		return;
-	}
-
-	echo '<li class="hidden-sm hidden-xs">';
-	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
-
-	$t_navbar_items = array();
 
 	if( $t_show_report_bug_button )  {
 		$t_navbar_items[] = [
@@ -586,6 +579,13 @@ function layout_navbar_button_bar() {
 	if( is_array( $t_modified_navbar_items ) && count( $t_modified_navbar_items ) > 0 ) {
 		$t_navbar_items = $t_modified_navbar_items[0];
 	}
+
+	if( empty( $t_navbar_items ) ) {
+		return;
+	}
+
+	echo '<li class="hidden-sm hidden-xs">';
+	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
 
 	foreach( $t_navbar_items as $t_navbar_item ) {
 		echo '<a class="btn btn-primary btn-sm" href="' . $t_navbar_item['url'] . '"';
