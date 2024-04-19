@@ -402,6 +402,13 @@ $g_send_reset_password = ON;
 $g_signup_use_captcha = ON;
 
 /**
+ * Initiate Admin approval for new users
+ * When this is enabled, users that signup need to be validated by the admkin
+ * @global integer $g_admin_approval
+ */
+$g_admin_approval = ON;
+
+/**
  * Path to TrueType font files.
  *
  * Absolute path (with trailing slash!) to the folder containing the TrueType

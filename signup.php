@@ -114,7 +114,13 @@ layout_login_page_begin();
 
 							<div>
 								<br />
-								<?php echo lang_get( 'password_emailed_msg' ) ?>
+								<?php
+									if ( config_get_global( 'admin_approval') ) {
+										echo lang_get( 'admin_approval_msg' ) ;
+									} else {
+										echo lang_get( 'password_emailed_msg' ) ;
+									}
+								?>
 								<br /><br />
 								<?php echo lang_get( 'no_reponse_msg' ) ?>
 								<br /><br />

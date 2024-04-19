@@ -59,6 +59,11 @@ if( !auth_signup_enabled() &&
 $f_user_id = gpc_get_string( 'id' );
 $f_confirm_hash = gpc_get_string( 'confirm_hash' );
 
+# check if account needs to be enabled first
+if ( !user_is_enabled( $f_user_id ) ) {
+	trigger_error( ERROR_ACCOUNT_DISABLED, ERROR );
+}
+
 # force logout on the current user if already authenticated
 if( auth_is_user_authenticated() ) {
 	auth_logout();
