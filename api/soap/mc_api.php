@@ -969,7 +969,7 @@ function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version
 			throw new ClientException(
 				"Version '$t_version_for_error' does not exist in project '$t_project_name'.",
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'version' )
+				array( $p_field_name )
 			);
 		}
 
