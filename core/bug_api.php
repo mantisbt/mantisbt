@@ -508,6 +508,16 @@ class BugData {
 			category_ensure_exists( $this->category_id );
 		}
 
+		if ( $this->status == RESOLVED ) {
+			if ( is_blank( $this->fixed_in_version ) && !is_blank( $this->target_version ) && config_get( 'bug_fixed_in_version_from_target_version', null, null, $this->project_id ) != OFF ) {
+				$this->fixed_in_version = $this->target_version;
+			}
+			if ( is_blank( $this->fixed_in_version ) && config_get( 'bug_fixed_in_version_required', null, null, $this->project_id ) != OFF ) {
+				error_parameters( lang_get( 'fixed_in_version' ) );
+				trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			}
+		}
+
 		if( !is_blank( $this->duplicate_id ) && ( $this->duplicate_id != 0 ) && ( $this->id == $this->duplicate_id ) ) {
 			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 			# never returns

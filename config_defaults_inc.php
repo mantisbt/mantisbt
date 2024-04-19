@@ -2300,7 +2300,13 @@ $g_bug_submit_status = NEW_;
 $g_bug_assigned_status = ASSIGNED;
 
 /**
- * Required fixed_in_version in RESOLVED state.
+ * In RESOLVED state fixed_in_version default from target_version.
+ * @global integer $g_bug_fixed_in_version_from_target_version
+ */
+$g_bug_fixed_in_version_from_target_version = OFF;
+
+/**
+ * In RESOLVED state fixed_in_version is required.
  * @global integer $g_bug_fixed_in_version_required
  */
 $g_bug_fixed_in_version_required = OFF;
