@@ -898,7 +898,8 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
  * @param integer $p_project_id     The id of the project the issue is associated with.
  * @param integer $p_old_handler_id The old handler id.
  * @param integer $p_new_handler_id The new handler id.  0 for not assigned.
- * @return true: access ok, otherwise: soap fault.
+ *
+ * @return RestFault|SoapFault|true
  */
 function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handler_id, $p_new_handler_id ) {
 	if( $p_new_handler_id != 0 ) {
@@ -953,14 +954,16 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 }
 
 /**
- * Update Issue in database
+ * Update Issue in database.
  *
- * Created By KGB
  * @param string   $p_username The name of the user trying to update the issue.
  * @param string   $p_password The password of the user.
  * @param integer  $p_issue_id The issue id of the existing issue being updated.
- * @param stdClass $p_issue    A IssueData structure containing information about the new issue.
- * @return integer|RestFault|SoapFault The id of the created issue.
+ * @param stdClass $p_issue    A IssueData structure containing information
+ *                             about the new issue.
+ *
+ * @return true|RestFault|SoapFault
+ * @throws ClientException
  */
 function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_issue ) {
 	global $g_project_override;

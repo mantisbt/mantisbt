@@ -921,14 +921,17 @@ function mci_get_version( $p_version, $p_project_id ) {
 }
 
 /**
- * Gets the version id based on version input from the API.  This can be
- * a string or an object (with id or name or both).  If both id and name
- * exist on the object, id takes precedence.
+ * Gets the version id based on version input from the API.
  *
- * @param string|object $p_version The version string or object with name or id or both.
- * @param int $p_project_id The project id.
- * @param string $p_field_name Version field name (e.g. version, target_version, fixed_in_version)
- * @return int|RestFault|SoapFault The version id, 0 if not supplied.
+ * @param string|object $p_version    The version string or an object with id
+ *                                    or name; if both id and name are provided,
+ *                                    id takes precedence.
+ * @param int           $p_project_id The project id.
+ * @param string        $p_field_name Version field name (e.g. version,
+ *                                    target_version, fixed_in_version)
+ *
+ * @return int The version id, 0 if not supplied.
+ * @throws ClientException
  */
 function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version' ) {
 	$t_version_id = 0;
