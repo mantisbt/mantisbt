@@ -551,7 +551,7 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> id="target_version" name="target_version" class="input-sm">
-				<?php print_version_option_list( '', null, VERSION_FUTURE ) ?>
+				<?php print_version_option_list( $f_target_version, null, VERSION_FUTURE ) ?>
 			</select>
 		</td>
 	</tr>
