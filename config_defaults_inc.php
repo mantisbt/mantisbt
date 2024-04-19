@@ -2300,6 +2300,12 @@ $g_bug_submit_status = NEW_;
 $g_bug_assigned_status = ASSIGNED;
 
 /**
+ * Required fixed_in_version in RESOLVED state.
+ * @global integer $g_bug_fixed_in_version_required
+ */
+$g_bug_fixed_in_version_required = OFF;
+
+/**
  * Status to assign to the bug when reopened.
  * @global integer $g_bug_reopen_status
  */
