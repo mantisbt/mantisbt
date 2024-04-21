@@ -1010,6 +1010,19 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
 	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
 
+	/**
+	 * Retrieve Id of Version to set.
+	 *
+	 * If the Version is not defined in the issue data, the function will return 0
+	 * which will cause the version field to be cleared when the Issue is updated.
+	 *
+	 * @param string $p_field      Version field to update.
+	 * @param array  $p_issue      Issue data.
+	 * @param int    $p_project_id
+	 *
+	 * @return int Version Id or 0 to unset the version
+	 * @throws ClientException
+	 */
 	$fn_get_version_id = function( string $p_field, array $p_issue, int $p_project_id ): int {
 		if( !isset( $p_issue[$p_field] ) ) {
 			return 0;
@@ -1114,6 +1127,14 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		$t_bug_data->platform = $p_issue['platform'];
 	}
 
+	/**
+	 * Returns the value to assign to Version field.
+	 *
+	 * @param int $p_version_id If 0, will return '' causing version to be unset.
+	 *
+	 * @return string Version
+	 * @throws ClientException
+	 */
 	$fn_set_version_field = function( int $p_version_id ): string {
 		/** @noinspection PhpUnhandledExceptionInspection */
 		return $p_version_id == 0 ? '' : version_get_field( $p_version_id, 'version' );
