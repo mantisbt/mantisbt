@@ -740,7 +740,13 @@ function user_signup( $p_username, $p_email = null ) {
 	# Create random password
 	$t_password = auth_generate_random_password();
 
-	return user_create( $p_username, $t_password, $p_email, auth_signup_access_level() );
+	# check if user approval is required, if so do not enable user yet 
+	if (config_get_global( 'admin_approval') ) {
+		return user_create( $p_username, $t_password, $p_email, auth_signup_access_level(), false, false, lang_get( 'new_account' ) );
+	} else {
+		return user_create( $p_username, $t_password, $p_email, auth_signup_access_level() );
+	}
+
 }
 
 /**
