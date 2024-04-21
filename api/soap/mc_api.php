@@ -946,13 +946,13 @@ function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version
 	$t_version_for_error = '';
 
 	if( is_array( $p_version ) ) {
-		if( isset( $p_version['id'] ) && is_numeric( $p_version['id'] ) ) {
+		if( isset( $p_version['id'] ) && is_numeric( $p_version['id'] ) && $p_version['id'] != 0 ) {
 			$t_version_id = (int)$p_version['id'];
 			$t_version_for_error = $p_version['id'];
 			if( !version_exists( $t_version_id ) ) {
 				$t_version_id = false;
 			}
-		} elseif( isset( $p_version['name'] ) ) {
+		} elseif( isset( $p_version['name'] ) && !is_blank( $p_version['name'] ) ) {
 			$t_version_for_error = $p_version['name'];
 			$t_version_id = version_get_id( $p_version['name'], $p_project_id );
 		}

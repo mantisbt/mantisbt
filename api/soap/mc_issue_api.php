@@ -1010,12 +1010,15 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
 	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
 
-	$fn_get_version_id = function( $p_version, int $p_project_id, string $p_field ): int {
-		return isset( $p_version ) ? mci_get_version_id( $p_version, $p_project_id, $p_field ) : 0;
+	$fn_get_version_id = function( string $p_field, array $p_issue, int $p_project_id ): int {
+		if( !isset( $p_issue[$p_field] ) ) {
+			return 0;
+		}
+		return mci_get_version_id( $p_issue[$p_field], $p_project_id, $p_field );
 	};
-	$t_version_id = $fn_get_version_id( $p_issue['version'], $t_project_id, 'version' );
-	$t_fixed_in_version_id = $fn_get_version_id( $p_issue['fixed_in_version'], $t_project_id, 'fixed_in_version' );
-	$t_target_version_id = $fn_get_version_id( $p_issue['target_version'], $t_project_id, 'target_version' );
+	$t_version_id = $fn_get_version_id( 'version', $p_issue, $t_project_id );
+	$t_fixed_in_version_id = $fn_get_version_id( 'fixed_in_version', $p_issue, $t_project_id );
+	$t_target_version_id = $fn_get_version_id( 'target_version', $p_issue, $t_project_id );
 
 	if( is_blank( $t_summary ) ) {
 		return ApiObjectFactory::faultBadRequest( 'Mandatory field \'summary\' is missing.' );
