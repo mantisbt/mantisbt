@@ -137,10 +137,29 @@ $t_warnings = array();
 $t_upgrade_required = false;
 
 if( config_get_global( 'admin_checks' ) == ON ) {
-	# Check if the admin directory is accessible
+	# Check if admin directory is accessible at filesystem level
 	$t_admin_dir = dirname( __FILE__ ) . '/admin';
 	$t_admin_dir_is_accessible = @file_exists( $t_admin_dir . '/.' );
-	if( $t_admin_dir_is_accessible ) {
+
+	# Check if admin directory is accessible as URL by retrieving HTTP headers.
+	try {
+		$t_guzzle = new GuzzleHttp\Client( array(
+			'base_uri' => config_get_global( 'path' ),
+			'timeout' => 1,
+		) );
+		$t_headers = $t_guzzle->head( 'admin', array(
+			GuzzleHttp\RequestOptions::HTTP_ERRORS => false
+		) );
+		$t_admin_url_is_accessible = $t_headers->getStatusCode() == HTTP_STATUS_SUCCESS;
+	}
+	catch( RuntimeException $e ) {
+		# GuzzleHttp will fail to initialize the client if the cURL extension
+		# is not available and allow_url_fopen is disabled. In that case, we
+		# simply fall back to checking accessibility at filesystem level.
+		$t_admin_url_is_accessible = $t_admin_dir_is_accessible;
+	}
+
+	if( $t_admin_url_is_accessible ) {
 		$t_warnings[] = lang_get( 'warning_admin_directory_present' );
 	}
 
