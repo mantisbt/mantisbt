@@ -56,16 +56,35 @@ $s_plugin_format_process_markdown = 'Markdown Processing';
 $s_plugin_format_process_markdown_info = 'Styling with Markdown support, text formatting syntax designed so that it can be converted to HTML.';
 $s_plugin_format_enabled = 'On';
 $s_plugin_format_disabled = 'Off';
+
 $s_plugin_format_syntax_highlighting = 'Syntax highlighting for code blocks';
 $s_plugin_format_syntax_highlighting_info = 'Syntax highlighting works only if "Markdown processing" is active.';
 $s_plugin_format_syntax_highlighting_theme = 'Code blocks theme';
 $s_plugin_format_syntax_highlighting_plugins = 'Code blocks options';
-$s_plugin_format_syntax_highlighting_plugin_clipboard_desc = 'Copy the content of the code block to the clipboard.';
-$s_plugin_format_syntax_highlighting_plugin_language_desc = 'Shows which language the code block contains.';
-$s_plugin_format_syntax_highlighting_plugin_numbers_desc = 'Shows line numbers.';
-$s_plugin_format_syntax_highlighting_plugin_invisible_desc = 'Displays hidden characters, e.g. for indentations.';
-$s_plugin_format_syntax_highlighting_plugin_trim_desc = 'Trims all leading and trailing whitespace of every code block. It also removes extra indents and trailing whitespace on every line.';
-$s_plugin_format_syntax_highlighting_plugin_braces_desc = 'Shows the pairing of brackets on move mouse over. Including "rainbow braces" (each pair has its own color).';
-$s_plugin_format_syntax_highlighting_plugin_diff_desc = 'Highlighting for added and removed lines in color.';
-$s_plugin_format_syntax_highlighting_plugin_colors_desc = 'Shows a small colored square in front of a color definitions (e.g. "#000").';
-$s_plugin_format_syntax_highlighting_plugin_preview_desc = 'A previewer will appear on hovering "angle", "color", "gradient", "easing" or "time" definitions.';
+
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Copy to clipboard';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Shows a small button to copy the content of the code block to the clipboard.';
+
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Show language';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Shows which language the code block contains.';
+
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Line numbers';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Shows line numbers.';
+
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Show whitespaces';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Displays hidden characters (e.g. for indentations).';
+
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Normalize whitespaces';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Trims all leading and trailing whitespace of a code block. It also removes extra indents and trailing whitespace on every line.';
+
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Matching braces';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'Shows the pairing of brackets on mouse over. Including "rainbow braces" (each pair has its own color).';
+
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Highlight differences (diff)';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'Added and removed lines are highlighted in different colors.';
+
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Visualise CSS colors';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Shows a small colored square in front of a color definitions (e.g. before "#000").';
+
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Previewers for some CSS definitions';
+$s_plugin_format_syntax_highlighting_plugin_previewers_desc = 'A previewer will appear on mouse over "angle", "color", "gradient", "easing" or "time" definitions.';

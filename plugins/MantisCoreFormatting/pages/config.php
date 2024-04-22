@@ -166,28 +166,36 @@ print_manage_menu( 'manage_plugin_page.php' );
 			}
 		?>
 		<?php foreach( [
-			'copy-to-clipboard' => lang_get( 'plugin_format_syntax_highlighting_plugin_clipboard_desc' ),
-			'show-language' => lang_get( 'plugin_format_syntax_highlighting_plugin_language_desc' ),
-			'line-numbers' => lang_get( 'plugin_format_syntax_highlighting_plugin_numbers_desc' ),
-			'show-invisibles' => lang_get( 'plugin_format_syntax_highlighting_plugin_invisible_desc' ),
-			'normalize-whitespace' => lang_get( 'plugin_format_syntax_highlighting_plugin_trim_desc' ),
-			'match-braces' => lang_get( 'plugin_format_syntax_highlighting_plugin_braces_desc' ),
-			'diff-highlight' => lang_get( 'plugin_format_syntax_highlighting_plugin_diff_desc' ),
-			'inline-color' => lang_get( 'plugin_format_syntax_highlighting_plugin_colors_desc' ),
-			'previewers' => lang_get( 'plugin_format_syntax_highlighting_plugin_preview_desc' )
-		] as $t_name => $t_description ): ?>
+			'copy-to-clipboard',
+			'show-language',
+			'line-numbers',
+			'show-invisibles',
+			'normalize-whitespace',
+			'match-braces',
+			'diff-highlight',
+			'inline-color',
+			'previewers',
+		] as $t_plugin_id ): ?>
 			<label style="cursor:pointer; margin-bottom: .8rem">
 				<input
 					name="syntax_highlighting_plugins[]"
 					type="checkbox"
 					class="ace input-sm"
-					value="<?php echo $t_name ?>"
-					<?php echo in_array( $t_name, $t_current_plugins, true ) ? ' checked' : '' ?>
+					value="<?php echo $t_plugin_id ?>"
+					<?php echo in_array( $t_plugin_id, $t_current_plugins, true ) ? ' checked' : '' ?>
 				/>
 				<span class="lbl"></span>
-				<span><?php echo ucfirst( str_replace( '-', ' ', $t_name ) ) ?></span>
+				<span>
+					<?php echo lang_get( sprintf(
+						'plugin_format_syntax_highlighting_plugin_%s_name',
+						str_replace('-', '_', $t_plugin_id)
+					) ) ?>
+                </span>
 				<small style="margin-left: 2.3rem; display: block; max-width: 350px">
-					<?php echo $t_description ?>
+					<?php echo lang_get( sprintf(
+						'plugin_format_syntax_highlighting_plugin_%s_desc',
+						str_replace('-', '_', $t_plugin_id)
+					) ) ?>
 				</small>
 			</label><br>
 		<?php endforeach; ?>
