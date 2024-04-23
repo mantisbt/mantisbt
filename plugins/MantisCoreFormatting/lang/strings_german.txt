@@ -79,8 +79,8 @@ $s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Entfern
 $s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Klammerpaarungen hervorheben';
 $s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'Zeigt bei Klammern die Paarung an, wenn man mit der Maus darüberfährt. Inklusive "rainbow braces" (Paare werden in jeweils gleicher Farbe dargestellt).';
 
-$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Hervorhebung von Differenzen (diff)';
-$s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'Hinzugefügte und entfernte Zeilen werden farblich unterschiedlich hervorgehoben.';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Erweiterte Hervorhebung von Differenzen (diff)';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'Färbt den Zeilenhintergrund statt den Text und zusätzlich zu "diff" ist eine sprachspezifische Färbung möglich (z.B. "diff-javascript").';
 
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'CSS-Farben darstellen';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Ein kleines farbiges Quadrat wird vor CSS-Farbdefinitionen angezeigt (z.B. vor "#000").';

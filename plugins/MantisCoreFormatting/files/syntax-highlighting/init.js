@@ -80,7 +80,7 @@
 		name: 'diff-highlight',
 		type: 'plugin',
 		requires: null,
-		css: false,
+		css: true,
 		ready: false,
 		cssClasses: ['diff-highlight'],
 	}, {
