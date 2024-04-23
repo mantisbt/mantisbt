@@ -10,7 +10,6 @@
  *
  * This rule reapplies/forces the monospace font-family to them.
  */
-pre,
-pre * {
+pre > code * {
     font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
 }
