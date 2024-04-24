@@ -22,7 +22,7 @@
  * @link http://www.mantisbt.org
  */
 
-auth_reauthenticate( );
+auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 layout_page_header( lang_get( 'plugin_format_title' ) );
@@ -31,22 +31,65 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
+# Syntax highlighting. Available plugins.
+$t_syntax_highlighting_available_plugins = [];
+foreach( [
+	'copy-to-clipboard',
+	'show-language',
+	'line-numbers',
+	'show-invisibles',
+	'normalize-whitespace',
+	'match-braces',
+	'diff-highlight',
+	'inline-color',
+	'previewers',
+] as $t_plugin_id ) {
+	$t_syntax_highlighting_available_plugins[] = [
+		'id' => $t_plugin_id,
+		'name' => lang_get( sprintf(
+			'plugin_format_syntax_highlighting_plugin_%s_name',
+			str_replace( '-', '_', $t_plugin_id )
+		) ),
+		'description' => lang_get( sprintf(
+			'plugin_format_syntax_highlighting_plugin_%s_desc',
+			str_replace( '-', '_', $t_plugin_id )
+		) )
+	];
+}
+
+# Syntax highlighting. Currently selected plugins
+$t_syntax_highlighting_current_plugins = plugin_config_get( 'syntax_highlighting_plugins' );
+if ( !is_array($t_syntax_highlighting_current_plugins ) ) {
+	$t_syntax_highlighting_current_plugins = [];
+}
+
+# Syntax highlighting. Available theme files
+$t_syntax_highlighting_available_themes = [];
+foreach( glob( __DIR__ . '/../files/syntax-highlighting/themes/*') as $t_file ) {
+	$t_syntax_highlighting_available_themes[] = basename( $t_file );
+}
+
+# Syntax highlighting. Currently selected theme
+$t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_theme' );
 ?>
 
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-<div class="form-container" >
+<div class="form-container">
 
 <form id="formatting-config-form" action="<?php echo plugin_page( 'config_edit' )?>" method="post">
 <?php echo form_security_field( 'plugin_format_config_edit' ) ?>
 
 <div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
-		<?php echo lang_get( 'plugin_format_title' ) . ': ' . lang_get( 'plugin_format_config' )?>
-	</h4>
-</div>
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
+			<?php echo sprintf('%s: %s',
+				lang_get( 'plugin_format_title' ),
+				lang_get( 'plugin_format_config' )
+			) ?>
+		</h4>
+	</div>
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="table-responsive">
@@ -54,84 +97,163 @@ print_manage_menu( 'manage_plugin_page.php' );
 <tr>
 	<th class="category width-40">
 		<?php echo lang_get( 'plugin_format_process_text' )?>
-		<br /><span class="small"><?php echo lang_get( 'plugin_format_process_text_warning_notice' )?></span>
+		<br />
+		<span class="small">
+			<?php echo lang_get( 'plugin_format_process_text_warning_notice' )?>
+		</span>
 	</th>
 	<td class="center" width="20%">
-		<label><input type="radio" class="ace" name="process_text" value="1" <?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
+		<label>
+			<input type="radio" class="ace" name="process_text" value="1"
+				<?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : '' ?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_enabled' )?>
+			</span>
+		</label>
 	</td>
 	<td class="center" width="20%">
-		<label><input type="radio" class="ace" name="process_text" value="0" <?php echo( OFF == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
+		<label>
+			<input type="radio" class="ace" name="process_text" value="0"
+				<?php echo( OFF == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : '' ?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_disabled' ) ?>
+			</span>
+		</label>
 	</td>
 </tr>
 
 <tr>
 	<th class="category width-40">
-		<?php echo lang_get( 'plugin_format_process_urls' )?>
+		<?php echo lang_get( 'plugin_format_process_urls' ) ?>
 	</th>
 	<td class="center">
-		<label><input type="radio" class="ace" name="process_urls" value="1" <?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
+		<label>
+			<input type="radio" class="ace" name="process_urls" value="1"
+				<?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : '' ?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_enabled' ) ?>
+			</span>
+		</label>
 	</td>
 	<td class="center">
-		<label><input type="radio" class="ace" name="process_urls" value="0" <?php echo( OFF == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
+		<label>
+			<input type="radio" class="ace" name="process_urls" value="0"
+				<?php echo( OFF == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : '' ?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_disabled' ) ?>
+			</span>
+		</label>
 	</td>
 </tr>
 
 <tr>
 	<th class="category width-40">
-		<?php echo lang_get( 'plugin_format_process_buglinks' )?>
+		<?php echo lang_get( 'plugin_format_process_buglinks' ) ?>
 		<br />
 		<span class="small"><?php
 			printf( lang_get( 'plugin_format_process_buglinks_info' ),
-				config_get( 'bug_link_tag' ), config_get( 'bugnote_link_tag' ) );
-		?></span>
+				config_get( 'bug_link_tag' ),
+				config_get( 'bugnote_link_tag' ) );
+		?>
+		</span>
 	</th>
 	<td class="center">
-		<label><input type="radio" class="ace" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
+		<label>
+			<input type="radio" class="ace" name="process_buglinks" value="1"
+				<?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : '' ?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_enabled' ) ?>
+			</span>
+		</label>
 	</td>
 	<td class="center">
-		<label><input type="radio" class="ace" name="process_buglinks" value="0" <?php echo( OFF == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
+		<label>
+			<input type="radio" class="ace" name="process_buglinks" value="0"
+				<?php echo( OFF == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : '' ?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_disabled' ) ?>
+			</span>
+		</label>
 	</td>
 </tr>
 
 <tr>
 	<th class="category width-40">
-		<?php echo lang_get( 'plugin_format_process_markdown' )?>
+		<?php echo lang_get( 'plugin_format_process_markdown' ) ?>
 		<br />
 		<span class="small">
-			<?php echo lang_get( 'plugin_format_process_markdown_info' )?>
+			<?php echo lang_get( 'plugin_format_process_markdown_info' ) ?>
 		</span>
 	</th>
 	<td class="center">
-		<label><input type="radio" class="ace" name="process_markdown" value="1" <?php echo( ON == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
+		<label>
+			<input type="radio" class="ace" name="process_markdown" value="1"
+				<?php echo( ON == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : '' ?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_enabled' ) ?>
+			</span>
+		</label>
 	</td>
 	<td class="center">
-		<label><input type="radio" class="ace" name="process_markdown" value="0" <?php echo( OFF == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
+		<label>
+			<input type="radio" class="ace" name="process_markdown" value="0"
+				<?php echo( OFF == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : '' ?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_disabled' ) ?>
+			</span>
+		</label>
 	</td>
 </tr>
 
 <tr>
 	<th class="category width-40">
-		<?php echo lang_get( 'plugin_format_syntax_highlighting' )?>
+		<?php echo lang_get( 'plugin_format_syntax_highlighting' ) ?>
 		<br />
 		<span class="small">
-			<?php echo lang_get( 'plugin_format_syntax_highlighting_info' )?>
+			<?php echo lang_get( 'plugin_format_syntax_highlighting_info' ) ?>
 		</span>
 	</th>
 	<td class="center">
-		<label><input type="radio" class="ace" name="syntax_highlighting" value="1" <?php echo( ON == plugin_config_get( 'syntax_highlighting' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
+		<label>
+			<input
+				type="radio"
+				class="ace"
+				name="syntax_highlighting"
+				value="1"
+				<?php echo( ON == plugin_config_get( 'syntax_highlighting' ) )
+					? 'checked="checked"'
+					: ''
+				?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_enabled' ) ?>
+			</span>
+		</label>
 	</td>
 	<td class="center">
-		<label><input type="radio" class="ace" name="syntax_highlighting" value="0" <?php echo( OFF == plugin_config_get( 'syntax_highlighting' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
+		<label>
+			<input
+				type="radio"
+				class="ace"
+				name="syntax_highlighting"
+				value="0"
+				<?php echo( OFF == plugin_config_get( 'syntax_highlighting' ) )
+					? 'checked="checked"'
+					: ''
+				?>
+			/>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_disabled' )?>
+			</span>
+		</label>
 	</td>
 </tr>
 
@@ -142,14 +264,14 @@ print_manage_menu( 'manage_plugin_page.php' );
 	<td>
 		<label>
 			<select name="syntax_highlighting_theme" class="input-sm">
-			<?php
-				$t_current_theme = plugin_config_get( 'syntax_highlighting_theme' );
-				foreach( glob( __DIR__ . '/../files/syntax-highlighting/themes/*' ) as $file ): ?>
-					<option value="<?php echo basename( $file ) ?>"
-						<?php echo basename( $file ) === $t_current_theme ? ' selected' : ''?>>
-						<?php echo str_replace( ['prism-', '.min.css'], '', basename( $file ) ) ?>
-					</option>
-				<?php endforeach; ?>
+			<?php foreach( $t_syntax_highlighting_available_themes as $t_theme ): ?>
+				<option
+					value="<?php echo $t_theme ?>"
+					<?php echo $t_theme === $t_syntax_highlighting_current_theme ? 'selected' : '' ?>
+				>
+					<?php echo str_replace( ['prism-', '.min.css'], '', $t_theme ) ?>
+				</option>
+			<?php endforeach; ?>
 			</select>
 		</label>
 	</td>
@@ -159,46 +281,26 @@ print_manage_menu( 'manage_plugin_page.php' );
 		<?php echo lang_get( 'plugin_format_syntax_highlighting_plugins' ) ?>
 	</th>
 	<td colspan="2">
-		<?php
-			$t_current_plugins = plugin_config_get( 'syntax_highlighting_plugins' );
-			if ( !is_array( $t_current_plugins ) ) {
-				$t_current_plugins = [];
-			}
-		?>
-		<?php foreach( [
-			'copy-to-clipboard',
-			'show-language',
-			'line-numbers',
-			'show-invisibles',
-			'normalize-whitespace',
-			'match-braces',
-			'diff-highlight',
-			'inline-color',
-			'previewers',
-		] as $t_plugin_id ): ?>
-			<label style="cursor:pointer; margin-bottom: .8rem">
-				<input
-					name="syntax_highlighting_plugins[]"
-					type="checkbox"
-					class="ace input-sm"
-					value="<?php echo $t_plugin_id ?>"
-					<?php echo in_array( $t_plugin_id, $t_current_plugins, true ) ? ' checked' : '' ?>
-				/>
-				<span class="lbl"></span>
-				<span>
-					<?php echo lang_get( sprintf(
-						'plugin_format_syntax_highlighting_plugin_%s_name',
-						str_replace('-', '_', $t_plugin_id)
-					) ) ?>
-                </span>
-				<small style="margin-left: 2.3rem; display: block; max-width: 350px">
-					<?php echo lang_get( sprintf(
-						'plugin_format_syntax_highlighting_plugin_%s_desc',
-						str_replace('-', '_', $t_plugin_id)
-					) ) ?>
+	<?php foreach( $t_syntax_highlighting_available_plugins as $t_plugin ): ?>
+		<label class="lbl block">
+			<input
+				name="syntax_highlighting_plugins[]"
+				type="checkbox"
+				class="ace input-sm"
+				value="<?php echo $t_plugin['id'] ?>"
+				<?php echo in_array( $t_plugin['id'], $t_syntax_highlighting_current_plugins, true )
+					? ' checked'
+					: ''
+				 ?>
+			/>
+			<span class="lbl">
+				<?php echo $t_plugin['name'] ?>
+				<small class="block" style="margin-left:2.3rem">
+					<?php echo $t_plugin['description'] ?>
 				</small>
-			</label><br>
-		<?php endforeach; ?>
+			</span>
+		</label>
+	 <?php endforeach; ?>
 	</td>
 </tr>
 
@@ -206,7 +308,9 @@ print_manage_menu( 'manage_plugin_page.php' );
 </div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
-	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'change_configuration' )?>" />
+	<input type="submit" class="btn btn-primary btn-white btn-round"
+		   value="<?php echo lang_get( 'change_configuration' ) ?>"
+	/>
 </div>
 </div>
 </div>
