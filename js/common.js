@@ -637,15 +637,26 @@ $(document).ready( function() {
 		me.data('prev', me.val());
 	});
 
-	var fixedInVersionRequiredStatusField = $('#bug-change-status-form input[name="fixed_in_version_required_status"]');
-	if (fixedInVersionRequiredStatusField.length > 0) {
-		var status = fixedInVersionRequiredStatusField.val();
-		var fixedInVersionField = $('#bug-change-status-form select[name="fixed_in_version"]');
-		$('#bug-change-status-form select[name="resolution"]').on('change', function() {
-			var fixedInVersionRequired = $(this).val() == status;
-			fixedInVersionField.prop('required', fixedInVersionRequired);
-			fixedInVersionField.closest('tr').find('.category .required').toggleClass('hidden', !fixedInVersionRequired);
-		}).trigger('change');
+	var fixedInVersionRequiredField = $('#update_bug_form,#bug-change-status-form')
+		.find('select[name="fixed_in_version"][data-required-at-resolution-threshold]');
+	if (fixedInVersionRequiredField.length > 0) {
+		var statusField = fixedInVersionRequiredField.closest('form').find('input[name="status"],select[name="status"]');
+		var resolutionField = fixedInVersionRequiredField.closest('form').find('input[name="resolution"],select[name="resolution"]');
+		var closedThreshold = fixedInVersionRequiredField.data('closed-status-threshold');
+		var statusThreshold = fixedInVersionRequiredField.data('required-at-status-threshold');
+		var resolutionThreshold = fixedInVersionRequiredField.data('required-at-resolution-threshold');
+		var handler = function() {
+			var fixedInVersionRequired = resolutionField.val() >= resolutionThreshold;
+			if (fixedInVersionRequired && closedThreshold != null && statusThreshold != null) {
+				var status = statusField.val();
+				fixedInVersionRequired &= status >= statusThreshold && status < closedThreshold;
+			}
+			fixedInVersionRequiredField.prop('required', fixedInVersionRequired);
+			fixedInVersionRequiredField.closest('tr').find('.category .required').toggleClass('hidden', !fixedInVersionRequired);
+		};
+		statusField.on('change',handler);
+		resolutionField.on('change',handler);
+		handler();
 	}
 });
 
