@@ -636,6 +636,17 @@ $(document).ready( function() {
 			.addClass(getColorClassName(me.val()));
 		me.data('prev', me.val());
 	});
+
+	var fixedInVersionRequiredStatusField = $('#bug-change-status-form input[name="fixed_in_version_required_status"]');
+	if (fixedInVersionRequiredStatusField.length > 0) {
+		var status = fixedInVersionRequiredStatusField.val();
+		var fixedInVersionField = $('#bug-change-status-form select[name="fixed_in_version"]');
+		$('#bug-change-status-form select[name="resolution"]').on('change', function() {
+			var fixedInVersionRequired = $(this).val() == status;
+			fixedInVersionField.prop('required', fixedInVersionRequired);
+			fixedInVersionField.closest('tr').find('.category .required').toggleClass('hidden', !fixedInVersionRequired);
+		}).trigger('change');
+	}
 });
 
 function setBugLabel() {
