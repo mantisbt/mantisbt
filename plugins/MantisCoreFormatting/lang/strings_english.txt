@@ -84,7 +84,7 @@ $s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Extended high
 $s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'Colors the background of a line rather than the text and in addition to "diff" a language specific coloring is possible (e.g. "diff-javascript").';
 
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Visualise CSS colors';
-$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Shows a small colored square in front of a color definitions (e.g. before "#000").';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Shows a small colored square in front of a color definition (e.g. before "#000").';
 
 $s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Previewers for some CSS definitions';
 $s_plugin_format_syntax_highlighting_plugin_previewers_desc = 'A previewer will appear on mouse over "angle", "color", "gradient", "easing" or "time" definitions.';
