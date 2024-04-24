@@ -2300,14 +2300,6 @@ $g_bug_submit_status = NEW_;
 $g_bug_assigned_status = ASSIGNED;
 
 /**
- * Allow to set default value for field 'fixed_in_version' with value of 
- * 'target_version' during bug resolution. If 'target_version' is missing 
- * or contains an obsolete value, then no default will be provided.
- * @global int $g_bug_fixed_in_version_from_target_version
- */
-$g_bug_fixed_in_version_from_target_version = OFF;
-
-/**
  * Allow to mark field 'fixed_in_version' as required in bug resolution.
  * @global int $g_bug_fixed_in_version_required
  */

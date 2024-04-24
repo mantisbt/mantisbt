@@ -324,15 +324,11 @@ layout_page_begin();
 			&& !bug_is_readonly( $f_bug_id )
 			&& access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id )
 		) {
-			$t_fixed_in_version_value = $t_bug->fixed_in_version;
 			if ( $f_new_status >= $t_resolved && ( $f_new_status < $t_closed || !$t_bug_resolution_is_fixed ) ) {
 				if ( config_get( 'bug_fixed_in_version_required', null, null, $t_bug->project_id ) != OFF ) {
 ?>
 			<input type="hidden" name="fixed_in_version_required_status" value="<?php echo $t_resolution_fixed ?>" />
 <?php
-				}
-				if ( is_blank( $t_fixed_in_version_value ) && !is_blank( $t_bug->target_version ) && config_get( 'bug_fixed_in_version_required', null, null, $t_bug->project_id ) != OFF ) {
-					$t_fixed_in_version_value = $t_bug->target_version;
 				}
 			}
 ?>
@@ -344,7 +340,7 @@ layout_page_begin();
 				</th>
 				<td>
 					<select name="fixed_in_version" class="input-sm">
-						<?php print_version_option_list( $t_fixed_in_version_value, $t_bug->project_id, VERSION_ALL ) ?>
+						<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
 					</select>
 				</td>
 			</tr>

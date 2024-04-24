@@ -23,15 +23,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_bug_fixed_in_version_from_target_version</term>
-			<listitem>
-				<para>Allow to set default value for field 'fixed_in_version' with value of 'target_version' during
-					bug resolution. If 'target_version' is missing or contains an obsolete value, then no default 
-					will be provided. Default value is OFF.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_bug_fixed_in_version_required</term>
 			<listitem>
 				<para>Allow to mark field 'fixed_in_version' as required in bug resolution.
