@@ -13,16 +13,26 @@
         <para>Just enter your username and password and hit the login
             button. There is also a Save Login checkbox to have the package
             remember that you are logged in between browser sessions. You will
-            have to have cookies enabled to login.If the account doesn't exist,
+            have to have cookies enabled to login.
+        </para>
+        <para>If the account doesn't exist,
             the account is disabled, or the password is incorrect then you will
-            remain at the login page. An error message will be displayed.The
+            remain at the login page. An error message will be displayed.
+        </para>
+        <para>The
             administrator may allow users to sign up for their own accounts. If
-            so, a link to Signup for your own account will be available.The
+            so, a link to Signup for your own account will be available.
+        </para>
+        <para>The
             administrator may also have anonymous login allowed. Anonymous
-            users will be logged in under a common account.You will be allowed
+            users will be logged in under a common account.
+        </para>
+        <para>You will be allowed
             to select a project to work in after logging in. You can make a
             project your default selection from the Select Project screen or
-            from your Account Options.SignupHere you can signup for a new
+            from your Account Options.
+        </para>
+        <para>SignupHere you can signup for a new
             account. You must supply a valid email address and select a unique
             username. Your randomly generated password will be emailed to your
             email account. If MantisBT is setup so that the email password is not
@@ -41,12 +51,16 @@
             abreast of changes in the bugtracker or project. Some news postings
             are specific to projects and others are global across the entire
             bugtracker. This is set at the time of posting in the Edit News
-            section.The number of news posts is controlled by a global
+            section.
+        </para>
+        <para>The number of news posts is controlled by a global
             variable. When the number of posts is more than the limit, a link
             to show "older news" is displayed at the bottom. Similarly a "newer
             news" is displayed when you have clicked on "older news".There is
             an Archives option at the bottom of the page to view all
-            listings.ArchivesA title/date/poster listing of ALL past news
+            listings.
+        </para>
+        <para>ArchivesA title/date/poster listing of ALL past news
             articles will be listed here. Clicking on the link will bring up
             the specified article. This listing will also only display items
             that are either global or specific to the selected project.
@@ -58,12 +72,17 @@
         <title>View Issues page</title>
 
         <para>Here we can view the issue listings. The page has a set of
-            viewing filters at the top and the issues are listed below.FiltersThe
-            filters control the behavior of the issues list. The filters are saved
+            viewing filters at the top and the issues are listed below.
+        </para>
+        <para>The filters control the behavior of the issues list. The filters are saved
             between browsing sessions but do not currently save sort order or
-            direction.If the number of issues exceeds the "Show" count in the
+            direction.
+        </para>
+        <para>If the number of issues exceeds the "Show" count in the
             filter a set of navigation to go to "First", "Last", "Previous",
-            "Next" and specific page numbers are added.The Search field will
+            "Next" and specific page numbers are added.
+        </para>
+        <para>The Search field will
             look for simple keyword matches in the summary, description, steps
             to reproduce, additional information, issue id, or issue text id
             fields. It does not search through issue notes.
@@ -179,11 +198,15 @@
         </itemizedlist>
         <para>
             A panel is provided to view and update the sponsorship of an
-            issue.Another panel is provided to view, delete and add
+            issue.
+        </para>
+        <para>Another panel is provided to view, delete and add
             relationships for an issue. Issues can have a parent/child
             relationship, where the user is warned about resolving a parent
             issue before all of the children are resolved. A peer relationship
-            is also possible.Below this, there may be a form for uploading file
+            is also possible.
+        </para>
+        <para>Below this, there may be a form for uploading file
             attachments. The Administrator needs to configure the bugtracker to
             handle file uploads. If uploading to disk is selected, each project
             needs to set its own upload path.  Issue notes are shown at the bottom
@@ -195,8 +218,9 @@
         <title>Issue Change Status page</title>
 
         <para>This page is used to change the status of an issue. A user
-            can add an issue note to describe the reason for change.In addition,
-            the following fields may be displayed for update:
+            can add an issue note to describe the reason for change.
+        </para>
+        <para>In addition, the following fields may be displayed for update:
             <itemizedlist>
                 <listitem>
                     <para>Resolution and Duplicate ID - for issues being resolved
@@ -232,10 +256,12 @@
         <para>The layout of this page resembles the Simple Issue View
             page, but here you can update various issue fields. The Reporter,
             Category, Severity, and Reproducibility fields are editable but
-            shouldn't be unless there is a gross mis-categorization.Also
-            modifiable are the Assigned To, Priority, Projection, ETA,
-            Resolution, and Duplicate ID fields.As per version 0.18.0, the user
-            can also add an issue note as part of an issue update.
+            shouldn't be unless there is a gross mis-categorization.
+        </para>
+        <para>Also modifiable are the Assigned To, Priority, Projection, ETA,
+            Resolution, and Duplicate ID fields.
+        </para>
+        <para>The user can also add an issue note as part of an issue update.
         </para>
 
     </section>
@@ -340,13 +366,18 @@
 
 
             <para>This page allow an administrator to manage the users in the
-                system.It essentially supplies a list of users defined in the
+                system.
+            </para>
+            <para>It essentially supplies a list of users defined in the
                 system. The user names are linked to a page where you can change
                 the user's name, access level, and projects to which they are
-                assigned. You can also reset their passwords through this page.At
-                the top, there is also a list of new users (who have created an
+                assigned. You can also reset their passwords through this page.
+            </para>
+            <para>At the top, there is also a list of new users (who have created an
                 account in the last week), and accounts where the user has yet to
-                log in.New users are created using the "Create User" link above the
+                log in.
+            </para>
+            <para>New users are created using the "Create User" link above the
                 list of existing users. Note that the username must be unique in
                 the system. Further, note that the user's real name (as displayed
                 on the screen) cannot match another user's user name.
@@ -358,7 +389,9 @@
 
 
             <para>This page allows the user to manage the projects listed in
-                the system.Each project is listed along with a link to manage that
+                the system.
+            </para>
+            <para>Each project is listed along with a link to manage that
                 specific project. The specific project pages allow the user to
                 change:
                 <itemizedlist>
@@ -486,7 +519,9 @@
 
             <para>This set of pages control the configuration of the MantisBT
                 system. Note that the configuration items displayed may be on a
-                project by project basis.These pages serve two purposes. First,
+                project by project basis.
+            </para>
+            <para>These pages serve two purposes. First,
                 they will display the settings for the particular aspects of the
                 system. If authorized, they will allow a user to change the
                 parameters. They also have settings for what access level is
@@ -505,8 +540,9 @@
                     self explanatory and relate to a similarly named setting in the
                     configuration file. At the right of each row is a selector that
                     allows the administrator to lower the access level required to
-                    change the particular parameter.The values changeable on this page
-                    are:
+                    change the particular parameter.
+                </para>
+                <para>The values changeable on this page are:
                 </para>
 
                 <formalpara><title>Issues</title>
@@ -778,8 +814,9 @@
                     fields are self explanatory and relate to a similarly named setting
                     in the configuration file. At the right of each row is a selector
                     that allows the administrator to lower the access level required to
-                    change the particular parameter.The values changeable on this page
-                    are:
+                    change the particular parameter.
+                </para>
+                <para>The values changeable on this page are:
                 </para>
                 <table>
                     <title>Issues</title>
@@ -813,8 +850,9 @@
                 <para>
                     The matrix that follows has checkmarks where the transitions are
                     allowed from the status on the left edge to the status listed
-                    across the top. This corresponds to the $g_enum_workflow array.At
-                    the bottom, there is a list of access levels that are required to
+                    across the top. This corresponds to the $g_enum_workflow array.
+                </para>
+                <para>At the bottom, there is a list of access levels that are required to
                     change the status to the value listed across the top. This can be
                     used, for instance, to restrict those who can close an issue to a
                     specific level, say a manager. This corresponds to the
@@ -887,7 +925,9 @@
 
         <para>The monitor issues feature allows users to subscribe to
             certain issues and hence get copied on all notification emails that
-            are sent for these issues.Depending on the configuration, sending a
+            are sent for these issues.
+        </para>
+        <para>Depending on the configuration, sending a
             reminder to a user about an issue can add this issue to the user's
             list of monitored issues. Users who reported the issue or are assigned
             the issue typically don't need to monitor the issue to get the
@@ -965,17 +1005,18 @@
 
         <title>News Syndication</title>
 
-
         <para>MantisBT supports news syndication using RSS v2.0 protocol.
             MantisBT also supports authenticated news feeds for private projects
             or installations where anonymous access is not enabled. Authenticated feeds takes a
-            user name and a key token that are used to authenticate the user
+            username and a key token that are used to authenticate the user
             and generate the feed results in the context of the user's access
             rights (i.e. the same as what the user would see if they were to
-            logged into MantisBT).To get access to the News RSS as anonymous
-            user, visit the following
-            page:&#160;http://www.example.com/mantisbt/news_rss.php&#160;While a
-            user is logged in, the RSS links provided in the UI will always
+            logged into MantisBT).
+        </para>
+        <para>To get access to the News RSS as anonymous user, visit the following page
+            https://example.com/mantisbt/news_rss.php
+        </para>
+        <para>While a user is logged in, the RSS links provided in the UI will always
             provide links to the authenticated feeds, if no user is logged in
             (i.e. anonymous), then anonymous links will be provided.
         </para>
