@@ -1,10 +1,12 @@
 /*
  * Initialize the Prism syntax highlighting
  */
-;((script) => {
-	const userSelectedPlugins = script.getAttribute('data-plugins').split(',')
+((script) => {
+	const userSelectedPlugins = script
+		.getAttribute('data-plugins')
+		.split(',')
 		.filter((plugin) => plugin !== '')
-		.map((plugin) => plugin.trim())
+		.map((plugin) => plugin.trim());
 	const cdn = script.getAttribute('data-cdn');
 	const theme = script.getAttribute('data-theme');
 	const head = document.getElementsByTagName('head')[0];
@@ -109,44 +111,55 @@
 	const loadScript = (url, callback = null) => {
 		const script = document.createElement('script');
 		script.src = url;
-		script.onload = callback
+		script.onload = callback;
 		head.appendChild(script);
-	}
+	};
 
 	const loadCss = (url, callback = null) => {
 		const css = document.createElement('link');
 		css.rel = 'stylesheet';
 		css.href = url;
-		css.onload = callback
+		css.onload = callback;
 		head.append(css);
-	}
+	};
 
 	const loadResource = (resource, callback) => {
 		if ('component' === resource.type) {
-			loadScript(`${resourceUrl}/components/prism-${resource.name}.min.js`, callback)
+			loadScript(
+				`${resourceUrl}/components/prism-${resource.name}.min.js`,
+				callback
+			);
 		} else {
 			if (resource.css) {
-				loadCss(`${resourceUrl}/plugins/${resource.name}/prism-${resource.name}.min.css`, callback)
+				loadCss(
+					`${resourceUrl}/plugins/${resource.name}/prism-${resource.name}.min.css`,
+					callback
+				);
 			}
-			loadScript(`${resourceUrl}/plugins/${resource.name}/prism-${resource.name}.min.js`, callback)
+			loadScript(
+				`${resourceUrl}/plugins/${resource.name}/prism-${resource.name}.min.js`,
+				callback
+			);
 		}
-	}
+	};
 
 	const load = (resource) => {
 		return new Promise(async (resolve) => {
 			if (resource.requires) {
-				const requirement= availableResources.find((r) => r.name === resource.requires)
+				const requirement = availableResources.find(
+					(r)=> r.name === resource.requires
+				);
 				if (!requirement.ready) {
-					await load(requirement)
+					await load(requirement);
 				}
 			}
 
 			loadResource(resource, () => {
 				resource.ready = true;
-				resolve()
-			})
+				resolve();
+			});
 		});
-	}
+	};
 
 	const loadResources = (resources) => {
 		return new Promise(async (resolve) => {
@@ -166,7 +179,9 @@
 	window.Prism.manual = true;
 	document.addEventListener('DOMContentLoaded', () => {
 		// Search for relevant <code> elements.
-		const codeBlocks = document.querySelectorAll('pre > code[class*="language-"]');
+		const codeBlocks = document.querySelectorAll(
+			'pre > code[class*="language-"]'
+		);
 
 		// Do not load anything if there is no relevant <code> element.
 		if (0 === codeBlocks.length) {
@@ -174,14 +189,22 @@
 		}
 
 		// Filter the plugins selected by the user from the available plugins.
-		const plugins = availableResources.filter((resource) => userSelectedPlugins.includes(resource.name));
+		const plugins = availableResources
+			.filter((resource) => userSelectedPlugins.includes(resource.name));
 
 		// Filter the plugins that requires additional CSS classes on "code" elements.
-		plugins.filter((plugin) => plugin.cssClasses).forEach((plugin) => {
-			codeBlocks.forEach((code) => code.classList.add(...plugin.cssClasses))
-		});
+		plugins
+			.filter((plugin) => plugin.cssClasses)
+			.forEach((plugin) => {
+				codeBlocks.forEach((code) =>
+					code.classList.add(...plugin.cssClasses)
+				);
+			});
 
-		// Load the chain serialized to avoid unexpected behaviour due different loading speed.
+		/*
+		 * Load the chain serialized to avoid unexpected behaviour due
+		 * different loading speed.
+		 */
 		loadScript(`${resourceUrl}/prism.min.js`, () => {
 			loadResources(plugins).then(() => {
 				loadResource({ name: 'autoloader' }, () => {
@@ -190,5 +213,5 @@
 				});
 			});
 		});
-	})
+	});
 })(document.getElementById('mantis-core-formatting-syntax-highlighter-init'));
