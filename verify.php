@@ -30,6 +30,9 @@
  * @uses gpc_api.php
  * @uses print_api.php
  * @uses user_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 # don't auto-login when trying to verify new user
@@ -100,19 +103,16 @@ layout_login_page_begin();
 		<?php layout_login_page_logo() ?>
 		<div class="space-24 hidden-480"></div>
 
+		<div id="reset-passwd-msg" class="alert alert-sm alert-warning ">
 		<?php
 			if( $t_can_change_password ) {
-				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning ">';
 				echo lang_get( 'verify_warning' ) . '<br />';
 				echo lang_get( 'verify_change_password' );
-				echo '</div>';
 			} else {
-				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning">';
 				echo auth_password_managed_elsewhere_message();
-				echo '</div>';
 			}
 		?>
-
+		</div>
 
 		<?php
 		if( $t_can_change_password ) {
