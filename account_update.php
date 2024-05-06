@@ -38,6 +38,9 @@
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 require_once( 'core.php' );
@@ -66,7 +69,7 @@ if( !$t_account_verification ) {
 	$t_user_id = auth_get_current_user_id();
 } else {
 	# set a temporary cookie so the login information is passed between pages.
-	auth_set_cookies( $t_verify_user_id, false );
+	auth_set_cookies( $t_verify_user_id );
 	# fake login so the user can set their password
 	auth_attempt_script_login( user_get_username( $t_verify_user_id ) );
 	$t_user_id = $t_verify_user_id;
@@ -148,6 +151,7 @@ if( $t_update_password ) {
 }
 
 if( $t_update_realname ) {
+	/** @noinspection PhpUndefinedVariableInspection */
 	user_set_realname( $t_user_id, $t_realname );
 }
 

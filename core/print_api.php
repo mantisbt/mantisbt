@@ -1397,8 +1397,13 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
-        $p_string, false, $p_class );
+	print_link(
+		$p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive
+		. '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
+		$p_string,
+		false,
+		$p_class
+	);
 }
 
 /**
