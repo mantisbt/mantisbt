@@ -134,8 +134,12 @@ layout_login_page_begin();
 					<input type="hidden" name="confirm_hash" value="<?php echo string_html_specialchars( $f_confirm_hash ) ?>">
 					<?php
 					echo form_security_field( 'account_update' );
-					# When verifying account, set a token and don't display current password
-					token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
+					# When verifying account, set a token to limit time to submit new password
+					token_set( TOKEN_ACCOUNT_VERIFY,
+						true,
+						config_get( 'reauthentication_expiry' ),
+						$u_id
+					);
 					?>
 					<div class="field-container">
 						<label class="block clearfix">
