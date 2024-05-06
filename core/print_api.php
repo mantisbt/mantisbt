@@ -1344,7 +1344,12 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			$t_sort_field = rawurlencode( $p_sort_field );
 			$t_print_parameter = ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) ? '&print=1' : '';
 			$t_filter_parameter = filter_is_temporary( $g_filter ) ? filter_get_temporary_key_param( $g_filter ) . '&' : '';
-			print_link( 'view_all_set.php?' . $t_filter_parameter . 'sort_add=' . $t_sort_field . '&dir_add=' . $p_dir . '&type=' . FILTER_ACTION_PARSE_ADD . $t_print_parameter, $p_string );
+			$t_url = 'view_all_set.php?' . $t_filter_parameter
+				. 'sort_add=' . $t_sort_field
+				. '&dir_add=' . $p_dir
+				. '&type=' . FILTER_ACTION_PARSE_ADD
+				. $t_print_parameter;
+			print_link( $t_url, string_attribute( $p_string ) );
 			break;
 		default:
 			echo $p_string;
