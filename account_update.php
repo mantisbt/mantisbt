@@ -60,19 +60,30 @@ require_api( 'utility_api.php' );
 
 form_security_validate( 'account_update' );
 
-# If token is set, it's a password reset request from verify.php, and if
-# not we need to reauthenticate the user
-$t_verify_user_id = gpc_get( 'verify_user_id', false );
-$t_account_verification = $t_verify_user_id ? token_get_value( TOKEN_ACCOUNT_VERIFY, $t_verify_user_id ) : false;
-if( !$t_account_verification ) {
-	auth_reauthenticate();
-	$t_user_id = auth_get_current_user_id();
-} else {
+$t_verify_user_id = gpc_get_int( 'verify_user_id', 0 );
+$t_account_verification = (bool)$t_verify_user_id;
+if( $t_account_verification ) {
+	# Password reset request from verify.php - validate the confirmation hash
+	$f_confirm_hash = gpc_get_string( 'confirm_hash' );
+	$t_token_confirm_hash = token_get_value( TOKEN_ACCOUNT_ACTIVATION, $t_verify_user_id );
+	if( $t_token_confirm_hash == null || $f_confirm_hash !== $t_token_confirm_hash ) {
+		trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
+	}
+
+	# Make sure the token is not expired
+	if( null === token_get_value( TOKEN_ACCOUNT_VERIFY, $t_verify_user_id ) ) {
+		trigger_error( ERROR_SESSION_NOT_VALID, ERROR );
+	}
+
 	# set a temporary cookie so the login information is passed between pages.
 	auth_set_cookies( $t_verify_user_id );
 	# fake login so the user can set their password
 	auth_attempt_script_login( user_get_username( $t_verify_user_id ) );
 	$t_user_id = $t_verify_user_id;
+} else {
+	# Normal account update - authenticate the user
+	auth_reauthenticate();
+	$t_user_id = auth_get_current_user_id();
 }
 
 auth_ensure_user_authenticated();
