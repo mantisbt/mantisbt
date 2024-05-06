@@ -320,9 +320,7 @@ class BugData {
 	}
 
 	/**
-	 * Overloaded Function handling property sets.
-	 *
-	 * Unknown properties will be ignored.
+	 * Overloaded Function handling property sets
 	 *
 	 * @param string $p_name  Property name.
 	 * @param string $p_value Value to set.
@@ -378,12 +376,6 @@ class BugData {
 				$p_value = db_mysql_fix_utf8( $p_value );
 				break;
 
-			default:
-				# Silently skip unknown columns
-				if( !property_exists( $this, $p_name ) ) {
-					return;
-				}
-
 		}
 		$this->$p_name = $p_value;
 	}
@@ -415,9 +407,6 @@ class BugData {
 
 	/**
 	 * Fast-load database row into the object.
-	 *
-	 * If the database row contains columns not defined as BugData properties,
-	 * those columns will be ignored.
 	 *
 	 * @param array $p_row Database result to load into a bug object.
 	 *
