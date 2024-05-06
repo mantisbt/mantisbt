@@ -114,6 +114,7 @@ use Mantis\Exceptions\ClientException;
  * @property string steps_to_reproduce
  * @property string additional_information
  */
+#[AllowDynamicProperties]
 class BugData {
 	/**
 	 * Bug ID
