@@ -1349,7 +1349,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 				. '&dir_add=' . $p_dir
 				. '&type=' . FILTER_ACTION_PARSE_ADD
 				. $t_print_parameter;
-			print_link( $t_url, string_attribute( $p_string ) );
+			print_link( $t_url, $p_string );
 			break;
 		default:
 			echo $p_string;
@@ -1494,25 +1494,28 @@ function print_bracket_link_prepared( $p_link ) {
 }
 
 /**
- * print a HTML link
- * @param string  $p_link       The page URL.
- * @param string  $p_url_text   The displayed text for the link.
+ * Print a HTML link.
+ *
+ * @param string  $p_link       The target URL.
+ * @param string  $p_url_text   Displayed text for the link, will be escaped prior to display.
  * @param boolean $p_new_window Whether to open in a new window.
  * @param string  $p_class      The CSS class of the link.
+ *
  * @return void
  */
 function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
+	$t_url_text = string_attribute( $p_url_text );
 	if( is_blank( $p_link ) ) {
-		echo $p_url_text;
+		echo $t_url_text;
 	} else {
 		$t_link = htmlspecialchars( $p_link );
 		if( $p_new_window === true ) {
-			echo '<a class="new-window ' . $p_class . '" href="' . $t_link . '" target="_blank">' . $p_url_text . '</a>';
+			echo '<a class="new-window ' . $p_class . '" href="' . $t_link . '" target="_blank">' . $t_url_text . '</a>';
 		} else {
 			if( $p_class !== '' ) {
-				echo '<a class="' . $p_class . '" href="' . $t_link . '">' . $p_url_text . '</a>';
+				echo '<a class="' . $p_class . '" href="' . $t_link . '">' . $t_url_text . '</a>';
 			} else {
-				echo '<a href="' . $t_link . '">' . $p_url_text . '</a>';
+				echo '<a href="' . $t_link . '">' . $t_url_text . '</a>';
 			}
 		}
 	}
