@@ -40,6 +40,7 @@
  *
  * @author A2093064
  * @author Anakmalaysia
+ * @author Cookai1205
  * @author Cwlin0416
  * @author Firesueprtom
  * @author Frankou
@@ -746,7 +747,7 @@ $s_version_delete_sure = '您確定要刪除此版本「%1$s」？';
 $s_delete_version_button = '刪除版本';
 $s_edit_project_version_title = '編輯專案版本';
 $s_update_version_button = '更新版本';
-$s_released = '已發佈';
+$s_released = '已發布';
 $s_not_released = '尚未發佈';
 $s_scheduled_release = '已計劃發佈於';
 $s_obsolete = '已廢棄';
