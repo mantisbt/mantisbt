@@ -303,7 +303,7 @@ layout_page_begin();
 	<tr>
 		<th class="category">
 			<?php if( $t_require && $t_has_write_access ) {?><span class="required">*</span><?php } ?>
-			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
+			<?php echo string_attribute( lang_get_defaulted( $t_def['name'] ) ) ?>
 		</th>
 		<td>
 <?php
