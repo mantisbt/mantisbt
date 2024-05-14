@@ -72,14 +72,28 @@ require_api( 'string_api.php' );
  */
 function columns_filter_disabled( array $p_columns ) {
 	$t_columns = array();
-	$t_enable_profiles = ( config_get( 'enable_profiles' ) == ON );
+	$t_enable_profiles = null;
+	$t_enable_due_date = null;
 
 	foreach ( $p_columns as $t_column ) {
 		switch( $t_column ) {
 			case 'os':
 			case 'os_build':
 			case 'platform':
+				if( $t_enable_profiles == null ) {
+					$t_enable_profiles = config_get( 'enable_profiles' ) == ON;
+				}
 				if( ! $t_enable_profiles ) {
+					continue 2;
+				}
+				break;
+
+			case 'due_date':
+			case 'overdue':
+				if ( $t_enable_due_date == null ) {
+					$t_enable_due_date = access_has_project_level( config_get( 'due_date_view_threshold' ) );
+				}
+				if( ! $t_enable_due_date ) {
 					continue 2;
 				}
 				break;
