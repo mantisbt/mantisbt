@@ -1500,11 +1500,17 @@ function print_bracket_link_prepared( $p_link ) {
  * @param string  $p_url_text   Displayed text for the link, will be escaped prior to display.
  * @param boolean $p_new_window Whether to open in a new window.
  * @param string  $p_class      The CSS class of the link.
+ * @param string  $p_icon       Optional Fontawesome icon to display before $p_label
  *
  * @return void
  */
-function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-	$t_url_text = string_attribute( $p_url_text );
+function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '', $p_icon = '' ) {
+	if( $p_icon ) {
+		$t_url_text = icon_get( $p_icon, '', $p_url_text );
+	} else {
+		$t_url_text = string_attribute( $p_url_text );
+	}
+
 	if( is_blank( $p_link ) ) {
 		echo $t_url_text;
 	} else {
