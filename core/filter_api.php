@@ -2326,8 +2326,13 @@ function filter_gpc_get( array $p_filter = null ) {
 function filter_get_visible_sort_properties_array( array $p_filter, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	# get visible columns
 	$t_visible_columns = helper_get_columns_to_view( $p_columns_target );
-	# filter out those that ar not sortable
+	# filter out those that are not sortable
 	$t_visible_columns = array_filter( $t_visible_columns, 'column_is_sortable' );
+
+	# Special handling for overdue column, which is equivalent to sorting by due_date
+	if( in_array( 'overdue', $t_visible_columns ) & !in_array( 'due_date', $t_visible_columns ) ) {
+		$t_visible_columns[] = 'due_date';
+	}
 
 	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
