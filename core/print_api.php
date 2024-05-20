@@ -1313,14 +1313,17 @@ function print_formatted_severity_string( BugData $p_bug ) {
 /**
  * Print view bug sort link
  * @todo params should be in same order as print_manage_user_sort_link
- * @param string  $p_string         The displayed text of the link.
+ * @param string  $p_label          The displayed text of the link.
  * @param string  $p_sort_field     The field to sort.
  * @param string  $p_sort           The field to sort by.
  * @param string  $p_dir            The sort direction - either ASC or DESC.
  * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @param string  $p_icon           Optional Fontawesome icon to display instead of text.
+ *                                  If is set, $p_label will be used as the icon's title attribute.
+ *
  * @return void
  */
-function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_view_bug_sort_link( $p_label, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_icon = '' ) {
 	# @TODO cproensa, $g_filter is needed to get the temporary id, since the
 	# actual filter is not providede as parameter. Ideally, we should not
 	# rely in this global variable, but at the moment is not possible without
@@ -1349,10 +1352,10 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 				. '&dir_add=' . $p_dir
 				. '&type=' . FILTER_ACTION_PARSE_ADD
 				. $t_print_parameter;
-			print_link( $t_url, $p_string );
+			print_link( $t_url, $p_label, false, '', $p_icon );
 			break;
 		default:
-			echo $p_string;
+			echo $p_label;
 	}
 }
 
