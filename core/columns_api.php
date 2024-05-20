@@ -986,7 +986,7 @@ function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMN
  */
 function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-bugnotes-count">';
-	print_icon( 'fa-comments', 'blue' );
+	print_icon( 'fa-comments', 'blue', lang_get( 'bugnotes_count' ) );
 	echo '</th>';
 }
 
