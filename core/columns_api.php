@@ -320,7 +320,6 @@ function column_is_sortable( $p_column ) {
 		case 'bugnotes_count':
 		case 'attachment_count':
 		case 'tags':
-		case 'overdue':
 		case 'additional_information':
 		case 'description':
 		case 'notes':
