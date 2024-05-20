@@ -956,7 +956,7 @@ function custom_field_get_display_name( $p_name ) {
 		$p_name .= ' (' . $t_local_name . ')';
 	}
 
-	return string_display_line( $p_name );
+	return string_attribute( $p_name );
 }
 
 /**
