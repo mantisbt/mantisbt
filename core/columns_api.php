@@ -1062,7 +1062,7 @@ function print_column_title_due_date( $p_sort, $p_dir, $p_columns_target = COLUM
 function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-overdue">';
 	$t_overdue_text = lang_get( 'overdue' );
-	print_view_bug_sort_link( $t_overdue_text, 'due_date', $p_sort, $p_dir, $p_columns_target, 'fa-times-circle-o' );
+	print_view_bug_sort_link( $t_overdue_text, 'due_date', $p_sort, $p_dir, $p_columns_target, 'fa-clock-o' );
 	print_sort_icon( $p_dir, $p_sort, 'due_date' );
 	echo '</th>';
 }
