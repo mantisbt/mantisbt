@@ -516,17 +516,16 @@ function relgraph_output_map( Graph $p_graph, $p_name ) {
  * @return void
  */
 function relgraph_add_bug_to_graph( Graph &$p_graph, $p_bug_id, BugData $p_bug, $p_url = null, $p_highlight = false, $p_show_summary = false ) {
-	$t_summary = string_display_line_links( $p_bug->summary );
 	$t_status = get_enum_element( 'status', $p_bug->status );
 	$t_label = $p_bug_id;
 	if( $p_show_summary ) {
 		# Truncate summary to 30 chars, to avoid nodes being too wide
-		$t_label .= "\n" . mb_strimwidth( $t_summary, 0, 30, "..." );
+		$t_label .= "\n" . string_attribute( mb_strimwidth( $p_bug->summary, 0, 30, "..." ) );
 	}
 
 	$t_node_attributes = array();
 	$t_node_attributes['label'] = $t_label;
-	$t_node_attributes['tooltip'] = '[' . $t_status . '] ' . $t_summary;
+	$t_node_attributes['tooltip'] = '[' . $t_status . '] ' . string_attribute( $p_bug->summary );
 
 	if( $p_highlight ) {
 		$t_node_attributes['color'] = '#0000FF';
