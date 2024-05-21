@@ -56,7 +56,8 @@ combination with some languages (e.g. "LISP" and "Dart"). An exception is
 thrown and breaks the code highlighting. See https://github.com/PrismJS/prism/issues/3789
 
 The [local file is patched](plugins/show-invisibles/prism-show-invisibles.min.js).
-If you use the CDN, this could hit you.
+
+If you are using the CDN, you may be affected by this issue.
 
 
 More themes
