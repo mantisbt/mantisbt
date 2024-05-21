@@ -184,6 +184,9 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 			'dir'		=> 'none'
 	) );
 
+	$t_url_format = 'bug_relationship_graph.php?bug_id=%d&graph=relation'
+		. ( $p_show_summary ? '&summary=1' : '' );
+
 	# Add all issue nodes and edges to the graph.
 	ksort( $v_bug_list );
 	foreach( $v_bug_list as $t_id => $t_bug ) {
@@ -192,7 +195,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 		if( $t_view_on_click ) {
 			$t_url = string_get_bug_view_url( $t_id );
 		} else {
-			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_id . '&graph=relation';
+			$t_url = sprintf( $t_url_format, $t_id );
 		}
 
 		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_bug, $t_url, $t_id == $p_bug_id, $p_show_summary );
@@ -316,6 +319,9 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 			'dir'		=> 'back'
 	) );
 
+	$t_url_format = 'bug_relationship_graph.php?bug_id=%d&graph=dependency&orientation=' . $t_graph_orientation
+		. ( $p_show_summary ? '&summary=1' : '' );
+
 	# Add all issue nodes and edges to the graph.
 	foreach( $v_bug_list as $t_related_bug_id => $t_related_bug ) {
 		$t_id_string = relgraph_bug_format_id( $t_related_bug_id );
@@ -323,7 +329,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 		if( $t_view_on_click ) {
 			$t_url = string_get_bug_view_url( $t_related_bug_id );
 		} else {
-			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_related_bug_id . '&graph=dependency&orientation=' . $t_graph_orientation;
+			$t_url = sprintf( $t_url_format, $t_related_bug_id );
 		}
 
 		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_related_bug, $t_url, $t_related_bug_id == $p_bug_id, $p_show_summary );
@@ -510,17 +516,16 @@ function relgraph_output_map( Graph $p_graph, $p_name ) {
  * @return void
  */
 function relgraph_add_bug_to_graph( Graph &$p_graph, $p_bug_id, BugData $p_bug, $p_url = null, $p_highlight = false, $p_show_summary = false ) {
-	$t_summary = string_display_line_links( $p_bug->summary );
 	$t_status = get_enum_element( 'status', $p_bug->status );
 	$t_label = $p_bug_id;
 	if( $p_show_summary ) {
 		# Truncate summary to 30 chars, to avoid nodes being too wide
-		$t_label .= "\n" . mb_strimwidth( $t_summary, 0, 30, "..." );
+		$t_label .= "\n" . string_attribute( mb_strimwidth( $p_bug->summary, 0, 30, "..." ) );
 	}
 
 	$t_node_attributes = array();
 	$t_node_attributes['label'] = $t_label;
-	$t_node_attributes['tooltip'] = '[' . $t_status . '] ' . $t_summary;
+	$t_node_attributes['tooltip'] = '[' . $t_status . '] ' . string_attribute( $p_bug->summary );
 
 	if( $p_highlight ) {
 		$t_node_attributes['color'] = '#0000FF';
