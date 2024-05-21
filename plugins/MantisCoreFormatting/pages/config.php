@@ -294,8 +294,8 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 				 ?>
 			/>
 			<span class="lbl">
-				<?php echo $t_plugin['name'] ?>
-				<small class="block" style="margin-left:2.3rem">
+				<?php echo $t_plugin['name'] ?><br>
+				<small class="margin-left-20">
 					<?php echo $t_plugin['description'] ?>
 				</small>
 			</span>
