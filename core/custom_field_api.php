@@ -1371,6 +1371,10 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 	$t_value_field = ( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) ? 'text' : 'value';
 	$t_value = custom_field_value_to_database( $p_value, $t_type );
 
+	if( $t_type == CUSTOM_FIELD_TYPE_MULTILIST || $t_type == CUSTOM_FIELD_TYPE_CHECKBOX ) {
+		$t_value = trim( $t_value, '|' );
+	}
+
 	# Determine whether an existing value needs to be updated or a new value inserted
 	db_param_push();
 	$t_query = 'SELECT ' . $t_value_field . '
