@@ -309,7 +309,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 </div>
 <div class="widget-toolbox padding-8 clearfix">
 	<input type="submit" class="btn btn-primary btn-white btn-round"
-		   value="<?php echo lang_get( 'change_configuration' ) ?>"
+			value="<?php echo lang_get( 'change_configuration' ) ?>"
 	/>
 </div>
 </div>
