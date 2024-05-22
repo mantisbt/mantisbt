@@ -69,12 +69,12 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 				$t_plugins = plugin_config_get( 'syntax_highlighting_plugins' );
 				echo '<script
 					id="mantis-core-formatting-syntax-highlighter-init"
-					data-cdn="' . config_get('cdn_enabled') . '"
+					data-cdn="' . config_get( 'cdn_enabled' ) . '"
 					data-theme="' . plugin_config_get( 'syntax_highlighting_theme' ) . '"
 					data-plugins="' . implode( ',', array_map(
 						'trim',
 						is_array( $t_plugins ) ? $t_plugins : []
-					)) . '"
+					) ) . '"
 					src="' . plugin_file( 'syntax-highlighting/init.js' ) . '"></script>';
 			}
 		}

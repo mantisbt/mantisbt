@@ -59,13 +59,13 @@ foreach( [
 
 # Syntax highlighting. Currently selected plugins
 $t_syntax_highlighting_current_plugins = plugin_config_get( 'syntax_highlighting_plugins' );
-if ( !is_array($t_syntax_highlighting_current_plugins ) ) {
+if ( !is_array( $t_syntax_highlighting_current_plugins ) ) {
 	$t_syntax_highlighting_current_plugins = [];
 }
 
 # Syntax highlighting. Available theme files
 $t_syntax_highlighting_available_themes = [];
-foreach( glob( __DIR__ . '/../files/syntax-highlighting/themes/*') as $t_file ) {
+foreach( glob( __DIR__ . '/../files/syntax-highlighting/themes/*' ) as $t_file ) {
 	$t_syntax_highlighting_available_themes[] = basename( $t_file );
 }
 
@@ -84,7 +84,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-text-width', 'ace-icon' ); ?>
-			<?php echo sprintf('%s: %s',
+			<?php echo sprintf( '%s: %s',
 				lang_get( 'plugin_format_title' ),
 				lang_get( 'plugin_format_config' )
 			) ?>

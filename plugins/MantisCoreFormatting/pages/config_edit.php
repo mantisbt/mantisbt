@@ -24,7 +24,7 @@
 
 form_security_validate( 'plugin_format_config_edit' );
 
-auth_reauthenticate( );
+auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 $f_process_text = gpc_get_int( 'process_text', ON );
@@ -33,7 +33,7 @@ $f_process_buglinks = gpc_get_int( 'process_buglinks', ON );
 $f_process_markdown = gpc_get_int( 'process_markdown', OFF );
 $f_syntax_highlighting = gpc_get_int( 'syntax_highlighting', OFF );
 $f_syntax_highlighting_theme = gpc_get_string( 'syntax_highlighting_theme', 'default' );
-$f_syntax_highlighting_plugins = gpc_get_string_array( 'syntax_highlighting_plugins',null );
+$f_syntax_highlighting_plugins = gpc_get_string_array( 'syntax_highlighting_plugins', null );
 
 if( plugin_config_get( 'process_text' ) != $f_process_text ) {
 	plugin_config_set( 'process_text', $f_process_text );
