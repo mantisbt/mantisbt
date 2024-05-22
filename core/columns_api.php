@@ -743,8 +743,7 @@ function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target =
 function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-view-state">';
 	$t_view_state_text = lang_get( 'view_status' );
-	$t_view_state_icon = ' ' . icon_get( 'fa-lock', '', $t_view_state_text );
-	print_view_bug_sort_link( $t_view_state_icon, 'view_state', $p_sort, $p_dir, $p_columns_target );
+	print_view_bug_sort_link( $t_view_state_text, 'view_state', $p_sort, $p_dir, $p_columns_target, 'fa-lock' );
 	print_sort_icon( $p_dir, $p_sort, 'view_state' );
 	echo '</th>';
 }
@@ -1077,8 +1076,7 @@ function print_column_title_due_date( $p_sort, $p_dir, $p_columns_target = COLUM
 function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-overdue">';
 	$t_overdue_text = lang_get( 'overdue' );
-	$t_overdue_icon = ' ' . icon_get( 'fa-times-circle-o', '', $t_overdue_text );
-	print_view_bug_sort_link( $t_overdue_icon, 'due_date', $p_sort, $p_dir, $p_columns_target );
+	print_view_bug_sort_link( $t_overdue_text, 'due_date', $p_sort, $p_dir, $p_columns_target, 'fa-clock-o' );
 	print_sort_icon( $p_dir, $p_sort, 'due_date' );
 	echo '</th>';
 }

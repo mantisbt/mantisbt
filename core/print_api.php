@@ -1329,19 +1329,26 @@ function print_formatted_severity_string( BugData $p_bug ) {
 }
 
 /**
- * Print view bug sort link
- * @todo params should be in same order as print_manage_user_sort_link
- * @param string  $p_string         The displayed text of the link.
- * @param string  $p_sort_field     The field to sort.
- * @param string  $p_sort           The field to sort by.
- * @param string  $p_dir            The sort direction - either ASC or DESC.
- * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * Print view bug sort link.
+ *
+ * Prints the column header as a link allowing to change the sort order.
+ *
+ * @param string $p_label          The displayed text of the link.
+ * @param string $p_sort_field     The field to sort.
+ * @param string $p_sort           The field to sort by.
+ * @param string $p_dir            The sort direction - either ASC or DESC.
+ * @param int    $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @param string $p_icon           Optional Fontawesome icon to display instead of text.
+ *                                 If is set, $p_label will be used as the icon's title attribute.
+ *
  * @return void
+ *
+ * @todo params should be in same order as print_manage_user_sort_link
  */
-function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_view_bug_sort_link( $p_label, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_icon = '' ) {
 	# @TODO cproensa, $g_filter is needed to get the temporary id, since the
-	# actual filter is not providede as parameter. Ideally, we should not
-	# rely in this global variable, but at the moment is not possible without
+	# actual filter is not provided as parameter. Ideally, we should not
+	# rely on this global variable, but at the moment is not possible without
 	# a rewrite of these print functions.
 	global $g_filter;
 
@@ -1367,10 +1374,10 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 				. '&dir_add=' . $p_dir
 				. '&type=' . FILTER_ACTION_PARSE_ADD
 				. $t_print_parameter;
-			print_link( $t_url, $p_string );
+			print_link( $t_url, $p_label, false, '', $p_icon );
 			break;
 		default:
-			echo $p_string;
+			echo $p_label;
 	}
 }
 
@@ -1512,17 +1519,23 @@ function print_bracket_link_prepared( $p_link ) {
 }
 
 /**
- * Print a HTML link.
+ * Print a HTML link with optional icon.
  *
- * @param string  $p_link       The target URL.
- * @param string  $p_url_text   Displayed text for the link, will be escaped prior to display.
- * @param boolean $p_new_window Whether to open in a new window.
- * @param string  $p_class      The CSS class of the link.
+ * @param string $p_link       The target URL.
+ * @param string $p_url_text   Displayed text for the link, will be escaped prior to display.
+ * @param bool   $p_new_window Whether to open in a new window.
+ * @param string $p_class      The CSS class of the link.
+ * @param string $p_icon       Optional Fontawesome icon to display before $p_label
  *
  * @return void
  */
-function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-	$t_url_text = string_attribute( $p_url_text );
+function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '', $p_icon = '' ) {
+	if( $p_icon ) {
+		$t_url_text = icon_get( $p_icon, '', $p_url_text );
+	} else {
+		$t_url_text = string_attribute( $p_url_text );
+	}
+
 	if( is_blank( $p_link ) ) {
 		echo $t_url_text;
 	} else {
