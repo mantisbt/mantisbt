@@ -252,7 +252,7 @@ class RestIssueTest extends RestBase {
 		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
-	public function testCreateIssueWithVersionObjectIdAndMistatchingName() {
+	public function testCreateIssueWithVersionObjectIdAndMismatchingName() {
 		$this->skipTestIfNotEnoughVersions( 2 );
 
 		$t_version_id = $this->versions[0]['id'];
@@ -365,7 +365,7 @@ class RestIssueTest extends RestBase {
 	 *
 	 * @param ResponseInterface $p_response
 	 *
-	 * @return integer Created issue Id
+	 * @return integer Created issue ID
 	 */
 	protected function assertIssueCreatedWithTag( $p_response ) {
 		$this->assertEquals( HTTP_STATUS_CREATED, $p_response->getStatusCode() );

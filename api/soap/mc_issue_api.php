@@ -1013,9 +1013,28 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_category = $p_issue['category'] ?? null;
 	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
 
-	$t_version_id = isset( $p_issue['version'] ) ? mci_get_version_id( $p_issue['version'], $t_project_id, 'version' ) : 0;
-	$t_fixed_in_version_id = isset( $p_issue['fixed_in_version'] ) ? mci_get_version_id( $p_issue['fixed_in_version'], $t_project_id, 'fixed_in_version' ) : 0;
-	$t_target_version_id = isset( $p_issue['target_version'] ) ? mci_get_version_id( $p_issue['target_version'], $t_project_id, 'target_version' ) : 0;
+	/**
+	 * Retrieve Id of Version to set.
+	 *
+	 * If the Version is not defined in the issue data, the function will return 0
+	 * which will cause the version field to be cleared when the Issue is updated.
+	 *
+	 * @param string $p_field      Version field to update.
+	 * @param array  $p_issue      Issue data.
+	 * @param int    $p_project_id
+	 *
+	 * @return int Version Id or 0 to unset the version
+	 * @throws ClientException
+	 */
+	$fn_get_version_id = function( string $p_field, array $p_issue, int $p_project_id ): int {
+		if( !isset( $p_issue[$p_field] ) ) {
+			return 0;
+		}
+		return mci_get_version_id( $p_issue[$p_field], $p_project_id, $p_field );
+	};
+	$t_version_id = $fn_get_version_id( 'version', $p_issue, $t_project_id );
+	$t_fixed_in_version_id = $fn_get_version_id( 'fixed_in_version', $p_issue, $t_project_id );
+	$t_target_version_id = $fn_get_version_id( 'target_version', $p_issue, $t_project_id );
 
 	if( is_blank( $t_summary ) ) {
 		return ApiObjectFactory::faultBadRequest( 'Mandatory field \'summary\' is missing.' );
@@ -1110,15 +1129,25 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	if( isset( $p_issue['platform'] ) ) {
 		$t_bug_data->platform = $p_issue['platform'];
 	}
-	if( $t_version_id != 0 ) {
-		$t_bug_data->version = version_get_field( $t_version_id, 'version' );
+
+	/**
+	 * Returns the value to assign to Version field.
+	 *
+	 * @param int $p_version_id If 0, will return '' causing version to be unset.
+	 *
+	 * @return string Version
+	 * @throws ClientException
+	 */
+	$fn_set_version_field = function( int $p_version_id ): string {
+		/** @noinspection PhpUnhandledExceptionInspection */
+		return $p_version_id == 0 ? '' : version_get_field( $p_version_id, 'version' );
+	};
+	$t_bug_data->version = $fn_set_version_field( $t_version_id );
+	$t_bug_data->fixed_in_version = $fn_set_version_field( $t_fixed_in_version_id );
+	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
+		$t_bug_data->target_version = $fn_set_version_field( $t_target_version_id );
 	}
-	if( $t_fixed_in_version_id != 0 ) {
-		$t_bug_data->fixed_in_version = version_get_field( $t_fixed_in_version_id, 'version' );
-	}
-	if( $t_target_version_id != 0 && access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
-		$t_bug_data->target_version = version_get_field( $t_target_version_id, 'version' );
-	}
+
 	if( isset( $p_issue['sticky'] ) && access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $t_bug_data->id ) ) {
 		$t_bug_data->sticky = $p_issue['sticky'];
 	}
