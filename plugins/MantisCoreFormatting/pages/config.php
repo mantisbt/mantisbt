@@ -300,7 +300,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 				</small>
 			</span>
 		</label>
-	 <?php endforeach; ?>
+	<?php endforeach; ?>
 	</td>
 </tr>
 
