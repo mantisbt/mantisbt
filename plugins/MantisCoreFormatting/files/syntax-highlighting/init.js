@@ -17,7 +17,7 @@
 	;
 
 	/*
-	 * Available plugins/resources.
+	 * Available plugins/resources
 	 *
 	 * If new plugins are added or others are deleted, this must be
 	 * reflected here. Only plugins that are listed here will be loaded.
@@ -170,11 +170,20 @@
 		});
 	};
 
-	// Load theme
+	// Load the Prism theme CSS.
 	loadCss(`${resourceUrl}/themes/${theme}`);
+
 	// This file is to reapply/force the monospace font to <code> elements.
 	loadCss(`${localUrl}/monospace.css`);
-	// Load scripts
+
+	/*
+	 * Initialize Prism
+	 *
+	 * "Prism.manual" is needed to call "Prism.highlightAll();" manually after
+	 * all files have been loaded serialized.
+	 *
+	 * @see https://prismjs.com/docs/Prism.html#.manual
+	 */
 	window.Prism = window.Prism || {};
 	window.Prism.manual = true;
 	document.addEventListener('DOMContentLoaded', () => {

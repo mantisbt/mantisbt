@@ -31,7 +31,7 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
-# Syntax highlighting. Available plugins.
+# Syntax highlighting. Available plugins
 $t_syntax_highlighting_available_plugins = [];
 foreach( [
 	'copy-to-clipboard',
@@ -310,10 +310,10 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	<?php foreach( $t_syntax_highlighting_available_plugins as $t_plugin ): ?>
 		<label class="lbl block">
 			<input
-				name="syntax_highlighting_plugins[]"
 				type="checkbox"
-				class="ace input-sm"
+				name="syntax_highlighting_plugins[]"
 				value="<?php echo $t_plugin['id'] ?>"
+				class="ace input-sm"
 				<?php check_checked( $t_syntax_highlighting_current_plugins, $t_plugin['id'] ) ?>
 			>
 			<span class="lbl">

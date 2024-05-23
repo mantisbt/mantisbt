@@ -1,15 +1,19 @@
 /*
- * Config > user | Font Family
+ * Under "Config > User | Font Family" it is possible to select a font dedicated
+ * for an user.
+ *
+ * The result is an inline style that applies this font to all elements.
+ * Including the <span> elements which wraps the language tokens, within
+ * the <code> element.
  *
  * <style>
  *  * { font-family: "Open Sans" }
  * </style>
  *
- * This inline style applies to the <span> elements which
- * wraps the language tokens, within the <code> element.
- *
  * This rule reapplies/forces the monospace font-family to them.
+ *
+ * @todo move this to the general markdown.css?
  */
-pre > code * {
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
+pre > code span {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
 }
