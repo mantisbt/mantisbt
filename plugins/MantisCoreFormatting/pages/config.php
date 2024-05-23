@@ -104,7 +104,11 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	</th>
 	<td class="center" width="20%">
 		<label>
-			<input type="radio" class="ace" name="process_text" value="1"
+			<input
+				type="radio"
+				name="process_text"
+				value="1"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'process_text' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
@@ -114,7 +118,11 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	</td>
 	<td class="center" width="20%">
 		<label>
-			<input type="radio" class="ace" name="process_text" value="0"
+			<input
+				type="radio"
+				name="process_text"
+				value="0"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'process_text' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
@@ -130,7 +138,11 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	</th>
 	<td class="center">
 		<label>
-			<input type="radio" class="ace" name="process_urls" value="1"
+			<input
+				type="radio"
+				name="process_urls"
+				value="1"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'process_urls' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
@@ -140,7 +152,11 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	</td>
 	<td class="center">
 		<label>
-			<input type="radio" class="ace" name="process_urls" value="0"
+			<input
+				type="radio"
+				name="process_urls"
+				value="0"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'process_urls' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
@@ -163,7 +179,11 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	</th>
 	<td class="center">
 		<label>
-			<input type="radio" class="ace" name="process_buglinks" value="1"
+			<input
+				type="radio"
+				name="process_buglinks"
+				value="1"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'process_buglinks' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
@@ -173,7 +193,11 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	</td>
 	<td class="center">
 		<label>
-			<input type="radio" class="ace" name="process_buglinks" value="0"
+			<input
+				type="radio"
+				name="process_buglinks"
+				value="0"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'process_buglinks' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
@@ -193,7 +217,11 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	</th>
 	<td class="center">
 		<label>
-			<input type="radio" class="ace" name="process_markdown" value="1"
+			<input
+				type="radio"
+				name="process_markdown"
+				value="1"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'process_markdown' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
@@ -203,7 +231,11 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	</td>
 	<td class="center">
 		<label>
-			<input type="radio" class="ace" name="process_markdown" value="0"
+			<input
+				type="radio"
+				name="process_markdown"
+				value="0"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'process_markdown' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
@@ -225,9 +257,9 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 		<label>
 			<input
 				type="radio"
-				class="ace"
 				name="syntax_highlighting"
 				value="1"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'syntax_highlighting' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
@@ -239,9 +271,9 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 		<label>
 			<input
 				type="radio"
-				class="ace"
 				name="syntax_highlighting"
 				value="0"
+				class="ace"
 				<?php check_checked( plugin_config_get( 'syntax_highlighting' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
