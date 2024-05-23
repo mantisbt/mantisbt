@@ -1055,6 +1055,7 @@ $s_bytes = 'octets';
 $s_kib = 'Kio';
 $s_attachment_missing = 'Pièce jointe manquante';
 $s_attachment_count = 'Nombre de pièces jointes';
+$s_bugnotes_count = 'Nombre de rapports de faute';
 $s_view_attachments_for_issue = 'Voir %1$d pièce(s) jointe(s) pour l’anomalie nº %2$d';
 $s_warning_update_custom_field_type = '<strong>Avertissement :</strong> le champ personnalisé « %1$s » a déjà des valeurs stockées. Changer le type de champ peut provoquer des erreurs et un comportement inattendu si les valeurs existantes ne sont pas cohérentes avec le nouveau type du champ. Pour continuer, cliquer sur le bouton ci-dessous.';
 $s_phpmailer_language = 'fr';

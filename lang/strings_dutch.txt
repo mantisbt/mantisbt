@@ -1040,6 +1040,7 @@ $s_bytes = 'bytes';
 $s_kib = 'KiB';
 $s_attachment_missing = 'De bijlage ontbreekt';
 $s_attachment_count = 'Aantal toegevoegde bestanden';
+$s_bugnotes_count = 'Aantal opmerkingen';
 $s_view_attachments_for_issue = '%1$d bestand(en) bekijken voor melding #%2$d';
 $s_warning_update_custom_field_type = '<strong>Waarschuwing:</strong> Aangepast veld "%1$s" heeft al opgeslagen waarden. Het wijzigen van het veldtype kan fouten en onverwacht gedrag veroorzaken als bestaande waarden niet consistent zijn met het nieuwe type van het veld. Klik op de onderstaande knop om door te gaan';
 $s_phpmailer_language = 'nl';
