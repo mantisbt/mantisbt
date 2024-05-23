@@ -102,7 +102,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 			<?php echo lang_get( 'plugin_format_process_text_warning_notice' ) ?>
 		</span>
 	</th>
-	<td class="center" width="20%">
+	<td class="center width-20">
 		<label>
 			<input
 				type="radio"
@@ -116,7 +116,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 			</span>
 		</label>
 	</td>
-	<td class="center" width="20%">
+	<td class="center width-20">
 		<label>
 			<input
 				type="radio"
@@ -133,7 +133,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 </tr>
 
 <tr>
-	<th class="category width-40">
+	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_urls' ) ?>
 	</th>
 	<td class="center">
@@ -167,7 +167,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 </tr>
 
 <tr>
-	<th class="category width-40">
+	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_buglinks' ) ?>
 		<br>
 		<span class="small"><?php
@@ -208,7 +208,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 </tr>
 
 <tr>
-	<th class="category width-40">
+	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_markdown' ) ?>
 		<br>
 		<span class="small">
@@ -246,7 +246,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 </tr>
 
 <tr>
-	<th class="category width-40">
+	<th class="category">
 		<?php echo lang_get( 'plugin_format_syntax_highlighting' ) ?>
 		<br>
 		<span class="small">
@@ -284,7 +284,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 </tr>
 
 <tr>
-	<th class="category width-40">
+	<th class="category">
 		<?php echo lang_get( 'plugin_format_syntax_highlighting_theme' )?>
 	</th>
 	<td>
@@ -303,7 +303,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	</td>
 </tr>
 <tr>
-	<th class="category width-40">
+	<th class="category">
 		<?php echo lang_get( 'plugin_format_syntax_highlighting_plugins' ) ?>
 	</th>
 	<td colspan="2">
