@@ -68,7 +68,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			if ( ON == plugin_config_get( 'syntax_highlighting' ) ) {
 				$t_plugins = plugin_config_get( 'syntax_highlighting_plugins' );
 				echo '<script
-					id="mantis-core-formatting-syntax-highlighter-init"
+					id="mantis-core-formatting-syntax-highlighting-init"
 					data-cdn="' . config_get( 'cdn_enabled' ) . '"
 					data-theme="' . plugin_config_get( 'syntax_highlighting_theme' ) . '"
 					data-plugins="' . implode( ',', array_map(

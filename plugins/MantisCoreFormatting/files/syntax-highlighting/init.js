@@ -214,4 +214,4 @@
 			});
 		});
 	});
-})(document.getElementById('mantis-core-formatting-syntax-highlighter-init'));
+})(document.getElementById('mantis-core-formatting-syntax-highlighting-init'));
