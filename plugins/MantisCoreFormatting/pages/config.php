@@ -96,26 +96,26 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 <table class="table table-bordered table-condensed table-striped">
 <tr>
 	<th class="category width-40">
-		<?php echo lang_get( 'plugin_format_process_text' )?>
+		<?php echo lang_get( 'plugin_format_process_text' ) ?>
 		<br>
 		<span class="small">
-			<?php echo lang_get( 'plugin_format_process_text_warning_notice' )?>
+			<?php echo lang_get( 'plugin_format_process_text_warning_notice' ) ?>
 		</span>
 	</th>
 	<td class="center" width="20%">
 		<label>
 			<input type="radio" class="ace" name="process_text" value="1"
-				<?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : '' ?>
+				<?php check_checked( plugin_config_get( 'process_text' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
-				<?php echo lang_get( 'plugin_format_enabled' )?>
+				<?php echo lang_get( 'plugin_format_enabled' ) ?>
 			</span>
 		</label>
 	</td>
 	<td class="center" width="20%">
 		<label>
 			<input type="radio" class="ace" name="process_text" value="0"
-				<?php echo( OFF == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : '' ?>
+				<?php check_checked( plugin_config_get( 'process_text' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
 				<?php echo lang_get( 'plugin_format_disabled' ) ?>
@@ -131,7 +131,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	<td class="center">
 		<label>
 			<input type="radio" class="ace" name="process_urls" value="1"
-				<?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : '' ?>
+				<?php check_checked( plugin_config_get( 'process_urls' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
 				<?php echo lang_get( 'plugin_format_enabled' ) ?>
@@ -141,7 +141,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	<td class="center">
 		<label>
 			<input type="radio" class="ace" name="process_urls" value="0"
-				<?php echo( OFF == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : '' ?>
+				<?php check_checked( plugin_config_get( 'process_urls' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
 				<?php echo lang_get( 'plugin_format_disabled' ) ?>
@@ -164,7 +164,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	<td class="center">
 		<label>
 			<input type="radio" class="ace" name="process_buglinks" value="1"
-				<?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : '' ?>
+				<?php check_checked( plugin_config_get( 'process_buglinks' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
 				<?php echo lang_get( 'plugin_format_enabled' ) ?>
@@ -174,7 +174,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	<td class="center">
 		<label>
 			<input type="radio" class="ace" name="process_buglinks" value="0"
-				<?php echo( OFF == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : '' ?>
+				<?php check_checked( plugin_config_get( 'process_buglinks' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
 				<?php echo lang_get( 'plugin_format_disabled' ) ?>
@@ -194,7 +194,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	<td class="center">
 		<label>
 			<input type="radio" class="ace" name="process_markdown" value="1"
-				<?php echo( ON == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : '' ?>
+				<?php check_checked( plugin_config_get( 'process_markdown' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
 				<?php echo lang_get( 'plugin_format_enabled' ) ?>
@@ -204,7 +204,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 	<td class="center">
 		<label>
 			<input type="radio" class="ace" name="process_markdown" value="0"
-				<?php echo( OFF == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : '' ?>
+				<?php check_checked( plugin_config_get( 'process_markdown' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
 				<?php echo lang_get( 'plugin_format_disabled' ) ?>
@@ -228,10 +228,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 				class="ace"
 				name="syntax_highlighting"
 				value="1"
-				<?php echo( ON == plugin_config_get( 'syntax_highlighting' ) )
-					? 'checked="checked"'
-					: ''
-				?>
+				<?php check_checked( plugin_config_get( 'syntax_highlighting' ), ON ) ?>
 			>
 			<span class="lbl padding-6">
 				<?php echo lang_get( 'plugin_format_enabled' ) ?>
@@ -245,10 +242,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 				class="ace"
 				name="syntax_highlighting"
 				value="0"
-				<?php echo( OFF == plugin_config_get( 'syntax_highlighting' ) )
-					? 'checked="checked"'
-					: ''
-				?>
+				<?php check_checked( plugin_config_get( 'syntax_highlighting' ), OFF ) ?>
 			>
 			<span class="lbl padding-6">
 				<?php echo lang_get( 'plugin_format_disabled' )?>
@@ -267,7 +261,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 			<?php foreach( $t_syntax_highlighting_available_themes as $t_theme ): ?>
 				<option
 					value="<?php echo $t_theme ?>"
-					<?php echo $t_theme === $t_syntax_highlighting_current_theme ? 'selected' : '' ?>
+					<?php check_selected( $t_syntax_highlighting_current_theme, $t_theme ) ?>
 				>
 					<?php echo str_replace( ['prism-', '.min.css'], '', $t_theme ) ?>
 				</option>
@@ -288,10 +282,7 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 				type="checkbox"
 				class="ace input-sm"
 				value="<?php echo $t_plugin['id'] ?>"
-				<?php echo in_array( $t_plugin['id'], $t_syntax_highlighting_current_plugins, true )
-					? ' checked'
-					: ''
-				 ?>
+				<?php check_checked( $t_syntax_highlighting_current_plugins, $t_plugin['id'] ) ?>
 			>
 			<span class="lbl">
 				<?php echo $t_plugin['name'] ?><br>
