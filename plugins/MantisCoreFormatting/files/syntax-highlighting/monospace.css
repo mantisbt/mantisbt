@@ -11,8 +11,6 @@
  * </style>
  *
  * This rule reapplies/forces the monospace font-family to them.
- *
- * @todo move this to the general markdown.css?
  */
 pre > code span {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
