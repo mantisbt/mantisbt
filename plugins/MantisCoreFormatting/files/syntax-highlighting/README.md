@@ -1,5 +1,4 @@
-Syntax highlighting
-===
+# Syntax highlighting
 
 This implementation is based on Prism.
 
@@ -14,8 +13,7 @@ A list of all supported languages can be found here.
 - https://prismjs.com/index.html#supported-languages
 
 
-Files
----
+## Files
 
 https://github.com/PrismJS/prism/
 
@@ -26,8 +24,7 @@ Copy only the minimized versions of:
 - themes to ./themes
 
 
-Plugins and Components
----
+## Plugins and Components
 
 Some of the plugins have dependencies on other plugins or components which are
 not loaded automatically by default.
@@ -39,8 +36,7 @@ If a plugin is added or removed, the `availableResources` array must be
 changed accordingly.
 
 
-CDN
----
+## CDN
 
 If the option `$g_cdn_enabled` is set to `ON`, the files are loaded from this CDN.
 
@@ -48,8 +44,7 @@ If the option `$g_cdn_enabled` is set to `ON`, the files are loaded from this CD
 - https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/
 
 
-Known Issues
----
+## Known Issues
 
 The plugin "Show whitespaces" (show-invisibles) does not work well in
 combination with some languages (e.g. "LISP" and "Dart"). An exception is
@@ -60,8 +55,7 @@ The [local file is patched](plugins/show-invisibles/prism-show-invisibles.min.js
 If you are using the CDN, you may be affected by this issue.
 
 
-More themes
----
+## More themes
 
 Prism has another repository for themes, and these are also available via the
 same CDN, but under a different URL.
