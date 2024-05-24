@@ -10,6 +10,11 @@
  *  * { font-family: "Open Sans" }
  * </style>
  *
+ * The font family for <code> elements are originally defined in the
+ * bootstrap.css and is overwritten by the inline-style.
+ *
+ * @see https://github.com/mantisbt/mantisbt/blob/a7c9660fd0b5cfaea8bdeef7ba4b2e83e28947f2/css/bootstrap-3.4.1.css#L1529-L1534
+ *
  * This rule reapplies/forces the monospace font-family to them.
  */
 pre > code span {
