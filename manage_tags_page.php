@@ -177,7 +177,8 @@ print_manage_menu( 'manage_tags_page.php' );
 				<td><?php echo $t_tag_name ?></td>
 			<?php } ?>
 				<td><?php echo (int)$t_tag_row['num'] ?></td>
-				<td><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
+				<td><?php echo string_attribute( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
+				<td><?php echo string_attribute( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 				<td class="center"><?php

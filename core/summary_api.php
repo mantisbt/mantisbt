@@ -88,8 +88,7 @@ function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p
  * @return string
  */
 function summary_helper_get_developer_label( $p_user_id, array $p_filter = [] ) {
-	$t_user = string_display_line( user_get_name( $p_user_id ) );
-
+	$t_user = string_attribute( user_get_name( $p_user_id ) );
 	$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 	return '<a class="subtle" href="' . $t_link_prefix
@@ -580,7 +579,7 @@ function summary_print_by_reporter( array $p_filter = [] ) {
 			continue;
 		}
 		$t_reporter_id = $t_stats['reporter_id'];
-		$t_user = string_display_line( user_get_name( $t_reporter_id ) );
+		$t_user = string_attribute( user_get_name( $t_reporter_id ) );
 		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
@@ -965,7 +964,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string, array $p_
 			echo '<tr>';
 			$t_row_count++;
 			echo '<td>';
-			echo string_display_line( user_get_name( $t_reporter_id ) );
+			echo string_attribute( user_get_name( $t_reporter_id ) );
 			echo "</td>\n";
 
 			# We need to track the percentage of bugs that are considered fix, as well as
@@ -1111,7 +1110,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 			echo '<tr>';
 			$t_row_count++;
 			echo '<td>';
-			echo string_display_line( user_get_name( $t_reporter_id ) );
+			echo string_attribute( user_get_name( $t_reporter_id ) );
 			echo '</td>';
 
 			$t_total_severity = 0;

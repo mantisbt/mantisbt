@@ -410,14 +410,14 @@ $t_user_count = count( $t_users );
 			/** @noinspection HtmlUnknownTarget */
 			printf( '<a href="%s">%s</a>',
 				'manage_user_edit_page.php?user_id=' . $v_id,
-				string_display_line( $v_username )
+				string_attribute( $v_username )
 			);
 		} else {
-			echo string_display_line( $v_username );
+			echo string_attribute( $v_username );
 		}
 ?>
 				</td>
-				<td><?php echo string_display_line( $v_realname ) ?></td>
+				<td><?php echo string_attribute( $v_realname ) ?></td>
 				<td><?php
 					# Display warning icon if emails should be unique and a duplicate exists
 					if( array_key_exists( strtolower( $v_email ), $t_duplicate_emails ) ) {

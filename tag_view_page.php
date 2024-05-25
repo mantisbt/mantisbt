@@ -119,7 +119,7 @@ if( $t_manage_tags ) {
 		<td class="category">
 			<?php echo lang_get( 'owner' ) ?>
 		</td>
-		<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></td>
+		<td><?php echo string_attribute( user_get_name($t_tag_row['user_id']) ) ?></td>
 	</tr>
 	<tr>
 		<td class="category">

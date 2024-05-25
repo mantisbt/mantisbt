@@ -137,7 +137,7 @@ $t_steps_to_reproduce_textarea = $t_show_steps_to_reproduce ? string_textarea( $
 if( NO_USER == $t_bug->handler_id ) {
 	$t_handler_name =  '';
 } else {
-	$t_handler_name = string_display_line( user_get_name( $t_bug->handler_id ) );
+	$t_handler_name = string_attribute( user_get_name( $t_bug->handler_id ) );
 }
 
 $t_can_change_view_state = $t_show_view_state && access_has_project_level( config_get( 'change_view_status_threshold' ) );

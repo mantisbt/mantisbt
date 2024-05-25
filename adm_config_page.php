@@ -184,7 +184,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 						<?php
 						} else {
 							$t_username = ALL_USERS == $t_option_user_id ? lang_get( 'all_users' ) : user_get_name( $t_option_user_id );
-							echo string_display_line( $t_username );
+							echo string_attribute( $t_username );
 						}
 						?>
 					</td>
