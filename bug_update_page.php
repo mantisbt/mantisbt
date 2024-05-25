@@ -151,7 +151,7 @@ if( $t_show_product_version ) {
 }
 
 $t_formatted_bug_id = $t_show_id ? bug_format_id( $f_bug_id ) : '';
-$t_project_name = $t_show_project ? string_display_line( project_get_name( $t_bug->project_id ) ) : '';
+$t_project_name = $t_show_project ? string_attribute( project_get_name( $t_bug->project_id ) ) : '';
 
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
