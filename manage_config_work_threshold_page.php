@@ -355,7 +355,7 @@ echo '<br />' . "\n";
 if( ALL_PROJECTS == $g_project_id ) {
 	$t_project_title = lang_get( 'config_all_projects' );
 } else {
-	$t_project_title = sprintf( lang_get( 'config_project' ), string_display_line( project_get_name( $g_project_id ) ) );
+	$t_project_title = sprintf( lang_get( 'config_project' ), string_attribute( project_get_name( $g_project_id ) ) );
 }
 
 echo '<div class="col-md-12 col-xs-12">' . "\n";
