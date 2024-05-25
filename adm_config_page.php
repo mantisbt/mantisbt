@@ -209,7 +209,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 						<input type="hidden" name="original_project_id" value="<?php echo $t_option_project_id; ?>" />
 						<?php
 						} else {
-							echo string_display_line( project_get_name( $t_option_project_id ) );
+							echo string_attribute( project_get_name( $t_option_project_id ) );
 						}
 						?>
 					</td>

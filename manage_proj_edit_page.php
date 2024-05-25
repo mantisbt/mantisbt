@@ -348,7 +348,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 									<tr>
 										<td>
 											<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>">
-												<?php echo string_display_line( $t_subproject['name'] ) ?>
+												<?php echo string_attribute( $t_subproject['name'] ) ?>
 											</a>
 										</td>
 										<td class="center">

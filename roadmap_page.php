@@ -167,7 +167,7 @@ function print_version_header( array $p_version_row, $p_progress ) {
 	$t_version_name = $p_version_row['version'];
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
-	$t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
+	$t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_attribute( $t_project_name ) . '</a>';
 	$t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
 	$t_version_timestamp = $p_version_row['date_order'];
@@ -222,7 +222,7 @@ function print_version_header( array $p_version_row, $p_progress ) {
 	);
 	print_extra_small_button(
 		'roadmap_page.php?project_id=' . $t_project_id,
-		string_display_line( $t_project_name )
+		string_attribute( $t_project_name )
 	);
 	echo '</div>';
 	echo PHP_EOL;
@@ -274,7 +274,7 @@ function print_version_footer( $p_version_row, $p_progress ) {
  */
 function print_project_header_roadmap( $p_project_name ) {
 	echo '<div class="page-header">';
-	echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'roadmap' ) . '</h1>';
+	echo '<h1><strong>' . string_attribute( $p_project_name ), '</strong> - ', lang_get( 'roadmap' ) . '</h1>';
 	echo '</div>';
 	echo PHP_EOL;
 }

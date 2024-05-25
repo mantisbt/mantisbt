@@ -496,7 +496,7 @@ echo '</fieldset>';
 if( ALL_PROJECTS == $t_project ) {
 	$t_project_title = lang_get( 'config_all_projects' );
 } else {
-	$t_project_title = sprintf( lang_get( 'config_project' ), string_display_line( project_get_name( $t_project ) ) );
+	$t_project_title = sprintf( lang_get( 'config_project' ), string_attribute( project_get_name( $t_project ) ) );
 }
 
 echo '<div class="col-md-12 col-xs-12">' . "\n";
