@@ -242,7 +242,7 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 	echo '<td class="bug-id">', $t_flags['id_show'] ? $t_issue_view['id_formatted'] : '', '</td>';
 
 	# Project
-	echo '<td class="bug-project">', $t_flags['project_show'] && isset( $t_issue['project']['name'] ) ? string_display_line( $t_issue['project']['name'] ) : '', '</td>';
+	echo '<td class="bug-project">', $t_flags['project_show'] && isset( $t_issue['project']['name'] ) ? string_attribute( $t_issue['project']['name'] ) : '', '</td>';
 
 	# Category
 	echo '<td class="bug-category">';
@@ -932,7 +932,7 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 
 	# add project name
 	if( $p_show_project ) {
-		$t_relationship_info_html .= $t_td . string_display_line( $t_related_project_name ) . '&#160;</td>';
+		$t_relationship_info_html .= $t_td . string_attribute( $t_related_project_name ) . '&#160;</td>';
 	}
 
 	# add summary

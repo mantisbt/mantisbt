@@ -412,7 +412,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	<td>
 		<?php
 			if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $t_bug->project_id ) {
-				echo '<span>[', string_display_line( project_get_name( $t_bug->project_id ) ), '] </span>';
+				echo '<span>[', string_attribute( project_get_name( $t_bug->project_id ) ), '] </span>';
 			}
 			$t_bug_url = string_get_bug_view_url( $t_bug->id );
 			echo '<span><a href="' . $t_bug_url . '">' . $t_summary . '</a></span><br />';

@@ -335,7 +335,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	if( ALL_PROJECTS == $t_project ) {
 		$t_project_title = lang_get( 'config_all_projects' );
 	} else {
-		$t_project_title = sprintf( lang_get( 'config_project' ), string_display_line( project_get_name( $t_project ) ) );
+		$t_project_title = sprintf( lang_get( 'config_project' ), string_attribute( project_get_name( $t_project ) ) );
 	}
 
 	echo '<div class="well">' . "\n";

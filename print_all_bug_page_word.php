@@ -221,7 +221,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo $t_id ?>
 	</td>
 	<td>
-		<?php echo '[' . string_display_line( $t_project_name ) . '] ' . string_display_line( $t_category_name ) ?>
+		<?php echo '[' . string_attribute( $t_project_name ) . '] ' . string_display_line( $t_category_name ) ?>
 	</td>
 	<td>
 		<?php echo get_enum_element( 'severity', $t_bug->severity, auth_get_current_user_id(), $t_bug->project_id ) ?>
