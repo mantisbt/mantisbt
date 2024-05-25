@@ -146,7 +146,7 @@ layout_page_begin();
 					echo '</select></td>';
 				} else { ?>
 					<td class="category"><?php echo lang_get( 'owner' ); ?></td>
-					<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ); ?></td><?php
+					<td><?php echo string_attribute( user_get_name($t_tag_row['user_id']) ); ?></td><?php
 				} ?>
 			</tr>
 			<tr>

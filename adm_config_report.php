@@ -400,7 +400,7 @@ while( $t_row = $t_config_query->fetch() ) {
 <!-- Repeated Info Rows -->
 			<tr class="visible-on-hover-toggle">
 				<td>
-					<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
+					<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_attribute( user_get_name( $v_user_id ) ) ?>
 				</td>
 				<td><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
 				<td><?php echo string_display_line( $v_config_id ) ?></td>

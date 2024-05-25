@@ -182,7 +182,7 @@ function print_filter_values_reporter_id( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_name );
+			$t_output .= string_attribute( $t_this_name );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -266,7 +266,7 @@ function print_filter_values_user_monitor( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_name );
+			$t_output .= string_attribute( $t_this_name );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -348,7 +348,7 @@ function print_filter_values_handler_id( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_name );
+			$t_output .= string_attribute( $t_this_name );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -1794,7 +1794,7 @@ function print_filter_values_note_user_id( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_name );
+			$t_output .= string_attribute( $t_this_name );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
