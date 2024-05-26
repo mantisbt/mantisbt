@@ -446,7 +446,7 @@ if( ( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is
 	# Platform
 	if( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is_blank( $t_issue['platform'] ) ) {
 		echo '<th class="bug-platform category">', lang_get( 'platform' ), '</th>';
-		echo '<td class="bug-platform">', string_display_line( $t_issue['platform'] ), '</td>';
+		echo '<td class="bug-platform">', string_attribute( $t_issue['platform'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -454,7 +454,7 @@ if( ( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is
 	# Operating System
 	if( $t_flags['profiles_os_show'] && isset( $t_issue['os'] ) && !is_blank( $t_issue['os'] ) ) {
 		echo '<th class="bug-os category">', lang_get( 'os' ), '</th>';
-		echo '<td class="bug-os">', string_display_line( $t_issue['os'] ), '</td>';
+		echo '<td class="bug-os">', string_attribute( $t_issue['os'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -462,7 +462,7 @@ if( ( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is
 	# OS Version
 	if( $t_flags['profiles_os_build_show'] && isset( $t_issue['os_build'] ) && !is_blank( $t_issue['os_build'] ) ) {
 		echo '<th class="bug-os-build category">', lang_get( 'os_build' ), '</th>';
-		echo '<td class="bug-os-build">', string_display_line( $t_issue['os_build'] ), '</td>';
+		echo '<td class="bug-os-build">', string_attribute( $t_issue['os_build'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
