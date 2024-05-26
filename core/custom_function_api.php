@@ -95,7 +95,7 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 		$t_category_name = '';
 	}
 
-	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_display_line( $t_category_name ) . ']</strong> ';
+	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_attribute( $t_category_name ) . ']</strong> ';
 
 	if( !isset( $s_status[$t_bug->status] ) ) {
 		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, $t_current_user, $t_bug->project_id );
@@ -153,7 +153,7 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 		$t_category_name = '';
 	}
 
-	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_display_line( $t_category_name ) . ']</strong> ';
+	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_attribute( $t_category_name ) . ']</strong> ';
 
 	if( !isset( $s_status[$t_bug->status] ) ) {
 		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, $t_current_user, $t_bug->project_id );

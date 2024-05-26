@@ -474,7 +474,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			$t_inherited = ( $t_category['project_id'] != $f_project_id );
 ?>
 			<tr>
-				<td><?php echo string_display_line( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
+				<td><?php echo string_attribute( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
 				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<td class="center">
