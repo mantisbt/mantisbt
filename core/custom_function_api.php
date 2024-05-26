@@ -474,7 +474,7 @@ function custom_function_default_print_column_value( $p_column, BugData $p_bug, 
 		} else {
 			printf( $t_column_start, $p_column );
 			if( isset( $p_bug->$p_column ) ) {
-				echo string_display_line( $p_bug->$p_column ) . $t_column_end;
+				echo string_attribute( $p_bug->$p_column ) . $t_column_end;
 			} else {
 				echo '@' . $p_column . '@' . $t_column_end;
 			}
