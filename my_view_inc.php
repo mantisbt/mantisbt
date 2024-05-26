@@ -419,7 +419,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	?>
 		<?php
 	# type project name if viewing 'all projects' or bug is in subproject
-	echo '<span class="small">', string_display_line( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) ), '</span>';
+	echo '<span class="small">', string_attribute( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) ), '</span>';
 
 	echo '<span class="small"> - ';
 	if( $t_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {

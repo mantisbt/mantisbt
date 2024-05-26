@@ -254,7 +254,7 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 			);
 			echo "&nbsp;";
 		}
-		echo string_display_line( $t_issue['category']['name'] );
+		echo string_attribute( $t_issue['category']['name'] );
 	}
 	echo '</td>';
 

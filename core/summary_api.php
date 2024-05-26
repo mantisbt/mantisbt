@@ -665,7 +665,7 @@ function summary_print_by_category( array $p_filter = [] ) {
 
 		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_CATEGORY_ID . '=' . string_url( $t_label );
 		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
-		summary_helper_print_row( string_display_line( $t_label ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
+		summary_helper_print_row( string_attribute( $t_label ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
 	}
 }
 

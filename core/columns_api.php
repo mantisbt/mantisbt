@@ -1324,7 +1324,7 @@ function print_column_category_id( BugData $p_bug, $p_columns_target = COLUMNS_T
 		echo ']</span>&#160;&#160;';
 	}
 
-	echo string_display_line( category_full_name( $p_bug->category_id, false ) );
+	echo string_attribute( category_full_name( $p_bug->category_id, false ) );
 	echo '</div>';
 	echo '</td>';
 }

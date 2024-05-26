@@ -257,7 +257,7 @@ print_manage_menu( 'manage_proj_page.php' );
 				$t_id = $t_category['id'];
 ?>
 			<tr>
-				<td><?php echo string_display_line( category_full_name( $t_id, false ) )  ?></td>
+				<td><?php echo string_attribute( category_full_name( $t_id, false ) )  ?></td>
 				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<?php if( $t_can_update_global_cat ) { ?>
