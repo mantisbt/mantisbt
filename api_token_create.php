@@ -67,7 +67,7 @@ layout_page_begin();
 <h2><?php echo $t_disclose_message ?></h2>
 <div class="lead red"><?php echo $t_display_once_message ?></div>
 <div class="space-10"></div>
-<div class="well"><?php echo string_display_line( $t_token ) ?></div>
+<div class="well"><?php echo string_attribute( $t_token ) ?></div>
 <div class="space-10"></div>
 <?php print_link_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) ) ?>
 </div>

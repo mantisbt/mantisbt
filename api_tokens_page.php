@@ -141,7 +141,7 @@ if ( count( $t_tokens ) > 0 ) {
 			}
 		?>
 			<tr>
-				<td><?php echo string_display_line( $u_name ) ?></td>
+				<td><?php echo string_attribute( $u_name ) ?></td>
 				<td><?php echo string_display_line( $u_date_created ) ?></td>
 				<td><?php echo string_display_line( $u_date_used ) ?></td>
 				<td>
