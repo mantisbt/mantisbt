@@ -601,7 +601,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			} ?>
 
 			<tr>
-				<td><?php echo string_display_line( $t_name ) ?></td>
+				<td><?php echo string_attribute( $t_name ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_released ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_obsolete ) ?></td>
 				<td class="center"><?php echo $t_date_formatted ?></td>
