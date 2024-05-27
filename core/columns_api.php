@@ -1635,7 +1635,7 @@ function print_column_tags( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_V
 	echo '<td class="column-tags">';
 
 	if( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ) {
-		echo string_display_line( tag_bug_get_all( $p_bug->id ) );
+		echo string_attribute( tag_bug_get_all( $p_bug->id ) );
 	}
 
 	echo '</td>';

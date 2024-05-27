@@ -152,7 +152,7 @@ print_manage_menu( 'manage_tags_page.php' );
 <?php
 		# Display all tags
 		while( $t_tag_row = db_fetch_array( $t_result ) ) {
-			$t_tag_name = string_display_line( $t_tag_row['name'] );
+			$t_tag_name = string_attribute( $t_tag_row['name'] );
 			$t_tag_description = string_display( $t_tag_row['description'] );
 ?>
 			<tr>
