@@ -316,7 +316,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_product_version ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->version ) ?>
+		<?php echo string_attribute( $t_bug->version ) ?>
 	</td>
 	<td colspan="2">&#160;</td>
 </tr>
@@ -325,7 +325,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_product_build ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->build ) ?>
+		<?php echo string_attribute( $t_bug->build ) ?>
 	</td>
 	<td class="bold">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_resolution ) ?>
@@ -361,7 +361,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_fixed_in_version ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->fixed_in_version ) ?>
+		<?php echo string_attribute( $t_bug->fixed_in_version ) ?>
 	</td>
 	<td colspan="2">&#160;</td>
 
@@ -377,7 +377,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_target_version ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->target_version ) ?>
+		<?php echo string_attribute( $t_bug->target_version ) ?>
 	</td>
 	<td colspan="2">&#160;</td>
 </tr>

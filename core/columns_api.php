@@ -1595,7 +1595,7 @@ function print_column_target_version( BugData $p_bug, $p_columns_target = COLUMN
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
 	# list of columns to view.  In case of ALL_PROJECTS, then we need to check the access per row.
 	if( helper_get_current_project() != ALL_PROJECTS || access_has_project_level( config_get( 'roadmap_view_threshold' ), $p_bug->project_id ) ) {
-		echo string_display_line( $p_bug->target_version );
+		echo string_attribute( $p_bug->target_version );
 	}
 
 	echo '</td>';

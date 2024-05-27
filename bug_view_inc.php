@@ -487,7 +487,7 @@ if( ( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) 
 	# Product Version
 	if( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) ) {
 		echo '<th class="bug-product-version category">', lang_get( 'product_version' ), '</th>';
-		echo '<td class="bug-product-version">', string_display_line( $t_issue_view['product_version'] ), '</td>';
+		echo '<td class="bug-product-version">', string_attribute( $t_issue_view['product_version'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -495,7 +495,7 @@ if( ( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) 
 	# Product Build
 	if( $t_flags['versions_product_build_show'] && isset( $t_issue['build'] ) ) {
 		echo '<th class="bug-product-build category">', lang_get( 'product_build' ), '</th>';
-		echo '<td class="bug-product-build">', string_display_line( $t_issue['build'] ), '</td>';
+		echo '<td class="bug-product-build">', string_attribute( $t_issue['build'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -520,7 +520,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 	if( $t_flags['versions_target_version_show'] && isset( $t_issue['target_version'] ) ) {
 		# Target Version
 		echo '<th class="bug-target-version category">', lang_get( 'target_version' ), '</th>';
-		echo '<td class="bug-target-version">', string_display_line( $t_issue_view['target_version'] ), '</td>';
+		echo '<td class="bug-target-version">', string_attribute( $t_issue_view['target_version'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -528,7 +528,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 	# fixed in version
 	if( $t_flags['versions_fixed_in_version_show'] && isset( $t_issue['fixed_in_version'] ) ) {
 		echo '<th class="bug-fixed-in-version category">', lang_get( 'fixed_in_version' ), '</th>';
-		echo '<td class="bug-fixed-in-version">', string_display_line( $t_issue_view['fixed_in_version'] ), '</td>';
+		echo '<td class="bug-fixed-in-version">', string_attribute( $t_issue_view['fixed_in_version'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
