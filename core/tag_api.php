@@ -1028,7 +1028,7 @@ function tag_get_link( array $p_tag_row ) {
 		'<a class="btn btn-xs btn-primary btn-white btn-round" href="tag_view_page.php?tag_id=%s" title="%s">%s</a>',
 		$p_tag_row['id'],
 		string_display_line( $p_tag_row['description'] ),
-		string_display_line( $p_tag_row['name'] )
+		string_attribute( $p_tag_row['name'] )
 	);
 }
 
@@ -1060,7 +1060,7 @@ function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
 	}
 
 	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
-		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), string_display_line( $p_tag_row['name'] ) ) );
+		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), string_attribute( $p_tag_row['name'] ) ) );
 		$t_href = 'tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token;
 		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" title="' . $t_tooltip . '" href="' . $t_href . '">';
 		print_icon( 'fa-times' );
