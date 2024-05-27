@@ -80,7 +80,7 @@ function print_version_header( $p_version_id ) {
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
 	$t_release_title = '<a class="white" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_attribute( $t_project_name ) . '</a>';
-	$t_release_title .= ' - <a class="white" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	$t_release_title .= ' - <a class="white" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_attribute( $t_version_name ) . '</a>';
 
 	if( config_get( 'show_changelog_dates' ) ) {
 		$t_version_released = version_get_field( $p_version_id, 'released' );
@@ -130,7 +130,7 @@ function print_version_header( $p_version_id ) {
 	);
 	print_extra_small_button(
 		'changelog_page.php?version_id=' . $p_version_id,
-		string_display_line( $t_version_name )
+		string_attribute( $t_version_name )
 	);
 	print_extra_small_button(
 		'changelog_page.php?project_id=' . $t_project_id,
