@@ -168,7 +168,7 @@ function print_version_header( array $p_version_row, $p_progress ) {
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
 	$t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_attribute( $t_project_name ) . '</a>';
-	$t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	$t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_attribute( $t_version_name ) . '</a>';
 
 	$t_version_timestamp = $p_version_row['date_order'];
 	if( config_get( 'show_roadmap_dates' ) && !date_is_null( $t_version_timestamp ) ) {
@@ -218,7 +218,7 @@ function print_version_header( array $p_version_row, $p_progress ) {
 	);
 	print_extra_small_button(
 		'roadmap_page.php?version_id=' . $t_version_id,
-		string_display_line( $t_version_name )
+		string_attribute( $t_version_name )
 	);
 	print_extra_small_button(
 		'roadmap_page.php?project_id=' . $t_project_id,
