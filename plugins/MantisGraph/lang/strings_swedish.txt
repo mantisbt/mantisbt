@@ -40,6 +40,7 @@
  *
  * @author Jopparn
  * @author Lokal Profil
+ * @author Sabelöga
  * @author Tobulos1
  * @author Velg
  * @author Warrakkk
@@ -61,6 +62,7 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Efter prioritetsdiagram';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Efter storleksdiagram';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Efter kategoridiagram';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Efter upplösningsdiagram';
+$s_plugin_MantisGraph_graph_project_title = 'Av projektgrafik';
 $s_plugin_MantisGraph_graph_developer_title = 'Efter utvecklardiagram';
 $s_plugin_MantisGraph_graph_reporter_title = 'Efter rapportdiagram';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Öppnade, lösta och återstående ärenden';
@@ -91,3 +93,4 @@ $s_plugin_MantisGraph_graph_topdev = 'Populära utvecklare efter åtgärdade är
 $s_plugin_MantisGraph_graph_opendev = 'Utvecklare efter öppna ärenden';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Populära rapportörer efter åtgärdade ärenden';
 $s_plugin_MantisGraph_other_categories = 'andra kategorier (%d)';
+$s_plugin_MantisGraph_other_projects = 'övriga projekt (%d)';

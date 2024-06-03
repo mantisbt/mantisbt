@@ -48,6 +48,7 @@
  * @author GuoPC
  * @author Hydra
  * @author Hzy980512
+ * @author Key0121
  * @author Lakejason0
  * @author Liangent
  * @author Linforest
@@ -1356,7 +1357,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '已存在同名类别。';
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = '没有指定的复制操作。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '没有找到类别。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = '未在项目 "%2$s"中找到"%1$s"类别';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = '这个分类不可以被删除，因为它被定为“为移动默认的分类“';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = '操作无法完成，因为分类“%1$s”在至少一个项目或全域中被定义为移动的默认设置。';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = '分类“%1$s”不能删除，因为它与一个或多个问题相关联。';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '已存在同名版本。';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '没有找到版本“%1$s” 。';
