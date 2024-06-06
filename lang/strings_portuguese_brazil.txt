@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author 555
  * @author Athena in Wonderland
  * @author Caçador de Palavras
  * @author Dianakc
@@ -68,7 +69,6 @@
  * @author TheGabrielZaum
  * @author Tuliouel
  * @author Walesson
- * @author 555
  */
 
 $s_actiongroup_menu_copy = 'Copiar';
