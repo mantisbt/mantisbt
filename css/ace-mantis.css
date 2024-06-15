@@ -456,60 +456,72 @@ input.typeahead.scrollable ~ .tt-menu {
     overflow-y: auto;
 }
 
-/* dropzone styling */
+/* ------------------------------------------------------------------------
+ * Dropzone.js styling
+ */
 .dropzone {
     background: rgba(0, 0, 0, 0.03) none repeat scroll 0 0;
     border: 1px solid rgba(0, 0, 0, 0.03);
     min-height: 60px;
 }
 
-.dropzone .dz-preview, .dropzone-previews .dz-preview {
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
-    font-size: 14px;
-}
-
-.dropzone .dz-preview, .dropzone-previews .dz-preview {
-    background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
+.dropzone .dz-preview,
+.dropzone-previews .dz-preview {
+    background: white;
     border: 1px solid #acacac;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
+    max-width: 250px;
     display: inline-block;
+    vertical-align: top;
     margin: 17px;
     padding: 6px;
     position: relative;
-    vertical-align: top;
+    font-size: 14px;
 }
 
-.dropzone .dz-preview .dz-details, .dropzone-previews .dz-preview .dz-details {
-    background: #ebebeb none repeat scroll 0 0;
-    height: 100px;
-    margin-bottom: 22px;
-    padding: 5px;
-    position: relative;
-    width: 100px;
+.dropzone .dz-preview.dz-error,
+.dropzone-previews .dz-preview.dz-error {
+    background-color: #f2dede;
 }
 
-.dropzone .dz-preview .dz-details .dz-filename:not(:hover) {
+.dropzone .dz-image-preview > img,
+.dropzone-previews .dz-image-preview img {
+    margin: 5px auto;
+}
+
+/* No image preview when there is an error */
+.dropzone .dz-error img,
+.dropzone-previews .dz-error > img {
+    display: none;
+}
+
+/* Truncate file name with ellipsis if too long */
+.dropzone .dz-preview .dz-filename,
+.dropzone-previews .dz-preview .dz-filename {
+    margin: 0 5px;
+    font-weight: bold;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.dropzone .dz-preview .dz-details .dz-size, .dropzone-previews .dz-preview .dz-details .dz-size {
-    font-size: 14px;
-    bottom: -38px;
-    height: 28px;
-    left: 3px;
-    line-height: 28px;
-    position: absolute;
+.dropzone .dz-preview.dz-error .dz-error-message,
+.dropzone-previews .dz-preview.dz-error .dz-error-message {
+    background: rgba(255, 255, 255, 0.6) none repeat scroll 0 0;
+    color: #800;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+    border-radius: unset;
+    margin: 5px auto;
+    padding: 6px 8px;
+    position: unset;
+    z-index: 500;
 }
 
-.dropzone .dz-preview .dz-details img, .dropzone-previews .dz-preview .dz-details img {
-    height: 100px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100px;
-}
-
-.dropzone a.dz-remove, .dropzone-previews a.dz-remove {
+.dropzone a.dz-remove,
+.dropzone-previews a.dz-remove {
     background: #d15b47 none repeat scroll 0 0;
     border: medium none;
     border-radius: 0;
@@ -518,44 +530,44 @@ input.typeahead.scrollable ~ .tt-menu {
     font-size: 12px !important;
 }
 
-.dropzone a.dz-remove:hover, .dropzone-previews a.dz-remove:hover {
+.dropzone a.dz-remove:hover,
+.dropzone-previews a.dz-remove:hover {
     background: #b74635 none repeat scroll 0 0;
     color: #fff;
     text-decoration: none !important;
 }
 
-.dropzone .dz-preview .dz-success-mark, .dropzone-previews .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark, .dropzone-previews .dz-preview .dz-error-mark {
-    display: none;
+
+
+.dropzone .dz-preview .dz-success-mark,
+.dropzone-previews .dz-preview .dz-success-mark,
+.dropzone .dz-preview.dz-error .dz-error-mark,
+.dropzone-previews .dz-preview.dz-error .dz-error-mark {
     font-size: 30px;
-    height: 40px;
-    position: absolute;
-    right: -10px;
-    text-align: center;
-    top: -10px;
-    width: 40px;
-}
-
-.dropzone .dz-preview .dz-error-mark, .dropzone-previews .dz-preview .dz-error-mark {
-    background-position: -268px -123px;
     color: #ee162d;
+    display: unset;
+    position: relative;
+    left: 0;
+    margin: auto 10px auto 0;
+    animation: none;
 }
 
-.dropzone .dz-preview .dz-error-message, .dropzone-previews .dz-preview .dz-error-message {
-    background: rgba(245, 245, 245, 0.8) none repeat scroll 0 0;
-    color: #800;
-    display: none;
-    left: -20px;
-    max-width: 500px;
-    min-width: 140px;
-    padding: 8px 10px;
-    position: absolute;
-    top: -5px;
-    z-index: 500;
+.dropzone .dz-preview .dz-error-message > span,
+.dropzone-previews .dz-preview .dz-error-message > span {
+    display: block;
+    text-align: left;
+    text-wrap: auto;
+}
+
+.dropzone .dz-preview .dz-error-message::after {
+    content: none;
 }
 
 .dropzone .progress {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
+
+/* ------------------------------------------------------------------------ */
 
 .btn-group .single-button-form {
 	margin: 0 1px 0 0;
@@ -598,8 +610,8 @@ ul.changelog > li, ul.roadmap > li {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border-left-width: 0px;
-  border-right-width: 0px;
+  border-left-width: 0;
+  border-right-width: 0;
 }
 
 .sidebar:not(.menu-min) {
