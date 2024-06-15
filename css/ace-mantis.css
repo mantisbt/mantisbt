@@ -537,10 +537,6 @@ input.typeahead.scrollable ~ .tt-menu {
     text-decoration: none !important;
 }
 
-
-
-.dropzone .dz-preview .dz-success-mark,
-.dropzone-previews .dz-preview .dz-success-mark,
 .dropzone .dz-preview.dz-error .dz-error-mark,
 .dropzone-previews .dz-preview.dz-error .dz-error-mark {
     font-size: 30px;
