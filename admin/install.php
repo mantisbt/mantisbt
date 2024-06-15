@@ -37,7 +37,7 @@ error_reporting( E_ALL );
 # and plugins will not be loaded.
 const MANTIS_MAINTENANCE_MODE = true;
 
-require_once( dirname( __FILE__, 2 ) . '/core.php' );
+require_once( dirname( __DIR__ ) . '/core.php' );
 require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
@@ -348,7 +348,7 @@ print_test( 'Checking if safe mode is enabled for install script',
 	);
 
 	foreach( $t_config_files as $t_file => $t_action ) {
-		$t_dir = dirname( __FILE__, 2 ) . '/';
+		$t_dir = dirname( __DIR__ ) . '/';
 		if( substr( $t_file, 0, 3 ) == 'mc_' ) {
 			$t_dir .= 'api/soap/';
 		}

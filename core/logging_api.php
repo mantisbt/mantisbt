@@ -271,7 +271,7 @@ function log_print_to_page() {
 function log_get_caller( $p_level = null ) {
 	$t_full_backtrace = debug_backtrace();
 	$t_backtrace = $t_full_backtrace;
-	$t_root_path = dirname( __FILE__, 2 ) . DIRECTORY_SEPARATOR;
+	$t_root_path = dirname( __DIR__ ) . DIRECTORY_SEPARATOR;
 
 	# Remove top trace, as it's this function
 	unset( $t_backtrace[0] );

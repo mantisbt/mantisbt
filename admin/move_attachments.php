@@ -22,7 +22,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( __FILE__, 2 ) . '/core.php' );
+require_once( dirname( __DIR__ ) . '/core.php' );
 
 form_security_validate( 'move_attachments_project_select' );
 

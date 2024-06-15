@@ -26,7 +26,7 @@
 global $g_bypass_headers;
 $g_bypass_headers = 1;
 
-require_once( dirname( __FILE__, 2 ) . '/core.php' );
+require_once( dirname( __DIR__ ) . '/core.php' );
 
 require_api( 'email_api.php' );
 

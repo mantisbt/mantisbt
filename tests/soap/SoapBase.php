@@ -25,10 +25,10 @@
  */
 
 
-$t_root_path = dirname( __FILE__, 3 ) . DIRECTORY_SEPARATOR;
+$t_root_path = dirname( __DIR__, 2 );
 
 # MantisBT constants
-require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
+require_once ( $t_root_path . '/core/constant_inc.php' );
 
 /**
  * Test cases for SoapEnum class.

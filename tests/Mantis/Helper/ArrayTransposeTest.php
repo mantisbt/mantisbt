@@ -26,7 +26,7 @@ declare( strict_types = 1 );
 
 use Mantis\Exceptions\ClientException;
 
-require_once dirname( __FILE__, 2 ) . '/MantisCoreBase.php';
+require_once dirname( __DIR__ ) . '/MantisCoreBase.php';
 
 /**
  * Test for helper_api::helper_array_transpose

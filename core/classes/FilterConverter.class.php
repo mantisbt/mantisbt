@@ -21,11 +21,11 @@
  * @package MantisBT
  */
 
-$t_api_path = dirname( __FILE__, 3 ) . '/api/';
-require_once( $t_api_path . 'soap/mc_api.php' );
-require_once( $t_api_path . 'soap/mc_account_api.php' );
-require_once( $t_api_path . 'soap/mc_enum_api.php' );
-require_once( $t_api_path . 'soap/mc_project_api.php' );
+$t_api_path = dirname( __DIR__, 2 ) . '/api/soap/';
+require_once( $t_api_path . 'mc_api.php' );
+require_once( $t_api_path . 'mc_account_api.php' );
+require_once( $t_api_path . 'mc_enum_api.php' );
+require_once( $t_api_path . 'mc_project_api.php' );
 
 require_api( 'custom_field_api.php' );
 
