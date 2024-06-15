@@ -792,7 +792,7 @@ if( $t_bottom_buttons_enabled ) {
 
 <?php
 define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-include( __DIR__ . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
+include( __DIR__ . '/bugnote_view_inc.php' );
 layout_page_end();
 
 last_visited_issue( $t_bug_id );

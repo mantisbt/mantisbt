@@ -152,7 +152,7 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
         echo '</div>';
         echo '<div class="col-xs-12 col-md-6">';
     }
-    include( __DIR__ . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
+    include( __DIR__ . '/my_view_inc.php' );
     echo '<div class="space-10"></div>';
 }
 ?>

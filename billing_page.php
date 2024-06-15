@@ -46,7 +46,7 @@ layout_page_begin();
 
 # Work break-down
 define( 'BILLING_INC_ALLOW', true );
-include( __DIR__ . DIRECTORY_SEPARATOR . 'billing_inc.php' );
+include( __DIR__ . '/billing_inc.php' );
 
 layout_page_end();
 

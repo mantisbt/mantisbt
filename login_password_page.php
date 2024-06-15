@@ -188,7 +188,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.
 	}
 
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
-	require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
+	require_once( 'admin/schema.php' );
 	$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
 	if( ( 0 < $t_db_version ) &&
