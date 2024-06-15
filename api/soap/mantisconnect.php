@@ -34,6 +34,8 @@ $t_mantis_dir = dirname( __FILE__, 3 ) . DIRECTORY_SEPARATOR;
 $g_bypass_headers = true;
 $g_bypass_error_handler = true;
 
+$t_wsdl_path = __DIR__ . '/mantisconnect.wsdl';
+
 require_once( $t_mantis_dir . 'core.php' );
 
 /**
@@ -71,7 +73,7 @@ if( !mci_is_webservice_call() ) {
 	}
 
 	header( 'Content-Type: text/xml' );
-	$t_wsdl = file_get_contents( 'mantisconnect.wsdl' );
+	$t_wsdl = file_get_contents( $t_wsdl_path );
 	$t_wsdl = str_replace(
 		'http://www.mantisbt.org/bugs/api/soap/mantisconnect.php',
 		config_get_global( 'path' ).'api/soap/mantisconnect.php',
@@ -86,7 +88,7 @@ require_once( 'mc_core.php' );
 set_error_handler( 'mc_error_handler' );
 set_exception_handler( 'mc_error_exception_handler' );
 
-$t_server = new SoapServer( 'mantisconnect.wsdl',
+$t_server = new SoapServer( $t_wsdl_path,
 	array( 'features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS )
 );
 
