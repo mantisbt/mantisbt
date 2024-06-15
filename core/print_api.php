@@ -2197,7 +2197,7 @@ function print_dropzone_form_data() {
 	echo "\t" . 'data-response-error="' . htmlspecialchars( lang_get( 'dropzone_response_error' ) ) . '"' . "\n";
 	echo "\t" . 'data-cancel-upload="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload' ) ) . '"' . "\n";
 	echo "\t" . 'data-cancel-upload-confirmation="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload_confirmation' ) ) . '"' . "\n";
-	echo "\t" . 'data-remove-file="'. htmlspecialchars( lang_get( 'dropzone_remove_file' ) ) . '"' . "\n";
+	echo "\t" . 'data-remove-file=""' . "\n";
 	echo "\t" . 'data-remove-file-confirmation="' . htmlspecialchars( lang_get( 'dropzone_remove_file_confirmation' ) ) . '"' . "\n";
 	echo "\t" . 'data-max-files-exceeded="' . htmlspecialchars( lang_get( 'dropzone_max_files_exceeded' ) ) . '"' . "\n";
 	echo "\t" . 'data-dropzone-not-supported="' . htmlspecialchars( lang_get( 'dropzone_not_supported' ) ) . '"';
@@ -2224,8 +2224,9 @@ function print_dropzone_template(){
 			<div class="progress progress-small progress-striped active">
 				<div class="progress-bar progress-bar-success" data-dz-uploadprogress></div>
 			</div>
-			<div class="dz-error-mark"><span></span></div>
-			<div class="dz-error-message"><span data-dz-errormessage></span></div>
+			<a class="btn btn-primary btn-white btn-round btn-xs" data-dz-remove>
+				<?php echo lang_get( 'dropzone_remove_file' ); ?>
+			</a>
 		</div>
 	</div>
 	<?php

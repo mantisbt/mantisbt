@@ -520,23 +520,6 @@ input.typeahead.scrollable ~ .tt-menu {
     z-index: 500;
 }
 
-.dropzone a.dz-remove,
-.dropzone-previews a.dz-remove {
-    background: #d15b47 none repeat scroll 0 0;
-    border: medium none;
-    border-radius: 0;
-    color: #fff;
-    cursor: pointer;
-    font-size: 12px !important;
-}
-
-.dropzone a.dz-remove:hover,
-.dropzone-previews a.dz-remove:hover {
-    background: #b74635 none repeat scroll 0 0;
-    color: #fff;
-    text-decoration: none !important;
-}
-
 .dropzone .dz-preview.dz-error .dz-error-mark,
 .dropzone-previews .dz-preview.dz-error .dz-error-mark {
     font-size: 30px;
@@ -561,6 +544,11 @@ input.typeahead.scrollable ~ .tt-menu {
 
 .dropzone .progress {
     margin-bottom: 10px;
+}
+
+.dropzone .dz-preview > a,
+.dropzone-previews .dz-preview > a {
+    cursor: pointer;
 }
 
 /* ------------------------------------------------------------------------ */
