@@ -10,10 +10,9 @@
 	const cdn = script.getAttribute('data-cdn');
 	const theme = script.getAttribute('data-theme');
 	const head = document.getElementsByTagName('head')[0];
-	const localUrl = document.currentScript.src.replace('/init.js', '');
 	const resourceUrl = 1 === parseInt(cdn)
 		? 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0'
-		: localUrl
+		: document.currentScript.src.replace('/init.js', '')
 	;
 
 	/*
@@ -172,9 +171,6 @@
 
 	// Load the Prism theme CSS.
 	loadCss(`${resourceUrl}/themes/${theme}`);
-
-	// This file is to reapply/force the monospace font to <code> elements.
-	loadCss(`${localUrl}/monospace.css`);
 
 	/*
 	 * Initialize Prism
