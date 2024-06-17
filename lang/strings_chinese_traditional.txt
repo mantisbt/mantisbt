@@ -582,6 +582,7 @@ $s_manage_accounts_title = '管理帳號';
 $s_date_created = '建立日期';
 $s_last_visit = '上次瀏覽';
 $s_last_visit_label = '上次瀏覽：';
+$s_failed_login_count = '登入失敗';
 $s_edit_user_link = '編輯使用者';
 $s_search_user_hint = '使用者名稱、真實名稱、或電子郵件';
 $s_separate_list_items_by = '(使用 "%1$s" 分隔清單項目)';

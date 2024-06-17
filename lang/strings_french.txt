@@ -62,6 +62,7 @@
  * @author Philou2024
  * @author Seudo
  * @author Sherbrooke
+ * @author SleaY
  * @author Thibaut120094
  * @author Urhixidur
  * @author Verdy p
@@ -593,6 +594,7 @@ $s_p = 'p';
 $s_date_created = 'Date de création';
 $s_last_visit = 'Dernière visite';
 $s_last_visit_label = 'Dernière visite :';
+$s_failed_login_count = 'Échec de connexion';
 $s_edit_user_link = 'Modifier l’utilisateur';
 $s_search_user_hint = 'Nom d’utilisateur, nom véritable ou adresse courriel';
 $s_separate_list_items_by = '(séparez les éléments de la liste par « %1$s »)';

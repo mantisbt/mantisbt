@@ -563,6 +563,7 @@ $s_p = 'з';
 $s_date_created = 'Создадена на';
 $s_last_visit = 'Последна посета';
 $s_last_visit_label = 'Последна посета:';
+$s_failed_login_count = 'Неуспешни најави';
 $s_edit_user_link = 'Уреди корисник';
 $s_search_user_hint = 'Корисничко име, вистинско име и е-пошта';
 $s_separate_list_items_by = '(одделувајте ги ставките во списокот со „%1$s“)';

@@ -561,6 +561,7 @@ $s_manage_accounts_title = 'Gerer contos';
 $s_date_created = 'Data de creation';
 $s_last_visit = 'Ultime visita';
 $s_last_visit_label = 'Ultime visita:';
+$s_failed_login_count = 'Aperturas de session fallite';
 $s_edit_user_link = 'Modificar usator';
 $s_search_user_hint = 'Nomine de usator, nomine real o e-mail';
 $s_separate_list_items_by = '(separa elementos de lista per "%1$s")';
