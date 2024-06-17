@@ -63,6 +63,9 @@ $s_plugin_format_syntax_highlighting_plugins = 'Erweiterungen für die Code-Blö
 
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Code in Zwischenablage kopieren';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Zeigt eine kleine Schaltfläche um den Inhalt des Code-Blocks in die Zwischenablage zu kopieren.';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Kopieren';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Kopiert';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Drücken Sie Strg+C zum Kopieren.';
 
 $s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Sprache anzeigen';
 $s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Die im Code-Block dargestellte Sprache anzeigen.';

@@ -64,6 +64,9 @@ $s_plugin_format_syntax_highlighting_plugins = 'Code blocks options';
 
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Copy to clipboard';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Shows a small button to copy the content of the code block to the clipboard.';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Copy';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Copied';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Press Ctrl+C to copy';
 
 $s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Show language';
 $s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Shows which language the code block contains.';

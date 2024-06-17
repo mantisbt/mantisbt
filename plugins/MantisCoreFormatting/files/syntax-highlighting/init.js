@@ -9,6 +9,9 @@
 		.map((plugin) => plugin.trim());
 	const cdn = script.getAttribute('data-cdn');
 	const theme = script.getAttribute('data-theme');
+	const i18n = JSON.parse(
+		script.getAttribute('data-i18n')
+	) ?? {};
 	const head = document.getElementsByTagName('head')[0];
 	const resourceUrl = 1 === parseInt(cdn)
 		? 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0'
@@ -204,6 +207,16 @@
 				codeBlocks.forEach((code) =>
 					code.classList.add(...plugin.cssClasses)
 				);
+			});
+
+		// Add translations.
+		const body = document.getElementsByTagName('body')[0];
+		plugins
+			.filter((plugin) => Object.keys(i18n).includes(plugin.name))
+			.forEach((plugin) => {
+				for (const [key, value] of Object.entries(i18n[plugin.name])) {
+					body.setAttribute(`data-prismjs-${key}`, `${value}`);
+				}
 			});
 
 		/*
