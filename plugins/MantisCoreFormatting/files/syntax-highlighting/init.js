@@ -149,7 +149,7 @@
 		return new Promise(async (resolve) => {
 			if (resource.requires) {
 				const requirement = availableResources.find(
-					(r)=> r.name === resource.requires
+					(r) => r.name === resource.requires
 				);
 				if (!requirement.ready) {
 					await load(requirement);
