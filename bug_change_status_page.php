@@ -324,14 +324,20 @@ layout_page_begin();
 			&& !bug_is_readonly( $f_bug_id )
 			&& access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id )
 		) {
+			$t_bug_fixed_in_version_required = false;
+			if ( $f_new_status >= $t_resolved && $f_new_status < $t_closed ) {
+				$t_bug_fixed_in_version_required = config_get( 'bug_fixed_in_version_required', null, null, $t_bug->project_id ) != OFF;
+			}
 ?>
 			<!-- Fixed in Version -->
 			<tr>
 				<th class="category">
+					<span class="required hidden">*</span>
 					<?php echo lang_get( 'fixed_in_version' ) ?>
 				</th>
 				<td>
-					<select name="fixed_in_version" class="input-sm">
+					<select name="fixed_in_version" class="input-sm"<?php if ( $t_bug_fixed_in_version_required ) {?> 
+							data-required-at-resolution-threshold="<?php echo $t_resolution_fixed ?>"<?php } ?>>
 						<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
 					</select>
 				</td>
