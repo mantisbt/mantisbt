@@ -53,13 +53,6 @@
 		ready: false,
 		cssClasses: ['line-numbers'],
 	}, {
-		name: 'copy-to-clipboard',
-		type: 'plugin',
-		requires: 'toolbar',
-		css: false,
-		ready: false,
-		cssClasses: null,
-	}, {
 		name: 'match-braces',
 		type: 'plugin',
 		requires: null,
@@ -68,6 +61,13 @@
 		cssClasses: ['rainbow-braces', 'match-braces'],
 	}, {
 		name: 'show-language',
+		type: 'plugin',
+		requires: 'toolbar',
+		css: false,
+		ready: false,
+		cssClasses: null,
+	}, {
+		name: 'copy-to-clipboard',
 		type: 'plugin',
 		requires: 'toolbar',
 		css: false,
