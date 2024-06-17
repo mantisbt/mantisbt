@@ -1481,7 +1481,7 @@ function print_column_project_id( BugData $p_bug, $p_columns_target = COLUMNS_TA
 function print_column_last_updated( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $g_filter;
 
-	$t_last_updated = string_display_line( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
+	$t_last_updated = string_attribute( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
 
 	echo '<td class="column-last-modified">';
 	if( $p_bug->last_updated > strtotime( '-' . $g_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
@@ -1501,7 +1501,7 @@ function print_column_last_updated( BugData $p_bug, $p_columns_target = COLUMNS_
  * @access public
  */
 function print_column_date_submitted( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	$t_date_submitted = string_display_line( date( config_get( 'short_date_format' ), $p_bug->date_submitted ) );
+	$t_date_submitted = string_attribute( date( config_get( 'short_date_format' ), $p_bug->date_submitted ) );
 
 	echo '<td class="column-date-submitted">', $t_date_submitted, '</td>';
 }
@@ -1657,7 +1657,7 @@ function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARG
 		$t_value = '&#160;';
 	} else {
 		$t_css = " due-" . bug_overdue_level( $p_bug->id );
-		$t_value = string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
+		$t_value = string_attribute( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 	}
 
 	printf( '<td class="column-due-date%s">%s</td>', $t_css, $t_value );
