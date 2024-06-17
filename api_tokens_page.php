@@ -142,8 +142,8 @@ if ( count( $t_tokens ) > 0 ) {
 		?>
 			<tr>
 				<td><?php echo string_attribute( $u_name ) ?></td>
-				<td><?php echo string_display_line( $u_date_created ) ?></td>
-				<td><?php echo string_display_line( $u_date_used ) ?></td>
+				<td><?php echo string_attribute( $u_date_created ) ?></td>
+				<td><?php echo string_attribute( $u_date_used ) ?></td>
 				<td>
 					<form id="revoke-api-token-form" method="post" action="api_token_revoke.php">
 						<?php echo form_security_field( 'revoke_api_token_form' ); ?>
