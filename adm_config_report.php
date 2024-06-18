@@ -406,7 +406,7 @@ while( $t_row = $t_config_query->fetch() ) {
 				<td><?php echo string_display_line( $v_config_id ) ?></td>
 				<td><?php echo string_display_line( config_get_type_string( $v_type ) ) ?></td>
 				<td style="overflow-x:auto;"><?php echo $t_html_value ?></td>
-				<td><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
+				<td><?php echo string_attribute( get_enum_element( 'access_levels', $v_access_reqd ) ); ?></td>
 <?php
 	if( $t_read_write_access ) {
 ?>

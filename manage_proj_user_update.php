@@ -215,7 +215,7 @@ if( !$f_confirmed ) {
 							<tbody>
 							<?php
 								$fn_print_tr = function( $p_td1, $p_td2 ) {
-									echo '<tr><td>' . string_attribute( $p_td1 ) . '</td><td>' . $p_td2 . '</td></tr>';
+									echo '<tr><td>' . string_attribute( $p_td1 ) . '</td><td>' . string_attribute( $p_td2 ) . '</td></tr>';
 								};
 								foreach( $t_users_to_delete as $t_id ) {
 									$t_username = prepare_user_name( $t_id, false );
@@ -267,7 +267,7 @@ if( !$f_confirmed ) {
 							<tbody>
 							<?php
 								$fn_print_tr = function( $p_td1, $p_td2, $p_td3 ) {
-									echo '<tr><td>' . $p_td1 . '</td><td>' . $p_td2 . '</td><td>' . $p_td3 . '</td></tr>';
+									echo '<tr><td>' . $p_td1 . '</td><td>' . string_attribute( $p_td2 ) . '</td><td>' . string_attribute($p_td3 ) . '</td></tr>';
 								};
 								foreach( $t_users_to_update as $t_id => $t_new_acl ) {
 									$t_username = prepare_user_name( $t_id, false );

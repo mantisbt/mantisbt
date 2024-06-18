@@ -428,7 +428,7 @@ $t_user_count = count( $t_users );
 					}
 					print_email_link( $v_email, $v_email )
 				?></td>
-				<td><?php echo $t_access_level[$v_access_level] ?></td>
+				<td><?php echo string_attribute( $t_access_level[$v_access_level] ); ?></td>
 				<td class="center"><?php echo trans_bool( $v_enabled ) ?></td>
 				<td class="center"><?php
 					if( $v_protected ) {

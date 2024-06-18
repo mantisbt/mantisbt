@@ -192,9 +192,9 @@ print_manage_menu( 'manage_proj_page.php' );
 							. string_attribute( $t_project['name'] ) ?>
 					</a>
 				</td>
-				<td><?php echo get_enum_element( 'project_status', $t_project['status'] ) ?></td>
+				<td><?php echo string_attribute( get_enum_element( 'project_status', $t_project['status'] ) ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_project['enabled'] ) ?></td>
-				<td><?php echo get_enum_element( 'project_view_state', $t_project['view_state'] ) ?></td>
+				<td><?php echo string_attribute( get_enum_element( 'project_view_state', $t_project['view_state'] ) ) ?></td>
 				<td><?php echo string_display_links( $t_project['description'] ) ?></td>
 			</tr><?php
 			}

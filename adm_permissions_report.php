@@ -80,7 +80,7 @@ function get_section_begin_apr( $p_section_name ) {
 	$t_output .= '<th class="bold">' . lang_get( 'perm_rpt_capability' ) . '</th>';
 
 	foreach( $t_access_levels as $t_access_level ) {
-		$t_output .= '<th class="bold" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
+		$t_output .= '<th class="bold" style="text-align:center">&#160;' . string_attribute( MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ) , $t_access_level ) ) . '&#160;</th>';
 	}
 
 	$t_output .= '</tr>' . "\n";

@@ -234,7 +234,7 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '  </tr><tr>' . "\n";
 
 	foreach( $t_access_levels as $t_access_level ) {
-		echo '  <th>&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>' . "\n";
+		echo '  <th>&#160;' . string_attribute( MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) ) . '&#160;</th>' . "\n";
 	}
 
 	echo '</tr>' . "\n";

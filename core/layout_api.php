@@ -1084,7 +1084,7 @@ function layout_breadcrumbs() {
 			$t_display_username . $t_display_realname . '</a>' . "\n";
 
 		$t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed';
-		echo '  <span class="label hidden-xs label-default ' . $t_label . '">' . $t_access_level . '</span></li>' . "\n";
+		echo '  <span class="label hidden-xs label-default ' . $t_label . '">' . string_attribute( $t_access_level ) . '</span></li>' . "\n";
 	}
 	echo '</ul>' , "\n";
 

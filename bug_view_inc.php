@@ -259,7 +259,7 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 	echo '</td>';
 
 	# View Status
-	echo '<td class="bug-view-status">', $t_flags['view_state_show'] && isset( $t_issue['view_state']['label'] ) ? string_display_line( $t_issue['view_state']['label'] ) : '', '</td>';
+	echo '<td class="bug-view-status">', $t_flags['view_state_show'] && isset( $t_issue['view_state']['label'] ) ? string_attribute( $t_issue['view_state']['label'] ) : '', '</td>';
 
 	# Date Submitted
 	echo '<td class="bug-date-submitted">', $t_flags['created_at_show'] ? $t_issue_view['created_at'] : '', '</td>';
@@ -335,7 +335,7 @@ if( $t_flags['priority_show'] || $t_flags['severity_show'] || $t_flags['reproduc
 	# Priority
 	if( $t_flags['priority_show'] ) {
 		echo '<th class="bug-priority category">', lang_get( 'priority' ), '</th>';
-		echo '<td class="bug-priority">', string_display_line( $t_issue['priority']['label'] ), '</td>';
+		echo '<td class="bug-priority">', string_attribute( $t_issue['priority']['label'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -343,7 +343,7 @@ if( $t_flags['priority_show'] || $t_flags['severity_show'] || $t_flags['reproduc
 	# Severity
 	if( $t_flags['severity_show'] ) {
 		echo '<th class="bug-severity category">', lang_get( 'severity' ), '</th>';
-		echo '<td class="bug-severity">', string_display_line( $t_issue['severity']['label'] ), '</td>';
+		echo '<td class="bug-severity">', string_attribute( $t_issue['severity']['label'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -351,7 +351,7 @@ if( $t_flags['priority_show'] || $t_flags['severity_show'] || $t_flags['reproduc
 	# Reproducibility
 	if( $t_flags['reproducibility_show'] ) {
 		echo '<th class="bug-reproducibility category">', lang_get( 'reproducibility' ), '</th>';
-		echo '<td class="bug-reproducibility">', string_display_line( $t_issue['reproducibility']['label'] ), '</td>';
+		echo '<td class="bug-reproducibility">', string_attribute( $t_issue['reproducibility']['label'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -382,7 +382,7 @@ if( $t_flags['status_show'] || $t_flags['resolution_show'] ) {
 
 		echo '<td class="bug-status">';
 		print_icon( 'fa-square', 'fa-status-box ' . $t_status_css );
-		echo ' ' . string_display_line( $t_issue['status']['label'] ), '</td>';
+		echo ' ' . string_attribute( $t_issue['status']['label'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -390,7 +390,7 @@ if( $t_flags['status_show'] || $t_flags['resolution_show'] ) {
 	# Resolution
 	if( $t_flags['resolution_show'] ) {
 		echo '<th class="bug-resolution category">', lang_get( 'resolution' ), '</th>';
-		echo '<td class="bug-resolution">', string_display_line( $t_issue['resolution']['label'] ), '</td>';
+		echo '<td class="bug-resolution">', string_attribute( $t_issue['resolution']['label'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -415,7 +415,7 @@ if( $t_flags['projection_show'] || $t_flags['eta_show'] ) {
 	if( $t_flags['projection_show'] ) {
 		# Projection
 		echo '<th class="bug-projection category">', lang_get( 'projection' ), '</th>';
-		echo '<td class="bug-projection">', string_display_line( $t_issue['projection']['label'] ), '</td>';
+		echo '<td class="bug-projection">', string_attribute( $t_issue['projection']['label'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -423,7 +423,7 @@ if( $t_flags['projection_show'] || $t_flags['eta_show'] ) {
 	# ETA
 	if( $t_flags['eta_show'] ) {
 		echo '<th class="bug-eta category">', lang_get( 'eta' ), '</th>';
-		echo '<td class="bug-eta">', string_display_line( $t_issue['eta']['label'] ), '</td>';
+		echo '<td class="bug-eta">', string_attribute( $t_issue['eta']['label'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -916,10 +916,10 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 		$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user_id, $t_bug->project_id );
 		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
 		$t_relationship_info_html .= '<td>' . icon_get( 'fa-square', 'fa-status-box ' . $t_status_css );
-		$t_relationship_info_html .= ' <span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_display_line( $t_status_string ) . '</span></td>';
+		$t_relationship_info_html .= ' <span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_attribute( $t_status_string ) . '</span></td>';
 	} else {
 		$t_relationship_info_html .= $t_td . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</td>';
-		$t_relationship_info_html .= $t_td . string_display_line( $t_status_string ) . '&#160;</td>';
+		$t_relationship_info_html .= $t_td . string_attribute( $t_status_string ) . '&#160;</td>';
 	}
 
 	# get the handler name of the related bug

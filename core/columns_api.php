@@ -1352,7 +1352,7 @@ function print_column_severity( BugData $p_bug, $p_columns_target = COLUMNS_TARG
  * @access public
  */
 function print_column_eta( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="column-eta">', get_enum_element( 'eta', $p_bug->eta, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
+	echo '<td class="column-eta">', string_attribute( get_enum_element( 'eta', $p_bug->eta, auth_get_current_user_id(), $p_bug->project_id ) ), '</td>';
 }
 
 /**
@@ -1364,7 +1364,7 @@ function print_column_eta( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VI
  * @access public
  */
 function print_column_projection( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="column-projection">', get_enum_element( 'projection', $p_bug->projection, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
+	echo '<td class="column-projection">', string_attribute( get_enum_element( 'projection', $p_bug->projection, auth_get_current_user_id(), $p_bug->project_id ) ), '</td>';
 }
 
 /**
@@ -1376,7 +1376,7 @@ function print_column_projection( BugData $p_bug, $p_columns_target = COLUMNS_TA
  * @access public
  */
 function print_column_reproducibility( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="column-reproducibility">', get_enum_element( 'reproducibility', $p_bug->reproducibility, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
+	echo '<td class="column-reproducibility">', string_attribute( get_enum_element( 'reproducibility', $p_bug->reproducibility, auth_get_current_user_id(), $p_bug->project_id ) ), '</td>';
 }
 
 /**
@@ -1389,7 +1389,7 @@ function print_column_reproducibility( BugData $p_bug, $p_columns_target = COLUM
  */
 function print_column_resolution( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-resolution">',
-		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
+		string_attribute( get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ) ),
 		'</td>';
 }
 
@@ -1409,8 +1409,8 @@ function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET
 	echo '<div class="align-left">';
 	print_icon( 'fa-square', 'fa-status-box ' . $t_status_css );
 	printf( ' <span title="%s">%s</span>',
-		get_enum_element( 'resolution', $p_bug->resolution, $t_current_user, $p_bug->project_id ),
-		get_enum_element( 'status', $p_bug->status, $t_current_user, $p_bug->project_id )
+		string_attribute( get_enum_element( 'resolution', $p_bug->resolution, $t_current_user, $p_bug->project_id ) ),
+		string_attribute( get_enum_element( 'status', $p_bug->status, $t_current_user, $p_bug->project_id ) )
 	);
 
 	# print handler user next to status
