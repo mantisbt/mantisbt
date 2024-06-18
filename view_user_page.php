@@ -141,7 +141,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 					<?php echo lang_get( 'access_level' ) ?>
 				</th>
 				<td>
-					<?php echo string_display_line( get_enum_element( 'access_levels', $u_access_level ) ); ?>
+					<?php echo string_attribute( get_enum_element( 'access_levels', $u_access_level ) ); ?>
 				</td>
 			</tr>
 			<tr>

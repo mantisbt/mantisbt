@@ -570,7 +570,7 @@ function print_filter_values_show_severity( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -627,7 +627,7 @@ function print_filter_values_show_resolution( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -684,7 +684,7 @@ function print_filter_values_show_status( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -741,7 +741,7 @@ function print_filter_values_hide_status( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		$t_hide_status_post = '';
 		if( count( $t_filter[FILTER_PROPERTY_HIDE_STATUS] ) == 1 ) {
@@ -750,7 +750,7 @@ function print_filter_values_hide_status( array $p_filter ) {
 		if( $t_none_found ) {
 			echo lang_get( 'none' );
 		} else {
-			echo $t_output . string_display_line( $t_hide_status_post );
+			echo $t_output . string_attribute( $t_hide_status_post );
 		}
 	}
 }
@@ -1049,7 +1049,7 @@ function print_filter_values_show_priority( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -2362,7 +2362,7 @@ function print_filter_values_projection( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
