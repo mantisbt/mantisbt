@@ -184,7 +184,7 @@ function section_begin( $p_section_name ) {
 
 	foreach( $t_enum_statuses as $t_status ) {
 		echo "\t\t\t" . '<th class="bold" style="text-align:center">&#160;'
-			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) )
+			. string_no_break( string_attribute( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) )
 			. '&#160;</th>' ."\n";
 	}
 

@@ -353,7 +353,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 											</a>
 										</td>
 										<td class="center">
-											<?php echo get_enum_element( 'project_status', $t_subproject['status'] ) ?>
+											<?php echo string_attribute( get_enum_element( 'project_status', $t_subproject['status'] ) ) ?>
 										</td>
 										<td class="center">
 											<?php echo trans_bool( $t_subproject['enabled'] ) ?>
@@ -366,7 +366,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 											</label>
 										</td>
 										<td class="center">
-											<?php echo get_enum_element( 'project_view_state', $t_subproject['view_state'] ) ?>
+											<?php echo string_attribute( get_enum_element( 'project_view_state', $t_subproject['view_state'] ) ) ?>
 										</td>
 										<td>
 											<?php echo string_display_links( $t_subproject['description'] ) ?>
