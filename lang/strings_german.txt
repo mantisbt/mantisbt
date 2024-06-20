@@ -588,6 +588,7 @@ $s_p = 'Änderungsgeschützt';
 $s_date_created = 'Erstellungsdatum';
 $s_last_visit = 'Letzter Besuch';
 $s_last_visit_label = 'Letzter Besuch:';
+$s_failed_login_count = 'Fehlgeschlagene Anmeldungen';
 $s_edit_user_link = 'Benutzer bearbeiten';
 $s_search_user_hint = 'Benutzername, bürgerlicher Name oder E-Mail';
 $s_separate_list_items_by = '(Listeneinträge mit „%1$s“ trennen)';

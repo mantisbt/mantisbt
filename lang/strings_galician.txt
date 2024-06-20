@@ -568,6 +568,7 @@ $s_manage_accounts_title = 'Xestionar as contas';
 $s_date_created = 'Data de creación';
 $s_last_visit = 'Última visita';
 $s_last_visit_label = 'Última visita:';
+$s_failed_login_count = 'Inicios de sesión fallidos';
 $s_edit_user_link = 'Editar o usuario';
 $s_search_user_hint = 'Nome de usuario, nome real ou enderezo de correo electrónico';
 $s_separate_list_items_by = '(separar os elementos da lista por "%1$s")';
