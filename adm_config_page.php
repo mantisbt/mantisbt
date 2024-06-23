@@ -222,7 +222,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 					</td>
 					<td>
 						<?php
-                        $c_option_id = string_display_line( $t_option_id );
+                        $c_option_id = string_attribute( $t_option_id );
 						if( $t_modify ) {
 						?>
 						<input type="text" name="config_option" class="input-sm"
@@ -251,7 +251,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 						</select>
 						<?php
 						} else {
-							echo string_display_line( config_get_type_string( $t_option_type ) );
+							echo string_attribute( config_get_type_string( $t_option_type ) );
 						}
 						?>
 					</td>
