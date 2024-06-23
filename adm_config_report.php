@@ -403,8 +403,8 @@ while( $t_row = $t_config_query->fetch() ) {
 					<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_attribute( user_get_name( $v_user_id ) ) ?>
 				</td>
 				<td><?php echo string_attribute( project_get_name( $v_project_id, false ) ) ?></td>
-				<td><?php echo string_display_line( $v_config_id ) ?></td>
-				<td><?php echo string_display_line( config_get_type_string( $v_type ) ) ?></td>
+				<td><?php echo string_attribute( $v_config_id ) ?></td>
+				<td><?php echo string_attribute( config_get_type_string( $v_type ) ) ?></td>
 				<td style="overflow-x:auto;"><?php echo $t_html_value ?></td>
 				<td><?php echo string_attribute( get_enum_element( 'access_levels', $v_access_reqd ) ); ?></td>
 <?php
