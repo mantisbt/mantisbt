@@ -512,6 +512,7 @@ $s_p = 'з';
 $s_date_created = 'Датум стварања';
 $s_last_visit = 'Последња посета';
 $s_last_visit_label = 'Последња посета:';
+$s_failed_login_count = 'Неуспеле пријаве';
 $s_edit_user_link = 'Уреди корисника';
 $s_config_all_projects = 'Напомена: ове поставке утичу на све пројекте.';
 $s_config_project = 'Напомена: ове поставке се односе само на пројекат %1$s.';

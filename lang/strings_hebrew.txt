@@ -45,6 +45,7 @@
  * @author Guycn2
  * @author LaG roiL
  * @author Macofe
+ * @author Neriah
  * @author Orentet
  * @author Rotemliss
  * @author Steeve815
@@ -576,6 +577,7 @@ $s_manage_accounts_title = 'ניהול חשבונות';
 $s_date_created = 'תאריך יצירה';
 $s_last_visit = 'כניסה אחרונה';
 $s_last_visit_label = 'ביקור אחרון:';
+$s_failed_login_count = 'הכניסה נכשלה';
 $s_edit_user_link = 'עריכת משתמש';
 $s_search_user_hint = 'שם משתמש, שם אמתי או דוא״ל';
 $s_separate_list_items_by = '(יש להפריד בין הפריטים ברשימה עם „%1$s”)';
