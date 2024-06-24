@@ -51,9 +51,15 @@ $g_anonymous_account		= '';
 
 # --- Email Configuration ---
 $g_phpMailer_method		= PHPMAILER_METHOD_MAIL; # or PHPMAILER_METHOD_SMTP, PHPMAILER_METHOD_SENDMAIL
-$g_smtp_host			= 'localhost';			# used with PHPMAILER_METHOD_SMTP
-$g_smtp_username		= '';					# used with PHPMAILER_METHOD_SMTP
-$g_smtp_password		= '';					# used with PHPMAILER_METHOD_SMTP
+
+# used with PHPMAILER_METHOD_SMTP
+$g_smtp_host			= 'localhost';
+$g_smtp_username		= '';
+$g_smtp_password		= '';
+# $g_smtp_connection_mode = ''; # Valid values are '' (no encryption), 'ssl' or 'tls'
+# $g_smtp_port = 25; # default unencrypted: 25  default tls: 587
+# $g_smtp_ssl_verify_peer = true; # Can be set to false to allow self-signed certs from mail server.
+
 $g_webmaster_email      = 'webmaster@example.com';
 $g_from_email           = 'noreply@example.com';	# the "From: " field in emails
 $g_return_path_email    = 'admin@example.com';	# the return address for bounced mail
