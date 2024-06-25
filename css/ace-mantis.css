@@ -136,6 +136,13 @@
     margin-left:8px;
 }
 
+.margin-left-20 {
+    margin-left: 20px;
+}
+.rtl .margin-left-20 {
+    margin-right: 20px;
+}
+
 .login-container {
     width: 100%;
 }
