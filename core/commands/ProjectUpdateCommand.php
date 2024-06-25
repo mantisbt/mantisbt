@@ -16,8 +16,8 @@
 
 require_api( 'project_api.php' );
 
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_enum_api.php' );
+$t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
+require_once( $t_soap_dir . 'mc_api.php' );
 
 use Mantis\Exceptions\ClientException;
 

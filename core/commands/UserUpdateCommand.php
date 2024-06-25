@@ -22,8 +22,8 @@ require_api( 'user_api.php' );
 
 use Mantis\Exceptions\ClientException;
 
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_account_api.php' );
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
+$t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
+require_once( $t_soap_dir . 'mc_api.php' );
 
 /**
  * A command that updates a user account.

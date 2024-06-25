@@ -163,7 +163,7 @@ $g_db_table_plugin_prefix = 'plugin';
  *
  * @global string $g_absolute_path
  */
-$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$g_absolute_path = __DIR__ . DIRECTORY_SEPARATOR;
 
 /**
  * Path to core folder.
