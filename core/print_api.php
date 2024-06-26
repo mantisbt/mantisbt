@@ -2186,7 +2186,7 @@ function print_dropzone_form_data() {
 	echo "\t" . 'data-max-filename-length="'. DB_FIELD_SIZE_FILENAME . '"' . "\n";
 	$t_allowed_files = config_get( 'allowed_files' );
 	if ( !empty ( $t_allowed_files ) ) {
-		$t_allowed_files = '.' . implode ( ',.', explode ( ',', config_get( 'allowed_files' ) ) );
+		$t_allowed_files = '.' . implode ( ',.', explode ( ',', $t_allowed_files ) );
 	}
 	echo "\t" . 'data-accepted-files="' . $t_allowed_files . '"' . "\n";
 	echo "\t" . 'data-default-message="' . htmlspecialchars( lang_get( 'dropzone_default_message' ) ) . '"' . "\n";
@@ -2197,7 +2197,7 @@ function print_dropzone_form_data() {
 	echo "\t" . 'data-response-error="' . htmlspecialchars( lang_get( 'dropzone_response_error' ) ) . '"' . "\n";
 	echo "\t" . 'data-cancel-upload="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload' ) ) . '"' . "\n";
 	echo "\t" . 'data-cancel-upload-confirmation="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload_confirmation' ) ) . '"' . "\n";
-	echo "\t" . 'data-remove-file="'. htmlspecialchars( lang_get( 'dropzone_remove_file' ) ) . '"' . "\n";
+	echo "\t" . 'data-remove-file=""' . "\n";
 	echo "\t" . 'data-remove-file-confirmation="' . htmlspecialchars( lang_get( 'dropzone_remove_file_confirmation' ) ) . '"' . "\n";
 	echo "\t" . 'data-max-files-exceeded="' . htmlspecialchars( lang_get( 'dropzone_max_files_exceeded' ) ) . '"' . "\n";
 	echo "\t" . 'data-dropzone-not-supported="' . htmlspecialchars( lang_get( 'dropzone_not_supported' ) ) . '"';
@@ -2215,14 +2215,18 @@ function print_dropzone_template(){
 	<div id="dropzone-preview-template" class="hidden">
 		<div class="dz-preview dz-file-preview">
 			<div class="dz-filename"><span data-dz-name></span></div>
-			<div><img data-dz-thumbnail /></div>
+			<img data-dz-thumbnail />
+			<div class="dz-error-message">
+				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle'); ?></span></div>
+				<span data-dz-errormessage></span>
+			</div>
 			<div class="dz-size" data-dz-size></div>
 			<div class="progress progress-small progress-striped active">
 				<div class="progress-bar progress-bar-success" data-dz-uploadprogress></div>
 			</div>
-			<div class="dz-success-mark"><span></span></div>
-			<div class="dz-error-mark"><span></span></div>
-			<div class="dz-error-message"><span data-dz-errormessage></span></div>
+			<a class="btn btn-primary btn-white btn-round btn-xs" data-dz-remove>
+				<?php echo lang_get( 'dropzone_remove_file' ); ?>
+			</a>
 		</div>
 	</div>
 	<?php
