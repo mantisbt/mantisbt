@@ -261,7 +261,20 @@ print_account_menu( 'account_page.php' );
 					<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ); ?>
 				</td>
 			</tr>
-			<?php event_signal( 'EVENT_USER_ADDITIONAL_ATTRIBUTES', $u_username ); ?>
+	<?php 
+	$t_plugin_user_attributes = event_signal( 'EVENT_USER_ADDITIONAL_ATTRIBUTES', $u_username );
+	foreach ( $t_plugin_user_attributes as $t_plugin => $t_plugin_items) {
+		foreach ($t_plugin_items['display'] as $t_attribute) { ?>
+			<tr>
+				<td class="category">
+					<?php echo $t_attribute['title'] ?>
+				</td>
+				<td>
+					<?php echo $t_attribute['value'] ?>
+				</td>
+			</tr>
+		<?php } ?>
+	<?php } ?>
 				</fieldset>
 			</table>
 		</div>

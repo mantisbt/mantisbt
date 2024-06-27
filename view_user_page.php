@@ -188,7 +188,20 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 				</tr>
 			<?php } ?>
 	<?php } ?>
-	<?php event_signal( 'EVENT_USER_ADDITIONAL_ATTRIBUTES', $u_username ); ?>
+	<?php 
+		$t_plugin_user_attributes = event_signal( 'EVENT_USER_ADDITIONAL_ATTRIBUTES', $u_username );
+		foreach ( $t_plugin_user_attributes as $t_plugin => $t_plugin_items) {
+			foreach ($t_plugin_items['display'] as $t_attribute) { ?>
+				<tr>
+					<td class="category">
+						<?php echo $t_attribute['title'] ?>
+					</td>
+					<td>
+						<?php echo $t_attribute['value'] ?>
+					</td>
+			    </tr>
+			<?php } ?>
+		<?php } ?>
 	</fieldset>
 </table>
 	</div>
