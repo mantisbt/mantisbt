@@ -349,11 +349,11 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 									<tr>
 										<td>
 											<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>">
-												<?php echo string_display_line( $t_subproject['name'] ) ?>
+												<?php echo string_attribute( $t_subproject['name'] ) ?>
 											</a>
 										</td>
 										<td class="center">
-											<?php echo get_enum_element( 'project_status', $t_subproject['status'] ) ?>
+											<?php echo string_attribute( get_enum_element( 'project_status', $t_subproject['status'] ) ) ?>
 										</td>
 										<td class="center">
 											<?php echo trans_bool( $t_subproject['enabled'] ) ?>
@@ -366,7 +366,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 											</label>
 										</td>
 										<td class="center">
-											<?php echo get_enum_element( 'project_view_state', $t_subproject['view_state'] ) ?>
+											<?php echo string_attribute( get_enum_element( 'project_view_state', $t_subproject['view_state'] ) ) ?>
 										</td>
 										<td>
 											<?php echo string_display_links( $t_subproject['description'] ) ?>
@@ -475,7 +475,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			$t_inherited = ( $t_category['project_id'] != $f_project_id );
 ?>
 			<tr>
-				<td><?php echo string_display_line( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
+				<td><?php echo string_attribute( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
 				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<td class="center">
@@ -602,7 +602,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			} ?>
 
 			<tr>
-				<td><?php echo string_display_line( $t_name ) ?></td>
+				<td><?php echo string_attribute( $t_name ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_released ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_obsolete ) ?></td>
 				<td class="center"><?php echo $t_date_formatted ?></td>
