@@ -38,8 +38,9 @@
  * @ingroup Language
  * @file
  *
+ * @author Kapatych
  * @author Red Winged Duck
  */
 
 $s_plugin_Gravatar_title = 'Аватары праз Gravatar';
-$s_plugin_Gravatar_description = 'Дадатак, які паказвае аватары ўдзельнікаў паводле іх адрасу электроннай пошты з дапамогай сэрвісу аватараў.';
+$s_plugin_Gravatar_description = 'Убудова, яка паказвае аватары ўдзельнікаў паводле іх адрасу электроннай пошты з дапамогай сэрвісу аватараў.';
