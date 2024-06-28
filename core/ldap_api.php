@@ -47,7 +47,7 @@ $g_cache_ldap_data = array();
 
 /**
  * Logs the most recent LDAP error
- * @param resource $p_ds LDAP resource identifier returned by ldap_connect.
+ * @param \LDAP\Connection $p_ds LDAP resource identifier returned by ldap_connect.
  * @return void
  */
 function ldap_log_error( $p_ds ) {
@@ -58,7 +58,7 @@ function ldap_log_error( $p_ds ) {
  * Connect and bind to the LDAP directory
  * @param string $p_binddn   DN to use for LDAP bind.
  * @param string $p_password Password to use for LDAP bind.
- * @return resource|false
+ * @return \LDAP\Connection|false
  */
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	$t_ldap_server = config_get_global( 'ldap_server' );
