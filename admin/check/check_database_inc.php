@@ -223,9 +223,10 @@ $t_date_format = config_get( 'short_date_format' );
 # MySQL support checking
 if( db_is_mysql() ) {
 	# The list below was built based on information found in the FAQ [1]
-	# [1]: https://dev.mysql.com/doc/refman/8.0/en/faqs-general.html
+	# [1]: https://dev.mysql.com/doc/refman/8.4/en/faqs-general.html
+	# @TODO consider using https://endoflife.date/mysql to retrieve this data
 	$t_versions = array(
-		# Series >= Type, GA status, GA date
+		# Series => Type, Version when GA status was achieved, GA date
 		'5.0' => array( 'GA', '5.0.15', '2005-10-19' ),
 		'5.1' => array( 'GA', '5.1.30', '2008-11-14' ),
 		'5.4' => array( 'Discontinued' ),
@@ -234,6 +235,10 @@ if( db_is_mysql() ) {
 		'5.7' => array( 'GA', '5.7.9', '2015-10-21' ),
 		'6.0' => array( 'Discontinued' ),
 		'8.0' => array( 'GA', '8.0.11', '2018-04-19' ),
+		'8.1' => array( 'Innovation', '8.1.0', '2023-07-18' ),
+		'8.2' => array( 'Innovation', '8.2.0', '2023-10-25' ),
+		'8.3' => array( 'Innovation', '8.3.0', '2024-01-16' ),
+		'8.4' => array( 'LTS', '8.4.0', '2024-04-30' ),
 	);
 	$t_support_url = 'https://www.mysql.com/support/';
 
