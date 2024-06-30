@@ -56,7 +56,7 @@ function check_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 
 	# Do not handle PHP errors that have already been caught by MantisBT. These
 	# are likely triggered by the admin checks script itself, so we let PHP
-	# process them, otherwise the check will fail silently.x§
+	# process them, otherwise the check will fail silently.
 	if( $p_type == E_USER_ERROR && $p_error == ERROR_PHP ) {
 		return false;
 	}
