@@ -48,7 +48,7 @@ if( isset( $ADODB_vers ) ) {
 	# Upstream bug report: http://phplens.com/lens/lensforum/msgs.php?id=18320
 	# This bug has been fixed in ADOdb 5.11 (May 5, 2010) but we still
 	# need to use the backwards compatible approach to detect ADOdb <5.11.
-	if( preg_match( '/^[Vv]([0-9\.]+)/', $ADODB_vers, $t_matches ) == 1 ) {
+	if( preg_match( '/^[Vv]([0-9.]+)/', $ADODB_vers, $t_matches ) == 1 ) {
 		$t_adodb_version_check_ok = version_compare( $t_matches[1], DB_MIN_VERSION_ADODB, '>=' );
 		$t_adodb_version_info = 'ADOdb version ' . htmlentities( $t_matches[1] ) . ' was found.';
 	}
@@ -61,7 +61,7 @@ if( isset( $ADODB_vers ) ) {
 	);
 }
 check_print_test_row(
-	'Version of <a href="http://en.wikipedia.org/wiki/ADOdb">ADOdb</a> available is at least ' . DB_MIN_VERSION_ADODB,
+	'Version of <a href="https://adodb.org">ADOdb</a> available is at least ' . DB_MIN_VERSION_ADODB,
 	$t_adodb_version_check_ok,
 	$t_adodb_version_info
 );
@@ -72,7 +72,7 @@ if( !$t_adodb_version_check_ok ) {
 
 $t_database_dsn = config_get_global( 'dsn' );
 check_print_info_row(
-	'Using a custom <a href="http://en.wikipedia.org/wiki/Database_Source_Name">Database Source Name</a> (DSN) for connecting to the database',
+	'Using a custom <a href="https://en.wikipedia.org/wiki/Database_Source_Name">Database Source Name</a> (DSN) for connecting to the database',
 	$t_database_dsn ? 'Yes' : 'No'
 );
 
@@ -178,7 +178,7 @@ check_print_test_row(
 if( !db_is_connected() ) {
 	return;
 }
-
+global $g_db;
 $t_database_server_info = $g_db->ServerInfo();
 $t_db_version = $t_database_server_info['version'];
 preg_match( '/^([0-9]+)\.[0-9+]/', $t_db_version, $t_matches );
@@ -430,6 +430,7 @@ check_print_test_warn_row(
 );
 
 if( db_is_mysql() ) {
+	global $g_database_name;
 	# Check DB's default collation
 	$t_query = 'SELECT default_collation_name
 		FROM information_schema.schemata
