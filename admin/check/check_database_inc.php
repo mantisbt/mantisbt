@@ -248,12 +248,22 @@ if( db_is_mysql() ) {
 	$t_mysql_ga_release = false;
 	$t_date_end_active_support = $t_date_end_of_life = null;
 	if( !array_key_exists( $t_db_major_version, $t_versions ) ) {
+		$t_param = [
+			'category_id' => 12, # db mysql
+			'product_version' => MANTIS_VERSION,
+			'reproducibility' => 10, # always
+			'priority' => 20, # low
+			'summary' => "MySQL version $t_db_major_version is not defined in Admin Checks",
+			'description' => "Please add the missing version to " . basename( __FILE__ ) . ".",
+		];
+		$t_report_bug_url = 'https://mantisbt.org/bugs/bug_report_page.php?' . http_build_query( $t_param );
 		check_print_test_warn_row(
 			'MySQL Lifecycle and Release Support data availability',
 			false,
 			array(
 				false => 'Release information for MySQL ' . $t_db_major_version
 					. ' series is not available, unable to perform the lifecycle checks.'
+					. ' Please <a href="' . $t_report_bug_url . '">report the issue</a>.'
 			) );
 	} else {
 		$t_version = $t_versions[$t_db_major_version];
