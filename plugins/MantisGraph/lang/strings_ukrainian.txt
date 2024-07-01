@@ -39,6 +39,7 @@
  * @file
  *
  * @author Andriykopanytsia
+ * @author Ignatgg
  * @author Movses
  * @author Piramidion
  * @author SteveR
@@ -60,6 +61,7 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Діаграми за пріо
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Діаграми за серйозністю';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Діаграми за категорією';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Діаграми за рішенням';
+$s_plugin_MantisGraph_graph_project_title = 'За графіками проєкту';
 $s_plugin_MantisGraph_graph_developer_title = 'Діаграми за розробниками';
 $s_plugin_MantisGraph_graph_reporter_title = 'Діаграми за доповідачами';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Відкриті, вирішені й ті, що залишилися проблеми';
@@ -90,3 +92,4 @@ $s_plugin_MantisGraph_graph_topdev = 'Найкращі розробники за
 $s_plugin_MantisGraph_graph_opendev = 'Розробники за відкритими проблемами';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Найкращі доповідачі за виправленими проблемами';
 $s_plugin_MantisGraph_other_categories = 'інші категорії (%d)';
+$s_plugin_MantisGraph_other_projects = 'інші проєкти (%d)';

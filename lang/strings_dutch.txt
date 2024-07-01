@@ -578,6 +578,7 @@ $s_p = 'p';
 $s_date_created = 'Aangemaakt op';
 $s_last_visit = 'Laatste bezoek';
 $s_last_visit_label = 'Laatste bezoek:';
+$s_failed_login_count = 'Mislukte aanmeldingen';
 $s_edit_user_link = 'Gebruiker bewerken';
 $s_search_user_hint = 'Gebruikersnaam, Echte Naam of E-mail';
 $s_separate_list_items_by = '(scheid items in de lijst met "%1$s")';
