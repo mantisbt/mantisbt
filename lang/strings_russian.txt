@@ -594,6 +594,7 @@ $s_p = 'з';
 $s_date_created = 'Создана';
 $s_last_visit = 'Посл. вход';
 $s_last_visit_label = 'Последний вход:';
+$s_failed_login_count = 'Неудачные входы';
 $s_edit_user_link = 'Изменить учётную запись';
 $s_search_user_hint = 'Имя пользователя, настоящее имя или эл. почта';
 $s_separate_list_items_by = '(отделяйте пункты списка с помощью «%1$s»)';
