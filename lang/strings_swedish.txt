@@ -49,6 +49,7 @@
  * @author Sabelöga
  * @author Sannab
  * @author Skalman
+ * @author Sturban
  * @author Technic2
  * @author Thosjo
  * @author Tor.klingberg
@@ -577,6 +578,7 @@ $s_p = 'Skyddad';
 $s_date_created = 'Skapelsedatum';
 $s_last_visit = 'Senaste besöket';
 $s_last_visit_label = 'Senaste besök:';
+$s_failed_login_count = 'Misslyckade inloggningar';
 $s_edit_user_link = 'Redigera användare';
 $s_search_user_hint = 'Användarnamn, verkligt namn eller e-post';
 $s_separate_list_items_by = '(separera objekt i listan med "%1$s")';
