@@ -1039,6 +1039,7 @@ $s_bytes = 'בתים';
 $s_kib = 'KiB';
 $s_attachment_missing = 'צרופה חסרה';
 $s_attachment_count = 'מספר הצרופות';
+$s_bugnotes_count = 'כמות הערות על סוגיה';
 $s_view_attachments_for_issue = 'הצגת %1$d צרופה/ות לבאג #%2$d';
 $s_warning_update_custom_field_type = '<strong>אזהרה:</strong> בשדה המותאם אישית "%1$s" כבר מאוחסנים ערכים. שינוי סוג שדה עלול לגרום לשגיאות ולהתנהגות בלתי צפויה, אם ערכים קיימים אינם תואמים לסוג החדש של השדה. כדי להמשיך, נא להקיש על הלחצן מטה';
 $s_phpmailer_language = 'he';
