@@ -62,8 +62,28 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 * @return void
 	 */
 	function resources() {
-		if ( ON == plugin_config_get( 'process_markdown' )) {
+		if ( ON == plugin_config_get( 'process_markdown' ) ) {
 			echo '<link rel="stylesheet" href="' . plugin_file( 'markdown.css' ) . '" />';
+
+			if ( ON == plugin_config_get( 'syntax_highlighting' ) ) {
+				$t_plugins = plugin_config_get( 'syntax_highlighting_plugins' );
+				echo '<script
+					id="mantis-core-formatting-syntax-highlighting-init"
+					data-cdn="' . config_get( 'cdn_enabled' ) . '"
+					data-theme="' . plugin_config_get( 'syntax_highlighting_theme' ) . '"
+					data-plugins="' . implode( ',', array_map(
+						'trim',
+						is_array( $t_plugins ) ? $t_plugins : []
+					) ) . '"
+					data-i18n=\'' . json_encode([
+						'copy-to-clipboard' => [
+							'copy' => lang_get( 'plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy' ),
+							'copy-success' => lang_get( 'plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success' ),
+							'copy-error' => lang_get( 'plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error' ),
+						],
+					])  . '\'
+					src="' . plugin_file( 'syntax-highlighting/init.js' ) . '"></script>';
+			}
 		}
 	}
 
@@ -73,10 +93,13 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 */
 	function config() {
 		return array(
-			'process_text'		=> ON,
-			'process_urls'		=> ON,
-			'process_buglinks'	=> ON,
-			'process_markdown'	=> OFF
+			'process_text'					=> ON,
+			'process_urls'					=> ON,
+			'process_buglinks'				=> ON,
+			'process_markdown'				=> OFF,
+			'syntax_highlighting'			=> OFF,
+			'syntax_highlighting_theme'		=> 'prism.min.css',
+			'syntax_highlighting_plugins'	=> []
 		);
 	}
 
