@@ -170,18 +170,18 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 	$t_graph = new Graph( $t_id_string, $t_graph_attributes, $t_neato_tool );
 
 	$t_graph->set_default_node_attr(  [
-			'fontname'	=> $t_graph_fontname,
-			'fontsize'	=> $t_graph_fontsize,
-			'shape'		=> 'record',
-			'style'		=> 'filled',
-			'height'	=> '0.2',
-			'width'		=> '0.4'
+		'fontname'	=> $t_graph_fontname,
+		'fontsize'	=> $t_graph_fontsize,
+		'shape'		=> 'record',
+		'style'		=> 'filled',
+		'height'	=> '0.2',
+		'width'		=> '0.4'
 	] );
 
 	$t_graph->set_default_edge_attr(  [
-			'style'		=> 'solid',
-			'color'		=> '#0000C0',
-			'dir'		=> 'none'
+		'style'		=> 'solid',
+		'color'		=> '#0000C0',
+		'dir'		=> 'none'
 	] );
 
 	$t_url_format = 'bug_relationship_graph.php?bug_id=%d&graph=relation'
@@ -305,18 +305,18 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 	$t_graph = new Digraph( $t_id_string, $t_graph_attributes, $t_dot_tool );
 
 	$t_graph->set_default_node_attr(  [
-			'fontname'	=> $t_graph_fontname,
-			'fontsize'	=> $t_graph_fontsize,
-			'shape'		=> 'record',
-			'style'		=> 'filled',
-			'height'	=> '0.2',
-			'width'		=> '0.4'
+		'fontname'	=> $t_graph_fontname,
+		'fontsize'	=> $t_graph_fontsize,
+		'shape'		=> 'record',
+		'style'		=> 'filled',
+		'height'	=> '0.2',
+		'width'		=> '0.4'
 	] );
 
 	$t_graph->set_default_edge_attr(  [
-			'style'		=> 'solid',
-			'color'		=> '#C00000',
-			'dir'		=> 'back'
+		'style'		=> 'solid',
+		'color'		=> '#C00000',
+		'dir'		=> 'back'
 	] );
 
 	$t_url_format = 'bug_relationship_graph.php?bug_id=%d&graph=dependency&orientation=' . $t_graph_orientation

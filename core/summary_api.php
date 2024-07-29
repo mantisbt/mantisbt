@@ -540,7 +540,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 				'closed' => 0,
 				'total' => 0,
 				'reporter_id' => $t_reporter_id
-				];
+			];
 		}
 		$t_bugcount = (int)$t_row['bugcount'];
 		$t_status = (int)$t_row['status'];
@@ -1161,7 +1161,7 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 		'largest_diff' => 0,
 		'total_time'   => 0,
 		'average_time' => 0,
-		];
+	];
 
 	$t_sql_inner = ' FROM {bug} b LEFT JOIN {bug_history} h'
 		. ' ON b.id = h.bug_id  AND h.type = :hist_type'
@@ -1174,7 +1174,7 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 		'hist_field' => 'status',
 		'int_resolved' => (int)$t_resolved,
 		'str_resolved' => (string)$t_resolved
-		];
+	];
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql_inner .= ' AND b.id IN :filter';
@@ -1202,7 +1202,7 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 				'largest_diff' => number_format( (int)$t_row['diff'] / SECONDS_PER_DAY, 2 ),
 				'total_time'   => number_format( (int)$t_row['total_time'] / SECONDS_PER_DAY, 2 ),
 				'average_time' => number_format( (int)$t_row['avg_time'] / SECONDS_PER_DAY, 2 ),
-				];
+			];
 		}
 	} else {
 		$t_sql = 'SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) AS hist_update, b.status'
@@ -1356,7 +1356,7 @@ function summary_by_dates_bug_count( array $p_date_array, array $p_filter = null
 		'action_open' => 'O',
 		'action_close' => 'C',
 		'mint_ime' => $t_now - $t_prev_days * SECONDS_PER_DAY
-		] );
+	] );
 
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );

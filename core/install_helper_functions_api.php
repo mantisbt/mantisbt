@@ -596,11 +596,11 @@ function install_update_history_long_custom_fields() {
 	# This is as per result of columns_get_standard() at the time of this schema update
 	# Fields mapping: category_id is actually logged in history as 'category'
 	$t_standard_fields = ['id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'eta', 'os',
-								'reproducibility', 'status', 'resolution', 'projection', 'category', 'date_submitted',
-								'last_updated', 'os_build', 'platform', 'version', 'fixed_in_version', 'target_version',
-								'build', 'view_state', 'summary', 'sponsorship_total', 'due_date', 'description',
-								'steps_to_reproduce', 'additional_information', 'attachment_count', 'bugnotes_count',
-								'selection', 'edit', 'overdue'];
+		'reproducibility', 'status', 'resolution', 'projection', 'category', 'date_submitted',
+		'last_updated', 'os_build', 'platform', 'version', 'fixed_in_version', 'target_version',
+		'build', 'view_state', 'summary', 'sponsorship_total', 'due_date', 'description',
+		'steps_to_reproduce', 'additional_information', 'attachment_count', 'bugnotes_count',
+		'selection', 'edit', 'overdue'];
 	$t_field_list = '';
 	foreach( $t_standard_fields as $t_field ) {
 		$t_field_list .= "'$t_field', ";

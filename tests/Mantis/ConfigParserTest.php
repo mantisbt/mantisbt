@@ -264,15 +264,15 @@ EOT
 			'SimpleArray no whitespace' => ["array(1,2,3)"],
 			'SimpleArray arbitrary whitespace' => ["  array(\n1,\t2  ,    3 )\r  "],
 			'SimpleArray mixed types, quotes' => [
-<<<'EOT'
+				<<<'EOT'
 array( 1, 'a', "b" )
 EOT
 			],
 			'SimpleArray nested quotes' => [
-<<<'EOT'
+				<<<'EOT'
 array( '"a""b"""', "'a''b'''" )
 EOT
-		],
+			],
 
 			/**
 			 * Associative arrays
@@ -287,7 +287,7 @@ EOT
 			'AssocArray mixed, overwritten implicit keys' => ["array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )"],
 
 			'AssocArray mixed' => [
-<<<'EOT'
+				<<<'EOT'
 array(
 	array ( 1, 'a', 3 => 1, 4 => 'b', 'x' => 'y' )
 )
@@ -301,9 +301,9 @@ EOT
 			# e.g. handle_bug_threshold
 			'Constants as array values' => ["array( DEVELOPER, MANAGER )"],
 
-				# e.g. status_enum_workflow
+			# e.g. status_enum_workflow
 			'Constants as array keys' => [
-<<<'EOT'
+				<<<'EOT'
 array (
   NEW_ => '20:feedback,30:acknowledged',
   ACKNOWLEDGED => '40:confirmed',
@@ -328,7 +328,7 @@ EOT
 			],
 
 			'Multidimentional, notify_flags sample' => [
-<<<'EOT'
+				<<<'EOT'
 array(
 	'updated' => array (
 		'reporter' => ON,
@@ -360,7 +360,7 @@ EOT
 			 * Test cases for specific issues reported on the bugtracker
 			 */
 			'Issue #0020787' => [
-<<<'EOT'
+				<<<'EOT'
 array (
 	'additional_info',
 	'attachments',
@@ -373,7 +373,7 @@ EOT
 			],
 
 			'Issue #0020812' => [
-<<<'EOT'
+				<<<'EOT'
 array (
 	0 =>
 	array (
@@ -386,7 +386,7 @@ EOT
 			],
 
 			'Issue #0020813' => [
-<<<'EOT'
+				<<<'EOT'
 array(
  0 => "aa'aa",
  1 => "bb\"bb"
@@ -395,13 +395,13 @@ EOT
 			],
 
 			'Issue #0020850' => [
-<<<'EOT'
+				<<<'EOT'
 			array ( 0 => '""a"' )
 EOT
 			],
 
 			'Issue #0020851' => [
-<<<'EOT'
+				<<<'EOT'
 array (
 	'a' => 'x1',
 	'x2',

@@ -81,7 +81,7 @@ $g_upgrade[0] = ['CreateTableSQL', [db_get_table( 'config' ), "
 	type					I		DEFAULT '90',
 	value					XL		NOTNULL",
 	$t_table_options
-	]];
+]];
 $g_upgrade[1] = ['CreateIndexSQL', ['idx_config', db_get_table( 'config' ), 'config_id']];
 $g_upgrade[2] = ['CreateTableSQL', [db_get_table( 'bug_file' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -96,7 +96,7 @@ $g_upgrade[2] = ['CreateTableSQL', [db_get_table( 'bug_file' ), "
 	date_added				T		NOTNULL DEFAULT '" . db_null_date() . "',
 	content					B		NOTNULL " . $t_blob_default,
 	$t_table_options
-	]];
+]];
 $g_upgrade[3] = ['CreateIndexSQL', ['idx_bug_file_bug_id', db_get_table( 'bug_file' ), 'bug_id']];
 $g_upgrade[4] = ['CreateTableSQL', [db_get_table( 'bug_history' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -108,7 +108,7 @@ $g_upgrade[4] = ['CreateTableSQL', [db_get_table( 'bug_history' ), "
 	new_value				C(128)	$t_notnull DEFAULT \" '' \",
 	type					I2		NOTNULL DEFAULT '0'",
 	$t_table_options
-	]];
+]];
 $g_upgrade[5] = ['CreateIndexSQL', ['idx_bug_history_bug_id', db_get_table( 'bug_history' ), 'bug_id']];
 $g_upgrade[6] = ['CreateIndexSQL', ['idx_history_user_id', db_get_table( 'bug_history' ), 'user_id']];
 $g_upgrade[7] = ['CreateTableSQL', [db_get_table( 'bug_monitor' ), "
@@ -116,14 +116,14 @@ $g_upgrade[7] = ['CreateTableSQL', [db_get_table( 'bug_monitor' ), "
 	bug_id					I		UNSIGNED NOTNULL PRIMARY DEFAULT '0'
 	",
 	$t_table_options
-	]];
+]];
 $g_upgrade[8] = ['CreateTableSQL', [db_get_table( 'bug_relationship' ), "
 	id						I		UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
 	source_bug_id			I		UNSIGNED NOTNULL DEFAULT '0',
 	destination_bug_id		I		UNSIGNED NOTNULL DEFAULT '0',
 	relationship_type		I2		NOTNULL DEFAULT '0' ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[9] = ['CreateIndexSQL', ['idx_relationship_source', db_get_table( 'bug_relationship' ), 'source_bug_id']];
 
 # ----------------------------------------------------------------------------
@@ -159,7 +159,7 @@ $g_upgrade[11] = ['CreateTableSQL', [db_get_table( 'bug' ), "
 	sponsorship_total		I		NOTNULL DEFAULT '0',
 	sticky					L		$t_notnull DEFAULT  \"'0'\" ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[12] = ['CreateIndexSQL', ['idx_bug_sponsorship_total', db_get_table( 'bug' ), 'sponsorship_total']];
 $g_upgrade[13] = ['CreateIndexSQL', ['idx_bug_fixed_in_version', db_get_table( 'bug' ), 'fixed_in_version']];
 $g_upgrade[14] = ['CreateIndexSQL', ['idx_bug_status', db_get_table( 'bug' ), 'status']];
@@ -170,7 +170,7 @@ $g_upgrade[16] = ['CreateTableSQL', [db_get_table( 'bug_text' ), "
 	steps_to_reproduce		XL		$t_notnull,
 	additional_information	XL		$t_notnull",
 	$t_table_options
-	]];
+]];
 $g_upgrade[17] = ['CreateTableSQL', [db_get_table( 'bugnote' ), "
 	id						I		UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
 	bug_id					I		UNSIGNED NOTNULL DEFAULT '0',
@@ -182,7 +182,7 @@ $g_upgrade[17] = ['CreateTableSQL', [db_get_table( 'bugnote' ), "
 	note_type				I		DEFAULT '0',
 	note_attr				C(250)	DEFAULT \" '' \" ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[18] = ['CreateIndexSQL', ['idx_bug', db_get_table( 'bugnote' ), 'bug_id']];
 $g_upgrade[19] = ['CreateIndexSQL', ['idx_last_mod', db_get_table( 'bugnote' ), 'last_modified']];
 
@@ -193,19 +193,19 @@ $g_upgrade[20] = ['CreateTableSQL', [db_get_table( 'bugnote_text' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	note					XL		NOTNULL",
 	$t_table_options
-	]];
+]];
 $g_upgrade[21] = ['CreateTableSQL', [db_get_table( 'custom_field_project' ), "
 	field_id				I		NOTNULL PRIMARY DEFAULT '0',
 	project_id				I		UNSIGNED PRIMARY NOTNULL DEFAULT '0',
 	sequence				I2		NOTNULL DEFAULT '0' ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[22] = ['CreateTableSQL', [db_get_table( 'custom_field_string' ), "
 	field_id				I		NOTNULL PRIMARY DEFAULT '0',
 	bug_id					I		NOTNULL PRIMARY DEFAULT '0',
 	value					C(255)	NOTNULL DEFAULT \" '' \" ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[23] = ['CreateIndexSQL', ['idx_custom_field_bug', db_get_table( 'custom_field_string' ), 'bug_id']];
 $g_upgrade[24] = ['CreateTableSQL', [db_get_table( 'custom_field' ), "
 	id						I		NOTNULL PRIMARY AUTOINCREMENT,
@@ -228,7 +228,7 @@ $g_upgrade[24] = ['CreateTableSQL', [db_get_table( 'custom_field' ), "
 	display_closed			L		NOTNULL DEFAULT \" '0' \",
 	require_closed			L		NOTNULL DEFAULT \" '0' \" ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[25] = ['CreateIndexSQL', ['idx_custom_field_name', db_get_table( 'custom_field' ), 'name']];
 $g_upgrade[26] = ['CreateTableSQL', [db_get_table( 'filters' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -238,7 +238,7 @@ $g_upgrade[26] = ['CreateTableSQL', [db_get_table( 'filters' ), "
 	name					C(64)	NOTNULL DEFAULT \" '' \",
 	filter_string			XL		NOTNULL",
 	$t_table_options
-	]];
+]];
 $g_upgrade[27] = ['CreateTableSQL', [db_get_table( 'news' ), "
 	id						I		UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
 	project_id				I		UNSIGNED NOTNULL DEFAULT '0',
@@ -250,13 +250,13 @@ $g_upgrade[27] = ['CreateTableSQL', [db_get_table( 'news' ), "
 	headline				C(64)	NOTNULL DEFAULT \" '' \",
 	body					XL		NOTNULL",
 	$t_table_options
-	]];
+]];
 $g_upgrade[28] = ['CreateTableSQL', [db_get_table( 'project_category' ), "
 	project_id				I		UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	category				C(64)	NOTNULL PRIMARY DEFAULT \" '' \",
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0' ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[29] = ['CreateTableSQL', [db_get_table( 'project_file' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	project_id				I		UNSIGNED NOTNULL DEFAULT '0',
@@ -270,7 +270,7 @@ $g_upgrade[29] = ['CreateTableSQL', [db_get_table( 'project_file' ), "
 	date_added				T		NOTNULL DEFAULT '" . db_null_date() . "',
 	content					B		NOTNULL " . $t_blob_default,
 	$t_table_options
-	]];
+]];
 
 # ----------------------------------------------------------------------------
 # Schema version: 30
@@ -279,7 +279,7 @@ $g_upgrade[30] = ['CreateTableSQL', [db_get_table( 'project_hierarchy' ), "
 	child_id				I		UNSIGNED NOTNULL,
 	parent_id				I		UNSIGNED NOTNULL",
 	$t_table_options
-	]];
+]];
 $g_upgrade[31] = ['CreateTableSQL', [db_get_table( 'project' ), "
 	id						I		UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
 	name					C(128)	NOTNULL DEFAULT \" '' \",
@@ -290,7 +290,7 @@ $g_upgrade[31] = ['CreateTableSQL', [db_get_table( 'project' ), "
 	file_path				C(250)	NOTNULL DEFAULT \" '' \",
 	description				XL		$t_notnull",
 	$t_table_options
-	]];
+]];
 
 # Index autocreated when oci used
 $g_upgrade[32] = db_is_oracle()
@@ -304,7 +304,7 @@ $g_upgrade[35] = ['CreateTableSQL', [db_get_table( 'project_user_list' ), "
 	user_id					I		UNSIGNED PRIMARY NOTNULL DEFAULT '0',
 	access_level			I2		NOTNULL DEFAULT '10' ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[36] = ['CreateIndexSQL', ['idx_project_user', db_get_table( 'project_user_list' ), 'user_id']];
 $g_upgrade[37] = ['CreateTableSQL', [db_get_table( 'project_version' ), "
 	id						I		NOTNULL PRIMARY AUTOINCREMENT,
@@ -314,7 +314,7 @@ $g_upgrade[37] = ['CreateTableSQL', [db_get_table( 'project_version' ), "
 	description				XL		$t_notnull,
 	released				L		NOTNULL DEFAULT \" '1' \" ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[38] = ['CreateIndexSQL', ['idx_project_version', db_get_table( 'project_version' ), 'project_id,version', ['UNIQUE']]];
 $g_upgrade[39] = ['CreateTableSQL', [db_get_table( 'sponsorship' ), "
 	id						I		NOTNULL PRIMARY AUTOINCREMENT,
@@ -327,7 +327,7 @@ $g_upgrade[39] = ['CreateTableSQL', [db_get_table( 'sponsorship' ), "
 	date_submitted			T		NOTNULL DEFAULT '" . db_null_date() . "',
 	last_updated			T		NOTNULL DEFAULT '" . db_null_date() . "'",
 	$t_table_options
-	]];
+]];
 
 # ----------------------------------------------------------------------------
 # Schema version: 40
@@ -342,7 +342,7 @@ $g_upgrade[42] = ['CreateTableSQL', [db_get_table( 'tokens' ), "
 	expiry					T,
 	value					XL		NOTNULL",
 	$t_table_options
-	]];
+]];
 $g_upgrade[43] = ['CreateTableSQL', [db_get_table( 'user_pref' ), "
 	id								I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	user_id							I		UNSIGNED NOTNULL DEFAULT '0',
@@ -376,12 +376,12 @@ $g_upgrade[43] = ['CreateTableSQL', [db_get_table( 'user_pref' ), "
 	email_bugnote_limit				I2		NOTNULL DEFAULT '0',
 	language						C(32)	NOTNULL DEFAULT 'english' ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[44] = ['CreateTableSQL', [db_get_table( 'user_print_pref' ), "
 	user_id					I		UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	print_pref				C(27)	NOTNULL DEFAULT \" '' \" ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[45] = ['CreateTableSQL', [db_get_table( 'user_profile' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
@@ -390,7 +390,7 @@ $g_upgrade[45] = ['CreateTableSQL', [db_get_table( 'user_profile' ), "
 	os_build				C(32)	NOTNULL DEFAULT \" '' \",
 	description				XL		$t_notnull",
 	$t_table_options
-	]];
+]];
 $g_upgrade[46] = ['CreateTableSQL', [db_get_table( 'user' ), "
 	id								I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	username						C(32)	NOTNULL DEFAULT \" '' \",
@@ -407,7 +407,7 @@ $g_upgrade[46] = ['CreateTableSQL', [db_get_table( 'user' ), "
 	failed_login_count				I2		NOTNULL DEFAULT '0',
 	cookie_string					C(64)	NOTNULL DEFAULT \" '' \" ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[47] = ['CreateIndexSQL', ['idx_user_cookie_string', db_get_table( 'user' ), 'cookie_string', ['UNIQUE']]];
 $g_upgrade[48] = ['CreateIndexSQL', ['idx_user_username', db_get_table( 'user' ), 'username', ['UNIQUE']]];
 $g_upgrade[49] = ['CreateIndexSQL', ['idx_enable', db_get_table( 'user' ), 'enabled']];
@@ -426,8 +426,8 @@ $g_upgrade[51] = ['InsertData', [db_get_table( 'user' ), "(
 		'administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845',
 		$t_timestamp, $t_timestamp, '1', '0', 90,
 		3, 0, 0, '"
-		. md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() )
-		. "'
+	. md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() )
+	. "'
 	)"]];
 
 # Release marker: 1.0.0 - 1.0.7
@@ -445,7 +445,7 @@ $g_upgrade[54] = ['CreateTableSQL', [db_get_table( 'email' ), "
 	metadata				XL		NOTNULL,
 	body					XL		NOTNULL",
 	$t_table_options
-	]];
+]];
 
 # Index autocreated when oci used
 $g_upgrade[55] = db_is_oracle()
@@ -476,14 +476,14 @@ $g_upgrade[61] = ['CreateTableSQL', [db_get_table( 'tag' ), "
 	date_created			T		NOTNULL DEFAULT '" . db_null_date() . "',
 	date_updated			T		NOTNULL DEFAULT '" . db_null_date() . "' ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[62] = ['CreateTableSQL', [db_get_table( 'bug_tag' ), "
 	bug_id					I		UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	tag_id					I		UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
 	date_attached			T		NOTNULL DEFAULT '" . db_null_date() . "'",
 	$t_table_options
-	]];
+]];
 
 $g_upgrade[63] = ['CreateIndexSQL', ['idx_typeowner', db_get_table( 'tokens' ), 'type, owner']];
 
@@ -494,7 +494,7 @@ $g_upgrade[64] = ['CreateTableSQL', [db_get_table( 'plugin' ), "
 	basename				C(40)	NOTNULL PRIMARY,
 	enabled					L		NOTNULL DEFAULT \" '0' \" ",
 	$t_table_options
-	]];
+]];
 
 $g_upgrade[65] = ['AlterColumnSQL', [db_get_table( 'user_pref' ), "
 	redirect_delay			I		$t_notnull DEFAULT 0"]];
@@ -515,7 +515,7 @@ $g_upgrade[67] = ['CreateTableSQL', [db_get_table( 'category' ), "
 	name					C(128)	NOTNULL DEFAULT \" '' \",
 	status					I		UNSIGNED NOTNULL DEFAULT '0' ",
 	$t_table_options
-	]];
+]];
 $g_upgrade[68] = ['CreateIndexSQL', ['idx_category_project_name', db_get_table( 'category' ), 'project_id, name', ['UNIQUE']]];
 $g_upgrade[69] = ['InsertData', [db_get_table( 'category' ), "
 	( project_id, user_id, name, status )
@@ -575,7 +575,7 @@ $g_upgrade[84] = ['CreateTableSQL', [db_get_table( 'bug_revision' ), "
 	type					I		UNSIGNED NOTNULL,
 	value					XL		NOTNULL",
 	$t_table_options
-	]];
+]];
 $g_upgrade[85] = ['CreateIndexSQL', ['idx_bug_rev_id_time', db_get_table( 'bug_revision' ), 'bug_id, timestamp']];
 $g_upgrade[86] = ['CreateIndexSQL', ['idx_bug_rev_type', db_get_table( 'bug_revision' ), 'type']];
 
@@ -852,7 +852,7 @@ $g_upgrade[200] = ['CreateTableSQL', [db_get_table( 'api_token' ), "
 	date_created			I		UNSIGNED NOTNULL DEFAULT '0',
 	date_used				I		UNSIGNED NOTNULL DEFAULT '0'",
 	$t_table_options
-	]];
+]];
 $g_upgrade[201] = ['CreateIndexSQL', ['idx_user_id_name', db_get_table( 'api_token' ), 'user_id, name', ['UNIQUE']]];
 
 # Release marker: 1.3.0-rc.1
@@ -880,7 +880,7 @@ $g_upgrade[209] = ['AlterColumnSQL', [db_get_table( 'api_token' ), "
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
 	date_created			I		UNSIGNED NOTNULL DEFAULT '1',
 	date_used				I		UNSIGNED NOTNULL DEFAULT '1'"
-	]];
+]];
 
 # Release marker: 1.3.0
 

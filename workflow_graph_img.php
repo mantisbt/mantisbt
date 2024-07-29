@@ -61,15 +61,15 @@ if( !empty( $t_graph_fontpath ) ) {
 $t_graph = new Graph( 'workflow', $t_graph_attributes, $t_dot_tool );
 
 $t_graph->set_default_node_attr(  ['fontname' => $t_graph_fontname,
-										 'fontsize' => $t_graph_fontsize,
-										 'shape'    => 'record',
-										 'style'    => 'filled',
-										 'height'   => '0.2',
-										 'width'    => '0.4'] );
+	'fontsize' => $t_graph_fontsize,
+	'shape'    => 'record',
+	'style'    => 'filled',
+	'height'   => '0.2',
+	'width'    => '0.4'] );
 
 $t_graph->set_default_edge_attr(  ['style' => 'solid',
-										 'color' => '#0000C0',
-										 'dir'   => 'forward'] );
+	'color' => '#0000C0',
+	'dir'   => 'forward'] );
 
 foreach ( $t_status_arr as $t_from_status => $t_from_label ) {
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );

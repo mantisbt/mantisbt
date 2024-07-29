@@ -417,7 +417,7 @@ class IssueAddTest extends SoapBase {
 			[
 				'text' => 'first note',
 				'note_type' => 2,
-			    'note_attr' => 'attr_value'
+				'note_attr' => 'attr_value'
 			]
 		];
 
@@ -443,12 +443,12 @@ class IssueAddTest extends SoapBase {
 	public function testCreateIssueWithTags() {
 		# initialise tags
 		$t_tag_id1 = $this->client->mc_tag_add( $this->userName, $this->password, [
-					'name' => 'IssueCreateTest.createIssueWithTags'
+			'name' => 'IssueCreateTest.createIssueWithTags'
 		] );
 		$this->deleteTagAfterRun( $t_tag_id1 );
 
 		$t_tag_id2 = $this->client->mc_tag_add( $this->userName, $this->password, [
-					'name' => 'IssueCreateTest.createIssueWithTags2'
+			'name' => 'IssueCreateTest.createIssueWithTags2'
 		] );
 		$this->deleteTagAfterRun( $t_tag_id2 );
 

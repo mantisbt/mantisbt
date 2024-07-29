@@ -82,8 +82,8 @@ class TagTest extends SoapBase {
 	 */
 	public function testCreateTagWithInvalidName() {
 		$t_tag_to_create =  [
-		    		'name' => '',
-		    		'description' => ''
+			'name' => '',
+			'description' => ''
 		];
 
 		try {
@@ -147,7 +147,7 @@ class TagTest extends SoapBase {
 	public function testSetTagsOnIssue() {
 		# create tag
 		$t_tag_to_create =  [
-		    		'name' => 'TagTest.testCreateTagWithExistingName'
+			'name' => 'TagTest.testCreateTagWithExistingName'
 		];
 		$t_tag_id = $this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
 		$this->deleteTagAfterRun( $t_tag_id );

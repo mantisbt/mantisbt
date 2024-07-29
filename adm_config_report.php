@@ -169,9 +169,9 @@ $t_users_list = array_combine( $t_users_ids, $t_users_list );
 
 # Prepend '[any]' and 'All Users' to the list
 $t_users_list = [
-		META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
-		ALL_USERS        => lang_get( 'all_users' ),
-	]
+	META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
+	ALL_USERS        => lang_get( 'all_users' ),
+]
 	+ $t_users_list;
 
 # Get projects in db with specific configs
@@ -227,7 +227,7 @@ $t_params = [
 	'project_id' => $t_filter_project_value,
 	'config_id' => $t_filter_config_value,
 	'complex' => CONFIG_TYPE_COMPLEX
-	];
+];
 $t_config_query = new DbQuery( $t_sql, $t_params );
 ?>
 
@@ -376,11 +376,11 @@ while( $t_row = $t_config_query->fetch() ) {
 	# For complex values, the content is not rendered
 	if( CONFIG_TYPE_COMPLEX == $v_type ) {
 		$t_url_params = [
-					'user_id'       => $v_user_id,
-					'project_id'    => $v_project_id,
-					'config_option' => $v_config_id,
-					'action'        => MANAGE_CONFIG_ACTION_VIEW
-				];
+			'user_id'       => $v_user_id,
+			'project_id'    => $v_project_id,
+			'config_option' => $v_config_id,
+			'action'        => MANAGE_CONFIG_ACTION_VIEW
+		];
 		$t_url_view = helper_url_combine( 'adm_config_page.php', http_build_query( $t_url_params ) );
 		$t_html_value = '<div class="adm_config_expand" data-config_id="' . $v_config_id . '"'
 				. ' data-project_id="' . $v_project_id . '" data-user_id="' . $v_user_id . '">'
@@ -411,10 +411,10 @@ while( $t_row = $t_config_query->fetch() ) {
 <?php
 		if( config_can_delete( $v_config_id ) ) {
 			$t_action_params = [
-					'user_id'       => $v_user_id,
-					'project_id'    => $v_project_id,
-					'config_option' => $v_config_id,
-				];
+				'user_id'       => $v_user_id,
+				'project_id'    => $v_project_id,
+				'config_option' => $v_config_id,
+			];
 
 			# Update button
 			$t_action_params['action'] = MANAGE_CONFIG_ACTION_EDIT;

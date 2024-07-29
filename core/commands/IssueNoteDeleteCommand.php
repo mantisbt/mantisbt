@@ -103,8 +103,8 @@ class IssueNoteDeleteCommand extends Command {
 	protected function process() {
         bugnote_delete( $this->id );
         return [
-            'id' => $this->id,
-            'issue_id' => $this->issueId
+        	'id' => $this->id,
+        	'issue_id' => $this->issueId
         ];
 	}
 }

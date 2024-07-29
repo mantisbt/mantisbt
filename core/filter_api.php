@@ -1127,14 +1127,12 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	# build a filter query, here for counting results
 	$t_filter_query = new BugFilterQuery(
-			$t_filter,
-			[
+			$t_filter, [
 				'query_type' => BugFilterQuery::QUERY_TYPE_LIST,
 				'project_id' => $p_project_id,
 				'user_id' => $p_user_id,
 				'use_sticky' => $p_show_sticky
-				]
-			);
+			]);
 	$p_bug_count = $t_filter_query->get_bug_count();
 	if( 0 == $p_bug_count ) {
 		return [];

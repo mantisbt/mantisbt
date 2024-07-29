@@ -514,7 +514,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 		'bug_id' => $p_bug_id,
 		'start_time' => $p_start_time,
 		'end_time' => $p_end_time
-		];
+	];
 	$t_result = history_query_result( $t_query_options );
 
 	$t_raw_history = [];

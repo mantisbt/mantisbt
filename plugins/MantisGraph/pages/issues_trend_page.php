@@ -45,9 +45,9 @@ layout_page_begin();
 $t_period = new Period();
 $t_period->set_period_from_selector( 'interval' );
 $t_types = [
-				1 => plugin_lang_get( 'status_link' ),
-				2 => plugin_lang_get( 'category_link' ),
-		   ];
+	1 => plugin_lang_get( 'status_link' ),
+	2 => plugin_lang_get( 'category_link' ),
+];
 ?>
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>

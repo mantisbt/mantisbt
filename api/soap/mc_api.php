@@ -1084,14 +1084,14 @@ function mci_category_as_array_by_id( $p_category_id ) {
  */
 function mci_project_version_as_array( array $p_version ) {
 	return [
-			'id' => $p_version['id'],
-			'name' => $p_version['version'],
-			'project_id' => $p_version['project_id'],
-			'date_order' => ApiObjectFactory::datetime( $p_version['date_order'] ),
-			'description' => mci_null_if_empty( $p_version['description'] ),
-			'released' => $p_version['released'],
-			'obsolete' => $p_version['obsolete']
-		];
+		'id' => $p_version['id'],
+		'name' => $p_version['version'],
+		'project_id' => $p_version['project_id'],
+		'date_order' => ApiObjectFactory::datetime( $p_version['date_order'] ),
+		'description' => mci_null_if_empty( $p_version['description'] ),
+		'released' => $p_version['released'],
+		'obsolete' => $p_version['obsolete']
+	];
 }
 
 /**

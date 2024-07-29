@@ -781,32 +781,46 @@ function print_manage_config_menu( $p_page = '' ) {
 
 	$t_pages = [];
 
-	$t_pages['adm_permissions_report.php'] = ['url'   => 'adm_permissions_report.php',
-	                                                'label' => 'permissions_summary_report'];
+	$t_pages['adm_permissions_report.php'] = [
+		'url'   => 'adm_permissions_report.php',
+		'label' => 'permissions_summary_report'
+	];
 
 	if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
-		$t_pages['adm_config_report.php'] = ['url'   => 'adm_config_report.php',
-		                                           'label' => 'configuration_report'];
+		$t_pages['adm_config_report.php'] = [
+			'url'   => 'adm_config_report.php',
+			'label' => 'configuration_report'
+		];
 	}
 
-	$t_pages['manage_config_work_threshold_page.php'] = ['url'   => 'manage_config_work_threshold_page.php',
-	                                                           'label' => 'manage_threshold_config'];
+	$t_pages['manage_config_work_threshold_page.php'] = [
+		'url'   => 'manage_config_work_threshold_page.php',
+		'label' => 'manage_threshold_config'
+	];
 
-	$t_pages['manage_config_workflow_page.php'] = ['url'   => 'manage_config_workflow_page.php',
-	                                                     'label' => 'manage_workflow_config'];
+	$t_pages['manage_config_workflow_page.php'] = [
+		'url'   => 'manage_config_workflow_page.php',
+		'label' => 'manage_workflow_config'
+	];
 
 	if( config_get( 'relationship_graph_enable' ) ) {
-		$t_pages['manage_config_workflow_graph_page.php'] = ['url'   => 'manage_config_workflow_graph_page.php',
-		                                                           'label' => 'manage_workflow_graph'];
+		$t_pages['manage_config_workflow_graph_page.php'] = [
+			'url'   => 'manage_config_workflow_graph_page.php',
+			'label' => 'manage_workflow_graph'
+		];
 	}
 
 	if( config_get( 'enable_email_notification' ) == ON ) {
-		$t_pages['manage_config_email_page.php'] = ['url'   => 'manage_config_email_page.php',
-		                                                  'label' => 'manage_email_config'];
+		$t_pages['manage_config_email_page.php'] = [
+			'url'   => 'manage_config_email_page.php',
+			'label' => 'manage_email_config'
+		];
 	}
 
-	$t_pages['manage_config_columns_page.php'] = ['url'   => 'manage_config_columns_page.php',
-	                                                    'label' => 'manage_columns_config'];
+	$t_pages['manage_config_columns_page.php'] = [
+		'url'   => 'manage_config_columns_page.php',
+		'label' => 'manage_columns_config'
+	];
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );

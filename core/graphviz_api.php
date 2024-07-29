@@ -355,7 +355,7 @@ class Graph {
 			0 => ['pipe', 'r', ],
 			1 => ['pipe', 'w', ],
 			2 => ['file', 'php://stderr', 'w', ],
-			];
+		];
 
 		$t_pipes = [];
 		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes );

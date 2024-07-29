@@ -83,7 +83,7 @@ function rest_internal_config_display( \Slim\Http\Request $p_request, \Slim\Http
 		'user_id' => $t_user_id,
 		'project_id' => $t_project_id,
 		'config_id' => $t_config_id
-		];
+	];
 	$t_query = new DbQuery( $t_sql, $t_params );
 	$t_row = $t_query->fetch();
 

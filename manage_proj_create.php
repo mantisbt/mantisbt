@@ -93,7 +93,7 @@ if( 0 != $f_parent_id ) {
 		'payload' => [
 			'project' => [
 				'id' => (int)$t_project_id
-			 ],
+			],
 			'inherit_parent' => (bool)$f_inherit_parent
 		]
 	];

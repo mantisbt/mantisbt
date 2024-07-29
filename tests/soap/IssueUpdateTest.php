@@ -325,7 +325,7 @@ class IssueUpdateTest extends SoapBase {
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		$t_issue->notes = [
-			 [
+			[
 				'text' => 'first note',
 				'time_tracking' => '30'
 			]

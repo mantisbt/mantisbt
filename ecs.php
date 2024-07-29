@@ -34,6 +34,7 @@ use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer;
 use PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer;
+use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
@@ -48,9 +49,9 @@ use Symplify\EasyCodingStandard\ValueObject\Option;
  */
 
 return ECSConfig::configure()
-    ->withPaths( [
-        __DIR__ . '/',
-    ] )
+	->withPaths( [
+		__DIR__ . '/',
+	] )
 	->withSkip( [
 		__DIR__ . '/build',
 		__DIR__ . '/config',
@@ -60,7 +61,7 @@ return ECSConfig::configure()
 		Option::INDENTATION_TAB,
 		"\n",
 	)
-    ->withRules( [
+	->withRules( [
 		/**
 		 * Basic: Encoding
 		 *
@@ -296,6 +297,30 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/array_notation/whitespace_after_comma_in_array.html
 		 */
 		WhitespaceAfterCommaInArrayFixer::class,
+
+		/**
+		 * Whitespace: Array indention
+		 *
+		 * Each element of an array must be indented exactly once.
+		 *
+		 * <input>
+		 *     $foo = [
+		 *      'bar' => [
+		 *        'baz' => true,
+		 *      ],
+		 *    ];
+		 * </input>
+		 * <output>
+		 *  $foo = [
+		 *  	'bar' => [
+		 *  		'baz' => true,
+		 *		],
+		 *	];
+		 * </output>
+		 *
+		 * @see https://cs.symfony.com/doc/rules/whitespace/array_indentation.html
+		 */
+		ArrayIndentationFixer::class,
 	] )
 
 	/**

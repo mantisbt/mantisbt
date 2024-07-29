@@ -812,7 +812,7 @@ function config_get_types() {
 		CONFIG_TYPE_FLOAT   => 'float',
 		CONFIG_TYPE_COMPLEX => 'complex',
 		CONFIG_TYPE_STRING  => 'string',
-		];
+	];
 }
 
 /**

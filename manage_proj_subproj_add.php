@@ -60,7 +60,7 @@ $t_data = [
 	'payload' => [
 		'project' => [
 			'id' => (int)$f_subproject_id
-		 ],
+		],
 		'inherit_parent' => (bool)$f_inherit_parent
 	]
 ];
