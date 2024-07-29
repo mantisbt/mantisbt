@@ -51,7 +51,7 @@ $f_bug_id = gpc_get_int( 'bug_id' );
 $f_tag_select = gpc_get_int( 'tag_select' );
 $f_tag_string = gpc_get_string( 'tag_string' );
 
-$t_tags = array();
+$t_tags = [];
 
 $t_strings = explode( config_get( 'tag_separator' ), $f_tag_string );
 foreach( $t_strings as $t_name ) {
@@ -60,19 +60,19 @@ foreach( $t_strings as $t_name ) {
 		continue;
 	}
 
-	$t_tags[] = array( 'name' => $t_name );
+	$t_tags[] = [ 'name' => $t_name ];
 }
 
 if( $f_tag_select > 0 ) {
-	$t_tags[] = array( 'id' => tag_get( $f_tag_select ) );
+	$t_tags[] = [ 'id' => tag_get( $f_tag_select ) ];
 }
 
-$t_data = array(
-	'query' => array( 'issue_id' => $f_bug_id ),
-	'payload' => array(
+$t_data = [
+	'query' => [ 'issue_id' => $f_bug_id ],
+	'payload' => [
 		'tags' => $t_tags
-	)
-);
+	]
+];
 
 $t_command = new TagAttachCommand( $t_data );
 $t_command->execute();

@@ -55,7 +55,7 @@ require_api( 'user_api.php' );
  * @param array  $p_styles          An optional array of ExcelStyle entries . Parent entries must be placed before child entries.
  * @return string the header Xml.
  */
-function excel_get_header( $p_worksheet_title, array $p_styles = array() ) {
+function excel_get_header( $p_worksheet_title, array $p_styles = [] ) {
 	$p_worksheet_title = preg_replace( '/[\/:*?"<>|]/', '', $p_worksheet_title );
 	return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><?mso-application progid=\"Excel.Sheet\"?>
  <Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"
@@ -189,9 +189,9 @@ function excel_prepare_number( $p_value ) {
  *                             values for the <tt>Cell</tt> object.
  * @return string
  */
-function excel_get_cell( $p_value, $p_type, array $p_attributes = array() ) {
+function excel_get_cell( $p_value, $p_type, array $p_attributes = [] ) {
 	if ( !is_int( $p_value ) ) {
-		$t_value = str_replace( array( '&', "\n", '<', '>' ), array( '&amp;', '&#10;', '&lt;', '&gt;' ), $p_value );
+		$t_value = str_replace( [ '&', "\n", '<', '>' ], [ '&amp;', '&#10;', '&lt;', '&gt;' ], $p_value );
 	} else {
 		$t_value = $p_value;
 	}
@@ -875,7 +875,7 @@ class Border {
 	/**
 	 * Border Positions
 	 */
-	private $positions = array('Left', 'Top', 'Right', 'Bottom');
+	private $positions = ['Left', 'Top', 'Right', 'Bottom'];
 
 	/**
 	 * Color

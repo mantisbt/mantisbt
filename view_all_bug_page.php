@@ -73,9 +73,9 @@ if( $t_rows === false ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
-$t_bugslist = array();
-$t_unique_user_ids = array();
-$t_unique_project_ids = array();
+$t_bugslist = [];
+$t_unique_user_ids = [];
+$t_unique_project_ids = [];
 $t_row_count = count( $t_rows );
 for( $i=0; $i < $t_row_count; $i++ ) {
 	array_push( $t_bugslist, $t_rows[$i]->id );

@@ -53,17 +53,17 @@ $f_project_id    = gpc_get_int( 'project_id' );
 $f_subproject_id = gpc_get_int( 'subproject_id' );
 $f_inherit_parent = gpc_get_bool( 'inherit_parent', true );
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'project_id' => (int)$f_project_id
-	),
-	'payload' => array(
-		'project' => array(
+	],
+	'payload' => [
+		'project' => [
 			'id' => (int)$f_subproject_id
-		 ),
+		 ],
 		'inherit_parent' => (bool)$f_inherit_parent
-	)
-);
+	]
+];
 
 $t_command = new ProjectHierarchyAddCommand( $t_data );
 $t_command->execute();

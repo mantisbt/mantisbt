@@ -40,5 +40,5 @@ check_print_section_header_row( 'Webservice' );
 check_print_test_warn_row(
 	'SOAP Extension Enabled',
 	extension_loaded( 'soap' ),
-	array( false => 'Enable the PHP SOAP extension.' )
+	[ false => 'Enable the PHP SOAP extension.' ]
 );

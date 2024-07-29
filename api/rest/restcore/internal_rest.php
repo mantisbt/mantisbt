@@ -79,11 +79,11 @@ function rest_internal_config_display( \Slim\Http\Request $p_request, \Slim\Http
 
 	$t_sql = 'SELECT config_id, user_id, project_id, type, value, access_reqd FROM {config}'
 			. ' WHERE user_id = :user_id AND project_id = :project_id AND config_id = :config_id';
-	$t_params = array(
+	$t_params = [
 		'user_id' => $t_user_id,
 		'project_id' => $t_project_id,
 		'config_id' => $t_config_id
-		);
+		];
 	$t_query = new DbQuery( $t_sql, $t_params );
 	$t_row = $t_query->fetch();
 

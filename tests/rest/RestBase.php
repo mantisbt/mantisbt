@@ -87,17 +87,17 @@ abstract class RestBase extends TestCase {
 	/**
 	 * @var array Array of Issue IDs to delete
 	 */
-	private $issueIdsToDelete = array();
+	private $issueIdsToDelete = [];
 
 	/**
 	 * @var array Array of version IDs to delete
 	 */
-	private $versionIdsToDelete = array();
+	private $versionIdsToDelete = [];
 
 	/**
 	 * @var array List of user ids to delete in tearDown()
 	 */
-	private $usersToDelete = array();
+	private $usersToDelete = [];
 	/**
 	 * setUp
 	 * @return void
@@ -203,12 +203,12 @@ abstract class RestBase extends TestCase {
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}
-		return array(
+		return [
 			'summary' => $t_summary . ': test issue ' . rand( 1, 1000000 ),
 			'description' => 'description of test issue.',
-			'project' => array( 'id' => $this->getProjectId() ),
-			'category' => array( 'name' => $this->getCategory() )
-		);
+			'project' => [ 'id' => $this->getProjectId() ],
+			'category' => [ 'name' => $this->getCategory() ]
+		];
 	}
 
 	/**
@@ -243,7 +243,7 @@ abstract class RestBase extends TestCase {
 			$p_project_id = $this->getProjectId();
 		}
 
-		$this->versionIdsToDelete[] = array( $p_project_id, $p_version_id );
+		$this->versionIdsToDelete[] = [ $p_project_id, $p_version_id ];
 	}
 
 	/**

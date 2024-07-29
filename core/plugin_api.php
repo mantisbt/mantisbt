@@ -55,32 +55,32 @@ require_api( 'logging_api.php' );
  * Installed Plugins cache
  * @global MantisPlugin[] $g_plugin_cache Basename is used as key.
  */
-$g_plugin_cache = array();
+$g_plugin_cache = [];
 
 /**
  * Initialized Plugins cache
  * @global boolean[] $g_plugin_cache True if plugin is loaded; Basename is used as key.
  * @see plugin_is_loaded()
  */
-$g_plugin_cache_init = array();
+$g_plugin_cache_init = [];
 
 /**
  * Plugins priority cache
  * @global int[] $g_plugin_cache_priority Basename is used as key.
  */
-$g_plugin_cache_priority = array();
+$g_plugin_cache_priority = [];
 
 /**
  * Plugins protected status cache
  * @global boolean[] $g_plugin_cache_protected Basename is used as key.
  */
-$g_plugin_cache_protected = array();
+$g_plugin_cache_protected = [];
 
 /**
  * Current plugin stack
  * @global MantisPlugin[] $g_plugin_current
  */
-$g_plugin_current = array();
+$g_plugin_current = [];
 
 
 /**
@@ -641,7 +641,7 @@ function plugin_is_installed( $p_basename ) {
 
 	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {plugin} WHERE basename=' . db_param();
-	$t_result = db_query( $t_query, array( $p_basename ) );
+	$t_result = db_query( $t_query, [ $p_basename ] );
 	return( 0 < db_result( $t_result ) );
 }
 
@@ -666,7 +666,7 @@ function plugin_install( MantisPlugin $p_plugin ) {
 	db_param_push();
 	$t_query = 'INSERT INTO {plugin} ( basename, enabled )
 				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $p_plugin->basename, true ) );
+	db_query( $t_query, [ $p_plugin->basename, true ] );
 
 	if( false === ( plugin_config_get( 'schema', false ) ) ) {
 		plugin_config_set( 'schema', -1 );
@@ -728,15 +728,15 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 
 		switch( $t_schema[$i][0] ) {
 			case 'InsertData':
-				$t_sqlarray = array(
+				$t_sqlarray = [
 					'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-				);
+				];
 				break;
 
 			case 'UpdateSQL':
-				$t_sqlarray = array(
+				$t_sqlarray = [
 					'UPDATE ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-				);
+				];
 				break;
 
 			case 'UpdateFunction':
@@ -756,7 +756,7 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 
 			default:
 				$t_sqlarray = call_user_func_array(
-					array( $t_dict, $t_schema[$i][0] ),
+					[ $t_dict, $t_schema[$i][0] ],
 					$t_schema[$i][1]
 				);
 		}
@@ -805,7 +805,7 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {plugin} WHERE basename=' . db_param();
-	db_query( $t_query, array( $p_plugin->basename ) );
+	db_query( $t_query, [ $p_plugin->basename ] );
 
 	plugin_push_current( $p_plugin->basename );
 
@@ -827,13 +827,13 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
  */
 function plugin_find_all() {
 	$t_plugin_path = config_get_global( 'plugin_path' );
-	$t_plugins = array(
+	$t_plugins = [
 		'MantisCore' => new MantisCorePlugin( 'MantisCore' ),
-	);
+	];
 
 	# Get list of installed plugins
 	$t_query = new DbQuery( 'SELECT basename FROM {plugin}' );
-	$t_installed_plugins = array();
+	$t_installed_plugins = [];
 	while( $t_query->fetch() ) {
 		$t_installed_plugins[] = $t_query->value();
 	}
@@ -1023,11 +1023,11 @@ function plugin_init_installed() {
 	}
 
 	global $g_plugin_cache, $g_plugin_current, $g_plugin_cache_priority, $g_plugin_cache_protected, $g_plugin_cache_init;
-	$g_plugin_cache = array();
-	$g_plugin_current = array();
-	$g_plugin_cache_init = array();
-	$g_plugin_cache_priority = array();
-	$g_plugin_cache_protected = array();
+	$g_plugin_cache = [];
+	$g_plugin_current = [];
+	$g_plugin_cache_init = [];
+	$g_plugin_cache_priority = [];
+	$g_plugin_cache_protected = [];
 
 	plugin_register_installed();
 
@@ -1035,7 +1035,7 @@ function plugin_init_installed() {
 
 	do {
 		$t_continue = false;
-		$t_plugins_retry = array();
+		$t_plugins_retry = [];
 
 		foreach( $t_plugins as $t_basename ) {
 			if( plugin_init( $t_basename ) ) {
@@ -1147,7 +1147,7 @@ function plugin_log_event( $p_msg, $p_basename = null ) {
  * @return array
  */
 function plugin_menu_items( $p_event ) {
-	$t_items = array();
+	$t_items = [];
 
 	if( $p_event ) {
 		$t_event_items = event_signal( $p_event );

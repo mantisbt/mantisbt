@@ -273,16 +273,16 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	# Start extracting regex matches
 	# Encode backslashes to prevent unwanted escaping of a leading '/' allowing
 	# redirection to external sites
-	$t_script = strtr( $t_matches['script'], array( '\\' => '%5C' ) );
+	$t_script = strtr( $t_matches['script'], [ '\\' => '%5C' ] );
 	$t_script_path = $t_matches['path'];
 
 	# Clean/encode query params
 	$t_query = '';
 	if( isset( $t_matches['query'] ) ) {
-		$t_pairs = array();
+		$t_pairs = [];
 		parse_str( html_entity_decode( $t_matches['query'] ), $t_pairs );
 
-		$t_clean_pairs = array();
+		$t_clean_pairs = [];
 		foreach( $t_pairs as $t_key => $t_value ) {
 			if( is_array( $t_value ) ) {
 				foreach( $t_value as $t_value_each ) {
@@ -332,7 +332,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
  * @return string
  */
 function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	static $s_bug_link_callback = array();
+	static $s_bug_link_callback = [];
 
 	$t_tag = config_get( 'bug_link_tag' );
 
@@ -402,7 +402,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
  * @return string
  */
 function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	static $s_bugnote_link_callback = array();
+	static $s_bugnote_link_callback = [];
 
 	$t_tag = config_get( 'bugnote_link_tag' );
 
@@ -876,7 +876,7 @@ function string_normalize( $p_string ) {
  * @return string
  */
 function string_get_field_name( $p_string ) {
-	$t_map = array(
+	$t_map = [
 		'attachment_count' => 'attachments',
 		'category_id' => 'category',
 		'handler_id' => 'assigned_to',
@@ -885,7 +885,7 @@ function string_get_field_name( $p_string ) {
 		'project_id' => 'email_project',
 		'reporter_id' => 'reporter',
 		'view_state' => 'view_status',
-	);
+	];
 
 	$t_string = $p_string;
 	if( isset( $t_map[$p_string] ) ) {

@@ -49,12 +49,12 @@ auth_reauthenticate();
 $f_project_id = gpc_get_int( 'project_id' );
 $f_user_id = gpc_get_int( 'user_id', 0 );
 
-$t_data = array(
-	'payload' => array(
-		'project' => array( 'id' => $f_project_id ),
-		'user' => array( 'id' => $f_user_id )
-	)
-);
+$t_data = [
+	'payload' => [
+		'project' => [ 'id' => $f_project_id ],
+		'user' => [ 'id' => $f_user_id ]
+	]
+];
 
 $t_command = new ProjectUsersDeleteCommand( $t_data );
 $t_command->validate();

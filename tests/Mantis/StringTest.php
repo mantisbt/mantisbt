@@ -61,26 +61,26 @@ class StringTest extends MantisCoreBase {
 	 * @return array
 	 */
 	public function provider() {
-		$t_test_strings = array(
-			array( '', 'index.php' ),
-			array( 'abc.php', 'abc.php' ),
-			array( 'abc.php?', 'abc.php'),
-			array( 'abc.php#a', 'abc.php#a'),
-			array( 'abc.php?abc=def', 'abc.php?abc=def'),
-			array( 'abc.php?abc=def#a', 'abc.php?abc=def#a'),
-			array( 'abc.php?abc=def&z=xyz', 'abc.php?abc=def&z=xyz'),
-			array( 'abc.php?abc=def&amp;z=xyz', 'abc.php?abc=def&z=xyz'),
-			array( 'abc.php?abc=def&z=xyz#a', 'abc.php?abc=def&z=xyz#a'),
-			array( 'abc.php?abc=def&amp;z=xyz#a', 'abc.php?abc=def&z=xyz#a'),
+		$t_test_strings = [
+			[ '', 'index.php' ],
+			[ 'abc.php', 'abc.php' ],
+			[ 'abc.php?', 'abc.php'],
+			[ 'abc.php#a', 'abc.php#a'],
+			[ 'abc.php?abc=def', 'abc.php?abc=def'],
+			[ 'abc.php?abc=def#a', 'abc.php?abc=def#a'],
+			[ 'abc.php?abc=def&z=xyz', 'abc.php?abc=def&z=xyz'],
+			[ 'abc.php?abc=def&amp;z=xyz', 'abc.php?abc=def&z=xyz'],
+			[ 'abc.php?abc=def&z=xyz#a', 'abc.php?abc=def&z=xyz#a'],
+			[ 'abc.php?abc=def&amp;z=xyz#a', 'abc.php?abc=def&z=xyz#a'],
 # @FIXME	array( 'abc.php?abc=def&z=<script>alert("foo")</script>z#a', 'abc.php?abc=def&z=alert%28%22foo%29%22%3cz#a'),
 # @FIXME	array( 'abc.php?abc=def&z=z#<script>alert("foo")</script>a', 'abc.php?abc=def&z=z#alert%28%22foo%22%3ca'),
-			array( 'plugin.php?page=Source/index', 'plugin.php?page=Source%2Findex'),
-			array( 'plugin.php?page=Source/list&id=1', 'plugin.php?page=Source%2Flist&id=1'),
-			array( 'plugin.php?page=Source/list&id=1#abc', 'plugin.php?page=Source%2Flist&id=1#abc'),
-			array( 'login_page.php?return=http://google.com/', 'index.php'),
-			array( 'javascript:alert(1);', 'index.php'),
-			array( '\/csrf-22702', '%5C/csrf-22702' ),
-		);
+			[ 'plugin.php?page=Source/index', 'plugin.php?page=Source%2Findex'],
+			[ 'plugin.php?page=Source/list&id=1', 'plugin.php?page=Source%2Flist&id=1'],
+			[ 'plugin.php?page=Source/list&id=1#abc', 'plugin.php?page=Source%2Flist&id=1#abc'],
+			[ 'login_page.php?return=http://google.com/', 'index.php'],
+			[ 'javascript:alert(1);', 'index.php'],
+			[ '\/csrf-22702', '%5C/csrf-22702' ],
+		];
 
 		# @FIXME
 		#	array( $my_path.'abc.php',

@@ -82,7 +82,7 @@ $c_export = implode( '', $t_prefs_arr );
 # update preferences
 $t_query = 'UPDATE {user_print_pref} SET print_pref=' . db_param() . ' WHERE user_id=' . db_param();
 
-$t_result = db_query( $t_query, array( $c_export, $t_user_id ) );
+$t_result = db_query( $t_query, [ $c_export, $t_user_id ] );
 
 form_security_purge( 'print_all_bug_options_update' );
 

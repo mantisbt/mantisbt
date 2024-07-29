@@ -38,7 +38,7 @@ class ProjectTest extends SoapBase {
 	/**
 	 * @var array List of project IDs to delete
 	 */
-	private $projectIdToDelete = array();
+	private $projectIdToDelete = [];
 
 	/**
 	 * A test case that tests the following:
@@ -147,7 +147,7 @@ class ProjectTest extends SoapBase {
 		$this->projectIdToDelete[] = $t_project_id;
 
 		# step 3
-		$t_project_data_structure['view_state'] = array( 'id' => VS_PRIVATE );
+		$t_project_data_structure['view_state'] = [ 'id' => VS_PRIVATE ];
 		$t_update_ok = $this->client->mc_project_update( $this->userName, $this->password,
 			$t_project_id,
 			$t_project_data_structure
@@ -172,10 +172,10 @@ class ProjectTest extends SoapBase {
 	 * @return array
 	 */
 	private function newProjectAsArray( $p_project_name ) {
-		$t_project_data_structure = array();
+		$t_project_data_structure = [];
 		$t_project_data_structure['name'] = $p_project_name;
-		$t_project_data_structure['status'] = array( 'name' => 'development' );
-		$t_project_data_structure['view_state'] = array( 'id' => VS_PUBLIC );
+		$t_project_data_structure['status'] = [ 'name' => 'development' ];
+		$t_project_data_structure['view_state'] = [ 'id' => VS_PUBLIC ];
 
 		return $t_project_data_structure;
 	}

@@ -85,7 +85,7 @@ class IssueNoteAddCommand extends Command {
 	/**
 	 * The files to attach with the note.
 	 */
-	private $files = array();
+	private $files = [];
 
 	/**
 	 * Private note?
@@ -131,7 +131,7 @@ class IssueNoteAddCommand extends Command {
 				throw new ClientException(
 					sprintf( "Invalid value '%s' for 'type'.", $t_type ),
 					ERROR_INVALID_FIELD_VALUE,
-					array( 'type' )
+					[ 'type' ]
 				);
 		}
 
@@ -142,7 +142,7 @@ class IssueNoteAddCommand extends Command {
 			throw new ClientException(
 				sprintf( "Issue '%d' is read-only.", $t_issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				array( $t_issue_id ) );
+				[ $t_issue_id ] );
 		}
 
 		$this->parseViewState();
@@ -162,7 +162,7 @@ class IssueNoteAddCommand extends Command {
 		if( empty( $this->text ) &&
 		    $t_time_tracking_mins == 0 &&
 		    count( $this->files ) == 0 ) {
-			throw new ClientException( 'Issue note not specified.', ERROR_EMPTY_FIELD, array( lang_get( 'bugnote' ) ) );
+			throw new ClientException( 'Issue note not specified.', ERROR_EMPTY_FIELD, [ lang_get( 'bugnote' ) ] );
 		}
 
 		$this->user_id = auth_get_current_user_id();
@@ -278,9 +278,9 @@ class IssueNoteAddCommand extends Command {
 		email_bugnote_add( $t_note_id, $t_file_infos, /* user_exclude_ids */ $t_user_ids_that_got_mention_notifications );
 
 		# Event integration
-		event_signal( 'EVENT_BUGNOTE_ADD', array( $this->issue->id, $t_note_id, $t_file_infos ) );
+		event_signal( 'EVENT_BUGNOTE_ADD', [ $this->issue->id, $t_note_id, $t_file_infos ] );
 
-		return array( 'id' => $t_note_id );
+		return [ 'id' => $t_note_id ];
 	}
 
 	/**
@@ -303,19 +303,19 @@ class IssueNoteAddCommand extends Command {
 	 * @return void
 	 */
 	private function parseFiles() {
-		$this->files = $this->payload( 'files', array() );
+		$this->files = $this->payload( 'files', [] );
 		if( !is_array( $this->files ) ) {
-			$this->files = array();
+			$this->files = [];
 		}
 
-		$t_files_required_fields = array( 'name', 'tmp_name' );
+		$t_files_required_fields = [ 'name', 'tmp_name' ];
 		foreach( $this->files as $t_file ) {
 			foreach( $t_files_required_fields as $t_field ) {
 				if( !isset( $t_file[$t_field] ) ) {
 					throw new ClientException(
 						sprintf( "File field '%s' is missing.", $t_field ),
 						ERROR_EMPTY_FIELD,
-						array( $t_field ) );
+						[ $t_field ] );
 				}
 			}
 		}

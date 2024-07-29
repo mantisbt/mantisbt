@@ -62,19 +62,19 @@ $f_status		= gpc_get_int( 'status' );
 $f_file_path	= gpc_get_string( 'file_path', '' );
 $f_inherit_global = gpc_get_bool( 'inherit_global', 0 );
 
-$t_data = array(
-	'payload' => array(
+$t_data = [
+	'payload' => [
 		'name' => $f_name,
 		'description' => $f_description,
 		'file_path' => $f_file_path,
 		'inherit_global' => $f_inherit_global,
-		'view_state' => array( 'id' => $f_view_state ),
-		'status' => array( 'id' => $f_status )
-	),
-	'options' => array(
+		'view_state' => [ 'id' => $f_view_state ],
+		'status' => [ 'id' => $f_status ]
+	],
+	'options' => [
 		'return_project' => false
-	)
-);
+	]
+];
 
 $t_command = new ProjectAddCommand( $t_data );
 $t_result = $t_command->execute();
@@ -86,17 +86,17 @@ $f_inherit_parent = gpc_get_bool( 'inherit_parent', 0 );
 
 # If parent project id != 0 then we're creating a subproject
 if( 0 != $f_parent_id ) {
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => (int)$f_parent_id
-		),
-		'payload' => array(
-			'project' => array(
+		],
+		'payload' => [
+			'project' => [
 				'id' => (int)$t_project_id
-			 ),
+			 ],
 			'inherit_parent' => (bool)$f_inherit_parent
-		)
-	);
+		]
+	];
 
 	$t_command = new ProjectHierarchyAddCommand( $t_data );
 	$t_command->execute();

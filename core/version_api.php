@@ -162,14 +162,14 @@ class VersionData {
  * Array indexed by version id.
  * Each item is a version row, as retrieved from project_version table.
  */
-$g_cache_versions = array();
+$g_cache_versions = [];
 
 /**
  * Array indexed by project_id.
  * Each item is an array of version ids that are linked to that project.
  * Note that this does not include versions inherited from parent projects.
  */
-$g_cache_versions_project  = array();
+$g_cache_versions_project  = [];
 
 /**
  * Clear version cache
@@ -178,8 +178,8 @@ $g_cache_versions_project  = array();
  */
 function version_cache_clear() {
 	global $g_cache_versions_project, $g_cache_versions;
-	$g_cache_versions_project = array();
-	$g_cache_versions = array();
+	$g_cache_versions_project = [];
+	$g_cache_versions = [];
 }
 
 /**
@@ -212,7 +212,7 @@ function version_cache_row( $p_version_id ) {
 	if( empty( $g_cache_versions[$c_version_id] ) ) {
 		db_param_push();
 		$t_query = 'SELECT * FROM {project_version} WHERE id=' . db_param();
-		$t_result = db_query( $t_query, array( $c_version_id ) );
+		$t_result = db_query( $t_query, [ $c_version_id ] );
 		$t_row = db_fetch_array( $t_result );
 
 		$g_cache_versions[$c_version_id] = $t_row;
@@ -224,7 +224,7 @@ function version_cache_row( $p_version_id ) {
 		throw new ClientException(
 			"Version with id $p_version_id not found",
 			ERROR_VERSION_NOT_FOUND,
-			array( $p_version_id )
+			[ $p_version_id ]
 		);
 	}
 
@@ -241,7 +241,7 @@ function version_cache_row( $p_version_id ) {
 function version_cache_array_rows( array $p_project_ids ) {
 	global $g_cache_versions_project, $g_cache_versions;
 
-	$t_ids_to_fetch = array();
+	$t_ids_to_fetch = [];
 	foreach( $p_project_ids as $t_id ) {
 		$c_id = (int)$t_id;
 		if( !isset( $g_cache_versions_project[$c_id] ) ) {
@@ -260,7 +260,7 @@ function version_cache_array_rows( array $p_project_ids ) {
 		$c_version_id = (int)$t_row['id'];
 		$g_cache_versions[$c_version_id] = $t_row;
 		if( !isset( $g_cache_versions_project[$c_project_id] ) ) {
-			$g_cache_versions_project[$c_project_id] = array();
+			$g_cache_versions_project[$c_project_id] = [];
 		}
 		$g_cache_versions_project[$c_project_id][] = $c_version_id;
         unset( $t_ids_to_fetch[$c_project_id] );
@@ -330,7 +330,7 @@ function version_ensure_exists( $p_version_id ) {
 		throw new ClientException(
 			"Version with id '$p_version_id' not found",
 			ERROR_VERSION_NOT_FOUND,
-			array( $p_version_id ) );
+			[ $p_version_id ] );
 	}
 }
 
@@ -348,7 +348,7 @@ function version_ensure_unique( $p_version, $p_project_id = null ) {
 		throw new ClientException(
 			"Version '$p_version' already exists",
 			ERROR_VERSION_DUPLICATE,
-			array( $p_version ) );
+			[ $p_version ] );
 	}
 }
 
@@ -383,11 +383,11 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 					( project_id, version, date_order, description, released, obsolete )
 				  VALUES
 					(' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
+	db_query( $t_query, [ $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ] );
 
 	$t_version_id = db_insert_id( db_get_table( 'project_version' ) );
 
-	event_signal( 'EVENT_MANAGE_VERSION_CREATE', array( $t_version_id ) );
+	event_signal( 'EVENT_MANAGE_VERSION_CREATE', [ $t_version_id ] );
 
 	return $t_version_id;
 }
@@ -411,7 +411,7 @@ function version_update( VersionData $p_version_info ) {
 		throw new ClientException(
 			"Version '$t_version' already exists",
 			ERROR_VERSION_DUPLICATE,
-			array( $t_version ) );
+			[ $t_version ] );
 	}
 
 	$c_version_id = (int)$p_version_info->id;
@@ -431,10 +431,10 @@ function version_update( VersionData $p_version_info ) {
 					date_order=' . db_param() . ',
 					obsolete=' . db_param() . '
 				  WHERE id=' . db_param();
-	db_query( $t_query, array( $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
+	db_query( $t_query, [ $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ] );
 
 	if( $c_version_name != $c_old_version_name ) {
-		$t_project_list = array( $c_project_id );
+		$t_project_list = [ $c_project_id ];
 		if( config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) ) {
 			$t_project_list = array_merge( $t_project_list, project_hierarchy_get_all_subprojects( $c_project_id, true ) );
 		}
@@ -443,17 +443,17 @@ function version_update( VersionData $p_version_info ) {
 		db_param_push();
 		$t_query = 'UPDATE {bug} SET version=' . db_param() .
 				 ' WHERE ( project_id IN ( ' . $t_project_list . ' ) ) AND ( version=' . db_param() . ')';
-		db_query( $t_query, array( $c_version_name, $c_old_version_name ) );
+		db_query( $t_query, [ $c_version_name, $c_old_version_name ] );
 
 		db_param_push();
 		$t_query = 'UPDATE {bug} SET fixed_in_version=' . db_param() . '
 					  WHERE ( project_id IN ( ' . $t_project_list . ' ) ) AND ( fixed_in_version=' . db_param() . ')';
-		db_query( $t_query, array( $c_version_name, $c_old_version_name ) );
+		db_query( $t_query, [ $c_version_name, $c_old_version_name ] );
 
 		db_param_push();
 		$t_query = 'UPDATE {bug} SET target_version=' . db_param() . '
 					  WHERE ( project_id IN ( ' . $t_project_list . ' ) ) AND ( target_version=' . db_param() . ')';
-		db_query( $t_query, array( $c_version_name, $c_old_version_name ) );
+		db_query( $t_query, [ $c_version_name, $c_old_version_name ] );
 
 		db_param_push();
 		$t_query = 'UPDATE {bug_history}
@@ -461,7 +461,7 @@ function version_update( VersionData $p_version_info ) {
 			WHERE field_name IN (\'version\',\'fixed_in_version\',\'target_version\')
 				AND old_value=' . db_param() . '
 				AND bug_id IN (SELECT id FROM {bug} WHERE project_id IN ( ' . $t_project_list . ' ))';
-		db_query( $t_query, array( $c_version_name, $c_old_version_name ) );
+		db_query( $t_query, [ $c_version_name, $c_old_version_name ] );
 
 		db_param_push();
 		$t_query = 'UPDATE {bug_history}
@@ -469,7 +469,7 @@ function version_update( VersionData $p_version_info ) {
 			WHERE field_name IN (\'version\',\'fixed_in_version\',\'target_version\')
 				AND new_value=' . db_param() . '
 				AND bug_id IN (SELECT id FROM {bug} WHERE project_id IN ( ' . $t_project_list . ' ))';
-		db_query( $t_query, array( $c_version_name, $c_old_version_name ) );
+		db_query( $t_query, [ $c_version_name, $c_old_version_name ] );
 
 		# @todo We should consider using ids instead of names for foreign keys.  The main advantage of using the names are:
 		#		- for history the version history entries will still be valid even if the version is deleted in the future. --  we can ban deleting referenced versions.
@@ -490,16 +490,16 @@ function version_update( VersionData $p_version_info ) {
 function version_remove( $p_version_id, $p_new_version = '' ) {
 	version_ensure_exists( $p_version_id );
 
-	event_signal( 'EVENT_MANAGE_VERSION_DELETE', array( $p_version_id, $p_new_version ) );
+	event_signal( 'EVENT_MANAGE_VERSION_DELETE', [ $p_version_id, $p_new_version ] );
 
 	$t_old_version = version_get_field( $p_version_id, 'version' );
 	$t_project_id = version_get_field( $p_version_id, 'project_id' );
 
 	db_param_push();
 	$t_query = 'DELETE FROM {project_version} WHERE id=' . db_param();
-	db_query( $t_query, array( (int)$p_version_id ) );
+	db_query( $t_query, [ (int)$p_version_id ] );
 
-	$t_project_list = array( $t_project_id );
+	$t_project_list = [ $t_project_id ];
 	if( config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) ) {
 		$t_project_list = array_merge( $t_project_list, project_hierarchy_get_all_subprojects( $t_project_id, true ) );
 	}
@@ -508,17 +508,17 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	db_param_push();
 	$t_query = 'UPDATE {bug} SET version=' . db_param() . '
 				  WHERE project_id IN ( ' . $t_project_list . ' ) AND version=' . db_param();
-	db_query( $t_query, array( $p_new_version, $t_old_version ) );
+	db_query( $t_query, [ $p_new_version, $t_old_version ] );
 
 	db_param_push();
 	$t_query = 'UPDATE {bug} SET fixed_in_version=' . db_param() . '
 				  WHERE ( project_id IN ( ' . $t_project_list . ' ) ) AND ( fixed_in_version=' . db_param() . ')';
-	db_query( $t_query, array( $p_new_version, $t_old_version ) );
+	db_query( $t_query, [ $p_new_version, $t_old_version ] );
 
 	db_param_push();
 	$t_query = 'UPDATE {bug} SET target_version=' . db_param() . '
 				  WHERE ( project_id IN ( ' . $t_project_list . ' ) ) AND ( target_version=' . db_param() . ')';
-	db_query( $t_query, array( $p_new_version, $t_old_version ) );
+	db_query( $t_query, [ $p_new_version, $t_old_version ] );
 }
 
 /**
@@ -536,12 +536,12 @@ function version_remove_all( $p_project_id ) {
 	$t_query = 'UPDATE {bug}
 				  SET version=\'\', fixed_in_version=\'\', target_version=\'\'
 				  WHERE project_id=' . db_param();
-	db_query( $t_query, array( $c_project_id ) );
+	db_query( $t_query, [ $c_project_id ] );
 
 	# remove the actual versions associated with the project.
 	db_param_push();
 	$t_query = 'DELETE FROM {project_version} WHERE project_id=' . db_param();
-	db_query( $t_query, array( $c_project_id ) );
+	db_query( $t_query, [ $c_project_id ] );
 }
 
 /**
@@ -571,11 +571,11 @@ function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete =
 	} else {
 		$t_inherit = (bool)$p_inherit;
 	}
-	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : [ $p_project_ids ];
 
 	if( $t_inherit ) {
 		# add all parents for the requested projects
-		$t_project_list = array();
+		$t_project_list = [];
 		foreach( $t_project_ids as $t_id ) {
 			if( in_array( $t_id, $t_project_list ) ) {
 				# if it's already in the list, it appeared as parent of other project,
@@ -590,7 +590,7 @@ function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete =
 	}
 
 	version_cache_array_rows( $t_project_list );
-	$t_versions = array();
+	$t_versions = [];
 	foreach( $t_project_list as $t_project_id ) {
 		if( !empty( $g_cache_versions_project[$t_project_id]) ) {
 			foreach( $g_cache_versions_project[$t_project_id] as $t_id ) {
@@ -672,7 +672,7 @@ function version_get_field( $p_version_id, $p_field_name ) {
 		throw new ClientException(
 			"Field '$p_field_name' not found",
 			ERROR_DB_FIELD_NOT_FOUND,
-			array( $p_field_name ) );
+			[ $p_field_name ] );
 	}
 }
 
@@ -734,9 +734,9 @@ function version_get( $p_version_id ) {
  * @return boolean true: show, false: otherwise.
  */
 function version_should_show_product_version( $p_project_ids ) {
-	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : [ $p_project_ids ];
 
-	$t_check_projects = array();
+	$t_check_projects = [];
 	foreach( $t_project_ids as $t_id ) {
 		$t_option = config_get( 'show_product_version', null, null, $t_id );
 		if( ON == $t_option ) {

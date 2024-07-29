@@ -47,9 +47,9 @@ auth_reauthenticate();
 
 $f_user_id = gpc_get_int( 'user_id' );
 
-$t_data = array(
-	'query' => array( 'id' => $f_user_id )
-);
+$t_data = [
+	'query' => [ 'id' => $f_user_id ]
+];
 
 $t_command = new UserResetPasswordCommand( $t_data );
 # The case of trying to reset a protected account now causes the Command to

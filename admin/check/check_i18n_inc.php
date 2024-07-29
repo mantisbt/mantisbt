@@ -41,11 +41,11 @@ if( $t_config_default_timezone ) {
 	check_print_test_row(
 		'Default timezone has been specified in config_inc.php (default_timezone option)',
 		in_array( $t_config_default_timezone, timezone_identifiers_list() ),
-		array(
+		[
 			true => "Default timezone is '" . htmlentities( $t_config_default_timezone ) . "'",
 			false => "Invalid timezone '" . htmlentities( $t_config_default_timezone ) . "' specified. "
 				. 'Refer to the <a href="http://php.net/timezones">List of Supported Timezones</a>.'
-		)
+		]
 	);
 } else {
 	$t_php_default_timezone = ini_get( 'date.timezone' );
@@ -56,19 +56,19 @@ if( $t_config_default_timezone ) {
 		check_print_test_row(
 			$t_msg,
 			in_array( $t_php_default_timezone, timezone_identifiers_list() ),
-			array(
+			[
 				true => "Default timezone (specified by the $t_tz_link directive in php.ini) "
 					. "is '" . htmlentities( $t_php_default_timezone ) . "'",
 				false => "Invalid timezone '" . htmlentities( $t_config_default_timezone ) . "' specified. "
-			)
+			]
 		);
 	} else {
 		check_print_test_warn_row(
 			$t_msg,
 			!empty( $t_php_default_timezone ),
-			array(
+			[
 				false => "Timezone has been defaulted to 'UTC'."
-			)
+			]
 		);
 	}
 }

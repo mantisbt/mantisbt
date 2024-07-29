@@ -48,18 +48,18 @@ $f_config_option = gpc_get_string( 'config_option' );
 
 helper_ensure_confirmed( lang_get( 'delete_config_sure_msg' ), lang_get( 'delete' ) );
 
-$t_data = array(
-	'payload' => array(
-		'user' => array( 'id' => $f_user_id ),
-		'project' => array( 'id' => $f_project_id ),
-		'configs' => array(
-			array(
+$t_data = [
+	'payload' => [
+		'user' => [ 'id' => $f_user_id ],
+		'project' => [ 'id' => $f_project_id ],
+		'configs' => [
+			[
 				'option' => $f_config_option,
 				'value' => null,
-			)
-		)
-	)
-);
+			]
+		]
+	]
+];
 
 $t_command = new ConfigsSetCommand( $t_data );
 $t_command->execute();

@@ -141,7 +141,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$t_file_table = db_get_table( $p_table . '_file' );
 	$t_id_col = $p_table . '_id';
 
-	$t_param = array(
+	$t_param = [
 		$t_id_col     => $t_id,
 		'title'       => $p_title,
 		'description' => $p_desc,
@@ -152,7 +152,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 		'file_type'   => $p_file_type,
 		'date_added'  => db_now(),
 		'user_id'     => (int)$p_user_id,
-	);
+	];
 	# Oracle has to update BLOBs separately
 	if( !db_is_oracle() ) {
 		$t_param['content'] = $c_content;
@@ -209,7 +209,7 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			return ApiObjectFactory::faultServerError( 'Invalid file type ' . $p_type . ' .' );
 	}
 
-	$t_result = db_query( $t_query, array( $p_file_id ) );
+	$t_result = db_query( $t_query, [ $p_file_id ] );
 
 	if( $t_result->EOF ) {
 		return ApiObjectFactory::faultNotFound( 'Unable to find an attachment with type ' . $p_type . ' and id ' .

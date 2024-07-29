@@ -113,7 +113,7 @@ class ConfigParser {
 	 * @throws Exception when there's an invalid token
 	 */
 	protected function process_array() {
-		$t_array = array();
+		$t_array = [];
 		$t_count = 0;
 
 		$this->tokens->ensure_matches( T_ARRAY );

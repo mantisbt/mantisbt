@@ -77,9 +77,9 @@ class ImportXml_Issue implements ImportXml_Interface {
 		$t_project_id = helper_get_current_project(); # TODO: category_get_id_by_name could work by default on current project
 		$t_user_id = auth_get_current_user_id( );
 
-		$t_custom_fields = array();
-		$t_bugnotes = array();
-		$t_attachments = array();
+		$t_custom_fields = [];
+		$t_bugnotes = [];
+		$t_attachments = [];
 
 		$t_depth = $t_reader->depth;
 		while( $t_reader->read() &&
@@ -279,13 +279,13 @@ class ImportXml_Issue implements ImportXml_Interface {
 				# Create a temporary file in the temporary files directory using sys_get_temp_dir()
 				$t_temp_file_name = tempnam( sys_get_temp_dir(), 'MantisImport' );
 				file_put_contents( $t_temp_file_name, base64_decode( $t_attachment->content ) );
-				$t_file_data = array(
+				$t_file_data = [
 					'name'     => $t_attachment->filename,
 					'type'     => $t_attachment->file_type,
 					'tmp_name' => $t_temp_file_name,
 					'size'     => filesize( $t_temp_file_name ),
 					'error'    => UPLOAD_ERR_OK,
-				);
+				];
 				# unfortunately we have no clue who has added the attachment (this could only be fetched from history -> feel free to implement this)
 				# also I have no clue where description should come from...
 				file_add( $this->new_id_, $t_file_data, 'bug', $t_attachment->title, $p_desc = '', $p_user_id = null, $t_attachment->date_added, true );

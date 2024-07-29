@@ -42,17 +42,17 @@ function mc_user_profiles_get_all( $p_username, $p_password, $p_page_number, $p_
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_results = array();
-	$t_start = max( array( 0, $p_page_number - 1 ) ) * $p_per_page;
+	$t_results = [];
+	$t_start = max( [ 0, $p_page_number - 1 ] ) * $p_per_page;
 
 	foreach ( profile_get_all_for_user( $t_user_id ) as $t_profile_row ) {
-		$t_result = array(
+		$t_result = [
 			'id' => $t_profile_row['id'],
 			'description' => $t_profile_row['description'],
 			'os' => $t_profile_row['os'],
 			'os_build' => $t_profile_row['os_build'],
 			'platform' => $t_profile_row['platform']
-		);
+		];
 
 		if( $t_profile_row['user_id'] != 0 ) {
 			$t_result['user_id'] = mci_account_get_array_by_id( $t_profile_row['user_id'] );
@@ -66,8 +66,8 @@ function mc_user_profiles_get_all( $p_username, $p_password, $p_page_number, $p_
 	# near future, as the number of profiles is expected to be small
 	$t_paged_results = array_slice( $t_results, $t_start, $p_per_page );
 
-	return array (
+	return  [
 		'total_results' => count( $t_results ),
 		'results' => $t_paged_results
-	);
+	];
 }

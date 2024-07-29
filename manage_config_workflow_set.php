@@ -92,11 +92,11 @@ $t_project = helper_get_current_project();
 $t_access = current_user_get_access_level();
 
 # process the changes to threshold values
-$t_valid_thresholds = array(
+$t_valid_thresholds = [
 	'bug_submit_status',
 	'bug_resolved_status_threshold',
 	'bug_reopen_status',
-);
+];
 
 foreach( $t_valid_thresholds as $t_threshold ) {
 	$t_access_current = config_get_access( $t_threshold );
@@ -122,16 +122,16 @@ $t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_e
 
 # process the workflow by reversing the flags to a matrix and creating the appropriate string
 if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
-	$f_value = gpc_get( 'flag', array() );
+	$f_value = gpc_get( 'flag', [] );
 	$f_value = $f_value ?? [];
 	$f_access = gpc_get( 'workflow_access' );
-	$t_matrix = array();
+	$t_matrix = [];
 
 	foreach( $f_value as $t_transition ) {
 		list( $t_from, $t_to ) = explode( ':', $t_transition );
 		$t_matrix[$t_from][$t_to] = '';
 	}
-	$t_workflow = array();
+	$t_workflow = [];
 	foreach( $t_enum_status as $t_state => $t_label ) {
 		$t_workflow_row = '';
 		$t_default = gpc_get_int( 'default_' . $t_state );
@@ -163,7 +163,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	$t_workflow_parent = config_get_parent( $t_project, 'status_enum_workflow' );
 	if( 0 == count( $t_workflow_parent ) ) {
 		foreach( $t_enum_status as $t_status => $t_label ) {
-			$t_temp_workflow = array();
+			$t_temp_workflow = [];
 			foreach( $t_enum_status as $t_next => $t_next_label ) {
 				if( $t_status != $t_next ) {
 					$t_temp_workflow[] = $t_next . ':' . $t_next_label;
@@ -211,7 +211,7 @@ if( min( config_get_access( 'set_status_threshold' ), config_get_access( 'report
 	}
 
 	# walk through the status labels to set the status threshold
-	$t_set_new = array();
+	$t_set_new = [];
 	foreach( $t_enum_status as $t_status_id => $t_status_label ) {
 		$f_level = gpc_get_int( 'access_change_' . $t_status_id, -1 );
 		if( config_get( 'bug_submit_status' ) == $t_status_id ) {

@@ -35,9 +35,9 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		$this->page = 'config';
 
 		$this->version = MANTIS_VERSION;
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.25.0',
-		);
+		];
 
 		$this->author = 'MantisBT Team';
 		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
@@ -49,13 +49,13 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 * @return array
 	 */
 	function hooks() {
-		return array(
+		return [
 			'EVENT_DISPLAY_TEXT'		=> 'text',			# Text String Display
 			'EVENT_DISPLAY_FORMATTED'	=> 'formatted',		# Formatted String Display
 			'EVENT_DISPLAY_RSS'			=> 'rss',			# RSS String Display
 			'EVENT_DISPLAY_EMAIL'		=> 'email',			# Email String Display
 			'EVENT_LAYOUT_RESOURCES'	=> 'resources'		# Load stylesheet
-		);
+		];
 	}
 
 	/**
@@ -92,7 +92,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 * @return array
 	 */
 	function config() {
-		return array(
+		return [
 			'process_text'					=> ON,
 			'process_urls'					=> ON,
 			'process_buglinks'				=> ON,
@@ -100,7 +100,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			'syntax_highlighting'			=> OFF,
 			'syntax_highlighting_theme'		=> 'prism.min.css',
 			'syntax_highlighting_plugins'	=> []
-		);
+		];
 	}
 
 	/**

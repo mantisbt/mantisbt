@@ -93,7 +93,7 @@ function layout_page_header_begin( $p_page_title = null ) {
 
 	# Advertise the availability of the browser search plug-ins.
 	$t_title = htmlspecialchars( config_get( 'search_title' ) );
-	$t_searches = array( 'text', 'id' );
+	$t_searches = [ 'text', 'id' ];
 	foreach( $t_searches as $t_type ) {
 		echo "\t",
 			'<link rel="search" type="application/opensearchdescription+xml" ',
@@ -642,7 +642,7 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
  * @param array   $p_parents           Array of parent projects.
  * @return void
  */
-function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, array $p_parents = array() ) {
+function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, array $p_parents = [] ) {
 	array_push( $p_parents, $p_parent_id );
 	$t_user_id = auth_get_current_user_id();
 	$t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
@@ -704,7 +704,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		$t_current_project = helper_get_current_project();
 
 		# Store all items in an array before outputting
-		$t_sidebar_items = array();
+		$t_sidebar_items = [];
 
 		# Plugin / Event added options
 		$t_event_menu_main_front = event_signal( 'EVENT_MENU_MAIN_FRONT' );
@@ -716,95 +716,95 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 
 		# Main Page
 		if( config_get( 'news_enabled' ) == ON ) {
-			$t_sidebar_items[] = array(
+			$t_sidebar_items[] = [
 				'url' => 'main_page.php',
 				'title' => 'main_link',
 				'icon' => 'fa-bullhorn'
-			);
+			];
 		}
 
 		# My View
-		$t_sidebar_items[] = array(
+		$t_sidebar_items[] = [
 			'url' => 'my_view_page.php',
 			'title' => 'my_view_link',
 			'icon' => 'fa-dashboard'
-		);
+		];
 
 		# View Bugs
-		$t_sidebar_items[] = array(
+		$t_sidebar_items[] = [
 			'url' => 'view_all_bug_page.php',
 			'title' => 'view_bugs_link',
 			'icon' => 'fa-list-alt'
-		);
+		];
 
 		# Report Bugs
 		if( access_has_any_project_level( 'report_bug_threshold' ) ) {
-			$t_sidebar_items[] = array(
+			$t_sidebar_items[] = [
 				'url' => string_get_bug_report_url(),
 				'title' => 'report_bug_link',
 				'icon' => 'fa-edit'
-			);
+			];
 		}
 
 		# Changelog Page
-		$t_sidebar_items[] = array(
+		$t_sidebar_items[] = [
 			'url' => 'changelog_page.php',
 			'title' => 'changelog_link',
 			'icon' => 'fa-retweet',
 			'access_level' => config_get( 'view_changelog_threshold' )
-		);
+		];
 
 		# Roadmap Page
-		$t_sidebar_items[] = array(
+		$t_sidebar_items[] = [
 			'url' => 'roadmap_page.php',
 			'title' => 'roadmap_link',
 			'icon' => 'fa-road',
 			'access_level' => config_get( 'roadmap_view_threshold' )
-		);
+		];
 
 		# Summary Page
-		$t_sidebar_items[] = array(
+		$t_sidebar_items[] = [
 			'url' => 'summary_page.php',
 			'title' => 'summary_link',
 			'icon' => 'fa-bar-chart-o',
 			'access_level' => config_get( 'view_summary_threshold' )
-		);
+		];
 
 		# Project Documentation Page
 		if( ON == config_get( 'enable_project_documentation' ) ) {
-			$t_sidebar_items[] = array(
+			$t_sidebar_items[] = [
 				'url' => 'proj_doc_page.php',
 				'title' => 'docs_link',
 				'icon' => 'fa-book'
-			);
+			];
 		}
 
 		# Project Wiki
 		if( ON == config_get_global( 'wiki_enable' )  ) {
-			$t_sidebar_items[] = array(
+			$t_sidebar_items[] = [
 				'url' => 'wiki.php?type=project&amp;id=' . $t_current_project,
 				'title' => 'wiki',
 				'icon' => 'fa-book'
-			);
+			];
 		}
 
 		# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
 		$t_link = layout_manage_menu_link();
 		if( !is_blank( $t_link ) ) {
-			$t_sidebar_items[] = array(
+			$t_sidebar_items[] = [
 				'url' => $t_link,
 				'title' => 'manage_link',
 				'icon' => 'fa-gears',
-			);
+			];
 		}
 
 		# Time Tracking / Billing
 		if( config_get( 'time_tracking_enabled' ) && access_has_project_level( config_get( 'time_tracking_reporting_threshold', $t_current_project ) ) ) {
-			$t_sidebar_items[] = array(
+			$t_sidebar_items[] = [
 				'url' => 'billing_page.php',
 				'title' => 'time_tracking_billing_link',
 				'icon' => 'fa-clock-o',
-			);
+			];
 		}
 
 		# Plugin / Event added options
@@ -823,7 +823,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Allow plugins to alter the sidebar items array
-		$t_modified_sidebar_items = event_signal( 'EVENT_MENU_MAIN_FILTER', array( $t_sidebar_items ) );
+		$t_modified_sidebar_items = event_signal( 'EVENT_MENU_MAIN_FILTER', [ $t_sidebar_items ] );
 		if( is_array( $t_modified_sidebar_items ) && count( $t_modified_sidebar_items ) > 0 ) {
 			$t_sidebar_items = $t_modified_sidebar_items[0];
 		}
@@ -847,7 +847,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
  * @return array containing sidebar items
  */
 function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response ) {
-	$t_menu_options = array();
+	$t_menu_options = [];
 
 	foreach( $p_plugin_event_response as $t_plugin => $t_plugin_menu_options ) {
 		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
@@ -869,7 +869,7 @@ function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response ) {
  * @return array containing sidebar items
  */
 function layout_config_menu_options_for_sidebar( ) {
-	$t_menu_options = array();
+	$t_menu_options = [];
 	$t_custom_options = config_get( 'main_menu_custom_options' );
 
 	foreach( $t_custom_options as $t_custom_option ) {
@@ -877,7 +877,7 @@ function layout_config_menu_options_for_sidebar( ) {
 			$t_menu_option = $t_custom_option;
 		} else {
 			# Support < 2.0.0 custom menu options config format
-			$t_menu_option = array();
+			$t_menu_option = [];
 			$t_menu_option['title'] = $t_custom_option[0];
 			$t_menu_option['access_level'] = $t_custom_option[1];
 			$t_menu_option['url'] = $t_custom_option[2];
@@ -1223,7 +1223,7 @@ function layout_footer() {
 		$t_total_queries_count = count( $g_queries_array );
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
-		$t_unique_queries = array();
+		$t_unique_queries = [];
 		for ( $i = 0; $i < $t_total_queries_count; $i++ ) {
 			if( !in_array( $g_queries_array[$i][0], $t_unique_queries ) ) {
 				$t_unique_queries_count++;

@@ -60,7 +60,7 @@ print_admin_menu_bar( 'system_utils.php' );
 			<td class="center">
 				<?php html_button( 'move_attachments_page.php',
 					'Move Attachments',
-					array( 'type' => 'bug' ) );
+					[ 'type' => 'bug' ] );
 				?>
 			</td>
 		</tr>
@@ -69,14 +69,14 @@ print_admin_menu_bar( 'system_utils.php' );
 			<td class="center">
 				<?php html_button( 'move_attachments_page.php',
 					'Move Project Files',
-					array( 'type' => 'project' ) );
+					[ 'type' => 'project' ] );
 				?>
 			</td>
 		</tr>
 		<tr>
 			<td>Show database statistics</td>
 			<td class="center">
-				<?php html_button( 'db_stats.php', 'Display', array() );?>
+				<?php html_button( 'db_stats.php', 'Display', [] );?>
 			</td>
 		</tr>
 	</tbody>

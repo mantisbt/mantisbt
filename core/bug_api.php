@@ -471,7 +471,7 @@ class BugData {
 		db_param_push();
 		$t_query = 'SELECT COUNT(*) FROM {bugnote}
 					  WHERE bug_id =' . db_param() . ' ' . $t_restriction;
-		$t_result = db_query( $t_query, array( $this->id ) );
+		$t_result = db_query( $t_query, [ $this->id ] );
 
 		return db_result( $t_result );
 	}
@@ -544,7 +544,7 @@ class BugData {
 					    ( description, steps_to_reproduce, additional_information )
 					  VALUES
 					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $this->description, $this->steps_to_reproduce, $this->additional_information ) );
+		db_query( $t_query, [ $this->description, $this->steps_to_reproduce, $this->additional_information ] );
 
 		# Get the id of the text information we just inserted
 		# NOTE: this is guaranteed to be the correct one.
@@ -561,7 +561,7 @@ class BugData {
 			# the bug was not assigned to somebody, then assign it automatically.
 			db_param_push();
 			$t_query = 'SELECT user_id FROM {category} WHERE id=' . db_param();
-			$t_result = db_query( $t_query, array( $this->category_id ) );
+			$t_result = db_query( $t_query, [ $this->category_id ] );
 			$t_handler = db_result( $t_result );
 
 			if( $t_handler !== false && user_exists( $t_handler ) ) {
@@ -591,7 +591,7 @@ class BugData {
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
+		db_query( $t_query, [ $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ] );
 
 		$this->id = db_insert_id( db_get_table( 'bug' ) );
 
@@ -612,7 +612,7 @@ class BugData {
 	 */
 	public function process_mentions() {
 		# Now that the issue is added process the @ mentions
-		$t_all_mentioned_user_ids = array();
+		$t_all_mentioned_user_ids = [];
 
 		$t_mentioned_user_ids = mention_get_users( $this->summary );
 		$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
@@ -697,7 +697,7 @@ class BugData {
 						platform=' . db_param() . ', version=' . db_param() . ',
 						build=' . db_param() . ', fixed_in_version=' . db_param() . ',';
 
-		$t_fields = array(
+		$t_fields = [
 			$this->project_id, $this->reporter_id,
 			$this->handler_id, $this->duplicate_id,
 			$this->priority, $this->severity,
@@ -707,7 +707,7 @@ class BugData {
 			$this->os, $this->os_build,
 			$this->platform, $this->version,
 			$this->build, $this->fixed_in_version,
-		);
+		];
 		$t_roadmap_updated = false;
 		if( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 			$t_query .= '
@@ -775,11 +775,11 @@ class BugData {
 								steps_to_reproduce=' . db_param() . ',
 								additional_information=' . db_param() . '
 							WHERE id=' . db_param();
-			db_query( $t_query, array(
+			db_query( $t_query, [
 				$this->description,
 				$this->steps_to_reproduce,
 				$this->additional_information,
-				$t_bug_text_id ) );
+				$t_bug_text_id ] );
 
 			bug_text_clear_cache( $c_bug_id );
 
@@ -837,9 +837,9 @@ class BugData {
 	}
 }
 
-$g_cache_bug = array();
-$g_cache_bug_text = array();
-$g_cache_bug_attachments = array();
+$g_cache_bug = [];
+$g_cache_bug_text = [];
+$g_cache_bug_attachments = [];
 
 /**
  * Cache a database result-set containing full contents of bug_table row.
@@ -893,7 +893,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 
 	db_param_push();
 	$t_query = 'SELECT * FROM {bug} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $c_bug_id ) );
+	$t_result = db_query( $t_query, [ $c_bug_id ] );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -901,7 +901,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		$g_cache_bug[$c_bug_id] = false;
 
 		if( $p_trigger_errors ) {
-			throw new ClientException( "Issue #$c_bug_id not found", ERROR_BUG_NOT_FOUND, array( $p_bug_id ) );
+			throw new ClientException( "Issue #$c_bug_id not found", ERROR_BUG_NOT_FOUND, [ $p_bug_id ] );
 		}
 
 		return false;
@@ -919,7 +919,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
  */
 function bug_cache_array_rows( array $p_bug_id_array ) {
 	global $g_cache_bug;
-	$c_bug_id_array = array();
+	$c_bug_id_array = [];
 
 	foreach( $p_bug_id_array as $t_bug_id ) {
 		if( !isset( $g_cache_bug[(int)$t_bug_id] ) ) {
@@ -979,7 +979,7 @@ function bug_clear_cache( $p_bug_id = null ) {
 	global $g_cache_bug;
 
 	if( null === $p_bug_id ) {
-		$g_cache_bug = array();
+		$g_cache_bug = [];
 	} else {
 		unset( $g_cache_bug[(int)$p_bug_id] );
 	}
@@ -1011,7 +1011,7 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	db_param_push();
 	$t_query = 'SELECT bt.* FROM {bug_text} bt, {bug} b
 				  WHERE b.id=' . db_param() . ' AND b.bug_text_id = bt.id';
-	$t_result = db_query( $t_query, array( $c_bug_id ) );
+	$t_result = db_query( $t_query, [ $c_bug_id ] );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -1022,7 +1022,7 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 			throw new ClientException(
 				"Issue '$p_bug_id' not found",
 				ERROR_BUG_NOT_FOUND,
-				array( $p_bug_id ) );
+				[ $p_bug_id ] );
 		}
 
 		return false;
@@ -1046,7 +1046,7 @@ function bug_text_clear_cache( $p_bug_id = null ) {
 	global $g_cache_bug_text;
 
 	if( null === $p_bug_id ) {
-		$g_cache_bug_text = array();
+		$g_cache_bug_text = [];
 	} else {
 		unset( $g_cache_bug_text[(int)$p_bug_id] );
 	}
@@ -1065,7 +1065,7 @@ function bug_attachments_clear_cache( $p_bug_id = null ) {
 	global $g_cache_bug_attachments;
 
 	if( null === $p_bug_id ) {
-		$g_cache_bug_attachments = array();
+		$g_cache_bug_attachments = [];
 	} else {
 		unset( $g_cache_bug_attachments[(int)$p_bug_id] );
 	}
@@ -1112,7 +1112,7 @@ function bug_ensure_exists( $p_bug_id ) {
 		throw new ClientException(
 			"Issue #$p_bug_id not found",
 			ERROR_BUG_NOT_FOUND,
-			array( $p_bug_id ) );
+			[ $p_bug_id ] );
 	}
 }
 
@@ -1356,7 +1356,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	if( $p_copy_custom_fields ) {
 		db_param_push();
 		$t_query = 'SELECT field_id, bug_id, value, text FROM {custom_field_string} WHERE bug_id=' . db_param();
-		$t_result = db_query( $t_query, array( $t_bug_id ) );
+		$t_result = db_query( $t_query, [ $t_bug_id ] );
 
 		while( $t_bug_custom = db_fetch_array( $t_result ) ) {
 			$c_field_id = (int)$t_bug_custom['field_id'];
@@ -1368,7 +1368,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 			$t_query = 'INSERT INTO {custom_field_string}
 						   ( field_id, bug_id, value, text )
 						   VALUES (' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
-			db_query( $t_query, array( $c_field_id, $c_new_bug_id, $c_value, $c_text ) );
+			db_query( $t_query, [ $c_field_id, $c_new_bug_id, $c_value, $c_text ] );
 		}
 	}
 
@@ -1381,14 +1381,14 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	if( $p_copy_bugnotes ) {
 		db_param_push();
 		$t_query = 'SELECT * FROM {bugnote} WHERE bug_id=' . db_param();
-		$t_result = db_query( $t_query, array( $t_bug_id ) );
+		$t_result = db_query( $t_query, [ $t_bug_id ] );
 
 		while( $t_bug_note = db_fetch_array( $t_result ) ) {
 			$t_bugnote_text_id = $t_bug_note['bugnote_text_id'];
 
 			db_param_push();
 			$t_query2 = 'SELECT * FROM {bugnote_text} WHERE id=' . db_param();
-			$t_result2 = db_query( $t_query2, array( $t_bugnote_text_id ) );
+			$t_result2 = db_query( $t_query2, [ $t_bugnote_text_id ] );
 
 			$t_bugnote_text_insert_id = -1;
 			if( $t_bugnote_text = db_fetch_array( $t_result2 ) ) {
@@ -1396,7 +1396,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 				$t_query2 = 'INSERT INTO {bugnote_text}
 							   ( note )
 							   VALUES ( ' . db_param() . ' )';
-				db_query( $t_query2, array( $t_bugnote_text['note'] ) );
+				db_query( $t_query2, [ $t_bugnote_text['note'] ] );
 				$t_bugnote_text_insert_id = db_insert_id( db_get_table( 'bugnote_text' ) );
 			}
 
@@ -1409,7 +1409,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 						   			' . db_param() . ',
 						   			' . db_param() . ',
 						   			' . db_param() . ')';
-			db_query( $t_query2, array( $t_new_bug_id, $t_bug_note['reporter_id'], $t_bugnote_text_insert_id, $t_bug_note['view_state'], $t_bug_note['date_submitted'], $t_bug_note['last_modified'] ) );
+			db_query( $t_query2, [ $t_new_bug_id, $t_bug_note['reporter_id'], $t_bugnote_text_insert_id, $t_bug_note['view_state'], $t_bug_note['date_submitted'], $t_bug_note['last_modified'] ] );
 		}
 	}
 
@@ -1431,7 +1431,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 		# @todo actually, does it even make sense to copy the history ?
 		db_param_push();
 		$t_query = 'SELECT * FROM {bug_history} WHERE bug_id = ' . db_param();
-		$t_result = db_query( $t_query, array( $t_bug_id ) );
+		$t_result = db_query( $t_query, [ $t_bug_id ] );
 
 		while( $t_bug_history = db_fetch_array( $t_result ) ) {
 			db_param_push();
@@ -1440,7 +1440,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 						  VALUES ( ' . db_param() . ',' . db_param() . ',' . db_param() . ',
 						  		   ' . db_param() . ',' . db_param() . ',' . db_param() . ',
 						  		   ' . db_param() . ' );';
-			db_query( $t_query, array( $t_bug_history['user_id'], $t_new_bug_id, $t_bug_history['date_modified'], $t_bug_history['field_name'], $t_bug_history['old_value'], $t_bug_history['new_value'], $t_bug_history['type'] ) );
+			db_query( $t_query, [ $t_bug_history['user_id'], $t_new_bug_id, $t_bug_history['date_modified'], $t_bug_history['field_name'], $t_bug_history['old_value'], $t_bug_history['new_value'], $t_bug_history['type'] ] );
 		}
 	} else {
 		# Create a "New Issue" history entry
@@ -1516,9 +1516,9 @@ function bug_delete( $p_bug_id ) {
 	$c_bug_id = (int)$p_bug_id;
 
 	# call pre-deletion custom function
-	helper_call_custom_function( 'issue_delete_validate', array( $p_bug_id ) );
+	helper_call_custom_function( 'issue_delete_validate', [ $p_bug_id ] );
 
-	event_signal( 'EVENT_BUG_DELETED', array( $c_bug_id ) );
+	event_signal( 'EVENT_BUG_DELETED', [ $c_bug_id ] );
 
 	# log deletion of bug
 	history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
@@ -1531,7 +1531,7 @@ function bug_delete( $p_bug_id ) {
 	# before they are deleted from the database given its id. The other option
 	# would be to move this to the end of the function and provide it with bug
 	# data rather than an id, but this would break backward compatibility.
-	helper_call_custom_function( 'issue_delete_notify', array( $p_bug_id ) );
+	helper_call_custom_function( 'issue_delete_notify', [ $p_bug_id ] );
 
 	# Unmonitor bug for all users
 	bug_unmonitor( $p_bug_id, null );
@@ -1565,12 +1565,12 @@ function bug_delete( $p_bug_id ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {bug_text} WHERE id=' . db_param();
-	db_query( $t_query, array( $t_bug_text_id ) );
+	db_query( $t_query, [ $t_bug_text_id ] );
 
 	# Delete the bug entry
 	db_param_push();
 	$t_query = 'DELETE FROM {bug} WHERE id=' . db_param();
-	db_query( $t_query, array( $c_bug_id ) );
+	db_query( $t_query, [ $c_bug_id ] );
 
 	bug_clear_cache_all( $p_bug_id );
 }
@@ -1588,7 +1588,7 @@ function bug_delete_all( $p_project_id ) {
 
 	db_param_push();
 	$t_query = 'SELECT id FROM {bug} WHERE project_id=' . db_param();
-	$t_result = db_query( $t_query, array( $c_project_id ) );
+	$t_result = db_query( $t_query, [ $c_project_id ] );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		/** @noinspection PhpUnhandledExceptionInspection */
@@ -1736,7 +1736,7 @@ function bug_get_text_field( $p_bug_id, $p_field_name ) {
  * @access public
  */
 function bug_format_summary( $p_bug_id, $p_context ) {
-	return helper_call_custom_function( 'format_issue_summary', array( $p_bug_id, $p_context ) );
+	return helper_call_custom_function( 'format_issue_summary', [ $p_bug_id, $p_context ] );
 }
 
 /**
@@ -1754,7 +1754,7 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
 
 	db_param_push();
 	$t_query = 'SELECT last_modified FROM {bugnote} WHERE bug_id=' . db_param() . ' ORDER BY last_modified DESC';
-	$t_result = db_query( $t_query, array( $c_bug_id ), 1 );
+	$t_result = db_query( $t_query, [ $c_bug_id ], 1 );
 	$t_row = db_result( $t_result );
 
 	if( false === $t_row ) {
@@ -1778,10 +1778,10 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
  */
 function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 	if( empty( $p_bugs_id ) ) {
-		return array();
+		return [];
 	}
 
-	$t_id_array = array();
+	$t_id_array = [];
 	foreach( $p_bugs_id as $t_id ) {
 		$t_id_array[$t_id] = (int)$t_id;
 	}
@@ -1789,7 +1789,7 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 		# MSSQL is limited to 2100 parameters per query, see #24393
 		$t_chunks = array_chunk( $t_id_array, 2100, true );
 	} else {
-		$t_chunks = array( $t_id_array );
+		$t_chunks = [ $t_id_array ];
 	}
 
 	$t_user_id = $p_user_id ?? auth_get_current_user_id();
@@ -1804,7 +1804,7 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 	$t_query->sql( sprintf( $t_sql, $t_query->sql_in( 'n.bug_id', 'bug_ids' ) ) );
 
 	$t_counter = 0;
-	$t_stats = array();
+	$t_stats = [];
 	foreach( $t_chunks as $t_chunk_ids ) {
 		$t_current_project_id = null;
 		$t_current_bug_id = null;
@@ -1881,7 +1881,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 	if( array_key_exists( '_stats', $g_cache_bug[$c_bug_id] ) ) {
 		return $g_cache_bug[$c_bug_id]['_stats'];
 	} else {
-		$t_stats = bug_get_bugnote_stats_array( array( $p_bug_id ) );
+		$t_stats = bug_get_bugnote_stats_array( [ $p_bug_id ] );
 		return $t_stats[$p_bug_id];
 	}
 }
@@ -1913,9 +1913,9 @@ function bug_get_attachments( $p_bug_id ) {
 		                FROM {bug_file}
 		                WHERE bug_id=' . db_param() . '
 		                ORDER BY date_added';
-	$t_db_result = db_query( $t_query, array( $p_bug_id ) );
+	$t_db_result = db_query( $t_query, [ $p_bug_id ] );
 
-	$t_result = array();
+	$t_result = [];
 
 	while( $t_row = db_fetch_array( $t_db_result ) ) {
 		$t_result[] = $t_row;
@@ -2002,7 +2002,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 	# Update fields
 	db_param_push();
 	$t_query = 'UPDATE {bug} SET ' . $p_field_name . '=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( $c_value, $c_bug_id ) );
+	db_query( $t_query, [ $c_value, $c_bug_id ] );
 
 	# updated the last_updated date
 	if( $p_field_name != 'last_updated' ) {
@@ -2068,7 +2068,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		$t_query = 'UPDATE {bug}
 					  SET handler_id=' . db_param() . ', status=' . db_param() . '
 					  WHERE id=' . db_param();
-		db_query( $t_query, array( $p_user_id, $t_ass_val, $p_bug_id ) );
+		db_query( $t_query, [ $p_user_id, $t_ass_val, $p_bug_id ] );
 
 		# log changes
 		history_log_event_direct( $p_bug_id, 'status', $h_status, $t_ass_val );
@@ -2244,7 +2244,7 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 function bug_update_date( $p_bug_id ) {
 	db_param_push();
 	$t_query = 'UPDATE {bug} SET last_updated=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( db_now(), $p_bug_id ) );
+	db_query( $t_query, [ db_now(), $p_bug_id ] );
 
 	bug_clear_cache( $p_bug_id );
 
@@ -2278,7 +2278,7 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 	# Insert monitoring record
 	db_param_push();
 	$t_query = 'INSERT INTO {bug_monitor} ( user_id, bug_id ) VALUES (' . db_param() . ',' . db_param() . ')';
-	db_query( $t_query, array( $c_user_id, $c_bug_id ) );
+	db_query( $t_query, [ $c_user_id, $c_bug_id ] );
 
 	# log new monitoring action
 	history_log_event_special( $c_bug_id, BUG_MONITOR, $c_user_id );
@@ -2300,7 +2300,7 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
  */
 function bug_get_monitors( $p_bug_id ) {
 	if( ! access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $p_bug_id ) ) {
-		return array();
+		return [];
 	}
 
 	# get the bugnote data
@@ -2309,9 +2309,9 @@ function bug_get_monitors( $p_bug_id ) {
 			FROM {bug_monitor} m, {user} u
 			WHERE m.bug_id=' . db_param() . ' AND m.user_id = u.id
 			ORDER BY u.realname, u.username';
-	$t_result = db_query( $t_query, array( $p_bug_id ) );
+	$t_result = db_query( $t_query, [ $p_bug_id ] );
 
-	$t_users = array();
+	$t_users = [];
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_users[] = $t_row['user_id'];
 	}
@@ -2335,7 +2335,7 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 
 	db_param_push();
 	$t_query = 'SELECT user_id FROM {bug_monitor} WHERE bug_id = ' . db_param();
-	$t_result = db_query( $t_query, array( $c_source_bug_id ) );
+	$t_result = db_query( $t_query, [ $c_source_bug_id ] );
 
 	while( $t_bug_monitor = db_fetch_array( $t_result ) ) {
 		if( user_exists( $t_bug_monitor['user_id'] ) &&
@@ -2343,7 +2343,7 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 			db_param_push();
 			$t_query = 'INSERT INTO {bug_monitor} ( user_id, bug_id )
 				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-			db_query( $t_query, array( $t_bug_monitor['user_id'], $c_dest_bug_id ) );
+			db_query( $t_query, [ $t_bug_monitor['user_id'], $c_dest_bug_id ] );
 			history_log_event_special( $c_dest_bug_id, BUG_MONITOR, $t_bug_monitor['user_id'] );
 		}
 	}
@@ -2394,7 +2394,7 @@ function bug_format_id( $p_bug_id ) {
 	$t_padding = config_get( 'display_bug_padding' );
 	$t_string = sprintf( '%0' . (int)$t_padding . 'd', $p_bug_id );
 
-	return event_signal( 'EVENT_DISPLAY_BUG_ID', $t_string, array( $p_bug_id ) );
+	return event_signal( 'EVENT_DISPLAY_BUG_ID', $t_string, [ $p_bug_id ] );
 }
 
 /**
@@ -2461,10 +2461,10 @@ function bug_clear_cache_all( $p_bug_id = null ) {
  * @param array $p_selected_columns Array of columns to show
  */
 function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
-	$t_bug_ids = array();
-	$t_user_ids = array();
-	$t_project_ids = array();
-	$t_category_ids = array();
+	$t_bug_ids = [];
+	$t_user_ids = [];
+	$t_project_ids = [];
+	$t_category_ids = [];
 	foreach( $p_bugs as $t_bug ) {
 		$t_bug_ids[] = (int)$t_bug->id;
 		$t_user_ids[] = (int)$t_bug->handler_id;
@@ -2476,7 +2476,7 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 	$t_project_ids = array_unique( $t_project_ids );
 	$t_category_ids = array_unique( $t_category_ids );
 
-	$t_custom_field_ids = array();
+	$t_custom_field_ids = [];
 	$t_users_cached = false;
 	foreach( $p_selected_columns as $t_column ) {
 

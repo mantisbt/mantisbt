@@ -550,7 +550,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 						case REMINDER:
 							echo lang_get( 'reminder_sent_to' ) . ': ';
 							$t_note_attr = mb_substr( $t_bugnote->note_attr, 1, mb_strlen( $t_bugnote->note_attr ) - 2 );
-							$t_to = array();
+							$t_to = [];
 							foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
 								$t_to[] = prepare_user_name( $t_recipient );
 							}

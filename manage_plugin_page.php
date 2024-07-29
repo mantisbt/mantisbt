@@ -248,17 +248,17 @@ class ListPluginsForDisplay {
 	/**
 	 * @var AvailablePlugin[] List of available plugins (i.e. valid and not installed)
 	 */
-	protected $available = array();
+	protected $available = [];
 
 	/**
 	 * @var InstalledPlugin[] List of installed (registered) plugins
 	 */
-	protected $installed = array();
+	protected $installed = [];
 
 	/**
 	 * @var InvalidPluginForDisplay[] List of invalid plugins
 	 */
-	protected $invalid = array();
+	protected $invalid = [];
 
 	/**
 	 * PluginsListForDisplay constructor.
@@ -399,7 +399,7 @@ class InvalidPluginForDisplay extends PluginForDisplay {
 }
 
 class AvailablePlugin extends PluginForDisplay {
-	protected $dependencies = array();
+	protected $dependencies = [];
 	protected $upgrade_needed = false;
 	protected $can_install = false;
 

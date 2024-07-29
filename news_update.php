@@ -69,10 +69,10 @@ layout_page_begin( 'main_page.php' );
 
 echo '<div class="space-20"></div>';
 
-$t_buttons = array(
-	array( 'news_menu_page.php' ),
-	array( 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit' ) ),
-);
+$t_buttons = [
+	[ 'news_menu_page.php' ],
+	[ 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit' ) ],
+];
 html_operation_confirmation( $t_buttons, CONFIRMATION_TYPE_SUCCESS );
 
 echo '<br />';

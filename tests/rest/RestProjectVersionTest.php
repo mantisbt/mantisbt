@@ -64,10 +64,10 @@ class RestProjectVersionTest extends RestBase {
 	 * @return void
 	 */
 	public function testProjectAddVersionWithNameAndDesc() {
-		$t_version_to_create = array(
+		$t_version_to_create = [
 			'name' => $this->versionName(),
 			'description' => 'Test version description',
-		);
+		];
 
 		$t_response = $this->builder()->post( $this->ver_base_url, $t_version_to_create )->send();
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
@@ -142,7 +142,7 @@ class RestProjectVersionTest extends RestBase {
 	 * @return void
 	 */
 	public function testProjectAddVersionForNonExistentProject() {
-		$t_version_to_create = array( 'name' => $this->versionName() );
+		$t_version_to_create = [ 'name' => $this->versionName() ];
 		$t_response = $this->builder()->post( '/projects/1000000/versions', $t_version_to_create )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
@@ -183,7 +183,7 @@ class RestProjectVersionTest extends RestBase {
 		$t_version = $this->createVersion();
 
 		// anonymous users can't update a version
-		$t_version_patch = array( 'name' => 'should fail' );
+		$t_version_patch = [ 'name' => 'should fail' ];
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->anonymous()->send();
 		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode(),
 			"Anonymous users can't update a version"
@@ -211,7 +211,7 @@ class RestProjectVersionTest extends RestBase {
 	public function testProjectAddVersionWithInvalidName( $p_name ) {
 		$t_version = $this->createVersion();
 
-		$t_version_patch = array( 'name' => $p_name );
+		$t_version_patch = [ 'name' => $p_name ];
 
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
@@ -223,7 +223,7 @@ class RestProjectVersionTest extends RestBase {
 	 * @return void
 	 */
 	public function testProjectUpdateDoesNotExists() {
-		$t_version_patch = array( 'description' => 'whatever' );
+		$t_version_patch = [ 'description' => 'whatever' ];
 		$t_response = $this->builder()->patch( $this->ver_base_url . '1000000', $t_version_patch )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 	}
@@ -236,7 +236,7 @@ class RestProjectVersionTest extends RestBase {
 	 */
 	public function testProjectUpdateVersionWithInvalidName( $p_name ) {
 		$t_version = $this->createVersion();
-		$t_version_patch = array( 'name' => $p_name );
+		$t_version_patch = [ 'name' => $p_name ];
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 	}
@@ -248,7 +248,7 @@ class RestProjectVersionTest extends RestBase {
 	 */
 	public function testProjectUpdateVersionWithDifferentCase() {
 		$t_version = $this->createVersion();
-		$t_version_patch = array( 'name' => strtoupper( $t_version['name'] ) );
+		$t_version_patch = [ 'name' => strtoupper( $t_version['name'] ) ];
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 	}
@@ -261,7 +261,7 @@ class RestProjectVersionTest extends RestBase {
 	public function testProjectUpdateVersion() {
 		$t_version = $this->createVersion();
 
-		$t_version_patch = array( 'description' => 'test description' );
+		$t_version_patch = [ 'description' => 'test description' ];
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 
@@ -273,7 +273,7 @@ class RestProjectVersionTest extends RestBase {
 		$this->assertEquals( $t_version['name'], $t_version_result['name'] );
 		$this->assertEquals( $t_version_patch['description'], $t_version_result['description'] );
 
-		$t_version_patch = array( 'obsolete' => true );
+		$t_version_patch = [ 'obsolete' => true ];
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_version_result = json_decode( $t_response->getBody(), true );
@@ -282,7 +282,7 @@ class RestProjectVersionTest extends RestBase {
 		$this->assertTrue( $t_version_result['obsolete'] );
 		$this->assertFalse( $t_version_result['released'] );
 
-		$t_version_patch = array( 'released' => true );
+		$t_version_patch = [ 'released' => true ];
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_version_result = json_decode( $t_response->getBody(), true );
@@ -292,7 +292,7 @@ class RestProjectVersionTest extends RestBase {
 		$this->assertTrue( $t_version_result['released'] );
 
 		$t_now = new DateTimeImmutable();
-		$t_version_patch = array( 'timestamp' => $t_now->format( 'c' ) );
+		$t_version_patch = [ 'timestamp' => $t_now->format( 'c' ) ];
 		$t_response = $this->builder()->patch( $this->ver_base_url . $t_version['id'], $t_version_patch )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_version_result = json_decode( $t_response->getBody(), true );
@@ -309,15 +309,15 @@ class RestProjectVersionTest extends RestBase {
 	 * @return array The test data
 	 */
 	public function providerVersionInvalidNames() {
-		return array(
-			'empty' =>array( '' ),
-			'blank' => array( '   ' ),
-			'newline' => array( "version\nwith\nnewlines" ),
-			'newline2' => array( "version\rwith\rnewlines" ),
-			'newline_blank' => array( "\n\r   " ),
-			'tabs' => array( "\t   " ),
-			'too_long' => array( str_repeat( "v", 65 ) )
-		);
+		return [
+			'empty' =>[ '' ],
+			'blank' => [ '   ' ],
+			'newline' => [ "version\nwith\nnewlines" ],
+			'newline2' => [ "version\rwith\rnewlines" ],
+			'newline_blank' => [ "\n\r   " ],
+			'tabs' => [ "\t   " ],
+			'too_long' => [ str_repeat( "v", 65 ) ]
+		];
 	}
 
 	/**
@@ -336,7 +336,7 @@ class RestProjectVersionTest extends RestBase {
 	 * @return array The version information
 	 */
 	private function createVersion() {
-		$t_version_to_create = array( 'name' => $this->versionName() );
+		$t_version_to_create = [ 'name' => $this->versionName() ];
 
 		$t_response = $this->builder()->post( $this->ver_base_url, $t_version_to_create )->send();
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );

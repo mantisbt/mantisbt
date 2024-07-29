@@ -106,7 +106,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				<div class="widget-main">
 					<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 					<?php
-						$t_filter = array();
+						$t_filter = [];
 						$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
 						$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
 						$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
@@ -133,7 +133,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
 
 		# Sort the array by user name
-		$t_sort_name = array();
+		$t_sort_name = [];
 		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
 			$t_sort_name[$t_key] = user_get_name_for_sorting_from_row( $t_item );
 		}

@@ -230,7 +230,7 @@ if( is_blank( $f_version ) ) {
 
 if( ALL_PROJECTS == $t_project_id ) {
 	$t_project_ids_to_check = user_get_all_accessible_projects( $t_user_id, ALL_PROJECTS );
-	$t_project_ids = array();
+	$t_project_ids = [];
 
 	foreach ( $t_project_ids_to_check as $t_project_id ) {
 		$t_changelog_view_access_level = config_get( 'view_changelog_threshold', null, null, $t_project_id );
@@ -294,11 +294,11 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_description = version_get_field( $t_version_id, 'description' );
 
 		$t_first_entry = true;
-		$t_issue_ids = array();
-		$t_issue_parents = array();
-		$t_issue_handlers = array();
+		$t_issue_ids = [];
+		$t_issue_parents = [];
+		$t_issue_handlers = [];
 
-		$t_result = db_query( $t_query, array( $t_project_id, $t_version ) );
+		$t_result = db_query( $t_query, [ $t_project_id, $t_version ] );
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			bug_cache_database_result( $t_row );
@@ -312,7 +312,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issue_parent = $t_row['source_bug_id'];
 			$t_parent_version = (string)$t_row['parent_version'];
 
-			if( !helper_call_custom_function( 'changelog_include_issue', array( $t_issue_id ) ) ) {
+			if( !helper_call_custom_function( 'changelog_include_issue', [ $t_issue_id ] ) ) {
 				continue;
 			}
 
@@ -352,12 +352,12 @@ foreach( $t_project_ids as $t_project_id ) {
 			continue;
 		}
 
-		$t_issue_set_ids = array();
-		$t_issue_set_levels = array();
+		$t_issue_set_ids = [];
+		$t_issue_set_levels = [];
 		$k = 0;
 
 		$t_cycle = false;
-		$t_cycle_ids = array();
+		$t_cycle_ids = [];
 
 		while( !empty( $t_issue_ids ) ) {
 			$t_issue_id = $t_issue_ids[$k];
@@ -389,7 +389,7 @@ foreach( $t_project_ids as $t_project_id ) {
 				array_splice( $t_issue_ids, $k, 1 );
 				array_splice( $t_issue_parents, $k, 1 );
 
-				$t_cycle_ids = array();
+				$t_cycle_ids = [];
 			} else {
 				$k++;
 			}
@@ -404,7 +404,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issue_set_level = $t_issue_set_levels[$j];
 
 			echo '<li>';
-			helper_call_custom_function( 'changelog_print_issue', array( $t_issue_set_id, $t_issue_set_level ) );
+			helper_call_custom_function( 'changelog_print_issue', [ $t_issue_set_id, $t_issue_set_level ] );
 			echo '</li>' . PHP_EOL;
 
 			$t_issues_found = true;

@@ -86,7 +86,7 @@ bugnote_set_text( $f_bugnote_id, $f_bugnote_text );
 bugnote_set_time_tracking( $f_bugnote_id, $f_time_tracking );
 
 # Plugin integration
-event_signal( 'EVENT_BUGNOTE_EDIT', array( $t_bug_id, $f_bugnote_id ) );
+event_signal( 'EVENT_BUGNOTE_EDIT', [ $t_bug_id, $f_bugnote_id ] );
 
 form_security_purge( 'bugnote_update' );
 

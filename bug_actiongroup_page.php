@@ -64,7 +64,7 @@ require_css( 'status_config.php' );
 auth_ensure_user_authenticated();
 
 $f_action = gpc_get_string( 'action', '' );
-$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
+$f_bug_arr = gpc_get_int_array( 'bug_arr', [] );
 
 # redirects to all_bug_page if nothing is selected
 if( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
@@ -75,8 +75,8 @@ if( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
 $t_project_id = ALL_PROJECTS;
 $t_multiple_projects = false;
 $t_user = auth_get_current_user_id();
-$t_projects = array();
-$t_view_bug_threshold = array();
+$t_projects = [];
+$t_view_bug_threshold = [];
 
 bug_cache_array_rows( $f_bug_arr );
 
@@ -111,7 +111,7 @@ foreach( $f_bug_arr as $t_key => $t_bug_id ) {
 }
 
 # Array of parameters to be used with plugin event
-$t_event_params = array();
+$t_event_params = [];
 $t_event_params['bug_ids'] = $f_bug_arr;
 $t_event_params['action'] = $f_action;
 $t_event_params['has_bugnote'] = false;
@@ -402,7 +402,7 @@ if( $t_multiple_projects ) {
 	}
 
 	# signal plugin event for additional fields
-	event_signal( 'EVENT_BUG_ACTIONGROUP_FORM', array( $t_event_params ) );
+	event_signal( 'EVENT_BUG_ACTIONGROUP_FORM', [ $t_event_params ] );
 
 	if( $t_bugnote ) {
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );

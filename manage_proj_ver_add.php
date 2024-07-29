@@ -73,14 +73,14 @@ foreach ( $t_versions as $t_version ) {
 		continue;
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => (int)$f_project_id
-		),
-		'payload' => array(
+		],
+		'payload' => [
 			'name' => $t_version
-		)
-	);
+		]
+	];
 
 	$t_command = new VersionAddCommand( $t_data );
 	$t_result = $t_command->execute();

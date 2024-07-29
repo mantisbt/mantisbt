@@ -63,7 +63,7 @@ function current_user_set( $p_user_id ) {
 	$g_cache_current_user_id = $t_user_id;
 
 	# Clear current user preferences cache
-	$g_cache_current_user_pref = array();
+	$g_cache_current_user_pref = [];
 
 	return $t_old_current;
 }

@@ -69,10 +69,10 @@ $g_show_errors = gpc_get_bool( 'show_errors', false );
  */
 function mode_url( $p_all, $p_errors ) {
 	return basename( __FILE__ ) . '?' . http_build_query(
-		array(
+		[
 			'show_all' => (int)$p_all,
 			'show_errors' => (int)$p_errors,
-		)
+		]
 	);
 }
 

@@ -281,10 +281,10 @@ layout_page_begin();
 		$t_show_custom_field = $t_require;
 
 		if( !$t_show_custom_field ) {
-			if( in_array( $t_custom_status_label, array( 'resolved', 'closed' ) ) && $t_display ) {
+			if( in_array( $t_custom_status_label, [ 'resolved', 'closed' ] ) && $t_display ) {
 				$t_show_custom_field = true;
 			} else {
-				$t_plugin_Event_result = event_signal( 'EVENT_UPDATE_BUG_SHOW_CUSTOM_FIELD', array( $t_bug, $t_id ) );
+				$t_plugin_Event_result = event_signal( 'EVENT_UPDATE_BUG_SHOW_CUSTOM_FIELD', [ $t_bug, $t_id ] );
 				foreach( $t_plugin_Event_result as $t_event_result ) {
 					if( in_array( true, $t_event_result ) ) {
 						$t_show_custom_field = true;
@@ -340,7 +340,7 @@ layout_page_begin();
 		}
 	}
 
-	event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', array( $f_bug_id, $f_new_status ) );
+	event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', [ $f_bug_id, $f_new_status ] );
 
 	if( $f_change_type == BUG_UPDATE_TYPE_REOPEN ) {
 ?>
@@ -401,7 +401,7 @@ layout_page_begin();
 <?php
 	}
 
-	event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
+	event_signal( 'EVENT_BUGNOTE_ADD_FORM', [ $f_bug_id ] );
 ?>
 
 </tbody>

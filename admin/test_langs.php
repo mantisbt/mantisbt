@@ -266,7 +266,7 @@ class LangCheckFile {
 		}
 
 		$t_line = 0;
-		$t_variables = array();
+		$t_variables = [];
 		static $s_basevariables;
 		$t_current_var = null;
 		$t_last_token = 0;

@@ -41,21 +41,21 @@ const HOST_HEADER_INJECTION_URL = 'https://owasp.org/www-project-web-security-te
 check_print_test_warn_row(
 	'"path" is defined in config_inc.php.',
 	!$g_defaulted_path,
-	array( false =>
+	[ false =>
 		'Leaving it empty is a security risk, as the path will be set based on '
 		. 'headers from the HTTP request, exposing your system to '
 		. '<a href="' . HOST_HEADER_INJECTION_URL . '">Host Header Injection attacks</a>.'
-	)
+	]
 );
 
-$t_path_config_names = array(
+$t_path_config_names = [
 	'absolute_path',
 	'core_path',
 	'class_path',
 	'library_path',
 	'config_path',
 	'language_path'
-);
+];
 
 # Handle file upload default path only if attachments stored on disk
 if( DISK == config_get_global( 'file_upload_method' ) ) {
@@ -63,9 +63,9 @@ if( DISK == config_get_global( 'file_upload_method' ) ) {
 }
 
 # Build paths for all configs
-$t_paths = array();
+$t_paths = [];
 foreach( $t_path_config_names as $t_path_config_name ) {
-	$t_new_path = array();
+	$t_new_path = [];
 	$t_new_path['config_value'] = config_get_global( $t_path_config_name );
 	$t_new_path['real_path'] = realpath( $t_new_path['config_value'] );
 	$t_paths[$t_path_config_name] = $t_new_path;
@@ -76,10 +76,10 @@ foreach( $t_paths as $t_path_config_name => $t_path ) {
 	check_print_test_row(
 		$t_path_config_name . ' configuration option has a trailing directory separator',
 		substr( $t_path['config_value'], -1, 1 ) == DIRECTORY_SEPARATOR,
-		array( false =>
+		[ false =>
 			'You must provide a trailing directory separator (' . DIRECTORY_SEPARATOR .
 			') to the end of \'' . htmlspecialchars( $t_path['config_value'] ) . '\'.'
-		)
+		]
 	);
 }
 
@@ -88,10 +88,10 @@ foreach( $t_paths as $t_path_config_name => $t_path ) {
 	check_print_test_row(
 		$t_path_config_name . ' configuration option points to a valid directory',
 		is_dir( $t_path['config_value'] ),
-		array( false =>
+		[ false =>
 			"The path '" . htmlspecialchars( $t_path['config_value'] ) .
 			"' is not a valid directory."
-		)
+		]
 	);
 }
 
@@ -100,10 +100,10 @@ foreach( $t_paths as $t_path_config_name => $t_path ) {
 	check_print_test_row(
 		$t_path_config_name . ' configuration option points to an accessible directory',
 		is_readable( $t_path['config_value'] ),
-		array( false =>
+		[ false =>
 			"The path '" . htmlspecialchars( $t_path['config_value'] ) .
 			"' is not accessible."
-		)
+		]
 	);
 }
 
@@ -114,9 +114,9 @@ if( DISK == config_get_global( 'file_upload_method' ) ) {
 	check_print_test_row(
 		$t_path_config_name . ' configuration option points to a writable directory',
 		is_writable( $t_path['config_value'] ),
-		array( false =>
+		[ false =>
 			"The path '" . htmlspecialchars( $t_path['config_value'] ) . "' must be writable."
-		)
+		]
 	);
 }
 
@@ -124,13 +124,13 @@ if( $g_failed_test ) {
 	return;
 }
 
-$t_moveable_paths = array(
+$t_moveable_paths = [
 	'core_path',
 	'class_path',
 	'library_path',
 	'config_path',
 	'language_path'
-);
+];
 
 if( $t_paths['absolute_path']['real_path'] !== false ) {
 	$t_absolute_path_regex_safe = preg_quote( $t_paths['absolute_path']['real_path'], '/' );
@@ -146,31 +146,31 @@ foreach( $t_moveable_paths as $t_moveable_path ) {
 	check_print_test_warn_row(
 		$t_moveable_path . ' configuration option is set to a path outside the web root',
 		!preg_match( '/^' . $t_absolute_path_regex_safe . '/', $t_moveable_real_path ),
-		array( false => 'For increased security it is recommended that you move the ' . $t_moveable_path . ' directory outside the web root.' )
+		[ false => 'For increased security it is recommended that you move the ' . $t_moveable_path . ' directory outside the web root.' ]
 	);
 }
 
-$t_removeable_directories = array(
+$t_removeable_directories = [
 	'doc',
-);
+];
 
 foreach( $t_removeable_directories as $t_removeable_directory ) {
 	check_print_test_warn_row(
 		'Directory <em><a href="' . htmlentities( config_get_global( 'short_path' ) ) . $t_removeable_directory . '">' . $t_removeable_directory . '</a></em> does not need to exist within the MantisBT root',
 		!is_dir( $t_paths['absolute_path']['config_value'] . $t_removeable_directory ),
-		array( false => 'The ' . $t_removeable_directory . ' directory within the MantisBT root should be removed as it is not needed for the live operation of MantisBT.' )
+		[ false => 'The ' . $t_removeable_directory . ' directory within the MantisBT root should be removed as it is not needed for the live operation of MantisBT.' ]
 	);
 }
 
-$t_developer_directories = array(
+$t_developer_directories = [
 	'docbook',
 	'tests',
-);
+];
 
 foreach( $t_developer_directories as $t_developer_directory ) {
 	check_print_test_warn_row(
 		'Directory <em><a href="' . htmlentities( config_get_global( 'short_path' ) ) . $t_developer_directory . '">' . $t_developer_directory . '</a></em> exists. These files are not included in MantisBT builds. For production use, please use a release build/snapshot, and not the developer git code.',
 		!is_dir( $t_paths['absolute_path']['config_value'] . $t_developer_directory ),
-		array( false => 'The ' . $t_developer_directory . ' directory within the MantisBT root is for development use and is not included in official releases of MantisBT.' )
+		[ false => 'The ' . $t_developer_directory . ' directory within the MantisBT root is for development use and is not included in official releases of MantisBT.' ]
 	);
 }

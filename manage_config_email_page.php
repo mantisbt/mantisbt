@@ -292,7 +292,7 @@ $t_actions = email_get_actions();
 
 # build a composite of the status flags, exploding the defaults
 $t_global_default_notify_flags = config_get( 'default_notify_flags', null, ALL_USERS, ALL_PROJECTS );
-$g_global_notify_flags = array();
+$g_global_notify_flags = [];
 foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
 		$g_global_notify_flags[$t_action][$t_flag] = $t_value;
@@ -301,7 +301,7 @@ foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
 $g_global_notify_flags = array_merge_recursive2( $g_global_notify_flags, config_get( 'notify_flags', null, ALL_USERS, ALL_PROJECTS ) );
 
 $t_file_default_notify_flags = config_get_global( 'default_notify_flags' );
-$g_file_notify_flags = array();
+$g_file_notify_flags = [];
 foreach ( $t_file_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
 		$g_file_notify_flags[$t_action][$t_flag] = $t_value;
@@ -310,7 +310,7 @@ foreach ( $t_file_default_notify_flags as $t_flag => $t_value ) {
 $g_file_notify_flags = array_merge_recursive2( $g_file_notify_flags, config_get_global( 'notify_flags' ) );
 
 $g_default_notify_flags = config_get( 'default_notify_flags' );
-$g_notify_flags = array();
+$g_notify_flags = [];
 foreach ( $g_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
 		$g_notify_flags[$t_action][$t_flag] = $t_value;

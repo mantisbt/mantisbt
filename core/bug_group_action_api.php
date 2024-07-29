@@ -207,12 +207,12 @@ function bug_group_action_process( $p_action, $p_bug_id ) {
  */
 function bug_group_action_get_commands( array $p_project_ids = null ) {
 	if( $p_project_ids === null || count( $p_project_ids ) == 0 ) {
-		$p_project_ids = array( ALL_PROJECTS );
+		$p_project_ids = [ ALL_PROJECTS ];
 	}
 
 	$t_user_id = auth_get_current_user_id();
 
-	$t_commands = array();
+	$t_commands = [];
 	version_cache_array_rows( $p_project_ids );
 	foreach( $p_project_ids as $t_project_id ) {
 

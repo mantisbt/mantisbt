@@ -32,7 +32,7 @@
 require_api( 'filter_constants_inc.php' );
 
 // doesn't contain 'custom_fields' and project_id
-$g_soap_api_to_filter_names = array(
+$g_soap_api_to_filter_names = [
 	'search' => FILTER_PROPERTY_SEARCH,
 	'category' => FILTER_PROPERTY_CATEGORY_ID,
 	'severity_id' => FILTER_PROPERTY_SEVERITY,
@@ -69,7 +69,7 @@ $g_soap_api_to_filter_names = array(
 	'last_update_end_year' => FILTER_PROPERTY_LAST_UPDATED_END_YEAR,
 	'tag_string' => FILTER_PROPERTY_TAG_STRING,
 	'tag_select' => FILTER_PROPERTY_TAG_SELECT,
-);
+];
 
 
 /**
@@ -91,7 +91,7 @@ function mc_filter_get( $p_username, $p_password, $p_project_id, $p_filter_id = 
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_result = array();
+	$t_result = [];
 	$t_filter_rows = filter_db_get_available_queries(
 		$p_project_id,
 		$t_user_id,
@@ -104,7 +104,7 @@ function mc_filter_get( $p_username, $p_password, $p_project_id, $p_filter_id = 
 		}
 
 		if( ApiObjectFactory::$soap ) {
-			$t_filter = array();
+			$t_filter = [];
 			$t_filter['id'] = (int)$t_filter_row['id'];
 			$t_filter['name'] = $t_filter_row['name'];
 			$t_filter['owner'] = mci_account_get_array_by_id( $t_filter_row['user_id'] );
@@ -214,10 +214,10 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if( $t_orig_page_number > $p_page_number ) {
-		return array();
+		return [];
 	}
 
-	$t_result = array();
+	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang, $p_fields );
 	}
@@ -252,7 +252,7 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	if( null === $t_filter ) {
 		return ApiObjectFactory::faultServerError( 'Invalid Filter' );
 	}
-	$t_result = array();
+	$t_result = [];
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
@@ -285,7 +285,7 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 		$p_filter_search = get_object_vars( $p_filter_search );
 	}
 
-	$t_project_id = array();
+	$t_project_id = [];
 	if( isset( $p_filter_search['project_id'] ) ) {
 		// check access right to all projects
 		foreach( $p_filter_search['project_id'] as $t_id ) {
@@ -304,10 +304,10 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 			return mci_fault_access_denied( $p_user_id );
 		}
 
-		$t_project_id = array( ALL_PROJECTS );
+		$t_project_id = [ ALL_PROJECTS ];
 	}
 
-	$t_filter = array( '_view_type' => FILTER_VIEW_TYPE_ADVANCED );
+	$t_filter = [ '_view_type' => FILTER_VIEW_TYPE_ADVANCED ];
 	$t_filter['project_id'] = $t_project_id;
 
 	// default fields
@@ -391,7 +391,7 @@ function mc_filter_search_issue_headers( $p_username, $p_password, $p_filter_sea
 
 	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
 
-	$t_result = array();
+	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = mci_issue_data_as_header_array( $t_issue_data );
 	}
@@ -421,7 +421,7 @@ function mc_filter_search_issues( $p_username, $p_password, $p_filter_search, $p
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
-	$t_result = array();
+	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
 	}
@@ -449,7 +449,7 @@ function mc_filter_search_issue_ids( $p_username, $p_password, $p_filter_search,
 
 	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
 
-	$t_result = array();
+	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = $t_issue_data->id;
 	}

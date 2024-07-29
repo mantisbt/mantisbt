@@ -48,7 +48,7 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page )
 		$p_per_page = 1;
 	}
 
-	$t_results = array();
+	$t_results = [];
 	$t_total_results = tag_count( '' );
 	$t_tags = tag_get_all( '', $p_per_page, $p_per_page *  ( $p_page_number - 1 ) );
 
@@ -64,10 +64,10 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page )
 		'/' . $t_total_results . ' tags (page #' . $p_page_number . ')'
 	);
 
-	return array(
+	return [
 		'results' => $t_results,
 		'total_results' => $t_total_results
-	);
+	];
 }
 
 /**
@@ -89,7 +89,7 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_valid_matches = array();
+	$t_valid_matches = [];
 
 	$p_tag = ApiObjectFactory::objectToArray( $p_tag );
 
@@ -145,12 +145,12 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
  * @return void|RestFault|SoapFault
  */
 function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
-	$t_tag_ids_to_attach = array();
-	$t_tag_ids_to_detach = array();
+	$t_tag_ids_to_attach = [];
+	$t_tag_ids_to_detach = [];
 
-	$t_submitted_tag_ids = array();
+	$t_submitted_tag_ids = [];
 	$t_attached_tags = tag_bug_get_attached( $p_issue_id );
-	$t_attached_tag_ids = array();
+	$t_attached_tag_ids = [];
 	foreach( $t_attached_tags as $t_attached_tag ) {
 		$t_attached_tag_ids[] = $t_attached_tag['id'];
 	}

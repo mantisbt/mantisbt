@@ -39,13 +39,13 @@ $g_app->group('/config', function() use ( $g_app ) {
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'option' => $p_request->getParam( 'option' ),
 			'project_id' => $p_request->getParam( 'project_id' ),
 			'user_id' => $p_request->getParam( 'user_id' ),
-		)
-	);
+		]
+	];
 
 	$t_command = new ConfigsGetCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -67,9 +67,9 @@ function rest_config_set( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
 	}
 
-	$t_data = array(
+	$t_data = [
 		'payload' => $t_payload
-	);
+	];
 
 	$t_command = new ConfigsSetCommand( $t_data );
 	$t_command->execute();

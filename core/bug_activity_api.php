@@ -52,7 +52,7 @@ define( 'ENTRY_TYPE_ATTACHMENT', 'attachment' );
  *               (combined notes and attachments).
  */
 function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
-	$t_result = array();
+	$t_result = [];
 
 	$t_user_id = auth_get_current_user_id();
 	$t_bug_readonly = bug_is_readonly( $p_bug_id );
@@ -60,7 +60,7 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 	if ( $p_include_attachments ) {
 		$t_attachments = file_get_visible_attachments( $p_bug_id );
 	} else {
-		$t_attachments = array();
+		$t_attachments = [];
 	}
 
 	$t_result['attachments'] = $t_attachments;
@@ -80,13 +80,13 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 		$t_can_change_view_state_all_bugnotes = $t_can_edit_all_bugnotes && access_has_bug_level( config_get( 'change_view_status_threshold' ), $p_bug_id );
 	}
 
-	$t_activities = array();
-	$t_bugnote_attachments = array();
+	$t_activities = [];
+	$t_bugnote_attachments = [];
 
 	foreach( $t_attachments as $t_attachment ) {
 		$t_bugnote_id = (int)$t_attachment['bugnote_id'];
 		if( $t_bugnote_id == 0 ) {
-			$t_activity = array(
+			$t_activity = [
 				'type' => ENTRY_TYPE_ATTACHMENT,
 				'timestamp' => $t_attachment['date_added'],
 				'modified' => false,
@@ -96,7 +96,7 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 				'user_id' => $t_attachment['user_id'],
 				'private' => false,
 				'style' => 'bugnote-note',
-				'attachments' => array( $t_attachment ) );
+				'attachments' => [ $t_attachment ] ];
 
 			$t_activity['can_edit'] = false;
 			$t_activity['can_delete'] = !$t_bug_readonly && $t_attachment['can_delete'];
@@ -105,7 +105,7 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 			$t_activities[] = $t_activity;
 		} else {
 			if( !isset( $t_bugnote_attachments[$t_bugnote_id] ) ) {
-				$t_bugnote_attachments[$t_bugnote_id] = array();
+				$t_bugnote_attachments[$t_bugnote_id] = [];
 			}
 
 			$t_bugnote_attachments[$t_bugnote_id][] = $t_attachment;
@@ -114,7 +114,7 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 
 	foreach( $t_bugnotes as $t_bugnote ) {
 		$t_bugnote_id = (int)$t_bugnote->id;
-		$t_activity = array(
+		$t_activity = [
 			'type' => ENTRY_TYPE_NOTE,
 			'timestamp' => $t_bugnote->date_submitted,
 			'last_modified' => $t_bugnote->last_modified,
@@ -124,8 +124,8 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 			'user_id' => $t_bugnote->reporter_id,
 			'private' => $t_bugnote->view_state != VS_PUBLIC,
 			'style' => 'bugnote-note',
-			'attachments' => array(),
-			'note' => $t_bugnote );
+			'attachments' => [],
+			'note' => $t_bugnote ];
 
 		if( isset( $t_bugnote_attachments[$t_bugnote_id] ) ) {
 			$t_activity['attachments'] = $t_bugnote_attachments[$t_bugnote_id];
@@ -243,7 +243,7 @@ function bug_activity_combine( $p_entries ) {
 		return $p_entries;
 	}
 
-	$t_combined_entries = array();
+	$t_combined_entries = [];
 	$t_last_entry = null;
 
 	foreach( $p_entries as $t_activity ) {
@@ -280,7 +280,7 @@ function bug_activity_bugnote_link_attachments( $p_bugnote_id ) {
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 	$t_activities = bug_activity_get_all( $t_bug_id, /* include_attachments */ true );
 
-	$t_files = array();
+	$t_files = [];
 	foreach( $t_activities['activities'] as $t_activity ) {
 		if( (int)$t_activity['id'] == (int)$p_bugnote_id ) {
 			foreach( $t_activity['attachments'] as $t_attachment ) {

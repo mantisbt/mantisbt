@@ -108,7 +108,7 @@ class ProjectUsersGetCommand extends Command {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[ $this->project_id ] );
 		}
 
 		# If user doesn't have access to project, return project doesn't exist
@@ -116,7 +116,7 @@ class ProjectUsersGetCommand extends Command {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[ $this->project_id ] );
 		}
 
 		if( $this->page < 1 ) {
@@ -138,8 +138,8 @@ class ProjectUsersGetCommand extends Command {
 			$this->access_level,
 			/* include_global_users */ true );
 
-		$t_display = array();
-		$t_sort = array();
+		$t_display = [];
+		$t_sort = [];
 
 		foreach( $t_users as $t_user ) {
 			$t_user_name = user_get_name_from_row( $t_user );
@@ -154,7 +154,7 @@ class ProjectUsersGetCommand extends Command {
 
 		$t_skip = ( $this->page - 1 ) * $this->page_size;
 		$t_taken = 0;
-		$t_users_result = array();
+		$t_users_result = [];
 
 		$t_lang = mci_get_user_lang( auth_get_current_user_id() );
 
@@ -176,7 +176,7 @@ class ProjectUsersGetCommand extends Command {
 			}
 		}
 
-		$t_result = array( 'users' => $t_users_result );
+		$t_result = [ 'users' => $t_users_result ];
 		return $t_result;
 	}
 }

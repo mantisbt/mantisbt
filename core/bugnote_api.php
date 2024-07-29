@@ -66,10 +66,10 @@ use Mantis\Exceptions\ClientException;
 
 # Cache of bugnotes arrays related to a bug, indexed by bug_id.
 # Each item is an array of BugnoteData objects
-$g_cache_bugnotes_by_bug_id = array();
+$g_cache_bugnotes_by_bug_id = [];
 
 # Cache of BugnoteData objects, indexed by bugnote id
-$g_cache_bugnotes_by_id = array();
+$g_cache_bugnotes_by_id = [];
 
 /**
  * Bugnote Data Structure Definition
@@ -159,7 +159,7 @@ function bugnote_exists( $p_bugnote_id ) {
 				FROM {bugnote} b
 				LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
 				WHERE b.id = ' . db_param();
-	$t_result = db_query( $t_query, array( $c_bugnote_id ) );
+	$t_result = db_query( $t_query, [ $c_bugnote_id ] );
 	$t_row = db_fetch_array( $t_result );
 
 	if( $t_row === false ) {
@@ -198,7 +198,7 @@ function bugnote_ensure_exists( $p_bugnote_id ) {
 		throw new ClientException(
 			"Issue note #$p_bugnote_id not found",
 			ERROR_BUGNOTE_NOT_FOUND,
-			array( $p_bugnote_id ) );
+			[ $p_bugnote_id ] );
 	}
 }
 
@@ -257,7 +257,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 				throw new ClientException(
 					'Time tracking not allowed with empty note',
 					ERROR_EMPTY_FIELD,
-					array( lang_get( 'bugnote' ) ) );
+					[ lang_get( 'bugnote' ) ] );
 			}
 
 			$c_type = TIME_TRACKING;
@@ -273,7 +273,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	# insert bugnote text
 	db_param_push();
 	$t_query = 'INSERT INTO {bugnote_text} ( note ) VALUES ( ' . db_param() . ' )';
-	db_query( $t_query, array( $t_bugnote_text ) );
+	db_query( $t_query, [ $t_bugnote_text ] );
 
 	# retrieve bugnote text id number
 	$t_bugnote_text_id = db_insert_id( db_get_table( 'bugnote_text' ) );
@@ -298,10 +298,10 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 		. db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
 		. db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
 		. db_param() . ' )';
-	$t_params = array(
+	$t_params = [
 		$c_bug_id, $p_user_id, $t_bugnote_text_id, $t_view_state,
 		$c_date_submitted, $c_last_modified, $c_type, $p_attr,
-		$c_time_tracking );
+		$c_time_tracking ];
 	db_query( $t_query, $t_params );
 
 	# get bugnote id
@@ -319,7 +319,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 
 	# Event integration
 	if( $p_trigger_event ) {
-		event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id, array() ) );
+		event_signal( 'EVENT_BUGNOTE_ADD', [ $p_bug_id, $t_bugnote_id, [] ] );
 	}
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
@@ -374,12 +374,12 @@ function bugnote_delete( $p_bugnote_id ) {
 	# Remove the bugnote
 	db_param_push();
 	$t_query = 'DELETE FROM {bugnote} WHERE id=' . db_param();
-	db_query( $t_query, array( $p_bugnote_id ) );
+	db_query( $t_query, [ $p_bugnote_id ] );
 
 	# Remove the bugnote text
 	db_param_push();
 	$t_query = 'DELETE FROM {bugnote_text} WHERE id=' . db_param();
-	db_query( $t_query, array( $t_bugnote_text_id ) );
+	db_query( $t_query, [ $t_bugnote_text_id ] );
 
 	# log deletion of bug
 	history_log_event_special( $t_bug_id, BUGNOTE_DELETED, bugnote_format_id( $p_bugnote_id ) );
@@ -388,7 +388,7 @@ function bugnote_delete( $p_bugnote_id ) {
 	file_delete_bugnote_attachments( $t_bug_id, $p_bugnote_id );
 
 	# Event integration
-	event_signal( 'EVENT_BUGNOTE_DELETED', array( $t_bug_id, $p_bugnote_id ) );
+	event_signal( 'EVENT_BUGNOTE_DELETED', [ $t_bug_id, $p_bugnote_id ] );
 
 	return true;
 }
@@ -405,20 +405,20 @@ function bugnote_delete_all( $p_bug_id ) {
 	# Delete the bugnote text items
 	db_param_push();
 	$t_query = 'SELECT bugnote_text_id FROM {bugnote} WHERE bug_id=' . db_param();
-	$t_result = db_query( $t_query, array( (int)$p_bug_id ) );
+	$t_result = db_query( $t_query, [ (int)$p_bug_id ] );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_bugnote_text_id = $t_row['bugnote_text_id'];
 
 		# Delete the corresponding bugnote texts
 		db_param_push();
 		$t_query = 'DELETE FROM {bugnote_text} WHERE id=' . db_param();
-		db_query( $t_query, array( $t_bugnote_text_id ) );
+		db_query( $t_query, [ $t_bugnote_text_id ] );
 	}
 
 	# Delete the corresponding bugnotes
 	db_param_push();
 	$t_query = 'DELETE FROM {bugnote} WHERE bug_id=' . db_param();
-	db_query( $t_query, array( (int)$p_bug_id ) );
+	db_query( $t_query, [ (int)$p_bug_id ] );
 }
 
 /**
@@ -437,7 +437,7 @@ function bugnote_get_text( $p_bugnote_id ) {
 	# grab the bugnote text
 	db_param_push();
 	$t_query = 'SELECT note FROM {bugnote_text} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $t_bugnote_text_id ) );
+	$t_result = db_query( $t_query, [ $t_bugnote_text_id ] );
 
 	return db_result( $t_result );
 }
@@ -469,7 +469,7 @@ function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
 function bugnote_get_latest_id( $p_bug_id ) {
 	db_param_push();
 	$t_query = 'SELECT id FROM {bugnote} WHERE bug_id=' . db_param() . ' ORDER by last_modified DESC';
-	$t_result = db_query( $t_query, array( (int)$p_bug_id ), 1 );
+	$t_result = db_query( $t_query, [ (int)$p_bug_id ], 1 );
 
 	return (int)db_result( $t_result );
 }
@@ -505,7 +505,7 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 	$t_private_bugnote_visible = access_compare_level( $t_user_access_level, config_get( 'private_bugnote_threshold' ) );
 	$t_time_tracking_visible = access_compare_level( $t_user_access_level, config_get( 'time_tracking_view_threshold' ) );
 
-	$t_bugnotes = array();
+	$t_bugnotes = [];
 	$t_bugnote_count = count( $t_all_bugnotes );
 	$t_bugnote_limit = $p_user_bugnote_limit > 0 ? $p_user_bugnote_limit : $t_bugnote_count;
 	$t_bugnotes_found = 0;
@@ -640,10 +640,10 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 			          	LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
 						WHERE b.bug_id=' . db_param() . '
 						ORDER BY b.date_submitted ASC, b.id ASC';
-		$t_bugnotes = array();
+		$t_bugnotes = [];
 
 		# BUILD bugnotes array
-		$t_result = db_query( $t_query, array( $p_bug_id ) );
+		$t_result = db_query( $t_query, [ $p_bug_id ] );
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_bugnote = bugnote_row_to_object( $t_row );
@@ -696,7 +696,7 @@ function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
 
 	db_param_push();
 	$t_query = 'UPDATE {bugnote} SET time_tracking = ' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( $c_bugnote_time_tracking, $p_bugnote_id ) );
+	db_query( $t_query, [ $c_bugnote_time_tracking, $p_bugnote_id ] );
 }
 
 /**
@@ -711,7 +711,7 @@ function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
 function bugnote_date_update( $p_bugnote_id ) {
 	db_param_push();
 	$t_query = 'UPDATE {bugnote} SET last_modified=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( db_now(), $p_bugnote_id ) );
+	db_query( $t_query, [ db_now(), $p_bugnote_id ] );
 }
 
 /**
@@ -747,7 +747,7 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 
 	db_param_push();
 	$t_query = 'UPDATE {bugnote_text} SET note=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( $p_bugnote_text, $t_bugnote_text_id ) );
+	db_query( $t_query, [ $p_bugnote_text, $t_bugnote_text_id ] );
 
 	# updated the last_updated date
 	bugnote_date_update( $p_bugnote_id );
@@ -785,7 +785,7 @@ function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
 
 	db_param_push();
 	$t_query = 'UPDATE {bugnote} SET view_state=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( $t_view_state, $p_bugnote_id ) );
+	db_query( $t_query, [ $t_view_state, $p_bugnote_id ] );
 
 	history_log_event_special( $t_bug_id, BUGNOTE_STATE_CHANGED, $t_view_state, bugnote_format_id( $p_bugnote_id ) );
 
@@ -833,7 +833,7 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 		$t_to_where = '';
 	}
 
-	$t_results = array();
+	$t_results = [];
 
 	db_param_push();
 	$t_query = 'SELECT u.id AS user_id, username, realname, SUM(time_tracking) AS sum_time_tracking
@@ -844,7 +844,7 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 		. $t_from_where
 		. $t_to_where . ' 
 				GROUP BY u.id, u.username, u.realname';
-	$t_result = db_query( $t_query, array( $p_bug_id ) );
+	$t_result = db_query( $t_query, [ $p_bug_id ] );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_row['name'] = user_get_name_from_row( $t_row );
@@ -867,8 +867,8 @@ function bugnote_clear_cache( $p_bugnote_id = null ) {
 	global $g_cache_bugnotes_by_id, $g_cache_bugnotes_by_bug_id;
 
 	if( null === $p_bugnote_id ) {
-		$g_cache_bugnotes_by_id = array();
-		$g_cache_bugnotes_by_bug_id = array();
+		$g_cache_bugnotes_by_id = [];
+		$g_cache_bugnotes_by_bug_id = [];
 	} else {
 		$p_bugnote_id = (int)$p_bugnote_id;
 		if( isset( $g_cache_bugnotes_by_id[$p_bugnote_id] ) ) {
@@ -896,8 +896,8 @@ function bugnote_clear_bug_cache( $p_bug_id = null ) {
 	global $g_cache_bugnotes_by_bug_id, $g_cache_bugnotes_by_id;
 
 	if( null === $p_bug_id ) {
-		$g_cache_bugnotes_by_bug_id = array();
-		$g_cache_bugnotes_by_id = array();
+		$g_cache_bugnotes_by_bug_id = [];
+		$g_cache_bugnotes_by_id = [];
 	} else {
 		if( isset( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] ) ) {
 			foreach( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] as $t_note_obj ) {

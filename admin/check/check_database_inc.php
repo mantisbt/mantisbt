@@ -85,27 +85,27 @@ check_print_info_row(
 check_print_test_row(
 	'Database type is supported by the version of PHP installed on this server',
 	db_check_database_support( $t_database_type ),
-	array( false => 'The current database type is set to ' . htmlentities( $t_database_type )
-		. '. The version of PHP installed on this server does not have support for this database type.' )
+	[ false => 'The current database type is set to ' . htmlentities( $t_database_type )
+		. '. The version of PHP installed on this server does not have support for this database type.' ]
 );
 
 if( db_is_mysql() ) {
 	check_print_test_warn_row(
 		'PHP support for legacy MySQL driver',
 		'mysql' != $t_database_type,
-		array( false => "'mysql' driver is deprecated as of PHP 5.5.0 and has been removed as of PHP 7.0.0, please use 'mysqli' instead" )
+		[ false => "'mysql' driver is deprecated as of PHP 5.5.0 and has been removed as of PHP 7.0.0, please use 'mysqli' instead" ]
 	);
 
 	check_print_test_row( 'PHP support for MySQL Native Driver',
 		function_exists( 'mysqli_stmt_get_result' ),
-		array( false => 'Check that the MySQL Native Driver (mysqlnd) has been compiled into your server.' )
+		[ false => 'Check that the MySQL Native Driver (mysqlnd) has been compiled into your server.' ]
 	);
 
 	check_print_test_warn_row(
 		'mysqli.allow_local_infile php.ini directive is set to 0',
 		!ini_get_bool( 'mysqli.allow_local_infile' ),
-		array( false => 'mysqli.allow_local_infile should be disabled to prevent remote attackers to access local files '
-			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=23173">#23173</a>).' )
+		[ false => 'mysqli.allow_local_infile should be disabled to prevent remote attackers to access local files '
+			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=23173">#23173</a>).' ]
 	);
 
 }
@@ -115,7 +115,7 @@ if( db_is_mssql() ) {
 	check_print_test_warn_row(
 		'PHP support for Microsoft SQL Server driver',
 		'mssql' != $t_database_type,
-		array( false => "'mssql' driver is no longer supported in PHP >= 5.3, please use 'mssqlnative' instead" )
+		[ false => "'mssql' driver is no longer supported in PHP >= 5.3, please use 'mssqlnative' instead" ]
 	);
 
 	$t_mssql_textsize = ini_get_number( 'mssql.textsize' );
@@ -127,9 +127,9 @@ if( db_is_mssql() ) {
 	check_print_test_warn_row(
 		'mssql.textsize php.ini directive is set to -1',
 		$t_mssql_textsize == -1,
-		array( false => 'The value of the mssql.textsize directive is currently '
+		[ false => 'The value of the mssql.textsize directive is currently '
 			. htmlentities( $t_mssql_textsize )
-			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' )
+			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' ]
 	);
 
 	$t_mssql_textlimit = ini_get_number( 'mssql.textlimit' );
@@ -141,9 +141,9 @@ if( db_is_mssql() ) {
 	check_print_test_warn_row(
 		'mssql.textlimit php.ini directive is set to -1',
 		$t_mssql_textlimit == -1,
-		array( false => 'The value of the mssql.textlimit directive is currently '
+		[ false => 'The value of the mssql.textlimit directive is currently '
 			. htmlentities( $t_mssql_textlimit )
-			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' )
+			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' ]
 	);
 }
 
@@ -211,11 +211,11 @@ if( db_is_mysql() ) {
 check_print_test_row(
 	'Minimum database version required for MantisBT',
 	version_compare( $t_db_version, $t_db_min_version, '>=' ),
-	array(
+	[
 		true => 'You are using version ' . htmlentities( $t_db_version ) . '.',
 		false => 'The database version you are using is ' . htmlentities( $t_db_version )
 			. '. The minimum requirement for MantisBT on your database platform is ' . $t_db_min_version . '.'
-	)
+	]
 );
 
 $t_date_format = config_get( 'short_date_format' );
@@ -225,21 +225,21 @@ if( db_is_mysql() ) {
 	# The list below was built based on information found in the FAQ [1]
 	# [1]: https://dev.mysql.com/doc/refman/8.4/en/faqs-general.html
 	# @TODO consider using https://endoflife.date/mysql to retrieve this data
-	$t_versions = array(
+	$t_versions = [
 		# Series => Type, Version when GA status was achieved, GA date
-		'5.0' => array( 'GA', '5.0.15', '2005-10-19' ),
-		'5.1' => array( 'GA', '5.1.30', '2008-11-14' ),
-		'5.4' => array( 'Discontinued' ),
-		'5.5' => array( 'GA', '5.5.8', '2010-12-03' ),
-		'5.6' => array( 'GA', '5.6.10', '2013-02-05' ),
-		'5.7' => array( 'GA', '5.7.9', '2015-10-21' ),
-		'6.0' => array( 'Discontinued' ),
-		'8.0' => array( 'GA', '8.0.11', '2018-04-19' ),
-		'8.1' => array( 'Innovation', '8.1.0', '2023-07-18' ),
-		'8.2' => array( 'Innovation', '8.2.0', '2023-10-25' ),
-		'8.3' => array( 'Innovation', '8.3.0', '2024-01-16' ),
-		'8.4' => array( 'LTS', '8.4.0', '2024-04-30' ),
-	);
+		'5.0' => [ 'GA', '5.0.15', '2005-10-19' ],
+		'5.1' => [ 'GA', '5.1.30', '2008-11-14' ],
+		'5.4' => [ 'Discontinued' ],
+		'5.5' => [ 'GA', '5.5.8', '2010-12-03' ],
+		'5.6' => [ 'GA', '5.6.10', '2013-02-05' ],
+		'5.7' => [ 'GA', '5.7.9', '2015-10-21' ],
+		'6.0' => [ 'Discontinued' ],
+		'8.0' => [ 'GA', '8.0.11', '2018-04-19' ],
+		'8.1' => [ 'Innovation', '8.1.0', '2023-07-18' ],
+		'8.2' => [ 'Innovation', '8.2.0', '2023-10-25' ],
+		'8.3' => [ 'Innovation', '8.3.0', '2024-01-16' ],
+		'8.4' => [ 'LTS', '8.4.0', '2024-04-30' ],
+	];
 
 	$t_support_url = 'https://www.mysql.com/support/supportedplatforms/';
 	$t_supported_release = '<a href="' . $t_support_url . '">supported release</a>';
@@ -260,11 +260,11 @@ if( db_is_mysql() ) {
 		check_print_test_warn_row(
 			'MySQL Lifecycle and Release Support data availability',
 			false,
-			array(
+			[
 				false => 'Release information for MySQL ' . $t_db_major_version
 					. ' series is not available, unable to perform the lifecycle checks.'
 					. ' Please <a href="' . $t_report_bug_url . '">report the issue</a>.'
-			) );
+			] );
 	} else {
 		$t_version = $t_versions[$t_db_major_version];
 		$t_version_type = $t_version[0];
@@ -307,11 +307,11 @@ if( db_is_mysql() ) {
 		check_print_test_row(
 			'MySQL version is a General Availability (GA) release',
 			$t_mysql_ga_release,
-			array(
+			[
 				false => "MySQL $t_db_version is a development or pre-GA release, which "
 					. ( $t_version_type == 'Discontinued' ? 'has been discontinued and ' : '' )
 					. "is not recommended for Production use. You should upgrade to a $t_supported_release."
-			)
+			]
 		);
 
 		# Has not reached End Of Life
@@ -320,12 +320,12 @@ if( db_is_mysql() ) {
 		check_print_test_warn_row(
 			'MySQL version is supported',
 			$t_end_of_life,
-			array(
+			[
 				true => 'Support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_eol_date_formatted,
 				false => 'Support for MySQL ' . htmlspecialchars( $t_db_version )
 					. " ended on $t_eol_date_formatted. You should upgrade to a $t_supported_release,"
 					. ' as bugs and security flaws discovered in this version will not be fixed.'
-			)
+			]
 		);
 
 		if( $t_end_of_life && $t_date_end_active_support < $t_date_end_of_life ) {
@@ -334,21 +334,21 @@ if( db_is_mysql() ) {
 			check_print_test_warn_row(
 				'MySQL version is within the active support period',
 				$t_date_end_active_support > date_create_immutable(),
-				array(
+				[
 					true => 'Active support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_eas_date_formatted,
 					false => 'Active support for MySQL ' . htmlspecialchars( $t_db_version )
 						. ' ended on ' . $t_eas_date_formatted
 						. '. The release is in its Extended support period, which will end on ' . $t_eol_date_formatted
 						. ". You should upgrade to an actively $t_supported_release,"
 						. '  to benefit from bug fixes and security patches.'
-				) );
+				] );
 		}
 	}
 } else if( db_is_pgsql() ) {
 	# PostgreSQL support checking
 
 	# Version support information
-	$t_versions = array(
+	$t_versions = [
 		# Version => Final release (EOL) date
 		'15'  => '2027-11-11',
 		'14'  => '2026-11-12',
@@ -363,7 +363,7 @@ if( db_is_mysql() ) {
 		'9.2' => '2017-11-09',
 		'9.1' => '2016-10-27',
 		'9.0' => '2015-10-15',
-	);
+	];
 	$t_support_url = 'https://www.postgresql.org/support/versioning/';
 
 	# Determine EOL date
@@ -375,32 +375,32 @@ if( db_is_mysql() ) {
 			# Major version is higher than the most recent in array - assume we're supported
 			$t_date_eol = new DateTime;
 			$t_date_eol = $t_date_eol->add( new DateInterval( 'P1Y' ) )->format( $t_date_format );
-			$t_assume = array( 'more recent', $t_version, 'supported' );
+			$t_assume = [ 'more recent', $t_version, 'supported' ];
 		} else {
 			# Assume EOL
 			$t_date_eol = null;
 			end( $t_versions );
-			$t_assume = array( 'older', key( $t_versions ), 'at end of life' );
+			$t_assume = [ 'older', key( $t_versions ), 'at end of life' ];
 		}
 
 		check_print_test_warn_row(
 			'PostgreSQL version support information availability',
 			false,
-			array(
+			[
 				false => 'Release information for version ' . $t_db_major_version . ' is not available. '
 					. vsprintf( 'Since it is %s than %s, we assume it is %s. ', $t_assume )
 					. 'Please refer to the <a href="' . $t_support_url
 					. '">PostgreSQL Versioning Policy</a> to make sure.'
-			) );
+			] );
 	}
 
 	check_print_test_row(
 		'Version of PostgreSQL is <a href="' . $t_support_url . '">supported</a>',
 		date_create( $t_date_eol ) > date_create( 'now' ),
-		array(
+		[
 			false => 'PostgreSQL version ' . htmlentities( $t_db_version )
 				. ' is no longer supported and should not be used, as security flaws discovered in this version will not be fixed.'
-		) );
+		] );
 }
 
 $t_table_prefix = config_get_global( 'db_table_prefix' );
@@ -424,9 +424,9 @@ check_print_info_row(
 check_print_test_warn_row(
 	'Plugin table prefix should not be empty',
 	!empty( $t_table_plugin_prefix ),
-	array(
+	[
 		false => 'Defining $g_db_table_plugin_prefix allows easy identification of plugin-specific vs MantisBT core tables',
-	)
+	]
 );
 
 if( db_is_mysql() ) {
@@ -435,13 +435,13 @@ if( db_is_mysql() ) {
 	$t_query = 'SELECT default_collation_name
 		FROM information_schema.schemata
 		WHERE schema_name = ' . db_param();
-	$t_collation = db_result( db_query( $t_query, array( $g_database_name ) ) );
+	$t_collation = db_result( db_query( $t_query, [ $g_database_name ] ) );
 	check_print_test_row(
 		'Database default collation is UTF-8',
 		check_is_collation_utf8( $t_collation ),
-		array( false => 'Database is using '
+		[ false => 'Database is using '
 			. htmlentities( $t_collation )
-			. ' collation where UTF-8 collation is required.' )
+			. ' collation where UTF-8 collation is required.' ]
 	);
 
 	$t_table_regex = '/^'
@@ -456,9 +456,9 @@ if( db_is_mysql() ) {
 			check_print_test_row(
 				'Table <em>' . htmlentities( $t_row['name'] ) . '</em> is using UTF-8 collation',
 				check_is_collation_utf8( $t_row['collation'] ),
-				array( false => 'Table ' . htmlentities( $t_row['name'] )
+				[ false => 'Table ' . htmlentities( $t_row['name'] )
 					. ' is using ' . htmlentities( $t_row['collation'] )
-					. ' collation where UTF-8 collation is required.' )
+					. ' collation where UTF-8 collation is required.' ]
 			);
 		}
 	}
@@ -476,11 +476,11 @@ if( db_is_mysql() ) {
 					. '</em> on table <em>' . htmlentities( $t_table )
 					. '</em> is using UTF-8 collation',
 					check_is_collation_utf8( $t_row['collation'] ),
-					array( false => 'Text column ' . htmlentities( $t_row['field'] )
+					[ false => 'Text column ' . htmlentities( $t_row['field'] )
 						. ' of type ' . $t_row['type']
 						. ' on table ' . htmlentities( $t_table )
 						. ' is using ' . htmlentities( $t_row['collation'] )
-						. ' collation where UTF-8 collation is required.' )
+						. ' collation where UTF-8 collation is required.' ]
 				);
 			}
 		}

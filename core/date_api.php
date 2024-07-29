@@ -44,7 +44,7 @@ require_api( 'lang_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-$g_cache_timezone = array();
+$g_cache_timezone = [];
 
 /**
  * checks if date is null
@@ -95,7 +95,7 @@ function date_strtotime( $p_date_string ) {
 			throw new ClientException(
 				"Invalid date format '$p_date_string'",
 				ERROR_INVALID_DATE_FORMAT,
-				array( $p_date_string ),
+				[ $p_date_string ],
 				$e
 			);
 		}
@@ -267,7 +267,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 	if( $p_date != 0 ) {
 		$t_date = preg_split( '/-/', date( 'Y-m-d', $p_date ), -1, PREG_SPLIT_NO_EMPTY );
 	} else {
-		$t_date = array( 0, 0, 0, );
+		$t_date = [ 0, 0, 0, ];
 	}
 
 	$t_disable = '';

@@ -122,9 +122,9 @@ $t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_i
 	AND ' . $t_project_clause . '
 	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC';
 
-$t_result = db_query( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
+$t_result = db_query( $t_query, $t_show_all ? [ $t_user ] : [ $t_user , $t_resolved ] );
 
-$t_sponsors = array();
+$t_sponsors = [];
 while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_sponsors[] = $t_row;
 }
@@ -249,9 +249,9 @@ $t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_i
 	AND ' . $t_project_clause . '
 	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC';
 
-$t_result = db_query( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
+$t_result = db_query( $t_query, $t_show_all ? [ $t_user ] : [ $t_user , $t_resolved ] );
 
-$t_sponsors = array();
+$t_sponsors = [];
 while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_sponsors[] = $t_row;
 }
@@ -295,7 +295,7 @@ if( $t_sponsor_count === 0 ) {
 		<td class="form-title"><?php echo lang_get( 'status' ) ?></td>
 	</tr>
 <?php
-	$t_bug_list = array();
+	$t_bug_list = [];
 	$t_total_owing = 0;
 	$t_total_paid = 0;
 	for( $i = 0; $i < $t_sponsor_count; ++$i ) {
@@ -381,7 +381,7 @@ if( $t_sponsor_count === 0 ) {
 <?php
 html_button( 'account_sponsor_page.php',
 	lang_get( ( $t_show_all ? 'sponsor_hide' : 'sponsor_show' ) ),
-	array( 'show_all' => ( $t_show_all ? 0 : 1 ) ) );
+	[ 'show_all' => ( $t_show_all ? 0 : 1 ) ] );
 ?>
 </div>
 

@@ -96,7 +96,7 @@ class UserCreateCommand extends Command {
 		$this->access_level = access_parse_array(
 			$this->payload(
 				'access_level',
-				array( 'id' => config_get_global( 'default_new_account_access_level' ) ) ) );
+				[ 'id' => config_get_global( 'default_new_account_access_level' ) ] ) );
 
 		# Don't allow the creation of accounts with access levels higher than that of
 		# the user creating the account.
@@ -154,6 +154,6 @@ class UserCreateCommand extends Command {
 		# set language back to user language
 		lang_pop();
 
-		return array( 'id' => user_get_id_by_name( $this->username ) );
+		return [ 'id' => user_get_id_by_name( $this->username ) ];
 	}
 }

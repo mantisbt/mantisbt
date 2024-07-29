@@ -68,7 +68,7 @@ class UserResetPasswordCommand extends Command {
 		# Make sure the account exists
 		$t_user = user_get_row( $this->user_id_reset );
 		if( $t_user === false ) {
-			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
+			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, [ 'id' ] );
 		}
 
 		# Mantis can't reset protected accounts' passwords, but if the
@@ -110,12 +110,12 @@ class UserResetPasswordCommand extends Command {
 		if( auth_can_set_password( $this->user_id_reset )
 			&& user_reset_password( $this->user_id_reset )
 		) {
-			return array( 'action' => self::RESULT_RESET );
+			return [ 'action' => self::RESULT_RESET ];
 		}
 
 		# Password can't be changed, unlock the account
 		# the account (i.e. reset failed login count)
 		user_reset_failed_login_count_to_zero( $this->user_id_reset );
-		return array( 'action' =>  self::RESULT_UNLOCK );
+		return [ 'action' =>  self::RESULT_UNLOCK ];
 	}
 }

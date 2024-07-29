@@ -59,7 +59,7 @@ user_ensure_exists( $f_user_id );
 $t_user = user_get_row( $f_user_id );
 
 # Make sure user is allowed to perform operation on all selected projects
-$t_project_names = array();
+$t_project_names = [];
 foreach( $f_projects as $t_project_id ) {
 	access_ensure_project_level( config_get( 'project_user_threshold' ), $t_project_id );
 	access_ensure_project_level( $t_user['access_level'], $t_project_id );

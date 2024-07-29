@@ -126,7 +126,7 @@ class ConfigParserTest extends MantisCoreBase {
 
 		$t_parser = new ConfigParser( 'array(); 2' );
 		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
-		$this->assertEquals( array(), $t_result);
+		$this->assertEquals( [], $t_result);
 	}
 
 	/**
@@ -202,37 +202,37 @@ class ConfigParserTest extends MantisCoreBase {
 	 * @return array
 	 */
 	public function providerScalarTypes() {
-		return array(
-			'Integer Zero' => array( '0', IsType::TYPE_INT ),
-			'Integer One' => array( '1', IsType::TYPE_INT ),
-			'Integer with whitespace' => array( " 1\n", IsType::TYPE_INT ),
-			'Integer negative' => array( '-1', IsType::TYPE_INT ),
-			'Integer positive' => array( '+1', IsType::TYPE_INT ),
+		return [
+			'Integer Zero' => [ '0', IsType::TYPE_INT ],
+			'Integer One' => [ '1', IsType::TYPE_INT ],
+			'Integer with whitespace' => [ " 1\n", IsType::TYPE_INT ],
+			'Integer negative' => [ '-1', IsType::TYPE_INT ],
+			'Integer positive' => [ '+1', IsType::TYPE_INT ],
 
-			'Float' => array( '1.1', IsType::TYPE_FLOAT ),
-			'Float negative' => array( '-1.1', IsType::TYPE_FLOAT ),
-			'Float positive' => array( '+1.1', IsType::TYPE_FLOAT ),
-			'Float scientific' => array( '1.2e3', IsType::TYPE_FLOAT ),
+			'Float' => [ '1.1', IsType::TYPE_FLOAT ],
+			'Float negative' => [ '-1.1', IsType::TYPE_FLOAT ],
+			'Float positive' => [ '+1.1', IsType::TYPE_FLOAT ],
+			'Float scientific' => [ '1.2e3', IsType::TYPE_FLOAT ],
 
-			'String empty double-quote' => array( '""', IsType::TYPE_STRING ),
-			'String empty single-quote' => array( "''", IsType::TYPE_STRING ),
-			'String whitespace' => array( '" "', IsType::TYPE_STRING ),
-			'String number double-quote' => array( '"1"', IsType::TYPE_STRING ),
-			'String number single-quote' => array( "'1'", IsType::TYPE_STRING ),
+			'String empty double-quote' => [ '""', IsType::TYPE_STRING ],
+			'String empty single-quote' => [ "''", IsType::TYPE_STRING ],
+			'String whitespace' => [ '" "', IsType::TYPE_STRING ],
+			'String number double-quote' => [ '"1"', IsType::TYPE_STRING ],
+			'String number single-quote' => [ "'1'", IsType::TYPE_STRING ],
 
-			'Built-in string literal null' => array( 'null', IsType::TYPE_NULL ),
-			'Built-in string literal false' => array( 'false', IsType::TYPE_BOOL ),
-			'Built-in string literal true' => array( 'true', IsType::TYPE_BOOL ),
+			'Built-in string literal null' => [ 'null', IsType::TYPE_NULL ],
+			'Built-in string literal false' => [ 'false', IsType::TYPE_BOOL ],
+			'Built-in string literal true' => [ 'true', IsType::TYPE_BOOL ],
 
-			'Constant = null' => array( 'VERSION_ALL', IsType::TYPE_NULL ),
-			'Constant = false' => array( 'VERSION_FUTURE', IsType::TYPE_BOOL ),
-			'Constant = true' => array( 'VERSION_RELEASED', IsType::TYPE_BOOL ),
-			'Constant = 0' => array( 'OFF', IsType::TYPE_INT ),
-			'Constant integer' => array( 'DEVELOPER', IsType::TYPE_INT ),
-			'Constant integer with whitespace' => array( " DEVELOPER\n", IsType::TYPE_INT ),
-			'Constant string' => array( 'MANTIS_VERSION', IsType::TYPE_STRING ),
-			'Constant string with whitespace' => array( " MANTIS_VERSION\n", IsType::TYPE_STRING ),
-		);
+			'Constant = null' => [ 'VERSION_ALL', IsType::TYPE_NULL ],
+			'Constant = false' => [ 'VERSION_FUTURE', IsType::TYPE_BOOL ],
+			'Constant = true' => [ 'VERSION_RELEASED', IsType::TYPE_BOOL ],
+			'Constant = 0' => [ 'OFF', IsType::TYPE_INT ],
+			'Constant integer' => [ 'DEVELOPER', IsType::TYPE_INT ],
+			'Constant integer with whitespace' => [ " DEVELOPER\n", IsType::TYPE_INT ],
+			'Constant string' => [ 'MANTIS_VERSION', IsType::TYPE_STRING ],
+			'Constant string with whitespace' => [ " MANTIS_VERSION\n", IsType::TYPE_STRING ],
+		];
 	}
 
 	/**
@@ -253,71 +253,71 @@ EOT
 		 * ---------------------------
  */
 
-		return array(
+		return [
 			/**
 			 * Simple arrays
 			 */
-			'SimpleArray empty' => array( "array( )" ),
-			'SimpleArray one element' => array( "array( 1 )" ),
-			'SimpleArray several elements, trailing delimiter' => array( "array( 1, 2, )" ),
-			'SimpleArray formatted whitespace' => array( "array ( 1, 2, 3 )" ),
-			'SimpleArray no whitespace' => array( "array(1,2,3)" ),
-			'SimpleArray arbitrary whitespace' => array( "  array(\n1,\t2  ,    3 )\r  " ),
-			'SimpleArray mixed types, quotes' => array(
+			'SimpleArray empty' => [ "array( )" ],
+			'SimpleArray one element' => [ "array( 1 )" ],
+			'SimpleArray several elements, trailing delimiter' => [ "array( 1, 2, )" ],
+			'SimpleArray formatted whitespace' => [ "array ( 1, 2, 3 )" ],
+			'SimpleArray no whitespace' => [ "array(1,2,3)" ],
+			'SimpleArray arbitrary whitespace' => [ "  array(\n1,\t2  ,    3 )\r  " ],
+			'SimpleArray mixed types, quotes' => [
 <<<'EOT'
 array( 1, 'a', "b" )
 EOT
-			),
-			'SimpleArray nested quotes' => array(
+			],
+			'SimpleArray nested quotes' => [
 <<<'EOT'
 array( '"a""b"""', "'a''b'''" )
 EOT
-		),
+		],
 
 			/**
 			 * Associative arrays
 			 */
-			'AssocArray' => array( "array( 0 => 'a', 1 => 'b' )" ),
-			'AssocArray, unordered keys' => array( "array( 5 => 'a', 2 => 'b' )" ),
-			'AssocArray, text keys' => array( "array( 'i' => 'a', 'j' => 'b' )" ),
-			'AssocArray mixed keys' => array( "array( 'i' => 'a', 1 => 'b', 'j' => 'c', 7 => 'd' )" ),
-			'AssocArray mixed, keys omitted' => array( "array( 'i' => 'a', 1 => 'b', 'c', 'j' => 'd' )" ),
+			'AssocArray' => [ "array( 0 => 'a', 1 => 'b' )" ],
+			'AssocArray, unordered keys' => [ "array( 5 => 'a', 2 => 'b' )" ],
+			'AssocArray, text keys' => [ "array( 'i' => 'a', 'j' => 'b' )" ],
+			'AssocArray mixed keys' => [ "array( 'i' => 'a', 1 => 'b', 'j' => 'c', 7 => 'd' )" ],
+			'AssocArray mixed, keys omitted' => [ "array( 'i' => 'a', 1 => 'b', 'c', 'j' => 'd' )" ],
 
 			# mixed associative, overwriting implicit keys
-			'AssocArray mixed, overwritten implicit keys' => array( "array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )" ),
+			'AssocArray mixed, overwritten implicit keys' => [ "array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )" ],
 
-			'AssocArray mixed' => array(
+			'AssocArray mixed' => [
 <<<'EOT'
 array(
 	array ( 1, 'a', 3 => 1, 4 => 'b', 'x' => 'y' )
 )
 EOT
-			),
+			],
 
 			/**
 			 * Use of constants
 			 */
 
 			# e.g. handle_bug_threshold
-			'Constants as array values' => array( "array( DEVELOPER, MANAGER )" ),
+			'Constants as array values' => [ "array( DEVELOPER, MANAGER )" ],
 
 				# e.g. status_enum_workflow
-			'Constants as array keys' => array(
+			'Constants as array keys' => [
 <<<'EOT'
 array (
   NEW_ => '20:feedback,30:acknowledged',
   ACKNOWLEDGED => '40:confirmed',
 )
 EOT
-			),
+			],
 
 			# e.g. set_status_threshold
-			'Constants as both key and value' => array( 'array( NEW_ => REPORTER )' ),
+			'Constants as both key and value' => [ 'array( NEW_ => REPORTER )' ],
 
 			/**
 			 * Multidimensional arrays
 			 */
-			'Multidimentional array' => array(
+			'Multidimentional array' => [
 				<<<'EOT'
 array(
 	1 => array( 1, 2 => array() ),
@@ -325,9 +325,9 @@ array(
 	'c' => array( 'd', 5 => 'e' ),
 )
 EOT
-			),
+			],
 
-			'Multidimentional, notify_flags sample' => array(
+			'Multidimentional, notify_flags sample' => [
 <<<'EOT'
 array(
 	'updated' => array (
@@ -354,12 +354,12 @@ array(
 	),
 )
 EOT
-			),
+			],
 
 			/**
 			 * Test cases for specific issues reported on the bugtracker
 			 */
-			'Issue #0020787' => array(
+			'Issue #0020787' => [
 <<<'EOT'
 array (
 	'additional_info',
@@ -370,9 +370,9 @@ array (
 	'due_date',
 )
 EOT
-			),
+			],
 
-			'Issue #0020812' => array(
+			'Issue #0020812' => [
 <<<'EOT'
 array (
 	0 =>
@@ -383,31 +383,31 @@ array (
 	),
 )
 EOT
-			),
+			],
 
-			'Issue #0020813' => array(
+			'Issue #0020813' => [
 <<<'EOT'
 array(
  0 => "aa'aa",
  1 => "bb\"bb"
 )
 EOT
-			),
+			],
 
-			'Issue #0020850' => array(
+			'Issue #0020850' => [
 <<<'EOT'
 			array ( 0 => '""a"' )
 EOT
-			),
+			],
 
-			'Issue #0020851' => array(
+			'Issue #0020851' => [
 <<<'EOT'
 array (
 	'a' => 'x1',
 	'x2',
 )
 EOT
-			),
-		);
+			],
+		];
 	}
 }

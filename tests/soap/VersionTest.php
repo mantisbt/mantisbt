@@ -53,14 +53,14 @@ class VersionTest extends SoapBase {
 	 * @return array
 	 */
 	private function getTestVersion() {
-		return array (
+		return  [
 			'project_id' => $this->getProjectId(),
 			'name' => '1.0',
 			'released' => true,
 			'description' => 'Test version',
 			'obsolete' => false,
 			'date_order' => $this->date_order
-		);
+		];
 	}
 
 	/**

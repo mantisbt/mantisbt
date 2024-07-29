@@ -58,9 +58,9 @@ class MantisGraphPlugin extends MantisPlugin {
 		$this->page = '';
 
 		$this->version = MANTIS_VERSION;
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.25.0',
-		);
+		];
 
 		$this->author = 'MantisBT Team';
 		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
@@ -82,7 +82,7 @@ class MantisGraphPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function config() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -101,9 +101,9 @@ class MantisGraphPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function events() {
-		return array(
+		return [
 			'EVENT_MANTISGRAPH_SUBMENU'=> EVENT_TYPE_DEFAULT,
-		);
+		];
 	}
 
 	/**
@@ -111,13 +111,13 @@ class MantisGraphPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function hooks() {
-		$t_hooks = array(
+		$t_hooks = [
 			'EVENT_REST_API_ROUTES' => 'routes',
 			'EVENT_LAYOUT_RESOURCES' => 'resources',
 			'EVENT_CORE_HEADERS' => 'csp_headers',
 			'EVENT_MENU_SUMMARY' => 'summary_menu',
 			'EVENT_MENU_FILTER' => 'graph_filter_menu'
-		);
+		];
 		return $t_hooks;
 	}
 
@@ -134,10 +134,10 @@ class MantisGraphPlugin extends MantisPlugin {
 			$t_app->get( '/reporters', function( $req, $res, $args ) {
 				if( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
 					$t_report_associative = create_reporter_summary();
-					$t_report = array();
+					$t_report = [];
 
 					foreach( $t_report_associative as $t_name => $t_count ) {
-						$t_report[] = array( "name" => $t_name, "count" => $t_count );
+						$t_report[] = [ "name" => $t_name, "count" => $t_count ];
 					}
 
 					return $res->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_report );
@@ -164,10 +164,10 @@ class MantisGraphPlugin extends MantisPlugin {
 	 */
 	function graph_filter_menu() {
 		if( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
-			return array( '<a class="btn btn-sm btn-primary btn-white btn-round" href="' .
-				plugin_page( 'issues_trend_page.php' ) . '">' . plugin_lang_get( 'issue_trends_link' ) . '</a>', );
+			return [ '<a class="btn btn-sm btn-primary btn-white btn-round" href="' .
+				plugin_page( 'issues_trend_page.php' ) . '">' . plugin_lang_get( 'issue_trends_link' ) . '</a>', ];
 		} else {
-			return array();
+			return [];
 		}
 	}
 
@@ -191,10 +191,10 @@ class MantisGraphPlugin extends MantisPlugin {
 			$t_link = sprintf( $t_cdn_url, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
 			html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 		} else {
-			$t_scripts = array(
+			$t_scripts = [
 				'Chart-' . self::CHARTJS_VERSION . '.min.js',
 				'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js',
-			);
+			];
 			foreach( $t_scripts as $t_script ) {
 				printf( "\t<script type=\"text/javascript\" src=\"%s\"></script>\n",
 					plugin_file( $t_script, false, $this->basename )
@@ -249,53 +249,53 @@ class MantisGraphPlugin extends MantisPlugin {
 	 * Print the plugin's submenu
 	 */
 	function print_submenu() {
-		$t_menu_items = array(
-			'project_graph.php' => array(
+		$t_menu_items = [
+			'project_graph.php' => [
 				'icon' => 'fa-bar-chart',
 				'label' => lang_get( 'by_project' ),
 				'url' => $this->get_url_with_filter( 'project_graph.php' ),
-			),
-			'developer_graph.php' => array(
+			],
+			'developer_graph.php' => [
 				'icon' => 'fa-bar-chart',
 				'label' => lang_get( 'by_developer' ),
 				'url' => $this->get_url_with_filter( 'developer_graph.php' ),
-			),
-			'reporter_graph.php' => array(
+			],
+			'reporter_graph.php' => [
 				'icon' => 'fa-bar-chart',
 				'label' => lang_get( 'by_reporter' ),
 				'url' => $this->get_url_with_filter( 'reporter_graph.php' ),
-			),
-			'status_graph.php' => array(
+			],
+			'status_graph.php' => [
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'status_link' ),
 				'url' => $this->get_url_with_filter( 'status_graph.php' ),
-			),
-			'resolution_graph.php' => array(
+			],
+			'resolution_graph.php' => [
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'resolution_link' ),
 				'url' => $this->get_url_with_filter( 'resolution_graph.php' ),
-			),
-			'priority_graph.php' => array(
+			],
+			'priority_graph.php' => [
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'priority_link' ),
 				'url' => $this->get_url_with_filter( 'priority_graph.php' ),
-			),
-			'severity_graph.php' => array(
+			],
+			'severity_graph.php' => [
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'severity_link' ),
 				'url' => $this->get_url_with_filter( 'severity_graph.php' ),
-			),
-			'category_graph.php' => array(
+			],
+			'category_graph.php' => [
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'category_link' ),
 				'url' => $this->get_url_with_filter( 'category_graph.php' ),
-			),
-			'issues_trend_graph.php' => array(
+			],
+			'issues_trend_graph.php' => [
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'issue_trends_link' ),
 				'url' => $this->get_url_with_filter( 'issues_trend_graph.php' ),
-			),
-		);
+			],
+		];
 
 		# Retrieve current page
 		$t_param_page = explode( '/', gpc_get_string( 'page', '' ) );

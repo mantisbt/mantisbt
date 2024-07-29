@@ -105,7 +105,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 	} else {
 		$t_function_prefix = 'print_filter_values_';
 	}
-	$t_params = array( $p_filter );
+	$t_params = [ $p_filter ];
 	$t_function_name = $t_function_prefix . $p_filter_target;
 
 	# override non standard calls
@@ -113,7 +113,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 		case 'do_filter_by_date':
 		case 'do_filter_by_last_updated_date':
 			if( $p_show_inputs ) {
-				$t_params = array( false, $p_filter );
+				$t_params = [ false, $p_filter ];
 			}
 			break;
 	}
@@ -127,7 +127,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 		throw new StateException(
 			"No function to populate the target",
 			ERROR_FILTER_NOT_FOUND,
-			array( $p_filter_target )
+			[ $p_filter_target ]
 		);
 	}
 }
@@ -1816,9 +1816,9 @@ function print_filter_values_plugin_field( array $p_filter, $p_field_name, $p_fi
 			case FILTER_TYPE_MULTI_STRING:
 			case FILTER_TYPE_MULTI_INT:
 				if( !is_array( $t_value ) ) {
-					$t_value = array( $t_value );
+					$t_value = [ $t_value ];
 				}
-				$t_strings = array();
+				$t_strings = [];
 				foreach( $t_value as $t_current ) {
 					if( filter_field_is_any( $t_current ) ) {
 						$t_strings[] = lang_get( 'any' );
@@ -1919,9 +1919,9 @@ function print_filter_values_custom_field( array $p_filter, $p_field_id ) {
 		return;
 	}
 
-	$t_values = $p_filter['custom_fields'][$p_field_id] ?? array();
-	$t_strings = array();
-	$t_inputs = array();
+	$t_values = $p_filter['custom_fields'][$p_field_id] ?? [];
+	$t_strings = [];
+	$t_inputs = [];
 
 	if( filter_field_is_any( $t_values ) ) {
 		$t_strings[] = lang_get( 'any' );
@@ -2034,7 +2034,7 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 			check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_ANY, false );
 			echo '>[' . lang_get( 'any' ) . ']</option>';
 			# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
-			if( !in_array( $t_cfdef['type'], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST ) ) ) {
+			if( !in_array( $t_cfdef['type'], [ CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST ] ) ) {
 				echo '<option value="' . META_FILTER_NONE . '"';
 				check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_NONE, false );
 				echo '>[' . lang_get( 'none' ) . ']</option>';
@@ -2284,9 +2284,9 @@ function print_filter_values_project_id( array $p_filter ) {
 	$t_filter = $p_filter;
 	$t_output = '';
 	if( !is_array( $t_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
-		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array(
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = [
 			$t_filter[FILTER_PROPERTY_PROJECT_ID],
-		);
+		];
 	}
 	if( count( $t_filter[FILTER_PROPERTY_PROJECT_ID] ) == 0 ) {
 		echo lang_get( 'current' );
@@ -2451,7 +2451,7 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 	} else {
 		$t_first_flag = true;
 
-		$t_field_value = is_array( $p_field_value ) ? $p_field_value : array( $p_field_value );
+		$t_field_value = is_array( $p_field_value ) ? $p_field_value : [ $p_field_value ];
 
 		foreach( $t_field_value as $t_current ) {
 			$t_current = stripslashes( $t_current );
@@ -2548,9 +2548,9 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 
 	# overload handler_id setting if user isn't supposed to see them (ref #6189)
 	if( !access_has_any_project_level( 'view_handler_threshold' ) ) {
-		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array(
+		$t_filter[FILTER_PROPERTY_HANDLER_ID] = [
 			META_FILTER_ANY,
-		);
+		];
 	}
 
 	if ( config_get( 'use_dynamic_filters' ) ) {
@@ -2816,7 +2816,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	if( ON == config_get( 'filter_by_custom_fields' ) ) {
 		$t_filter_included_projects = filter_get_included_projects( $t_filter );
 		$t_custom_fields = custom_field_get_linked_ids( $t_filter_included_projects );
-		$t_accessible_custom_fields = array();
+		$t_accessible_custom_fields = [];
 		foreach( $t_custom_fields as $t_cfid ) {
 			$t_cfdef = custom_field_get_definition( $t_cfid );
 			$t_projects_to_check = array_intersect( $t_filter_included_projects, custom_field_get_project_ids( $t_cfid ) );

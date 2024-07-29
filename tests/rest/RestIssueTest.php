@@ -206,7 +206,7 @@ class RestIssueTest extends RestBase {
 		$t_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
+		$t_issue_to_add['version'] = [ 'name' => $t_version_name ];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -232,7 +232,7 @@ class RestIssueTest extends RestBase {
 		$t_version_id = $this->versions[0]['id'];
 
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
+		$t_issue_to_add['version'] = [ 'id' => $t_version_id ];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -260,7 +260,7 @@ class RestIssueTest extends RestBase {
 		$t_correct_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'id' => $t_version_id, 'name' => $t_wrong_version_name );
+		$t_issue_to_add['version'] = [ 'id' => $t_version_id, 'name' => $t_wrong_version_name ];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -284,7 +284,7 @@ class RestIssueTest extends RestBase {
 		# Test case assumes webservice_error_when_version_not_found = ON.
 		$t_version_id = 10000;
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
+		$t_issue_to_add['version'] = [ 'id' => $t_version_id ];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -295,7 +295,7 @@ class RestIssueTest extends RestBase {
 		# Test case assumes webservice_error_when_version_not_found = ON.
 		$t_version_name = 'VersionNotFound';
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
+		$t_issue_to_add['version'] = [ 'name' => $t_version_name ];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -318,7 +318,7 @@ class RestIssueTest extends RestBase {
 	 */
 	public function testCreateIssueWithTagNotExisting() {
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
+		$t_issue_to_add['tags'] = [ [ 'name' => $this->tag_name ] ];
 
 		# Change threshold to disable tag creation
 		$t_threshold = config_set( 'tag_create_threshold', NOBODY );
@@ -342,7 +342,7 @@ class RestIssueTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		# Tag by name
-		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
+		$t_issue_to_add['tags'] = [ [ 'name' => $this->tag_name ] ];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
@@ -352,7 +352,7 @@ class RestIssueTest extends RestBase {
 		# Tag by id
 		# TODO: replace internal call by GET /tag request when implemented (see #32863)
 		$t_tag = tag_get_by_name( $this->tag_name );
-		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag['id'] ) );
+		$t_issue_to_add['tags'] = [ [ 'id' => $t_tag['id'] ] ];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
@@ -389,7 +389,7 @@ class RestIssueTest extends RestBase {
 	 */
 	public function testCreateIssueWithTagInvalid( $p_tag, $p_status_code ) {
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['tags'] = array( $p_tag );
+		$t_issue_to_add['tags'] = [ $p_tag ];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$this->assertEquals( $p_status_code, $t_response->getStatusCode() );
@@ -407,27 +407,27 @@ class RestIssueTest extends RestBase {
 	 *
 	 */
 	public function providerTagsInvalid() {
-		return array(
-			'EmptyTagElement' => array(
-				array(),
+		return [
+			'EmptyTagElement' => [
+				[],
 				HTTP_STATUS_BAD_REQUEST
-			),
+			],
 
-			'NotATagElement' => array(
-				array( 'what' => 'ever' ),
+			'NotATagElement' => [
+				[ 'what' => 'ever' ],
 				HTTP_STATUS_BAD_REQUEST
-			),
+			],
 
-			'InvalidTagId' => array(
-				array( 'id' => -1 ),
+			'InvalidTagId' => [
+				[ 'id' => -1 ],
 				HTTP_STATUS_NOT_FOUND
-			),
+			],
 
-			'EmptyTagName' => array(
-				array( 'name' => '' ),
+			'EmptyTagName' => [
+				[ 'name' => '' ],
 				HTTP_STATUS_BAD_REQUEST
-			),
-		);
+			],
+		];
 	}
 
 	public function testTagAttachDetach() {

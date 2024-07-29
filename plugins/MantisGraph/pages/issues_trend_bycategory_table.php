@@ -45,7 +45,7 @@ $t_page_count = 0;
 
 $t_filter = current_user_get_bug_filter();
 $t_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
-$t_filter[FILTER_PROPERTY_STATUS] = array(META_FILTER_ANY);
+$t_filter[FILTER_PROPERTY_STATUS] = [META_FILTER_ANY];
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
 if( count( $t_rows ) == 0 ) {
@@ -53,8 +53,8 @@ if( count( $t_rows ) == 0 ) {
 	exit();
 }
 
-$t_marker = array();
-$t_data = array();
+$t_marker = [];
+$t_data = [];
 $t_ptr = 0;
 $t_end = $t_interval->get_end_timestamp();
 $t_start = $t_interval->get_start_timestamp();
@@ -62,13 +62,13 @@ $t_start = $t_interval->get_start_timestamp();
 $t_resolved = config_get( 'bug_resolved_status_threshold' );
 $t_closed = config_get( 'bug_closed_status_threshold' );
 
-$t_bug = array();
-$t_bug_cat = array(); # save categoties or bugs to look up resolved ones.
-$t_category = array();
+$t_bug = [];
+$t_bug_cat = []; # save categoties or bugs to look up resolved ones.
+$t_category = [];
 
 # walk through all issues and grab their category for 'now'
 $t_marker[$t_ptr] = time();
-$t_data[$t_ptr] = array();
+$t_data[$t_ptr] = [];
 foreach ( $t_rows as $t_row ) {
 	# the following function can treat the resolved parameter as an array to match
 	$t_cat = category_get_name( $t_row->category_id );
@@ -96,7 +96,7 @@ $t_select = 'SELECT bug_id, type, field_name, old_value, new_value, date_modifie
 			'(type=' . NORMAL_TYPE . ' and field_name=\'status\') or type=' . NEW_BUG . ' ) and ' .
 			'date_modified >= ' . db_param() .
 		' order by date_modified DESC';
-$t_result = db_query( $t_select, array( $t_start ) );
+$t_result = db_query( $t_select, [ $t_start ] );
 $t_row = db_fetch_array( $t_result );
 
 for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {

@@ -68,10 +68,10 @@ $f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) 
 $t_username = auth_prepare_username( $f_username );
 
 if( is_blank( $t_username ) ) {
-	$t_query_args = array(
+	$t_query_args = [
 		'error' => 1,
 		'return' => $f_return,
-	);
+	];
 
 	$t_query_text = http_build_query( $t_query_args, '', '&' );
 
@@ -89,11 +89,11 @@ $t_should_redirect = AUTH_PAGE_CREDENTIAL != ( $t_user_id !== false
 		? auth_credential_page( '', $t_user_id )
 		: auth_credential_page( '', NO_USER, $t_username ) );
 if( $t_should_redirect ) {
-	$t_query_args = array(
+	$t_query_args = [
 		'username' => $t_username,
 		'cookie_error' => $f_cookie_error,
 		'reauthenticate' => $f_reauthenticate,
-	);
+	];
 
 	if( !is_blank( $f_error ) ) {
 		$t_query_args['error'] = $f_error;

@@ -99,7 +99,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			</label>
 
 <?php
-	$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
+	$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', [] );
 
 	# captcha image requires GD library and related option to ON
 	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {

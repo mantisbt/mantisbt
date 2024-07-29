@@ -78,7 +78,7 @@ class IssueRelationshipDeleteCommand extends Command {
 			throw new ClientException(
 				sprintf( "Issue %d is read-only", $t_issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				array( $t_issue_id )
+				[ $t_issue_id ]
 			);
 		}
 
@@ -92,7 +92,7 @@ class IssueRelationshipDeleteCommand extends Command {
 			throw new ClientException(
 				sprintf( "Access denied to issue %d", $t_target_issue_id ),
 				ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW,
-				array( $t_target_issue_id )
+				[ $t_target_issue_id ]
 			);
 		}
 	}
@@ -105,6 +105,6 @@ class IssueRelationshipDeleteCommand extends Command {
 	protected function process() {
 		$t_relationship_id = helper_parse_id( $this->query( 'relationship_id' ), 'relationship_id' );
 		relationship_delete( $t_relationship_id );
-		return array();
+		return [];
 	}
 }

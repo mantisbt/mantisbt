@@ -49,7 +49,7 @@ require_api( 'utility_api.php' );
  * @return array
  */
 function get_field_names() {
-	return array (
+	return  [
 				'id',
 				'category',
 				'severity',
@@ -77,7 +77,7 @@ function get_field_names() {
 				'bugnote_title',
 				'bugnote_date',
 				'bugnote_description',
-				'time_tracking' );
+				'time_tracking' ];
 }
 
 /**
@@ -107,7 +107,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 	# Grab the data
 	$t_query = 'SELECT print_pref FROM {user_print_pref} WHERE user_id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_user_id ) );
+	$t_result = db_query( $t_query, [ $p_user_id ] );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -125,11 +125,11 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 				(user_id, print_pref)
 				VALUES
 				(' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $p_user_id, $t_default ) );
+		db_query( $t_query, [ $p_user_id, $t_default ] );
 
 		# Rerun select query
 		$t_query = 'SELECT print_pref FROM {user_print_pref} WHERE user_id=' . db_param();
-		$t_result = db_query( $t_query, array( $p_user_id ) );
+		$t_result = db_query( $t_query, [ $p_user_id ] );
 
 		$t_row = db_fetch_array( $t_result );
 	}

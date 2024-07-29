@@ -50,22 +50,22 @@ $f_access_level	= gpc_get_int( 'access_level' );
 $f_user_id		= gpc_get_int( 'user_id' );
 $f_send_email_notification = gpc_get_bool( 'send_email_notification' );
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'user_id' => $f_user_id
-	),
-	'payload' => array(
-		'user' => array(
+	],
+	'payload' => [
+		'user' => [
 			'username' => $f_username,
 			'real_name' => $f_realname,
 			'email' => $f_email,
-			'access_level' => array( 'id' => $f_access_level ),
+			'access_level' => [ 'id' => $f_access_level ],
 			'enabled' => $f_enabled,
 			'protected' => $f_protected
-		),
+		],
 		'notify_user' => $f_send_email_notification
-	)
-);
+	]
+];
 
 $t_command = new UserUpdateCommand( $t_data );
 $t_command->execute();

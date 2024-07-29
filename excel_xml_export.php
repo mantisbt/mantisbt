@@ -98,10 +98,10 @@ do {
 	$t_offset += EXPORT_BLOCK_SIZE;
 
 	# Keep reading until reaching max block size or end of result set
-	$t_read_rows = array();
+	$t_read_rows = [];
 	$t_count = 0;
-	$t_bug_id_array = array();
-	$t_unique_user_ids = array();
+	$t_bug_id_array = [];
+	$t_unique_user_ids = [];
 	while( $t_count < EXPORT_BLOCK_SIZE ) {
 		$t_row = db_fetch_array( $t_result );
 		if( false === $t_row ) {

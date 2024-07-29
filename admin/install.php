@@ -215,13 +215,13 @@ $t_config_exists = file_exists( $t_config_filename );
 
 # Initialize Oracle-specific values for prefix and suffix, and set
 # values for other db's as per config defaults
-$t_prefix_defaults = array(
-	'oci8' => array(
+$t_prefix_defaults = [
+	'oci8' => [
 		'db_table_prefix'        => 'm',
 		'db_table_plugin_prefix' => 'plg',
 		'db_table_suffix'        => '',
-	) ,
-);
+	] ,
+];
 foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
 	$t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
 }
@@ -337,7 +337,7 @@ print_test( 'Checking if safe mode is enabled for install script',
 
 <?php
 	# Check for custom config files in obsolete locations
-	$t_config_files = array(
+	$t_config_files = [
 		'config_inc.php' => 'move',
 		'custom_constants_inc.php' => 'move',
 		'custom_strings_inc.php' => 'move',
@@ -345,7 +345,7 @@ print_test( 'Checking if safe mode is enabled for install script',
 		'custom_relationships_inc.php' => 'move',
 		'mc_config_defaults_inc.php' => 'delete',
 		'mc_config_inc.php' => 'contents',
-	);
+	];
 
 	foreach( $t_config_files as $t_file => $t_action ) {
 		$t_dir = dirname( __DIR__ ) . '/';
@@ -652,12 +652,12 @@ if( !$g_database_upgrade ) {
 		<select id="db_type" name="db_type" class="input-sm">
 <?php
 			# Build selection list of available DB types
-			$t_db_list = array(
+			$t_db_list = [
 				'mysqli'      => 'MySQL Improved',
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
-			);
+			];
 
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
 				echo '<option value="' . $t_db . '" ' .
@@ -749,11 +749,11 @@ if( !$g_database_upgrade ) {
 <?php
 # install-only fields: when upgrading, only display admin username and password
 if( !$g_database_upgrade ) {
-	$t_prefix_labels = array(
+	$t_prefix_labels = [
 		'db_table_prefix'        => 'Database Table Prefix',
 		'db_table_plugin_prefix' => 'Database Plugin Table Prefix',
 		'db_table_suffix'        => 'Database Table Suffix',
-	);
+	];
 	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
 		echo "<tr>\n\t<td>\n";
 		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
@@ -898,9 +898,9 @@ if( 3 == $t_install_state ) {
 			/** @var ADODB_DataDict $t_dict */
 			$t_dict = NewDataDictionary( $g_db );
 
-			$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
+			$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, [
 				'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci',
-			) );
+			] );
 			$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 			if( $t_ret == 2 ) {
 				print_test_result( GOOD );
@@ -1112,7 +1112,7 @@ if( 3 == $t_install_state ) {
 			# No-op upgrade step - required for oci8
 			if( $g_upgrade[$i] === null ) {
 				$t_sql = false;
-				$t_sqlarray = array();
+				$t_sqlarray = [];
 				$t_operation = 'No operation';
 				$t_target = null;
 			} else {
@@ -1126,16 +1126,16 @@ if( 3 == $t_install_state ) {
 						break;
 
 					case 'UpdateSQL':
-						$t_sqlarray = array(
+						$t_sqlarray = [
 							$g_upgrade[$i][1],
-						);
+						];
 						$t_target = $g_upgrade[$i][1];
 						break;
 
 					case 'UpdateFunction':
-						$t_sqlarray = array(
+						$t_sqlarray = [
 							$g_upgrade[$i][1],
-						);
+						];
 						if( isset( $g_upgrade[$i][2] ) ) {
 							$t_sqlarray[] = $g_upgrade[$i][2];
 						}
@@ -1144,19 +1144,19 @@ if( 3 == $t_install_state ) {
 						break;
 
 					default:
-						$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+						$t_sqlarray = call_user_func_array( [ $t_dict, $t_operation ], $g_upgrade[$i][1] );
 
 						# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
 						if( isset( $g_upgrade[$i][2] ) ) {
 							if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
-								$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+								$t_sqlarray = call_user_func_array( [ $t_dict, $t_operation ], $g_upgrade[$i][1] );
 							} else {
 								$t_sql = false;
-								$t_sqlarray = array();
+								$t_sqlarray = [];
 								$t_operation = "No operation";
 							}
 						} else {
-							$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+							$t_sqlarray = call_user_func_array( [ $t_dict, $t_operation ], $g_upgrade[$i][1] );
 						}
 						break;
 				}
@@ -1177,7 +1177,7 @@ if( 3 == $t_install_state ) {
 					echo "-- Execute PHP Update Function: install_" . htmlentities( $t_sqlarray[0] ) . "(";
 					# Convert the parameters array to a printable string
 					if( isset( $t_sqlarray[1] ) ) {
-						$t_params = array();
+						$t_params = [];
 						foreach( $t_sqlarray[1] as $t_param ) {
 							$t_value = var_export( $t_param, true );
 							if( is_array( $t_param ) ) {

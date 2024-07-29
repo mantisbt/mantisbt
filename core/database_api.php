@@ -45,7 +45,7 @@ $g_db = false;
 
 # An array in which all executed queries are stored.  This is used for profiling
 # @global array $g_queries_array
-$g_queries_array = array();
+$g_queries_array = [];
 
 # Stores whether a database connection was successfully opened.
 # @global bool $g_db_connected
@@ -79,7 +79,7 @@ class MantisDbParam {
 	/**
 	 * Parameter count stack
 	 */
-	private $stack = array();
+	private $stack = [];
 
 	/**
 	 * Generate a string to insert a parameter into a database query string
@@ -573,7 +573,7 @@ function db_field_exists( $p_field_name, $p_table_name ) {
 function db_field_names( $p_table_name ) {
 	global $g_db;
 	$t_columns = $g_db->MetaColumnNames( $p_table_name );
-	return is_array( $t_columns ) ? $t_columns : array();
+	return is_array( $t_columns ) ? $t_columns : [];
 }
 
 /**
@@ -764,7 +764,7 @@ function db_count_unique_queries() {
 	global $g_queries_array;
 
 	$t_unique_queries = 0;
-	$t_shown_queries = array();
+	$t_shown_queries = [];
 	foreach( $g_queries_array as $t_val_array ) {
 		if( !in_array( $t_val_array[0], $t_shown_queries ) ) {
 			$t_unique_queries++;
@@ -880,11 +880,11 @@ function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 
 	if( $g_db_log_queries ) {
 		$t_elapsed = number_format( microtime( true ) - $t_start, 4 );
-		$t_log_data = array(
+		$t_log_data = [
 			'Update BLOB in ' . $p_table . '.' . $p_column . ' where ' . $p_where,
 			$t_elapsed,
 			$t_caller
-		);
+		];
 		log_event( LOG_DATABASE, var_export( $t_log_data, true ) );
 		array_push( $g_queries_array, $t_log_data );
 	}
@@ -1246,7 +1246,7 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
  * @return boolean    True if the capability is supported, false otherwise.
  */
 function db_has_capability( $p_capability ) {
-	static $s_cache = array();
+	static $s_cache = [];
 	if( !isset( $s_cache[$p_capability] ) ) {
 		$s_cache[$p_capability] = db_test_capability( $p_capability );
 	}

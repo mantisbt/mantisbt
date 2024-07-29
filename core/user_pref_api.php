@@ -189,34 +189,34 @@ class UserPreferences {
 	/**
 	 * Default Values - Config Field Mappings
 	 */
-	private static $_default_mapping = array(
-	'default_profile' => array( 'default_profile', 'int' ),
-	'default_project' => array( 'default_project', 'int' ),
-	'refresh_delay' => array( 'default_refresh_delay', 'int' ),
-	'redirect_delay' => array( 'default_redirect_delay', 'int' ),
-	'bugnote_order' => array( 'default_bugnote_order', 'string' ),
-	'email_on_new' => array( 'default_email_on_new', 'int' ),
-	'email_on_assigned' => array(  'default_email_on_assigned', 'int' ),
-	'email_on_feedback' => array(  'default_email_on_feedback', 'int' ),
-	'email_on_resolved' => array(  'default_email_on_resolved', 'int' ),
-	'email_on_closed' => array(  'default_email_on_closed', 'int' ),
-	'email_on_reopened' => array(  'default_email_on_reopened', 'int' ),
-	'email_on_bugnote' => array(  'default_email_on_bugnote', 'int' ),
-	'email_on_status' => array(  'default_email_on_status', 'int' ),
-	'email_on_priority' => array(  'default_email_on_priority', 'int' ),
-	'email_on_new_min_severity' => array(  'default_email_on_new_minimum_severity', 'int' ),
-	'email_on_assigned_min_severity' => array(  'default_email_on_assigned_minimum_severity', 'int' ),
-	'email_on_feedback_min_severity' => array(  'default_email_on_feedback_minimum_severity', 'int' ),
-	'email_on_resolved_min_severity' => array(  'default_email_on_resolved_minimum_severity', 'int' ),
-	'email_on_closed_min_severity' => array(  'default_email_on_closed_minimum_severity', 'int' ),
-	'email_on_reopened_min_severity' => array(  'default_email_on_reopened_minimum_severity', 'int' ),
-	'email_on_bugnote_min_severity' => array(  'default_email_on_bugnote_minimum_severity', 'int' ),
-	'email_on_status_min_severity' => array(  'default_email_on_status_minimum_severity', 'int' ),
-	'email_on_priority_min_severity' => array(  'default_email_on_priority_minimum_severity', 'int' ),
-	'email_bugnote_limit' => array(  'default_email_bugnote_limit', 'int' ),
-	'language' => array(  'default_language', 'string' ),
-	'timezone' => array( 'default_timezone', 'string' ),
-	);
+	private static $_default_mapping = [
+	'default_profile' => [ 'default_profile', 'int' ],
+	'default_project' => [ 'default_project', 'int' ],
+	'refresh_delay' => [ 'default_refresh_delay', 'int' ],
+	'redirect_delay' => [ 'default_redirect_delay', 'int' ],
+	'bugnote_order' => [ 'default_bugnote_order', 'string' ],
+	'email_on_new' => [ 'default_email_on_new', 'int' ],
+	'email_on_assigned' => [  'default_email_on_assigned', 'int' ],
+	'email_on_feedback' => [  'default_email_on_feedback', 'int' ],
+	'email_on_resolved' => [  'default_email_on_resolved', 'int' ],
+	'email_on_closed' => [  'default_email_on_closed', 'int' ],
+	'email_on_reopened' => [  'default_email_on_reopened', 'int' ],
+	'email_on_bugnote' => [  'default_email_on_bugnote', 'int' ],
+	'email_on_status' => [  'default_email_on_status', 'int' ],
+	'email_on_priority' => [  'default_email_on_priority', 'int' ],
+	'email_on_new_min_severity' => [  'default_email_on_new_minimum_severity', 'int' ],
+	'email_on_assigned_min_severity' => [  'default_email_on_assigned_minimum_severity', 'int' ],
+	'email_on_feedback_min_severity' => [  'default_email_on_feedback_minimum_severity', 'int' ],
+	'email_on_resolved_min_severity' => [  'default_email_on_resolved_minimum_severity', 'int' ],
+	'email_on_closed_min_severity' => [  'default_email_on_closed_minimum_severity', 'int' ],
+	'email_on_reopened_min_severity' => [  'default_email_on_reopened_minimum_severity', 'int' ],
+	'email_on_bugnote_min_severity' => [  'default_email_on_bugnote_minimum_severity', 'int' ],
+	'email_on_status_min_severity' => [  'default_email_on_status_minimum_severity', 'int' ],
+	'email_on_priority_min_severity' => [  'default_email_on_priority_minimum_severity', 'int' ],
+	'email_bugnote_limit' => [  'default_email_bugnote_limit', 'int' ],
+	'language' => [  'default_language', 'string' ],
+	'timezone' => [ 'default_timezone', 'string' ],
+	];
 
 	/**
 	 * Constructor
@@ -279,8 +279,8 @@ class UserPreferences {
 	}
 }
 
-$g_cache_user_pref = array();
-$g_cache_current_user_pref = array();
+$g_cache_user_pref = [];
+$g_cache_current_user_pref = [];
 
 /**
  * Cache a user preferences row if necessary and return the cached copy.
@@ -295,7 +295,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 	global $g_cache_user_pref;
 
 	if( !isset( $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] ) ) {
-		user_pref_cache_array_rows( array( $p_user_id ), $p_project_id );
+		user_pref_cache_array_rows( [ $p_user_id ], $p_project_id );
 	}
 
 	$t_row = $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id];
@@ -313,7 +313,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
  */
 function user_pref_cache_array_rows( array $p_user_id_array, $p_project_id = ALL_PROJECTS ) {
 	global $g_cache_user_pref;
-	$c_user_id_array = array();
+	$c_user_id_array = [];
 
 	# identify the user ids that are not cached already.
 	foreach( $p_user_id_array as $t_user_id ) {
@@ -336,7 +336,7 @@ function user_pref_cache_array_rows( array $p_user_id_array, $p_project_id = ALL
 		foreach( $t_result as $t_row ) {
 			$t_user_id = (int)$t_row['user_id'];
 			if( !isset( $g_cache_user_pref[$t_user_id] ) ) {
-				$g_cache_user_pref[$t_user_id] = array();
+				$g_cache_user_pref[$t_user_id] = [];
 			}
 			$g_cache_user_pref[$t_user_id][(int)$p_project_id] = $t_row;
 
@@ -361,7 +361,7 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 	global $g_cache_user_pref;
 
 	if( null === $p_user_id ) {
-		$g_cache_user_pref = array();
+		$g_cache_user_pref = [];
 	} else if( null === $p_project_id ) {
 		unset( $g_cache_user_pref[(int)$p_user_id] );
 	} else {
@@ -411,7 +411,7 @@ function user_pref_db_insert( $p_user_id, $p_project_id, UserPreferences $p_pref
 		$s_vars = getClassProperties( 'UserPreferences', 'protected' );
 	}
 
-	$t_values = array();
+	$t_values = [];
 	$t_values[] = $c_user_id;
 	$t_values[] = $c_project_id;
 	foreach( $s_vars as $t_var => $t_val ) {
@@ -450,7 +450,7 @@ function user_pref_db_update( $p_user_id, $p_project_id, UserPreferences $p_pref
 		$s_vars = getClassProperties( 'UserPreferences', 'protected' );
 	}
 
-	$t_pairs = array();
+	$t_pairs = [];
 	foreach( $s_vars as $t_var => $t_val ) {
 		$t_pairs[] = "$t_var = :$t_var";
 		$t_param[$t_var] = $p_prefs->$t_var;
@@ -525,7 +525,7 @@ function user_pref_db_delete_user( $p_user_id ) {
  *
  * @return void
  */
-function user_pref_clear_project_default( $p_project_id, array $p_users = array() ) {
+function user_pref_clear_project_default( $p_project_id, array $p_users = [] ) {
 	$t_query = new DbQuery( 'UPDATE {user_pref}'
 		. ' SET default_project = ' . ALL_PROJECTS
 		. ' WHERE default_project = :default'
@@ -550,7 +550,7 @@ function user_pref_clear_project_default( $p_project_id, array $p_users = array(
  *
  * @return void
  */
-function user_pref_clear_invalid_project_default( $p_project_id, array $p_users = array() ) {
+function user_pref_clear_invalid_project_default( $p_project_id, array $p_users = [] ) {
 	# Get all users having the project as default
 	$t_query = new DbQuery( 'SELECT user_id FROM {user_pref} WHERE default_project = :default' );
 	$t_query->bind( 'default', (int)$p_project_id );
@@ -564,7 +564,7 @@ function user_pref_clear_invalid_project_default( $p_project_id, array $p_users 
 
 	# Users who can't access the project anymore must have the default cleared
 	user_cache_array_rows( $t_users_having_project_as_default );
-	$t_users_to_clear = array();
+	$t_users_to_clear = [];
 	foreach( $t_users_having_project_as_default as $t_id ) {
 		if( access_get_project_level( $p_project_id, $t_id ) == ANYBODY ) {
 			$t_users_to_clear[] = $t_id;
@@ -621,7 +621,7 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		# If $t_row is still false (the user doesn't have default preferences)
 		if( false === $t_row ) {
 			# We use an empty array
-			$t_row = array();
+			$t_row = [];
 		}
 	}
 

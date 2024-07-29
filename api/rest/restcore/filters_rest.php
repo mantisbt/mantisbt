@@ -57,7 +57,7 @@ function rest_filter_get( SlimRequest $p_request, SlimResponse $p_response, arra
 	}
 
 	$t_filters = mc_filter_get( '', '', $t_project_id, $t_filter_id );
-	$t_result = array( 'filters' => $t_filters );
+	$t_result = [ 'filters' => $t_filters ];
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }

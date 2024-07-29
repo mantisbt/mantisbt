@@ -53,11 +53,11 @@ auth_reauthenticate();
 
 $f_project_id = gpc_get_int( 'project_id' );
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'id' => $f_project_id
-	)
-);
+	]
+];
 
 $t_command = new ProjectDeleteCommand( $t_data );
 $t_command->validate();

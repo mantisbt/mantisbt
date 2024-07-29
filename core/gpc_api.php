@@ -208,7 +208,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
 			# ensure that the default is an array, if set
 			if( ( $p_default !== null ) && !is_array( $p_default ) ) {
-				$p_default = array( $p_default );
+				$p_default = [ $p_default ];
 			}
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
 			if( is_array( $t_values ) ) {
@@ -257,7 +257,7 @@ function gpc_get_string_array( $p_var_name, array $p_default = null ) {
 	if( !is_array( $t_result ) ) {
 		return $t_result;
 	}
-	$t_array = array();
+	$t_array = [];
 	foreach( $t_result as $t_key => $t_value ) {
 		if( $t_value === null ) {
 			$t_array[$t_key] = null;
@@ -391,14 +391,14 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 		$p_samesite = config_get_global( 'cookie_samesite' );
 	}
 
-	$t_options = array(
+	$t_options = [
 		'expires' => $p_expire,
 		'path' => $p_path,
 		'domain' => $p_domain,
 		'samesite' => $p_samesite,
 		'secure' => $g_cookie_secure_flag_enabled,
 		'httponly' => $p_httponly,
-	);
+	];
 	return setcookie( $p_name, $p_value, $t_options );
 }
 
@@ -431,12 +431,12 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null, $p_samesit
 		# Cookie “<PREFIX>_collapse_settings” has been rejected because it is already expired.
 		# apparently this is due to bug https://bugzilla.mozilla.org/show_bug.cgi?id=1676651
 
-		$t_options = array(
+		$t_options = [
 			'expires' => 1,
 			'path' => $p_path,
 			'domain' => $p_domain,
 			'samesite' => $p_samesite,
-		);
+		];
 		return setcookie( $p_name, '', $t_options );
 	} else {
 		return false;
@@ -475,15 +475,15 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
  */
 function gpc_make_array( $p_var_name ) {
 	if( isset( $_POST[$p_var_name] ) && !is_array( $_POST[$p_var_name] ) ) {
-		$_POST[$p_var_name] = array(
+		$_POST[$p_var_name] = [
 			$_POST[$p_var_name],
-		);
+		];
 	}
 
 	if( isset( $_GET[$p_var_name] ) && !is_array( $_GET[$p_var_name] ) ) {
-		$_GET[$p_var_name] = array(
+		$_GET[$p_var_name] = [
 			$_GET[$p_var_name],
-		);
+		];
 	}
 }
 

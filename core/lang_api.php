@@ -40,10 +40,10 @@ require_api( 'user_pref_api.php' );
 
 # Cache of localization strings in the language specified by the last
 # lang_load call
-$g_lang_strings = array();
+$g_lang_strings = [];
 
 # stack for language overrides
-$g_lang_overrides = array();
+$g_lang_overrides = [];
 
 # To be used in custom_strings_inc.php :
 $g_active_language = '';
@@ -142,7 +142,7 @@ function lang_map_auto() {
 		$t_auto_map = config_get_global( 'language_auto_map' );
 
 		# Expand language map
-		$t_auto_map_exp = array();
+		$t_auto_map_exp = [];
 		foreach( $t_auto_map as $t_encs => $t_enc_lang ) {
 			$t_encs_arr = explode( ',', $t_encs );
 

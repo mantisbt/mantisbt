@@ -133,7 +133,7 @@ if( $f_error || $f_cookie_error ) {
 	echo '</div>';
 }
 
-$t_warnings = array();
+$t_warnings = [];
 $t_upgrade_required = false;
 
 if( config_get_global( 'admin_checks' ) == ON ) {

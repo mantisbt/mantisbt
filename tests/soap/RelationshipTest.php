@@ -46,12 +46,12 @@ class RelationshipTest extends SoapBase {
 		$t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_second_issue );
 		$this->deleteAfterRun( $t_second_issue_id );
 
-		$t_relationship = array (
-			'type' => array (
+		$t_relationship =  [
+			'type' =>  [
 				'id' => 0 # BUG_DUPLICATE
-			),
+			],
 			'target_id' => $t_second_issue_id
-		);
+		];
 
 		$this->client->mc_issue_relationship_add( $this->userName, $this->password, $t_first_issue_id, $t_relationship );
 
@@ -83,12 +83,12 @@ class RelationshipTest extends SoapBase {
 		$t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_second_issue );
 		$this->deleteAfterRun( $t_second_issue_id );
 
-		$t_relationship = array (
-			'type' => array (
+		$t_relationship =  [
+			'type' =>  [
 				'id' => 0 # BUG_DUPLICATE
-			),
+			],
 			'target_id' => $t_second_issue_id
-		);
+		];
 
 		$t_relationship_id = $this->client->mc_issue_relationship_add( $this->userName, $this->password, $t_first_issue_id, $t_relationship );
 		$this->client->mc_issue_relationship_delete( $this->userName, $this->password, $t_first_issue_id, $t_relationship_id );

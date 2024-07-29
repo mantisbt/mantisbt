@@ -40,12 +40,12 @@ $t_token_name = $t_token_row['name'];
 
 $t_user_id = auth_get_current_user_id();
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'user_id' => $t_user_id,
 		'id' => $f_token_id,
-	),
-);
+	],
+];
 
 $t_command = new UserTokenDeleteCommand( $t_data );
 $t_command->execute();

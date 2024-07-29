@@ -32,12 +32,12 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function hooks() {
-		return array(
+		return [
 			'EVENT_DISPLAY_TEXT'		=> 'text',			# Text String Display
 			'EVENT_DISPLAY_FORMATTED'	=> 'formatted',		# Formatted String Display
 			'EVENT_DISPLAY_RSS'			=> 'rss',			# RSS String Display
 			'EVENT_DISPLAY_EMAIL'		=> 'email',			# Email String Display
-		);
+		];
 	}
 
 	/**

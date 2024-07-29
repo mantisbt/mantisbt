@@ -106,7 +106,7 @@ function get_commit_containing_object_hash( $p_filename, $p_object_hash ) {
  * @param array  $p_ignore_files         Files to ignore.
  * @return void
  */
-function check_file_integrity_recursive( $p_directory, $p_base_directory, $p_relative_path_prefix = '', array $p_ignore_files = array() ) {
+function check_file_integrity_recursive( $p_directory, $p_base_directory, $p_relative_path_prefix = '', array $p_ignore_files = [] ) {
 	global $g_integrity_blobs, $g_integrity_release_blobs;
 	if( $t_handle = opendir( $p_directory ) ) {
 		while( false !== ( $t_file = readdir( $t_handle ) ) ) {
@@ -158,7 +158,7 @@ $t_can_perform_integrity_check = isset( $g_integrity_release_blobs ) && isset( $
 check_print_test_warn_row(
 	'Reference integrity blob hashes are available for verifying the integrity of this MantisBT installation',
 	$t_can_perform_integrity_check,
-	array( false => 'Ensure integrity_release_blobs.php and/or integrity_commit_blobs.php are available.' )
+	[ false => 'Ensure integrity_release_blobs.php and/or integrity_commit_blobs.php are available.' ]
 );
 
 if( !$t_can_perform_integrity_check ) {
@@ -166,7 +166,7 @@ if( !$t_can_perform_integrity_check ) {
 }
 
 $t_absolute_base_dir = realpath( config_get_global( 'absolute_path' ) ) . DIRECTORY_SEPARATOR;
-$t_ignore_files = array(
+$t_ignore_files = [
 	'.git/',
 	'admin/integrity_commit_blobs.php',
 	'admin/integrity_release_blobs.php',
@@ -180,33 +180,33 @@ $t_ignore_files = array(
 	'config/custom_relationships_inc.php',
 	'config/custom_strings_inc.php',
 	'mantis_offline.php'
-);
+];
 check_file_integrity_recursive( $t_absolute_base_dir, $t_absolute_base_dir, '', $t_ignore_files );
 
 $t_base_dir = realpath( config_get_global( 'core_path' ) ) . DIRECTORY_SEPARATOR;
-$t_ignore_files = array(
+$t_ignore_files = [
 	'core/classes/'
-);
+];
 check_file_integrity_recursive( $t_base_dir, $t_base_dir, 'core/', $t_ignore_files );
 
 $t_base_dir = realpath( config_get_global( 'class_path' ) ) . DIRECTORY_SEPARATOR;
 check_file_integrity_recursive( $t_base_dir, $t_base_dir, 'core/classes/' );
 
 $t_base_dir = realpath( config_get_global( 'library_path' ) ) . DIRECTORY_SEPARATOR;
-$t_ignore_files = array(
+$t_ignore_files = [
 	'library/jpgraph/',
 	'library/FirePHPCore/'
-);
+];
 check_file_integrity_recursive( $t_base_dir, $t_base_dir, 'library/', $t_ignore_files );
 
 $t_base_dir = realpath( config_get_global( 'language_path' ) ) . DIRECTORY_SEPARATOR;
 check_file_integrity_recursive( $t_base_dir, $t_base_dir, 'lang/' );
 
-$t_builtin_plugins = array(
+$t_builtin_plugins = [
 	'MantisCoreFormatting',
 	'MantisGraph',
 	'XmlImportExport'
-);
+];
 $t_plugins_dir = $t_absolute_base_dir . 'plugins' . DIRECTORY_SEPARATOR;
 foreach( $t_builtin_plugins as $t_builtin_plugin ) {
 	$t_base_dir = $t_plugins_dir . $t_builtin_plugin . DIRECTORY_SEPARATOR;

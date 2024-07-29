@@ -57,13 +57,13 @@ foreach( $t_dest_bug_id_array as $t_dest_bug_id ) {
 		continue;
 	}
 
-	$t_data = array(
-		'query' => array( 'issue_id' => $f_src_bug_id ),
-		'payload' => array(
-			'type' => array( 'id' => $f_rel_type ),
-			'issue' => array( 'id' => $t_dest_bug_id )
-		)
-	);
+	$t_data = [
+		'query' => [ 'issue_id' => $f_src_bug_id ],
+		'payload' => [
+			'type' => [ 'id' => $f_rel_type ],
+			'issue' => [ 'id' => $t_dest_bug_id ]
+		]
+	];
 
 	$t_command = new IssueRelationshipAddCommand( $t_data );
 	$t_command->execute();

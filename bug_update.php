@@ -347,7 +347,7 @@ if( $t_close_issue ) {
 }
 
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_existing_bug->project_id );
-$t_custom_fields_to_set = array();
+$t_custom_fields_to_set = [];
 foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_cf_def = custom_field_get_definition( $t_cf_id );
 
@@ -387,7 +387,7 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	# Remember the new custom field values so we can set them when updating
 	# the bug (done after all data passed to this update page has been
 	# validated).
-	$t_custom_fields_to_set[] = array( 'id' => $t_cf_id, 'value' => $t_new_custom_field_value );
+	$t_custom_fields_to_set[] = [ 'id' => $t_cf_id, 'value' => $t_new_custom_field_value ];
 }
 
 # Perform validation of the duplicate ID of the bug.
@@ -445,7 +445,7 @@ $t_updated_bug->status = bug_get_status_for_assign( $t_existing_bug->handler_id,
 # Allow a custom function to validate the proposed bug updates. Note that
 # custom functions are being deprecated in MantisBT. You should migrate to
 # the new plugin system instead.
-helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_updated_bug, $t_bug_note->note ) );
+helper_call_custom_function( 'issue_update_validate', [ $f_bug_id, $t_updated_bug, $t_bug_note->note ] );
 
 # Allow plugins to validate/modify the update prior to it being committed.
 $t_updated_bug = event_signal( 'EVENT_UPDATE_BUG_DATA', $t_updated_bug, $t_existing_bug );
@@ -481,12 +481,12 @@ if( $t_updated_bug->duplicate_id != 0 ) {
 	bug_monitor_copy( $f_bug_id, $t_updated_bug->duplicate_id );
 }
 
-event_signal( 'EVENT_UPDATE_BUG', array( $t_existing_bug, $t_updated_bug ) );
+event_signal( 'EVENT_UPDATE_BUG', [ $t_existing_bug, $t_updated_bug ] );
 
 # Allow a custom function to respond to the modifications made to the bug. Note
 # that custom functions are being deprecated in MantisBT. You should migrate to
 # the new plugin system instead.
-helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
+helper_call_custom_function( 'issue_update_notify', [ $f_bug_id ] );
 
 # Send a notification of changes via email.
 if( $t_resolve_issue ) {

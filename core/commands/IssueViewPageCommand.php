@@ -109,8 +109,8 @@ class IssueViewPageCommand extends Command {
 
 		$t_date_format = config_get( 'normal_date_format' );
 
-		$t_issue_view = array();
-		$t_flags = array();
+		$t_issue_view = [];
+		$t_flags = [];
 
 		# Fields to show on the issue view page
 		$t_fields = config_get( 'bug_view_page_fields' );
@@ -281,7 +281,7 @@ class IssueViewPageCommand extends Command {
 		}
 
 		$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
-		custom_field_cache_values( array( $t_issue_id ), $t_related_custom_field_ids );
+		custom_field_cache_values( [ $t_issue_id ], $t_related_custom_field_ids );
 
 		$t_links = event_signal( 'EVENT_MENU_ISSUE', $t_issue_id );
 		$t_issue_view['links'] = $t_links;
@@ -289,9 +289,9 @@ class IssueViewPageCommand extends Command {
 		# Mark the added issue as visited so that it appears on the last visited list.
 		last_visited_issue( $t_issue_id );
 
-		return array(
+		return [
 			'issue' => $t_issue,
 			'issue_view' => $t_issue_view,
-			'flags' => $t_flags );
+			'flags' => $t_flags ];
 	}
 }

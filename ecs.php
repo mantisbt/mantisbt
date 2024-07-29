@@ -17,6 +17,7 @@
 declare( strict_types = 1 );
 
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
+use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\Basic\BracesPositionFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
@@ -252,6 +253,17 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/comment/single_line_comment_spacing.html
 		 */
 		SingleLineCommentSpacingFixer::class,
+
+		/**
+		 * Array: Array syntax
+		 *
+		 * Configurable. Default is "short" syntax.
+		 *
+		 * array(1,2) > [1,2];
+		 *
+		 * @see https://cs.symfony.com/doc/rules/array_notation/array_syntax.html
+		 */
+		ArraySyntaxFixer::class,
 	] )
 
 	/**

@@ -65,7 +65,7 @@ function set_capability_row( $p_threshold, $p_all_projects_only = false ) {
 
 	if( ( $g_access >= config_get_access( $p_threshold ) )
 			  && ( ( ALL_PROJECTS == $g_project ) || !$p_all_projects_only ) ) {
-		$f_threshold = gpc_get_int_array( 'flag_thres_' . $p_threshold, array() );
+		$f_threshold = gpc_get_int_array( 'flag_thres_' . $p_threshold, [] );
 		$f_access = gpc_get_int( 'access_' . $p_threshold );
 		# @@debug @@ echo "<br />for $p_threshold "; var_dump($f_threshold, $f_access); echo '<br />';
 		$t_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access_levels_enum_string' ) );
@@ -73,7 +73,7 @@ function set_capability_row( $p_threshold, $p_all_projects_only = false ) {
 		reset( $t_access_levels );
 
 		$t_lower_threshold = NOBODY;
-		$t_array_threshold = array();
+		$t_array_threshold = [];
 
 		foreach( $t_access_levels as $t_access_level => $t_level_name ) {
 			if( in_array( $t_access_level, $f_threshold ) ) {

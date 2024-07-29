@@ -57,9 +57,9 @@ class IssueNoteTest extends SoapBase {
 		# Create a note, even though type is set to 2 (time tracking),
 		# the note doesn't have time tracking info, and hence type will
 		# be set to 0 (BUGNOTE).
-		$t_note_data = array(
+		$t_note_data = [
 			'text' => 'first note',
-		    'note_type' => 2 );
+		    'note_type' => 2 ];
 
 		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 
@@ -104,10 +104,10 @@ class IssueNoteTest extends SoapBase {
 
 		# Even though note type is not set, since there is time tracking info
 		# it will be set to 2 (TIME_TRACKING).
-		$t_note_data = array(
+		$t_note_data = [
 			'text' => 'first note',
 			'time_tracking' => '30'
-		);
+		];
 
 		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 
@@ -147,9 +147,9 @@ class IssueNoteTest extends SoapBase {
 
 		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$t_note_data = array(
+		$t_note_data = [
 			'text' => 'some note',
-		);
+		];
 
 		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 
@@ -157,11 +157,11 @@ class IssueNoteTest extends SoapBase {
 
 		$this->assertEquals( 1, count( $t_issue_with_note->notes ) );
 
-		$t_note_data_new = array(
+		$t_note_data_new = [
 			'id' => $t_issue_note_id,
 			'text' => 'some new note',
-			'view_state' => array ( 'id' => 10 ) # public
-		);
+			'view_state' =>  [ 'id' => 10 ] # public
+		];
 
 		$this->client->mc_issue_note_update( $this->userName, $this->password, $t_note_data_new );
 
@@ -195,7 +195,7 @@ class IssueNoteTest extends SoapBase {
 
 		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$t_note = array();
+		$t_note = [];
 
 		try {
 			$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note );

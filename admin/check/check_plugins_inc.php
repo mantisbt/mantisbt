@@ -60,11 +60,11 @@ foreach( $t_installed_plugins as $t_basename => $t_plugin ) {
 	check_print_test_row(
 		"Installed Plugin '$t_basename'' is operational",
 		plugin_is_loaded( $t_basename ),
-		array(
+		[
 			false => "Plugin could not be loaded; check "
 				. sprintf( $t_manage_plugins_link, '#installed', 'Manage Plugins page' )
 				. " to ensure its dependencies are met or if it needs to be upgraded."
-		)
+		]
 	);
 }
 
@@ -76,10 +76,10 @@ foreach( $t_forced_plugins as $t_basename => $t_priority ) {
 	check_print_test_warn_row(
 		"Force-installed plugin '$t_basename' is available and valid",
 		!$t_plugin instanceof InvalidPlugin,
-		array(
+		[
 			false => $t_plugin->description
 				. " - review 'plugins_force_installed' configuration option"
-		)
+		]
 	);
 }
 
@@ -102,10 +102,10 @@ foreach( $t_invalid_plugins as $t_plugin ) {
 			check_print_test_row(
 				$t_description,
 				false,
-				array(
+				[
 					false => sprintf( $t_manage_plugins_link, '#invalid', 'Remove the Plugin' )
 						. " or reinstall its source code."
-				)
+				]
 			);
 			break;
 		case MantisPlugin::STATUS_MISSING_BASE_CLASS:
@@ -115,16 +115,16 @@ foreach( $t_invalid_plugins as $t_plugin ) {
 			check_print_test_warn_row(
 				$t_description,
 				false,
-				array(
+				[
 					false => "Rename the Plugin's directory or " . $t_msg_contact
-				)
+				]
 			);
 			break;
 		default:
 			check_print_test_row(
 				$t_description,
 				false,
-				array( false => $t_msg_contact )
+				[ false => $t_msg_contact ]
 			);
 	}
 }

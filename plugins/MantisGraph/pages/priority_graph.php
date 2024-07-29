@@ -35,7 +35,7 @@ print_summary_menu( 'project_graph.php', $t_filter );
 $t_mantisgraph = plugin_get();
 $t_mantisgraph->print_submenu();
 
-$t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority', array(), $t_filter );
+$t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority', [], $t_filter );
 ?>
 
 <div class="col-md-12 col-xs-12">

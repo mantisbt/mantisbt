@@ -50,12 +50,12 @@ class PrepareTest extends MantisCoreBase {
 	 * @return array
 	 */
 	public function providerMailTo() {
-		$t_test_data = array(
-			'Basic' => array( array( self::EMAIL, ''), 'mailto:' . self::EMAIL ),
-			'Subject' => array( array( self::EMAIL, 'subject'), 'mailto:' . self::EMAIL . '?subject=subject' ),
-			'SubjectWithSpace' => array( array( self::EMAIL, 'message subject'), 'mailto:' . self::EMAIL . '?subject=message%20subject' ),
-			'SubjectWithQuestionAmp' => array( array( self::EMAIL, 'message?subject&matter'), 'mailto:' . self::EMAIL . '?subject=message%3Fsubject%26matter' ),
-		);
+		$t_test_data = [
+			'Basic' => [ [ self::EMAIL, ''], 'mailto:' . self::EMAIL ],
+			'Subject' => [ [ self::EMAIL, 'subject'], 'mailto:' . self::EMAIL . '?subject=subject' ],
+			'SubjectWithSpace' => [ [ self::EMAIL, 'message subject'], 'mailto:' . self::EMAIL . '?subject=message%20subject' ],
+			'SubjectWithQuestionAmp' => [ [ self::EMAIL, 'message?subject&matter'], 'mailto:' . self::EMAIL . '?subject=message%3Fsubject%26matter' ],
+		];
 
 		return $t_test_data;
 	}
@@ -94,69 +94,69 @@ class PrepareTest extends MantisCoreBase {
 		$t_button_classes = 'class="noprint blue zoom-130"';
 		$t_button_text = icon_get( 'fa-envelope-o', 'bigger-115' ) . '&nbsp;' . $t_text;
 
-		$t_test_data = array(
-			'Basic' => array(
-				array( $t_email, $t_text, '', '', false ),
+		$t_test_data = [
+			'Basic' => [
+				[ $t_email, $t_text, '', '', false ],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\">$t_text</a>"
-			),
-			'Basic, cannot see e-mails' => array(
-				array( $t_email, $t_text, '', '', false ),
+			],
+			'Basic, cannot see e-mails' => [
+				[ $t_email, $t_text, '', '', false ],
 				NOBODY,
 				$t_text
-			),
-			'With tooltip' => array(
-				array( $t_email, $t_text, '', $t_tooltip, false ),
+			],
+			'With tooltip' => [
+				[ $t_email, $t_text, '', $t_tooltip, false ],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\" title=\"$t_tooltip\">$t_text</a>"
-			),
-			'With tooltip, cannot see e-mails' => array(
-				array( $t_email, $t_text, '', $t_tooltip, false ),
+			],
+			'With tooltip, cannot see e-mails' => [
+				[ $t_email, $t_text, '', $t_tooltip, false ],
 				NOBODY,
 				"<a title=\"$t_tooltip\">$t_text</a>"
-			),
-			'With tooltip identical to text' => array(
-				array( $t_email, $t_text, '', $t_text, false ),
+			],
+			'With tooltip identical to text' => [
+				[ $t_email, $t_text, '', $t_text, false ],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\">$t_text</a>"
-			),
-			'With tooltip identical to text, cannot see e-mails' => array(
-				array( $t_email, $t_text, '', $t_text, false ),
+			],
+			'With tooltip identical to text, cannot see e-mails' => [
+				[ $t_email, $t_text, '', $t_text, false ],
 				NOBODY,
 				$t_text
-			),
+			],
 
-			'Button' => array(
-				array( $t_email, $t_text, '', '', true ),
+			'Button' => [
+				[ $t_email, $t_text, '', '', true ],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\" $t_button_classes>$t_button_text</a>"
-			),
-			'Button, cannot see e-mails' => array(
-				array( $t_email, $t_text, '', '', true ),
+			],
+			'Button, cannot see e-mails' => [
+				[ $t_email, $t_text, '', '', true ],
 				NOBODY,
 				$t_text
-			),
-			'Button with tooltip' => array(
-				array( $t_email, $t_text, '', $t_tooltip, true ),
+			],
+			'Button with tooltip' => [
+				[ $t_email, $t_text, '', $t_tooltip, true ],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\" title=\"$t_tooltip\" $t_button_classes>$t_button_text</a>"
-			),
-			'Button with tooltip, cannot see e-mails' => array(
-				array( $t_email, $t_text, '', $t_tooltip, true ),
+			],
+			'Button with tooltip, cannot see e-mails' => [
+				[ $t_email, $t_text, '', $t_tooltip, true ],
 				NOBODY,
 				"<a title=\"$t_tooltip\">$t_text</a>"
-			),
-			'Button with tooltip identical to text' => array(
-				array( $t_email, $t_text, '', $t_text, true ),
+			],
+			'Button with tooltip identical to text' => [
+				[ $t_email, $t_text, '', $t_text, true ],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\" $t_button_classes>$t_button_text</a>"
-			),
-			'Button with tooltip identical to text, cannot see e-mails' => array(
-				array( $t_email, $t_text, '', $t_text, true ),
+			],
+			'Button with tooltip identical to text, cannot see e-mails' => [
+				[ $t_email, $t_text, '', $t_text, true ],
 				NOBODY,
 				$t_text
-			),
-		);
+			],
+		];
 
 		return $t_test_data;
 	}

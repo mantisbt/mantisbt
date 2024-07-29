@@ -71,7 +71,7 @@ gpc_make_array( FILTER_PROPERTY_NOTE_USER_ID );
 $t_my_filter = filter_get_default();
 
 # gpc_get_*_array functions expect 2nd param to be an array
-$t_meta_filter_any_array = array( META_FILTER_ANY );
+$t_meta_filter_any_array = [ META_FILTER_ANY ];
 
 $t_my_filter[FILTER_PROPERTY_SEARCH] = gpc_get_string( FILTER_PROPERTY_SEARCH, '' );
 $t_my_filter[FILTER_PROPERTY_CATEGORY_ID] = gpc_get_string_array( FILTER_PROPERTY_CATEGORY_ID, $t_meta_filter_any_array );
@@ -134,7 +134,7 @@ if( $t_highlight_changed != -1 ) {
 }
 
 # Handle custom fields.
-$t_custom_fields = array();
+$t_custom_fields = [];
 foreach( $_GET as $t_var_name => $t_var_value ) {
 	if( strpos( $t_var_name, 'custom_field_' ) === 0 ) {
 		$t_custom_field_id = mb_substr( $t_var_name, 13 );

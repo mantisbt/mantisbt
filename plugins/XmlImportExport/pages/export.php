@@ -39,7 +39,7 @@ $t_nl = "\n";
 # Get bug rows according to the current filter
 $t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 if( $t_result === false ) {
-	$t_result = array( );
+	$t_result = [ ];
 }
 
 $t_filename = 'exported_issues.xml';
@@ -74,10 +74,10 @@ $t_writer->writeAttribute( 'notelink', $t_bugnote_link );
 $t_writer->writeAttribute( 'format', '1' );
 
 # Ignored fields, these will be skipped
-$t_ignore = array(
+$t_ignore = [
 	'_stats',
 	'bug_text_id',
-);
+];
 
 # properties that we want to export are 'protected'
 $t_columns = array_keys( getClassProperties( 'BugData', 'protected' ) );

@@ -67,7 +67,7 @@ function get_attachment_stats( $p_file_type, $p_in_db ) {
 			break;
 	}
 	$t_result = db_query( $t_query );
-	$t_stats = array();
+	$t_stats = [];
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_project_id = (int)$t_row['id'];

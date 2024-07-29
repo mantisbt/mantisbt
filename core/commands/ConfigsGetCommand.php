@@ -63,7 +63,7 @@ class ConfigsGetCommand extends Command {
 	function validate() {
 		$this->options = $this->query( 'option' );
 		if( !is_array( $this->options ) ) {
-			$this->options = array( $this->options );
+			$this->options = [ $this->options ];
 		}
 
 		$this->project_id = $this->query( 'project_id' );
@@ -75,7 +75,7 @@ class ConfigsGetCommand extends Command {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[ $this->project_id ] );
 		}
 
 		$this->user_id = $this->query( 'user_id' );
@@ -94,7 +94,7 @@ class ConfigsGetCommand extends Command {
 				throw new ClientException(
 					sprintf( "User '%d' not found.", $this->user_id ),
 					ERROR_USER_BY_ID_NOT_FOUND,
-					array( $this->user_id ) );
+					[ $this->user_id ] );
 			}
 		}
 	}
@@ -105,7 +105,7 @@ class ConfigsGetCommand extends Command {
 	 * @return array Command response
 	 */
 	protected function process() {
-		$t_configs = array();
+		$t_configs = [];
 
 		foreach( $this->options as $t_option ) {
 			# Filter out undefined configs rather than error, they may be valid in some MantisBT versions but not
@@ -124,17 +124,17 @@ class ConfigsGetCommand extends Command {
 				$t_value = ConfigsGetCommand::config_get_enum_as_array( $t_option, $t_value );
 			}
 
-			$t_config_pair = array(
+			$t_config_pair = [
 				'option' => $t_option,
 				'value' => $t_value
-			);
+			];
 
 			$t_configs[] = $t_config_pair;
 		}
 
 		# wrap all configs into a configs attribute to allow adding other information if needed in the future
 		# that belongs outside the configs response.
-		return array( 'configs' => $t_configs );
+		return [ 'configs' => $t_configs ];
 	}
 
 	/**
@@ -159,11 +159,11 @@ class ConfigsGetCommand extends Command {
 		$t_enum_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string_value );
 		$t_localized_enum_string = lang_get( $p_enum_name );
 
-		$t_enum_array = array();
+		$t_enum_array = [];
 
 		foreach( $t_enum_assoc_array as $t_id => $t_name ) {
 			$t_label = MantisEnum::getLocalizedLabel( $p_enum_string_value, $t_localized_enum_string, $t_id );
-			$t_enum_entry = array( 'id' => $t_id, 'name' => $t_name, 'label' => $t_label );
+			$t_enum_entry = [ 'id' => $t_id, 'name' => $t_name, 'label' => $t_label ];
 			$t_enum_array[] = $t_enum_entry;
 		}
 

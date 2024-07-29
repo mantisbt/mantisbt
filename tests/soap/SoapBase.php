@@ -84,17 +84,17 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var array Array of Issue IDs to delete
 	 */
-	private   $issueIdsToDelete = array();
+	private   $issueIdsToDelete = [];
 
 	/**
 	 * @var array Array of Version IDs to delete
 	 */
-	private   $versionIdsToDelete = array();
+	private   $versionIdsToDelete = [];
 
 	/**
 	 * @var array Array of Tag IDs to delete
 	 */
-	private   $tagIdsToDelete = array();
+	private   $tagIdsToDelete = [];
 
 	/**
 	 * @var array Soap Client Options Array
@@ -115,11 +115,11 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file"
 		);
 
-		$this->defaultSoapClientOptions = array(
+		$this->defaultSoapClientOptions = [
 			'trace'      => true,
 			'exceptions' => true,
 			'cache_wsdl' => WSDL_CACHE_NONE,
-		);
+		];
 
 		$this->client = new SoapClient( $t_wsdl,
 			array_merge( $this->defaultSoapClientOptions, $this->extraSoapClientFlags() )
@@ -144,7 +144,7 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 	 * @return array an array of extra options to be passed to the SoapClient constructor
 	 */
 	protected function extraSoapClientFlags() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -210,12 +210,12 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}
-		return array(
+		return [
 			'summary' => $t_summary . ': test issue ' . rand( 1, 1000000 ),
 			'description' => 'description of test issue.',
-			'project' => array( 'id' => $this->getProjectId() ),
+			'project' => [ 'id' => $this->getProjectId() ],
 			'category' => $this->getCategory()
-		);
+		];
 	}
 
 	/**

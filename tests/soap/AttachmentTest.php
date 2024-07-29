@@ -36,7 +36,7 @@ class AttachmentTest extends SoapBase {
 	/**
 	 * @var array project attachments to delete after tests
 	 */
-	private $projectAttachmentsToDelete = array();
+	private $projectAttachmentsToDelete = [];
 
 	/**
 	 * A test case that tests the following:

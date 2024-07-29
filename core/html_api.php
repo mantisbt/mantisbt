@@ -86,8 +86,8 @@ $g_robots_meta = '';
 # flag for error handler to skip header menus
 $g_error_send_page_header = true;
 
-$g_stylesheets_included = array();
-$g_scripts_included = array();
+$g_stylesheets_included = [];
+$g_scripts_included = [];
 
 /**
  * Sets the url for the rss link associated with the current page.
@@ -226,7 +226,7 @@ function html_css() {
 		if( $t_stylesheet_path == 'status_config.php' ) {
 			$t_stylesheet_path = helper_url_combine(
 				helper_mantis_url( 'css/status_config.php' ),
-				'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+				'cache_key=' . helper_generate_cache_key( [ 'user' ] )
 			);
 		}
 
@@ -345,11 +345,11 @@ function html_head_javascript() {
 	# a reload when the content may differ.
 	$t_javascript_translations = helper_url_combine(
 		helper_mantis_url( 'javascript_translations.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'lang' ) )
+		'cache_key=' . helper_generate_cache_key( [ 'lang' ] )
 	);
 	$t_javascript_config = helper_url_combine(
 		helper_mantis_url( 'javascript_config.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+		'cache_key=' . helper_generate_cache_key( [ 'user' ] )
 	);
 	echo "\t" . '<script type="text/javascript" src="' . $t_javascript_config . '"></script>' . "\n";
 	echo "\t" . '<script type="text/javascript" src="' . $t_javascript_translations . '"></script>' . "\n";
@@ -495,7 +495,7 @@ function html_operation_confirmation( array $p_buttons = null, $p_message = '', 
  * @return void
  */
 function html_operation_successful( $p_redirect_url, $p_message = '' ) {
-	html_operation_confirmation( array( array( $p_redirect_url ) ), $p_message );
+	html_operation_confirmation( [ [ $p_redirect_url ] ], $p_message );
 }
 
 /**
@@ -506,7 +506,7 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
  */
 function html_operation_warning( $p_redirect_url, $p_message = '' ) {
 	html_operation_confirmation(
-		array( array( $p_redirect_url ) ),
+		[ [ $p_redirect_url ] ],
 		$p_message,
 		CONFIRMATION_TYPE_WARNING
 	);
@@ -520,7 +520,7 @@ function html_operation_warning( $p_redirect_url, $p_message = '' ) {
  */
 function html_operation_failure( $p_redirect_url, $p_message = '' ) {
 	html_operation_confirmation(
-		array( array( $p_redirect_url ) ),
+		[ [ $p_redirect_url ] ],
 		$p_message,
 		CONFIRMATION_TYPE_FAILURE
 	);
@@ -579,7 +579,7 @@ function print_project_menu_bar() {
 				$t_button_classes
 			);
 		echo "\n";
-		print_subproject_menu_bar( $t_current_project_id, $t_id, array( $t_id ) );
+		print_subproject_menu_bar( $t_current_project_id, $t_id, [ $t_id ] );
 	}
 
 	echo '</div>' . "\n";
@@ -596,7 +596,7 @@ function print_project_menu_bar() {
  *
  * @return void
  */
-function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id, array $p_parents = array() ) {
+function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id, array $p_parents = [] ) {
 	$t_subprojects = current_user_get_accessible_subprojects( $p_parent_project_id );
 
 	foreach( $t_subprojects as $t_subproject_id ) {
@@ -613,7 +613,7 @@ function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id,
 		print_subproject_menu_bar(
 			$p_current_project_id,
 			$t_subproject_id,
-			array_merge( $p_parents, array( $t_subproject_id) )
+			array_merge( $p_parents, [ $t_subproject_id] )
 		);
 	}
 }
@@ -715,11 +715,11 @@ function print_summary_submenu( $p_current_page = '' ) {
 	if( $t_menu_items ) {
 		$t_filter_param = filter_get_temporary_key_param( summary_get_filter() );
 
-		$t_synthesis['summary_page.php'] = array(
+		$t_synthesis['summary_page.php'] = [
 			'url' => helper_url_combine( helper_mantis_url( 'summary_page.php' ), $t_filter_param ),
 			'icon' => 'fa-table',
 			'label' => 'synthesis',
-		);
+		];
 
 		if( $p_current_page == '' ) {
 			$p_current_page = 'summary_page.php';
@@ -735,35 +735,35 @@ function print_summary_submenu( $p_current_page = '' ) {
  * @return void
  */
 function print_manage_menu( $p_page = '' ) {
-	$t_pages = array();
+	$t_pages = [];
 
 	if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
-		$t_pages['manage_overview_page.php'] = array( 'url'   => 'manage_overview_page.php', 'label' => '' );
+		$t_pages['manage_overview_page.php'] = [ 'url'   => 'manage_overview_page.php', 'label' => '' ];
 	}
 	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-		$t_pages['manage_user_page.php'] = array( 'url'   => 'manage_user_page.php', 'label' => 'manage_users_link' );
+		$t_pages['manage_user_page.php'] = [ 'url'   => 'manage_user_page.php', 'label' => 'manage_users_link' ];
 	}
 	if( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
-		$t_pages['manage_proj_page.php'] = array( 'url'   => 'manage_proj_page.php', 'label' => 'manage_projects_link' );
+		$t_pages['manage_proj_page.php'] = [ 'url'   => 'manage_proj_page.php', 'label' => 'manage_projects_link' ];
 	}
 	if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-		$t_pages['manage_tags_page.php'] = array( 'url'   => 'manage_tags_page.php', 'label' => 'manage_tags_link' );
+		$t_pages['manage_tags_page.php'] = [ 'url'   => 'manage_tags_page.php', 'label' => 'manage_tags_link' ];
 	}
 	if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
-		$t_pages['manage_custom_field_page.php'] = array( 'url'   => 'manage_custom_field_page.php', 'label' => 'manage_custom_field_link' );
+		$t_pages['manage_custom_field_page.php'] = [ 'url'   => 'manage_custom_field_page.php', 'label' => 'manage_custom_field_link' ];
 	}
 	if( config_get( 'enable_profiles' ) == ON && access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
-		$t_pages['manage_prof_menu_page.php'] = array( 'url'   => 'manage_prof_menu_page.php', 'label' => 'manage_global_profiles_link' );
+		$t_pages['manage_prof_menu_page.php'] = [ 'url'   => 'manage_prof_menu_page.php', 'label' => 'manage_global_profiles_link' ];
 	}
 	if( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
-		$t_pages['manage_plugin_page.php'] = array( 'url'   => 'manage_plugin_page.php', 'label' => 'manage_plugin_link' );
+		$t_pages['manage_plugin_page.php'] = [ 'url'   => 'manage_plugin_page.php', 'label' => 'manage_plugin_link' ];
 	}
 
 	if( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
-		$t_pages['adm_permissions_report.php'] = array(
+		$t_pages['adm_permissions_report.php'] = [
 			'url'   => 'adm_permissions_report.php',
 			'label' => 'manage_config_link'
-		);
+		];
 	}
 
 	print_menu( $t_pages, $p_page, 'EVENT_MENU_MANAGE' );
@@ -779,38 +779,38 @@ function print_manage_config_menu( $p_page = '' ) {
 		return;
 	}
 
-	$t_pages = array();
+	$t_pages = [];
 
-	$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
-	                                                'label' => 'permissions_summary_report' );
+	$t_pages['adm_permissions_report.php'] = [ 'url'   => 'adm_permissions_report.php',
+	                                                'label' => 'permissions_summary_report' ];
 
 	if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
-		$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php',
-		                                           'label' => 'configuration_report' );
+		$t_pages['adm_config_report.php'] = [ 'url'   => 'adm_config_report.php',
+		                                           'label' => 'configuration_report' ];
 	}
 
-	$t_pages['manage_config_work_threshold_page.php'] = array( 'url'   => 'manage_config_work_threshold_page.php',
-	                                                           'label' => 'manage_threshold_config' );
+	$t_pages['manage_config_work_threshold_page.php'] = [ 'url'   => 'manage_config_work_threshold_page.php',
+	                                                           'label' => 'manage_threshold_config' ];
 
-	$t_pages['manage_config_workflow_page.php'] = array( 'url'   => 'manage_config_workflow_page.php',
-	                                                     'label' => 'manage_workflow_config' );
+	$t_pages['manage_config_workflow_page.php'] = [ 'url'   => 'manage_config_workflow_page.php',
+	                                                     'label' => 'manage_workflow_config' ];
 
 	if( config_get( 'relationship_graph_enable' ) ) {
-		$t_pages['manage_config_workflow_graph_page.php'] = array( 'url'   => 'manage_config_workflow_graph_page.php',
-		                                                           'label' => 'manage_workflow_graph' );
+		$t_pages['manage_config_workflow_graph_page.php'] = [ 'url'   => 'manage_config_workflow_graph_page.php',
+		                                                           'label' => 'manage_workflow_graph' ];
 	}
 
 	if( config_get( 'enable_email_notification' ) == ON ) {
-		$t_pages['manage_config_email_page.php'] = array( 'url'   => 'manage_config_email_page.php',
-		                                                  'label' => 'manage_email_config' );
+		$t_pages['manage_config_email_page.php'] = [ 'url'   => 'manage_config_email_page.php',
+		                                                  'label' => 'manage_email_config' ];
 	}
 
-	$t_pages['manage_config_columns_page.php'] = array( 'url'   => 'manage_config_columns_page.php',
-	                                                    'label' => 'manage_columns_config' );
+	$t_pages['manage_config_columns_page.php'] = [ 'url'   => 'manage_config_columns_page.php',
+	                                                    'label' => 'manage_columns_config' ];
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
-	$t_menu_options = array();
+	$t_menu_options = [];
 	foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
 		foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
 			if( is_array( $t_callback_menu_options ) ) {
@@ -850,20 +850,20 @@ function print_manage_config_menu( $p_page = '' ) {
  * @return void
  */
 function print_account_menu( $p_page = '' ) {
-	$t_pages['account_page.php'] = array( 'url'=>'account_page.php', 'label'=>'account_link' );
-	$t_pages['account_prefs_page.php'] = array( 'url'=>'account_prefs_page.php', 'label'=>'change_preferences_link' );
-	$t_pages['account_manage_columns_page.php'] = array( 'url'=>'account_manage_columns_page.php', 'label'=>'manage_columns_config' );
+	$t_pages['account_page.php'] = [ 'url'=>'account_page.php', 'label'=>'account_link' ];
+	$t_pages['account_prefs_page.php'] = [ 'url'=>'account_prefs_page.php', 'label'=>'change_preferences_link' ];
+	$t_pages['account_manage_columns_page.php'] = [ 'url'=>'account_manage_columns_page.php', 'label'=>'manage_columns_config' ];
 
 	if( config_get( 'enable_profiles' ) == ON && access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
-		$t_pages['account_prof_menu_page.php'] = array( 'url'=>'account_prof_menu_page.php', 'label'=>'manage_profiles_link' );
+		$t_pages['account_prof_menu_page.php'] = [ 'url'=>'account_prof_menu_page.php', 'label'=>'manage_profiles_link' ];
 	}
 
 	if( config_get( 'enable_sponsorship' ) == ON && access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) && !current_user_is_anonymous() ) {
-		$t_pages['account_sponsor_page.php'] = array( 'url'=>'account_sponsor_page.php', 'label'=>'my_sponsorship' );
+		$t_pages['account_sponsor_page.php'] = [ 'url'=>'account_sponsor_page.php', 'label'=>'my_sponsorship' ];
 	}
 
 	if( api_token_can_create() ) {
-		$t_pages['api_tokens_page.php'] = array( 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' );
+		$t_pages['api_tokens_page.php'] = [ 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' ];
 	}
 
 	print_menu( $t_pages, $p_page, 'EVENT_MENU_ACCOUNT' );
@@ -889,23 +889,23 @@ function print_doc_menu( $p_page = '' ) {
 		}
 	}
 
-	$t_pages[$t_doc_url] = array(
+	$t_pages[$t_doc_url] = [
 		'url'   => $t_doc_url,
 		'label' => 'user_documentation'
-	);
+	];
 
 	# Project Documentation
-	$t_pages['proj_doc_page.php'] = array(
+	$t_pages['proj_doc_page.php'] = [
 		'url'   => 'proj_doc_page.php',
 		'label' => 'project_documentation'
-	);
+	];
 
 	# Add File
 	if( file_allow_project_upload() ) {
-		$t_pages['proj_doc_add_page.php'] = array(
+		$t_pages['proj_doc_add_page.php'] = [
 			'url'   => 'proj_doc_add_page.php',
 			'label' => 'add_file'
-		);
+		];
 	}
 
 	print_menu( $t_pages, $p_page, 'EVENT_MENU_DOCS' );
@@ -923,10 +923,10 @@ function print_summary_menu( $p_page = '', array $p_filter = null ) {
 	if( $t_filter_param ) {
 		$t_link = helper_url_combine( $t_link, $t_filter_param );
 	}
-	$t_pages['summary_page.php'] = array(
+	$t_pages['summary_page.php'] = [
 		'url' => $t_link,
 		'label' => 'summary_link',
-	);
+	];
 
 	print_menu( $t_pages, $p_page, 'EVENT_MENU_SUMMARY' );
 
@@ -957,12 +957,12 @@ function print_admin_menu_bar( $p_page ) {
 		$t_path = '';
 	}
 
-	$t_menu_items += array(
+	$t_menu_items += [
 		'check/index.php' => 'Check Installation',
 		'system_utils.php' => 'System Utilities',
 		'test_langs.php' => 'Test Lang',
 		'email_queue.php' => 'Email Queue',
-	);
+	];
 
 	echo '<div class="space-10"></div>' . "\n";
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";
@@ -989,7 +989,7 @@ function print_admin_menu_bar( $p_page ) {
  * @param string $p_method      Form submit method - default post.
  * @return void
  */
-function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_method = 'post' ) {
+function html_button( $p_action, $p_button_text, array $p_fields = [], $p_method = 'post' ) {
 	$t_form_name = explode( '.php', $p_action, 2 );
 	$p_action = urlencode( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
@@ -1104,7 +1104,7 @@ class TableGridLayout {
 	protected $cols;
 	private $_max_colspan;
 
-	public $items = array();
+	public $items = [];
 	public $item_orientation;
 
 	/**
@@ -1157,8 +1157,8 @@ class TableGridLayout {
 	 * Prints the HTMl for the generated table cells, for all items contained
 	 */
 	public function render() {
-		$t_rows_items = array();
-		$t_rows_freespace = array();
+		$t_rows_items = [];
+		$t_rows_freespace = [];
 		$t_used_rows = 0;
 
 		# Arrange the items in rows accounting for their actual cell space
@@ -1178,7 +1178,7 @@ class TableGridLayout {
 			}
 			# If no suitable row was found, create new one and add the item here
 			if( !$t_found ) {
-				$t_rows_items[] = array( $t_item );
+				$t_rows_items[] = [ $t_item ];
 				$t_used_rows++;
 				$t_rows_freespace[] = $this->cols - $t_item_cols;
 			}

@@ -119,10 +119,10 @@ if( $t_new_row_id == -1 ) {
 } else {
 	# Build a redirect to view_all_set to load the filter that was saved.
 	# This will make the filter name appear as selected in the filter selection box.
-	$t_params = array(
+	$t_params = [
 		'type' => 3,
 		'source_query_id' => $t_new_row_id
-	);
+	];
 	if( filter_is_temporary( $t_filter ) ) {
 		$t_params['filter'] = filter_get_temporary_key( $t_filter );
 	}

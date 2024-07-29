@@ -106,13 +106,13 @@ $g_filter = null;
  * Indexed by filter_id, contains the filter rows as read from db table.
  * @global array $g_cache_filter_db_rows
  */
-$g_cache_filter_db_rows = array();
+$g_cache_filter_db_rows = [];
 
 /**
  * Indexed by a hash of the filter array, contains a prebuilt BugFilterQuery object.
  * @global array $g_cache_filter_subquery
  */
-$g_cache_filter_subquery = array();
+$g_cache_filter_subquery = [];
 
 /**
  * Initialize the filter API with the current filter.
@@ -132,7 +132,7 @@ function filter_get_plugin_filters() {
 	static $s_field_array = null;
 
 	if( is_null( $s_field_array ) ) {
-		$s_field_array = array();
+		$s_field_array = [];
 
 		$t_all_plugin_filters = event_signal( 'EVENT_FILTER_FIELDS' );
 		foreach( $t_all_plugin_filters as $t_plugin => $t_plugin_filters ) {
@@ -165,15 +165,15 @@ function filter_get_plugin_filters() {
  * @return string the search.php?xxxx or an empty string if no criteria applied.
  */
 function filter_get_url( array $p_custom_filter ) {
-	$t_query = array();
+	$t_query = [];
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
 		$t_project_id = $p_custom_filter[FILTER_PROPERTY_PROJECT_ID];
 
 		if( count( $t_project_id ) == 1 && $t_project_id[0] == META_FILTER_CURRENT ) {
-			$t_project_id = array(
+			$t_project_id = [
 				helper_get_current_project(),
-			);
+			];
 		}
 
 		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_PROJECT_ID, $t_project_id );
@@ -401,7 +401,7 @@ function filter_get_url( array $p_custom_filter ) {
  * @return string url encoded string
  */
 function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_type = null ) {
-	$t_query_array = array();
+	$t_query_array = [];
 	if( is_array( $p_field_value ) ) {
 		$t_count = count( $p_field_value );
 		if( $t_count > 1 || $p_field_type == FILTER_TYPE_MULTI_STRING || $p_field_type == FILTER_TYPE_MULTI_INT ) {
@@ -624,7 +624,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( SIMPLE_ONLY == $t_config_view_filters ) {
 		$t_view_type = FILTER_VIEW_TYPE_SIMPLE;
 	}
-	if( !in_array( $t_view_type, array( FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED ) ) ) {
+	if( !in_array( $t_view_type, [ FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED ] ) ) {
 		$t_view_type = filter_get_default_view_type();
 	}
 	$p_filter_arr['_view_type'] = $t_view_type;
@@ -635,8 +635,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	$t_sort_fields_count = min( count( $t_sort_fields ), count( $t_dir_fields ) );
 
 	# clean up sort fields, remove invalid columns
-	$t_new_sort_array = array();
-	$t_new_dir_array = array();
+	$t_new_sort_array = [];
+	$t_new_dir_array = [];
 	$t_all_columns = columns_get_all_active_columns();
 	for( $ix = 0; $ix < $t_sort_fields_count; $ix++ ) {
 		if( isset( $t_sort_fields[$ix] ) ) {
@@ -697,11 +697,11 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	};
 
 	# Validate properties that must not be arrays
-	$t_single_value_list = array(
+	$t_single_value_list = [
 		FILTER_PROPERTY_VIEW_STATE => 'int',
 		FILTER_PROPERTY_RELATIONSHIP_TYPE => 'int',
 		FILTER_PROPERTY_RELATIONSHIP_BUG => 'int',
-	);
+	];
 	foreach( $t_single_value_list as $t_field_name => $t_field_type ) {
 		$t_value = $p_filter_arr[$t_field_name];
 		if( is_array( $t_value ) ) {
@@ -715,7 +715,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	}
 
 	# Validate properties that must be arrays, and the type of its elements
-	$t_array_values_list = array(
+	$t_array_values_list = [
 		FILTER_PROPERTY_CATEGORY_ID => 'string',
 		FILTER_PROPERTY_SEVERITY => 'int',
 		FILTER_PROPERTY_STATUS => 'int',
@@ -736,14 +736,14 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		FILTER_PROPERTY_OS_BUILD => 'string',
 		FILTER_PROPERTY_PROJECT_ID => 'int',
 		FILTER_PROPERTY_PROJECTION => 'int'
-	);
+	];
 	foreach( $t_array_values_list as $t_multi_field_name => $t_multi_field_type ) {
 		if( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
-			$p_filter_arr[$t_multi_field_name] = array(
+			$p_filter_arr[$t_multi_field_name] = [
 				$p_filter_arr[$t_multi_field_name],
-			);
+			];
 		}
-		$t_checked_array = array();
+		$t_checked_array = [];
 		foreach( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
 			$t_checked_array[] = $t_function_validate_type( $t_filter_value, $t_multi_field_type );
 		}
@@ -755,11 +755,11 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( isset( $p_filter_arr['custom_fields'][$t_cfid]) ) {
 				if( !is_array( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
-					$p_filter_arr['custom_fields'][$t_cfid] = array(
+					$p_filter_arr['custom_fields'][$t_cfid] = [
 						$p_filter_arr['custom_fields'][$t_cfid],
-					);
+					];
 				}
-				$t_checked_array = array();
+				$t_checked_array = [];
 				foreach( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
 					$t_filter_value = stripslashes( $t_filter_value );
 					if( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
@@ -783,7 +783,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 			$t_selected_status_array = $p_filter_arr[FILTER_PROPERTY_STATUS];
 		}
 		$t_hide_status = $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS][0];
-		$t_new_status_array = array();
+		$t_new_status_array = [];
 		foreach( $t_selected_status_array as $t_status ) {
 			if( $t_status < $t_hide_status ) {
 				$t_new_status_array[] = $t_status;
@@ -803,7 +803,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		# get array of hidden status ids
 		$t_all_status = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 		$t_hidden_status = $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS][0];
-		$t_hidden_status_array = array();
+		$t_hidden_status_array = [];
 		foreach( $t_all_status as $t_status ) {
 			if( $t_status >= $t_hidden_status ) {
 				$t_hidden_status_array[] = $t_status;
@@ -841,10 +841,10 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
  * @return array Filter array with default values
  */
 function filter_get_default_array( $p_view_type = null ) {
-	static $t_cache_default_array = array();
+	static $t_cache_default_array = [];
 
 	$t_default_view_type = filter_get_default_view_type();
-	if( !in_array( $p_view_type, array( FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED ) ) ) {
+	if( !in_array( $p_view_type, [ FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED ] ) ) {
 		$p_view_type = $t_default_view_type;
 	}
 
@@ -854,7 +854,7 @@ function filter_get_default_array( $p_view_type = null ) {
 	}
 
 	$t_default_show_changed = config_get( 'default_show_changed' );
-	$t_meta_filter_any_array = array( META_FILTER_ANY );
+	$t_meta_filter_any_array = [ META_FILTER_ANY ];
 
 	$t_config_view_filters = config_get( 'view_filters' );
 	if( ADVANCED_ONLY == $t_config_view_filters ) {
@@ -871,7 +871,7 @@ function filter_get_default_array( $p_view_type = null ) {
 		$t_hide_status_default = META_FILTER_NONE;
 	}
 
-	$t_filter = array(
+	$t_filter = [
 		'_version' => FILTER_VERSION,
 		'_view_type' => $t_view_type,
 		FILTER_PROPERTY_CATEGORY_ID => $t_meta_filter_any_array,
@@ -880,12 +880,12 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
 		FILTER_PROPERTY_REPORTER_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_HANDLER_ID => $t_meta_filter_any_array,
-		FILTER_PROPERTY_PROJECT_ID => array( META_FILTER_CURRENT ),
+		FILTER_PROPERTY_PROJECT_ID => [ META_FILTER_CURRENT ],
 		FILTER_PROPERTY_PROJECTION => $t_meta_filter_any_array,
 		FILTER_PROPERTY_RESOLUTION => $t_meta_filter_any_array,
 		FILTER_PROPERTY_BUILD => $t_meta_filter_any_array,
 		FILTER_PROPERTY_VERSION => $t_meta_filter_any_array,
-		FILTER_PROPERTY_HIDE_STATUS => array( $t_hide_status_default ),
+		FILTER_PROPERTY_HIDE_STATUS => [ $t_hide_status_default ],
 		FILTER_PROPERTY_MONITOR_USER_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_SORT_FIELD_NAME => 'last_updated',
 		FILTER_PROPERTY_SORT_DIRECTION => 'DESC',
@@ -920,7 +920,7 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_TAG_SELECT => 0,
 		FILTER_PROPERTY_RELATIONSHIP_TYPE => BUG_REL_ANY,
 		FILTER_PROPERTY_RELATIONSHIP_BUG => META_FILTER_ANY,
-	);
+	];
 
 	# initialize plugin filters
 	$t_plugin_filters = filter_get_plugin_filters();
@@ -936,10 +936,10 @@ function filter_get_default_array( $p_view_type = null ) {
 					$t_filter[$t_field_name] = (bool)$t_filter_object->default;
 					break;
 				case FILTER_TYPE_MULTI_STRING:
-					$t_filter[$t_field_name] = array( (string)META_FILTER_ANY );
+					$t_filter[$t_field_name] = [ (string)META_FILTER_ANY ];
 					break;
 				case FILTER_TYPE_MULTI_INT:
-					$t_filter[$t_field_name] = array( META_FILTER_ANY );
+					$t_filter[$t_field_name] = [ META_FILTER_ANY ];
 					break;
 				default:
 					$t_filter[$t_field_name] = (string)META_FILTER_ANY;
@@ -952,10 +952,10 @@ function filter_get_default_array( $p_view_type = null ) {
 
 	$t_custom_fields = custom_field_get_ids();
 	# @@@ (thraxisp) This should really be the linked ids, but we don't know the project
-	$f_custom_fields_data = array();
+	$f_custom_fields_data = [];
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
-			$f_custom_fields_data[$t_cfid] = array( (string)META_FILTER_ANY );
+			$f_custom_fields_data[$t_cfid] = [ (string)META_FILTER_ANY ];
 		}
 	}
 	$t_filter['custom_fields'] = $f_custom_fields_data;
@@ -1000,7 +1000,7 @@ function filter_get_default_property( $p_filter_property, $p_view_type = null ) 
  */
 function filter_get_default() {
 	# Create empty array, validation will fill it with defaults
-	$t_filter = array();
+	$t_filter = [];
 	return filter_ensure_valid_filter( $t_filter );
 }
 
@@ -1026,10 +1026,10 @@ function filter_deserialize( $p_serialized_filter ) {
 	# check filter version mark
 	$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
 	$t_version_string = $t_setting_arr[0];
-	if( in_array( $t_version_string, array( 'v1', 'v2', 'v3', 'v4' ) ) ) {
+	if( in_array( $t_version_string, [ 'v1', 'v2', 'v3', 'v4' ] ) ) {
 		# these versions can't be salvaged, they are too old to update
 		return false;
-	} elseif( in_array( $t_version_string, array( 'v5', 'v6', 'v7', 'v8' ) ) ) {
+	} elseif( in_array( $t_version_string, [ 'v5', 'v6', 'v7', 'v8' ] ) ) {
 		# filters from v5 onwards should cope with changing filter indices dynamically
 		$t_filter_array = unserialize( $t_setting_arr[1] );
 	} else {
@@ -1073,7 +1073,7 @@ function filter_get_row( $p_filter_id ) {
 	global $g_cache_filter_db_rows;
 
 	if( !isset( $g_cache_filter_db_rows[$p_filter_id] ) ) {
-		filter_cache_rows( array($p_filter_id) );
+		filter_cache_rows( [$p_filter_id] );
 	}
 
 	$t_row = $g_cache_filter_db_rows[$p_filter_id];
@@ -1128,16 +1128,16 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	# build a filter query, here for counting results
 	$t_filter_query = new BugFilterQuery(
 			$t_filter,
-			array(
+			[
 				'query_type' => BugFilterQuery::QUERY_TYPE_LIST,
 				'project_id' => $p_project_id,
 				'user_id' => $p_user_id,
 				'use_sticky' => $p_show_sticky
-				)
+				]
 			);
 	$p_bug_count = $t_filter_query->get_bug_count();
 	if( 0 == $p_bug_count ) {
-		return array();
+		return [];
 	}
 
 	# Calculate pagination
@@ -1186,7 +1186,7 @@ function filter_get_bug_rows_filter( $p_project_id = null, $p_user_id = null ) {
 
 	# if filter isn't return above, create a new filter from an empty array.
 	if( false === $t_filter ) {
-		$t_filter = array();
+		$t_filter = [];
 	}
 	return $t_filter;
 }
@@ -1199,7 +1199,7 @@ function filter_get_bug_rows_filter( $p_project_id = null, $p_user_id = null ) {
  */
 function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 	$t_stats = bug_get_bugnote_stats_array( $p_id_array_lastmod );
-	$t_rows = array();
+	$t_rows = [];
 	foreach( $p_rows as $t_row ) {
 		if( array_key_exists( $t_row['id'], $t_stats ) ) {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, $t_stats[$t_row['id']] ) );
@@ -1220,7 +1220,7 @@ function filter_draw_selection_area() {
 	$t_form_name_suffix = '_open';
 
 	$t_filter = current_user_get_bug_filter();
-	$t_filter = filter_ensure_valid_filter( $t_filter === false ? array() : $t_filter );
+	$t_filter = filter_ensure_valid_filter( $t_filter === false ? [] : $t_filter );
 
 	$t_view_type = $t_filter['_view_type'];
 
@@ -1477,9 +1477,9 @@ function filter_cache_rows( array $p_filter_ids ) {
 	if( empty( $p_filter_ids ) ) {
 		return;
 	}
-	$t_ids_not_found = array();
-	$t_params = array();
-	$t_sql_params = array();
+	$t_ids_not_found = [];
+	$t_params = [];
+	$t_sql_params = [];
 	db_param_push();
 	foreach( $p_filter_ids as $t_id ) {
 		$t_sql_params[] = db_param();
@@ -1507,7 +1507,7 @@ function filter_clear_cache( $p_filter_id = null ) {
 	global $g_cache_filter_db_rows;
 
 	if( null === $p_filter_id ) {
-		$g_cache_filter_db_rows = array();
+		$g_cache_filter_db_rows = [];
 	} else {
 		unset( $g_cache_filter_db_rows[(int)$p_filter_id] );
 	}
@@ -1527,7 +1527,7 @@ function filter_clear_cache( $p_filter_id = null ) {
  */
 function filter_db_update_filter( $p_filter_id, $p_filter_string, $p_project_id = null, $p_is_public = null, $p_name = null ) {
 	db_param_push();
-	$t_params = array();
+	$t_params = [];
 	$t_query = 'UPDATE {filters} SET filter_string=' . db_param();
 	$t_params[] = $p_filter_string;
 	if( null !== $p_project_id ) {
@@ -1566,7 +1566,7 @@ function filter_db_create_filter( $p_filter_string, $p_user_id, $p_project_id, $
 	db_param_push();
 	$t_query = 'INSERT INTO {filters} ( user_id, project_id, is_public, name, filter_string )'
 			. ' VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	$t_params = array( $c_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string );
+	$t_params = [ $c_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string ];
 	db_query( $t_query, $t_params );
 
 	return db_insert_id( db_get_table( 'filters' ) );
@@ -1659,7 +1659,7 @@ function filter_db_get_project_current( $p_project_id = null, $p_user_id = null 
 	db_param_push();
 	$t_query = 'SELECT id FROM {filters} WHERE user_id = ' . db_param()
 			. ' AND project_id = ' . db_param() . ' AND name = ' . db_param();
-	$t_result = db_query( $t_query, array( $c_user_id, $t_filter_project_id, '' ) );
+	$t_result = db_query( $t_query, [ $c_user_id, $t_filter_project_id, '' ] );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
 		return $t_row['id'];
@@ -1729,7 +1729,7 @@ function filter_db_delete_filter( $p_filter_id ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE id=' . db_param();
-	db_query( $t_query, array( $c_filter_id ) );
+	db_query( $t_query, [ $c_filter_id ] );
 
 	return true;
 }
@@ -1743,7 +1743,7 @@ function filter_db_delete_current_filters() {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE project_id<=' . db_param() . ' AND name=' . db_param();
-	db_query( $t_query, array( $t_all_id, '' ) );
+	db_query( $t_query, [ $t_all_id, '' ] );
 }
 
 /**
@@ -1756,7 +1756,7 @@ function filter_db_delete_current_filters() {
  */
 function filter_db_get_named_filters( $p_project_id = null, $p_user_id = null, $p_public = null ) {
 	db_param_push();
-	$t_params = array();
+	$t_params = [];
 	$t_query = 'SELECT id, name FROM {filters} WHERE project_id >= ' . db_param();
 	$t_params[] = 0;
 
@@ -1777,7 +1777,7 @@ function filter_db_get_named_filters( $p_project_id = null, $p_user_id = null, $
 
 	$t_result = db_query( $t_query, $t_params );
 
-	$t_query_arr = array();
+	$t_query_arr = [];
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_query_arr[$t_row['id']] = $t_row['name'];
 	}
@@ -1808,7 +1808,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 
 	# If the user doesn't have access rights to stored queries, just return
 	if( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
-		return array();
+		return [];
 	}
 
 	# Get the list of available queries. By sorting such that public queries are
@@ -1825,7 +1825,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 				OR user_id = ' . db_param() . ')
 			ORDER BY is_public DESC, name ASC';
 
-		$t_result = db_query( $t_query, array( $t_project_id, true, $t_user_id ) );
+		$t_result = db_query( $t_query, [ $t_project_id, true, $t_user_id ] );
 	} else {
 		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
 		$t_project_ids[] = ALL_PROJECTS;
@@ -1837,10 +1837,10 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 				OR user_id = ' . db_param() . ')
 			ORDER BY is_public DESC, name ASC';
 
-		$t_result = db_query( $t_query, array( true, $t_user_id ) );
+		$t_result = db_query( $t_query, [ true, $t_user_id ] );
 	}
 
-	$t_filters = array();
+	$t_filters = [];
 
 	# first build the id=>name array
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -1854,9 +1854,9 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 	}
 
 	# build an extended array of name=>{filter data}
-	$t_filter_data = array();
+	$t_filter_data = [];
 	foreach( $t_filters as $t_filter_id => $t_filter_name ) {
-		$t_row = array();
+		$t_row = [];
 		$t_filter_obj = filter_get( $t_filter_id );
 		if( !$t_filter_obj ) {
 			continue;
@@ -1932,16 +1932,16 @@ function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
 
 	if( $p_user_id == 0 ) {
-		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => META_FILTER_NONE );
+		$t_filter[FILTER_PROPERTY_HANDLER_ID] = [ '0' => META_FILTER_NONE ];
 	} else {
-		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => $p_user_id );
+		$t_filter[FILTER_PROPERTY_HANDLER_ID] = [ '0' => $p_user_id ];
 	}
 
 	$t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold', null, $p_user_id, $p_project_id );
-	$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array( '0' => $t_bug_resolved_status_threshold );
+	$t_filter[FILTER_PROPERTY_HIDE_STATUS] = [ '0' => $t_bug_resolved_status_threshold ];
 
 	if( $p_project_id != ALL_PROJECTS ) {
-		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = [ '0' => $p_project_id ];
 	}
 
 	return filter_ensure_valid_filter( $t_filter );
@@ -1955,10 +1955,10 @@ function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
  */
 function filter_create_reported_by( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
-	$t_filter[FILTER_PROPERTY_REPORTER_ID] = array( '0' => $p_user_id );
+	$t_filter[FILTER_PROPERTY_REPORTER_ID] = [ '0' => $p_user_id ];
 
 	if( $p_project_id != ALL_PROJECTS ) {
-		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = [ '0' => $p_project_id ];
 	}
 
 	return filter_ensure_valid_filter( $t_filter );
@@ -1974,13 +1974,13 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
 
 	if( $p_user_id == 0 ) {
-		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = array( '0' => META_FILTER_NONE );
+		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = [ '0' => META_FILTER_NONE ];
 	} else {
-		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = array( '0' => $p_user_id );
+		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = [ '0' => $p_user_id ];
 	}
 
 	if( $p_project_id != ALL_PROJECTS ) {
-		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = [ '0' => $p_project_id ];
 	}
 
 	return filter_ensure_valid_filter( $t_filter );
@@ -2042,7 +2042,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	# sort="c1,c2" as used by permalinks
 	# sort[]="c1" sort[]="c2" as used by filter form
 	gpc_make_array( FILTER_PROPERTY_SORT_FIELD_NAME );
-	$f_sort_array = gpc_get_string_array( FILTER_PROPERTY_SORT_FIELD_NAME, array() );
+	$f_sort_array = gpc_get_string_array( FILTER_PROPERTY_SORT_FIELD_NAME, [] );
 
 	# This sort parameter is an incremental column addition to current sort set.
 	# Only one column/dir, which is added to the front.
@@ -2050,9 +2050,9 @@ function filter_gpc_get( array $p_filter = null ) {
 
 	if( !empty( $f_sort_array ) ) {
 		gpc_make_array( FILTER_PROPERTY_SORT_DIRECTION );
-		$f_dir_array = gpc_get_string_array( FILTER_PROPERTY_SORT_DIRECTION, array() );
-		$t_new_sort_array = array();
-		$t_new_dir_array = array();
+		$f_dir_array = gpc_get_string_array( FILTER_PROPERTY_SORT_DIRECTION, [] );
+		$t_new_sort_array = [];
+		$t_new_dir_array = [];
 		# evaluate each parameter, checks that "dir" may be omitted in order to avoid shifting subsequent parameters
 		$t_count = count( $f_sort_array );
 		for( $ix = 0; $ix < $t_count; $ix++ ) {
@@ -2060,7 +2060,7 @@ function filter_gpc_get( array $p_filter = null ) {
 			if( isset( $f_dir_array[$ix] ) ) {
 				$t_param_dirs = explode( ',', $f_dir_array[$ix] );
 			} else {
-				$t_param_dirs = array();
+				$t_param_dirs = [];
 			}
 			# fill the gaps with dummy string, they will be defaulted by ensure_valid_filter
 			if( count( $t_param_dirs ) < count( $t_param_columns ) ) {
@@ -2109,7 +2109,7 @@ function filter_gpc_get( array $p_filter = null ) {
 
 	# plugin filter updates
 	$t_plugin_filters = filter_get_plugin_filters();
-	$t_filter_input = array();
+	$t_filter_input = [];
 
 	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 		switch( $t_filter_object->type ) {
@@ -2147,7 +2147,7 @@ function filter_gpc_get( array $p_filter = null ) {
 					continue;
 				}
 
-				$f_custom_fields_data[$t_cfid] = array();
+				$f_custom_fields_data[$t_cfid] = [];
 
 				# Get date control property
 				$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null );
@@ -2236,10 +2236,10 @@ function filter_gpc_get( array $p_filter = null ) {
 				}
 
 				if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, array( META_FILTER_ANY ) );
+					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, [ META_FILTER_ANY ] );
 				} else {
 					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
-					$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
+					$f_custom_fields_data[$t_cfid] = [ $f_custom_fields_data[$t_cfid] ];
 				}
 			}
 		}
@@ -2329,8 +2329,8 @@ function filter_get_visible_sort_properties_array( array $p_filter, $p_columns_t
 
 	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
-	$t_sort_array = array();
-	$t_dir_array = array();
+	$t_sort_array = [];
+	$t_dir_array = [];
 	$t_count = count( $t_sort_fields );
 	for( $i = 0; $i < $t_count; $i++ ) {
 		$c_sort = $t_sort_fields[$i];
@@ -2339,10 +2339,10 @@ function filter_get_visible_sort_properties_array( array $p_filter, $p_columns_t
 			$t_dir_array[] = $t_dir_fields[$i];
 		}
 	}
-	return array(
+	return [
 		FILTER_PROPERTY_SORT_FIELD_NAME => $t_sort_array,
 		FILTER_PROPERTY_SORT_DIRECTION => $t_dir_array
-	);
+	];
 }
 
 /**
@@ -2447,7 +2447,7 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 	# normalize the project filtering into an array $t_project_ids
 	if( FILTER_VIEW_TYPE_SIMPLE == $t_view_type ) {
 		log_event( LOG_FILTERING, 'Simple Filter' );
-		$t_project_ids = array( $t_project_id );
+		$t_project_ids = [ $t_project_id ];
 		$t_include_sub_projects = true;
 	} else {
 		log_event( LOG_FILTERING, 'Advanced Filter' );
@@ -2462,7 +2462,7 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 	# replace META_FILTER_CURRENT with the actual current project id.
 
 	$t_all_projects_found = false;
-	$t_new_project_ids = array();
+	$t_new_project_ids = [];
 	foreach( $t_project_ids as $t_pid ) {
 		if( $t_pid == META_FILTER_CURRENT ) {
 			$t_pid = $t_project_id;
@@ -2665,7 +2665,7 @@ function filter_temporary_get( $p_filter_key, $p_default = null ) {
 	# if no default was provided, we will trigger an error if not found
 	$t_trigger_error = func_num_args() == 1;
 
-	$t_session_filters = session_get( 'temporary_filters', array() );
+	$t_session_filters = session_get( 'temporary_filters', [] );
 	if( isset( $t_session_filters[$p_filter_key] ) ) {
 		# setting here the key in the filter array only if the key exists
 		# this validates against receiving garbage input as XSS attacks
@@ -2703,7 +2703,7 @@ function filter_temporary_set( array $p_filter, $p_filter_key = null ) {
 	}
 
 	$p_filter = filter_clean_runtime_properties( $p_filter );
-	$t_session_filters = session_get( 'temporary_filters', array() );
+	$t_session_filters = session_get( 'temporary_filters', [] );
 	$t_session_filters[$t_filter_key] = $p_filter;
 	session_set( 'temporary_filters', $t_session_filters );
 	return $t_filter_key;

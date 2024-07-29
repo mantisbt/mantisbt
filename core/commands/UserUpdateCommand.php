@@ -129,7 +129,7 @@ class UserUpdateCommand extends Command {
 		# User Data
 		$t_user = $this->payload( 'user' );
 		if( is_null( $t_user ) ) {
-			throw new ClientException( 'Missing user data', ERROR_EMPTY_FIELD, array( 'user' ) );
+			throw new ClientException( 'Missing user data', ERROR_EMPTY_FIELD, [ 'user' ] );
 		}
 
 		# Protected
@@ -262,7 +262,7 @@ class UserUpdateCommand extends Command {
 			}
 		}
 
-		$this->old_user = array(
+		$this->old_user = [
 			'id' => $this->user_id,
 			'username' => $t_old_username,
 			'real_name' => $t_old_realname,
@@ -270,9 +270,9 @@ class UserUpdateCommand extends Command {
 			'access_level' => $t_old_access_level,
 			'enabled' => $t_old_enabled,
 			'protected' => $t_old_protected
-		);
+		];
 
-		$this->new_user = array(
+		$this->new_user = [
 			'id' => $this->user_id,
 			'username' => $t_new_username ?: $t_old_username,
 			'real_name' => !is_null( $t_new_realname ) ? $t_new_realname : $t_old_realname,
@@ -280,7 +280,7 @@ class UserUpdateCommand extends Command {
 			'access_level' => $t_new_access_level ?: $t_old_access_level,
 			'enabled' => !is_null( $t_new_enabled ) ? $t_new_enabled : $t_old_enabled,
 			'protected' => !is_null( $t_new_protected ) ? $t_new_protected : $t_old_protected
-		);
+		];
 	}
 
 	/**
@@ -304,12 +304,12 @@ class UserUpdateCommand extends Command {
 			email_user_changed( $this->user_id, $this->old_user, $this->new_user );
 		}
 
-		event_signal( 'EVENT_MANAGE_USER_UPDATE', array( $this->user_id ) );
+		event_signal( 'EVENT_MANAGE_USER_UPDATE', [ $this->user_id ] );
 
 		user_clear_cache( $this->user_id );
-		$t_select = array( 'id', 'name', 'real_name', 'email', 'access_level', 'enabled', 'protected' );
+		$t_select = [ 'id', 'name', 'real_name', 'email', 'access_level', 'enabled', 'protected' ];
 		$t_user = mci_user_get( $this->user_id, $t_select );
-		return array( 'user' => $t_user );
+		return [ 'user' => $t_user ];
 	}
 
 	/**
@@ -332,14 +332,14 @@ class UserUpdateCommand extends Command {
 				protected=' . db_param() . ', realname=' . db_param() . '
 			WHERE id=' . db_param();
 
-		$t_query_params = array(
+		$t_query_params = [
 			$p_user['username'],
 			$p_user['email'],
 			$p_user['access_level'],
 			$p_user['enabled'],
 			$p_user['protected'],
 			$p_user['real_name'],
-			$p_user['id'] );
+			$p_user['id'] ];
 
 		db_query( $t_query, $t_query_params );
 	}

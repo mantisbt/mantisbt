@@ -192,7 +192,7 @@ function profile_get_row( $p_profile_id ) {
 		throw new ClientException(
 			"Profile #$p_profile_id not found",
 			ERROR_USER_PROFILE_NOT_FOUND,
-			array( $p_profile_id )
+			[ $p_profile_id ]
 		);
 	}
 

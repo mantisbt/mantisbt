@@ -51,12 +51,12 @@ $f_project_id    = gpc_get_int( 'project_id' );
 $f_subproject_id = gpc_get_int( 'subproject_id' );
 
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'project_id' => (int)$f_project_id,
 		'subproject_id' => (int)$f_subproject_id
-	)
-);
+	]
+];
 
 $t_command = new ProjectHierarchyDeleteCommand( $t_data );
 $t_command->execute();

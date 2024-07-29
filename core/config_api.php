@@ -39,10 +39,10 @@ require_api( 'helper_api.php' );
 require_api( 'utility_api.php' );
 
 # cache for config variables
-$g_cache_config = array();
-$g_cache_config_eval = array();
-$g_cache_config_access = array();
-$g_cache_bypass_lookup = array();
+$g_cache_config = [];
+$g_cache_config_eval = [];
+$g_cache_config_access = [];
+$g_cache_bypass_lookup = [];
 $g_cache_filled = false;
 
 # cache environment to speed up lookups
@@ -86,7 +86,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 			# @@ debug @@ echo " lu db $p_option ";
 			# @@ debug @@ error_print_stack_trace();
 			# prepare the user's list
-			$t_users = array();
+			$t_users = [];
 			if( null === $p_user ) {
 				if( !isset( $g_cache_config_user ) ) {
 					$t_users[] = auth_is_user_authenticated() ? auth_get_current_user_id() : ALL_USERS;
@@ -105,7 +105,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 			}
 
 			# prepare the projects list
-			$t_projects = array();
+			$t_projects = [];
 			if( ( null === $p_project ) ) {
 				if( !isset( $g_cache_config_project ) ) {
 					$t_projects[] = auth_is_user_authenticated() ? helper_get_current_project() : ALL_PROJECTS;
@@ -212,7 +212,7 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	}
 
 	# prepare the user's list
-	$t_users = array();
+	$t_users = [];
 	if( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 		$t_users[] = auth_get_current_user_id();
 	} else if( !in_array( $p_user, $t_users ) ) {
@@ -221,7 +221,7 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	$t_users[] = ALL_USERS;
 
 	# prepare the projects list
-	$t_projects = array();
+	$t_projects = [];
 	if( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
 		$t_selected_project = helper_get_current_project();
 		$t_projects[] = $t_selected_project;
@@ -262,7 +262,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	}
 
 	# prepare the user's list
-	$t_users = array( ALL_USERS );
+	$t_users = [ ALL_USERS ];
 	if( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 		$t_users[] = auth_get_current_user_id();
 	} else if( !in_array( $p_user, $t_users ) ) {
@@ -271,7 +271,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	$t_users[] = ALL_USERS;
 
 	# prepare the projects list
-	$t_projects = array( ALL_PROJECTS );
+	$t_projects = [ ALL_PROJECTS ];
 	if( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
 		$t_selected_project = helper_get_current_project();
 		if( ALL_PROJECTS <> $t_selected_project ) {
@@ -335,7 +335,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 				WHERE config_id = ' . db_param() . ' AND
 					project_id = ' . db_param() . ' AND
 					user_id = ' . db_param();
-		$t_result = db_query( $t_query, array( $p_option, (int)$p_project, (int)$p_user ) );
+		$t_result = db_query( $t_query, [ $p_option, (int)$p_project, (int)$p_user ] );
 
 		db_param_push();
 		if( 0 < db_result( $t_result ) ) {
@@ -344,27 +344,27 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 					WHERE config_id = ' . db_param() . ' AND
 						project_id = ' . db_param() . ' AND
 						user_id = ' . db_param();
-			$t_params = array(
+			$t_params = [
 				(string)$c_value,
 				$t_type,
 				(int)$p_access,
 				$p_option,
 				(int)$p_project,
 				(int)$p_user,
-			);
+			];
 		} else {
 			$t_set_query = 'INSERT INTO {config}
 					( value, type, access_reqd, config_id, project_id, user_id )
 					VALUES
 					(' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ' )';
-			$t_params = array(
+			$t_params = [
 				(string)$c_value,
 				$t_type,
 				(int)$p_access,
 				$p_option,
 				(int)$p_project,
 				(int)$p_user,
-			);
+			];
 		}
 
 		db_query( $t_set_query, $t_params );
@@ -475,7 +475,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 				WHERE config_id = ' . db_param() . ' AND
 					project_id=' . db_param() . ' AND
 					user_id=' . db_param();
-		db_query( $t_query, array( $p_option, $p_project, $p_user ) );
+		db_query( $t_query, [ $p_option, $p_project, $p_user ] );
 	}
 
 	config_flush_cache( $p_option, $p_user, $p_project );
@@ -496,7 +496,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 	# Delete the corresponding bugnote texts
 	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE config_id=' . db_param() . ' AND user_id=' . db_param();
-	db_query( $t_query, array( $p_option, $p_user_id ) );
+	db_query( $t_query, [ $p_option, $p_user_id ] );
 }
 
 /**
@@ -508,7 +508,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 function config_delete_project( $p_project = ALL_PROJECTS ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE project_id=' . db_param();
-	db_query( $t_query, array( $p_project ) );
+	db_query( $t_query, [ $p_project ] );
 
 	# flush cache here in case some of the deleted configs are in use.
 	config_flush_cache();
@@ -720,7 +720,7 @@ function config_is_defined( $p_option, $p_value = null ) {
 function config_cache_all() {
 	global $g_cache_config, $g_cache_config_access;
 
-	$t_config_rows = array();
+	$t_config_rows = [];
 
 	# With oracle database, ADOdb maps column type "L" to clob.
 	# Because reading clobs is significantly slower, cast them to varchar for faster query execution
@@ -806,13 +806,13 @@ function config_get_value_as_string( $p_type, $p_value, $p_for_display = true ) 
 }
 
 function config_get_types() {
-	return array(
+	return [
 		CONFIG_TYPE_DEFAULT => 'default',
 		CONFIG_TYPE_INT     => 'integer',
 		CONFIG_TYPE_FLOAT   => 'float',
 		CONFIG_TYPE_COMPLEX => 'complex',
 		CONFIG_TYPE_STRING  => 'string',
-		);
+		];
 }
 
 /**

@@ -273,12 +273,12 @@ function custom_function_default_issue_delete_notify( $p_issue_id ) {
  * @return boolean
  */
 function custom_function_default_auth_can_change_password() {
-	$t_can_change = array(
+	$t_can_change = [
 		PLAIN,
 		CRYPT,
 		CRYPT_FULL_SALT,
 		MD5,
-	);
+	];
 
 	return in_array( config_get_global( 'login_method' ), $t_can_change );
 }
@@ -491,7 +491,7 @@ function custom_function_default_print_column_value( $p_column, BugData $p_bug, 
 function custom_function_default_enum_versions() {
 	$t_versions = version_get_all_rows( helper_get_current_project() );
 
-	$t_enum = array();
+	$t_enum = [];
 	foreach( $t_versions as $t_version ) {
 		$t_enum[] = $t_version['version'];
 	}
@@ -511,7 +511,7 @@ function custom_function_default_enum_versions() {
 function custom_function_default_enum_released_versions() {
 	$t_versions = version_get_all_rows( helper_get_current_project() );
 
-	$t_enum = array();
+	$t_enum = [];
 	foreach( $t_versions as $t_version ) {
 		if( $t_version['released'] == 1 ) {
 			$t_enum[] = $t_version['version'];
@@ -533,7 +533,7 @@ function custom_function_default_enum_released_versions() {
 function custom_function_default_enum_future_versions() {
 	$t_versions = version_get_all_rows( helper_get_current_project() );
 
-	$t_enum = array();
+	$t_enum = [];
 	foreach( $t_versions as $t_version ) {
 		if( $t_version['released'] == 0 ) {
 			$t_enum[] = $t_version['version'];
@@ -555,7 +555,7 @@ function custom_function_default_enum_future_versions() {
 function custom_function_default_enum_categories() {
 	$t_categories = category_get_all_rows( helper_get_current_project() );
 
-	$t_enum = array();
+	$t_enum = [];
 	foreach( $t_categories as $t_category ) {
 		$t_enum[] = $t_category['name'];
 	}

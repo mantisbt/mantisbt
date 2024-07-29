@@ -111,14 +111,14 @@ function table_print_filter_row( $p_filter_id ) {
 	# Actions
 	echo '<td>';
 	echo '<div class="pull-left">';
-	print_form_button( 'view_all_set.php', lang_get( 'apply_filter_button' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ), /* security token */ OFF );
+	print_form_button( 'view_all_set.php', lang_get( 'apply_filter_button' ), [ 'type' => 3, 'source_query_id' =>  $p_filter_id ], /* security token */ OFF );
 	echo '</div>';
 	if( $t_editable ) {
 		echo '<div class="pull-left">';
-		print_form_button( 'manage_filter_edit_page.php', lang_get( 'edit' ), array( 'filter_id' =>  $p_filter_id ) );
+		print_form_button( 'manage_filter_edit_page.php', lang_get( 'edit' ), [ 'filter_id' =>  $p_filter_id ] );
 		echo '</div>';
 		echo '<div class="pull-left">';
-		print_form_button( 'manage_filter_delete.php', lang_get( 'delete' ), array( 'filter_id' =>  $p_filter_id ) );
+		print_form_button( 'manage_filter_delete.php', lang_get( 'delete' ), [ 'filter_id' =>  $p_filter_id ] );
 		echo '</div>';
 	}
 	echo '</div>';

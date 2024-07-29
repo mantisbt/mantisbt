@@ -213,7 +213,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</td>
 			</tr>
 
-			<?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', array( $f_project_id ) ); ?>
+			<?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', [ $f_project_id ] ); ?>
 		</fieldset>
 		</table>
 		</div>
@@ -305,7 +305,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		print_form_button(
 			'manage_proj_create_page.php',
 			lang_get( 'create_new_subproject_link' ),
-			array( 'parent_id' => $f_project_id ),
+			[ 'parent_id' => $f_project_id ],
 			null,
 			'btn btn-sm btn-primary btn-white btn-round'
 		);
@@ -485,10 +485,10 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				print_form_button(
 					'manage_proj_cat_edit_page.php',
 					lang_get( 'edit' ),
-					array(
+					[
 						'category_id' => $t_id,
 						'project_id' => $f_project_id,
-					),
+					],
 					OFF,
 					'btn btn-xs btn-primary btn-white btn-round'
 				);
@@ -496,10 +496,10 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				print_form_button(
 					'manage_proj_cat_delete.php',
 					lang_get( 'delete' ),
-					array(
+					[
 						'category_id' => $t_id,
 						'project_id' => $f_project_id,
-					),
+					],
 					$t_security_token,
 					'btn btn-xs btn-primary btn-white btn-round'
 				);
@@ -611,7 +611,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<?php
 					$t_version_id = version_get_id( $t_name, $f_project_id );
 					if( !$t_inherited ) {
-						$t_param = array( 'version_id' => $t_version_id);
+						$t_param = [ 'version_id' => $t_version_id];
 						print_form_button(
 							'manage_proj_ver_edit_page.php',
 							lang_get( 'edit' ),
@@ -741,18 +741,18 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 					print_form_button(
 						'manage_custom_field_edit_page.php?field_id=' . $t_field_id,
 						lang_get( 'edit' ),
-						array(
+						[
 							'return' => 'manage_proj_edit_page.php?project_id='
 								. $f_project_id . '#customfields',
-						)
+						]
 					);
 					print_form_button(
 						'manage_proj_custom_field_remove.php',
 						lang_get( 'remove_link' ),
-						array(
+						[
 							'field_id' => $t_field_id,
 							'project_id' => $f_project_id,
-						)
+						]
 					);
 ?>
 				</td>
@@ -776,7 +776,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="field_id" class="input-sm">
 				<?php
-					$t_cf_defs = array();
+					$t_cf_defs = [];
 					foreach( custom_field_get_ids() as $t_cfid ) {
 						$t_cf_defs[] = custom_field_get_definition( $t_cfid );
 					}
@@ -803,7 +803,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 </div><?php
 }
 
-event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
+event_signal( 'EVENT_MANAGE_PROJECT_PAGE', [ $f_project_id ] );
 ?>
 
 <!-- MANAGE ACCOUNTS -->
@@ -861,8 +861,8 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 
 	if( $t_users_count > 0 ) {
 
-		$t_user_ids = array();
-		$t_sort = array();
+		$t_user_ids = [];
+		$t_sort = [];
 		foreach ( $t_users as $t_ix => $t_user ) {
 			$t_user_display_name = user_get_name_from_row( $t_user );
 			$t_users[$t_ix]['display_name'] = $t_user_display_name;
@@ -899,10 +899,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 		print_form_button(
 			'manage_proj_edit_page.php#project-users',
 			lang_get( $f_show_global_users ? 'hide_global_users' : 'show_global_users' ),
-			array(
+			[
 				'project_id' => $f_project_id,
 				'show_global_users' => !$f_show_global_users
-			),
+			],
 			OFF,
 			'btn btn-sm btn-primary btn-white btn-round'
 		);
@@ -945,7 +945,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 								<tbody class="list">
 <?php
 		# If including global users, fetch here all local user to later distinguish them
-		$t_local_users = array();
+		$t_local_users = [];
 		if( $f_show_global_users ) {
 			$t_local_users = project_get_all_user_rows( $f_project_id, ANYBODY, false );
 		}

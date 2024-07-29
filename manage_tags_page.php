@@ -60,7 +60,7 @@ $f_page_number = gpc_get_int( 'page_number', 1 );
 
 # Start Index Menu
 $t_prefix_array = array_merge(
-	array( 'ALL' ),
+	[ 'ALL' ],
 	range( 'A', 'Z' ),
 	range( '0', '9' )
 );

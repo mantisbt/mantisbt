@@ -38,8 +38,8 @@ require_api( 'database_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-$g_error_parameters = array();
-$g_errors_delayed = array();
+$g_error_parameters = [];
+$g_errors_delayed = [];
 $g_error_handled = false;
 $g_error_proceed_url = null;
 $g_error_send_page_header = true;
@@ -414,7 +414,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 		lang_pop();
 	}
 
-	$g_error_parameters = array();
+	$g_error_parameters = [];
 	$g_error_proceed_url = null;
 }
 
@@ -465,7 +465,7 @@ function error_print_delayed() {
 		}
 		echo "\n" . '</div>';
 
-		$g_errors_delayed = array();
+		$g_errors_delayed = [];
 	}
 }
 
@@ -512,7 +512,7 @@ function error_stack_trace_as_string( $p_exception = null ) {
 			( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ) . ' - ' .
 			( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' );
 
-		$t_args = array();
+		$t_args = [];
 		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
@@ -555,12 +555,12 @@ function error_print_stack_trace( $p_exception = null ) {
 
 	foreach( $t_stack as $t_id => $t_frame ) {
 		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
-			$t_args = array();
+			$t_args = [];
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
 		} else {
-			$t_args = array('-');
+			$t_args = ['-'];
 		}
 
 		printf(
@@ -591,7 +591,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 	}
 
 	if( is_array( $p_param ) ) {
-		$t_results = array();
+		$t_results = [];
 
 		foreach( $p_param as $t_key => $t_value ) {
 			$t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
@@ -599,7 +599,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 
 		return '<array> { ' . implode( ', ', $t_results ) . ' }';
 	} else if( is_object( $p_param ) ) {
-		$t_results = array();
+		$t_results = [];
 
 		$t_class_name = get_class( $p_param );
 		$t_inst_vars = get_object_vars( $p_param );

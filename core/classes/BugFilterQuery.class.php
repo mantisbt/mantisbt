@@ -110,12 +110,12 @@ class BugFilterQuery extends DbQuery {
 
 	# internal storage for intermediate data
 	protected $query_type;
-	protected $parts_select = array();
-	protected $parts_from = array();
-	protected $parts_join = array();
-	protected $parts_where = array(); # these are joined by the filter operator
-	protected $parts_order = array();
-	protected $fixed_where = array(); # these are joined always by AND
+	protected $parts_select = [];
+	protected $parts_from = [];
+	protected $parts_join = [];
+	protected $parts_where = []; # these are joined by the filter operator
+	protected $parts_order = [];
+	protected $fixed_where = []; # these are joined always by AND
 	protected $filter_operator;
 
 	# runtime variables for building the filter query
@@ -548,30 +548,30 @@ class BugFilterQuery extends DbQuery {
 
 			# this array is populated with projects that the current user
 			# hasfull access to (public and private issues)
-			$t_private_and_public_project_ids = array();
+			$t_private_and_public_project_ids = [];
 			# this array is populated with projects to search only public issues.
-			$t_public_only_project_ids = array();
+			$t_public_only_project_ids = [];
 			# this array is populated with projects to search only accesible private
 			# issues by being the reporter of those.
-			$t_private_is_reporter_project_ids = array();
+			$t_private_is_reporter_project_ids = [];
 
 			# these arrays are populated with projects where the user has limited view,
 			# with 'limit_view_unless_threshold' configuration
 
 			# projects where the user has limited view, but can see any private issue
-			$t_limited_public_and_private_project_ids = array();
+			$t_limited_public_and_private_project_ids = [];
 			# projects where the user has limited view, and can't see private issues,
 			# only public ones
-			$t_limited_public_only_project_ids = array();
+			$t_limited_public_only_project_ids = [];
 
 			# these arrays are populated with projects where the user has limited view,
 			# with the old 'limit_reporters' configuration
 
 			# projects where the user has limited view, but can see any private issue
-			$t_old_limit_public_and_private_project_ids = array();
+			$t_old_limit_public_and_private_project_ids = [];
 			# projects where the user has limited view, and can't see private issues,
 			# only public ones
-			$t_old_limit_public_only_project_ids = array();
+			$t_old_limit_public_only_project_ids = [];
 
 			# make sure the project rows are cached, as they will be used to check access levels.
 			project_cache_array_rows( $t_included_project_ids );
@@ -612,7 +612,7 @@ class BugFilterQuery extends DbQuery {
 				}
 			}
 
-			$t_query_projects_or = array();
+			$t_query_projects_or = [];
 			# for these projects, search all issues
 			if( !empty( $t_private_and_public_project_ids ) ) {
 				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_private_and_public_project_ids );
@@ -694,7 +694,7 @@ class BugFilterQuery extends DbQuery {
 				}
 				$t_hide_status = $this->filter[FILTER_PROPERTY_HIDE_STATUS][0];
 				# Filter out status that must be hidden
-				$t_desired_statuses = array();
+				$t_desired_statuses = [];
 				foreach( $t_selected_status_array as $t_this_status ) {
 					if( $t_hide_status > $t_this_status ) {
 						$t_desired_statuses[] = $t_this_status;
@@ -706,7 +706,7 @@ class BugFilterQuery extends DbQuery {
 
 		# if show_status is "any", empty the array, to not include any condition on status.
 		if( filter_field_is_any( $t_desired_statuses ) ) {
-				$t_desired_statuses = array();
+				$t_desired_statuses = [];
 		}
 
 		if( count( $t_desired_statuses ) > 0 ) {
@@ -798,7 +798,7 @@ class BugFilterQuery extends DbQuery {
 	 * @return array	Converted array
 	 */
 	protected function helper_process_users_property( array $p_users_array ) {
-		$t_new_array = array();
+		$t_new_array = [];
 		foreach( $p_users_array as $t_user ) {
 			if( filter_field_is_none( $t_user ) ) {
 				$t_new_array[] = 0;
@@ -867,7 +867,7 @@ class BugFilterQuery extends DbQuery {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_CATEGORY_ID] ) ) {
 			return;
 		}
-		$t_names = array();
+		$t_names = [];
 		$t_use_none = false;
 		foreach( $this->filter[FILTER_PROPERTY_CATEGORY_ID] as $t_filter_member ) {
 			if( filter_field_is_none( $t_filter_member ) ) {
@@ -878,7 +878,7 @@ class BugFilterQuery extends DbQuery {
 		}
 
 		$t_join = 'LEFT JOIN {category} ON {bug}.category_id = {category}.id';
-		$t_query_or = array();
+		$t_query_or = [];
 		if( !empty( $t_names ) ) {
 			$t_query_or[] = $this->sql_in( '{category}.name', $t_names );
 		}
@@ -949,7 +949,7 @@ class BugFilterQuery extends DbQuery {
 	 * @return array	Converted array
 	 */
 	protected function helper_process_string_property( $p_array ) {
-		$t_new_array = array();
+		$t_new_array = [];
 		foreach( $p_array as $t_elem ) {
 			if( filter_field_is_none( $t_elem ) ) {
 				$t_new_array[] = '';
@@ -995,7 +995,7 @@ class BugFilterQuery extends DbQuery {
 	 * @return array	Converted array
 	 */
 	protected function helper_process_id_property( $p_array ) {
-		$t_new_array = array();
+		$t_new_array = [];
 		foreach( $p_array as $t_elem ) {
 			if( filter_field_is_none( $t_elem ) ) {
 				$t_new_array[] = 0;
@@ -1294,7 +1294,7 @@ class BugFilterQuery extends DbQuery {
 	 * @return array	Converted array
 	 */
 	protected function helper_array_map_int( $p_array ) {
-		$t_new_array = array();
+		$t_new_array = [];
 		foreach( $p_array as $t_elem ) {
 			$t_new_array[] = (int)$t_elem;
 		}
@@ -1333,9 +1333,9 @@ class BugFilterQuery extends DbQuery {
 			}
 		}
 
-		$t_tags_always = array();
-		$t_tags_any = array();
-		$t_tags_never = array();
+		$t_tags_always = [];
+		$t_tags_any = [];
+		$t_tags_never = [];
 
 		# @TODO, use constants for tag modifiers
 		foreach( $t_tags as $t_tag_row ) {
@@ -1367,7 +1367,7 @@ class BugFilterQuery extends DbQuery {
 			$t_tags_any[] = tag_get( $c_tag_select );
 		}
 
-		$t_where = array();
+		$t_where = [];
 
 		if( count( $t_tags_always ) ) {
 			foreach( $t_tags_always as $t_tag_row ) {
@@ -1500,7 +1500,7 @@ class BugFilterQuery extends DbQuery {
 						break;
 				}
 			} else {
-				$t_filter_array = array();
+				$t_filter_array = [];
 				foreach( $t_field as $t_filter_member ) {
 					$t_filter_member = stripslashes( $t_filter_member );
 					if( filter_field_is_none( $t_filter_member ) ) {
@@ -1549,7 +1549,7 @@ class BugFilterQuery extends DbQuery {
 		preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $this->filter[FILTER_PROPERTY_SEARCH], $t_matches, PREG_SET_ORDER );
 
 		# organize terms without quoting, paying attention to negation
-		$t_search_terms = array();
+		$t_search_terms = [];
 		foreach( $t_matches as $t_match ) {
 			$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
 		}

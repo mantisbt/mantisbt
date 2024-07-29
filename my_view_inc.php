@@ -87,39 +87,39 @@ $t_url_link_parameters['recent_mod'] = FILTER_PROPERTY_HIDE_STATUS . '=none'
 $c_filter['reported'] = filter_create_reported_by( helper_get_current_project(), $t_current_user_id );
 $t_url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
-$c_filter['resolved'] = array(
-	FILTER_PROPERTY_CATEGORY_ID => array(
+$c_filter['resolved'] = [
+	FILTER_PROPERTY_CATEGORY_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SEVERITY => array(
+	],
+	FILTER_PROPERTY_SEVERITY => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_STATUS => array(
+	],
+	FILTER_PROPERTY_STATUS => [
 		'0' => $t_bug_resolved_status_threshold,
-	),
+	],
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => array(
+	FILTER_PROPERTY_REPORTER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HANDLER_ID => array(
+	],
+	FILTER_PROPERTY_HANDLER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_RESOLUTION => array(
+	],
+	FILTER_PROPERTY_RESOLUTION => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_BUILD => array(
+	],
+	FILTER_PROPERTY_BUILD => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_VERSION => array(
+	],
+	FILTER_PROPERTY_VERSION => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIDE_STATUS => array(
+	],
+	FILTER_PROPERTY_HIDE_STATUS => [
 		'0' => $t_hide_status_default,
-	),
-	FILTER_PROPERTY_MONITOR_USER_ID => array(
+	],
+	FILTER_PROPERTY_MONITOR_USER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-);
+	],
+];
 $t_url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
 
@@ -131,119 +131,119 @@ $t_url_link_parameters['unassigned'] = FILTER_PROPERTY_HANDLER_ID . '=[none]' . 
 $c_filter['monitored'] = filter_create_monitored_by( helper_get_current_project(), $t_current_user_id );
 $t_url_link_parameters['monitored'] = FILTER_PROPERTY_MONITOR_USER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
-$c_filter['feedback'] = array(
-	FILTER_PROPERTY_CATEGORY_ID => array(
+$c_filter['feedback'] = [
+	FILTER_PROPERTY_CATEGORY_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SEVERITY => array(
+	],
+	FILTER_PROPERTY_SEVERITY => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_STATUS => array(
+	],
+	FILTER_PROPERTY_STATUS => [
 		'0' => config_get( 'bug_feedback_status' ),
-	),
+	],
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => array(
+	FILTER_PROPERTY_REPORTER_ID => [
 		'0' => $t_current_user_id,
-	),
-	FILTER_PROPERTY_HANDLER_ID => array(
+	],
+	FILTER_PROPERTY_HANDLER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_RESOLUTION => array(
+	],
+	FILTER_PROPERTY_RESOLUTION => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_BUILD => array(
+	],
+	FILTER_PROPERTY_BUILD => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_VERSION => array(
+	],
+	FILTER_PROPERTY_VERSION => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIDE_STATUS => array(
+	],
+	FILTER_PROPERTY_HIDE_STATUS => [
 		'0' => $t_hide_status_default,
-	),
-	FILTER_PROPERTY_MONITOR_USER_ID => array(
+	],
+	FILTER_PROPERTY_MONITOR_USER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-);
+	],
+];
 $t_url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . config_get( 'bug_feedback_status' ) . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
-$c_filter['verify'] = array(
-	FILTER_PROPERTY_CATEGORY_ID => array(
+$c_filter['verify'] = [
+	FILTER_PROPERTY_CATEGORY_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SEVERITY => array(
+	],
+	FILTER_PROPERTY_SEVERITY => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_STATUS => array(
+	],
+	FILTER_PROPERTY_STATUS => [
 		'0' => $t_bug_resolved_status_threshold,
-	),
+	],
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => array(
+	FILTER_PROPERTY_REPORTER_ID => [
 		'0' => $t_current_user_id,
-	),
-	FILTER_PROPERTY_HANDLER_ID => array(
+	],
+	FILTER_PROPERTY_HANDLER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_RESOLUTION => array(
+	],
+	FILTER_PROPERTY_RESOLUTION => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_BUILD => array(
+	],
+	FILTER_PROPERTY_BUILD => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_VERSION => array(
+	],
+	FILTER_PROPERTY_VERSION => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIDE_STATUS => array(
+	],
+	FILTER_PROPERTY_HIDE_STATUS => [
 		'0' => $t_hide_status_default,
-	),
-	FILTER_PROPERTY_MONITOR_USER_ID => array(
+	],
+	FILTER_PROPERTY_MONITOR_USER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-);
+	],
+];
 $t_url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold;
 
-$c_filter['my_comments'] = array(
-	FILTER_PROPERTY_CATEGORY_ID => array(
+$c_filter['my_comments'] = [
+	FILTER_PROPERTY_CATEGORY_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SEVERITY => array(
+	],
+	FILTER_PROPERTY_SEVERITY => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_STATUS => array(
+	],
+	FILTER_PROPERTY_STATUS => [
 		'0' => META_FILTER_ANY,
-	),
+	],
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => array(
+	FILTER_PROPERTY_REPORTER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HANDLER_ID => array(
+	],
+	FILTER_PROPERTY_HANDLER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_RESOLUTION => array(
+	],
+	FILTER_PROPERTY_RESOLUTION => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_BUILD => array(
+	],
+	FILTER_PROPERTY_BUILD => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_VERSION => array(
+	],
+	FILTER_PROPERTY_VERSION => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIDE_STATUS => array(
+	],
+	FILTER_PROPERTY_HIDE_STATUS => [
 		'0' => $t_hide_status_default,
-	),
-	FILTER_PROPERTY_MONITOR_USER_ID => array(
+	],
+	FILTER_PROPERTY_MONITOR_USER_ID => [
 		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_NOTE_USER_ID=> array(
+	],
+	FILTER_PROPERTY_NOTE_USER_ID=> [
 		'0' => META_FILTER_MYSELF,
-	),
-);
+	],
+];
 
 $t_url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID . '=' . META_FILTER_MYSELF . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
 # Improve performance by caching category data in one pass
 if( helper_get_current_project() == 0 ) {
-	$t_categories = array();
+	$t_categories = [];
 	foreach( $t_rows as $t_row ) {
 		$t_categories[] = $t_row->category_id;
 	}
@@ -251,7 +251,7 @@ if( helper_get_current_project() == 0 ) {
 	category_cache_array_rows( array_unique( $t_categories ) );
 }
 
-bug_cache_columns_data( $t_rows , array( 'attachment_count' ) );
+bug_cache_columns_data( $t_rows , [ 'attachment_count' ] );
 
 $t_filter = array_merge( $c_filter[$t_box_title], $t_filter );
 

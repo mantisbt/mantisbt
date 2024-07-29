@@ -86,7 +86,7 @@ $t_activities = $t_bug_activity_get_all_result['activities'];
 $t_bugnotes = $t_bug_activity_get_all_result['bugnotes'];
 
 # Pre-cache users
-$t_users_to_cache = array();
+$t_users_to_cache = [];
 
 foreach( $t_activities as $t_activity ) {
 	$t_users_to_cache[$t_activity['user_id']] = true;
@@ -136,7 +136,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 </tr>
 <?php }
 
-	event_signal( 'EVENT_VIEW_BUGNOTES_START', array( $f_bug_id, $t_bugnotes ) );
+	event_signal( 'EVENT_VIEW_BUGNOTES_START', [ $f_bug_id, $t_bugnotes ] );
 
 	$t_normal_date_format = config_get( 'normal_date_format' );
 	$t_total_time = 0;
@@ -225,7 +225,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				print_form_button(
 					'bugnote_edit_page.php',
 					lang_get( 'edit' ),
-					array( 'bugnote_id' => $t_activity['id'] ),
+					[ 'bugnote_id' => $t_activity['id'] ],
 					OFF );
 				echo '</div>';
 			}
@@ -242,7 +242,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 					print_form_button(
 						'bugnote_delete.php',
 						lang_get( 'delete' ),
-						array( 'bugnote_id' => $t_activity['id'] ),
+						[ 'bugnote_id' => $t_activity['id'] ],
 						$t_security_token_notes_delete );
 				} else {
 					if ( !isset( $t_security_token_attachments_delete ) ) {
@@ -269,13 +269,13 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 					print_form_button(
 						'bugnote_set_view_state.php',
 						lang_get( 'make_public' ),
-						array( 'private' => '0', 'bugnote_id' => $t_activity['id'] ),
+						[ 'private' => '0', 'bugnote_id' => $t_activity['id'] ],
 						$t_security_token_state );
 				} else {
 					print_form_button(
 						'bugnote_set_view_state.php',
 						lang_get( 'make_private' ),
-						array( 'private' => '1', 'bugnote_id' => $t_activity['id'] ),
+						[ 'private' => '1', 'bugnote_id' => $t_activity['id'] ],
 						$t_security_token_state );
 				}
 				echo '</div>';
@@ -303,7 +303,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 						$t_truncated = ( '|' != mb_substr( $t_activity['note']->note_attr, mb_strlen( $t_activity['note']->note_attr ) - 1 ) );
 
 						# Build recipients list for display
-						$t_to = array();
+						$t_to = [];
 						foreach ( explode( '|', $t_recipients ) as $t_recipient ) {
 							$t_to[] = prepare_user_name( $t_recipient );
 						}
@@ -344,7 +344,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 </tr>
 <?php
 if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
-	event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_activity['id'], $t_activity['private'] ) );
+	event_signal( 'EVENT_VIEW_BUGNOTE', [ $f_bug_id, $t_activity['id'], $t_activity['private'] ] );
 }
 ?>
 <tr class="spacer">

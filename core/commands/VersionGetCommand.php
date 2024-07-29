@@ -66,7 +66,7 @@ class VersionGetCommand extends Command {
 			throw new ClientException(
 				"Project $this->project_id not found",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[ $this->project_id ] );
 		}
 
 		if( !access_has_project_level( VIEWER, $this->project_id ) ) {
@@ -77,11 +77,11 @@ class VersionGetCommand extends Command {
 
 		if( !is_null( $this->version_id ) ) {
 			if( is_blank( $this->version_id ) ) {
-				throw new ClientException( 'Invalid version name', ERROR_EMPTY_FIELD, array( 'id' ) );
+				throw new ClientException( 'Invalid version name', ERROR_EMPTY_FIELD, [ 'id' ] );
 			}
 
 			if( !version_exists( $this->version_id ) ) {
-				throw new ClientException( 'Version not found', ERROR_VERSION_NOT_FOUND, array( $this->version_id ) );
+				throw new ClientException( 'Version not found', ERROR_VERSION_NOT_FOUND, [ $this->version_id ] );
 			}
 		}
 	}
@@ -110,17 +110,17 @@ class VersionGetCommand extends Command {
 
 			if( $t_version->project_id == $this->project_id ) {
 				$t_version = VersionGetCommand::VersionToArray( $t_version );
-				$t_versions = array( $t_version );
+				$t_versions = [ $t_version ];
 			} else {
-				$t_versions = array();
+				$t_versions = [];
 			}
 		}
 
 		$g_project_override = $t_prev_project_id;
 
-		$t_result = array(
+		$t_result = [
 			'versions' => $t_versions
-		);
+		];
 
 		return $t_result;
 	}
@@ -132,7 +132,7 @@ class VersionGetCommand extends Command {
 	 * @return array The version array.
 	 */
 	public static function VersionRowToArray( $p_row ) {
-		$t_version = array();
+		$t_version = [];
 		$t_version['id'] = (int)$p_row['id'];
 		$t_version['name'] = $p_row['version'];
 
@@ -154,7 +154,7 @@ class VersionGetCommand extends Command {
 	 * @return array The version array.
 	 */
 	public static function VersionToArray( $p_version ) {
-		$t_version = array();
+		$t_version = [];
 
 		$t_version['id'] = (int)$p_version->id;
 		$t_version['name'] = $p_version->version;

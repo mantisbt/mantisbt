@@ -37,7 +37,7 @@ require_api( 'constant_inc.php' );
 check_print_section_header_row( 'Custom Fields' );
 
 # Check for deprecated usage of {} in Date CF default values
-$t_date_cf_with_bracket = array();
+$t_date_cf_with_bracket = [];
 foreach( custom_field_get_ids() as $t_id ) {
 	/**
 	 * @var int        $v_id
@@ -51,7 +51,7 @@ foreach( custom_field_get_ids() as $t_id ) {
 		continue;
 	}
 	if( preg_match( '/^{(.*)}$/', $v_default_value, $t_matches ) ) {
-		$t_date_cf_with_bracket[$v_name] = array( $v_id, $t_matches[1] );
+		$t_date_cf_with_bracket[$v_name] = [ $v_id, $t_matches[1] ];
 	}
 }
 if( $t_date_cf_with_bracket ) {
@@ -63,9 +63,9 @@ if( $t_date_cf_with_bracket ) {
 		check_print_test_warn_row(
 			"Date Custom Field '$t_name' specifies its Default Value with deprecated curly brackets format.",
 			false,
-			array( false => "Use the same format, but without the '{}', i.e. '$t_new_value'. "
+			[ false => "Use the same format, but without the '{}', i.e. '$t_new_value'. "
 				. sprintf( $t_manage_cf_link, $t_id )
-			)
+			]
 		);
 	}
 } else {

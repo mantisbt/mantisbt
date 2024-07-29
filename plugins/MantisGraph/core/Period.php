@@ -273,7 +273,7 @@ class Period {
      * @return string
 	 */
 	function period_selector( $p_control_name ) {
-		$t_periods = array(
+		$t_periods = [
 			0 => plugin_lang_get( 'period_none' ),
 			7 => plugin_lang_get( 'period_this_week' ),
 			8 => plugin_lang_get( 'period_last_week' ),
@@ -285,7 +285,7 @@ class Period {
 			5 => plugin_lang_get( 'period_year_to_date' ),
 			6 => plugin_lang_get( 'period_last_year' ),
 			10 => plugin_lang_get( 'period_select' ),
-		);
+		];
 		$t_default = gpc_get_int( $p_control_name, 0 );
 		$t_formatted_start = $this->get_start_formatted();
 		$t_formatted_end = $this->get_end_formatted();

@@ -42,7 +42,7 @@ class InvalidDefinitionPlugin extends InvalidPlugin {
 	public function setInvalidPlugin( MantisPlugin $p_plugin ) {
 		parent::setInvalidPlugin( $p_plugin );
 
-		$t_missing = array();
+		$t_missing = [];
 
 		# Add the reference plugin's name, if defined
 		if( $p_plugin->name ) {

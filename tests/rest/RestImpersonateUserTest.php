@@ -63,10 +63,10 @@ class RestImpersonateUserTest extends RestBase {
 	public function testImpersonateUser() {
 		$t_username = Faker::username();
 
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => array( 'name' => 'viewer' )
-		);
+			'access_level' => [ 'name' => 'viewer' ]
+		];
 
 		# Create a user
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
@@ -93,11 +93,11 @@ class RestImpersonateUserTest extends RestBase {
 	public function testImpersonateUserDisabled() {
 		$t_username = Faker::username();
 
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => array( 'name' => 'viewer' ),
+			'access_level' => [ 'name' => 'viewer' ],
 			'enabled' => false
-		);
+		];
 
 		# Create a user
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
@@ -115,11 +115,11 @@ class RestImpersonateUserTest extends RestBase {
 	public function testImpersonateUserWithoutImpersonationAccessLevel() {
 		$t_username = Faker::username();
 
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => array( 'name' => 'viewer' ),
+			'access_level' => [ 'name' => 'viewer' ],
 			'enabled' => false
-		);
+		];
 
 		# Create a user
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();

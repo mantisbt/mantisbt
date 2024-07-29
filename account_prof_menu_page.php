@@ -166,10 +166,10 @@ if( $g_global_profiles ) {
 									<div class="btn-group inline">
 <?php
 				# Common POST parameters for action buttons
-				$t_param = array(
+				$t_param = [
 					'profile_id' => $v_id,
 					'redirect' => basename( $_SERVER["SCRIPT_FILENAME"] ),
-				);
+				];
 
 				# Print the Edit and Delete buttons for local profiles, or
 				# if user can manage global ones.
@@ -186,7 +186,7 @@ if( $g_global_profiles ) {
 					print_form_button(
 						'account_prof_update.php',
 						lang_get( 'delete' ),
-						array_merge( $t_param, array( 'action' => 'delete' ) ),
+						array_merge( $t_param, [ 'action' => 'delete' ] ),
 						$t_security_token
 					);
 					echo '</div>';
@@ -201,7 +201,7 @@ if( $g_global_profiles ) {
 					print_form_button(
 						'account_prof_update.php',
 						lang_get( $t_is_default_profile ? 'clear_default' : 'make_default' ),
-						array_merge( $t_param, array( 'action' => 'make_default' ) ),
+						array_merge( $t_param, [ 'action' => 'make_default' ] ),
 						$t_security_token
 					);
 					echo '</div>';

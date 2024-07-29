@@ -47,7 +47,7 @@ config_set_global( $t_config, $t_test );
 $t_test = config_get_global( $t_config );
 print_r( $t_test );
 
-$g_test_config = array();
+$g_test_config = [];
 $t_config = 'test_config';
 $t_test = config_get( $t_config );
 print_r( $t_config );

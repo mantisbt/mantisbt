@@ -52,7 +52,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 $t_url_page = string_sanitize_url( basename( $_SERVER['SCRIPT_NAME'] ) );
 # Timeline shows shows next/prev buttons that reload the page with new timeline parameters
 # we must preserve parent script query parameters
-$t_url_params = array();
+$t_url_params = [];
 if( !empty( $_GET ) ) {
 	# Sanitize request values to avoid xss
 	foreach( $_GET as $t_key => $t_value ) {

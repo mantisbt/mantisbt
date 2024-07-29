@@ -93,17 +93,17 @@ function check_pgsql_bool_columns() {
 	}
 
 	# Build the list of "L" type columns as of schema version 51
-	$t_bool_columns = array(
-		'bug'             => array( 'sticky' ),
-		'custom_field'    => array( 'advanced', 'require_report', 'require_update', 'display_report', 'display_update', 'require_resolved', 'display_resolved', 'display_closed', 'require_closed' ),
-		'filters'         => array( 'is_public' ),
-		'news'            => array( 'announcement' ),
-		'project'         => array( 'enabled' ),
-		'project_version' => array( 'released' ),
-		'sponsorship'     => array( 'paid' ),
-		'user_pref'       => array( 'advanced_report', 'advanced_view', 'advanced_update', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority' ),
-		'user'            => array( 'enabled', 'protected' ),
-	);
+	$t_bool_columns = [
+		'bug'             => [ 'sticky' ],
+		'custom_field'    => [ 'advanced', 'require_report', 'require_update', 'display_report', 'display_update', 'require_resolved', 'display_resolved', 'display_closed', 'require_closed' ],
+		'filters'         => [ 'is_public' ],
+		'news'            => [ 'announcement' ],
+		'project'         => [ 'enabled' ],
+		'project_version' => [ 'released' ],
+		'sponsorship'     => [ 'paid' ],
+		'user_pref'       => [ 'advanced_report', 'advanced_view', 'advanced_update', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority' ],
+		'user'            => [ 'enabled', 'protected' ],
+	];
 
 	# Generate SQL to check columns against schema
 	$t_where = '';
@@ -124,7 +124,7 @@ function check_pgsql_bool_columns() {
 	if( $t_result === false ) {
 		return 'Unable to check information_schema';
 	} else if( $t_result->RecordCount() == 0 ) {
-		return array();
+		return [];
 	}
 
 	# Some columns are not BOOLEAN type, return the list
@@ -151,11 +151,11 @@ function pgsql_get_column_type( $p_table, $p_column ) {
 		WHERE table_catalog = $1 
 		AND table_name = $2
 		AND column_name = $3';
-	$t_param = array(
+	$t_param = [
 		$f_database_name,
 		db_get_table( $p_table ),
 		$p_column,
-	);
+	];
 
 	/** @var ADORecordSet|bool $t_result */
 	$t_result = @$g_db->execute( $t_sql, $t_param );
@@ -198,7 +198,7 @@ function install_category_migrate() {
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
 
-	$t_data = array();
+	$t_data = [];
 
 	# Find categories specified by project
 	$t_query = new DbQuery(
@@ -232,14 +232,14 @@ function install_category_migrate() {
 
 	# In every project, go through all the categories found, and create them and update the bug
 	foreach( $t_data as $t_project_id => $t_categories ) {
-		$t_inserted = array();
+		$t_inserted = [];
 		foreach( $t_categories as $t_name => $t_user_id ) {
 			$t_lower_name = mb_strtolower( trim( $t_name ) );
-			$t_category = array(
+			$t_category = [
 				'name' => $t_name,
 				'project_id' => $t_project_id,
 				'user_id' => $t_user_id,
-			);
+			];
 			if( !isset( $t_inserted[$t_lower_name] ) ) {
 				$t_insert->execute( $t_category );
 				$t_category['id'] = db_insert_id( db_get_table( 'category' ) );
@@ -277,7 +277,7 @@ function install_date_migrate( array $p_data ) {
 		$t_cnt_fields = count( $p_data[2] );
 		$t_sql = "SELECT $t_id_column, $t_old_column FROM $t_table";
 		$t_first_column = true;
-		$t_pairs = array();
+		$t_pairs = [];
 
 		# In order to handle large databases where we may timeout during the upgrade, we don't
 		# start from the beginning every time.  Here we will only pickup rows where at least one
@@ -381,11 +381,11 @@ function install_correct_multiselect_custom_fields_db_format() {
 			AND v.value NOT LIKE '|%|'"
 	);
 	foreach( $t_query->fetch_all() as $t_row ) {
-		$t_param = array(
+		$t_param = [
 			'field_id' => (int)$t_row['field_id'],
 			'bug_id' => (int)$t_row['bug_id'],
 			'value' => '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|'
-		);
+		];
 		$t_update_query->execute( $t_param );
 	}
 
@@ -399,11 +399,11 @@ function install_correct_multiselect_custom_fields_db_format() {
 			AND v.value LIKE '|%|'"
 	);
 	foreach( $t_query->fetch_all() as $t_row ) {
-		$t_param = array(
+		$t_param = [
 			'field_id' => (int)$t_row['field_id'],
 			'bug_id' => (int)$t_row['bug_id'],
 			'value' => rtrim( ltrim( $t_row['value'], '|' ), '|' )
-		);
+		];
 		$t_update_query->execute( $t_param );
 	}
 
@@ -464,7 +464,7 @@ function install_stored_filter_migrate() {
 	$t_delete = new DbQuery( 'DELETE FROM {filters} WHERE id=:id' );
 	$t_update = new DbQuery( 'UPDATE {filters} SET filter_string=:filter_string WHERE id=:id' );
 
-	$t_errors = array();
+	$t_errors = [];
 	foreach( $t_query->fetch_all() as $t_row ) {
 		$t_filter_arr = null;
 		$t_error = false;
@@ -595,12 +595,12 @@ function install_update_history_long_custom_fields() {
 	# Build list of standard fields to filter out from history
 	# This is as per result of columns_get_standard() at the time of this schema update
 	# Fields mapping: category_id is actually logged in history as 'category'
-	$t_standard_fields = array( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'eta', 'os',
+	$t_standard_fields = [ 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'eta', 'os',
 								'reproducibility', 'status', 'resolution', 'projection', 'category', 'date_submitted',
 								'last_updated', 'os_build', 'platform', 'version', 'fixed_in_version', 'target_version',
 								'build', 'view_state', 'summary', 'sponsorship_total', 'due_date', 'description',
 								'steps_to_reproduce', 'additional_information', 'attachment_count', 'bugnotes_count',
-								'selection', 'edit', 'overdue' );
+								'selection', 'edit', 'overdue' ];
 	$t_field_list = '';
 	foreach( $t_standard_fields as $t_field ) {
 		$t_field_list .= "'$t_field', ";
@@ -681,7 +681,7 @@ function install_check_project_hierarchy() {
  * This ensures it is not possible to execute code during un-serialization
  */
 function install_check_config_serialization() {
-	$t_errors = array();
+	$t_errors = [];
 
 	$t_update = new DbQuery(
 		'UPDATE {config} SET value=:value '
@@ -734,7 +734,7 @@ function install_check_token_serialization() {
 	$t_query = new DbQuery( 'SELECT * FROM {tokens} WHERE type IN (1, 2, 5)' );
 	$t_update = new DbQuery( 'UPDATE {tokens} SET value=:value WHERE id=:id' );
 
-	$t_errors = array();
+	$t_errors = [];
 	foreach( $t_query->fetch_all() as $t_row ) {
 		$t_value = &$t_row['value'];
 
@@ -800,7 +800,7 @@ function install_gravatar_plugin() {
  */
 function InsertData( $p_table, $p_data ) {
 	$t_query = 'INSERT INTO ' . $p_table . $p_data;
-	return array( $t_query );
+	return [ $t_query ];
 }
 
 /**

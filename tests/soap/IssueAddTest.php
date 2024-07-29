@@ -141,15 +141,15 @@ class IssueAddTest extends SoapBase {
 		$t_projection_enabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_projection' );
 
 		if( $t_projection_enabled ) {
-			$t_issue_to_add['projection'] = array( 'id' => 90 );    # redesign
+			$t_issue_to_add['projection'] = [ 'id' => 90 ];    # redesign
 		}
 
 		if( $t_eta_enabled ) {
-			$t_issue_to_add['eta'] = array( 'id' => 60 );           # > 1 month
+			$t_issue_to_add['eta'] = [ 'id' => 60 ];           # > 1 month
 		}
 
-		$t_issue_to_add['resolution'] = array( 'id' => 80 );    # suspended
-		$t_issue_to_add['status'] = array( 'id' => 40 );        # confirmed
+		$t_issue_to_add['resolution'] = [ 'id' => 80 ];    # suspended
+		$t_issue_to_add['status'] = [ 'id' => 40 ];        # confirmed
 		$t_issue_to_add['sticky'] = true;
 
 		# Must use valid versions for this to work.
@@ -293,12 +293,12 @@ class IssueAddTest extends SoapBase {
 		$this->skipIfTimeTrackingIsNotEnabled();
 
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['notes'] = array(
-			array(
+		$t_issue_to_add['notes'] = [
+			[
 				'text' => 'first note',
 				'time_tracking' => '30'
-			)
-		);
+			]
+		];
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -324,9 +324,9 @@ class IssueAddTest extends SoapBase {
 	 */
 	public function testCreateIssueWithHandlerByName() {
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['handler'] = array(
+		$t_issue_to_add['handler'] = [
 			'name' => $this->userName
-		);
+		];
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -362,13 +362,13 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueWithVersion() {
-		$t_version = array (
+		$t_version =  [
 			'project_id' => $this->getProjectId(),
 			'name' => '1.0',
 			'released' => 'true',
 			'description' => 'Test version',
 			'date_order' => ''
-		);
+		];
 
 		$t_version_id = $this->client->mc_project_version_add( $this->userName, $this->password, $t_version );
 
@@ -413,13 +413,13 @@ class IssueAddTest extends SoapBase {
 	 */
 	public function testCreateIssueWithMiscNote() {
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['notes'] = array(
-			array(
+		$t_issue_to_add['notes'] = [
+			[
 				'text' => 'first note',
 				'note_type' => 2,
 			    'note_attr' => 'attr_value'
-			)
-		);
+			]
+		];
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -442,19 +442,19 @@ class IssueAddTest extends SoapBase {
 	 */
 	public function testCreateIssueWithTags() {
 		# initialise tags
-		$t_tag_id1 = $this->client->mc_tag_add( $this->userName, $this->password, array(
+		$t_tag_id1 = $this->client->mc_tag_add( $this->userName, $this->password, [
 					'name' => 'IssueCreateTest.createIssueWithTags'
-		) );
+		] );
 		$this->deleteTagAfterRun( $t_tag_id1 );
 
-		$t_tag_id2 = $this->client->mc_tag_add( $this->userName, $this->password, array(
+		$t_tag_id2 = $this->client->mc_tag_add( $this->userName, $this->password, [
 					'name' => 'IssueCreateTest.createIssueWithTags2'
-		) );
+		] );
 		$this->deleteTagAfterRun( $t_tag_id2 );
 
 		# create issue
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag_id1 ), array( 'id' => $t_tag_id2 ) );
+		$t_issue_to_add['tags'] = [ [ 'id' => $t_tag_id1 ], [ 'id' => $t_tag_id2 ] ];
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 		$this->deleteAfterRun( $t_issue_id );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
@@ -470,9 +470,9 @@ class IssueAddTest extends SoapBase {
 	public function testCreateIssueWithFieldsByName() {
 		$t_issue_to_add = $this->getIssueToAdd();
 
-		$t_issue_to_add['view_state'] = array( 'name' => 'private');
-		$t_issue_to_add['resolution'] = array( 'name' => 'suspended');
-		$t_issue_to_add['status'] = array( 'name' => 'confirmed');
+		$t_issue_to_add['view_state'] = [ 'name' => 'private'];
+		$t_issue_to_add['resolution'] = [ 'name' => 'suspended'];
+		$t_issue_to_add['status'] = [ 'name' => 'confirmed'];
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -524,8 +524,8 @@ class IssueAddTest extends SoapBase {
         $this->deleteAfterRun( $t_issue_id );
         $this->deleteAfterRun( $t_issue_id_2 );
 
-        $t_search_result_issues = $this->client->mc_issues_get( $this->userName, $this->password, array( $t_issue_id, $t_issue_id_2 ) );
-        $t_search_result_headers = $this->client->mc_issues_get_header( $this->userName, $this->password, array( $t_issue_id, $t_issue_id_2 ) );
+        $t_search_result_issues = $this->client->mc_issues_get( $this->userName, $this->password, [ $t_issue_id, $t_issue_id_2 ] );
+        $t_search_result_headers = $this->client->mc_issues_get_header( $this->userName, $this->password, [ $t_issue_id, $t_issue_id_2 ] );
 
         $this->assertEquals( 2, count( $t_search_result_headers ));
         $this->assertStringContainsString( 'testIssuesGet-1', $t_search_result_headers[0]->summary );

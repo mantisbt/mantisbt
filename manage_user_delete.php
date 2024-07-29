@@ -71,9 +71,9 @@ if( auth_get_current_user_id() == $f_user_id ) {
 	print_header_redirect( 'account_delete.php?account_delete_token=' . form_security_token( 'account_delete' ), true, false );
 }
 
-$t_data = array(
-	'query' => array( 'id' => $f_user_id )
-);
+$t_data = [
+	'query' => [ 'id' => $f_user_id ]
+];
 
 $t_command = new UserDeleteCommand( $t_data );
 $t_command->execute();

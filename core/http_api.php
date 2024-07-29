@@ -33,7 +33,7 @@ require_api( 'config_api.php' );
  * The Content-Security-Policy settings array.  Use http_csp_add() to update it.
  * @var array
  */
-$g_csp = array();
+$g_csp = [];
 
 /**
  * Check to see if the client is using Microsoft Internet Explorer so we can
@@ -165,7 +165,7 @@ function http_csp_add( $p_type, $p_value ) {
 			$g_csp[$p_type][] = $p_value;
 		}
 	} else {
-		$g_csp[$p_type] = array( $p_value );
+		$g_csp[$p_type] = [ $p_value ];
 	}
 }
 
