@@ -19,6 +19,7 @@ declare( strict_types = 1 );
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
+use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
 use PhpCsFixer\Fixer\Basic\BracesPositionFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
@@ -278,6 +279,23 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/array_notation/trim_array_spaces.html
 		 */
 		TrimArraySpacesFixer::class,
+
+		/**
+		 * Array: Whitespace after comma
+		 *
+		 * In array declaration, there MUST be a whitespace after each comma.
+		 *
+		 * Configurable.
+		 *
+		 * [1,2,3] > [1, 2, 3]
+		 *
+		 * "ensure_single_space" => false
+		 * ['one', 'two', 'three']
+		 * [1,     2,     3]
+		 *
+		 * @see https://cs.symfony.com/doc/rules/array_notation/whitespace_after_comma_in_array.html
+		 */
+		WhitespaceAfterCommaInArrayFixer::class,
 	] )
 
 	/**

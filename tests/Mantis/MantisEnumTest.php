@@ -89,7 +89,7 @@ class MantisEnumTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testGetValues() {
-		$this->assertEquals( [10, 25, 40, 55, 70,90], MantisEnum::getValues( MantisEnumTest::ACCESS_LEVELS_ENUM, 10 ) );
+		$this->assertEquals( [10, 25, 40, 55, 70, 90], MantisEnum::getValues( MantisEnumTest::ACCESS_LEVELS_ENUM, 10 ) );
 		$this->assertEquals( [], MantisEnum::getValues( MantisEnumTest::EMPTY_ENUM, 10 ) );
 	}
 
