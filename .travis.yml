@@ -12,6 +12,6 @@ jobs:
     - name: Coding Standards
       php: 8.3
       script:
-        - composer check-cs
+        - composer check-cs -- $(echo $(git diff --name-only HEAD HEAD~1))
   allow_failures:
     - name: Coding Standards

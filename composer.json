@@ -41,7 +41,7 @@
         }
     },
     "scripts": {
-        "check-cs": "vendor/bin/ecs check --ansi",
-        "fix-cs": "vendor/bin/ecs check --fix --ansi"
+        "check-cs": "vendor/bin/ecs check --ansi --no-progress-bar",
+        "fix-cs": "vendor/bin/ecs check --fix --ansi --no-progress-bar"
     }
 }
