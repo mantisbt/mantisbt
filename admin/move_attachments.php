@@ -49,16 +49,16 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 			$t_query = "SELECT f.*
 				FROM {project_file} f
 				WHERE content = ''
-				  AND f.project_id = " . db_param() . "
-				ORDER BY f.filename";
+				  AND f.project_id = " . db_param() . '
+				ORDER BY f.filename';
 			break;
 		case 'bug':
 			$t_query = "SELECT f.*
 				FROM {bug_file} f
 				JOIN {bug} b ON b.id = f.bug_id
 				WHERE content = ''
-				  AND b.project_id = " . db_param() . "
-				ORDER BY f.bug_id, f.filename";
+				  AND b.project_id = " . db_param() . '
+				ORDER BY f.bug_id, f.filename';
 			break;
 	}
 
@@ -97,14 +97,14 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 
 					# write file to db
 					if( db_is_oracle() ) {
-						db_update_blob( $t_file_table, 'content', $c_content, "id=" . (int)$t_row['id'] );
+						db_update_blob( $t_file_table, 'content', $c_content, 'id=' . (int)$t_row['id'] );
 						$t_query = "UPDATE $t_file_table SET folder='' WHERE id = " . db_param();
 						$t_result2 = db_query( $t_query, [(int)$t_row['id']] );
 					} else {
 						$t_update_query = "UPDATE $t_file_table
-										SET folder = " . db_param() . ",
-										content = " . db_param() . "
-										WHERE id = " . db_param();
+										SET folder = " . db_param() . ',
+										content = ' . db_param() . '
+										WHERE id = ' . db_param();
 						$t_result2 = db_query( $t_update_query,
 							['', $c_content, (int)$t_row['id']]
 						);

@@ -43,7 +43,7 @@ $t_shortname_id = sprintf( lang_get( 'opensearch_id_short' ), $t_prefix );
 $t_shortname_length = max( strlen( $t_shortname_text ), strlen( $t_shortname_id ) );
 
 check_print_test_warn_row(
-	"Browser Search engine names must be 16 chars or less",
+	'Browser Search engine names must be 16 chars or less',
 	$t_shortname_length <= 16,
 	[false => 'Either shorten the "search_title" configuration option to '
 		. 'a maximum  of ' . ( 16 - $t_shortname_length + strlen( $t_prefix ) )

@@ -986,9 +986,9 @@ function print_admin_menu_bar( $p_page ) {
 		$t_class_green = $t_menu_page == 'install.php' ? 'class="bold green" ' : '';
 
 		echo "\t<li$t_class_active>";
-		echo "<a " . $t_class_green
+		echo '<a ' . $t_class_green
 			. 'href="' . $t_path . $t_menu_page . '">'
-			. $t_description . "</a>";
+			. $t_description . '</a>';
 		echo '</li>' . "\n";
 	}
 

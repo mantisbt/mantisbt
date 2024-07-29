@@ -1043,7 +1043,7 @@ function user_get_id_by_user_info( array $p_user, $p_throw_if_id_not_found = fal
 		}
 	} else {
 		throw new ClientException(
-			"User id missing",
+			'User id missing',
 			ERROR_GPC_VAR_NOT_FOUND,
 			['user id'] );
 	}

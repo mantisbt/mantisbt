@@ -1000,7 +1000,7 @@ function project_delete_all_files( $p_project_id ) {
  */
 function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '', array $p_parents = [], $p_indent = '' ) {
 	if( $p_parents ) {
-		$t_full_id = implode( ";", $p_parents ) . ';' . $p_project_id;
+		$t_full_id = implode( ';', $p_parents ) . ';' . $p_project_id;
 		$t_indent = str_repeat( $p_indent, count( $p_parents ) ) . '&nbsp;';
 	} else {
 		$t_full_id = $p_project_id;

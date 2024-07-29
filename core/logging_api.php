@@ -169,7 +169,7 @@ function log_print_to_page() {
 		$t_total_event_count = $g_log_events === null ? 0 : count( $g_log_events );
 
 
-		echo "<div class=\"space-10\"></div>";
+		echo '<div class="space-10"></div>';
 		echo "\t<div class=\"row\">\n";
 		echo "\t<div class=\"col-xs-12\">\n";
 
@@ -177,7 +177,7 @@ function log_print_to_page() {
 		echo "\t<div class=\"widget-header widget-header-small\">\n";
 		echo "\t<h4 class=\"widget-title lighter\">\n";
 		echo "\t" . icon_get( 'fa-flag-o', 'ace-icon' ) . "\n";
-		echo "Debug Log";
+		echo 'Debug Log';
 		echo "</h4>\n";
 		echo "</div>\n";
 
@@ -189,7 +189,7 @@ function log_print_to_page() {
 			return;
 		}
 
-		echo "<div class=\"widget-main no-padding\">";
+		echo '<div class="widget-main no-padding">';
 		echo "<div class=\"table-responsive\">\n";
 		echo "<table class=\"table table-bordered table-condensed table-striped\" id=\"log-event-list\">\n";
 		echo "\t<thead>\n";

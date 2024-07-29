@@ -826,12 +826,12 @@ function install_print_unserialize_errors_csv( $p_table, $p_data ) {
 	fclose( $f );
 
 	# Display message and download link
-	printf( "<p><br>%d rows in <em>%s</em> could not be converted because of invalid data.<br>",
+	printf( '<p><br>%d rows in <em>%s</em> could not be converted because of invalid data.<br>',
 		count( $p_data ),
 		db_get_table( $p_table )
 	);
-	echo "Fix the problem by manually repairing or deleting the offending row(s) "
-		. "as appropriate, then try again.</p>";
+	echo 'Fix the problem by manually repairing or deleting the offending row(s) '
+		. 'as appropriate, then try again.</p>';
 
 	# CSV download (as data URL)
 ?>

@@ -110,7 +110,7 @@ class ProjectUsersDeleteCommand extends Command {
 				access_get_project_level( $this->project_id, $this->actor_id ), $this->project_id );
 
 		if( !$t_access_check ) {
-			throw new ClientException( "Access Denied", ERROR_ACCESS_DENIED );
+			throw new ClientException( 'Access Denied', ERROR_ACCESS_DENIED );
 		}
 	}
 

@@ -248,7 +248,7 @@ class IssueNoteAddCommand extends Command {
 			/* trigger_event */ false );
 
 		if( !$t_note_id ) {
-			throw new ClientException( "Unable to add note", ERROR_GENERIC );
+			throw new ClientException( 'Unable to add note', ERROR_GENERIC );
 		}
 
 		# Handle the file upload

@@ -169,7 +169,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue = $p_request->getParsedBody();
 	if( !$t_issue ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
 	}
 
 	if( isset( $t_issue['files'] ) ) {
@@ -248,7 +248,7 @@ function rest_issue_file_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 	$t_command = new IssueFileAddCommand( $t_data );
 	$t_command->execute();
 
-	return $p_response->withStatus( HTTP_STATUS_CREATED, "Issue File(s) Attached" );
+	return $p_response->withStatus( HTTP_STATUS_CREATED, 'Issue File(s) Attached' );
 }
 
 /**
@@ -416,7 +416,7 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	# Construct full issue from issue from db + patched info
 	$t_issue_patch = $p_request->getParsedBody();
 	if( !$t_issue_patch ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
 	}
 	if( isset( $t_issue_patch['id'] ) && $t_issue_patch['id'] != $t_issue_id ) {
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Issue id mismatch' );

@@ -189,9 +189,9 @@ $g_upgrade[19] = ['CreateIndexSQL', ['idx_last_mod', db_get_table( 'bugnote' ), 
 # ----------------------------------------------------------------------------
 # Schema version: 20
 #
-$g_upgrade[20] = ['CreateTableSQL', [db_get_table( 'bugnote_text' ), "
+$g_upgrade[20] = ['CreateTableSQL', [db_get_table( 'bugnote_text' ), '
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
-	note					XL		NOTNULL",
+	note					XL		NOTNULL',
 	$t_table_options
 ]];
 $g_upgrade[21] = ['CreateTableSQL', [db_get_table( 'custom_field_project' ), "
@@ -275,9 +275,9 @@ $g_upgrade[29] = ['CreateTableSQL', [db_get_table( 'project_file' ), "
 # ----------------------------------------------------------------------------
 # Schema version: 30
 #
-$g_upgrade[30] = ['CreateTableSQL', [db_get_table( 'project_hierarchy' ), "
+$g_upgrade[30] = ['CreateTableSQL', [db_get_table( 'project_hierarchy' ), '
 	child_id				I		UNSIGNED NOTNULL,
-	parent_id				I		UNSIGNED NOTNULL",
+	parent_id				I		UNSIGNED NOTNULL',
 	$t_table_options
 ]];
 $g_upgrade[31] = ['CreateTableSQL', [db_get_table( 'project' ), "
@@ -334,13 +334,13 @@ $g_upgrade[39] = ['CreateTableSQL', [db_get_table( 'sponsorship' ), "
 #
 $g_upgrade[40] = ['CreateIndexSQL', ['idx_sponsorship_bug_id', db_get_table( 'sponsorship' ), 'bug_id']];
 $g_upgrade[41] = ['CreateIndexSQL', ['idx_sponsorship_user_id', db_get_table( 'sponsorship' ), 'user_id']];
-$g_upgrade[42] = ['CreateTableSQL', [db_get_table( 'tokens' ), "
+$g_upgrade[42] = ['CreateTableSQL', [db_get_table( 'tokens' ), '
 	id						I		NOTNULL PRIMARY AUTOINCREMENT,
 	owner					I		NOTNULL,
 	type					I		NOTNULL,
 	timestamp				T		NOTNULL,
 	expiry					T,
-	value					XL		NOTNULL",
+	value					XL		NOTNULL',
 	$t_table_options
 ]];
 $g_upgrade[43] = ['CreateTableSQL', [db_get_table( 'user_pref' ), "
@@ -454,8 +454,8 @@ $g_upgrade[55] = db_is_oracle()
 
 $g_upgrade[56] = ['AddColumnSQL', [db_get_table( 'bug' ), "
 	target_version			C(64)	NOTNULL DEFAULT \" '' \""]];
-$g_upgrade[57] = ['AddColumnSQL', [db_get_table( 'bugnote' ), "
-	time_tracking			I		UNSIGNED NOTNULL DEFAULT \" 0 \""]];
+$g_upgrade[57] = ['AddColumnSQL', [db_get_table( 'bugnote' ), '
+	time_tracking			I		UNSIGNED NOTNULL DEFAULT " 0 "']];
 $g_upgrade[58] = ['CreateIndexSQL', ['idx_diskfile', db_get_table( 'bug_file' ), 'diskfile']];
 $g_upgrade[59] = ['AlterColumnSQL', [db_get_table( 'user_print_pref' ), "
 	print_pref				C(64)	$t_notnull"]];
@@ -502,8 +502,8 @@ $g_upgrade[65] = ['AlterColumnSQL', [db_get_table( 'user_pref' ), "
 # Apparently mysql now has a STRICT mode, where setting a DEFAULT value on a
 # blob/text is now an error, instead of being silently ignored
 $g_upgrade[66] = ( isset( $f_db_type ) && ( $f_db_type == 'mysqli' ) )
-	? ['AlterColumnSQL', [db_get_table( 'custom_field' ), "
-		possible_values		X		NOTNULL"]]
+	? ['AlterColumnSQL', [db_get_table( 'custom_field' ), '
+		possible_values		X		NOTNULL']]
 	: ['AlterColumnSQL', [db_get_table( 'custom_field' ), "
 		possible_values		X		NOTNULL DEFAULT \" '' \" "]];
 
@@ -809,8 +809,8 @@ $g_upgrade[183] = ['UpdateFunction', 'correct_multiselect_custom_fields_db_forma
 # Release marker: 1.2.1 - 1.2.x
 
 $g_upgrade[184] = null;
-$g_upgrade[185] = ['AddColumnSQL', [db_get_table( 'custom_field_string' ), "
-	text					XL		NULL DEFAULT NULL"]];
+$g_upgrade[185] = ['AddColumnSQL', [db_get_table( 'custom_field_string' ), '
+	text					XL		NULL DEFAULT NULL']];
 $g_upgrade[186] = ['UpdateFunction', 'update_history_long_custom_fields'];
 $g_upgrade[187] = ['CreateIndexSQL', ['idx_bug_id', db_get_table( 'bug_monitor' ), 'bug_id']];
 $g_upgrade[188] = ['AlterColumnSQL', [db_get_table( 'project' ), "
@@ -860,10 +860,10 @@ $g_upgrade[201] = ['CreateIndexSQL', ['idx_user_id_name', db_get_table( 'api_tok
 $g_upgrade[202] = ['CreateIndexSQL', ['idx_email', db_get_table( 'user' ), 'email']];
 
 # Ensure consistent definition of file attachment blob columns, see #20547
-$g_upgrade[203] = ['AlterColumnSQL', [db_get_table( 'bug_file' ), "
-	content					B		NULL " . $t_blob_default]];
-$g_upgrade[204] = ['AlterColumnSQL', [db_get_table( 'project_file' ), "
-	content					B		NULL " . $t_blob_default]];
+$g_upgrade[203] = ['AlterColumnSQL', [db_get_table( 'bug_file' ), '
+	content					B		NULL ' . $t_blob_default]];
+$g_upgrade[204] = ['AlterColumnSQL', [db_get_table( 'project_file' ), '
+	content					B		NULL ' . $t_blob_default]];
 
 # Enable gravatar plugin if avatars are enabled
 $g_upgrade[205] = ['UpdateFunction', 'gravatar_plugin', []];

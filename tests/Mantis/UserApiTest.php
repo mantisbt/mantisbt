@@ -86,17 +86,17 @@ class UserApiTest extends MantisCoreBase {
 		$t_user_sql_like_pattern = substr_replace( $t_user, '_', 1, 1 );
 
 		return [
-			"Existing email, new user"
+			'Existing email, new user'
 				=> [self::TEST_EMAIL, null, false],
-			"Existing email, matching user"
+			'Existing email, matching user'
 				=> [self::TEST_EMAIL, -1, true],
-			"Existing email, other user"
+			'Existing email, other user'
 				=> [self::TEST_EMAIL, 1, false],
-			"Existing email with different case"
+			'Existing email with different case'
 				=> [ucfirst( self::TEST_EMAIL ), null, false],
-			"Email matching SQL LIKE pattern"
+			'Email matching SQL LIKE pattern'
 				=> ["$t_user_sql_like_pattern@$t_domain", null, true],
-			"Non-existing email"
+			'Non-existing email'
 				=> ["unique@$t_domain", null, true],
 		];
 	}
@@ -112,11 +112,11 @@ class UserApiTest extends MantisCoreBase {
 
 		$this->assertEquals( $t_user_id,
 			user_get_id_by_email( self::TEST_EMAIL ),
-			"User email found with exact case"
+			'User email found with exact case'
 			 );
 		$this->assertEquals( $t_user_id,
 			user_get_id_by_email( $t_email_with_case_variation ),
-			"User email found with different case"
+			'User email found with different case'
 		);
 
 		// Allow non-unique emails and create a new user with duplicate email
@@ -130,14 +130,14 @@ class UserApiTest extends MantisCoreBase {
 
 		$this->assertNotFalse(
 			user_get_id_by_email( self::TEST_EMAIL ),
-			"User found when multiple accounts with same email exist"
+			'User found when multiple accounts with same email exist'
 		);
 		user_delete( $t_user_id );
 
 		// Expected failures
 		$this->assertFalse(
 			user_get_id_by_email( rand() . self::TEST_EMAIL ),
-			"Non-existing email not found"
+			'Non-existing email not found'
 			 );
 
 		// Same test but with exception

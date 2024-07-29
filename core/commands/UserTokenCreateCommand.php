@@ -103,7 +103,7 @@ class UserTokenCreateCommand extends Command {
 			$t_count = 1;
 			do {
 				$this->name = sprintf(
-					"%s created on %s",
+					'%s created on %s',
 					$t_current_user_name,
 					date( $t_date_format ) );
 

@@ -239,7 +239,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 				'fa-status-box bigger-125 red',
 				lang_get( 'category_disabled' )
 			);
-			echo "&nbsp;";
+			echo '&nbsp;';
 		}
 		echo '<select ' . helper_get_tab_index()
 			. ( $t_allow_no_category ? '' : ' required' )

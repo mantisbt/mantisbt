@@ -553,8 +553,8 @@ function layout_navbar_button_bar() {
 	}
 
 	$t_show_report_bug_button = access_has_any_project_level( 'report_bug_threshold' ) &&
-		!is_page_name( string_get_bug_page( "report" ) ) &&
-		!is_page_name( string_get_bug_page( "update" ) );
+		!is_page_name( string_get_bug_page( 'report' ) ) &&
+		!is_page_name( string_get_bug_page( 'update' ) );
 	$t_show_invite_user_button = access_has_global_level( config_get( 'manage_user_threshold' ) );
 
 	if( !$t_show_report_bug_button && !$t_show_invite_user_button ) {
@@ -650,7 +650,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 
 	foreach( $t_project_ids as $t_id ) {
 		if( $p_trace ) {
-			$t_full_id = implode( ";", $p_parents ) . ';' . $t_id;
+			$t_full_id = implode( ';', $p_parents ) . ';' . $t_id;
 		} else {
 			$t_full_id = $t_id;
 		}

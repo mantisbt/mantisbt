@@ -263,7 +263,7 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 				'bigger-125 red',
 				lang_get( 'category_disabled' )
 			);
-			echo "&nbsp;";
+			echo '&nbsp;';
 		}
 		echo string_display_line( $t_issue['category']['name'] );
 	}

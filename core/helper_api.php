@@ -97,7 +97,7 @@ function helper_array_transpose( array $p_array ) {
 	foreach( $p_array as $t_key => $t_sub ) {
 		if( !is_array( $t_sub ) ) {
 			throw new ClientException(
-				__FUNCTION__ . " can only handle bidimensional arrays",
+				__FUNCTION__ . ' can only handle bidimensional arrays',
 				ERROR_GENERIC
 			);
 		}
@@ -779,7 +779,7 @@ function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_strin
 function helper_parse_view_state( $p_view_state ) {
 	if( ! is_array( $p_view_state ) ) {
 		throw new ClientException(
-			"Invalid view state",
+			'Invalid view state',
 			ERROR_INVALID_FIELD_VALUE,
 			[lang_get( 'bugnote_view_state' )]
 		);
@@ -812,7 +812,7 @@ function helper_parse_view_state( $p_view_state ) {
 		$t_view_state_id = $t_enum_by_labels[$t_name];
 	} else {
 		throw new ClientException(
-			"Empty view state",
+			'Empty view state',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'bugnote_view_state' )]
 		);

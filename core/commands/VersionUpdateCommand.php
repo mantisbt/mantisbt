@@ -132,7 +132,7 @@ class VersionUpdateCommand extends Command {
 			# check for duplicates
 			if( ( strtolower( $t_version->version ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $this->project_id ) ) {
 				throw new ClientException(
-					"Version name is not unique",
+					'Version name is not unique',
 					ERROR_VERSION_DUPLICATE,
 					[$t_version->version] );
 			}

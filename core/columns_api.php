@@ -1657,7 +1657,7 @@ function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARG
 		$t_css = '';
 		$t_value = '&#160;';
 	} else {
-		$t_css = " due-" . bug_overdue_level( $p_bug->id );
+		$t_css = ' due-' . bug_overdue_level( $p_bug->id );
 		$t_value = string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 	}
 

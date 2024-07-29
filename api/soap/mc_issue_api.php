@@ -1397,7 +1397,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
 			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
-				return mci_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue note reporter" );
+				return mci_fault_access_denied( $t_user_id, 'Active user does not have access level required to specify a different issue note reporter' );
 			}
 		}
 	} else {

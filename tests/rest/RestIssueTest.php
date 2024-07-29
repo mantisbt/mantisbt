@@ -442,41 +442,41 @@ class RestIssueTest extends RestBase {
 		$t_url_base = "/issues/$t_issue_id/tags/";
 
 		# TODO: replace internal call by GET /tag request when implemented (see #32863)
-		$this->assertFalse( tag_get_by_name( $this->tag_name ), "The Tag already exists" );
+		$this->assertFalse( tag_get_by_name( $this->tag_name ), 'The Tag already exists' );
 
 		# Attach the tag - it will be created
 		$t_data = $this->getTagData();
 		$t_response = $this->builder()->post( $t_url_base, $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Failed to attach the tag"
+			'Failed to attach the tag'
 		);
 
 		# TODO: replace internal call by GET /tag request when implemented (see #32863)
 		$t_tag_id = tag_get_by_name( $this->tag_name )['id'];
-		$this->assertNotFalse( $t_tag_id, "Tag has not been created" );
+		$this->assertNotFalse( $t_tag_id, 'Tag has not been created' );
 
 		$t_body = json_decode( $t_response->getBody() );
 		$t_issue_tags = array_column( $t_body->issues[0]->tags ?? [], 'id' );
 		$this->assertContains( $t_tag_id, $t_issue_tags,
-			"Tag does not exist in created Issue data"
+			'Tag does not exist in created Issue data'
 		);
 
 		# Attach the same tag again
 		$t_response = $this->builder()->post( $t_url_base, $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Failed to attach the same tag"
+			'Failed to attach the same tag'
 		);
 
 		# Detach the tag
 		$t_response = $this->builder()->delete( $t_url_base . $t_tag_id )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Tag was not detached"
+			'Tag was not detached'
 		);
 
 		# Try to detach the same tag again
 		$t_response = $this->builder()->delete( $t_url_base . $t_tag_id )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Attempting to detach an unattached tag should have succeeded"
+			'Attempting to detach an unattached tag should have succeeded'
 		);
 
 		# Try to detach a non-existing tag
@@ -486,7 +486,7 @@ class RestIssueTest extends RestBase {
 		}
 		$t_response = $this->builder()->delete( "/issues/$t_issue_id/tags/$t_tag_id" )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Detaching a non-existing tag should have failed"
+			'Detaching a non-existing tag should have failed'
 		);
 	}
 
@@ -499,7 +499,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->post( $t_url_base, $this->getTagData() )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Attaching a tag to a non-existing issue should have failed"
+			'Attaching a tag to a non-existing issue should have failed'
 		);
 
 		# TODO: replace internal calls by GET /tag request when implemented (see #32863)
@@ -507,7 +507,7 @@ class RestIssueTest extends RestBase {
 		$this->assertTrue( tag_exists( $t_tag_id ) );
 		$t_response = $this->builder()->delete( $t_url_base . $t_tag_id )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Detaching an existing tag from a non-existing issue should have failed"
+			'Detaching an existing tag from a non-existing issue should have failed'
 		);
 	}
 

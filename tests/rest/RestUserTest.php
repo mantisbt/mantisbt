@@ -93,8 +93,8 @@ class RestUserTest extends RestBase {
 		$this->assertEquals( $t_user_to_create['name'], $t_user['name'] );
 		$this->assertEquals( 'english', $t_user['language'] );
 		$this->assertEquals( 25, $t_user['access_level']['id'] );
-		$this->assertEquals( "reporter", $t_user['access_level']['name'] );
-		$this->assertEquals( "reporter", $t_user['access_level']['label'] );
+		$this->assertEquals( 'reporter', $t_user['access_level']['name'] );
+		$this->assertEquals( 'reporter', $t_user['access_level']['label'] );
 		$this->assertGreaterThanOrEqual( 1, count( $t_user['projects'] ) );
 		$this->assertTrue( isset( $t_user['projects'][0]['id'] ) );
 		$this->assertTrue( isset( $t_user['projects'][0]['name'] ) );
@@ -109,7 +109,7 @@ class RestUserTest extends RestBase {
 			'real_name' => Faker::realname(),
 			'email' => Faker::email(),
 			'password' => Faker::password(),
-			'access_level' => ["name" => "developer"],
+			'access_level' => ['name' => 'developer'],
 			'protected' => false,
 			'enabled' => false,
 		];
@@ -316,8 +316,8 @@ class RestUserTest extends RestBase {
 		$this->assertEquals( $t_user_to_create['name'], $t_user['name'], 'username check' );
 		$this->assertEquals( 'english', $t_user['language'], 'language' );
 		$this->assertEquals( 25, $t_user['access_level']['id'], 'access level id' );
-		$this->assertEquals( "reporter", $t_user['access_level']['name'], 'access level name' );
-		$this->assertEquals( "reporter", $t_user['access_level']['label'], 'access level label' );
+		$this->assertEquals( 'reporter', $t_user['access_level']['name'], 'access level name' );
+		$this->assertEquals( 'reporter', $t_user['access_level']['label'], 'access level label' );
 	}
 
 	/**
@@ -465,7 +465,7 @@ class RestUserTest extends RestBase {
 		# Try to delete user again
 		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Deleting non-existing user"
+			'Deleting non-existing user'
 		);
 
 		$t_response = $this->builder()->get( '/users/' . $t_user_id )->send();
@@ -595,7 +595,7 @@ class RestUserTest extends RestBase {
 	public function providerValidUserNames() {
 		return [
 			'regular' => [Faker::username()],
-			'with_spaces_in_middle' => ["some user"],
+			'with_spaces_in_middle' => ['some user'],
 			'email' => ['vboctor@somedomain.com'],
 			'dot' => ['victor.boctor'],
 			'underscore' => ['victor_boctor'],

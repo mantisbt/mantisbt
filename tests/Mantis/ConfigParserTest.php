@@ -257,11 +257,11 @@ EOT
 			/**
 			 * Simple arrays
 			 */
-			'SimpleArray empty' => ["array( )"],
-			'SimpleArray one element' => ["array( 1 )"],
-			'SimpleArray several elements, trailing delimiter' => ["array( 1, 2, )"],
-			'SimpleArray formatted whitespace' => ["array ( 1, 2, 3 )"],
-			'SimpleArray no whitespace' => ["array(1,2,3)"],
+			'SimpleArray empty' => ['array( )'],
+			'SimpleArray one element' => ['array( 1 )'],
+			'SimpleArray several elements, trailing delimiter' => ['array( 1, 2, )'],
+			'SimpleArray formatted whitespace' => ['array ( 1, 2, 3 )'],
+			'SimpleArray no whitespace' => ['array(1,2,3)'],
 			'SimpleArray arbitrary whitespace' => ["  array(\n1,\t2  ,    3 )\r  "],
 			'SimpleArray mixed types, quotes' => [
 				<<<'EOT'
@@ -299,7 +299,7 @@ EOT
 			 */
 
 			# e.g. handle_bug_threshold
-			'Constants as array values' => ["array( DEVELOPER, MANAGER )"],
+			'Constants as array values' => ['array( DEVELOPER, MANAGER )'],
 
 			# e.g. status_enum_workflow
 			'Constants as array keys' => [

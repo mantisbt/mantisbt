@@ -137,7 +137,7 @@ class MantisGraphPlugin extends MantisPlugin {
 					$t_report = [];
 
 					foreach( $t_report_associative as $t_name => $t_count ) {
-						$t_report[] = ["name" => $t_name, "count" => $t_count];
+						$t_report[] = ['name' => $t_name, 'count' => $t_count];
 					}
 
 					return $res->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_report );

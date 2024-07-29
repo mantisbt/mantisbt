@@ -156,7 +156,7 @@ function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_re
 function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
 	}
 
 	$t_data = ['payload' => $t_payload];
@@ -189,7 +189,7 @@ function rest_user_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
 	}
 
 	$t_data = [
@@ -264,7 +264,7 @@ function execute_create_token_command( \Slim\Http\Request $p_request, \Slim\Http
 	$t_command = new UserTokenCreateCommand( $t_data );
 	$t_result = $t_command->execute();
 
-	return $p_response->withStatus( HTTP_STATUS_CREATED, "User token created" )->
+	return $p_response->withStatus( HTTP_STATUS_CREATED, 'User token created' )->
 		withJson( $t_result );
 }
 
@@ -322,7 +322,7 @@ function execute_delete_token_command( \Slim\Http\Request $p_request, \Slim\Http
 	$t_command = new UserTokenDeleteCommand( $t_data );
 	$t_command->execute();
 
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "User token deleted" );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, 'User token deleted' );
 }
 
 /**

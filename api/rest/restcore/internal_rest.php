@@ -73,7 +73,7 @@ function rest_internal_config_display( \Slim\Http\Request $p_request, \Slim\Http
 		return $p_response->withStatus( HTTP_STATUS_FORBIDDEN );
 	}
 	if( null === $t_user_id || null === $t_project_id || null === $t_config_id ) {
-		$t_message = "Missing parameters";
+		$t_message = 'Missing parameters';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 

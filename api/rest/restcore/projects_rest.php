@@ -153,7 +153,7 @@ function rest_project_user_add( \Slim\Http\Request $p_request, \Slim\Http\Respon
 
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
 	}
 
 	$t_payload['project'] = ['id' => $t_project_id];
@@ -270,7 +270,7 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
 function rest_project_version_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
-		$t_message = "Project id is missing.";
+		$t_message = 'Project id is missing.';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
@@ -287,7 +287,7 @@ function rest_project_version_get( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_result = $t_command->execute();
 
 	return $p_response->
-		withStatus( HTTP_STATUS_SUCCESS, "OK" )->
+		withStatus( HTTP_STATUS_SUCCESS, 'OK' )->
 		withJson( $t_result );
 }
 
@@ -302,7 +302,7 @@ function rest_project_version_get( \Slim\Http\Request $p_request, \Slim\Http\Res
 function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
-		$t_message = "Project id is missing.";
+		$t_message = 'Project id is missing.';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
@@ -335,7 +335,7 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
 function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
-		$t_message = "Project id is missing.";
+		$t_message = 'Project id is missing.';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
@@ -354,7 +354,7 @@ function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\
 	$t_result = $t_command->execute();
 
 	return $p_response
-		->withStatus( HTTP_STATUS_SUCCESS, "Version updated" )
+		->withStatus( HTTP_STATUS_SUCCESS, 'Version updated' )
 		->withJson( $t_result );
 }
 
@@ -369,7 +369,7 @@ function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\
 function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
-		$t_message = "Project id is missing.";
+		$t_message = 'Project id is missing.';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
@@ -385,7 +385,7 @@ function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\
 	$t_command = new VersionDeleteCommand( $t_data );
 	$t_command->execute();
 
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version deleted" );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, 'Version deleted' );
 }
 
 /**
@@ -399,7 +399,7 @@ function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\
 function rest_project_hierarchy_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
-		$t_message = "Project id is missing.";
+		$t_message = 'Project id is missing.';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
@@ -429,13 +429,13 @@ function rest_project_hierarchy_add( \Slim\Http\Request $p_request, \Slim\Http\R
 function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
-		$t_message = "Project id is missing.";
+		$t_message = 'Project id is missing.';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
 	$t_subproject_id = $p_args['subproject_id'] ?? $p_request->getParam( 'subproject_id' );
 	if( is_blank( $t_subproject_id ) ) {
-		$t_message = "Subproject id is missing.";
+		$t_message = 'Subproject id is missing.';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
@@ -467,13 +467,13 @@ function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Htt
 function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_project_id ) ) {
-		$t_message = "Project id is missing.";
+		$t_message = 'Project id is missing.';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
 	$t_subproject_id = $p_args['subproject_id'] ?? $p_request->getParam( 'subproject_id' );
 	if( is_blank( $t_subproject_id ) ) {
-		$t_message = "Subproject id is missing.";
+		$t_message = 'Subproject id is missing.';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
@@ -505,7 +505,7 @@ function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Htt
 function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
 	}
 
 	$t_data = [
@@ -542,7 +542,7 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
 	}
 
 	$t_data = [

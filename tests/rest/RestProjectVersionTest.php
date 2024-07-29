@@ -198,7 +198,7 @@ class RestProjectVersionTest extends RestBase {
 		// Confirm that version exists
 		$t_response = $this->builder()->get( $this->ver_base_url . $t_version['id'] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Confirm that version has not been deleted"
+			'Confirm that version has not been deleted'
 		);
 	}
 
@@ -316,7 +316,7 @@ class RestProjectVersionTest extends RestBase {
 			'newline2' => ["version\rwith\rnewlines"],
 			'newline_blank' => ["\n\r   "],
 			'tabs' => ["\t   "],
-			'too_long' => [str_repeat( "v", 65 )]
+			'too_long' => [str_repeat( 'v', 65 )]
 		];
 	}
 

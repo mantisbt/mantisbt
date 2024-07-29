@@ -354,7 +354,7 @@ abstract class PluginForDisplay {
 	}
 
 	protected function renderColumns() {
-		echo "<td>" . $this->pluginName() . "</td>\n";
+		echo '<td>' . $this->pluginName() . "</td>\n";
 		echo "<td>$this->description</td>\n";
 	}
 

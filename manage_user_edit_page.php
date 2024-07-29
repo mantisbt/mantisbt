@@ -306,7 +306,7 @@ print_manage_menu( 'manage_user_page.php' );
 	# Information button
 	print_link_button( 'view_user_page.php?id=' . $t_user['id'],
 		lang_get( 'view_account_title' ),
-		"btn btn-primary btn-white btn-round pull-left"
+		'btn btn-primary btn-white btn-round pull-left'
 	);
 
 	# Impersonate Button

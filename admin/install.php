@@ -481,9 +481,9 @@ if( 2 == $t_install_state ) {
 		$t_url_check = '';
 		if( !$f_path ) {
 			# Empty URL - warn admin about security risk
-			$t_url_check = "Using an empty path is a security risk, as MantisBT "
-				. "will dynamically set it based on headers from the HTTP request, "
-				. "exposing your system to Host Header Injection attacks.";
+			$t_url_check = 'Using an empty path is a security risk, as MantisBT '
+				. 'will dynamically set it based on headers from the HTTP request, '
+				. 'exposing your system to Host Header Injection attacks.';
 			$t_hard_fail = false;
 		} else {
 			# Make sure we have a trailing '/'
@@ -777,8 +777,8 @@ if( !$g_database_upgrade ) {
 			echo "\n", '<input id="' . $t_id_sample . '" type="text" size="40" disabled>';
 		} else {
 			echo '<span id="oracle_size_warning" >';
-			echo "On Oracle < 12cR2, max length for identifiers is 30 chars. "
-				. "Keep pre/suffixes as short as possible to avoid problems.";
+			echo 'On Oracle < 12cR2, max length for identifiers is 30 chars. '
+				. 'Keep pre/suffixes as short as possible to avoid problems.';
 			echo '<span>';
 		}
 		echo "\n\t</td>\n</tr>\n\n";
@@ -987,16 +987,16 @@ if( 3 == $t_install_state ) {
 
 			echo '<div class="space-6"></div>';
 			echo '<div class="alert alert-warning">';
-			echo "Please note that executing the generated script below <strong>may not result in a fully functional "
-				. "database</strong>, particularly in upgrade scenarios. This is due to the fact that some upgrade "
-				. "steps require the execution of PHP code; these <em>Upgrade Functions</em> are defined in "
+			echo 'Please note that executing the generated script below <strong>may not result in a fully functional '
+				. 'database</strong>, particularly in upgrade scenarios. This is due to the fact that some upgrade '
+				. 'steps require the execution of PHP code; these <em>Upgrade Functions</em> are defined in '
 				. '<a href="https://github.com/mantisbt/mantisbt/blob/master/core/install_helper_functions_api.php">install_helper_functions_api.php</a>'
-				. " and cannot be translated to SQL statements. Use at your own risk.";
+				. ' and cannot be translated to SQL statements. Use at your own risk.';
 			echo '</div>';
 
 			echo '<pre>';
-			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script" . PHP_EOL;
-			echo "-- " . date( "c" ) . PHP_EOL . PHP_EOL;
+			echo '-- MantisBT ' . MANTIS_VERSION . ' Database creation script' . PHP_EOL;
+			echo '-- ' . date( 'c' ) . PHP_EOL . PHP_EOL;
 		}
 
 		# Make sure we do the upgrades using UTF-8 if needed
@@ -1075,7 +1075,7 @@ if( 3 == $t_install_state ) {
 
 			try {
 				$t_is_integer = pgsql_get_column_type( $t_table, $t_column ) == 'integer';
-				$t_msg = "Column must be converted to INTEGER";
+				$t_msg = 'Column must be converted to INTEGER';
 				$t_exception_occured = false;
 			} catch( Exception $e ) {
 				$t_exception_occured = true;
@@ -1153,7 +1153,7 @@ if( 3 == $t_install_state ) {
 							} else {
 								$t_sql = false;
 								$t_sqlarray = [];
-								$t_operation = "No operation";
+								$t_operation = 'No operation';
 							}
 						} else {
 							$t_sqlarray = call_user_func_array( [$t_dict, $t_operation], $g_upgrade[$i][1] );
@@ -1174,7 +1174,7 @@ if( 3 == $t_install_state ) {
 						echo htmlentities( $t_statement ) . $t_sql_end;
 					}
 				} elseif( $t_sqlarray ) {
-					echo "-- Execute PHP Update Function: install_" . htmlentities( $t_sqlarray[0] ) . "(";
+					echo '-- Execute PHP Update Function: install_' . htmlentities( $t_sqlarray[0] ) . '(';
 					# Convert the parameters array to a printable string
 					if( isset( $t_sqlarray[1] ) ) {
 						$t_params = [];
@@ -1189,7 +1189,7 @@ if( 3 == $t_install_state ) {
 						}
 						echo htmlentities( implode( ', ', $t_params ) );
 					}
-					echo ")";
+					echo ')';
 				} else {
 					echo "-- $t_operation";
 				}
@@ -1231,14 +1231,14 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo "-- Set database version" . PHP_EOL;
+			echo '-- Set database version' . PHP_EOL;
 			if( $t_last_update == -1 ) {
-				echo "INSERT INTO " . db_get_table( 'config' )
-					. " ( value, type, access_reqd, config_id, project_id, user_id )"
+				echo 'INSERT INTO ' . db_get_table( 'config' )
+					. ' ( value, type, access_reqd, config_id, project_id, user_id )'
 					. " VALUES ($t_last_id, 1, 90, 'database_version', 0, 0 );"
 					. PHP_EOL;
 			} else {
-				echo "UPDATE " . db_get_table( 'config' )
+				echo 'UPDATE ' . db_get_table( 'config' )
 					. " SET value = $t_last_id"
 					. " WHERE config_id = 'database_version' AND project_id = 0 AND user_id = 0;"
 					. PHP_EOL;
@@ -1247,8 +1247,8 @@ if( 3 == $t_install_state ) {
 
 			echo '<div class="space-6"></div>';
 			echo '<div class="alert alert-danger">';
-			echo "<strong>Your database is not ready yet !</strong> "
-				. "Please create it, then install the tables and data using the above script before proceeding.";
+			echo '<strong>Your database is not ready yet !</strong> '
+				. 'Please create it, then install the tables and data using the above script before proceeding.';
 			echo '</div>';
 			echo '</td></tr>';
 		}
@@ -1332,9 +1332,9 @@ if( 5 == $t_install_state ) {
 		}
 		# With PHP 8.2 and later this should catch Random\RandomException instead
 		catch( Exception $e ) {
-			$t_crypto_failed_msg = "No appropriate source of randomness found. "
-				. "You will need to generate the Master Salt yourself "
-				. "and add it to the configuration file manually.";
+			$t_crypto_failed_msg = 'No appropriate source of randomness found. '
+				. 'You will need to generate the Master Salt yourself '
+				. 'and add it to the configuration file manually.';
 			print_test_result( BAD, false, $t_crypto_failed_msg );
 
 		}

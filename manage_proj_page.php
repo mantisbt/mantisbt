@@ -188,7 +188,7 @@ print_manage_menu( 'manage_proj_page.php' );
 			<tr>
 				<td>
 					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>">
-						<?php echo str_repeat( "&raquo; ", $t_level )
+						<?php echo str_repeat( '&raquo; ', $t_level )
 							. string_display_line( $t_project['name'] ) ?>
 					</a>
 				</td>

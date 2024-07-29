@@ -36,6 +36,7 @@ use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer;
 use PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer;
+use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
@@ -94,6 +95,21 @@ return ECSConfig::configure()
 		 *       could be because the symfony cs-fixer is fixed to whitespaces.
 		 */
 		DisallowSpaceIndentSniff::class,
+
+		/**
+		 * String: Single quotes
+		 *
+		 * Convert double quotes to single quotes for simple strings.
+		 *
+		 * Configurable. Default is keep double-quoted strings if they contain a
+		 * single-quoted string.
+		 *
+		 * $a = "sample"                       > $a = 'sample'
+		 * $b = "sample with 'single-quotes'"  > $b = "sample with 'single-quotes'"
+		 *
+		 * @see https://cs.symfony.com/doc/rules/string_notation/single_quote.html
+		 */
+		SingleQuoteFixer::class,
 
 		/**
 		 * PHP tag: Full opening tag

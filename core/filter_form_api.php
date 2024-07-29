@@ -125,7 +125,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 	} else {
 		# error - no function to populate the target (e.g., print_filter_foo)
 		throw new StateException(
-			"No function to populate the target",
+			'No function to populate the target',
 			ERROR_FILTER_NOT_FOUND,
 			[$p_filter_target]
 		);
@@ -1659,7 +1659,7 @@ function print_filter_relationship_type( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	$c_reltype_value = $p_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
-	print_relationship_list_box( $c_reltype_value, 'relationship_type', true, true, "input-xs" );
+	print_relationship_list_box( $c_reltype_value, 'relationship_type', true, true, 'input-xs' );
 	echo '<input class="input-xs" type="text" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" size="5" maxlength="10" value="', $p_filter[FILTER_PROPERTY_RELATIONSHIP_BUG], '" />';
 }
 
@@ -2269,9 +2269,9 @@ function print_filter_custom_field_date( $p_field_id, array $p_filter = null ) {
 
 	echo "</td></tr>\n<tr><td>";
 
-	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
+	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year, 'input-xs' );
 	echo "</td></tr>\n<tr><td>";
-	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
+	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year, 'input-xs' );
 	echo "</td></tr>\n</table>";
 }
 

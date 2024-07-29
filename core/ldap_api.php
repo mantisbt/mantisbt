@@ -76,7 +76,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 
 	$t_network_timeout = config_get_global( 'ldap_network_timeout' );
 	if( $t_network_timeout > 0 ) {
-		log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
+		log_event( LOG_LDAP, 'Setting LDAP network timeout to ' . $t_network_timeout );
 		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
@@ -106,7 +106,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_X_TLS_PROTOCOL_MIN, $t_tls_protocol_min );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
-			log_event( LOG_LDAP, "Error: Failed to set minimum TLS version on LDAP server" );
+			log_event( LOG_LDAP, 'Error: Failed to set minimum TLS version on LDAP server' );
 			trigger_error( ERROR_LDAP_UNABLE_TO_SET_MIN_TLS, ERROR );
 
 			# Return required as function may be called with error suppressed
@@ -120,7 +120,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		$t_result = @ldap_start_tls( $t_ds );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
-			log_event( LOG_LDAP, "Error: Cannot initiate StartTLS on LDAP server" );
+			log_event( LOG_LDAP, 'Error: Cannot initiate StartTLS on LDAP server' );
 			trigger_error( ERROR_LDAP_UNABLE_TO_STARTTLS, ERROR );
 
 			# Return required as function may be called with error suppressed
@@ -245,7 +245,7 @@ function ldap_cache_user_data( $p_username ) {
 	# context, it just means we won't be able to retrieve user data from LDAP.
 	$t_ds = @ldap_connect_bind();
 	if( $t_ds === false ) {
-		log_event( LOG_LDAP, "ERROR: could not bind to LDAP server" );
+		log_event( LOG_LDAP, 'ERROR: could not bind to LDAP server' );
 		return false;
 	}
 

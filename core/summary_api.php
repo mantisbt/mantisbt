@@ -173,8 +173,8 @@ function summary_helper_get_bugratio( $p_bugs_open, $p_bugs_resolved, $p_bugs_cl
 	$t_bugs_total = $p_bugs_open + $p_bugs_resolved + $p_bugs_closed;
 	$t_bugs_resolved_ratio = ( $p_bugs_resolved + $p_bugs_closed ) / ( $t_bugs_total == 0 ? 1 : $t_bugs_total );
 	$t_bugs_ratio = $t_bugs_total / ( $p_bugs_total_count == 0 ? 1 : $p_bugs_total_count );
-	$t_bugs_resolved_ratio = sprintf( "%.1f%%", $t_bugs_resolved_ratio * 100 );
-	$t_bugs_ratio = sprintf( "%.1f%%", $t_bugs_ratio * 100 );
+	$t_bugs_resolved_ratio = sprintf( '%.1f%%', $t_bugs_resolved_ratio * 100 );
+	$t_bugs_ratio = sprintf( '%.1f%%', $t_bugs_ratio * 100 );
 	return [$t_bugs_resolved_ratio, $t_bugs_ratio];
 }
 
@@ -712,10 +712,10 @@ function summary_print_by_project( array $p_projects = [], int $p_level = 0, arr
 
 			summary_helper_build_bugcount( $p_cache, $t_project_id, $t_status, $t_bugcount );
 		}
-		$p_cache["_bugs_total_count_"] = $t_bugs_total_count;
+		$p_cache['_bugs_total_count_'] = $t_bugs_total_count;
 	}
 
-	$t_bugs_total_count = $p_cache["_bugs_total_count_"];
+	$t_bugs_total_count = $p_cache['_bugs_total_count_'];
 	foreach( $p_projects as $t_project ) {
 		$t_name = str_repeat( '&raquo; ', $p_level ) . project_get_name( $t_project );
 

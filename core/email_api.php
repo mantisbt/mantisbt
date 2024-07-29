@@ -173,14 +173,14 @@ function email_is_valid( $p_email ) {
 				if( checkdnsrr( $t_host, 'ANY' ) ) {
 					return true;
 				}
-				log_event( LOG_EMAIL, "failed - mx/dns record check" );
+				log_event( LOG_EMAIL, 'failed - mx/dns record check' );
 			}
 		} else {
 			# Email format was valid but didn't check for valid mx records
 			return true;
 		}
 	} else {
-		log_event( LOG_EMAIL, "failed - invalid address" );
+		log_event( LOG_EMAIL, 'failed - invalid address' );
 	}
 
 	# Everything failed.  The email is invalid

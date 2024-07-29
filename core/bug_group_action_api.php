@@ -110,7 +110,7 @@ function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
  * @return void
  */
 function bug_group_action_print_results( array $p_failed_ids ) {
-	$t_format = "<tr>"
+	$t_format = '<tr>'
 		. "\n\t" . '<td width="50%%">%s' . lang_get( 'word_separator' ) . '%s</td>'
 		. "\n\t" . '<td>%s</td>'
 		. "\n</tr>\n";

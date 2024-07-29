@@ -85,7 +85,7 @@ layout_page_header();
 
 layout_page_begin();
 $t_timeline_view_threshold_access = access_has_project_level( config_get( 'timeline_view_threshold' ) );
-$t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-12";
+$t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? 'col-md-7' : 'col-md-12';
 ?>
 <div class="<?php echo $t_timeline_view_class ?> col-xs-12">
 <div class="widget-box widget-color-blue2">

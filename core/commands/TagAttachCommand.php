@@ -113,7 +113,7 @@ class TagAttachCommand extends Command {
 				}
 			} else {
 				# invalid tag with no id or name.
-				throw new ClientException( "Invalid tag with no id or name", ERROR_INVALID_FIELD_VALUE, ['tags'] );
+				throw new ClientException( 'Invalid tag with no id or name', ERROR_INVALID_FIELD_VALUE, ['tags'] );
 			}
 		}
 	}

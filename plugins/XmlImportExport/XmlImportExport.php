@@ -34,7 +34,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 	function register() {
 		$this->name = plugin_lang_get( 'title' );
 		$this->description = plugin_lang_get( 'description' );
-		$this->page = "config_page";
+		$this->page = 'config_page';
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = [
@@ -52,8 +52,8 @@ class XmlImportExportPlugin extends MantisPlugin {
 	 */
 	public function config() {
 		return [
-			"import_threshold" => ADMINISTRATOR,
-			"export_threshold" => DEVELOPER,
+			'import_threshold' => ADMINISTRATOR,
+			'export_threshold' => DEVELOPER,
 		];
 	}
 

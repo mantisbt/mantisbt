@@ -28,7 +28,7 @@ class RestIssueUpdateVersion extends RestBase {
 	protected function getJson( ResponseInterface $p_response, $p_status_code = HTTP_STATUS_SUCCESS ) {
 		$this->assertEquals( $p_status_code,
 			$p_response->getStatusCode(),
-			"REST API returned unexpected Status Code"
+			'REST API returned unexpected Status Code'
 		);
 		return json_decode( $p_response->getBody(), false );
 	}
@@ -67,9 +67,9 @@ class RestIssueUpdateVersion extends RestBase {
 
 		# Add a test Version
 		$t_version_data = [
-			"name" => self::class . "_v" . rand( 1, 9 ) . "." . rand( 0, 99 ),
-			"description" => self::class . " test version",
-			"released" => true,
+			'name' => self::class . '_v' . rand( 1, 9 ) . '.' . rand( 0, 99 ),
+			'description' => self::class . ' test version',
+			'released' => true,
 		];
 		$t_response = $this->builder()->post( $this->endpoint_version, $t_version_data )->send();
 		$t_version = $this->getJson( $t_response, HTTP_STATUS_CREATED )->version;
@@ -130,7 +130,7 @@ class RestIssueUpdateVersion extends RestBase {
 		$this->assertEquals(
 			$p_expected_status_code,
 			$t_response->getStatusCode(),
-			"Unexpected status code from REST API"
+			'Unexpected status code from REST API'
 		);
 	}
 

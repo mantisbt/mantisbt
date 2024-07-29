@@ -520,7 +520,7 @@ function relgraph_add_bug_to_graph( Graph &$p_graph, $p_bug_id, BugData $p_bug, 
 	$t_label = $p_bug_id;
 	if( $p_show_summary ) {
 		# Truncate summary to 30 chars, to avoid nodes being too wide
-		$t_label .= "\n" . string_attribute( mb_strimwidth( $p_bug->summary, 0, 30, "..." ) );
+		$t_label .= "\n" . string_attribute( mb_strimwidth( $p_bug->summary, 0, 30, '...' ) );
 	}
 
 	$t_node_attributes = [];
