@@ -4,8 +4,7 @@ use Psr\Http\Message\ResponseInterface;
 
 require_once 'RestIssueTest.php';
 
-class RestIssueUpdateVersion extends RestBase
-{
+class RestIssueUpdateVersion extends RestBase {
 	const VERSION_FIELDS = ['version', 'target_version', 'fixed_in_version'];
 
 	/** @var int Version id */
@@ -179,8 +178,8 @@ class RestIssueUpdateVersion extends RestBase
 		# Provider returns nothing.
 		yield 'dummy' => [ ['id' => -1], HTTP_STATUS_BAD_REQUEST ];
 
-		//yield 'Numeric version' => [ 999, HTTP_STATUS_BAD_REQUEST ];
-		//yield 'Blank version' => [ '', HTTP_STATUS_BAD_REQUEST ];
-		//yield 'Version with blank name' => [ ['name' => ''], HTTP_STATUS_BAD_REQUEST ];
+		// yield 'Numeric version' => [ 999, HTTP_STATUS_BAD_REQUEST ];
+		// yield 'Blank version' => [ '', HTTP_STATUS_BAD_REQUEST ];
+		// yield 'Version with blank name' => [ ['name' => ''], HTTP_STATUS_BAD_REQUEST ];
 	}
 }

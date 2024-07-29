@@ -76,7 +76,7 @@ if( !mci_is_webservice_call() ) {
 	$t_wsdl = file_get_contents( $t_wsdl_path );
 	$t_wsdl = str_replace(
 		'http://www.mantisbt.org/bugs/api/soap/mantisconnect.php',
-		config_get_global( 'path' ).'api/soap/mantisconnect.php',
+		config_get_global( 'path' ) . 'api/soap/mantisconnect.php',
 		$t_wsdl
 	);
 	echo $t_wsdl;

@@ -179,7 +179,7 @@ if( $f_error || $f_cookie_error || $f_reauthenticate ) {
 }
 
 $t_upgrade_required = false;
-if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.' ) ) {
+if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ . '/admin/.' ) ) {
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
 	$t_db_version = config_get( 'database_version', 0, ALL_USERS, ALL_PROJECTS );

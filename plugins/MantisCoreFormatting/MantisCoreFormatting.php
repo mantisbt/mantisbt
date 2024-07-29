@@ -81,7 +81,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 							'copy-success' => lang_get( 'plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success' ),
 							'copy-error' => lang_get( 'plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error' ),
 						],
-					])  . '\'
+					]) . '\'
 					src="' . plugin_file( 'syntax-highlighting/init.js' ) . '"></script>';
 			}
 		}

@@ -654,7 +654,9 @@ if( $t_show_attachments ) {
 				<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>">
 					<?php echo string_attribute( lang_get_defaulted( $t_def['name'] ) ) ?>
 				</label>
-			<?php } else { echo string_attribute( lang_get_defaulted( $t_def['name'] ) ); } ?>
+			<?php } else {
+			echo string_attribute( lang_get_defaulted( $t_def['name'] ) );
+			} ?>
 		</th>
 		<td>
 			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id, $t_def['require_report'] ) ?>
