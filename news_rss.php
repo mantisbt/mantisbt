@@ -49,7 +49,7 @@ require_api( 'rss_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
-require_lib( 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.RSSBuilder.inc.php' );
+require_lib( 'rssbuilder/class.RSSBuilder.inc.php' );
 
 $f_username = gpc_get_string( 'username', null );
 $f_key = gpc_get_string( 'key', null );

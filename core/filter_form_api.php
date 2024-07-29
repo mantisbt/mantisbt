@@ -2082,7 +2082,7 @@ function print_filter_values_show_sort( array $p_filter ) {
 			}
 			$t_sort = $t_sort_fields[$i];
 			if(column_is_custom_field( $t_sort ) ) {
-				$t_field_name = string_display_line( lang_get_defaulted( column_get_custom_field_name( $t_sort ) ) );
+				$t_field_name = string_attribute( lang_get_defaulted( column_get_custom_field_name( $t_sort ) ) );
 			} else {
 				$t_field_name = string_get_field_name( $t_sort );
 			}
@@ -2116,7 +2116,7 @@ function print_filter_show_sort( array $p_filter = null ) {
 	$t_shown_fields[''] = '';
 	foreach( $t_visible_columns as $t_column ) {
 		if(column_is_custom_field( $t_column ) ) {
-			$t_field_name = string_display_line( lang_get_defaulted( column_get_custom_field_name( $t_column ) ) );
+			$t_field_name = string_attribute( lang_get_defaulted( column_get_custom_field_name( $t_column ) ) );
 		} else {
 			$t_field_name = string_get_field_name( $t_column );
 		}
@@ -2828,7 +2828,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 
 		if( !empty( $t_accessible_custom_fields ) ) {
 			foreach( $t_accessible_custom_fields as $t_cfdef ) {
-				$t_header = $get_field_header( 'custom_field_' . $t_cfdef['id'] . '_filter', string_display_line( lang_get_defaulted( $t_cfdef['name'] ) ) );
+				$t_header = $get_field_header( 'custom_field_' . $t_cfdef['id'] . '_filter', string_attribute( lang_get_defaulted( $t_cfdef['name'] ) ) );
 				ob_start();
 				if( $p_static ) {
 					print_filter_custom_field( $t_cfdef['id'], $t_filter );

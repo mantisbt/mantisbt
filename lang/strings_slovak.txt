@@ -46,6 +46,7 @@
  * @author Llucenic
  * @author Mikulas1
  * @author Nathaniel.skywalker.888
+ * @author Oujon
  * @author Rattkin
  * @author Rudko
  * @author Teslaton
@@ -126,6 +127,7 @@ $s_inherit = 'Zdediť kategórie';
 $s_inherit_global = 'Zdediť globálne kategórie';
 $s_inherit_parent = 'Zdediť rodičovské kategórie';
 $s_update_subproject_inheritance = 'Upraviť dedičnosť podprojektov';
+$s_category_disabled = 'Kategória je zakázaná, vyberte si inú.';
 $s_duplicate_of = 'duplikát z';
 $s_has_duplicate = 'má duplikát';
 $s_related_to = 'súvisiace';

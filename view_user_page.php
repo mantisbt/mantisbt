@@ -176,6 +176,17 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 					<?php echo date( $t_date_format, $u_last_visit ); ?>
 				</td>
 			</tr>
+			<?php
+				if( OFF != config_get( 'max_failed_login_count' ) ) { ?>
+				<tr>
+					<th class="category">
+						<?php echo lang_get( 'failed_login_count' ) ?>
+					</th>
+					<td>
+						<?php echo $u_failed_login_count ?>
+					</td>
+				</tr>
+			<?php } ?>
 	<?php } ?>
 	</fieldset>
 </table>

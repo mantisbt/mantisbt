@@ -178,19 +178,20 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'RESOLVE':
 			$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
-				if( access_has_bug_level( access_get_status_threshold( $t_resolved_status, $t_bug->project_id ), $t_bug_id ) ) {
-					if( ( $t_status < $t_resolved_status ) &&
-						bug_check_workflow( $t_status, $t_resolved_status ) ) {
-				$f_resolution = gpc_get_int( 'resolution' );
-				$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
-				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-				bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version, $f_bug_notetext, null, null, $f_bug_noteprivate );
-				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
-			} else {
+			if( access_has_bug_level( access_get_status_threshold( $t_resolved_status, $t_bug->project_id ), $t_bug_id ) ) {
+				if( ( $t_status < $t_resolved_status ) &&
+					bug_check_workflow( $t_status, $t_resolved_status )
+				) {
+					$f_resolution = gpc_get_int( 'resolution' );
+					$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
+					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
+					bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version, $f_bug_notetext, null, null, $f_bug_noteprivate );
+					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
+				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
 				}
-				} else {
-					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
+			} else {
+				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
 			break;
 		case 'UP_PRIOR':

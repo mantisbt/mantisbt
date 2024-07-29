@@ -99,7 +99,7 @@ function excel_get_footer() {
  * @return string The cell xml.
  */
 function excel_format_column_title( $p_column_title ) {
-	return '<Cell><Data ss:Type="String">' . $p_column_title . '</Data></Cell>';
+	return excel_prepare_string( $p_column_title );
 }
 
 /**

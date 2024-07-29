@@ -715,7 +715,7 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 		echo '<tr>';
 		echo '<td class="category">';
 		echo '<label', $t_required_class, $t_label_for, '>';
-		echo '<span>', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</span>';
+		echo '<span>', string_attribute( lang_get_defaulted( $t_def['name'] ) ), '</span>';
 		echo '</label>';
 		echo '</td><td colspan="5">';
 		print_custom_field_input( $t_def, $t_bug_id, $t_def['require_update'] );
@@ -792,7 +792,7 @@ if( $t_bottom_buttons_enabled ) {
 
 <?php
 define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
+include( __DIR__ . '/bugnote_view_inc.php' );
 layout_page_end();
 
 last_visited_issue( $t_bug_id );

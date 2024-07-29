@@ -93,7 +93,7 @@ function table_print_filter_row( $p_filter_id ) {
 	echo '<tr>';
 	# Filter name
 	echo '<td>';
-	$t_name = string_display_line( filter_get_field( $p_filter_id, 'name' ) );
+	$t_name = filter_get_field( $p_filter_id, 'name' );
 	print_link( 'view_filters_page.php?filter_id=' . $p_filter_id, $t_name );
 	echo '</td>';
 	# RSS

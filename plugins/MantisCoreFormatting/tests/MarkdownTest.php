@@ -14,8 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-require_once( dirname( __FILE__, 2 ) . '/../../tests/TestConfig.php' );
-require_once( dirname( __FILE__, 2 ) . '/core/MantisMarkdown.php' );
+require_once( dirname( __DIR__ ) . '/../../tests/TestConfig.php' );
+require_once( dirname( __DIR__ ) . '/core/MantisMarkdown.php' );
 
 # MantisBT Core API
 require_mantis_core();

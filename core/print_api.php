@@ -103,9 +103,6 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		layout_page_header( null, $p_url );
 		layout_page_begin();
 		html_operation_successful( $p_url );
-		echo '<br /><div class="center">';
-		print_link_button( $p_url, lang_get( 'proceed' ) );
-		echo '</div>';
 		layout_page_end();
 		return false;
 	}
@@ -1332,19 +1329,26 @@ function print_formatted_severity_string( BugData $p_bug ) {
 }
 
 /**
- * Print view bug sort link
- * @todo params should be in same order as print_manage_user_sort_link
- * @param string  $p_string         The displayed text of the link.
- * @param string  $p_sort_field     The field to sort.
- * @param string  $p_sort           The field to sort by.
- * @param string  $p_dir            The sort direction - either ASC or DESC.
- * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * Print view bug sort link.
+ *
+ * Prints the column header as a link allowing to change the sort order.
+ *
+ * @param string $p_label          The displayed text of the link.
+ * @param string $p_sort_field     The field to sort.
+ * @param string $p_sort           The field to sort by.
+ * @param string $p_dir            The sort direction - either ASC or DESC.
+ * @param int    $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @param string $p_icon           Optional Fontawesome icon to display instead of text.
+ *                                 If is set, $p_label will be used as the icon's title attribute.
+ *
  * @return void
+ *
+ * @todo params should be in same order as print_manage_user_sort_link
  */
-function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_view_bug_sort_link( $p_label, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_icon = '' ) {
 	# @TODO cproensa, $g_filter is needed to get the temporary id, since the
-	# actual filter is not providede as parameter. Ideally, we should not
-	# rely in this global variable, but at the moment is not possible without
+	# actual filter is not provided as parameter. Ideally, we should not
+	# rely on this global variable, but at the moment is not possible without
 	# a rewrite of these print functions.
 	global $g_filter;
 
@@ -1365,10 +1369,15 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			$t_sort_field = rawurlencode( $p_sort_field );
 			$t_print_parameter = ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) ? '&print=1' : '';
 			$t_filter_parameter = filter_is_temporary( $g_filter ) ? filter_get_temporary_key_param( $g_filter ) . '&' : '';
-			print_link( 'view_all_set.php?' . $t_filter_parameter . 'sort_add=' . $t_sort_field . '&dir_add=' . $p_dir . '&type=' . FILTER_ACTION_PARSE_ADD . $t_print_parameter, $p_string );
+			$t_url = 'view_all_set.php?' . $t_filter_parameter
+				. 'sort_add=' . $t_sort_field
+				. '&dir_add=' . $p_dir
+				. '&type=' . FILTER_ACTION_PARSE_ADD
+				. $t_print_parameter;
+			print_link( $t_url, $p_label, false, '', $p_icon );
 			break;
 		default:
-			echo $p_string;
+			echo $p_label;
 	}
 }
 
@@ -1400,8 +1409,13 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
-        $p_string, false, $p_class );
+	print_link(
+		$p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive
+		. '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
+		$p_string,
+		false,
+		$p_class
+	);
 }
 
 /**
@@ -1505,25 +1519,34 @@ function print_bracket_link_prepared( $p_link ) {
 }
 
 /**
- * print a HTML link
- * @param string  $p_link       The page URL.
- * @param string  $p_url_text   The displayed text for the link.
- * @param boolean $p_new_window Whether to open in a new window.
- * @param string  $p_class      The CSS class of the link.
+ * Print a HTML link with optional icon.
+ *
+ * @param string $p_link       The target URL.
+ * @param string $p_url_text   Displayed text for the link, will be escaped prior to display.
+ * @param bool   $p_new_window Whether to open in a new window.
+ * @param string $p_class      The CSS class of the link.
+ * @param string $p_icon       Optional Fontawesome icon to display before $p_label
+ *
  * @return void
  */
-function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
+function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '', $p_icon = '' ) {
+	if( $p_icon ) {
+		$t_url_text = icon_get( $p_icon, '', $p_url_text );
+	} else {
+		$t_url_text = string_attribute( $p_url_text );
+	}
+
 	if( is_blank( $p_link ) ) {
-		echo $p_url_text;
+		echo $t_url_text;
 	} else {
 		$t_link = htmlspecialchars( $p_link );
 		if( $p_new_window === true ) {
-			echo '<a class="new-window ' . $p_class . '" href="' . $t_link . '" target="_blank">' . $p_url_text . '</a>';
+			echo '<a class="new-window ' . $p_class . '" href="' . $t_link . '" target="_blank">' . $t_url_text . '</a>';
 		} else {
 			if( $p_class !== '' ) {
-				echo '<a class="' . $p_class . '" href="' . $t_link . '">' . $p_url_text . '</a>';
+				echo '<a class="' . $p_class . '" href="' . $t_link . '">' . $t_url_text . '</a>';
 			} else {
-				echo '<a href="' . $t_link . '">' . $p_url_text . '</a>';
+				echo '<a href="' . $t_link . '">' . $t_url_text . '</a>';
 			}
 		}
 	}
@@ -2162,7 +2185,7 @@ function print_dropzone_form_data() {
 	echo "\t" . 'data-max-filename-length="' . DB_FIELD_SIZE_FILENAME . '"' . "\n";
 	$t_allowed_files = config_get( 'allowed_files' );
 	if ( !empty ( $t_allowed_files ) ) {
-		$t_allowed_files = '.' . implode ( ',.', explode ( ',', config_get( 'allowed_files' ) ) );
+		$t_allowed_files = '.' . implode ( ',.', explode ( ',', $t_allowed_files ) );
 	}
 	echo "\t" . 'data-accepted-files="' . $t_allowed_files . '"' . "\n";
 	echo "\t" . 'data-default-message="' . htmlspecialchars( lang_get( 'dropzone_default_message' ) ) . '"' . "\n";
@@ -2173,7 +2196,7 @@ function print_dropzone_form_data() {
 	echo "\t" . 'data-response-error="' . htmlspecialchars( lang_get( 'dropzone_response_error' ) ) . '"' . "\n";
 	echo "\t" . 'data-cancel-upload="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload' ) ) . '"' . "\n";
 	echo "\t" . 'data-cancel-upload-confirmation="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload_confirmation' ) ) . '"' . "\n";
-	echo "\t" . 'data-remove-file="' . htmlspecialchars( lang_get( 'dropzone_remove_file' ) ) . '"' . "\n";
+	echo "\t" . 'data-remove-file=""' . "\n";
 	echo "\t" . 'data-remove-file-confirmation="' . htmlspecialchars( lang_get( 'dropzone_remove_file_confirmation' ) ) . '"' . "\n";
 	echo "\t" . 'data-max-files-exceeded="' . htmlspecialchars( lang_get( 'dropzone_max_files_exceeded' ) ) . '"' . "\n";
 	echo "\t" . 'data-dropzone-not-supported="' . htmlspecialchars( lang_get( 'dropzone_not_supported' ) ) . '"';
@@ -2191,14 +2214,18 @@ function print_dropzone_template() {
 	<div id="dropzone-preview-template" class="hidden">
 		<div class="dz-preview dz-file-preview">
 			<div class="dz-filename"><span data-dz-name></span></div>
-			<div><img data-dz-thumbnail /></div>
+			<img data-dz-thumbnail />
+			<div class="dz-error-message">
+				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle'); ?></span></div>
+				<span data-dz-errormessage></span>
+			</div>
 			<div class="dz-size" data-dz-size></div>
 			<div class="progress progress-small progress-striped active">
 				<div class="progress-bar progress-bar-success" data-dz-uploadprogress></div>
 			</div>
-			<div class="dz-success-mark"><span></span></div>
-			<div class="dz-error-mark"><span></span></div>
-			<div class="dz-error-message"><span data-dz-errormessage></span></div>
+			<a class="btn btn-primary btn-white btn-round btn-xs" data-dz-remove>
+				<?php echo lang_get( 'dropzone_remove_file' ); ?>
+			</a>
 		</div>
 	</div>
 	<?php

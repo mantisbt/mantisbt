@@ -201,8 +201,8 @@ layout_page_begin();
 $_GET['id'] = $f_bug_id;
 $t_show_page_header = false;
 $t_force_readonly = true;
-$t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$t_mantis_dir = __DIR__ . DIRECTORY_SEPARATOR;
 $t_file = __FILE__;
 
 define( 'BUG_VIEW_INC_ALLOW', true );
-include( dirname( __FILE__ ) . '/bug_view_inc.php' );
+include( __DIR__ . '/bug_view_inc.php' );

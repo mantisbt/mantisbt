@@ -650,7 +650,7 @@ if( isset( $t_issue['custom_fields'] ) ) {
 		$t_class = $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? ' cfdef-textarea' : '';
 
 		echo '<tr>';
-		echo '<th class="bug-custom-field category">', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</th>';
+		echo '<th class="bug-custom-field category">', string_attribute( lang_get_defaulted( $t_def['name'] ) ), '</th>';
 		echo '<td class="bug-custom-field' . $t_class . '" colspan="5">';
 		print_custom_field_value( $t_def, $t_custom_field['field']['id'], $f_issue_id );
 		echo '</td></tr>';

@@ -773,7 +773,7 @@ function enableDropzone( classPrefix, autoUpload ) {
 		parallelUploads: 100,
 		maxFilesize: max_filesize_mb,
 		timeout: 0,
-		addRemoveLinks: !autoUpload,
+		addRemoveLinks: false,
 		acceptedFiles: zone.data('accepted-files'),
 		thumbnailWidth: 150,
 		thumbnailMethod: 'contain',

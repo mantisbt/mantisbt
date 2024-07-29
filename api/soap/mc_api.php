@@ -522,7 +522,7 @@ function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
  * @return true: offline, false: online
  */
 function mci_is_mantis_offline() {
-	$t_offline_file = dirname( __FILE__, 3 ) . DIRECTORY_SEPARATOR . 'mantis_offline.php';
+	$t_offline_file = dirname( __DIR__, 2 ) . '/mantis_offline.php';
 	return file_exists( $t_offline_file );
 }
 
@@ -921,27 +921,30 @@ function mci_get_version( $p_version, $p_project_id ) {
 }
 
 /**
- * Gets the version id based on version input from the API.  This can be
- * a string or an object (with id or name or both).  If both id and name
- * exist on the object, id takes precedence.
+ * Gets the version id based on version input from the API.
  *
- * @param string|object $p_version The version string or object with name or id or both.
- * @param int $p_project_id The project id.
- * @param string $p_field_name Version field name (e.g. version, target_version, fixed_in_version)
- * @return int|RestFault|SoapFault The version id, 0 if not supplied.
+ * @param string|object $p_version    The version string or an object with id
+ *                                    or name; if both id and name are provided,
+ *                                    id takes precedence.
+ * @param int           $p_project_id The project id.
+ * @param string        $p_field_name Version field name (e.g. version,
+ *                                    target_version, fixed_in_version)
+ *
+ * @return int The version id, 0 if not supplied.
+ * @throws ClientException
  */
 function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version' ) {
 	$t_version_id = 0;
 	$t_version_for_error = '';
 
 	if( is_array( $p_version ) ) {
-		if( isset( $p_version['id'] ) && is_numeric( $p_version['id'] ) ) {
+		if( isset( $p_version['id'] ) && is_numeric( $p_version['id'] ) && $p_version['id'] != 0 ) {
 			$t_version_id = (int)$p_version['id'];
 			$t_version_for_error = $p_version['id'];
 			if( !version_exists( $t_version_id ) ) {
 				$t_version_id = false;
 			}
-		} elseif( isset( $p_version['name'] ) ) {
+		} elseif( isset( $p_version['name'] ) && !is_blank( $p_version['name'] ) ) {
 			$t_version_for_error = $p_version['name'];
 			$t_version_id = version_get_id( $p_version['name'], $p_project_id );
 		}
@@ -958,7 +961,7 @@ function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version
 			throw new ClientException(
 				"Version '$t_version_for_error' does not exist in project '$t_project_name'.",
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'version' )
+				array( $p_field_name )
 			);
 		}
 

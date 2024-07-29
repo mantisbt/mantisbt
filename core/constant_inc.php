@@ -659,8 +659,8 @@ define( 'DATETIME_PICKER_HASH_JS', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbU
 define( 'DATETIME_PICKER_HASH_CSS', 'sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=' );
 
 # Tyeahead JS
-define( 'TYPEAHEAD_VERSION', '1.3.0' );
-define( 'TYPEAHEAD_HASH', 'sha256-VWMJXexFUMAwIXw/PoOzOleP6q97pIbKWuY4v9gMXoY=' );
+define( 'TYPEAHEAD_VERSION', '1.3.4' );
+define( 'TYPEAHEAD_HASH', 'sha512-+f1CvxhWImXOCzqPaBaXNtH+cyfZYeHaJTPoT1v/CK326MliOFISS+rEEwRwO4atJr1+eXpVRVyaUyjXotFBKg==' );
 
 # List JS
 define( 'LISTJS_VERSION', '2.3.1' );

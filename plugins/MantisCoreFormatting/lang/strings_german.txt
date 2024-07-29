@@ -31,7 +31,7 @@
  * **********************************************************************
  */
 /** German (Deutsch)
- * 
+ *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit https://translatewiki.net
  *
@@ -55,3 +55,38 @@ $s_plugin_format_process_markdown = 'Markdown-Verarbeitung';
 $s_plugin_format_process_markdown_info = 'Gestaltung mit Markdown-Unterstützung und einer Text-Formatierungs-Syntax, die so gestaltet wurde, dass sie in HTML konvertiert werden kann.';
 $s_plugin_format_enabled = 'An';
 $s_plugin_format_disabled = 'Aus';
+
+$s_plugin_format_syntax_highlighting = 'Syntaxhervorhebung für Code-Blöcke';
+$s_plugin_format_syntax_highlighting_info = 'Diese Einstellung wird nur berücksichtigt, wenn die "Markdown-Verarbeitung" aktiviert wurde.';
+$s_plugin_format_syntax_highlighting_theme = 'Darstellung der Code-Blöcke';
+$s_plugin_format_syntax_highlighting_plugins = 'Erweiterungen für die Code-Blöcke';
+
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Code in Zwischenablage kopieren';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Zeigt eine kleine Schaltfläche um den Inhalt des Code-Blocks in die Zwischenablage zu kopieren.';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Kopieren';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Kopiert';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Drücken Sie Strg+C zum Kopieren.';
+
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Sprache anzeigen';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Die im Code-Block dargestellte Sprache anzeigen.';
+
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Zeilennummern';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Zeilennummern anzeigen.';
+
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Leerzeichen anzeigen';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Verborgene Zeichen werden angezeigt (z.B. bei Einrückungen).';
+
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Leerzeichen bereinigen';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Entfernt leere Zeilen vor und nach dem eigentlichen Code.';
+
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Klammerpaarungen hervorheben';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'Zeigt bei Klammern die Paarung an, wenn man mit der Maus darüberfährt. Inklusive "rainbow braces" (Paare werden in jeweils gleicher Farbe dargestellt).';
+
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Erweiterte Hervorhebung von Differenzen (diff)';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'Färbt den Zeilenhintergrund statt den Text und zusätzlich zu "diff" ist eine sprachspezifische Färbung möglich (z.B. "diff-javascript").';
+
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'CSS-Farben darstellen';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Ein kleines farbiges Quadrat wird vor CSS-Farbdefinitionen angezeigt (z.B. vor "#000").';
+
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Vorschau für CSS-Definitionen';
+$s_plugin_format_syntax_highlighting_plugin_previewers_desc = 'Beim Überfahren mit der Maus wird eine Vorschau für "angle", "color", "gradient", "easing" oder "time" Definitionen angezeigt.';

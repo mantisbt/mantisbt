@@ -52,6 +52,7 @@
  * @author FF11
  * @author Gebu
  * @author Geitost
+ * @author Ignatgg
  * @author Imre
  * @author Justman10000
  * @author KarlReichert
@@ -588,6 +589,7 @@ $s_p = 'Änderungsgeschützt';
 $s_date_created = 'Erstellungsdatum';
 $s_last_visit = 'Letzter Besuch';
 $s_last_visit_label = 'Letzter Besuch:';
+$s_failed_login_count = 'Fehlgeschlagene Anmeldungen';
 $s_edit_user_link = 'Benutzer bearbeiten';
 $s_search_user_hint = 'Benutzername, bürgerlicher Name oder E-Mail';
 $s_separate_list_items_by = '(Listeneinträge mit „%1$s“ trennen)';
@@ -1049,6 +1051,7 @@ $s_bytes = 'Bytes';
 $s_kib = 'KiB';
 $s_attachment_missing = 'Dateianhang fehlt';
 $s_attachment_count = 'Anzahl Dateianhänge';
+$s_bugnotes_count = 'Anzahl der Problemnotizen';
 $s_view_attachments_for_issue = 'Zeige %1$d Dateianhänge für Eintrag #%2$d';
 $s_warning_update_custom_field_type = '<strong>Warnung:</strong> Das benutzerdefinierte Feld „%1$s“ besitzt bereits gespeicherte Werte. Eine Änderung des Feldtyps kann Fehler und ein unerwartetes Verhalten verursachen, falls vorhandene Werte nicht mit dem neuen Typ des Feldes konsistent sind. Um fortzufahren, klicken Sie unten auf die Schaltfläche.';
 $s_phpmailer_language = 'de';
@@ -1246,6 +1249,7 @@ $s_database_information = 'MantisBT-Datenbankinformationen';
 $s_path_information = 'MantisBT-Pfadinformationen';
 $s_mantisbt_database_statistics = 'MantisBT-Datenbankstatistiken';
 $s_php_version = 'PHP-Version';
+$s_os_information = 'Betriebssystem-Informationen';
 $s_adodb_version = 'ADOdb-Version';
 $s_database_driver = 'Datenbanktreiber';
 $s_database_version_description = 'Datenbankversion, Beschreibung';

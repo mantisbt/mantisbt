@@ -45,6 +45,7 @@
  * @author Guycn2
  * @author LaG roiL
  * @author Macofe
+ * @author Neriah
  * @author Orentet
  * @author Rotemliss
  * @author Steeve815
@@ -576,6 +577,7 @@ $s_manage_accounts_title = 'ניהול חשבונות';
 $s_date_created = 'תאריך יצירה';
 $s_last_visit = 'כניסה אחרונה';
 $s_last_visit_label = 'ביקור אחרון:';
+$s_failed_login_count = 'הכניסה נכשלה';
 $s_edit_user_link = 'עריכת משתמש';
 $s_search_user_hint = 'שם משתמש, שם אמתי או דוא״ל';
 $s_separate_list_items_by = '(יש להפריד בין הפריטים ברשימה עם „%1$s”)';
@@ -1037,6 +1039,7 @@ $s_bytes = 'בתים';
 $s_kib = 'KiB';
 $s_attachment_missing = 'צרופה חסרה';
 $s_attachment_count = 'מספר הצרופות';
+$s_bugnotes_count = 'כמות הערות על סוגיה';
 $s_view_attachments_for_issue = 'הצגת %1$d צרופה/ות לבאג #%2$d';
 $s_warning_update_custom_field_type = '<strong>אזהרה:</strong> בשדה המותאם אישית "%1$s" כבר מאוחסנים ערכים. שינוי סוג שדה עלול לגרום לשגיאות ולהתנהגות בלתי צפויה, אם ערכים קיימים אינם תואמים לסוג החדש של השדה. כדי להמשיך, נא להקיש על הלחצן מטה';
 $s_phpmailer_language = 'he';
@@ -1291,7 +1294,7 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'המחרוזת „%1$s” לא נ�
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'הערה לא נמצאה.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'שדה מסד הנתונים „%1$s” לא נמצא.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'המטפל בבאג לא מחזיק בהרשאות מספיקות לטיפול בבאג במצב הזה.';
-$MANTIS_ERROR[ERROR_PROJECT_HIERARCHY_DISABLED] = 'מדרג מיזם (מזמי משנה) מושבת.';
+$MANTIS_ERROR[ERROR_PROJECT_HIERARCHY_DISABLED] = 'מדרג מיזמים (מיזמי־משנה) כבוי.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'מיזם „%1$s” לא נמצא.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'פרויקט בשם זה כבר קיים. נא לחזור ולבחור בשם אחר.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'שם הפרויקט אינו תקין. השם אינו יכול להיות ריק.';

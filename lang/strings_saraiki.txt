@@ -225,6 +225,7 @@ $s_new_accounts_title = 'نویں کھاتے';
 $s_1_week_title = 'ہک ہفتہ';
 $s_last_visit = 'چھیکڑی وزٹ';
 $s_last_visit_label = 'چھیکڑی وزٹ:';
+$s_failed_login_count = 'ناکام تھئے لاگ ان';
 $s_message = 'سنیہا';
 $s_next_status = 'اڳلی حیثیت';
 $s_workflow = 'کم دی چال';

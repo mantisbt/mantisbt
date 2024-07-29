@@ -44,7 +44,7 @@
 $s_plugin_MantisGraph_config = 'Configurazzioni';
 $s_plugin_MantisGraph_status_link = 'Pi statu';
 $s_plugin_MantisGraph_category_link = 'Pi catigurìa';
-$s_plugin_MantisGraph_period_none = 'Nuddu';
+$s_plugin_MantisGraph_period_none = 'Nuḍḍu';
 $s_plugin_MantisGraph_period_this_week = 'Sta simana';
 $s_plugin_MantisGraph_period_last_week = 'Ùrtima simana';
 $s_plugin_MantisGraph_period_two_weeks = 'Ùrtimi dui simani';

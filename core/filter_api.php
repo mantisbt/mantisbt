@@ -84,11 +84,16 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 require_api( 'filter_form_api.php' );
 
-# @global array $g_filter	Filter array for the filter in use through view_all_bug_page
-# This gets initialized on filter load
-# @TODO cproensa	We should move towards not relying on this variable, as we reuse filter logic
-# to allow operating on other filter different that the one in use for view_all_bug_page.
-# For example: manage and edit stored filters.
+/**
+ * Filter array for the filter in use through view_all_bug_page.
+ *
+ * This gets initialized on filter load to allow operating on other filter than
+ * the one in use for view_all_bug_page. For example: manage and edit stored filters.
+ *
+ * @TODO cproensa We should move towards not relying on this variable, as we reuse filter logic.
+ *
+ * @global array $g_filter
+ */
 $g_filter = null;
 
 
@@ -97,12 +102,16 @@ $g_filter = null;
 # ==========================================================================
 # We cache filter requests to reduce the number of SQL queries
 
-# @global array $g_cache_filter_db_rows
-# indexed by filter_id, contains the filter rows as read from db table
+/**
+ * Indexed by filter_id, contains the filter rows as read from db table.
+ * @global array $g_cache_filter_db_rows
+ */
 $g_cache_filter_db_rows = array();
 
-# @global array $g_cache_filter_subquery
-# indexed by a hash of the filter array, contains a prebuilt BugFilterQuery object
+/**
+ * Indexed by a hash of the filter array, contains a prebuilt BugFilterQuery object.
+ * @global array $g_cache_filter_subquery
+ */
 $g_cache_filter_subquery = array();
 
 /**

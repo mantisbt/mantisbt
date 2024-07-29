@@ -24,7 +24,7 @@
  */
 
 # Includes
-require_once dirname( __FILE__, 2 ) . '/TestConfig.php';
+require_once dirname( __DIR__ ) . '/TestConfig.php';
 
 # MantisBT Core API
 require_mantis_core();

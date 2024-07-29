@@ -508,7 +508,7 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 <!-- ACCOUNT PREFERENCES -->
 <?php
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
-include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
+include( __DIR__ . '/account_prefs_inc.php' );
 edit_account_prefs(
 	$t_user['id'],
 	false,

@@ -56,7 +56,7 @@ function check_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 
 	# Do not handle PHP errors that have already been caught by MantisBT. These
 	# are likely triggered by the admin checks script itself, so we let PHP
-	# process them, otherwise the check will fail silently.x§
+	# process them, otherwise the check will fail silently.
 	if( $p_type == E_USER_ERROR && $p_error == ERROR_PHP ) {
 		return false;
 	}
@@ -192,13 +192,20 @@ function check_print_test_result( $p_result ) {
 }
 
 /**
- * Print Check Test Row
- * @param string  $p_description Description.
- * @param boolean $p_pass        Whether test passed.
- * @param string  $p_info        Information.
- * @return boolean
+ * Print Check Test Row.
+ *
+ * @param string $p_description Check's description.
+ * @param bool   $p_pass        True if test passed.
+ * @param null   $p_info        Optional additional information to print below the description.
+ *                              If a string is given, the message is always displayed;
+ *                              Providing array with true/false keys allows differentiated
+ *                              messages depending on the Check's result, and if a key is
+ *                              missing then the message is not printed.
+ * @param bool   $p_warning     True if it's a Warning check.
+ *
+ * @return bool
  */
-function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
+function check_print_test_row( $p_description, $p_pass, $p_info = null, $p_warning = false ) {
 	global $g_show_all;
 	$t_unhandled = check_unhandled_errors_exist();
 	if( !$g_show_all && $p_pass && !$t_unhandled ) {
@@ -217,7 +224,7 @@ function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
 
 	if( $p_pass && !$t_unhandled ) {
 		$t_result = GOOD;
-	} elseif( $t_unhandled == E_DEPRECATED ) {
+	} elseif( $p_warning && !$t_unhandled || $t_unhandled == E_DEPRECATED ) {
 		$t_result = WARN;
 	} else {
 		$t_result = BAD;
@@ -232,41 +239,20 @@ function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
 }
 
 /**
- * Print Check Test Warning Row
- * @param string  $p_description Description.
- * @param boolean $p_pass        Whether test passed.
- * @param string  $p_info        Information.
- * @return boolean
+ * Print Check Test Warning Row.
+ *
+ * @param string       $p_description Check's description.
+ * @param bool         $p_pass        True if test passed.
+ * @param string|array $p_info        Optional additional information to print below the description.
+ *                                    If a string is given, the message is always displayed;
+ *                                    Providing array with true/false keys allows differentiated
+ *                                    messages depending on the Check's result, and if a key is
+ *                                    missing then the message is not printed.
+ *
+ * @return bool
  */
 function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
-	global $g_show_all;
-	$t_unhandled = check_unhandled_errors_exist();
-	if( !$g_show_all && $p_pass && !$t_unhandled ) {
-		return $p_pass;
-	}
-	echo "\t<tr>\n\t\t<td>$p_description";
-	if( $p_info !== null ) {
-		if( is_array( $p_info ) && isset( $p_info[$p_pass] ) ) {
-			echo '<br /><em>' . $p_info[$p_pass] . '</em>';
-		} else if( !is_array( $p_info ) ) {
-			echo '<br /><em>' . $p_info . '</em>';
-		}
-	}
-	echo "</td>\n";
-	if( $p_pass && !$t_unhandled ) {
-		$t_result = GOOD;
-	} elseif( !$t_unhandled || $t_unhandled == E_DEPRECATED ) {
-		$t_result = WARN;
-	} else {
-		$t_result = BAD;
-	}
-	check_print_test_result( $t_result );
-	echo "\t</tr>\n";
-
-	if( $t_unhandled ) {
-		check_print_error_rows();
-	}
-	return $p_pass;
+	return check_print_test_row( $p_description, $p_pass, $p_info, true );
 }
 
 /**

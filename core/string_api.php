@@ -420,24 +420,32 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 					if( bugnote_exists( $c_bugnote_id ) ) {
 						$t_bug_id = bugnote_get_field( $c_bugnote_id, 'bug_id' );
 						if( bug_exists( $t_bug_id ) ) {
-							$g_project_override = bug_get_field( $t_bug_id, 'project_id' );
-							if(   access_compare_level(
-										user_get_access_level( auth_get_current_user_id(),
-										bug_get_field( $t_bug_id, 'project_id' ) ),
-										config_get( 'private_bugnote_threshold' )
-								   )
-								|| bugnote_get_field( $c_bugnote_id, 'reporter_id' ) == auth_get_current_user_id()
-								|| bugnote_get_field( $c_bugnote_id, 'view_state' ) == VS_PUBLIC
-							) {
-								$g_project_override = null;
-								return $p_array[1] .
-									string_get_bugnote_view_link(
-										$t_bug_id,
-										$c_bugnote_id,
-										(boolean)$p_detail_info,
-										(boolean)$p_fqdn
-									);
+							$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+							$t_user_id = auth_get_current_user_id();
+
+							$g_project_override = $t_project_id;
+
+							$t_can_view_issue = access_has_bug_level( config_get( 'view_bug_threshold' ), $t_bug_id, $t_user_id );
+							if( $t_can_view_issue ) {
+								$t_can_view_note = access_compare_level(
+									user_get_access_level( $t_user_id, $t_project_id ),
+									config_get( 'private_bugnote_threshold' )
+									)
+									|| bugnote_get_field( $c_bugnote_id, 'reporter_id' ) == $t_user_id
+									|| bugnote_get_field( $c_bugnote_id, 'view_state' ) == VS_PUBLIC;
+
+								if( $t_can_view_note ) {
+									$g_project_override = null;
+									return $p_array[1] .
+										string_get_bugnote_view_link(
+											$t_bug_id,
+											$c_bugnote_id,
+											(boolean)$p_detail_info,
+											(boolean)$p_fqdn
+										);
+								}
 							}
+
 							$g_project_override = null;
 						}
 					}
@@ -693,9 +701,13 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info 
 			$t_link .= ' title="' . bug_format_id( $t_bug_id ) . ': [' . $t_update_date . '] ' . $t_reporter . '"';
 		}
 
+		if( bug_is_resolved( $t_bug_id ) ) {
+			$t_link .= ' class="resolved"';
+		}
+
 		$t_link .= '>' . bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id ) . '</a>';
 	} else {
-		$t_link = bugnote_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id );
+		$t_link = bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id );
 	}
 
 	return $t_link;
