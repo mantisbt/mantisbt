@@ -281,7 +281,7 @@ class IssueViewPageCommand extends Command {
 		}
 
 		$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
-		custom_field_cache_values( [ $t_issue_id ], $t_related_custom_field_ids );
+		custom_field_cache_values( [$t_issue_id], $t_related_custom_field_ids );
 
 		$t_links = event_signal( 'EVENT_MENU_ISSUE', $t_issue_id );
 		$t_issue_view['links'] = $t_links;
@@ -292,6 +292,6 @@ class IssueViewPageCommand extends Command {
 		return [
 			'issue' => $t_issue,
 			'issue_view' => $t_issue_view,
-			'flags' => $t_flags ];
+			'flags' => $t_flags];
 	}
 }

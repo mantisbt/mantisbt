@@ -105,7 +105,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 	} else {
 		$t_function_prefix = 'print_filter_values_';
 	}
-	$t_params = [ $p_filter ];
+	$t_params = [$p_filter];
 	$t_function_name = $t_function_prefix . $p_filter_target;
 
 	# override non standard calls
@@ -113,7 +113,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 		case 'do_filter_by_date':
 		case 'do_filter_by_last_updated_date':
 			if( $p_show_inputs ) {
-				$t_params = [ false, $p_filter ];
+				$t_params = [false, $p_filter];
 			}
 			break;
 	}
@@ -127,7 +127,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 		throw new StateException(
 			"No function to populate the target",
 			ERROR_FILTER_NOT_FOUND,
-			[ $p_filter_target ]
+			[$p_filter_target]
 		);
 	}
 }
@@ -1816,7 +1816,7 @@ function print_filter_values_plugin_field( array $p_filter, $p_field_name, $p_fi
 			case FILTER_TYPE_MULTI_STRING:
 			case FILTER_TYPE_MULTI_INT:
 				if( !is_array( $t_value ) ) {
-					$t_value = [ $t_value ];
+					$t_value = [$t_value];
 				}
 				$t_strings = [];
 				foreach( $t_value as $t_current ) {
@@ -2034,7 +2034,7 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 			check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_ANY, false );
 			echo '>[' . lang_get( 'any' ) . ']</option>';
 			# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
-			if( !in_array( $t_cfdef['type'], [ CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST ] ) ) {
+			if( !in_array( $t_cfdef['type'], [CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST] ) ) {
 				echo '<option value="' . META_FILTER_NONE . '"';
 				check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_NONE, false );
 				echo '>[' . lang_get( 'none' ) . ']</option>';
@@ -2451,7 +2451,7 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 	} else {
 		$t_first_flag = true;
 
-		$t_field_value = is_array( $p_field_value ) ? $p_field_value : [ $p_field_value ];
+		$t_field_value = is_array( $p_field_value ) ? $p_field_value : [$p_field_value];
 
 		foreach( $t_field_value as $t_current ) {
 			$t_current = stripslashes( $t_current );

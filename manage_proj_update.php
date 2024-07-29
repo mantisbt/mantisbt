@@ -53,8 +53,8 @@ $t_data = [
 	'payload' => [
 		'name' => $f_name,
 		'description' => $f_description,
-		'status' => [ 'id' => $f_status ],
-		'view_state' => [ 'id' => $f_view_state ],
+		'status' => ['id' => $f_status],
+		'view_state' => ['id' => $f_view_state],
 		'file_path' => $f_file_path,
 		'enabled' => $f_enabled,
 		'inherit_global' => $f_inherit_global

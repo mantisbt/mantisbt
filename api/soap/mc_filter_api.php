@@ -304,10 +304,10 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 			return mci_fault_access_denied( $p_user_id );
 		}
 
-		$t_project_id = [ ALL_PROJECTS ];
+		$t_project_id = [ALL_PROJECTS];
 	}
 
-	$t_filter = [ '_view_type' => FILTER_VIEW_TYPE_ADVANCED ];
+	$t_filter = ['_view_type' => FILTER_VIEW_TYPE_ADVANCED];
 	$t_filter['project_id'] = $t_project_id;
 
 	// default fields

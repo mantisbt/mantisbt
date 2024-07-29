@@ -44,7 +44,7 @@ $t_page_count = 0;
 
 $t_filter = current_user_get_bug_filter();
 $t_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
-$t_filter[FILTER_PROPERTY_STATUS] = [ META_FILTER_ANY ];
+$t_filter[FILTER_PROPERTY_STATUS] = [META_FILTER_ANY];
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
 if( count( $t_rows ) == 0 ) {
@@ -90,7 +90,7 @@ $t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM {bug_
 	') and ( (type=' . NORMAL_TYPE . ' and field_name=\'status\')
 		or type=' . NEW_BUG . ' ) and date_modified >= ' . db_param() .
 	' order by date_modified DESC';
-$t_result = db_query( $t_select, [ $t_start ] );
+$t_result = db_query( $t_select, [$t_start] );
 $t_row = db_fetch_array( $t_result );
 
 for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {

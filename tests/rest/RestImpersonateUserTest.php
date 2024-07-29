@@ -65,7 +65,7 @@ class RestImpersonateUserTest extends RestBase {
 
 		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => [ 'name' => 'viewer' ]
+			'access_level' => ['name' => 'viewer']
 		];
 
 		# Create a user
@@ -95,7 +95,7 @@ class RestImpersonateUserTest extends RestBase {
 
 		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => [ 'name' => 'viewer' ],
+			'access_level' => ['name' => 'viewer'],
 			'enabled' => false
 		];
 
@@ -117,7 +117,7 @@ class RestImpersonateUserTest extends RestBase {
 
 		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => [ 'name' => 'viewer' ],
+			'access_level' => ['name' => 'viewer'],
 			'enabled' => false
 		];
 

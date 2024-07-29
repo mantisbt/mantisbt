@@ -104,8 +104,8 @@ $f_bug_id = $f_issue_id;
 $t_bug = bug_get( $f_bug_id, true );
 
 $t_data = [
-	'query' => [ 'id' => $f_issue_id ],
-	'options' => [ 'force_readonly' => $t_force_readonly ]
+	'query' => ['id' => $f_issue_id],
+	'options' => ['force_readonly' => $t_force_readonly]
 ];
 $t_cmd = new IssueViewPageCommand( $t_data );
 $t_result = $t_cmd->execute();
@@ -556,7 +556,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 # Bug Details Event Signal
 #
 
-event_signal( 'EVENT_VIEW_BUG_DETAILS', [ $f_issue_id ] );
+event_signal( 'EVENT_VIEW_BUG_DETAILS', [$f_issue_id] );
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
@@ -778,7 +778,7 @@ if( 'ASC' == current_user_get_pref( 'bugnote_order' ) ) {
 }
 
 # Allow plugins to display stuff after notes
-event_signal( 'EVENT_VIEW_BUG_EXTRA', [ $f_issue_id ] );
+event_signal( 'EVENT_VIEW_BUG_EXTRA', [$f_issue_id] );
 
 # Time tracking statistics
 if( config_get( 'time_tracking_enabled' ) &&
@@ -1263,7 +1263,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	# UPDATE button
 	if( $p_flags['can_update'] ) {
 		echo '<div class="pull-left padding-right-8">';
-		html_button( string_get_bug_update_page(), lang_get( 'edit' ), [ 'bug_id' => $p_bug_id ] );
+		html_button( string_get_bug_update_page(), lang_get( 'edit' ), ['bug_id' => $p_bug_id] );
 		echo '</div>';
 	}
 
@@ -1284,35 +1284,35 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	# Unmonitor
 	if( $p_flags['can_unmonitor'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), [ 'bug_id' => $p_bug_id ] );
+		html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), ['bug_id' => $p_bug_id] );
 		echo '</div>';
 	}
 
 	# Monitor
 	if( $p_flags['can_monitor'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), [ 'bug_id' => $p_bug_id ] );
+		html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), ['bug_id' => $p_bug_id] );
 		echo '</div>';
 	}
 
 	# Stick
 	if( $p_flags['can_sticky'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), [ 'bug_id' => $p_bug_id, 'action' => 'stick' ] );
+		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), ['bug_id' => $p_bug_id, 'action' => 'stick'] );
 		echo '</div>';
 	}
 
 	# Unstick
 	if( $p_flags['can_unsticky'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), [ 'bug_id' => $p_bug_id, 'action' => 'unstick' ] );
+		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), ['bug_id' => $p_bug_id, 'action' => 'unstick'] );
 		echo '</div>';
 	}
 
 	# CLONE button
 	if( $p_flags['can_clone'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), [ 'm_id' => $p_bug_id ] );
+		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), ['m_id' => $p_bug_id] );
 		echo '</div>';
 	}
 
@@ -1323,7 +1323,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 		html_button(
 			'bug_change_status_page.php',
 			lang_get( 'reopen_bug_button' ),
-			[ 'id' => $t_bug->id, 'new_status' => $t_reopen_status, 'change_type' => BUG_UPDATE_TYPE_REOPEN ] );
+			['id' => $t_bug->id, 'new_status' => $t_reopen_status, 'change_type' => BUG_UPDATE_TYPE_REOPEN] );
 		echo '</div>';
 	}
 
@@ -1334,25 +1334,25 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 		html_button(
 			'bug_change_status_page.php',
 			lang_get( 'close' ),
-			[ 'id' => $t_bug->id, 'new_status' => $t_closed_status, 'change_type' => BUG_UPDATE_TYPE_CLOSE ] );
+			['id' => $t_bug->id, 'new_status' => $t_closed_status, 'change_type' => BUG_UPDATE_TYPE_CLOSE] );
 		echo '</div>';
 	}
 
 	# MOVE button
 	if( $p_flags['can_move'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_actiongroup_page.php', lang_get( 'move' ), [ 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ] );
+		html_button( 'bug_actiongroup_page.php', lang_get( 'move' ), ['bug_arr[]' => $p_bug_id, 'action' => 'MOVE'] );
 		echo '</div>';
 	}
 
 	# DELETE button
 	if( $p_flags['can_delete'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_actiongroup_page.php', lang_get( 'delete' ), [ 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ] );
+		html_button( 'bug_actiongroup_page.php', lang_get( 'delete' ), ['bug_arr[]' => $p_bug_id, 'action' => 'DELETE'] );
 		echo '</div>';
 	}
 
-	helper_call_custom_function( 'print_bug_view_page_custom_buttons', [ $p_bug_id ] );
+	helper_call_custom_function( 'print_bug_view_page_custom_buttons', [$p_bug_id] );
 
 	echo '</div>';
 }

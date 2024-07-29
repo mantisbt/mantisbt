@@ -653,8 +653,8 @@ function error_string( $p_error ) {
 		# error messages even if core is not fully initialized.
 		# Modified to allow <br> tags
 		$t_value = preg_replace(
-			[ '/&amp;(#[0-9]+|[a-z]+);/i', '|&lt;(br)\s*/?&gt;|i' ],
-			[ '&$1;', '<&$1>' ],
+			['/&amp;(#[0-9]+|[a-z]+);/i', '|&lt;(br)\s*/?&gt;|i'],
+			['&$1;', '<&$1>'],
 			@htmlspecialchars( $t_value, ENT_COMPAT, 'UTF-8' )
 		);
 	}

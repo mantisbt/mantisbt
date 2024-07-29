@@ -1144,19 +1144,19 @@ if( 3 == $t_install_state ) {
 						break;
 
 					default:
-						$t_sqlarray = call_user_func_array( [ $t_dict, $t_operation ], $g_upgrade[$i][1] );
+						$t_sqlarray = call_user_func_array( [$t_dict, $t_operation], $g_upgrade[$i][1] );
 
 						# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
 						if( isset( $g_upgrade[$i][2] ) ) {
 							if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
-								$t_sqlarray = call_user_func_array( [ $t_dict, $t_operation ], $g_upgrade[$i][1] );
+								$t_sqlarray = call_user_func_array( [$t_dict, $t_operation], $g_upgrade[$i][1] );
 							} else {
 								$t_sql = false;
 								$t_sqlarray = [];
 								$t_operation = "No operation";
 							}
 						} else {
-							$t_sqlarray = call_user_func_array( [ $t_dict, $t_operation ], $g_upgrade[$i][1] );
+							$t_sqlarray = call_user_func_array( [$t_dict, $t_operation], $g_upgrade[$i][1] );
 						}
 						break;
 				}

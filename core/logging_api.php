@@ -74,7 +74,7 @@ function log_event( $p_level, $p_msg ) {
 			array_shift( $t_args ); # skip message
 			$p_msg = vsprintf( $p_msg, $t_args );
 		}
-		$t_event = [ $p_msg, 0 ];
+		$t_event = [$p_msg, 0];
 		$t_msg = $p_msg;
 	}
 
@@ -90,7 +90,7 @@ function log_event( $p_level, $p_msg ) {
 	if( !$s_event_log_called && function_exists( 'event_signal' ) ) {
 		$t_plugin_event = '[' . $t_level . '] ' . $t_msg;
 		$s_event_log_called = true;
-		event_signal( 'EVENT_LOG', [ $t_plugin_event ] );
+		event_signal( 'EVENT_LOG', [$t_plugin_event] );
 		$s_event_log_called = false;
 	}
 
@@ -136,7 +136,7 @@ function log_event( $p_level, $p_msg ) {
 			break;
 		case 'page':
 			global $g_log_events;
-			$g_log_events[] = [ time(), $p_level, $t_event, $t_caller];
+			$g_log_events[] = [time(), $p_level, $t_event, $t_caller];
 			break;
 		default:
 			# use default PHP error log settings

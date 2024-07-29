@@ -45,14 +45,14 @@ class IssueDeleteCommand extends Command {
 		$this->id = $this->query( 'id' );
 
 		if( (int)$this->id < 1 ) {
-			throw new ClientException( "'id' must be >= 1", ERROR_INVALID_FIELD_VALUE, [ 'id' ] );
+			throw new ClientException( "'id' must be >= 1", ERROR_INVALID_FIELD_VALUE, ['id'] );
 		}
 
 		if( !bug_exists( $this->id ) ) {
 			throw new ClientException(
 				"Issue '" . $this->id . "' does not exist.",
 				ERROR_BUG_NOT_FOUND,
-				[ $this->id ]
+				[$this->id]
 			);
 		}
 

@@ -262,7 +262,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	}
 
 	# prepare the user's list
-	$t_users = [ ALL_USERS ];
+	$t_users = [ALL_USERS];
 	if( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 		$t_users[] = auth_get_current_user_id();
 	} else if( !in_array( $p_user, $t_users ) ) {
@@ -271,7 +271,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	$t_users[] = ALL_USERS;
 
 	# prepare the projects list
-	$t_projects = [ ALL_PROJECTS ];
+	$t_projects = [ALL_PROJECTS];
 	if( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
 		$t_selected_project = helper_get_current_project();
 		if( ALL_PROJECTS <> $t_selected_project ) {
@@ -335,7 +335,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 				WHERE config_id = ' . db_param() . ' AND
 					project_id = ' . db_param() . ' AND
 					user_id = ' . db_param();
-		$t_result = db_query( $t_query, [ $p_option, (int)$p_project, (int)$p_user ] );
+		$t_result = db_query( $t_query, [$p_option, (int)$p_project, (int)$p_user] );
 
 		db_param_push();
 		if( 0 < db_result( $t_result ) ) {
@@ -475,7 +475,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 				WHERE config_id = ' . db_param() . ' AND
 					project_id=' . db_param() . ' AND
 					user_id=' . db_param();
-		db_query( $t_query, [ $p_option, $p_project, $p_user ] );
+		db_query( $t_query, [$p_option, $p_project, $p_user] );
 	}
 
 	config_flush_cache( $p_option, $p_user, $p_project );
@@ -496,7 +496,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 	# Delete the corresponding bugnote texts
 	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE config_id=' . db_param() . ' AND user_id=' . db_param();
-	db_query( $t_query, [ $p_option, $p_user_id ] );
+	db_query( $t_query, [$p_option, $p_user_id] );
 }
 
 /**
@@ -508,7 +508,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 function config_delete_project( $p_project = ALL_PROJECTS ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE project_id=' . db_param();
-	db_query( $t_query, [ $p_project ] );
+	db_query( $t_query, [$p_project] );
 
 	# flush cache here in case some of the deleted configs are in use.
 	config_flush_cache();

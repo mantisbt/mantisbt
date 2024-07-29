@@ -352,9 +352,9 @@ class Graph {
 
 		$t_command = escapeshellcmd( $this->graphviz_tool . ' -T' . $p_format );
 		$t_descriptors = [
-			0 => [ 'pipe', 'r', ],
-			1 => [ 'pipe', 'w', ],
-			2 => [ 'file', 'php://stderr', 'w', ],
+			0 => ['pipe', 'r', ],
+			1 => ['pipe', 'w', ],
+			2 => ['file', 'php://stderr', 'w', ],
 			];
 
 		$t_pipes = [];

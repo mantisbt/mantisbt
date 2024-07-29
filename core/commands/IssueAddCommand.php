@@ -105,7 +105,7 @@ class IssueAddCommand extends Command {
 				throw new ClientException(
 					sprintf( "Master issue '%d' is read-only", $t_clone_info['master_issue_id'] ),
 					ERROR_BUG_READ_ONLY_ACTION_DENIED,
-					[ $t_clone_info['master_issue_id'] ]
+					[$t_clone_info['master_issue_id']]
 				);
 			}
 		}
@@ -114,7 +114,7 @@ class IssueAddCommand extends Command {
 			throw new ClientException(
 				'Summary not specified',
 				ERROR_EMPTY_FIELD,
-				[ 'summary' ] );
+				['summary'] );
 		}
 
 		$t_summary = $t_issue['summary'];
@@ -123,7 +123,7 @@ class IssueAddCommand extends Command {
 			throw new ClientException(
 				'Description not specified',
 				ERROR_EMPTY_FIELD,
-				[ 'description' ] );
+				['description'] );
 		}
 
 		$t_description = $t_issue['description'];
@@ -132,7 +132,7 @@ class IssueAddCommand extends Command {
 			throw new ClientException(
 				'Project not specified',
 				ERROR_EMPTY_FIELD,
-				[ 'project' ] );
+				['project'] );
 		}
 
 		$t_project_id = mci_get_project_id( $t_issue['project'] );
@@ -141,14 +141,14 @@ class IssueAddCommand extends Command {
 			throw new ClientException(
 				'Project not specified',
 				ERROR_EMPTY_FIELD,
-				[ 'project' ] );
+				['project'] );
 		}
 
 		if( !project_exists( $t_project_id ) ) {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $t_project_id ),
 				ERROR_PROJECT_NOT_FOUND,
-				[ $t_project_id ] );
+				[$t_project_id] );
 		}
 
 		# in case the current project is not the same project of the bug we are
@@ -209,7 +209,7 @@ class IssueAddCommand extends Command {
 				throw new ClientException(
 					sprintf( "User '%d' not found.", $t_handler_id ),
 					ERROR_USER_BY_ID_NOT_FOUND,
-					[ $t_handler_id ] );
+					[$t_handler_id] );
 			}
 
 			if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_handler_id ) ) {
@@ -227,7 +227,7 @@ class IssueAddCommand extends Command {
 					throw new ClientException(
 						sprintf( "User '%d' can't create tag '%s'.", $this->user_id, $t_tag['name'] ),
 						ERROR_TAG_NOT_FOUND,
-						[ $t_tag['name'] ]
+						[$t_tag['name']]
 					);
 				}
 			}
@@ -332,7 +332,7 @@ class IssueAddCommand extends Command {
 					throw new ClientException(
 						"File name too long '$t_name'",
 						ERROR_FILE_NAME_TOO_LONG,
-						[ $t_name ]
+						[$t_name]
 					);
 				}
 			}
@@ -341,7 +341,7 @@ class IssueAddCommand extends Command {
 		}
 
 		# Trigger extensibility events to pre-process data before creating issue
-		helper_call_custom_function( 'issue_create_validate', [ $this->issue ] );
+		helper_call_custom_function( 'issue_create_validate', [$this->issue] );
 		$this->issue = event_signal( 'EVENT_REPORT_BUG_DATA', $this->issue );
 	}
 
@@ -470,10 +470,10 @@ class IssueAddCommand extends Command {
 		email_bug_added( $t_issue_id );
 
 		# Trigger extensibility events
-		helper_call_custom_function( 'issue_create_notify', [ $t_issue_id ] );
-		event_signal( 'EVENT_REPORT_BUG', [ $this->issue, $t_issue_id ] );
+		helper_call_custom_function( 'issue_create_notify', [$t_issue_id] );
+		event_signal( 'EVENT_REPORT_BUG', [$this->issue, $t_issue_id] );
 
-		return [ 'issue_id' => $t_issue_id ];
+		return ['issue_id' => $t_issue_id];
 	}
 
 	/**
@@ -495,7 +495,7 @@ class IssueAddCommand extends Command {
 				throw new ClientException(
 					"Tag with id $t_tag_id not found.",
 					ERROR_TAG_NOT_FOUND,
-					[ $t_tag_id ]
+					[$t_tag_id]
 				);
 			}
 		} elseif( isset( $p_tag['name'] ) ) {
@@ -504,7 +504,7 @@ class IssueAddCommand extends Command {
 				throw new ClientException(
 					"Tag name '{$p_tag['name']}' is not valid.",
 					ERROR_TAG_NAME_INVALID,
-					[ $p_tag['name'] ]
+					[$p_tag['name']]
 				);
 			}
 			$t_existing_tag = tag_get_by_name( $p_tag['name'] );

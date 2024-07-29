@@ -51,7 +51,7 @@ foreach( custom_field_get_ids() as $t_id ) {
 		continue;
 	}
 	if( preg_match( '/^{(.*)}$/', $v_default_value, $t_matches ) ) {
-		$t_date_cf_with_bracket[$v_name] = [ $v_id, $t_matches[1] ];
+		$t_date_cf_with_bracket[$v_name] = [$v_id, $t_matches[1]];
 	}
 }
 if( $t_date_cf_with_bracket ) {
@@ -63,7 +63,7 @@ if( $t_date_cf_with_bracket ) {
 		check_print_test_warn_row(
 			"Date Custom Field '$t_name' specifies its Default Value with deprecated curly brackets format.",
 			false,
-			[ false => "Use the same format, but without the '{}', i.e. '$t_new_value'. "
+			[false => "Use the same format, but without the '{}', i.e. '$t_new_value'. "
 				. sprintf( $t_manage_cf_link, $t_id )
 			]
 		);

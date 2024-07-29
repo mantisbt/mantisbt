@@ -47,7 +47,7 @@ class LocalizedStringsGetCommand extends Command {
 	protected function process() {
 		$t_strings = $this->query( 'string' );
 		if( !is_array( $t_strings ) ) {
-			$t_strings = [ $t_strings ];
+			$t_strings = [$t_strings];
 		}
 
 		$t_current_language = lang_get_current();
@@ -58,7 +58,7 @@ class LocalizedStringsGetCommand extends Command {
 				continue;
 			}
 
-			$t_localized_strings[] = [ 'name' => $t_string, 'localized' => lang_get( $t_string ) ];
+			$t_localized_strings[] = ['name' => $t_string, 'localized' => lang_get( $t_string )];
 		}
 
 		return [

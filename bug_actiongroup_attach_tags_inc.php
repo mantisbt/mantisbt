@@ -116,13 +116,13 @@ function action_attach_tags_process( $p_bug_id ) {
 	global $g_action_attach_tags_attach, $g_action_attach_tags_create;
 
 	foreach( $g_action_attach_tags_create as $t_tag_row ) {
-		$g_action_attach_tags_attach[] = [ 'name' => $t_tag_row['name'] ];
+		$g_action_attach_tags_attach[] = ['name' => $t_tag_row['name']];
 	}
 
 	$g_action_attach_tags_create = [];
 
 	$t_data = [
-		'query' => [ 'issue_id' => $p_bug_id ],
+		'query' => ['issue_id' => $p_bug_id],
 		'payload' => [
 			'tags' => $g_action_attach_tags_attach
 		]

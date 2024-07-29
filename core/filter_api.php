@@ -624,7 +624,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( SIMPLE_ONLY == $t_config_view_filters ) {
 		$t_view_type = FILTER_VIEW_TYPE_SIMPLE;
 	}
-	if( !in_array( $t_view_type, [ FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED ] ) ) {
+	if( !in_array( $t_view_type, [FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED] ) ) {
 		$t_view_type = filter_get_default_view_type();
 	}
 	$p_filter_arr['_view_type'] = $t_view_type;
@@ -844,7 +844,7 @@ function filter_get_default_array( $p_view_type = null ) {
 	static $t_cache_default_array = [];
 
 	$t_default_view_type = filter_get_default_view_type();
-	if( !in_array( $p_view_type, [ FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED ] ) ) {
+	if( !in_array( $p_view_type, [FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED] ) ) {
 		$p_view_type = $t_default_view_type;
 	}
 
@@ -854,7 +854,7 @@ function filter_get_default_array( $p_view_type = null ) {
 	}
 
 	$t_default_show_changed = config_get( 'default_show_changed' );
-	$t_meta_filter_any_array = [ META_FILTER_ANY ];
+	$t_meta_filter_any_array = [META_FILTER_ANY];
 
 	$t_config_view_filters = config_get( 'view_filters' );
 	if( ADVANCED_ONLY == $t_config_view_filters ) {
@@ -880,12 +880,12 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
 		FILTER_PROPERTY_REPORTER_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_HANDLER_ID => $t_meta_filter_any_array,
-		FILTER_PROPERTY_PROJECT_ID => [ META_FILTER_CURRENT ],
+		FILTER_PROPERTY_PROJECT_ID => [META_FILTER_CURRENT],
 		FILTER_PROPERTY_PROJECTION => $t_meta_filter_any_array,
 		FILTER_PROPERTY_RESOLUTION => $t_meta_filter_any_array,
 		FILTER_PROPERTY_BUILD => $t_meta_filter_any_array,
 		FILTER_PROPERTY_VERSION => $t_meta_filter_any_array,
-		FILTER_PROPERTY_HIDE_STATUS => [ $t_hide_status_default ],
+		FILTER_PROPERTY_HIDE_STATUS => [$t_hide_status_default],
 		FILTER_PROPERTY_MONITOR_USER_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_SORT_FIELD_NAME => 'last_updated',
 		FILTER_PROPERTY_SORT_DIRECTION => 'DESC',
@@ -936,10 +936,10 @@ function filter_get_default_array( $p_view_type = null ) {
 					$t_filter[$t_field_name] = (bool)$t_filter_object->default;
 					break;
 				case FILTER_TYPE_MULTI_STRING:
-					$t_filter[$t_field_name] = [ (string)META_FILTER_ANY ];
+					$t_filter[$t_field_name] = [(string)META_FILTER_ANY];
 					break;
 				case FILTER_TYPE_MULTI_INT:
-					$t_filter[$t_field_name] = [ META_FILTER_ANY ];
+					$t_filter[$t_field_name] = [META_FILTER_ANY];
 					break;
 				default:
 					$t_filter[$t_field_name] = (string)META_FILTER_ANY;
@@ -955,7 +955,7 @@ function filter_get_default_array( $p_view_type = null ) {
 	$f_custom_fields_data = [];
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
-			$f_custom_fields_data[$t_cfid] = [ (string)META_FILTER_ANY ];
+			$f_custom_fields_data[$t_cfid] = [(string)META_FILTER_ANY];
 		}
 	}
 	$t_filter['custom_fields'] = $f_custom_fields_data;
@@ -1026,10 +1026,10 @@ function filter_deserialize( $p_serialized_filter ) {
 	# check filter version mark
 	$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
 	$t_version_string = $t_setting_arr[0];
-	if( in_array( $t_version_string, [ 'v1', 'v2', 'v3', 'v4' ] ) ) {
+	if( in_array( $t_version_string, ['v1', 'v2', 'v3', 'v4'] ) ) {
 		# these versions can't be salvaged, they are too old to update
 		return false;
-	} elseif( in_array( $t_version_string, [ 'v5', 'v6', 'v7', 'v8' ] ) ) {
+	} elseif( in_array( $t_version_string, ['v5', 'v6', 'v7', 'v8'] ) ) {
 		# filters from v5 onwards should cope with changing filter indices dynamically
 		$t_filter_array = unserialize( $t_setting_arr[1] );
 	} else {
@@ -1566,7 +1566,7 @@ function filter_db_create_filter( $p_filter_string, $p_user_id, $p_project_id, $
 	db_param_push();
 	$t_query = 'INSERT INTO {filters} ( user_id, project_id, is_public, name, filter_string )'
 			. ' VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	$t_params = [ $c_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string ];
+	$t_params = [$c_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string];
 	db_query( $t_query, $t_params );
 
 	return db_insert_id( db_get_table( 'filters' ) );
@@ -1659,7 +1659,7 @@ function filter_db_get_project_current( $p_project_id = null, $p_user_id = null 
 	db_param_push();
 	$t_query = 'SELECT id FROM {filters} WHERE user_id = ' . db_param()
 			. ' AND project_id = ' . db_param() . ' AND name = ' . db_param();
-	$t_result = db_query( $t_query, [ $c_user_id, $t_filter_project_id, '' ] );
+	$t_result = db_query( $t_query, [$c_user_id, $t_filter_project_id, ''] );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
 		return $t_row['id'];
@@ -1729,7 +1729,7 @@ function filter_db_delete_filter( $p_filter_id ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE id=' . db_param();
-	db_query( $t_query, [ $c_filter_id ] );
+	db_query( $t_query, [$c_filter_id] );
 
 	return true;
 }
@@ -1743,7 +1743,7 @@ function filter_db_delete_current_filters() {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE project_id<=' . db_param() . ' AND name=' . db_param();
-	db_query( $t_query, [ $t_all_id, '' ] );
+	db_query( $t_query, [$t_all_id, ''] );
 }
 
 /**
@@ -1825,7 +1825,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 				OR user_id = ' . db_param() . ')
 			ORDER BY is_public DESC, name ASC';
 
-		$t_result = db_query( $t_query, [ $t_project_id, true, $t_user_id ] );
+		$t_result = db_query( $t_query, [$t_project_id, true, $t_user_id] );
 	} else {
 		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
 		$t_project_ids[] = ALL_PROJECTS;
@@ -1837,7 +1837,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 				OR user_id = ' . db_param() . ')
 			ORDER BY is_public DESC, name ASC';
 
-		$t_result = db_query( $t_query, [ true, $t_user_id ] );
+		$t_result = db_query( $t_query, [true, $t_user_id] );
 	}
 
 	$t_filters = [];
@@ -1932,16 +1932,16 @@ function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
 
 	if( $p_user_id == 0 ) {
-		$t_filter[FILTER_PROPERTY_HANDLER_ID] = [ '0' => META_FILTER_NONE ];
+		$t_filter[FILTER_PROPERTY_HANDLER_ID] = ['0' => META_FILTER_NONE];
 	} else {
-		$t_filter[FILTER_PROPERTY_HANDLER_ID] = [ '0' => $p_user_id ];
+		$t_filter[FILTER_PROPERTY_HANDLER_ID] = ['0' => $p_user_id];
 	}
 
 	$t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold', null, $p_user_id, $p_project_id );
-	$t_filter[FILTER_PROPERTY_HIDE_STATUS] = [ '0' => $t_bug_resolved_status_threshold ];
+	$t_filter[FILTER_PROPERTY_HIDE_STATUS] = ['0' => $t_bug_resolved_status_threshold];
 
 	if( $p_project_id != ALL_PROJECTS ) {
-		$t_filter[FILTER_PROPERTY_PROJECT_ID] = [ '0' => $p_project_id ];
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = ['0' => $p_project_id];
 	}
 
 	return filter_ensure_valid_filter( $t_filter );
@@ -1955,10 +1955,10 @@ function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
  */
 function filter_create_reported_by( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
-	$t_filter[FILTER_PROPERTY_REPORTER_ID] = [ '0' => $p_user_id ];
+	$t_filter[FILTER_PROPERTY_REPORTER_ID] = ['0' => $p_user_id];
 
 	if( $p_project_id != ALL_PROJECTS ) {
-		$t_filter[FILTER_PROPERTY_PROJECT_ID] = [ '0' => $p_project_id ];
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = ['0' => $p_project_id];
 	}
 
 	return filter_ensure_valid_filter( $t_filter );
@@ -1974,13 +1974,13 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
 
 	if( $p_user_id == 0 ) {
-		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = [ '0' => META_FILTER_NONE ];
+		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = ['0' => META_FILTER_NONE];
 	} else {
-		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = [ '0' => $p_user_id ];
+		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = ['0' => $p_user_id];
 	}
 
 	if( $p_project_id != ALL_PROJECTS ) {
-		$t_filter[FILTER_PROPERTY_PROJECT_ID] = [ '0' => $p_project_id ];
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = ['0' => $p_project_id];
 	}
 
 	return filter_ensure_valid_filter( $t_filter );
@@ -2236,10 +2236,10 @@ function filter_gpc_get( array $p_filter = null ) {
 				}
 
 				if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, [ META_FILTER_ANY ] );
+					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, [META_FILTER_ANY] );
 				} else {
 					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
-					$f_custom_fields_data[$t_cfid] = [ $f_custom_fields_data[$t_cfid] ];
+					$f_custom_fields_data[$t_cfid] = [$f_custom_fields_data[$t_cfid]];
 				}
 			}
 		}
@@ -2447,7 +2447,7 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 	# normalize the project filtering into an array $t_project_ids
 	if( FILTER_VIEW_TYPE_SIMPLE == $t_view_type ) {
 		log_event( LOG_FILTERING, 'Simple Filter' );
-		$t_project_ids = [ $t_project_id ];
+		$t_project_ids = [$t_project_id];
 		$t_include_sub_projects = true;
 	} else {
 		log_event( LOG_FILTERING, 'Advanced Filter' );

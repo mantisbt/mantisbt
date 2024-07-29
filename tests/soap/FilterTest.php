@@ -67,7 +67,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetIssuesForUserForUnassignedWithTargetUser() {
-		$t_target_user = [ 'name' => $this->userName ];
+		$t_target_user = ['name' => $this->userName];
 		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 		$t_issue_to_add = $this->getIssueToAdd();
 
@@ -90,7 +90,7 @@ class FilterTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		# Assign the issue to the reporter.
-		$t_issue_to_add['handler'] = [ 'name' => $this->userName ];
+		$t_issue_to_add['handler'] = ['name' => $this->userName];
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -106,7 +106,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetIssuesForUserForAssignedWithTargetUser() {
-		$t_target_user = [ 'name' => $this->userName ];
+		$t_target_user = ['name' => $this->userName];
 		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 		$t_issue_to_add = $this->getIssueToAdd();
 
@@ -129,7 +129,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetIssuesForUserForAssignedWithTargetUserNoResolved() {
-		$t_target_user = [ 'name' => $this->userName ];
+		$t_target_user = ['name' => $this->userName];
 		$t_issues_before_count = $this->getIssuesForUser( 'assigned', $t_target_user );
 		$t_issue_to_add = $this->getIssueToAdd();
 
@@ -142,7 +142,7 @@ class FilterTest extends SoapBase {
 
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$t_issue->status = [ 'name' => 'resolved' ];
+		$t_issue->status = ['name' => 'resolved'];
 
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 
@@ -167,7 +167,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetIssuesForUserReportedWithTargetUser() {
-		$t_target_user = [ 'name' => $this->userName ];
+		$t_target_user = ['name' => $this->userName];
 		$t_issues_before = $this->getIssuesForUser( 'reported', $t_target_user );
 		$t_issue_to_add = $this->getIssueToAdd();
 
@@ -212,7 +212,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetIssuesForUserMonitoredWithTargetUser() {
-		$t_target_user = [ 'name' => $this->userName ];
+		$t_target_user = ['name' => $this->userName];
 		$t_issues_before = $this->getIssuesForUser( 'monitored', $t_target_user );
 		$t_issue_to_add = $this->getIssueToAdd();
 
@@ -232,7 +232,7 @@ class FilterTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetIssuesForUserForMonitoredWithTargetUserAndMatch() {
-		$t_target_user = [ 'name' => $this->userName ];
+		$t_target_user = ['name' => $this->userName];
 		$t_issues_before = $this->getIssuesForUser( 'monitored', $t_target_user );
 		$t_issue_to_add = $this->getIssueToAdd();
 
@@ -242,7 +242,7 @@ class FilterTest extends SoapBase {
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# Monitor the issue so it matches the file.
-		$t_issue->monitors = [ [ 'id' => $this->userId ] ];
+		$t_issue->monitors = [['id' => $this->userId]];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 
 		$t_issues_after = $this->getIssuesForUser( 'monitored', $t_target_user );
@@ -265,7 +265,7 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetIssuesForUserInvalidFilter() {
 		$this->expectException( SoapFault::class );
-		$t_target_user = [ 'name' => $this->userName ];
+		$t_target_user = ['name' => $this->userName];
 		$this->getIssuesForUser( 'unknown', $t_target_user );
 	}
 
@@ -452,7 +452,7 @@ class FilterTest extends SoapBase {
 
 		# first page should be full
 		self::assertCount( $t_page_size,
-			call_user_func_array( [ $this->client, $p_method_name ],
+			call_user_func_array( [$this->client, $p_method_name],
 				[
 					$this->userName,
 					$this->password,
@@ -463,7 +463,7 @@ class FilterTest extends SoapBase {
 		);
 		# second page should get just one issue, as $t_page_size = $t_issue_count - 1;
 		self::assertCount( 1,
-			call_user_func_array( [ $this->client, $p_method_name ],
+			call_user_func_array( [$this->client, $p_method_name],
 				[
 					$this->userName,
 					$this->password,
@@ -474,7 +474,7 @@ class FilterTest extends SoapBase {
 		);
 		# third page should be empty
 		self::assertCount( 0,
-			call_user_func_array( [ $this->client, $p_method_name ],
+			call_user_func_array( [$this->client, $p_method_name],
 				[
 					$this->userName,
 					$this->password,
@@ -546,7 +546,7 @@ class FilterTest extends SoapBase {
 	public function testFilterGetIssuesReturnsIssueMonitors() {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['monitors'] = [
-			[ 'id' => $this->userId ]
+			['id' => $this->userId]
 		];
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
@@ -673,14 +673,14 @@ class FilterTest extends SoapBase {
 	 */
 	public function testCustomFilterSearchAllPossibleParameters() {
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['severity'] = [ 'id' => BLOCK ];
-		$t_issue_to_add['status'] = [ 'id' => 50 ];
-		$t_issue_to_add['priority'] = [ 'id' => NORMAL ];
-		$t_issue_to_add['reporter'] = [ 'id' => 1 ];
-		$t_issue_to_add['handler'] = [ 'id' => 1 ];
-		$t_issue_to_add['resolution'] = [ 'id' => FIXED ];
+		$t_issue_to_add['severity'] = ['id' => BLOCK];
+		$t_issue_to_add['status'] = ['id' => 50];
+		$t_issue_to_add['priority'] = ['id' => NORMAL];
+		$t_issue_to_add['reporter'] = ['id' => 1];
+		$t_issue_to_add['handler'] = ['id' => 1];
+		$t_issue_to_add['resolution'] = ['id' => FIXED];
 		$t_issue_to_add['sticky'] = true;
-		$t_issue_to_add['view_state'] = [ 'id' => VS_PUBLIC ];
+		$t_issue_to_add['view_state'] = ['id' => VS_PUBLIC];
 		$t_issue_to_add['platform'] = 'test_plaform';
 		$t_issue_to_add['os'] = 'test_os';
 		$t_issue_to_add['os_build'] = 'test_6';
@@ -694,26 +694,26 @@ class FilterTest extends SoapBase {
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_filter = [
-			'project_id' => [ 0 ],
-			'category' => [ $this->getCategory() ],
-			'severity_id' => [ BLOCK ],
-			'status_id' => [ 50 ],
-			'priority_id' => [ NORMAL ],
-			'reporter_id' => [ 1 ],
-			'handler_id' => [ 1 ],
-			'resolution_id' => [ FIXED ],
+			'project_id' => [0],
+			'category' => [$this->getCategory()],
+			'severity_id' => [BLOCK],
+			'status_id' => [50],
+			'priority_id' => [NORMAL],
+			'reporter_id' => [1],
+			'handler_id' => [1],
+			'resolution_id' => [FIXED],
 
-			'hide_status_id' => [ -2 ],
+			'hide_status_id' => [-2],
 			'sort' => 'last_updated',
 			'sort_direction' => 'DESC',
 			'sticky' => true,
-			'view_state' => [ VS_PUBLIC ],
+			'view_state' => [VS_PUBLIC],
 			# These versions must exist for this to work
 			# 'fixed_in_version' => array( 'test_69' ),
 			# 'target_version' => array( 'test_70' ),
-			'platform' => [ 'test_plaform' ],
-			'os' => [ 'test_os' ],
-			'os_build' => [ 'test_6' ]
+			'platform' => ['test_plaform'],
+			'os' => ['test_os'],
+			'os_build' => ['test_6']
 		];
 
 		$t_search_result_headers = $this->client->mc_filter_search_issue_headers( $this->userName, $this->password, $t_filter, 1, -1 );
@@ -735,7 +735,7 @@ class FilterTest extends SoapBase {
 		$this->assertEquals( BLOCK, $t_search_result_issues[0]->severity->id );
 
 		// filter doesn't match any issue
-		$t_filter['severity_id'] = [ FEATURE ];
+		$t_filter['severity_id'] = [FEATURE];
 
 		$t_search_result_headers = $this->client->mc_filter_search_issue_headers( $this->userName, $this->password, $t_filter, 1, -1 );
 		$t_search_result_ids = $this->client->mc_filter_search_issue_ids( $this->userName, $this->password, $t_filter, 1, -1 );

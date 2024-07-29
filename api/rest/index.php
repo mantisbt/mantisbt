@@ -51,7 +51,7 @@ $t_config = [];
 
 # Show SLIM detailed errors according to Mantis settings
 if( ON == config_get_global( 'show_detailed_errors' ) ) {
-	$t_config['settings'] = [ 'displayErrorDetails' => true ];
+	$t_config['settings'] = ['displayErrorDetails' => true];
 }
 
 # For debugging purposes, uncomment this line to avoid truncated error messages
@@ -181,7 +181,7 @@ try {
 	require_once( $t_restcore_dir . 'users_rest.php' );
 	require_once( $t_restcore_dir . 'pages_rest.php' );
 
-	event_signal( 'EVENT_REST_API_ROUTES', [ [ 'app' => $g_app ] ] );
+	event_signal( 'EVENT_REST_API_ROUTES', [['app' => $g_app]] );
 
 	$g_app->run();
 } catch( Throwable $e ) {

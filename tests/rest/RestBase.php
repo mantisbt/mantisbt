@@ -206,8 +206,8 @@ abstract class RestBase extends TestCase {
 		return [
 			'summary' => $t_summary . ': test issue ' . rand( 1, 1000000 ),
 			'description' => 'description of test issue.',
-			'project' => [ 'id' => $this->getProjectId() ],
-			'category' => [ 'name' => $this->getCategory() ]
+			'project' => ['id' => $this->getProjectId()],
+			'category' => ['name' => $this->getCategory()]
 		];
 	}
 
@@ -243,7 +243,7 @@ abstract class RestBase extends TestCase {
 			$p_project_id = $this->getProjectId();
 		}
 
-		$this->versionIdsToDelete[] = [ $p_project_id, $p_version_id ];
+		$this->versionIdsToDelete[] = [$p_project_id, $p_version_id];
 	}
 
 	/**

@@ -68,7 +68,7 @@ $t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' 
 
 # build a list of the possible actions and flags
 $t_valid_actions = email_get_actions();
-$t_valid_flags = [ 'reporter', 'handler', 'monitor' , 'bugnotes', 'category' ];
+$t_valid_flags = ['reporter', 'handler', 'monitor' , 'bugnotes', 'category'];
 
 # initialize the thresholds
 foreach( $t_valid_actions as $t_action ) {

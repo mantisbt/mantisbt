@@ -124,7 +124,7 @@ function auth_flags( $p_user_id = null, $p_username = '' ) {
 
 	static $s_flags_cache = [];
 	if( !isset( $s_flags_cache[$t_user_id] ) ) {
-		$t_flags = event_signal( 'EVENT_AUTH_USER_FLAGS', [ $t_event_arguments ] );
+		$t_flags = event_signal( 'EVENT_AUTH_USER_FLAGS', [$t_event_arguments] );
 
 		# Don't cache in case of user not in db.
 		if( $t_user_id ) {

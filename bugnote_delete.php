@@ -43,7 +43,7 @@ $f_bugnote_id = gpc_get_int( 'bugnote_id' );
 helper_ensure_confirmed( lang_get( 'delete_bugnote_sure_msg' ),
 						 lang_get( 'delete_bugnote_button' ) );
 
-$t_data = [ 'query' => [ 'id' => $f_bugnote_id  ] ];
+$t_data = ['query' => ['id' => $f_bugnote_id]];
 
 $t_command = new IssueNoteDeleteCommand( $t_data );
 $t_result = $t_command->execute();

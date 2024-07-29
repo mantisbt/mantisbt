@@ -87,17 +87,17 @@ class UserApiTest extends MantisCoreBase {
 
 		return [
 			"Existing email, new user"
-				=> [ self::TEST_EMAIL, null, false ],
+				=> [self::TEST_EMAIL, null, false],
 			"Existing email, matching user"
-				=> [ self::TEST_EMAIL, -1, true ],
+				=> [self::TEST_EMAIL, -1, true],
 			"Existing email, other user"
-				=> [ self::TEST_EMAIL, 1, false ],
+				=> [self::TEST_EMAIL, 1, false],
 			"Existing email with different case"
-				=> [ ucfirst(self::TEST_EMAIL), null, false ],
+				=> [ucfirst(self::TEST_EMAIL), null, false],
 			"Email matching SQL LIKE pattern"
-				=> [ "$t_user_sql_like_pattern@$t_domain", null, true ],
+				=> ["$t_user_sql_like_pattern@$t_domain", null, true],
 			"Non-existing email"
-				=> [ "unique@$t_domain", null, true ],
+				=> ["unique@$t_domain", null, true],
 		];
 	}
 

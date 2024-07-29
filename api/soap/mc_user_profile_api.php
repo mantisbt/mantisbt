@@ -43,7 +43,7 @@ function mc_user_profiles_get_all( $p_username, $p_password, $p_page_number, $p_
 	}
 
 	$t_results = [];
-	$t_start = max( [ 0, $p_page_number - 1 ] ) * $p_per_page;
+	$t_start = max( [0, $p_page_number - 1] ) * $p_per_page;
 
 	foreach ( profile_get_all_for_user( $t_user_id ) as $t_profile_row ) {
 		$t_result = [

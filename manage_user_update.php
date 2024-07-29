@@ -59,7 +59,7 @@ $t_data = [
 			'username' => $f_username,
 			'real_name' => $f_realname,
 			'email' => $f_email,
-			'access_level' => [ 'id' => $f_access_level ],
+			'access_level' => ['id' => $f_access_level],
 			'enabled' => $f_enabled,
 			'protected' => $f_protected
 		],

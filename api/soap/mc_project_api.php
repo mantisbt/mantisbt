@@ -645,7 +645,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 				throw new ClientException(
 					'Custom field has no value specified.',
 					ERROR_EMPTY_FIELD,
-					[ "custom_field['value']" ]
+					["custom_field['value']"]
 				);
 			}
 
@@ -653,7 +653,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 				throw new ClientException(
 					'Custom field with no specified id or name.',
 					ERROR_EMPTY_FIELD,
-					[ "custom_field['field']" ]
+					["custom_field['field']"]
 				);
 			}
 
@@ -696,7 +696,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 				throw new ClientException(
 					"Mandatory field '$t_name' is missing.",
 					ERROR_EMPTY_FIELD,
-					[ $t_name ]
+					[$t_name]
 				);
 			}
 		}
@@ -706,7 +706,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 			throw new ClientException(
 				"Invalid custom field '$t_name' value.",
 				ERROR_CUSTOM_FIELD_INVALID_VALUE,
-				[ $t_name ]
+				[$t_name]
 			);
 		}
 	}
@@ -866,7 +866,7 @@ function mci_project_categories( $p_project_id ) {
 		$t_result = [
 			'id' => (int)$t_category['id'],
 			'name' => $t_category['name'],
-			'project' => [ 'id' => $t_project_id, 'name' => $t_category['project_name'] ],
+			'project' => ['id' => $t_project_id, 'name' => $t_category['project_name']],
 			'status' => $t_category['status'],
 		];
 
@@ -954,7 +954,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		( ut.access_level = ' . db_param() . ' ) )
 		ORDER BY pt.name ASC, pft.title ASC';
 
-	$t_result = db_query( $t_query, [ $t_user_id, $t_user_id, VS_PUBLIC, $t_user_id, $t_admin ] );
+	$t_result = db_query( $t_query, [$t_user_id, $t_user_id, VS_PUBLIC, $t_user_id, $t_admin] );
 	$t_num_files = db_num_rows( $t_result );
 
 	$t_attachments = [];
@@ -1095,7 +1095,7 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 		$t_project_data['inherit_global'] = $p_project['inherit_global'];
 	}
 
-	$t_data = [ 'payload' => $t_project_data ];
+	$t_data = ['payload' => $t_project_data];
 
 	$t_command = new ProjectAddCommand( $t_data );
 	$t_result = $t_command->execute();

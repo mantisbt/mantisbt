@@ -92,7 +92,7 @@ switch( $f_type ) {
 	default:
 		access_denied();
 }
-$t_result = db_query( $t_query, [ $c_file_id ] );
+$t_result = db_query( $t_query, [$c_file_id] );
 $t_row = db_fetch_array( $t_result );
 if( false === $t_row ) {
 	# Attachment not found

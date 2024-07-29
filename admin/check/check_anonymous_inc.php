@@ -66,19 +66,19 @@ $t_anonymous_user_id = user_get_id_by_name( $t_anonymous_account );
 check_print_test_row(
 	'anonymous_account is a valid user account',
 	$t_anonymous_user_id !== false,
-	[ false => 'You need to specify a valid user account to use with the anonymous_account configuration options.' ]
+	[false => 'You need to specify a valid user account to use with the anonymous_account configuration options.']
 );
 
 check_print_test_row(
 	'anonymous_account user has the enabled flag set',
 	user_is_enabled( $t_anonymous_user_id ),
-	[ false => 'The anonymous user account must be enabled before it can be used.' ]
+	[false => 'The anonymous user account must be enabled before it can be used.']
 );
 
 check_print_test_row(
 	'anonymous_account user has the protected flag set',
 	user_get_field( $t_anonymous_user_id, 'protected' ),
-	[ false => 'The anonymous user account needs to have the protected flag set to prevent anonymous users modifying the account.' ]
+	[false => 'The anonymous user account needs to have the protected flag set to prevent anonymous users modifying the account.']
 );
 
 check_print_test_row(

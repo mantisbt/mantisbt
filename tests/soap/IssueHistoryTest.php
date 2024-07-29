@@ -105,8 +105,8 @@ class IssueHistoryTest extends SoapBase {
 	 */
 	function testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries() {
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['status'] = [ 'id' => CONFIRMED ]; # confirmed
-		$t_issue_to_add['resolution'] =  [ 'id' => REOPENED ]; # reopened
+		$t_issue_to_add['status'] = ['id' => CONFIRMED]; # confirmed
+		$t_issue_to_add['resolution'] =  ['id' => REOPENED]; # reopened
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 

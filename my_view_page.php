@@ -97,7 +97,7 @@ if( $t_current_project_id == ALL_PROJECTS ) {
 } else {
 	# this creates a filter with the specific project informes, in the same way that
 	# those that will be used later for the boxes
-	$t_test_filter = filter_ensure_valid_filter( [ FILTER_PROPERTY_PROJECT_ID => [$t_current_project_id]] );
+	$t_test_filter = filter_ensure_valid_filter( [FILTER_PROPERTY_PROJECT_ID => [$t_current_project_id]] );
 	$t_project_ids_to_check = filter_get_included_projects( $t_test_filter );
 }
 
@@ -121,7 +121,7 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
 		) ||
 		# Remove display of "Reported by Me", "Awaiting Feedback" and
 		# "Awating confirmation of resolution" boxes for users that can't report bugs
-		(  in_array( $t_box_title, [ 'reported', 'feedback', 'verify' ] )
+		(  in_array( $t_box_title, ['reported', 'feedback', 'verify'] )
 		&& (  $t_anonymous_user
 		   || !access_has_any_project_level( 'report_bug_threshold', $t_project_ids_to_check, $t_current_user_id )
 		   )
@@ -163,7 +163,7 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
 	<?php
 		# Build a simple filter that gets all bugs for current project
 		$g_timeline_filter = [];
-		$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = [ META_FILTER_NONE ];
+		$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = [META_FILTER_NONE];
 		$g_timeline_filter = filter_ensure_valid_filter( $g_timeline_filter );
 		include( 'timeline_inc.php' );
 	?>

@@ -112,7 +112,7 @@ class ProjectUpdateCommand extends Command {
 			throw new ClientException(
 				'Project id is invalid',
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'id' ] );
+				['id'] );
 		}
 
 		$t_project = $this->data['payload'];
@@ -120,14 +120,14 @@ class ProjectUpdateCommand extends Command {
 			throw new ClientException(
 				'Project id in payload does not match id in query',
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'id' ] );
+				['id'] );
 		}
 
 		if( !project_exists( $this->id ) ) {
 			throw new ClientException(
 				'Project not found',
 				ERROR_PROJECT_NOT_FOUND,
-				[ $this->id ] );
+				[$this->id] );
 		}
 
 		global $g_project_override;
@@ -145,7 +145,7 @@ class ProjectUpdateCommand extends Command {
 			throw new ClientException(
 				'Project name cannot be blank',
 				ERROR_EMPTY_FIELD,
-				[ 'name' ] );
+				['name'] );
 		}
 
 		$this->description = $this->payload( 'description', project_get_field( $this->id, 'description' ) );
@@ -153,10 +153,10 @@ class ProjectUpdateCommand extends Command {
 		$this->enabled = (int)$this->payload( 'enabled', project_get_field( $this->id, 'enabled' ) );
 		$this->file_path = $this->payload( 'file_path', project_get_field( $this->id, 'file_path' ) );
 
-		$t_view_state_ref = $this->payload( 'view_state', [ 'id' => project_get_field( $this->id, 'view_state' ) ] );
+		$t_view_state_ref = $this->payload( 'view_state', ['id' => project_get_field( $this->id, 'view_state' )] );
 		$this->view_state = mci_get_project_view_state_id( $t_view_state_ref );
 
-		$t_status_ref = $this->payload( 'status', [ 'id' => project_get_field( $this->id, 'status' ) ] );
+		$t_status_ref = $this->payload( 'status', ['id' => project_get_field( $this->id, 'status' )] );
 		$this->status = mci_get_project_status_id( $t_status_ref );
 
 		# check to make sure a modified project doesn't already exist
@@ -165,7 +165,7 @@ class ProjectUpdateCommand extends Command {
 				throw new ClientException(
 					'Project name already exists',
 					ERROR_PROJECT_NAME_NOT_UNIQUE,
-					[ $this->name ] );
+					[$this->name] );
 			}
 		}
 	}
@@ -189,7 +189,7 @@ class ProjectUpdateCommand extends Command {
 
 		project_clear_cache( $this->id );
 
-		event_signal( 'EVENT_MANAGE_PROJECT_UPDATE', [ $this->id ] );
+		event_signal( 'EVENT_MANAGE_PROJECT_UPDATE', [$this->id] );
 
 		$t_result = [];
 		if( $this->option('return_project', false ) ) {

@@ -96,7 +96,7 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 				'user_id' => $t_attachment['user_id'],
 				'private' => false,
 				'style' => 'bugnote-note',
-				'attachments' => [ $t_attachment ] ];
+				'attachments' => [$t_attachment]];
 
 			$t_activity['can_edit'] = false;
 			$t_activity['can_delete'] = !$t_bug_readonly && $t_attachment['can_delete'];
@@ -125,7 +125,7 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 			'private' => $t_bugnote->view_state != VS_PUBLIC,
 			'style' => 'bugnote-note',
 			'attachments' => [],
-			'note' => $t_bugnote ];
+			'note' => $t_bugnote];
 
 		if( isset( $t_bugnote_attachments[$t_bugnote_id] ) ) {
 			$t_activity['attachments'] = $t_bugnote_attachments[$t_bugnote_id];

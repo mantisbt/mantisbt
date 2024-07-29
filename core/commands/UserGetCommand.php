@@ -68,7 +68,7 @@ class UserGetCommand extends Command {
 			throw new ClientException(
 				"Invalid user id '$t_user_id'",
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'id' ] );
+				['id'] );
 		}
 
 		$this->target_user_id = null;
@@ -80,7 +80,7 @@ class UserGetCommand extends Command {
 				throw new ClientException(
 					'User not found',
 					ERROR_USER_BY_NAME_NOT_FOUND,
-					[ $t_username ] );
+					[$t_username] );
 			}
 
 			$this->target_user_id = $t_user_id;
@@ -93,7 +93,7 @@ class UserGetCommand extends Command {
 					throw new ClientException(
 						'User not found',
 						ERROR_USER_BY_ID_NOT_FOUND,
-						[ $t_user_id ] );
+						[$t_user_id] );
 				}
 
 				$this->target_user_id = (int)$t_user_id;
@@ -101,7 +101,7 @@ class UserGetCommand extends Command {
 				throw new ClientException(
 					'User not specified',
 					ERROR_INVALID_FIELD_VALUE,
-					[ 'user_id' ] );
+					['user_id'] );
 			}
 		}
 
@@ -116,7 +116,7 @@ class UserGetCommand extends Command {
 			throw new ClientException(
 				'User not found',
 				ERROR_USER_BY_ID_NOT_FOUND,
-				[ $this->target_user_id ] );
+				[$this->target_user_id] );
 		}
 
 		$t_select = $this->query( 'select', null );
@@ -147,7 +147,7 @@ class UserGetCommand extends Command {
 		$t_result = mci_user_get( $this->target_user_id, $this->select );
 
 		if( $this->option( 'return_as_users', true ) ) {
-			$t_result = [ 'users' => [ $t_result ] ];
+			$t_result = ['users' => [$t_result]];
 		}
 
 		return $t_result;

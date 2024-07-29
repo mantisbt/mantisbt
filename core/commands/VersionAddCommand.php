@@ -64,7 +64,7 @@ class VersionAddCommand extends Command {
 			throw new ClientException(
 				"Project $this->project_id not found",
 				ERROR_PROJECT_NOT_FOUND,
-				[ $this->project_id ] );
+				[$this->project_id] );
 		}
 
 		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $this->project_id ) ) {
@@ -77,7 +77,7 @@ class VersionAddCommand extends Command {
 			throw new ClientException(
 				'Invalid version name',
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'name' ] );
+				['name'] );
 		}
 
 		$t_timestamp = $this->payload( 'timestamp', '' );
@@ -110,7 +110,7 @@ class VersionAddCommand extends Command {
 
 		version_cache_clear_row( $t_version_id );
 		$t_version = version_get( $t_version_id );
-		$t_result = [ 'version' => VersionGetCommand::VersionToArray( $t_version ) ];
+		$t_result = ['version' => VersionGetCommand::VersionToArray( $t_version )];
 
 		$g_project_override = $t_prev_project_id;
 

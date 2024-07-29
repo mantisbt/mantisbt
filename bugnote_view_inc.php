@@ -136,7 +136,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 </tr>
 <?php }
 
-	event_signal( 'EVENT_VIEW_BUGNOTES_START', [ $f_bug_id, $t_bugnotes ] );
+	event_signal( 'EVENT_VIEW_BUGNOTES_START', [$f_bug_id, $t_bugnotes] );
 
 	$t_normal_date_format = config_get( 'normal_date_format' );
 	$t_total_time = 0;
@@ -225,7 +225,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				print_form_button(
 					'bugnote_edit_page.php',
 					lang_get( 'edit' ),
-					[ 'bugnote_id' => $t_activity['id'] ],
+					['bugnote_id' => $t_activity['id']],
 					OFF );
 				echo '</div>';
 			}
@@ -242,7 +242,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 					print_form_button(
 						'bugnote_delete.php',
 						lang_get( 'delete' ),
-						[ 'bugnote_id' => $t_activity['id'] ],
+						['bugnote_id' => $t_activity['id']],
 						$t_security_token_notes_delete );
 				} else {
 					if ( !isset( $t_security_token_attachments_delete ) ) {
@@ -269,13 +269,13 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 					print_form_button(
 						'bugnote_set_view_state.php',
 						lang_get( 'make_public' ),
-						[ 'private' => '0', 'bugnote_id' => $t_activity['id'] ],
+						['private' => '0', 'bugnote_id' => $t_activity['id']],
 						$t_security_token_state );
 				} else {
 					print_form_button(
 						'bugnote_set_view_state.php',
 						lang_get( 'make_private' ),
-						[ 'private' => '1', 'bugnote_id' => $t_activity['id'] ],
+						['private' => '1', 'bugnote_id' => $t_activity['id']],
 						$t_security_token_state );
 				}
 				echo '</div>';
@@ -344,7 +344,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 </tr>
 <?php
 if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
-	event_signal( 'EVENT_VIEW_BUGNOTE', [ $f_bug_id, $t_activity['id'], $t_activity['private'] ] );
+	event_signal( 'EVENT_VIEW_BUGNOTE', [$f_bug_id, $t_activity['id'], $t_activity['private']] );
 }
 ?>
 <tr class="spacer">

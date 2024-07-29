@@ -158,7 +158,7 @@ $t_can_perform_integrity_check = isset( $g_integrity_release_blobs ) && isset( $
 check_print_test_warn_row(
 	'Reference integrity blob hashes are available for verifying the integrity of this MantisBT installation',
 	$t_can_perform_integrity_check,
-	[ false => 'Ensure integrity_release_blobs.php and/or integrity_commit_blobs.php are available.' ]
+	[false => 'Ensure integrity_release_blobs.php and/or integrity_commit_blobs.php are available.']
 );
 
 if( !$t_can_perform_integrity_check ) {

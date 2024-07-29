@@ -39,7 +39,7 @@ $t_nl = "\n";
 # Get bug rows according to the current filter
 $t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 if( $t_result === false ) {
-	$t_result = [ ];
+	$t_result = [];
 }
 
 $t_filename = 'exported_issues.xml';

@@ -93,7 +93,7 @@ function layout_page_header_begin( $p_page_title = null ) {
 
 	# Advertise the availability of the browser search plug-ins.
 	$t_title = htmlspecialchars( config_get( 'search_title' ) );
-	$t_searches = [ 'text', 'id' ];
+	$t_searches = ['text', 'id'];
 	foreach( $t_searches as $t_type ) {
 		echo "\t",
 			'<link rel="search" type="application/opensearchdescription+xml" ',
@@ -823,7 +823,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Allow plugins to alter the sidebar items array
-		$t_modified_sidebar_items = event_signal( 'EVENT_MENU_MAIN_FILTER', [ $t_sidebar_items ] );
+		$t_modified_sidebar_items = event_signal( 'EVENT_MENU_MAIN_FILTER', [$t_sidebar_items] );
 		if( is_array( $t_modified_sidebar_items ) && count( $t_modified_sidebar_items ) > 0 ) {
 			$t_sidebar_items = $t_modified_sidebar_items[0];
 		}

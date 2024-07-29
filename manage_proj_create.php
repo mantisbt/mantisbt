@@ -68,8 +68,8 @@ $t_data = [
 		'description' => $f_description,
 		'file_path' => $f_file_path,
 		'inherit_global' => $f_inherit_global,
-		'view_state' => [ 'id' => $f_view_state ],
-		'status' => [ 'id' => $f_status ]
+		'view_state' => ['id' => $f_view_state],
+		'status' => ['id' => $f_status]
 	],
 	'options' => [
 		'return_project' => false

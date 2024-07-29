@@ -63,7 +63,7 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 	$c_from = strtotime( $p_from );
 
 	if( $c_to === false || $c_from === false ) {
-		error_parameters( [ $p_from, $p_to ] );
+		error_parameters( [$p_from, $p_to] );
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
@@ -222,7 +222,7 @@ function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour,
 	return [
 		'issues' => $t_issues,
 		'users' => $t_users,
-		'total' => $t_total ];
+		'total' => $t_total];
 }
 
 /**

@@ -165,7 +165,7 @@ function http_csp_add( $p_type, $p_value ) {
 			$g_csp[$p_type][] = $p_value;
 		}
 	} else {
-		$g_csp[$p_type] = [ $p_value ];
+		$g_csp[$p_type] = [$p_value];
 	}
 }
 

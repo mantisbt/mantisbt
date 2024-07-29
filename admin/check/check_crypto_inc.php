@@ -41,13 +41,13 @@ check_print_section_header_row( 'Cryptography' );
 check_print_test_row(
 	'Master salt value has been specified',
 	strlen( config_get_global( 'crypto_master_salt' ) ) >= 16,
-	[ false => 'The crypto_master_salt option needs to be specified in config_inc.php with a minimum string length of 16 characters.' ]
+	[false => 'The crypto_master_salt option needs to be specified in config_inc.php with a minimum string length of 16 characters.']
 );
 
 check_print_test_row(
 	'login_method is not equal to CRYPT_FULL_SALT',
 	config_get_global( 'login_method' ) != CRYPT_FULL_SALT,
-	[ false => 'Login method CRYPT_FULL_SALT has been deprecated and should not be used.' ]
+	[false => 'Login method CRYPT_FULL_SALT has been deprecated and should not be used.']
 );
 
 if( config_get_global( 'login_method' ) != LDAP ) {

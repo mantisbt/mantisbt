@@ -170,7 +170,7 @@ print_manage_menu( 'manage_proj_page.php' );
 			$t_full_projects[] = project_get_row( $t_project_id );
 		}
 		$t_projects = multi_sort( $t_full_projects, $f_sort, $t_direction );
-		$t_stack = [ $t_projects ];
+		$t_stack = [$t_projects];
 
 		while( 0 < count( $t_stack ) ) {
 			$t_projects = array_shift( $t_stack );

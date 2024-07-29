@@ -120,7 +120,7 @@ print_manage_menu( 'manage_user_page.php' );
 $t_days_old = 7 * SECONDS_PER_DAY;
 $t_query = 'SELECT COUNT(*) AS new_user_count FROM {user}
 	WHERE ' . db_helper_compare_time( db_param(), '<=', 'date_created', $t_days_old );
-$t_result = db_query( $t_query, [ db_now() ] );
+$t_result = db_query( $t_query, [db_now()] );
 $t_row = db_fetch_array( $t_result );
 $t_new_user_count = $t_row['new_user_count'];
 

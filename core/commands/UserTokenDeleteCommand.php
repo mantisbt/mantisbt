@@ -60,7 +60,7 @@ class UserTokenDeleteCommand extends Command {
 				throw new ClientException(
 					"User doesn't exist",
 					ERROR_USER_BY_ID_NOT_FOUND,
-					[ $this->user_id ]
+					[$this->user_id]
 				);
 			}
 		}
@@ -80,7 +80,7 @@ class UserTokenDeleteCommand extends Command {
 			throw new ClientException(
 				"Token doesn't exist",
 				ERROR_USER_TOKEN_NOT_FOUND,
-				[ $t_token_id ]
+				[$t_token_id]
 			);
 		}
 	}

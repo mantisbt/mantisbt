@@ -82,7 +82,7 @@ $t_data = [
 	'payload' => [
 		'username' => $f_username,
 		'email' => $f_email,
-		'access_level' => [ 'id' => $f_access_level ],
+		'access_level' => ['id' => $f_access_level],
 		'real_name' => $f_realname,
 		'password' => $f_password,
 		'protected' => $f_protected,

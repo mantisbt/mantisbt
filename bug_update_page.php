@@ -196,7 +196,7 @@ if( $t_top_buttons_enabled ) {
 ?>
 			<tbody>
 <?php
-event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', [ $t_bug_id ] );
+event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', [$t_bug_id] );
 
 if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $t_show_date_submitted | $t_show_last_updated ) {
 	#
@@ -636,7 +636,7 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 	echo '</tr>';
 }
 
-event_signal( 'EVENT_UPDATE_BUG_FORM', [ $t_bug_id ] );
+event_signal( 'EVENT_UPDATE_BUG_FORM', [$t_bug_id] );
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
@@ -766,7 +766,7 @@ if( config_get( 'time_tracking_enabled' ) ) {
 	}
 }
 
-event_signal( 'EVENT_BUGNOTE_ADD_FORM', [ $t_bug_id ] );
+event_signal( 'EVENT_BUGNOTE_ADD_FORM', [$t_bug_id] );
 
 echo '</table>';
 echo '</div>';

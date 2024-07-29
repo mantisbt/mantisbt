@@ -155,16 +155,16 @@ switch( $f_type ) {
 	case FILTER_ACTION_GENERALIZE:
 		log_event( LOG_FILTERING, 'view_all_set.php: Generalise the filter' );
 
-		$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID]			= [ META_FILTER_ANY ];
-		$t_setting_arr[FILTER_PROPERTY_REPORTER_ID] 		= [ META_FILTER_ANY ];
-		$t_setting_arr[FILTER_PROPERTY_HANDLER_ID] 			= [ META_FILTER_ANY ];
-		$t_setting_arr[FILTER_PROPERTY_BUILD] 				= [ META_FILTER_ANY ];
-		$t_setting_arr[FILTER_PROPERTY_VERSION] 			= [ META_FILTER_ANY ];
-		$t_setting_arr[FILTER_PROPERTY_PRIORITY]			= [ META_FILTER_ANY ];
-		$t_setting_arr[FILTER_PROPERTY_FIXED_IN_VERSION]	= [ META_FILTER_ANY ];
-		$t_setting_arr[FILTER_PROPERTY_TARGET_VERSION]		= [ META_FILTER_ANY ];
-		$t_setting_arr[FILTER_PROPERTY_MONITOR_USER_ID] 	= [ META_FILTER_ANY ];
-		$t_setting_arr[FILTER_PROPERTY_NOTE_USER_ID]  		= [ META_FILTER_ANY ];
+		$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID]			= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_REPORTER_ID] 		= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_HANDLER_ID] 			= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_BUILD] 				= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_VERSION] 			= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_PRIORITY]			= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_FIXED_IN_VERSION]	= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_TARGET_VERSION]		= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_MONITOR_USER_ID] 	= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_NOTE_USER_ID]  		= [META_FILTER_ANY];
 		$t_setting_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] = -1;
 		$t_setting_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] 	= 0;
 
@@ -172,7 +172,7 @@ switch( $f_type ) {
 		$t_custom_fields_data 	= [];
 		if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 			foreach( $t_custom_fields as $t_cfid ) {
-				$t_custom_fields_data[$t_cfid] =  [ META_FILTER_ANY ];
+				$t_custom_fields_data[$t_cfid] =  [META_FILTER_ANY];
 			}
 		}
 		$t_setting_arr['custom_fields'] = $t_custom_fields_data;

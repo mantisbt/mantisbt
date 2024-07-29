@@ -60,15 +60,15 @@ foreach( $t_strings as $t_name ) {
 		continue;
 	}
 
-	$t_tags[] = [ 'name' => $t_name ];
+	$t_tags[] = ['name' => $t_name];
 }
 
 if( $f_tag_select > 0 ) {
-	$t_tags[] = [ 'id' => tag_get( $f_tag_select ) ];
+	$t_tags[] = ['id' => tag_get( $f_tag_select )];
 }
 
 $t_data = [
-	'query' => [ 'issue_id' => $f_bug_id ],
+	'query' => ['issue_id' => $f_bug_id],
 	'payload' => [
 		'tags' => $t_tags
 	]

@@ -59,7 +59,7 @@ class IssueNoteTest extends SoapBase {
 		# be set to 0 (BUGNOTE).
 		$t_note_data = [
 			'text' => 'first note',
-		    'note_type' => 2 ];
+		    'note_type' => 2];
 
 		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 
@@ -160,7 +160,7 @@ class IssueNoteTest extends SoapBase {
 		$t_note_data_new = [
 			'id' => $t_issue_note_id,
 			'text' => 'some new note',
-			'view_state' =>  [ 'id' => 10 ] # public
+			'view_state' =>  ['id' => 10] # public
 		];
 
 		$this->client->mc_issue_note_update( $this->userName, $this->password, $t_note_data_new );

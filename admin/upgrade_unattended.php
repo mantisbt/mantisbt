@@ -158,12 +158,12 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 		# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
 		if( isset( $g_upgrade[$i][2] ) ) {
 			if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
-				$t_sqlarray = call_user_func_array( [ $t_dict, $g_upgrade[$i][0] ], $g_upgrade[$i][1] );
+				$t_sqlarray = call_user_func_array( [$t_dict, $g_upgrade[$i][0]], $g_upgrade[$i][1] );
 			} else {
 				$t_sqlarray = [];
 			}
 		} else {
-			$t_sqlarray = call_user_func_array( [ $t_dict, $g_upgrade[$i][0] ], $g_upgrade[$i][1] );
+			$t_sqlarray = call_user_func_array( [$t_dict, $g_upgrade[$i][0]], $g_upgrade[$i][1] );
 		}
 	}
 

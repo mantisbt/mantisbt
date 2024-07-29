@@ -117,7 +117,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 		$g_cache_project_missing[$c_project_id] = true;
 
 		if( $p_trigger_errors ) {
-			throw new ClientException( "Project #$p_project_id not found", ERROR_PROJECT_NOT_FOUND, [ $p_project_id ] );
+			throw new ClientException( "Project #$p_project_id not found", ERROR_PROJECT_NOT_FOUND, [$p_project_id] );
 		}
 
 		return false;
@@ -245,7 +245,7 @@ function project_ensure_exists( $p_project_id ) {
 		throw new ClientException(
 			"Project $p_project_id not found",
 			ERROR_PROJECT_NOT_FOUND,
-			[ $p_project_id ] );
+			[$p_project_id] );
 	}
 }
 
@@ -772,7 +772,7 @@ function project_get_upload_path( $p_project_id ) {
  * @return void
  */
 function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
-	project_add_users( $p_project_id, [ $p_user_id => $p_access_level ] );
+	project_add_users( $p_project_id, [$p_user_id => $p_access_level] );
 }
 
 /**
@@ -783,7 +783,7 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
  * @return void
  */
 function project_update_user_access( $p_project_id, $p_user_id, $p_access_level ) {
-	project_add_users( $p_project_id, [ $p_user_id => $p_access_level ] );
+	project_add_users( $p_project_id, [$p_user_id => $p_access_level] );
 }
 
 /**
@@ -795,7 +795,7 @@ function project_update_user_access( $p_project_id, $p_user_id, $p_access_level 
  * @return void
  */
 function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
-	project_add_users( $p_project_id, [ $p_user_id => $p_access_level ] );
+	project_add_users( $p_project_id, [$p_user_id => $p_access_level] );
 }
 
 /**
@@ -857,7 +857,7 @@ function project_add_users( $p_project_id, array $p_changes ) {
 			VALUES :params'
 		);
 		foreach( $t_changes as $t_id => $t_value ) {
-			$t_insert->bind( 'params', [ $t_project_id, $t_id, $t_value ] );
+			$t_insert->bind( 'params', [$t_project_id, $t_id, $t_value] );
 			$t_insert->execute();
 
 			# Trigger event for user added on project
@@ -873,7 +873,7 @@ function project_add_users( $p_project_id, array $p_changes ) {
  * @return void
  */
 function project_remove_user( $p_project_id, $p_user_id ) {
-	project_remove_users( $p_project_id, [ $p_user_id ] );
+	project_remove_users( $p_project_id, [$p_user_id] );
 }
 
 /**

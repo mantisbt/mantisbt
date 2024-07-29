@@ -115,7 +115,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data, $f_bugnote_text ) );
 				bug_close( $t_bug_id, $f_bug_notetext, $f_bug_noteprivate );
-				helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+				helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 			} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
 				}
@@ -125,7 +125,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'DELETE':
 			if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $t_bug_id ) ) {
-				$t_data = [ 'query' => [ 'id' => $t_bug_id ] ];
+				$t_data = ['query' => ['id' => $t_bug_id]];
 				$t_command = new IssueDeleteCommand( $t_data );
 				$t_command->execute();
 			} else {
@@ -138,7 +138,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				access_has_project_level( config_get( 'report_bug_threshold', null, null, $f_project_id ), $f_project_id ) ) {
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				bug_move( $t_bug_id, $f_project_id );
-				helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+				helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
@@ -165,7 +165,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 					if( bug_check_workflow( $t_status, $t_assign_status ) ) {
 						# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 						bug_assign( $t_bug_id, $f_assign, $f_bug_notetext, $f_bug_noteprivate );
-						helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+						helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 					} else {
 						$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
 					}
@@ -186,7 +186,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 					$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version, $f_bug_notetext, null, null, $f_bug_noteprivate );
-					helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+					helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
 				}
@@ -200,7 +200,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				bug_set_field( $t_bug_id, 'priority', $f_priority );
 				email_bug_updated( $t_bug_id );
-				helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+				helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
@@ -221,7 +221,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 						email_bug_updated( $t_bug_id );
 					}
 
-					helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+					helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
 				}
@@ -238,7 +238,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'category_id', $f_category_id );
 					email_bug_updated( $t_bug_id );
-					helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+					helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_category' );
 				}
@@ -253,7 +253,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 					/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
 					bug_set_field( $t_bug_id, 'version', $f_product_version );
 					email_bug_updated( $t_bug_id );
-					helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+					helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
 				}
@@ -268,7 +268,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'fixed_in_version', $f_fixed_in_version );
 					email_bug_updated( $t_bug_id );
-					helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+					helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 					} else {
 						$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
 				}
@@ -283,7 +283,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'target_version', $f_target_version );
 					email_bug_updated( $t_bug_id );
-					helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+					helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
 				}
@@ -309,7 +309,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				bug_set_field( $t_bug_id, 'view_state', $f_view_status );
 				email_bug_updated( $t_bug_id );
-				helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+				helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
@@ -320,7 +320,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				# The new value is the inverted old value
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				bug_set_field( $t_bug_id, 'sticky', intval( !$f_sticky ) );
-				helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+				helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
@@ -336,14 +336,14 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			custom_field_set_value( $f_custom_field_id, $t_bug_id, $t_custom_field_value );
 			bug_update_date( $t_bug_id );
 			email_bug_updated( $t_bug_id );
-			helper_call_custom_function( 'issue_update_notify', [ $t_bug_id ] );
+			helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 			break;
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
 
 	# Bug Action Event
-	event_signal( 'EVENT_BUG_ACTION', [ $f_action, $t_bug_id ] );
+	event_signal( 'EVENT_BUG_ACTION', [$f_action, $t_bug_id] );
 }
 
 form_security_purge( $t_form_name );

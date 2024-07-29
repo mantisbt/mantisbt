@@ -133,7 +133,7 @@ if( in_array( $t_timezone, timezone_identifiers_list() ) ) {
 	}
 }
 
-event_signal( 'EVENT_ACCOUNT_PREF_UPDATE', [ $f_user_id ] );
+event_signal( 'EVENT_ACCOUNT_PREF_UPDATE', [$f_user_id] );
 
 user_pref_set( $f_user_id, $t_prefs, ALL_PROJECTS );
 

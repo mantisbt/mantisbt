@@ -51,8 +51,8 @@ $f_user_id = gpc_get_int( 'user_id', 0 );
 
 $t_data = [
 	'payload' => [
-		'project' => [ 'id' => $f_project_id ],
-		'user' => [ 'id' => $f_user_id ]
+		'project' => ['id' => $f_project_id],
+		'user' => ['id' => $f_user_id]
 	]
 ];
 

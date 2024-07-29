@@ -273,7 +273,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	# Start extracting regex matches
 	# Encode backslashes to prevent unwanted escaping of a leading '/' allowing
 	# redirection to external sites
-	$t_script = strtr( $t_matches['script'], [ '\\' => '%5C' ] );
+	$t_script = strtr( $t_matches['script'], ['\\' => '%5C'] );
 	$t_script_path = $t_matches['path'];
 
 	# Clean/encode query params

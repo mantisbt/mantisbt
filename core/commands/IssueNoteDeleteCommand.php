@@ -53,7 +53,7 @@ class IssueNoteDeleteCommand extends Command {
         $this->id = $this->query( 'id' );
 
         if( (integer)$this->id < 1 ) {
-            throw new ClientException( "'id' must be >= 1", ERROR_INVALID_FIELD_VALUE, [ 'id' ] );
+            throw new ClientException( "'id' must be >= 1", ERROR_INVALID_FIELD_VALUE, ['id'] );
         }
 
         bugnote_ensure_exists( $this->id );
@@ -61,7 +61,7 @@ class IssueNoteDeleteCommand extends Command {
         $this->issueId = bugnote_get_field( $this->id, 'bug_id' );
         $t_specified_issue_id = $this->query( 'issue_id' );
         if( $t_specified_issue_id !== null && $t_specified_issue_id != $this->issueId ) {
-            throw new ClientException( "Issue note doesn't belong to issue", ERROR_INVALID_FIELD_VALUE, [ 'id' ] );
+            throw new ClientException( "Issue note doesn't belong to issue", ERROR_INVALID_FIELD_VALUE, ['id'] );
         }
 
         $t_project_id = bug_get_field( $this->issueId, 'project_id' );
@@ -91,7 +91,7 @@ class IssueNoteDeleteCommand extends Command {
 			throw new ClientException(
 				sprintf( "Issue '%d' is read-only.", $this->issueId ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				[ $this->issueId ] );
+				[$this->issueId] );
         }
     }
 

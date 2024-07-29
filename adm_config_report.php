@@ -132,7 +132,7 @@ if( $t_filter_save ) {
 $t_sql = 'SELECT DISTINCT c.user_id AS config_uid, u.id, u.username, u.realname'
 		. ' FROM {config} c LEFT JOIN {user} u ON c.user_id=u.id'
 		. ' WHERE c.user_id <> :all_users ORDER BY c.user_id';
-$t_query = new DbQuery( $t_sql, [ 'all_users' => ALL_USERS ] );
+$t_query = new DbQuery( $t_sql, ['all_users' => ALL_USERS] );
 $t_users_list = [];
 $t_users_ids = [];
 $t_sort = [];

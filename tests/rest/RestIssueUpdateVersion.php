@@ -143,23 +143,23 @@ class RestIssueUpdateVersion extends RestBase {
 	 * @return Generator List of test cases
 	 */
 	public function providerUnsetVersionSuccess(): Generator {
-		yield 'Version with id 0' => [ ['id' => 0], HTTP_STATUS_SUCCESS ];
+		yield 'Version with id 0' => [['id' => 0], HTTP_STATUS_SUCCESS];
 
 		# According to @vboctor these test cases should actually fail, but don't...
 		# For now the tests are designed to pass anyway, reflecting current API behavior.
 		# See discussion in #25407.
-		yield 'Null version' => [ null, HTTP_STATUS_SUCCESS ];
-		yield 'Blank version' => [ '', HTTP_STATUS_SUCCESS ];
-		yield 'Empty version' => [ [], HTTP_STATUS_SUCCESS ];
-		yield 'Version with null name' => [ ['name' => null], HTTP_STATUS_SUCCESS ];
-		yield 'Version with blank name' => [ ['name' => ''], HTTP_STATUS_SUCCESS ];
+		yield 'Null version' => [null, HTTP_STATUS_SUCCESS];
+		yield 'Blank version' => ['', HTTP_STATUS_SUCCESS];
+		yield 'Empty version' => [[], HTTP_STATUS_SUCCESS];
+		yield 'Version with null name' => [['name' => null], HTTP_STATUS_SUCCESS];
+		yield 'Version with blank name' => [['name' => ''], HTTP_STATUS_SUCCESS];
 
 		# @TODO should probably be BAD REQUEST (inconsistent API behavior compared to same values in version array)
-		yield 'Non-existing Numeric version' => [ 99999, HTTP_STATUS_SUCCESS ];
-		yield 'Invalid Numeric version' => [ -1, HTTP_STATUS_SUCCESS ];
+		yield 'Non-existing Numeric version' => [99999, HTTP_STATUS_SUCCESS];
+		yield 'Invalid Numeric version' => [-1, HTTP_STATUS_SUCCESS];
 
 		# @TODO not sure what the correct behavior should be in this case
-		yield 'Version with neither id nor name' => [ ['xxx' => 'yyy'], HTTP_STATUS_SUCCESS ];
+		yield 'Version with neither id nor name' => [['xxx' => 'yyy'], HTTP_STATUS_SUCCESS];
 	}
 
 	/**
@@ -176,7 +176,7 @@ class RestIssueUpdateVersion extends RestBase {
 	public function providerUnsetVersionFailure(): Generator {
 		# This is a dummy test case, to avoid a PHPUnit warning when the
 		# Provider returns nothing.
-		yield 'dummy' => [ ['id' => -1], HTTP_STATUS_BAD_REQUEST ];
+		yield 'dummy' => [['id' => -1], HTTP_STATUS_BAD_REQUEST];
 
 		// yield 'Numeric version' => [ 999, HTTP_STATUS_BAD_REQUEST ];
 		// yield 'Blank version' => [ '', HTTP_STATUS_BAD_REQUEST ];

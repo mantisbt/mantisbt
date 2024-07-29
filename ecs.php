@@ -18,6 +18,7 @@ declare( strict_types = 1 );
 
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
+use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\Basic\BracesPositionFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
@@ -264,6 +265,19 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/array_notation/array_syntax.html
 		 */
 		ArraySyntaxFixer::class,
+
+		/**
+		 * Array: Trim array spaces
+		 *
+		 * Arrays should be formatted like function/method arguments,
+		 * without leading or trailing single line space.
+		 *
+		 * [ ]     > []
+		 * [ 1,2 ] > [1,2]
+		 *
+		 * @see https://cs.symfony.com/doc/rules/array_notation/trim_array_spaces.html
+		 */
+		TrimArraySpacesFixer::class,
 	] )
 
 	/**

@@ -65,7 +65,7 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 	# Process projects list
 	foreach( $p_projects as $t_project ) {
 		# Retrieve attachments for the project
-		$t_result = db_query( $t_query, [ $t_project ] );
+		$t_result = db_query( $t_query, [$t_project] );
 
 		# Project upload path
 		$t_upload_path = project_get_field( $t_project, 'file_path' );
@@ -99,14 +99,14 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 					if( db_is_oracle() ) {
 						db_update_blob( $t_file_table, 'content', $c_content, "id=" . (int)$t_row['id'] );
 						$t_query = "UPDATE $t_file_table SET folder='' WHERE id = " . db_param();
-						$t_result2 = db_query( $t_query, [ (int)$t_row['id'] ] );
+						$t_result2 = db_query( $t_query, [(int)$t_row['id']] );
 					} else {
 						$t_update_query = "UPDATE $t_file_table
 										SET folder = " . db_param() . ",
 										content = " . db_param() . "
 										WHERE id = " . db_param();
 						$t_result2 = db_query( $t_update_query,
-							[ '', $c_content, (int)$t_row['id'] ]
+							['', $c_content, (int)$t_row['id']]
 						);
 					}
 
@@ -176,7 +176,7 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 	# Process projects list
 	foreach( $p_projects as $t_project ) {
 		# Retrieve attachments for the project
-		$t_result = db_query( $t_query, [ $t_project ] );
+		$t_result = db_query( $t_query, [$t_project] );
 
 		# Project upload path
 		$t_upload_path = project_get_upload_path( $t_project );
@@ -217,7 +217,7 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 						}
 						$t_update_result = db_query(
 							$t_update_query,
-							[ $t_upload_path, $t_row['id'] ]
+							[$t_upload_path, $t_row['id']]
 						);
 
 						if( !$t_update_result ) {
@@ -288,10 +288,10 @@ if( null == $f_project_to_move ) {
 
 			switch( $t_array[0] ) {
 				case 'disk':
-					$t_moved[] = move_attachments_to_disk( $f_file_type, [ $t_project_id ] );
+					$t_moved[] = move_attachments_to_disk( $f_file_type, [$t_project_id] );
 					break;
 				case 'db':
-					$t_moved[] = move_attachments_to_db( $f_file_type, [ $t_project_id ] );
+					$t_moved[] = move_attachments_to_db( $f_file_type, [$t_project_id] );
 					break;
 			}
 		}

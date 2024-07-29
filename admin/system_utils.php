@@ -60,7 +60,7 @@ print_admin_menu_bar( 'system_utils.php' );
 			<td class="center">
 				<?php html_button( 'move_attachments_page.php',
 					'Move Attachments',
-					[ 'type' => 'bug' ] );
+					['type' => 'bug'] );
 				?>
 			</td>
 		</tr>
@@ -69,7 +69,7 @@ print_admin_menu_bar( 'system_utils.php' );
 			<td class="center">
 				<?php html_button( 'move_attachments_page.php',
 					'Move Project Files',
-					[ 'type' => 'project' ] );
+					['type' => 'project'] );
 				?>
 			</td>
 		</tr>

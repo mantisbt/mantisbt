@@ -93,7 +93,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 	$t_max_depth = config_get( 'relationship_graph_max_depth' );
 
 	# Put the first element into queue.
-	array_push( $v_queue, [ 0, $p_bug_id ] );
+	array_push( $v_queue, [0, $p_bug_id] );
 
 	# And now we process it
 	while( !empty( $v_queue ) ) {
@@ -127,7 +127,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 			}
 
 			if( $t_depth < $t_max_depth ) {
-				array_push( $v_queue, [ $t_depth + 1, $t_dst ] );
+				array_push( $v_queue, [$t_depth + 1, $t_dst] );
 			}
 		}
 
@@ -143,7 +143,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 			}
 
 			if( $t_depth < $t_max_depth ) {
-				array_push( $v_queue, [ $t_depth + 1, $t_dst ] );
+				array_push( $v_queue, [$t_depth + 1, $t_dst] );
 			}
 		}
 	}

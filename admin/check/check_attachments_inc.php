@@ -53,7 +53,7 @@ if( !$t_file_uploads_allowed ) {
 check_print_test_row(
 	'file_uploads php.ini directive is enabled',
 	ini_get_bool( 'file_uploads' ),
-	[ false => 'The file_uploads directive in php.ini must be enabled in order for file uploads to work with MantisBT.' ]
+	[false => 'The file_uploads directive in php.ini must be enabled in order for file uploads to work with MantisBT.']
 );
 
 check_print_info_row(
@@ -64,11 +64,11 @@ check_print_info_row(
 check_print_test_row(
 	'max_file_size MantisBT option is less than or equal to the upload_max_filesize directive in php.ini',
 	config_get_global( 'max_file_size' ) <= ini_get_number( 'upload_max_filesize' ),
-	[ false => 'max_file_size is currently '
+	[false => 'max_file_size is currently '
 		. check_format_number( config_get_global( 'max_file_size' ) )
 		. ' which is greater than the limit of '
 		. check_format_number( ini_get_number( 'upload_max_filesize' ) )
-		. ' imposed by the php.ini directive upload_max_filesize.' ]
+		. ' imposed by the php.ini directive upload_max_filesize.']
 );
 
 $t_use_xsendfile = config_get_global( 'file_download_xsendfile_enabled' );
@@ -81,7 +81,7 @@ if( $t_use_xsendfile ) {
 	check_print_test_row(
 		'file_download_xsendfile_enabled = ON requires file_upload_method = DISK',
 		config_get_global( 'file_upload_method' ) == DISK,
-		[ false => 'X-Sendfile file downloading only works when files are stored on a disk.' ]
+		[false => 'X-Sendfile file downloading only works when files are stored on a disk.']
 	);
 
 	$t_xsendfile_header_name = config_get_global( 'file_download_xsendfile_header_name' );

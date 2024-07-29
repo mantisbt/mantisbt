@@ -103,7 +103,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id, $t_select );
 		ApiObjectFactory::throwIfFault( $t_issue );
 
-		$t_result = [ 'issues' => [ $t_issue ] ];
+		$t_result = ['issues' => [$t_issue]];
 	} else {
 		$t_page_number = $p_request->getParam( 'page', 1 );
 		$t_page_size = $p_request->getParam( 'page_size', 50 );
@@ -134,7 +134,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 				'', '', $t_project_id, FILTER_STANDARD_ANY, $t_page_number, $t_page_size, $t_select );
 		}
 
-		$t_result = [ 'issues' => $t_issues ];
+		$t_result = ['issues' => $t_issues];
 	}
 
 	$t_etag = mc_issue_hash( $t_issue_id, $t_result );
@@ -176,7 +176,7 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		$t_issue['files'] = files_base64_to_temp( $t_issue['files'] );
 	}
 
-	$t_data = [ 'payload' => [ 'issue' => $t_issue ] ];
+	$t_data = ['payload' => ['issue' => $t_issue]];
 	$t_command = new IssueAddCommand( $t_data );
 	$t_result = $t_command->execute();
 	$t_issue_id = (int)$t_result['issue_id'];
@@ -184,7 +184,7 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 	$t_created_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Issue Created with id $t_issue_id" )->
-		withJson( [ 'issue' => $t_created_issue ] );
+		withJson( ['issue' => $t_created_issue] );
 }
 
 /**
@@ -204,7 +204,7 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	ApiObjectFactory::throwIfFault( $t_issue );
 
-	$t_etag = mc_issue_hash( $t_issue_id, [ 'issues' => [ $t_issue ] ] );
+	$t_etag = mc_issue_hash( $t_issue_id, ['issues' => [$t_issue]] );
 
 	if( $p_request->hasHeader( HEADER_IF_MATCH ) ) {
 		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_MATCH );
@@ -214,7 +214,7 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		}
 	}
 
-	$t_data = [ 'query' => [ 'id' => $t_issue_id ] ];
+	$t_data = ['query' => ['id' => $t_issue_id]];
 	$t_command = new IssueDeleteCommand( $t_data );
 	$t_command->execute();
 
@@ -237,7 +237,7 @@ function rest_issue_file_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 
 	$t_data = [
-		'query' => [ 'issue_id' => $t_issue_id ],
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
 	];
 
@@ -266,7 +266,7 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 
 	$t_data = [
-		'query' => [ 'issue_id' => $t_issue_id ],
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
 	];
 
@@ -293,7 +293,7 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 
 	return $p_response
 		->withStatus( HTTP_STATUS_CREATED, "Issue Note Created with id $t_issue_id" )
-		->withJson( [ 'note' => $t_note, 'issue' => $t_issue ] );
+		->withJson( ['note' => $t_note, 'issue' => $t_issue] );
 }
 
 /**
@@ -312,7 +312,7 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_data = [
 		'query' => [
 			'id' => $t_issue_note_id,
-			'issue_id' => $t_issue_id ]
+			'issue_id' => $t_issue_id]
 	];
 
 	$t_command = new IssueNoteDeleteCommand( $t_data );
@@ -320,7 +320,7 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue Note Deleted' )->
-		withJson( [ 'issue' => $t_issue ] );
+		withJson( ['issue' => $t_issue] );
 }
 
 /**
@@ -336,7 +336,7 @@ function rest_issue_relationship_add( \Slim\Http\Request $p_request, \Slim\Http\
 	$t_issue_id = $p_args['id'];
 
 	$t_data = [
-		'query' => [ 'issue_id' => $t_issue_id ],
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
 	];
 
@@ -350,7 +350,7 @@ function rest_issue_relationship_add( \Slim\Http\Request $p_request, \Slim\Http\
 	return $p_response->withStatus(
 		HTTP_STATUS_CREATED,
 		"Issue relationship created with id $t_relationship_id" )->
-			withJson( [ 'issue' => $t_issue ] );
+			withJson( ['issue' => $t_issue] );
 }
 
 /**
@@ -371,7 +371,7 @@ function rest_issue_relationship_delete( \Slim\Http\Request $p_request, \Slim\Ht
 	$t_data = [
 		'query' => [
 			'relationship_id' => $t_relationship_id,
-			'issue_id' => $t_issue_id ]
+			'issue_id' => $t_issue_id]
 	];
 
 	$t_command = new IssueRelationshipDeleteCommand( $t_data );
@@ -379,7 +379,7 @@ function rest_issue_relationship_delete( \Slim\Http\Request $p_request, \Slim\Ht
 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue relationship deleted' )->
-		withJson( [ 'issue' => $t_issue ] );
+		withJson( ['issue' => $t_issue] );
 }
 
 /**
@@ -403,7 +403,7 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	ApiObjectFactory::throwIfFault( $t_issue );
 
-	$t_etag = mc_issue_hash( $t_issue_id, [ 'issues' => [ $t_issue ] ] );
+	$t_etag = mc_issue_hash( $t_issue_id, ['issues' => [$t_issue]] );
 
 	if( $p_request->hasHeader( HEADER_IF_MATCH ) ) {
 		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_MATCH );
@@ -429,7 +429,7 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	ApiObjectFactory::throwIfFault( $t_result );
 
 	$t_updated_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
-	$t_result = [ 'issues' => [ $t_updated_issue ] ];
+	$t_result = ['issues' => [$t_updated_issue]];
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Issue with id $t_issue_id Updated" )
 		->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, $t_result ) )
@@ -448,7 +448,7 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 	$t_data = [
-		'query' => [ 'issue_id' => $t_issue_id ],
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
 	];
 
@@ -458,7 +458,7 @@ function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Users are now monitoring issue $t_issue_id" )->
-		withJson( [ 'issues' => [ $t_issue ] ] );
+		withJson( ['issues' => [$t_issue]] );
 }
 
 /**
@@ -473,7 +473,7 @@ function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Respo
 function rest_issue_tag_attach( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'];
 	$t_data = [
-		'query' => [ 'issue_id' => $t_issue_id ],
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
 	];
 
@@ -483,7 +483,7 @@ function rest_issue_tag_attach( \Slim\Http\Request $p_request, \Slim\Http\Respon
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Tag attached to issue $t_issue_id" )->
-		withJson( [ 'issues' => [ $t_issue ] ] );
+		withJson( ['issues' => [$t_issue]] );
 }
 
 /**
@@ -502,7 +502,7 @@ function rest_issue_tag_detach( \Slim\Http\Request $p_request, \Slim\Http\Respon
 	$t_tag_id = $p_args['tag_id'];
 
 	$t_data = [
-		'query' => [ 'issue_id' => $t_issue_id, 'tag_id' => $t_tag_id ]
+		'query' => ['issue_id' => $t_issue_id, 'tag_id' => $t_tag_id]
 	];
 
 	$t_command = new TagDetachCommand( $t_data );
@@ -511,7 +511,7 @@ function rest_issue_tag_detach( \Slim\Http\Request $p_request, \Slim\Http\Respon
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Tag detached from issue $t_issue_id" )->
-		withJson( [ 'issues' => [ $t_issue ] ] );
+		withJson( ['issues' => [$t_issue]] );
 }
 
 /**
@@ -530,7 +530,7 @@ function rest_issue_files_get( \Slim\Http\Request $p_request, \Slim\Http\Respons
 	$t_file_id = isset( $p_args['file_id'] ) ? $p_args['file_id'] : null;
 
 	$t_data = [
-		'query' => [ 'issue_id' => $t_issue_id, 'file_id' => $t_file_id ]
+		'query' => ['issue_id' => $t_issue_id, 'file_id' => $t_file_id]
 	];
 
 	$t_command = new IssueFileGetCommand( $t_data );
@@ -555,7 +555,7 @@ function rest_issue_files_get( \Slim\Http\Request $p_request, \Slim\Http\Respons
 	}
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->
-		withJson( [ 'files' => $t_files ] );
+		withJson( ['files' => $t_files] );
 }
 
 /**
@@ -575,7 +575,7 @@ function files_base64_to_temp( $p_files ) {
 				throw new ClientException(
 					'File content not set',
 					ERROR_INVALID_FIELD_VALUE,
-					[ 'files' ] );
+					['files'] );
 			}
 
 			$t_raw_content = base64_decode( $t_file['content'] );

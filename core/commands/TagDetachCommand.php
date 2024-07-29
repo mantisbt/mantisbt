@@ -67,7 +67,7 @@ class TagDetachCommand extends Command {
 			throw new ClientException(
 				sprintf( "Invalid tag id '%s'", $this->tag_id ),
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'tag_id' ] );
+				['tag_id'] );
 		}
 
 		tag_ensure_exists( $this->tag_id );
@@ -82,7 +82,7 @@ class TagDetachCommand extends Command {
 	protected function process() {
 		if( tag_bug_is_attached( $this->tag_id, $this->issue_id ) ) {
 			tag_bug_detach( $this->tag_id, $this->issue_id );
-			event_signal( 'EVENT_TAG_DETACHED', [ $this->issue_id, [ $this->tag_id ] ] );
+			event_signal( 'EVENT_TAG_DETACHED', [$this->issue_id, [$this->tag_id]] );
 		}
 
 		return [];

@@ -85,27 +85,27 @@ check_print_info_row(
 check_print_test_row(
 	'Database type is supported by the version of PHP installed on this server',
 	db_check_database_support( $t_database_type ),
-	[ false => 'The current database type is set to ' . htmlentities( $t_database_type )
-		. '. The version of PHP installed on this server does not have support for this database type.' ]
+	[false => 'The current database type is set to ' . htmlentities( $t_database_type )
+		. '. The version of PHP installed on this server does not have support for this database type.']
 );
 
 if( db_is_mysql() ) {
 	check_print_test_warn_row(
 		'PHP support for legacy MySQL driver',
 		'mysql' != $t_database_type,
-		[ false => "'mysql' driver is deprecated as of PHP 5.5.0 and has been removed as of PHP 7.0.0, please use 'mysqli' instead" ]
+		[false => "'mysql' driver is deprecated as of PHP 5.5.0 and has been removed as of PHP 7.0.0, please use 'mysqli' instead"]
 	);
 
 	check_print_test_row( 'PHP support for MySQL Native Driver',
 		function_exists( 'mysqli_stmt_get_result' ),
-		[ false => 'Check that the MySQL Native Driver (mysqlnd) has been compiled into your server.' ]
+		[false => 'Check that the MySQL Native Driver (mysqlnd) has been compiled into your server.']
 	);
 
 	check_print_test_warn_row(
 		'mysqli.allow_local_infile php.ini directive is set to 0',
 		!ini_get_bool( 'mysqli.allow_local_infile' ),
-		[ false => 'mysqli.allow_local_infile should be disabled to prevent remote attackers to access local files '
-			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=23173">#23173</a>).' ]
+		[false => 'mysqli.allow_local_infile should be disabled to prevent remote attackers to access local files '
+			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=23173">#23173</a>).']
 	);
 
 }
@@ -115,7 +115,7 @@ if( db_is_mssql() ) {
 	check_print_test_warn_row(
 		'PHP support for Microsoft SQL Server driver',
 		'mssql' != $t_database_type,
-		[ false => "'mssql' driver is no longer supported in PHP >= 5.3, please use 'mssqlnative' instead" ]
+		[false => "'mssql' driver is no longer supported in PHP >= 5.3, please use 'mssqlnative' instead"]
 	);
 
 	$t_mssql_textsize = ini_get_number( 'mssql.textsize' );
@@ -127,9 +127,9 @@ if( db_is_mssql() ) {
 	check_print_test_warn_row(
 		'mssql.textsize php.ini directive is set to -1',
 		$t_mssql_textsize == -1,
-		[ false => 'The value of the mssql.textsize directive is currently '
+		[false => 'The value of the mssql.textsize directive is currently '
 			. htmlentities( $t_mssql_textsize )
-			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' ]
+			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.']
 	);
 
 	$t_mssql_textlimit = ini_get_number( 'mssql.textlimit' );
@@ -141,9 +141,9 @@ if( db_is_mssql() ) {
 	check_print_test_warn_row(
 		'mssql.textlimit php.ini directive is set to -1',
 		$t_mssql_textlimit == -1,
-		[ false => 'The value of the mssql.textlimit directive is currently '
+		[false => 'The value of the mssql.textlimit directive is currently '
 			. htmlentities( $t_mssql_textlimit )
-			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' ]
+			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.']
 	);
 }
 
@@ -227,18 +227,18 @@ if( db_is_mysql() ) {
 	# @TODO consider using https://endoflife.date/mysql to retrieve this data
 	$t_versions = [
 		# Series => Type, Version when GA status was achieved, GA date
-		'5.0' => [ 'GA', '5.0.15', '2005-10-19' ],
-		'5.1' => [ 'GA', '5.1.30', '2008-11-14' ],
-		'5.4' => [ 'Discontinued' ],
-		'5.5' => [ 'GA', '5.5.8', '2010-12-03' ],
-		'5.6' => [ 'GA', '5.6.10', '2013-02-05' ],
-		'5.7' => [ 'GA', '5.7.9', '2015-10-21' ],
-		'6.0' => [ 'Discontinued' ],
-		'8.0' => [ 'GA', '8.0.11', '2018-04-19' ],
-		'8.1' => [ 'Innovation', '8.1.0', '2023-07-18' ],
-		'8.2' => [ 'Innovation', '8.2.0', '2023-10-25' ],
-		'8.3' => [ 'Innovation', '8.3.0', '2024-01-16' ],
-		'8.4' => [ 'LTS', '8.4.0', '2024-04-30' ],
+		'5.0' => ['GA', '5.0.15', '2005-10-19'],
+		'5.1' => ['GA', '5.1.30', '2008-11-14'],
+		'5.4' => ['Discontinued'],
+		'5.5' => ['GA', '5.5.8', '2010-12-03'],
+		'5.6' => ['GA', '5.6.10', '2013-02-05'],
+		'5.7' => ['GA', '5.7.9', '2015-10-21'],
+		'6.0' => ['Discontinued'],
+		'8.0' => ['GA', '8.0.11', '2018-04-19'],
+		'8.1' => ['Innovation', '8.1.0', '2023-07-18'],
+		'8.2' => ['Innovation', '8.2.0', '2023-10-25'],
+		'8.3' => ['Innovation', '8.3.0', '2024-01-16'],
+		'8.4' => ['LTS', '8.4.0', '2024-04-30'],
 	];
 
 	$t_support_url = 'https://www.mysql.com/support/supportedplatforms/';
@@ -375,12 +375,12 @@ if( db_is_mysql() ) {
 			# Major version is higher than the most recent in array - assume we're supported
 			$t_date_eol = new DateTime;
 			$t_date_eol = $t_date_eol->add( new DateInterval( 'P1Y' ) )->format( $t_date_format );
-			$t_assume = [ 'more recent', $t_version, 'supported' ];
+			$t_assume = ['more recent', $t_version, 'supported'];
 		} else {
 			# Assume EOL
 			$t_date_eol = null;
 			end( $t_versions );
-			$t_assume = [ 'older', key( $t_versions ), 'at end of life' ];
+			$t_assume = ['older', key( $t_versions ), 'at end of life'];
 		}
 
 		check_print_test_warn_row(
@@ -435,13 +435,13 @@ if( db_is_mysql() ) {
 	$t_query = 'SELECT default_collation_name
 		FROM information_schema.schemata
 		WHERE schema_name = ' . db_param();
-	$t_collation = db_result( db_query( $t_query, [ $g_database_name ] ) );
+	$t_collation = db_result( db_query( $t_query, [$g_database_name] ) );
 	check_print_test_row(
 		'Database default collation is UTF-8',
 		check_is_collation_utf8( $t_collation ),
-		[ false => 'Database is using '
+		[false => 'Database is using '
 			. htmlentities( $t_collation )
-			. ' collation where UTF-8 collation is required.' ]
+			. ' collation where UTF-8 collation is required.']
 	);
 
 	$t_table_regex = '/^'
@@ -456,9 +456,9 @@ if( db_is_mysql() ) {
 			check_print_test_row(
 				'Table <em>' . htmlentities( $t_row['name'] ) . '</em> is using UTF-8 collation',
 				check_is_collation_utf8( $t_row['collation'] ),
-				[ false => 'Table ' . htmlentities( $t_row['name'] )
+				[false => 'Table ' . htmlentities( $t_row['name'] )
 					. ' is using ' . htmlentities( $t_row['collation'] )
-					. ' collation where UTF-8 collation is required.' ]
+					. ' collation where UTF-8 collation is required.']
 			);
 		}
 	}
@@ -476,11 +476,11 @@ if( db_is_mysql() ) {
 					. '</em> on table <em>' . htmlentities( $t_table )
 					. '</em> is using UTF-8 collation',
 					check_is_collation_utf8( $t_row['collation'] ),
-					[ false => 'Text column ' . htmlentities( $t_row['field'] )
+					[false => 'Text column ' . htmlentities( $t_row['field'] )
 						. ' of type ' . $t_row['type']
 						. ' on table ' . htmlentities( $t_table )
 						. ' is using ' . htmlentities( $t_row['collation'] )
-						. ' collation where UTF-8 collation is required.' ]
+						. ' collation where UTF-8 collation is required.']
 				);
 			}
 		}

@@ -94,15 +94,15 @@ function check_pgsql_bool_columns() {
 
 	# Build the list of "L" type columns as of schema version 51
 	$t_bool_columns = [
-		'bug'             => [ 'sticky' ],
-		'custom_field'    => [ 'advanced', 'require_report', 'require_update', 'display_report', 'display_update', 'require_resolved', 'display_resolved', 'display_closed', 'require_closed' ],
-		'filters'         => [ 'is_public' ],
-		'news'            => [ 'announcement' ],
-		'project'         => [ 'enabled' ],
-		'project_version' => [ 'released' ],
-		'sponsorship'     => [ 'paid' ],
-		'user_pref'       => [ 'advanced_report', 'advanced_view', 'advanced_update', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority' ],
-		'user'            => [ 'enabled', 'protected' ],
+		'bug'             => ['sticky'],
+		'custom_field'    => ['advanced', 'require_report', 'require_update', 'display_report', 'display_update', 'require_resolved', 'display_resolved', 'display_closed', 'require_closed'],
+		'filters'         => ['is_public'],
+		'news'            => ['announcement'],
+		'project'         => ['enabled'],
+		'project_version' => ['released'],
+		'sponsorship'     => ['paid'],
+		'user_pref'       => ['advanced_report', 'advanced_view', 'advanced_update', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority'],
+		'user'            => ['enabled', 'protected'],
 	];
 
 	# Generate SQL to check columns against schema
@@ -595,12 +595,12 @@ function install_update_history_long_custom_fields() {
 	# Build list of standard fields to filter out from history
 	# This is as per result of columns_get_standard() at the time of this schema update
 	# Fields mapping: category_id is actually logged in history as 'category'
-	$t_standard_fields = [ 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'eta', 'os',
+	$t_standard_fields = ['id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'eta', 'os',
 								'reproducibility', 'status', 'resolution', 'projection', 'category', 'date_submitted',
 								'last_updated', 'os_build', 'platform', 'version', 'fixed_in_version', 'target_version',
 								'build', 'view_state', 'summary', 'sponsorship_total', 'due_date', 'description',
 								'steps_to_reproduce', 'additional_information', 'attachment_count', 'bugnotes_count',
-								'selection', 'edit', 'overdue' ];
+								'selection', 'edit', 'overdue'];
 	$t_field_list = '';
 	foreach( $t_standard_fields as $t_field ) {
 		$t_field_list .= "'$t_field', ";
@@ -800,7 +800,7 @@ function install_gravatar_plugin() {
  */
 function InsertData( $p_table, $p_data ) {
 	$t_query = 'INSERT INTO ' . $p_table . $p_data;
-	return [ $t_query ];
+	return [$t_query];
 }
 
 /**

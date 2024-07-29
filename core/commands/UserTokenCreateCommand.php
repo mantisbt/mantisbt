@@ -72,7 +72,7 @@ class UserTokenCreateCommand extends Command {
 				throw new ClientException(
 					"User doesn't exist",
 					ERROR_USER_BY_ID_NOT_FOUND,
-					[ $this->user_id ]
+					[$this->user_id]
 				);
 			}
 
@@ -120,7 +120,7 @@ class UserTokenCreateCommand extends Command {
 			throw new ClientException(
 				'Token name is not unique',
 				ERROR_INVALID_FIELD_VALUE,
-				[ $this->name ]
+				[$this->name]
 			);
 		}
 	}

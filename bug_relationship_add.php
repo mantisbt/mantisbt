@@ -58,10 +58,10 @@ foreach( $t_dest_bug_id_array as $t_dest_bug_id ) {
 	}
 
 	$t_data = [
-		'query' => [ 'issue_id' => $f_src_bug_id ],
+		'query' => ['issue_id' => $f_src_bug_id],
 		'payload' => [
-			'type' => [ 'id' => $f_rel_type ],
-			'issue' => [ 'id' => $t_dest_bug_id ]
+			'type' => ['id' => $f_rel_type],
+			'issue' => ['id' => $t_dest_bug_id]
 		]
 	];
 

@@ -129,7 +129,7 @@ class UserUpdateCommand extends Command {
 		# User Data
 		$t_user = $this->payload( 'user' );
 		if( is_null( $t_user ) ) {
-			throw new ClientException( 'Missing user data', ERROR_EMPTY_FIELD, [ 'user' ] );
+			throw new ClientException( 'Missing user data', ERROR_EMPTY_FIELD, ['user'] );
 		}
 
 		# Protected
@@ -304,12 +304,12 @@ class UserUpdateCommand extends Command {
 			email_user_changed( $this->user_id, $this->old_user, $this->new_user );
 		}
 
-		event_signal( 'EVENT_MANAGE_USER_UPDATE', [ $this->user_id ] );
+		event_signal( 'EVENT_MANAGE_USER_UPDATE', [$this->user_id] );
 
 		user_clear_cache( $this->user_id );
-		$t_select = [ 'id', 'name', 'real_name', 'email', 'access_level', 'enabled', 'protected' ];
+		$t_select = ['id', 'name', 'real_name', 'email', 'access_level', 'enabled', 'protected'];
 		$t_user = mci_user_get( $this->user_id, $t_select );
-		return [ 'user' => $t_user ];
+		return ['user' => $t_user];
 	}
 
 	/**
@@ -339,7 +339,7 @@ class UserUpdateCommand extends Command {
 			$p_user['enabled'],
 			$p_user['protected'],
 			$p_user['real_name'],
-			$p_user['id'] ];
+			$p_user['id']];
 
 		db_query( $t_query, $t_query_params );
 	}

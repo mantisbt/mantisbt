@@ -209,7 +209,7 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			return ApiObjectFactory::faultServerError( 'Invalid file type ' . $p_type . ' .' );
 	}
 
-	$t_result = db_query( $t_query, [ $p_file_id ] );
+	$t_result = db_query( $t_query, [$p_file_id] );
 
 	if( $t_result->EOF ) {
 		return ApiObjectFactory::faultNotFound( 'Unable to find an attachment with type ' . $p_type . ' and id ' .

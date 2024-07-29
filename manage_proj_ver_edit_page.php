@@ -136,7 +136,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 					</label>
 				</td>
 			</tr>
-			<?php event_signal( 'EVENT_MANAGE_VERSION_UPDATE_FORM', [ $t_version->id ] ); ?>
+			<?php event_signal( 'EVENT_MANAGE_VERSION_UPDATE_FORM', [$t_version->id] ); ?>
 		</fieldset>
 		</table>
 			</div>

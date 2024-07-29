@@ -719,7 +719,7 @@ function summary_print_by_project( array $p_projects = [], int $p_level = 0, arr
 	foreach( $p_projects as $t_project ) {
 		$t_name = str_repeat( '&raquo; ', $p_level ) . project_get_name( $t_project );
 
-		$t_pdata = isset( $p_cache[$t_project] ) ? $p_cache[$t_project] : [ 'open' => 0, 'resolved' => 0, 'closed' => 0 ];
+		$t_pdata = isset( $p_cache[$t_project] ) ? $p_cache[$t_project] : ['open' => 0, 'resolved' => 0, 'closed' => 0];
 
 		$t_bugs_open = isset( $t_pdata['open'] ) ? $t_pdata['open'] : 0;
 		$t_bugs_resolved = isset( $t_pdata['resolved'] ) ? $t_pdata['resolved'] : 0;
@@ -1268,7 +1268,7 @@ function summary_get_filter() {
 			# TODO: for summary, as default, we want to show all status.
 			# Until a better implementation for default/empty filters, we need to adjust here
 			$t_filter = filter_get_default();
-			$t_filter[FILTER_PROPERTY_HIDE_STATUS] = [ META_FILTER_NONE ];
+			$t_filter[FILTER_PROPERTY_HIDE_STATUS] = [META_FILTER_NONE];
 			$t_filter['_view_type'] = FILTER_VIEW_TYPE_SIMPLE;
 	}
 	return $t_filter;

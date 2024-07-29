@@ -89,7 +89,7 @@ foreach( $f_bug_arr as $t_key => $t_bug_id ) {
 	if( isset( $t_projects_bugs[$t_bug->project_id] ) ) {
 		$t_projects_bugs[$t_bug->project_id][] = $t_bug_id;
 	} else {
-		$t_projects_bugs[$t_bug->project_id] = [ $t_bug_id ];
+		$t_projects_bugs[$t_bug->project_id] = [$t_bug_id];
 	}
 }
 

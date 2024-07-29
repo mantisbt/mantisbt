@@ -159,13 +159,13 @@ function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
 	}
 
-	$t_data = [ 'payload' => $t_payload ];
+	$t_data = ['payload' => $t_payload];
 	$t_command = new UserCreateCommand( $t_data );
 	$t_result = $t_command->execute();
 	$t_user_id = $t_result['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "User created with id $t_user_id" )->
-		withJson( [ 'user' => mci_user_get( $t_user_id ) ] );
+		withJson( ['user' => mci_user_get( $t_user_id )] );
 }
 
 /**
@@ -340,7 +340,7 @@ function rest_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 	$t_user_id = $p_args['id'];
 
 	$t_data = [
-		'query' => [ 'id' => $t_user_id ]
+		'query' => ['id' => $t_user_id]
 	];
 
 	$t_command = new UserDeleteCommand( $t_data );
@@ -364,7 +364,7 @@ function rest_user_reset_password( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_user_id = $p_args['id'];
 
 	$t_data = [
-		'query' => [ 'id' => $t_user_id ]
+		'query' => ['id' => $t_user_id]
 	];
 
 	$t_command = new UserResetPasswordCommand( $t_data );

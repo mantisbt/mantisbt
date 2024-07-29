@@ -42,7 +42,7 @@ $f_text = gpc_get_string( 'bugnote_text', '' );
 $f_duration = gpc_get_string( 'time_tracking', '0:00' );
 $f_files = gpc_get_file( 'ufile', [] );
 
-$t_query = [ 'issue_id' => $f_bug_id ];
+$t_query = ['issue_id' => $f_bug_id];
 
 $t_payload = [
 	'text' => $f_text,

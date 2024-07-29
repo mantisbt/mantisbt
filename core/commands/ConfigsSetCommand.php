@@ -85,7 +85,7 @@ class ConfigsSetCommand extends Command {
 			throw new ClientException(
 				"Project doesn't exist",
 				ERROR_PROJECT_NOT_FOUND,
-				[ $this->project_id ] );
+				[$this->project_id] );
 		}
 
 		# This check is redundant if command is limited to administrator, but it is
@@ -105,7 +105,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					'Config option not provided',
 					ERROR_EMPTY_FIELD,
-					[ 'option' ] );
+					['option'] );
 			}
 
 			$t_name = $t_config['option'];
@@ -133,7 +133,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					sprintf( "Config '%s' is global and cannot be set", $t_name ),
 					ERROR_INVALID_FIELD_VALUE,
-					[ $t_name ] );
+					[$t_name] );
 			}
 
 			if( !isset( $t_config['value'] ) ) {
@@ -161,7 +161,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					'Invalid parameters for edit action',
 					ERROR_INVALID_FIELD_VALUE,
-					[ 'edit_action' ] );
+					['edit_action'] );
 			}
 		}
 	}
@@ -224,7 +224,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					sprintf( "Enum '%s' missing 'id' or 'name' field for an entry", $p_enum_name ),
 					ERROR_INVALID_FIELD_VALUE,
-					[ $p_enum_name ]
+					[$p_enum_name]
 				);
 			}
 
@@ -232,7 +232,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					sprintf( "Enum '%s' has 'id' that is not numeric", $p_enum_name ),
 					ERROR_INVALID_FIELD_VALUE,
-					[ $p_enum_name ]
+					[$p_enum_name]
 				);
 			}
 
@@ -240,7 +240,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					sprintf( "Enum '%s' has 'label' property which is not supported", $p_enum_name ),
 					ERROR_INVALID_FIELD_VALUE,
-					[ $p_enum_name ]
+					[$p_enum_name]
 				);
 			}
 
@@ -248,7 +248,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					sprintf( "Enum '%s' has invalid enum entry name '%s'.", $p_enum_name, $t_entry['name'] ),
 					ERROR_INVALID_FIELD_VALUE,
-					[ $p_enum_name ]
+					[$p_enum_name]
 				);
 			}
 

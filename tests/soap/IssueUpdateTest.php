@@ -197,7 +197,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 1, count( $t_issue_with_noteAfterUpdate->notes ) );
 
 		$t_issue_with_one_new_note = $t_issue_with_noteAfterUpdate;
-		$t_issue_with_one_new_note->notes[] = [ 'text' => 'second note', 'note_type' => 2, 'note_attr' => 'attr_value' ];
+		$t_issue_with_one_new_note->notes[] = ['text' => 'second note', 'note_type' => 2, 'note_attr' => 'attr_value'];
 
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_with_one_new_note );
 
@@ -410,19 +410,19 @@ class IssueUpdateTest extends SoapBase {
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# update from 0 to 2 tags -> test attaching tags
-		$t_issue->tags =  [ $t_tag1, $t_tag2 ];
+		$t_issue->tags =  [$t_tag1, $t_tag2];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		self::assertEquals( 2, count( $t_issue->tags ) );
 
 		# update from 2 to 1 tags -> test partially detaching tags
-		$t_issue->tags =  [ $t_tag1 ];
+		$t_issue->tags =  [$t_tag1];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		self::assertEquals( 1, count( $t_issue->tags ) );
 
 		# update from 1 to 2 tags -> test partially attaching tags
-		$t_issue->tags =  [ $t_tag1, $t_tag2 ];
+		$t_issue->tags =  [$t_tag1, $t_tag2];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		self::assertEquals( 2, count( $t_issue->tags ) );
@@ -449,7 +449,7 @@ class IssueUpdateTest extends SoapBase {
 		self::assertEquals( 0, count( $t_issue->monitors ) );
 
 		# update with this user as monitor -> should be added
-		$t_issue->monitors =  [  [ 'id' => $this->userId]];
+		$t_issue->monitors =  [['id' => $this->userId]];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		self::assertEquals( 1, count( $t_issue->monitors ) );

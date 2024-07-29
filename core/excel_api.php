@@ -191,7 +191,7 @@ function excel_prepare_number( $p_value ) {
  */
 function excel_get_cell( $p_value, $p_type, array $p_attributes = [] ) {
 	if ( !is_int( $p_value ) ) {
-		$t_value = str_replace( [ '&', "\n", '<', '>' ], [ '&amp;', '&#10;', '&lt;', '&gt;' ], $p_value );
+		$t_value = str_replace( ['&', "\n", '<', '>'], ['&amp;', '&#10;', '&lt;', '&gt;'], $p_value );
 	} else {
 		$t_value = $p_value;
 	}

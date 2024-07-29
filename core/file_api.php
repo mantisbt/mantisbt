@@ -177,7 +177,7 @@ function file_bug_attachment_count( $p_bug_id ) {
 
 	# If it's not in cache, load the value
 	if( !isset( $g_cache_file_count[$p_bug_id] ) ) {
-		file_bug_attachment_count_cache( [ (int)$p_bug_id ] );
+		file_bug_attachment_count_cache( [(int)$p_bug_id] );
 	}
 
 	return $g_cache_file_count[$p_bug_id];
@@ -571,7 +571,7 @@ function file_delete_attachments( $p_bug_id ) {
 	# Delete files from disk
 	db_param_push();
 	$t_query = 'SELECT diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param();
-	$t_result = db_query( $t_query, [ $p_bug_id ] );
+	$t_result = db_query( $t_query, [$p_bug_id] );
 
 	$t_file_count = db_num_rows( $t_result );
 	if( 0 == $t_file_count ) {
@@ -590,7 +590,7 @@ function file_delete_attachments( $p_bug_id ) {
 	# Delete the corresponding db records
 	db_param_push();
 	$t_query = 'DELETE FROM {bug_file} WHERE bug_id=' . db_param();
-	db_query( $t_query, [ $p_bug_id ] );
+	db_query( $t_query, [$p_bug_id] );
 
 	# db_query() errors on failure so:
 	return true;
@@ -608,7 +608,7 @@ function file_delete_attachments( $p_bug_id ) {
 function file_delete_bugnote_attachments( $p_bug_id, $p_bugnote_id ) {
 	db_param_push();
 	$t_query = 'SELECT id, diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param() . ' AND bugnote_id=' . db_param();
-	$t_result = db_query( $t_query, [ $p_bug_id, $p_bugnote_id ] );
+	$t_result = db_query( $t_query, [$p_bug_id, $p_bugnote_id] );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		file_delete( (int)$t_row['id'], 'bug', $p_bugnote_id );
@@ -630,7 +630,7 @@ function file_link_to_bugnote( $p_file_id, $p_bugnote_id ) {
 	db_param_push();
 
 	$t_query = 'UPDATE {bug_file} SET bugnote_id=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, [ $p_bugnote_id, $p_file_id ] );
+	db_query( $t_query, [$p_bugnote_id, $p_file_id] );
 }
 
 /**
@@ -648,7 +648,7 @@ function file_delete_project_files( $p_project_id ) {
 		# Delete files from disk
 		db_param_push();
 		$t_query = 'SELECT diskfile, filename FROM {project_file} WHERE project_id=' . db_param();
-		$t_result = db_query( $t_query, [ (int)$p_project_id ] );
+		$t_result = db_query( $t_query, [(int)$p_project_id] );
 
 		$t_file_count = db_num_rows( $t_result );
 
@@ -663,7 +663,7 @@ function file_delete_project_files( $p_project_id ) {
 	# Delete the corresponding database records
 	db_param_push();
 	$t_query = 'DELETE FROM {project_file} WHERE project_id=' . db_param();
-	db_query( $t_query, [ (int)$p_project_id ] );
+	db_query( $t_query, [(int)$p_project_id] );
 }
 
 /**
@@ -697,7 +697,7 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 
 	db_param_push();
 	$t_query = 'SELECT ' . $p_field_name . ' FROM ' . $t_bug_file_table . ' WHERE id=' . db_param();
-	$t_result = db_query( $t_query, [ (int)$p_file_id ], 1 );
+	$t_result = db_query( $t_query, [(int)$p_file_id], 1 );
 
 	return db_result( $t_result );
 }
@@ -742,7 +742,7 @@ function file_delete( $p_file_id, $p_table = 'bug', $p_bugnote_id = 0 ) {
 	$t_file_table = db_get_table( $p_table . '_file' );
 	db_param_push();
 	$t_query = 'DELETE FROM ' . $t_file_table . ' WHERE id=' . db_param();
-	db_query( $t_query, [ $c_file_id ] );
+	db_query( $t_query, [$c_file_id] );
 	return true;
 }
 
@@ -840,7 +840,7 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 			UNION
 			SELECT diskfile FROM {project_file} WHERE diskfile=' . db_param() . '
 			) f';
-	$t_result = db_query( $t_query, [ $c_name, $c_name] );
+	$t_result = db_query( $t_query, [$c_name, $c_name] );
 	$t_count = db_result( $t_result );
 
 	return ( $t_count == 0 ) && !file_exists( $c_name );
@@ -862,7 +862,7 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
 
 	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM ' . $t_file_table . ' WHERE filename=' . db_param();
-	$t_param = [ $p_name ];
+	$t_param = [$p_name];
 	if( $p_table == 'bug' ) {
 		$t_query .= ' AND bug_id=' . db_param();
 		$t_param[] = $p_bug_id;
@@ -933,7 +933,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		throw new ClientException(
 			sprintf( "Filename '%s' is too long", $t_file_name ),
 			ERROR_FILE_NAME_TOO_LONG,
-			[ $t_file_name ]
+			[$t_file_name]
 		);
 	}
 
@@ -1300,7 +1300,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			return false;
 	}
 
-	$t_result = db_query( $t_query, [ $p_file_id ] );
+	$t_result = db_query( $t_query, [$p_file_id] );
 	$t_row = db_fetch_array( $t_result );
 
 	if( $p_type == 'bug' ) {
@@ -1322,7 +1322,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 					$t_content_type = $t_file_info_type;
 				}
 
-				return [ 'type' => $t_content_type, 'content' => file_get_contents( $t_local_disk_file ) ];
+				return ['type' => $t_content_type, 'content' => file_get_contents( $t_local_disk_file )];
 			}
 			return false;
 		case DATABASE:
@@ -1332,7 +1332,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 				$t_content_type = $t_file_info_type;
 			}
 
-			return [ 'type' => $t_content_type, 'content' => $t_row['content'] ];
+			return ['type' => $t_content_type, 'content' => $t_row['content']];
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
@@ -1407,7 +1407,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 			chmod( $t_disk_file_name_to, config_get( 'attachments_file_permissions' ) );
 			# Don't pop the parameters after query execution since we're in a loop
 			db_query( $t_query_disk_attachment_update,
-				[ $t_path_to, $c_bug_id, (int)$t_row['id'] ],
+				[$t_path_to, $c_bug_id, (int)$t_row['id']],
 				-1, -1,
 				false
 			);
@@ -1433,7 +1433,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 	db_param_push();
 	$t_query = 'SELECT * FROM {bug_file} WHERE bug_id = ' . db_param();
-	$t_result = db_query( $t_query, [ $p_source_bug_id ] );
+	$t_result = db_query( $t_query, [$p_source_bug_id] );
 	$t_count = db_num_rows( $t_result );
 
 	$t_project_id = bug_get_field( $p_source_bug_id, 'project_id' );

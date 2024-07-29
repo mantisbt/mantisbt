@@ -203,35 +203,35 @@ class ConfigParserTest extends MantisCoreBase {
 	 */
 	public function providerScalarTypes() {
 		return [
-			'Integer Zero' => [ '0', IsType::TYPE_INT ],
-			'Integer One' => [ '1', IsType::TYPE_INT ],
-			'Integer with whitespace' => [ " 1\n", IsType::TYPE_INT ],
-			'Integer negative' => [ '-1', IsType::TYPE_INT ],
-			'Integer positive' => [ '+1', IsType::TYPE_INT ],
+			'Integer Zero' => ['0', IsType::TYPE_INT],
+			'Integer One' => ['1', IsType::TYPE_INT],
+			'Integer with whitespace' => [" 1\n", IsType::TYPE_INT],
+			'Integer negative' => ['-1', IsType::TYPE_INT],
+			'Integer positive' => ['+1', IsType::TYPE_INT],
 
-			'Float' => [ '1.1', IsType::TYPE_FLOAT ],
-			'Float negative' => [ '-1.1', IsType::TYPE_FLOAT ],
-			'Float positive' => [ '+1.1', IsType::TYPE_FLOAT ],
-			'Float scientific' => [ '1.2e3', IsType::TYPE_FLOAT ],
+			'Float' => ['1.1', IsType::TYPE_FLOAT],
+			'Float negative' => ['-1.1', IsType::TYPE_FLOAT],
+			'Float positive' => ['+1.1', IsType::TYPE_FLOAT],
+			'Float scientific' => ['1.2e3', IsType::TYPE_FLOAT],
 
-			'String empty double-quote' => [ '""', IsType::TYPE_STRING ],
-			'String empty single-quote' => [ "''", IsType::TYPE_STRING ],
-			'String whitespace' => [ '" "', IsType::TYPE_STRING ],
-			'String number double-quote' => [ '"1"', IsType::TYPE_STRING ],
-			'String number single-quote' => [ "'1'", IsType::TYPE_STRING ],
+			'String empty double-quote' => ['""', IsType::TYPE_STRING],
+			'String empty single-quote' => ["''", IsType::TYPE_STRING],
+			'String whitespace' => ['" "', IsType::TYPE_STRING],
+			'String number double-quote' => ['"1"', IsType::TYPE_STRING],
+			'String number single-quote' => ["'1'", IsType::TYPE_STRING],
 
-			'Built-in string literal null' => [ 'null', IsType::TYPE_NULL ],
-			'Built-in string literal false' => [ 'false', IsType::TYPE_BOOL ],
-			'Built-in string literal true' => [ 'true', IsType::TYPE_BOOL ],
+			'Built-in string literal null' => ['null', IsType::TYPE_NULL],
+			'Built-in string literal false' => ['false', IsType::TYPE_BOOL],
+			'Built-in string literal true' => ['true', IsType::TYPE_BOOL],
 
-			'Constant = null' => [ 'VERSION_ALL', IsType::TYPE_NULL ],
-			'Constant = false' => [ 'VERSION_FUTURE', IsType::TYPE_BOOL ],
-			'Constant = true' => [ 'VERSION_RELEASED', IsType::TYPE_BOOL ],
-			'Constant = 0' => [ 'OFF', IsType::TYPE_INT ],
-			'Constant integer' => [ 'DEVELOPER', IsType::TYPE_INT ],
-			'Constant integer with whitespace' => [ " DEVELOPER\n", IsType::TYPE_INT ],
-			'Constant string' => [ 'MANTIS_VERSION', IsType::TYPE_STRING ],
-			'Constant string with whitespace' => [ " MANTIS_VERSION\n", IsType::TYPE_STRING ],
+			'Constant = null' => ['VERSION_ALL', IsType::TYPE_NULL],
+			'Constant = false' => ['VERSION_FUTURE', IsType::TYPE_BOOL],
+			'Constant = true' => ['VERSION_RELEASED', IsType::TYPE_BOOL],
+			'Constant = 0' => ['OFF', IsType::TYPE_INT],
+			'Constant integer' => ['DEVELOPER', IsType::TYPE_INT],
+			'Constant integer with whitespace' => [" DEVELOPER\n", IsType::TYPE_INT],
+			'Constant string' => ['MANTIS_VERSION', IsType::TYPE_STRING],
+			'Constant string with whitespace' => [" MANTIS_VERSION\n", IsType::TYPE_STRING],
 		];
 	}
 
@@ -257,12 +257,12 @@ EOT
 			/**
 			 * Simple arrays
 			 */
-			'SimpleArray empty' => [ "array( )" ],
-			'SimpleArray one element' => [ "array( 1 )" ],
-			'SimpleArray several elements, trailing delimiter' => [ "array( 1, 2, )" ],
-			'SimpleArray formatted whitespace' => [ "array ( 1, 2, 3 )" ],
-			'SimpleArray no whitespace' => [ "array(1,2,3)" ],
-			'SimpleArray arbitrary whitespace' => [ "  array(\n1,\t2  ,    3 )\r  " ],
+			'SimpleArray empty' => ["array( )"],
+			'SimpleArray one element' => ["array( 1 )"],
+			'SimpleArray several elements, trailing delimiter' => ["array( 1, 2, )"],
+			'SimpleArray formatted whitespace' => ["array ( 1, 2, 3 )"],
+			'SimpleArray no whitespace' => ["array(1,2,3)"],
+			'SimpleArray arbitrary whitespace' => ["  array(\n1,\t2  ,    3 )\r  "],
 			'SimpleArray mixed types, quotes' => [
 <<<'EOT'
 array( 1, 'a', "b" )
@@ -277,14 +277,14 @@ EOT
 			/**
 			 * Associative arrays
 			 */
-			'AssocArray' => [ "array( 0 => 'a', 1 => 'b' )" ],
-			'AssocArray, unordered keys' => [ "array( 5 => 'a', 2 => 'b' )" ],
-			'AssocArray, text keys' => [ "array( 'i' => 'a', 'j' => 'b' )" ],
-			'AssocArray mixed keys' => [ "array( 'i' => 'a', 1 => 'b', 'j' => 'c', 7 => 'd' )" ],
-			'AssocArray mixed, keys omitted' => [ "array( 'i' => 'a', 1 => 'b', 'c', 'j' => 'd' )" ],
+			'AssocArray' => ["array( 0 => 'a', 1 => 'b' )"],
+			'AssocArray, unordered keys' => ["array( 5 => 'a', 2 => 'b' )"],
+			'AssocArray, text keys' => ["array( 'i' => 'a', 'j' => 'b' )"],
+			'AssocArray mixed keys' => ["array( 'i' => 'a', 1 => 'b', 'j' => 'c', 7 => 'd' )"],
+			'AssocArray mixed, keys omitted' => ["array( 'i' => 'a', 1 => 'b', 'c', 'j' => 'd' )"],
 
 			# mixed associative, overwriting implicit keys
-			'AssocArray mixed, overwritten implicit keys' => [ "array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )" ],
+			'AssocArray mixed, overwritten implicit keys' => ["array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )"],
 
 			'AssocArray mixed' => [
 <<<'EOT'
@@ -299,7 +299,7 @@ EOT
 			 */
 
 			# e.g. handle_bug_threshold
-			'Constants as array values' => [ "array( DEVELOPER, MANAGER )" ],
+			'Constants as array values' => ["array( DEVELOPER, MANAGER )"],
 
 				# e.g. status_enum_workflow
 			'Constants as array keys' => [
@@ -312,7 +312,7 @@ EOT
 			],
 
 			# e.g. set_status_threshold
-			'Constants as both key and value' => [ 'array( NEW_ => REPORTER )' ],
+			'Constants as both key and value' => ['array( NEW_ => REPORTER )'],
 
 			/**
 			 * Multidimensional arrays

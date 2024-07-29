@@ -63,7 +63,7 @@ class ConfigsGetCommand extends Command {
 	function validate() {
 		$this->options = $this->query( 'option' );
 		if( !is_array( $this->options ) ) {
-			$this->options = [ $this->options ];
+			$this->options = [$this->options];
 		}
 
 		$this->project_id = $this->query( 'project_id' );
@@ -75,7 +75,7 @@ class ConfigsGetCommand extends Command {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
 				ERROR_PROJECT_NOT_FOUND,
-				[ $this->project_id ] );
+				[$this->project_id] );
 		}
 
 		$this->user_id = $this->query( 'user_id' );
@@ -94,7 +94,7 @@ class ConfigsGetCommand extends Command {
 				throw new ClientException(
 					sprintf( "User '%d' not found.", $this->user_id ),
 					ERROR_USER_BY_ID_NOT_FOUND,
-					[ $this->user_id ] );
+					[$this->user_id] );
 			}
 		}
 	}
@@ -134,7 +134,7 @@ class ConfigsGetCommand extends Command {
 
 		# wrap all configs into a configs attribute to allow adding other information if needed in the future
 		# that belongs outside the configs response.
-		return [ 'configs' => $t_configs ];
+		return ['configs' => $t_configs];
 	}
 
 	/**
@@ -163,7 +163,7 @@ class ConfigsGetCommand extends Command {
 
 		foreach( $t_enum_assoc_array as $t_id => $t_name ) {
 			$t_label = MantisEnum::getLocalizedLabel( $p_enum_string_value, $t_localized_enum_string, $t_id );
-			$t_enum_entry = [ 'id' => $t_id, 'name' => $t_name, 'label' => $t_label ];
+			$t_enum_entry = ['id' => $t_id, 'name' => $t_name, 'label' => $t_label];
 			$t_enum_array[] = $t_enum_entry;
 		}
 

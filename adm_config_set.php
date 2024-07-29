@@ -98,8 +98,8 @@ if( $t_type != CONFIG_TYPE_STRING ) {
 
 $t_data = [
 	'payload' => [
-		'user' => [ 'id' => $f_user_id ],
-		'project' => [ 'id' => $f_project_id ],
+		'user' => ['id' => $f_user_id],
+		'project' => ['id' => $f_project_id],
 		'configs' => [
 			[
 				'option' => $f_config_option,

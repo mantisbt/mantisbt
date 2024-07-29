@@ -487,8 +487,8 @@ function create_cumulative_bydate( array $p_filter = null ) {
 
 	# For this metric to make sense, we need to remove the filter properties related to status
 	if( $p_filter ) {
-		$p_filter[FILTER_PROPERTY_STATUS] = [ META_FILTER_ANY ];
-		$p_filter[FILTER_PROPERTY_HIDE_STATUS] = [ META_FILTER_NONE ];
+		$p_filter[FILTER_PROPERTY_STATUS] = [META_FILTER_ANY];
+		$p_filter[FILTER_PROPERTY_HIDE_STATUS] = [META_FILTER_NONE];
 	}
 
 	# Get all the submitted dates
@@ -511,7 +511,7 @@ function create_cumulative_bydate( array $p_filter = null ) {
 	$t_calc_metrics = [];
 	while( $t_row = $t_query->fetch() ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-		$t_calc_metrics[$v_date_index] = [ $v_num, 0, 0 ];
+		$t_calc_metrics[$v_date_index] = [$v_num, 0, 0];
 	}
 
 	# Get a count of resolved issues.
@@ -554,7 +554,7 @@ function create_cumulative_bydate( array $p_filter = null ) {
 		if( isset( $t_calc_metrics[$v_date_index] ) ) {
 			$t_calc_metrics[$v_date_index][1] = $v_num;
 		} else {
-			$t_calc_metrics[$v_date_index] = [ 0, $v_num, 0 ];
+			$t_calc_metrics[$v_date_index] = [0, $v_num, 0];
 		}
 	}
 

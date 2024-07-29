@@ -153,7 +153,7 @@ class FilterConverter {
 	private function convertEnumToJson( &$p_criteria, $p_field, $p_enum_name ) {
 		if( isset( $p_criteria[$p_field] ) ) {
 			if( !is_array( $p_criteria[$p_field] ) ) {
-				$p_criteria[$p_field] = [ $p_criteria[$p_field] ];
+				$p_criteria[$p_field] = [$p_criteria[$p_field]];
 			}
 
 			$t_result = [];
@@ -192,10 +192,10 @@ class FilterConverter {
 						unset( $p_criteria[$p_field] );
 						return;
 					case META_FILTER_NONE:
-						$t_result[] = [ 'id' => '[none]' ];
+						$t_result[] = ['id' => '[none]'];
 						break;
 					default:
-						$t_result[] = [ 'name' => $t_value ];
+						$t_result[] = ['name' => $t_value];
 						break;
 				}
 			}
@@ -222,10 +222,10 @@ class FilterConverter {
 						unset( $p_criteria[$p_field] );
 						return;
 					case META_FILTER_NONE:
-						$t_result[] = [ 'id' => '[none]' ];
+						$t_result[] = ['id' => '[none]'];
 						break;
 					case META_FILTER_MYSELF:
-						$t_result[] = [ 'id' => '[myself]' ];
+						$t_result[] = ['id' => '[myself]'];
 						break;
 					default:
 						$t_result[] = mci_account_get_array_by_id( $t_user );
@@ -279,8 +279,8 @@ class FilterConverter {
 
 					$t_def = custom_field_get_definition( $t_cf_id );
 					$t_cf = [
-						'field' => [ 'id' => (int)$t_cf_id, 'name' => $t_def['name'] ],
-						'value' => $t_values ];
+						'field' => ['id' => (int)$t_cf_id, 'name' => $t_def['name']],
+						'value' => $t_values];
 				}
 
 				if( !empty( $t_values ) ) {
@@ -316,7 +316,7 @@ class FilterConverter {
 							return;
 						}
 
-						$t_result[] = [ 'id' => '[current]' ];
+						$t_result[] = ['id' => '[current]'];
 						break;
 					default:
 						$t_result[] = mci_project_as_array_by_id( $t_project_id );
@@ -409,7 +409,7 @@ class FilterConverter {
 
 		if( isset( $p_criteria['sort'] ) ) {
 			$t_sort_entry = [];
-			$t_sort_entry['field'] = [ 'name' => $p_criteria['sort'] ];
+			$t_sort_entry['field'] = ['name' => $p_criteria['sort']];
 			unset( $p_criteria['sort'] );
 
 			if( isset( $p_criteria['dir'] ) ) {
@@ -418,7 +418,7 @@ class FilterConverter {
 			}
 
 			if( $t_sort_entry['field']['name'] != 'last_updated' || $t_sort_entry['dir'] != 'DESC' ) {
-				$t_result['fields'] = [ $t_sort_entry ];
+				$t_result['fields'] = [$t_sort_entry];
 			}
 		}
 
@@ -454,7 +454,7 @@ class FilterConverter {
 				$t_result[] = [
 					'id' => $t_tag_row['id'],
 					'name' => $t_tag_row['name'],
-					'owner' => mci_account_get_array_by_id( $t_tag_row['user_id'] ) ];
+					'owner' => mci_account_get_array_by_id( $t_tag_row['user_id'] )];
 			}
 
 			unset( $p_criteria[$t_field ] );
@@ -526,7 +526,7 @@ class FilterConverter {
 			if( $t_issue_id != 0 ) {
 				$t_result = [
 					'type' => relationship_get_name_for_api( $p_criteria['relationship_type'] ),
-					'issue' => [ 'id' => $t_issue_id ]
+					'issue' => ['id' => $t_issue_id]
 				];
 
 				$p_criteria['relationship'] = $t_result;
@@ -656,7 +656,7 @@ class FilterConverter {
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
 
-				$p_criteria['created_at'] = [ 'from' => $t_start_date, 'to' => $t_end_date ];
+				$p_criteria['created_at'] = ['from' => $t_start_date, 'to' => $t_end_date];
 				$this->removeDateSubmitted( $p_criteria );
 		}
 
@@ -671,7 +671,7 @@ class FilterConverter {
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
 
-			$p_criteria['updated_at'] = [ 'from' => $t_start_date, 'to' => $t_end_date ];
+			$p_criteria['updated_at'] = ['from' => $t_start_date, 'to' => $t_end_date];
 			$this->remoteDateLastUpdated( $p_criteria );
 		}
 	}

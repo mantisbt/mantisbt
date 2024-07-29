@@ -72,7 +72,7 @@ if( auth_get_current_user_id() == $f_user_id ) {
 }
 
 $t_data = [
-	'query' => [ 'id' => $f_user_id ]
+	'query' => ['id' => $f_user_id]
 ];
 
 $t_command = new UserDeleteCommand( $t_data );

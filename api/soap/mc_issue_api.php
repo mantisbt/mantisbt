@@ -150,7 +150,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 
 			$t_event['field'] = [
 				'name' => $t_field,
-				'label' => history_localize_field_name( $t_history_row['field'] ) ];
+				'label' => history_localize_field_name( $t_history_row['field'] )];
 		}
 
 		if( $t_skip ) {
@@ -159,7 +159,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 
 		$t_event['type'] = [
 			'id' => $t_type,
-			'name' => history_get_type_name( $t_history_row['type'] ) ];
+			'name' => history_get_type_name( $t_history_row['type'] )];
 
 		$t_old_value_name = 'old_value';
 		$t_new_value_name = 'new_value';
@@ -217,16 +217,16 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 				case TAG_DETACHED:
 					$t_tag = tag_get_by_name( $p_value );
 					if( $t_tag === false ) {
-						return [ 'name' => $p_value ];
+						return ['name' => $p_value];
 					}
 
-					return [ 'id' => $t_tag['id'], 'name' => $t_tag['name'] ];
+					return ['id' => $t_tag['id'], 'name' => $t_tag['name']];
 				case BUGNOTE_ADDED:
 				case BUGNOTE_DELETED:
-					return [ 'id' => (int)$p_value ];
+					return ['id' => (int)$p_value];
 				case BUGNOTE_UPDATED:
 					if( !$p_new_value ) {
-						return [ 'id' => (int)$p_value ];
+						return ['id' => (int)$p_value];
 					}
 
 					return '';
@@ -247,7 +247,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 					return $t_value;
 				case BUGNOTE_STATE_CHANGED:
 					if( $p_new_value ) {
-						return [ 'id' => (int)$p_value ];
+						return ['id' => (int)$p_value];
 					}
 
 					return mci_enum_get_array_by_id( (int)$p_value, 'view_state', $p_lang );
@@ -255,15 +255,15 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 				case BUG_REPLACE_RELATIONSHIP:
 				case BUG_DEL_RELATIONSHIP:
 					if( $p_new_value ) {
-						return [ 'id' => (int)$p_value ];
+						return ['id' => (int)$p_value];
 					}
 
 					return [
 						'id' => (int)$p_value,
 						'name' => relationship_get_name_for_api( (int)$p_value ),
-						'label' => relationship_get_description_for_history( (int)$p_value ) ];
+						'label' => relationship_get_description_for_history( (int)$p_value )];
 				case BUG_CLONED_TO:
-					return [ 'id' => (int)$p_value ];
+					return ['id' => (int)$p_value];
 			}
 
 			switch( $p_field ) {
@@ -473,7 +473,7 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 			unset( $t_related_custom_field_ids[$t_index] );
 		}
 	}
-	custom_field_cache_values( [ $p_issue_id ], $t_related_custom_field_ids );
+	custom_field_cache_values( [$p_issue_id], $t_related_custom_field_ids );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
@@ -670,7 +670,7 @@ function mci_issue_note_data_as_array( $p_bugnote_row ) {
 			if ( $t_bugnote['time_tracking'] == 0 || $t_type != 'timelog' ) {
 				unset( $t_bugnote['time_tracking'] );
 			} else {
-				$t_bugnote['time_tracking'] = [ 'duration' => db_minutes_to_hhmm( $t_bugnote['time_tracking'] ) ];
+				$t_bugnote['time_tracking'] = ['duration' => db_minutes_to_hhmm( $t_bugnote['time_tracking'] )];
 			}
 		}
 
@@ -866,7 +866,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 
 	$t_query = 'SELECT id FROM {bug} WHERE summary = ' . db_param();
 
-	$t_result = db_query( $t_query, [ $p_summary ], 1 );
+	$t_result = db_query( $t_query, [$p_summary], 1 );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return 0;
@@ -943,7 +943,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	}
 
 	$t_data = [
-		'payload' => [ 'issue' => $t_issue ]
+		'payload' => ['issue' => $t_issue]
 	];
 
 	$t_command = new IssueAddCommand( $t_data );
@@ -1288,7 +1288,7 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_data = [ 'query' => [ 'id' => $p_issue_id ] ];
+	$t_data = ['query' => ['id' => $p_issue_id]];
 	$t_command = new IssueDeleteCommand( $t_data );
 	$t_command->execute();
 }
@@ -1334,7 +1334,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 		}
 
 		if( isset( $p_note['reporter'] ) ) {
-			$t_payload['reporter'] = [ 'id' => mci_get_user_id( $p_note['reporter'] ) ];
+			$t_payload['reporter'] = ['id' => mci_get_user_id( $p_note['reporter'] )];
 		}
 
 		if( isset( $p_note['time_tracking'] ) && is_numeric( $p_note['time_tracking'] ) ) {
@@ -1344,7 +1344,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 		}
 
 		$t_data = [
-			'query' => [ 'issue_id' => $p_issue_id ],
+			'query' => ['issue_id' => $p_issue_id],
 			'payload' => $t_payload
 		];
 
@@ -1441,7 +1441,7 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	}
 
 	$t_data = [
-		'query' => [ 'id' => $p_issue_note_id ]
+		'query' => ['id' => $p_issue_note_id]
 	];
 
 	$t_command = new IssueNoteDeleteCommand( $t_data );

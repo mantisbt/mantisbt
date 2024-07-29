@@ -124,7 +124,7 @@ foreach( $t_invalid_plugins as $t_plugin ) {
 			check_print_test_row(
 				$t_description,
 				false,
-				[ false => $t_msg_contact ]
+				[false => $t_msg_contact]
 			);
 	}
 }

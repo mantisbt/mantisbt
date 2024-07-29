@@ -961,7 +961,7 @@ function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version
 			throw new ClientException(
 				"Version '$t_version_for_error' does not exist in project '$t_project_name'.",
 				ERROR_INVALID_FIELD_VALUE,
-				[ $p_field_name ]
+				[$p_field_name]
 			);
 		}
 
@@ -1045,7 +1045,7 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 			throw new ClientException(
 				'Category field must be supplied.',
 				ERROR_EMPTY_FIELD,
-				[ 'category' ]
+				['category']
 			);
 		}
 

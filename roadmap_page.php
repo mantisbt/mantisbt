@@ -395,7 +395,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		$t_first_entry = true;
 
-		$t_result = db_query( $t_query, [ $t_project_id, $t_version ] );
+		$t_result = db_query( $t_query, [$t_project_id, $t_version] );
 
 		$t_issue_ids = [];
 		$t_issue_parents = [];
@@ -413,7 +413,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issue_parent = $t_row['source_bug_id'];
 			$t_parent_version = (string)$t_row['parent_version'];
 
-			if( !helper_call_custom_function( 'roadmap_include_issue', [ $t_issue_id ] ) ) {
+			if( !helper_call_custom_function( 'roadmap_include_issue', [$t_issue_id] ) ) {
 				continue;
 			}
 
@@ -517,7 +517,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issue_set_level = $t_issue_set_levels[$j];
 
 			echo '<li>';
-			helper_call_custom_function( 'roadmap_print_issue', [ $t_issue_set_id, $t_issue_set_level ] );
+			helper_call_custom_function( 'roadmap_print_issue', [$t_issue_set_id, $t_issue_set_level] );
 			echo '</li>' . PHP_EOL;
 
 			$t_issues_found = true;

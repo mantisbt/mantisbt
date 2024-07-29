@@ -74,7 +74,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function import_issues_menu() {
-		return [ '<a href="' . plugin_page( 'import' ) . '">' . plugin_lang_get( 'import' ) . '</a>', ];
+		return ['<a href="' . plugin_page( 'import' ) . '">' . plugin_lang_get( 'import' ) . '</a>', ];
 	}
 
 	/**
@@ -85,7 +85,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 		if( !access_has_project_level( plugin_config_get( 'export_threshold' ) ) ) {
 			return [];
 		}
-		return [ '<a class="btn btn-sm btn-primary btn-white btn-round" href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', ];
+		return ['<a class="btn btn-sm btn-primary btn-white btn-round" href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', ];
 	}
 
 	/**

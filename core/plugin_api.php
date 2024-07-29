@@ -641,7 +641,7 @@ function plugin_is_installed( $p_basename ) {
 
 	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {plugin} WHERE basename=' . db_param();
-	$t_result = db_query( $t_query, [ $p_basename ] );
+	$t_result = db_query( $t_query, [$p_basename] );
 	return( 0 < db_result( $t_result ) );
 }
 
@@ -666,7 +666,7 @@ function plugin_install( MantisPlugin $p_plugin ) {
 	db_param_push();
 	$t_query = 'INSERT INTO {plugin} ( basename, enabled )
 				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, [ $p_plugin->basename, true ] );
+	db_query( $t_query, [$p_plugin->basename, true] );
 
 	if( false === ( plugin_config_get( 'schema', false ) ) ) {
 		plugin_config_set( 'schema', -1 );
@@ -756,7 +756,7 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 
 			default:
 				$t_sqlarray = call_user_func_array(
-					[ $t_dict, $t_schema[$i][0] ],
+					[$t_dict, $t_schema[$i][0]],
 					$t_schema[$i][1]
 				);
 		}
@@ -805,7 +805,7 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {plugin} WHERE basename=' . db_param();
-	db_query( $t_query, [ $p_plugin->basename ] );
+	db_query( $t_query, [$p_plugin->basename] );
 
 	plugin_push_current( $p_plugin->basename );
 

@@ -89,7 +89,7 @@ set_error_handler( 'mc_error_handler' );
 set_exception_handler( 'mc_error_exception_handler' );
 
 $t_server = new SoapServer( $t_wsdl_path,
-	[ 'features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS ]
+	['features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS]
 );
 
 $t_server->addFunction( SOAP_FUNCTIONS_ALL );

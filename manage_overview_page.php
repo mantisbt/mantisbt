@@ -124,7 +124,7 @@ print_manage_menu( 'manage_overview_page.php' );
 	<?php
 	}
 
-	event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', [ $t_is_admin ] )
+	event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', [$t_is_admin] )
 	?>
 	</table>
 	</div>

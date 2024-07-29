@@ -213,7 +213,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</td>
 			</tr>
 
-			<?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', [ $f_project_id ] ); ?>
+			<?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', [$f_project_id] ); ?>
 		</fieldset>
 		</table>
 		</div>
@@ -305,7 +305,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		print_form_button(
 			'manage_proj_create_page.php',
 			lang_get( 'create_new_subproject_link' ),
-			[ 'parent_id' => $f_project_id ],
+			['parent_id' => $f_project_id],
 			null,
 			'btn btn-sm btn-primary btn-white btn-round'
 		);
@@ -611,7 +611,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<?php
 					$t_version_id = version_get_id( $t_name, $f_project_id );
 					if( !$t_inherited ) {
-						$t_param = [ 'version_id' => $t_version_id];
+						$t_param = ['version_id' => $t_version_id];
 						print_form_button(
 							'manage_proj_ver_edit_page.php',
 							lang_get( 'edit' ),
@@ -803,7 +803,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 </div><?php
 }
 
-event_signal( 'EVENT_MANAGE_PROJECT_PAGE', [ $f_project_id ] );
+event_signal( 'EVENT_MANAGE_PROJECT_PAGE', [$f_project_id] );
 ?>
 
 <!-- MANAGE ACCOUNTS -->

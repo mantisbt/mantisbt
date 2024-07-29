@@ -213,7 +213,7 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 		return [
 			'summary' => $t_summary . ': test issue ' . rand( 1, 1000000 ),
 			'description' => 'description of test issue.',
-			'project' => [ 'id' => $this->getProjectId() ],
+			'project' => ['id' => $this->getProjectId()],
 			'category' => $this->getCategory()
 		];
 	}

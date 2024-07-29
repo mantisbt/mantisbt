@@ -86,7 +86,7 @@ class TagAttachCommand extends Command {
 
 		$t_tags = $this->payload( 'tags', [] );
 		if( !is_array( $t_tags ) || empty( $t_tags ) ) {
-			throw new ClientException( 'Invalid tags array', ERROR_INVALID_FIELD_VALUE, [ 'tags' ] );
+			throw new ClientException( 'Invalid tags array', ERROR_INVALID_FIELD_VALUE, ['tags'] );
 		}
 
 		$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
@@ -106,14 +106,14 @@ class TagAttachCommand extends Command {
 						throw new ClientException(
 							sprintf( "Tag '%s' not found.  Access denied to auto-create tag.", $t_tag['name'] ),
 							ERROR_INVALID_FIELD_VALUE,
-							[ 'tags' ] );
+							['tags'] );
 					}
 				} else {
 					$this->tagsToAttach[] = (int)$t_tag_row['id'];
 				}
 			} else {
 				# invalid tag with no id or name.
-				throw new ClientException( "Invalid tag with no id or name", ERROR_INVALID_FIELD_VALUE, [ 'tags' ] );
+				throw new ClientException( "Invalid tag with no id or name", ERROR_INVALID_FIELD_VALUE, ['tags'] );
 			}
 		}
 	}
@@ -144,7 +144,7 @@ class TagAttachCommand extends Command {
 		}
 
 		if( !empty( $t_attached_tags ) ) {
-			event_signal( 'EVENT_TAG_ATTACHED', [ $this->issue_id, $t_attached_tags ] );
+			event_signal( 'EVENT_TAG_ATTACHED', [$this->issue_id, $t_attached_tags] );
 		}
 
 		return [];

@@ -156,7 +156,7 @@ function rest_project_user_add( \Slim\Http\Request $p_request, \Slim\Http\Respon
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
 	}
 
-	$t_payload['project'] = [ 'id' => $t_project_id ];
+	$t_payload['project'] = ['id' => $t_project_id];
 
 	$t_data = [
 		'payload' => $t_payload
@@ -186,15 +186,15 @@ function rest_project_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Res
 	# that can cast to 0.
 	$t_user = $p_args['user_id'];
 	if( !is_numeric( $t_user ) ) {
-		throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, [ 'user_id' ] );
+		throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, ['user_id'] );
 	}
 
 	$t_user_id = (int)$t_user;
 
 	$t_data = [
 		'payload' => [
-			'project' => [ 'id' => $t_project_id ],
-			'user' => [ 'id' => $t_user_id ]
+			'project' => ['id' => $t_project_id],
+			'user' => ['id' => $t_user_id]
 		]
 	];
 
@@ -254,7 +254,7 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		$t_projects[] = $t_project;
 	}
 
-	$t_result = [ 'projects' => $t_projects ];
+	$t_result = ['projects' => $t_projects];
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
@@ -520,7 +520,7 @@ function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 	$t_project_id = $t_result['project']['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Project created with id $t_project_id" )->
-		withJson( [ 'project' => $t_result['project'] ] );
+		withJson( ['project' => $t_result['project']] );
 }
 
 /**
@@ -560,7 +560,7 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 	$t_project_id = $t_result['project']['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id Updated" )
-		->withJson( [ 'project' => $t_result['project'] ] );
+		->withJson( ['project' => $t_result['project']] );
 }
 
 /**
@@ -574,7 +574,7 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 function rest_project_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
-	$t_data = [ 'query' => [ 'id' => $t_project_id ] ];
+	$t_data = ['query' => ['id' => $t_project_id]];
 	$t_command = new ProjectDeleteCommand( $t_data );
 	$t_command->execute();
 

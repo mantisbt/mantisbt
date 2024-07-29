@@ -66,7 +66,7 @@ class VersionGetCommand extends Command {
 			throw new ClientException(
 				"Project $this->project_id not found",
 				ERROR_PROJECT_NOT_FOUND,
-				[ $this->project_id ] );
+				[$this->project_id] );
 		}
 
 		if( !access_has_project_level( VIEWER, $this->project_id ) ) {
@@ -77,11 +77,11 @@ class VersionGetCommand extends Command {
 
 		if( !is_null( $this->version_id ) ) {
 			if( is_blank( $this->version_id ) ) {
-				throw new ClientException( 'Invalid version name', ERROR_EMPTY_FIELD, [ 'id' ] );
+				throw new ClientException( 'Invalid version name', ERROR_EMPTY_FIELD, ['id'] );
 			}
 
 			if( !version_exists( $this->version_id ) ) {
-				throw new ClientException( 'Version not found', ERROR_VERSION_NOT_FOUND, [ $this->version_id ] );
+				throw new ClientException( 'Version not found', ERROR_VERSION_NOT_FOUND, [$this->version_id] );
 			}
 		}
 	}
@@ -110,7 +110,7 @@ class VersionGetCommand extends Command {
 
 			if( $t_version->project_id == $this->project_id ) {
 				$t_version = VersionGetCommand::VersionToArray( $t_version );
-				$t_versions = [ $t_version ];
+				$t_versions = [$t_version];
 			} else {
 				$t_versions = [];
 			}

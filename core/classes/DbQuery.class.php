@@ -313,12 +313,12 @@ class DbQuery {
 		global $g_db_log_queries, $g_queries_array;
 		if( ON == $g_db_log_queries ) {
 			$t_query_text = db_format_query_log_msg( $this->db_query_string, $this->db_param_array );
-			log_event( LOG_DATABASE, [ $t_query_text, $this->db_query_time ] );
+			log_event( LOG_DATABASE, [$t_query_text, $this->db_query_time] );
 		} else {
 			# If not logging the queries the actual text is not needed
 			$t_query_text = '';
 		}
-		array_push( $g_queries_array, [ $t_query_text, $this->db_query_time ] );
+		array_push( $g_queries_array, [$t_query_text, $this->db_query_time] );
 	}
 
 	/**
@@ -376,7 +376,7 @@ class DbQuery {
 		}
 
 		$this->db_query_string = strtr( $this->db_query_string,
-			[ '{' => $s_prefix, '}' => $s_suffix ]
+			['{' => $s_prefix, '}' => $s_suffix]
 			);
 
 		# check parameters for special treatment of boolean types

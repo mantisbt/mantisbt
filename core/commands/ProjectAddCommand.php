@@ -94,7 +94,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Project name cannot be empty',
 				ERROR_EMPTY_FIELD,
-				[ 'name' ]
+				['name']
 			);
 		}
 
@@ -112,7 +112,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Project name is not unique',
 				ERROR_PROJECT_NAME_NOT_UNIQUE,
-				[ 'name' ]
+				['name']
 			);
 		}
 
@@ -121,7 +121,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Invalid project status',
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'status' ]
+				['status']
 			);
 		}
 
@@ -129,7 +129,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Invalid project inherit global',
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'inherit_global' ]
+				['inherit_global']
 			);
 		}
 
@@ -137,7 +137,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Invalid project enabled',
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'enabled' ]
+				['enabled']
 			);
 		}
 	}
@@ -174,7 +174,7 @@ class ProjectAddCommand extends Command {
 		global $g_project_override;
 		$g_project_override = $t_project_id;
 
-		event_signal( 'EVENT_MANAGE_PROJECT_CREATE', [ $t_project_id ] );
+		event_signal( 'EVENT_MANAGE_PROJECT_CREATE', [$t_project_id] );
 
 		$t_result = [];
 		if( $this->option('return_project', false ) ) {

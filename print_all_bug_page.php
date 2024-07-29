@@ -147,8 +147,8 @@ $f_export = implode( ',', $f_bug_arr );
 	$t_search = urlencode( $f_search );
 
 	$t_icons = [
-		[ 'print_all_bug_page_word', 'word', '', 'fa-file-word-o', 'Word 2000' ],
-		[ 'print_all_bug_page_word', 'html', 'target="_blank"', 'fa-internet-explorer', 'Word View' ] ];
+		['print_all_bug_page_word', 'word', '', 'fa-file-word-o', 'Word 2000'],
+		['print_all_bug_page_word', 'html', 'target="_blank"', 'fa-internet-explorer', 'Word View']];
 
 	foreach ( $t_icons as $t_icon ) {
 		$t_params = [
@@ -206,7 +206,7 @@ if( filter_is_temporary( $t_filter ) ) {
 	<?php
 		$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter, COLUMNS_TARGET_PRINT_PAGE );
 		foreach( $t_columns as $t_column ) {
-			helper_call_custom_function( 'print_column_title', [ $t_column, COLUMNS_TARGET_PRINT_PAGE, $t_sort_properties ] );
+			helper_call_custom_function( 'print_column_title', [$t_column, COLUMNS_TARGET_PRINT_PAGE, $t_sort_properties] );
 		}
 	?>
 </tr>
@@ -225,7 +225,7 @@ if( filter_is_temporary( $t_filter ) ) {
 <tr>
 <?php
 			foreach( $t_columns as $t_column ) {
-				helper_call_custom_function( 'print_column_value', [ $t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE ] );
+				helper_call_custom_function( 'print_column_value', [$t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE] );
 			}
 ?>
 </tr>

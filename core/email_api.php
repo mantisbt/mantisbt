@@ -321,7 +321,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	$t_monitoring_enabled = ON == email_notify_flag( $p_notify_type, 'monitor' );
 	db_param_push();
 	$t_query = 'SELECT DISTINCT user_id FROM {bug_monitor} WHERE bug_id=' . db_param();
-	$t_result = db_query( $t_query, [ $p_bug_id ] );
+	$t_result = db_query( $t_query, [$p_bug_id] );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_user_id = $t_row['user_id'];
@@ -351,7 +351,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	$t_notes_enabled = ( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) );
 	db_param_push();
 	$t_query = 'SELECT DISTINCT reporter_id FROM {bugnote} WHERE bug_id = ' . db_param();
-	$t_result = db_query( $t_query, [ $p_bug_id ] );
+	$t_result = db_query( $t_query, [$p_bug_id] );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_user_id = $t_row['reporter_id'];
 		if ( $t_notes_enabled ) {
@@ -377,7 +377,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	}
 
 	# add users as specified by plugins
-	$t_recipients_include_data = event_signal( 'EVENT_NOTIFY_USER_INCLUDE', [ $p_bug_id, $p_notify_type ] );
+	$t_recipients_include_data = event_signal( 'EVENT_NOTIFY_USER_INCLUDE', [$p_bug_id, $p_notify_type] );
 	foreach( $t_recipients_include_data as $t_plugin => $t_recipients_include_data2 ) {
 		foreach( $t_recipients_include_data2 as $t_recipients_included ) {
 			# only handle if we get an array from the callback
@@ -486,7 +486,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		}
 
 		# check to exclude users as specified by plugins
-		$t_recipient_exclude_data = event_signal( 'EVENT_NOTIFY_USER_EXCLUDE', [ $p_bug_id, $p_notify_type, $t_id ] );
+		$t_recipient_exclude_data = event_signal( 'EVENT_NOTIFY_USER_EXCLUDE', [$p_bug_id, $p_notify_type, $t_id] );
 		$t_exclude = false;
 		foreach( $t_recipient_exclude_data as $t_plugin => $t_recipient_exclude_data2 ) {
 			foreach( $t_recipient_exclude_data2 as $t_recipient_excluded ) {
@@ -778,7 +778,7 @@ function email_monitor_added( $p_bug_id, $p_user_id ) {
 	$t_opt[] = bug_format_id( $p_bug_id );
 	$t_opt[] = user_get_name( $p_user_id );
 
-	email_generic( $p_bug_id, 'monitor', 'email_notification_title_for_action_monitor', $t_opt, [ $p_user_id ] );
+	email_generic( $p_bug_id, 'monitor', 'email_notification_title_for_action_monitor', $t_opt, [$p_user_id] );
 }
 
 /**
@@ -859,7 +859,7 @@ function email_relationship_send( int $p_bug_id, int $p_related_bug_id, $p_messa
 	$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
 	$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
 
-	$t_opt = [ bug_format_id( $p_related_bug_id ) ];
+	$t_opt = [bug_format_id( $p_related_bug_id )];
 
 	email_generic_to_recipients( $p_bug_id, 'relation', $t_recipients, $p_message_id, $t_opt );
 }
@@ -1608,7 +1608,7 @@ function email_build_subject( $p_bug_id ) {
 
 	# update subject as defined by plugins
 	/** @noinspection PhpUnnecessaryLocalVariableInspection */
-	$t_email_subject = event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, [ 'bug_id' => $p_bug_id ] );
+	$t_email_subject = event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, ['bug_id' => $p_bug_id] );
 
 	return $t_email_subject;
 }
@@ -2279,7 +2279,7 @@ function email_shutdown_function() {
  * @return array List of actions
  */
 function email_get_actions() {
-	$t_actions = [ 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation', 'monitor' ];
+	$t_actions = ['updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation', 'monitor'];
 
 	if( config_get( 'enable_sponsorship' ) == ON ) {
 		$t_actions[] = 'sponsor';

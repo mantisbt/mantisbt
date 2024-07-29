@@ -28,7 +28,7 @@ class ImportXml_Mapper {
 	 * Issues
 	 * @var array
 	 */
-	private $issue = [ ];
+	private $issue = [];
 
 	/**
 	 * add

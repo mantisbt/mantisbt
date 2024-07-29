@@ -53,13 +53,13 @@ class UserDeleteCommand extends Command {
 	function validate() {
 		$this->user_id_to_delete = (int)$this->query( 'id', null );
 		if( $this->user_id_to_delete <= 0 ) {
-			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, [ 'id' ] );
+			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, ['id'] );
 		}
 
 		user_ensure_exists( $this->user_id_to_delete );
 
 		if( $this->user_id_to_delete == auth_get_current_user_id() ) {
-			throw new ClientException( 'Deleting own account not allowed', ERROR_INVALID_FIELD_VALUE, [ 'id' ] );
+			throw new ClientException( 'Deleting own account not allowed', ERROR_INVALID_FIELD_VALUE, ['id'] );
 		}
 
 		# Ensure user has access level to delete users

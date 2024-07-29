@@ -107,5 +107,5 @@ function workflow_parse( array $p_enum_workflow ) {
 			$t_entry[$t_status] = [];
 		}
 	}
-	return [ 'entry' => $t_entry, 'exit' => $t_exit, 'default' => $t_default ];
+	return ['entry' => $t_entry, 'exit' => $t_exit, 'default' => $t_default];
 }

@@ -50,14 +50,14 @@ if( !is_blank( $f_usernames ) ) {
 	$t_usernames = preg_split( '/[,|]/', $f_usernames, -1, PREG_SPLIT_NO_EMPTY );
 	$t_users = [];
 	foreach( $t_usernames as $t_username ) {
-		$t_users[] = [ 'name_or_realname' => trim( $t_username ) ];
+		$t_users[] = ['name_or_realname' => trim( $t_username )];
 	}
 
 	$t_payload['users'] = $t_users;
 }
 
 $t_data = [
-	'query' => [ 'issue_id' => $f_bug_id ],
+	'query' => ['issue_id' => $f_bug_id],
 	'payload' => $t_payload,
 ];
 

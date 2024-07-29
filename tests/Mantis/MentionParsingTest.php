@@ -71,59 +71,59 @@ class MentionParsingTest extends MantisCoreBase {
 			],
 			'JustMention' => [
 				'@vboctor',
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'WithDotInMiddle' => [
 				'@victor.boctor',
-				[ 'victor.boctor' ]
+				['victor.boctor']
 			],
 			'WithDotAtEnd' => [
 				'@vboctor.',
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'MentionWithUnderscore' => [
 				'@victor_boctor',
-				[ 'victor_boctor' ]
+				['victor_boctor']
 			],
 			'MentionAtStart' => [
 				'@vboctor will check',
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'MentionAtEnd' => [
 				'Please assign to @vboctor',
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'MentionAtEndWithFullstop' => [
 				'Please assign to @vboctor.',
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'MentionSeparatedWithColon' => [
 				'@vboctor: please check.',
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'MentionSeparatedWithSemiColon' => [
 				'@vboctor; please check.',
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'MentionWithMultiple' => [
 				'Please check with @vboctor and @someone.',
-				[ 'vboctor', 'someone' ]
+				['vboctor', 'someone']
 			],
 			'MentionWithDuplicates' => [
 				'Please check with @vboctor and @vboctor.',
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'MentionWithMultipleSlashSeparated' => [
 				'@vboctor/@someone, please check.',
-				[ 'vboctor', 'someone' ]
+				['vboctor', 'someone']
 			],
 			'MentionWithMultipleNewLineSeparated' => [
 				"Check with:\n@vboctor\n@someone.",
-				[ 'vboctor', 'someone' ]
+				['vboctor', 'someone']
 			],
 			'MentionNl2br' => [
 				string_nl2br( "Check with @vboctor\n" ) ,
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'MentionWithEmailAddress' => [
 				'xxx@example.com',
@@ -139,7 +139,7 @@ class MentionParsingTest extends MantisCoreBase {
 			],
 			'MentionWithInvalidChars' => [
 				"@vboctor%%%%%",
-				[ 'vboctor' ]
+				['vboctor']
 			],
 			'MentionUsernameThatIsAnEmailAddress' => [
 				"@vboctor@example.com",

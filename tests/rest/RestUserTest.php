@@ -109,7 +109,7 @@ class RestUserTest extends RestBase {
 			'real_name' => Faker::realname(),
 			'email' => Faker::email(),
 			'password' => Faker::password(),
-			'access_level' => [ "name" => "developer" ],
+			'access_level' => ["name" => "developer"],
 			'protected' => false,
 			'enabled' => false,
 		];
@@ -170,7 +170,7 @@ class RestUserTest extends RestBase {
 			'name' => Faker::username(),
 			'email' => Faker::email(),
 			'real_name' => Faker::realname(),
-			'access_level' => [ 'name' => 'manager' ],
+			'access_level' => ['name' => 'manager'],
 			'enabled' => false,
 			'protected' => false
 		];
@@ -534,7 +534,7 @@ class RestUserTest extends RestBase {
 		$t_username = Faker::username();
 		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => [ 'name' => 'administrator' ]
+			'access_level' => ['name' => 'administrator']
 		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
@@ -580,10 +580,10 @@ class RestUserTest extends RestBase {
 	 */
 	public function providerInvalidUserNames() {
 		return [
-			'blank_spaces' => [ ' ' ],
-			'blank_tabs' => [ "\t" ],
-			'empty' => [ '' ],
-			'too_long' => [ Faker::randStr( 500 ) ]
+			'blank_spaces' => [' '],
+			'blank_tabs' => ["\t"],
+			'empty' => [''],
+			'too_long' => [Faker::randStr( 500 )]
 		];
 	}
 
@@ -594,11 +594,11 @@ class RestUserTest extends RestBase {
 	 */
 	public function providerValidUserNames() {
 		return [
-			'regular' => [ Faker::username() ],
-			'with_spaces_in_middle' => [ "some user" ],
-			'email' => [ 'vboctor@somedomain.com' ],
-			'dot' => [ 'victor.boctor' ],
-			'underscore' => [ 'victor_boctor' ],
+			'regular' => [Faker::username()],
+			'with_spaces_in_middle' => ["some user"],
+			'email' => ['vboctor@somedomain.com'],
+			'dot' => ['victor.boctor'],
+			'underscore' => ['victor_boctor'],
 		];
 	}
 

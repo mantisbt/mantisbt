@@ -279,7 +279,7 @@ print_manage_menu( 'manage_user_page.php' );
 						</td>
 					</tr>
 
-					<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', [ $t_user['id'] ] ); ?>
+					<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', [$t_user['id']] ); ?>
 				</table>
 			</div>
 		</div>
@@ -347,7 +347,7 @@ print_manage_menu( 'manage_user_page.php' );
 </form>
 </div>
 
-<?php event_signal( 'EVENT_MANAGE_USER_PAGE', [ $t_user_id ] ); ?>
+<?php event_signal( 'EVENT_MANAGE_USER_PAGE', [$t_user_id] ); ?>
 
 <?php
 # Project access sections are only shown if the current user's permissions

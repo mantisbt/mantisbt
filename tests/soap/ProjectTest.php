@@ -147,7 +147,7 @@ class ProjectTest extends SoapBase {
 		$this->projectIdToDelete[] = $t_project_id;
 
 		# step 3
-		$t_project_data_structure['view_state'] = [ 'id' => VS_PRIVATE ];
+		$t_project_data_structure['view_state'] = ['id' => VS_PRIVATE];
 		$t_update_ok = $this->client->mc_project_update( $this->userName, $this->password,
 			$t_project_id,
 			$t_project_data_structure
@@ -174,8 +174,8 @@ class ProjectTest extends SoapBase {
 	private function newProjectAsArray( $p_project_name ) {
 		$t_project_data_structure = [];
 		$t_project_data_structure['name'] = $p_project_name;
-		$t_project_data_structure['status'] = [ 'name' => 'development' ];
-		$t_project_data_structure['view_state'] = [ 'id' => VS_PUBLIC ];
+		$t_project_data_structure['status'] = ['name' => 'development'];
+		$t_project_data_structure['view_state'] = ['id' => VS_PUBLIC];
 
 		return $t_project_data_structure;
 	}

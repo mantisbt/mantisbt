@@ -108,7 +108,7 @@ class ProjectUsersGetCommand extends Command {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
 				ERROR_PROJECT_NOT_FOUND,
-				[ $this->project_id ] );
+				[$this->project_id] );
 		}
 
 		# If user doesn't have access to project, return project doesn't exist
@@ -116,7 +116,7 @@ class ProjectUsersGetCommand extends Command {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
 				ERROR_PROJECT_NOT_FOUND,
-				[ $this->project_id ] );
+				[$this->project_id] );
 		}
 
 		if( $this->page < 1 ) {
@@ -176,7 +176,7 @@ class ProjectUsersGetCommand extends Command {
 			}
 		}
 
-		$t_result = [ 'users' => $t_users_result ];
+		$t_result = ['users' => $t_users_result];
 		return $t_result;
 	}
 }

@@ -258,7 +258,7 @@ if( $t_show_attachments ) {
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
 <?php
-	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', [ $t_project_id ] );
+	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', [$t_project_id] );
 
 	if( $t_show_category ) {
 		$t_allow_no_category = config_get( 'allow_no_category' );
@@ -556,7 +556,7 @@ if( $t_show_attachments ) {
 		</td>
 	</tr>
 <?php } ?>
-<?php event_signal( 'EVENT_REPORT_BUG_FORM', [ $t_project_id ] ) ?>
+<?php event_signal( 'EVENT_REPORT_BUG_FORM', [$t_project_id] ) ?>
 	<tr>
 		<th class="category">
 			<span class="required">*</span>

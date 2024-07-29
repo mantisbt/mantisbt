@@ -98,7 +98,7 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
 						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		db_query( $t_query, [ $p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type ] );
+		db_query( $t_query, [$p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type] );
 	}
 }
 
@@ -144,7 +144,7 @@ function history_log_event_special( $p_bug_id, $p_type, $p_old_value = '', $p_ne
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
 					( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
-	db_query( $t_query, [ $t_user_id, $p_bug_id, db_now(), $p_type, $c_old_value, $c_new_value, '' ] );
+	db_query( $t_query, [$t_user_id, $p_bug_id, db_now(), $p_type, $c_old_value, $c_new_value, ''] );
 }
 
 /**
@@ -190,7 +190,7 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = null ) {
 	$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
-	$t_params = [ db_now() - $p_duration_in_seconds, $t_user_id ];
+	$t_params = [db_now() - $p_duration_in_seconds, $t_user_id];
 
 	db_param_push();
 	$t_query = 'SELECT count(*) as event_count FROM {bug_history} WHERE date_modified > ' . db_param() .
@@ -753,7 +753,7 @@ function history_localize_item( $p_bug_id, $p_field_name, $p_type, $p_old_value,
 		$t_note = lang_get_defaulted( 'plugin_' . $p_field_name, $p_field_name );
 		$t_change = ( isset( $p_new_value ) ? $p_old_value . ' => ' . $p_new_value : $p_old_value );
 
-		return [ 'note' => $t_note, 'change' => $t_change, 'raw' => true ];
+		return ['note' => $t_note, 'change' => $t_change, 'raw' => true];
 	}
 
 	$t_field_localized = history_localize_field_name( $p_field_name );
@@ -974,7 +974,7 @@ function history_localize_item( $p_bug_id, $p_field_name, $p_type, $p_old_value,
 	}
 
 	# end if DEFAULT
-	return [ 'note' => $t_note, 'change' => $t_change, 'raw' => $t_raw ];
+	return ['note' => $t_note, 'change' => $t_change, 'raw' => $t_raw];
 }
 
 /**
@@ -985,7 +985,7 @@ function history_localize_item( $p_bug_id, $p_field_name, $p_type, $p_old_value,
 function history_delete( $p_bug_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {bug_history} WHERE bug_id=' . db_param();
-	db_query( $t_query, [ $p_bug_id ] );
+	db_query( $t_query, [$p_bug_id] );
 }
 
 /**
@@ -1003,5 +1003,5 @@ function history_link_file_to_bugnote( $p_bug_id, $p_filename, $p_bugnote_id ) {
 		' WHERE bug_id=' . db_param() . ' AND old_value=' . db_param() .
 		' AND (type=' . db_param() . ' OR type=' . db_param() . ')';
 
-	db_query( $t_query, [ (int)$p_bugnote_id, (int)$p_bug_id, $p_filename, FILE_ADDED, FILE_DELETED ] );
+	db_query( $t_query, [(int)$p_bugnote_id, (int)$p_bug_id, $p_filename, FILE_ADDED, FILE_DELETED] );
 }

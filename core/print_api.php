@@ -458,7 +458,7 @@ function print_news_item_option_list() {
 				ORDER BY date_posted DESC';
 	}
 
-	$t_result = db_query( $t_query, ($t_global == true ? [] : [ $t_project_id ] ) );
+	$t_result = db_query( $t_query, ($t_global == true ? [] : [$t_project_id] ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_headline = string_display_line( $t_row['headline'] );
@@ -904,7 +904,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 	if( null === $p_project_ids ) {
 		$p_project_ids = helper_get_current_project();
 	}
-	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : [ $p_project_ids ];
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : [$p_project_ids];
 
 	$t_versions = version_get_all_rows( $t_project_ids, $p_released, true );
 
@@ -1207,7 +1207,7 @@ function print_project_user_list_option_list2( $p_user_id ) {
 				WHERE p.enabled = ' . db_param() . ' AND
 					u.user_id IS NULL
 				ORDER BY p.name';
-	$t_result = db_query( $t_query, [ (int)$p_user_id, true ] );
+	$t_result = db_query( $t_query, [(int)$p_user_id, true] );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_project_name = string_attribute( $t_row['name'] );
 		$t_user_id = $t_row['id'];
@@ -1893,7 +1893,7 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 	}
 	$t_info = sprintf( '<select class="input-sm" %s name="%s" id="%s"%s>', $t_multiple, $p_control_name, $p_control_name, $t_size );
 	if( $p_add_any ) {
-		array_unshift( $p_control_array, [ META_FILTER_ANY => '[any]' ] );
+		array_unshift( $p_control_array, [META_FILTER_ANY => '[any]'] );
 	}
 	foreach ( $p_control_array as $t_name => $t_desc ) {
 		$t_sel = '';
@@ -2022,7 +2022,7 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 		}
 
 		echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
-		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', [ $p_attachment ] );
+		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', [$p_attachment] );
 	} else {
 		print_file_icon( $p_attachment['display_name'] );
 		echo lang_get( 'word_separator' ) . '<s>' . string_display_line( $p_attachment['display_name'] ) . '</s>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
@@ -2057,7 +2057,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 		case DATABASE:
 			db_param_push();
 			$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
-			$t_result = db_query( $t_query, [ (int)$p_attachment['id'] ] );
+			$t_result = db_query( $t_query, [(int)$p_attachment['id']] );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
 			break;

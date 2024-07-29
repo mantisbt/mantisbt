@@ -79,7 +79,7 @@ class IssueRelationshipAddCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {
-		$t_type = $this->payload( 'type', [ 'id' => BUG_RELATED ] );
+		$t_type = $this->payload( 'type', ['id' => BUG_RELATED] );
 		$this->typeId = $this->getRelationTypeId( $t_type );
 
 		$t_source_issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
@@ -89,7 +89,7 @@ class IssueRelationshipAddCommand extends Command {
 			throw new ClientException(
 				'Invalid issue id',
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'issue_id' ]
+				['issue_id']
 			);
 		}
 
@@ -123,7 +123,7 @@ class IssueRelationshipAddCommand extends Command {
 			throw new ClientException(
 				sprintf( "Issue %d is read-only", $t_source_issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				[ $t_source_issue_id ]
+				[$t_source_issue_id]
 			);
 		}
 
@@ -133,7 +133,7 @@ class IssueRelationshipAddCommand extends Command {
 			throw new ClientException(
 				sprintf( "Access denied to issue %d", $t_target_issue_id ),
 				ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW,
-				[ $t_target_issue_id ]
+				[$t_target_issue_id]
 			);
 		}
 	}
@@ -155,7 +155,7 @@ class IssueRelationshipAddCommand extends Command {
 		# Create or update the relationship
 		$t_relationship_id = relationship_upsert( $this->sourceIssue->id, $this->targetIssue->id, $this->typeId );
 
-		return [ 'id' => $t_relationship_id ];
+		return ['id' => $t_relationship_id];
 	}
 
 	/**
@@ -176,7 +176,7 @@ class IssueRelationshipAddCommand extends Command {
 			throw new ClientException(
 				'Invalid relationship type',
 				ERROR_INVALID_FIELD_VALUE,
-				[ 'relationship_type' ]
+				['relationship_type']
 			);
 		}
 

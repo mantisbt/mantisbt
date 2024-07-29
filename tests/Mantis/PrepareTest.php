@@ -51,10 +51,10 @@ class PrepareTest extends MantisCoreBase {
 	 */
 	public function providerMailTo() {
 		$t_test_data = [
-			'Basic' => [ [ self::EMAIL, ''], 'mailto:' . self::EMAIL ],
-			'Subject' => [ [ self::EMAIL, 'subject'], 'mailto:' . self::EMAIL . '?subject=subject' ],
-			'SubjectWithSpace' => [ [ self::EMAIL, 'message subject'], 'mailto:' . self::EMAIL . '?subject=message%20subject' ],
-			'SubjectWithQuestionAmp' => [ [ self::EMAIL, 'message?subject&matter'], 'mailto:' . self::EMAIL . '?subject=message%3Fsubject%26matter' ],
+			'Basic' => [[self::EMAIL, ''], 'mailto:' . self::EMAIL],
+			'Subject' => [[self::EMAIL, 'subject'], 'mailto:' . self::EMAIL . '?subject=subject'],
+			'SubjectWithSpace' => [[self::EMAIL, 'message subject'], 'mailto:' . self::EMAIL . '?subject=message%20subject'],
+			'SubjectWithQuestionAmp' => [[self::EMAIL, 'message?subject&matter'], 'mailto:' . self::EMAIL . '?subject=message%3Fsubject%26matter'],
 		];
 
 		return $t_test_data;
@@ -96,63 +96,63 @@ class PrepareTest extends MantisCoreBase {
 
 		$t_test_data = [
 			'Basic' => [
-				[ $t_email, $t_text, '', '', false ],
+				[$t_email, $t_text, '', '', false],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\">$t_text</a>"
 			],
 			'Basic, cannot see e-mails' => [
-				[ $t_email, $t_text, '', '', false ],
+				[$t_email, $t_text, '', '', false],
 				NOBODY,
 				$t_text
 			],
 			'With tooltip' => [
-				[ $t_email, $t_text, '', $t_tooltip, false ],
+				[$t_email, $t_text, '', $t_tooltip, false],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\" title=\"$t_tooltip\">$t_text</a>"
 			],
 			'With tooltip, cannot see e-mails' => [
-				[ $t_email, $t_text, '', $t_tooltip, false ],
+				[$t_email, $t_text, '', $t_tooltip, false],
 				NOBODY,
 				"<a title=\"$t_tooltip\">$t_text</a>"
 			],
 			'With tooltip identical to text' => [
-				[ $t_email, $t_text, '', $t_text, false ],
+				[$t_email, $t_text, '', $t_text, false],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\">$t_text</a>"
 			],
 			'With tooltip identical to text, cannot see e-mails' => [
-				[ $t_email, $t_text, '', $t_text, false ],
+				[$t_email, $t_text, '', $t_text, false],
 				NOBODY,
 				$t_text
 			],
 
 			'Button' => [
-				[ $t_email, $t_text, '', '', true ],
+				[$t_email, $t_text, '', '', true],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\" $t_button_classes>$t_button_text</a>"
 			],
 			'Button, cannot see e-mails' => [
-				[ $t_email, $t_text, '', '', true ],
+				[$t_email, $t_text, '', '', true],
 				NOBODY,
 				$t_text
 			],
 			'Button with tooltip' => [
-				[ $t_email, $t_text, '', $t_tooltip, true ],
+				[$t_email, $t_text, '', $t_tooltip, true],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\" title=\"$t_tooltip\" $t_button_classes>$t_button_text</a>"
 			],
 			'Button with tooltip, cannot see e-mails' => [
-				[ $t_email, $t_text, '', $t_tooltip, true ],
+				[$t_email, $t_text, '', $t_tooltip, true],
 				NOBODY,
 				"<a title=\"$t_tooltip\">$t_text</a>"
 			],
 			'Button with tooltip identical to text' => [
-				[ $t_email, $t_text, '', $t_text, true ],
+				[$t_email, $t_text, '', $t_text, true],
 				ANYBODY,
 				"<a href=\"mailto:$t_email\" $t_button_classes>$t_button_text</a>"
 			],
 			'Button with tooltip identical to text, cannot see e-mails' => [
-				[ $t_email, $t_text, '', $t_text, true ],
+				[$t_email, $t_text, '', $t_text, true],
 				NOBODY,
 				$t_text
 			],

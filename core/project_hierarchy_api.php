@@ -52,7 +52,7 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
 						( child_id, parent_id, inherit_parent )
 						VALUES
 						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, [ $p_child_id, $p_parent_id, $p_inherit_parent ] );
+	db_query( $t_query, [$p_child_id, $p_parent_id, $p_inherit_parent] );
 }
 
 /**
@@ -68,7 +68,7 @@ function project_hierarchy_update( $p_child_id, $p_parent_id, $p_inherit_parent 
 					SET inherit_parent=' . db_param() . '
 					WHERE child_id=' . db_param() . '
 						AND parent_id=' . db_param();
-	db_query( $t_query, [ $p_inherit_parent, $p_child_id, $p_parent_id ] );
+	db_query( $t_query, [$p_inherit_parent, $p_child_id, $p_parent_id] );
 }
 
 /**
@@ -82,7 +82,7 @@ function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
 	$t_query = 'DELETE FROM {project_hierarchy} WHERE child_id = ' . db_param() . '
 						AND parent_id = ' . db_param();
 
-	db_query( $t_query, [ $p_child_id, $p_parent_id ] );
+	db_query( $t_query, [$p_child_id, $p_parent_id] );
 }
 
 /**
@@ -95,7 +95,7 @@ function project_hierarchy_remove_all( $p_project_id ) {
 	$t_query = 'DELETE FROM {project_hierarchy} WHERE child_id = ' . db_param() . '
 						  OR parent_id = ' . db_param();
 
-	db_query( $t_query, [ $p_project_id, $p_project_id ] );
+	db_query( $t_query, [$p_project_id, $p_project_id] );
 }
 
 /**
@@ -164,7 +164,7 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 				  WHERE ' . $t_enabled_clause . '
 				  ORDER BY p.name';
 
-	$t_result = db_query( $t_query, ( $p_show_disabled ? [] : [ true ] ) );
+	$t_result = db_query( $t_query, ( $p_show_disabled ? [] : [true] ) );
 
 	$g_cache_project_hierarchy = [];
 	$g_cache_project_inheritance = [];
@@ -216,8 +216,8 @@ function project_hierarchy_inheritance( $p_project_id, $p_show_disabled = false 
 
 	project_hierarchy_cache( $p_show_disabled );
 
-	$t_project_ids = [ (int)$p_project_id, ];
-	$t_lookup_ids = [ (int)$p_project_id, ];
+	$t_project_ids = [(int)$p_project_id, ];
+	$t_lookup_ids = [(int)$p_project_id, ];
 
 	while( count( $t_lookup_ids ) > 0 ) {
 		$t_project_id = array_shift( $t_lookup_ids );
