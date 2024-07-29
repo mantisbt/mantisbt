@@ -226,7 +226,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			</button>
 <?php
 	# You must have global permissions to delete projects
-	if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) {
+	if( access_has_global_level( config_get( 'delete_project_threshold' ) ) ) {
 ?>
 			<button class="btn btn-primary btn-white btn-round"
 					formaction="manage_proj_delete.php">

@@ -296,7 +296,7 @@ class IssueUpdateTest extends SoapBase {
 
 		$t_issue_to_update = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		unset ( $t_issue_to_update->category );
+		unset( $t_issue_to_update->category );
 
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_to_update );
 

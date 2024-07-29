@@ -105,7 +105,7 @@ foreach( $t_field_options as $t_field_option ) {
 	$t_fields = config_get( $t_field_option, null, ALL_USERS, ALL_PROJECTS );
 	check_print_test_warn_row(
 		$t_field_option . ' configuration option does not contain "os_version"',
-		!in_array ( 'os_version', $t_fields ),
+		!in_array( 'os_version', $t_fields ),
 		[false => 'You need to replace "os_version" by "os_build" for the ' . $t_field_option . ' configuration option '
 			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=26840">#26840</a>).']
 	);

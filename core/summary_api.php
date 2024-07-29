@@ -567,7 +567,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 	# sort based on total issue count
 	# note that after array_multisort, we lose the numeric indexes, but we stored
 	# the reporter id inside each sub-array
-	array_multisort ( array_column( $t_reporter_stats, 'total' ), SORT_DESC, $t_reporter_stats );
+	array_multisort( array_column( $t_reporter_stats, 'total' ), SORT_DESC, $t_reporter_stats );
 
 	# print results
 	foreach( $t_reporter_stats as $t_stats ) {

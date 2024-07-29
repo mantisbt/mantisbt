@@ -402,7 +402,7 @@ class FilterTest extends SoapBase {
 		$this->skipIfAllowNoCategoryIsDisabled();
 
 		$t_issue_to_add = $this->getIssueToAdd();
-		unset ( $t_issue_to_add['category'] );
+		unset( $t_issue_to_add['category'] );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 		$this->deleteAfterRun( $t_issue_id );

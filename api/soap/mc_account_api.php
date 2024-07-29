@@ -35,7 +35,7 @@ function mci_account_get_array_by_id( $p_user_id ) {
 	if( user_exists( $p_user_id ) ) {
 
 		$t_current_user_id = auth_get_current_user_id();
-		$t_access_level = user_get_field ( $t_current_user_id, 'access_level' );
+		$t_access_level = user_get_field( $t_current_user_id, 'access_level' );
 		$t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
 			access_has_global_level( $t_access_level );
 

@@ -840,7 +840,7 @@ if( !$g_database_upgrade ) {
 <!-- Submit button -->
 <tr>
 	<td>
-		<?php echo ( $g_failed
+		<?php echo( $g_failed
 			? 'Please correct failed checks and try again'
 			: 'Attempt Installation' );
 		?>
@@ -1346,7 +1346,7 @@ if( 5 == $t_install_state ) {
 
 <tr>
 	<td>
-		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
+		<?php echo( $t_config_exists ? 'Updating' : 'Creating' ); ?>
 		Configuration File (config/config_inc.php)<br />
 	</td>
 <?php

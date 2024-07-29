@@ -312,7 +312,7 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 
 	// default fields
 	foreach( $g_soap_api_to_filter_names as $t_soap_name => $t_filter_name ) {
-		if( isset ( $p_filter_search[$t_soap_name] ) ) {
+		if( isset( $p_filter_search[$t_soap_name] ) ) {
 
 			$t_value = $p_filter_search[$t_soap_name];
 			$t_filter[$t_filter_name] = $t_value;
@@ -320,7 +320,7 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 	}
 
 	// custom fields
-	if( isset ( $p_filter_search['custom_fields'] ) ) {
+	if( isset( $p_filter_search['custom_fields'] ) ) {
 		foreach( $p_filter_search['custom_fields'] as $t_custom_field ) {
 
 			// object to array
@@ -346,20 +346,20 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 	}
 
 	// date fields
-	if( isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] )
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] )
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] )
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] )
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] )
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ) ) {
+	if( isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ) ) {
 		$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
 	}
-	if( isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] )
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] )
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] )
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] )
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] )
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ) ) {
+	if( isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ) ) {
 		$t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = 'on';
 }
 

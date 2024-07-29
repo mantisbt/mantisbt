@@ -33,7 +33,7 @@ require_once dirname( __DIR__ ) . '/TestConfig.php';
 require_mantis_core();
 
 require_once( __DIR__ . '/../../vendor/autoload.php' );
-require_once ( __DIR__ . '/../../core/constant_inc.php' );
+require_once( __DIR__ . '/../../core/constant_inc.php' );
 require_once __DIR__ . '/../core/RequestBuilder.php';
 require_once __DIR__ . '/../core/Faker.php';
 

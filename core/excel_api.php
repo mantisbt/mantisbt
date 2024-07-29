@@ -666,7 +666,7 @@ class ExcelStyle {
 	 * @return void
 	 */
 	function setBackgroundColor( $p_color, $p_pattern = 'Solid' ) {
-		if( ! isset ( $this->interior ) ) {
+		if( ! isset( $this->interior ) ) {
 			$this->interior = new Interior();
 		}
 

@@ -1309,7 +1309,7 @@ function print_filter_values_do_filter_by_date( array $p_filter ) {
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
+				echo lang_get( 'month_' . strtolower( date( 'F', $t_time ) ) );
 			}
 			if( strcasecmp( $t_char, 'D' ) == 0 ) {
 				echo ' ';
@@ -1327,7 +1327,7 @@ function print_filter_values_do_filter_by_date( array $p_filter ) {
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
+				echo lang_get( 'month_' . strtolower( date( 'F', $t_time ) ) );
 			}
 			if( strcasecmp( $t_char, 'D' ) == 0 ) {
 				echo ' ';
@@ -1463,7 +1463,7 @@ function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
+				echo lang_get( 'month_' . strtolower( date( 'F', $t_time ) ) );
 			}
 			if( strcasecmp( $t_char, 'D' ) == 0 ) {
 				echo ' ';
@@ -1481,7 +1481,7 @@ function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
+				echo lang_get( 'month_' . strtolower( date( 'F', $t_time ) ) );
 			}
 			if( strcasecmp( $t_char, 'D' ) == 0 ) {
 				echo ' ';

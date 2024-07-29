@@ -30,6 +30,7 @@ use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\Comment\SingleLineCommentSpacingFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
+use PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
 use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
 use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
@@ -364,6 +365,18 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/whitespace/array_indentation.html
 		 */
 		ArrayIndentationFixer::class,
+
+		/**
+		 * Function: No spaces after function name
+		 *
+		 * When making a method or function call, there MUST NOT be a space
+		 * between the method or function name and the opening parenthesis.
+		 *
+		 * "foo ( test ( 3 ) );"  > "foo( test( 3 ) )"
+		 *
+		 * @see https://cs.symfony.com/doc/rules/function_notation/no_spaces_after_function_name.html
+		 */
+		NoSpacesAfterFunctionNameFixer::class,
 	] )
 
 	/**
