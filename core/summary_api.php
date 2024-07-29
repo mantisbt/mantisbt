@@ -1344,7 +1344,7 @@ function summary_by_dates_bug_count( array $p_date_array, array $p_filter = null
 		. ' WHEN h.type = :hist_type_upd AND h.old_value >= :status AND h.new_value  < :status THEN :action_open'
 		. ' WHEN h.type = :hist_type_upd AND h.old_value < :status AND h.new_value  >= :status THEN :action_close'
 		. ' ELSE null END AS action, date_modified'
-        . ' FROM {bug_history} h JOIN {bug} b ON b.id = h.bug_id'
+		. ' FROM {bug_history} h JOIN {bug} b ON b.id = h.bug_id'
 		. ' WHERE h.date_modified > :mint_ime'
 		. ' AND ( h.type = :hist_type_new OR h.type = :hist_type_upd AND h.field_name = :hist_field )'
 		. ' AND ' . $t_specific_where;

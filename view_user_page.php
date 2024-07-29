@@ -70,7 +70,7 @@ $t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) )
 	access_has_global_level( $u_access_level );
 
 $t_can_see_realname = $t_can_manage || user_show_realname() ||
-    access_has_project_level( config_get( 'show_user_realname_threshold' ) );
+	access_has_project_level( config_get( 'show_user_realname_threshold' ) );
 $t_can_see_email = $t_can_manage || access_has_project_level( config_get( 'show_user_email_threshold' ) );
 $t_can_impersonate = auth_can_impersonate( $f_user_id );
 
@@ -126,7 +126,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 					<?php echo lang_get( 'email' ) ?>
 				</th>
 				<td>
-				    <?php
+					<?php
 						if( !is_blank( $u_email ) ) {
 							print_email_link( $u_email, $u_email );
 						}

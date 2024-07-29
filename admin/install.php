@@ -1345,10 +1345,10 @@ if( 5 == $t_install_state ) {
 ?>
 
 <tr>
-    <td>
-        <?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
-        Configuration File (config/config_inc.php)<br />
-    </td>
+	<td>
+		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
+		Configuration File (config/config_inc.php)<br />
+	</td>
 <?php
 	# Generating the config_inc.php file
 

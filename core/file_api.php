@@ -446,9 +446,9 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 
 	# if diskfile doesn't include a path, then use the expected filename.
 	if( ( strstr( $p_diskfile, DIRECTORY_SEPARATOR ) === false ||
-	       strstr( $p_diskfile, '\\' ) === false ) &&
-	     !is_blank( $t_expected_file_path ) ) {
-	    return $t_expected_file_path;
+		   strstr( $p_diskfile, '\\' ) === false ) &&
+		 !is_blank( $t_expected_file_path ) ) {
+		return $t_expected_file_path;
 	}
 
 	# otherwise return as is.

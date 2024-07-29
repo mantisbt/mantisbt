@@ -163,7 +163,7 @@ layout_page_begin();
 	<form id="update_bug_form" method="post" action="bug_update.php">
 		<?php echo form_security_field( 'bug_update' ); ?>
 		<input type="hidden" name="bug_id" value="<?php echo $t_bug_id ?>" />
-        <input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
+		<input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
 
 		<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
@@ -234,7 +234,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<td>';
 
 	if( $t_show_category ) {
-        if( !category_is_enabled( $t_bug->category_id ) ) {
+		if( !category_is_enabled( $t_bug->category_id ) ) {
 			print_icon( 'warning',
 				'fa-status-box bigger-125 red',
 				lang_get( 'category_disabled' )

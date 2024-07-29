@@ -174,8 +174,8 @@ print_account_menu( 'account_page.php' );
 				</td>
 			</tr>
 			<?php
-			    $t_required = $t_force_pw_reset ? 'required' : '';
-			    $t_class = $t_force_pw_reset ? 'class="required"' : '';
+				$t_required = $t_force_pw_reset ? 'required' : '';
+				$t_class = $t_force_pw_reset ? 'class="required"' : '';
 			?>
 			<tr>
 				<td class="category">

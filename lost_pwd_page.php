@@ -93,8 +93,8 @@ layout_login_page_begin();
 				<span class="block input-icon input-icon-right">
 					<input id="username" name="username" type="text"
 						placeholder="<?php echo lang_get( 'username' ) ?>"
-                        value="<?php echo string_html_specialchars( $t_username ) ?>"
-                        size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control <?php echo $t_username_field_autofocus ?>">
+						value="<?php echo string_html_specialchars( $t_username ) ?>"
+						size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control <?php echo $t_username_field_autofocus ?>">
 					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				</span>
 				</label>

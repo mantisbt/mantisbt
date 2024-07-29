@@ -1490,7 +1490,7 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
  * @return string The CSS identifier
  */
 function custom_field_css_name( $p_custom_field_name ) {
-    return 'custom-' . preg_replace( '/[^a-zA-Z0-9_-]+/', '-', $p_custom_field_name );
+	return 'custom-' . preg_replace( '/[^a-zA-Z0-9_-]+/', '-', $p_custom_field_name );
 }
 
 /**

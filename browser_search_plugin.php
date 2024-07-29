@@ -55,7 +55,7 @@ header( 'Content-Type: application/opensearchdescription+xml' );
 echo '<?xml version="1.0" encoding="UTF-8" ?>' . PHP_EOL;
 ?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
-                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+					   xmlns:moz="http://www.mozilla.org/2006/browser/search/">
 	<ShortName><?php echo htmlspecialchars( $t_shortname, ENT_XML1 | ENT_QUOTES); ?></ShortName>
 	<Description><?php echo htmlspecialchars( $t_description, ENT_XML1 | ENT_QUOTES); ?></Description>
 	<InputEncoding>UTF-8</InputEncoding>

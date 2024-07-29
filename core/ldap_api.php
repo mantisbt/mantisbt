@@ -216,7 +216,7 @@ function ldap_escape_string( $p_string ) {
 	$t_find = ['\\', '*', '(', ')', '/', "\x00"];
 	$t_replace = ['\5c', '\2a', '\28', '\29', '\2f', '\00'];
 
-    return str_replace( $t_find, $t_replace, $p_string );
+	return str_replace( $t_find, $t_replace, $p_string );
 }
 
 /**
@@ -419,8 +419,8 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 	# from LDAP.  This will allow us to use the local data after login without
 	# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
 	if( $t_authenticated ) {
-        /** @noinspection PhpUnhandledExceptionInspection */
-        $t_user_id = user_get_id_by_name( $p_username );
+		/** @noinspection PhpUnhandledExceptionInspection */
+		$t_user_id = user_get_id_by_name( $p_username );
 
 		if( false !== $t_user_id ) {
 

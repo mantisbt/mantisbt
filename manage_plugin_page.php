@@ -483,7 +483,7 @@ class AvailablePlugin extends PluginForDisplay {
 			$this->dependencies[] = '<span class="dependency_met">'
 				. lang_get( 'plugin_no_depends' )
 				. '</span>';
-            $this->can_install = true;
+			$this->can_install = true;
 		}
 
 		$this->upgrade_needed = plugin_needs_upgrade( $p_plugin );

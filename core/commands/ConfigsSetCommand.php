@@ -141,7 +141,7 @@ class ConfigsSetCommand extends Command {
 			}
 
 			if( ConfigsSetCommand::config_is_enum( $t_name ) &&
-			    is_array( $t_config['value'] ) ) {
+				is_array( $t_config['value'] ) ) {
 				$t_config['value'] = ConfigsSetCommand::array_to_enum_string( $t_name, $t_config['value'] );
 			}
 

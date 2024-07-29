@@ -160,8 +160,8 @@ class IssueNoteAddCommand extends Command {
 
 		$this->text = trim( $this->payload( 'text', '' ) );
 		if( empty( $this->text ) &&
-		    $t_time_tracking_mins == 0 &&
-		    count( $this->files ) == 0 ) {
+			$t_time_tracking_mins == 0 &&
+			count( $this->files ) == 0 ) {
 			throw new ClientException( 'Issue note not specified.', ERROR_EMPTY_FIELD, [lang_get( 'bugnote' )] );
 		}
 

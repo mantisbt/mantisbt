@@ -329,7 +329,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	$project_name = project_get_field( $t_bug->project_id, 'name' );
 
 	if( VS_PRIVATE == $t_bug->view_state ) {
-	    $t_bug_class = 'my-buglist-private';
+		$t_bug_class = 'my-buglist-private';
 	} else {
 		$t_bug_class = '';
 	}

@@ -27,17 +27,17 @@ use Mantis\Exceptions\ClientException;
  * A command that deletes an issue note.
  */
 class IssueNoteDeleteCommand extends Command {
-    /**
-     * @var integer issue note id to delete
-     */
-    private $id;
+	/**
+	 * @var integer issue note id to delete
+	 */
+	private $id;
 
-    /**
-     * @var integer issue id
-     */
-    private $issueId;
+	/**
+	 * @var integer issue id
+	 */
+	private $issueId;
 
-    /**
+	/**
 	 * Constructor
 	 *
 	 * @param array $p_data The command data.
@@ -50,61 +50,61 @@ class IssueNoteDeleteCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {
-        $this->id = $this->query( 'id' );
+		$this->id = $this->query( 'id' );
 
-        if( (integer)$this->id < 1 ) {
-            throw new ClientException( "'id' must be >= 1", ERROR_INVALID_FIELD_VALUE, ['id'] );
-        }
+		if( (integer)$this->id < 1 ) {
+			throw new ClientException( "'id' must be >= 1", ERROR_INVALID_FIELD_VALUE, ['id'] );
+		}
 
-        bugnote_ensure_exists( $this->id );
+		bugnote_ensure_exists( $this->id );
 
-        $this->issueId = bugnote_get_field( $this->id, 'bug_id' );
-        $t_specified_issue_id = $this->query( 'issue_id' );
-        if( $t_specified_issue_id !== null && $t_specified_issue_id != $this->issueId ) {
-            throw new ClientException( "Issue note doesn't belong to issue", ERROR_INVALID_FIELD_VALUE, ['id'] );
-        }
+		$this->issueId = bugnote_get_field( $this->id, 'bug_id' );
+		$t_specified_issue_id = $this->query( 'issue_id' );
+		if( $t_specified_issue_id !== null && $t_specified_issue_id != $this->issueId ) {
+			throw new ClientException( "Issue note doesn't belong to issue", ERROR_INVALID_FIELD_VALUE, ['id'] );
+		}
 
-        $t_project_id = bug_get_field( $this->issueId, 'project_id' );
+		$t_project_id = bug_get_field( $this->issueId, 'project_id' );
 		if( $t_project_id != helper_get_current_project() ) {
 			# in case the current project is not the same project of the bug we are
 			# viewing, override the current project. This to avoid problems with
 			# categories and handlers lists etc.
-            global $g_project_override;
-            $g_project_override = $t_project_id;
-        }
+			global $g_project_override;
+			$g_project_override = $t_project_id;
+		}
 
-        $t_reporter_id = bugnote_get_field( $this->id, 'reporter_id' );
-        $t_user_id = auth_get_current_user_id();
+		$t_reporter_id = bugnote_get_field( $this->id, 'reporter_id' );
+		$t_user_id = auth_get_current_user_id();
 
-        # mirrors check from bugnote_delete.php
-        if( $t_user_id == $t_reporter_id ) {
-            $t_threshold_config_name =  'bugnote_user_delete_threshold';
-        } else {
-            $t_threshold_config_name =  'delete_bugnote_threshold';
-        }
+		# mirrors check from bugnote_delete.php
+		if( $t_user_id == $t_reporter_id ) {
+			$t_threshold_config_name =  'bugnote_user_delete_threshold';
+		} else {
+			$t_threshold_config_name =  'delete_bugnote_threshold';
+		}
 
-        if( !access_has_bugnote_level( config_get( $t_threshold_config_name ), $this->id ) ) {
-            throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
-        }
+		if( !access_has_bugnote_level( config_get( $t_threshold_config_name ), $this->id ) ) {
+			throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
+		}
 
-        if( bug_is_readonly( $this->issueId ) ) {
+		if( bug_is_readonly( $this->issueId ) ) {
 			throw new ClientException(
 				sprintf( "Issue '%d' is read-only.", $this->issueId ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
 				[$this->issueId] );
-        }
-    }
+		}
+	}
 
- 	/**
+	/**
 	 * Process the command.
 	 *
 	 * @return array Command response
 	 */
 	protected function process() {
-        bugnote_delete( $this->id );
-        return [
-        	'id' => $this->id,
-        	'issue_id' => $this->issueId
-        ];
+		bugnote_delete( $this->id );
+		return [
+			'id' => $this->id,
+			'issue_id' => $this->issueId
+		];
 	}
 }

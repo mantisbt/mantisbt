@@ -692,7 +692,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 		# Produce an error if the field is required but wasn't posted
 		if( $t_def['require_report'] ) {
 			if( !isset( $t_custom_field_values[$t_name] ) ||
-			    is_blank( $t_custom_field_values[$t_name] ) ) {
+				is_blank( $t_custom_field_values[$t_name] ) ) {
 				throw new ClientException(
 					"Mandatory field '$t_name' is missing.",
 					ERROR_EMPTY_FIELD,
@@ -702,7 +702,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 		}
 
 		if( isset( $t_custom_field_values[$t_name] ) &&
-		    !custom_field_validate( $t_custom_field_id, $t_custom_field_values[$t_name] ) ) {
+			!custom_field_validate( $t_custom_field_id, $t_custom_field_values[$t_name] ) ) {
 			throw new ClientException(
 				"Invalid custom field '$t_name' value.",
 				ERROR_CUSTOM_FIELD_INVALID_VALUE,
@@ -874,7 +874,7 @@ function mci_project_categories( $p_project_id ) {
 		# category is associated with in case of inherited categories.
 		$t_default_handler_id = (int)$t_category['user_id'];
 		if( $t_default_handler_id != 0 &&
-		    access_has_project_level( config_get( 'manage_project_threshold', null, null, $t_project_id ), $t_project_id ) ) {
+			access_has_project_level( config_get( 'manage_project_threshold', null, null, $t_project_id ), $t_project_id ) ) {
 			$t_result['default_handler'] = mci_account_get_array_by_id( $t_default_handler_id );
 		}
 

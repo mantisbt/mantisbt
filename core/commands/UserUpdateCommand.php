@@ -241,7 +241,7 @@ class UserUpdateCommand extends Command {
 		# Don't allow updating accounts to access levels that are higher than
 		# the actor's access level.
 		if( !access_has_global_level( $t_old_access_level ) ||
-		    ( !is_null( $t_new_access_level ) && !access_has_global_level( $t_new_access_level ) ) ) {
+			( !is_null( $t_new_access_level ) && !access_has_global_level( $t_new_access_level ) ) ) {
 			throw new ClientException(
 				'Access denied to update users that have higher access level',
 				ERROR_ACCESS_DENIED );
@@ -254,7 +254,7 @@ class UserUpdateCommand extends Command {
 
 			if( $t_admin_count <= 1 ) {
 				if( ( !is_null( $this->enabled ) && !$this->enabled ) ||
-				    ( !is_null( $this->access_level ) && $this->access_level < $t_admin_threshold ) ) {
+					( !is_null( $this->access_level ) && $this->access_level < $t_admin_threshold ) ) {
 						throw new ClientException(
 							'Disabling or reducing access level of last admin not allowed.',
 							ERROR_USER_CHANGE_LAST_ADMIN );

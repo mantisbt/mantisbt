@@ -16,6 +16,7 @@
 
 declare( strict_types = 1 );
 
+use PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\DisallowSpaceIndentSniff;
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
@@ -79,6 +80,18 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/whitespace/line_ending.html
 		 */
 		LineEndingFixer::class,
+
+		/**
+		 * Whitespace: Tab as indention style
+		 *
+		 * Note: The config `->withSpacing(Option::INDENTATION_TAB)` does not
+		 *       work in all circumstances. In combination with some other
+		 *       whitespace fixers it results in a mix of tabs and whitespaces.
+		 *
+		 *       For example, the "ArrayIndentationFixer" behaves this way, this
+		 *       could be because the symfony cs-fixer is fixed to whitespaces.
+		 */
+		DisallowSpaceIndentSniff::class,
 
 		/**
 		 * PHP tag: Full opening tag

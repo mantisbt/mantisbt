@@ -185,7 +185,7 @@ if( filter_is_temporary( $t_filter ) ) {
 
 <table id="buglist" class="table table-striped table-bordered table-condensed no-margin">
 <tr>
-    <td class="bold bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
+	<td class="bold bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
 		<?php
 			echo lang_get( 'viewing_bugs_title' );
 
@@ -234,13 +234,13 @@ if( filter_is_temporary( $t_filter ) ) {
 	} # for_loop
 ?>
 <tr class="spacer">
-    <td colspan="<?php echo $t_num_of_columns ?>"></td>
+	<td colspan="<?php echo $t_num_of_columns ?>"></td>
 </tr>
 <tr>
-    <td colspan="<?php echo $t_num_of_columns ?>">
-        <input type="hidden" name="show_flag" value="1" />
-        <input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
-    </td>
+	<td colspan="<?php echo $t_num_of_columns ?>">
+		<input type="hidden" name="show_flag" value="1" />
+		<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
+	</td>
 </tr>
 </table>
 </form>

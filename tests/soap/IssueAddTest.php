@@ -397,10 +397,10 @@ class IssueAddTest extends SoapBase {
 		$t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( '2' ) );
 		$this->deleteAfterRun( $t_second_issue_id );
 
-	    $t_first_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_first_issue_id );
+		$t_first_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_first_issue_id );
 
-	    # this update should trigger this issue's id to be returned as the biggest
-	    # reported as bug #12887
+		# this update should trigger this issue's id to be returned as the biggest
+		# reported as bug #12887
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_first_issue_id, $t_first_issue );
 
 		$this->assertEquals( $t_second_issue_id, $this->client->mc_issue_get_biggest_id( $this->userName, $this->password, $this->getProjectId() ) );
@@ -507,40 +507,40 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( $t_issue_to_add['description'], $t_issue->description, 'description is not correct' );
 	}
 
-    /**
-     * A test case that tests the following:
-     * 1. mc_issues_get()
-     * 3. mc_issues_get_header()
-     * @return void
-     */
-    public function testIssuesGet() {
+	/**
+	 * A test case that tests the following:
+	 * 1. mc_issues_get()
+	 * 3. mc_issues_get_header()
+	 * @return void
+	 */
+	public function testIssuesGet() {
 
-        $t_issue_to_add = $this->getIssueToAdd( '1' );
-        $t_issue_to_add_2 = $this->getIssueToAdd( '2' );
+		$t_issue_to_add = $this->getIssueToAdd( '1' );
+		$t_issue_to_add_2 = $this->getIssueToAdd( '2' );
 
-        $t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
-        $t_issue_id_2 = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add_2 );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+		$t_issue_id_2 = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add_2 );
 
-        $this->deleteAfterRun( $t_issue_id );
-        $this->deleteAfterRun( $t_issue_id_2 );
+		$this->deleteAfterRun( $t_issue_id );
+		$this->deleteAfterRun( $t_issue_id_2 );
 
-        $t_search_result_issues = $this->client->mc_issues_get( $this->userName, $this->password, [$t_issue_id, $t_issue_id_2] );
-        $t_search_result_headers = $this->client->mc_issues_get_header( $this->userName, $this->password, [$t_issue_id, $t_issue_id_2] );
+		$t_search_result_issues = $this->client->mc_issues_get( $this->userName, $this->password, [$t_issue_id, $t_issue_id_2] );
+		$t_search_result_headers = $this->client->mc_issues_get_header( $this->userName, $this->password, [$t_issue_id, $t_issue_id_2] );
 
-        $this->assertEquals( 2, count( $t_search_result_headers ));
-        $this->assertStringContainsString( 'testIssuesGet-1', $t_search_result_headers[0]->summary );
-        $this->assertStringContainsString( 'testIssuesGet-2', $t_search_result_headers[1]->summary );
+		$this->assertEquals( 2, count( $t_search_result_headers ));
+		$this->assertStringContainsString( 'testIssuesGet-1', $t_search_result_headers[0]->summary );
+		$this->assertStringContainsString( 'testIssuesGet-2', $t_search_result_headers[1]->summary );
 
-        $this->assertEquals( VS_PUBLIC, $t_search_result_headers[0]->view_state );
-        $this->assertEquals( 0, $t_search_result_headers[0]->notes_count );
-        $this->assertEquals( 0, $t_search_result_headers[0]->attachments_count );
-        $this->assertEquals( 10, $t_search_result_headers[0]->status );
+		$this->assertEquals( VS_PUBLIC, $t_search_result_headers[0]->view_state );
+		$this->assertEquals( 0, $t_search_result_headers[0]->notes_count );
+		$this->assertEquals( 0, $t_search_result_headers[0]->attachments_count );
+		$this->assertEquals( 10, $t_search_result_headers[0]->status );
 
-        $this->assertEquals( 2, count( $t_search_result_issues ));
-        $this->assertStringContainsString( 'testIssuesGet-1', $t_search_result_issues[0]->summary );
-        $this->assertStringContainsString( 'testIssuesGet-2', $t_search_result_issues[1]->summary );
+		$this->assertEquals( 2, count( $t_search_result_issues ));
+		$this->assertStringContainsString( 'testIssuesGet-1', $t_search_result_issues[0]->summary );
+		$this->assertStringContainsString( 'testIssuesGet-2', $t_search_result_issues[1]->summary );
 
-        $this->assertEquals( VS_PUBLIC, $t_search_result_issues[0]->view_state->id);
-        $this->assertEquals( 10, $t_search_result_issues[0]->status->id );
-    }
+		$this->assertEquals( VS_PUBLIC, $t_search_result_issues[0]->view_state->id);
+		$this->assertEquals( 10, $t_search_result_issues[0]->status->id );
+	}
 }

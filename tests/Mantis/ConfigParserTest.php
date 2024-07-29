@@ -249,7 +249,7 @@ class ConfigParserTest extends MantisCoreBase {
 		'case description' => array(
 <<<'EOT'
 EOT
- 		),
+		),
 		 * ---------------------------
  */
 

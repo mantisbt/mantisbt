@@ -110,8 +110,8 @@ class Period {
 	}
 
 	/**
- 	 * set dates for this month
- 	 *
+	 * set dates for this month
+	 *
 	 * @return void
 	 */
 	function this_month() {
@@ -260,7 +260,7 @@ class Period {
 
 	/**
 	 * get number of days in interval
-     * @return integer
+	 * @return integer
 	 */
 	function get_elapsed_days() {
 		return( $this->get_end_timestamp() - $this->get_start_timestamp() ) / ( 24 * 60 * 60 );
@@ -270,7 +270,7 @@ class Period {
 	 * print a period selector
 	 *
 	 * @param string $p_control_name Value representing the name of the html control on the web page.
-     * @return string
+	 * @return string
 	 */
 	function period_selector( $p_control_name ) {
 		$t_periods = [

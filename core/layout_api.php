@@ -226,7 +226,7 @@ function layout_admin_page_end() {
 	layout_body_javascript();
 
 	html_body_end();
-    html_end();
+	html_end();
 }
 
 

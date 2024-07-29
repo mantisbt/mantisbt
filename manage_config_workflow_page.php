@@ -339,12 +339,12 @@ function access_begin( $p_section_name ) {
 	echo '   </div>';
 	echo '   <div class="widget-body">';
 	echo '   <div class="widget-main no-padding">';
-    echo '        <div class="widget-toolbox padding-8 clearfix">';
-    echo            lang_get( 'access_change' );
-    echo '        </div>';
-    echo '        <div class="table-responsive">';
-    echo '        <table class="table table-striped table-bordered table-condensed">';
-    echo '        <tbody>';
+	echo '        <div class="widget-toolbox padding-8 clearfix">';
+	echo            lang_get( 'access_change' );
+	echo '        </div>';
+	echo '        <div class="table-responsive">';
+	echo '        <table class="table table-striped table-bordered table-condensed">';
+	echo '        <tbody>';
 }
 
 /**

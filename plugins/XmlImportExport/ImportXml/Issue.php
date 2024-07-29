@@ -159,8 +159,8 @@ class ImportXml_Issue implements ImportXml_Interface {
 						$i = -1;
 						$t_depth_cf = $t_reader->depth;
 						while( $t_reader->read() &&
-						        ( $t_reader->depth > $t_depth_cf ||
-						          $t_reader->nodeType != XMLReader::END_ELEMENT ) ) {
+								( $t_reader->depth > $t_depth_cf ||
+								  $t_reader->nodeType != XMLReader::END_ELEMENT ) ) {
 							if( $t_reader->nodeType == XMLReader::ELEMENT ) {
 								if( $t_reader->localName == 'custom_field' ) {
 									$t_custom_fields[++$i] = new stdClass();
@@ -180,8 +180,8 @@ class ImportXml_Issue implements ImportXml_Interface {
 						$i = -1;
 						$t_depth_bn = $t_reader->depth;
 						while( $t_reader->read() &&
-						        ( $t_reader->depth > $t_depth_bn ||
-						          $t_reader->nodeType != XMLReader::END_ELEMENT ) ) {
+								( $t_reader->depth > $t_depth_bn ||
+								  $t_reader->nodeType != XMLReader::END_ELEMENT ) ) {
 							if( $t_reader->nodeType == XMLReader::ELEMENT ) {
 								if( $t_reader->localName == 'bugnote' ) {
 									$t_bugnotes[++$i] = new stdClass();
@@ -213,8 +213,8 @@ class ImportXml_Issue implements ImportXml_Interface {
 						$i = -1;
 						$t_depth_att = $t_reader->depth;
 						while( $t_reader->read() &&
-						        ( $t_reader->depth > $t_depth_att ||
-						          $t_reader->nodeType != XMLReader::END_ELEMENT ) ) {
+								( $t_reader->depth > $t_depth_att ||
+								  $t_reader->nodeType != XMLReader::END_ELEMENT ) ) {
 							if( $t_reader->nodeType == XMLReader::ELEMENT ) {
 								if( $t_reader->localName == 'attachment' ) {
 									$t_attachments[++$i] = new stdClass();

@@ -772,8 +772,8 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 
 	# Add the current category if it is not in the list
 	if( $p_category_id != 0
-        && !in_array( $p_category_id, array_column( $t_cat_arr, 'id' ) )
-    ) {
+		&& !in_array( $p_category_id, array_column( $t_cat_arr, 'id' ) )
+	) {
 		$t_category_row = category_get_row( $p_category_id );
 		$t_category_row['project_name'] = project_get_name( $t_category_row['project_id'] );
 		$t_cat_arr[] = $t_category_row;
@@ -2113,7 +2113,7 @@ function print_bug_attachment_preview_audio_video( array $p_attachment, $p_file_
 	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
 	echo '<' . $t_type . ' controls="controls"' . $t_preload . '>';
 	echo '<source src="' . string_attribute( $t_file_url ) . '" type="' . string_attribute( $p_file_type ) . '">';
-  	echo lang_get( 'browser_does_not_support_' . $t_type );
+	echo lang_get( 'browser_does_not_support_' . $t_type );
 	echo '</' . $t_type . '>';
 	echo "</a></div>";
 }

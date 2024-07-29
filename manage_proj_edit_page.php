@@ -1028,8 +1028,8 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', [$f_project_id] );
 							<div class="form-inline pull-right">
 								<?php echo form_security_field( 'manage_proj_user_remove' ) ?>
 								<button name="btn-remove-all"
-									    class="btn btn-primary btn-white btn-round"
-									    formaction="manage_proj_user_remove.php">
+										class="btn btn-primary btn-white btn-round"
+										formaction="manage_proj_user_remove.php">
 									<?php echo lang_get( 'remove_all_link' ) ?>
 								</button>
 								<button name="btn-undo-remove-all" class="hidden btn btn-primary btn-white btn-round">
@@ -1068,7 +1068,7 @@ if( count( $t_users ) > 0 ) { ?>
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
-        <fieldset>
+		<fieldset>
 		<table class="table table-bordered table-condensed table-striped">
 			<?php echo form_security_field( 'manage_proj_user_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
@@ -1109,7 +1109,7 @@ if( count( $t_users ) > 0 ) { ?>
 				</td>
 			</tr>
 		</table>
-        </fieldset>
+		</fieldset>
 		</div>
 		</div>
 		</div>

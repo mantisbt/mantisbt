@@ -263,7 +263,7 @@ function version_cache_array_rows( array $p_project_ids ) {
 			$g_cache_versions_project[$c_project_id] = [];
 		}
 		$g_cache_versions_project[$c_project_id][] = $c_version_id;
-        unset( $t_ids_to_fetch[$c_project_id] );
+		unset( $t_ids_to_fetch[$c_project_id] );
 	}
 	foreach( $t_ids_to_fetch as $t_id_not_found ) {
 		$g_cache_versions_project[$t_id_not_found] = false;

@@ -966,38 +966,38 @@ function string_truncate( $p_string, $p_length, $p_marker = '') {
  */
 function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
 
-    $inputLen = mb_strlen($input);
-    if ($length <= $inputLen) {
-        return $input;
-    }
+	$inputLen = mb_strlen($input);
+	if ($length <= $inputLen) {
+		return $input;
+	}
 
-    $padStrLen = mb_strlen($padStr);
-    $padLen = $length - $inputLen;
+	$padStrLen = mb_strlen($padStr);
+	$padLen = $length - $inputLen;
 
-    if ($type == STR_PAD_RIGHT) {
-        $repeatTimes = ceil($padLen / $padStrLen);
-        return mb_substr($input . str_repeat($padStr, $repeatTimes), 0, $length);
-    }
+	if ($type == STR_PAD_RIGHT) {
+		$repeatTimes = ceil($padLen / $padStrLen);
+		return mb_substr($input . str_repeat($padStr, $repeatTimes), 0, $length);
+	}
 
-    if ($type == STR_PAD_LEFT) {
-        $repeatTimes = ceil($padLen / $padStrLen);
-        return mb_substr(str_repeat($padStr, $repeatTimes), 0, floor($padLen)) . $input;
-    }
+	if ($type == STR_PAD_LEFT) {
+		$repeatTimes = ceil($padLen / $padStrLen);
+		return mb_substr(str_repeat($padStr, $repeatTimes), 0, floor($padLen)) . $input;
+	}
 
-    if ($type == STR_PAD_BOTH) {
+	if ($type == STR_PAD_BOTH) {
 
-        $padLen/= 2;
-        $padAmountLeft = floor($padLen);
-        $padAmountRight = ceil($padLen);
-        $repeatTimesLeft = ceil($padAmountLeft / $padStrLen);
-        $repeatTimesRight = ceil($padAmountRight / $padStrLen);
+		$padLen/= 2;
+		$padAmountLeft = floor($padLen);
+		$padAmountRight = ceil($padLen);
+		$repeatTimesLeft = ceil($padAmountLeft / $padStrLen);
+		$repeatTimesRight = ceil($padAmountRight / $padStrLen);
 
-        $paddingLeft = mb_substr(str_repeat($padStr, $repeatTimesLeft), 0, $padAmountLeft);
-        $paddingRight = mb_substr(str_repeat($padStr, $repeatTimesRight), 0, $padAmountLeft);
-        return $paddingLeft . $input . $paddingRight;
-    }
+		$paddingLeft = mb_substr(str_repeat($padStr, $repeatTimesLeft), 0, $padAmountLeft);
+		$paddingRight = mb_substr(str_repeat($padStr, $repeatTimesRight), 0, $padAmountLeft);
+		return $paddingLeft . $input . $paddingRight;
+	}
 
-    trigger_error('utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR);
+	trigger_error('utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR);
 }
 
 /**
@@ -1007,9 +1007,9 @@ function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
  * @deprecated mb_strlen() should be used in preference to this function
  */
 function utf8_strlen( $p_string ) {
-    error_parameters( __FUNCTION__ . '()', 'mb_strlen()' );
-    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
-    return mb_strlen( $p_string );
+	error_parameters( __FUNCTION__ . '()', 'mb_strlen()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	return mb_strlen( $p_string );
 }
 
 /**
@@ -1021,9 +1021,9 @@ function utf8_strlen( $p_string ) {
  * @deprecated mb_substr() should be used in preference to this function
  */
 function utf8_substr( $p_string, $p_offset, $p_length = null ) {
-    error_parameters( __FUNCTION__ . '()', 'mb_substr()' );
-    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
-    return mb_substr( $p_string, $p_offset, $p_length );
+	error_parameters( __FUNCTION__ . '()', 'mb_substr()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	return mb_substr( $p_string, $p_offset, $p_length );
 }
 
 /**
@@ -1033,7 +1033,7 @@ function utf8_substr( $p_string, $p_offset, $p_length = null ) {
  * @deprecated mb_strtolower() should be used in preference to this function
  */
 function utf8_strtolower( $p_string ) {
-    error_parameters( __FUNCTION__ . '()', 'mb_strtolower()' );
-    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
-    return mb_strtolower( $p_string );
+	error_parameters( __FUNCTION__ . '()', 'mb_strtolower()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	return mb_strtolower( $p_string );
 }

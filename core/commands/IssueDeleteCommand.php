@@ -24,12 +24,12 @@ use Mantis\Exceptions\ClientException;
  * A command that deletes an issue.
  */
 class IssueDeleteCommand extends Command {
-    /**
-     * @var integer issue note id to delete
-     */
-    private $id;
+	/**
+	 * @var integer issue note id to delete
+	 */
+	private $id;
 
-    /**
+	/**
 	 * Constructor
 	 *
 	 * @param array $p_data The command data.
@@ -67,7 +67,7 @@ class IssueDeleteCommand extends Command {
 		}
 	}
 
- 	/**
+	/**
 	 * Process the command.
 	 *
 	 * @return array Command response

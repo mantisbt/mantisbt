@@ -1415,7 +1415,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	# Copy attachments
 	if( $p_copy_attachments ) {
-	    file_copy_attachments( $t_bug_id, $t_new_bug_id );
+		file_copy_attachments( $t_bug_id, $t_new_bug_id );
 	}
 
 	# Copy users monitoring bug

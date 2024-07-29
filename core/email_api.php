@@ -830,17 +830,17 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type, $p
  * @access private
  */
 function email_filter_recipients_for_bug( $p_bug_id, array $p_recipients ) {
-    $t_view_bug_threshold = config_get( 'view_bug_threshold' );
+	$t_view_bug_threshold = config_get( 'view_bug_threshold' );
 
-    $t_authorized_recipients = [];
+	$t_authorized_recipients = [];
 
-    foreach( $p_recipients as $t_recipient_id => $t_recipient_email ) {
-        if( access_has_bug_level( $t_view_bug_threshold, $p_bug_id, $t_recipient_id ) ) {
-            $t_authorized_recipients[$t_recipient_id] = $t_recipient_email;
-        }
-    }
+	foreach( $p_recipients as $t_recipient_id => $t_recipient_email ) {
+		if( access_has_bug_level( $t_view_bug_threshold, $p_bug_id, $t_recipient_id ) ) {
+			$t_authorized_recipients[$t_recipient_id] = $t_recipient_email;
+		}
+	}
 
-    return $t_authorized_recipients;
+	return $t_authorized_recipients;
 }
 
 /**
