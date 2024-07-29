@@ -122,7 +122,7 @@ $t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_i
 	AND ' . $t_project_clause . '
 	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC';
 
-$t_result = db_query( $t_query, $t_show_all ? [$t_user] : [$t_user , $t_resolved] );
+$t_result = db_query( $t_query, $t_show_all ? [$t_user] : [$t_user, $t_resolved] );
 
 $t_sponsors = [];
 while( $t_row = db_fetch_array( $t_result ) ) {
@@ -249,7 +249,7 @@ $t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_i
 	AND ' . $t_project_clause . '
 	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC';
 
-$t_result = db_query( $t_query, $t_show_all ? [$t_user] : [$t_user , $t_resolved] );
+$t_result = db_query( $t_query, $t_show_all ? [$t_user] : [$t_user, $t_resolved] );
 
 $t_sponsors = [];
 while( $t_row = db_fetch_array( $t_result ) ) {

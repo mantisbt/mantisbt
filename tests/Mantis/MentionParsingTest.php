@@ -122,7 +122,7 @@ class MentionParsingTest extends MantisCoreBase {
 				['vboctor', 'someone']
 			],
 			'MentionNl2br' => [
-				string_nl2br( "Check with @vboctor\n" ) ,
+				string_nl2br( "Check with @vboctor\n" ),
 				['vboctor']
 			],
 			'MentionWithEmailAddress' => [

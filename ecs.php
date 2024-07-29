@@ -19,6 +19,7 @@ declare( strict_types = 1 );
 use PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\DisallowSpaceIndentSniff;
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
+use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
 use PhpCsFixer\Fixer\Basic\BracesPositionFixer;
@@ -311,6 +312,18 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/array_notation/whitespace_after_comma_in_array.html
 		 */
 		WhitespaceAfterCommaInArrayFixer::class,
+
+		/**
+		 * Array: No whitespace before comma in array
+		 *
+		 * In array declaration, there MUST NOT be a whitespace before
+		 * each comma.
+		 *
+		 * [1 , 2 , 8] > [1, 2, 3]
+		 *
+		 * @see https://cs.symfony.com/doc/rules/array_notation/no_whitespace_before_comma_in_array.html
+		 */
+		NoWhitespaceBeforeCommaInArrayFixer::class,
 
 		/**
 		 * Whitespace: Array indention

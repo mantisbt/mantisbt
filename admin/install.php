@@ -220,7 +220,7 @@ $t_prefix_defaults = [
 		'db_table_prefix'        => 'm',
 		'db_table_plugin_prefix' => 'plg',
 		'db_table_suffix'        => '',
-	] ,
+	],
 ];
 foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
 	$t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
