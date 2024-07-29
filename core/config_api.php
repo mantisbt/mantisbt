@@ -633,7 +633,7 @@ function config_eval( $p_value, $p_global = false ) {
 
 		if( $t_count > 0 ) {
 			foreach( $t_matches as $t_match ) {
-				list(, $t_match_with_delimiters, $t_config ) = $t_match;
+				list( , $t_match_with_delimiters, $t_config ) = $t_match;
 
 				# Make sure the config actually exists before retrieving it
 				if( !isset( $GLOBALS['g_' . $t_config ] ) ) {

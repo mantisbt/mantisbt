@@ -260,7 +260,7 @@ class UserPreferences {
 		}
 		switch( self::$_default_mapping[$p_string][1] ) {
 			case 'int':
-				return (int)($this->$p_string);
+				return (int)( $this->$p_string );
 			default:
 				return $this->$p_string;
 		}
@@ -432,7 +432,7 @@ function user_pref_db_insert( $p_user_id, $p_project_id, UserPreferences $p_pref
  */
 function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
 	user_ensure_unprotected( $p_user_id );
-	user_pref_db_update($p_user_id, $p_project_id, $p_prefs );
+	user_pref_db_update( $p_user_id, $p_project_id, $p_prefs );
 	user_pref_clear_cache( $p_user_id, $p_project_id );
 }
 

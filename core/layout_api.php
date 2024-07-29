@@ -116,7 +116,7 @@ function layout_page_header_begin( $p_page_title = null ) {
  *
  * @return void
  */
-function layout_page_header_end( $p_page_id = null) {
+function layout_page_header_end( $p_page_id = null ) {
 	global $g_error_send_page_header;
 
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
@@ -369,8 +369,8 @@ function layout_login_page_begin( $p_title = '' ) {
 	}
 
 	# Advertise the availability of the browser search plug-ins.
-	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true) . '" />' . "\n";
-	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true) . '" />' . "\n";
+	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true ) . '" />' . "\n";
+	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true ) . '" />' . "\n";
 
 	html_head_javascript();
 
@@ -405,8 +405,8 @@ function layout_login_page_end() {
  * @return void
  */
 function layout_navbar() {
-	$t_logo_url = config_get_global('logo_url');
-	$t_short_path = config_get_global('short_path');
+	$t_logo_url = config_get_global( 'logo_url' );
+	$t_short_path = config_get_global( 'short_path' );
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
 	echo '<div id="navbar-container" class="navbar-container">';
@@ -421,14 +421,14 @@ function layout_navbar() {
 	echo '<div class="navbar-header">';
 	echo '<a href="' . $t_short_path . $t_logo_url . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
-	echo string_display_line( config_get('window_title') );
+	echo string_display_line( config_get( 'window_title' ) );
 	echo ' </span>';
 	echo '</a>';
 
-	$t_toggle_class = (OFF == config_get('show_avatar') ? 'navbar-toggle' : 'navbar-toggle-img');
+	$t_toggle_class = ( OFF == config_get( 'show_avatar' ) ? 'navbar-toggle' : 'navbar-toggle-img' );
 	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
 	echo '<span class="sr-only">Toggle user menu</span>';
-	if (auth_is_user_authenticated()) {
+	if ( auth_is_user_authenticated() ) {
 		layout_navbar_user_avatar();
 	}
 	echo '</button>';
@@ -437,7 +437,7 @@ function layout_navbar() {
 
 	echo '<div class="navbar-buttons navbar-header navbar-collapse collapse">';
 	echo '<ul class="nav ace-nav">';
-	if (auth_is_user_authenticated()) {
+	if ( auth_is_user_authenticated() ) {
 		# shortcuts button bar
 		layout_navbar_button_bar();
 		# projects dropdown menu
@@ -567,7 +567,7 @@ function layout_navbar_button_bar() {
 	if( $t_show_report_bug_button ) {
 		$t_bug_url = string_get_bug_report_url();
 		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
-		print_icon( 'fa-edit');
+		print_icon( 'fa-edit' );
 		echo ' ' . lang_get( 'report_bug_link' );
 		echo '</a>';
 	}
@@ -780,7 +780,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Project Wiki
-		if( ON == config_get_global( 'wiki_enable' )  ) {
+		if( ON == config_get_global( 'wiki_enable' ) ) {
 			$t_sidebar_items[] = [
 				'url' => 'wiki.php?type=project&amp;id=' . $t_current_project,
 				'title' => 'wiki',
@@ -868,7 +868,7 @@ function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response ) {
  * Process main menu options from config.
  * @return array containing sidebar items
  */
-function layout_config_menu_options_for_sidebar( ) {
+function layout_config_menu_options_for_sidebar() {
 	$t_menu_options = [];
 	$t_custom_options = config_get( 'main_menu_custom_options' );
 
@@ -1050,7 +1050,7 @@ function layout_breadcrumbs() {
 	echo '<ul class="breadcrumb">' , "\n";
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
-		if( isset( $_SERVER['QUERY_STRING'] ) && !is_blank( $_SERVER['QUERY_STRING'] )) {
+		if( isset( $_SERVER['QUERY_STRING'] ) && !is_blank( $_SERVER['QUERY_STRING'] ) ) {
 			$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 		}
 
@@ -1287,7 +1287,7 @@ function layout_footer_end() {
  */
 function layout_scroll_up_button() {
 	echo '<a class="btn-scroll-up btn btn-sm btn-inverse display" id="btn-scroll-up" href="#">' . "\n";
-	print_icon( 'fa-angle-double-up', 'ace-icon icon-only bigger-110');
+	print_icon( 'fa-angle-double-up', 'ace-icon icon-only bigger-110' );
 	echo "\n" . '</a>' . "\n";
 }
 

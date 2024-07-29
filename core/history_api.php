@@ -508,7 +508,7 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
  * @return array
  */
 function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
-	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
+	$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
 	$t_query_options = [
 		'bug_id' => $p_bug_id,

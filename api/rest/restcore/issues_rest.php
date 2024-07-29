@@ -29,7 +29,7 @@ use Mantis\Exceptions\ClientException;
 /**
  * @var \Slim\App $g_app
  */
-$g_app->group('/issues', function() use ( $g_app ) {
+$g_app->group( '/issues', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_issue_get' );
 	$g_app->get( '/', 'rest_issue_get' );
 	$g_app->get( '/{id}', 'rest_issue_get' );
@@ -74,7 +74,7 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->get( '/{id}/files', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}/', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}', 'rest_issue_files_get' );
-});
+} );
 
 /**
  * A method that does the work to handle getting an issue via REST API.
@@ -112,7 +112,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		$t_project_id = (int)$p_request->getParam( 'project_id', ALL_PROJECTS );
 		if( $t_project_id != ALL_PROJECTS ) {
 			$t_message = "Project '$t_project_id' doesn't exist";
-			if (!project_exists( $t_project_id ) ) {
+			if ( !project_exists( $t_project_id ) ) {
 				return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
 			}
 
@@ -169,7 +169,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue = $p_request->getParsedBody();
 	if( !$t_issue ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
 	if( isset( $t_issue['files'] ) ) {
@@ -416,7 +416,7 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	# Construct full issue from issue from db + patched info
 	$t_issue_patch = $p_request->getParsedBody();
 	if( !$t_issue_patch ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 	if( isset( $t_issue_patch['id'] ) && $t_issue_patch['id'] != $t_issue_id ) {
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Issue id mismatch' );

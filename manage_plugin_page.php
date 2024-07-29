@@ -75,7 +75,7 @@ if( $t_plugins->countInstalled() ) {
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-cubes', 'ace-icon' ); ?>
-					<?php echo lang_get('plugins_installed') ?>
+					<?php echo lang_get( 'plugins_installed' ) ?>
 				</h4>
 			</div>
 
@@ -183,7 +183,7 @@ if( $t_plugins->countAvailable() ) {
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-cube', 'ace-icon' ); ?>
-			<?php echo lang_get('plugins_available') ?>
+			<?php echo lang_get( 'plugins_available' ) ?>
 		</h4>
 	</div>
 
@@ -225,7 +225,7 @@ if( $t_plugins->countAvailable() ) {
 	<div class="space-10"></div>
 	<div class="well well-sm">
 		<?php print_icon( 'fa-key', 'ace-icon' ); ?>
-		<?php echo lang_get('plugin_key_label') ?>
+		<?php echo lang_get( 'plugin_key_label' ) ?>
 		<span class='dependency_met'><?php echo lang_get( 'plugin_key_met' ) ?></span>,
 		<span class='dependency_unmet'><?php echo lang_get( 'plugin_key_unmet' ) ?></span>,
 		<span class='dependency_dated'><?php echo lang_get( 'plugin_key_dated' ) ?></span>,

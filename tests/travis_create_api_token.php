@@ -31,7 +31,7 @@ require_api( 'api_token_api.php' );
 
 # Make sure this script doesn't run via the webserver
 if( php_sapi_name() != 'cli' ) {
-	echo basename( __FILE__  ) . " is not allowed to run through the webserver.\n";
+	echo basename( __FILE__ ) . " is not allowed to run through the webserver.\n";
 	exit( 1 );
 }
 

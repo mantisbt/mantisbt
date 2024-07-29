@@ -220,7 +220,7 @@ print_account_menu( 'account_page.php' );
 						&& !user_is_email_unique( $u_email, $u_id )
 					) {
 						echo '<span class="padding-8">';
-						print_icon('fa-exclamation-triangle',
+						print_icon( 'fa-exclamation-triangle',
 							'ace-icon bigger-125 red padding-right-4'
 						);
 						echo lang_get( 'email_not_unique' );
@@ -267,7 +267,7 @@ print_account_menu( 'account_page.php' );
 	</div>
 	<?php if( $t_show_update_button ) { ?>
 		<div class="widget-toolbox padding-8 clearfix">
-			<?php if ($t_force_pw_reset) { ?>
+			<?php if ( $t_force_pw_reset ) { ?>
 				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
 			<?php } ?>
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_user_button' ) ?>" />

@@ -114,7 +114,7 @@ class LangCheckFile {
 	 *
 	 * @param string $p_message
 	 */
-	protected function logWarn( $p_message, $p_line = 0  ) {
+	protected function logWarn( $p_message, $p_line = 0 ) {
 		if( $p_line ) {
 			$p_message = "Line $p_line: $p_message";
 		}
@@ -246,7 +246,7 @@ class LangCheckFile {
 		# Report errors
 		if( $t_check ) {
 			$this->logWarn( "'$t_lang' language is not defined in "
-				. implode(', ', $t_check )
+				. implode( ', ', $t_check )
 			);
 		}
 	}
@@ -294,14 +294,14 @@ class LangCheckFile {
 						break;
 					case '[':
 						if( $t_last_token != T_VARIABLE ) {
-							$this->logFail( "Unexpected opening square bracket '['", $t_line);
+							$this->logFail( "Unexpected opening square bracket '['", $t_line );
 							$t_pass = false;
 						}
 						$t_variable_array = true;
 						break;
 					case ']':
 						if( !$t_expect_end_array ) {
-							$this->logFail( "Unexpected closing square bracket ']'", $t_line);
+							$this->logFail( "Unexpected closing square bracket ']'", $t_line );
 							$t_pass = false;
 						}
 						$t_expect_end_array = false;
@@ -423,7 +423,7 @@ class LangCheckFile {
 
 						# Perform HTML tags validation if the string contains any
 						if( $this::canDoHtmlChecks()
-							&& preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text)
+							&& preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text )
 						) {
 							/** @noinspection PhpComposerExtensionStubsInspection */
 							$t_dom = new DOMDocument();
@@ -524,7 +524,7 @@ print_admin_menu_bar( 'test_langs.php' );
 			</h4>
 			<div class="widget-toolbar no-border hidden-xs">
 				<div class="widget-menu">
-					<?php print_extra_small_button( '#plugins', 'Scroll down to Plugins'); ?>
+					<?php print_extra_small_button( '#plugins', 'Scroll down to Plugins' ); ?>
 				</div>
 			</div>
 		</div>
@@ -567,7 +567,7 @@ checklangdir( $t_mantis_dir );
 			</h4>
 			<div class="widget-toolbar no-border hidden-xs">
 				<div class="widget-menu">
-					<?php print_extra_small_button( '#', 'Scroll back to top'); ?>
+					<?php print_extra_small_button( '#', 'Scroll back to top' ); ?>
 				</div>
 			</div>
 		</div>

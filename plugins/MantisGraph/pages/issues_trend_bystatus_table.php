@@ -77,7 +77,7 @@ foreach ( $t_rows as $t_row ) {
 	} else {
 		$t_data[$t_ptr][$t_row->status] = 1;
 		$t_view_status[$t_row->status] =
-			isset($t_status_arr[$t_row->status]) ? $t_status_arr[$t_row->status] : '@' . $t_row->status . '@';
+			isset( $t_status_arr[$t_row->status] ) ? $t_status_arr[$t_row->status] : '@' . $t_row->status . '@';
 	}
 	$t_bug[] = $t_row->id;
 }
@@ -105,14 +105,14 @@ for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 				} else {
 					$t_data[$t_ptr][$t_row['new_value']] = 0;
 					$t_view_status[$t_row['new_value']] =
-						isset($t_status_arr[$t_row['new_value']]) ? $t_status_arr[$t_row['new_value']] : '@' . $t_row['new_value'] . '@';
+						isset( $t_status_arr[$t_row['new_value']] ) ? $t_status_arr[$t_row['new_value']] : '@' . $t_row['new_value'] . '@';
 				}
 				if( isset( $t_data[$t_ptr][$t_row['old_value']] ) ) {
 					$t_data[$t_ptr][$t_row['old_value']] ++;
 				} else {
 					$t_data[$t_ptr][$t_row['old_value']] = 1;
 					$t_view_status[$t_row['old_value']] =
-						isset($t_status_arr[$t_row['old_value']]) ? $t_status_arr[$t_row['old_value']] : '@' . $t_row['old_value'] . '@';
+						isset( $t_status_arr[$t_row['old_value']] ) ? $t_status_arr[$t_row['old_value']] : '@' . $t_row['old_value'] . '@';
 				}
 				break;
 			case 1: # new bug
@@ -183,7 +183,7 @@ for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 		}
 	}
 
-	echo '<tr class="row-' . ($t_ptr%2+1) . '"><td>' . $t_ptr . ' (' . date( $t_date_format, $t_metrics[0][$t_ptr] ) . ')' . '</td>';
+	echo '<tr class="row-' . ( $t_ptr%2+1 ) . '"><td>' . $t_ptr . ' (' . date( $t_date_format, $t_metrics[0][$t_ptr] ) . ')' . '</td>';
 	for( $i=1; $i<=$t_label_count; $i++ ) {
 		echo '<td>' . $t_metrics[$i][$t_ptr] . '</td>';
 	}

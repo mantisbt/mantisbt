@@ -109,7 +109,7 @@ layout_page_begin();
 		</div>
 		</div>
 			<div class="widget-toolbox padding-8 clearfix">
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'select_project_button') ?>" />
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'select_project_button' ) ?>" />
 			</div>
 		</div>
 	</div>

@@ -75,13 +75,13 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 						'trim',
 						is_array( $t_plugins ) ? $t_plugins : []
 					) ) . '"
-					data-i18n=\'' . json_encode([
+					data-i18n=\'' . json_encode( [
 						'copy-to-clipboard' => [
 							'copy' => lang_get( 'plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy' ),
 							'copy-success' => lang_get( 'plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success' ),
 							'copy-error' => lang_get( 'plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error' ),
 						],
-					]) . '\'
+					] ) . '\'
 					src="' . plugin_file( 'syntax-highlighting/init.js' ) . '"></script>';
 			}
 		}

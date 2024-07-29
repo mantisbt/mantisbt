@@ -101,7 +101,7 @@ class ConfigsSetCommand extends Command {
 
 		$t_set_of_configs = $this->payload( 'configs' );
 		foreach( $t_set_of_configs as $t_config ) {
-			if( !isset( $t_config['option'] ) || is_blank( $t_config['option']) ) {
+			if( !isset( $t_config['option'] ) || is_blank( $t_config['option'] ) ) {
 				throw new ClientException(
 					'Config option not provided',
 					ERROR_EMPTY_FIELD,
@@ -244,7 +244,7 @@ class ConfigsSetCommand extends Command {
 				);
 			}
 
-			if( !preg_match('/^[a-zA-Z0-9_-]+$/', $t_entry['name'] ) ) {
+			if( !preg_match( '/^[a-zA-Z0-9_-]+$/', $t_entry['name'] ) ) {
 				throw new ClientException(
 					sprintf( "Enum '%s' has invalid enum entry name '%s'.", $p_enum_name, $t_entry['name'] ),
 					ERROR_INVALID_FIELD_VALUE,

@@ -389,7 +389,7 @@ function mc_filter_search_issue_headers( $p_username, $p_password, $p_filter_sea
 		return mci_fault_login_failed();
 	}
 
-	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page );
 
 	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {
@@ -417,7 +417,7 @@ function mc_filter_search_issues( $p_username, $p_password, $p_filter_search, $p
 		return mci_fault_login_failed();
 	}
 
-	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page );
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
@@ -447,7 +447,7 @@ function mc_filter_search_issue_ids( $p_username, $p_password, $p_filter_search,
 		return mci_fault_login_failed();
 	}
 
-	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page );
 
 	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {

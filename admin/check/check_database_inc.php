@@ -269,7 +269,7 @@ if( db_is_mysql() ) {
 		$t_version = $t_versions[$t_db_major_version];
 		$t_version_type = $t_version[0];
 		$t_mysql_ga_release = version_compare( $t_db_version, $t_version[1], '>=' );
-		if( in_array( $t_version_type, ['GA', 'LTS'] )) {
+		if( in_array( $t_version_type, ['GA', 'LTS'] ) ) {
 			# Support end-dates as per https://www.mysql.com/support/
 			/** @noinspection PhpUnhandledExceptionInspection */
 			$t_date_ga = new DateTimeImmutable( $t_version[2] );
@@ -286,7 +286,7 @@ if( db_is_mysql() ) {
 			$t_innovation_versions = array_slice( $t_versions, 8 );
 			foreach( $t_innovation_versions as $t_key => $t_unused ) {
 				$t_next_version = next( $t_innovation_versions );
-				if( $t_key == $t_db_major_version) {
+				if( $t_key == $t_db_major_version ) {
 					break;
 				}
 			}

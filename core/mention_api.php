@@ -101,7 +101,7 @@ function mention_get_users( $p_text ) {
 	}
 
 	$t_matches = mention_get_candidates( $p_text );
-	if( empty( $t_matches )) {
+	if( empty( $t_matches ) ) {
 		return [];
 	}
 
@@ -149,7 +149,7 @@ function mention_format_text( $p_text, $p_html = true ) {
 	$t_mentions_tag = mentions_tag();
 	$t_formatted_mentions = [];
 
-	foreach( $t_mentioned_users as $t_username => $t_user_id  ) {
+	foreach( $t_mentioned_users as $t_username => $t_user_id ) {
 		$t_mention = $t_mentions_tag . $t_username;
 		$t_mention_formatted = $t_mention;
 

@@ -712,7 +712,7 @@ function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target
  * @access public
  */
 function print_column_title_tags( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-tags">' . lang_get('tags') . '</th>';
+	echo '<th class="column-tags">' . lang_get( 'tags' ) . '</th>';
 }
 
 /**

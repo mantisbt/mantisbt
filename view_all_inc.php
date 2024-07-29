@@ -106,9 +106,9 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 	# Viewing range info
 	$v_start = 0;
 	$v_end = 0;
-	if (count($t_rows) > 0) {
-		$v_start = $g_filter['per_page'] * ($f_page_number - 1) + 1;
-		$v_end = $v_start + count($t_rows) - 1;
+	if ( count( $t_rows ) > 0 ) {
+		$v_start = $g_filter['per_page'] * ( $f_page_number - 1 ) + 1;
+		$v_end = $v_start + count( $t_rows ) - 1;
 	}
 	echo '<span class="badge"> ' . $v_start . ' - ' . $v_end . ' / ' . $t_bug_count . '</span>' ;
 ?>
@@ -252,9 +252,9 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 ?>
 			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="action" class="input-sm">
-				<?php print_all_bug_action_option_list($t_unique_project_ids) ?>
+				<?php print_all_bug_action_option_list( $t_unique_project_ids ) ?>
 			</select>
-			<input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get('ok'); ?>"/>
+			<input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get( 'ok' ); ?>"/>
 <?php
 		} else {
 			echo '&#160;';

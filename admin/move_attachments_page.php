@@ -199,7 +199,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 	
 </table>
 <div class="widget-toolbox padding-8 clearfix">
-	<input name="type" type="hidden" value="<?php echo string_attribute( $f_file_type); ?>" />
+	<input name="type" type="hidden" value="<?php echo string_attribute( $f_file_type ); ?>" />
 	<input type="submit" class="btn btn-primary btn-white btn-round" value="Move <?php echo $t_type ?>" />
 </div>
 </div>

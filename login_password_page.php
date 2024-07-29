@@ -125,7 +125,7 @@ $t_show_remember_me = !$f_reauthenticate && auth_allow_perm_login( $t_user_id, $
 $t_form_title = $f_reauthenticate ? lang_get( 'reauthenticate_title' ) : lang_get( 'login_title' );
 
 # If user is already authenticated and not anonymous
-if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthenticate) {
+if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthenticate ) {
 	# If return URL is specified redirect to it; otherwise use default page
 	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, false, true );

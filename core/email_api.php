@@ -476,8 +476,8 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		# exclude users who don't have at least viewer access to the bug,
 		# or who can't see bugnotes if the last update included a bugnote
 		$t_view_bug_threshold = config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id );
-		if(   !access_has_bug_level( $t_view_bug_threshold, $p_bug_id, $t_id )
-		   || (   $p_bugnote_id
+		if( !access_has_bug_level( $t_view_bug_threshold, $p_bug_id, $t_id )
+		   || ( $p_bugnote_id
 			   && !access_has_bugnote_level( $t_view_bug_threshold, $p_bugnote_id, $t_id )
 			  )
 		) {
@@ -897,7 +897,7 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, 
 		email_relationship_send( $p_bug_id, $p_related_bug_id, $t_message_id );
 	}
 
-	if( $p_bug_id != $p_related_bug_id && bug_exists( $p_related_bug_id) ) {
+	if( $p_bug_id != $p_related_bug_id && bug_exists( $p_related_bug_id ) ) {
 		email_relationship_send( $p_related_bug_id, $p_bug_id, $t_message_id );
 	}
 }
@@ -1202,7 +1202,7 @@ function email_bug_reopened( $p_bug_id ) {
  *
  * @return void
  */
-function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) {
+function email_owner_changed( $p_bug_id, $p_prev_handler_id, $p_new_handler_id ) {
 	if ( $p_prev_handler_id == 0 && $p_new_handler_id != 0 ) {
 		log_event( LOG_EMAIL, sprintf( 'Issue #%d assigned to user @U%d.', $p_bug_id, $p_new_handler_id ) );
 	} else if ( $p_prev_handler_id != 0 && $p_new_handler_id == 0 ) {
@@ -1502,7 +1502,7 @@ function email_send( EmailData $p_email_data ) {
 	if( !empty( $t_debug_email ) ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
 		$t_recipient = $t_debug_email;
-		log_event(LOG_EMAIL_VERBOSE, "Using debug email '$t_debug_email'");
+		log_event( LOG_EMAIL_VERBOSE, "Using debug email '$t_debug_email'" );
 	}
 
 	try {
@@ -2253,8 +2253,8 @@ function email_shutdown_function() {
 	# Nothing to do if
 	# - no emails have been generated in the current request
 	# - system is configured to use cron job (unless processing is forced)
-	if(    $g_email_shutdown_processing == EMAIL_SHUTDOWN_SKIP
-		|| (   !( $g_email_shutdown_processing & EMAIL_SHUTDOWN_FORCE )
+	if( $g_email_shutdown_processing == EMAIL_SHUTDOWN_SKIP
+		|| ( !( $g_email_shutdown_processing & EMAIL_SHUTDOWN_FORCE )
 			&& config_get( 'email_send_using_cronjob' )
 		   )
 	) {

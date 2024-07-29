@@ -728,7 +728,7 @@ if( $t_flags['monitor_show'] ) {
 						echo ' <a class="btn btn-xs btn-primary btn-white btn-round" '
 							. 'href="' . helper_mantis_url( 'bug_monitor_delete.php' )
 							. '?bug_id=' . $f_issue_id . '&amp;user_id=' . $t_monitor_user['id']
-							. htmlspecialchars(form_security_param( 'bug_monitor_delete' ))
+							. htmlspecialchars( form_security_param( 'bug_monitor_delete' ) )
 							. '">'
 							. icon_get( 'fa-times' )
 							. '</a>';
@@ -1124,7 +1124,7 @@ function bug_view_button_bug_change_status( BugData $p_bug ) {
 		# Add close if user is bug's reporter, still has rights to report issues
 		# (to prevent users downgraded to viewers from updating issues) and
 		# reporters are allowed to close their own issues
-		(  bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
+		( bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
 		&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id )
 		&& ON == config_get( 'allow_reporter_close' )
 		),

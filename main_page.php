@@ -102,9 +102,9 @@ echo '<div class="col-md-6 col-xs-12">';
 if( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
 	# Admin can edit news for All Projects (site-wide)
 	if( ALL_PROJECTS != helper_get_current_project() || current_user_is_administrator() ) {
-		print_link_button( 'news_menu_page.php', lang_get( 'edit_news_link' ), 'pull-right');
+		print_link_button( 'news_menu_page.php', lang_get( 'edit_news_link' ), 'pull-right' );
 	} else {
-		print_link_button( 'login_select_proj_page.php', lang_get( 'edit_news_link' ), 'pull-right');
+		print_link_button( 'login_select_proj_page.php', lang_get( 'edit_news_link' ), 'pull-right' );
 	}
 }
 echo '</div>';

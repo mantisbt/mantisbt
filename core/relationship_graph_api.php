@@ -169,7 +169,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 
 	$t_graph = new Graph( $t_id_string, $t_graph_attributes, $t_neato_tool );
 
-	$t_graph->set_default_node_attr(  [
+	$t_graph->set_default_node_attr( [
 		'fontname'	=> $t_graph_fontname,
 		'fontsize'	=> $t_graph_fontsize,
 		'shape'		=> 'record',
@@ -178,7 +178,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 		'width'		=> '0.4'
 	] );
 
-	$t_graph->set_default_edge_attr(  [
+	$t_graph->set_default_edge_attr( [
 		'style'		=> 'solid',
 		'color'		=> '#0000C0',
 		'dir'		=> 'none'
@@ -304,7 +304,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 
 	$t_graph = new Digraph( $t_id_string, $t_graph_attributes, $t_dot_tool );
 
-	$t_graph->set_default_node_attr(  [
+	$t_graph->set_default_node_attr( [
 		'fontname'	=> $t_graph_fontname,
 		'fontsize'	=> $t_graph_fontsize,
 		'shape'		=> 'record',
@@ -313,7 +313,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 		'width'		=> '0.4'
 	] );
 
-	$t_graph->set_default_edge_attr(  [
+	$t_graph->set_default_edge_attr( [
 		'style'		=> 'solid',
 		'color'		=> '#C00000',
 		'dir'		=> 'back'

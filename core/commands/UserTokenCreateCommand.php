@@ -88,7 +88,7 @@ class UserTokenCreateCommand extends Command {
 		}
 
 		// Check if it possible to create tokens for target user - e.g. user is not protected.
-		if( !api_token_can_create( $this->user_id )) {
+		if( !api_token_can_create( $this->user_id ) ) {
 			throw new ClientException(
 				'Create API tokens not allowed for target user',
 				ERROR_ACCESS_DENIED

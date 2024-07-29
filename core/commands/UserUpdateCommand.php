@@ -148,7 +148,7 @@ class UserUpdateCommand extends Command {
 		}
 
 		$t_old_username = user_get_username( $this->user_id );
-		$t_new_username = isset( $t_user['username' ] ) ? trim( $t_user['username']): null;
+		$t_new_username = isset( $t_user['username' ] ) ? trim( $t_user['username'] ): null;
 
 		if( !is_null( $t_new_username ) && $t_new_username !== $t_old_username ) {
 			user_ensure_name_unique( $t_new_username, $this->user_id );

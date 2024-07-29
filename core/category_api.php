@@ -169,7 +169,7 @@ function category_can_remove( $p_category_id ) {
  */
 function category_ensure_can_remove( $p_category_id ) {
 	if( !category_can_remove( $p_category_id ) ) {
-		error_parameters( category_get_name( $p_category_id) );
+		error_parameters( category_get_name( $p_category_id ) );
 		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
 	}
 }
@@ -526,7 +526,7 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 
 	if( isset( $g_cache_category_project[(int)$p_project_id] ) ) {
 		$t_categories = [];
-		if( !empty( $g_cache_category_project[(int)$p_project_id]) ) {
+		if( !empty( $g_cache_category_project[(int)$p_project_id] ) ) {
 			foreach( $g_cache_category_project[(int)$p_project_id] as $t_id ) {
 				$t_categories[] = category_get_row( $t_id );
 			}

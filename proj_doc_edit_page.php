@@ -90,7 +90,7 @@ print_doc_menu();
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-edit', 'ace-icon' ); ?>
-			<?php echo lang_get('upload_file_title') ?>
+			<?php echo lang_get( 'upload_file_title' ) ?>
 		</h4>
 	</div>
 <div class="widget-body">
@@ -144,9 +144,9 @@ print_doc_menu();
 </div>
 </div>
 	<div class="widget-toolbox padding-8 clearfix">
-		<span class="required pull-right"> * <?php echo lang_get('required') ?></span>
+		<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
 		<input type="submit" class="btn btn-primary btn-white btn-round"
-			value="<?php echo lang_get('file_update_button') ?>"/>
+			value="<?php echo lang_get( 'file_update_button' ) ?>"/>
 	</div>
 </div>
 </div>

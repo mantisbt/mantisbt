@@ -215,9 +215,9 @@ function is_page_name( $p_string ) {
  */
 function is_windows_server() {
 	if( defined( 'PHP_WINDOWS_VERSION_MAJOR' ) ) {
-		return (PHP_WINDOWS_VERSION_MAJOR > 0);
+		return ( PHP_WINDOWS_VERSION_MAJOR > 0 );
 	}
-	return ('WIN' == substr( PHP_OS, 0, 3 ) );
+	return ( 'WIN' == substr( PHP_OS, 0, 3 ) );
 }
 
 /**
@@ -235,16 +235,16 @@ function getClassProperties( $p_classname, $p_type = 'public', $p_return_object 
 	$t_props_arr = [];
 	foreach( $t_props as $t_prop ) {
 		$t_name = $t_prop->getName();
-		if( $t_prop->isPublic() and (stripos( $p_type, 'public' ) === false) ) {
+		if( $t_prop->isPublic() and ( stripos( $p_type, 'public' ) === false ) ) {
 			continue;
 		}
-		if( $t_prop->isPrivate() and (stripos( $p_type, 'private' ) === false) ) {
+		if( $t_prop->isPrivate() and ( stripos( $p_type, 'private' ) === false ) ) {
 			continue;
 		}
-		if( $t_prop->isProtected() and (stripos( $p_type, 'protected' ) === false) ) {
+		if( $t_prop->isProtected() and ( stripos( $p_type, 'protected' ) === false ) ) {
 			continue;
 		}
-		if( $t_prop->isStatic() and (stripos( $p_type, 'static' ) === false) ) {
+		if( $t_prop->isStatic() and ( stripos( $p_type, 'static' ) === false ) ) {
 			continue;
 		}
 		if( $p_return_object ) {

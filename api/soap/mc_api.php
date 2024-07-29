@@ -326,11 +326,11 @@ class ApiObjectFactory {
 	 * @param integer $p_value Integer value to return as date time string.
 	 * @return datetime in expected API format.
 	 */
-	static function datetime($p_value ) {
+	static function datetime( $p_value ) {
 		$t_string_value = self::datetimeString( $p_value );
 
 		if( ApiObjectFactory::$soap ) {
-			return new SoapVar($t_string_value, XSD_DATETIME, 'xsd:dateTime');
+			return new SoapVar( $t_string_value, XSD_DATETIME, 'xsd:dateTime' );
 		}
 
 		return $t_string_value;
@@ -341,7 +341,7 @@ class ApiObjectFactory {
 	 * @param integer $p_timestamp Integer value to format as date time string.
 	 * @return string for provided timestamp
 	 */
-	static function datetimeString($p_timestamp ) {
+	static function datetimeString( $p_timestamp ) {
 		if( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
 			return null;
 		}
@@ -359,11 +359,11 @@ class ApiObjectFactory {
 			return false;
 		}
 
-		if( ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'SoapFault') {
+		if( ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'SoapFault' ) {
 			return true;
 		}
 
-		if( !ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'RestFault') {
+		if( !ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'RestFault' ) {
 			return true;
 		}
 
@@ -699,7 +699,7 @@ function mci_profile_as_array_by_id( $p_profile_id ) {
 
 	try {
 		$t_profile = profile_get_row( $t_profile_id );
-	} catch (ClientException $e) {
+	} catch ( ClientException $e ) {
 		return null;
 	}
 
@@ -1306,7 +1306,7 @@ function mci_fault_login_failed() {
  * @param string  $p_detail  The optional details to append to the error message.
  * @return RestFault|SoapFault
  */
-function mci_fault_access_denied($p_user_id = 0, $p_detail = '' ) {
+function mci_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
 	if( $p_user_id ) {
 		$t_user_name = user_get_name( $p_user_id );
 		$t_reason = 'Access denied for user ' . $t_user_name . '.';

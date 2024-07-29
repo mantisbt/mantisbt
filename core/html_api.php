@@ -1216,7 +1216,7 @@ class TableGridLayout {
 						$t_cols_left -= ( $t_item->colspan + 1 );
 					}
 					if( $t_cols_left > 0 ) {
-						$this->render_td_empty($t_cols_left);
+						$this->render_td_empty( $t_cols_left );
 					}
 					echo '</tr>';
 					break;
@@ -1242,7 +1242,7 @@ class TableGridLayout {
 						$t_cols_left -= $t_item->colspan;
 					}
 					if( $t_cols_left > 0 ) {
-						$this->render_td_empty($t_cols_left);
+						$this->render_td_empty( $t_cols_left );
 					}
 					echo '</tr>';
 			}
@@ -1255,7 +1255,7 @@ class TableGridLayout {
 	 */
 	protected function render_td_empty( $p_colspan ) {
 		echo '<td';
-		if( $p_colspan > 1) {
+		if( $p_colspan > 1 ) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
 		echo '>';
@@ -1282,7 +1282,7 @@ class TableGridLayout {
 		if( $p_item->attr_class ) {
 			echo 'class="' . $p_item->attr_class . '"';
 		}
-		if( $p_colspan > 1) {
+		if( $p_colspan > 1 ) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
 		if( $p_item->header_attr_id ) {
@@ -1299,12 +1299,12 @@ class TableGridLayout {
 	 * @param TableFieldsItem $p_item Item to display
 	 * @param integer $p_colspan Colspan attribute for cell
 	 */
-	protected function render_td_item_content( TableFieldsItem $p_item, $p_colspan  ) {
+	protected function render_td_item_content( TableFieldsItem $p_item, $p_colspan ) {
 		echo '<td';
 		if( $p_item->attr_class ) {
 			echo 'class="' . $p_item->attr_class . '"';
 		}
-		if( $p_colspan > 1) {
+		if( $p_colspan > 1 ) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
 		if( $p_item->content_attr_id ) {

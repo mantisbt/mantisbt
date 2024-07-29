@@ -113,7 +113,7 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 
 	$t_cost_per_min = $p_cost_per_hour / 60.0;
 
-	$t_access_level_required = config_get( 'time_tracking_view_threshold');
+	$t_access_level_required = config_get( 'time_tracking_view_threshold' );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		if ( !access_has_bugnote_level( $t_access_level_required, $t_row['id'] ) ) {

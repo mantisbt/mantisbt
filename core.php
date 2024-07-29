@@ -340,7 +340,7 @@ function set_default_path() {
 		if( isset( $_SERVER['SERVER_PORT'] ) ) {
 			$t_port = ':' . $_SERVER['SERVER_PORT'];
 			if( ( ':80' == $t_port && 'http' == $t_protocol )
-				|| ( ':443' == $t_port && 'https' == $t_protocol )) {
+				|| ( ':443' == $t_port && 'https' == $t_protocol ) ) {
 				$t_port = '';
 			}
 		} else {

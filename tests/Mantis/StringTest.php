@@ -51,8 +51,8 @@ class StringTest extends MantisCoreBase {
 		# config $g_short_path will be that of the phpunit binary. We also
 		# need to cover the case of Mantis being installed at the server's
 		# root (i.e. $g_short_path = '/')
-		config_set_global('short_path', '/');
-		$t_a = string_sanitize_url($p_in, false);
+		config_set_global( 'short_path', '/' );
+		$t_a = string_sanitize_url( $p_in, false );
 		$this->assertEquals( $p_out, $t_a );
 	}
 

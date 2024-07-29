@@ -491,7 +491,7 @@ class BugFilterQuery extends DbQuery {
 		}
 
 		if( isset( $this->filter[FILTER_PROPERTY_HIDE_STATUS] )
-				|| isset( $this->filter[FILTER_PROPERTY_STATUS] )) {
+				|| isset( $this->filter[FILTER_PROPERTY_STATUS] ) ) {
 			$this->build_prop_status();
 		}
 
@@ -1394,7 +1394,7 @@ class BugFilterQuery extends DbQuery {
 			$t_tag_alias = 'bug_tag_alias_nev';
 			$t_tag_ids = $this->helper_array_map_int( array_column( $t_tags_never, 'id' ) );
 			$t_join_exc = 'LEFT JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
-				. ' AND ' . $this->sql_in(  $t_tag_alias . '.tag_id', $t_tag_ids )
+				. ' AND ' . $this->sql_in( $t_tag_alias . '.tag_id', $t_tag_ids )
 				. $t_tag_projects_clause;
 			$this->add_join( $t_join_exc );
 			$t_where[] = $t_tag_alias . '.tag_id IS NULL';
@@ -1457,7 +1457,7 @@ class BugFilterQuery extends DbQuery {
 			$t_field_info = custom_field_cache_row( $t_cfid, true );
 			if( !$t_field_info['filter_by'] ) {
 				# skip this custom field if it shouldn't be filterable
-				log_event( LOG_FILTERING, 'filter custom fields, field_id=' . $t_cfid . ' is not valid for filtering');
+				log_event( LOG_FILTERING, 'filter custom fields, field_id=' . $t_cfid . ' is not valid for filtering' );
 				continue;
 			}
 

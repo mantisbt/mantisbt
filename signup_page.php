@@ -136,8 +136,8 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 						   title="<?php echo $t_label_captcha_play; ?>"
 						   aria-label="<?php echo $t_label_captcha_play; ?>"
 						>
-							<?php print_icon( 'volume-up', 'ace-icon bigger-250 captcha_play_image'); ?>
-							<?php print_icon( 'spinner', 'ace-icon bigger-250 captcha_loading_image" style="display: none'); ?>
+							<?php print_icon( 'volume-up', 'ace-icon bigger-250 captcha_play_image' ); ?>
+							<?php print_icon( 'spinner', 'ace-icon bigger-250 captcha_loading_image" style="display: none' ); ?>
 						</a>
 						<noscript>Enable Javascript for audio controls</noscript>
 					</div>

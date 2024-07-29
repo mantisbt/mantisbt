@@ -340,7 +340,7 @@ function log_get_caller( $p_level = null ) {
 	}
 
 	# At this point, first step in the cleaned backtrace is the one we want to show
-	$t_step = reset( $t_backtrace);
+	$t_step = reset( $t_backtrace );
 	$t_step_key = key( $t_backtrace );
 	$t_caller_file = basename( $t_step['file'] );
 	$t_caller_line = $t_step['line'];

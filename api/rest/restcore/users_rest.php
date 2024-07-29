@@ -27,7 +27,7 @@
 /**
  * @var \Slim\App $g_app
  */
-$g_app->group('/users', function() use ( $g_app ) {
+$g_app->group( '/users', function() use ( $g_app ) {
 	# These 4 cases are just to avoid html errors in case of incomplete urls
 	$g_app->get( '', 'rest_user_get' );
 	$g_app->get( '/', 'rest_user_get' );
@@ -58,7 +58,7 @@ $g_app->group('/users', function() use ( $g_app ) {
 	$g_app->delete( '/{id}/', 'rest_user_delete' );
 
 	$g_app->put( '/{id}/reset', 'rest_user_reset_password' );
-});
+} );
 
 /**
  * A method that does the work to get information about current logged in user.
@@ -156,7 +156,7 @@ function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_re
 function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
 	$t_data = ['payload' => $t_payload];
@@ -189,7 +189,7 @@ function rest_user_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
 	$t_data = [

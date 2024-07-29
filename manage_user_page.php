@@ -62,7 +62,7 @@ $t_lock_image = icon_get( 'fa-lock', 'fa-lg', lang_get( 'protected' ) );
 
 $f_save = gpc_get_bool( 'save' );
 $f_filter = gpc_get_string( 'filter', 'ALL' );
-$f_search = gpc_get_string( 'search', '');
+$f_search = gpc_get_string( 'search', '' );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
 if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
@@ -288,7 +288,7 @@ $t_user_count = count( $t_users );
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 	<?php print_icon( 'fa-users', 'ace-icon' ); ?>
-	<?php echo lang_get('manage_accounts_title') ?>
+	<?php echo lang_get( 'manage_accounts_title' ) ?>
 	<span class="badge"><?php echo $t_total_user_count ?></span>
 </h4>
 </div>
@@ -304,11 +304,11 @@ $t_user_count = count( $t_users );
 		</div>
 		<?php if( $f_filter === 'UNUSED' ) { ?>
 		<div class="pull-left">
-			<?php print_form_button('manage_user_prune.php',
-				lang_get('prune_accounts'),
+			<?php print_form_button( 'manage_user_prune.php',
+				lang_get( 'prune_accounts' ),
 				null,
 				null,
-				'btn btn-primary btn-sm btn-white btn-round')
+				'btn btn-primary btn-sm btn-white btn-round' )
 			?>
 		</div>
 		<?php } ?>

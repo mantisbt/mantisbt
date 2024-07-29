@@ -22,13 +22,13 @@
  * @link http://www.mantisbt.org
  */
 
-$g_app->group('/config', function() use ( $g_app ) {
+$g_app->group( '/config', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_config_get' );
 	$g_app->get( '/', 'rest_config_get' );
 
 	$g_app->patch( '', 'rest_config_set' );
 	$g_app->patch( '/', 'rest_config_set' );
-});
+} );
 
 /**
  * A method that does the work to handle getting a set of configs via REST API.
@@ -64,7 +64,7 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 function rest_config_set( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
 	$t_data = [

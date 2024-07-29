@@ -316,7 +316,7 @@ if( null == $f_project_to_move ) {
 				$t_row['rows'],
 				( 0 == $t_row['failed']
 					? 'moved successfully'
-					: 'to move, ' . $t_row['failed'] . ' failures')
+					: 'to move, ' . $t_row['failed'] . ' failures' )
 			);
 			echo '</h4>';
 			echo '</div>';

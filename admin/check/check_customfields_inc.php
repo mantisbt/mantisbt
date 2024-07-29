@@ -45,7 +45,7 @@ foreach( custom_field_get_ids() as $t_id ) {
 	 * @var int        $v_type
 	 * @var string|int $v_default_value
 	 */
-	extract( custom_field_get_definition( $t_id ), EXTR_PREFIX_ALL, 'v');
+	extract( custom_field_get_definition( $t_id ), EXTR_PREFIX_ALL, 'v' );
 
 	if( $v_type != CUSTOM_FIELD_TYPE_DATE ) {
 		continue;

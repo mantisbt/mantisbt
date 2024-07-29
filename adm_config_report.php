@@ -69,7 +69,7 @@ print_manage_config_menu( 'adm_config_report.php' );
  * @return string|integer Config name if valid, or META_FILTER_NONE of not
  */
 function check_config_value( $p_config ) {
-	if(    $p_config != META_FILTER_NONE
+	if( $p_config != META_FILTER_NONE
 	   && !is_blank( $p_config )
 	   && is_null( @config_get( $p_config ) )
 	) {
@@ -396,7 +396,7 @@ while( $t_row = $t_config_query->fetch() ) {
 <!-- Repeated Info Rows -->
 			<tr class="visible-on-hover-toggle">
 				<td>
-					<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
+					<?php echo ( $v_user_id == 0 ) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 				</td>
 				<td><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
 				<td><?php echo string_display_line( $v_config_id ) ?></td>

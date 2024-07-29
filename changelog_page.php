@@ -412,7 +412,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		echo '</ul>' . PHP_EOL;
 
 	if( $t_version_header_printed ) {
-		print_version_footer( $t_version_id,  $t_issues_resolved);
+		print_version_footer( $t_version_id,  $t_issues_resolved );
 	}
 }
 

@@ -104,7 +104,7 @@ class MantisMarkdown extends Parsedown {
 	 * @return string HTML markup
 	 */
 	public function convert( string $p_string, bool $p_multiline = false ): string {
-		return $this->finalizeMarkup($p_multiline
+		return $this->finalizeMarkup( $p_multiline
 			? parent::text( $p_string )
 			: parent::line( $p_string )
 		);

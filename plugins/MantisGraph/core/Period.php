@@ -146,7 +146,7 @@ class Period {
 	 */
 	function a_quarter( $p_when ) {
 		list( $t_year, $t_month, $t_day ) = explode( '-', $p_when );
-		$t_month = ( (int)(( $t_month - 1 ) / 3 ) * 3 ) + 1;
+		$t_month = ( (int)( ( $t_month - 1 ) / 3 ) * 3 ) + 1;
 		$this->end = strftime( '%Y-%m-%d 23:59:59', mktime( 0, 0, 0, $t_month + 3, 0, $t_year ) );
 		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, $t_month, 1, $t_year ) );
 	}
@@ -177,7 +177,7 @@ class Period {
 	function quarter_to_date() {
 		$this->end = date( 'Y-m-d' ) . ' 23:59:59';
 		list( $t_year, $t_month, $t_day ) = explode( '-', $this->end );
-		$t_month = ( (int)(( $t_month - 1 ) / 3 ) * 3 ) + 1;
+		$t_month = ( (int)( ( $t_month - 1 ) / 3 ) * 3 ) + 1;
 		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, $t_month, 1, $t_year ) );
 	}
 

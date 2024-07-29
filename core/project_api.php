@@ -847,7 +847,7 @@ function project_add_users( $p_project_id, array $p_changes ) {
 			unset( $t_changes[$t_id] );
 
 			# Trigger event for user access modification on project
-			event_signal('EVENT_MANAGE_PROJECT_USER_UPDATE', ['user_id' => $t_id, 'project_id' => $p_project_id]);
+			event_signal( 'EVENT_MANAGE_PROJECT_USER_UPDATE', ['user_id' => $t_id, 'project_id' => $p_project_id] );
 		}
 	}
 	# remaining items are for insert
@@ -861,7 +861,7 @@ function project_add_users( $p_project_id, array $p_changes ) {
 			$t_insert->execute();
 
 			# Trigger event for user added on project
-			event_signal('EVENT_MANAGE_PROJECT_USER_CREATE', ['user_id' => $t_id, 'project_id' => $p_project_id]);
+			event_signal( 'EVENT_MANAGE_PROJECT_USER_CREATE', ['user_id' => $t_id, 'project_id' => $p_project_id] );
 		}
 	}
 }
@@ -898,7 +898,7 @@ function project_remove_users( $p_project_id, array $p_user_ids ) {
 
 	# Trigger event for each user deleted from project
 	foreach( $p_user_ids as $t_id ) {
-		event_signal('EVENT_MANAGE_PROJECT_USER_DELETE', ['user_id' => $t_id, 'project_id' => $p_project_id]);
+		event_signal( 'EVENT_MANAGE_PROJECT_USER_DELETE', ['user_id' => $t_id, 'project_id' => $p_project_id] );
 	}
 
 	# Remove users from the project
@@ -1014,7 +1014,7 @@ function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '',
 		$p_class .= ' active';
 	}
 
-	return sprintf('<a class="%s" href="%s">%s</a>', $p_class, $t_url, $t_label );
+	return sprintf( '<a class="%s" href="%s">%s</a>', $p_class, $t_url, $t_label );
 }
 
 /**

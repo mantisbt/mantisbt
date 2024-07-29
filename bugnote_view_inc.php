@@ -185,7 +185,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			&#160;
 			<?php if( $t_activity['type'] == ENTRY_TYPE_NOTE ) { ?>
 			<?php print_icon( 'fa-link', 'grey' ); ?>
-			<a rel="bookmark" href="<?php echo string_get_bugnote_view_url( $t_activity['note']->bug_id, $t_activity['note']->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>">
+			<a rel="bookmark" href="<?php echo string_get_bugnote_view_url( $t_activity['note']->bug_id, $t_activity['note']->id ) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>">
 				<?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_activity['id_formatted'] ?>
 			</a>
 			<?php } ?>
@@ -194,7 +194,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		if( $t_activity['modified'] ) {
 			echo '<p class="no-margin small lighter">';
 			print_icon( 'fa-retweet' );
-			echo ' ' . lang_get( 'last_edited')
+			echo ' ' . lang_get( 'last_edited' )
 				. lang_get( 'word_separator' )
 				. date( $t_normal_date_format, $t_activity['last_modified'] )
 				. '</p>';

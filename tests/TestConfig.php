@@ -118,4 +118,4 @@ $g_path = [
 set_include_path( implode( PATH_SEPARATOR, $g_path ) );
 
 # Unset global variables that are no longer needed.
-unset($g_mantisRoot, $g_mantisLibrary, $g_mantisTests, $g_path);
+unset( $g_mantisRoot, $g_mantisLibrary, $g_mantisTests, $g_path );

@@ -69,4 +69,4 @@ project_copy_custom_fields( $t_dst_project_id, $t_src_project_id );
 
 form_security_purge( 'manage_proj_custom_field_copy' );
 
-print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#customfields');
+print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#customfields' );

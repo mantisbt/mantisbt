@@ -60,7 +60,7 @@ print_manage_menu( 'manage_overview_page.php' );
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-info', 'ace-icon' ); ?>
-			<?php echo lang_get('site_information') ?>
+			<?php echo lang_get( 'site_information' ) ?>
 		</h4>
 	</div>
 	<div class="widget-body">

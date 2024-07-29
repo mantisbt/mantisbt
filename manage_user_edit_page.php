@@ -84,7 +84,7 @@ if( is_blank( $f_username ) ) {
 $t_user = user_get_row( $t_user_id );
 if( !$t_user ) {
 	error_parameters( $t_user_id );
-	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR);
+	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
 }
 
 # Ensure that the account to be updated is of equal or lower access to the
@@ -129,7 +129,7 @@ print_manage_menu( 'manage_user_page.php' );
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-user', 'ace-icon' ); ?>
-				<?php echo lang_get('edit_user_title') ?>
+				<?php echo lang_get( 'edit_user_title' ) ?>
 			</h4>
 		</div>
 
@@ -214,7 +214,7 @@ print_manage_menu( 'manage_user_page.php' );
 								&& !user_is_email_unique( $t_user['email'], $t_user_id )
 							) {
 								echo '<span class="padding-8">';
-								print_icon('fa-exclamation-triangle',
+								print_icon( 'fa-exclamation-triangle',
 									'ace-icon bigger-125 red  padding-right-4'
 								);
 								echo lang_get( 'email_not_unique' );

@@ -90,7 +90,7 @@ class Avatar {
 	 * @return void
 	 */
 	private function normalize( $p_user_id, $p_user_exists ) {
-		if( $this->image === null) {
+		if( $this->image === null ) {
 			$this->image = config_get_global( 'path' ) . 'images/avatar.png';
 		}
 

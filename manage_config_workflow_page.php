@@ -85,7 +85,7 @@ function set_overrides( $p_config, $p_can_change, $p_color ) {
 	}
 
 	$t_project = helper_get_current_project();
-	if(    $t_project == ALL_PROJECTS && $p_color == COLOR_GLOBAL
+	if( $t_project == ALL_PROJECTS && $p_color == COLOR_GLOBAL
 		|| $t_project != ALL_PROJECTS && $p_color == COLOR_PROJECT
 	) {
 		$g_overrides[$p_config] = $p_config;
@@ -291,7 +291,7 @@ function threshold_row( $p_threshold ) {
 	set_overrides( $p_threshold, $t_can_change_threshold, $t_color );
 
 	$t_file_access = config_get_global( 'admin_site_threshold' );
-	$t_global_access = config_get_access( $p_threshold, ALL_USERS, ALL_PROJECTS);
+	$t_global_access = config_get_access( $p_threshold, ALL_USERS, ALL_PROJECTS );
 	$t_project_access = config_get_access( $p_threshold );
 	$t_color_access = set_color_override( $t_file_access, $t_global_access, $t_project_access );
 	set_overrides( $p_threshold, $t_can_change_threshold, $t_color_access );

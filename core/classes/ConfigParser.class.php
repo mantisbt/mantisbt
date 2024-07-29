@@ -122,8 +122,8 @@ class ConfigParser {
 		# Loop until we reach the end of the array
 		while( !$this->tokens->matches( ')' ) ) {
 			# A comma is required before each element except the first one
-			if ($t_count > 0) {
-				$this->tokens->ensure_matches(',');
+			if ( $t_count > 0 ) {
+				$this->tokens->ensure_matches( ',' );
 			}
 
 			switch( $this->tokens->type() ) {
@@ -160,7 +160,7 @@ class ConfigParser {
 					break;
 
 				default:
-					throw new Exception("Invalid token '" . $this->tokens->value() . "'");
+					throw new Exception( "Invalid token '" . $this->tokens->value() . "'" );
 			}
 
 			$t_count++;
@@ -183,7 +183,7 @@ class ConfigParser {
 			$t_value = $t_token[1];
 
 			# PHP Standard string literals
-			switch (strtolower($t_value)) {
+			switch ( strtolower( $t_value ) ) {
 				case 'null':
 					return null;
 				case 'true':
@@ -198,7 +198,7 @@ class ConfigParser {
 				return $t_value;
 			}
 
-			throw new Exception("Unknown string literal '$t_value'");
+			throw new Exception( "Unknown string literal '$t_value'" );
 		}
 
 		# Strings

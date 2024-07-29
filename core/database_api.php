@@ -964,7 +964,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 	#   Using a counter for "CAST" appearances to allow nesting: CAST(CAST(x AS y) AS z)
 
 	# split the string by the relevant delimiters. The delimiters will be part of the split array
-	$t_parts = preg_split("/(')|( AS )|(CAST\s*\()/mi", $p_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+	$t_parts = preg_split( "/(')|( AS )|(CAST\s*\()/mi", $p_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE );
 	$t_is_literal = false;
 	$t_cast = 0;
 	$t_query = '';

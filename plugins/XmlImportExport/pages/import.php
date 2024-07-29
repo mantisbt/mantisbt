@@ -24,7 +24,7 @@
 
 access_ensure_project_level( plugin_config_get( 'import_threshold' ) );
 
-auth_reauthenticate( );
+auth_reauthenticate();
 
 layout_page_header( plugin_lang_get( 'import' ) );
 
@@ -36,7 +36,7 @@ print_manage_menu( $t_this_page );
 $t_max_file_size = file_get_max_file_size();
 
 # We need a project to import into
-$t_project_id = helper_get_current_project( );
+$t_project_id = helper_get_current_project();
 if( ALL_PROJECTS == $t_project_id ) {
 	print_header_redirect( 'login_select_proj_page.php?ref=' . $t_this_page );
 }

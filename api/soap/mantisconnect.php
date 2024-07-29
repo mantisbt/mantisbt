@@ -67,7 +67,7 @@ if( !mci_is_webservice_call() ) {
 	# if we have a documentation request, do some tidy up to prevent lame bot loops
 	# e.g. /mantisconnect.php/mc_enum_etas/mc_project_get_versions/
 	$t_parts = explode( 'mantisconnect.php/', strtolower( $_SERVER['SCRIPT_NAME'] ), 2 );
-	if( isset( $t_parts[1] ) && (strlen( $t_parts[1] ) > 0 ) ) {
+	if( isset( $t_parts[1] ) && ( strlen( $t_parts[1] ) > 0 ) ) {
 		echo 'This is not a SOAP webservice request, for documentation, see ' . $t_parts[0] . 'mantisconnect.php';
 		exit();
 	}

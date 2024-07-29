@@ -48,7 +48,7 @@ require_api( 'rss_api.php' );
 
 auth_ensure_user_authenticated();
 
-layout_page_header( lang_get('manage_filter_page_title' ) );
+layout_page_header( lang_get( 'manage_filter_page_title' ) );
 
 layout_page_begin( 'manage_filter_page.php' );
 
@@ -152,7 +152,7 @@ function table_print_filters( array $p_filter_array ) {
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
-				<?php echo lang_get('available_filter_for_project') . ': ' . string_display_line( project_get_name( $t_project_id ) ) ?>
+				<?php echo lang_get( 'available_filter_for_project' ) . ': ' . string_display_line( project_get_name( $t_project_id ) ) ?>
 			</h4>
 		</div>
 

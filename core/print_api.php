@@ -458,7 +458,7 @@ function print_news_item_option_list() {
 				ORDER BY date_posted DESC';
 	}
 
-	$t_result = db_query( $t_query, ($t_global == true ? [] : [$t_project_id] ) );
+	$t_result = db_query( $t_query, ( $t_global == true ? [] : [$t_project_id] ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_headline = string_display_line( $t_row['headline'] );
@@ -1174,7 +1174,7 @@ function print_font_option_list( $p_font ) {
  */
 function print_all_bug_action_option_list( array $p_project_ids = null ) {
 	$t_commands = bug_group_action_get_commands( $p_project_ids );
-	foreach ( $t_commands as $t_action_id => $t_action_label) {
+	foreach ( $t_commands as $t_action_id => $t_action_label ) {
 		echo '<option value="' . $t_action_id . '">' . $t_action_label . '</option>';
 	}
 }
@@ -1495,7 +1495,7 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = nu
 		print_hidden_inputs( $p_args_to_post );
 	}
 
-	if( $p_class == '') {
+	if( $p_class == '' ) {
 		$p_class = 'btn btn-primary btn-xs btn-white btn-round';
 	}
 	echo '<button type="submit" class="' . $p_class . '">' . $p_label . '</button>';
@@ -1937,7 +1937,7 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 			$p_attachment['type'] == 'audio' ||
 			$p_attachment['type'] == 'video';
 
-		collapse_open( $t_collapse_id, '');
+		collapse_open( $t_collapse_id, '' );
 	}
 
 	print_bug_attachment_header( $p_attachment, $p_security_token );
@@ -2216,7 +2216,7 @@ function print_dropzone_template() {
 			<div class="dz-filename"><span data-dz-name></span></div>
 			<img data-dz-thumbnail />
 			<div class="dz-error-message">
-				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle'); ?></span></div>
+				<div class="dz-error-mark"><span><?php print_icon( 'fa-times-circle' ); ?></span></div>
 				<span data-dz-errormessage></span>
 			</div>
 			<div class="dz-size" data-dz-size></div>

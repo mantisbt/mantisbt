@@ -304,7 +304,7 @@ if( $t_config_exists ) {
 		$g_db_connected = true;
 	}
 
-	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS);
+	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
@@ -497,7 +497,7 @@ if( 2 == $t_install_state ) {
 				$t_page_contents = url_get( $f_path );
 				if( !$t_page_contents ) {
 					$t_url_check = "Can't retrieve web page at '$f_path'.";
-				} elseif( false === strpos( $t_page_contents, 'MantisBT') ) {
+				} elseif( false === strpos( $t_page_contents, 'MantisBT' ) ) {
 					$t_url_check = "Web page at '$f_path' does not appear to be a MantisBT site.";
 				}
 			}
@@ -996,7 +996,7 @@ if( 3 == $t_install_state ) {
 
 			echo '<pre>';
 			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script" . PHP_EOL;
-			echo "-- " . date("c") . PHP_EOL . PHP_EOL;
+			echo "-- " . date( "c" ) . PHP_EOL . PHP_EOL;
 		}
 
 		# Make sure we do the upgrades using UTF-8 if needed
@@ -1377,7 +1377,7 @@ if( 5 == $t_install_state ) {
 	$t_config .=
 		  '$g_default_timezone       = \'' . addslashes( $f_timezone ) . '\';' . PHP_EOL
 		. PHP_EOL
-		. (!$t_crypto_master_salt ? "# The installer could not generate the Master Salt; please set it manually.\n" : '')
+		. ( !$t_crypto_master_salt ? "# The installer could not generate the Master Salt; please set it manually.\n" : '' )
 		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
 
 	if( $f_path ) {

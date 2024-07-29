@@ -943,7 +943,7 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 		# Include the plugin script if the class is not already declared.
 		if( !class_exists( $t_classname ) ) {
 			if( !plugin_include( $p_basename, $p_child ) ) {
-				log_event( LOG_PLUGIN, "Source code for Plugin '$t_basename' not found");
+				log_event( LOG_PLUGIN, "Source code for Plugin '$t_basename' not found" );
 				return new MissingClassPlugin( $t_basename );
 			}
 		}
@@ -1131,10 +1131,10 @@ function plugin_log_event( $p_msg, $p_basename = null ) {
 
 	if( $t_basename != $t_current_plugin ) {
 		plugin_push_current( $t_basename );
-		log_event( LOG_PLUGIN, $p_msg);
+		log_event( LOG_PLUGIN, $p_msg );
 		plugin_pop_current();
 	} else {
-		log_event( LOG_PLUGIN, $p_msg);
+		log_event( LOG_PLUGIN, $p_msg );
 	}
 }
 

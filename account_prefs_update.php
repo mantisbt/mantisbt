@@ -120,7 +120,7 @@ if( config_get( $t_email_full_config_option, /* default */ null, $f_user_id, ALL
 
 # make sure the delay isn't too low
 if( ( config_get( 'min_refresh_delay' ) > $t_prefs->refresh_delay )&&
-	( $t_prefs->refresh_delay != 0 )) {
+	( $t_prefs->refresh_delay != 0 ) ) {
 	$t_prefs->refresh_delay = config_get( 'min_refresh_delay' );
 }
 

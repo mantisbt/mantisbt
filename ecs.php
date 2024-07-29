@@ -40,6 +40,7 @@ use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
+use PhpCsFixer\Fixer\Whitespace\SpacesInsideParenthesesFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
@@ -337,6 +338,24 @@ return ECSConfig::configure()
 	] )
 
 	/**
+	 * Whitespace: Spaces inside parentheses
+	 *
+	 * "function foo($bar, $baz)" > "function foo( $bar, $baz )"
+	 * "if($bar === $baz)"        > "if( $bar === $baz )"
+	 * "foo( )"                   > "foo()"
+	 *
+	 * Sniffs:
+	 *  - build/CodeSniffer/Mantis/Sniffs/ControlStructures/ControlSignatureSniff.php
+	 *  - ControlStructureSpacingSniff
+	 *  - FunctionDeclarationArgumentSpacingSniff
+	 *
+	 * @see https://cs.symfony.com/doc/rules/whitespace/spaces_inside_parentheses.html
+	 */
+	->withConfiguredRule( SpacesInsideParenthesesFixer::class, [
+		'space' => 'single',
+	] )
+
+	/**
 	 * Basic: Position of braces
 	 *
 	 * Opening braces on same line
@@ -346,10 +365,10 @@ return ECSConfig::configure()
 	 *
 	 * @see https://cs.symfony.com/doc/rules/basic/braces_position.html
 	 */
-	->withConfiguredRule(BracesPositionFixer::class, [
+	->withConfiguredRule( BracesPositionFixer::class, [
 		'classes_opening_brace' => 'same_line',
 		'functions_opening_brace' => 'same_line',
-	])
+	] )
 
 	/**
 	 * Operator: Concat spaces
@@ -358,9 +377,9 @@ return ECSConfig::configure()
 	 *
 	 * @see https://cs.symfony.com/doc/rules/operator/concat_space.html
 	 */
-	->withConfiguredRule(ConcatSpaceFixer::class, [
+	->withConfiguredRule( ConcatSpaceFixer::class, [
 		'spacing' => 'one',
-	])
+	] )
 
 	/**
 	 * Cast: No space after cast

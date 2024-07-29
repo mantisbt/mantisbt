@@ -134,7 +134,7 @@ function collapse_icon( $p_name ) {
 	}
 
 	echo '&nbsp;&nbsp;<a id="', $t_id, '" class="collapse-link noprint">';
-	print_icon( $t_icon, 'bigger-120', $t_alt);
+	print_icon( $t_icon, 'bigger-120', $t_alt );
 	echo '</a>';
 }
 

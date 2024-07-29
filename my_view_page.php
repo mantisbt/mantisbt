@@ -108,21 +108,21 @@ $t_boxes = array_filter( config_get( 'my_view_boxes' ) );
 $t_anonymous_user = current_user_is_anonymous();
 foreach( $t_boxes as $t_box_title => $t_box_display ) {
 	if( # Remove "Assigned to Me" box for users that can't handle issues
-		(  $t_box_title == 'assigned'
-		&& (  $t_anonymous_user
-		   || !access_has_any_project_level('handle_bug_threshold', $t_project_ids_to_check, $t_current_user_id )
+		( $t_box_title == 'assigned'
+		&& ( $t_anonymous_user
+		   || !access_has_any_project_level( 'handle_bug_threshold', $t_project_ids_to_check, $t_current_user_id )
 		   )
 		) ||
 		# Remove "Monitored by Me" box for users that can't monitor issues
-		(  $t_box_title == 'monitored'
-		&& (  $t_anonymous_user
+		( $t_box_title == 'monitored'
+		&& ( $t_anonymous_user
 		   || !access_has_any_project_level( 'monitor_bug_threshold', $t_project_ids_to_check, $t_current_user_id )
 		   )
 		) ||
 		# Remove display of "Reported by Me", "Awaiting Feedback" and
 		# "Awating confirmation of resolution" boxes for users that can't report bugs
-		(  in_array( $t_box_title, ['reported', 'feedback', 'verify'] )
-		&& (  $t_anonymous_user
+		( in_array( $t_box_title, ['reported', 'feedback', 'verify'] )
+		&& ( $t_anonymous_user
 		   || !access_has_any_project_level( 'report_bug_threshold', $t_project_ids_to_check, $t_current_user_id )
 		   )
 		)

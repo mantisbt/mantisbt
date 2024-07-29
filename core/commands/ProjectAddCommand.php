@@ -177,7 +177,7 @@ class ProjectAddCommand extends Command {
 		event_signal( 'EVENT_MANAGE_PROJECT_CREATE', [$t_project_id] );
 
 		$t_result = [];
-		if( $this->option('return_project', false ) ) {
+		if( $this->option( 'return_project', false ) ) {
 			$t_lang = mci_get_user_lang( $t_user_id );
 			$t_result['project'] = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
 		} else {

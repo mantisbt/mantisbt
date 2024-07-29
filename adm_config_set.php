@@ -90,9 +90,9 @@ if( $t_type != CONFIG_TYPE_STRING ) {
 				$t_value = (float)$t_value;
 				break;
 		}
-	} catch (Exception $e) {
+	} catch ( Exception $e ) {
 		error_parameters( $f_config_option, $e->getMessage() );
-		trigger_error(ERROR_CONFIG_OPT_BAD_SYNTAX, ERROR);
+		trigger_error( ERROR_CONFIG_OPT_BAD_SYNTAX, ERROR );
 	}
 }
 

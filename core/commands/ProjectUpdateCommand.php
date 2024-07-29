@@ -192,7 +192,7 @@ class ProjectUpdateCommand extends Command {
 		event_signal( 'EVENT_MANAGE_PROJECT_UPDATE', [$this->id] );
 
 		$t_result = [];
-		if( $this->option('return_project', false ) ) {
+		if( $this->option( 'return_project', false ) ) {
 			$t_user_id = auth_get_current_user_id();
 
 			$t_lang = mci_get_user_lang( $t_user_id );

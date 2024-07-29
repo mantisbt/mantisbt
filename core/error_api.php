@@ -287,7 +287,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			}
 		}
 		if( DISPLAY_ERROR_HALT == $t_method ) {
-			exit(1);
+			exit( 1 );
 		}
 	} else {
 		switch( $t_method ) {
@@ -322,7 +322,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				if( defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
 					# @TODO Have a mapping for mantis error codes to appropriate HTTP error codes
 					header( ' ', true, 400 );
-					exit(1);
+					exit( 1 );
 				}
 
 				# don't send the page header information if it has already been sent
@@ -396,7 +396,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				} else {
 					echo '</body></html>', "\n";
 				}
-				exit(1);
+				exit( 1 );
 
 			case DISPLAY_ERROR_INLINE:
 				if( !defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {

@@ -73,7 +73,7 @@ if( $f_filter === 'ALL' ) {
 
 # Set the number of Tags per page.
 $t_per_page = 20;
-$t_offset = (( $f_page_number - 1 ) * $t_per_page );
+$t_offset = ( ( $f_page_number - 1 ) * $t_per_page );
 
 # Determine number of tags in tag table
 $t_total_tag_count = tag_count( $t_name_filter );
@@ -126,15 +126,15 @@ print_manage_menu( 'manage_tags_page.php' );
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-tags', 'ace-icon' ); ?>
-			<?php echo lang_get('manage_tags_link') ?>
+			<?php echo lang_get( 'manage_tags_link' ) ?>
 			<span class="badge"><?php echo $t_total_tag_count ?></span>
 		</h4>
 	</div>
 
 	<div class="widget-body">
-		<?php if ($t_can_edit) { ?>
+		<?php if ( $t_can_edit ) { ?>
 			<div class="widget-toolbox padding-8 clearfix">
-				<?php print_small_button( '#tagcreate', lang_get('tag_create') ) ?>
+				<?php print_small_button( '#tagcreate', lang_get( 'tag_create' ) ) ?>
 			</div>
 		<?php } ?>
 	<div class="widget-main no-padding">
@@ -194,7 +194,7 @@ print_manage_menu( 'manage_tags_page.php' );
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-tag', 'ace-icon' ); ?>
-				<?php echo lang_get('tag_create') ?>
+				<?php echo lang_get( 'tag_create' ) ?>
 			</h4>
 		</div>
 		<div class="widget-body">
@@ -235,7 +235,7 @@ print_manage_menu( 'manage_tags_page.php' );
 			<div class="widget-toolbox padding-8 clearfix">
 				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
 				<input type="submit" name="config_set" class="btn btn-primary btn-sm btn-white btn-round"
-					   value="<?php echo lang_get('tag_create') ?>"/>
+					   value="<?php echo lang_get( 'tag_create' ) ?>"/>
 			</div>
 		</div>
 	</div>

@@ -113,7 +113,7 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
-					<?php echo lang_get('filters') ?>
+					<?php echo lang_get( 'filters' ) ?>
 				</h4>
 
 				<div class="widget-toolbar">

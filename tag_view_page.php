@@ -84,9 +84,9 @@ layout_page_begin();
 <div class="widget-body">
 <div class="widget-main no-padding">
 	<div class="widget-toolbox padding-8 clearfix">
-		<?php print_link_button( 'search.php?tag_string=' . urlencode($t_tag_row['name']),
+		<?php print_link_button( 'search.php?tag_string=' . urlencode( $t_tag_row['name'] ),
 			sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ),
-			'btn-sm pull-right'); ?>
+			'btn-sm pull-right' ); ?>
 	</div>
 	<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
@@ -107,7 +107,7 @@ layout_page_begin();
 		<td class="category">
 			<?php echo lang_get( 'tag_creator' ) ?>
 		</td>
-		<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></td>
+		<td><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
 	</tr>
 	<tr>
 		<td class="category">

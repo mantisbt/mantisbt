@@ -113,7 +113,7 @@ class RestIssueRelationshipsTest extends RestBase {
 	}
 
 	public function testIssueRelationships() {
-		$this->assertEmpty($this->getIssueRelationships( $this->tgt_id ),
+		$this->assertEmpty( $this->getIssueRelationships( $this->tgt_id ),
 			"No prior relationships exist"
 		);
 
@@ -229,19 +229,19 @@ class RestIssueRelationshipsTest extends RestBase {
 
 		# Attempt to resolve the parent issue should fail
 		$t_data = ['status' => ['id' => RESOLVED]];
-		$t_response = $this->builder()->patch( '/issues/' . $this->src_id, $t_data)->send();
+		$t_response = $this->builder()->patch( '/issues/' . $this->src_id, $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
 			"Resolve parent issue with unresolved children"
 		);
 
 		# Resolve the child issue
-		$t_response = $this->builder()->patch( '/issues/' . $this->tgt_id, $t_data)->send();
+		$t_response = $this->builder()->patch( '/issues/' . $this->tgt_id, $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
 			"Resolving child issue"
 		);
 
 		# Resolving the parent should work now
-		$t_response = $this->builder()->patch( '/issues/' . $this->src_id, $t_data)->send();
+		$t_response = $this->builder()->patch( '/issues/' . $this->src_id, $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
 			"Resolve parent issue with resolved children"
 		);

@@ -615,7 +615,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 		}
 	}
 
-	return (count( $t_relationships ) == 0 ? null : $t_relationships );
+	return ( count( $t_relationships ) == 0 ? null : $t_relationships );
 }
 
 /**
@@ -1185,7 +1185,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 					$t_bugnote_changed = false;
 					$t_bugnote = $t_bugnotes_by_id[$t_bugnote_id];
 
-					if( isset( $t_note['text']) && $t_bugnote->note !== $t_note['text'] ) {
+					if( isset( $t_note['text'] ) && $t_bugnote->note !== $t_note['text'] ) {
 						bugnote_set_text( $t_bugnote_id, $t_note['text'] );
 						$t_bugnote_changed = true;
 					}
@@ -1195,7 +1195,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 						$t_bugnote_changed = true;
 					}
 
-					if( isset( $t_note['time_tracking']) && $t_note['time_tracking'] != $t_bugnote->time_tracking ) {
+					if( isset( $t_note['time_tracking'] ) && $t_note['time_tracking'] != $t_bugnote->time_tracking ) {
 						bugnote_set_time_tracking( $t_bugnote_id, mci_get_time_tracking_from_note( $p_issue_id, $t_note ) );
 						$t_bugnote_changed = true;
 					}
@@ -1717,7 +1717,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
 	if( $t_fields === null || isset( $t_fields['handler'] ) ) {
 		if( !empty( $p_issue_data->handler_id ) &&
 			access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $t_id, $p_user_id ) ) {
-			$t_issue['handler'] = mci_account_get_array_by_id($p_issue_data->handler_id);
+			$t_issue['handler'] = mci_account_get_array_by_id( $p_issue_data->handler_id );
 		}
 	}
 
@@ -1810,8 +1810,8 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
 	} else {
 		if( $t_fields === null || isset( $t_fields['profile'] ) ) {
 			if( config_get( 'enable_profiles' ) != OFF ) {
-				if ((int)$p_issue_data->profile_id != 0) {
-					$t_issue['profile'] = mci_profile_as_array_by_id($p_issue_data->profile_id);
+				if ( (int)$p_issue_data->profile_id != 0 ) {
+					$t_issue['profile'] = mci_profile_as_array_by_id( $p_issue_data->profile_id );
 				}
 			}
 		}

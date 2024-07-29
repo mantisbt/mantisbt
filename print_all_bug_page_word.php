@@ -475,7 +475,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 			$t_first_attachment = true;
 			$t_path = config_get_global( 'path' );
 
-			foreach ( $t_attachments as $t_attachment  ) {
+			foreach ( $t_attachments as $t_attachment ) {
 				if( $t_first_attachment ) {
 					$t_first_attachment = false;
 				} else {
@@ -541,7 +541,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 			<br />
 				<?php echo $t_date_submitted ?>&#160;&#160;&#160;
 				<?php if( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
-					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';
+					echo '<br />(' . lang_get( 'last_edited' ) . lang_get( 'word_separator' ) . $t_last_modified . ')';
 				} ?>
 			</td>
 	<td>

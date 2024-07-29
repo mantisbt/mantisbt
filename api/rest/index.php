@@ -150,7 +150,7 @@ $t_container['errorHandler'] = function( $p_container ) {
 		$t_error_to_log =  $p_exception->getMessage() . "\n" . $t_stack_as_string;
 		error_log( $t_error_to_log );
 
-		$t_settings = $p_container->get('settings');
+		$t_settings = $p_container->get( 'settings' );
 		if( $t_settings['displayErrorDetails'] ) {
 			$p_response = $p_response->withJson( $t_data );
 		}
@@ -185,7 +185,7 @@ try {
 
 	$g_app->run();
 } catch( Throwable $e ) {
-	header( 'Content-type: text/plain');
+	header( 'Content-type: text/plain' );
 	http_response_code( HTTP_STATUS_INTERNAL_SERVER_ERROR );
 	echo $e;
 }

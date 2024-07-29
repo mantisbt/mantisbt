@@ -46,7 +46,7 @@ class MentionParsingTest extends MantisCoreBase {
 	public function testMentions( $p_input_text, array $p_expected ) {
 		$t_actual = mention_get_candidates( $p_input_text );
 
-		$this->assertEquals($p_expected, $t_actual );
+		$this->assertEquals( $p_expected, $t_actual );
 	}
 
 	/**

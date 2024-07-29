@@ -67,26 +67,26 @@ class RestIssueUpdateVersion extends RestBase {
 
 		# Add a test Version
 		$t_version_data = [
-			"name" => self::class . "_v" . rand(1, 9) . "." . rand(0, 99),
+			"name" => self::class . "_v" . rand( 1, 9 ) . "." . rand( 0, 99 ),
 			"description" => self::class . " test version",
 			"released" => true,
 		];
 		$t_response = $this->builder()->post( $this->endpoint_version, $t_version_data )->send();
-		$t_version = $this->getJson($t_response, HTTP_STATUS_CREATED )->version;
+		$t_version = $this->getJson( $t_response, HTTP_STATUS_CREATED )->version;
 		$this->version_id = $t_version->id;
-		$this->deleteAfterRunVersion($t_version->id);
+		$this->deleteAfterRunVersion( $t_version->id );
 
 		# Create a test Issue with the version fields set
 		$t_version_data = ['id' => $this->version_id];
 		$t_issue_data = array_merge(
 			$this->getIssueToAdd(),
-			array_fill_keys( self::VERSION_FIELDS, $t_version_data)
+			array_fill_keys( self::VERSION_FIELDS, $t_version_data )
 		);
 		$t_response = $this->builder()->post( '/issues', $t_issue_data )->send();
-		$t_issue = $this->getJson($t_response, HTTP_STATUS_CREATED )->issue;
+		$t_issue = $this->getJson( $t_response, HTTP_STATUS_CREATED )->issue;
 		$this->issue_id = $t_issue->id;
 		$this->endpoint_issue .= $t_issue->id;
-		$this->deleteIssueAfterRun($t_issue->id);
+		$this->deleteIssueAfterRun( $t_issue->id );
 	}
 
 	/**
@@ -107,7 +107,7 @@ class RestIssueUpdateVersion extends RestBase {
 		$t_response = $this->builder()->patch( $this->endpoint_issue, $t_payload )->send();
 		$t_issue = $this->getJson( $t_response, $p_expected_status_code )->issues[0];
 		foreach( self::VERSION_FIELDS as $t_version_field ) {
-			$this->assertObjectNotHasAttribute($t_version_field, $t_issue, "'$t_version_field' was not unset" );
+			$this->assertObjectNotHasAttribute( $t_version_field, $t_issue, "'$t_version_field' was not unset" );
 		}
 	}
 

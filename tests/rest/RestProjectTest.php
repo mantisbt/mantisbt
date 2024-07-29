@@ -124,7 +124,7 @@ class RestProjectTest extends RestBase {
 			"Failed to retrieve all projects"
 		);
 		$t_projects = json_decode( $t_response->getBody() )->projects;
-		$this->assertGreaterThanOrEqual(2, count( $t_projects ),
+		$this->assertGreaterThanOrEqual( 2, count( $t_projects ),
 			"Expected to retrieve at least 2 projects"
 		);
 

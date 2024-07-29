@@ -26,8 +26,8 @@ require_once( 'core.php' );
 
 access_ensure_project_level( plugin_config_get( 'export_threshold' ) );
 
-auth_ensure_user_authenticated( );
-helper_begin_long_process( );
+auth_ensure_user_authenticated();
+helper_begin_long_process();
 
 $t_page_number = 1;
 $t_per_page = -1;
@@ -106,7 +106,7 @@ foreach( $t_result as $t_row ) {
 				$t_writer->startElement( $t_element_name );
 				$t_writer->writeAttribute( 'id', $t_value );
 				$t_writer->text( $t_element_data );
-				$t_writer->endElement( );
+				$t_writer->endElement();
 				break;
 
 			case 'category_id':
@@ -118,7 +118,7 @@ foreach( $t_result as $t_row ) {
 				$t_writer->startElement( $t_element_name );
 				$t_writer->writeAttribute( 'id', $t_value );
 				$t_writer->text( $t_element_data );
-				$t_writer->endElement( );
+				$t_writer->endElement();
 				break;
 
 			case 'project_id':
@@ -128,7 +128,7 @@ foreach( $t_result as $t_row ) {
 				$t_writer->startElement( $t_element_name );
 				$t_writer->writeAttribute( 'id', $t_value );
 				$t_writer->text( $t_element_data );
-				$t_writer->endElement( );
+				$t_writer->endElement();
 
 				break;
 
@@ -145,7 +145,7 @@ foreach( $t_result as $t_row ) {
 				$t_writer->startElement( $t_element );
 				$t_writer->writeAttribute( 'id', $t_value );
 				$t_writer->text( $t_element_data );
-				$t_writer->endElement( );
+				$t_writer->endElement();
 				break;
 
 			default:
@@ -187,14 +187,14 @@ foreach( $t_result as $t_row ) {
 			$t_writer->startElement( 'reporter' );
 			$t_writer->writeAttribute( 'id', $t_bugnote->reporter_id );
 			$t_writer->text( user_get_name( $t_bugnote->reporter_id ) );
-			$t_writer->endElement( );
+			$t_writer->endElement();
 			# bug note
 			$t_writer->writeElement( 'note', $t_bugnote->note );
 			# view state
 			$t_writer->startElement( 'view_state' );
 			$t_writer->writeAttribute( 'id', $t_bugnote->view_state );
 			$t_writer->text( get_enum_element( 'view_state', $t_bugnote->view_state ) );
-			$t_writer->endElement( );
+			$t_writer->endElement();
 			# date submitted
 			$t_writer->writeElement( 'date_submitted', $t_bugnote->date_submitted );
 			# last modified
@@ -247,4 +247,4 @@ foreach( $t_result as $t_row ) {
 }
 
 $t_writer->endElement(); # mantis
-$t_writer->endDocument( );
+$t_writer->endDocument();

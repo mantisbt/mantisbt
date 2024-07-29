@@ -79,12 +79,12 @@ function mode_url( $p_all, $p_errors ) {
 $t_link = '<a href="%s">%s %s</a>';
 $t_show_all_mode_link = sprintf( $t_link,
 	mode_url( !$g_show_all, $g_show_errors ),
-	($g_show_all ? 'Hide' : 'Show'),
+	( $g_show_all ? 'Hide' : 'Show' ),
 	'passed tests'
 );
 $t_show_errors_mode_link = sprintf( $t_link,
 	mode_url( $g_show_all, !$g_show_errors ),
-	($g_show_errors ? 'Hide' : 'Show'),
+	( $g_show_errors ? 'Hide' : 'Show' ),
 	'verbose error messages'
 );
 
