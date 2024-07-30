@@ -12,7 +12,6 @@ jobs:
     - name: Coding Standards
       php: 8.3
       script:
-        - echo $TRAVIS_COMMIT_RANGE
-        # - composer check-cs -- $(echo $(git diff --name-only HEAD HEAD~1))
+        - composer check-cs -- $(echo $(git diff --name-only $TRAVIS_COMMIT_RANGE))
   allow_failures:
     - name: Coding Standards
