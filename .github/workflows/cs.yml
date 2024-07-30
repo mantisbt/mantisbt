@@ -10,6 +10,17 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
+      - name: context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: commit range
+        env:
+          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
+        run:
+          echo "$COMMIT_RANGE"
+
       - name: Install dependencies
         uses: php-actions/composer@v6
         with:
@@ -18,9 +29,9 @@ jobs:
 
       - name: Check formatting
         # run: ./vendor/bin/ecs check
-        run: ./vendor/bin/ecs check $(echo $(git diff --name-only $COMMIT_RANGE))
+        run: composer check-cs -- $(echo $(git diff --name-only "$COMMIT_RANGE"))
         env:
-          COMMIT_RANGE: ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
 
 #      - name: Analyse code
 #        run: ./vendor/bin/phpstan
