@@ -419,7 +419,7 @@ function html_top_banner() {
 	$t_logo_image = config_get_global( 'logo_image' );
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
-		include( $t_page );
+		include $t_page;
 	} else if( !is_blank( $t_logo_image ) ) {
 		echo '<div id="banner">';
 		html_print_logo( $t_logo_image );
@@ -963,7 +963,7 @@ function print_admin_menu_bar( $p_page ) {
 		$t_path = '../';
 	} else {
 		global $g_absolute_path, $g_upgrade;
-		require_once( $g_absolute_path . 'admin/schema.php' );
+		require_once $g_absolute_path . 'admin/schema.php';
 		if( count( $g_upgrade ) - 1 != config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS ) ) {
 			$t_menu_items['install.php'] = 'Upgrade your installation';
 		}

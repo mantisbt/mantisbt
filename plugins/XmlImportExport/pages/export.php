@@ -22,7 +22,7 @@
  * Export Issues in XML Format
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 
 access_ensure_project_level( plugin_config_get( 'export_threshold' ) );
 

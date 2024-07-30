@@ -28,7 +28,7 @@
  * @uses excel_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'billing_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'excel_api.php' );

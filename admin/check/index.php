@@ -40,9 +40,9 @@ define( 'MANTIS_MAINTENANCE_MODE', true );
 # of the tests, ensuring that the testing process hasn't frozen.
 define( 'COMPRESSION_DISABLED', true );
 
-require_once( dirname( __DIR__, 2 ) . '/core.php' );
+require_once dirname( __DIR__, 2 ) . '/core.php';
 
-require_once( 'check_api.php' );
+require_once 'check_api.php';
 
 require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
@@ -117,26 +117,26 @@ print_admin_menu_bar( 'check/index.php' );
 <?php
 
 define( 'CHECK_PHP_INC_ALLOW', true );
-include( 'check_php_inc.php' );
+include 'check_php_inc.php';
 
 if( !$g_failed_test ) {
 	define( 'CHECK_DATABASE_INC_ALLOW', true );
-	include( 'check_database_inc.php' );
+	include 'check_database_inc.php';
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_CONFIG_INC_ALLOW', true );
-	include( 'check_config_inc.php' );
+	include 'check_config_inc.php';
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_PATHS_INC_ALLOW', true );
-	include( 'check_paths_inc.php' );
+	include 'check_paths_inc.php';
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_WEBSERVICE_INC_ALLOW', true );
-	include( 'check_webservice_inc.php' );
+	include 'check_webservice_inc.php';
 }
 
 /*
@@ -151,51 +151,51 @@ if( !$g_failed_test ) {
 
 if( !$g_failed_test ) {
 	define( 'CHECK_CRYPTO_INC_ALLOW', true );
-	include( 'check_crypto_inc.php' );
+	include 'check_crypto_inc.php';
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_I18N_INC_ALLOW', true );
-	include( 'check_i18n_inc.php' );
+	include 'check_i18n_inc.php';
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_L10N_INC_ALLOW', true );
-	include( 'check_L10n_inc.php' );
+	include 'check_L10n_inc.php';
 }
 
 # @TODO $t_email_failed_test is a temp workaround to be removed when fixing #33012
 $t_email_failed_test = false;
 if( !$g_failed_test ) {
 	define( 'CHECK_EMAIL_INC_ALLOW', true );
-	include( 'check_email_inc.php' );
+	include 'check_email_inc.php';
 	$t_email_failed_test = $g_failed_test;
 	$g_failed_test = false;
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_ANONYMOUS_INC_ALLOW', true );
-	include( 'check_anonymous_inc.php' );
+	include 'check_anonymous_inc.php';
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_ATTACHMENTS_INC_ALLOW', true );
-	include( 'check_attachments_inc.php' );
+	include 'check_attachments_inc.php';
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_DISPLAY_INC_ALLOW', true );
-	include( 'check_display_inc.php' );
+	include 'check_display_inc.php';
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_CUSTOMFIELDS_INC_ALLOW', true );
-	include( 'check_customfields_inc.php' );
+	include 'check_customfields_inc.php';
 }
 
 if( !$g_failed_test ) {
 	define( 'CHECK_PLUGINS_INC_ALLOW', true );
-	include( 'check_plugins_inc.php' );
+	include 'check_plugins_inc.php';
 }
 ?>
 </table>

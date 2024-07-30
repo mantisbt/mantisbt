@@ -99,7 +99,7 @@ if( ( 0 != $f_type ) && ( $f_interval > 0 ) ) {
 	}
 
 	if( !is_blank( $t_page_to_include ) ) {
-		include( config_get_global( 'plugin_path' ) . plugin_get_current() . '/pages/' . $t_page_to_include );
+		include config_get_global( 'plugin_path' ) . plugin_get_current() . '/pages/' . $t_page_to_include;
 	}
 }
 ?>

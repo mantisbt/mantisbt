@@ -189,7 +189,7 @@ $g_relationships[BUG_RELATED] = [
 ];
 
 if( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' ) ) {
-	include_once( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' );
+	include_once config_get_global( 'config_path' ) . 'custom_relationships_inc.php';
 }
 
 /**

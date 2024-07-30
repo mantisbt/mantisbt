@@ -59,7 +59,7 @@ function bug_group_action_init( $p_action ) {
 	if( !file_exists( $t_include_file ) ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	} else {
-		require_once( $t_include_file );
+		require_once $t_include_file;
 	}
 }
 

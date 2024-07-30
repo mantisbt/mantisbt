@@ -34,8 +34,8 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
 $t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
-require_once( $t_soap_dir . 'mc_api.php' );
-require_once( $t_soap_dir . 'mc_issue_api.php' );
+require_once $t_soap_dir . 'mc_api.php';
+require_once $t_soap_dir . 'mc_issue_api.php';
 
 use Mantis\Exceptions\ClientException;
 

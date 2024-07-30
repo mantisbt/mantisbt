@@ -40,7 +40,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -185,7 +185,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
 	if( $t_admin_dir_is_accessible ) {
-		require_once( 'admin/schema.php' );
+		require_once 'admin/schema.php';
 		/** @var array $g_upgrade */
 		$t_upgrades_reqd = count( $g_upgrade ) - 1;
 

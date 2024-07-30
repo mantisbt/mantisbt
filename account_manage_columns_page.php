@@ -41,7 +41,7 @@
  * @uses lang_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'current_user_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
@@ -56,6 +56,6 @@ current_user_ensure_unprotected();
 define( 'ACCOUNT_COLUMNS', true );
 
 define( 'MANAGE_COLUMNS_INC_ALLOW', true );
-include( __DIR__ . '/manage_columns_inc.php' );
+include __DIR__ . '/manage_columns_inc.php';
 
 layout_page_end();

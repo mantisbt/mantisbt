@@ -41,7 +41,7 @@
  * @uses version_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -422,4 +422,4 @@ layout_page_begin();
 </div>
 <?php
 define( 'BUG_VIEW_INC_ALLOW', true );
-include( __DIR__ . '/bug_view_inc.php' );
+include __DIR__ . '/bug_view_inc.php';

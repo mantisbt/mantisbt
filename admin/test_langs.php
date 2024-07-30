@@ -27,7 +27,7 @@ define( 'LANG_LOAD_DISABLED', true );
 
 $t_mantis_dir = dirname( __DIR__ ) . '/';
 
-require_once( $t_mantis_dir . 'core.php' );
+require_once $t_mantis_dir . 'core.php';
 
 /**
  * Class CheckLangFile.

@@ -25,7 +25,7 @@
 
 require_api( 'bug_api.php' );
 require_api( 'user_api.php' );
-require_once( 'Interface.php' );
+require_once 'Interface.php';
 
 /**
  * Import XML issue class

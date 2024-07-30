@@ -37,7 +37,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -226,7 +226,7 @@ if( $t_timeline_view_threshold_access ) {
 	$g_timeline_user = $f_user_id;
 	?>
 	<div class="col-md-5 col-xs-12">
-		<?php include( 'timeline_inc.php' ); ?>
+		<?php include 'timeline_inc.php'; ?>
 		<div class="space-10"></div>
 	</div>
 <?php } ?>

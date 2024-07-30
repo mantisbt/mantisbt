@@ -46,7 +46,7 @@
  * @uses version_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -792,7 +792,7 @@ if( $t_bottom_buttons_enabled ) {
 
 <?php
 define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-include( __DIR__ . '/bugnote_view_inc.php' );
+include __DIR__ . '/bugnote_view_inc.php';
 layout_page_end();
 
 last_visited_issue( $t_bug_id );

@@ -65,7 +65,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $t_type ) {
 	/** @noinspection PhpIncludeInspection */
-	require_once( config_get_global( 'core_path' ) . 'cfdefs/cfdef_' . $t_type . '.php' );
+	require_once config_get_global( 'core_path' ) . 'cfdefs/cfdef_' . $t_type . '.php';
 }
 unset( $t_type );
 

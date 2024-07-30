@@ -27,7 +27,7 @@
  * @uses plugin_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
@@ -71,4 +71,4 @@ if( gpc_isset( 'cache_key' ) ) {
 }
 
 plugin_push_current( $t_basename );
-include( $t_page );
+include $t_page;

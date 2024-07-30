@@ -26,7 +26,7 @@
  * @uses api_token_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'api_token_api.php' );
 
 form_security_validate( 'revoke_api_token_form' );

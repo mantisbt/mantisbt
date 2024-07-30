@@ -29,7 +29,7 @@
  * @uses logging_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'logging_api.php' );

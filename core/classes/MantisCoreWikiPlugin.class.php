@@ -26,7 +26,7 @@
 /**
  * requires MantisWikiPlugin.class
  */
-require_once( 'MantisWikiPlugin.class.php' );
+require_once 'MantisWikiPlugin.class.php';
 
 /**
  * Base that uses the old style wiki definitions from config_inc.php

@@ -881,7 +881,7 @@ function plugin_include( $p_basename, $p_child = null ) {
 	$t_included = false;
 	if( is_file( $t_plugin_file ) ) {
 		/** @noinspection PhpIncludeInspection */
-		include_once( $t_plugin_file );
+		include_once $t_plugin_file;
 		$t_included = true;
 	}
 
@@ -904,7 +904,7 @@ function plugin_require_api( $p_file, $p_basename = null ) {
 	$t_path = config_get_global( 'plugin_path' ) . $t_current . '/';
 
 	/** @noinspection PhpIncludeInspection */
-	require_once( $t_path . $p_file );
+	require_once $t_path . $p_file;
 }
 
 /**

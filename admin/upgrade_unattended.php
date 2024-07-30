@@ -29,7 +29,7 @@
 # and plugins will not be loaded.
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
-require_once( dirname( __DIR__ ) . '/core.php' );
+require_once dirname( __DIR__ ) . '/core.php';
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
@@ -104,7 +104,7 @@ if( !preg_match( '/^[a-zA-Z0-9_]+$/', $t_db_type ) ||
 }
 
 $GLOBALS['g_db_type'] = $t_db_type; # database_api references this
-require_once( __DIR__ . '/schema.php' );
+require_once __DIR__ . '/schema.php';
 $g_db = ADONewConnection( $t_db_type );
 
 echo "\nPost 1.0 schema changes\n";

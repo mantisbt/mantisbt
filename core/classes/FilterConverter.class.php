@@ -22,10 +22,10 @@
  */
 
 $t_api_path = dirname( __DIR__, 2 ) . '/api/soap/';
-require_once( $t_api_path . 'mc_api.php' );
-require_once( $t_api_path . 'mc_account_api.php' );
-require_once( $t_api_path . 'mc_enum_api.php' );
-require_once( $t_api_path . 'mc_project_api.php' );
+require_once $t_api_path . 'mc_api.php';
+require_once $t_api_path . 'mc_account_api.php';
+require_once $t_api_path . 'mc_enum_api.php';
+require_once $t_api_path . 'mc_project_api.php';
 
 require_api( 'custom_field_api.php' );
 

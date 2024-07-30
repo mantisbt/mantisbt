@@ -41,7 +41,7 @@
  * @uses version_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -136,7 +136,7 @@ $t_bugnote = false;
 $t_external_action_prefix = 'EXT_';
 if( strpos( $f_action, $t_external_action_prefix ) === 0 ) {
 	$t_form_page = 'bug_actiongroup_ext_page.php';
-	require_once( $t_form_page );
+	require_once $t_form_page;
 	exit;
 }
 
@@ -144,7 +144,7 @@ $t_custom_group_actions = config_get( 'custom_group_actions' );
 
 foreach( $t_custom_group_actions as $t_custom_group_action ) {
 	if( $f_action == $t_custom_group_action['action'] ) {
-		require_once( $t_custom_group_action['form_page'] );
+		require_once $t_custom_group_action['form_page'];
 		exit;
 	}
 }

@@ -30,6 +30,7 @@ use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\Comment\SingleLineCommentSpacingFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
+use PhpCsFixer\Fixer\ControlStructure\IncludeFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
 use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
@@ -377,6 +378,19 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/function_notation/no_spaces_after_function_name.html
 		 */
 		NoSpacesAfterFunctionNameFixer::class,
+
+		/**
+		 * Control structure: include
+		 *
+		 * Include/Require and file path should be divided with a single space.
+		 * File path should not be placed within parentheses.
+		 *
+		 * require ("sample1.php"); >  require "sample1.php";
+		 * require_once "sample2.php"; > require_once "sample2.php";
+		 *
+		 * @see https://cs.symfony.com/doc/rules/control_structure/include.html
+		 */
+		IncludeFixer::class,
 	] )
 
 	/**

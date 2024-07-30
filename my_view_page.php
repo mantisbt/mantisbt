@@ -38,7 +38,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -152,7 +152,7 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
 		echo '</div>';
 		echo '<div class="col-xs-12 col-md-6">';
 	}
-	include( __DIR__ . '/my_view_inc.php' );
+	include __DIR__ . '/my_view_inc.php';
 	echo '<div class="space-10"></div>';
 }
 ?>
@@ -165,7 +165,7 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
 		$g_timeline_filter = [];
 		$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = [META_FILTER_NONE];
 		$g_timeline_filter = filter_ensure_valid_filter( $g_timeline_filter );
-		include( 'timeline_inc.php' );
+		include 'timeline_inc.php';
 	?>
 	<div class="space-10"></div>
 </div>

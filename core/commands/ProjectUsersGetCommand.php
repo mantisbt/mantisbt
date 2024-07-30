@@ -20,8 +20,8 @@ require_api( 'authentication_api.php' );
 require_api( 'user_pref_api.php' );
 
 $t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
-require_once( $t_soap_dir . 'mc_account_api.php' );
-require_once( $t_soap_dir . 'mc_enum_api.php' );
+require_once $t_soap_dir . 'mc_account_api.php';
+require_once $t_soap_dir . 'mc_enum_api.php';
 
 /**
  * Sample:

@@ -67,10 +67,10 @@ function lang_load( $p_lang, $p_dir = null ) {
 	}
 
 	if( $p_dir === null ) {
-		include_once( config_get_global( 'language_path' ) . 'strings_' . $p_lang . '.txt' );
+		include_once config_get_global( 'language_path' ) . 'strings_' . $p_lang . '.txt';
 	} else {
 		if( is_file( $p_dir . 'strings_' . $p_lang . '.txt' ) ) {
-			include_once( $p_dir . 'strings_' . $p_lang . '.txt' );
+			include_once $p_dir . 'strings_' . $p_lang . '.txt';
 		}
 	}
 
@@ -80,7 +80,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 	global $g_config_path;
 
 	if( file_exists( $g_config_path . 'custom_strings_inc.php' ) ) {
-		include( $g_config_path . 'custom_strings_inc.php' );
+		include $g_config_path . 'custom_strings_inc.php';
 	}
 
 	$t_vars = get_defined_vars();

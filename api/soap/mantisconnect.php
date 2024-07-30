@@ -36,7 +36,7 @@ $g_bypass_error_handler = true;
 
 $t_wsdl_path = __DIR__ . '/mantisconnect.wsdl';
 
-require_once( $t_mantis_dir . 'core.php' );
+require_once $t_mantis_dir . 'core.php';
 
 /**
  * Checks if the request for the webservice is a documentation request (eg:
@@ -83,7 +83,7 @@ if( !mci_is_webservice_call() ) {
 	exit();
 }
 
-require_once( 'mc_core.php' );
+require_once 'mc_core.php';
 
 set_error_handler( 'mc_error_handler' );
 set_exception_handler( 'mc_error_exception_handler' );

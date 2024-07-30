@@ -59,14 +59,14 @@
  *   parameter 'mbadmin=1' to the URL.
  */
 if( file_exists( 'mantis_offline.php' ) && !isset( $_GET['mbadmin'] ) ) {
-	include( 'mantis_offline.php' );
+	include 'mantis_offline.php';
 	exit;
 }
 
 $g_request_time = microtime( true );
 
 # Load supplied constants
-require_once( __DIR__ . '/core/constant_inc.php' );
+require_once __DIR__ . '/core/constant_inc.php';
 
 # Enforce our minimum PHP requirements
 if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
@@ -86,21 +86,21 @@ if( php_sapi_name() != 'cli' ) {
 }
 
 # Load Composer autoloader
-require_once( __DIR__ . '/vendor/autoload.php' );
+require_once __DIR__ . '/vendor/autoload.php';
 
 # Include default configuration settings
-require_once( __DIR__ . '/config_defaults_inc.php' );
+require_once __DIR__ . '/config_defaults_inc.php';
 
 # Load user-defined constants (if required)
 global $g_config_path;
 if( file_exists( $g_config_path . 'custom_constants_inc.php' ) ) {
-	require_once( $g_config_path . 'custom_constants_inc.php' );
+	require_once $g_config_path . 'custom_constants_inc.php';
 }
 
 # config_inc may not be present if this is a new install
 $t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
 if( $t_config_inc_found ) {
-	require_once( $g_config_path . 'config_inc.php' );
+	require_once $g_config_path . 'config_inc.php';
 }
 
 # Set global path variables
@@ -227,7 +227,7 @@ if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 require_api( 'custom_function_api.php' );
 
 if( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
-	require_once( $g_config_path . 'custom_functions_inc.php' );
+	require_once $g_config_path . 'custom_functions_inc.php';
 }
 
 # Set HTTP response headers
@@ -257,7 +257,7 @@ function require_api( $p_api_name ) {
 	static $s_api_included;
 	global $g_core_path;
 	if( !isset( $s_api_included[$p_api_name] ) ) {
-		require_once( $g_core_path . $p_api_name );
+		require_once $g_core_path . $p_api_name;
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, ['t_new_globals' => 0] );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
@@ -280,7 +280,7 @@ function require_lib( $p_library_name ) {
 		$t_library_file_path = $g_library_path . $p_library_name;
 
 		if( file_exists( $t_library_file_path ) ) {
-			require_once( $t_library_file_path );
+			require_once $t_library_file_path;
 		} else {
 			echo 'External library \'' . $t_library_file_path . '\' not found.';
 			exit;
@@ -413,7 +413,7 @@ function autoload_mantis( $p_class ) {
 	if( substr( $p_class, -7 ) === 'Command' ) {
 		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
 		if( file_exists( $t_require_path ) ) {
-			require_once( $t_require_path );
+			require_once $t_require_path;
 			return;
 		}
 	}
@@ -422,7 +422,7 @@ function autoload_mantis( $p_class ) {
 	if( substr( $p_class, -9 ) === 'Exception' ) {
 		$t_require_path = $g_core_path . 'exceptions/' . $p_class . '.php';
 		if( file_exists( $t_require_path ) ) {
-			require_once( $t_require_path );
+			require_once $t_require_path;
 			return;
 		}
 	}
@@ -433,14 +433,14 @@ function autoload_mantis( $p_class ) {
 	$t_require_path = $g_class_path . $p_class . '.class.php';
 
 	if( file_exists( $t_require_path ) ) {
-		require_once( $t_require_path );
+		require_once $t_require_path;
 		return;
 	}
 
 	$t_require_path = $g_library_path . 'rssbuilder/class.' . $p_class . '.inc.php';
 
 	if( file_exists( $t_require_path ) ) {
-		require_once( $t_require_path );
+		require_once $t_require_path;
 		return;
 	}
 }

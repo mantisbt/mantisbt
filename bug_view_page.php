@@ -26,7 +26,7 @@
  * @uses gpc_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'gpc_api.php' );
 
 # Copy 'bug_id' parameter into 'id' so it is found by the view page.

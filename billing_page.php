@@ -30,7 +30,7 @@
  * @uses lang_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'billing_api.php' );
 require_api( 'config_api.php' );
@@ -46,6 +46,6 @@ layout_page_begin();
 
 # Work break-down
 define( 'BILLING_INC_ALLOW', true );
-include( __DIR__ . '/billing_inc.php' );
+include __DIR__ . '/billing_inc.php';
 
 layout_page_end();
