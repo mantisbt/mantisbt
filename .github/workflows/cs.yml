@@ -1,0 +1,35 @@
+name: Coding Style
+
+on: [ push, pull_request ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: 8.3
+
+      - name: Check formatting
+        # run: ./vendor/bin/ecs check
+        run: ./vendor/bin/ecs check $(echo $(git diff --name-only $COMMIT_RANGE))
+        env:
+          COMMIT_RANGE: ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+
+#      - name: Analyse code
+#        run: ./vendor/bin/phpstan
+
+#      - name: Run tests
+#        uses: php-actions/phpunit@v3
+#        env:
+#          XDEBUG_MODE: coverage
+#        with:
+#          version: 10.5
+#          php_version: 8.3
+#          php_extensions: "xdebug"
+#          coverage_text: true

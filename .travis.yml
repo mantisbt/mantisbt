@@ -1,17 +1,17 @@
 language: php
-os: linux
-dist: focal
-install:
-  - composer install
-branches:
-  only:
-    - master
-    - /master-[0-9.]+/
-jobs:
-  include:
-    - name: Coding Standards
-      php: 8.3
-      script:
-        - composer check-cs -- $(echo $(git diff --name-only $TRAVIS_COMMIT_RANGE))
-  allow_failures:
-    - name: Coding Standards
+#os: linux
+#dist: focal
+#install:
+#  - composer install
+#branches:
+#  only:
+#    - master
+#    - /master-[0-9.]+/
+#jobs:
+#  include:
+#    - name: Coding Standards
+#      php: 8.3
+#      script:
+#        - composer check-cs -- $(echo $(git diff --name-only $TRAVIS_COMMIT_RANGE))
+#  allow_failures:
+#    - name: Coding Standards
