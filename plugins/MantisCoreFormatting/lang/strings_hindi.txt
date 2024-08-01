@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Ajaysajay
  */
 
@@ -53,3 +54,4 @@ $s_plugin_format_process_markdown = 'अधो-अँकन (मार्क्�
 $s_plugin_format_process_markdown_info = 'अधो-अँकन (मार्क्डाउन) समर्थित पाठ प्रारूप ताकि इसे एच.टी.एम.एल. में परिवर्तित किया जा सके।';
 $s_plugin_format_enabled = 'प्रारंभ';
 $s_plugin_format_disabled = 'अंत';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'प्रतिलिपि बनाएँ';

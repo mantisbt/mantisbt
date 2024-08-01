@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Karmwiki
  * @author McDutchie
  */
 
@@ -53,3 +54,7 @@ $s_plugin_format_process_markdown = 'Processamento Markdown';
 $s_plugin_format_process_markdown_info = 'Application de stilo con supporto de Markdown, un syntaxe pro formatar texto de maniera que pote esser convertite in HTML.';
 $s_plugin_format_enabled = 'Active';
 $s_plugin_format_disabled = 'Non active';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Copiar al area de transferentia';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Copiar';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Monstrar lingua';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Monstrar spatios blanc';
