@@ -285,7 +285,7 @@ class LangCheckFile {
 			if( is_string( $t_token ) ) {
 				switch( $t_token ) {
 					case '=':
-						#
+
 						if( $t_last_token != T_VARIABLE ) {
 							$this->logFail( "'=' sign without variable", $t_line );
 							$t_pass = false;
