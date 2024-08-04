@@ -229,13 +229,13 @@ abstract class MantisPlugin {
 	}
 
 	/**
-	  * Perform pre-installation operations
-	  *
-	  * This method is called before installing the given plugin.
-	  * It can be used to add pre-install checks on external requirements
-	  *
-	  * @return bool true if install can proceed
-	  */
+	 * Perform pre-installation operations
+	 *
+	 * This method is called before installing the given plugin.
+	 * It can be used to add pre-install checks on external requirements
+	 *
+	 * @return bool true if install can proceed
+	 */
 	public function install() {
 		return true;
 	}

@@ -191,11 +191,11 @@ function lang_ensure_loaded( $p_lang ) {
 }
 
 /**
-* Check if the given language exists
-*
-* @param string $p_lang The language name.
-* @return boolean
-*/
+ * Check if the given language exists
+ *
+ * @param string $p_lang The language name.
+ * @return boolean
+ */
 function lang_language_exists( $p_lang ) {
 	$t_valid_langs = config_get( 'language_choices_arr' );
 	$t_valid = in_array( $p_lang, $t_valid_langs, true );

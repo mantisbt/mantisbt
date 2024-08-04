@@ -881,7 +881,7 @@ function project_remove_user( $p_project_id, $p_user_id ) {
  *
  * The user's default_project preference will be set to ALL_PROJECTS if they
  * no longer have access to the project.
-
+ *
  * @param integer $p_project_id  A project identifier.
  * @param array $p_user_ids      Array of user identifiers.
  * @return void

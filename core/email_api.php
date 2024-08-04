@@ -191,7 +191,7 @@ function email_is_valid( $p_email ) {
  * Check if the email address is valid trigger an ERROR if it isn't.
  *
  * @param string $p_email An email address.
-
+ *
  * @return void
  * @throws ClientException
  */

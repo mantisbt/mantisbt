@@ -33,6 +33,7 @@ use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
 use PhpCsFixer\Fixer\ControlStructure\IncludeFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
+use PhpCsFixer\Fixer\Phpdoc\AlignMultilineCommentFixer;
 use PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer;
 use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
@@ -391,6 +392,16 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/control_structure/include.html
 		 */
 		IncludeFixer::class,
+
+		/*
+		 * Align multiline comment
+		 *
+		 * Each line of multi-line DocComments must have an asterisk
+		 * [PSR-5] and must be aligned with the first one.
+		 *
+		 * @see https://cs.symfony.com/doc/rules/phpdoc/align_multiline_comment.html
+		 */
+		AlignMultilineCommentFixer::class,
 	] )
 
 	/**

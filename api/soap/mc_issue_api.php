@@ -327,13 +327,13 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 }
 
 /**
-* Get history details about an issue, used by SOAP APIs.
-*
-* @param string  $p_username The name of the user trying to access the issue.
-* @param string  $p_password The password of the user.
-* @param integer $p_issue_id The id of the issue to retrieve.
-* @return array that represents a HistoryDataArray structure
-*/
+ * Get history details about an issue, used by SOAP APIs.
+ *
+ * @param string  $p_username The name of the user trying to access the issue.
+ * @param string  $p_password The password of the user.
+ * @param integer $p_issue_id The id of the issue to retrieve.
+ * @return array that represents a HistoryDataArray structure
+ */
 function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 	global $g_project_override;
 

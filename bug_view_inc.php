@@ -51,7 +51,7 @@
  * @var bool   $t_force_readonly
  * @var bool   $t_show_page_header
  * @var string $t_mantis_dir
-
+ *
  * Ignoring warnings caused by includes with a dynamic path
  * @noinspection PhpIncludeInspection
  */

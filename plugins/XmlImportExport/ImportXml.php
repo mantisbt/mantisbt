@@ -71,8 +71,8 @@ class SourceData {
 }
 
 /**
-  * Perform import from an XML file
-  */
+ * Perform import from an XML file
+ */
 class ImportXML {
 	/**
 	 * Source
@@ -112,14 +112,14 @@ class ImportXML {
 	private $defaultCategory_;
 
 	/**
-	  * Constructor
-	  *
-	  * @param string $p_filename         Name of the file to read.
-	  * @param string $p_strategy         Conversion strategy; one of "renumber", "link" or "disable".
-	  * @param string $p_fallback         Alternative conversion strategy when "renumber" does not apply.
-	  * @param string $p_keep_category    Keep category.
-	  * @param string $p_default_category Default category.
-	  */
+	 * Constructor
+	 *
+	 * @param string $p_filename         Name of the file to read.
+	 * @param string $p_strategy         Conversion strategy; one of "renumber", "link" or "disable".
+	 * @param string $p_fallback         Alternative conversion strategy when "renumber" does not apply.
+	 * @param string $p_keep_category    Keep category.
+	 * @param string $p_default_category Default category.
+	 */
 	public function __construct( $p_filename, $p_strategy, $p_fallback, $p_keep_category, $p_default_category ) {
 		$this->source_ = new SourceData;
 		$this->reader_ = new XMLReader();
