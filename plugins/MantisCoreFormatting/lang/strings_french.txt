@@ -41,6 +41,7 @@
  * @author Dolmen
  * @author Gomoko
  * @author IAlex
+ * @author Méthodes Bulebe Hangi
  * @author Urhixidur
  * @author Verdy p
  * @author Wladek92
@@ -58,3 +59,19 @@ $s_plugin_format_process_markdown = 'Traitement Markdown';
 $s_plugin_format_process_markdown_info = 'Mise en forme prenant en charge Markdown, la syntaxe de formatage du texte qui permet que celui-ci puisse être converti en HTML.';
 $s_plugin_format_enabled = 'Activé';
 $s_plugin_format_disabled = 'Désactivé';
+$s_plugin_format_syntax_highlighting = 'Mise enévidence des blocs de code par synthax.';
+$s_plugin_format_syntax_highlighting_plugins = 'Options du bloc de code';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Copier dans le presse-papiers';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Pour copier le contenu,il faut montrer un petit bouton pour copier le bloc des codes sur le presse-papiers.';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Copier';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Pour copier tapper Ctrl+C';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Définir la langue';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Numéros des lignes';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Afficher les numéros de ligne';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Montrer les espaces espaces blanches.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Afficher les caracteres cachés (e.g. for indentations).';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Normaliser les espaces blanches';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Etendre la mise en évidence des différences.';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Visualiser les couleurs CSS';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Montrer un petit carré devant la définition de chaque couleur (e.g. before "#000").';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Previsualisation de certaines definitionsCSS.';

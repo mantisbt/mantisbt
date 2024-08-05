@@ -40,6 +40,7 @@
  *
  * @author DRIHEM
  * @author Meno25
+ * @author بهتين شوكت
  * @author ديفيد
  */
 
@@ -55,3 +56,24 @@ $s_plugin_format_process_markdown = 'معالجة ماركداون';
 $s_plugin_format_process_markdown_info = 'التصميم مع دعم ماركداون، صيغة نص تنسيق تصميم بحيث يمكن تحويلها إلى HTML.';
 $s_plugin_format_enabled = 'مفعل';
 $s_plugin_format_disabled = 'معطل';
+$s_plugin_format_syntax_highlighting = 'وبناء علي الجملة تسليط الضوء ل شفرة كتل';
+$s_plugin_format_syntax_highlighting_info = 'ويعمل تمييز إنشاء الجملة فقط إذا كانت "معالجة تقليل السعر" مفعله.';
+$s_plugin_format_syntax_highlighting_theme = 'شفرة كتل صفه';
+$s_plugin_format_syntax_highlighting_plugins = 'خيارات هذه الكتل والتعليمات البرمجية';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'جاري النسخ إلى الحافظة';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'يستنسخ';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = 'استنسخت';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'دوس على كنترول ج لنسخ المطلوب';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'تباين اللغة';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'يظهر اللغة التي يحتوي عليها كتلة التعليمات التي تدعي البرمجية.';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'أرقام الأسطر';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'يظهر هنا أرقام الخط.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'تباين المسافات البيضاء';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'تظهر الأحرف المخفية (على سبيل المثال المسافات البادئة).';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'تطبيع اللابعاد البيضاء';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'تقويمات متطابقة';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'هو يعرض اقتران الأقواس وعند تحريك الماوس من فوق وبما في ذلك "أقواس قوس قزح" (كل زوج له لونه مخصص).';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'وذالك لتسليط الضوء الموسع على الاختلافات (الفرق)';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'تصور ألوان سي اس اس';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'تراء مربعًا صغيرًا ملونًا أمام تعريف اللون (وعلى سبيل المثال قبل "#000").';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'هنا المعاينات ولبعض تعريفات سي اس اس';
