@@ -62,7 +62,7 @@ $f_tag_id = gpc_get_int( 'tag_id' );
 tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
-$t_name = string_display_line( $t_tag_row['name'] );
+$t_name = string_attribute( $t_tag_row['name'] );
 $t_description = string_display( $t_tag_row['description'] );
 
 if( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
@@ -120,7 +120,7 @@ layout_page_begin();
 					echo '</select></td>';
 				} else { ?>
 					<td class="category"><?php echo lang_get( 'tag_creator' ); ?></td>
-					<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ); ?></td><?php
+					<td><?php echo string_attribute( user_get_name($t_tag_row['user_id']) ); ?></td><?php
 				} ?>
 			</tr>
 			<tr>

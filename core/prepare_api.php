@@ -83,7 +83,7 @@ function prepare_mailto_url ( $p_email, $p_subject = '' ) {
  * @return string
  */
 function prepare_email_link( $p_email, $p_text, $p_subject = '', $p_tooltip ='', $p_show_as_button = false ) {
-	$t_text = string_display_line( $p_text );
+	$t_text = string_attribute( $p_text );
 	if( !is_blank( $p_tooltip ) && $p_tooltip != $p_text ) {
 		$t_tooltip = ' title="' . string_display_line( $p_tooltip ) . '"';
 	} else {
@@ -133,7 +133,7 @@ function prepare_user_name( $p_user_id, $p_link = true ) {
 		$t_tooltip = '';
 	}
 
-	$t_name = string_display_line( $t_name );
+	$t_name = string_attribute( $t_name );
 
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 		if( $p_link ) {
