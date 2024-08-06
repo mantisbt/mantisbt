@@ -48,7 +48,7 @@ function api_token_get( $p_token_id ) {
 	db_param_push();
 
 	$t_query = 'SELECT * FROM {api_token} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_token_id ) );
+	$t_result = db_query( $t_query, [$p_token_id] );
 	$t_row = db_fetch_array( $t_result );
 
 	return $t_row;
@@ -85,11 +85,11 @@ function api_token_create( $p_token_name, $p_user_id, $p_return_id = false ) {
 	$t_query = 'INSERT INTO {api_token}
 					( user_id, name, hash, date_created )
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $p_user_id, (string)$t_token_name, $t_hash, $t_date_created ) );
+	db_query( $t_query, [$p_user_id, (string)$t_token_name, $t_hash, $t_date_created] );
 
 	if( $p_return_id ) {
 		$t_id = db_insert_id( db_get_table( 'api_token' ) );
-		return array( 'id' => $t_id, 'token' => $t_plain_token );
+		return ['id' => $t_id, 'token' => $t_plain_token];
 	}
 
 	return $t_plain_token;
@@ -116,7 +116,7 @@ function api_token_hash( $p_token ) {
 function api_token_name_is_unique( $p_token_name, $p_user_id ) {
 	db_param_push();
 	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND name=' . db_param();
-	$t_result = db_query( $t_query, array( $p_user_id, $p_token_name ) );
+	$t_result = db_query( $t_query, [$p_user_id, $p_token_name] );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -157,7 +157,7 @@ function api_token_get_user( $p_token ) {
 
 	# TODO: add an index on just the API token hash
 	$t_query = 'SELECT * FROM {api_token} WHERE hash=' . db_param();
-	$t_result = db_query( $t_query, array( $t_encrypted_token ) );
+	$t_result = db_query( $t_query, [$t_encrypted_token] );
 
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
@@ -194,7 +194,7 @@ function api_token_validate( $p_username, $p_token ) {
 
 	db_param_push();
 	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND hash=' . db_param();
-	$t_result = db_query( $t_query, array( $t_user_id, $t_encrypted_token ) );
+	$t_result = db_query( $t_query, [$t_user_id, $t_encrypted_token] );
 
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
@@ -214,11 +214,10 @@ function api_token_validate( $p_username, $p_token ) {
 function api_token_get_all( $p_user_id ) {
 	db_param_push();
 	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' ORDER BY date_used DESC, date_created ASC';
-	$t_result = db_query( $t_query, array( $p_user_id ) );
+	$t_result = db_query( $t_query, [$p_user_id] );
 
-	$t_rows = array();
-	while ( ( $t_row = db_fetch_array( $t_result ) ) !== false )
-	{
+	$t_rows = [];
+	while ( ( $t_row = db_fetch_array( $t_result ) ) !== false ) {
 		$t_rows[] = $t_row;
 	}
 
@@ -248,7 +247,7 @@ function api_token_touch( $p_api_token_id ) {
 	db_param_push();
 	$t_query = 'UPDATE {api_token} SET date_used=' . db_param() . ' WHERE id=' . db_param();
 
-	db_query( $t_query, array( $t_date_used, $p_api_token_id ) );
+	db_query( $t_query, [$t_date_used, $p_api_token_id] );
 }
 
 /**
@@ -261,7 +260,7 @@ function api_token_touch( $p_api_token_id ) {
 function api_token_revoke( $p_api_token_id, $p_user_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {api_token} WHERE id=' . db_param() . ' AND user_id = ' . db_param();
-	db_query( $t_query, array( $p_api_token_id, $p_user_id ) );
+	db_query( $t_query, [$p_api_token_id, $p_user_id] );
 }
 
 /**
@@ -274,5 +273,5 @@ function api_token_revoke( $p_api_token_id, $p_user_id ) {
 function api_token_revoke_all( $p_user_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {api_token} WHERE user_id = ' . db_param();
-	db_query( $t_query, array( $p_user_id ) );
+	db_query( $t_query, [$p_user_id] );
 }

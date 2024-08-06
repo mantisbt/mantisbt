@@ -79,7 +79,7 @@ class IssueRelationshipAddCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {
-		$t_type = $this->payload( 'type', array( 'id' => BUG_RELATED ) );
+		$t_type = $this->payload( 'type', ['id' => BUG_RELATED] );
 		$this->typeId = $this->getRelationTypeId( $t_type );
 
 		$t_source_issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
@@ -89,7 +89,7 @@ class IssueRelationshipAddCommand extends Command {
 			throw new ClientException(
 				'Invalid issue id',
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'issue_id' )
+				['issue_id']
 			);
 		}
 
@@ -121,9 +121,9 @@ class IssueRelationshipAddCommand extends Command {
 		# Ensure source issue is not read-only
 		if( bug_is_readonly( $t_source_issue_id ) ) {
 			throw new ClientException(
-				sprintf( "Issue %d is read-only", $t_source_issue_id ),
+				sprintf( 'Issue %d is read-only', $t_source_issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				array( $t_source_issue_id )
+				[$t_source_issue_id]
 			);
 		}
 
@@ -131,9 +131,9 @@ class IssueRelationshipAddCommand extends Command {
 		$t_view_threshold = config_get( 'view_bug_threshold', null, null, $this->targetIssue->project_id );
 		if( !access_has_bug_level( $t_view_threshold, $t_target_issue_id ) ) {
 			throw new ClientException(
-				sprintf( "Access denied to issue %d", $t_target_issue_id ),
+				sprintf( 'Access denied to issue %d', $t_target_issue_id ),
 				ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW,
-				array( $t_target_issue_id )
+				[$t_target_issue_id]
 			);
 		}
 	}
@@ -155,7 +155,7 @@ class IssueRelationshipAddCommand extends Command {
 		# Create or update the relationship
 		$t_relationship_id = relationship_upsert( $this->sourceIssue->id, $this->targetIssue->id, $this->typeId );
 
-		return array( 'id' => $t_relationship_id );
+		return ['id' => $t_relationship_id];
 	}
 
 	/**
@@ -176,11 +176,10 @@ class IssueRelationshipAddCommand extends Command {
 			throw new ClientException(
 				'Invalid relationship type',
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'relationship_type' )
+				['relationship_type']
 			);
 		}
 
 		return $t_type_id;
 	}
 }
-

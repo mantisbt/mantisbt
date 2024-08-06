@@ -93,11 +93,11 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
  * @throws ClientException
  */
 function helper_array_transpose( array $p_array ) {
-	$t_out = array();
+	$t_out = [];
 	foreach( $p_array as $t_key => $t_sub ) {
 		if( !is_array( $t_sub ) ) {
 			throw new ClientException(
-				__FUNCTION__ . " can only handle bidimensional arrays",
+				__FUNCTION__ . ' can only handle bidimensional arrays',
 				ERROR_GENERIC
 			);
 		}
@@ -148,7 +148,7 @@ function get_percentage_by_status() {
 	$t_query .= ' GROUP BY status';
 	$t_result = db_query( $t_query );
 
-	$t_status_count_array = array();
+	$t_status_count_array = [];
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_status_count_array[$t_row['status']] = $t_row['num'];
@@ -360,9 +360,9 @@ function helper_get_current_project_trace() {
 	if( null === $t_project_id ) {
 		$t_bottom = current_user_get_pref( 'default_project' );
 		$t_parent = $t_bottom;
-		$t_project_id = array(
+		$t_project_id = [
 			$t_bottom,
-		);
+		];
 
 		while( true ) {
 			$t_parent = project_hierarchy_get_parent( $t_parent );
@@ -378,9 +378,9 @@ function helper_get_current_project_trace() {
 	}
 
 	if( !project_exists( $t_bottom ) || ( 0 == project_get_field( $t_bottom, 'enabled' ) ) || !access_has_project_level( config_get( 'view_bug_threshold', null, null, $t_bottom ), $t_bottom ) ) {
-		$t_project_id = array(
+		$t_project_id = [
 			ALL_PROJECTS,
-		);
+		];
 	}
 
 	return $t_project_id;
@@ -507,7 +507,7 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
  * @return array
  */
 function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_viewable_only = true, $p_user_id = null ) {
-	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( $p_columns_target, $p_user_id ) );
+	$t_columns = helper_call_custom_function( 'get_columns_to_view', [$p_columns_target, $p_user_id] );
 
 	# Fix column names for custom field columns that may be stored as lowercase in configuration. See issue #17367
 	# If the system was working fine with lowercase names, then database is case-insensitive, eg: mysql
@@ -524,7 +524,7 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 		return $t_columns;
 	}
 
-	$t_keys_to_remove = array();
+	$t_keys_to_remove = [];
 
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
 		$t_keys_to_remove[] = 'selection';
@@ -643,7 +643,7 @@ function helper_duration_to_minutes( $p_hhmm, $p_field = 'hhmm' ) {
 		throw new ClientException(
 			sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
 			ERROR_INVALID_FIELD_VALUE,
-			array( $p_field )
+			[$p_field]
 		);
 	}
 
@@ -654,7 +654,7 @@ function helper_duration_to_minutes( $p_hhmm, $p_field = 'hhmm' ) {
 			throw new ClientException(
 				sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
 				ERROR_INVALID_FIELD_VALUE,
-				array( $p_field )
+				[$p_field]
 			);
 		}
 
@@ -663,7 +663,7 @@ function helper_duration_to_minutes( $p_hhmm, $p_field = 'hhmm' ) {
 			throw new ClientException(
 				sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
 				ERROR_INVALID_FIELD_VALUE,
-				array( $p_field )
+				[$p_field]
 			);
 		}
 	}
@@ -704,7 +704,7 @@ function shutdown_functions_register() {
  * @return array An array of strings which match the supplied prefix.
  */
 function helper_filter_by_prefix( array $p_set, $p_prefix ) {
-	$t_matches = array();
+	$t_matches = [];
 	foreach ( $p_set as $p_item ) {
 		if( mb_strtolower( mb_substr( $p_item, 0, mb_strlen( $p_prefix ) ) ) === mb_strtolower( $p_prefix ) ) {
 			$t_matches[] = $p_item;
@@ -779,9 +779,9 @@ function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_strin
 function helper_parse_view_state( $p_view_state ) {
 	if( ! is_array( $p_view_state ) ) {
 		throw new ClientException(
-			"Invalid view state",
+			'Invalid view state',
 			ERROR_INVALID_FIELD_VALUE,
-			array( lang_get( 'bugnote_view_state' ) )
+			[lang_get( 'bugnote_view_state' )]
 		);
 	}
 
@@ -795,7 +795,7 @@ function helper_parse_view_state( $p_view_state ) {
 			throw new ClientException(
 				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
 				ERROR_INVALID_FIELD_VALUE,
-				array( lang_get( 'bugnote_view_state' ) )
+				[lang_get( 'bugnote_view_state' )]
 			);
 		}
 	} else if( isset( $p_view_state['name' ] ) ) {
@@ -805,16 +805,16 @@ function helper_parse_view_state( $p_view_state ) {
 			throw new ClientException(
 				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
 				ERROR_INVALID_FIELD_VALUE,
-				array( lang_get( 'bugnote_view_state' ) )
+				[lang_get( 'bugnote_view_state' )]
 			);
 		}
 
 		$t_view_state_id = $t_enum_by_labels[$t_name];
 	} else {
 		throw new ClientException(
-			"Empty view state",
+			'Empty view state',
 			ERROR_EMPTY_FIELD,
-			array( lang_get( 'bugnote_view_state' ) )
+			[lang_get( 'bugnote_view_state' )]
 		);
 	}
 
@@ -833,15 +833,15 @@ function helper_parse_id( $p_id, $p_field_name ) {
 	$t_id = trim( $p_id );
 	if( !is_numeric( $t_id ) ) {
 		if( empty( $t_id ) ) {
-			throw new ClientException( "'$p_field_name' missing", ERROR_GPC_VAR_NOT_FOUND, array( $p_field_name ) );
+			throw new ClientException( "'$p_field_name' missing", ERROR_GPC_VAR_NOT_FOUND, [$p_field_name] );
 		}
 
-		throw new ClientException( "'$p_field_name' must be numeric", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+		throw new ClientException( "'$p_field_name' must be numeric", ERROR_INVALID_FIELD_VALUE, [$p_field_name] );
 	}
 
 	$t_id = (int)$t_id;
 	if( $t_id < 1 ) {
-		throw new ClientException( "'$p_field_name' must be >= 1", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+		throw new ClientException( "'$p_field_name' must be >= 1", ERROR_INVALID_FIELD_VALUE, [$p_field_name] );
 	}
 
 	return $t_id;
@@ -876,7 +876,7 @@ function helper_parse_issue_id( $p_issue_id, $p_field_name = 'issue_id' ) {
 function helper_get_link_attributes( $p_return_array = true ) {
 	$t_html_make_links = config_get( 'html_make_links' );
 
-	$t_attributes = array();
+	$t_attributes = [];
 	if( $t_html_make_links ) {
 		# Link target
 		if( $t_html_make_links & LINKS_NEW_WINDOW ) {
@@ -888,8 +888,7 @@ function helper_get_link_attributes( $p_return_array = true ) {
 			if( $t_html_make_links & LINKS_NOREFERRER ) {
 				$t_attributes['rel'] = 'noreferrer';
 				# noreferrer implies noopener, so no need to set the latter
-			}
-			elseif( $t_html_make_links & LINKS_NOOPENER ) {
+			} elseif( $t_html_make_links & LINKS_NOOPENER ) {
 				$t_attributes['rel'] = 'noopener';
 			}
 		}

@@ -112,7 +112,8 @@ abstract class MantisPlugin {
 	 * that will be called after all plugins have been initialized.
 	 * @return void
 	 */
-	public function init() {}
+	public function init() {
+	}
 
 	/**
 	 * This function allows plugins to add new error messages for Mantis usage
@@ -120,7 +121,7 @@ abstract class MantisPlugin {
 	 * @return array The error_name=>error_message list to add
 	 */
 	public function errors() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -128,7 +129,7 @@ abstract class MantisPlugin {
 	 * @return array
 	 */
 	public function config() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -159,7 +160,7 @@ abstract class MantisPlugin {
 	 * @return array
 	 */
 	public function events() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -195,7 +196,7 @@ abstract class MantisPlugin {
 	 * @return array
 	 */
 	public function hooks() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -224,17 +225,17 @@ abstract class MantisPlugin {
 	 * @return array
 	 */
 	public function schema() {
-		return array();
+		return [];
 	}
 
 	/**
-	  * Perform pre-installation operations
-	  *
-	  * This method is called before installing the given plugin.
-	  * It can be used to add pre-install checks on external requirements
-	  *
-	  * @return bool true if install can proceed
-	  */
+	 * Perform pre-installation operations
+	 *
+	 * This method is called before installing the given plugin.
+	 * It can be used to add pre-install checks on external requirements
+	 *
+	 * @return bool true if install can proceed
+	 */
 	public function install() {
 		return true;
 	}
@@ -263,7 +264,7 @@ abstract class MantisPlugin {
 	public function uninstall() {
 	}
 
-	### Core plugin functionality ###
+	# ## Core plugin functionality ###
 
 	/**
 	 * Plugin Basename

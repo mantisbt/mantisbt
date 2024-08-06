@@ -59,12 +59,12 @@ class TagAttachCommand extends Command {
 	/**
 	 * @var array Array of tag names to be added.
 	 */
-	private $tagsToCreate = array();
+	private $tagsToCreate = [];
 
 	/**
 	 * @var array Array of tag ids to be attached.  This doesn't include tags to be created the attached.
 	 */
-	private $tagsToAttach = array();
+	private $tagsToAttach = [];
 
 	/**
 	 * @param array $p_data The command data.
@@ -84,9 +84,9 @@ class TagAttachCommand extends Command {
 			throw new ClientException( 'Access denied to attach tags', ERROR_ACCESS_DENIED );
 		}
 
-		$t_tags = $this->payload( 'tags', array() );
+		$t_tags = $this->payload( 'tags', [] );
 		if( !is_array( $t_tags ) || empty( $t_tags ) ) {
-			throw new ClientException( 'Invalid tags array', ERROR_INVALID_FIELD_VALUE, array( 'tags' ) );
+			throw new ClientException( 'Invalid tags array', ERROR_INVALID_FIELD_VALUE, ['tags'] );
 		}
 
 		$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
@@ -106,14 +106,14 @@ class TagAttachCommand extends Command {
 						throw new ClientException(
 							sprintf( "Tag '%s' not found.  Access denied to auto-create tag.", $t_tag['name'] ),
 							ERROR_INVALID_FIELD_VALUE,
-							array( 'tags' ) );
+							['tags'] );
 					}
 				} else {
 					$this->tagsToAttach[] = (int)$t_tag_row['id'];
 				}
 			} else {
 				# invalid tag with no id or name.
-				throw new ClientException( "Invalid tag with no id or name", ERROR_INVALID_FIELD_VALUE, array( 'tags' ) );
+				throw new ClientException( 'Invalid tag with no id or name', ERROR_INVALID_FIELD_VALUE, ['tags'] );
 			}
 		}
 	}
@@ -124,7 +124,7 @@ class TagAttachCommand extends Command {
 	 * @return array Command response
 	 */
 	protected function process() {
-		$t_attached_tags = array();
+		$t_attached_tags = [];
 
 		# Attach tags that already exist
 		foreach( $this->tagsToAttach as $t_tag_id ) {
@@ -144,10 +144,9 @@ class TagAttachCommand extends Command {
 		}
 
 		if( !empty( $t_attached_tags ) ) {
-			event_signal( 'EVENT_TAG_ATTACHED', array( $this->issue_id, $t_attached_tags ) );
+			event_signal( 'EVENT_TAG_ATTACHED', [$this->issue_id, $t_attached_tags] );
 		}
 
 		return [];
 	}
 }
-

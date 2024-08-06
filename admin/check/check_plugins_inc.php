@@ -31,7 +31,7 @@ if( !defined( 'CHECK_PLUGINS_INC_ALLOW' ) ) {
 }
 
 # MantisBT Check API
-require_once( 'check_api.php' );
+require_once 'check_api.php';
 require_api( 'config_api.php' );
 require_api( 'plugin_api.php' );
 require_api( 'constant_inc.php' );
@@ -40,7 +40,7 @@ check_print_section_header_row( 'Plugins' );
 
 # Initialize
 $t_plugins = plugin_find_all();
-ksort($t_plugins);
+ksort( $t_plugins );
 plugin_init_installed();
 $t_installed_plugins = array_filter(
 	$t_plugins,
@@ -50,7 +50,7 @@ $t_manage_plugins_link = '<a href="' . helper_mantis_url( 'manage_plugin_page.ph
 
 # Info row - plugins count
 check_print_info_row(
-	"Checking all available and installed plugins",
+	'Checking all available and installed plugins',
 	count( $t_plugins ) . ' plugins, '
 	. count( $t_installed_plugins ) . ' installed'
 );
@@ -60,11 +60,11 @@ foreach( $t_installed_plugins as $t_basename => $t_plugin ) {
 	check_print_test_row(
 		"Installed Plugin '$t_basename'' is operational",
 		plugin_is_loaded( $t_basename ),
-		array(
-			false => "Plugin could not be loaded; check "
+		[
+			false => 'Plugin could not be loaded; check '
 				. sprintf( $t_manage_plugins_link, '#installed', 'Manage Plugins page' )
-				. " to ensure its dependencies are met or if it needs to be upgraded."
-		)
+				. ' to ensure its dependencies are met or if it needs to be upgraded.'
+		]
 	);
 }
 
@@ -76,10 +76,10 @@ foreach( $t_forced_plugins as $t_basename => $t_priority ) {
 	check_print_test_warn_row(
 		"Force-installed plugin '$t_basename' is available and valid",
 		!$t_plugin instanceof InvalidPlugin,
-		array(
+		[
 			false => $t_plugin->description
 				. " - review 'plugins_force_installed' configuration option"
-		)
+		]
 	);
 }
 
@@ -102,10 +102,10 @@ foreach( $t_invalid_plugins as $t_plugin ) {
 			check_print_test_row(
 				$t_description,
 				false,
-				array(
+				[
 					false => sprintf( $t_manage_plugins_link, '#invalid', 'Remove the Plugin' )
-						. " or reinstall its source code."
-				)
+						. ' or reinstall its source code.'
+				]
 			);
 			break;
 		case MantisPlugin::STATUS_MISSING_BASE_CLASS:
@@ -115,16 +115,16 @@ foreach( $t_invalid_plugins as $t_plugin ) {
 			check_print_test_warn_row(
 				$t_description,
 				false,
-				array(
+				[
 					false => "Rename the Plugin's directory or " . $t_msg_contact
-				)
+				]
 			);
 			break;
 		default:
 			check_print_test_row(
 				$t_description,
 				false,
-				array( false => $t_msg_contact )
+				[false => $t_msg_contact]
 			);
 	}
 }

@@ -40,10 +40,10 @@ class TagTest extends SoapBase {
 	public function testTagOperations() {
 		$t_current_tag_count = sizeof( $this->client->mc_tag_get_all( $this->userName, $this->password, 1, 500 )->results );
 
-		$t_tag_to_create = array (
+		$t_tag_to_create =  [
 			'name' => 'TagTest.testTagOperations',
 			'description' => 'Tag created by unit test'
-		);
+		];
 
 		$t_new_tag_id = $this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
 
@@ -81,10 +81,10 @@ class TagTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateTagWithInvalidName() {
-		$t_tag_to_create = array (
-		    		'name' => '',
-		    		'description' => ''
-		);
+		$t_tag_to_create =  [
+			'name' => '',
+			'description' => ''
+		];
 
 		try {
 			$this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
@@ -112,9 +112,9 @@ class TagTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateTagWithNoDescription() {
-		$t_tag_to_create = array (
+		$t_tag_to_create =  [
 			'name' => 'TagTest.testCreateTagWithNoDescription'
-		);
+		];
 
 		$t_tag_id = $this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
 
@@ -126,9 +126,9 @@ class TagTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateTagWithExistingName() {
-		$t_tag_to_create = array (
+		$t_tag_to_create =  [
 			'name' => 'TagTest.testCreateTagWithExistingName'
-		);
+		];
 		$t_tag_id = $this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
 		$this->deleteTagAfterRun( $t_tag_id );
 
@@ -146,9 +146,9 @@ class TagTest extends SoapBase {
 	 */
 	public function testSetTagsOnIssue() {
 		# create tag
-		$t_tag_to_create = array (
-		    		'name' => 'TagTest.testCreateTagWithExistingName'
-		);
+		$t_tag_to_create =  [
+			'name' => 'TagTest.testCreateTagWithExistingName'
+		];
 		$t_tag_id = $this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
 		$this->deleteTagAfterRun( $t_tag_id );
 
@@ -158,7 +158,7 @@ class TagTest extends SoapBase {
 		$this->deleteAfterRun( $t_issue_id );
 
 		# set tags
-		$this->client->mc_issue_set_tags( $this->userName, $this->password, $t_issue_id, array ( array ( 'id' => $t_tag_id ) ) );
+		$this->client->mc_issue_set_tags( $this->userName, $this->password, $t_issue_id,  [['id' => $t_tag_id]] );
 
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 

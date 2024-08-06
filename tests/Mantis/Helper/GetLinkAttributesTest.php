@@ -31,8 +31,7 @@ require_once dirname( __DIR__ ) . '/MantisCoreBase.php';
  *
  * @see helper_get_link_attributes()
  */
-class GetLinkAttributesTest extends MantisCoreBase
-{
+class GetLinkAttributesTest extends MantisCoreBase {
 	/**
 	 * Link attributes are correctly created according to the
 	 * configuration of "$g_html_make_links"
@@ -48,7 +47,7 @@ class GetLinkAttributesTest extends MantisCoreBase
 	 * @dataProvider provideConfigurations
 	 */
 	public function testHelperReturnsArrayOrString( int $p_config, string $p_string, array $p_array ): void {
-		config_set('html_make_links', $p_config );
+		config_set( 'html_make_links', $p_config );
 
 		# 1.
 		$this->assertSame( $p_array, helper_get_link_attributes() );

@@ -22,7 +22,7 @@
  * @noinspection PhpUnused
  */
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_STRING] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_STRING] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -36,9 +36,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_STRING] = array (
 	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_string',
 	'#function_string_value_for_email' => null,
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_TEXTAREA] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_TEXTAREA] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -52,9 +52,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_TEXTAREA] = array (
 	'#function_print_value' => 'cfdef_print_textarea',
 	'#function_string_value' => 'cfdef_prepare_string',
 	'#function_string_value_for_email' => null,
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_NUMERIC] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_NUMERIC] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -67,9 +67,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_NUMERIC] = array (
 	'#function_print_value' => 'cfdef_print_numeric',
 	'#function_string_value' => 'cfdef_prepare_numeric',
 	'#function_string_value_for_email' => null,
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_FLOAT] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_FLOAT] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -82,9 +82,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_FLOAT] = array (
 	'#function_print_value' => 'cfdef_print_float',
 	'#function_string_value' => 'cfdef_prepare_float',
 	'#function_string_value_for_email' => null,
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_ENUM] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_ENUM] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -97,9 +97,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_ENUM] = array (
 	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_EMAIL] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_EMAIL] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -112,9 +112,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_EMAIL] = array (
 	'#function_print_value' => 'cfdef_print_email_value',
 	'#function_string_value' => 'cfdef_prepare_email_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_email_value_for_email',
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_CHECKBOX] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_CHECKBOX] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -127,9 +127,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_CHECKBOX] = array (
 	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_RADIO] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_RADIO] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => false,
 	'#display_length_min' => false,
@@ -142,9 +142,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_RADIO] = array (
 	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_LIST] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_LIST] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -157,9 +157,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_LIST] = array (
 	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_MULTILIST] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_MULTILIST] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -172,9 +172,9 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_MULTILIST] = array (
 	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
-);
+];
 
-$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_DATE] = array (
+$g_custom_field_type_definition[CUSTOM_FIELD_TYPE_DATE] =  [
 	'#display_possible_values' => true,
 	'#display_valid_regexp' => true,
 	'#display_length_min' => true,
@@ -188,7 +188,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_DATE] = array (
 	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_date_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_date_value_for_email',
-);
+];
 
 /**
  * Prepare List Value for database storage
@@ -316,8 +316,7 @@ function cfdef_prepare_date_default( $p_value ) {
 	# Check default date format and calculate actual date
 	try {
 		$t_date = new DateTimeImmutable( $t_value );
-	}
-	catch( Exception $e ) {
+	} catch( Exception $e ) {
 		return 0;
 	}
 
@@ -376,9 +375,9 @@ function cfdef_input_list( array $p_field_def, $p_custom_field_value, $p_require
 	}
 
 	if( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
-		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple"' . $p_required .'>';
+		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple"' . $p_required . '>';
 	} else {
-		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '"' . $p_required .'>';
+		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '"' . $p_required . '>';
 	}
 
 	$t_selected_values = explode( '|', $p_custom_field_value );
@@ -460,7 +459,7 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value, $p_requ
 			, '" name="custom_field_', $p_field_def['id'], '" ', $p_required;
 	if( $p_field_def['length_max'] > 0 ) {
 		echo ' maxlength="' . $p_field_def['length_max'] . '"'
-				, ' size="' .  min( 80, $p_field_def['length_max'] ) . '"';
+				, ' size="' . min( 80, $p_field_def['length_max'] ) . '"';
 	} else {
 		echo ' maxlength="255" size="80"';
 	}
@@ -477,7 +476,7 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value, $p_requ
 		}
 		echo ' pattern="' . string_attribute( $t_cf_regex ) . '"';
 	}
-	echo ' value="' . string_attribute( $p_custom_field_value ) .'" />';
+	echo ' value="' . string_attribute( $p_custom_field_value ) . '" />';
 }
 
 /**
@@ -541,7 +540,7 @@ function cfdef_prepare_list_value_to_database( $p_value ) {
 function cfdef_prepare_list_distinct_values( array $p_field_def ) {
 	db_param_push();
 	$t_query = 'SELECT possible_values FROM {custom_field} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_field_def['id'] ) );
+	$t_result = db_query( $t_query, [$p_field_def['id']] );
 
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
@@ -550,7 +549,7 @@ function cfdef_prepare_list_distinct_values( array $p_field_def ) {
 
 	$t_possible_values = custom_field_prepare_possible_values( $t_row['possible_values'] );
 	$t_values_arr = explode( '|', $t_possible_values );
-	$t_return_arr = array();
+	$t_return_arr = [];
 
 	foreach( $t_values_arr as $t_option ) {
 		array_push( $t_return_arr, $t_option );

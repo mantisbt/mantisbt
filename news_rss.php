@@ -37,7 +37,7 @@
  * @uses rssbuilder/class.RSSBuilder.inc.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -89,7 +89,7 @@ if( $f_username !== null ) {
 }
 
 $t_description = $t_title;
-$t_image_link = config_get_global( 'path' ) . config_get_global( 'logo_image' );;
+$t_image_link = config_get_global( 'path' ) . config_get_global( 'logo_image' );
 
 # only rss 2.0
 $t_category = string_rss_links( project_get_name( $f_project_id ) );

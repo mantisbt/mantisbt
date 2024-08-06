@@ -26,7 +26,7 @@
 /**
  * requires MantisWikiPlugin.class
  */
-require_once( 'MantisWikiPlugin.class.php' );
+require_once 'MantisWikiPlugin.class.php';
 
 /**
  * Base that uses the old style wiki definitions from config_inc.php
@@ -37,10 +37,10 @@ abstract class MantisCoreWikiPlugin extends MantisWikiPlugin {
 	 * @return array
 	 */
 	function config() {
-		return array(
+		return [
 			'root_namespace' => config_get_global( 'wiki_root_namespace' ),
 			'engine_url' => config_get_global( 'wiki_engine_url' ),
-		);
+		];
 	}
 }
 
@@ -55,9 +55,9 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 	function register() {
 		$this->name = 'MantisBT Dokuwiki Integration';
 		$this->version = '0.1';
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.0.0',
-		);
+		];
 	}
 
 	/**
@@ -88,7 +88,7 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 	 * @return string
 	 */
 	function link_bug( $p_event, $p_bug_id ) {
-		return $this->base_url( bug_get_field( $p_bug_id, 'project_id' ) ) .  'issue:' . (int)$p_bug_id;
+		return $this->base_url( bug_get_field( $p_bug_id, 'project_id' ) ) . 'issue:' . (int)$p_bug_id;
 	}
 
 	/**
@@ -114,9 +114,9 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 	function register() {
 		$this->name = 'MantisBT MediaWiki Integration';
 		$this->version = '0.1';
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.0.0',
-		);
+		];
 	}
 
 	/**
@@ -169,9 +169,9 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 	function register() {
 		$this->name = 'MantisBT Twiki Integration';
 		$this->version = '0.1';
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.0.0',
-		);
+		];
 	}
 
 	/**
@@ -228,9 +228,9 @@ class MantisCoreWackowikiPlugin extends MantisCoreWikiPlugin {
 	function register() {
 		$this->name = 'MantisBT WackoWiki Integration';
 		$this->version = '0.1';
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.0.0',
-		);
+		];
 	}
 
 	/**
@@ -287,9 +287,9 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 	function register() {
 		$this->name = 'MantisBT WikkaWiki Integration';
 		$this->version = '0.1';
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.0.0',
-		);
+		];
 	}
 
 	/**
@@ -346,9 +346,9 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 	function register() {
 		$this->name = 'MantisBT Xwiki Integration';
 		$this->version = '0.1';
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.0.0',
-		);
+		];
 	}
 
 	/**
@@ -375,7 +375,7 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 	 * @return string
 	 */
 	function link_bug( $p_event, $p_bug_id ) {
-		return $this->base_url( bug_get_field( $p_bug_id, 'project_id' ) ) .  (int)$p_bug_id;
+		return $this->base_url( bug_get_field( $p_bug_id, 'project_id' ) ) . (int)$p_bug_id;
 	}
 
 	/**

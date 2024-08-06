@@ -35,7 +35,7 @@ $t_mantisgraph = plugin_get();
 $t_mantisgraph->print_submenu();
 
 $t_metrics = create_project_summary( $t_filter );
-array_multisort( $t_metrics, SORT_DESC, SORT_NUMERIC);
+array_multisort( $t_metrics, SORT_DESC, SORT_NUMERIC );
 
 # Dynamically set width ratio between 1 and 0.25 based on number of categories
 $t_wfactor = 1 - min( max( count( $t_metrics ), 25 ) - 25, 75 ) / 100;

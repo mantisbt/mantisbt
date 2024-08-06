@@ -24,7 +24,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( __DIR__ ) . '/core.php' );
+require_once dirname( __DIR__ ) . '/core.php';
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
@@ -128,7 +128,7 @@ if( count( $t_ids ) > 0 ) {
 				<td><?php echo $t_row->email_id; ?></td>
 				<td><?php echo $t_row->email; ?></td>
 				<td><?php echo date( config_get( 'complete_date_format' ), $t_row->submitted );?></td>
-				<td><?php html_button( 'email_queue.php', 'Send Or Delete', array( 'send' => $t_row->email_id ) ); ?></td>
+				<td><?php html_button( 'email_queue.php', 'Send Or Delete', ['send' => $t_row->email_id] ); ?></td>
 			</tr>
 <?php
 	}
@@ -140,10 +140,10 @@ if( count( $t_ids ) > 0 ) {
 <?php
 	echo '<div class="btn-group inline">';
 	echo '<div class="pull-left">';
-	html_button( 'email_queue.php', 'Send All', array( 'send' => 'all') );
+	html_button( 'email_queue.php', 'Send All', ['send' => 'all'] );
 	echo '</div>';
 	echo '<div class="pull-left">';
-	html_button( 'email_queue.php', 'Send Or Delete All', array( 'send' => 'sendordelall') );
+	html_button( 'email_queue.php', 'Send Or Delete All', ['send' => 'sendordelall'] );
 	echo '</div>';
 	echo '</div>';
 } else {

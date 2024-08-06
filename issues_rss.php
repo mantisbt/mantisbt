@@ -47,7 +47,7 @@
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
@@ -125,7 +125,7 @@ $t_description = $t_title;
 # in minutes (only rss 2.0)
 $t_cache = '10';
 
-$t_rssfile = new RSSBuilder(	$t_encoding, $t_about, $t_title, $t_description, $t_image_link, $t_category, $t_cache );
+$t_rssfile = new RSSBuilder( $t_encoding, $t_about, $t_title, $t_description, $t_image_link, $t_category, $t_cache );
 
 # person, an organization, or a service
 $t_publisher = '';
@@ -238,4 +238,3 @@ for( $i = 0; $i < $t_issues_count; $i++ ) {
 $t_version = '2.0';
 
 $t_rssfile->outputRSS( $t_version );
-

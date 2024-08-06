@@ -36,7 +36,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -58,8 +58,8 @@ access_ensure_project_level( $t_can_change_level );
 
 $t_project = helper_get_current_project();
 
-$f_flags			= gpc_get( 'flag', array() ) ?? [];
-$f_thresholds		= gpc_get( 'flag_threshold', array() ) ?? [];
+$f_flags			= gpc_get( 'flag', [] ) ?? [];
+$f_thresholds		= gpc_get( 'flag_threshold', [] ) ?? [];
 $f_actions_access	= gpc_get_int( 'notify_actions_access' );
 
 $t_access = current_user_get_access_level();
@@ -68,7 +68,7 @@ $t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' 
 
 # build a list of the possible actions and flags
 $t_valid_actions = email_get_actions();
-$t_valid_flags = array( 'reporter', 'handler', 'monitor' , 'bugnotes', 'category' );
+$t_valid_flags = ['reporter', 'handler', 'monitor', 'bugnotes', 'category'];
 
 # initialize the thresholds
 foreach( $t_valid_actions as $t_action ) {
@@ -136,7 +136,7 @@ if( $t_can_change_defaults ) {
 }
 
 # set the values for specific actions if different from the defaults
-$t_notify_flags = array();
+$t_notify_flags = [];
 foreach ( $t_valid_actions as $t_action ) {
 	$t_action_printed = false;
 	foreach ( $t_valid_flags as $t_flag ) {

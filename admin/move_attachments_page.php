@@ -23,7 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( __DIR__ ) . '/core.php' );
+require_once dirname( __DIR__ ) . '/core.php';
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
@@ -67,10 +67,10 @@ function get_attachment_stats( $p_file_type, $p_in_db ) {
 			break;
 	}
 	$t_result = db_query( $t_query );
-	$t_stats = array();
+	$t_stats = [];
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_project_id = (int) $t_row['id'];
+		$t_project_id = (int)$t_row['id'];
 		$t_stats[$t_project_id] = $t_row['stats'];
 	}
 	return $t_stats;
@@ -199,7 +199,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 	
 </table>
 <div class="widget-toolbox padding-8 clearfix">
-	<input name="type" type="hidden" value="<?php echo string_attribute( $f_file_type); ?>" />
+	<input name="type" type="hidden" value="<?php echo string_attribute( $f_file_type ); ?>" />
 	<input type="submit" class="btn btn-primary btn-white btn-round" value="Move <?php echo $t_type ?>" />
 </div>
 </div>

@@ -38,7 +38,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'error_api.php' );
@@ -60,12 +60,12 @@ $f_copy_notes_from_parent = gpc_get_bool( 'copy_notes_from_parent', false );
 $f_copy_attachments_from_parent = gpc_get_bool( 'copy_attachments_from_parent', false );
 $f_report_stay = gpc_get_bool( 'report_stay', false );
 
-$t_clone_info = array(
+$t_clone_info = [
 	'master_issue_id' => $f_master_bug_id,
 	'relationship_type' => $f_rel_type,
 	'copy_notes' => $f_copy_notes_from_parent,
 	'copy_files' => $f_copy_attachments_from_parent
-);
+];
 
 if( $f_master_bug_id > 0 ) {
 	bug_ensure_exists( $f_master_bug_id );
@@ -84,12 +84,12 @@ if( $f_master_bug_id > 0 ) {
 	$t_project_id = $f_project_id;
 }
 
-$t_issue = array(
-	'project' => array( 'id' => $t_project_id ),
-	'reporter' => array( 'id' => auth_get_current_user_id() ),
+$t_issue = [
+	'project' => ['id' => $t_project_id],
+	'reporter' => ['id' => auth_get_current_user_id()],
 	'summary' => gpc_get_string( 'summary' ),
 	'description' => gpc_get_string( 'description' ),
-);
+];
 
 $t_tag_string = '';
 $f_tag_select = gpc_get_int( 'tag_select', 0 );
@@ -104,9 +104,9 @@ if( !is_blank( $f_tag_string ) ) {
 
 $t_tags = tag_parse_string( $t_tag_string );
 if( !empty( $t_tags ) ) {
-	$t_issue['tags'] = array();
+	$t_issue['tags'] = [];
 	foreach( $t_tags as $t_tag ) {
-		$t_issue['tags'][] = array( 'name' => $t_tag['name'] );
+		$t_issue['tags'][] = ['name' => $t_tag['name']];
 	}
 }
 
@@ -137,57 +137,57 @@ if( !is_blank( $t_os_build ) ) {
 
 $t_version = gpc_get_string( 'product_version', '' );
 if( !is_blank( $t_version ) ) {
-	$t_issue['version'] = array( 'name' => $t_version );
+	$t_issue['version'] = ['name' => $t_version];
 }
 
 $t_target_version = gpc_get_string( 'target_version', '' );
 if( !is_blank( $t_target_version ) ) {
-	$t_issue['target_version'] = array( 'name' => $t_target_version );
+	$t_issue['target_version'] = ['name' => $t_target_version];
 }
 
 $t_profile_id = gpc_get_int( 'profile_id', 0 );
 if( $t_profile_id != 0 ) {
-	$t_issue['profile'] = array( 'id' => $t_profile_id );
+	$t_issue['profile'] = ['id' => $t_profile_id];
 }
 
 $t_handler_id = gpc_get_int( 'handler_id', NO_USER );
 if( $t_handler_id != NO_USER ) {
-	$t_issue['handler'] = array( 'id' => $t_handler_id );
+	$t_issue['handler'] = ['id' => $t_handler_id];
 }
 
-$t_monitors = gpc_get_int_array( 'monitors', array() );
+$t_monitors = gpc_get_int_array( 'monitors', [] );
 if( $t_monitors ) {
 	# The API expects a list of arrays with 'id' as key
-	$t_list = array();
+	$t_list = [];
 	foreach( $t_monitors as $t_monitor_id ) {
-		$t_list[] = array( 'id' => $t_monitor_id );
+		$t_list[] = ['id' => $t_monitor_id];
 	}
 	$t_issue['monitors'] = $t_list;
 }
 
 $t_view_state = gpc_get_int( 'view_state', 0 );
 if( $t_view_state != 0 ) {
-	$t_issue['view_state'] = array( 'id' => $t_view_state );
+	$t_issue['view_state'] = ['id' => $t_view_state];
 }
 
 $t_category_id = gpc_get_int( 'category_id', 0 );
 if( $t_category_id != 0 ) {
-	$t_issue['category'] = array( 'id' => $t_category_id );
+	$t_issue['category'] = ['id' => $t_category_id];
 }
 
 $t_reproducibility = gpc_get_int( 'reproducibility', 0 );
 if( $t_reproducibility != 0 ) {
-	$t_issue['reproducibility'] = array( 'id' => $t_reproducibility );
+	$t_issue['reproducibility'] = ['id' => $t_reproducibility];
 }
 
 $t_severity = gpc_get_int( 'severity', 0 );
 if( $t_severity != 0 ) {
-	$t_issue['severity'] = array( 'id' => $t_severity );
+	$t_issue['severity'] = ['id' => $t_severity];
 }
 
 $t_priority = gpc_get_int( 'priority', 0 );
 if( $t_priority != 0 ) {
-	$t_issue['priority'] = array( 'id' => $t_priority );
+	$t_issue['priority'] = ['id' => $t_priority];
 }
 
 # @TODO decide what to do with projection field - see #27577
@@ -196,22 +196,22 @@ if( $t_priority != 0 ) {
 # make sense to process it here.
 $t_projection = gpc_get_int( 'projection', 0 );
 if( $t_projection != 0 ) {
-	$t_issue['projection'] = array( 'id' => $t_projection );
+	$t_issue['projection'] = ['id' => $t_projection];
 }
 
 $t_eta = gpc_get_int( 'eta', 0 );
 if( $t_eta != 0 ) {
-	$t_issue['eta'] = array( 'id' => $t_eta );
+	$t_issue['eta'] = ['id' => $t_eta];
 }
 
 $t_resolution = gpc_get_int( 'resolution', 0 );
 if( $t_resolution != 0 ) {
-	$t_issue['resolution'] = array( 'id' => $t_resolution );
+	$t_issue['resolution'] = ['id' => $t_resolution];
 }
 
 $t_status = gpc_get_int( 'status', 0 );
 if( $t_status != 0 ) {
-	$t_issue['status'] = array( 'id' => $t_status );
+	$t_issue['status'] = ['id' => $t_status];
 }
 
 $t_steps_to_reproduce = gpc_get_string( 'steps_to_reproduce', null );
@@ -231,16 +231,16 @@ if( $t_due_date !== null ) {
 
 # Validate the custom fields before adding the bug.
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
-$t_custom_fields = array();
+$t_custom_fields = [];
 foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 
 	# Produce an error if the field is required but wasn't posted
 	if( gpc_isset_custom_field( $t_id, $t_def['type'] ) ) {
-		$t_custom_fields[] = array(
-			'field' => array( 'id' => $t_id ),
+		$t_custom_fields[] = [
+			'field' => ['id' => $t_id],
 			'value' => gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], null )
-		);
+		];
 	}
 }
 
@@ -248,12 +248,12 @@ if( !empty( $t_custom_fields ) ) {
 	$t_issue['custom_fields'] = $t_custom_fields;
 }
 
-$t_data = array(
-	'payload' => array( 'issue' => $t_issue ),
-);
+$t_data = [
+	'payload' => ['issue' => $t_issue],
+];
 
 if( $f_master_bug_id > 0 ) {
-	$t_data['options'] = array( 'clone_info' => $t_clone_info );
+	$t_data['options'] = ['clone_info' => $t_clone_info];
 }
 
 $t_command = new IssueAddCommand( $t_data );
@@ -263,14 +263,14 @@ $t_issue_id = (int)$t_result['issue_id'];
 form_security_purge( 'bug_report' );
 
 if( $f_report_stay ) {
-	$t_fields = array(
+	$t_fields = [
 		'category_id', 'severity', 'reproducibility', 'profile_id', 'platform',
 		'os', 'os_build', 'target_version', 'build', 'view_state', 'due_date'
-	);
+	];
 
 	$t_issue = bug_get( $t_issue_id );
 
-	$t_data = array();
+	$t_data = [];
 	foreach( $t_fields as $t_field ) {
 		$t_data[$t_field] = $t_issue->$t_field;
 	}

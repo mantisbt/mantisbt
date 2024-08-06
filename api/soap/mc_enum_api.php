@@ -237,15 +237,15 @@ function mci_explode_to_objectref( $p_enumeration_name ) {
 
 	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 
-	$t_result = array();
+	$t_result = [];
 
 	foreach ( $t_enum_values as $t_key ) {
 		$t_translated = MantisEnum::getLocalizedLabel( $t_config_var_value, $t_translated_values, $t_key );
 
-		$t_result[] = array(
+		$t_result[] = [
 			'id' => $t_key,
 			'name' => $t_translated,
-		);
+		];
 	}
 	return $t_result;
 }
@@ -278,7 +278,7 @@ function mci_validate_enum_access( $p_username, $p_password ) {
  * @return array an array containing the id and the name of the enumeration element.
  */
 function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
-	$t_result = array();
+	$t_result = [];
 	$t_result['id'] = (int)$p_enum_id;
 
 	$t_enum_name = $p_enum_type . '_enum_string';

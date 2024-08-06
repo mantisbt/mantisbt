@@ -124,7 +124,7 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
 				$t_piece = preg_replace( '/&#160;/', ' ', $t_piece );
 				if( ON == config_get( 'wrap_in_preformatted_text' ) ) {
 					# Use PCRE_UTF8 modifier to ensure a correct char count
-					$t_output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/u', "$1", $t_piece );
+					$t_output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/u', '$1', $t_piece );
 				} else {
 					$t_output .= $t_piece;
 				}
@@ -273,16 +273,16 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	# Start extracting regex matches
 	# Encode backslashes to prevent unwanted escaping of a leading '/' allowing
 	# redirection to external sites
-	$t_script = strtr( $t_matches['script'], array( '\\' => '%5C' ) );
+	$t_script = strtr( $t_matches['script'], ['\\' => '%5C'] );
 	$t_script_path = $t_matches['path'];
 
 	# Clean/encode query params
 	$t_query = '';
 	if( isset( $t_matches['query'] ) ) {
-		$t_pairs = array();
+		$t_pairs = [];
 		parse_str( html_entity_decode( $t_matches['query'] ), $t_pairs );
 
-		$t_clean_pairs = array();
+		$t_clean_pairs = [];
 		foreach( $t_pairs as $t_key => $t_value ) {
 			if( is_array( $t_value ) ) {
 				foreach( $t_value as $t_value_each ) {
@@ -332,7 +332,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
  * @return string
  */
 function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	static $s_bug_link_callback = array();
+	static $s_bug_link_callback = [];
 
 	$t_tag = config_get( 'bug_link_tag' );
 
@@ -402,7 +402,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
  * @return string
  */
 function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	static $s_bugnote_link_callback = array();
+	static $s_bugnote_link_callback = [];
 
 	$t_tag = config_get( 'bugnote_link_tag' );
 
@@ -876,7 +876,7 @@ function string_normalize( $p_string ) {
  * @return string
  */
 function string_get_field_name( $p_string ) {
-	$t_map = array(
+	$t_map = [
 		'attachment_count' => 'attachments',
 		'category_id' => 'category',
 		'handler_id' => 'assigned_to',
@@ -885,7 +885,7 @@ function string_get_field_name( $p_string ) {
 		'project_id' => 'email_project',
 		'reporter_id' => 'reporter',
 		'view_state' => 'view_status',
-	);
+	];
 
 	$t_string = $p_string;
 	if( isset( $t_map[$p_string] ) ) {
@@ -941,7 +941,7 @@ function string_prepare_header( $p_string ) {
  *
  * @return string
  */
-function string_truncate( $p_string, $p_length, $p_marker = '') {
+function string_truncate( $p_string, $p_length, $p_marker = '' ) {
 	$t_string_length = mb_strlen( $p_string );
 	$t_marker_length = mb_strlen( $p_marker );
 	$t_truncate_length = $p_length - $t_marker_length;
@@ -966,38 +966,38 @@ function string_truncate( $p_string, $p_length, $p_marker = '') {
  */
 function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
 
-    $inputLen = mb_strlen($input);
-    if ($length <= $inputLen) {
-        return $input;
-    }
+	$inputLen = mb_strlen( $input );
+	if ( $length <= $inputLen ) {
+		return $input;
+	}
 
-    $padStrLen = mb_strlen($padStr);
-    $padLen = $length - $inputLen;
+	$padStrLen = mb_strlen( $padStr );
+	$padLen = $length - $inputLen;
 
-    if ($type == STR_PAD_RIGHT) {
-        $repeatTimes = ceil($padLen / $padStrLen);
-        return mb_substr($input . str_repeat($padStr, $repeatTimes), 0, $length);
-    }
+	if ( $type == STR_PAD_RIGHT ) {
+		$repeatTimes = ceil( $padLen / $padStrLen );
+		return mb_substr( $input . str_repeat( $padStr, $repeatTimes ), 0, $length );
+	}
 
-    if ($type == STR_PAD_LEFT) {
-        $repeatTimes = ceil($padLen / $padStrLen);
-        return mb_substr(str_repeat($padStr, $repeatTimes), 0, floor($padLen)) . $input;
-    }
+	if ( $type == STR_PAD_LEFT ) {
+		$repeatTimes = ceil( $padLen / $padStrLen );
+		return mb_substr( str_repeat( $padStr, $repeatTimes ), 0, floor( $padLen ) ) . $input;
+	}
 
-    if ($type == STR_PAD_BOTH) {
+	if ( $type == STR_PAD_BOTH ) {
 
-        $padLen/= 2;
-        $padAmountLeft = floor($padLen);
-        $padAmountRight = ceil($padLen);
-        $repeatTimesLeft = ceil($padAmountLeft / $padStrLen);
-        $repeatTimesRight = ceil($padAmountRight / $padStrLen);
+		$padLen/= 2;
+		$padAmountLeft = floor( $padLen );
+		$padAmountRight = ceil( $padLen );
+		$repeatTimesLeft = ceil( $padAmountLeft / $padStrLen );
+		$repeatTimesRight = ceil( $padAmountRight / $padStrLen );
 
-        $paddingLeft = mb_substr(str_repeat($padStr, $repeatTimesLeft), 0, $padAmountLeft);
-        $paddingRight = mb_substr(str_repeat($padStr, $repeatTimesRight), 0, $padAmountLeft);
-        return $paddingLeft . $input . $paddingRight;
-    }
+		$paddingLeft = mb_substr( str_repeat( $padStr, $repeatTimesLeft ), 0, $padAmountLeft );
+		$paddingRight = mb_substr( str_repeat( $padStr, $repeatTimesRight ), 0, $padAmountLeft );
+		return $paddingLeft . $input . $paddingRight;
+	}
 
-    trigger_error('utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR);
+	trigger_error( 'utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR );
 }
 
 /**
@@ -1007,9 +1007,9 @@ function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
  * @deprecated mb_strlen() should be used in preference to this function
  */
 function utf8_strlen( $p_string ) {
-    error_parameters( __FUNCTION__ . '()', 'mb_strlen()' );
-    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
-    return mb_strlen( $p_string );
+	error_parameters( __FUNCTION__ . '()', 'mb_strlen()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	return mb_strlen( $p_string );
 }
 
 /**
@@ -1020,10 +1020,10 @@ function utf8_strlen( $p_string ) {
  * @return mixed string or FALSE if failure
  * @deprecated mb_substr() should be used in preference to this function
  */
-function utf8_substr( $p_string, $p_offset, $p_length = NULL ) {
-    error_parameters( __FUNCTION__ . '()', 'mb_substr()' );
-    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
-    return mb_substr( $p_string, $p_offset, $p_length );
+function utf8_substr( $p_string, $p_offset, $p_length = null ) {
+	error_parameters( __FUNCTION__ . '()', 'mb_substr()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	return mb_substr( $p_string, $p_offset, $p_length );
 }
 
 /**
@@ -1033,7 +1033,7 @@ function utf8_substr( $p_string, $p_offset, $p_length = NULL ) {
  * @deprecated mb_strtolower() should be used in preference to this function
  */
 function utf8_strtolower( $p_string ) {
-    error_parameters( __FUNCTION__ . '()', 'mb_strtolower()' );
-    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
-    return mb_strtolower( $p_string );
+	error_parameters( __FUNCTION__ . '()', 'mb_strtolower()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	return mb_strtolower( $p_string );
 }

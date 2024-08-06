@@ -25,8 +25,7 @@ use Mantis\Exceptions\ClientException;
  * The command pattern will build on top of model, APIs, configurations, and
  * authorization.
  */
-abstract class Command
-{
+abstract class Command {
 	/**
 	 * This is the data for the command.  Modelled after the REST
 	 * it has the following sub-arrays:
@@ -125,15 +124,15 @@ abstract class Command
 		auth_ensure_user_authenticated();
 
 		if( !isset( $this->data['payload'] ) ) {
-			$this->data['payload'] = array();
+			$this->data['payload'] = [];
 		}
 
 		if( !isset( $this->data['query'] ) ) {
-			$this->data['query'] = array();
+			$this->data['query'] = [];
 		}
 
 		if( !isset( $this->data['options'] ) ) {
-			$this->data['options'] = array();
+			$this->data['options'] = [];
 		}
 
 		$this->validate();

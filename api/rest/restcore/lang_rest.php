@@ -22,10 +22,10 @@
  * @link http://www.mantisbt.org
  */
 
-$g_app->group('/lang', function() use ( $g_app ) {
+$g_app->group( '/lang', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_lang_get' );
 	$g_app->get( '/', 'rest_lang_get' );
-});
+} );
 
 /**
  * A method that does the work to handle getting a set of localized strings via REST API.
@@ -36,11 +36,11 @@ $g_app->group('/lang', function() use ( $g_app ) {
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_lang_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'string' => $p_request->getParam( 'string' )
-		)
-	);
+		]
+	];
 
 	$t_command = new LocalizedStringsGetCommand( $t_data );
 	$t_result = $t_command->execute();

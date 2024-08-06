@@ -33,7 +33,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'bug_revision_api.php' );
 require_api( 'config_api.php' );
@@ -55,4 +55,3 @@ bug_revision_drop( $f_revision_id );
 form_security_purge( 'bug_revision_drop' );
 
 print_header_redirect_view( $t_revision['bug_id'] );
-

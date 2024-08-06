@@ -30,7 +30,7 @@ $g_failed_test = false;
 $g_passed_test_with_warnings = false;
 
 $g_errors_temporarily_suppressed = false;
-$g_errors_raised = array();
+$g_errors_raised = [];
 
 /**
  * Initialise error handler for checks
@@ -60,12 +60,12 @@ function check_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	if( $p_type == E_USER_ERROR && $p_error == ERROR_PHP ) {
 		return false;
 	}
-	$g_errors_raised[] = array(
+	$g_errors_raised[] = [
 		'type' => $p_type,
 		'error' => $p_error,
 		'file' => $p_file,
 		'line' => $p_line
-	);
+	];
 	return true;
 }
 
@@ -93,7 +93,7 @@ function check_unhandled_errors_exist() {
 function check_print_error_rows() {
 	global $g_show_errors, $g_errors_temporarily_suppressed, $g_errors_raised;
 	if( !$g_show_errors || $g_errors_temporarily_suppressed ) {
-		$g_errors_raised = array();
+		$g_errors_raised = [];
 		return;
 	}
 	foreach( $g_errors_raised as $t_error ) {
@@ -134,7 +134,7 @@ function check_print_error_rows() {
 		echo '<em>Raised in file ' . htmlentities( $t_error['file'] ) . ' on line ' . htmlentities( $t_error['line'] ) . '</em>';
 		echo "</td>\n\t</tr>\n";
 	}
-	$g_errors_raised = array();
+	$g_errors_raised = [];
 }
 
 /**

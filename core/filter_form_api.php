@@ -105,7 +105,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 	} else {
 		$t_function_prefix = 'print_filter_values_';
 	}
-	$t_params = array( $p_filter );
+	$t_params = [$p_filter];
 	$t_function_name = $t_function_prefix . $p_filter_target;
 
 	# override non standard calls
@@ -113,7 +113,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 		case 'do_filter_by_date':
 		case 'do_filter_by_last_updated_date':
 			if( $p_show_inputs ) {
-				$t_params = array( false, $p_filter );
+				$t_params = [false, $p_filter];
 			}
 			break;
 	}
@@ -125,9 +125,9 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 	} else {
 		# error - no function to populate the target (e.g., print_filter_foo)
 		throw new StateException(
-			"No function to populate the target",
+			'No function to populate the target',
 			ERROR_FILTER_NOT_FOUND,
-			array( $p_filter_target )
+			[$p_filter_target]
 		);
 	}
 }
@@ -1223,7 +1223,7 @@ function print_filter_view_state( array $p_filter = null ) {
 function print_filter_values_sticky_issues( array $p_filter ) {
 	$t_filter = $p_filter;
 	$t_sticky_filter_state = gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] );
-	print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
+	echo( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
 	?>
 	<input type="hidden" name="<?php
 		echo FILTER_PROPERTY_STICKY; ?>" value="<?php
@@ -1309,7 +1309,7 @@ function print_filter_values_do_filter_by_date( array $p_filter ) {
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
+				echo lang_get( 'month_' . strtolower( date( 'F', $t_time ) ) );
 			}
 			if( strcasecmp( $t_char, 'D' ) == 0 ) {
 				echo ' ';
@@ -1327,7 +1327,7 @@ function print_filter_values_do_filter_by_date( array $p_filter ) {
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
+				echo lang_get( 'month_' . strtolower( date( 'F', $t_time ) ) );
 			}
 			if( strcasecmp( $t_char, 'D' ) == 0 ) {
 				echo ' ';
@@ -1394,17 +1394,17 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 	}
 	?>
@@ -1422,17 +1422,17 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 	}
 	?>
@@ -1463,7 +1463,7 @@ function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
-				echo lang_get( 'month_' . strtolower (date( 'F', $t_time ) ) );
+				echo lang_get( 'month_' . strtolower( date( 'F', $t_time ) ) );
 			}
 			if( strcasecmp( $t_char, 'D' ) == 0 ) {
 				echo ' ';
@@ -1481,7 +1481,7 @@ function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
+				echo lang_get( 'month_' . strtolower( date( 'F', $t_time ) ) );
 			}
 			if( strcasecmp( $t_char, 'D' ) == 0 ) {
 				echo ' ';
@@ -1548,17 +1548,17 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 	}
 	?>
@@ -1576,17 +1576,17 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
-			print "</select>\n";
+			echo "</select>\n";
 		}
 	}
 	?>
@@ -1659,7 +1659,7 @@ function print_filter_relationship_type( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	$c_reltype_value = $p_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
-	print_relationship_list_box( $c_reltype_value, 'relationship_type', true, true, "input-xs" );
+	print_relationship_list_box( $c_reltype_value, 'relationship_type', true, true, 'input-xs' );
 	echo '<input class="input-xs" type="text" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" size="5" maxlength="10" value="', $p_filter[FILTER_PROPERTY_RELATIONSHIP_BUG], '" />';
 }
 
@@ -1816,9 +1816,9 @@ function print_filter_values_plugin_field( array $p_filter, $p_field_name, $p_fi
 			case FILTER_TYPE_MULTI_STRING:
 			case FILTER_TYPE_MULTI_INT:
 				if( !is_array( $t_value ) ) {
-					$t_value = array( $t_value );
+					$t_value = [$t_value];
 				}
-				$t_strings = array();
+				$t_strings = [];
 				foreach( $t_value as $t_current ) {
 					if( filter_field_is_any( $t_current ) ) {
 						$t_strings[] = lang_get( 'any' );
@@ -1919,9 +1919,9 @@ function print_filter_values_custom_field( array $p_filter, $p_field_id ) {
 		return;
 	}
 
-	$t_values = $p_filter['custom_fields'][$p_field_id] ?? array();
-	$t_strings = array();
-	$t_inputs = array();
+	$t_values = $p_filter['custom_fields'][$p_field_id] ?? [];
+	$t_strings = [];
+	$t_inputs = [];
 
 	if( filter_field_is_any( $t_values ) ) {
 		$t_strings[] = lang_get( 'any' );
@@ -2034,7 +2034,7 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 			check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_ANY, false );
 			echo '>[' . lang_get( 'any' ) . ']</option>';
 			# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
-			if( !in_array( $t_cfdef['type'], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST ) ) ) {
+			if( !in_array( $t_cfdef['type'], [CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST] ) ) {
 				echo '<option value="' . META_FILTER_NONE . '"';
 				check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_NONE, false );
 				echo '>[' . lang_get( 'none' ) . ']</option>';
@@ -2042,10 +2042,10 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 			# Print possible values
 			$t_included_projects = filter_get_included_projects( $p_filter );
 			$t_values = custom_field_distinct_values( $t_cfdef, $t_included_projects );
-			if( is_array( $t_values ) ){
+			if( is_array( $t_values ) ) {
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_values as $t_val ) {
-					if( filter_field_is_any($t_val) || filter_field_is_none( $t_val ) ) {
+					if( filter_field_is_any( $t_val ) || filter_field_is_none( $t_val ) ) {
 						continue;
 					}
 					echo '<option value="' . string_attribute( $t_val ) . '"';
@@ -2081,7 +2081,7 @@ function print_filter_values_show_sort( array $p_filter ) {
 				echo ', ';
 			}
 			$t_sort = $t_sort_fields[$i];
-			if(column_is_custom_field( $t_sort ) ) {
+			if( column_is_custom_field( $t_sort ) ) {
 				$t_field_name = string_attribute( lang_get_defaulted( column_get_custom_field_name( $t_sort ) ) );
 			} else {
 				$t_field_name = string_get_field_name( $t_sort );
@@ -2115,7 +2115,7 @@ function print_filter_show_sort( array $p_filter = null ) {
 
 	$t_shown_fields[''] = '';
 	foreach( $t_visible_columns as $t_column ) {
-		if(column_is_custom_field( $t_column ) ) {
+		if( column_is_custom_field( $t_column ) ) {
 			$t_field_name = string_attribute( lang_get_defaulted( column_get_custom_field_name( $t_column ) ) );
 		} else {
 			$t_field_name = string_get_field_name( $t_column );
@@ -2269,10 +2269,10 @@ function print_filter_custom_field_date( $p_field_id, array $p_filter = null ) {
 
 	echo "</td></tr>\n<tr><td>";
 
-	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
-	print "</td></tr>\n<tr><td>";
-	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
-	print "</td></tr>\n</table>";
+	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year, 'input-xs' );
+	echo "</td></tr>\n<tr><td>";
+	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year, 'input-xs' );
+	echo "</td></tr>\n</table>";
 }
 
 /**
@@ -2284,9 +2284,9 @@ function print_filter_values_project_id( array $p_filter ) {
 	$t_filter = $p_filter;
 	$t_output = '';
 	if( !is_array( $t_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
-		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array(
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = [
 			$t_filter[FILTER_PROPERTY_PROJECT_ID],
-		);
+		];
 	}
 	if( count( $t_filter[FILTER_PROPERTY_PROJECT_ID] ) == 0 ) {
 		echo lang_get( 'current' );
@@ -2451,7 +2451,7 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 	} else {
 		$t_first_flag = true;
 
-		$t_field_value = is_array( $p_field_value ) ? $p_field_value : array( $p_field_value );
+		$t_field_value = is_array( $p_field_value ) ? $p_field_value : [$p_field_value];
 
 		foreach( $t_field_value as $t_current ) {
 			$t_current = stripslashes( $t_current );
@@ -2548,9 +2548,9 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 
 	# overload handler_id setting if user isn't supposed to see them (ref #6189)
 	if( !access_has_any_project_level( 'view_handler_threshold' ) ) {
-		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array(
+		$t_filter[FILTER_PROPERTY_HANDLER_ID] = [
 			META_FILTER_ANY,
-		);
+		];
 	}
 
 	if ( config_get( 'use_dynamic_filters' ) ) {
@@ -2591,56 +2591,56 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			1 /* colspan */,
 			null /* class */,
 			'reporter_id_filter_target' /* content id */
-			));
+			) );
 	$t_row1->add_item( new TableFieldsItem(
 			$get_field_header( 'handler_id_filter', lang_get( 'assigned_to' ) ),
 			filter_form_get_input( $t_filter, 'handler_id', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'handler_id_filter_target' /* content id */
-			));
+			) );
 	$t_row1->add_item( new TableFieldsItem(
 			$get_field_header( 'user_monitor_filter', lang_get( 'monitored_by' ) ),
 			filter_form_get_input( $t_filter, 'user_monitor', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'user_monitor_filter_target' /* content id */
-			));
+			) );
 	$t_row1->add_item( new TableFieldsItem(
 			$get_field_header( 'note_user_id_filter', lang_get( 'note_user_id' ) ),
 			filter_form_get_input( $t_filter, 'note_user_id', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'note_user_id_filter_target' /* content id */
-			));
+			) );
 	$t_row1->add_item( new TableFieldsItem(
 			$get_field_header( 'show_priority_filter', lang_get( 'priority' ) ),
 			filter_form_get_input( $t_filter, 'show_priority', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'show_priority_filter_target' /* content id */
-			));
+			) );
 	$t_row1->add_item( new TableFieldsItem(
 			$get_field_header( 'show_severity_filter', lang_get( 'severity' ) ),
 			filter_form_get_input( $t_filter, 'show_severity', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'show_severity_filter_target' /* content id */
-			));
+			) );
 	$t_row1->add_item( new TableFieldsItem(
 			$get_field_header( 'view_state_filter', lang_get( 'view_status' ) ),
 			filter_form_get_input( $t_filter, 'view_state', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'view_state_filter_target' /* content id */
-			));
+			) );
 	$t_row1->add_item( new TableFieldsItem(
 			$get_field_header( 'sticky_issues_filter', lang_get( 'sticky' ) ),
 			filter_form_get_input( $t_filter, 'sticky_issues', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'sticky_issues_filter_target' /* content id */
-			));
+			) );
 
 	$t_row2 = new FilterBoxGridLayout( $t_filter_cols , TableGridLayout::ORIENTATION_VERTICAL );
 
@@ -2650,7 +2650,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			1 /* colspan */,
 			null /* class */,
 			'show_category_filter_target' /* content id */
-			));
+			) );
 	if( FILTER_VIEW_TYPE_SIMPLE == $t_view_type ) {
 		$t_row2->add_item( new TableFieldsItem(
 				$get_field_header( 'hide_status_filter', lang_get( 'hide_status' ) ),
@@ -2658,7 +2658,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				1 /* colspan */,
 				null /* class */,
 				'hide_status_filter_target' /* content id */
-				));
+				) );
 	}
 	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'show_status_filter', lang_get( 'status' ) ),
@@ -2666,14 +2666,14 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			1 /* colspan */,
 			null /* class */,
 			'show_status_filter_target' /* content id */
-			));
+			) );
 	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'show_resolution_filter', lang_get( 'resolution' ) ),
 			filter_form_get_input( $t_filter, 'show_resolution', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'show_resolution_filter_target' /* content id */
-			));
+			) );
 	if( ON == config_get( 'enable_projection' ) ) {
 		$t_row2->add_item( new TableFieldsItem(
 				$get_field_header( 'projection_filter', lang_get( 'projection' ) ),
@@ -2681,7 +2681,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				1 /* colspan */,
 				null /* class */,
 				'projection_filter_target' /* content id */
-				));
+				) );
 	}
 	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'do_filter_by_date_filter', lang_get( 'use_date_filters' ) ),
@@ -2689,14 +2689,14 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			1 /* colspan */,
 			null /* class */,
 			'do_filter_by_date_filter_target' /* content id */
-			));
+			) );
 	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'do_filter_by_last_updated_date_filter', lang_get( 'use_last_updated_date_filters' ) ),
 			filter_form_get_input( $t_filter, 'do_filter_by_last_updated_date', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'do_filter_by_last_updated_date_filter_target' /* content id */
-			));
+			) );
 	if( FILTER_VIEW_TYPE_ADVANCED == $t_view_type ) {
 		$t_row2->add_item( new TableFieldsItem(
 				$get_field_header( 'project_id_filter', lang_get( 'email_project' ) ),
@@ -2704,7 +2704,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				1 /* colspan */,
 				null /* class */,
 				'project_id_filter_target' /* content id */
-				));
+				) );
 	}
 
 	$t_row3 = new FilterBoxGridLayout( $t_filter_cols , TableGridLayout::ORIENTATION_VERTICAL );
@@ -2716,28 +2716,28 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				1 /* colspan */,
 				null /* class */,
 				'show_profile_filter_target' /* content id */
-				));
+				) );
 		$t_row3->add_item( new TableFieldsItem(
 				$get_field_header( 'platform_filter', lang_get( 'platform' ) ),
 				filter_form_get_input( $t_filter, 'platform', $t_show_inputs ),
 				1 /* colspan */,
 				null /* class */,
 				'platform_filter_target' /* content id */
-				));
+				) );
 		$t_row3->add_item( new TableFieldsItem(
 				$get_field_header( 'os_filter', lang_get( 'os' ) ),
 				filter_form_get_input( $t_filter, 'os', $t_show_inputs ),
 				1 /* colspan */,
 				null /* class */,
 				'os_filter_target' /* content id */
-				));
+				) );
 		$t_row3->add_item( new TableFieldsItem(
 				$get_field_header( 'os_build_filter', lang_get( 'os_build' ) ),
 				filter_form_get_input( $t_filter, 'os_build', $t_show_inputs ),
 				1 /* colspan */,
 				null /* class */,
 				'os_build_filter_target' /* content id */
-				));
+				) );
 	}
 	if( $t_show_build ) {
 		$t_row3->add_item( new TableFieldsItem(
@@ -2746,7 +2746,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				1 /* colspan */,
 				null /* class */,
 				'show_build_filter_target' /* content id */
-				));
+				) );
 	}
 	if( $t_show_product_version ) {
 		$t_row3->add_item( new TableFieldsItem(
@@ -2755,21 +2755,21 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				1 /* colspan */,
 				null /* class */,
 				'show_version_filter_target' /* content id */
-				));
+				) );
 		$t_row3->add_item( new TableFieldsItem(
 				$get_field_header( 'show_fixed_in_version_filter', lang_get( 'fixed_in_version' ) ),
 				filter_form_get_input( $t_filter, 'show_fixed_in_version', $t_show_inputs ),
 				1 /* colspan */,
 				null /* class */,
 				'show_fixed_in_version_filter_target' /* content id */
-				));
+				) );
 		$t_row3->add_item( new TableFieldsItem(
 				$get_field_header( 'show_target_version_filter', lang_get( 'target_version' ) ),
 				filter_form_get_input( $t_filter, 'show_target_version', $t_show_inputs ),
 				1 /* colspan */,
 				null /* class */,
 				'show_target_version_filter_target' /* content id */
-				));
+				) );
 	}
 	$t_row3->add_item( new TableFieldsItem(
 			$get_field_header( 'relationship_type_filter', lang_get( 'bug_relationships' ) ),
@@ -2777,7 +2777,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			1 /* colspan */,
 			null /* class */,
 			'relationship_type_filter_target' /* content id */
-			));
+			) );
 	if( access_has_project_level( config_get( 'tag_view_threshold' ) ) ) {
 		$t_row3->add_item( new TableFieldsItem(
 				$get_field_header( 'tag_string_filter', lang_get( 'tags' ) ),
@@ -2785,7 +2785,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				3 /* colspan */,
 				null /* class */,
 				'tag_string_filter_target' /* content id */
-				));
+				) );
 	}
 
 	# plugin filters & custom fields
@@ -2810,13 +2810,13 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				$t_colspan,
 				null /* class */,
 				string_attribute( $t_field_name ) . '_filter_target' /* content id */
-				));
+				) );
 	}
 
 	if( ON == config_get( 'filter_by_custom_fields' ) ) {
 		$t_filter_included_projects = filter_get_included_projects( $t_filter );
 		$t_custom_fields = custom_field_get_linked_ids( $t_filter_included_projects );
-		$t_accessible_custom_fields = array();
+		$t_accessible_custom_fields = [];
 		foreach( $t_custom_fields as $t_cfid ) {
 			$t_cfdef = custom_field_get_definition( $t_cfid );
 			$t_projects_to_check = array_intersect( $t_filter_included_projects, custom_field_get_project_ids( $t_cfid ) );
@@ -2843,7 +2843,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 						1 /* colspan */,
 						null /* class */,
 						'custom_field_' . $t_cfdef['id'] . '_filter_target' /* content id */
-						));
+						) );
 			}
 		}
 	}
@@ -2858,28 +2858,28 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			1 /* colspan */,
 			null /* class */,
 			'per_page_filter_target' /* content id */
-			));
+			) );
 	$t_section_last->add_item( new TableFieldsItem(
 			$get_field_header( 'show_sort_filter', lang_get( 'sort' ) ),
 			filter_form_get_input( $t_filter, 'show_sort', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'show_sort_filter_target' /* content id */
-			));
+			) );
 	$t_section_last->add_item( new TableFieldsItem(
 			$get_field_header( 'match_type_filter', lang_get( 'filter_match_type' ) ),
 			filter_form_get_input( $t_filter, 'match_type', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'match_type_filter_target' /* content id */
-			));
+			) );
 	$t_section_last->add_item( new TableFieldsItem(
 			$get_field_header( 'highlight_changed_filter', lang_get( 'changed' ) ),
 			filter_form_get_input( $t_filter, 'highlight_changed', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'highlight_changed_filter_target' /* content id */
-			));
+			) );
 
 	if( $p_show_search ) {
 		$t_section_search = new FilterBoxGridLayout( $t_filter_cols , TableGridLayout::ORIENTATION_HORIZONTAL );
@@ -2890,7 +2890,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				$t_filter_cols /* colspan */,
 				'bigger-120' /* class */,
 				'search_filter_target' /* content id */
-				));
+				) );
 	}
 
 	?>
@@ -2925,7 +2925,7 @@ class FilterBoxGridLayout extends TableGridLayout {
 	 */
 	protected function render_td_item_header( TableFieldsItem $p_item, $p_colspan ) {
 		echo '<td class="small-caption category ' . $p_item->attr_class . '"';
-		if( $p_colspan > 1) {
+		if( $p_colspan > 1 ) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
 		if( $p_item->header_attr_id ) {
@@ -2943,7 +2943,7 @@ class FilterBoxGridLayout extends TableGridLayout {
 	 */
 	protected function render_td_item_content( TableFieldsItem $p_item, $p_colspan ) {
 		echo '<td class="small-caption ' . $p_item->attr_class . '"';
-		if( $p_colspan > 1) {
+		if( $p_colspan > 1 ) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
 		if( $p_item->content_attr_id ) {
@@ -2960,7 +2960,7 @@ class FilterBoxGridLayout extends TableGridLayout {
 	 */
 	protected function render_td_empty_header( $p_colspan ) {
 		echo '<td class="small-caption category"';
-		if( $p_colspan > 1) {
+		if( $p_colspan > 1 ) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
 		echo '>';

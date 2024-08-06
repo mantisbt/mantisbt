@@ -1,0 +1,47 @@
+name: Coding Style
+
+on: [ push, pull_request ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: commit range
+        env:
+          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
+        run:
+          echo "$COMMIT_RANGE"
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: 8.3
+          php_extensions: zip gd
+
+      - name: Check formatting
+        # run: ./vendor/bin/ecs check
+        run: composer check-cs -- $(echo $(git diff --name-only "$COMMIT_RANGE"))
+        env:
+          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
+
+#      - name: Analyse code
+#        run: ./vendor/bin/phpstan
+
+#      - name: Run tests
+#        uses: php-actions/phpunit@v3
+#        env:
+#          XDEBUG_MODE: coverage
+#        with:
+#          version: 10.5
+#          php_version: 8.3
+#          php_extensions: "xdebug"
+#          coverage_text: true

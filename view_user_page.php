@@ -37,7 +37,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -70,7 +70,7 @@ $t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) )
 	access_has_global_level( $u_access_level );
 
 $t_can_see_realname = $t_can_manage || user_show_realname() ||
-    access_has_project_level( config_get( 'show_user_realname_threshold' ) );
+	access_has_project_level( config_get( 'show_user_realname_threshold' ) );
 $t_can_see_email = $t_can_manage || access_has_project_level( config_get( 'show_user_email_threshold' ) );
 $t_can_impersonate = auth_can_impersonate( $f_user_id );
 
@@ -85,14 +85,14 @@ layout_page_header();
 
 layout_page_begin();
 $t_timeline_view_threshold_access = access_has_project_level( config_get( 'timeline_view_threshold' ) );
-$t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-12";
+$t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? 'col-md-7' : 'col-md-12';
 ?>
 <div class="<?php echo $t_timeline_view_class ?> col-xs-12">
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<?php print_icon( 'fa-user', 'ace-icon' ); ?>
-		<?php echo lang_get('view_account_title') ?>
+		<?php echo lang_get( 'view_account_title' ) ?>
 	</h4>
 </div>
 <div class="widget-body">
@@ -126,7 +126,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 					<?php echo lang_get( 'email' ) ?>
 				</th>
 				<td>
-				    <?php
+					<?php
 						if( !is_blank( $u_email ) ) {
 							print_email_link( $u_email, $u_email );
 						}
@@ -220,13 +220,13 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 <?php
 if( $t_timeline_view_threshold_access ) {
 	# Build a filter to show all bugs in current projects
-	$g_timeline_filter = array();
-	$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+	$g_timeline_filter = [];
+	$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = [META_FILTER_NONE];
 	$g_timeline_filter = filter_ensure_valid_filter( $g_timeline_filter );
 	$g_timeline_user = $f_user_id;
 	?>
 	<div class="col-md-5 col-xs-12">
-		<?php include( 'timeline_inc.php' ); ?>
+		<?php include 'timeline_inc.php'; ?>
 		<div class="space-10"></div>
 	</div>
 <?php } ?>

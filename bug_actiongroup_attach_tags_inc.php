@@ -81,8 +81,8 @@ function action_attach_tags_validate( $p_bug_id ) {
 
 	if( !isset( $g_action_attach_tags_tags ) ) {
 		if( !isset( $g_action_attach_tags_attach ) ) {
-			$g_action_attach_tags_attach = array();
-			$g_action_attach_tags_create = array();
+			$g_action_attach_tags_attach = [];
+			$g_action_attach_tags_create = [];
 		}
 		$g_action_attach_tags_tags = tag_parse_string( gpc_get_string( 'tag_string' ) );
 		foreach ( $g_action_attach_tags_tags as $t_tag_row ) {
@@ -116,17 +116,17 @@ function action_attach_tags_process( $p_bug_id ) {
 	global $g_action_attach_tags_attach, $g_action_attach_tags_create;
 
 	foreach( $g_action_attach_tags_create as $t_tag_row ) {
-		$g_action_attach_tags_attach[] = array( 'name' => $t_tag_row['name'] );
+		$g_action_attach_tags_attach[] = ['name' => $t_tag_row['name']];
 	}
 
-	$g_action_attach_tags_create = array();
+	$g_action_attach_tags_create = [];
 
-	$t_data = array(
-		'query' => array( 'issue_id' => $p_bug_id ),
-		'payload' => array(
+	$t_data = [
+		'query' => ['issue_id' => $p_bug_id],
+		'payload' => [
 			'tags' => $g_action_attach_tags_attach
-		)
-	);
+		]
+	];
 
 	$t_command = new TagAttachCommand( $t_data );
 	$t_command->execute();

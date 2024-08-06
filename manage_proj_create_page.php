@@ -35,7 +35,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -91,7 +91,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 <?php
 	echo form_security_field( 'manage_proj_create' );
 	if( null !== $f_parent_id ) {
-		$f_parent_id = (int) $f_parent_id;
+		$f_parent_id = (int)$f_parent_id;
 ?>
 				<input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>" />
 <?php } ?>

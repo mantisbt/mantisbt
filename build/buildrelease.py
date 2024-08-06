@@ -38,6 +38,7 @@ exclude_list = (
     # Directories
     "docbook/",
     "tests/"
+    "ecs.php"
     )
 
 # Checksum types to includ in digest filese

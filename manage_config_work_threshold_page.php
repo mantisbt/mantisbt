@@ -37,7 +37,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -65,7 +65,7 @@ $g_project_id = helper_get_current_project();
 $t_show_submit = false;
 
 $g_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access_levels_enum_string' ) );
-$g_overrides = array();
+$g_overrides = [];
 
 /**
  * Set overrides
@@ -186,7 +186,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 
 	$t_file = config_get_global( $p_threshold );
 	if( !is_array( $t_file ) ) {
-		$t_file_exp = array();
+		$t_file_exp = [];
 		foreach( $g_access_levels as $t_access_level => $t_label ) {
 			if( $t_access_level >= $t_file ) {
 				$t_file_exp[] = $t_access_level;
@@ -198,7 +198,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 
 	$t_global = config_get( $p_threshold, null, ALL_USERS, ALL_PROJECTS );
 	if( !is_array( $t_global ) ) {
-		$t_global_exp = array();
+		$t_global_exp = [];
 		foreach( $g_access_levels as $t_access_level => $t_label ) {
 			if( $t_access_level >= $t_global ) {
 				$t_global_exp[] = $t_access_level;
@@ -210,7 +210,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 
 	$t_project = config_get( $p_threshold );
 	if( !is_array( $t_project ) ) {
-		$t_project_exp = array();
+		$t_project_exp = [];
 		foreach( $g_access_levels as $t_access_level => $t_label ) {
 			if( $t_access_level >= $t_project ) {
 				$t_project_exp[] = $t_access_level;
@@ -292,7 +292,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 		}
 	}
 	echo "\t" . '<td class="center ' . $t_color . '">' . $t_value . '</td>' . "\n\t"
-		. '<td class="left" colspan="' . ( count( $g_access_levels ) - 1 ). '"></td>';
+		. '<td class="left" colspan="' . ( count( $g_access_levels ) - 1 ) . '"></td>';
 
 	print_who_can_change( $p_threshold, $t_can_change );
 
@@ -363,7 +363,7 @@ echo '<div class="well">' . "\n";
 echo '<p class="bold">' . icon_get( 'fa-info-circle' ) . " $t_project_title</p>\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $g_project_id ) {
-	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="color-project">' . lang_get( 'colour_project' ) . '</span><br />';
 }
 echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 echo '</div>' . "\n";
@@ -472,7 +472,7 @@ if( $t_show_submit && ( 0 < count( $g_overrides ) ) ) {
 	echo form_security_field( 'manage_config_revert' );
 	echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '"></input>';
 	echo '<input name="project" type="hidden" value="' . $g_project_id . '"></input>';
-	echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'"></input>';
+	echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) . '"></input>';
 	echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="';
 	if( ALL_PROJECTS == $g_project_id ) {
 		echo lang_get( 'revert_to_system' );

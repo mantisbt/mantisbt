@@ -34,7 +34,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -103,7 +103,7 @@ print_manage_menu( 'manage_user_create_page.php' );
 				</td>
 			</tr><?php
 			}
-			if( OFF == config_get( 'send_reset_password' ) )  { ?>
+			if( OFF == config_get( 'send_reset_password' ) ) { ?>
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'password' ) ?>

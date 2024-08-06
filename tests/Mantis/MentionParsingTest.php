@@ -46,7 +46,7 @@ class MentionParsingTest extends MantisCoreBase {
 	public function testMentions( $p_input_text, array $p_expected ) {
 		$t_actual = mention_get_candidates( $p_input_text );
 
-		$this->assertEquals($p_expected, $t_actual );
+		$this->assertEquals( $p_expected, $t_actual );
 	}
 
 	/**
@@ -56,100 +56,100 @@ class MentionParsingTest extends MantisCoreBase {
 	 * @return array
 	 */
 	public function provider() {
-		return array(
-			'NoMention' => array(
+		return [
+			'NoMention' => [
 				'some random string.',
-				array()
-			),
-			'NoMentionWithAtSign' => array(
+				[]
+			],
+			'NoMentionWithAtSign' => [
 				'some random string with @ sign.',
-				array()
-			),
-			'NoMentionWithMultipleAtSigns' => array(
+				[]
+			],
+			'NoMentionWithMultipleAtSigns' => [
 				'some random string with @@vboctor sign.',
-				array()
-			),
-			'JustMention' => array(
+				[]
+			],
+			'JustMention' => [
 				'@vboctor',
-				array( 'vboctor' )
-			),
-			'WithDotInMiddle' => array(
+				['vboctor']
+			],
+			'WithDotInMiddle' => [
 				'@victor.boctor',
-				array( 'victor.boctor' )
-			),
-			'WithDotAtEnd' => array(
+				['victor.boctor']
+			],
+			'WithDotAtEnd' => [
 				'@vboctor.',
-				array( 'vboctor' )
-			),
-			'MentionWithUnderscore' => array(
+				['vboctor']
+			],
+			'MentionWithUnderscore' => [
 				'@victor_boctor',
-				array( 'victor_boctor' )
-			),
-			'MentionAtStart' => array(
+				['victor_boctor']
+			],
+			'MentionAtStart' => [
 				'@vboctor will check',
-				array( 'vboctor' )
-			),
-			'MentionAtEnd' => array(
+				['vboctor']
+			],
+			'MentionAtEnd' => [
 				'Please assign to @vboctor',
-				array( 'vboctor' )
-			),
-			'MentionAtEndWithFullstop' => array(
+				['vboctor']
+			],
+			'MentionAtEndWithFullstop' => [
 				'Please assign to @vboctor.',
-				array( 'vboctor' )
-			),
-			'MentionSeparatedWithColon' => array(
+				['vboctor']
+			],
+			'MentionSeparatedWithColon' => [
 				'@vboctor: please check.',
-				array( 'vboctor' )
-			),
-			'MentionSeparatedWithSemiColon' => array(
+				['vboctor']
+			],
+			'MentionSeparatedWithSemiColon' => [
 				'@vboctor; please check.',
-				array( 'vboctor' )
-			),
-			'MentionWithMultiple' => array(
+				['vboctor']
+			],
+			'MentionWithMultiple' => [
 				'Please check with @vboctor and @someone.',
-				array( 'vboctor', 'someone' )
-			),
-			'MentionWithDuplicates' => array(
+				['vboctor', 'someone']
+			],
+			'MentionWithDuplicates' => [
 				'Please check with @vboctor and @vboctor.',
-				array( 'vboctor' )
-			),
-			'MentionWithMultipleSlashSeparated' => array(
+				['vboctor']
+			],
+			'MentionWithMultipleSlashSeparated' => [
 				'@vboctor/@someone, please check.',
-				array( 'vboctor', 'someone' )
-			),
-			'MentionWithMultipleNewLineSeparated' => array(
+				['vboctor', 'someone']
+			],
+			'MentionWithMultipleNewLineSeparated' => [
 				"Check with:\n@vboctor\n@someone.",
-				array( 'vboctor', 'someone' )
-			),
-			'MentionNl2br' => array(
-				string_nl2br( "Check with @vboctor\n" ) ,
-				array( 'vboctor' )
-			),
-			'MentionWithEmailAddress' => array(
+				['vboctor', 'someone']
+			],
+			'MentionNl2br' => [
+				string_nl2br( "Check with @vboctor\n" ),
+				['vboctor']
+			],
+			'MentionWithEmailAddress' => [
 				'xxx@example.com',
-				array()
-			),
-			'MentionWithLocalhost' => array(
+				[]
+			],
+			'MentionWithLocalhost' => [
 				'xxx@localhost',
-				array()
-			),
-			'MentionAtEndOfWord' => array(
-				"vboctor@",
-				array()
-			),
-			'MentionWithInvalidChars' => array(
-				"@vboctor%%%%%",
-				array( 'vboctor' )
-			),
-			'MentionUsernameThatIsAnEmailAddress' => array(
-				"@vboctor@example.com",
-				array()
-			),
-			'MentionUsernameThatIsLocalhost' => array(
-				"@vboctor@localhost",
-				array()
-			),
-		);
+				[]
+			],
+			'MentionAtEndOfWord' => [
+				'vboctor@',
+				[]
+			],
+			'MentionWithInvalidChars' => [
+				'@vboctor%%%%%',
+				['vboctor']
+			],
+			'MentionUsernameThatIsAnEmailAddress' => [
+				'@vboctor@example.com',
+				[]
+			],
+			'MentionUsernameThatIsLocalhost' => [
+				'@vboctor@localhost',
+				[]
+			],
+		];
 
 	}
 }

@@ -291,7 +291,7 @@ class EnumTest extends SoapBase {
 	 * @return array
 	 */
 	private static function ObjectRefsToAssoc( $p_object_refs ) {
-		$t_assoc_array = array();
+		$t_assoc_array = [];
 
 		foreach ( $p_object_refs as $t_object_ref ) {
 			$t_assoc_array[$t_object_ref->id] = $t_object_ref->name;

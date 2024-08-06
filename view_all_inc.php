@@ -106,9 +106,9 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 	# Viewing range info
 	$v_start = 0;
 	$v_end = 0;
-	if (count($t_rows) > 0) {
-		$v_start = $g_filter['per_page'] * ($f_page_number - 1) + 1;
-		$v_end = $v_start + count($t_rows) - 1;
+	if ( count( $t_rows ) > 0 ) {
+		$v_start = $g_filter['per_page'] * ( $f_page_number - 1 ) + 1;
+		$v_end = $v_start + count( $t_rows ) - 1;
 	}
 	echo '<span class="badge"> ' . $v_start . ' - ' . $v_end . ' / ' . $t_bug_count . '</span>' ;
 ?>
@@ -136,7 +136,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
 		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
 			if( !is_array( $t_callback_menu_options ) ) {
-				$t_callback_menu_options = array( $t_callback_menu_options );
+				$t_callback_menu_options = [$t_callback_menu_options];
 			}
 
 			foreach( $t_callback_menu_options as $t_menu_option ) {
@@ -215,7 +215,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 	$t_title_function = 'print_column_title';
 	$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter, COLUMNS_TARGET_VIEW_PAGE );
 	foreach( $g_columns as $t_column ) {
-		helper_call_custom_function( $t_title_function, array( $t_column, COLUMNS_TARGET_VIEW_PAGE, $t_sort_properties ) );
+		helper_call_custom_function( $t_title_function, [$t_column, COLUMNS_TARGET_VIEW_PAGE, $t_sort_properties] );
 	}
 ?>
 							</tr>
@@ -252,9 +252,9 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 ?>
 			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="action" class="input-sm">
-				<?php print_all_bug_action_option_list($t_unique_project_ids) ?>
+				<?php print_all_bug_action_option_list( $t_unique_project_ids ) ?>
 			</select>
-			<input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get('ok'); ?>"/>
+			<input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get( 'ok' ); ?>"/>
 <?php
 		} else {
 			echo '&#160;';
@@ -307,7 +307,7 @@ function write_bug_rows( array $p_rows ) {
 
 		echo '<tr>';
 		foreach( $g_columns as $t_column ) {
-			helper_call_custom_function( 'print_column_value', array( $t_column, $t_row ) );
+			helper_call_custom_function( 'print_column_value', [$t_column, $t_row] );
 		}
 		echo '</tr>';
 	}

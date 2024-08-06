@@ -50,7 +50,7 @@
  * @uses string_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -145,7 +145,7 @@ $t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC
 <?php } ?>
 <?php } ?>
 
-<?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', array( $t_bug_id, $f_bugnote_id ) ); ?>
+<?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', [$t_bug_id, $f_bugnote_id] ); ?>
 
 </table>
 	</div>

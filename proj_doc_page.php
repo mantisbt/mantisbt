@@ -39,7 +39,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -75,7 +75,7 @@ if( $f_project_id == ALL_PROJECTS ) {
 	$t_projects = user_get_accessible_projects( $t_user_id );
 } else {
 	# Select the specific project
-	$t_projects = array( $f_project_id );
+	$t_projects = [$f_project_id];
 }
 
 $t_projects[] = ALL_PROJECTS; # add "ALL_PROJECTS to the list of projects to fetch
@@ -102,7 +102,7 @@ $t_query = 'SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title
 					( ( pult.user_id = ' . db_param() . ' ) AND ( pult.access_level ' . $t_access_clause . ' ) ) OR
 					( ut.access_level >= ' . db_param() . ' ) )
 			ORDER BY pt.name ASC, pft.title ASC';
-$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
+$t_result = db_query( $t_query, [$t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin] );
 
 layout_page_header( lang_get( 'docs_link' ) );
 
@@ -118,7 +118,7 @@ print_doc_menu( 'proj_doc_page.php' );
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<?php print_icon( 'fa-file', 'ace-icon' ); ?>
-		<?php echo lang_get('project_documentation_title') ?>
+		<?php echo lang_get( 'project_documentation_title' ) ?>
 	</h4>
 </div>
 

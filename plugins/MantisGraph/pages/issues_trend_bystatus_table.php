@@ -44,7 +44,7 @@ $t_page_count = 0;
 
 $t_filter = current_user_get_bug_filter();
 $t_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
-$t_filter[FILTER_PROPERTY_STATUS] = array( META_FILTER_ANY );
+$t_filter[FILTER_PROPERTY_STATUS] = [META_FILTER_ANY];
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
 if( count( $t_rows ) == 0 ) {
@@ -52,8 +52,8 @@ if( count( $t_rows ) == 0 ) {
 	exit();
 }
 
-$t_marker = array();
-$t_data = array();
+$t_marker = [];
+$t_data = [];
 $t_ptr = 0;
 $t_end = $t_interval->get_end_timestamp();
 $t_start = $t_interval->get_start_timestamp();
@@ -66,8 +66,8 @@ $t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_e
 $t_status_labels  = MantisEnum::getAssocArrayIndexedByValues( lang_get( 'status_enum_string' ) );
 $t_default_bug_status = config_get( 'bug_submit_status' );
 
-$t_bug = array();
-$t_view_status = array();
+$t_bug = [];
+$t_view_status = [];
 
 # walk through all issues and grab their status for 'now'
 $t_marker[$t_ptr] = time();
@@ -77,7 +77,7 @@ foreach ( $t_rows as $t_row ) {
 	} else {
 		$t_data[$t_ptr][$t_row->status] = 1;
 		$t_view_status[$t_row->status] =
-			isset($t_status_arr[$t_row->status]) ? $t_status_arr[$t_row->status] : '@'.$t_row->status.'@';
+			isset( $t_status_arr[$t_row->status] ) ? $t_status_arr[$t_row->status] : '@' . $t_row->status . '@';
 	}
 	$t_bug[] = $t_row->id;
 }
@@ -86,11 +86,11 @@ foreach ( $t_rows as $t_row ) {
 # type = 0 and field=status are status changes
 # type = 1 are new bugs
 $t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM {bug_history}
-	WHERE bug_id in ('. implode( ',', $t_bug ) .
+	WHERE bug_id in (' . implode( ',', $t_bug ) .
 	') and ( (type=' . NORMAL_TYPE . ' and field_name=\'status\')
 		or type=' . NEW_BUG . ' ) and date_modified >= ' . db_param() .
 	' order by date_modified DESC';
-$t_result = db_query( $t_select, array( $t_start ) );
+$t_result = db_query( $t_select, [$t_start] );
 $t_row = db_fetch_array( $t_result );
 
 for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
@@ -105,14 +105,14 @@ for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 				} else {
 					$t_data[$t_ptr][$t_row['new_value']] = 0;
 					$t_view_status[$t_row['new_value']] =
-						isset($t_status_arr[$t_row['new_value']]) ? $t_status_arr[$t_row['new_value']] : '@'.$t_row['new_value'].'@';
+						isset( $t_status_arr[$t_row['new_value']] ) ? $t_status_arr[$t_row['new_value']] : '@' . $t_row['new_value'] . '@';
 				}
 				if( isset( $t_data[$t_ptr][$t_row['old_value']] ) ) {
 					$t_data[$t_ptr][$t_row['old_value']] ++;
 				} else {
 					$t_data[$t_ptr][$t_row['old_value']] = 1;
 					$t_view_status[$t_row['old_value']] =
-						isset($t_status_arr[$t_row['old_value']]) ? $t_status_arr[$t_row['old_value']] : '@'.$t_row['old_value'].'@';
+						isset( $t_status_arr[$t_row['old_value']] ) ? $t_status_arr[$t_row['old_value']] : '@' . $t_row['old_value'] . '@';
 				}
 				break;
 			case 1: # new bug
@@ -152,7 +152,7 @@ echo '<div class="table-responsive">';
 echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
 
 foreach ( $t_view_status as $t_status => $t_label ) {
-	echo '<th>'.$t_label.' ('.$t_status.')</th>';
+	echo '<th>' . $t_label . ' (' . $t_status . ')</th>';
 }
 
 echo '</tr>';
@@ -160,7 +160,7 @@ echo '</tr>';
 $t_resolved = config_get( 'bug_resolved_status_threshold' );
 $t_closed = config_get( 'bug_closed_status_threshold' );
 $t_bin_count = $t_ptr;
-$t_labels = array();
+$t_labels = [];
 $i = 0;
 
 foreach ( $t_view_status as $t_status => $t_label ) {
@@ -170,7 +170,7 @@ foreach ( $t_view_status as $t_status => $t_label ) {
 $t_label_count = $i;
 
 # reverse the array and consolidate the data, if necessary
-$t_metrics = array();
+$t_metrics = [];
 for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 	$t = $t_bin_count - $t_ptr;
 	$t_metrics[0][$t_ptr] = $t_marker[$t];
@@ -183,9 +183,9 @@ for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 		}
 	}
 
-	echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_metrics[0][$t_ptr] ) .')' . '</td>';
+	echo '<tr class="row-' . ( $t_ptr%2+1 ) . '"><td>' . $t_ptr . ' (' . date( $t_date_format, $t_metrics[0][$t_ptr] ) . ')' . '</td>';
 	for( $i=1; $i<=$t_label_count; $i++ ) {
-		echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
+		echo '<td>' . $t_metrics[$i][$t_ptr] . '</td>';
 	}
 
 	echo '</tr>';

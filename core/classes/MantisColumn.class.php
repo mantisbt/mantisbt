@@ -51,7 +51,7 @@ abstract class MantisColumn {
 	 * @return array Keyed-array with query elements; see developer guide
 	 */
 	public function sortquery( $p_direction ) {
-		return array();
+		return [];
 	}
 
 	/**
@@ -62,7 +62,8 @@ abstract class MantisColumn {
 	 * @param array $p_bugs Bug objects.
 	 * @return void
 	 */
-	public function cache( array $p_bugs ) {}
+	public function cache( array $p_bugs ) {
+	}
 
 	/**
 	 * Function to clear the cache of values that was built with the cache() method.
@@ -70,7 +71,8 @@ abstract class MantisColumn {
 	 * memory helps to keep a long export process within memory limits.
 	 * @return void
 	 */
-	public function clear_cache() {}
+	public function clear_cache() {
+	}
 
 	/**
 	 * Function to display column data for a given bug row.

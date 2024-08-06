@@ -37,7 +37,7 @@
  * @uses version_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -99,7 +99,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 					<input type="text" id="proj-version-date-order" name="date_order" class="datetimepicker input-sm"
 						data-picker-locale="<?php echo lang_get_current_datetime_locale() ?>"
 						data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
-						size="16" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'normal_date_format' ), $t_version->date_order ) ) ) ?>" />
+						size="16" value="<?php echo ( date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'normal_date_format' ), $t_version->date_order ) ) ) ?>" />
 					<?php print_icon( 'fa-calendar', 'fa-xlg datetimepicker' ); ?>
 				</td>
 			</tr>
@@ -136,7 +136,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 					</label>
 				</td>
 			</tr>
-			<?php event_signal( 'EVENT_MANAGE_VERSION_UPDATE_FORM', array( $t_version->id ) ); ?>
+			<?php event_signal( 'EVENT_MANAGE_VERSION_UPDATE_FORM', [$t_version->id] ); ?>
 		</fieldset>
 		</table>
 			</div>

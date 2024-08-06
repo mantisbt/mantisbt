@@ -64,7 +64,7 @@ class VersionUpdateCommand extends Command {
 			throw new ClientException(
 				"Project '$this->project_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[$this->project_id] );
 		}
 
 		$t_access_level = config_get(
@@ -87,7 +87,7 @@ class VersionUpdateCommand extends Command {
 			throw new ClientException(
 				"Version with id '$this->version_id' not found",
 				ERROR_VERSION_NOT_FOUND,
-				array( $this->version_id ) );
+				[$this->version_id] );
 		}
 	}
 
@@ -106,7 +106,7 @@ class VersionUpdateCommand extends Command {
 			throw new ClientException(
 				"Version with id '$this->version_id' not found",
 				ERROR_VERSION_NOT_FOUND,
-				array( $this->version_id ) );
+				[$this->version_id] );
 		}
 
 		$t_version = version_get( $this->version_id );
@@ -117,7 +117,7 @@ class VersionUpdateCommand extends Command {
 				throw new ClientException(
 					"Version name can't be empty",
 					ERROR_EMPTY_FIELD,
-					array( 'name' ) );
+					['name'] );
 			}
 
 			$t_version->version = $t_name = trim( $t_name );
@@ -126,15 +126,15 @@ class VersionUpdateCommand extends Command {
 				throw new ClientException(
 					'Invalid version name',
 					ERROR_INVALID_FIELD_VALUE,
-					array( 'name' ) );
+					['name'] );
 			}
 
 			# check for duplicates
 			if( ( strtolower( $t_version->version ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $this->project_id ) ) {
 				throw new ClientException(
-					"Version name is not unique",
+					'Version name is not unique',
 					ERROR_VERSION_DUPLICATE,
-					array( $t_version->version ) );
+					[$t_version->version] );
 			}
 		}
 
@@ -161,11 +161,11 @@ class VersionUpdateCommand extends Command {
 
 		version_update( $t_version );
 
-		event_signal( 'EVENT_MANAGE_VERSION_UPDATE', array( $this->version_id ) );
+		event_signal( 'EVENT_MANAGE_VERSION_UPDATE', [$this->version_id] );
 
 		version_cache_clear_row( $this->version_id );
 		$t_version = version_get( $this->version_id );
-		$t_result = array( 'version' => VersionGetCommand::VersionToArray( $t_version ) );
+		$t_result = ['version' => VersionGetCommand::VersionToArray( $t_version )];
 
 		$g_project_override = $t_prev_project_id;
 

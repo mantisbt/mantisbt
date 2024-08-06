@@ -32,32 +32,32 @@ if( !defined( 'CHECK_EMAIL_INC_ALLOW' ) ) {
 }
 
 # MantisBT Check API
-require_once( 'check_api.php' );
+require_once 'check_api.php';
 require_api( 'config_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'database_api.php' );
 
 check_print_section_header_row( 'Email' );
 
-$t_email_options = array(
+$t_email_options = [
 	'webmaster_email',
 	'from_email',
 	'return_path_email'
-);
+];
 
 foreach( $t_email_options as $t_email_option ) {
 	$t_email = config_get_global( $t_email_option );
 	check_print_test_row(
 		$t_email_option . ' configuration option has a valid email address specified',
 		!preg_match( '/@example\.com$/', $t_email ),
-		array( false => 'You need to specify a valid email address for the ' . $t_email_option . ' configuration option.' )
+		[false => 'You need to specify a valid email address for the ' . $t_email_option . ' configuration option.']
 	);
 }
 
 check_print_test_warn_row(
 	'Email addresses are validated',
 	config_get_global( 'validate_email' ),
-	array( false => 'You have disabled email validation checks. For security reasons it is suggested that you enable these validation checks.' )
+	[false => 'You have disabled email validation checks. For security reasons it is suggested that you enable these validation checks.']
 );
 
 check_print_test_row(
@@ -99,7 +99,7 @@ if( OFF == config_get_global( 'allow_blank_email' ) ) {
 	check_print_test_row(
 		'All users must have an e-mail address',
 		empty( $t_users_without_email ),
-		count( $t_users_without_email ) . " users without e-mail address found: "
+		count( $t_users_without_email ) . ' users without e-mail address found: '
 		. implode( ', ', $t_users_without_email ),
 	);
 }

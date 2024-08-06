@@ -23,7 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( __DIR__ . '/mc_core.php' );
+require_once __DIR__ . '/mc_core.php';
 
 use Mantis\Exceptions\ClientException;
 
@@ -103,12 +103,12 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 
 	$t_view_history_threshold = config_get( 'view_history_threshold', null, null, $t_project_id );
 	if( !access_has_bug_level( $t_view_history_threshold, $p_issue_id, $p_user_id ) ) {
-		return array();
+		return [];
 	}
 
 	$t_history_rows = history_get_raw_events_array( $p_issue_id, $p_user_id );
 
-	$t_history = array();
+	$t_history = [];
 
 	$t_files = file_get_visible_attachments( $p_issue_id );
 
@@ -127,7 +127,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 				break;
 		}
 
-		$t_event = array();
+		$t_event = [];
 
 		$t_event['created_at'] = ApiObjectFactory::datetime( $t_history_row['date'] );
 		$t_event['user'] = mci_account_get_array_by_id( $t_history_row['userid'] );
@@ -135,7 +135,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 		$t_field = $t_history_row['field'];
 		if( !is_blank( $t_field ) ) {
 			# map field names to external names
-			switch( $t_field )  {
+			switch( $t_field ) {
 				case 'reporter_id':
 					$t_field = 'reporter';
 					break;
@@ -148,18 +148,18 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 					break;
 			}
 
-			$t_event['field'] = array(
+			$t_event['field'] = [
 				'name' => $t_field,
-				'label' => history_localize_field_name( $t_history_row['field'] ) );
+				'label' => history_localize_field_name( $t_history_row['field'] )];
 		}
 
 		if( $t_skip ) {
 			continue;
 		}
 
-		$t_event['type'] = array(
+		$t_event['type'] = [
 			'id' => $t_type,
-			'name' => history_get_type_name( $t_history_row['type'] ) );
+			'name' => history_get_type_name( $t_history_row['type'] )];
 
 		$t_old_value_name = 'old_value';
 		$t_new_value_name = 'new_value';
@@ -217,22 +217,22 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 				case TAG_DETACHED:
 					$t_tag = tag_get_by_name( $p_value );
 					if( $t_tag === false ) {
-						return array( 'name' => $p_value );
+						return ['name' => $p_value];
 					}
 
-					return array( 'id' => $t_tag['id'], 'name' => $t_tag['name'] );
+					return ['id' => $t_tag['id'], 'name' => $t_tag['name']];
 				case BUGNOTE_ADDED:
 				case BUGNOTE_DELETED:
-					return array( 'id' => (int)$p_value );
+					return ['id' => (int)$p_value];
 				case BUGNOTE_UPDATED:
 					if( !$p_new_value ) {
-						return array( 'id' => (int) $p_value );
+						return ['id' => (int)$p_value];
 					}
 
 					return '';
 				case FILE_ADDED:
 				case FILE_DELETED:
-					$t_value = array();
+					$t_value = [];
 
 					$t_id = null;
 					foreach( $t_files as $t_file ) {
@@ -247,7 +247,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 					return $t_value;
 				case BUGNOTE_STATE_CHANGED:
 					if( $p_new_value ) {
-						return array( 'id' => (int)$p_value );
+						return ['id' => (int)$p_value];
 					}
 
 					return mci_enum_get_array_by_id( (int)$p_value, 'view_state', $p_lang );
@@ -255,15 +255,15 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 				case BUG_REPLACE_RELATIONSHIP:
 				case BUG_DEL_RELATIONSHIP:
 					if( $p_new_value ) {
-						return array( 'id' => (int)$p_value );
+						return ['id' => (int)$p_value];
 					}
 
-					return array(
+					return [
 						'id' => (int)$p_value,
 						'name' => relationship_get_name_for_api( (int)$p_value ),
-						'label' => relationship_get_description_for_history( (int)$p_value ) );
+						'label' => relationship_get_description_for_history( (int)$p_value )];
 				case BUG_CLONED_TO:
-					return array( 'id' => (int)$p_value );
+					return ['id' => (int)$p_value];
 			}
 
 			switch( $p_field ) {
@@ -327,13 +327,13 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 }
 
 /**
-* Get history details about an issue, used by SOAP APIs.
-*
-* @param string  $p_username The name of the user trying to access the issue.
-* @param string  $p_password The password of the user.
-* @param integer $p_issue_id The id of the issue to retrieve.
-* @return array that represents a HistoryDataArray structure
-*/
+ * Get history details about an issue, used by SOAP APIs.
+ *
+ * @param string  $p_username The name of the user trying to access the issue.
+ * @param string  $p_password The password of the user.
+ * @param integer $p_issue_id The id of the issue to retrieve.
+ * @return array that represents a HistoryDataArray structure
+ */
 function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 	global $g_project_override;
 
@@ -463,7 +463,7 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 function mci_issue_get_custom_fields( $p_issue_id ) {
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 
-	$t_custom_fields = array();
+	$t_custom_fields = [];
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 	custom_field_cache_array_rows( $t_related_custom_field_ids );
 
@@ -473,7 +473,7 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 			unset( $t_related_custom_field_ids[$t_index] );
 		}
 	}
-	custom_field_cache_values( array( $p_issue_id ), $t_related_custom_field_ids );
+	custom_field_cache_values( [$p_issue_id], $t_related_custom_field_ids );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
@@ -488,8 +488,8 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 			$t_value = '';
 		}
 
-		$t_custom_field_value = array();
-		$t_custom_field_value['field'] = array();
+		$t_custom_field_value = [];
+		$t_custom_field_value['field'] = [];
 		$t_custom_field_value['field']['id'] = (int)$t_id;
 		$t_custom_field_value['field']['name'] = $t_def['name'];
 		$t_custom_field_value['value'] = $t_value;
@@ -510,17 +510,17 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 function mci_issue_get_attachments( $p_issue_id, $p_note_id = null ) {
 	$t_attachment_rows = file_get_visible_attachments( $p_issue_id );
 	if( $t_attachment_rows == null ) {
-		return array();
+		return [];
 	}
 
-	$t_result = array();
+	$t_result = [];
 	foreach( $t_attachment_rows as $t_attachment_row ) {
 		# Filter out attachments that are not requested by caller
 		if( !is_null( $p_note_id ) && (int)$t_attachment_row['bugnote_id'] != (int)$p_note_id ) {
 			continue;
 		}
 
-		$t_attachment = array();
+		$t_attachment = [];
 		$t_attachment['id'] = (int)$t_attachment_row['id'];
 
 		$t_created_at = ApiObjectFactory::datetime( $t_attachment_row['date_added'] );
@@ -555,15 +555,15 @@ function mci_issue_get_attachments( $p_issue_id, $p_note_id = null ) {
  * @return array that represents an RelationShipData structure
  */
 function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
-	$t_relationships = array();
+	$t_relationships = [];
 
 	$t_src_relationships = relationship_get_all_src( $p_issue_id );
 	foreach( $t_src_relationships as $t_relship_row ) {
 		if( access_has_bug_level( config_get( 'webservice_readonly_access_level_threshold' ), $t_relship_row->dest_bug_id, $p_user_id ) ) {
 			$t_related_issue_id = (int)$t_relship_row->dest_bug_id;
 
-			$t_relationship = array();
-			$t_reltype = array();
+			$t_relationship = [];
+			$t_reltype = [];
 			$t_relationship['id'] = (int)$t_relship_row->id;
 			$t_reltype['id'] = (int)$t_relship_row->type;
 
@@ -589,9 +589,9 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 	$t_dest_relationships = relationship_get_all_dest( $p_issue_id );
 	foreach( $t_dest_relationships as $t_relship_row ) {
 		if( access_has_bug_level( config_get( 'webservice_readonly_access_level_threshold' ), $t_relship_row->src_bug_id, $p_user_id ) ) {
-			$t_relationship = array();
+			$t_relationship = [];
 			$t_relationship['id'] = (int)$t_relship_row->id;
-			$t_reltype = array();
+			$t_reltype = [];
 			$t_complementary_type_id = (int)relationship_get_complementary_type( $t_relship_row->type );
 			$t_reltype['id'] = $t_complementary_type_id;
 
@@ -615,7 +615,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 		}
 	}
 
-	return (count( $t_relationships ) == 0 ? null : $t_relationships );
+	return ( count( $t_relationships ) == 0 ? null : $t_relationships );
 }
 
 /**
@@ -628,7 +628,7 @@ function mci_issue_note_data_as_array( $p_bugnote_row ) {
 	$t_lang = mci_get_user_lang( $t_user_id );
 	$t_has_time_tracking_access = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_bugnote_row->bug_id );
 
-	$t_bugnote = array();
+	$t_bugnote = [];
 	$t_bugnote['id'] = (int)$p_bugnote_row->id;
 	$t_bugnote['reporter'] = mci_account_get_array_by_id( $p_bugnote_row->reporter_id );
 	$t_bugnote['text'] = mci_sanitize_xml_string( $p_bugnote_row->note );
@@ -670,8 +670,8 @@ function mci_issue_note_data_as_array( $p_bugnote_row ) {
 			if ( $t_bugnote['time_tracking'] == 0 || $t_type != 'timelog' ) {
 				unset( $t_bugnote['time_tracking'] );
 			} else {
-				$t_bugnote['time_tracking'] = array( 'duration' => db_minutes_to_hhmm( $t_bugnote['time_tracking'] ) );
-			}	
+				$t_bugnote['time_tracking'] = ['duration' => db_minutes_to_hhmm( $t_bugnote['time_tracking'] )];
+			}
 		}
 
 		$t_bugnote['created_at'] = $t_created_at;
@@ -690,7 +690,7 @@ function mci_issue_note_data_as_array( $p_bugnote_row ) {
 function mci_issue_get_notes( $p_issue_id ) {
 	$t_user_bugnote_order = 'ASC'; # always get the notes in ascending order for consistency to the calling application.
 
-	$t_result = array();
+	$t_result = [];
 	foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 ) as $t_value ) {
 		$t_bugnote = mci_issue_note_data_as_array( $t_value );
 		$t_result[] = $t_bugnote;
@@ -720,7 +720,7 @@ function mci_issue_set_monitors( $p_issue_id, $p_requesting_user_id, array $p_mo
 	$t_existing_monitor_ids = bug_get_monitors( $p_issue_id );
 
 	# 2. build new monitors ids
-	$t_new_monitor_ids = array();
+	$t_new_monitor_ids = [];
 	foreach ( $p_monitors as $t_monitor ) {
 		$t_monitor = ApiObjectFactory::objectToArray( $t_monitor );
 		$t_new_monitor_ids[] = $t_monitor['id'];
@@ -784,41 +784,41 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$t_any = defined( 'META_FILTER_ANY' ) ? META_FILTER_ANY : 'any';
 	$t_none = defined( 'META_FILTER_NONE' ) ? META_FILTER_NONE : 'none';
 
-	$t_filter = array(
-		'category_id' => array(
+	$t_filter = [
+		'category_id' => [
 			'0' => $t_any,
-		),
-		'severity' => array(
+		],
+		'severity' => [
 			'0' => $t_any,
-		),
-		'status' => array(
+		],
+		'status' => [
 			'0' => $t_any,
-		),
+		],
 		'highlight_changed' => 0,
-		'reporter_id' => array(
+		'reporter_id' => [
 			'0' => $t_any,
-		),
-		'handler_id' => array(
+		],
+		'handler_id' => [
 			'0' => $t_any,
-		),
-		'resolution' => array(
+		],
+		'resolution' => [
 			'0' => $t_any,
-		),
-		'build' => array(
+		],
+		'build' => [
 			'0' => $t_any,
-		),
-		'version' => array(
+		],
+		'version' => [
 			'0' => $t_any,
-		),
-		'hide_status' => array(
+		],
+		'hide_status' => [
 			'0' => $t_none,
-		),
-		'monitor_user_id' => array(
+		],
+		'monitor_user_id' => [
 			'0' => $t_any,
-		),
+		],
 		'dir' => 'DESC',
 		'sort' => 'id',
-	);
+	];
 
 	$t_page_number = 1;
 	$t_per_page = 1;
@@ -866,7 +866,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 
 	$t_query = 'SELECT id FROM {bug} WHERE summary = ' . db_param();
 
-	$t_result = db_query( $t_query, array( $p_summary ), 1 );
+	$t_result = db_query( $t_query, [$p_summary], 1 );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return 0;
@@ -942,9 +942,9 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_data = array(
-		'payload' => array( 'issue' => $t_issue )
-	);
+	$t_data = [
+		'payload' => ['issue' => $t_issue]
+	];
 
 	$t_command = new IssueAddCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -1167,7 +1167,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	if( isset( $p_issue['notes'] ) && is_array( $p_issue['notes'] ) ) {
 		$t_bugnotes = bugnote_get_all_visible_bugnotes( $p_issue_id, 'DESC', 0 );
-		$t_bugnotes_by_id = array();
+		$t_bugnotes_by_id = [];
 		foreach( $t_bugnotes as $t_bugnote ) {
 			$t_bugnotes_by_id[$t_bugnote->id] = $t_bugnote;
 		}
@@ -1185,7 +1185,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 					$t_bugnote_changed = false;
 					$t_bugnote = $t_bugnotes_by_id[$t_bugnote_id];
 
-					if( isset( $t_note['text']) && $t_bugnote->note !== $t_note['text'] ) {
+					if( isset( $t_note['text'] ) && $t_bugnote->note !== $t_note['text'] ) {
 						bugnote_set_text( $t_bugnote_id, $t_note['text'] );
 						$t_bugnote_changed = true;
 					}
@@ -1195,7 +1195,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 						$t_bugnote_changed = true;
 					}
 
-					if( isset( $t_note['time_tracking']) && $t_note['time_tracking'] != $t_bugnote->time_tracking ) {
+					if( isset( $t_note['time_tracking'] ) && $t_note['time_tracking'] != $t_bugnote->time_tracking ) {
 						bugnote_set_time_tracking( $t_bugnote_id, mci_get_time_tracking_from_note( $p_issue_id, $t_note ) );
 						$t_bugnote_changed = true;
 					}
@@ -1288,7 +1288,7 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_data = array( 'query' => array( 'id' => $p_issue_id ) );
+	$t_data = ['query' => ['id' => $p_issue_id]];
 	$t_command = new IssueDeleteCommand( $t_data );
 	$t_command->execute();
 }
@@ -1317,7 +1317,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 
 	$t_note_type = isset( $p_note['note_type'] ) ? (int)$p_note['note_type'] : BUGNOTE;
 	if( $t_note_type != REMINDER ) {
-		$t_payload = array();
+		$t_payload = [];
 
 		if( $t_note_type == TIME_TRACKING ) {
 			$t_payload['type'] = 'timelog';
@@ -1334,19 +1334,19 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 		}
 
 		if( isset( $p_note['reporter'] ) ) {
-			$t_payload['reporter'] = array( 'id' => mci_get_user_id( $p_note['reporter'] ) );
+			$t_payload['reporter'] = ['id' => mci_get_user_id( $p_note['reporter'] )];
 		}
 
 		if( isset( $p_note['time_tracking'] ) && is_numeric( $p_note['time_tracking'] ) ) {
-			$t_payload['time_tracking'] = array(
+			$t_payload['time_tracking'] = [
 				'duration' => db_minutes_to_hhmm( $p_note['time_tracking'] )
-			);
+			];
 		}
 
-		$t_data = array(
-			'query' => array( 'issue_id' => $p_issue_id ),
+		$t_data = [
+			'query' => ['issue_id' => $p_issue_id],
 			'payload' => $t_payload
-		);
+		];
 
 		$t_command = new IssueNoteAddCommand( $t_data );
 		$t_result = $t_command->execute();
@@ -1380,9 +1380,9 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	if( isset( $p_note['view_state'] ) ) {
 		$t_view_state = $p_note['view_state'];
 	} else {
-		$t_view_state = array(
+		$t_view_state = [
 			'id' => config_get( 'default_bug_view_status' ),
-		);
+		];
 	}
 
 	# TODO: #17777: Add test case for mc_issue_add() and mc_issue_note_add() reporter override
@@ -1397,7 +1397,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
 			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
-				return mci_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue note reporter" );
+				return mci_fault_access_denied( $t_user_id, 'Active user does not have access level required to specify a different issue note reporter' );
 			}
 		}
 	} else {
@@ -1440,9 +1440,9 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_data = array(
-		'query' => array( 'id' => $p_issue_note_id )
-	);
+	$t_data = [
+		'query' => ['id' => $p_issue_note_id]
+	];
 
 	$t_command = new IssueNoteDeleteCommand( $t_data );
 	$t_command->execute();
@@ -1655,16 +1655,16 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
 	if( $p_fields === null ) {
 		$t_fields = null;
 	} else {
-		$t_fields = array();
+		$t_fields = [];
 		foreach( $p_fields as $t_field ) {
 			$t_fields[$t_field] = true;
 		}
 
 		# null it out, so it doesn't get used by mistake
-		$p_fields = null;	
+		$p_fields = null;
 	}
 
-	$t_issue = array();
+	$t_issue = [];
 
 	if( $t_fields === null || isset( $t_fields['id'] ) ) {
 		$t_issue['id'] = $t_id;
@@ -1717,7 +1717,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
 	if( $t_fields === null || isset( $t_fields['handler'] ) ) {
 		if( !empty( $p_issue_data->handler_id ) &&
 			access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $t_id, $p_user_id ) ) {
-			$t_issue['handler'] = mci_account_get_array_by_id($p_issue_data->handler_id);
+			$t_issue['handler'] = mci_account_get_array_by_id( $p_issue_data->handler_id );
 		}
 	}
 
@@ -1810,8 +1810,8 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
 	} else {
 		if( $t_fields === null || isset( $t_fields['profile'] ) ) {
 			if( config_get( 'enable_profiles' ) != OFF ) {
-				if ((int)$p_issue_data->profile_id != 0) {
-					$t_issue['profile'] = mci_profile_as_array_by_id($p_issue_data->profile_id);
+				if ( (int)$p_issue_data->profile_id != 0 ) {
+					$t_issue['profile'] = mci_profile_as_array_by_id( $p_issue_data->profile_id );
 				}
 			}
 		}
@@ -1882,17 +1882,17 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
  */
 function mci_issue_get_tags_for_bug_id( $p_bug_id, $p_user_id ) {
 	if( !access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug_id, $p_user_id ) ) {
-		return array();
+		return [];
 	}
 
 	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
-	$t_result = array();
+	$t_result = [];
 
 	foreach ( $t_tag_rows as $t_tag_row ) {
-		$t_result[] = array (
+		$t_result[] =  [
 			'id' => $t_tag_row['id'],
 			'name' => $t_tag_row['name']
-		);
+		];
 	}
 
 	return $t_result;
@@ -1905,7 +1905,7 @@ function mci_issue_get_tags_for_bug_id( $p_bug_id, $p_user_id ) {
  * @return array The issue header data as an array
  */
 function mci_issue_data_as_header_array( BugData $p_issue_data ) {
-		$t_issue = array();
+		$t_issue = [];
 
 		$t_id = $p_issue_data->id;
 
@@ -1946,21 +1946,21 @@ function mci_issue_data_as_header_array( BugData $p_issue_data ) {
  */
 function mci_check_access_to_bug( $p_user_id, $p_bug_id ) {
 
-    if( !bug_exists( $p_bug_id ) ) {
-        return false;
-    }
+	if( !bug_exists( $p_bug_id ) ) {
+		return false;
+	}
 
-    $t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-    $g_project_override = $t_project_id;
-    if( !mci_has_readonly_access( $p_user_id, $t_project_id ) ) {
-        return false;
-    }
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	$g_project_override = $t_project_id;
+	if( !mci_has_readonly_access( $p_user_id, $t_project_id ) ) {
+		return false;
+	}
 
-    if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_bug_id, $p_user_id ) ) {
-        return false;
-    }
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_bug_id, $p_user_id ) ) {
+		return false;
+	}
 
-    return true;
+	return true;
 }
 
 /**
@@ -1972,26 +1972,26 @@ function mci_check_access_to_bug( $p_user_id, $p_bug_id ) {
  * @return array that represents an IssueDataArray structure
  */
 function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
-    $t_user_id = mci_check_login( $p_username, $p_password );
-    if( $t_user_id === false ) {
-        return mci_fault_login_failed();
-    }
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_fault_login_failed();
+	}
 
-    $t_lang = mci_get_user_lang( $t_user_id );
+	$t_lang = mci_get_user_lang( $t_user_id );
 
-    $t_result = array();
-    foreach( $p_issue_ids as $t_id ) {
-        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false ) {
+	$t_result = [];
+	foreach( $p_issue_ids as $t_id ) {
+		if( mci_check_access_to_bug( $t_user_id, $t_id ) === false ) {
 			continue;
 		}
 
-        log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
+		log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
-        $t_issue_data = bug_get( $t_id, true );
-        $t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
-    }
+		$t_issue_data = bug_get( $t_id, true );
+		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
+	}
 
-    return $t_result;
+	return $t_result;
 }
 
 /**
@@ -2003,24 +2003,25 @@ function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
  * @return array that represents an IssueHeaderDataArray structure
  */
 function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
-    $t_user_id = mci_check_login( $p_username, $p_password );
-    if( $t_user_id === false ) {
-        return mci_fault_login_failed();
-    }
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_fault_login_failed();
+	}
 
-    $t_result = array();
-    foreach( $p_issue_ids as $t_id ) {
+	$t_result = [];
+	foreach( $p_issue_ids as $t_id ) {
 
-        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
-            continue;
+		if( mci_check_access_to_bug( $t_user_id, $t_id ) === false ) {
+			continue;
+		}
 
-        log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
+		log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
-        $t_issue_data = bug_get( $t_id, true );
-        $t_result[] = mci_issue_data_as_header_array( $t_issue_data );
-    }
+		$t_issue_data = bug_get( $t_id, true );
+		$t_result[] = mci_issue_data_as_header_array( $t_issue_data );
+	}
 
-    return $t_result;
+	return $t_result;
 }
 
 /**

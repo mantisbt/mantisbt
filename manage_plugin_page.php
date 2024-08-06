@@ -35,7 +35,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -75,7 +75,7 @@ if( $t_plugins->countInstalled() ) {
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-cubes', 'ace-icon' ); ?>
-					<?php echo lang_get('plugins_installed') ?>
+					<?php echo lang_get( 'plugins_installed' ) ?>
 				</h4>
 			</div>
 
@@ -183,7 +183,7 @@ if( $t_plugins->countAvailable() ) {
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-cube', 'ace-icon' ); ?>
-			<?php echo lang_get('plugins_available') ?>
+			<?php echo lang_get( 'plugins_available' ) ?>
 		</h4>
 	</div>
 
@@ -225,7 +225,7 @@ if( $t_plugins->countAvailable() ) {
 	<div class="space-10"></div>
 	<div class="well well-sm">
 		<?php print_icon( 'fa-key', 'ace-icon' ); ?>
-		<?php echo lang_get('plugin_key_label') ?>
+		<?php echo lang_get( 'plugin_key_label' ) ?>
 		<span class='dependency_met'><?php echo lang_get( 'plugin_key_met' ) ?></span>,
 		<span class='dependency_unmet'><?php echo lang_get( 'plugin_key_unmet' ) ?></span>,
 		<span class='dependency_dated'><?php echo lang_get( 'plugin_key_dated' ) ?></span>,
@@ -248,17 +248,17 @@ class ListPluginsForDisplay {
 	/**
 	 * @var AvailablePlugin[] List of available plugins (i.e. valid and not installed)
 	 */
-	protected $available = array();
+	protected $available = [];
 
 	/**
 	 * @var InstalledPlugin[] List of installed (registered) plugins
 	 */
-	protected $installed = array();
+	protected $installed = [];
 
 	/**
 	 * @var InvalidPluginForDisplay[] List of invalid plugins
 	 */
-	protected $invalid = array();
+	protected $invalid = [];
 
 	/**
 	 * PluginsListForDisplay constructor.
@@ -354,7 +354,7 @@ abstract class PluginForDisplay {
 	}
 
 	protected function renderColumns() {
-		echo "<td>" . $this->pluginName() . "</td>\n";
+		echo '<td>' . $this->pluginName() . "</td>\n";
 		echo "<td>$this->description</td>\n";
 	}
 
@@ -399,7 +399,7 @@ class InvalidPluginForDisplay extends PluginForDisplay {
 }
 
 class AvailablePlugin extends PluginForDisplay {
-	protected $dependencies = array();
+	protected $dependencies = [];
 	protected $upgrade_needed = false;
 	protected $can_install = false;
 
@@ -483,7 +483,7 @@ class AvailablePlugin extends PluginForDisplay {
 			$this->dependencies[] = '<span class="dependency_met">'
 				. lang_get( 'plugin_no_depends' )
 				. '</span>';
-            $this->can_install = true;
+			$this->can_install = true;
 		}
 
 		$this->upgrade_needed = plugin_needs_upgrade( $p_plugin );

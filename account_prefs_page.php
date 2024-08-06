@@ -46,22 +46,22 @@
  * @uses lang_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'current_user_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-#============ Parameters ============
+# ============ Parameters ============
 # (none)
 
-#============ Permissions ============
+# ============ Permissions ============
 auth_ensure_user_authenticated();
 
 current_user_ensure_unprotected();
 
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
-include( __DIR__ . '/account_prefs_inc.php' );
+include __DIR__ . '/account_prefs_inc.php';
 
 layout_page_header( lang_get( 'change_preferences_link' ) );
 

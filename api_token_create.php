@@ -27,7 +27,7 @@
  * @uses string_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'api_token_api.php' );
 require_api( 'string_api.php' );
 
@@ -39,14 +39,14 @@ auth_reauthenticate();
 $f_token_name = gpc_get_string( 'token_name' );
 $t_user_id = auth_get_current_user_id();
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'user_id' => $t_user_id,
-	),
-	'payload' => array(
+	],
+	'payload' => [
 		'name' => $f_token_name,
-	),
-);
+	],
+];
 
 $t_command = new UserTokenCreateCommand( $t_data );
 $t_result = $t_command->execute();
@@ -73,4 +73,3 @@ layout_page_begin();
 </div>
 <?php
 layout_page_end();
-

@@ -99,7 +99,7 @@ function crypto_generate_strong_random_string( $p_bytes ) {
  */
 function crypto_generate_uri_safe_nonce( $p_minimum_length ) {
 	$t_length_mod4 = $p_minimum_length % 4;
-	$t_adjusted_length = $p_minimum_length + 4 - ($t_length_mod4 ? $t_length_mod4 : 4);
+	$t_adjusted_length = $p_minimum_length + 4 - ( $t_length_mod4 ? $t_length_mod4 : 4 );
 	$t_raw_bytes_required = ( $t_adjusted_length / 4 ) * 3;
 	$t_base64_encoded = base64_encode( random_bytes( $t_raw_bytes_required ) );
 	# Note: no need to translate trailing = padding characters because our

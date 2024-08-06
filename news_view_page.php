@@ -32,7 +32,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -55,7 +55,7 @@ layout_page_begin( 'main_page.php' );
 if( $f_news_id !== null ) {
 	$t_project_id = news_get_field( $f_news_id, 'project_id' );
 	if( news_is_private( $f_news_id ) ) {
-		access_ensure_project_level(	config_get( 'private_news_threshold' ),
+		access_ensure_project_level( config_get( 'private_news_threshold' ),
 						$t_project_id );
 	} else {
 		access_ensure_project_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_project_id );

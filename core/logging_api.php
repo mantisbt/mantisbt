@@ -36,7 +36,7 @@ require_api( 'constant_inc.php' );
 require_api( 'event_api.php' );
 require_api( 'utility_api.php' );
 
-$g_log_levels = array(
+$g_log_levels = [
 	LOG_EMAIL => 'MAIL',
 	LOG_EMAIL_RECIPIENT => 'RECIPIENT',
 	LOG_EMAIL_VERBOSE => 'MAIL_VERBOSE',
@@ -46,7 +46,7 @@ $g_log_levels = array(
 	LOG_DATABASE => 'DB',
 	LOG_WEBSERVICE => 'WEBSERVICE',
 	LOG_PLUGIN => 'PLUGIN',
-);
+];
 
 /**
  * Log an event
@@ -74,7 +74,7 @@ function log_event( $p_level, $p_msg ) {
 			array_shift( $t_args ); # skip message
 			$p_msg = vsprintf( $p_msg, $t_args );
 		}
-		$t_event = array( $p_msg, 0 );
+		$t_event = [$p_msg, 0];
 		$t_msg = $p_msg;
 	}
 
@@ -90,7 +90,7 @@ function log_event( $p_level, $p_msg ) {
 	if( !$s_event_log_called && function_exists( 'event_signal' ) ) {
 		$t_plugin_event = '[' . $t_level . '] ' . $t_msg;
 		$s_event_log_called = true;
-		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
+		event_signal( 'EVENT_LOG', [$t_plugin_event] );
 		$s_event_log_called = false;
 	}
 
@@ -136,7 +136,7 @@ function log_event( $p_level, $p_msg ) {
 			break;
 		case 'page':
 			global $g_log_events;
-			$g_log_events[] = array( time(), $p_level, $t_event, $t_caller);
+			$g_log_events[] = [time(), $p_level, $t_event, $t_caller];
 			break;
 		default:
 			# use default PHP error log settings
@@ -164,12 +164,12 @@ function log_print_to_page() {
 
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
-		$t_unique_queries = array();
+		$t_unique_queries = [];
 		$t_total_queries_count = 0;
 		$t_total_event_count = $g_log_events === null ? 0 : count( $g_log_events );
 
 
-		echo "<div class=\"space-10\"></div>";
+		echo '<div class="space-10"></div>';
 		echo "\t<div class=\"row\">\n";
 		echo "\t<div class=\"col-xs-12\">\n";
 
@@ -177,7 +177,7 @@ function log_print_to_page() {
 		echo "\t<div class=\"widget-header widget-header-small\">\n";
 		echo "\t<h4 class=\"widget-title lighter\">\n";
 		echo "\t" . icon_get( 'fa-flag-o', 'ace-icon' ) . "\n";
-		echo "Debug Log";
+		echo 'Debug Log';
 		echo "</h4>\n";
 		echo "</div>\n";
 
@@ -189,7 +189,7 @@ function log_print_to_page() {
 			return;
 		}
 
-		echo "<div class=\"widget-main no-padding\">";
+		echo '<div class="widget-main no-padding">';
 		echo "<div class=\"table-responsive\">\n";
 		echo "<table class=\"table table-bordered table-condensed table-striped\" id=\"log-event-list\">\n";
 		echo "\t<thead>\n";
@@ -215,7 +215,7 @@ function log_print_to_page() {
 			}
 		}
 
-		$t_count = array();
+		$t_count = [];
 		foreach( $g_log_events as $t_log_event ) {
 			$t_level = $g_log_levels[$t_log_event[1]];
 			if( isset( $t_count[$t_log_event[1]] ) ) {
@@ -340,7 +340,7 @@ function log_get_caller( $p_level = null ) {
 	}
 
 	# At this point, first step in the cleaned backtrace is the one we want to show
-	$t_step = reset( $t_backtrace);
+	$t_step = reset( $t_backtrace );
 	$t_step_key = key( $t_backtrace );
 	$t_caller_file = basename( $t_step['file'] );
 	$t_caller_line = $t_step['line'];

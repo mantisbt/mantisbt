@@ -37,7 +37,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -69,7 +69,7 @@ print_manage_config_menu( 'adm_config_report.php' );
  * @return string|integer Config name if valid, or META_FILTER_NONE of not
  */
 function check_config_value( $p_config ) {
-	if(    $p_config != META_FILTER_NONE
+	if( $p_config != META_FILTER_NONE
 	   && !is_blank( $p_config )
 	   && is_null( @config_get( $p_config ) )
 	) {
@@ -102,11 +102,11 @@ if( $t_filter_save ) {
 	# Save user's filter to the cookie
 	$t_cookie_string = implode(
 		':',
-		array(
+		[
 			$t_filter_user_value,
 			$t_filter_project_value,
 			$t_filter_config_value,
-		)
+		]
 	);
 	gpc_set_cookie( $t_cookie_name, $t_cookie_string, true );
 } else {
@@ -132,11 +132,11 @@ if( $t_filter_save ) {
 $t_sql = 'SELECT DISTINCT c.user_id AS config_uid, u.id, u.username, u.realname'
 		. ' FROM {config} c LEFT JOIN {user} u ON c.user_id=u.id'
 		. ' WHERE c.user_id <> :all_users ORDER BY c.user_id';
-$t_query = new DbQuery( $t_sql, array( 'all_users' => ALL_USERS ) );
-$t_users_list = array();
-$t_users_ids = array();
-$t_sort = array();
-$t_deleted_users = array();
+$t_query = new DbQuery( $t_sql, ['all_users' => ALL_USERS] );
+$t_users_list = [];
+$t_users_ids = [];
+$t_sort = [];
+$t_deleted_users = [];
 while( $t_row = $t_query->fetch() ) {
 	if( empty( $t_row['id'] ) ) {
 		# the user doesn't exist, deleted
@@ -168,10 +168,10 @@ array_multisort( $t_sort, SORT_ASC, SORT_NATURAL | SORT_FLAG_CASE, $t_users_list
 $t_users_list = array_combine( $t_users_ids, $t_users_list );
 
 # Prepend '[any]' and 'All Users' to the list
-$t_users_list = array(
-		META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
-		ALL_USERS        => lang_get( 'all_users' ),
-	)
+$t_users_list = [
+	META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
+	ALL_USERS        => lang_get( 'all_users' ),
+]
 	+ $t_users_list;
 
 # Get projects in db with specific configs
@@ -222,12 +222,12 @@ if( $t_filter_config_value != META_FILTER_NONE ) {
 	$t_sql .= ' AND config_id = :config_id';
 }
 $t_sql .= ' ORDER BY user_id, project_id, config_id ';
-$t_params = array(
+$t_params = [
 	'user_id' => $t_filter_user_value,
 	'project_id' => $t_filter_project_value,
 	'config_id' => $t_filter_config_value,
 	'complex' => CONFIG_TYPE_COMPLEX
-	);
+];
 $t_config_query = new DbQuery( $t_sql, $t_params );
 ?>
 
@@ -375,12 +375,12 @@ while( $t_row = $t_config_query->fetch() ) {
 
 	# For complex values, the content is not rendered
 	if( CONFIG_TYPE_COMPLEX == $v_type ) {
-		$t_url_params = array(
-					'user_id'       => $v_user_id,
-					'project_id'    => $v_project_id,
-					'config_option' => $v_config_id,
-					'action'        => MANAGE_CONFIG_ACTION_VIEW
-				);
+		$t_url_params = [
+			'user_id'       => $v_user_id,
+			'project_id'    => $v_project_id,
+			'config_option' => $v_config_id,
+			'action'        => MANAGE_CONFIG_ACTION_VIEW
+		];
 		$t_url_view = helper_url_combine( 'adm_config_page.php', http_build_query( $t_url_params ) );
 		$t_html_value = '<div class="adm_config_expand" data-config_id="' . $v_config_id . '"'
 				. ' data-project_id="' . $v_project_id . '" data-user_id="' . $v_user_id . '">'
@@ -396,7 +396,7 @@ while( $t_row = $t_config_query->fetch() ) {
 <!-- Repeated Info Rows -->
 			<tr class="visible-on-hover-toggle">
 				<td>
-					<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
+					<?php echo ( $v_user_id == 0 ) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 				</td>
 				<td><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
 				<td><?php echo string_display_line( $v_config_id ) ?></td>
@@ -410,11 +410,11 @@ while( $t_row = $t_config_query->fetch() ) {
 	<div class="btn-group inline visible-on-hover">
 <?php
 		if( config_can_delete( $v_config_id ) ) {
-			$t_action_params = array(
-					'user_id'       => $v_user_id,
-					'project_id'    => $v_project_id,
-					'config_option' => $v_config_id,
-				);
+			$t_action_params = [
+				'user_id'       => $v_user_id,
+				'project_id'    => $v_project_id,
+				'config_option' => $v_config_id,
+			];
 
 			# Update button
 			$t_action_params['action'] = MANAGE_CONFIG_ACTION_EDIT;
@@ -435,11 +435,11 @@ while( $t_row = $t_config_query->fetch() ) {
 			print_form_button(
 				'adm_config_delete.php',
 				lang_get( 'delete' ),
-				array(
+				[
 					'user_id'       => $v_user_id,
 					'project_id'    => $v_project_id,
 					'config_option' => $v_config_id,
-				),
+				],
 				$t_form_security_token
 			);
 			echo '</div>';

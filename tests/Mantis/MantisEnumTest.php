@@ -89,8 +89,8 @@ class MantisEnumTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testGetValues() {
-		$this->assertEquals( array( 10, 25, 40, 55, 70,90 ), MantisEnum::getValues( MantisEnumTest::ACCESS_LEVELS_ENUM, 10 ) );
-		$this->assertEquals( array(), MantisEnum::getValues( MantisEnumTest::EMPTY_ENUM, 10 ) );
+		$this->assertEquals( [10, 25, 40, 55, 70, 90], MantisEnum::getValues( MantisEnumTest::ACCESS_LEVELS_ENUM, 10 ) );
+		$this->assertEquals( [], MantisEnum::getValues( MantisEnumTest::EMPTY_ENUM, 10 ) );
 	}
 
 	/**
@@ -98,11 +98,11 @@ class MantisEnumTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testGetAssocArrayIndexedByValues() {
-		$this->assertEquals( array(), MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::EMPTY_ENUM ) );
-		$this->assertEquals( array( 10 => 'viewer' ), MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::SINGLE_VALUE_ENUM ) );
-		$this->assertEquals( array( 10 => 'viewer1' ), MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::DUPLICATE_VALUES_ENUM ) );
-		$this->assertEquals( array( 10 => 'viewer', 20 => 'viewer' ), MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::DUPLICATE_LABELS_ENUM ) );
-		$this->assertEquals( array( 10 => 'first label', 20 => 'second label' ), MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::NAME_WITH_SPACES_ENUM ) );
+		$this->assertEquals( [], MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::EMPTY_ENUM ) );
+		$this->assertEquals( [10 => 'viewer'], MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::SINGLE_VALUE_ENUM ) );
+		$this->assertEquals( [10 => 'viewer1'], MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::DUPLICATE_VALUES_ENUM ) );
+		$this->assertEquals( [10 => 'viewer', 20 => 'viewer'], MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::DUPLICATE_LABELS_ENUM ) );
+		$this->assertEquals( [10 => 'first label', 20 => 'second label'], MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::NAME_WITH_SPACES_ENUM ) );
 	}
 
 	/**
@@ -110,11 +110,11 @@ class MantisEnumTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testGetAssocArrayIndexedByLabels() {
-		$this->assertEquals( array(), MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::EMPTY_ENUM ) );
-		$this->assertEquals( array( 'viewer' => 10 ), MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::SINGLE_VALUE_ENUM ) );
-		$this->assertEquals( array( 'viewer1' => 10 ), MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::DUPLICATE_VALUES_ENUM ) );
-		$this->assertEquals( array( 'viewer' => 10, 'viewer' => 20 ), MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::DUPLICATE_LABELS_ENUM ) );
-		$this->assertEquals( array( 'first label' => 10, 'second label' => 20 ), MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::NAME_WITH_SPACES_ENUM ) );
+		$this->assertEquals( [], MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::EMPTY_ENUM ) );
+		$this->assertEquals( ['viewer' => 10], MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::SINGLE_VALUE_ENUM ) );
+		$this->assertEquals( ['viewer1' => 10], MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::DUPLICATE_VALUES_ENUM ) );
+		$this->assertEquals( ['viewer' => 10, 'viewer' => 20], MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::DUPLICATE_LABELS_ENUM ) );
+		$this->assertEquals( ['first label' => 10, 'second label' => 20], MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::NAME_WITH_SPACES_ENUM ) );
 	}
 
 	/**

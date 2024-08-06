@@ -36,7 +36,7 @@
  * @uses user_api
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -66,12 +66,12 @@ $f_edit_option          = gpc_get_string( 'config_option', null );
 $f_edit_action          = gpc_get_string( 'action', MANAGE_CONFIG_ACTION_VIEW );
 
 # Ensure we exclusively use one of the defined, valid actions (XSS protection)
-$t_valid_actions = array(
+$t_valid_actions = [
 	MANAGE_CONFIG_ACTION_CREATE,
 	MANAGE_CONFIG_ACTION_CLONE,
 	MANAGE_CONFIG_ACTION_EDIT,
 	MANAGE_CONFIG_ACTION_VIEW
-);
+];
 $t_edit_action = in_array( $f_edit_action, $t_valid_actions )
 	? $f_edit_action
 	: MANAGE_CONFIG_ACTION_CREATE;
@@ -97,11 +97,11 @@ $t_action_label = lang_get( 'set_configuration_option_action_' . $t_edit_action 
 if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 	# retrieve existing config data from database for this option
 	$t_query = new DbQuery( 'SELECT * FROM {config} WHERE config_id = :config AND user_id = :user AND project_id = :project' );
-	$t_query->bind_values(  array(
-			'config' => $f_edit_option,
-			'user' => $f_edit_user_id,
-			'project' => $f_edit_project_id
-		) );
+	$t_query->bind_values( [
+		'config' => $f_edit_option,
+		'user' => $f_edit_user_id,
+		'project' => $f_edit_project_id
+	] );
 	$t_config_row = $t_query->fetch();
 
 	if( !$t_config_row ) {
@@ -222,7 +222,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 					</td>
 					<td>
 						<?php
-                        $c_option_id = string_display_line( $t_option_id );
+						$c_option_id = string_display_line( $t_option_id );
 						if( $t_modify ) {
 						?>
 						<input type="text" name="config_option" class="input-sm"

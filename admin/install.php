@@ -37,7 +37,7 @@ error_reporting( E_ALL );
 # and plugins will not be loaded.
 const MANTIS_MAINTENANCE_MODE = true;
 
-require_once( dirname( __DIR__ ) . '/core.php' );
+require_once dirname( __DIR__ ) . '/core.php';
 require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
@@ -215,13 +215,13 @@ $t_config_exists = file_exists( $t_config_filename );
 
 # Initialize Oracle-specific values for prefix and suffix, and set
 # values for other db's as per config defaults
-$t_prefix_defaults = array(
-	'oci8' => array(
+$t_prefix_defaults = [
+	'oci8' => [
 		'db_table_prefix'        => 'm',
 		'db_table_plugin_prefix' => 'plg',
 		'db_table_suffix'        => '',
-	) ,
-);
+	],
+];
 foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
 	$t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
 }
@@ -304,7 +304,7 @@ if( $t_config_exists ) {
 		$g_db_connected = true;
 	}
 
-	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS);
+	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
@@ -337,7 +337,7 @@ print_test( 'Checking if safe mode is enabled for install script',
 
 <?php
 	# Check for custom config files in obsolete locations
-	$t_config_files = array(
+	$t_config_files = [
 		'config_inc.php' => 'move',
 		'custom_constants_inc.php' => 'move',
 		'custom_strings_inc.php' => 'move',
@@ -345,7 +345,7 @@ print_test( 'Checking if safe mode is enabled for install script',
 		'custom_relationships_inc.php' => 'move',
 		'mc_config_defaults_inc.php' => 'delete',
 		'mc_config_inc.php' => 'contents',
-	);
+	];
 
 	foreach( $t_config_files as $t_file => $t_action ) {
 		$t_dir = dirname( __DIR__ ) . '/';
@@ -481,9 +481,9 @@ if( 2 == $t_install_state ) {
 		$t_url_check = '';
 		if( !$f_path ) {
 			# Empty URL - warn admin about security risk
-			$t_url_check = "Using an empty path is a security risk, as MantisBT "
-				. "will dynamically set it based on headers from the HTTP request, "
-				. "exposing your system to Host Header Injection attacks.";
+			$t_url_check = 'Using an empty path is a security risk, as MantisBT '
+				. 'will dynamically set it based on headers from the HTTP request, '
+				. 'exposing your system to Host Header Injection attacks.';
 			$t_hard_fail = false;
 		} else {
 			# Make sure we have a trailing '/'
@@ -497,7 +497,7 @@ if( 2 == $t_install_state ) {
 				$t_page_contents = url_get( $f_path );
 				if( !$t_page_contents ) {
 					$t_url_check = "Can't retrieve web page at '$f_path'.";
-				} elseif( false === strpos( $t_page_contents, 'MantisBT') ) {
+				} elseif( false === strpos( $t_page_contents, 'MantisBT' ) ) {
 					$t_url_check = "Web page at '$f_path' does not appear to be a MantisBT site.";
 				}
 			}
@@ -580,7 +580,7 @@ if( 2 == $t_install_state ) {
 <?php
 	} # end if db open
 	} # end if failed DB checks
-	
+
 	if( !$g_failed ) {
 		$t_install_state++;
 	} else {
@@ -652,12 +652,12 @@ if( !$g_database_upgrade ) {
 		<select id="db_type" name="db_type" class="input-sm">
 <?php
 			# Build selection list of available DB types
-			$t_db_list = array(
+			$t_db_list = [
 				'mysqli'      => 'MySQL Improved',
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
-			);
+			];
 
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
 				echo '<option value="' . $t_db . '" ' .
@@ -749,11 +749,11 @@ if( !$g_database_upgrade ) {
 <?php
 # install-only fields: when upgrading, only display admin username and password
 if( !$g_database_upgrade ) {
-	$t_prefix_labels = array(
+	$t_prefix_labels = [
 		'db_table_prefix'        => 'Database Table Prefix',
 		'db_table_plugin_prefix' => 'Database Plugin Table Prefix',
 		'db_table_suffix'        => 'Database Table Suffix',
-	);
+	];
 	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
 		echo "<tr>\n\t<td>\n";
 		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
@@ -772,13 +772,13 @@ if( !$g_database_upgrade ) {
 		);
 		echo "\n&nbsp;";
 		if( $t_key != 'db_table_suffix' ) {
-			$t_id_sample = $t_key. '_sample';
+			$t_id_sample = $t_key . '_sample';
 			echo '<label for="' . $t_id_sample . '">Sample table name:</label>';
 			echo "\n", '<input id="' . $t_id_sample . '" type="text" size="40" disabled>';
 		} else {
 			echo '<span id="oracle_size_warning" >';
-			echo "On Oracle < 12cR2, max length for identifiers is 30 chars. "
-				. "Keep pre/suffixes as short as possible to avoid problems.";
+			echo 'On Oracle < 12cR2, max length for identifiers is 30 chars. '
+				. 'Keep pre/suffixes as short as possible to avoid problems.';
 			echo '<span>';
 		}
 		echo "\n\t</td>\n</tr>\n\n";
@@ -840,7 +840,7 @@ if( !$g_database_upgrade ) {
 <!-- Submit button -->
 <tr>
 	<td>
-		<?php echo ( $g_failed
+		<?php echo( $g_failed
 			? 'Please correct failed checks and try again'
 			: 'Attempt Installation' );
 		?>
@@ -898,9 +898,9 @@ if( 3 == $t_install_state ) {
 			/** @var ADODB_DataDict $t_dict */
 			$t_dict = NewDataDictionary( $g_db );
 
-			$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
+			$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, [
 				'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci',
-			) );
+			] );
 			$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 			if( $t_ret == 2 ) {
 				print_test_result( GOOD );
@@ -970,7 +970,7 @@ if( 3 == $t_install_state ) {
 		config_set_global( 'db_table_plugin_prefix', $f_db_table_plugin_prefix );
 		config_set_global( 'db_table_suffix', $f_db_table_suffix );
 		# database_api references this
-		require_once( __DIR__ . '/schema.php' );
+		require_once __DIR__ . '/schema.php';
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 		if( !$f_log_queries ) {
@@ -987,16 +987,16 @@ if( 3 == $t_install_state ) {
 
 			echo '<div class="space-6"></div>';
 			echo '<div class="alert alert-warning">';
-			echo "Please note that executing the generated script below <strong>may not result in a fully functional "
-				. "database</strong>, particularly in upgrade scenarios. This is due to the fact that some upgrade "
-				. "steps require the execution of PHP code; these <em>Upgrade Functions</em> are defined in "
+			echo 'Please note that executing the generated script below <strong>may not result in a fully functional '
+				. 'database</strong>, particularly in upgrade scenarios. This is due to the fact that some upgrade '
+				. 'steps require the execution of PHP code; these <em>Upgrade Functions</em> are defined in '
 				. '<a href="https://github.com/mantisbt/mantisbt/blob/master/core/install_helper_functions_api.php">install_helper_functions_api.php</a>'
-				. " and cannot be translated to SQL statements. Use at your own risk.";
+				. ' and cannot be translated to SQL statements. Use at your own risk.';
 			echo '</div>';
 
 			echo '<pre>';
-			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script". PHP_EOL;
-			echo "-- " . date("c") . PHP_EOL . PHP_EOL;
+			echo '-- MantisBT ' . MANTIS_VERSION . ' Database creation script' . PHP_EOL;
+			echo '-- ' . date( 'c' ) . PHP_EOL . PHP_EOL;
 		}
 
 		# Make sure we do the upgrades using UTF-8 if needed
@@ -1075,10 +1075,9 @@ if( 3 == $t_install_state ) {
 
 			try {
 				$t_is_integer = pgsql_get_column_type( $t_table, $t_column ) == 'integer';
-				$t_msg = "Column must be converted to INTEGER";
+				$t_msg = 'Column must be converted to INTEGER';
 				$t_exception_occured = false;
-			}
-			catch( Exception $e ) {
+			} catch( Exception $e ) {
 				$t_exception_occured = true;
 				$t_msg = $e->getMessage();
 			}
@@ -1113,7 +1112,7 @@ if( 3 == $t_install_state ) {
 			# No-op upgrade step - required for oci8
 			if( $g_upgrade[$i] === null ) {
 				$t_sql = false;
-				$t_sqlarray = array();
+				$t_sqlarray = [];
 				$t_operation = 'No operation';
 				$t_target = null;
 			} else {
@@ -1127,16 +1126,16 @@ if( 3 == $t_install_state ) {
 						break;
 
 					case 'UpdateSQL':
-						$t_sqlarray = array(
+						$t_sqlarray = [
 							$g_upgrade[$i][1],
-						);
+						];
 						$t_target = $g_upgrade[$i][1];
 						break;
 
 					case 'UpdateFunction':
-						$t_sqlarray = array(
+						$t_sqlarray = [
 							$g_upgrade[$i][1],
-						);
+						];
 						if( isset( $g_upgrade[$i][2] ) ) {
 							$t_sqlarray[] = $g_upgrade[$i][2];
 						}
@@ -1145,19 +1144,19 @@ if( 3 == $t_install_state ) {
 						break;
 
 					default:
-						$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+						$t_sqlarray = call_user_func_array( [$t_dict, $t_operation], $g_upgrade[$i][1] );
 
 						# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
 						if( isset( $g_upgrade[$i][2] ) ) {
 							if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
-								$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+								$t_sqlarray = call_user_func_array( [$t_dict, $t_operation], $g_upgrade[$i][1] );
 							} else {
 								$t_sql = false;
-								$t_sqlarray = array();
-								$t_operation = "No operation";
+								$t_sqlarray = [];
+								$t_operation = 'No operation';
 							}
 						} else {
-							$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+							$t_sqlarray = call_user_func_array( [$t_dict, $t_operation], $g_upgrade[$i][1] );
 						}
 						break;
 				}
@@ -1175,10 +1174,10 @@ if( 3 == $t_install_state ) {
 						echo htmlentities( $t_statement ) . $t_sql_end;
 					}
 				} elseif( $t_sqlarray ) {
-					echo "-- Execute PHP Update Function: install_" . htmlentities( $t_sqlarray[0] ) . "(";
+					echo '-- Execute PHP Update Function: install_' . htmlentities( $t_sqlarray[0] ) . '(';
 					# Convert the parameters array to a printable string
 					if( isset( $t_sqlarray[1] ) ) {
-						$t_params = array();
+						$t_params = [];
 						foreach( $t_sqlarray[1] as $t_param ) {
 							$t_value = var_export( $t_param, true );
 							if( is_array( $t_param ) ) {
@@ -1190,7 +1189,7 @@ if( 3 == $t_install_state ) {
 						}
 						echo htmlentities( implode( ', ', $t_params ) );
 					}
-					echo ")";
+					echo ')';
 				} else {
 					echo "-- $t_operation";
 				}
@@ -1224,7 +1223,7 @@ if( 3 == $t_install_state ) {
 							}
 						}
 					}
-					print_test_result( BAD, true, $t_all_sql  . $g_db->ErrorMsg() );
+					print_test_result( BAD, true, $t_all_sql . $g_db->ErrorMsg() );
 				}
 				echo '</tr>';
 			}
@@ -1232,14 +1231,14 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo "-- Set database version" . PHP_EOL;
+			echo '-- Set database version' . PHP_EOL;
 			if( $t_last_update == -1 ) {
-				echo "INSERT INTO " . db_get_table( 'config' )
-					. " ( value, type, access_reqd, config_id, project_id, user_id )"
+				echo 'INSERT INTO ' . db_get_table( 'config' )
+					. ' ( value, type, access_reqd, config_id, project_id, user_id )'
 					. " VALUES ($t_last_id, 1, 90, 'database_version', 0, 0 );"
 					. PHP_EOL;
 			} else {
-				echo "UPDATE " . db_get_table( 'config' )
+				echo 'UPDATE ' . db_get_table( 'config' )
 					. " SET value = $t_last_id"
 					. " WHERE config_id = 'database_version' AND project_id = 0 AND user_id = 0;"
 					. PHP_EOL;
@@ -1248,8 +1247,8 @@ if( 3 == $t_install_state ) {
 
 			echo '<div class="space-6"></div>';
 			echo '<div class="alert alert-danger">';
-			echo "<strong>Your database is not ready yet !</strong> "
-				. "Please create it, then install the tables and data using the above script before proceeding.";
+			echo '<strong>Your database is not ready yet !</strong> '
+				. 'Please create it, then install the tables and data using the above script before proceeding.';
 			echo '</div>';
 			echo '</td></tr>';
 		}
@@ -1333,9 +1332,9 @@ if( 5 == $t_install_state ) {
 		}
 		# With PHP 8.2 and later this should catch Random\RandomException instead
 		catch( Exception $e ) {
-			$t_crypto_failed_msg = "No appropriate source of randomness found. "
-				. "You will need to generate the Master Salt yourself "
-				. "and add it to the configuration file manually.";
+			$t_crypto_failed_msg = 'No appropriate source of randomness found. '
+				. 'You will need to generate the Master Salt yourself '
+				. 'and add it to the configuration file manually.';
 			print_test_result( BAD, false, $t_crypto_failed_msg );
 
 		}
@@ -1346,10 +1345,10 @@ if( 5 == $t_install_state ) {
 ?>
 
 <tr>
-    <td>
-        <?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
-        Configuration File (config/config_inc.php)<br />
-    </td>
+	<td>
+		<?php echo( $t_config_exists ? 'Updating' : 'Creating' ); ?>
+		Configuration File (config/config_inc.php)<br />
+	</td>
 <?php
 	# Generating the config_inc.php file
 
@@ -1378,7 +1377,7 @@ if( 5 == $t_install_state ) {
 	$t_config .=
 		  '$g_default_timezone       = \'' . addslashes( $f_timezone ) . '\';' . PHP_EOL
 		. PHP_EOL
-		. (!$t_crypto_master_salt ? "# The installer could not generate the Master Salt; please set it manually.\n" : '')
+		. ( !$t_crypto_master_salt ? "# The installer could not generate the Master Salt; please set it manually.\n" : '' )
 		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
 
 	if( $f_path ) {

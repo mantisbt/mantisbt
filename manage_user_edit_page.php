@@ -41,7 +41,7 @@
  * @noinspection PhpUnhandledExceptionInspection
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -84,7 +84,7 @@ if( is_blank( $f_username ) ) {
 $t_user = user_get_row( $t_user_id );
 if( !$t_user ) {
 	error_parameters( $t_user_id );
-	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR);
+	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
 }
 
 # Ensure that the account to be updated is of equal or lower access to the
@@ -129,7 +129,7 @@ print_manage_menu( 'manage_user_page.php' );
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-user', 'ace-icon' ); ?>
-				<?php echo lang_get('edit_user_title') ?>
+				<?php echo lang_get( 'edit_user_title' ) ?>
 			</h4>
 		</div>
 
@@ -214,7 +214,7 @@ print_manage_menu( 'manage_user_page.php' );
 								&& !user_is_email_unique( $t_user['email'], $t_user_id )
 							) {
 								echo '<span class="padding-8">';
-								print_icon('fa-exclamation-triangle',
+								print_icon( 'fa-exclamation-triangle',
 									'ace-icon bigger-125 red  padding-right-4'
 								);
 								echo lang_get( 'email_not_unique' );
@@ -279,7 +279,7 @@ print_manage_menu( 'manage_user_page.php' );
 						</td>
 					</tr>
 
-					<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
+					<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', [$t_user['id']] ); ?>
 				</table>
 			</div>
 		</div>
@@ -306,7 +306,7 @@ print_manage_menu( 'manage_user_page.php' );
 	# Information button
 	print_link_button( 'view_user_page.php?id=' . $t_user['id'],
 		lang_get( 'view_account_title' ),
-		"btn btn-primary btn-white btn-round pull-left"
+		'btn btn-primary btn-white btn-round pull-left'
 	);
 
 	# Impersonate Button
@@ -347,7 +347,7 @@ print_manage_menu( 'manage_user_page.php' );
 </form>
 </div>
 
-<?php event_signal( 'EVENT_MANAGE_USER_PAGE', array( $t_user_id ) ); ?>
+<?php event_signal( 'EVENT_MANAGE_USER_PAGE', [$t_user_id] ); ?>
 
 <?php
 # Project access sections are only shown if the current user's permissions
@@ -508,7 +508,7 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 <!-- ACCOUNT PREFERENCES -->
 <?php
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
-include( __DIR__ . '/account_prefs_inc.php' );
+include __DIR__ . '/account_prefs_inc.php';
 edit_account_prefs(
 	$t_user['id'],
 	false,

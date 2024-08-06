@@ -59,7 +59,7 @@ function wiki_init() {
 	}
 
 	# handle legacy style wiki integration
-	require_once( config_get_global( 'class_path' ) . 'MantisCoreWikiPlugin.class.php' );
+	require_once config_get_global( 'class_path' ) . 'MantisCoreWikiPlugin.class.php';
 	switch( $t_wiki_engine ) {
 		case 'dokuwiki':
 			plugin_child( 'MantisCoreDokuwiki' );
@@ -105,4 +105,3 @@ function wiki_link_bug( $p_bug_id ) {
 function wiki_link_project( $p_project_id ) {
 	return event_signal( 'EVENT_WIKI_LINK_PROJECT', $p_project_id );
 }
-

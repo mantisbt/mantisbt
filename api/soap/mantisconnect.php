@@ -36,7 +36,7 @@ $g_bypass_error_handler = true;
 
 $t_wsdl_path = __DIR__ . '/mantisconnect.wsdl';
 
-require_once( $t_mantis_dir . 'core.php' );
+require_once $t_mantis_dir . 'core.php';
 
 /**
  * Checks if the request for the webservice is a documentation request (eg:
@@ -67,8 +67,8 @@ if( !mci_is_webservice_call() ) {
 	# if we have a documentation request, do some tidy up to prevent lame bot loops
 	# e.g. /mantisconnect.php/mc_enum_etas/mc_project_get_versions/
 	$t_parts = explode( 'mantisconnect.php/', strtolower( $_SERVER['SCRIPT_NAME'] ), 2 );
-	if( isset( $t_parts[1] ) && (strlen( $t_parts[1] ) > 0 ) ) {
-		echo 'This is not a SOAP webservice request, for documentation, see ' .  $t_parts[0] . 'mantisconnect.php';
+	if( isset( $t_parts[1] ) && ( strlen( $t_parts[1] ) > 0 ) ) {
+		echo 'This is not a SOAP webservice request, for documentation, see ' . $t_parts[0] . 'mantisconnect.php';
 		exit();
 	}
 
@@ -76,20 +76,20 @@ if( !mci_is_webservice_call() ) {
 	$t_wsdl = file_get_contents( $t_wsdl_path );
 	$t_wsdl = str_replace(
 		'http://www.mantisbt.org/bugs/api/soap/mantisconnect.php',
-		config_get_global( 'path' ).'api/soap/mantisconnect.php',
+		config_get_global( 'path' ) . 'api/soap/mantisconnect.php',
 		$t_wsdl
 	);
 	echo $t_wsdl;
 	exit();
 }
 
-require_once( 'mc_core.php' );
+require_once 'mc_core.php';
 
 set_error_handler( 'mc_error_handler' );
 set_exception_handler( 'mc_error_exception_handler' );
 
 $t_server = new SoapServer( $t_wsdl_path,
-	array( 'features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS )
+	['features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS]
 );
 
 $t_server->addFunction( SOAP_FUNCTIONS_ALL );

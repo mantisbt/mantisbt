@@ -91,7 +91,7 @@ class DbQuery {
 	 * Array of values binded to anonymous parameters, indexed by numerical index.
 	 * @var array
 	 */
-	protected $query_autobind_array = array();
+	protected $query_autobind_array = [];
 
 	/**
 	 * Counter for assigning numerical indexes to anonymous parameters.
@@ -150,7 +150,7 @@ class DbQuery {
 	 * Array to manage late binding for IN constructs
 	 * @var array
 	 */
-	protected $late_binding_in_clause = array();
+	protected $late_binding_in_clause = [];
 
 	protected static $oracle_in_limit = 1000; # this could be a constant
 
@@ -171,7 +171,7 @@ class DbQuery {
 			$this->query_string = $p_query_string;
 		}
 		if( null === $p_bind_array ) {
-			$this->query_bind_array = array();
+			$this->query_bind_array = [];
 		} else {
 			$this->query_bind_array = $p_bind_array;
 		}
@@ -257,7 +257,7 @@ class DbQuery {
 		$this->process_bind_params();
 		$this->process_sql_syntax();
 
-		$t_result = $this->db_execute($p_limit, $p_offset);
+		$t_result = $this->db_execute( $p_limit, $p_offset );
 		db_param_pop();
 		return $t_result;
 	}
@@ -313,12 +313,12 @@ class DbQuery {
 		global $g_db_log_queries, $g_queries_array;
 		if( ON == $g_db_log_queries ) {
 			$t_query_text = db_format_query_log_msg( $this->db_query_string, $this->db_param_array );
-			log_event( LOG_DATABASE, array( $t_query_text, $this->db_query_time ) );
+			log_event( LOG_DATABASE, [$t_query_text, $this->db_query_time] );
 		} else {
 			# If not logging the queries the actual text is not needed
 			$t_query_text = '';
 		}
-		array_push( $g_queries_array, array( $t_query_text, $this->db_query_time ) );
+		array_push( $g_queries_array, [$t_query_text, $this->db_query_time] );
 	}
 
 	/**
@@ -376,7 +376,7 @@ class DbQuery {
 		}
 
 		$this->db_query_string = strtr( $this->db_query_string,
-			array( '{' => $s_prefix, '}' => $s_suffix )
+			['{' => $s_prefix, '}' => $s_suffix]
 			);
 
 		# check parameters for special treatment of boolean types
@@ -402,19 +402,19 @@ class DbQuery {
 	 * @param integer $p_counter_start
 	 * @return integer	Number of parameters created
 	 */
-	protected function process_bind_params( $p_counter_start = 0) {
+	protected function process_bind_params( $p_counter_start = 0 ) {
 		global $g_db;
 
 		# shortcut, if no values are binded, skip parameter replacement
 		if( empty( $this->query_autobind_array ) && empty( $this->query_bind_array ) ) {
 			$this->db_query_string = $this->query_string;
-			$this->db_param_array = array();
+			$this->db_param_array = [];
 		}
 
 		$t_query_string = $this->expanded_query_string;
 
 		$t_new_query = '';
-		$t_new_binds = array();
+		$t_new_binds = [];
 		$t_par_index = $p_counter_start;
 		$t_par_count = 0;
 		$t_parts = preg_split( '/(:[a-z0-9_]+)|(\$[0-9]+)/mi', $t_query_string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE );
@@ -435,7 +435,7 @@ class DbQuery {
 				}
 
 				if( is_array( $t_value ) ) {
-					$t_params_for_array = array();
+					$t_params_for_array = [];
 					foreach( $t_value as $t_array_item ) {
 						$t_params_for_array[] = $g_db->Param( $t_par_index );
 						$t_new_binds[$t_par_index] = $t_array_item;
@@ -481,7 +481,7 @@ class DbQuery {
 	 * @return string
 	 */
 	protected function helper_in_oracle_fix( $p_alias, array $p_values ) {
-		$t_in_tuples = array();
+		$t_in_tuples = [];
 		foreach( $p_values as $t_value ) {
 			$t_in_tuples[] = '(1,' . $this->param( $t_value ) . ')';
 		}
@@ -563,7 +563,7 @@ class DbQuery {
 			# is a label
 			# create placeholder for late binding
 			$t_new_index = count( $this->late_binding_in_clause );
-			$this->late_binding_in_clause[$t_new_index] = array();
+			$this->late_binding_in_clause[$t_new_index] = [];
 			$this->late_binding_in_clause[$t_new_index]['alias'] = $p_alias;
 			$this->late_binding_in_clause[$t_new_index]['label'] = $p_label_or_values;
 			$t_sql = '$in' . $t_new_index;
@@ -582,7 +582,7 @@ class DbQuery {
 		$t_query = $this->db_query_string;
 
 		# split the string by the relevant delimiters. The delimiters will be part of the split array
-		$t_parts = preg_split("/(')|( AS )|(CAST\s*\()/mi", $t_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+		$t_parts = preg_split( "/(')|( AS )|(CAST\s*\()/mi", $t_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE );
 		$t_is_literal = false;
 		$t_cast = 0;
 		$t_new_query = '';
@@ -626,13 +626,13 @@ class DbQuery {
 		if( is_array( $this->db_param_array ) ) {
 			preg_match( '/^[\s\n\r]*insert[\s\n\r]+(into){0,1}[\s\n\r]+(?P<table>[a-z0-9_]+)[\s\n\r]*\([\s\n\r]*[\s\n\r]*(?P<fields>[a-z0-9_,\s\n\r]+)[\s\n\r]*\)[\s\n\r]*values[\s\n\r]*\([\s\n\r]*(?P<values>[:a-z0-9_,\s\n\r]+)\)/i', $t_query, $t_matches );
 
-			if( isset( $t_matches['values'] ) ) { #if statement is a INSERT INTO ... (...) VALUES(...)
+			if( isset( $t_matches['values'] ) ) { # if statement is a INSERT INTO ... (...) VALUES(...)
 				# iterates non-empty bind variables
 				$i = 0;
 				$t_fields_left = $t_matches['fields'];
 				$t_values_left = $t_matches['values'];
 
-				//for( $t_arr_index = 0; $t_arr_index < count( $this->db_param_array ); $t_arr_index++ ) {
+				// for( $t_arr_index = 0; $t_arr_index < count( $this->db_param_array ); $t_arr_index++ ) {
 				foreach( $this->db_param_array as $t_arr_index => $t_arr_value ) {
 					# inserting fieldname search
 					if( preg_match( '/^[\s\n\r]*([a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i', $t_fields_left, $t_fieldmatch ) ) {
@@ -645,7 +645,7 @@ class DbQuery {
 						$t_values_arr[$i] = $t_valuematch[1];
 					}
 					# skip unsetting if bind array value not empty
-					//if( $this->db_param_array[$t_arr_index] !== '' ) {
+					// if( $this->db_param_array[$t_arr_index] !== '' ) {
 					if( $t_arr_value !== '' ) {
 						$i++;
 					} else {
@@ -714,7 +714,7 @@ class DbQuery {
 					$t_bind_num = $t_matches['bind_name'];
 
 					$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
-					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name']. $t_matches['after_var'];
+					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name'] . $t_matches['after_var'];
 
 					if( $this->db_param_array[$t_bind_num] === '' ) {
 						unset( $this->db_param_array[$t_bind_num] );
@@ -739,7 +739,7 @@ class DbQuery {
 					$t_removed_set_where = $t_matches['set_where'];
 					$t_query = $t_matches['before_set_where'] . $t_set_where_template_str . $t_matches['after_set_where'];
 
-					#Replace "SET fld1=:1" to "SET fld1=DEFAULT" if bind array value is empty
+					# Replace "SET fld1=:1" to "SET fld1=DEFAULT" if bind array value is empty
 					$t_removed_set_where_parsing = $t_removed_set_where;
 
 					while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r,]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[,\s\n\r]*[\d\D]*\z)/i', $t_removed_set_where_parsing, $t_matches ) > 0 ) {
@@ -781,7 +781,7 @@ class DbQuery {
 		global $g_db_param;
 
 		if( !is_array( $p_arr_parms ) ) {
-			$p_arr_parms = array();
+			$p_arr_parms = [];
 		}
 
 		$t_query = new DbQuery();
@@ -833,7 +833,7 @@ class DbQuery {
 		if( !$this->db_result ) {
 			return false;
 		}
-		$t_all_rows = array();
+		$t_all_rows = [];
 		while( $t_row = db_fetch_array( $this->db_result ) ) {
 			$t_all_rows[] = $t_row;
 		}
@@ -852,7 +852,7 @@ class DbQuery {
 	 * @param integer|string $p_index_or_name	Column name or numeric index
 	 * @return string|boolean	Value, or false if end of result or index is not valid
 	 */
-	public function value( $p_index_or_name = 0) {
+	public function value( $p_index_or_name = 0 ) {
 		if( !$this->current_row ) {
 			$this->fetch();
 		}
@@ -879,7 +879,7 @@ class DbQuery {
 	 * Alias for value()
 	 * @param integer|string $p_index_or_name	Column name or numeric index
 	 */
-	public function field( $p_index_or_name = 0) {
+	public function field( $p_index_or_name = 0 ) {
 		return $this->value( $p_index_or_name );
 	}
 

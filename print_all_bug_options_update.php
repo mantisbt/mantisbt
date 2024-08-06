@@ -34,7 +34,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
@@ -46,7 +46,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
 define( 'PRINT_ALL_BUG_OPTIONS_INC_ALLOW', true );
-include( __DIR__ . '/print_all_bug_options_inc.php' );
+include __DIR__ . '/print_all_bug_options_inc.php';
 
 form_security_validate( 'print_all_bug_options_update' );
 
@@ -82,7 +82,7 @@ $c_export = implode( '', $t_prefs_arr );
 # update preferences
 $t_query = 'UPDATE {user_print_pref} SET print_pref=' . db_param() . ' WHERE user_id=' . db_param();
 
-$t_result = db_query( $t_query, array( $c_export, $t_user_id ) );
+$t_result = db_query( $t_query, [$c_export, $t_user_id] );
 
 form_security_purge( 'print_all_bug_options_update' );
 
@@ -93,7 +93,7 @@ if( $t_result ) {
 	layout_page_begin();
 
 	echo '<div class="failure-msg">';
-	print error_string( ERROR_GENERIC ) . '<br />';
+	echo error_string( ERROR_GENERIC ) . '<br />';
 	print_link_button( $f_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 

@@ -59,8 +59,8 @@ function antispam_check() {
 	}
 
 	throw new ClientException(
-		"Hit rate limit threshold",
+		'Hit rate limit threshold',
 		ERROR_SPAM_SUSPECTED,
-		array( $t_antispam_max_event_count, $t_antispam_time_window_in_seconds )
+		[$t_antispam_max_event_count, $t_antispam_time_window_in_seconds]
 	);
 }

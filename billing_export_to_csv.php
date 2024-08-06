@@ -28,7 +28,7 @@
  * @uses csv_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'billing_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'csv_api.php' );
@@ -87,5 +87,3 @@ foreach( $t_billing_rows as $t_billing ) {
 	echo csv_escape_string( $t_billing['note'] );
 	echo $t_new_line;
 }
-
-

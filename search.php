@@ -33,7 +33,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -71,7 +71,7 @@ gpc_make_array( FILTER_PROPERTY_NOTE_USER_ID );
 $t_my_filter = filter_get_default();
 
 # gpc_get_*_array functions expect 2nd param to be an array
-$t_meta_filter_any_array = array( META_FILTER_ANY );
+$t_meta_filter_any_array = [META_FILTER_ANY];
 
 $t_my_filter[FILTER_PROPERTY_SEARCH] = gpc_get_string( FILTER_PROPERTY_SEARCH, '' );
 $t_my_filter[FILTER_PROPERTY_CATEGORY_ID] = gpc_get_string_array( FILTER_PROPERTY_CATEGORY_ID, $t_meta_filter_any_array );
@@ -134,7 +134,7 @@ if( $t_highlight_changed != -1 ) {
 }
 
 # Handle custom fields.
-$t_custom_fields = array();
+$t_custom_fields = [];
 foreach( $_GET as $t_var_name => $t_var_value ) {
 	if( strpos( $t_var_name, 'custom_field_' ) === 0 ) {
 		$t_custom_field_id = mb_substr( $t_var_name, 13 );
@@ -147,23 +147,23 @@ $t_my_filter['custom_fields'] = $t_custom_fields;
 # Handle class-based filters defined as plugins
 $t_plugin_filters = filter_get_plugin_filters();
 foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-    switch( $t_filter_object->type ) {
-        case FILTER_TYPE_STRING:
-            $t_my_filter[$t_field_name] = gpc_get_string( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
-            break;
-        case FILTER_TYPE_INT:
-            $t_my_filter[$t_field_name] = gpc_get_int( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
-            break;
-        case FILTER_TYPE_BOOLEAN:
-            $t_my_filter[$t_field_name] = gpc_get_bool( $t_field_name, $t_meta_filter_any_array[$t_field_name]);
-            break;
-        case FILTER_TYPE_MULTI_STRING:
-            $t_my_filter[$t_field_name] = gpc_get_string_array( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
-            break;
-        case FILTER_TYPE_MULTI_INT:
-            $t_my_filter[$t_field_name] = gpc_get_int_array( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
-            break;
-    }
+	switch( $t_filter_object->type ) {
+		case FILTER_TYPE_STRING:
+			$t_my_filter[$t_field_name] = gpc_get_string( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+			break;
+		case FILTER_TYPE_INT:
+			$t_my_filter[$t_field_name] = gpc_get_int( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+			break;
+		case FILTER_TYPE_BOOLEAN:
+			$t_my_filter[$t_field_name] = gpc_get_bool( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+			break;
+		case FILTER_TYPE_MULTI_STRING:
+			$t_my_filter[$t_field_name] = gpc_get_string_array( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+			break;
+		case FILTER_TYPE_MULTI_INT:
+			$t_my_filter[$t_field_name] = gpc_get_int_array( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+			break;
+	}
 }
 
 # Must use advanced filter so that the project_id is applied and multiple

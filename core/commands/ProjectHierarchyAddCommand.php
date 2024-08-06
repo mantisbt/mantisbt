@@ -21,7 +21,7 @@ require_api( 'project_api.php' );
 require_api( 'project_hierarchy_api.php' );
 
 $t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
-require_once( $t_soap_dir . 'mc_api.php' );
+require_once $t_soap_dir . 'mc_api.php';
 
 use Mantis\Exceptions\ClientException;
 
@@ -70,7 +70,7 @@ class ProjectHierarchyAddCommand extends Command {
 			throw new ClientException(
 				"Project '$this->project_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[$this->project_id] );
 		}
 
 		$this->subproject_id = mci_get_project_id( $this->payload( 'project' ), false );
@@ -80,12 +80,12 @@ class ProjectHierarchyAddCommand extends Command {
 			throw new ClientException(
 				"Project '$t_subproject_name' not found",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $t_subproject_name ) );
+				[$t_subproject_name] );
 		} else if ( !project_exists( $this->subproject_id ) ) {
 			throw new ClientException(
 				"Project '$this->subproject_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->subproject_id ) );
+				[$this->subproject_id] );
 		}
 
 		if( $this->project_id == $this->subproject_id ) {
@@ -105,7 +105,7 @@ class ProjectHierarchyAddCommand extends Command {
 			throw new ClientException(
 				"Project '$this->subproject_id' is already a subproject of '$this->project_id'",
 				ERROR_PROJECT_SUBPROJECT_DUPLICATE,
-				array( $this->subproject_id, $this->project_id ) );
+				[$this->subproject_id, $this->project_id] );
 		}
 
 		if( in_array( $this->project_id, project_hierarchy_get_all_subprojects( $this->subproject_id, true ) ) ) {
@@ -132,6 +132,6 @@ class ProjectHierarchyAddCommand extends Command {
 		project_hierarchy_add( $this->subproject_id, $this->project_id,
 			$this->payload( 'inherit_parent', true ) );
 
-		return array();
+		return [];
 	}
 }

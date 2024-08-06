@@ -22,10 +22,10 @@
  */
 
 $t_api_path = dirname( __DIR__, 2 ) . '/api/soap/';
-require_once( $t_api_path . 'mc_api.php' );
-require_once( $t_api_path . 'mc_account_api.php' );
-require_once( $t_api_path . 'mc_enum_api.php' );
-require_once( $t_api_path . 'mc_project_api.php' );
+require_once $t_api_path . 'mc_api.php';
+require_once $t_api_path . 'mc_account_api.php';
+require_once $t_api_path . 'mc_enum_api.php';
+require_once $t_api_path . 'mc_project_api.php';
 
 require_api( 'custom_field_api.php' );
 
@@ -64,7 +64,7 @@ class FilterConverter {
 	 * @return array The filter in API format ready to be converted to JSON.
 	 */
 	public function filterToJson( array $p_filter ) {
-		$t_filter = array();
+		$t_filter = [];
 		$t_filter['id'] = (int)$p_filter['id'];
 		$t_filter['name'] = $p_filter['name'];
 
@@ -90,7 +90,7 @@ class FilterConverter {
 	 */
 	private function filterCriteriaToJson( $p_criteria, $p_project_id ) {
 		$t_criteria = $p_criteria;
-	
+
 		$this->renameField( $t_criteria, FILTER_PROPERTY_HANDLER_ID, 'handler' );
 		$this->renameField( $t_criteria, FILTER_PROPERTY_REPORTER_ID, 'reporter' );
 		$this->renameField( $t_criteria, FILTER_PROPERTY_MONITOR_USER_ID, 'monitored' );
@@ -124,7 +124,7 @@ class FilterConverter {
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_VERSION, $p_project_id );
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_FIXED_IN_VERSION, $p_project_id );
 		$this->convertVersionArrayToJson( $t_criteria, FILTER_PROPERTY_TARGET_VERSION, $p_project_id );
-		
+
 		$this->convertProfileToJson( $t_criteria );
 		$this->convertStringArrayToJson( $t_criteria, FILTER_PROPERTY_PLATFORM );
 		$this->convertStringArrayToJson( $t_criteria, FILTER_PROPERTY_BUILD );
@@ -138,7 +138,7 @@ class FilterConverter {
 
 		$this->convertViewOptionsToJson( $t_criteria );
 		$this->convertSortOrder( $t_criteria );
-		
+
 		return $t_criteria;
 	}
 
@@ -153,10 +153,10 @@ class FilterConverter {
 	private function convertEnumToJson( &$p_criteria, $p_field, $p_enum_name ) {
 		if( isset( $p_criteria[$p_field] ) ) {
 			if( !is_array( $p_criteria[$p_field] ) ) {
-				$p_criteria[$p_field] = array( $p_criteria[$p_field] );
+				$p_criteria[$p_field] = [$p_criteria[$p_field]];
 			}
-	
-			$t_result = array();
+
+			$t_result = [];
 			foreach( $p_criteria[$p_field] as $t_enum_code ) {
 				switch( $t_enum_code ) {
 					case META_FILTER_ANY:
@@ -183,7 +183,7 @@ class FilterConverter {
 	 * @return void
 	 */
 	private function convertStringArrayToJson( &$p_criteria, $p_field ) {
-		$t_result = array();
+		$t_result = [];
 
 		if( isset( $p_criteria[$p_field] ) ) {
 			foreach( $p_criteria[$p_field] as $t_value ) {
@@ -192,10 +192,10 @@ class FilterConverter {
 						unset( $p_criteria[$p_field] );
 						return;
 					case META_FILTER_NONE:
-						$t_result[] = array( 'id' => '[none]' );
+						$t_result[] = ['id' => '[none]'];
 						break;
 					default:
-						$t_result[] = array( 'name' => $t_value );
+						$t_result[] = ['name' => $t_value];
 						break;
 				}
 			}
@@ -214,7 +214,7 @@ class FilterConverter {
 	 */
 	private function convertUserArrayToJson( &$p_criteria, $p_field ) {
 		if( isset( $p_criteria[$p_field] ) ) {
-			$t_result = array();
+			$t_result = [];
 
 			foreach( $p_criteria[$p_field] as $t_user ) {
 				switch( $t_user ) {
@@ -222,10 +222,10 @@ class FilterConverter {
 						unset( $p_criteria[$p_field] );
 						return;
 					case META_FILTER_NONE:
-						$t_result[] = array( 'id' => '[none]' );
+						$t_result[] = ['id' => '[none]'];
 						break;
 					case META_FILTER_MYSELF:
-						$t_result[] = array( 'id' => '[myself]' );
+						$t_result[] = ['id' => '[myself]'];
 						break;
 					default:
 						$t_result[] = mci_account_get_array_by_id( $t_user );
@@ -262,14 +262,14 @@ class FilterConverter {
 	private function convertCustomFieldsArrayToJson( &$p_criteria ) {
 		$t_field = 'custom_fields';
 		if( isset( $p_criteria[$t_field] ) ) {
-			$t_result = array();
+			$t_result = [];
 
 			foreach( $p_criteria[$t_field] as $t_cf_id => $t_cf_values ) {
-				$t_values = array();
+				$t_values = [];
 
 				foreach( $t_cf_values as $t_value ) {
 					if( $t_value === (int)META_FILTER_ANY || $t_value === (string)META_FILTER_ANY ) {
-						$t_values = array();
+						$t_values = [];
 						break;
 					} else if( $t_value === (int)META_FILTER_NONE || $t_value === (string)META_FILTER_NONE ) {
 						$t_values[] = '[none]';
@@ -278,9 +278,9 @@ class FilterConverter {
 					}
 
 					$t_def = custom_field_get_definition( $t_cf_id );
-					$t_cf = array(
-						'field' => array( 'id' => (int) $t_cf_id, 'name' => $t_def['name'] ),
-						'value' => $t_values );
+					$t_cf = [
+						'field' => ['id' => (int)$t_cf_id, 'name' => $t_def['name']],
+						'value' => $t_values];
 				}
 
 				if( !empty( $t_values ) ) {
@@ -306,7 +306,7 @@ class FilterConverter {
 	private function convertProjectArrayToJson( &$p_criteria ) {
 		$t_field = 'project';
 		if( isset( $p_criteria[$t_field] ) ) {
-			$t_result = array();
+			$t_result = [];
 			$t_count = count( $p_criteria[$t_field] );
 			foreach( $p_criteria[$t_field] as $t_project_id ) {
 				switch( $t_project_id ) {
@@ -316,7 +316,7 @@ class FilterConverter {
 							return;
 						}
 
-						$t_result[] = array( 'id' => '[current]' );
+						$t_result[] = ['id' => '[current]'];
 						break;
 					default:
 						$t_result[] = mci_project_as_array_by_id( $t_project_id );
@@ -338,7 +338,7 @@ class FilterConverter {
 	private function convertCategoryArrayToJson( &$p_criteria ) {
 		$t_field = 'category';
 		if( isset( $p_criteria[$t_field] ) ) {
-			$t_result = array();
+			$t_result = [];
 
 			foreach( $p_criteria[$t_field] as $t_value ) {
 				switch( $t_value ) {
@@ -368,7 +368,7 @@ class FilterConverter {
 	 */
 	private function convertVersionArrayToJson( &$p_criteria, $p_field, $p_project_id ) {
 		if( isset( $p_criteria[$p_field] ) ) {
-			$t_result = array();
+			$t_result = [];
 
 			foreach( $p_criteria[$p_field] as $t_version_string ) {
 				switch( $t_version_string ) {
@@ -395,7 +395,7 @@ class FilterConverter {
 	 * @return void
 	 */
 	private function convertSortOrder( &$p_criteria ) {
-		$t_result = array();
+		$t_result = [];
 
 		if( isset( $p_criteria[FILTER_PROPERTY_STICKY] ) ) {
 			$t_show_sticky_default = config_get_global( 'show_sticky_issues' );
@@ -408,8 +408,8 @@ class FilterConverter {
 		}
 
 		if( isset( $p_criteria['sort'] ) ) {
-			$t_sort_entry = array();
-			$t_sort_entry['field'] = array( 'name' => $p_criteria['sort'] );
+			$t_sort_entry = [];
+			$t_sort_entry['field'] = ['name' => $p_criteria['sort']];
 			unset( $p_criteria['sort'] );
 
 			if( isset( $p_criteria['dir'] ) ) {
@@ -418,7 +418,7 @@ class FilterConverter {
 			}
 
 			if( $t_sort_entry['field']['name'] != 'last_updated' || $t_sort_entry['dir'] != 'DESC' ) {
-				$t_result['fields'] = array( $t_sort_entry );
+				$t_result['fields'] = [$t_sort_entry];
 			}
 		}
 
@@ -447,14 +447,14 @@ class FilterConverter {
 			}
 
 			$t_elements = explode( ',', $p_criteria[$t_field] );
-			$t_result = array();
+			$t_result = [];
 			foreach( $t_elements as $t_element ) {
 				$t_element = trim( $t_element );
 				$t_tag_row = tag_get_by_name( $t_element );
-				$t_result[] = array(
+				$t_result[] = [
 					'id' => $t_tag_row['id'],
 					'name' => $t_tag_row['name'],
-					'owner' => mci_account_get_array_by_id( $t_tag_row['user_id'] ) );
+					'owner' => mci_account_get_array_by_id( $t_tag_row['user_id'] )];
 			}
 
 			unset( $p_criteria[$t_field ] );
@@ -472,7 +472,7 @@ class FilterConverter {
 		$t_field = 'profile';
 
 		if( isset( $p_criteria[$t_field] ) ) {
-			$t_result = array();
+			$t_result = [];
 
 			foreach( $p_criteria[$t_field] as $t_profile_id ) {
 				switch( $t_profile_id ) {
@@ -524,12 +524,12 @@ class FilterConverter {
 		if( isset( $p_criteria['relationship_type'] ) ) {
 			$t_issue_id = (int)$p_criteria['relationship_bug'];
 			if( $t_issue_id != 0 ) {
-				$t_result = array(
+				$t_result = [
 					'type' => relationship_get_name_for_api( $p_criteria['relationship_type'] ),
-					'issue' => array( 'id' => $t_issue_id )
-				);
-	
-				$p_criteria['relationship'] = $t_result;				
+					'issue' => ['id' => $t_issue_id]
+				];
+
+				$p_criteria['relationship'] = $t_result;
 			}
 
 			unset( $p_criteria['relationship_type'] );
@@ -544,7 +544,7 @@ class FilterConverter {
 	 * @return void
 	 */
 	private function convertViewOptionsToJson( &$p_criteria ) {
-		$t_result = array();
+		$t_result = [];
 
 		$t_page_size = (int)config_get_global( 'default_limit_view' );
 		if( isset( $p_criteria['per_page'] ) ) {
@@ -644,34 +644,34 @@ class FilterConverter {
 			$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] = (int)$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_MONTH];
 			$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] = (int)$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_YEAR];
 		}
-	
+
 		if( isset( $p_criteria[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) ) {
-			$t_start_date = sprintf( '%04d-%02d-%02d', 
+			$t_start_date = sprintf( '%04d-%02d-%02d',
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
 
-			$t_end_date = sprintf( '%04d-%02d-%02d', 
+			$t_end_date = sprintf( '%04d-%02d-%02d',
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
-			
-				$p_criteria['created_at'] = array( 'from' => $t_start_date, 'to' => $t_end_date );
+
+				$p_criteria['created_at'] = ['from' => $t_start_date, 'to' => $t_end_date];
 				$this->removeDateSubmitted( $p_criteria );
 		}
 
 		if( isset( $p_criteria[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) ) {
-			$t_start_date = sprintf( '%04d-%02d-%02d', 
+			$t_start_date = sprintf( '%04d-%02d-%02d',
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_YEAR],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_MONTH],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
 
-			$t_end_date = sprintf( '%04d-%02d-%02d', 
+			$t_end_date = sprintf( '%04d-%02d-%02d',
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_YEAR],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
-			
-			$p_criteria['updated_at'] = array( 'from' => $t_start_date, 'to' => $t_end_date );
+
+			$p_criteria['updated_at'] = ['from' => $t_start_date, 'to' => $t_end_date];
 			$this->remoteDateLastUpdated( $p_criteria );
 		}
 	}

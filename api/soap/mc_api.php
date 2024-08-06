@@ -270,7 +270,7 @@ class ApiObjectFactory {
 			case ERROR_TOKEN_NOT_FOUND:
 			case ERROR_USER_TOKEN_NOT_FOUND:
 				return ApiObjectFactory::faultNotFound( $p_exception->getMessage() );
-				
+
 			case ERROR_ACCESS_DENIED:
 			case ERROR_PROTECTED_ACCOUNT:
 			case ERROR_HANDLER_ACCESS_TOO_LOW:
@@ -326,11 +326,11 @@ class ApiObjectFactory {
 	 * @param integer $p_value Integer value to return as date time string.
 	 * @return datetime in expected API format.
 	 */
-	static function datetime($p_value ) {
+	static function datetime( $p_value ) {
 		$t_string_value = self::datetimeString( $p_value );
 
 		if( ApiObjectFactory::$soap ) {
-			return new SoapVar($t_string_value, XSD_DATETIME, 'xsd:dateTime');
+			return new SoapVar( $t_string_value, XSD_DATETIME, 'xsd:dateTime' );
 		}
 
 		return $t_string_value;
@@ -341,7 +341,7 @@ class ApiObjectFactory {
 	 * @param integer $p_timestamp Integer value to format as date time string.
 	 * @return string for provided timestamp
 	 */
-	static function datetimeString($p_timestamp ) {
+	static function datetimeString( $p_timestamp ) {
 		if( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
 			return null;
 		}
@@ -359,11 +359,11 @@ class ApiObjectFactory {
 			return false;
 		}
 
-		if( ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'SoapFault') {
+		if( ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'SoapFault' ) {
 			return true;
 		}
 
-		if( !ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'RestFault') {
+		if( !ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'RestFault' ) {
 			return true;
 		}
 
@@ -418,7 +418,7 @@ function mc_login( $p_username, $p_password ) {
  * @return array array of user data for the supplied user id
  */
 function mci_user_get( $p_user_id, $p_select = null ) {
-	$t_user_data = array();
+	$t_user_data = [];
 
 	# if user doesn't exist, then mci_account_get_array_by_id() will throw.
 	if( ApiObjectFactory::$soap ) {
@@ -463,7 +463,7 @@ function mci_user_get( $p_user_id, $p_select = null ) {
 
 		if( is_null( $p_select ) || in_array( 'projects', $p_select ) ) {
 			$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
-			$t_projects = array();
+			$t_projects = [];
 			foreach( $t_project_ids as $t_project_id ) {
 				$t_projects[] = mci_project_get( $t_project_id, $t_language, /* detail */ false );
 			}
@@ -490,10 +490,10 @@ function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
 	$t_user_access_level = access_get_project_level( $p_project_id, $t_user_id );
 
 	# Get project info that makes sense to publish via API.  For example, skip file_path.
-	$t_project = array(
+	$t_project = [
 		'id' => $p_project_id,
 		'name' => $t_row['name'],
-	);
+	];
 
 	if( $p_detail ) {
 		$t_project['status'] = mci_enum_get_array_by_id( (int)$t_row['status'], 'project_status', $p_lang );
@@ -699,18 +699,18 @@ function mci_profile_as_array_by_id( $p_profile_id ) {
 
 	try {
 		$t_profile = profile_get_row( $t_profile_id );
-	} catch (ClientException $e) {
+	} catch ( ClientException $e ) {
 		return null;
 	}
 
-	return array(
+	return [
 		'id' => $t_profile_id,
 		'user' => mci_account_get_array_by_id( $t_profile['user_id'] ),
 		'platform' => $t_profile['platform'],
 		'os' => $t_profile['os'],
 		'os_build' => $t_profile['os_build'],
 		'description' => $t_profile['description']
-	);
+	];
 }
 
 /**
@@ -731,12 +731,12 @@ function mci_related_issue_as_array_by_id( $p_issue_id ) {
 
 	$t_bug = bug_get( $t_issue_id );
 
-	$t_related_issue = array(
+	$t_related_issue = [
 		'id' => $t_bug->id,
 		'status' => mci_enum_get_array_by_id( $t_bug->status, 'status', $t_lang ),
 		'resolution' => mci_enum_get_array_by_id( $t_bug->resolution, 'resolution', $t_lang ),
 		'summary' => $t_bug->summary
-	);
+	];
 
 	if( !empty( $t_bug->handler_id ) ) {
 		if( access_has_bug_level(
@@ -885,7 +885,7 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 		$t_lang = $p_lang;
 	}
 
-	$t_result = array();
+	$t_result = [];
 	foreach( user_get_accessible_subprojects( $p_user_id, $p_parent_project_id ) as $t_subproject_id ) {
 		$t_result[] = mci_project_get_row( $t_subproject_id, $p_user_id, $t_lang );
 	}
@@ -914,10 +914,10 @@ function mci_get_version( $p_version, $p_project_id ) {
 		return $p_version;
 	}
 
-	return array(
+	return [
 		'id' => (int)$t_version_id,
 		'name' => $p_version,
-	);
+	];
 }
 
 /**
@@ -961,7 +961,7 @@ function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version
 			throw new ClientException(
 				"Version '$t_version_for_error' does not exist in project '$t_project_name'.",
 				ERROR_INVALID_FIELD_VALUE,
-				array( $p_field_name )
+				[$p_field_name]
 			);
 		}
 
@@ -993,10 +993,10 @@ function mci_get_category( $p_category_id ) {
 		return null;
 	}
 
-	return array(
+	return [
 		'id' => $p_category_id,
 		'name' => mci_null_if_empty( category_get_name( $p_category_id ) ),
-	);
+	];
 }
 
 /**
@@ -1045,7 +1045,7 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 			throw new ClientException(
 				'Category field must be supplied.',
 				ERROR_EMPTY_FIELD,
-				array( 'category' )
+				['category']
 			);
 		}
 
@@ -1070,7 +1070,7 @@ function mci_get_category_id( $p_category, $p_project_id ) {
  * @return array an array containing the id and the name of the category.
  */
 function mci_category_as_array_by_id( $p_category_id ) {
-	$t_result = array();
+	$t_result = [];
 	$t_result['id'] = $p_category_id;
 	$t_result['name'] = category_get_name( $p_category_id );
 	return $t_result;
@@ -1083,15 +1083,15 @@ function mci_category_as_array_by_id( $p_category_id ) {
  * @return array
  */
 function mci_project_version_as_array( array $p_version ) {
-	return array(
-			'id' => $p_version['id'],
-			'name' => $p_version['version'],
-			'project_id' => $p_version['project_id'],
-			'date_order' => ApiObjectFactory::datetime( $p_version['date_order'] ),
-			'description' => mci_null_if_empty( $p_version['description'] ),
-			'released' => $p_version['released'],
-			'obsolete' => $p_version['obsolete']
-		);
+	return [
+		'id' => $p_version['id'],
+		'name' => $p_version['version'],
+		'project_id' => $p_version['project_id'],
+		'date_order' => ApiObjectFactory::datetime( $p_version['date_order'] ),
+		'description' => mci_null_if_empty( $p_version['description'] ),
+		'released' => $p_version['released'],
+		'obsolete' => $p_version['obsolete']
+	];
 }
 
 /**
@@ -1135,7 +1135,7 @@ function mc_error_exception_handler( $p_exception ) {
 		$t_log = true;
 	} else {
 		$t_cause = 'Server';
-		$t_message = 'Internal Service Error';		
+		$t_message = 'Internal Service Error';
 		$t_log = true;
 	}
 
@@ -1210,7 +1210,7 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			$t_error_description = $p_error;
 			break;
 		default:
-			#shouldn't happen, just display the error just in case
+			# shouldn't happen, just display the error just in case
 			$t_error_type = '';
 			$t_error_description = $p_error;
 	}
@@ -1231,7 +1231,7 @@ function error_get_stack_trace() {
 
 	if( extension_loaded( 'xdebug' ) ) {
 
-		#check for xdebug presence
+		# check for xdebug presence
 		$t_stack = xdebug_get_function_stack();
 
 		# reverse the array in a separate line of code so the
@@ -1239,13 +1239,13 @@ function error_get_stack_trace() {
 		$t_stack = array_reverse( $t_stack );
 		array_shift( $t_stack );
 
-		#remove the call to this function from the stack trace
+		# remove the call to this function from the stack trace
 		foreach( $t_stack as $t_frame ) {
 			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' )
 				. ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' )
 				. ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
 
-			$t_args = array();
+			$t_args = [];
 			if( isset( $t_frame['params'] ) && ( count( $t_frame['params'] ) > 0 ) ) {
 				$t_trace .= ' Params: ';
 				foreach( $t_frame['params'] as $t_value ) {
@@ -1262,15 +1262,15 @@ function error_get_stack_trace() {
 	} else {
 		$t_stack = debug_backtrace();
 
-		array_shift( $t_stack ); #remove the call to this function from the stack trace
-		array_shift( $t_stack ); #remove the call to the error handler from the stack trace
+		array_shift( $t_stack ); # remove the call to this function from the stack trace
+		array_shift( $t_stack ); # remove the call to the error handler from the stack trace
 
 		foreach( $t_stack as $t_frame ) {
 			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' )
 				. ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' )
 				. ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
 
-			$t_args = array();
+			$t_args = [];
 			if( isset( $t_frame['args'] ) ) {
 				foreach( $t_frame['args'] as $t_value ) {
 					$t_args[] = error_build_parameter_string( $t_value );
@@ -1306,10 +1306,10 @@ function mci_fault_login_failed() {
  * @param string  $p_detail  The optional details to append to the error message.
  * @return RestFault|SoapFault
  */
-function mci_fault_access_denied($p_user_id = 0, $p_detail = '' ) {
+function mci_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
 	if( $p_user_id ) {
 		$t_user_name = user_get_name( $p_user_id );
-		$t_reason = 'Access denied for user '. $t_user_name . '.';
+		$t_reason = 'Access denied for user ' . $t_user_name . '.';
 	} else {
 		$t_reason = 'Access denied';
 	}
@@ -1328,7 +1328,7 @@ function mci_fault_access_denied($p_user_id = 0, $p_detail = '' ) {
  * @return void
  */
 function mci_remove_null_keys( &$p_array ) {
-	$t_keys_to_remove = array();
+	$t_keys_to_remove = [];
 
 	foreach( $p_array as $t_key => $t_value ) {
 		if( is_null( $t_value ) ) {
@@ -1348,7 +1348,7 @@ function mci_remove_null_keys( &$p_array ) {
  * @return void
  */
 function mci_remove_empty_arrays( &$p_array ) {
-	$t_keys_to_remove = array();
+	$t_keys_to_remove = [];
 
 	foreach( $p_array as $t_key => $t_value ) {
 		if( is_array( $t_value ) && empty( $t_value ) ) {

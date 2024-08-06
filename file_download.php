@@ -41,7 +41,7 @@ define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 $g_bypass_headers = true; # suppress headers as we will send our own later
 define( 'COMPRESSION_DISABLED', true );
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -92,7 +92,7 @@ switch( $f_type ) {
 	default:
 		access_denied();
 }
-$t_result = db_query( $t_query, array( $c_file_id ) );
+$t_result = db_query( $t_query, [$c_file_id] );
 $t_row = db_fetch_array( $t_result );
 if( false === $t_row ) {
 	# Attachment not found
@@ -186,19 +186,19 @@ if( $t_content_type_override ) {
 # Decide what should open inline in the browser vs. download as attachment
 # https://www.thoughtco.com/mime-types-by-content-type-3469108
 $t_show_inline = $f_show_inline;
-$t_mime_force_inline = array(
+$t_mime_force_inline = [
 	'application/pdf',
 	'image/bmp',
 	'image/gif',
 	'image/jpeg',
 	'image/png',
 	'image/tiff',
-);
-$t_mime_force_attachment = array(
+];
+$t_mime_force_attachment = [
 	'application/x-shockwave-flash',
 	'image/svg+xml', # SVG could contain CSS or scripting, see #30384
 	'text/html',
-);
+];
 
 # extract mime type from content type
 $t_mime_type = explode( ';', $t_content_type, 2 );

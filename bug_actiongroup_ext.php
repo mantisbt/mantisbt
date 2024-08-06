@@ -36,7 +36,7 @@
  * @uses string_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'bug_group_action_api.php' );
@@ -54,7 +54,7 @@ auth_ensure_user_authenticated();
 helper_begin_long_process();
 
 $f_action = gpc_get_string( 'action' );
-$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
+$f_bug_arr = gpc_get_int_array( 'bug_arr', [] );
 
 $t_form_name = 'bug_actiongroup_' . $f_action;
 
@@ -63,8 +63,8 @@ form_security_validate( $t_form_name );
 bug_group_action_init( $f_action );
 
 # group bugs by project
-$t_projects_bugs = array();
-$t_view_bug_threshold = array();
+$t_projects_bugs = [];
+$t_view_bug_threshold = [];
 $t_user = auth_get_current_user_id();
 foreach( $f_bug_arr as $t_key => $t_bug_id ) {
 	bug_ensure_exists( $t_bug_id );
@@ -89,11 +89,11 @@ foreach( $f_bug_arr as $t_key => $t_bug_id ) {
 	if( isset( $t_projects_bugs[$t_bug->project_id] ) ) {
 		$t_projects_bugs[$t_bug->project_id][] = $t_bug_id;
 	} else {
-		$t_projects_bugs[$t_bug->project_id] = array( $t_bug_id );
+		$t_projects_bugs[$t_bug->project_id] = [$t_bug_id];
 	}
 }
 
-$t_failed_ids = array();
+$t_failed_ids = [];
 
 foreach( $t_projects_bugs as $t_project_id => $t_bugs ) {
 	$g_project_override = $t_project_id;

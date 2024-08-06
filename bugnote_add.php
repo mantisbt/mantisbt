@@ -29,7 +29,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'file_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -40,25 +40,25 @@ form_security_validate( 'bugnote_add' );
 $f_bug_id = gpc_get_int( 'bug_id' );
 $f_text = gpc_get_string( 'bugnote_text', '' );
 $f_duration = gpc_get_string( 'time_tracking', '0:00' );
-$f_files = gpc_get_file( 'ufile', array() );
+$f_files = gpc_get_file( 'ufile', [] );
 
-$t_query = array( 'issue_id' => $f_bug_id );
+$t_query = ['issue_id' => $f_bug_id];
 
-$t_payload = array(
+$t_payload = [
 	'text' => $f_text,
-	'view_state' => array(
+	'view_state' => [
 		'id' => gpc_get_bool( 'private' ) ? VS_PRIVATE : VS_PUBLIC
-	),
-	'time_tracking' => array(
+	],
+	'time_tracking' => [
 		'duration' => $f_duration
-	),
+	],
 	'files' => helper_array_transpose( $f_files )
-);
+];
 
-$t_data = array(
+$t_data = [
 	'query' => $t_query,
 	'payload' => $t_payload,
-);
+];
 
 $t_command = new IssueNoteAddCommand( $t_data );
 $t_command->execute();

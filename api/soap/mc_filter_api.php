@@ -32,7 +32,7 @@
 require_api( 'filter_constants_inc.php' );
 
 // doesn't contain 'custom_fields' and project_id
-$g_soap_api_to_filter_names = array(
+$g_soap_api_to_filter_names = [
 	'search' => FILTER_PROPERTY_SEARCH,
 	'category' => FILTER_PROPERTY_CATEGORY_ID,
 	'severity_id' => FILTER_PROPERTY_SEVERITY,
@@ -69,7 +69,7 @@ $g_soap_api_to_filter_names = array(
 	'last_update_end_year' => FILTER_PROPERTY_LAST_UPDATED_END_YEAR,
 	'tag_string' => FILTER_PROPERTY_TAG_STRING,
 	'tag_select' => FILTER_PROPERTY_TAG_SELECT,
-);
+];
 
 
 /**
@@ -91,7 +91,7 @@ function mc_filter_get( $p_username, $p_password, $p_project_id, $p_filter_id = 
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_result = array();
+	$t_result = [];
 	$t_filter_rows = filter_db_get_available_queries(
 		$p_project_id,
 		$t_user_id,
@@ -103,8 +103,8 @@ function mc_filter_get( $p_username, $p_password, $p_project_id, $p_filter_id = 
 			continue;
 		}
 
-		if( ApiObjectFactory::$soap ) {	
-			$t_filter = array();
+		if( ApiObjectFactory::$soap ) {
+			$t_filter = [];
 			$t_filter['id'] = (int)$t_filter_row['id'];
 			$t_filter['name'] = $t_filter_row['name'];
 			$t_filter['owner'] = mci_account_get_array_by_id( $t_filter_row['user_id'] );
@@ -195,7 +195,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 
 	# TODO: we should have a better way to do this.
 	global $g_project_override;
-	$g_project_override = $p_project_id;	
+	$g_project_override = $p_project_id;
 
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
 	$t_page_count = 0;
@@ -214,10 +214,10 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if( $t_orig_page_number > $p_page_number ) {
-		return array();
+		return [];
 	}
 
-	$t_result = array();
+	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang, $p_fields );
 	}
@@ -252,7 +252,7 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	if( null === $t_filter ) {
 		return ApiObjectFactory::faultServerError( 'Invalid Filter' );
 	}
-	$t_result = array();
+	$t_result = [];
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
@@ -285,14 +285,13 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 		$p_filter_search = get_object_vars( $p_filter_search );
 	}
 
-	$t_project_id = array();
+	$t_project_id = [];
 	if( isset( $p_filter_search['project_id'] ) ) {
 		// check access right to all projects
 		foreach( $p_filter_search['project_id'] as $t_id ) {
 			if( mci_has_readonly_access( $p_user_id, $t_id ) ) {
 				$t_project_id[] = $t_id;
-			}
-			else {
+			} else {
 				error_log( 'User: ' . $p_user_id . ' has not access right to project: ' . $t_id . '.' );
 			}
 		}
@@ -300,21 +299,20 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 		if( count( $t_project_id ) < 1 ) {
 			return mci_fault_access_denied( $p_user_id );
 		}
-	}
-	else {
+	} else {
 		if( !mci_has_readonly_access( $p_user_id, ALL_PROJECTS ) ) {
 			return mci_fault_access_denied( $p_user_id );
 		}
 
-		$t_project_id = array( ALL_PROJECTS );
+		$t_project_id = [ALL_PROJECTS];
 	}
 
-	$t_filter = array( '_view_type' => FILTER_VIEW_TYPE_ADVANCED );
+	$t_filter = ['_view_type' => FILTER_VIEW_TYPE_ADVANCED];
 	$t_filter['project_id'] = $t_project_id;
 
 	// default fields
 	foreach( $g_soap_api_to_filter_names as $t_soap_name => $t_filter_name ) {
-		if( isset ( $p_filter_search[$t_soap_name] ) ) {
+		if( isset( $p_filter_search[$t_soap_name] ) ) {
 
 			$t_value = $p_filter_search[$t_soap_name];
 			$t_filter[$t_filter_name] = $t_value;
@@ -322,7 +320,7 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 	}
 
 	// custom fields
-	if( isset ( $p_filter_search['custom_fields'] ) ) {
+	if( isset( $p_filter_search['custom_fields'] ) ) {
 		foreach( $p_filter_search['custom_fields'] as $t_custom_field ) {
 
 			// object to array
@@ -338,8 +336,7 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 			// if is set custom_field's id, use it primary
 			if( isset( $t_field['id'] ) ) {
 				$t_custom_field_id = $t_field['id'];
-			}
-			else {
+			} else {
 				$t_custom_field_id = custom_field_get_id_from_name( $t_field['name'] );
 			}
 
@@ -349,20 +346,20 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 	}
 
 	// date fields
-	if( isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ) ) {
+	if( isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] )
+		|| isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ) ) {
 		$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
 	}
-	if( isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ) ) {
+	if( isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] )
+		|| isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ) ) {
 		$t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = 'on';
 }
 
@@ -392,9 +389,9 @@ function mc_filter_search_issue_headers( $p_username, $p_password, $p_filter_sea
 		return mci_fault_login_failed();
 	}
 
-	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page );
 
-	$t_result = array();
+	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = mci_issue_data_as_header_array( $t_issue_data );
 	}
@@ -420,11 +417,11 @@ function mc_filter_search_issues( $p_username, $p_password, $p_filter_search, $p
 		return mci_fault_login_failed();
 	}
 
-	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page );
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
-	$t_result = array();
+	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
 	}
@@ -450,9 +447,9 @@ function mc_filter_search_issue_ids( $p_username, $p_password, $p_filter_search,
 		return mci_fault_login_failed();
 	}
 
-	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page );
 
-	$t_result = array();
+	$t_result = [];
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = $t_issue_data->id;
 	}

@@ -65,11 +65,11 @@ function form_security_token( $p_form_name ) {
 		return '';
 	}
 
-	$t_tokens = session_get( 'form_security_tokens', array() );
+	$t_tokens = session_get( 'form_security_tokens', [] );
 
 	# Create a new array for the form name if necessary
 	if( !isset( $t_tokens[$p_form_name] ) || !is_array( $t_tokens[$p_form_name] ) ) {
-		$t_tokens[$p_form_name] = array();
+		$t_tokens[$p_form_name] = [];
 	}
 
 	# Generate a nonce prefixed by date.
@@ -80,7 +80,7 @@ function form_security_token( $p_form_name ) {
 
 	# Add the token to the user's session
 	if( !isset( $t_tokens[$p_form_name][$t_date] ) ) {
-		$t_tokens[$p_form_name][$t_date] = array();
+		$t_tokens[$p_form_name][$t_date] = [];
 	}
 
 	$t_tokens[$p_form_name][$t_date][$t_string] = true;
@@ -149,7 +149,7 @@ function form_security_validate( $p_form_name ) {
 		return true;
 	}
 
-	$t_tokens = session_get( 'form_security_tokens', array() );
+	$t_tokens = session_get( 'form_security_tokens', [] );
 
 	# Short-circuit if we don't have any tokens for the given form name
 	if( !isset( $t_tokens[$p_form_name] ) || !is_array( $t_tokens[$p_form_name] ) || count( $t_tokens[$p_form_name] ) < 1 ) {
@@ -192,7 +192,7 @@ function form_security_purge( $p_form_name ) {
 		return;
 	}
 
-	$t_tokens = session_get( 'form_security_tokens', array() );
+	$t_tokens = session_get( 'form_security_tokens', [] );
 
 	# Short-circuit if we don't have any tokens for the given form name
 	if( !isset( $t_tokens[$p_form_name] ) || !is_array( $t_tokens[$p_form_name] ) || count( $t_tokens[$p_form_name] ) < 1 ) {

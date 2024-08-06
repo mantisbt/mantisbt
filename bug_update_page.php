@@ -46,7 +46,7 @@
  * @uses version_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -163,7 +163,7 @@ layout_page_begin();
 	<form id="update_bug_form" method="post" action="bug_update.php">
 		<?php echo form_security_field( 'bug_update' ); ?>
 		<input type="hidden" name="bug_id" value="<?php echo $t_bug_id ?>" />
-        <input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
+		<input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
 
 		<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
@@ -196,7 +196,7 @@ if( $t_top_buttons_enabled ) {
 ?>
 			<tbody>
 <?php
-event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $t_bug_id ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', [$t_bug_id] );
 
 if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $t_show_date_submitted | $t_show_last_updated ) {
 	#
@@ -234,12 +234,12 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<td>';
 
 	if( $t_show_category ) {
-        if( !category_is_enabled( $t_bug->category_id ) ) {
+		if( !category_is_enabled( $t_bug->category_id ) ) {
 			print_icon( 'warning',
 				'fa-status-box bigger-125 red',
 				lang_get( 'category_disabled' )
 			);
-			echo "&nbsp;";
+			echo '&nbsp;';
 		}
 		echo '<select ' . helper_get_tab_index()
 			. ( $t_allow_no_category ? '' : ' required' )
@@ -346,7 +346,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 				$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 			}
 			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
-				'data-picker-locale="' . lang_get_current_datetime_locale() .  '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
+				'data-picker-locale="' . lang_get_current_datetime_locale() . '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
 				'maxlength="16" value="' . $t_date_to_display . '" />';
 			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
 		} else {
@@ -636,7 +636,7 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 	echo '</tr>';
 }
 
-event_signal( 'EVENT_UPDATE_BUG_FORM', array( $t_bug_id ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM', [$t_bug_id] );
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
@@ -766,7 +766,7 @@ if( config_get( 'time_tracking_enabled' ) ) {
 	}
 }
 
-event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $t_bug_id ) );
+event_signal( 'EVENT_BUGNOTE_ADD_FORM', [$t_bug_id] );
 
 echo '</table>';
 echo '</div>';
@@ -792,7 +792,7 @@ if( $t_bottom_buttons_enabled ) {
 
 <?php
 define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-include( __DIR__ . '/bugnote_view_inc.php' );
+include __DIR__ . '/bugnote_view_inc.php';
 layout_page_end();
 
 last_visited_issue( $t_bug_id );

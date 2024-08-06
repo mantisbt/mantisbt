@@ -36,7 +36,7 @@
  * @uses string_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -77,7 +77,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-sitemap', 'ace-icon' ); ?>
-				<?php echo lang_get('edit_project_category_title') ?>
+				<?php echo lang_get( 'edit_project_category_title' ) ?>
 			</h4>
 		</div>
 		<div class="widget-body">

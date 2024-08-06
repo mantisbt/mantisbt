@@ -51,7 +51,7 @@
  * @var bool   $t_force_readonly
  * @var bool   $t_show_page_header
  * @var string $t_mantis_dir
-
+ *
  * Ignoring warnings caused by includes with a dynamic path
  * @noinspection PhpIncludeInspection
  */
@@ -103,10 +103,10 @@ $f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 $f_bug_id = $f_issue_id;
 $t_bug = bug_get( $f_bug_id, true );
 
-$t_data = array(
-	'query' => array( 'id' => $f_issue_id ),
-	'options' => array( 'force_readonly' => $t_force_readonly )
-);
+$t_data = [
+	'query' => ['id' => $f_issue_id],
+	'options' => ['force_readonly' => $t_force_readonly]
+];
 $t_cmd = new IssueViewPageCommand( $t_data );
 $t_result = $t_cmd->execute();
 
@@ -196,11 +196,11 @@ if( $t_bugslist ) {
 	$t_index = array_search( $f_issue_id, $t_bugslist );
 	if( false !== $t_index ) {
 		if( isset( $t_bugslist[$t_index-1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+			print_small_button( 'view.php?id=' . $t_bugslist[$t_index-1], '&lt;&lt;' );
 		}
 
 		if( isset( $t_bugslist[$t_index+1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
+			print_small_button( 'view.php?id=' . $t_bugslist[$t_index+1], '&gt;&gt;' );
 		}
 	}
 }
@@ -234,7 +234,7 @@ if( $t_bottom_buttons_enabled ) {
 echo '<tbody>';
 
 if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show'] ||
-    $t_flags['view_state_show'] || $t_flags['created_at_show'] || $t_flags['updated_at_show']
+	$t_flags['view_state_show'] || $t_flags['created_at_show'] || $t_flags['updated_at_show']
 ) {
 
 	# Labels
@@ -263,7 +263,7 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 				'bigger-125 red',
 				lang_get( 'category_disabled' )
 			);
-			echo "&nbsp;";
+			echo '&nbsp;';
 		}
 		echo string_display_line( $t_issue['category']['name'] );
 	}
@@ -451,7 +451,7 @@ if( $t_flags['projection_show'] || $t_flags['eta_show'] ) {
 
 if( ( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is_blank( $t_issue['platform'] ) ) ||
 	( $t_flags['profiles_os_show'] && isset( $t_issue['os'] ) && !is_blank( $t_issue['os'] ) ) ||
-    ( $t_flags['profiles_os_build_show'] && isset( $t_issue['os_build'] ) && !is_blank( $t_issue['os_build'] ) ) ) {
+	( $t_flags['profiles_os_build_show'] && isset( $t_issue['os_build'] ) && !is_blank( $t_issue['os_build'] ) ) ) {
 	$t_spacer = 0;
 
 	echo '<tr>';
@@ -492,7 +492,7 @@ if( ( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is
 #
 
 if( ( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) ) ||
-    ( $t_flags['versions_product_build_show'] && isset( $t_issue['build'] ) ) ) {
+	( $t_flags['versions_product_build_show'] && isset( $t_issue['build'] ) ) ) {
 	$t_spacer = 2;
 
 	echo '<tr>';
@@ -524,7 +524,7 @@ if( ( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) 
 #
 
 if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_version'] ) ) ||
-    ( $t_flags['versions_fixed_in_version_show'] && isset( $t_issue['fixed_in_version'] ) ) ) {
+	( $t_flags['versions_fixed_in_version_show'] && isset( $t_issue['fixed_in_version'] ) ) ) {
 	$t_spacer = 2;
 
 	echo '<tr>';
@@ -556,7 +556,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 # Bug Details Event Signal
 #
 
-event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $f_issue_id ) );
+event_signal( 'EVENT_VIEW_BUG_DETAILS', [$f_issue_id] );
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
@@ -667,7 +667,7 @@ echo '</div></div></div></div></div>';
 # User list sponsoring the bug
 if( $t_flags['sponsorships_show'] ) {
 	define( 'BUG_SPONSORSHIP_LIST_VIEW_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
+	include $t_mantis_dir . 'bug_sponsorship_list_view_inc.php';
 }
 
 # Bug Relationships
@@ -728,14 +728,14 @@ if( $t_flags['monitor_show'] ) {
 						echo ' <a class="btn btn-xs btn-primary btn-white btn-round" '
 							. 'href="' . helper_mantis_url( 'bug_monitor_delete.php' )
 							. '?bug_id=' . $f_issue_id . '&amp;user_id=' . $t_monitor_user['id']
-							. htmlspecialchars(form_security_param( 'bug_monitor_delete' ))
+							. htmlspecialchars( form_security_param( 'bug_monitor_delete' ) )
 							. '">'
 							. icon_get( 'fa-times' )
 							. '</a>';
 					}
 				 }
 			}
-	
+
 			if( $t_flags['monitor_can_add'] ) {
 	?>
 			<br /><br />
@@ -761,30 +761,30 @@ if( $t_flags['monitor_show'] ) {
 # Bugnotes and "Add Note" box
 if( 'ASC' == current_user_get_pref( 'bugnote_order' ) ) {
 	define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bugnote_view_inc.php' );
+	include $t_mantis_dir . 'bugnote_view_inc.php';
 
 	if( !$t_force_readonly ) {
 		define( 'BUGNOTE_ADD_INC_ALLOW', true );
-		include( $t_mantis_dir . 'bugnote_add_inc.php' );
+		include $t_mantis_dir . 'bugnote_add_inc.php';
 	}
 } else {
 	if( !$t_force_readonly ) {
 		define( 'BUGNOTE_ADD_INC_ALLOW', true );
-		include( $t_mantis_dir . 'bugnote_add_inc.php' );
+		include $t_mantis_dir . 'bugnote_add_inc.php';
 	}
 
 	define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bugnote_view_inc.php' );
+	include $t_mantis_dir . 'bugnote_view_inc.php';
 }
 
 # Allow plugins to display stuff after notes
-event_signal( 'EVENT_VIEW_BUG_EXTRA', array( $f_issue_id ) );
+event_signal( 'EVENT_VIEW_BUG_EXTRA', [$f_issue_id] );
 
 # Time tracking statistics
 if( config_get( 'time_tracking_enabled' ) &&
 	access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_issue_id ) ) {
 	define( 'BUGNOTE_STATS_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bugnote_stats_inc.php' );
+	include $t_mantis_dir . 'bugnote_stats_inc.php';
 }
 
 # History
@@ -1045,7 +1045,7 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 		<div class="widget-toolbox padding-8 clearfix">
 <?php
 		# Default relationship buttons
-		$t_buttons = array();
+		$t_buttons = [];
 		if( $t_relationship_graph ) {
 			$t_buttons[lang_get( 'relation_graph' )] =
 				'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation';
@@ -1124,7 +1124,7 @@ function bug_view_button_bug_change_status( BugData $p_bug ) {
 		# Add close if user is bug's reporter, still has rights to report issues
 		# (to prevent users downgraded to viewers from updating issues) and
 		# reporters are allowed to close their own issues
-		(  bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
+		( bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
 		&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id )
 		&& ON == config_get( 'allow_reporter_close' )
 		),
@@ -1170,16 +1170,16 @@ function bug_view_button_bug_change_status( BugData $p_bug ) {
  */
 function bug_view_button_bug_assign_to( BugData $p_bug ) {
 	$t_current_user_id = auth_get_current_user_id();
-	$t_options = array();
+	$t_options = [];
 	$t_default_assign_to = null;
 
 	if( ( $p_bug->handler_id != $t_current_user_id )
 		&& access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug->id, $t_current_user_id )
 	) {
-		$t_options[] = array(
+		$t_options[] = [
 			$t_current_user_id,
 			'[' . lang_get( 'myself' ) . ']',
-		);
+		];
 		$t_default_assign_to = $t_current_user_id;
 	}
 
@@ -1187,10 +1187,10 @@ function bug_view_button_bug_assign_to( BugData $p_bug ) {
 		&& user_exists( $p_bug->reporter_id )
 		&& access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug->id, $p_bug->reporter_id )
 	) {
-		$t_options[] = array(
+		$t_options[] = [
 			$p_bug->reporter_id,
 			'[' . lang_get( 'reporter' ) . ']',
-		);
+		];
 
 		if( $t_default_assign_to === null ) {
 			$t_default_assign_to = $p_bug->reporter_id;
@@ -1263,7 +1263,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	# UPDATE button
 	if( $p_flags['can_update'] ) {
 		echo '<div class="pull-left padding-right-8">';
-		html_button( string_get_bug_update_page(), lang_get( 'edit' ), array( 'bug_id' => $p_bug_id ) );
+		html_button( string_get_bug_update_page(), lang_get( 'edit' ), ['bug_id' => $p_bug_id] );
 		echo '</div>';
 	}
 
@@ -1284,35 +1284,35 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	# Unmonitor
 	if( $p_flags['can_unmonitor'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+		html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), ['bug_id' => $p_bug_id] );
 		echo '</div>';
 	}
 
 	# Monitor
 	if( $p_flags['can_monitor'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+		html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), ['bug_id' => $p_bug_id] );
 		echo '</div>';
 	}
 
 	# Stick
 	if( $p_flags['can_sticky'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
+		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), ['bug_id' => $p_bug_id, 'action' => 'stick'] );
 		echo '</div>';
 	}
 
 	# Unstick
 	if( $p_flags['can_unsticky'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
+		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), ['bug_id' => $p_bug_id, 'action' => 'unstick'] );
 		echo '</div>';
 	}
 
 	# CLONE button
 	if( $p_flags['can_clone'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
+		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), ['m_id' => $p_bug_id] );
 		echo '</div>';
 	}
 
@@ -1323,7 +1323,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 		html_button(
 			'bug_change_status_page.php',
 			lang_get( 'reopen_bug_button' ),
-			array( 'id' => $t_bug->id, 'new_status' => $t_reopen_status, 'change_type' => BUG_UPDATE_TYPE_REOPEN ) );
+			['id' => $t_bug->id, 'new_status' => $t_reopen_status, 'change_type' => BUG_UPDATE_TYPE_REOPEN] );
 		echo '</div>';
 	}
 
@@ -1334,26 +1334,25 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 		html_button(
 			'bug_change_status_page.php',
 			lang_get( 'close' ),
-			array( 'id' => $t_bug->id, 'new_status' => $t_closed_status, 'change_type' => BUG_UPDATE_TYPE_CLOSE ) );
+			['id' => $t_bug->id, 'new_status' => $t_closed_status, 'change_type' => BUG_UPDATE_TYPE_CLOSE] );
 		echo '</div>';
 	}
 
 	# MOVE button
 	if( $p_flags['can_move'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_actiongroup_page.php', lang_get( 'move' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
+		html_button( 'bug_actiongroup_page.php', lang_get( 'move' ), ['bug_arr[]' => $p_bug_id, 'action' => 'MOVE'] );
 		echo '</div>';
 	}
 
 	# DELETE button
 	if( $p_flags['can_delete'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_actiongroup_page.php', lang_get( 'delete' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
+		html_button( 'bug_actiongroup_page.php', lang_get( 'delete' ), ['bug_arr[]' => $p_bug_id, 'action' => 'DELETE'] );
 		echo '</div>';
 	}
 
-	helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
+	helper_call_custom_function( 'print_bug_view_page_custom_buttons', [$p_bug_id] );
 
 	echo '</div>';
 }
-

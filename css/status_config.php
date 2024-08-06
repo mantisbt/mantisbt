@@ -28,7 +28,7 @@
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
-@require_once( dirname( __DIR__ ) . '/core.php' );
+@require_once dirname( __DIR__ ) . '/core.php';
 require_api( 'config_api.php' );
 
 /**

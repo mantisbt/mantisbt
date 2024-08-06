@@ -110,8 +110,8 @@ class Period {
 	}
 
 	/**
- 	 * set dates for this month
- 	 *
+	 * set dates for this month
+	 *
 	 * @return void
 	 */
 	function this_month() {
@@ -146,7 +146,7 @@ class Period {
 	 */
 	function a_quarter( $p_when ) {
 		list( $t_year, $t_month, $t_day ) = explode( '-', $p_when );
-		$t_month = ( (int)(( $t_month - 1 ) / 3 ) * 3 ) + 1;
+		$t_month = ( (int)( ( $t_month - 1 ) / 3 ) * 3 ) + 1;
 		$this->end = strftime( '%Y-%m-%d 23:59:59', mktime( 0, 0, 0, $t_month + 3, 0, $t_year ) );
 		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, $t_month, 1, $t_year ) );
 	}
@@ -177,7 +177,7 @@ class Period {
 	function quarter_to_date() {
 		$this->end = date( 'Y-m-d' ) . ' 23:59:59';
 		list( $t_year, $t_month, $t_day ) = explode( '-', $this->end );
-		$t_month = ( (int)(( $t_month - 1 ) / 3 ) * 3 ) + 1;
+		$t_month = ( (int)( ( $t_month - 1 ) / 3 ) * 3 ) + 1;
 		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, $t_month, 1, $t_year ) );
 	}
 
@@ -260,7 +260,7 @@ class Period {
 
 	/**
 	 * get number of days in interval
-     * @return integer
+	 * @return integer
 	 */
 	function get_elapsed_days() {
 		return( $this->get_end_timestamp() - $this->get_start_timestamp() ) / ( 24 * 60 * 60 );
@@ -270,10 +270,10 @@ class Period {
 	 * print a period selector
 	 *
 	 * @param string $p_control_name Value representing the name of the html control on the web page.
-     * @return string
+	 * @return string
 	 */
 	function period_selector( $p_control_name ) {
-		$t_periods = array(
+		$t_periods = [
 			0 => plugin_lang_get( 'period_none' ),
 			7 => plugin_lang_get( 'period_this_week' ),
 			8 => plugin_lang_get( 'period_last_week' ),
@@ -285,7 +285,7 @@ class Period {
 			5 => plugin_lang_get( 'period_year_to_date' ),
 			6 => plugin_lang_get( 'period_last_year' ),
 			10 => plugin_lang_get( 'period_select' ),
-		);
+		];
 		$t_default = gpc_get_int( $p_control_name, 0 );
 		$t_formatted_start = $this->get_start_formatted();
 		$t_formatted_end = $this->get_end_formatted();

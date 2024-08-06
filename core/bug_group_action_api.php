@@ -59,7 +59,7 @@ function bug_group_action_init( $p_action ) {
 	if( !file_exists( $t_include_file ) ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	} else {
-		require_once( $t_include_file );
+		require_once $t_include_file;
 	}
 }
 
@@ -110,7 +110,7 @@ function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
  * @return void
  */
 function bug_group_action_print_results( array $p_failed_ids ) {
-	$t_format = "<tr>"
+	$t_format = '<tr>'
 		. "\n\t" . '<td width="50%%">%s' . lang_get( 'word_separator' ) . '%s</td>'
 		. "\n\t" . '<td>%s</td>'
 		. "\n</tr>\n";
@@ -207,12 +207,12 @@ function bug_group_action_process( $p_action, $p_bug_id ) {
  */
 function bug_group_action_get_commands( array $p_project_ids = null ) {
 	if( $p_project_ids === null || count( $p_project_ids ) == 0 ) {
-		$p_project_ids = array( ALL_PROJECTS );
+		$p_project_ids = [ALL_PROJECTS];
 	}
 
 	$t_user_id = auth_get_current_user_id();
 
-	$t_commands = array();
+	$t_commands = [];
 	version_cache_array_rows( $p_project_ids );
 	foreach( $p_project_ids as $t_project_id ) {
 

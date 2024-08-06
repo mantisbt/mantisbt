@@ -40,10 +40,10 @@ require_api( 'user_pref_api.php' );
 
 # Cache of localization strings in the language specified by the last
 # lang_load call
-$g_lang_strings = array();
+$g_lang_strings = [];
 
 # stack for language overrides
-$g_lang_overrides = array();
+$g_lang_overrides = [];
 
 # To be used in custom_strings_inc.php :
 $g_active_language = '';
@@ -67,10 +67,10 @@ function lang_load( $p_lang, $p_dir = null ) {
 	}
 
 	if( $p_dir === null ) {
-		include_once( config_get_global( 'language_path' ) . 'strings_' . $p_lang . '.txt' );
+		include_once config_get_global( 'language_path' ) . 'strings_' . $p_lang . '.txt';
 	} else {
 		if( is_file( $p_dir . 'strings_' . $p_lang . '.txt' ) ) {
-			include_once( $p_dir . 'strings_' . $p_lang . '.txt' );
+			include_once $p_dir . 'strings_' . $p_lang . '.txt';
 		}
 	}
 
@@ -80,7 +80,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 	global $g_config_path;
 
 	if( file_exists( $g_config_path . 'custom_strings_inc.php' ) ) {
-		include( $g_config_path . 'custom_strings_inc.php' );
+		include $g_config_path . 'custom_strings_inc.php';
 	}
 
 	$t_vars = get_defined_vars();
@@ -142,7 +142,7 @@ function lang_map_auto() {
 		$t_auto_map = config_get_global( 'language_auto_map' );
 
 		# Expand language map
-		$t_auto_map_exp = array();
+		$t_auto_map_exp = [];
 		foreach( $t_auto_map as $t_encs => $t_enc_lang ) {
 			$t_encs_arr = explode( ',', $t_encs );
 
@@ -191,11 +191,11 @@ function lang_ensure_loaded( $p_lang ) {
 }
 
 /**
-* Check if the given language exists
-*
-* @param string $p_lang The language name.
-* @return boolean
-*/
+ * Check if the given language exists
+ *
+ * @param string $p_lang The language name.
+ * @return boolean
+ */
 function lang_language_exists( $p_lang ) {
 	$t_valid_langs = config_get( 'language_choices_arr' );
 	$t_valid = in_array( $p_lang, $t_valid_langs, true );

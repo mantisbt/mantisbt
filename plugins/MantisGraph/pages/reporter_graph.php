@@ -50,12 +50,12 @@ $t_mantisgraph->print_submenu();
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-bar-chart', 'ace-icon' ); ?>
-					<?php echo plugin_lang_get('graph_topreporter_fixed') ?>
+					<?php echo plugin_lang_get( 'graph_topreporter_fixed' ) ?>
 				</h4>
 			</div>
 <?php
 			$t_metrics = create_reporter_summary( $t_filter );
-			graph_bar( $t_metrics, 2 /*wfactor*/ );
+			graph_bar( $t_metrics, 2 /* wfactor */ );
 ?>
 		</div>
 	</div>

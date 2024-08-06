@@ -65,7 +65,7 @@ class VersionDeleteCommand extends Command {
 			throw new ClientException(
 				"Project '$this->project_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[$this->project_id] );
 		}
 
 		$t_access_level = config_get(
@@ -85,7 +85,7 @@ class VersionDeleteCommand extends Command {
 			throw new ClientException(
 				"Version with id '$this->version_id' not found",
 				ERROR_VERSION_NOT_FOUND,
-				array( $this->version_id ) );
+				[$this->version_id] );
 		}
 	}
 
@@ -109,4 +109,3 @@ class VersionDeleteCommand extends Command {
 		return [];
 	}
 }
-

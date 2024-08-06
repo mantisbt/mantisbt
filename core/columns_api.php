@@ -71,7 +71,7 @@ require_api( 'string_api.php' );
  * @return array The columns array after removing the disabled features.
  */
 function columns_filter_disabled( array $p_columns ) {
-	$t_columns = array();
+	$t_columns = [];
 	$t_enable_profiles = null;
 	$t_enable_due_date = null;
 
@@ -176,7 +176,7 @@ function columns_get_plugin_columns() {
 	static $s_column_array = null;
 
 	if( is_null( $s_column_array ) ) {
-		$s_column_array = array();
+		$s_column_array = [];
 
 		$t_all_plugin_columns = event_signal( 'EVENT_FILTER_COLUMNS' );
 		foreach( $t_all_plugin_columns as $t_plugin => $t_plugin_columns ) {
@@ -212,7 +212,7 @@ function columns_get_custom_fields() {
 	}
 
 	$t_all_cfids = custom_field_get_ids();
-	$t_col_names = array();
+	$t_col_names = [];
 	foreach( $t_all_cfids as $t_id ) {
 		$t_col_names[] = column_get_custom_field_column_name( $t_id );
 	}
@@ -327,7 +327,7 @@ function column_is_sortable( $p_column ) {
 		return $t_plugin_obj->sortable;
 	}
 
-	#standard fields: define exceptions here
+	# standard fields: define exceptions here
 	switch( $p_column ) {
 		case 'selection':
 		case 'edit':
@@ -479,7 +479,7 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
 	}
 
 	# Check for duplicate fields
-	$t_columns_no_duplicates = array();
+	$t_columns_no_duplicates = [];
 	foreach( $p_columns_to_validate as $t_column ) {
 		$t_column_lower = mb_strtolower( $t_column );
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
@@ -504,7 +504,7 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
  */
 function columns_remove_invalid( array $p_columns, array $p_columns_all ) {
 	$t_columns_all_lower = array_values( array_map( 'mb_strtolower', $p_columns_all ) );
-	$t_columns = array();
+	$t_columns = [];
 
 	foreach( $p_columns as $t_column ) {
 		if( in_array( mb_strtolower( $t_column ), $t_columns_all_lower ) ) {
@@ -712,7 +712,7 @@ function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target
  * @access public
  */
 function print_column_title_tags( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-tags">' . lang_get('tags') . '</th>';
+	echo '<th class="column-tags">' . lang_get( 'tags' ) . '</th>';
 }
 
 /**
@@ -1521,7 +1521,7 @@ function print_column_summary( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	} else {
 		$t_summary = string_display_line_links( $p_bug->summary );
 	}
-	
+
 	$t_bug_url = string_get_bug_view_url( $p_bug->id );
 	echo '<td class="column-summary"><a href="' . $t_bug_url . '">' . $t_summary . '</a></td>';
 }
@@ -1657,7 +1657,7 @@ function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARG
 		$t_css = '';
 		$t_value = '&#160;';
 	} else {
-		$t_css = " due-" . bug_overdue_level( $p_bug->id );
+		$t_css = ' due-' . bug_overdue_level( $p_bug->id );
 		$t_value = string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 	}
 

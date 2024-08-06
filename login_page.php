@@ -40,7 +40,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -133,7 +133,7 @@ if( $f_error || $f_cookie_error ) {
 	echo '</div>';
 }
 
-$t_warnings = array();
+$t_warnings = [];
 $t_upgrade_required = false;
 
 if( config_get_global( 'admin_checks' ) == ON ) {
@@ -185,7 +185,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
 	if( $t_admin_dir_is_accessible ) {
-		require_once( 'admin/schema.php' );
+		require_once 'admin/schema.php';
 		/** @var array $g_upgrade */
 		$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
@@ -196,8 +196,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 				$t_warnings[] = lang_get( 'error_database_version_out_of_date_2'
 				);
 				$t_upgrade_required = true;
-			}
-			else {
+			} else {
 				$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
 			}
 		}
@@ -252,7 +251,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 if( count( $t_warnings ) > 0 ) {
 	echo '<div class="space-10"></div>';
 	echo '<div class="alert alert-warning">';
-	foreach( $t_warnings AS $t_warning ) {
+	foreach( $t_warnings as $t_warning ) {
 		echo '<p>' . $t_warning . '</p>';
 	}
 	echo '</div>';

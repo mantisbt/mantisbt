@@ -83,17 +83,17 @@ function relgraph_bug_format_id( $p_bug_id ) {
  */
 function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 	# List of visited issues and their data.
-	$v_bug_list = array();
-	$v_rel_list = array();
+	$v_bug_list = [];
+	$v_rel_list = [];
 
 	# Queue for breadth-first
-	$v_queue = array();
+	$v_queue = [];
 
 	# Now we visit all related issues.
 	$t_max_depth = config_get( 'relationship_graph_max_depth' );
 
 	# Put the first element into queue.
-	array_push( $v_queue, array( 0, $p_bug_id ) );
+	array_push( $v_queue, [0, $p_bug_id] );
 
 	# And now we process it
 	while( !empty( $v_queue ) ) {
@@ -127,7 +127,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 			}
 
 			if( $t_depth < $t_max_depth ) {
-				array_push( $v_queue, array( $t_depth + 1, $t_dst ) );
+				array_push( $v_queue, [$t_depth + 1, $t_dst] );
 			}
 		}
 
@@ -143,7 +143,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 			}
 
 			if( $t_depth < $t_max_depth ) {
-				array_push( $v_queue, array( $t_depth + 1, $t_dst ) );
+				array_push( $v_queue, [$t_depth + 1, $t_dst] );
 			}
 		}
 	}
@@ -158,10 +158,10 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 	$t_view_on_click = config_get( 'relationship_graph_view_on_click' );
 	$t_neato_tool = config_get_global( 'neato_tool' );
 
-	$t_graph_attributes = array(
+	$t_graph_attributes = [
 		'overlap'	=> 'false',
 		'overlap_scaling' => '0',
-	);
+	];
 
 	if( !empty( $t_graph_fontpath ) ) {
 		$t_graph_attributes['fontpath'] = $t_graph_fontpath;
@@ -169,20 +169,20 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 
 	$t_graph = new Graph( $t_id_string, $t_graph_attributes, $t_neato_tool );
 
-	$t_graph->set_default_node_attr( array (
-			'fontname'	=> $t_graph_fontname,
-			'fontsize'	=> $t_graph_fontsize,
-			'shape'		=> 'record',
-			'style'		=> 'filled',
-			'height'	=> '0.2',
-			'width'		=> '0.4'
-	) );
+	$t_graph->set_default_node_attr( [
+		'fontname'	=> $t_graph_fontname,
+		'fontsize'	=> $t_graph_fontsize,
+		'shape'		=> 'record',
+		'style'		=> 'filled',
+		'height'	=> '0.2',
+		'width'		=> '0.4'
+	] );
 
-	$t_graph->set_default_edge_attr( array (
-			'style'		=> 'solid',
-			'color'		=> '#0000C0',
-			'dir'		=> 'none'
-	) );
+	$t_graph->set_default_edge_attr( [
+		'style'		=> 'solid',
+		'color'		=> '#0000C0',
+		'dir'		=> 'none'
+	] );
 
 	$t_url_format = 'bug_relationship_graph.php?bug_id=%d&graph=relation'
 		. ( $p_show_summary ? '&summary=1' : '' );
@@ -220,7 +220,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 				if( isset( $g_relationships[$t_relation] ) && isset( $g_relationships[$t_relation]['#edge_style'] ) ) {
 					$t_edge_style = $g_relationships[$t_relation]['#edge_style'];
 				} else {
-					$t_edge_style = array();
+					$t_edge_style = [];
 				}
 
 				$t_graph->add_edge( $t_id_string, $t_related_id, $t_edge_style );
@@ -241,7 +241,7 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
  */
 function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_summary = false ) {
 	# List of visited issues and their data.
-	$v_bug_list = array();
+	$v_bug_list = [];
 
 	# Firstly, we visit all ascendant issues and all descendant issues
 	# and collect all the necessary data in the $v_bug_list variable.
@@ -255,8 +255,8 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 
 	$v_bug_list[$p_bug_id] = $p_bug;
 	$v_bug_list[$p_bug_id]->is_descendant = true;
-	$v_bug_list[$p_bug_id]->parents = array();
-	$v_bug_list[$p_bug_id]->children = array();
+	$v_bug_list[$p_bug_id]->parents = [];
+	$v_bug_list[$p_bug_id]->children = [];
 
 	# Now we visit all ascendants of the root issue.
 	$t_relationships = relationship_get_all_dest( $p_bug_id );
@@ -289,7 +289,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 	$t_view_on_click = config_get( 'relationship_graph_view_on_click' );
 	$t_dot_tool = config_get_global( 'dot_tool' );
 
-	$t_graph_attributes = array();
+	$t_graph_attributes = [];
 
 	if( !empty( $t_graph_fontpath ) ) {
 		$t_graph_attributes['fontpath'] = $t_graph_fontpath;
@@ -304,20 +304,20 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_
 
 	$t_graph = new Digraph( $t_id_string, $t_graph_attributes, $t_dot_tool );
 
-	$t_graph->set_default_node_attr( array (
-			'fontname'	=> $t_graph_fontname,
-			'fontsize'	=> $t_graph_fontsize,
-			'shape'		=> 'record',
-			'style'		=> 'filled',
-			'height'	=> '0.2',
-			'width'		=> '0.4'
-	) );
+	$t_graph->set_default_node_attr( [
+		'fontname'	=> $t_graph_fontname,
+		'fontsize'	=> $t_graph_fontsize,
+		'shape'		=> 'record',
+		'style'		=> 'filled',
+		'height'	=> '0.2',
+		'width'		=> '0.4'
+	] );
 
-	$t_graph->set_default_edge_attr( array (
-			'style'		=> 'solid',
-			'color'		=> '#C00000',
-			'dir'		=> 'back'
-	) );
+	$t_graph->set_default_edge_attr( [
+		'style'		=> 'solid',
+		'color'		=> '#C00000',
+		'dir'		=> 'back'
+	] );
 
 	$t_url_format = 'bug_relationship_graph.php?bug_id=%d&graph=dependency&orientation=' . $t_graph_orientation
 		. ( $p_show_summary ? '&summary=1' : '' );
@@ -377,8 +377,8 @@ function relgraph_add_parent( array &$p_bug_list, $p_bug_id ) {
 	# Add the issue to the list.
 	$p_bug_list[$p_bug_id] = $t_bug;
 	$p_bug_list[$p_bug_id]->is_descendant = false;
-	$p_bug_list[$p_bug_id]->parents = array();
-	$p_bug_list[$p_bug_id]->children = array();
+	$p_bug_list[$p_bug_id]->parents = [];
+	$p_bug_list[$p_bug_id]->children = [];
 
 	# Add all parent issues to the list of parents and visit them
 	# recursively.
@@ -450,8 +450,8 @@ function relgraph_add_child( array &$p_bug_list, $p_bug_id ) {
 		# Add the issue to the list.
 		$p_bug_list[$p_bug_id] = $t_bug;
 		$p_bug_list[$p_bug_id]->is_descendant = true;
-		$p_bug_list[$p_bug_id]->parents = array();
-		$p_bug_list[$p_bug_id]->children = array();
+		$p_bug_list[$p_bug_id]->parents = [];
+		$p_bug_list[$p_bug_id]->children = [];
 
 		# Add all parent issues to the list of parents. Do not visit them
 		# for the same reason we didn't visit the children of all
@@ -520,10 +520,10 @@ function relgraph_add_bug_to_graph( Graph &$p_graph, $p_bug_id, BugData $p_bug, 
 	$t_label = $p_bug_id;
 	if( $p_show_summary ) {
 		# Truncate summary to 30 chars, to avoid nodes being too wide
-		$t_label .= "\n" . string_attribute( mb_strimwidth( $p_bug->summary, 0, 30, "..." ) );
+		$t_label .= "\n" . string_attribute( mb_strimwidth( $p_bug->summary, 0, 30, '...' ) );
 	}
 
-	$t_node_attributes = array();
+	$t_node_attributes = [];
 	$t_node_attributes['label'] = $t_label;
 	$t_node_attributes['tooltip'] = '[' . $t_status . '] ' . string_attribute( $p_bug->summary );
 

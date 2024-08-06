@@ -65,22 +65,22 @@ class ProjectUsersDeleteCommand extends Command {
 	function validate() {
 		$t_project = $this->payload( 'project' );
 		if( is_null( $t_project ) ) {
-			throw new ClientException( 'User not specified', ERROR_EMPTY_FIELD, array( 'project' ) );
+			throw new ClientException( 'User not specified', ERROR_EMPTY_FIELD, ['project'] );
 		}
 
 		$this->project_id = mci_get_project_id( $t_project );
 		if( $this->project_id < 1 ) {
-			throw new ClientException( 'Invalid Project', ERROR_INVALID_FIELD_VALUE, array( 'project' ) );
+			throw new ClientException( 'Invalid Project', ERROR_INVALID_FIELD_VALUE, ['project'] );
 		}
 
 		$t_user = $this->payload( 'user' );
 		if( is_null( $t_user ) ) {
-			throw new ClientException( 'User not specified', ERROR_EMPTY_FIELD, array( 'user' ) );
+			throw new ClientException( 'User not specified', ERROR_EMPTY_FIELD, ['user'] );
 		}
 
 		$this->user_id = mci_get_user_id( $t_user, /* default */ null, /* allow all users */ true );
 		if( is_null( $this->user_id ) ) {
-			throw new ClientException( 'Invalid User', ERROR_INVALID_FIELD_VALUE, array( 'user' ) );
+			throw new ClientException( 'Invalid User', ERROR_INVALID_FIELD_VALUE, ['user'] );
 		}
 
 		# ALL_USERS is a valid case for deleting all users on a project
@@ -110,7 +110,7 @@ class ProjectUsersDeleteCommand extends Command {
 				access_get_project_level( $this->project_id, $this->actor_id ), $this->project_id );
 
 		if( !$t_access_check ) {
-			throw new ClientException( "Access Denied", ERROR_ACCESS_DENIED );
+			throw new ClientException( 'Access Denied', ERROR_ACCESS_DENIED );
 		}
 	}
 
@@ -131,4 +131,3 @@ class ProjectUsersDeleteCommand extends Command {
 		return [];
 	}
 }
-

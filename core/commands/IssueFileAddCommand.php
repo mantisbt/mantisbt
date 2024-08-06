@@ -69,7 +69,7 @@ class IssueFileAddCommand extends Command {
 	/**
 	 * The files to attach with the note.
 	 */
-	private $files = array();
+	private $files = [];
 
 	/**
 	 * The reporter id for the note.
@@ -96,7 +96,7 @@ class IssueFileAddCommand extends Command {
 			throw new ClientException(
 				sprintf( "Issue '%d' is read-only.", $t_issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				array( $t_issue_id ) );
+				[$t_issue_id] );
 		}
 
 		$this->parseFiles();
@@ -107,7 +107,7 @@ class IssueFileAddCommand extends Command {
 			throw new ClientException(
 				'Files not provided',
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'files' ) );
+				['files'] );
 		}
 
 		$this->user_id = auth_get_current_user_id();
@@ -153,7 +153,7 @@ class IssueFileAddCommand extends Command {
 		# Handle the file upload
 		file_attach_files( $this->issue->id, $this->files );
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -161,22 +161,21 @@ class IssueFileAddCommand extends Command {
 	 * @return void
 	 */
 	private function parseFiles() {
-		$this->files = $this->payload( 'files', array() );
+		$this->files = $this->payload( 'files', [] );
 		if( !is_array( $this->files ) ) {
-			$this->files = array();
+			$this->files = [];
 		}
 
-		$t_files_required_fields = array( 'name', 'tmp_name' );
+		$t_files_required_fields = ['name', 'tmp_name'];
 		foreach( $this->files as $t_file ) {
 			foreach( $t_files_required_fields as $t_field ) {
 				if( !isset( $t_file[$t_field] ) ) {
 					throw new ClientException(
 						sprintf( "File field '%s' is missing.", $t_field ),
 						ERROR_EMPTY_FIELD,
-						array( $t_field ) );
+						[$t_field] );
 				}
 			}
 		}
 	}
 }
-

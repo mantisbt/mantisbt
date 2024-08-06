@@ -47,24 +47,23 @@ class LocalizedStringsGetCommand extends Command {
 	protected function process() {
 		$t_strings = $this->query( 'string' );
 		if( !is_array( $t_strings ) ) {
-			$t_strings = array( $t_strings );
+			$t_strings = [$t_strings];
 		}
 
 		$t_current_language = lang_get_current();
-		$t_localized_strings = array();
+		$t_localized_strings = [];
 
 		foreach( $t_strings as $t_string ) {
 			if( !lang_exists( $t_string, $t_current_language ) ) {
 				continue;
 			}
 
-			$t_localized_strings[] = array( 'name' => $t_string, 'localized' => lang_get( $t_string ) );
+			$t_localized_strings[] = ['name' => $t_string, 'localized' => lang_get( $t_string )];
 		}
 
-		return array(
+		return [
 			'strings' => $t_localized_strings,
 			'language' => $t_current_language,
-		);
+		];
 	}
 }
-

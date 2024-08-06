@@ -53,11 +53,11 @@ class AuthMiddleware {
 			# TODO: add an index on the token hash for the method below
 
 			# Manage multiple authorization header (ex: Basic + token)
-			$t_authorization_headers = explode(', ', $t_authorization_header);
+			$t_authorization_headers = explode( ', ', $t_authorization_header );
 			$t_user_id = false;
 			$t_api_token  = '';
 
-			# Search for the token among the different authorization headers. 
+			# Search for the token among the different authorization headers.
 			foreach( $t_authorization_headers as $value ) {
 				$t_user_id = api_token_get_user( $value );
 				if( $t_user_id !== false ) {

@@ -32,7 +32,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -46,7 +46,7 @@ form_security_validate( 'manage_custom_field_proj_add' );
 auth_reauthenticate();
 
 $f_field_id = gpc_get_int( 'field_id' );
-$f_project_id = gpc_get_int_array( 'project_id', array() );
+$f_project_id = gpc_get_int_array( 'project_id', [] );
 $f_sequence	= gpc_get_int( 'sequence' );
 
 $t_manage_project_threshold = config_get( 'manage_project_threshold' );

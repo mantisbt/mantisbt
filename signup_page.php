@@ -33,7 +33,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'crypto_api.php' );
@@ -99,7 +99,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			</label>
 
 <?php
-	$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
+	$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', [] );
 
 	# captcha image requires GD library and related option to ON
 	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
@@ -136,8 +136,8 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 						   title="<?php echo $t_label_captcha_play; ?>"
 						   aria-label="<?php echo $t_label_captcha_play; ?>"
 						>
-							<?php print_icon( 'volume-up', 'ace-icon bigger-250 captcha_play_image'); ?>
-							<?php print_icon( 'spinner', 'ace-icon bigger-250 captcha_loading_image" style="display: none'); ?>
+							<?php print_icon( 'volume-up', 'ace-icon bigger-250 captcha_play_image' ); ?>
+							<?php print_icon( 'spinner', 'ace-icon bigger-250 captcha_loading_image" style="display: none' ); ?>
 						</a>
 						<noscript>Enable Javascript for audio controls</noscript>
 					</div>

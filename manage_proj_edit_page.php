@@ -47,7 +47,7 @@
  * @uses version_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -101,7 +101,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 	<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
-	<?php echo lang_get('edit_project_title') ?>
+	<?php echo lang_get( 'edit_project_title' ) ?>
 </h4>
 </div>
 
@@ -173,7 +173,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</td>
 				<td>
 					<select id="project-view-state" name="view_state" class="input-sm">
-						<?php print_enum_string_option_list( 'project_view_state', (int)$t_row['view_state']) ?>
+						<?php print_enum_string_option_list( 'project_view_state', (int)$t_row['view_state'] ) ?>
 					</select>
 				</td>
 			</tr>
@@ -213,7 +213,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</td>
 			</tr>
 
-			<?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', array( $f_project_id ) ); ?>
+			<?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', [$f_project_id] ); ?>
 		</fieldset>
 		</table>
 		</div>
@@ -226,7 +226,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			</button>
 <?php
 	# You must have global permissions to delete projects
-	if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) {
+	if( access_has_global_level( config_get( 'delete_project_threshold' ) ) ) {
 ?>
 			<button class="btn btn-primary btn-white btn-round"
 					formaction="manage_proj_delete.php">
@@ -305,7 +305,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		print_form_button(
 			'manage_proj_create_page.php',
 			lang_get( 'create_new_subproject_link' ),
-			array( 'parent_id' => $f_project_id ),
+			['parent_id' => $f_project_id],
 			null,
 			'btn btn-sm btn-primary btn-white btn-round'
 		);
@@ -485,10 +485,10 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				print_form_button(
 					'manage_proj_cat_edit_page.php',
 					lang_get( 'edit' ),
-					array(
+					[
 						'category_id' => $t_id,
 						'project_id' => $f_project_id,
-					),
+					],
 					OFF,
 					'btn btn-xs btn-primary btn-white btn-round'
 				);
@@ -496,10 +496,10 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				print_form_button(
 					'manage_proj_cat_delete.php',
 					lang_get( 'delete' ),
-					array(
+					[
 						'category_id' => $t_id,
 						'project_id' => $f_project_id,
-					),
+					],
 					$t_security_token,
 					'btn btn-xs btn-primary btn-white btn-round'
 				);
@@ -611,7 +611,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<?php
 					$t_version_id = version_get_id( $t_name, $f_project_id );
 					if( !$t_inherited ) {
-						$t_param = array( 'version_id' => $t_version_id);
+						$t_param = ['version_id' => $t_version_id];
 						print_form_button(
 							'manage_proj_ver_edit_page.php',
 							lang_get( 'edit' ),
@@ -741,18 +741,18 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 					print_form_button(
 						'manage_custom_field_edit_page.php?field_id=' . $t_field_id,
 						lang_get( 'edit' ),
-						array(
+						[
 							'return' => 'manage_proj_edit_page.php?project_id='
 								. $f_project_id . '#customfields',
-						)
+						]
 					);
 					print_form_button(
 						'manage_proj_custom_field_remove.php',
 						lang_get( 'remove_link' ),
-						array(
+						[
 							'field_id' => $t_field_id,
 							'project_id' => $f_project_id,
-						)
+						]
 					);
 ?>
 				</td>
@@ -776,14 +776,13 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="field_id" class="input-sm">
 				<?php
-					$t_cf_defs = array();
+					$t_cf_defs = [];
 					foreach( custom_field_get_ids() as $t_cfid ) {
 						$t_cf_defs[] = custom_field_get_definition( $t_cfid );
 					}
 					$t_custom_fields = multi_sort( $t_cf_defs, 'name' );
 
-					foreach( $t_custom_fields as $t_field )
-					{
+					foreach( $t_custom_fields as $t_field ) {
 						if( !custom_field_is_linked( $t_field['id'], $f_project_id ) ) {
 							echo '<option value="', $t_field['id'], '">',
 								string_attribute( lang_get_defaulted( $t_field['name'] ) ),
@@ -804,7 +803,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 </div><?php
 }
 
-event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
+event_signal( 'EVENT_MANAGE_PROJECT_PAGE', [$f_project_id] );
 ?>
 
 <!-- MANAGE ACCOUNTS -->
@@ -862,8 +861,8 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 
 	if( $t_users_count > 0 ) {
 
-		$t_user_ids = array();
-		$t_sort = array();
+		$t_user_ids = [];
+		$t_sort = [];
 		foreach ( $t_users as $t_ix => $t_user ) {
 			$t_user_display_name = user_get_name_from_row( $t_user );
 			$t_users[$t_ix]['display_name'] = $t_user_display_name;
@@ -900,10 +899,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 		print_form_button(
 			'manage_proj_edit_page.php#project-users',
 			lang_get( $f_show_global_users ? 'hide_global_users' : 'show_global_users' ),
-			array(
+			[
 				'project_id' => $f_project_id,
 				'show_global_users' => !$f_show_global_users
-			),
+			],
 			OFF,
 			'btn btn-sm btn-primary btn-white btn-round'
 		);
@@ -946,7 +945,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 								<tbody class="list">
 <?php
 		# If including global users, fetch here all local user to later distinguish them
-		$t_local_users = array();
+		$t_local_users = [];
 		if( $f_show_global_users ) {
 			$t_local_users = project_get_all_user_rows( $f_project_id, ANYBODY, false );
 		}
@@ -956,7 +955,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 			$t_email = user_get_email( $t_user['id'] );
 			$t_can_manage_this_user = $t_can_manage_users
 					&& access_has_project_level( $t_user['access_level'], $f_project_id )
-					&& ( !$f_show_global_users || isset( $t_local_users[$t_user['id']]) );
+					&& ( !$f_show_global_users || isset( $t_local_users[$t_user['id']] ) );
 ?>
 		<tr>
 			<td class="key-name" data-sortvalue="<?php echo string_attribute( $t_username ) ?>">
@@ -1029,12 +1028,12 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 							<div class="form-inline pull-right">
 								<?php echo form_security_field( 'manage_proj_user_remove' ) ?>
 								<button name="btn-remove-all"
-									    class="btn btn-primary btn-white btn-round"
-									    formaction="manage_proj_user_remove.php">
+										class="btn btn-primary btn-white btn-round"
+										formaction="manage_proj_user_remove.php">
 									<?php echo lang_get( 'remove_all_link' ) ?>
 								</button>
 								<button name="btn-undo-remove-all" class="hidden btn btn-primary btn-white btn-round">
-									<?php echo lang_get( 'undo' ). ': ', lang_get( 'remove_all_link' ) ?>
+									<?php echo lang_get( 'undo' ) . ': ', lang_get( 'remove_all_link' ) ?>
 								</button>
 							</div>
 						</div>
@@ -1069,7 +1068,7 @@ if( count( $t_users ) > 0 ) { ?>
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
-        <fieldset>
+		<fieldset>
 		<table class="table table-bordered table-condensed table-striped">
 			<?php echo form_security_field( 'manage_proj_user_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
@@ -1084,7 +1083,7 @@ if( count( $t_users ) > 0 ) { ?>
 					<select id="project-add-users-username" name="user_id[]"
 							class="input-sm" multiple="multiple" size="10" required>
 <?php
-						foreach( $t_users AS $t_user_id=>$t_display_name ) {
+						foreach( $t_users as $t_user_id=>$t_display_name ) {
 							echo '<option value="', $t_user_id, '">', string_attribute( $t_display_name ), '</option>';
 						}
 ?>
@@ -1110,7 +1109,7 @@ if( count( $t_users ) > 0 ) { ?>
 				</td>
 			</tr>
 		</table>
-        </fieldset>
+		</fieldset>
 		</div>
 		</div>
 		</div>

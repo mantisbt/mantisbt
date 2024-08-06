@@ -25,14 +25,14 @@
  * @uses filter_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'filter_api.php' );
 
 form_security_validate( 'manage_filter_edit_update' );
 
 auth_ensure_user_authenticated();
 
-$t_errors = array();
+$t_errors = [];
 
 $f_filter_id = gpc_get_int( 'filter_id', null );
 if( null === $f_filter_id ) {
@@ -61,7 +61,7 @@ if( $f_filter_name != filter_get_field( $f_filter_id, 'name' ) ) {
 	}
 	# Check and make sure they don't already have a query with the same name
 	$t_query_arr = filter_db_get_available_queries();
-	foreach( $t_query_arr as $t_name )	{
+	foreach( $t_query_arr as $t_name ) {
 		if( $f_filter_name == string_normalize( $t_name ) ) {
 			$t_errors[] = lang_get( 'query_dupe_name' );
 			break;

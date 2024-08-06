@@ -39,7 +39,7 @@
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'columns_api.php' );
@@ -98,10 +98,10 @@ do {
 	$t_offset += EXPORT_BLOCK_SIZE;
 
 	# Keep reading until reaching max block size or end of result set
-	$t_read_rows = array();
+	$t_read_rows = [];
 	$t_count = 0;
-	$t_bug_id_array = array();
-	$t_unique_user_ids = array();
+	$t_bug_id_array = [];
+	$t_unique_user_ids = [];
 	while( $t_count < EXPORT_BLOCK_SIZE ) {
 		$t_row = db_fetch_array( $t_result );
 		if( false === $t_row ) {
@@ -162,4 +162,3 @@ do {
 } while ( false === $t_end_of_results );
 
 echo excel_get_footer();
-

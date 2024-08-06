@@ -23,7 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( __DIR__ . '/mc_core.php' );
+require_once __DIR__ . '/mc_core.php';
 
 /**
  * Get the issue attachment with the specified id.

@@ -33,7 +33,7 @@
  * @uses project_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -73,4 +73,4 @@ project_copy_users( $t_dst_project_id, $t_src_project_id, access_get_project_lev
 
 form_security_purge( 'manage_proj_user_copy' );
 
-print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . "#project-users");
+print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#project-users' );

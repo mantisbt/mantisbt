@@ -42,7 +42,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -82,7 +82,7 @@ print_manage_menu( 'manage_proj_page.php' );
 ?>
 
 <div class="col-md-12 col-xs-12">
-    <div class="space-10"></div>
+	<div class="space-10"></div>
 	<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
@@ -95,7 +95,7 @@ print_manage_menu( 'manage_proj_page.php' );
 	<div class="widget-toolbox padding-8 clearfix">
 		<?php
 		# Check the user's global access level before allowing project creation
-		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+		if( access_has_global_level( config_get( 'create_project_threshold' ) ) ) {
 			print_form_button(
 				'manage_proj_create_page.php',
 				lang_get( 'create_new_project_link' ),
@@ -165,12 +165,12 @@ print_manage_menu( 'manage_proj_page.php' );
 <?php
 		$t_manage_project_threshold = config_get( 'manage_project_threshold' );
 		$t_projects = user_get_accessible_projects( auth_get_current_user_id(), true );
-		$t_full_projects = array();
+		$t_full_projects = [];
 		foreach ( $t_projects as $t_project_id ) {
 			$t_full_projects[] = project_get_row( $t_project_id );
 		}
 		$t_projects = multi_sort( $t_full_projects, $f_sort, $t_direction );
-		$t_stack = array( $t_projects );
+		$t_stack = [$t_projects];
 
 		while( 0 < count( $t_stack ) ) {
 			$t_projects = array_shift( $t_stack );
@@ -188,7 +188,7 @@ print_manage_menu( 'manage_proj_page.php' );
 			<tr>
 				<td>
 					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>">
-						<?php echo str_repeat( "&raquo; ", $t_level )
+						<?php echo str_repeat( '&raquo; ', $t_level )
 							. string_display_line( $t_project['name'] ) ?>
 					</a>
 				</td>
@@ -205,7 +205,7 @@ print_manage_menu( 'manage_proj_page.php' );
 			}
 
 			if( 0 < count( $t_subprojects ) ) {
-				$t_full_projects = array();
+				$t_full_projects = [];
 				foreach ( $t_subprojects as $t_project_id ) {
 					$t_full_projects[] = project_get_row( $t_project_id );
 				}

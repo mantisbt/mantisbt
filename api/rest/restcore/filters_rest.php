@@ -22,19 +22,19 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( __DIR__, 2 ) . '/soap/mc_filter_api.php'  );
+require_once dirname( __DIR__, 2 ) . '/soap/mc_filter_api.php';
 
 use \Slim\Http\Request as SlimRequest;
 use \Slim\Http\Response as SlimResponse;
 
-$g_app->group('/filters', function() use ( $g_app ) {
+$g_app->group( '/filters', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_filter_get' );
 	$g_app->get( '/', 'rest_filter_get' );
 	$g_app->get( '/{id}', 'rest_filter_get' );
 	$g_app->get( '/{id}/', 'rest_filter_get' );
 	$g_app->delete( '/{id}', 'rest_filter_delete' );
 	$g_app->delete( '/{id}/', 'rest_filter_delete' );
-});
+} );
 
 /**
  * A method that does the work to handle getting filters via REST API.
@@ -57,7 +57,7 @@ function rest_filter_get( SlimRequest $p_request, SlimResponse $p_response, arra
 	}
 
 	$t_filters = mc_filter_get( '', '', $t_project_id, $t_filter_id );
-	$t_result = array( 'filters' => $t_filters );
+	$t_result = ['filters' => $t_filters];
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }

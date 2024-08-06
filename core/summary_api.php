@@ -64,7 +64,7 @@ require_api( 'utility_api.php' );
  * @param string $p_ratio    Ratio of total bugs
  * @return void
  */
-function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total, $p_resolved_ratio, $p_ratio) {
+function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total, $p_resolved_ratio, $p_ratio ) {
 	echo '<tr>';
 	printf( '<td class="width50">%s</td>', $p_label );
 	printf( '<td class="width12 align-right">%s</td>', $p_open );
@@ -143,7 +143,7 @@ function summary_helper_build_bugcount( &$p_cache, $p_key, $p_status, $p_bugcoun
  * @param string &$p_bugs_total         The total bugs count, return total bugs link.
  * @return void 
  */
-function summary_helper_build_buglinks( $p_bug_link, &$p_bugs_open, &$p_bugs_resolved, &$p_bugs_closed, &$p_bugs_total) {
+function summary_helper_build_buglinks( $p_bug_link, &$p_bugs_open, &$p_bugs_resolved, &$p_bugs_closed, &$p_bugs_total ) {
 	$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
 	$t_closed_val = config_get( 'bug_closed_status_threshold' );
 
@@ -158,7 +158,7 @@ function summary_helper_build_buglinks( $p_bug_link, &$p_bugs_open, &$p_bugs_res
 	}
 	if( 0 < $p_bugs_total ) {
 		$p_bugs_total = '<a class="subtle" href="' . $p_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $p_bugs_total . '</a>';
-	}	
+	}
 }
 
 /**
@@ -169,13 +169,13 @@ function summary_helper_build_buglinks( $p_bug_link, &$p_bugs_open, &$p_bugs_res
  * @param integer $p_bugs_total_count     The total bugs count.
  * @return array  array of ($t_bugs_resolved_ratio, $t_bugs_ratio)
  */
-function summary_helper_get_bugratio( $p_bugs_open, $p_bugs_resolved, $p_bugs_closed, $p_bugs_total_count) {
+function summary_helper_get_bugratio( $p_bugs_open, $p_bugs_resolved, $p_bugs_closed, $p_bugs_total_count ) {
 	$t_bugs_total = $p_bugs_open + $p_bugs_resolved + $p_bugs_closed;
 	$t_bugs_resolved_ratio = ( $p_bugs_resolved + $p_bugs_closed ) / ( $t_bugs_total == 0 ? 1 : $t_bugs_total );
 	$t_bugs_ratio = $t_bugs_total / ( $p_bugs_total_count == 0 ? 1 : $p_bugs_total_count );
-	$t_bugs_resolved_ratio = sprintf( "%.1f%%", $t_bugs_resolved_ratio * 100 );
-	$t_bugs_ratio = sprintf( "%.1f%%", $t_bugs_ratio * 100 );	
-	return array($t_bugs_resolved_ratio, $t_bugs_ratio);
+	$t_bugs_resolved_ratio = sprintf( '%.1f%%', $t_bugs_resolved_ratio * 100 );
+	$t_bugs_ratio = sprintf( '%.1f%%', $t_bugs_ratio * 100 );
+	return [$t_bugs_resolved_ratio, $t_bugs_ratio];
 }
 
 /**
@@ -209,7 +209,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 		. ' ORDER BY ' . $p_enum . ' ' . $t_status_query;
 	$t_query->sql( $t_sql );
 
-	$t_cache = array();
+	$t_cache = [];
 	$t_bugs_total_count = 0;
 
 	while( $t_row = $t_query->fetch() ) {
@@ -217,7 +217,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 		$t_status = $t_row['status'];
 		$t_bugcount = $t_row['bugcount'];
 		$t_bugs_total_count += $t_bugcount;
-		
+
 		summary_helper_build_bugcount( $t_cache, $t_enum, $t_status, $t_bugcount );
 	}
 
@@ -239,20 +239,20 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	foreach( $t_cache as $t_enum => $t_item) {
+	foreach( $t_cache as $t_enum => $t_item ) {
 		# Build up the hyperlinks to bug views
 		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
 		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] : 0;
 		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
+		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count );
 
 		$t_bug_link = $t_link_prefix . '&amp;' . $t_filter_property . '=' . $t_enum;
 
 		if( !is_blank( $t_bug_link ) ) {
 			$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
 			$t_closed_val = config_get( 'bug_closed_status_threshold' );
-			
+
 			if( 0 < $t_bugs_open ) {
 				$t_bugs_open = '<a class="subtle" href="' . $t_bug_link
 					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_resolved_val . '">'
@@ -269,7 +269,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_closed_val . '">'
 					. $t_bugs_resolved . '</a>';
 			} else {
-				if( ( 'status' == $p_enum ) && (( $t_enum < $t_resolved_val ) || ( $t_enum >= $t_closed_val ) ) ) {
+				if( ( 'status' == $p_enum ) && ( ( $t_enum < $t_resolved_val ) || ( $t_enum >= $t_closed_val ) ) ) {
 					$t_bugs_resolved = '-';
 				}
 			}
@@ -288,8 +288,10 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 				$t_bugs_total = '<a class="subtle" href="' . $t_bug_link
 					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '='
 					. META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
-			}	
-			if( 'status' == $p_enum )  $t_bugs_ratio[0] = '-';		
+			}
+			if( 'status' == $p_enum ) {
+			$t_bugs_ratio[0] = '-';
+			}
 		}
 		summary_helper_print_row( get_enum_element( $p_enum, $t_enum ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
 	}
@@ -326,8 +328,8 @@ function summary_print_by_activity( array $p_filter = null ) {
 
 	$t_count = 0;
 	$t_private_bug_threshold = config_get( 'private_bug_threshold' );
-	$t_summarydata = array();
-	$t_summarybugs = array();
+	$t_summarydata = [];
+	$t_summarybugs = [];
 	while( $t_row = $t_query->fetch() ) {
 		# Skip private bugs unless user has proper permissions
 		if( ( VS_PRIVATE == $t_row['view_state'] ) && ( false == access_has_bug_level( $t_private_bug_threshold, $t_row['id'] ) ) ) {
@@ -338,11 +340,11 @@ function summary_print_by_activity( array $p_filter = null ) {
 			break;
 		}
 
-		$t_summarydata[] = array(
+		$t_summarydata[] = [
 			'id' => $t_row['id'],
 			'summary' => $t_row['summary'],
 			'count' => $t_row['count'],
-		);
+		];
 		$t_summarybugs[] = $t_row['id'];
 	}
 
@@ -438,8 +440,8 @@ function summary_print_by_developer( array $p_filter = null ) {
 		. ' ORDER BY handler_id, status';
 	$t_query->sql( $t_sql );
 
-	$t_summaryusers = array();
-	$t_cache = array();
+	$t_summaryusers = [];
+	$t_cache = [];
 	$t_bugs_total_count = 0;
 
 	while( $t_row = $t_query->fetch() ) {
@@ -454,13 +456,13 @@ function summary_print_by_developer( array $p_filter = null ) {
 
 	user_cache_array_rows( array_unique( $t_summaryusers ) );
 
-	foreach( $t_cache as $t_label => $t_item) {
+	foreach( $t_cache as $t_label => $t_item ) {
 		# Build up the hyperlinks to bug views
 		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
 		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] : 0;
 		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
+		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count );
 
 		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
@@ -497,7 +499,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 	$t_sql .= ' GROUP BY reporter_id ORDER BY num DESC';
 	$t_query->sql( $t_sql );
 
-	$t_reporters = array();
+	$t_reporters = [];
 	$t_bugs_total_count = 0;
 	$t_reporters_count = 0;
 	while( $t_row = $t_query->fetch() ) {
@@ -528,17 +530,17 @@ function summary_print_by_reporter( array $p_filter = null ) {
 
 	$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
 	$t_closed_status = config_get( 'bug_closed_status_threshold' );
-	$t_reporter_stats = array();
+	$t_reporter_stats = [];
 	while( $t_row = $t_query->fetch() ) {
 		$t_reporter_id = (int)$t_row['reporter_id'];
 		if( !isset( $t_reporter_stats[$t_reporter_id] ) ) {
-			$t_reporter_stats[$t_reporter_id] = array(
+			$t_reporter_stats[$t_reporter_id] = [
 				'open' => 0,
 				'resolved' => 0,
 				'closed' => 0,
 				'total' => 0,
 				'reporter_id' => $t_reporter_id
-				);
+			];
 		}
 		$t_bugcount = (int)$t_row['bugcount'];
 		$t_status = (int)$t_row['status'];
@@ -565,7 +567,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 	# sort based on total issue count
 	# note that after array_multisort, we lose the numeric indexes, but we stored
 	# the reporter id inside each sub-array
-	array_multisort ( array_column( $t_reporter_stats, 'total' ), SORT_DESC, $t_reporter_stats );
+	array_multisort( array_column( $t_reporter_stats, 'total' ), SORT_DESC, $t_reporter_stats );
 
 	# print results
 	foreach( $t_reporter_stats as $t_stats ) {
@@ -578,7 +580,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 
 		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
 		if( 0 < $t_stats['open'] ) {
-			$t_bugs_open = '<a class="subtle" href="' . $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_resolved_status . '">'. $t_stats['open'] . '</a>';
+			$t_bugs_open = '<a class="subtle" href="' . $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_resolved_status . '">' . $t_stats['open'] . '</a>';
 		} else {
 			$t_bugs_open = 0;
 		}
@@ -633,7 +635,7 @@ function summary_print_by_category( array $p_filter = null ) {
 		. ' ORDER BY ' . $t_project_query . ' c.name';
 	$t_query->sql( $t_sql );
 
-	$t_cache = array();
+	$t_cache = [];
 	$t_bugs_total_count = 0;
 
 	while( $t_row = $t_query->fetch() ) {
@@ -643,18 +645,18 @@ function summary_print_by_category( array $p_filter = null ) {
 		$t_label = $t_row['category_name'];
 		if( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 			$t_label = sprintf( '[%s] %s', project_get_name( $t_row['project_id'] ), $t_label );
-		} 
+		}
 
 		summary_helper_build_bugcount( $t_cache, $t_label, $t_status, $t_bugcount );
 	}
 
-	foreach( $t_cache as $t_label => $t_item) {
+	foreach( $t_cache as $t_label => $t_item ) {
 		# Build up the hyperlinks to bug views
 		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
 		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] :0;
 		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
+		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count );
 
 		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
@@ -675,16 +677,16 @@ function summary_print_by_category( array $p_filter = null ) {
  * @param array   $p_filter   Filter array.
  * @return void
  */
-function summary_print_by_project( array $p_projects = array(), int $p_level = 0, array $p_cache = null, array $p_filter = null ) {
+function summary_print_by_project( array $p_projects = [], int $p_level = 0, array $p_cache = null, array $p_filter = null ) {
 	$t_project_id = helper_get_current_project();
 
 	if( empty( $p_projects ) ) {
 		if( ALL_PROJECTS == $t_project_id ) {
 			$p_projects = current_user_get_accessible_projects();
 		} else {
-			$p_projects = array(
+			$p_projects = [
 				$t_project_id,
-			);
+			];
 		}
 	}
 
@@ -700,7 +702,7 @@ function summary_print_by_project( array $p_projects = array(), int $p_level = 0
 		$t_sql .= ' GROUP BY project_id, status';
 		$t_query->sql( $t_sql );
 
-		$p_cache = array();
+		$p_cache = [];
 		$t_bugs_total_count = 0;
 		while( $t_row = $t_query->fetch() ) {
 			$t_project_id = $t_row['project_id'];
@@ -710,27 +712,27 @@ function summary_print_by_project( array $p_projects = array(), int $p_level = 0
 
 			summary_helper_build_bugcount( $p_cache, $t_project_id, $t_status, $t_bugcount );
 		}
-		$p_cache["_bugs_total_count_"] = $t_bugs_total_count;
+		$p_cache['_bugs_total_count_'] = $t_bugs_total_count;
 	}
 
-	$t_bugs_total_count = $p_cache["_bugs_total_count_"];
+	$t_bugs_total_count = $p_cache['_bugs_total_count_'];
 	foreach( $p_projects as $t_project ) {
 		$t_name = str_repeat( '&raquo; ', $p_level ) . project_get_name( $t_project );
 
-		$t_pdata = isset( $p_cache[$t_project] ) ? $p_cache[$t_project] : array( 'open' => 0, 'resolved' => 0, 'closed' => 0 );
+		$t_pdata = isset( $p_cache[$t_project] ) ? $p_cache[$t_project] : ['open' => 0, 'resolved' => 0, 'closed' => 0];
 
 		$t_bugs_open = isset( $t_pdata['open'] ) ? $t_pdata['open'] : 0;
 		$t_bugs_resolved = isset( $t_pdata['resolved'] ) ? $t_pdata['resolved'] : 0;
 		$t_bugs_closed = isset( $t_pdata['closed'] ) ? $t_pdata['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		
-		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
+
+		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count );
 
 # FILTER_PROPERTY_PROJECT_ID filter by project does not work ??
 #		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . urlencode( $t_project );
 #		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
-		summary_helper_print_row( string_display_line( $t_name ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1]);
+		summary_helper_print_row( string_display_line( $t_name ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
 
 		if( count( project_hierarchy_get_subprojects( $t_project ) ) > 0 ) {
 			$t_subprojects = current_user_get_accessible_subprojects( $t_project );
@@ -777,11 +779,11 @@ function summary_print_developer_resolution( $p_resolution_enum_string, array $p
 		. ' ORDER BY handler_id, resolution';
 	$t_query->sql( $t_sql );
 
-	$t_handler_res_arr = array();
+	$t_handler_res_arr = [];
 	$t_arr = $t_query->fetch();
 	while( $t_arr ) {
 		if( !isset( $t_handler_res_arr[$t_arr['handler_id']] ) ) {
-			$t_handler_res_arr[$t_arr['handler_id']] = array();
+			$t_handler_res_arr[$t_arr['handler_id']] = [];
 			$t_handler_res_arr[$t_arr['handler_id']]['total'] = 0;
 		}
 		if( !isset( $t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] ) ) {
@@ -914,12 +916,12 @@ function summary_print_reporter_resolution( $p_resolution_enum_string, array $p_
 	$t_sql .= ' GROUP BY reporter_id, resolution';
 	$t_query->sql( $t_sql );
 
-	$t_reporter_res_arr = array();
-	$t_reporter_bugcount_arr = array();
+	$t_reporter_res_arr = [];
+	$t_reporter_bugcount_arr = [];
 	$t_arr = $t_query->fetch();
 	while( $t_arr ) {
 		if( !isset( $t_reporter_res_arr[$t_arr['reporter_id']] ) ) {
-			$t_reporter_res_arr[$t_arr['reporter_id']] = array();
+			$t_reporter_res_arr[$t_arr['reporter_id']] = [];
 			$t_reporter_bugcount_arr[$t_arr['reporter_id']] = 0;
 		}
 		if( !isset( $t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] ) ) {
@@ -1059,16 +1061,16 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 	$t_sql .= ' GROUP BY reporter_id, resolution, severity';
 	$t_query->sql( $t_sql );
 
-	$t_reporter_ressev_arr = array();
-	$t_reporter_bugcount_arr = array();
+	$t_reporter_ressev_arr = [];
+	$t_reporter_bugcount_arr = [];
 	$t_arr = $t_query->fetch();
 	while( $t_arr ) {
 		if( !isset( $t_reporter_ressev_arr[$t_arr['reporter_id']] ) ) {
-			$t_reporter_ressev_arr[$t_arr['reporter_id']] = array();
+			$t_reporter_ressev_arr[$t_arr['reporter_id']] = [];
 			$t_reporter_bugcount_arr[$t_arr['reporter_id']] = 0;
 		}
 		if( !isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']] ) ) {
-			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']] = array();
+			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']] = [];
 			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']]['total'] = 0;
 		}
 		if( !isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] ) ) {
@@ -1154,12 +1156,12 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 	# (e.g. bug is CLOSED, not RESOLVED). The linkage to the history field
 	# will look up the most recent 'resolved' status change and return it as well
 
-	$t_stats = array(
+	$t_stats = [
 		'bug_id'       => 0,
 		'largest_diff' => 0,
 		'total_time'   => 0,
 		'average_time' => 0,
-		);
+	];
 
 	$t_sql_inner = ' FROM {bug} b LEFT JOIN {bug_history} h'
 		. ' ON b.id = h.bug_id  AND h.type = :hist_type'
@@ -1167,12 +1169,12 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 		. ' WHERE b.status >= :int_resolved'
 		. ' AND h.new_value >= :str_resolved AND h.old_value < :str_resolved'
 		. ' AND ' . $t_specific_where;
-	$t_params = array(
+	$t_params = [
 		'hist_type' => 0,
 		'hist_field' => 'status',
 		'int_resolved' => (int)$t_resolved,
 		'str_resolved' => (string)$t_resolved
-		);
+	];
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql_inner .= ' AND b.id IN :filter';
@@ -1180,7 +1182,7 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 	}
 
 	if( db_has_capability( DB_CAPABILITY_WINDOW_FUNCTIONS ) ) {
-		if(db_is_mssql() ) {
+		if( db_is_mssql() ) {
 			# sqlserver by default uses the column datatype, which is INT. This datatype can be overflowed
 			# when a big number of issues are included, since we are adding the total number of seconds.
 			$t_diff_expr = 'CAST(diff AS BIGINT)';
@@ -1193,14 +1195,14 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 			. ' GROUP BY b.id,b.date_submitted ) subquery'
 			. ' ORDER BY diff DESC';
 		$t_query = new DbQuery( $t_sql, $t_params );
-		$t_query->set_limit(1);
+		$t_query->set_limit( 1 );
 		if( $t_row = $t_query->fetch() ) {
-			$t_stats = array(
+			$t_stats = [
 				'bug_id'       => $t_row['id'],
 				'largest_diff' => number_format( (int)$t_row['diff'] / SECONDS_PER_DAY, 2 ),
 				'total_time'   => number_format( (int)$t_row['total_time'] / SECONDS_PER_DAY, 2 ),
 				'average_time' => number_format( (int)$t_row['avg_time'] / SECONDS_PER_DAY, 2 ),
-				);
+			];
 		}
 	} else {
 		$t_sql = 'SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) AS hist_update, b.status'
@@ -1236,12 +1238,12 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 			$t_bug_id = 0;
 		}
 
-		$t_stats = array(
+		$t_stats = [
 			'bug_id'       => $t_bug_id,
 			'largest_diff' => number_format( $t_largest_diff / SECONDS_PER_DAY, 2 ),
 			'total_time'   => number_format( $t_total_time / SECONDS_PER_DAY, 2 ),
 			'average_time' => number_format( $t_average_time / SECONDS_PER_DAY, 2 ),
-		);
+		];
 	}
 	return $t_stats;
 }
@@ -1266,7 +1268,7 @@ function summary_get_filter() {
 			# TODO: for summary, as default, we want to show all status.
 			# Until a better implementation for default/empty filters, we need to adjust here
 			$t_filter = filter_get_default();
-			$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+			$t_filter[FILTER_PROPERTY_HIDE_STATUS] = [META_FILTER_NONE];
 			$t_filter['_view_type'] = FILTER_VIEW_TYPE_SIMPLE;
 	}
 	return $t_filter;
@@ -1342,11 +1344,11 @@ function summary_by_dates_bug_count( array $p_date_array, array $p_filter = null
 		. ' WHEN h.type = :hist_type_upd AND h.old_value >= :status AND h.new_value  < :status THEN :action_open'
 		. ' WHEN h.type = :hist_type_upd AND h.old_value < :status AND h.new_value  >= :status THEN :action_close'
 		. ' ELSE null END AS action, date_modified'
-        . ' FROM {bug_history} h JOIN {bug} b ON b.id = h.bug_id'
+		. ' FROM {bug_history} h JOIN {bug} b ON b.id = h.bug_id'
 		. ' WHERE h.date_modified > :mint_ime'
 		. ' AND ( h.type = :hist_type_new OR h.type = :hist_type_upd AND h.field_name = :hist_field )'
 		. ' AND ' . $t_specific_where;
-	$t_query->bind( array (
+	$t_query->bind( [
 		'hist_type_upd' => NORMAL_TYPE,
 		'hist_type_new' => NEW_BUG,
 		'hist_field' => 'status',
@@ -1354,7 +1356,7 @@ function summary_by_dates_bug_count( array $p_date_array, array $p_filter = null
 		'action_open' => 'O',
 		'action_close' => 'C',
 		'mint_ime' => $t_now - $t_prev_days * SECONDS_PER_DAY
-		) );
+	] );
 
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
@@ -1370,7 +1372,7 @@ function summary_by_dates_bug_count( array $p_date_array, array $p_filter = null
 	$t_query->sql( $t_sql );
 
 	# initialize the result array to 0
-	$t_count_array = array();
+	$t_count_array = [];
 	foreach( $t_date_array as $t_ix => $t_value ) {
 		$t_count_array['open'][$t_ix] = 0;
 		$t_count_array['close'][$t_ix] = 0;

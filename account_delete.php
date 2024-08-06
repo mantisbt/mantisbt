@@ -51,7 +51,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -103,7 +103,7 @@ layout_page_begin();
 	<div class="space-10"></div>
 <?php
 echo lang_get( 'account_removed_msg' ) . '<br />';
-print_link_button( config_get_global( 'logout_redirect_page' ), lang_get( 'proceed' ));
+print_link_button( config_get_global( 'logout_redirect_page' ), lang_get( 'proceed' ) );
 ?>
 </div>
 

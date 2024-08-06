@@ -135,7 +135,7 @@ if( $t_show_sponsorships ) {
 					$t_sponsorship = sponsorship_get( $t_id );
 					$t_date_added = date( config_get( 'normal_date_format' ), $t_sponsorship->date_submitted );
 
-					echo ($i > 0) ? '<br />' : '';
+					echo ( $i > 0 ) ? '<br />' : '';
 					$i++;
 
 					echo sprintf( lang_get( 'label' ), $t_date_added ) . lang_get( 'word_separator' );

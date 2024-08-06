@@ -32,7 +32,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'file_api.php' );
@@ -56,7 +56,7 @@ layout_page_header();
 
 layout_page_begin( 'proj_doc_page.php' );
 
-print_doc_menu('proj_doc_add_page.php');
+print_doc_menu( 'proj_doc_add_page.php' );
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -106,8 +106,8 @@ print_doc_menu('proj_doc_add_page.php');
 		</div>
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
-			<span class="required pull-right"> * <?php echo lang_get('required') ?></span>
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get('upload_file_button') ?>"/>
+			<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'upload_file_button' ) ?>"/>
 		</div>
 		</div>
 	</div>

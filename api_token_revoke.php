@@ -26,7 +26,7 @@
  * @uses api_token_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'api_token_api.php' );
 
 form_security_validate( 'revoke_api_token_form' );
@@ -40,12 +40,12 @@ $t_token_name = $t_token_row['name'];
 
 $t_user_id = auth_get_current_user_id();
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'user_id' => $t_user_id,
 		'id' => $f_token_id,
-	),
-);
+	],
+];
 
 $t_command = new UserTokenDeleteCommand( $t_data );
 $t_command->execute();
@@ -66,4 +66,3 @@ print_link_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
 echo '</div>';
 
 layout_page_end();
-

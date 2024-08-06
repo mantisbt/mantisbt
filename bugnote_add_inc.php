@@ -169,7 +169,7 @@ require_api( 'lang_api.php' );
 <?php
 	}
 
-	event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
+	event_signal( 'EVENT_BUGNOTE_ADD_FORM', [$f_bug_id] );
 ?>
 		</tbody>
 </table>

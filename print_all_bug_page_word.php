@@ -48,7 +48,7 @@
  * @uses string_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -264,7 +264,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		}
 		if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( $t_short_date_format, $t_bug->due_date );
-		print "\t\t</td>\n";
+		echo "\t\t</td>\n";
 		}
 	} else {
 ?>
@@ -475,7 +475,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 			$t_first_attachment = true;
 			$t_path = config_get_global( 'path' );
 
-			foreach ( $t_attachments as $t_attachment  ) {
+			foreach ( $t_attachments as $t_attachment ) {
 				if( $t_first_attachment ) {
 					$t_first_attachment = false;
 				} else {
@@ -541,7 +541,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 			<br />
 				<?php echo $t_date_submitted ?>&#160;&#160;&#160;
 				<?php if( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
-					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';
+					echo '<br />(' . lang_get( 'last_edited' ) . lang_get( 'word_separator' ) . $t_last_modified . ')';
 				} ?>
 			</td>
 	<td>
@@ -550,7 +550,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 						case REMINDER:
 							echo lang_get( 'reminder_sent_to' ) . ': ';
 							$t_note_attr = mb_substr( $t_bugnote->note_attr, 1, mb_strlen( $t_bugnote->note_attr ) - 2 );
-							$t_to = array();
+							$t_to = [];
 							foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
 								$t_to[] = prepare_user_name( $t_recipient );
 							}

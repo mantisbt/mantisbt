@@ -98,7 +98,7 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
 						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		db_query( $t_query, array( $p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type ) );
+		db_query( $t_query, [$p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type] );
 	}
 }
 
@@ -144,7 +144,7 @@ function history_log_event_special( $p_bug_id, $p_type, $p_old_value = '', $p_ne
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
 					( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
-	db_query( $t_query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_old_value, $c_new_value, '' ) );
+	db_query( $t_query, [$t_user_id, $p_bug_id, db_now(), $p_type, $c_old_value, $c_new_value, ''] );
 }
 
 /**
@@ -159,7 +159,7 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 	$t_normal_date_format = config_get( 'normal_date_format' );
 
 	$t_raw_history = history_get_raw_events_array( $p_bug_id, $p_user_id );
-	$t_history = array();
+	$t_history = [];
 
 	foreach( $t_raw_history as $k => $t_item ) {
 		/**
@@ -190,7 +190,7 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = null ) {
 	$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
-	$t_params = array( db_now() - $p_duration_in_seconds, $t_user_id );
+	$t_params = [db_now() - $p_duration_in_seconds, $t_user_id];
 
 	db_param_push();
 	$t_query = 'SELECT count(*) as event_count FROM {bug_history} WHERE date_modified > ' . db_param() .
@@ -227,7 +227,7 @@ function history_query_result( array $p_query_options ) {
 	}
 
 	$t_query = new DbQuery();
-	$t_where = array();
+	$t_where = [];
 
 	# With bug filter
 	if( isset( $p_query_options['filter'] ) ) {
@@ -247,7 +247,7 @@ function history_query_result( array $p_query_options ) {
 
 	# Bug ids
 	if( isset( $p_query_options['bug_id'] ) ) {
-		$c_ids = array();
+		$c_ids = [];
 		if( is_array( $p_query_options['bug_id'] ) ) {
 			foreach( $p_query_options['bug_id'] as $t_id ) {
 				$c_ids[] = (int)$t_id;
@@ -260,7 +260,7 @@ function history_query_result( array $p_query_options ) {
 
 	# User ids
 	if( isset( $p_query_options['user_id'] ) ) {
-		$c_ids = array();
+		$c_ids = [];
 		if( is_array( $p_query_options['user_id'] ) ) {
 			foreach( $p_query_options['user_id'] as $t_id ) {
 				$c_ids[] = (int)$t_id;
@@ -295,7 +295,7 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 
-	$t_query_options = array();
+	$t_query_options = [];
 	if ( $p_history_order !== null ) {
 		$t_query_options['order'] = $p_history_order;
 	}
@@ -324,7 +324,7 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
 	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 
-	$t_query_options = array();
+	$t_query_options = [];
 	if ( $p_history_order !== null ) {
 		$t_query_options['order'] = $p_history_order;
 	}
@@ -349,7 +349,7 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
  * @return array|false containing the history event or false if no more matches.
  */
 function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
-	static $s_bug_visible = array();
+	static $s_bug_visible = [];
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
 
 	while ( $t_row = db_fetch_array( $p_result ) ) {
@@ -480,7 +480,7 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 			}
 		}
 
-		$t_event = array();
+		$t_event = [];
 		$t_event['bug_id'] = $v_bug_id;
 		$t_event['date'] = $v_date_modified;
 		$t_event['userid'] = $v_user_id;
@@ -508,16 +508,16 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
  * @return array
  */
 function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
-	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
+	$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
-	$t_query_options = array(
+	$t_query_options = [
 		'bug_id' => $p_bug_id,
 		'start_time' => $p_start_time,
 		'end_time' => $p_end_time
-		);
+	];
 	$t_result = history_query_result( $t_query_options );
 
-	$t_raw_history = array();
+	$t_raw_history = [];
 
 	$j = 0;
 	while( true ) {
@@ -753,7 +753,7 @@ function history_localize_item( $p_bug_id, $p_field_name, $p_type, $p_old_value,
 		$t_note = lang_get_defaulted( 'plugin_' . $p_field_name, $p_field_name );
 		$t_change = ( isset( $p_new_value ) ? $p_old_value . ' => ' . $p_new_value : $p_old_value );
 
-		return array( 'note' => $t_note, 'change' => $t_change, 'raw' => true );
+		return ['note' => $t_note, 'change' => $t_change, 'raw' => true];
 	}
 
 	$t_field_localized = history_localize_field_name( $p_field_name );
@@ -974,7 +974,7 @@ function history_localize_item( $p_bug_id, $p_field_name, $p_type, $p_old_value,
 	}
 
 	# end if DEFAULT
-	return array( 'note' => $t_note, 'change' => $t_change, 'raw' => $t_raw );
+	return ['note' => $t_note, 'change' => $t_change, 'raw' => $t_raw];
 }
 
 /**
@@ -985,7 +985,7 @@ function history_localize_item( $p_bug_id, $p_field_name, $p_type, $p_old_value,
 function history_delete( $p_bug_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {bug_history} WHERE bug_id=' . db_param();
-	db_query( $t_query, array( $p_bug_id ) );
+	db_query( $t_query, [$p_bug_id] );
 }
 
 /**
@@ -1003,6 +1003,5 @@ function history_link_file_to_bugnote( $p_bug_id, $p_filename, $p_bugnote_id ) {
 		' WHERE bug_id=' . db_param() . ' AND old_value=' . db_param() .
 		' AND (type=' . db_param() . ' OR type=' . db_param() . ')';
 
-	db_query( $t_query, array( (int)$p_bugnote_id, (int)$p_bug_id, $p_filename, FILE_ADDED, FILE_DELETED ) );
+	db_query( $t_query, [(int)$p_bugnote_id, (int)$p_bug_id, $p_filename, FILE_ADDED, FILE_DELETED] );
 }
-

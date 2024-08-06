@@ -20,8 +20,8 @@ require_api( 'authentication_api.php' );
 require_api( 'user_pref_api.php' );
 
 $t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
-require_once( $t_soap_dir . 'mc_account_api.php' );
-require_once( $t_soap_dir . 'mc_enum_api.php' );
+require_once $t_soap_dir . 'mc_account_api.php';
+require_once $t_soap_dir . 'mc_enum_api.php';
 
 /**
  * Sample:
@@ -108,7 +108,7 @@ class ProjectUsersGetCommand extends Command {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[$this->project_id] );
 		}
 
 		# If user doesn't have access to project, return project doesn't exist
@@ -116,9 +116,9 @@ class ProjectUsersGetCommand extends Command {
 			throw new ClientException(
 				sprintf( "Project '%d' not found", $this->project_id ),
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[$this->project_id] );
 		}
-		
+
 		if( $this->page < 1 ) {
 			$this->page = 1;
 		}
@@ -138,8 +138,8 @@ class ProjectUsersGetCommand extends Command {
 			$this->access_level,
 			/* include_global_users */ true );
 
-		$t_display = array();
-		$t_sort = array();
+		$t_display = [];
+		$t_sort = [];
 
 		foreach( $t_users as $t_user ) {
 			$t_user_name = user_get_name_from_row( $t_user );
@@ -154,7 +154,7 @@ class ProjectUsersGetCommand extends Command {
 
 		$t_skip = ( $this->page - 1 ) * $this->page_size;
 		$t_taken = 0;
-		$t_users_result = array();
+		$t_users_result = [];
 
 		$t_lang = mci_get_user_lang( auth_get_current_user_id() );
 
@@ -165,7 +165,7 @@ class ProjectUsersGetCommand extends Command {
 			if( $this->include_access_levels ) {
 				$t_access_level = (int)$t_users[$i]['access_level'];
 				$t_user['access_level'] =
-					mci_enum_get_array_by_id( $t_access_level, 'access_levels', $t_lang );	
+					mci_enum_get_array_by_id( $t_access_level, 'access_levels', $t_lang );
 			}
 
 			$t_users_result[] = $t_user;
@@ -176,7 +176,7 @@ class ProjectUsersGetCommand extends Command {
 			}
 		}
 
-		$t_result = array( 'users' => $t_users_result );
+		$t_result = ['users' => $t_users_result];
 		return $t_result;
 	}
 }

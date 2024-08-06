@@ -50,4 +50,3 @@ function mc_config_get_string( $p_username, $p_password, $p_config_var ) {
 
 	return config_get( $p_config_var );
 }
-

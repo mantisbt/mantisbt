@@ -34,7 +34,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'form_api.php' );
@@ -65,14 +65,14 @@ if( $f_form_json_updates ) {
 	$f_form_updated_acls = $t_form_updates['user_access_level'];
 	$f_form_deleted_ids = $t_form_updates['user_access_delete'];
 } else {
-	$f_form_updated_acls = gpc_get_int_array( 'user_access_level', array() );
-	$f_form_deleted_ids = gpc_get_int_array( 'user_access_delete', array() );
+	$f_form_updated_acls = gpc_get_int_array( 'user_access_level', [] );
+	$f_form_deleted_ids = gpc_get_int_array( 'user_access_delete', [] );
 }
 
 # Build and validate the set of changes
 
-$t_users_to_update = array();
-$t_users_to_delete = array();
+$t_users_to_update = [];
+$t_users_to_delete = [];
 
 $t_all_local_users = project_get_all_user_rows( $f_project_id, ANYBODY, false );
 
@@ -186,7 +186,7 @@ if( !$f_confirmed ) {
 	# Table for users to be deleted
 	if( !empty( $t_users_to_delete ) ) {
 		# prepare usernames to sort the results
-		$t_usernames_val = Array();
+		$t_usernames_val = [];
 		foreach( $t_users_to_delete as $t_id ) {
 			$t_usernames_val[] = user_get_name( $t_id );
 		}
@@ -235,7 +235,7 @@ if( !$f_confirmed ) {
 	# Table for users to be modified
 	if( !empty( $t_users_to_update ) ) {
 		# prepare usernames to sort the results
-		$t_usernames_val = Array();
+		$t_usernames_val = [];
 		foreach( $t_users_to_update as $t_id => $t_val ) {
 			$t_usernames_val[] = user_get_name( $t_id );
 		}
@@ -302,7 +302,7 @@ if( !$f_confirmed ) {
 	}
 
 	form_security_purge( 'manage_proj_user_update' );
-	
+
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#project-users';
 	print_header_redirect( $t_redirect_url );
 }

@@ -61,6 +61,6 @@ class CompressionTest extends SoapBase {
 	 * @return array
 	 */
 	protected function extraSoapClientFlags() {
-		return array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP);
+		return ['compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP];
 	}
 }

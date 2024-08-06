@@ -130,11 +130,11 @@ function collapse_icon( $p_name ) {
 	} else {
 		$t_icon = 'fa-chevron-down';
 		$t_alt = '+';
-		$t_id = $p_name. '_closed_link';
+		$t_id = $p_name . '_closed_link';
 	}
 
 	echo '&nbsp;&nbsp;<a id="', $t_id, '" class="collapse-link noprint">';
-	print_icon( $t_icon, 'bigger-120', $t_alt);
+	print_icon( $t_icon, 'bigger-120', $t_alt );
 	echo '</a>';
 }
 
@@ -186,7 +186,7 @@ function collapse_cache_token() {
 	global $g_collapse_cache_token;
 
 	if( !auth_is_user_authenticated() || current_user_is_anonymous() ) {
-		$g_collapse_cache_token = array();
+		$g_collapse_cache_token = [];
 		return;
 	}
 
@@ -199,7 +199,7 @@ function collapse_cache_token() {
 	if( !is_null( $t_token ) ) {
 		$t_data = json_decode( $t_token, true );
 	} else {
-		$t_data = array();
+		$t_data = [];
 		$t_data['filter'] = false;
 	}
 

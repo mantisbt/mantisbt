@@ -75,7 +75,7 @@ class Faker {
 		$t_randomString = '';
 
 		for ( $i = 0; $i < $p_length; $i++ ) {
-			$t_randomString .= $t_characters[random_int(0, $t_characters_length - 1)];
+			$t_randomString .= $t_characters[random_int( 0, $t_characters_length - 1 )];
 		}
 
 		return $t_randomString;

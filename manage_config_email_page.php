@@ -36,7 +36,7 @@
  * @uses string_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -146,7 +146,7 @@ function show_notify_flag( $p_action, $p_flag ) {
 	if( $g_can_change_flags || $g_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_flag;
 		$t_set = $t_flag ? 'checked="checked"' : '';
-		return '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name. '" ' . $t_set . ' /><span class="lbl"></span></label>';
+		return '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' /><span class="lbl"></span></label>';
 	} else {
 		return $t_flag ? icon_get( 'fa-check', 'fa-lg blue' ) : '&#160;';
 	}
@@ -253,7 +253,7 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
 	echo '<tr><td>' . string_display( $p_caption ) . '</td>' . "\n";
-	echo '  <td' . color_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' ) . '</td>' . "\n";
 	echo '  <td' . color_notify_flag( $p_message_type, 'handler' ) . '>' . show_notify_flag( $p_message_type, 'handler' ) . '</td>' . "\n";
 	echo '  <td' . color_notify_flag( $p_message_type, 'monitor' ) . '>' . show_notify_flag( $p_message_type, 'monitor' ) . '</td>' . "\n";
 	echo '  <td' . color_notify_flag( $p_message_type, 'bugnotes' ) . '>' . show_notify_flag( $p_message_type, 'bugnotes' ) . '</td>' . "\n";
@@ -292,7 +292,7 @@ $t_actions = email_get_actions();
 
 # build a composite of the status flags, exploding the defaults
 $t_global_default_notify_flags = config_get( 'default_notify_flags', null, ALL_USERS, ALL_PROJECTS );
-$g_global_notify_flags = array();
+$g_global_notify_flags = [];
 foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
 		$g_global_notify_flags[$t_action][$t_flag] = $t_value;
@@ -301,7 +301,7 @@ foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
 $g_global_notify_flags = array_merge_recursive2( $g_global_notify_flags, config_get( 'notify_flags', null, ALL_USERS, ALL_PROJECTS ) );
 
 $t_file_default_notify_flags = config_get_global( 'default_notify_flags' );
-$g_file_notify_flags = array();
+$g_file_notify_flags = [];
 foreach ( $t_file_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
 		$g_file_notify_flags[$t_action][$t_flag] = $t_value;
@@ -310,7 +310,7 @@ foreach ( $t_file_default_notify_flags as $t_flag => $t_value ) {
 $g_file_notify_flags = array_merge_recursive2( $g_file_notify_flags, config_get_global( 'notify_flags' ) );
 
 $g_default_notify_flags = config_get( 'default_notify_flags' );
-$g_notify_flags = array();
+$g_notify_flags = [];
 foreach ( $g_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
 		$g_notify_flags[$t_action][$t_flag] = $t_value;
@@ -348,7 +348,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	}
 	echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 	echo '</div>' . "\n";
-	
+
 	get_section_begin_for_email( lang_get( 'email_notification' ) );
 #		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'
 	get_capability_row_for_email( lang_get( 'email_on_updated' ), 'updated' );

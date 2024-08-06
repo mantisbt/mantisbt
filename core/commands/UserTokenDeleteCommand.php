@@ -60,7 +60,7 @@ class UserTokenDeleteCommand extends Command {
 				throw new ClientException(
 					"User doesn't exist",
 					ERROR_USER_BY_ID_NOT_FOUND,
-					array( $this->user_id )
+					[$this->user_id]
 				);
 			}
 		}
@@ -68,7 +68,7 @@ class UserTokenDeleteCommand extends Command {
 		// ensure target user is not protected
 		if( user_is_protected( $this->user_id ) ) {
 			throw new ClientException(
-				"User is protected",
+				'User is protected',
 				ERROR_PROTECTED_ACCOUNT
 			);
 		}
@@ -80,7 +80,7 @@ class UserTokenDeleteCommand extends Command {
 			throw new ClientException(
 				"Token doesn't exist",
 				ERROR_USER_TOKEN_NOT_FOUND,
-				array( $t_token_id )
+				[$t_token_id]
 			);
 		}
 	}

@@ -34,7 +34,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'current_user_api.php' );
@@ -46,7 +46,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
 define( 'PRINT_ALL_BUG_OPTIONS_INC_ALLOW', true );
-include( __DIR__ . '/print_all_bug_options_inc.php' );
+include __DIR__ . '/print_all_bug_options_inc.php';
 
 form_security_validate( 'print_all_bug_options_reset' );
 
@@ -71,7 +71,7 @@ $t_default = implode( '', $t_default_arr );
 # reset to defaults
 $t_query = 'UPDATE {user_print_pref} SET print_pref=' . db_param() . ' WHERE user_id=' . db_param();
 
-$t_result = db_query( $t_query, array( $t_default, $t_user_id ) );
+$t_result = db_query( $t_query, [$t_default, $t_user_id] );
 
 form_security_purge( 'print_all_bug_options_reset' );
 

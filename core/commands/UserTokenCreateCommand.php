@@ -20,8 +20,8 @@ require_api( 'api_token_api.php' );
 use Mantis\Exceptions\ClientException;
 
 $t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
-require_once( $t_soap_dir . 'mc_api.php' );
-require_once( $t_soap_dir . 'mc_account_api.php' );
+require_once $t_soap_dir . 'mc_api.php';
+require_once $t_soap_dir . 'mc_account_api.php';
 
 /**
  * A command that creates a user API token.
@@ -72,7 +72,7 @@ class UserTokenCreateCommand extends Command {
 				throw new ClientException(
 					"User doesn't exist",
 					ERROR_USER_BY_ID_NOT_FOUND,
-					array( $this->user_id )
+					[$this->user_id]
 				);
 			}
 
@@ -88,7 +88,7 @@ class UserTokenCreateCommand extends Command {
 		}
 
 		// Check if it possible to create tokens for target user - e.g. user is not protected.
-		if( !api_token_can_create( $this->user_id )) {
+		if( !api_token_can_create( $this->user_id ) ) {
 			throw new ClientException(
 				'Create API tokens not allowed for target user',
 				ERROR_ACCESS_DENIED
@@ -103,10 +103,10 @@ class UserTokenCreateCommand extends Command {
 			$t_count = 1;
 			do {
 				$this->name = sprintf(
-					"%s created on %s",
+					'%s created on %s',
 					$t_current_user_name,
 					date( $t_date_format ) );
-				
+
 				if( $t_count > 1 ) {
 					$this->name .= ' ' . $t_count;
 				}
@@ -120,7 +120,7 @@ class UserTokenCreateCommand extends Command {
 			throw new ClientException(
 				'Token name is not unique',
 				ERROR_INVALID_FIELD_VALUE,
-				array( $this->name )
+				[$this->name]
 			);
 		}
 	}
@@ -129,12 +129,12 @@ class UserTokenCreateCommand extends Command {
 	function process() {
 		$t_token_result = api_token_create( $this->name, $this->user_id, /* return_id */ true );
 
-		$t_result = array(
+		$t_result = [
 			'id' => $t_token_result['id'],
 			'name' => $this->name,
 			'token' => $t_token_result['token'],
 			'user' => mci_account_get_array_by_id( $this->user_id )
-		);
+		];
 
 		return $t_result;
 	}

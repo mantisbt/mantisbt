@@ -34,7 +34,7 @@
  * @uses string_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -56,7 +56,7 @@ layout_page_begin( 'manage_overview_page.php' );
 print_manage_menu( 'manage_custom_field_page.php' );
 
 $t_all_ids = custom_field_get_ids();
-$t_all_defs = array();
+$t_all_defs = [];
 foreach( $t_all_ids as $t_id ) {
 	$t_all_defs[] = custom_field_get_definition( $t_id );
 }

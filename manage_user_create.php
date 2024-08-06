@@ -36,7 +36,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
@@ -77,18 +77,18 @@ if( is_blank( $f_password ) && (
 		lang_get( 'empty_password_button' ) );
 }
 
-$t_data = array(
-	'query' => array(),
-	'payload' => array(
+$t_data = [
+	'query' => [],
+	'payload' => [
 		'username' => $f_username,
 		'email' => $f_email,
-		'access_level' => array( 'id' => $f_access_level ),
+		'access_level' => ['id' => $f_access_level],
 		'real_name' => $f_realname,
 		'password' => $f_password,
 		'protected' => $f_protected,
 		'enabled' => $f_enabled
-	)
-);
+	]
+];
 
 $t_command = new UserCreateCommand( $t_data );
 $t_result = $t_command->execute();

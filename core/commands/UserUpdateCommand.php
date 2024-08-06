@@ -23,7 +23,7 @@ require_api( 'user_api.php' );
 use Mantis\Exceptions\ClientException;
 
 $t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
-require_once( $t_soap_dir . 'mc_api.php' );
+require_once $t_soap_dir . 'mc_api.php';
 
 /**
  * A command that updates a user account.
@@ -129,7 +129,7 @@ class UserUpdateCommand extends Command {
 		# User Data
 		$t_user = $this->payload( 'user' );
 		if( is_null( $t_user ) ) {
-			throw new ClientException( 'Missing user data', ERROR_EMPTY_FIELD, array( 'user' ) );
+			throw new ClientException( 'Missing user data', ERROR_EMPTY_FIELD, ['user'] );
 		}
 
 		# Protected
@@ -148,7 +148,7 @@ class UserUpdateCommand extends Command {
 		}
 
 		$t_old_username = user_get_username( $this->user_id );
-		$t_new_username = isset( $t_user['username' ] ) ? trim( $t_user['username']): null;
+		$t_new_username = isset( $t_user['username' ] ) ? trim( $t_user['username'] ): null;
 
 		if( !is_null( $t_new_username ) && $t_new_username !== $t_old_username ) {
 			user_ensure_name_unique( $t_new_username, $this->user_id );
@@ -241,7 +241,7 @@ class UserUpdateCommand extends Command {
 		# Don't allow updating accounts to access levels that are higher than
 		# the actor's access level.
 		if( !access_has_global_level( $t_old_access_level ) ||
-		    ( !is_null( $t_new_access_level ) && !access_has_global_level( $t_new_access_level ) ) ) {
+			( !is_null( $t_new_access_level ) && !access_has_global_level( $t_new_access_level ) ) ) {
 			throw new ClientException(
 				'Access denied to update users that have higher access level',
 				ERROR_ACCESS_DENIED );
@@ -254,7 +254,7 @@ class UserUpdateCommand extends Command {
 
 			if( $t_admin_count <= 1 ) {
 				if( ( !is_null( $this->enabled ) && !$this->enabled ) ||
-				    ( !is_null( $this->access_level ) && $this->access_level < $t_admin_threshold ) ) {
+					( !is_null( $this->access_level ) && $this->access_level < $t_admin_threshold ) ) {
 						throw new ClientException(
 							'Disabling or reducing access level of last admin not allowed.',
 							ERROR_USER_CHANGE_LAST_ADMIN );
@@ -262,7 +262,7 @@ class UserUpdateCommand extends Command {
 			}
 		}
 
-		$this->old_user = array(
+		$this->old_user = [
 			'id' => $this->user_id,
 			'username' => $t_old_username,
 			'real_name' => $t_old_realname,
@@ -270,9 +270,9 @@ class UserUpdateCommand extends Command {
 			'access_level' => $t_old_access_level,
 			'enabled' => $t_old_enabled,
 			'protected' => $t_old_protected
-		);
+		];
 
-		$this->new_user = array(
+		$this->new_user = [
 			'id' => $this->user_id,
 			'username' => $t_new_username ?: $t_old_username,
 			'real_name' => !is_null( $t_new_realname ) ? $t_new_realname : $t_old_realname,
@@ -280,7 +280,7 @@ class UserUpdateCommand extends Command {
 			'access_level' => $t_new_access_level ?: $t_old_access_level,
 			'enabled' => !is_null( $t_new_enabled ) ? $t_new_enabled : $t_old_enabled,
 			'protected' => !is_null( $t_new_protected ) ? $t_new_protected : $t_old_protected
-		);
+		];
 	}
 
 	/**
@@ -304,12 +304,12 @@ class UserUpdateCommand extends Command {
 			email_user_changed( $this->user_id, $this->old_user, $this->new_user );
 		}
 
-		event_signal( 'EVENT_MANAGE_USER_UPDATE', array( $this->user_id ) );
+		event_signal( 'EVENT_MANAGE_USER_UPDATE', [$this->user_id] );
 
 		user_clear_cache( $this->user_id );
-		$t_select = array( 'id', 'name', 'real_name', 'email', 'access_level', 'enabled', 'protected' );
+		$t_select = ['id', 'name', 'real_name', 'email', 'access_level', 'enabled', 'protected'];
 		$t_user = mci_user_get( $this->user_id, $t_select );
-		return array( 'user' => $t_user );
+		return ['user' => $t_user];
 	}
 
 	/**
@@ -332,16 +332,15 @@ class UserUpdateCommand extends Command {
 				protected=' . db_param() . ', realname=' . db_param() . '
 			WHERE id=' . db_param();
 
-		$t_query_params = array(
+		$t_query_params = [
 			$p_user['username'],
 			$p_user['email'],
 			$p_user['access_level'],
 			$p_user['enabled'],
 			$p_user['protected'],
 			$p_user['real_name'],
-			$p_user['id'] );
+			$p_user['id']];
 
 		db_query( $t_query, $t_query_params );
 	}
 }
-

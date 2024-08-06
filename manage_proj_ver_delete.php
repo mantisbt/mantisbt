@@ -31,7 +31,7 @@
  * @uses lang_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -55,12 +55,12 @@ helper_ensure_confirmed(
 	lang_get( 'delete_version_button' )
 );
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'project_id' => $t_version_info->project_id,
 		'version_id' => $f_version_id,
-	)
-);
+	]
+];
 
 $t_command = new VersionDeleteCommand( $t_data );
 $t_command->execute();

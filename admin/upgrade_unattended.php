@@ -29,7 +29,7 @@
 # and plugins will not be loaded.
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
-require_once( dirname( __DIR__ ) . '/core.php' );
+require_once dirname( __DIR__ ) . '/core.php';
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
@@ -104,7 +104,7 @@ if( !preg_match( '/^[a-zA-Z0-9_]+$/', $t_db_type ) ||
 }
 
 $GLOBALS['g_db_type'] = $t_db_type; # database_api references this
-require_once( __DIR__ . '/schema.php' );
+require_once __DIR__ . '/schema.php';
 $g_db = ADONewConnection( $t_db_type );
 
 echo "\nPost 1.0 schema changes\n";
@@ -138,15 +138,15 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 	if( $g_upgrade[$i][0] == 'InsertData' ) {
 		$t_sqlarray = call_user_func_array( $g_upgrade[$i][0], $g_upgrade[$i][1] );
 	} else if( $g_upgrade[$i][0] == 'UpdateSQL' ) {
-		$t_sqlarray = array(
+		$t_sqlarray = [
 			$g_upgrade[$i][1],
-		);
+		];
 
 		$t_target = $g_upgrade[$i][1];
 	} else if( $g_upgrade[$i][0] == 'UpdateFunction' ) {
-		$t_sqlarray = array(
+		$t_sqlarray = [
 			$g_upgrade[$i][1],
-		);
+		];
 
 		if( isset( $g_upgrade[$i][2] ) ) {
 			$t_sqlarray[] = $g_upgrade[$i][2];
@@ -158,12 +158,12 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 		# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
 		if( isset( $g_upgrade[$i][2] ) ) {
 			if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
-				$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
+				$t_sqlarray = call_user_func_array( [$t_dict, $g_upgrade[$i][0]], $g_upgrade[$i][1] );
 			} else {
-				$t_sqlarray = array();
+				$t_sqlarray = [];
 			}
 		} else {
-			$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
+			$t_sqlarray = call_user_func_array( [$t_dict, $g_upgrade[$i][0]], $g_upgrade[$i][1] );
 		}
 	}
 

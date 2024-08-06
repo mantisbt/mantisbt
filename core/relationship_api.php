@@ -134,62 +134,62 @@ class BugRelationshipData {
 	public $type;
 }
 
-$g_relationships = array();
-$g_relationships[BUG_DEPENDANT] = array(
+$g_relationships = [];
+$g_relationships[BUG_DEPENDANT] = [
 	'#forward' => true,
 	'#complementary' => BUG_BLOCKS,
 	'#name' => 'parent-of',
 	'#description' => 'dependant_on',
 	'#notify_added' => 'email_notification_title_for_action_dependant_on_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_dependant_on_relationship_deleted',
-	'#edge_style' => array(
+	'#edge_style' => [
 		'color' => '#C00000',
 		'dir' => 'back',
-	),
-);
-$g_relationships[BUG_BLOCKS] = array(
+	],
+];
+$g_relationships[BUG_BLOCKS] = [
 	'#forward' => false,
 	'#complementary' => BUG_DEPENDANT,
 	'#name' => 'child-of',
 	'#description' => 'blocks',
 	'#notify_added' => 'email_notification_title_for_action_blocks_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_blocks_relationship_deleted',
-	'#edge_style' => array(
+	'#edge_style' => [
 		'color' => '#C00000',
 		'dir' => 'forward',
-	),
-);
-$g_relationships[BUG_DUPLICATE] = array(
+	],
+];
+$g_relationships[BUG_DUPLICATE] = [
 	'#forward' => true,
 	'#complementary' => BUG_HAS_DUPLICATE,
 	'#name' => 'duplicate-of',
 	'#description' => 'duplicate_of',
 	'#notify_added' => 'email_notification_title_for_action_duplicate_of_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_duplicate_of_relationship_deleted',
-	'#edge_style' => array(
+	'#edge_style' => [
 		'style' => 'dashed',
 		'color' => '#808080',
-	),
-);
-$g_relationships[BUG_HAS_DUPLICATE] = array(
+	],
+];
+$g_relationships[BUG_HAS_DUPLICATE] = [
 	'#forward' => false,
 	'#complementary' => BUG_DUPLICATE,
 	'#name' => 'has-duplicate',
 	'#description' => 'has_duplicate',
 	'#notify_added' => 'email_notification_title_for_action_has_duplicate_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_has_duplicate_relationship_deleted',
-);
-$g_relationships[BUG_RELATED] = array(
+];
+$g_relationships[BUG_RELATED] = [
 	'#forward' => true,
 	'#name' => 'related-to',
 	'#complementary' => BUG_RELATED,
 	'#description' => 'related_to',
 	'#notify_added' => 'email_notification_title_for_action_related_to_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_related_to_relationship_deleted',
-);
+];
 
 if( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' ) ) {
-	include_once( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' );
+	include_once config_get_global( 'config_path' ) . 'custom_relationships_inc.php';
 }
 
 /**
@@ -247,17 +247,17 @@ function relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_
 
 	if( $g_relationships[$p_relationship_type]['#forward'] === false ) {
 		# Invert backwards relationships
-		$t_data = array(
+		$t_data = [
 			(int)$p_dest_bug_id,
 			(int)$p_src_bug_id,
 			relationship_get_complementary_type( $p_relationship_type )
-		);
+		];
 	} else {
-		$t_data = array(
+		$t_data = [
 			(int)$p_src_bug_id,
 			(int)$p_dest_bug_id,
 			(int)$p_relationship_type
-		);
+		];
 	}
 	return $t_data;
 }
@@ -366,7 +366,7 @@ function relationship_delete( $p_relationship_id, $p_send_email = true ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {bug_relationship} WHERE id=' . db_param();
-	db_query( $t_query, array( (int)$p_relationship_id ) );
+	db_query( $t_query, [(int)$p_relationship_id] );
 
 	$t_src_bug_id = $t_relationship->src_bug_id;
 	$t_dest_bug_id = $t_relationship->dest_bug_id;
@@ -446,7 +446,7 @@ function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
 function relationship_get( $p_relationship_id ) {
 	db_param_push();
 	$t_query = 'SELECT * FROM {bug_relationship} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( (int)$p_relationship_id ) );
+	$t_result = db_query( $t_query, [(int)$p_relationship_id] );
 
 	$t_relationship = db_fetch_array( $t_result );
 
@@ -483,12 +483,12 @@ function relationship_get_all_src( $p_src_bug_id ) {
 				INNER JOIN {bug} ON {bug_relationship}.destination_bug_id = {bug}.id
 				WHERE source_bug_id=' . db_param() . '
 				ORDER BY relationship_type, {bug_relationship}.id';
-	$t_result = db_query( $t_query, array( $p_src_bug_id ) );
+	$t_result = db_query( $t_query, [$p_src_bug_id] );
 
 	$t_src_project_id = bug_get_field( $p_src_bug_id, 'project_id' );
 
-	$t_bug_relationship_data = array();
-	$t_bug_array = array();
+	$t_bug_relationship_data = [];
+	$t_bug_array = [];
 	$i = 0;
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -527,12 +527,12 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 				INNER JOIN {bug} ON {bug_relationship}.source_bug_id = {bug}.id
 				WHERE destination_bug_id=' . db_param() . '
 				ORDER BY relationship_type, {bug_relationship}.id';
-	$t_result = db_query( $t_query, array( (int)$p_dest_bug_id ) );
+	$t_result = db_query( $t_query, [(int)$p_dest_bug_id] );
 
 	$t_dest_project_id = bug_get_field( $p_dest_bug_id, 'project_id' );
 
-	$t_bug_relationship_data = array();
-	$t_bug_array = array();
+	$t_bug_relationship_data = [];
+	$t_bug_array = [];
 	$i = 0;
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -594,7 +594,7 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 				OR
 				(source_bug_id=' . db_param() . '
 				AND destination_bug_id=' . db_param() . ')';
-	$t_result = db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id ), 1 );
+	$t_result = db_query( $t_query, [$c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id], 1 );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
 		# return the first id
@@ -760,7 +760,7 @@ function relationship_get_id_from_api_name( $p_relationship_type_name ) {
 	throw new ClientException(
 		sprintf( "Unknown relationship type '%s'", $p_relationship_type_name ),
 		ERROR_INVALID_FIELD_VALUE,
-		array( 'relationship_type' )
+		['relationship_type']
 	);
 }
 

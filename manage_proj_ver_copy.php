@@ -35,7 +35,7 @@
  * @uses version_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -101,4 +101,4 @@ foreach ( $t_rows as $t_row ) {
 
 form_security_purge( 'manage_proj_ver_copy' );
 
-print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#versions');
+print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#versions' );

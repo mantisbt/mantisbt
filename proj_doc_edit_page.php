@@ -36,7 +36,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'database_api.php' );
@@ -63,7 +63,7 @@ $t_project_id = file_get_field( $t_file_id, 'project_id', 'project' );
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 $t_query = 'SELECT * FROM {project_file} WHERE id=' . db_param();
-$t_result = db_query( $t_query, array( $t_file_id ) );
+$t_result = db_query( $t_query, [$t_file_id] );
 $t_row = db_fetch_array( $t_result );
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
@@ -90,7 +90,7 @@ print_doc_menu();
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-edit', 'ace-icon' ); ?>
-			<?php echo lang_get('upload_file_title') ?>
+			<?php echo lang_get( 'upload_file_title' ) ?>
 		</h4>
 	</div>
 <div class="widget-body">
@@ -122,7 +122,7 @@ print_doc_menu();
 	</th>
 	<td>
 		<?php
-			$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
+			$t_href = '<a href="file_download.php?file_id=' . $v_id . '&amp;type=doc">';
 			echo $t_href;
 			print_file_icon( $v_filename );
 			echo '</a>&#160;' . $t_href . string_html_specialchars( file_get_display_name( $v_filename ) ) . '</a>';
@@ -144,9 +144,9 @@ print_doc_menu();
 </div>
 </div>
 	<div class="widget-toolbox padding-8 clearfix">
-		<span class="required pull-right"> * <?php echo lang_get('required') ?></span>
+		<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
 		<input type="submit" class="btn btn-primary btn-white btn-round"
-			value="<?php echo lang_get('file_update_button') ?>"/>
+			value="<?php echo lang_get( 'file_update_button' ) ?>"/>
 	</div>
 </div>
 </div>

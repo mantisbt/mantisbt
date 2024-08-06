@@ -36,7 +36,7 @@
  * @uses relationship_graph_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -175,11 +175,11 @@ layout_page_begin();
 			<!-- Legend -->
 			<div class="center widget-toolbox">
 <?php
-	$t_legend = array(
+	$t_legend = [
 		'related_to' => 'rel_related.png',
 		'blocks' => 'rel_dependant.png',
 		'duplicate_of' => 'rel_duplicate.png',
-	);
+	];
 	foreach( $t_legend as $t_key => $t_image ) {
 		$t_string = lang_get( $t_key );
 ?>
@@ -205,4 +205,4 @@ $t_mantis_dir = __DIR__ . DIRECTORY_SEPARATOR;
 $t_file = __FILE__;
 
 define( 'BUG_VIEW_INC_ALLOW', true );
-include( __DIR__ . '/bug_view_inc.php' );
+include __DIR__ . '/bug_view_inc.php';

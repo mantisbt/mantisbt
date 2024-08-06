@@ -53,24 +53,24 @@ class MonitorAddCommand extends Command {
 	/**
 	 * Validate the data.
 	 */
-	function validate() {		
+	function validate() {
 		$t_issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
 
 		$this->projectId = bug_get_field( $t_issue_id, 'project_id' );
 		$t_logged_in_user = auth_get_current_user_id();
 
-		$t_users = $this->payload( 'users', array( array( 'id' => $t_logged_in_user ) ) );
+		$t_users = $this->payload( 'users', [['id' => $t_logged_in_user]] );
 		if( !is_array( $t_users ) ) {
-			throw new ClientException( 'Invalid users array', ERROR_INVALID_FIELD_VALUE, array( 'users' ) );
+			throw new ClientException( 'Invalid users array', ERROR_INVALID_FIELD_VALUE, ['users'] );
 		}
 
 		# Normalize user objects
-		$t_user_ids = array();
+		$t_user_ids = [];
 		foreach( $t_users as $t_user ) {
 			$t_user_ids[] = user_get_id_by_user_info( $t_user );
 		}
 
-		$this->userIdsToAdd = array();
+		$this->userIdsToAdd = [];
 		foreach( $t_user_ids as $t_user_id ) {
 			user_ensure_exists( $t_user_id );
 
@@ -123,7 +123,6 @@ class MonitorAddCommand extends Command {
 			bug_monitor( $this->query( 'issue_id' ), $t_user_id );
 		}
 
-		return array();
+		return [];
 	}
 }
-

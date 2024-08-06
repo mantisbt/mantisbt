@@ -37,7 +37,7 @@
  * @uses workflow_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -68,7 +68,7 @@ $g_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 $g_can_change_workflow = ( $g_access >= config_get_access( 'status_enum_workflow' ) );
 $g_can_change_flags = $g_can_change_workflow;
-$g_overrides = array();
+$g_overrides = [];
 
 /**
  * Set overrides
@@ -85,7 +85,7 @@ function set_overrides( $p_config, $p_can_change, $p_color ) {
 	}
 
 	$t_project = helper_get_current_project();
-	if(    $t_project == ALL_PROJECTS && $p_color == COLOR_GLOBAL
+	if( $t_project == ALL_PROJECTS && $p_color == COLOR_GLOBAL
 		|| $t_project != ALL_PROJECTS && $p_color == COLOR_PROJECT
 	) {
 		$g_overrides[$p_config] = $p_config;
@@ -176,16 +176,16 @@ function section_begin( $p_section_name ) {
 	echo "\t<table  class=\"table table-striped table-bordered table-condensed\">\n";
 	echo "\t\t<thead>\n";
 	echo "\t\t" . '<tr>' . "\n";
-	echo "\t\t\t" . '<th class="bold" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
+	echo "\t\t\t" . '<th class="bold" rowspan="2">' . lang_get( 'current_status' ) . '</th>' . "\n";
 	echo "\t\t\t" . '<th class="bold" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
 		. lang_get( 'next_status' ) . '</th>';
-	echo "\n\t\t" . '</tr>'. "\n";
+	echo "\n\t\t" . '</tr>' . "\n";
 	echo "\t\t" . '<tr>' . "\n";
 
 	foreach( $t_enum_statuses as $t_status ) {
 		echo "\t\t\t" . '<th class="bold" style="text-align:center">&#160;'
 			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) )
-			. '&#160;</th>' ."\n";
+			. '&#160;</th>' . "\n";
 	}
 
 	echo "\t\t\t" . '<th class="bold" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</th>' . "\n";
@@ -202,7 +202,7 @@ function section_begin( $p_section_name ) {
 function capability_row( $p_from_status ) {
 	global $g_file_workflow, $g_global_workflow, $g_project_workflow, $g_can_change_workflow;
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	echo "\t\t" .'<tr><td>' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_from_status ) ) . '</td>' . "\n";
+	echo "\t\t" . '<tr><td>' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_from_status ) ) . '</td>' . "\n";
 	foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
 		echo show_flag( $p_from_status, $t_to_status_id );
 	}
@@ -291,7 +291,7 @@ function threshold_row( $p_threshold ) {
 	set_overrides( $p_threshold, $t_can_change_threshold, $t_color );
 
 	$t_file_access = config_get_global( 'admin_site_threshold' );
-	$t_global_access = config_get_access( $p_threshold, ALL_USERS, ALL_PROJECTS);
+	$t_global_access = config_get_access( $p_threshold, ALL_USERS, ALL_PROJECTS );
 	$t_project_access = config_get_access( $p_threshold );
 	$t_color_access = set_color_override( $t_file_access, $t_global_access, $t_project_access );
 	set_overrides( $p_threshold, $t_can_change_threshold, $t_color_access );
@@ -339,12 +339,12 @@ function access_begin( $p_section_name ) {
 	echo '   </div>';
 	echo '   <div class="widget-body">';
 	echo '   <div class="widget-main no-padding">';
-    echo '        <div class="widget-toolbox padding-8 clearfix">';
-    echo            lang_get( 'access_change' );
-    echo '        </div>';
-    echo '        <div class="table-responsive">';
-    echo '        <table class="table table-striped table-bordered table-condensed">';
-    echo '        <tbody>';
+	echo '        <div class="widget-toolbox padding-8 clearfix">';
+	echo            lang_get( 'access_change' );
+	echo '        </div>';
+	echo '        <div class="table-responsive">';
+	echo '        <table class="table table-striped table-bordered table-condensed">';
+	echo '        <tbody>';
 }
 
 /**
@@ -504,7 +504,7 @@ echo '<div class="well">' . "\n";
 echo '<p class="bold">' . icon_get( 'fa-info-circle' ) . " $t_project_title</p>\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $t_project ) {
-	echo '<span class="' . COLOR_PROJECT . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="' . COLOR_PROJECT . '">' . lang_get( 'colour_project' ) . '</span><br />';
 }
 echo '<span class="' . COLOR_GLOBAL . '">' . lang_get( 'colour_global' ) . '</span></p>';
 echo '</div>' . "\n";

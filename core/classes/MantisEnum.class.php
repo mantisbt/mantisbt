@@ -43,7 +43,7 @@ class MantisEnum {
 	 *
 	 * @var array Used to cache previous results
 	 */
-	private static $_cacheAssocArrayIndexedByValues = array();
+	private static $_cacheAssocArrayIndexedByValues = [];
 
 	/**
 	 * Get the string associated with the $p_enum value
@@ -119,7 +119,7 @@ class MantisEnum {
 
 		$t_tuples = MantisEnum::getArrayOfTuples( $p_enum_string );
 
-		$t_assoc_array = array();
+		$t_assoc_array = [];
 
 		foreach ( $t_tuples as $t_tuple ) {
 			$t_tuple_tokens = MantisEnum::getArrayForTuple( $t_tuple );
@@ -188,11 +188,11 @@ class MantisEnum {
 	 */
 	private static function getArrayOfTuples( $p_enum_string ) {
 		if( strlen( trim( $p_enum_string ) ) == 0 ) {
-			return array();
+			return [];
 		}
 
 		$t_raw_array = explode( MantisEnum::TUPLE_SEPARATOR, $p_enum_string );
-		$t_trimmed_array = array();
+		$t_trimmed_array = [];
 
 		foreach( $t_raw_array as $t_tuple ) {
 			$t_trimmed_array[] = trim( $t_tuple );

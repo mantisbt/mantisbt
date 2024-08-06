@@ -34,12 +34,12 @@ class XmlImportExportPlugin extends MantisPlugin {
 	function register() {
 		$this->name = plugin_lang_get( 'title' );
 		$this->description = plugin_lang_get( 'description' );
-		$this->page = "config_page";
+		$this->page = 'config_page';
 
 		$this->version = MANTIS_VERSION;
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.25.0',
-		);
+		];
 
 		$this->author = 'MantisBT Team';
 		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
@@ -51,10 +51,10 @@ class XmlImportExportPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	public function config() {
-		return array(
-			"import_threshold" => ADMINISTRATOR,
-			"export_threshold" => DEVELOPER,
-		);
+		return [
+			'import_threshold' => ADMINISTRATOR,
+			'export_threshold' => DEVELOPER,
+		];
 	}
 
 	/**
@@ -62,10 +62,10 @@ class XmlImportExportPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function hooks() {
-		$t_hooks = array(
+		$t_hooks = [
 			'EVENT_MENU_MANAGE' => 'import_issues_menu',
 			'EVENT_MENU_FILTER' => 'export_issues_menu',
-		);
+		];
 		return $t_hooks;
 	}
 
@@ -74,7 +74,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function import_issues_menu() {
-		return array( '<a href="' . plugin_page( 'import' ) . '">' . plugin_lang_get( 'import' ) . '</a>', );
+		return ['<a href="' . plugin_page( 'import' ) . '">' . plugin_lang_get( 'import' ) . '</a>', ];
 	}
 
 	/**
@@ -83,9 +83,9 @@ class XmlImportExportPlugin extends MantisPlugin {
 	 */
 	function export_issues_menu() {
 		if( !access_has_project_level( plugin_config_get( 'export_threshold' ) ) ) {
-			return array();
+			return [];
 		}
-		return array( '<a class="btn btn-sm btn-primary btn-white btn-round" href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', );
+		return ['<a class="btn btn-sm btn-primary btn-white btn-round" href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', ];
 	}
 
 	/**

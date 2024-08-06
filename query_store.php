@@ -35,7 +35,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
 require_api( 'config_api.php' );
@@ -75,7 +75,7 @@ if( !filter_name_valid_length( $f_query_name ) ) {
 # Check and make sure they don't already have a
 # query with the same name
 $t_query_arr = filter_db_get_available_queries();
-foreach( $t_query_arr as $t_id => $t_name )	{
+foreach( $t_query_arr as $t_id => $t_name ) {
 	if( $f_query_name == $t_name ) {
 		$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
 			. urlencode( lang_get( 'query_dupe_name' ) );
@@ -119,10 +119,10 @@ if( $t_new_row_id == -1 ) {
 } else {
 	# Build a redirect to view_all_set to load the filter that was saved.
 	# This will make the filter name appear as selected in the filter selection box.
-	$t_params = array(
+	$t_params = [
 		'type' => 3,
 		'source_query_id' => $t_new_row_id
-	);
+	];
 	if( filter_is_temporary( $t_filter ) ) {
 		$t_params['filter'] = filter_get_temporary_key( $t_filter );
 	}

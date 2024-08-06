@@ -31,27 +31,27 @@ use Slim\Container;
 $g_bypass_headers = true;
 $g_bypass_error_handler = true;
 
-require_once( __DIR__ . '/../../vendor/autoload.php' );
-require_once( __DIR__ . '/../../core.php' );
-require_once( __DIR__ . '/../soap/mc_core.php' );
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../core.php';
+require_once __DIR__ . '/../soap/mc_core.php';
 
 $t_restcore_dir = __DIR__ . '/restcore/';
 
-require_once( $t_restcore_dir . 'ApiEnabledMiddleware.php' );
-require_once( $t_restcore_dir . 'AuthMiddleware.php' );
-require_once( $t_restcore_dir . 'CacheMiddleware.php' );
-require_once( $t_restcore_dir . 'OfflineMiddleware.php' );
-require_once( $t_restcore_dir . 'VersionMiddleware.php' );
+require_once $t_restcore_dir . 'ApiEnabledMiddleware.php';
+require_once $t_restcore_dir . 'AuthMiddleware.php';
+require_once $t_restcore_dir . 'CacheMiddleware.php';
+require_once $t_restcore_dir . 'OfflineMiddleware.php';
+require_once $t_restcore_dir . 'VersionMiddleware.php';
 
 # Hint to re-used mantisconnect code that it is being executed from REST rather than SOAP.
 # For example, this will disable logic like encoding dates with XSD meta-data.
 ApiObjectFactory::$soap = false;
 
-$t_config = array();
+$t_config = [];
 
 # Show SLIM detailed errors according to Mantis settings
 if( ON == config_get_global( 'show_detailed_errors' ) ) {
-	$t_config['settings'] = array( 'displayErrorDetails' => true );
+	$t_config['settings'] = ['displayErrorDetails' => true];
 }
 
 # For debugging purposes, uncomment this line to avoid truncated error messages
@@ -128,9 +128,9 @@ if( version_compare( Slim\App::VERSION, '4.0', '<' )
 $t_container = new Container( $t_config );
 $t_container['errorHandler'] = function( $p_container ) {
 	return function( $p_request, $p_response, $p_exception ) use ( $p_container ) {
-		$t_data = array(
+		$t_data = [
 			'message' => $p_exception->getMessage(),
-		);
+		];
 
 		if( is_a( $p_exception, 'Mantis\Exceptions\MantisException' ) ) {
 			global $g_error_parameters;
@@ -150,7 +150,7 @@ $t_container['errorHandler'] = function( $p_container ) {
 		$t_error_to_log =  $p_exception->getMessage() . "\n" . $t_stack_as_string;
 		error_log( $t_error_to_log );
 
-		$t_settings = $p_container->get('settings');
+		$t_settings = $p_container->get( 'settings' );
 		if( $t_settings['displayErrorDetails'] ) {
 			$p_response = $p_response->withJson( $t_data );
 		}
@@ -172,21 +172,20 @@ try {
 	$g_app->add( new OfflineMiddleware() );
 	$g_app->add( new CacheMiddleware() );
 
-	require_once( $t_restcore_dir . 'config_rest.php' );
-	require_once( $t_restcore_dir . 'filters_rest.php' );
-	require_once( $t_restcore_dir . 'internal_rest.php' );
-	require_once( $t_restcore_dir . 'issues_rest.php' );
-	require_once( $t_restcore_dir . 'lang_rest.php' );
-	require_once( $t_restcore_dir . 'projects_rest.php' );
-	require_once( $t_restcore_dir . 'users_rest.php' );
-	require_once( $t_restcore_dir . 'pages_rest.php' );
+	require_once $t_restcore_dir . 'config_rest.php';
+	require_once $t_restcore_dir . 'filters_rest.php';
+	require_once $t_restcore_dir . 'internal_rest.php';
+	require_once $t_restcore_dir . 'issues_rest.php';
+	require_once $t_restcore_dir . 'lang_rest.php';
+	require_once $t_restcore_dir . 'projects_rest.php';
+	require_once $t_restcore_dir . 'users_rest.php';
+	require_once $t_restcore_dir . 'pages_rest.php';
 
-	event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $g_app ) ) );
+	event_signal( 'EVENT_REST_API_ROUTES', [['app' => $g_app]] );
 
 	$g_app->run();
-}
-catch( Throwable $e ) {
-	header( 'Content-type: text/plain');
+} catch( Throwable $e ) {
+	header( 'Content-type: text/plain' );
 	http_response_code( HTTP_STATUS_INTERNAL_SERVER_ERROR );
 	echo $e;
 }

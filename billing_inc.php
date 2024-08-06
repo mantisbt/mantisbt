@@ -118,7 +118,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	<div class="widget-main">
 	<input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
 		<?php
-			$t_filter = array();
+			$t_filter = [];
 			$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
 			$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
 			$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
@@ -173,10 +173,10 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 		echo '<br /><div class="noprint">';
 
-		$t_exports = array(
+		$t_exports = [
 			'csv_export' => 'billing_export_to_csv.php',
 			'excel_export' => 'billing_export_to_excel.php',
-		);
+		];
 
 		foreach( $t_exports as $t_export_label => $t_export_page ) {
 			echo '<a class="btn btn-primary btn-sm btn-white btn-round" ';

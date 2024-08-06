@@ -130,14 +130,14 @@ class MantisPHPSession extends MantisSession {
 		$t_path = config_get_global( 'cookie_path' );
 		$t_domain = config_get_global( 'cookie_domain' );
 		$t_samesite = config_get_global( 'cookie_samesite' );
-		$t_options = array(
+		$t_options = [
 			'lifetime' => 0,
 			'path' => $t_path,
 			'domain' => $t_domain,
 			'samesite' => $t_samesite,
 			'secure' => $g_cookie_secure_flag_enabled,
 			'httponly' => true,
-		);
+		];
 		session_set_cookie_params( $t_options );
 
 		# Handle existent session ID
@@ -151,7 +151,7 @@ class MantisPHPSession extends MantisSession {
 
 		# Initialize the keyed session store
 		if( !isset( $_SESSION[$this->key] ) ) {
-			$_SESSION[$this->key] = array();
+			$_SESSION[$this->key] = [];
 		}
 	}
 
@@ -266,7 +266,7 @@ function session_get( $p_name, $p_default = null ) {
 	global $g_session;
 
 	$t_args = func_get_args();
-	return call_user_func_array( array( $g_session, 'get' ), $t_args );
+	return call_user_func_array( [$g_session, 'get'], $t_args );
 }
 
 /**

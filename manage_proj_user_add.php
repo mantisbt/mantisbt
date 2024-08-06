@@ -29,7 +29,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -40,24 +40,24 @@ form_security_validate( 'manage_proj_user_add' );
 auth_reauthenticate();
 
 $f_project_id	= gpc_get_int( 'project_id' );
-$f_user_id		= gpc_get_int_array( 'user_id', array() );
+$f_user_id		= gpc_get_int_array( 'user_id', [] );
 $f_access_level	= gpc_get_int( 'access_level' );
 
 # Add user(s) to the specified project
 foreach( $f_user_id as $t_user_id ) {
-	$t_data = array(
-		'payload' => array(
-			'project' => array(
+	$t_data = [
+		'payload' => [
+			'project' => [
 				'id' => $f_project_id
-			),
-			'user' => array(
+			],
+			'user' => [
 				'id' => $t_user_id
-			),
-			'access_level' => array(
+			],
+			'access_level' => [
 				'id' => $f_access_level
-			)
-		)
-	);
+			]
+		]
+	];
 
 	$t_command = new ProjectUsersAddCommand( $t_data );
 	$t_command->execute();
@@ -65,4 +65,4 @@ foreach( $f_user_id as $t_user_id ) {
 
 form_security_purge( 'manage_proj_user_add' );
 
-print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#project-users');
+print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#project-users' );

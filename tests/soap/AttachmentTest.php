@@ -36,7 +36,7 @@ class AttachmentTest extends SoapBase {
 	/**
 	 * @var array project attachments to delete after tests
 	 */
-	private $projectAttachmentsToDelete = array();
+	private $projectAttachmentsToDelete = [];
 
 	/**
 	 * A test case that tests the following:
@@ -52,7 +52,7 @@ class AttachmentTest extends SoapBase {
 
 		$t_attachment_contents = 'Attachment contents.';
 
-		$t_issue_id = $this->client->mc_issue_add(	$this->userName, $this->password, $t_issue_to_add );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
 		$this->deleteAfterRun( $t_issue_id );
 

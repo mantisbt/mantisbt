@@ -93,7 +93,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	public function html() {
 		switch( $this->type ) {
 			case IssueStatusChangeTimelineEvent::RESOLVED:
-                $t_html = $this->html_start( 'fa-thumbs-o-up' );
+				$t_html = $this->html_start( 'fa-thumbs-o-up' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_resolved' ),
 					prepare_user_name( $this->user_id ),
@@ -101,7 +101,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::CLOSED:
-                $t_html = $this->html_start( 'fa-power-off' );
+				$t_html = $this->html_start( 'fa-power-off' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_closed' ),
 					prepare_user_name( $this->user_id ),
@@ -109,7 +109,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::REOPENED:
-                $t_html = $this->html_start( 'fa-refresh' );
+				$t_html = $this->html_start( 'fa-refresh' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_reopened' ),
 					prepare_user_name( $this->user_id ),
@@ -123,7 +123,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 				trigger_error( ERROR_GENERIC, ERROR );
 				return '';
 		}
-        
+
 		$t_html .= '<div class="action">' . $t_string . '</div>';
 		$t_html .= $this->html_end();
 

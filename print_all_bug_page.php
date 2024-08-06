@@ -42,7 +42,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -117,12 +117,12 @@ layout_page_header();
 
 <table class="table table-striped table-bordered table-condensed no-margin">
 <?php
-#<SQLI> Excel & Print export
-#$f_bug_array stores the number of the selected rows
-#$t_bug_arr_sort is used for displaying
-#$f_export is a string for the word and excel pages
+# <SQLI> Excel & Print export
+# $f_bug_array stores the number of the selected rows
+# $t_bug_arr_sort is used for displaying
+# $f_export is a string for the word and excel pages
 
-$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
+$f_bug_arr = gpc_get_int_array( 'bug_arr', [] );
 $f_bug_arr[$t_row_count]=-1;
 
 for( $i=0; $i < $t_row_count; $i++ ) {
@@ -146,19 +146,19 @@ $f_export = implode( ',', $f_bug_arr );
 
 	$t_search = urlencode( $f_search );
 
-	$t_icons = array(
-		array( 'print_all_bug_page_word', 'word', '', 'fa-file-word-o', 'Word 2000' ),
-		array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'fa-internet-explorer', 'Word View' ) );
+	$t_icons = [
+		['print_all_bug_page_word', 'word', '', 'fa-file-word-o', 'Word 2000'],
+		['print_all_bug_page_word', 'html', 'target="_blank"', 'fa-internet-explorer', 'Word View']];
 
 	foreach ( $t_icons as $t_icon ) {
-		$t_params = array(
+		$t_params = [
 			FILTER_PROPERTY_SEARCH => $t_search,
 			FILTER_PROPERTY_SORT_FIELD_NAME => $f_sort,
 			FILTER_PROPERTY_SORT_DIRECTION => $t_new_dir,
 			'type_page' => $t_icon[1],
 			'export' => $f_export,
 			'show_flag' => $t_show_flag,
-		);
+		];
 		if( filter_is_temporary( $t_filter ) ) {
 			$t_params['filter'] = filter_get_temporary_key( $t_filter );
 		}
@@ -185,7 +185,7 @@ if( filter_is_temporary( $t_filter ) ) {
 
 <table id="buglist" class="table table-striped table-bordered table-condensed no-margin">
 <tr>
-    <td class="bold bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
+	<td class="bold bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
 		<?php
 			echo lang_get( 'viewing_bugs_title' );
 
@@ -206,7 +206,7 @@ if( filter_is_temporary( $t_filter ) ) {
 	<?php
 		$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter, COLUMNS_TARGET_PRINT_PAGE );
 		foreach( $t_columns as $t_column ) {
-			helper_call_custom_function( 'print_column_title', array( $t_column, COLUMNS_TARGET_PRINT_PAGE, $t_sort_properties ) );
+			helper_call_custom_function( 'print_column_title', [$t_column, COLUMNS_TARGET_PRINT_PAGE, $t_sort_properties] );
 		}
 	?>
 </tr>
@@ -225,7 +225,7 @@ if( filter_is_temporary( $t_filter ) ) {
 <tr>
 <?php
 			foreach( $t_columns as $t_column ) {
-				helper_call_custom_function( 'print_column_value', array( $t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE ) );
+				helper_call_custom_function( 'print_column_value', [$t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE] );
 			}
 ?>
 </tr>
@@ -234,13 +234,13 @@ if( filter_is_temporary( $t_filter ) ) {
 	} # for_loop
 ?>
 <tr class="spacer">
-    <td colspan="<?php echo $t_num_of_columns ?>"></td>
+	<td colspan="<?php echo $t_num_of_columns ?>"></td>
 </tr>
 <tr>
-    <td colspan="<?php echo $t_num_of_columns ?>">
-        <input type="hidden" name="show_flag" value="1" />
-        <input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
-    </td>
+	<td colspan="<?php echo $t_num_of_columns ?>">
+		<input type="hidden" name="show_flag" value="1" />
+		<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
+	</td>
 </tr>
 </table>
 </form>

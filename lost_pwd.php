@@ -38,7 +38,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -73,7 +73,7 @@ email_ensure_valid( $f_email );
 
 # @todo Consider moving this query to user_api.php
 $t_query = 'SELECT id FROM {user} WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
-$t_result = db_query( $t_query, array( $f_username, $f_email, true ) );
+$t_result = db_query( $t_query, [$f_username, $f_email, true] );
 $t_row = db_fetch_array( $t_result );
 
 if( !$t_row ) {

@@ -33,7 +33,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
@@ -71,5 +71,5 @@ tag_update( $f_tag_id, $f_new_name, $f_new_user_id, $f_new_description );
 
 form_security_purge( 'tag_update' );
 
-$t_url = 'tag_view_page.php?tag_id='.$f_tag_id;
+$t_url = 'tag_view_page.php?tag_id=' . $f_tag_id;
 print_header_redirect( $t_url );
