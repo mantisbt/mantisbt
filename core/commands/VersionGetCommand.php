@@ -101,7 +101,7 @@ class VersionGetCommand extends Command {
 			$t_versions = version_get_all_rows(
 				$this->project_id,
 				/* released */ $this->query( 'released' ),
-				/* obsolete */ $this->query( 'obsolete', false ),
+				/* obsolete */ $this->query( 'obsolete' ),
 				/* inherit */ $this->query( 'inherit', false ) );
 
 			$t_versions = array_map( 'VersionGetCommand::VersionRowToArray', $t_versions );
