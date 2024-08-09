@@ -167,7 +167,7 @@ class UserUpdateCommand extends Command {
 
 		# ... if realname should be set by LDAP, then fetch it.
 		if( $t_ldap && config_get_global( 'use_ldap_realname' ) ) {
-			$t_username = !is_null( $t_new_username ) ?: $t_old_username;
+			$t_username = $t_new_username ?: $t_old_username;
 			$t_realname = ldap_realname_from_username( $t_username );
 			if( !is_null( $t_realname ) && $t_realname !== $t_new_username ) {
 				$t_new_realname = $t_realname;
