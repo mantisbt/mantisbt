@@ -112,12 +112,14 @@ class UserUpdateCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 *
+	 * @throws ClientException
 	 */
 	function validate() {
 		# Get id of target user
 		$this->user_id = helper_parse_id( $this->query( 'user_id' ), 'user_id' );
 
-		# Get info about logged in user which can be different than target user
+		# Get info about logged-in user which can be different from target user
 		$t_actor_is_admin = current_user_is_administrator();
 		$t_actor_can_manage_users = access_has_global_level( config_get( 'manage_user_threshold' ) );
 		$t_actor_user_id = auth_get_current_user_id();
@@ -137,7 +139,7 @@ class UserUpdateCommand extends Command {
 		$t_old_protected = user_is_protected( $this->user_id );
 		$t_new_protected = isset( $t_user['protected'] ) ? (bool)$t_user['protected'] : null;
 		if( !is_null( $t_new_protected ) && $t_old_protected != $t_new_protected ) {
-			$this->protected = $t_new_protected ? true : false;
+			$this->protected = $t_new_protected;
 		}
 
 		# LDAP
@@ -149,7 +151,7 @@ class UserUpdateCommand extends Command {
 		}
 
 		$t_old_username = user_get_username( $this->user_id );
-		$t_new_username = isset( $t_user['username' ] ) ? trim( $t_user['username']): null;
+		$t_new_username = isset( $t_user['username' ] ) ? trim( $t_user['username']) : null;
 
 		if( !is_null( $t_new_username ) && $t_new_username !== $t_old_username ) {
 			user_ensure_name_unique( $t_new_username, $this->user_id );
@@ -160,15 +162,15 @@ class UserUpdateCommand extends Command {
 
 		# Real Name
 		$t_old_realname = user_get_realname( $this->user_id );
-		$t_new_realname = isset( $t_user['real_name'] ) ? $t_user['real_name'] : null;
+		$t_new_realname = $t_user['real_name'] ?? null;
 
-		if( !is_null( $t_new_realname ) ) {
+		if( !$t_new_realname ) {
 			$t_new_realname = string_normalize( $t_new_realname );
 		}
 
 		# ... if realname should be set by LDAP, then fetch it.
 		if( $t_ldap && config_get_global( 'use_ldap_realname' ) ) {
-			$t_username = !is_null( $t_new_username ) ?: $t_old_username;
+			$t_username = $t_new_username ?: $t_old_username;
 			$t_realname = ldap_realname_from_username( $t_username );
 			if( !is_null( $t_realname ) && $t_realname !== $t_new_username ) {
 				$t_new_realname = $t_realname;
@@ -201,7 +203,7 @@ class UserUpdateCommand extends Command {
 
 		# Access Level
 		$t_old_access_level = user_get_access_level( $this->user_id );
-		$t_new_access_level = isset( $t_user['access_level'] ) ? $t_user['access_level'] : null;
+		$t_new_access_level = $t_user['access_level'] ?? null;
 		if( !is_null( $t_new_access_level ) ) {
 			$t_new_access_level = access_parse_array( $t_new_access_level );
 		}
@@ -212,9 +214,9 @@ class UserUpdateCommand extends Command {
 
 		# Enabled
 		$t_old_enabled = user_is_enabled( $this->user_id );
-		$t_new_enabled = isset( $t_user['enabled'] ) ? $t_user['enabled'] : null;
+		$t_new_enabled = $t_user['enabled'] ?? null;
 		if( !is_null( $t_new_enabled ) && $t_old_enabled !== $t_new_enabled ) {
-			$this->enabled = $t_new_enabled ? true : false;
+			$this->enabled = (bool)$t_new_enabled;
 		}
 
 		# Notify User
@@ -288,6 +290,8 @@ class UserUpdateCommand extends Command {
 	 * Process the command.
 	 *
 	 * @return array Command response
+	 *
+	 * @throws ClientException
 	 */
 	protected function process() {
 		$this->update_user( $this->new_user );
