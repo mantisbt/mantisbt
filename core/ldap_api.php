@@ -472,7 +472,7 @@ function ldap_simulation_get_user( $p_username ) {
 		$t_line = trim( $t_line, " \t\r\n" );
 		$t_row = explode( ',', $t_line );
 
-		if( $t_row[0] != $p_username ) {
+		if( $t_row[0] !== $p_username ) {
 			continue;
 		}
 
