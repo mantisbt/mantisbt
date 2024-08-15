@@ -164,7 +164,7 @@ class UserUpdateCommand extends Command {
 		$t_old_realname = user_get_realname( $this->user_id );
 		$t_new_realname = $t_user['real_name'] ?? null;
 
-		if( !$t_new_realname ) {
+		if( $t_new_realname ) {
 			$t_new_realname = string_normalize( $t_new_realname );
 		}
 
