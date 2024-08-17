@@ -2522,17 +2522,20 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 }
 
 /**
- * Returns a filter array structure for the given filter_id
+ * Returns a filter array structure for the given filter_id.
+ *
  * A default value can be provided to be used when the filter_id doesn't exists
- * or is not accessible
+ * or is not accessible.
  *
- *  You may pass in any array as a default (including null) but if
- *  you pass in *no* default then an error will be triggered if the filter
- *  cannot be found
+ * You may pass in any array as a default (including null) but if
+ * you pass in *no* default then an error will be triggered if the filter
+ * cannot be found.
  *
- * @param integer $p_filter_id Filter id
- * @param array $p_default     A filter array to return when id is not found
- * @return array	A filter array
+ * @param integer $p_filter_id Filter id.
+ * @param array   $p_default   A filter array to return when id is not found.
+ *
+ * @return array A filter array
+ * @throws ClientException
  */
 function filter_get( $p_filter_id, array $p_default = null ) {
 	# if no default was provided, we will trigger an error if not found
@@ -2553,7 +2556,7 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 		}
 	}
 	$t_filter = filter_deserialize( $t_filter_string );
-	# If the unserialez data is not an array, the some error happened, eg, invalid format
+	# If the unserialized data is not an array, then some error happened, eg, invalid format
 	if( !is_array( $t_filter ) ) {
 		# Don't throw error, otherwise the user could not recover navigation easily
 		return filter_get_default();
