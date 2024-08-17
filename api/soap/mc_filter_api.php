@@ -121,6 +121,15 @@ function mc_filter_get( $p_username, $p_password, $p_project_id, $p_filter_id = 
 		$t_result[] = $t_filter;
 	}
 
+	# A filter ID was given, but was not found
+	if( $p_filter_id !== null && !$t_result ) {
+		throw new \Mantis\Exceptions\ClientException(
+			"Filter '$p_filter_id' not found",
+			ERROR_FILTER_NOT_FOUND,
+			[$p_filter_id]
+		);
+	}
+
 	return $t_result;
 }
 
