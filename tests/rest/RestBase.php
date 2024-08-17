@@ -72,7 +72,7 @@ abstract class RestBase extends TestCase {
 	/**
 	 * @var int User ID
 	 */
-	protected $userId = '1';
+	protected $userId = 1;
 
 	/**
 	 * @var int Project ID
@@ -111,6 +111,7 @@ abstract class RestBase extends TestCase {
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_USERNAME', $GLOBALS ) ) {
 			$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'];
+			$this->userId = user_get_id_by_name( $this->userName );
 		}
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_PASSWORD', $GLOBALS ) ) {
