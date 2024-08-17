@@ -84,6 +84,8 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 require_api( 'filter_form_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Filter array for the filter in use through view_all_bug_page.
  *
@@ -2541,8 +2543,11 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 	# If value is false, it either doesn't exists or is not accessible
 	if( !$t_filter_string ) {
 		if( $t_trigger_error ) {
-			error_parameters( $p_filter_id );
-			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+			throw new ClientException(
+				"Filter id '$p_filter_id' not found",
+				ERROR_FILTER_NOT_FOUND,
+				[$p_filter_id]
+			);
 		} else {
 			return $p_default;
 		}
