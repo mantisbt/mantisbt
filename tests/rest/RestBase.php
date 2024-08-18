@@ -77,7 +77,7 @@ abstract class RestBase extends TestCase {
 	/**
 	 * @var int User ID
 	 */
-	protected $userId = '1';
+	protected $userId = 1;
 
 	/**
 	 * @var int Project ID
@@ -116,6 +116,7 @@ abstract class RestBase extends TestCase {
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_USERNAME', $GLOBALS ) ) {
 			$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'];
+			$this->userId = user_get_id_by_name( $this->userName );
 		}
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_PASSWORD', $GLOBALS ) ) {
@@ -189,6 +190,18 @@ abstract class RestBase extends TestCase {
 	}
 
 	/**
+	 * Generate a Test Case reference (TestClass::TestCase).
+	 *
+	 * This can be used to associate the test data (e.g. Issue Summary, Project
+	 * Name, etc.) with a test case.
+	 * 
+	 * @return string
+	 */
+	protected function getTestCaseReference() {
+		return static::class . '::' . $this->getName();
+	}
+
+	/**
 	 * Returns a minimal data structure for tests to create a new Issue.
 	 *
 	 * The Issue Summary is set to TestClass::TestCase with an optional
@@ -199,7 +212,7 @@ abstract class RestBase extends TestCase {
 	 * @return array
 	 */
 	protected function getIssueToAdd( $p_suffix = '' ) {
-		$t_summary = static::class . '::' . $this->getName();
+		$t_summary = $this->getTestCaseReference();
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}
