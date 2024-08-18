@@ -98,6 +98,32 @@ class RestFiltersTest extends RestBase
 	}
 
 	/**
+	 * Create a test filter.
+	 *
+	 * The Filter will be automatically deleted at end of Test execution.
+	 *
+	 * There are currently no available REST API endpoints to create filters, so
+	 * the MantisBT core Filter API is used.
+	 *
+	 * @param array $p_filter A valid Filter {@see filter_ensure_valid_filter()}
+	 * @param bool  $p_public True to create a public filter
+	 *
+	 * @return int Id of created Filter
+	 */
+	private function createTestFilter( $p_filter, $p_public = false ) {
+		$t_filter_id = filter_db_create_filter(
+			filter_serialize( $p_filter ),
+			$this->userId,
+			$this->getProjectId(),
+			$this->getTestCaseReference() . ' ' . rand(1, 10000),
+			$p_public
+		);
+		$this->filterIdsToDelete[] = $t_filter_id;
+
+		return $t_filter_id;
+	}
+
+	/**
 	 * Test case for GET /filters endpoint.
 	 *
 	 * @return void
@@ -112,7 +138,10 @@ class RestFiltersTest extends RestBase
 	 * @return void
 	 */
 	public function testGetSpecificFilter() {
-		$this->getFilters(10);
+		$t_orig_filter = filter_create_reported_by( $this->getProjectId(), $this->userId );
+		$t_filter_id = $this->createTestFilter( $t_orig_filter );
+
+		$this->getFilters( $t_filter_id );
 	}
 
 	/**
@@ -135,13 +164,7 @@ class RestFiltersTest extends RestBase
 	 */
 	public function testDeleteFilter() {
 		# Create a test filter
-		$t_filter_id = filter_db_create_filter(
-			filter_serialize( filter_create_any() ),
-			auth_get_current_user_id(),
-			$this->getProjectId(),
-			$this->getTestCaseReference() . ' ' . rand(1, 10000),
-			false
-		);
+		$t_filter_id = $this->createTestFilter( filter_create_any() );
 
 		# Delete the filter
 		$t_endpoint = $this->getFilterURL( $t_filter_id );
@@ -172,14 +195,7 @@ class RestFiltersTest extends RestBase
 		$t_filter = filter_get_default();
 		$t_filter[FILTER_PROPERTY_SEARCH] = $this->getTestCaseReference();
 		$t_filter[FILTER_PROPERTY_STATUS] = RESOLVED;
-		$t_filter_id = filter_db_create_filter(
-			filter_serialize( $t_filter ),
-			$this->userId,
-			$this->getProjectId(),
-			$this->getTestCaseReference() . ' ' . rand(1, 10000),
-			false
-		);
-		$this->filterIdsToDelete[] = $t_filter_id;
+		$t_filter_id = $this->createTestFilter( $t_filter );
 
 		# Get issues matching test filter - at this point there should be none
 		$t_response = $this->builder()->get( $this->getIssueFilterURL( $t_filter_id ) )->send();
