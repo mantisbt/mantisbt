@@ -129,7 +129,17 @@ class RestFiltersTest extends RestBase
 	 * @return void
 	 */
 	public function testGetAllFilters() {
+		# Get number of filters
+		$t_count_filters = count( $this->getFilters() );
+
+		# Create 2 test filters
+		$this->createTestFilter( filter_create_any() );
+		$this->createTestFilter( filter_create_reported_by( $this->getProjectId(), $this->userId ), true );
+
 		$t_filters = $this->getFilters();
+		$this->assertEquals( 2, count( $t_filters ) - $t_count_filters,
+			"Number of filters expected to be 2"
+		);
 	}
 
 	/**
