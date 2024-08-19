@@ -1051,7 +1051,6 @@ $s_bytes = 'Bytes';
 $s_kib = 'KiB';
 $s_attachment_missing = 'Dateianhang fehlt';
 $s_attachment_count = 'Anzahl Dateianhänge';
-$s_bugnotes_count = 'Anzahl der Problemnotizen';
 $s_view_attachments_for_issue = 'Zeige %1$d Dateianhänge für Eintrag #%2$d';
 $s_warning_update_custom_field_type = '<strong>Warnung:</strong> Das benutzerdefinierte Feld „%1$s“ besitzt bereits gespeicherte Werte. Eine Änderung des Feldtyps kann Fehler und ein unerwartetes Verhalten verursachen, falls vorhandene Werte nicht mit dem neuen Typ des Feldes konsistent sind. Um fortzufahren, klicken Sie unten auf die Schaltfläche.';
 $s_phpmailer_language = 'de';
