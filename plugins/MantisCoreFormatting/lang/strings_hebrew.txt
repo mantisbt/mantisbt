@@ -78,3 +78,5 @@ $s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'צביעת ה
 $s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'צביעת רקע השורה במקום הטקסט בנוסף ל־„diff” אפשר גם לצבוע לפי השפה (למשל: „diff-javascript”).';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'המחשת צבעי CSS';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'הצגת ריבוע צבעוני לפני הגדרת הצבע (למשל: לפני „#000”).';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'מציגים עבור הגדרות CSS מסוימות';
+$s_plugin_format_syntax_highlighting_plugin_previewers_desc = 'מציג יופיע במעבר עכבר על הגדרות "angle"‏, "color"‏, "gradient"‏, "easing" או "time".';

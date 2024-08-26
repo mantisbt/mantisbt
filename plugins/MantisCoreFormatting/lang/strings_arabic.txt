@@ -40,6 +40,7 @@
  *
  * @author DRIHEM
  * @author Meno25
+ * @author Mohammed Qays
  * @author بهتين شوكت
  * @author ديفيد
  */
@@ -60,8 +61,8 @@ $s_plugin_format_syntax_highlighting = 'وبناء علي الجملة تسلي�
 $s_plugin_format_syntax_highlighting_info = 'ويعمل تمييز إنشاء الجملة فقط إذا كانت "معالجة تقليل السعر" مفعله.';
 $s_plugin_format_syntax_highlighting_theme = 'شفرة كتل صفه';
 $s_plugin_format_syntax_highlighting_plugins = 'خيارات هذه الكتل والتعليمات البرمجية';
-$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'جاري النسخ إلى الحافظة';
-$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'يستنسخ';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'نُسخ إلى الحافظة.';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'نسخ';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = 'استنسخت';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'دوس على كنترول ج لنسخ المطلوب';
 $s_plugin_format_syntax_highlighting_plugin_show_language_name = 'تباين اللغة';
@@ -75,5 +76,5 @@ $s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'تقويمات 
 $s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'هو يعرض اقتران الأقواس وعند تحريك الماوس من فوق وبما في ذلك "أقواس قوس قزح" (كل زوج له لونه مخصص).';
 $s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'وذالك لتسليط الضوء الموسع على الاختلافات (الفرق)';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'تصور ألوان سي اس اس';
-$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'تراء مربعًا صغيرًا ملونًا أمام تعريف اللون (وعلى سبيل المثال قبل "#000").';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'يظهر مربعًا صغيرًا ملونًا أمام تعريف اللون (على سبيل المثال قبل "#000").';
 $s_plugin_format_syntax_highlighting_plugin_previewers_name = 'هنا المعاينات ولبعض تعريفات سي اس اس';
