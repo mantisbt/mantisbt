@@ -1224,7 +1224,7 @@ function mc_issue_validation_error_handler( $p_type, $p_error, $p_file, $p_line 
 /**
  * Validate the issue data.
  *
- * @param array|stdClass $p_issue    A IssueData structure containing information about the issue to validate.
+ * @param BugData $p_issue Issue to validate.
  * @param bool $p_update_extended Whether to validate extended fields.
  * @return string|false The validation error message.
  */

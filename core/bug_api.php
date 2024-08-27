@@ -508,12 +508,13 @@ class BugData {
 			category_ensure_exists( $this->category_id );
 		}
 
+		# server-side check replicated client-side in js/common.js 
 		if ( is_blank( $this->fixed_in_version ) && config_get( 'bug_fixed_in_version_required', null, null, $this->project_id ) != OFF ) {
 			$t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $this->project_id );
 			$t_closed = config_get( 'bug_closed_status_threshold', null, null, $this->project_id );
 			$t_resolution_fixed = config_get( 'bug_resolution_fixed_threshold', null, null, $this->project_id );
 			$t_bug_resolution_is_fixed = $this->resolution >= $t_resolution_fixed;
-			if ( $this->status >= $t_resolved && $this->status < $t_closed && $t_bug_resolution_is_fixed ) {
+			if ( $this->status >= $t_resolved && $t_bug_resolution_is_fixed ) {
 				error_parameters( lang_get( 'fixed_in_version' ) );
 				trigger_error( ERROR_EMPTY_FIELD, ERROR );
 			}
