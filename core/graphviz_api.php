@@ -453,7 +453,13 @@ class Graph {
 			}
 
 			if( is_string( $t_value ) ) {
-				$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
+				if( $t_name == 'label' && $t_value != strip_tags( $t_value ) ) {
+					// It's an HTML-like label
+					// @see https://graphviz.org/doc/info/shapes.html#html
+					$t_value = '<' . $t_value. '>';
+				} else {
+					$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
+				}
 			} else if( is_integer( $t_value ) or is_float( $t_value ) ) {
 				$t_value = (string)$t_value;
 			} else {
