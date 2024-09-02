@@ -74,8 +74,8 @@ foreach ( $t_status_arr as $t_from_status => $t_from_label ) {
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
 		if( workflow_transition_edge_exists( $t_from_status, $t_to_status_id ) ) {
-			$t_graph->add_edge( string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_from_status ) ),
-			                    string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_to_status_id ) ),
+			$t_graph->add_edge( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_from_status ),
+			                    MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_to_status_id ),
 			                    array() );
 		}
 	}
