@@ -44,6 +44,7 @@
  * @author Desertwaste
  * @author Dregad
  * @author Emostoyanov
+ * @author MTongov
  * @author Macofe
  * @author RealEnder
  * @author ShockD
@@ -98,6 +99,7 @@ $s_unassigned_projects_label = 'Невъзложени проекти';
 $s_copy_users = 'Копиране на потребители';
 $s_copy_categories_from = 'Копиране на категории от';
 $s_copy_categories_to = 'Копиране на категории в';
+$s_copy_categories_exclude_inherited = 'Изключване на наследени категории';
 $s_copy_versions_from = 'Копиране на версии от';
 $s_copy_versions_to = 'Копиране на версии в';
 $s_copy_users_from = 'Копиране на потребители от';
@@ -127,6 +129,7 @@ $s_inherit = 'Наследени категории';
 $s_inherit_global = 'Онаследи глобалните категории';
 $s_inherit_parent = 'Онаследи ,родителските категории';
 $s_update_subproject_inheritance = 'Обновяване на  структурата на подпроекта';
+$s_category_disabled = 'Категорията е деактивирана, моля изберете друга';
 $s_duplicate_of = 'дубликат на';
 $s_has_duplicate = 'съществува дубликат';
 $s_related_to = 'отнася се до';
@@ -229,6 +232,7 @@ $s_new_account_signup_msg = 'Създаден е следният профил:'
 $s_reset_request_msg = 'Заявена е смяна на парола чрез email. Ако това не сте Вие, пропуснете това съобщение.
 
 Ако сте заявили смяната, посетете следният адрес за да промените паролата:';
+$s_reset_request_admin_msg = 'Вашата парола е нулирана. Моля, посетете следния URL адрес, за да зададете новa:';
 $s_reset_request_in_progress_msg = 'Ако са въведени потребителско име и email адрес, валидни за профила, ще бъде изпратено потвърждаващо писмо на този email адрес. Следвайте инструкциите в него, за да смените паролата на вашия профил.';
 $s_email_notification_title_for_status_bug_new = 'Следният проблем е с променен статус НОВ (отново)';
 $s_email_notification_title_for_status_bug_feedback = 'Следният проблем изисква ОБРАТНА ВРЪЗКА.';
@@ -479,6 +483,7 @@ $s_bugnote_updated_msg = 'Бележката е обновена успешно.
 $s_last_edited = 'Последна редакция:';
 $s_hide_content = 'Скриване на съдържанието';
 $s_show_content = 'Показване на съдържанието';
+$s_file_icon_description = '%1$s икона на файла';
 $s_unknown_file_extension = 'неизвестно';
 $s_webmaster_contact_information = 'За съдействие моля, свържете се с <a href="mailto:%1$s" title="Свържете се с разработчика посредством e-mail.">администратора</a>';
 $s_total_queries_executed = 'Общ брой изпълнени заявки: %1$d';
@@ -533,6 +538,7 @@ $s_create_new_account_title = 'Създаване на нов профил';
 $s_verify_password = 'Проверка на паролата';
 $s_enabled = 'Активен';
 $s_enabled_label = 'Позволен';
+$s_disabled = 'Изключено';
 $s_protected = 'Защитен';
 $s_protected_label = 'Защитен';
 $s_create_user_button = 'Нов потребител';
@@ -567,6 +573,7 @@ $s_manage_accounts_title = 'Управление на Профили';
 $s_date_created = 'Дата на създаване';
 $s_last_visit = 'Последно посещение';
 $s_last_visit_label = 'Последно посещение:';
+$s_failed_login_count = 'Неуспешни влизания';
 $s_edit_user_link = 'Редакция на потребител';
 $s_search_user_hint = 'Потребителско име, истинско име или адрес на ел. поща';
 $s_separate_list_items_by = '(отдели всеки атрибут в списъка с „%1$s“)';
@@ -627,6 +634,7 @@ $s_resolved_status = 'Статус, при който проблемът се с
 $s_readonly_status = 'Статус, при който редакция на проблема не е позволена';
 $s_reopen_status = 'Статус, назначен на повторно отворен проблем';
 $s_reopen_resolution = 'Резолюция, задавана на повторно отворен проблем';
+$s_export_issues = 'Проблеми с износа';
 $s_config_delete_sure = 'Сигурни ли сте, че искате да изтриете настройките за %1$s в проект %2$s?';
 $s_delete_config_button = 'Изтриване на настройките';
 $s_configuration_report = 'Конфигурационен репорт';
@@ -646,6 +654,7 @@ $s_plugin = 'Приставка';
 $s_plugins_installed = 'Инсталирани приставки';
 $s_plugins_available = 'Налични приставки';
 $s_plugin_description = 'Описание';
+$s_plugin_problem_description = 'Описание на проблема';
 $s_plugin_author = 'Автор: %1$s';
 $s_plugin_url = 'Уебсайт:';
 $s_plugin_depends = 'Зависимости';
@@ -656,12 +665,15 @@ $s_plugin_actions = 'Действия';
 $s_plugin_install = 'Инсталиране';
 $s_plugin_upgrade = 'Обновяване';
 $s_plugin_uninstall = 'Деинсталиране';
+$s_plugin_manual_fix = 'Необходима е ръчна намеса';
 $s_plugin_uninstall_message = 'Наистина ли искате да деинсталирате плъгин „%1$s“?';
+$s_plugin_remove_message = 'Сигурни ли сте, че искате да премахнете невалидния или липсващ "%1$s" плъгин?';
 $s_plugin_key_label = 'Ключ:';
 $s_plugin_key_met = 'Готов плъгин';
 $s_plugin_key_unmet = 'неудовлетворени зависимости';
 $s_plugin_key_dated = 'остарели зависимости';
 $s_plugin_key_upgrade = 'Необходимо обновяване';
+$s_plugin_invalid_description = 'Невалиден плъгин';
 $s_project_added_msg = 'Проектът е добавен успешно...';
 $s_category_added_msg = 'Категорията е добавена успешно...';
 $s_category_deleted_msg = 'Категорията е изтрита успешно...';

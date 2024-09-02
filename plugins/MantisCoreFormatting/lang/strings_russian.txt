@@ -41,6 +41,7 @@
  * @author Dirruw'o
  * @author Kirill
  * @author Lega4
+ * @author Lutece398
  * @author Nitch
  * @author Okras
  * @author Александр Сигачёв
@@ -58,7 +59,11 @@ $s_plugin_format_process_markdown = 'Обработка Markdown';
 $s_plugin_format_process_markdown_info = 'Синтаксис форматирования с поддержкой Markdown разработан таким образом, что текст может быть преобразован в HTML.';
 $s_plugin_format_enabled = 'Вкл';
 $s_plugin_format_disabled = 'Выкл';
+$s_plugin_format_syntax_highlighting = 'Подсветка синтаксиса для блоков кода';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Скопировать в буфер обмена';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Копировать';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Скопировано';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Нажмите Ctrl+C для копирования';
 $s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Выберите язык';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Номера строк';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Визуализация цветов CSS';
