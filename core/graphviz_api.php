@@ -327,6 +327,9 @@ class Graph {
 	/**
 	 * Generates an undirected graph representation (suitable for neato).
 	 *
+	 * To test the generated graph, use the
+	 * {@see http://magjac.com/graphviz-visual-editor/ Graphviz Visual Editor}
+	 *
 	 * @return void
 	 */
 	public function generate() {
@@ -525,6 +528,9 @@ class Digraph extends Graph {
 
 	/**
 	 * Generates a directed graph representation (suitable for dot).
+	 *
+	 * To test the generated graph, use the
+	 * {@see http://magjac.com/graphviz-visual-editor/ Graphviz Visual Editor}
 	 *
 	 * @return void
 	 */
