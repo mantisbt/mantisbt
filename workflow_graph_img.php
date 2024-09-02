@@ -45,7 +45,9 @@ if( !config_get( 'relationship_graph_enable' ) ) {
 
 compress_enable();
 
-$t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+$t_status_enum   = config_get( 'status_enum_string' );
+$t_status_ids    = MantisEnum::getValues( $t_status_enum );
+$t_status_labels = lang_get( 'status_enum_string' );
 
 $t_graph_fontname = config_get( 'relationship_graph_fontname' );
 $t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
@@ -70,13 +72,15 @@ $t_graph->set_default_edge_attr( array ( 'style' => 'solid',
 										 'color' => '#0000C0',
 										 'dir'   => 'forward' ) );
 
-foreach ( $t_status_arr as $t_from_status => $t_from_label ) {
-	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
-		if( workflow_transition_edge_exists( $t_from_status, $t_to_status_id ) ) {
-			$t_graph->add_edge( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_from_status ),
-			                    MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_to_status_id ),
-			                    array() );
+foreach ( $t_status_ids as $t_from_id ) {
+	$t_graph->add_node(
+		$t_from_id,
+		[ 'label' => MantisEnum::getLocalizedLabel( $t_status_enum, $t_status_labels, $t_from_id ) ]
+	);
+
+	foreach ( $t_status_ids as $t_to_id ) {
+		if( workflow_transition_edge_exists( $t_from_id, $t_to_id ) ) {
+			$t_graph->add_edge( $t_from_id, $t_to_id );
 		}
 	}
 }
