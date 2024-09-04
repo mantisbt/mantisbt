@@ -367,7 +367,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			<?php echo lang_get( 'timezone' ) ?>
 		</td>
 		<td>
-					<select id="timezone" name="timezone" class="inout-sm">
+					<select id="timezone" name="timezone" class="input-sm">
 						<?php print_timezone_option_list( $t_pref->timezone ?  $t_pref->timezone  : config_get_global( 'default_timezone' ) ) ?>
 					</select>
 		</td>
