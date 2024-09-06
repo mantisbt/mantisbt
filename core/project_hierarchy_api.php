@@ -279,11 +279,7 @@ function project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled = fa
 
 	project_hierarchy_cache( $p_show_disabled );
 
-	if( isset( $g_cache_project_hierarchy[$p_project_id] ) ) {
-		return $g_cache_project_hierarchy[$p_project_id];
-	} else {
-		return array();
-	}
+	return $g_cache_project_hierarchy[$p_project_id] ?? [];
 }
 
 /**
@@ -299,7 +295,7 @@ function project_hierarchy_get_all_subprojects( $p_project_id, $p_show_disabled 
 	while( $t_todo ) {
 		$t_elem = array_shift( $t_todo );
 		if( !in_array( $t_elem, $t_subprojects ) ) {
-			array_push( $t_subprojects, $t_elem );
+			$t_subprojects[] = $t_elem;
 			$t_todo = array_merge( $t_todo, project_hierarchy_get_subprojects( $t_elem, $p_show_disabled ) );
 		}
 	}
