@@ -2166,7 +2166,7 @@ function get_filesize_info( $p_size, $p_unit ) {
  * @return string
  */
 function print_attachment_link_target() {
-	if( config_get( 'attachment_to_new_tab' ) ) {
+	if( config_get( 'attachments_to_new_tab' ) ) {
 		return ' target="_blank"';
 	}
 	return ' target="_self"';

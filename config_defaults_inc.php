@@ -2887,7 +2887,7 @@ $g_allow_delete_own_attachments = OFF;
  * If turned off, a click on a link will not redirect to a new tab
  * @global integer $g_attachment_to_new_tab
  */
-$g_attachment_to_new_tab = OFF;
+$g_attachments_to_new_tab = OFF;
 
 ####################
 # Field Visibility #
