@@ -38,227 +38,251 @@
 require_api( 'constant_inc.php' );
 require_api( 'utility_api.php' );
 
-# constant(s) defining the output formats supported by dot and neato.
-define( 'GRAPHVIZ_ATTRIBUTED_DOT', 0 );
-define( 'GRAPHVIZ_PS', 1 );
-define( 'GRAPHVIZ_HPGL', 2 );
-define( 'GRAPHVIZ_PCL', 3 );
-define( 'GRAPHVIZ_MIF', 4 );
-define( 'GRAPHVIZ_PLAIN', 6 );
-define( 'GRAPHVIZ_PLAIN_EXT', 7 );
-define( 'GRAPHVIZ_GIF', 11 );
-define( 'GRAPHVIZ_JPEG', 12 );
-define( 'GRAPHVIZ_PNG', 13 );
-define( 'GRAPHVIZ_WBMP', 14 );
-define( 'GRAPHVIZ_XBM', 15 );
-define( 'GRAPHVIZ_ISMAP', 16 );
-define( 'GRAPHVIZ_IMAP', 17 );
-define( 'GRAPHVIZ_CMAP', 18 );
-define( 'GRAPHVIZ_CMAPX', 19 );
-define( 'GRAPHVIZ_VRML', 20 );
-define( 'GRAPHVIZ_SVG', 25 );
-define( 'GRAPHVIZ_SVGZ', 26 );
-define( 'GRAPHVIZ_CANONICAL_DOT', 27 );
-define( 'GRAPHVIZ_PDF', 28 );
-
 /**
- * Base class for graph creation and manipulation. By default,
- * undirected graphs are generated. For directed graphs, use Digraph
- * class.
+ * Base class for graph creation and manipulation.
+ *
+ * Generates undirected graphs are generated.
+ * For directed graphs, use {@see Digraph} class.
  */
 class Graph {
-	/**
-	 * Name
-	 */
-	public $name = 'G';
 
 	/**
-	 * Attributes
+	 * Constants defining the Graphviz tools' names.
+	 *
+	 * These are the names of the executables in the directory defined by
+	 * {@see $g_graphviz_path}.
 	 */
-	public $attributes = array();
+	const TOOL_DOT = 'dot';
+	const TOOL_NEATO = 'neato';
+	const TOOL_CIRCO = 'circo';
 
 	/**
-	 * Default node
+	 * Constant(s) defining the output formats supported by dot and neato.
 	 */
-	public $default_node = null;
+	const GRAPHVIZ_ATTRIBUTED_DOT = 0;
+	const GRAPHVIZ_PS = 1;
+	const GRAPHVIZ_HPGL = 2;
+	const GRAPHVIZ_PCL = 3;
+	const GRAPHVIZ_MIF = 4;
+	const GRAPHVIZ_PLAIN = 6;
+	const GRAPHVIZ_PLAIN_EXT = 7;
+	const GRAPHVIZ_GIF = 11;
+	const GRAPHVIZ_JPEG = 12;
+	const GRAPHVIZ_PNG = 13;
+	const GRAPHVIZ_WBMP = 14;
+	const GRAPHVIZ_XBM = 15;
+	const GRAPHVIZ_ISMAP = 16;
+	const GRAPHVIZ_IMAP = 17;
+	const GRAPHVIZ_CMAP = 18;
+	const GRAPHVIZ_CMAPX = 19;
+	const GRAPHVIZ_VRML = 20;
+	const GRAPHVIZ_SVG = 25;
+	const GRAPHVIZ_SVGZ = 26;
+	const GRAPHVIZ_CANONICAL_DOT = 27;
+	const GRAPHVIZ_PDF = 28;
 
 	/**
-	 * Default edge
+	 * @var string Name
 	 */
-	public $default_edge = null;
+	protected $name = 'G';
 
 	/**
-	 * Nodes
+	 * @var array Attributes
 	 */
-	public $nodes = array();
+	protected $attributes = array();
 
 	/**
-	 * Edges
+	 * @var array Default node attributes
 	 */
-	public $edges = array();
+	protected $default_node = null;
 
 	/**
-	 * Graphviz tool
+	 * @var array Default edge attributes
 	 */
-	public $graphviz_tool;
+	protected $default_edge = null;
 
 	/**
-	 * Formats
+	 * @var array Nodes
 	 */
-	public $formats = array(
+	protected $nodes = array();
+
+	/**
+	 * @var array Edges
+	 */
+	protected $edges = array();
+
+	/**
+	 * @var string Graphviz path
+	 */
+	protected $graphviz_path;
+
+	/**
+	 * @var string Graphviz tool
+	 */
+	protected $graphviz_tool;
+
+	/**
+	 * Graphviz output formats
+	 * @see https://graphviz.org/docs/outputs/
+	 */
+	protected $formats = array(
 		'dot' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_ATTRIBUTED_DOT,
+			'type' => self::GRAPHVIZ_ATTRIBUTED_DOT,
 			'mime' => 'text/x-graphviz',
 		),
 		'ps' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_PS,
+			'type' => self::GRAPHVIZ_PS,
 			'mime' => 'application/postscript',
 		),
 		'hpgl' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_HPGL,
+			'type' => self::GRAPHVIZ_HPGL,
 			'mime' => 'application/vnd.hp-HPGL',
 		),
 		'pcl' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_PCL,
+			'type' => self::GRAPHVIZ_PCL,
 			'mime' => 'application/vnd.hp-PCL',
 		),
 		'mif' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_MIF,
+			'type' => self::GRAPHVIZ_MIF,
 			'mime' => 'application/vnd.mif',
 		),
 		'gif' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_GIF,
+			'type' => self::GRAPHVIZ_GIF,
 			'mime' => 'image/gif',
 		),
 		'jpg' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_JPEG,
+			'type' => self::GRAPHVIZ_JPEG,
 			'mime' => 'image/jpeg',
 		),
 		'jpeg' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_JPEG,
+			'type' => self::GRAPHVIZ_JPEG,
 			'mime' => 'image/jpeg',
 		),
 		'png' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_PNG,
+			'type' => self::GRAPHVIZ_PNG,
 			'mime' => 'image/png',
 		),
 		'wbmp' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_WBMP,
+			'type' => self::GRAPHVIZ_WBMP,
 			'mime' => 'image/vnd.wap.wbmp',
 		),
 		'xbm' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_XBM,
+			'type' => self::GRAPHVIZ_XBM,
 			'mime' => 'image/x-xbitmap',
 		),
 		'ismap' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_ISMAP,
+			'type' => self::GRAPHVIZ_ISMAP,
 			'mime' => 'text/plain',
 		),
 		'imap' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_IMAP,
+			'type' => self::GRAPHVIZ_IMAP,
 			'mime' => 'application/x-httpd-imap',
 		),
 		'cmap' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_CMAP,
+			'type' => self::GRAPHVIZ_CMAP,
 			'mime' => 'text/html',
 		),
 		'cmapx' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_CMAPX,
+			'type' => self::GRAPHVIZ_CMAPX,
 			'mime' => 'application/xhtml+xml',
 		),
 		'vrml' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_VRML,
+			'type' => self::GRAPHVIZ_VRML,
 			'mime' => 'x-world/x-vrml',
 		),
 		'svg' => array(
 			'binary' => false,
-			'type' => GRAPHVIZ_SVG,
+			'type' => self::GRAPHVIZ_SVG,
 			'mime' => 'image/svg+xml',
 		),
 		'svgz' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_SVGZ,
+			'type' => self::GRAPHVIZ_SVGZ,
 			'mime' => 'image/svg+xml',
 		),
 		'pdf' => array(
 			'binary' => true,
-			'type' => GRAPHVIZ_PDF,
+			'type' => self::GRAPHVIZ_PDF,
 			'mime' => 'application/pdf',
 		),
 	);
 
 	/**
 	 * Constructor for Graph objects.
-	 * @param string $p_name       Graph name.
-	 * @param array  $p_attributes Attributes.
-	 * @param string $p_tool       Graph generation tool.
+	 *
+	 * @param string $p_name       Graph name
+	 * @param array  $p_attributes Attributes
+	 * @param string $p_tool       Graph generation tool (one of the TOOL_* constants)
 	 */
-	function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = 'neato' ) {
+	public function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = Graph::TOOL_NEATO ) {
 		if( is_string( $p_name ) ) {
 			$this->name = $p_name;
 		}
 
 		$this->set_attributes( $p_attributes );
 
+		$this->graphviz_path = config_get_global( 'graphviz_path' );
 		$this->graphviz_tool = $p_tool;
 	}
 
 	/**
 	 * Sets graph attributes.
+	 *
 	 * @param array $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
-	function set_attributes( array $p_attributes ) {
-		if( is_array( $p_attributes ) ) {
-			$this->attributes = $p_attributes;
-		}
+	public function set_attributes( array $p_attributes ) {
+		$this->attributes = $p_attributes;
 	}
 
 	/**
 	 * Sets default attributes for all nodes of the graph.
+	 *
 	 * @param array $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
-	function set_default_node_attr( array $p_attributes ) {
-		if( is_array( $p_attributes ) ) {
-			$this->default_node = $p_attributes;
-		}
+	public function set_default_node_attr( array $p_attributes ) {
+		$this->default_node = $p_attributes;
 	}
 
 	/**
 	 * Sets default attributes for all edges of the graph.
+	 *
 	 * @param array $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
-	 function set_default_edge_attr( array $p_attributes ) {
-		if( is_array( $p_attributes ) ) {
-			$this->default_edge = $p_attributes;
-		}
+	public function set_default_edge_attr( array $p_attributes ) {
+		$this->default_edge = $p_attributes;
 	}
 
 	/**
 	 * Adds a node to the graph.
+	 *
 	 * @param string $p_name       Node name.
 	 * @param array  $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
-	 function add_node( $p_name, array $p_attributes = array() ) {
+	public function add_node( $p_name, array $p_attributes = array() ) {
 		if( is_array( $p_attributes ) ) {
 			$this->nodes[$p_name] = $p_attributes;
 		}
@@ -266,12 +290,14 @@ class Graph {
 
 	/**
 	 * Adds an edge to the graph.
+	 *
 	 * @param string $p_src        Source.
 	 * @param string $p_dst        Destination.
 	 * @param array  $p_attributes Attributes.
+	 *
 	 * @return void
 	 */
-	 function add_edge( $p_src, $p_dst, array $p_attributes = array() ) {
+	public function add_edge( $p_src, $p_dst, array $p_attributes = array() ) {
 		if( is_array( $p_attributes ) ) {
 			$this->edges[] = array(
 				'src' => $p_src,
@@ -283,11 +309,13 @@ class Graph {
 
 	/**
 	 * Check if an edge is already present.
+	 *
 	 * @param string $p_src Source.
 	 * @param string $p_dst Destination.
+	 *
 	 * @return boolean
 	 */
-	function is_edge_present( $p_src, $p_dst ) {
+	public function is_edge_present( $p_src, $p_dst ) {
 		foreach( $this->edges as $t_edge ) {
 			if( $t_edge['src'] == $p_src && $t_edge['dst'] == $p_dst ) {
 				return true;
@@ -298,16 +326,20 @@ class Graph {
 
 	/**
 	 * Generates an undirected graph representation (suitable for neato).
+	 *
+	 * To test the generated graph, use the
+	 * {@see http://magjac.com/graphviz-visual-editor/ Graphviz Visual Editor}
+	 *
 	 * @return void
 	 */
-	function generate() {
+	public function generate() {
 		echo 'graph ' . $this->name . ' {' . "\n";
 
-		$this->_print_graph_defaults();
+		$this->print_graph_defaults();
 
 		foreach( $this->nodes as $t_name => $t_attr ) {
 			$t_name = '"' . addcslashes( $t_name, "\0..\37\"\\" ) . '"';
-			$t_attr = $this->_build_attribute_list( $t_attr );
+			$t_attr = $this->build_attribute_list( $t_attr );
 			echo "\t" . $t_name . ' ' . $t_attr . ";\n";
 		}
 
@@ -315,7 +347,7 @@ class Graph {
 			$t_src = '"' . addcslashes( $t_edge['src'], "\0..\37\"\\" ) . '"';
 			$t_dst = '"' . addcslashes( $t_edge['dst'], "\0..\37\"\\" ) . '"';
 			$t_attr = $t_edge['attributes'];
-			$t_attr = $this->_build_attribute_list( $t_attr );
+			$t_attr = $this->build_attribute_list( $t_attr );
 			echo "\t" . $t_src . ' -- ' . $t_dst . ' ' . $t_attr . ";\n";
 		}
 
@@ -324,74 +356,91 @@ class Graph {
 
 	/**
 	 * Outputs a graph image or map in the specified format.
+	 *
 	 * @param string  $p_format  Graphviz output format.
 	 * @param boolean $p_headers Whether to sent http headers.
+	 *
 	 * @return void
 	 */
-	function output( $p_format = 'dot', $p_headers = false ) {
+	public function output( $p_format = 'dot', $p_headers = false ) {
 		# Check if it is a recognized format.
 		if( !isset( $this->formats[$p_format] ) ) {
+			error_parameters( "Invalid Graph format '$p_format'." );
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
-		$t_binary = $this->formats[$p_format]['binary'];
-		$t_type = $this->formats[$p_format]['type'];
-		$t_mime = $this->formats[$p_format]['mime'];
-
-		# Send Content-Type header, if requested.
-		if( $p_headers ) {
-			header( 'Content-Type: ' . $t_mime );
+		# Graphviz tool missing or not executable
+		if( !is_executable( $this->tool_path() ) ) {
+			error_parameters( $this->graphviz_tool );
+			trigger_error( ERROR_GRAPH_TOOL_NOT_FOUND, ERROR );
 		}
+
 		# Retrieve the source dot document into a buffer
 		ob_start();
 		$this->generate();
-		$t_dot_source = ob_get_contents();
-		ob_end_clean();
+		$t_dot_source = ob_get_clean();
 
 		# Start dot process
-
-		$t_command = escapeshellcmd( $this->graphviz_tool . ' -T' . $p_format );
+		$t_command = escapeshellcmd( $this->tool_path() . ' -T' . $p_format );
+		$t_stderr = tempnam( sys_get_temp_dir(), 'graphviz' );
 		$t_descriptors = array(
 			0 => array( 'pipe', 'r', ),
 			1 => array( 'pipe', 'w', ),
-			2 => array( 'file', 'php://stderr', 'w', ),
-			);
+			# Writing to file instead of pipe to avoid locking issues
+			2 => array( 'file', $t_stderr, 'w', ),
+		);
 
 		$t_pipes = array();
 		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes );
 
-		if( is_resource( $t_process ) ) {
-			# Filter generated output through dot
-			fwrite( $t_pipes[0], $t_dot_source );
-			fclose( $t_pipes[0] );
-
-			if( $p_headers ) {
-				# Headers were requested, use another output buffer to
-				# retrieve the size for Content-Length.
-				ob_start();
-				while( !feof( $t_pipes[1] ) ) {
-					echo fgets( $t_pipes[1], 1024 );
-				}
-				header( 'Content-Length: ' . ob_get_length() );
-				ob_end_flush();
-			} else {
-				# No need for headers, send output directly.
-				while( !feof( $t_pipes[1] ) ) {
-					print( fgets( $t_pipes[1], 1024 ) );
-				}
-			}
-
-			fclose( $t_pipes[1] );
-			proc_close( $t_process );
+		if( !is_resource( $t_process ) ) {
+			# proc_open failed
+			trigger_error( ERROR_GENERIC, ERROR );
 		}
+
+		# Check for output in stderr
+		# Wait a bit to ensure the file has been written before attempting to read it
+		usleep( 5000 );
+		$t_error = file_get_contents( $t_stderr );
+		unlink( $t_stderr );
+		if( $t_error ) {
+			error_parameters( $t_error );
+			trigger_error( ERROR_GENERIC, ERROR );
+		}
+
+		# Filter the generated document through dot
+		fwrite( $t_pipes[0], $t_dot_source );
+		fclose( $t_pipes[0] );
+
+		if( $p_headers ) {
+			header( 'Content-Type: ' . $this->formats[$p_format]['mime'] );
+
+			# Use an output buffer to retrieve the size for Content-Length
+			ob_start();
+		}
+
+		# Send the output
+		while( !feof( $t_pipes[1] ) ) {
+			echo fgets( $t_pipes[1], 1024 );
+		}
+
+		if( $p_headers ) {
+			header( 'Content-Length: ' . ob_get_length() );
+			ob_end_flush();
+		}
+
+		fclose( $t_pipes[1] );
+		proc_close( $t_process );
 	}
 
 	/**
-	 * PROTECTED function to build a node or edge attribute list.
+	 * Build a node or edge attribute list.
+	 *
 	 * @param array $p_attributes Attributes.
+	 *
 	 * @return string
 	 */
-	function _build_attribute_list( array $p_attributes ) {
+	protected function build_attribute_list( array $p_attributes ) {
 		if( empty( $p_attributes ) ) {
 			return '';
 		}
@@ -404,7 +453,13 @@ class Graph {
 			}
 
 			if( is_string( $t_value ) ) {
-				$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
+				if( $t_name == 'label' && $t_value != strip_tags( $t_value ) ) {
+					// It's an HTML-like label
+					// @see https://graphviz.org/doc/info/shapes.html#html
+					$t_value = '<' . $t_value. '>';
+				} else {
+					$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
+				}
 			} else if( is_integer( $t_value ) or is_float( $t_value ) ) {
 				$t_value = (string)$t_value;
 			} else {
@@ -418,10 +473,11 @@ class Graph {
 	}
 
 	/**
-	 * PROTECTED function to print graph attributes and defaults.
+	 * Print graph attributes and defaults.
+	 *
 	 * @return void
 	 */
-	function _print_graph_defaults() {
+	protected function print_graph_defaults() {
 		foreach( $this->attributes as $t_name => $t_value ) {
 			if( !preg_match( '/[a-zA-Z]+/', $t_name ) ) {
 				continue;
@@ -439,23 +495,35 @@ class Graph {
 		}
 
 		if( null !== $this->default_node ) {
-			$t_attr = $this->_build_attribute_list( $this->default_node );
+			$t_attr = $this->build_attribute_list( $this->default_node );
 			echo "\t" . 'node ' . $t_attr . ";\n";
 		}
 
 		if( null !== $this->default_edge ) {
-			$t_attr = $this->_build_attribute_list( $this->default_edge );
+			$t_attr = $this->build_attribute_list( $this->default_edge );
 			echo "\t" . 'edge ' . $t_attr . ";\n";
 		}
 	}
+
+	/**
+	 * Gets the path to the Graphviz tool.
+	 *
+	 * @return string
+	 */
+	protected function tool_path() {
+		return $this->graphviz_path . $this->graphviz_tool;
+	}
 }
+
 
 /**
  * Directed graph creation and manipulation.
  */
 class Digraph extends Graph {
+
 	/**
 	 * Constructor for Digraph objects.
+	 *
 	 * @param string $p_name       Name of the graph.
 	 * @param array  $p_attributes Attributes.
 	 * @param string $p_tool       Graphviz tool.
@@ -466,16 +534,20 @@ class Digraph extends Graph {
 
 	/**
 	 * Generates a directed graph representation (suitable for dot).
+	 *
+	 * To test the generated graph, use the
+	 * {@see http://magjac.com/graphviz-visual-editor/ Graphviz Visual Editor}
+	 *
 	 * @return void
 	 */
-	function generate() {
+	public function generate() {
 		echo 'digraph ' . $this->name . ' {' . "\n";
 
-		$this->_print_graph_defaults();
+		$this->print_graph_defaults();
 
 		foreach( $this->nodes as $t_name => $t_attr ) {
 			$t_name = '"' . addcslashes( $t_name, "\0..\37\"\\" ) . '"';
-			$t_attr = $this->_build_attribute_list( $t_attr );
+			$t_attr = $this->build_attribute_list( $t_attr );
 			echo "\t" . $t_name . ' ' . $t_attr . ";\n";
 		}
 
@@ -483,7 +555,7 @@ class Digraph extends Graph {
 			$t_src = '"' . addcslashes( $t_edge['src'], "\0..\37\"\\" ) . '"';
 			$t_dst = '"' . addcslashes( $t_edge['dst'], "\0..\37\"\\" ) . '"';
 			$t_attr = $t_edge['attributes'];
-			$t_attr = $this->_build_attribute_list( $t_attr );
+			$t_attr = $this->build_attribute_list( $t_attr );
 			echo "\t" . $t_src . ' -> ' . $t_dst . ' ' . $t_attr . ";\n";
 		}
 

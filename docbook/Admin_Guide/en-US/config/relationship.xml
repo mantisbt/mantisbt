@@ -10,11 +10,12 @@
 		<emphasis>dependencies</emphasis> and a full
 		<emphasis>relationships</emphasis> graph.
 	</para>
+	<para>It is also possible to visualize the Workflow transitions.
+	</para>
 
 	<important>
 		<para>This feature relies on the external
-			<emphasis>dot</emphasis> and <emphasis>neato</emphasis> tools
-			from the <ulink url="https://www.graphviz.org/">GraphViz</ulink>
+			<ulink url="https://www.graphviz.org/">GraphViz</ulink>
 			library, which must be installed separately.
 		</para>
 		<para>Most Linux distributions have a GraphViz package available
@@ -39,6 +40,21 @@
 			</itemizedlist>
 		</para>
 	</important>
+
+	<para>The following Graphviz tools are used:</para>
+	<itemizedlist>
+		<listitem><para>
+			Relationship graphs: <literal>dot</literal>, <literal>neato</literal>
+		</para></listitem>
+		<listitem><para>
+			Workflow transitions graph (see
+			<xref linkend="admin.lifecycle.workflow.transitions" />):
+			<literal>dot</literal>
+		</para></listitem>
+	</itemizedlist>
+	<para>The webserver must have execute permission to these programs
+		in order to generate the graphs.
+	</para>
 
 	<variablelist>
 		<varlistentry>
@@ -100,25 +116,29 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_dot_tool</term>
+			<term>$g_graphviz_path</term>
 			<listitem>
-				<para>
-					The full path for the dot tool.  The webserver must have execute
-					permission to this program in order to generate relationship graphs.
-					This configuration option is not relevant for Windows.  The default
-					value is '/usr/bin/dot'.
+				<para>Complete path to the
+					<ulink url="https://graphviz.org/ Graphviz">Graphviz</ulink> tools
+					(for details, see the note at the beginning of
+					<xref linkend="admin.config.relationship" />).
 				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_neato_tool</term>
-			<listitem>
-				<para>
-					The full path for the neato tool.  The webserver must have execute
-					permission to this program in order to generate relationship graphs.
-					This configuration option is not relevant for Windows.  The default
-					value is '/usr/bin/neato'.
+				<para>Requires trailing '/'.
+					The default	value is <literal>/usr/bin/</literal>.
 				</para>
+				<warning>
+					<itemizedlist>
+						<listitem><para>
+							The webserver must have execute permission to these programs
+							in order to generate the graphs.
+						</para></listitem>
+						<listitem><para>
+							On Windows, the IIS user may require permissions to
+							cmd.exe to be able to use PHP's
+							<ulink url="https://www.php.net/manual/en/function.proc-open.php">proc_open()</ulink>
+						</para></listitem>
+					</itemizedlist>
+				</warning>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

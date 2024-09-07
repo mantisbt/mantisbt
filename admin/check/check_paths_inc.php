@@ -30,6 +30,8 @@ if( !defined( 'CHECK_PATHS_INC_ALLOW' ) ) {
 	return;
 }
 
+global $g_failed_test;
+
 # MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
@@ -54,7 +56,8 @@ $t_path_config_names = array(
 	'class_path',
 	'library_path',
 	'config_path',
-	'language_path'
+	'language_path',
+	'graphviz_path',
 );
 
 # Handle file upload default path only if attachments stored on disk

@@ -4470,43 +4470,34 @@ $g_rss_enabled = ON;
 /**
  * Enable relationship graphs support.
  *
- * Show issue relationships using graphs.
+ * Show issue relationships and workflow transitions using graphs.
  *
  * In order to use this feature, you must first install GraphViz.
  * @see https://www.graphviz.org/ Graphviz homepage
- *
- * Refer to the notes near the top of core/graphviz_api.php and
- * core/relationship_graph_api.php for more information.
+ * @see $g_graphviz_path
  *
  * @global int $g_relationship_graph_enable
  */
 $g_relationship_graph_enable = OFF;
 
 /**
- * Complete path to dot and neato tools.
+ * Complete path to the Graphviz tools.
  *
- * Your webserver must have execute permission to these programs in order to
- * generate relationship graphs.
+ * {@see https://graphviz.org/ Graphviz} must be installed on your server.
+ * Mantis uses the following tools :
+ * - Relationship graphs: dot, neato
+ * - Workflow transitions graph: dot
  *
- * NOTE: On windows, the IIS user may require permissions to cmd.exe to be able
- * to use PHP's proc_open.
+ * NOTES:
+ * - Requires trailing `/`
+ * - The webserver must have execute permission to these programs in order to
+ *   generate the graphs.
+ * - On Windows, the IIS user may require permissions to cmd.exe to be able
+ *   to use PHP's {@see proc_open()}
  *
- * @global string $g_dot_tool
+ * @global string $g_graphviz_path
  */
-$g_dot_tool = '/usr/bin/dot';
-
-/**
- * Complete path to dot and neato tools.
- *
- * Your webserver must have execute permission to these programs in order to
- * generate relationship graphs.
- *
- * NOTE: On windows, the IIS user may require permissions to cmd.exe to be able
- * to use PHP's proc_open.
- *
- * @global string $g_neato_tool
- */
-$g_neato_tool = '/usr/bin/neato';
+$g_graphviz_path = '/usr/bin/';
 
 /**
  * Font name and size, as required by Graphviz.
@@ -5173,7 +5164,6 @@ $g_global_settings = array(
 	'default_home_page',
 	'default_language',
 	'display_errors',
-	'dot_tool',
 	'email_dkim_domain',
 	'email_dkim_enable',
 	'email_dkim_identity',
@@ -5195,6 +5185,7 @@ $g_global_settings = array(
 	'fileinfo_magic_db_file',
 	'form_security_validation',
 	'global_settings',
+	'graphviz_path',
 	'hostname',
 	'html_valid_tags',
 	'html_valid_tags_single_line',
@@ -5226,7 +5217,6 @@ $g_global_settings = array(
 	'long_process_timeout',
 	'manage_config_cookie',
 	'manual_url',
-	'neato_tool',
 	'path',
 	'plugin_path',
 	'plugins_enabled',
