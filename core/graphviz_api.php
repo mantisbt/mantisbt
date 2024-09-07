@@ -51,6 +51,7 @@ class Graph {
 	 *
 	 * These are the names of the executables in the directory defined by
 	 * {@see $g_graphviz_path}.
+	 * On Windows, '.exe' extension will be appended.
 	 */
 	const TOOL_DOT = 'dot';
 	const TOOL_NEATO = 'neato';
@@ -239,6 +240,10 @@ class Graph {
 
 		$this->graphviz_path = config_get_global( 'graphviz_path' );
 		$this->graphviz_tool = $p_tool;
+
+		if( is_windows_server() ) {
+			$this->graphviz_tool .= '.exe';
+		}
 	}
 
 	/**
