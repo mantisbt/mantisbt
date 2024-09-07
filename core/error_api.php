@@ -275,8 +275,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			$t_error_description = $p_error . ' (' . $t_error_location . ')';
 	}
 
-	$t_error_description = nl2br( $t_error_description );
-
 	if( php_sapi_name() == 'cli' ) {
 		if( DISPLAY_ERROR_NONE != $t_method ) {
 			echo $t_error_type . ': ' . $t_error_description . "\n";
@@ -290,6 +288,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			exit(1);
 		}
 	} else {
+		$t_error_description = nl2br( $t_error_description );
+
 		switch( $t_method ) {
 			case DISPLAY_ERROR_HALT:
 				# disable any further event callbacks
@@ -644,6 +644,13 @@ function error_string( $p_error ) {
 			array_unshift( $g_error_parameters, $p_error );
 			break;
 		}
+	}
+
+	# Special handling for generic error type
+	# Append detailed error information if a parameter has been provided.
+	if( $p_error == ERROR_GENERIC && $g_error_parameters ) {
+		$t_error .= PHP_EOL . error_string( ERROR_GENERIC_DETAILS );
+		$g_error_parameters = [];
 	}
 
 	# Prepare error parameters for display
