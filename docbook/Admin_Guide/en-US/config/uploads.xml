@@ -227,6 +227,16 @@
 					level is below delete_attachments_threshold.</para>
 			</listitem>
 		</varlistentry>
+
+		<varlistentry>
+			<term>$g_attachments_to_new_tab</term>
+			<listitem>
+				<para>Controls the target for attachment links.
+					When ON, attachments will be opened in a new tab when clicking on the link;
+					when OFF (default), they will open in the same tab.
+				</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 
 </section>

@@ -2882,6 +2882,16 @@ $g_allow_download_own_attachments = ON;
  */
 $g_allow_delete_own_attachments = OFF;
 
+/**
+ * Controls the target for attachment links.
+ *
+ * When ON, attachments will be opened in a new tab when clicking on the link;
+ * when OFF (default), they will open in the same tab.
+ *
+ * @global integer $g_attachments_to_new_tab
+ */
+$g_attachments_to_new_tab = OFF;
+
 ####################
 # Field Visibility #
 ####################
@@ -5279,6 +5289,7 @@ $g_public_config_names = array(
 	'antispam_max_event_count',
 	'antispam_time_window_in_seconds',
 	'assign_sponsored_bugs_threshold',
+	'attachments_to_new_tab',
 	'auto_set_status_to_assigned',
 	'backward_year_count',
 	'bottom_include_page',
