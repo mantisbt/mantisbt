@@ -354,7 +354,6 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
  * @param integer               $p_limit        Maximum number of results, default is 0 for all results
  *
  * @return array                The filtered array of project ids
- * @throws ClientException
  */
 function access_project_array_filter( $p_access_level, array $p_project_ids = null, $p_user_id = null, $p_limit = 0 ) {
 	# Short circuit the check in this case

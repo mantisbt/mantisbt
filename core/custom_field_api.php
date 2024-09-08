@@ -38,6 +38,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -70,10 +72,12 @@ foreach( $g_custom_field_types as $t_type ) {
 unset( $t_type );
 
 /**
- * Return true whether to display custom field
- * @param integer $p_type    Custom field type.
- * @param string  $p_display When to display.
- * @return boolean
+ * Return true whether to display custom field.
+ *
+ * @param int    $p_type    Custom field type.
+ * @param string $p_display When to display.
+ *
+ * @return bool
  */
 function custom_field_allow_manage_display( $p_type, $p_display ) {
 	global $g_custom_field_type_definition;
@@ -97,13 +101,17 @@ $g_cache_name_to_id_map = array();
 $g_cache_cf_bug_values = array();
 
 /**
- * Cache a custom field row if necessary and return the cached copy
+ * Cache a custom field row if necessary and return the cached copy.
+ *
  * If the second parameter is true (default), trigger an error
  * if the field can't be found.  If the second parameter is
  * false, return false if the field can't be found.
- * @param integer $p_field_id       Integer representing custom field id.
- * @param boolean $p_trigger_errors Indicates whether to trigger an error if the field is not found.
+ *
+ * @param int $p_field_id        Custom field id.
+ * @param bool $p_trigger_errors Indicates whether to trigger an error if the field is not found.
+ *
  * @return array|false array representing custom field
+ *
  * @access public
  */
 function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
@@ -128,10 +136,14 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 }
 
 /**
- * Cache custom fields contained within an array of field id's
- * If ids parameter is omitted, all fields will be cached
+ * Cache custom fields contained within an array of field id's.
+ *
+ * If ids parameter is omitted, all fields will be cached.
+ *
  * @param array|null $p_cf_id_array Array of custom field ids.
+ *
  * @return void
+ *
  * @access public
  */
 function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
@@ -198,10 +210,13 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 
 /**
  * Load in cache values of custom fields, for given bugs and field ids.
- * When a value for a given bug and field does not exist, fill the cached value as null
+ *
+ * When a value for a given bug and field does not exist, fill the cached value as null.
+ *
  * @global array $g_cache_cf_bug_values
  * @param array $p_bug_id_array
  * @param array $p_field_id_array
+ *
  * @return void
  */
 function custom_field_cache_values( array $p_bug_id_array, array $p_field_id_array ) {
@@ -279,9 +294,11 @@ function custom_field_cache_values( array $p_bug_id_array, array $p_field_id_arr
 }
 
 /**
- * Clear the custom field values cache (or just the given bug id if specified)
+ * Clear the custom field values cache (or just the given bug id if specified).
+ *
  * @global array $g_cache_cf_bug_values
- * @param integer $p_bug_id	Bug id
+ * @param int $p_bug_id	Bug id
+ *
  * @return void
  */
 function custom_field_clear_cache_values( $p_bug_id = null ) {
@@ -297,9 +314,12 @@ function custom_field_clear_cache_values( $p_bug_id = null ) {
 }
 
 /**
- * Clear the custom field cache (or just the given id if specified)
- * @param integer $p_field_id Custom field id.
+ * Clear the custom field cache (or just the given id if specified).
+ *
+ * @param int $p_field_id Custom field id.
+ *
  * @return void
+ *
  * @access public
  */
 function custom_field_clear_cache( $p_field_id = null ) {
@@ -317,11 +337,13 @@ function custom_field_clear_cache( $p_field_id = null ) {
 }
 
 /**
- * Check to see whether the field is included in the given project
- * return true if the field is included, false otherwise
- * @param integer $p_field_id   Custom field id.
- * @param integer $p_project_id Project id.
- * @return boolean
+ * Check to see whether the field is included in the given project.
+ *
+ * @param int $p_field_id   Custom field id.
+ * @param int $p_project_id Project id.
+ *
+ * @return bool True if the field is included, false otherwise
+ *
  * @access public
  */
 function custom_field_is_linked( $p_field_id, $p_project_id ) {
@@ -349,10 +371,12 @@ function custom_field_is_linked( $p_field_id, $p_project_id ) {
 }
 
 /**
- * Check to see whether the field id is defined
- * return true if the field is defined, false otherwise
- * @param integer $p_field_id Custom field id.
- * @return boolean
+ * Check to see whether the field id is defined.
+ *
+ * @param int $p_field_id Custom field id.
+ *
+ * @return bool True if the field is defined, false otherwise
+ *
  * @access public
  */
 function custom_field_exists( $p_field_id ) {
@@ -365,8 +389,11 @@ function custom_field_exists( $p_field_id ) {
 
 /**
  * Return the type of a custom field if it exists.
- * @param integer $p_field_id Custom field id.
- * @return integer custom field type
+ *
+ * @param int $p_field_id Custom field id.
+ *
+ * @return int Custom field's type
+ *
  * @access public
  */
 function custom_field_type( $p_field_id ) {
@@ -381,8 +408,9 @@ function custom_field_type( $p_field_id ) {
 /**
  * Check to see whether the field id is defined.
  *
- * @param integer $p_field_id Custom field id.
- * @return boolean true if the field is defined, error otherwise.
+ * @param int $p_field_id Custom field id.
+ *
+ * @return bool True if the field is defined, error otherwise.
  *
  * @access public
  */
@@ -395,13 +423,16 @@ function custom_field_ensure_exists( $p_field_id ) {
 }
 
 /**
- * Check to see whether the name is unique
- * return false if a field with the name already exists, true otherwise
- * if an id is specified, then the corresponding record is excluded from the
+ * Check to see whether the name is unique.
+ *
+ * If an id is specified, then the corresponding record is excluded from the
  * uniqueness test.
- * @param string  $p_name            Custom field name.
- * @param integer $p_custom_field_id Custom field identifier.
- * @return boolean
+ *
+ * @param string $p_name         Custom field name.
+ * @param int $p_custom_field_id Custom field identifier.
+ *
+ * @return bool False if a field with the name already exists, true otherwise.
+ *
  * @access public
  */
 function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
@@ -424,7 +455,8 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
  * Check to see whether the name is unique.
  *
  * @param string $p_name Custom field name.
- * @return boolean true if the name has not been used, error otherwise.
+ *
+ * @return bool True if the name has not been used, error otherwise.
  *
  * @access public
  */
@@ -438,10 +470,14 @@ function custom_field_ensure_name_unique( $p_name ) {
 /**
  * Return true if the user can read the value of the field for the given bug,
  * false otherwise.
- * @param integer $p_field_id Custom field identifier.
- * @param integer $p_bug_id   A bug identifier.
- * @param integer $p_user_id  User id.
- * @return boolean
+ *
+ * @param int $p_field_id Custom field identifier.
+ * @param int $p_bug_id   A bug identifier.
+ * @param int $p_user_id  User id.
+ *
+ * @return bool
+ * @throws ClientException if the bug does not exist
+ *
  * @access public
  */
 function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id = null ) {
@@ -461,10 +497,13 @@ function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id = null
 /**
  * Return true if the user can read the value of the field for the given project,
  * false otherwise.
- * @param integer $p_field_id   Custom field identifier.
- * @param integer $p_project_id A project identifier.
- * @param integer $p_user_id    A user identifier.
- * @return boolean
+ *
+ * @param int $p_field_id   Custom field identifier.
+ * @param int $p_project_id A project identifier.
+ * @param int $p_user_id    A user identifier.
+ *
+ * @return bool
+ *
  * @access public
  */
 function custom_field_has_read_access_by_project_id( $p_field_id, $p_project_id, $p_user_id = null ) {
@@ -482,10 +521,13 @@ function custom_field_has_read_access_by_project_id( $p_field_id, $p_project_id,
 /**
  * Return true if the user can modify the value of the field for the given project,
  * false otherwise.
- * @param integer $p_field_id   Custom field identifier.
- * @param integer $p_project_id A project identifier.
- * @param integer $p_user_id    A user identifier.
- * @return boolean
+ *
+ * @param int $p_field_id   Custom field identifier.
+ * @param int $p_project_id A project identifier.
+ * @param int $p_user_id    A user identifier.
+ *
+ * @return bool
+ *
  * @access public
  */
 function custom_field_has_write_access_to_project( $p_field_id, $p_project_id, $p_user_id = null ) {
@@ -503,10 +545,14 @@ function custom_field_has_write_access_to_project( $p_field_id, $p_project_id, $
 /**
  * Return true if the user can modify the value of the field for the given bug,
  * false otherwise.
- * @param integer $p_field_id Custom field identifier.
- * @param integer $p_bug_id   A bug identifier.
- * @param integer $p_user_id  A user identifier.
- * @return boolean
+ *
+ * @param int $p_field_id Custom field identifier.
+ * @param int $p_bug_id   A bug identifier.
+ * @param int $p_user_id  A user identifier.
+ *
+ * @return bool
+ * @throws ClientException if the bug does not exist
+ *
  * @access public
  */
 function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id = null ) {
@@ -515,11 +561,14 @@ function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id = nul
 }
 
 /**
- * create a new custom field with the name $p_name
- * the definition are the default values and can be changes later
- * return the ID of the new definition
+ * Create a new custom field with the name $p_name.
+ *
+ * The definition's fields are set to default values and can be changed later.
+ *
  * @param string $p_name Custom field name.
- * @return integer custom field id
+ *
+ * @return int Id of the new custom field.
+ *
  * @access public
  */
 function custom_field_create( $p_name ) {
@@ -543,10 +592,10 @@ function custom_field_create( $p_name ) {
 /**
  * Update the field definition.
  *
- * @param integer $p_field_id  Custom field identifier.
- * @param array   $p_def_array Custom field definition.
+ * @param int   $p_field_id  Custom field identifier.
+ * @param array $p_def_array Custom field definition.
  *
- * @return boolean true on success, false on failure
+ * @return bool True on success, false on failure
  *
  * @access public
  */
@@ -675,11 +724,14 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 }
 
 /**
- * Add a custom field to a project
- * return true on success, false on failure or if already added
- * @param integer $p_field_id   Custom field identifier.
- * @param integer $p_project_id Project identifier.
- * @return boolean
+ * Add a custom field to a project.
+ *
+ * @param int $p_field_id   Custom field identifier.
+ * @param int $p_project_id Project identifier.
+ *
+ * @return bool True on success, false on failure or if already added
+ * @throws ClientException if project does not exist
+ *
  * @access public
  */
 function custom_field_link( $p_field_id, $p_project_id ) {
@@ -699,15 +751,17 @@ function custom_field_link( $p_field_id, $p_project_id ) {
 }
 
 /**
- * Remove a custom field from a project
- * return true on success, false on failure
+ * Remove a custom field from a project.
  *
  * The values for the custom fields are not deleted.  This is to allow for the
  * case where a bug is moved to another project that has the field, or the
  * field is linked again to the project.
- * @param integer $p_field_id   Custom field identifier.
- * @param integer $p_project_id Project identifier.
- * @return void
+ *
+ * @param int $p_field_id   Custom field identifier.
+ * @param int $p_project_id Project identifier.
+ *
+ * @return void True on success, false on failure
+ *
  * @access public
  */
 function custom_field_unlink( $p_field_id, $p_project_id ) {
@@ -718,10 +772,12 @@ function custom_field_unlink( $p_field_id, $p_project_id ) {
 }
 
 /**
- * Delete the field definition and all associated values and project associations
- * return true on success, false on failure
- * @param integer $p_field_id Custom field identifier.
+ * Delete the field definition and all associated values and project associations.
+ *
+ * @param int $p_field_id Custom field identifier.
+ *
  * @return void
+ *
  * @access public
  */
 function custom_field_destroy( $p_field_id ) {
@@ -745,12 +801,14 @@ function custom_field_destroy( $p_field_id ) {
 }
 
 /**
- * Delete all associations of custom fields to the specified project
- * return true on success, false on failure
+ * Delete all associations of custom fields to the specified project.
  *
  * To be called from within project_delete().
- * @param integer $p_project_id A project identifier.
+ *
+ * @param int $p_project_id A project identifier.
+ *
  * @return void
+ *
  * @access public
  */
 function custom_field_unlink_all( $p_project_id ) {
@@ -764,8 +822,11 @@ function custom_field_unlink_all( $p_project_id ) {
  * Delete all custom values associated with the specified bug.
  *
  * To be called from bug_delete().
- * @param integer $p_bug_id A bug identifier.
+ *
+ * @param int $p_bug_id A bug identifier.
+ *
  * @return void
+ *
  * @access public
  */
 function custom_field_delete_all_values( $p_bug_id ) {
@@ -782,7 +843,9 @@ function custom_field_delete_all_values( $p_bug_id ) {
  * field is found with the specified name.
  *
  * @param string $p_field_name Custom field name.
+ *
  * @return int|false custom field id
+ *
  * @access public
  */
 function custom_field_get_id_from_name( $p_field_name ) {
@@ -808,11 +871,14 @@ function custom_field_get_id_from_name( $p_field_name ) {
 }
 
 /**
- * Return an array of ids of custom fields bound to the specified project
+ * Return an array of ids of custom fields bound to the specified project.
  *
  * The ids will be sorted based on the sequence number associated with the binding
- * @param integer|array $p_project_id A project identifier, or array of project ids
- * @return array	Array of custom field ids
+ *
+ * @param int|array $p_project_id A project identifier, or array of project ids
+ *
+ * @return array Array of custom field ids
+ *
  * @access public
  */
 function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
@@ -887,8 +953,10 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 }
 
 /**
- * Return an array all custom field ids sorted by name
+ * Return an array all custom field ids sorted by name.
+ *
  * @return array
+ *
  * @access public
  */
 function custom_field_get_ids() {
@@ -902,10 +970,12 @@ function custom_field_get_ids() {
 }
 
 /**
- * Return an array of ids of projects related to the specified custom field
- * (the array may be empty)
- * @param integer $p_field_id Custom field identifier.
- * @return array
+ * Return the list of projects linked to the specified custom field.
+ *
+ * @param int $p_field_id Custom field identifier.
+ *
+ * @return array Ids of linked projects (can be empty)
+ *
  * @access public
  */
 function custom_field_get_project_ids( $p_field_id ) {
@@ -914,9 +984,12 @@ function custom_field_get_project_ids( $p_field_id ) {
 }
 
 /**
- * Return a field definition row for the field or error if the field does not exist
- * @param integer $p_field_id Custom field identifier.
+ * Return a field definition row for the field or error if the field does not exist.
+ *
+ * @param int $p_field_id Custom field identifier.
+ *
  * @return array custom field definition
+ *
  * @access public
  */
 function custom_field_get_definition( $p_field_id ) {
@@ -924,11 +997,15 @@ function custom_field_get_definition( $p_field_id ) {
 }
 
 /**
- * Return a single database field from a custom field definition row for the field
- * if the database field does not exist, display a warning and return ''
- * @param integer $p_field_id   Custom field identifier.
- * @param integer $p_field_name Custom field name.
+ * Return a single database field from a custom field definition row for the field.
+ *
+ * if the database field does not exist, display a warning and return ''.
+ *
+ * @param int $p_field_id   Custom field identifier.
+ * @param int $p_field_name Custom field name.
+ *
  * @return string
+ *
  * @access public
  */
 function custom_field_get_field( $p_field_id, $p_field_name ) {
@@ -947,7 +1024,9 @@ function custom_field_get_field( $p_field_id, $p_field_name ) {
  * Return custom field name including localized name (if available)
  *
  * @param string $p_name Custom field's name.
+ *
  * @return string CustomFieldName [(LocalizedName)]
+ *
  * @access public
  */
 function custom_field_get_display_name( $p_name ) {
@@ -960,12 +1039,17 @@ function custom_field_get_display_name( $p_name ) {
 }
 
 /**
- * Get the value of a custom field for the given bug
+ * Get the value of a custom field for the given bug.
+ *
  * @todo return values are unclear... should we error when access is denied
- * and provide an api to check whether it will be?
- * @param integer $p_field_id Custom field id.
- * @param integer $p_bug_id   A bug identifier.
+ *       and provide an api to check whether it will be?
+ *
+ * @param int $p_field_id Custom field id.
+ * @param int $p_bug_id   A bug identifier.
+ *
  * @return mixed: value is defined, null: no value is defined, false: read access is denied
+ * @throws ClientException if the bug does not exist
+ *
  * @access public
  */
 function custom_field_get_value( $p_field_id, $p_bug_id ) {
@@ -991,12 +1075,17 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 
 /**
  * Gets the custom fields array for the given bug readable by specified level.
+ *
  * Array keys are custom field names. Array is sorted by custom field sequence number;
  * Array items are arrays with the next keys:
  * 'type', 'value', 'access_level_r'
- * @param integer $p_bug_id            A bug identifier.
- * @param integer $p_user_access_level Access level.
+ *
+ * @param int $p_bug_id            A bug identifier.
+ * @param int $p_user_access_level Access level.
+ *
  * @return array
+ * @throws ClientException if the bug does not exist
+ *
  * @access public
  */
 function custom_field_get_linked_fields( $p_bug_id, $p_user_access_level ) {
@@ -1013,10 +1102,15 @@ function custom_field_get_linked_fields( $p_bug_id, $p_user_access_level ) {
 
 /**
  * Gets the custom fields array for the given bug. Array keys are custom field names.
+ *
  * Array is sorted by custom field sequence number; Array items are arrays with the next keys:
  * 'type', 'value', 'access_level_r'
- * @param integer $p_bug_id A bug identifier.
+ *
+ * @param int $p_bug_id A bug identifier.
+ *
  * @return array
+ * @throws ClientException if the bug does not exist
+ *
  * @access public
  */
 function custom_field_get_all_linked_fields( $p_bug_id ) {
@@ -1064,11 +1158,13 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 }
 
 /**
- * Gets the sequence number for the specified custom field for the specified
- * project.  Returns false in case of error.
- * @param integer $p_field_id   A custom field identifier.
- * @param integer $p_project_id A project identifier.
- * @return integer|boolean
+ * Gets the custom field's sequence number for the specified project.
+ *
+ * @param int $p_field_id   A custom field identifier.
+ * @param int $p_project_id A project identifier.
+ *
+ * @return int|bool Sequence number, false in case of error.
+ *
  * @access public
  */
 function custom_field_get_sequence( $p_field_id, $p_project_id ) {
@@ -1092,11 +1188,15 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
 }
 
 /**
- * Allows the validation of a custom field value without setting it
- * or needing a bug to exist.
- * @param integer $p_field_id Custom field identifier.
- * @param string  $p_value    Custom field value.
- * @return boolean
+ * Validate a custom field's value.
+ *
+ * Does not require a bug to exist and does not actually set the value.
+ *
+ * @param int    $p_field_id Custom field identifier.
+ * @param string $p_value    Custom field value.
+ *
+ * @return bool
+ *
  * @access public
  */
 function custom_field_validate( $p_field_id, $p_value ) {
@@ -1195,10 +1295,15 @@ function custom_field_validate( $p_field_id, $p_value ) {
 }
 
 /**
- * $p_possible_values: possible values to be pre-processed.  If it has enumeration values,
- * it will be left as is.  If it has a method, it will be replaced by the list.
+ * $p_possible_values: possible values to be pre-processed.
+ *
+ * If it has enumeration values, it will be left as is.
+ * If it has a method, it will be replaced by the list.
+ *
  * @param string $p_possible_values Possible values for custom field.
+ *
  * @return string|array
+ *
  * @access public
  */
 function custom_field_prepare_possible_values( $p_possible_values ) {
@@ -1211,12 +1316,15 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
 
 /**
  * Get All Possible Values for a Field.
+ *
  * Optionally, a subset of projects can be specified to get values only appearing in those.
  * The values are always those visible to the user, based on view permissions.
  *
- * @param array         $p_field_def   Custom field definition.
- * @param integer|array $p_project_id  Project identifier, or array of project ids
- * @return boolean|array
+ * @param array     $p_field_def   Custom field definition.
+ * @param int|array $p_project_id  Project identifier, or array of project ids.
+ *
+ * @return bool|array
+ *
  * @access public
  */
 function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_PROJECTS ) {
@@ -1295,11 +1403,13 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 }
 
 /**
- * Convert the value to save it into the database, depending of the type
- * return value for database
- * @param boolean|integer|string $p_value Custom field value.
- * @param integer                $p_type  Custom field type.
- * @return boolean|integer|string
+ * Convert the value to save it into the database, depending on the type.
+ *
+ * @param bool|int|string $p_value Custom field value.
+ * @param int                $p_type  Custom field type.
+ *
+ * @return bool|int|string Value for database storage.
+ *
  * @access public
  */
 function custom_field_value_to_database( $p_value, $p_type ) {
@@ -1315,11 +1425,13 @@ function custom_field_value_to_database( $p_value, $p_type ) {
 }
 
 /**
- * Convert the database-value to value, depending of the type
- * return value for further operation
- * @param boolean|integer|string $p_value Custom field value.
- * @param integer                $p_type  Custom field type.
- * @return boolean|integer|string
+ * Convert the database-value to value, depending on the type.
+ *
+ * @param bool|int|string $p_value Custom field value.
+ * @param int             $p_type  Custom field type.
+ *
+ * @return bool|int|string Database value
+ *
  * @access public
  */
 function custom_field_database_to_value( $p_value, $p_type ) {
@@ -1331,11 +1443,15 @@ function custom_field_database_to_value( $p_value, $p_type ) {
 }
 
 /**
- * Convert the default-value to value depending on the type.  For example, in case of date, this
- * would translate 'tomorrow' to tomorrow's date.
- * @param boolean|integer|string $p_value Custom field default value.
- * @param integer                $p_type  Custom field type.
- * @return boolean|integer|string
+ * Convert the default value to actual value depending on the type.
+ *
+ * For example, in case of date, this would translate 'tomorrow' to tomorrow's date.
+ *
+ * @param bool|int|string $p_value Custom field default value.
+ * @param int                $p_type  Custom field type.
+ *
+ * @return bool|int|string
+ *
  * @access public
  */
 function custom_field_default_to_value( $p_value, $p_type ) {
@@ -1349,13 +1465,15 @@ function custom_field_default_to_value( $p_value, $p_type ) {
 }
 
 /**
- * Set the value of a custom field for a given bug
- * return true on success, false on failure
- * @param integer $p_field_id   Custom field identifier.
- * @param integer $p_bug_id     A bug identifier.
- * @param mixed   $p_value      New custom field value.
- * @param boolean $p_log_insert Create history logs for new values.
- * @return boolean
+ * Set the value of a custom field for a given bug.
+ *
+ * @param int   $p_field_id   Custom field identifier.
+ * @param int   $p_bug_id     A bug identifier.
+ * @param mixed $p_value      New custom field value.
+ * @param bool  $p_log_insert Create history logs for new values.
+ *
+ * @return bool True on success, false on failure
+ *
  * @access public
  */
 function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert = true ) {
@@ -1418,12 +1536,14 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 }
 
 /**
- * Sets the sequence number for the specified custom field for the specified
- * project.
- * @param integer $p_field_id   A custom field identifier.
- * @param integer $p_project_id A Project identifier.
- * @param integer $p_sequence   Sequence order.
- * @return boolean
+ * Sets the custom field's sequence number for the specified project.
+ *
+ * @param int $p_field_id   A custom field identifier.
+ * @param int $p_project_id A Project identifier.
+ * @param int $p_sequence   Sequence order.
+ *
+ * @return bool
+ *
  * @access public
  */
 function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
@@ -1440,15 +1560,20 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
 }
 
 /**
- * Print an input field
- * $p_field_def contains the definition of the custom field (including it's field id
- * $p_bug_id    contains the bug where this field belongs to. If it's left
- * away, it'll default to 0 and thus belongs to a new (i.e. non-existent) bug
+ * Print an input field.
+ *
+ * $p_bug_id    contains the bug
  * NOTE: This probably belongs in the print_api.php
- * @param array   $p_field_def Custom field definition.
- * @param integer $p_bug_id    A bug identifier.
- * @param boolean $p_required  True if the field is required for form submission
+ *
+ * @param array $p_field_def Custom field definition (including its field id).
+ * @param int   $p_bug_id    Id of the bug this field belongs to. If not specified,
+ *                           it will default to 0 and thus belong to a new
+ *                           (i.e. non-existent) bug.
+ * @param bool  $p_required  True if the field is required for form submission.
+ *
  * @return void
+ * @throws ClientException if the bug does not exist
+ *
  * @access public
  */
 function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_required = false ) {
@@ -1479,7 +1604,7 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
 	}
 }
 
-/*
+/**
  * Returns a valid CSS identifier for the given custom field.
  *
  * The string is built based on the custom field's name, replacing any potentially
@@ -1495,8 +1620,10 @@ function custom_field_css_name( $p_custom_field_name ) {
 }
 
 /**
- * Constructs the name of a field used as a flag to indicate that a custom field is present on the form
- * @param integer $p_custom_field_id  The custom field id to create the field name for.
+ * Constructs the name of a field used as a flag to indicate that a custom field is present on the form.
+ *
+ * @param int $p_custom_field_id  The custom field id to create the field name for.
+ *
  * @return string The field name.
  */
 function custom_field_presence_field_name( $p_custom_field_id ) {
@@ -1505,7 +1632,9 @@ function custom_field_presence_field_name( $p_custom_field_id ) {
 
 /**
  * Checks the presence of a custom field on the form.
- * @param integer $p_custom_field_id  The custom field id to check.
+ *
+ * @param int $p_custom_field_id  The custom field id to check.
+ *
  * @return bool true when field is on form, false otherwise.
  */
 function custom_field_is_present( $p_custom_field_id ) {
@@ -1513,11 +1642,15 @@ function custom_field_is_present( $p_custom_field_id ) {
 }
 
 /**
- * Prepare a string containing a custom field value for display
- * @param array   $p_def      Contains the definition of the custom field.
- * @param integer $p_field_id Contains the id of the field.
- * @param integer $p_bug_id   Contains the bug id to display the custom field value for.
+ * Prepare a string containing a custom field value for display.
+ *
+ * @param array $p_def      Custom Field Definition.
+ * @param int   $p_field_id Id of the custom field.
+ * @param int   $p_bug_id   Bug id to display the custom field value for.
+ *
  * @return string
+ * @throws ClientException if the bug does not exist
+ *
  * @access public
  */
 function string_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
@@ -1535,12 +1668,17 @@ function string_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
 }
 
 /**
- * Print a custom field value for display
- * NOTE: This probably belongs in the print_api.php
- * @param array   $p_def      Contains the definition of the custom field.
- * @param integer $p_field_id Contains the id of the field.
- * @param integer $p_bug_id   Contains the bug id to display the custom field value for.
+ * Print a custom field value for display.
+ *
+ * NOTE: This probably belongs in the print_api.php.
+ *
+ * @param array $p_def      Contains the definition of the custom field.
+ * @param int   $p_field_id Contains the id of the field.
+ * @param int   $p_bug_id   Contains the bug id to display the custom field value for.
+ *
  * @return void
+ * @throws ClientException if the bug does not exist
+ *
  * @access public
  */
 function print_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
@@ -1558,11 +1696,15 @@ function print_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
 }
 
 /**
- * Prepare a string containing a custom field value for email
- * NOTE: This probably belongs in the string_api.php
+ * Prepare a string containing a custom field value for email.
+ *
+ * NOTE: This probably belongs in the string_api.php.
+ *
  * @param string  $p_value Value of custom field.
- * @param integer $p_type  Type of custom field.
+ * @param int $p_type  Type of custom field.
+ *
  * @return string value ready for sending via email
+ *
  * @access public
  */
 function string_custom_field_value_for_email( $p_value, $p_type ) {
@@ -1575,9 +1717,12 @@ function string_custom_field_value_for_email( $p_value, $p_type ) {
 
 /**
  * Returns true if there is data stored for a custom field id.
- * Empty values are ignored
- * @param integer $p_field_id	Custom field id
- * @return boolean		True, if non-empty values exist
+ *
+ * Empty values are ignored.
+ *
+ * @param int $p_field_id Custom field id
+ *
+ * @return bool True, if non-empty values exist
  */
 function custom_field_has_data( $p_field_id ) {
 	db_param_push();
