@@ -60,6 +60,7 @@
  * @author Kareyac
  * @author Kirill
  * @author Lega4
+ * @author Lutece398
  * @author Mailman
  * @author Movses
  * @author MuratTheTurkish
@@ -1289,7 +1290,8 @@ $s_timeline_no_activity = 'Действий за этот период не об
 $s_timeline_title = 'Активность';
 $s_timeline_more = 'Показать ещё...';
 $s_missing_error_string = 'Отсутствует строка ошибки: %1$s';
-$MANTIS_ERROR[ERROR_GENERIC] = 'При выполнении действия произошла ошибка. Возможно, об этом стоит сообщить вашему местному администратору.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'При выполнении действия произошла ошибка. Вы можете сообщить об этом вашему местному администратору.';
+$MANTIS_ERROR[ERROR_GENERIC_DETAILS] = 'Подробности ошибки: %s';
 $MANTIS_ERROR[ERROR_SQL] = 'Обнаружена ошибка SQL .';
 $MANTIS_ERROR[ERROR_REPORT] = 'Во введенной информации обнаружены ошибки.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Не указан файл.';

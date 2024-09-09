@@ -66,4 +66,5 @@ $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ С�
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Нажмите Ctrl+C для копирования';
 $s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Выберите язык';
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Номера строк';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Показать пробелы';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Визуализация цветов CSS';
