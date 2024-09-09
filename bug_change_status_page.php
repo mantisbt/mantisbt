@@ -83,7 +83,6 @@ $t_reopen = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
 $t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id );
 $t_closed = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
 $t_resolution_fixed = config_get( 'bug_resolution_fixed_threshold', null, null, $t_bug->project_id );
-$t_resolution_not_fixed = config_get( 'bug_resolution_not_fixed_threshold', null, null, $t_bug->project_id );
 $t_current_user_id = auth_get_current_user_id();
 
 # Ensure user has proper access level before proceeding
@@ -329,7 +328,6 @@ layout_page_begin();
 			<!-- Fixed in Version -->
 			<tr>
 				<th class="category">
-					<span class="required hidden">*</span>
 					<?php echo lang_get( 'fixed_in_version' ) ?>
 				</th>
 				<td>
