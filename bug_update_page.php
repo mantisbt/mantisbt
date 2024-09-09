@@ -613,15 +613,9 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 
 	# Fixed in Version
 	if( $t_show_fixed_in_version ) {
-		echo '<th class="category"><span class="required hidden">*</span> <label for="fixed_in_version">' . lang_get( 'fixed_in_version' ) . '</label></th>';
+		echo '<th class="category"><label for="fixed_in_version">' . lang_get( 'fixed_in_version' ) . '</label></th>';
 		echo '<td>';
-		echo '<select ' . helper_get_tab_index() . ' id="fixed_in_version" name="fixed_in_version" class="input-sm"';
-		if ( config_get( 'bug_fixed_in_version_required', null, null, $t_bug->project_id ) != OFF ) {
-			echo ' data-closed-status-threshold="' . config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id ) . '"';
-			echo ' data-required-at-status-threshold="' . config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id ) . '"';
-			echo ' data-required-at-resolution-threshold="' . config_get( 'bug_resolution_fixed_threshold', null, null, $t_bug->project_id ) . '"';
-		}
-		echo '>';
+		echo '<select ' . helper_get_tab_index() . ' id="fixed_in_version" name="fixed_in_version" class="input-sm">';
 		print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL );
 		echo '</select>';
 		echo '</td>';

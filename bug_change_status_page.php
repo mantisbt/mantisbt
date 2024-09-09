@@ -83,6 +83,7 @@ $t_reopen = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
 $t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id );
 $t_closed = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
 $t_resolution_fixed = config_get( 'bug_resolution_fixed_threshold', null, null, $t_bug->project_id );
+$t_resolution_not_fixed = config_get( 'bug_resolution_not_fixed_threshold', null, null, $t_bug->project_id );
 $t_current_user_id = auth_get_current_user_id();
 
 # Ensure user has proper access level before proceeding
@@ -324,10 +325,6 @@ layout_page_begin();
 			&& !bug_is_readonly( $f_bug_id )
 			&& access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id )
 		) {
-			$t_bug_fixed_in_version_required = false;
-			if ( $f_new_status >= $t_resolved ) {
-				$t_bug_fixed_in_version_required = config_get( 'bug_fixed_in_version_required', null, null, $t_bug->project_id ) != OFF;
-			}
 ?>
 			<!-- Fixed in Version -->
 			<tr>
@@ -336,8 +333,7 @@ layout_page_begin();
 					<?php echo lang_get( 'fixed_in_version' ) ?>
 				</th>
 				<td>
-					<select name="fixed_in_version" class="input-sm"<?php if ( $t_bug_fixed_in_version_required ) {?> 
-							data-required-at-resolution-threshold="<?php echo $t_resolution_fixed ?>"<?php } ?>>
+					<select name="fixed_in_version" class="input-sm">
 						<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
 					</select>
 				</td>

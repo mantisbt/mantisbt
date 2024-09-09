@@ -636,28 +636,6 @@ $(document).ready( function() {
 			.addClass(getColorClassName(me.val()));
 		me.data('prev', me.val());
 	});
-
-	// client-side check replicated server-side in core/bug_api.php
-	var fixedInVersionRequiredField = $('#update_bug_form,#bug-change-status-form')
-		.find('select[name="fixed_in_version"][data-required-at-resolution-threshold]');
-	if (fixedInVersionRequiredField.length > 0) {
-		var statusField = fixedInVersionRequiredField.closest('form').find('input[name="status"],select[name="status"]');
-		var resolutionField = fixedInVersionRequiredField.closest('form').find('input[name="resolution"],select[name="resolution"]');
-		var statusThreshold = fixedInVersionRequiredField.data('required-at-status-threshold');
-		var resolutionThreshold = fixedInVersionRequiredField.data('required-at-resolution-threshold');
-		var handler = function() {
-			var fixedInVersionRequired = resolutionField.val() >= resolutionThreshold;
-			if (fixedInVersionRequired && statusThreshold != null) {
-				var status = statusField.val();
-				fixedInVersionRequired &= status >= statusThreshold;
-			}
-			fixedInVersionRequiredField.prop('required', fixedInVersionRequired);
-			fixedInVersionRequiredField.closest('tr').find('.category .required').toggleClass('hidden', !fixedInVersionRequired);
-		};
-		statusField.on('change',handler);
-		resolutionField.on('change',handler);
-		handler();
-	}
 });
 
 function setBugLabel() {
