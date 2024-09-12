@@ -56,6 +56,7 @@
  * @author Lbayle
  * @author Mathematic-alpha
  * @author McDutchie
+ * @author Méthodes Bulebe Hangi
  * @author Noe
  * @author Od1n
  * @author Peter17
@@ -63,6 +64,7 @@
  * @author Seudo
  * @author Sherbrooke
  * @author SleaY
+ * @author Terio legale
  * @author Thibaut120094
  * @author Urhixidur
  * @author Verdy p
@@ -1290,7 +1292,8 @@ $s_timeline_no_activity = 'Aucune activité dans l’intervalle de temps.';
 $s_timeline_title = 'Chronologie';
 $s_timeline_more = 'Plus d’événements...';
 $s_missing_error_string = 'Chaîne d’erreur manquante :%1$s';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Une erreur s’est produite. Merci de signaler cette erreur à votre administrateur local.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Une erreur s\'est produite durant cette action, vous pourriez le signaler à votre administrateur local.';
+$MANTIS_ERROR[ERROR_GENERIC_DETAILS] = 'Détails de l\'erreur: %s';
 $MANTIS_ERROR[ERROR_SQL] = 'Erreur SQL détectée.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Il y avait une erreur dans votre rapport.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Aucun fichier spécifié.';
@@ -1435,6 +1438,7 @@ $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Le nom de jeton de l’API «�
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Le fichier spécifié dans $g_log_destination « %s » ne peut pas être écrit.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'L’utilisateur ajouté n’a pas les droits d’accès suffisants pour suivre ce problème.';
 $MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'Jeton de l’API pour l’utilisateur non trouvé avec l’identifiant « %d ».';
+$MANTIS_ERROR[ERROR_GRAPH_TOOL_NOT_FOUND] = 'L\'outil Graphviz « %s » n\'a pas été trouvé ou son exécution a échoué. Assurez-vous que la bibliothèque est installée et que $g_graphviz_path est correctement défini.';
 $s_dropzone_default_message = 'Joignez les fichiers en les glissant-déposant, en les sélectionnant ou en les collant.';
 $s_dropzone_fallback_message = 'Votre navigateur ne prend pas en charge le téléversement de fichiers par glisser-déposer.';
 $s_dropzone_file_too_big = 'Le fichier est trop gros ({{filesize}} Mio). Taille maximale : {{maxFilesize}} Mio.';
