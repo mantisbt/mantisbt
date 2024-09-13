@@ -156,19 +156,19 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 	global $g_cache_project_hierarchy_all, $g_cache_project_inheritance_all;
 	global $g_cache_project_hierarchy, $g_cache_project_inheritance;
 
-	# Should disabled projects be shown and do we already cache the whole hierarchy?
-	if( ( !is_null( $p_show_disabled ) ) && !is_null( $g_cache_project_hierarchy_all ) ) {
-		# Set aliases to the whole hierarchy cache and return
+	# Set Cache aliases...
+	if( $p_show_disabled ) {
+		# ... to the whole hierarchy cache
 		$g_cache_project_hierarchy = $g_cache_project_hierarchy_all;
 		$g_cache_project_inheritance = $g_cache_project_inheritance_all;
-		return;
-	}
-
-	# Should disabled projects be hidden and do we already cache the enabled hierarchy?
-	if( ( is_null( $p_show_disabled ) ) && !is_null( $g_cache_project_hierarchy_enabled ) ) {
-		# Set aliases to the enabled hierarchy cache and return
+	} else {
+		# ... to the enabled hierarchy cache
 		$g_cache_project_hierarchy = $g_cache_project_hierarchy_enabled;
 		$g_cache_project_inheritance = $g_cache_project_inheritance_enabled;
+	}
+
+	# Cache is already built
+	if( !is_null( $g_cache_project_hierarchy ) ) {
 		return;
 	}
 
@@ -208,12 +208,12 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 	}
 
 	# Copy aliases into the right pair of cache variables
-	if( is_null( $p_show_disabled ) ) {
-		$g_cache_project_hierarchy_enabled = $g_cache_project_hierarchy;
-		$g_cache_project_inheritance_enabled = $g_cache_project_inheritance;
-	} else {
+	if( $p_show_disabled ) {
 		$g_cache_project_hierarchy_all = $g_cache_project_hierarchy;
 		$g_cache_project_inheritance_all = $g_cache_project_inheritance;
+	} else {
+		$g_cache_project_hierarchy_enabled = $g_cache_project_hierarchy;
+		$g_cache_project_inheritance_enabled = $g_cache_project_inheritance;
 	}
 }
 
@@ -279,11 +279,7 @@ function project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled = fa
 
 	project_hierarchy_cache( $p_show_disabled );
 
-	if( isset( $g_cache_project_hierarchy[$p_project_id] ) ) {
-		return $g_cache_project_hierarchy[$p_project_id];
-	} else {
-		return array();
-	}
+	return $g_cache_project_hierarchy[$p_project_id] ?? [];
 }
 
 /**
@@ -299,7 +295,7 @@ function project_hierarchy_get_all_subprojects( $p_project_id, $p_show_disabled 
 	while( $t_todo ) {
 		$t_elem = array_shift( $t_todo );
 		if( !in_array( $t_elem, $t_subprojects ) ) {
-			array_push( $t_subprojects, $t_elem );
+			$t_subprojects[] = $t_elem;
 			$t_todo = array_merge( $t_todo, project_hierarchy_get_subprojects( $t_elem, $p_show_disabled ) );
 		}
 	}
