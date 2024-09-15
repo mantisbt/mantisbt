@@ -47,13 +47,13 @@ use Mantis\Exceptions\ClientException;
 /**
  * Create a new profile for the user, return the ID of the new profile.
  *
- * @param integer $p_user_id     A valid user identifier.
- * @param string  $p_platform    Value for profile platform.
- * @param string  $p_os          Value for profile operating system.
- * @param string  $p_os_build    Value for profile operation system build.
- * @param string  $p_description Description of profile.
- * @return integer
+ * @param int    $p_user_id     A valid user identifier.
+ * @param string $p_platform    Value for profile platform.
+ * @param string $p_os          Value for profile operating system.
+ * @param string $p_os_build    Value for profile operation system build.
+ * @param string $p_description Description of profile.
  *
+ * @return int
  * @throws ClientException if user is protected
  */
 function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
@@ -85,10 +85,10 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
  * code included the user_id in the query and I have chosen to keep that for
  * this API as it hides the details of id implementation from users of the API
  *
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_profile_id A profile identifier.
- * @return void
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_profile_id A profile identifier.
  *
+ * @return void
  * @throws ClientException if user is protected
  */
 function profile_delete( $p_user_id, $p_profile_id ) {
@@ -107,14 +107,14 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 /**
  * Update a profile for the user.
  *
- * @param integer $p_user_id     A valid user identifier.
- * @param integer $p_profile_id  A profile identifier.
- * @param string  $p_platform    Value for profile platform.
- * @param string  $p_os          Value for profile operating system.
- * @param string  $p_os_build    Value for profile operation system build.
- * @param string  $p_description Description of profile.
- * @return void
+ * @param int    $p_user_id     A valid user identifier.
+ * @param int    $p_profile_id  A profile identifier.
+ * @param string $p_platform    Value for profile platform.
+ * @param string $p_os          Value for profile operating system.
+ * @param string $p_os_build    Value for profile operation system build.
+ * @param string $p_description Description of profile.
  *
+ * @return void
  * @throws ClientException if user is protected
  */
 function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_build, $p_description ) {
@@ -140,14 +140,14 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 
 /**
  * Validates that the given profile data is valid, throw errors if not.
- * @internal
  *
- * @param $p_user_id
- * @param $p_platform
- * @param $p_os
- * @param $p_os_build
+ * @param int    $p_user_id  A valid user identifier.
+ * @param string $p_platform Value for profile platform.
+ * @param string $p_os       Value for profile operating system.
+ * @param string $p_os_build Value for profile operation system build.
  *
  * @throws ClientException
+ * @internal
  */
 function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build ) {
 	if( ALL_USERS != $p_user_id ) {
@@ -176,9 +176,9 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 /**
  * Return a profile row from the database.
  *
- * @param integer $p_profile_id A profile identifier.
- * @return array
+ * @param int $p_profile_id A profile identifier.
  *
+ * @return array
  * @throws ClientException if the profile ID does not exist
  */
 function profile_get_row( $p_profile_id ) {
@@ -203,8 +203,8 @@ function profile_get_row( $p_profile_id ) {
  * Return the profile's name as concatenation of platform, os and build.
  *
  * @param int $p_profile_id
- * @return string
  *
+ * @return string
  * @throws ClientException if the profile ID does not exist
  */
 function profile_get_name( $p_profile_id ) {
@@ -221,8 +221,9 @@ function profile_get_name( $p_profile_id ) {
 /**
  * Return an array containing all rows for a given user.
  *
- * @param integer $p_user_id   A valid user identifier.
- * @param boolean $p_all_users Include profiles for all users.
+ * @param int  $p_user_id   A valid user identifier.
+ * @param bool $p_all_users Include profiles for all users.
+ *
  * @return array
  */
 function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
@@ -243,7 +244,8 @@ function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
  * Return an array containing all profiles for a given user,
  * including global profiles.
  *
- * @param integer $p_user_id A valid user identifier.
+ * @param int $p_user_id A valid user identifier.
+ *
  * @return array
  */
 function profile_get_all_for_user( $p_user_id ) {
@@ -251,11 +253,12 @@ function profile_get_all_for_user( $p_user_id ) {
 }
 
 /**
- * Return an array of strings containing unique values for the specified field based
- * on private and public profiles accessible to the specified user.
+ * Return an array of strings containing unique values for the specified field
+ * based on private and public profiles accessible to the specified user.
  *
- * @param string  $p_field   Field name of the profile to retrieve.
- * @param integer $p_user_id A valid user identifier.
+ * @param string $p_field   Field name of the profile to retrieve.
+ * @param int    $p_user_id A valid user identifier.
+ *
  * @return array
  */
 function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
@@ -288,9 +291,10 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 }
 
 /**
- * Return an array containing all profiles used in a given project
+ * Return an array containing all profiles used in a given project.
  *
- * @param integer $p_project_id A valid project identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return array
  */
 function profile_get_all_for_project( $p_project_id ) {
@@ -309,8 +313,9 @@ function profile_get_all_for_project( $p_project_id ) {
 /**
  * Returns the user's default profile.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return string
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return int
  */
 function profile_get_default( $p_user_id ) {
 	return (int)user_pref_get_pref( $p_user_id, 'default_profile' );
@@ -319,8 +324,9 @@ function profile_get_default( $p_user_id ) {
 /**
  * Returns true if the specified profile is global.
  *
- * @param integer $p_profile_id A valid profile identifier.
- * @return boolean
+ * @param int $p_profile_id A valid profile identifier.
+ *
+ * @return bool
  * @throws ClientException if the profile ID does not exist
  */
 function profile_is_global( $p_profile_id ) {
