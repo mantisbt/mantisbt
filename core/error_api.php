@@ -31,6 +31,9 @@
  * @uses lang_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\MantisException;
+
 require_api( 'compress_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -62,7 +65,7 @@ $g_exception = null;
 /**
  * Unhandled exception handler
  *
- * @param \Mantis\Exceptions\MantisException|Exception|Error $p_exception The exception to handle
+ * @param MantisException|Exception|Error $p_exception The exception to handle
  * @return void
  */
 function error_exception_handler( $p_exception ) {
@@ -130,7 +133,7 @@ function error_stack_trace( $p_exception = null ) {
  * @param int        $p_line  Contains the line number the error was raised at, as an integer.
  *
  * @return void
- * @throws \Mantis\Exceptions\ClientException
+ * @throws ClientException
  *
  * @internal
  * @uses lang_api.php
@@ -168,15 +171,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	}
 
 	$t_method_array = config_get_global( 'display_errors' );
-	if( isset( $t_method_array[$p_type] ) ) {
-		$t_method = $t_method_array[$p_type];
-	} else {
-		if( isset( $t_method_array[E_ALL] ) ) {
-			$t_method = $t_method_array[E_ALL];
-		} else {
-			$t_method = 'none';
-		}
-	}
+	$t_method = $t_method_array[$p_type] ?? $t_method_array[E_ALL] ?? 'none';
 
 	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
 
@@ -273,7 +268,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 		default:
 			# shouldn't happen, just display the error just in case
 			$t_error_type = 'UNHANDLED ERROR TYPE (' .
-				'<a href="http://php.net/errorfunc.constants">' . $p_type. '</a>)';
+				'<a href="https://www.php.net/errorfunc.constants">' . $p_type. '</a>)';
 			$t_error_description = $p_error . ' (' . $t_error_location . ')';
 	}
 
@@ -331,7 +326,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				if( $g_error_send_page_header ) {
 					if( $t_html_api ) {
 						layout_page_header();
-						if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
+						if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected ) {
 							if( auth_is_user_authenticated() ) {
 								layout_page_begin();
 							} else {
@@ -383,7 +378,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				}
 
 				if( $t_html_api ) {
-					if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
+					if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected ) {
 						if( auth_is_user_authenticated() ) {
 							layout_page_end();
 						} else {
@@ -518,14 +513,14 @@ function error_stack_trace_as_string( $p_exception = null ) {
 	$t_output = '';
 
 	foreach( $t_stack as $t_frame ) {
-		$t_output .= ( isset( $t_frame['file'] ) ? $t_frame['file'] : '-' ) . ': ' .
-			( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ) . ': ' .
-			( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ) . ' - ' .
-			( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ) . ' - ' .
-			( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' );
+		$t_output .= ( $t_frame['file'] ?? '-' ) . ': ' .
+			( $t_frame['line'] ?? '-' ) . ': ' .
+			( $t_frame['class'] ?? '-' ) . ' - ' .
+			( $t_frame['type'] ?? '-' ) . ' - ' .
+			( $t_frame['function'] ?? '-' );
 
 		$t_args = array();
-		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
+		if( !empty( $t_frame['args'] ) ) {
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
@@ -567,7 +562,7 @@ function error_print_stack_trace( $p_exception = null ) {
 	$t_stack = error_stack_trace( $p_exception );
 
 	foreach( $t_stack as $t_id => $t_frame ) {
-		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
+		if( !empty( $t_frame['args'] ) ) {
 			$t_args = array();
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
@@ -580,10 +575,10 @@ function error_print_stack_trace( $p_exception = null ) {
 			"<tr>\n" . str_repeat( "<td>%s</td>\n", 7 ) . "</tr>\n",
 			$t_id,
 			isset( $t_frame['file'] ) ? htmlentities( $t_frame['file'], ENT_COMPAT, 'UTF-8' ) : '-',
-			isset( $t_frame['line'] ) ? $t_frame['line'] : '-',
-			isset( $t_frame['class'] ) ? $t_frame['class'] : '-',
-			isset( $t_frame['type'] ) ? $t_frame['type'] : '-',
-			isset( $t_frame['function'] ) ? $t_frame['function'] : '-',
+			$t_frame['line'] ?? '-',
+			$t_frame['class'] ?? '-',
+			$t_frame['type'] ?? '-',
+			$t_frame['function'] ?? '-',
 			htmlentities( implode( ', ', $t_args ), ENT_COMPAT, 'UTF-8' )
 		);
 
