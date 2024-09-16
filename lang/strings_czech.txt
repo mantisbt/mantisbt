@@ -58,6 +58,7 @@
  * @author Patrik L.
  * @author Quinn
  * @author Rattkin
+ * @author Spotter
  * @author Tchoř
  * @author Utar
  * @author Walter Klosse
@@ -1245,7 +1246,7 @@ $s_timeline_no_activity = 'V rámci časového intervalu nebyla žádná aktivit
 $s_timeline_title = 'Chronologicky';
 $s_timeline_more = 'Další události...';
 $s_missing_error_string = 'Chybí řetězec: %1$s';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Při této akci se vyskytla chyba. Oznamte to svému lokálnímu správci.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Během této akce došlo k chybě. Možná to budete chtít nahlásit místnímu správci.';
 $MANTIS_ERROR[ERROR_SQL] = 'Chyba SQL.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Chybná data ve vašem reportu.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Soubor nebyl zadán.';

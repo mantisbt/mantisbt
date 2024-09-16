@@ -404,6 +404,7 @@ $s_month_october = 'Oktober';
 $s_month_november = 'November';
 $s_month_december = 'Dezember';
 $s_timeline_more = 'Méi Evenementer...';
+$MANTIS_ERROR[ERROR_GENERIC_DETAILS] = 'Feelerdetailer: %s';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL-Feeler entdeckt.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Et gëtt schonn e ¨Projet mat deem Numm.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Net valabele Wäert fir \'%1$s\'';
