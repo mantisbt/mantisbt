@@ -95,7 +95,8 @@ function error_exception_handler( $p_exception ) {
 /**
  * Get error stack based on last exception
  *
- * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
+ * @param Exception|null $p_exception The exception to print stack trace for.
+ *                                    Null will check last seen exception.
  * @return array The stack trace as an array
  */
 function error_stack_trace( $p_exception = null ) {
@@ -119,18 +120,19 @@ function error_stack_trace( $p_exception = null ) {
 /**
  * Default error handler.
  *
- * This handler will not receive E_ERROR, E_PARSE, E_CORE_*, or E_COMPILE_*
- * errors.
+ * This handler will not receive E_ERROR, E_PARSE, E_CORE_*, or E_COMPILE_* errors.
  *
- * @internal
- * @param integer    $p_type  Contains the level of the error raised, as an integer.
+ * @param int        $p_type  Contains the level of the error raised, as an integer.
  * @param int|string $p_error For Mantis internal errors (i.e. of type E_USER_*),
  *                            contains the error number (see ERROR_* constants);
  *                            otherwise (system errors), the error message as a string.
  * @param string     $p_file  Contains the filename that the error was raised in, as a string.
- * @param integer    $p_line  Contains the line number the error was raised at, as an integer.
- * @return void
+ * @param int        $p_line  Contains the line number the error was raised at, as an integer.
  *
+ * @return void
+ * @throws \Mantis\Exceptions\ClientException
+ *
+ * @internal
  * @uses lang_api.php
  * @uses config_api.php
  * @uses compress_api.php
@@ -421,13 +423,16 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 
 /**
  * Error handler to convert PHP errors to Exceptions.
+ *
  * This is used to temporarily override the default error handler, when it is
  * required to catch a PHP error (e.g. when unserializing data in install
  * helper functions).
- * @param integer $p_type    Level of the error raised.
- * @param string  $p_error   Error message.
- * @param string  $p_file    Filename that the error was raised in.
- * @param integer $p_line    Line number the error was raised at.
+ *
+ * @param int    $p_type    Level of the error raised.
+ * @param string $p_error   Error message.
+ * @param string $p_file    Filename that the error was raised in.
+ * @param int    $p_line    Line number the error was raised at.
+ *
  * @throws ErrorException
  */
 function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
@@ -436,6 +441,7 @@ function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
 
 /**
  * Enqueues an error message for later display.
+ *
  * @see error_print_delayed()
  *
  * @param string $p_message Error message
@@ -449,9 +455,11 @@ function error_log_delayed( $p_message ) {
 
 /**
  * Prints messages from the delayed errors queue.
+ *
  * The error handler enqueues deprecation warnings that would be printed inline,
  * to avoid display issues when they are triggered within html tags. Only unique
  * messages are printed.
+ *
  * @return void
  */
 function error_print_delayed() {
@@ -470,9 +478,11 @@ function error_print_delayed() {
 }
 
 /**
- * Print out the error details
- * @param string  $p_file    File error occurred in.
- * @param integer $p_line    Line number error occurred on.
+ * Print out the error details.
+ *
+ * @param string $p_file File error occurred in.
+ * @param int    $p_line Line number error occurred on.
+ *
  * @return void
  */
 function error_print_details( $p_file, $p_line ) {
@@ -498,7 +508,9 @@ function error_print_details( $p_file, $p_line ) {
 /**
  * Get the stack trace as a string that can be logged or echoed to CLI output.
  *
- * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
+ * @param Exception|null $p_exception The exception to print stack trace for.
+ *                                    Null will check last seen exception.
+ *
  * @return string multi-line printout of stack trace.
  */
 function error_stack_trace_as_string( $p_exception = null ) {
@@ -528,9 +540,10 @@ function error_stack_trace_as_string( $p_exception = null ) {
 }
 
 /**
- * Print out a stack trace
+ * Print out a stack trace.
  *
- * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
+ * @param Exception|null $p_exception The exception to print stack trace for.
+ *                                    Null will check last seen exception.
  */
 function error_print_stack_trace( $p_exception = null ) {
 	if( php_sapi_name() == 'cli' ) {
@@ -579,10 +592,12 @@ function error_print_stack_trace( $p_exception = null ) {
 }
 
 /**
- * Build a string describing the parameters to a function
+ * Build a string describing the parameters to a function.
+ *
  * @param string|array|object $p_param    Parameter.
- * @param boolean             $p_showtype Default true.
- * @param integer             $p_depth    Default 0.
+ * @param bool                $p_showtype Default true.
+ * @param int                 $p_depth    Default 0.
+ *
  * @return string
  */
 function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 0 ) {
@@ -620,7 +635,9 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 
 /**
  * Return an error string (in the current language) for the given error.
- * @param integer $p_error Error string to localize.
+ *
+ * @param int $p_error Error string to localize.
+ *
  * @return string
  * @access public
  */
@@ -666,9 +683,9 @@ function error_string( $p_error ) {
 }
 
 /**
- * Check if we have handled an error during this page
- * Return true if an error has been handled, false otherwise
- * @return boolean
+ * Check if we have handled an error during this page.
+ *
+ * @return bool True if an error has been handled, false otherwise
  */
 function error_handled() {
 	global $g_error_handled;
@@ -677,14 +694,17 @@ function error_handled() {
 }
 
 /**
- * Set additional info parameters to be used when displaying the next error
- * This function takes a variable number of parameters
+ * Set additional info parameters to be used when displaying the next error.
+ *
+ * This function takes a variable number of parameters.
  *
  * When writing internationalized error strings, note that you can change the
- *  order of parameters in the string.  See the PHP manual page for the
- *  sprintf() function for more details.
- * @access public
+ * order of parameters in the string.  See the PHP manual page for the
+ * sprintf() function for more details.
+ *
  * @return void
+ *
+ * @access public
  */
 function error_parameters() {
 	global $g_error_parameters;
@@ -693,10 +713,13 @@ function error_parameters() {
 }
 
 /**
- * Set a URL to give to the user to proceed after viewing the error
- * @access public
+ * Set a URL to give to the user to proceed after viewing the error.
+ *
  * @param string $p_url URL given to user after viewing the error.
+ *
  * @return void
+ *
+ * @access public
  */
 function error_proceed_url( $p_url ) {
 	global $g_error_proceed_url;
