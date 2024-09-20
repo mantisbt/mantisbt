@@ -621,25 +621,39 @@ function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id,
 /**
  * Print a generic menu (tabs).
  *
- * @param array  $p_menu_items   List of menu items
- * @param string $p_current_page Current page's file name to highlight active tab
- * @param string $p_event        Optional event to signal,
+ * A menu item is an associative array with the following structure:
+ *  - 'url' (string): MantisBT page name or URL the menu item points to
+ *  - 'label' (string): Language string or Text to display on the menu item
+ *  - 'absolute' (bool): optional, set to true if the URL is absolute; if false
+ *    or unspecified, it will be processed by {@see helper_mantis_url()}.
+ *
+ * Plugins hooking $p_event are expected to provide a list of cooked HTML links
+ * instead (i.e. `<a href="url">label</a>`).
+ *
+ * @param array  $p_menu_items   List of menu items.
+ * @param string $p_current_page Current page's file name to highlight active tab.
+ * @param string $p_event        Optional event to signal.
  */
 function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null ) {
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 
 	foreach( $p_menu_items as $t_item ) {
-		$t_active = $p_current_page && strpos( $t_item['url'], $p_current_page ) !== false ? 'active' : '';
+		$t_url = $t_item['url'];
+		$t_active = $p_current_page && strpos( $t_url, $p_current_page ) !== false ? 'active' : '';
 
-		echo '<li class="' . $t_active .  '">';
-		if( $t_item['label'] == '' ) {
-			echo '<a href="'. helper_mantis_url( $t_item['url'] ) .'">';
-			print_icon( 'fa-info-circle', 'blue ace-icon' );
-			echo '</a>';
-		} else {
-			echo '<a href="'. helper_mantis_url( $t_item['url'] ) .'">' . lang_get_defaulted( $t_item['label'] ) . '</a>';
+		# Use URL as-is if caller didn't specify it as absolute
+		# This is
+		if( $t_item['absolute'] ?? true ) {
+			$t_url = helper_mantis_url( $t_url );
 		}
-		echo '</li>' . "\n";
+
+		echo '<li class="' . $t_active .  '"><a href="'. $t_url .'">';
+		if( $t_item['label'] == '' ) {
+			print_icon( 'fa-info-circle', 'blue ace-icon' );
+		} else {
+			echo lang_get_defaulted( $t_item['label'] );
+		}
+		echo '</a></li>' . "\n";
 	}
 
 	# Plugins menu items - these are html hyperlinks (<a> tags)
@@ -877,6 +891,7 @@ function print_account_menu( $p_page = '' ) {
 function print_doc_menu( $p_page = '' ) {
 	# User Documentation
 	$t_doc_url = config_get_global( 'manual_url' );
+	$t_absolute = true;
 	if( is_null( parse_url( $t_doc_url, PHP_URL_SCHEME ) ) ) {
 		# URL has no scheme, so it is relative to MantisBT root
 		if( is_blank( $t_doc_url ) ||
@@ -886,11 +901,13 @@ function print_doc_menu( $p_page = '' ) {
 			$t_doc_url = 'https://mantisbt.org/documentation.php';
 		} else {
 			$t_doc_url = helper_mantis_url( $t_doc_url );
+			$t_absolute = false;
 		}
 	}
 
 	$t_pages[$t_doc_url] = array(
 		'url'   => $t_doc_url,
+		'absolute' => $t_absolute,
 		'label' => 'user_documentation'
 	);
 
