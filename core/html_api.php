@@ -883,7 +883,7 @@ function print_doc_menu( $p_page = '' ) {
 			!file_exists( config_get_global( 'absolute_path' ) . $t_doc_url )
 		) {
 			# Local documentation not available, use online docs
-			$t_doc_url = 'http://www.mantisbt.org/documentation.php';
+			$t_doc_url = 'https://mantisbt.org/documentation.php';
 		} else {
 			$t_doc_url = helper_mantis_url( $t_doc_url );
 		}

@@ -225,9 +225,11 @@ $g_short_path = '';
 
 /**
  * Used to link to manual for User Documentation.
+ *
  * This can be either a full URL or a relative path to the MantisBT root.
  * If a relative path does not exist, the link will fall back to the online
- * documentation at http://www.mantisbt.org. No check is performed on URLs.
+ * documentation at https://mantisbt.org. No check is performed on URLs.
+ *
  * @global string $g_manual_url
  */
 $g_manual_url = 'doc/en-US/Admin_Guide/html-desktop/';
