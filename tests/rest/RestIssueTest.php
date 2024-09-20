@@ -547,6 +547,21 @@ class RestIssueTest extends RestBase {
 		}
 	}
 
+	public function testCreateIssueWithCategoryInvalid() {
+		$t_issue_to_add = $this->getIssueToAdd();
+		$t_issue_to_add['category'] = 'Non-existent category';
+
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
+
+		if( $t_response->getStatusCode() == HTTP_STATUS_CREATED ) {
+			$t_body = json_decode( $t_response->getBody(), true );
+			$t_issue = $t_body['issue'];
+			$this->deleteIssueAfterRun( $t_issue['id'] );
+		}
+	}
+
 	public function testCreateIssueNoProject() {
 		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['project'] );
