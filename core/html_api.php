@@ -633,7 +633,7 @@ function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null 
 
 		echo '<li class="' . $t_active .  '">';
 		if( $t_item['label'] == '' ) {
-			echo '<a href="'. lang_get_defaulted( $t_item['url'] ) .'">';
+			echo '<a href="'. helper_mantis_url( $t_item['url'] ) .'">';
 			print_icon( 'fa-info-circle', 'blue ace-icon' );
 			echo '</a>';
 		} else {
