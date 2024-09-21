@@ -934,23 +934,26 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 	};
 
 	$t_category_id = $fn_get_category_id_internal( $p_category, $p_project_id );
-	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
+	if( $t_category_id == 0 ) {
+		# Category not found or unspecified
 		if( !isset( $p_category ) ) {
+			if( !config_get( 'allow_no_category' ) ) {
+				throw new ClientException(
+					'Category field must be supplied.',
+					ERROR_EMPTY_FIELD,
+					array( 'category' )
+				);
+			}
+		} else {
+			# category may be a string, array with id, array with name, or array
+			# with id + name. Serialize to json to include in error message.
+			$t_cat_desc = is_array( $p_category ) ? json_encode( $p_category ) : $p_category;
+
 			throw new ClientException(
-				'Category field must be supplied.',
-				ERROR_EMPTY_FIELD,
-				array( 'category' )
+				"Category '$t_cat_desc' not found.",
+				ERROR_CATEGORY_NOT_FOUND
 			);
 		}
-
-		# category may be a string, array with id, array with name, or array
-		# with id + name. Serialize to json to include in error message.
-		$t_cat_desc = is_array( $p_category ) ? json_encode( $p_category ) : $p_category;
-
-		throw new ClientException(
-			"Category '$t_cat_desc' not found.",
-			ERROR_CATEGORY_NOT_FOUND
-		);
 	}
 
 	# Make sure the category belongs to the given project's hierarchy
