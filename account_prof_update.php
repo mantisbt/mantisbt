@@ -33,6 +33,8 @@
  * @uses gpc_api.php
  * @uses print_api.php
  * @uses profile_api.php
+ *
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 require_once( 'core.php' );
@@ -61,9 +63,10 @@ $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
 if( $f_action != 'add' ) {
 	$f_profile_id = gpc_get_int( 'profile_id' );
-	profile_ensure_can_update( $f_profile_id );
+	$t_profile = new ProfileData( $f_profile_id );
+	$t_profile->ensure_can_update();
 
-	$t_user_id = profile_is_global( $f_profile_id ) ? ALL_USERS : auth_get_current_user_id();
+	$t_user_id = $t_profile->is_global() ? ALL_USERS : auth_get_current_user_id();
 }
 
 switch( $f_action ) {
@@ -74,9 +77,7 @@ switch( $f_action ) {
 		$f_description	= gpc_get_string( 'description' );
 		$t_user_id		= gpc_get_int( 'user_id' );
 
-		if( ALL_USERS == $t_user_id ) {
-			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ), $t_user_id );
-		} else {
+		if( ALL_USERS != $t_user_id ) {
 			$t_user_id = auth_get_current_user_id();
 			access_ensure_global_level( config_get( 'add_profile_threshold' ), $t_user_id );
 		}
@@ -90,21 +91,25 @@ switch( $f_action ) {
 		$f_os_build = gpc_get_string( 'os_build' );
 		$f_description = gpc_get_string( 'description' );
 
+		/** @noinspection PhpUndefinedVariableInspection */
 		profile_update( $t_user_id, $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
 		break;
 
 	case 'delete':
+		/** @noinspection PhpUndefinedVariableInspection */
 		helper_ensure_confirmed(
 			sprintf( lang_get( 'delete_profile_confirm_msg' ),
-				string_attribute( profile_get_name( $f_profile_id ) )
+				string_attribute( $t_profile->get_name() )
 			),
 			lang_get( 'delete_profile' )
 		);
 
+		/** @noinspection PhpUndefinedVariableInspection */
 		profile_delete( $t_user_id, $f_profile_id );
 		break;
 
 	case 'make_default':
+		/** @noinspection PhpUndefinedVariableInspection */
 		current_user_set_pref( 'default_profile', $f_profile_id );
 		break;
 }
