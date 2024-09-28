@@ -128,11 +128,16 @@ class AttachmentTest extends SoapBase {
 
 		$this->assertEquals( $t_attachment_contents, base64_decode( $t_attachment ), '$t_attachment_contents' );
 
+		# Get the list of attachments
 		$t_attachments = $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() );
 		$this->assertEquals( $t_attachments_count + 1, count( $t_attachments ), 'Check if we have 1 additional attachment' );
 
-		# The attachment we just uploaded should be the last one
-		$t_attachment = end( $t_attachments );
+		# Find the attachment we just uploaded in the list
+		$t_key = array_search( $t_attachment_id, array_column( $t_attachments, 'id' ) );
+
+		$this->assertNotFalse( $t_key, "Test attachment not found" );
+		$t_attachment = $t_attachments[$t_key];
+
 		$this->assertEquals( $this->userId, $t_attachment->user_id, "Attachment's User Id should match current user" );
 		$this->assertEquals( 'description', $t_attachment->description );
 	}

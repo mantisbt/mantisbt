@@ -269,7 +269,7 @@ $g_short_path = '';
  *
  * This can be either a full URL or a relative path to the MantisBT root.
  * If a relative path does not exist, the link will fall back to the online
- * documentation at http://www.mantisbt.org. No check is performed on URLs.
+ * documentation at https://mantisbt.org. No check is performed on URLs.
  *
  * @global string $g_manual_url
  */
