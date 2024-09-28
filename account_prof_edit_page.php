@@ -61,13 +61,9 @@ current_user_ensure_unprotected();
 $f_profile_id	= gpc_get_int( 'profile_id' );
 $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
-/** @noinspection PhpUnhandledExceptionInspection */
-$t_global_profile = profile_is_global( $f_profile_id );
-if( $t_global_profile ) {
-	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
-}
-$t_row = profile_get_row( $f_profile_id );
+profile_ensure_can_update( $f_profile_id );
 
+$t_row = profile_get_row( $f_profile_id );
 /**
  * @var $v_id
  * @var $v_user_id
@@ -80,7 +76,7 @@ extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 layout_page_header();
 
-if( $t_global_profile ) {
+if( profile_is_global( $f_profile_id ) ) {
 	layout_page_begin( 'manage_overview_page.php' );
 	print_manage_menu( 'manage_prof_menu_page.php' );
 } else {

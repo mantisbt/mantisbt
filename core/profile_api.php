@@ -327,3 +327,38 @@ function profile_is_global( $p_profile_id ) {
 	$t_row = profile_get_row( $p_profile_id );
 	return $t_row['user_id'] == ALL_USERS;
 }
+
+/**
+ * Check if user is allowed to update or delete the given Profile.
+ *
+ * @param int      $p_profile_id Profile id
+ * @param int|null $p_user_id    User id or null for current user (default).
+ *
+ * @return bool True if allowed, false otherwise.
+ * @throws ClientException
+ */
+function profile_can_update( $p_profile_id, $p_user_id = null ) {
+	$t_row = profile_get_row( $p_profile_id );
+	$t_user_id = $p_user_id === null ? auth_get_current_user_id() : $p_user_id;
+
+	# Global profile ?
+	if( $t_row['user_id'] == ALL_USERS ) {
+		return access_has_global_level( config_get( 'manage_global_profile_threshold' ) );
+	}
+
+	return $t_row['user_id'] == $t_user_id;
+}
+
+/**
+ * Throws Access Denied error if user is not allowed to update the Profile.
+ *
+ * @param int      $p_profile_id Profile id
+ * @param int|null $p_user_id    User id or null for current user (default).
+ *
+ * @throws ClientException
+ */
+function profile_ensure_can_update( $p_profile_id, $p_user_id = null ) {
+	if( !profile_can_update( $p_profile_id, $p_user_id ) ) {
+		access_denied();
+	}
+}
