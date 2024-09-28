@@ -735,14 +735,19 @@ function mci_null_if_empty( $p_value ) {
 }
 
 /**
- * Removes any invalid character from the string per XML 1.0 specification
+ * Removes any invalid character from the string per XML 1.0 specification.
  *
  * @param string $p_input XML string.
- * @return string the sanitized XML
+ *
+ * @return string the sanitized XML.
  */
-function mci_sanitize_xml_string ( $p_input ) {
+function mci_sanitize_xml_string( $p_input ) {
 	if( ApiObjectFactory::$soap ) {
-		return preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_input );
+		return preg_replace(
+			'/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u',
+			'',
+			(string)$p_input
+		);
 	}
 
 	return $p_input;
@@ -868,10 +873,11 @@ function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version
 
 
 /**
- * Returns the category name, possibly null if no category is assigned
+ * Returns the category name, possibly null if no category is assigned.
  *
- * @param integer $p_category_id A category identifier.
- * @return string
+ * @param int $p_category_id A category identifier.
+ *
+ * @return string|null|array
  */
 function mci_get_category( $p_category_id ) {
 	if( ApiObjectFactory::$soap ) {
@@ -894,12 +900,13 @@ function mci_get_category( $p_category_id ) {
 }
 
 /**
- * Convert a category name, or category object reference (array w/ id, name,
- * or id + name) to a category id for a given project.
+ * Convert a category name or object reference to a category id.
  *
- * @param string|array $p_category Category name or array with id and/or name.
- * @param integer $p_project_id    Project id.
- * @return integer|SoapFault|RestFault category id or error.
+ * @param string|array $p_category   Category name or array with id and/or name.
+ * @param int          $p_project_id Project id.
+ *
+ * @return int category id or error.
+ * @throws ClientException if category is not set or does not exist.
  */
 function mci_get_category_id( $p_category, $p_project_id ) {
 	$fn_get_category_id_internal = function( $p_category, $p_project_id ) {
@@ -934,21 +941,26 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 	};
 
 	$t_category_id = $fn_get_category_id_internal( $p_category, $p_project_id );
-	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
+	if( $t_category_id == 0 ) {
+		# Category not found or unspecified
 		if( !isset( $p_category ) ) {
+			if( !config_get( 'allow_no_category' ) ) {
+				throw new ClientException(
+					'Category field must be supplied.',
+					ERROR_EMPTY_FIELD,
+					array( 'category' )
+				);
+			}
+		} else {
+			# category may be a string, array with id, array with name, or array
+			# with id + name. Serialize to json to include in error message.
+			$t_cat_desc = is_array( $p_category ) ? json_encode( $p_category ) : $p_category;
+
 			throw new ClientException(
-				'Category field must be supplied.',
-				ERROR_EMPTY_FIELD,
-				array( 'category' )
+				"Category '$t_cat_desc' not found.",
+				ERROR_CATEGORY_NOT_FOUND
 			);
 		}
-
-		# category may be a string, array with id, array with name, or array
-		# with id + name. Serialize to json to include in error message.
-		$t_cat_desc = json_encode( $p_category );
-
-		return ApiObjectFactory::faultBadRequest(
-			"Category '{$t_cat_desc}' not found." );
 	}
 
 	# Make sure the category belongs to the given project's hierarchy
