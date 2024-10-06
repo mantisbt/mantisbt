@@ -21,12 +21,6 @@ paths:
           description: 'The filter id'
           required: true
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/filters':
     get:
       summary: Get all filters
@@ -37,13 +31,6 @@ paths:
       responses:
         '200':
           description: 'Success'
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/config?option={option}':
     get:
       summary: Get Configuration Option
@@ -107,12 +94,6 @@ paths:
           description: ''
           required: true
           example: status_enum_string
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: true
   '/api/rest/config':
     patch:
       summary: Set Configs
@@ -135,13 +116,6 @@ paths:
       responses:
         '200':
           description: 'Success'
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues/{issue_id}/files':
     post:
       summary: Add attachments to issue
@@ -159,12 +133,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -190,12 +158,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues/{issue_id}/notes':
     post:
       summary: Create an issue note
@@ -213,12 +175,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -251,12 +207,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -283,12 +233,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -315,12 +259,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -341,12 +279,6 @@ paths:
         '200':
           description: 'Success'
       parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -379,12 +311,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -415,12 +341,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -459,12 +379,6 @@ paths:
           description: ''
           required: false
           example: id,summary,description
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues?page_size={pageSize}&page={page}':
     get:
       summary: Get all issues
@@ -489,12 +403,6 @@ paths:
           description: ''
           required: false
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues/':
     post:
       summary: Create an issue -minimal-
@@ -506,12 +414,6 @@ paths:
         '200':
           description: 'Success'
       parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -545,12 +447,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues/{issue_id}':
     get:
       summary: Get an issue
@@ -569,12 +465,6 @@ paths:
           description: ''
           required: true
           example: 123
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
     patch:
       summary: Update an issue
       operationId: Update an issue
@@ -592,12 +482,6 @@ paths:
           description: ''
           required: true
           example: 123
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -632,12 +516,6 @@ paths:
           description: ''
           required: true
           example: 567
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues?filter_id=assigned&page_size={pageSize}&page={page}':
     get:
       summary: Get issues assigned to me
@@ -663,12 +541,6 @@ paths:
           description: ''
           required: false
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues?project_id={projectId}&page_size={pageSize}&page={page}':
     get:
       summary: Get issues for a project
@@ -701,12 +573,6 @@ paths:
           description: ''
           required: false
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues?filter_id={filter_id}&page_size={pageSize}&page={page}&project_id={project_id}':
     get:
       summary: Get issues matching filter
@@ -746,12 +612,6 @@ paths:
           description: ''
           required: false
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues?filter_id=monitored&page_size={pageSize}&page={page}':
     get:
       summary: Get issues monitored by me
@@ -777,12 +637,6 @@ paths:
           description: ''
           required: false
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues?filter_id=reported&page_size={pageSize}&page={page}':
     get:
       summary: Get issues reported by me
@@ -808,12 +662,6 @@ paths:
           description: ''
           required: false
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues?filter_id=unassigned&page_size={pageSize}&page={page}':
     get:
       summary: Get unassigned issues
@@ -839,12 +687,6 @@ paths:
           description: ''
           required: false
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/issues/{issue_id}/monitors':
     post:
       summary: Monitor an issue
@@ -863,12 +705,6 @@ paths:
           description: ''
           required: true
           example: 123
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -894,12 +730,6 @@ paths:
           description: ''
           required: true
           example: all_projects
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/lang?string[]=all_projects&string[]=does_not_exist&string[]=status&string[]=move_bugs&string[]=status_enum_string':
     get:
       summary: Get multiple localized strings
@@ -946,12 +776,6 @@ paths:
           description: ''
           required: true
           example: status_enum_string
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/pages/issues/view/{issue_id}':
     get:
       summary: Get Issue View Page
@@ -970,12 +794,6 @@ paths:
           description: ''
           required: true
           example: 123
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/users/me/token':
     post:
       summary: Create token for me
@@ -986,13 +804,6 @@ paths:
       responses:
         '200':
           description: 'Success'
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/users/{user_id}/token':
     post:
       summary: Create token for user
@@ -1011,12 +822,6 @@ paths:
           description: ''
           required: true
           example: 3
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/users/me/token/{id}':
     delete:
       summary: Delete token for me
@@ -1034,12 +839,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
       requestBody:
         $ref: '#/components/requestBodies/delete_token_for_me'
   '/api/rest/users/{user_id}/token/{id}':
@@ -1066,12 +865,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/projects/':
     post:
       summary: Create a project
@@ -1083,12 +876,6 @@ paths:
         '200':
           description: 'Success'
       parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1107,13 +894,6 @@ paths:
       responses:
         '200':
           description: 'Success'
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/projects/{project_id}':
     get:
       summary: Get a project
@@ -1149,12 +929,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1182,12 +956,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1221,12 +989,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1258,12 +1020,6 @@ paths:
           description: ''
           required: true
           example: 18
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: true
         - name: Content-Type
           in: header
           schema:
@@ -1295,12 +1051,6 @@ paths:
           description: ''
           required: true
           example: 8
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1328,12 +1078,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1359,12 +1103,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1399,12 +1137,6 @@ paths:
           description: ''
           required: true
           example: '2'
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1468,12 +1200,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/projects/{project_id}/users/':
     put:
       summary: Project Add-Update User
@@ -1535,12 +1261,6 @@ paths:
         '200':
           description: 'Success'
       parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1575,12 +1295,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/users/{id}':
     get:
       summary: Get User By Id
@@ -1600,12 +1314,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/users/username/{username}':
     get:
       summary: Get User By Username
@@ -1630,12 +1338,6 @@ paths:
             type: string
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
   '/api/rest/users/{user_id}/reset':
     put:
       summary: Reset user password
@@ -1673,12 +1375,6 @@ paths:
             minimum: 1
           description: ''
           required: true
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          description: 'The API token'
-          required: false
         - name: Content-Type
           in: header
           schema:
@@ -1691,6 +1387,11 @@ paths:
 servers:
   - url: https://mantisbt.org/bugs/
 components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
   schemas:
     set_configs:
       type: object
@@ -2488,4 +2189,3 @@ components:
             $ref: '#/components/schemas/update_user'
       description: ''
       required: true
-  securitySchemes: {}
