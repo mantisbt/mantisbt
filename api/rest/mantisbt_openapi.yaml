@@ -31,9 +31,11 @@ paths:
         - 'Filters'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/filter_id'
   '/api/rest/filters':
@@ -45,9 +47,11 @@ paths:
         - 'Filters'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/config':
     get:
       summary: Get Configuration Option
@@ -57,9 +61,11 @@ paths:
         - 'Configs'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: option[]
           in: query
@@ -75,9 +81,9 @@ paths:
         - 'Configs'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
       requestBody:
         $ref: '#/components/requestBodies/set_configs'
   '/api/rest/users/me':
@@ -89,9 +95,11 @@ paths:
         - 'Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{issue_id}/files':
     post:
       summary: Add attachments to issue
@@ -101,9 +109,11 @@ paths:
         - 'Issue Attachments'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
@@ -116,9 +126,11 @@ paths:
         - 'Issue Attachments'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
   '/api/rest/issues/{issue_id}/notes':
@@ -130,9 +142,11 @@ paths:
         - 'Issue Notes'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
@@ -146,9 +160,11 @@ paths:
         - 'Issue Notes'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: issue_note_id
@@ -168,9 +184,11 @@ paths:
         - 'Issue Relationships'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
@@ -184,9 +202,11 @@ paths:
         - 'Issue Tags'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
@@ -200,9 +220,11 @@ paths:
         - 'Issue Relationships'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: relationship_id
@@ -220,9 +242,11 @@ paths:
         - 'Issue Tags'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: tag_id
@@ -240,9 +264,11 @@ paths:
         - 'Issues'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: query
@@ -284,9 +310,11 @@ paths:
         - 'Issues'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       requestBody:
         $ref: '#/components/requestBodies/create_an_issue'
   '/api/rest/issues/{issue_id}':
@@ -298,9 +326,11 @@ paths:
         - 'Issues'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: select
@@ -318,9 +348,11 @@ paths:
         - 'Issues'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
@@ -334,9 +366,11 @@ paths:
         - 'Issue Attachments'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: file_id
@@ -355,9 +389,11 @@ paths:
         - 'Issue Monitoring'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
   '/api/rest/lang':
@@ -369,9 +405,11 @@ paths:
         - 'Localized Strings'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: string[]
           in: query
@@ -389,9 +427,11 @@ paths:
         - 'Views'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
   '/api/rest/users/me/token':
@@ -403,9 +443,11 @@ paths:
         - 'API Tokens'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/users/{user_id}/token':
     post:
       summary: Create token for user
@@ -415,9 +457,11 @@ paths:
         - 'API Tokens'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/user_id'
   '/api/rest/users/me/token/{id}':
@@ -429,9 +473,11 @@ paths:
         - 'API Tokens'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: id
           in: path
@@ -450,9 +496,11 @@ paths:
         - 'API Tokens'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/user_id'
         - name: id
@@ -470,9 +518,11 @@ paths:
         - 'Projects'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       requestBody:
         $ref: '#/components/requestBodies/create_a_project'
     get:
@@ -483,9 +533,11 @@ paths:
         - 'Projects'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}':
     get:
       summary: Get a project
@@ -495,9 +547,11 @@ paths:
         - 'Projects'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -514,9 +568,11 @@ paths:
         - 'Projects'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -536,9 +592,11 @@ paths:
         - 'Project Versions'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -561,9 +619,11 @@ paths:
         - 'Project Versions'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -587,9 +647,11 @@ paths:
         - 'Project Versions'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -616,9 +678,11 @@ paths:
         - 'Project Versions'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -635,9 +699,11 @@ paths:
         - 'Project Versions'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -657,9 +723,11 @@ paths:
         - 'Projects'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -679,9 +747,11 @@ paths:
         - 'Projects'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -708,9 +778,11 @@ paths:
         - 'Project Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -728,9 +800,11 @@ paths:
         - 'Project Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -765,9 +839,11 @@ paths:
         - 'Project Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -788,9 +864,11 @@ paths:
         - 'Project Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -812,9 +890,11 @@ paths:
         - 'Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       requestBody:
         $ref: '#/components/requestBodies/create_a_user'
   '/api/rest/users/{id}':
@@ -826,9 +906,11 @@ paths:
         - 'Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: id
           in: path
@@ -853,9 +935,11 @@ paths:
         - 'Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: username
           in: path
@@ -879,9 +963,11 @@ paths:
         - 'Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/user_id'
   '/api/rest/users/{user_id}':
@@ -893,9 +979,11 @@ paths:
         - 'Users'
       responses:
         '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/user_id'
       requestBody:
@@ -1675,3 +1763,10 @@ components:
           It is possible to also pass in an integer
           which is the id of a saved filter.
       required: true
+  responses:
+    BadRequest:
+      description: 'Bad Request'
+    NotFound:
+      description: 'Entity not found'
+    Success:
+      description: 'Success'
