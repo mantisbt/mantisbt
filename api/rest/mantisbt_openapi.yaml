@@ -31,13 +31,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: filter_id
-          in: path
-          schema:
-            type: integer
-          description: 'The filter id'
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/filter_id'
   '/api/rest/filters':
     get:
       summary: Get all filters
@@ -253,21 +247,7 @@ paths:
           description: ''
           required: false
           example: 1
-        - name: filter_id
-          in: query
-          schema:
-            type: string
-          description: |
-            Following are the built-in filter names:  
-
-            `assigned` - issues assigned to me.  
-            `reported` - issues reported by me.  
-            `monitored` - issues monitored by me.  
-            `unassigned` - unassigned issues.  
-
-            It is possible to also pass in an integer
-            which is the id of a saved filter.
-          required: false
+        - $ref: '#/components/parameters/filter_id'
         - name: page_size
           in: query
           schema:
@@ -1680,3 +1660,19 @@ components:
       description: 'The issue id'
       required: true
       example: 123
+    filter_id:
+      name: filter_id
+      in: path
+      schema:
+        type: string
+        description: |
+          Following are the built-in filter names:  
+
+          `assigned` - issues assigned to me.  
+          `reported` - issues reported by me.  
+          `monitored` - issues monitored by me.  
+          `unassigned` - unassigned issues.  
+
+          It is possible to also pass in an integer
+          which is the id of a saved filter.
+      required: true
