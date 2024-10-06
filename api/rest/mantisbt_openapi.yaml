@@ -17,6 +17,10 @@ info:
     REST API is enabled by default since MantisBT 2.8.0 release.
   license:
     name: GPL-2.0-or-later
+  contact:
+    name: MantisBT Team
+    email: mantisbt-dev@lists.sourceforge.net
+    url: https://mantisbt.org
 paths:
   '/api/rest/filters/{filter_id}':
     get:
