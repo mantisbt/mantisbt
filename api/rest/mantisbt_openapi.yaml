@@ -37,7 +37,7 @@ paths:
           description: 'Success'
         '4XX':
           description: 'Bad Request'
-  '/api/rest/config?option={option}':
+  '/api/rest/config':
     get:
       summary: Get Configuration Option
       operationId: configGet
@@ -50,61 +50,12 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: option
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-  '/api/rest/config?option[]=crypto_master_salt&option[]=csv_separator&option[]=status_colors&option[]=does_not_exist&option[]=status_enum_string':
-    get:
-      summary: Get Multiple Configuration Options
-      operationId: configGetMultiple
-      description: ''
-      tags:
-        - 'Configs'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      parameters:
         - name: option[]
           in: query
           schema:
             type: string
           description: ''
           required: true
-          example: crypto_master_salt
-        - name: option[]
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: csv_separator
-        - name: option[]
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: status_colors
-        - name: option[]
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: does_not_exist
-        - name: option[]
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: status_enum_string
-  '/api/rest/config':
     patch:
       summary: Set Configs
       operationId: configSet
@@ -144,7 +95,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -164,7 +115,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -183,7 +134,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -204,20 +155,20 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: 'The issue id'
           required: true
         - name: issue_note_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
       requestBody:
         $ref: '#/components/requestBodies/delete_an_issue_note'
-  '/api/rest/issues/{issue_id}/relationships/':
+  '/api/rest/issues/{issue_id}/relationships':
     post:
       summary: Add an issue relationship
       operationId: issueRelationshipsAdd
@@ -231,7 +182,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -252,27 +203,13 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
       requestBody:
         $ref: '#/components/requestBodies/attach_a_tag_to_issue'
-  '/api/rest/issues':
-    post:
-      summary: Create an issue
-      operationId: issueAdd
-      description: ''
-      tags:
-        - 'Issues'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      requestBody:
-        $ref: '#/components/requestBodies/create_an_issue'
   '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
     delete:
       summary: Delete an issue relationship
@@ -287,13 +224,13 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
         - name: relationship_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -312,20 +249,20 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
         - name: tag_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
-  '/api/rest/issues?page_size={pageSize}&page={page}&select={select}':
+  '/api/rest/issues':
     get:
-      summary: Get all issues
+      summary: Get issues
       operationId: issueGetAll
       description: ''
       tags:
@@ -336,6 +273,24 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 1
+        - name: filter_id
+          in: query
+          schema:
+            type: string
+          description: |
+            The filter id to apply
+
+            'assigned' - issues assigned to me.
+            'reported' - issues reported by me.
+            'unassigned' - unassigned issues.
+          required: false
         - name: page_size
           in: query
           schema:
@@ -348,7 +303,7 @@ paths:
             type: integer
           description: ''
           required: false
-          example: '1'
+          example: 1
         - name: select
           in: query
           schema:
@@ -356,7 +311,20 @@ paths:
           description: ''
           required: false
           example: id,summary,description
-  '/api/rest/issues/{issue_id}?select={select}':
+    post:
+      summary: Create an issue
+      operationId: issueAdd
+      description: ''
+      tags:
+        - 'Issues'
+      responses:
+        '200':
+          description: 'Success'
+        '4XX':
+          description: 'Bad Request'
+      requestBody:
+        $ref: '#/components/requestBodies/create_an_issue'
+  '/api/rest/issues/{issue_id}':
     get:
       summary: Get an issue
       operationId: issueGet
@@ -369,6 +337,12 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
+        - name: issue_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
         - name: select
           in: query
           schema:
@@ -376,12 +350,6 @@ paths:
           description: ''
           required: false
           example: id,summary,description
-        - name: issue_id
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: true
     patch:
       summary: Update an issue
       operationId: issueUpdate
@@ -395,7 +363,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -417,202 +385,19 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
           example: 123
         - name: file_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
           example: 567
-  '/api/rest/issues?filter_id=assigned&page_size={pageSize}&page={page}':
-    get:
-      summary: Get issues assigned to me
-      operationId: issueGetAssignedToMe
-      description: ''
-      tags:
-        - 'Filters'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      parameters:
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 25
-        - name: page
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 1
-  '/api/rest/issues?project_id={projectId}&page_size={pageSize}&page={page}':
-    get:
-      summary: Get issues for a project
-      operationId: issueGetForProject
-      description: ''
-      tags:
-        - 'Filters'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      parameters:
-        - name: project_id
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 25
-        - name: page
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 1
-  '/api/rest/issues?filter_id={filter_id}&page_size={pageSize}&page={page}&project_id={project_id}':
-    get:
-      summary: Get issues matching filter
-      operationId: issueGetForFilter
-      description: ''
-      tags:
-        - 'Filters'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      parameters:
-        - name: filter_id
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: '1'
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 25
-        - name: page
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 1
-        - name: project_id
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 1
-  '/api/rest/issues?filter_id=monitored&page_size={pageSize}&page={page}':
-    get:
-      summary: Get issues monitored by me
-      operationId: issueGetMonitoredByMe
-      description: ''
-      tags:
-        - 'Filters'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      parameters:
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 25
-        - name: page
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 1
-  '/api/rest/issues?filter_id=reported&page_size={pageSize}&page={page}':
-    get:
-      summary: Get issues reported by me
-      operationId: issueGetReportedByMe
-      description: ''
-      tags:
-        - 'Filters'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      parameters:
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 25
-        - name: page
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 1
-  '/api/rest/issues?filter_id=unassigned&page_size={pageSize}&page={page}':
-    get:
-      summary: Get unassigned issues
-      operationId: issueGetUnassigned
-      description: ''
-      tags:
-        - 'Filters'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      parameters:
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 25
-        - name: page
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 1
   '/api/rest/issues/{issue_id}/monitors':
     post:
       summary: Monitor an issue
@@ -627,15 +412,15 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
           example: 123
-  '/api/rest/lang?string=all_projects':
+  '/api/rest/lang':
     get:
-      summary: Get a localized string
+      summary: Get multiple localized strings
       operationId: stringGet
       description: ''
       tags:
@@ -646,26 +431,6 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: string
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: all_projects
-  '/api/rest/lang?string[]=all_projects&string[]=does_not_exist&string[]=status&string[]=move_bugs&string[]=status_enum_string':
-    get:
-      summary: Get multiple localized strings
-      operationId: stringGetMultiple
-      description: ''
-      tags:
-        - 'Localized Strings'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      parameters:
         - name: string[]
           in: query
           schema:
@@ -673,34 +438,6 @@ paths:
           description: ''
           required: true
           example: all_projects
-        - name: string[]
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: does_not_exist
-        - name: string[]
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: status
-        - name: string[]
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: move_bugs
-        - name: string[]
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: status_enum_string
   '/api/rest/pages/issues/view/{issue_id}':
     get:
       summary: Get Issue View Page
@@ -715,7 +452,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: issue_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -747,7 +484,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: user_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -767,7 +504,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -788,19 +525,19 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: user_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
           example: '3'
         - name: id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
-  '/api/rest/projects/':
+  '/api/rest/projects':
     post:
       summary: Create a project
       operationId: projectAdd
@@ -839,7 +576,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -858,7 +595,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -866,28 +603,6 @@ paths:
           example: 1
       requestBody:
         $ref: '#/components/requestBodies/update_a_project'
-  '/api/rest/projects/{project_id}/versions/':
-    post:
-      summary: Create a project version
-      operationId: projectVersionsAdd
-      description: ''
-      tags:
-        - 'Project Versions'
-      responses:
-        '200':
-          description: 'Success'
-        '4XX':
-          description: 'Bad Request'
-      parameters:
-        - name: project_id
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
-      requestBody:
-        $ref: '#/components/requestBodies/create_a_project_version'
   '/api/rest/projects/{project_id}/versions/{version_id}':
     delete:
       summary: Delete a project version
@@ -902,14 +617,14 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
           example: 1
         - name: version_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -927,14 +642,14 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
           example: 1
         - name: version_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -953,14 +668,14 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
           example: 1
         - name: version_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -982,12 +697,33 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
           example: 1
+    post:
+      summary: Create a project version
+      operationId: projectVersionsAdd
+      description: ''
+      tags:
+        - 'Project Versions'
+      responses:
+        '200':
+          description: 'Success'
+        '4XX':
+          description: 'Bad Request'
+      parameters:
+        - name: project_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+      requestBody:
+        $ref: '#/components/requestBodies/create_a_project_version'
   '/api/rest/projects/{project_id}/subprojects':
     post:
       summary: Add a sub-project
@@ -1002,7 +738,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -1024,14 +760,14 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
           required: true
           example: '1'
         - name: subproject_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -1053,7 +789,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
           description: ''
@@ -1072,6 +808,13 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
+        - name: project_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
         - name: access_level
           in: query
           schema:
@@ -1090,14 +833,6 @@ paths:
           description: ''
           required: false
           example: 0
-        - name: project_id
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
-  '/api/rest/projects/{project_id}/users/':
     put:
       summary: Project Add-Update User
       operationId: projectUsersUpsert
@@ -1111,7 +846,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
             minimum: 1
@@ -1134,7 +869,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: project_id
-          in: query
+          in: path
           schema:
             type: integer
             minimum: 1
@@ -1142,7 +877,7 @@ paths:
           required: true
           example: 1
         - name: user_id
-          in: query
+          in: path
           schema:
             type: integer
             minimum: 1
@@ -1151,7 +886,7 @@ paths:
           example: 5
       requestBody:
         $ref: '#/components/requestBodies/project_delete_user'
-  '/api/rest/users/':
+  '/api/rest/users':
     post:
       summary: Create a user
       operationId: userAdd
@@ -1165,7 +900,7 @@ paths:
           description: 'Bad Request'
       requestBody:
         $ref: '#/components/requestBodies/create_a_user'
-  '/api/rest/users/{id}?select={select}':
+  '/api/rest/users/{id}':
     get:
       summary: Get User By Id
       operationId: userGet
@@ -1178,6 +913,13 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
         - name: select
           in: query
           schema:
@@ -1185,13 +927,6 @@ paths:
           description: ''
           required: false
           example: id,name,real_name,email,access_level
-        - name: id
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
   '/api/rest/users/username/{username}':
     get:
       summary: Get User By Username
@@ -1205,6 +940,12 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
+        - name: username
+          in: path
+          schema:
+            type: string
+          description: ''
+          required: true
         - name: select
           in: query
           schema:
@@ -1212,12 +953,6 @@ paths:
           description: ''
           required: false
           example: id,name,real_name,email
-        - name: username
-          in: query
-          schema:
-            type: string
-          description: ''
-          required: true
   '/api/rest/users/{user_id}/reset':
     put:
       summary: Reset user password
@@ -1232,7 +967,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: user_id
-          in: query
+          in: path
           schema:
             type: integer
             minimum: 1
@@ -1253,7 +988,7 @@ paths:
           description: 'Bad Request'
       parameters:
         - name: user_id
-          in: query
+          in: path
           schema:
             type: integer
             minimum: 1
@@ -1265,7 +1000,7 @@ servers:
   - url: https://mantisbt.org/bugs/
 components:
   securitySchemes:
-    ApiKeyAuth:
+    api_key:
       type: apiKey
       in: header
       name: Authorization
