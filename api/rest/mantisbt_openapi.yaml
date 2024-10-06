@@ -1,0 +1,2491 @@
+openapi: 3.0.0
+info:
+  title: Mantis Bug Tracker REST API
+  version: 2.27.0
+paths:
+  '/api/rest/filters/{filter_id}':
+    get:
+      summary: Get a filter
+      operationId: Get a filter
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: filter_id
+          in: path
+          schema:
+            type: integer
+          description: 'The filter id'
+          required: true
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/filters':
+    get:
+      summary: Get all filters
+      operationId: Get all filters
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/config?option={option}':
+    get:
+      summary: Get Configuration Option
+      operationId: Get Configuration Option
+      description: ''
+      tags:
+        - 'Configs'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: option
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+  '/api/rest/config?option[]=crypto_master_salt&option[]=csv_separator&option[]=status_colors&option[]=does_not_exist&option[]=status_enum_string':
+    get:
+      summary: Get Multiple Configuration Options
+      operationId: Get Multiple Configuration Options
+      description: ''
+      tags:
+        - 'Configs'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: option[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: crypto_master_salt
+        - name: option[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: csv_separator
+        - name: option[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: status_colors
+        - name: option[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: does_not_exist
+        - name: option[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: status_enum_string
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: true
+  '/api/rest/config':
+    patch:
+      summary: Set Configs
+      operationId: Set Configs
+      description: ''
+      tags:
+        - 'Configs'
+      responses:
+        '200':
+          description: 'Success'
+      requestBody:
+        $ref: '#/components/requestBodies/set_configs'
+  '/api/rest/users/me':
+    get:
+      summary: Get My User Info
+      operationId: Get My User Info
+      description: ''
+      tags:
+        - 'Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues/{issue_id}/files':
+    post:
+      summary: Add attachments to issue
+      operationId: Add attachments to issue
+      description: ''
+      tags:
+        - 'Issue Attachments'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/add_attachments_to_issue'
+    get:
+      summary: Get issue files
+      operationId: Get issue files
+      description: ''
+      tags:
+        - 'Issue Attachments'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues/{issue_id}/notes':
+    post:
+      summary: Create an issue note
+      operationId: Create an issue note
+      description: ''
+      tags:
+        - 'Issue Notes'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/create_an_issue_note'
+  '/api/rest/issues/{issue_id}/notes/{issue_note_id}':
+    delete:
+      summary: Delete an issue note
+      operationId: Delete an issue note
+      description: ''
+      tags:
+        - 'Issue Notes'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: 'The issue id'
+          required: true
+        - name: issue_note_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/delete_an_issue_note'
+  '/api/rest/issues/{issue_id}/relationships/':
+    post:
+      summary: Add an issue relationship
+      operationId: Add an issue relationship
+      description: ''
+      tags:
+        - 'Issue Relationships'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/add_an_issue_relationship'
+  '/api/rest/issues/{issue_id}/tags':
+    post:
+      summary: Attach a tag to issue
+      operationId: Attach a tag to issue
+      description: ''
+      tags:
+        - 'Issue Tags'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/attach_a_tag_to_issue'
+  '/api/rest/issues':
+    post:
+      summary: Create an issue
+      operationId: Create an issue
+      description: ''
+      tags:
+        - 'Issues'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/create_an_issue'
+  '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
+    delete:
+      summary: Delete an issue relationship
+      operationId: Delete an issue relationship
+      description: ''
+      tags:
+        - 'Issue Relationships'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: relationship_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+  '/api/rest/issues/{issue_id}/tags/{tag_id}':
+    delete:
+      summary: Detach a tag from an issue
+      operationId: Detach a tag from an issue
+      description: ''
+      tags:
+        - 'Issue Tags'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: tag_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+  '/api/rest/issues?page_size={pageSize}&page={page}&select={select}':
+    get:
+      summary: Get all issues -specified fields-
+      operationId: Get all issues -specified fields-
+      description: ''
+      tags:
+        - 'Issues'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: '1'
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: false
+          example: id,summary,description
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues?page_size={pageSize}&page={page}':
+    get:
+      summary: Get all issues
+      operationId: Get all issues
+      description: ''
+      tags:
+        - 'Issues'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues/':
+    post:
+      summary: Create an issue -minimal-
+      operationId: Create an issue -minimal-
+      description: ''
+      tags:
+        - 'Issues'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/create_an_issue_-minimal-'
+  '/api/rest/issues/{issue_id}?select={select}':
+    get:
+      summary: Get an issue -specific fields-
+      operationId: Get an issue -specific fields-
+      description: ''
+      tags:
+        - 'Issues'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: id,summary,description
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues/{issue_id}':
+    get:
+      summary: Get an issue
+      operationId: Get an issue
+      description: ''
+      tags:
+        - 'Issues'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 123
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+    patch:
+      summary: Update an issue
+      operationId: Update an issue
+      description: ''
+      tags:
+        - 'Issues'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 123
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/update_an_issue'
+  '/api/rest/issues/{issue_id}/files/{file_id}':
+    get:
+      summary: Get issue file -single-
+      operationId: Get issue file -single-
+      description: ''
+      tags:
+        - 'Issue Attachments'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 123
+        - name: file_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 567
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues?filter_id=assigned&page_size={pageSize}&page={page}':
+    get:
+      summary: Get issues assigned to me
+      operationId: Get issues assigned to me
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 25
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues?project_id={projectId}&page_size={pageSize}&page={page}':
+    get:
+      summary: Get issues for a project
+      operationId: Get issues for a project
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 25
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues?filter_id={filter_id}&page_size={pageSize}&page={page}&project_id={project_id}':
+    get:
+      summary: Get issues matching filter
+      operationId: Get issues matching filter
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: filter_id
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: '1'
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 25
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 1
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues?filter_id=monitored&page_size={pageSize}&page={page}':
+    get:
+      summary: Get issues monitored by me
+      operationId: Get issues monitored by me
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 25
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues?filter_id=reported&page_size={pageSize}&page={page}':
+    get:
+      summary: Get issues reported by me
+      operationId: Get issues reported by me
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 25
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues?filter_id=unassigned&page_size={pageSize}&page={page}':
+    get:
+      summary: Get unassigned issues
+      operationId: Get unassigned issues
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 25
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/issues/{issue_id}/monitors':
+    post:
+      summary: Monitor an issue
+      operationId: Monitor an issue
+      description: ''
+      tags:
+        - 'Issue Monitoring'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 123
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+  '/api/rest/lang?string=all_projects':
+    get:
+      summary: Get a localized string
+      operationId: Get a localized string
+      description: ''
+      tags:
+        - 'Localized Strings'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: string
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: all_projects
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/lang?string[]=all_projects&string[]=does_not_exist&string[]=status&string[]=move_bugs&string[]=status_enum_string':
+    get:
+      summary: Get multiple localized strings
+      operationId: Get multiple localized strings
+      description: ''
+      tags:
+        - 'Localized Strings'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: string[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: all_projects
+        - name: string[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: does_not_exist
+        - name: string[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: status
+        - name: string[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: move_bugs
+        - name: string[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: status_enum_string
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/pages/issues/view/{issue_id}':
+    get:
+      summary: Get Issue View Page
+      operationId: Get Issue View Page
+      description: ''
+      tags:
+        - 'Views'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: issue_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 123
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/users/me/token':
+    post:
+      summary: Create token for me
+      operationId: Create token for me
+      description: ''
+      tags:
+        - 'API Tokens'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/users/{user_id}/token':
+    post:
+      summary: Create token for user
+      operationId: Create token for user
+      description: ''
+      tags:
+        - 'API Tokens'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 3
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/users/me/token/{id}':
+    delete:
+      summary: Delete token for me
+      operationId: Delete token for me
+      description: ''
+      tags:
+        - 'API Tokens'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+      requestBody:
+        $ref: '#/components/requestBodies/delete_token_for_me'
+  '/api/rest/users/{user_id}/token/{id}':
+    delete:
+      summary: Delete token for user
+      operationId: Delete token for user
+      description: ''
+      tags:
+        - 'API Tokens'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: '3'
+        - name: id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/projects/':
+    post:
+      summary: Create a project
+      operationId: Create a project
+      description: ''
+      tags:
+        - 'Projects'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/create_a_project'
+    get:
+      summary: Get all projects
+      operationId: Get all projects
+      description: ''
+      tags:
+        - 'Projects'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/projects/{project_id}':
+    get:
+      summary: Get a project
+      operationId: Get a project
+      description: ''
+      tags:
+        - 'Projects'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+    patch:
+      summary: Update a project
+      operationId: Update a project
+      description: ''
+      tags:
+        - 'Projects'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/update_a_project'
+  '/api/rest/projects/{project_id}/versions/':
+    post:
+      summary: Create a project version
+      operationId: Create a project version
+      description: ''
+      tags:
+        - 'Project Versions'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/create_a_project_version'
+  '/api/rest/projects/{project_id}/versions/{version_id}':
+    delete:
+      summary: Delete a project version
+      operationId: Delete a project version
+      description: ''
+      tags:
+        - 'Project Versions'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: version_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+    get:
+      summary: Get a Project Version
+      operationId: Get a Project Version
+      description: ''
+      tags:
+        - 'Project Versions'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: version_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 18
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: true
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: false
+          example: application/json
+    patch:
+      summary: Update project version
+      operationId: Update project version
+      description: ''
+      tags:
+        - 'Project Versions'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: version_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 8
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/update_project_version'
+  '/api/rest/projects/{project_id}/versions':
+    get:
+      summary: Get Project Versions
+      operationId: Get Project Versions
+      description: ''
+      tags:
+        - 'Project Versions'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+  '/api/rest/projects/{project_id}/subprojects':
+    post:
+      summary: Add a sub-project
+      operationId: Add a sub-project
+      description: ''
+      tags:
+        - 'Projects'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/add_a_sub-project'
+  '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
+    patch:
+      summary: Update a subproject
+      operationId: Update a subproject
+      description: ''
+      tags:
+        - 'Projects'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: '1'
+        - name: subproject_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: '2'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/update_a_subproject'
+  '/api/rest/projects/{project_id}/handlers':
+    get:
+      summary: Get Project Users that can be assigned issues
+      operationId: Get Project Users that can be assigned issues
+      description: ''
+      tags:
+        - 'Project Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+  '/api/rest/projects/{project_id}/users':
+    get:
+      summary: Get Project Users
+      operationId: Get Project Users
+      description: ''
+      tags:
+        - 'Project Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: access_level
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+          description: ''
+          required: false
+          example: 25
+        - name: include_access_levels
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+          description: ''
+          required: false
+          example: 0
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/projects/{project_id}/users/':
+    put:
+      summary: Project Add-Update User
+      operationId: Project Add-Update User
+      description: ''
+      tags:
+        - 'Project Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ''
+          required: true
+          example: 1
+      requestBody:
+        $ref: '#/components/requestBodies/project_add-update_user'
+  '/api/rest/projects/{project_id}/users/{user_id}':
+    delete:
+      summary: Project Delete User
+      operationId: Project Delete User
+      description: ''
+      tags:
+        - 'Project Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ''
+          required: true
+          example: 1
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ''
+          required: true
+          example: 5
+      requestBody:
+        $ref: '#/components/requestBodies/project_delete_user'
+  '/api/rest/users/':
+    post:
+      summary: Create a user
+      operationId: Create a user
+      description: ''
+      tags:
+        - 'Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/create_a_user'
+  '/api/rest/users/{id}?select={select}':
+    get:
+      summary: Get User By Id -select-
+      operationId: Get User By Id -select-
+      description: ''
+      tags:
+        - 'Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: id,name,real_name,email,access_level
+        - name: id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/users/{id}':
+    get:
+      summary: Get User By Id
+      operationId: Get User By Id
+      description: ''
+      tags:
+        - 'Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ''
+          required: true
+          example: 1
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/users/username/{username}':
+    get:
+      summary: Get User By Username
+      operationId: Get User By Username
+      description: ''
+      tags:
+        - 'Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: false
+          example: id,name,real_name,email
+        - name: username
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+  '/api/rest/users/{user_id}/reset':
+    put:
+      summary: Reset user password
+      operationId: Reset user password
+      description: ''
+      tags:
+        - 'Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ''
+          required: true
+          example: 5
+  '/api/rest/users/{user_id}':
+    patch:
+      summary: Update User
+      operationId: Update User
+      description: ''
+      tags:
+        - 'Users'
+      responses:
+        '200':
+          description: 'Success'
+      parameters:
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ''
+          required: true
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: 'The API token'
+          required: false
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/update_user'
+servers:
+  - url: https://mantisbt.org/bugs/
+components:
+  schemas:
+    set_configs:
+      type: object
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+        configs:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                option:
+                  type: string
+                value:
+                  type: string
+            '1':
+              type: object
+              properties:
+                option:
+                  type: string
+                value:
+                  type: string
+            '2':
+              type: object
+              properties:
+                option:
+                  type: string
+                value:
+                  type: array
+                  items:
+                    type: string
+                  properties:
+                    '0':
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                    '1':
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                    '2':
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+    add_attachments_to_issue:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+    create_an_issue_note_with_attachment:
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          type: object
+          properties:
+            name:
+              type: string
+        time_tracking:
+          type: object
+          properties:
+            duration:
+              type: string
+        files:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+    create_an_issue_note_with_time_tracking:
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          type: object
+          properties:
+            name:
+              type: string
+        time_tracking:
+          type: object
+          properties:
+            duration:
+              type: string
+    create_an_issue_note:
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          type: object
+          properties:
+            name:
+              type: string
+    delete_an_issue_note:
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          type: object
+          properties:
+            name:
+              type: string
+        reporter:
+          type: object
+          properties:
+            name:
+              type: string
+    add_an_issue_relationship:
+      type: object
+      properties:
+        issue:
+          type: object
+          properties:
+            id:
+              type: number
+        type:
+          type: object
+          properties:
+            name:
+              type: string
+    attach_a_tag_to_issue:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                id:
+                  type: number
+            '1':
+              type: object
+              properties:
+                name:
+                  type: string
+            '2':
+              type: object
+              properties:
+                id:
+                  type: number
+                name:
+                  type: string
+    create_an_issue_with_attachments:
+      type: object
+      properties:
+        summary:
+          type: string
+        description:
+          type: string
+        project:
+          type: object
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+        category:
+          type: object
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+        custom_fields:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                field:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                value:
+                  type: string
+        files:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+            '1':
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+    create_an_issue:
+      type: object
+      properties:
+        summary:
+          type: string
+        description:
+          type: string
+        additional_information:
+          type: string
+        project:
+          type: object
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+        category:
+          type: object
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+        handler:
+          type: object
+          properties:
+            name:
+              type: string
+        view_state:
+          type: object
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+        priority:
+          type: object
+          properties:
+            name:
+              type: string
+        severity:
+          type: object
+          properties:
+            name:
+              type: string
+        reproducibility:
+          type: object
+          properties:
+            name:
+              type: string
+        sticky:
+          type: boolean
+        custom_fields:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                field:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                value:
+                  type: string
+        tags:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                name:
+                  type: string
+    create_an_issue_-minimal-:
+      type: object
+      properties:
+        summary:
+          type: string
+        description:
+          type: string
+        category:
+          type: object
+          properties:
+            name:
+              type: string
+        project:
+          type: object
+          properties:
+            id:
+              type: number
+    monitor_an_issue_-for_specified_users-:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                name:
+                  type: string
+            '1':
+              type: object
+              properties:
+                name_or_realname:
+                  type: string
+    update_an_issue_-minimal-:
+      type: object
+      properties:
+        handler:
+          type: object
+          properties:
+            name:
+              type: string
+        status:
+          type: object
+          properties:
+            name:
+              type: string
+    update_an_issue:
+      type: object
+      properties:
+        summary:
+          type: string
+        priority:
+          type: object
+          properties:
+            name:
+              type: string
+        handler:
+          type: object
+          properties:
+            name:
+              type: string
+        status:
+          type: object
+          properties:
+            name:
+              type: string
+        custom_fields:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                field:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                value:
+                  type: string
+        notes:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: object
+              properties:
+                id:
+                  type: number
+                reporter:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                text:
+                  type: string
+                view_state:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    label:
+                      type: string
+                type:
+                  type: string
+            '1':
+              type: object
+              properties:
+                reporter:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                text:
+                  type: string
+                view_state:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                type:
+                  type: string
+            '2':
+              type: object
+              properties:
+                reporter:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                text:
+                  type: string
+                view_state:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                type:
+                  type: string
+    delete_token_for_me:
+      type: object
+      properties:
+        x:
+          type: number
+    create_a_project:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: object
+          properties:
+            name:
+              type: string
+        description:
+          type: string
+        file_path:
+          type: string
+        view_state:
+          type: object
+          properties:
+            name:
+              type: string
+        enabled:
+          type: boolean
+    update_a_project:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        enabled:
+          type: boolean
+        inherit_global:
+          type: number
+    create_a_project_version:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        released:
+          type: boolean
+        obsolete:
+          type: boolean
+        timestamp:
+          type: string
+    update_project_version:
+      type: object
+      properties:
+        obsolete:
+          type: boolean
+    add_a_sub-project:
+      type: object
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+        inherit_parent:
+          type: boolean
+    update_a_subproject:
+      type: object
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+        inherit_parent:
+          type: boolean
+    project_add-update_user:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            name:
+              type: string
+        access_level:
+          type: object
+          properties:
+            name:
+              type: string
+    project_delete_user:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            name:
+              type: string
+    create_a_user_-minimal-:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        real_name:
+          type: string
+        email:
+          type: string
+        access_level:
+          type: object
+          properties:
+            name:
+              type: string
+        enabled:
+          type: boolean
+        protected:
+          type: boolean
+    create_a_user:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        real_name:
+          type: string
+        email:
+          type: string
+        access_level:
+          type: object
+          properties:
+            name:
+              type: string
+        enabled:
+          type: boolean
+        protected:
+          type: boolean
+    update_user:
+      type: object
+      properties:
+        name:
+          type: string
+        real_name:
+          type: string
+        email:
+          type: string
+        access_level:
+          type: object
+          properties:
+            name:
+              type: string
+        enabled:
+          type: boolean
+        protected:
+          type: boolean
+  requestBodies:
+    set_configs:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/set_configs'
+      description: ''
+      required: true
+    add_attachments_to_issue:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/add_attachments_to_issue'
+      description: ''
+      required: true
+    create_an_issue_note_with_attachment:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_an_issue_note_with_attachment'
+      description: ''
+      required: true
+    create_an_issue_note_with_time_tracking:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_an_issue_note_with_time_tracking'
+      description: ''
+      required: true
+    create_an_issue_note:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_an_issue_note'
+      description: ''
+      required: true
+    delete_an_issue_note:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/delete_an_issue_note'
+      description: ''
+      required: true
+    add_an_issue_relationship:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/add_an_issue_relationship'
+      description: ''
+      required: true
+    attach_a_tag_to_issue:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/attach_a_tag_to_issue'
+      description: ''
+      required: true
+    create_an_issue_with_attachments:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_an_issue_with_attachments'
+      description: ''
+      required: true
+    create_an_issue:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_an_issue'
+      description: ''
+      required: true
+    create_an_issue_-minimal-:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_an_issue_-minimal-'
+      description: ''
+      required: true
+    monitor_an_issue_-for_specified_users-:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/monitor_an_issue_-for_specified_users-'
+      description: ''
+      required: true
+    update_an_issue_-minimal-:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_an_issue_-minimal-'
+      description: ''
+      required: true
+    update_an_issue:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_an_issue'
+      description: ''
+      required: true
+    delete_token_for_me:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/delete_token_for_me'
+      description: ''
+      required: true
+    create_a_project:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_a_project'
+      description: ''
+      required: true
+    update_a_project:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_a_project'
+      description: ''
+      required: true
+    create_a_project_version:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_a_project_version'
+      description: ''
+      required: true
+    update_project_version:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_project_version'
+      description: ''
+      required: true
+    add_a_sub-project:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/add_a_sub-project'
+      description: ''
+      required: true
+    update_a_subproject:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_a_subproject'
+      description: ''
+      required: true
+    project_add-update_user:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/project_add-update_user'
+      description: ''
+      required: true
+    project_delete_user:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/project_delete_user'
+      description: ''
+      required: true
+    create_a_user_-minimal-:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_a_user_-minimal-'
+      description: ''
+      required: true
+    create_a_user:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_a_user'
+      description: ''
+      required: true
+    update_user:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_user'
+      description: ''
+      required: true
+  securitySchemes: {}
