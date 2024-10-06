@@ -898,6 +898,23 @@ paths:
         $ref: '#/components/requestBodies/update_user'
 servers:
   - url: https://mantisbt.org/bugs/
+    description: MantisBT Official Bugtracker
+  - url: '{protocol}://{hostname}:{port}/{basePath}/'
+    description: Your MantisBT instance
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+      hostname:
+        description: The server where MantisBT is installed, including port number if not standard.
+        default: localhost
+      port:
+        default: ''
+      basePath:
+        description: The path where MantisBT is installed, without trailing `/`
+        default: mantisbt
 components:
   securitySchemes:
     api_key:
