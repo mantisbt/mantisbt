@@ -13,6 +13,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: filter_id
           in: path
@@ -31,6 +33,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
   '/api/rest/config?option={option}':
     get:
       summary: Get Configuration Option
@@ -41,6 +45,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: option
           in: query
@@ -58,6 +64,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: option[]
           in: query
@@ -104,6 +112,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       requestBody:
         $ref: '#/components/requestBodies/set_configs'
   '/api/rest/users/me':
@@ -116,6 +126,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
   '/api/rest/issues/{issue_id}/files':
     post:
       summary: Add attachments to issue
@@ -126,6 +138,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -144,6 +158,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -161,6 +177,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -180,6 +198,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -205,6 +225,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -224,6 +246,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -243,6 +267,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       requestBody:
         $ref: '#/components/requestBodies/create_an_issue'
   '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
@@ -255,6 +281,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -278,6 +306,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -301,6 +331,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: page_size
           in: query
@@ -332,6 +364,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: select
           in: query
@@ -355,6 +389,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -375,6 +411,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -400,6 +438,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: page_size
           in: query
@@ -425,6 +465,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -457,6 +499,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: filter_id
           in: query
@@ -496,6 +540,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: page_size
           in: query
@@ -521,6 +567,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: page_size
           in: query
@@ -546,6 +594,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: page_size
           in: query
@@ -571,6 +621,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -589,6 +641,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: string
           in: query
@@ -607,6 +661,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: string[]
           in: query
@@ -653,6 +709,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: issue_id
           in: query
@@ -671,6 +729,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
   '/api/rest/users/{user_id}/token':
     post:
       summary: Create token for user
@@ -681,6 +741,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: user_id
           in: query
@@ -699,6 +761,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: id
           in: query
@@ -718,6 +782,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: user_id
           in: query
@@ -742,6 +808,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       requestBody:
         $ref: '#/components/requestBodies/create_a_project'
     get:
@@ -753,6 +821,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
   '/api/rest/projects/{project_id}':
     get:
       summary: Get a project
@@ -763,6 +833,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -780,6 +852,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -800,6 +874,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -820,6 +896,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -843,6 +921,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -867,6 +947,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -894,6 +976,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -912,6 +996,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -932,6 +1018,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -959,6 +1047,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -977,6 +1067,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: access_level
           in: query
@@ -1013,6 +1105,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -1034,6 +1128,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: project_id
           in: query
@@ -1063,6 +1159,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       requestBody:
         $ref: '#/components/requestBodies/create_a_user'
   '/api/rest/users/{id}?select={select}':
@@ -1075,6 +1173,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: select
           in: query
@@ -1100,6 +1200,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: select
           in: query
@@ -1124,6 +1226,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: user_id
           in: query
@@ -1143,6 +1247,8 @@ paths:
       responses:
         '200':
           description: 'Success'
+        '4XX':
+          description: 'Bad Request'
       parameters:
         - name: user_id
           in: query
