@@ -298,11 +298,15 @@ paths:
           schema:
             type: string
           description: |
-            The filter id to apply
+            Following are the built-in filter names:  
 
-            'assigned' - issues assigned to me.
-            'reported' - issues reported by me.
-            'unassigned' - unassigned issues.
+            `assigned` - issues assigned to me.  
+            `reported` - issues reported by me.  
+            `monitored` - issues monitored by me.  
+            `unassigned` - unassigned issues.  
+
+            It is possible to also pass in an integer
+            which is the id of a saved filter.
           required: false
         - name: page_size
           in: query
@@ -314,6 +318,7 @@ paths:
           in: query
           schema:
             type: integer
+            minimum: 1
           description: ''
           required: false
           example: 1
