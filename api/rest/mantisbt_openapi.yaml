@@ -107,12 +107,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
+        - $ref: '#/components/parameters/issue_id'
       requestBody:
         $ref: '#/components/requestBodies/add_attachments_to_issue'
     get:
@@ -127,12 +122,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
+        - $ref: '#/components/parameters/issue_id'
   '/api/rest/issues/{issue_id}/notes':
     post:
       summary: Create an issue note
@@ -146,12 +136,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
+        - $ref: '#/components/parameters/issue_id'
       requestBody:
         $ref: '#/components/requestBodies/create_an_issue_note'
   '/api/rest/issues/{issue_id}/notes/{issue_note_id}':
@@ -167,12 +152,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: 'The issue id'
-          required: true
+        - $ref: '#/components/parameters/issue_id'
         - name: issue_note_id
           in: path
           schema:
@@ -194,12 +174,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
+        - $ref: '#/components/parameters/issue_id'
       requestBody:
         $ref: '#/components/requestBodies/add_an_issue_relationship'
   '/api/rest/issues/{issue_id}/tags':
@@ -215,12 +190,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
+        - $ref: '#/components/parameters/issue_id'
       requestBody:
         $ref: '#/components/requestBodies/attach_a_tag_to_issue'
   '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
@@ -236,12 +206,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
+        - $ref: '#/components/parameters/issue_id'
         - name: relationship_id
           in: path
           schema:
@@ -261,12 +226,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
+        - $ref: '#/components/parameters/issue_id'
         - name: tag_id
           in: path
           schema:
@@ -358,12 +318,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
+        - $ref: '#/components/parameters/issue_id'
         - name: select
           in: query
           schema:
@@ -383,13 +338,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 123
+        - $ref: '#/components/parameters/issue_id'
       requestBody:
         $ref: '#/components/requestBodies/update_an_issue'
   '/api/rest/issues/{issue_id}/files/{file_id}':
@@ -405,13 +354,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 123
+        - $ref: '#/components/parameters/issue_id'
         - name: file_id
           in: path
           schema:
@@ -432,13 +375,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 123
+        - $ref: '#/components/parameters/issue_id'
   '/api/rest/lang':
     get:
       summary: Get multiple localized strings
@@ -472,13 +409,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: issue_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 123
+        - $ref: '#/components/parameters/issue_id'
   '/api/rest/users/me/token':
     post:
       summary: Create token for me
@@ -1740,3 +1671,12 @@ components:
             $ref: '#/components/schemas/update_user'
       description: ''
       required: true
+  parameters:
+    issue_id:
+      name: issue_id
+      in: path
+      schema:
+        type: integer
+      description: 'The issue id'
+      required: true
+      example: 123
