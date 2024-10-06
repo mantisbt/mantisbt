@@ -584,18 +584,18 @@ function mci_profile_as_array_by_id( $p_profile_id ) {
 	}
 
 	try {
-		$t_profile = profile_get_row( $t_profile_id );
+		$t_profile = new ProfileData( $t_profile_id );
 	} catch (ClientException $e) {
 		return null;
 	}
 
 	return array(
 		'id' => $t_profile_id,
-		'user' => mci_account_get_array_by_id( $t_profile['user_id'] ),
-		'platform' => $t_profile['platform'],
-		'os' => $t_profile['os'],
-		'os_build' => $t_profile['os_build'],
-		'description' => $t_profile['description']
+		'user' => mci_account_get_array_by_id( $t_profile->user_id ),
+		'platform' => $t_profile->platform,
+		'os' => $t_profile->os,
+		'os_build' => $t_profile->os_build,
+		'description' => $t_profile->description
 	);
 }
 

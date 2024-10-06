@@ -298,22 +298,18 @@ class IssueAddCommand extends Command {
 
 		# if a profile was selected then let's use that information
 		if( $this->issue->profile_id != 0 ) {
-			if( profile_is_global( $this->issue->profile_id ) ) {
-				$t_row = user_get_profile_row( ALL_USERS, $this->issue->profile_id );
-			} else {
-				$t_row = user_get_profile_row( $this->issue->reporter_id, $this->issue->profile_id );
-			}
+			$t_profile = user_get_profile( $this->issue->reporter_id, $this->issue->profile_id );
 
 			if( is_blank( $this->issue->platform ) ) {
-				$this->issue->platform = $t_row['platform'];
+				$this->issue->platform = $t_profile->platform;
 			}
 
 			if( is_blank( $this->issue->os ) ) {
-				$this->issue->os = $t_row['os'];
+				$this->issue->os = $t_profile->os;
 			}
 
 			if( is_blank( $this->issue->os_build ) ) {
-				$this->issue->os_build = $t_row['os_build'];
+				$this->issue->os_build = $t_profile->os_build;
 			}
 		}
 

@@ -1626,27 +1626,24 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 }
 
 /**
- * Return a profile row.
+ * Return Profile data information.
  *
  * @param int $p_user_id    A valid user identifier.
  * @param int $p_profile_id The profile identifier to retrieve.
  *
- * @return array
+ * @return ProfileData
+ * @throws ClientException if Profile is not found.
  */
-function user_get_profile_row( $p_user_id, $p_profile_id ) {
-	db_param_push();
-	$t_query = 'SELECT * FROM {user_profile}
-				  WHERE id=' . db_param() . ' AND
-						user_id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_profile_id, $p_user_id ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
-		trigger_error( ERROR_USER_PROFILE_NOT_FOUND, ERROR );
+function user_get_profile( $p_user_id, $p_profile_id ) {
+	$t_profile = new ProfileData( $p_profile_id );
+	if( !$t_profile->is_global() && $t_profile->user_id != $p_user_id ) {
+		throw new ClientException(
+			"Profile '$p_profile_id' not found for user '$p_user_id'.",
+			ERROR_USER_PROFILE_NOT_FOUND
+		);
 	}
 
-	return $t_row;
+	return $t_profile;
 }
 
 /**

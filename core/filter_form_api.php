@@ -1100,7 +1100,8 @@ function print_filter_values_show_profile( array $p_filter ) {
 			if( filter_field_is_any( $t_current ) ) {
 				$t_any_found = true;
 			} else {
-				$t_this_string = profile_get_name( $t_current );
+				$t_profile = new ProfileData( $t_current );
+				$t_this_string = $t_profile->get_name();
 			}
 			if( !$t_first_flag ) {
 				$t_output .= '<br />';
