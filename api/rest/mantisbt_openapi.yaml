@@ -59,13 +59,6 @@ paths:
       description: ''
       tags:
         - 'Configs'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
       parameters:
         - name: option[]
           in: query
@@ -73,19 +66,26 @@ paths:
             type: string
           description: ''
           required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
     patch:
       summary: Set Configs
       operationId: configSet
       description: ''
       tags:
         - 'Configs'
+      requestBody:
+        $ref: '#/components/requestBodies/set_configs'
       responses:
         '200':
           $ref: '#/components/responses/Success'
         '400':
           $ref: '#/components/responses/BadRequest'
-      requestBody:
-        $ref: '#/components/requestBodies/set_configs'
   '/api/rest/users/me':
     get:
       summary: Get My User Info
@@ -107,6 +107,10 @@ paths:
       description: ''
       tags:
         - 'Issue Attachments'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/add_attachments_to_issue'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -114,16 +118,14 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      parameters:
-        - $ref: '#/components/parameters/issue_id'
-      requestBody:
-        $ref: '#/components/requestBodies/add_attachments_to_issue'
     get:
       summary: Get issue files
       operationId: issueFilesGet
       description: ''
       tags:
         - 'Issue Attachments'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -131,8 +133,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      parameters:
-        - $ref: '#/components/parameters/issue_id'
   '/api/rest/issues/{issue_id}/notes':
     post:
       summary: Create an issue note
@@ -140,6 +140,10 @@ paths:
       description: ''
       tags:
         - 'Issue Notes'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/create_an_issue_note'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -147,10 +151,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      parameters:
-        - $ref: '#/components/parameters/issue_id'
-      requestBody:
-        $ref: '#/components/requestBodies/create_an_issue_note'
   '/api/rest/issues/{issue_id}/notes/{issue_note_id}':
     delete:
       summary: Delete an issue note
@@ -158,13 +158,6 @@ paths:
       description: ''
       tags:
         - 'Issue Notes'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: issue_note_id
@@ -175,6 +168,13 @@ paths:
           required: true
       requestBody:
         $ref: '#/components/requestBodies/delete_an_issue_note'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{issue_id}/relationships':
     post:
       summary: Add an issue relationship
@@ -182,6 +182,10 @@ paths:
       description: ''
       tags:
         - 'Issue Relationships'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/add_an_issue_relationship'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -189,10 +193,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      parameters:
-        - $ref: '#/components/parameters/issue_id'
-      requestBody:
-        $ref: '#/components/requestBodies/add_an_issue_relationship'
   '/api/rest/issues/{issue_id}/tags':
     post:
       summary: Attach a tag to issue
@@ -200,6 +200,10 @@ paths:
       description: ''
       tags:
         - 'Issue Tags'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/attach_a_tag_to_issue'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -207,10 +211,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      parameters:
-        - $ref: '#/components/parameters/issue_id'
-      requestBody:
-        $ref: '#/components/requestBodies/attach_a_tag_to_issue'
   '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
     delete:
       summary: Delete an issue relationship
@@ -218,13 +218,6 @@ paths:
       description: ''
       tags:
         - 'Issue Relationships'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: relationship_id
@@ -233,13 +226,6 @@ paths:
             type: integer
           description: ''
           required: true
-  '/api/rest/issues/{issue_id}/tags/{tag_id}':
-    delete:
-      summary: Detach a tag from an issue
-      operationId: issueTagsDelete
-      description: ''
-      tags:
-        - 'Issue Tags'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -247,6 +233,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/tags/{tag_id}':
+    delete:
+      summary: Detach a tag from an issue
+      operationId: issueTagsDelete
+      description: ''
+      tags:
+        - 'Issue Tags'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: tag_id
@@ -255,13 +248,6 @@ paths:
             type: integer
           description: ''
           required: true
-  '/api/rest/issues':
-    get:
-      summary: Get issues
-      operationId: issueGetAll
-      description: ''
-      tags:
-        - 'Issues'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -269,6 +255,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/issues':
+    get:
+      summary: Get issues
+      operationId: issueGetAll
+      description: ''
+      tags:
+        - 'Issues'
       parameters:
         - name: project_id
           in: query
@@ -299,6 +292,13 @@ paths:
           description: ''
           required: false
           example: id,summary,description
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
     post:
       summary: Create an issue
       operationId: issueAdd
@@ -308,6 +308,8 @@ paths:
         it is sufficient to pass the `id` or `name`.
       tags:
         - 'Issues'
+      requestBody:
+        $ref: '#/components/requestBodies/create_an_issue'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -315,8 +317,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      requestBody:
-        $ref: '#/components/requestBodies/create_an_issue'
   '/api/rest/issues/{issue_id}':
     get:
       summary: Get an issue
@@ -324,13 +324,6 @@ paths:
       description: ''
       tags:
         - 'Issues'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: select
@@ -340,12 +333,6 @@ paths:
           description: ''
           required: false
           example: id,summary,description
-    patch:
-      summary: Update an issue
-      operationId: issueUpdate
-      description: ''
-      tags:
-        - 'Issues'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -353,10 +340,23 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update an issue
+      operationId: issueUpdate
+      description: ''
+      tags:
+        - 'Issues'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
         $ref: '#/components/requestBodies/update_an_issue'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{issue_id}/files/{file_id}':
     get:
       summary: Get file from issue
@@ -364,13 +364,6 @@ paths:
       description: ''
       tags:
         - 'Issue Attachments'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/issue_id'
         - name: file_id
@@ -380,6 +373,13 @@ paths:
           description: ''
           required: true
           example: 567
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{issue_id}/monitors':
     post:
       summary: Monitor an issue
@@ -387,6 +387,8 @@ paths:
       description: ''
       tags:
         - 'Issue Monitoring'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -394,8 +396,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      parameters:
-        - $ref: '#/components/parameters/issue_id'
   '/api/rest/lang':
     get:
       summary: Get multiple localized strings
@@ -403,13 +403,6 @@ paths:
       description: ''
       tags:
         - 'Localized Strings'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
       parameters:
         - name: string[]
           in: query
@@ -418,13 +411,6 @@ paths:
           description: ''
           required: true
           example: all_projects
-  '/api/rest/pages/issues/view/{issue_id}':
-    get:
-      summary: Get Issue View Page
-      operationId: issueGetViewPage
-      description: ''
-      tags:
-        - 'Views'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -432,8 +418,22 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/pages/issues/view/{issue_id}':
+    get:
+      summary: Get Issue View Page
+      operationId: issueGetViewPage
+      description: ''
+      tags:
+        - 'Views'
       parameters:
         - $ref: '#/components/parameters/issue_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/users/me/token':
     post:
       summary: Create token for me
@@ -455,6 +455,8 @@ paths:
       description: ''
       tags:
         - 'API Tokens'
+      parameters:
+        - $ref: '#/components/parameters/user_id'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -462,8 +464,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      parameters:
-        - $ref: '#/components/parameters/user_id'
   '/api/rest/users/me/token/{id}':
     delete:
       summary: Delete token for me
@@ -471,13 +471,6 @@ paths:
       description: ''
       tags:
         - 'API Tokens'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
       parameters:
         - name: id
           in: path
@@ -487,13 +480,6 @@ paths:
           required: true
       requestBody:
         $ref: '#/components/requestBodies/delete_token_for_me'
-  '/api/rest/users/{user_id}/token/{id}':
-    delete:
-      summary: Delete token for user
-      operationId: tokenDeleteForUser
-      description: ''
-      tags:
-        - 'API Tokens'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -501,6 +487,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/users/{user_id}/token/{id}':
+    delete:
+      summary: Delete token for user
+      operationId: tokenDeleteForUser
+      description: ''
+      tags:
+        - 'API Tokens'
       parameters:
         - $ref: '#/components/parameters/user_id'
         - name: id
@@ -509,13 +502,6 @@ paths:
             type: integer
           description: ''
           required: true
-  '/api/rest/projects':
-    post:
-      summary: Create a project
-      operationId: projectAdd
-      description: ''
-      tags:
-        - 'Projects'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -523,8 +509,22 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/projects':
+    post:
+      summary: Create a project
+      operationId: projectAdd
+      description: ''
+      tags:
+        - 'Projects'
       requestBody:
         $ref: '#/components/requestBodies/create_a_project'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
     get:
       summary: Get all projects
       operationId: projectGetAll
@@ -545,13 +545,6 @@ paths:
       description: ''
       tags:
         - 'Projects'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
       parameters:
         - name: project_id
           in: path
@@ -560,12 +553,6 @@ paths:
           description: ''
           required: true
           example: 1
-    patch:
-      summary: Update a project
-      operationId: projectUpdate
-      description: ''
-      tags:
-        - 'Projects'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -573,6 +560,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update a project
+      operationId: projectUpdate
+      description: ''
+      tags:
+        - 'Projects'
       parameters:
         - name: project_id
           in: path
@@ -583,13 +576,6 @@ paths:
           example: 1
       requestBody:
         $ref: '#/components/requestBodies/update_a_project'
-  '/api/rest/projects/{project_id}/versions/{version_id}':
-    delete:
-      summary: Delete a project version
-      operationId: projectVersionsDelete
-      description: ''
-      tags:
-        - 'Project Versions'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -597,6 +583,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/versions/{version_id}':
+    delete:
+      summary: Delete a project version
+      operationId: projectVersionsDelete
+      description: ''
+      tags:
+        - 'Project Versions'
       parameters:
         - name: project_id
           in: path
@@ -611,12 +604,6 @@ paths:
             type: integer
           description: ''
           required: true
-    get:
-      summary: Get a Project Version
-      operationId: projectVersionsGet
-      description: ''
-      tags:
-        - 'Project Versions'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -624,6 +611,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    get:
+      summary: Get a Project Version
+      operationId: projectVersionsGet
+      description: ''
+      tags:
+        - 'Project Versions'
       parameters:
         - name: project_id
           in: path
@@ -639,12 +632,6 @@ paths:
           description: ''
           required: true
           example: 18
-    patch:
-      summary: Update project version
-      operationId: projectVersionsUpdate
-      description: ''
-      tags:
-        - 'Project Versions'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -652,6 +639,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update project version
+      operationId: projectVersionsUpdate
+      description: ''
+      tags:
+        - 'Project Versions'
       parameters:
         - name: project_id
           in: path
@@ -669,13 +662,6 @@ paths:
           example: 8
       requestBody:
         $ref: '#/components/requestBodies/update_project_version'
-  '/api/rest/projects/{project_id}/versions':
-    get:
-      summary: Get Project Versions
-      operationId: projectVersionsGetAll
-      description: ''
-      tags:
-        - 'Project Versions'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -683,6 +669,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/versions':
+    get:
+      summary: Get Project Versions
+      operationId: projectVersionsGetAll
+      description: ''
+      tags:
+        - 'Project Versions'
       parameters:
         - name: project_id
           in: path
@@ -691,12 +684,6 @@ paths:
           description: ''
           required: true
           example: 1
-    post:
-      summary: Create a project version
-      operationId: projectVersionsAdd
-      description: ''
-      tags:
-        - 'Project Versions'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -704,6 +691,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    post:
+      summary: Create a project version
+      operationId: projectVersionsAdd
+      description: ''
+      tags:
+        - 'Project Versions'
       parameters:
         - name: project_id
           in: path
@@ -714,13 +707,6 @@ paths:
           example: 1
       requestBody:
         $ref: '#/components/requestBodies/create_a_project_version'
-  '/api/rest/projects/{project_id}/subprojects':
-    post:
-      summary: Add a sub-project
-      operationId: projectSubprojectsAdd
-      description: ''
-      tags:
-        - 'Projects'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -728,6 +714,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/subprojects':
+    post:
+      summary: Add a sub-project
+      operationId: projectSubprojectsAdd
+      description: ''
+      tags:
+        - 'Projects'
       parameters:
         - name: project_id
           in: path
@@ -738,13 +731,6 @@ paths:
           example: 1
       requestBody:
         $ref: '#/components/requestBodies/add_a_sub-project'
-  '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
-    patch:
-      summary: Update a subproject
-      operationId: projectSubprojectsUpdate
-      description: ''
-      tags:
-        - 'Projects'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -752,6 +738,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
+    patch:
+      summary: Update a subproject
+      operationId: projectSubprojectsUpdate
+      description: ''
+      tags:
+        - 'Projects'
       parameters:
         - name: project_id
           in: path
@@ -769,13 +762,6 @@ paths:
           example: '2'
       requestBody:
         $ref: '#/components/requestBodies/update_a_subproject'
-  '/api/rest/projects/{project_id}/handlers':
-    get:
-      summary: Get Project Users that can be assigned issues
-      operationId: projectUsersCanHandleIssues
-      description: ''
-      tags:
-        - 'Project Users'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -783,6 +769,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/handlers':
+    get:
+      summary: Get Project Users that can be assigned issues
+      operationId: projectUsersCanHandleIssues
+      description: ''
+      tags:
+        - 'Project Users'
       parameters:
         - name: project_id
           in: path
@@ -791,13 +784,6 @@ paths:
           description: ''
           required: true
           example: 1
-  '/api/rest/projects/{project_id}/users':
-    get:
-      summary: Get Project Users
-      operationId: projectUsersGetAll
-      description: ''
-      tags:
-        - 'Project Users'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -805,6 +791,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/users':
+    get:
+      summary: Get Project Users
+      operationId: projectUsersGetAll
+      description: ''
+      tags:
+        - 'Project Users'
       parameters:
         - name: project_id
           in: path
@@ -831,12 +824,6 @@ paths:
           description: ''
           required: false
           example: 0
-    put:
-      summary: Project Add-Update User
-      operationId: projectUsersUpsert
-      description: ''
-      tags:
-        - 'Project Users'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -844,6 +831,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    put:
+      summary: Project Add-Update User
+      operationId: projectUsersUpsert
+      description: ''
+      tags:
+        - 'Project Users'
       parameters:
         - name: project_id
           in: path
@@ -855,13 +848,6 @@ paths:
           example: 1
       requestBody:
         $ref: '#/components/requestBodies/project_add-update_user'
-  '/api/rest/projects/{project_id}/users/{user_id}':
-    delete:
-      summary: Project Delete User
-      operationId: projectUsersDelete
-      description: ''
-      tags:
-        - 'Project Users'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -869,6 +855,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/users/{user_id}':
+    delete:
+      summary: Project Delete User
+      operationId: projectUsersDelete
+      description: ''
+      tags:
+        - 'Project Users'
       parameters:
         - name: project_id
           in: path
@@ -881,6 +874,13 @@ paths:
         - $ref: '#/components/parameters/user_id'
       requestBody:
         $ref: '#/components/requestBodies/project_delete_user'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/users':
     post:
       summary: Create a user
@@ -888,6 +888,8 @@ paths:
       description: ''
       tags:
         - 'Users'
+      requestBody:
+        $ref: '#/components/requestBodies/create_a_user'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -895,8 +897,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      requestBody:
-        $ref: '#/components/requestBodies/create_a_user'
   '/api/rest/users/{id}':
     get:
       summary: Get User By Id
@@ -904,13 +904,6 @@ paths:
       description: ''
       tags:
         - 'Users'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
       parameters:
         - name: id
           in: path
@@ -926,13 +919,6 @@ paths:
           description: ''
           required: false
           example: id,name,real_name,email,access_level
-  '/api/rest/users/username/{username}':
-    get:
-      summary: Get User By Username
-      operationId: userGetByUsername
-      description: ''
-      tags:
-        - 'Users'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -940,6 +926,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/api/rest/users/username/{username}':
+    get:
+      summary: Get User By Username
+      operationId: userGetByUsername
+      description: ''
+      tags:
+        - 'Users'
       parameters:
         - name: username
           in: path
@@ -954,6 +947,13 @@ paths:
           description: ''
           required: false
           example: id,name,real_name,email
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/users/{user_id}/reset':
     put:
       summary: Reset user password
@@ -961,6 +961,8 @@ paths:
       description: ''
       tags:
         - 'Users'
+      parameters:
+        - $ref: '#/components/parameters/user_id'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -968,8 +970,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      parameters:
-        - $ref: '#/components/parameters/user_id'
   '/api/rest/users/{user_id}':
     patch:
       summary: Update User
@@ -977,6 +977,10 @@ paths:
       description: ''
       tags:
         - 'Users'
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      requestBody:
+        $ref: '#/components/requestBodies/update_user'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -984,10 +988,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-      parameters:
-        - $ref: '#/components/parameters/user_id'
-      requestBody:
-        $ref: '#/components/requestBodies/update_user'
 servers:
   - url: https://mantisbt.org/bugs/
     description: MantisBT Official Bugtracker
