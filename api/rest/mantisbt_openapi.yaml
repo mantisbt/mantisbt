@@ -332,7 +332,10 @@ paths:
     post:
       summary: Create an issue
       operationId: issueAdd
-      description: ''
+      description: |
+        When creating an issue, most of the fields other than `summary`, `description` and `category` are typically optional.
+        It is also worth noting that when passing references to enumerations like `priority` or object references like `handler`,
+        it is sufficient to pass the `id` or `name`.
       tags:
         - 'Issues'
       responses:
