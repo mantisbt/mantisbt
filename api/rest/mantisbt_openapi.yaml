@@ -415,13 +415,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: user_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 3
+        - $ref: '#/components/parameters/user_id'
   '/api/rest/users/me/token/{id}':
     delete:
       summary: Delete token for me
@@ -456,13 +450,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: user_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: '3'
+        - $ref: '#/components/parameters/user_id'
         - name: id
           in: path
           schema:
@@ -808,14 +796,7 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: user_id
-          in: path
-          schema:
-            type: integer
-            minimum: 1
-          description: ''
-          required: true
-          example: 5
+        - $ref: '#/components/parameters/user_id'
       requestBody:
         $ref: '#/components/requestBodies/project_delete_user'
   '/api/rest/users':
@@ -898,14 +879,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: user_id
-          in: path
-          schema:
-            type: integer
-            minimum: 1
-          description: ''
-          required: true
-          example: 5
+        - $ref: '#/components/parameters/user_id'
   '/api/rest/users/{user_id}':
     patch:
       summary: Update User
@@ -919,13 +893,7 @@ paths:
         '4XX':
           description: 'Bad Request'
       parameters:
-        - name: user_id
-          in: path
-          schema:
-            type: integer
-            minimum: 1
-          description: ''
-          required: true
+        - $ref: '#/components/parameters/user_id'
       requestBody:
         $ref: '#/components/requestBodies/update_user'
 servers:
@@ -1657,9 +1625,19 @@ components:
       in: path
       schema:
         type: integer
-      description: 'The issue id'
+        minimum: 1
+      description: 'The issue ID'
       required: true
       example: 123
+    user_id:
+      name: user_id
+      in: path
+      schema:
+        type: integer
+        minimum: 1
+      description: 'The user ID'
+      example: 5
+      required: true
     filter_id:
       name: filter_id
       in: path
