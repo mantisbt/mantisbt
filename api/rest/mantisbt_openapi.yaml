@@ -267,6 +267,7 @@ paths:
           in: query
           schema:
             type: integer
+            minimum: 0
           description: ''
           required: false
           example: 1
@@ -546,13 +547,7 @@ paths:
       tags:
         - 'Projects'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -567,13 +562,7 @@ paths:
       tags:
         - 'Projects'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
       requestBody:
         $ref: '#/components/requestBodies/update_a_project'
       responses:
@@ -591,13 +580,7 @@ paths:
       tags:
         - 'Project Versions'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
         - name: version_id
           in: path
           schema:
@@ -618,13 +601,7 @@ paths:
       tags:
         - 'Project Versions'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
         - name: version_id
           in: path
           schema:
@@ -646,13 +623,7 @@ paths:
       tags:
         - 'Project Versions'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
         - name: version_id
           in: path
           schema:
@@ -677,13 +648,7 @@ paths:
       tags:
         - 'Project Versions'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -698,13 +663,7 @@ paths:
       tags:
         - 'Project Versions'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
       requestBody:
         $ref: '#/components/requestBodies/create_a_project_version'
       responses:
@@ -722,13 +681,7 @@ paths:
       tags:
         - 'Projects'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
       requestBody:
         $ref: '#/components/requestBodies/add_a_sub-project'
       responses:
@@ -746,13 +699,7 @@ paths:
       tags:
         - 'Projects'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: '1'
+        - $ref: '#/components/parameters/project_id'
         - name: subproject_id
           in: path
           schema:
@@ -777,13 +724,7 @@ paths:
       tags:
         - 'Project Users'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -799,13 +740,7 @@ paths:
       tags:
         - 'Project Users'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
         - name: access_level
           in: query
           schema:
@@ -838,14 +773,7 @@ paths:
       tags:
         - 'Project Users'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-            minimum: 1
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
       requestBody:
         $ref: '#/components/requestBodies/project_add-update_user'
       responses:
@@ -863,14 +791,7 @@ paths:
       tags:
         - 'Project Users'
       parameters:
-        - name: project_id
-          in: path
-          schema:
-            type: integer
-            minimum: 1
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/project_id'
         - $ref: '#/components/parameters/user_id'
       requestBody:
         $ref: '#/components/requestBodies/project_delete_user'
@@ -1747,6 +1668,15 @@ components:
       description: 'The user ID'
       example: 5
       required: true
+    project_id:
+      name: project_id
+      in: path
+      schema:
+        type: integer
+        minimum: 0
+      description: 'The project ID'
+      required: true
+      example: 1
     filter_id:
       name: filter_id
       in: path
