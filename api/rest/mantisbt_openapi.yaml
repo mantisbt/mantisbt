@@ -25,7 +25,7 @@ paths:
   '/api/rest/filters/{filter_id}':
     get:
       summary: Get a filter
-      operationId: filterGet
+      operationId: FilterGet
       description: ''
       tags:
         - 'Filters'
@@ -41,7 +41,7 @@ paths:
   '/api/rest/filters':
     get:
       summary: Get all filters
-      operationId: filterGetAll
+      operationId: FilterGetAll
       description: ''
       tags:
         - 'Filters'
@@ -55,7 +55,7 @@ paths:
   '/api/rest/config':
     get:
       summary: Get Configuration Option
-      operationId: configGet
+      operationId: ConfigGet
       description: ''
       tags:
         - 'Configs'
@@ -75,12 +75,12 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       summary: Set Configs
-      operationId: configSet
+      operationId: ConfigSet
       description: ''
       tags:
         - 'Configs'
       requestBody:
-        $ref: '#/components/requestBodies/set_configs'
+        $ref: '#/components/requestBodies/ConfigSet'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -89,7 +89,7 @@ paths:
   '/api/rest/users/me':
     get:
       summary: Get My User Info
-      operationId: userGetMe
+      operationId: UserGetMe
       description: ''
       tags:
         - 'Users'
@@ -103,14 +103,14 @@ paths:
   '/api/rest/issues/{issue_id}/files':
     post:
       summary: Add attachments to issue
-      operationId: issueFilesAdd
+      operationId: IssueFilesAdd
       description: ''
       tags:
         - 'Issue Attachments'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
-        $ref: '#/components/requestBodies/add_attachments_to_issue'
+        $ref: '#/components/requestBodies/IssueFilesAdd'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -120,7 +120,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     get:
       summary: Get issue files
-      operationId: issueFilesGet
+      operationId: IssueFilesGet
       description: ''
       tags:
         - 'Issue Attachments'
@@ -136,14 +136,14 @@ paths:
   '/api/rest/issues/{issue_id}/notes':
     post:
       summary: Create an issue note
-      operationId: issueNotesAdd
+      operationId: IssueNotesAdd
       description: ''
       tags:
         - 'Issue Notes'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
-        $ref: '#/components/requestBodies/create_an_issue_note'
+        $ref: '#/components/requestBodies/IssueNotesAdd'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -154,7 +154,7 @@ paths:
   '/api/rest/issues/{issue_id}/notes/{issue_note_id}':
     delete:
       summary: Delete an issue note
-      operationId: issueNotesDelete
+      operationId: IssueNotesDelete
       description: ''
       tags:
         - 'Issue Notes'
@@ -167,7 +167,7 @@ paths:
           description: ''
           required: true
       requestBody:
-        $ref: '#/components/requestBodies/delete_an_issue_note'
+        $ref: '#/components/requestBodies/IssueNotesDelete'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -178,14 +178,14 @@ paths:
   '/api/rest/issues/{issue_id}/relationships':
     post:
       summary: Add an issue relationship
-      operationId: issueRelationshipsAdd
+      operationId: IssueRelationshipsAdd
       description: ''
       tags:
         - 'Issue Relationships'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
-        $ref: '#/components/requestBodies/add_an_issue_relationship'
+        $ref: '#/components/requestBodies/IssueRelationshipsAdd'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -196,14 +196,14 @@ paths:
   '/api/rest/issues/{issue_id}/tags':
     post:
       summary: Attach a tag to issue
-      operationId: issueTagsAdd
+      operationId: IssueTagsAdd
       description: ''
       tags:
         - 'Issue Tags'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
-        $ref: '#/components/requestBodies/attach_a_tag_to_issue'
+        $ref: '#/components/requestBodies/IssueTagsAdd'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -214,7 +214,7 @@ paths:
   '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
     delete:
       summary: Delete an issue relationship
-      operationId: issueRelationshipsDelete
+      operationId: IssueRelationshipsDelete
       description: ''
       tags:
         - 'Issue Relationships'
@@ -236,7 +236,7 @@ paths:
   '/api/rest/issues/{issue_id}/tags/{tag_id}':
     delete:
       summary: Detach a tag from an issue
-      operationId: issueTagsDelete
+      operationId: IssueTagsDelete
       description: ''
       tags:
         - 'Issue Tags'
@@ -258,7 +258,7 @@ paths:
   '/api/rest/issues':
     get:
       summary: Get issues
-      operationId: issueGetAll
+      operationId: IssueGetAll
       description: ''
       tags:
         - 'Issues'
@@ -302,7 +302,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       summary: Create an issue
-      operationId: issueAdd
+      operationId: IssueAdd
       description: |
         When creating an issue, most of the fields other than `summary`, `description` and `category` are typically optional.
         It is also worth noting that when passing references to enumerations like `priority` or object references like `handler`,
@@ -310,7 +310,7 @@ paths:
       tags:
         - 'Issues'
       requestBody:
-        $ref: '#/components/requestBodies/create_an_issue'
+        $ref: '#/components/requestBodies/IssueAdd'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -321,7 +321,7 @@ paths:
   '/api/rest/issues/{issue_id}':
     get:
       summary: Get an issue
-      operationId: issueGet
+      operationId: IssueGet
       description: ''
       tags:
         - 'Issues'
@@ -343,14 +343,14 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       summary: Update an issue
-      operationId: issueUpdate
+      operationId: IssueUpdate
       description: ''
       tags:
         - 'Issues'
       parameters:
         - $ref: '#/components/parameters/issue_id'
       requestBody:
-        $ref: '#/components/requestBodies/update_an_issue'
+        $ref: '#/components/requestBodies/IssueUpdate'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -361,7 +361,7 @@ paths:
   '/api/rest/issues/{issue_id}/files/{file_id}':
     get:
       summary: Get file from issue
-      operationId: issueFileGet
+      operationId: IssueFileGet
       description: ''
       tags:
         - 'Issue Attachments'
@@ -384,7 +384,7 @@ paths:
   '/api/rest/issues/{issue_id}/monitors':
     post:
       summary: Monitor an issue
-      operationId: issueMonitor
+      operationId: IssueMonitor
       description: ''
       tags:
         - 'Issue Monitoring'
@@ -400,7 +400,7 @@ paths:
   '/api/rest/lang':
     get:
       summary: Get multiple localized strings
-      operationId: stringGet
+      operationId: StringGet
       description: ''
       tags:
         - 'Localized Strings'
@@ -422,7 +422,7 @@ paths:
   '/api/rest/pages/issues/view/{issue_id}':
     get:
       summary: Get Issue View Page
-      operationId: issueGetViewPage
+      operationId: IssueGetViewPage
       description: ''
       tags:
         - 'Views'
@@ -438,7 +438,7 @@ paths:
   '/api/rest/users/me/token':
     post:
       summary: Create token for me
-      operationId: tokenCreateForMe
+      operationId: TokenCreateForMe
       description: ''
       tags:
         - 'API Tokens'
@@ -452,7 +452,7 @@ paths:
   '/api/rest/users/{user_id}/token':
     post:
       summary: Create token for user
-      operationId: tokenCreateForUser
+      operationId: TokenCreateForUser
       description: ''
       tags:
         - 'API Tokens'
@@ -468,7 +468,7 @@ paths:
   '/api/rest/users/me/token/{id}':
     delete:
       summary: Delete token for me
-      operationId: tokenDeleteForMe
+      operationId: TokenDeleteForMe
       description: ''
       tags:
         - 'API Tokens'
@@ -480,7 +480,7 @@ paths:
           description: ''
           required: true
       requestBody:
-        $ref: '#/components/requestBodies/delete_token_for_me'
+        $ref: '#/components/requestBodies/TokenDeleteForMe'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -491,7 +491,7 @@ paths:
   '/api/rest/users/{user_id}/token/{id}':
     delete:
       summary: Delete token for user
-      operationId: tokenDeleteForUser
+      operationId: TokenDeleteForUser
       description: ''
       tags:
         - 'API Tokens'
@@ -513,12 +513,12 @@ paths:
   '/api/rest/projects':
     post:
       summary: Create a project
-      operationId: projectAdd
+      operationId: ProjectAdd
       description: ''
       tags:
         - 'Projects'
       requestBody:
-        $ref: '#/components/requestBodies/create_a_project'
+        $ref: '#/components/requestBodies/ProjectAdd'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -528,7 +528,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     get:
       summary: Get all projects
-      operationId: projectGetAll
+      operationId: ProjectGetAll
       description: ''
       tags:
         - 'Projects'
@@ -542,7 +542,7 @@ paths:
   '/api/rest/projects/{project_id}':
     get:
       summary: Get a project
-      operationId: projectGet
+      operationId: ProjectGet
       description: ''
       tags:
         - 'Projects'
@@ -557,14 +557,14 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       summary: Update a project
-      operationId: projectUpdate
+      operationId: ProjectUpdate
       description: ''
       tags:
         - 'Projects'
       parameters:
         - $ref: '#/components/parameters/project_id'
       requestBody:
-        $ref: '#/components/requestBodies/update_a_project'
+        $ref: '#/components/requestBodies/ProjectUpdate'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -575,7 +575,7 @@ paths:
   '/api/rest/projects/{project_id}/versions/{version_id}':
     delete:
       summary: Delete a project version
-      operationId: projectVersionsDelete
+      operationId: ProjectVersionsDelete
       description: ''
       tags:
         - 'Project Versions'
@@ -596,7 +596,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     get:
       summary: Get a Project Version
-      operationId: projectVersionsGet
+      operationId: ProjectVersionsGet
       description: ''
       tags:
         - 'Project Versions'
@@ -618,7 +618,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       summary: Update project version
-      operationId: projectVersionsUpdate
+      operationId: ProjectVersionsUpdate
       description: ''
       tags:
         - 'Project Versions'
@@ -632,7 +632,7 @@ paths:
           required: true
           example: 8
       requestBody:
-        $ref: '#/components/requestBodies/update_project_version'
+        $ref: '#/components/requestBodies/ProjectVersionsUpdate'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -643,7 +643,7 @@ paths:
   '/api/rest/projects/{project_id}/versions':
     get:
       summary: Get Project Versions
-      operationId: projectVersionsGetAll
+      operationId: ProjectVersionsGetAll
       description: ''
       tags:
         - 'Project Versions'
@@ -658,14 +658,14 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       summary: Create a project version
-      operationId: projectVersionsAdd
+      operationId: ProjectVersionsAdd
       description: ''
       tags:
         - 'Project Versions'
       parameters:
         - $ref: '#/components/parameters/project_id'
       requestBody:
-        $ref: '#/components/requestBodies/create_a_project_version'
+        $ref: '#/components/requestBodies/ProjectVersionsAdd'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -676,14 +676,14 @@ paths:
   '/api/rest/projects/{project_id}/subprojects':
     post:
       summary: Add a sub-project
-      operationId: projectSubprojectsAdd
+      operationId: ProjectSubprojectsAdd
       description: ''
       tags:
         - 'Projects'
       parameters:
         - $ref: '#/components/parameters/project_id'
       requestBody:
-        $ref: '#/components/requestBodies/add_a_sub-project'
+        $ref: '#/components/requestBodies/ProjectSubprojectsAdd'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -694,7 +694,7 @@ paths:
   '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
     patch:
       summary: Update a subproject
-      operationId: projectSubprojectsUpdate
+      operationId: ProjectSubprojectsUpdate
       description: ''
       tags:
         - 'Projects'
@@ -708,7 +708,7 @@ paths:
           required: true
           example: '2'
       requestBody:
-        $ref: '#/components/requestBodies/update_a_subproject'
+        $ref: '#/components/requestBodies/ProjectSubprojectsUpdate'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -719,7 +719,7 @@ paths:
   '/api/rest/projects/{project_id}/handlers':
     get:
       summary: Get Project Users that can be assigned issues
-      operationId: projectUsersCanHandleIssues
+      operationId: ProjectUsersCanHandleIssues
       description: ''
       tags:
         - 'Project Users'
@@ -735,7 +735,7 @@ paths:
   '/api/rest/projects/{project_id}/users':
     get:
       summary: Get Project Users
-      operationId: projectUsersGetAll
+      operationId: ProjectUsersGetAll
       description: ''
       tags:
         - 'Project Users'
@@ -768,14 +768,14 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       summary: Project Add-Update User
-      operationId: projectUsersUpsert
+      operationId: ProjectUsersUpsert
       description: ''
       tags:
         - 'Project Users'
       parameters:
         - $ref: '#/components/parameters/project_id'
       requestBody:
-        $ref: '#/components/requestBodies/project_add-update_user'
+        $ref: '#/components/requestBodies/ProjectUsersUpsert'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -786,7 +786,7 @@ paths:
   '/api/rest/projects/{project_id}/users/{user_id}':
     delete:
       summary: Project Delete User
-      operationId: projectUsersDelete
+      operationId: ProjectUsersDelete
       description: ''
       tags:
         - 'Project Users'
@@ -794,7 +794,7 @@ paths:
         - $ref: '#/components/parameters/project_id'
         - $ref: '#/components/parameters/user_id'
       requestBody:
-        $ref: '#/components/requestBodies/project_delete_user'
+        $ref: '#/components/requestBodies/ProjectUsersDelete'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -805,12 +805,12 @@ paths:
   '/api/rest/users':
     post:
       summary: Create a user
-      operationId: userAdd
+      operationId: UserAdd
       description: ''
       tags:
         - 'Users'
       requestBody:
-        $ref: '#/components/requestBodies/create_a_user'
+        $ref: '#/components/requestBodies/UserAdd'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -821,7 +821,7 @@ paths:
   '/api/rest/users/{id}':
     get:
       summary: Get User By Id
-      operationId: userGet
+      operationId: UserGet
       description: ''
       tags:
         - 'Users'
@@ -850,7 +850,7 @@ paths:
   '/api/rest/users/username/{username}':
     get:
       summary: Get User By Username
-      operationId: userGetByUsername
+      operationId: UserGetByUsername
       description: ''
       tags:
         - 'Users'
@@ -878,7 +878,7 @@ paths:
   '/api/rest/users/{user_id}/reset':
     put:
       summary: Reset user password
-      operationId: userResetPassword
+      operationId: UserResetPassword
       description: ''
       tags:
         - 'Users'
@@ -894,14 +894,14 @@ paths:
   '/api/rest/users/{user_id}':
     patch:
       summary: Update User
-      operationId: userUpdate
+      operationId: UserUpdate
       description: ''
       tags:
         - 'Users'
       parameters:
         - $ref: '#/components/parameters/user_id'
       requestBody:
-        $ref: '#/components/requestBodies/update_user'
+        $ref: '#/components/requestBodies/UserUpdate'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -1022,9 +1022,7 @@ components:
     User:
       type: object
       properties:
-        username:
-          type: string
-        password:
+        name:
           type: string
         real_name:
           type: string
@@ -1043,6 +1041,13 @@ components:
           properties:
             id:
               type: number
+    UserWithPassword:
+      allOf:
+        - $ref: '#/components/schemas/User'
+      type: object
+      properties:
+        password:
+          type: string
     Issue:
       type: object
       properties:
@@ -1126,7 +1131,7 @@ components:
               type: string
             content:
               type: string
-    set_configs:
+    ConfigSet:
       type: object
       properties:
         project:
@@ -1143,33 +1148,9 @@ components:
                 type: string
               value:
                 type: string
-    add_attachments_to_issue:
+    IssueFilesAdd:
       type: object
       properties:
-        files:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              content:
-                type: string
-    create_an_issue_note_with_attachment:
-      type: object
-      properties:
-        text:
-          type: string
-        view_state:
-          type: object
-          properties:
-            name:
-              type: string
-        time_tracking:
-          type: object
-          properties:
-            duration:
-              type: string
         files:
           type: array
           items:
@@ -1194,7 +1175,7 @@ components:
           properties:
             duration:
               type: string
-    create_an_issue_note:
+    IssueNotesAdd:
       type: object
       properties:
         text:
@@ -1204,7 +1185,7 @@ components:
           properties:
             name:
               type: string
-    delete_an_issue_note:
+    IssueNotesDelete:
       type: object
       properties:
         text:
@@ -1219,7 +1200,7 @@ components:
           properties:
             name:
               type: string
-    add_an_issue_relationship:
+    IssueRelationshipsAdd:
       type: object
       properties:
         issue:
@@ -1232,7 +1213,7 @@ components:
           properties:
             name:
               type: string
-    attach_a_tag_to_issue:
+    IssueTagsAdd:
       type: object
       properties:
         tags:
@@ -1242,63 +1223,9 @@ components:
             properties:
               id:
                 type: number
-    create_an_issue_with_attachments:
-      type: object
-      properties:
-        summary:
-          type: string
-        description:
-          type: string
-        project:
-          type: object
-          properties:
-            id:
-              type: number
-            name:
-              type: string
-        category:
-          type: object
-          properties:
-            id:
-              type: number
-            name:
-              type: string
-        custom_fields:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: object
-                properties:
-                  id:
-                    type: number
-                  name:
-                    type: string
-              value:
-                type: string
-        files:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              content:
-                type: string
-    create_an_issue:
+    IssueAdd:
       $ref: '#/components/schemas/Issue'
-    monitor_an_issue_-for_specified_users-:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-    update_an_issue:
+    IssueUpdate:
       type: object
       properties:
         summary:
@@ -1353,12 +1280,12 @@ components:
                     type: string
                   label:
                     type: string
-    delete_token_for_me:
+    TokenDeleteForMe:
       type: object
       properties:
         x:
           type: number
-    create_a_project:
+    ProjectAdd:
       type: object
       properties:
         name:
@@ -1379,7 +1306,7 @@ components:
               type: string
         enabled:
           type: boolean
-    update_a_project:
+    ProjectUpdate:
       type: object
       properties:
         id:
@@ -1390,7 +1317,7 @@ components:
           type: boolean
         inherit_global:
           type: number
-    create_a_project_version:
+    ProjectVersionsAdd:
       type: object
       properties:
         name:
@@ -1403,12 +1330,12 @@ components:
           type: boolean
         timestamp:
           type: string
-    update_project_version:
+    ProjectVersionsUpdate:
       type: object
       properties:
         obsolete:
           type: boolean
-    add_a_sub-project:
+    ProjectSubprojectsAdd:
       type: object
       properties:
         project:
@@ -1418,7 +1345,7 @@ components:
               type: string
         inherit_parent:
           type: boolean
-    update_a_subproject:
+    ProjectSubprojectsUpdate:
       type: object
       properties:
         project:
@@ -1428,7 +1355,7 @@ components:
               type: string
         inherit_parent:
           type: boolean
-    project_add-update_user:
+    ProjectUsersUpsert:
       type: object
       properties:
         user:
@@ -1441,7 +1368,7 @@ components:
           properties:
             name:
               type: string
-    project_delete_user:
+    ProjectUsersDelete:
       type: object
       properties:
         user:
@@ -1449,64 +1376,19 @@ components:
           properties:
             name:
               type: string
-    create_a_user:
-      type: object
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-        real_name:
-          type: string
-        email:
-          type: string
-        access_level:
-          type: object
-          properties:
-            name:
-              type: string
-        enabled:
-          type: boolean
-        protected:
-          type: boolean
-    update_user:
-      type: object
-      properties:
-        name:
-          type: string
-        real_name:
-          type: string
-        email:
-          type: string
-        access_level:
-          type: object
-          properties:
-            name:
-              type: string
-        enabled:
-          type: boolean
-        protected:
-          type: boolean
   requestBodies:
-    set_configs:
+    ConfigSet:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/set_configs'
+            $ref: '#/components/schemas/ConfigSet'
       description: ''
       required: true
-    add_attachments_to_issue:
+    IssueFilesAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/add_attachments_to_issue'
-      description: ''
-      required: true
-    create_an_issue_note_with_attachment:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/create_an_issue_note_with_attachment'
+            $ref: '#/components/schemas/IssueFilesAdd'
       description: ''
       required: true
     create_an_issue_note_with_time_tracking:
@@ -1516,137 +1398,123 @@ components:
             $ref: '#/components/schemas/create_an_issue_note_with_time_tracking'
       description: ''
       required: true
-    create_an_issue_note:
+    IssueNotesAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/create_an_issue_note'
+            $ref: '#/components/schemas/IssueNotesAdd'
       description: ''
       required: true
-    delete_an_issue_note:
+    IssueNotesDelete:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/delete_an_issue_note'
+            $ref: '#/components/schemas/IssueNotesDelete'
       description: ''
       required: true
-    add_an_issue_relationship:
+    IssueRelationshipsAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/add_an_issue_relationship'
+            $ref: '#/components/schemas/IssueRelationshipsAdd'
       description: ''
       required: true
-    attach_a_tag_to_issue:
+    IssueTagsAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/attach_a_tag_to_issue'
+            $ref: '#/components/schemas/IssueTagsAdd'
       description: ''
       required: true
-    create_an_issue_with_attachments:
+    IssueAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/create_an_issue_with_attachments'
+            $ref: '#/components/schemas/IssueAdd'
       description: ''
       required: true
-    create_an_issue:
+    IssueUpdate:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/create_an_issue'
+            $ref: '#/components/schemas/IssueUpdate'
       description: ''
       required: true
-    monitor_an_issue_-for_specified_users-:
+    TokenDeleteForMe:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/monitor_an_issue_-for_specified_users-'
+            $ref: '#/components/schemas/TokenDeleteForMe'
       description: ''
       required: true
-    update_an_issue:
+    ProjectAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/update_an_issue'
+            $ref: '#/components/schemas/ProjectAdd'
       description: ''
       required: true
-    delete_token_for_me:
+    ProjectUpdate:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/delete_token_for_me'
+            $ref: '#/components/schemas/ProjectUpdate'
       description: ''
       required: true
-    create_a_project:
+    ProjectVersionsAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/create_a_project'
+            $ref: '#/components/schemas/ProjectVersionsAdd'
       description: ''
       required: true
-    update_a_project:
+    ProjectVersionsUpdate:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/update_a_project'
+            $ref: '#/components/schemas/ProjectVersionsUpdate'
       description: ''
       required: true
-    create_a_project_version:
+    ProjectSubprojectsAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/create_a_project_version'
+            $ref: '#/components/schemas/ProjectSubprojectsAdd'
       description: ''
       required: true
-    update_project_version:
+    ProjectSubprojectsUpdate:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/update_project_version'
+            $ref: '#/components/schemas/ProjectSubprojectsUpdate'
       description: ''
       required: true
-    add_a_sub-project:
+    ProjectUsersUpsert:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/add_a_sub-project'
+            $ref: '#/components/schemas/ProjectUsersUpsert'
       description: ''
       required: true
-    update_a_subproject:
+    ProjectUsersDelete:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/update_a_subproject'
+            $ref: '#/components/schemas/ProjectUsersDelete'
       description: ''
       required: true
-    project_add-update_user:
+    UserAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/project_add-update_user'
+            $ref: '#/components/schemas/UserWithPassword'
       description: ''
       required: true
-    project_delete_user:
+    UserUpdate:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/project_delete_user'
-      description: ''
-      required: true
-    create_a_user:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/create_a_user'
-      description: ''
-      required: true
-    update_user:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/update_user'
+            $ref: '#/components/schemas/User'
       description: ''
       required: true
   parameters:
