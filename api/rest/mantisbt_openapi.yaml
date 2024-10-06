@@ -1,3 +1,6 @@
+# MantisBT REST API definition
+# Copyright 2024 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+
 openapi: 3.0.0
 info:
   title: Mantis Bug Tracker REST API
