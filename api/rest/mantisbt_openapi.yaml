@@ -1026,6 +1026,197 @@ components:
       in: header
       name: Authorization
   schemas:
+    ObjectRef:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: Some Name
+    ProjectRef:
+      allOf:
+        - $ref: '#/components/schemas/ObjectRef'
+      properties:
+        name:
+          example: MantisBT
+    CategoryRef:
+      allOf:
+        - $ref: '#/components/schemas/ObjectRef'
+      properties:
+        name:
+          example: Authn
+    UserRef:
+      allOf:
+        - $ref: '#/components/schemas/ObjectRef'
+      properties:
+        name:
+          example: John Doe
+        email:
+          type: string
+          example: john@example.com
+    Enum:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+          example: some-name
+        label:
+          type: string
+          example: Localized Name
+    ViewStateEnum:
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+      properties:
+        id:
+          example: 10
+        name:
+          example: public
+        label:
+          example: Public
+    PriorityEnum:
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+      properties:
+        id:
+          example: 40
+        name:
+          example: high
+        label:
+          example: High
+    SeverityEnum:
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+      properties:
+        id:
+          example: 60
+        name:
+          example: major
+        label:
+          example: Major
+    ReproducibilityEnum:
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+      properties:
+        id:
+          example: 10
+        name:
+          example: always
+        label:
+          example: Always
+    AccessLevel:
+      allOf:
+        - $ref: '#/components/schemas/Enum'  
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        real_name:
+          type: string
+        email:
+          type: string
+        access_level:
+          $ref: '#/components/schemas/AccessLevel'
+        enabled:
+          type: boolean
+        protected:
+          type: boolean
+    UserWithId:
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            id:
+              type: number
+    Issue:
+      type: object
+      properties:
+        summary:
+          type: string
+          example: 'This is a summary'
+        description:
+          type: string
+          example: |
+            This is a description.  
+            It can be multiline.
+        steps_to_reproduce:
+          type: string
+          example: |
+            This is steps to reproduce.  
+            It can be multiline.
+        additional_information:
+          type: string
+          example: |
+            This is additional information.  
+            It can be multiline.
+        project:
+          $ref: '#/components/schemas/ProjectRef'
+        category:
+          $ref: '#/components/schemas/CategoryRef'
+        handler:
+          $ref: '#/components/schemas/UserRef'
+        view_state:
+          $ref: '#/components/schemas/ViewStateEnum'
+        priority:
+          $ref: '#/components/schemas/PriorityEnum'
+        severity:
+          $ref: '#/components/schemas/SeverityEnum'
+        reproducibility:
+          $ref: '#/components/schemas/ReproducibilityEnum'
+        sticky:
+          type: boolean
+          description: |
+            sticky issues show at the top of the View Issues page.
+        files:
+          type: array
+          items:
+            type: object
+          properties:
+            name:
+              type: string
+            content:
+              type: string
+        custom_fields:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+              value:
+                type: string
+    IssueNote:
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          $ref: '#/components/schemas/ViewStateEnum'
+        time_tracking:
+          type: object
+          properties:
+            duration:
+              type: string
+        files:
+          type: array
+          items:
+            type: object
+          properties:
+            name:
+              type: string
+            content:
+              type: string
     set_configs:
       type: object
       properties:
@@ -1037,68 +1228,24 @@ components:
         configs:
           type: array
           items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                option:
-                  type: string
-                value:
-                  type: string
-            '1':
-              type: object
-              properties:
-                option:
-                  type: string
-                value:
-                  type: string
-            '2':
-              type: object
-              properties:
-                option:
-                  type: string
-                value:
-                  type: array
-                  items:
-                    type: string
-                  properties:
-                    '0':
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        name:
-                          type: string
-                    '1':
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        name:
-                          type: string
-                    '2':
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        name:
-                          type: string
+            type: object
+            properties:
+              option:
+                type: string
+              value:
+                type: string
     add_attachments_to_issue:
       type: object
       properties:
         files:
           type: array
           items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                name:
-                  type: string
-                content:
-                  type: string
+            type: object
+            properties:
+              name:
+                type: string
+              content:
+                type: string
     create_an_issue_note_with_attachment:
       type: object
       properties:
@@ -1117,15 +1264,12 @@ components:
         files:
           type: array
           items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                name:
-                  type: string
-                content:
-                  type: string
+            type: object
+            properties:
+              name:
+                type: string
+              content:
+                type: string
     create_an_issue_note_with_time_tracking:
       type: object
       properties:
@@ -1185,25 +1329,10 @@ components:
         tags:
           type: array
           items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                id:
-                  type: number
-            '1':
-              type: object
-              properties:
-                name:
-                  type: string
-            '2':
-              type: object
-              properties:
-                id:
-                  type: number
-                name:
-                  type: string
+            type: object
+            properties:
+              id:
+                type: number
     create_an_issue_with_attachments:
       type: object
       properties:
@@ -1228,136 +1357,38 @@ components:
         custom_fields:
           type: array
           items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                field:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    name:
-                      type: string
-                value:
-                  type: string
+            type: object
+            properties:
+              field:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+              value:
+                type: string
         files:
           type: array
           items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                name:
-                  type: string
-                content:
-                  type: string
-            '1':
-              type: object
-              properties:
-                name:
-                  type: string
-                content:
-                  type: string
+            type: object
+            properties:
+              name:
+                type: string
+              content:
+                type: string
     create_an_issue:
-      type: object
-      properties:
-        summary:
-          type: string
-        description:
-          type: string
-        additional_information:
-          type: string
-        project:
-          type: object
-          properties:
-            id:
-              type: number
-            name:
-              type: string
-        category:
-          type: object
-          properties:
-            id:
-              type: number
-            name:
-              type: string
-        handler:
-          type: object
-          properties:
-            name:
-              type: string
-        view_state:
-          type: object
-          properties:
-            id:
-              type: number
-            name:
-              type: string
-        priority:
-          type: object
-          properties:
-            name:
-              type: string
-        severity:
-          type: object
-          properties:
-            name:
-              type: string
-        reproducibility:
-          type: object
-          properties:
-            name:
-              type: string
-        sticky:
-          type: boolean
-        custom_fields:
-          type: array
-          items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                field:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    name:
-                      type: string
-                value:
-                  type: string
-        tags:
-          type: array
-          items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                name:
-                  type: string
+      $ref: '#/components/schemas/Issue'
     monitor_an_issue_-for_specified_users-:
       type: object
       properties:
         users:
           type: array
           items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                name:
-                  type: string
-            '1':
-              type: object
-              properties:
-                name_or_realname:
-                  type: string
+            type: object
+            properties:
+              name:
+                type: string
     update_an_issue:
       type: object
       properties:
@@ -1381,80 +1412,38 @@ components:
         custom_fields:
           type: array
           items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                field:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                value:
-                  type: string
+            type: object
+            properties:
+              field:
+                type: object
+                properties:
+                  name:
+                    type: string
+              value:
+                type: string
         notes:
           type: array
           items:
-            type: string
-          properties:
-            '0':
-              type: object
-              properties:
-                id:
-                  type: number
-                reporter:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                text:
-                  type: string
-                view_state:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    name:
-                      type: string
-                    label:
-                      type: string
-                type:
-                  type: string
-            '1':
-              type: object
-              properties:
-                reporter:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                text:
-                  type: string
-                view_state:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                type:
-                  type: string
-            '2':
-              type: object
-              properties:
-                reporter:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                text:
-                  type: string
-                view_state:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                type:
-                  type: string
+            type: object
+            properties:
+              id:
+                type: number
+              reporter:
+                type: object
+                properties:
+                  name:
+                    type: string
+              text:
+                type: string
+              view_state:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  label:
+                    type: string
     delete_token_for_me:
       type: object
       properties:
