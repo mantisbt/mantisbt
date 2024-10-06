@@ -5,6 +5,16 @@ openapi: 3.0.0
 info:
   title: Mantis Bug Tracker REST API
   version: 2.27.0
+  description: |-
+    REST API calls have to be authenticated by creating an API token for the user doing the calls,
+    and then passing the API token in the 'Authorization' header.  However, for anonymous access,
+    the API key and header are not needed.
+
+    There has been significant improvements and feature additions for REST API in each of the
+    recent releases.  Hence, it is highly recommended to use latest release when leveraging the
+    REST APIs.
+
+    REST API is enabled by default since MantisBT 2.8.0 release.
   license:
     name: GPL-2.0-or-later
 paths:
