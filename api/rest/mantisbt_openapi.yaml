@@ -6,7 +6,7 @@ paths:
   '/api/rest/filters/{filter_id}':
     get:
       summary: Get a filter
-      operationId: Get a filter
+      operationId: filterGet
       description: ''
       tags:
         - 'Filters'
@@ -24,7 +24,7 @@ paths:
   '/api/rest/filters':
     get:
       summary: Get all filters
-      operationId: Get all filters
+      operationId: filterGetAll
       description: ''
       tags:
         - 'Filters'
@@ -34,7 +34,7 @@ paths:
   '/api/rest/config?option={option}':
     get:
       summary: Get Configuration Option
-      operationId: Get Configuration Option
+      operationId: configGet
       description: ''
       tags:
         - 'Configs'
@@ -51,7 +51,7 @@ paths:
   '/api/rest/config?option[]=crypto_master_salt&option[]=csv_separator&option[]=status_colors&option[]=does_not_exist&option[]=status_enum_string':
     get:
       summary: Get Multiple Configuration Options
-      operationId: Get Multiple Configuration Options
+      operationId: configGetMultiple
       description: ''
       tags:
         - 'Configs'
@@ -97,7 +97,7 @@ paths:
   '/api/rest/config':
     patch:
       summary: Set Configs
-      operationId: Set Configs
+      operationId: configSet
       description: ''
       tags:
         - 'Configs'
@@ -109,7 +109,7 @@ paths:
   '/api/rest/users/me':
     get:
       summary: Get My User Info
-      operationId: Get My User Info
+      operationId: userGetMe
       description: ''
       tags:
         - 'Users'
@@ -119,7 +119,7 @@ paths:
   '/api/rest/issues/{issue_id}/files':
     post:
       summary: Add attachments to issue
-      operationId: Add attachments to issue
+      operationId: issueFilesAdd
       description: ''
       tags:
         - 'Issue Attachments'
@@ -137,7 +137,7 @@ paths:
         $ref: '#/components/requestBodies/add_attachments_to_issue'
     get:
       summary: Get issue files
-      operationId: Get issue files
+      operationId: issueFilesGet
       description: ''
       tags:
         - 'Issue Attachments'
@@ -154,7 +154,7 @@ paths:
   '/api/rest/issues/{issue_id}/notes':
     post:
       summary: Create an issue note
-      operationId: Create an issue note
+      operationId: issueNotesAdd
       description: ''
       tags:
         - 'Issue Notes'
@@ -173,7 +173,7 @@ paths:
   '/api/rest/issues/{issue_id}/notes/{issue_note_id}':
     delete:
       summary: Delete an issue note
-      operationId: Delete an issue note
+      operationId: issueNotesDelete
       description: ''
       tags:
         - 'Issue Notes'
@@ -198,7 +198,7 @@ paths:
   '/api/rest/issues/{issue_id}/relationships/':
     post:
       summary: Add an issue relationship
-      operationId: Add an issue relationship
+      operationId: issueRelationshipsAdd
       description: ''
       tags:
         - 'Issue Relationships'
@@ -217,7 +217,7 @@ paths:
   '/api/rest/issues/{issue_id}/tags':
     post:
       summary: Attach a tag to issue
-      operationId: Attach a tag to issue
+      operationId: issueTagsAdd
       description: ''
       tags:
         - 'Issue Tags'
@@ -236,7 +236,7 @@ paths:
   '/api/rest/issues':
     post:
       summary: Create an issue
-      operationId: Create an issue
+      operationId: issueAdd
       description: ''
       tags:
         - 'Issues'
@@ -248,7 +248,7 @@ paths:
   '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
     delete:
       summary: Delete an issue relationship
-      operationId: Delete an issue relationship
+      operationId: issueRelationshipsDelete
       description: ''
       tags:
         - 'Issue Relationships'
@@ -271,7 +271,7 @@ paths:
   '/api/rest/issues/{issue_id}/tags/{tag_id}':
     delete:
       summary: Detach a tag from an issue
-      operationId: Detach a tag from an issue
+      operationId: issueTagsDelete
       description: ''
       tags:
         - 'Issue Tags'
@@ -293,8 +293,8 @@ paths:
           required: true
   '/api/rest/issues?page_size={pageSize}&page={page}&select={select}':
     get:
-      summary: Get all issues -specified fields-
-      operationId: Get all issues -specified fields-
+      summary: Get all issues
+      operationId: issueGetAll
       description: ''
       tags:
         - 'Issues'
@@ -322,46 +322,10 @@ paths:
           description: ''
           required: false
           example: id,summary,description
-  '/api/rest/issues?page_size={pageSize}&page={page}':
-    get:
-      summary: Get all issues
-      operationId: Get all issues
-      description: ''
-      tags:
-        - 'Issues'
-      responses:
-        '200':
-          description: 'Success'
-      parameters:
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-        - name: page
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: false
-          example: 1
-  '/api/rest/issues/':
-    post:
-      summary: Create an issue -minimal-
-      operationId: Create an issue -minimal-
-      description: ''
-      tags:
-        - 'Issues'
-      responses:
-        '200':
-          description: 'Success'
-      requestBody:
-        $ref: '#/components/requestBodies/create_an_issue_-minimal-'
   '/api/rest/issues/{issue_id}?select={select}':
     get:
-      summary: Get an issue -specific fields-
-      operationId: Get an issue -specific fields-
+      summary: Get an issue
+      operationId: issueGet
       description: ''
       tags:
         - 'Issues'
@@ -374,7 +338,7 @@ paths:
           schema:
             type: string
           description: ''
-          required: true
+          required: false
           example: id,summary,description
         - name: issue_id
           in: query
@@ -382,27 +346,9 @@ paths:
             type: integer
           description: ''
           required: true
-  '/api/rest/issues/{issue_id}':
-    get:
-      summary: Get an issue
-      operationId: Get an issue
-      description: ''
-      tags:
-        - 'Issues'
-      responses:
-        '200':
-          description: 'Success'
-      parameters:
-        - name: issue_id
-          in: query
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 123
     patch:
       summary: Update an issue
-      operationId: Update an issue
+      operationId: issueUpdate
       description: ''
       tags:
         - 'Issues'
@@ -421,8 +367,8 @@ paths:
         $ref: '#/components/requestBodies/update_an_issue'
   '/api/rest/issues/{issue_id}/files/{file_id}':
     get:
-      summary: Get issue file -single-
-      operationId: Get issue file -single-
+      summary: Get file from issue
+      operationId: issueFileGet
       description: ''
       tags:
         - 'Issue Attachments'
@@ -447,7 +393,7 @@ paths:
   '/api/rest/issues?filter_id=assigned&page_size={pageSize}&page={page}':
     get:
       summary: Get issues assigned to me
-      operationId: Get issues assigned to me
+      operationId: issueGetAssignedToMe
       description: ''
       tags:
         - 'Filters'
@@ -472,7 +418,7 @@ paths:
   '/api/rest/issues?project_id={projectId}&page_size={pageSize}&page={page}':
     get:
       summary: Get issues for a project
-      operationId: Get issues for a project
+      operationId: issueGetForProject
       description: ''
       tags:
         - 'Filters'
@@ -504,7 +450,7 @@ paths:
   '/api/rest/issues?filter_id={filter_id}&page_size={pageSize}&page={page}&project_id={project_id}':
     get:
       summary: Get issues matching filter
-      operationId: Get issues matching filter
+      operationId: issueGetForFilter
       description: ''
       tags:
         - 'Filters'
@@ -543,7 +489,7 @@ paths:
   '/api/rest/issues?filter_id=monitored&page_size={pageSize}&page={page}':
     get:
       summary: Get issues monitored by me
-      operationId: Get issues monitored by me
+      operationId: issueGetMonitoredByMe
       description: ''
       tags:
         - 'Filters'
@@ -568,7 +514,7 @@ paths:
   '/api/rest/issues?filter_id=reported&page_size={pageSize}&page={page}':
     get:
       summary: Get issues reported by me
-      operationId: Get issues reported by me
+      operationId: issueGetReportedByMe
       description: ''
       tags:
         - 'Filters'
@@ -593,7 +539,7 @@ paths:
   '/api/rest/issues?filter_id=unassigned&page_size={pageSize}&page={page}':
     get:
       summary: Get unassigned issues
-      operationId: Get unassigned issues
+      operationId: issueGetUnassigned
       description: ''
       tags:
         - 'Filters'
@@ -618,7 +564,7 @@ paths:
   '/api/rest/issues/{issue_id}/monitors':
     post:
       summary: Monitor an issue
-      operationId: Monitor an issue
+      operationId: issueMonitor
       description: ''
       tags:
         - 'Issue Monitoring'
@@ -636,7 +582,7 @@ paths:
   '/api/rest/lang?string=all_projects':
     get:
       summary: Get a localized string
-      operationId: Get a localized string
+      operationId: stringGet
       description: ''
       tags:
         - 'Localized Strings'
@@ -654,7 +600,7 @@ paths:
   '/api/rest/lang?string[]=all_projects&string[]=does_not_exist&string[]=status&string[]=move_bugs&string[]=status_enum_string':
     get:
       summary: Get multiple localized strings
-      operationId: Get multiple localized strings
+      operationId: stringGetMultiple
       description: ''
       tags:
         - 'Localized Strings'
@@ -700,7 +646,7 @@ paths:
   '/api/rest/pages/issues/view/{issue_id}':
     get:
       summary: Get Issue View Page
-      operationId: Get Issue View Page
+      operationId: issueGetViewPage
       description: ''
       tags:
         - 'Views'
@@ -718,7 +664,7 @@ paths:
   '/api/rest/users/me/token':
     post:
       summary: Create token for me
-      operationId: Create token for me
+      operationId: tokenCreateForMe
       description: ''
       tags:
         - 'API Tokens'
@@ -728,7 +674,7 @@ paths:
   '/api/rest/users/{user_id}/token':
     post:
       summary: Create token for user
-      operationId: Create token for user
+      operationId: tokenCreateForUser
       description: ''
       tags:
         - 'API Tokens'
@@ -746,7 +692,7 @@ paths:
   '/api/rest/users/me/token/{id}':
     delete:
       summary: Delete token for me
-      operationId: Delete token for me
+      operationId: tokenDeleteForMe
       description: ''
       tags:
         - 'API Tokens'
@@ -765,7 +711,7 @@ paths:
   '/api/rest/users/{user_id}/token/{id}':
     delete:
       summary: Delete token for user
-      operationId: Delete token for user
+      operationId: tokenDeleteForUser
       description: ''
       tags:
         - 'API Tokens'
@@ -789,7 +735,7 @@ paths:
   '/api/rest/projects/':
     post:
       summary: Create a project
-      operationId: Create a project
+      operationId: projectAdd
       description: ''
       tags:
         - 'Projects'
@@ -800,7 +746,7 @@ paths:
         $ref: '#/components/requestBodies/create_a_project'
     get:
       summary: Get all projects
-      operationId: Get all projects
+      operationId: projectGetAll
       description: ''
       tags:
         - 'Projects'
@@ -810,7 +756,7 @@ paths:
   '/api/rest/projects/{project_id}':
     get:
       summary: Get a project
-      operationId: Get a project
+      operationId: projectGet
       description: ''
       tags:
         - 'Projects'
@@ -827,7 +773,7 @@ paths:
           example: 1
     patch:
       summary: Update a project
-      operationId: Update a project
+      operationId: projectUpdate
       description: ''
       tags:
         - 'Projects'
@@ -847,7 +793,7 @@ paths:
   '/api/rest/projects/{project_id}/versions/':
     post:
       summary: Create a project version
-      operationId: Create a project version
+      operationId: projectVersionsAdd
       description: ''
       tags:
         - 'Project Versions'
@@ -867,7 +813,7 @@ paths:
   '/api/rest/projects/{project_id}/versions/{version_id}':
     delete:
       summary: Delete a project version
-      operationId: Delete a project version
+      operationId: projectVersionsDelete
       description: ''
       tags:
         - 'Project Versions'
@@ -890,7 +836,7 @@ paths:
           required: true
     get:
       summary: Get a Project Version
-      operationId: Get a Project Version
+      operationId: projectVersionsGet
       description: ''
       tags:
         - 'Project Versions'
@@ -914,7 +860,7 @@ paths:
           example: 18
     patch:
       summary: Update project version
-      operationId: Update project version
+      operationId: projectVersionsUpdate
       description: ''
       tags:
         - 'Project Versions'
@@ -941,7 +887,7 @@ paths:
   '/api/rest/projects/{project_id}/versions':
     get:
       summary: Get Project Versions
-      operationId: Get Project Versions
+      operationId: projectVersionsGetAll
       description: ''
       tags:
         - 'Project Versions'
@@ -959,7 +905,7 @@ paths:
   '/api/rest/projects/{project_id}/subprojects':
     post:
       summary: Add a sub-project
-      operationId: Add a sub-project
+      operationId: projectSubprojectsAdd
       description: ''
       tags:
         - 'Projects'
@@ -979,7 +925,7 @@ paths:
   '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
     patch:
       summary: Update a subproject
-      operationId: Update a subproject
+      operationId: projectSubprojectsUpdate
       description: ''
       tags:
         - 'Projects'
@@ -1006,7 +952,7 @@ paths:
   '/api/rest/projects/{project_id}/handlers':
     get:
       summary: Get Project Users that can be assigned issues
-      operationId: Get Project Users that can be assigned issues
+      operationId: projectUsersCanHandleIssues
       description: ''
       tags:
         - 'Project Users'
@@ -1024,7 +970,7 @@ paths:
   '/api/rest/projects/{project_id}/users':
     get:
       summary: Get Project Users
-      operationId: Get Project Users
+      operationId: projectUsersGetAll
       description: ''
       tags:
         - 'Project Users'
@@ -1060,7 +1006,7 @@ paths:
   '/api/rest/projects/{project_id}/users/':
     put:
       summary: Project Add-Update User
-      operationId: Project Add-Update User
+      operationId: projectUsersUpsert
       description: ''
       tags:
         - 'Project Users'
@@ -1081,7 +1027,7 @@ paths:
   '/api/rest/projects/{project_id}/users/{user_id}':
     delete:
       summary: Project Delete User
-      operationId: Project Delete User
+      operationId: projectUsersDelete
       description: ''
       tags:
         - 'Project Users'
@@ -1110,7 +1056,7 @@ paths:
   '/api/rest/users/':
     post:
       summary: Create a user
-      operationId: Create a user
+      operationId: userAdd
       description: ''
       tags:
         - 'Users'
@@ -1121,8 +1067,8 @@ paths:
         $ref: '#/components/requestBodies/create_a_user'
   '/api/rest/users/{id}?select={select}':
     get:
-      summary: Get User By Id -select-
-      operationId: Get User By Id -select-
+      summary: Get User By Id
+      operationId: userGet
       description: ''
       tags:
         - 'Users'
@@ -1135,7 +1081,7 @@ paths:
           schema:
             type: string
           description: ''
-          required: true
+          required: false
           example: id,name,real_name,email,access_level
         - name: id
           in: query
@@ -1144,29 +1090,10 @@ paths:
           description: ''
           required: true
           example: 1
-  '/api/rest/users/{id}':
-    get:
-      summary: Get User By Id
-      operationId: Get User By Id
-      description: ''
-      tags:
-        - 'Users'
-      responses:
-        '200':
-          description: 'Success'
-      parameters:
-        - name: id
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-          description: ''
-          required: true
-          example: 1
   '/api/rest/users/username/{username}':
     get:
       summary: Get User By Username
-      operationId: Get User By Username
+      operationId: userGetByUsername
       description: ''
       tags:
         - 'Users'
@@ -1190,7 +1117,7 @@ paths:
   '/api/rest/users/{user_id}/reset':
     put:
       summary: Reset user password
-      operationId: Reset user password
+      operationId: userResetPassword
       description: ''
       tags:
         - 'Users'
@@ -1209,7 +1136,7 @@ paths:
   '/api/rest/users/{user_id}':
     patch:
       summary: Update User
-      operationId: Update User
+      operationId: userUpdate
       description: ''
       tags:
         - 'Users'
@@ -1549,23 +1476,6 @@ components:
               properties:
                 name:
                   type: string
-    create_an_issue_-minimal-:
-      type: object
-      properties:
-        summary:
-          type: string
-        description:
-          type: string
-        category:
-          type: object
-          properties:
-            name:
-              type: string
-        project:
-          type: object
-          properties:
-            id:
-              type: number
     monitor_an_issue_-for_specified_users-:
       type: object
       properties:
@@ -1584,19 +1494,6 @@ components:
               properties:
                 name_or_realname:
                   type: string
-    update_an_issue_-minimal-:
-      type: object
-      properties:
-        handler:
-          type: object
-          properties:
-            name:
-              type: string
-        status:
-          type: object
-          properties:
-            name:
-              type: string
     update_an_issue:
       type: object
       properties:
@@ -1790,26 +1687,6 @@ components:
           properties:
             name:
               type: string
-    create_a_user_-minimal-:
-      type: object
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-        real_name:
-          type: string
-        email:
-          type: string
-        access_level:
-          type: object
-          properties:
-            name:
-              type: string
-        enabled:
-          type: boolean
-        protected:
-          type: boolean
     create_a_user:
       type: object
       properties:
@@ -1919,25 +1796,11 @@ components:
             $ref: '#/components/schemas/create_an_issue'
       description: ''
       required: true
-    create_an_issue_-minimal-:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/create_an_issue_-minimal-'
-      description: ''
-      required: true
     monitor_an_issue_-for_specified_users-:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/monitor_an_issue_-for_specified_users-'
-      description: ''
-      required: true
-    update_an_issue_-minimal-:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/update_an_issue_-minimal-'
       description: ''
       required: true
     update_an_issue:
@@ -2008,13 +1871,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/project_delete_user'
-      description: ''
-      required: true
-    create_a_user_-minimal-:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/create_a_user_-minimal-'
       description: ''
       required: true
     create_a_user:
