@@ -133,13 +133,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/add_attachments_to_issue'
     get:
@@ -175,13 +168,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/create_an_issue_note'
   '/api/rest/issues/{issue_id}/notes/{issue_note_id}':
@@ -207,13 +193,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/delete_an_issue_note'
   '/api/rest/issues/{issue_id}/relationships/':
@@ -233,13 +212,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/add_an_issue_relationship'
   '/api/rest/issues/{issue_id}/tags':
@@ -259,13 +231,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/attach_a_tag_to_issue'
   '/api/rest/issues':
@@ -278,14 +243,6 @@ paths:
       responses:
         '200':
           description: 'Success'
-      parameters:
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/create_an_issue'
   '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
@@ -311,13 +268,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
   '/api/rest/issues/{issue_id}/tags/{tag_id}':
     delete:
       summary: Detach a tag from an issue
@@ -341,13 +291,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
   '/api/rest/issues?page_size={pageSize}&page={page}&select={select}':
     get:
       summary: Get all issues -specified fields-
@@ -413,14 +356,6 @@ paths:
       responses:
         '200':
           description: 'Success'
-      parameters:
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/create_an_issue_-minimal-'
   '/api/rest/issues/{issue_id}?select={select}':
@@ -482,13 +417,6 @@ paths:
           description: ''
           required: true
           example: 123
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/update_an_issue'
   '/api/rest/issues/{issue_id}/files/{file_id}':
@@ -705,13 +633,6 @@ paths:
           description: ''
           required: true
           example: 123
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
   '/api/rest/lang?string=all_projects':
     get:
       summary: Get a localized string
@@ -875,14 +796,6 @@ paths:
       responses:
         '200':
           description: 'Success'
-      parameters:
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/create_a_project'
     get:
@@ -929,13 +842,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/update_a_project'
   '/api/rest/projects/{project_id}/versions/':
@@ -956,13 +862,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/create_a_project_version'
   '/api/rest/projects/{project_id}/versions/{version_id}':
@@ -989,13 +888,6 @@ paths:
             type: integer
           description: ''
           required: true
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
     get:
       summary: Get a Project Version
       operationId: Get a Project Version
@@ -1020,13 +912,6 @@ paths:
           description: ''
           required: true
           example: 18
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: false
-          example: application/json
     patch:
       summary: Update project version
       operationId: Update project version
@@ -1051,13 +936,6 @@ paths:
           description: ''
           required: true
           example: 8
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/update_project_version'
   '/api/rest/projects/{project_id}/versions':
@@ -1078,13 +956,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
   '/api/rest/projects/{project_id}/subprojects':
     post:
       summary: Add a sub-project
@@ -1103,13 +974,6 @@ paths:
           description: ''
           required: true
           example: 1
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/add_a_sub-project'
   '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
@@ -1137,13 +1001,6 @@ paths:
           description: ''
           required: true
           example: '2'
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/update_a_subproject'
   '/api/rest/projects/{project_id}/handlers':
@@ -1260,14 +1117,6 @@ paths:
       responses:
         '200':
           description: 'Success'
-      parameters:
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/create_a_user'
   '/api/rest/users/{id}?select={select}':
@@ -1375,13 +1224,6 @@ paths:
             minimum: 1
           description: ''
           required: true
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          description: ''
-          required: true
-          example: application/json
       requestBody:
         $ref: '#/components/requestBodies/update_user'
 servers:
