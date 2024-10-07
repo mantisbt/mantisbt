@@ -2272,6 +2272,9 @@ function email_shutdown_function() {
 	log_event( LOG_EMAIL_VERBOSE, $t_msg );
 
 	if( $g_email_shutdown_processing ) {
+		if( function_exists( 'fastcgi_finish_request' ) ) {
+			fastcgi_finish_request();
+		}
 		email_send_all();
 	}
 }

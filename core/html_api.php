@@ -545,10 +545,6 @@ function html_body_end() {
  */
 function html_end() {
 	echo '</html>', "\n";
-
-	if( function_exists( 'fastcgi_finish_request' ) ) {
-		fastcgi_finish_request();
-	}
 }
 
 /**
