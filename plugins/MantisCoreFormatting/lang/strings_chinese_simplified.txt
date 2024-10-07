@@ -40,6 +40,7 @@
  *
  * @author Hydra
  * @author Liuxinyu970226
+ * @author 沈澄心
  */
 
 $s_plugin_format_title = 'MantisBT格式化';
@@ -54,3 +55,15 @@ $s_plugin_format_process_markdown = 'Markdown处理';
 $s_plugin_format_process_markdown_info = '通过Markdown支持、文本格式化语法设计样式，这样它可以转换为HTML。';
 $s_plugin_format_enabled = '开';
 $s_plugin_format_disabled = '关';
+$s_plugin_format_syntax_highlighting = '代码块的语法高亮';
+$s_plugin_format_syntax_highlighting_theme = '代码块主题';
+$s_plugin_format_syntax_highlighting_plugins = '代码块选项';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = '复制到剪贴板';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = '复制';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ 已复制';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = '按Ctrl+C复制';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = '显示语言';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = '显示代码块包含的语言。';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = '行号';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = '显示行号。';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = '显示空格';

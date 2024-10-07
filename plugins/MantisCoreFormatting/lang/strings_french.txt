@@ -41,6 +41,7 @@
  * @author Dolmen
  * @author Gomoko
  * @author IAlex
+ * @author McDutchie
  * @author Méthodes Bulebe Hangi
  * @author Urhixidur
  * @author Verdy p
