@@ -59,7 +59,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 <?php
 	printf(
 		plugin_lang_get( 'importing_in_project' ),
-		string_display( project_get_field( $t_project_id, 'name' ) )
+		string_attribute( project_get_field( $t_project_id, 'name' ) )
 	);
 ?>
 </h4>
