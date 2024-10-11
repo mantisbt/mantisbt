@@ -40,7 +40,7 @@ if( $t_interval_days <= 14 ) {
 $f_page_number = 1;
 
 $t_per_page = -1;
-$t_bug_count = null;
+$t_bug_count = 0;
 $t_page_count = 0;
 
 $t_filter = current_user_get_bug_filter();
@@ -200,7 +200,7 @@ echo '</tr>';
 for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 	echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
 	foreach ( $t_category as $t_cat ) {
-		echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
+		echo '<td>' . ( $t_data[$t_ptr][$t_cat] ?? 0 ) . '</td>';
 	}
 	echo '</tr>';
 }
