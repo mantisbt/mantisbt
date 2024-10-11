@@ -15,158 +15,168 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2002, 2024  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  */
 
 /**
- * Class for actions dealing with date periods
+ * Class for actions dealing with date periods.
  *
- * This class encapsulates all actions dealing with time intervals. It handles data
- * storage, and retrieval, as well as formatting and access.
+ * This class encapsulates all actions dealing with time intervals. It handles
+ * data storage and retrieval, as well as formatting and access.
  *
- * @copyright Logical Outcome Ltd. 2005 - 2007
  * @author Glenn Henshaw <thraxisp@logicaloutcome.ca>
- * @link http://www.mantisbt.org
  * @package MantisBT
- * @subpackage classes
  */
 class Period {
 	/**
-	 * start date
-	 * @var string
+	 * @var DateTimeImmutable Start Date.
 	 */
-	private $start = '';
+	private DateTimeImmutable $start;
 
 	/**
-	 * end date
-	 * @var string
+	 * @var DateTimeImmutable End Date.
 	 */
-	private $end = '';
+	private DateTimeImmutable $end;
 
 	/**
-	 * Constructor
+	 * @var string Date format
+	 */
+	private string $format;
+
+	/**
+	 * Constructor.
+	 *
+	 * Set start and end date to Today.
 	 */
 	function __construct() {
-		$this->start = '';
+		$this->start = $this->bod();
+		$this->end = $this->eod();
 
-		# default to today
-		$this->end = '';
-
-		# default to today
+		$this->format = config_get( 'normal_date_format' );
 	}
 
 	/**
-	 * set dates for a week
+	 * Set dates for a week.
 	 *
-	 * @param string  $p_when  Date string to expand to a week (Sun to Sat).
-	 * @param integer $p_weeks Number of weeks.
+	 * Weeks start on Monday since PHP 7.0.8, see Changelog section at
+	 * {@see https://www.php.net/manual/en/datetime.formats.php}.
+	 *
+	 * @param DateTimeImmutable $p_when  Reference date.
+	 * @param int               $p_weeks Number of weeks.
+	 *
 	 * @return void
 	 */
-	function a_week( $p_when, $p_weeks = 1 ) {
-		list( $t_year, $t_month, $t_day ) = explode( '-', $p_when );
-		$t_now = getdate( mktime( 0, 0, 0, $t_month, $t_day, $t_year ) );
-		$this->end = strftime( '%Y-%m-%d 23:59:59', mktime( 0, 0, 0, $t_month, $t_day - $t_now['wday'] + ( $p_weeks * 7 ) - 1, $t_year ) );
-		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, $t_month, $t_day - $t_now['wday'], $t_year ) );
+	function a_week( DateTimeImmutable $p_when, int $p_weeks = 1 ) {
+		$this->start = $p_when->modify('monday this week');
+		$t_week = $p_weeks == 1 ? 'this' : $p_weeks - 1;
+		$this->end = $this->eod( $p_when->modify("sunday $t_week week") );
 	}
 
 	/**
-	 * set dates for this week
+	 * Set dates for this week.
+	 *
 	 * @return void
 	 */
 	function this_week() {
-		$this->a_week( date( 'Y-m-d' ) );
+		$this->a_week( new DateTimeImmutable() );
 	}
 
 	/**
-	 * set dates for last week
+	 * Set dates for last week.
 	 *
-	 * @param integer $p_weeks Number of weeks.
+	 * @param int $p_weeks Number of weeks.
+	 *
 	 * @return void
 	 */
-	function last_week( $p_weeks = 1 ) {
-		$this->a_week( date( 'Y-m-d', strtotime( '-' . $p_weeks . ' week' ) ), $p_weeks );
+	function last_week( int $p_weeks = 1 ) {
+		$t_date = new DateTimeImmutable();
+		$this->a_week( $t_date->modify("-1 week"), $p_weeks );
 	}
 
 	/**
-	 * set dates for this week to date
+	 * Set dates for this week to date.
 	 *
 	 * @return void
 	 */
 	function week_to_date() {
 		$this->this_week();
-		$this->end = date( 'Y-m-d' ) . ' 23:59:59';
+		$this->end = $this->eod();
 	}
 
 	/**
-	 * set dates for a month
+	 * Set dates for a month.
 	 *
-	 * @param string $p_when Date string to expand to a month.
+	 * @param DateTimeImmutable $p_when Reference date.
+	 *
 	 * @return void
 	 */
-	function a_month( $p_when ) {
-		list( $t_year, $t_month, $t_day ) = explode( '-', $p_when );
-		$this->end = strftime( '%Y-%m-%d 23:59:59', mktime( 0, 0, 0, $t_month + 1, 0, $t_year ) );
-		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, $t_month, 1, $t_year ) );
+	function a_month( DateTimeImmutable $p_when ) {
+		$this->start = $this->bod( $p_when->modify('first day of this month') );
+		$this->end = $this->eod( $p_when->modify('last day of this month') );
 	}
 
 	/**
- 	 * set dates for this month
+ 	 * Set dates for this month.
  	 *
 	 * @return void
 	 */
 	function this_month() {
-		$this->a_month( date( 'Y-m-d' ) );
+		$this->a_month( new DateTimeImmutable() );
 	}
 
 	/**
-	 * set dates for last month
+	 * Set dates for last month.
 	 *
 	 * @return void
 	 */
 	function last_month() {
-		$this->a_month( date( 'Y-m-d', strtotime( '-1 month' ) ) );
+		$t_date = new DateTimeImmutable();
+		$this->a_month( $t_date->modify( "-1 month" ) );
 	}
 
 	/**
-	 * set dates for this month to date
+	 * Set dates for this month to date
 	 *
 	 * @return void
 	 */
 	function month_to_date() {
-		$this->end = date( 'Y-m-d' ) . ' 23:59:59';
-		list( $t_year, $t_month, $t_day ) = explode( '-', $this->end );
-		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, $t_month, 1, $t_year ) );
+		$this->this_month();
+		$this->end = $this->eod();
 	}
 
 	/**
-	 * set dates for a quarter
+	 * Set dates for a quarter.
 	 *
-	 * @param string $p_when Date string to expand to a quarter.
+	 * @param DateTimeImmutable $p_when Reference date string.
+	 *
 	 * @return void
 	 */
-	function a_quarter( $p_when ) {
-		list( $t_year, $t_month, $t_day ) = explode( '-', $p_when );
-		$t_month = ( (int)(( $t_month - 1 ) / 3 ) * 3 ) + 1;
-		$this->end = strftime( '%Y-%m-%d 23:59:59', mktime( 0, 0, 0, $t_month + 3, 0, $t_year ) );
-		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, $t_month, 1, $t_year ) );
+	function a_quarter( DateTimeImmutable $p_when ) {
+		# Get first month of quarter
+		$t_month = intdiv( $p_when->format('m') - 1, 3 ) * 3 + 1;
+		$t_year = $p_when->format('Y');
+
+		$this->start = $this->bod()->setDate( $t_year, $t_month, 1);
+		$this->end = $this->eod( $this->start->modify( 'last day of second month' ) );
 	}
 
 	/**
-	 * set dates for this quarter
+	 * Set dates for this quarter.
 	 *
 	 * @return void
 	 */
 	function this_quarter() {
-		$this->a_quarter( date( 'Y-m-d' ) );
+		$this->a_quarter( new DateTimeImmutable() );
 	}
 
 	/**
-	 * set dates for last month
+	 * Set dates for last quarter.
 	 *
 	 * @return void
 	 */
 	function last_quarter() {
-		$this->a_quarter( date( 'Y-m-d', strtotime( '-3 months' ) ) );
+		$t_date = new DateTimeImmutable();
+		$this->a_quarter( $t_date->modify( '-3 months' ) );
 	}
 
 	/**
@@ -175,104 +185,104 @@ class Period {
 	 * @return void
 	 */
 	function quarter_to_date() {
-		$this->end = date( 'Y-m-d' ) . ' 23:59:59';
-		list( $t_year, $t_month, $t_day ) = explode( '-', $this->end );
-		$t_month = ( (int)(( $t_month - 1 ) / 3 ) * 3 ) + 1;
-		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, $t_month, 1, $t_year ) );
+		$this->this_quarter();
+		$this->end = $this->eod();
 	}
 
 	/**
-	 * set dates for a year
+	 * Set dates for a year.
 	 *
-	 * @param string $p_when Date string to expand to a year.
+	 * @param DateTimeImmutable $p_when Reference date.
+	 *
 	 * @return void
 	 */
-	function a_year( $p_when ) {
-		list( $t_year, $t_month, $t_day ) = explode( '-', $p_when );
-		$this->end = strftime( '%Y-%m-%d 23:59:59', mktime( 0, 0, 0, 12, 31, $t_year ) );
-		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, 1, 1, $t_year ) );
+	function a_year( DateTimeImmutable $p_when ) {
+		$this->start = $this->bod( $p_when->modify('first day of january') );
+		$this->end = $this->eod( $p_when->modify('last day of december') );
 	}
 
 	/**
-	 * set dates for this year
+	 * Set dates for this year.
 	 *
 	 * @return void
 	 */
 	function this_year() {
-		$this->a_year( date( 'Y-m-d' ) );
+		$this->a_year( new DateTimeImmutable() );
 	}
 
 	/**
-	 * set dates for current year, ending today
+	 * Set dates for current year, ending today.
 	 *
 	 * @return void
 	 */
 	function year_to_date() {
-		$this->end = date( 'Y-m-d' ) . ' 23:59:59';
-		list( $t_year, $t_month, $t_day ) = explode( '-', $this->end );
-		$this->start = strftime( '%Y-%m-%d 00:00:00', mktime( 0, 0, 0, 1, 1, $t_year ) );
+		$this->this_year();
+		$this->end = $this->eod();
 	}
 
 	/**
-	 * set dates for last year
+	 * Set dates for last year.
 	 *
 	 * @return void
 	 */
 	function last_year() {
-		$this->a_year( date( 'Y-m-d', strtotime( '-1 year' ) ) );
+		$t_date = new DateTimeImmutable();
+		$this->a_year( $t_date->modify( "-1 year" ) );
 	}
 
 	/**
-	 * get start date in unix timestamp format
+	 * Get start date in Unix timestamp format.
 	 *
-	 * @return integer
+	 * @return int
 	 */
-	function get_start_timestamp() {
-		return strtotime( $this->start );
+	function get_start_timestamp(): int {
+		return $this->start->getTimestamp();
 	}
 
 	/**
-	 * get end date in unix timestamp format
+	 * Get end date in Unix timestamp format.
 	 *
-	 * @return integer
+	 * @return int
 	 */
-	function get_end_timestamp() {
-		return strtotime( $this->end );
+	function get_end_timestamp(): int {
+		return $this->end->getTimestamp();
 	}
 
 	/**
-	 * get formatted start date
-	 *
-	 * @return string
-	 */
-	function get_start_formatted() {
-		return( $this->start == '' ? '' : strftime( '%Y-%m-%d', $this->get_start_timestamp() ) );
-	}
-
-	/**
-	 * get formatted end date
+	 * Get formatted start date.
 	 *
 	 * @return string
 	 */
-	function get_end_formatted() {
-		return( $this->end == '' ? '' : strftime( '%Y-%m-%d', $this->get_end_timestamp() ) );
+	function get_start_formatted(): string {
+		return $this->start->format( $this->format );
 	}
 
 	/**
-	 * get number of days in interval
-     * @return integer
-	 */
-	function get_elapsed_days() {
-		return( $this->get_end_timestamp() - $this->get_start_timestamp() ) / ( 24 * 60 * 60 );
-	}
-
-	/**
-	 * print a period selector
+	 * Get formatted end date.
 	 *
-	 * @param string $p_control_name Value representing the name of the html control on the web page.
-     * @return string
+	 * @return string
 	 */
-	function period_selector( $p_control_name ) {
+	function get_end_formatted(): string {
+		return $this->end->format( $this->format );
+	}
+
+	/**
+	 * Get number of days in interval
+	 * @return int
+	 */
+	function get_elapsed_days(): int {
+		return $this->start->diff( $this->end )->days;
+	}
+
+	/**
+	 * Returns HTML markup for a period selector.
+	 *
+	 * @param string $p_control_name Name of the html control.
+	 *
+	 * @return string
+	 */
+	function period_selector( string $p_control_name ): string {
+		# @TODO use constants
 		$t_periods = array(
 			0 => plugin_lang_get( 'period_none' ),
 			7 => plugin_lang_get( 'period_this_week' ),
@@ -321,10 +331,13 @@ class Period {
 	 * @param string $p_control_name Value representing the name of the html control on the web page.
 	 * @param string $p_start_field  Name representing the name of the starting field on the date selector i.e. start_date.
 	 * @param string $p_end_field    Name representing the name of the ending field on the date selector i.e. end_date.
+	 *
 	 * @return void
+	 * @TODO consider moving to constructor
 	 */
-	function set_period_from_selector( $p_control_name, $p_start_field = 'start_date', $p_end_field = 'end_date' ) {
+	function set_period_from_selector( string $p_control_name, string $p_start_field = 'start_date', string $p_end_field = 'end_date' ) {
 		$t_default = gpc_get_int( $p_control_name, 0 );
+		# @TODO use constants
 		switch( $t_default ) {
 			case 1:
 				$this->month_to_date();
@@ -354,21 +367,52 @@ class Period {
 				$this->last_week( 2 );
 				break;
 			case 10:
-				$t_today = date( 'Y-m-d' );
+				$t_date_format = config_get( 'normal_date_format' );
+
 				if( $p_start_field != '' ) {
-					$this->start = gpc_get_string( $p_start_field, '' ) . ' 00:00:00';
-					if( $this->start == '' ) {
-						$this->start = $t_today . ' 00:00:00';
+					$t_start_date = gpc_get_string( $p_start_field, '' );
+					if( $t_start_date ) {
+						$t_start_date = DateTimeImmutable::createFromFormat( $t_date_format, $t_start_date );
+						$this->start = $this->bod( $t_start_date ?: null );
 					}
 				}
 				if( $p_end_field != '' ) {
-					$this->end = gpc_get_string( $p_end_field, '' ) . ' 23:59:59';
-					if( $this->end == '' ) {
-						$this->end = $t_today . ' 23:59:59';
+					$t_end_field = gpc_get_string( $p_end_field, '' );
+					if( $t_end_field ) {
+						$t_end_field = DateTimeImmutable::createFromFormat( $t_date_format, $t_end_field );
+						$this->end = $this->eod( $t_end_field ?: null );
 					}
 				}
 				break;
-			default:
 		}
 	}
+
+	/**
+	 * Sets the time to beginning of day (00:00:00).
+	 *
+	 * @param DateTimeImmutable|null $p_date
+	 *
+	 * @return DateTimeImmutable
+	 */
+	private function bod( ?DateTimeImmutable $p_date = null ): DateTimeImmutable {
+		if( $p_date === null ) {
+			$p_date = new DateTimeImmutable();
+		}
+		return $p_date->setTime( 0, 0 );
+	}
+
+	/**
+	 * Sets the time to end of day (23:59:59).
+	 *
+	 * @param DateTimeImmutable|null $p_date
+	 *
+	 * @return DateTimeImmutable
+	 */
+	private function eod( ?DateTimeImmutable $p_date = null): DateTimeImmutable {
+		if( $p_date === null ) {
+			$p_date = new DateTimeImmutable();
+		}
+		return $p_date->setTime( 23, 59, 59 );
+	}
+
 }
