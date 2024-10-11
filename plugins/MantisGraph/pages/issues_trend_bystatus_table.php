@@ -39,7 +39,7 @@ if( $t_interval_days <= 14 ) {
 $f_page_number = 1;
 
 $t_per_page = -1;
-$t_bug_count = null;
+$t_bug_count = 0;
 $t_page_count = 0;
 
 $t_filter = current_user_get_bug_filter();
@@ -58,7 +58,7 @@ $t_ptr = 0;
 $t_end = $t_interval->get_end_timestamp();
 $t_start = $t_interval->get_start_timestamp();
 
-if( $t_end == false || $t_start == false ) {
+if( !$t_end || !$t_start ) {
 	return;
 }
 # grab all status levels
@@ -77,7 +77,7 @@ foreach ( $t_rows as $t_row ) {
 	} else {
 		$t_data[$t_ptr][$t_row->status] = 1;
 		$t_view_status[$t_row->status] =
-			isset($t_status_arr[$t_row->status]) ? $t_status_arr[$t_row->status] : '@'.$t_row->status.'@';
+			$t_status_arr[$t_row->status] ?? '@' . $t_row->status . '@';
 	}
 	$t_bug[] = $t_row->id;
 }
@@ -105,14 +105,14 @@ for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 				} else {
 					$t_data[$t_ptr][$t_row['new_value']] = 0;
 					$t_view_status[$t_row['new_value']] =
-						isset($t_status_arr[$t_row['new_value']]) ? $t_status_arr[$t_row['new_value']] : '@'.$t_row['new_value'].'@';
+						$t_status_arr[$t_row['new_value']] ?? '@' . $t_row['new_value'] . '@';
 				}
 				if( isset( $t_data[$t_ptr][$t_row['old_value']] ) ) {
 					$t_data[$t_ptr][$t_row['old_value']] ++;
 				} else {
 					$t_data[$t_ptr][$t_row['old_value']] = 1;
 					$t_view_status[$t_row['old_value']] =
-						isset($t_status_arr[$t_row['old_value']]) ? $t_status_arr[$t_row['old_value']] : '@'.$t_row['old_value'].'@';
+						$t_status_arr[$t_row['old_value']] ?? '@' . $t_row['old_value'] . '@';
 				}
 				break;
 			case 1: # new bug
@@ -123,7 +123,7 @@ for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 				} else {
 					$t_data[$t_ptr][$t_default_bug_status] = 0;
 					$t_view_status[$t_default_bug_status] =
-						isset( $t_status_arr[$t_default_bug_status] ) ? $t_status_arr[$t_default_bug_status] : '@' . $t_default_bug_status . '@';
+						$t_status_arr[$t_default_bug_status] ?? '@' . $t_default_bug_status . '@';
 				}
 				break;
 		}
@@ -140,8 +140,8 @@ for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 }
 
 ksort( $t_view_status );
-# @todo - these should probably be separate strings, but in the summary page context,
-# the string is used as the title for all columns
+# @todo These should probably be separate strings, but in the summary page context,
+#       the string is used as the title for all columns
 $t_label_string = lang_get( 'orct' ); # use the (open/resolved/closed/total) label
 $t_label_strings = explode( '/', mb_substr( $t_label_string, 1, strlen( $t_label_string ) - 2 ) );
 
@@ -164,7 +164,7 @@ $t_labels = array();
 $i = 0;
 
 foreach ( $t_view_status as $t_status => $t_label ) {
-	$t_labels[++$i] = isset( $t_status_labels[$t_status] ) ? $t_status_labels[$t_status] : lang_get_defaulted( $t_label );
+	$t_labels[++$i] = $t_status_labels[$t_status] ?? lang_get_defaulted( $t_label );
 }
 
 $t_label_count = $i;
