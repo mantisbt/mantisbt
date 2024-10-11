@@ -140,7 +140,10 @@ $(function() {
      */
     period_selector
         .on('change', function() {
-            $('#dates input.datetimepicker').prop('disabled', $(this).val() !== '10');
+            // Enable inputs and show icon for arbitrary dates, otherwise disable & hide
+            let enabled = $(this).val() === "10";
+            $('#dates input.datetimepicker').prop('disabled', !enabled);
+            $('#dates i.datetimepicker').toggle(enabled);
         })
         .trigger('change');
 });
