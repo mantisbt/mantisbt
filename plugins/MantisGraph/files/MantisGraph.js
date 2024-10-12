@@ -4,12 +4,14 @@
 
 $(function() {
     // Default color scheme
-    Chart.defaults.global.plugins.colorschemes.scheme = 'tableau.Classic20';
+    Chart.defaults.plugins.colorschemes.scheme = 'tableau.Classic20';
 
+    // Bar charts
     $("canvas[id*='barchart']").each( function() {
-        const type = this.id.substring(0, 8) === 'barchart' ? 'bar' : 'horizontalBar';
+        // Is it a vertical or horizontal bar chart ?
+        const vertical = this.id.substring(0, 8) === 'barchart';
         new Chart( $(this), {
-            type: type,
+            type: 'bar',
             data: {
                 labels: $(this).data('labels'),
                 datasets: [{
@@ -20,23 +22,25 @@ $(function() {
             },
             options: {
                 scales: {
-                    xAxes: [{
-                        position: type === 'bar' ? 'bottom' : 'top',
+                    x: {
+                        position: vertical ? 'bottom' : 'top',
                         ticks: {
                             autoSkip: false,
                             maxRotation: 90
                         }
-                    }],
-                    yAxes: [{
+                    },
+                    y: {
                         ticks: {
                             beginAtZero: true
                         }
-                    }]
-                }
+                    },
+                },
+                indexAxis: vertical ? 'x' : 'y',
             }
         });
     });
 
+    // Pie charts
     $("canvas[id^='piechart']").each( function() {
         new Chart( $(this), {
             type: 'pie',
@@ -53,6 +57,7 @@ $(function() {
         });
     });
 
+    // Issue trends
     $("canvas[id^='linebydate']").each( function() {
         const ctx = $(this).get(0).getContext("2d");
         new Chart(ctx, {
@@ -76,11 +81,11 @@ $(function() {
             },
             options: {
                 scales: {
-                    yAxes: [{
+                    y: {
                         ticks: {
                             beginAtZero: true
                         }
-                    }]
+                    }
                 },
                 plugins: {
                     colorschemes: {
