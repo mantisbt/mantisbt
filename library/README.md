@@ -22,7 +22,7 @@ The version and status of each is summarized below:
 | moment.js                   | 2.29.4  | unpatched   |
 | bootstrap-datetimepicker    | 4.17.47 | unpatched   |
 | dropzone.js                 | 5.5.0   | unpatched   |
-| chart.js                    | 2.8.0   | unpatched   |
+| chart.js                    | 3.9.1   | unpatched   |
 | chartjs-plugin-colorschemes | 0.4.0   | unpatched   |
 | typeahead.js                | 1.3.4   | unpatched   |
 | list.js                     | 2.3.1   | patched [3] |
