@@ -49,14 +49,17 @@ $(function() {
                 datasets: [{
                     label: '# of issues',
                     data:  $(this).data('values'),
-                    backgroundColor: $(this).data('colors'),
-                    borderColor: $(this).data('colors'),
                     borderWidth: 1
                 }]
             },
             options: {
                 // Graphs have a default size of 500*400
                 aspectRatio: 1.25,
+                plugins: {
+                    colorschemes: {
+                        scheme: $(this).data('colors'),
+                    },
+                },
             }
         });
     });
