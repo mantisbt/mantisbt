@@ -36,12 +36,18 @@ class MantisGraphPlugin extends MantisPlugin  {
 	const CHARTJS_HASH = 'sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA';
 
 	/**
-	 * ChartJS colorschemes plugin
+	 * ChartJS colorschemes plugin.
+	 *
+	 * The plugin's official repository seems unmaintained for several years,
+	 * and the latest 0.4.0 release is not compatible with Chart.js v3, so we
+	 * are using a community-maintained fork.
+	 *
 	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/ Home page
-	 * @see https://www.jsdelivr.com/package/npm/chartjs-plugin-colorschemes CDN
+	 * @see https://www.jsdelivr.com/package/npm/hw-chartjs-plugin-colorschemes CDN
+	 * @see https://github.com/MaximBelov/chartjs-plugin-colorschemes/ Fork
 	 */
-	const CHARTJS_COLORSCHEMES_VERSION = '0.4.0';
-	const CHARTJS_COLORSCHEMES_HASH = 'sha256-Ctym065YsaugUvysT5nHayKynbiDGVpgNBqUePRAL+0=';
+	const CHARTJS_COLORSCHEMES_VERSION = '0.5.4';
+	const CHARTJS_COLORSCHEMES_HASH = 'sha256-q5bFi6wZG3skQ5zHhhCum9lVVw+iejIM0SqVgzkhVME=';
 
 	/**
 	 * CDN for Chart.JS libraries
