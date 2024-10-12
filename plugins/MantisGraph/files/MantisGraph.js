@@ -74,15 +74,18 @@ $(function() {
                 datasets: [
                     {
                         label: $(this).data('opened-label'),
-                        data: $(this).data('opened-values')
+                        data: $(this).data('opened-values'),
+                        fill: +1, // Fill since Resolved dataset
                     },
                     {
                         label: $(this).data('resolved-label'),
-                        data: $(this).data('resolved-values')
+                        data: $(this).data('resolved-values'),
+                        fill: 'origin',
                     },
                     {
                         label: $(this).data('still-open-label'),
-                        data: $(this).data('still-open-values')
+                        data: $(this).data('still-open-values'),
+                        fill: false,
                     }
                 ]
             },
