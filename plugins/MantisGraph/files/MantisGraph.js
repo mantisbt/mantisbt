@@ -98,6 +98,10 @@ $(function() {
                     }
                 },
                 plugins: {
+                    tooltip: {
+                        mode: 'index',
+                        position: 'nearest',
+                    },
                     colorschemes: {
                         scheme: 'brewer.Set1-3',
                         reverse: true,
