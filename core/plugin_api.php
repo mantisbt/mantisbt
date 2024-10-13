@@ -451,8 +451,13 @@ function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null 
 
 /**
  * Hook a plugin's callback function to an event.
+ *
+ * Plugin hooks are expected to be methods of the plugin's base class. Regular
+ * functions will not be called.
+ *
  * @param string $p_name     Event name.
  * @param string $p_callback Callback function.
+ *
  * @return void
  */
 function plugin_event_hook( $p_name, $p_callback ) {
@@ -889,9 +894,17 @@ function plugin_include( $p_basename, $p_child = null ) {
 }
 
 /**
- * Allows a plugin page to require a plugin-specific API
+ * Allows a plugin page to require a plugin-specific API.
+ *
+ * This function's purpose is to include a plugin-specific API (e.g. helper
+ * functions) without having to worry about the actual plugin path.
+ *
+ * NOTE: it is not intended to, and in fact will not register variables in the
+ * global namespace.
+ *
  * @param string $p_file     The API to be included.
  * @param string $p_basename Plugin's basename (defaults to current plugin).
+ *
  * @return void
  */
 function plugin_require_api( $p_file, $p_basename = null ) {
