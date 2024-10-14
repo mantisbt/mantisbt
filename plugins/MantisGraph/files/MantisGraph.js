@@ -98,6 +98,11 @@ $(function() {
                         }
                     }
                 },
+                datasets: {
+                    line: {
+                        tension: 0.2,
+                    }
+                },
                 plugins: {
                     tooltip: {
                         mode: 'index',
