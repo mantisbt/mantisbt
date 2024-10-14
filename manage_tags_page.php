@@ -58,14 +58,21 @@ $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
 $f_filter = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_tag_prefix' ) ) );
 $f_page_number = gpc_get_int( 'page_number', 1 );
 
+const TAGS_ALL = 'ALL';
+const TAGS_UNUSED = 'UNUSED';
+
 # Start Index Menu
 $t_prefix_array = array_merge(
-	array( 'ALL' ),
 	range( 'A', 'Z' ),
-	range( '0', '9' )
+	range( '0', '9' ), # With PHP < 8.3, this produces int[], not string[]
+);
+$t_prefix_array = array_merge(
+	[ TAGS_ALL => lang_get( 'filter_all' ) ],
+	array_combine( $t_prefix_array, $t_prefix_array ),
+	[ TAGS_UNUSED => lang_get( 'filter_unused' ) ]
 );
 
-if( $f_filter === 'ALL' ) {
+if( $f_filter === TAGS_ALL || $f_filter === TAGS_UNUSED ) {
 	$t_name_filter = '';
 } else {
 	$t_name_filter = $f_filter;
@@ -76,7 +83,7 @@ $t_per_page = 20;
 $t_offset = (( $f_page_number - 1 ) * $t_per_page );
 
 # Determine number of tags in tag table
-$t_total_tag_count = tag_count( $t_name_filter );
+$t_total_tag_count = tag_count( $t_name_filter, $f_filter == TAGS_UNUSED );
 
 # Number of pages from result
 $t_page_count = ceil( $t_total_tag_count / $t_per_page );
@@ -96,7 +103,11 @@ if( $f_page_number < 1 ) {
 }
 
 # Retrieve Tags from table
-$t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset ) ;
+if( $f_filter == TAGS_UNUSED ) {
+	$t_result = tag_get_unused( $t_name_filter, $t_per_page, $t_offset );
+} else {
+	$t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset );
+}
 
 layout_page_header( lang_get( 'manage_tags_link' ) );
 layout_page_begin( 'manage_overview_page.php' );
@@ -110,11 +121,11 @@ print_manage_menu( 'manage_tags_page.php' );
 		<div class="btn-toolbar inline">
 		<div class="btn-group">
 	<?php
-	foreach ( $t_prefix_array as $t_prefix ) {
-		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'filter_all' ) : $t_prefix );
+	foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 		$t_active = (string)$t_prefix == (string)$f_filter ? 'active' : '';
 		echo '<a class="btn btn-xs btn-white btn-primary ' . $t_active .
-		'" href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>' ."\n";
+			'" href="manage_tags_page.php?filter=' . $t_prefix .'">'
+			. $t_caption . '</a>' ."\n";
 	} ?>
 		</div>
 	</div>
