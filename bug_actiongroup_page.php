@@ -183,6 +183,7 @@ switch( $f_action ) {
 		$t_question_title 		= lang_get( 'move_bugs_conf_msg' );
 		$t_button_title 		= lang_get( 'move_group_bugs_button' );
 		$t_form					= 'project_id';
+		$t_bugnote				= true;
 		break;
 	case 'COPY' :
 		$t_question_title 		= lang_get( 'copy_bugs_conf_msg' );
