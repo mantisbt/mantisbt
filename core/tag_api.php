@@ -440,11 +440,42 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
 }
 
 /**
- * Counts all available tags
- * @param integer $p_name_filter A string to match the beginning of the tag name.
- * @return integer
+ * Returns all unused tags (i.e. not linked to any Issue).
+ *
+ * @param int $p_name_filter A string to match the beginning of the tag name.
+ * @param int $p_count       The number of tags to return.
+ * @param int $p_offset      The offset of the result.
+ *
+ * @return ADORecordSet|bool Tags sorted by name, or false if the query failed.
  */
-function tag_count( $p_name_filter ) {
+function tag_get_unused( $p_name_filter, $p_count, $p_offset ) {
+	$t_where = '';
+	$t_where_params = array();
+
+	if( !is_blank( $p_name_filter ) ) {
+		$t_where = ' AND ' . db_helper_like( 'name' );
+		$t_where_params[] = $p_name_filter . '%';
+	}
+
+	$t_query = <<< SQL
+		SELECT t.* FROM {tag} t
+		LEFT JOIN {bug_tag} bt ON bt.tag_id = t.id
+		WHERE bt.tag_id IS NULL $t_where 
+		ORDER BY name
+		SQL;
+
+	return db_query( $t_query, $t_where_params, $p_count, $p_offset );
+}
+
+/**
+ * Counts all available tags.
+ *
+ * @param int  $p_name_filter A string to match the beginning of the tag name.
+ * @param bool $p_unused      True to filter on unused tags, False for all tags.
+ *
+ * @return int
+ */
+function tag_count( $p_name_filter, $p_unused = false ) {
 	$t_where = '';
 	$t_where_params = array();
 
@@ -452,13 +483,15 @@ function tag_count( $p_name_filter ) {
 		$t_where = ' WHERE ' . db_helper_like( 'name' );
 		$t_where_params[] = $p_name_filter . '%';
 	}
+	if( $p_unused ) {
+		$t_where .= $t_where ? ' AND ': ' WHERE ';
+		$t_where .= "bt.tag_id IS NULL";
+	}
 
-	$t_query = 'SELECT count(*) FROM {tag}' . $t_where;
+	$t_query = 'SELECT count(DISTINCT t.id) FROM {tag} t LEFT JOIN {bug_tag} bt ON bt.tag_id = t.id' . $t_where;
 
 	$t_result = db_query( $t_query, $t_where_params );
-	$t_row = db_fetch_array( $t_result );
 	return (int)db_result( $t_result );
-
 }
 
 /**
