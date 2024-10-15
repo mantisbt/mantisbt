@@ -45,6 +45,15 @@ Installation
   scripts within this directory should not be accessible on a live MantisBT
   site or on any installation that is accessible via the Internet.
 
+Self-Hosting
+------------
+
+### Elestio
+
+You can deploy MantisBT on Elestio using one-click deployment. Elestio handles version updates, maintenance, securtiy, backups, etc. Additionally, Elestio supports MantisBT by providing revenue share so go ahead and click below to deploy and start using.
+
+[![Deploy on Elestio](https://elest.io/images/logos/deploy-to-elestio-btn.png)](https://elest.io/open-source/mantisbt)
+
 UPGRADING
 ---------
 
