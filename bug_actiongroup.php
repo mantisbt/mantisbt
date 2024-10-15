@@ -141,6 +141,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				# Add bugnote if supplied
 				if( !is_blank( $f_bug_notetext ) ) {
 					$t_bugnote_id = bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+					bugnote_process_mentions( $t_bug_id, $t_bugnote_id, $f_bug_notetext );
 				}
 				bug_move( $t_bug_id, $f_project_id );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
