@@ -75,7 +75,8 @@ $(function() {
                     {
                         label: $(this).data('opened-label'),
                         data: $(this).data('opened-values'),
-                        fill: +1, // Fill since Resolved dataset
+                        fill: false,
+                        stack: 'total', // Display on a separate stack
                     },
                     {
                         label: $(this).data('resolved-label'),
@@ -85,14 +86,15 @@ $(function() {
                     {
                         label: $(this).data('still-open-label'),
                         data: $(this).data('still-open-values'),
-                        fill: false,
-                    }
+                        fill: '-1', // Fill since "resolved" dataset
+                    },
                 ]
             },
             options: {
                 scales: {
                     y: {
                         beginAtZero: true,
+                        stacked: true,
                         ticks: {
                             precision: 0,
                         }
@@ -104,6 +106,10 @@ $(function() {
                     }
                 },
                 plugins: {
+                    // legend: {
+                    //     display: true,
+                    //     fillStyle: "#cccccc",
+                    // },
                     tooltip: {
                         mode: 'index',
                         position: 'nearest',
@@ -111,7 +117,7 @@ $(function() {
                     colorschemes: {
                         scheme: 'brewer.Set1-3',
                         reverse: true,
-                        fillAlpha: 0.15
+                        fillAlpha: 0.15,
                     }
                 }
             }
