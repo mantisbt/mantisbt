@@ -102,7 +102,7 @@ $(function() {
                 },
                 datasets: {
                     line: {
-                        tension: 0.2,
+                        tension: 0.3,
                     }
                 },
                 plugins: {
