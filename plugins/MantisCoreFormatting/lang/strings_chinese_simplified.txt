@@ -67,3 +67,4 @@ $s_plugin_format_syntax_highlighting_plugin_show_language_desc = '显示代码�
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_name = '行号';
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = '显示行号。';
 $s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = '显示空格';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = '可视化CSS颜色';

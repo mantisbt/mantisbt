@@ -1428,6 +1428,7 @@ $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '字段“%1$s”必须小于等于%2$d个
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API令牌名称“%s”已被使用。请返回并选择另一个。';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '无法写入$g_log_destination的指定文件"%s"';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = '添加的用户没有足够的访问权限来监视这个问题。';
+$MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = '找不到ID为“%d”的用户API令牌。';
 $s_dropzone_default_message = '通过拖放，选择或粘贴来附加文件。';
 $s_dropzone_fallback_message = '您的浏览器不支持拖放文件上传。';
 $s_dropzone_file_too_big = '文件太大（{{filesize}}MiB）。最大文件大小：{{maxFilesize}}MiB。';
