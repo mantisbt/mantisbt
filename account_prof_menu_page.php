@@ -195,13 +195,11 @@ if( $g_global_profiles ) {
 				# Make / Clear Default button
 				if( !$g_global_profiles ) {
 					echo '<div class="pull-left">';
-					if( $t_is_default_profile ) {
-						$t_param['profile_id'] = 0;
-					}
+					$t_actiom = $t_is_default_profile ? 'clear_default' : 'make_default';
 					print_form_button(
 						'account_prof_update.php',
-						lang_get( $t_is_default_profile ? 'clear_default' : 'make_default' ),
-						array_merge( $t_param, array( 'action' => 'make_default' ) ),
+						lang_get( $t_actiom ),
+						array_merge( $t_param, array( 'action' => $t_actiom ) ),
 						$t_security_token
 					);
 					echo '</div>';
