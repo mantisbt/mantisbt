@@ -61,9 +61,10 @@ $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
 if( $f_action != 'add' ) {
 	$f_profile_id = gpc_get_int( 'profile_id' );
-	profile_ensure_can_update( $f_profile_id );
-
-	$t_user_id = profile_is_global( $f_profile_id ) ? ALL_USERS : auth_get_current_user_id();
+	if( $f_action != 'change_default' ) {
+		profile_ensure_can_update($f_profile_id);
+		$t_user_id = profile_is_global($f_profile_id) ? ALL_USERS : auth_get_current_user_id();
+	}
 }
 
 switch( $f_action ) {
@@ -104,7 +105,7 @@ switch( $f_action ) {
 		profile_delete( $t_user_id, $f_profile_id );
 		break;
 
-	case 'make_default':
+	case 'change_default':
 		current_user_set_pref( 'default_profile', $f_profile_id );
 		break;
 }
