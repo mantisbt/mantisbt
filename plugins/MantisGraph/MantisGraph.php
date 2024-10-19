@@ -32,16 +32,22 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * includes Moment.js, and per documentation this could cause issues.
 	 * @see https://www.chartjs.org/docs/latest/getting-started/installation.html#bundled-build
 	 */
-	const CHARTJS_VERSION = '2.9.4';
-	const CHARTJS_HASH = 'sha256-t9UJPrESBeG2ojKTIcFLPGF7nHi2vEc7f5A2KpH/UBU=';
+	const CHARTJS_VERSION = '3.9.1';
+	const CHARTJS_HASH = 'sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA';
 
 	/**
-	 * ChartJS colorschemes plugin
+	 * ChartJS colorschemes plugin.
+	 *
+	 * The plugin's official repository seems unmaintained for several years,
+	 * and the latest 0.4.0 release is not compatible with Chart.js v3, so we
+	 * are using a community-maintained fork.
+	 *
 	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/ Home page
-	 * @see https://www.jsdelivr.com/package/npm/chartjs-plugin-colorschemes CDN
+	 * @see https://www.jsdelivr.com/package/npm/hw-chartjs-plugin-colorschemes CDN
+	 * @see https://github.com/MaximBelov/chartjs-plugin-colorschemes/ Fork
 	 */
-	const CHARTJS_COLORSCHEMES_VERSION = '0.4.0';
-	const CHARTJS_COLORSCHEMES_HASH = 'sha256-Ctym065YsaugUvysT5nHayKynbiDGVpgNBqUePRAL+0=';
+	const CHARTJS_COLORSCHEMES_VERSION = '0.5.4';
+	const CHARTJS_COLORSCHEMES_HASH = 'sha256-q5bFi6wZG3skQ5zHhhCum9lVVw+iejIM0SqVgzkhVME=';
 
 	/**
 	 * CDN for Chart.JS libraries
@@ -185,10 +191,10 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 			# Chart.js library
 			$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
-			html_javascript_cdn_link( $t_link . 'Chart.min.js', self::CHARTJS_HASH );
+			html_javascript_cdn_link( $t_link . 'chart.min.js', self::CHARTJS_HASH );
 
 			# Chart.js color schemes plugin
-			$t_link = sprintf( $t_cdn_url, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
+			$t_link = sprintf( $t_cdn_url, 'hw-chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
 			html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 		} else {
 			$t_scripts = array(
