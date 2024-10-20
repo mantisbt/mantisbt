@@ -914,11 +914,11 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	if( !$p_html_preview ) {
 		# choose color based on status
 		$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user_id, $t_bug->project_id );
-		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
+		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
 		$t_relationship_info_html .= '<td>' . icon_get( 'fa-square', 'fa-status-box ' . $t_status_css );
 		$t_relationship_info_html .= ' <span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_attribute( $t_status_string ) . '</span></td>';
 	} else {
-		$t_relationship_info_html .= $t_td . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</td>';
+		$t_relationship_info_html .= $t_td . bug_format_id( $t_related_bug_id ) . '</td>';
 		$t_relationship_info_html .= $t_td . string_attribute( $t_status_string ) . '&#160;</td>';
 	}
 
