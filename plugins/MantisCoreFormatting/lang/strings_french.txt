@@ -41,6 +41,7 @@
  * @author Dolmen
  * @author Gomoko
  * @author IAlex
+ * @author Mahabarata
  * @author McDutchie
  * @author Méthodes Bulebe Hangi
  * @author Urhixidur
@@ -77,8 +78,8 @@ $s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Montrer les 
 $s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Afficher les caracteres cachés (e.g. for indentations).';
 $s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Normaliser les espaces blanches';
 $s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Il élimine tous les espaces blancs de code. Il élimine également les tirages supplémentaires et l\'espace blanc en arrière sur chaque ligne.';
-$s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Les appareils de protection';
-$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'Il montre l\'accouplement des supports sur la souris. Y compris les "brèches d\'arc-en-ciel" (chaque paire a sa propre couleur).';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Mise en correspondance des broches';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'Montre l\'accouplage des supports au survol de la souris. Y compris les "broches arc-en-ciel" (chaque paire a sa propre couleur).';
 $s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Etendre la mise en évidence des différences.';
 $s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'Colore l\'arrière-plan d\'une ligne plutôt que du texte et en plus de "diff", une coloration spécifique du langage est possible (par exemple "diff-javascript").';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Visualiser les couleurs CSS';
