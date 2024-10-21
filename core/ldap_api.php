@@ -47,7 +47,7 @@ $g_cache_ldap_data = array();
 
 /**
  * Logs the most recent LDAP error
- * @param resource $p_ds LDAP resource identifier returned by ldap_connect.
+ * @param \LDAP\Connection $p_ds LDAP resource identifier returned by ldap_connect.
  * @return void
  */
 function ldap_log_error( $p_ds ) {
@@ -58,7 +58,7 @@ function ldap_log_error( $p_ds ) {
  * Connect and bind to the LDAP directory
  * @param string $p_binddn   DN to use for LDAP bind.
  * @param string $p_password Password to use for LDAP bind.
- * @return resource|false
+ * @return \LDAP\Connection|false
  */
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	$t_ldap_server = config_get_global( 'ldap_server' );
@@ -260,6 +260,21 @@ function ldap_cache_user_data( $p_username ) {
 		config_get_global( 'ldap_email_field' ),
 		config_get_global( 'ldap_realname_field' )
 	);
+
+	# add attrs specified by plugins
+	$t_all_plugin_fields_event = event_signal( 'EVENT_LDAP_USER_FIELDS' );
+	foreach( $t_all_plugin_fields_event as $t_plugin => $t_all_plugin_fields_event2 ) {
+		foreach( $t_all_plugin_fields_event2 as $t_callback => $t_all_plugin_fields ) {
+			if( is_array( $t_all_plugin_fields ) ) {
+				foreach( $t_all_plugin_fields as $t_plugin_field ) {
+					if( ! in_array( $t_plugin_field, $t_search_attrs, true ) ) {
+						array_push( $t_search_attrs, $t_plugin_field );
+						log_event( LOG_LDAP, 'Attribute = %d, added (by %d plugin)', $t_plugin_field, $t_plugin );
+					}
+				}
+			}
+		}
+	}
 
 	log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
 	$t_sr = @ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
