@@ -455,6 +455,32 @@ class Period {
 	}
 
 	/**
+	 * Start of the Period's most recent bucket depending on its size.
+	 *
+	 * @param int $p_bucket_type
+	 *
+	 * @return int Unix timestamp
+	 *
+	 * @see get_bucket_size()
+	 */
+	public function get_latest_bucket( int $p_bucket_type ): int {
+		$t_now = new DateTimeImmutable();
+		switch( $p_bucket_type ) {
+			case self::BUCKET_HOURLY:
+				$t_start = $t_now->setTime( $this->end->format( 'H' ), 0 );
+				break;
+			case self::BUCKET_WEEKLY:
+				$t_start = $t_now->modify( 'monday this week' );
+				break;
+			case self::BUCKET_DAILY:
+			default:
+				$t_start = $t_now->setTime( 0, 0 );
+				break;
+		}
+		return $t_start->getTimestamp();
+	}
+
+	/**
 	 * Sets the time to beginning of day (00:00:00).
 	 *
 	 * @param DateTimeImmutable|null $p_date

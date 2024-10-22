@@ -83,10 +83,10 @@ $t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM {bug_
 $t_result = db_query( $t_select, array( $t_start ) );
 $t_row = db_fetch_array( $t_result );
 
-$t_now = time();
+$t_now = $t_interval->get_latest_bucket( $t_incr );
 $t_marker[$t_ptr++] = $t_now;
 $t_data[$t_ptr] = $t_data[0];
-for( $t_now -= $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
+for( $t_now -= $t_incr; $t_now > $t_start; $t_now -= $t_incr ) {
 	$t_marker[$t_ptr] = $t_now;
 	# walk through the data points and use the data retrieved to update counts
 	while( ( $t_row !== false ) && ( $t_row['date_modified'] >= $t_now ) ) {
