@@ -175,7 +175,7 @@ for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 		}
 	}
 
-	echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_metrics[0][$t_ptr] ) .')' . '</td>';
+	echo '<tr><td>' . $t_ptr . ' (' . date( $t_date_format, $t_metrics[0][$t_ptr] ) . ')' . '</td>';
 	for( $i=1; $i<=$t_label_count; $i++ ) {
 		echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
 	}
