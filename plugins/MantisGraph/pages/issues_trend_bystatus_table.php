@@ -83,7 +83,11 @@ $t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM {bug_
 $t_result = db_query( $t_select, array( $t_start ) );
 $t_row = db_fetch_array( $t_result );
 
-for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
+$t_now = time();
+$t_marker[$t_ptr++] = $t_now;
+$t_data[$t_ptr] = $t_data[0];
+for( $t_now -= $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
+	$t_marker[$t_ptr] = $t_now;
 	# walk through the data points and use the data retrieved to update counts
 	while( ( $t_row !== false ) && ( $t_row['date_modified'] >= $t_now ) ) {
 		switch( $t_row['type'] ) {
@@ -122,12 +126,12 @@ for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 
 	if( $t_now <= $t_end ) {
 		$t_ptr++;
-		$t_marker[$t_ptr] = $t_now;
 		foreach ( $t_view_status as $t_status => $t_label ) {
 			$t_data[$t_ptr][$t_status] = $t_data[$t_ptr-1][$t_status];
 		}
 	}
 }
+$t_marker[$t_ptr] = $t_now;
 
 ksort( $t_view_status );
 # @todo These should probably be separate strings, but in the summary page context,
@@ -161,7 +165,7 @@ $t_label_count = $i;
 
 # reverse the array and consolidate the data, if necessary
 $t_metrics = array();
-for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
+for( $t_ptr = 0; $t_ptr <= $t_bin_count; $t_ptr++ ) {
 	$t = $t_bin_count - $t_ptr;
 	$t_metrics[0][$t_ptr] = $t_marker[$t];
 	$i = 0;
