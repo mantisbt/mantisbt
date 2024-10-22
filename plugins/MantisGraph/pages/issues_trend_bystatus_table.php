@@ -143,7 +143,9 @@ $t_label_strings = explode( '/', mb_substr( $t_label_string, 1, strlen( $t_label
 $t_date_format = config_get( 'short_date_format' );
 echo '<div class="space-10"></div>';
 echo '<div class="table-responsive">';
-echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
+echo '<table class="table table-striped table-bordered table-condensed"><tr>';
+echo '<th>' . plugin_lang_get( 'bucket' ) . '</th>';
+echo '<th>' . plugin_lang_get( 'date' ) . '</th>';
 
 foreach ( $t_view_status as $t_status => $t_label ) {
 	echo '<th>'.$t_label.' ('.$t_status.')</th>';
@@ -177,7 +179,9 @@ for( $t_ptr = 0; $t_ptr <= $t_bin_count; $t_ptr++ ) {
 		}
 	}
 
-	echo '<tr><td>' . $t_ptr . ' (' . date( $t_date_format, $t_metrics[0][$t_ptr] ) . ')' . '</td>';
+	echo '<tr>';
+	echo '<td>' . $t_ptr . '</td>';
+	echo '<td>' . date( $t_date_format, $t_metrics[0][$t_ptr] ) . '</td>';
 	for( $i=1; $i<=$t_label_count; $i++ ) {
 		echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
 	}
