@@ -35,14 +35,13 @@ require_api( 'datetimepicker_api.php' );
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 $f_interval = gpc_get_int( 'interval', 0 );
-$t_today = date( 'Y-m-d' );
+//$t_today = date( 'Y-m-d' );
 $f_type = gpc_get_int( 'graph_type', 0 );
 $f_show_as_table = gpc_get_bool( 'show_table', false );
 
 layout_page_header_begin( plugin_lang_get( 'graph_page' ) );
-$t_path = config_get_global( 'path' );
+//$t_path = config_get_global( 'path' );
 layout_page_header_end();
-
 layout_page_begin();
 
 $t_period = new Period();
@@ -86,8 +85,8 @@ $t_types = array(
 <?php
 # build the graphs if both an interval and graph type are selected
 if( ( 0 != $f_type ) && ( $f_interval > 0 ) ) {
-	$f_start = $t_period->get_start_formatted();
-	$f_end = $t_period->get_end_formatted();
+//	$f_start = $t_period->get_start_formatted();
+//	$f_end = $t_period->get_end_formatted();
 
 	switch( $f_type ) {
 		case 1:
