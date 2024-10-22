@@ -190,7 +190,7 @@ foreach ( $t_category as $t_cat ) {
 }
 echo '</tr>';
 for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
-	echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
+	echo '<tr><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
 	foreach ( $t_category as $t_cat ) {
 		echo '<td>' . ( $t_data[$t_ptr][$t_cat] ?? 0 ) . '</td>';
 	}
