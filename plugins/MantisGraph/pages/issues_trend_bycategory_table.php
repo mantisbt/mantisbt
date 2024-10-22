@@ -29,17 +29,15 @@ $t_interval = new Period();
 $t_interval->set_period_from_selector( 'interval' );
 $t_incr = $t_interval->get_bucket_size();
 
-$t_$f_page_number = 1;
-
+$t_page_number = 1;
 $t_per_page = -1;
 $t_bug_count = 0;
 $t_page_count = 0;
-
 $t_filter = current_user_get_bug_filter();
 $t_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
 $t_filter[FILTER_PROPERTY_STATUS] = array(META_FILTER_ANY);
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
-$t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
+$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
 if( count( $t_rows ) == 0 ) {
 	# no data to graph
 	exit();
