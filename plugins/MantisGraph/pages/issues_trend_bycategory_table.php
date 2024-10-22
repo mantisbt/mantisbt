@@ -186,14 +186,19 @@ sort( $t_category );
 $t_date_format = config_get( 'short_date_format' );
 echo '<div class="space-10"></div>';
 echo '<div class="table-responsive">';
-echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
+echo '<table class="table table-striped table-bordered table-condensed"><tr>';
+echo '<th>' . plugin_lang_get( 'bucket' ) . '</th>';
+echo '<th>' . plugin_lang_get( 'date' ) . '</th>';
+
 foreach ( $t_category as $t_cat ) {
 	echo '<th>'.$t_cat.'</th>';
 }
 echo '</tr>';
 
 for( $t_ptr = 0; $t_ptr <= $t_bin_count; $t_ptr++ ) {
-	echo '<tr><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
+	echo '<tr>';
+	echo '<td>' . $t_ptr . '</td>';
+	echo '<td>' . date( $t_date_format, $t_marker[$t_ptr] ) . '</td>';
 	foreach ( $t_category as $t_cat ) {
 		echo '<td>' . ( $t_data[$t_ptr][$t_cat] ?? 0 ) . '</td>';
 	}

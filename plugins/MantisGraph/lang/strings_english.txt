@@ -85,3 +85,5 @@ $s_plugin_MantisGraph_graph_opendev = 'Developers by Open Issues';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Top Reporters by Fixed Issues';
 $s_plugin_MantisGraph_other_categories = 'other categories (%d)';
 $s_plugin_MantisGraph_other_projects = 'other projects (%d)';
+$s_plugin_MantisGraph_bucket = 'Bucket';
+$s_plugin_MantisGraph_date = 'Date';
