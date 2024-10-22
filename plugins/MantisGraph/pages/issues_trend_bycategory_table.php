@@ -27,17 +27,9 @@ access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 $t_interval = new Period();
 $t_interval->set_period_from_selector( 'interval' );
+$t_incr = $t_interval->get_bucket_size();
 
-$t_interval_days = $t_interval->get_elapsed_days();
-if( $t_interval_days <= 14 ) {
-	$t_incr = 60 * 60; # less than 14 days, use hourly
-} else if( $t_interval_days <= 92 ) {
-	$t_incr = 24 * 60 * 60; # less than three month, use daily
-} else {
-	$t_incr = 7 * 24 * 60 * 60; # otherwise weekly
-}
-
-$f_page_number = 1;
+$t_$f_page_number = 1;
 
 $t_per_page = -1;
 $t_bug_count = 0;
