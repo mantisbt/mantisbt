@@ -69,7 +69,8 @@ class Period {
 	function a_week( DateTimeImmutable $p_when, int $p_weeks = 1 ) {
 		$this->start = $p_when->modify('monday this week');
 		$t_week = $p_weeks == 1 ? 'this' : $p_weeks - 1;
-		$this->end = $this->eod( $p_when->modify("sunday $t_week week") );
+		$t_end = $this->eod( $p_when->modify("sunday $t_week week") );
+		$this->end = min( $t_end, new DateTimeImmutable());
 	}
 
 	/**
@@ -380,7 +381,7 @@ class Period {
 					$t_end_field = gpc_get_string( $p_end_field, '' );
 					if( $t_end_field ) {
 						$t_end_field = DateTimeImmutable::createFromFormat( $t_date_format, $t_end_field );
-						$this->end = $this->eod( $t_end_field ?: null );
+						$this->end = min( $this->eod( $t_end_field ?: null ), new DateTimeImmutable() );
 					}
 				}
 				break;
@@ -410,7 +411,7 @@ class Period {
 	 */
 	private function eod( ?DateTimeImmutable $p_date = null): DateTimeImmutable {
 		if( $p_date === null ) {
-			$p_date = new DateTimeImmutable();
+			return new DateTimeImmutable();
 		}
 		return $p_date->setTime( 23, 59, 59 );
 	}
