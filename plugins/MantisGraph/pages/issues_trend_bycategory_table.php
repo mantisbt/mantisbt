@@ -196,11 +196,12 @@ foreach ( $t_category as $t_cat ) {
 echo '</tr>';
 
 for( $t_ptr = 0; $t_ptr <= $t_bin_count; $t_ptr++ ) {
+	$t = $t_bin_count - $t_ptr;
 	echo '<tr>';
 	echo '<td>' . $t_ptr . '</td>';
-	echo '<td>' . date( $t_date_format, $t_marker[$t_ptr] ) . '</td>';
+	echo '<td>' . date( $t_date_format, $t_marker[$t] ) . '</td>';
 	foreach ( $t_category as $t_cat ) {
-		echo '<td>' . ( $t_data[$t_ptr][$t_cat] ?? 0 ) . '</td>';
+		echo '<td>' . ( $t_data[$t][$t_cat] ?? 0 ) . '</td>';
 	}
 	echo '</tr>';
 }
