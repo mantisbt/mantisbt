@@ -40,6 +40,27 @@ class VersionGetCommand extends Command {
 	 * @var integer|null
 	 */
 	private $version_id;
+	
+	/**
+	 * The released versions will be returned.
+	 *
+	 * @var boolean
+	 */
+	private $r_released;
+	
+	/**
+	 * The obsolete versions will be returned.
+	 *
+	 * @var boolean
+	 */
+	private $r_obsolete;
+	
+	/**
+	 * The inherited versions will be returned.
+	 *
+	 * @var boolean
+	 */
+	private $r_inherited;
 
 	/**
 	 * $p_data['query'] is expected to contain:
@@ -100,9 +121,9 @@ class VersionGetCommand extends Command {
 		if( is_null( $this->version_id ) ) {
 			$t_versions = version_get_all_rows(
 				$this->project_id,
-				/* released */ $this->query( 'released' ),
-				/* obsolete */ $this->query( 'obsolete', false ),
-				/* inherit */ $this->query( 'inherit', false ) );
+				/* released */ $this->query( 'released', $r_released ),
+				/* obsolete */ $this->query( 'obsolete', $r_obsolete ),
+				/* inherit */ $this->query( 'inherit', $r_inherited ) );
 
 			$t_versions = array_map( 'VersionGetCommand::VersionRowToArray', $t_versions );
 		} else {

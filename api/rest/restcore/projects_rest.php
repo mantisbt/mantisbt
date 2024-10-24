@@ -275,11 +275,17 @@ function rest_project_version_get( \Slim\Http\Request $p_request, \Slim\Http\Res
 	}
 
 	$t_version_id = $p_args['version_id'] ?? $p_request->getParam( 'version_id' );
+	$t_released = (bool)$_request->getQueryParam( 'released', true );
+	$t_obsolete = (bool)$_request->getQueryParam( 'obsolete', false );
+	$t_inherited = (bool)$_request->getQueryParam( 'inherited', false );
 
 	$t_data = array(
 		'query' => array(
 			'project_id' => $t_project_id,
-			'version_id' => $t_version_id
+			'version_id' => $t_version_id,
+			'r_released' => $t_released,
+			'r_obsolete' => $t_obsolete,
+			'r_inherited' => $t_inherited
 		)
 	);
 
