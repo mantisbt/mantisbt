@@ -187,7 +187,8 @@ $t_db_version = $t_database_server_info['version'];
 # MantisBT minimum version
 check_print_info_row(
 	'Database server version',
-	htmlentities( $t_db_version )
+	htmlentities( $t_db_version ),
+	htmlentities( $t_database_server_info['description'] )
 );
 
 global $g_db_functional_type;
