@@ -84,12 +84,18 @@ check_print_info_row(
 	htmlentities( $t_database_type )
 );
 
+
+$t_db_support = db_check_database_support( $t_database_type );
 check_print_test_row(
 	'Database type is supported by the version of PHP installed on this server',
-	db_check_database_support( $t_database_type ),
+	$t_db_support,
 	array( false => 'The current database type is set to ' . htmlentities( $t_database_type )
 		. '. The version of PHP installed on this server does not have support for this database type.' )
 );
+if( !$t_db_support ) {
+	# Can't continue the checks without PHP support
+	return;
+}
 
 if( db_is_mysql() ) {
 	check_print_test_warn_row(
