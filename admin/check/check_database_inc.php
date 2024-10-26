@@ -80,7 +80,7 @@ check_print_info_row(
 
 $t_database_type = config_get_global( 'db_type' );
 check_print_info_row(
-	'Database type',
+	'Database type (ADOdb driver)',
 	htmlentities( $t_database_type )
 );
 
