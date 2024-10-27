@@ -192,7 +192,7 @@ if ( $t_fileinfo_loaded ) {
 }
 
 check_print_test_warn_row(
-	'<a href="http://en.wikipedia.org/wiki/Xdebug">Xdebug</a> extension is not loaded',
+	'<a href="https://en.wikipedia.org/wiki/Xdebug">Xdebug</a> extension is not loaded',
 	!extension_loaded( 'xdebug' ),
 	array( false => 'For security reasons this extension should not be loaded on production and Internet facing servers.' )
 );
