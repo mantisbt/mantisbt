@@ -160,22 +160,34 @@ if( config_get_global( 'allow_file_upload' ) ) {
 }
 
 if ( $t_fileinfo_loaded ) {
+	# Magic database file name and source
 	$t_fileinfo_magic_db_file = config_get_global( 'fileinfo_magic_db_file' );
-	if( $t_fileinfo_magic_db_file ) {
-		check_print_info_row(
-			'Name of magic.db file set with the fileinfo_magic_db_file configuration value',
-			config_get_global( 'fileinfo_magic_db_file' ) );
-		check_print_test_row(
-			'fileinfo_magic_db_file configuration value points to an existing magic.db file',
-			file_exists( $t_fileinfo_magic_db_file ) );
-		$t_finfo = new finfo( FILEINFO_MIME, $t_fileinfo_magic_db_file );
-	} else {
-		$t_finfo = new finfo( FILEINFO_MIME );
+	$t_fileinfo_source = '<em>fileinfo_magic_db_file</em> configuration';
+	if( !$t_fileinfo_magic_db_file ) {
+		$t_fileinfo_magic_db_file = getenv( 'MAGIC' );
+		$t_fileinfo_source = 'MAGIC environment variable';
+		if( !$t_fileinfo_magic_db_file ) {
+			$t_fileinfo_source = 'PHP';
+		}
 	}
+	check_print_info_row(
+		"Magic database file name",
+		$t_fileinfo_magic_db_file ?: 'Bundled',
+		"Source: $t_fileinfo_source"
+	);
+
+	if( $t_fileinfo_magic_db_file ) {
+		check_print_test_row(
+			'The specified Magic database file exists and is readable',
+			is_file( $t_fileinfo_magic_db_file ) && is_readable( $t_fileinfo_magic_db_file )
+		);
+	}
+	/** @noinspection PhpComposerExtensionStubsInspection */
+	$t_finfo = finfo_open( FILEINFO_MIME, $t_fileinfo_magic_db_file );
 	check_print_test_row(
-		'Fileinfo extension can find and load a valid magic.db file',
+		'The magic database is valid and can be loaded by the Fileinfo extension',
 		$t_finfo !== false,
-		array( false => 'Ensure that the fileinfo_magic_db_file configuration value points to a valid magic.db file.' )
+		array( false => 'Ensure the fileinfo_magic_db_file configuration value points to a valid magic.db file.' )
 	);
 }
 
