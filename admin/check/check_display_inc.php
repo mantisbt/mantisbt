@@ -82,9 +82,10 @@ if( config_get( 'relationship_graph_enable' ) ) {
 	);
 
 	# Check each tool's availability
+	$t_extension = is_windows_server() ? '.exe' : '';
 	$t_unavailable = [];
 	foreach( $t_tools as $t_tool ) {
-		$t_tool_path = $t_graphviz_path . $t_tool;
+		$t_tool_path = $t_graphviz_path . $t_tool . $t_extension;
 		if( !is_executable( $t_tool_path ) ) {
 			$t_unavailable[] = $t_tool;
 		}
