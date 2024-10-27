@@ -251,7 +251,10 @@ $t_memory_limit = ini_get_number( 'memory_limit' );
 check_print_test_row(
 	'<em>memory_limit</em> php.ini directive is at least equal to the <em>post_max_size</em> directive',
 	$t_memory_limit >= ini_get_number( 'post_max_size' ) || $t_memory_limit == -1,
-	array( false => 'The current value of the memory_limit directive is ' . htmlentities( ini_get_number( 'memory_limit' ) ) . ' bytes. This value needs to be at least equal to the post_max_size directive value of ' . htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes.' )
+	array( false => 'The current value of the memory_limit directive is '
+		. check_format_number( ini_get_number( 'memory_limit' ) )
+		. '. This value needs to be at least equal to the post_max_size directive value of '
+		. check_format_number( ini_get_number( 'post_max_size' ) ) . '.' )
 );
 
 check_print_info_row(
@@ -267,7 +270,11 @@ check_print_info_row(
 check_print_test_row(
 	'<em>post_max_size</em> php.ini directive is at least equal to the <em>upload_max_filesize</em> directive',
 	ini_get_number( 'post_max_size' ) >= ini_get_number( 'upload_max_filesize' ),
-	array( false => 'The current value of the post_max_size directive is ' . htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes. This value needs to be at least equal to the upload_max_filesize directive value of ' . htmlentities( ini_get_number( 'upload_max_filesize' ) ) . ' bytes.' )
+	array( false => 'The current value of the post_max_size directive is '
+		. check_format_number( ini_get_number( 'post_max_size' ) )
+		. '. This value needs to be at least equal to the <em>upload_max_filesize</em> directive value of '
+		. check_format_number( ini_get_number( 'upload_max_filesize' ) )
+	)
 );
 
 $t_disabled_functions = explode( ',', ini_get( 'disable_functions' ) );
