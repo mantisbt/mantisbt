@@ -139,7 +139,7 @@ $t_upgrade_required = false;
 if( config_get_global( 'admin_checks' ) == ON ) {
 	# Check if the admin directory is accessible
 	$t_admin_dir = __DIR__ . '/admin';
-	$t_admin_dir_is_accessible = @file_exists( $t_admin_dir . '/.' );
+	$t_admin_dir_is_accessible = @is_readable( $t_admin_dir );
 	if( $t_admin_dir_is_accessible ) {
 		$t_warnings[] = lang_get( 'warning_admin_directory_present' );
 	}
@@ -184,8 +184,9 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	}
 
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
-	if( $t_admin_dir_is_accessible ) {
-		require_once( 'admin/schema.php' );
+	if( $t_admin_dir_is_accessible
+		&& @include_once( $t_admin_dir . '/schema.php' )
+	) {
 		/** @var array $g_upgrade */
 		$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
