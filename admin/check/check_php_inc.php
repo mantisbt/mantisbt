@@ -214,12 +214,6 @@ check_print_test_warn_row(
 );
 
 check_print_test_warn_row(
-	'<em>register_long_arrays</em> php.ini directive is disabled',
-	!ini_get_bool( 'register_long_arrays' ),
-	array( false => 'This directive is deprecated in PHP 5.3.0 and should be disabled for performance reasons.' )
-);
-
-check_print_test_warn_row(
 	'<em>auto_globals_jit</em> php.ini directive is enabled',
 	ini_get_bool( 'auto_globals_jit' ),
 	array( false => 'This directive is currently disabled: enable it for a performance gain.' )
