@@ -239,6 +239,8 @@ if( db_is_mysql() ) {
 		'8.2' => array( 'Innovation', '8.2.0', '2023-10-25' ),
 		'8.3' => array( 'Innovation', '8.3.0', '2024-01-16' ),
 		'8.4' => array( 'LTS', '8.4.0', '2024-04-30' ),
+		'9.0' => array( 'Innovation', '9.0.0', '2024-06-07' ),
+		'9.1' => array( 'Innovation', '9.1.0', '2024-09-24' ),
 	);
 
 	$t_support_url = 'https://www.mysql.com/support/supportedplatforms/';
@@ -350,6 +352,8 @@ if( db_is_mysql() ) {
 	# Version support information
 	$t_versions = array(
 		# Version => Final release (EOL) date
+		'17'  => '2029-11-08',
+		'16'  => '2028-11-09',
 		'15'  => '2027-11-11',
 		'14'  => '2026-11-12',
 		'13'  => '2025-11-13',
