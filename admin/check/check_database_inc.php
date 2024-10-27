@@ -352,6 +352,8 @@ if( db_is_mysql() ) {
 	# Version support information
 	$t_versions = array(
 		# Version => Final release (EOL) date
+		'17'  => '2029-11-08',
+		'16'  => '2028-11-09',
 		'15'  => '2027-11-11',
 		'14'  => '2026-11-12',
 		'13'  => '2025-11-13',
