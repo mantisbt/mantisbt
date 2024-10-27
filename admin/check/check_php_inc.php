@@ -82,6 +82,45 @@ check_print_test_warn_row(
 	[ false => $t_info ]
 );
 
+# PHP version checks
+# Note: no need to check for minimum supported version as core.php will trigger
+# a fatal error if PHP is too old.
+try {
+	/** @noinspection HtmlUnknownTarget */
+	$t_url_link = '<a href="%1$s">%1$s</a>';
+
+	$t_release = new EndOfLifeCheck( EndOfLifeCheck::PRODUCT_PHP, PHP_VERSION );
+	$t_message = 'Release information retrieved from '
+		. sprintf( $t_url_link, $t_release->getUrl() );
+}
+catch( Exception $e ) {
+	$t_message = 'Failed to retrieve release information from '
+		. sprintf( $t_url_link, EndOfLifeCheck::URL ) . ': '
+		. $e->getMessage() . '<br>'
+		. $e->getPrevious()->getMessage();
+	$t_release = false;
+}
+check_print_test_warn_row(
+	'PHP End-of-Life support check',
+	$t_release !== false,
+	$t_message
+);
+if( $t_release !== false ) {
+	# Has reached End Of Life ?
+	check_print_test_warn_row(
+		'PHP version is supported',
+		!$t_release->isEOL( $t_message ),
+		$t_message
+	);
+
+	# Is there a newer release available ?
+	check_print_test_warn_row(
+		'Using the latest available PHP bug fix release',
+		$t_release->isLatest( $t_message ),
+		$t_message
+	);
+}
+
 # $t_extensions_required lists the extensions required to run Mantis in general
 $t_extensions_required = array(
 	'ctype', # required by PHPMailer
