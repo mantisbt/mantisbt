@@ -61,6 +61,7 @@ $s_plugin_MantisGraph_graph_imp_priority_title = '按优先权图表';
 $s_plugin_MantisGraph_graph_imp_severity_title = '按严重性图表';
 $s_plugin_MantisGraph_graph_imp_category_title = '按分类图表';
 $s_plugin_MantisGraph_graph_imp_resolution_title = '按处理状况图表';
+$s_plugin_MantisGraph_graph_project_title = '按项目图表';
 $s_plugin_MantisGraph_graph_developer_title = '按开发者图表';
 $s_plugin_MantisGraph_graph_reporter_title = '按汇报者图表';
 $s_plugin_MantisGraph_graph_issues_trend_title = '开启的、解决的和剩余的问题';
