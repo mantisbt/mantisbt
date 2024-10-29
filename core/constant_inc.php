@@ -628,6 +628,7 @@ define( 'LINKS_SAME_WINDOW', 1 );
 define( 'LINKS_NEW_WINDOW', 2 );
 define( 'LINKS_NOOPENER', 4 );
 define( 'LINKS_NOREFERRER', 8 );
+define( 'LINKS_NOFOLLOW_EXTERNAL', 16);
 
 # Auth Related Constants
 define( 'API_TOKEN_LENGTH', 32 );
