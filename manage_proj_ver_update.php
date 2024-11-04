@@ -63,7 +63,7 @@ $t_data = array(
 		'description' => $f_description,
 		'released' => $f_released,
 		'obsolete' => $f_obsolete,
-		'timestamp' => $f_date_order
+		'timestamp' => date_strtotime( $f_date_order )
 	)
 );
 
