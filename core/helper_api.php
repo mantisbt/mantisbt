@@ -893,8 +893,8 @@ function helper_get_link_attributes( $p_return_array = true, $p_is_external_link
 				$t_attributes['rel'] = 'noopener';
 			}
 		}
-		if( $p_is_external_link && ($t_html_make_links & LINKS_NOFOLLOW_EXTERNAL) ) {
-			if (isset($t_attributes['rel'])) {
+		if( $p_is_external_link && ( $t_html_make_links & LINKS_NOFOLLOW_EXTERNAL ) ) {
+			if ( isset( $t_attributes['rel'] ) ) {
 				$t_attributes['rel'] .= ',nofollow';
 			} 
 			else {
@@ -917,23 +917,23 @@ function helper_get_link_attributes( $p_return_array = true, $p_is_external_link
  * Returns the root domain plus TLD from a URL.
  * Also handles ccTLDs
  *
- * @param string $t_url The URL to parse
+ * @param string $p_url The URL to parse
  * @return string domain.tld or domain.cctld.tld or IP address
  * 
  */
-function helper_get_root_domain($t_url) {
-    $host = parse_url($t_url, PHP_URL_HOST);
-    if (filter_var($host, FILTER_VALIDATE_IP)) {
-        return $host; // Return IP address as is
-    }
-    $parts = explode('.', $host);
-    $numParts = count($parts);
-    if ($numParts >= 2) {
-        $domain = $parts[$numParts - 2] . '.' . $parts[$numParts - 1];
-        if (strlen($parts[$numParts - 1]) == 2 && $numParts > 2) {
-            $domain = $parts[$numParts - 3] . '.' . $domain; // Handle ccTLDs
-        }
-        return $domain;
-    }
-    return $host; // Return host if nothing matches
+function helper_get_root_domain( $p_url ) {
+	$t_host = parse_url( $p_url, PHP_URL_HOST );
+	if ( filter_var( $t_host, FILTER_VALIDATE_IP ) ) {
+		return $t_host; // Return IP address as is
+	}
+	$t_parts = explode( '.', $t_host );
+	$t_numParts = count( $t_parts );
+	if ( $t_numParts >= 2 ) {
+		$t_domain = $t_parts[ $t_numParts - 2 ] . '.' . $t_parts[ $t_numParts - 1 ];
+		if ( strlen( $t_parts[ $t_numParts - 1 ] ) == 2 && $t_numParts > 2 ) {
+			$t_domain = $t_parts[ $t_numParts - 3 ] . '.' . $t_domain; // Handle ccTLDs
+		}
+		return $t_domain;
+	}
+	return $t_host; // Return host if nothing matches
 }
