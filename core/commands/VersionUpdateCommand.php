@@ -154,8 +154,10 @@ class VersionUpdateCommand extends Command {
 		}
 
 		$t_timestamp = $this->payload( 'timestamp' );
-		if( !is_null( $t_timestamp ) && !is_blank( $t_timestamp ) ) {
-			$t_timestamp = strtotime( $t_timestamp );
+		if( !is_blank( $t_timestamp ) ) {
+			if( !is_int( $t_timestamp ) ) {
+				$t_timestamp = strtotime( $t_timestamp );
+			}
 			$t_version->date_order = $t_timestamp;
 		}
 
