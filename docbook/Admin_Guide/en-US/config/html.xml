@@ -51,6 +51,13 @@
 							Implies <emphasis>LINKS_NOOPENER</emphasis>.
 						</para>
 					</listitem>
+					<listitem>
+						<para><emphasis>LINKS_NOFOLLOW_EXTERNAL</emphasis> -
+							Links to external sites (i.e. having a different root domain) have the
+							<ulink url="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#nofollow">nofollow</ulink>,
+							instructing search engines not to follow these links.
+						</para>
+					</listitem>
 				</itemizedlist>
 			</listitem>
 		</varlistentry>

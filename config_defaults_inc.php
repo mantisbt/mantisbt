@@ -2340,8 +2340,9 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
  * - LINKS_NOREFERRER         Links have the `noreferrer` type, i.e. they omit the *Referer*
  *                            header (implies LINKS_NOOPENER)
  *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/noreferrer}
- * - LINKS_NOFOLLOW_EXTERNAL  Link to external sites (different root domain) links have the `nofollow` type,
- *                            i.e. they instruct search engines not to follow these links
+ * - LINKS_NOFOLLOW_EXTERNAL  Links to external sites (i.e. having a different root domain)
+ *                            have the `nofollow` type, instructing search engines
+ *                            not to follow these links
  *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#nofollow}
  *
  * @global int $g_html_make_links
