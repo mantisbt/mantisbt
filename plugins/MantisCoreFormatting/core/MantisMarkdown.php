@@ -250,10 +250,11 @@ class MantisMarkdown extends Parsedown
 	{
 		if( isset( $Excerpt['element']['attributes'] ) ) {
 			# Check if link is external
-			$p_is_external_link = helper_get_root_domain(config_get_global( 'path' )) != helper_get_root_domain( $Excerpt['element']['attributes']['href'] );
+			$t_mantis_root_domain = helper_get_root_domain( config_get_global( 'path' ) );
+			$p_is_external_link = $t_mantis_root_domain != helper_get_root_domain( $Excerpt['element']['attributes']['href'] );
 			$Excerpt['element']['attributes'] = array_replace(
 				$Excerpt['element']['attributes'],
-				helper_get_link_attributes(true, $p_is_external_link)
+				helper_get_link_attributes( true, $p_is_external_link )
 			);
 		}
 

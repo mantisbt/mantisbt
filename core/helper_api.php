@@ -894,9 +894,9 @@ function helper_get_link_attributes( $p_return_array = true, $p_is_external_link
 			}
 		}
 		if( $p_is_external_link && ( $t_html_make_links & LINKS_NOFOLLOW_EXTERNAL ) ) {
-			if ( isset( $t_attributes['rel'] ) ) {
+			if( isset( $t_attributes['rel'] ) ) {
 				$t_attributes['rel'] .= ',nofollow';
-			} 
+			}
 			else {
 				$t_attributes['rel'] = 'nofollow';
 			}
@@ -915,11 +915,12 @@ function helper_get_link_attributes( $p_return_array = true, $p_is_external_link
 
 /**
  * Returns the root domain plus TLD from a URL.
- * Also handles ccTLDs
  *
- * @param string $p_url The URL to parse
- * @return string domain.tld or domain.cctld.tld or IP address
- * 
+ * Also handles ccTLDs.
+ *
+ * @param string $p_url The URL to parse.
+ *
+ * @return string domain.tld or domain.cctld.tld or IP address.
  */
 function helper_get_root_domain( $p_url ) {
 	$t_host = parse_url( $p_url, PHP_URL_HOST );

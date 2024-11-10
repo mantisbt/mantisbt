@@ -521,7 +521,8 @@ function string_insert_hrefs( $p_string ) {
 		function ( $p_match ) {
 			$t_url = $p_match[1];
 			# Check if link is external
-			$p_is_external_link = helper_get_root_domain(config_get_global( 'path' )) != helper_get_root_domain( $t_url );
+			$t_mantis_root_domain = helper_get_root_domain( config_get_global( 'path' ) );
+			$p_is_external_link = $t_mantis_root_domain != helper_get_root_domain( $t_url );
 			# Set the link's target and type according to configuration
 			$t_link_attributes = helper_get_link_attributes( false, $p_is_external_link );
 			$t_url_href = 'href="' . rtrim( $t_url, '.' ) . '"';
