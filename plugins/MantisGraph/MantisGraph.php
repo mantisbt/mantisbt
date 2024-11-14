@@ -198,7 +198,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 			html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 		} else {
 			$t_scripts = array(
-				'Chart-' . self::CHARTJS_VERSION . '.min.js',
+				'chart-' . self::CHARTJS_VERSION . '.min.js',
 				'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js',
 			);
 			foreach( $t_scripts as $t_script ) {
