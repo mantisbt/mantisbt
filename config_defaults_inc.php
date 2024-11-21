@@ -2342,12 +2342,12 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
  *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/noreferrer}
  * - LINKS_NOFOLLOW_EXTERNAL  Links to external sites (i.e. having a different root domain)
  *                            have the `nofollow` type, instructing search engines
- *                            not to follow these links
+ *                            not to follow these links (DEFAULT)
  *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#nofollow}
  *
  * @global int $g_html_make_links
  */
-$g_html_make_links = LINKS_SAME_WINDOW | LINKS_NOOPENER;
+$g_html_make_links = LINKS_SAME_WINDOW | LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL;
 
 /**
  * Valid html tags for multi-line fields (e.g. description).

@@ -16,7 +16,9 @@
 				</para>
 				<para>The options below can be combined using bitwise operators,
 					though not all possible combinations make sense.
-					The default is <emphasis>LINKS_SAME_WINDOW | LINKS_NOOPENER</emphasis>.
+					The default is <emphasis>
+						LINKS_SAME_WINDOW | LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL
+					</emphasis>.
 				</para>
 				<itemizedlist>
 					<listitem>
