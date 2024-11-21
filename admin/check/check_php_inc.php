@@ -48,6 +48,7 @@ $t_extensions_required = array(
 	'pcre',
 	'reflection',
 	'session',
+	'tokenizer',
 );
 
 foreach( $t_extensions_required as $t_extension ) {
