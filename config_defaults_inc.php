@@ -2332,14 +2332,17 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
  *
  * The options below can be combined using bitwise operators (not all
  * possible combinations make sense):
- * - OFF                Do not convert URLs or emails
- * - LINKS_SAME_WINDOW  Convert to links that open in the current window (DEFAULT)
- * - LINKS_NEW_WINDOW   Convert to links that open in a new window (overrides LINKS_SAME_WINDOW)
- * - LINKS_NOOPENER     Links have the `noopener` type (DEFAULT)
- *                      {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener}
- * - LINKS_NOREFERRER   Links have the `noreferrer` type, i.e. they omit the *Referer*
- *                      header (implies LINKS_NOOPENER)
- *                      {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer}
+ * - OFF                      Do not convert URLs or emails
+ * - LINKS_SAME_WINDOW        Convert to links that open in the current window (DEFAULT)
+ * - LINKS_NEW_WINDOW         Convert to links that open in a new window (overrides LINKS_SAME_WINDOW)
+ * - LINKS_NOOPENER           Links have the `noopener` type (DEFAULT)
+ *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/noopener}
+ * - LINKS_NOREFERRER         Links have the `noreferrer` type, i.e. they omit the *Referer*
+ *                            header (implies LINKS_NOOPENER)
+ *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/noreferrer}
+ * - LINKS_NOFOLLOW_EXTERNAL  Link to external sites (different root domain) links have the `nofollow` type,
+ *                            i.e. they instruct search engines not to follow these links
+ *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#nofollow}
  *
  * @global int $g_html_make_links
  */
