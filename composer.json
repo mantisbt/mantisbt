@@ -6,6 +6,7 @@
         "php": "^7.4 || ^8.0",
         "ext-mbstring": "*",
         "ext-json": "*",
+        "ext-tokenizer": "*",
         "slim/slim": "^3.0",
         "guzzlehttp/guzzle": "^7.5",
         "vboctor/disposable_email_checker": "^3.0",

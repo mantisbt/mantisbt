@@ -187,7 +187,8 @@
 										filter,
 										hash,
 										json,
-										session
+										session,
+										tokenizer
 									</emphasis>
 									- Required to run MantisBT in general.
 									These are bundled with PHP, and enabled by default.
