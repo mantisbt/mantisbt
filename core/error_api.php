@@ -204,15 +204,19 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	# build an appropriate error string
 	$t_error_location = 'in \'' . $p_file .'\' line ' . $p_line;
 	$t_error_description = '\'' . $p_error . '\' ' . $t_error_location;
+
+	# PHP 8.4 compatibility, deprecation of E_STRICT constant
+	# Treat such errors as E_NOTICE
+	if( PHP_VERSION_ID < 80000 && $p_type == E_STRICT ) {
+		$p_type = E_NOTICE;
+	}
+
 	switch( $p_type ) {
 		case E_WARNING:
 			$t_error_type = 'SYSTEM WARNING';
 			break;
 		case E_NOTICE:
 			$t_error_type = 'SYSTEM NOTICE';
-			break;
-		case E_STRICT:
-			$t_error_type = 'STRICT NOTICE';
 			break;
 		case E_RECOVERABLE_ERROR:
 			# This should generally be considered fatal (like E_ERROR)
