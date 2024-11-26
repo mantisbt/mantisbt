@@ -85,4 +85,4 @@ foreach ( $t_status_ids as $t_from_id ) {
 	}
 }
 
-$t_graph->output( 'png', true );
+$t_graph->output( 'svg', true );
