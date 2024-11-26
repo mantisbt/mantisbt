@@ -386,7 +386,7 @@ class Graph {
 		$t_dot_source = ob_get_clean();
 
 		# Start dot process
-		$t_command = escapeshellcmd( $this->tool_path() . ' -T' . $p_format );
+		$t_command = $this->tool_path() . ' -T' . $p_format;
 		$t_stderr = tempnam( sys_get_temp_dir(), 'graphviz' );
 		$t_descriptors = array(
 			0 => array( 'pipe', 'r', ),
@@ -396,7 +396,7 @@ class Graph {
 		);
 
 		$t_pipes = array();
-		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes );
+		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes, null, null, [ 'bypass_shell' => true ] );
 
 		if( !is_resource( $t_process ) ) {
 			# proc_open failed
