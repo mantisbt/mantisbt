@@ -16,7 +16,9 @@
 				</para>
 				<para>The options below can be combined using bitwise operators,
 					though not all possible combinations make sense.
-					The default is <emphasis>LINKS_SAME_WINDOW | LINKS_NOOPENER</emphasis>.
+					The default is <emphasis>
+						LINKS_SAME_WINDOW | LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL
+					</emphasis>.
 				</para>
 				<itemizedlist>
 					<listitem>
@@ -49,6 +51,13 @@
 							<ulink url="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer">noreferrer</ulink>
 							type, i.e. they omit the <emphasis>Referer</emphasis> header.
 							Implies <emphasis>LINKS_NOOPENER</emphasis>.
+						</para>
+					</listitem>
+					<listitem>
+						<para><emphasis>LINKS_NOFOLLOW_EXTERNAL</emphasis> -
+							Links to external sites (i.e. having a different root domain) have the
+							<ulink url="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#nofollow">nofollow</ulink>,
+							instructing search engines not to follow these links.
 						</para>
 					</listitem>
 				</itemizedlist>

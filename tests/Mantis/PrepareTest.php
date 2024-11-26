@@ -29,7 +29,7 @@ require_once 'MantisCoreBase.php';
 /**
  * MantisBT Prepare API test cases
  */
-class MantisPrepareTest extends MantisCoreBase {
+class PrepareTest extends MantisCoreBase {
 	const EMAIL = 'test@example.com';
 
 	/**

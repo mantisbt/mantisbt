@@ -39,6 +39,7 @@
  * @file
  *
  * @author Cedric31
+ * @author Lhanars
  * @author Nicolas Eynaud
  */
 
@@ -265,7 +266,7 @@ $s_delete_account_button = 'Suprimir lo compte';
 $s_manage_profiles_link = 'Perfils';
 $s_change_preferences_link = 'Preferéncias';
 $s_edit_account_title = 'Modificar un compte';
-$s_username = 'Utilizaire';
+$s_username = 'Utilizator';
 $s_username_label = 'Nom d\'utilizaire';
 $s_realname = 'Nom vertadièr';
 $s_realname_label = 'Nom vertadièr';
@@ -451,7 +452,6 @@ $s_log_page_time = 'Temps d\'execucion';
 $s_log_page_caller = 'Apelant';
 $s_log_page_event = 'Eveniment';
 $s_please_report = 'Raportatz aquò a l\'%1$, sens vos comandar.';
-$s_warning_plain_password_authentication = '<strong>ATENCION :</strong> l\'autentificacion per senhal en clar es utilizada, aquò expausarà vòstre senhal als administrators.';
 $s_warning_default_administrator_account_present = '<strong>ATENCION :</strong> Vos caldriá desactivar lo compte per defaut « administrator » o cambiar son senhal.';
 $s_warning_admin_directory_present = '<strong>ATENCION :</strong> lo repertòri Admin deuriá èsser suprimit.';
 $s_error_database_no_schema_version = '<strong>Error :</strong> L\'estructura de la basa de donadas sembla obsoleta (config(databaseversion) es a 0) o corrompuda. Verificatz que vòstra basa de donadas es en cors d\'execucion - podèm pas trobar la version de l\'esquèma de la basa de donadas. La taula « Config » a pas renviat una version valida de l\'esquèma - demandatz d\'ajuda sus la lista de difusion mantis-help se besonh.';
@@ -1191,7 +1191,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Categoria duplicada.';
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Cap de còpia pas especificada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria introbabla.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria « %1$s » introbabla pel projècte « %2$s ».';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Aquesta categoria pòt pas èsser suprimida, perque es definida coma "Categoria per defaut pels desplaçaments".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'Aquesta categoria pòt pas èsser suprimida, perque es definida coma "Categoria per defaut pels desplaçaments".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Version duplicada.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version "%1$s" introbabla.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Nom d\'utilizaire invalid. Lo nom d\'utilizaire pòt pas conténer que las letras latinas, nombres, espacis, junhents, punts, signes mai e traits de soslinhament.';

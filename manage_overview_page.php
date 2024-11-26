@@ -88,6 +88,10 @@ print_manage_menu( 'manage_overview_page.php' );
 			<td><?php echo phpversion() ?></td>
 		</tr>
 		<tr>
+ 			<th class="category"><?php echo lang_get( 'os_information' ) ?></th>
+			<td><?php echo php_uname() ?></td>
+		</tr>
+		<tr>
 			<th class="category"><?php echo lang_get( 'database_driver' ) ?></th>
 			<td><?php echo config_get_global( 'db_type' ) ?></td>
 		</tr>

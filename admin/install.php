@@ -21,6 +21,12 @@
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpMethodParametersCountMismatchInspection For some reason,
+ *  PHPStorm incorrectly matches the ADOConnection object to the ADODB_text
+ *  subclass, which has a different signature for Connect() method; this
+ *  inconsistency should be fixed in a future version of ADOdb, but for now we
+ *  can just suppress the inspection to avoid the false positive warnings.
  */
 
 error_reporting( E_ALL );
@@ -29,9 +35,9 @@ error_reporting( E_ALL );
 # Load the MantisDB core in maintenance mode. This mode will assume that
 # config/config_inc.php hasn't been specified. Thus the database will not be opened
 # and plugins will not be loaded.
-define( 'MANTIS_MAINTENANCE_MODE', true );
+const MANTIS_MAINTENANCE_MODE = true;
 
-require_once( dirname( __FILE__, 2 ) . '/core.php' );
+require_once( dirname( __DIR__ ) . '/core.php' );
 require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
@@ -83,6 +89,43 @@ function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_mes
 	echo '</tr>' . "\n";
 }
 
+/**
+ * @param $p_db_type
+ * @return void
+ */
+function print_db_support_tests( $p_db_type ): void {
+	print_test( 'Checking PHP support for database type',
+		db_check_database_support( $p_db_type ),
+		true,
+		'Database is not supported by PHP. Check that it has been compiled into your server.'
+	);
+
+	switch( $p_db_type ) {
+		case 'mssql':
+			print_test( 'Checking PHP support for Microsoft SQL Server driver',
+				BAD,
+				true,
+				'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead'
+			);
+			break;
+		case 'mysql':
+			# Legacy mysql driver
+			print_test( 'Checking PHP support for MySQL driver',
+				BAD,
+				true,
+				'mysql driver is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0.0. The driver is no longer supported by MantisBT, please use mysqli instead'
+			);
+			break;
+		case 'mysqli':
+			print_test( 'Checking PHP support for MySQL Native Driver',
+				function_exists( 'mysqli_stmt_get_result' ),
+				true,
+				'Check that the MySQL Native Driver (mysqlnd) has been compiled into your server.'
+			);
+			break;
+	}
+}
+
 # install_state
 #   0 = no checks done
 #   1 = server ok, get database information
@@ -96,7 +139,7 @@ $t_install_state = gpc_get_int( 'install', 0 );
 
 layout_page_header_begin( 'Administration - Installation' );
 # Javascript is only needed to support input of installation options
-if( $t_install_state < 2 ) {
+if( $t_install_state <= 2 ) {
 	html_javascript_link( 'install.js' );
 }
 layout_page_header_end();
@@ -197,6 +240,7 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_db_username            = config_get_global( 'db_username', '' );
 	$f_db_password            = config_get_global( 'db_password', '' );
 	$f_timezone               = config_get( 'default_timezone', '' );
+	$f_path                   = config_get_global( 'path', '' );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
 	$t_prefix_type = 'other';
@@ -215,6 +259,7 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 		$f_db_password = config_get_global( 'db_password' );
 	}
 	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
+	$f_path               = gpc_get( 'path', config_get_global( 'path', '' ) );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
 	$t_prefix_type = $f_db_type == 'oci8' ? $f_db_type : 'other';
@@ -249,21 +294,7 @@ if( $t_config_exists ) {
 			true,
 			'database connection settings do not exist?' );
 
-		print_test( 'Checking PHP support for database type',
-			db_check_database_support( $f_db_type ), true,
-			'database is not supported by PHP. Check that it has been compiled into your server.' );
-
-		if( $f_db_type == 'mssql' ) {
-			print_test( 'Checking PHP support for Microsoft SQL Server driver',
-				BAD, true,
-				'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead' );
-		}
-
-		if( $f_db_type == 'mysql' ) {
-			print_test( 'Checking PHP support for MySQL driver',
-				BAD, true,
-				'mysql driver is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0.0. The driver is no longer supported by MantisBT, please use mysqli instead' );
-		}
+		print_db_support_tests( $f_db_type );
 	}
 
 	/** @var ADOConnection $g_db */
@@ -317,7 +348,7 @@ print_test( 'Checking if safe mode is enabled for install script',
 	);
 
 	foreach( $t_config_files as $t_file => $t_action ) {
-		$t_dir = dirname( __FILE__, 2 ) . '/';
+		$t_dir = dirname( __DIR__ ) . '/';
 		if( substr( $t_file, 0, 3 ) == 'mc_' ) {
 			$t_dir .= 'api/soap/';
 		}
@@ -332,6 +363,8 @@ print_test( 'Checking if safe mode is enabled for install script',
 			case 'contents':
 				$t_message = 'Move contents to config_inc.php file.';
 				break;
+			default:
+				$t_message = '';
 		}
 
 		print_test(
@@ -344,7 +377,7 @@ print_test( 'Checking if safe mode is enabled for install script',
 ?>
 
 <?php
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$t_install_state++;
 	}
 } # end install_state == 0
@@ -359,7 +392,7 @@ if( 2 == $t_install_state ) {
 <?php
 	print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
 
-	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
+	print_db_support_tests( $f_db_type );
 
 	# ADOdb library version check
 	global $ADODB_vers;
@@ -403,6 +436,10 @@ if( 2 == $t_install_state ) {
 	?>
 </tr>
 
+<?php
+	# Don't try to connect to the DB if we have failed checks at this stage,
+	# as this probably means the DB extension is missing.
+	if( !$g_failed ) { ?>
 <!-- connect to db -->
 <tr>
 	<td>
@@ -436,6 +473,40 @@ if( 2 == $t_install_state ) {
 	}
 	?>
 </tr>
+<tr>
+	<td>
+		Checking URL to installation
+	</td>
+	<?php
+		$t_url_check = '';
+		if( !$f_path ) {
+			# Empty URL - warn admin about security risk
+			$t_url_check = "Using an empty path is a security risk, as MantisBT "
+				. "will dynamically set it based on headers from the HTTP request, "
+				. "exposing your system to Host Header Injection attacks.";
+			$t_hard_fail = false;
+		} else {
+			# Make sure we have a trailing '/'
+			$f_path = rtrim( $f_path, '/' ) . '/';
+
+			# Check that the URL is valid
+			if( !filter_var( $f_path, FILTER_VALIDATE_URL ) ) {
+				$t_url_check = "'$f_path' is not a valid URL.";
+			} else {
+				require_api( 'url_api.php' );
+				$t_page_contents = url_get( $f_path );
+				if( !$t_page_contents ) {
+					$t_url_check = "Can't retrieve web page at '$f_path'.";
+				} elseif( false === strpos( $t_page_contents, 'MantisBT') ) {
+					$t_url_check = "Web page at '$f_path' does not appear to be a MantisBT site.";
+				}
+			}
+			$t_hard_fail = true;
+		}
+
+		print_test_result( $t_url_check ? BAD : GOOD, $t_hard_fail, $t_url_check );
+	?>
+</tr>
 <?php
 	if( $f_db_exists ) {
 		?>
@@ -447,7 +518,7 @@ if( 2 == $t_install_state ) {
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
 
-		if( $t_result == true ) {
+		if( $t_result ) {
 			$t_db_open = true;
 			print_test_result( GOOD );
 		} else {
@@ -508,7 +579,9 @@ if( 2 == $t_install_state ) {
 
 <?php
 	} # end if db open
-	if( false == $g_failed ) {
+	} # end if failed DB checks
+	
+	if( !$g_failed ) {
 		$t_install_state++;
 	} else {
 		$t_install_state--; # a check failed, redisplay the questions
@@ -686,13 +759,14 @@ if( !$g_database_upgrade ) {
 		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
 		echo "\t</td>\n\t<td>\n\t\t";
 		$t_required = $t_key == 'db_table_plugin_prefix' ? 'required' : '';
-		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix" %2$s value="%3$s">',
+		/** @noinspection HtmlUnknownAttribute */
+		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix reset" %2$s value="%3$s">',
 			$t_key,
 			$t_key == 'db_table_plugin_prefix' ? 'required' : '',
 			${'f_' . $t_key} // The actual value of the corresponding form variable
 		);
 		echo "\n&nbsp;";
-		printf( '<button id="%s" type="button" class="btn btn-sm btn-primary btn-white btn-round reset-prefix">%s</button>',
+		printf( '<button id="%s" type="button" class="btn btn-sm btn-primary btn-white btn-round reset">%s</button>',
 			"btn_$t_key",
 			lang_get( 'reset' )
 		);
@@ -727,6 +801,27 @@ if( !$g_database_upgrade ) {
 		</select>
 	</td>
 </tr>
+
+<!-- URL to installation ($g_path) -->
+<tr>
+	<td>
+		<label for="path">URL to your installation (<em>$g_path</em>, see
+			<a href="https://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.config.path"
+			   target="_blank">documentation</a>)
+		</label>
+	</td>
+	<td>
+		<input id="path" name="path" type="text" size="50" class="reset"
+			   value="<?php echo string_attribute( $f_path ) ?>"
+			   data-defval="<?php global $g_path; echo string_attribute( $g_path ); ?>"
+		/>
+
+		<button id="btn_path" type="button" class="btn btn-sm btn-primary btn-white btn-round reset">
+			<?php echo lang_get( 'reset' ); ?>
+		</button>
+	</td>
+</tr>
+
 <?php
 } # end install-only fields
 ?>
@@ -792,7 +887,7 @@ if( 3 == $t_install_state ) {
 
 		$t_db_open = false;
 
-		if( $t_result == true ) {
+		if( $t_result ) {
 			print_test_result( GOOD );
 			$t_db_open = true;
 		} else {
@@ -848,7 +943,7 @@ if( 3 == $t_install_state ) {
 	<?php
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
-		if( $t_result == true ) {
+		if( $t_result ) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result(
@@ -864,7 +959,7 @@ if( 3 == $t_install_state ) {
 	}
 
 	# install the tables
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$g_db_connected = false;
 
 		# fake out database access routines used by config_get
@@ -875,7 +970,7 @@ if( 3 == $t_install_state ) {
 		config_set_global( 'db_table_plugin_prefix', $f_db_table_plugin_prefix );
 		config_set_global( 'db_table_suffix', $f_db_table_suffix );
 		# database_api references this
-		require_once( dirname( __FILE__ ) . '/schema.php' );
+		require_once( __DIR__ . '/schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 		if( !$f_log_queries ) {
@@ -988,6 +1083,7 @@ if( 3 == $t_install_state ) {
 				$t_msg = $e->getMessage();
 			}
 
+			/** @noinspection PhpUndefinedVariableInspection */
 			print_test(
 				"PostgreSQL: check column '$t_table.$t_column' data type",
 				!$t_exception_occured && $t_is_integer,
@@ -1118,7 +1214,7 @@ if( 3 == $t_install_state ) {
 				echo '</td>';
 				if( $t_ret == 2 ) {
 					print_test_result( GOOD );
-					config_set( 'database_version', $i, ALL_USERS, ALL_PROJECTS );
+					config_set( 'database_version', $i, ALL_USERS );
 				} else {
 					$t_all_sql = '';
 					if( $t_sql ) {
@@ -1158,7 +1254,7 @@ if( 3 == $t_install_state ) {
 			echo '</td></tr>';
 		}
 	}
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$t_install_state++;
 	} else {
 		$t_install_state--;
@@ -1219,6 +1315,36 @@ if( 5 == $t_install_state ) {
 <div class="widget-main no-padding">
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
+
+<?php
+	$t_crypto_master_salt = '';
+	if( !$t_config_exists ) {
+?>
+	<tr>
+		<td>
+			Generating Crypto Master Salt
+		</td>
+<?php
+		# Automatically generate a strong master salt/nonce for MantisBT
+		# cryptographic purposes.
+		try {
+			$t_crypto_master_salt = base64_encode( random_bytes( 32 ) );
+			print_test_result( GOOD );
+		}
+		# With PHP 8.2 and later this should catch Random\RandomException instead
+		catch( Exception $e ) {
+			$t_crypto_failed_msg = "No appropriate source of randomness found. "
+				. "You will need to generate the Master Salt yourself "
+				. "and add it to the configuration file manually.";
+			print_test_result( BAD, false, $t_crypto_failed_msg );
+
+		}
+?>
+	</tr>
+<?php
+	} # End crypto master salt generation
+?>
+
 <tr>
     <td>
         <?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
@@ -1226,10 +1352,6 @@ if( 5 == $t_install_state ) {
     </td>
 <?php
 	# Generating the config_inc.php file
-
-	# Automatically generate a strong master salt/nonce for MantisBT
-	# cryptographic purposes.
-	$t_crypto_master_salt = base64_encode( random_bytes( 32 ) );
 
 	$t_config = '<?php' . PHP_EOL
 		. '$g_hostname               = \'' . addslashes( $f_hostname ) . '\';' . PHP_EOL
@@ -1256,7 +1378,13 @@ if( 5 == $t_install_state ) {
 	$t_config .=
 		  '$g_default_timezone       = \'' . addslashes( $f_timezone ) . '\';' . PHP_EOL
 		. PHP_EOL
+		. (!$t_crypto_master_salt ? "# The installer could not generate the Master Salt; please set it manually.\n" : '')
 		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
+
+	if( $f_path ) {
+		$t_config .= PHP_EOL
+			. "\$g_path                   = '" . addslashes( $f_path ) . "';" . PHP_EOL;
+	}
 
 	$t_write_failed = true;
 
@@ -1291,7 +1419,7 @@ if( 5 == $t_install_state ) {
 	?>
 </tr>
 <?php
-	if( true == $t_write_failed ) {
+	if( $t_write_failed ) {
 ?>
 <tr>
 	<td colspan="2">
@@ -1323,7 +1451,7 @@ if( 5 == $t_install_state ) {
 </div>
 
 <?php
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$t_install_state++;
 	}
 }
@@ -1355,7 +1483,7 @@ if( 6 == $t_install_state ) {
 		$g_db = ADONewConnection( $f_db_type );
 	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
 
-	if( $t_result == true ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1374,7 +1502,7 @@ if( 6 == $t_install_state ) {
 	$t_query = 'SELECT COUNT(*) FROM ' . db_get_table( 'config' );
 	$t_result = @$g_db->Execute( $t_query );
 
-	if( $t_result != false ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1393,7 +1521,7 @@ if( 6 == $t_install_state ) {
 		$t_query = 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'test\', 1, 90, \'database_test\', 20, 0 )';
 	$t_result = @$g_db->Execute( $t_query );
 
-	if( $t_result != false ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1412,7 +1540,7 @@ if( 6 == $t_install_state ) {
 		$t_query = 'UPDATE ' . db_get_table( 'config' ) . ' SET value=\'test_update\' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
-	if( $t_result != false ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1431,7 +1559,7 @@ if( 6 == $t_install_state ) {
 		$t_query = 'DELETE FROM ' . db_get_table( 'config' ) . ' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
-	if( $t_result != false ) {
+	if( $t_result ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result(
@@ -1450,7 +1578,7 @@ if( 6 == $t_install_state ) {
 </div>
 
 <?php
-	if( false == $g_failed ) {
+	if( !$g_failed ) {
 		$t_install_state++;
 	}
 }

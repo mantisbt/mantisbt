@@ -163,7 +163,7 @@ $g_db_table_plugin_prefix = 'plugin';
  *
  * @global string $g_absolute_path
  */
-$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$g_absolute_path = __DIR__ . DIRECTORY_SEPARATOR;
 
 /**
  * Path to core folder.
@@ -235,94 +235,41 @@ unset( $t_local_config );
 # MantisBT Path Settings #
 ##########################
 
-$t_protocol = 'http';
-$t_host = 'localhost';
-if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
-	$t_protocol = http_is_protocol_https() ? 'https' : 'http';
-
-	# $_SERVER['SERVER_PORT'] is not defined in case of php-cgi.exe
-	if( isset( $_SERVER['SERVER_PORT'] ) ) {
-		$t_port = ':' . $_SERVER['SERVER_PORT'];
-		if( ( ':80' == $t_port && 'http' == $t_protocol )
-		  || ( ':443' == $t_port && 'https' == $t_protocol )) {
-			$t_port = '';
-		}
-	} else {
-		$t_port = '';
-	}
-
-	if( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { # Support ProxyPass
-		$t_hosts = explode( ',', $_SERVER['HTTP_X_FORWARDED_HOST'] );
-		$t_host = $t_hosts[0];
-	} else if( isset( $_SERVER['HTTP_HOST'] ) ) {
-		$t_host = $_SERVER['HTTP_HOST'];
-	} else if( isset( $_SERVER['SERVER_NAME'] ) ) {
-		$t_host = $_SERVER['SERVER_NAME'] . $t_port;
-	} else if( isset( $_SERVER['SERVER_ADDR'] ) ) {
-		$t_host = $_SERVER['SERVER_ADDR'] . $t_port;
-	}
-
-	if( !isset( $_SERVER['SCRIPT_NAME'] )) {
-		echo 'Invalid server configuration detected. Please set $g_path manually in ' . $g_config_path . 'config_inc.php.';
-		if( isset( $_SERVER['SERVER_SOFTWARE'] ) && ( stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false ) )
-			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
-		die;
-	}
-
-	# Prevent XSS if the path is displayed later on. This is the equivalent of
-	# FILTER_SANITIZE_STRING, which was deprecated in PHP 8.1:
-	# strip tags and null bytes, then encode quotes into HTML entities
-	$t_path = preg_replace( '/\x00|<[^>]*>?/', '', $_SERVER['SCRIPT_NAME'] );
-	$t_path = str_replace( ["'", '"'], ['&#39;', '&#34;'], $t_path );
-
-	$t_path = dirname( $t_path );
-	switch( basename( $t_path ) ) {
-		case 'admin':
-			$t_path = dirname( $t_path );
-			break;
-		case 'check':		# admin checks dir
-		case 'soap':
-		case 'rest':
-			$t_path = dirname( $t_path, 2 );
-			break;
-		case 'swagger':
-			$t_path = dirname( $t_path, 3 );
-			break;
-	}
-	$t_path = rtrim( $t_path, '/\\' ) . '/';
-
-	if( strpos( $t_path, '&#' ) ) {
-		echo 'Can not safely determine $g_path. Please set $g_path manually in ' . $g_config_path . 'config_inc.php';
-		die;
-	}
-} else {
-	$t_path = 'mantisbt/';
-}
-
 /**
- * Path to your installation as seen from the web browser.
+ * Full URL to your installation as seen from the web browser.
  *
- * requires trailing /.
+ * Requires trailing `/`.
+ *
+ * If not set, MantisBT will default this to a working URL valid for most
+ * installations.
+ *
+ * WARNING: The default is built based on headers from the HTTP request
+ * ({@see set_default_path()} in core.php). This is a potential security risk,
+ * as the system will be exposed to Host Header injection attacks, so it is
+ * strongly recommended to initialize this in config_inc.php.
  *
  * @global string $g_path
  */
-$g_path = $t_protocol . '://' . $t_host . $t_path;
+$g_path	= '';
 
 /**
  * Short web path without the domain name.
  *
- * requires trailing /.
+ * requires trailing `/`.
+ *
+ * This is defined by MantisBT core based on the script being executed, and
+ * should not be set in config_inc.php.
  *
  * @global string $g_short_path
  */
-$g_short_path = $t_path;
+$g_short_path = '';
 
 /**
  * Used to link to manual for User Documentation.
  *
  * This can be either a full URL or a relative path to the MantisBT root.
  * If a relative path does not exist, the link will fall back to the online
- * documentation at http://www.mantisbt.org. No check is performed on URLs.
+ * documentation at https://mantisbt.org. No check is performed on URLs.
  *
  * @global string $g_manual_url
  */
@@ -2385,18 +2332,22 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
  *
  * The options below can be combined using bitwise operators (not all
  * possible combinations make sense):
- * - OFF                Do not convert URLs or emails
- * - LINKS_SAME_WINDOW  Convert to links that open in the current window (DEFAULT)
- * - LINKS_NEW_WINDOW   Convert to links that open in a new window (overrides LINKS_SAME_WINDOW)
- * - LINKS_NOOPENER     Links have the `noopener` type (DEFAULT)
- *                      {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener}
- * - LINKS_NOREFERRER   Links have the `noreferrer` type, i.e. they omit the *Referer*
- *                      header (implies LINKS_NOOPENER)
- *                      {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer}
+ * - OFF                      Do not convert URLs or emails
+ * - LINKS_SAME_WINDOW        Convert to links that open in the current window (DEFAULT)
+ * - LINKS_NEW_WINDOW         Convert to links that open in a new window (overrides LINKS_SAME_WINDOW)
+ * - LINKS_NOOPENER           Links have the `noopener` type (DEFAULT)
+ *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/noopener}
+ * - LINKS_NOREFERRER         Links have the `noreferrer` type, i.e. they omit the *Referer*
+ *                            header (implies LINKS_NOOPENER)
+ *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/noreferrer}
+ * - LINKS_NOFOLLOW_EXTERNAL  Links to external sites (i.e. having a different root domain)
+ *                            have the `nofollow` type, instructing search engines
+ *                            not to follow these links (DEFAULT)
+ *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#nofollow}
  *
  * @global int $g_html_make_links
  */
-$g_html_make_links = LINKS_SAME_WINDOW | LINKS_NOOPENER;
+$g_html_make_links = LINKS_SAME_WINDOW | LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL;
 
 /**
  * Valid html tags for multi-line fields (e.g. description).
@@ -2934,6 +2885,16 @@ $g_allow_download_own_attachments = ON;
  * @global int $g_allow_delete_own_attachments
  */
 $g_allow_delete_own_attachments = OFF;
+
+/**
+ * Controls the target for attachment links.
+ *
+ * When ON, attachments will be opened in a new tab when clicking on the link;
+ * when OFF (default), they will open in the same tab.
+ *
+ * @global integer $g_attachments_to_new_tab
+ */
+$g_attachments_to_new_tab = OFF;
 
 ####################
 # Field Visibility #
@@ -4523,43 +4484,34 @@ $g_rss_enabled = ON;
 /**
  * Enable relationship graphs support.
  *
- * Show issue relationships using graphs.
+ * Show issue relationships and workflow transitions using graphs.
  *
  * In order to use this feature, you must first install GraphViz.
  * @see https://www.graphviz.org/ Graphviz homepage
- *
- * Refer to the notes near the top of core/graphviz_api.php and
- * core/relationship_graph_api.php for more information.
+ * @see $g_graphviz_path
  *
  * @global int $g_relationship_graph_enable
  */
 $g_relationship_graph_enable = OFF;
 
 /**
- * Complete path to dot and neato tools.
+ * Complete path to the Graphviz tools.
  *
- * Your webserver must have execute permission to these programs in order to
- * generate relationship graphs.
+ * {@see https://graphviz.org/ Graphviz} must be installed on your server.
+ * Mantis uses the following tools :
+ * - Relationship graphs: dot, neato
+ * - Workflow transitions graph: dot
  *
- * NOTE: On windows, the IIS user may require permissions to cmd.exe to be able
- * to use PHP's proc_open.
+ * NOTES:
+ * - Requires trailing `/`
+ * - The webserver must have execute permission to these programs in order to
+ *   generate the graphs.
+ * - On Windows, the IIS user may require permissions to cmd.exe to be able
+ *   to use PHP's {@see proc_open()}
  *
- * @global string $g_dot_tool
+ * @global string $g_graphviz_path
  */
-$g_dot_tool = '/usr/bin/dot';
-
-/**
- * Complete path to dot and neato tools.
- *
- * Your webserver must have execute permission to these programs in order to
- * generate relationship graphs.
- *
- * NOTE: On windows, the IIS user may require permissions to cmd.exe to be able
- * to use PHP's proc_open.
- *
- * @global string $g_neato_tool
- */
-$g_neato_tool = '/usr/bin/neato';
+$g_graphviz_path = '/usr/bin/';
 
 /**
  * Font name and size, as required by Graphviz.
@@ -5226,7 +5178,6 @@ $g_global_settings = array(
 	'default_home_page',
 	'default_language',
 	'display_errors',
-	'dot_tool',
 	'email_dkim_domain',
 	'email_dkim_enable',
 	'email_dkim_identity',
@@ -5248,6 +5199,7 @@ $g_global_settings = array(
 	'fileinfo_magic_db_file',
 	'form_security_validation',
 	'global_settings',
+	'graphviz_path',
 	'hostname',
 	'html_valid_tags',
 	'html_valid_tags_single_line',
@@ -5279,7 +5231,6 @@ $g_global_settings = array(
 	'long_process_timeout',
 	'manage_config_cookie',
 	'manual_url',
-	'neato_tool',
 	'path',
 	'plugin_path',
 	'plugins_enabled',
@@ -5342,6 +5293,7 @@ $g_public_config_names = array(
 	'antispam_max_event_count',
 	'antispam_time_window_in_seconds',
 	'assign_sponsored_bugs_threshold',
+	'attachments_to_new_tab',
 	'auto_set_status_to_assigned',
 	'backward_year_count',
 	'bottom_include_page',
@@ -5697,10 +5649,6 @@ $g_public_config_names = array(
 	'window_title',
 	'wrap_in_preformatted_text'
 );
-
-# Temporary variables should not remain defined in global scope
-unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );
-
 
 ############################
 # Webservice Configuration #

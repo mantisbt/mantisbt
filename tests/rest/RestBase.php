@@ -27,7 +27,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 
 # Includes
-require_once dirname( __FILE__, 2 ) . '/TestConfig.php';
+require_once dirname( __DIR__ ) . '/TestConfig.php';
 
 # MantisBT Core API
 require_mantis_core();
@@ -48,6 +48,11 @@ abstract class RestBase extends TestCase {
 	 * @var string Base path for REST API
 	 */
 	protected $base_path = '';
+
+	/**
+	 * @var string Xdebug session value to enable, empty to disable debugging.
+	 */
+	protected $xdebug_session;
 
 	/**
 	 * @var string Username
@@ -72,7 +77,7 @@ abstract class RestBase extends TestCase {
 	/**
 	 * @var int User ID
 	 */
-	protected $userId = '1';
+	protected $userId = 1;
 
 	/**
 	 * @var int Project ID
@@ -111,6 +116,7 @@ abstract class RestBase extends TestCase {
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_USERNAME', $GLOBALS ) ) {
 			$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'];
+			$this->userId = user_get_id_by_name( $this->userName );
 		}
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_PASSWORD', $GLOBALS ) ) {
@@ -122,6 +128,8 @@ abstract class RestBase extends TestCase {
 			"You must define 'MANTIS_TESTSUITE_API_TOKEN' in your bootstrap file" );
 
 		$this->token = $GLOBALS['MANTIS_TESTSUITE_API_TOKEN'];
+
+		$this->xdebug_session = $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION'] ?? '';
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_PROJECT_ID', $GLOBALS ) ) {
 			$this->projectId = $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'];
@@ -161,7 +169,7 @@ abstract class RestBase extends TestCase {
 	 * @return RequestBuilder
 	 */
 	public function builder() {
-		return new RequestBuilder( $this->base_path, $this->token );
+		return new RequestBuilder( $this->base_path, $this->token, $this->xdebug_session );
 	}
 
 	/**
@@ -182,6 +190,18 @@ abstract class RestBase extends TestCase {
 	}
 
 	/**
+	 * Generate a Test Case reference (TestClass::TestCase).
+	 *
+	 * This can be used to associate the test data (e.g. Issue Summary, Project
+	 * Name, etc.) with a test case.
+	 * 
+	 * @return string
+	 */
+	protected function getTestCaseReference() {
+		return static::class . '::' . $this->getName();
+	}
+
+	/**
 	 * Returns a minimal data structure for tests to create a new Issue.
 	 *
 	 * The Issue Summary is set to TestClass::TestCase with an optional
@@ -192,7 +212,7 @@ abstract class RestBase extends TestCase {
 	 * @return array
 	 */
 	protected function getIssueToAdd( $p_suffix = '' ) {
-		$t_summary = static::class . '::' . $this->getName();
+		$t_summary = $this->getTestCaseReference();
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}

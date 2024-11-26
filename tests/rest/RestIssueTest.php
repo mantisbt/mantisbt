@@ -252,7 +252,7 @@ class RestIssueTest extends RestBase {
 		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
-	public function testCreateIssueWithVersionObjectIdAndMistatchingName() {
+	public function testCreateIssueWithVersionObjectIdAndMismatchingName() {
 		$this->skipTestIfNotEnoughVersions( 2 );
 
 		$t_version_id = $this->versions[0]['id'];
@@ -365,7 +365,7 @@ class RestIssueTest extends RestBase {
 	 *
 	 * @param ResponseInterface $p_response
 	 *
-	 * @return integer Created issue Id
+	 * @return integer Created issue ID
 	 */
 	protected function assertIssueCreatedWithTag( $p_response ) {
 		$this->assertEquals( HTTP_STATUS_CREATED, $p_response->getStatusCode() );
@@ -539,6 +539,21 @@ class RestIssueTest extends RestBase {
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
 		$this->assertEquals( $t_result, $t_response->getStatusCode() );
+
+		if( $t_response->getStatusCode() == HTTP_STATUS_CREATED ) {
+			$t_body = json_decode( $t_response->getBody(), true );
+			$t_issue = $t_body['issue'];
+			$this->deleteIssueAfterRun( $t_issue['id'] );
+		}
+	}
+
+	public function testCreateIssueWithCategoryInvalid() {
+		$t_issue_to_add = $this->getIssueToAdd();
+		$t_issue_to_add['category'] = 'Non-existent category';
+
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 
 		if( $t_response->getStatusCode() == HTTP_STATUS_CREATED ) {
 			$t_body = json_decode( $t_response->getBody(), true );

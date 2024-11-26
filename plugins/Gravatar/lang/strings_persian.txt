@@ -38,8 +38,10 @@
  * @ingroup Language
  * @file
  *
+ * @author Ebrahim
+ * @author Ebraminio
  * @author Sjazz
  */
 
 $s_plugin_Gravatar_title = 'عکس‌های پروفایل با Gravatar';
-$s_plugin_Gravatar_description = 'افزونه‌ای که عکس‌های پروفایل کاربران را بر پایه‌ی آدرس ایمیلشان از سرویس عکس پروفایل نمایش می‌دهد.';
+$s_plugin_Gravatar_description = 'افزونه‌ای که عکس‌های پروفایل کاربران را بر پایهٔ آدرس ایمیلشان از سرویس عکس پروفایل نمایش می‌دهد.';

@@ -209,15 +209,16 @@ function is_page_name( $p_string ) {
 }
 
 /**
- * return true or false if the host operating system is windows
- * @return boolean
+ * Return true if the host operating system is Windows, false otherwise.
+ *
+ * @return bool
  * @access public
  */
 function is_windows_server() {
 	if( defined( 'PHP_WINDOWS_VERSION_MAJOR' ) ) {
-		return (PHP_WINDOWS_VERSION_MAJOR > 0);
+		return PHP_WINDOWS_VERSION_MAJOR > 0;
 	}
-	return ('WIN' == substr( PHP_OS, 0, 3 ) );
+	return 'Windows' === PHP_OS_FAMILY;
 }
 
 /**

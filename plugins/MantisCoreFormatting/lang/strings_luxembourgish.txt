@@ -39,6 +39,7 @@
  * @file
  *
  * @author Robby
+ * @author Volvox
  */
 
 $s_plugin_format_title = 'MantisBt-Formatéierung';
@@ -51,3 +52,8 @@ $s_plugin_format_process_buglinks = 'MantisBT intern Linken (Problemer an Notize
 $s_plugin_format_process_buglinks_info = 'Är Astellung definéiert den <em>Issue</em> Tag als "%s" an den <em>Issue Note</em> Tag als "%s"';
 $s_plugin_format_enabled = 'Un';
 $s_plugin_format_disabled = 'Aus';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Kopéieren';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Kopéiert';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Sprooch weisen';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Zeilennummeren';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Zeilennummere weisen.';

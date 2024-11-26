@@ -41,6 +41,7 @@
  * @author Asya
  * @author DCLXVI
  * @author Emostoyanov
+ * @author MTongov
  * @author StanProg
  */
 
@@ -56,3 +57,7 @@ $s_plugin_format_process_markdown = 'Обработка с Markdown';
 $s_plugin_format_process_markdown_info = 'Синтаксиса на форматирането с поддръжка на Markdown е разработен така, че текстът да може да се преобразува в HTML.';
 $s_plugin_format_enabled = 'Вкл.';
 $s_plugin_format_disabled = 'Изкл.';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Копиране';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Натиснете Ctrl+C, за да копирате';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Показване на езика';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Номерата на редовете';

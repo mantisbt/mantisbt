@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Milicevic01
  * @author Rancher
  * @author Srdjan m
  * @author Srđan
@@ -52,3 +53,4 @@ $s_plugin_format_process_urls = 'Обрада адреса';
 $s_plugin_format_process_buglinks = 'MantisBT унутрашње везе (Проблеми и коментари)';
 $s_plugin_format_enabled = 'Укључено';
 $s_plugin_format_disabled = 'Искључено';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Копирани';

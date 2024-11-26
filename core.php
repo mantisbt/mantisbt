@@ -66,7 +66,7 @@ if( file_exists( 'mantis_offline.php' ) && !isset( $_GET['mbadmin'] ) ) {
 $g_request_time = microtime( true );
 
 # Load supplied constants
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
+require_once( __DIR__ . '/core/constant_inc.php' );
 
 # Enforce our minimum PHP requirements
 if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
@@ -86,10 +86,10 @@ if( php_sapi_name() != 'cli' ) {
 }
 
 # Load Composer autoloader
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
+require_once( __DIR__ . '/vendor/autoload.php' );
 
 # Include default configuration settings
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
+require_once( __DIR__ . '/config_defaults_inc.php' );
 
 # Load user-defined constants (if required)
 global $g_config_path;
@@ -99,10 +99,15 @@ if( file_exists( $g_config_path . 'custom_constants_inc.php' ) ) {
 
 # config_inc may not be present if this is a new install
 $t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
-
 if( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
 }
+
+# Set global path variables
+# NOTE: We store whether $g_path was defaulted, so we can later warn the admin
+# about the exposure to host header injection attacks if they didn't set it.
+global $g_defaulted_path;
+$g_defaulted_path = set_default_path();
 
 # Ensure PHP LDAP extension is available when Login Method is LDAP
 global $g_login_method;
@@ -135,6 +140,12 @@ if( false === $t_config_inc_found ) {
 	if( php_sapi_name() == 'cli' ) {
 		echo 'Error: ' . $g_config_path . "config_inc.php file not found; ensure MantisBT is properly setup.\n";
 		exit( 1 );
+	}
+
+	# Do not load Core for dynamic javascript files when MantisBT is not installed
+	if( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'javascript' ) ) ) {
+		http_response_code( HTTP_STATUS_NO_CONTENT );
+		exit;
 	}
 
 	if( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
@@ -301,6 +312,89 @@ function http_is_protocol_https() {
 }
 
 /**
+ * Set Global Path variables.
+ *
+ * @see $g_path
+ * @see $g_short_path
+ *
+ * @return bool True if default $g_path was assigned, false if it was already set.
+ */
+function set_default_path() {
+	global $g_path, $g_short_path, $g_config_path;
+
+	# $g_path is set in config_inc.php
+	if( $g_path ) {
+		# Derive $g_short_path from $g_path if not set
+		if( !$g_short_path ) {
+			$g_short_path = parse_url( $g_path, PHP_URL_PATH );
+		}
+		return false;
+	}
+
+	$t_protocol = 'http';
+	$t_host = 'localhost';
+	if( isset( $_SERVER['SCRIPT_NAME'] ) ) {
+		$t_protocol = http_is_protocol_https() ? 'https' : 'http';
+
+		# $_SERVER['SERVER_PORT'] is not defined in case of php-cgi.exe
+		if( isset( $_SERVER['SERVER_PORT'] ) ) {
+			$t_port = ':' . $_SERVER['SERVER_PORT'];
+			if( ( ':80' == $t_port && 'http' == $t_protocol )
+				|| ( ':443' == $t_port && 'https' == $t_protocol )) {
+				$t_port = '';
+			}
+		} else {
+			$t_port = '';
+		}
+
+		if( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { # Support ProxyPass
+			$t_hosts = explode( ',', $_SERVER['HTTP_X_FORWARDED_HOST'] );
+			$t_host = $t_hosts[0];
+		} else if( isset( $_SERVER['HTTP_HOST'] ) ) {
+			$t_host = $_SERVER['HTTP_HOST'];
+		} else if( isset( $_SERVER['SERVER_NAME'] ) ) {
+			$t_host = $_SERVER['SERVER_NAME'] . $t_port;
+		} else if( isset( $_SERVER['SERVER_ADDR'] ) ) {
+			$t_host = $_SERVER['SERVER_ADDR'] . $t_port;
+		}
+
+		# Prevent XSS if the path is displayed later on. This is the equivalent of
+		# FILTER_SANITIZE_STRING, which was deprecated in PHP 8.1:
+		# strip tags and null bytes, then encode quotes into HTML entities
+		$t_path = preg_replace( '/\x00|<[^>]*>?/', '', $_SERVER['SCRIPT_NAME'] );
+		$t_path = str_replace( ["'", '"'], ['&#39;', '&#34;'], $t_path );
+
+		$t_path = dirname( $t_path );
+		switch( basename( $t_path ) ) {
+			case 'admin':
+				$t_path = dirname( $t_path );
+				break;
+			case 'check': # admin checks dir
+			case 'soap':
+			case 'rest':
+				$t_path = dirname( $t_path, 2 );
+				break;
+			case 'swagger':
+				$t_path = dirname( $t_path, 3 );
+				break;
+		}
+		$t_path = rtrim( $t_path, '/\\' ) . '/';
+
+		if( strpos( $t_path, '&#' ) ) {
+			echo 'Can not safely determine $g_path. Please set $g_path manually in ' . $g_config_path . 'config_inc.php';
+			die;
+		}
+	} else {
+		$t_path = 'mantisbt/';
+	}
+
+	$g_path	= $t_protocol . '://' . $t_host . $t_path;
+	$g_short_path = $t_path;
+
+	return true;
+}
+
+/**
  * Define an autoload function to automatically load classes when referenced
  *
  * @param string $p_class Class name being autoloaded.
@@ -343,7 +437,7 @@ function autoload_mantis( $p_class ) {
 		return;
 	}
 
-	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $p_class . '.inc.php';
+	$t_require_path = $g_library_path . 'rssbuilder/class.' . $p_class . '.inc.php';
 
 	if( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );

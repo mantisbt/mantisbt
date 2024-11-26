@@ -48,7 +48,7 @@ if( isset( $ADODB_vers ) ) {
 	# Upstream bug report: http://phplens.com/lens/lensforum/msgs.php?id=18320
 	# This bug has been fixed in ADOdb 5.11 (May 5, 2010) but we still
 	# need to use the backwards compatible approach to detect ADOdb <5.11.
-	if( preg_match( '/^[Vv]([0-9\.]+)/', $ADODB_vers, $t_matches ) == 1 ) {
+	if( preg_match( '/^[Vv]([0-9.]+)/', $ADODB_vers, $t_matches ) == 1 ) {
 		$t_adodb_version_check_ok = version_compare( $t_matches[1], DB_MIN_VERSION_ADODB, '>=' );
 		$t_adodb_version_info = 'ADOdb version ' . htmlentities( $t_matches[1] ) . ' was found.';
 	}
@@ -61,7 +61,7 @@ if( isset( $ADODB_vers ) ) {
 	);
 }
 check_print_test_row(
-	'Version of <a href="http://en.wikipedia.org/wiki/ADOdb">ADOdb</a> available is at least ' . DB_MIN_VERSION_ADODB,
+	'Version of <a href="https://adodb.org">ADOdb</a> available is at least ' . DB_MIN_VERSION_ADODB,
 	$t_adodb_version_check_ok,
 	$t_adodb_version_info
 );
@@ -72,7 +72,7 @@ if( !$t_adodb_version_check_ok ) {
 
 $t_database_dsn = config_get_global( 'dsn' );
 check_print_info_row(
-	'Using a custom <a href="http://en.wikipedia.org/wiki/Database_Source_Name">Database Source Name</a> (DSN) for connecting to the database',
+	'Using a custom <a href="https://en.wikipedia.org/wiki/Database_Source_Name">Database Source Name</a> (DSN) for connecting to the database',
 	$t_database_dsn ? 'Yes' : 'No'
 );
 
@@ -91,9 +91,14 @@ check_print_test_row(
 
 if( db_is_mysql() ) {
 	check_print_test_warn_row(
-		'PHP support for MySQL driver',
+		'PHP support for legacy MySQL driver',
 		'mysql' != $t_database_type,
-		array( false => "'mysql' driver is deprecated as of PHP 5.5.0, please use 'mysqli' instead" )
+		array( false => "'mysql' driver is deprecated as of PHP 5.5.0 and has been removed as of PHP 7.0.0, please use 'mysqli' instead" )
+	);
+
+	check_print_test_row( 'PHP support for MySQL Native Driver',
+		function_exists( 'mysqli_stmt_get_result' ),
+		array( false => 'Check that the MySQL Native Driver (mysqlnd) has been compiled into your server.' )
 	);
 
 	check_print_test_warn_row(
@@ -173,7 +178,7 @@ check_print_test_row(
 if( !db_is_connected() ) {
 	return;
 }
-
+global $g_db;
 $t_database_server_info = $g_db->ServerInfo();
 $t_db_version = $t_database_server_info['version'];
 preg_match( '/^([0-9]+)\.[0-9+]/', $t_db_version, $t_matches );
@@ -218,9 +223,10 @@ $t_date_format = config_get( 'short_date_format' );
 # MySQL support checking
 if( db_is_mysql() ) {
 	# The list below was built based on information found in the FAQ [1]
-	# [1]: https://dev.mysql.com/doc/refman/8.0/en/faqs-general.html
+	# [1]: https://dev.mysql.com/doc/refman/8.4/en/faqs-general.html
+	# @TODO consider using https://endoflife.date/mysql to retrieve this data
 	$t_versions = array(
-		# Series >= Type, GA status, GA date
+		# Series => Type, Version when GA status was achieved, GA date
 		'5.0' => array( 'GA', '5.0.15', '2005-10-19' ),
 		'5.1' => array( 'GA', '5.1.30', '2008-11-14' ),
 		'5.4' => array( 'Discontinued' ),
@@ -229,68 +235,116 @@ if( db_is_mysql() ) {
 		'5.7' => array( 'GA', '5.7.9', '2015-10-21' ),
 		'6.0' => array( 'Discontinued' ),
 		'8.0' => array( 'GA', '8.0.11', '2018-04-19' ),
+		'8.1' => array( 'Innovation', '8.1.0', '2023-07-18' ),
+		'8.2' => array( 'Innovation', '8.2.0', '2023-10-25' ),
+		'8.3' => array( 'Innovation', '8.3.0', '2024-01-16' ),
+		'8.4' => array( 'LTS', '8.4.0', '2024-04-30' ),
+		'9.0' => array( 'Innovation', '9.0.0', '2024-06-07' ),
+		'9.1' => array( 'Innovation', '9.1.0', '2024-09-24' ),
 	);
-	$t_support_url = 'https://www.mysql.com/support/';
 
-	# Is it a GA release
+	$t_support_url = 'https://www.mysql.com/support/supportedplatforms/';
+	$t_supported_release = '<a href="' . $t_support_url . '">supported release</a>';
+
+	# Is it a GA or LTS release
 	$t_mysql_ga_release = false;
-	$t_date_premier_end = $t_date_extended_end = null;
+	$t_date_end_active_support = $t_date_end_of_life = null;
 	if( !array_key_exists( $t_db_major_version, $t_versions ) ) {
+		$t_param = [
+			'category_id' => 12, # db mysql
+			'product_version' => MANTIS_VERSION,
+			'reproducibility' => 10, # always
+			'priority' => 20, # low
+			'summary' => "MySQL version $t_db_major_version is not defined in Admin Checks",
+			'description' => "Please add the missing version to " . basename( __FILE__ ) . ".",
+		];
+		$t_report_bug_url = 'https://mantisbt.org/bugs/bug_report_page.php?' . http_build_query( $t_param );
 		check_print_test_warn_row(
 			'MySQL Lifecycle and Release Support data availability',
 			false,
 			array(
 				false => 'Release information for MySQL ' . $t_db_major_version
 					. ' series is not available, unable to perform the lifecycle checks.'
+					. ' Please <a href="' . $t_report_bug_url . '">report the issue</a>.'
 			) );
 	} else {
-		if( 'GA' == $t_versions[$t_db_major_version][0] ) {
-			$t_mysql_ga_release = version_compare( $t_database_server_info['version'], $t_versions[$t_db_major_version][1], '>=' );
+		$t_version = $t_versions[$t_db_major_version];
+		$t_version_type = $t_version[0];
+		$t_mysql_ga_release = version_compare( $t_db_version, $t_version[1], '>=' );
+		if( in_array( $t_version_type, ['GA', 'LTS'] )) {
 			# Support end-dates as per https://www.mysql.com/support/
-			$t_date_ga = new DateTime( $t_versions[$t_db_major_version][2] );
-			$t_date_premier_end = $t_date_ga->add( new DateInterval( 'P5Y' ) )->format( $t_date_format );
-			$t_date_extended_end = $t_date_ga->add( new DateInterval( 'P3Y' ) )->format( $t_date_format );
-		} else {
-			$t_mysql_ga_release = false;
-			$t_date_premier_end = $t_date_extended_end = null;
+			/** @noinspection PhpUnhandledExceptionInspection */
+			$t_date_ga = new DateTimeImmutable( $t_version[2] );
+			$t_date_end_active_support = $t_date_ga->add( new DateInterval( 'P5Y' ) )
+												   ->modify( 'last day of this month' );
+			$t_date_end_of_life = $t_date_ga->add( new DateInterval( 'P8Y' ) )
+											->modify( 'last day of this month' );
+		} elseif( 'Innovation' === $t_version_type ) {
+			# Innovation releases are supported until the next one comes out.
+			# If not defined, we default to 3 months as Oracle aims for quarterly releases.
+
+			# Get the next version
+			# Skip the first entries (Innovation versions started with MySQL 8.1)
+			$t_innovation_versions = array_slice( $t_versions, 8 );
+			foreach( $t_innovation_versions as $t_key => $t_unused ) {
+				$t_next_version = next( $t_innovation_versions );
+				if( $t_key == $t_db_major_version) {
+					break;
+				}
+			}
+
+			/** @noinspection PhpUndefinedVariableInspection */
+			if( $t_next_version !== false ) {
+				/** @noinspection PhpUnhandledExceptionInspection */
+				$t_date_end_of_life = new DateTimeImmutable( $t_next_version[2] );
+			} else {
+				/** @noinspection PhpUnhandledExceptionInspection */
+				$t_date_ga = new DateTimeImmutable( $t_version[2] );
+				$t_date_end_of_life = $t_date_ga->add( new DateInterval( 'P3M' ) )
+												->modify( 'last day of this month' );
+			}
+			$t_date_end_active_support = $t_date_end_of_life;
 		}
+
 		check_print_test_row(
 			'MySQL version is a General Availability (GA) release',
 			$t_mysql_ga_release,
 			array(
-				true => 'You are using MySQL version ' . htmlentities( $t_db_version ) . '.',
-				false => 'The version of MySQL you are using is '
-					. htmlentities( $t_db_version )
-					. '. This is a development or pre-GA version which '
-					. ( $t_versions[$t_db_major_version][0] == 'Discontinued' ? 'has been discontinued and ' : '' )
-					. 'is not recommended for Production use. You should upgrade to a supported GA release.'
-			) );
+				false => "MySQL $t_db_version is a development or pre-GA release, which "
+					. ( $t_version_type == 'Discontinued' ? 'has been discontinued and ' : '' )
+					. "is not recommended for Production use. You should upgrade to a $t_supported_release."
+			)
+		);
 
-		# Within lifecycle 'Extended' support
-		check_print_test_row(
-			'MySQL version is within the <a href="' . $t_support_url . '">Extended Support</a> period (GA + 8 years)',
-			date_create( $t_date_extended_end ) > date_create( 'now' ),
-			array(
-				true => 'Extended support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_date_extended_end,
-				false => 'Support for the release of MySQL you are using ('
-					. htmlentities( $t_db_version )
-					. ') ended on ' . $t_date_extended_end
-					. '. It should not be used, as security flaws discovered in this version will not be fixed.'
-			) );
-
-		# Within lifecycle 'Premier' support
+		# Has not reached End Of Life
+		$t_end_of_life = $t_date_end_of_life > date_create_immutable();
+		$t_eol_date_formatted = $t_date_end_of_life ? $t_date_end_of_life->format( $t_date_format ) : 'N/A (Discontinued release)';
 		check_print_test_warn_row(
-			'Version of MySQL being used is within the <a href="' . $t_support_url . '">Premier Support</a> period (GA + 5 years)',
-			date_create( $t_date_premier_end ) > date_create( 'now' ),
+			'MySQL version is supported',
+			$t_end_of_life,
 			array(
-				true => 'Premier support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_date_premier_end,
-				false => 'Premier Support for the release of MySQL you are using ('
-					. htmlentities( $t_db_version )
-					. ') ended on ' . $t_date_premier_end
-					. '. The release is in its Extended support period, which ends on '
-					. $t_date_extended_end
-					. '. You should upgrade to a newer version of MySQL which is still within its Premier support period to benefit from bug fixes and security patches.'
-			) );
+				true => 'Support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_eol_date_formatted,
+				false => 'Support for MySQL ' . htmlspecialchars( $t_db_version )
+					. " ended on $t_eol_date_formatted. You should upgrade to a $t_supported_release,"
+					. ' as bugs and security flaws discovered in this version will not be fixed.'
+			)
+		);
+
+		if( $t_end_of_life && $t_date_end_active_support < $t_date_end_of_life ) {
+			# Within active support period
+			$t_eas_date_formatted = $t_date_end_active_support->format( $t_date_format );
+			check_print_test_warn_row(
+				'MySQL version is within the active support period',
+				$t_date_end_active_support > date_create_immutable(),
+				array(
+					true => 'Active support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_eas_date_formatted,
+					false => 'Active support for MySQL ' . htmlspecialchars( $t_db_version )
+						. ' ended on ' . $t_eas_date_formatted
+						. '. The release is in its Extended support period, which will end on ' . $t_eol_date_formatted
+						. ". You should upgrade to an actively $t_supported_release,"
+						. '  to benefit from bug fixes and security patches.'
+				) );
+		}
 	}
 } else if( db_is_pgsql() ) {
 	# PostgreSQL support checking
@@ -298,6 +352,8 @@ if( db_is_mysql() ) {
 	# Version support information
 	$t_versions = array(
 		# Version => Final release (EOL) date
+		'17'  => '2029-11-08',
+		'16'  => '2028-11-09',
 		'15'  => '2027-11-11',
 		'14'  => '2026-11-12',
 		'13'  => '2025-11-13',
@@ -378,6 +434,7 @@ check_print_test_warn_row(
 );
 
 if( db_is_mysql() ) {
+	global $g_database_name;
 	# Check DB's default collation
 	$t_query = 'SELECT default_collation_name
 		FROM information_schema.schemata

@@ -83,3 +83,8 @@ $GLOBALS['MANTIS_TESTSUITE_REST_HOST'] = 'http://localhost/mantisbt/api/rest';
  * The API token to use
  */
 $GLOBALS['MANTIS_TESTSUITE_API_TOKEN'] = '';
+
+/**
+ * If not empty, enables debugging of API endpoints.
+ */
+$GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION'] = '';

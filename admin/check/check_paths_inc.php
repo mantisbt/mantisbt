@@ -30,11 +30,25 @@ if( !defined( 'CHECK_PATHS_INC_ALLOW' ) ) {
 	return;
 }
 
+global $g_failed_test;
+
 # MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 
 check_print_section_header_row( 'Paths' );
+
+global $g_defaulted_path;
+const HOST_HEADER_INJECTION_URL = 'https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/07-Input_Validation_Testing/17-Testing_for_Host_Header_Injection';
+check_print_test_warn_row(
+	'"path" is defined in config_inc.php.',
+	!$g_defaulted_path,
+	array( false =>
+		'Leaving it empty is a security risk, as the path will be set based on '
+		. 'headers from the HTTP request, exposing your system to '
+		. '<a href="' . HOST_HEADER_INJECTION_URL . '">Host Header Injection attacks</a>.'
+	)
+);
 
 $t_path_config_names = array(
 	'absolute_path',
@@ -42,7 +56,8 @@ $t_path_config_names = array(
 	'class_path',
 	'library_path',
 	'config_path',
-	'language_path'
+	'language_path',
+	'graphviz_path',
 );
 
 # Handle file upload default path only if attachments stored on disk

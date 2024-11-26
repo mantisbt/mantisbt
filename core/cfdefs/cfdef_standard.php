@@ -403,7 +403,7 @@ function cfdef_input_list( array $p_field_def, $p_custom_field_value, $p_require
  */
 function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value, $p_required = '' ) {
 	$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
-	$t_checked_values = explode( '|', $p_custom_field_value );
+	$t_checked_values = explode( '|', $p_custom_field_value ?? '' );
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'] . '[]';

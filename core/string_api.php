@@ -420,24 +420,32 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 					if( bugnote_exists( $c_bugnote_id ) ) {
 						$t_bug_id = bugnote_get_field( $c_bugnote_id, 'bug_id' );
 						if( bug_exists( $t_bug_id ) ) {
-							$g_project_override = bug_get_field( $t_bug_id, 'project_id' );
-							if(   access_compare_level(
-										user_get_access_level( auth_get_current_user_id(),
-										bug_get_field( $t_bug_id, 'project_id' ) ),
-										config_get( 'private_bugnote_threshold' )
-								   )
-								|| bugnote_get_field( $c_bugnote_id, 'reporter_id' ) == auth_get_current_user_id()
-								|| bugnote_get_field( $c_bugnote_id, 'view_state' ) == VS_PUBLIC
-							) {
-								$g_project_override = null;
-								return $p_array[1] .
-									string_get_bugnote_view_link(
-										$t_bug_id,
-										$c_bugnote_id,
-										(boolean)$p_detail_info,
-										(boolean)$p_fqdn
-									);
+							$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+							$t_user_id = auth_get_current_user_id();
+
+							$g_project_override = $t_project_id;
+
+							$t_can_view_issue = access_has_bug_level( config_get( 'view_bug_threshold' ), $t_bug_id, $t_user_id );
+							if( $t_can_view_issue ) {
+								$t_can_view_note = access_compare_level(
+									user_get_access_level( $t_user_id, $t_project_id ),
+									config_get( 'private_bugnote_threshold' )
+									)
+									|| bugnote_get_field( $c_bugnote_id, 'reporter_id' ) == $t_user_id
+									|| bugnote_get_field( $c_bugnote_id, 'view_state' ) == VS_PUBLIC;
+
+								if( $t_can_view_note ) {
+									$g_project_override = null;
+									return $p_array[1] .
+										string_get_bugnote_view_link(
+											$t_bug_id,
+											$c_bugnote_id,
+											(boolean)$p_detail_info,
+											(boolean)$p_fqdn
+										);
+								}
 							}
+
 							$g_project_override = null;
 						}
 					}
@@ -507,15 +515,18 @@ function string_insert_hrefs( $p_string ) {
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
 	}
 
-	# Set the link's target and type according to configuration
-	$t_link_attributes = helper_get_link_attributes( false );
-
 	# Find any URL in a string and replace it with a clickable link
 	$p_string = preg_replace_callback(
 		$s_url_regex,
-		function ( $p_match ) use ( $t_link_attributes ) {
-			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			return "<a {$t_url_href}{$t_link_attributes}>{$p_match[1]}</a>";
+		function ( $p_match ) {
+			$t_url = $p_match[1];
+			# Check if link is external
+			$t_mantis_root_domain = helper_get_root_domain( config_get_global( 'path' ) );
+			$p_is_external_link = $t_mantis_root_domain != helper_get_root_domain( $t_url );
+			# Set the link's target and type according to configuration
+			$t_link_attributes = helper_get_link_attributes( false, $p_is_external_link );
+			$t_url_href = 'href="' . rtrim( $t_url, '.' ) . '"';
+			return "<a {$t_url_href}{$t_link_attributes}>{$t_url}</a>";
 		},
 		$p_string
 	);
@@ -693,9 +704,13 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info 
 			$t_link .= ' title="' . bug_format_id( $t_bug_id ) . ': [' . $t_update_date . '] ' . $t_reporter . '"';
 		}
 
+		if( bug_is_resolved( $t_bug_id ) ) {
+			$t_link .= ' class="resolved"';
+		}
+
 		$t_link .= '>' . bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id ) . '</a>';
 	} else {
-		$t_link = bugnote_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id );
+		$t_link = bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id );
 	}
 
 	return $t_link;
@@ -901,7 +916,7 @@ function string_html_specialchars( $p_string ) {
 	# achumakov: @ added to avoid warning output in unsupported codepages
 	# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
 	# This is VERY important for Eastern European, Baltic and Korean languages
-	return preg_replace( '/&amp;(#[0-9]+|[a-z]+);/i', '&$1;', @htmlspecialchars( $p_string, ENT_COMPAT, 'utf-8' ) );
+	return preg_replace( '/&amp;(#x?[0-9]+|[a-z]+);/i', '&$1;', @htmlspecialchars( $p_string, ENT_COMPAT, 'utf-8' ) );
 }
 
 /**

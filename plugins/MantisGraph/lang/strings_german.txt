@@ -44,7 +44,7 @@
  * @author Umherirrender
  */
 
-$s_plugin_MantisGraph_title = 'MantisBT-Grafiken';
+$s_plugin_MantisGraph_title = 'MantisBT Diagramme';
 $s_plugin_MantisGraph_description = 'Offizielles Grafik-Plugin.';
 $s_plugin_MantisGraph_config = 'Konfiguration';
 $s_plugin_MantisGraph_tab_label = 'Diagramme';
@@ -54,13 +54,14 @@ $s_plugin_MantisGraph_severity_link = 'Nach Schweregrad';
 $s_plugin_MantisGraph_category_link = 'Nach Kategorie';
 $s_plugin_MantisGraph_resolution_link = 'Nach Lösung';
 $s_plugin_MantisGraph_issue_trends_link = 'Eintragstrends';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Grafiken nach Status';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafiken nach Priorität';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafiken nach Schweregrad';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Grafiken nach Kategorie';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafiken nach Lösung';
-$s_plugin_MantisGraph_graph_developer_title = 'Grafiken nach Entwickler';
-$s_plugin_MantisGraph_graph_reporter_title = 'Grafiken nach Reporter';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Diagramme nach Status';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Diagramme nach Priorität';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Diagramme nach Schweregrad';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Diagramme nach Kategorie';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Diagramme nach Lösung';
+$s_plugin_MantisGraph_graph_project_title = 'Diagramme nach Projekt';
+$s_plugin_MantisGraph_graph_developer_title = 'Diagramme nach Entwickler';
+$s_plugin_MantisGraph_graph_reporter_title = 'Diagramme nach Reporter';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Offene, erledigte und verbleibende Einträge';
 $s_plugin_MantisGraph_by_status_pct = 'nach Status Prozent';
 $s_plugin_MantisGraph_by_priority_pct = 'nach Priorität Prozent';
@@ -89,3 +90,4 @@ $s_plugin_MantisGraph_graph_topdev = 'Top-Entwickler nach erledigten Einträgen'
 $s_plugin_MantisGraph_graph_opendev = 'Entwickler nach offenen Einträgen';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Top-Reporter nach erledigten Einträgen';
 $s_plugin_MantisGraph_other_categories = 'andere Kategorien (%d)';
+$s_plugin_MantisGraph_other_projects = 'Andere Projekte (%d)';

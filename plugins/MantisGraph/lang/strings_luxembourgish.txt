@@ -63,3 +63,4 @@ $s_plugin_MantisGraph_period_this_quarter = 'Dëst Quartal';
 $s_plugin_MantisGraph_period_last_quarter = 'Lescht Quartal';
 $s_plugin_MantisGraph_period_last_year = 'Lescht Joer';
 $s_plugin_MantisGraph_other_categories = 'aner Kategorien (%d)';
+$s_plugin_MantisGraph_other_projects = 'aner Projeten (%d)';

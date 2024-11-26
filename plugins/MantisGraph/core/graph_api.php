@@ -26,14 +26,16 @@
 
 /**
  * Converts an html color (e.g. #fcbdbd) to rgba.
- * @param string  $p_color The html color
- * @param float   $p_alpha    The value (e.g. 0.2)
+ *
+ * @param string $p_color The html color
+ * @param float  $p_alpha The value (e.g. 0.2)
+ *
  * @return string The rgba with the surrounding single quotes, 'rgba(252, 189, 189, 0.2)'
  */
 function graph_color_to_rgba( $p_color, $p_alpha ) {
 	$t_rgba = '"rgba(';
 
-	if ( $p_color[0] == '#' ) {
+	if( $p_color[0] == '#' ) {
 		$t_color = substr( $p_color, 1 );
 	} else {
 		$t_color = $p_color;
@@ -49,15 +51,17 @@ function graph_color_to_rgba( $p_color, $p_alpha ) {
 
 /**
  * Converts an array of colors + an alpha value to a set of rgbas.
- * @param  array  $p_colors Array of html colors (e.g. #fcbdbd).
- * @param  float  $p_alpha  The alpha value.
+ *
+ * @param array $p_colors Array of html colors (e.g. #fcbdbd).
+ * @param float $p_alpha  The alpha value.
+ *
  * @return string e.g. 'rgba(252, 189, 189, 0.2)', 'rgba(252, 189, 189, 0.2)'
  */
 function graph_colors_to_rgbas( array $p_colors, $p_alpha ) {
 	$t_rgbas = '';
 
 	foreach( $p_colors as $t_color ) {
-		if ( !empty( $t_rgbas ) ) {
+		if( !empty( $t_rgbas ) ) {
 			$t_rgbas .= ', ';
 		}
 
@@ -69,16 +73,18 @@ function graph_colors_to_rgbas( array $p_colors, $p_alpha ) {
 
 /**
  * Gets an array of html colors that corresponds to statuses.
+ *
  * @param array $p_metrics Data set to return colors for (with status labels as keys)
+ *
  * @return array An array similar to the status_colors config ordered by status enum codes.
  */
 function graph_status_colors_to_colors( $p_metrics = array() ) {
 	$t_colors = array();
 	# The metrics contain localized status, so we need an extra lookup
-    # to retrieve the id before we can get the color code
-	$t_status_lookup =  MantisEnum::getAssocArrayIndexedByLabels( lang_get( 'status_enum_string' ) );
+	# to retrieve the id before we can get the color code
+	$t_status_lookup = MantisEnum::getAssocArrayIndexedByLabels( lang_get( 'status_enum_string' ) );
 	foreach( array_keys( $p_metrics ) as $t_label ) {
-		$t_colors[] = get_status_color( $t_status_lookup[$t_label] , null, null, '#e5e5e5' );
+		$t_colors[] = get_status_color( $t_status_lookup[$t_label], null, null, '#e5e5e5' );
 	}
 
 	return $t_colors;
@@ -87,9 +93,10 @@ function graph_status_colors_to_colors( $p_metrics = array() ) {
 /**
  * Generate Bar Graph
  *
- * @param array   $p_metrics      Graph Data.
- * @param integer $p_wfactor      Width factor for graph chart. Eg: 2 to make it double wide
- * @param bool    $p_horiz        True for horizontal bars, defaults to false (vertical)
+ * @param array   $p_metrics Graph Data.
+ * @param integer $p_wfactor Width factor for graph chart. Eg: 2 to make it double wide
+ * @param bool    $p_horiz   True for horizontal bars, defaults to false (vertical)
+ *
  * @return void
  */
 function graph_bar( array $p_metrics, $p_wfactor = 1, $p_horiz = false ) {
@@ -116,7 +123,7 @@ function graph_bar( array $p_metrics, $p_wfactor = 1, $p_horiz = false ) {
  * Function that displays pie charts
  *
  * @param array $p_metrics       Graph Data.
- * @param bool $p_mantis_colors  True to use colors defined in Mantis config
+ * @param bool  $p_mantis_colors True to use colors defined in Mantis config
  *                               {@see $g_status_colors}. By default use
  *                               standard color scheme
  *
@@ -149,8 +156,9 @@ function graph_pie( array $p_metrics, $p_mantis_colors = false ) {
 /**
  * Cumulative line graph
  *
- * @param array   $p_metrics      Graph Data.
- * @param integer $p_wfactor      Width factor for graph chart. Eg: 2 to make it double wide
+ * @param array   $p_metrics Graph Data.
+ * @param integer $p_wfactor Width factor for graph chart. Eg: 2 to make it double wide
+ *
  * @return void
  */
 function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
@@ -159,7 +167,12 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 	$s_id++;
 
 	$t_labels = array_keys( $p_metrics[0] );
-	$t_formatted_labels = array_map( function($label) { return date( 'Ymd', $label ); }, $t_labels );
+	$t_formatted_labels = array_map(
+		function( $label ) {
+			return date( 'Ymd', $label );
+		},
+		$t_labels
+	);
 	$t_json_labels = json_encode( $t_formatted_labels );
 
 	$t_opened_values = json_encode( array_values( $p_metrics[0] ) );
@@ -190,10 +203,11 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 /**
  * Summarize metrics by a single ENUM field in the bug table.
  *
- * @param string $p_enum_string Enumeration string.
- * @param string $p_enum        Enumeration field.
+ * @param string $p_enum_string   Enumeration string.
+ * @param string $p_enum          Enumeration field.
  * @param array  $p_exclude_codes Array of codes to exclude from the enum.
- * @param array  $p_filter      Filter array.
+ * @param array  $p_filter        Filter array.
+ *
  * @return array
  */
 function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = array(), array $p_filter = null ) {
@@ -210,10 +224,10 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
 
 	$t_query = new DBQuery();
 	$t_sql = 'SELECT ' . $p_enum . ' AS enum, COUNT(*) AS bugcount FROM {bug}'
-			. ' WHERE ' . $p_enum . ' IN :enum_values'
-			. ' AND ' . $t_specific_where
-			. ( $p_filter ? ' AND {bug}.id IN :filter' : '' )
-			. ' GROUP BY ' . $p_enum . ' ORDER BY ' . $p_enum;
+		. ' WHERE ' . $p_enum . ' IN :enum_values'
+		. ' AND ' . $t_specific_where
+		. ( $p_filter ? ' AND {bug}.id IN :filter' : '' )
+		. ' GROUP BY ' . $p_enum . ' ORDER BY ' . $p_enum;
 	$t_query->bind( 'enum_values', array_keys( $t_assoc_array ) );
 	if( $p_filter ) {
 		$t_query->bind( 'filter', filter_cache_subquery( $p_filter ) );
@@ -232,7 +246,9 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
 
 /**
  * Calculate distribution of issues by statuses excluding closed status.
+ *
  * @param array $p_filter Filter array.
+ *
  * @return array An array with keys being status names and values being number of issues with such status.
  */
 function create_bug_status_summary( array $p_filter = null ) {
@@ -247,12 +263,12 @@ function create_bug_status_summary( array $p_filter = null ) {
 
 		$t_closed_statuses = array();
 		foreach( $t_statuses as $t_status_code ) {
-			if ( $t_status_code >= $t_closed_threshold ) {
+			if( $t_status_code >= $t_closed_threshold ) {
 				$t_closed_statuses[] = $t_status_code;
 			}
 		}
 	} else {
-	# when explicitly using a filter, do not exclude any status, to match the expected filter results
+		# when explicitly using a filter, do not exclude any status, to match the expected filter results
 		$t_closed_statuses = array();
 	}
 
@@ -261,7 +277,9 @@ function create_bug_status_summary( array $p_filter = null ) {
 
 /**
  * Create summary for issues resolved by a developer
- * @param array $p_filter Filter array.
+ *
+ * @param array|null $p_filter Filter array.
+ *
  * @return array with key being username and value being # of issues fixed.
  */
 function create_developer_resolved_summary( array $p_filter = null ) {
@@ -283,8 +301,8 @@ function create_developer_resolved_summary( array $p_filter = null ) {
 	$t_query->bind( array(
 		'nouser' => NO_USER,
 		'status_resolved' => (int)$t_resolved_status_threshold,
-		'resolution_fixed' => FIXED
-		) );
+		'resolution_fixed' => FIXED,
+	) );
 	$t_query->set_limit( 20 );
 
 	$t_handler_array = array();
@@ -311,7 +329,9 @@ function create_developer_resolved_summary( array $p_filter = null ) {
 
 /**
  * Create summary for issues opened by a developer
- * @param array $p_filter Filter array.
+ *
+ * @param array|null $p_filter Filter array.
+ *
  * @return array with key being username and value being # of issues fixed.
  */
 function create_developer_open_summary( array $p_filter = null ) {
@@ -332,8 +352,8 @@ function create_developer_open_summary( array $p_filter = null ) {
 	$t_query->sql( $t_sql );
 	$t_query->bind( array(
 		'nouser' => NO_USER,
-		'status_resolved' => (int)$t_resolved_status_threshold
-		) );
+		'status_resolved' => (int)$t_resolved_status_threshold,
+	) );
 
 	$t_handler_array = array();
 	$t_handler_ids = array();
@@ -359,7 +379,9 @@ function create_developer_open_summary( array $p_filter = null ) {
 
 /**
  * Create summary table of reporters
- * @param array $p_filter    Filter array.
+ *
+ * @param array|null $p_filter Filter array.
+ *
  * @return array
  */
 function create_reporter_summary( array $p_filter = null ) {
@@ -404,7 +426,9 @@ function create_reporter_summary( array $p_filter = null ) {
 
 /**
  * Create summary table of categories
+ *
  * @param array $p_filter Filter array.
+ *
  * @return array
  */
 function create_category_summary( array $p_filter = null ) {
@@ -414,7 +438,7 @@ function create_category_summary( array $p_filter = null ) {
 
 	$t_query_cat = new DBQuery();
 	$t_sql = 'SELECT id, name FROM {category} WHERE ' . $t_specific_where
-			. ' OR project_id = :all_projects';
+		. ' OR project_id = :all_projects';
 	$t_query_cat->sql( $t_sql );
 	$t_query_cat->bind( 'all_projects', ALL_PROJECTS );
 
@@ -434,11 +458,11 @@ function create_category_summary( array $p_filter = null ) {
 		$t_query_cnt->execute();
 		$t_bugcount = (int)$t_query_cnt->value();
 
-		if( isset($t_metrics[$t_cat_name]) ) {
+		if( isset( $t_metrics[$t_cat_name] ) ) {
 			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + $t_bugcount;
 		} else {
 			if( $t_bugcount > 0 ) {
-			    $t_metrics[$t_cat_name] = $t_bugcount;
+				$t_metrics[$t_cat_name] = $t_bugcount;
 			}
 		}
 	}
@@ -447,13 +471,15 @@ function create_category_summary( array $p_filter = null ) {
 }
 
 /**
- * Create cumulative graph by date
- * @param array $p_filter Filter array.
- * @return array | null
+ * Generate cumulative graph data by date.
+ *
+ * @param array|null $p_filter Filter array.
+ *
+ * @return array|null
  */
 function create_cumulative_bydate( array $p_filter = null ) {
-	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
+	$t_seconds_per_day = SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -467,98 +493,85 @@ function create_cumulative_bydate( array $p_filter = null ) {
 
 	# Get all the submitted dates
 	$t_query = new DBQuery();
-	$t_sql = 'SELECT date_submitted FROM {bug} WHERE ' . $t_specific_where;
+	$t_sql = <<< SQL
+		SELECT
+			FLOOR(date_submitted / $t_seconds_per_day) date_index,
+			COUNT(*) num
+		FROM {bug}
+		WHERE $t_specific_where
+		SQL;
 	if( $p_filter ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' ORDER BY date_submitted';
+	$t_sql .= ' GROUP BY date_index';
 	$t_query->sql( $t_sql );
 
 	$t_calc_metrics = array();
 	while( $t_row = $t_query->fetch() ) {
-		# rationalise the timestamp to a day to reduce the amount of data
-		$t_date = $t_row['date_submitted'];
-		$t_date = (int)( $t_date / SECONDS_PER_DAY );
-
-		if( isset( $t_calc_metrics[$t_date] ) ) {
-			$t_calc_metrics[$t_date][0]++;
-		} else {
-			$t_calc_metrics[$t_date] = array( 1, 0, 0, );
-		}
+		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+		$t_calc_metrics[$v_date_index] = [ $v_num, 0, 0 ];
 	}
 
-	# ## Get all the dates where a transition from not resolved to resolved may have happened
-	#    also, get the last updated date for the bug as this may be all the information we have
+	# Get a count of resolved issues.
+	# Query explanation:
+	# - Use a sub-query against the history table, to retrieve the most recent
+	#   date_modified for a transition to a status higher than resolved.
+	# - If there are no history records (i.e. with pre 0.18 data), date_modified
+	#   will be NULL, so we fall back to the bug's last_updated date
+	# - Group by day to reduce the amount of data
 	$t_query = new DBQuery();
-	$t_sql = 'SELECT {bug}.id, last_updated, date_modified, new_value, old_value'
-		. ' FROM {bug} LEFT JOIN {bug_history} ON {bug}.id = {bug_history}.bug_id'
-		. ' WHERE ' . $t_specific_where
-		. ' AND {bug}.status >= :int_resolved'
-		. ' AND ( ( {bug_history}.new_value >= :str_resolved AND {bug_history}.old_value < :str_resolved AND {bug_history}.field_name = :field_name )'
-		. ' OR {bug_history}.id is NULL )';
+	$t_sql = <<< SQL
+		SELECT
+			FLOOR(COALESCE(max_date_modified, last_updated) / $t_seconds_per_day ) date_index,
+			COUNT(*) num
+		FROM {bug}
+		LEFT JOIN(
+			SELECT bug_id, MAX(date_modified) max_date_modified
+			FROM {bug_history}
+			WHERE field_name = :field_name AND new_value >= :str_resolved AND old_value < :str_resolved
+			GROUP BY bug_id
+		) hist ON hist.bug_id ={bug}.id
+		WHERE $t_specific_where
+			AND {bug}.status >= :int_resolved
+		SQL;
 	if( $p_filter ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' ORDER BY {bug}.id, date_modified ASC';
+	$t_sql .= ' GROUP BY date_index';
 	$t_query->sql( $t_sql );
 	$t_query->bind( array(
 		'int_resolved' => (int)$t_res_val,
 		'str_resolved' => (string)$t_res_val,
-		'field_name' => 'status'
-		) );
-
-	$t_last_id = 0;
-	$t_last_date = 0;
+		'field_name' => 'status',
+	) );
 
 	while( $t_row = $t_query->fetch() ) {
-		$t_id = $t_row['id'];
-
-		# if h_last_updated is NULL, there were no appropriate history records
-		#  (i.e. pre 0.18 data), use last_updated from bug table instead
-		if( null == $t_row['date_modified'] ) {
-			$t_date = $t_row['last_updated'];
+		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+		if( isset( $t_calc_metrics[$v_date_index] ) ) {
+			$t_calc_metrics[$v_date_index][1] = $v_num;
 		} else {
-			if( $t_res_val > $t_row['old_value'] ) {
-				$t_date = $t_row['date_modified'];
-			}
+			$t_calc_metrics[$v_date_index] = [ 0, $v_num, 0 ];
 		}
-		if( $t_id <> $t_last_id ) {
-			if( 0 <> $t_last_id ) {
-
-				# rationalise the timestamp to a day to reduce the amount of data
-				$t_date_index = (int)( $t_last_date / SECONDS_PER_DAY );
-
-				if( isset( $t_calc_metrics[$t_date_index] ) ) {
-					$t_calc_metrics[$t_date_index][1]++;
-				} else {
-					$t_calc_metrics[$t_date_index] = array(
-						0,
-						1,
-						0,
-					);
-				}
-			}
-			$t_last_id = $t_id;
-		}
-		$t_last_date = $t_date;
 	}
 
-	if ( $t_last_id == 0 ) {
+	if( !$t_calc_metrics ) {
 		return null;
 	}
 	ksort( $t_calc_metrics );
 
+	# Consolidate metrics data
+	$t_metrics = [];
 	$t_last_opened = 0;
 	$t_last_resolved = 0;
-	foreach( $t_calc_metrics as $i => $t_values ) {
-		$t_date = $i * SECONDS_PER_DAY;
-		$t_metrics[0][$t_date] = $t_last_opened = $t_last_opened + $t_calc_metrics[$i][0];
-		$t_metrics[1][$t_date] = $t_last_resolved = $t_last_resolved + $t_calc_metrics[$i][1];
-		$t_metrics[2][$t_date] = $t_metrics[0][$t_date] - $t_metrics[1][$t_date];
+	foreach( $t_calc_metrics as $t_date_index => $t_values ) {
+		$t_date = $t_date_index * SECONDS_PER_DAY;
+		$t_metrics[0][$t_date] = $t_last_opened = $t_last_opened + $t_values[0];
+		$t_metrics[1][$t_date] = $t_last_resolved = $t_last_resolved + $t_values[1];
+		$t_metrics[2][$t_date] = $t_last_opened - $t_last_resolved;
 	}
 	return $t_metrics;
 }
@@ -567,9 +580,52 @@ function create_cumulative_bydate( array $p_filter = null ) {
  * Get formatted date string
  *
  * @param integer $p_date Date.
+ *
  * @return string
  */
 function graph_date_format( $p_date ) {
 	return date( config_get( 'short_date_format' ), $p_date );
 }
 
+/**
+ * Create summary table of projects.
+ *
+ * @param array|null $p_filter Filter array.
+ *
+ * @return array
+ */
+function create_project_summary( array $p_filter = null ) {
+	$t_project_id = helper_get_current_project();
+	$t_user_id = auth_get_current_user_id();
+	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
+
+	$t_query_cat = new DBQuery();
+	$t_sql = 'SELECT id, name FROM {project} ';
+	$t_query_cat->sql( $t_sql );
+	$t_query_cat->bind( 'all_projects', ALL_PROJECTS );
+
+	$t_metrics = array();
+	$t_query_cnt = new DBQuery();
+	$t_query_cnt->sql( 'SELECT COUNT(*) FROM {bug} WHERE project_id = :proj_id AND ' . $t_specific_where );
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_query_cnt->append_sql( ' AND {bug}.id IN :filter' );
+		$t_query_cnt->bind( 'filter', $t_subquery );
+	}
+
+	while( $t_row = $t_query_cat->fetch() ) {
+		$t_proj_name = $t_row['name'];
+		$t_proj_id = $t_row['id'];
+		$t_query_cnt->bind( 'proj_id', (int)$t_proj_id );
+		$t_query_cnt->execute();
+		$t_bugcount = (int)$t_query_cnt->value();
+
+		if( isset( $t_metrics[$t_proj_name] ) ) {
+			$t_metrics[$t_proj_name] = $t_metrics[$t_proj_name] + $t_bugcount;
+		} elseif( $t_bugcount > 0 ) {
+			$t_metrics[$t_proj_name] = $t_bugcount;
+		}
+	}
+
+	return $t_metrics;
+}

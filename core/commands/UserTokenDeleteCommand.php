@@ -19,9 +19,6 @@ require_api( 'api_token_api.php' );
 
 use Mantis\Exceptions\ClientException;
 
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_account_api.php' );
-
 /**
  * A command that creates a user API token.
  */

@@ -35,6 +35,8 @@
  * @uses lang_api.php
  * @uses profile_api.php
  * @uses string_api.php
+ *
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 require_once( 'core.php' );
@@ -58,29 +60,15 @@ auth_ensure_user_authenticated();
 
 current_user_ensure_unprotected();
 
-$f_profile_id	= gpc_get_int( 'profile_id' );
+$f_profile_id = gpc_get_int( 'profile_id' );
 $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
-/** @noinspection PhpUnhandledExceptionInspection */
-$t_global_profile = profile_is_global( $f_profile_id );
-if( $t_global_profile ) {
-	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
-}
-$t_row = profile_get_row( $f_profile_id );
-
-/**
- * @var $v_id
- * @var $v_user_id
- * @var $v_platform
- * @var $v_os
- * @var $v_os_build
- * @var $v_description
- */
-extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+$t_profile = new ProfileData( $f_profile_id );
+$t_profile->ensure_can_update();
 
 layout_page_header();
 
-if( $t_global_profile ) {
+if( $t_profile->is_global() ) {
 	layout_page_begin( 'manage_overview_page.php' );
 	print_manage_menu( 'manage_prof_menu_page.php' );
 } else {
@@ -95,7 +83,7 @@ if( $t_global_profile ) {
 	<form method="post" action="account_prof_update.php">
 		<?php  echo form_security_field( 'account_prof_update' )?>
 		<input type="hidden" name="action" value="update" />
-		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
+		<input type="hidden" name="profile_id" value="<?php echo $t_profile->id ?>" />
 		<input type="hidden" name="redirect" value="<?php echo string_attribute( $f_redirect_page ) ?>" />
 
 		<div class="widget-box widget-color-blue2">
@@ -121,7 +109,7 @@ if( $t_global_profile ) {
 								<td>
 									<input id="platform" name="platform" type="text" required
 										   class="input-sm" size="32" maxlength="32"
-										   value="<?php echo string_attribute( $v_platform ) ?>"
+										   value="<?php echo string_attribute( $t_profile->platform ) ?>"
 									/>
 								</td>
 							</tr>
@@ -135,7 +123,7 @@ if( $t_global_profile ) {
 								<td>
 									<input id="os" name="os" type="text" required
 										   class="input-sm" size="32" maxlength="32"
-										   value="<?php echo string_attribute( $v_os ) ?>"
+										   value="<?php echo string_attribute( $t_profile->os ) ?>"
 									/>
 								</td>
 							</tr>
@@ -149,7 +137,7 @@ if( $t_global_profile ) {
 								<td>
 									<input id="os_build" name="os_build" type="text" required
 										   class="input-sm" size="16" maxlength="16"
-										   value="<?php echo string_attribute( $v_os_build ) ?>"
+										   value="<?php echo string_attribute( $t_profile->os_build ) ?>"
 									/>
 								</td>
 							</tr>
@@ -164,7 +152,7 @@ if( $t_global_profile ) {
 									<textarea id="description" name="description"
 											  class="form-control"
 											  cols="60" rows="8">
-<?php echo string_textarea( $v_description ) ?>
+<?php echo string_textarea( $t_profile->description ) ?>
 </textarea>
 								</td>
 							</tr>

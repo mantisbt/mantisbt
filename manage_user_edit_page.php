@@ -93,6 +93,23 @@ access_ensure_global_level( $t_user['access_level'] );
 
 $t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
+# User action buttons: RESET/UNLOCK, IMPERSONATE and DELETE
+$t_reset = $t_user['id'] != auth_get_current_user_id()
+	&& auth_can_set_password( $t_user['id'] )
+	&& user_is_enabled( $t_user['id'] )
+	&& !user_is_protected( $t_user['id'] );
+$t_unlock = !user_is_login_request_allowed( $t_user['id'] );
+$t_delete = !( user_is_administrator( $t_user_id )
+	&& user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1
+);
+$t_impersonate = auth_can_impersonate( $t_user['id'] );
+$t_email_notification_enabled = ON == config_get( 'enable_email_notification' );
+$t_reset_password_msg = lang_get(
+	( ON == config_get( 'send_reset_password' ) && $t_email_notification_enabled )
+	? 'reset_password_msg'
+	: 'reset_password_msg2'
+);
+
 layout_page_header();
 layout_page_begin( 'manage_overview_page.php' );
 
@@ -102,7 +119,7 @@ print_manage_menu( 'manage_user_page.php' );
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 
-<!-- USER INFO -->
+<!-- EDIT USER INFO SECTION -->
 <div id="edit-user-div" class="form-container">
 <form id="edit-user-form" method="post" action="manage_user_update.php">
 	<?php echo form_security_field( 'manage_user_update' ) ?>
@@ -272,7 +289,7 @@ print_manage_menu( 'manage_user_page.php' );
 				<?php echo lang_get( 'update_user_button' ) ?>
 			</button>
 <?php
-	if( config_get( 'enable_email_notification' ) == ON ) {
+	if( $t_email_notification_enabled ) {
 ?>
 			&nbsp;
 			<label class="inline">
@@ -284,90 +301,53 @@ print_manage_menu( 'manage_user_page.php' );
 				</span>
 			</label>
 <?php } ?>
+			<div class="btn-group pull-right">
+<?php
+	# Information button
+	print_link_button( 'view_user_page.php?id=' . $t_user['id'],
+		lang_get( 'view_account_title' ),
+		"btn btn-primary btn-white btn-round pull-left"
+	);
+
+	# Impersonate Button
+	if( $t_impersonate ) {
+		echo form_security_field( 'manage_user_impersonate' )
+?>
+				<button formaction="manage_user_impersonate.php"
+						class="btn btn-primary btn-white btn-round">
+					<?php echo lang_get( 'impersonate_user_button' ) ?>
+				</button>
+<?php
+	}
+
+	# Reset/Unlock Button
+	if( $t_reset || $t_unlock ) {
+?>
+				<button formaction="manage_user_reset.php"
+						title="<?php echo $t_reset_password_msg ?>"
+						class="btn btn-primary btn-white btn-round">
+					<?php echo lang_get( $t_reset ? 'reset_password_button' : 'account_unlock_button' ) ?>
+				</button>
+<?php
+	}
+
+	# Delete Button
+	if( $t_delete ) {
+?>
+
+				<button formaction="manage_user_delete.php"
+						class="btn btn-primary btn-white btn-round">
+					<?php echo lang_get( 'delete_user_button' ) ?>
+				</button>
+<?php } ?>
+
+			</div>
 		</div>
 	</div>
 </form>
 </div>
 
-<div class="space-10"></div>
-<?php
-# User action buttons: RESET/UNLOCK and DELETE
-
-$t_reset = $t_user['id'] != auth_get_current_user_id()
-	&& auth_can_set_password( $t_user['id'] )
-	&& user_is_enabled( $t_user['id'] )
-	&& !user_is_protected( $t_user['id'] );
-$t_unlock = !user_is_login_request_allowed( $t_user['id'] );
-$t_delete = !( user_is_administrator( $t_user_id )
-	&& user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1
-);
-$t_impersonate = auth_can_impersonate( $t_user['id'] );
-
-if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
-?>
-<div id="manage-user-actions-div" class="col-md-6 col-xs-12 no-padding">
-<div class="space-8"></div>
-<div class="btn-group">
-
-<!-- Reset/Unlock Button -->
-<?php if( $t_reset || $t_unlock ) { ?>
-	<form id="manage-user-reset-form" method="post" action="manage_user_reset.php" class="pull-left">
-		<?php echo form_security_field( 'manage_user_reset' ) ?>
-		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-		<button class="btn btn-primary btn-white btn-round">
-			<?php echo lang_get( $t_reset ? 'reset_password_button' : 'account_unlock_button' ) ?>
-		</button>
-	</form>
-<?php } ?>
-
-<!-- Delete Button -->
-<?php if( $t_delete ) { ?>
-	<form id="manage-user-delete-form" method="post" action="manage_user_delete.php" class="pull-left">
-		<?php echo form_security_field( 'manage_user_delete' ) ?>
-		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-		<button class="btn btn-primary btn-white btn-round">
-			<?php echo lang_get( 'delete_user_button' ) ?>
-		</button>
-	</form>
-<?php } ?>
-
-<!-- Impersonate Button -->
-<?php if( $t_impersonate ) { ?>
-	<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="pull-left">
-		<?php echo form_security_field( 'manage_user_impersonate' ) ?>
-		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-		<button class="btn btn-primary btn-white btn-round">
-			<?php echo lang_get( 'impersonate_user_button' ) ?>
-		</button>
-	</form>
-<?php } ?>
-
-</div>
-</div>
-<?php } ?>
-
-<?php if( $t_reset ) { ?>
-<div class="col-md-6 col-xs-12 no-padding">
-<div class="space-4"></div>
-<div class="alert alert-info">
-<?php
-	print_icon( 'fa-info-circle' );
-	echo '&nbsp;';
-	if( ( ON == config_get( 'send_reset_password' ) )
-		&& ( ON == config_get( 'enable_email_notification' ) )
-	) {
-		echo lang_get( 'reset_password_msg' );
-	} else {
-		echo lang_get( 'reset_password_msg2' );
-	}
-?>
-</div>
-</div>
-<?php } ?>
-
 <?php event_signal( 'EVENT_MANAGE_USER_PAGE', array( $t_user_id ) ); ?>
-
-<div class="clearfix"></div>
 
 <?php
 # Project access sections are only shown if the current user's permissions
@@ -528,7 +508,7 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 <!-- ACCOUNT PREFERENCES -->
 <?php
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
-include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
+include( __DIR__ . '/account_prefs_inc.php' );
 edit_account_prefs(
 	$t_user['id'],
 	false,

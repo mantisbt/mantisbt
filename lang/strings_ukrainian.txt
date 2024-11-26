@@ -47,6 +47,7 @@
  * @author Dovsienko
  * @author Green Zero
  * @author Ice bulldog
+ * @author Ignatgg
  * @author Igorko
  * @author Macofe
  * @author Movses
@@ -501,12 +502,10 @@ $s_log_page_time = 'Час виконання';
 $s_log_page_caller = 'Гість';
 $s_log_page_event = 'Подія';
 $s_please_report = 'Будь ласка, повідомте про це в %1$s.';
-$s_warning_plain_password_authentication = '<strong>Попередження:</strong> Паролі зберігаються у відкритому вигляді. Це робить ваш пароль видимим для адміністраторів.';
 $s_warning_default_administrator_account_present = '<strong>ПОПЕРЕДЖЕННЯ:</strong> Ви повинні видалити профіль «administrator» або змінити для нього пароль.';
 $s_warning_admin_directory_present = '<strong>Попередження:</strong> Каталог «admin» слід або вилучити, або зробити доступ до нього обмеженим.';
 $s_warning_change_setting = '<strong>Увага:</strong> для «%1$s» не встановлено типове значення (%2$s).';
 $s_warning_security_hazard = 'Це несе потенційну загрозу безпеці, позаяк може призвести до розголошення конфіденційних відомостей.';
-$s_warning_integrity_hazard = 'Це змусить MantisBT продовжувати роботу, коли виникають помилки, і може привести до проблем з цілісністю даних системи.';
 $s_warning_debug_email = '<strong>Увага:</strong> «<code>debug_email</code>» не встановлено <code>OFF</code>, всі поштові події будуть відправлятися «%1$s».';
 $s_error_database_no_schema_version = '<strong>Помилка:</strong> Версія Вашої схеми бази даних — 0. Це може означати, що або база даних пошкоджена, або значення «database_version» не вдалося отримати з таблиці конфігурації, або ж структура бази даних походить із застарілої версії MantisBT (до 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Попередження:</strong> Структура бази даних, можливо, застаріла. Будь ласка <a href="admin/install.php">зробіть оновлення тут</a> перед тим як продовжити.';
@@ -1347,7 +1346,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Така категорія вже і
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Ніяких дій копіювання не задано';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Не вдалось знайти таку категорію.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Категорію «%1$s» для проєкту «%2$s» не знайдено.';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Не можна вилучити цю категорію, бо вона визначається як «Типова категорія для переміщення».';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'Не можна вилучити цю категорію, бо вона визначається як «Типова категорія для переміщення».';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'Категорія «%1$s» не може бути видалена, тому що вона пов’язана з однією або декількома проблемами.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Така версія вже існує.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Версію «%1$s» не знайдено.';

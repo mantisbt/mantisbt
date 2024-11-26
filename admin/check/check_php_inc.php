@@ -43,11 +43,12 @@ $t_extensions_required = array(
 	'ctype', # required by PHPMailer
 	'date',
 	'hash',
-	'pcre',
-	'Reflection',
-	'session',
+	'json',
 	'mbstring',
-	'json'
+	'pcre',
+	'reflection',
+	'session',
+	'tokenizer',
 );
 
 foreach( $t_extensions_required as $t_extension ) {

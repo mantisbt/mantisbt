@@ -50,6 +50,7 @@
  * @author Dgstranz
  * @author DiegoAmbrocio
  * @author Dtamajon
+ * @author Eulalio
  * @author Fitoschido
  * @author Geryescalier
  * @author Guidored
@@ -57,6 +58,7 @@
  * @author Jelou
  * @author Joanmp17
  * @author Ktranz
+ * @author Laquin
  * @author Lemondoge
  * @author Leshurex
  * @author Locos epraix
@@ -151,6 +153,7 @@ $s_inherit = 'Heredar categorías';
 $s_inherit_global = 'Heredar categorías globales';
 $s_inherit_parent = 'Heredar categorías padre';
 $s_update_subproject_inheritance = 'Actualizar herencia del subproyecto';
+$s_category_disabled = 'Se ha deshabilitado la categoría; por favor, seleccione otra';
 $s_duplicate_of = 'duplicado de';
 $s_has_duplicate = 'tiene duplicado';
 $s_related_to = 'relacionada con';
@@ -517,12 +520,11 @@ $s_log_page_time = 'Tiempo de ejecución';
 $s_log_page_caller = 'Invocador';
 $s_log_page_event = 'Evento';
 $s_please_report = 'Informa de esto al %1$s.';
-$s_warning_plain_password_authentication = '<strong>ATENCIÓN:</strong> La autenticación utilizada es de contraseñas de texto plano; esto expondrá sus contraseñas a los administradores.';
 $s_warning_default_administrator_account_present = '<strong>ATENCIÓN:</strong> Debería desactivar la cuenta por defecto \'administrator\' o cambiar la contraseña de la misma.';
 $s_warning_admin_directory_present = '<strong>Atención:</strong> el directorio «admin» debería eliminarse o restringirse su acceso.';
+$s_warning_host_header_injection_hazard = '<strong>Advertencia:</strong> "path" no se ha definido en config_inc.php. Dejarlo vacío es un riesgo de seguridad, ya que la ruta se establecerá en función de los encabezados de la petición HTTP, exponiendo su sistema a ataques de inyección de cabeceras de host.';
 $s_warning_change_setting = '<strong>Advertencia:</strong> "%1$s" no está establecido a su valor predeterminado (%2$s).';
 $s_warning_security_hazard = 'Esto es un riesgo potencial de seguridad que puede exponer información confidencial.';
-$s_warning_integrity_hazard = 'Esto hará que MantisBT continúe cuando se produzcan errores y puede generar problemas de integridad de sistema o datos.';
 $s_warning_debug_email = '<strong>Advertencia:</strong> "<code>debug_email</code>" no está establecido en <code>OFF</code>; todas las notificaciones por correo electrónico se enviarán a "%1$s".';
 $s_error_database_no_schema_version = '<strong>Error:</strong> la versión del esquema de la base de datos es 0. Esto puede producirse debido a un daño en la base de datos, por no haberse podido obtener el valor de «database_version» de la tabla de configuración, o bien, porque la estructura de la base de datos pertenece a una versión desactualizada de MantisBT (anterior a la 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>ATENCIÓN:</strong> La estructura de la base de datos parece estar desactualizada. Por favor actualícela <a href="admin/install.php">aquí</a> antes de iniciar sesión.';
@@ -1255,6 +1257,7 @@ $s_database_information = 'Información de la base de datos de MantisBT';
 $s_path_information = 'Información de la Ruta de MantisBT';
 $s_mantisbt_database_statistics = 'Estadísticas de la base de datos de MantisBT';
 $s_php_version = 'Versión de PHP';
+$s_os_information = 'Información del OS';
 $s_adodb_version = 'Versión de ADOdb';
 $s_database_driver = 'Controlador de base de datos';
 $s_database_version_description = 'Versión de base de datos; Descripción';
@@ -1366,7 +1369,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Ya existe una categoría con ese nomb
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'No se ha especificado ninguna acción de copia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoría no encontrada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoría \'%1$s\' no encontrada para el proyecto \'%2$s\'.';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Esta categoría no puede eliminarse, porque ha sido definida como "categoría por defecto para mover incidencias".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'Esta categoría no puede eliminarse, porque ha sido definida como "categoría por defecto para mover incidencias".';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'La categoría "%1$s" no se puede eliminar porque está asociada con una o más incidencias.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Ya existe una versión con ese nombre.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versión \'%1$s\' no encontrada.';

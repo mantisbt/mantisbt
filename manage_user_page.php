@@ -359,7 +359,10 @@ $t_user_count = count( $t_users );
 		'username', 'realname', 'email', 'access_level',
 		'enabled', 'protected', 'date_created', 'last_visit'
 	);
-
+	$t_display_failed_login_count = OFF != config_get( 'max_failed_login_count' );
+	if( $t_display_failed_login_count ) {
+		$t_columns[] = 'failed_login_count';
+	}
 	foreach( $t_columns as $t_col ) {
 		echo "\t<th>";
 		print_manage_user_sort_link( 'manage_user_page.php',
@@ -435,7 +438,8 @@ $t_user_count = count( $t_users );
 					} ?>
 				</td>
 				<td><?php echo $v_date_created ?></td>
-				<td><?php echo $v_last_visit ?></td>
+				<td><?php echo $v_last_visit ?></td><?php if( $t_display_failed_login_count ) { ?>
+				<td><?php echo $v_failed_login_count ?></td><?php } ?>
 			</tr>
 <?php
 	}  # end for

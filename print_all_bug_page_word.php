@@ -393,7 +393,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 <tr>
 	<td class="bold">
-		<?php echo string_display_line( sprintf( lang_get( 'label' ), lang_get_defaulted( $t_def['name'] ) ) ) ?>
+		<?php echo string_attribute( sprintf( lang_get( 'label' ), lang_get_defaulted( $t_def['name'] ) ) ) ?>
 	</td>
 	<td colspan="5">
 		<?php print_custom_field_value( $t_def, $t_custom_field_id, $t_id ); ?>
@@ -450,8 +450,8 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 <?php
 	# account profile description
 	if( $t_bug->profile_id > 0 ) {
-		$t_profile_row = profile_get_row( $t_bug->profile_id );
-		$t_profile_description = string_display( $t_profile_row['description'] );
+		$t_profile = new ProfileData( $t_bug->profile_id );
+		$t_profile_description = string_display( $t_profile->description );
 
 ?>
 <tr>

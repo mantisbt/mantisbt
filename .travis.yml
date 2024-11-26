@@ -4,7 +4,7 @@
 
 language: php
 os: linux
-dist: bionic
+dist: focal
 
 # -----------------------------------------------------------------------------
 # Environment setup and test scripts execution
@@ -39,6 +39,7 @@ branches:
     - /master-[0-9.]+/
 
 php:
+  - 8.3
   - 8.2
   - 8.1
   - 8.0

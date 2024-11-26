@@ -21,6 +21,9 @@
  * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
  * @copyright Copyright 2005  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpComposerExtensionStubsInspection
+ * @noinspection PhpUnused
  */
 
 use Mantis\Exceptions\ClientException;
@@ -28,19 +31,20 @@ use Mantis\Exceptions\ClientException;
 /**
  * Use a standard filter to get issues associated with the specified user.
  *
- * @param string  $p_username    Logged in user name.
- * @param string  $p_password    Login password.
- * @param integer $p_project_id  Id of project to filter on, or ALL_PROJECTS.
- * @param string  $p_filter_type The name of the filter to apply
- *                               "assigned" - target user specified - issues assigned to target user that are not resolved.
- *                               "assigned" - target user 0 - unassigned issues that are not resolved.
- *                               "reported" - target user specified - issues reported by user.
- *                               "reported" - target user 0 - will throw.
- *                               "monitored" - target user specified - issues monitored by user.
- *                               "monitored" - target user 0 - issues not monitored.
- * @param object  $p_target_user AccountData for target user, can include id, name, or both.
- * @param integer $p_page_number The page to return (1 based).
- * @param integer $p_per_page    Number of issues per page.
+ * @param string $p_username    Logged in user name.
+ * @param string $p_password    Login password.
+ * @param int    $p_project_id  Id of project to filter on, or ALL_PROJECTS.
+ * @param string $p_filter_type The name of the filter to apply
+ *                              "assigned" - target user specified - issues assigned to target user that are not resolved.
+ *                              "assigned" - target user 0 - unassigned issues that are not resolved.
+ *                              "reported" - target user specified - issues reported by user.
+ *                              "reported" - target user 0 - will throw.
+ *                              "monitored" - target user specified - issues monitored by user.
+ *                              "monitored" - target user 0 - issues not monitored.
+ * @param object $p_target_user AccountData for target user, can include id, name, or both.
+ * @param int    $p_page_number The page to return (1 based).
+ * @param int    $p_per_page    Number of issues per page.
+ *
  * @return array|RestFault|SoapFault a page of matching issues or error.
  */
 function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
@@ -59,11 +63,10 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
-	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
+	$t_orig_page_number = max( $p_page_number, 1 );
 	$t_page_count = 0;
 	$t_bug_count = 0;
 	$t_target_user_id = mci_get_user_id( $p_target_user );
-	$t_show_sticky = true;
 
 	if( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
 		# If user is filtering on handlers, then they must have access to view handlers
@@ -90,7 +93,7 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 
 	$t_rows = filter_get_bug_rows(
 		$p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter,
-		$p_project_id, $t_user_id, $t_show_sticky );
+		$p_project_id, $t_user_id, true );
 
 	$t_result = array();
 
@@ -107,13 +110,15 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 }
 
 /**
- * Project Get Issues
- * @param string  $p_username    Logged in user name.
- * @param string  $p_password    Login password.
- * @param integer $p_project_id  Project Id.
- * @param integer $p_page_number Page number.
- * @param integer $p_per_page    Per page.
- * @return array
+ * Project Get Issues.
+ *
+ * @param string $p_username    Logged in user name.
+ * @param string $p_password    Login password.
+ * @param int    $p_project_id  Project Id.
+ * @param int    $p_page_number Page number.
+ * @param int    $p_per_page    Per page.
+ *
+ * @return array|RestFault|SoapFault
  */
 function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
 	global $g_project_override;
@@ -132,7 +137,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
+	$t_orig_page_number = max( $p_page_number, 1 );
 	$t_page_count = 0;
 	$t_bug_count = 0;
 	$g_project_override = $p_project_id;
@@ -158,7 +163,9 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
  *
  * @param string $p_username The name of the user trying to access the project list.
  * @param string $p_password The password of the user.
- * @return array  suitable to be converted into a ProjectDataArray
+ *
+ * @return array|RestFault|SoapFault Array suitable to be converted into a ProjectDataArray
+ * @throws ClientException
  */
 function mc_projects_get_user_accessible( $p_username, $p_password ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -174,50 +181,92 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
 
 	$t_result = array();
 	foreach( user_get_accessible_projects( $t_user_id ) as $t_project_id ) {
-		$t_project_row = project_cache_row( $t_project_id );
-		$t_project = array();
-		$t_project['id'] = $t_project_id;
-		$t_project['name'] = $t_project_row['name'];
-		$t_project['status'] = mci_enum_get_array_by_id( $t_project_row['status'], 'project_status', $t_lang );
-		$t_project['enabled'] = $t_project_row['enabled'];
-		$t_project['view_state'] = mci_enum_get_array_by_id( $t_project_row['view_state'], 'project_view_state', $t_lang );
-		$t_project['access_min'] = mci_enum_get_array_by_id( $t_project_row['access_min'], 'access_levels', $t_lang );
-		$t_project['file_path'] = array_key_exists( 'file_path', $t_project_row ) ? $t_project_row['file_path'] : '';
-		$t_project['description'] = array_key_exists( 'description', $t_project_row ) ? $t_project_row['description'] : '';
-		$t_project['subprojects'] = mci_user_get_accessible_subprojects( $t_user_id, $t_project_id, $t_lang );
-		$t_result[] = $t_project;
+		$t_result[] = mci_project_get_row( $t_project_id, $t_user_id, $t_lang );
 	}
 
 	return $t_result;
 }
 
 /**
- * Get all categories of a project.
+ * Retrieves project data.
+ * 
+ * @param int    $p_project_id
+ * @param int    $p_user_id
+ * @param string $p_lang
  *
- * @param string  $p_username   The name of the user trying to access the categories.
- * @param string  $p_password   The password of the user.
- * @param integer $p_project_id The id of the project to retrieve the categories for.
- * @return array An array of category names
+ * @return array
+ * @throws ClientException
  */
-function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
+function mci_project_get_row( $p_project_id, $p_user_id, $p_lang ) {
+	$t_project = project_cache_row( $p_project_id );
 
+	return array(
+		'id' => $p_project_id,
+		'name' => $t_project['name'],
+		'status' => mci_enum_get_array_by_id( $t_project['status'], 'project_status', $p_lang ),
+		'enabled' => $t_project['enabled'],
+		'view_state' => mci_enum_get_array_by_id( $t_project['view_state'], 'project_view_state', $p_lang ),
+		'access_min' => mci_enum_get_array_by_id( $t_project['access_min'], 'access_levels', $p_lang ),
+		'file_path' => array_key_exists( 'file_path', $t_project ) ? $t_project['file_path'] : '',
+		'description' => array_key_exists( 'description', $t_project ) ? $t_project['description'] : '',
+		'subprojects' => mci_user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_lang ),
+	);
+}
+
+/**
+ * Performs initial checks for Project Categories.
+ *
+ * @param string $p_username   The name of the user trying to access the categories.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project for which to add the category.
+ * @param string $p_readonly   Access: True for readonly, False for manage project
+ *
+ * @return RestFault|SoapFault|true True if caller can proceed
+ */
+function mci_project_initial_checks( $p_username, $p_password, $p_project_id, $p_readonly ) {
+	global $g_project_override;
+
+	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_fault_login_failed();
+		return mci_fault_access_denied();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
 		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
+
 	$g_project_override = $p_project_id;
 
-	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
+	if( $p_readonly ) {
+		if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+			return mci_fault_access_denied( $t_user_id );
+		}
+	} else {
+		if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
+			return mci_fault_access_denied();
+		}
+	}
+
+	return true;
+}
+
+/**
+ * Get all enabled categories of a project.
+ *
+ * @param string $p_username   The name of the user trying to access the categories.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project to retrieve the categories for.
+ *
+ * @return array|RestFault|SoapFault An array of category names
+ */
+function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
+	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, true );
+	if( $t_result !== true ) {
+		return $t_result;
 	}
 
 	$t_result = array();
-	$t_cat_array = category_get_all_rows( $p_project_id );
+	$t_cat_array = category_get_all_rows( $p_project_id, null, false, true );
 	foreach( $t_cat_array as $t_category_row ) {
 		$t_result[] = $t_category_row['name'];
 	}
@@ -225,57 +274,38 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 }
 
 /**
- * Add a new category to a project
- * @param string  $p_username      The name of the user trying to access the categories.
- * @param string  $p_password      The password of the user.
- * @param integer $p_project_id    The id of the project to retrieve the categories for.
- * @param string  $p_category_name The name of the new category to add.
- * @return integer id of the new category
+ * Add a new category to a project.
+ *
+ * @param string $p_username      The name of the user trying to access the categories.
+ * @param string $p_password      The password of the user.
+ * @param int    $p_project_id    The id of the project for which to add the category.
+ * @param string $p_category_name The name of the new category to add.
+ *
+ * @return int|RestFault|SoapFault Id of the new category
  */
 function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_category_name ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_access_denied();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied();
+	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, false );
+	if( $t_result !== true ) {
+		return $t_result;
 	}
 
 	return category_add( $p_project_id, $p_category_name );
 }
 
 /**
- * Delete a category of a project
- * @param string  $p_username      The name of the user trying to access the categories.
- * @param string  $p_password      The password of the user.
- * @param integer $p_project_id    The id of the project to retrieve the categories for.
- * @param string  $p_category_name The name of the category to delete.
- * @return boolean returns true or false depending on the success of the delete action
+ * Delete a category of a project.
+ *
+ * @param string $p_username      The name of the user trying to access the categories.
+ * @param string $p_password      The password of the user.
+ * @param int    $p_project_id    The id of the project to retrieve the categories for.
+ * @param string $p_category_name The name of the category to delete.
+ *
+ * @return bool|RestFault|SoapFault True or false depending on the success of the delete action.
  */
-function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $p_category_name ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_access_denied();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied();
+function mc_project_delete_category( $p_username, $p_password, $p_project_id, $p_category_name ) {
+	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, false );
+	if( $t_result !== true ) {
+		return $t_result;
 	}
 
 	# find the id of the category
@@ -290,18 +320,21 @@ function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $
 	}
 
 	# delete the category and link all the issues to the default category
-	return category_remove( $p_category_id, config_get( 'default_category_for_moves' ) );
+	category_remove( $p_category_id, config_get( 'default_category_for_moves' ) );
+	return true;
 }
 
 /**
- * Update a category of a project
- * @param string  $p_username          The name of the user trying to access the categories.
- * @param string  $p_password          The password of the user.
- * @param integer $p_project_id        The id of the project to retrieve the categories for.
- * @param string  $p_category_name     The name of the category to rename.
- * @param string  $p_category_name_new The new name of the category to rename.
- * @param integer $p_assigned_to       User ID that category is assigned to.
- * @return boolean returns true or false depending on the success of the update action
+ * Update a category of a project.
+ *
+ * @param string $p_username          The name of the user trying to access the categories.
+ * @param string $p_password          The password of the user.
+ * @param int    $p_project_id        The id of the project to retrieve the categories for.
+ * @param string $p_category_name     The name of the category to rename.
+ * @param string $p_category_name_new The new name of the category to rename.
+ * @param int    $p_assigned_to       User ID that category is assigned to.
+ *
+ * @return bool|RestFault|SoapFault True or false depending on the success of the update action
  */
 function mc_project_rename_category_by_name( $p_username, $p_password, $p_project_id, $p_category_name, $p_category_name_new, $p_assigned_to ) {
 	global $g_project_override;
@@ -329,109 +362,71 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 	$p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
 
 	# update the category
-	return category_update( $p_category_id, $p_category_name_new, $p_assigned_to );
+	category_update( $p_category_id, $p_category_name_new, $p_assigned_to );
+	return true;
 }
 
 /**
  * Get all versions of a project.
  *
- * @param string  $p_username   The name of the user trying to access the versions.
- * @param string  $p_password   The password of the user.
- * @param integer $p_project_id The id of the project to retrieve the versions for.
- * @return array representing a ProjectVersionDataArray structure.
+ * @param string $p_username   The name of the user trying to access the versions.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project to retrieve the versions for.
+ * @param bool   $p_released   Released status (one of VERSION_* constants)
+ *
+ * @return array|RestFault|SoapFault Array representing a ProjectVersionDataArray structure.
  */
-function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_login_failed();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
+function mci_project_get_versions( $p_username, $p_password, $p_project_id, $p_released = VERSION_ALL ) {
+	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, true );
+	if( $t_result !== true ) {
+		return $t_result;
 	}
 
 	$t_result = array();
-	foreach( version_get_all_rows( $p_project_id, VERSION_ALL ) as $t_version ) {
+	foreach( version_get_all_rows( $p_project_id, $p_released ) as $t_version ) {
 		$t_result[] = mci_project_version_as_array( $t_version );
 	}
 
 	return $t_result;
+}
+
+/**
+ * Get all versions of a project.
+ *
+ * @param string $p_username   The name of the user trying to access the versions.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project to retrieve the versions for.
+ *
+ * @return array|RestFault|SoapFault Array representing a ProjectVersionDataArray structure.
+ */
+function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
+	return mci_project_get_versions( $p_username, $p_password, $p_project_id );
 }
 
 /**
  * Get all released versions of a project.
  *
- * @param string  $p_username   The name of the user trying to access the versions.
- * @param string  $p_password   The password of the user.
- * @param integer $p_project_id The id of the project to retrieve the versions for.
- * @return array  representing a ProjectVersionDataArray structure.
+ * @param string $p_username   The name of the user trying to access the versions.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project to retrieve the versions for.
+ *
+ * @return array|RestFault|SoapFault Array representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_released_versions( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_login_failed();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-
-	$g_project_override = $p_project_id;
-	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
-
-	$t_result = array();
-
-	foreach( version_get_all_rows( $p_project_id, VERSION_RELEASED ) as $t_version ) {
-		$t_result[] = mci_project_version_as_array( $t_version );
-	}
-
-	return $t_result;
+	return mci_project_get_versions( $p_username, $p_password, $p_project_id, VERSION_RELEASED );
 }
 
 /**
  * Get all unreleased (a.k.a. future) versions of a project.
  *
- * @param string  $p_username   The name of the user trying to access the versions.
- * @param string  $p_password   The password of the user.
- * @param integer $p_project_id The id of the project to retrieve the versions for.
- * @return array  representing a ProjectVersionDataArray structure.
+ * @param string $p_username   The name of the user trying to access the versions.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project to retrieve the versions for.
+ *
+ * @return array|RestFault|SoapFault Array representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_unreleased_versions( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-
-	$t_user_id = mci_check_login( $p_username, $p_password );
-
-	if( $t_user_id === false ) {
-		return mci_fault_login_failed();
-	}
-
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
-
-	$t_result = array();
-
-	foreach( version_get_all_rows( $p_project_id, VERSION_FUTURE ) as $t_version ) {
-		$t_result[] = mci_project_version_as_array( $t_version );
-	}
-
-	return $t_result;
+	return mci_project_get_versions( $p_username, $p_password, $p_project_id, VERSION_FUTURE );
 }
 
 /**
@@ -439,8 +434,11 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
  *
  * @param string   $p_username The name of the user trying to add the issue.
  * @param string   $p_password The password of the user.
- * @param stdClass $p_version  A ProjectVersionData structure containing information about the new version.
- * @return integer  The id of the created version.
+ * @param stdClass $p_version  A ProjectVersionData structure containing
+ *                             information about the new version.
+ *
+ * @return int|RestFault|SoapFault The id of the created version.
+ * @throws ClientException
  */
 function mc_project_version_add( $p_username, $p_password, stdClass $p_version ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -465,7 +463,7 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 			'name' => $p_version['name'],
 			'description' => $p_version['description'],
 			'released' => $p_version['released'],
-			'obsolete' => isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false,
+			'obsolete' => $p_version['obsolete'] ?? false,
 			'timestamp' => $p_version['date_order']
 		)
 	);
@@ -481,9 +479,12 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
  *
  * @param string   $p_username   The name of the user trying to update the issue.
  * @param string   $p_password   The password of the user.
- * @param integer  $p_version_id A version's id.
- * @param stdClass $p_version    A ProjectVersionData structure containing information about the new version.
- * @return boolean returns true or false depending on the success of the update action
+ * @param int      $p_version_id A version's id.
+ * @param stdClass $p_version    A ProjectVersionData structure containing
+ *                               information about the new version.
+ *
+ * @return bool|RestFault|SoapFault returns true or false depending on the success of the update action.
+ * @throws ClientException
  */
 function mc_project_version_update( $p_username, $p_password, $p_version_id, stdClass $p_version ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -507,7 +508,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
 	$t_date_order = is_blank( $p_version['date_order'] ) ? null : $p_version['date_order'];
-	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
+	$t_obsolete = $p_version['obsolete'] ?? false;
 
 	if( is_blank( $t_project_id ) ) {
 		return ApiObjectFactory::faultBadRequest( 'Mandatory field "project_id" was missing' );
@@ -544,10 +545,12 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 /**
  * Delete a version.
  *
- * @param string  $p_username   The name of the user trying to delete the version.
- * @param string  $p_password   The password of the user.
- * @param integer $p_version_id A version's id.
- * @return boolean returns true or false depending on the success of the delete action
+ * @param string $p_username   The name of the user trying to delete the version.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_version_id A version's id.
+ *
+ * @return bool|RestFault|SoapFault True or false depending on the success of the delete action.
+ * @throws ClientException
  */
 function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -588,7 +591,8 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
  *
  * @param string  $p_username   The name of the user trying to access the versions.
  * @param string  $p_password   The password of the user.
- * @param integer $p_project_id The id of the project to retrieve the custom fields for.
+ * @param int    $p_project_id The id of the project to retrieve the custom fields for.
+ *
  * @return array|RestFault|SoapFault  representing a CustomFieldDefinitionDataArray structure.
  */
 function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id ) {
@@ -608,11 +612,14 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 /**
  * Validate custom fields before creating/updating issues.
  *
- * @param integer $p_project_id The project id.
- * @param array   $p_custom_fields The custom fields, may be not set.
- * @return bool|SoapFault|RestFault true or error.
+ * @param int   $p_project_id    The project id.
+ * @param array $p_custom_fields The custom fields (by reference).
+ *                               May be unset; if so, will be set to null.
  *
+ * @return void
  * @throws ClientException
+ *
+ * @noinspection PhpParameterByRefIsNotUsedAsReferenceInspection
  */
 function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) {
 	# Load custom field definitions for the specified project
@@ -703,14 +710,13 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 			);
 		}
 	}
-
-	return true;
 }
 
 /**
  * Get the custom fields that belong to the specified project.
  *
- * @param integer $p_project_id The id of the project to retrieve the custom fields for.
+ * @param int $p_project_id The id of the project to retrieve the custom fields for.
+ *
  * @return array|RestFault|SoapFault  representing a CustomFieldDefinitionDataArray structure.
  */
 function mci_project_get_custom_fields( $p_project_id ) {
@@ -785,6 +791,7 @@ function mci_project_get_custom_fields( $p_project_id ) {
  * Get the custom field type name given its type id.
  *
  * @param int $p_type_id The custom field type id.
+ *
  * @return string The type name or id if an unknown type.
  */
 function mci_custom_field_type_name( $p_type_id ) {
@@ -816,7 +823,9 @@ function mci_custom_field_type_name( $p_type_id ) {
 
 /**
  * Get list of versions for a project.
+ *
  * @param int $p_project_id The project id
+ *
  * @return array The project versions.
  */
 function mci_project_versions( $p_project_id ) {
@@ -845,6 +854,7 @@ function mci_project_versions( $p_project_id ) {
  * Get projects for the specified project.
  *
  * @param int $p_project_id The project id
+ *
  * @return array The array of categories with their info.
  */
 function mci_project_categories( $p_project_id ) {
@@ -857,10 +867,11 @@ function mci_project_categories( $p_project_id ) {
 			'id' => (int)$t_category['id'],
 			'name' => $t_category['name'],
 			'project' => array( 'id' => $t_project_id, 'name' => $t_category['project_name'] ),
+			'status' => $t_category['status'],
 		);
 
-		# Do access check here to take into consider the project id that the category is associated with
-		# in case of inherited categories.
+		# Do access check here to take into consideration the project id that the
+		# category is associated with in case of inherited categories.
 		$t_default_handler_id = (int)$t_category['user_id'];
 		if( $t_default_handler_id != 0 &&
 		    access_has_project_level( config_get( 'manage_project_threshold', null, null, $t_project_id ), $t_project_id ) ) {
@@ -876,10 +887,11 @@ function mci_project_categories( $p_project_id ) {
 /**
  * Get the attachments that belong to the specified project.
  *
- * @param string  $p_username   The name of the user trying to access the versions.
- * @param string  $p_password   The password of the user.
- * @param integer $p_project_id The id of the project to retrieve the attachments for.
- * @return array  representing a ProjectAttachmentDataArray structure.
+ * @param string $p_username   The name of the user trying to access the versions.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project to retrieve the attachments for.
+ *
+ * @return array|RestFault|SoapFault Array representing a ProjectAttachmentDataArray structure.
  */
 function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	global $g_project_override;
@@ -905,8 +917,6 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_pub = VS_PUBLIC;
-	$t_priv = VS_PRIVATE;
 	$t_admin = config_get_global( 'admin_site_threshold' );
 
 	if( $p_project_id == ALL_PROJECTS ) {
@@ -944,7 +954,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		( ut.access_level = ' . db_param() . ' ) )
 		ORDER BY pt.name ASC, pft.title ASC';
 
-	$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
+	$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, VS_PUBLIC, $t_user_id, $t_admin ) );
 	$t_num_files = db_num_rows( $t_result );
 
 	$t_attachments = array();
@@ -968,11 +978,13 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 }
 
 /**
- * Get the list of subprojects for a given project
- * @param string  $p_username   The name of the user trying to access the versions.
- * @param string  $p_password   The password of the user.
- * @param integer $p_project_id The id of the project to retrieve the attachments for.
- * @return array
+ * Get the list of subprojects for a given project.
+ *
+ * @param string $p_username   The name of the user trying to access the versions.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project to retrieve the attachments for.
+ *
+ * @return array|RestFault|SoapFault
  */
 function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id ) {
 	global $g_project_override;
@@ -999,7 +1011,8 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
 /**
  * Get a project definition.
  *
- * @param integer $p_project_id The id of the project to retrieve.
+ * @param int $p_project_id The id of the project to retrieve.
+ *
  * @return array an array containing the id and the name of the project.
  */
 function mci_project_as_array_by_id( $p_project_id ) {
@@ -1015,7 +1028,8 @@ function mci_project_as_array_by_id( $p_project_id ) {
  * @param string $p_username     The name of the user trying to access the versions.
  * @param string $p_password     The password of the user.
  * @param string $p_project_name The name of the project to retrieve.
- * @return int  The id of the project with the given name, 0 if there is no such project.
+ *
+ * @return int|RestFault|SoapFault The id of the project with the given name, 0 if there is no such project.
  */
 function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -1035,7 +1049,9 @@ function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name 
  * @param string   $p_username The name of the user trying to access the versions.
  * @param string   $p_password The password of the user.
  * @param stdClass $p_project  A new ProjectData structure.
- * @return int the new project's project_id
+ *
+ * @return int|RestFault|SoapFault The new project's project_id
+ * @throws ClientException
  */
 function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -1083,10 +1099,9 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 
 	$t_command = new ProjectAddCommand( $t_data );
 	$t_result = $t_command->execute();
-	$t_project_id = $t_result['id'];
 
 	# project_create returns the new project's id, spit that out to web service caller
-	return $t_project_id;
+	return $t_result['id'];
 }
 
 /**
@@ -1094,9 +1109,11 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
  *
  * @param string   $p_username   The name of the user.
  * @param string   $p_password   The password of the user.
- * @param integer  $p_project_id A project's identifier.
+ * @param int      $p_project_id A project's identifier.
  * @param stdClass $p_project    A new ProjectData structure.
- * @return boolean returns true or false depending on the success of the update action
+ *
+ * @return bool|RestFault|SoapFault True or false depending on the success of the update action.
+ * @throws ClientException
  */
 function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p_project ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -1152,10 +1169,12 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 /**
  * Delete a project.
  *
- * @param string  $p_username   The name of the user trying to access the versions.
- * @param string  $p_password   The password of the user.
- * @param integer $p_project_id A project's identifier.
- * @return boolean returns true or false depending on the success of the delete action
+ * @param string $p_username   The name of the user trying to access the versions.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id A project's identifier.
+ *
+ * @return bool|RestFault|SoapFault True or false depending on the success of the delete action.
+ * @throws ClientException
  */
 function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -1176,13 +1195,15 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 }
 
 /**
- * Get Issue Headers
- * @param string  $p_username    The name of the user trying to access the versions.
- * @param string  $p_password    The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the attachments for.
- * @param integer $p_page_number Page number.
- * @param integer $p_per_page    Per page.
- * @return mixed
+ * Get Issue Headers.
+ *
+ * @param string $p_username    The name of the user trying to access the versions.
+ * @param string $p_password    The password of the user.
+ * @param int    $p_project_id  The id of the project to retrieve the attachments for.
+ * @param int    $p_page_number Page number.
+ * @param int    $p_per_page    Per page.
+ *
+ * @return array|RestFault|SoapFault
  */
 function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
 	global $g_project_override;
@@ -1201,7 +1222,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
+	$t_orig_page_number = max( $p_page_number, 1 );
 	$t_page_count = 0;
 	$t_bug_count = 0;
 
@@ -1223,15 +1244,15 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 /**
  * Get appropriate users assigned to a project by access level.
  *
- * @param string  $p_username   The name of the user trying to access the versions.
- * @param string  $p_password   The password of the user.
- * @param integer $p_project_id The id of the project to retrieve the users for.
- * @param integer $p_access     Minimum access level.
- * @return array  representing a ProjectAttachmentDataArray structure.
+ * @param string $p_username   The name of the user trying to access the versions.
+ * @param string $p_password   The password of the user.
+ * @param int    $p_project_id The id of the project to retrieve the users for.
+ * @param int    $p_access     Minimum access level.
+ *
+ * @return array|RestFault|SoapFault Array representing a ProjectAttachmentDataArray structure.
+ * @throws ClientException
  */
 function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_access ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -1250,7 +1271,5 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 
 	$t_command = new ProjectUsersGetCommand( $t_data );
 	$t_result = $t_command->execute();
-	$t_result = $t_result['users'];
-
-	return $t_result;
+	return $t_result['users'];
 }

@@ -52,6 +52,7 @@
  * @author FF11
  * @author Gebu
  * @author Geitost
+ * @author Ignatgg
  * @author Imre
  * @author Justman10000
  * @author KarlReichert
@@ -142,6 +143,7 @@ $s_inherit = 'Kategorien erben';
 $s_inherit_global = 'Globale Kategorien erben';
 $s_inherit_parent = 'Übergeordnete Kategorien erben';
 $s_update_subproject_inheritance = 'Aktualisiere Vererbung des Unterprojekts';
+$s_category_disabled = 'Die Kategorie wurde deaktiviert. Bitte wählen Sie eine andere aus.';
 $s_duplicate_of = 'Duplikat von';
 $s_has_duplicate = 'hat Duplikat';
 $s_related_to = 'verwandt mit';
@@ -508,12 +510,11 @@ $s_log_page_time = 'Ausführungszeit';
 $s_log_page_caller = 'Aufrufer';
 $s_log_page_event = 'Ereignis';
 $s_please_report = 'Bitte melde dies den %1$en.';
-$s_warning_plain_password_authentication = '<strong>WARNUNG:</strong> Einfache Passwort-Authentifizierung wird benutzt, dies wird das Passwort den Administratoren offenlegen.';
 $s_warning_default_administrator_account_present = '<strong>Warnung:</strong> Sie sollten das Standard-Administrator-Konto deaktivieren oder das Passwort ändern.';
 $s_warning_admin_directory_present = '<strong>Warnung:</strong> Das Verzeichnis „admin“ sollte entfernt oder der Zugriff darauf eingeschränkt werden.';
+$s_warning_host_header_injection_hazard = '<strong>Warnung:</strong> "path" wurde in config_inc.php nicht definiert. Wenn Sie diese Konfiguration leer lassen, stellt dies ein Sicherheitsrisiko dar, da der Pfad auf Grundlage der Header der HTTP-Anfrage festgelegt wird, wodurch Ihr System Host-Header-Injection-Angriffen ausgesetzt wird.';
 $s_warning_change_setting = '<strong>Warnung:</strong> „%1$s“ ist nicht auf den Standardwert (%2$s) gesetzt.';
 $s_warning_security_hazard = 'Dies ist ein potentielles Sicherheitsrisiko, sodass sensible Informationen nach außen gelangen können.';
-$s_warning_integrity_hazard = 'Dies führt dazu, dass MantisBT beim Auftreten von Fehlern weiterläuft und kann zu System-/Daten-Integritätsproblemen führen.';
 $s_warning_debug_email = '<strong>Warnung:</strong> „<code>debug_email</code>“ ist nicht auf <code>OFF</code> festgelegt. Alle Benachrichtigungs-E-Mails werden an „%1$s“ versandt.';
 $s_error_database_no_schema_version = '<strong>Fehler:</strong> Die Version Ihres Datenbankschemas ist 0. Dies kann auftreten, wenn die Datenbank beschädigt ist, der Wert von „database_version“ nicht von der Konfigurationstabelle abgerufen werden konnte oder die Datenbankstruktur von einer veralteten MantisBT-Version ist (vor 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Warnung:</strong> Die Datenbank-Struktur könnte veraltet sein. Bitte <a href="admin/install.php">bearbeiten</a> Sie diese vor dem Anmelden.';
@@ -552,6 +553,7 @@ $s_create_new_account_title = 'Neues Konto erstellen';
 $s_verify_password = 'Passwort verifizieren';
 $s_enabled = 'Aktiv';
 $s_enabled_label = 'Aktiv';
+$s_disabled = 'Deaktiviert';
 $s_protected = 'Änderungsgeschützt';
 $s_protected_label = 'Änderungsgeschützt';
 $s_create_user_button = 'Benutzer anlegen';
@@ -587,6 +589,7 @@ $s_p = 'Änderungsgeschützt';
 $s_date_created = 'Erstellungsdatum';
 $s_last_visit = 'Letzter Besuch';
 $s_last_visit_label = 'Letzter Besuch:';
+$s_failed_login_count = 'Fehlgeschlagene Anmeldungen';
 $s_edit_user_link = 'Benutzer bearbeiten';
 $s_search_user_hint = 'Benutzername, bürgerlicher Name oder E-Mail';
 $s_separate_list_items_by = '(Listeneinträge mit „%1$s“ trennen)';
@@ -888,18 +891,18 @@ $s_site_settings_link = 'Eigenschaften';
 $s_site_settings_updated_msg = 'Eigenschaften wurden aktualisiert';
 $s_summary_title = 'Zusammenfassung';
 $s_summary_advanced_link = 'Erweiterte Zusammenfassung';
-$s_by_project = 'Gruppiert nach Projekt';
-$s_by_status = 'Gruppiert nach Status';
-$s_by_date = 'Gruppiert nach Datum';
-$s_by_severity = 'Gruppiert nach Schweregrad';
-$s_by_resolution = 'Gruppiert nach Lösungs-Status';
-$s_by_category = 'Gruppiert nach Kategorie';
-$s_by_priority = 'Gruppiert nach Priorität';
-$s_by_developer = 'Gruppiert nach Entwickler';
-$s_by_reporter = 'Gruppiert nach Reporter';
-$s_reporter_by_resolution = 'Reporter gruppiert nach Lösungs-Status';
+$s_by_project = 'Nach Projekt';
+$s_by_status = 'Nach Status';
+$s_by_date = 'Nach Datum';
+$s_by_severity = 'Nach Schweregrad';
+$s_by_resolution = 'Nach Lösungs-Status';
+$s_by_category = 'Nach Kategorie';
+$s_by_priority = 'Nach Priorität';
+$s_by_developer = 'Nach Entwickler';
+$s_by_reporter = 'Nach Reporter';
+$s_reporter_by_resolution = 'Reporter nach Lösungs-Status';
 $s_reporter_effectiveness = 'Reporter-Effektivität';
-$s_developer_by_resolution = 'Entwickler gruppiert nach Lösungs-Status';
+$s_developer_by_resolution = 'Entwickler nach Lösungs-Status';
 $s_percentage_fixed = '% behoben';
 $s_percentage_errors = '% fehlerhaft';
 $s_errors = 'Fehlerhaft';
@@ -1245,6 +1248,7 @@ $s_database_information = 'MantisBT-Datenbankinformationen';
 $s_path_information = 'MantisBT-Pfadinformationen';
 $s_mantisbt_database_statistics = 'MantisBT-Datenbankstatistiken';
 $s_php_version = 'PHP-Version';
+$s_os_information = 'Betriebssystem-Informationen';
 $s_adodb_version = 'ADOdb-Version';
 $s_database_driver = 'Datenbanktreiber';
 $s_database_version_description = 'Datenbankversion, Beschreibung';
@@ -1356,7 +1360,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Eine Kategorie mit diesem Namen exist
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Kein Kopiervorgang angegeben.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie nicht gefunden.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Die Kategorie „%1$s“ wurde für das Projekt „%2$s“ nicht gefunden.';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Diese Kategorie kann nicht gelöscht werden, da sie als „Standardkategorie für Verschiebungen“ definiert ist.';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'Der Vorgang kann nicht abgeschlossen werden, da die Kategorie "%1$s" in mindestens einem Projekt oder global als Standard für Verschiebungen definiert ist.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'Die Kategorie „%1$s“ kann nicht gelöscht werden, da sie mit einem oder mehreren Einträgen verknüpft ist.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Eine Version mit diesem Namen existiert bereits.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version „%1$s“ nicht gefunden.';

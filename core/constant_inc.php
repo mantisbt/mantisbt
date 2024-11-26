@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.27.0-dev' );
+define( 'MANTIS_VERSION', '2.28.0-dev' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -128,6 +128,10 @@ define( 'ETA_TWO_TO_THREE_DAYS', 30 );
 define( 'ETA_UNDER_ONE_WEEK', 40 );
 define( 'ETA_UNDER_ONE_MONTH', 50 );
 define( 'ETA_OVER_ONE_MONTH', 60 );
+
+# Category status
+define( 'CATEGORY_STATUS_DISABLED', 0 );
+define( 'CATEGORY_STATUS_ENABLED', 1 );
 
 # project view_state
 define( 'VS_PUBLIC', 10 );
@@ -240,6 +244,7 @@ define( 'PLUGIN_PRIORITY_HIGH', 5 );
 # error messages
 define( 'ERROR_PHP', -1 );
 define( 'ERROR_GENERIC', 0 );
+define( 'ERROR_GENERIC_DETAILS', 32 );
 define( 'ERROR_SQL', 1 );
 define( 'ERROR_REPORT', 3 );
 define( 'ERROR_NO_FILE_SPECIFIED', 4 );
@@ -368,7 +373,7 @@ define( 'ERROR_CATEGORY_DUPLICATE', 1500 );
 define( 'ERROR_NO_COPY_ACTION', 1501 );
 define( 'ERROR_CATEGORY_NOT_FOUND', 1502 );
 define( 'ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT', 1503 );
-define( 'ERROR_CATEGORY_CANNOT_DELETE_DEFAULT', 1504 );
+define( 'ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT', 1504 );
 define( 'ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES', 1505 );
 
 # ERROR_VERSION_*
@@ -443,6 +448,9 @@ define( 'ERROR_CRYPTO_MASTER_SALT_INVALID', 2900 );
 
 # ERROR_API_TOKEN_*
 define( 'ERROR_API_TOKEN_NAME_NOT_UNIQUE', 3000 );
+
+# ERROR_GRAPH_*
+define( 'ERROR_GRAPH_TOOL_NOT_FOUND', 3100 );
 
 # Generic position constants
 define( 'POSITION_NONE', 0 );
@@ -590,10 +598,6 @@ define( 'EVENT_TYPE_OUTPUT', 2 );
 define( 'EVENT_TYPE_CHAIN', 3 );
 define( 'EVENT_TYPE_FIRST', 4 );
 
-# Timeline types
-define( 'TIMELINE_TARGETTED', 1 );
-define( 'TIMELINE_FIXED', 2 );
-
 # PHPMailer Methods
 define( 'PHPMAILER_METHOD_MAIL', 0 );
 define( 'PHPMAILER_METHOD_SENDMAIL', 1 );
@@ -624,6 +628,7 @@ define( 'LINKS_SAME_WINDOW', 1 );
 define( 'LINKS_NEW_WINDOW', 2 );
 define( 'LINKS_NOOPENER', 4 );
 define( 'LINKS_NOREFERRER', 8 );
+define( 'LINKS_NOFOLLOW_EXTERNAL', 16);
 
 # Auth Related Constants
 define( 'API_TOKEN_LENGTH', 32 );
@@ -659,8 +664,8 @@ define( 'DATETIME_PICKER_HASH_JS', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbU
 define( 'DATETIME_PICKER_HASH_CSS', 'sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=' );
 
 # Tyeahead JS
-define( 'TYPEAHEAD_VERSION', '1.3.0' );
-define( 'TYPEAHEAD_HASH', 'sha256-VWMJXexFUMAwIXw/PoOzOleP6q97pIbKWuY4v9gMXoY=' );
+define( 'TYPEAHEAD_VERSION', '1.3.4' );
+define( 'TYPEAHEAD_HASH', 'sha512-+f1CvxhWImXOCzqPaBaXNtH+cyfZYeHaJTPoT1v/CK326MliOFISS+rEEwRwO4atJr1+eXpVRVyaUyjXotFBKg==' );
 
 # List JS
 define( 'LISTJS_VERSION', '2.3.1' );

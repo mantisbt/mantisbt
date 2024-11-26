@@ -34,7 +34,7 @@ if( !defined( 'CHECK_INTEGRITY_INC_ALLOW' ) ) {
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 
-$t_this_directory = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$t_this_directory = __DIR__ . DIRECTORY_SEPARATOR;
 if( file_exists( $t_this_directory . 'integrity_release_blobs.php' ) ) {
 	require_once( $t_this_directory . 'integrity_release_blobs.php' );
 }

@@ -33,6 +33,7 @@ if( !defined( 'CHECK_DISPLAY_INC_ALLOW' ) ) {
 # MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
+require_api( 'graphviz_api.php' );
 
 check_print_section_header_row( 'Display' );
 
@@ -66,3 +67,34 @@ check_print_test_row(
 	array( false => 'The value of the bugnote_link_tag option cannot be blank/null.' )
 );
 
+# Graphviz library
+if( config_get( 'relationship_graph_enable' ) ) {
+	# graphviz_path validity is checked in check_paths_inc.php
+	$t_graphviz_path = config_get_global( 'graphviz_path' );
+
+	# Get list of Graphviz tools from the Graph class constants
+	$t_reflect_graph = new ReflectionClass( Graph::class );
+	$t_tools = array_filter( $t_reflect_graph->getConstants(),
+		function( $p_key ) {
+			return strpos( $p_key, 'TOOL_' ) === 0;
+		},
+		ARRAY_FILTER_USE_KEY
+	);
+
+	# Check each tool's availability
+	$t_extension = is_windows_server() ? '.exe' : '';
+	$t_unavailable = [];
+	foreach( $t_tools as $t_tool ) {
+		$t_tool_path = $t_graphviz_path . $t_tool . $t_extension;
+		if( !is_executable( $t_tool_path ) ) {
+			$t_unavailable[] = $t_tool;
+		}
+	}
+	check_print_test_row(
+		"Graphviz tools (" .implode( ', ', $t_tools ) . ") are required to display relationship graphs",
+		empty( $t_unavailable ),
+		[ false => implode( ', ', $t_unavailable )
+			. " not found in $t_graphviz_path or not executable. "
+		]
+	);
+}

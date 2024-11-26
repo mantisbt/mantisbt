@@ -416,7 +416,6 @@ $s_total_queries_executed = '%1$d päringut kokku täidetud.';
 $s_unique_queries_executed = '%1$d unikaalset päringut täidetud.';
 $s_memory_usage = 'mälu kasutus: %1$s KiB';
 $s_please_report = 'Palun teata sellest %1$s -le.';
-$s_warning_plain_password_authentication = '<strong>Hoiatus:</strong> Kasutusel on lihtne parooliga autentimismoodus, sinu parool on nähtav administraatoritele.';
 $s_warning_default_administrator_account_present = '<strong>Hoiatus:</strong> Pead keelama vaikimisi \'administrator\' konto või muutma tema parooli.';
 $s_warning_admin_directory_present = '<strong>Hoiatus:</strong> Admin kaust tuleb eemaldada.';
 $s_error_database_no_schema_version = '<strong>Viga:</strong> Andmebaasi struktuur näib olevat aegunud (config(databaseversion) on 0 ja vanu uuendamise tabeleid pole). Palun kontrolli, et sinu andmebaas töötab - me ei saanud lugeda andmebaasi skeemi versiooni. Config Tabel ei tagastanud lubatud andmebaasi skeemi versiooni - palun küsi abi mantis-help e-kirja loendst kui vajalik.';

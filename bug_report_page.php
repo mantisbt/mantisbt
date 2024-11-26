@@ -280,7 +280,7 @@ if( $t_show_attachments ) {
 				echo $t_allow_no_category ? '' : ' required';
 			?>>
 				<?php
-					print_category_option_list( $f_category_id );
+					print_category_option_list( $f_category_id, null, true );
 				?>
 			</select>
 		</td>
@@ -551,7 +551,7 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> id="target_version" name="target_version" class="input-sm">
-				<?php print_version_option_list( '', null, VERSION_FUTURE ) ?>
+				<?php print_version_option_list( $f_target_version, null, VERSION_FUTURE ) ?>
 			</select>
 		</td>
 	</tr>
@@ -559,7 +559,8 @@ if( $t_show_attachments ) {
 <?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id ) ) ?>
 	<tr>
 		<th class="category">
-			<span class="required">*</span><label for="summary"><?php print_documentation_link( 'summary' ) ?></label>
+			<span class="required">*</span>
+			<label for="summary"><?php print_documentation_link( 'summary' ) ?></label>
 		</th>
 		<td>
 			<input <?php echo helper_get_tab_index() ?> type="text" id="summary" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" required />
@@ -567,7 +568,8 @@ if( $t_show_attachments ) {
 	</tr>
 	<tr>
 		<th class="category">
-			<span class="required">*</span><label for="description"><?php print_documentation_link( 'description' ) ?></label>
+			<span class="required">*</span>
+			<label for="description"><?php print_documentation_link( 'description' ) ?></label>
 		</th>
 		<td>
 			<?php # Newline after opening textarea tag is intentional, see #25839 ?>
@@ -650,9 +652,9 @@ if( $t_show_attachments ) {
 			<?php if( $t_def['require_report'] ) {?><span class="required">*</span><?php } ?>
 			<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
 				<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>">
-					<?php echo string_display_line( lang_get_defaulted( $t_def['name'] ) ) ?>
+					<?php echo string_attribute( lang_get_defaulted( $t_def['name'] ) ) ?>
 				</label>
-			<?php } else { echo string_display_line( lang_get_defaulted( $t_def['name'] ) ); } ?>
+			<?php } else { echo string_attribute( lang_get_defaulted( $t_def['name'] ) ); } ?>
 		</th>
 		<td>
 			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id, $t_def['require_report'] ) ?>

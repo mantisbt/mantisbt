@@ -33,10 +33,11 @@ require_api( 'relationship_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_enum_api.php' );
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_issue_api.php' );
-require_once( dirname( __FILE__ ) . '/../../api/soap/mc_project_api.php' );
+$t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
+require_once( $t_soap_dir . 'mc_api.php' );
+require_once( $t_soap_dir . 'mc_enum_api.php' );
+require_once( $t_soap_dir . 'mc_issue_api.php' );
+require_once( $t_soap_dir . 'mc_project_api.php' );
 
 use Mantis\Exceptions\ClientException;
 
@@ -232,7 +233,7 @@ class IssueAddCommand extends Command {
 			}
 		}
 
-		$t_category = isset( $t_issue['category'] ) ? $t_issue['category'] : null;
+		$t_category = $t_issue['category'] ?? null;
 		$t_category_id = mci_get_category_id( $t_category, $t_project_id );
 
 		$this->issue = new BugData;
@@ -240,8 +241,8 @@ class IssueAddCommand extends Command {
 		$this->issue->reporter_id = $t_reporter_id;
 		$this->issue->summary = $t_summary;
 		$this->issue->description = $t_description;
-		$this->issue->steps_to_reproduce = isset( $t_issue['steps_to_reproduce'] ) ? $t_issue['steps_to_reproduce'] : '';
-		$this->issue->additional_information = isset( $t_issue['additional_information'] ) ? $t_issue['additional_information'] : '';
+		$this->issue->steps_to_reproduce = $t_issue['steps_to_reproduce'] ?? '';
+		$this->issue->additional_information = $t_issue['additional_information'] ?? '';
 		$this->issue->handler_id = $t_handler_id;
 		$this->issue->priority = $t_priority_id;
 		$this->issue->severity = $t_severity_id;
@@ -251,16 +252,16 @@ class IssueAddCommand extends Command {
 		$this->issue->projection = $t_projection_id;
 		$this->issue->category_id = $t_category_id;
 		$this->issue->eta = $t_eta_id;
-		$this->issue->os = isset( $t_issue['os'] ) ? $t_issue['os'] : '';
-		$this->issue->os_build = isset( $t_issue['os_build'] ) ? $t_issue['os_build'] : '';
-		$this->issue->platform = isset( $t_issue['platform'] ) ? $t_issue['platform'] : '';
-		$this->issue->build = isset( $t_issue['build'] ) ? $t_issue['build'] : '';
+		$this->issue->os = $t_issue['os'] ?? '';
+		$this->issue->os_build = $t_issue['os_build'] ?? '';
+		$this->issue->platform = $t_issue['platform'] ?? '';
+		$this->issue->build = $t_issue['build'] ?? '';
 		$this->issue->view_state = $t_view_state_id;
-		$this->issue->sponsorship_total = isset( $t_issue['sponsorship_total'] ) ? $t_issue['sponsorship_total'] : 0;
+		$this->issue->sponsorship_total = $t_issue['sponsorship_total'] ?? 0;
 
 		if( isset( $t_issue['profile_id'] ) ) {
 			$t_profile_id = (int)$t_issue['profile_id'];
-		} else if( isset( $t_issue['profile'] ) && isset( $t_issue['profile']['id'] ) ) {
+		} else if( isset( $t_issue['profile']['id'] ) ) {
 			$t_profile_id = (int)$t_issue['profile']['id'];
 		} else {
 			$t_profile_id = 0;
@@ -297,28 +298,24 @@ class IssueAddCommand extends Command {
 
 		# if a profile was selected then let's use that information
 		if( $this->issue->profile_id != 0 ) {
-			if( profile_is_global( $this->issue->profile_id ) ) {
-				$t_row = user_get_profile_row( ALL_USERS, $this->issue->profile_id );
-			} else {
-				$t_row = user_get_profile_row( $this->issue->reporter_id, $this->issue->profile_id );
-			}
+			$t_profile = user_get_profile( $this->issue->reporter_id, $this->issue->profile_id );
 
 			if( is_blank( $this->issue->platform ) ) {
-				$this->issue->platform = $t_row['platform'];
+				$this->issue->platform = $t_profile->platform;
 			}
 
 			if( is_blank( $this->issue->os ) ) {
-				$this->issue->os = $t_row['os'];
+				$this->issue->os = $t_profile->os;
 			}
 
 			if( is_blank( $this->issue->os_build ) ) {
-				$this->issue->os_build = $t_row['os_build'];
+				$this->issue->os_build = $t_profile->os_build;
 			}
 		}
 
 		mci_project_custom_fields_validate( $t_project_id, $t_issue['custom_fields'] );
 
-		if( isset( $t_issue['files'] ) && !empty( $t_issue['files'] ) ) {
+		if( !empty( $t_issue['files'] ) ) {
 			if( !file_allow_bug_upload( /* issue id */ null, /* user id */ null, $t_project_id ) ) {
 				throw new ClientException(
 					'User not allowed to attach files.',
@@ -432,14 +429,10 @@ class IssueAddCommand extends Command {
 			}
 		}
 
-		$t_notes = isset( $t_issue['notes'] ) ? $t_issue['notes'] : array();
+		$t_notes = $t_issue['notes'] ?? array();
 		if( isset( $t_notes ) && is_array( $t_notes ) ) {
 			foreach( $t_notes as $t_note ) {
-				if( isset( $t_note['view_state'] ) ) {
-					$t_view_state = $t_note['view_state'];
-				} else {
-					$t_view_state = config_get( 'default_bugnote_view_status' );
-				}
+				$t_view_state = $t_note['view_state'] ?? config_get( 'default_bugnote_view_status' );
 
 				$t_note_type = isset( $t_note['note_type'] ) ? (int)$t_note['note_type'] : BUGNOTE;
 				$t_note_attr = isset( $t_note['note_type'] ) ? $t_note['note_attr'] : '';

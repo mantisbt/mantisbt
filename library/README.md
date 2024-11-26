@@ -6,9 +6,9 @@ The version and status of each is summarized below:
 
 ## PHP libraries
 
-| directory  | project    | version | status         |
-|------------|------------|---------|----------------|
-| rssbuilder | RSSBuilder | 2.2.1   | patched [1][2] |
+| directory  | project    | version | status              |
+|------------|------------|---------|---------------------|
+| rssbuilder | RSSBuilder | 2.2.1   | patched [1],[2],[4] |
 
 
 ## Javascript/CSS libraries
@@ -22,18 +22,18 @@ The version and status of each is summarized below:
 | moment.js                   | 2.29.4  | unpatched   |
 | bootstrap-datetimepicker    | 4.17.47 | unpatched   |
 | dropzone.js                 | 5.5.0   | unpatched   |
-| chart.js                    | 2.8.0   | unpatched   |
-| chartjs-plugin-colorschemes | 0.4.0   | unpatched   |
-| typeahead.js                | 1.3.0   | unpatched   |
+| chart.js                    | 3.9.1   | unpatched   |
+| chartjs-plugin-colorschemes | 0.5.4   | unpatched   |
+| typeahead.js                | 1.3.4   | unpatched   |
 | list.js                     | 2.3.1   | patched [3] |
 
 **Notes**
 
 1. removed `__autoload` function
-2. fixed SYSTEM NOTICE 'Only variables should be passed by reference'
+2. fixed SYSTEM NOTICE 'Only variables should be passed by reference' (#25213)
 3. fixed scrolling regression in navigation buttons, 
    patch submitted upstream https://github.com/javve/list.js/pull/750
-
+4. fixed TypeError when creating empty feed on PHP 8 (#33634)
 
 
 ## Upstream projects

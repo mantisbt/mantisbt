@@ -39,6 +39,7 @@
  * @file
  *
  * @author Erdemaslancan
+ * @author GolyatGeri
  * @author Kumkumuk
  * @author Marmase
  * @author Mirzali
@@ -52,7 +53,7 @@ $s_plugin_XmlImportExport_config_title = 'Konfigurasyona sewiyeya hesabii de XML
 $s_plugin_XmlImportExport_import_threshold = 'Meseleyê grotışi';
 $s_plugin_XmlImportExport_export_threshold = 'Meseler ateberd';
 $s_plugin_XmlImportExport_action_update = 'Rocane ke';
-$s_plugin_XmlImportExport_importing_in_project = 'Proce dı meselê teberdara:';
+$s_plugin_XmlImportExport_importing_in_project = 'Proce dı meselê teberdara:%s';
 $s_plugin_XmlImportExport_import_options = 'Weçinıkan zerre ke';
 $s_plugin_XmlImportExport_cross_references = 'Çaprez referansi';
 $s_plugin_XmlImportExport_default_strategy = 'Strateciya çerexnayışê hesabiyayiye:';

@@ -45,15 +45,152 @@ require_api( 'utility_api.php' );
 use Mantis\Exceptions\ClientException;
 
 /**
+ * System Profile information
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $platform
+ * @property string $os
+ * @property string $os_build
+ * @property string $description
+ */
+class ProfileData {
+	/** @var int Profile Id */
+	protected int $id;
+
+	/** @var int User Id */
+	protected int $user_id;
+
+	/** @var string Platform */
+	protected string $platform;
+
+	/** @var string Operating System */
+	protected string $os;
+
+	/** @var string Operating System Build */
+	protected string $os_build;
+
+	/** @var string Profile description */
+	protected string $description;
+
+	/**
+	 * Class constructor
+	 *
+	 * @param int $p_profile_id Id of Profile to initialize object with.
+	 *
+	 * @throws ClientException if the Profile Id does not exist.
+	 */
+	public function __construct( int $p_profile_id ) {
+		$t_row = $this->load_row( $p_profile_id );
+
+		$this->id = $t_row['id'];
+		$this->user_id = $t_row['user_id'];
+		$this->platform = $t_row['platform'];
+		$this->os = $t_row['os'];
+		$this->os_build = $t_row['os_build'];
+		$this->description = $t_row['description'];
+	}
+
+	/**
+	 * Load and return a profile row from the database.
+	 *
+	 * @param int $p_profile_id A profile identifier.
+	 *
+	 * @return array
+	 * @throws ClientException if the Profile Id does not exist
+	 */
+	public static function load_row( int $p_profile_id ): array {
+		$t_query = new DbQuery();
+		$t_query->sql( 'SELECT * FROM {user_profile} WHERE id=:profile_id' );
+		$t_query->bind( 'profile_id',  $p_profile_id );
+		$t_query->execute();
+
+		$t_row = $t_query->fetch();
+		if( !$t_row ) {
+			throw new ClientException(
+				"Profile #$p_profile_id not found",
+				ERROR_USER_PROFILE_NOT_FOUND,
+				array( $p_profile_id )
+			);
+		}
+
+		return $t_row;
+	}
+
+	/**
+	 * Allow direct, read-only access to class properties.
+	 *
+	 * @param string $p_property Property name.
+	 *
+	 * @return int|string Property value.
+	 * @throws ClientException if property does not exist
+	 */
+	public function __get( string $p_property ) {
+		if( !property_exists( $this, $p_property ) ) {
+			throw new ClientException( "Unknown property '$p_property'", ERROR_GENERIC );
+		}
+		return $this->$p_property;
+	}
+
+	/**
+	 * Return the profile's name as concatenation of platform, os and build.
+	 *
+	 * @return string
+	 */
+	public function get_name(): string {
+		return "$this->platform $this->os $this->os_build";
+	}
+
+	/**
+	 * Returns true if the specified profile is global.
+	 *
+	 * @return bool
+	 */
+	public function is_global(): bool {
+		return $this->user_id == ALL_USERS;
+	}
+
+	/**
+	 * Check if user is allowed to update or delete the given Profile.
+	 *
+	 * @param int|null $p_user_id User id or null for current user (default).
+	 *
+	 * @return bool True if allowed, false otherwise.
+	 */
+	function can_update( ?int $p_user_id = null ): bool {
+		$t_user_id = $p_user_id === null ? auth_get_current_user_id() : $p_user_id;
+
+		# Global profile ?
+		if( $this->is_global()) {
+			return access_has_global_level( config_get( 'manage_global_profile_threshold' ) );
+		}
+
+		return $this->user_id == $t_user_id;
+	}
+
+	/**
+	 * Throws Access Denied error if user is not allowed to update the Profile.
+	 *
+	 * @param int|null $p_user_id User id or null for current user (default).
+	 */
+	function ensure_can_update( ?int $p_user_id = null ) {
+		if( !$this->can_update( $p_user_id ) ) {
+			access_denied();
+		}
+	}
+
+}
+
+/**
  * Create a new profile for the user, return the ID of the new profile.
  *
- * @param integer $p_user_id     A valid user identifier.
- * @param string  $p_platform    Value for profile platform.
- * @param string  $p_os          Value for profile operating system.
- * @param string  $p_os_build    Value for profile operation system build.
- * @param string  $p_description Description of profile.
- * @return integer
+ * @param int    $p_user_id     A valid user identifier.
+ * @param string $p_platform    Value for profile platform.
+ * @param string $p_os          Value for profile operating system.
+ * @param string $p_os_build    Value for profile operation system build.
+ * @param string $p_description Description of profile.
  *
+ * @return int
  * @throws ClientException if user is protected
  */
 function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
@@ -85,10 +222,10 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
  * code included the user_id in the query and I have chosen to keep that for
  * this API as it hides the details of id implementation from users of the API
  *
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_profile_id A profile identifier.
- * @return void
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_profile_id A profile identifier.
  *
+ * @return void
  * @throws ClientException if user is protected
  */
 function profile_delete( $p_user_id, $p_profile_id ) {
@@ -107,14 +244,14 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 /**
  * Update a profile for the user.
  *
- * @param integer $p_user_id     A valid user identifier.
- * @param integer $p_profile_id  A profile identifier.
- * @param string  $p_platform    Value for profile platform.
- * @param string  $p_os          Value for profile operating system.
- * @param string  $p_os_build    Value for profile operation system build.
- * @param string  $p_description Description of profile.
- * @return void
+ * @param int    $p_user_id     A valid user identifier.
+ * @param int    $p_profile_id  A profile identifier.
+ * @param string $p_platform    Value for profile platform.
+ * @param string $p_os          Value for profile operating system.
+ * @param string $p_os_build    Value for profile operation system build.
+ * @param string $p_description Description of profile.
  *
+ * @return void
  * @throws ClientException if user is protected
  */
 function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_build, $p_description ) {
@@ -140,14 +277,14 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 
 /**
  * Validates that the given profile data is valid, throw errors if not.
- * @internal
  *
- * @param $p_user_id
- * @param $p_platform
- * @param $p_os
- * @param $p_os_build
+ * @param int    $p_user_id  A valid user identifier.
+ * @param string $p_platform Value for profile platform.
+ * @param string $p_os       Value for profile operating system.
+ * @param string $p_os_build Value for profile operation system build.
  *
  * @throws ClientException
+ * @internal
  */
 function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build ) {
 	if( ALL_USERS != $p_user_id ) {
@@ -176,53 +313,44 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 /**
  * Return a profile row from the database.
  *
- * @param integer $p_profile_id A profile identifier.
- * @return array
+ * @param int $p_profile_id A profile identifier.
  *
+ * @return array
  * @throws ClientException if the profile ID does not exist
+ *
+ * @deprecated 2.28.0 Use {@see ProfileData::load_row()} instead.
  */
 function profile_get_row( $p_profile_id ) {
-	$t_query = new DbQuery();
-	$t_query->sql( 'SELECT * FROM {user_profile} WHERE id=:profile_id' );
-	$t_query->bind( 'profile_id',  $p_profile_id );
-	$t_query->execute();
+	error_parameters( __FUNCTION__ . '()', 'ProfileData::load_row()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 
-	$t_row = $t_query->fetch();
-	if( !$t_row ) {
-		throw new ClientException(
-			"Profile #$p_profile_id not found",
-			ERROR_USER_PROFILE_NOT_FOUND,
-			array( $p_profile_id )
-		);
-	}
-
-	return $t_row;
+	return ProfileData::load_row( $p_profile_id );
 }
 
 /**
  * Return the profile's name as concatenation of platform, os and build.
  *
  * @param int $p_profile_id
- * @return string
  *
+ * @return string
  * @throws ClientException if the profile ID does not exist
+ *
+ * @deprecated 2.28.0 Use {@see ProfileData::get_name()} instead.
  */
 function profile_get_name( $p_profile_id ) {
-	$t_profile = profile_get_row( $p_profile_id );
-	/**
-	 * @var string $v_platform
-	 * @var string $v_os
-	 * @var string $v_os_build
-	 */
-	extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
-	return "$v_platform $v_os $v_os_build";
+	error_parameters( __FUNCTION__ . '()', 'ProfileData::get_name()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	$t_profile = new ProfileData( $p_profile_id );
+	return $t_profile->get_name();
 }
 
 /**
  * Return an array containing all rows for a given user.
  *
- * @param integer $p_user_id   A valid user identifier.
- * @param boolean $p_all_users Include profiles for all users.
+ * @param int  $p_user_id   A valid user identifier.
+ * @param bool $p_all_users Include profiles for all users.
+ *
  * @return array
  */
 function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
@@ -243,7 +371,8 @@ function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
  * Return an array containing all profiles for a given user,
  * including global profiles.
  *
- * @param integer $p_user_id A valid user identifier.
+ * @param int $p_user_id A valid user identifier.
+ *
  * @return array
  */
 function profile_get_all_for_user( $p_user_id ) {
@@ -251,11 +380,12 @@ function profile_get_all_for_user( $p_user_id ) {
 }
 
 /**
- * Return an array of strings containing unique values for the specified field based
- * on private and public profiles accessible to the specified user.
+ * Return an array of strings containing unique values for the specified field
+ * based on private and public profiles accessible to the specified user.
  *
- * @param string  $p_field   Field name of the profile to retrieve.
- * @param integer $p_user_id A valid user identifier.
+ * @param string $p_field   Field name of the profile to retrieve.
+ * @param int    $p_user_id A valid user identifier.
+ *
  * @return array
  */
 function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
@@ -288,9 +418,10 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 }
 
 /**
- * Return an array containing all profiles used in a given project
+ * Return an array containing all profiles used in a given project.
  *
- * @param integer $p_project_id A valid project identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return array
  */
 function profile_get_all_for_project( $p_project_id ) {
@@ -309,8 +440,9 @@ function profile_get_all_for_project( $p_project_id ) {
 /**
  * Returns the user's default profile.
  *
- * @param integer $p_user_id A valid user identifier.
- * @return string
+ * @param int $p_user_id A valid user identifier.
+ *
+ * @return int
  */
 function profile_get_default( $p_user_id ) {
 	return (int)user_pref_get_pref( $p_user_id, 'default_profile' );
@@ -319,11 +451,17 @@ function profile_get_default( $p_user_id ) {
 /**
  * Returns true if the specified profile is global.
  *
- * @param integer $p_profile_id A valid profile identifier.
- * @return boolean
+ * @param int $p_profile_id A valid profile identifier.
+ *
+ * @return bool
  * @throws ClientException if the profile ID does not exist
+ *
+ * @deprecated 2.28.0 Use {@see ProfileData::is_global()} instead.
  */
 function profile_is_global( $p_profile_id ) {
-	$t_row = profile_get_row( $p_profile_id );
-	return $t_row['user_id'] == ALL_USERS;
+	error_parameters( __FUNCTION__ . '()', 'ProfileData::is_global()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	$t_profile = new ProfileData( $p_profile_id );
+	return $t_profile->is_global();
 }

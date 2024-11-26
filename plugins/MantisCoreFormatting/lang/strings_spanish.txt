@@ -40,6 +40,7 @@
  *
  * @author Bithunter
  * @author Fitoschido
+ * @author Laquin
  * @author Locos epraix
  * @author Luisangelrg
  */
@@ -56,3 +57,6 @@ $s_plugin_format_process_markdown = 'Procesando Markdown';
 $s_plugin_format_process_markdown_info = 'Aplicando estilo con soporte Markdown, la síntaxis de formato de texto diseñada para que pueda ser convertida a HTML.';
 $s_plugin_format_enabled = 'Habilitado';
 $s_plugin_format_disabled = 'Desactivado';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Copiado';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Presione Ctrl+C para copiar';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Mostrar idioma';

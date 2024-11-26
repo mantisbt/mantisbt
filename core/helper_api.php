@@ -88,14 +88,18 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
  * becomes array('k1'=>array('a'=>1,'b'=>3),'k2'=>array('a'=>2,'b'=>4))
  *
  * @param array $p_array The array to transpose.
+ *
  * @return array|mixed transposed array or $p_array if not 2-dimensional array
+ * @throws ClientException
  */
 function helper_array_transpose( array $p_array ) {
 	$t_out = array();
 	foreach( $p_array as $t_key => $t_sub ) {
 		if( !is_array( $t_sub ) ) {
-			# This function can only handle bidimensional arrays
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new ClientException(
+				__FUNCTION__ . " can only handle bidimensional arrays",
+				ERROR_GENERIC
+			);
 		}
 
 		foreach( $t_sub as $t_subkey => $t_value ) {
@@ -772,7 +776,15 @@ function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_strin
  * @return integer view state id
  * @throws ClientException if view state is invalid or array is empty.
  */
-function helper_parse_view_state( array $p_view_state ) {
+function helper_parse_view_state( $p_view_state ) {
+	if( ! is_array( $p_view_state ) ) {
+		throw new ClientException(
+			"Invalid view state",
+			ERROR_INVALID_FIELD_VALUE,
+			array( lang_get( 'bugnote_view_state' ) )
+		);
+	}
+
 	$t_view_state_enum = config_get( 'view_state_enum_string' );
 
 	$t_view_state_id = VS_PUBLIC;
@@ -783,7 +795,8 @@ function helper_parse_view_state( array $p_view_state ) {
 			throw new ClientException(
 				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
 				ERROR_INVALID_FIELD_VALUE,
-				array( lang_get( 'view_state' ) ) );
+				array( lang_get( 'bugnote_view_state' ) )
+			);
 		}
 	} else if( isset( $p_view_state['name' ] ) ) {
 		$t_enum_by_labels = MantisEnum::getAssocArrayIndexedByLabels( $t_view_state_enum );
@@ -792,14 +805,17 @@ function helper_parse_view_state( array $p_view_state ) {
 			throw new ClientException(
 				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
 				ERROR_INVALID_FIELD_VALUE,
-				array( lang_get( 'view_state' ) ) );
+				array( lang_get( 'bugnote_view_state' ) )
+			);
 		}
 
 		$t_view_state_id = $t_enum_by_labels[$t_name];
 	} else {
 		throw new ClientException(
 			"Empty view state",
-			ERROR_EMPTY_FIELD );
+			ERROR_EMPTY_FIELD,
+			array( lang_get( 'bugnote_view_state' ) )
+		);
 	}
 
 	return $t_view_state_id;
@@ -857,7 +873,7 @@ function helper_parse_issue_id( $p_issue_id, $p_field_name = 'issue_id' ) {
  *
  * @see $g_html_make_links
  */
-function helper_get_link_attributes( $p_return_array = true ) {
+function helper_get_link_attributes( $p_return_array = true, $p_is_external_link = false ) {
 	$t_html_make_links = config_get( 'html_make_links' );
 
 	$t_attributes = array();
@@ -877,8 +893,15 @@ function helper_get_link_attributes( $p_return_array = true ) {
 				$t_attributes['rel'] = 'noopener';
 			}
 		}
+		if( $p_is_external_link && ( $t_html_make_links & LINKS_NOFOLLOW_EXTERNAL ) ) {
+			if( isset( $t_attributes['rel'] ) ) {
+				$t_attributes['rel'] .= ',nofollow';
+			}
+			else {
+				$t_attributes['rel'] = 'nofollow';
+			}
+		}
 	}
-
 	if( $p_return_array ) {
 		return $t_attributes;
 	}
@@ -888,4 +911,30 @@ function helper_get_link_attributes( $p_return_array = true ) {
 		$t_string .= " $t_attr=\"$t_value\"";
 	}
 	return $t_string;
+}
+
+/**
+ * Returns the root domain plus TLD from a URL.
+ *
+ * Also handles ccTLDs.
+ *
+ * @param string $p_url The URL to parse.
+ *
+ * @return string domain.tld or domain.cctld.tld or IP address.
+ */
+function helper_get_root_domain( $p_url ) {
+	$t_host = parse_url( $p_url, PHP_URL_HOST );
+	if ( filter_var( $t_host, FILTER_VALIDATE_IP ) ) {
+		return $t_host; // Return IP address as is
+	}
+	$t_parts = explode( '.', $t_host );
+	$t_numParts = count( $t_parts );
+	if ( $t_numParts >= 2 ) {
+		$t_domain = $t_parts[ $t_numParts - 2 ] . '.' . $t_parts[ $t_numParts - 1 ];
+		if ( strlen( $t_parts[ $t_numParts - 1 ] ) == 2 && $t_numParts > 2 ) {
+			$t_domain = $t_parts[ $t_numParts - 3 ] . '.' . $t_domain; // Handle ccTLDs
+		}
+		return $t_domain;
+	}
+	return $t_host; // Return host if nothing matches
 }

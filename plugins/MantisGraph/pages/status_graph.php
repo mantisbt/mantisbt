@@ -28,7 +28,7 @@ layout_page_header();
 layout_page_begin( 'summary_page.php' );
 
 $t_filter = summary_get_filter();
-print_summary_menu( plugin_page( 'developer_graph.php' ), $t_filter );
+print_summary_menu( 'project_graph.php', $t_filter );
 
 # Submenu
 $t_mantisgraph = plugin_get();

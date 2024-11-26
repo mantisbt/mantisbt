@@ -40,6 +40,7 @@
  *
  * @author EugeneZelenko
  * @author Jim-by
+ * @author Kapatych
  * @author Macofe
  * @author Nerogaf
  * @author Red Winged Duck
@@ -91,6 +92,7 @@ $s_unassigned_projects_label = 'Непрызначаныя праекты';
 $s_copy_users = 'Скапіяваць карыстальнікаў';
 $s_copy_categories_from = 'Скапіяваць катэгорыі з';
 $s_copy_categories_to = 'Скапіяваць катэгорыі ў';
+$s_copy_categories_exclude_inherited = 'Выключыць успадкаваныя катэгорыі';
 $s_copy_versions_from = 'Скапіяваць вэрсіі з';
 $s_copy_versions_to = 'Скапіяваць вэрсіі ў';
 $s_copy_users_from = 'Скапіяваць карыстальнікаў з';
@@ -120,6 +122,7 @@ $s_inherit = 'Спадчынныя катэгорыі';
 $s_inherit_global = 'Спадчынныя глябальныя катэгорыі';
 $s_inherit_parent = 'Спадчынныя бацькоўскія катэгорыі';
 $s_update_subproject_inheritance = 'Зьмяніць спадчынныя падпраекты';
+$s_category_disabled = 'Катэгорая адключаная; абярыце іншую, калі ласка';
 $s_duplicate_of = 'дублюе';
 $s_has_duplicate = 'дублюецца';
 $s_related_to = 'зьвязаная з';
@@ -278,8 +281,8 @@ $s_email_tag = 'Цэтлікі';
 $s_email_due_date = 'Дата дзеяньня';
 $s_account_protected_msg = 'Рахунак абаронены. Немагчыма зьмяніць устаноўкі…';
 $s_account_removed_msg = 'Ваш рахунак быў выдалены…';
-$s_confirm_delete_msg = 'Вы ўпэўнены, што жадаеце выдаліць Ваш рахунак?';
-$s_delete_account_button = 'Выдаліць рахунак';
+$s_confirm_delete_msg = 'Вы ўпэўнены, што жадаеце выдаліць Ваш уліковы запіс?';
+$s_delete_account_button = 'Выдаліць уліковы запіс';
 $s_manage_profiles_link = 'Профілі';
 $s_change_preferences_link = 'Налады';
 $s_edit_account_title = 'Рэдагаваць рахунак';
@@ -486,12 +489,10 @@ $s_log_page_time = 'Час выкананьня';
 $s_log_page_caller = 'Выклікаў';
 $s_log_page_event = 'Падзея';
 $s_please_report = 'Калі ласка, паведаміце пра гэта %1$s.';
-$s_warning_plain_password_authentication = '<strong>Папярэджаньне:</strong> Выкарыстоўваецца простая аўтэнтыфікацыя, гэта вядзе да таго, што Ваш пароль бачны для адміністратараў.';
 $s_warning_default_administrator_account_present = '<strong>Папярэджаньне:</strong> Вы павінны забараніць рахунак адміністратара па змоўчваньні ці зьмяніць гэты пароль.';
 $s_warning_admin_directory_present = '<strong>Папярэджаньне:</strong> каталёг «admin» павінен быць выдалены або да яго павінен быць абмежаваны доступ.';
 $s_warning_change_setting = '<strong>Папярэджаньне:</strong> для «%1$s» ня вызначанае значэньне па змоўчаньні (%2$s).';
 $s_warning_security_hazard = 'Гэта нясе патэнцыйную пагрозу бясьпецы, бо можа прывесьці да разгалошваньня канфідэнцыйных зьвестак.';
-$s_warning_integrity_hazard = 'Гэта прымусіць MantisBT працягваць працу, калі ўзьнікаюць памылкі, і можа прывесьці да праблемаў з цэласнасьцю зьвестак сыстэмы.';
 $s_warning_debug_email = '<strong>Папярэджаньне:</strong> «<code>debug_email</code>» ня выстаўлены ў <code>OFF</code>, усе паведамленьні электроннай поштай будуць дасылацца на «%1$s».';
 $s_error_database_no_schema_version = '<strong>Памылка:</strong> вэрсія схемы вашай базы зьвестак — 0. Гэта можа адбывацца праз пашкоджаньне базы зьвестак, ці значэньне «database_version» ня можа быць атрыманае з табліцы канфігурацыі, ці структура базы зьвестак паходзіць з састарэлай вэрсіі MantisBT (да 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Папярэджаньне:</strong> Схема базы зьвестак можа быць састарэлай. Калі ласка, абнавіце <a href="admin/install.php">тут</a> перад уваходам у сыстэму.';
@@ -532,7 +533,7 @@ $s_enabled = 'Уключана';
 $s_enabled_label = 'Актыўна';
 $s_protected = 'Абаронены';
 $s_protected_label = 'Абаронена';
-$s_create_user_button = 'Стварыць рахунак';
+$s_create_user_button = 'Стварыць уліковы запіс';
 $s_hide_disabled = 'Схаваць выключаныя';
 $s_filter_button = 'Ужыць фільтар';
 $s_default_filter = 'Фільтар па змаўчаньні';
@@ -902,7 +903,7 @@ $s_changed = 'Вылучаць зьмененыя (гадзіны)';
 $s_viewing_bugs_title = 'Прагляд праблемаў';
 $s_updated = 'Абноўленая';
 $s_sticky = 'Паказаць прылепленыя праблемы';
-$s_sort = 'Сартаваць па';
+$s_sort = 'Сартаваць паводле';
 $s_issue_id = 'Праблема №';
 $s_recently_visited = 'Апошнія наведаныя';
 $s_note_user_id = 'Камэнтар ад';
@@ -1325,7 +1326,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Катэгорыя з гэтай на
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Ня вызначанае дзеяньне капіяваньня.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Катэгорыя ня знойдзеная.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Катэгорыя «%1$s» ня знойдзеная ў праекце «%2$s».';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Гэтая катэгорыя ня можа быць выдаленая, таму што вызначаная як «Катэгорыя для пераносаў па змаўчаньні»';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'Немагчыма завяршыць апэрацыю, бо катэгорыя „%1$s“ вызначаная дапомнай для пераносаў прынамсі ў адным з праектаў ці глябальна.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'Катэгорыя «%1$s» ня можа быць выдаленая, бо яна зьвязаная з адной ці болей задачамі.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Вэрсія з гэтай назвай ужо існуе.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Вэрсія «%1$s» ня знойдзеная.';

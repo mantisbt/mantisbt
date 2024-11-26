@@ -30,6 +30,9 @@
  * @uses gpc_api.php
  * @uses print_api.php
  * @uses user_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 # don't auto-login when trying to verify new user
@@ -100,19 +103,16 @@ layout_login_page_begin();
 		<?php layout_login_page_logo() ?>
 		<div class="space-24 hidden-480"></div>
 
+		<div id="reset-passwd-msg" class="alert alert-sm alert-warning ">
 		<?php
 			if( $t_can_change_password ) {
-				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning ">';
 				echo lang_get( 'verify_warning' ) . '<br />';
 				echo lang_get( 'verify_change_password' );
-				echo '</div>';
 			} else {
-				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning">';
 				echo auth_password_managed_elsewhere_message();
-				echo '</div>';
 			}
 		?>
-
+		</div>
 
 		<?php
 		if( $t_can_change_password ) {
@@ -131,10 +131,15 @@ layout_login_page_begin();
 					<legend><span><?php echo lang_get( 'edit_account_title' ) . ' - ' . string_display_line( $u_username ) ?></span></legend>
 					<div class="space-10"></div>
 					<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
+					<input type="hidden" name="confirm_hash" value="<?php echo string_html_specialchars( $f_confirm_hash ) ?>">
 					<?php
 					echo form_security_field( 'account_update' );
-					# When verifying account, set a token and don't display current password
-					token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
+					# When verifying account, set a token to limit time to submit new password
+					token_set( TOKEN_ACCOUNT_VERIFY,
+						true,
+						config_get( 'reauthentication_expiry' ),
+						$u_id
+					);
 					?>
 					<div class="field-container">
 						<label class="block clearfix">

@@ -1107,7 +1107,7 @@
     <output message="tns:mc_projects_get_user_accessibleResponse"/>
   </operation>
   <operation name="mc_project_get_categories">
-    <documentation>Get the categories belonging to the specified project.</documentation>
+    <documentation>Get the enabled categories belonging to the specified project.</documentation>
     <input message="tns:mc_project_get_categoriesRequest"/>
     <output message="tns:mc_project_get_categoriesResponse"/>
   </operation>

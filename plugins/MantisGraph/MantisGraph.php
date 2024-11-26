@@ -32,16 +32,22 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * includes Moment.js, and per documentation this could cause issues.
 	 * @see https://www.chartjs.org/docs/latest/getting-started/installation.html#bundled-build
 	 */
-	const CHARTJS_VERSION = '2.9.4';
-	const CHARTJS_HASH = 'sha256-t9UJPrESBeG2ojKTIcFLPGF7nHi2vEc7f5A2KpH/UBU=';
+	const CHARTJS_VERSION = '3.9.1';
+	const CHARTJS_HASH = 'sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA';
 
 	/**
-	 * ChartJS colorschemes plugin
+	 * ChartJS colorschemes plugin.
+	 *
+	 * The plugin's official repository seems unmaintained for several years,
+	 * and the latest 0.4.0 release is not compatible with Chart.js v3, so we
+	 * are using a community-maintained fork.
+	 *
 	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/ Home page
-	 * @see https://www.jsdelivr.com/package/npm/chartjs-plugin-colorschemes CDN
+	 * @see https://www.jsdelivr.com/package/npm/hw-chartjs-plugin-colorschemes CDN
+	 * @see https://github.com/MaximBelov/chartjs-plugin-colorschemes/ Fork
 	 */
-	const CHARTJS_COLORSCHEMES_VERSION = '0.4.0';
-	const CHARTJS_COLORSCHEMES_HASH = 'sha256-Ctym065YsaugUvysT5nHayKynbiDGVpgNBqUePRAL+0=';
+	const CHARTJS_COLORSCHEMES_VERSION = '0.5.4';
+	const CHARTJS_COLORSCHEMES_HASH = 'sha256-q5bFi6wZG3skQ5zHhhCum9lVVw+iejIM0SqVgzkhVME=';
 
 	/**
 	 * CDN for Chart.JS libraries
@@ -86,7 +92,18 @@ class MantisGraphPlugin extends MantisPlugin  {
 	}
 
 	/**
-	 * Plugin events
+	 * Plugin events.
+	 *
+	 * - EVENT_MANTISGRAPH_SUBMENU (Default): allows 3rd-party plugins to add
+	 *   additional graphs {@see https://mantisbt.org/bugs/view.php?id=26139#c62802}.
+	 *   NOTE: If the child plugin wishes to use the chart.js library to display
+	 *   its graphs, then it is responsible to
+	 *     1. include the library as appropriate for its needs
+	 *        (the {@see include_chartjs()} method can be used for this purpose)
+	 *     2. initialize the <canvas> elements containing the graphs
+	 *   This is typically done in the hook for EVENT_LAYOUT_RESOURCES,
+	 *   ({@see resources()} method for details).
+	 *
 	 * @return array
 	 */
 	function events() {
@@ -174,14 +191,14 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 			# Chart.js library
 			$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
-			html_javascript_cdn_link( $t_link . 'Chart.min.js', self::CHARTJS_HASH );
+			html_javascript_cdn_link( $t_link . 'chart.min.js', self::CHARTJS_HASH );
 
 			# Chart.js color schemes plugin
-			$t_link = sprintf( $t_cdn_url, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
+			$t_link = sprintf( $t_cdn_url, 'hw-chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
 			html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 		} else {
 			$t_scripts = array(
-				'Chart-' . self::CHARTJS_VERSION . '.min.js',
+				'chart-' . self::CHARTJS_VERSION . '.min.js',
 				'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js',
 			);
 			foreach( $t_scripts as $t_script ) {
@@ -227,7 +244,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function summary_menu() {
 		$t_menu_items[] = '<a href="'
-			. $this->get_url_with_filter( 'developer_graph.php' )
+			. $this->get_url_with_filter( 'project_graph.php' )
 			. '">'
 			. plugin_lang_get( 'tab_label' )
 			. '</a>';
@@ -239,6 +256,11 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function print_submenu() {
 		$t_menu_items = array(
+			'project_graph.php' => array(
+				'icon' => 'fa-bar-chart',
+				'label' => lang_get( 'by_project' ),
+				'url' => $this->get_url_with_filter( 'project_graph.php' ),
+			),
 			'developer_graph.php' => array(
 				'icon' => 'fa-bar-chart',
 				'label' => lang_get( 'by_developer' ),

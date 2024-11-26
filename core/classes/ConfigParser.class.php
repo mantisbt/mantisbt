@@ -138,6 +138,8 @@ class ConfigParser
 				case T_STRING:
 				case T_LNUMBER:
 				case T_DNUMBER:
+				case '-':
+				case '+':
 					$t_str = $this->process_value();
 
 					if( $this->tokens->matches( T_DOUBLE_ARROW ) ) {

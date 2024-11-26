@@ -52,12 +52,17 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+const TIMELINE_INC_ALLOW = true;
+
 auth_ensure_user_authenticated();
 
-# extracts the user information for the currently logged in user
-# and prefixes it with u_
+# extracts the user information and prefixes it with u_
 $f_user_id = gpc_get_int( 'id', auth_get_current_user_id() );
 $t_row = user_get_row( $f_user_id );
+if( !$t_row ) {
+	error_parameters( $f_user_id );
+	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+}
 
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
@@ -171,6 +176,17 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 					<?php echo date( $t_date_format, $u_last_visit ); ?>
 				</td>
 			</tr>
+			<?php
+				if( OFF != config_get( 'max_failed_login_count' ) ) { ?>
+				<tr>
+					<th class="category">
+						<?php echo lang_get( 'failed_login_count' ) ?>
+					</th>
+					<td>
+						<?php echo $u_failed_login_count ?>
+					</td>
+				</tr>
+			<?php } ?>
 	<?php } ?>
 	</fieldset>
 </table>
@@ -210,7 +226,7 @@ if( $t_timeline_view_threshold_access ) {
 	$g_timeline_user = $f_user_id;
 	?>
 	<div class="col-md-5 col-xs-12">
-		<?php include( $g_core_path . 'timeline_inc.php' ); ?>
+		<?php include( 'timeline_inc.php' ); ?>
 		<div class="space-10"></div>
 	</div>
 <?php } ?>

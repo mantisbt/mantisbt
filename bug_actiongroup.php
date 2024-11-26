@@ -137,6 +137,12 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( access_has_bug_level( config_get( 'move_bug_threshold' ), $t_bug_id ) &&
 				access_has_project_level( config_get( 'report_bug_threshold', null, null, $f_project_id ), $f_project_id ) ) {
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
+
+				# Add bugnote if supplied
+				if( !is_blank( $f_bug_notetext ) ) {
+					$t_bugnote_id = bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+					bugnote_process_mentions( $t_bug_id, $t_bugnote_id, $f_bug_notetext );
+				}
 				bug_move( $t_bug_id, $f_project_id );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
@@ -178,19 +184,20 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'RESOLVE':
 			$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
-				if( access_has_bug_level( access_get_status_threshold( $t_resolved_status, $t_bug->project_id ), $t_bug_id ) ) {
-					if( ( $t_status < $t_resolved_status ) &&
-						bug_check_workflow( $t_status, $t_resolved_status ) ) {
-				$f_resolution = gpc_get_int( 'resolution' );
-				$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
-				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-				bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version, $f_bug_notetext, null, null, $f_bug_noteprivate );
-				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
-			} else {
+			if( access_has_bug_level( access_get_status_threshold( $t_resolved_status, $t_bug->project_id ), $t_bug_id ) ) {
+				if( ( $t_status < $t_resolved_status ) &&
+					bug_check_workflow( $t_status, $t_resolved_status )
+				) {
+					$f_resolution = gpc_get_int( 'resolution' );
+					$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
+					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
+					bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version, $f_bug_notetext, null, null, $f_bug_noteprivate );
+					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
+				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
 				}
-				} else {
-					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
+			} else {
+				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
 			break;
 		case 'UP_PRIOR':

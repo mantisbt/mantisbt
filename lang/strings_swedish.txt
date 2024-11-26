@@ -49,6 +49,7 @@
  * @author Sabelöga
  * @author Sannab
  * @author Skalman
+ * @author Sturban
  * @author Technic2
  * @author Thosjo
  * @author Tor.klingberg
@@ -131,6 +132,7 @@ $s_inherit = 'Ärv kategorier';
 $s_inherit_global = 'Ärv globala kategorier';
 $s_inherit_parent = 'Ärv föräldrakategorier';
 $s_update_subproject_inheritance = 'Uppdatera arv för underprojekt';
+$s_category_disabled = 'Kategorin har inaktiverats, välj en annan';
 $s_duplicate_of = 'kopia av';
 $s_has_duplicate = 'har en kopia';
 $s_related_to = 'relaterad till';
@@ -497,12 +499,11 @@ $s_log_page_time = 'Exekveringstid';
 $s_log_page_caller = 'Uppringare';
 $s_log_page_event = 'Händelse';
 $s_please_report = 'Vänligen rapportera detta till %1$s.';
-$s_warning_plain_password_authentication = '<strong>VARNING:</strong> Klartextautentisering används, detta exponerar dina lösenord för administratörerna.';
 $s_warning_default_administrator_account_present = '<strong>Varning:</strong> Du bör inaktivera standardkontot för \'administrator\' eller ändra dess lösenord.';
 $s_warning_admin_directory_present = '<strong>Varning:</strong> Katalogen "admin" bör tas bort eller begränsa dess åtkomst.';
+$s_warning_host_header_injection_hazard = '<strong>Varning:</strong> "path" har inte definierats i config_inc.php. Det innebär en säkerhetsrisk att lämna det tomt då sökvägen kommer anges baserat på HTTP-förfrågningar, vilket blottar ditt system för Host Header Injection-attaker.';
 $s_warning_change_setting = '<strong>Varning:</strong> "%1$s" är inte inställd till sitt standardvärde (%2$s).';
 $s_warning_security_hazard = 'Detta är en potentiell säkerhetsrisk som kan exponera känslig information.';
-$s_warning_integrity_hazard = 'Detta kommer att leda till att MantisBT fortsätter när fel uppstår och kan leda till system-/dataintegritetsärenden.';
 $s_warning_debug_email = '<strong>Varning:</strong> "<code>debug_email</code>" är inte inställd på <code>OFF</code>, alla e-postmeddelanden skickas till "%1$s".';
 $s_error_database_no_schema_version = '<strong>Fel:</strong> Versionen för ditt databasschema är 0. Detta kan inträffa när databasen är korrupt eller värdet för "database_version" inte kunde hämtas från konfigurationstabellen eller när databasstrukturen är från en föråldrad version av MantisBT (pre 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Varning:</strong> Databasstrukturen kan vara föråldrad. Vänligen uppgradera <a href="admin/install.php">här</a> innan du loggar in.';
@@ -541,6 +542,7 @@ $s_create_new_account_title = 'Skapa ett nytt användarkonto';
 $s_verify_password = 'Verifiera lösenord';
 $s_enabled = 'Aktiverad';
 $s_enabled_label = 'Aktiverad';
+$s_disabled = 'Inaktiverad';
 $s_protected = 'Skyddad';
 $s_protected_label = 'Skyddad';
 $s_create_user_button = 'Skapa konto';
@@ -576,6 +578,7 @@ $s_p = 'Skyddad';
 $s_date_created = 'Skapelsedatum';
 $s_last_visit = 'Senaste besöket';
 $s_last_visit_label = 'Senaste besök:';
+$s_failed_login_count = 'Misslyckade inloggningar';
 $s_edit_user_link = 'Redigera användare';
 $s_search_user_hint = 'Användarnamn, verkligt namn eller e-post';
 $s_separate_list_items_by = '(separera objekt i listan med "%1$s")';
@@ -1038,6 +1041,7 @@ $s_bytes = 'bytes';
 $s_kib = 'KiB';
 $s_attachment_missing = 'Bilaga saknas';
 $s_attachment_count = 'Antal bilagor';
+$s_bugnotes_count = 'Antalet ärendemeddelanden';
 $s_view_attachments_for_issue = 'Visa %1$d bilaga/bilagor till ärende #%2$d';
 $s_warning_update_custom_field_type = '<strong>Varning:</strong> Det anpassade fältet "%1$s" har redan lagrade värden. Att ändra fälttypen kan orsaka fel och oväntat beteende om befintliga värden inte är konsistenta med fältets nya typ. För att fortsätta, klicka på knappen nedan';
 $s_phpmailer_language = 'se';
@@ -1236,6 +1240,7 @@ $s_database_information = 'MantisBT databasinformation';
 $s_path_information = 'sökvägsinformation för MantisBT';
 $s_mantisbt_database_statistics = 'Statistik för MantisBT-databasen';
 $s_php_version = 'PHP-version';
+$s_os_information = 'Information om operativsystem';
 $s_adodb_version = 'ADOdb-version';
 $s_database_driver = 'Databasdrivrutin';
 $s_database_version_description = 'Databasversion, beskrivning';
@@ -1269,7 +1274,8 @@ $s_timeline_no_activity = 'Ingen aktivitet inom tidsintervallet.';
 $s_timeline_title = 'Tidslinje';
 $s_timeline_more = 'Fler evenemang...';
 $s_missing_error_string = 'Saknas felsträng: %1$s';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Ett fel uppstod.  Du kan rapportera detta fel till din lokala administratör.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Ett fel uppstod vid den här åtgärden. Du kanske vill rapportera detta fel till din lokala administratör.';
+$MANTIS_ERROR[ERROR_GENERIC_DETAILS] = 'Feldetaljer: %s';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL-fel upptäckt.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Det fanns ett fel i din rapport.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ingen fil angiven';
@@ -1347,7 +1353,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'En kategori med det namnet finns reda
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Ingen kopieringsändring angiven.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorin hittades inte.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategori "%1$s" hittades inte i projekt "%2$s".';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Denna kategori kan inte raderas, eftersom den definieras som "Standardkategori för flyttningar".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'Operationen kan inte slutföras, eftersom kategorin "%1$s" definieras som Standardkategori för flyttningar på minst ett projekt eller globalt.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'Kategorin "%1$s" kan inte raderas, eftersom den associeras med ett eller flera ärenden.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'En version med det namnet existerar redan.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versionen "%1$s" hittades inte.';
@@ -1414,6 +1420,7 @@ $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API-tokennamnet "%s" används 
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Filen som specificerades i $g_log_destination "%s" är skrivskyddad.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Den tillagda användaren har inte tillräckliga rättigheter för att övervaka det här ärendet.';
 $MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'Användar-API-token med ID "%d" hittades inte.';
+$MANTIS_ERROR[ERROR_GRAPH_TOOL_NOT_FOUND] = 'Graphviz-verktyget "%s" hittades inte eller kunde inte köras. Säkerställ att biblioteket är installerat och att $g_graphviz_path är korrekt inställd.';
 $s_dropzone_default_message = 'Bifoga filer genom att dra och släppa, markera eller klistra in.';
 $s_dropzone_fallback_message = 'Din webbläsare stödjer inte filuppladdning med dra-och-släpp.';
 $s_dropzone_file_too_big = 'Filen är för stor ({{filesize}} MiB). Maximal storlek: {{maxFilesize}} MiB.';

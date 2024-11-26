@@ -56,12 +56,15 @@
  * @author Lbayle
  * @author Mathematic-alpha
  * @author McDutchie
+ * @author Méthodes Bulebe Hangi
  * @author Noe
  * @author Od1n
  * @author Peter17
  * @author Philou2024
  * @author Seudo
  * @author Sherbrooke
+ * @author SleaY
+ * @author Terio legale
  * @author Thibaut120094
  * @author Urhixidur
  * @author Verdy p
@@ -69,6 +72,7 @@
  * @author Windes
  * @author Wladek92
  * @author Wyz
+ * @author Yanniick
  * @author Zetud
  */
 
@@ -77,7 +81,7 @@ $s_actiongroup_menu_copy = 'Copier';
 $s_actiongroup_menu_assign = 'Affecter';
 $s_actiongroup_menu_resolve = 'Résoudre';
 $s_actiongroup_menu_update_priority = 'Mettre à jour la priorité';
-$s_actiongroup_menu_update_status = 'Mettre à jour le statut';
+$s_actiongroup_menu_update_status = 'Mettre à jour l’État';
 $s_actiongroup_menu_update_severity = 'Mettre à jour l’impact';
 $s_actiongroup_menu_update_view_status = 'Mettre à jour l’état d’affichage';
 $s_actiongroup_menu_update_category = 'Mettre à jour la catégorie';
@@ -85,7 +89,7 @@ $s_actiongroup_menu_set_sticky = 'Activer / désactiver l’épinglage';
 $s_actiongroup_menu_update_field = 'Mettre à jour %1$s';
 $s_actiongroup_menu_update_product_version = 'Mettre à jour la version du produit';
 $s_actiongroup_menu_update_target_version = 'Mettre à jour la version ciblée';
-$s_actiongroup_menu_update_fixed_in_version = 'Mettre à jour la version résolue';
+$s_actiongroup_menu_update_fixed_in_version = 'Mettre à jour Résolu dans la version';
 $s_actiongroup_menu_update_product_build = 'Mettre à jour la compilation';
 $s_actiongroup_menu_update_due_date = 'Mettre à jour la date d’échéance';
 $s_actiongroup_menu_add_note = 'Ajouter une note';
@@ -146,6 +150,7 @@ $s_inherit = 'Hériter des catégories';
 $s_inherit_global = 'Hériter des catégories globales';
 $s_inherit_parent = 'Hériter des catégories parentes';
 $s_update_subproject_inheritance = 'Mettre à jour l’héritage du sous-projet';
+$s_category_disabled = 'La catégorie a été désactivée, veuillez en sélectionner une autre';
 $s_duplicate_of = 'doublon de';
 $s_has_duplicate = 'a pour doublon';
 $s_related_to = 'relatif à';
@@ -182,13 +187,13 @@ $s_copy_bugs_conf_msg = 'Copier les anomalies vers';
 $s_assign_bugs_conf_msg = 'Affecter les problèmes à';
 $s_resolve_bugs_conf_msg = 'Choisir la résolution des anomalies';
 $s_priority_bugs_conf_msg = 'Choisir la priorité des anomalies';
-$s_status_bugs_conf_msg = 'Choisir le statut des anomalies';
+$s_status_bugs_conf_msg = 'Choisir l\'état des anomalies';
 $s_view_status_bugs_conf_msg = 'Choisir l’état d’affichage des anomalies';
 $s_category_bugs_conf_msg = 'Choisir la catégorie des anomalies';
 $s_set_sticky_bugs_conf_msg = 'Voulez-vous vraiment épingler / désépingler ces anomalies ?';
 $s_product_version_bugs_conf_msg = 'Mettre à jour la version du produit à';
 $s_fixed_in_version_bugs_conf_msg = 'Mettre à jour la version de résolution à';
-$s_target_version_bugs_conf_msg = 'Mettre à jour la version ciblée à';
+$s_target_version_bugs_conf_msg = 'Mettre à jour la version cible à';
 $s_due_date_bugs_conf_msg = 'Mettre à jour la date d’échéance à';
 $s_close_group_bugs_button = 'Fermer les anomalies';
 $s_delete_group_bugs_button = 'Supprimer les anomalies';
@@ -197,16 +202,16 @@ $s_copy_group_bugs_button = 'Copier les anomalies';
 $s_assign_group_bugs_button = 'Affecter les anomalies';
 $s_resolve_group_bugs_button = 'Résoudre les anomalies';
 $s_priority_group_bugs_button = 'Mettre à jour la priorité';
-$s_status_group_bugs_button = 'Mettre à jour le statut';
+$s_status_group_bugs_button = 'Mettre à jour l\'état';
 $s_category_group_bugs_button = 'Mettre à jour la catégorie';
 $s_view_status_group_bugs_button = 'Mettre à jour le statut d’affichage';
 $s_set_sticky_group_bugs_button = 'Épingler / désépingler';
 $s_product_version_group_bugs_button = 'Mettre à jour la version du produit';
 $s_fixed_in_version_group_bugs_button = 'Mettre à jour la version de résolution';
-$s_target_version_group_bugs_button = 'Mettre à jour la version ciblée';
+$s_target_version_group_bugs_button = 'Mettre à jour la version cible';
 $s_due_date_group_bugs_button = 'Mettre à jour la date d’échéance';
 $s_update_severity_title = 'Mettre à jour la sévérité';
-$s_update_severity_msg = 'Choisissez la sévérité de l’anomalie';
+$s_update_severity_msg = 'Choisir la sévérité de l’anomalie';
 $s_update_severity_button = 'Mettre à jour la sévérité';
 $s_hide_button = 'Afficher seulement les anomalies sélectionnées';
 $s_printing_preferences_title = 'Choisir les champs à imprimer';
@@ -215,7 +220,7 @@ $s_bugnote_title = 'Auteur de la note';
 $s_bugnote_date = 'Date de la note';
 $s_bugnote_description = 'Description de la note';
 $s_error_no_proceed = 'Merci d\'utiliser le bouton « Précédent » de votre navigateur web pour retourner à la page précédente. Vous pourrez y corriger les problèmes identifiés par cette erreur ou choisir une autre action. Vous pouvez aussi choisir une option de la barre de menu pour aller directement dans une nouvelle section.';
-$s_login_error = 'Votre compte est peut être désactivé ou alors le code utilisateur et le mot de passe que vous avez saisis sont incorrects.';
+$s_login_error = 'Votre compte est peut être désactivé ou bloqué ou alors le nom d\'utilisateur et / ou le mot de passe que vous avez saisis sont incorrects.';
 $s_login_cookies_disabled = 'Votre navigateur ne sait pas gérer les témoins (cookies) ou refuse de les gérer.';
 $s_logged_in_as = 'Connecté en tant que ';
 $s_prefix_for_deleted_users = 'utilisateur';
@@ -225,7 +230,7 @@ $s_default_access_level = 'Niveau d’accès par défaut';
 $s_issue_status_percentage = 'Pourcentage des statuts d’anomalie';
 $s_access_levels_enum_string = '10:invité,25:rapporteur,40:testeur,55:développeur,70:gestionnaire,90:administrateur';
 $s_no_access = 'inaccessible';
-$s_project_status_enum_string = '10:développement,30:livré,50:stable,70:désuet';
+$s_project_status_enum_string = '10:développement,30:livré,50:stable,70:obsolète';
 $s_project_view_state_enum_string = '10:public,50:privé';
 $s_view_state_enum_string = '10:public,50:privé';
 $s_priority_enum_string = '10:aucune,20:basse,30:normale,40:élevée,50:urgente,60:immédiate';
@@ -512,12 +517,11 @@ $s_log_page_time = 'Temps d’exécution';
 $s_log_page_caller = 'Appelant';
 $s_log_page_event = 'Événement';
 $s_please_report = 'Veuillez rapporter ceci à l’%1$s.';
-$s_warning_plain_password_authentication = '<strong>Attention :</strong> l’authentification par mot de passe en clair est utilisée, ceci exposera votre mot de passe aux administrateurs.';
 $s_warning_default_administrator_account_present = '<strong>Attention :</strong> vous devriez désactiver le compte « administrator » par défaut ou changer son mot de passe.';
 $s_warning_admin_directory_present = '<strong>Attention :</strong> le répertoire « admin » par défaut devrait être supprimé ou son accès devrait être restreint.';
+$s_warning_host_header_injection_hazard = '<strong>Attention :</strong> le "chemin" n\'a pas été défini dans config_inc.php. Le laisser vide constitue un risque pour la sécurité, car le chemin sera défini en fonction des en-têtes de la requête HTTP, exposant votre système aux attaques par injection d\'en-tête d\'hôte.';
 $s_warning_change_setting = '<strong>Avertissement :</strong> « %1$s » n’est pas défini à sa valeur par défaut (%2$s).';
 $s_warning_security_hazard = 'Ceci constitue un risque potentiel de sécurité puisque des informations sensibles peuvent être exposées.';
-$s_warning_integrity_hazard = 'Ceci fera que MantisBT poursuivra quand même lorsque surviendront des erreurs et pourrait conduire à des problèmes d’intégrité des données ou du système.';
 $s_warning_debug_email = '<strong>Avertissement :</strong> « <code>debug_email</code> » n’est pas défini à <code>OFF</code>, tous les courriels de notification seront envoyés à « %1$s ».';
 $s_error_database_no_schema_version = '<strong>Erreur :</strong> le schéma de votre base de données est à la version 0. Cela peut se produire soit parce que la base de données est corrompue, soit parce que la valeur de « database_version » n’a pas pu être récupérée dans la table de configuration, ou encore parce que la structure de la base de données provient d’une version obsolète de MantisBT (d’avant la 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Attention :</strong> la structure de la base de données est sans doute dépassée. Veuillez la mettre à niveau depuis la <a href="admin/install.php">page d’installation</a> avant de vous identifier.';
@@ -556,6 +560,7 @@ $s_create_new_account_title = 'Créer un nouveau compte';
 $s_verify_password = 'Vérifier le mot de passe';
 $s_enabled = 'Activé';
 $s_enabled_label = 'Activé';
+$s_disabled = 'Désactivé';
 $s_protected = 'Protégé';
 $s_protected_label = 'Protégé';
 $s_create_user_button = 'Créer l’utilisateur';
@@ -591,6 +596,7 @@ $s_p = 'p';
 $s_date_created = 'Date de création';
 $s_last_visit = 'Dernière visite';
 $s_last_visit_label = 'Dernière visite :';
+$s_failed_login_count = 'Échec de connexion';
 $s_edit_user_link = 'Modifier l’utilisateur';
 $s_search_user_hint = 'Nom d’utilisateur, nom véritable ou adresse courriel';
 $s_separate_list_items_by = '(séparez les éléments de la liste par « %1$s »)';
@@ -1053,6 +1059,7 @@ $s_bytes = 'octets';
 $s_kib = 'Kio';
 $s_attachment_missing = 'Pièce jointe manquante';
 $s_attachment_count = 'Nombre de pièces jointes';
+$s_bugnotes_count = 'Nombre de rapports de faute';
 $s_view_attachments_for_issue = 'Voir %1$d pièce(s) jointe(s) pour l’anomalie nº %2$d';
 $s_warning_update_custom_field_type = '<strong>Avertissement :</strong> le champ personnalisé « %1$s » a déjà des valeurs stockées. Changer le type de champ peut provoquer des erreurs et un comportement inattendu si les valeurs existantes ne sont pas cohérentes avec le nouveau type du champ. Pour continuer, cliquer sur le bouton ci-dessous.';
 $s_phpmailer_language = 'fr';
@@ -1110,7 +1117,7 @@ $s_delete_issue = 'Supprimer une anomalie';
 $s_reopen_issue = 'Rouvrir une anomalie';
 $s_view_private_issues = 'Voir les anomalies privées';
 $s_update_readonly_issues = 'Mettre à jour les anomalies en lecture seule';
-$s_update_issue_status = 'Mettre à jour le statut d’une anomalie';
+$s_update_issue_status = 'Mettre à jour l’état d’une anomalie';
 $s_set_view_status = 'Définir l’état d’affichage lors du rapport d’une nouvelle anomalie ou d’une note';
 $s_update_view_status = 'Mettre à jour la visibilité d’une anomalie ou d’une note existante.';
 $s_view_issue_revisions = 'Voir les versions d’un problème ou d’une note.';
@@ -1251,6 +1258,7 @@ $s_database_information = 'Informations sur la base de données MantisBT';
 $s_path_information = 'Informations sur les chemins de MantisBT';
 $s_mantisbt_database_statistics = 'Statistiques de la base de données MantisBT';
 $s_php_version = 'Version de PHP';
+$s_os_information = 'Informations du système d\'exploitation';
 $s_adodb_version = 'Version d’ADOdb';
 $s_database_driver = 'Pilote de la base de données';
 $s_database_version_description = 'Version de la base de données, description';
@@ -1284,7 +1292,8 @@ $s_timeline_no_activity = 'Aucune activité dans l’intervalle de temps.';
 $s_timeline_title = 'Chronologie';
 $s_timeline_more = 'Plus d’événements...';
 $s_missing_error_string = 'Chaîne d’erreur manquante :%1$s';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Une erreur s’est produite. Merci de signaler cette erreur à votre administrateur local.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Une erreur s\'est produite durant cette action, vous pourriez le signaler à votre administrateur local.';
+$MANTIS_ERROR[ERROR_GENERIC_DETAILS] = 'Détails de l\'erreur: %s';
 $MANTIS_ERROR[ERROR_SQL] = 'Erreur SQL détectée.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Il y avait une erreur dans votre rapport.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Aucun fichier spécifié.';
@@ -1362,7 +1371,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Une catégorie avec ce nom existe dé
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Aucune action de copie n’a été spécifiée.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Catégorie introuvable.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Catégorie « %1$s » introuvable pour le projet « %2$s ».';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Cette catégorie ne peut pas être supprimée, car elle est définie comme « catégorie par défaut pour les déplacements ».';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'L\'opération ne peut pas être effectuée, car la catégorie "%1$s" est définie comme catégorie par défaut pour les déplacements dans au moins un projet ou globalement.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'La catégorie « %1$s » n’a pas pu être supprimée, parce qu’elle est associée avec une ou plusieurs questions.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Une version avec ce nom existe déjà.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version « %1$s » introuvable.';
@@ -1429,6 +1438,7 @@ $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Le nom de jeton de l’API «�
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Le fichier spécifié dans $g_log_destination « %s » ne peut pas être écrit.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'L’utilisateur ajouté n’a pas les droits d’accès suffisants pour suivre ce problème.';
 $MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'Jeton de l’API pour l’utilisateur non trouvé avec l’identifiant « %d ».';
+$MANTIS_ERROR[ERROR_GRAPH_TOOL_NOT_FOUND] = 'L\'outil Graphviz « %s » n\'a pas été trouvé ou son exécution a échoué. Assurez-vous que la bibliothèque est installée et que $g_graphviz_path est correctement défini.';
 $s_dropzone_default_message = 'Joignez les fichiers en les glissant-déposant, en les sélectionnant ou en les collant.';
 $s_dropzone_fallback_message = 'Votre navigateur ne prend pas en charge le téléversement de fichiers par glisser-déposer.';
 $s_dropzone_file_too_big = 'Le fichier est trop gros ({{filesize}} Mio). Taille maximale : {{maxFilesize}} Mio.';

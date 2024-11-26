@@ -234,11 +234,14 @@ function project_exists( $p_project_id ) {
 }
 
 /**
- * check to see if project exists by id
- * if it does not exist then error
- * otherwise let execution continue undisturbed
+ * Check to see if project exists by id.
+ *
+ * Errors if it does not exist, otherwise let execution continue undisturbed.
+ *
  * @param integer $p_project_id A project identifier.
+ *
  * @return void
+ * @throws ClientException if project does not exist
  */
 function project_ensure_exists( $p_project_id ) {
 	if( !project_exists( $p_project_id ) ) {

@@ -31,9 +31,15 @@
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 
+# We may need to build caches for either all projects or enabled projects or both
+$g_cache_project_hierarchy_enabled = null;
+$g_cache_project_hierarchy_all = null;
+$g_cache_project_inheritance_enabled = null;
+$g_cache_show_disabled_all = null;
+# To make it simpler for callers of project_hierarchy_cache(), we provide
+# these two aliases for the correct pair of caches above
 $g_cache_project_hierarchy = null;
 $g_cache_project_inheritance = null;
-$g_cache_show_disabled = null;
 
 /**
  * Add project to project hierarchy
@@ -146,14 +152,27 @@ function project_hierarchy_get_parent( $p_project_id, $p_show_disabled = false )
  * @return void
  */
 function project_hierarchy_cache( $p_show_disabled = false ) {
+	global $g_cache_project_hierarchy_enabled, $g_cache_project_inheritance_enabled;
+	global $g_cache_project_hierarchy_all, $g_cache_project_inheritance_all;
 	global $g_cache_project_hierarchy, $g_cache_project_inheritance;
-	global $g_cache_show_disabled;
 
-	if( !is_null( $g_cache_project_hierarchy ) && ( $g_cache_show_disabled == $p_show_disabled ) ) {
+	# Set Cache aliases...
+	if( $p_show_disabled ) {
+		# ... to the whole hierarchy cache
+		$g_cache_project_hierarchy = $g_cache_project_hierarchy_all;
+		$g_cache_project_inheritance = $g_cache_project_inheritance_all;
+	} else {
+		# ... to the enabled hierarchy cache
+		$g_cache_project_hierarchy = $g_cache_project_hierarchy_enabled;
+		$g_cache_project_inheritance = $g_cache_project_inheritance_enabled;
+	}
+
+	# Cache is already built
+	if( !is_null( $g_cache_project_hierarchy ) ) {
 		return;
 	}
-	$g_cache_show_disabled = $p_show_disabled;
 
+	# Build the missing cache
 	db_param_push();
 	$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param();
 
@@ -186,6 +205,15 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 		if( $t_row['inherit_parent'] ) {
 			$g_cache_project_inheritance[$t_project_id][$t_parent_id] = $t_parent_id;
 		}
+	}
+
+	# Copy aliases into the right pair of cache variables
+	if( $p_show_disabled ) {
+		$g_cache_project_hierarchy_all = $g_cache_project_hierarchy;
+		$g_cache_project_inheritance_all = $g_cache_project_inheritance;
+	} else {
+		$g_cache_project_hierarchy_enabled = $g_cache_project_hierarchy;
+		$g_cache_project_inheritance_enabled = $g_cache_project_inheritance;
 	}
 }
 
@@ -251,11 +279,7 @@ function project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled = fa
 
 	project_hierarchy_cache( $p_show_disabled );
 
-	if( isset( $g_cache_project_hierarchy[$p_project_id] ) ) {
-		return $g_cache_project_hierarchy[$p_project_id];
-	} else {
-		return array();
-	}
+	return $g_cache_project_hierarchy[$p_project_id] ?? [];
 }
 
 /**
@@ -271,7 +295,7 @@ function project_hierarchy_get_all_subprojects( $p_project_id, $p_show_disabled 
 	while( $t_todo ) {
 		$t_elem = array_shift( $t_todo );
 		if( !in_array( $t_elem, $t_subprojects ) ) {
-			array_push( $t_subprojects, $t_elem );
+			$t_subprojects[] = $t_elem;
 			$t_todo = array_merge( $t_todo, project_hierarchy_get_subprojects( $t_elem, $p_show_disabled ) );
 		}
 	}

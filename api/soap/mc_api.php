@@ -180,126 +180,12 @@ class ApiObjectFactory {
 	 * @return RestFault|SoapFault The fault object.
 	 */
 	static function faultFromException( Exception $p_exception ) {
-		$t_code = $p_exception->getCode();
-
-		switch( $t_code ) {
-			case ERROR_NO_FILE_SPECIFIED:
-			case ERROR_FILE_DISALLOWED:
-			case ERROR_DUPLICATE_PROJECT:
-			case ERROR_EMPTY_FIELD:
-			case ERROR_INVALID_REQUEST_METHOD:
-			case ERROR_INVALID_SORT_FIELD:
-			case ERROR_INVALID_DATE_FORMAT:
-			case ERROR_INVALID_RESOLUTION:
-			case ERROR_FIELD_TOO_LONG:
-			case ERROR_CONFIG_OPT_NOT_FOUND:
-			case ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB:
-			case ERROR_CONFIG_OPT_BAD_SYNTAX:
-			case ERROR_GPC_VAR_NOT_FOUND:
-			case ERROR_GPC_ARRAY_EXPECTED:
-			case ERROR_GPC_ARRAY_UNEXPECTED:
-			case ERROR_GPC_NOT_NUMBER:
-			case ERROR_FILE_TOO_BIG:
-			case ERROR_FILE_NOT_ALLOWED:
-			case ERROR_FILE_DUPLICATE:
-			case ERROR_FILE_NO_UPLOAD_FAILURE:
-			case ERROR_PROJECT_NAME_NOT_UNIQUE:
-			case ERROR_PROJECT_NAME_INVALID:
-			case ERROR_PROJECT_RECURSIVE_HIERARCHY:
-			case ERROR_USER_NAME_NOT_UNIQUE:
-			case ERROR_USER_CREATE_PASSWORD_MISMATCH:
-			case ERROR_USER_NAME_INVALID:
-			case ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS:
-			case ERROR_USER_CHANGE_LAST_ADMIN:
-			case ERROR_USER_REAL_NAME_INVALID:
-			case ERROR_USER_EMAIL_NOT_UNIQUE:
-			case ERROR_BUG_DUPLICATE_SELF:
-			case ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING:
-			case ERROR_BUG_CONFLICTING_EDIT:
-			case ERROR_EMAIL_INVALID:
-			case ERROR_EMAIL_DISPOSABLE:
-			case ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE:
-			case ERROR_CUSTOM_FIELD_IN_USE:
-			case ERROR_CUSTOM_FIELD_INVALID_VALUE:
-			case ERROR_CUSTOM_FIELD_INVALID_DEFINITION:
-			case ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT:
-			case ERROR_CUSTOM_FIELD_INVALID_PROPERTY:
-			case ERROR_CATEGORY_DUPLICATE:
-			case ERROR_NO_COPY_ACTION:
-			case ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT:
-			case ERROR_VERSION_DUPLICATE:
-			case ERROR_SPONSORSHIP_NOT_ENABLED:
-			case ERROR_SPONSORSHIP_AMOUNT_TOO_LOW:
-			case ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL:
-			case ERROR_RELATIONSHIP_SAME_BUG:
-			case ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID:
-			case ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED:
-			case ERROR_LOST_PASSWORD_NOT_MATCHING_DATA:
-			case ERROR_SIGNUP_NOT_MATCHING_CAPTCHA:
-			case ERROR_TAG_DUPLICATE:
-			case ERROR_TAG_NAME_INVALID:
-			case ERROR_TAG_NOT_ATTACHED:
-			case ERROR_TAG_ALREADY_ATTACHED:
-			case ERROR_COLUMNS_DUPLICATE:
-			case ERROR_COLUMNS_INVALID:
-			case ERROR_API_TOKEN_NAME_NOT_UNIQUE:
-			case ERROR_INVALID_FIELD_VALUE:
-			case ERROR_PROJECT_SUBPROJECT_DUPLICATE:
-			case ERROR_PROJECT_SUBPROJECT_NOT_FOUND:
-				return ApiObjectFactory::faultBadRequest( $p_exception->getMessage() );
-
-			case ERROR_BUG_NOT_FOUND:
-			case ERROR_FILE_NOT_FOUND:
-			case ERROR_BUGNOTE_NOT_FOUND:
-			case ERROR_PROJECT_NOT_FOUND:
-			case ERROR_USER_PREFS_NOT_FOUND:
-			case ERROR_USER_PROFILE_NOT_FOUND:
-			case ERROR_USER_BY_NAME_NOT_FOUND:
-			case ERROR_USER_BY_ID_NOT_FOUND:
-			case ERROR_USER_BY_EMAIL_NOT_FOUND:
-			case ERROR_USER_BY_REALNAME_NOT_FOUND:
-			case ERROR_NEWS_NOT_FOUND:
-			case ERROR_BUG_REVISION_NOT_FOUND:
-			case ERROR_CUSTOM_FIELD_NOT_FOUND:
-			case ERROR_CATEGORY_NOT_FOUND:
-			case ERROR_VERSION_NOT_FOUND:
-			case ERROR_SPONSORSHIP_NOT_FOUND:
-			case ERROR_RELATIONSHIP_NOT_FOUND:
-			case ERROR_FILTER_NOT_FOUND:
-			case ERROR_TAG_NOT_FOUND:
-			case ERROR_TOKEN_NOT_FOUND:
-			case ERROR_USER_TOKEN_NOT_FOUND:
-				return ApiObjectFactory::faultNotFound( $p_exception->getMessage() );
-				
-			case ERROR_ACCESS_DENIED:
-			case ERROR_PROTECTED_ACCOUNT:
-			case ERROR_HANDLER_ACCESS_TOO_LOW:
-			case ERROR_USER_CURRENT_PASSWORD_MISMATCH:
-			case ERROR_AUTH_INVALID_COOKIE:
-			case ERROR_BUG_READ_ONLY_ACTION_DENIED:
-			case ERROR_LDAP_AUTH_FAILED:
-			case ERROR_LDAP_USER_NOT_FOUND:
-			case ERROR_CATEGORY_CANNOT_DELETE_DEFAULT:
-			case ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES:
-			case ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW:
-			case ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW:
-			case ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW:
-			case ERROR_LOST_PASSWORD_NOT_ENABLED:
-			case ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED:
-			case ERROR_FORM_TOKEN_INVALID:
-				return ApiObjectFactory::faultForbidden( $p_exception->getMessage() );
-
-			case ERROR_SPAM_SUSPECTED:
-				return ApiObjectFactory::faultTooManyRequests( $p_exception->getMessage() );
-
-			case ERROR_CONFIG_OPT_INVALID:
-			case ERROR_FILE_INVALID_UPLOAD_PATH:
-				# TODO: These are configuration or db state errors.
-				return ApiObjectFactory::faultServerError( $p_exception->getMessage() );
-
-			default:
-				return ApiObjectFactory::faultServerError( $p_exception->getMessage() );
-		}
+		$t_status_code = error_map_mantis_error_to_http_code( $p_exception->getCode() );
+		return ApiObjectFactory::fault(
+			intdiv( $t_status_code, 100 ) == 4 ? 'Client' : 'Server',
+			$p_exception->getMessage(),
+			$t_status_code
+		);
 	}
 
 	/**
@@ -522,7 +408,7 @@ function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
  * @return true: offline, false: online
  */
 function mci_is_mantis_offline() {
-	$t_offline_file = dirname( __FILE__, 3 ) . DIRECTORY_SEPARATOR . 'mantis_offline.php';
+	$t_offline_file = dirname( __DIR__, 2 ) . '/mantis_offline.php';
 	return file_exists( $t_offline_file );
 }
 
@@ -698,18 +584,18 @@ function mci_profile_as_array_by_id( $p_profile_id ) {
 	}
 
 	try {
-		$t_profile = profile_get_row( $t_profile_id );
+		$t_profile = new ProfileData( $t_profile_id );
 	} catch (ClientException $e) {
 		return null;
 	}
 
 	return array(
 		'id' => $t_profile_id,
-		'user' => mci_account_get_array_by_id( $t_profile['user_id'] ),
-		'platform' => $t_profile['platform'],
-		'os' => $t_profile['os'],
-		'os_build' => $t_profile['os_build'],
-		'description' => $t_profile['description']
+		'user' => mci_account_get_array_by_id( $t_profile->user_id ),
+		'platform' => $t_profile->platform,
+		'os' => $t_profile->os,
+		'os_build' => $t_profile->os_build,
+		'description' => $t_profile->description
 	);
 }
 
@@ -849,14 +735,19 @@ function mci_null_if_empty( $p_value ) {
 }
 
 /**
- * Removes any invalid character from the string per XML 1.0 specification
+ * Removes any invalid character from the string per XML 1.0 specification.
  *
  * @param string $p_input XML string.
- * @return string the sanitized XML
+ *
+ * @return string the sanitized XML.
  */
-function mci_sanitize_xml_string ( $p_input ) {
+function mci_sanitize_xml_string( $p_input ) {
 	if( ApiObjectFactory::$soap ) {
-		return preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_input );
+		return preg_replace(
+			'/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u',
+			'',
+			(string)$p_input
+		);
 	}
 
 	return $p_input;
@@ -887,18 +778,7 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 
 	$t_result = array();
 	foreach( user_get_accessible_subprojects( $p_user_id, $p_parent_project_id ) as $t_subproject_id ) {
-		$t_subproject_row = project_cache_row( $t_subproject_id );
-		$t_subproject = array();
-		$t_subproject['id'] = $t_subproject_id;
-		$t_subproject['name'] = $t_subproject_row['name'];
-		$t_subproject['status'] = mci_enum_get_array_by_id( $t_subproject_row['status'], 'project_status', $t_lang );
-		$t_subproject['enabled'] = $t_subproject_row['enabled'];
-		$t_subproject['view_state'] = mci_enum_get_array_by_id( $t_subproject_row['view_state'], 'project_view_state', $t_lang );
-		$t_subproject['access_min'] = mci_enum_get_array_by_id( $t_subproject_row['access_min'], 'access_levels', $t_lang );
-		$t_subproject['file_path'] = array_key_exists( 'file_path', $t_subproject_row ) ? $t_subproject_row['file_path'] : '';
-		$t_subproject['description'] = array_key_exists( 'description', $t_subproject_row ) ? $t_subproject_row['description'] : '';
-		$t_subproject['subprojects'] = mci_user_get_accessible_subprojects( $p_user_id, $t_subproject_id, $t_lang );
-		$t_result[] = $t_subproject;
+		$t_result[] = mci_project_get_row( $t_subproject_id, $p_user_id, $t_lang );
 	}
 
 	return $t_result;
@@ -932,27 +812,30 @@ function mci_get_version( $p_version, $p_project_id ) {
 }
 
 /**
- * Gets the version id based on version input from the API.  This can be
- * a string or an object (with id or name or both).  If both id and name
- * exist on the object, id takes precedence.
+ * Gets the version id based on version input from the API.
  *
- * @param string|object $p_version The version string or object with name or id or both.
- * @param int $p_project_id The project id.
- * @param string $p_field_name Version field name (e.g. version, target_version, fixed_in_version)
- * @return int|RestFault|SoapFault The version id, 0 if not supplied.
+ * @param string|object $p_version    The version string or an object with id
+ *                                    or name; if both id and name are provided,
+ *                                    id takes precedence.
+ * @param int           $p_project_id The project id.
+ * @param string        $p_field_name Version field name (e.g. version,
+ *                                    target_version, fixed_in_version)
+ *
+ * @return int The version id, 0 if not supplied.
+ * @throws ClientException
  */
 function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version' ) {
 	$t_version_id = 0;
 	$t_version_for_error = '';
 
 	if( is_array( $p_version ) ) {
-		if( isset( $p_version['id'] ) && is_numeric( $p_version['id'] ) ) {
+		if( isset( $p_version['id'] ) && is_numeric( $p_version['id'] ) && $p_version['id'] != 0 ) {
 			$t_version_id = (int)$p_version['id'];
 			$t_version_for_error = $p_version['id'];
 			if( !version_exists( $t_version_id ) ) {
 				$t_version_id = false;
 			}
-		} elseif( isset( $p_version['name'] ) ) {
+		} elseif( isset( $p_version['name'] ) && !is_blank( $p_version['name'] ) ) {
 			$t_version_for_error = $p_version['name'];
 			$t_version_id = version_get_id( $p_version['name'], $p_project_id );
 		}
@@ -969,7 +852,7 @@ function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version
 			throw new ClientException(
 				"Version '$t_version_for_error' does not exist in project '$t_project_name'.",
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'version' )
+				array( $p_field_name )
 			);
 		}
 
@@ -982,10 +865,11 @@ function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version
 
 
 /**
- * Returns the category name, possibly null if no category is assigned
+ * Returns the category name, possibly null if no category is assigned.
  *
- * @param integer $p_category_id A category identifier.
- * @return string
+ * @param int $p_category_id A category identifier.
+ *
+ * @return string|null|array
  */
 function mci_get_category( $p_category_id ) {
 	if( ApiObjectFactory::$soap ) {
@@ -1008,12 +892,13 @@ function mci_get_category( $p_category_id ) {
 }
 
 /**
- * Convert a category name, or category object reference (array w/ id, name,
- * or id + name) to a category id for a given project.
+ * Convert a category name or object reference to a category id.
  *
- * @param string|array $p_category Category name or array with id and/or name.
- * @param integer $p_project_id    Project id.
- * @return integer|SoapFault|RestFault category id or error.
+ * @param string|array $p_category   Category name or array with id and/or name.
+ * @param int          $p_project_id Project id.
+ *
+ * @return int category id or error.
+ * @throws ClientException if category is not set or does not exist.
  */
 function mci_get_category_id( $p_category, $p_project_id ) {
 	$fn_get_category_id_internal = function( $p_category, $p_project_id ) {
@@ -1048,21 +933,26 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 	};
 
 	$t_category_id = $fn_get_category_id_internal( $p_category, $p_project_id );
-	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
+	if( $t_category_id == 0 ) {
+		# Category not found or unspecified
 		if( !isset( $p_category ) ) {
+			if( !config_get( 'allow_no_category' ) ) {
+				throw new ClientException(
+					'Category field must be supplied.',
+					ERROR_EMPTY_FIELD,
+					array( 'category' )
+				);
+			}
+		} else {
+			# category may be a string, array with id, array with name, or array
+			# with id + name. Serialize to json to include in error message.
+			$t_cat_desc = is_array( $p_category ) ? json_encode( $p_category ) : $p_category;
+
 			throw new ClientException(
-				'Category field must be supplied.',
-				ERROR_EMPTY_FIELD,
-				array( 'category' )
+				"Category '$t_cat_desc' not found.",
+				ERROR_CATEGORY_NOT_FOUND
 			);
 		}
-
-		# category may be a string, array with id, array with name, or array
-		# with id + name. Serialize to json to include in error message.
-		$t_cat_desc = json_encode( $p_category );
-
-		return ApiObjectFactory::faultBadRequest(
-			"Category '{$t_cat_desc}' not found." );
 	}
 
 	# Make sure the category belongs to the given project's hierarchy

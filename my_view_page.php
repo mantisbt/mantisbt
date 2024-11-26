@@ -55,6 +55,8 @@ require_api( 'user_api.php' );
 require_api( 'layout_api.php' );
 require_css( 'status_config.php' );
 
+const TIMELINE_INC_ALLOW = true;
+
 auth_ensure_user_authenticated();
 
 $t_current_user_id = auth_get_current_user_id();
@@ -150,7 +152,7 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
         echo '</div>';
         echo '<div class="col-xs-12 col-md-6">';
     }
-    include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
+    include( __DIR__ . '/my_view_inc.php' );
     echo '<div class="space-10"></div>';
 }
 ?>
@@ -163,7 +165,7 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
 		$g_timeline_filter = array();
 		$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
 		$g_timeline_filter = filter_ensure_valid_filter( $g_timeline_filter );
-		include( $g_core_path . 'timeline_inc.php' );
+		include( 'timeline_inc.php' );
 	?>
 	<div class="space-10"></div>
 </div>

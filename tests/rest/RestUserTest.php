@@ -31,7 +31,7 @@ require_once 'RestBase.php';
  * @requires extension curl
  * @group REST
  */
-class RestUserTests extends RestBase {
+class RestUserTest extends RestBase {
 
 	/**
 	 * Test /users/me API which users use to get information about themselves.

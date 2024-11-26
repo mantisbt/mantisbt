@@ -256,11 +256,18 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 	echo '<td class="bug-project">', $t_flags['project_show'] && isset( $t_issue['project']['name'] ) ? string_display_line( $t_issue['project']['name'] ) : '', '</td>';
 
 	# Category
-	echo '<td class="bug-category">',
-		$t_flags['category_show'] && isset( $t_issue['category']['name'] )
-			? string_display_line( $t_issue['category']['name'] )
-			: '',
-		'</td>';
+	echo '<td class="bug-category">';
+	if( $t_flags['category_show'] && isset( $t_issue['category']['name'] ) ) {
+		if( $t_flags['can_update'] && !category_is_enabled( $t_issue['category']['id'] ) ) {
+			print_icon( 'warning',
+				'bigger-125 red',
+				lang_get( 'category_disabled' )
+			);
+			echo "&nbsp;";
+		}
+		echo string_display_line( $t_issue['category']['name'] );
+	}
+	echo '</td>';
 
 	# View Status
 	echo '<td class="bug-view-status">', $t_flags['view_state_show'] && isset( $t_issue['view_state']['label'] ) ? string_display_line( $t_issue['view_state']['label'] ) : '', '</td>';
@@ -643,7 +650,7 @@ if( isset( $t_issue['custom_fields'] ) ) {
 		$t_class = $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? ' cfdef-textarea' : '';
 
 		echo '<tr>';
-		echo '<th class="bug-custom-field category">', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</th>';
+		echo '<th class="bug-custom-field category">', string_attribute( lang_get_defaulted( $t_def['name'] ) ), '</th>';
 		echo '<td class="bug-custom-field' . $t_class . '" colspan="5">';
 		print_custom_field_value( $t_def, $t_custom_field['field']['id'], $f_issue_id );
 		echo '</td></tr>';
