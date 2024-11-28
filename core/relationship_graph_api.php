@@ -486,7 +486,7 @@ function relgraph_add_child( array &$p_bug_list, $p_bug_id ) {
  * @return void
  */
 function relgraph_output_image( Graph $p_graph ) {
-	$p_graph->output( 'svg', true );
+	$p_graph->output( config_get_global( 'graph_format' ), true );
 }
 
 /**

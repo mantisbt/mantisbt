@@ -4514,6 +4514,18 @@ $g_relationship_graph_enable = OFF;
 $g_graphviz_path = '/usr/bin/';
 
 /**
+ * Graphviz output format.
+ *
+ * Can be svg, png or any other format supported by Graphviz and the browser.
+ *
+ * NOTES:
+ * - SVG requires Graphviz >= 2.42.4 due to an output bug.
+ *
+ * @global string $g_graph_format
+ */
+$g_graph_format = 'png';
+
+/**
  * Font name and size, as required by Graphviz.
  *
  * If Graphviz fails to run for you, you are probably using a font name that
