@@ -74,18 +74,6 @@ foreach( $t_path_config_names as $t_path_config_name ) {
 	$t_paths[$t_path_config_name] = $t_new_path;
 }
 
-# Trailing directory separator
-foreach( $t_paths as $t_path_config_name => $t_path ) {
-	check_print_test_row(
-		$t_path_config_name . ' configuration option has a trailing directory separator',
-		substr( $t_path['config_value'], -1, 1 ) == DIRECTORY_SEPARATOR,
-		array( false =>
-			'You must provide a trailing directory separator (' . DIRECTORY_SEPARATOR .
-			') to the end of \'' . htmlspecialchars( $t_path['config_value'] ) . '\'.'
-		)
-	);
-}
-
 # Is a directory
 foreach( $t_paths as $t_path_config_name => $t_path ) {
 	check_print_test_row(

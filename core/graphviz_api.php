@@ -238,7 +238,7 @@ class Graph {
 
 		$this->set_attributes( $p_attributes );
 
-		$this->graphviz_path = config_get_global( 'graphviz_path' );
+		$this->graphviz_path = realpath( config_get_global( 'graphviz_path' ) ) . DIRECTORY_SEPARATOR;
 		$this->graphviz_tool = $p_tool;
 
 		if( is_windows_server() ) {
@@ -386,7 +386,7 @@ class Graph {
 		$t_dot_source = ob_get_clean();
 
 		# Start dot process
-		$t_command = $this->tool_path() . ' -T' . $p_format;
+		$t_command = escapeshellarg( $this->tool_path() ) . ' -T' . $p_format;
 		$t_stderr = tempnam( sys_get_temp_dir(), 'graphviz' );
 		$t_descriptors = array(
 			0 => array( 'pipe', 'r', ),
