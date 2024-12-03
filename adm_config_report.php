@@ -116,9 +116,13 @@ if( $t_filter_save ) {
 	if( null !== $t_cookie_string ) {
 		$t_cookie_contents = explode( ':', $t_cookie_string );
 
-		$t_filter_user_value    = $t_cookie_contents[0];
-		$t_filter_project_value = $t_cookie_contents[1];
+		$t_filter_user_value    = (int)$t_cookie_contents[0];
+		$t_filter_project_value = (int)$t_cookie_contents[1];
 		$t_filter_config_value  = check_config_value( $t_cookie_contents[2] );
+
+		if( !user_exists( $t_filter_user_value ) ) {
+			$t_filter_user_value = ALL_USERS;
+		}
 
 		if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
 			$t_filter_project_value = ALL_PROJECTS;
