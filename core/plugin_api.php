@@ -190,10 +190,19 @@ function plugin_route_group( $p_base_name = null ) {
  * @param string $p_base_name Plugin base name.
  * @return mixed File path or false if FNF
  */
-function plugin_file_path( $p_filename, $p_base_name ) {
+function plugin_file_path( $p_filename = null, $p_base_name = null ) {
 	$t_file_path = config_get_global( 'plugin_path' );
-	$t_file_path .= $p_base_name . DIRECTORY_SEPARATOR;
-	$t_file_path .= 'files' . DIRECTORY_SEPARATOR . $p_filename;
+	if( is_null( $p_base_name ) ) {
+		$t_file_path .= plugin_get_current() . DIRECTORY_SEPARATOR;
+	} else {
+		$t_file_path .= $p_base_name . DIRECTORY_SEPARATOR;
+	}
+	$t_file_path .= 'files' . DIRECTORY_SEPARATOR;
+
+	if( is_null( $p_filename ) ) {
+		return $t_file_path;
+	}
+	$t_file_path .= $p_filename;
 
 	return( is_file( $t_file_path ) ? $t_file_path : false );
 }
