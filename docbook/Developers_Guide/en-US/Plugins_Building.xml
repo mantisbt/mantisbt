@@ -402,8 +402,9 @@ layout_page_end();
 			<para>
 				Adding non-PHP files, such as images or CSS stylesheets, follows a very similar
 				pattern as pages.  Files should be placed in the plugin's
-				<filename>files/</filename> directory, and can only contain a single period in
-				the name.  The file's URI is generated with the <function>plugin_file()</function>
+				<filename>files/</filename> directory, the path to this directory can be
+				retrived by <function>plugin_file_path()</function> function.
+				The file's URI is generated with the <function>plugin_file()</function>
 				function.
 			</para>
 			<para>
@@ -421,7 +422,11 @@ p.foo {
 			<programlisting><filename>Example/pages/foo.php</filename><![CDATA[
 ...
 
-<link rel="stylesheet" type="text/css" href="<?php echo plugin_file( 'foo.css' ) ?>" />
+<link
+	rel="stylesheet"
+	type="text/css"
+	href="<?php echo plugin_file( 'foo.css' ) ?>"
+/>
 <p class="foo">
     Our custom stylesheet paints this text red.
 </p>
