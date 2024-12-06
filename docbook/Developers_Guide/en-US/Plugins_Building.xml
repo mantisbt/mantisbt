@@ -403,7 +403,7 @@ layout_page_end();
 				Adding non-PHP files, such as images or CSS stylesheets, follows a very similar
 				pattern as pages.  Files should be placed in the plugin's
 				<filename>files/</filename> directory, the path to this directory can be
-				retrived by <function>plugin_file_path()</function> function.
+				retrieved by <function>plugin_file_path()</function> function.
 				The file's URI is generated with the <function>plugin_file()</function>
 				function.
 			</para>
