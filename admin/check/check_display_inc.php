@@ -70,7 +70,7 @@ check_print_test_row(
 # Graphviz library
 if( config_get( 'relationship_graph_enable' ) ) {
 	# graphviz_path validity is checked in check_paths_inc.php
-	$t_graphviz_path = config_get_global( 'graphviz_path' );
+	$t_graphviz_path = realpath( config_get_global( 'graphviz_path' ) ) . DIRECTORY_SEPARATOR;
 
 	# Get list of Graphviz tools from the Graph class constants
 	$t_reflect_graph = new ReflectionClass( Graph::class );
