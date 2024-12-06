@@ -4503,6 +4503,7 @@ $g_relationship_graph_enable = OFF;
  * - Workflow transitions graph: dot
  *
  * NOTES:
+ * - Requires trailing `/`
  * - The webserver must have execute permission to these programs in order to
  *   generate the graphs.
  * - On Windows, the IIS user may require permissions to cmd.exe to be able
