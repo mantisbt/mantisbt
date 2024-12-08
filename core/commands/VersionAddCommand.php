@@ -81,7 +81,9 @@ class VersionAddCommand extends Command {
 		}
 
 		$t_timestamp = $this->payload( 'timestamp', '' );
-		$this->timestamp = is_blank( $t_timestamp ) ? null : strtotime( $t_timestamp );
+		$this->timestamp = is_blank( $t_timestamp )
+			? null
+			: ( is_int( $t_timestamp ) ? $t_timestamp : strtotime( $t_timestamp ) );
 	}
 
 	/**
