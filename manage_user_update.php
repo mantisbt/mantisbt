@@ -70,9 +70,6 @@ $t_data = array(
 $t_command = new UserUpdateCommand( $t_data );
 $t_command->execute();
 
-
-if( config_get( 'use_ldap_realname' ) ) {
-if( config_get( 'use_ldap_email' ) ) {
 form_security_purge( 'manage_user_update' );
 
 $t_redirect_url = 'manage_user_edit_page.php?user_id=' . (int)$f_user_id;

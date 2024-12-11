@@ -131,8 +131,6 @@ print_manage_menu( 'manage_user_page.php' );
 			</h4>
 		</div>
 
-			if( ON == config_get( 'use_ldap_realname' ) ) {
-			if( ON == config_get( 'use_ldap_email' ) ) {
 		<div class="widget-body">
 			<div class="widget-main no-padding table-responsive">
 				<table class="table table-bordered table-condensed table-striped">
