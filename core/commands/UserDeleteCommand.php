@@ -56,6 +56,12 @@ class UserDeleteCommand extends Command {
 			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
 		}
 
+		user_ensure_exists( $this->user_id_to_delete );
+
+		if( $this->user_id_to_delete == auth_get_current_user_id() ) {
+			throw new ClientException( 'Deleting own account not allowed', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
+		}
+
 		# Ensure user has access level to delete users
 		if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
 			throw new ClientException( 'Access denied to delete users', ERROR_ACCESS_DENIED );
@@ -82,7 +88,7 @@ class UserDeleteCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		user_delete( $this->user_id_to_delete );

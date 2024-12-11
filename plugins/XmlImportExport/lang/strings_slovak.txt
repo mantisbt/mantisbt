@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,19 +33,24 @@
 /** Slovak (slovenčina)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Rudko
+ * @author Yardom78
  */
 
 $s_plugin_XmlImportExport_title = 'Import/Export';
 $s_plugin_XmlImportExport_description = 'Dopĺňa MantisBT o import a export funkciu na XML-základe.';
 $s_plugin_XmlImportExport_import = 'Vložiť problém';
 $s_plugin_XmlImportExport_export = 'XML Export';
-$s_plugin_XmlImportExport_importing_in_project = 'Vložiť problémy v projekte:';
+$s_plugin_XmlImportExport_config_title = 'XML Import/Export konfigurácia prístupu úrovní';
+$s_plugin_XmlImportExport_import_threshold = 'Importovať problémy';
+$s_plugin_XmlImportExport_export_threshold = 'Exportovať problémy';
+$s_plugin_XmlImportExport_action_update = 'Aktualizovať';
+$s_plugin_XmlImportExport_importing_in_project = 'Importovanie problémov do projektu: %s';
 $s_plugin_XmlImportExport_import_options = 'Možnosti vkladania';
 $s_plugin_XmlImportExport_cross_references = 'Vzájomné odkazy';
 $s_plugin_XmlImportExport_default_strategy = 'Základná stratégia premeny:';

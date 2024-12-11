@@ -71,12 +71,4 @@ file_add( 0, $f_file, 'project', $f_title, $f_description );
 
 form_security_purge( 'proj_doc_add' );
 
-$t_redirect_url = 'proj_doc_page.php';
-
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin( 'proj_doc_page.php' );
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( 'proj_doc_page.php' );

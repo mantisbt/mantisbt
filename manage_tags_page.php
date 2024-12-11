@@ -55,19 +55,16 @@ access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 compress_enable();
 
 $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
-$f_filter = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_tag_prefix' ) ) );
+$f_filter = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_tag_prefix' ) ) );
 $f_page_number = gpc_get_int( 'page_number', 1 );
 
 # Start Index Menu
-$t_prefix_array = array( 'ALL' );
+$t_prefix_array = array_merge(
+	array( 'ALL' ),
+	range( 'A', 'Z' ),
+	range( '0', '9' )
+);
 
-for( $i = 'A'; $i != 'AA'; $i++ ) {
-	$t_prefix_array[] = $i;
-}
-
-for( $i = 0; $i <= 9; $i++ ) {
-	$t_prefix_array[] = (string)$i;
-}
 if( $f_filter === 'ALL' ) {
 	$t_name_filter = '';
 } else {
@@ -81,7 +78,7 @@ $t_offset = (( $f_page_number - 1 ) * $t_per_page );
 # Determine number of tags in tag table
 $t_total_tag_count = tag_count( $t_name_filter );
 
-#Number of pages from result
+# Number of pages from result
 $t_page_count = ceil( $t_total_tag_count / $t_per_page );
 
 if( $t_page_count < 1 ) {
@@ -102,7 +99,6 @@ if( $f_page_number < 1 ) {
 $t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset ) ;
 
 layout_page_header( lang_get( 'manage_tags_link' ) );
-
 layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_tags_page.php' );
@@ -116,7 +112,7 @@ print_manage_menu( 'manage_tags_page.php' );
 	<?php
 	foreach ( $t_prefix_array as $t_prefix ) {
 		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'show_all_tags' ) : $t_prefix );
-		$t_active = $t_prefix == $f_filter ? 'active' : '';
+		$t_active = (string)$t_prefix == (string)$f_filter ? 'active' : '';
 		echo '<a class="btn btn-xs btn-white btn-primary ' . $t_active .
 		'" href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>' ."\n";
 	} ?>
@@ -129,7 +125,7 @@ print_manage_menu( 'manage_tags_page.php' );
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-tags"></i>
+			<?php print_icon( 'fa-tags', 'ace-icon' ); ?>
 			<?php echo lang_get('manage_tags_link') ?>
 			<span class="badge"><?php echo $t_total_tag_count ?></span>
 		</h4>
@@ -176,12 +172,18 @@ print_manage_menu( 'manage_tags_page.php' );
 	</table>
 	</div>
 	</div>
+<?php
+	# Do not display the section's footer if we have only one page of users,
+	# otherwise it will be empty as the navigation controls won't be shown.
+	if( $t_total_tag_count > $t_per_page ) {
+?>
 	<div class="widget-toolbox padding-8 clearfix">
-	<div class="btn-toolbar pull-right"><?php
-		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
-		print_page_links( 'manage_tags_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter ); ?>
+		<div class="btn-toolbar pull-right"><?php
+			# @todo hack - pass in the hide inactive filter via cheating the actual filter value
+			print_page_links( 'manage_tags_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter ); ?>
+		</div>
 	</div>
-</div>
+<?php } ?>
 </div>
 </div>
 
@@ -191,12 +193,12 @@ print_manage_menu( 'manage_tags_page.php' );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-tag"></i>
+				<?php print_icon( 'fa-tag', 'ace-icon' ); ?>
 				<?php echo lang_get('tag_create') ?>
 			</h4>
 		</div>
 		<div class="widget-body">
-			<a name="tagcreate"></a>
+			<a id="tagcreate"></a>
 			<div class="widget-main no-padding">
 		<div class="form-container">
 		<div class="table-responsive">
@@ -205,7 +207,10 @@ print_manage_menu( 'manage_tags_page.php' );
 			<?php echo form_security_field( 'tag_create' ); ?>
 			<tr>
 				<td class="category">
-					<span class="required">*</span> <?php echo lang_get( 'tag_name' ) ?>
+					<label for="tag-name">
+						<span class="required">*</span>
+						<?php echo lang_get( 'tag_name' ) ?>
+					</label>
 				</td>
 				<td>
 					<input type="text" id="tag-name" name="name" class="input-sm" size="40" maxlength="100" required />
@@ -214,7 +219,9 @@ print_manage_menu( 'manage_tags_page.php' );
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'tag_description' ) ?>
+					<label for="tag-description">
+						<?php echo lang_get( 'tag_description' ) ?>
+					</label>
 				</td>
 				<td>
 					<textarea class="form-control" id="tag-description" name="description" cols="80" rows="6"></textarea>
@@ -232,8 +239,9 @@ print_manage_menu( 'manage_tags_page.php' );
 			</div>
 		</div>
 	</div>
-    </form>
+	</form>
 <?php
-} #End can Edit
+} # End can Edit
+
 echo '</div>';
 layout_page_end();

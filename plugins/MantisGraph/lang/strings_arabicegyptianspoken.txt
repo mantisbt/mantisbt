@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Egyptian Arabic (مصرى)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -41,16 +41,16 @@
  * @author Meno25
  */
 
-$s_plugin_graph_description = 'الملحق الرسومى الرسمى.';
+$s_plugin_MantisGraph_description = 'الملحق الرسومى الرسمى.';
 $s_plugin_MantisGraph_config = 'ضبط';
-$s_plugin_MantisGraph_status_link = 'حسب الحالة';
-$s_plugin_MantisGraph_priority_link = 'حسب الأهمية';
+$s_plugin_MantisGraph_status_link = 'حسب الحاله';
+$s_plugin_MantisGraph_priority_link = 'حسب الاهميه';
 $s_plugin_MantisGraph_category_link = 'حسب التصنيف';
-$s_plugin_MantisGraph_graph_imp_status_title = 'صناعه الرسومات حسب الحالة';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'صناعه الرسومات حسب الأولوية';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'صناعه الرسومات حسب الشدة';
-$s_plugin_MantisGraph_graph_imp_category_title = 'صناعه الرسومات حسب التصنيف';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'صناعه الرسومات حسب الحل';
+$s_plugin_MantisGraph_graph_imp_status_title = 'حسب رسومات الحاله';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'حسب رسومات الاهميه';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'حسب رسومات الشده';
+$s_plugin_MantisGraph_graph_imp_category_title = 'حسب رسومات التصنيف';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'حسب رسومات الحل';
 $s_plugin_MantisGraph_by_status_pct = 'حسب النسبه المئويه للحالة';
 $s_plugin_MantisGraph_by_priority_pct = 'حسب النسبه المئويه للأولوية';
 $s_plugin_MantisGraph_by_severity_pct = 'حسب النسبه المئويه للشدة';

@@ -24,7 +24,7 @@
  */
 
 # constants and configurations
-$t_current_dir = dirname( __FILE__ ) . '/';
+$t_current_dir = __DIR__ . '/';
 
 # MantisConnect APIs
 #   mc_* = public methods

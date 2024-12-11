@@ -25,15 +25,15 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Swiss German (Alemannisch)
+/** Alemannic (Alemannisch)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -41,11 +41,10 @@
  * @author Als-Holder
  */
 
-$s_plugin_graph_title = 'Mantis Graphs';
-$s_plugin_graph_description = 'Offiziäll Diagramm-Plugin.';
 $s_plugin_MantisGraph_title = 'Mantis Graphs';
+$s_plugin_MantisGraph_description = 'Offiziäll Diagramm-Plugin.';
 $s_plugin_MantisGraph_config = 'Konfigurierig';
-$s_plugin_MantisGraph_synthesis_link = 'Synthese';
+$s_plugin_MantisGraph_tab_label = 'Mantis Graphs';
 $s_plugin_MantisGraph_status_link = 'Pro Zuestand';
 $s_plugin_MantisGraph_priority_link = 'Pro Priorität';
 $s_plugin_MantisGraph_severity_link = 'Pro Schwirigkeitsgrad';

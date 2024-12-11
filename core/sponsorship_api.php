@@ -189,7 +189,7 @@ function sponsorship_get_id( $p_bug_id, $p_user_id = null ) {
 /**
  * get information about a sponsorship given its id
  * @param integer $p_sponsorship_id The sponsorship identifier to retrieve.
- * @return array
+ * @return SponsorShipData
  */
 function sponsorship_get( $p_sponsorship_id ) {
 	$t_row = sponsorship_cache_row( $p_sponsorship_id );

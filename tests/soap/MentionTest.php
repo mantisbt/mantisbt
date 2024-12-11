@@ -37,8 +37,8 @@ class MentionTest extends SoapBase {
 	 * correctly.
 	 * @return void
 	 */
-	public function testCreateIssue() {		
-		$t_issue_to_add = $this->getIssueToAdd( 'MentionTest.testCreateIssue' );
+	public function testCreateIssue() {
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['summary'] .= ' @administrator';
 		$t_issue_to_add['description'] .= ' @administrator';
 		$t_issue_to_add['additional_information'] = 'additional info @administrator';
@@ -61,8 +61,8 @@ class MentionTest extends SoapBase {
 	 * Create an issue with mentions and find it by summary.
 	 * @return void
 	 */
-	public function testFindIssueBySummary() {		
-		$t_issue_to_add = $this->getIssueToAdd( 'MentionTest.testCreateIssue' );
+	public function testFindIssueBySummary() {
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['summary'] .= ' @administrator';
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
@@ -79,7 +79,7 @@ class MentionTest extends SoapBase {
 	 * @return void
 	 */
 	public function testAddNote() {
-		$t_issue_to_add = $this->getIssueToAdd( 'MentionTest.testAddNote' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 

@@ -221,7 +221,49 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: List of HTML links for the documents menu.</para></listitem>
+					<listitem>
+						<para>&lt;Array&gt;: List of HTML links for the issue page menu.</para>
+						<para>This is an associative array, with the link's label as key
+							and the link target as value, e.g. <programlisting>
+array( plugin_lang_get( 'mypage_label' ) => plugin_page( 'mypage' );
+</programlisting>
+						</para>
+						<para>For compatibility with MantisBT versions before 2.21.0,
+							it is also possible to return an array of cooked links :
+							<programlisting>
+array( '&lt;a href="' . plugin_page( 'mypage' ) . '">' . plugin_lang_get( 'mypage_label' ) . '&lt;/a>' );
+</programlisting>
+							However, this usage is deprecated.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.output.menu.issue.relationship">
+			<title>EVENT_MENU_ISSUE_RELATIONSHIP (Default)</title>
+			<blockquote>
+				<para>
+					This event allows plugins to add new links to the menu
+					under the <emphasis>Relationships</emphasis> section
+					in the View Issue Details page.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: bug ID</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem>
+						<para>&lt;Array&gt;: List of elements to add to the menu.</para>
+						<para>This is an associative array, with the link's label as key
+							and the link target as value, e.g. <programlisting>
+array( plugin_lang_get( 'mypage_label' ) => plugin_page( 'mypage' );
+</programlisting>
+						</para>
+					</listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -242,21 +284,21 @@
 					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
 						</para>
 						<programlisting>
-							return array(
-							    array( 
-									'title' =&gt; 'My Link',
-									'access_level' =&gt; DEVELOPER,
-									'url' =&gt; 'my_link.php',
-									'icon' =&gt; 'fa-random'
-								),
-								array(
-									'title' =&gt; 'My Link2',
-									'access_level' =&gt; DEVELOPER,
-									'url' =&gt; 'my_link2.php',
-									'icon' =&gt; 'fa-shield'
-								)
-							);
-						</programlisting>
+return array(
+	array(
+		'title' =&gt; 'My Link',
+		'access_level' =&gt; DEVELOPER,
+		'url' =&gt; 'my_link.php',
+		'icon' =&gt; 'fa-random'
+	),
+	array(
+		'title' =&gt; 'My Link2',
+		'access_level' =&gt; DEVELOPER,
+		'url' =&gt; 'my_link2.php',
+		'icon' =&gt; 'fa-shield'
+	)
+);
+</programlisting>
 					</listitem>
 				</itemizedlist>
 			</blockquote>
@@ -278,25 +320,70 @@
 					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
 						</para>
 						<programlisting>
-							return array(
-							    array( 
-									'title' =&gt; 'My Link',
-									'access_level' =&gt; DEVELOPER,
-									'url' =&gt; 'my_link.php',
-									'icon' =&gt; 'fa-random'
-								),
-								array(
-									'title' =&gt; 'My Link2',
-									'access_level' =&gt; DEVELOPER,
-									'url' =&gt; 'my_link2.php',
-									'icon' =&gt; 'fa-shield'
-								)
-							);
-						</programlisting>
+return array(
+	array(
+		'title' =&gt; 'My Link',
+		'access_level' =&gt; DEVELOPER,
+		'url' =&gt; 'my_link.php',
+		'icon' =&gt; 'fa-random'
+	),
+	array(
+		'title' =&gt; 'My Link2',
+		'access_level' =&gt; DEVELOPER,
+		'url' =&gt; 'my_link2.php',
+		'icon' =&gt; 'fa-shield'
+	)
+);
+</programlisting>
 					</listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
+
+		<blockquote id="dev.eventref.output.menu.mainfilter">
+			<title>EVENT_MENU_MAIN_FILTER (Chained)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to modify the complete main menu
+					before it is output (for example re-order items, add items in the middle,
+					remove built-in items, change icons of built-in items).
+				</para>
+				<para>
+					A single parameter is passed as an array of associate arrays containing
+					the items in the main sidebar menu. The format of this array is the same as
+					EVENT_MENU_MAIN and EVENT_MENU_MAIN_FRONT, and will also contain any entries
+					added as a result of these events.
+				</para>
+				<para>
+					Plugins should do any modifications needed and return the array back.
+					Returning an empty array will hide the main menu.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array&gt;: menu items</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem>
+						<para>&lt;Array&gt;: modified menu items</para>
+						<note>
+							<para>
+								When returning the updated menu, the plugin's hook
+								function needs to wrap it in an array, i.e.
+								<literal>return array( $p_menu_data );</literal> and not
+								<literal>return $p_menu_data;</literal>.
+								The reason for this is that the Event API relies on
+								call_user_func_array() to execute callback functions.
+							</para>
+						</note>
+
+					</listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 
 		<blockquote id="dev.eventref.output.menu.manage">
 			<title>EVENT_MENU_MANAGE (Default)</title>

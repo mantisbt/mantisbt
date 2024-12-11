@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,12 +33,14 @@
 /** German (Deutsch)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Atrol
+ * @author FF-11
+ * @author FF11
  * @author Metalhead64
  * @author Umherirrender
  */
@@ -51,7 +53,7 @@ $s_plugin_XmlImportExport_config_title = 'Konfiguration der XML-Import-/Export-Z
 $s_plugin_XmlImportExport_import_threshold = 'Einträge importieren';
 $s_plugin_XmlImportExport_export_threshold = 'Einträge exportieren';
 $s_plugin_XmlImportExport_action_update = 'Aktualisieren';
-$s_plugin_XmlImportExport_importing_in_project = 'Importiere Einträge in Projekt:';
+$s_plugin_XmlImportExport_importing_in_project = 'Importiere Einträge in Projekt: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Import-Optionen';
 $s_plugin_XmlImportExport_cross_references = 'Querverweise';
 $s_plugin_XmlImportExport_default_strategy = 'Standard-Konvertierungsstrategie:';

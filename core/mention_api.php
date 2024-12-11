@@ -73,8 +73,8 @@ function mention_get_candidates( $p_text ) {
 			# Negative lookbehind  to ensure we don't match multiple tags
 			. '(?<!' . $t_quoted_tag . ')' . $t_quoted_tag
 			. ')'
-			# any word char or period, but must not end with period
-			. '([\w.]*[\w])'
+			# any word char, dash or period, must end with word char
+			. '([\w\-.]*[\w])'
 			# Lookforward to ensure next char is not a valid mention char or
 			# the end of the string, or the mention tag
 			. '(?=[^\w@]|$)'
@@ -156,7 +156,7 @@ function mention_format_text( $p_text, $p_html = true ) {
 		if( $p_html ) {
 			$t_mention_formatted = string_display_line( $t_mention_formatted );
 
-			$t_mention_formatted = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mention_formatted . '</a>';
+			$t_mention_formatted = '<a href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mention_formatted . '</a>';
 
 			if( !user_is_enabled( $t_user_id ) ) {
 				$t_mention_formatted = '<s>' . $t_mention_formatted . '</s>';

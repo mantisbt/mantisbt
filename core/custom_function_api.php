@@ -102,19 +102,18 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 	}
 
 	# choose color based on status
-	$status_label = html_get_status_css_class( $t_bug->status, $t_current_user, $t_bug->project_id );
-	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
+	$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user, $t_bug->project_id );
+	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );
 
 	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
-	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
-	echo string_get_bug_view_link( $p_issue_id );
+	print_icon( 'fa-square', 'fa-status-box ' . $t_status_css, $t_status_title );
+	echo ' ' . string_get_bug_view_link( $p_issue_id, false );
 	echo ': <span class="label label-light">', $t_category, '</span> ' , string_display_line_links( $t_bug->summary );
 	if( $t_bug->handler_id > 0
 			&& ON == config_get( 'show_assigned_names', null, $t_current_user, $t_bug->project_id )
 			&& access_can_see_handler_for_bug( $t_bug ) ) {
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
-	echo '<div class="space-2"></div>';
 }
 
 /**
@@ -161,19 +160,18 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 	}
 
 	# choose color based on status
-	$status_label = html_get_status_css_class( $t_bug->status, $t_current_user, $t_bug->project_id );
-	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
+	$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user, $t_bug->project_id );
+	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );
 
 	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
-	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
-	echo string_get_bug_view_link( $p_issue_id );
+	print_icon( 'fa-square', 'fa-status-box ' . $t_status_css, $t_status_title );
+	echo ' ' . string_get_bug_view_link( $p_issue_id, false );
 	echo ': <span class="label label-light">', $t_category, '</span> ', $t_strike_start, string_display_line_links( $t_bug->summary ), $t_strike_end;
 	if( $t_bug->handler_id > 0
 			&& ON == config_get( 'show_assigned_names', null, $t_current_user, $t_bug->project_id )
 			&& access_can_see_handler_for_bug( $t_bug ) ) {
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
-	echo '<div class="space-2"></div>';
 }
 
 /**
@@ -320,8 +318,8 @@ function custom_function_default_get_columns_to_view( $p_columns_target = COLUMN
 /**
  * Print the title of a column given its name.
  *
- * @global type $t_sort             (deprecated) main sort column in use from filter
- * @global type $t_dir              (deprecated) main sort dir in use from filter
+ * @global string $t_sort           (deprecated) main sort column in use from filter
+ * @global string $t_dir            (deprecated) main sort dir in use from filter
  * @param string  $p_column         Custom_xxx for custom field xxx, or otherwise field name as in bug table.
  * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
  * @param array $p_sort_properties  Array of filter sortin gproeprties, in the format returned from filter_get_visible_sort_properties_array()
@@ -343,7 +341,7 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
 		if( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
-			echo '<th class="column-custom-' . $t_custom_field . '">';
+			echo '<th class="column-' . custom_field_css_name( $t_custom_field ) . '">';
 		}
 
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
@@ -408,22 +406,48 @@ function custom_function_default_print_column_value( $p_column, BugData $p_bug, 
 
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
-		printf( $t_column_start, 'custom-' . $t_custom_field );
-
+		$t_class = custom_field_css_name( $t_custom_field );
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
+
 		if( $t_field_id === false ) {
-			echo '@', $t_custom_field, '@';
+			$t_value = '@' . $t_custom_field . '@';
+			$t_is_linked = false;
 		} else {
 			$t_issue_id = $p_bug->id;
 			$t_project_id = $p_bug->project_id;
+			$t_is_linked = custom_field_is_linked( $t_field_id, $t_project_id );
 
-			if( custom_field_is_linked( $t_field_id, $t_project_id ) ) {
+			if( $t_is_linked ) {
+				$t_value = false;
 				$t_def = custom_field_get_definition( $t_field_id );
-				print_custom_field_value( $t_def, $t_field_id, $t_issue_id );
+
+				# Build a map of CF types to corresponding label
+				static $s_cf_types;
+				if( $s_cf_types === null ) {
+					$s_cf_types = MantisEnum::getAssocArrayIndexedByValues(
+						config_get( 'custom_field_type_enum_string' )
+					);
+					# Make sure the type's label is a valid CSS identifier
+					array_walk( $s_cf_types,
+						function( &$t_val ) {
+							$t_val = preg_replace( '/[^a-zA-Z0-9_-]+/', '-', $t_val );
+						}
+					);
+				}
+				# Add CF type CSS class
+				$t_class .= ' cftype-' . $s_cf_types[$t_def['type']];
 			} else {
 				# field is not linked to project
-				echo $t_column_empty;
+				$t_value = $t_column_empty;
 			}
+		}
+
+		printf( $t_column_start, $t_class );
+		if( $t_is_linked ) {
+			/** @noinspection PhpUndefinedVariableInspection */
+			print_custom_field_value( $t_def, $t_field_id, $t_issue_id );
+		} else {
+			echo $t_value;
 		}
 		echo $t_column_end;
 	} else {

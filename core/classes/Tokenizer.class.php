@@ -51,23 +51,11 @@ class Tokenizer
 		# Check syntax to make sure we get valid PHP code
 		# prepend 'return' statement to ensure the code is not actually executed
 		$t_code = 'return; ' . $p_code . ';';
-		if( version_compare( PHP_VERSION, '7', '>=' ) ) {
-			# In PHP >= 7, eval() throws a ParseError which we can catch
-			# and rethrow as an Exception
-			try {
-				eval( $t_code );
-			}
-			catch( ParseError $e ) {
-				throw new Exception( $e->getMessage() );
-			}
-		} else {
-			# In earlier PHP versions, eval() simply returns false and outputs
-			# an error message to STDERR, but this can't be capture using ob_
-			# functions so we suppress errors and throw a generic error message
-			$result = @eval( $t_code );
-			if( $result === false ) {
-				throw new Exception( 'syntax error' );
-			}
+		try {
+			eval( $t_code );
+		}
+		catch( ParseError $e ) {
+			throw new Exception( $e->getMessage() );
 		}
 
 		$t_tokens = token_get_all( '<?php ' . $p_code );

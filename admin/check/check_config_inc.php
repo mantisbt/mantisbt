@@ -32,8 +32,12 @@ if( !defined( 'CHECK_CONFIG_INC_ALLOW' ) ) {
 # MantisBT Check API
 require_once( 'check_api.php' );
 
+global $g_config_path, $g_absolute_path, $g_log_level, $g_log_destination,
+	   $g_show_detailed_errors, $g_debug_email, $g_limit_reporters;
+
 check_print_section_header_row( 'Configuration' );
 
+/** @noinspection HtmlUnknownTarget */
 check_print_test_row( 'config_inc.php configuration file exists',
 	file_exists( $g_config_path . 'config_inc.php' ),
 	array( false => 'Please use <a href="install.php">install.php</a> to perform the initial installation of MantisBT.' )
@@ -76,8 +80,8 @@ check_print_test_warn_row( 'Check whether diagnostic logging is enabled',
 );
 
 check_print_test_warn_row( 'Check whether log output is sent to end user',
-	!($g_log_destination == 'firebug' || $g_log_destination == 'page'),
-	array( false => 'Diagnostic output destination is currently sent to end users browser' )
+	$g_log_destination !== 'page',
+	array( false => "Diagnostics output destination is currently set to end-user's browser" )
 );
 
 check_print_test_warn_row( 'Detailed errors should be OFF',
@@ -93,6 +97,36 @@ check_print_test_warn_row( 'Email debugging should be OFF',
 check_print_test_row( 'Default move category must exists ("default_category_for_moves")',
 	category_exists( config_get( 'default_category_for_moves' ) ),
 	array( false => 'Issues moved may end up with invalid category id.' )
+);
+
+$t_field_options = array(
+	'bug_report_page_fields',
+	'bug_view_page_fields',
+	'bug_update_page_fields'
+);
+
+foreach( $t_field_options as $t_field_option ) {
+	$t_fields = config_get( $t_field_option, null, ALL_USERS, ALL_PROJECTS );
+	check_print_test_warn_row(
+		$t_field_option . ' configuration option does not contain "os_version"',
+		!in_array ( 'os_version', $t_fields ),
+		array( false => 'You need to replace "os_version" by "os_build" for the ' . $t_field_option . ' configuration option '
+			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=26840">#26840</a>).')
+	);
+}
+
+# Deprecated Settings
+check_print_test_warn_row( 'Deprecated "limit_reporters" setting should no longer be used',
+	$g_limit_reporters == OFF,
+	array( false => 'Use "limit_view_unless_threshold" instead.' )
+);
+
+# Check that 'ldap_server' is a proper URI, starting with either ldap:// or ldaps://
+$t_ldap_server = config_get_global( 'ldap_server' );
+check_print_test_row(
+	'"ldap_server" must be a valid, full LDAP URI',
+	( preg_match( '~^ldaps?://~', $t_ldap_server ) == 1 ),
+	array( false => '"ldap_server" must be a proper URI, starting with either "ldap://" or "ldaps://"' )
 );
 
 # Obsolete Settings

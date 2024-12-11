@@ -35,6 +35,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
@@ -50,7 +52,8 @@ require_api( 'utility_api.php' );
 $g_category_cache = array();
 
 /**
- * Check whether the category exists in the project
+ * Check whether the category exists globally.
+ *
  * @param integer $p_category_id A Category identifier.
  * @return boolean Return true if the category exists, false otherwise
  * @access public
@@ -61,8 +64,8 @@ function category_exists( $p_category_id ) {
 }
 
 /**
- * Check whether the category exists in the project
- * Trigger an error if it does not
+ * Trigger an error if category does not exist globally.
+ *
  * @param integer $p_category_id A Category identifier.
  * @return void
  * @access public
@@ -70,6 +73,42 @@ function category_exists( $p_category_id ) {
 function category_ensure_exists( $p_category_id ) {
 	if( !category_exists( $p_category_id ) ) {
 		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+	}
+}
+
+/**
+ * Check whether the category exists within the project hierarchy.
+ *
+ * @param int $p_category_id Category identifier.
+ * @param int $p_project_id  Project identifier.
+ *
+ * @return bool True if the category exists, false otherwise.
+ */
+function category_exists_in_project( $p_category_id, $p_project_id ) {
+	if( $p_category_id == 0
+		&& config_get( 'allow_no_category', null, null, $p_project_id )
+	) {
+		return true;
+	}
+	$t_categories = array_column( category_get_all_rows( $p_project_id ), 'id' );
+	return in_array( $p_category_id, $t_categories );
+}
+
+/**
+ * Trigger an error if the category does not exist within the project hierarchy.
+ *
+ * @param int $p_category_id Category identifier.
+ * @param int $p_project_id  Project identifier.
+ *
+ * @throws ClientException
+ */
+function category_ensure_exists_in_project( $p_category_id, $p_project_id ) {
+	if( !category_exists_in_project( $p_category_id, $p_project_id ) ) {
+		throw new ClientException(
+			"Category '$p_category_id' not available in project '$p_project_id'.",
+			ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT,
+			array( $p_category_id, $p_project_id )
+		);
 	}
 }
 
@@ -130,7 +169,8 @@ function category_can_remove( $p_category_id ) {
  */
 function category_ensure_can_remove( $p_category_id ) {
 	if( !category_can_remove( $p_category_id ) ) {
-		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_DEFAULT, ERROR );
+		error_parameters( category_get_name( $p_category_id) );
+		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
 	}
 }
 
@@ -159,25 +199,57 @@ function category_add( $p_project_id, $p_name ) {
 }
 
 /**
- * Update the name and user associated with the category
- * @param integer $p_category_id Category identifier.
- * @param string  $p_name        Category Name.
- * @param integer $p_assigned_to User ID that category is assigned to.
+ * Update the name and user associated with the category.
+ *
+ * @param int      $p_category_id Category identifier.
+ * @param string   $p_name        Category Name.
+ * @param int      $p_assigned_to User ID that category is assigned to.
+ * @param int|null $p_status      Optional category status (see CATEGORY_STATUS_* constants)
+ *                                or null to leave status unchanged.
+ *
  * @return void
  * @access public
  */
-function category_update( $p_category_id, $p_name, $p_assigned_to ) {
+function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = null ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	$t_old_category = category_get_row( $p_category_id );
+	$t_project_id = (int)$t_old_category['project_id'];
+
+	# Ensure target user exists and is allowed to handle bugs
+	if( $p_assigned_to != NO_USER ) {
+		if( user_exists( $p_assigned_to ) ) {
+			$t_handle_bugs = config_get( 'handle_bug_threshold' );
+			if( !access_has_project_level( $t_handle_bugs, $t_project_id, $p_assigned_to ) ) {
+				trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+			}
+		} else {
+			error_parameters( $p_assigned_to );
+			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+		}
+	}
+
+	# Disabling category is not authorized if it is used as default
+	$t_default_category_id = config_get_global( 'default_category_for_moves', null );
+	if( $p_category_id == $t_default_category_id
+		|| config_is_defined( 'default_category_for_moves', $p_category_id )
+	) {
+		error_parameters( $t_old_category['name'] );
+		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
+	}
+
+	# Keep existing status
+	if( $p_status === null ) {
+		$p_status = $t_old_category['status'];
+	}
 
 	db_param_push();
-	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . '
+	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . ', status=' . db_param() .'
 				  WHERE id=' . db_param();
-	db_query( $t_query, array( $p_name, $p_assigned_to, $p_category_id ) );
+	db_query( $t_query, array( $p_name, $p_assigned_to , $p_status, $p_category_id ) );
 
 	# Add bug history entries if we update the category's name
 	if( $t_old_category['name'] != $p_name ) {
@@ -262,7 +334,7 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 		return true;
 	}
 
-	$t_category_ids = join( ',', $t_category_ids );
+	$t_category_ids = implode( ',', $t_category_ids );
 
 	# update bug history entries
 	$t_query = 'SELECT id, category_id FROM {bug} WHERE category_id IN ( ' . $t_category_ids . ' )';
@@ -289,7 +361,7 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
  * Return the definition row for the category
  * @param integer $p_category_id Category identifier.
  * @param boolean $p_error_if_not_exists true: error if not exists, otherwise return false.
- * @return array An array containing category details.
+ * @return array|false An array containing category details.
  * @access public
  */
 function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
@@ -321,7 +393,7 @@ function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
  * Sort categories based on what project they're in.
  * Call beforehand with a single parameter to set a 'preferred' project.
  * @param int|array $p_category1 Id of preferred project or array containing category details.
- * @param array $p_category2 Array containing category details.
+ * @param array|null $p_category2 Array containing category details.
  * @return integer|null An integer representing sort order.
  * @access public
  */
@@ -342,12 +414,12 @@ function category_sort_rows_by_project( $p_category1, array $p_category2 = null 
 		}
 	}
 
-	$t_proj_cmp = strcasecmp( $p_category1['project_name'], $p_category2['project_name'] );
+	$t_proj_cmp = strcasecmp( (string)$p_category1['project_name'], (string)$p_category2['project_name'] );
 	if( $t_proj_cmp != 0 ) {
 		return $t_proj_cmp;
 	}
 
-	return strcasecmp( $p_category1['name'], $p_category2['name'] );
+	return strcasecmp( (string)$p_category1['name'], (string)$p_category2['name'] );
 }
 
 $g_cache_category_project = null;
@@ -390,7 +462,6 @@ function category_cache_array_rows_by_project( array $p_project_id_array ) {
 	foreach( $t_rows as $t_project_id => $t_row ) {
 		$g_cache_category_project[(int)$t_project_id] = $t_row;
 	}
-	return;
 }
 
 /**
@@ -438,17 +509,23 @@ function category_get_filter_list( $p_project_id = null ) {
 
 /**
  * Return all categories for the specified project id.
+ *
  * Obeys project hierarchies and such.
- * @param integer $p_project_id      A Project identifier.
- * @param boolean $p_inherit         Indicates whether to inherit categories from parent projects, or null to use configuration default.
- * @param boolean $p_sort_by_project Whether to sort by project.
+ *
+ * @param int  $p_project_id      A Project identifier.
+ * @param bool $p_inherit         Indicates whether to inherit categories from parent projects,
+ *                                or null to use configuration default.
+ * @param bool $p_sort_by_project Whether to sort by project.
+ * @param bool $p_enabled_only    False to select all categories or True for just the active ones.
+ *
  * @return array array of categories
  * @access public
  */
-function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false ) {
+function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false, $p_enabled_only = false ) {
 	global $g_category_cache, $g_cache_category_project;
 
 	if( isset( $g_cache_category_project[(int)$p_project_id] ) ) {
+		$t_categories = array();
 		if( !empty( $g_cache_category_project[(int)$p_project_id]) ) {
 			foreach( $g_cache_category_project[(int)$p_project_id] as $t_id ) {
 				$t_categories[] = category_get_row( $t_id );
@@ -457,12 +534,12 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 			if( $p_sort_by_project ) {
 				category_sort_rows_by_project( $p_project_id );
 				usort( $t_categories, 'category_sort_rows_by_project' );
+
+				# TODO: passing null may be a bug here
 				category_sort_rows_by_project( null );
 			}
-			return $t_categories;
-		} else {
-			return array();
 		}
+		return $t_categories;
 	}
 
 	$c_project_id = (int)$p_project_id;
@@ -484,6 +561,10 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 		$t_project_where = ' project_id=' . $p_project_id . ' ';
 	}
 
+	if( $p_enabled_only ) {
+		$t_project_where .= ' and c.status = ' . CATEGORY_STATUS_ENABLED;
+	}
+	
 	$t_query = 'SELECT c.*, p.name AS project_name FROM {category} c
 				LEFT JOIN {project} p
 					ON c.project_id=p.id
@@ -498,6 +579,8 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 	if( $p_sort_by_project ) {
 		category_sort_rows_by_project( $p_project_id );
 		usort( $t_rows, 'category_sort_rows_by_project' );
+
+		# TODO: passing null may be a bug here
 		category_sort_rows_by_project( null );
 	}
 
@@ -533,7 +616,6 @@ function category_cache_array_rows( array $p_cat_id_array ) {
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$g_category_cache[(int)$t_row['id']] = $t_row;
 	}
-	return;
 }
 
 /**
@@ -644,3 +726,16 @@ function category_ensure_can_delete( $p_category_id ) {
 	}
 }
 
+/**
+ * Check if category is enabled.
+ *
+ * Category 0 (no category) is always considered as enabled.
+ *
+ * @param int $p_category_id Category identifier.
+ *
+ * @return bool True if enabled, false otherwise
+ */
+function category_is_enabled( $p_category_id ) {
+	return $p_category_id == 0
+		|| category_get_field( $p_category_id, 'status' ) == CATEGORY_STATUS_ENABLED;
+}

@@ -79,11 +79,4 @@ foreach( $t_bug_list as $t_bug ) {
 
 form_security_purge( 'account_sponsor_update' );
 
-$t_redirect_url = 'account_sponsor_page.php';
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin();
-
-html_operation_successful( $t_redirect_url, lang_get( 'payment_updated' ) );
-
-layout_page_end();
+print_header_redirect( 'account_sponsor_page.php' );

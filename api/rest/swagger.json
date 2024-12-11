@@ -6,7 +6,8 @@
     "version": "1.0.0"
   },
   "schemes": [
-    "http", "https"
+    "http",
+    "https"
   ],
   "produces": [
     "application/json"
@@ -33,7 +34,9 @@
         "responses": {
           "200": {
             "description": "Success with issue details",
-            "schema": { "$ref": "#/definitions/CreateIssueResponse" }
+            "schema": {
+              "$ref": "#/definitions/CreateIssueResponse"
+            }
           },
           "403": {
             "description": "Access denied"
@@ -143,7 +146,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ConfigGetResponse" }
+            "schema": {
+              "$ref": "#/definitions/ConfigGetResponse"
+            }
           },
           "403": {
             "description": "Access denied"
@@ -180,7 +185,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/LangGetResponse" }
+            "schema": {
+              "$ref": "#/definitions/LangGetResponse"
+            }
           },
           "403": {
             "description": "Access denied"
@@ -202,7 +209,30 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/UserMeResponse" }
+            "schema": {
+              "$ref": "#/definitions/UserMeResponse"
+            }
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "503": {
+            "description": "Mantis Offline"
+          }
+        }
+      }
+    },
+    "/users/reset": {
+      "put": {
+        "summary": "Reset user's password",
+        "description": "Reset the user's password",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "userResetPassword",
+        "responses": {
+          "200": {
+            "description": "Success"
           },
           "403": {
             "description": "Access denied"
@@ -215,7 +245,9 @@
     }
   },
   "security": [
-    { "Authorization": [] }
+    {
+      "Authorization": []
+    }
   ],
   "securityDefinitions": {
     "Authorization": {
@@ -227,7 +259,10 @@
   "definitions": {
     "Issue": {
       "type": "object",
-      "required": [ "summary", "description" ],
+      "required": [
+        "summary",
+        "description"
+      ],
       "properties": {
         "id": {
           "type": "integer",
@@ -342,8 +377,7 @@
         "option": {
           "type": "string"
         },
-        "value": {
-        }
+        "value": {}
       }
     },
     "LangGetResponse": {

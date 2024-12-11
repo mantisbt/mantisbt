@@ -25,37 +25,42 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Serbian (Latin script) (srpski (latinica)‎)
+/** Serbian (Latin script) (srpski (latinica))
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Rancher
+ * @author Zexmax
  */
 
-$s_plugin_XmlImportExport_title = 'Problemi u uvozu/izvozu';
-$s_plugin_XmlImportExport_description = 'Dodaje mogućnosti uvoza i izvoza u XML.';
+$s_plugin_XmlImportExport_title = 'Uvezi/Izvezi probleme';
+$s_plugin_XmlImportExport_description = 'Dodaj mogućnosti uvoza i izvoza XML-a u MantisBT.';
 $s_plugin_XmlImportExport_import = 'Uvezi probleme';
 $s_plugin_XmlImportExport_export = 'XML izvoz';
-$s_plugin_XmlImportExport_importing_in_project = 'Uvoženje problema u projekat:';
-$s_plugin_XmlImportExport_import_options = 'Postavke uvoza';
+$s_plugin_XmlImportExport_config_title = 'Konfiguracija nivoa pristupa za XML uvoz/izvoz';
+$s_plugin_XmlImportExport_import_threshold = 'Uvezi probleme';
+$s_plugin_XmlImportExport_export_threshold = 'Izvezi probleme';
+$s_plugin_XmlImportExport_action_update = 'Ažuriraj';
+$s_plugin_XmlImportExport_importing_in_project = 'Uvoz problema u projekat: \'%s\'';
+$s_plugin_XmlImportExport_import_options = 'Opcije uvoza';
 $s_plugin_XmlImportExport_cross_references = 'Upućivanja';
-$s_plugin_XmlImportExport_default_strategy = 'Podrazumevana strategija za pretvaranje:';
+$s_plugin_XmlImportExport_default_strategy = 'Podrazumevana strategija konverzije:';
 $s_plugin_XmlImportExport_renumber = 'Prenumeriši';
 $s_plugin_XmlImportExport_renumber_desc = 'Probaj da pretvoriš navode u nove brojeve';
-$s_plugin_XmlImportExport_link = 'Veza';
-$s_plugin_XmlImportExport_link_desc = 'Pretvori u vezu do izvorne stavke';
+$s_plugin_XmlImportExport_link = 'Link';
+$s_plugin_XmlImportExport_link_desc = 'Pretvori u link do izvorne stavke';
 $s_plugin_XmlImportExport_disable = 'Onemogući';
-$s_plugin_XmlImportExport_disable_desc = 'Onemogući vezu';
-$s_plugin_XmlImportExport_fallback = 'Rezervna strategija (kada „Prenumeriši“ ne važi):';
+$s_plugin_XmlImportExport_disable_desc = 'Onemogući link';
+$s_plugin_XmlImportExport_fallback = 'Rezervna strategija (kada „Prenumeriši“ nije primenjena):';
 $s_plugin_XmlImportExport_fallback_category = 'Rezervna kategorija:';
 $s_plugin_XmlImportExport_keep_same_category = 'Probaj da zadržiš istu kategoriju';
-$s_plugin_XmlImportExport_error_no_xml = 'ne mogu da pronađem proširenja xmlreader i xmlwriter';
+$s_plugin_XmlImportExport_error_no_xml = 'ne mogu da pronađem xmlreader i xmlwriter ekstenzije';

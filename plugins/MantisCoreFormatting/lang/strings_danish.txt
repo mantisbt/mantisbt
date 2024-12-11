@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Danish (dansk)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -50,7 +50,7 @@ $s_plugin_format_process_text = 'Tekstbehandling';
 $s_plugin_format_process_text_warning_notice = 'Slå ikke fra medmindre du virkelig ved hvad du laver. I slukket tilstand, er cross site scripting (XSS) angreb mulige.';
 $s_plugin_format_process_urls = 'URL-behandling';
 $s_plugin_format_process_buglinks = 'Interne MantisBT-henvisninger (udgaver/udgavenotater)';
-$s_plugin_format_process_buglinks_info = 'Din konfiguration definerer mærket <em>Issue</em> som "<literal>%s</literal>" og mærket <em>Issue Note</em> som "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'Din konfiguration definerer mærket <em>Issue</em> som "%s" og mærket <em>Issue Note</em> som "%s"';
 $s_plugin_format_process_markdown = 'Opmærkningsbehandling';
 $s_plugin_format_process_markdown_info = 'Stil med opmærkningsunderstøttelse, tekstformateringssyntaks designet så den kan konverteres til HTML.';
 $s_plugin_format_enabled = 'Til';

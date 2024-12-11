@@ -35,7 +35,6 @@
  * @uses html_api.php
  * @uses logging_api.php
  * @uses print_api.php
- * @uses tokens_api.php
  * @uses utility_api.php
  */
 
@@ -52,125 +51,108 @@ require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'print_api.php' );
-require_api( 'tokens_api.php' );
 require_api( 'utility_api.php' );
 
 auth_ensure_user_authenticated();
 
 $f_type					= gpc_get_int( 'type', -1 );
 $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
-$f_print				= gpc_get_bool( 'print' );
-$f_temp_filter			= gpc_get_bool( 'temporary' );
+$f_isset_temporary		= gpc_isset( 'temporary' );
+$f_make_temporary		= gpc_get_bool( 'temporary' );
+$f_isset_new_key		= gpc_isset( 'new' );
+$f_force_new_key		= gpc_get_bool( 'new' );
+$f_project_id			= gpc_get_int( 'set_project_id', -1 );
 
-if( $f_temp_filter ) {
-	$f_type = 1;
+# flags to redirect after changing the filter
+# 'print' will redirect to print_all_bug_page.php
+# 'summary' will redirect to summary_page.php
+# otherwise, the default redirect is to view_all_bug_page.php
+$f_print				= gpc_get_bool( 'print' );
+$f_summary				= gpc_get_bool( 'summary' );
+
+# Get the filter in use
+$t_setting_arr = current_user_get_bug_filter();
+
+# If there is an explicit "temporary" parameter true/false, will force the new filter
+# to be termporary (true) or persistent (false), according to its value.
+# If the parameter is not present, the filter will be kept the same as original.
+if( $f_isset_temporary ) {
+	# when only changing the temporary status of a filter and no action is specified
+	# we assume not to reset current filter
+	if( $f_type == -1 ) {
+		# use type 2 wich keeps current filter values
+		$f_type = FILTER_ACTION_PARSE_ADD;
+	}
+	$t_temp_filter = $f_make_temporary;
+} else {
+	$t_temp_filter = filter_is_temporary( $t_setting_arr );
 }
 
-if( $f_type < 0 ) {
+if( $f_type == -1 && $f_isset_new_key ) {
+	# use an action that keeps current filter values
+	$f_type = FILTER_ACTION_PARSE_ADD;
+}
+
+if( $f_type == -1 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
 
 # -1 is a special case stored query: it means we want to reset our filter
-if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
-	$f_type = 0;
+if( ( $f_type == FILTER_ACTION_LOAD ) && ( $f_source_query_id == -1 ) ) {
+	$f_type = FILTER_ACTION_RESET;
 }
 
-#   array contents
-#   --------------
-#	 0: version
-#	 1: $f_show_category
-#	 2: $f_show_severity
-#	 3: $f_show_status
-#	 4: $f_per_page
-#	 5: $f_highlight_changed
-#	 6: $f_hide_closed
-#	 7: $f_reporter_id
-#	 8: $f_handler_id
-#	 9: $f_sort
-#	10: $f_dir
-#	11: $f_start_month
-#	12: $f_start_day
-#	13: $f_start_year
-#	14: $f_end_month
-#	15: $f_end_day
-#	16: $f_end_year
-#	17: $f_search
-#	18: $f_hide_resolved
-#	19: $f_show_resolution
-#	20: $f_show_build
-#	21: $f_show_version
-#	22: $f_do_filter_by_date
-#	23: $f_custom_field
-#	24: $f_relationship_type
-# 	25: $f_relationship_bug
-# 	26: $f_show_profile
-
-# Set new filter values.  These are stored in a cookie
-$t_view_all_cookie_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
-$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
-
-# process the cookie if it exists, it may be blank in a new install
-if( !is_blank( $t_view_all_cookie ) ) {
-	$t_setting_arr = filter_deserialize( $t_view_all_cookie );
-	if( false === $t_setting_arr ) {
-		# couldn't deserialize, if we were trying to use the filter, clear it and reload
-		# for ftype = 0, 1, or 3, we are going to re-write the filter anyways
-		if( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
-			gpc_clear_cookie( 'view_all_cookie' );
-			error_proceed_url( 'view_all_set.php?type=0' );
-			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
-			exit; # stop here
-		}
-	} else {
-		$t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
-	}
-} else {
-	# no cookie found, set it
-	$f_type = 1;
+# If user can't use persistent filters, force the creation of a temporary filter
+if( !filter_user_can_use_persistent( auth_get_current_user_id() ) ) {
+	$t_temp_filter = true;
 }
+
+$t_previous_temporary_key = filter_get_temporary_key( $t_setting_arr );
+$t_force_new_key = $t_temp_filter && $f_force_new_key;
 
 # Clear the source query id.  Since we have entered new filter criteria.
-$t_setting_arr['_source_query_id'] = '';
+if( isset( $t_setting_arr['_source_query_id'] ) ) {
+	unset( $t_setting_arr['_source_query_id'] );
+}
+
 switch( $f_type ) {
-	# New cookie
-	case '0':
-		log_event( LOG_FILTERING, 'view_all_set.php: New cookie' );
+	# Apply a new empty filter
+	case FILTER_ACTION_RESET:
+		log_event( LOG_FILTERING, 'view_all_set.php: New filter' );
 		$t_setting_arr = array();
 		break;
-	# Update filters. (filter_gpc_get reads a new set of parameters)
-	case '1':
+
+	# Read new filter parameters. (filter_gpc_get reads a new set of parameters)
+	# Parameter that are not submitted, will be reset to defaults.
+	case FILTER_ACTION_PARSE_NEW:
+		log_event( LOG_FILTERING, 'view_all_set.php: Parse a new filter' );
 		$t_setting_arr = filter_gpc_get();
 		break;
-	# Set the sort order and direction (filter_gpc_get is called over current filter)
-	case '2':
-		log_event( LOG_FILTERING, 'view_all_set.php: Set the sort order and direction.' );
+
+	# Read and update filter parameters (filter_gpc_get is called over current filter)
+	# Parameter that are not submitted, will not be modified
+	case FILTER_ACTION_PARSE_ADD:
+		log_event( LOG_FILTERING, 'view_all_set.php: Parse incremental filter values' );
 		$t_setting_arr = filter_gpc_get( $t_setting_arr );
-
 		break;
-	# This is when we want to copy another query from the
-	# database over the top of our current one
-	case '3':
-		log_event( LOG_FILTERING, 'view_all_set.php: Copy another query from database' );
 
-		$t_filter_string = filter_db_get_filter( $f_source_query_id );
-		# If we can use the query that we've requested,
-		# grab it. We will overwrite the current one at the
-		# bottom of this page
-		$t_setting_arr = filter_deserialize( $t_filter_string );
-		if( false === $t_setting_arr ) {
-			# couldn't deserialize, if we were trying to use the filter, clear it and reload
-			gpc_clear_cookie( 'view_all_cookie' );
-			error_proceed_url( 'view_all_set.php?type=0' );
-			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
-			exit; # stop here
+	# Fetch a stored filter from database
+	case FILTER_ACTION_LOAD:
+		log_event( LOG_FILTERING, 'view_all_set.php: Load stored filter' );
+
+		$t_setting_arr = filter_get( $f_source_query_id, null );
+		if( null === $t_setting_arr ) {
+			# couldn't get the filter, if we were trying to use the filter, clear it and reload
+			error_proceed_url( 'view_all_set.php?type=' . FILTER_ACTION_RESET );
+			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+			exit;
 		} else {
-			$t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
+			$t_setting_arr['_source_query_id'] = $f_source_query_id;
 		}
-		# Store the source query id to select the correct filter in the drop down.
-		$t_setting_arr['_source_query_id'] = $f_source_query_id;
 		break;
-	case '4':
-		# Generalise the filter
+
+	# Generalise the filter
+	case FILTER_ACTION_GENERALIZE:
 		log_event( LOG_FILTERING, 'view_all_set.php: Generalise the filter' );
 
 		$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID]			= array( META_FILTER_ANY );
@@ -194,19 +176,8 @@ switch( $f_type ) {
 			}
 		}
 		$t_setting_arr['custom_fields'] = $t_custom_fields_data;
+		break;
 
-		break;
-	case '5':
-		# Just set the search string value (filter_gpc_get is called over current filter)
-		log_event( LOG_FILTERING, 'view_all_set.php: Search Text' );
-		$t_setting_arr = filter_gpc_get( $t_setting_arr );
-		break;
-	case '6':
-		# Just set the view_state (simple / advanced) value. (filter_gpc_get is called over current filter)
-		log_event( LOG_FILTERING, 'view_all_set.php: View state (simple/advanced)' );
-		$t_setting_arr = filter_gpc_get( $t_setting_arr );
-
-		break;
 	default:
 		# does nothing. catch all case
 		log_event( LOG_FILTERING, 'view_all_set.php: default - do nothing' );
@@ -215,28 +186,34 @@ switch( $f_type ) {
 
 $t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
-$t_settings_string = filter_serialize( $t_setting_arr );
-
 # If only using a temporary filter, don't store it in the database
-if( !$f_temp_filter ) {
-	# Store the filter string in the database: its the current filter, so some values won't change
-	$t_project_id = helper_get_current_project();
-	$t_project_id = ( $t_project_id * -1 );
-	$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
-
-	# set cookie values
-	gpc_set_cookie( config_get_global( 'view_all_cookie' ), $t_row_id, time()+config_get_global( 'cookie_time_length' ), config_get_global( 'cookie_path' ) );
+if( !$t_temp_filter ) {
+	# get project if it was specified
+	$t_project_id = ( $f_project_id >= 0 ) ? $f_project_id : null;
+	# Store the filter in the database as the current filter for the project
+	filter_set_project_filter( $t_setting_arr, $t_project_id );
 }
 
-# redirect to print_all or view_all page
+# evaluate redirect
 if( $f_print ) {
 	$t_redirect_url = 'print_all_bug_page.php';
+} elseif( $f_summary ) {
+	$t_redirect_url = 'summary_page.php';
 } else {
 	$t_redirect_url = 'view_all_bug_page.php';
 }
 
-if( $f_temp_filter ) {
-	$t_token_id = token_set( TOKEN_FILTER, json_encode( $t_setting_arr ) );
-	$t_redirect_url = $t_redirect_url . '?filter=' . $t_token_id;
+if( $t_temp_filter ) {
+	# keeping the $t_previous_temporary_key, and using it to save back the filter
+	# The key inside the filter array may have been deleted as part of some actions
+	# Note, if we reset the key here, a new filter will be created after each filter change.
+	# This adds a lot of orphaned filters to session store, but would allow consistency
+	# through browser back button, for example.
+	if( $t_force_new_key ) {
+		$t_previous_temporary_key = null;
+		unset( $t_setting_arr['_temporary_key'] );
+	}
+	$t_temporary_key = filter_temporary_set( $t_setting_arr, $t_previous_temporary_key );
+	$t_redirect_url = $t_redirect_url . '?' . filter_get_temporary_key_param( $t_temporary_key );
 }
 print_header_redirect( $t_redirect_url );

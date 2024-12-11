@@ -22,7 +22,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding <programlisting>&lt;table&gt;</programlisting> elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -44,7 +44,7 @@
 
 				<para>
 					Any output here should be contained within its own
-					<programlisting>&lt;table&gt;</programlisting> element.
+					<filename>&lt;table&gt;</filename> element.
 				</para>
 
 				<itemizedlist>
@@ -71,7 +71,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -93,7 +93,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -191,13 +191,30 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
 					<listitem><para>&lt;Integer&gt;: New Status</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+        <blockquote id="dev.eventref.bug.action.bugupdateshowcustomfield">
+			<title>EVENT_UPDATE_BUG_SHOW_CUSTOM_FIELD (Default)</title>
+
+			<blockquote>
+				<para>
+				This event allows plugins to show a non-required custom field on the bug_change_status_page, when the bug/ticket is in a custom state (non-native).
+                 It is only possible to show fields, not to hide them trough the plugin.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Customfield ID</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -254,7 +271,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -330,7 +347,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -353,7 +370,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -376,7 +393,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -403,12 +420,33 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.noteaction.data">
+			<title>EVENT_BUGNOTE_DATA (Chained)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to preprocess bugnote contents.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;String&gt;: Bugnote text</para></listitem>
+					<listitem><para>&lt;String&gt;: Bug Id</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return value</title>
+					<listitem><para>&lt;String&gt;: Updated Bugnote text</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -426,6 +464,7 @@
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
 					<listitem><para>&lt;Integer&gt;: Bugnote ID</para></listitem>
+					<listitem><para>&lt;array&gt;: Files info (name, size, id), starting 2.23.0</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -442,7 +481,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>

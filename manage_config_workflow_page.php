@@ -139,7 +139,7 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 			$t_set = $t_flag ? 'checked="checked"' : '';
 			$t_value .= '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' /><span class="lbl"></span></label>';
 		} else {
-			$t_value .= $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;';
+			$t_value .= $t_flag ? icon_get( 'fa-check', 'fa-lg blue' ) : '&#160;';
 		}
 
 		# Add 'reopened' label
@@ -166,7 +166,7 @@ function section_begin( $p_section_name ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
-	echo '            <i class="ace-icon fa fa-random"></i>';
+	echo '            ' . icon_get( 'fa-random', 'ace-icon' );
 	echo $p_section_name;
 	echo '       </h4>';
 	echo '   </div>';
@@ -256,7 +256,7 @@ function threshold_begin( $p_section_name ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
-	echo '            <i class="ace-icon fa fa-sliders"></i>';
+	echo '            ' . icon_get( 'fa-sliders', 'ace-icon' );
 	echo $p_section_name;
 	echo '       </h4>';
 	echo '   </div>';
@@ -333,7 +333,7 @@ function access_begin( $p_section_name ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
-	echo '            <i class="ace-icon fa fa-lock"></i>';
+	echo '            ' . icon_get( 'fa-lock', 'ace-icon' );
 	echo $p_section_name;
 	echo '       </h4>';
 	echo '   </div>';
@@ -496,12 +496,12 @@ echo '</fieldset>';
 if( ALL_PROJECTS == $t_project ) {
 	$t_project_title = lang_get( 'config_all_projects' );
 } else {
-	$t_project_title = sprintf( lang_get( 'config_project' ), string_display( project_get_name( $t_project ) ) );
+	$t_project_title = sprintf( lang_get( 'config_project' ), string_display_line( project_get_name( $t_project ) ) );
 }
 
 echo '<div class="col-md-12 col-xs-12">' . "\n";
 echo '<div class="well">' . "\n";
-echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
+echo '<p class="bold">' . icon_get( 'fa-info-circle' ) . " $t_project_title</p>\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $t_project ) {
 	echo '<span class="' . COLOR_PROJECT . '">' . lang_get( 'colour_project' ) .'</span><br />';
@@ -522,8 +522,8 @@ if( '' <> $t_validation_result ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '<div class="widget-header widget-header-small">';
 	echo '	<h4 class="widget-title lighter">';
-	echo '		<i class="ace-icon fa fa-hand-o-right"></i>';
-	echo 		lang_get( 'validation' );
+	echo '		' . icon_get( 'fa-hand-o-right', 'ace-icon' );
+	echo lang_get( 'validation' );
 	echo '	</h4>';
 	echo '</div>';
 	echo '<div class="widget-body">';
@@ -553,33 +553,38 @@ echo "\n\n";
 access_begin( lang_get( 'access_levels' ) );
 access_row();
 access_end();
+echo '</div>';
 
 if( $g_can_change_flags ) {
-	echo '<input type="submit" class="btn btn-primary btn-white btn-round" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
-	echo '</form>' . "\n";
+	echo '<div class="col-md-12">';
+	echo '<button class="btn btn-primary btn-white btn-round">'
+		. lang_get( 'change_configuration' )
+		. "</button>\n";
 
+	# Deported submit button for separate form defined below
+	# included here to simplify page layout
 	if( 0 < count( $g_overrides ) ) {
-		echo '<div class="pull-right">';
-		echo '<form id="mail_config_action" method="post" action="manage_config_revert.php">' ."\n";
-		echo '<fieldset>' . "\n";
-		echo form_security_field( 'manage_config_revert' );
-		echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '" />';
-		echo '<input name="project" type="hidden" value="' . $t_project . '" />';
-		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'" />';
-		echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value=';
-		if( ALL_PROJECTS == $t_project ) {
-			echo lang_get( 'revert_to_system' );
-		} else {
-			echo lang_get( 'revert_to_all_project' );
-		}
-		echo '" />' . "\n";
-		echo '</fieldset>' . "\n";
-		echo '</form></div>' . "\n";
+		echo '<button form="mail_config_action" class="btn btn-primary btn-white btn-round">'
+			. lang_get( ALL_PROJECTS == $t_project ? 'revert_to_system' : 'revert_to_all_project' )
+			. "</button>\n";
 	}
-
-
-} else {
-	echo '</form>' . "\n";
+	echo '</div>';
 }
-echo '</div>';
+echo '</form>' . "\n";
+
+# Secondary form to revert config - submit button is defined above
+if( $g_can_change_flags && 0 < count( $g_overrides ) ) {
+?>
+<form id="mail_config_action" method="post" action="manage_config_revert.php">
+	<fieldset>
+		<?php echo form_security_field( 'manage_config_revert' ); ?>
+		<input name="revert" type="hidden" value="<?php echo implode( ',', $g_overrides ) ?>" />
+		<input name="project" type="hidden" value="<?php echo $t_project ?>" />
+		<input name="return" type="hidden" value="<?php echo string_attribute( form_action_self() ) ?>" />
+	</fieldset>
+</form>
+
+<?php
+}
+
 layout_page_end();

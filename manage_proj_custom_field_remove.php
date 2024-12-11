@@ -66,24 +66,22 @@ access_ensure_project_level( config_get( 'custom_field_link_threshold' ), $f_pro
 $t_definition = custom_field_get_definition( $f_field_id );
 
 # Confirm with the user
-helper_ensure_confirmed( lang_get( 'confirm_custom_field_unlinking' ) .
-	'<br />' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
-	lang_get( 'field_remove_button' ) );
+helper_ensure_confirmed(
+	sprintf(
+		lang_get( 'confirm_custom_field_unlinking' ),
+		string_attribute( $t_definition['name'] )
+	),
+	lang_get( 'field_remove_button' )
+);
 
 if( $f_return == 'custom_field' ) {
 	$t_redirect_url = 'manage_custom_field_edit_page.php?field_id=' . $f_field_id;
 } else {
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#customfields';
 }
 
 custom_field_unlink( $f_field_id, $f_project_id );
 
 form_security_purge( 'manage_proj_custom_field_remove' );
 
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin( 'manage_overview_page.php' );
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( $t_redirect_url );

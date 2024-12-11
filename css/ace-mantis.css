@@ -16,7 +16,7 @@
 */
 .footer .footer-inner {
     text-align: left;
-    left: 0px;
+    left: 0;
 }
 .nav-search .nav-search-input {
     width: 120px;
@@ -67,7 +67,11 @@
 }
 
 .width-13 {
-    width: 13%
+    width: 13%;
+}
+
+.width-15 {
+    width: 15%;
 }
 
 .padding-2 {
@@ -132,6 +136,13 @@
     margin-left:8px;
 }
 
+.margin-left-20 {
+    margin-left: 20px;
+}
+.rtl .margin-left-20 {
+    margin-right: 20px;
+}
+
 .login-container {
     width: 100%;
 }
@@ -141,18 +152,27 @@
 }
 
 .widget-toolbar > .widget-menu > a {
-    display: inline-block;
     font-size: 11px;
     padding: 0 5px;
     line-height: 20px;
 }
 
-.widget-toolbar > .widget-menu > .input-xs {
+.widget-toolbar > .widget-menu form {
+    display: inline-block;
+}
+.widget-toolbar > .widget-menu .input-xs {
     line-height: 20px;
 }
 
-.widget-toolbar > .widget-menu > .btn-xs {
+.widget-toolbar > .widget-menu .btn-xs {
+    font-size: 12px;
+    line-height: 1.5;
     padding: 2px 5px;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+    height: 30px;
 }
 
 .bold {
@@ -163,14 +183,26 @@ table {
     background-color: #ffffff !important;
 }
 
+/* Breaking lines when needed */
+td.column-description, td.bug-description,
+td.column-steps-to-reproduce, td.bug-steps-to-reproduce,
+td.column-additional-information, td.bug-additional-information,
+td.bugnote-note, td.column-notes,
+td.cftype-textarea {
+    overflow-wrap: anywhere;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    overflow-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 /* Disable printing of link urls */
 a:link:after, a:visited:after {
     content: normal !important;
-}
-
-/* Prevent horizontal scrolling when displaying db commands in install screen */
-pre {
-    word-break: break-all !important;
 }
 
 /* Disable theme backgrounds */
@@ -227,7 +259,6 @@ pre {
 
 .ace-nav .nav-avatar-40 {
     margin: -4px 8px 0 0;
-    border-radius: 100%;
     border: 2px solid #FFF;
     max-width: 40px;
     max-height: 40px;
@@ -266,27 +297,27 @@ pre {
 
 .input-sm {
     width: 90px !important;
-    display: inline-block !important;
+    /*display: inline-block !important;*/ /* removed because it messes with js hide/show capabilities */
     vertical-align: middle !important;
     padding: 4px 6px !important;
 }
 
 .input-xs {
     width: auto !important;
-    display: inline-block !important;
+    /*display: inline-block !important;*/ /* removed because it messes with js hide/show capabilities */
     vertical-align: middle !important;
     padding: 1px 2px !important;
 }
 
 select.input-xs {
     border-radius: 0;
-    padding: 0px;
+    padding: 0;
     height: 22px;
     line-height: 8px;
 }
 
 select.input-xs option, select.form-control.input-xs option {
-    padding: 0px 2px !important;
+    padding: 0 2px !important;
 }
 
 select[disabled] {
@@ -302,6 +333,22 @@ textarea.input-xs, select.input-xs[multiple] {
     width: auto !important;
 }
 
+.zoom-130 {
+    margin: 0 2px;
+    display: inline-block;
+    opacity: 0.85;
+    transition: all 0.1s;
+}
+.zoom-130:hover {
+    text-decoration: none;
+    opacity: 1;
+    transform: scale(1.3);
+}
+.well-xs {
+    padding: 4px 9px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
 .table-condensed2 > thead > tr > th,
 .table-condensed2 > tbody > tr > th,
 .table-condensed2 > tfoot > tr > th,
@@ -311,9 +358,18 @@ textarea.input-xs, select.input-xs[multiple] {
     padding: 1px 3px;
 }
 
+th > label,
+td > label {
+    font-size: 13px;
+}
+
+th > label {
+    font-weight: bold;
+}
+
 .scrollable-menu {
     height: auto;
-    max-height: 500px;
+    max-height: 435px;
     overflow-x: hidden;
 }
 
@@ -407,109 +463,156 @@ input.typeahead.scrollable ~ .tt-menu {
     overflow-y: auto;
 }
 
-/* dropzone styling */
+/* ------------------------------------------------------------------------
+ * Dropzone.js styling
+ */
 .dropzone {
     background: rgba(0, 0, 0, 0.03) none repeat scroll 0 0;
     border: 1px solid rgba(0, 0, 0, 0.03);
     min-height: 60px;
 }
 
-.dropzone .dz-preview, .dropzone-previews .dz-preview {
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
-    font-size: 14px;
-}
-
-.dropzone .dz-preview, .dropzone-previews .dz-preview {
-    background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
+.dropzone .dz-preview,
+.dropzone-previews .dz-preview {
+    background: white;
     border: 1px solid #acacac;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
+    max-width: 250px;
     display: inline-block;
+    vertical-align: top;
     margin: 17px;
     padding: 6px;
     position: relative;
-    vertical-align: top;
+    font-size: 14px;
 }
 
-.dropzone .dz-preview .dz-details, .dropzone-previews .dz-preview .dz-details {
-    background: #ebebeb none repeat scroll 0 0;
-    height: 100px;
-    margin-bottom: 22px;
-    padding: 5px;
-    position: relative;
-    width: 100px;
+.dropzone .dz-preview.dz-error,
+.dropzone-previews .dz-preview.dz-error {
+    background-color: #f2dede;
 }
 
-.dropzone .dz-preview .dz-details .dz-filename:not(:hover) {
+.dropzone .dz-image-preview > img,
+.dropzone-previews .dz-image-preview img {
+    margin: 5px auto;
+}
+
+/* No image preview when there is an error */
+.dropzone .dz-error img,
+.dropzone-previews .dz-error > img {
+    display: none;
+}
+
+/* Truncate file name with ellipsis if too long */
+.dropzone .dz-preview .dz-filename,
+.dropzone-previews .dz-preview .dz-filename {
+    margin: 0 5px;
+    font-weight: bold;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.dropzone .dz-preview .dz-details .dz-size, .dropzone-previews .dz-preview .dz-details .dz-size {
-    font-size: 14px;
-    bottom: -38px;
-    height: 28px;
-    left: 3px;
-    line-height: 28px;
-    position: absolute;
-}
-
-.dropzone .dz-preview .dz-details img, .dropzone-previews .dz-preview .dz-details img {
-    height: 100px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100px;
-}
-
-.dropzone a.dz-remove, .dropzone-previews a.dz-remove {
-    background: #d15b47 none repeat scroll 0 0;
-    border: medium none;
-    border-radius: 0;
-    color: #fff;
-    cursor: pointer;
-    font-size: 12px !important;
-}
-
-.dropzone a.dz-remove:hover, .dropzone-previews a.dz-remove:hover {
-    background: #b74635 none repeat scroll 0 0;
-    color: #fff;
-    text-decoration: none !important;
-}
-
-.dropzone .dz-preview .dz-success-mark, .dropzone-previews .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark, .dropzone-previews .dz-preview .dz-error-mark {
-    display: none;
-    font-size: 30px;
-    height: 40px;
-    position: absolute;
-    right: -10px;
-    text-align: center;
-    top: -10px;
-    width: 40px;
-}
-
-.dropzone .dz-preview .dz-error-mark, .dropzone-previews .dz-preview .dz-error-mark {
-    background-position: -268px -123px;
-    color: #ee162d;
-}
-
-.dropzone .dz-preview .dz-error-message, .dropzone-previews .dz-preview .dz-error-message {
-    background: rgba(245, 245, 245, 0.8) none repeat scroll 0 0;
+.dropzone .dz-preview.dz-error .dz-error-message,
+.dropzone-previews .dz-preview.dz-error .dz-error-message {
+    background: rgba(255, 255, 255, 0.6) none repeat scroll 0 0;
     color: #800;
-    display: none;
-    left: -20px;
-    max-width: 500px;
-    min-width: 140px;
-    padding: 8px 10px;
-    position: absolute;
-    top: -5px;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+    border-radius: unset;
+    margin: 5px auto;
+    padding: 6px 8px;
+    position: unset;
     z-index: 500;
 }
 
-.dropzone .progress {
-  margin-bottom: 10px;
+.dropzone .dz-preview.dz-error .dz-error-mark,
+.dropzone-previews .dz-preview.dz-error .dz-error-mark {
+    font-size: 30px;
+    color: #ee162d;
+    display: unset;
+    position: relative;
+    left: 0;
+    margin: auto 10px auto 0;
+    animation: none;
 }
+
+.dropzone .dz-preview .dz-error-message > span,
+.dropzone-previews .dz-preview .dz-error-message > span {
+    display: block;
+    text-align: left;
+    text-wrap: auto;
+}
+
+.dropzone .dz-preview .dz-error-message::after {
+    content: none;
+}
+
+.dropzone .progress {
+    margin-bottom: 10px;
+}
+
+.dropzone .dz-preview > a,
+.dropzone-previews .dz-preview > a {
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------------------------ */
 
 .btn-group .single-button-form {
 	margin: 0 1px 0 0;
+}
+
+.fa-xs-top {
+	font-size: 60%;
+	vertical-align: top;
+}
+
+.progress {
+    background:#bbb;
+}
+.progress.progress-large {
+    height: 32px;
+}
+.progress.progress-large[data-percent]:after {
+    line-height:32px;
+    font-size:18px;
+}
+
+hr {
+    /* Set to match body text color */
+    border-color: #393939;
+}
+
+/* Changelog and Roadmap items */
+ul.changelog, ul.roadmap {
+    list-style-type: none;
+    margin-left: 0;
+}
+ul.changelog > li, ul.roadmap > li {
+    margin-bottom: 4px;
+}
+
+/* Mantis 28826: Remove vertical lines for bordered tables. */
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.sidebar:not(.menu-min) {
+    min-width: 190px;
+    width: auto;
+}
+
+.sidebar.menu-min .nav-list > li > a > .menu-text {
+    width: max-content;
+    padding-right: 12px;
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -551,6 +654,10 @@ input.typeahead.scrollable ~ .tt-menu {
     .sidebar.menu-min + .main-content {
         margin-right: auto  !important;
         margin-left: 43px !important;
+    }
+
+    .sidebar:not(.min-width) {
+        min-width: auto;
     }
 
     .sidebar.compact, .sidebar.compact.navbar-collapse {
@@ -645,4 +752,3 @@ input.typeahead.scrollable ~ .tt-menu {
     }
 
 }
-

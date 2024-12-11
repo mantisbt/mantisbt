@@ -60,7 +60,7 @@ layout_page_begin( 'main_page.php' );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-edit"></i>
+					<?php print_icon( 'fa-edit', 'ace-icon' ); ?>
 					<?php echo lang_get( 'add_news_title' ) ?>
 				</h4>
 			</div>
@@ -132,7 +132,7 @@ if( news_get_count( helper_get_current_project(), current_user_is_administrator(
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-edit"></i>
+					<?php print_icon( 'fa-edit', 'ace-icon' ); ?>
 					<?php echo lang_get( 'edit_or_delete_news_title' ) ?>
 				</h4>
 			</div>
@@ -179,7 +179,7 @@ if( news_get_count( helper_get_current_project(), current_user_is_administrator(
 		</div>
 		</div>
 			<div class="widget-toolbox padding-8 clearfix">
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'submit_button' ) ?>" />
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'submit' ) ?>" />
 			</div>
 		</div>
 		</div>

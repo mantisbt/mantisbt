@@ -25,21 +25,22 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Traditional Chinese (中文（繁體）‎)
+/** Traditional Chinese (中文（繁體）)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Cwlin0416
  * @author Kly
+ * @author Lionpancake
  * @author Mark85296341
  */
 
@@ -49,9 +50,34 @@ $s_plugin_format_config = '設置';
 $s_plugin_format_process_text = '文字處理';
 $s_plugin_format_process_text_warning_notice = '請勿關閉此項目，除非您已明白可能導致的問題。當此項目關閉時可能導致跨網站指令碼 (XSS) 攻擊。';
 $s_plugin_format_process_urls = 'URL 處理';
-$s_plugin_format_process_buglinks = 'MantisBT 內部連結 (問題/問題說明)';
-$s_plugin_format_process_buglinks_info = '您的設置定義 <em>問題</em> 標籤為 "<literal>%s</literal>" 且 <em>問題說明</em> 標籤為 "<literal>%s</literal>"';
-$s_plugin_format_process_markdown = 'Markdown 標記語言處理中';
+$s_plugin_format_process_buglinks = 'MantisBT 內部連結 (問題/問題註釋)';
+$s_plugin_format_process_buglinks_info = '您的設置定義 <em>問題</em> 標籤為 "%s" 且 <em>問題註釋</em> 標籤為 "%s"';
+$s_plugin_format_process_markdown = 'Markdown 處理';
 $s_plugin_format_process_markdown_info = '因樣式能由 Markdown 支援，文字格式語法設計可轉換為 HTML。';
 $s_plugin_format_enabled = '開啟';
 $s_plugin_format_disabled = '關閉';
+$s_plugin_format_syntax_highlighting = '程式碼區塊的語法醒目標示';
+$s_plugin_format_syntax_highlighting_info = '語法醒目標示僅在「Markdown 處理」生效時有用。';
+$s_plugin_format_syntax_highlighting_theme = '程式碼區塊主題';
+$s_plugin_format_syntax_highlighting_plugins = '程式碼區塊選項';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = '複製到剪貼簿';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = '顯示一個用於將程式碼區塊的內容複製到剪貼簿的小按鈕。';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = '複製';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ 已複製';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = '按下 Ctrl+C 來複製';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = '顯示語言';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = '顯示程式碼區塊裡包含的語言';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = '行號';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = '顯示行號。';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = '顯示空格';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = '顯示隱藏字元（例如：縮排字元）';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = '標準化空格';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = '去掉程式碼區塊的所有前端和尾端空格。這會另外刪除各行的額外縮排和尾端空格。';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = '配對大括號';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = '滑鼠懸停時顯示括號配對，包括「彩虹括號」（每對括號各有自己的顏色）。';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = '擴充的差異突顯（diff）';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = '為行的背景著色，而不是文字。除了「diff」之外，還可使用特定於語言的顏色（例如：「diff-javascript」）。';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = '視覺化 CSS 色彩';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = '在顏色定義前面（例如 "#000" 之前）顯示一個色彩小方塊。';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = '一些 CSS 定義的預覽器';
+$s_plugin_format_syntax_highlighting_plugin_previewers_desc = '將滑鼠懸停在「角度」、「顏色」、「漸層」、「緩動」、或「時間」定義上時，可出現預覽器。';

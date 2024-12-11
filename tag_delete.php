@@ -56,4 +56,4 @@ tag_delete( $f_tag_id );
 
 form_security_purge( 'tag_delete' );
 
-print_successful_redirect( 'manage_tags_page.php' );
+print_header_redirect( 'manage_tags_page.php' );

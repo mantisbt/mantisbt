@@ -11,7 +11,7 @@
 
 		<para>The MantisBT database schema (excluding plugins) is described in
 			the Entity-Relationship diagram (ERD) below. There is also a
-			<ulink url="http://mantisbt.org/docs/erd/">
+			<ulink url="https://mantisbt.org/docs/erd/">
 				PDF version available for download</ulink>.
 		</para>
 

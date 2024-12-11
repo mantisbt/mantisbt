@@ -46,7 +46,7 @@ class IssueNoteTest extends SoapBase {
 	 * @return void
 	 */
 	public function testAddNote() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueNoteTest.testAddNote' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -98,7 +98,7 @@ class IssueNoteTest extends SoapBase {
 	public function testAddNoteWithTimeTracking() {
 		$this->skipIfTimeTrackingIsNotEnabled();
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueNoteTest.testAddNoteWithTimeTracking' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -139,7 +139,7 @@ class IssueNoteTest extends SoapBase {
 	 * @return void
 	 */
 	public function testAddThenUpdateThenDeleteNote() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueNoteTest.testAddThenUpdateThenDeleteNote' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -187,7 +187,7 @@ class IssueNoteTest extends SoapBase {
 	 * @return void
 	 */
 	public function testAddNoteWithNoText() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueNoteTest.testAddNote' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 

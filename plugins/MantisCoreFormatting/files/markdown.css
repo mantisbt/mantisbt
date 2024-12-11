@@ -1,0 +1,39 @@
+/* Adjust color of inline code */
+code {
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+/*
+ * Increases the distance between a code block
+ * and its previous line within a list.
+ */
+li > pre {
+    margin-top: .4rem;
+}
+
+/* quotes */
+blockquote {
+    padding: 0.13em 1em;
+    color: rgb(119,119,119);
+    border-left: 0.25em solid #C0C0C0;
+    font-size: inherit;
+}
+
+/*
+ * Monospace font for Prism syntax highlighting.
+ *
+ * A user-defined font family (set under My Account > Preferences | Font Family)
+ * will break the monospace font used for Prism-highlighted code blocks, by
+ * inserting a style which applies the user-defined font to all elements
+ * including the <span> elements which wrap the language tokens within the
+ * <code> elements.
+ * @see layout_user_font_preference()
+ *
+ * This rule reapplies (forces) the monospace font to the code blocks, as per
+ * its original definition in bootstrap.css.
+ * @see https://github.com/mantisbt/mantisbt/blob/release-2.26.2/css/bootstrap-3.4.1.css#L1529-L1534
+ */
+pre > code span {
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}

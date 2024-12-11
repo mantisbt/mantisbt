@@ -65,7 +65,7 @@ function get_section_begin_apr( $p_section_name ) {
 	$t_output .= '<div class="widget-box widget-color-blue2">';
 	$t_output .= '   <div class="widget-header widget-header-small">';
 	$t_output .= '        <h4 class="widget-title lighter uppercase">';
-	$t_output .= '            <i class="ace-icon fa fa-lock"></i>';
+	$t_output .= '            ' . icon_get( 'fa-lock', 'ace-icon' );
 	$t_output .= $p_section_name;
 	$t_output .= '       </h4>';
 	$t_output .= '   </div>';
@@ -99,10 +99,10 @@ function get_section_begin_apr( $p_section_name ) {
 function get_capability_row( $p_caption, $p_access_level ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
-	$t_output = '<tr><td>' . string_display( $p_caption ) . '</td>';
+	$t_output = '<tr><td>' . string_display_line( $p_caption ) . '</td>';
 	foreach( $t_access_levels as $t_access_level ) {
 		if( $t_access_level >= (int)$p_access_level ) {
-			$t_value = '<i class="fa fa-check fa-lg blue"></i>';
+			$t_value = icon_get( 'fa-check', 'fa-lg blue' );
 		} else {
 			$t_value = '&#160;';
 		}

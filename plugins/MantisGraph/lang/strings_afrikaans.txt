@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Afrikaans (Afrikaans)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -42,5 +42,3 @@
  */
 
 $s_plugin_MantisGraph_config = 'Voorkeure';
-$s_plugin_MantisGraph_enabled = 'Aangeskakel';
-$s_plugin_MantisGraph_disabled = 'Afgeskakel';

@@ -9,8 +9,8 @@ docbook/*/*/install
 docbook/*/tmp
 !docbook/Admin_Guide/*/config
 
-# Build output
-build/
+# Local docbook from release tarballs
+doc/en-US
 
 # Untracked plugins
 plugins/*
@@ -32,11 +32,12 @@ plugins/*
 *.kdev4
 nbproject/
 
+# Python bytecode
+__pycache__/
+*.py[cod]
+
 # MacOS
 .DS_Store
-
-# IIS7
-web.config
 
 # Libraries (outdated or installed via Composer)
 library/FirePHPCore
@@ -51,6 +52,10 @@ api/rest/swagger
 # Composer
 /vendor/
 composer.phar
+
+# PHPUnit
+.phpunit.result.cache
+
 
 # Settings below are for convenience when switching branches on Dev machines
 

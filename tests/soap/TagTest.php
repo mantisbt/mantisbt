@@ -90,7 +90,7 @@ class TagTest extends SoapBase {
 			$this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
 			self::fail( 'Expected an error' );
 		} catch ( SoapFault $e ) {
-			$this->assertContains( 'Invalid tag name', $e->getMessage() );
+			$this->assertStringContainsString( 'Invalid tag name', $e->getMessage() );
 		}
 	}
 
@@ -103,7 +103,7 @@ class TagTest extends SoapBase {
 			$this->client->mc_tag_delete( $this->userName, $this->password, -1 );
 			self::fail( 'Expected an error' );
 		} catch ( SoapFault $e ) {
-			$this->assertContains( 'No tag with id', $e->getMessage() );
+			$this->assertStringContainsString( 'No tag with id', $e->getMessage() );
 		}
 	}
 
@@ -136,7 +136,7 @@ class TagTest extends SoapBase {
 			$this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
 			self::fail( 'Expected an error' );
 		} catch ( SoapFault $e ) {
-			$this->assertContains( 'A tag with the same name already exists', $e->getMessage() );
+			$this->assertStringContainsString( 'A tag with the same name already exists', $e->getMessage() );
 		}
 	}
 
@@ -153,7 +153,7 @@ class TagTest extends SoapBase {
 		$this->deleteTagAfterRun( $t_tag_id );
 
 		# create issue
-		$t_issue_to_create = $this->getIssueToAdd( 'testTestTagsOnIssue' );
+		$t_issue_to_create = $this->getIssueToAdd();
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_create );
 		$this->deleteAfterRun( $t_issue_id );
 

@@ -25,28 +25,32 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Serbian (Latin script) (srpski (latinica)‎)
+/** Serbian (Latin script) (srpski (latinica))
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Rancher
+ * @author Zexmax
  */
 
-$s_plugin_format_title = 'Oblikovanje za MantisBT';
+$s_plugin_format_title = 'Formatiranje za MantisBT';
 $s_plugin_format_description = 'Zvanični dodatak za obradu i oblikovanje teksta.';
-$s_plugin_format_config = 'Podešavanje';
+$s_plugin_format_config = 'Konfiguracija';
 $s_plugin_format_process_text = 'Obrada teksta';
-$s_plugin_format_process_text_warning_notice = 'Ne isključujte ako niste sigurni šta radite. U isključenom stanju, mogući su međumesni napadi (XSS) na mrežnom mestu.';
-$s_plugin_format_process_urls = 'Obrada adresa';
-$s_plugin_format_process_buglinks = 'MantisBT veze (zadaci/komentari)';
+$s_plugin_format_process_text_warning_notice = 'Ne isključujte se osim ako zaista ne znate šta radite. U isključenom stanju, mogući su napadi skriptovanja na više lokacija (XSS).';
+$s_plugin_format_process_urls = 'Obrada URL linka';
+$s_plugin_format_process_buglinks = 'MantisBT interne veze (problemi i beleške)';
+$s_plugin_format_process_buglinks_info = 'Vaša konfiguracija definiše oznaku <em>Problem</em> kao "%s" i oznaku <em>Beleška o problemu</em> kao "%s"';
+$s_plugin_format_process_markdown = 'Markdown obrada';
+$s_plugin_format_process_markdown_info = 'Stil sa podrškom za Markdovn, sintaksa oblikovanja teksta dizajnirana tako da se može konvertovati u HTML.';
 $s_plugin_format_enabled = 'Uključeno';
 $s_plugin_format_disabled = 'Isključeno';

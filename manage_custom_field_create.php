@@ -56,18 +56,12 @@ $f_name	= gpc_get_string( 'name' );
 
 $t_field_id = custom_field_create( $f_name );
 
+form_security_purge( 'manage_custom_field_create' );
+
 if( ON == config_get( 'custom_field_edit_after_create' ) ) {
 	$t_redirect_url = 'manage_custom_field_edit_page.php?field_id=' . $t_field_id;
 } else {
 	$t_redirect_url = 'manage_custom_field_page.php';
 }
 
-form_security_purge( 'manage_custom_field_create' );
-
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin( 'manage_overview_page.php' );
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( $t_redirect_url );

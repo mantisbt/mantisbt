@@ -74,12 +74,12 @@ require_api( 'lang_api.php' );
 	<div id="bugnote_add" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-comment"></i>
+				<?php print_icon( 'fa-comment', 'ace-icon' ); ?>
 				<?php echo lang_get( 'add_bugnote_title' ) ?>
 			</h4>
 			<div class="widget-toolbar">
 				<a data-action="collapse" href="#">
-					<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+					<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 				</a>
 			</div>
 		</div>
@@ -112,10 +112,10 @@ require_api( 'lang_api.php' );
 <?php }?>
 
 			<tr>
-				<th class="category" width="15%">
+				<th class="category width-15">
 					<?php echo lang_get( 'bugnote' ) ?>
 				</th>
-				<td width="85%">
+				<td class="width-85">
 					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" rows="7"></textarea>
 				</td>
 			</tr>
@@ -144,20 +144,20 @@ require_api( 'lang_api.php' );
 
 	if( $t_allow_file_upload ) {
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
-		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-
-		$t_attach_style = ( $t_default_bugnote_view_status != VS_PUBLIC ) ? 'display: none;' : '';
+		$t_max_file_size = file_get_max_file_size();
 ?>
-			<tr id="bugnote-attach-files" style="<?php echo $t_attach_style ?>">
+			<tr id="bugnote-attach-files">
 				<th class="category">
 					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
 					<br />
 					<?php print_max_filesize( $t_max_file_size ); ?>
 				</th>
 				<td>
+					<?php print_dropzone_template() ?>
 					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
-						<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
+						<?php print_icon( 'fa-cloud-upload', 'upload-icon ace-icon blue fa-3x' ); ?>
+						<br>
 						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
 						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
 					</div>

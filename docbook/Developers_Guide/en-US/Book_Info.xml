@@ -7,7 +7,7 @@
 	<title>Developers Guide</title>
 	<subtitle>Reference for developers and community members</subtitle>
 	<productname>MantisBT</productname>
-	<productnumber>2.0</productnumber>
+	<productnumber>2.x</productnumber>
 	<abstract>
 		<para>
 			This book is targeted at MantisBT developers, contributors and

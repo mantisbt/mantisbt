@@ -23,7 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( __FILE__ ) . '/mc_core.php' );
+require_once( __DIR__ . '/mc_core.php' );
 
 /**
  * Get the project attachment with the specified id.

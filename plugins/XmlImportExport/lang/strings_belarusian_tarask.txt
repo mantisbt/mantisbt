@@ -25,15 +25,15 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца))
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -41,6 +41,7 @@
  * @author EugeneZelenko
  * @author Jim-by
  * @author Red Winged Duck
+ * @author Renessaince
  */
 
 $s_plugin_XmlImportExport_title = 'Імпарт/Экспарт праблемаў';
@@ -51,7 +52,7 @@ $s_plugin_XmlImportExport_config_title = 'Канфігурацыя ўзроўн�
 $s_plugin_XmlImportExport_import_threshold = 'Імпарт праблемаў';
 $s_plugin_XmlImportExport_export_threshold = 'Экспарт праблемаў';
 $s_plugin_XmlImportExport_action_update = 'Абнавіць';
-$s_plugin_XmlImportExport_importing_in_project = 'Імпартаваньне праблемаў у праект:';
+$s_plugin_XmlImportExport_importing_in_project = 'Імпартаваньне праблемаў у праект: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Налады імпарту';
 $s_plugin_XmlImportExport_cross_references = 'Узаемныя спасылкі';
 $s_plugin_XmlImportExport_default_strategy = 'Стратэгія канвэртацыі па змоўчваньні:';

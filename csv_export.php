@@ -47,6 +47,8 @@ require_api( 'print_api.php' );
 
 auth_ensure_user_authenticated();
 
+access_ensure_project_level( config_get( 'export_issues_threshold' ) );
+
 helper_begin_long_process();
 
 $t_nl = csv_get_newline();
@@ -55,13 +57,10 @@ $t_sep = csv_get_separator();
 # Get current filter
 $t_filter = filter_get_bug_rows_filter();
 
-# Get the query clauses
-$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter );
+$t_filter_query = new BugFilterQuery( $t_filter );
+$t_filter_query->set_limit( EXPORT_BLOCK_SIZE );
 
-# Get the total number of bugs that meet the criteria.
-$p_bug_count = filter_get_bug_count( $t_query_clauses, /* pop_params */ false );
-
-if( 0 == $p_bug_count ) {
+if( 0 == $t_filter_query->get_bug_count() ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
@@ -91,7 +90,7 @@ $t_header = ob_get_clean();
 # Fixed for a problem in Excel where it prompts error message "SYLK: File Format Is Not Valid"
 # See Microsoft Knowledge Base Article - 323626
 # http://support.microsoft.com/default.aspx?scid=kb;en-us;323626&Product=xlw
-$t_first_three_chars = utf8_substr( $t_header, 0, 3 );
+$t_first_three_chars = mb_substr( $t_header, 0, 3 );
 if( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
 	$t_header = str_replace( 'ID' . $t_sep, 'Id' . $t_sep, $t_header );
 }
@@ -106,7 +105,8 @@ do {
 	bug_clear_cache_all();
 
 	# select a new block
-	$t_result = filter_get_bug_rows_result( $t_query_clauses, EXPORT_BLOCK_SIZE, $t_offset, /* pop params */ false );
+	$t_filter_query->set_offset( $t_offset );
+	$t_result = $t_filter_query->execute();
 	$t_offset += EXPORT_BLOCK_SIZE;
 
 	# Keep reading until reaching max block size or end of result set

@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Czech (čeština)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -50,7 +50,7 @@ $s_plugin_format_process_text = 'Zpracování textu';
 $s_plugin_format_process_text_warning_notice = 'Nevypínejte, aniž opravdu víte, co děláte. Ve vypnutém stavu hrozí útoky typu „cross site scripting“ (XSS).';
 $s_plugin_format_process_urls = 'Zpracování URL';
 $s_plugin_format_process_buglinks = 'Interní odkazy MantisBT (záznamy a poznámky k záznamům)';
-$s_plugin_format_process_buglinks_info = 'Vaše konfigurace definuje štítek <em>záznamu</em> jako "<literal>%s</literal>"a štítek <em>poznámky k záznamu</em> jako "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = 'Vaše konfigurace definuje štítek <em>záznamu</em> jako "%s"a štítek <em>poznámky k záznamu</em> jako "%s"';
 $s_plugin_format_process_markdown = 'Markdown zpracovávání';
 $s_plugin_format_process_markdown_info = 'Úprava s podporou značkovacího jazyka Markdown, syntaxe formátování textu navržená tak, aby mohla být převedena na HTML.';
 $s_plugin_format_enabled = 'Zapnuto';

@@ -49,7 +49,6 @@ billing_ensure_reporting_access( $f_project_id );
 $t_show_cost = ON == config_get( 'time_tracking_with_billing' ) && $f_cost != 0;
 
 $t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cost, $f_include_subprojects );
-$t_show_realname = config_get( 'show_realname' ) == ON;
 
 header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
 header( 'Pragma: public' );
@@ -61,13 +60,7 @@ echo excel_format_column_title( lang_get( 'issue_id' ) );
 echo excel_format_column_title( lang_get( 'project_name' ) );
 echo excel_format_column_title( lang_get( 'category' ) );
 echo excel_format_column_title( lang_get( 'summary' ) );
-
-if( $t_show_realname ) {
-	echo excel_format_column_title( lang_get( 'realname' ) );
-} else {
-	echo excel_format_column_title( lang_get( 'username' ) );
-}
-
+echo excel_format_column_title( lang_get( 'username' ) );
 echo excel_format_column_title( lang_get( 'timestamp' ) );
 echo excel_format_column_title( lang_get( 'minutes' ) );
 echo excel_format_column_title( lang_get( 'time_tracking_time_spent' ) );
@@ -85,13 +78,7 @@ foreach( $t_billing_rows as $t_billing ) {
 	echo excel_prepare_string( $t_billing['project_name'] );
 	echo excel_prepare_string( $t_billing['bug_category'] );
 	echo excel_prepare_string( $t_billing['bug_summary'] );
-
-	if( $t_show_realname ) {
-		echo excel_prepare_string( $t_billing['reporter_realname'] );
-	} else {
-		echo excel_prepare_string( $t_billing['reporter_username'] );
-	}
-
+	echo excel_prepare_string( $t_billing['reporter_name'] );
 	echo excel_prepare_string( date( $t_date_format, $t_billing['date_submitted'] ) );
 	echo excel_prepare_number( $t_billing['minutes'] );
 	echo excel_prepare_string( $t_billing['duration'] );

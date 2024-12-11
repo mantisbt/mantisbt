@@ -55,6 +55,7 @@ if( ON != config_get( 'relationship_graph_enable' ) ) {
 $f_bug_id		= gpc_get_int( 'bug_id' );
 $f_type			= gpc_get_string( 'graph', 'relation' );
 $f_orientation	= gpc_get_string( 'orientation', config_get( 'relationship_graph_orientation' ) );
+$f_show_summary	= gpc_get_bool( 'summary', false );
 
 $t_bug = bug_get( $f_bug_id, true );
 
@@ -66,9 +67,9 @@ $t_graph_relation = ( 'relation' == $f_type );
 $t_graph_horizontal = ( 'horizontal' == $f_orientation );
 
 if( $t_graph_relation ) {
-	$t_graph = relgraph_generate_rel_graph( $f_bug_id );
+	$t_graph = relgraph_generate_rel_graph( $f_bug_id, $f_show_summary );
 } else {
-	$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal );
+	$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal, $f_show_summary );
 }
 
 relgraph_output_image( $t_graph );

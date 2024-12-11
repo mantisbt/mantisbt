@@ -141,7 +141,7 @@ class IssueRelationshipAddCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		if( $this->sourceIssue->project_id != helper_get_current_project() ) {
@@ -161,12 +161,15 @@ class IssueRelationshipAddCommand extends Command {
 	/**
 	 * Get relationship type id from relationship type reference.
 	 *
-	 * @param array The relationship type reference with id, name or both.
-	 * @return integer relationship type id.
+	 * @param array $p_relationship_type The relationship type reference with id, name or both.
+	 *
+	 * @return int relationship type id.
+	 * @throws ClientException if type is not valid
 	 */
 	private function getRelationTypeId( $p_relationship_type ) {
 		if( isset( $p_relationship_type['id'] ) ) {
 			$t_type_id = (int)$p_relationship_type['id'];
+			relationship_type_ensure_valid( $t_type_id );
 		} else if( isset( $p_relationship_type['name'] ) ) {
 			$t_type_id = relationship_get_id_from_api_name( $p_relationship_type['name'] );
 		} else {

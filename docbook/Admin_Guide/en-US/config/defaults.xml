@@ -9,8 +9,8 @@
 		<varlistentry>
 			<term>$g_default_new_account_access_level</term>
 			<listitem>
-				<para>This is the default access level users are given when their
-					account is created by email. The default access level is REPORTER.
+				<para>Default access level assigned to new sign-up users.
+					The default access level is REPORTER.
 					Look in constant_inc.php for other values.
 				</para>
 			</listitem>
@@ -20,6 +20,33 @@
 			<listitem>
 				<para>The default viewing status for new projects (VS_PUBLIC or
 					VS_PRIVATE). The default is VS_PUBLIC.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_description</term>
+			<listitem>
+				<para>
+				Default value for bug description field used on bug report page.
+				Default is empty description.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_additional_info</term>
+			<listitem>
+				<para>
+				Default value for bug additional info field used on bug report page.
+				Default is empty.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_steps_to_reproduce</term>
+			<listitem>
+				<para>
+				Default value for bug steps to reproduce field used on bug report page.
+				Default is empty.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -196,7 +223,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_default_email_on_new$g_default_email_on_assigned$g_default_email_on_feedback$g_default_email_on_resolved$g_default_email_on_closed</term>
+			<term>$g_default_email_on_new, $g_default_email_on_assigned, $g_default_email_on_feedback, $g_default_email_on_resolved, $g_default_email_on_closed</term>
 			<listitem>
 				<para>Default user preferences to enable receiving emails when a
 					bug is set to the corresponding status. This option only has an
@@ -222,16 +249,23 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_default_email_on_status$g_default_email_on_priority</term>
+			<term>$g_default_email_on_status</term>
 			<listitem>
 				<para>Default user preferences to enable receiving emails when
-					status or priority is changed. Default is ON. Note that this option
-					is not implemented.
+					status is changed. Default is OFF.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_default_email_on_new_minimum_severity$g_default_email_on_assigned_minimum_severity$g_default_email_on_feedback_minimum_severity$g_default_email_on_resolved_minimum_severity$g_default_email_on_closed_minimum_severity$g_default_email_on_reopened_minimum_severity$g_default_email_on_bugnote_minimum_severity</term>
+			<term>$g_default_email_on_priority</term>
+			<listitem>
+				<para>Default user preferences to enable receiving emails when
+					priority is changed. Default is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_new_minimum_severity, $g_default_email_on_assigned_minimum_severity, $g_default_email_on_feedback_minimum_severity, $g_default_email_on_resolved_minimum_severity, $g_default_email_on_closed_minimum_severity, $g_default_email_on_reopened_minimum_severity, $g_default_email_on_bugnote_minimum_severity</term>
 			<listitem>
 				<para>Default user preferences to enable filtering based on issue
 					severity. These correspond to the email_on_&lt;status&gt; settings.
@@ -249,13 +283,109 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_default_email_on_status_minimum_severity$g_default_email_on_priority_minimum_severity</term>
+			<term>$g_default_email_on_status_minimum_severity</term>
+			<listitem>
+				<para>Default user preference to enable filtering based on issue
+					severity. These corresponds to the email_on_status settings. Default is 'any'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_priority_minimum_severity</term>
 			<listitem>
 				<para>Default user preferences to enable filtering based on issue
-					severity. These correspond to the email_on_status and
-					email_on_priority settings. Default is 'any'. Note that this option
-					is not yet implemented.
+					severity. These corresponds to the email_on_priority settings. Default is 'any'.
 				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_relationship_clone</term>
+			<listitem>
+				<para>Default relationship between a new bug and its parent when cloning it</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_relationship</term>
+			<listitem>
+				<para>Default for new bug relationships</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_sticky_issues</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_new</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_assigned</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_feedback</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_resolved</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_closed</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_new_minimum_severity</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_assigned_minimum_severity</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_feedback_minimum_severity</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_resolved_minimum_severity</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_closed_minimum_severity</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_reopened_minimum_severity</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_bugnote_limit</term>
+			<listitem>
+				<para>TODO</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

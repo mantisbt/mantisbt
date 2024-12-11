@@ -37,19 +37,26 @@ auth_ensure_user_authenticated();
 auth_reauthenticate();
 
 $f_token_name = gpc_get_string( 'token_name' );
-
 $t_user_id = auth_get_current_user_id();
 
-user_ensure_unprotected( $t_user_id );
+$t_data = array(
+	'query' => array(
+		'user_id' => $t_user_id,
+	),
+	'payload' => array(
+		'name' => $f_token_name,
+	),
+);
 
-if( !api_token_can_create() ) {
-	access_denied();
-}
+$t_command = new UserTokenCreateCommand( $t_data );
+$t_result = $t_command->execute();
 
-$t_token = api_token_create( $f_token_name, $t_user_id );
+$t_token = $t_result['token'];
+
 $t_disclose_message = lang_get( 'api_token_disclose_message' );
 $t_display_once_message = lang_get( 'api_token_displayed_once' );
 
+form_security_purge( 'create_api_token_form' );
 
 layout_page_header( lang_get( 'api_tokens_link' ) );
 

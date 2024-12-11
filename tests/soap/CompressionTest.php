@@ -47,7 +47,7 @@ class CompressionTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetIssueWithCompressionEnabled() {
-		$t_issue_to_add = $this->getIssueToAdd( 'CompressionTest.testUpdateSummary' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 

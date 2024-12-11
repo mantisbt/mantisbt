@@ -71,7 +71,22 @@
 		<varlistentry>
 			<term>$g_create_short_url</term>
 			<listitem>
-				<para>The service to use to create a short URL.  The %s will be replaced by the long URL.  By default http://www.tinyurl service is used to shorten URLs.</para>
+				<para>The service to use to create a short URL.  The %s will be replaced by the long URL.  By default https://www.tinyurl service is used to shorten URLs.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_filters</term>
+			<listitem>
+				<para>Controls the display of the filter pages.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_use_dynamic_filters</term>
+			<listitem>
+				<para>This switch enables the use of AJAX to dynamically load and create filter
+					form controls upon request. This method will reduce the amount of data that
+					needs to be transferred upon each page load dealing with filters and thus
+					will result in speed improvements and bandwidth reduction.</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

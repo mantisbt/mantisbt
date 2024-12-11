@@ -18,10 +18,10 @@ print_manage_menu( 'manage_plugin_page.php' );
 <fieldset>
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
-    <h4 class="widget-title lighter">
-        <i class="ace-icon fa fa-exchange"></i>
-        <?php echo plugin_lang_get( 'config_title' ) ?>
-    </h4>
+	<h4 class="widget-title lighter">
+		<?php print_icon( 'fa-exchange', 'ace-icon' ); ?>
+		<?php echo plugin_lang_get( 'config_title' ) ?>
+	</h4>
 </div>
 
 <?php echo form_security_field( 'plugin_XmlImportExport_config' ) ?>

@@ -44,7 +44,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp  Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id    An user identifier.
+	 * @param integer $p_user_id    A user identifier.
 	 * @param integer $p_issue_id   A issue identifier.
 	 * @param integer $p_old_status Old status value of issue.
 	 * @param integer $p_new_status New status value of issue.
@@ -96,7 +96,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
                 $t_html = $this->html_start( 'fa-thumbs-o-up' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_resolved' ),
-					user_get_name( $this->user_id ),
+					prepare_user_name( $this->user_id ),
 					string_get_bug_view_link( $this->issue_id )
 				);
 				break;
@@ -104,7 +104,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
                 $t_html = $this->html_start( 'fa-power-off' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_closed' ),
-					user_get_name( $this->user_id ),
+					prepare_user_name( $this->user_id ),
 					string_get_bug_view_link( $this->issue_id )
 				);
 				break;
@@ -112,7 +112,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
                 $t_html = $this->html_start( 'fa-refresh' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_reopened' ),
-					user_get_name( $this->user_id ),
+					prepare_user_name( $this->user_id ),
 					string_get_bug_view_link( $this->issue_id )
 				);
 				break;

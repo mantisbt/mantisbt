@@ -20,7 +20,6 @@ Developers
 ----------
 
 Damien Regad (dregad)
-Robert Munteanu (rombert)
 Roland Becker (atrol)
 Carlos Proensa (cproensa)
 Rafik Robeal (syncguru)
@@ -41,8 +40,9 @@ David Hicks (dhx)
 Daryn Warriner (daryn, dwarrine)
 Gianluca Sforna (giallu)
 Glenn Henshaw (thraxisp)
-John Reese (jreese, nuclear_eclipse)
+Amethyst Reese (jreese, nuclear_eclipse)
 Paul Richards (grangeway, paulr, minimoo, prichards)
+Robert Munteanu (rombert)
 Siebrand Mazeland (siebrand)
 
 
@@ -51,16 +51,17 @@ Contributors
 People who contributed code to MantisBT, listed in reverse order of the
 number of commits authored.
 
-Victor Boctor
 Damien Regad
+Victor Boctor
 Paul Richards
 Kenzaburo Ito
+Carlos Proensa
+Roland Becker
+translatewiki.net
 Glenn Henshaw
 Julian Fitzell
 David Hicks
-John Reese
-Carlos Proensa
-Roland Becker
+Amethyst Reese
 Rafik Robeal
 Jeroen Latour
 Siebrand Mazeland
@@ -68,144 +69,188 @@ Robert Munteanu
 Gianluca Sforna
 André Eisenbach
 Daryn Warriner
-translatewiki.net
 bigbadger
+dependabot[bot]
 Lincoln Maskey
 Marcello Scata
 Alexey Chumakov
 beerfrick
 Bastian Pfenningschmidt
-Kornel Lesinski
+Bob Le Bricodeur
 Joel C. Llano
+Kornel Lesinski
+Vladimir Shulev
 Adrian Spinei
 Martin Fuchs
 zakman
 jbrugger
-Vladimir Shulev
 jctrosset
 Kirill Krasnov
+grummbeer
 ryandesign
-Bob Le Bricodeur
 rufinus
-jhuggins
-Rasmus Lerdorf
+g0tmi1k
 David Newcomb
+Rasmus Lerdorf
+jhuggins
 yarick123
+Tamás Gulácsi
 jotel
 robertjf
 Frank Rodgers
 Luke Lee
-Johan Guilbaud
-planser
-davidu
-Tamás Gulácsi
 Chris Fitch
-myplacedk
+Johan Guilbaud
+Martin Schleußer
+davidu
+planser
 Franck Villaume
 Matej Habrnal
 Véronique Maginot
+luzpaz
+myplacedk
 smhanson
 vwegert
+Cas Nuy
+Daniel Tschinder
+James Crickmere
+Manilal
+Sean McBride
 Stefan Pettersson
 Vincent Sels
-atrol
-Daniel Tschinder
-Stéphane Veyret
-Val Kulkov
-torija
+Albert Aribaud
+Allan Brazute
+Betsy Gamrat
+Dominik Blunk
 Giovanni Giacobbi
 Jim Hanley
-Betsy Gamrat
-Martin Schleußer
-Dominik Blunk
-scoates
+Malo MM. MAISONNEUVE
+Stéphane Veyret
+Val Kulkov
+Zipher
 cyclespersecond
-Alexander Menk
+scoates
+torija
 Alexander Ishmuradov
-elmarculino
-Tarik Sedlarevic
-Justin Theberge
-Manilal
+Alexander Menk
+Anders Sandblad
+Chris Graham
 Christian Weiske
-jeckyhl
-Matt McCutchen
-libregeek
-luzpaz
-EthraZa
-mfoXen
-Sebastian Limbach
-puklos
-Markus Schneider
-Romain CABASSOT
 Dan Moore
-SL-Gundam
+Daniele Verducci
+Gatis Ozols
+Grigoriy Ermolaev
+Justin Theberge
+Marc-Antoine TURBET-DELOF
+Markus Schneider
+Matt McCutchen
+Miloslav Nenadál
+Raimund Herbert
+Romain CABASSOT
 Saga Musix
-Sebastian Kayser
-Sergei Kuznetcov
-Sergio Del Franco
-Dmitriy V Kuranov
-The Gitter Badger
-Todd Whitesel
-Dawit Ayalew
-David W. Juntgen
-watergad
-Daniel N
-cheesecracker
-cybd
-cybernet
-davethegr8
-dwethell
-epenet
-gcompagnon
-greenius
-Brian Wrightson
-Bob Clough
-Bill Stidham
-mbaranski
-naveenbali
-petertc
-Benjamin Renard
-rainflood
-Andreas Stieger
-Karl Wiggisser
-Allan Brazute
+Sebastian Limbach
+Selonka
+Tarik Sedlarevic
+c2pil
+elmarculino
+fbruneau
+jeckyhl
+mfoXen
+puklos
 Alexander Maringer
-spidgorny
-tfromm
+Andreas Schopper
+Andreas Stieger
+Benjamin Renard
+Bill Stidham
+Bob Clough
+Brian Wrightson
+Daniel N
+David Pankov
+David W. Juntgen
+Dawit Ayalew
+Dmitriy V Kuranov
+Edward Rudd
+Ephaltes
+Florent Daigniere
+George Peter Banyard
+Gulacsi Tamas
+Heiko Schneider-Lange
+Henning Eiben
+Ian MacKenzie
+ImgBotApp
+Jacky Alcine
+Jacob Hoover
+Jadran Josimovic
+Jean-Sébastien B
+Jeremy Vriens
+Jingshao Chen
+Jon Huang
 Jonas Nockert
 José D. Grieco
-Andreas Schopper
-Jeremy Vriens
-Jadran Josimovic
-Jacob Hoover
+KN4CK3R
+Karl Wiggisser
 Larry Lewis
 Laszlo Kovacs
 LeoZandvliet
-Jacky Alcine
-Ian MacKenzie
+Luc MULLER
 MS-Astra
-Henning Eiben
+MaloMn
+Marc de Lima Lucio
 Marcin Kłeczek
 Marco Dings
 Marco Ribeiro
 Martin Dennhardt
-Heiko Schneider-Lange
-wapznw
 MatthieuR
+Maurycy13
 Michael Lorer
 Michael Weibel
+Mr. Ronald
 Murray Crane
+Nikolay Raspopov
 Olivier Mengué
 Patrick Massot
-Gulacsi Tamas
+Peter Badida
 Peter Dave Hello
 Pier-Luc Duchaine
-Florent Daigniere
 Raul Baldner junior
 Raymond van Asperen
-Edward Rudd
+Ricardo Alonso
 Ross Nelson
 Ryan Rafe Lee
+SL-Gundam
+Sebastian Kayser
+Sergei Kuznetcov
+Sergio Del Franco
+The Gitter Badger
+Thorsten Möller
+Todd Whitesel
+cheesecracker
+cybd
+cybernet
+davethegr8
+dsribouavong
+dwethell
+elen-ayanyan
+elpoutro
+epenet
+fuyun
+gcompagnon
+greenius
+l2m83
+mbaranski
+naveenbali
+petertc
+pokrad
+rainflood
+rk4n3
+spidgorny
+talentant
+tfromm
+tm8544
+tsz
+vendeeglobe
+wapznw
+watergad
 Adrian Spinei
 
 Other Contributors

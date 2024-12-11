@@ -17,17 +17,26 @@
 					the rules you are using on your site.
 				</para>
 				<para>
-					See <ulink url="http://en.wikipedia.org/wiki/Regular_Expression">Wikipedia</ulink> for more
+					See <ulink url="https://en.wikipedia.org/wiki/Regular_Expression">Wikipedia</ulink> for more
 					details about regular expressions.  For testing regular expressions, use
-					<ulink url="http://rubular.com/">Rubular</ulink>.
+					<ulink url="https://rubular.com/">Rubular</ulink>.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_monitor_bug_threshold</term>
 			<listitem>
-				<para>Access level needed to monitor bugs. The default
-					value is REPORTER.
+				<para>Access level needed to monitor issues.
+					The default value is REPORTER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_monitor_list_threshold</term>
+			<listitem>
+				<para>Access level needed to show the list of users monitoring
+					an issue.
+					The default value is DEVELOPER.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -35,7 +44,11 @@
 			<term>$g_monitor_add_others_bug_threshold</term>
 			<listitem>
 				<para>Access level needed to add other users to the list of
-					users monitoring a bug. The default value is DEVELOPER.
+					users monitoring an issue.
+					The default value is DEVELOPER.
+				</para>
+				<para>This setting should not be lower than
+					<emphasis>$g_show_monitor_list_threshold</emphasis>.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -43,16 +56,29 @@
 			<term>$g_monitor_delete_others_bug_threshold</term>
 			<listitem>
 				<para>Access level needed to delete other users from the
-					list of users monitoring a bug. The default value is
-					DEVELOPER.
+					list of users monitoring an issue.
+					The default value is DEVELOPER.
+				</para>
+				<para>This setting should not be lower than
+					<emphasis>$g_show_monitor_list_threshold</emphasis>.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_limit_reporters</term>
+			<term>$g_print_reports_threshold</term>
 			<listitem>
-				<para>Limit reporters to only viewing bugs that they
-					report.
+				<para>Grants users access to the Print Reports functionality
+					(Word/HTML) from the View Issues page.
+					The default value is UPDATER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_export_issues_threshold</term>
+			<listitem>
+				<para>Access level required to export issues to CSV and Excel
+					formats from the View Issues page.
+					The default value is VIEWER.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -224,5 +250,532 @@
 				</warning>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_csv_separator</term>
+			<listitem>
+				<para>The separator to use for CSV exports.
+					The default value is the comma (<literal>,</literal>).
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_csv_injection_protection</term>
+			<listitem>
+				<para>When this setting is <emphasis>ON</emphasis> (default),
+					any data that could be interpreted as a formula by a
+					spreadsheet program such as Excel
+					(i.e. starting with
+					<literal>=</literal>,
+					<literal>@</literal>,
+					<literal>-</literal> or
+					<literal>+</literal>),
+					will be prefixed with a tab character (<literal>\t</literal>)
+					in order to prevent CSV injection.
+				</para>
+				<para>Sometimes this may not be appropriate (e.g. if the CSV needs
+					to be consumed programmatically). In that case,
+					$g_csv_injection_protection can be set to
+					<emphasis>OFF</emphasis>, resulting in raw data to be exported.
+				</para>
+				<warning>
+					<para>Setting this to <emphasis>OFF</emphasis> is a security
+						risk. An attacker could upload a crafted CSV file
+						containing formulas that will be executed when opened
+						with Excel, as described in
+						<ulink url="http://georgemauer.net/2017/10/07/csv-injection.html">this article</ulink>.
+					</para>
+				</warning>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_view_bug_threshold</term>
+			<listitem>
+				<para>Access level needed to view bugs.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_update_bug_assign_threshold</term>
+			<listitem>
+				<para>Access level needed to show the Assign To: button bug_view*_page or the Assigned list in bug_update*_page.
+					This allows control over who can route bugs
+					This defaults to $g_handle_bug_threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_private_bugnote_threshold</term>
+			<listitem>
+				<para>Access level needed to view private bugnotes.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_handler_threshold</term>
+			<listitem>
+				<para>Access level needed to view handler.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_history_threshold</term>
+			<listitem>
+				<para>Access level needed to view history.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_reminder_threshold</term>
+			<listitem>
+				<para>Access level needed to send a reminder from the bug view pages
+					set to NOBODY to disable the feature.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_upload_project_file_threshold</term>
+			<listitem>
+				<para>Access level needed to upload files to the project documentation section
+					You can set this to NOBODY to prevent uploads to projects.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_upload_bug_file_threshold</term>
+			<listitem>
+				<para>Access level needed to upload files to attach to a bug
+					You can set this to NOBODY to prevent uploads to bugs but note that
+					 the reporter of the bug will still be able to upload unless you set
+					 $g_allow_reporter_upload or $g_allow_file_upload to OFF
+					See also: $g_upload_project_file_threshold, $g_allow_file_upload, $g_allow_reporter_upload.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_add_bugnote_threshold</term>
+			<listitem>
+				<para>Add bugnote threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_update_bugnote_threshold</term>
+			<listitem>
+				<para>Threshold at which a user can edit the bugnotes of other users.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_proj_doc_threshold</term>
+			<listitem>
+				<para>Threshold needed to view project documentation
+					Note: setting this to ANYBODY will let any user download attachments
+					from private projects, regardless of their being a member of it.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_site_threshold</term>
+			<listitem>
+				<para>Site manager.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_project_threshold</term>
+			<listitem>
+				<para>Threshold needed to manage a project: edit project
+					details (not to add/delete projects) ...etc.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_news_threshold</term>
+			<listitem>
+				<para>Threshold needed to add/delete/modify news.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_delete_project_threshold</term>
+			<listitem>
+				<para>Threshold required to delete a project.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_create_project_threshold</term>
+			<listitem>
+				<para>Threshold needed to create a new project.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_private_project_threshold</term>
+			<listitem>
+				<para>Threshold needed to be automatically included in private projects.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_project_user_threshold</term>
+			<listitem>
+				<para>Threshold needed to manage user access to a project.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_delete_bugnote_threshold</term>
+			<listitem>
+				<para>Threshold at which a user can delete the bugnotes of other users.
+					The default value is equal to the configuration setting
+					$g_delete_bug_threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_move_bug_threshold</term>
+			<listitem>
+				<para>Move bug threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_stored_query_use_threshold</term>
+			<listitem>
+				<para>Threshold needed to be able to use stored queries.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_stored_query_create_threshold</term>
+			<listitem>
+				<para>Threshold needed to be able to create stored queries.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_stored_query_create_shared_threshold</term>
+			<listitem>
+				<para>Threshold needed to be able to create shared stored queries.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_update_readonly_bug_threshold</term>
+			<listitem>
+				<para>Threshold needed to update readonly bugs.  Readonly bugs are identified via
+					$g_bug_readonly_status_threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_changelog_threshold</term>
+			<listitem>
+				<para>Threshold for viewing changelog.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_roadmap_view_threshold</term>
+			<listitem>
+				<para>Threshold for viewing roadmap.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_roadmap_update_threshold</term>
+			<listitem>
+				<para>Threshold for updating roadmap, target_version, etc.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_update_bug_status_threshold</term>
+			<listitem>
+				<para>Status change thresholds.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_reopen_bug_threshold</term>
+			<listitem>
+				<para>Access level needed to re-open bugs.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_report_issues_for_unreleased_versions_threshold</term>
+			<listitem>
+				<para>Access level needed to assign bugs to unreleased product versions.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_set_bug_sticky_threshold</term>
+			<listitem>
+				<para>Access level needed to set a bug sticky.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_set_status_threshold</term>
+			<listitem>
+				<para>This array sets the access thresholds needed to enter each status listed.
+					if a status is not listed, it falls back to $g_update_bug_status_threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_no_category</term>
+			<listitem>
+				<para>Allow a bug to have no category.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_limit_view_unless_threshold</term>
+			<listitem>
+				<para>Threshold at which a user can view all issues in the project (as allowed by other permissions).
+					Not meeting this threshold means the user can only see the issues they reported,
+					are handling or monitoring.
+					A value of ANYBODY means that all users have full visibility (as default)
+					This is a replacement for old option: $g_limit_reporters.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_reporter_upload</term>
+			<listitem>
+				<para>Reporter can upload
+					Allow reporters to upload attachments to bugs they reported.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_count_hyperlink_prefix</term>
+			<listitem>
+				<para>Bug Count Linking
+					This is the prefix to use when creating links to bug views from bug counts
+					(eg. on the main page and the summary page).
+					Default is a temporary filter.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_manage_tag_prefix</term>
+			<listitem>
+				<para>Default tag prefix used to filter the list of tags in
+					manage_tags_page.php.  Change this to 'A' (or any other
+					letter) if you have a lot of tags in the system and loading
+					the manage tags page takes a long time.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_access_levels_enum_string</term>
+			<listitem>
+				<para>Status from $g_status_index-1 to 79 are used for the onboard customization
+					(if enabled) directly use MantisBT to edit them.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_project_status_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_project_view_state_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_state_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_priority_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_severity_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_reproducibility_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_status_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_resolution_enum_string</term>
+			<listitem>
+				<para>The values in this list are also used to define
+					variables in the language files (e.g., $s_new_bug_title referenced in
+					bug_change_status_page.php ). Embedded spaces are converted to underscores
+					(e.g., "working on" references $s_working_on_bug_title). They are also
+					expected to be English names for the states</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_projection_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_eta_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_sponsorship_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_custom_field_type_enum_string</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_file_type_icons</term>
+			<listitem>
+				<para>Maps a file extension to a file type icon.  These icons are printed
+					next to project documents and bug attachments.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_file_download_content_type_overrides</term>
+			<listitem>
+				<para>Content types which will be overridden when downloading files.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_status_icon_arr</term>
+			<listitem>
+				<para>Icon associative arrays.
+					Status to icon mapping.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_sort_icon_arr</term>
+			<listitem>
+				<para>Sort direction to icon mapping.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_rss_enabled</term>
+			<listitem>
+				<para>This flag enables or disables RSS syndication.  In the case where RSS
+					syndication is not used, it is recommended to set it to OFF.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_recently_visited_count</term>
+			<listitem>
+				<para>This controls whether to show the most recently visited issues by the current user or not.
+					If set to 0, this feature is disabled. Otherwise it is the maximum number of issues to
+					keep in the recently visited list.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_tag_separator</term>
+			<listitem>
+				<para>String that will separate tags as entered for input.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_tag_view_threshold</term>
+			<listitem>
+				<para>Access level required to view tags attached to a bug.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_tag_attach_threshold</term>
+			<listitem>
+				<para>Access level required to attach tags to a bug.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_tag_detach_threshold</term>
+			<listitem>
+				<para>Access level required to detach tags from a bug.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_tag_detach_own_threshold</term>
+			<listitem>
+				<para>Access level required to detach tags attached by the same user.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_tag_create_threshold</term>
+			<listitem>
+				<para>Access level required to create new tags.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_tag_edit_threshold</term>
+			<listitem>
+				<para>Access level required to edit tag names and descriptions.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_tag_edit_own_threshold</term>
+			<listitem>
+				<para>Access level required to edit descriptions by the creating user.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_enable_profiles</term>
+			<listitem>
+				<para>Enable Profiles.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_add_profile_threshold</term>
+			<listitem>
+				<para>Add profile threshold.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_global_profile_threshold</term>
+			<listitem>
+				<para>Threshold needed to be able to create and modify global profiles.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_freetext_in_profile_fields</term>
+			<listitem>
+				<para>Allows the users to enter free text when reporting/updating issues
+					for the profile related fields (i.e. platform, os, os build).</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_plugins_enabled</term>
+			<listitem>
+				<para>Enable/disable plugins.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_plugin_path</term>
+			<listitem>
+				<para>Absolute path to plugin files.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_plugin_threshold</term>
+			<listitem>
+				<para>Threshold needed to manage plugins.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_plugin_mime_types</term>
+			<listitem>
+				<para>A mapping of file extensions to mime types, used when serving resources from plugins.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_plugins_force_installed</term>
+			<listitem>
+				<para>Force installation and protection of certain plugins.
+					Note that this is not the preferred method of installing plugins,
+					which should generally be done directly through the plugin management
+					interface.  However, this method will prevent users with admin access
+					from uninstalling plugins through the plugin management interface.</para>
+				<para>Entries in the array must be in the form of a key/value pair
+					consisting of the plugin basename and priority.</para>
+			</listitem>
+		</varlistentry>
+
 	</variablelist>
 </section>

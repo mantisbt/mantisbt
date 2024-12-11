@@ -1,0 +1,58 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit https://translatewiki.net  **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Saraiki (Arabic script) (سرائیکی)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit https://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Saraiki
+ */
+
+$s_plugin_MantisGraph_title = 'منٹیس گراف';
+$s_plugin_MantisGraph_description = 'دفتری گراف پلگ ان۔';
+$s_plugin_MantisGraph_config = 'کنفگریشن';
+$s_plugin_MantisGraph_tab_label = 'گراف';
+$s_plugin_MantisGraph_priority_link = 'ترجیح نال';
+$s_plugin_MantisGraph_category_link = 'ونکی نال';
+$s_plugin_MantisGraph_period_none = 'کوئی وی کائنی';
+$s_plugin_MantisGraph_period_this_week = 'ایں ہفتے';
+$s_plugin_MantisGraph_period_last_week = 'پچھلا ہفتہ';
+$s_plugin_MantisGraph_period_two_weeks = 'پچھلے ݙو ہفتے';
+$s_plugin_MantisGraph_period_this_month = 'ایں مہینے';
+$s_plugin_MantisGraph_period_last_month = 'پچھلے مہینے';
+$s_plugin_MantisGraph_period_this_quarter = 'ایہ تماہی';
+$s_plugin_MantisGraph_period_last_quarter = 'چھیکڑی چوتھائی';
+$s_plugin_MantisGraph_period_last_year = 'پچھلے سال';

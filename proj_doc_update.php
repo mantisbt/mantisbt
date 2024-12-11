@@ -79,6 +79,12 @@ if( is_blank( $f_title ) ) {
 if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 	file_ensure_uploaded( $f_file );
 
+	$t_file_name = $f_file['name'];
+	if( strlen( $t_file_name ) > DB_FIELD_SIZE_FILENAME ) {
+		error_parameters( $t_file_name );
+		trigger_error( ERROR_FILE_NAME_TOO_LONG, ERROR );
+	}
+
 	$t_project_id = helper_get_current_project();
 
 	# grab the original file path and name
@@ -87,7 +93,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 
 	# prepare variables for insertion
 	$t_file_size = filesize( $f_file['tmp_name'] );
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	$t_max_file_size = file_get_max_file_size();
 	if( $t_file_size > $t_max_file_size ) {
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
@@ -118,7 +124,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 		SET title=' . db_param() . ', description=' . db_param() . ', date_added=' . db_param() . ',
 			filename=' . db_param() . ', filesize=' . db_param() . ', file_type=' .db_param() . ', content=' .db_param() . '
 			WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $f_title, $f_description, db_now(), $f_file['name'], $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
+	$t_result = db_query( $t_query, array( $f_title, $f_description, db_now(), $t_file_name, $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
 } else {
 	$t_query = 'UPDATE {project_file}
 			SET title=' . db_param() . ', description=' . db_param() . '
@@ -132,12 +138,4 @@ if( !$t_result ) {
 
 form_security_purge( 'proj_doc_update' );
 
-$t_redirect_url = 'proj_doc_page.php';
-
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin( 'proj_doc_page.php' );
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( 'proj_doc_page.php' );

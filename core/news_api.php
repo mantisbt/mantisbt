@@ -209,7 +209,7 @@ function news_get_rows( $p_project_id, $p_global = true ) {
 		$c_project_id = $t_projects[0];
 		$t_query .= ' WHERE project_id=\'$c_project_id\'';
 	} else {
-		$t_query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
+		$t_query .= ' WHERE project_id IN (' . implode( ',', $t_projects ) . ')';
 	}
 
 	$t_query .= ' ORDER BY date_posted DESC';
@@ -283,7 +283,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 				$t_query .= ' WHERE project_id=' . db_param();
 				$t_params = array( $c_project_id );
 			} else {
-				$t_query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
+				$t_query .= ' WHERE project_id IN (' . implode( ',', $t_projects ) . ')';
 				$t_params = null;
 			}
 
@@ -306,7 +306,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 				$t_query .= ' AND project_id=' . db_param();
 				$t_params[] = $c_project_id;
 			} else {
-				$t_query .= ' AND project_id IN (' . join( $t_projects, ',' ) . ')';
+				$t_query .= ' AND project_id IN (' . implode( ',', $t_projects ) . ')';
 			}
 			$t_query .= ' ORDER BY announcement DESC, id DESC';
 			$t_result = db_query( $t_query, $t_params, $t_news_view_limit, $c_offset );

@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,13 +33,14 @@
 /** Korean (한국어)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Changwoo
  * @author Wisewolf
+ * @author Ykhwong
  */
 
 $s_plugin_XmlImportExport_title = '이슈 가져오기/내보내기';
@@ -50,7 +51,7 @@ $s_plugin_XmlImportExport_config_title = 'XML 가져오기/내보내기 접근 �
 $s_plugin_XmlImportExport_import_threshold = '이슈 가져오기';
 $s_plugin_XmlImportExport_export_threshold = '이슈 내보내기';
 $s_plugin_XmlImportExport_action_update = '업데이트';
-$s_plugin_XmlImportExport_importing_in_project = '프로젝트의 이슈 가져오기:';
+$s_plugin_XmlImportExport_importing_in_project = '프로젝트에 이슈 가져오기: \'%s\'';
 $s_plugin_XmlImportExport_import_options = '옵션 가져오기';
 $s_plugin_XmlImportExport_cross_references = '상호 참조';
 $s_plugin_XmlImportExport_default_strategy = '기본 변환 방식:';
@@ -58,7 +59,7 @@ $s_plugin_XmlImportExport_renumber = '번호 재구성';
 $s_plugin_XmlImportExport_renumber_desc = '상호 참조를 새로운 이슈 번호에 맞게 변환';
 $s_plugin_XmlImportExport_link = '링크';
 $s_plugin_XmlImportExport_link_desc = '링크를 원래 항목으로 변환';
-$s_plugin_XmlImportExport_disable = '사용 않기';
+$s_plugin_XmlImportExport_disable = '사용 안 함';
 $s_plugin_XmlImportExport_disable_desc = '링크 사용하지 않기';
 $s_plugin_XmlImportExport_fallback = '대체 방식("번호 재구성"이 동작하지 않을 때)';
 $s_plugin_XmlImportExport_fallback_category = '대체 방식';

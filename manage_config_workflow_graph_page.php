@@ -67,7 +67,7 @@ $t_project = helper_get_current_project();
 if( $t_project == ALL_PROJECTS ) {
 	$t_project_title = lang_get( 'config_all_projects' );
 } else {
-	$t_project_title = sprintf( lang_get( 'config_project' ), string_display( project_get_name( $t_project ) ) );
+	$t_project_title = sprintf( lang_get( 'config_project' ), string_display_line( project_get_name( $t_project ) ) );
 }
 ?>
 	<br />

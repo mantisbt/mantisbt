@@ -34,6 +34,15 @@
 					be automatically added to the monitor list of that bug. Default is
 					ON.
 				</para>
+				<note>
+					<para>
+						Users will not be added to the monitoring list if they are
+						the Issue's handler or reporter, since they	automatically
+						get notified, if required.
+						If recipients of the reminders are below the monitor
+						threshold, they will not be added either.
+					</para>
+				</note>
 			</listitem>
 		</varlistentry>
 

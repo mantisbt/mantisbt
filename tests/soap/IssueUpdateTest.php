@@ -41,7 +41,7 @@ class IssueUpdateTest extends SoapBase {
 	 * @return void
 	 */
 	public function testUpdateSummaryBasedOnPreviousGet() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummary' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -107,13 +107,13 @@ class IssueUpdateTest extends SoapBase {
 	 * @return void
 	 */
 	public function testUpdateSummaryBasedOnMandatoryFields() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummaryBasedOnMandatoryFields' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
 		$this->deleteAfterRun( $t_issue_id );
 
-		$t_issue_to_update = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummaryBasedOnMandatoryFields' );
+		$t_issue_to_update = $this->getIssueToAdd();
 		$t_issue_to_update['sticky'] = true;
 
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_to_update );
@@ -172,7 +172,7 @@ class IssueUpdateTest extends SoapBase {
 	 * @return void
 	 */
 	public function testUpdateWithNewNote() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithNewNote' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -227,7 +227,7 @@ class IssueUpdateTest extends SoapBase {
 
 		$this->assertTrue( count( $t_admin_users ) >= 1, 'count(adminUsers) >= 1' );
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateIssueWithHandler' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_admin_user = $t_admin_users[0];
 
@@ -260,8 +260,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->skipIfDueDateIsNotEnabled();
 
 		$t_date = '2015-10-29T12:59:14+00:00';
-
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateIssueDueDate' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -290,8 +289,7 @@ class IssueUpdateTest extends SoapBase {
 	public function testUpdateBugWithNoCategory() {
 		$this->skipIfAllowNoCategoryIsDisabled();
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateBugWithNoCategory' );
-
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
 		$this->deleteAfterRun( $t_issue_id );
@@ -318,7 +316,7 @@ class IssueUpdateTest extends SoapBase {
 	public function testUpdateWithTimeTrackingNote() {
 		$this->skipIfTimeTrackingIsNotEnabled();
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithTimeTrackingNote' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -360,7 +358,7 @@ class IssueUpdateTest extends SoapBase {
 			$this->markTestSkipped( '`allow_freetext_in_profile_fields` is not enabled' );
 		}
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithRareFields' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -406,7 +404,7 @@ class IssueUpdateTest extends SoapBase {
 		$t_tag2->id = $t_tag_id2;
 
 		# create issue
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithRareFields' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 		$this->deleteAfterRun( $t_issue_id );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
@@ -442,7 +440,7 @@ class IssueUpdateTest extends SoapBase {
 	 */
 	public function testUpdateWithMonitors() {
 		# create issue
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithMonitors' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 		$this->deleteAfterRun( $t_issue_id );
 

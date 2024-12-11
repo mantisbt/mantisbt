@@ -49,7 +49,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-form_security_validate( 'manage_custom_field_delete' );
+form_security_validate( 'manage_custom_field_update' );
 
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
@@ -60,23 +60,17 @@ $f_return = strip_tags( gpc_get_string( 'return', 'manage_custom_field_page.php'
 $t_definition = custom_field_get_definition( $f_field_id );
 
 if( 0 < count( custom_field_get_project_ids( $f_field_id ) ) ) {
-	helper_ensure_confirmed( lang_get( 'confirm_used_custom_field_deletion' ) .
-		'<br />' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
-		lang_get( 'field_delete_button' ) );
+	$t_msg = lang_get( 'confirm_used_custom_field_deletion' );
 } else {
-	helper_ensure_confirmed( lang_get( 'confirm_custom_field_deletion' ) .
-		'<br />' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
-		lang_get( 'field_delete_button' ) );
+	$t_msg = lang_get( 'confirm_custom_field_deletion' );
 }
+helper_ensure_confirmed(
+	sprintf( $t_msg, string_attribute( $t_definition['name'] ) ),
+	lang_get( 'field_delete_button' )
+);
 
 custom_field_destroy( $f_field_id );
 
-form_security_purge( 'manage_custom_field_delete' );
+form_security_purge( 'manage_custom_field_update' );
 
-layout_page_header( null, $f_return );
-
-layout_page_begin( 'manage_overview_page.php' );
-
-html_operation_successful( $f_return );
-
-layout_page_end();
+print_header_redirect( $f_return );

@@ -139,7 +139,7 @@ class IssueFileAddCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		if( $this->issue->project_id != helper_get_current_project() ) {
@@ -165,9 +165,6 @@ class IssueFileAddCommand extends Command {
 		if( !is_array( $this->files ) ) {
 			$this->files = array();
 		}
-
-		$t_files_invalid_fields = array();
-		$t_files_required_fields = array();
 
 		$t_files_required_fields = array( 'name', 'tmp_name' );
 		foreach( $this->files as $t_file ) {

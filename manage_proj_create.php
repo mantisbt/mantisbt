@@ -35,7 +35,6 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses project_api.php
- * @uses project_hierarchy_api.php
  */
 
 require_once( 'core.php' );
@@ -51,12 +50,10 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'project_api.php' );
-require_api( 'project_hierarchy_api.php' );
 
 form_security_validate( 'manage_proj_create' );
 
 auth_reauthenticate();
-access_ensure_global_level( config_get( 'create_project_threshold' ) );
 
 $f_name 		= gpc_get_string( 'name' );
 $f_description 	= gpc_get_string( 'description' );
@@ -64,36 +61,51 @@ $f_view_state	= gpc_get_int( 'view_state' );
 $f_status		= gpc_get_int( 'status' );
 $f_file_path	= gpc_get_string( 'file_path', '' );
 $f_inherit_global = gpc_get_bool( 'inherit_global', 0 );
-$f_inherit_parent = gpc_get_bool( 'inherit_parent', 0 );
+
+$t_data = array(
+	'payload' => array(
+		'name' => $f_name,
+		'description' => $f_description,
+		'file_path' => $f_file_path,
+		'inherit_global' => $f_inherit_global,
+		'view_state' => array( 'id' => $f_view_state ),
+		'status' => array( 'id' => $f_status )
+	),
+	'options' => array(
+		'return_project' => false
+	)
+);
+
+$t_command = new ProjectAddCommand( $t_data );
+$t_result = $t_command->execute();
+
+$t_project_id = $t_result['id'];
 
 $f_parent_id	= gpc_get_int( 'parent_id', 0 );
+$f_inherit_parent = gpc_get_bool( 'inherit_parent', 0 );
 
+# If parent project id != 0 then we're creating a subproject
 if( 0 != $f_parent_id ) {
-	project_ensure_exists( $f_parent_id );
+	$t_data = array(
+		'query' => array(
+			'project_id' => (int)$f_parent_id
+		),
+		'payload' => array(
+			'project' => array(
+				'id' => (int)$t_project_id
+			 ),
+			'inherit_parent' => (bool)$f_inherit_parent
+		)
+	);
+
+	$t_command = new ProjectHierarchyAddCommand( $t_data );
+	$t_command->execute();
+
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_parent_id . '#subprojects';
+} else {
+	$t_redirect_url = 'manage_proj_page.php';
 }
-
-$t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path, true, $f_inherit_global );
-
-if( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {
-	$t_access_level = access_get_global_level();
-	$t_current_user_id = auth_get_current_user_id();
-	project_add_user( $t_project_id, $t_current_user_id, $t_access_level );
-}
-
-if( 0 != $f_parent_id ) {
-	project_hierarchy_add( $t_project_id, $f_parent_id, $f_inherit_parent );
-}
-
-event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
 
 form_security_purge( 'manage_proj_create' );
 
-$t_redirect_url = 'manage_proj_page.php';
-
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin( 'manage_overview_page.php' );
-
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( $t_redirect_url );

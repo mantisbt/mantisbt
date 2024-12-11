@@ -36,17 +36,21 @@ require_api( 'utility_api.php' );
 $g_compression_started = false;
 
 /**
- * Check if compression handler (ob_gzhandler) should be enabled. Note: this should not be used
- * as an indicator of whether output received by a client will be compressed, only whether an
- * output handler is used to compress output.
+ * Check if compression handler (ob_gzhandler) should be enabled.
+ *
+ * Note: this should not be used as an indicator of whether output received by a
+ * client will be compressed, only whether an output handler is used to compress
+ * output.
+ *
  * @return boolean
  * @access public
  */
 function compress_handler_is_enabled() {
 	global $g_compress_html;
 
-	# indicates compression should be disabled for a page. Note: php.ini may still enable zlib.output_compression.
-	# it may be possible to turn this off through the use of ini_set within that specific page.
+	# indicates compression should be disabled for a page.
+	# Note: php.ini may still enable zlib.output_compression. It may be possible
+	# to turn this off through the use of ini_set within that specific page.
 	if( defined( 'COMPRESSION_DISABLED' ) ) {
 		return false;
 	}
@@ -68,7 +72,7 @@ function compress_handler_is_enabled() {
 	}
 
 	# It's possible to set zlib.output_compression via ini_set.
-	# This method is preferred over ob_gzhandler
+	# This method is preferred over ob_gzhandler, and effectively starts output buffering.
 	if( ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) ) {
 		ini_set( 'zlib.output_compression', true );
 		# do it transparently
@@ -85,6 +89,11 @@ function compress_handler_is_enabled() {
  * @access public
  */
 function compress_start_handler() {
+	# Don't start compression for CLI or when expressly disabled
+	if( php_sapi_name() == 'cli'  || defined( 'COMPRESSION_DISABLED' ) ) {
+		return;
+	}
+
 	# Do not start compress handler if we got any output so far, as this
 	# denotes that an error has occurred. Enabling compression in this case
 	# will likely cause a Content Encoding Error when displaying the page.
@@ -97,24 +106,30 @@ function compress_start_handler() {
 		# headers from being sent if there's a blank line in an included file
 		ob_start( 'compress_handler' );
 	} else if( ini_get_bool( 'zlib.output_compression' ) == true ) {
-		if( defined( 'COMPRESSION_DISABLED' ) ) {
-			return;
-		}
+		# @TODO is this really needed ? We already start buffering in core.php
 		ob_start();
 	}
 }
 
 /**
- * Output Buffering handler that either compresses the buffer or just.
- * returns it, depending on the return value of compress_handler_is_enabled()
- * @param string  &$p_buffer Buffer.
- * @param integer $p_mode    Mode.
+ * Output Buffering handler.
+ *
+ * Either compresses the buffer or just returns it as-is, depending on the
+ * return value of compress_handler_is_enabled()
+ *
+ * @param string  $p_buffer Buffer.
+ * @param integer $p_mode   Mode.
  * @return string
  * @access public
  */
-function compress_handler( &$p_buffer, $p_mode ) {
+function compress_handler( $p_buffer, $p_mode ) {
 	global $g_compression_started;
 	if( $g_compression_started && compress_handler_is_enabled() ) {
+		/**
+		 * @noinspection PhpComposerExtensionStubsInspection
+		 *               compress_handler_is_enabled() returns false if zlib
+		 *               extension is not available.
+		 */
 		return ob_gzhandler( $p_buffer, $p_mode );
 	} else {
 		return $p_buffer;

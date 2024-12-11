@@ -61,12 +61,10 @@ auth_ensure_user_authenticated();
 current_user_ensure_unprotected();
 
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
-include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
+include( __DIR__ . '/account_prefs_inc.php' );
 
 layout_page_header( lang_get( 'change_preferences_link' ) );
 
 layout_page_begin();
-
 edit_account_prefs();
-
 layout_page_end();

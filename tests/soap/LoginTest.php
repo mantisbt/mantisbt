@@ -180,6 +180,6 @@ class LoginTest extends SoapBase {
 	 * @return void
 	 */
 	private function assertIsLoginFailure( SoapFault $e ) {
-		$this->assertRegexp( '/Access denied/i', $e->getMessage() );
+		$this->assertMatchesRegularExpression( '/Access denied/i', $e->getMessage() );
 	}
 }

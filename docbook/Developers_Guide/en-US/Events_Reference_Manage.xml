@@ -212,6 +212,10 @@
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
+	</section>
+
+	<section id="dev.eventref.manage.user">
+		<title>Users</title>
 
 		<blockquote id="dev.eventref.manage.user.createform">
 			<title>EVENT_MANAGE_USER_CREATE_FORM (Execute)</title>
@@ -236,7 +240,7 @@
 				<para>
 					This event allows plugins to do post-processing of newly-created
 					users.  This event is triggered for each user created.  The
-					Manage Users create form is one possible case for triggering
+					Users create form is one possible case for triggering
 					such events, but there can be other ways users can be created.
 				</para>
 
@@ -319,6 +323,59 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+		
+		
+		<blockquote id="dev.eventref.manage.project.user.create">
+			<title>EVENT_MANAGE_PROJECT_USER_CREATE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of newly-added user
+					on project.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Project ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+		
+		<blockquote id="dev.eventref.manage.project.user.update">
+			<title>EVENT_MANAGE_PROJECT_USER_UPDATE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of modified user
+					on project.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Project ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+		
+		<blockquote id="dev.eventref.manage.project.user.delete">
+			<title>EVENT_MANAGE_PROJECT_USER_DELETE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do pre-processing of user deletion
+					on project. This event is triggered prior to the user
+					removal from the project in database.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Project ID</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>

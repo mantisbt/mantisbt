@@ -23,7 +23,7 @@
 <!--
 * ====================================================================
 * wsdl-viewer.xsl
-* Version: 3.1.02-mantis.1
+* Version: 3.1.03-mantis.1
 *
 * URL: http://tomi.vanek.sk/xml/wsdl-viewer.xsl
 *
@@ -39,7 +39,7 @@
 * Description:
 * 		wsdl-viewer.xsl is a lightweight XSLT 1.0 transformation with minimal
 * 		usage of any hacks that extend the possibilities of the transformation
-* 		over the XSLT 1.0 constraints but eventually would harm the engine independence.
+* 		over the XSLT 1.0 constraints but eventually would harm the engine independance.
 *
 * 		The transformation has to run even in the browser offered XSLT engines
 * 		(tested in IE 6 and Firefox) and in ANT "batch" processing.
@@ -145,6 +145,8 @@
 * 						  (seems to be a correct state)
 * 	2008-08-20 - 3.1.02 - Woden-214: Anti-recursion bypassed in xsd:choice element
 * 	2015-02-02 - 3.1.02-mantis.1 - removed unnecessary wsdl-viewer.js <script> block
+* 	2019-01-03 - 3.1.03 - Fix for `small` tag - recursively smaller text
+* 	2024-11-02 - 3.1.03-mantis.1 - reapplied patch 3.1.02-mantis.1
 * ====================================================================
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -157,15 +159,13 @@
                 version="1.0"
                 exclude-result-prefixes="ws ws2 xsd soap local">
 
-   <xsl:output method="xml" version="1.0" encoding="utf-8" indent="no"
+   <xsl:output method="html" encoding="utf-8" indent="no"
                omit-xml-declaration="no"
-               media-type="text/html"
-               doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-               doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"/>
+               media-type="text/html"/>
 
    <xsl:strip-space elements="*"/>
 
-   <xsl:param name="wsdl-viewer.version">3.1.01</xsl:param>
+   <xsl:param name="wsdl-viewer.version">3.1.03-mantis.1</xsl:param>
 
 
 
@@ -909,14 +909,14 @@ h3 {
          </b>
          <xsl:if test="$ENABLE-LINK">
             <xsl:text> </xsl:text>
-            <small>
+            <span>
                <xsl:if test="$ENABLE-OPERATIONS-PARAGRAPH">
                   <a class="local" href="#{concat($PORT-PREFIX, generate-id(.))}"> 
                      <xsl:value-of select="$PORT-TYPE-TEXT"/>
                   </a>
                </xsl:if> 
                <xsl:call-template name="render.source-code-link"/>
-            </small>
+            </span>
          </xsl:if>
       </h3>
 
@@ -975,14 +975,14 @@ h3 {
          </b>
          <xsl:if test="$ENABLE-LINK">
             <xsl:text> </xsl:text>
-            <small>
+            <span>
                <xsl:if test="$ENABLE-OPERATIONS-PARAGRAPH">
                   <a class="local" href="#{concat($PORT-PREFIX, generate-id($port-type))}"> 
                      <xsl:value-of select="$PORT-TYPE-TEXT"/>
                   </a>
                </xsl:if> 
                <xsl:call-template name="render.source-code-link"/>
-            </small>
+            </span>
          </xsl:if>
       </h3>
 
@@ -1403,9 +1403,9 @@ h3 {
 			         </xsl:apply-templates>
 		       </xsl:when>
 		       <xsl:otherwise>
-			         <small style="color:blue">
+			         <span style="color:blue">
 				           <xsl:value-of select="$RECURSIVE"/>
-			         </small>
+			         </span>
 		       </xsl:otherwise>
 	     </xsl:choose>
 
@@ -1437,9 +1437,9 @@ h3 {
 			         </ul>
 		       </xsl:when>
 		       <xsl:otherwise>
-			         <small style="color:blue">
+			         <span style="color:blue">
 				           <xsl:value-of select="$RECURSIVE"/>
-			         </small>
+			         </span>
 		       </xsl:otherwise>
 	     </xsl:choose>
    </xsl:template>
@@ -1564,9 +1564,9 @@ h3 {
 			         </xsl:if>
 		       </xsl:when>
 		       <xsl:otherwise>
-			         <small style="color:blue">
+			         <span style="color:blue">
 				           <xsl:value-of select="$RECURSIVE"/>
-			         </small>
+			         </span>
 		       </xsl:otherwise>
 	     </xsl:choose>
 
@@ -1632,9 +1632,9 @@ h3 {
 			         </xsl:apply-templates>
 		       </xsl:when>
 		       <xsl:otherwise>
-			         <small style="color:blue">
+			         <span style="color:blue">
 				           <xsl:value-of select="$RECURSIVE"/>
-			         </small>
+			         </span>
 		       </xsl:otherwise>
 	     </xsl:choose>
    </xsl:template>
@@ -1716,7 +1716,7 @@ h3 {
 		       </xsl:variable>
 
 		       <xsl:if test="string-length($recursion.test) != 0">
-			         <small style="color:blue">
+			         <span style="color:blue">
 				           <xsl:value-of select="$properties"/>
 				           <xsl:variable name="elem-type"
                              select="$consolidated-xsd[@name = $type-local-name and (not(contains(local-name(current()), 'element')) or contains(local-name(), 'Type'))][1]"/>
@@ -1740,7 +1740,7 @@ h3 {
 						               </xsl:apply-templates>
 					             </xsl:otherwise>
 				           </xsl:choose>
-			         </small>
+			         </span>
 		       </xsl:if>
 	     </xsl:if>
    </xsl:template>
@@ -2254,7 +2254,7 @@ h3 {
 	        <style type="text/css">
             <xsl:value-of select="$css" disable-output-escaping="yes"/>
          </style>
-      </head>
+	  </head>
    </xsl:template>
 
 

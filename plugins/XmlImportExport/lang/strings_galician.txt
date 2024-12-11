@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Galician (galego)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -50,7 +50,7 @@ $s_plugin_XmlImportExport_config_title = 'Configuración de niveis de acceso de 
 $s_plugin_XmlImportExport_import_threshold = 'Importar incidencias';
 $s_plugin_XmlImportExport_export_threshold = 'Exportar incidencias';
 $s_plugin_XmlImportExport_action_update = 'Actualizar';
-$s_plugin_XmlImportExport_importing_in_project = 'Importar os problemas no proxecto:';
+$s_plugin_XmlImportExport_importing_in_project = 'Importar os problemas no proxecto: "%s"';
 $s_plugin_XmlImportExport_import_options = 'Opcións de importación';
 $s_plugin_XmlImportExport_cross_references = 'Referencias cruzadas';
 $s_plugin_XmlImportExport_default_strategy = 'Estratexia de conversión por defecto:';

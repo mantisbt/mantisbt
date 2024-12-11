@@ -13,14 +13,29 @@
 		<varlistentry>
 			<term>$g_path</term>
 			<listitem>
-				<para>URL to your installation as seen from the web browser; this
-					is what you type into the URL field. Requires trailing '/'
-					character. eg. 'http://www.example.com/mantisbt/'.  In the following example
-					https protocol is used: eg. 'https://www.example.com/mantisbt/'.  MantisBT will default this to
-					the correct value. However, in some cases it might be necessary to
-					override the default.  This is typically needed when an installation can be
-					accessed by multiple URLs (internal vs external).
+				<para>
+					Full URL to your installation as seen from the web browser.
 				</para>
+				<para>
+					This is what users type into the URL field, e.g.
+					<literal>https://www.example.com/mantisbt/</literal>.
+					Requires trailing `/`.
+				</para>
+				<para>
+					If not set, MantisBT will default this to a working URL valid
+					for most installations. However, in some cases (typically when
+					an installation can be accessed by multiple URLs, e.g. internal
+					vs external), it might be necessary to override the default.
+				</para>
+				<warning><para>
+					The default is built based on headers from the HTTP request.
+					This is a potential security risk, as the system will be exposed to
+					<ulink url="https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/07-Input_Validation_Testing/17-Testing_for_Host_Header_Injection"
+					>Host Header injection</ulink>
+					attacks, so it is
+					strongly recommended to initialize this in config_inc.php.
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
@@ -64,6 +79,14 @@
 				<para>This is the path to the library directory of your installation.
 					The default value is usually OK but it is recommended
 					that you move the 'library' directory out of your webroot.
+					Requires trailing DIRECTORY_SEPARATOR character.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_vendor_path</term>
+			<listitem>
+				<para>Path to vendor folder for 3rd party libraries.
 					Requires trailing DIRECTORY_SEPARATOR character.
 				</para>
 			</listitem>

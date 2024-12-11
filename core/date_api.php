@@ -33,6 +33,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -64,16 +66,42 @@ function date_get_null() {
 }
 
 /**
- * gets Unix timestamp from date string
- * @param string $p_date A valid date/time string (see http://php.net/manual/en/datetime.formats.php)
- * @return false|int a timestamp on success, null date when $p_date is blank or false on failure.
+ * Gets Unix timestamp from a date string.
+ *
+ * First tries to convert the given date string using the configured Normal
+ * date format {@see $g_normal_date_format}, and if that does not work
+ * fallback to PHP's Supported Date and Time Formats
+ * {@link https://php.net/manual/en/datetime.formats.php}.
+ *
+ * @param string $p_date_string A valid date/time string
+ *
+ * @return int a timestamp on success, null date when $p_date_string is blank
+ *
+ * @throws ClientException When given string cannot be converted to Date
  * @access public
  */
-function date_strtotime( $p_date ) {
-	if( is_blank( $p_date ) ) {
+function date_strtotime( $p_date_string ) {
+	if( is_blank( $p_date_string ) ) {
 		return date_get_null();
 	}
-	return strtotime( $p_date );
+
+	$t_format = config_get( 'normal_date_format' );
+	$t_dt = DateTimeImmutable::createFromFormat( $t_format, $p_date_string );
+	if( $t_dt === false ) {
+		# date is not in expected format, try with default formats
+		try {
+			$t_dt = new DateTimeImmutable( $p_date_string );
+		}
+		catch( Exception $e ) {
+			throw new ClientException(
+				"Invalid date format '$p_date_string'",
+				ERROR_INVALID_DATE_FORMAT,
+				array( $p_date_string ),
+				$e
+			);
+		}
+	}
+	return $t_dt->getTimestamp();
 }
 
 /**
@@ -279,4 +307,3 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 		}
 	}
 }
-

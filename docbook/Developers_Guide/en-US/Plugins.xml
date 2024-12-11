@@ -20,7 +20,7 @@
 		<para>
 			Plugins are defined as implementations, or subclasses, of the
 			<classname>MantisPlugin</classname> class as defined in
-			<filename>core/classes/MantisPlugin.php</filename>.  Each plugin may define
+			<filename>core/classes/MantisPlugin.class.php</filename>.  Each plugin may define
 			information about itself, as well as a list of conflicts and dependencies
 			upon other plugins.  There are many methods defined in the
 			<classname>MantisPlugin</classname> class that may be used as convenient
@@ -48,7 +48,6 @@
 	</section>
 
 	<xi:include href="Plugins_Building.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	<xi:include href="Plugins_Building_Source.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 
 	<section id="dev.plugins.api">
 		<title>API Usage</title>

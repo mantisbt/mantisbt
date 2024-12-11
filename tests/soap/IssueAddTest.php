@@ -41,7 +41,7 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssue() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssue' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -107,7 +107,7 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueWithHtmlMarkup() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHtmlMarkup' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_to_add['summary'] .= ' <strong>WithHtmlMarkup</strong>';
 		$t_issue_to_add['description'] .= ' <strong>WithHtmlMarkup</strong>';
@@ -135,7 +135,7 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueWithRareFields() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithRareFields' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_eta_enabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_eta' );
 		$t_projection_enabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_projection' );
@@ -155,9 +155,6 @@ class IssueAddTest extends SoapBase {
 		# Must use valid versions for this to work.
 		# $t_issue_to_add['fixed_in_version'] = 'fixed version';
 		# $t_issue_to_add['target_version'] = 'target version';
-
-		$t_dt = DateTime::createFromFormat( 'U', time() );
-		$t_issue_to_add['last_updated'] = $t_dt->format( DateTime::ISO8601 );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -181,10 +178,6 @@ class IssueAddTest extends SoapBase {
 		# Since versions are not defined, they are not going to be set
 		$this->assertFalse( isset( $t_issue->fixed_in_version ) );
 		$this->assertFalse( isset( $t_issue->target_version ) );
-
-		$t_read_dt = DateTime::createFromFormat( DateTime::ISO8601, $t_issue->last_updated );
-
-		$this->assertEquals( $t_dt, $t_read_dt );
 	}
 
 	/**
@@ -201,7 +194,7 @@ class IssueAddTest extends SoapBase {
 
 		$this->assertTrue( count( $t_admin_users ) >= 1, 'count(adminUsers) >= 1' );
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHandler' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_admin_user = $t_admin_users[0];
 
@@ -229,7 +222,7 @@ class IssueAddTest extends SoapBase {
 
 		$t_date = '2015-10-29T12:59:14+00:00';
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithDueDate' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_to_add['due_date'] = $t_date;
 
@@ -255,7 +248,7 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueWithNullDueDate() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNullDueDate' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -278,7 +271,7 @@ class IssueAddTest extends SoapBase {
 	public function testCreateBugWithNoCategory() {
 		$this->skipIfAllowNoCategoryIsDisabled();
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateBugWithNoCategory' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		unset( $t_issue_to_add['category'] );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
@@ -299,7 +292,7 @@ class IssueAddTest extends SoapBase {
 	public function testCreateIssueWithTimeTrackingNote() {
 		$this->skipIfTimeTrackingIsNotEnabled();
 
-		$t_issue_to_add = $this->getIssueToAdd( 'testCreateIssueWithNote' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['notes'] = array(
 			array(
 				'text' => 'first note',
@@ -330,7 +323,7 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueWithHandlerByName() {
-		$t_issue_to_add = $this->getIssueToAdd( 'testCreateIssueWithHandlerByName' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['handler'] = array(
 			'name' => $this->userName
 		);
@@ -349,7 +342,7 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueWithFaultyVersionGeneratesError() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithFaultyVersionGeneratesError' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = 'noSuchVersion';
 
 		try {
@@ -357,7 +350,10 @@ class IssueAddTest extends SoapBase {
 
 			$this->fail( 'Invalid version did not raise error.' );
 		} catch ( SoapFault $e ) {
-			$this->assertContains( "Version 'noSuchVersion' does not exist in project", $e->getMessage() );
+			$this->assertStringContainsString(
+				"Version 'noSuchVersion' does not exist in project",
+				$e->getMessage()
+			);
 		}
 	}
 
@@ -378,7 +374,7 @@ class IssueAddTest extends SoapBase {
 
 		$this->deleteVersionAfterRun( $t_version_id );
 
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithVersion' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['version'] = $t_version['name'];
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
@@ -395,11 +391,11 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetBiggestId() {
-	    $t_first_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId1' ) );
+		$t_first_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( '1' ) );
 		$this->deleteAfterRun( $t_first_issue_id );
 
-	    $t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId2' ) );
-	    $this->deleteAfterRun( $t_second_issue_id );
+		$t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( '2' ) );
+		$this->deleteAfterRun( $t_second_issue_id );
 
 	    $t_first_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_first_issue_id );
 
@@ -416,7 +412,7 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueWithMiscNote() {
-		$t_issue_to_add = $this->getIssueToAdd( 'testCreateIssueWithMiscNote' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['notes'] = array(
 			array(
 				'text' => 'first note',
@@ -457,7 +453,7 @@ class IssueAddTest extends SoapBase {
 		$this->deleteTagAfterRun( $t_tag_id2 );
 
 		# create issue
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueCreateTest.createIssueWithTags' );
+		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag_id1 ), array( 'id' => $t_tag_id2 ) );
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 		$this->deleteAfterRun( $t_issue_id );
@@ -472,7 +468,7 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueWithFieldsByName() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithFieldsByName' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_to_add['view_state'] = array( 'name' => 'private');
 		$t_issue_to_add['resolution'] = array( 'name' => 'suspended');
@@ -495,7 +491,7 @@ class IssueAddTest extends SoapBase {
 	 * @return void
 	 */
 	public function testCreateIssueWithNonLatinText() {
-		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNonLatinText' );
+		$t_issue_to_add = $this->getIssueToAdd();
 
 		$t_issue_to_add['summary'] = 'Здравствуйте!'; # Russian, hello
 		$t_issue_to_add['description'] = '你好'; # Mandarin Chinese, hello
@@ -519,8 +515,8 @@ class IssueAddTest extends SoapBase {
      */
     public function testIssuesGet() {
 
-        $t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testIssuesGet' );
-        $t_issue_to_add_2 = $this->getIssueToAdd( 'FilterTest.testIssuesGet2' );
+        $t_issue_to_add = $this->getIssueToAdd( '1' );
+        $t_issue_to_add_2 = $this->getIssueToAdd( '2' );
 
         $t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
         $t_issue_id_2 = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add_2 );
@@ -532,8 +528,8 @@ class IssueAddTest extends SoapBase {
         $t_search_result_headers = $this->client->mc_issues_get_header( $this->userName, $this->password, array( $t_issue_id, $t_issue_id_2 ) );
 
         $this->assertEquals( 2, count( $t_search_result_headers ));
-        $this->assertContains( 'testIssuesGet', $t_search_result_headers[0]->summary );
-        $this->assertContains( 'testIssuesGet2', $t_search_result_headers[1]->summary );
+        $this->assertStringContainsString( 'testIssuesGet-1', $t_search_result_headers[0]->summary );
+        $this->assertStringContainsString( 'testIssuesGet-2', $t_search_result_headers[1]->summary );
 
         $this->assertEquals( VS_PUBLIC, $t_search_result_headers[0]->view_state );
         $this->assertEquals( 0, $t_search_result_headers[0]->notes_count );
@@ -541,8 +537,8 @@ class IssueAddTest extends SoapBase {
         $this->assertEquals( 10, $t_search_result_headers[0]->status );
 
         $this->assertEquals( 2, count( $t_search_result_issues ));
-        $this->assertContains( 'testIssuesGet', $t_search_result_issues[0]->summary );
-        $this->assertContains( 'testIssuesGet2', $t_search_result_issues[1]->summary );
+        $this->assertStringContainsString( 'testIssuesGet-1', $t_search_result_issues[0]->summary );
+        $this->assertStringContainsString( 'testIssuesGet-2', $t_search_result_issues[1]->summary );
 
         $this->assertEquals( VS_PUBLIC, $t_search_result_issues[0]->view_state->id);
         $this->assertEquals( 10, $t_search_result_issues[0]->status->id );

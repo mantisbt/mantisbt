@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Retrieves all tags, unless the users
  *
@@ -159,17 +161,26 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 		if( isset( $t_tag['id'] ) ) {
 			$t_tag_id = $t_tag['id'];
 			if( !tag_exists( $t_tag_id ) ) {
-				return ApiObjectFactory::faultNotFound( "Tag with id $t_tag_id not found." );
+				throw new ClientException(
+					"Tag with id $t_tag_id not found.",
+					ERROR_TAG_NOT_FOUND
+				);
 			}
 		} else if( isset( $t_tag['name'] ) ) {
-			$t_tag = tag_get_by_name( $t_tag['name'] );
-			if( $t_tag === false ) {
-				return ApiObjectFactory::faultNotFound( "Tag {$t_tag['name']} not found." );
+			$t_get_tag = tag_get_by_name( $t_tag['name'] );
+			if( $t_get_tag === false ) {
+				throw new ClientException(
+					"Tag '{$t_tag['name']}' not found.",
+					ERROR_TAG_NOT_FOUND
+				);
 			}
 
-			$t_tag_id = $t_tag['id'];
+			$t_tag_id = $t_get_tag['id'];
 		} else {
-			return ApiObjectFactory::faultBadRequest( "Tag without id or name." );
+			throw new ClientException(
+				'Tag without id or name.',
+				ERROR_TAG_NAME_INVALID
+			);
 		}
 
 		$t_submitted_tag_ids[] = $t_tag_id;

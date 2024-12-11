@@ -12,13 +12,23 @@
 		<literal>/api/soap/mantisconnect.php?wsdl</literal> below the MantisBT root.
 	</para>
 	<para>
-		The REST API is experimental and is disabled by default.
+		The REST API is enabled by default.
 		A Swagger sandbox and documentation for REST API is available at <literal>/api/rest/swagger/</literal> below
 		the MantisBT root.
 	</para>
 
 	<para>The following options are used to control the behaviour of the MantisBT SOAP API:</para>
 	<variablelist>
+		<varlistentry>
+			<term>$g_webservice_rest_enabled</term>
+			<listitem>
+				<para>
+					Whether the REST API is enabled or not.  Note that this flag only
+					impacts API Token based auth.  Hence, even if the API is disabled, it can still be
+					used from the Web UI using cookie based authentication.  Default ON.
+				</para>
+			</listitem>
+		</varlistentry>
 		<varlistentry>
 			<term>$g_webservice_readonly_access_level_threshold</term>
 			<listitem>
@@ -45,13 +55,65 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_webservice_rest_enabled</term>
+			<term>$g_webservice_priority_enum_default_when_not_found</term>
 			<listitem>
-				<para>
-					Whether the REST API is enabled or not.  Note that this flag only
-					impacts API Token based auth.  Hence, even if the API is disabled, it can still be
-					used from the Web UI using cookie based authentication.  Default ON.
-				</para>
+				<para>The following enum id is used when the webservices get enum labels that are not
+					defined in the associated MantisBT installation.  In this case, the enum id is set
+					to the value specified by the corresponding configuration option.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_severity_enum_default_when_not_found</term>
+			<listitem>
+				<para>The following enum id is used when the webservices get enum labels that are not
+					defined in the associated MantisBT installation.  In this case, the enum id is set
+					to the value specified by the corresponding configuration option.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_status_enum_default_when_not_found</term>
+			<listitem>
+				<para>The following enum id is used when the webservices get enum labels that are not
+					defined in the associated MantisBT installation.  In this case, the enum id is set
+					to the value specified by the corresponding configuration option.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_resolution_enum_default_when_not_found</term>
+			<listitem>
+				<para>The following enum id is used when the webservices get enum labels that are not
+					defined in the associated MantisBT installation.  In this case, the enum id is set
+					to the value specified by the corresponding configuration option.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_projection_enum_default_when_not_found</term>
+			<listitem>
+				<para>The following enum id is used when the webservices get enum labels that are not
+					defined in the associated MantisBT installation.  In this case, the enum id is set
+					to the value specified by the corresponding configuration option.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_eta_enum_default_when_not_found</term>
+			<listitem>
+				<para>The following enum id is used when the webservices get enum labels that are not
+					defined in the associated MantisBT installation.  In this case, the enum id is set
+					to the value specified by the corresponding configuration option.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_error_when_version_not_found</term>
+			<listitem>
+				<para>If ON and the supplied version is not found, then a SoapException will be raised.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_version_when_not_found</term>
+			<listitem>
+				<para>Default version to be used if the specified version is not found and
+					$g_webservice_error_when_version_not_found == OFF.
+					(at the moment this value does not depend on the project).</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

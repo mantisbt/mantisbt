@@ -138,8 +138,8 @@ $t_upgrade_required = false;
 
 if( config_get_global( 'admin_checks' ) == ON ) {
 	# Check if the admin directory is accessible
-	$t_admin_dir = dirname( __FILE__ ) . '/admin';
-	$t_admin_dir_is_accessible = @file_exists( $t_admin_dir . '/.' );
+	$t_admin_dir = __DIR__ . '/admin';
+	$t_admin_dir_is_accessible = @is_readable( $t_admin_dir );
 	if( $t_admin_dir_is_accessible ) {
 		$t_warnings[] = lang_get( 'warning_admin_directory_present' );
 	}
@@ -152,6 +152,12 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 		}
 	}
 
+	# $g_path was defaulted - risk of Host Header injection attack
+	global $g_defaulted_path;
+	if( $g_defaulted_path ) {
+		$t_warnings[] = lang_get( 'warning_host_header_injection_hazard' );
+	}
+
 	/**
 	 * Display Warnings for enabled debugging / developer settings
 	 * @param string $p_type    Message Type.
@@ -161,37 +167,27 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	 */
 	function debug_setting_message ( $p_type, $p_setting, $p_value ) {
 		return sprintf( lang_get( 'warning_change_setting' ), $p_setting, $p_value )
-			. sprintf( lang_get( 'word_separator' ) )
-			. sprintf( lang_get( "warning_${p_type}_hazard" ) );
+			. lang_get( 'word_separator' )
+			. lang_get( "warning_{$p_type}_hazard" );
 	}
 
 	$t_config = 'show_detailed_errors';
 	if( config_get_global( $t_config ) != OFF ) {
 		$t_warnings[] = debug_setting_message( 'security', $t_config, 'OFF' );
 	}
-	$t_config = 'display_errors';
-	$t_errors = config_get_global( $t_config );
-	if( !(
-			isset( $t_errors[E_ALL] ) && $t_errors[E_ALL] == DISPLAY_ERROR_HALT
-		 ||	isset( $t_errors[E_USER_ERROR] ) && $t_errors[E_USER_ERROR] == DISPLAY_ERROR_HALT
-		 )
-	) {
-		$t_warnings[] = debug_setting_message(
-			'integrity',
-			$t_config . '[E_USER_ERROR]',
-			DISPLAY_ERROR_HALT );
-	}
 
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
-	$t_db_version = config_get( 'database_version', 0 );
+	$t_db_version = config_get( 'database_version', 0, ALL_USERS, ALL_PROJECTS );
 	if( $t_db_version == 0 ) {
 		$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 	}
 
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
-	if( $t_admin_dir_is_accessible ) {
-		require_once( 'admin/schema.php' );
+	if( $t_admin_dir_is_accessible
+		&& @include_once( $t_admin_dir . '/schema.php' )
+	) {
+		/** @var array $g_upgrade */
 		$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
 		if( ( 0 < $t_db_version ) &&
@@ -215,7 +211,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 		<div class="widget-body">
 			<div class="widget-main">
 				<h4 class="header lighter bigger">
-					<i class="ace-icon fa fa-sign-in"></i>
+					<?php print_icon( 'fa-sign-in', 'ace-icon' ); ?>
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
@@ -239,13 +235,13 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 					<input id="username" name="username" type="text" placeholder="<?php echo $t_username_label ?>"
 						   size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $t_username ); ?>"
 						   class="form-control autofocus">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				</span>
 			</label>
 
 			<div class="space-10"></div>
 
-			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login_button' ) ?>" />
+			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login' ) ?>" />
 		</fieldset>
 	</form>
 

@@ -7,7 +7,7 @@
 	<title>Admin Guide</title>
 	<subtitle>Reference for Administrators</subtitle>
 	<productname>MantisBT</productname>
-	<productnumber>2.0</productnumber>
+	<productnumber>2.x</productnumber>
 	<abstract>
 		<para>
 			This book is targeted at MantisBT administrators, and documents the

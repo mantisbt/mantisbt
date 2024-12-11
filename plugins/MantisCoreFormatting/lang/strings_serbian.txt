@@ -25,21 +25,23 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Serbian (Cyrillic script) (српски (ћирилица)‎)
+/** Serbian (Cyrillic script) (српски (ћирилица))
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Milicevic01
  * @author Rancher
  * @author Srdjan m
+ * @author Srđan
  */
 
 $s_plugin_format_title = 'Обликовање за MantisBT';
@@ -51,3 +53,4 @@ $s_plugin_format_process_urls = 'Обрада адреса';
 $s_plugin_format_process_buglinks = 'MantisBT унутрашње везе (Проблеми и коментари)';
 $s_plugin_format_enabled = 'Укључено';
 $s_plugin_format_disabled = 'Искључено';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Копирани';

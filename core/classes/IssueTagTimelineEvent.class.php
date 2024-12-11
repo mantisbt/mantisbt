@@ -34,7 +34,7 @@ class IssueTagTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id   An user identifier.
+	 * @param integer $p_user_id   A user identifier.
 	 * @param integer $p_issue_id  A issue identifier.
 	 * @param string  $p_tag_name  Tag name linked to the issue.
 	 * @param boolean $p_tag       Whether tag was being linked or unlinked from the issue.
@@ -55,11 +55,11 @@ class IssueTagTimelineEvent extends TimelineEvent {
 		$t_string = $this->tag ? lang_get( 'timeline_issue_tagged' ) : lang_get( 'timeline_issue_untagged' );
 		$t_tag_row = tag_get_by_name( $this->tag_name );
 
-		$t_html = $this->html_start();
+		$t_html = $this->html_start( 'fa-tag' );
 		$t_html .= '<div class="action">'
 			. sprintf(
 				$t_string,
-				user_get_name( $this->user_id ),
+				prepare_user_name( $this->user_id ),
 				string_get_bug_view_link( $this->issue_id ),
 				$t_tag_row ? tag_get_link( $t_tag_row ) : $this->tag_name
 			)

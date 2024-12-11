@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,21 +33,35 @@
 /** Icelandic (íslenska)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Sveinn í Felli
  */
 
-$s_plugin_MantisGraph_graph_imp_status_title = 'Samþætt graf eftir stöðu';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Samþætt graf eftir forgangi';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Samþætt graf eftir alvöru';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Samþætt graf eftir verkþætti';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Samþætt graf eftir úrlausn';
+$s_plugin_MantisGraph_title = 'Gröf/línurit Mantis';
+$s_plugin_MantisGraph_description = 'Opinber forritsviðbót fyrir gröf/línurit.';
+$s_plugin_MantisGraph_config = 'Uppsetning';
+$s_plugin_MantisGraph_tab_label = 'Gröf/línurit';
+$s_plugin_MantisGraph_status_link = 'Eftir stöðu';
+$s_plugin_MantisGraph_priority_link = 'Eftir forgangi';
+$s_plugin_MantisGraph_severity_link = 'Eftir mikilvægi';
+$s_plugin_MantisGraph_category_link = 'Eftir verkþætti';
+$s_plugin_MantisGraph_resolution_link = 'Eftir úrlausn';
+$s_plugin_MantisGraph_issue_trends_link = 'Framvinda verkbeiðna';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Með grafi eftir stöðu';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Með grafi eftir forgangi';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Með grafi eftir mikilvægi';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Með grafi eftir verkþáttum';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Með grafi eftir úrlausnum';
+$s_plugin_MantisGraph_graph_developer_title = 'Með grafi eftir úrlausnaraðilum';
+$s_plugin_MantisGraph_graph_reporter_title = 'Með grafi eftir tilkynnend';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Opnaðar, leystar og eftirliggjandi verkbeiðnir';
 $s_plugin_MantisGraph_by_status_pct = 'eftir prósentu stöðu';
 $s_plugin_MantisGraph_by_priority_pct = 'eftir forgangs prósentu';
-$s_plugin_MantisGraph_by_severity_pct = 'eftir mikilvægis prósentu';
+$s_plugin_MantisGraph_by_severity_pct = 'eftir prósentu mikilvægis';
 $s_plugin_MantisGraph_by_category_pct = 'eftir verkþátts prósentu';
 $s_plugin_MantisGraph_by_resolution_pct = 'eftir úrlausnar prósentu';
 $s_plugin_MantisGraph_by_severity_mix = 'eftir mikilvægi og stöðu';
@@ -55,10 +69,20 @@ $s_plugin_MantisGraph_by_priority_mix = 'eftir forgangi og stöðu';
 $s_plugin_MantisGraph_by_resolution_mix = 'eftir úrlausn og stöðu';
 $s_plugin_MantisGraph_legend_still_open = 'Enn opið';
 $s_plugin_MantisGraph_legend_resolved = 'Leyst';
-$s_plugin_MantisGraph_legend_assigned = 'Úthlutað';
-$s_plugin_MantisGraph_legend_total = 'Alls';
-$s_plugin_MantisGraph_legend_opened = 'Opnað';
-$s_plugin_MantisGraph_legend_closed = 'Lokað';
 $s_plugin_MantisGraph_legend_reported = 'Tilkynnt';
-$s_plugin_MantisGraph_cumulative = 'Uppsöfnun';
-$s_plugin_MantisGraph_not_enough_data = 'Ekki eru næg gögn til að búa til graf';
+$s_plugin_MantisGraph_period_none = 'Ekkert';
+$s_plugin_MantisGraph_period_this_week = 'Í þessari viku';
+$s_plugin_MantisGraph_period_last_week = 'Í síðustu viku';
+$s_plugin_MantisGraph_period_two_weeks = 'Á síðustu tveimur vikum';
+$s_plugin_MantisGraph_period_this_month = 'Í þessum mánuði';
+$s_plugin_MantisGraph_period_last_month = 'Í síðasta mánuði';
+$s_plugin_MantisGraph_period_this_quarter = 'Á þessum ársfjórðungi';
+$s_plugin_MantisGraph_period_last_quarter = 'Á síðasta ársfjórðungi';
+$s_plugin_MantisGraph_period_year_to_date = 'Frá áramótum';
+$s_plugin_MantisGraph_period_select = 'Frjálsar dagsetningar';
+$s_plugin_MantisGraph_period_last_year = 'Á síðasta ári';
+$s_plugin_MantisGraph_graph_page = 'Graf yfir feril verkbeiðna';
+$s_plugin_MantisGraph_graph_topdev = 'Hönnuðir með flestar leystar verkbeiðnir';
+$s_plugin_MantisGraph_graph_opendev = 'Hönnuðir eftir opnum verkbeiðnum';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Tilkynnendur með flestar leystar verkbeiðnir';
+$s_plugin_MantisGraph_other_categories = 'aðrir flokkar (%d)';

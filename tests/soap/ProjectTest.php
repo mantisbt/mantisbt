@@ -21,6 +21,9 @@
  * @subpackage UnitTests
  * @copyright Copyright (C) 2010-2013 MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * Avoid PHPStorm warnings caused by MantisConnect methods not found in SoapClient
+ * @noinspection PhpUndefinedMethodInspection
  */
 
 require_once 'SoapBase.php';
@@ -33,9 +36,9 @@ require_once 'SoapBase.php';
  */
 class ProjectTest extends SoapBase {
 	/**
-	 * Array of project ID's to delete
+	 * @var array List of project IDs to delete
 	 */
-	private $t_project_idToDelete = array();
+	private $projectIdToDelete = array();
 
 	/**
 	 * A test case that tests the following:
@@ -44,8 +47,8 @@ class ProjectTest extends SoapBase {
 	 * @return void
 	 */
 	public function testAddRenameDeleteProject() {
-		$t_project_name = $this->getOriginalNameProject();
-		$t_project_new_name = $this->getNewNameProject();
+		$t_project_name = $this->getNewProjectName();
+		$t_project_new_name = $t_project_name . '_new';
 
 		$t_project_data_structure = $this->newProjectAsArray( $t_project_name );
 
@@ -63,8 +66,10 @@ class ProjectTest extends SoapBase {
 
 		$t_project_data_structure['name'] = $t_project_new_name;
 
-		$t_return_bool = $this->client->mc_project_update( $this->userName, $this->password, $t_project_id,
-														$t_project_data_structure );
+		$this->client->mc_project_update( $this->userName, $this->password,
+			$t_project_id,
+			$t_project_data_structure
+		);
 
 		$t_projects_array = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password );
 
@@ -83,7 +88,7 @@ class ProjectTest extends SoapBase {
 	 * @return void
 	 */
 	public function testGetIdFromName() {
-		$t_project_name = 'TestProjectForIdFromName';
+		$t_project_name = $this->getNewProjectName();
 
 		$t_project_data_structure = $this->newProjectAsArray( $t_project_name );
 
@@ -91,8 +96,10 @@ class ProjectTest extends SoapBase {
 
 		$this->projectIdToDelete[] = $t_project_id;
 
-		$t_project_idFromName = $this->client->mc_project_get_id_from_name( $this->userName, $this->password,
-																		$t_project_name );
+		$t_project_idFromName = $this->client->mc_project_get_id_from_name(
+			$this->userName, $this->password,
+			$t_project_name
+		);
 
 		$this->assertEquals( $t_project_idFromName, $t_project_id );
 	}
@@ -101,11 +108,11 @@ class ProjectTest extends SoapBase {
 	 * A test case which does the following
 	 *
 	 * 1. Create a project
-	 * 2. Retrieve the subproject ids. Must returns empty array.
+	 * 2. Retrieve the subproject ids. Must return empty array.
 	 * @return void
 	 */
 	public function testGetSubprojects() {
-		$t_project_name = $this->getOriginalNameProject();
+		$t_project_name = $this->getNewProjectName();
 		$t_project_data_structure = $this->newProjectAsArray( $t_project_name );
 
 		$t_project_id = $this->client->mc_project_add( $this->userName, $this->password, $t_project_data_structure );
@@ -114,7 +121,7 @@ class ProjectTest extends SoapBase {
 
 		$t_projects_array = $this->client->mc_project_get_all_subprojects( $this->userName, $this->password, $t_project_id );
 
-		$this->assertEquals( 0, count( $t_projects_array ) );
+		$this->assertCount( 0, $t_projects_array );
 	}
 
 	/**
@@ -133,7 +140,7 @@ class ProjectTest extends SoapBase {
 	 * @return void
 	 */
 	public function testSetProjectPrivateLockout() {
-		$t_project_data_structure = $this->newProjectAsArray( $this->getName() . '_' . rand() );
+		$t_project_data_structure = $this->newProjectAsArray( $this->getNewProjectName() );
 
 		# step 1
 		$t_project_id = $this->client->mc_project_add( $this->userName, $this->password, $t_project_data_structure );
@@ -141,7 +148,10 @@ class ProjectTest extends SoapBase {
 
 		# step 3
 		$t_project_data_structure['view_state'] = array( 'id' => VS_PRIVATE );
-		$t_update_ok = $this->client->mc_project_update( $this->userName, $this->password, $t_project_id, $t_project_data_structure );
+		$t_update_ok = $this->client->mc_project_update( $this->userName, $this->password,
+			$t_project_id,
+			$t_project_data_structure
+		);
 		$this->assertTrue( $t_update_ok, 'Project update failed' );
 
 		# step 4
@@ -153,7 +163,7 @@ class ProjectTest extends SoapBase {
 				break;
 			}
 		}
-		$this->assertTrue( $t_found, 'User \'' . $this->userName . '\' no longer has access to the project' );
+		$this->assertTrue( $t_found, "User '$this->userName' no longer has access to the project" );
 	}
 
 	/**
@@ -174,7 +184,7 @@ class ProjectTest extends SoapBase {
 	 * Tear Down
 	 * @return void
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 		parent::tearDown();
 
 		foreach( $this->projectIdToDelete as $t_project_id )  {
@@ -183,18 +193,17 @@ class ProjectTest extends SoapBase {
 	}
 
 	/**
-	 * Return old project name
+	 * Helper function to generate a unique project name for a test.
+	 *
+	 * Project Name will be the Test Case name followed by a random number.
+	 *
 	 * @return string
 	 */
-	private function getOriginalNameProject() {
-		return 'my_project_name';
-	}
-
-	/**
-	 * Return new project name
-	 * @return string
-	 */
-	private function getNewNameProject() {
-		return 'my_new_project_name';
+	protected function getNewProjectName() {
+		do {
+			$t_name = $this->getName() . '_' . rand();
+			$t_id = $this->client->mc_project_get_id_from_name( $this->userName, $this->password, $t_name );
+		} while( $t_id != 0 );
+		return $t_name;
 	}
 }

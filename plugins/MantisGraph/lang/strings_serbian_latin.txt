@@ -25,45 +25,49 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Serbian (Latin script) (srpski (latinica)‎)
+/** Serbian (Latin script) (srpski (latinica))
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Rancher
+ * @author Zexmax
  */
 
-$s_plugin_graph_title = 'Grafikoni za MantisBT';
-$s_plugin_graph_description = 'Zvanični dodatak za iscrtavanje grafikona.';
 $s_plugin_MantisGraph_title = 'Grafikoni za MantisBT';
-$s_plugin_MantisGraph_config = 'Podešavanje';
-$s_plugin_MantisGraph_synthesis_link = 'Sinteza';
-$s_plugin_MantisGraph_status_link = 'Po stanju';
-$s_plugin_MantisGraph_priority_link = 'Po važnosti';
-$s_plugin_MantisGraph_severity_link = 'Po ozbiljnosti';
+$s_plugin_MantisGraph_description = 'Zvanični dodatak za iscrtavanje grafikona.';
+$s_plugin_MantisGraph_config = 'Konfiguracija';
+$s_plugin_MantisGraph_tab_label = 'Grafikoni';
+$s_plugin_MantisGraph_status_link = 'Po statusu';
+$s_plugin_MantisGraph_priority_link = 'Po prioritetu';
+$s_plugin_MantisGraph_severity_link = 'Po težini';
 $s_plugin_MantisGraph_category_link = 'Po kategoriji';
 $s_plugin_MantisGraph_resolution_link = 'Po rezoluciji';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Sintetički grafikoni po stanju';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Sintetički grafikoni po važnosti';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Sintetički grafikoni po ozbiljnosti';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Sintetički grafikoni po kategoriji';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Sintetički grafikoni po rezoluciji';
-$s_plugin_MantisGraph_by_status_pct = 'Po stanju (%)';
-$s_plugin_MantisGraph_by_priority_pct = 'Po važnosti (%)';
-$s_plugin_MantisGraph_by_severity_pct = 'Po ozbiljnosti (%)';
+$s_plugin_MantisGraph_issue_trends_link = 'Trendovi izdanja';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Po grafikonima statusa';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Po grafikonima prioriteta';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Po grafikonima ozbiljnosti';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Po grafikonima kategorija';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Po grafikonima rezolucije';
+$s_plugin_MantisGraph_graph_developer_title = 'Po grafikonima programera';
+$s_plugin_MantisGraph_graph_reporter_title = 'Prema grafikonima izveštaja';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Otvoreni problemi, rešeni i preostali';
+$s_plugin_MantisGraph_by_status_pct = 'Po statusu (%)';
+$s_plugin_MantisGraph_by_priority_pct = 'Po prioritetu (%)';
+$s_plugin_MantisGraph_by_severity_pct = 'Po težini (%)';
 $s_plugin_MantisGraph_by_category_pct = 'Po kategoriji (%)';
 $s_plugin_MantisGraph_by_resolution_pct = 'Po rešenju (%)';
-$s_plugin_MantisGraph_by_severity_mix = 'Po ozbiljnosti i stanju';
-$s_plugin_MantisGraph_by_priority_mix = 'Po važnosti i stanju';
-$s_plugin_MantisGraph_by_resolution_mix = 'Po rešenju i stanju';
+$s_plugin_MantisGraph_by_severity_mix = 'Po težini i statusu';
+$s_plugin_MantisGraph_by_priority_mix = 'Po prioritetu i statusu';
+$s_plugin_MantisGraph_by_resolution_mix = 'Po rešenju i statusu';
 $s_plugin_MantisGraph_legend_still_open = 'Još otvoreno';
 $s_plugin_MantisGraph_legend_resolved = 'Rešeno';
 $s_plugin_MantisGraph_legend_reported = 'Prijavljeno';
@@ -75,7 +79,11 @@ $s_plugin_MantisGraph_period_this_month = 'Ovaj mesec';
 $s_plugin_MantisGraph_period_last_month = 'Prethodni mesec';
 $s_plugin_MantisGraph_period_this_quarter = 'Ovo tromesečje';
 $s_plugin_MantisGraph_period_last_quarter = 'Prethodno tromesečje';
-$s_plugin_MantisGraph_period_year_to_date = 'Za tačno jednu godinu';
+$s_plugin_MantisGraph_period_year_to_date = 'Za jednu godinu';
 $s_plugin_MantisGraph_period_select = 'Proizvoljni datumi';
 $s_plugin_MantisGraph_period_last_year = 'Prethodna godina';
-$s_plugin_MantisGraph_graph_page = 'Istorija problema s grafikonom';
+$s_plugin_MantisGraph_graph_page = 'Istorija problema sa grafikonom';
+$s_plugin_MantisGraph_graph_topdev = 'Najbolji programeri po rešenim problemima';
+$s_plugin_MantisGraph_graph_opendev = 'Programeri po otvorenim problemima';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Najbolji izveštaji prema rešenim problemima';
+$s_plugin_MantisGraph_other_categories = 'druge kategorije (%d)';

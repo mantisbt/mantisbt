@@ -29,8 +29,17 @@ use Mantis\Exceptions\ClientException;
 class IssueFileGetCommand extends Command {
 	/**
 	 * The issue id.
+	 *
+	 * @var int
 	 */
 	private $issue_id;
+
+	/**
+	 * The user id.
+	 *
+	 * @var int
+	 */
+	private $user_id;
 
 	/**
 	 * Constructor
@@ -51,7 +60,7 @@ class IssueFileGetCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns array Command response
+	 * @return array Command response
 	 */
 	protected function process() {
 		$t_issue = bug_get( $this->issue_id, true );
@@ -68,7 +77,6 @@ class IssueFileGetCommand extends Command {
 		$t_file_id = $this->query( 'file_id' );
 		$t_attachments = file_get_visible_attachments( $this->issue_id );
 		$t_matching_attachments = array();
-		$t_mantis_path = config_get_global( 'path' );
 		foreach( $t_attachments as $t_attachment ) {
 			if( $t_file_id != null && $t_file_id != $t_attachment['id'] ) {
 				continue;

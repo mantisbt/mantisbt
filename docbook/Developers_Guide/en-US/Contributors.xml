@@ -7,7 +7,7 @@
 	<title>Contributing to MantisBT</title>
 
 	<para>
-		MantisBT source code is managed with <ulink url="http://git-scm.com/">Git</ulink>.
+		MantisBT source code is managed with <ulink url="https://git-scm.com/">Git</ulink>.
 		If you are new to this version control system, you can
 		find some good resources for learning and installing it in
 		<xref linkend="dev.appendix.git" />.
@@ -80,9 +80,9 @@ git config --global alias.ci "commit"
 							official repository.
 						</para>
 						<para>
-							Benefitting from this access requires a special URL
+							Benefiting from this access requires a special URL
 							that uses your SSH key to handle access permissions:
-							<ulink url="git@github.com:mantisbt/mantisbt.git">git@github.com:mantisbt/mantisbt.git</ulink>.
+							<literal>git@github.com:mantisbt/mantisbt.git</literal>.
 							Alternatively, an HTTPS link can be used as well,
 							in which case you will have to provide your GitHub
 							User ID and password when Git requests it:
@@ -103,7 +103,7 @@ git config --global alias.ci "commit"
 						<para>
 							For other people, the MantisBT repository and
 							the related clone URLs
-							<ulink url="git://github.com/mantisbt/mantisbt.git">git://github.com/mantisbt/mantisbt.git</ulink> (SSH)
+							<literal>git@github.com:mantisbt/mantisbt.git</literal> (SSH).
 							or
 							<ulink url="https://github.com/mantisbt/mantisbt.git">https://github.com/mantisbt/mantisbt.git</ulink> (HTTPS)
 							will always be read-only.
@@ -116,7 +116,7 @@ git config --global alias.ci "commit"
 							</emphasis> of MantisBT where you will be able
 							to push your changes, and then use the fork's URL
 							instead to clone, which will look like this:
-							<ulink url="git@github.com:MyGithubId/mantisbt.git">git@github.com:MyGithubId/mantisbt.git</ulink>
+							<literal>git@github.com:MyGithubId/mantisbt.git</literal>.
 							or
 							<ulink url="https://github.com/MyGithubId/mantisbt.git">https://github.com/MyGithubId/mantisbt.git</ulink>
 						</para>
@@ -255,7 +255,7 @@ sed -rn "s/^.*path\s*=\s*(.*)$/\1/p" .gitmodules |xargs -n 1 basename |xargs -I{
 				</para>
 				<para>
 					For further reference:
-					<ulink url="http://git-scm.com/book/en/Git-Tools-Submodules#Issues-with-Submodules">
+					<ulink url="https://git-scm.com/book/en/Git-Tools-Submodules#Issues-with-Submodules">
 						Pro Git book
 					</ulink>
 				</para>
@@ -392,54 +392,221 @@ git merge master
 	</section>
 
 	<section id="dev.contrib.test">
-		<title>Running PHPUnit tests</title>
+		<title>PHPUnit tests</title>
 
 		<para>
-			MantisBT has a suite of PHPUnit tests found in the <literal>tests</literal>
-			directory. You are encouraged to add your own tests for the patches you
-			are submitting, but please remember that your changes must not break
-			existing tests.
+			MantisBT has a suite of
+			<ulink url="https://www.phpunit.de">PHPUnit</ulink> tests,
+			which can be found in the <literal>/tests</literal> directory.
+			It is organized in 3 distinct <emphasis>Test Suites</emphasis>,
+			defined in the <literal>phpunit.xml</literal> file:
 		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<literal>mantis</literal>: MantisBT Core tests
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>soap</literal>: SOAP API tests
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>rest</literal>: REST API tests
+				</para>
+			</listitem>
+		</itemizedlist>
 
-		<para>
-			In order to run the tests, you will need to have the PHP Soap extension,
-			<ulink url="http://www.phpunit.de">PHPUnit 3.4 or newer</ulink> and
-			<ulink url="http://phing.info">Phing 2.4 or newer</ulink> installed.
-			The tests are configured using a <literal>bootstrap.php</literal> file. The
-			<literal>boostrap.php.sample</literal> file contains the settings you will
-			need to adjust to run all the tests.
-		</para>
-
-		<para>
-			Running the unit tests is done from root directory using the following
-			command:
-		</para>
-
-		<programlisting>
-phing test
-		</programlisting>
-
-		<section id="dev.contrib.test.soap">
-			<title>Running the SOAP tests</title>
-
+		<warning>
 			<para>
-				MantisBT ships with a suite of SOAP tests which require an initial
-				set up to be executed. The required steps are:
+				The unit tests are currently only covering a small part of the code base,
+				focusing mainly on the REST and SOAP APIs.
+				The MantisBT Core functions are for the most part only tested
+				indirectly through the APIs.
+			</para>
+		</warning>
+
+		<para>
+			You are encouraged to improve the test suite, by adding new tests
+			for the patches you are submitting.
+			Please remember that your changes must not break existing tests.
+		</para>
+		<para>
+			New Tests should be stored in the subdirectory corresponding to the
+			Test Suite they belong to; the file should be named
+			<literal>XxxxxTest.php</literal>, where
+			<emphasis>Xxxxx</emphasis> is the Test's name.
+			The <emphasis>Test.php</emphasis> suffix allows the script to be
+			automatically picked up by PHPUnit when running the Test Suite.
+			Without this suffix, the new script will have to be
+			<ulink url="https://docs.phpunit.de/en/8.5/configuration.html#the-testsuite-element">
+				declared manually</ulink>
+			with a <literal>&lt;file&gt;</literal> tag
+			in the <literal>phpunit.xml</literal> file's
+			relevant <literal>&lt;testsuite&gt;</literal> section.
+		</para>
+
+		<section id="dev.contrib.test.setup">
+			<title>Initial Setup</title>
+			<para>
+				This section describes the initial configuration required
+				to run the unit tests.
 			</para>
 
-			<itemizedlist>
-				<listitem><para>Install MantisBT locally and configure a project
-					and a category.</para>
-				</listitem>
-				<listitem><para>Adjust the <literal>bootstrap.php</literal> file
-					to point to your local installation.</para>
-				</listitem>
-				<listitem><para>Customize the <literal>config_inc.php</literal>
-					to enable all the features tested using the SOAP tests.
-					The simplest way to do that is to run all the tests once
-					and adjust it based on the skipped tests.</para>
-				</listitem>
-			</itemizedlist>
+			<variablelist>
+				<varlistentry>
+					<term>PHPUnit</term>
+					<listitem>
+						<para>The software is normally installed via Composer
+							when the MantisBT repository is initialized with
+							<literal>composer install</literal>, which ensures that
+							you have the appropriate version to run the unit tests.
+						</para>
+						<para>It is also possible to use another instance of
+							PHPUnit, in which case you should refer to the
+							<literal>composer.json</literal> file to find out
+							which version to use.
+						</para>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>MantisBT</term>
+					<listitem>
+						<para>
+							MantisBT must be installed and operational on your
+							computer, per the admin guide. Additionally, the
+							following seed data must be created to ensure that
+							all test cases can be executed
+						</para>
+						<itemizedlist>
+							<listitem><para>1 <emphasis>Project</emphasis></para></listitem>
+							<listitem><para>3 Project <emphasis>Versions</emphasis>:
+								<emphasis>Old</emphasis> (released, obsolete),
+								<emphasis>Active</emphasis> (released, not obsolete)
+								and <emphasis>Future</emphasis> (not released, not obsolete)
+							</para></listitem>
+							<listitem><para>2 <emphasis>Tags</emphasis></para></listitem>
+							<listitem><para><emphasis>Anonymous user</emphasis> account
+								(protected, enabled and with VIEWER access level)
+							</para></listitem>
+							<listitem><para>1 REST API <emphasis>Token</emphasis>
+								for the Administrator account used to run the tests
+							</para></listitem>
+						</itemizedlist>
+						<warning><para>
+							If the MantisBT instance is to be used for other purposes
+							than unit testing, it is strongly recommended to create
+							a dedicated project for the unit tests, to avoid any
+							side-effects as the tests will generate a large number
+							of various types of database records.
+						</para></warning>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>Configuration</term>
+					<listitem>
+						<para>The following variables must be set in your
+							<literal>config_inc.php</literal> file to ensure all
+							PHPUnit tests are executed. Without this, some
+							tests will be skipped
+						</para>
+						<programlisting>
+$g_allow_no_category = ON;
+$g_due_date_update_threshold = DEVELOPER;
+$g_due_date_view_threshold = DEVELOPER;
+$g_enable_product_build = ON;
+$g_enable_project_documentation = ON;
+$g_time_tracking_enabled = ON;
+$g_time_tracking_enabled = ON;
+$g_allow_anonymous_login = ON;
+$g_anonymous_account = 'username'; # of the anonymous account created above
+						</programlisting>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>PHPUnit Bootstrap file</term>
+					<listitem>
+						<para>
+							The tests are configured using a
+							<literal>bootstrap.php</literal> file,
+							which must be adjusted to run the tests on your
+							local installation.
+							The <literal>tests/boostrap.php.sample</literal> file
+							contains the settings you will need to adjust to run
+							all the tests.
+						</para>
+						<para>
+							At the minimum, you should set the following variables
+						</para>
+						<itemizedlist>
+							<listitem>
+								<para>
+									<literal>MANTIS_TESTSUITE_USERNAME</literal>,
+									<literal>MANTIS_TESTSUITE_PASSWORD</literal> and
+									<literal>MANTIS_TESTSUITE_PROJECT_ID</literal>
+								</para>
+							</listitem>
+							<listitem>
+								<para>For the SOAP Tests:
+									<literal>MANTIS_TESTSUITE_SOAP_ENABLED</literal> and
+									<literal>MANTIS_TESTSUITE_SOAP_HOST</literal>
+								</para>
+							</listitem>
+							<listitem>
+								<para>For the REST API Tests:
+									<literal>MANTIS_TESTSUITE_REST_ENABLED</literal>,
+									<literal>MANTIS_TESTSUITE_REST_HOST</literal> and
+									<literal>MANTIS_TESTSUITE_API_TOKEN</literal>
+								</para>
+							</listitem>
+						</itemizedlist>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>SOAP extension</term>
+					<listitem>
+						<para>
+							The <ulink url="https://www.php.net/manual/en/book.soap.php">
+								PHP SOAP extension</ulink>
+							is required to run the SOAP tests.
+						</para>
+					</listitem>
+				</varlistentry>
+
+			</variablelist>
+
+		</section>
+
+		<section id="dev.contrib.test.run">
+			<title>Running the tests</title>
+
+			<para>
+				To run the tests, run the following command from the MantisBT
+				repository's root
+			</para>
+			<programlisting>
+./vendor/bin/phpunit
+			</programlisting>
+
+			<para>
+				Execution can be limited to a subset or individual test units
+			</para>
+			<programlisting>
+./vendor/bin/phpunit --testsuite rest
+./vendor/bin/phpunit tests/Mantis/ConfigParserTest.php
+			</programlisting>
+
+			<para>
+				For further details and options, refer to the
+				<ulink url="https://docs.phpunit.de/en/9.6/textui.html#command-line-options">
+					PHPUnit manual</ulink>.
+			</para>
 
 		</section>
 	</section>
@@ -487,7 +654,7 @@ phing test
 					<listitem>
 						<para>
 							Your code follows the
-							<ulink url="http://www.mantisbt.org/wiki/doku.php/mantisbt:coding_guidelines">
+							<ulink url="https://mantisbt.org/wiki/doku.php/mantisbt:coding_guidelines">
 								MantisBT coding guidelines
 							</ulink>
 						</para>
@@ -515,7 +682,7 @@ phing test
 			<para>
 				Since the <ulink url="https://github.com/mantisbt/mantisbt">
 				official MantisBT repository</ulink> is hosted there, using
-				<ulink url="http://github.com">GitHub</ulink> is the
+				<ulink url="https://github.com">GitHub</ulink> is the
 				recommended (and easiest) way to submit your contributions.
 			</para>
 
@@ -590,7 +757,7 @@ git push origin MyBranch
 						of the changes you are submitting, including the
 						reason for it and if possible a reference (link) to
 						an existing issue on
-						<ulink url="http://mantibt.org/bugs/">our bugtracker</ulink>.
+						<ulink url="https://mantisbt.org/bugs/">our bugtracker</ulink>.
 						The team will usually review your changes and provide
 						feedback within 7 days (but your mileage may vary).
 					</para>
@@ -643,7 +810,7 @@ git am --signoff feature_branch.patch
 
 			<para>
 				If you are not able or not willing to make use of a fork of
-				the official <ulink url="http://github.com">GitHub</ulink>
+				the official <ulink url="https://github.com">GitHub</ulink>
 				repository but have another publicly available one to host
 				your changes, for example on a free hosting for public
 				repository such as
@@ -656,7 +823,7 @@ git am --signoff feature_branch.patch
 					</listitem>
 					<listitem>
 						<para>
-							<ulink url="http://gitorious.com">Gitorious</ulink>
+							<ulink url="https://gitlab.com">GitLab</ulink>
 						</para>
 					</listitem>
 				</itemizedlist>

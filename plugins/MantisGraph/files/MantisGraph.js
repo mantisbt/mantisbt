@@ -1,5 +1,15 @@
-$(document).ready( function() {
-    $("canvas[id^='barchart']").each( function() {
+/* jshint esversion: 6, -W097, -W031 */
+/* globals Chart */
+"use strict";
+
+$(function() {
+    // Default color scheme
+    Chart.defaults.plugins.colorschemes.scheme = 'tableau.Classic20';
+
+    // Bar charts
+    $("canvas[id*='barchart']").each( function() {
+        // Is it a vertical or horizontal bar chart ?
+        const vertical = this.id.substring(0, 8) === 'barchart';
         new Chart( $(this), {
             type: 'bar',
             data: {
@@ -7,23 +17,30 @@ $(document).ready( function() {
                 datasets: [{
                     label: '# of issues',
                     data: $(this).data('values'),
-                    backgroundColor: 'rgba(252, 189, 189, 0.7)',
-                    borderColor: 'rgba(252, 189, 189, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
                 scales: {
-                    yAxes: [{
+                    x: {
+                        position: vertical ? 'bottom' : 'top',
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 90
+                        }
+                    },
+                    y: {
                         ticks: {
                             beginAtZero: true
                         }
-                    }]
-                }
+                    },
+                },
+                indexAxis: vertical ? 'x' : 'y',
             }
         });
     });
 
+    // Pie charts
     $("canvas[id^='piechart']").each( function() {
         new Chart( $(this), {
             type: 'pie',
@@ -32,16 +49,24 @@ $(document).ready( function() {
                 datasets: [{
                     label: '# of issues',
                     data:  $(this).data('values'),
-                    backgroundColor: $(this).data('background-colors'),
-                    borderColor: $(this).data('border-colors'),
                     borderWidth: 1
                 }]
+            },
+            options: {
+                // Graphs have a default size of 500*400
+                aspectRatio: 1.25,
+                plugins: {
+                    colorschemes: {
+                        scheme: $(this).data('colors'),
+                    },
+                },
             }
         });
     });
 
+    // Issue trends
     $("canvas[id^='linebydate']").each( function() {
-        var ctx = $(this).get(0).getContext("2d");
+        const ctx = $(this).get(0).getContext("2d");
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -49,27 +74,51 @@ $(document).ready( function() {
                 datasets: [
                     {
                         label: $(this).data('opened-label'),
-                        backgroundColor: 'rgba(255, 158, 158, 0.5)',
-                        data: $(this).data('opened-values')
+                        data: $(this).data('opened-values'),
+                        fill: false,
+                        stack: 'total', // Display on a separate stack
                     },
                     {
                         label: $(this).data('resolved-label'),
-                        backgroundColor: 'rgba(49, 196, 110, 0.5)',
-                        data: $(this).data('resolved-values')
+                        data: $(this).data('resolved-values'),
+                        fill: 'origin',
                     },
                     {
                         label: $(this).data('still-open-label'),
-                        backgroundColor: 'rgba(255, 0, 0, 1)',
-                        data: $(this).data('still-open-values')
-                    },]
+                        data: $(this).data('still-open-values'),
+                        fill: '-1', // Fill since "resolved" dataset
+                    },
+                ]
             },
             options: {
                 scales: {
-                    yAxes: [{
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
                         ticks: {
-                            beginAtZero: true
+                            precision: 0,
                         }
-                    }]
+                    }
+                },
+                datasets: {
+                    line: {
+                        tension: 0.3,
+                    }
+                },
+                plugins: {
+                    // legend: {
+                    //     display: true,
+                    //     fillStyle: "#cccccc",
+                    // },
+                    tooltip: {
+                        mode: 'index',
+                        position: 'nearest',
+                    },
+                    colorschemes: {
+                        scheme: 'brewer.Set1-3',
+                        reverse: true,
+                        fillAlpha: 0.15,
+                    }
                 }
             }
         });

@@ -88,13 +88,8 @@ $t_can_change_level = min( config_get_access( 'status_enum_workflow' ), config_g
 		, config_get_access( 'bug_submit_status' ), config_get_access( 'bug_resolved_status_threshold' ), config_get_access( 'bug_reopen_status' ) );
 access_ensure_project_level( $t_can_change_level );
 
-$t_redirect_url = 'manage_config_workflow_page.php';
 $t_project = helper_get_current_project();
 $t_access = current_user_get_access_level();
-
-layout_page_header( lang_get( 'manage_workflow_config' ), $t_redirect_url );
-
-layout_page_begin( 'manage_overview_page.php' );
 
 # process the changes to threshold values
 $t_valid_thresholds = array(
@@ -128,6 +123,7 @@ $t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_e
 # process the workflow by reversing the flags to a matrix and creating the appropriate string
 if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	$f_value = gpc_get( 'flag', array() );
+	$f_value = $f_value ?? [];
 	$f_access = gpc_get( 'workflow_access' );
 	$t_matrix = array();
 
@@ -252,6 +248,4 @@ if( min( config_get_access( 'set_status_threshold' ), config_get_access( 'report
 
 form_security_purge( 'manage_config_workflow_set' );
 
-html_operation_successful( $t_redirect_url );
-
-layout_page_end();
+print_header_redirect( 'manage_config_workflow_page.php' );

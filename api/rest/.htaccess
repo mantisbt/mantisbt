@@ -3,3 +3,5 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
 
+# Requests failing due to missing Authorization header, see #26365
+CGIPassAuth On

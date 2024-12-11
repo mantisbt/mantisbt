@@ -100,7 +100,7 @@ layout_page_begin( 'main_page.php' );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-edit"></i>
+					<?php print_icon( 'fa-edit', 'ace-icon' ); ?>
 					<?php echo lang_get( 'edit_post' ) ?>
 				</h4>
 			</div>
@@ -124,7 +124,10 @@ layout_page_begin( 'main_page.php' );
 					<span class="required">*</span> <?php echo lang_get( 'body' ) ?>
 				</td>
 				<td>
-					<textarea class="form-control" id="news-update-body" name="body" cols="60" rows="10" required><?php echo $v_body ?></textarea>
+					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+					<textarea class="form-control" id="news-update-body" name="body" cols="60" rows="10" required>
+<?php echo $v_body ?>
+</textarea>
 				</td>
 			</tr>
 			<tr>

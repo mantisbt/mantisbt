@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,7 +33,7 @@
 /** Macedonian (македонски)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
@@ -48,8 +48,33 @@ $s_plugin_format_process_text = 'Обработка на текст';
 $s_plugin_format_process_text_warning_notice = 'Не исклучувајте доколку не сте уверени дека навистина знаете што правите. Во исклучена состојба, можни се меѓумесни напади (XSS) на мрежното место.';
 $s_plugin_format_process_urls = 'Обработка на URL';
 $s_plugin_format_process_buglinks = 'Внатрешни врски на MantisBT (задачи и нивни белешки)';
-$s_plugin_format_process_buglinks_info = 'Во вашата поставка ознаката <em>Issue</em>  е зададена како „<literal>%s</literal>“, а ознаката <em>Issue Note</em> како „<literal>%s</literal>“';
+$s_plugin_format_process_buglinks_info = 'Во вашата поставка ознаката <em>Issue</em>  е зададена како „%s“, а ознаката <em>Issue Note</em> како „%s“';
 $s_plugin_format_process_markdown = 'Обработка со Markdown';
 $s_plugin_format_process_markdown_info = 'Стилизирање со поддршка за Markdown — синтакса за форматирање текст предвидена да може да се претвора во HTML.';
 $s_plugin_format_enabled = 'Вкл.';
 $s_plugin_format_disabled = 'Искл.';
+$s_plugin_format_syntax_highlighting = 'Нагласување на синтакса за кодни блокови';
+$s_plugin_format_syntax_highlighting_info = 'Нагласување на синтаксата работи само ако е активна „Обработка со Markdown“';
+$s_plugin_format_syntax_highlighting_theme = 'Изглед на кодните блокови';
+$s_plugin_format_syntax_highlighting_plugins = 'Можности за кодните блокови';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Копирај во меѓускладот';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Прикажува мало копче за копирање на содржината на кодниот блок во меѓускладот.';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Копирај';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Ископирано';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Стиснете на Ctrl+C за да копирате';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Прикажи јазик';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Прикажува кој јазик го содржи кодниот блок.';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Број на редови';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Прикажува број на редови.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Прикажи белини';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Прикажува скриени знаци (на пр. за вовлекувања).';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Нормализирај белини';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Ги отстранува сите белини на кодниот блок пред и зад знаците. Воедно ги отстранува дополнителните вовлекувања и завршните белини на секој ред.';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Спарени загради';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'Го прикажува спарувањето на загради со одење на стрелката врз нив. Вклучува „виножитни загради“ (секој пар има своја боја).';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Проширено нагласување на разлики (разл)';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'Ја бои позадианта на редот наместо текстот и покрај „diff“, постои можност за боење според јазик (на пр. „diff-javascript“).';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Прикажи CSS-бои';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Прикажува обоено квадратче пред зададена боја (на пр. пред „#000“).';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Прегледници за некои CSS-зададоци';
+$s_plugin_format_syntax_highlighting_plugin_previewers_desc = 'Ќе се појави прегледник при одење со стралката врз зададбите „angle“, „color“, „gradient“, „easing“ или „time“.';

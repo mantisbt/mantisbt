@@ -60,10 +60,9 @@ function json_url( $p_url, $p_member = null ) {
  * @param string  $p_error   Contains the error message, as a string.
  * @param string  $p_file    Contains the filename that the error was raised in, as a string.
  * @param integer $p_line    Contains the line number the error was raised at, as an integer.
- * @param array   $p_context The active symbol table at the point the error occurred (optional).
  * @return void
  */
-function json_error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) {
+function json_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	# flush any language overrides to return to user's natural default
 	if( function_exists( 'db_is_connected' ) ) {
 		if( db_is_connected() ) {

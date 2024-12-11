@@ -89,16 +89,26 @@ if( $f_all_projects ) {
 	$t_project_id = 0;
 }
 
-$t_filter_string = filter_db_get_filter( gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' ) );
+# Get the filter in use
+$t_filter = current_user_get_bug_filter();
+
 # named filters must not reference source query id
-$t_filter = filter_deserialize( $t_filter_string );
 if( isset( $t_filter['_source_query_id'] ) ) {
 	unset( $t_filter['_source_query_id'] );
 }
-$t_filter_string = filter_serialize( $t_filter );
 
-$t_new_row_id = filter_db_set_for_current_user( $t_project_id, $f_is_public,
-												$f_query_name, $t_filter_string );
+# Check that the user has permission to create stored filters
+if( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
+	access_denied();
+}
+
+# ensure that we're not making this filter public if we're not allowed
+if( $f_is_public && !access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
+	access_denied();
+}
+
+$t_filter_string = filter_serialize( $t_filter );
+$t_new_row_id = filter_db_create_filter( $t_filter_string, auth_get_current_user_id(), $t_project_id, $f_query_name , $f_is_public );
 
 form_security_purge( 'query_store' );
 
@@ -107,5 +117,15 @@ if( $t_new_row_id == -1 ) {
 		. urlencode( lang_get( 'query_store_error' ) );
 	print_header_redirect( $t_query_redirect_url );
 } else {
-	print_header_redirect( 'view_all_bug_page.php' );
+	# Build a redirect to view_all_set to load the filter that was saved.
+	# This will make the filter name appear as selected in the filter selection box.
+	$t_params = array(
+		'type' => 3,
+		'source_query_id' => $t_new_row_id
+	);
+	if( filter_is_temporary( $t_filter ) ) {
+		$t_params['filter'] = filter_get_temporary_key( $t_filter );
+	}
+	$t_redirect = 'view_all_set.php?' . http_build_query( $t_params );
+	print_header_redirect( $t_redirect );
 }

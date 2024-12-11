@@ -33,7 +33,7 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp     Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id       An user identifier.
+	 * @param integer $p_user_id       A user identifier.
 	 * @param integer $p_issue_id      A issue identifier.
 	 * @param integer $p_issue_note_id A issue note identifier.
 	 */
@@ -50,7 +50,7 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 	 */
 	public function html() {
 		$t_html = $this->html_start( 'fa-comment-o' );
-		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_note_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_note_created' ), prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
 		$t_html .= $this->html_end();
 
 		return $t_html;

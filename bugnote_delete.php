@@ -50,4 +50,4 @@ $t_result = $t_command->execute();
 
 form_security_purge( 'bugnote_delete' );
 
-print_successful_redirect( string_get_bug_view_url( $t_result['issue_id'] ) . '#bugnotes' );
+print_header_redirect( string_get_bug_view_url( $t_result['issue_id'] ) . '#bugnotes' );

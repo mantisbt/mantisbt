@@ -51,19 +51,63 @@ class AuthMiddleware {
 			}
 		} else {
 			# TODO: add an index on the token hash for the method below
-			$t_user_id = api_token_get_user( $t_authorization_header );
+
+			# Manage multiple authorization header (ex: Basic + token)
+			$t_authorization_headers = explode(', ', $t_authorization_header);
+			$t_user_id = false;
+			$t_api_token  = '';
+
+			# Search for the token among the different authorization headers. 
+			foreach( $t_authorization_headers as $value ) {
+				$t_user_id = api_token_get_user( $value );
+				if( $t_user_id !== false ) {
+					# Valid token found
+					$t_api_token = $value;
+					break;
+				}
+			}
+
 			if( $t_user_id === false ) {
 				return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'API token not found' );
 			}
 
 			# use api token
 			$t_login_method = LOGIN_METHOD_API_TOKEN;
-			$t_password = $t_authorization_header;
+			$t_password = $t_api_token;
 			$t_username = user_get_username( $t_user_id );
 		}
 
 		if( mci_check_login( $t_username, $t_password ) === false ) {
 			return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'Access denied' );
+		}
+
+		$t_impersonation_header = $request->getHeaderLine( HEADER_USERNAME );
+		if( !empty( $t_impersonation_header ) && $t_login_method == LOGIN_METHOD_API_TOKEN ) {
+			$t_username = $t_impersonation_header;
+			$t_impersonation_user_id = user_get_id_by_name( $t_username );
+			if( $t_impersonation_user_id === false ) {
+				return $response->withStatus( HTTP_STATUS_NOT_FOUND, 'Invalid impersonation username' );
+			}
+
+			if( $t_impersonation_user_id === auth_get_current_user_id() ) {
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, "Can't impersonate self" );
+			}
+
+			if( !access_has_global_level( config_get( 'impersonate_user_threshold' ) ) ) {
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, "User can't impersonate other users" );
+			}
+
+			if( (int)user_get_field( $t_impersonation_user_id, 'access_level' ) > current_user_get_field( 'access_level' ) ) {
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, "User can't impersonate users with higher access level" );
+			}
+
+			# Token is valid, then login the user without worrying about a password.
+			if( auth_attempt_script_login( $t_username, null ) === false ) {
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'Login failed for impersonated user' );
+			}
+
+			# Set language to user's language
+			lang_push( lang_get_default() );
 		}
 
 		# Now that user is logged in, check if they have the right access level to access the REST API.

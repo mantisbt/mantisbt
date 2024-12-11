@@ -46,7 +46,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
 define( 'PRINT_ALL_BUG_OPTIONS_INC_ALLOW', true );
-include( dirname( __FILE__ ) . '/print_all_bug_options_inc.php' );
+include( __DIR__ . '/print_all_bug_options_inc.php' );
 
 form_security_validate( 'print_all_bug_options_reset' );
 
@@ -77,17 +77,16 @@ form_security_purge( 'print_all_bug_options_reset' );
 
 $t_redirect_url = 'print_all_bug_options_page.php';
 
-layout_page_header( null, $t_redirect_url );
-
-layout_page_begin();
-
 if( $t_result ) {
-	html_operation_successful( $t_redirect_url );
+	print_header_redirect( $t_redirect_url );
 } else {
+	layout_page_header( null, $t_redirect_url );
+	layout_page_begin();
+
 	echo '<div class="failure-msg">';
 	echo error_string( ERROR_GENERIC ) . '<br />';
 	print_link_button( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
-}
 
-layout_page_end();
+	layout_page_end();
+}

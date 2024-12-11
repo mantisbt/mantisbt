@@ -53,6 +53,7 @@ gpc_make_array( FILTER_PROPERTY_STATUS );
 gpc_make_array( FILTER_PROPERTY_REPORTER_ID );
 gpc_make_array( FILTER_PROPERTY_HANDLER_ID );
 gpc_make_array( FILTER_PROPERTY_PROJECT_ID );
+gpc_make_array( FILTER_PROPERTY_PROJECTION );
 gpc_make_array( FILTER_PROPERTY_RESOLUTION );
 gpc_make_array( FILTER_PROPERTY_BUILD );
 gpc_make_array( FILTER_PROPERTY_VERSION );
@@ -81,6 +82,7 @@ $t_my_filter[FILTER_PROPERTY_SEVERITY] = gpc_get_string_array( FILTER_PROPERTY_S
 $t_my_filter[FILTER_PROPERTY_STATUS] = gpc_get_string_array( FILTER_PROPERTY_STATUS, $t_meta_filter_any_array );
 
 $t_my_filter[FILTER_PROPERTY_PROJECT_ID] = gpc_get_string_array( FILTER_PROPERTY_PROJECT_ID, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_PROJECTION] = gpc_get_string_array( FILTER_PROPERTY_PROJECTION, $t_meta_filter_any_array );
 $t_my_filter[FILTER_PROPERTY_RESOLUTION] = gpc_get_string_array( FILTER_PROPERTY_RESOLUTION, $t_meta_filter_any_array );
 $t_my_filter[FILTER_PROPERTY_BUILD] = gpc_get_string_array( FILTER_PROPERTY_BUILD, $t_meta_filter_any_array );
 $t_my_filter[FILTER_PROPERTY_FIXED_IN_VERSION] = gpc_get_string_array( FILTER_PROPERTY_FIXED_IN_VERSION, $t_meta_filter_any_array );
@@ -135,12 +137,34 @@ if( $t_highlight_changed != -1 ) {
 $t_custom_fields = array();
 foreach( $_GET as $t_var_name => $t_var_value ) {
 	if( strpos( $t_var_name, 'custom_field_' ) === 0 ) {
-		$t_custom_field_id = utf8_substr( $t_var_name, 13 );
+		$t_custom_field_id = mb_substr( $t_var_name, 13 );
 		$t_custom_fields[$t_custom_field_id] = $t_var_value;
 	}
 }
 
 $t_my_filter['custom_fields'] = $t_custom_fields;
+
+# Handle class-based filters defined as plugins
+$t_plugin_filters = filter_get_plugin_filters();
+foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+    switch( $t_filter_object->type ) {
+        case FILTER_TYPE_STRING:
+            $t_my_filter[$t_field_name] = gpc_get_string( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+            break;
+        case FILTER_TYPE_INT:
+            $t_my_filter[$t_field_name] = gpc_get_int( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+            break;
+        case FILTER_TYPE_BOOLEAN:
+            $t_my_filter[$t_field_name] = gpc_get_bool( $t_field_name, $t_meta_filter_any_array[$t_field_name]);
+            break;
+        case FILTER_TYPE_MULTI_STRING:
+            $t_my_filter[$t_field_name] = gpc_get_string_array( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+            break;
+        case FILTER_TYPE_MULTI_INT:
+            $t_my_filter[$t_field_name] = gpc_get_int_array( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+            break;
+    }
+}
 
 # Must use advanced filter so that the project_id is applied and multiple
 # selections are handled.
@@ -148,16 +172,9 @@ $t_my_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
 
 $t_setting_arr = filter_ensure_valid_filter( $t_my_filter );
 
-$t_settings_serialized = json_encode( $t_setting_arr );
-$t_settings_string = FILTER_VERSION . '#' . $t_settings_serialized;
-
-# Store the filter string in the database: its the current filter, so some values won't change
-$t_project_id = helper_get_current_project();
-$t_project_id = ( $t_project_id * -1 );
-$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
-
-# set cookie values
-gpc_set_cookie( config_get_global( 'view_all_cookie' ), $t_row_id, time()+config_get_global( 'cookie_time_length' ), config_get_global( 'cookie_path' ) );
+# set the filter for use, for current user
+# Note: This will overwrite the filter in use/default for current project and user.
+$t_temporary_key = filter_temporary_set( $t_setting_arr );
 
 # redirect to print_all or view_all page
 if( $f_print ) {
@@ -165,5 +182,6 @@ if( $f_print ) {
 } else {
 	$t_redirect_url = 'view_all_bug_page.php';
 }
+$t_redirect_url .= '?' . filter_get_temporary_key_param( $t_temporary_key );
 
 print_header_redirect( $t_redirect_url );

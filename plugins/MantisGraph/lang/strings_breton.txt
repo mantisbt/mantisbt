@@ -25,7 +25,7 @@
  * **                                                                  **
  * **                      DO NOT UPDATE MANUALLY                      **
  * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
+ * ** To improve a translation please visit https://translatewiki.net  **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
@@ -33,20 +33,20 @@
 /** Breton (brezhoneg)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
+ * To improve a translation please visit https://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
  * @author Fohanno
+ * @author Fulup
  * @author Gwenn-Ael
  */
 
-$s_plugin_graph_title = 'Grafikoù Mantis';
-$s_plugin_graph_description = 'Lugant ofisiel evit ar grafikoù.';
 $s_plugin_MantisGraph_title = 'Grafikoù Mantis';
+$s_plugin_MantisGraph_description = 'Lugant ofisiel evit ar grafikoù.';
 $s_plugin_MantisGraph_config = 'Kefluniadur';
-$s_plugin_MantisGraph_synthesis_link = 'Sintezenn';
+$s_plugin_MantisGraph_tab_label = 'Grafikoù';
 $s_plugin_MantisGraph_status_link = 'Dre statud';
 $s_plugin_MantisGraph_priority_link = 'Dre briorezh';
 $s_plugin_MantisGraph_severity_link = 'Dre live grevusted';
@@ -87,3 +87,4 @@ $s_plugin_MantisGraph_graph_page = 'Grafik istor an draen';
 $s_plugin_MantisGraph_graph_topdev = 'Diorroeien oberiantañ dre zanvez Reizhet';
 $s_plugin_MantisGraph_graph_opendev = 'Diorroerien dre zanvez Digor';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Danevelleren oberiantañ dre zanvez Reizhet';
+$s_plugin_MantisGraph_other_categories = 'rummadoù all (%d)';

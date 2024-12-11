@@ -54,7 +54,7 @@ class Avatar
      * @param integer $p_user_id  The user id.
      * @param integer $p_size     The desired width/height of the avatar.
      *
-     * @return array The array with avatar information.
+     * @return Avatar The Avatar instance.
      */
     public static function get( $p_user_id, $p_size = 80 ) {
         $t_enabled = config_get( 'show_avatar' ) !== OFF;

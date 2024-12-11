@@ -10,7 +10,7 @@
 		formatting.
 	</para>
 	<para>Please refer to the
-		<ulink url="http://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters">
+		<ulink url="https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters">
 			PHP manual
 		</ulink> for details on available formatting options.
 	</para>
@@ -47,13 +47,13 @@
 			<term>$g_datetime_picker_format</term>
 			<listitem>
 				<para>This format is used with the datetime picker widget.
-					Default is <literal>Y-MM-DD H:m</literal>.
+					Default is <literal>Y-MM-DD HH:mm</literal>.
 				</para>
 				<note><para>The formatting convention for the DateTime picker is
 					different from the one used for the other date settings
 					described above; see
-					<ulink url="http://momentjs.com/docs/#/displaying/format/">
-						Moment.js documention
+					<ulink url="https://momentjs.com/docs/#/displaying/format/">
+						Moment.js documentation
 					</ulink>
 					for details.
 				</para></note>

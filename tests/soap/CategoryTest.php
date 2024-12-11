@@ -108,7 +108,7 @@ class CategoryTest extends SoapBase {
 	 * Tear Down: Remove categories created by tests
 	 * @return void
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 		parent::tearDown();
 
 		foreach( $this->categoryNamesToDelete as $t_category_name )  {

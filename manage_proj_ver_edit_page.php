@@ -60,7 +60,6 @@ $t_version = version_get( $f_version_id );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version->project_id );
 
 layout_page_header();
-
 layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_proj_ver_edit_page.php' );
@@ -73,7 +72,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-share-alt"></i>
+					<?php print_icon( 'fa-share-alt', 'ace-icon' ); ?>
 					<?php echo lang_get( 'edit_project_version_title' ) ?>
 				</h4>
 			</div>
@@ -101,7 +100,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 						data-picker-locale="<?php echo lang_get_current_datetime_locale() ?>"
 						data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
 						size="16" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'normal_date_format' ), $t_version->date_order ) ) ) ?>" />
-					<i class="fa fa-calendar fa-xlg datetimepicker"></i>
+					<?php print_icon( 'fa-calendar', 'fa-xlg datetimepicker' ); ?>
 				</td>
 			</tr>
 			<tr>
@@ -109,7 +108,10 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 					<?php echo lang_get( 'description' ) ?>
 				</td>
 				<td>
-					<textarea class="form-control" id="proj-version-description" name="description" cols="60" rows="5"><?php echo string_attribute( $t_version->description ) ?></textarea>
+					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+					<textarea class="form-control" id="proj-version-description" name="description" cols="60" rows="5">
+<?php echo string_attribute( $t_version->description ) ?>
+</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -141,22 +143,19 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 			</div>
 			<div class="widget-toolbox padding-8 clearfix">
 				<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_version_button' ) ?>" />
+				<button class="btn btn-primary btn-white btn-round">
+					<?php echo lang_get( 'update_version_button' ) ?>
+				</button>
+				<?php echo form_security_field( 'manage_proj_ver_delete' ) ?>
+				<button class="btn btn-primary btn-white btn-round"
+						formaction="manage_proj_ver_delete.php">
+					<?php echo lang_get( 'delete_version_button' ) ?>
+				</button>
 			</div>
 			</div>
 			</div>
 	</form>
 </div>
-</div>
-
-<div class="col-md-12 col-xs-12">
-	<form method="post" action="manage_proj_ver_delete.php" class="pull-right">
-		<fieldset>
-			<?php echo form_security_field( 'manage_proj_ver_delete' ) ?>
-			<input type="hidden" name="version_id" value="<?php echo string_attribute( $t_version->id ) ?>" />
-			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
-		</fieldset>
-	</form>
 </div>
 
 <?php
