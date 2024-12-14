@@ -54,6 +54,7 @@ define( 'DB_MIN_VERSION_MSSQL', '11.0.0' );  # MS SQL Server 2012
 define( 'DB_MIN_VERSION_MYSQL', '5.5.35' );  # See #20431
 define( 'DB_MIN_VERSION_PGSQL', '9.2' );     # Earliest supported version as of Nov 2016
 define( 'DB_MIN_VERSION_ORACLE', '11.2' );
+define( 'DB_MIN_VERSION_SQLITE3', '3.35' );
 
 # error types
 define( 'ERROR', E_USER_ERROR );
@@ -750,6 +751,7 @@ define( 'DB_TYPE_MYSQL', 1 );
 define( 'DB_TYPE_PGSQL', 2 );
 define( 'DB_TYPE_MSSQL', 3 );
 define( 'DB_TYPE_ORACLE', 4 );
+define( 'DB_TYPE_SQLITE3', 5 );
 
 # Database special capabilities identifiers
 define( 'DB_CAPABILITY_WINDOW_FUNCTIONS', 1 );

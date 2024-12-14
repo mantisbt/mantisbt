@@ -7,7 +7,7 @@
 declare -A query=(
 	[install]=2
 	[db_type]=$DB_TYPE
-	[hostname]=$HOSTNAME
+	[hostname]=$DB_HOST
 	[database_name]=$DB_NAME
 	[db_username]=$DB_USER
 	[db_password]=$DB_PASSWORD

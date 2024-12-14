@@ -937,7 +937,7 @@ class DbQuery {
 		$t_pattern = $p_pattern;
 
 		# Here we assume that by default:
-		# mysql, mssql: have case-insensitive collations
+		# mysql, mssql, sqlite3: have case-insensitive collations
 		# pgsql, oracle: have case-sensitive collations
 		# Otherwise, a more complicated discovery should be implemented.
 		if( $p_force_ci ) {

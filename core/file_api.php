@@ -1063,8 +1063,8 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	if( 'bug' == $p_table ) {
 		$t_param['bugnote_id'] = is_null( $p_bugnote_id ) ? null : (int)$p_bugnote_id;
 	}
-	# Oracle has to update BLOBs separately
-	if( !db_is_oracle() ) {
+	# Update BLOBs separately
+	if( !db_uses_blob() ) {
 		$t_param['content'] = $c_content;
 	}
 
@@ -1081,7 +1081,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 
 	$t_file_info['id'] = db_insert_id( $t_file_table );
 
-	if( db_is_oracle() ) {
+	if( db_uses_blob() ) {
 		db_update_blob( $t_file_table, 'content', $c_content, "diskfile='$t_unique_name'" );
 	}
 
