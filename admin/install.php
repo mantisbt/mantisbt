@@ -657,6 +657,7 @@ if( !$g_database_upgrade ) {
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
+				'sqlite3'     => 'SQLite3',
 			);
 
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
@@ -972,6 +973,8 @@ if( 3 == $t_install_state ) {
 		# database_api references this
 		require_once( __DIR__ . '/schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
+		$g_db->SetFetchMode( ADODB_FETCH_ASSOC );
+
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 		if( !$f_log_queries ) {
 			$g_db_connected = true;
@@ -1121,6 +1124,30 @@ if( 3 == $t_install_state ) {
 				$t_operation = $g_upgrade[$i][0];
 				$t_target = $g_upgrade[$i][1][0];
 
+				# SQLite: Patch schema
+				if( $f_db_type == 'sqlite3' && isset( $g_upgrade[$i][1][1] ) ) {
+					$t_request = $g_upgrade[$i][1][1];
+
+					# Rely on auto-detection
+					$t_request = str_replace( [ 'UNSIGNED', 'AUTOINCREMENT' ], '', $t_request );
+
+					# Remove the second PRIMARY
+					$t_request = str_replace( 'PRIMARY KEY', 'PRIMARY', $t_request );
+					while( substr_count( $t_request, 'PRIMARY' ) > 1 ) {
+						$t_pos = strrpos( $t_request, 'PRIMARY' );
+						$t_request = substr( $t_request, 0, $t_pos ) . substr( $t_request, $t_pos + 7 );
+					}
+					$t_request = str_replace( 'PRIMARY', 'PRIMARY KEY', $t_request );
+
+					# Remove NOT NULL of BLOB, use db_update_blob() instead
+					$t_request = preg_replace( '/B\s+NOTNULL/', 'B', $t_request );
+
+					# Replace VARCHAR(x) with TEXT
+					$t_request = preg_replace( '/C\([0-9]+\)/', 'X', $t_request );
+
+					$g_upgrade[$i][1][1] = $t_request;
+				}
+
 				switch( $t_operation ) {
 					case 'InsertData':
 						$t_sqlarray = call_user_func_array( $t_operation, $g_upgrade[$i][1] );
@@ -1144,6 +1171,15 @@ if( 3 == $t_install_state ) {
 						$t_target = $g_upgrade[$i][1];
 						break;
 
+					case 'AlterColumnSQL':
+						# SQLite: AlterColumnSQL can be safely ignored till it changing only a type sizes
+						if( $f_db_type == 'sqlite3' ) {
+							$t_target = null;
+							$t_sqlarray = array();
+							break;
+						}
+						# no break;
+						
 					default:
 						$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
 

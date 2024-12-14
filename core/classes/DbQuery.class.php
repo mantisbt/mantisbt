@@ -952,6 +952,7 @@ class DbQuery {
 					$t_operator = 'ILIKE';
 					break;
 				case DB_TYPE_ORACLE:
+				case DB_TYPE_SQLITE3:
 					$t_expr = 'upper(' . $t_expr . ')';
 					$t_pattern = strtoupper( $t_pattern );
 					break;
