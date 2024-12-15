@@ -1132,7 +1132,6 @@ if( 3 == $t_install_state ) {
 					$t_request = str_replace( [ 'UNSIGNED', 'AUTOINCREMENT' ], '', $t_request );
 
 					# Remove the second PRIMARY
-					$t_request = str_replace( 'PRIMARY KEY', 'PRIMARY', $t_request );
 					while( substr_count( $t_request, 'PRIMARY' ) > 1 ) {
 						$t_pos = strrpos( $t_request, 'PRIMARY' );
 						$t_request = substr( $t_request, 0, $t_pos ) . substr( $t_request, $t_pos + 7 );
