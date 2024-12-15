@@ -1169,15 +1169,6 @@ if( 3 == $t_install_state ) {
 						$t_sql = false;
 						$t_target = $g_upgrade[$i][1];
 						break;
-
-					case 'AlterColumnSQL':
-						# SQLite: AlterColumnSQL can be safely ignored till it changing only a type sizes
-						if( $f_db_type == 'sqlite3' ) {
-							$t_target = null;
-							$t_sqlarray = array();
-							break;
-						}
-						# no break;
 						
 					default:
 						$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
