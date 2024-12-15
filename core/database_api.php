@@ -854,8 +854,8 @@ function db_get_table_list() {
 /**
  * Updates a BLOB column
  *
- * This function is only needed for oci8; it will do nothing and return
- * false if used with another RDBMS.
+ * This function is only needed for databases that require separate BLOB
+ * handling, such as oci8 or sqlite3.
  *
  * @param string $p_table  Table name.
  * @param string $p_column The BLOB column to update.

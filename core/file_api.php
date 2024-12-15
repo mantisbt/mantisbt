@@ -1063,7 +1063,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	if( 'bug' == $p_table ) {
 		$t_param['bugnote_id'] = is_null( $p_bugnote_id ) ? null : (int)$p_bugnote_id;
 	}
-	# Oracle has to update BLOBs separately
+	# Update BLOBs separately
 	if( !db_is_oracle() && !db_is_sqlite3() ) {
 		$t_param['content'] = $c_content;
 	}
