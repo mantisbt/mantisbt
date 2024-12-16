@@ -175,19 +175,43 @@
 					for more details.
 				</para>
 			</blockquote>
+		</blockquote>
 
-			<blockquote id="dev.eventref.cronjob">
-				<title>EVENT_CRONJOB (Execute)</title>
+		<blockquote id="dev.eventref.cronjob">
+			<title>EVENT_CRONJOB (Execute)</title>
 
-				<blockquote>
-					<para>
-						This is an event that is triggered by the scripts/cronjob.php on
-						some recurring schedule (once an hour is recommended). Plugins
-						handle this event to execute recurring tasks.
-					</para>
-				</blockquote>
+			<blockquote>
+				<para>
+					This is an event that is triggered by the scripts/cronjob.php on
+					some recurring schedule (once an hour is recommended). Plugins
+					handle this event to execute recurring tasks.
+				</para>
 			</blockquote>
 		</blockquote>
+
+		<blockquote id="dev.eventref.ldap.cache_attrs">
+			<title>EVENT_LDAP_CACHE_ATTRS (Default)</title>
+
+			<blockquote>
+				<para>
+					An event that enables plugins to return a set of additional LDAP attribute names
+					to be cached on the very first read of the user attributes from the LDAP server.
+					The attributes defined by the <literal>$g_ldap_email_field</literal> and
+					<literal>$g_ldap_realname_field</literal> options are always read.
+					Later cached attributes can be accessed using the
+					<function>ldap_get_field_from_username()</function> function.
+				</para>
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array&gt;: The user name</para></listitem>
+				</itemizedlist>
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Array&gt;: LDAP attribute names</para></listitem>
+				</itemizedlist>				
+			</blockquote>
+		</blockquote>
+
 	</section>
 
 	<xi:include href="Events_Reference_Output.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
