@@ -288,6 +288,14 @@ function db_is_sqlite3() {
 }
 
 /**
+ * Checks if the database driver requires special BLOB handling
+ * @return boolean true if the BLOBs need to be handled by db_update_blob()
+ */
+function db_uses_blob() {
+	return db_is_oracle() || db_is_sqlite3();
+}
+
+/**
  * Validates that the given identifier's length is OK for the database platform
  * Triggers an error if the identifier is too long
  * @param string $p_identifier Identifier to check.
