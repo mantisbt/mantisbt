@@ -965,6 +965,7 @@ if( 3 == $t_install_state ) {
 
 		# fake out database access routines used by config_get
 		config_set_global( 'db_type', $f_db_type );
+		$g_db_functional_type = db_get_type( $f_db_type );
 
 		# Initialize table prefixes as specified by user
 		config_set_global( 'db_table_prefix', $f_db_table_prefix );
@@ -1169,7 +1170,7 @@ if( 3 == $t_install_state ) {
 						$t_sql = false;
 						$t_target = $g_upgrade[$i][1];
 						break;
-						
+
 					default:
 						$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
 
