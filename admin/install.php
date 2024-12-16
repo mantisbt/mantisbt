@@ -1125,29 +1125,6 @@ if( 3 == $t_install_state ) {
 				$t_operation = $g_upgrade[$i][0];
 				$t_target = $g_upgrade[$i][1][0];
 
-				# SQLite: Patch schema
-				if( $f_db_type == 'sqlite3' && isset( $g_upgrade[$i][1][1] ) ) {
-					$t_request = $g_upgrade[$i][1][1];
-
-					# Rely on auto-detection
-					$t_request = str_replace( [ 'UNSIGNED', 'AUTOINCREMENT' ], '', $t_request );
-
-					# Remove the second PRIMARY
-					while( substr_count( $t_request, 'PRIMARY' ) > 1 ) {
-						$t_pos = strrpos( $t_request, 'PRIMARY' );
-						$t_request = substr( $t_request, 0, $t_pos ) . substr( $t_request, $t_pos + 7 );
-					}
-					$t_request = str_replace( 'PRIMARY', 'PRIMARY KEY', $t_request );
-
-					# Remove NOT NULL of BLOB, use db_update_blob() instead
-					$t_request = preg_replace( '/B\s+NOTNULL/', 'B', $t_request );
-
-					# Replace VARCHAR(x) with TEXT
-					$t_request = preg_replace( '/C\([0-9]+\)/', 'X', $t_request );
-
-					$g_upgrade[$i][1][1] = $t_request;
-				}
-
 				switch( $t_operation ) {
 					case 'InsertData':
 						$t_sqlarray = call_user_func_array( $t_operation, $g_upgrade[$i][1] );
@@ -1229,6 +1206,19 @@ if( 3 == $t_install_state ) {
 				} else {
 					echo ' ( ' . $t_target . ' )';
 					if( $t_sql ) {
+
+						# SQLite: Detect the AUTOINCREMENT column and restore the correct definition in place
+						if( $f_db_type == 'sqlite3' && $t_sqlarray ) {
+							foreach( $t_sqlarray as & $t_request ) {
+								if( preg_match( '/\(\s+([a-z_]+).*AUTOINCREMENT/', $t_request, $t_matches ) ) {
+									$t_request = preg_replace( '/,\s+PRIMARY KEY \(' . $t_matches[ 1 ] . '\)/',
+										'', $t_request );
+									$t_request = preg_replace( '/INTEGER (UNSIGNED |)NOT NULL AUTOINCREMENT/',
+										'INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT', $t_request );
+								}
+							}
+						}
+
 						$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 					} else {
 						if( isset( $t_sqlarray[1] ) ) {
