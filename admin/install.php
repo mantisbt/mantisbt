@@ -1206,19 +1206,6 @@ if( 3 == $t_install_state ) {
 				} else {
 					echo ' ( ' . $t_target . ' )';
 					if( $t_sql ) {
-
-						# SQLite: Detect the AUTOINCREMENT column and restore the correct definition in place
-						if( $f_db_type == 'sqlite3' && $t_sqlarray ) {
-							foreach( $t_sqlarray as & $t_request ) {
-								if( preg_match( '/\(\s+([a-z_]+).*AUTOINCREMENT/', $t_request, $t_matches ) ) {
-									$t_request = preg_replace( '/,\s+PRIMARY KEY \(' . $t_matches[ 1 ] . '\)/',
-										'', $t_request );
-									$t_request = preg_replace( '/INTEGER (UNSIGNED |)NOT NULL AUTOINCREMENT/',
-										'INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT', $t_request );
-								}
-							}
-						}
-
 						$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 					} else {
 						if( isset( $t_sqlarray[1] ) ) {
