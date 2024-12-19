@@ -46,6 +46,7 @@
  * @uses user_api.php
  * @uses user_pref_api.php
  * @uses utility_api.php
+ * @uses template_api.php 
  *
  * @uses PHPMailerAutoload.php PHPMailer library
  *
@@ -75,6 +76,7 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
+require_api( 'template_api.php' );
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as phpmailerException;
@@ -1118,29 +1120,63 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 		$t_message = lang_get( 'email_notification_title_for_action_bugnote_submitted' ) . "\n\n";
 
 		$t_show_time_tracking = access_has_bug_level( $t_time_tracking_access_threshold, $t_bugnote->bug_id, $t_user_id );
-		$t_formatted_note = email_format_bugnote( $t_bugnote, $t_project_id, $t_show_time_tracking, $t_separator );
-		$t_message .= trim( $t_formatted_note ) . "\n";
-		$t_message .= $t_separator . "\n";
+		
+		## setting required in config_inc.php :
+		## $g_email_use_template = ON;
+		## here we also check if the mail template exists
+		$t_templating = OFF;
+		if ( ON == config_get( 'email_use_template' ) )  {
+			$t_template_definition = config_get( 'email_note_template' );
+			if (file_exists($t_template_definition)) {
+				$t_templating = ON;
+			}
+		}
+		if ( $t_templating ) {	
+			$t_message = email_template_bugnote($t_bugnote, $t_project_id, $t_show_time_tracking, $t_separator,$t_message );
+			$t_message .= "<br>";	
+			# Files attached
+			if( count( $p_files ) > 0 &&
+				access_has_bug_level( $t_view_attachments_threshold, $t_bugnote->bug_id, $t_user_id ) ) {
+				$t_message .= lang_get( 'bugnote_attached_files' ) . "<br>";
 
-		# Files attached
-		if( count( $p_files ) > 0 &&
-			access_has_bug_level( $t_view_attachments_threshold, $t_bugnote->bug_id, $t_user_id ) ) {
-			$t_message .= lang_get( 'bugnote_attached_files' ) . "\n";
+				foreach( $p_files as $t_file ) {
+					$t_message .= '- ' . $t_file['name'] . ' (' . number_format( $t_file['size'] ) .
+					' ' . lang_get( 'bytes' ) . ")<br>";
+				}
 
-			foreach( $p_files as $t_file ) {
-				$t_message .= '- ' . $t_file['name'] . ' (' . number_format( $t_file['size'] ) .
-					' ' . lang_get( 'bytes' ) . ")\n";
+				$t_message .= "<br>";
+			}
+			if ( ON == config_get( 'email_escape_template' ) )  {
+				$t_contents = htmlspecialchars( $t_message . "<br>" );
+			} else {
+				$t_contents = $t_message . "<br>";
 			}
 
+
+		} else {
+			$t_formatted_note = email_format_bugnote( $t_bugnote, $t_project_id, $t_show_time_tracking, $t_separator );
+			$t_message .= trim( $t_formatted_note ) . "\n";
 			$t_message .= $t_separator . "\n";
+
+			# Files attached
+			if( count( $p_files ) > 0 &&
+				access_has_bug_level( $t_view_attachments_threshold, $t_bugnote->bug_id, $t_user_id ) ) {
+				$t_message .= lang_get( 'bugnote_attached_files' ) . "\n";
+
+				foreach( $p_files as $t_file ) {
+					$t_message .= '- ' . $t_file['name'] . ' (' . number_format( $t_file['size'] ) .
+					' ' . lang_get( 'bytes' ) . ")\n";
+				}
+
+				$t_message .= $t_separator . "\n";
+			}
+
+			$t_contents = $t_message . "\n";
+
+			$t_mail_headers = [
+				'In-Reply-To' => email_generate_bug_md5( $t_bugnote->bug_id, $t_date_submitted )
+			];
 		}
-
-		$t_contents = $t_message . "\n";
-
-		$t_mail_headers = [
-			'In-Reply-To' => email_generate_bug_md5( $t_bugnote->bug_id, $t_date_submitted )
-		];
-
 		email_store( $t_user_email, $t_subject, $t_contents, $t_mail_headers );
 
 		log_event( LOG_EMAIL_VERBOSE, 'queued bugnote email for note ~' . $p_bugnote_id .
@@ -1474,6 +1510,9 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	$t_mail->isHTML( false );              # set email format to plain text
+	if ( ON == config_get( 'email_use_template' ) )  {
+		$t_mail->isHTML( true );
+	} 
 	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );
@@ -1790,7 +1829,30 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 		$t_message .= " \n";
 	}
 
-	$t_message .= email_format_bug_message( $p_visible_bug_data );
+
+	## test CN to enable template for sending email
+	## setting required on config_inc.php :
+	## $g_email_use_template = ON;
+	## here we also check if the mail template exists
+	$t_templating = OFF;
+	if ( ON == config_get( 'email_use_template' ) )  {
+		$t_template_definition = config_get( 'email_bug_template' );
+		if (file_exists($t_template_definition)) {
+			$t_templating = ON;
+		}
+	}
+	if ( $t_templating ) {
+		if ( ON == config_get( 'email_escape_template' ) )  {
+			$t_message = htmlspecialchars( email_template_bug_message( $p_visible_bug_data, $t_message ) );
+		} else {
+			$t_message = email_template_bug_message( $p_visible_bug_data, $t_message );
+		}
+	} else {
+
+		$t_message .= email_format_bug_message( $p_visible_bug_data ) ;
+
+	}
+
 
 	# build headers
 	$t_bug_id = $p_visible_bug_data['email_bug'];
