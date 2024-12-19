@@ -289,7 +289,15 @@ function layout_head_css() {
 
 	echo "\n";
 
-	# Print user font preference
+	# Set font preference
+	layout_user_font_preference();
+}
+
+/**
+ * Print user font preference
+ * @return void
+ */
+function layout_user_font_preference() {
 	$t_font_family = config_get( 'font_family', null, null, ALL_PROJECTS );
 	echo '<style>', "\n";
 	echo  '* { font-family: "' . $t_font_family . '"; } ', "\n";
