@@ -135,9 +135,6 @@ function layout_page_header_end( $p_page_id = null) {
 		echo '<body ' . $t_body_id . 'class="skin-3">', "\n";
 	}
 
-	# Set user font preference
-	layout_user_font_preference();
-
 	event_signal( 'EVENT_LAYOUT_BODY_BEGIN' );
 
 	$g_error_send_page_header = false;
@@ -291,13 +288,8 @@ function layout_head_css() {
 	}
 
 	echo "\n";
-}
 
-/**
- * Print user font preference
- * @return void
- */
-function layout_user_font_preference() {
+	# Print user font preference
 	$t_font_family = config_get( 'font_family', null, null, ALL_PROJECTS );
 	echo '<style>', "\n";
 	echo  '* { font-family: "' . $t_font_family . '"; } ', "\n";
@@ -378,9 +370,6 @@ function layout_login_page_begin( $p_title = '' ) {
 	html_head_end();
 
 	echo '<body class="login-layout light-login">';
-
-	# Set font preference
-	layout_user_font_preference();
 
 	layout_main_container_begin();
 	layout_main_content_begin();

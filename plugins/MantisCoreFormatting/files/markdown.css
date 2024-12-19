@@ -28,7 +28,7 @@ blockquote {
  * inserting a style which applies the user-defined font to all elements
  * including the <span> elements which wrap the language tokens within the
  * <code> elements.
- * @see layout_user_font_preference()
+ * @see layout_head_css()
  *
  * This rule reapplies (forces) the monospace font to the code blocks, as per
  * its original definition in bootstrap.css.
