@@ -1065,7 +1065,10 @@ $g_language_choices_arr = array(
 
 /**
  * Browser language mapping for 'auto' language selection.
+ * An ISO 639-1 language codes, the most general one must be set the last.
  *
+ * @see lang_get_current_lang()
+ * @see lang_get_current_datetime_locale()
  * @global array $g_language_auto_map
  */
 $g_language_auto_map = array(

@@ -354,6 +354,16 @@ function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 }
 
 /**
+ * Get current language code (ISO 639-1).
+ * @return string Browser language code (e.g. 'en' for English)
+ */
+function lang_get_current_lang() {
+	$t_key_arr = explode( ',', array_search( lang_get_current(),
+		config_get_global( 'language_auto_map' ) ) );
+	return trim( end( $t_key_arr ) );
+}
+
+/**
  * Maps current lang string to moment.js locale.
  * @see https://github.com/moment/moment/tree/develop/locale
  * @return string Two chars browser language code (e.g. 'de' for German)
