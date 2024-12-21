@@ -86,7 +86,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 	$t_vars = get_defined_vars();
 
 	foreach( array_keys( $t_vars ) as $t_var ) {
-		if( str_starts_with( $t_var, 's_' ) ) {
+		if( strncmp( $t_var, 's_', 2 ) === 0 ) {
 			$g_lang_strings[$p_lang][substr( $t_var, 2 )] = $$t_var;
 		} else if( 'MANTIS_ERROR' == $t_var ) {
 			if( isset( $g_lang_strings[$p_lang][$t_var] ) ) {
