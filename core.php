@@ -189,12 +189,6 @@ if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 # Register global shutdown function
 shutdown_functions_register();
 
-# Push default language to speed calls to lang_get
-if( !defined( 'LANG_LOAD_DISABLED' ) ) {
-	require_api( 'lang_api.php' );
-	lang_push( lang_get_default() );
-}
-
 # Initialise plugins
 require_api( 'plugin_api.php' );  # necessary for some upgrade steps
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
@@ -240,6 +234,12 @@ if( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
 require_api( 'http_api.php' );
 event_signal( 'EVENT_CORE_HEADERS' );
 http_all_headers();
+
+# Push default language to speed calls to lang_get
+if( !defined( 'LANG_LOAD_DISABLED' ) ) {
+	require_api( 'lang_api.php' );
+	lang_push( lang_get_default() );
+}
 
 # Signal plugins that the core system is loaded
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
