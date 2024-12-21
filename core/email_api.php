@@ -821,13 +821,14 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type, $p
 		$p_related_bug_id,
 		$g_relationships[$p_rel_type]['#description'] );
 
-	# Source issue email notification
-	$t_message_id = $g_relationships[$p_rel_type]['#notify_added'];
+	# Source issue email notification. Should use the specified relationship message
 	if( $p_email_for_source ) {
+		$t_message_id = $g_relationships[$p_rel_type]['#notify_added'];
 		email_relationship_send( $p_bug_id, $p_related_bug_id, $t_message_id );
 	}
 
-	# Destination issue email notification
+	# Destination issue email notification. Should use the relationship reverse message
+	$t_message_id = $g_relationships[$t_rev_rel_type]['#notify_added'];
 	email_relationship_send( $p_related_bug_id, $p_bug_id, $t_message_id );
 }
 
@@ -903,12 +904,15 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, 
 		$p_related_bug_id,
 		$g_relationships[$p_rel_type]['#description'] );
 
-	$t_message_id = $g_relationships[$p_rel_type]['#notify_deleted'];
+	# Source issue email notification. Should use the specified relationship message
 	if( $p_bug_id != $p_skip_email_for_issue_id ) {
+		$t_message_id = $g_relationships[$p_rel_type]['#notify_deleted'];
 		email_relationship_send( $p_bug_id, $p_related_bug_id, $t_message_id );
 	}
 
+	# Destination issue email notification. Should use the relationship reverse message
 	if( $p_bug_id != $p_related_bug_id && bug_exists( $p_related_bug_id) ) {
+		$t_message_id = $g_relationships[$t_rev_rel_type]['#notify_deleted'];
 		email_relationship_send( $p_related_bug_id, $p_bug_id, $t_message_id );
 	}
 }
