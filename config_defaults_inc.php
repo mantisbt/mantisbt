@@ -1065,7 +1065,10 @@ $g_language_choices_arr = array(
 
 /**
  * Browser language mapping for 'auto' language selection.
- * An ISO 639-1 language codes, the most general one must be set the last.
+ *
+ * The mapping between a comma-separated list of BCP 47 language codes, usually
+ * ending with the most generic one (i.e. the primary language without extended
+ * subtag), and the corresponding MantisBT language code.
  *
  * @see lang_get_current_lang()
  * @see lang_get_current_datetime_locale()
