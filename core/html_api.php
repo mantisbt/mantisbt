@@ -152,7 +152,7 @@ function html_javascript_cdn_link( $p_url, $p_hash = '' ) {
  */
 function html_begin() {
 	echo '<!DOCTYPE html>', "\n";
-	echo '<html>', "\n";
+	echo '<html lang="', lang_get_current_lang(), '">', "\n";
 }
 
 /**
