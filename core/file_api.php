@@ -1255,6 +1255,15 @@ function file_create_finfo() {
  * @return bool|string The mime type or false on failure.
  */
 function file_get_mime_type( $p_file_path ) {
+	global $g_plugin_mime_types;
+
+	# allow overriding the content type for specific text and image extensions
+	# see bug #13193 for details
+	$t_extension = pathinfo( $p_file_path, PATHINFO_EXTENSION );
+	if( $t_extension && array_key_exists( $t_extension, $g_plugin_mime_types ) ) {
+		return $g_plugin_mime_types[$t_extension];
+	}
+
 	if( !file_exists( $p_file_path ) ) {
 		return false;
 	}
