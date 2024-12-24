@@ -421,7 +421,7 @@ class AvailablePlugin extends PluginForDisplay {
 						prepare_email_link( $p_plugin->contact, $t_author, $t_subject )
 					);
 			} else {
-				$t_author = '<br>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
+				$t_author = '<br>' . string_attribute( sprintf( lang_get( 'plugin_author' ), $t_author ) );
 			}
 		}
 
@@ -476,7 +476,7 @@ class AvailablePlugin extends PluginForDisplay {
 				$this->dependencies[] = sprintf( '<span class="%s" title="%s">%s</span>',
 					$t_class,
 					$t_tooltip,
-					string_display_line( $t_dependency_name )
+					string_attribute( $t_dependency_name )
 				);
 			}
 		} else {
@@ -574,7 +574,7 @@ class InstalledPlugin extends AvailablePlugin {
 			return '<a href="'
 				. string_attribute( plugin_page( $this->page, false, $this->basename ) )
 				. '">'
-				. string_display_line( $this->name )
+				. string_attribute( $this->name )
 				. '</a>';
 		}
 
