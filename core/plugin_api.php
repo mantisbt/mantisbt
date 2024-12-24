@@ -225,8 +225,6 @@ function plugin_file( $p_file, $p_redirect = false, $p_base_name = null ) {
  * @return void
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
-	global $g_plugin_mime_types;
-
 	if( is_null( $p_basename ) ) {
 		$t_current = plugin_get_current();
 	} else {
@@ -243,15 +241,6 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	$t_file_info_type = file_get_mime_type( $t_file_path );
 	if( $t_file_info_type !== false ) {
 		$t_content_type = $t_file_info_type;
-	}
-
-	# allow overriding the content type for specific text and image extensions
-	# see bug #13193 for details
-	if( strpos( $t_content_type, 'text/' ) === 0 || strpos( $t_content_type, 'image/' ) === 0 ) {
-		$t_extension = pathinfo( $t_file_path, PATHINFO_EXTENSION );
-		if( $t_extension && array_key_exists( $t_extension, $g_plugin_mime_types ) ) {
-			$t_content_type =  $g_plugin_mime_types[$t_extension];
-		}
 	}
 
 	if( $t_content_type ) {
