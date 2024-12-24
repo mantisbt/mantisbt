@@ -25,7 +25,7 @@
 define( 'PLUGINS_DISABLED', true );
 define( 'LANG_LOAD_DISABLED', true );
 
-$t_mantis_dir = dirname( __DIR__ ) . '/';
+$t_mantis_dir = dirname( __DIR__ ) . DIRECTORY_SEPARATOR;
 
 require_once( $t_mantis_dir . 'core.php' );
 
@@ -598,19 +598,14 @@ function checkplugins() {
 	echo "Retrieving Plugins from '$t_path'";
 	echo '</td>';
 
-	try {
-		$t_plugins = get_plugins( $t_path );
-		$t_toc = '<ol class="plugins-toc">';
-		foreach( $t_plugins as $t_plugin => $t_path ) {
-			$t_toc .= '<li><a href="#plugin-' . $t_plugin . '">' . $t_plugin . '</a></li>';
-		}
-		$t_toc .= '</ol>';
-		print_info( count( $t_plugins ) . " Plugins found" . $t_toc );
-	} catch( UnexpectedValueException $e ) {
-		print_fail( $e->getMessage() );
-		echo '</tr>' . PHP_EOL;
-		return;
+	$t_plugins = get_plugins( $t_path );
+	$t_toc = '<ol class="plugins-toc">';
+	foreach( $t_plugins as $t_plugin => $t_path ) {
+		$t_toc .= '<li><a href="#plugin-' . $t_plugin . '">' . $t_plugin . '</a></li>';
 	}
+	$t_toc .= '</ol>';
+	print_info( count( $t_plugins ) . " Plugins found" . $t_toc );
+
 	echo '</tr>' . PHP_EOL;
 
 	foreach( $t_plugins as $t_plugin => $t_path ) {
@@ -628,27 +623,15 @@ function checkplugins() {
  *
  * @param string $p_path
  * @return string[] Plugin names in ascending order.
- *
- * @throws UnexpectedValueException
  */
 function get_plugins( $p_path ) {
-	$t_iter = new CallbackFilterIterator(
-		new FileSystemIterator(
-			$p_path,
-			FileSystemIterator::KEY_AS_FILENAME
-		),
-		/**
-		 * Callback filter function
-		 * @param SplFileInfo $p_current
-		 * @return bool
-		 */
-		function( SplFileInfo $p_current ) {
-			return $p_current->isDir();
+	$t_plugins = array();
+	foreach( scandir( $p_path, SCANDIR_SORT_ASCENDING ) as $t_item ) {
+		$t_plugin = $p_path . $t_item;
+		if( $t_item[0] !== '.' && is_dir( $t_plugin ) ) {
+			$t_plugins[ $t_item ] = $t_plugin;
 		}
-	);
-
-	$t_plugins = iterator_to_array( $t_iter );
-	ksort( $t_plugins, SORT_FLAG_CASE );
+	}
 	return $t_plugins;
 }
 
@@ -687,7 +670,8 @@ function get_lang_files( $p_path ) {
  * @return void
  */
 function checklangdir( $p_path ) {
-	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . '/lang/';
+	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR )
+		. DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 	echo PHP_EOL . '<tr><td>';
 	echo "Retrieving language files from '$t_path'";
 	echo '</td>';
