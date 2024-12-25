@@ -4861,7 +4861,7 @@ $g_manage_plugin_threshold = ADMINISTRATOR;
  */
 $g_plugin_mime_types = array(
 	'css' => 'text/css',
-	'js'  => 'text/javascript',
+	'js'  => 'application/javascript',
 	'gif' => 'image/gif',
 	'png' => 'image/png',
 	'jpg' => 'image/jpeg',

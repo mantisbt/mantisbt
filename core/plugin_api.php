@@ -225,6 +225,8 @@ function plugin_file( $p_file, $p_redirect = false, $p_base_name = null ) {
  * @return void
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
+	global $g_plugin_mime_types;
+
 	if( is_null( $p_basename ) ) {
 		$t_current = plugin_get_current();
 	} else {
@@ -238,16 +240,33 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	}
 
 	$t_content_type = '';
-	$t_file_info_type = file_get_mime_type( $t_file_path );
-	if( $t_file_info_type !== false ) {
-		$t_content_type = $t_file_info_type;
+
+	# allow overriding the content type for specific text and image extensions
+	# see bug #13193 for details
+	$t_extension = pathinfo( $t_file_path, PATHINFO_EXTENSION );
+	if( $t_extension && array_key_exists( $t_extension, $g_plugin_mime_types ) ) {
+		$t_content_type = $g_plugin_mime_types[$t_extension];
+	}
+
+	if( !$t_content_type ) {
+		$t_file_info_type = file_get_mime_type( $t_file_path );
+		if( $t_file_info_type !== false ) {
+			$t_content_type = $t_file_info_type;
+		}
 	}
 
 	if( $t_content_type ) {
 		header( 'Content-Type: ' . $t_content_type );
 	}
 
-	readfile( $t_file_path );
+	$t_mtime = @filemtime( $t_file_path );
+	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $t_mtime ) );
+	if( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] )
+		&& ( $t_mtime <= strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) ) ) {
+		http_response_code( 304 );
+	} else {
+		readfile( $t_file_path );
+	}
 }
 
 /**
