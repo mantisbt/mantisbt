@@ -1001,8 +1001,8 @@ function custom_field_get_definition( $p_field_id ) {
  *
  * if the database field does not exist, display a warning and return ''.
  *
- * @param int $p_field_id   Custom field identifier.
- * @param int $p_field_name Custom field name.
+ * @param int    $p_field_id   Custom field identifier.
+ * @param string $p_field_name Custom field name.
  *
  * @return string
  *
