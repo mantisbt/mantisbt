@@ -4522,10 +4522,14 @@ $g_graphviz_path = '/usr/bin/';
 /**
  * Graphviz output format.
  *
- * Can be svg, png or any other format supported by Graphviz and the browser.
+ * Can be `svg`, `png` (default) or any other
+ * {@link https://www.graphviz.org/docs/outputs/ supported format}.
  *
- * NOTES:
- * - SVG requires Graphviz >= 2.42.4 due to an output bug.
+ * NOTE: svg produces higher quality images compared to png, but it requires
+ * Graphviz >= 2.42.4 due to a
+ * {@link https://gitlab.com/graphviz/graphviz/-/issues/1687 bug in earlier versions}.
+ * The fix will be included in Ubuntu 26.04 LTS; the default can be reconsidered
+ * when it is released.
  *
  * @global string $g_graph_format
  */
