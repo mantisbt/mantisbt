@@ -69,4 +69,5 @@ $s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Выберит
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Номера строк';
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Показать номера строк.';
 $s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Показать пробелы';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Нормализовать пробелы';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Визуализация цветов CSS';
