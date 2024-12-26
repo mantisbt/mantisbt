@@ -635,7 +635,7 @@ function get_plugins( $p_path ) {
 	$t_iter = new CallbackFilterIterator(
 		new FileSystemIterator(
 			$p_path,
-			FileSystemIterator::KEY_AS_FILENAME
+			FileSystemIterator::SKIP_DOTS | FileSystemIterator::KEY_AS_FILENAME
 		),
 		/**
 		 * Callback filter function
