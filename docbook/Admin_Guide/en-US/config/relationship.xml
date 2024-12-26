@@ -68,6 +68,29 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_graph_format</term>
+			<listitem>
+				<para>Graphviz output format. Can be
+					<literal>svg</literal>,
+					<literal>png</literal> (default)
+					or any other
+					<ulink url="https://www.graphviz.org/docs/outputs/">
+						supported format</ulink>.
+				</para>
+				<note>
+					<para>
+						<literal>svg</literal> produces higher quality images
+						compared to <literal>png</literal>, but it requires
+						Graphviz >= 2.42.4 due to a
+						<ulink url="https://gitlab.com/graphviz/graphviz/-/issues/1687">
+							bug in earlier versions</ulink>.
+						The fix will be included in Ubuntu 26.04 LTS;
+						the default can be reconsidered when it is released.
+					</para>
+				</note>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_relationship_graph_fontname</term>
 			<listitem>
 				<para>
