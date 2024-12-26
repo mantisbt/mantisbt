@@ -113,11 +113,6 @@ class Graph {
 	protected $edges = array();
 
 	/**
-	 * @var string Graphviz path
-	 */
-	protected $graphviz_path;
-
-	/**
 	 * @var string Graphviz tool
 	 */
 	protected $graphviz_tool;
@@ -238,7 +233,6 @@ class Graph {
 
 		$this->set_attributes( $p_attributes );
 
-		$this->graphviz_path = config_get_global( 'graphviz_path' );
 		$this->graphviz_tool = $p_tool;
 
 		if( is_windows_server() ) {
@@ -375,8 +369,9 @@ class Graph {
 		}
 
 		# Graphviz tool missing or not executable
-		if( !is_executable( $this->tool_path() ) ) {
-			error_parameters( $this->graphviz_tool );
+		$t_tool_path = $this->tool_path();
+		if( !is_executable( $t_tool_path ) ) {
+			error_parameters( $t_tool_path );
 			trigger_error( ERROR_GRAPH_TOOL_NOT_FOUND, ERROR );
 		}
 
@@ -386,7 +381,7 @@ class Graph {
 		$t_dot_source = ob_get_clean();
 
 		# Start dot process
-		$t_command = escapeshellcmd( $this->tool_path() . ' -T' . $p_format );
+		$t_command = escapeshellarg( $t_tool_path ) . ' -T' . $p_format;
 		$t_stderr = tempnam( sys_get_temp_dir(), 'graphviz' );
 		$t_descriptors = array(
 			0 => array( 'pipe', 'r', ),
@@ -396,7 +391,8 @@ class Graph {
 		);
 
 		$t_pipes = array();
-		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes );
+		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes,
+			null, null, [ 'bypass_shell' => true ] );
 
 		if( !is_resource( $t_process ) ) {
 			# proc_open failed
@@ -511,12 +507,21 @@ class Graph {
 	}
 
 	/**
+	 * Gets the path to the Graphviz tools directory.
+	 *
+	 * @return string
+	 */
+	public static function graphviz_path() {
+		return realpath( config_get_global( 'graphviz_path' ) ) . DIRECTORY_SEPARATOR;
+	}
+
+	/**
 	 * Gets the path to the Graphviz tool.
 	 *
 	 * @return string
 	 */
 	protected function tool_path() {
-		return $this->graphviz_path . $this->graphviz_tool;
+		return self::graphviz_path() . $this->graphviz_tool;
 	}
 }
 
