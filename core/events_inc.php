@@ -157,6 +157,9 @@ event_declare_many( array(
 
 	# Authentication Events
 	'EVENT_AUTH_USER_FLAGS' => EVENT_TYPE_FIRST,
+	
+	# LDAP Cache attribute names
+	'EVENT_LDAP_CACHE_ATTRS' => EVENT_TYPE_DEFAULT,
 
 	'EVENT_CRONJOB' => EVENT_TYPE_EXECUTE
 ) );
