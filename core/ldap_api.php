@@ -273,6 +273,8 @@ function ldap_cache_user_data( $p_username ) {
 			log_event( LOG_LDAP, "Extra attributes for '$t_plugin' plugin: '$t_attr'" );
 		}
 	}
+	# array_values() is required as ldap_search() will fail if keys are not sequential
+	$t_search_attrs = array_values( array_unique( $t_search_attrs ) );
 
 	log_event( LOG_LDAP, "Searching for '$t_search_filter'" );
 	$t_sr = @ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
