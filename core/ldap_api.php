@@ -262,18 +262,19 @@ function ldap_cache_user_data( $p_username ) {
 	);
 
 	$t_extra_attrs = event_signal( 'EVENT_LDAP_CACHE_ATTRS', array( $p_username ) );
-	foreach( $t_extra_attrs as $t_callback ) {
+	foreach( $t_extra_attrs as $t_plugin => $t_callback ) {
 		foreach( $t_callback as $t_attr ) {
 			if( is_array( $t_attr ) ) {
 				$t_search_attrs = array_merge( $t_search_attrs, $t_attr );
-callback );
+				$t_attr = implode( ', ', $t_attr );
 			} elseif( !is_null( $t_attr ) ) {
 				$t_search_attrs[] = $t_attr;
 			}
+			log_event( LOG_LDAP, "Extra attributes for '$t_plugin' plugin: '$t_attr'" );
 		}
 	}
-	
-	log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
+
+	log_event( LOG_LDAP, "Searching for '$t_search_filter'" );
 	$t_sr = @ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 	if( $t_sr === false ) {
 		ldap_log_error( $t_ds );
