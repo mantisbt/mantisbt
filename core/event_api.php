@@ -92,6 +92,7 @@ function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	global $g_event_cache;
 
 	if( !event_is_declared( $p_name ) ) {
+		error_delay_reporting();
 		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
 		return;

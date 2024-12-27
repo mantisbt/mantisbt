@@ -259,11 +259,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				. ' (in ' . $t_caller['file']
 				. ' line ' . $t_caller['line'] . ')';
 
-			if( $t_method == DISPLAY_ERROR_INLINE && php_sapi_name() != 'cli' ) {
-				error_log_delayed( $t_error_description );
-				$g_error_handled = true;
-				return;
-			}
+			error_delay_reporting();
 			break;
 		default:
 			# shouldn't happen, just display the error just in case
@@ -400,7 +396,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 
 			case DISPLAY_ERROR_INLINE:
 				if( !defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
-					echo '<div class="alert alert-warning">', $t_error_type, ': ', $t_error_description, '</div>';
+					if( defined( 'DELAY_INLINE_ERROR_REPORTING')) {
+						error_log_delayed( $t_error_type . ': ' . $t_error_description );
+					} else {
+						echo '<div class="alert alert-warning">', $t_error_type, ': ', $t_error_description, '</div>';
+					}
 				}
 				$g_error_handled = true;
 				break;
@@ -435,6 +435,20 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
  */
 function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
 	throw new ErrorException( $p_error, 0, $p_type, $p_file, $p_line );
+}
+
+/**
+ * Instruct the error handler to delay display of inline warnings.
+ *
+ * This should be called prior to trigger_error() when required, e.g. when
+ * a warning could be triggered before the page layout has been sent.
+ *
+ * @return void
+ */
+function error_delay_reporting() {
+	if( !defined( 'DELAY_INLINE_ERROR_REPORTING' ) ) {
+		define( 'DELAY_INLINE_ERROR_REPORTING', true );
+	}
 }
 
 /**
