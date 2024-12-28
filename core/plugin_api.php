@@ -991,15 +991,23 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 				);
 				return $t_plugin->getInvalidPlugin();
 			}
-
-			if( $p_return ) {
-				return $t_plugin;
-			} else {
-				$g_plugin_cache[$t_basename] = $t_plugin;
-			}
+		} elseif( basename( $_SERVER['SCRIPT_NAME'] ) == 'manage_plugin_page.php' ) {
+			# We don't want to throw an error here, as this is the place where
+			# information about the invalid Plugin is displayed.
+			$t_plugin = new MissingClassPlugin( $t_basename );
+			log_event(
+				LOG_PLUGIN,
+				"Plugin '$t_basename' is invalid ('$t_classname' class is not defined)"
+			);
 		} else {
 			error_parameters( $t_basename, $t_classname );
 			trigger_error( ERROR_PLUGIN_CLASS_NOT_FOUND, ERROR );
+		}
+
+		if( $p_return ) {
+			return $t_plugin;
+		} else {
+			$g_plugin_cache[$t_basename] = $t_plugin;
 		}
 	}
 
