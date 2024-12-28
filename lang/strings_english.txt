@@ -845,7 +845,7 @@ $s_plugin_invalid_status_message = 'The following required properties are not de
 $s_plugin_missing_description = 'Missing Plugin';
 $s_plugin_missing_status_message = 'The plugin is installed in the Mantis database, but could not be loaded.';
 $s_plugin_missing_class_description = 'Missing Plugin Base Class';
-$s_plugin_missing_class_status_message = 'A directory for this Plugin was found, but there was no corresponding Plugin code inside of it. Make sure the directory\'s name matches the Plugin\'s base name (case sensitive), a PHP file with the same name exists in the directory, and a Class named "%2$s" extending <em>MantisPlugin</em> is defined.';
+$s_plugin_missing_class_status_message = 'A directory for this Plugin was found, but there is no corresponding Plugin code inside of it. Make sure that: the directory\'s name matches the Plugin\'s base name "%1$s" (case sensitive), a PHP file with the same name exists in the directory, and it defines a Class named "%2$s" extending MantisPlugin.';
 $s_plugin_missing_event = 'Missing Events';
 $s_plugin_missing_event_status_message = 'The Plugin is attempting to hook undeclared Events: %s.';
 
