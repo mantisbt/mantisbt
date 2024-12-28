@@ -81,12 +81,18 @@ function event_declare_many( array $p_events ) {
 
 /**
  * Hook a callback function to a given event.
+ *
  * A plugin's basename must be specified for proper handling of plugin callbacks.
+ *
+ * If the Event being hooked does not exist, a WARNING is triggered and the
+ * function returns false.
+ *
  * @param string         $p_name     Event name.
  * @param string         $p_callback Callback function.
  * @param integer|string $p_plugin   Plugin basename.
+ *
+ * @return bool True if the hook is successful, false otherwise.
  * @access public
- * @return void
  */
 function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	global $g_event_cache;
@@ -95,10 +101,11 @@ function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 		error_delay_reporting();
 		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
-		return;
+		return false;
 	}
 
 	$g_event_cache[$p_name]['callbacks'][$p_plugin][] = $p_callback;
+	return true;
 }
 
 /**

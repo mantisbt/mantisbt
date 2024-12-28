@@ -110,7 +110,7 @@ abstract class MantisPlugin {
 	 * necessary API's, declare or hook events, etc.
 	 * Alternatively, your plugin can hook the EVENT_PLUGIN_INIT event
 	 * that will be called after all plugins have been initialized.
-	 * @return void
+	 * @return bool
 	 */
 	public function init() {}
 
@@ -282,14 +282,17 @@ abstract class MantisPlugin {
 
 	/**
 	 * Initialisation
-	 * @return void
+	 * @return bool
 	 */
 	final public function __init() {
 		plugin_config_defaults( $this->config() );
 		event_declare_many( $this->events() );
-		plugin_event_hook_many( $this->hooks() );
+		if( !plugin_event_hook_many( $this->hooks() ) ) {
+			return false;
+		}
 
-		$this->init();
+		# Backwards-compatibility - return true if no return value
+		return $this->init() ?? true;
 	}
 
 	/**
