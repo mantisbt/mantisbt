@@ -39,6 +39,8 @@
  * @uses logging_api.php
  */
 
+use Mantis\classes\MissingHooksPlugin;
+
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -1129,7 +1131,13 @@ function plugin_init( $p_basename ) {
 		}
 
 		# finish initializing the plugin
-		$t_plugin->__init();
+		if( !$t_plugin->__init() ) {
+			$t_invalid = new MissingHooksPlugin( $p_basename );
+			$t_invalid->setInvalidPlugin( $t_plugin );
+			$g_plugin_cache[$p_basename] = $t_invalid;
+			plugin_pop_current();
+			return false;
+		}
 		$g_plugin_cache_init[$p_basename] = true;
 
 		plugin_pop_current();

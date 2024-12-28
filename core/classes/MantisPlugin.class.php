@@ -48,6 +48,7 @@ abstract class MantisPlugin {
 	const STATUS_INCOMPLETE_DEFINITION = 2;
 	const STATUS_MISSING_BASE_CLASS = 3;
 	const STATUS_MISSING_PLUGIN = 4;
+	const STATUS_MISSING_EVENTS = 5;
 
 	/**
 	 * name - Your plugin's full name. Required value.
