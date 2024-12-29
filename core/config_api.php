@@ -246,15 +246,19 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 }
 
 /**
- * Returns true if the specified configuration option exists (Either a
- * value or default can be found), false otherwise
+ * Checks if the specified configuration option exists as an override in the
+ * database.
  *
- * @param string  $p_option  Configuration option.
- * @param integer $p_user    A user identifier.
- * @param integer $p_project A project identifier.
- * @return boolean
+ * @param string $p_option  Configuration option.
+ * @param int    $p_user    A user identifier.
+ * @param int    $p_project A project identifier.
+ *
+ * @return bool True if the option exists, false otherwise.
+ *
+ * @since 2.28.0
  */
-function config_is_set( $p_option, $p_user = null, $p_project = null ) {
+
+function config_is_set_in_database( $p_option, $p_user = null, $p_project = null ) {
 	global $g_cache_config, $g_cache_filled;
 
 	if( !$g_cache_filled ) {
@@ -265,8 +269,11 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	$t_users = array( ALL_USERS );
 	if( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 		$t_users[] = auth_get_current_user_id();
-	} else if( !in_array( $p_user, $t_users ) ) {
-		$t_users[] = $p_user;
+	}
+	else {
+		if( !in_array( $p_user, $t_users ) ) {
+			$t_users[] = $p_user;
+		}
 	}
 	$t_users[] = ALL_USERS;
 
@@ -277,8 +284,11 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 		if( ALL_PROJECTS <> $t_selected_project ) {
 			$t_projects[] = $t_selected_project;
 		}
-	} else if( !in_array( $p_project, $t_projects ) ) {
-		$t_projects[] = $p_project;
+	}
+	else {
+		if( !in_array( $p_project, $t_projects ) ) {
+			$t_projects[] = $p_project;
+		}
 	}
 
 	foreach( $t_users as $t_user ) {
@@ -289,7 +299,24 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 		}
 	}
 
-	return isset( $GLOBALS['g_' . $p_option] );
+	return false;
+}
+
+/**
+ * Checks if the specified configuration option exists anywhere.
+ *
+ * Returns true if either a value in the database or a default defined in a
+ * global variable can be found.
+ *
+ * @param string $p_option  Configuration option.
+ * @param int    $p_user    A user identifier.
+ * @param int    $p_project A project identifier.
+ *
+ * @return bool True if the option exists, false otherwise.
+ */
+function config_is_set( $p_option, $p_user = null, $p_project = null ) {
+	return config_is_set_in_database( $p_option, $p_user, $p_project )
+		|| isset( $GLOBALS['g_' . $p_option] );
 }
 
 /**
