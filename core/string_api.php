@@ -520,11 +520,9 @@ function string_insert_hrefs( $p_string ) {
 		$s_url_regex,
 		function ( $p_match ) {
 			$t_url = $p_match[1];
-			# Check if link is external
-			$t_mantis_root_domain = helper_get_root_domain( config_get_global( 'path' ) );
-			$p_is_external_link = $t_mantis_root_domain != helper_get_root_domain( $t_url );
+			$t_is_external_link = helper_is_link_external( $t_url );
 			# Set the link's target and type according to configuration
-			$t_link_attributes = helper_get_link_attributes( false, $p_is_external_link );
+			$t_link_attributes = helper_get_link_attributes( false, $t_is_external_link );
 			$t_url_href = 'href="' . rtrim( $t_url, '.' ) . '"';
 			return "<a {$t_url_href}{$t_link_attributes}>{$t_url}</a>";
 		},
