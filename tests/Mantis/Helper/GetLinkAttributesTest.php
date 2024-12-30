@@ -18,7 +18,7 @@
  * MantisBT Core Unit Tests
  * @package Tests
  * @subpackage Helper
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2024  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link https://www.mantisbt.org
  */
 
@@ -27,9 +27,10 @@ declare( strict_types = 1 );
 require_once dirname( __DIR__ ) . '/MantisCoreBase.php';
 
 /**
- * Test for helper_api::helper_get_link_attributes
+ * Tests for Link Attributes (Helper API).
  *
  * @see helper_get_link_attributes()
+ * @see helper_is_link_external()
  */
 class GetLinkAttributesTest extends MantisCoreBase
 {
@@ -109,6 +110,70 @@ class GetLinkAttributesTest extends MantisCoreBase
 			LINKS_NEW_WINDOW | LINKS_NOOPENER | LINKS_NOREFERRER,
 			'target="_blank" rel="noreferrer"',
 			['target' => '_blank', 'rel' => 'noreferrer']
+		];
+	}
+
+	/**
+	 * Testing {@see helper_is_link_external()}.
+	 *
+	 * @dataProvider providerLinks
+	 */
+	public function testLinkIsExternal( string $p_url, bool $p_external ): void
+	{
+		$this->assertEquals( $p_external, helper_is_link_external( $p_url ), "URL is external" );
+	}
+
+	public function providerLinks(): Generator {
+		yield 'External URL' => [
+			'https://example.com',
+			'external' => true,
+		];
+
+		$t_path = config_get_global('path' );
+		yield 'Mantis URL' => [
+			$t_path,
+			'external' => false,
+		];
+
+		yield 'Relative URL' => [
+			'/index.html',
+			'external' => false,
+		];
+	}
+
+	/**
+	 * Tests that links have the "nofollow" attribute set as appropriate.
+	 *
+	 * @param int   $p_value    Value for html_make_links config.
+	 * @param array $p_internal Expected values for internal links ().
+	 * @param array $p_external Expected values for external links ().
+	 *
+	 * @dataProvider providerNoFollow
+	 */
+	public function testNoFollow( int $p_value, array $p_internal, array $p_external ): void
+	{
+		$t_old = $this->setConfig( self::CFG_MAKE_LINKS, $p_value );
+
+		# Test internal links
+		$this->assertSame( $p_internal, helper_get_link_attributes() );
+
+		# Test internal links
+		$this->assertSame( $p_external, helper_get_link_attributes(true, true) );
+
+		$this->restoreConfig( self::CFG_MAKE_LINKS, $t_old );
+	}
+
+	public function providerNoFollow(): Generator {
+		yield 'LINKS_NOFOLLOW_EXTERNAL' => [
+			LINKS_NOFOLLOW_EXTERNAL,
+			'internal' => [],
+			'external' => ['rel' => 'nofollow'],
+		];
+
+		yield 'LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL' => [
+			LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL,
+			'internal' => ['rel' => 'noopener'],
+			'external' => ['rel' => 'noopener,nofollow'],
 		];
 	}
 }
