@@ -240,7 +240,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 					<div class="form-inline pull-left">
 <?php
 		/**
-		 * Global $g_checkboxes_exist is set in write_bug_rows() via the
+		 * Global $g_checkboxes_exist is set in {@see write_bug_rows()} via the
 		 * print_column_value custom function.
 		 * @noinspection PhpConditionAlreadyCheckedInspection
 		 */

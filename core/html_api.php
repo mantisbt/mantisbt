@@ -719,9 +719,12 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 
 /**
  * Print the Summary page's submenu.
+ *
  * The submenu is only printed if there is at least one plugin-defined link, in
  * which case a 'Synthesis' button is added for the summary page itself.
+ *
  * @param string $p_current_page Current page's file name to highlight active menu item
+ *
  * @return void
  */
 function print_summary_submenu( $p_current_page = '' ) {

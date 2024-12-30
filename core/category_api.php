@@ -391,10 +391,13 @@ function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
 
 /**
  * Sort categories based on what project they're in.
+ *
  * Call beforehand with a single parameter to set a 'preferred' project.
+ *
  * @param int|array $p_category1 Id of preferred project or array containing category details.
  * @param array|null $p_category2 Array containing category details.
- * @return integer|null An integer representing sort order.
+ *
+ * @return int|null An integer representing sort order.
  * @access public
  */
 function category_sort_rows_by_project( $p_category1, array $p_category2 = null ) {

@@ -401,17 +401,22 @@ function access_project_array_filter( $p_access_level, array $p_project_ids = nu
 }
 
 /**
- * Check the current user's access against the given value, in each of the provided projects,
- * and return true if the user's access is equal to or higher in any of the projects, false otherwise.
- * @param integer|array|string  $p_access_level Parameter representing access level threshold, may be:
- *                                              - integer: for a simple threshold
- *                                              - array: for an array threshold
- *                                              - string: for a threshold option which will be evaluated
- *                                                 for each project context
- * @param array                 $p_project_ids  Array of project ids to check access against, default to null
- *                                               to use all user accessible projects
- * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
- * @return boolean              True if user has the specified access level for any of the projects
+ * Check if the user has access to at least one of the specified projects.
+ *
+ * Check the current user's access against the given value, in each of the
+ * provided projects, and return true if the user's access is equal to or
+ * higher in any of the projects, false otherwise.
+ *
+ * @param int|array|string $p_access_level Access level threshold, may be:
+ *                                         - integer: for a simple threshold
+ *                                         - array: for an array threshold
+ *                                         - string: for a threshold option to be
+ *                                           evaluated in each project's context.
+ * @param array|null       $p_project_ids  Array of project ids to check access against,
+ *                                         to use all user accessible projects.
+ * @param int|null         $p_user_id      User id, defaults to null to use current user.
+ *
+ * @return bool            True if user has the specified access level in any of the projects.
  * @access public
  */
 function access_has_any_project_level( $p_access_level, array $p_project_ids = null, $p_user_id = null ) {
@@ -422,10 +427,12 @@ function access_has_any_project_level( $p_access_level, array $p_project_ids = n
 
 /**
  * Check if the user has the specified access level in any of the given projects
- * Refer to access_has_any_project_level() for detailed parameter information
- * @param integer|array|string $p_access_level  Parameter representing access level threshold
- * @param array $p_project_ids                  Array of project ids to check access against
- * @param integer|null $p_user_id
+ *
+ * @see access_has_any_project_level() for detailed parameter information.
+ *
+ * @param int|array|string $p_access_level Access level threshold.
+ * @param array|null       $p_project_ids  Array of project ids to check access against.
+ * @param int|null         $p_user_id      User id, defaults to null to use current user.
  */
 function access_ensure_any_project_level( $p_access_level, array $p_project_ids = null, $p_user_id = null ) {
 	if( !access_has_any_project_level( $p_access_level, $p_project_ids, $p_user_id ) ) {

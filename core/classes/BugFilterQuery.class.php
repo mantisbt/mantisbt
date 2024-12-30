@@ -1603,8 +1603,10 @@ class BugFilterQuery extends DbQuery {
 	/**
 	 * Translates a sql string created with legacy db_param() syntax, into
 	 * a string with valid parameters and values binded to current query object.
+	 *
 	 * @param string $p_string	Sql string
 	 * @param array $p_params	Array of parameter values
+	 *
 	 * @return string
 	 */
 	protected function helper_convert_legacy_clause( $p_string, array $p_params = null ) {

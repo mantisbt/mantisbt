@@ -298,16 +298,19 @@ function db_query_bound() {
 }
 
 /**
- * execute query, requires connection to be opened
+ * Execute a database query.
+ *
+ * Requires the database connection to be opened.
  * An error will be triggered if there is a problem executing the query.
  * This will pop the database parameter stack {@see MantisDbParam} after a
- * successful execution, unless specified otherwise
+ * successful execution, unless specified otherwise.
  *
  * @param string  $p_query     Parameterlised Query string to execute.
- * @param array   $p_arr_parms Array of parameters matching $p_query.
+ * @param array   $p_params    Array of parameters matching $p_query.
  * @param integer $p_limit     Number of results to return.
  * @param integer $p_offset    Offset query results for paging.
  * @param boolean $p_pop_param Set to false to leave the parameters on the stack
+ *
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
 function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1, $p_pop_param = true ) {
@@ -946,14 +949,17 @@ function db_oracle_order_binds_sequentially( $p_query ) {
 
 /**
  * Adapt input query string and bindvars array to Oracle DB syntax:
+ *
  * 1. Change bind vars id's to sequence beginning with 0
  *    (calls db_oracle_order_binds_sequentially() )
  * 2. Remove "AS" keyword, because it is not supported with table aliasing
  * 3. Remove null bind variables in insert statements for default values support
  * 4. Replace "tab.column=:bind" to "tab.column IS NULL" when :bind is empty string
  * 5. Replace "SET tab.column=:bind" to "SET tab.column=DEFAULT" when :bind is empty string
- * @param string $p_query      Query string to sort.
- * @param array  &$p_arr_parms Array of parameters matching $p_query, function sorts array keys.
+ *
+ * @param string  $p_query  Query string to sort.
+ * @param array  &$p_params Array of parameters matching $p_query, function sorts array keys.
+ *
  * @return string Query string with sorted bind variable numbers.
  */
 function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {

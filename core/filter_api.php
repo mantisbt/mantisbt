@@ -1989,12 +1989,15 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
 }
 
 /**
- * Performs the reading of parameters from get/post.
+ * Read filter parameters from get/post.
+ *
  * If a filter array is passed as parameter, the read parameters will be appended,
- * or everride existing ones.
- * If no filter array is used as parameter, a default one will be used.
- * @param array $p_filter An existing filter array
- * @return array The resulting filter array
+ * or override existing ones.
+ *
+ * @param array|null $p_filter An existing filter array. If null, a default
+ *                             filter will be used.
+ *
+ * @return array The resulting filter array.
  */
 function filter_gpc_get( array $p_filter = null ) {
 	# Get or copy the view_type first as it's needed to get proper defaults
@@ -2536,10 +2539,10 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
  * you pass in *no* default then an error will be triggered if the filter
  * cannot be found.
  *
- * @param integer $p_filter_id Filter id.
- * @param array   $p_default   A filter array to return when id is not found.
+ * @param int        $p_filter_id Filter id.
+ * @param array|null $p_default   A filter array to return when id is not found.
  *
- * @return array A filter array
+ * @return array|null A filter array
  * @throws ClientException
  */
 function filter_get( $p_filter_id, array $p_default = null ) {

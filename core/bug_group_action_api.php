@@ -202,7 +202,9 @@ function bug_group_action_process( $p_action, $p_bug_id ) {
 /**
  * Get a list of bug group actions available to the current user for one or
  * more projects.
+ *
  * @param array $p_project_ids An array containing one or more project IDs.
+ *
  * @return array
  */
 function bug_group_action_get_commands( array $p_project_ids = null ) {

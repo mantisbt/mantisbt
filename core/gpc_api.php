@@ -235,11 +235,14 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 }
 
 /**
- * Retrieve a string array GPC variable.  Uses gpc_get().
- * If you pass in *no* default, an error will be triggered if
- * the variable does not exist
+ * Retrieve a string array GPC variable.
+ *
+ * Uses {@see gpc_get()}. If you pass in *no* default, an error will be
+ * triggered if the variable does not exist.
+ *
  * @param string $p_var_name Variable name to retrieve.
  * @param array  $p_default  Default value of the string array if not set.
+ *
  * @return array
  */
 function gpc_get_string_array( $p_var_name, array $p_default = null ) {
@@ -269,11 +272,14 @@ function gpc_get_string_array( $p_var_name, array $p_default = null ) {
 }
 
 /**
- * Retrieve an integer array GPC variable.  Uses gpc_get().
- * If you pass in *no* default, an error will be triggered if
- * the variable does not exist
+ * Retrieve an integer array GPC variable.
+ *
+ * Uses {@see gpc_get()}. If you pass in *no* default, an error will be
+ * triggered if the variable does not exist.
+ *
  * @param string $p_var_name Variable name to retrieve.
  * @param array  $p_default  Default value of the integer array if not set.
+ *
  * @return array
  */
 function gpc_get_int_array( $p_var_name, array $p_default = null ) {
@@ -297,10 +303,14 @@ function gpc_get_int_array( $p_var_name, array $p_default = null ) {
 }
 
 /**
- * Retrieve a boolean array GPC variable.  Uses gpc_get().
- * If you pass in *no* default, an error will be triggered if the variable does not exist.
+ * Retrieve a boolean array GPC variable.
+ *
+ * Uses {@see gpc_get()}. If you pass in *no* default, an error will be
+ * triggered if the variable does not exist.
+ *
  * @param string $p_var_name Variable name to retrieve.
  * @param array  $p_default  Default value of the boolean array if not set.
+ *
  * @return array
  */
 function gpc_get_bool_array( $p_var_name, array $p_default = null ) {
