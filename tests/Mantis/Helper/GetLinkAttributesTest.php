@@ -60,7 +60,13 @@ class GetLinkAttributesTest extends MantisCoreBase
 		$this->restoreConfig( self::CFG_MAKE_LINKS, $t_old );
 	}
 
-	public function provideConfigurations(): \Generator {
+	public function provideConfigurations(): Generator {
+		yield 'LINKS_SAME_WINDOW' => [
+			LINKS_SAME_WINDOW,
+			'',
+			[],
+		];
+
 		yield 'LINKS_NEW_WINDOW' => [
 			LINKS_NEW_WINDOW,
 			'target="_blank"',
