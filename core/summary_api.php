@@ -1263,11 +1263,11 @@ function summary_get_filter() {
 	}
 	# if filter parameter doesn't exist or can't be loaded, return a default filter
 	if( null === $t_filter ) {
-			# TODO: for summary, as default, we want to show all status.
-			# Until a better implementation for default/empty filters, we need to adjust here
-			$t_filter = filter_get_default();
-			$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
-			$t_filter['_view_type'] = FILTER_VIEW_TYPE_SIMPLE;
+		# TODO: for summary, as default, we want to show all status.
+		# Until a better implementation for default/empty filters, we need to adjust here
+		$t_filter = filter_get_default();
+		$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+		$t_filter['_view_type'] = FILTER_VIEW_TYPE_SIMPLE;
 	}
 	return $t_filter;
 }

@@ -1154,7 +1154,8 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 		$t_bugnote->bug_id,
 		'bugnote',
 		$t_recipients_verbose,
-		$t_message_id );
+		$t_message_id
+	);
 }
 
 /**
