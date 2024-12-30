@@ -104,5 +104,34 @@ abstract class MantisCoreBase extends PHPUnit\Framework\TestCase {
 		);
 	}
 
+	/**
+	 * Sets the given configuration and returns its old value.
+	 *
+	 * @param string $p_config Configuration option name.
+	 * @param mixed  $p_value  Configuration option value.
+	 *
+	 * @return mixed The config's old value, false if it was not set in the database.
+	 */
+	protected function setConfig( string $p_config, $p_value ) {
+		$t_old = config_is_set_in_database( $p_config ) ? config_get( $p_config ) : false;
+		config_set( $p_config, $p_value );
+
+		return $t_old;
+	}
+
+	/**
+	 * Restores a configuration to its initial state.
+	 *
+	 * @param string $p_config Configuration option name.
+	 * @param mixed  $p_value  Configuration option value. If false, the config
+	 *                         will be deleted.
+	 */
+	protected function restoreConfig( string $p_config, $p_value ) {
+		if( $p_value === false ) {
+			config_delete( $p_config );
+		} else {
+			config_set( $p_config, $p_value );
+		}
+	}
 }
 
