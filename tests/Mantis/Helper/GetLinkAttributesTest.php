@@ -37,20 +37,20 @@ class GetLinkAttributesTest extends MantisCoreBase
 
 	/**
 	 * Link attributes are correctly created according to the
-	 * configuration of "$g_html_make_links"
+	 * configuration of {@see $g_html_make_links}.
 	 *
 	 * 1. Helper returns an array on default.
 	 * 2. Helper returns the attributes as a string if the
 	 *    argument "p_return_array" is set to false.
 	 *
-	 * @param int $p_config                  The configuration for "$g_html_make_links"
+	 * @param int $p_value                   Value for $g_html_make_links config
 	 * @param string $p_string               The expected result as a string
 	 * @param array<string, string> $p_array The expected result as an array
 	 *
 	 * @dataProvider provideConfigurations
 	 */
-	public function testHelperReturnsArrayOrString( int $p_config, string $p_string, array $p_array ): void {
-		$t_old = $this->setConfig( self::CFG_MAKE_LINKS, $p_config );
+	public function testHelperReturnsArrayOrString( int $p_value, string $p_string, array $p_array ): void {
+		$t_old = $this->setConfig( self::CFG_MAKE_LINKS, $p_value );
 
 		# 1.
 		$this->assertSame( $p_array, helper_get_link_attributes() );
