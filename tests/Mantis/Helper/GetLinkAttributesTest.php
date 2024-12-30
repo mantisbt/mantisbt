@@ -33,6 +33,8 @@ require_once dirname( __DIR__ ) . '/MantisCoreBase.php';
  */
 class GetLinkAttributesTest extends MantisCoreBase
 {
+	const CFG_MAKE_LINKS = 'html_make_links';
+
 	/**
 	 * Link attributes are correctly created according to the
 	 * configuration of "$g_html_make_links"
@@ -48,12 +50,14 @@ class GetLinkAttributesTest extends MantisCoreBase
 	 * @dataProvider provideConfigurations
 	 */
 	public function testHelperReturnsArrayOrString( int $p_config, string $p_string, array $p_array ): void {
-		config_set('html_make_links', $p_config );
+		$t_old = $this->setConfig( self::CFG_MAKE_LINKS, $p_config );
 
 		# 1.
 		$this->assertSame( $p_array, helper_get_link_attributes() );
 		# 2.
 		$this->assertSame( $p_string, trim( helper_get_link_attributes( false ) ) );
+
+		$this->restoreConfig( self::CFG_MAKE_LINKS, $t_old );
 	}
 
 	public function provideConfigurations(): \Generator {
