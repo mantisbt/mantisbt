@@ -37,7 +37,11 @@ final class MissingClassPlugin extends InvalidPlugin {
 		$this->description = lang_get( 'plugin_missing_class_description' );
 
 		$this->status = self::STATUS_MISSING_BASE_CLASS;
-		$this->status_message = lang_get( 'plugin_missing_class_status_message' );
+		$this->status_message = sprintf(
+			lang_get( 'plugin_missing_class_status_message' ),
+			$this->basename,
+			$this->basename . 'Plugin'
+		);
 		$this->removable = false;
 	}
 }

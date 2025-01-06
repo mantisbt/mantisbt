@@ -39,6 +39,8 @@
  * @uses logging_api.php
  */
 
+use Mantis\classes\MissingHooksPlugin;
+
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -245,17 +247,18 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	}
 
 	$t_content_type = '';
-	$t_file_info_type = file_get_mime_type( $t_file_path );
-	if( $t_file_info_type !== false ) {
-		$t_content_type = $t_file_info_type;
-	}
 
 	# allow overriding the content type for specific text and image extensions
 	# see bug #13193 for details
-	if( strpos( $t_content_type, 'text/' ) === 0 || strpos( $t_content_type, 'image/' ) === 0 ) {
-		$t_extension = pathinfo( $t_file_path, PATHINFO_EXTENSION );
-		if( $t_extension && array_key_exists( $t_extension, $g_plugin_mime_types ) ) {
-			$t_content_type =  $g_plugin_mime_types[$t_extension];
+	$t_extension = pathinfo( $t_file_path, PATHINFO_EXTENSION );
+	if( $t_extension && array_key_exists( $t_extension, $g_plugin_mime_types ) ) {
+		$t_content_type = $g_plugin_mime_types[$t_extension];
+	}
+
+	if( !$t_content_type ) {
+		$t_file_info_type = file_get_mime_type( $t_file_path );
+		if( $t_file_info_type !== false ) {
+			$t_content_type = $t_file_info_type;
 		}
 	}
 
@@ -263,7 +266,14 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 		header( 'Content-Type: ' . $t_content_type );
 	}
 
-	readfile( $t_file_path );
+	$t_mtime = @filemtime( $t_file_path );
+	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $t_mtime ) );
+	if( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] )
+		&& ( $t_mtime <= strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) ) ) {
+		http_response_code( HTTP_STATUS_NOT_MODIFIED );
+	} else {
+		readfile( $t_file_path );
+	}
 }
 
 /**
@@ -472,26 +482,26 @@ function plugin_event_hook( $p_name, $p_callback ) {
 
 /**
  * Hook multiple plugin callbacks at once.
+ *
  * @param array $p_hooks Array of event name/callback key/value pairs.
- * @return void
+ *
+ * @return bool True if all events were successfully hooked, false otherwise.
  */
 function plugin_event_hook_many( array $p_hooks ) {
-	if( !is_array( $p_hooks ) ) {
-		return;
-	}
-
 	$t_basename = plugin_get_current();
 
+	$t_return = true;
 	foreach( $p_hooks as $t_event => $t_callbacks ) {
 		if( !is_array( $t_callbacks ) ) {
-			event_hook( $t_event, $t_callbacks, $t_basename );
-			continue;
+			$t_callbacks = array( $t_callbacks );
 		}
-
 		foreach( $t_callbacks as $t_callback ) {
-			event_hook( $t_event, $t_callback, $t_basename );
+			if( !event_hook( $t_event, $t_callback, $t_basename ) ) {
+				$t_return = false;
+			}
 		}
 	}
+	return $t_return;
 }
 
 /**
@@ -981,15 +991,23 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 				);
 				return $t_plugin->getInvalidPlugin();
 			}
-
-			if( $p_return ) {
-				return $t_plugin;
-			} else {
-				$g_plugin_cache[$t_basename] = $t_plugin;
-			}
+		} elseif( basename( $_SERVER['SCRIPT_NAME'] ) == 'manage_plugin_page.php' ) {
+			# We don't want to throw an error here, as this is the place where
+			# information about the invalid Plugin is displayed.
+			$t_plugin = new MissingClassPlugin( $t_basename );
+			log_event(
+				LOG_PLUGIN,
+				"Plugin '$t_basename' is invalid ('$t_classname' class is not defined)"
+			);
 		} else {
 			error_parameters( $t_basename, $t_classname );
 			trigger_error( ERROR_PLUGIN_CLASS_NOT_FOUND, ERROR );
+		}
+
+		if( $p_return ) {
+			return $t_plugin;
+		} else {
+			$g_plugin_cache[$t_basename] = $t_plugin;
 		}
 	}
 
@@ -1121,7 +1139,13 @@ function plugin_init( $p_basename ) {
 		}
 
 		# finish initializing the plugin
-		$t_plugin->__init();
+		if( !$t_plugin->__init() ) {
+			$t_invalid = new MissingHooksPlugin( $p_basename );
+			$t_invalid->setInvalidPlugin( $t_plugin );
+			$g_plugin_cache[$p_basename] = $t_invalid;
+			plugin_pop_current();
+			return false;
+		}
 		$g_plugin_cache_init[$p_basename] = true;
 
 		plugin_pop_current();

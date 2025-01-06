@@ -372,7 +372,7 @@ class InvalidPluginForDisplay extends PluginForDisplay {
 		# Descriptions from InvalidPlugin classes are trusted input
 		$this->description = $p_plugin->description;
 		if( $p_plugin->status_message ) {
-			$this->description .= '<br>' . $p_plugin->status_message;
+			$this->description .= '<br><span class="small">' . $p_plugin->status_message . '</span>';
 		}
 
 		$this->can_remove = $p_plugin->removable;

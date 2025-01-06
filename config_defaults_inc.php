@@ -1066,6 +1066,12 @@ $g_language_choices_arr = array(
 /**
  * Browser language mapping for 'auto' language selection.
  *
+ * The mapping between a comma-separated list of BCP 47 language codes, usually
+ * ending with the most generic one (i.e. the primary language without extended
+ * subtag), and the corresponding MantisBT language code.
+ *
+ * @see lang_get_current_lang()
+ * @see lang_get_current_datetime_locale()
  * @global array $g_language_auto_map
  */
 $g_language_auto_map = array(
@@ -4514,6 +4520,22 @@ $g_relationship_graph_enable = OFF;
 $g_graphviz_path = '/usr/bin/';
 
 /**
+ * Graphviz output format.
+ *
+ * Can be `svg`, `png` (default) or any other
+ * {@link https://www.graphviz.org/docs/outputs/ supported format}.
+ *
+ * NOTE: svg produces higher quality images compared to png, but it requires
+ * Graphviz >= 2.42.4 due to a
+ * {@link https://gitlab.com/graphviz/graphviz/-/issues/1687 bug in earlier versions}.
+ * The fix will be included in Ubuntu 26.04 LTS; the default can be reconsidered
+ * when it is released.
+ *
+ * @global string $g_graph_format
+ */
+$g_graph_format = 'png';
+
+/**
  * Font name and size, as required by Graphviz.
  *
  * If Graphviz fails to run for you, you are probably using a font name that
@@ -4859,11 +4881,13 @@ $g_manage_plugin_threshold = ADMINISTRATOR;
  */
 $g_plugin_mime_types = array(
 	'css' => 'text/css',
-	'js'  => 'text/javascript',
+	'js'  => 'application/javascript',
 	'gif' => 'image/gif',
 	'png' => 'image/png',
 	'jpg' => 'image/jpeg',
-	'jpeg' => 'image/jpeg'
+	'jpeg' => 'image/jpeg',
+	'svg' => 'image/svg+xml',
+	'webp' => 'image/webp'
 );
 
 /**

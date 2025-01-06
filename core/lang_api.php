@@ -86,16 +86,15 @@ function lang_load( $p_lang, $p_dir = null ) {
 	$t_vars = get_defined_vars();
 
 	foreach( array_keys( $t_vars ) as $t_var ) {
-		$t_lang_var = preg_replace( '/^s_/', '', $t_var );
-		if( $t_lang_var != $t_var ) {
-			$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
+		if( $t_var[0] === 's' && $t_var[1] === '_' ) {
+			$g_lang_strings[$p_lang][substr( $t_var, 2 )] = $$t_var;
 		} else if( 'MANTIS_ERROR' == $t_var ) {
-			if( isset( $g_lang_strings[$p_lang][$t_lang_var] ) ) {
+			if( isset( $g_lang_strings[$p_lang][$t_var] ) ) {
 				foreach( $$t_var as $t_key => $t_val ) {
-					$g_lang_strings[$p_lang][$t_lang_var][$t_key] = $t_val;
+					$g_lang_strings[$p_lang][$t_var][$t_key] = $t_val;
 				}
 			} else {
-				$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
+				$g_lang_strings[$p_lang][$t_var] = $$t_var;
 			}
 		}
 	}
@@ -351,6 +350,16 @@ function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 		# or the original string if no default was provided
 		return $p_default !== null ? $p_default : $p_string;
 	}
+}
+
+/**
+ * Get current language code (ISO 639-1).
+ * @return string Browser language code (e.g. 'en' for English)
+ */
+function lang_get_current_lang() {
+	$t_key_arr = explode( ',', array_search( lang_get_current(),
+		config_get_global( 'language_auto_map' ) ) );
+	return trim( end( $t_key_arr ) );
 }
 
 /**
