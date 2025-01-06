@@ -625,6 +625,25 @@ function helper_mantis_url( $p_url ) {
 }
 
 /**
+ * Check if URL is external.
+ *
+ * @param string $p_url Url to check.
+ *
+ * @return bool True if URL does not belong to the same root domain as MantisBT
+ *              {@see $g_path}, false if it does.
+ */
+function helper_is_link_external( string $p_url ): bool {
+	$t_link_root_domain = helper_get_root_domain( $p_url );
+	if( !$t_link_root_domain ) {
+		# No domain = relative URL = internal
+		return false;
+	}
+
+	$t_mantis_root_domain = helper_get_root_domain( config_get_global( 'path' ) );
+	return $t_link_root_domain != $t_mantis_root_domain;
+}
+
+/**
  * convert a duration string in "[h]h:mm" to an integer (minutes)
  * @param string $p_hhmm A string in [h]h:mm format to convert.
  * @param string $p_field The field name.
@@ -924,6 +943,9 @@ function helper_get_link_attributes( $p_return_array = true, $p_is_external_link
  */
 function helper_get_root_domain( $p_url ) {
 	$t_host = parse_url( $p_url, PHP_URL_HOST );
+	if( !$t_host ) {
+		return '';
+	}
 	if ( filter_var( $t_host, FILTER_VALIDATE_IP ) ) {
 		return $t_host; // Return IP address as is
 	}
