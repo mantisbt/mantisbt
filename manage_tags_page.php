@@ -153,10 +153,10 @@ print_manage_menu( 'manage_tags_page.php' );
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
 			<tr>
-				<td><?php echo lang_get( 'tag_name' ) ?></td>
-				<td><?php echo lang_get( 'tag_creator' ) ?></td>
-				<td><?php echo lang_get( 'tag_created' ) ?></td>
-				<td><?php echo lang_get( 'tag_updated' ) ?></td>
+				<th><?php echo lang_get( 'tag_name' ) ?></th>
+				<th><?php echo lang_get( 'tag_creator' ) ?></th>
+				<th><?php echo lang_get( 'tag_created' ) ?></th>
+				<th><?php echo lang_get( 'tag_updated' ) ?></th>
 			</tr>
 		</thead>
 		<tbody>
