@@ -39,6 +39,8 @@
  * @uses logging_api.php
  */
 
+use Mantis\classes\MissingHooksPlugin;
+
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -480,26 +482,26 @@ function plugin_event_hook( $p_name, $p_callback ) {
 
 /**
  * Hook multiple plugin callbacks at once.
+ *
  * @param array $p_hooks Array of event name/callback key/value pairs.
- * @return void
+ *
+ * @return bool True if all events were successfully hooked, false otherwise.
  */
 function plugin_event_hook_many( array $p_hooks ) {
-	if( !is_array( $p_hooks ) ) {
-		return;
-	}
-
 	$t_basename = plugin_get_current();
 
+	$t_return = true;
 	foreach( $p_hooks as $t_event => $t_callbacks ) {
 		if( !is_array( $t_callbacks ) ) {
-			event_hook( $t_event, $t_callbacks, $t_basename );
-			continue;
+			$t_callbacks = array( $t_callbacks );
 		}
-
 		foreach( $t_callbacks as $t_callback ) {
-			event_hook( $t_event, $t_callback, $t_basename );
+			if( !event_hook( $t_event, $t_callback, $t_basename ) ) {
+				$t_return = false;
+			}
 		}
 	}
+	return $t_return;
 }
 
 /**
@@ -989,15 +991,23 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 				);
 				return $t_plugin->getInvalidPlugin();
 			}
-
-			if( $p_return ) {
-				return $t_plugin;
-			} else {
-				$g_plugin_cache[$t_basename] = $t_plugin;
-			}
+		} elseif( basename( $_SERVER['SCRIPT_NAME'] ) == 'manage_plugin_page.php' ) {
+			# We don't want to throw an error here, as this is the place where
+			# information about the invalid Plugin is displayed.
+			$t_plugin = new MissingClassPlugin( $t_basename );
+			log_event(
+				LOG_PLUGIN,
+				"Plugin '$t_basename' is invalid ('$t_classname' class is not defined)"
+			);
 		} else {
 			error_parameters( $t_basename, $t_classname );
 			trigger_error( ERROR_PLUGIN_CLASS_NOT_FOUND, ERROR );
+		}
+
+		if( $p_return ) {
+			return $t_plugin;
+		} else {
+			$g_plugin_cache[$t_basename] = $t_plugin;
 		}
 	}
 
@@ -1129,7 +1139,13 @@ function plugin_init( $p_basename ) {
 		}
 
 		# finish initializing the plugin
-		$t_plugin->__init();
+		if( !$t_plugin->__init() ) {
+			$t_invalid = new MissingHooksPlugin( $p_basename );
+			$t_invalid->setInvalidPlugin( $t_plugin );
+			$g_plugin_cache[$p_basename] = $t_invalid;
+			plugin_pop_current();
+			return false;
+		}
 		$g_plugin_cache_init[$p_basename] = true;
 
 		plugin_pop_current();

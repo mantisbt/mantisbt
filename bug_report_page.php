@@ -156,7 +156,9 @@ if( $f_master_bug_id > 0 ) {
 
 	# New issues cannot be reported for the 'All Project' selection
 	if( ALL_PROJECTS == $t_current_project ) {
-		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
+		if( !print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' ) ) {
+			die;
+		}
 	}
 
 	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
