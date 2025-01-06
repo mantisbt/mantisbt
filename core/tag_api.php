@@ -1047,12 +1047,14 @@ function tag_stats_attached( $p_tag_id ) {
 
 /**
  * Get a list of related tags.
+ *
  * Returns a list of tags that are the most related to the given tag,
  * based on the number of times they have been attached to the same bugs.
- * Defaults to a list of five tags.
- * @param integer $p_tag_id The tag ID to retrieve statistics on.
- * @param integer $p_limit  List size.
- * @return array Array of tag rows, with share count added
+ *
+ * @param int $p_tag_id The tag ID to retrieve statistics on.
+ * @param int $p_limit  List size, defaults to 5 (0 = no limit).
+ *
+ * @return array Array of tag rows, with share count added.
  */
 function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 
@@ -1071,6 +1073,9 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 			. ' WHERE bug_id IN :filter AND tag_id <> :tagid'
 			. ' GROUP BY tag_id ORDER BY tag_count DESC';
 	$t_query = new DbQuery( $t_sql );
+	if( $p_limit > 0 ) {
+		$t_query->set_limit( $p_limit );
+	}
 	$t_query->bind( 'filter', $t_filter_subquery );
 	$t_query->bind( 'tagid', (int)$p_tag_id );
 	$t_query->execute();
@@ -1084,4 +1089,3 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 
 	return $t_tags;
 }
-
