@@ -266,7 +266,7 @@ function tag_ensure_unique( $p_name ) {
  */
 function tag_name_is_valid( $p_name, array &$p_matches, $p_prefix = '' ) {
 	$t_separator = config_get( 'tag_separator' );
-	$t_pattern = '/^' . $p_prefix . '([^\+\-' . $t_separator . '][^' . $t_separator . ']*)$/';
+	$t_pattern = '/^' . $p_prefix . '([^+\-' . $t_separator . '][^' . $t_separator . ']*)$/';
 	return preg_match( $t_pattern, $p_name, $p_matches );
 }
 
@@ -441,8 +441,6 @@ function tag_parse_filters( $p_string ) {
 
 				$t_tags[] = $t_tag_row;
 			}
-		} else {
-			continue;
 		}
 	}
 	usort( $t_tags, 'tag_cmp_name' );
@@ -1019,6 +1017,7 @@ function tag_bug_detach_all( $p_bug_id, $p_add_history = true, $p_user_id = null
  * @return string
  */
 function tag_get_link( array $p_tag_row ) {
+	/** @noinspection HtmlUnknownTarget */
 	return sprintf(
 		'<a class="btn btn-xs btn-primary btn-white btn-round" href="tag_view_page.php?tag_id=%s" title="%s">%s</a>',
 		$p_tag_row['id'],
