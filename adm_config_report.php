@@ -116,9 +116,13 @@ if( $t_filter_save ) {
 	if( null !== $t_cookie_string ) {
 		$t_cookie_contents = explode( ':', $t_cookie_string );
 
-		$t_filter_user_value    = $t_cookie_contents[0];
-		$t_filter_project_value = $t_cookie_contents[1];
+		$t_filter_user_value    = (int)$t_cookie_contents[0];
+		$t_filter_project_value = (int)$t_cookie_contents[1];
 		$t_filter_config_value  = check_config_value( $t_cookie_contents[2] );
+
+		if( !user_exists( $t_filter_user_value ) ) {
+			$t_filter_user_value = ALL_USERS;
+		}
 
 		if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
 			$t_filter_project_value = ALL_PROJECTS;
@@ -255,13 +259,13 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 		<thead>
 			<tr>
 				<th>
-					<?php echo lang_get( 'username' ); ?><br />
+					<label for="filter_user_id"><?php echo lang_get( 'username' ); ?></label>
 				</th>
 				<th>
-					<?php echo lang_get( 'project_name' ); ?><br />
+					<label for="filter_project_id"><?php echo lang_get( 'project_name' ); ?></label>
 				</th>
 				<th>
-					<?php echo lang_get( 'configuration_option' ); ?><br />
+					<label for="filter_config_id"><?php echo lang_get( 'configuration_option' ); ?></label>
 				</th>
 			</tr>
 		</thead>
@@ -269,21 +273,21 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 		<tbody>
 			<tr>
 				<td>
-					<select name="filter_user_id" class="input-sm">
+					<select name="filter_user_id" id="filter_user_id" class="input-sm">
 						<?php
 						print_option_list_from_array( $t_users_list, $t_filter_user_value );
 						?>
 					</select>
 				</td>
 				<td>
-					<select name="filter_project_id" class="input-sm">
+					<select name="filter_project_id" id="filter_project_id" class="input-sm">
 						<?php
 						print_option_list_from_array( $t_projects_list, $t_filter_project_value );
 						?>
 					</select>
 				</td>
 				<td>
-					<select name="filter_config_id" class="input-sm">
+					<select name="filter_config_id" id="filter_config_id" class="input-sm">
 						<?php
 						print_option_list_from_array( $t_configs_list, $t_filter_config_value );
 						?>
