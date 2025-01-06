@@ -158,10 +158,13 @@ print_manage_menu( 'manage_tags_page.php' );
 				<th><?php echo lang_get( 'tag_creator' ) ?></th>
 				<th><?php echo lang_get( 'tag_created' ) ?></th>
 				<th><?php echo lang_get( 'tag_updated' ) ?></th>
+				<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 			</tr>
 		</thead>
 		<tbody>
 <?php
+		$t_security_token = form_security_token( 'tag_delete' );
+
 		# Display all tags
 		while( $t_tag_row = db_fetch_array( $t_result ) ) {
 			$t_tag_name = string_display_line( $t_tag_row['name'] );
@@ -177,6 +180,15 @@ print_manage_menu( 'manage_tags_page.php' );
 				<td><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
+				<td class="center"><?php
+					print_form_button(
+						'tag_delete.php',
+						lang_get( 'delete' ),
+						[ 'tag_id' => $t_tag_row['id'] ],
+						$t_security_token
+					);
+					?>
+				</td>
 			</tr>
 <?php
 		} # end while loop on tags
