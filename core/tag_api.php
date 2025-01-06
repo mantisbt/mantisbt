@@ -466,6 +466,13 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
 	}
 
 	$t_query = 'SELECT * FROM {tag} ' . $t_where . ' ORDER BY name';
+	$t_query = <<<SQL
+		SELECT t.*, num FROM {tag} t
+		LEFT JOIN (SELECT tag_id, COUNT(1) AS num FROM {bug_tag} GROUP BY tag_id) cnt
+			ON cnt.tag_id = t.id
+		$t_where
+		ORDER BY name
+		SQL;
 
 	return db_query( $t_query, $t_where_params, $p_count, $p_offset );
 }
@@ -489,7 +496,7 @@ function tag_get_unused( $p_name_filter, $p_count, $p_offset ) {
 	}
 
 	$t_query = <<< SQL
-		SELECT t.* FROM {tag} t
+		SELECT t.*, 0 AS num FROM {tag} t
 		LEFT JOIN {bug_tag} bt ON bt.tag_id = t.id
 		WHERE bt.tag_id IS NULL $t_where 
 		ORDER BY name

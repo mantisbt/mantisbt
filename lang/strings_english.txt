@@ -1509,7 +1509,7 @@ $s_tag_history_detached = 'Tag Detached';
 $s_tag_history_renamed = 'Tag Renamed';
 $s_tag_related = 'Related Tags';
 $s_tag_related_issues = 'Shared Issues (%1$s)';
-$s_tag_stats_attached = 'Issues attached: %1$s';
+$s_tag_stats_attached = 'Issues attached';
 $s_tag_create = 'Create Tag';
 
 # Time Tracking

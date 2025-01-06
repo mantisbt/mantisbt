@@ -154,6 +154,7 @@ print_manage_menu( 'manage_tags_page.php' );
 		<thead>
 			<tr>
 				<th><?php echo lang_get( 'tag_name' ) ?></th>
+				<th><?php echo lang_get( 'tag_stats_attached' ) ?></th>
 				<th><?php echo lang_get( 'tag_creator' ) ?></th>
 				<th><?php echo lang_get( 'tag_created' ) ?></th>
 				<th><?php echo lang_get( 'tag_updated' ) ?></th>
@@ -172,6 +173,7 @@ print_manage_menu( 'manage_tags_page.php' );
 			<?php } else { ?>
 				<td><?php echo $t_tag_name ?></td>
 			<?php } ?>
+				<td><?php echo (int)$t_tag_row['num'] ?></td>
 				<td><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
