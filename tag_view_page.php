@@ -145,11 +145,20 @@ layout_page_begin();
 			$t_description = string_display_line( $t_tag['description'] );
 			$t_count = $t_tag['count'];
 			$t_link = string_html_specialchars( 'search.php?tag_string='.urlencode( '+' . $t_tag_row['name'] . config_get( 'tag_separator' ) . '+' . $t_name ) );
-			$t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ); ?>
-			<div class="col-md-3 col-xs-6 no-padding"><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></a></div>
-			<div class="col-md-9 col-xs-6 no-padding"><a href="<?php echo $t_link; ?>" class="btn btn-xs btn-primary btn-white btn-round"><?php echo $t_label; ?></a></div>
-			<div class="clearfix"></div>
-			<div class="space-4"></div>
+			$t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] );
+?>
+				<div class="col-md-3 col-xs-6 no-padding">
+					<a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>"
+					   title="<?php echo $t_description; ?>">
+						<?php echo $t_name; ?>
+					</a>
+				</div>
+				<div class="col-md-9 col-xs-6 no-padding"><?php
+					print_link_button( $t_link, $t_label, 'btn-xs' );
+					?>
+				</div>
+				<div class="clearfix"></div>
+				<div class="space-4"></div>
 <?php
 		}
 ?>
@@ -167,22 +176,23 @@ layout_page_begin();
 <?php
 		if( $t_can_edit_own ) {
 			print_link_button( 'tag_update_page.php?tag_id=' . $f_tag_id,
-				lang_get( 'tag_update_button' ),
-				'pull-left'
+				lang_get( 'tag_update_button' )
 			);
 		}
 
-		if( $t_can_edit ) { ?>
-		<form class="form-inline pull-left" action="tag_delete.php" method="post">
-			<fieldset>
-				<?php echo form_security_field( 'tag_delete' ) ?>
-				<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'tag_delete_button' ) ?>" />
-			</fieldset>
-		</form><?php
-		} ?>
-	</div><?php
-	} ?>
+		if( $t_can_edit ) {
+			print_form_button( 'tag_delete.php',
+				lang_get( 'tag_delete_button' ),
+				[ 'tag_id' => $f_tag_id ],
+				null,
+				'btn btn-primary btn-white btn-round'
+			);
+		}
+?>
+	</div>
+<?php
+	}
+?>
 	</div>
 	</div>
 	</div>
