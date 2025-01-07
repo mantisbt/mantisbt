@@ -152,7 +152,7 @@ print_manage_menu( 'manage_tags_page.php' );
 <?php
 		# Display all tags
 		while( $t_tag_row = db_fetch_array( $t_result ) ) {
-			$t_tag_name = string_display_line( $t_tag_row['name'] );
+			$t_tag_name = string_attribute( $t_tag_row['name'] );
 			$t_tag_description = string_display( $t_tag_row['description'] );
 ?>
 			<tr>
@@ -161,7 +161,7 @@ print_manage_menu( 'manage_tags_page.php' );
 			<?php } else { ?>
 				<td><?php echo $t_tag_name ?></td>
 			<?php } ?>
-				<td><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
+				<td><?php echo string_attribute( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 			</tr>
