@@ -52,6 +52,8 @@ require_api( 'string_api.php' );
 require_api( 'tag_api.php' );
 require_api( 'user_api.php' );
 
+$t_manage_tags = defined( 'MANAGE_TAG_VIEW_PAGE' );
+
 access_ensure_global_level( config_get( 'tag_view_threshold' ) );
 compress_enable();
 
@@ -65,10 +67,13 @@ $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
 $t_can_edit_own = $t_can_edit || auth_get_current_user_id() == tag_get_field( $f_tag_id, 'user_id' )
 	&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) );
 
-
 layout_page_header( sprintf( lang_get( 'tag_details' ), $t_name ) );
-
-layout_page_begin();
+if( $t_manage_tags ) {
+	layout_page_begin( 'manage_overview_page.php' );
+	print_manage_menu( 'manage_tags_page.php' );
+} else {
+	layout_page_begin();
+}
 ?>
 
 <div class="col-md-12 col-xs-12">

@@ -172,7 +172,7 @@ print_manage_menu( 'manage_tags_page.php' );
 ?>
 			<tr>
 			<?php if( $t_can_edit ) { ?>
-				<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td>
+				<td><a href="manage_tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td>
 			<?php } else { ?>
 				<td><?php echo $t_tag_name ?></td>
 			<?php } ?>

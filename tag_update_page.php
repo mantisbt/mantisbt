@@ -62,6 +62,11 @@ $f_tag_id = gpc_get_int( 'tag_id' );
 tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
+$t_redirect_page = parse_url(
+	basename( $_SERVER["HTTP_REFERER"] ?? 'tag_view_page.php' ),
+	PHP_URL_PATH
+);
+
 $t_name = string_display_line( $t_tag_row['name'] );
 $t_description = string_display( $t_tag_row['description'] );
 
@@ -88,14 +93,17 @@ layout_page_begin();
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="widget-toolbox padding-8 clearfix">
-			<?php print_link_button( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ),
-				'btn-sm pull-right' ); ?>
+			<?php print_link_button( $t_redirect_page . '?tag_id=' . $f_tag_id,
+				lang_get( 'tag_update_return' ),
+				'btn-sm pull-right' );
+			?>
 		</div>
 		<div class="form-container">
 		<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
+			<input type="hidden" name="redirect" value="<?php echo $t_redirect_page ?>"/>
 			<?php echo form_security_field( 'tag_update' ) ?>
 			<tr>
 				<td class="category">
