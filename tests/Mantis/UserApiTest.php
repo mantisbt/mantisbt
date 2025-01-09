@@ -81,7 +81,7 @@ class UserApiTest extends MantisCoreBase {
 	 *
 	 * @return array [email_address, user_id, unique]
 	 */
-	public function providerEmailUnique() {
+	public static function providerEmailUnique() {
 		[$t_user, $t_domain] = explode( '@', self::TEST_EMAIL );
 		$t_user_sql_like_pattern = substr_replace( $t_user, '_', 1, 1 );
 

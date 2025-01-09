@@ -61,7 +61,7 @@ class GetLinkAttributesTest extends MantisCoreBase
 		$this->restoreConfig( self::CFG_MAKE_LINKS, $t_old );
 	}
 
-	public function provideConfigurations(): Generator {
+	public static function provideConfigurations(): Generator {
 		yield 'LINKS_SAME_WINDOW' => [
 			LINKS_SAME_WINDOW,
 			'',
@@ -123,7 +123,7 @@ class GetLinkAttributesTest extends MantisCoreBase
 		$this->assertEquals( $p_external, helper_is_link_external( $p_url ), "URL is external" );
 	}
 
-	public function providerLinks(): Generator {
+	public static function providerLinks(): Generator {
 		yield 'External URL' => [
 			'https://example.com',
 			'external' => true,
@@ -163,7 +163,7 @@ class GetLinkAttributesTest extends MantisCoreBase
 		$this->restoreConfig( self::CFG_MAKE_LINKS, $t_old );
 	}
 
-	public function providerNoFollow(): Generator {
+	public static function providerNoFollow(): Generator {
 		yield 'LINKS_NOFOLLOW_EXTERNAL' => [
 			LINKS_NOFOLLOW_EXTERNAL,
 			'internal' => [],
