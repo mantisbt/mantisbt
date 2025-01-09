@@ -126,18 +126,18 @@ class GetLinkAttributesTest extends MantisCoreBase
 	public static function providerLinks(): Generator {
 		yield 'External URL' => [
 			'https://example.com',
-			'external' => true,
+			true,
 		];
 
 		$t_path = config_get_global('path' );
 		yield 'Mantis URL' => [
 			$t_path,
-			'external' => false,
+			false,
 		];
 
 		yield 'Relative URL' => [
 			'/index.html',
-			'external' => false,
+			false,
 		];
 	}
 
@@ -166,14 +166,14 @@ class GetLinkAttributesTest extends MantisCoreBase
 	public static function providerNoFollow(): Generator {
 		yield 'LINKS_NOFOLLOW_EXTERNAL' => [
 			LINKS_NOFOLLOW_EXTERNAL,
-			'internal' => [],
-			'external' => ['rel' => 'nofollow'],
+			[],
+			['rel' => 'nofollow'],
 		];
 
 		yield 'LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL' => [
 			LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL,
-			'internal' => ['rel' => 'noopener'],
-			'external' => ['rel' => 'noopener,nofollow'],
+			['rel' => 'noopener'],
+			['rel' => 'noopener,nofollow'],
 		];
 	}
 }
