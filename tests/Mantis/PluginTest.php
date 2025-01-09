@@ -101,7 +101,7 @@ class PluginTest extends MantisCoreBase {
 	 *
 	 * @return array List of test cases
 	 */
-	public function providerDependency() {
+	static public function providerDependency() {
 		return array(
 			array( '1.3.0', self::REQ_13, true ),
 			array( '1.3.0', self::REQ_130, true ),

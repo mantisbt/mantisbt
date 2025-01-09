@@ -55,7 +55,7 @@ class MentionParsingTest extends MantisCoreBase {
 	 *   <test case> => array( <string to test>, <list of expected mentions>)
 	 * @return array
 	 */
-	public function provider() {
+	static public function provider() {
 		return array(
 			'NoMention' => array(
 				'some random string.',

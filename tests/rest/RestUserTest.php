@@ -578,7 +578,7 @@ class RestUserTest extends RestBase {
 	 *
 	 * @return array test cases
 	 */
-	public function providerInvalidUserNames() {
+	static public function providerInvalidUserNames() {
 		return array(
 			'blank_spaces' => array( ' ' ),
 			'blank_tabs' => array( "\t" ),
@@ -592,7 +592,7 @@ class RestUserTest extends RestBase {
 	 *
 	 * @return array test cases
 	 */
-	public function providerValidUserNames() {
+	static public function providerValidUserNames() {
 		return array(
 			'regular' => array( Faker::username() ),
 			'with_spaces_in_middle' => array( "some user" ),

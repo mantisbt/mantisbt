@@ -406,7 +406,7 @@ class RestIssueTest extends RestBase {
 	 * @return array List of test cases
 	 *
 	 */
-	public function providerTagsInvalid() {
+	static public function providerTagsInvalid() {
 		return array(
 			'EmptyTagElement' => array(
 				array(),

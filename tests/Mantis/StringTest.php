@@ -60,7 +60,7 @@ class StringTest extends MantisCoreBase {
 	 * Data provider for string sanitize test
 	 * @return array
 	 */
-	public function provider() {
+	static public function provider() {
 		$t_test_strings = array(
 			array( '', 'index.php' ),
 			array( 'abc.php', 'abc.php' ),
