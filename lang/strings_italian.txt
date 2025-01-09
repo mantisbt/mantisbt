@@ -676,6 +676,7 @@ $s_plugin_key_upgrade = 'Richiede aggiornamento';
 $s_plugin_invalid_description = 'Plugin non valido';
 $s_plugin_missing_description = 'Plugin mancante';
 $s_plugin_missing_status_message = 'Il plugin è installato nel database Mantis, ma non può essere caricato.';
+$s_plugin_missing_event = 'Eventi mancanti';
 $s_project_added_msg = 'Il progetto è stato inserito...';
 $s_category_added_msg = 'La categoria è stata inserita...';
 $s_category_deleted_msg = 'La categoria è stata eliminata...';

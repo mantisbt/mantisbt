@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author GilPe
  * @author Les Meloures
  * @author Robby
  * @author Soued031
@@ -253,6 +254,7 @@ $s_plugin_install = 'Installéieren';
 $s_plugin_upgrade = 'Aktualiséieren';
 $s_plugin_invalid_description = 'Plugin net valabel';
 $s_plugin_missing_description = 'Plugin feelt';
+$s_plugin_missing_event = 'Evenementer déi feelen';
 $s_category_delete_confirm_msg = 'Sidd Dir sécher, datt Dir d\'Kategorie „%1$s“ läsche wëllt?';
 $s_delete_category_button = 'Kategorie läschen';
 $s_update_category_button = 'Kategorie aktualiséieren';
