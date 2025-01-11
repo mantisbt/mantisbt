@@ -143,7 +143,7 @@ class RestIssueUpdateVersion extends RestBase
 	 *
 	 * @return Generator List of test cases
 	 */
-	static public function providerUnsetVersionSuccess(): Generator {
+	public static function providerUnsetVersionSuccess(): Generator {
 		yield 'Version with id 0' => [ ['id' => 0], HTTP_STATUS_SUCCESS ];
 
 		# According to @vboctor these test cases should actually fail, but don't...
@@ -174,7 +174,7 @@ class RestIssueUpdateVersion extends RestBase
 	 *    <case> => array( <version payload>, <expected status code> )
 	 *
 	 */
-	static public function providerUnsetVersionFailure(): Generator {
+	public static function providerUnsetVersionFailure(): Generator {
 		# This is a dummy test case, to avoid a PHPUnit warning when the
 		# Provider returns nothing.
 		yield 'dummy' => [ ['id' => -1], HTTP_STATUS_BAD_REQUEST ];

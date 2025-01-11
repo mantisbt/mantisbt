@@ -308,7 +308,7 @@ class RestProjectVersionTest extends RestBase {
 	 *
 	 * @return array The test data
 	 */
-	static public function providerVersionInvalidNames() {
+	public static function providerVersionInvalidNames() {
 		return array(
 			'empty' =>array( '' ),
 			'blank' => array( '   ' ),

@@ -267,7 +267,7 @@ EOD;
 		$this->assertSame( '<p>' . $t_sample . '</p>', $this->parser->convert( $t_sample, true ) );
 	}
 
-	static public function provideHeaders(): Generator {
+	public static function provideHeaders(): Generator {
 		# Valid headers
 		yield  'valid: # foo' => ['# foo', '<h1>foo</h1>'];
 		yield  'valid: ## foo' => ['## foo', '<h2>foo</h2>'];
@@ -303,7 +303,7 @@ EOD;
 	 * tested by the Parsedown tests. But they ensure that the Parsedown process is
 	 * not affected in any way, no matter what the value of "process_urls" is.
 	 */
-	static public function provideEmails(): Generator {
+	public static function provideEmails(): Generator {
 		yield 'process_urls = ON; lorem <user@exmaple.com> ipsum' => [
 			'lorem <user@exmaple.com> ipsum',
 			ON,
@@ -358,7 +358,7 @@ EOD;
 	 * tested by the Parsedown tests. But they ensure that the Parsedown process is
 	 * not affected in any way, no matter what the value of "process_urls" is.
 	 */
-	static public function provideUrls(): Generator {
+	public static function provideUrls(): Generator {
 		yield 'process_urls = ON; lorem <https://exmaple.com> ipsum' => [
 			'lorem <https://exmaple.com> ipsum',
 			ON,
