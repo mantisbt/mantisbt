@@ -86,7 +86,7 @@ class ApiObjectFactory {
 	/**
 	 * @var bool true: SOAP API, false: REST API
 	 */
-	static public $soap = true;
+	public static $soap = true;
 
 	/**
 	 * Generate a new fault - this method should only be called from within this factory class.  Use methods for
