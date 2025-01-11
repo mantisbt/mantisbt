@@ -123,6 +123,18 @@ layout_page_begin();
 				</td>
 			</tr>
 			<tr>
+				<td class="category">
+					<?php echo lang_get( 'tag_description' ) ?>
+				</td>
+				<td>
+					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+					<textarea id="tag-description" name="description"
+							  class="form-control" cols="80" rows="6" <?php echo helper_get_tab_index() ?>>
+<?php echo string_textarea( $t_description ) ?>
+</textarea>
+				</td>
+			</tr>
+			<tr>
 				<?php
 				if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 					echo '<td class="category">', lang_get( 'tag_creator' ), '</td>';
@@ -148,18 +160,6 @@ layout_page_begin();
 					<?php echo lang_get( 'tag_updated' ) ?>
 				</td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
-			</tr>
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'tag_description' ) ?>
-				</td>
-				<td>
-					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
-					<textarea id="tag-description" name="description"
-							  class="form-control" cols="80" rows="6" <?php echo helper_get_tab_index() ?>>
-<?php echo string_textarea( $t_description ) ?>
-</textarea>
-				</td>
 			</tr>
 		</fieldset>
 		</table>

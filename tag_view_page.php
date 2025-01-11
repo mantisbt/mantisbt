@@ -110,6 +110,12 @@ if( $t_manage_tags ) {
 	</tr>
 	<tr>
 		<td class="category">
+			<?php echo lang_get( 'tag_description' ) ?>
+		</td>
+		<td><?php echo $t_description ?></td>
+	</tr>
+	<tr>
+		<td class="category">
 			<?php echo lang_get( 'tag_creator' ) ?>
 		</td>
 		<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></td>
@@ -126,13 +132,6 @@ if( $t_manage_tags ) {
 		</td>
 		<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 	</tr>
-	<tr>
-		<td class="category">
-			<?php echo lang_get( 'tag_description' ) ?>
-		</td>
-		<td><?php echo $t_description ?></td>
-	</tr>
-
 <?php
 	# Related tags
 
