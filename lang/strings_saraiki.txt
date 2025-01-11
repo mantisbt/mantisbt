@@ -389,7 +389,6 @@ $s_wiki = 'وکی';
 $s_tags = 'ٹیگ';
 $s_tag_id = 'ٹیگ آئی ڈی';
 $s_tag_name = 'ناں';
-$s_tag_creator = 'خالق';
 $s_tag_update_button = 'ٹیگ اپ ڈیٹ کرو';
 $s_tag_delete_button = 'ٹیگ مٹاؤ';
 $s_tag_create = 'ٹیگ خلقو';
