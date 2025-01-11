@@ -111,7 +111,7 @@ print_manage_menu( 'manage_tags_page.php' );
 		<div class="btn-group">
 	<?php
 	foreach ( $t_prefix_array as $t_prefix ) {
-		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'show_all_tags' ) : $t_prefix );
+		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'filter_all' ) : $t_prefix );
 		$t_active = (string)$t_prefix == (string)$f_filter ? 'active' : '';
 		echo '<a class="btn btn-xs btn-white btn-primary ' . $t_active .
 		'" href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>' ."\n";

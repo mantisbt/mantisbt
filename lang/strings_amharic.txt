@@ -450,7 +450,6 @@ $s_tag_history_detached = 'የመለያው ስም ተለየው';
 $s_tag_history_renamed = 'የመለያው ስም ተቀየረ';
 $s_tag_related = 'የተዛመዱ መለያዎች';
 $s_tag_create = 'መለያ ፍጠር';
-$s_show_all_tags = 'ሁሉም';
 $s_time_tracking_billing_link = 'ክፍያ';
 $s_time_tracking = 'የሰዓት መቆጣጠሪያ';
 $s_time_tracking_cost_per_hour = 'ዋጋ / ሰዓት';
