@@ -110,25 +110,25 @@ if( $t_manage_tags ) {
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'tag_description' ) ?>
+			<?php echo lang_get( 'description' ) ?>
 		</td>
 		<td><?php echo $t_description ?></td>
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'tag_creator' ) ?>
+			<?php echo lang_get( 'owner' ) ?>
 		</td>
 		<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></td>
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'tag_created' ) ?>
+			<?php echo lang_get( 'date_created' ) ?>
 		</td>
 		<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'tag_updated' ) ?>
+			<?php echo lang_get( 'updated' ) ?>
 		</td>
 		<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 	</tr>

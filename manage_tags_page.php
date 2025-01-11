@@ -155,9 +155,9 @@ print_manage_menu( 'manage_tags_page.php' );
 			<tr>
 				<th><?php echo lang_get( 'tag_name' ) ?></th>
 				<th><?php echo lang_get( 'tag_stats_attached' ) ?></th>
-				<th><?php echo lang_get( 'tag_creator' ) ?></th>
-				<th><?php echo lang_get( 'tag_created' ) ?></th>
-				<th><?php echo lang_get( 'tag_updated' ) ?></th>
+				<th><?php echo lang_get( 'owner' ) ?></th>
+				<th><?php echo lang_get( 'date_created' ) ?></th>
+				<th><?php echo lang_get( 'updated' ) ?></th>
 				<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 			</tr>
 		</thead>
@@ -251,7 +251,7 @@ print_manage_menu( 'manage_tags_page.php' );
 			<tr>
 				<td class="category">
 					<label for="tag-description">
-						<?php echo lang_get( 'tag_description' ) ?>
+						<?php echo lang_get( 'description' ) ?>
 					</label>
 				</td>
 				<td>

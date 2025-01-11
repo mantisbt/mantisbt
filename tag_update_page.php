@@ -124,7 +124,7 @@ layout_page_begin();
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'tag_description' ) ?>
+					<?php echo lang_get( 'description' ) ?>
 				</td>
 				<td>
 					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
@@ -137,7 +137,7 @@ layout_page_begin();
 			<tr>
 				<?php
 				if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-					echo '<td class="category">', lang_get( 'tag_creator' ), '</td>';
+					echo '<td class="category">', lang_get( 'owner' ), '</td>';
 					echo '<td><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id" class="input-sm">';
 					print_user_option_list( (int)$t_tag_row['user_id'],
 						ALL_PROJECTS,
@@ -145,19 +145,19 @@ layout_page_begin();
 					);
 					echo '</select></td>';
 				} else { ?>
-					<td class="category"><?php echo lang_get( 'tag_creator' ); ?></td>
+					<td class="category"><?php echo lang_get( 'owner' ); ?></td>
 					<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ); ?></td><?php
 				} ?>
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'tag_created' ) ?>
+					<?php echo lang_get( 'date_created' ) ?>
 				</td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'tag_updated' ) ?>
+					<?php echo lang_get( 'updated' ) ?>
 				</td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 			</tr>
