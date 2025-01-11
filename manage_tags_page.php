@@ -182,6 +182,12 @@ print_manage_menu( 'manage_tags_page.php' );
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 				<td class="center"><?php
 					print_form_button(
+						'tag_update_page.php',
+						lang_get( 'edit' ),
+						[ 'tag_id' => $t_tag_row['id'] ],
+						$t_security_token
+					);
+					print_form_button(
 						'tag_delete.php',
 						lang_get( 'delete' ),
 						[ 'tag_id' => $t_tag_row['id'] ],
