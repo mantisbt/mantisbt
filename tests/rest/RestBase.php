@@ -24,7 +24,6 @@
  */
 
 use GuzzleHttp\Exception\GuzzleException;
-use PHPUnit\Framework\TestCase;
 
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
@@ -43,7 +42,7 @@ require_once __DIR__ . '/../core/Faker.php';
  * @requires extension curl
  * @group REST
  */
-abstract class RestBase extends TestCase {
+abstract class RestBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
@@ -198,7 +197,8 @@ abstract class RestBase extends TestCase {
 	 * @return string
 	 */
 	protected function getTestCaseReference() {
-		return static::class . '::' . $this->getName();
+		return static::class . '::' . ( method_exists( $this, 'getName' ) ?
+			$this->getName() : $this->name() );
 	}
 
 	/**

@@ -201,7 +201,8 @@ class ProjectTest extends SoapBase {
 	 */
 	protected function getNewProjectName() {
 		do {
-			$t_name = $this->getName() . '_' . rand();
+			$t_name = ( method_exists( $this, 'getName' ) ?
+				$this->getName() : $this->name() ) . '_' . rand();
 			$t_id = $this->client->mc_project_get_id_from_name( $this->userName, $this->password, $t_name );
 		} while( $t_id != 0 );
 		return $t_name;
