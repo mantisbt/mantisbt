@@ -39,29 +39,38 @@ branches:
     - /master-[0-9.]+/
 
 php:
-  - 8.3
-  - 8.2
-  - 8.1
-  - 8.0
-  - 7.4
+#  - 8.3
+#  - 8.2
+#  - 8.1
+#  - 8.0
+#  - 7.4
 
 env:
   - DB=mysql
-  - DB=pgsql
+#  - DB=pgsql
 
 jobs:
   include:
-    # Add a specific build for Documentation
-    - name: Documentation
-      env: DOCBOOK=1
-      # Using Ruby as it's preinstalled and we don't need PHP to build docs
-      language: ruby
-      addons:
-        apt:
-          packages:
-            - publican
+    # Nigthly build (MySQL only)
+    # 2023-11-04 "nightly" is actually 8.0.27-dev built: Dec  7 2022 19:29:53...
+    # 2024-01-24 trying "master" instead of "nightly" following Travis support instructions
+    - php: master
+      env: DB=mysql
+      dist: focal
 
-  allow_failures: []
+#    # Add a specific build for Documentation
+#    - name: Documentation
+#      env: DOCBOOK=1
+#      # Using Ruby as it's preinstalled and we don't need PHP to build docs
+#      language: ruby
+#      addons:
+#        apt:
+#          packages:
+#            - publican
+
+  fast_finish: true
+  allow_failures:
+    - php: nightly
 
 
 # -----------------------------------------------------------------------------
