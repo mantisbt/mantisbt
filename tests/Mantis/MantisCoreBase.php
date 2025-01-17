@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+namespace Mantis\tests\Mantis;
+
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
 

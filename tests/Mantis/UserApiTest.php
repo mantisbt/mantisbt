@@ -25,10 +25,9 @@
  * @noinspection PhpIllegalPsrClassPathInspection
  */
 
-# Includes
-use Mantis\Exceptions\ClientException;
+namespace Mantis\tests\Mantis;
 
-require_once 'MantisCoreBase.php';
+use Mantis\Exceptions\ClientException;
 
 /**
  * PHPUnit tests for User API

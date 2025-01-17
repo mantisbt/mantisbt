@@ -24,7 +24,10 @@
 
 declare( strict_types = 1 );
 
-require_once dirname( __DIR__ ) . '/MantisCoreBase.php';
+namespace Mantis\tests\Mantis\Helper;
+
+use Generator;
+use Mantis\tests\Mantis\MantisCoreBase;
 
 /**
  * Tests for Link Attributes (Helper API).
