@@ -1122,8 +1122,6 @@ $s_valid_project_msg = 'You must choose a valid project.';
 $s_signup_done_title = 'Account registration processed.';
 $s_password_emailed_msg = 'Congratulations, you have registered successfully ! You are now being sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.';
 $s_no_reponse_msg = 'You have seven days to complete the account confirmation process; if you fail to do so within this period, the newly-registered account may be purged.';
-$s_admin_approval_msg = 'Congratulations, you have registered successfully ! After review by the administrator , you will be sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.';
-$s_new_account = '=New Account=';
 
 # signup_page.php
 $s_signup_captcha_request_label = 'Enter the code as it is shown in the box on the right:';
@@ -1755,7 +1753,6 @@ $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'The file specified in $g_log_destination "%s" is not writable.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Added user does not have sufficient access rights to monitor this issue.';
 $MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'User API token with id "%d" not found.';
-$MANTIS_ERROR[ERROR_ACCOUNT_DISABLED] = 'Your account has not yet been approved by the Administration, please come back later.';
 
 # dropzone.js - placeholders format is defined by the library
 $s_dropzone_default_message = 'Attach files by dragging & dropping, selecting or pasting them.';
