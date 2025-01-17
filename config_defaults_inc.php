@@ -949,6 +949,38 @@ $g_email_padding_length = 28;
  */
 $g_email_retry_in_days = 7;
 
+/**
+ * use a template in order to send HTML emails 
+ * this functionality can be dis/enabled with the $g_use_emailtemplate. Default value  = OFF meaning use standard mantisbt emails
+ *
+ * @global int $g_email_use_template
+  */
+$g_use_mailtemplate = OFF;
+
+/**
+ * In case the template output needs to be escaped, one can enable this with the $g_escape_mailtemplate, Default = OFF
+  *
+ * @global int $g_email_escape_template
+ */
+$g_escape_mailtemplate = OFF;
+
+/**
+ * there are 3 templates available
+ *	- Template for New Issues
+ *	- Template for Existing Issues
+ *	- Template for Notes
+ *
+ * These templates can be stored outside Mantis, just make sure that the web-user has access to these files
+ *
+ * @global string $g_email_newbug_template
+ * @global string $g_email_bug_template
+ * @global string $g_email_note_template
+ */
+
+$g_newbug_mailtemplate	= "core/templates/newbug_mailtemplate.html";
+$g_bug_mailtemplate		= "core/templates/bug_mailtemplate.html";
+$g_note_mailtemplate	= "core/templates/note_mailtemplate.html";
+
 ###########################
 # MantisBT Version String #
 ###########################

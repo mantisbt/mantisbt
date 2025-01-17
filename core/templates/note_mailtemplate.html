@@ -1,0 +1,138 @@
+<!--
+Available fields to this template:
+	$variables['top_line']	= Header of the text
+	$variables['note_id']	= Note-id
+	$variables['reporter'	= Name of reporter
+	$variables['access']	= Access_level
+	$variables['modified']	= Last_modified
+	$variables['private']	= Private
+	$variables['timetrack'] = Time_tracking
+	$variables['url']		= Link to bugnote
+	$variables['note']		= The note itself
+	$variables['bug_id']	= Bug_id;
+	$variables['bug_url']	= Link to bug
+	$variables['summary']	= Summary text og bug
+	$variables['category']	= Name of category
+	$variables['project']	= Name of project
+	
+	## how to use the fields
+	all elements ( only those you need of course) need to be referenced inbetween "{{" and "}}"
+	
+	## changes
+	modification of contents takes place within core/template_api.php, function email_template_bugnote
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Note Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #93B874;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            color: #333;
+            background: #f2f2f2;
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #006066;
+            color: white;
+            text-align: left;
+        }
+
+        td {
+            background-color: #FFFFFF;
+        }
+
+        a {
+            color: #006066;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>{{ summary }}</h3>
+        <br>
+        <table>
+            <tr>
+                <th>Issue</th>
+                <td><a href={{ url }}>{{ bug_id }}</a></td>
+            </tr>
+            <tr>
+                <th>Project/Category</th>
+                <td>{{ project }}: {{ category }}</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td>{{ reporter }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td><pre>{{ note }}</pre></td>
+            </tr>
+            <tr>
+                <th>Note ID </th>
+                <td><a href={{ url }}>{{ note_id }}</a></td>
+            </tr>
+            <tr>
+                <th>Access level</th>
+                <td>{{ access }}</td>
+            </tr>
+            <tr>
+                <th>Last modified</th>
+                <td>{{ modified }}</td>
+            </tr>
+            <tr>
+                <th>Private</th>
+                <td>{{ private }}</td>
+            </tr>
+            <tr>
+                <th>Timetracking</th>
+                <td><pre>{{ timetrack }}</pre></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
+
