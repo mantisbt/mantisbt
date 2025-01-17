@@ -20,6 +20,11 @@
         "ext-zip": "*",
         "phpunit/phpunit": "^9.6"
     },
+    "autoload": {
+        "psr-4": {
+            "Mantis\\": [""]
+        }
+    },
     "repositories": [
         {
             "type": "vcs",
