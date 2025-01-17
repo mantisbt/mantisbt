@@ -22,7 +22,7 @@
  * @link      https://mantisbt.org
  */
 
-require_once 'RestBase.php';
+namespace Mantis\tests\rest;
 
 /**
  * Test fixture for project APIs.

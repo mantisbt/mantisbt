@@ -23,6 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
+namespace Mantis\tests\rest;
+
+use Mantis\tests\core\RequestBuilder;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 
@@ -31,11 +34,6 @@ require_once dirname( __DIR__ ) . '/TestConfig.php';
 
 # MantisBT Core API
 require_mantis_core();
-
-require_once( __DIR__ . '/../../vendor/autoload.php' );
-require_once ( __DIR__ . '/../../core/constant_inc.php' );
-require_once __DIR__ . '/../core/RequestBuilder.php';
-require_once __DIR__ . '/../core/Faker.php';
 
 /**
  * Base class for REST API test cases
