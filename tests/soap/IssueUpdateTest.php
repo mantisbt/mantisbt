@@ -23,7 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'SoapBase.php';
+namespace Mantis\tests\soap;
+
+use stdClass;
 
 /**
  * Test fixture for issue update webservice methods.

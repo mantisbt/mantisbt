@@ -23,7 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'SoapBase.php';
+namespace Mantis\tests\soap;
 
 /**
  * Test fixture for handling issues with mentions in them.

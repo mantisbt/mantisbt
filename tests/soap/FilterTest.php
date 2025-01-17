@@ -24,9 +24,12 @@
  *
  * @noinspection PhpIllegalPsrClassPathInspection, PhpComposerExtensionStubsInspection,
  * @noinspection PhpUndefinedMethodInspection
+ * @noinspection PhpComposerExtensionStubsInspection
  */
 
-require_once 'SoapBase.php';
+namespace Mantis\tests\soap;
+
+use SoapFault;
 
 /**
  * Test fixture for filter related webservice method.

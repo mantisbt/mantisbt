@@ -26,7 +26,7 @@
  * @noinspection PhpUndefinedMethodInspection
  */
 
-require_once 'SoapBase.php';
+namespace Mantis\tests\soap;
 
 /**
  * Test fixture for project webservice methods.

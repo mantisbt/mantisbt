@@ -22,8 +22,15 @@
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpComposerExtensionStubsInspection
  */
 
+namespace Mantis\tests\soap;
+
+use DateTimeImmutable;
+use DateTimeZone;
+use SoapClient;
 
 $t_root_path = dirname( __DIR__, 2 );
 
@@ -280,12 +287,15 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * Converts date to UTC
+	 * Converts date to UTC.
+	 *
 	 * @param string $p_date A valid date string.
-	 * @return DateTime object
+	 *
+	 * @return DateTimeImmutable object
+	 * @throws \DateMalformedStringException
 	 */
 	protected function dateToUTC( $p_date ) {
-		$t_conv_date = new DateTime( $p_date );
+		$t_conv_date = new DateTimeImmutable( $p_date );
 		return $t_conv_date->setTimeZone( new DateTimeZone( 'UTC' ) );
 	}
 

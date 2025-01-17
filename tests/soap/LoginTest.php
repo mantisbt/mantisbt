@@ -23,7 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'SoapBase.php';
+namespace Mantis\tests\soap;
+
+use SoapFault;
 
 /**
  * Test fixture which verifies login mechanisms
