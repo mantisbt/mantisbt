@@ -52,6 +52,8 @@ require_api( 'string_api.php' );
 require_api( 'tag_api.php' );
 require_api( 'user_api.php' );
 
+$t_manage_tags = defined( 'MANAGE_TAG_VIEW_PAGE' );
+
 access_ensure_global_level( config_get( 'tag_view_threshold' ) );
 compress_enable();
 
@@ -65,10 +67,13 @@ $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
 $t_can_edit_own = $t_can_edit || auth_get_current_user_id() == tag_get_field( $f_tag_id, 'user_id' )
 	&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) );
 
-
 layout_page_header( sprintf( lang_get( 'tag_details' ), $t_name ) );
-
-layout_page_begin();
+if( $t_manage_tags ) {
+	layout_page_begin( 'manage_overview_page.php' );
+	print_manage_menu( 'manage_tags_page.php' );
+} else {
+	layout_page_begin();
+}
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -105,29 +110,28 @@ layout_page_begin();
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'tag_creator' ) ?>
+			<?php echo lang_get( 'description' ) ?>
+		</td>
+		<td><?php echo $t_description ?></td>
+	</tr>
+	<tr>
+		<td class="category">
+			<?php echo lang_get( 'owner' ) ?>
 		</td>
 		<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></td>
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'tag_created' ) ?>
+			<?php echo lang_get( 'date_created' ) ?>
 		</td>
 		<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'tag_updated' ) ?>
+			<?php echo lang_get( 'updated' ) ?>
 		</td>
 		<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 	</tr>
-	<tr>
-		<td class="category">
-			<?php echo lang_get( 'tag_description' ) ?>
-		</td>
-		<td><?php echo $t_description ?></td>
-	</tr>
-
 <?php
 	# Related tags
 
@@ -145,11 +149,20 @@ layout_page_begin();
 			$t_description = string_display_line( $t_tag['description'] );
 			$t_count = $t_tag['count'];
 			$t_link = string_html_specialchars( 'search.php?tag_string='.urlencode( '+' . $t_tag_row['name'] . config_get( 'tag_separator' ) . '+' . $t_name ) );
-			$t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ); ?>
-			<div class="col-md-3 col-xs-6 no-padding"><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></a></div>
-			<div class="col-md-9 col-xs-6 no-padding"><a href="<?php echo $t_link; ?>" class="btn btn-xs btn-primary btn-white btn-round"><?php echo $t_label; ?></a></div>
-			<div class="clearfix"></div>
-			<div class="space-4"></div>
+			$t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] );
+?>
+				<div class="col-md-3 col-xs-6 no-padding">
+					<a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>"
+					   title="<?php echo $t_description; ?>">
+						<?php echo $t_name; ?>
+					</a>
+				</div>
+				<div class="col-md-9 col-xs-6 no-padding"><?php
+					print_link_button( $t_link, $t_label, 'btn-xs' );
+					?>
+				</div>
+				<div class="clearfix"></div>
+				<div class="space-4"></div>
 <?php
 		}
 ?>
@@ -166,27 +179,24 @@ layout_page_begin();
 	<div class="widget-toolbox padding-8 clearfix">
 <?php
 		if( $t_can_edit_own ) {
-?>
-		<form class="form-inline pull-left" action="tag_update_page.php" method="post">
-			<fieldset>
-				<?php # CSRF protection not required here - form does not result in modifications ?>
-				<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'tag_update_button' ) ?>" />
-			</fieldset>
-		</form><?php
+			print_link_button( 'tag_update_page.php?tag_id=' . $f_tag_id,
+				lang_get( 'tag_update_button' )
+			);
 		}
 
-		if( $t_can_edit ) { ?>
-		<form class="form-inline pull-left" action="tag_delete.php" method="post">
-			<fieldset>
-				<?php echo form_security_field( 'tag_delete' ) ?>
-				<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'tag_delete_button' ) ?>" />
-			</fieldset>
-		</form><?php
-		} ?>
-	</div><?php
-	} ?>
+		if( $t_can_edit ) {
+			print_form_button( 'tag_delete.php',
+				lang_get( 'tag_delete_button' ),
+				[ 'tag_id' => $f_tag_id ],
+				null,
+				'btn btn-primary btn-white btn-round'
+			);
+		}
+?>
+	</div>
+<?php
+	}
+?>
 	</div>
 	</div>
 	</div>
