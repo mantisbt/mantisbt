@@ -332,6 +332,8 @@ if( $t_multiple_projects ) {
 
 			switch( $f_action ) {
 				case 'COPY':
+					print_project_option_list( null, false, null, false, true );
+					break;
 				case 'MOVE':
 					print_project_option_list(
 						null,
