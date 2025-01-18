@@ -206,8 +206,7 @@ class SoapBase extends PHPUnit\Framework\TestCase {
 	 * @return array
 	 */
 	protected function getIssueToAdd( $p_suffix = '' ) {
-		$t_summary = static::class . '::' . ( method_exists( $this, 'getName' ) ?
-			$this->getName() : $this->name() );
+		$t_summary = $this->toString();
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}

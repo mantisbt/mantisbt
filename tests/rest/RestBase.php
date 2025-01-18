@@ -197,8 +197,7 @@ abstract class RestBase extends PHPUnit\Framework\TestCase {
 	 * @return string
 	 */
 	protected function getTestCaseReference() {
-		return static::class . '::' . ( method_exists( $this, 'getName' ) ?
-			$this->getName() : $this->name() );
+		return $this->toString();
 	}
 
 	/**
