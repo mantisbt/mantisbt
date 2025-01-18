@@ -25,13 +25,15 @@
 
 namespace Mantis\tests\Mantis;
 
+use Mantis\tests\core\MantisTestCase;
+
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
 
 # MantisBT Core API
 require_mantis_core();
 
-abstract class MantisCoreBase extends PHPUnit\Framework\TestCase {
+abstract class MantisCoreBase extends MantisTestCase {
 
 	/**
 	 * @var string Username

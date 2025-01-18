@@ -25,9 +25,9 @@
 
 namespace Mantis\tests\rest;
 
+use Mantis\tests\core\MantisTestCase;
 use Mantis\tests\core\RequestBuilder;
 use GuzzleHttp\Exception\GuzzleException;
-use PHPUnit\Framework\TestCase;
 
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
@@ -41,7 +41,7 @@ require_mantis_core();
  * @requires extension curl
  * @group REST
  */
-abstract class RestBase extends TestCase {
+abstract class RestBase extends MantisTestCase {
 	/**
 	 * @var string Base path for REST API
 	 */

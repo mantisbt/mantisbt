@@ -28,6 +28,7 @@
 
 namespace Mantis\tests\soap;
 
+use Mantis\tests\core\MantisTestCase;
 use DateTimeImmutable;
 use DateTimeZone;
 use SoapClient;
@@ -40,7 +41,7 @@ require_once ( $t_root_path . '/core/constant_inc.php' );
 /**
  * Test cases for SoapEnum class.
  */
-class SoapBase extends PHPUnit\Framework\TestCase {
+class SoapBase extends MantisTestCase {
 	/**
 	 * @var SoapClient Soap Client
 	 */
