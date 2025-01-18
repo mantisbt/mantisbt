@@ -213,9 +213,16 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 }
 
 # Build config query
+//Added by MAB - Feb/2024
+if (!db_is_firebird ())
 $t_sql = 'SELECT config_id, user_id, project_id, type, access_reqd,'
 		. ' CASE type WHEN :complex THEN null ELSE value END AS value'
 		. ' FROM {config} WHERE 1=1';
+else
+  $t_sql = 'SELECT config_id, user_id, project_id, type, access_reqd,'
+		. ' CASE type WHEN :complex THEN null ELSE "value" END AS "value"'
+		. ' FROM {config} WHERE 1=1';	
+		
 if( $t_filter_user_value != META_FILTER_NONE ) {
 	$t_sql .= ' AND user_id = :user_id';
 }

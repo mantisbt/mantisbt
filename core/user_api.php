@@ -325,6 +325,7 @@ function user_get_duplicate_emails() {
 		# Using a sub-query within the IN clause's SELECT statement, as a workaround for
 		# MySQL >= 5.7 with sql_mode=only_full_group_by throwing ERROR 1055 (42000):
 		# Expression #1 of HAVING clause is not in GROUP BY clause
+		if (!db_is_firebird ()) //Added by MAB - Feb/2024
 		$t_sql = <<< ENDSQL
 SELECT lower(email) email, id, username
 FROM {$t_user_table} 
@@ -338,6 +339,21 @@ WHERE lower(email) IN (
 	)
 ORDER BY lower(email), username
 ENDSQL;
+    else //Added by MAB - Feb/2024
+$t_sql = <<< ENDSQL
+SELECT lower(email) email, id, username
+FROM {$t_user_table} 
+WHERE lower(email) IN (
+	SELECT email 
+	FROM (
+		SELECT lower(email) email
+		FROM {$t_user_table}
+		GROUP BY lower(email) HAVING COUNT(*) > 1
+		) tmp
+	)
+ORDER BY lower(email), username
+ENDSQL;	   
+
 		$t_query = new DbQuery( $t_sql );
 		$t_rows = $t_query->fetch_all();
 

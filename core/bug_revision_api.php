@@ -60,12 +60,23 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 	}
 
 	db_param_push();
-	$t_query = 'INSERT INTO {bug_revision} (
+	
+	//Added by MAB - Mar/2024
+	if (!db_is_firebird ())
+	  $t_query = 'INSERT INTO {bug_revision} (
 			bug_id, bugnote_id, user_id,
 			timestamp, type, value
 		) VALUES ( ' .
 			db_param() . ', ' . db_param() . ', ' . db_param() . ', ' .
 			db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+	else
+	  $t_query = 'INSERT INTO {bug_revision} (
+			bug_id, bugnote_id, user_id,
+			"timestamp", type, "value"
+		) VALUES ( ' .
+			db_param() . ', ' . db_param() . ', ' . db_param() . ', ' .
+			db_param() . ', ' . db_param() . ', ' . db_param() . ' )';	
+	
 	db_query( $t_query, array(
 			$p_bug_id, $p_bugnote_id, $p_user_id,
 			$t_timestamp, $p_type, $p_value ) );
@@ -242,7 +253,12 @@ function bug_revision_last( $p_bug_id, $p_type = REV_ANY, $p_bugnote_id = 0 ) {
 		$t_query .= ' AND bugnote_id=0';
 	}
 
-	$t_query .= ' ORDER BY timestamp DESC';
+	//Added by MAB - Mar/2024
+	if (!db_is_firebird ())	
+	  $t_query .= ' ORDER BY timestamp DESC';
+    else
+      $t_query .= ' ORDER BY "timestamp" DESC';	
+  
 	$t_result = db_query( $t_query, $t_params, 1 );
 
 	$t_row = db_fetch_array( $t_result );

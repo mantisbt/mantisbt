@@ -448,15 +448,32 @@ if( 2 == $t_install_state ) {
 	<?php
 		$t_db_open = false;
 	$g_db = ADONewConnection( $f_db_type );
-	$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
-
+	
+	if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+	  $t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
+    else
+	  $t_result = $g_db->Connect( $f_hostname . ":" . $f_database_name, $f_admin_username, $f_admin_password );
+  
 	if( $t_result ) {
 		# due to a bug in ADODB, this call prompts warnings, hence the @
 		# the check only works on mysql if the database is open
-		$t_version_info = @$g_db->ServerInfo();
+	    if (DB_TYPE_FIREBIRD != db_get_type($f_db_type)) //Added by MAB - Oct/2022
+		  $t_version_info = @$g_db->ServerInfo();
+		else {//Added by MAB - Oct/2022
+           if (($firebird_service = ibase_service_attach($f_hostname, $f_admin_username, $f_admin_password)) != FALSE) {
+			$t_version_info = ibase_server_info($firebird_service, IBASE_SVC_SERVER_VERSION); 		
+		    ibase_service_detach($firebird_service); 	 
+		  } 	  
+		  else
+           	$t_error = 'Error attaching Firebird Server Info ' . ibase_errmsg();		
+        }
 
 		# check if db exists for the admin
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+		if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+		  $t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+	    else
+          $t_result = $g_db->Connect( $f_hostname . ":" . $f_database_name, $f_admin_username, $f_admin_password );
+	  
 		if( $t_result ) {
 			$t_db_open = true;
 			$f_db_exists = true;
@@ -516,7 +533,11 @@ if( 2 == $t_install_state ) {
 	</td>
 	<?php
 		$g_db = ADONewConnection( $f_db_type );
-		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+		
+		if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+		  $t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+	    else
+          $t_result = $g_db->Connect( $f_hostname . ":" . $f_database_name, $f_db_username, $f_db_password );			
 
 		if( $t_result ) {
 			$t_db_open = true;
@@ -560,6 +581,10 @@ if( 2 == $t_install_state ) {
 					$t_error = 'SQL Server (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation';
 				}
 				break;
+			case 'firebird': //Added by MAB Jun/2022
+				if (strpos($t_version_info, DB_MIN_VERSION_FIREBIRD) == false)
+				  $t_error = 'Firebird Server (' . $t_version_info . ') or later is required for installation';
+				break;			
 			case 'pgsql':
 			default:
 				break;
@@ -657,6 +682,7 @@ if( !$g_database_upgrade ) {
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
+				'firebird'    => 'Firebird',
 			);
 
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
@@ -883,7 +909,11 @@ if( 3 == $t_install_state ) {
 	</td>
 	<?php
 		global $g_db;
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+		
+		if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+		  $t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+	    else
+		  $t_result = $g_db->Connect( $f_hostname . ":" . $f_database_name, $f_admin_username, $f_admin_password );		
 
 		$t_db_open = false;
 
@@ -891,27 +921,29 @@ if( 3 == $t_install_state ) {
 			print_test_result( GOOD );
 			$t_db_open = true;
 		} else {
-			# create db
-			$g_db = ADONewConnection( $f_db_type );
-			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
+			//Create the database only if not Firebird
+			if (DB_TYPE_FIREBIRD != db_get_type($f_db_type)) {
+			  # create db
+			  $g_db = ADONewConnection( $f_db_type );
+			  $t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 
-			/** @var ADODB_DataDict $t_dict */
-			$t_dict = NewDataDictionary( $g_db );
+			  /** @var ADODB_DataDict $t_dict */
+			  $t_dict = NewDataDictionary( $g_db );
 
-			$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
-				'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci',
-			) );
-			$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
-			if( $t_ret == 2 ) {
-				print_test_result( GOOD );
-				$t_db_open = true;
-			} else {
-				$t_error = db_error_msg();
-				if( $f_db_type == 'oci8' ) {
-					$t_db_exists = preg_match( '/ORA-01920/', $t_error );
-				} else {
-					$t_db_exists = strstr( $t_error, 'atabase exists' );
-				}
+			  $t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
+				  'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci',
+			  ) );
+			  $t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
+			  if( $t_ret == 2 ) {
+				  print_test_result( GOOD );
+				  $t_db_open = true;
+			  } else {
+				  $t_error = db_error_msg();
+				  if( $f_db_type == 'oci8' ) {
+					  $t_db_exists = preg_match( '/ORA-01920/', $t_error );
+				  } else {
+				  	$t_db_exists = strstr( $t_error, 'atabase exists' );
+			  	}  
 
 				if( $t_db_exists ) {
 					print_test_result(
@@ -928,6 +960,7 @@ if( 3 == $t_install_state ) {
 					$t_install_state--; # db creation failed, allow user to re-enter user/password info
 				}
 			}
+			}	
 		}
 		?>
 </tr>
@@ -942,7 +975,12 @@ if( 3 == $t_install_state ) {
 	</td>
 	<?php
 		$g_db = ADONewConnection( $f_db_type );
-		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+		
+		if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+		  $t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+	    else
+          $t_result = $g_db->Connect( $f_hostname . ":" . $f_database_name, $f_db_username, $f_db_password );
+	  
 		if( $t_result ) {
 			print_test_result( GOOD );
 		} else {
@@ -972,7 +1010,12 @@ if( 3 == $t_install_state ) {
 		# database_api references this
 		require_once( __DIR__ . '/schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+		
+		if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+		  $t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+	    else
+          $t_result = $g_db->Connect( $f_hostname . ":" . $f_database_name, $f_admin_username, $f_admin_password );
+	  
 		if( !$f_log_queries ) {
 			$g_db_connected = true;
 
@@ -1234,15 +1277,27 @@ if( 3 == $t_install_state ) {
 			# add a query to set the database version
 			echo "-- Set database version" . PHP_EOL;
 			if( $t_last_update == -1 ) {
-				echo "INSERT INTO " . db_get_table( 'config' )
+				if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+				  echo "INSERT INTO " . db_get_table( 'config' )
 					. " ( value, type, access_reqd, config_id, project_id, user_id )"
 					. " VALUES ($t_last_id, 1, 90, 'database_version', 0, 0 );"
 					. PHP_EOL;
+				else
+                  echo "INSERT INTO " . db_get_table( 'config' )
+					. " ( \"value\", type, access_reqd, config_id, project_id, user_id )"
+					. " VALUES ($t_last_id, 1, 90, 'database_version', 0, 0 );"
+					. PHP_EOL;																
 			} else {
-				echo "UPDATE " . db_get_table( 'config' )
+				if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+				  echo "UPDATE " . db_get_table( 'config' )
 					. " SET value = $t_last_id"
 					. " WHERE config_id = 'database_version' AND project_id = 0 AND user_id = 0;"
 					. PHP_EOL;
+			    else
+                  echo "UPDATE " . db_get_table( 'config' )
+					. " SET \"value\"	= $t_last_id"
+					. " WHERE config_id = 'database_version' AND project_id = 0 AND user_id = 0;"
+					. PHP_EOL;																
 			}
 			echo '</pre>';
 
@@ -1481,7 +1536,11 @@ if( 6 == $t_install_state ) {
 	</td>
 	<?php
 		$g_db = ADONewConnection( $f_db_type );
-	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+	
+	if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+	  $t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+    else
+	  $t_result = $g_db->Connect( $f_hostname . ":" . $f_database_name, $f_db_username, $f_db_password );	
 
 	if( $t_result ) {
 		print_test_result( GOOD );
@@ -1518,7 +1577,11 @@ if( 6 == $t_install_state ) {
 		checking ability to INSERT records
 	</td>
 	<?php
-		$t_query = 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'test\', 1, 90, \'database_test\', 20, 0 )';
+		//Added by MAB - May/2022
+		if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+		  $t_query = 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'test\', 1, 90, \'database_test\', 20, 0 )';
+	    else
+          $t_query = 'INSERT INTO ' . db_get_table( 'config' ) . ' ( "value", type, access_reqd, config_id, project_id, user_id ) VALUES (\'test\', 1, 90, \'database_test\', 20, 0 )'; 						
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result ) {
@@ -1537,7 +1600,12 @@ if( 6 == $t_install_state ) {
 		checking ability to UPDATE records
 	</td>
 	<?php
-		$t_query = 'UPDATE ' . db_get_table( 'config' ) . ' SET value=\'test_update\' WHERE config_id=\'database_test\'';
+		//Added by MAB - Jun/2022
+		if (DB_TYPE_FIREBIRD != db_get_type($f_db_type))
+		  $t_query = 'UPDATE ' . db_get_table( 'config' ) . ' SET value=\'test_update\' WHERE config_id=\'database_test\'';
+	    else
+          $t_query = 'UPDATE ' . db_get_table( 'config' ) . ' SET "value"=\'test_update\' WHERE config_id=\'database_test\'';			
+	
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result ) {

@@ -365,45 +365,92 @@ function install_correct_multiselect_custom_fields_db_format() {
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
 
-	$t_update_query = new DbQuery( 'UPDATE {custom_field_string}
+	//Added by MAB - Mar/2024
+	if (!db_is_firebird ())
+	  $t_update_query = new DbQuery( 'UPDATE {custom_field_string}
 		SET value = :value
 		WHERE field_id = :field_id AND bug_id = :bug_id'
-	);
+	  );
+	else
+      $t_update_query = new DbQuery( 'UPDATE {custom_field_string}
+		  SET "value" = :value
+		  WHERE field_id = :field_id AND bug_id = :bug_id'	
+      );		  
 
 	# Ensure multilist and checkbox custom field values have a vertical pipe |
 	# as a prefix and suffix.
-	$t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value 
+	//Added by MAB - Mar/2024
+	if (!db_is_firebird ())
+	  $t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value 
 		FROM {custom_field_string} v
 		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE (c.type = ' . CUSTOM_FIELD_TYPE_MULTILIST . ' OR c.type = ' . CUSTOM_FIELD_TYPE_CHECKBOX . ")
 			AND v.value != ''
 			AND v.value NOT LIKE '|%|'"
-	);
+	  );
+	else
+      $t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v."value" 
+		FROM {custom_field_string} v
+		LEFT JOIN {custom_field} c
+		ON v.field_id = c.id
+		WHERE (c."type" = ' . CUSTOM_FIELD_TYPE_MULTILIST . ' OR c."type" = ' . CUSTOM_FIELD_TYPE_CHECKBOX . ")
+			AND v.\"value\" != ''
+			AND v.\"value\" NOT LIKE '|%|'"
+	  );		
+	
 	foreach( $t_query->fetch_all() as $t_row ) {
-		$t_param = array(
+		if (!db_is_firebird ())
+		  $t_param = array(
 			'field_id' => (int)$t_row['field_id'],
 			'bug_id' => (int)$t_row['bug_id'],
 			'value' => '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|'
-		);
+		  );
+		else
+	      $t_param = array(
+			'field_id' => (int)$t_row['field_id'],
+			'bug_id' => (int)$t_row['bug_id'],
+			'"value"' => '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|'  	
+          ); 	
+		
 		$t_update_query->execute( $t_param );
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
-	$t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value 
+	//Added by MAB - Mar/2024
+	if (!db_is_firebird ())
+	  $t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value 
 		FROM {custom_field_string} v
 		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE c.type = ' . CUSTOM_FIELD_TYPE_RADIO . "
 			AND v.value != ''
 			AND v.value LIKE '|%|'"
-	);
+	  );
+	else
+      $t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v."value" 
+		FROM {custom_field_string} v
+		LEFT JOIN {custom_field} c
+		ON v.field_id = c.id
+		WHERE c."type" = ' . CUSTOM_FIELD_TYPE_RADIO . "
+			AND v.\"value\" != ''
+			AND v.\"value\" LIKE '|%|'"
+	  );				
+	
 	foreach( $t_query->fetch_all() as $t_row ) {
-		$t_param = array(
+		if (!db_is_firebird ())
+		  $t_param = array(
 			'field_id' => (int)$t_row['field_id'],
 			'bug_id' => (int)$t_row['bug_id'],
 			'value' => rtrim( ltrim( $t_row['value'], '|' ), '|' )
-		);
+		  );
+		else
+          $t_param = array(
+			'field_id' => (int)$t_row['field_id'],
+			'bug_id' => (int)$t_row['bug_id'],
+			'"value"' => rtrim( ltrim( $t_row['value'], '|' ), '|' )
+		  );				
+		
 		$t_update_query->execute( $t_param );
 	}
 
@@ -644,10 +691,17 @@ function install_update_history_long_custom_fields() {
  * @return integer
  */
 function install_check_project_hierarchy() {
-	$t_query = new DbQuery(
+	if (!db_is_firebird ())
+	  $t_query = new DbQuery(
 		'SELECT count(child_id) as count, child_id, parent_id FROM {project_hierarchy} '
 		. 'GROUP BY child_id, parent_id'
-	);
+	  );
+	else
+      $t_query = new DbQuery(
+		'SELECT count(child_id) as countt, child_id, parent_id FROM {project_hierarchy} '
+		. 'GROUP BY child_id, parent_id'
+	  );
+	  
 	$t_child_projects = new DbQuery(
 		'SELECT inherit_parent, child_id, parent_id FROM {project_hierarchy} '
 		. 'WHERE child_id=:child_id AND parent_id=:parent_id'
@@ -661,7 +715,10 @@ function install_check_project_hierarchy() {
 	);
 
 	foreach( $t_query->fetch_all() as $t_project ) {
-		$t_count = (int)$t_project['count'];
+		if (!db_is_firebird ())
+		  $t_count = (int)$t_project['count'];
+	    else
+		  $t_count = (int)$t_project['countt'];				
 
 		if( $t_count > 1 ) {
 			# get first result for inherit_parent, discard the rest
@@ -684,17 +741,33 @@ function install_check_project_hierarchy() {
 function install_check_config_serialization() {
 	$t_errors = array();
 
-	$t_update = new DbQuery(
+	if (!db_is_firebird ())
+	  $t_update = new DbQuery(
 		'UPDATE {config} SET value=:value '
 		. 'WHERE config_id=:config_id AND project_id=:project_id AND user_id=:user_id'
-	);
+	  );
+	else
+      $t_update = new DbQuery(
+		'UPDATE {config} SET "value"=:value '
+		. 'WHERE config_id=:config_id AND project_id=:project_id AND user_id=:user_id'
+	  );					
 
-	$t_query = new DbQuery(
+	if (!db_is_firebird ())
+	  $t_query = new DbQuery(
 		'SELECT config_id, project_id, user_id, value '
 		. 'FROM {config} WHERE type=3'
-	);
+	  );
+	else
+      $t_query = new DbQuery(
+		'SELECT config_id, project_id, user_id, "value" '
+		. 'FROM {config} WHERE type=3'
+	  );		
+	
 	foreach( $t_query->fetch_all() as $t_row ) {
-		$t_value = &$t_row['value'];
+		if (!db_is_firebird ())
+		  $t_value = &$t_row['value'];
+	    else
+		  $t_value = &$t_row['"value"'];			
 
 		# Don't try to convert the value if it's already valid JSON
 		if( $t_value === null || json_decode( $t_value ) !== null ) {

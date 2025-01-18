@@ -179,8 +179,26 @@ if( !db_is_connected() ) {
 	return;
 }
 global $g_db;
-$t_database_server_info = $g_db->ServerInfo();
-$t_db_version = $t_database_server_info['version'];
+
+if (!db_is_firebird()){
+  $t_database_server_info = $g_db->ServerInfo();
+  $t_db_version = $t_database_server_info['version'];
+}
+else {//Added by MAB - Jan/2024
+  if (($firebird_service = ibase_service_attach($t_database_hostname, $t_database_username, $t_database_password)) != FALSE) {
+	$t_database_server_info['description'] = ibase_server_info($firebird_service, IBASE_SVC_SERVER_VERSION); 
+    ibase_service_detach($firebird_service); 	
+	if (preg_match('/([0-9]+\.([0-9\.])+)/',$t_database_server_info['description'], $arr))
+	  $t_database_server_info['version'] = $arr[1];
+	else 
+      $t_database_server_info['version'] = '';
+	
+	$t_db_version = $t_database_server_info['version'];
+  } 	  
+  else
+    $t_error = 'Error attaching Firebird Server Info ' . ibase_errmsg();		
+}
+
 preg_match( '/^([0-9]+)\.[0-9+]/', $t_db_version, $t_matches );
 $t_db_major_version = $t_matches[0];
 
@@ -205,6 +223,8 @@ if( db_is_mysql() ) {
 	$t_db_min_version = DB_MIN_VERSION_MSSQL;
 } elseif( db_is_oracle() ) {
 	$t_db_min_version = DB_MIN_VERSION_ORACLE;
+} elseif( db_is_firebird() ) { //Added by MAB Sep/2022
+	$t_db_min_version = DB_MIN_VERSION_FIREBIRD;
 } else {
 	$t_db_min_version = 0;
 }
@@ -403,6 +423,55 @@ if( db_is_mysql() ) {
 		date_create( $t_date_eol ) > date_create( 'now' ),
 		array(
 			false => 'PostgreSQL version ' . htmlentities( $t_db_version )
+				. ' is no longer supported and should not be used, as security flaws discovered in this version will not be fixed.'
+		) );
+} else if( db_is_firebird() ) {
+    # Firebird support checking
+	
+	# Version support information
+	$t_versions = array(
+		# Version => EOL date
+		'2.5' => '2019-06-24',
+		'2.1' => '2014-12-05',
+		'2.0' => '2012-04-12',
+		'1.5' => '2009-10-08',
+		'1.0' => '2003-06-04',
+	);
+	$t_support_url = 'https://firebirdsql.org/en/server-packages/';
+	
+	# Determine EOL date
+	if( array_key_exists( $t_db_major_version, $t_versions ) ) {
+		$t_date_eol = $t_versions[$t_db_major_version];
+	} else {
+		$t_version = key( $t_versions );
+		if( version_compare( $t_db_major_version, $t_version, '>' ) ) {
+			# Major version is higher than the most recent in array - assume we're supported
+			$t_date_eol = new DateTime;
+			$t_date_eol = $t_date_eol->add( new DateInterval( 'P1Y' ) )->format( $t_date_format );
+			$t_assume = array( 'more recent', $t_version, 'supported' );
+		} else {
+			# Assume EOL
+			$t_date_eol = null;
+			end( $t_versions );
+			$t_assume = array( 'older', key( $t_versions ), 'at end of life' );
+		}
+
+		check_print_test_warn_row(
+			'Firebird version support information availability',
+			false,
+			array(
+				false => 'Release information for version ' . $t_db_major_version . ' is not available. '
+					. vsprintf( 'Since it is %s than %s, we assume it is %s. ', $t_assume )
+					. 'Please refer to the <a href="' . $t_support_url
+					. '">Firebird release support policy</a> to make sure.'
+			) );
+	}
+	
+	check_print_test_row(
+		'Version of Firebird is <a href="' . $t_support_url . '">supported</a>',
+		date_create( $t_date_eol ) > date_create( 'now' ),
+		array(
+			false => 'Firebird version ' . htmlentities( $t_db_version )
 				. ' is no longer supported and should not be used, as security flaws discovered in this version will not be fixed.'
 		) );
 }

@@ -1355,7 +1355,12 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	# COPY CUSTOM FIELDS
 	if( $p_copy_custom_fields ) {
 		db_param_push();
-		$t_query = 'SELECT field_id, bug_id, value, text FROM {custom_field_string} WHERE bug_id=' . db_param();
+		//Added by MAB - Feb/2024
+		if (!db_is_firebird())
+		  $t_query = 'SELECT field_id, bug_id, value, text FROM {custom_field_string} WHERE bug_id=' . db_param();
+		else
+		  $t_query = 'SELECT field_id, bug_id, "value", text FROM {custom_field_string} WHERE bug_id=' . db_param();	
+		
 		$t_result = db_query( $t_query, array( $t_bug_id ) );
 
 		while( $t_bug_custom = db_fetch_array( $t_result ) ) {
@@ -1365,9 +1370,17 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 			$c_text = $t_bug_custom['text'];
 
 			db_param_push();
-			$t_query = 'INSERT INTO {custom_field_string}
+			
+			//Added by MAB - Feb/2024
+			if (!db_is_firebird())
+			  $t_query = 'INSERT INTO {custom_field_string}
 						   ( field_id, bug_id, value, text )
 						   VALUES (' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
+			else
+			  $t_query = 'INSERT INTO {custom_field_string}
+				  		   ( field_id, bug_id, "value", text )
+					  	   VALUES (' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';	
+			
 			db_query( $t_query, array( $c_field_id, $c_new_bug_id, $c_value, $c_text ) );
 		}
 	}
