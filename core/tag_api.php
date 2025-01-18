@@ -465,7 +465,6 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
 		$t_where_params[] = $p_name_filter . '%';
 	}
 
-	$t_query = 'SELECT * FROM {tag} ' . $t_where . ' ORDER BY name';
 	$t_query = <<<SQL
 		SELECT t.*, num FROM {tag} t
 		LEFT JOIN (SELECT tag_id, COUNT(1) AS num FROM {bug_tag} GROUP BY tag_id) cnt
