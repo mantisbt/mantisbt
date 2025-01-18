@@ -98,7 +98,26 @@ print_manage_menu( 'manage_overview_page.php' );
 		<tr>
 			<th class="category"><?php echo lang_get( 'database_version_description' ) ?></th>
 			<td><?php
-					$t_database_server_info = $g_db->ServerInfo();
+					//Added by MAB - Feb/2024
+					if (!db_is_firebird())
+					  $t_database_server_info = $g_db->ServerInfo();
+				    else {
+					  $t_database_hostname = config_get_global( 'hostname' );
+					  $t_database_username = config_get_global( 'db_username' );
+					  $t_database_password = config_get_global( 'db_password' );
+					  if (($firebird_service = ibase_service_attach($t_database_hostname, $t_database_username, $t_database_password)) != FALSE) {
+	                  $t_database_server_info['description'] = ibase_server_info($firebird_service, IBASE_SVC_SERVER_VERSION); 
+                      ibase_service_detach($firebird_service); 	
+	                  if (preg_match('/([0-9]+\.([0-9\.])+)/',$t_database_server_info['description'], $arr))
+	                    $t_database_server_info['version'] = $arr[1];
+	                  else 
+                        $t_database_server_info['version'] = '';
+	
+	                   $t_db_version = $t_database_server_info['version'];
+                      } 	  
+                      else
+                        $t_error = 'Error attaching Firebird Server Info ' . ibase_errmsg();		
+					}
 					echo $t_database_server_info['version'] . ', ' . $t_database_server_info['description']
 				?>
 			</td>

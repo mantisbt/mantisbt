@@ -196,9 +196,15 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
 	$c_expiry = time() + $p_expiry;
 
 	db_param_push();
-	$t_query = 'INSERT INTO {tokens}
+	if (!db_is_firebird())
+	  $t_query = 'INSERT INTO {tokens}
 					( type, value, timestamp, expiry, owner )
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+	else
+	  $t_query = 'INSERT INTO {tokens}
+		  			( type, "value", "timestamp", expiry, owner )
+			  		VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';      					
+	
 	db_query( $t_query, array( $c_type, (string)$p_value, $c_timestamp, $c_expiry, $c_user_id ) );
 	return db_insert_id( db_get_table( 'tokens' ) );
 }
@@ -216,9 +222,16 @@ function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 	$c_expiry = time() + $p_expiry;
 
 	db_param_push();
-	$t_query = 'UPDATE {tokens}
+	
+	if (!db_is_firebird())
+	  $t_query = 'UPDATE {tokens}
 					SET value=' . db_param() . ', expiry=' . db_param() . '
 					WHERE id=' . db_param();
+	else
+	  $t_query = 'UPDATE {tokens}
+					SET "value"=' . db_param() . ', expiry=' . db_param() . '
+					WHERE id=' . db_param();   					
+	
 	db_query( $t_query, array( (string)$p_value, $c_expiry, $c_token_id ) );
 
 	return true;

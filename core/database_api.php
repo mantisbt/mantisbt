@@ -209,6 +209,9 @@ function db_check_database_support( $p_db_type ) {
 		case 'odbc_mssql':
 			$t_support = function_exists( 'odbc_connect' );
 			break;
+		case 'firebird':
+			$t_support = function_exists( 'ibase_connect' );
+			break;		
 		default:
 			$t_support = false;
 	}
@@ -231,6 +234,8 @@ function db_get_type( $p_driver_type ) {
 			return DB_TYPE_MSSQL;
 		case 'oci8':
 			return DB_TYPE_ORACLE;
+		case 'firebird':
+			return DB_TYPE_FIREBIRD;			
 		default:
 			return DB_TYPE_UNDEFINED;
 	}
@@ -240,9 +245,18 @@ function db_get_type( $p_driver_type ) {
  * Checks if the database driver is MySQL
  * @return boolean true if mysql
  */
+//I don't really know why this functions doesn't work, so I changed
+//to be like db_is_firebird, before the change, it allways returned True.
+//Changed by MAB - Jan/2024
+ 
 function db_is_mysql() {
-	global $g_db_functional_type;
-	return( DB_TYPE_MYSQL == $g_db_functional_type );
+	if (db_get_type(config_get_global( 'db_type' )) == DB_TYPE_MYSQL)
+      return True;
+	else
+      return False;		
+	
+	//global $g_db_functional_type;
+	//return( DB_TYPE_MYSQL == $g_db_functional_type );
 }
 
 /**
@@ -270,6 +284,20 @@ function db_is_mssql() {
 function db_is_oracle() {
 	global $g_db_functional_type;
 	return( DB_TYPE_ORACLE == $g_db_functional_type );
+}
+
+/**
+ * Checks if the database driver is Firebird
+ * @return boolean true if firebird
+ * Added by MAB - Jun/2022
+ */
+function db_is_firebird() {
+    if (db_get_type(config_get_global( 'db_type' )) == DB_TYPE_FIREBIRD)
+      return True;
+	else
+      return False;		
+	//global $g_db_functional_type;
+	//return( DB_TYPE_FIREBIRD == $g_db_functional_type );
 }
 
 /**
@@ -483,6 +511,9 @@ function db_insert_id( $p_table, $p_field = 'id' ) {
 			case DB_TYPE_PGSQL:
 				$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
 				break;
+			case DB_TYPE_FIREBIRD: //Added by MAB - Feb/2024
+				$t_query = 'SELECT max(' . $p_field . ') FROM ' . $p_table;
+				break;			
 			default:
 				return $g_db->Insert_ID();
 	}
@@ -644,6 +675,8 @@ function db_prepare_binary_string( $p_string ) {
 		case 'mssqlnative':
 		case 'oci8':
 			# Fall through, mssqlnative, oci8 store raw data in BLOB
+		case 'firebird': //Added by MAB - Jan/2024
+            return $p_string;				
 		default:
 			return $p_string;
 	}

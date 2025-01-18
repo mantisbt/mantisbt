@@ -366,11 +366,19 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 
 		db_param_push();
 		if( 0 < db_result( $t_result ) ) {
-			$t_set_query = 'UPDATE {config}
+			if (!db_is_firebird())
+			  $t_set_query = 'UPDATE {config}
 					SET value=' . db_param() . ', type=' . db_param() . ', access_reqd=' . db_param() . '
 					WHERE config_id = ' . db_param() . ' AND
 						project_id = ' . db_param() . ' AND
 						user_id = ' . db_param();
+			else
+			  $t_set_query = 'UPDATE {config}
+					SET "value"=' . db_param() . ', type=' . db_param() . ', access_reqd=' . db_param() . '
+					WHERE config_id = ' . db_param() . ' AND
+						project_id = ' . db_param() . ' AND
+						user_id = ' . db_param();					
+			
 			$t_params = array(
 				(string)$c_value,
 				$t_type,
@@ -380,10 +388,17 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 				(int)$p_user,
 			);
 		} else {
-			$t_set_query = 'INSERT INTO {config}
+			if (!db_is_firebird())
+			  $t_set_query = 'INSERT INTO {config}
 					( value, type, access_reqd, config_id, project_id, user_id )
 					VALUES
 					(' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ' )';
+			else
+			  $t_set_query = 'INSERT INTO {config}
+				  	( "value", type, access_reqd, config_id, project_id, user_id )
+					  VALUES
+					  (' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ' )';   					
+			
 			$t_params = array(
 				(string)$c_value,
 				$t_type,
@@ -769,7 +784,12 @@ function config_cache_all() {
 			$t_config_rows[] = $t_row;
 		}
 	} else {
-		$t_query = 'SELECT config_id, user_id, project_id, type,  value, access_reqd FROM {config}';
+		//Added by MAB - Dec/2023
+		if (!db_is_firebird())
+		  $t_query = 'SELECT config_id, user_id, project_id, type,  value, access_reqd FROM {config}';
+		else
+	      $t_query = 'SELECT config_id, user_id, project_id, type, "value", access_reqd FROM {config}';	
+	  
 		$t_result = db_query( $t_query );
 		while( false <> ( $t_row = db_fetch_array( $t_result ) ) ) {
 			$t_config_rows[] = $t_row;

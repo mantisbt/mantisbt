@@ -311,17 +311,31 @@ function summary_print_by_activity( array $p_filter = null ) {
 		return;
 	}
 	$t_query = new DBQuery();
-	$t_sql = 'SELECT COUNT(h.id) as count, b.id, b.summary, b.view_state'
+	
+	if (!db_is_firebird ())
+	  $t_sql = 'SELECT COUNT(h.id) as count, b.id, b.summary, b.view_state'
 		. ' FROM {bug} b JOIN {bug_history} h ON h.bug_id = b.id'
 		. ' WHERE b.status < ' . $t_query->param( (int)$t_resolved )
 		. ' AND ' . $t_specific_where;
+	else
+	  $t_sql = 'SELECT COUNT(h.id) as countt, b.id, b.summary, b.view_state'
+		  . ' FROM {bug} b JOIN {bug_history} h ON h.bug_id = b.id'
+		  . ' WHERE b.status < ' . $t_query->param( (int)$t_resolved )
+		  . ' AND ' . $t_specific_where;		
+	
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND b.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' GROUP BY h.bug_id, b.id, b.summary, b.last_updated, b.view_state'
+	
+	if (!db_is_firebird ())
+	  $t_sql .= ' GROUP BY h.bug_id, b.id, b.summary, b.last_updated, b.view_state'
 		. ' ORDER BY count DESC, b.last_updated DESC';
+	else
+	  $t_sql .= ' GROUP BY h.bug_id, b.id, b.summary, b.last_updated, b.view_state'
+		  . ' ORDER BY countt DESC, b.last_updated DESC';
+	
 	$t_query->sql( $t_sql );
 
 	$t_count = 0;
@@ -338,11 +352,19 @@ function summary_print_by_activity( array $p_filter = null ) {
 			break;
 		}
 
-		$t_summarydata[] = array(
+		if (!db_is_firebird ())
+		  $t_summarydata[] = array(
 			'id' => $t_row['id'],
 			'summary' => $t_row['summary'],
 			'count' => $t_row['count'],
-		);
+		  );
+		else
+		  $t_summarydata[] = array(
+			'id' => $t_row['id'],
+			'summary' => $t_row['summary'],
+			'countt' => $t_row['countt'],
+		  );
+		
 		$t_summarybugs[] = $t_row['id'];
 	}
 
@@ -351,7 +373,11 @@ function summary_print_by_activity( array $p_filter = null ) {
 	foreach( $t_summarydata as $t_row ) {
 		$t_bugid = string_get_bug_view_link( $t_row['id'], false );
 		$t_summary = string_display_line( $t_row['summary'] );
-		$t_notescount = $t_row['count'];
+		
+		if (!db_is_firebird ())
+		  $t_notescount = $t_row['count'];
+	    else
+		  $t_notescount = $t_row['countt'];				 
 
 		echo '<tr>' . "\n";
 		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="align-right">' . $t_notescount . '</td>' . "\n";

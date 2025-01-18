@@ -289,14 +289,25 @@ function create_developer_resolved_summary( array $p_filter = null ) {
 	$t_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
 
 	$t_query = new DBQuery();
-	$t_sql = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
+	
+	if (!db_is_firebird ())
+	  $t_sql = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
 		. ' AND handler_id <> :nouser AND status >= :status_resolved AND resolution = :resolution_fixed';
+	else
+	  $t_sql = 'SELECT handler_id, count(*) as countt FROM {bug} WHERE ' . $t_specific_where
+		  . ' AND handler_id <> :nouser AND status >= :status_resolved AND resolution = :resolution_fixed';		
+	
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' GROUP BY handler_id ORDER BY count DESC';
+	
+	if (!db_is_firebird ())
+	  $t_sql .= ' GROUP BY handler_id ORDER BY count DESC';
+    else
+	  $t_sql .= ' GROUP BY handler_id ORDER BY countt DESC';			
+	
 	$t_query->sql( $t_sql );
 	$t_query->bind( array(
 		'nouser' => NO_USER,
@@ -308,7 +319,11 @@ function create_developer_resolved_summary( array $p_filter = null ) {
 	$t_handler_array = array();
 	$t_handler_ids = array();
 	while( $t_row = $t_query->fetch() ) {
-		$t_handler_array[$t_row['handler_id']] = (int)$t_row['count'];
+		if (!db_is_firebird ())
+		  $t_handler_array[$t_row['handler_id']] = (int)$t_row['count'];
+	    else
+		  $t_handler_array[$t_row['handler_id']] = (int)$t_row['countt'];							
+		
 		$t_handler_ids[] = $t_row['handler_id'];
 	}
 
@@ -341,14 +356,25 @@ function create_developer_open_summary( array $p_filter = null ) {
 	$t_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
 
 	$t_query = new DBQuery();
-	$t_sql = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
+	
+	if (!db_is_firebird ())
+	  $t_sql = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
 		. ' AND handler_id <> :nouser AND status < :status_resolved';
+	else
+	  $t_sql = 'SELECT handler_id, count(*) as countt FROM {bug} WHERE ' . $t_specific_where
+		  . ' AND handler_id <> :nouser AND status < :status_resolved';		
+	
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' GROUP BY handler_id ORDER BY count DESC';
+	
+	if (!db_is_firebird ())
+	  $t_sql .= ' GROUP BY handler_id ORDER BY count DESC';
+	else
+	  $t_sql .= ' GROUP BY handler_id ORDER BY countt DESC'; 			
+	
 	$t_query->sql( $t_sql );
 	$t_query->bind( array(
 		'nouser' => NO_USER,
@@ -358,7 +384,11 @@ function create_developer_open_summary( array $p_filter = null ) {
 	$t_handler_array = array();
 	$t_handler_ids = array();
 	while( $t_row = $t_query->fetch() ) {
-		$t_handler_array[$t_row['handler_id']] = (int)$t_row['count'];
+		if (!db_is_firebird ())
+		  $t_handler_array[$t_row['handler_id']] = (int)$t_row['count'];
+	    else
+          $t_handler_array[$t_row['handler_id']] = (int)$t_row['countt'];					
+		
 		$t_handler_ids[] = $t_row['handler_id'];
 	}
 
@@ -390,14 +420,25 @@ function create_reporter_summary( array $p_filter = null ) {
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_query = new DBQuery();
-	$t_sql = 'SELECT reporter_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
+	
+	if (!db_is_firebird ())
+	  $t_sql = 'SELECT reporter_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
 		. ' AND resolution = :resolution_fixed';
+	else
+	  $t_sql = 'SELECT reporter_id, count(*) as countt FROM {bug} WHERE ' . $t_specific_where
+		  . ' AND resolution = :resolution_fixed';	
+	
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' GROUP BY reporter_id ORDER BY count DESC';
+	
+	if (!db_is_firebird ())
+	  $t_sql .= ' GROUP BY reporter_id ORDER BY count DESC';
+    else
+	  $t_sql .= ' GROUP BY reporter_id ORDER BY countt DESC'; 		
+	
 	$t_query->sql( $t_sql );
 	$t_query->bind( 'resolution_fixed', FIXED );
 	$t_query->set_limit( 25 );
@@ -405,7 +446,11 @@ function create_reporter_summary( array $p_filter = null ) {
 	$t_reporter_arr = array();
 	$t_reporters = array();
 	while( $t_row = $t_query->fetch() ) {
-		$t_reporter_arr[$t_row['reporter_id']] = (int)$t_row['count'];
+		if (!db_is_firebird ())
+		  $t_reporter_arr[$t_row['reporter_id']] = (int)$t_row['count'];
+	    else
+		  $t_reporter_arr[$t_row['reporter_id']] = (int)$t_row['countt'];					
+		
 		$t_reporters[] = $t_row['reporter_id'];
 	}
 

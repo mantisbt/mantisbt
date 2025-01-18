@@ -254,9 +254,17 @@ function custom_field_cache_values( array $p_bug_id_array, array $p_field_id_arr
 
 	db_param_push();
 	$t_params= array();
-	$t_query = 'SELECT B.id AS bug_id, CF.id AS field_id, CFS.value, CFS.text FROM {bug} B'
+	
+	//Added by MAB - Feb/2024
+	if (!db_is_firebird())
+	  $t_query = 'SELECT B.id AS bug_id, CF.id AS field_id, CFS.value, CFS.text FROM {bug} B'
 			. ' LEFT OUTER JOIN {custom_field} CF ON 1 = 1'
 			. ' LEFT OUTER JOIN {custom_field_string} CFS ON ( B.id = CFS.bug_id AND CF.id = CFS.field_id )';
+	else
+	  $t_query = 'SELECT B.id AS bug_id, CF.id AS field_id, CFS."value", CFS.text FROM {bug} B'
+			. ' LEFT OUTER JOIN {custom_field} CF ON 1 = 1'
+			. ' LEFT OUTER JOIN {custom_field_string} CFS ON ( B.id = CFS.bug_id AND CF.id = CFS.field_id )';			
+	
 	$t_bug_in_params = array();
 	foreach( $t_bugs_to_search as $t_bug_id ) {
 		$t_bug_in_params[] = db_param();
@@ -684,6 +692,14 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 				$t_params[] = (string)$t_value;
 				break;
 			case 'type':
+			     //Added by MAB - Feb/2024
+                 if (!db_is_firebird())
+				   $t_field = 'type';
+                 else
+                   $t_field = '"type"'; 
+                 $t_update .= $t_field  . '=' . db_param() . ', ';	
+                 $t_params[] = (int)$t_value;			   
+                 break;			 
 			case 'access_level_r':
 			case 'access_level_rw':
 			case 'length_min':
@@ -1125,13 +1141,25 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 		$c_project_id = (int)( bug_get_field( $p_bug_id, 'project_id' ) );
 
 		db_param_push();
-		$t_query = 'SELECT f.name, f.type, f.access_level_r, f.default_value, s.value, s.text
+		
+		//Added by MAB - Feb/2024
+		if (!db_is_firebird())
+		  $t_query = 'SELECT f.name, f.type, f.access_level_r, f.default_value, s.value, s.text
 			FROM {custom_field_project} p
 				INNER JOIN {custom_field} f ON f.id = p.field_id
 				LEFT JOIN {custom_field_string} s
 					ON s.field_id = p.field_id AND s.bug_id = ' . db_param() . '
 			WHERE p.project_id = ' . db_param() . '
 			ORDER BY p.sequence ASC, f.name ASC';
+		else
+		  $t_query = 'SELECT f.name, f."type", f.access_level_r, f.default_value, s."value", s.text
+			  FROM {custom_field_project} p
+				  INNER JOIN {custom_field} f ON f.id = p.field_id
+				  LEFT JOIN {custom_field_string} s
+					ON s.field_id = p.field_id AND s.bug_id = ' . db_param() . '
+			  WHERE p.project_id = ' . db_param() . '
+			  ORDER BY p.sequence ASC, f.name ASC';
+		
 		$t_result = db_query( $t_query, array( $p_bug_id, $c_project_id) );
 
 		$t_custom_fields = array();
@@ -1486,7 +1514,12 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 	$t_name = custom_field_get_field( $p_field_id, 'name' );
 	$t_type = custom_field_get_field( $p_field_id, 'type' );
 
-	$t_value_field = ( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) ? 'text' : 'value';
+	//Added by MAB - Feb/2024
+	if (!db_is_firebird ())
+	  $t_value_field = ( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) ? 'text' : 'value';
+    else
+      $t_value_field = ( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) ? 'text' : '"value"';							
+	
 	$t_value = custom_field_value_to_database( $p_value, $t_type );
 
 	# Determine whether an existing value needs to be updated or a new value inserted
@@ -1510,7 +1543,11 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 		);
 		db_query( $t_query, $t_params );
 
-		history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row[$t_value_field], $t_type ), $t_value );
+		//Added by MAB - Mar/2024
+	    if (!db_is_firebird ())
+		  history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row[$t_value_field], $t_type ), $t_value );
+	    else
+		  history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row['value'], $t_type ), $t_value );	
 	} else {
 		db_param_push();
 		$t_query = 'INSERT INTO {custom_field_string}
@@ -1726,9 +1763,17 @@ function string_custom_field_value_for_email( $p_value, $p_type ) {
  */
 function custom_field_has_data( $p_field_id ) {
 	db_param_push();
-	$t_query = 'SELECT COUNT(*) FROM {custom_field_string}'
+	
+	//Added by MAB - Feb/2024
+	if (!db_is_firebird())
+	  $t_query = 'SELECT COUNT(*) FROM {custom_field_string}'
 			. ' WHERE field_id=' . db_param()
 			. ' AND value<>\'\'';
+	else
+	  $t_query = 'SELECT COUNT(*) FROM {custom_field_string}'
+			. ' WHERE field_id=' . db_param()
+			. ' AND "value"<>\'\'';	
+			
 	$t_result = db_query( $t_query, array( (int)$p_field_id ) );
 	$t_count = db_result( $t_result );
 
