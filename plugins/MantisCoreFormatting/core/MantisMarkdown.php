@@ -149,14 +149,14 @@ class MantisMarkdown extends Parsedown
 	 */
 	protected function element( array $Element ): string {
 		# Capture the code blocks to prevent them from being processed further.
-		if( $Element['name'] === 'code' ) {
+		if( isset( $Element['name'] ) && $Element['name'] === 'code' ) {
 			$t_hash = $this->hash( $Element['text'] );
 			$this->codeblocks[$t_hash] = $Element['text'];
 			$Element['text'] = $t_hash;
 		}
 
 		# Adding CSS classes to tables.
-		if( $Element['name'] === 'table' ) {
+		if( isset( $Element['name'] ) && $Element['name'] === 'table' ) {
 			$Element['attributes']['class'] = $this->table_class;
 		}
 
