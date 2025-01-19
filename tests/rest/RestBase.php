@@ -189,18 +189,6 @@ abstract class RestBase extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * Generate a Test Case reference (TestClass::TestCase).
-	 *
-	 * This can be used to associate the test data (e.g. Issue Summary, Project
-	 * Name, etc.) with a test case.
-	 * 
-	 * @return string
-	 */
-	protected function getTestCaseReference() {
-		return $this->toString();
-	}
-
-	/**
 	 * Returns a minimal data structure for tests to create a new Issue.
 	 *
 	 * The Issue Summary is set to TestClass::TestCase with an optional
@@ -211,7 +199,7 @@ abstract class RestBase extends PHPUnit\Framework\TestCase {
 	 * @return array
 	 */
 	protected function getIssueToAdd( $p_suffix = '' ) {
-		$t_summary = $this->getTestCaseReference();
+		$t_summary = $this->toString();
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}
