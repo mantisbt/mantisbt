@@ -115,7 +115,7 @@ class RestFiltersTest extends RestBase
 			filter_serialize( $p_filter ),
 			$this->userId,
 			$this->getProjectId(),
-			$this->getTestCaseReference() . ' ' . rand(1, 10000),
+			$this->toString() . ' ' . rand(1, 10000),
 			$p_public
 		);
 		$this->filterIdsToDelete[] = $t_filter_id;
@@ -203,7 +203,7 @@ class RestFiltersTest extends RestBase
 	public function testGetIssuesMatchingFilter() {
 		# Create test filter - resolved issues created by this test case
 		$t_filter = filter_get_default();
-		$t_filter[FILTER_PROPERTY_SEARCH] = $this->getTestCaseReference();
+		$t_filter[FILTER_PROPERTY_SEARCH] = $this->toString();
 		$t_filter[FILTER_PROPERTY_STATUS] = RESOLVED;
 		$t_filter_id = $this->createTestFilter( $t_filter );
 

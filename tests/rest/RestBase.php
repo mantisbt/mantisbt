@@ -24,7 +24,6 @@
  */
 
 use GuzzleHttp\Exception\GuzzleException;
-use PHPUnit\Framework\TestCase;
 
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
@@ -43,7 +42,7 @@ require_once __DIR__ . '/../core/Faker.php';
  * @requires extension curl
  * @group REST
  */
-abstract class RestBase extends TestCase {
+abstract class RestBase extends PHPUnit\Framework\TestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
@@ -190,18 +189,6 @@ abstract class RestBase extends TestCase {
 	}
 
 	/**
-	 * Generate a Test Case reference (TestClass::TestCase).
-	 *
-	 * This can be used to associate the test data (e.g. Issue Summary, Project
-	 * Name, etc.) with a test case.
-	 * 
-	 * @return string
-	 */
-	protected function getTestCaseReference() {
-		return static::class . '::' . $this->getName();
-	}
-
-	/**
 	 * Returns a minimal data structure for tests to create a new Issue.
 	 *
 	 * The Issue Summary is set to TestClass::TestCase with an optional
@@ -212,7 +199,7 @@ abstract class RestBase extends TestCase {
 	 * @return array
 	 */
 	protected function getIssueToAdd( $p_suffix = '' ) {
-		$t_summary = $this->getTestCaseReference();
+		$t_summary = $this->toString();
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}
