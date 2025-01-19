@@ -457,6 +457,36 @@ $g_notify_flags['acknowledged'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_email_use_template</term>
+			<listitem>
+				<para>Use a HTML template to format emails, when this OFF ( default) mails will be fully text based. </para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_escape_template</term>
+			<listitem>
+				<para>Use the escape sequence for the mail template, when this OFF ( default) mails, an escape sequence will not be used</para>
+			</listitem>
+		</varlistentry>
+ 		<varlistentry>
+			<term>$g_email_newbug_template</term>
+			<listitem>
+				<para>Location of the template for new bugs, this location can be outside the webroot but do ensure that the web-user has access to it.</para>
+			</listitem>
+		</varlistentry>
+ 		<varlistentry>
+			<term>$g_email_bug_template</term>
+			<listitem>
+				<para>Location of the template for existing bugs, this location can be outside the webroot but do ensure that the web-user has access to it.</para>
+			</listitem>
+		</varlistentry>
+ 		<varlistentry>
+			<term>$g_email_note_template</term>
+			<listitem>
+				<para>Location of the template for bugnotes, this location can be outside the webroot but do ensure that the web-user has access to it.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_email_send_using_cronjob</term>
 			<listitem>
 				<para>Use a cron job or task scheduler to send emails.</para>
