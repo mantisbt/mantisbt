@@ -24,6 +24,7 @@
  */
 
 use GuzzleHttp\Exception\GuzzleException;
+use PHPUnit\Framework\TestCase;
 
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
@@ -42,7 +43,7 @@ require_once __DIR__ . '/../core/Faker.php';
  * @requires extension curl
  * @group REST
  */
-abstract class RestBase extends PHPUnit\Framework\TestCase {
+abstract class RestBase extends TestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
