@@ -63,7 +63,7 @@ function email_template_bug_message( $issue_data,$top_line ) {
 
 ## process the relationships, looping through the array
 	$relations = $issue_data['relations'];
-	if ( !empty($relations  ) {
+	if ( !empty($relations  ) ) {
 		$reldata = $relations;
 	} else {
 		$reldata = "Not Available";
