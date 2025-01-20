@@ -1439,4 +1439,5 @@ $s_add = 'Додати';
 $s_login = 'Увійти';
 $s_filter_all = 'ВСІ';
 $s_filter_new = 'Нові';
+$s_filter_unused_tags = 'Невикористані';
 $s_filter_unused = 'Невикористані';

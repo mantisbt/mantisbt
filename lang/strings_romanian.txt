@@ -1205,4 +1205,5 @@ $s_add = 'Adaugă';
 $s_login = 'Autentificare';
 $s_filter_all = 'Toți';
 $s_filter_new = 'Nou';
+$s_filter_unused_tags = 'Nefolosit';
 $s_filter_unused = 'Nefolosit';

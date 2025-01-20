@@ -1204,4 +1204,5 @@ $s_add = 'Thêm';
 $s_login = 'Đăng nhập';
 $s_filter_all = 'Tất cả';
 $s_filter_new = 'Mới';
+$s_filter_unused_tags = 'Không sử dụng';
 $s_filter_unused = 'Không sử dụng';

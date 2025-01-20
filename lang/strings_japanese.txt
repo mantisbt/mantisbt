@@ -1443,4 +1443,5 @@ $s_add = '追加';
 $s_login = 'ログイン';
 $s_filter_all = 'すべて';
 $s_filter_new = '新規';
+$s_filter_unused_tags = '未使用';
 $s_filter_unused = '未使用';

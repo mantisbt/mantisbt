@@ -1463,4 +1463,5 @@ $s_add = 'Добавить';
 $s_login = 'Вход';
 $s_filter_all = 'Все';
 $s_filter_new = 'Новые';
+$s_filter_unused_tags = 'Неиспользуемые';
 $s_filter_unused = 'Неиспользуемые';

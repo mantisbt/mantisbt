@@ -1163,4 +1163,5 @@ $s_add = 'Lisa';
 $s_login = 'Logi sisse';
 $s_filter_all = 'Kõik';
 $s_filter_new = 'Uus';
+$s_filter_unused_tags = 'Pole kasutuses';
 $s_filter_unused = 'Pole kasutuses';

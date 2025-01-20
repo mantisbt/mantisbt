@@ -919,4 +919,5 @@ $s_add = 'Amestar';
 $s_login = 'Aniciar sesión';
 $s_filter_all = 'Toes';
 $s_filter_new = 'Nuevu';
+$s_filter_unused_tags = 'Sin usar';
 $s_filter_unused = 'Sin usar';

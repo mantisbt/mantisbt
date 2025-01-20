@@ -1298,4 +1298,5 @@ $s_add = 'जोड़ें';
 $s_login = 'प्रवेश';
 $s_filter_all = 'सभी';
 $s_filter_new = 'नया';
+$s_filter_unused_tags = 'अप्रयुक्त';
 $s_filter_unused = 'अप्रयुक्त';

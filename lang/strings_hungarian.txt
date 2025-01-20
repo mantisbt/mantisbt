@@ -1433,4 +1433,5 @@ $s_add = 'Hozzáadás';
 $s_login = 'Bejelentkezés';
 $s_filter_all = 'Összes';
 $s_filter_new = 'Új';
+$s_filter_unused_tags = 'Nem használt';
 $s_filter_unused = 'Nem használt';

@@ -1343,4 +1343,5 @@ $s_add = 'Bæta við';
 $s_login = 'Innskráning';
 $s_filter_all = 'Allir';
 $s_filter_new = 'Nýtt';
+$s_filter_unused_tags = 'Ónotað';
 $s_filter_unused = 'Ónotað';

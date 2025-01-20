@@ -884,4 +884,5 @@ $s_add = 'Dobei donn';
 $s_login = 'Enlogge';
 $s_filter_all = 'All';
 $s_filter_new = 'Neu';
+$s_filter_unused_tags = 'nit jebruch';
 $s_filter_unused = 'nit jebruch';

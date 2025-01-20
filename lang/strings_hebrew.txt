@@ -1444,4 +1444,5 @@ $s_add = 'להוסיף';
 $s_login = 'כניסה';
 $s_filter_all = 'כולם';
 $s_filter_new = 'חדש';
+$s_filter_unused_tags = 'לא בשימוש';
 $s_filter_unused = 'לא בשימוש';

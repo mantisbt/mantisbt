@@ -1268,4 +1268,5 @@ $s_add = 'Lisää';
 $s_login = 'Kirjaudu sisään';
 $s_filter_all = 'Kaikki';
 $s_filter_new = 'Uusi';
+$s_filter_unused_tags = 'Ei käytössä';
 $s_filter_unused = 'Ei käytössä';

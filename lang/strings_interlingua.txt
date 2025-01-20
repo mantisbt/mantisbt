@@ -1429,4 +1429,5 @@ $s_add = 'Adder';
 $s_login = 'Aperir session';
 $s_filter_all = 'Totes';
 $s_filter_new = 'Nove';
+$s_filter_unused_tags = 'Non usate';
 $s_filter_unused = 'Non usate';

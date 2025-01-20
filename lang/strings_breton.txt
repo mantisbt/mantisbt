@@ -1403,4 +1403,5 @@ $s_add = 'Ouzhpennañ';
 $s_login = 'Kevreañ';
 $s_filter_all = 'An holl';
 $s_filter_new = 'Nevez';
+$s_filter_unused_tags = 'Dizimplij';
 $s_filter_unused = 'Dizimplij';

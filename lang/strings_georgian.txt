@@ -882,4 +882,5 @@ $s_add = 'დამატება';
 $s_login = 'შესვლა';
 $s_filter_all = 'ყველა';
 $s_filter_new = 'ახალი';
+$s_filter_unused_tags = 'გამოუყენებელი';
 $s_filter_unused = 'გამოუყენებელი';

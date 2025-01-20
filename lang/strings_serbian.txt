@@ -1224,4 +1224,5 @@ $s_add = 'Додај';
 $s_login = 'Пријава';
 $s_filter_all = 'Све';
 $s_filter_new = 'Ново';
+$s_filter_unused_tags = 'Некоришћено';
 $s_filter_unused = 'Некоришћено';

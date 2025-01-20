@@ -1409,4 +1409,5 @@ $s_add = 'Přidat';
 $s_login = 'Přihlásit se';
 $s_filter_all = 'všichni';
 $s_filter_new = 'Nové';
+$s_filter_unused_tags = 'Nepoužité';
 $s_filter_unused = 'Nepoužité';

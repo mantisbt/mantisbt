@@ -846,4 +846,5 @@ $s_add = 'Aldoni';
 $s_login = 'Ensaluti';
 $s_filter_all = 'Ĉiuj';
 $s_filter_new = 'Novaj';
+$s_filter_unused_tags = 'Ne uzataj';
 $s_filter_unused = 'Ne uzataj';

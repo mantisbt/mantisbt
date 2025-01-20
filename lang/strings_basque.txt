@@ -1025,4 +1025,5 @@ $s_add = 'Gehitu';
 $s_login = 'Hasi saioa';
 $s_filter_all = 'Denak';
 $s_filter_new = 'Berriak';
+$s_filter_unused_tags = 'Erabili gabea';
 $s_filter_unused = 'Erabili gabea';

@@ -1378,4 +1378,5 @@ $s_add = 'Legg til';
 $s_login = 'Logge inn';
 $s_filter_all = 'Alle';
 $s_filter_new = 'NY';
+$s_filter_unused_tags = 'IKKE I BRUK';
 $s_filter_unused = 'IKKE I BRUK';

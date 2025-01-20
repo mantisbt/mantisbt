@@ -1162,4 +1162,5 @@ $s_add = 'Idagdag';
 $s_login = 'Mag-login';
 $s_filter_all = 'LAHAT';
 $s_filter_new = 'BAGO';
+$s_filter_unused_tags = 'HINDI PA NAGAGAMIT';
 $s_filter_unused = 'HINDI PA NAGAGAMIT';

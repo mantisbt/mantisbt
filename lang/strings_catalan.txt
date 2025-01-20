@@ -1277,4 +1277,5 @@ $s_add = 'Afegeix';
 $s_login = 'Entrada';
 $s_filter_all = 'Tots';
 $s_filter_new = 'Nou';
+$s_filter_unused_tags = 'No usat';
 $s_filter_unused = 'No usat';

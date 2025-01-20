@@ -1447,4 +1447,5 @@ $s_add = 'Toevoegen';
 $s_login = 'Aanmelden';
 $s_filter_all = 'Alle';
 $s_filter_new = 'Nieuw';
+$s_filter_unused_tags = 'Ongebruikt';
 $s_filter_unused = 'Ongebruikt';

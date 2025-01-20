@@ -1248,4 +1248,5 @@ $s_add = 'Apondre';
 $s_login = 'Dobrir la session';
 $s_filter_all = 'TOTES';
 $s_filter_new = 'NOVÈL';
+$s_filter_unused_tags = 'INUTILIZAT';
 $s_filter_unused = 'INUTILIZAT';

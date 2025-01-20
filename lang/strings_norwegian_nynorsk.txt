@@ -390,4 +390,5 @@ $s_close = 'Lukk';
 $s_login = 'Logg inn';
 $s_filter_all = 'Alle';
 $s_filter_new = 'NYE';
+$s_filter_unused_tags = 'UNYTTA';
 $s_filter_unused = 'UNYTTA';

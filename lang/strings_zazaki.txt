@@ -539,4 +539,5 @@ $s_add = 'Cı ke';
 $s_login = 'Cıkewtış';
 $s_filter_all = 'Pêro';
 $s_filter_new = 'Newe';
+$s_filter_unused_tags = 'Nêkaryayo';
 $s_filter_unused = 'Nêkaryayo';

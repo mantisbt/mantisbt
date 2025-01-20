@@ -527,4 +527,5 @@ $s_add = 'Voeg by';
 $s_login = 'Aanmelding';
 $s_filter_all = 'Alle';
 $s_filter_new = 'Nuut';
+$s_filter_unused_tags = 'Ongebruikte';
 $s_filter_unused = 'Ongebruikte';

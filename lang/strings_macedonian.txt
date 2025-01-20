@@ -1433,4 +1433,5 @@ $s_add = 'Додај';
 $s_login = 'Најава';
 $s_filter_all = 'Сите';
 $s_filter_new = 'Нови';
+$s_filter_unused_tags = 'Неискористени';
 $s_filter_unused = 'Неискористени';

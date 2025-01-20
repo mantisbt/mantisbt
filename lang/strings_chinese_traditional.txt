@@ -1451,4 +1451,5 @@ $s_add = '新增';
 $s_login = '登入';
 $s_filter_all = '全部';
 $s_filter_new = '新增';
+$s_filter_unused_tags = '未使用';
 $s_filter_unused = '未使用';

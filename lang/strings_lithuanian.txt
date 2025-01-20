@@ -1387,4 +1387,5 @@ $s_add = 'Pridėti';
 $s_login = 'Prisijungti';
 $s_filter_all = 'VISI';
 $s_filter_new = 'Naujas';
+$s_filter_unused_tags = 'Nenaudotas';
 $s_filter_unused = 'Nenaudotas';

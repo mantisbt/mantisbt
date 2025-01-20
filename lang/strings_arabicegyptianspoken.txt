@@ -1149,4 +1149,5 @@ $s_add = 'أضف';
 $s_login = 'تسجيل الدخول';
 $s_filter_all = 'الكل';
 $s_filter_new = 'جديد';
+$s_filter_unused_tags = 'غير مستخدم';
 $s_filter_unused = 'غير مستخدم';

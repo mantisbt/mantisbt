@@ -480,4 +480,5 @@ $s_add = 'Läükön';
 $s_login = 'Nunädon oki';
 $s_filter_all = 'VALIKS';
 $s_filter_new = 'NULIK';
+$s_filter_unused_tags = 'NO PAGEBÖL';
 $s_filter_unused = 'NO PAGEBÖL';

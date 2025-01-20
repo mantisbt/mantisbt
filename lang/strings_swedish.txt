@@ -1448,4 +1448,5 @@ $s_add = 'Lägg till';
 $s_login = 'Logga in';
 $s_filter_all = 'Alla';
 $s_filter_new = 'Ny';
+$s_filter_unused_tags = 'Oanvänd';
 $s_filter_unused = 'Oanvänd';

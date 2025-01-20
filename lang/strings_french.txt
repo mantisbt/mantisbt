@@ -1466,4 +1466,5 @@ $s_add = 'Ajouter';
 $s_login = 'Se connecter';
 $s_filter_all = 'Tous';
 $s_filter_new = 'Nouveau';
+$s_filter_unused_tags = 'Inutilisé';
 $s_filter_unused = 'Inutilisé';

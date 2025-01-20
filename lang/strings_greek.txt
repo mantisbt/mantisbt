@@ -1113,4 +1113,5 @@ $s_add = 'Προσθήκη';
 $s_login = 'Είσοδος';
 $s_filter_all = 'ΟΛΟΙ';
 $s_filter_new = 'Νέος';
+$s_filter_unused_tags = 'Αχρησιμοποίητος';
 $s_filter_unused = 'Αχρησιμοποίητος';

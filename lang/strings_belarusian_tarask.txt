@@ -1418,4 +1418,5 @@ $s_add = 'Дадаць';
 $s_login = 'Увайсьці ў сыстэму';
 $s_filter_all = 'Усе';
 $s_filter_new = 'Новы';
+$s_filter_unused_tags = 'Невыкарыстоўваемыя';
 $s_filter_unused = 'Невыкарыстоўваемыя';

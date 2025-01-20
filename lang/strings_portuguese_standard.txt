@@ -1403,4 +1403,5 @@ $s_add = 'Adicionar';
 $s_login = 'Entrar';
 $s_filter_all = 'Todos';
 $s_filter_new = 'Novo';
+$s_filter_unused_tags = 'Não usado';
 $s_filter_unused = 'Não usado';

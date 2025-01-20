@@ -1449,4 +1449,5 @@ $s_add = 'Adicionar';
 $s_login = 'Entrar';
 $s_filter_all = 'TODOS';
 $s_filter_new = 'NOVO';
+$s_filter_unused_tags = 'NÃO UTILIZADO';
 $s_filter_unused = 'NÃO UTILIZADO';

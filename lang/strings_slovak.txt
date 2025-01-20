@@ -1430,4 +1430,5 @@ $s_add = 'Pridať';
 $s_login = 'Prihlásenie';
 $s_filter_all = 'Všetko';
 $s_filter_new = 'Nové';
+$s_filter_unused_tags = 'Nepoužité';
 $s_filter_unused = 'Nepoužité';

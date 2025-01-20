@@ -1397,4 +1397,5 @@ $s_add = '추가';
 $s_login = '로그인';
 $s_filter_all = '모두';
 $s_filter_new = '새 사용자';
+$s_filter_unused_tags = '사용하지 않음';
 $s_filter_unused = '사용하지 않음';

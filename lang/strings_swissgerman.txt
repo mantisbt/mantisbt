@@ -1200,4 +1200,5 @@ $s_add = 'Zuefiege';
 $s_login = 'Aamälde';
 $s_filter_all = 'ALLI';
 $s_filter_new = 'NEJ';
+$s_filter_unused_tags = 'NIT BRUCHT';
 $s_filter_unused = 'NIT BRUCHT';

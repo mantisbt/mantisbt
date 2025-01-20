@@ -1458,4 +1458,5 @@ $s_add = '添加';
 $s_login = '登录';
 $s_filter_all = '全部';
 $s_filter_new = '新的';
+$s_filter_unused_tags = '未用';
 $s_filter_unused = '未用';

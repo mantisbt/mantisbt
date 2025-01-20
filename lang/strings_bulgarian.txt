@@ -1404,4 +1404,5 @@ $s_add = 'Добавяне';
 $s_login = 'Влизане';
 $s_filter_all = 'ВСИЧКИ';
 $s_filter_new = 'Нов';
+$s_filter_unused_tags = 'Неизползван';
 $s_filter_unused = 'Неизползван';

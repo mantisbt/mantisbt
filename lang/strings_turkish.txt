@@ -1452,4 +1452,5 @@ $s_add = 'Ekle';
 $s_login = 'Oturum aç';
 $s_filter_all = 'Hepsi';
 $s_filter_new = 'Yeni';
+$s_filter_unused_tags = 'Kullanılmamış';
 $s_filter_unused = 'Kullanılmamış';

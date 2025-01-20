@@ -1425,4 +1425,5 @@ $s_add = 'Dodaj';
 $s_login = 'Prijavi se';
 $s_filter_all = 'Sve';
 $s_filter_new = 'Novo';
+$s_filter_unused_tags = 'Nekorišćeno';
 $s_filter_unused = 'Nekorišćeno';

@@ -1454,4 +1454,5 @@ $s_add = 'Hinzufügen';
 $s_login = 'Anmelden';
 $s_filter_all = 'ALLE';
 $s_filter_new = 'NEU';
+$s_filter_unused_tags = 'UNBENUTZT';
 $s_filter_unused = 'UNBENUTZT';

@@ -1438,4 +1438,5 @@ $s_add = 'Engadir';
 $s_login = 'Rexistro';
 $s_filter_all = 'Todos';
 $s_filter_new = 'Novo';
+$s_filter_unused_tags = 'Sen uso';
 $s_filter_unused = 'Sen uso';
