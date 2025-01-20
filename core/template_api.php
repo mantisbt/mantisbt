@@ -122,7 +122,7 @@ $variables['mail_data'] = print_r($issue_data, true);
 	} else {
 		$template_definition = config_get( 'bug_mailtemplate' );
 	}
-	$template = file_get_contents(x$template_definitionx);
+	$template = file_get_contents($template_definition);
 	
 	// next assign the values to the template
 	foreach( $variables as $key => $value ) {
