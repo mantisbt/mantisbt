@@ -88,6 +88,9 @@ class MantisMarkdown extends Parsedown
 		$this->setSafeMode( true );
 		# Only turn URLs into links if config says so
 		$this->setUrlsLinked( (bool) $this->config_process_urls );
+
+		$this->InlineTypes['@'] []= 'EmailText';
+		$this->inlineMarkerList .= '@';
 	}
 
 	public static function getInstance( ?int $p_process_urls = OFF, ?int $p_process_buglinks = OFF ): self {
@@ -164,17 +167,32 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Convert an email addresses in unmarked text into a link.
+	 * Convert an email addresses into a link.
 	 *
-	 * Unlike unmarked URLs, unmarked email addresses are not
-	 * processed by Parsedown.
+	 * Original Parsedown only converts emails marked with < and >.
+	 *
+	 * @param array Data for the inline element
+	 *
+	 * @return array|void The email element data or nothing
 	 */
-	protected function unmarkedText( $text ): string {
-		if( ON == $this->config_process_urls && false !== strpos( $text, '@' ) ) {
-			$text = string_insert_hrefs( $text );
+	protected function inlineEmailText( $p_excerpt ) {
+		$t_host = '[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?';
+		$t_email = '/([a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]++@'
+			. $t_host . '(?:\.' . $t_host . ')*)/i';
+		if( ON == $this->config_process_urls
+			&& preg_match( $t_email, $p_excerpt['context'], $t_matches, PREG_OFFSET_CAPTURE ) ) {
+			return [
+				'extent' => strlen( $t_matches[1][0] ),
+				'position' => $t_matches[1][1],
+				'element' => [
+					'name' => 'a',
+					'text' => $t_matches[1][0],
+					'attributes' => [
+						'href' => 'mailto:' . $t_matches[1][0],
+					],
+				],
+			];
 		}
-
-		return parent::unmarkedText( $text );
 	}
 
 	/**
