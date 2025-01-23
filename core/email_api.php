@@ -841,17 +841,14 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type, $p
  * @access private
  */
 function email_filter_recipients_for_bug( $p_bug_id, array $p_recipients ) {
-    $t_view_bug_threshold = config_get( 'view_bug_threshold' );
+	$t_view_bug_threshold = config_get( 'view_bug_threshold' );
 
-    $t_authorized_recipients = array();
-
-    foreach( $p_recipients as $t_recipient_id => $t_recipient_email ) {
-        if( access_has_bug_level( $t_view_bug_threshold, $p_bug_id, $t_recipient_id ) ) {
-            $t_authorized_recipients[$t_recipient_id] = $t_recipient_email;
-        }
-    }
-
-    return $t_authorized_recipients;
+	return array_filter( $p_recipients,
+		function( $t_recipient_id ) use ( $t_view_bug_threshold, $p_bug_id ) {
+			return access_has_bug_level( $t_view_bug_threshold, $p_bug_id, $t_recipient_id );
+		},
+		ARRAY_FILTER_USE_KEY
+	);
 }
 
 /**
@@ -1640,10 +1637,7 @@ function email_build_subject( $p_bug_id ) {
 	$t_email_subject = '[' . $p_project_name . ' ' . $t_bug_id . ']: ' . $p_subject;
 
 	# update subject as defined by plugins
-	/** @noinspection PhpUnnecessaryLocalVariableInspection */
-	$t_email_subject = event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, array( $p_bug_id ) );
-
-	return $t_email_subject;
+	return event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, array( $p_bug_id ) );
 }
 
 /**
