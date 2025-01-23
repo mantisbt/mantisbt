@@ -560,6 +560,11 @@ if( 2 == $t_install_state ) {
 					$t_error = 'SQL Server (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation';
 				}
 				break;
+			case 'sqlite3':
+				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_SQLITE3, '<' ) ) {
+					$t_error = 'SQLite (' . DB_MIN_VERSION_SQLITE3 . ') or later is required for installation';
+				}
+				break;
 			case 'pgsql':
 			default:
 				break;

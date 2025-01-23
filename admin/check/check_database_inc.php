@@ -205,6 +205,8 @@ if( db_is_mysql() ) {
 	$t_db_min_version = DB_MIN_VERSION_MSSQL;
 } elseif( db_is_oracle() ) {
 	$t_db_min_version = DB_MIN_VERSION_ORACLE;
+} elseif( db_is_sqlite3() ) {
+	$t_db_min_version = DB_MIN_VERSION_SQLITE3;
 } else {
 	$t_db_min_version = 0;
 }
