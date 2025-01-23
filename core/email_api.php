@@ -1611,7 +1611,7 @@ function email_build_subject( $p_bug_id ) {
 
 	# update subject as defined by plugins
 	/** @noinspection PhpUnnecessaryLocalVariableInspection */
-	$t_email_subject = event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, array( 'bug_id' => $p_bug_id ) );
+	$t_email_subject = event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, array( $p_bug_id ) );
 
 	return $t_email_subject;
 }
