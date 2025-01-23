@@ -274,12 +274,13 @@ function email_notify_flag( $p_action, $p_flag ) {
  * @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
  * @todo yarick123:sort recipients list by language to reduce switches between different languages
  *
- * @param integer $p_bug_id                  A bug identifier.
- * @param string  $p_notify_type             Notification type.
- * @param array   $p_extra_user_ids_to_email Array of additional email addresses to notify.
- * @param integer $p_bugnote_id 			 The bugnote id in case of bugnote, otherwise null.
+ * @param int    $p_bug_id                  A bug identifier.
+ * @param string $p_notify_type             Notification type.
+ * @param array  $p_extra_user_ids_to_email Array of additional email addresses to notify.
+ * @param int    $p_bugnote_id              The bugnote id in case of bugnote, otherwise null.
  *
  * @return array
+ * @throws ClientException
  */
 function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_user_ids_to_email = array(), $p_bugnote_id = null ) {
 	$t_recipients = array();
@@ -519,10 +520,12 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 /**
  * Send an email notification to a user when their information is changed by another user.
  *
- * @param int $p_user_id The user id of the user whose information was changed.
+ * @param int   $p_user_id  The user id of the user whose information was changed.
  * @param array $p_old_user The user's information before the change.
  * @param array $p_new_user The user's information after the change.
+ *
  * @return void
+ * @throws phpmailerException
  */
 function email_user_changed( $p_user_id, $p_old_user, $p_new_user ) {
 	if( config_get( 'enable_email_notification' ) == OFF ) {
@@ -571,11 +574,12 @@ function email_user_changed( $p_user_id, $p_old_user, $p_new_user ) {
 /**
  * Send password to user.
  *
- * @param integer $p_user_id      A valid user identifier.
- * @param string  $p_confirm_hash Confirmation hash.
- * @param string  $p_admin_name   Administrator name.
+ * @param int    $p_user_id      A valid user identifier.
+ * @param string $p_confirm_hash Confirmation hash.
+ * @param string $p_admin_name   Administrator name.
  *
  * @return void
+ * @throws ClientException
  */
 function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 	if( ( OFF == config_get( 'send_reset_password' ) ) || ( OFF == config_get( 'enable_email_notification' ) ) ) {
@@ -613,12 +617,13 @@ function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 /**
  * Send confirm_hash URL to let user reset their password.
  *
- * @param integer $p_user_id        A valid user identifier.
- * @param string  $p_confirm_hash   Confirmation hash.
- * @param bool    $p_reset_by_admin True if password was reset by admin,
- *                                  False (default) for user request (lost password)
+ * @param int    $p_user_id        A valid user identifier.
+ * @param string $p_confirm_hash   Confirmation hash.
+ * @param bool   $p_reset_by_admin True if password was reset by admin,
+ *                                 False (default) for user request (lost password)
  *
  * @return void
+ * @throws ClientException
  */
 function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash, $p_reset_by_admin = false ) {
 	if( OFF == config_get( 'send_reset_password' ) ) {
@@ -671,6 +676,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash, $p_reset_by_a
  * @param string $p_email    Email address of new user.
  *
  * @return void
+ * @throws ClientException
  */
 function email_notify_new_account( $p_username, $p_email ) {
 	log_event( LOG_EMAIL, 'New account for user %s', $p_username );
@@ -702,16 +708,17 @@ function email_notify_new_account( $p_username, $p_email ) {
 /**
  * Send a generic email.
  *
- * @param integer $p_bug_id                  A bug identifier.
- * @param string  $p_notify_type             Notification type, used to check who
- *                                           should get notified of such event.
- * @param integer $p_message_id              Message identifier to be translated
- *                                           and included at the top of the email message.
- * @param array $p_header_optional_params    Optional Parameters for $p_message_id
- *                                           (default null).
- * @param array   $p_extra_user_ids_to_email Array of additional users to email.
+ * @param int        $p_bug_id                  A bug identifier.
+ * @param string     $p_notify_type             Notification type, used to check who
+ *                                              should get notified of such event.
+ * @param int        $p_message_id              Message identifier to be translated
+ *                                              and included at the top of the email message.
+ * @param array|null $p_header_optional_params  Optional Parameters for $p_message_id
+ *                                              (default null).
+ * @param array      $p_extra_user_ids_to_email Array of additional users to email.
  *
  * @return void
+ * @throws ClientException
  */
 function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $p_header_optional_params = null, array $p_extra_user_ids_to_email = array() ) {
 	# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
@@ -723,13 +730,14 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
 /**
  * Sends a generic email to the specific set of recipients.
  *
- * @param integer $p_bug_id                  A bug identifier
- * @param string  $p_notify_type             Notification type
- * @param array   $p_recipients              Array of recipients (key: user id, value: email address)
- * @param integer $p_message_id              Message identifier
- * @param array   $p_header_optional_params  Optional Parameters (default null)
+ * @param int        $p_bug_id                 A bug identifier
+ * @param string     $p_notify_type            Notification type
+ * @param array      $p_recipients             Array of recipients (key: user id, value: email address)
+ * @param int        $p_message_id             Message identifier
+ * @param array|null $p_header_optional_params Optional Parameters (default null)
  *
  * @return void
+ * @throws ClientException
  */
 function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipients, $p_message_id = null, array $p_header_optional_params = null ) {
 	if( empty( $p_recipients ) ) {
@@ -766,10 +774,11 @@ function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipi
  * Typically, this will only be sent when the added user is not the logged-in
  * user.  This is assuming that receive own notifications is OFF (default).
  *
- * @param integer $p_bug_id  A valid bug identifier.
- * @param integer $p_user_id A valid user identifier.
+ * @param int $p_bug_id  A valid bug identifier.
+ * @param int $p_user_id A valid user identifier.
  *
  * @return void
+ * @throws ClientException
  */
 function email_monitor_added( $p_bug_id, $p_user_id ) {
 	log_event( LOG_EMAIL, 'Issue #%d monitored by user @U%d', $p_bug_id, $p_user_id );
@@ -784,12 +793,13 @@ function email_monitor_added( $p_bug_id, $p_user_id ) {
 /**
  * Send notices when a relationship is ADDED.
  *
- * @param integer $p_bug_id         A bug identifier.
- * @param integer $p_related_bug_id Related bug identifier.
- * @param integer $p_rel_type       Relationship type.
- * @param bool $p_email_for_source  Should an email be triggered for source issue?
+ * @param int  $p_bug_id           A bug identifier.
+ * @param int  $p_related_bug_id   Related bug identifier.
+ * @param int  $p_rel_type         Relationship type.
+ * @param bool $p_email_for_source Should an email be triggered for source issue?
  *
  * @return void
+ * @throws ClientException
  */
 function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type, $p_email_for_source ) {
 	global $g_relationships;
@@ -823,8 +833,9 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type, $p
 /**
  * Filter recipients to remove ones that don't have access to the specified bug.
  *
- * @param integer $p_bug_id       The bug id
- * @param array   $p_recipients   The recipients array (key: id, value: email)
+ * @param int   $p_bug_id     The bug id
+ * @param array $p_recipients The recipients array (key: id, value: email)
+ *
  * @return array The filtered list of recipients in same format
  *
  * @access private
@@ -851,6 +862,7 @@ function email_filter_recipients_for_bug( $p_bug_id, array $p_recipients ) {
  * @param string $p_message_id
  *
  * @access private
+ * @throws ClientException
  */
 function email_relationship_send( int $p_bug_id, int $p_related_bug_id, $p_message_id ) {
 	$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
@@ -867,12 +879,13 @@ function email_relationship_send( int $p_bug_id, int $p_related_bug_id, $p_messa
 /**
  * Send notices when a relationship is DELETED.
  *
- * @param integer $p_bug_id         A bug identifier.
- * @param integer $p_related_bug_id Related bug identifier.
- * @param integer $p_rel_type       Relationship type.
- * @param integer $p_skip_email_for_issue_id Skip email for specified issue, otherwise 0.
+ * @param int $p_bug_id                  A bug identifier.
+ * @param int $p_related_bug_id          Related bug identifier.
+ * @param int $p_rel_type                Relationship type.
+ * @param int $p_skip_email_for_issue_id Skip email for specified issue, otherwise 0.
  *
  * @return void
+ * @throws ClientException
  */
 function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, $p_skip_email_for_issue_id = 0 ) {
 	global $g_relationships;
@@ -900,16 +913,17 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, 
 	if( $p_bug_id != $p_related_bug_id && bug_exists( $p_related_bug_id) ) {
 		email_relationship_send( $p_related_bug_id, $p_bug_id, $t_message_id );
 	}
-}	
+}
 
 /**
  * Email related issues when a bug is deleted.
  *
  * This should be called before the bug is deleted.
  *
- * @param integer $p_bug_id The id of the bug to be deleted.
+ * @param int $p_bug_id The id of the bug to be deleted.
  *
  * @return void
+ * @throws ClientException
  */
 function email_relationship_bug_deleted( $p_bug_id ) {
 	$t_ignore = false;
@@ -933,9 +947,10 @@ function email_relationship_bug_deleted( $p_bug_id ) {
 /**
  * Send notices to all the handlers of the parent bugs when a child bug is RESOLVED.
  *
- * @param integer $p_bug_id A bug identifier.
+ * @param int $p_bug_id A bug identifier.
  *
  * @return void
+ * @throws ClientException
  */
 function email_relationship_child_resolved( $p_bug_id ) {
 	email_relationship_child_resolved_closed( $p_bug_id, 'email_notification_title_for_action_relationship_child_resolved' );
@@ -944,9 +959,10 @@ function email_relationship_child_resolved( $p_bug_id ) {
 /**
  * Send notices to all the handlers of the parent bugs when a child bug is CLOSED.
  *
- * @param integer $p_bug_id A bug identifier.
+ * @param int $p_bug_id A bug identifier.
  *
  * @return void
+ * @throws ClientException
  */
 function email_relationship_child_closed( $p_bug_id ) {
 	email_relationship_child_resolved_closed( $p_bug_id, 'email_notification_title_for_action_relationship_child_closed' );
@@ -955,10 +971,11 @@ function email_relationship_child_closed( $p_bug_id ) {
 /**
  * Send notices to all the handlers of the parent bugs still open when a child bug is resolved/closed.
  *
- * @param integer $p_bug_id     A bug identifier.
- * @param integer $p_message_id A message identifier.
+ * @param int $p_bug_id     A bug identifier.
+ * @param int $p_message_id A message identifier.
  *
  * @return void
+ * @throws ClientException
  */
 function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
 	# retrieve all the relationships in which the bug is the destination bug
@@ -996,6 +1013,7 @@ function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
  * @param int $p_bug_id
  *
  * @return void
+ * @throws ClientException
  */
 function email_sponsorship_added( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship added', $p_bug_id ) );
@@ -1008,6 +1026,7 @@ function email_sponsorship_added( $p_bug_id ) {
  * @param int $p_bug_id
  *
  * @return void
+ * @throws ClientException
  */
 function email_sponsorship_updated( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship updated', $p_bug_id ) );
@@ -1020,6 +1039,7 @@ function email_sponsorship_updated( $p_bug_id ) {
  * @param int $p_bug_id
  *
  * @return void
+ * @throws ClientException
  */
 function email_sponsorship_deleted( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship removed', $p_bug_id ) );
@@ -1032,6 +1052,7 @@ function email_sponsorship_deleted( $p_bug_id ) {
  * @param int $p_bug_id
  *
  * @return void
+ * @throws ClientException
  */
 function email_bug_added( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d reported', $p_bug_id ) );
@@ -1041,9 +1062,10 @@ function email_bug_added( $p_bug_id ) {
 /**
  * Send notifications for bug update.
  *
- * @param int $p_bug_id  The bug id.
+ * @param int $p_bug_id The bug id.
  *
  * @return void
+ * @throws ClientException
  */
 function email_bug_updated( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d updated', $p_bug_id ) );
@@ -1065,11 +1087,12 @@ function email_generate_bug_md5( $p_bug_id, $p_date_submitted ) {
 /**
  * Send notices when a new bugnote.
  *
- * @param int $p_bugnote_id  		The bugnote id.
- * @param array $p_files 			The array of file information (keys: name, size)
+ * @param int   $p_bugnote_id       The bugnote id.
+ * @param array $p_files            The array of file information (keys: name, size)
  * @param array $p_exclude_user_ids The id of users to exclude.
  *
  * @return void
+ * @throws ClientException
  */
 function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_ids = array() ) {
 	if( OFF == config_get( 'enable_email_notification' ) ) {
@@ -1163,6 +1186,7 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
  * @param int $p_bug_id
  *
  * @return void
+ * @throws ClientException
  */
 function email_resolved( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d resolved', $p_bug_id ) );
@@ -1175,6 +1199,7 @@ function email_resolved( $p_bug_id ) {
  * @param int $p_bug_id
  *
  * @return void
+ * @throws ClientException
  */
 function email_close( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d closed', $p_bug_id ) );
@@ -1187,6 +1212,7 @@ function email_close( $p_bug_id ) {
  * @param int $p_bug_id
  *
  * @return void
+ * @throws ClientException
  */
 function email_bug_reopened( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d reopened', $p_bug_id ) );
@@ -1201,6 +1227,7 @@ function email_bug_reopened( $p_bug_id ) {
  * @param int $p_new_handler_id
  *
  * @return void
+ * @throws ClientException
  */
 function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) {
 	if ( $p_prev_handler_id == 0 && $p_new_handler_id != 0 ) {
@@ -1235,10 +1262,11 @@ function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) 
 /**
  * Send notifications when bug status is changed.
  *
- * @param int $p_bug_id 			 The bug id
+ * @param int    $p_bug_id           The bug id
  * @param string $p_new_status_label The new status label.
  *
  * @return void
+ * @throws ClientException
  */
 function email_bug_status_changed( $p_bug_id, $p_new_status_label ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d status changed', $p_bug_id ) );
@@ -1251,6 +1279,7 @@ function email_bug_status_changed( $p_bug_id, $p_new_status_label ) {
  * @param int $p_bug_id
  *
  * @return void
+ * @throws ClientException
  */
 function email_bug_deleted( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d deleted', $p_bug_id ) );
@@ -1260,14 +1289,14 @@ function email_bug_deleted( $p_bug_id ) {
 /**
  * Store email in queue for sending.
  *
- * @param string  $p_recipient Email recipient address.
- * @param string  $p_subject   Subject of email message.
- * @param string  $p_message   Body text of email message.
- * @param array   $p_headers   Array of additional headers to send with the email.
- * @param boolean $p_force     True to force sending of emails in shutdown function,
- *                             even when using cronjob
- * @param array   $p_cc        Array of cc recipients.
- * @param array   $p_bcc       Array of bcc recipients.
+ * @param string     $p_recipient Email recipient address.
+ * @param string     $p_subject   Subject of email message.
+ * @param string     $p_message   Body text of email message.
+ * @param array|null $p_headers   Array of additional headers to send with the email.
+ * @param bool       $p_force     True to force sending of emails in shutdown function,
+ *                                even when using cronjob
+ * @param array      $p_cc        Array of cc recipients.
+ * @param array      $p_bcc       Array of bcc recipients.
  *
  * @return integer|null
  */
@@ -1327,7 +1356,7 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
  * - from a cronjob in case of asynchronous emails
  * If a failure occurs, then the function exits.
  *
- * @param boolean $p_delete_on_failure Indicates whether to remove email from queue on failure (default false).
+ * @param bool $p_delete_on_failure Indicates whether to remove email from queue on failure (default false).
  *
  * @return void
  * @throws phpmailerException
@@ -1592,9 +1621,10 @@ function email_smtp_close() {
  *
  * We include the project name, bug id, and summary.
  *
- * @param integer $p_bug_id A bug identifier.
+ * @param int $p_bug_id A bug identifier.
  *
  * @return string
+ * @throws ClientException
  */
 function email_build_subject( $p_bug_id ) {
 	# grab the project name
@@ -1631,11 +1661,12 @@ function make_lf_crlf( $p_string ) {
 /**
  * Send a bug reminder to the given user(s).
  *
- * @param integer|array $p_recipients User id or list of user ids array to send reminder to.
- * @param integer       $p_bug_id     Issue for which the reminder is sent.
- * @param string        $p_message    Optional message to add to the e-mail.
+ * @param int|array $p_recipients User id or list of user ids array to send reminder to.
+ * @param int       $p_bug_id     Issue for which the reminder is sent.
+ * @param string    $p_message    Optional message to add to the e-mail.
  *
  * @return array List of users ids to whom the reminder e-mail was actually sent
+ * @throws ClientException
  */
 function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 	if( OFF == config_get( 'enable_email_notification' ) ) {
@@ -1684,12 +1715,13 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 /**
  * Send a notification to users that were mentioned in an issue.
  *
- * @param integer       $p_bug_id     		Issue for which the reminder is sent.
- * @param array         $p_mention_user_ids User id or list of user ids array.
- * @param string        $p_message    		Optional message to add to the e-mail.
- * @param array         $p_removed_mention_user_ids  The users that were removed due to lack of access.
+ * @param int    $p_bug_id                   Issue for which the reminder is sent.
+ * @param array  $p_mention_user_ids         User id or list of user ids array.
+ * @param string $p_message                  Optional message to add to the e-mail.
+ * @param array  $p_removed_mention_user_ids The users that were removed due to lack of access.
  *
  * @return array        List of users ids to whom the mentioned e-mail were actually sent
+ * @throws ClientException
  */
 function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_removed_mention_user_ids = array() ) {
 	if( OFF == config_get( 'enable_email_notification' ) ) {
@@ -1760,12 +1792,13 @@ function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_remo
 /**
  * Send bug info to given user.
  *
- * @param array   $p_visible_bug_data       Array of bug data information.
- * @param string  $p_message_id             A message identifier.
- * @param integer $p_user_id                A valid user identifier.
- * @param array   $p_header_optional_params Array of additional email headers.
+ * @param array      $p_visible_bug_data       Array of bug data information.
+ * @param string     $p_message_id             A message identifier.
+ * @param int        $p_user_id                A valid user identifier.
+ * @param array|null $p_header_optional_params Array of additional email headers.
  *
  * @return void
+ * @throws ClientException
  */
 function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $p_user_id, array $p_header_optional_params = null ) {
 	$t_user_email = user_get_email( $p_user_id );
@@ -1811,11 +1844,11 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 /**
  * Generates a formatted note to be used in email notifications.
  *
- * @param BugnoteData $p_bugnote  		 The bugnote object.
- * @param integer $p_project_id  	 	 The project id
- * @param boolean $p_show_time_tracking  True to show time tracking, false otherwise.
- * @param string $p_horizontal_separator The horizontal line separator to use.
- * @param string $p_date_format 		 The date format to use.
+ * @param BugnoteData $p_bugnote              The bugnote object.
+ * @param int         $p_project_id           The project id
+ * @param bool        $p_show_time_tracking   True to show time tracking, false otherwise.
+ * @param string      $p_horizontal_separator The horizontal line separator to use.
+ * @param string      $p_date_format          The date format to use.
  *
  * @return string The formatted note.
  */
@@ -2038,11 +2071,12 @@ function email_format_attribute( array $p_visible_bug_data, $p_attribute_id ) {
  * Filter the bug data according to user access level.
  * @see email_format_bug_message()
  *
- * @param integer $p_user_id    A user identifier.
- * @param integer $p_bug_id     A bug identifier.
- * @param string  $p_message_id A message identifier.
+ * @param int    $p_user_id    A user identifier.
+ * @param int    $p_bug_id     A bug identifier.
+ * @param string $p_message_id A message identifier.
  *
  * @return array Bug data
+ * @throws ClientException
  */
 function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	# Override current user with user to construct bug data for.
@@ -2168,10 +2202,11 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 /**
  * Return formatted string with all the details on the requested relationship.
  *
- * @param integer             $p_bug_id       A bug identifier.
+ * @param int                 $p_bug_id       A bug identifier.
  * @param BugRelationshipData $p_relationship A bug relationship object.
  *
  * @return string
+ * @throws ClientException
  */
 function email_relationship_get_details( $p_bug_id, BugRelationshipData $p_relationship ) {
 	$t_summary_wrap_at = mb_strlen( config_get( 'email_separator2' ) ) - 28;
@@ -2219,9 +2254,10 @@ function email_relationship_get_details( $p_bug_id, BugRelationshipData $p_relat
 /**
  * Get ALL the RELATIONSHIPS OF A SPECIFIC BUG in text format.
  *
- * @param integer $p_bug_id A bug identifier.
+ * @param int $p_bug_id A bug identifier.
  *
  * @return string
+ * @throws ClientException
  */
 function email_relationship_get_summary_text( $p_bug_id ) {
 	# A variable that will be set by the following call to indicate if relationships belong
