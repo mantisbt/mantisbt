@@ -89,7 +89,7 @@ class MantisMarkdown extends Parsedown
 		# Only turn URLs into links if config says so
 		$this->setUrlsLinked( (bool) $this->config_process_urls );
 
-		$this->InlineTypes['@'] []= 'EmailText';
+		$this->InlineTypes['@'][] = 'EmailText';
 		$this->inlineMarkerList .= '@';
 	}
 
@@ -176,19 +176,17 @@ class MantisMarkdown extends Parsedown
 	 * @return array|void The email element data or nothing
 	 */
 	protected function inlineEmailText( $p_excerpt ) {
-		$t_host = '[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?';
-		$t_email = '/([a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]++@'
-			. $t_host . '(?:\.' . $t_host . ')*)/i';
 		if( ON == $this->config_process_urls
-			&& preg_match( $t_email, $p_excerpt['context'], $t_matches, PREG_OFFSET_CAPTURE ) ) {
+			&& preg_match( email_regex_simple(), $p_excerpt['context'],
+				$t_matches, PREG_OFFSET_CAPTURE ) ) {
 			return [
-				'extent' => strlen( $t_matches[1][0] ),
-				'position' => $t_matches[1][1],
+				'extent' => strlen( $t_matches[0][0] ),
+				'position' => $t_matches[0][1],
 				'element' => [
 					'name' => 'a',
-					'text' => $t_matches[1][0],
+					'text' => $t_matches[0][0],
 					'attributes' => [
-						'href' => 'mailto:' . $t_matches[1][0],
+						'href' => 'mailto:' . $t_matches[0][0],
 					],
 				],
 			];
