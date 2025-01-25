@@ -1516,8 +1516,7 @@ function email_send( EmailData $p_email_data ) {
 	$t_mail->isHTML( false );              # set email format to plain text
 
 	# check if we actually use a templte before indicating that we use HTML
-	global $templating ;
-	if ( ON == $templating )  {
+	if ( ON == config_get( 'use_mailtemplate' ) )  {
 		$t_mail->isHTML( true );
 	} 
 
