@@ -214,7 +214,7 @@ class SoapBase extends MantisTestCase {
 	 * @return array
 	 */
 	protected function getIssueToAdd( $p_suffix = '' ) {
-		$t_summary = $this->toString();
+		$t_summary = $this->getTestName();
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}

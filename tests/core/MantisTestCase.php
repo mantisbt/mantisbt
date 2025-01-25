@@ -27,8 +27,41 @@ namespace Mantis\tests\core;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Runner\Version as PHPUnitVersion;
+use ReflectionClass;
 
 /**
  * Base class for the MantisBT test suites.
  */
-abstract class MantisTestCase extends TestCase {}
+abstract class MantisTestCase extends TestCase {
+
+	/**
+	 * Test case name to use as data.
+	 *
+	 * This allows identifying which test case created data, which is useful when
+	 * troubleshooting failing tests.
+	 *
+	 * This is similar to {@see TestCase::toString()}, which was used previously
+	 * but caused problem as the generated string is sometimes too big for the
+	 * table columns where it should be stored.
+	 *
+	 * Note that {@see TestCase::getName()}/{@see TestCase::name()} are PHPUnit
+	 * internal methods which are not covered by the backwards-compatibility
+	 * promise, so this could break in the future.
+	 *
+	 * @return string TestClass::testMethod
+	 *
+	 * @noinspection PhpUndefinedMethodInspection
+	 */
+	function getTestName(): string {
+		$t_class_name = (new ReflectionClass($this))->getShortName();
+
+		# getName() method was renamed in PHPUnit 10.2 (commit d0dbaafb)
+		if( version_compare( PHPUnitVersion::id(), '10.2', '<' )) {
+			$t_test_method = $this->getName();
+		} else {
+			$t_test_method = $this->name();
+		}
+
+		return $t_class_name . '::' . $t_test_method;
+	}
+}
