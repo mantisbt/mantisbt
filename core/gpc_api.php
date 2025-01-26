@@ -343,6 +343,7 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 	}
 
+	/** @noinspection PhpUndefinedVariableInspection */
 	return $t_result;
 }
 
@@ -464,6 +465,7 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 	}
 
+	/** @noinspection PhpUndefinedVariableInspection */
 	return $t_result;
 }
 
