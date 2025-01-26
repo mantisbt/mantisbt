@@ -607,7 +607,7 @@ function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 	# Send signup email regardless of mail notification pref
 	# or else users won't be able to sign up
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message, null, true );
+		email_store( $t_email, $t_subject, $t_message, [], true );
 		log_event( LOG_EMAIL, 'Signup Email = %s, Hash = %s, User = @U%d', $t_email, $p_confirm_hash, $p_user_id );
 	}
 
@@ -660,7 +660,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash, $p_reset_by_a
 	# Send password reset regardless of mail notification preferences
 	# or else users won't be able to receive their reset passwords
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message, null, true );
+		email_store( $t_email, $t_subject, $t_message, [], true );
 		log_event( LOG_EMAIL, 'Password reset for user @U%d sent to %s', $p_user_id, $t_email );
 	} else {
 		log_event( LOG_EMAIL, 'Password reset for user @U%d not sent, email is empty', $p_user_id );
@@ -708,19 +708,19 @@ function email_notify_new_account( $p_username, $p_email ) {
 /**
  * Send a generic email.
  *
- * @param int        $p_bug_id                  A bug identifier.
- * @param string     $p_notify_type             Notification type, used to check who
- *                                              should get notified of such event.
- * @param int        $p_message_id              Message identifier to be translated
- *                                              and included at the top of the email message.
- * @param array|null $p_header_optional_params  Optional Parameters for $p_message_id
- *                                              (default null).
- * @param array      $p_extra_user_ids_to_email Array of additional users to email.
+ * @param int    $p_bug_id                   A bug identifier.
+ * @param string $p_notify_type              Notification type, used to check who
+ *                                           should get notified of such event.
+ * @param int    $p_message_id               Message identifier to be translated
+ *                                           and included at the top of the email message.
+ * @param array  $p_header_optional_params   Optional Parameters for $p_message_id
+ *                                           (default none).
+ * @param array   $p_extra_user_ids_to_email Array of additional users to email.
  *
  * @return void
  * @throws ClientException
  */
-function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $p_header_optional_params = null, array $p_extra_user_ids_to_email = array() ) {
+function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $p_header_optional_params = [], array $p_extra_user_ids_to_email = array() ) {
 	# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
 	# @todo yarick123:sort recipients list by language to reduce switches between different languages
 	$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
@@ -730,16 +730,16 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
 /**
  * Sends a generic email to the specific set of recipients.
  *
- * @param int        $p_bug_id                 A bug identifier
- * @param string     $p_notify_type            Notification type
- * @param array      $p_recipients             Array of recipients (key: user id, value: email address)
- * @param int        $p_message_id             Message identifier
- * @param array|null $p_header_optional_params Optional Parameters (default null)
+ * @param int     $p_bug_id                 A bug identifier
+ * @param string  $p_notify_type            Notification type
+ * @param array   $p_recipients             Array of recipients (key: user id, value: email address)
+ * @param int     $p_message_id             Message identifier
+ * @param array   $p_header_optional_params Optional Parameters (default none)
  *
  * @return void
  * @throws ClientException
  */
-function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipients, $p_message_id = null, array $p_header_optional_params = null ) {
+function email_generic_to_recipients( int $p_bug_id, string $p_notify_type, array $p_recipients, $p_message_id = null, array $p_header_optional_params = [] ) {
 	if( empty( $p_recipients ) ) {
 		return;
 	}
@@ -1254,7 +1254,7 @@ function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) 
 		}
 	}
 
-	email_generic( $p_bug_id, 'owner', $t_message_id, /* headers */ null, $t_extra_user_ids_to_email );
+	email_generic( $p_bug_id, 'owner', $t_message_id, /* headers */ [], $t_extra_user_ids_to_email );
 }
 
 /**
@@ -1287,18 +1287,18 @@ function email_bug_deleted( $p_bug_id ) {
 /**
  * Store email in queue for sending.
  *
- * @param string     $p_recipient Email recipient address.
- * @param string     $p_subject   Subject of email message.
- * @param string     $p_message   Body text of email message.
- * @param array|null $p_headers   Array of additional headers to send with the email.
- * @param bool       $p_force     True to force sending of emails in shutdown function,
- *                                even when using cronjob
- * @param array      $p_cc        Array of cc recipients.
- * @param array      $p_bcc       Array of bcc recipients.
+ * @param string $p_recipient Email recipient address.
+ * @param string $p_subject   Subject of email message.
+ * @param string $p_message   Body text of email message.
+ * @param array  $p_headers   Array of additional headers to send with the email.
+ * @param bool   $p_force     True to force sending of emails in shutdown function,
+ *                            even when using cronjob
+ * @param array  $p_cc        Array of cc recipients.
+ * @param array  $p_bcc       Array of bcc recipients.
  *
  * @return integer|null
  */
-function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null, $p_force = false, $p_cc = [], $p_bcc = [] ) {
+function email_store( string $p_recipient, string $p_subject, string $p_message, array $p_headers = [], $p_force = false, $p_cc = [], $p_bcc = [] ) {
 	global $g_email_shutdown_processing;
 
 	$t_recipient = trim( $p_recipient );
@@ -1317,7 +1317,7 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 	$t_email_data->subject = $t_subject;
 	$t_email_data->body = $t_message;
 	$t_email_data->metadata = array();
-	$t_email_data->metadata['headers'] = $p_headers === null ? array() : $p_headers;
+	$t_email_data->metadata['headers'] = $p_headers;
 	$t_email_data->metadata['cc'] = $p_cc;
 	$t_email_data->metadata['bcc'] = $p_bcc;
 
@@ -1795,7 +1795,7 @@ function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_remo
  * @return void
  * @throws ClientException
  */
-function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $p_user_id, array $p_header_optional_params = null ) {
+function email_bug_info_to_one_user( array $p_visible_bug_data, string $p_message_id, int $p_user_id, array $p_header_optional_params = [] ) {
 	$t_user_email = user_get_email( $p_user_id );
 
 	# check whether email should be sent
@@ -1810,7 +1810,7 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 	# build message
 	$t_message = lang_get_defaulted( $p_message_id );
 
-	if( is_array( $p_header_optional_params ) ) {
+	if( $p_header_optional_params ) {
 		$t_message = vsprintf( $t_message, $p_header_optional_params );
 	}
 

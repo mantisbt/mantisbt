@@ -313,9 +313,9 @@ function db_query_bound() {
  *
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
-function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1, $p_pop_param = true ) {
+function db_query( string $p_query, array $p_params = [], int $p_limit = -1, int $p_offset = -1, bool $p_pop_param = true ) {
 	# Use DbQuery class to execute the query
-	return DbQuery::compat_db_query( $p_query, $p_arr_parms, $p_limit, $p_offset, $p_pop_param );
+	return DbQuery::compat_db_query( $p_query, $p_params, $p_limit, $p_offset, $p_pop_param );
 }
 
 /**
@@ -962,7 +962,7 @@ function db_oracle_order_binds_sequentially( $p_query ) {
  *
  * @return string Query string with sorted bind variable numbers.
  */
-function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
+function db_oracle_adapt_query_syntax( $p_query, array &$p_params = [] ) {
 	# Remove "AS" keyword, because not supported with table aliasing
 	# - Do not remove text literal within "'" quotes
 	# - Will remove all "AS", except when it's part of a "CAST(x AS y)" expression
@@ -1011,7 +1011,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 	$p_query = $t_query;
 
 	# Remove null bind variables in insert statements for default values support
-	if( is_array( $p_arr_parms ) ) {
+	if( is_array( $p_params ) ) {
 		preg_match( '/^[\s\n\r]*insert[\s\n\r]+(into){0,1}[\s\n\r]+(?P<table>[a-z0-9_]+)[\s\n\r]*\([\s\n\r]*[\s\n\r]*(?P<fields>[a-z0-9_,\s\n\r]+)[\s\n\r]*\)[\s\n\r]*values[\s\n\r]*\([\s\n\r]*(?P<values>[:a-z0-9_,\s\n\r]+)\)/i', $p_query, $t_matches );
 
 		if( isset( $t_matches['values'] ) ) { #if statement is a INSERT INTO ... (...) VALUES(...)
@@ -1020,7 +1020,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 			$t_fields_left = $t_matches['fields'];
 			$t_values_left = $t_matches['values'];
 
-			for( $t_arr_index = 0; $t_arr_index < count( $p_arr_parms ); $t_arr_index++ ) {
+			for( $t_arr_index = 0; $t_arr_index < count( $p_params ); $t_arr_index++ ) {
 				# inserting fieldname search
 				if( preg_match( '/^[\s\n\r]*([a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i', $t_fields_left, $t_fieldmatch ) ) {
 					$t_fields_left = $t_fieldmatch[2];
@@ -1032,27 +1032,27 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 					$t_values_arr[$i] = $t_valuematch[1];
 				}
 				# skip unsetting if bind array value not empty
-				if( $p_arr_parms[$t_arr_index] !== '' ) {
+				if( $p_params[$t_arr_index] !== '' ) {
 					$i++;
 				} else {
 					$t_arr_index--;
 					# Shift array and unset bind array element
-					for( $n = $i + 1; $n < count( $p_arr_parms ); $n++ ) {
-						$p_arr_parms[$n-1] = $p_arr_parms[$n];
+					for( $n = $i + 1; $n < count( $p_params ); $n++ ) {
+						$p_params[$n-1] = $p_params[$n];
 					}
 					unset( $t_fields_arr[$i] );
 					unset( $t_values_arr[$i] );
-					unset( $p_arr_parms[count( $p_arr_parms ) - 1] );
+					unset( $p_params[count( $p_params ) - 1] );
 				}
 			}
 
 			# Combine statement from arrays
 			$p_query = 'INSERT INTO ' . $t_matches['table'] . ' (' . $t_fields_arr[0];
-			for( $i = 1; $i < count( $p_arr_parms ); $i++ ) {
+			for( $i = 1; $i < count( $p_params ); $i++ ) {
 				$p_query = $p_query . ', ' . $t_fields_arr[$i];
 			}
 			$p_query = $p_query . ') values (' . $t_values_arr[0];
-			for( $i = 1; $i < count( $p_arr_parms ); $i++ ) {
+			for( $i = 1; $i < count( $p_params ); $i++ ) {
 				$p_query = $p_query . ', ' . $t_values_arr[$i];
 			}
 			$p_query = $p_query . ')';
@@ -1096,11 +1096,11 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 				$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
 				$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name']. $t_matches['after_var'];
 
-				if( $p_arr_parms[$t_bind_num] === '' ) {
-					for( $n = $t_bind_num + 1; $n < count( $p_arr_parms ); $n++ ) {
-						$p_arr_parms[$n - 1] = $p_arr_parms[$n];
+				if( $p_params[$t_bind_num] === '' ) {
+					for( $n = $t_bind_num + 1; $n < count( $p_params ); $n++ ) {
+						$p_params[$n - 1] = $p_params[$n];
 					}
-					unset( $p_arr_parms[count( $p_arr_parms ) - 1] );
+					unset( $p_params[count( $p_params ) - 1] );
 					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . ' IS NULL ' . $t_matches['after_var'];
 				}
 				$p_query = str_replace( $t_search_substr, $t_replace_substr, $p_query );
@@ -1126,11 +1126,11 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 					$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] ;
 					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] ;
 
-					if( $p_arr_parms[$t_bind_num] === '' ) {
-						for( $n = $t_bind_num + 1; $n < count( $p_arr_parms ); $n++ ) {
-							$p_arr_parms[$n - 1] = $p_arr_parms[$n];
+					if( $p_params[$t_bind_num] === '' ) {
+						for( $n = $t_bind_num + 1; $n < count( $p_params ); $n++ ) {
+							$p_params[$n - 1] = $p_params[$n];
 						}
-						unset( $p_arr_parms[count( $p_arr_parms ) - 1] );
+						unset( $p_params[count( $p_params ) - 1] );
 						$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=DEFAULT ';
 					}
 					$t_removed_set_where = str_replace( $t_search_substr, $t_replace_substr, $t_removed_set_where );

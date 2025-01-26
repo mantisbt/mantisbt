@@ -687,13 +687,15 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 }
 
 /**
- * prints the profiles given the user id
- * @param integer $p_user_id   A user identifier.
- * @param integer $p_select_id ID to mark as selected; if 0, gets the user's default profile.
- * @param array   $p_profiles  Array of profiles.
+ * Prints the profiles given the user id.
+ *
+ * @param int        $p_user_id   A user identifier.
+ * @param int        $p_select_id ID to mark as selected; if 0, gets the user's default profile.
+ * @param array|null $p_profiles  Array of profiles.
+ *
  * @return void
  */
-function print_profile_option_list( $p_user_id, $p_select_id = 0, array $p_profiles = null ) {
+function print_profile_option_list( $p_user_id, $p_select_id = 0, ?array $p_profiles = null ) {
 	if( 0 == $p_select_id ) {
 		$p_select_id = profile_get_default( $p_user_id );
 	}
@@ -707,12 +709,12 @@ function print_profile_option_list( $p_user_id, $p_select_id = 0, array $p_profi
 
 /**
  * prints the profiles used in a certain project
- * @param integer $p_project_id A project identifier.
- * @param integer $p_select_id  ID to mark as selected; if 0, gets the user's default profile.
- * @param array   $p_profiles   Array of profiles.
+ * @param int        $p_project_id A project identifier.
+ * @param int        $p_select_id  ID to mark as selected; if 0, gets the user's default profile.
+ * @param array|null $p_profiles   Array of profiles.
  * @return void
  */
-function print_profile_option_list_for_project( $p_project_id, $p_select_id = 0, array $p_profiles = null ) {
+function print_profile_option_list_for_project( $p_project_id, $p_select_id = 0, ?array $p_profiles = null ) {
 	if( 0 == $p_select_id ) {
 		$p_select_id = profile_get_default( auth_get_current_user_id() );
 	}
@@ -1174,7 +1176,7 @@ function print_font_option_list( $p_font ) {
  *
  * @return void
  */
-function print_all_bug_action_option_list( array $p_project_ids = null ) {
+function print_all_bug_action_option_list( array $p_project_ids = [] ) {
 	$t_commands = bug_group_action_get_commands( $p_project_ids );
 	foreach ( $t_commands as $t_action_id => $t_action_label) {
 		echo '<option value="' . $t_action_id . '">' . $t_action_label . '</option>';
@@ -1472,7 +1474,7 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
  *
  * @return void
  */
-function print_form_button( $p_action_page, $p_label, array $p_args_to_post = null, $p_security_token = null, $p_class = '' ) {
+function print_form_button( $p_action_page, $p_label, array $p_args_to_post = [], $p_security_token = null, $p_class = '' ) {
 	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
 	# instead of via $p_action_page (GET). Then only add the CSRF form token if
 	# arguments are being sent via the POST method.
@@ -2260,7 +2262,7 @@ function print_dropzone_template(){
  * @deprecated 2.0 use {@see print_form_button()} instead
  * @see form_security_token()
  */
-function print_button( $p_action_page, $p_label, array $p_args_to_post = null, $p_security_token = null ) {
+function print_button( $p_action_page, $p_label, array $p_args_to_post = [], $p_security_token = null ) {
 	error_parameters( __FUNCTION__, 'print_form_button' );
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	print_form_button( $p_action_page, $p_label, $p_args_to_post, $p_security_token );

@@ -138,19 +138,18 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 /**
  * Cache custom fields contained within an array of field id's.
  *
- * If ids parameter is omitted, all fields will be cached.
- *
- * @param array|null $p_cf_id_array Array of custom field ids.
+ * @param array $p_cf_id_array Array of custom field ids;
+ *                             if empty, all fields will be cached.
  *
  * @return void
  *
  * @access public
  */
-function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
+function custom_field_cache_array_rows( array $p_cf_id_array = [] ): void {
 	global $g_cache_custom_field, $g_cache_name_to_id_map;
 
 	$c_cf_id_array = array();
-	$t_cache_all = ( null === $p_cf_id_array );
+	$t_cache_all = empty( $p_cf_id_array );
 
 	# cache main data
 	if( $t_cache_all ) {

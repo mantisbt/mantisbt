@@ -995,10 +995,12 @@ function filter_get_default_property( $p_filter_property, $p_view_type = null ) 
 }
 
 /**
- *  Get the standard filter that is to be used when no filter was previously saved.
- *  When creating specific filters, this can be used as a basis for the filter, where
- *  specific entries can be overridden.
- * @return mixed
+ * Get the standard filter that is to be used when no filter was previously saved.
+ *
+ * When creating specific filters, this can be used as a basis for the filter, where
+ * specific entries can be overridden.
+ *
+ * @return array
  */
 function filter_get_default() {
 	# Create empty array, validation will fill it with defaults
@@ -1007,13 +1009,16 @@ function filter_get_default() {
 }
 
 /**
- * Deserialize filter string
+ * Deserialize filter string.
+ *
  * Expected strings have this format: "<version>#<json string>" where:
- * - <version> is the versio number of the filter structure used. See constant FILTER_VERSION
+ * - <version> is the version number of the filter structure used. See constant FILTER_VERSION
  * - # is a separator
- * - <json string> is the json encoded filter array.
+ * - <json string> is the JSON-encoded filter array.
+ *
  * @param string $p_serialized_filter Serialized filter string.
- * @return mixed $t_filter array
+ *
+ * @return array|false $t_filter array
  * @see filter_ensure_valid_filter
  */
 function filter_deserialize( $p_serialized_filter ) {
@@ -1021,9 +1026,9 @@ function filter_deserialize( $p_serialized_filter ) {
 		return false;
 	}
 
-	#@TODO cproensa, we could accept a pure json array, without version prefix
-	# in this case, the filter version field inside the array is to be used
-	# and if not present, set the current filter version
+	# @TODO cproensa, we could accept a pure json array, without version prefix.
+	#       In this case, the filter version field inside the array is to be used
+	#       and if not present, set the current filter version
 
 	# check filter version mark
 	$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
@@ -1999,7 +2004,7 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
  *
  * @return array The resulting filter array.
  */
-function filter_gpc_get( array $p_filter = null ) {
+function filter_gpc_get( ?array $p_filter = null ): array {
 	# Get or copy the view_type first as it's needed to get proper defaults
 	$f_view_type = gpc_get_string( 'view_type', null );
 	if( null === $f_view_type && is_array( $p_filter ) && isset( $p_filter['_view_type'] ) ) {
@@ -2545,7 +2550,7 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
  * @return array|null A filter array
  * @throws ClientException
  */
-function filter_get( $p_filter_id, array $p_default = null ) {
+function filter_get( int $p_filter_id, ?array $p_default = null ) {
 	# if no default was provided, we will trigger an error if not found
 	$t_trigger_error = func_num_args() == 1;
 

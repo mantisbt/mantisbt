@@ -207,8 +207,8 @@ function bug_group_action_process( $p_action, $p_bug_id ) {
  *
  * @return array
  */
-function bug_group_action_get_commands( array $p_project_ids = null ) {
-	if( $p_project_ids === null || count( $p_project_ids ) == 0 ) {
+function bug_group_action_get_commands( array $p_project_ids = [] ) {
+	if( empty( $p_project_ids ) ) {
 		$p_project_ids = array( ALL_PROJECTS );
 	}
 

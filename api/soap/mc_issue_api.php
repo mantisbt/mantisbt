@@ -386,14 +386,17 @@ function mci_issue_get_due_date( BugData $p_bug ) {
 /**
  * Sets the supplied array of custom field values to the specified issue id.
  *
- * @param integer $p_issue_id       Issue id to apply custom field values to.
- * @param array   &$p_custom_fields The array of custom field values as described in the webservice complex types.
- * @param boolean $p_log_insert     Create history logs for new values.
- * @return boolean|SoapFault|RestFault true for success, otherwise fault.
+ * @param int         $p_issue_id      Issue id to apply custom field values to.
+ * @param array|null &$p_custom_fields The array of custom field values as described
+ *                                     in the webservice complex types.
+ * @param bool        $p_log_insert    Create history logs for new values.
+ *
+ * @return bool|SoapFault|RestFault true for success, otherwise fault.
+ * @throws ClientException
  */
-function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = null, $p_log_insert = true ) {
+function mci_issue_set_custom_fields( $p_issue_id, ?array &$p_custom_fields, $p_log_insert = true ) {
 	# set custom field values on the submitted issue
-	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
+	if( isset( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
 			$t_custom_field = ApiObjectFactory::objectToArray( $t_custom_field );
 

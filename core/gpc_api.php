@@ -211,11 +211,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 				$p_default = array( $p_default );
 			}
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
-			if( is_array( $t_values ) ) {
-				return implode( '|', $t_values );
-			} else {
-				return '';
-			}
+			return implode( '|', $t_values );
 		case CUSTOM_FIELD_TYPE_DATE:
 			$t_day = gpc_get_int( $p_var_name . '_day', 0 );
 			$t_month = gpc_get_int( $p_var_name . '_month', 0 );
@@ -245,7 +241,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
  *
  * @return array
  */
-function gpc_get_string_array( $p_var_name, array $p_default = null ) {
+function gpc_get_string_array( string $p_var_name, array $p_default = [] ): array {
 	# Don't pass along a default unless one was given to us
 	# otherwise we prevent an error being triggered
 	$t_args = func_get_args();
@@ -282,7 +278,7 @@ function gpc_get_string_array( $p_var_name, array $p_default = null ) {
  *
  * @return array
  */
-function gpc_get_int_array( $p_var_name, array $p_default = null ) {
+function gpc_get_int_array( string $p_var_name, array $p_default = [] ): array {
 	# Don't pass along a default unless one was given to us
 	# otherwise we prevent an error being triggered
 	$t_args = func_get_args();
@@ -313,7 +309,7 @@ function gpc_get_int_array( $p_var_name, array $p_default = null ) {
  *
  * @return array
  */
-function gpc_get_bool_array( $p_var_name, array $p_default = null ) {
+function gpc_get_bool_array( string $p_var_name, array $p_default = [] ): array {
 	# Don't pass along a default unless one was given to us
 	# otherwise we prevent an error being triggered
 	$t_args = func_get_args();

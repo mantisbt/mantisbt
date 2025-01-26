@@ -400,7 +400,7 @@ function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
  * @return int|null An integer representing sort order.
  * @access public
  */
-function category_sort_rows_by_project( $p_category1, array $p_category2 = null ) {
+function category_sort_rows_by_project( $p_category1, ?array $p_category2 = null ) {
 	static $s_project_id = null;
 	if( is_null( $p_category2 ) ) {
 		# Set a target project

@@ -434,19 +434,19 @@ function html_top_banner() {
 /**
  * Outputs a message to confirm an operation's result.
  *
- * @param array|null $p_buttons  Array of (URL, label) pairs used to generate
- *                               the buttons; if label is null or unspecified,
- *                               the default 'proceed' text will be displayed;
- *                               If the array is empty or not provided, no
- *                               buttons will be printed.
- * @param string     $p_message  Message to display to the user. If none is
- *                               provided, a default message will be printed
- * @param int        $p_type     One of the constants CONFIRMATION_TYPE_SUCCESS,
- *                               CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
+ * @param array  $p_buttons  Array of (URL, label) pairs used to generate
+ *                           the buttons; if label is null or unspecified,
+ *                           the default 'proceed' text will be displayed;
+ *                           If the array is empty or not provided, no
+ *                           buttons will be printed.
+ * @param string $p_message  Message to display to the user. If none is
+ *                           provided, a default message will be printed
+ * @param int    $p_type     One of the constants CONFIRMATION_TYPE_SUCCESS,
+ *                           CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
  *
  * @return void
  */
-function html_operation_confirmation( array $p_buttons = null, $p_message = '', $p_type = CONFIRMATION_TYPE_SUCCESS ) {
+function html_operation_confirmation( array $p_buttons = [], string $p_message = '', int $p_type = CONFIRMATION_TYPE_SUCCESS ): void {
 	switch( $p_type ) {
 		case CONFIRMATION_TYPE_FAILURE:
 			$t_alert_css = 'alert-danger';
@@ -727,7 +727,7 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
  *
  * @return void
  */
-function print_summary_submenu( $p_current_page = '' ) {
+function print_summary_submenu( string $p_current_page = '' ): void {
 	# Plugin / Event added options
 	$t_menu_items = plugin_menu_items( 'EVENT_SUBMENU_SUMMARY' );
 
@@ -941,9 +941,9 @@ function print_doc_menu( $p_page = '' ) {
  *
  * @return void
  */
-function print_summary_menu( $p_page = '', array $p_filter = null ) {
+function print_summary_menu( $p_page = '', ?array $p_filter = null ): void {
 	$t_link = 'summary_page.php';
-	$t_filter_param = $p_filter ? filter_get_temporary_key_param( $p_filter ) : null;
+	$t_filter_param = $p_filter ? filter_get_temporary_key_param( $p_filter ) : '';
 	if( $t_filter_param ) {
 		$t_link = helper_url_combine( $t_link, $t_filter_param );
 	}

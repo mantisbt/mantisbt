@@ -348,14 +348,14 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
  *                                              - array: for an array threshold
  *                                              - string: for a threshold option which will be evaluated
  *                                                for each project context
- * @param array                 $p_project_ids  Array of project ids to check access against, default to null
+ * @param array|null            $p_project_ids  Array of project ids to check access against, default to null
  *                                               to use all user accessible projects
  * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
  * @param integer               $p_limit        Maximum number of results, default is 0 for all results
  *
  * @return array                The filtered array of project ids
  */
-function access_project_array_filter( $p_access_level, array $p_project_ids = null, $p_user_id = null, $p_limit = 0 ) {
+function access_project_array_filter( $p_access_level, ?array $p_project_ids = null, ?int $p_user_id = null, int $p_limit = 0 ): array {
 	# Short circuit the check in this case
 	if( NOBODY == $p_access_level ) {
 		return array();
@@ -419,7 +419,7 @@ function access_project_array_filter( $p_access_level, array $p_project_ids = nu
  * @return bool            True if user has the specified access level in any of the projects.
  * @access public
  */
-function access_has_any_project_level( $p_access_level, array $p_project_ids = null, $p_user_id = null ) {
+function access_has_any_project_level( $p_access_level, ?array $p_project_ids = null, ?int $p_user_id = null ): bool {
 	# We only need 1 matching project to return positive
 	$t_matches = access_project_array_filter( $p_access_level, $p_project_ids, $p_user_id, 1 );
 	return !empty( $t_matches );
@@ -434,7 +434,7 @@ function access_has_any_project_level( $p_access_level, array $p_project_ids = n
  * @param array|null       $p_project_ids  Array of project ids to check access against.
  * @param int|null         $p_user_id      User id, defaults to null to use current user.
  */
-function access_ensure_any_project_level( $p_access_level, array $p_project_ids = null, $p_user_id = null ) {
+function access_ensure_any_project_level( $p_access_level, ?array $p_project_ids = null, ?int $p_user_id = null ): void {
 	if( !access_has_any_project_level( $p_access_level, $p_project_ids, $p_user_id ) ) {
 		access_denied();
 	}
