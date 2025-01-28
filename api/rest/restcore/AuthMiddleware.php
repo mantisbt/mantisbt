@@ -64,7 +64,7 @@ class AuthMiddleware {
 				$t_password = '';
 				$t_login_method = LOGIN_METHOD_ANONYMOUS;
 				if( !auth_anonymous_enabled() || empty( $t_username ) ) {
-					return $response->withStatus( HTTP_STATUS_UNAUTHORIZED, 'API token required' );
+					return $response->withStatus( HTTP_STATUS_UNAUTHORIZED, 'Valid API token required' );
 				}
 			}
 		}
