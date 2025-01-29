@@ -24,6 +24,8 @@ td.category .small, th.category .small	{ font-weight: normal;  }
 }
 tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px; }
 
+/* Issue Summary at bug_report_page.php, bug_update_page.php */
+input[type="text"]#summary { width: 100%; }
 
 /**
  * view_all_bug_page.php
