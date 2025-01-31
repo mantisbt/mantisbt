@@ -23,9 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-# Include PHPUnit dependencies ; ensure compatibility with 3.5 and 3.6
-@include_once 'PHPUnit/Framework.php';
-
 /**
  * Parse file and retrieve distinct T_VARIABLE tokens with 'g_' prefix
  *

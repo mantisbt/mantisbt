@@ -23,11 +23,10 @@
  * @link http://www.mantisbt.org
  */
 
-/**
- * Includes
- */
-require_once 'MantisCoreBase.php';
+namespace Mantis\tests\Mantis;
 
+use ConfigParser;
+use Exception;
 use PHPUnit\Framework\Constraint\IsType;
 
 

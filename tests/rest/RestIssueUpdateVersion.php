@@ -1,4 +1,5 @@
 <?php
+namespace Mantis\tests\rest;
 
 use Psr\Http\Message\ResponseInterface;
 

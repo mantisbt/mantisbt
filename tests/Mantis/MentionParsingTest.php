@@ -23,10 +23,11 @@
  * @link http://www.mantisbt.org
  */
 
+namespace Mantis\tests\Mantis;
+
 /**
  * Includes
  */
-require_once 'MantisCoreBase.php';
 require_api( 'mention_api.php' );
 
 /**

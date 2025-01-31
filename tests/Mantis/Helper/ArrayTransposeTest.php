@@ -24,9 +24,12 @@
 
 declare( strict_types = 1 );
 
-use Mantis\Exceptions\ClientException;
+namespace Mantis\tests\Mantis\Helper;
 
-require_once dirname( __DIR__ ) . '/MantisCoreBase.php';
+use Generator;
+use Mantis\Exceptions\ClientException;
+use Mantis\tests\Mantis\MantisCoreBase;
+
 
 /**
  * Test for helper_api::helper_array_transpose

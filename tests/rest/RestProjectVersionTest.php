@@ -24,7 +24,9 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'RestBase.php';
+namespace Mantis\tests\rest;
+
+use DateTimeImmutable;
 
 /**
  * Test fixture for project related APIs.

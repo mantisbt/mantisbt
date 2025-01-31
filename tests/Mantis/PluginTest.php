@@ -23,8 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-# Includes
-require_once 'MantisCoreBase.php';
+namespace Mantis\tests\Mantis;
 
 /**
  * Helper API tests

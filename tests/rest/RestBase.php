@@ -23,8 +23,11 @@
  * @link http://www.mantisbt.org
  */
 
+namespace Mantis\tests\rest;
+
+use Mantis\tests\core\MantisTestCase;
+use Mantis\tests\core\RequestBuilder;
 use GuzzleHttp\Exception\GuzzleException;
-use PHPUnit\Framework\TestCase;
 
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
@@ -32,18 +35,13 @@ require_once dirname( __DIR__ ) . '/TestConfig.php';
 # MantisBT Core API
 require_mantis_core();
 
-require_once( __DIR__ . '/../../vendor/autoload.php' );
-require_once ( __DIR__ . '/../../core/constant_inc.php' );
-require_once __DIR__ . '/../core/RequestBuilder.php';
-require_once __DIR__ . '/../core/Faker.php';
-
 /**
  * Base class for REST API test cases
  *
  * @requires extension curl
  * @group REST
  */
-abstract class RestBase extends TestCase {
+abstract class RestBase extends MantisTestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
@@ -200,7 +198,7 @@ abstract class RestBase extends TestCase {
 	 * @return array
 	 */
 	protected function getIssueToAdd( $p_suffix = '' ) {
-		$t_summary = $this->toString();
+		$t_summary = $this->getTestName();
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}

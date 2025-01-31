@@ -23,7 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'RestBase.php';
+namespace Mantis\tests\rest;
+
+use Mantis\tests\core\Faker;
 
 /**
  * Test fixture for user update webservice methods.
