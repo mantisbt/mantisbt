@@ -1,0 +1,98 @@
+name: mantisbt/mantisbt
+on:
+  push:
+    branches:
+    - "**/*"
+    - master
+    - "/master-[0-9.]+/"
+  pull_request:
+concurrency:
+#   # This item has no matching transformer
+#   maximum_number_of_builds: 0
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.0
+    - uses: shivammathur/setup-php@2.29.0
+      with:
+        tools: phpunit
+        php-version: "${{ matrix.php }}"
+    - run: composer install
+    - run: chmod +x "${{ github.workspace }}/tests/fakesendmail.sh"
+    - run: echo 'sendmail_path = ${{ github.workspace }}/tests/fakesendmail.sh' > ./tests/sendmail.ini
+    - run: phpenv config-add ./tests/sendmail.ini
+    - run: "./build/travis_before_script.sh"
+    - run: "./build/travis_script.sh"
+#     # This item has no matching transformer
+#     - email:
+#         on_success: change
+#         on_failure: always
+    - uses: rectalogic/notify-irc@v1
+      if: "${{ github.event_name != 'pull_request' }}"
+      with:
+        server: chat.freenode.net
+        port: 6697
+        channel: mantisbt
+        nickname: Default nickname
+        message: |-
+          Build #%{build_number}: %{repository} %{branch} (%{commit}) %{author} - %{message}
+          Build details: %{build_url}
+          Code Changes: %{compare_url}
+    strategy:
+      matrix:
+        DB:
+        - mysql
+        - pgsql
+        php:
+        - 8.3
+        - 8.2
+        - 8.1
+        - 8.0
+        - 7.4
+#       # 'allow_failures' transformations are currently unsupported.
+    services:
+      postgresql:
+        image: postgres
+      mysql:
+        image: mysql
+    env:
+      DB: "${{ matrix.DB }}"
+  Documentation:
+    runs-on: ubuntu-20.04
+    env:
+      DOCBOOK: '1'
+      DB: mysql
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.0
+    - run: apt-get -y install publican
+    - run: composer install
+    - run: chmod +x "${{ github.workspace }}/tests/fakesendmail.sh"
+    - run: echo 'sendmail_path = ${{ github.workspace }}/tests/fakesendmail.sh' > ./tests/sendmail.ini
+    - run: phpenv config-add ./tests/sendmail.ini
+    - run: "./build/travis_before_script.sh"
+    - run: "./build/travis_script.sh"
+#     # This item has no matching transformer
+#     - email:
+#         on_success: change
+#         on_failure: always
+    - uses: rectalogic/notify-irc@v1
+      if: "${{ github.event_name != 'pull_request' }}"
+      with:
+        server: chat.freenode.net
+        port: 6697
+        channel: mantisbt
+        nickname: Default nickname
+        message: |-
+          Build #%{build_number}: %{repository} %{branch} (%{commit}) %{author} - %{message}
+          Build details: %{build_url}
+          Code Changes: %{compare_url}
+    services:
+      postgresql:
+        image: postgres
+      mysql:
+        image: mysql
