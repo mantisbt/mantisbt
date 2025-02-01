@@ -479,12 +479,12 @@ if( 2 == $t_install_state ) {
 	</td>
 	<?php
 		$t_url_check = '';
+		$t_hard_fail = false;
 		if( !$f_path ) {
 			# Empty URL - warn admin about security risk
 			$t_url_check = "Using an empty path is a security risk, as MantisBT "
 				. "will dynamically set it based on headers from the HTTP request, "
 				. "exposing your system to Host Header Injection attacks.";
-			$t_hard_fail = false;
 		} else {
 			# Make sure we have a trailing '/'
 			$f_path = rtrim( $f_path, '/' ) . '/';
@@ -492,6 +492,7 @@ if( 2 == $t_install_state ) {
 			# Check that the URL is valid
 			if( !filter_var( $f_path, FILTER_VALIDATE_URL ) ) {
 				$t_url_check = "'$f_path' is not a valid URL.";
+				$t_hard_fail = true;
 			} else {
 				require_api( 'url_api.php' );
 				$t_page_contents = url_get( $f_path );
@@ -500,8 +501,10 @@ if( 2 == $t_install_state ) {
 				} elseif( false === strpos( $t_page_contents, 'MantisBT') ) {
 					$t_url_check = "Web page at '$f_path' does not appear to be a MantisBT site.";
 				}
+				if( $t_url_check ) {
+					$t_url_check .= "<br>The system will not function properly if this URL is not accessible.";
+				}
 			}
-			$t_hard_fail = true;
 		}
 
 		print_test_result( $t_url_check ? BAD : GOOD, $t_hard_fail, $t_url_check );
