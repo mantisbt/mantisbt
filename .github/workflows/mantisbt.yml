@@ -42,15 +42,13 @@ jobs:
       with:
         php-version: "${{ matrix.php }}"
         tools: phpunit
+        ini-values: |
+          sendmail_path=${{ github.workspace }}/tests/fakesendmail.sh
 
     - name: checkout
       uses: actions/checkout@v4.1.0
 
     - run: composer install
-
-    - run: chmod +x "${{ github.workspace }}/tests/fakesendmail.sh"
-    - run: echo 'sendmail_path = ${{ github.workspace }}/tests/fakesendmail.sh' > ./tests/sendmail.ini
-    - run: phpenv config-add ./tests/sendmail.ini
 
     - run: "./build/travis_before_script.sh"
 
@@ -72,9 +70,6 @@ jobs:
       uses: actions/checkout@v4.1.0
     - run: apt-get -y install publican
     - run: composer install
-    - run: chmod +x "${{ github.workspace }}/tests/fakesendmail.sh"
-    - run: echo 'sendmail_path = ${{ github.workspace }}/tests/fakesendmail.sh' > ./tests/sendmail.ini
-    - run: phpenv config-add ./tests/sendmail.ini
     - run: "./build/travis_before_script.sh"
     - run: "./build/travis_script.sh"
     services:
