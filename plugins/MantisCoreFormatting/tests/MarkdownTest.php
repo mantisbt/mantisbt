@@ -14,8 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-require_once( dirname( __DIR__ ) . '/../../tests/TestConfig.php' );
-require_once( dirname( __DIR__ ) . '/core/MantisMarkdown.php' );
+namespace Mantis\plugins\MantisCoreFormatting\tests;
+
+use Generator;
+use MantisMarkdown;
+use PHPUnit\Framework\TestCase;
+use TypeError;
+
+require_once( dirname( __DIR__, 3 ) . '/tests/TestConfig.php' );
 
 # MantisBT Core API
 require_mantis_core();
@@ -30,7 +36,7 @@ require_mantis_core();
  *
  * @covers MantisMarkdown
  */
-class MarkdownTest extends PHPUnit\Framework\TestCase {
+class MarkdownTest extends TestCase {
 
 	private ?MantisMarkdown $parser = null;
 
