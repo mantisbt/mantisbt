@@ -24,6 +24,8 @@
 
 namespace Mantis\tests\rest;
 
+use stdClass;
+
 /**
  * Test fixture for project APIs.
  *
