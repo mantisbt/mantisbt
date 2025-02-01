@@ -30,10 +30,30 @@ require_api( 'user_api.php' );
  */
 class AuthMiddleware {
 	public function __invoke( \Slim\Http\Request $request, \Slim\Http\Response $response, callable $next ) {
-		$t_authorization_header = $request->getHeaderLine( HEADER_AUTHORIZATION );
 
-		if( empty( $t_authorization_header ) ) {
-			# Since authorization header is empty, check if user is authenticated by checking the cookie
+		# Check if user is authenticated by API token
+		$t_authorization_header = $request->getHeaderLine( HEADER_AUTHORIZATION );
+		if( !empty( $t_authorization_header ) ) {
+			# TODO: add an index on the token hash for the method below
+
+			# Manage multiple authorization header (ex: Basic + token)
+			$t_authorization_headers = explode(', ', $t_authorization_header);
+
+			# Search for the token among the different authorization headers.
+			foreach( $t_authorization_headers as $t_api_token ) {
+				$t_user_id = api_token_get_user( $t_api_token );
+				if( $t_user_id !== false ) {
+					# Valid token found
+					$t_username = user_get_username( $t_user_id );
+					$t_password = $t_api_token;
+					$t_login_method = LOGIN_METHOD_API_TOKEN;
+					break;
+				}
+			}
+		}
+
+		if( !isset( $t_login_method ) ) {
+			# Check if user is authenticated by cookie
 			# This mode is used when Web UI javascript calls into the API.
 			if( auth_is_user_authenticated() ) {
 				$t_username = user_get_username( auth_get_current_user_id() );
@@ -41,40 +61,12 @@ class AuthMiddleware {
 				$t_login_method = LOGIN_METHOD_COOKIE;
 			} else {
 				$t_username = auth_anonymous_account();
-
-				if( !auth_anonymous_enabled() || empty( $t_username ) ) {
-					return $response->withStatus( HTTP_STATUS_UNAUTHORIZED, 'API token required' );
-				}
-
-				$t_login_method = LOGIN_METHOD_ANONYMOUS;
 				$t_password = '';
-			}
-		} else {
-			# TODO: add an index on the token hash for the method below
-
-			# Manage multiple authorization header (ex: Basic + token)
-			$t_authorization_headers = explode(', ', $t_authorization_header);
-			$t_user_id = false;
-			$t_api_token  = '';
-
-			# Search for the token among the different authorization headers. 
-			foreach( $t_authorization_headers as $value ) {
-				$t_user_id = api_token_get_user( $value );
-				if( $t_user_id !== false ) {
-					# Valid token found
-					$t_api_token = $value;
-					break;
+				$t_login_method = LOGIN_METHOD_ANONYMOUS;
+				if( !auth_anonymous_enabled() || empty( $t_username ) ) {
+					return $response->withStatus( HTTP_STATUS_UNAUTHORIZED, 'Valid API token required' );
 				}
 			}
-
-			if( $t_user_id === false ) {
-				return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'API token not found' );
-			}
-
-			# use api token
-			$t_login_method = LOGIN_METHOD_API_TOKEN;
-			$t_password = $t_api_token;
-			$t_username = user_get_username( $t_user_id );
 		}
 
 		if( mci_check_login( $t_username, $t_password ) === false ) {

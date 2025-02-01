@@ -558,6 +558,10 @@ input.typeahead.scrollable ~ .tt-menu {
     cursor: pointer;
 }
 
+.dropzone > span {
+    white-space: normal;
+}
+
 /* ------------------------------------------------------------------------ */
 
 .btn-group .single-button-form {
