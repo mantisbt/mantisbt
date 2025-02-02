@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
@@ -34,7 +35,14 @@ jobs:
           - 8.1
           - 8.0
           - 7.4
-          # 'allow_failures' transformations are currently unsupported.
+        experimental: [false]
+        include:
+          - php: 8.4
+            DB: mysqli
+            experimental: true
+          - php: 8.4
+            DB: pgsql
+            experimental: true
 
     env:
       HOSTNAME: localhost
