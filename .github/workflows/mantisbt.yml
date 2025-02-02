@@ -97,7 +97,8 @@ jobs:
     - name: Post-installation steps
       run: ./build/ci_post_install.sh
 
-    - run: "./build/travis_before_script.sh"
+    - name: Run test suite
+      run: vendor/bin/phpunit
 
   Documentation:
     runs-on: ubuntu-20.04
