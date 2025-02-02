@@ -88,6 +88,27 @@ jobs:
         # Write access to config dir needed for installer to create config_inc.php
         chmod 777 config/
 
+    - name: Install MantisBT
+      id: install
+      uses: indiesdev/curl@v1.1
+      with:
+        url: http://${{env.HOSTNAME}}:${{env.PORT}}/admin/install.php
+        method: "POST"
+        params: |
+          install: 2
+          db_type: ${{matrix.DB}}
+          hostname: ${{env.HOSTNAME}}
+          database_name: ${{env.DB_NAME}}
+          db_username: ${{env.DB_USER}}
+          db_password: ${{env.DB_PASSWORD}}
+          admin_username: ${{env.DB_USER}}
+          admin_password: ${{env.DB_PASSWORD}}
+          timezone: UTC
+          path: 
+        log-response: true
+    - name: Log installer output
+      run: echo '${{ fromJSON(steps.install.outputs.response)['data'] }}'
+
     - run: "./build/travis_before_script.sh"
 
   Documentation:
