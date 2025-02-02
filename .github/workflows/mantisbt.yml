@@ -96,6 +96,7 @@ jobs:
       with:
         url: http://${{env.HOSTNAME}}:${{env.PORT}}/admin/install.php
         method: "POST"
+        timeout: 120000
         params: |
           install: 2
           db_type: ${{matrix.DB}}
