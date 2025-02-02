@@ -1,14 +1,16 @@
 # -----------------------------------------------------------------------------
 # MantisBT GitHub Actions Worflow to run PHPUnit tests
+#
+# Tests will be triggered on
+# - direct pushes to branches (except dependabot)
+# - pull requests
 # -----------------------------------------------------------------------------
 
 name: MantisBT unit tests
 on:
   push:
-    branches:
-    - master
-    - "master-[0-9]+.[0-9]+"
-    - "**"
+    branches-ignore:
+      - dependabot/**   # Only build dependabot branches on PRs
   pull_request:
 
 concurrency:
