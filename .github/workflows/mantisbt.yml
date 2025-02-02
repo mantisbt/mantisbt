@@ -24,7 +24,8 @@ jobs:
     strategy:
       matrix:
         DB:
-          - mysql
+          # Database to test with (= name of the ADOdb driver)
+          - mysqli
           - pgsql
         php:
           - 8.3
@@ -60,7 +61,7 @@ jobs:
     - run: composer install
 
     - name: Initialize MySQL
-      if: ${{ matrix.DB == 'mysql' }}
+      if: ${{ matrix.DB == 'mysqli' }}
       run: |
         sudo systemctl start mysql.service
         # Using -p for password triggers warnings, but these can be ignored 
