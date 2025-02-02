@@ -23,9 +23,9 @@ $g_phpMailer = null;
 require_once( __DIR__ . DIRECTORY_SEPARATOR . 'EmailSender.class.php' );
 
 /**
- * An implementation that sends out emails
+ * An implementation that sends out emails using PhpMailer library.
  */
-class EmailSenderSmtp extends EmailSender {
+class EmailSenderPhpMailer extends EmailSender {
 	/**
 	 * Send an email
 	 *
@@ -80,8 +80,7 @@ class EmailSenderSmtp extends EmailSender {
 
 				if( is_blank( config_get( 'smtp_connection_mode' ) ) ) {
 					$t_mail->SMTPAutoTLS = false;
-				}
-				else {
+				} else {
 					$t_mail->SMTPSecure = config_get( 'smtp_connection_mode' );
 				}
 
