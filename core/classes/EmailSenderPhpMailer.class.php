@@ -113,7 +113,7 @@ class EmailSenderPhpMailer extends EmailSender {
 		$t_mail->isHTML( false );
 		$t_mail->WordWrap = 80;
 
-		$t_mail->CharSet = $p_message->hostname;
+		$t_mail->CharSet = $p_message->charset;
 		$t_mail->Host = config_get( 'smtp_host' );
 		$t_mail->From = config_get( 'from_email' );
 		$t_mail->Sender = config_get( 'return_path_email' );
@@ -128,10 +128,6 @@ class EmailSenderPhpMailer extends EmailSender {
 		}
 
 		$t_mail->Encoding = 'quoted-printable';
-
-		if( isset( $t_email_data->metadata['priority'] ) ) {
-			$t_mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
-		}
 
 		$t_log_msg = 'Error: message could not be sent - ';
 
