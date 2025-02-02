@@ -94,6 +94,9 @@ jobs:
     - name: Install MantisBT
       run: ./build/ci_install_mantis.sh
 
+    - name: Post-installation steps
+      run: ./build/ci_post_install.sh
+
     - run: "./build/travis_before_script.sh"
 
   Documentation:
