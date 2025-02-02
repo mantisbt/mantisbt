@@ -35,6 +35,8 @@ jobs:
           # 'allow_failures' transformations are currently unsupported.
 
     env:
+      HOSTNAME: localhost
+      PORT: 8080
       DB_NAME: bugtracker
       DB_USER: root
       DB_PASSWORD: root
@@ -48,6 +50,7 @@ jobs:
         php-version: "${{ matrix.php }}"
         tools: phpunit
         ini-values: |
+          opcache.jit=disable,
           sendmail_path=${{ github.workspace }}/tests/fakesendmail.sh
 
     - name: Checkout MantisBT Repository
@@ -76,6 +79,14 @@ jobs:
         $DB_CMD -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER"
         # Make the DB execution command available to subsequent steps
         echo "DB_CMD=$DB_CMD $DB_NAME -c " >> "$GITHUB_ENV"
+
+    - name: Start webserver
+      run: |
+        nohup php -S ${{env.HOSTNAME}}:${{env.PORT}} &
+        sleep 1
+        echo "PHP built-in webserver started with PID $!"
+        # Write access to config dir needed for installer to create config_inc.php
+        chmod 777 config/
 
     - run: "./build/travis_before_script.sh"
 
