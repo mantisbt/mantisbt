@@ -90,7 +90,7 @@ jobs:
 
     - name: Install MantisBT
       id: install
-      uses: indiesdev/curl@v1.1
+      uses: cyberman54/curl@v1.3
       with:
         url: http://${{env.HOSTNAME}}:${{env.PORT}}/admin/install.php
         method: "POST"
