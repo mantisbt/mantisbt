@@ -690,6 +690,17 @@ $g_show_user_email_threshold = NOBODY;
 $g_show_user_realname_threshold = NOBODY;
 
 /**
+ * Email Send Provider
+ *
+ * The name of the Email Send Provider to use. It is expected for providers
+ * to be found under `core/classes/EmailSender.ProviderName.class.php`. MantisBT
+ * comes with `PhpMailer` provider.
+ *
+ * @global string $g_email_send_provider
+ */
+$g_email_send_provider = 'PhpMailer';
+
+/**
  * Select the method to mail by.
  *
  * Possible values are:
@@ -5209,6 +5220,7 @@ $g_global_settings = array(
 	'email_ensure_unique',
 	'email_login_enabled',
 	'email_retry_in_days',
+	'email_send_provider',
 	'email_smime_cert_file',
 	'email_smime_enable',
 	'email_smime_extracerts_file',

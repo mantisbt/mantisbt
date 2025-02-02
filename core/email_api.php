@@ -78,7 +78,6 @@ require_api( 'utility_api.php' );
 
 require_once( __DIR__ . '/classes/EmailMessage.class.php' );
 require_once( __DIR__ . '/classes/EmailSender.class.php' );
-require_once( __DIR__ . '/classes/EmailSender.PhpMailer.class.php' );
 
 # PHPMailer is needed for email address validation independent of the provider used
 # to send the emails.
@@ -1469,7 +1468,7 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	try {
-		$t_sender = new EmailSenderSmtp();
+		$t_sender = email_create_provider();
 		$t_success = $t_sender->send( $t_msg );
 
 		# if email is sent successfully, then delete it from the queue
@@ -1481,6 +1480,31 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	return $t_success;
+}
+
+/**
+ * Create Email Send Provider object.
+ *
+ * @return EmailSender The email sender instance to use.
+ * @throws Exception If configured provider can't be found.
+ */
+function email_create_provider() : EmailSender {
+	$t_email_provider = config_get( 'email_send_provider' );
+
+	$t_file_path = __DIR__ . '/classes/EmailSender' . $t_email_provider . '.class.php';
+	if( !file_exists( $t_file_path ) ) {
+		throw new Exception( "Email Send Provider file not found: '$t_file_path'");
+	}
+
+	require_once $t_file_path;
+
+	$t_class_name = 'EmailSender' . $t_email_provider;
+
+	if( !class_exists( $t_class_name ) ) {
+		throw new Exception("Email Send Provider class not found: '$className'");
+	}
+
+	return new $t_class_name();
 }
 
 /**
