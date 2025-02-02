@@ -35,31 +35,49 @@ jobs:
           # 'allow_failures' transformations are currently unsupported.
 
     env:
-      DB: "${{ matrix.DB }}"
+      DB_NAME: bugtracker
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_HOST: localhost
 
     steps:
-    - uses: shivammathur/setup-php@2.29.0
+    - name: Setup PHP
       # https://setup-php.com/
+      uses: shivammathur/setup-php@2.29.0
       with:
         php-version: "${{ matrix.php }}"
         tools: phpunit
         ini-values: |
           sendmail_path=${{ github.workspace }}/tests/fakesendmail.sh
 
-    - name: checkout
+    - name: Checkout MantisBT Repository
       uses: actions/checkout@v4.1.0
 
     - run: composer install
 
+    - name: Initialize MySQL
+      if: ${{ matrix.DB == 'mysql' }}
+      run: |
+        sudo systemctl start mysql.service
+        # Using -p for password triggers warnings, but these can be ignored 
+        DB_CMD="mysql -u$DB_USER -p$DB_PASSWORD"
+        $DB_CMD -e "CREATE DATABASE $DB_NAME"
+        # Make the DB execution command available to subsequent steps
+        echo "DB_CMD=$DB_CMD $DB_NAME -e " >> "$GITHUB_ENV"
+
+    - name: Initialize PostgreSQL
+      if: ${{ matrix.DB == 'pgsql' }}
+      run: |
+        sudo systemctl start postgresql.service
+        pg_isready
+        DB_CMD="sudo -u postgres psql"
+        sudo -u postgres createdb $DB_NAME
+        $DB_CMD -c "CREATE USER $DB_USER WITH SUPERUSER CREATEDB CREATEROLE INHERIT LOGIN PASSWORD '$DB_PASSWORD'"
+        $DB_CMD -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER"
+        # Make the DB execution command available to subsequent steps
+        echo "DB_CMD=$DB_CMD $DB_NAME -c " >> "$GITHUB_ENV"
+
     - run: "./build/travis_before_script.sh"
-
-    - run: "./build/travis_script.sh"
-
-    services:
-      postgresql:
-        image: postgres
-      mysql:
-        image: mysql
 
   Documentation:
     runs-on: ubuntu-20.04
