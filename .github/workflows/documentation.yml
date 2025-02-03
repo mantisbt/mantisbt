@@ -24,11 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
-    strategy:
-      matrix:
-        docbook:
-          - Admin_Guide
-          - Developers_Guide
+    env:
+      DOCBOOKS: Admin_Guide Developers_Guide
 
     steps:
       - name: Checkout MantisBT Repository
@@ -40,8 +37,12 @@ jobs:
           packages: publican
           version: 1.0
 
-      - name: Build ${{ matrix.docbook }} Docbook
+      - name: Build Docbooks
         run: |
-          pwd
-          cd docbook/${{ matrix.docbook }}
-          make
+          for BOOK in $DOCBOOKS
+          do
+              echo "Building '$BOOK'..."
+              pushd docbook/$BOOK
+              make
+              popd
+          done
