@@ -36,6 +36,7 @@ jobs:
         with:
           packages: publican
           version: 1.0
+          execute_install_scripts: true
 
       - name: Build Docbooks
         run: |
