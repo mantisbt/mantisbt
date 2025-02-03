@@ -41,8 +41,9 @@ jobs:
         run: |
           for BOOK in $DOCBOOKS
           do
-              echo "Building '$BOOK'..."
-              pushd docbook/$BOOK
+              echo "::group::Building '$BOOK'..."
+              pushd docbook/$BOOK >/dev/null
               make
-              popd
+              popd  >/dev/null
+              echo "::endgroup::"
           done
