@@ -110,21 +110,3 @@ jobs:
 
     - name: Run test suite
       run: vendor/bin/phpunit
-
-  Documentation:
-    runs-on: ubuntu-20.04
-    env:
-      DOCBOOK: '1'
-      DB: mysql
-    steps:
-    - name: checkout
-      uses: actions/checkout@v4.1.0
-    - run: apt-get -y install publican
-    - run: composer install
-    - run: "./build/travis_before_script.sh"
-    - run: "./build/travis_script.sh"
-    services:
-      postgresql:
-        image: postgres
-      mysql:
-        image: mysql

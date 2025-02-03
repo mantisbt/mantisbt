@@ -1,0 +1,47 @@
+# -----------------------------------------------------------------------------
+# MantisBT GitHub Actions Worflow to build Documentation
+#
+# Will only run if DocBook files have been changed.
+# -----------------------------------------------------------------------------
+
+name: MantisBT Documentation
+on:
+  push:
+    paths:
+      - "docbook/*/en-US/**"
+      - "docbook/*/publican.cfg"
+  pull_request:
+    paths:
+      - "docbook/*/en-US/**"
+      - "docbook/*/publican.cfg"
+
+concurrency:
+  group: doc-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  Documentation:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    strategy:
+      matrix:
+        docbook:
+          - Admin_Guide
+          - Developers_Guide
+
+    steps:
+      - name: Checkout MantisBT Repository
+        uses: actions/checkout@v4
+
+      - name: Install Publican toolchain
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: publican
+          version: 1.0
+
+      - name: Build ${{ matrix.docbook }} Docbook
+        run: |
+          pwd
+          cd docbook/${{ matrix.docbook }}
+          make
