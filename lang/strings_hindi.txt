@@ -40,6 +40,7 @@
  *
  * @author Ajaysajay
  * @author AnupamM
+ * @author Bunnypranav
  * @author Phoenix303
  * @author Prong$31
  * @author Saurmandal
@@ -359,7 +360,7 @@ $s_amount = 'राशि';
 $s_total_owing = 'कुल देय';
 $s_total_paid = 'कुल भुगतान';
 $s_sponsor_hide = 'समाधान-प्राप्त और भुगतान-प्राप्त को छिपाएं';
-$s_sponsor_show = 'सभी दिखाएं';
+$s_sponsor_show = 'सभी दिखाएँ';
 $s_payment_updated = 'भुगतान का विवरण परिवर्धित कर दिया गया है।';
 $s_account_updated_msg = 'आपका खाता सफलतापूर्वक परिवर्धित कर दिया गया है...';
 $s_email_updated = 'ई-मेल पते को सफलतापूर्वक परिवर्तित कर दिया गया है';
