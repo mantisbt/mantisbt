@@ -11,7 +11,11 @@ on:
   push:
     branches-ignore:
       - dependabot/**   # Only build dependabot branches on PRs
+    paths-ignore:
+      - docbook/**
   pull_request:
+    paths-ignore:
+      - docbook/**
 
 concurrency:
   group: ci-${{ github.ref }}

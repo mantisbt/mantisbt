@@ -8,10 +8,12 @@ name: MantisBT Documentation
 on:
   push:
     paths:
+      - .github/workflows/documentation.yml
       - "docbook/*/en-US/**"
       - "docbook/*/publican.cfg"
   pull_request:
     paths:
+      - .github/workflows/documentation.yml
       - "docbook/*/en-US/**"
       - "docbook/*/publican.cfg"
 
