@@ -353,16 +353,6 @@ $g_notify_flags['acknowledged'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_email_send_provider</term>
-			<listitem>
-				<para>
-					The name of the Email Send Provider to use. It is expected for providers
-					to be found under `core/classes/EmailSender.ProviderName.class.php`.
-					MantisBT comes with `PhpMailer` provider.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_phpMailer_method</term>
 			<listitem>
 				<para>Select the method to send mail:
