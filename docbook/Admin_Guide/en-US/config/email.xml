@@ -325,18 +325,21 @@ $g_notify_flags['new'] = array(
 					<itemizedlist>
 						<listitem><para>
 							<emphasis>PHPMAILER_METHOD_MAIL</emphasis>
-							for use of mail() function,
+							for use of PHP built-in mail() function,
 						</para></listitem>
 						<listitem><para>
 							<emphasis>PHPMAILER_METHOD_SENDMAIL</emphasis>
-							for sendmail (or postfix),
+							for "sendmail" (or any sendmail-compatible mail transfer agent, e.g. postfix, DMA, etc.),
 						</para></listitem>
 						<listitem><para>
 							<emphasis>PHPMAILER_METHOD_SMTP</emphasis>
-							for SMTP,
+							for SMTP.
 						</para></listitem>
 					</itemizedlist>
-					Default is PHPMAILER_METHOD_MAIL.
+					Default is PHPMAILER_METHOD_MAIL because, despite of its issues, PHP's mail()
+					function has the advantage of being cross-platform (e.g. no sendmail on Windows)
+					and as long as PHP is configured properly it will generally work out-of-the-box.
+					On UNIX-like operating systems, it is usually better to use a different option.
 				</para>
 			</listitem>
 		</varlistentry>
