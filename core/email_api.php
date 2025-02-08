@@ -1489,22 +1489,13 @@ function email_send( EmailData $p_email_data ) : bool {
  * @throws Exception If configured provider can't be found.
  */
 function email_create_provider() : EmailSender {
-	$t_email_provider = config_get( 'email_send_provider' );
-
-	$t_file_path = __DIR__ . '/classes/EmailSender' . $t_email_provider . '.class.php';
-	if( !file_exists( $t_file_path ) ) {
-		throw new Exception( "Email Send Provider file not found: '$t_file_path'" );
+	$t_provider = event_signal( 'EVENT_EMAIL_CREATE_SEND_PROVIDER', [] );
+	if( is_null( $t_provider ) ) {
+		require_once __DIR__ . '/classes/EmailSenderPhpMailer.class.php';
+		return new EmailSenderPhpMailer();
 	}
 
-	require_once $t_file_path;
-
-	$t_class_name = 'EmailSender' . $t_email_provider;
-
-	if( !class_exists( $t_class_name ) ) {
-		throw new Exception( "Email Send Provider class not found: '$t_class_name'" );
-	}
-
-	return new $t_class_name();
+	return $t_provider;
 }
 
 /**
