@@ -441,11 +441,23 @@ git merge master
 			The <emphasis>Test.php</emphasis> suffix allows the script to be
 			automatically picked up by PHPUnit when running the Test Suite.
 			Without this suffix, the new script will have to be
-			<ulink url="https://docs.phpunit.de/en/8.5/configuration.html#the-testsuite-element">
+			<ulink url="https://docs.phpunit.de/en/9.6/configuration.html#the-testsuite-element">
 				declared manually</ulink>
 			with a <literal>&lt;file&gt;</literal> tag
 			in the <literal>phpunit.xml</literal> file's
 			relevant <literal>&lt;testsuite&gt;</literal> section.
+		</para>
+		<para>Since
+			<ulink url="https://mantisbt.org/bugs/view.php?id=35259">MantisBT 2.28.0</ulink>
+			the test suite is
+			<ulink url="https://www.php.net/manual/en/language.namespaces.rationale.php">namespaced</ulink>.
+
+			The main namespace is <literal>Mantis\tests</literal>
+			with global helper classes in <literal>Mantis\tests\core</literal>
+			and subnamespaces for each test suite (<literal>Mantis</literal>,
+			<literal>rest</literal> and <literal>soap</literal>).
+			It is possible to further break down the namespace hierarchy, to regroup
+			related test cases e.g. <literal>Mantis\tests\Mantis\Helper</literal>.
 		</para>
 
 		<section id="dev.contrib.test.setup">
@@ -465,7 +477,8 @@ git merge master
 							you have the appropriate version to run the unit tests.
 						</para>
 						<para>It is also possible to use another instance of
-							PHPUnit, in which case you should refer to the
+							PHPUnit (PHAR file, global install),
+							in which case you should refer to the
 							<literal>composer.json</literal> file to find out
 							which version to use.
 						</para>
@@ -496,9 +509,13 @@ git merge master
 								for the Administrator account used to run the tests
 							</para></listitem>
 						</itemizedlist>
+						<para>Refer to <literal>build/ci_post_install.sh</literal>
+							script for SQL statements to create the necessary data.
+						</para>
 						<warning><para>
 							If the MantisBT instance is to be used for other purposes
-							than unit testing, it is strongly recommended to create
+							than unit testing (e.g. local development),
+							it is strongly recommended to create
 							a dedicated project for the unit tests, to avoid any
 							side-effects as the tests will generate a large number
 							of various types of database records.
@@ -541,7 +558,12 @@ $g_anonymous_account = 'username'; # of the anonymous account created above
 							all the tests.
 						</para>
 						<para>
-							At the minimum, you should set the following variables
+							At the minimum, it should include Composer's autoloader
+							<programlisting>
+require_once 'vendor/autoload.php';
+							</programlisting>
+
+							and set the following variables
 						</para>
 						<itemizedlist>
 							<listitem>
@@ -569,7 +591,7 @@ $g_anonymous_account = 'username'; # of the anonymous account created above
 				</varlistentry>
 
 				<varlistentry>
-					<term>SOAP extension</term>
+					<term>PHP extensions</term>
 					<listitem>
 						<para>
 							The <ulink url="https://www.php.net/manual/en/book.soap.php">
@@ -595,11 +617,13 @@ $g_anonymous_account = 'username'; # of the anonymous account created above
 			</programlisting>
 
 			<para>
-				Execution can be limited to a subset or individual test units
+				Execution can be limited to a single test suite, individual test units
+				or filtered by test case name
 			</para>
 			<programlisting>
 ./vendor/bin/phpunit --testsuite rest
 ./vendor/bin/phpunit tests/Mantis/ConfigParserTest.php
+./vendor/bin/phpunit --filter Project
 			</programlisting>
 
 			<para>
