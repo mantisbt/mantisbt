@@ -17,7 +17,7 @@
 # See the README and LICENSE files for details
 
 /**
- * Travis CI unit tests for REST API.
+ * CI unit tests for REST API.
  * This script will generate an API token to execute the REST API test suite.
  * @package Tests
  * @copyright Copyright 2019  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -38,7 +38,7 @@ if( php_sapi_name() != 'cli' ) {
 # Default administrator account
 $t_user_id = 1;
 
-$t_token_name = 'Travis_PHPUnit';
+$t_token_name = 'CI_PHPUnit';
 if( api_token_name_is_unique( $t_token_name, $t_user_id ) ) {
 	$t_token = api_token_create( $t_token_name, 1 );
 } else {
