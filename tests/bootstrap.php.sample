@@ -10,6 +10,8 @@
  * @link http://www.mantisbt.org
  */
 
+require_once 'vendor/autoload.php';
+
 /**
  * Enable the test suite
  * @global bool $GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']
