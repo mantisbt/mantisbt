@@ -1474,7 +1474,7 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
  *
  * @return void
  */
-function print_form_button( $p_action_page, $p_label, array $p_args_to_post = [], $p_security_token = null, $p_class = '' ) {
+function print_form_button( $p_action_page, $p_label, ?array $p_args_to_post = [], $p_security_token = null, $p_class = '' ) {
 	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
 	# instead of via $p_action_page (GET). Then only add the CSRF form token if
 	# arguments are being sent via the POST method.
@@ -2262,7 +2262,7 @@ function print_dropzone_template(){
  * @deprecated 2.0 use {@see print_form_button()} instead
  * @see form_security_token()
  */
-function print_button( $p_action_page, $p_label, array $p_args_to_post = [], $p_security_token = null ) {
+function print_button( $p_action_page, $p_label, ?array $p_args_to_post = [], $p_security_token = null ) {
 	error_parameters( __FUNCTION__, 'print_form_button' );
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	print_form_button( $p_action_page, $p_label, $p_args_to_post, $p_security_token );
