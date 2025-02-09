@@ -1,13 +1,12 @@
 <?php
-# MantisBT phpUnit tests sample bootstrap file
-
 /**
- * Mantis Webservice Tests
+ * MantisBT Sample Bootstrap File.
+ *
+ * Rename to `bootstrap.php` and adapt settings as appropriate.
  *
  * @package Tests
- * @subpackage UnitTests
  * @copyright Copyright (C) 2010-2013 MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
+ * @link https://mantisbt.org
  */
 
 require_once 'vendor/autoload.php';
@@ -67,7 +66,7 @@ $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'] = 1;
 $GLOBALS['MANTIS_TESTSUITE_MAX_ISSUES'] = 50;
 
 /**
- * Set default timestamp to avoid errors in some test environments
+ * Set default timezone to avoid errors in some test environments
  */
 date_default_timezone_set('UTC');
 
