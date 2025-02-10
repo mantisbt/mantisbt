@@ -42,6 +42,7 @@
  * @author Fitoschido
  * @author Tokvo
  * @author Xuacu
+ * @author YoaR
  */
 
 $s_actiongroup_menu_copy = 'Copiar';
@@ -218,7 +219,7 @@ $s_new_account_signup_msg = 'Creóse la cuenta siguiente:';
 $s_reset_request_msg = 'Alguién (supuestamente tu) solicitó una cambiu de la contraseña con comprobación per corréu electrónicu. Si nun fuisti tu, inora esti mensaxe y nun asocederá nada.
 
 Si solicitasti esta comprobación, visita la siguiente URL pa cambiar la contraseña:';
-$s_reset_request_in_progress_msg = 'Si disti\'l nome d\'usuariu y direición de corréu electrónicu correutos de la to cuenta, acabamos d\'unviate un mensaxe de confirmación. En recibiendo\'l mensaxe, sigui les instrucciones que contien pa cambiar la contraseña de la cuenta.';
+$s_reset_request_in_progress_msg = 'Si disti\'l nome d\'usuariu y direición de corréu electrónicu correutos de la to cuenta, acabamos d\'unviate un mensaxe de confirmación. En recibiendo\'l mensaxe, sigui les instrucciones que contién pa cambiar la contraseña de la cuenta.';
 $s_email_notification_title_for_status_bug_new = 'La siguiente incidencia agora ta n\'estáu NUEVA (otra vuelta)';
 $s_email_notification_title_for_status_bug_feedback = 'La siguiente incidencia rique MÁS INFORMACIÓN.';
 $s_email_notification_title_for_status_bug_acknowledged = 'La siguiente incidencia ACEUTÓSE.';
@@ -494,7 +495,7 @@ $s_select_project_button = 'Seleccionar proyeutu';
 $s_lost_password_title = 'Restaurar contraseña';
 $s_lost_password_done_title = 'Unvióse\'l mensaxe de contraseña';
 $s_lost_password_subject = 'Restaurar contraseña';
-$s_lost_password_info = 'Pa recuperar la contraseña perdida, proporciona\'l nome y direición de corréu electrónicu de la cuenta.<br /><br />Si los datos correspuenden con una cuenta válida, recibirás per corréu electrónicu una direición URL especial que contien un códigu de validación pa la cuenta. Sigui esti enllaz pa cambiar la contraseña.';
+$s_lost_password_info = 'Pa recuperar la contraseña perdida, proporciona\'l nome y direición de corréu electrónicu de la cuenta.<br /><br />Si los datos correspuenden con una cuenta válida, recibirás per corréu electrónicu una direición URL especial que contién un códigu de validación pa la cuenta. Sigui esti enllaz pa cambiar la contraseña.';
 $s_lost_password_confirm_hash_OK = 'Aceutóse la to confirmación. Por favor anueva la contraseña.';
 $s_open_and_assigned_to_me_label = 'Abiertos y atribuíos a min:';
 $s_open_and_reported_to_me_label = 'Abiertos de los qu\'informé yo:';
