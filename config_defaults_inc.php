@@ -757,6 +757,16 @@ $g_smtp_connection_mode = '';
 $g_smtp_port = 25;
 
 /**
+ * Send additional custom header
+ *
+ * Default: No additional custom header
+ * Additional headers can be included separated by , (comma) in format header_name1:value1, header_name2:value2, ....
+ * 
+ * @global string $g_smtp_customheader
+ */
+$g_smtp_customheader = '';
+
+/**
  * Enable DomainKeys Identified Mail (DKIM) Signatures (rfc6376).
  *
  * To successfully sign mails you need to enable DKIM and provide at least:
