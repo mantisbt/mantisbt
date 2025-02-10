@@ -306,7 +306,7 @@ $t_user_count = count( $t_users );
 		<div class="pull-left">
 			<?php print_form_button('manage_user_prune.php',
 				lang_get('prune_accounts'),
-				null,
+				[],
 				null,
 				'btn btn-primary btn-sm btn-white btn-round')
 			?>

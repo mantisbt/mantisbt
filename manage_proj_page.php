@@ -99,7 +99,7 @@ print_manage_menu( 'manage_proj_page.php' );
 			print_form_button(
 				'manage_proj_create_page.php',
 				lang_get( 'create_new_project_link' ),
-				null,
+				[],
 				null,
 				'btn btn-primary btn-white btn-round'
 			);
