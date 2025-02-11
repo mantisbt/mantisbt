@@ -244,7 +244,7 @@ function layout_is_rtl() {
  * @return void
  */
 function layout_head_meta() {
-	echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />' . "\n";
+	echo "\t" , '<meta name="viewport" content="width=device-width, initial-scale=1.0">' , "\n";
 }
 
 /**
