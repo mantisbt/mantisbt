@@ -84,7 +84,6 @@ auth_attempt_script_login( user_get_username( $f_user_id ) );
 
 user_increment_login_count( $f_user_id );
 
-
 # extracts the user information
 # and prefixes it with u_
 $t_row = user_get_row( $f_user_id );
@@ -93,7 +92,9 @@ extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_can_change_password = auth_can_set_password( $f_user_id );
 
-layout_login_page_begin();
+$t_form_title = lang_get( 'edit_account_title' );
+
+layout_login_page_begin( $t_form_title );
 
 ?>
 
@@ -128,7 +129,7 @@ layout_login_page_begin();
 		<div id="verify-div" class="form-container">
 			<form id="account-update-form" method="post" action="account_update.php">
 				<fieldset>
-					<legend><span><?php echo lang_get( 'edit_account_title' ) . ' - ' . string_display_line( $u_username ) ?></span></legend>
+					<legend><span><?php echo $t_form_title . ' - ' . string_display_line( $u_username ) ?></span></legend>
 					<div class="space-10"></div>
 					<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
 					<input type="hidden" name="confirm_hash" value="<?php echo string_html_specialchars( $f_confirm_hash ) ?>">
