@@ -48,15 +48,14 @@ require_css( 'login.css' );
 
 require_js( 'login.js' );
 
+$t_form_title = lang_get( 'signup_title' );
+
 # Check for invalid access to signup page
 if( !auth_signup_enabled() || LDAP == config_get_global( 'login_method' ) ) {
 	print_header_redirect( auth_login_page() );
 }
 
-# signup page shouldn't be indexed by search engines
-html_robots_noindex();
-
-layout_login_page_begin( lang_get( 'signup_title' ) );
+layout_login_page_begin( $t_form_title );
 
 $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 ?>
@@ -74,7 +73,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 				<div class="widget-main">
 					<h4 class="header lighter bigger">
 						<?php print_icon( 'fa-pencil', 'ace-icon' ); ?>
-						<?php echo lang_get( 'signup_title' ) ?>
+						<?php echo $t_form_title ?>
 					</h4>
 					<div class="space-10"></div>
 
@@ -110,7 +109,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 		$t_label_captcha_refresh = lang_get( 'signup_captcha_refresh' );
 		$t_label_captcha_play = lang_get( 'signup_captcha_play' );
 ?>
-				<script type="text/javascript" src="<?php echo $t_securimage_path . '/securimage.js'; ?>"></script>
+				<script src="<?php echo $t_securimage_path . '/securimage.js'; ?>"></script>
 
 				<label for="captcha-field" class="block clearfix">
 					<strong><?php echo lang_get( 'signup_captcha_request_label' ); ?></strong>

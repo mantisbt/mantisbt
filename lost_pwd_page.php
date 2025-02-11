@@ -62,10 +62,9 @@ if( $t_username ) {
 	$t_email_field_autofocus = 'autofocus';
 }
 
-# don't index lost password page
-html_robots_noindex();
+$t_form_title = lang_get( 'lost_password_title' );
 
-layout_login_page_begin();
+layout_login_page_begin( $t_form_title );
 ?>
 
 <div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
@@ -79,7 +78,7 @@ layout_login_page_begin();
 	<div class="widget-main">
 		<h4 class="header lighter bigger">
 			<?php print_icon( 'fa-key', 'ace-icon' ); ?>
-			<?php echo lang_get( 'lost_password_title' ) ?>
+			<?php echo $t_form_title ?>
 		</h4>
 		<div class="space-10"></div>
 	<form id="lost-password-form" method="post" action="lost_pwd.php">
