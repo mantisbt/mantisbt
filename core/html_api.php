@@ -1249,6 +1249,14 @@ class TableGridLayout {
 	}
 
 	/**
+	 * Prints HTML code for a spacer row
+	 * @param string $p_class Class of the row ('spacer' by default)
+	 */
+	public function render_spacer( $p_class = 'spacer' ) {
+		echo '<tr class="', $p_class, '"><td colspan="', $this->cols, '"></td></tr>';
+	}
+
+	/**
 	 * Prints HTML code for an empty TD cell
 	 * @param integer $p_colspan Colspan attribute for cell
 	 */
