@@ -9,6 +9,7 @@
 * @package RSS
 * @version 2.2.1
 */
+#[\AllowDynamicProperties]
 abstract class RSSBase {
 
 	protected $allowed_datatypes = array('string', 'int', 'boolean',
