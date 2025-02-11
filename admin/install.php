@@ -563,6 +563,11 @@ if( 2 == $t_install_state ) {
 					$t_error = 'SQL Server (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation';
 				}
 				break;
+			case 'sqlite3':
+				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_SQLITE3, '<' ) ) {
+					$t_error = 'SQLite (' . DB_MIN_VERSION_SQLITE3 . ') or later is required for installation';
+				}
+				break;
 			case 'pgsql':
 			default:
 				break;
@@ -660,6 +665,7 @@ if( !$g_database_upgrade ) {
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
+				'sqlite3'     => 'SQLite3',
 			);
 
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
@@ -967,6 +973,7 @@ if( 3 == $t_install_state ) {
 
 		# fake out database access routines used by config_get
 		config_set_global( 'db_type', $f_db_type );
+		$g_db_functional_type = db_get_type( $f_db_type );
 
 		# Initialize table prefixes as specified by user
 		config_set_global( 'db_table_prefix', $f_db_table_prefix );
@@ -975,6 +982,8 @@ if( 3 == $t_install_state ) {
 		# database_api references this
 		require_once( __DIR__ . '/schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
+		$g_db->SetFetchMode( ADODB_FETCH_ASSOC );
+
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 		if( !$f_log_queries ) {
 			$g_db_connected = true;
