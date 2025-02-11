@@ -1015,7 +1015,7 @@ function layout_main_content_end() {
  * @return void
  */
 function layout_page_content_begin() {
-	echo '  <div class="page-content">' , "\n";
+	echo '<div class="page-content">' , "\n";
 }
 
 /**
@@ -1031,7 +1031,6 @@ function layout_page_content_end() {
 	echo '</div>' , "\n";
 }
 
-
 /**
  * Render breadcrumbs bar.
  * @return void
@@ -1045,6 +1044,8 @@ function layout_breadcrumbs() {
 
 	# Login information
 	echo '<ul class="breadcrumb">' , "\n";
+	echo '  <li>';
+	print_icon( 'fa-user', 'home-icon active' );
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
 		if( isset( $_SERVER['QUERY_STRING'] ) && !is_blank( $_SERVER['QUERY_STRING'] )) {
@@ -1053,18 +1054,16 @@ function layout_breadcrumbs() {
 
 		$t_return_page = string_url( $t_return_page );
 
-		echo ' <li>';
-		print_icon( 'fa-user', 'home-icon active' );
-		echo lang_get( 'anonymous' ) . ' </li>' . "\n";
+		echo '  ' . lang_get( 'anonymous' ) . "\n";
 
-		echo '<div class="btn-group btn-corner">' . "\n";
+		echo '  <div class="btn-group btn-corner">' . "\n";
 		echo '	<a href="' . helper_mantis_url( auth_login_page( 'return=' . $t_return_page ) ) .
 			'" class="btn btn-primary btn-xs">' . lang_get( 'login' ) . '</a>' . "\n";
 		if( auth_signup_enabled() ) {
 			echo '	<a href="' . helper_mantis_url( 'signup_page.php' ) . '" class="btn btn-primary btn-xs">' .
 				lang_get( 'signup_link' ) . '</a>' . "\n";
 		}
-		echo '</div>' . "\n";
+		echo '  </div></li>' . "\n";
 
 	} else {
 		$t_protected = current_user_get_field( 'protected' );
@@ -1073,8 +1072,6 @@ function layout_breadcrumbs() {
 		$t_realname = current_user_get_field( 'realname' );
 		$t_display_realname = is_blank( $t_realname ) ? '' : ' ( ' . string_html_specialchars( $t_realname ) . ' ) ';
 
-		echo '  <li>';
-		print_icon( 'fa-user', 'home-icon active' );
 		$t_page = ( OFF == $t_protected ) ? 'account_page.php' : 'my_view_page.php';
 		echo '  <a href="' . helper_mantis_url( $t_page ) . '">' .
 			$t_display_username . $t_display_realname . '</a>' . "\n";
