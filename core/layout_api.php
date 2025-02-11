@@ -161,16 +161,15 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 
 	layout_breadcrumbs();
 
+	layout_main_content_row_begin();
+
 	layout_page_content_begin();
 
 	if( auth_is_user_authenticated() ) {
 		if( ON == config_get( 'show_project_menu_bar' ) ) {
-			echo '<div class="row">' , "\n";
 			print_project_menu_bar();
-			echo '</div>' , "\n";
 		}
 	}
-	echo '<div class="row">' , "\n";
 
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
 }
@@ -186,9 +185,8 @@ function layout_page_end() {
 
 	event_signal( 'EVENT_LAYOUT_CONTENT_END' );
 
-	echo '</div>' , "\n";
-
 	layout_page_content_end();
+	layout_main_content_row_end();
 	layout_main_content_end();
 
 	layout_footer();
@@ -225,8 +223,6 @@ function layout_admin_page_end() {
 	html_body_end();
     html_end();
 }
-
-
 
 /**
  * Check if the layout is setup for right to left languages
@@ -287,8 +283,6 @@ function layout_head_css() {
 		html_css_link( 'ace-rtl.min.css', $t_cache_key );
 	}
 
-	echo "\n";
-
 	# Set font preference
 	layout_user_font_preference();
 }
@@ -345,34 +339,14 @@ function layout_body_javascript() {
 
 /**
  * Print opening markup for login/signup/register pages
+ * @param string $p_page_title page title
  * @return void
  */
-function layout_login_page_begin( $p_title = '' ) {
-	html_begin();
-	html_head_begin();
-	html_content_type();
-
-	global $g_robots_meta;
-	if( !is_blank( $g_robots_meta ) ) {
-		echo "\t", '<meta name="robots" content="', $g_robots_meta, '" />', "\n";
-	}
-
-	html_title( $p_title );
-	layout_head_meta();
-	html_css();
-	layout_head_css();
-	html_rss_link();
-
-	$t_favicon_image = config_get_global( 'favicon_image' );
-	if( !is_blank( $t_favicon_image ) ) {
-		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
-	}
-
-	# Advertise the availability of the browser search plug-ins.
-	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true) . '" />' . "\n";
-	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true) . '" />' . "\n";
+function layout_login_page_begin( $p_page_title = '' ) {
+	# Login page shouldn't be indexed by search engines
+	html_robots_noindex();
 	
-	html_head_javascript();
+	layout_page_header_begin( $p_page_title );
 	
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
 	html_head_end();
@@ -381,7 +355,7 @@ function layout_login_page_begin( $p_title = '' ) {
 
 	layout_main_container_begin();
 	layout_main_content_begin();
-	echo '<div class="row">';
+	layout_main_content_row_begin();
 }
 
 /**
@@ -389,12 +363,13 @@ function layout_login_page_begin( $p_title = '' ) {
  * @return void
  */
 function layout_login_page_end() {
-	echo '</div>';
+	layout_main_content_row_end();
 	layout_main_content_end();
 	layout_main_container_end();
 	layout_body_javascript();
 
-	echo '</body>', "\n";
+	html_body_end();
+	html_end();
 }
 
 /**
@@ -1007,6 +982,22 @@ function layout_main_content_begin() {
  * @return void
  */
 function layout_main_content_end() {
+	echo '</div>' , "\n";
+}
+
+/**
+ * Render opening markup for main content row
+ * @return void
+ */
+function layout_main_content_row_begin() {
+	echo '<div class="row">' , "\n";
+}
+
+/**
+ * Render closing markup for main content row
+ * @return void
+ */
+function layout_main_content_row_end() {
 	echo '</div>' , "\n";
 }
 
