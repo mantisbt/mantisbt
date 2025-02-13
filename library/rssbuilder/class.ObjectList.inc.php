@@ -64,7 +64,7 @@ abstract class ObjectList extends RSSBase implements IteratorAggregate {
 		return (boolean) TRUE;
 	} // end function
 	
-	public function getIterator() {
+	public function getIterator() : Traversable {
 		return new ObjectIterator($this);
 	} // end function
 } // end class
