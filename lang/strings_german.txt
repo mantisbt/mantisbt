@@ -42,6 +42,7 @@
  * @author Als-Holder
  * @author Atrol
  * @author Ayonik
+ * @author Brettchenweber
  * @author Campmaster
  * @author Cupkake4Yoshi
  * @author Das Schäfchen
@@ -672,7 +673,7 @@ $s_plugin = 'Plugin';
 $s_plugins_installed = 'Installierte Plugins';
 $s_plugins_available = 'Verfügbare Plugins';
 $s_plugins_missing = 'Fehlende oder ungültige Plugins';
-$s_plugins_missing_description = 'Die Plugins in der Liste unten sind registriert, aber deren Quellcode konnte nicht in "%s" gefunden oder von dort geladen werden.<br>Versuchen Sie eine Neuinstallation oder entfernen Sie die Plugins.';
+$s_plugins_missing_description = 'Die Plugins in untenstehender Liste sind entweder<ul><li>registriert, aber ihr Quellcode konnte in "%s" nicht gefunden und geladen werden</li><li>installiert, aber sie konnten nicht initialisiert werden.</li></ul>Versuchen Sie, sie erneut zu installieren oder zu entfernen.';
 $s_plugin_description = 'Beschreibung';
 $s_plugin_problem_description = 'Problembeschreibung';
 $s_plugin_author = 'Autor: %1$s';
@@ -698,7 +699,7 @@ $s_plugin_invalid_status_message = 'Die folgenden erforderlichen Eigenschaften s
 $s_plugin_missing_description = 'Fehlendes Plugin';
 $s_plugin_missing_status_message = 'Das Plugin ist in der Mantis-Datenbank istalliert, konnte aber nicht geladen werden.';
 $s_plugin_missing_class_description = 'Fehlende Plugin Basisklasse';
-$s_plugin_missing_class_status_message = 'Es wurde ein Verzeichnis für dieses Plugin gefunden, aber kein entsprechender Plugin Quellcode. Stellen Sie sicher, dass der Name des Verzeichnisses dem Namen der Basisklasse entspricht. Beachten Sie dabei Groß-/Kleinschreibung.';
+$s_plugin_missing_class_status_message = 'Ein Verzeichnis für dieses Plugin wurde gefunden, aber es gibt keinen entsprechenden Plugin-Code darin. Stellen Sie sicher, dass der Name des Verzeichnisses mit dem Basisnamen des Plugins "%1$s" übereinstimmt (Groß- und Kleinschreibung beachten), dass eine PHP-Datei mit demselben Namen im Verzeichnis vorhanden ist und eine Klasse mit dem Namen "%2$s" definiert, die MantisPlugin erweitert.';
 $s_plugin_missing_event = 'Fehlende Ereignisse';
 $s_plugin_missing_event_status_message = 'Das Plugin versucht, nicht deklarierte Ereignisse einzubinden: %s .';
 $s_project_added_msg = 'Projekt wurde hinzugefügt …';
@@ -1050,7 +1051,7 @@ $s_bytes = 'Bytes';
 $s_kib = 'KiB';
 $s_attachment_missing = 'Dateianhang fehlt';
 $s_attachment_count = 'Anzahl Dateianhänge';
-$s_bugnotes_count = 'Anzahl der Problemnotizen';
+$s_bugnotes_count = 'Anzahl der Notizen';
 $s_view_attachments_for_issue = 'Zeige %1$d Dateianhänge für Eintrag #%2$d';
 $s_warning_update_custom_field_type = '<strong>Warnung:</strong> Das benutzerdefinierte Feld „%1$s“ besitzt bereits gespeicherte Werte. Eine Änderung des Feldtyps kann Fehler und ein unerwartetes Verhalten verursachen, falls vorhandene Werte nicht mit dem neuen Typ des Feldes konsistent sind. Um fortzufahren, klicken Sie unten auf die Schaltfläche.';
 $s_phpmailer_language = 'de';
@@ -1186,7 +1187,7 @@ $s_tag_update = 'Tag aktualisieren: %1$s';
 $s_tag_update_return = 'Zurück zu Tag';
 $s_tag_update_button = 'Tag aktualisieren';
 $s_tag_delete_button = 'Tag löschen';
-$s_tag_delete_message = 'Bist du sicher, dass du den Tag "%1$s" löschen willst?';
+$s_tag_delete_message = 'Sind Sie sicher, dass Sie den Tag "%1$s" löschen wollen?';
 $s_tag_existing = 'Existierende Tags';
 $s_tag_none_attached = 'Keine Tags zugeordnet.';
 $s_tag_attach = 'Zuordnen';
@@ -1277,7 +1278,7 @@ $s_timeline_no_activity = 'Keine Aktivität innerhalb des Zeitbereichs.';
 $s_timeline_title = 'Zeitleiste';
 $s_timeline_more = 'Weitere Ereignisse …';
 $s_missing_error_string = 'Fehlende Fehlerzeichenfolge: %1$s';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Bei dieser Aktion ist ein Fehler aufgetreten. Du solltest ihn deinem lokalen Administrator melden.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Bei dieser Aktion ist ein Fehler aufgetreten. Melden Sie ihn ggf. Ihrem lokalen Administrator.';
 $MANTIS_ERROR[ERROR_GENERIC_DETAILS] = 'Fehlerdetails: %s';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL-Fehler entdeckt.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Während des Reports trat ein Fehler auf.';
@@ -1423,6 +1424,7 @@ $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Der Name des API-Tokens „%s�
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Die in $g_log_destination angegebene Datei „%s“ ist nicht beschreibbar.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Der hinzugefügte Benutzer hat keine ausreichenden Rechte, um diesen Eintrag zu beobachten.';
 $MANTIS_ERROR[ERROR_USER_TOKEN_NOT_FOUND] = 'Benutzer API-Token mit ID "%d" nicht gefunden.';
+$MANTIS_ERROR[ERROR_GRAPH_TOOL_NOT_FOUND] = 'Das Graphviz-Tool "%s" wurde nicht gefunden, oder die Ausführung ist fehlgeschlagen. Stellen Sie sicher, dass die Bibliothek installiert ist, und dass $g_graphviz_path korrekt eingestellt ist.';
 $s_dropzone_default_message = 'Dateien hier zum Hochladen ablegen, oder klicken oder einfügen.';
 $s_dropzone_fallback_message = 'Ihr Webbrowser unterstützt keine Dateiuploads durch Ziehen und Ablegen.';
 $s_dropzone_file_too_big = 'Die Datei ist zu groß ({{filesize}} MiB). Maximale Dateigröße: {{maxFilesize}} MiB.';
