@@ -131,6 +131,7 @@ layout_login_page_begin();
 	</div>
 	</div>
 </div>
+</div>
 
 <?php
 layout_login_page_end();
