@@ -195,4 +195,3 @@ class RSSBuilder extends RSSBase {
 		return $this->version_objects[$version]->outputRSS();
 	} // end function
 } // end class
-?>

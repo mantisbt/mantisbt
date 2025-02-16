@@ -21,4 +21,3 @@ class RSSItemList extends ObjectList {
 	} // end function
 	
 } // end class
-?>

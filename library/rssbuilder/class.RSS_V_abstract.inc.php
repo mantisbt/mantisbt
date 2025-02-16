@@ -55,4 +55,3 @@ abstract class RSS_V_abstract extends RSSBase implements RSS {
 		return $this->xml->saveXML();
 	} // function
 } // end class
-?>
