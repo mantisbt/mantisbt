@@ -14,4 +14,3 @@ interface RSS {
 	public function outputRSS();
 	public function saveRSS();
 } // end interface
-?>

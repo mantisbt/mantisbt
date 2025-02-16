@@ -69,4 +69,3 @@ abstract class RSSBase {
 	} // end function
 
 } // end class
-?>

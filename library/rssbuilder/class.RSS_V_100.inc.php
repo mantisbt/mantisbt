@@ -177,4 +177,3 @@ class RSS_V_100 extends RSS_V_abstract {
 		} // end foreach
 	} // function
 } // end class
-?>

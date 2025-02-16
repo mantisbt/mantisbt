@@ -79,4 +79,3 @@ class RSSItem extends RSSBase {
 		return parent::getVar('image');
 	} // end function		
 } // end class
-?>
