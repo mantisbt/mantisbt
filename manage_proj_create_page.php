@@ -86,7 +86,6 @@ $f_parent_id = gpc_get( 'parent_id', null );
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 <?php
 	echo form_security_field( 'manage_proj_create' );
@@ -95,7 +94,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 ?>
 				<input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>" />
 <?php } ?>
-
+		<table class="table table-bordered table-condensed table-striped">
 			<tr>
 				<td class="category">
 					<span class="required">*</span>
@@ -194,8 +193,8 @@ $f_parent_id = gpc_get( 'parent_id', null );
 			</tr>
 
 			<?php event_signal( 'EVENT_MANAGE_PROJECT_CREATE_FORM' ) ?>
-		</fieldset>
 		</table>
+		</fieldset>
 		</div>
 		</div>
 		</div>
@@ -205,8 +204,8 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				   value="<?php echo lang_get( 'add_project_button' ) ?>" />
 		</div>
 	</div>
-	</div>
 	</form>
+	</div>
 </div>
 
 <?php
