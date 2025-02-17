@@ -638,9 +638,8 @@ function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null 
 		$t_url = $t_item['url'];
 		$t_active = $p_current_page && strpos( $t_url, $p_current_page ) !== false ? 'active' : '';
 
-		# Use URL as-is if caller didn't specify it as absolute
-		# This is
-		if( $t_item['absolute'] ?? true ) {
+		# Generate relative URL if caller didn't specify it as absolute
+		if( !($t_item['absolute'] ?? false) ) {
 			$t_url = helper_mantis_url( $t_url );
 		}
 
