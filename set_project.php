@@ -61,6 +61,8 @@ $t_project = explode( ';', $f_project_id );
 $t_top     = $t_project[0];
 $t_bottom  = $t_project[count( $t_project ) - 1];
 
+$t_redirect_url = config_get_global( 'default_home_page' );
+
 if( ALL_PROJECTS != $t_bottom ) {
 	project_ensure_exists( $t_bottom );
 }
@@ -77,45 +79,46 @@ helper_set_current_project( $f_project_id );
 # for proxies that clear out HTTP_REFERER
 if( !is_blank( $c_ref ) ) {
 	$t_redirect_url = $c_ref;
-} else if( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
-	$t_redirect_url = config_get_global( 'default_home_page' );
-} else {
-	$t_home_page = config_get_global( 'default_home_page' );
-
+} else if( isset( $_SERVER['HTTP_REFERER'] ) && !is_blank( $_SERVER['HTTP_REFERER'] ) ) {
 	# Check that referrer matches our address after squashing case (case insensitive compare)
 	$t_path = rtrim( config_get_global( 'path' ), '/' );
 	if( preg_match( '@^(' . $t_path . ')/(?:/*([^\?#]*))(.*)?$@', $_SERVER['HTTP_REFERER'], $t_matches ) ) {
 		$t_referrer_page = $t_matches[2];
 		$t_param = $t_matches[3];
 
-		# if view_all_bug_page, pass on filter
-		if( strcasecmp( 'view_all_bug_page.php', $t_referrer_page ) == 0 ) {
-			$t_source_filter_id = filter_db_get_project_current( $t_bottom );
-			$t_redirect_url = 'view_all_set.php?type=' . FILTER_ACTION_GENERALIZE;
+		switch( $t_referrer_page ) {
+			case 'view_all_bug_page.php':		
+				$t_source_filter_id = filter_db_get_project_current( $t_bottom );
+				$t_redirect_url = 'view_all_set.php?'
+					. http_build_query( ( $t_source_filter_id !== null ) ?
+						[ 'type' => FILTER_ACTION_LOAD,
+						  'source_query_id' => $t_source_filter_id ] :
+						[ 'type' => FILTER_ACTION_GENERALIZE ] );
+				error_log( 'view_all_bug_page.php : ' . $t_redirect_url );
+				break;
 
-			if( $t_source_filter_id !== null ) {
-				$t_redirect_url = 'view_all_set.php?type=' . FILTER_ACTION_LOAD . '&source_query_id=' . $t_source_filter_id;
-			}
-		} else if( stripos( $t_referrer_page, '_page.php' ) !== false ) {
-			switch( $t_referrer_page ) {
-				case 'bug_view_page.php':
-				case 'bug_view_advanced_page.php':
-				case 'bug_update_page.php':
-				case 'bug_change_status_page.php':
-					$t_path = $t_home_page;
-					break;
-				default:
-					$t_path = $t_referrer_page . $t_param;
-					break;
-			}
-			$t_redirect_url = $t_path;
-		} else if( $t_referrer_page == 'plugin.php' ) {
-			$t_redirect_url = $t_referrer_page . $t_param; # redirect to same plugin page
-		} else {
-			$t_redirect_url = $t_home_page;
+			case 'manage_proj_edit_page.php':
+			case 'manage_proj_page.php':
+				$t_redirect_url = ( ALL_PROJECTS != $t_bottom ) ?
+					'manage_proj_edit_page.php?'
+						. http_build_query( [ 'project_id' => $t_bottom ] ) :
+					'manage_proj_page.php';
+				break;
+
+			case 'bug_view_page.php':
+			case 'bug_view_advanced_page.php':
+			case 'bug_update_page.php':
+			case 'bug_change_status_page.php':
+				break;
+
+			default:
+				if( stripos( $t_referrer_page, '_page.php' ) !== false
+					# redirect to same plugin page
+					|| $t_referrer_page == 'plugin.php' ) {
+					$t_redirect_url = $t_referrer_page . $t_param;
+				}
+				break;
 		}
-	} else {
-		$t_redirect_url = $t_home_page;
 	}
 }
 
