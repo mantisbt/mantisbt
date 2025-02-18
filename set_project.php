@@ -94,7 +94,6 @@ if( !is_blank( $c_ref ) ) {
 						[ 'type' => FILTER_ACTION_LOAD,
 						  'source_query_id' => $t_source_filter_id ] :
 						[ 'type' => FILTER_ACTION_GENERALIZE ] );
-				error_log( 'view_all_bug_page.php : ' . $t_redirect_url );
 				break;
 
 			case 'manage_proj_edit_page.php':
