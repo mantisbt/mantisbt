@@ -46,6 +46,7 @@
  * @author DDPAT
  * @author Dovsienko
  * @author Green Zero
+ * @author Gzhegozh
  * @author Ice bulldog
  * @author Ignatgg
  * @author Igorko
@@ -1285,11 +1286,11 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Коментар не знайдени
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Не можу знайти поле «%1$s» бази даних.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Обробник проблем не має достатніх привілеїв на обробку проблеми з цим статусом.';
 $MANTIS_ERROR[ERROR_PROJECT_HIERARCHY_DISABLED] = 'Ієрархія проєкту відключена.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Проект «%1$s» не знайдено.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Такий проект вже існує. Поверніться назад і введіть іншу назву проєкта.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Проєкт «%1$s» не знайдено.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Такий проєкт вже існує. Поверніться назад і введіть іншу назву проєкта.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Хибна назва проекта. Назва проєкта не може бути порожньою.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Ця операція зациклила б ієрархію підпроєктів.';
-$MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_DUPLICATE] = 'Проект «%1$s» вже є підпроєктом «%2$s».';
+$MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_DUPLICATE] = 'Проєкт «%1$s» вже є підпроєктом «%2$s».';
 $MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_NOT_FOUND] = 'Проєкт «%1$s» не є підпроєктом «%2$s».';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Користувача з ім’ям «%1$s» не знайдено.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Користувача з ім’ям «%1$d» не знайдено.';
@@ -1319,7 +1320,7 @@ $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Редакцію проблеми
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Не можу знайти таке власне поле';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Таке ім\'я вже існує.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_INVALID] = 'Недійсна назва користувацького поля «%1$s»: коми не допускаються. Див. розділ «Локалізація користувацьких імен полів» у посібнику адміністратора.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Принаймні один проект використовує це поле.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Принаймні один проєкт використовує це поле.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Неприпустиме значення поля «%1$s».';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Хибне означення власного поля';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Недопустима властивість спеціального поля (%1$s).';
