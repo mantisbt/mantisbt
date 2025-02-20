@@ -411,25 +411,39 @@ function html_print_logo( $p_logo = null ) {
 	}
 }
 
-
-
 /**
  * Print a user-defined banner at the top of the page if there is one.
+ *
+ * @param bool $p_nested Add a div to wrap around the banner
  * @return void
  */
-function html_top_banner() {
+function html_top_banner( bool $p_nested = false ) {
 	$t_page = config_get_global( 'top_include_page' );
-	$t_logo_image = config_get_global( 'logo_image' );
+	
+	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		if( $p_nested ) {
+			echo '<div class="navbar navbar-fixed-top noprint">', "\n";
+		}
+		include( $t_page );
+		if( $p_nested ) {
+			echo '</div>', "\n";
+		}
+	}
+}
+
+/**
+ * Print a user-defined banner at the bottom of the page if there is one.
+ *
+ * @return void
+ */
+function html_bottom_banner() {
+	$t_page = config_get_global( 'bottom_include_page' );
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		echo '<div class="navbar-fixed-bottom noprint">', "\n";
 		include( $t_page );
-	} else if( !is_blank( $t_logo_image ) ) {
-		echo '<div id="banner">';
-		html_print_logo( $t_logo_image );
-		echo '</div>';
+		echo '</div>', "\n";
 	}
-
-	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 }
 
 /**

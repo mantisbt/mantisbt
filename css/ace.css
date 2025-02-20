@@ -1167,21 +1167,6 @@ pre.prettyprint {
 .navbar .navbar-brand:focus {
     color: #FFF;
 }
-/**
-@media (min-width: @grid-float-breakpoint) {
-  .navbar > .container .navbar-brand,
-  .navbar > .container-fluid .navbar-brand {
-    margin-left: 0;
-	margin-right: 0;
-  }
-}
-*/
-@media only screen and (min-width: 992px) {
-    .navbar-container {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
 .navbar-container.container {
     padding-left: 0;
     padding-right: 0;
@@ -14703,7 +14688,7 @@ ul.attachment-list > li {
     border-width: 0;
     position: fixed;
     right: 2px;
-    z-index: 99;
+    z-index: 1099;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     opacity: 0;

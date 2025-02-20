@@ -577,9 +577,6 @@
     border-top-color: #99B6C9;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .skin-3 .navbar.navbar-collapse {
-        background-color: transparent;
-    }
     .skin-3 .navbar.navbar-collapse:before,
     .skin-3 .navbar.navbar-collapse .navbar-container {
         background: #404040;

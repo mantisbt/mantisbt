@@ -152,6 +152,8 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 	current_user_modify_single_project_default();
 
 	layout_navbar();
+	
+	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 
 	layout_main_container_begin();
 
@@ -353,6 +355,7 @@ function layout_login_page_begin( $p_page_title = '' ) {
 
 	echo '<body class="login-layout light-login">';
 
+	html_top_banner( true );
 	layout_main_container_begin();
 	layout_main_content_begin();
 	layout_main_content_row_begin();
@@ -365,6 +368,8 @@ function layout_login_page_begin( $p_page_title = '' ) {
 function layout_login_page_end() {
 	layout_main_content_row_end();
 	layout_main_content_end();
+	html_bottom_banner();
+	layout_scroll_up_button();
 	layout_main_container_end();
 	layout_body_javascript();
 
@@ -382,6 +387,8 @@ function layout_navbar() {
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
 	echo '<div id="navbar-container" class="navbar-container">';
+
+	html_top_banner();
 
 	echo '<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg hidden-md" data-target="#sidebar">';
 	echo '<span class="sr-only">Toggle sidebar</span>';
@@ -1241,6 +1248,8 @@ function layout_footer() {
 		echo '</div>' . "\n";
 	}
 
+	html_bottom_banner();
+
 	layout_footer_end();
 }
 
@@ -1249,8 +1258,6 @@ function layout_footer() {
  * @return void
  */
 function layout_footer_begin() {
-	echo '<div class="clearfix"></div>' . "\n";
-	echo '<div class="space-20"></div>' . "\n";
 	echo '<div class="footer noprint">' . "\n";
 	echo '<div class="footer-inner">' . "\n";
 	echo '<div class="footer-content">' . "\n";
