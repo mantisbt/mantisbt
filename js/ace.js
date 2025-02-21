@@ -2810,7 +2810,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Ace\'s JavaScript requires
 	}).insertBefore(bottom);
 	var footer = $('.footer');
 	var footer_content = $('.footer-content');
-	$(window).on('resize.navbar-fixed-bottom, resize.footer', function() {
+	$(window).on('resize.footer', function() {
 		bottom_placeholder.css('height', parseInt(bottom.height()) + 'px');
 		footer.css('padding-top', parseInt(footer_content.height()) + 'px');
 		}).triggerHandler('resize.footer');
