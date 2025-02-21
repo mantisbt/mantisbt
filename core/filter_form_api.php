@@ -2966,10 +2966,10 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 		$t_row2->render();
 		$t_row3->render();
 		$t_row_extra->render();
-		echo '<tr class="spacer"></tr>';
+		$t_section_last->render_spacer();
 		$t_section_last->render();
 		if( $p_show_search ) {
-			echo '<tr class="spacer"></tr>';
+			$t_section_search->render_spacer();
 			$t_section_search->render();
 		}
 		?>

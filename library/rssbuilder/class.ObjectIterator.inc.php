@@ -3,7 +3,7 @@
 * Class for creating an RSS-feed
 * @author Michael Wimmer <flaimo@gmail.com>
 * @category flaimo-php
-* @copyright Copyright © 2002-2008, Michael Wimmer
+* @copyright Copyright Â© 2002-2008, Michael Wimmer
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package RSS
@@ -19,18 +19,21 @@ class ObjectIterator implements Iterator {
 		$this->objectlist->getList();
 	} // end constructor
 
-    public function valid() {
+    public function valid() : bool {
     	return ($this->current < $this->size()) ? TRUE : FALSE;
     } // end function    
     
+	#[\ReturnTypeWillChange]
     public function next() {
     	return $this->current++;
     } // end function
 
+	#[\ReturnTypeWillChange]
     public function &current() {
     	return $this->objectlist->objects[$this->key()];
     } // end function
-    
+
+	#[\ReturnTypeWillChange]
     public function key() {
     	return $this->current;
     } // end function
@@ -39,8 +42,7 @@ class ObjectIterator implements Iterator {
 		return count($this->objectlist->objects);
     } // end function
 
-    public function rewind() {
+    public function rewind() : void {
 		$this->current = 0;
 	} // end function
 } // end class
-?>

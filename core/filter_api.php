@@ -1345,7 +1345,7 @@ function filter_draw_selection_area() {
 					<form method="post" action="view_all_set.php">
 						<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
 						<select id="filter-bar-query-id" class="input-xs">
-							<option value="-1"></option>
+							<option value="-1">&nbsp;</option>
 							<?php
 							$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 							foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
@@ -1422,7 +1422,7 @@ function filter_draw_selection_area() {
 							<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
 							<label><?php echo lang_get( 'load' ) ?>
 								<select class="input-s" name="source_query_id">
-									<option value="-1"></option>
+									<option value="-1">&nbsp;</option>
 									<?php
 									$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 									foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
@@ -2425,7 +2425,7 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
 	}
 
 	echo '<li>';
-	printf( '<a href="%s">%s</i>&#160;&#160;%s</a>',
+	printf( '<a href="%s">%s&#160;&#160;%s</a>',
 		$t_url,
 		icon_get( $t_icon, 'ace-icon' ),
 		lang_get( $t_lang_string )

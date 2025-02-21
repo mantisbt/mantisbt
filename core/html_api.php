@@ -119,7 +119,8 @@ function html_rss_link() {
 	global $g_rss_feed_url;
 
 	if( $g_rss_feed_url !== null ) {
-		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . string_attribute( $g_rss_feed_url ) . '" />' . "\n";
+		echo "\t", '<link rel="alternate" type="application/rss+xml" title="RSS" href="',
+			string_attribute( $g_rss_feed_url ), '">', "\n";
 	}
 }
 
@@ -129,7 +130,7 @@ function html_rss_link() {
  * @return void
  */
 function html_javascript_link( $p_filename ) {
-	echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'js/' . $p_filename ), '"></script>', "\n";
+	echo "\t", '<script src="', helper_mantis_url( 'js/' . $p_filename ), '"></script>', "\n";
 }
 
 /**
@@ -143,7 +144,7 @@ function html_javascript_cdn_link( $p_url, $p_hash = '' ) {
 	if( $p_hash !== '' ) {
 		$t_integrity = 'integrity="' . $p_hash . '" ';
 	}
-	echo "\t", '<script type="text/javascript" src="', $p_url, '" ', $t_integrity, 'crossorigin="anonymous"></script>', "\n";
+	echo "\t", '<script src="', $p_url, '" ', $t_integrity, 'crossorigin="anonymous"></script>', "\n";
 }
 
 /**
@@ -169,7 +170,7 @@ function html_head_begin() {
  * @return void
  */
 function html_content_type() {
-	echo "\t", '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />', "\n";
+	echo "\t", '<meta charset="utf-8">', "\n";
 }
 
 /**
@@ -352,8 +353,8 @@ function html_head_javascript() {
 		helper_mantis_url( 'javascript_config.php' ),
 		'cache_key=' . helper_generate_cache_key( array( 'user' ) )
 	);
-	echo "\t" . '<script type="text/javascript" src="' . $t_javascript_config . '"></script>' . "\n";
-	echo "\t" . '<script type="text/javascript" src="' . $t_javascript_translations . '"></script>' . "\n";
+	echo "\t" . '<script src="' . $t_javascript_config . '"></script>' . "\n";
+	echo "\t" . '<script src="' . $t_javascript_translations . '"></script>' . "\n";
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		# JQuery
@@ -1251,6 +1252,14 @@ class TableGridLayout {
 			}
 			echo '</tr>';
 		}
+	}
+
+	/**
+	 * Prints HTML code for a spacer row
+	 * @param string $p_class Class of the row ('spacer' by default)
+	 */
+	public function render_spacer( $p_class = 'spacer' ) {
+		echo '<tr class="', $p_class, '"><td colspan="', $this->cols, '"></td></tr>';
 	}
 
 	/**

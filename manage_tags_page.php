@@ -233,9 +233,9 @@ print_manage_menu( 'manage_tags_page.php' );
 			<div class="widget-main no-padding">
 		<div class="form-container">
 		<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'tag_create' ); ?>
+			<table class="table table-bordered table-condensed table-striped">
 			<tr>
 				<td class="category">
 					<label for="tag-name">
@@ -258,8 +258,8 @@ print_manage_menu( 'manage_tags_page.php' );
 					<textarea class="form-control" id="tag-description" name="description" cols="80" rows="6"></textarea>
 				</td>
 			</tr>
+			</table>
 		</fieldset>
-		</table>
 		</div>
 		</div>
 		</div>
