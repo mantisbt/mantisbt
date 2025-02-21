@@ -757,3 +757,16 @@ ul.changelog > li, ul.roadmap > li {
     }
 
 }
+/* Disable padding for the top included page */
+.navbar-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+/* Move the button higher than the bottom included page */
+.btn-scroll-up {
+    z-index: 1099;
+}
+/* Fix the background of the navbar */
+.skin-3 .navbar.navbar-collapse {
+	background-color: #777;
+}
