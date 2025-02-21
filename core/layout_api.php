@@ -278,12 +278,11 @@ function layout_head_css() {
 
 	# theme styles
 	html_css_link( 'ace.min.css', $t_cache_key );
-	html_css_link( 'ace-mantis.css', $t_cache_key );
 	html_css_link( 'ace-skins.min.css', $t_cache_key );
-
 	if( layout_is_rtl() ) {
 		html_css_link( 'ace-rtl.min.css', $t_cache_key );
 	}
+	html_css_link( 'ace-mantis.css', $t_cache_key );
 
 	# Set font preference
 	layout_user_font_preference();
@@ -1258,6 +1257,7 @@ function layout_footer() {
  * @return void
  */
 function layout_footer_begin() {
+	echo '<div class="clearfix"></div>' . "\n";
 	echo '<div class="footer noprint">' . "\n";
 	echo '<div class="footer-inner">' . "\n";
 	echo '<div class="footer-content">' . "\n";
