@@ -471,14 +471,9 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
 	echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">';
 	if( $p_show_avatar ) {
 		layout_navbar_user_avatar();
-		echo '<span class="user-info">';
-		echo $t_username;
-		echo '</span>';
-		print_icon( 'fa-angle-down', 'ace-icon' );
-	} else {
-		echo '&#160;' . $t_username . '&#160;' . "\n";
-		print_icon( 'fa-angle-down', 'ace-icon bigger-110' );
 	}
+	echo '<span class="user-info">', $t_username, '</span>';
+	print_icon( 'fa-angle-down', 'ace-icon bigger-110' );
 	echo '</a>';
 	echo '<ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">';
 
