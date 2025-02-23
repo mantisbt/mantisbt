@@ -131,7 +131,7 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 	}
-	$t_val = str_replace( ' ', '', trim( $t_result ) );
+	$t_val = str_replace( ' ', '', trim( (string)$t_result ) );
 	if( !preg_match( '/^-?([0-9])*$/', $t_val ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_NOT_NUMBER, ERROR );
