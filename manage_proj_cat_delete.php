@@ -71,7 +71,7 @@ category_ensure_can_remove( $f_category_id );
 category_ensure_can_delete( $f_category_id );
 
 # Confirm with the user
-helper_ensure_confirmed( sprintf( lang_get( 'category_delete_confirm_msg' ), string_display_line( $t_name ) ),
+helper_ensure_confirmed( sprintf( lang_get( 'category_delete_confirm_msg' ), string_attribute( $t_name ) ),
 	lang_get( 'delete_category_button' ) );
 
 category_remove( $f_category_id );

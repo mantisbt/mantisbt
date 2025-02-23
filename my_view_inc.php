@@ -412,14 +412,14 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	<td>
 		<?php
 			if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $t_bug->project_id ) {
-				echo '<span>[', string_display_line( project_get_name( $t_bug->project_id ) ), '] </span>';
+				echo '<span>[', string_attribute( project_get_name( $t_bug->project_id ) ), '] </span>';
 			}
 			$t_bug_url = string_get_bug_view_url( $t_bug->id );
 			echo '<span><a href="' . $t_bug_url . '">' . $t_summary . '</a></span><br />';
 	?>
 		<?php
 	# type project name if viewing 'all projects' or bug is in subproject
-	echo '<span class="small">', string_display_line( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) ), '</span>';
+	echo '<span class="small">', string_attribute( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) ), '</span>';
 
 	echo '<span class="small"> - ';
 	if( $t_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
