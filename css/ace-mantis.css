@@ -242,6 +242,7 @@ a:link:after, a:visited:after {
 
 .user-info {
     line-height: 33px !important;
+    max-width: 270px !important;
 }
 
 .page-content {
