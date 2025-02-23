@@ -1004,7 +1004,12 @@ if( 3 == $t_install_state ) {
 
 		# Make sure we do the upgrades using UTF-8 if needed
 		if( $f_db_type === 'mysqli' ) {
-			$g_db->execute( 'SET NAMES UTF8' );
+			$sql = 'SET NAMES UTF8';
+			if( $f_log_queries ) {
+				echo $sql . ';' . PHP_EOL . PHP_EOL;
+			} else {
+				$g_db->execute( $sql );
+			}
 		}
 
 		/** @var ADODB_DataDict $t_dict */
