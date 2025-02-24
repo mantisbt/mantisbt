@@ -59,6 +59,7 @@
  * @author Karduelis
  * @author Khutuck
  * @author Korayal
+ * @author Leo
  * @author McAang
  * @author Meelo
  * @author Melissadilara
@@ -147,6 +148,7 @@ $s_inherit = 'Kategorileri Devral';
 $s_inherit_global = 'Küresel Kategorileri Devral';
 $s_inherit_parent = 'Üst Kategorileri Devral';
 $s_update_subproject_inheritance = 'Altproje Sahiplenmesini Güncelle';
+$s_category_disabled = 'Kategori devre dışı bırakıldı, lütfen başka bir kategori seçin';
 $s_duplicate_of = 'kopyası';
 $s_has_duplicate = 'kopyası var';
 $s_related_to = 'ile ilgili';
