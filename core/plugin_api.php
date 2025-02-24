@@ -846,8 +846,13 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
  * @return MantisPlugin[] List of found plugins, with basename as key.
  */
 function plugin_find_all() {
+	static $s_plugins;
+	if( !is_null( $s_plugins ) ) {
+		return $s_plugins;
+	}
+	
 	$t_plugin_path = config_get_global( 'plugin_path' );
-	$t_plugins = array(
+	$s_plugins = array(
 		'MantisCore' => new MantisCorePlugin( 'MantisCore' ),
 	);
 
@@ -868,7 +873,7 @@ function plugin_find_all() {
 				$t_plugin = plugin_register( $t_file, true );
 
 				if( !is_null( $t_plugin ) ) {
-					$t_plugins[$t_file] = $t_plugin;
+					$s_plugins[$t_file] = $t_plugin;
 				}
 			}
 		}
@@ -876,12 +881,12 @@ function plugin_find_all() {
 	}
 
 	# Process missing plugins (i.e. installed without code in plugins directory)
-	$t_missing_plugins = array_diff( $t_installed_plugins, array_keys( $t_plugins ) );
+	$t_missing_plugins = array_diff( $t_installed_plugins, array_keys( $s_plugins ) );
 	foreach( $t_missing_plugins as $t_missing_plugin ) {
-		$t_plugins[$t_missing_plugin] = new MissingPlugin( $t_missing_plugin );
+		$s_plugins[$t_missing_plugin] = new MissingPlugin( $t_missing_plugin );
 	}
 
-	return $t_plugins;
+	return $s_plugins;
 }
 
 /**
