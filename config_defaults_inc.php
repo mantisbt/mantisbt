@@ -4153,26 +4153,26 @@ $g_use_persistent_connections = OFF;
 #################
 
 /**
- * Specify your top/bottom include file (logos, banners, etc).
- * 
- * @global string $g_bottom_include_page
- */
-$g_bottom_include_page = '%absolute_path%';
-
-/**
- * Specify your top/bottom include file (logos, banners, etc).
+ * Absolute path to the top include file (logos, banners, etc).
  *
- * If a top file is supplied, the default MantisBT logo at the top will be hidden.
- * For example, you could include a centered title at the top of the page with:
+ * For example, you could include a centered title at the top of the
+ * page with:
  *
- * <div class="center"><span class="pagetitle">TITLE</span></div>
+ * <div class="bg-primary text-center bigger-150">Awesome company</div>
  *
- * The default banner which is removed if you use an include file can be found in html_api.php in
- * the function called html_top_banner.
+ * The element will have a fixed position, so it is desirable to use
+ * a solid background for it.
  *
  * @global string $g_top_include_page
  */
-$g_top_include_page = '%absolute_path%';
+$g_top_include_page = '';
+
+/**
+ * Absolute path to the bottom include file (logos, banners, etc).
+ * 
+ * @global string $g_bottom_include_page
+ */
+$g_bottom_include_page = '';
 
 /**
  * CSS file.
