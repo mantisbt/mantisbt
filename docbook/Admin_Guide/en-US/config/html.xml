@@ -98,47 +98,30 @@
 				</warning>
 			</listitem>
 		</varlistentry>
-
 		<varlistentry>
-			<term>$g_bottom_include_page</term>
+			<term>$g_top_include_page</term>
 			<listitem>
-				<para>Specifies a file to be included at the bottom of each page.
-					It can be used e.g. for company branding, to include Google
-					Analytics script, etc.
+				<para>Absolute path to the top include file.
+					It can be used e.g. for company branding.
+				</para>
+				<para>Example include file with logo and centered page title:
+<programlisting>
+&lt;div class="bg-primary text-center bigger-150"&gt;
+	Awesome company
+&lt;/div&gt;
+</programlisting>
+				</para>
+				<para>The element will have a fixed position,
+					so it is desirable to use a solid background for it.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_top_include_page</term>
+			<term>$g_bottom_include_page</term>
 			<listitem>
-				<para>Specifies a file to be included at the top of each page.
-					It can be used e.g. for company branding.
-				</para>
-				<para>If a file is supplied, the logo specified by
-					<literal>$g_logo_image</literal> (see
-					<xref linkend="admin.config.display" />) will not be shown,
-					and the include file will have to handle display of the logo.
-					To do so you can use the <literal>html_print_logo()</literal>
-					API function, which will display the logo with an URL link if
-					one has been specified in <literal>$g_logo_url</literal>
-				</para>
-				<para>Example top include PHP file with logo and centered page title:
-<programlisting>
-&lt;div id="banner" style="display: flex; align-items: center;"&gt;
-	&lt;div style="width: 10%;"&gt;
-		&lt;?php html_print_logo(); ?&gt;
-	&lt;/div&gt;
-
-	&lt;div class="center"&gt;
-		&lt;span class="pagetitle"&gt;
-			&lt;?php global $g_window_title; echo $g_window_title; ?&gt;
-		&lt;/span&gt;
-	&lt;/div&gt;
-
-	&lt;div style="width: 10%;"&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-</programlisting>
+				<para>Absolute path to the bottom include file.
+					It can be used e.g. for company branding, to include Google
+					Analytics script, etc.
 				</para>
 			</listitem>
 		</varlistentry>
