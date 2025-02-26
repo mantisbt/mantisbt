@@ -208,11 +208,13 @@ class ApiObjectFactory {
 	}
 
 	/**
-	 * Convert a timestamp to a soap DateTime variable
-	 * @param integer $p_value Integer value to return as date time string.
-	 * @return datetime in expected API format.
+	 * Convert a timestamp to a soap DateTime variable or ISO-8601 date.
+	 *
+	 * @param int $p_value Unix Timestamp.
+	 *
+	 * @return SoapVar|string datetime in expected API format.
 	 */
-	static function datetime($p_value ) {
+	static function datetime( $p_value ) {
 		$t_string_value = self::datetimeString( $p_value );
 
 		if( ApiObjectFactory::$soap ) {
@@ -223,16 +225,27 @@ class ApiObjectFactory {
 	}
 
 	/**
-	 * Convert a timestamp to a DateTime string
-	 * @param integer $p_timestamp Integer value to format as date time string.
-	 * @return string for provided timestamp
+	 * Convert a timestamp to an ISO-8601 formatted DateTime string.
+	 *
+	 * @param int|null $p_timestamp Unix timestamp.
+	 *
+	 * @return string|null Formatted datetime.
 	 */
-	static function datetimeString($p_timestamp ) {
-		if( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
-			return null;
-		}
+	static function datetimeString( $p_timestamp ) {
+		return date_timestamp_to_iso8601( $p_timestamp );
+	}
 
-		return date( 'c', (int)$p_timestamp );
+	/**
+	 * Converts a datetime string to a Unix timestamp.
+	 *
+	 * @param string $p_date_string Date string.
+	 *
+	 * @return int|null Unix timestamp, null when $p_date_string is blank.
+	 *
+	 * @throws ClientException When given string cannot be converted to Date.
+	 */
+	static function dateStringToTimestamp( $p_date_string ): ?int {
+		return date_string_to_timestamp( $p_date_string );
 	}
 
 	/**
