@@ -104,10 +104,17 @@
 				<para>Absolute path to the top include file.
 					It can be used e.g. for company branding.
 				</para>
-				<para>Example include file with logo and centered page title:
+				<para>
+					For example you can use the <literal>html_print_logo()</literal>
+					API function, which will display the logo specified by
+					<literal>$g_logo_image</literal> (see
+					<xref linkend="admin.config.display" />) with an URL link if
+					one has been specified in <literal>$g_logo_url</literal>.
+				</para>
+				<para>Example top include PHP file with a centered page logo:
 <programlisting>
-&lt;div class="bg-primary text-center bigger-150"&gt;
-	Awesome company
+&lt;div class="bg-primary text-center bigger-150 padding-8"&gt;
+	&lt;?php html_print_logo() ?&gt;
 &lt;/div&gt;
 </programlisting>
 				</para>
@@ -122,6 +129,9 @@
 				<para>Absolute path to the bottom include file.
 					It can be used e.g. for company branding, to include Google
 					Analytics script, etc.
+				</para>
+				<para>The element will also have a fixed position,
+					so it is desirable to use a solid background for it as well.
 				</para>
 			</listitem>
 		</varlistentry>
