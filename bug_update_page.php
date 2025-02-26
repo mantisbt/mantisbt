@@ -204,18 +204,18 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	#
 
 	echo '<tr>';
-	echo '<td width="15%" class="category">', $t_show_id ? lang_get( 'id' ) : '', '</td>';
-	echo '<td width="20%" class="category">', $t_show_project ? lang_get( 'email_project' ) : '', '</td>';
-	echo '<td width="15%" class="category">';
+	echo '<td class="category">', $t_show_id ? lang_get( 'id' ) : '', '</td>';
+	echo '<td class="category">', $t_show_project ? lang_get( 'email_project' ) : '', '</td>';
+	echo '<td class="category">';
 	if( $t_show_category ) {
 		$t_allow_no_category = config_get( 'allow_no_category' );
 		echo $t_allow_no_category ? '' : '<span class="required">*</span> ';
 		echo '<label for="category_id">' . lang_get( 'category' ) . '</label>';
 	}
 	echo '</td>';
-	echo '<td width="20%" class="category">', $t_show_view_state ? '<label for="view_state">' . lang_get( 'view_status' ) . '</label>' : '', '</td>';
-	echo '<td width="15%" class="category">', $t_show_date_submitted ? lang_get( 'date_submitted' ) : '', '</td>';
-	echo '<td width="15%" class="category">', $t_show_last_updated ? lang_get( 'last_update' ) : '', '</td>';
+	echo '<td class="category">', $t_show_view_state ? '<label for="view_state">' . lang_get( 'view_status' ) . '</label>' : '', '</td>';
+	echo '<td class="category">', $t_show_date_submitted ? lang_get( 'date_submitted' ) : '', '</td>';
+	echo '<td class="category">', $t_show_last_updated ? lang_get( 'last_update' ) : '', '</td>';
 	echo '</tr>';
 
 	#
@@ -314,7 +314,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 
 		if( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
 			echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id" class="input-sm">';
-			echo '<option value="0"></option>';
+			echo '<option value="0">&nbsp;</option>';
 			print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id );
 			echo '</select>';
 		} else {
