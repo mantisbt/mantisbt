@@ -280,9 +280,7 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 
 	echo '</tr>';
 
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
 #
@@ -558,9 +556,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 
 event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $f_issue_id ) );
 
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 #
 # Bug Details (screen wide fields)
@@ -639,9 +635,7 @@ if( !empty( $t_result['issue']['attachments'] ) ) {
 	echo '</td></tr>';
 }
 
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 # Custom Fields
 if( isset( $t_issue['custom_fields'] ) ) {
@@ -656,9 +650,7 @@ if( isset( $t_issue['custom_fields'] ) ) {
 		echo '</td></tr>';
 	}
 
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
 echo '</tbody></table>';

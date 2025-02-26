@@ -271,9 +271,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 
 	echo '</tr>';
 
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
 #
@@ -638,9 +636,7 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 
 event_signal( 'EVENT_UPDATE_BUG_FORM', array( $t_bug_id ) );
 
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 # Summary
 if( $t_show_summary ) {
@@ -692,8 +688,7 @@ if( $t_show_additional_information ) {
 	echo '</td></tr>';
 }
 
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 # Custom Fields
 $t_custom_fields_found = false;
@@ -724,9 +719,7 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 } # foreach( $t_related_custom_field_ids as $t_id )
 
 if( $t_custom_fields_found ) {
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
 # Bugnote Text Box

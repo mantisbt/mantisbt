@@ -343,14 +343,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</td>
 </tr>
 <?php
-if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
-	event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_activity['id'], $t_activity['private'] ) );
-}
-?>
-<tr class="spacer">
-	<td colspan="2"></td>
-</tr>
-<?php
+		if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
+			event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_activity['id'], $t_activity['private'] ) );
+		}
+
+		print_table_spacer( 2 );
 	} # end for loop
 
 	event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );

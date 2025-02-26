@@ -191,9 +191,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo $t_lang_bug_view_title ?>
 	</td>
 </tr>
-<tr class="spacer" >
-	<td colspan="6"></td>
-</tr>
+<?php print_table_spacer( 6 ) ?>
 <tr class="bold">
 	<td width="16%">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_id ) ?>
@@ -234,9 +232,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo date( $t_date_format, $t_bug->last_updated ) ?>
 	</td>
 </tr>
-<tr class="spacer" >
-	<td colspan="6"></td>
-</tr>
+<?php print_table_spacer( 6 ) ?>
 <tr>
 	<td class="bold">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_reporter ) ?>
@@ -402,9 +398,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 <?php
 }       # foreach
 ?>
-<tr class="spacer" >
-	<td colspan="6"></td>
-</tr>
+<?php print_table_spacer( 6 ) ?>
 <tr>
 	<td class="bold">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_summary ) ?>
@@ -497,8 +491,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		?>
 	</td>
 </tr>
-
-<tr class="spacer"><td colspan="6"></td></tr>
+<?php print_table_spacer( 6 ) ?>
 </table>
 
 <?php
@@ -561,8 +554,8 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 				?>
 			</td>
 		</tr>
-		<tr class="spacer"><td colspan="2"></td></tr>
 <?php
+			print_table_spacer( 2 );
 		} # end for
 	} # end else
 ?>
