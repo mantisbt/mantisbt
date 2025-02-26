@@ -193,22 +193,22 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 </tr>
 <?php print_table_spacer( 6 ) ?>
 <tr class="bold">
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_id ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_category ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_severity ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_reproducibility ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_date_submitted ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_last_update ) ?>
 	</td>
 </tr>
@@ -506,7 +506,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 	if( 0 == count( $t_bugnotes ) ) {
 	?>
 <tr>
-	<td class="bold" colspan="2">
+	<td class="bold">
 		<?php echo $t_lang_no_bugnotes_msg ?>
 	</td>
 </tr>
@@ -527,7 +527,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 			$t_note = string_display_links( $t_bugnote->note );
 	?>
 <tr>
-	<td width="12%">
+	<td>
 				(<?php echo bugnote_format_id( $t_bugnote->id ) ?>)
 			<br />
 				<?php print_user( $t_bugnote->reporter_id, false ) ?>&#160;&#160;&#160;

@@ -222,15 +222,6 @@ if( $t_top_buttons_enabled ) {
 	echo '</thead>';
 }
 
-if( $t_bottom_buttons_enabled ) {
-	echo '<tfoot>';
-	echo '<tr class="noprint"><td colspan="6">';
-	/** @noinspection PhpUnhandledExceptionInspection */
-	bug_view_action_buttons( $f_issue_id, $t_flags );
-	echo '</td></tr>';
-	echo '</tfoot>';
-}
-
 echo '<tbody>';
 
 if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show'] ||
@@ -653,7 +644,19 @@ if( isset( $t_issue['custom_fields'] ) ) {
 	print_table_spacer( 6 );
 }
 
-echo '</tbody></table>';
+echo '</tbody>';
+
+if( $t_bottom_buttons_enabled ) {
+	echo '<tfoot>';
+	echo '<tr class="noprint"><td colspan="6">';
+	/** @noinspection PhpUnhandledExceptionInspection */
+	bug_view_action_buttons( $f_issue_id, $t_flags );
+	echo '</td></tr>';
+	echo '</tfoot>';
+}
+
+echo '</table>';
+
 echo '</div></div></div></div></div>';
 
 # User list sponsoring the bug
@@ -791,7 +794,7 @@ if( $t_flags['history_show'] && $f_history ) {
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_history = history_get_events_array( $f_issue_id );
 ?>
-		<div id="history" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+		<div class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-history', 'ace-icon' ); ?>
