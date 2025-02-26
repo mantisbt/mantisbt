@@ -2315,3 +2315,14 @@ function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_sele
 <?php
 }
 
+/**
+ * Print table spacer.
+ *
+ * @param integer $p_cols Number of columns in the table
+ * @return void
+ */
+function print_table_spacer( int $p_cols ) {
+	if( $p_cols > 0 ) {
+		echo '<tr class="spacer"><td colspan="', $p_cols, '"></td></tr>';
+	}
+}

@@ -210,11 +210,8 @@ if( filter_is_temporary( $t_filter ) ) {
 		}
 	?>
 </tr>
-<tr class="spacer">
-	<td colspan="<?php echo $t_num_of_columns ?>"></td>
-</tr>
+<?php print_table_spacer( $t_num_of_columns ) ?>
 </thead>
-
 <tbody>
 <?php
 	for( $i=0; $i < $t_row_count; $i++ ) {
@@ -232,11 +229,10 @@ if( filter_is_temporary( $t_filter ) ) {
 <?php
 		} # isset_loop
 	} # for_loop
+
+	print_table_spacer( $t_num_of_columns );
 ?>
-<tr class="spacer">
-    <td colspan="<?php echo $t_num_of_columns ?>"></td>
-</tr>
-<tr>
+<tr class="noprint">
     <td colspan="<?php echo $t_num_of_columns ?>">
         <input type="hidden" name="show_flag" value="1" />
         <input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
