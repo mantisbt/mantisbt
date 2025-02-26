@@ -391,7 +391,7 @@ function html_head_end() {
  *                       from $g_logo_image
  * @return void
  */
-function html_print_logo( $p_logo = null ) {
+function html_print_logo( string $p_logo = '' ) {
 	if( !$p_logo ) {
 		$p_logo = config_get_global( 'logo_image' );
 	}
@@ -401,10 +401,14 @@ function html_print_logo( $p_logo = null ) {
 		$t_show_url = !is_blank( $t_logo_url );
 
 		if( $t_show_url ) {
-			echo '<a id="logo-link" href="', config_get_global( 'logo_url' ), '">';
+			echo '<a class="logo-link" href="', $t_logo_url, '"',
+				helper_get_link_attributes( false, helper_is_link_external( $t_logo_url ) ),
+				'>';
 		}
 		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
-		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="' . helper_mantis_url( $p_logo ) . '" />';
+		echo '<img class="logo-image" alt="', $t_alternate_text,
+			'" title="', $t_alternate_text,
+			'" src="' . helper_mantis_url( $p_logo ) . '">';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
