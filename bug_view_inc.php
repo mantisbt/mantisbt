@@ -212,13 +212,11 @@ echo '<div class="table-responsive">';
 echo '<table class="table table-bordered table-condensed">';
 
 if( $t_top_buttons_enabled ) {
-	echo '<thead><tr class="bug-nav">';
-	echo '<tr class="top-buttons noprint">';
-	echo '<td colspan="6">';
+	echo '<thead>';
+	echo '<tr class="top-buttons noprint"><td colspan="6">';
 	/** @noinspection PhpUnhandledExceptionInspection */
 	bug_view_action_buttons( $f_issue_id, $t_flags );
-	echo '</td>';
-	echo '</tr>';
+	echo '</td></tr>';
 	echo '</thead>';
 }
 
@@ -1228,7 +1226,7 @@ function bug_view_button_bug_assign_to( BugData $p_bug ) {
 
 	# allow un-assigning if already assigned.
 	if( $p_bug->handler_id != 0 ) {
-		echo '<option value="0"></option>';
+		echo '<option value="0">&nbsp;</option>';
 	}
 
 	# 0 means currently selected

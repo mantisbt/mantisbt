@@ -180,8 +180,6 @@ layout_page_begin();
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
-
 <?php
 # Submit Button
 if( $t_top_buttons_enabled ) {
@@ -194,6 +192,7 @@ if( $t_top_buttons_enabled ) {
 <?php
 }
 ?>
+		<table class="table table-bordered table-condensed table-striped">
 			<tbody>
 <?php
 event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $t_bug_id ) );
@@ -285,15 +284,18 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 
 	if( $t_show_reporter ) {
 		# Reporter
-		echo '<th class="category"><label for="reporter_id">' . lang_get( 'reporter' ) . '</label></th>';
-		echo '<td>';
+		echo '<th class="category">';
+		if( $f_reporter_edit ) echo '<label for="reporter_id">';
+		echo lang_get( 'reporter' );
+		if( $f_reporter_edit ) echo '</label>';
+		echo '</th><td>';
 
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
 		if( access_has_limited_view( $t_bug->project_id ) ) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {
-			if ( $f_reporter_edit ) {
+			if( $f_reporter_edit ) {
 				echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id">';
 				print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id );
 				echo '</select>';
@@ -760,12 +762,13 @@ if( config_get( 'time_tracking_enabled' ) ) {
 }
 
 event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $t_bug_id ) );
-
-echo '</table>';
-echo '</div>';
-echo '</div>';
-echo '</div>';
-
+?>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<?php
 # Submit Button
 if( $t_bottom_buttons_enabled ) {
 ?>

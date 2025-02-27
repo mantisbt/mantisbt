@@ -61,7 +61,7 @@ print_manage_menu( 'manage_user_create_page.php' );
 <div class="space-10"></div>
 <div id="manage-user-create-div" class="form-container">
 	<form id="manage-user-create-form" method="post" action="manage_user_create.php">
-	<div class="widget-box widget-color-blue2">
+		<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-user', 'ace-icon' ); ?>
@@ -71,10 +71,9 @@ print_manage_menu( 'manage_user_create_page.php' );
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
-			<?php echo form_security_field( 'manage_user_create' ) ?>
-
+		<?php echo form_security_field( 'manage_user_create' ) ?>
+		<table class="table table-bordered table-condensed table-striped">
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'username' ) ?>
@@ -152,21 +151,20 @@ print_manage_menu( 'manage_user_create_page.php' );
 					</label>
 				</td>
 			</tr>
-			</fieldset>
-			</table>
-			</div>
-			</div>
-			</div>
+		</table>
+		</fieldset>
+		</div>
+		</div>
+		</div>
 
-			<?php event_signal( 'EVENT_MANAGE_USER_CREATE_FORM' ) ?>
+		<?php event_signal( 'EVENT_MANAGE_USER_CREATE_FORM' ) ?>
 
-			<div class="widget-toolbox padding-8 clearfix">
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'create_user_button' ) ?>" />
-			</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'create_user_button' ) ?>" />
 		</div>
 		</div>
 	</form>
 </div>
-
+</div>
 <?php
 layout_page_end();
