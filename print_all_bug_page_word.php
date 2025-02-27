@@ -174,7 +174,11 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	# display the available and selected bugs
 	if( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
 		if( $t_count_exported > 0 ) {
-			echo '<br style="mso-special-character: line-break; page-break-before: always" />';
+			if( $f_type_page == 'html' ) {
+				echo '<div class="clearfix" style="page-break-before: always">&nbsp;</div>';
+			} else {
+				echo '<br clear=all style="mso-special-character: line-break; page-break-before: always">&nbsp;';
+			}
 		}
 
 		$t_count_exported++;
@@ -560,14 +564,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 	} # end else
 ?>
 </table>
-
-<?php # Bugnotes END ?>
-
-
 <?php
-		if( $f_type_page != 'html' ) {
-			echo '<hr>';
-		}
 	} # end in_array
 }  # end main loop
 
