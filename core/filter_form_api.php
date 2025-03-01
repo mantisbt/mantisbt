@@ -1907,13 +1907,13 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object, ?array $p_f
 
 	switch( $p_filter_object->type ) {
 		case FILTER_TYPE_STRING:
-			echo '<input class="input-xs" name="', string_attribute( $p_field_name ), '"',
+			echo '<input class="input-xs" type="text" name="', string_attribute( $p_field_name ), '"',
 				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' value="',
 				string_attribute( $p_filter[$p_field_name] ), '"/>';
 			break;
 
 		case FILTER_TYPE_INT:
-			echo '<input class="input-xs" name="', string_attribute( $p_field_name ), '"',
+			echo '<input class="input-xs" type="text" name="', string_attribute( $p_field_name ), '"',
 				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' value="',
 				(int)$p_filter[$p_field_name], '"/>';
 			break;
@@ -1921,7 +1921,7 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object, ?array $p_f
 		case FILTER_TYPE_BOOLEAN:
 			echo '<input name="', string_attribute( $p_field_name ), '" type="hidden" value="', OFF ,'"/>';
 			echo '<label>';
-			echo '<input class="input-xs" name="', string_attribute( $p_field_name ), '" type="checkbox"',
+			echo '<input class="input-xs ace" name="', string_attribute( $p_field_name ), '" type="checkbox"',
 				( $t_size > 0 ? ' size="' . $t_size . '"' : '' );
 			check_checked( (bool)$p_filter[$p_field_name] );
 			echo '"/>';

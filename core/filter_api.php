@@ -761,13 +761,24 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 						$p_filter_arr['custom_fields'][$t_cfid],
 					);
 				}
+
 				$t_checked_array = array();
-				foreach( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
-					$t_filter_value = stripslashes( $t_filter_value );
-					if( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
-						$t_filter_value = META_FILTER_ANY;
+
+				# Special handling for date custom fields which have a special array format
+				$t_def = custom_field_get_definition( $t_cfid );
+				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
+					# All array elements should be numeric
+					# - 0 is one of the CUSTOM_FIELD_DATE_xxx constants
+					# - 1 & 2 are unix timestamps
+					$t_checked_array = array_map( 'intval', $p_filter_arr['custom_fields'][$t_cfid] );
+				} else {
+					foreach( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
+						$t_filter_value = stripslashes( $t_filter_value );
+						if( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
+							$t_filter_value = META_FILTER_ANY;
+						}
+						$t_checked_array[] = $t_filter_value;
 					}
-					$t_checked_array[] = $t_filter_value;
 				}
 				$p_filter_arr['custom_fields'][$t_cfid] = $t_checked_array;
 			}
@@ -2160,7 +2171,7 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 				$f_custom_fields_data[$t_cfid] = array();
 
 				# Get date control property
-				$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null );
+				$t_control = gpc_get_int( 'custom_field_' . $t_cfid . '_control', null );
 				$f_custom_fields_data[$t_cfid][0] = $t_control;
 
 				$t_one_day = 86399;
