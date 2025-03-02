@@ -1473,6 +1473,13 @@ function email_send( EmailData $p_email_data ) {
 			}
 			else {
 				$t_mail->SMTPSecure = config_get( 'smtp_connection_mode' );
+					
+				// Specify additonal options for ssl/tls protocols.
+				$t_mail->SMTPOptions = array (
+					'ssl' => array(
+						'verify_peer' => config_get( 'smtp_ssl_verify_peer' )
+					)
+				);
 			}
 
 			$t_mail->Port = config_get( 'smtp_port' );
