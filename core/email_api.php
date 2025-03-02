@@ -1458,13 +1458,35 @@ function email_send( EmailData $p_email_data ) : bool {
 	# - In-Reply-To
 	# - ... possibly other custom headers
 
-	$t_msg->headers = [
+	$t_headers = [
 		'Auto-Submitted' => 'auto-generated',
 		'X-Auto-Response-Suppress' => 'All',
 	];
 
 	if( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
-		$t_msg->headers = array_merge( $t_msg->headers, $t_email_data->metadata['headers'] );
+		$t_headers = array_merge( $t_headers, $t_email_data->metadata['headers'] );
+	}
+
+	$t_msg->headers = [];
+	foreach( $t_headers as $t_key => $t_value ) {
+		switch( strtolower( $t_key ) ) {
+			case 'message-id':
+				# Note: hostname can never be blank here as we set metadata['hostname']
+				# in email_store() where mail gets queued.
+				if( !strchr( $t_value, '@' ) && !is_blank( $t_msg->hostname ) ) {
+					$t_value = $t_value . '@' . $t_msg->hostname;
+				}
+
+				$t_value = '<' . $t_value . '>';
+				break;
+			case 'in-reply-to':
+				if( !preg_match( '/<.+@.+>/m', $t_value ) ) {
+					$t_value = '<' . $t_value . '@' . $t_msg->hostname . '>';
+				}
+				break;
+		}
+
+		$t_msg->headers[$t_key] = $t_value;
 	}
 
 	try {
@@ -1489,13 +1511,19 @@ function email_send( EmailData $p_email_data ) : bool {
  * @throws Exception If configured provider can't be found.
  */
 function email_create_provider() : EmailSender {
-	$t_provider = event_signal( 'EVENT_EMAIL_CREATE_SEND_PROVIDER', [] );
-	if( is_null( $t_provider ) ) {
-		require_once __DIR__ . '/classes/EmailSenderPhpMailer.class.php';
-		return new EmailSenderPhpMailer();
+	/** @var EmailSender $s_provider */
+	static $s_provider = null;
+
+	if( is_null( $s_provider ) ) {
+		$s_provider = event_signal( 'EVENT_EMAIL_CREATE_SEND_PROVIDER', [] );
+
+		if( is_null( $s_provider ) ) {
+			require_once __DIR__ . '/classes/EmailSenderPhpMailer.class.php';
+			$s_provider = new EmailSenderPhpMailer();
+		}
 	}
 
-	return $t_provider;
+	return $s_provider;
 }
 
 /**
