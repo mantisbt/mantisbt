@@ -5,6 +5,20 @@
 <section id="admin.config.email">
 	<title>Email</title>
 
+	<para>
+		MantisBT sends email notifications to users when certain events occur.
+		This section includes configuration relating to when to trigger email notifications,
+		how to send them, from what addresses to send them, and how to format them.
+	</para>
+
+	<para>
+		The default implementation uses PHPMailer to send emails which is implemented via
+		<literal>core/classes/EmailSenderPhpMailer.class.php</literal>. Such implementation
+		can be overriden by EmailSender plugins, see
+		<ulink url="https://github.com/mantisbt-plugins/TestEmailSender">TestEmailSender</ulink>
+		for an example.
+	</para>
+
 	<variablelist>
 		<varlistentry>
 			<term>$g_webmaster_email</term>
