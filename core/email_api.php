@@ -1435,15 +1435,15 @@ function email_send( EmailData $p_email_data ) : bool {
 	$t_msg->lang = $t_lang;
 
 	$t_msg->cc = [];
-	if( isset( $t_email_data->metadata['cc'] ) && $t_email_data->metadata['cc'] ) {
-		foreach( $t_email_data->metadata['cc'] as $cc ) {
+	if( isset( $p_email_data->metadata['cc'] ) && $p_email_data->metadata['cc'] ) {
+		foreach( $p_email_data->metadata['cc'] as $cc ) {
 			$t_msg->cc[] = trim( $cc );
 		}
 	}
 
 	$t_msg->bcc = [];
-	if( isset( $t_email_data->metadata['bcc'] ) && $t_email_data->metadata['bcc'] ) {
-		foreach( $t_email_data->metadata['bcc'] as $bcc ) {
+	if( isset( $p_email_data->metadata['bcc'] ) && $p_email_data->metadata['bcc'] ) {
+		foreach( $p_email_data->metadata['bcc'] as $bcc ) {
 			$t_msg->bcc[] = trim( $bcc );
 		}
 	}
@@ -1463,8 +1463,8 @@ function email_send( EmailData $p_email_data ) : bool {
 		'X-Auto-Response-Suppress' => 'All',
 	];
 
-	if( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
-		$t_headers = array_merge( $t_headers, $t_email_data->metadata['headers'] );
+	if( isset( $p_email_data->metadata['headers'] ) && is_array( $p_email_data->metadata['headers'] ) ) {
+		$t_headers = array_merge( $t_headers, $p_email_data->metadata['headers'] );
 	}
 
 	$t_msg->headers = [];
