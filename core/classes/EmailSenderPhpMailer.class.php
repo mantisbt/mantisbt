@@ -148,7 +148,12 @@ class EmailSenderPhpMailer extends EmailSender {
 		$t_mail->Subject = $p_message->subject;
 		$t_mail->Body = $p_message->text;
 
-		foreach( $p_message->headers as $t_key => $t_value ) {
+		# Provide classes that derive from this class to inject their own headers.
+		# For example, a plugin that re-uses this SMTP implementation but needs to
+		# inject target specific headers (e.g. AWS SES, Sendgrid, Mailgun, Postmark, etc)
+		$t_headers = array_merge( $p_message->headers, $this->headersToInject() );
+
+		foreach( $t_headers as $t_key => $t_value ) {
 			switch( strtolower( $t_key ) ) {
 				case 'message-id':
 					$t_mail->set( 'MessageID', $t_value );
@@ -173,6 +178,28 @@ class EmailSenderPhpMailer extends EmailSender {
 		self::reset( $t_mail );
 
 		return $t_success;
+	}
+
+	/**
+	 * Get headers to inject into the email.
+	 *
+	 * @return array<string,string> The headers to inject.
+	 */
+	protected function headersToInject() : array {
+		$t_headers = [];
+		
+		# Here is an example of a sample AwsEmailSender plugin that re-uses
+		# EmailSenderPhpMailer instead of building a native AWS SES one.
+		# It will implement EmailSenderAws class that inherits from this class
+		# and inject the headers required by AWS SES.
+		# plugin_push_current( 'AwsEmailSender' );
+		# try {
+		#    $t_headers['X-SES-CONFIGURATION-SET'] = plugin_config_get( 'config_set' );
+		# } finally {
+		#    plugin_pop_current();
+		# }
+
+		return $t_headers;
 	}
 
 	/**
