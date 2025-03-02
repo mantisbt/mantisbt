@@ -18,7 +18,10 @@ require_api( 'email_queue_api.php' );
 require_once( __DIR__ . '/EmailMessage.class.php' );
 
 /**
- * An implementation that sends out emails
+ * The base class for email sender implementations.
+ *
+ * Note that the same instance will be used to send multiple emails
+ * within the same request.
  */
 abstract class EmailSender {
 	/**

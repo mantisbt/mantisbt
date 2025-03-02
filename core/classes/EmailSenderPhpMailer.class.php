@@ -24,6 +24,9 @@ require_once( __DIR__ . '/EmailSender.class.php' );
 
 /**
  * An implementation that sends out emails using PhpMailer library.
+ *
+ * Note that the same instance will be used to send multiple emails
+ * within the same request.
  */
 class EmailSenderPhpMailer extends EmailSender {
 	/**
@@ -148,19 +151,8 @@ class EmailSenderPhpMailer extends EmailSender {
 		foreach( $p_message->headers as $t_key => $t_value ) {
 			switch( strtolower( $t_key ) ) {
 				case 'message-id':
-					# Note: hostname can never be blank here as we set metadata['hostname']
-					# in email_store() where mail gets queued.
-					if( !strchr( $t_value, '@' ) && !is_blank( $t_mail->Hostname ) ) {
-						$t_value = $t_value . '@' . $t_mail->Hostname;
-					}
-					$t_mail->set( 'MessageID', '<' . $t_value . '>' );
+					$t_mail->set( 'MessageID', $t_value );
 					break;
-				/** @noinspection PhpMissingBreakStatementInspection */
-				case 'in-reply-to':
-					if( !preg_match( '/<.+@.+>/m', $t_value ) ) {
-						$t_value = '<' . $t_value . '@' . $t_mail->Hostname . '>';
-					}
-					# Fall-through
 				default:
 					$t_mail->addCustomHeader( $t_key . ': ' . $t_value );
 					break;
