@@ -54,15 +54,16 @@ class MarkdownTest extends TestCase {
 		$this->assertSame( $t_instance_1, $t_instance_2 );
 	}
 
-	/**
-	 * The default value for "process_urls" and "process_buglinks"
-	 * is the value of the constant "OFF" (0).
-	 */
+  /**
+   * The default value for "process_urls", "process_buglinks" and
+   * "process_prlinks" is the value of the constant "OFF" (0).
+   */
 	public function testIfDefaultConfigurationValueIsOff(): void {
 		$t_parser = new MantisMarkdown();
 
 		$this->assertSame( OFF, $t_parser->getConfigProcessUrls() );
 		$this->assertSame( OFF, $t_parser->getConfigProcessBugLinks() );
+		$this->assertSame( OFF, $t_parser->getConfigProcessPrLinks() );
 	}
 
 	/**
@@ -73,20 +74,34 @@ class MarkdownTest extends TestCase {
 		$t_parser = new MantisMarkdown( ON );
 		$this->assertSame( ON, $t_parser->getConfigProcessUrls() );
 		$this->assertSame( OFF, $t_parser->getConfigProcessBugLinks() );
+		$this->assertSame( OFF, $t_parser->getConfigProcessPrLinks() );
 
 		$t_parser = new MantisMarkdown( OFF, ON );
 		$this->assertSame( OFF, $t_parser->getConfigProcessUrls() );
 		$this->assertSame( ON, $t_parser->getConfigProcessBugLinks() );
+		$this->assertSame( OFF, $t_parser->getConfigProcessPrLinks() );
 
 		$t_parser = new MantisMarkdown( ON, ON );
 		$this->assertSame( ON, $t_parser->getConfigProcessUrls() );
 		$this->assertSame( ON, $t_parser->getConfigProcessBugLinks() );
+		$this->assertSame( OFF, $t_parser->getConfigProcessPrLinks() );
+
+		$t_parser = new MantisMarkdown( ON, OFF, ON );
+		$this->assertSame( ON, $t_parser->getConfigProcessUrls() );
+		$this->assertSame( OFF, $t_parser->getConfigProcessBugLinks() );
+		$this->assertSame( ON, $t_parser->getConfigProcessPrLinks() );
+
+		$t_parser = new MantisMarkdown( OFF, ON, OFF );
+		$this->assertSame( OFF, $t_parser->getConfigProcessUrls() );
+		$this->assertSame( ON, $t_parser->getConfigProcessBugLinks() );
+		$this->assertSame( OFF, $t_parser->getConfigProcessPrLinks() );
 	}
 
-	/**
-	 * The configuration value for "process_urls" and "process_buglinks" must
-	 * be the value of the constant "ON" (1) or "OFF" (0). Its "OFF" (0) otherwise.
-	 */
+  /**
+   * The configuration value for "process_urls", "process_buglinks" and
+   * "process_prlinks" must be the value of the constant "ON" (1) or "OFF" (0).
+   * Its "OFF" (0) otherwise.
+   */
 	public function testCanNotConfigureInvalidValues(): void {
 		$t_expected = OFF;
 
@@ -94,6 +109,7 @@ class MarkdownTest extends TestCase {
 			$t_parser = new MantisMarkdown( $t_value, $t_value );
 			$this->assertSame( $t_expected, $t_parser->getConfigProcessUrls() );
 			$this->assertSame( $t_expected, $t_parser->getConfigProcessBugLinks() );
+			$this->assertSame( $t_expected, $t_parser->getConfigProcessPrLinks() );
 		}
 	}
 

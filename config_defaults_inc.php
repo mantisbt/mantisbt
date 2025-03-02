@@ -3713,6 +3713,32 @@ $g_bug_link_tag = '#';
 $g_bugnote_link_tag = '~';
 
 /**
+ * Pull / merge request linking.
+ *
+ * If a number follows this tag, MantisBT will create a link to a pull / merge
+ * request on a third party website to that pull / merge request.
+ *
+ * Examples:
+ * - for '!' a link would be '!45'
+ * - for 'pr:' a link would be 'pr:98'
+ *
+ * @global string $g_pr_link_tag
+ */
+$g_pr_link_tag = '!';
+
+/**
+ * Pull / merge request linking URL template.
+ *
+ * URL template that will be filled with a pull / merge request ID when
+ * using "$g_pr_link_tag" above. It must contain the string "{id}" where the
+ * actual ID should be inserted. Default is an empty string, which disables
+ * the feature.
+ *
+ * @global string $g_pr_link_url
+ */
+$g_pr_link_url = '';
+
+/**
  * Bug Count Linking.
  *
  * This is the prefix to use when creating links to bug views from bug counts
@@ -5520,6 +5546,8 @@ $g_public_config_names = array(
 	'preview_max_height',
 	'preview_max_width',
 	'preview_text_extensions',
+  'pr_link_tag',
+  'pr_link_url',
 	'print_issues_page_columns',
 	'print_reports_threshold',
 	'priority_enum_string',
