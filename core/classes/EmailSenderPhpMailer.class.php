@@ -20,7 +20,7 @@ use PHPMailer\PHPMailer\Exception as phpmailerException;
 /** @global PHPMailer $g_phpMailer Reusable PHPMailer object */
 $g_phpMailer = null;
 
-require_once( __DIR__ . DIRECTORY_SEPARATOR . 'EmailSender.class.php' );
+require_once( __DIR__ . '/EmailSender.class.php' );
 
 /**
  * An implementation that sends out emails using PhpMailer library.
