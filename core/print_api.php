@@ -1370,14 +1370,18 @@ function print_view_bug_sort_link( $p_label, $p_sort_field, $p_sort, $p_dir, $p_
 				# Otherwise always start with ascending
 				$p_dir = 'ASC';
 			}
-			$t_sort_field = rawurlencode( $p_sort_field );
-			$t_print_parameter = ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) ? '&print=1' : '';
-			$t_filter_parameter = filter_is_temporary( $g_filter ) ? filter_get_temporary_key_param( $g_filter ) . '&' : '';
-			$t_url = 'view_all_set.php?' . $t_filter_parameter
-				. 'sort_add=' . $t_sort_field
-				. '&dir_add=' . $p_dir
-				. '&type=' . FILTER_ACTION_PARSE_ADD
-				. $t_print_parameter;
+			$t_params = [
+				'sort_add' => $p_sort_field,
+				'dir_add' => $p_dir,
+				'type' => FILTER_ACTION_PARSE_ADD
+			];
+			if( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) {
+				$t_params['print'] = 1;
+			}
+			$t_url = helper_url_combine( 'view_all_set.php', $t_params );
+			if( filter_is_temporary( $g_filter ) ) {
+				$t_url .= '&' . filter_get_temporary_key_param( $g_filter );
+			}
 			print_link( $t_url, $p_label, false, '', $p_icon );
 			break;
 		default:
@@ -1412,10 +1416,16 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 		$t_dir = 'ASC';
 	}
 
-	$t_field = rawurlencode( $p_field );
 	print_link(
-		$p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive
-		. '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
+		helper_url_combine( $p_page, [
+			'sort' => $p_field,
+			'dir' => $t_dir,
+			'save' => '1',
+			'hideinactive' => $p_hide_inactive,
+			'showdisabled' => $p_show_disabled,
+			'filter' => $p_filter,
+			'search' => $p_search
+		] ),
 		$p_string,
 		false,
 		$p_class
@@ -1444,8 +1454,13 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 		$t_dir = 'ASC';
 	}
 
-	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir, $p_string );
+	print_link(
+		helper_url_combine( $p_page, [
+			'sort' => $p_field,
+			'dir' => $t_dir
+		] ),
+		$p_string
+	);
 }
 
 /**
