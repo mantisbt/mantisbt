@@ -79,7 +79,7 @@ function access_denied() {
 		if( isset( $_SERVER['QUERY_STRING'] ) && !is_blank( $_SERVER['QUERY_STRING'] ) ) {
 			$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 		}
-		$t_return = 'return=' . string_url( string_sanitize_url( $t_return_page ) );
+		$t_return = [ 'return' => string_sanitize_url( $t_return_page ) ];
 	}
 
 	if( !auth_is_user_authenticated() ) {

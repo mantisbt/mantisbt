@@ -1054,12 +1054,10 @@ function layout_breadcrumbs() {
 			$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 		}
 
-		$t_return_page = string_url( $t_return_page );
-
 		echo '  ' . lang_get( 'anonymous' ) . "\n";
 
 		echo '  <div class="btn-group btn-corner">' . "\n";
-		echo '	<a href="' . helper_mantis_url( auth_login_page( 'return=' . $t_return_page ) ) .
+		echo '	<a href="' . helper_mantis_url( auth_login_page( [ 'return' => $t_return_page ] ) ) .
 			'" class="btn btn-primary btn-xs">' . lang_get( 'login' ) . '</a>' . "\n";
 		if( auth_signup_enabled() ) {
 			echo '	<a href="' . helper_mantis_url( 'signup_page.php' ) . '" class="btn btn-primary btn-xs">' .
