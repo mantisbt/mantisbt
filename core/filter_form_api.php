@@ -2607,7 +2607,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	$t_get_params['view_type'] = ( FILTER_VIEW_TYPE_ADVANCED == $t_view_type )
 		? FILTER_VIEW_TYPE_ADVANCED
 		: FILTER_VIEW_TYPE_SIMPLE;
-	$t_filters_url .= '?' . http_build_query( $t_get_params );
+	$t_filters_url = helper_url_combine( $t_filters_url, $t_get_params );
 
 	$t_show_product_version =  version_should_show_product_version( $t_filter_projects );
 	$t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' ) == ON );

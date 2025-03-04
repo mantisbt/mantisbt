@@ -144,15 +144,13 @@ $f_export = implode( ',', $f_bug_arr );
 		$t_new_dir = 'DESC';
 	}
 
-	$t_search = urlencode( $f_search );
-
 	$t_icons = array(
 		array( 'print_all_bug_page_word', 'word', '', 'fa-file-word-o', 'Word 2000' ),
 		array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'fa-internet-explorer', 'Word View' ) );
 
 	foreach ( $t_icons as $t_icon ) {
 		$t_params = array(
-			FILTER_PROPERTY_SEARCH => $t_search,
+			FILTER_PROPERTY_SEARCH => $f_search,
 			FILTER_PROPERTY_SORT_FIELD_NAME => $f_sort,
 			FILTER_PROPERTY_SORT_DIRECTION => $t_new_dir,
 			'type_page' => $t_icon[1],
@@ -163,7 +161,7 @@ $f_export = implode( ',', $f_bug_arr );
 			$t_params['filter'] = filter_get_temporary_key( $t_filter );
 		}
 
-		echo '<a href="' . $t_icon[0] . '.php?' . http_build_query( $t_params ) . '" ' . $t_icon[2] . '>';
+		echo '<a href="' . helper_url_combine( $t_icon[0] . '.php', $t_params ) . '" ' . $t_icon[2] . '>';
 		print_icon( $t_icon[3], '', $t_icon[4] );
 		echo '</a> ';
 	}

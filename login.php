@@ -27,6 +27,7 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses gpc_api.php
+ * @uses helper_api.php
  * @uses print_api.php
  * @uses session_api.php
  * @uses string_api.php
@@ -37,13 +38,14 @@ require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
 require_api( 'session_api.php' );
 require_api( 'string_api.php' );
 
 $f_username		= gpc_get_string( 'username', '' );
 $f_password		= gpc_get_string( 'password', '' );
-$t_return		= string_url( string_sanitize_url( gpc_get_string( 'return', config_get_global( 'default_home_page' ) ) ) );
+$t_return		= string_sanitize_url( gpc_get_string( 'return', config_get_global( 'default_home_page' ) ) );
 $f_from			= gpc_get_string( 'from', '' );
 $f_secure_session = gpc_get_bool( 'secure_session', false );
 $f_reauthenticate = gpc_get_bool( 'reauthenticate', false );
@@ -70,7 +72,7 @@ if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 		$t_return = 'account_page.php';
 	}
 
-	$t_redirect_url = 'login_cookie_test.php?return=' . $t_return;
+	$t_redirect_url = helper_url_combine( 'login_cookie_test.php', [ 'return' => $t_return ] );
 } else {
 	$t_query_args = array(
 		'error' => 1,
@@ -90,9 +92,7 @@ if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 		$t_query_args['perm_login'] = 1;
 	}
 
-	$t_query_text = http_build_query( $t_query_args, '', '&' );
-
-	$t_redirect_url = auth_login_page( $t_query_text );
+	$t_redirect_url = auth_login_page( $t_query_args );
 
 	if( HTTP_AUTH == config_get_global( 'login_method' ) ) {
 		auth_http_prompt();

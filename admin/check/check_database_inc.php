@@ -25,6 +25,7 @@
  * @uses check_api.php
  * @uses config_api.php
  * @uses database_api.php
+ * @uses helper_api.php
  * @uses utility_api.php
  */
 
@@ -36,6 +37,7 @@ if( !defined( 'CHECK_DATABASE_INC_ALLOW' ) ) {
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 require_api( 'database_api.php' );
+require_api( 'helper_api.php' );
 require_api( 'utility_api.php' );
 
 check_print_section_header_row( 'Database' );
@@ -258,7 +260,7 @@ if( db_is_mysql() ) {
 			'summary' => "MySQL version $t_db_major_version is not defined in Admin Checks",
 			'description' => "Please add the missing version to " . basename( __FILE__ ) . ".",
 		];
-		$t_report_bug_url = 'https://mantisbt.org/bugs/bug_report_page.php?' . http_build_query( $t_param );
+		$t_report_bug_url = helper_url_combine( 'https://mantisbt.org/bugs/bug_report_page.php', $t_param );
 		check_print_test_warn_row(
 			'MySQL Lifecycle and Release Support data availability',
 			false,

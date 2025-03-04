@@ -18,6 +18,7 @@ if( !defined( 'TIMELINE_INC_ALLOW' ) ) {
 	return;
 }
 
+require_api( 'helper_api.php' );
 require_api( 'timeline_api.php' );
 
 define( 'MAX_EVENTS', 50 );
@@ -90,14 +91,14 @@ unset( $t_url_params['all'] );
 
 				echo '<div class="btn-group">';
 				$t_url_params['days'] = $f_days + 7;
-				$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
+				$t_href = helper_url_combine( $t_url_page, $t_url_params );
 				echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="' . $t_href . '">' . lang_get( 'prev' ) . '</a>';
 
 				$t_next_days = max( $f_days - 7, 0 );
 
 				if( $t_next_days != $f_days ) {
 					$t_url_params['days'] = $t_next_days;
-					$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
+					$t_href = helper_url_combine( $t_url_page, $t_url_params );
 					echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="' . $t_href . '">' . lang_get( 'next' ) . '</a>';
 				}
 				echo '</div>';
@@ -118,7 +119,7 @@ unset( $t_url_params['all'] );
 		echo '<div class="btn-toolbar">';
 		$t_url_params['days'] = $f_days;
 		$t_url_params['all'] = 1;
-		$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
+		$t_href = helper_url_combine( $t_url_page, $t_url_params );
 		echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="' . $t_href . '">' . lang_get( 'timeline_more' ) . '</a>';
 		echo '</div>';
 		echo '</div>';

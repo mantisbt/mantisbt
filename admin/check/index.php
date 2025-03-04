@@ -27,6 +27,7 @@
  *
  * @uses check_api.php
  * @uses gpc_api.php
+ * @uses helper_api.php
  * @uses html_api.php
  */
 
@@ -45,6 +46,7 @@ require_once( dirname( __DIR__, 2 ) . '/core.php' );
 require_once( 'check_api.php' );
 
 require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'http_api.php' );
 
@@ -68,12 +70,10 @@ $g_show_errors = gpc_get_bool( 'show_errors', false );
  * @return string url
  */
 function mode_url( $p_all, $p_errors ) {
-	return basename( __FILE__ ) . '?' . http_build_query(
-		array(
-			'show_all' => (int)$p_all,
-			'show_errors' => (int)$p_errors,
-		)
-	);
+	return helper_url_combine( basename( __FILE__ ), [
+		'show_all' => (int)$p_all,
+		'show_errors' => (int)$p_errors,
+	] );
 }
 
 $t_link = '<a href="%s">%s %s</a>';
