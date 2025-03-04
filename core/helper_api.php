@@ -737,18 +737,19 @@ function helper_filter_by_prefix( array $p_set, $p_prefix ) {
 /**
  * Combine a URL with a query string or an array of query parameters.
  *
- * @param string       $p_page         The page (relative or full)
+ * @param string       $p_page         The page (relative or full).
  * @param string|array $p_query_string The query string or array of query parameters.
  * @return string The combined url.
  */
-function helper_url_combine( $p_page, $p_query_string ) {
+function helper_url_combine( string $p_page, $p_query_string ): string {
 	$t_url = $p_page;
 	$t_query_string = is_array( $p_query_string )
 		? string_build_query( $p_query_string )
 		: $p_query_string;
 
 	if( !is_blank( $t_query_string ) ) {
-		if( stripos( $p_page, '?' ) !== false ) {
+		$t_url = rtrim( $t_url, '?' );
+		if( stripos( $t_url, '?' ) !== false ) {
 			$t_url .= '&' . $t_query_string;
 		} else {
 			$t_url .= '?' . $t_query_string;
