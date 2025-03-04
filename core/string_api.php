@@ -507,7 +507,7 @@ function string_process_pr_link( string $p_string, bool $p_include_anchor = true
       static function( array $p_matches ) use( $t_url_template, $p_include_anchor ): string {
 
         # Pattern may catch space before tag, we have to include it in the output if it exists
-        if ( str_starts_with( $p_matches[0], ' ' ) ) {
+        if ( mb_strpos( $p_matches[0], ' ' ) === 0 ) {
           $t_first_space = ' ';
         } else {
           $t_first_space = '';
