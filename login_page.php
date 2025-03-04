@@ -32,6 +32,7 @@
  * @uses current_user_api.php
  * @uses database_api.php
  * @uses gpc_api.php
+ * @uses helper_api.php
  * @uses html_api.php
  * @uses lang_api.php
  * @uses print_api.php
@@ -47,6 +48,7 @@ require_api( 'constant_inc.php' );
 require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
 require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
@@ -99,7 +101,7 @@ if( auth_automatic_logon_bypass_form() ) {
 	}
 
 	if( !is_blank( $f_return ) ) {
-		$t_uri .= '?return=' . string_url( $f_return );
+		$t_uri = helper_url_combine( $t_uri, [ 'return' => $f_return ] );
 	}
 
 	print_header_redirect( $t_uri );
@@ -263,7 +265,11 @@ if( $t_show_anonymous_login || $t_show_signup ) {
 	echo '<div class="toolbar center">';
 
 	if( $t_show_anonymous_login ) {
-		echo '<a class="back-to-login-link pull-right" href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a>';
+		echo '<a class="back-to-login-link pull-right" href="',
+			helper_url_combine( 'login_anon.php', [
+				'return' => $f_return
+			] ),
+			'">', lang_get( 'login_anonymously' ), '</a>';
 	}
 
 	if( $t_show_signup ) {

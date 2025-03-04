@@ -816,7 +816,10 @@ function string_get_bug_report_url() {
  * @return string
  */
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	return config_get_global( 'path' ) . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
+	return helper_url_combine( config_get_global( 'path' ) . 'verify.php', [
+		'id' => $p_user_id,
+		'confirm_hash' => $p_confirm_hash
+	] );
 }
 
 /**
