@@ -1032,7 +1032,7 @@ function print_admin_menu_bar( $p_page ) {
  */
 function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_method = 'post' ) {
 	$t_form_name = explode( '.php', $p_action, 2 );
-	$p_action = urlencode( $p_action );
+	$p_action = string_url( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
 
 	if( strtolower( $p_method ) == 'get' ) {

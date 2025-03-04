@@ -295,10 +295,10 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 		foreach( $t_pairs as $t_key => $t_value ) {
 			if( is_array( $t_value ) ) {
 				foreach( $t_value as $t_value_each ) {
-					$t_clean_pairs[] = rawurlencode( $t_key ) . '[]=' . rawurlencode( $t_value_each );
+					$t_clean_pairs[] = string_url( $t_key ) . '[]=' . string_url( $t_value_each );
 				}
 			} else {
-				$t_clean_pairs[] = rawurlencode( $t_key ) . '=' . rawurlencode( $t_value );
+				$t_clean_pairs[] = string_url( $t_key ) . '=' . string_url( $t_value );
 			}
 		}
 
@@ -310,7 +310,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	# encode link anchor
 	$t_anchor = '';
 	if( isset( $t_matches['anchor'] ) ) {
-		$t_anchor = '#' . rawurlencode( $t_matches['anchor'] );
+		$t_anchor = '#' . string_url( $t_matches['anchor'] );
 	}
 
 	# Return an appropriate re-combined URL string

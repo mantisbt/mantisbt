@@ -664,7 +664,7 @@ function summary_print_by_category( array $p_filter = [] ) {
 
 		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
-		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_CATEGORY_ID . '=' . urlencode( $t_label );
+		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_CATEGORY_ID . '=' . string_url( $t_label );
 		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 		summary_helper_print_row( string_display_line( $t_label ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
 	}
@@ -734,7 +734,7 @@ function summary_print_by_project( array $p_projects = [], int $p_level = 0, arr
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
 # FILTER_PROPERTY_PROJECT_ID filter by project does not work ??
-#		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . urlencode( $t_project );
+#		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . string_url( $t_project );
 #		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
 		summary_helper_print_row( string_display_line( $t_name ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1]);
