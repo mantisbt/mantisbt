@@ -391,7 +391,7 @@ function html_head_end() {
  *                       from $g_logo_image
  * @return void
  */
-function html_print_logo( $p_logo = null ) {
+function html_print_logo( string $p_logo = '' ) {
 	if( !$p_logo ) {
 		$p_logo = config_get_global( 'logo_image' );
 	}
@@ -401,35 +401,53 @@ function html_print_logo( $p_logo = null ) {
 		$t_show_url = !is_blank( $t_logo_url );
 
 		if( $t_show_url ) {
-			echo '<a id="logo-link" href="', config_get_global( 'logo_url' ), '">';
+			echo '<a class="logo-link" href="', $t_logo_url, '"',
+				helper_get_link_attributes( false, helper_is_link_external( $t_logo_url ) ),
+				'>';
 		}
 		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
-		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="' . helper_mantis_url( $p_logo ) . '" />';
+		echo '<img class="logo-image" alt="', $t_alternate_text,
+			'" title="', $t_alternate_text,
+			'" src="' . helper_mantis_url( $p_logo ) . '">';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
 	}
 }
 
-
-
 /**
  * Print a user-defined banner at the top of the page if there is one.
+ *
+ * @param bool $p_nested Add a div to wrap around the banner
  * @return void
  */
-function html_top_banner() {
+function html_top_banner( bool $p_nested = false ) {
 	$t_page = config_get_global( 'top_include_page' );
-	$t_logo_image = config_get_global( 'logo_image' );
+	
+	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		if( $p_nested ) {
+			echo '<div class="navbar navbar-fixed-top noprint">', "\n";
+		}
+		include( $t_page );
+		if( $p_nested ) {
+			echo '</div>', "\n";
+		}
+	}
+}
+
+/**
+ * Print a user-defined banner at the bottom of the page if there is one.
+ *
+ * @return void
+ */
+function html_bottom_banner() {
+	$t_page = config_get_global( 'bottom_include_page' );
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		echo '<div class="navbar-fixed-bottom noprint">', "\n";
 		include( $t_page );
-	} else if( !is_blank( $t_logo_image ) ) {
-		echo '<div id="banner">';
-		html_print_logo( $t_logo_image );
-		echo '</div>';
+		echo '</div>', "\n";
 	}
-
-	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 }
 
 /**
