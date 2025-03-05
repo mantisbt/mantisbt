@@ -535,7 +535,7 @@ $(document).ready( function() {
 	});
 
 	$('a.click-url').bind("click", function() {
-		$(this).attr("href", $(this).attr("url"));
+		$(this).attr("href", $(this).data("url"));
 	});
 
 	$('input[name=private].ace').bind("click", function() {

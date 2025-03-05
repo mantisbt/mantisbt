@@ -788,17 +788,15 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 		echo category_full_name( 0, false );
 		echo '</option>', PHP_EOL;
 	} else {
-		if( 0 == $p_category_id ) {
-			if( count( $t_cat_arr ) == 1 ) {
-				$p_category_id = (int) $t_cat_arr[0]['id'];
-			} else {
-				echo '<option value="" disabled hidden';
-				check_selected( $p_category_id, 0 );
-				echo '>';
-				echo string_attribute( lang_get( 'select_option' ) );
-				echo '</option>', PHP_EOL;
-			}
+		if( 0 == $p_category_id && count( $t_cat_arr ) == 1 ) {
+			# Single option are selected by default
+			$p_category_id = (int) $t_cat_arr[0]['id'];
 		}
+		echo '<option value="" disabled hidden';
+		check_selected( $p_category_id, 0 );
+		echo '>';
+		echo string_attribute( lang_get( 'select_option' ) );
+		echo '</option>', PHP_EOL;
 	}
 
 	foreach( $t_cat_arr as $t_category_row ) {
@@ -925,7 +923,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 	}
 
 	if( $p_leading_blank ) {
-		echo '<option value=""></option>';
+		echo '<option value="">&nbsp;</option>';
 	}
 
 	$t_listed = array();
@@ -2230,7 +2228,7 @@ function print_dropzone_template(){
 	<div id="dropzone-preview-template" class="hidden">
 		<div class="dz-preview dz-file-preview">
 			<div class="dz-filename"><span data-dz-name></span></div>
-			<img data-dz-thumbnail />
+			<img src="#" alt="" data-dz-thumbnail>
 			<div class="dz-error-message">
 				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle'); ?></span></div>
 				<span data-dz-errormessage></span>
@@ -2315,3 +2313,14 @@ function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_sele
 <?php
 }
 
+/**
+ * Print table spacer.
+ *
+ * @param integer $p_cols Number of columns in the table
+ * @return void
+ */
+function print_table_spacer( int $p_cols ) {
+	if( $p_cols > 0 ) {
+		echo '<tr class="spacer"><td colspan="', $p_cols, '"></td></tr>';
+	}
+}

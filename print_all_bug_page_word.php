@@ -174,7 +174,11 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	# display the available and selected bugs
 	if( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
 		if( $t_count_exported > 0 ) {
-			echo '<br style="mso-special-character: line-break; page-break-before: always" />';
+			if( $f_type_page == 'html' ) {
+				echo '<div class="clearfix" style="page-break-before: always">&nbsp;</div>';
+			} else {
+				echo '<br clear=all style="mso-special-character: line-break; page-break-before: always">&nbsp;';
+			}
 		}
 
 		$t_count_exported++;
@@ -191,26 +195,24 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo $t_lang_bug_view_title ?>
 	</td>
 </tr>
-<tr class="spacer" >
-	<td colspan="6"></td>
-</tr>
+<?php print_table_spacer( 6 ) ?>
 <tr class="bold">
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_id ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_category ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_severity ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_reproducibility ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_date_submitted ) ?>
 	</td>
-	<td width="16%">
+	<td>
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_last_update ) ?>
 	</td>
 </tr>
@@ -234,9 +236,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo date( $t_date_format, $t_bug->last_updated ) ?>
 	</td>
 </tr>
-<tr class="spacer" >
-	<td colspan="6"></td>
-</tr>
+<?php print_table_spacer( 6 ) ?>
 <tr>
 	<td class="bold">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_reporter ) ?>
@@ -402,9 +402,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 <?php
 }       # foreach
 ?>
-<tr class="spacer" >
-	<td colspan="6"></td>
-</tr>
+<?php print_table_spacer( 6 ) ?>
 <tr>
 	<td class="bold">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_summary ) ?>
@@ -497,8 +495,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		?>
 	</td>
 </tr>
-
-<tr class="spacer"><td colspan="6"></td></tr>
+<?php print_table_spacer( 6 ) ?>
 </table>
 
 <?php
@@ -513,7 +510,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 	if( 0 == count( $t_bugnotes ) ) {
 	?>
 <tr>
-	<td class="bold" colspan="2">
+	<td class="bold">
 		<?php echo $t_lang_no_bugnotes_msg ?>
 	</td>
 </tr>
@@ -534,7 +531,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 			$t_note = string_display_links( $t_bugnote->note );
 	?>
 <tr>
-	<td width="12%">
+	<td>
 				(<?php echo bugnote_format_id( $t_bugnote->id ) ?>)
 			<br />
 				<?php print_user( $t_bugnote->reporter_id, false ) ?>&#160;&#160;&#160;
@@ -561,20 +558,13 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 				?>
 			</td>
 		</tr>
-		<tr class="spacer"><td colspan="2"></td></tr>
 <?php
+			print_table_spacer( 2 );
 		} # end for
 	} # end else
 ?>
 </table>
-
-<?php # Bugnotes END ?>
-
-
 <?php
-		if( $f_type_page != 'html' ) {
-			echo '<hr>';
-		}
 	} # end in_array
 }  # end main loop
 
