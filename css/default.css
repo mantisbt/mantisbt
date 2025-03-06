@@ -187,3 +187,7 @@ table.filters td.category {
     display: inline-grid;
     grid-template-columns: 1fr 20px 1fr;
 }
+
+#log-event-list .duplicate-query {
+    color: #E2755F;
+}
