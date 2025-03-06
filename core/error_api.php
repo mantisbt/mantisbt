@@ -403,7 +403,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 					if( defined( 'DELAY_INLINE_ERROR_REPORTING')) {
 						error_log_delayed( $t_error_type . ': ' . $t_error_description );
 					} else {
-						echo '<div class="alert alert-warning">', $t_error_type, ': ', $t_error_description, '</div>';
+						echo '<div class="alert alert-warning" style="position: relative; top: 4em;">', $t_error_type, ': ', $t_error_description, '</div>';
 					}
 				}
 				$g_error_handled = true;

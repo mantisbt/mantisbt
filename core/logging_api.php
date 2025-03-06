@@ -25,12 +25,14 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
+ * @uses collapse_api.php
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses event_api.php
  * @uses utility_api.php
  */
 
+require_api( 'collapse_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'event_api.php' );
@@ -155,54 +157,54 @@ function log_event( $p_level, $p_msg ) {
  * @return void
  */
 function log_print_to_page() {
-	if( config_get_global( 'log_destination' ) === 'page' && auth_is_user_authenticated() && access_has_global_level( config_get( 'show_log_threshold' ) ) ) {
+	if( helper_log_to_page() ) {
 		global $g_log_events, $g_log_levels, $g_email_shutdown_processing;
 
 		if( $g_email_shutdown_processing ) {
 			email_send_all();
 		}
 
+		$t_collapse_block = is_collapsed( 'debuglog' );
+		$t_block_css = $t_collapse_block ? 'collapsed' : '';
+		$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
 		$t_unique_queries = array();
 		$t_total_queries_count = 0;
-		$t_total_event_count = $g_log_events === null ? 0 : count( $g_log_events );
+		$t_total_event_count = empty( $g_log_events ) ? 0 : count( $g_log_events );
 
+		layout_main_content_row_begin();
+?>	<div class="col-xs-12">
+		<div class="space-10"></div>
+		<div id="debuglog" class="widget-box widget-color-red <?php echo $t_block_css ?>">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<?php print_icon( 'fa-flag-o', 'ace-icon' ) ?>
+					Debug Log
+				</h4>
+				<div class="widget-toolbar">
+					<a data-action="collapse" href="#">
+						<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ) ?>
+					</a>
+				</div>
+			</div>
+			<div class="widget-body">
 
-		echo "<div class=\"space-10\"></div>";
-		echo "\t<div class=\"row\">\n";
-		echo "\t<div class=\"col-xs-12\">\n";
-
-		echo "\t<div class=\"widget-box widget-color-red\">\n";
-		echo "\t<div class=\"widget-header widget-header-small\">\n";
-		echo "\t<h4 class=\"widget-title lighter\">\n";
-		echo "\t" . icon_get( 'fa-flag-o', 'ace-icon' ) . "\n";
-		echo "Debug Log";
-		echo "</h4>\n";
-		echo "</div>\n";
-
-		echo "\t<div class=\"widget-body\">\n";
-
-		echo "\n\n<!--Mantis Debug Log Output-->";
-		if( $t_total_event_count == 0 ) {
-			echo "<!--END Mantis Debug Log Output-->\n\n";
-			return;
-		}
-
-		echo "<div class=\"widget-main no-padding\">";
-		echo "<div class=\"table-responsive\">\n";
-		echo "<table class=\"table table-bordered table-condensed table-striped\" id=\"log-event-list\">\n";
-		echo "\t<thead>\n";
-		echo "\t\t<tr>\n";
-		echo "\t\t\t<th class=\"small-caption\">" . lang_get( 'log_page_number' ) . "</th>\n";
-		echo "\t\t\t<th class=\"small-caption\">" . lang_get( 'log_page_time' ) . "</th>\n";
-		echo "\t\t\t<th class=\"small-caption\">" . lang_get( 'log_page_caller' ) . "</th>\n";
-		echo "\t\t\t<th class=\"small-caption\">" . lang_get( 'log_page_event' ) . "</th>\n";
-		echo "\t\t</tr>\n";
-		echo "\t</thead>\n";
-		echo "\t<tbody>\n";
-
-		for( $i = 0; $i < $t_total_event_count; $i++ ) {
+				<!--Mantis Debug Log Output-->
+				<div class="widget-main no-padding">
+					<div class="table-responsive">
+						<table class="table table-bordered table-condensed table-striped" id="log-event-list">
+							<thead>
+								<tr>
+									<th class="small-caption"><?php echo lang_get( 'log_page_number' ) ?></th>
+									<th class="small-caption"><?php echo lang_get( 'log_page_time' ) ?></th>
+									<th class="small-caption"><?php echo lang_get( 'log_page_caller' ) ?></th>
+									<th class="small-caption"><?php echo lang_get( 'log_page_event' ) ?></th>
+								</tr>
+							</thead>
+							<tbody>
+<?php	for( $i = 0; $i < $t_total_event_count; $i++ ) {
 			if( $g_log_events[$i][1] == LOG_DATABASE ) {
 				if( !in_array( $g_log_events[$i][2][0], $t_unique_queries ) ) {
 					$t_unique_queries_count++;
@@ -215,45 +217,76 @@ function log_print_to_page() {
 			}
 		}
 
-		$t_count = array();
-		foreach( $g_log_events as $t_log_event ) {
-			$t_level = $g_log_levels[$t_log_event[1]];
-			if( isset( $t_count[$t_log_event[1]] ) ) {
-				$t_count[$t_log_event[1]]++;
-			} else {
-				$t_count[$t_log_event[1]] = 1;
+		if( $t_total_event_count ){
+			$t_count = array();
+			foreach( $g_log_events as $t_log_event ) {
+				$t_level = $g_log_levels[$t_log_event[1]];
+				if( isset( $t_count[$t_log_event[1]] ) ) {
+					$t_count[$t_log_event[1]]++;
+				} else {
+					$t_count[$t_log_event[1]] = 1;
+				}
+				switch( $t_log_event[1] ) {
+					case LOG_DATABASE:
+						$t_total_queries_count++;
+						if( $t_log_event[2][2] ) {
+?>								<tr class="duplicate-query">
+<?php					} else {
+?>								<tr>
+<?php					}
+?>									<td class="small"><?php echo $t_level . '-' . $t_count[$t_log_event[1]] ?></td>
+									<td class="small"><?php echo $t_log_event[2][1] ?></td>
+									<td class="small"><?php echo string_html_specialchars( $t_log_event[3] ) ?></td>
+									<td class="small"><?php echo string_html_specialchars( $t_log_event[2][0] ) ?></td>
+								</tr>
+<?php					break;
+					default:
+?>								<tr>
+									<td class="small"><?php echo $t_level . '-' . $t_count[$t_log_event[1]] ?></td>
+									<td class="small"><?php echo $t_log_event[2][1] ?></td>
+									<td class="small"><?php echo string_html_specialchars( $t_log_event[3] ) ?></td>
+									<td class="small"><?php echo string_html_specialchars( $t_log_event[2][0] ) ?></td>
+								</tr>
+<?php			}
 			}
-			switch( $t_log_event[1] ) {
-				case LOG_DATABASE:
-					$t_total_queries_count++;
-					$t_query_duplicate_class = '';
-					if( $t_log_event[2][2] ) {
-						$t_query_duplicate_class = ' class="duplicate-query"';
-					}
-					echo "\t\t<tr " . $t_query_duplicate_class . '><td class="small">' . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td class="small">' . $t_log_event[2][1] . '</td><td class="small">' . string_html_specialchars( $t_log_event[3] ) . '</td><td class="small">' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
-					break;
-				default:
-					echo "\t\t<tr><td class=\"small\">" . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td class="small">' . $t_log_event[2][1] . '</td><td class="small">' . string_html_specialchars( $t_log_event[3] ) . '</td><td class="small">' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
-			}
-		}
+		} else {
+?>								<tr>
+									<td colspan="4">No log data.</td>
+								</tr>
+<?php	}
 
 		# output any summary data
 		if( $t_unique_queries_count != 0 ) {
 			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-			echo "\t\t<tr><td class=\"small\">" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3" class="small">' . $t_unique_queries_executed . "</td></tr>\n";
-		}
+?>								<tr>
+									<td class="small"><?php echo $g_log_levels[LOG_DATABASE] ?></td>
+									<td colspan="3" class="small"><?php echo $t_unique_queries_executed ?></td>
+								</tr>
+<?php	}
 		if( $t_total_queries_count != 0 ) {
 			$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-			echo "\t\t<tr><td class=\"small\">" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3" class="small">' . $t_total_queries_executed . "</td></tr>\n";
-		}
+?>								<tr>
+									<td class="small"><?php echo $g_log_levels[LOG_DATABASE] ?></td>
+									<td colspan="3" class="small"><?php echo $t_total_queries_executed ?></td>
+								</tr>
+<?php	}
 		if( $t_total_query_execution_time != 0 ) {
 			$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-			echo "\t\t<tr><td class=\"small\">" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3" class="small">' . $t_total_query_time . "</td></tr>\n";
-		}
-		echo "\t</tbody>\n\t</table>\n";
-		echo "</div></div></div></div></div></div>\n";
+?>								<tr>
+									<td class="small"><?php echo $g_log_levels[LOG_DATABASE] ?></td>
+									<td colspan="3" class="small"><?php echo $t_total_query_time ?></td>
+								</tr>
+<?php	}
+?>							</tbody>
+						</table>
+					</div>
+				</div>
+				<!--END Mantis Debug Log Output-->
 
-		echo "<!--END Mantis Debug Log Output-->\n\n";
+			</div>
+		</div>
+	</div>
+<?php	layout_main_content_row_end();
 	}
 }
 
