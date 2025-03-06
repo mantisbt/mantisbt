@@ -25,12 +25,14 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
+ * @uses collapse_api.php
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses event_api.php
  * @uses utility_api.php
  */
 
+require_api( 'collapse_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'event_api.php' );
@@ -175,18 +177,27 @@ function log_print_to_page() {
 
 	$t_icon = icon_get( 'fa-flag-o', 'ace-icon' );
 	$t_section_title = lang_get( 'debug_log' );
+	$t_collapse_block = is_collapsed( 'debuglog' );
+	$t_block_css = $t_collapse_block ? ' collapsed' : '';
+	$t_block_icon = icon_get(
+		$t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up',
+		'1 ace-icon bigger-125'
+	);
 	echo <<<HTML
 
 		<!-- Mantis Debug Log Output -->
 		<div class="space-10"></div>
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="widget-box widget-color-red">
+				<div class="widget-box widget-color-red$t_block_css">
 					<div class="widget-header widget-header-small">
 						<h4 class="widget-title lighter">
 							$t_icon 
 							$t_section_title
 						</h4>
+						<div class="widget-toolbar">
+							<a data-action="collapse" href="#">$t_block_icon</a>
+						</div>
 					</div>
 					<div class="widget-body">
 
