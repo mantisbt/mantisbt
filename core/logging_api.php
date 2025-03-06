@@ -49,9 +49,11 @@ $g_log_levels = array(
 );
 
 /**
- * Log an event
- * @param integer          $p_level Valid debug log level.
- * @param string|array,... $p_msg   Either a string, or an array structured as (string,execution time).
+ * Log an event.
+ *
+ * @param integer      $p_level Valid debug log level.
+ * @param string|array $p_msg   Either a string, or an array structured as (string,execution time).
+ *
  * @return void
  */
 function log_event( $p_level, $p_msg ) {
@@ -151,8 +153,10 @@ function log_event( $p_level, $p_msg ) {
 }
 
 /**
- * Print logging api output to bottom of html page
+ * Print logging api output to bottom of html page.
+ *
  * @return void
+ * @throws \PHPMailer\PHPMailer\Exception
  */
 function log_print_to_page() {
 	if( !helper_log_to_page() ) {
@@ -287,15 +291,17 @@ function log_print_to_page() {
 }
 
 /**
- * Builds a string with information from the call backtrace of current logging action
+ * Builds a string with information from the call backtrace of current logging action.
+ *
  * The output format is, where available:
  *    {plugin} {file}:{line} {class}[::|->]{function}
  *
  * Some of the actual backtrace is removed to get more informative line to the user.
  * The log type is used to selectively remove some internal call traces.
  *
- * @param integer $p_level	Log level type constant
- * @return string	Output string with caller information
+ * @param int $p_level Log level type constant
+ *
+ * @return string Output string with caller information
  */
 function log_get_caller( $p_level = null ) {
 	$t_full_backtrace = debug_backtrace();
