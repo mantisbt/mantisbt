@@ -1510,6 +1510,17 @@ function email_send( EmailData $p_email_data ) {
 	$t_mail->AddCustomHeader( 'Auto-Submitted:auto-generated' );
 	$t_mail->AddCustomHeader( 'X-Auto-Response-Suppress: All' );
 
+	# Send additional custom headers
+	if( !is_blank( config_get( 'smtp_customheader' ) ) ) {
+		
+		$customheader_config = config_get( 'smtp_customheader' );
+		$customheader_lines  = array_map('trim', explode(',', $customheader_config));
+		
+		foreach ($customheader_lines as $customheader) {
+			$t_mail->AddCustomHeader($customheader);
+		}
+	}
+
 	if( isset( $t_email_data->metadata['cc'] ) && $t_email_data->metadata['cc'] ) {
 		foreach( $t_email_data->metadata['cc'] as $cc ) {
 			$t_mail->addCC( trim( $cc ) );
