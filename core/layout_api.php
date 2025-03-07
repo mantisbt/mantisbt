@@ -211,6 +211,10 @@ function layout_admin_page_begin() {
 	layout_navbar();
 
 	layout_main_container_begin();
+
+	layout_main_content_begin();
+	layout_page_content_begin();
+	layout_main_content_row_begin();
 }
 
 /**
@@ -218,6 +222,10 @@ function layout_admin_page_begin() {
  * @return void
  */
 function layout_admin_page_end() {
+	layout_main_content_row_end();
+	layout_page_content_end();
+	layout_main_content_end();
+
 	layout_footer();
 	layout_scroll_up_button();
 
