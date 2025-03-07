@@ -230,10 +230,6 @@ function access_has_global_level( $p_access_level, $p_user_id = null ) {
 		return false;
 	}
 
-	if( $p_user_id === null ) {
-		$p_user_id = auth_get_current_user_id();
-	}
-
 	$t_access_level = access_get_global_level( $p_user_id );
 
 	return access_compare_level( $t_access_level, $p_access_level );
