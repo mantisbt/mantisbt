@@ -171,6 +171,8 @@ function log_print_to_page() {
 		email_send_all();
 	}
 
+
+	$t_total_event_count = count( $g_log_events ?? [] );
 	$t_total_query_execution_time = 0;
 	$t_unique_queries = array();
 	$t_total_queries_count = 0;
@@ -194,6 +196,7 @@ function log_print_to_page() {
 						<h4 class="widget-title lighter">
 							$t_icon 
 							$t_section_title
+							<span class="badge">$t_total_event_count</span>
 						</h4>
 						<div class="widget-toolbar">
 							<a data-action="collapse" href="#">$t_block_icon</a>
