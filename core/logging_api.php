@@ -182,6 +182,7 @@ function log_print_to_page() {
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-flag-o', 'ace-icon' ) ?>
 					Debug Log
+					<span class="badge"><?php echo $t_total_event_count ?></span>
 				</h4>
 				<div class="widget-toolbar">
 					<a data-action="collapse" href="#">
