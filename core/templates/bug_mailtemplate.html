@@ -1,0 +1,195 @@
+<!--
+Available fields to this template:
+	[email_bug]						=> bug_id
+	[email_bug_view_url]			=> url
+	[email_handler]					=> handler
+	[email_reporter]				=> reporter
+	[email_project]					=> project
+	[email_category]				=> category
+	[email_tag]						=> tags
+	[email_date_submitted]			=> submitted
+	[email_last_modified] 			=> modified
+	[email_due_date]				=> due_date
+	[email_status]					=> status
+	[email_severity]				=> severity
+	[email_priority]				=> priority
+	[email_reproducibility]			=> repro
+	[email_summary]					=> summary
+	[email_description]				=> description
+	[email_additional_information]	=> info
+	[email_steps_to_reproduce]		=> steps
+	Custom fields					cfdata		
+	Notes							notedata	As table
+	Relations						reldata		As table
+	History							hisdata		
+	History (last entries)			lasthisdata	
+
+	## following 2 fields are available for testing purposes
+	Referer page					reference
+	Available data					mail_data
+
+	## how to use the fields
+	all elements ( only those you need of course ) need to be referenced inbetween "{{" and "}}"
+
+	## changes
+	modification of contents takes place within core/template_api.php, function email_template_bug_message
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Issue Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #93B874;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            color: #333;
+            background: #f2f2f2;
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #006066;
+            color: white;
+            text-align: left;
+        }
+
+        td {
+            background-color: #FFFFFF;
+        }
+
+        a {
+            color: #006066;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>{{ summary }}</h3>
+        <table>
+            <tr>
+                <th>Issue-id</th>
+                <td><a href={{ url }}>{{ bug_id }}</a></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ description }}</td>
+            </tr>
+            <tr>
+                <th>Project/Category</th>
+                <td>{{ project }}: {{ category }}</td>
+            </tr>
+			<tr>
+                <th>Reporter</th>
+                <td>{{ reporter }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ status }}</td>
+            </tr>
+            <tr>
+                <th>Submitted</th>
+                <td>{{ submitted }}</td>
+            </tr>
+            <tr>
+                <th>Priority</th>
+                <td>{{ priority }}</td>
+            </tr>
+            <tr>
+                <th>Severity</th>
+                <td>{{ severity }}</td>
+            </tr>
+            <tr>
+                <th>Last Modified</th>
+                <td>{{ modified }}</td>
+            </tr>
+            <tr>
+                <th>Reproducibility</th>
+                <td>{{ repro }}</td>
+            </tr>
+            <tr>
+                <th>Steps to reproduce</th>
+                <td>{{ steps }}</td>
+            </tr>
+            <tr>
+                <th>Additional Information</th>
+                <td>{{ info }}</td>
+            </tr>
+            <tr>
+                <th>Due-Date</th>
+                <td>{{ due_date }}</td>
+            </tr>
+            <tr>
+                <th>Tags</th>
+                <td>{{ tags }}</td>
+            </tr>
+            <tr>
+                <th>Custom Fields</th>
+                <td>{{ cfdata }}</td>
+            </tr>
+            <tr>
+                <th>Relations</th>
+                <td>{{ reldata }}</td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ notedata }}</td>
+            </tr>
+            <tr>
+                <th>Last History</th>
+                <td>{{ lasthisdata }}</td>
+            </tr>
+            <!-- skip for now, feel free to use
+            <tr><td><b>All History</b></td><td>{{ hisdata }}</td></tr>
+            <tr><td><b>Referer</b></td><td> {{ reference }}</td></tr>
+            <tr><td><b>Available data</b></td><td><pre> {{ mail_data }}</pre></td></tr>
+            -->
+            <tr>
+                <th>On The Web</th>
+                <td><a href="{{ url }}">View all details inside the Issue Tracker</a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
+
