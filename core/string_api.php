@@ -484,6 +484,52 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 }
 
 /**
+ * Process $p_string, looking for pull/merge requests ID references and creating
+ * third party links for them.
+ *
+ * Returns the processed string.
+ *
+ * The bugnote tag ('!' by default) must be at the beginning of the string or
+ * preceded by a character that is not a letter, a number or an underscore
+ *
+ * @param string $p_string         String to be processed.
+ * @param bool   $p_include_anchor Whether to include the href tag or just the URL.
+ * @return string
+ */
+function string_process_pr_link( string $p_string, bool $p_include_anchor = true ): string {
+  $t_tag = config_get( 'pr_link_tag' );
+  $t_url_template = config_get( 'pr_link_url' );
+
+  # Process only if config is valid and string not empty
+	if( $t_tag !== '' && $p_string !== '' && preg_match( '#^https?://.*\{id\}.*#', $t_url_template ) ) {
+    $p_string = preg_replace_callback(
+      '/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/',
+      static function( array $p_matches ) use( $t_url_template, $p_include_anchor ): string {
+
+        # Pattern may catch space before tag, we have to include it in the output if it exists
+        if ( mb_strpos( $p_matches[0], ' ' ) === 0 ) {
+          $t_first_space = ' ';
+        } else {
+          $t_first_space = '';
+        }
+        $t_url = str_replace( '{id}', $p_matches[2], $t_url_template );
+        if ( $p_include_anchor ) {
+          $t_link = $t_first_space
+            . '<a href="' . htmlspecialchars( $t_url ) . '">'
+            . htmlspecialchars( trim( $p_matches[0] ) )
+            . '</a>';
+        } else {
+          $t_link = $t_first_space . $t_url;
+        }
+        return $t_link;
+      },
+      $p_string
+    );
+  }	
+  return $p_string;
+}
+
+/**
  * Search email addresses and URLs for a few common protocols in the given
  * string, and replace occurrences with href anchors.
  * @param string $p_string String to be processed.
