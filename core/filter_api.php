@@ -408,13 +408,13 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_
 		$t_count = count( $p_field_value );
 		if( $t_count > 1 || $p_field_type == FILTER_TYPE_MULTI_STRING || $p_field_type == FILTER_TYPE_MULTI_INT ) {
 			foreach( $p_field_value as $t_value ) {
-				$t_query_array[] = urlencode( $p_field_name . '[]' ) . '=' . urlencode( $t_value );
+				$t_query_array[] = string_url( $p_field_name . '[]' ) . '=' . string_url( $t_value );
 			}
 		} else if( $t_count == 1 ) {
-			$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value[0] );
+			$t_query_array[] = string_url( $p_field_name ) . '=' . string_url( $p_field_value[0] );
 		}
 	} else {
-		$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value );
+		$t_query_array[] = string_url( $p_field_name ) . '=' . string_url( $p_field_value );
 	}
 
 	return implode( '&', $t_query_array );

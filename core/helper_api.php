@@ -34,6 +34,7 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses project_api.php
+ * @uses string_api.php
  * @uses user_api.php
  * @uses user_pref_api.php
  * @uses utility_api.php
@@ -50,6 +51,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'project_api.php' );
+require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
@@ -733,20 +735,24 @@ function helper_filter_by_prefix( array $p_set, $p_prefix ) {
 }
 
 /**
- * Combine a Mantis page with a query string.  This handles the case where the page is a native
- * page or a plugin page.
- * @param string $p_page The page (relative or full)
- * @param string $p_query_string The query string
+ * Combine a URL with a query string or an array of query parameters.
+ *
+ * @param string       $p_page         The page (relative or full).
+ * @param string|array $p_query_string The query string or array of query parameters.
  * @return string The combined url.
  */
-function helper_url_combine( $p_page, $p_query_string ) {
+function helper_url_combine( string $p_page, $p_query_string ): string {
 	$t_url = $p_page;
+	$t_query_string = is_array( $p_query_string )
+		? string_build_query( $p_query_string )
+		: $p_query_string;
 
-	if( !is_blank( $p_query_string ) ) {
-		if( stripos( $p_page, '?' ) !== false ) {
-			$t_url .= '&' . $p_query_string;
+	if( !is_blank( $t_query_string ) ) {
+		$t_url = rtrim( $t_url, '?' );
+		if( stripos( $t_url, '?' ) !== false ) {
+			$t_url .= '&' . $t_query_string;
 		} else {
-			$t_url .= '?' . $p_query_string;
+			$t_url .= '?' . $t_query_string;
 		}
 	}
 

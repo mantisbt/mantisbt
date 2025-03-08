@@ -264,16 +264,20 @@ print_manage_menu( 'manage_proj_page.php' );
 				<td class="center">
 					<div class="btn-group inline">
 						<div class="pull-left"><?php
-						$t_id = urlencode( $t_id );
-						$t_project_id = urlencode( ALL_PROJECTS );
 						print_form_button(
-							"manage_proj_cat_edit_page.php?category_id=$t_id&project_id=$t_project_id",
+							helper_url_combine( 'manage_proj_cat_edit_page.php', [
+								'category_id' => $t_id,
+								'project_id' => ALL_PROJECTS
+							] ),
 							lang_get( 'edit' )
 						); ?>
 						</div>
 						<div class="pull-left"><?php
 						print_form_button(
-							"manage_proj_cat_delete.php?category_id=$t_id&project_id=$t_project_id",
+							helper_url_combine( 'manage_proj_cat_delete.php', [
+								'category_id' => $t_id,
+								'project_id' => ALL_PROJECTS
+							] ),
 							lang_get( 'delete' )
 						); ?>
 						</div>
