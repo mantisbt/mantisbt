@@ -290,6 +290,8 @@ function log_print_to_page() {
 		</div>
 
 		HTML;
+	} else {
+		echo '<div class="widget-main">', lang_get( 'debug_log_empty' ), '</div>';
 	}
 
 	echo <<<HTML
