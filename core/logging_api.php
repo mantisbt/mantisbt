@@ -191,7 +191,7 @@ function log_print_to_page() {
 		<div class="space-10"></div>
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="widget-box widget-color-red$t_block_css">
+				<div id="debuglog" class="widget-box widget-color-red$t_block_css">
 					<div class="widget-header widget-header-small">
 						<h4 class="widget-title lighter">
 							$t_icon 
