@@ -617,6 +617,7 @@ $s_memory_usage = 'Memory usage: %1$s KiB';
 
 # log_api.php
 $s_debug_log = 'Debug Log';
+$s_debug_log_empty = 'The log is empty.';
 $s_log_page_number = 'Number';
 $s_log_page_time = 'Execution time';
 $s_log_page_caller = 'Caller';
