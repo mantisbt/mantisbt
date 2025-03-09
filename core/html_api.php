@@ -228,7 +228,7 @@ function html_css() {
 		if( $t_stylesheet_path == 'status_config.php' ) {
 			$t_stylesheet_path = helper_url_combine(
 				helper_mantis_url( 'css/status_config.php' ),
-				'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+				[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
 			);
 		}
 
@@ -259,7 +259,7 @@ function html_css_link( $p_filename, $p_cache_key = '' ) {
 
 	$t_url = helper_mantis_url( $t_filename );
 	if ( !empty( $p_cache_key ) ) {
-		$t_url = helper_url_combine( $t_url, 'cache_key=' . $p_cache_key );
+		$t_url = helper_url_combine( $t_url, [ 'cache_key' => $p_cache_key ] );
 	}
 
 	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( $t_url, true ), '" />', "\n";
@@ -347,11 +347,11 @@ function html_head_javascript() {
 	# a reload when the content may differ.
 	$t_javascript_translations = helper_url_combine(
 		helper_mantis_url( 'javascript_translations.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'lang' ) )
+		[ 'cache_key' => helper_generate_cache_key( array( 'lang' ) ) ]
 	);
 	$t_javascript_config = helper_url_combine(
 		helper_mantis_url( 'javascript_config.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+		[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
 	);
 	echo "\t" . '<script src="' . $t_javascript_config . '"></script>' . "\n";
 	echo "\t" . '<script src="' . $t_javascript_translations . '"></script>' . "\n";
@@ -1032,7 +1032,7 @@ function print_admin_menu_bar( $p_page ) {
  */
 function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_method = 'post' ) {
 	$t_form_name = explode( '.php', $p_action, 2 );
-	$p_action = urlencode( $p_action );
+	$p_action = string_url( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
 
 	if( strtolower( $p_method ) == 'get' ) {

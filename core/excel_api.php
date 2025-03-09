@@ -33,6 +33,7 @@
  * @uses helper_api.php
  * @uses lang_api.php
  * @uses project_api.php
+ * @uses string_api.php
  * @uses user_api.php
  */
 
@@ -46,6 +47,7 @@ require_api( 'custom_field_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'project_api.php' );
+require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
 /**
@@ -61,7 +63,7 @@ function excel_get_header( $p_worksheet_title, array $p_styles = array() ) {
  <Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"
  xmlns:x=\"urn:schemas-microsoft-com:office:excel\"
  xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\"
- xmlns:html=\"http://www.w3.org/TR/REC-html40\">\n ". excel_get_styles( $p_styles ). '<Worksheet ss:Name="' . urlencode( $p_worksheet_title ) . "\">\n<Table>\n<Column ss:Index=\"1\" ss:AutoFitWidth=\"0\" ss:Width=\"110\"/>\n";
+ xmlns:html=\"http://www.w3.org/TR/REC-html40\">\n ". excel_get_styles( $p_styles ). '<Worksheet ss:Name="' . string_url( $p_worksheet_title ) . "\">\n<Table>\n<Column ss:Index=\"1\" ss:AutoFitWidth=\"0\" ss:Width=\"110\"/>\n";
 }
 
 /**
