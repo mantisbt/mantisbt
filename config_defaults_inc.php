@@ -89,6 +89,7 @@ $g_database_name = 'bugtracker';
  * PostgreSQL      pgsql         pgsql
  * MS SQL Server   mssqlnative   sqlsrv    experimental
  * Oracle          oci8          oci8      experimental
+ * SQLite 3        sqlite3       sqlite3
  *
  * @global string $g_db_type
  */
