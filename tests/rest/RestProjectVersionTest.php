@@ -24,7 +24,9 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'RestBase.php';
+namespace Mantis\tests\rest;
+
+use DateTimeImmutable;
 
 /**
  * Test fixture for project related APIs.
@@ -308,7 +310,7 @@ class RestProjectVersionTest extends RestBase {
 	 *
 	 * @return array The test data
 	 */
-	public function providerVersionInvalidNames() {
+	public static function providerVersionInvalidNames() {
 		return array(
 			'empty' =>array( '' ),
 			'blank' => array( '   ' ),

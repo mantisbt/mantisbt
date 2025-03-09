@@ -242,6 +242,7 @@ a:link:after, a:visited:after {
 
 .user-info {
     line-height: 33px !important;
+    max-width: 270px !important;
 }
 
 .page-content {
@@ -558,6 +559,10 @@ input.typeahead.scrollable ~ .tt-menu {
     cursor: pointer;
 }
 
+.dropzone > span {
+    white-space: normal;
+}
+
 /* ------------------------------------------------------------------------ */
 
 .btn-group .single-button-form {
@@ -751,4 +756,17 @@ ul.changelog > li, ul.roadmap > li {
         right: 43px !important;
     }
 
+}
+/* Disable padding for the top included page */
+.navbar-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+/* Move the button higher than the bottom included page */
+.btn-scroll-up {
+    z-index: 1099;
+}
+/* Fix the background of the navbar */
+.skin-3 .navbar.navbar-collapse {
+	background-color: #404040;
 }

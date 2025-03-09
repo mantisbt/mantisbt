@@ -60,6 +60,8 @@ $f_username = trim( $f_username );
 $f_email = trim( $f_email );
 $f_captcha = mb_strtolower( trim( $f_captcha ) );
 
+$t_form_title = lang_get( 'signup_title' );
+
 # force logout on the current user if already authenticated
 if( auth_is_user_authenticated() ) {
 	auth_logout();
@@ -87,7 +89,7 @@ if( user_signup( $f_username, $f_email ) ) {
 
 form_security_purge( 'signup' );
 
-layout_login_page_begin();
+layout_login_page_begin( $t_form_title );
 ?>
 
 	<div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
@@ -103,7 +105,7 @@ layout_login_page_begin();
 						<div class="widget-main">
 							<h4 class="header lighter bigger">
 								<?php print_icon( 'fa-pencil', 'ace-icon' ); ?>
-								<?php echo lang_get( 'signup_title' ) ?>
+								<?php echo $t_form_title ?>
 							</h4>
 							<div class="space-10"></div>
 

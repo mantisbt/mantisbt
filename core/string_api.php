@@ -238,6 +238,15 @@ function string_url( $p_string ) {
 }
 
 /**
+ * Build a URL-encoded query string from an array of key value pairs.
+ * @param  array $p_params Query string parameters.
+ * @return string
+ */
+function string_build_query( array $p_params ): string {
+	return http_build_query( $p_params, '', '&', PHP_QUERY_RFC3986 );
+}
+
+/**
  * validate the url as part of this site before continuing
  * @param string  $p_url             URL to be processed.
  * @param boolean $p_return_absolute Whether to return the absolute URL to this Mantis instance.

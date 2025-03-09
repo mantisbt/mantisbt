@@ -26,7 +26,7 @@
  * @noinspection PhpUndefinedMethodInspection
  */
 
-require_once 'SoapBase.php';
+namespace Mantis\tests\soap;
 
 /**
  * Test fixture for project webservice methods.
@@ -201,7 +201,7 @@ class ProjectTest extends SoapBase {
 	 */
 	protected function getNewProjectName() {
 		do {
-			$t_name = $this->getName() . '_' . rand();
+			$t_name = $this->getTestName() . '_' . rand();
 			$t_id = $this->client->mc_project_get_id_from_name( $this->userName, $this->password, $t_name );
 		} while( $t_id != 0 );
 		return $t_name;

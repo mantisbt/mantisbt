@@ -21,9 +21,13 @@
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpComposerExtensionStubsInspection
  */
 
-require_once 'SoapBase.php';
+namespace Mantis\tests\soap;
+
+use SoapFault;
 
 /**
  * Test fixture for enum related webservice method.

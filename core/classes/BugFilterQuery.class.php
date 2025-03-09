@@ -240,7 +240,7 @@ class BugFilterQuery extends DbQuery {
 	 * @param integer $p_offset		Offset value
 	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed.
 	 */
-	public function execute( array $p_bind_array = null, $p_limit = null, $p_offset = null ) {
+	public function execute( array $p_bind_array = [], $p_limit = null, $p_offset = null ) {
 		if( $this->needs_rebuild ) {
 			$this->build_query();
 		}
@@ -1603,11 +1603,13 @@ class BugFilterQuery extends DbQuery {
 	/**
 	 * Translates a sql string created with legacy db_param() syntax, into
 	 * a string with valid parameters and values binded to current query object.
+	 *
 	 * @param string $p_string	Sql string
 	 * @param array $p_params	Array of parameter values
+	 *
 	 * @return string
 	 */
-	protected function helper_convert_legacy_clause( $p_string, array $p_params = null ) {
+	protected function helper_convert_legacy_clause( $p_string, array $p_params = [] ) {
 		if( empty( $p_params ) ) {
 			# shortcut, if there are no parameters, there's no need to translate
 			return $p_string;
@@ -1635,7 +1637,7 @@ class BugFilterQuery extends DbQuery {
 					if( isset( $t_filter_query['join'] ) ) {
 						$this->add_join( $t_filter_query['join'] );
 					}
-					$t_params = null;
+					$t_params = [];
 					if( isset( $t_filter_query['params'] ) && is_array( $t_filter_query['params'] ) ) {
 						$t_params = $t_filter_query['params'];
 					}

@@ -23,10 +23,13 @@
  * @link http://www.mantisbt.org
  */
 
+namespace Mantis\tests\Mantis;
+
+use MantisEnum;
+
 /**
  * Includes
  */
-require_once 'MantisCoreBase.php';
 require_once 'MantisEnum.class.php';
 
 /**

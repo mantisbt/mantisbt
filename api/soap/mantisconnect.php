@@ -92,5 +92,11 @@ $t_server = new SoapServer( $t_wsdl_path,
 	array( 'features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS )
 );
 
-$t_server->addFunction( SOAP_FUNCTIONS_ALL );
+// Get the list of public SOAP functions
+$t_soap_functions = array_filter( get_defined_functions()['user'],
+	function( string $p_name ) {
+		return strpos( $p_name, 'mc_' ) === 0;
+	}
+);
+$t_server->addFunction( $t_soap_functions );
 $t_server->handle();

@@ -174,7 +174,5 @@ if( count( $t_ids ) > 0 ) {
 		</form>
 	</div>
 	</div></div></div>
-
-</div>
 <?php
 layout_admin_page_end();

@@ -578,6 +578,8 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 	} # end in_array
 }  # end main loop
 
-layout_body_javascript();
+if( $f_type_page == 'html' ) {
+	layout_body_javascript();
+}
 html_body_end();
 html_end();

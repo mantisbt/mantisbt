@@ -636,6 +636,21 @@ $(document).ready( function() {
 			.addClass(getColorClassName(me.val()));
 		me.data('prev', me.val());
 	});
+
+	/**
+	 * Adjust footer height based on its content
+	 */
+	var bottom = $('.navbar-fixed-bottom');
+	var bottom_placeholder = $('<div>', {
+		'class': 'col-xs-12',
+		'width': '100%'
+	}).insertBefore(bottom);
+	var footer = $('.footer');
+	var footer_content = $('.footer-content');
+	$(window).on('resize.footer', function() {
+		bottom_placeholder.css('height', parseInt(bottom.height()) + 'px');
+		footer.css('padding-top', parseInt(footer_content.height()) + 'px');
+		}).triggerHandler('resize.footer');
 });
 
 function setBugLabel() {

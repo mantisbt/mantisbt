@@ -70,22 +70,30 @@ $t_hide_status_default = config_get( 'hide_status_default' );
 $t_default_show_changed = config_get( 'default_show_changed' );
 
 $c_filter['assigned'] = filter_create_assigned_to_unresolved( helper_get_current_project(), $t_current_user_id );
-$t_url_link_parameters['assigned'] = FILTER_PROPERTY_HANDLER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_bug_resolved_status_threshold;
+$t_url_link_parameters['assigned'] = [
+	FILTER_PROPERTY_HANDLER_ID => $t_current_user_id,
+	FILTER_PROPERTY_HIDE_STATUS => $t_bug_resolved_status_threshold,
+];
 
 # @TODO cproensa: make this value configurable
 $t_recent_days = 30;
 $c_filter['recent_mod'] = filter_create_recently_modified( $t_recent_days );
-$t_url_link_parameters['recent_mod'] = FILTER_PROPERTY_HIDE_STATUS . '=none'
-		. '&' . FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE]
-		. '&' . FILTER_PROPERTY_LAST_UPDATED_END_DAY . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_DAY]
-		. '&' . FILTER_PROPERTY_LAST_UPDATED_END_MONTH . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_MONTH]
-		. '&' . FILTER_PROPERTY_LAST_UPDATED_END_YEAR . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_YEAR]
-		. '&' . FILTER_PROPERTY_LAST_UPDATED_START_DAY . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_DAY]
-		. '&' . FILTER_PROPERTY_LAST_UPDATED_START_MONTH . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_MONTH]
-		. '&' . FILTER_PROPERTY_LAST_UPDATED_START_YEAR . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_YEAR];
+$t_url_link_parameters['recent_mod'] = [
+	FILTER_PROPERTY_HIDE_STATUS => 'none',
+	FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE => $c_filter['recent_mod'][FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE],
+	FILTER_PROPERTY_LAST_UPDATED_END_DAY => $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_DAY],
+	FILTER_PROPERTY_LAST_UPDATED_END_MONTH => $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_MONTH],
+	FILTER_PROPERTY_LAST_UPDATED_END_YEAR => $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_YEAR],
+	FILTER_PROPERTY_LAST_UPDATED_START_DAY => $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_DAY],
+	FILTER_PROPERTY_LAST_UPDATED_START_MONTH => $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_MONTH],
+	FILTER_PROPERTY_LAST_UPDATED_START_YEAR => $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_YEAR],
+];
 
 $c_filter['reported'] = filter_create_reported_by( helper_get_current_project(), $t_current_user_id );
-$t_url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['reported'] = [
+	FILTER_PROPERTY_REPORTER_ID => $t_current_user_id,
+	FILTER_PROPERTY_HIDE_STATUS => $t_hide_status_default,
+];
 
 $c_filter['resolved'] = array(
 	FILTER_PROPERTY_CATEGORY_ID => array(
@@ -120,16 +128,24 @@ $c_filter['resolved'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$t_url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
-
+$t_url_link_parameters['resolved'] = [
+	FILTER_PROPERTY_STATUS => $t_bug_resolved_status_threshold,
+	FILTER_PROPERTY_HIDE_STATUS => $t_hide_status_default,
+];
 
 $c_filter['unassigned'] = filter_create_assigned_to_unresolved( helper_get_current_project(), 0 );
-$t_url_link_parameters['unassigned'] = FILTER_PROPERTY_HANDLER_ID . '=[none]' . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['unassigned'] = [
+	FILTER_PROPERTY_HANDLER_ID => '[none]',
+	FILTER_PROPERTY_HIDE_STATUS => $t_hide_status_default,
+];
 
 # TODO: check. handler value looks wrong
 
 $c_filter['monitored'] = filter_create_monitored_by( helper_get_current_project(), $t_current_user_id );
-$t_url_link_parameters['monitored'] = FILTER_PROPERTY_MONITOR_USER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['monitored'] = [
+	FILTER_PROPERTY_MONITOR_USER_ID => $t_current_user_id,
+	FILTER_PROPERTY_HIDE_STATUS => $t_hide_status_default,
+];
 
 $c_filter['feedback'] = array(
 	FILTER_PROPERTY_CATEGORY_ID => array(
@@ -164,7 +180,11 @@ $c_filter['feedback'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$t_url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . config_get( 'bug_feedback_status' ) . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['feedback'] = [
+	FILTER_PROPERTY_REPORTER_ID => $t_current_user_id,
+	FILTER_PROPERTY_STATUS => config_get( 'bug_feedback_status' ),
+	FILTER_PROPERTY_HIDE_STATUS => $t_hide_status_default,
+];
 
 $c_filter['verify'] = array(
 	FILTER_PROPERTY_CATEGORY_ID => array(
@@ -199,7 +219,10 @@ $c_filter['verify'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$t_url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold;
+$t_url_link_parameters['verify'] = [
+	FILTER_PROPERTY_REPORTER_ID => $t_current_user_id,
+	FILTER_PROPERTY_STATUS => $t_bug_resolved_status_threshold,
+];
 
 $c_filter['my_comments'] = array(
 	FILTER_PROPERTY_CATEGORY_ID => array(
@@ -233,12 +256,15 @@ $c_filter['my_comments'] = array(
 	FILTER_PROPERTY_MONITOR_USER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_NOTE_USER_ID=> array(
+	FILTER_PROPERTY_NOTE_USER_ID => array(
 		'0' => META_FILTER_MYSELF,
 	),
 );
 
-$t_url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['my_comments'] = [
+	FILTER_PROPERTY_NOTE_USER_ID => META_FILTER_MYSELF,
+	FILTER_PROPERTY_HIDE_STATUS => $t_hide_status_default,
+];
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
 # Improve performance by caching category data in one pass
@@ -274,7 +300,8 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
 			<?php print_icon( 'fa-list-alt', 'ace-icon' ); ?>
 <?php
 #-- Box title
-$t_box_url = html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' . $t_url_link_parameters[$t_box_title];
+$t_box_url = html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&'
+	. string_build_query( $t_url_link_parameters[$t_box_title] );
 print_link( $t_box_url, $t_box_title_label, false, 'white' );
 
 # -- Viewing range info

@@ -24,7 +24,10 @@
 
 declare( strict_types = 1 );
 
-require_once dirname( __DIR__ ) . '/MantisCoreBase.php';
+namespace Mantis\tests\Mantis\Helper;
+
+use Generator;
+use Mantis\tests\Mantis\MantisCoreBase;
 
 /**
  * Tests for Link Attributes (Helper API).
@@ -61,7 +64,7 @@ class GetLinkAttributesTest extends MantisCoreBase
 		$this->restoreConfig( self::CFG_MAKE_LINKS, $t_old );
 	}
 
-	public function provideConfigurations(): Generator {
+	public static function provideConfigurations(): Generator {
 		yield 'LINKS_SAME_WINDOW' => [
 			LINKS_SAME_WINDOW,
 			'',
@@ -123,21 +126,21 @@ class GetLinkAttributesTest extends MantisCoreBase
 		$this->assertEquals( $p_external, helper_is_link_external( $p_url ), "URL is external" );
 	}
 
-	public function providerLinks(): Generator {
+	public static function providerLinks(): Generator {
 		yield 'External URL' => [
 			'https://example.com',
-			'external' => true,
+			true,
 		];
 
 		$t_path = config_get_global('path' );
 		yield 'Mantis URL' => [
 			$t_path,
-			'external' => false,
+			false,
 		];
 
 		yield 'Relative URL' => [
 			'/index.html',
-			'external' => false,
+			false,
 		];
 	}
 
@@ -163,17 +166,17 @@ class GetLinkAttributesTest extends MantisCoreBase
 		$this->restoreConfig( self::CFG_MAKE_LINKS, $t_old );
 	}
 
-	public function providerNoFollow(): Generator {
+	public static function providerNoFollow(): Generator {
 		yield 'LINKS_NOFOLLOW_EXTERNAL' => [
 			LINKS_NOFOLLOW_EXTERNAL,
-			'internal' => [],
-			'external' => ['rel' => 'nofollow'],
+			[],
+			['rel' => 'nofollow'],
 		];
 
 		yield 'LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL' => [
 			LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL,
-			'internal' => ['rel' => 'noopener'],
-			'external' => ['rel' => 'noopener,nofollow'],
+			['rel' => 'noopener'],
+			['rel' => 'noopener,nofollow'],
 		];
 	}
 }

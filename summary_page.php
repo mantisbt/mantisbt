@@ -107,7 +107,7 @@ print_summary_submenu();
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
-		<?php summary_print_by_project( array(), 0, null, $t_filter ); ?>
+		<?php summary_print_by_project( [], 0, [], $t_filter ); ?>
 	</table>
 	</div>
 

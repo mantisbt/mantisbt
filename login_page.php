@@ -106,10 +106,7 @@ if( auth_automatic_logon_bypass_form() ) {
 	exit;
 }
 
-# Login page shouldn't be indexed by search engines
-html_robots_noindex();
-
-layout_login_page_begin();
+layout_login_page_begin( $t_form_title );
 ?>
 
 <div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">

@@ -74,4 +74,3 @@ echo $rssfile->saveRSS($version, $path = '');
 */
 
 ob_end_flush();
-?>

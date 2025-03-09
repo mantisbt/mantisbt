@@ -46,6 +46,7 @@
  * @author DDPAT
  * @author Dovsienko
  * @author Green Zero
+ * @author Gzhegozh
  * @author Ice bulldog
  * @author Ignatgg
  * @author Igorko
@@ -763,9 +764,6 @@ $s_delete_user_button = 'Видалити користувача';
 $s_impersonate_user_button = 'Розкрити користувача';
 $s_reset_password_msg = 'Скидання паролю надсилає посилання для підтвердження електронною поштою.';
 $s_reset_password_msg2 = 'Скидання паролю зробить ваш пароль порожнім.';
-$s_show_all_users = 'ВСІ';
-$s_users_unused = 'Невикористані';
-$s_users_new = 'Нові';
 $s_account_reset_msg = 'Лист для підтвердження відправлений вам на вашу електронну адресу...';
 $s_account_reset_msg2 = 'Запису задано порожній пароль…';
 $s_account_unlock_msg = 'Обліковий запис розблоковано.';
@@ -1169,10 +1167,6 @@ $s_tags = 'Теги';
 $s_tag_details = 'Подробиці тегу: %1$s';
 $s_tag_id = 'Ідентифікатор тегу';
 $s_tag_name = 'Назва';
-$s_tag_creator = 'Автор';
-$s_tag_created = 'Дата створення';
-$s_tag_updated = 'Останнє оновлення';
-$s_tag_description = 'Опис тегів';
 $s_tag_statistics = 'Статистика використання';
 $s_tag_update = 'Оновити тег:%1$s';
 $s_tag_update_return = 'Назад до тега';
@@ -1195,9 +1189,8 @@ $s_tag_history_detached = 'Тег відкріплено';
 $s_tag_history_renamed = 'Тег перейменовано';
 $s_tag_related = 'Пов\'язані теги';
 $s_tag_related_issues = 'Пов\'язані проблеми (%1$s)';
-$s_tag_stats_attached = 'Прикріплені проблеми: %1$s';
+$s_tag_stats_attached = 'Прикріплені проблеми';
 $s_tag_create = 'Створити тег';
-$s_show_all_tags = 'Усі';
 $s_time_tracking_billing_link = 'Облік часу';
 $s_time_tracking = 'Облік часу';
 $s_time_tracking_time_spent = 'Витрачений час:';
@@ -1293,11 +1286,11 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Коментар не знайдени
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Не можу знайти поле «%1$s» бази даних.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Обробник проблем не має достатніх привілеїв на обробку проблеми з цим статусом.';
 $MANTIS_ERROR[ERROR_PROJECT_HIERARCHY_DISABLED] = 'Ієрархія проєкту відключена.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Проект «%1$s» не знайдено.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Такий проект вже існує. Поверніться назад і введіть іншу назву проєкта.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Проєкт «%1$s» не знайдено.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Такий проєкт вже існує. Поверніться назад і введіть іншу назву проєкта.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Хибна назва проекта. Назва проєкта не може бути порожньою.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Ця операція зациклила б ієрархію підпроєктів.';
-$MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_DUPLICATE] = 'Проект «%1$s» вже є підпроєктом «%2$s».';
+$MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_DUPLICATE] = 'Проєкт «%1$s» вже є підпроєктом «%2$s».';
 $MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_NOT_FOUND] = 'Проєкт «%1$s» не є підпроєктом «%2$s».';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Користувача з ім’ям «%1$s» не знайдено.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Користувача з ім’ям «%1$d» не знайдено.';
@@ -1327,7 +1320,7 @@ $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Редакцію проблеми
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Не можу знайти таке власне поле';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Таке ім\'я вже існує.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_INVALID] = 'Недійсна назва користувацького поля «%1$s»: коми не допускаються. Див. розділ «Локалізація користувацьких імен полів» у посібнику адміністратора.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Принаймні один проект використовує це поле.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Принаймні один проєкт використовує це поле.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Неприпустиме значення поля «%1$s».';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Хибне означення власного поля';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Недопустима властивість спеціального поля (%1$s).';
@@ -1445,3 +1438,7 @@ $s_move = 'Перенести';
 $s_close = 'Закрити';
 $s_add = 'Додати';
 $s_login = 'Увійти';
+$s_filter_all = 'ВСІ';
+$s_filter_new = 'Нові';
+$s_filter_unused_tags = 'Невикористані';
+$s_filter_unused = 'Невикористані';

@@ -24,9 +24,12 @@
 
 declare( strict_types = 1 );
 
-use Mantis\Exceptions\ClientException;
+namespace Mantis\tests\Mantis\Helper;
 
-require_once dirname( __DIR__ ) . '/MantisCoreBase.php';
+use Generator;
+use Mantis\Exceptions\ClientException;
+use Mantis\tests\Mantis\MantisCoreBase;
+
 
 /**
  * Test for helper_api::helper_array_transpose
@@ -71,7 +74,7 @@ class ArrayTransposeTest extends MantisCoreBase {
 	 * helper_array_transpose() should successfully transpose <test matrix>
 	 * into <expected transposition>.
 	 */
-	public function providerArrayTransposeValid(): Generator
+	public static function providerArrayTransposeValid(): Generator
 	{
 		yield 'Bidimensional simple array' => [
 			[['a'], ['b']],
@@ -125,7 +128,7 @@ class ArrayTransposeTest extends MantisCoreBase {
 	 *
 	 * @return Generator List of test cases
 	 */
-	public function providerArrayTransposeInvalid(): Generator {
+	public static function providerArrayTransposeInvalid(): Generator {
 		yield 'Simple array' => [
 			[1, 2]
 		];

@@ -1,0 +1,48 @@
+# -----------------------------------------------------------------------------
+# MantisBT GitHub Actions Worflow to build Documentation
+#
+# Will only run if DocBook files have been changed.
+# -----------------------------------------------------------------------------
+
+name: MantisBT Documentation
+on:
+  push:
+    paths:
+      - .github/workflows/documentation.yml
+      - "docbook/*/en-US/**"
+      - "docbook/*/publican.cfg"
+  pull_request:
+    paths:
+      - .github/workflows/documentation.yml
+      - "docbook/*/en-US/**"
+      - "docbook/*/publican.cfg"
+
+concurrency:
+  group: doc-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  Documentation:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    env:
+      DOCBOOKS: Admin_Guide Developers_Guide
+
+    steps:
+      - name: Checkout MantisBT Repository
+        uses: actions/checkout@v4
+
+      - name: Install Publican toolchain
+        run: sudo apt-get install publican
+
+      - name: Build Docbooks
+        run: |
+          for BOOK in $DOCBOOKS
+          do
+              echo "::group::Building '$BOOK'..."
+              pushd docbook/$BOOK >/dev/null
+              make
+              popd  >/dev/null
+              echo "::endgroup::"
+          done

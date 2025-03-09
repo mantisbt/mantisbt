@@ -967,9 +967,6 @@ $s_delete_user_button = 'Delete User';
 $s_impersonate_user_button = 'Impersonate User';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via e-mail.';
 $s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
-$s_show_all_users = 'All';
-$s_users_unused = 'Unused';
-$s_users_new = 'New';
 $s_email_not_unique = 'Email address is associated with at least one other user account';
 
 # manage_user_reset.php
@@ -1486,16 +1483,12 @@ $s_tags = 'Tags';
 $s_tag_details = 'Tag Details: %1$s';
 $s_tag_id = 'Tag ID';
 $s_tag_name = 'Name';
-$s_tag_creator = 'Creator';
-$s_tag_created = 'Date Created';
-$s_tag_updated = 'Last Updated';
-$s_tag_description = 'Tag Description';
 $s_tag_statistics = 'Usage Statistics';
 $s_tag_update = 'Update Tag: %1$s';
 $s_tag_update_return = 'Back to Tag';
 $s_tag_update_button = 'Update Tag';
 $s_tag_delete_button = 'Delete Tag';
-$s_tag_delete_message = 'Are you sure you wish to delete this tag?';
+$s_tag_delete_message = 'Are you sure you wish to delete tag "%1$s"?';
 $s_tag_existing = 'Existing tags';
 $s_tag_none_attached = 'No tags attached.';
 $s_tag_attach = 'Attach';
@@ -1512,9 +1505,8 @@ $s_tag_history_detached = 'Tag Detached';
 $s_tag_history_renamed = 'Tag Renamed';
 $s_tag_related = 'Related Tags';
 $s_tag_related_issues = 'Shared Issues (%1$s)';
-$s_tag_stats_attached = 'Issues attached: %1$s';
+$s_tag_stats_attached = 'Issues attached';
 $s_tag_create = 'Create Tag';
-$s_show_all_tags = 'All';
 
 # Time Tracking
 $s_time_tracking_billing_link = 'Time Tracking';
@@ -1798,3 +1790,7 @@ $s_move = 'Move';
 $s_close = 'Close';
 $s_add = 'Add';
 $s_login = 'Login';
+$s_filter_all = 'All';
+$s_filter_new = 'New';
+$s_filter_unused_tags = 'Unused';
+$s_filter_unused = 'Unused';

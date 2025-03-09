@@ -381,6 +381,9 @@ function bugnote_delete( $p_bugnote_id ) {
 	$t_query = 'DELETE FROM {bugnote_text} WHERE id=' . db_param();
 	db_query( $t_query, array( $t_bugnote_text_id ) );
 
+	# Update the last_updated date
+	bug_update_date( $t_bug_id );
+
 	# log deletion of bug
 	history_log_event_special( $t_bug_id, BUGNOTE_DELETED, bugnote_format_id( $p_bugnote_id ) );
 

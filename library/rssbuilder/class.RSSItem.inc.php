@@ -4,7 +4,7 @@ require_once 'class.RSSBase.inc.php';
 * Class for creating an RSS-feed
 * @author Michael Wimmer <flaimo@gmail.com>
 * @category flaimo-php
-* @copyright Copyright © 2002-2008, Michael Wimmer
+* @copyright Copyright Â© 2002-2008, Michael Wimmer
 * @license GNU General Public License v3
 * @link http://code.google.com/p/flaimo-php/
 * @package RSS
@@ -79,4 +79,3 @@ class RSSItem extends RSSBase {
 		return parent::getVar('image');
 	} // end function		
 } // end class
-?>

@@ -823,7 +823,7 @@ function install_print_unserialize_errors_csv( $p_table, $p_data ) {
 
 	# Generate CSV data
 	foreach( $p_data as $t_error ) {
-		fputcsv( $f, $t_error );
+		fputcsv( $f, $t_error, ',', '"', '' );
 	}
 	$t_csv .= stream_get_contents( $f, -1,0 );
 	fclose( $f );

@@ -23,9 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
-use Psr\Http\Message\ResponseInterface;
+namespace Mantis\tests\rest;
 
-require_once 'RestBase.php';
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Test fixture for issue webservice methods.
@@ -406,7 +406,7 @@ class RestIssueTest extends RestBase {
 	 * @return array List of test cases
 	 *
 	 */
-	public function providerTagsInvalid() {
+	public static function providerTagsInvalid() {
 		return array(
 			'EmptyTagElement' => array(
 				array(),
