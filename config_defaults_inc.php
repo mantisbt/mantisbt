@@ -692,6 +692,8 @@ $g_show_user_realname_threshold = NOBODY;
 /**
  * Select the method to mail by.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * Possible values are:
  * - PHPMAILER_METHOD_MAIL - PHP mail() function
  * - PHPMAILER_METHOD_SENDMAIL - sendmail
@@ -702,7 +704,9 @@ $g_show_user_realname_threshold = NOBODY;
 $g_phpMailer_method = PHPMAILER_METHOD_MAIL;
 
 /**
- * Remote SMTP Host(s).
+ * Remote SMTP Host(s)
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Either a single hostname or multiple semicolon-delimited hostnames.
  * You can specify for each host a port other than the default, using format:
@@ -719,6 +723,8 @@ $g_smtp_host = 'localhost';
 /**
  * SMTP Server Authentication user.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * NOTE: must be set to '' if the SMTP host does not require authentication.
  *
  * @see $g_smtp_password
@@ -728,6 +734,8 @@ $g_smtp_username = '';
 
 /**
  * SMTP Server Authentication password.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Not used when $g_smtp_username = ''
  *
@@ -739,6 +747,8 @@ $g_smtp_password = '';
 /**
  * Allow secure connection to the SMTP server.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * Valid values are '' (no encryption), 'ssl' or 'tls'
  *
  * @global string $g_smtp_connection_mode
@@ -747,6 +757,8 @@ $g_smtp_connection_mode = '';
 
 /**
  * Default SMTP port.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Typical ports are 25 and 587.
  * This can be overridden individually for specific hosts.
@@ -758,6 +770,8 @@ $g_smtp_port = 25;
 
 /**
  * Enable DomainKeys Identified Mail (DKIM) Signatures (rfc6376).
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * To successfully sign mails you need to enable DKIM and provide at least:
  * - DKIM domain
@@ -777,6 +791,8 @@ $g_email_dkim_enable = OFF;
 /**
  * DomainKeys Identified Mail (DKIM) Signatures domain.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * This is usually the same as the domain of your from email.
  *
  * @see $g_from_email
@@ -787,6 +803,8 @@ $g_email_dkim_domain = 'example.com';
 
 /**
  * DomainKeys Identified Mail (DKIM) Signatures private key path.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Path to the private key. If $g_email_dkim_private_key_string is specified
  * this setting will not be used.
@@ -801,6 +819,8 @@ $g_email_dkim_private_key_file_path = '';
 /**
  * DomainKeys Identified Mail (DKIM) Signatures private key value.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * This string should contain private key for signing. Leave empty
  * string if you wish to load the key from the file defined with
  * $g_email_dkim_private_key_file_path.
@@ -813,6 +833,8 @@ $g_email_dkim_private_key_string = '';
 
 /**
  * DomainKeys Identified Mail (DKIM) Signatures selector.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * DNS selector for the signature (rfc6376)
  * DNS TXT field should have for instance:
@@ -827,6 +849,8 @@ $g_email_dkim_selector = 'mail.example';
 /**
  * DomainKeys Identified Mail (DKIM) Signatures private key password.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * Leave empty string if your private key does not have password.
  *
  * @see $g_email_dkim_enable
@@ -836,6 +860,8 @@ $g_email_dkim_passphrase = '';
 
 /**
  * DomainKeys Identified Mail (DKIM) Signatures identity.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Identity you are signing the mails with (rfc6376).
  * This is usually the same as your from email.
@@ -849,12 +875,16 @@ $g_email_dkim_identity = 'noreply@example.com';
 /**
  * Enable S/MIME signature.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * @global int $g_email_smime_enable
  */
 $g_email_smime_enable = OFF;
 
 /**
  * Path to the S/MIME certificate.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * The file must contain a PEM-encoded certificate.
  *
@@ -864,6 +894,8 @@ $g_email_smime_cert_file = '';
 
 /**
  * Path to the S/MIME private key file.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * The file must contain a PEM-encoded private key matching the S/MIME certificate.
  *
@@ -876,6 +908,8 @@ $g_email_smime_key_file = '';
 /**
  * Password for the S/MIME private key.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * Leave blank if the private key is not protected by a passphrase.
  * @see $g_email_smime_key_file
  *
@@ -885,6 +919,8 @@ $g_email_smime_key_password = '';
 
 /**
  * Optional path to S/MIME extra certificates.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * The file must contain one (or more) PEM-encoded certificates, which will be
  * included in the signature to help the recipient verify the certificate

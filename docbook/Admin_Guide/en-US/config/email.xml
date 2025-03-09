@@ -5,6 +5,20 @@
 <section id="admin.config.email">
 	<title>Email</title>
 
+	<para>
+		MantisBT sends email notifications to users when certain events occur.
+		This section includes configuration relating to when to trigger email notifications,
+		how to send them, from what addresses to send them, and how to format them.
+	</para>
+
+	<para>
+		The default implementation uses PHPMailer to send emails which is implemented via
+		<literal>core/classes/EmailSenderPhpMailer.class.php</literal>. Such implementation
+		can be overriden by EmailSender plugins, see
+		<ulink url="https://github.com/mantisbt-plugins/TestEmailSender">TestEmailSender</ulink>
+		for an example.
+	</para>
+
 	<variablelist>
 		<varlistentry>
 			<term>$g_webmaster_email</term>
@@ -380,6 +394,7 @@ $g_notify_flags['acknowledged'] = array(
 		<varlistentry>
 			<term>$g_smtp_host</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>This option specifies the SMTP server to submit messages to.
 					The SMTP server (MTA) then takes on the responsibility of delivering
 					messages to their final destinations.
@@ -405,6 +420,7 @@ $g_notify_flags['acknowledged'] = array(
 		<varlistentry>
 			<term>$g_smtp_port</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>The default SMTP port to use.
 					This can be overridden individually for specific hosts.
 					(see $g_smtp_host).
@@ -418,6 +434,7 @@ $g_notify_flags['acknowledged'] = array(
 		<varlistentry>
 			<term>$g_smtp_connection_mode</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>Allow secure connection to the SMTP server. Valid values are:
 					<itemizedlist>
 						<listitem><para><emphasis>'' (empty string)</emphasis>:
@@ -432,6 +449,7 @@ $g_notify_flags['acknowledged'] = array(
 		<varlistentry>
 			<term>$g_smtp_username</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>SMTP Server Authentication user
 				</para>
 				<para>Allows the use of SMTP Authentication when using a remote SMTP host.
@@ -446,6 +464,7 @@ $g_notify_flags['acknowledged'] = array(
 		<varlistentry>
 			<term>$g_smtp_password</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>This is the password that is used in SMTP Authentication.
 					Not used when $g_smtp_username = ''
 				</para>
@@ -572,6 +591,7 @@ $g_notify_flags['acknowledged'] = array(
 	<section id="admin.config.email.dkim">
 		<title>DKIM signature</title>
 
+		<para>These config options are specific to PhpMailer provider.</para>
 		<para>In order to setup
 			<ulink url="https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail"
 				>DomainKeys Identified Mail (DKIM) Signatures</ulink>
@@ -681,6 +701,8 @@ $g_notify_flags['acknowledged'] = array(
 
 	<section id="admin.config.email.smime">
 		<title>S/MIME signature</title>
+
+		<para>These config options are specific to PhpMailer provider.</para>
 
 		<para>This sections describes the necessary settings to enable
 			<ulink url="https://en.wikipedia.org/wiki/S/MIME">S/MIME</ulink>
