@@ -212,23 +212,12 @@ echo '<div class="table-responsive">';
 echo '<table class="table table-bordered table-condensed">';
 
 if( $t_top_buttons_enabled ) {
-	echo '<thead><tr class="bug-nav">';
-	echo '<tr class="top-buttons noprint">';
-	echo '<td colspan="6">';
-	/** @noinspection PhpUnhandledExceptionInspection */
-	bug_view_action_buttons( $f_issue_id, $t_flags );
-	echo '</td>';
-	echo '</tr>';
-	echo '</thead>';
-}
-
-if( $t_bottom_buttons_enabled ) {
-	echo '<tfoot>';
-	echo '<tr class="noprint"><td colspan="6">';
+	echo '<thead>';
+	echo '<tr class="top-buttons noprint"><td colspan="6">';
 	/** @noinspection PhpUnhandledExceptionInspection */
 	bug_view_action_buttons( $f_issue_id, $t_flags );
 	echo '</td></tr>';
-	echo '</tfoot>';
+	echo '</thead>';
 }
 
 echo '<tbody>';
@@ -280,9 +269,7 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 
 	echo '</tr>';
 
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
 #
@@ -558,9 +545,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 
 event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $f_issue_id ) );
 
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 #
 # Bug Details (screen wide fields)
@@ -639,9 +624,7 @@ if( !empty( $t_result['issue']['attachments'] ) ) {
 	echo '</td></tr>';
 }
 
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 # Custom Fields
 if( isset( $t_issue['custom_fields'] ) ) {
@@ -656,12 +639,22 @@ if( isset( $t_issue['custom_fields'] ) ) {
 		echo '</td></tr>';
 	}
 
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
-echo '</tbody></table>';
+echo '</tbody>';
+
+if( $t_bottom_buttons_enabled ) {
+	echo '<tfoot>';
+	echo '<tr class="noprint"><td colspan="6">';
+	/** @noinspection PhpUnhandledExceptionInspection */
+	bug_view_action_buttons( $f_issue_id, $t_flags );
+	echo '</td></tr>';
+	echo '</tfoot>';
+}
+
+echo '</table>';
+
 echo '</div></div></div></div></div>';
 
 # User list sponsoring the bug
@@ -799,7 +792,7 @@ if( $t_flags['history_show'] && $f_history ) {
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_history = history_get_events_array( $f_issue_id );
 ?>
-		<div id="history" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+		<div class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-history', 'ace-icon' ); ?>
@@ -1233,7 +1226,7 @@ function bug_view_button_bug_assign_to( BugData $p_bug ) {
 
 	# allow un-assigning if already assigned.
 	if( $p_bug->handler_id != 0 ) {
-		echo '<option value="0"></option>';
+		echo '<option value="0">&nbsp;</option>';
 	}
 
 	# 0 means currently selected

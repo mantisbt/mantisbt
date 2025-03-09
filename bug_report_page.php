@@ -229,6 +229,8 @@ $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level
 $t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload();
 $t_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
 
+$t_has_profiles = count( profile_get_all_for_user( auth_get_current_user_id() ) ) > 0;
+
 # don't index bug report page
 html_robots_noindex();
 
@@ -375,10 +377,15 @@ if( $t_show_attachments ) {
 <?php if( $t_show_platform || $t_show_os || $t_show_os_build ) { ?>
 	<tr>
 		<th class="category">
-			<label for="profile_id"><?php echo lang_get( 'select_profile' ) ?></label>
+			<?php
+			if( $t_has_profiles ) echo '<label for="profile_id">';
+			echo lang_get( 'select_profile' );
+			if( $t_has_profiles ) echo '</label>';
+			?>
+
 		</th>
 		<td>
-			<?php if( count( profile_get_all_for_user( auth_get_current_user_id() ) ) > 0 ) { ?>
+			<?php if( $t_has_profiles ) { ?>
 				<select <?php echo helper_get_tab_index() ?> id="profile_id" name="profile_id" class="input-sm">
 					<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
 				</select>
@@ -485,7 +492,7 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> id="handler_id" name="handler_id" class="input-sm">
-				<option value="0" selected="selected"></option>
+				<option value="0" selected="selected">&nbsp;</option>
 				<?php print_assign_to_option_list( $f_handler_id ) ?>
 			</select>
 		</td>
@@ -611,7 +618,7 @@ if( $t_show_attachments ) {
 <?php if( $t_show_tags ) { ?>
 	<tr>
 		<th class="category">
-			<label for="attach_tag"><?php echo lang_get( 'tag_attach_long' ) ?></label>
+			<label for="tag_string"><?php echo lang_get( 'tag_attach_long' ) ?></label>
 		</th>
 		<td>
 			<?php

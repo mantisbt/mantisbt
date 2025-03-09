@@ -115,7 +115,7 @@ layout_page_header();
 	<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_FIELD_NAME; ?>" value="<?php echo $f_sort ?>" />
 	<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_DIRECTION; ?>" value="<?php echo $f_dir ?>" />
 
-<table class="table table-striped table-bordered table-condensed no-margin">
+<table class="table table-striped table-bordered table-condensed no-margin noprint">
 <?php
 #<SQLI> Excel & Print export
 #$f_bug_array stores the number of the selected rows
@@ -134,9 +134,8 @@ for( $i=0; $i < $t_row_count; $i++ ) {
 $f_export = implode( ',', $f_bug_arr );
 
 ?>
-
 <tr>
-	<td colspan="<?php echo $t_num_of_columns ?>">
+	<td>
 <?php
 	if( 'DESC' == $f_dir ) {
 		$t_new_dir = 'ASC';
@@ -168,7 +167,6 @@ $f_export = implode( ',', $f_bug_arr );
 		echo '</a> ';
 	}
 ?>
-
 	</td>
 </tr>
 </table>
@@ -184,8 +182,9 @@ if( filter_is_temporary( $t_filter ) ) {
 <?php # CSRF protection not required here - form does not result in modifications ?>
 
 <table id="buglist" class="table table-striped table-bordered table-condensed no-margin">
+<thead>
 <tr>
-    <td class="bold bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
+    <td class="bold bigger-110" colspan="<?php echo $t_num_of_columns ?>">
 		<?php
 			echo lang_get( 'viewing_bugs_title' );
 
@@ -199,8 +198,6 @@ if( filter_is_temporary( $t_filter ) ) {
 			echo '( ' . $v_start . ' - ' . $v_end . ' )';
 		?>
 	</td>
-<tr>
-	</td>
 </tr>
 <tr class="row-category">
 	<?php
@@ -210,11 +207,8 @@ if( filter_is_temporary( $t_filter ) ) {
 		}
 	?>
 </tr>
-<tr class="spacer">
-	<td colspan="<?php echo $t_num_of_columns ?>"></td>
-</tr>
+<?php print_table_spacer( $t_num_of_columns ) ?>
 </thead>
-
 <tbody>
 <?php
 	for( $i=0; $i < $t_row_count; $i++ ) {
@@ -232,11 +226,10 @@ if( filter_is_temporary( $t_filter ) ) {
 <?php
 		} # isset_loop
 	} # for_loop
+
+	print_table_spacer( $t_num_of_columns );
 ?>
-<tr class="spacer">
-    <td colspan="<?php echo $t_num_of_columns ?>"></td>
-</tr>
-<tr>
+<tr class="noprint">
     <td colspan="<?php echo $t_num_of_columns ?>">
         <input type="hidden" name="show_flag" value="1" />
         <input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
