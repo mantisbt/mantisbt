@@ -79,8 +79,8 @@ function access_denied() {
 			if( isset( $_SERVER['QUERY_STRING'] ) ) {
 				$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 			}
-			$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
-			print_header_redirect( auth_login_page( 'return=' . $t_return_page ) );
+			$t_return_page = string_sanitize_url( $t_return_page );
+			print_header_redirect( auth_login_page( [ 'return' => $t_return_page ] ) );
 		}
 	} else {
 		if( current_user_is_anonymous() ) {
@@ -89,9 +89,9 @@ function access_denied() {
 				if( isset( $_SERVER['QUERY_STRING'] ) ) {
 					$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 				}
-				$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
+				$t_return_page = string_sanitize_url( $t_return_page );
 				echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p><p class="center">';
-				print_link_button( auth_login_page( 'return=' . $t_return_page ), lang_get( 'login' ) );
+				print_link_button( auth_login_page( [ 'return' => $t_return_page ] ), lang_get( 'login' ) );
 				echo '</p><p class="center">';
 				print_link_button(
 					helper_mantis_url( config_get_global( 'default_home_page' ) ),

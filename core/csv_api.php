@@ -31,6 +31,7 @@
  * @uses file_api.php
  * @uses helper_api.php
  * @uses project_api.php
+ * @uses string_api.php
  * @uses user_api.php
  *
  * @noinspection PhpDocMissingThrowsInspection
@@ -46,6 +47,7 @@ require_api( 'constant_inc.php' );
 require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'project_api.php' );
+require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
 /**
@@ -56,7 +58,7 @@ require_api( 'user_api.php' );
  * @return void
  */
 function csv_start( $p_filename ) {
-	$t_filename = urlencode( file_clean_name( $p_filename ) );
+	$t_filename = string_url( file_clean_name( $p_filename ) );
 
 	header( 'Pragma: public' );
 	header( 'Content-Encoding: UTF-8' );

@@ -278,7 +278,7 @@ if( $f_report_stay ) {
 	$t_data['product_version'] = $t_issue->version;
 	$t_data['report_stay'] = 1;
 
-	$t_report_more_bugs_url = string_get_bug_report_url() . '?' . http_build_query( $t_data );
+	$t_report_more_bugs_url = helper_url_combine( string_get_bug_report_url(), $t_data );
 
 	print_header_redirect( $t_report_more_bugs_url );
 } else {

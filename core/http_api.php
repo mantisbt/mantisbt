@@ -25,9 +25,11 @@
  * @link http://www.mantisbt.org
  *
  * @uses config_api.php
+ * @uses string_api.php
  */
 
 require_api( 'config_api.php' );
+require_api( 'string_api.php' );
 
 /**
  * The Content-Security-Policy settings array.  Use http_csp_add() to update it.
@@ -77,7 +79,7 @@ function is_browser_chrome() {
  */
 function http_content_disposition_header( $p_filename, $p_inline = false ) {
 	if( !headers_sent() ) {
-		$t_encoded_filename = rawurlencode( $p_filename );
+		$t_encoded_filename = string_url( $p_filename );
 		$t_disposition = '';
 		if( !$p_inline ) {
 			$t_disposition = 'attachment;';
