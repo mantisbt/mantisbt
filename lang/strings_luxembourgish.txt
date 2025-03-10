@@ -354,6 +354,7 @@ $s_linked_projects_label = 'Verbonne Projeten';
 $s_custom_field_sequence = 'Sequenz';
 $s_custom_field_sequence_label = 'Sequenz';
 $s_filter_resolved = 'Geléist';
+$s_advanced_filters = 'Erweidert Filteren';
 $s_bytes = 'Byte';
 $s_kib = 'KiB';
 $s_phpmailer_language = 'lb';
