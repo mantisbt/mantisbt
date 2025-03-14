@@ -53,7 +53,7 @@ require_api( 'utility_api.php' );
  * @param string $p_canonical_url Canonical URL if necessary: has to be relative to the install path {@see $g_path}.
  * @return void
  */
-function layout_page_header( $p_page_title = null, $p_redirect_url = null, $p_page_id = null, $p_canonical_url = null ) {
+function layout_page_header( $p_page_title = '', $p_redirect_url = null, $p_page_id = null, $p_canonical_url = null ) {
 	layout_page_header_begin( $p_page_title );
 	if( $p_redirect_url !== null ) {
 		html_meta_redirect( $p_redirect_url );
@@ -70,7 +70,7 @@ function layout_page_header( $p_page_title = null, $p_redirect_url = null, $p_pa
  * @param string $p_page_title Page title.
  * @return void
  */
-function layout_page_header_begin( $p_page_title = null ) {
+function layout_page_header_begin( $p_page_title = '' ) {
 	html_begin();
 	html_head_begin();
 	html_content_type();

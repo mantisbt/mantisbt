@@ -178,7 +178,7 @@ function html_content_type() {
  * @param string $p_page_title Window title.
  * @return void
  */
-function html_title( $p_page_title = null ) {
+function html_title( $p_page_title = '' ) {
 	$t_page_title = string_html_specialchars( $p_page_title );
 	$t_title = string_html_specialchars( config_get( 'window_title' ) );
 	echo "\t", '<title>';
