@@ -83,14 +83,14 @@ function access_denied() {
 	}
 
 	if( !auth_is_user_authenticated() ) {
-		print_header_redirect( auth_login_page( $t_return ) );
+		print_header_redirect( helper_mantis_url( auth_login_page( $t_return ) ) );
 	} else {
 		$t_buttons = [];
 		
 		# Login button
 		if( current_user_is_anonymous() ) {
 			$t_buttons[] = [
-				auth_login_page( $t_return ),
+				helper_mantis_url( auth_login_page( $t_return ) ),
 				lang_get( 'login' )
 			];
 		}
