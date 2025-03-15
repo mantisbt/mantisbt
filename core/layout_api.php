@@ -387,6 +387,7 @@ function layout_login_page_begin( $p_page_title = '' ) {
 function layout_login_page_end() {
 	layout_main_content_row_end();
 	layout_main_content_end();
+	error_print_delayed();
 	html_bottom_banner();
 	layout_scroll_up_button();
 	layout_main_container_end();
