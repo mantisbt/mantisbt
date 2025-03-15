@@ -176,6 +176,9 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 	layout_main_content_row_begin();
 
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
+
+	# Layout is in place, inline warnings can now be displayed without messing it up.
+	error_delay_reporting( false );
 }
 
 /**
