@@ -1,0 +1,6 @@
+# Prevents other .editorconfig files higher in the folder hierarchy to interfere
+root = true
+
+[*.{php,js,css}]
+indent_style = tab
+indent_size = 4
