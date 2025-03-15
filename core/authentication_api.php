@@ -221,7 +221,8 @@ function auth_session_expiry( $p_user_id, $p_perm_login ) {
 /**
  * Gets the login page to redirect to when login is needed, it will return a
  * relative url.
- * @param string $p_query_string query string parameters.
+ *
+ * @param string|array $p_query_string The query string or array of query parameters.
  * @return string login page (e.g. 'login_page.php' )
  * @throws ClientException
  */
@@ -236,9 +237,9 @@ function auth_login_page( $p_query_string = '' ) {
  * Gets the page that asks the user for credentials based on the user's
  * authentication model.
  *
- * @param string   $p_query_string The query string, can be empty.
- * @param int|null $p_user_id      The user id or null for current logged in user.
- * @param string   $p_username     The username
+ * @param string|array $p_query_string The query string or array of query parameters, can be empty.
+ * @param int|null     $p_user_id      The user id or null for current logged in user.
+ * @param string       $p_username     The username
  * @return string The credentials page with query string.
  * @throws ClientException
  */
@@ -322,8 +323,7 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 			}
 			$p_return_page = $_SERVER['REQUEST_URI'];
 		}
-		$p_return_page = string_url( $p_return_page );
-		print_header_redirect( auth_login_page( 'return=' . $p_return_page ) );
+		print_header_redirect( auth_login_page( [ 'return' => $p_return_page ] ) );
 	}
 }
 
@@ -1057,11 +1057,11 @@ function auth_reauthenticate() {
 			return true;
 		}
 
-		$t_query_params = http_build_query( array(
+		$t_query_params = [
 			'reauthenticate' => 1,
 			'username' => $t_username,
-			'return' => string_url( $_SERVER['REQUEST_URI'] ),
-		) );
+			'return' => $_SERVER['REQUEST_URI'],
+		];
 
 		# redirect to login page
 		return print_header_redirect( auth_credential_page( $t_query_params ) );

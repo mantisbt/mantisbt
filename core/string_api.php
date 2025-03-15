@@ -295,10 +295,10 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 		foreach( $t_pairs as $t_key => $t_value ) {
 			if( is_array( $t_value ) ) {
 				foreach( $t_value as $t_value_each ) {
-					$t_clean_pairs[] = rawurlencode( $t_key ) . '[]=' . rawurlencode( $t_value_each );
+					$t_clean_pairs[] = string_url( $t_key ) . '[]=' . string_url( $t_value_each );
 				}
 			} else {
-				$t_clean_pairs[] = rawurlencode( $t_key ) . '=' . rawurlencode( $t_value );
+				$t_clean_pairs[] = string_url( $t_key ) . '=' . string_url( $t_value );
 			}
 		}
 
@@ -310,7 +310,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	# encode link anchor
 	$t_anchor = '';
 	if( isset( $t_matches['anchor'] ) ) {
-		$t_anchor = '#' . rawurlencode( $t_matches['anchor'] );
+		$t_anchor = '#' . string_url( $t_matches['anchor'] );
 	}
 
 	# Return an appropriate re-combined URL string
@@ -816,7 +816,10 @@ function string_get_bug_report_url() {
  * @return string
  */
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	return config_get_global( 'path' ) . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
+	return helper_url_combine( config_get_global( 'path' ) . 'verify.php', [
+		'id' => $p_user_id,
+		'confirm_hash' => $p_confirm_hash
+	] );
 }
 
 /**
