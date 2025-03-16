@@ -204,7 +204,14 @@ function layout_page_end() {
 }
 
 /**
- * Print common elements for admin pages
+ * Print common elements for admin pages.
+ *
+ * This layout should be kept as simple as possible, and should not
+ * include any access or authentication functions, as it can also be
+ * used to output some authentication-related errors, and lead to the
+ * possible endless redirect loop otherwise.
+ * @see error_handler()
+ *
  * @return void
  */
 function layout_admin_page_begin() {

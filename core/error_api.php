@@ -330,6 +330,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 							if( auth_is_user_authenticated() ) {
 								layout_page_begin();
 							} else {
+								# The simpler layout to avoid the possible endless redirect loop
 								layout_admin_page_begin();
 							}
 						}
