@@ -512,6 +512,9 @@ function error_print_delayed() {
 
 		$g_errors_delayed = array();
 	}
+
+	# Make sure any subsequent inline errors are displayed
+	error_delay_reporting( false );
 }
 
 /**
