@@ -415,7 +415,9 @@ for( $i = 0;$i < $t_count; $i++ ) {
 				echo '<span>[', string_display_line( project_get_name( $t_bug->project_id ) ), '] </span>';
 			}
 			$t_bug_url = string_get_bug_view_url( $t_bug->id );
-			echo '<span><a href="' . $t_bug_url . '">' . $t_summary . '</a></span><br />';
+			echo '<span>',
+				string_wrap( '<a href="' . $t_bug_url . '">', $t_summary, '</a>', '<a ' ),
+				'</span><br />', "\n";
 	?>
 		<?php
 	# type project name if viewing 'all projects' or bug is in subproject

@@ -23,7 +23,11 @@
  * @link http://www.mantisbt.org
  */
 
+declare(strict_types=1);
+
 namespace Mantis\tests\Mantis;
+
+use Mantis\tests\Mantis\MantisCoreBase;
 
 /**
  * Mantis string handling test cases
@@ -101,4 +105,41 @@ class StringTest extends MantisCoreBase {
 		return $t_test_strings;
 	}
 
+	/**
+	 * Tests string_wrap()
+	 *
+	 * @param string $p_before   The string to insert before.
+	 * @param string $p_string   The string to be wrapped.
+	 * @param string $p_after    The string to insert after.
+	 * @param string $p_marker   The marker string.
+	 * @param mixed  $p_expected Expected result.
+	 * @return void
+	 * @see string_wrap()
+	 *
+	 * @dataProvider providerStringWrap
+	 */
+	public function testStringWrap( $p_before, $p_string, $p_after, $p_marker, $p_expected ): void {
+		if( is_subclass_of( $p_expected, '\Throwable' ) ) { 
+			$this->expectException( $p_expected );
+			string_wrap( $p_before, $p_string, $p_after, $p_marker );
+		} else {
+			$this->assertEquals( $p_expected, string_wrap( $p_before, $p_string, $p_after, $p_marker ) );
+		}
+	}
+
+	/**
+	 * Data provider for testStringWrap
+	 *
+	 * @return array
+	 */
+	public static function providerStringWrap(): array {
+		return [
+			'Error parameter (null)'	=> [ null, null, null, null, \TypeError::class ],
+			'Empty parameter (all)'		=> [ '', '', '', '', '' ],
+			'Insert at the middle'		=> [ '1', '24', '3', '4', '1234' ],
+			'Insert at the begin'		=> [ '1', '34', '2', '3', '1234' ],
+			'Insert at the end'			=> [ '1', '2', '3', '4', '123' ],
+			'Insert at the end (empty)'	=> [ '1', '2', '3', '', '123' ],
+		];
+	}
 }
