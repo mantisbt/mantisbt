@@ -6,6 +6,27 @@
 <section id="dev.eventref.notify">
 	<title>Notification Events</title>
 
+	<section id="dev.eventref.notify.provider">
+		<title>Email Send Provider</title>
+
+		<blockquote id="dev.eventref.notify.provider.create">
+			<title>EVENT_EMAIL_CREATE_SEND_PROVIDER (First)</title>
+
+			<blockquote>
+				<para>
+					This event allows a plugin to provide an instance of an email send provider
+					which overrides the default implementation packaged with MantisBT. The first
+					plugin response is used. If null, then the default provider will be used.
+				</para>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;EmailSender&gt;: The email provider to use or null to use the standard provider.</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+	</section>
+
 	<section id="dev.eventref.notify.user">
 		<title>Recipient Selection</title>
 

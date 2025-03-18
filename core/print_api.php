@@ -788,17 +788,15 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 		echo category_full_name( 0, false );
 		echo '</option>', PHP_EOL;
 	} else {
-		if( 0 == $p_category_id ) {
-			if( count( $t_cat_arr ) == 1 ) {
-				$p_category_id = (int) $t_cat_arr[0]['id'];
-			} else {
-				echo '<option value="" disabled hidden';
-				check_selected( $p_category_id, 0 );
-				echo '>';
-				echo string_attribute( lang_get( 'select_option' ) );
-				echo '</option>', PHP_EOL;
-			}
+		if( 0 == $p_category_id && count( $t_cat_arr ) == 1 ) {
+			# Single option are selected by default
+			$p_category_id = (int) $t_cat_arr[0]['id'];
 		}
+		echo '<option value="" disabled hidden';
+		check_selected( $p_category_id, 0 );
+		echo '>';
+		echo string_attribute( lang_get( 'select_option' ) );
+		echo '</option>', PHP_EOL;
 	}
 
 	foreach( $t_cat_arr as $t_category_row ) {
@@ -925,7 +923,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 	}
 
 	if( $p_leading_blank ) {
-		echo '<option value=""></option>';
+		echo '<option value="">&nbsp;</option>';
 	}
 
 	$t_listed = array();
@@ -1370,14 +1368,18 @@ function print_view_bug_sort_link( $p_label, $p_sort_field, $p_sort, $p_dir, $p_
 				# Otherwise always start with ascending
 				$p_dir = 'ASC';
 			}
-			$t_sort_field = rawurlencode( $p_sort_field );
-			$t_print_parameter = ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) ? '&print=1' : '';
-			$t_filter_parameter = filter_is_temporary( $g_filter ) ? filter_get_temporary_key_param( $g_filter ) . '&' : '';
-			$t_url = 'view_all_set.php?' . $t_filter_parameter
-				. 'sort_add=' . $t_sort_field
-				. '&dir_add=' . $p_dir
-				. '&type=' . FILTER_ACTION_PARSE_ADD
-				. $t_print_parameter;
+			$t_params = [
+				'sort_add' => $p_sort_field,
+				'dir_add' => $p_dir,
+				'type' => FILTER_ACTION_PARSE_ADD
+			];
+			if( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) {
+				$t_params['print'] = 1;
+			}
+			$t_url = helper_url_combine( 'view_all_set.php', $t_params );
+			if( filter_is_temporary( $g_filter ) ) {
+				$t_url .= '&' . filter_get_temporary_key_param( $g_filter );
+			}
 			print_link( $t_url, $p_label, false, '', $p_icon );
 			break;
 		default:
@@ -1412,10 +1414,16 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 		$t_dir = 'ASC';
 	}
 
-	$t_field = rawurlencode( $p_field );
 	print_link(
-		$p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive
-		. '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
+		helper_url_combine( $p_page, [
+			'sort' => $p_field,
+			'dir' => $t_dir,
+			'save' => '1',
+			'hideinactive' => $p_hide_inactive,
+			'showdisabled' => $p_show_disabled,
+			'filter' => $p_filter,
+			'search' => $p_search
+		] ),
 		$p_string,
 		false,
 		$p_class
@@ -1444,8 +1452,13 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 		$t_dir = 'ASC';
 	}
 
-	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir, $p_string );
+	print_link(
+		helper_url_combine( $p_page, [
+			'sort' => $p_field,
+			'dir' => $t_dir
+		] ),
+		$p_string
+	);
 }
 
 /**
@@ -2230,7 +2243,7 @@ function print_dropzone_template(){
 	<div id="dropzone-preview-template" class="hidden">
 		<div class="dz-preview dz-file-preview">
 			<div class="dz-filename"><span data-dz-name></span></div>
-			<img data-dz-thumbnail />
+			<img src="#" alt="" data-dz-thumbnail>
 			<div class="dz-error-message">
 				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle'); ?></span></div>
 				<span data-dz-errormessage></span>
@@ -2315,3 +2328,14 @@ function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_sele
 <?php
 }
 
+/**
+ * Print table spacer.
+ *
+ * @param integer $p_cols Number of columns in the table
+ * @return void
+ */
+function print_table_spacer( int $p_cols ) {
+	if( $p_cols > 0 ) {
+		echo '<tr class="spacer"><td colspan="', $p_cols, '"></td></tr>';
+	}
+}

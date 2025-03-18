@@ -131,8 +131,8 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 	}
-	$t_val = str_replace( ' ', '', trim( $t_result ) );
-	if( !preg_match( '/^-?([0-9])*$/', $t_val ) ) {
+	$t_val = trim( (string)$t_result );
+	if( !preg_match( '/^-?[0-9]*$/', $t_val ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_NOT_NUMBER, ERROR );
 	}
@@ -206,8 +206,10 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_MULTILIST:
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
-			# ensure that the default is an array, if set
-			if( ( $p_default !== null ) && !is_array( $p_default ) ) {
+			# Ensure that the default is an array
+			if( $p_default === null ) {
+				$p_default = [];
+			} elseif( !is_array( $p_default ) ) {
 				$p_default = array( $p_default );
 			}
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );

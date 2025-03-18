@@ -330,8 +330,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 							if( auth_is_user_authenticated() ) {
 								layout_page_begin();
 							} else {
-								layout_navbar();
-								layout_main_container_begin();
+								# The simpler layout to avoid the possible endless redirect loop
+								layout_admin_page_begin();
 							}
 						}
 					} else {
@@ -382,8 +382,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 						if( auth_is_user_authenticated() ) {
 							layout_page_end();
 						} else {
-							layout_main_container_end();
-							layout_footer();
+							layout_admin_page_end();
 						}
 					} else {
 						layout_body_javascript();

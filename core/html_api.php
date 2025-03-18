@@ -178,7 +178,7 @@ function html_content_type() {
  * @param string $p_page_title Window title.
  * @return void
  */
-function html_title( $p_page_title = null ) {
+function html_title( $p_page_title = '' ) {
 	$t_page_title = string_html_specialchars( $p_page_title );
 	$t_title = string_html_specialchars( config_get( 'window_title' ) );
 	echo "\t", '<title>';
@@ -228,7 +228,7 @@ function html_css() {
 		if( $t_stylesheet_path == 'status_config.php' ) {
 			$t_stylesheet_path = helper_url_combine(
 				helper_mantis_url( 'css/status_config.php' ),
-				'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+				[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
 			);
 		}
 
@@ -259,7 +259,7 @@ function html_css_link( $p_filename, $p_cache_key = '' ) {
 
 	$t_url = helper_mantis_url( $t_filename );
 	if ( !empty( $p_cache_key ) ) {
-		$t_url = helper_url_combine( $t_url, 'cache_key=' . $p_cache_key );
+		$t_url = helper_url_combine( $t_url, [ 'cache_key' => $p_cache_key ] );
 	}
 
 	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( $t_url, true ), '" />', "\n";
@@ -347,11 +347,11 @@ function html_head_javascript() {
 	# a reload when the content may differ.
 	$t_javascript_translations = helper_url_combine(
 		helper_mantis_url( 'javascript_translations.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'lang' ) )
+		[ 'cache_key' => helper_generate_cache_key( array( 'lang' ) ) ]
 	);
 	$t_javascript_config = helper_url_combine(
 		helper_mantis_url( 'javascript_config.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+		[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
 	);
 	echo "\t" . '<script src="' . $t_javascript_config . '"></script>' . "\n";
 	echo "\t" . '<script src="' . $t_javascript_translations . '"></script>' . "\n";
@@ -391,7 +391,7 @@ function html_head_end() {
  *                       from $g_logo_image
  * @return void
  */
-function html_print_logo( $p_logo = null ) {
+function html_print_logo( string $p_logo = '' ) {
 	if( !$p_logo ) {
 		$p_logo = config_get_global( 'logo_image' );
 	}
@@ -401,35 +401,53 @@ function html_print_logo( $p_logo = null ) {
 		$t_show_url = !is_blank( $t_logo_url );
 
 		if( $t_show_url ) {
-			echo '<a id="logo-link" href="', config_get_global( 'logo_url' ), '">';
+			echo '<a class="logo-link" href="', $t_logo_url, '"',
+				helper_get_link_attributes( false, helper_is_link_external( $t_logo_url ) ),
+				'>';
 		}
 		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
-		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="' . helper_mantis_url( $p_logo ) . '" />';
+		echo '<img class="logo-image" alt="', $t_alternate_text,
+			'" title="', $t_alternate_text,
+			'" src="' . helper_mantis_url( $p_logo ) . '">';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
 	}
 }
 
-
-
 /**
  * Print a user-defined banner at the top of the page if there is one.
+ *
+ * @param bool $p_nested Add a div to wrap around the banner
  * @return void
  */
-function html_top_banner() {
+function html_top_banner( bool $p_nested = false ) {
 	$t_page = config_get_global( 'top_include_page' );
-	$t_logo_image = config_get_global( 'logo_image' );
+	
+	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		if( $p_nested ) {
+			echo '<div class="navbar navbar-fixed-top noprint">', "\n";
+		}
+		include( $t_page );
+		if( $p_nested ) {
+			echo '</div>', "\n";
+		}
+	}
+}
+
+/**
+ * Print a user-defined banner at the bottom of the page if there is one.
+ *
+ * @return void
+ */
+function html_bottom_banner() {
+	$t_page = config_get_global( 'bottom_include_page' );
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		echo '<div class="navbar-fixed-bottom noprint">', "\n";
 		include( $t_page );
-	} else if( !is_blank( $t_logo_image ) ) {
-		echo '<div id="banner">';
-		html_print_logo( $t_logo_image );
-		echo '</div>';
+		echo '</div>', "\n";
 	}
-
-	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 }
 
 /**
@@ -1014,7 +1032,7 @@ function print_admin_menu_bar( $p_page ) {
  */
 function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_method = 'post' ) {
 	$t_form_name = explode( '.php', $p_action, 2 );
-	$p_action = urlencode( $p_action );
+	$p_action = string_url( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
 
 	if( strtolower( $p_method ) == 'get' ) {
@@ -1256,10 +1274,9 @@ class TableGridLayout {
 
 	/**
 	 * Prints HTML code for a spacer row
-	 * @param string $p_class Class of the row ('spacer' by default)
 	 */
-	public function render_spacer( $p_class = 'spacer' ) {
-		echo '<tr class="', $p_class, '"><td colspan="', $this->cols, '"></td></tr>';
+	public function render_spacer() {
+		print_table_spacer( $this->cols );
 	}
 
 	/**
