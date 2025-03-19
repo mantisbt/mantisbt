@@ -71,6 +71,8 @@ function layout_page_header( $p_page_title = '', $p_redirect_url = null, $p_page
  * @return void
  */
 function layout_page_header_begin( $p_page_title = '' ) {
+	$t_path = config_get_global( 'path' );
+
 	html_begin();
 	html_head_begin();
 	html_content_type();
@@ -93,14 +95,15 @@ function layout_page_header_begin( $p_page_title = '' ) {
 
 	# Advertise the availability of the browser search plug-ins.
 	$t_title = htmlspecialchars( config_get( 'search_title' ) );
-	$t_searches = array( 'text', 'id' );
-	foreach( $t_searches as $t_type ) {
-		echo "\t",
-			'<link rel="search" type="application/opensearchdescription+xml" ',
-				'title="' . sprintf( lang_get( "opensearch_{$t_type}_description" ), $t_title ) . '" ',
-				'href="' . string_sanitize_url( 'browser_search_plugin.php?type=' . $t_type, true ) .
-				'"/>',
-			"\n";
+	if( !is_blank( $t_title ) ) {
+		$t_searches = array( 'text', 'id' );
+		foreach( $t_searches as $t_type ) {
+			echo "\t",
+				'<link rel="search" type="application/opensearchdescription+xml" ',
+				'title="', sprintf( lang_get( "opensearch_{$t_type}_description" ), $t_title ), '" ',
+				'href="', $t_path, 'browser_search_plugin.php?type=', $t_type, '">',
+				"\n";
+		}
 	}
 
 	html_head_javascript();
