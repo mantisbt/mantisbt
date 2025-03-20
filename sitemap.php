@@ -18,8 +18,8 @@
  * Sitemap - http://sitemaps.org
  *
  * @package MantisBT
- * @copyright Copyright 2002 MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
+ * @copyright Copyright 2025 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link https://www.mantisbt.org
  *
  * @uses access_api.php
  * @uses authentication_api.php
@@ -27,6 +27,7 @@
  * @uses database_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
+ * @uses menu_api.php
  */
 
 # Prevent output of HTML in the content if errors occur
@@ -39,6 +40,7 @@ require_api( 'config_api.php' );
 require_api( 'database_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
+require_api( 'menu_api.php' );
 
 # Access level to get a sitemap
 $t_threshold = config_get( 'view_bug_threshold' );
@@ -46,24 +48,14 @@ $t_threshold = config_get( 'view_bug_threshold' );
 # Maximum number of URLs
 $t_max_urls = 50000;
 
+# Full URL to MantisBT root as seen from the web browser
 $t_path = config_get_global( 'path' );
 
-/**
- * Print a sitemap URL.
- *
- * @param string $p_url The URL: has to be relative to the installation path {@see $g_path}.
- */
-function print_sitemap_url( string $p_url ) {
-	global $t_path;
-	echo '<url>', "\n",
-		'<loc>', htmlspecialchars( $t_path . $p_url, ENT_XML1 | ENT_QUOTES ), '</loc>', "\n",
-		'</url>', "\n";
-}
+# Last-Modified time
+$t_mtime = 0;
 
-header( 'Content-Type: application/xml; charset=UTF-8' );
-
-echo '<?xml version="1.0" encoding="UTF-8"?>', "\n",
-	'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', "\n";
+$t_urls = [];
+$t_err = '';
 
 if( auth_anonymous_enabled() ) {
 	$t_anonymous_user_id = user_get_id_by_name( auth_anonymous_account() );
@@ -73,30 +65,83 @@ if( auth_anonymous_enabled() ) {
 			# Force anonymous user
 			current_user_set( $t_anonymous_user_id );
 
-			# Print home
-			print_sitemap_url( config_get_global( 'default_home_page' ) );
-			$t_max_urls --;
+			# Home link
+			$t_urls[] = config_get_global( 'default_home_page' );
 
-			# Print issues
+			# Sidebar links
+			foreach( menu_sidebar_options() as $t_menu_option ) {
+				$t_urls[] = $t_menu_option['url'];
+			}
+
+			# Make absolute links
+			foreach( $t_urls as &$t_url ) {
+				if( is_null( parse_url( $t_url, PHP_URL_SCHEME ) ) ) {
+					$t_url = $t_path . ltrim( $t_url, '/' );
+				}
+			}
+
+			# Skip external or duplicate links
+			$t_urls = array_filter( array_unique( $t_urls ),
+				function($p_url) {
+					return !helper_is_link_external( $p_url );
+				}
+			);
+
+			# Issues links
 			$t_filter = filter_ensure_valid_filter( [
 				FILTER_PROPERTY_VIEW_STATE => VS_PUBLIC,
 				FILTER_PROPERTY_STATUS => META_FILTER_ANY,
 				FILTER_PROPERTY_HIDE_STATUS => META_FILTER_NONE,
 			] );
 			$t_filter_query = new BugFilterQuery( $t_filter );
-			$t_filter_query->set_limit( $t_max_urls );
+			$t_filter_query->set_limit( $t_max_urls - count( $t_urls ) );
 			$t_result = $t_filter_query->execute();
 			while( $t_row = db_fetch_array( $t_result ) ) {
-				print_sitemap_url( string_get_bug_view_url( $t_row['id'] ) );
+				$t_mtime = max( $t_mtime, $t_row['last_updated'] );
+				$t_urls[] = [
+					'loc' => $t_path . string_get_bug_view_url( $t_row['id'] ),
+					'lastmod' => gmdate( 'Y-m-d', $t_row['last_updated'] ),
+				];
 			}
 		} else {
-			echo '<!-- Anonymous account has no required access level -->', "\n";
+			$t_err = 'Anonymous account has no required access level';
 		}
 	} else {
-		echo '<!-- Anonymous account disabled -->', "\n";
+		$t_err = 'Anonymous account disabled';
 	}
 } else {
-	echo '<!-- Anonymous login is not allowed or account is not set -->', "\n";
+	$t_err = 'Anonymous login is not allowed or account is not set';
 }
 
-echo '</urlset>', "\n";
+if( !$t_mtime ) {
+	$t_mtime = time();
+}
+
+header_remove( 'Cache-Control' );
+header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $t_mtime ) );
+header( 'Content-Type: application/xml; charset=UTF-8' );
+if( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] )
+	&& ( $t_mtime <= strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) ) ) {
+	http_response_code( HTTP_STATUS_NOT_MODIFIED );
+} else {
+	# Print sitemap
+	echo '<?xml version="1.0" encoding="UTF-8"?>', "\n",
+		'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', "\n";
+
+	# Print error
+	if( $t_err ) {
+		echo '<!-- ', $t_err, ' -->', "\n";
+	}
+
+	# Print links
+	foreach( $t_urls as $t_item ) {
+		echo '<url>', "\n",
+			'<loc>', htmlspecialchars( $t_item['loc'] ?? $t_item, ENT_XML1 | ENT_QUOTES ), '</loc>', "\n";
+		if( isset($t_item['lastmod']) ) {
+			echo '<lastmod>', $t_item['lastmod'], '</lastmod>', "\n";
+		}
+		echo '</url>', "\n";
+	}
+
+	echo '</urlset>', "\n";
+}
