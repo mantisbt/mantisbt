@@ -71,6 +71,8 @@ function layout_page_header( $p_page_title = '', $p_redirect_url = null, $p_page
  * @return void
  */
 function layout_page_header_begin( $p_page_title = '' ) {
+	$t_path = config_get_global( 'path' );
+
 	html_begin();
 	html_head_begin();
 	html_content_type();
@@ -89,6 +91,13 @@ function layout_page_header_begin( $p_page_title = '' ) {
 	$t_favicon_image = config_get_global( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
+	}
+
+	if( auth_anonymous_enabled() ) {
+		echo "\t",
+			'<link rel="sitemap" type="application/xml" title="Sitemap" ',
+			'href="', $t_path, 'sitemap.php', '">',
+			"\n";
 	}
 
 	# Advertise the availability of the browser search plug-ins.
