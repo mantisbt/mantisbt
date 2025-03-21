@@ -70,12 +70,12 @@ $MANTIS_ERROR[ERROR_NUMBER] = STRING;
 				</para>
 				<para>
 					If you <emphasis>must</emphasis> use API calls, then
-					anything that expects an active database connection needs
-					to be protected, e.g.
+					anything that expects an active database connection or
+					a logged-in user needs to be protected, e.g.
 				</para>
 <programlisting>
 &lt;?php
-if( db_is_connected() ) {
+if( auth_is_user_authenticated() ) {
 	if( helper_get_current_project() == 1 ) {
 		$s_summary = 'Title';
 	}
