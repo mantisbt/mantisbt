@@ -109,7 +109,7 @@ $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 ?>
-<div class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+<div id="bugnotes" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<?php print_icon( 'fa-comments', 'ace-icon' ); ?>

@@ -792,7 +792,7 @@ if( $t_flags['history_show'] && $f_history ) {
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_history = history_get_events_array( $f_issue_id );
 ?>
-		<div class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+		<div id="history" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-history', 'ace-icon' ); ?>
