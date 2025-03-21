@@ -2243,7 +2243,7 @@ function print_dropzone_template(){
 	<div id="dropzone-preview-template" class="hidden">
 		<div class="dz-preview dz-file-preview">
 			<div class="dz-filename"><span data-dz-name></span></div>
-			<img src="#" alt="" data-dz-thumbnail>
+			<img src="data:image/png;base64," alt="" data-dz-thumbnail>
 			<div class="dz-error-message">
 				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle'); ?></span></div>
 				<span data-dz-errormessage></span>
