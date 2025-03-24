@@ -258,7 +258,9 @@ $s_workflow = '{{Identical|Workflow}}';
 $s_status_level = '{{Identical|Status}}';
 $s_access_levels = '{{Identical|Access level}}';
 $s_access_change = 'Niveau d’accès minimal pour atteindre cet état';
-$s_limit_access = '{{doc-singularthey}}';
+$s_limit_access = '\'\'Note: "reporter" is singular in this message!\'\'
+
+{{doc-singularthey}}';
 $s_configuration_option_type = '{{Identical|Type}}';
 $s_configuration_option_value = '{{Identical|Value}}';
 $s_all_users = '{{Identical|All users}}';
