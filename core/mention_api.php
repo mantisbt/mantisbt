@@ -77,7 +77,7 @@ function mention_get_candidates( $p_text ) {
 			# Email domain portion; optionally captures it if present, allowing usage of email addresses
 			. '(?:@[\w\-.]+(?:\.[a-z]{2,})?)?)'
 			# Positive lookahead for ending boundary
-			. '(?=\s|[^\w.]|$)'
+			. '(?=\s|[^\w.]|$)/';
 	}
 
 	preg_match_all( $s_pattern, $p_text, $t_mentions );
