@@ -65,21 +65,19 @@ function mention_get_candidates( $p_text ) {
 	static $s_pattern = null;
 	if( $s_pattern === null ) {
 		$t_quoted_tag = preg_quote( mentions_tag() );
-		$s_pattern = '/(?:'
-			# Negative lookbehind to ensure we have whitespace or start of
-			# string before the tag - ensures we don't match a tag in the
-			# middle of a word (e.g. e-mail address)
-			. '(?<=^|[^\w])'
-			# Negative lookbehind  to ensure we don't match multiple tags
-			. '(?<!' . $t_quoted_tag . ')' . $t_quoted_tag
-			. ')'
-			# any word char, dash or period, must end with word char
-			. '([\w\-.]*[\w])'
-			# Lookforward to ensure next char is not a valid mention char or
-			# the end of the string, or the mention tag
-			. '(?=[^\w@]|$)'
-			. '(?!$t_quoted_tag)'
-			. '/';
+		$s_pattern = '/'
+			# Positive lookbehind ensuring the tag symbol is either at the start of the string or preceded by a non-word character
+			. '(?:(?<=^|[^\w])'
+			# Negative lookbehind ensuring the tag symbol is not preceded by another one
+			. '(?<!' . $t_quoted_tag . ')'
+			# Matches the literal tag character that starts our pattern
+			. $t_quoted_tag . ')'
+			# First capture group; ensures also that the username ends with a word character
+			. '([\w\-.]*[\w]'
+			# Email domain portion; optionally captures it if present, allowing usage of email addresses
+			. '(?:@[\w\-.]+(?:\.[a-z]{2,})?)?)'
+			# Positive lookahead for ending boundary
+			. '(?=\s|[^\w.]|$)'
 	}
 
 	preg_match_all( $s_pattern, $p_text, $t_mentions );
