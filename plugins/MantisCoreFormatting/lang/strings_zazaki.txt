@@ -46,7 +46,7 @@
 $s_plugin_format_title = 'MantisBT Babetkerdış';
 $s_plugin_format_description = 'Metnê resimi karfinayış u olekenê terzkerden.';
 $s_plugin_format_config = 'Vıraştış';
-$s_plugin_format_process_text = 'Metin Karfinayış';
+$s_plugin_format_process_text = 'Vıraştışê Metıni';
 $s_plugin_format_process_text_warning_notice = 'Heqeta şımayê nêzanê sekerê se enay meracnê. Weziyet dê racnayışi de gurbiyayışê çeprez kod gurweynayışa maruz manenê! (cross site scripting (XSS))';
 $s_plugin_format_process_urls = 'URL Karfinayış';
 $s_plugin_format_process_buglinks = 'Gıreyê MantisBTi (Mesele/Nota Meseleyi)';
