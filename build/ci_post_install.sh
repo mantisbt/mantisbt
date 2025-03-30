@@ -73,7 +73,6 @@ cat <<-EOF >> $MANTIS_CONFIG
 	\$g_enable_product_build = ON;
 	\$g_enable_project_documentation = ON;
 	\$g_time_tracking_enabled = ON;
-	\$g_time_tracking_enabled = ON;
 	\$g_allow_anonymous_login = ON;
   \$g_anonymous_account = '$MANTIS_ANONYMOUS';
 	EOF
