@@ -24,6 +24,8 @@
 
 namespace Mantis\tests\rest;
 
+use Mantis\tests\Mantis\MantisCoreBase;
+
 /**
  * Tests for Filters and Issues matching Filter REST API endpoints.
  *
@@ -40,6 +42,12 @@ class RestFiltersTest extends RestBase
 	 * Create test issues for the test
 	 * @return void
 	 */
+	protected function setUp(): void {
+		parent::setUp();
+		# Authentication required for createTestFilter() method, until we have
+		# a REST API endpoint to create filters.
+		MantisCoreBase::login();
+	}
 
 	protected function tearDown(): void {
 		parent::tearDown();
