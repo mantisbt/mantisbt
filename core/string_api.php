@@ -234,7 +234,7 @@ function string_attribute( $p_string ) {
  * @return string
  */
 function string_url( $p_string ) {
-	return rawurlencode( $p_string );
+	return rawurlencode( (string)$p_string );
 }
 
 /**
