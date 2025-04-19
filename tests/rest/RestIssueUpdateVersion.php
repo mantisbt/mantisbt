@@ -21,22 +21,6 @@ class RestIssueUpdateVersion extends RestBase
 	protected string $endpoint_issue = '/issues/';
 
 	/**
-	 * Checks that response was successful and returns JSON body as object.
-	 *
-	 * @param ResponseInterface $p_response
-	 * @param int               $p_status_code Expected HTTP status code
-	 *
-	 * @return stdClass
-	 */
-	protected function getJson( ResponseInterface $p_response, $p_status_code = HTTP_STATUS_SUCCESS ) {
-		$this->assertEquals( $p_status_code,
-			$p_response->getStatusCode(),
-			"REST API returned unexpected Status Code"
-		);
-		return json_decode( $p_response->getBody(), false );
-	}
-
-	/**
 	 * Get the test Issue's current state.
 	 *
 	 * Checks that the Version fields are present.

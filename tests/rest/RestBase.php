@@ -28,6 +28,8 @@ namespace Mantis\tests\rest;
 use Mantis\tests\core\MantisTestCase;
 use Mantis\tests\core\RequestBuilder;
 use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\ResponseInterface;
+use stdClass;
 
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
@@ -209,6 +211,23 @@ abstract class RestBase extends MantisTestCase {
 			'category' => array( 'name' => $this->getCategory() )
 		);
 	}
+
+	/**
+	 * Checks that response was successful and returns JSON body as object.
+	 *
+	 * @param ResponseInterface $p_response
+	 * @param int               $p_status_code Expected HTTP status code
+	 *
+	 * @return stdClass
+	 */
+	protected function getJson( ResponseInterface $p_response, $p_status_code = HTTP_STATUS_SUCCESS ) {
+		$this->assertEquals( $p_status_code,
+			$p_response->getStatusCode(),
+			"REST API returned unexpected Status Code"
+		);
+		return json_decode( $p_response->getBody(), false );
+	}
+
 
 	/**
 	 * Marks a test as skipped if there is no configured Anonymous account.
