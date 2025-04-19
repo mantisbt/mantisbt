@@ -1,7 +1,8 @@
 <?php
 namespace Mantis\tests\rest;
 
-use Psr\Http\Message\ResponseInterface;
+use Generator;
+use stdClass;
 
 require_once 'RestIssueTest.php';
 
@@ -15,9 +16,9 @@ class RestIssueUpdateVersion extends RestBase
 	/** @var int Issue id */
 	protected $issue_id;
 
-	/** @var string REST API endpoint for projet version */
-	protected $endpoint_version;
-	protected $endpoint_issue = '/issues/';
+	/** @var string REST API endpoint for project version */
+	protected string $endpoint_version;
+	protected string $endpoint_issue = '/issues/';
 
 	/**
 	 * Checks that response was successful and returns JSON body as object.
