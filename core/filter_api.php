@@ -414,7 +414,7 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_
 			$t_query_array[] = string_url( $p_field_name ) . '=' . string_url( $p_field_value[0] );
 		}
 	} else {
-		$t_query_array[] = string_url( $p_field_name ) . '=' . string_url( $p_field_value );
+		$t_query_array[] = string_url( $p_field_name ) . '=' . string_url( (string)$p_field_value );
 	}
 
 	return implode( '&', $t_query_array );
