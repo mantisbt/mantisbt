@@ -917,7 +917,15 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 
 		if( is_array( $p_category ) ) {
 			if( isset( $p_category['id'] ) ) {
-				$t_id = (int)$p_category['id'];
+				$t_id = $p_category['id'];
+				if( !is_int( $t_id ) ) {
+					throw new ClientException(
+						"Invalid category id '$t_id'.",
+						ERROR_INVALID_FIELD_VALUE,
+						['category_id']
+					);
+				}
+				//settype( $t_id, 'int' );
 				if( $t_id === 0 && $t_allow_no_category ) {
 					return 0;
 				} elseif( category_exists( $t_id ) ) {
