@@ -54,6 +54,7 @@
  * @author Linforest
  * @author LittlePaw365
  * @author Liuxinyu970226
+ * @author Mishidexfc
  * @author Mmyangfl
  * @author Myy730
  * @author Paopao
@@ -508,6 +509,8 @@ $s_unique_queries_executed = '唯一已执行查询：%1$d';
 $s_total_query_execution_time = '已执行查询总共耗时：%1$s秒';
 $s_page_execution_time = '页面执行时间：%1$s秒';
 $s_memory_usage = '内存使用：%1$s KiB';
+$s_debug_log = '调试日志';
+$s_debug_log_empty = '日志是空的。';
 $s_log_page_number = '号码';
 $s_log_page_time = '执行时间';
 $s_log_page_caller = '调用程序';
@@ -674,7 +677,7 @@ $s_plugin = '插件';
 $s_plugins_installed = '已装插件';
 $s_plugins_available = '可用插件';
 $s_plugins_missing = '缺失或无效的插件';
-$s_plugins_missing_description = '下列插件已注册，但无法从“%s”中找到或加载它们的源代码。<br>尝试重新安装或删除它们。';
+$s_plugins_missing_description = '以下列表中的插件是<ul><li>已注册，但无法在“ %s ”中找到或加载其源代码</li><li>安装，但无法初始化。</li></ul>尝试重新安装或删除它们。';
 $s_plugin_description = '说明';
 $s_plugin_problem_description = '问题描述';
 $s_plugin_author = '作者： %1$s';
@@ -700,7 +703,9 @@ $s_plugin_invalid_status_message = '以下必需的属性没有在插件的类�
 $s_plugin_missing_description = '缺少插件';
 $s_plugin_missing_status_message = '已安装在Mantis数据库中的插件无法加载。';
 $s_plugin_missing_class_description = '缺少插件基本类';
-$s_plugin_missing_class_status_message = '该插件的文件夹已找到，但文件夹内没有相应的插件代码。请确保文件夹的名字与插件的基本名字相符（大小写敏感）。';
+$s_plugin_missing_class_status_message = '找到了此插件的目录，但其中没有对应的插件代码。请确保：目录名称与插件的基本名称“ %1$s ”（区分大小写）匹配；目录中存在同名的 PHP 文件；并且该文件定义了一个名为“ %2$s ”的类，用于扩展 MantisPlugin。';
+$s_plugin_missing_event = '缺失事件';
+$s_plugin_missing_event_status_message = '插件正在尝试挂载未声明的事件： %s 。';
 $s_project_added_msg = '已添加项目...';
 $s_category_added_msg = '已添加分类...';
 $s_category_deleted_msg = '已删除分类...';
@@ -1186,7 +1191,7 @@ $s_tag_update = '更新标签: %1$s';
 $s_tag_update_return = '返回到标记';
 $s_tag_update_button = '更新标签';
 $s_tag_delete_button = '删除标签';
-$s_tag_delete_message = '确认删除该标签吗?';
+$s_tag_delete_message = '您确定要删除标签“ %1$s ”吗？';
 $s_tag_existing = '现有标签';
 $s_tag_none_attached = '没加标签.';
 $s_tag_attach = '添加';
@@ -1203,7 +1208,7 @@ $s_tag_history_detached = '分离的标记';
 $s_tag_history_renamed = '重命名的标记';
 $s_tag_related = '相关的标签';
 $s_tag_related_issues = '共享的问题（%1$s）';
-$s_tag_stats_attached = '附加的问题：%1$s';
+$s_tag_stats_attached = '问题已附加';
 $s_tag_create = '创建标签';
 $s_time_tracking_billing_link = '时间跟踪';
 $s_time_tracking = '时间跟踪';
