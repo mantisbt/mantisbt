@@ -47,7 +47,7 @@ class RestIssueUpdateVersion extends RestBase
 		$t_issue = $this->getJson( $t_response )->issues[0];
 
 		foreach( self::VERSION_FIELDS as $t_version_field ) {
-			$this->assertObjectHasAttribute( $t_version_field, $t_issue, "'$t_version_field' is set" );
+			$this->assertObjectHasProperty( $t_version_field, $t_issue, "'$t_version_field' is set" );
 			$this->assertEquals( $this->version_id,
 				$t_issue->$t_version_field->id,
 				"'$t_version_field' id does not match"
@@ -109,7 +109,7 @@ class RestIssueUpdateVersion extends RestBase
 		$t_response = $this->builder()->patch( $this->endpoint_issue, $t_payload )->send();
 		$t_issue = $this->getJson( $t_response, $p_expected_status_code )->issues[0];
 		foreach( self::VERSION_FIELDS as $t_version_field ) {
-			$this->assertObjectNotHasAttribute($t_version_field, $t_issue, "'$t_version_field' was not unset" );
+			$this->assertObjectNotHasProperty($t_version_field, $t_issue, "'$t_version_field' was not unset" );
 		}
 	}
 
