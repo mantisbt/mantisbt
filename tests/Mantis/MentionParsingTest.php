@@ -26,11 +26,6 @@
 namespace Mantis\tests\Mantis;
 
 /**
- * Includes
- */
-require_api( 'mention_api.php' );
-
-/**
  * Test cases for parsing functionality in mention API.
  * @package    Tests
  * @subpackage Mention
