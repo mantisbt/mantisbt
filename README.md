@@ -33,10 +33,10 @@ Installation
 ------------
 
 * Extract the tarball into a location readable by your web server
-* Point your browser to https://path/to/mantisbt/admin/check/index.php to ensure
-  that your webserver is compatible with MantisBT and configured correctly
-* Point your browser to https://path/to/mantisbt/admin/install.php to begin the
-  database installation process
+* Open your browser and navigate to `https://path/to/mantisbt/admin/check/index.php` to verify
+  that your web server is compatible with MantisBT and configured correctly.
+* Open your browser and navigate to `https://path/to/mantisbt/admin/install.php` to start the
+  database installation process.
 * Select the database type and enter the credentials to access the database
 * Click install/upgrade
 * Installation is complete -- you may need to copy the default configuration
