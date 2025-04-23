@@ -50,6 +50,9 @@ span.dependency_met			{ color: green; }
 span.dependency_unmet		{ color: red; }
 span.dependency_upgrade		{ color: orange; }
 
+tr.bugnote {
+	scroll-margin-top: 50px;
+}
 tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%; vertical-align: top; }
 
 .bugnote-private { background-color: #fcf8e3 !important;}
