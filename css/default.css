@@ -52,6 +52,9 @@ span.dependency_upgrade		{ color: orange; }
 
 tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%; vertical-align: top; }
 
+tr.bugnote {
+  scroll-margin-top: 50px;
+}
 .bugnote-private { background-color: #fcf8e3 !important;}
 
 .nowrap
