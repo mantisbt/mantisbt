@@ -74,14 +74,16 @@ function mention_get_candidates( $p_text ) {
 			. '(?<!' . $t_quoted_tag . ')'
 			# Matches the literal tag character that starts our pattern
 			. $t_quoted_tag . ')'
-			# First capture group; ensures also that the username ends
-			# with a word character
-			. '([\w\-.]*[\w]'
-			# Email domain portion; optionally captures it if present
-			# allowing usage of email addresses
-			. '(?:@[\w\-.]+(?:\.[a-z]{2,})?)?)'
+			# Start with word character, allowing for a-z, A-Z, 0-9, _
+			. '(\w'
+			# Middle chars including @ if followed by word char
+			. '(?:[\w\-\.]|@(?=\w))*'
+			# End with word character
+			. '\w'
+			# Or just a single word char (for single-char usernames)
+			. '|\w)'
 			# Positive lookahead for ending boundary
-			. '(?=\s|[^\w.]|$)/';
+			. '(?=\s|[^\w]|$)/';
 	}
 
 	preg_match_all( $s_pattern, $p_text, $t_mentions );
