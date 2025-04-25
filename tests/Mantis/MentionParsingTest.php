@@ -150,6 +150,18 @@ class MentionParsingTest extends MantisCoreBase {
 				"@vboctor@localhost",
 				array('vboctor@localhost')
 			),
+			'MentionUsernameThatIsAnEmailAddressWithInvalidChars' => array(
+				"@vboctor@example.com/path",
+				array('vboctor@example.com')
+			),
+			'MentionUsernameThatIsLocalhostWithInvalidChars' => array(
+				"@vboctor@localhost/smth",
+				array('vboctor@localhost')
+			),
+			'MentionWithEmailAddressAndPunctuation' => array(
+				"@xxx@example.com.",
+				array('xxx@example.com')
+			),
 		);
 
 	}
