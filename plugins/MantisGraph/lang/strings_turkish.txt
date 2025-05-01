@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Andac
  * @author BaRaN6161 TURK
  * @author Korayal
  */
@@ -87,3 +88,4 @@ $s_plugin_MantisGraph_graph_topdev = 'Sabit Konularla En İyi Geliştiriciler';
 $s_plugin_MantisGraph_graph_opendev = 'Açık Konuya Göre Geliştiriciler';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Giderilen Sorunlara Göre En İyi Bildirenler';
 $s_plugin_MantisGraph_other_categories = 'diğer kategoriler (%d)';
+$s_plugin_MantisGraph_other_projects = 'diğer projeler (%d)';

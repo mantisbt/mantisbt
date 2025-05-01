@@ -39,6 +39,7 @@
  * @file
  *
  * @author Agaafd
+ * @author Andac
  * @author Archaeodontosaurus
  * @author BaRaN6161 TURK
  * @author Burakolik
@@ -510,6 +511,8 @@ $s_unique_queries_executed = 'Yürütülen benzersiz sorgular: %1$d';
 $s_total_query_execution_time = 'Toplam sorgu yürütme süresi: %1$s saniye';
 $s_page_execution_time = 'Sayfa yürütme süresi: %1$s saniye';
 $s_memory_usage = 'Bellek kullanımı: %1$s KiB';
+$s_debug_log = 'Hata Ayıklama Günlüğü';
+$s_debug_log_empty = 'Kayıt boş.';
 $s_log_page_number = 'Sayı';
 $s_log_page_time = 'Yürütme süresi';
 $s_log_page_caller = 'Arayan';
@@ -592,6 +595,7 @@ $s_p = 'k';
 $s_date_created = 'Oluşturduğu Tarih';
 $s_last_visit = 'Son Ziyaret';
 $s_last_visit_label = 'Son Ziyaret:';
+$s_failed_login_count = 'Başarısız Girişler';
 $s_edit_user_link = 'Kullanıcıyı Düzenle';
 $s_search_user_hint = 'Kullanıcı Adı, Gerçek İsim veya E-posta';
 $s_separate_list_items_by = '(liste öğelerini "%1$s" ile ayırın)';
@@ -701,6 +705,7 @@ $s_plugin_missing_description = 'Eksik Eklenti';
 $s_plugin_missing_status_message = 'Eklenti Mantis veri tabanına kuruldu, ama yüklenemedi.';
 $s_plugin_missing_class_description = 'Eksik Eklenti Temel Sınıfı';
 $s_plugin_missing_class_status_message = 'Bu Eklenti için bir dizin bulundu, ancak içinde uygun bir Eklenti kodu yok. Dizinin adının Eklentinin temel adıyla uygun olduğuna emin olun (büyük küçük harf duyarlı)';
+$s_plugin_missing_event = 'Eksik Etkinlikler';
 $s_project_added_msg = 'Proje başarıyla eklendi...';
 $s_category_added_msg = 'Kategori başarıyla eklendi...';
 $s_category_deleted_msg = 'Kategori başarıyla silindi...';
