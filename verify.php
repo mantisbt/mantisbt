@@ -129,7 +129,7 @@ layout_login_page_begin( $t_form_title );
 		<div id="verify-div" class="form-container">
 			<form id="account-update-form" method="post" action="account_update.php">
 				<fieldset>
-					<legend><span><?php echo $t_form_title . ' - ' . string_display_line( $u_username ) ?></span></legend>
+					<legend><span><?php echo $t_form_title . ' - ' . string_attribute( $u_username ) ?></span></legend>git a
 					<div class="space-10"></div>
 					<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
 					<input type="hidden" name="confirm_hash" value="<?php echo string_html_specialchars( $f_confirm_hash ) ?>">

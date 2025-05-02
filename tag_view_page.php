@@ -61,7 +61,7 @@ $f_tag_id = gpc_get_int( 'tag_id' );
 tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
-$t_name = string_display_line( $t_tag_row['name'] );
+$t_name = string_attribute( $t_tag_row['name'] );
 $t_description = string_display( $t_tag_row['description'] );
 $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
 $t_can_edit_own = $t_can_edit || auth_get_current_user_id() == tag_get_field( $f_tag_id, 'user_id' )
@@ -119,7 +119,7 @@ if( $t_manage_tags ) {
 		<td class="category">
 			<?php echo lang_get( 'owner' ) ?>
 		</td>
-		<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></td>
+		<td><?php echo string_attribute( user_get_name($t_tag_row['user_id']) ) ?></td>
 	</tr>
 	<tr>
 		<td class="category">
@@ -146,7 +146,7 @@ if( $t_manage_tags ) {
 			<td>
 <?php
 		foreach( $t_tags_related as $t_tag ) {
-			$t_name = string_display_line( $t_tag['name'] );
+			$t_name = string_attribute( $t_tag['name'] );
 			$t_description = string_display_line( $t_tag['description'] );
 			$t_count = $t_tag['count'];
 			$t_link = string_html_specialchars( helper_url_combine( 'search.php', [

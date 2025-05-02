@@ -103,7 +103,7 @@ layout_page_header();
 
 <table class="table table-condensed no-margin"><tr><td class="bold bigger-120">
 	<div class="center">
-		<?php echo string_display_line( config_get( 'window_title' ) ) . ' - ' . string_display_line( project_get_name( $t_project_id ) ); ?>
+		<?php echo string_attribute( config_get( 'window_title' ) ) . ' - ' . string_attribute( project_get_name( $t_project_id ) ); ?>
 	</div>
 </td></tr></table>
 
