@@ -683,10 +683,9 @@ if( $t_flags['monitor_show'] ) {
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
 	<div class="col-md-12 col-xs-12">
-	<a id="monitors"></a>
 	<div class="space-10"></div>
 
-	<div id="monitoring" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+	<div id="monitors" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-users', 'ace-icon' ); ?>
@@ -791,7 +790,6 @@ if( config_get( 'time_tracking_enabled' ) &&
 if( $t_flags['history_show'] && $f_history ) {
 ?>
 	<div class="col-md-12 col-xs-12">
-		<a id="history"></a>
 		<div class="space-10"></div>
 <?php
 	$t_collapse_block = is_collapsed( 'history' );
