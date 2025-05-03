@@ -50,7 +50,7 @@ span.dependency_met			{ color: green; }
 span.dependency_unmet		{ color: red; }
 span.dependency_upgrade		{ color: orange; }
 
-tr.bugnote {
+tr.bugnote, div.widget-box, a#attachments, .test-langs tr {
 	scroll-margin-top: 50px;
 }
 tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%; vertical-align: top; }
@@ -126,7 +126,7 @@ td.print-overdue     { font-weight: bold; }
 }
 
 /* strike-through resolved issues: #22492 */
-.resolved  {     
+.resolved  {
     text-decoration: line-through;
 }
 
