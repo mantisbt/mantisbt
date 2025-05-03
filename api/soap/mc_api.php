@@ -901,27 +901,51 @@ function mci_get_category( $p_category_id ) {
  * @throws ClientException if category is not set or does not exist.
  */
 function mci_get_category_id( $p_category, $p_project_id ) {
-	$fn_get_category_id_internal = function( $p_category, $p_project_id ) {
-		if( !isset( $p_category ) ) {
-			return 0;
-		}
+	$t_allow_no_category = config_get( 'allow_no_category' );
 
-		$t_category_name = '';
+	/**
+	 * @param string|array|null $p_category
+	 * @param int               $p_project_id
+	 *
+	 * @return int|false Category Id (0 = no category) or false if unspecified.
+	 * @throws ClientException if Category does not exist.
+	 */
+	$fn_get_category_id_internal = function( $p_category, int $p_project_id ) use ( $t_allow_no_category ) {
+		if( $p_category === null ) {
+			return false;
+		}
 
 		if( is_array( $p_category ) ) {
 			if( isset( $p_category['id'] ) ) {
-				if( category_exists( $p_category['id'] ) ) {
-					return $p_category['id'];
+				$t_id = $p_category['id'];
+				if( !is_int( $t_id ) ) {
+					throw new ClientException(
+						"Invalid category id '$t_id'.",
+						ERROR_INVALID_FIELD_VALUE,
+						['category_id']
+					);
 				}
-			} else if( isset( $p_category['name'] ) ) {
+				//settype( $t_id, 'int' );
+				if( $t_id === 0 && $t_allow_no_category ) {
+					return 0;
+				} elseif( category_exists( $t_id ) ) {
+					return $t_id;
+				} else {
+					throw new ClientException(
+						"Category Id '$t_id' not found.",
+						ERROR_CATEGORY_NOT_FOUND
+					);
+				}
+			} elseif( isset( $p_category['name'] ) ) {
 				$t_category_name = $p_category['name'];
 			} else {
-				return 0;
+				return false;
 			}
 		} else {
 			$t_category_name = $p_category;
 		}
 
+		# Retrieve Category Id from Name
 		$t_cat_array = category_get_all_rows( $p_project_id );
 		foreach( $t_cat_array as $t_category_row ) {
 			if( strcasecmp( $t_category_row['name'], $t_category_name ) == 0 ) {
@@ -929,30 +953,19 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 			}
 		}
 
-		return 0;
+		throw new ClientException(
+			"Category '$t_category_name' not found.",
+			ERROR_CATEGORY_NOT_FOUND
+		);
 	};
 
 	$t_category_id = $fn_get_category_id_internal( $p_category, $p_project_id );
-	if( $t_category_id == 0 ) {
-		# Category not found or unspecified
-		if( !isset( $p_category ) ) {
-			if( !config_get( 'allow_no_category' ) ) {
-				throw new ClientException(
-					'Category field must be supplied.',
-					ERROR_EMPTY_FIELD,
-					array( 'category' )
-				);
-			}
-		} else {
-			# category may be a string, array with id, array with name, or array
-			# with id + name. Serialize to json to include in error message.
-			$t_cat_desc = is_array( $p_category ) ? json_encode( $p_category ) : $p_category;
-
-			throw new ClientException(
-				"Category '$t_cat_desc' not found.",
-				ERROR_CATEGORY_NOT_FOUND
-			);
-		}
+	if( !$t_allow_no_category && $t_category_id === false ) {
+		throw new ClientException(
+			'Category field must be supplied.',
+			ERROR_EMPTY_FIELD,
+			array( 'category' )
+		);
 	}
 
 	# Make sure the category belongs to the given project's hierarchy
