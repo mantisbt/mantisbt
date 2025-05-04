@@ -144,8 +144,9 @@ layout_page_begin();
 			</select>
 		</td>
 		<td>
-			<textarea name="bugnote_text" cols="65" rows="10"
-					  class="form-control <?php echo $t_bugnote_class; ?>"></textarea>
+			<textarea name="bugnote_text" class="form-control <?php echo $t_bugnote_class; ?>"
+					  cols="65" rows="10" maxlength="<?php echo DB_FIELD_SIZE_LONGTEXT ?>"
+			></textarea>
 		</td>
 	</tr>
 </table>

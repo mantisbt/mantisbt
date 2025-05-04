@@ -415,7 +415,9 @@ if( $t_multiple_projects ) {
 						<?php echo lang_get( 'add_bugnote_title' ); ?>
 					</th>
 					<td>
-						<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" cols="80" rows="7"></textarea>
+						<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>"
+								  cols="80" rows="7" maxlength="<?php echo DB_FIELD_SIZE_LONGTEXT ?>"
+						></textarea>
 					</td>
 				</tr>
 <?php

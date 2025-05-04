@@ -116,7 +116,9 @@ require_api( 'lang_api.php' );
 					<?php echo lang_get( 'bugnote' ) ?>
 				</th>
 				<td class="width-85">
-					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" rows="7"></textarea>
+					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>"
+							  rows="7" maxlength="<?php echo DB_FIELD_SIZE_LONGTEXT ?>"
+					></textarea>
 				</td>
 			</tr>
 

@@ -736,7 +736,10 @@ $t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-c
 
 echo '<tr>';
 echo '<th class="category"><label for="bugnote_text">' . lang_get( 'add_bugnote_title' ) . '</label></th>';
-echo '<td colspan="5"><textarea ', helper_get_tab_index(), ' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class, '" cols="80" rows="7"></textarea></td></tr>';
+echo '<td colspan="5"><textarea ', helper_get_tab_index(),
+	' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class,
+	'" cols="80" rows="7" maxlength="' . DB_FIELD_SIZE_LONGTEXT . '">',
+	'</textarea></td></tr>';
 
 # Bugnote Private Checkbox (if permitted)
 if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id ) ) {

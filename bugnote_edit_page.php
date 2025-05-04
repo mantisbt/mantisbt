@@ -130,8 +130,9 @@ $t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC
 <table class="table table-bordered table-condensed table-striped">
 <tr>
 	<td colspan="2">
-		<textarea class="form-control <?php echo $t_bugnote_class; ?>" cols="80" rows="10" name="bugnote_text"
-		id="bugnote_text"><?php echo $t_bugnote_text ?></textarea>
+		<textarea id="bugnote_text" name="bugnote_text" class="form-control <?php echo $t_bugnote_class; ?>"
+				  cols="80" rows="10" maxlength="<?php echo DB_FIELD_SIZE_LONGTEXT ?>"
+		><?php echo $t_bugnote_text ?></textarea>
 	</td>
 </tr>
 <?php if( config_get( 'time_tracking_enabled' ) ) { ?>
