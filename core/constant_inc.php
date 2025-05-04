@@ -627,6 +627,11 @@ define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 define( 'DB_FIELD_SIZE_HISTORY_VALUE', 255 );
 define( 'DB_FIELD_SIZE_FILENAME', 250 );
 
+# Maximum size for long text fields (bug description, steps to reproduce,
+# additional information, bugnotes), to avoid potential DOS attacks (see #35893).
+# Value set arbitrarily to a reasonable value.
+define( 'DB_FIELD_SIZE_LONGTEXT', 65535 );
+
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
 
