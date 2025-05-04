@@ -615,8 +615,7 @@ function checkplugins() {
 
 	foreach( $t_plugins as $t_plugin => $t_path ) {
 		echo PHP_EOL;
-		echo '<tr><th colspan="2">';
-		echo '<a id="plugin-' . $t_plugin . '"></a>';
+		echo '<tr id="plugin-' . $t_plugin . '"><th colspan="2">';
 		echo "Checking language files for plugin <em>$t_plugin</em>";
 		echo '</th></tr>';
 		checklangdir( $t_path );

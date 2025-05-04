@@ -99,8 +99,6 @@ $t_activities_count = count( $t_activities );
 
 <?php # Bugnotes BEGIN ?>
 <div class="col-md-12 col-xs-12">
-<a id="attachments"></a>
-<a id="bugnotes"></a>
 <div class="space-10"></div>
 
 <?php
@@ -109,6 +107,7 @@ $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 ?>
+<a id="attachments"></a>
 <div id="bugnotes" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">

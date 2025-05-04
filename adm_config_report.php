@@ -320,8 +320,7 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 <div class="space-10"></div>
 
 <!-- CONFIGURATIONS LIST -->
-<a id="database_configuration"></a>
-<div class="widget-box widget-color-blue2">
+<div id="database_configuration" class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 	<?php print_icon( 'fa-database', 'ace-icon' ); ?>
