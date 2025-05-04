@@ -905,3 +905,31 @@ function helper_get_link_attributes( $p_return_array = true ) {
 	}
 	return $t_string;
 }
+
+/**
+ * Checks that a string's length is within the allowed size.
+ *     
+ * @param string $p_string Text to check
+ *
+ * @return bool True if smaller than {@see DB_FIELD_SIZE_LONGTEXT}.
+ */
+function helper_is_longtext_length_valid( string $p_string ): bool {
+	return mb_strlen( $p_string ) <= DB_FIELD_SIZE_LONGTEXT;
+}
+
+/**
+ * Throws error if a string's length is bigger than the allowed maximum.
+ *
+ * @param string $p_string Text to check
+ * @param 
+ * @throws ClientException
+ */
+function helper_ensure_longtext_length_valid( string $p_string, string $p_field = '' ): void {
+	if( !helper_is_longtext_length_valid( $p_string ) ) {
+		throw new ClientException(
+			'Long text fields must be shorter than ' . DB_FIELD_SIZE_LONGTEXT . ' characters.',
+			ERROR_FIELD_TOO_LONG,
+			array( $p_field, DB_FIELD_SIZE_LONGTEXT )
+		);
+	}
+}
