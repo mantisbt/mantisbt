@@ -132,7 +132,7 @@ class ConfigsSetCommand extends Command {
 			if( !config_can_set_in_database( $t_name ) ) {
 				throw new ClientException(
 					sprintf( "Config '%s' is global and cannot be set", $t_name ),
-					ERROR_INVALID_FIELD_VALUE,
+					ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB,
 					array( $t_name ) );
 			}
 
