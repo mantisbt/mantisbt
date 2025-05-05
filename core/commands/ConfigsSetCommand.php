@@ -22,7 +22,7 @@ require_once( $t_soap_dir . 'mc_api.php' );
 /**
  * A command that sets config options.
  * 
- * Only config options that can be overriden in the database can be set via this command.
+ * Only config options that can be overridden in the database can be set via this command.
  */
 class ConfigsSetCommand extends Command {
 	/**
@@ -51,8 +51,9 @@ class ConfigsSetCommand extends Command {
 
 	/**
 	 * Validate the data.
-	 * 
+	 *
 	 * @return void
+	 * @throws ClientException
 	 */
 	function validate() {
 		$t_current_user_id = auth_get_current_user_id();
@@ -89,7 +90,7 @@ class ConfigsSetCommand extends Command {
 		}
 
 		# This check is redundant if command is limited to administrator, but it is
-		# better to have it as a safe guard is non-administrators can change their own
+		# better to have it as a safeguard is non-administrators can change their own
 		# settings later.
 		if( $this->project_id != ALL_PROJECTS &&
 			$this->user_id != ALL_USERS &&
@@ -106,7 +107,7 @@ class ConfigsSetCommand extends Command {
 					'Config option not provided',
 					ERROR_EMPTY_FIELD,
 					array( 'option' ) );
-			};
+			}
 
 			$t_name = $t_config['option'];
 
@@ -148,7 +149,7 @@ class ConfigsSetCommand extends Command {
 			$this->options[] = $t_config;
 		}
 
-		# This mode is only for web UI and it will always have a single config option
+		# This mode is only for web UI, and it will always have a single config option
 		if( MANAGE_CONFIG_ACTION_EDIT === $this->option( 'edit_action', MANAGE_CONFIG_ACTION_CREATE ) ) {
 			$t_original_option = $this->option( 'original_option', '' );
 			$t_original_user_id = (int)$this->option( 'original_user_id', '' );
@@ -172,7 +173,7 @@ class ConfigsSetCommand extends Command {
 	 * @return array Command response
 	 */
 	protected function process() {
-		# The edit case is internal only to web UI and it will always have a single config option
+		# The edit case is internal only to web UI, and it will always have a single config option
 		if( MANAGE_CONFIG_ACTION_EDIT === $this->option( 'edit_action', MANAGE_CONFIG_ACTION_CREATE ) ) {
 			$t_original_option = $this->option( 'original_option' );
 			$t_original_user_id = (int)$this->option( 'original_user_id' );
@@ -188,7 +189,7 @@ class ConfigsSetCommand extends Command {
 			}
 		}
 
-		foreach( $this->options as $t_option ) {			
+		foreach( $this->options as $t_option ) {
 			if( is_null( $t_option['value'] ) ) {
 				config_delete( $t_option['option'], $this->user_id, $this->project_id );
 			} else {
@@ -211,10 +212,12 @@ class ConfigsSetCommand extends Command {
 
 	/**
 	 * Convert an enum array into an enum string representation.
-	 * 
-	 * Input: 
+	 *
+	 * Input:
 	 * - array of enum entries. Each enum entry has an id and name.
 	 * - Note that label (localized name) is not settable and hence not expected.
+	 *
+	 * @throws ClientException
 	 */
 	private static function array_to_enum_string( $p_enum_name, $p_enum_array ) {
 		$t_enum_string = '';
