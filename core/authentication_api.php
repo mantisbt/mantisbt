@@ -605,11 +605,11 @@ function auth_ensure_can_impersonate( $p_user_id ) {
 }
 
 /**
- * Allows scripts to login using a login name or ( login name + password )
+ * Allows scripts to login using a login name or (login name + password)
  *
  * There are multiple scenarios where this is used:
  * - Anonymous login (blank username supplied).
- * - Anonymous login with anonymous user name specified.
+ * - Anonymous login with anonymous username specified.
  * - Anonymous login with account not existing or disabled.
  * - Pre-authenticated user via some secret hash from email verify or rss feed,
  *   where username is specified but password is null.
@@ -617,10 +617,11 @@ function auth_ensure_can_impersonate( $p_user_id ) {
  *
  * @param string $p_username Username.
  * @param string $p_password Password.
- * @return boolean indicates if authentication was successful
- * @access public
  *
+ * @return bool indicates if authentication was successful
  * @throws ClientException
+ *
+ * @access public
  */
 function auth_attempt_script_login( $p_username, $p_password = null ) {
 	global $g_script_login_cookie;
@@ -635,7 +636,7 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 		$t_anonymous_account = '';
 	}
 
-	# if no user name supplied, then attempt to login as anonymous user.
+	# if no username supplied, then attempt to log in as anonymous user.
 	if( is_blank( $t_username ) || ( strcasecmp( $t_username, $t_anonymous_account ) == 0 ) ) {
 		if( $t_anon_allowed == OFF ) {
 			return false;
