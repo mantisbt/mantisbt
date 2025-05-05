@@ -110,6 +110,7 @@ class ConfigsSetCommand extends Command {
 			}
 
 			$t_name = $t_config['option'];
+			$t_value = $t_config['value'] ?? null;
 
 			# Silently ignore unknown configs - similar to get configs. This may be useful for
 			# compatibility with different MantisBT versions.
@@ -130,22 +131,20 @@ class ConfigsSetCommand extends Command {
 			}
 
 			# It is not allowed to set configs that are global and don't support db overrides
-			if( !config_can_set_in_database( $t_name ) ) {
+			# Deleting them is OK (we want the admin to be able to remove invalid config)
+			if( !config_can_set_in_database( $t_name ) && $t_value !== null ) {
 				throw new ClientException(
 					sprintf( "Config '%s' is global and cannot be set", $t_name ),
 					ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB,
 					array( $t_name ) );
 			}
 
-			if( !isset( $t_config['value'] ) ) {
-				$t_config['value'] = null;
-			}
-
 			if( ConfigsSetCommand::config_is_enum( $t_name ) &&
-			    is_array( $t_config['value'] ) ) {
-				$t_config['value'] = ConfigsSetCommand::array_to_enum_string( $t_name, $t_config['value'] );
+				is_array( $t_value ) ) {
+				$t_value = ConfigsSetCommand::array_to_enum_string( $t_name, $t_value );
 			}
 
+			$t_config['value'] = $t_value;
 			$this->options[] = $t_config;
 		}
 
