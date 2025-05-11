@@ -1537,6 +1537,39 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
+	 * Build custom field free text filter. The query starts with "OR ...", which is okay for build_prop_search.
+	 * Only textarea and strings that are marked as "filter by" are searched.
+	 * @param array $p_search_term	Substring to search in textarea and string custom fields
+	 * @return querylist
+	 */
+	protected function build_custom_field_search( $p_search_term ) {
+		$t_custom_fields = custom_field_get_linked_ids( $this->rt_included_projects );
+		$c_search = '%' . $p_search_term . '%';
+		$t_custom_field_where_clause = '';
+
+		foreach( $t_custom_fields as $t_cfid ) {
+			$t_field_info = custom_field_cache_row( $t_cfid, true );
+			if( !$t_field_info['filter_by'] ) {
+				continue;
+			}
+
+			$t_def = custom_field_get_definition( $t_cfid );
+			if ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA || $t_def['type'] == CUSTOM_FIELD_TYPE_STRING ) {
+				$t_table_name = $this->helper_table_alias_for_cf( $t_def );
+				if( !$t_table_name ) {
+					# Ignore, if no view access
+					continue;
+				}
+				if ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+					$t_custom_field_where_clause .= ' OR ' . $this->sql_like( $t_table_name . '.text', $c_search );
+				} else {
+					$t_custom_field_where_clause .= ' OR ' . $this->sql_like( $t_table_name . '.value', $c_search );
+				}
+			}
+		} # foreach cf
+		return $t_custom_field_where_clause;
+	}
+	/**
 	 * Build the query parts for the filter property "text search"
 	 * @return void
 	 */
@@ -1546,22 +1579,32 @@ class BugFilterQuery extends DbQuery {
 		}
 
 		# break up search terms by spacing or quoting
-		preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $this->filter[FILTER_PROPERTY_SEARCH], $t_matches, PREG_SET_ORDER );
-
-		# organize terms without quoting, paying attention to negation
-		$t_search_terms = array();
-		foreach( $t_matches as $t_match ) {
-			$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
-		}
+		# optional "s:, i:, c:" for faster summary only requests
+		preg_match_all( "/-?([sic]:)?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $this->filter[FILTER_PROPERTY_SEARCH], $t_matches, PREG_SET_ORDER );
 
 		$t_bugnote_table = $this->helper_table_alias_for_bugnote();
 
 		# build a big where-clause and param list for all search terms, including negations
 		$t_first = true;
-		$t_textsearch_where_clause = '( ';
-		foreach( $t_search_terms as $t_search_term => $t_negate ) {
-			if( !$t_first ) {
-				$t_textsearch_where_clause .= ' AND ';
+		$t_after_or = false; # if we are after an OR 
+		$t_textsearch_where_clause = "( ( "; # second ( for OR
+		$t_allow_custom_field_search = ( ON == config_get( 'filter_by_custom_fields' ) );
+
+		foreach( $t_matches as $t_match ) {
+			# analyse search term
+			$t_search_term = trim( $t_match[2], "\'\"" );
+			$t_negate = ( $t_match[0][0] == '-' );
+			$t_summary_only = ( $t_match[1] && $t_match[1][0] == 's' );
+			$t_id_only = ( $t_match[1] && $t_match[1][0] == 'i' );
+			$t_custom_field_only = ( $t_match[1] && $t_match[1][0] == 'c' );
+			if ( !$t_first && !$t_after_or ) {
+				if ( $t_search_term == 'OR' ) {
+					$t_textsearch_where_clause .= ' ) OR ( ';
+					$t_after_or = true;
+					continue;
+				} else {
+					$t_textsearch_where_clause .= ' AND ';
+				}
 			}
 
 			if( $t_negate ) {
@@ -1569,25 +1612,48 @@ class BugFilterQuery extends DbQuery {
 			}
 
 			$c_search = '%' . $t_search_term . '%';
-			$t_textsearch_where_clause .= '( ' . $this->sql_like( '{bug}.summary', $c_search )
-					. ' OR ' . $this->sql_like( '{bug_text}.description', $c_search )
-					. ' OR ' . $this->sql_like( '{bug_text}.steps_to_reproduce', $c_search )
-					. ' OR ' . $this->sql_like( '{bug_text}.additional_information', $c_search )
-					. ' OR ' . $this->sql_like( '{bugnote_text}.note', $c_search );
+			$t_textsearch_where_clause .= '( ';
+			# search in summary only if not id / custom_field_search
+			if ( !$t_id_only && !$t_custom_field_only ) {
+				$t_textsearch_where_clause .= $this->sql_like( '{bug}.summary', $c_search );
+                        } else {
+				# To make the joining of clauses together with OR easier, we assume that each following
+				# clause starts with OR. If no summary search, the result will be "False OR this OR that"
+				$t_textsearch_where_clause .= '1=0';
+			}
+			if ( !$t_summary_only && !$t_id_only && !$t_custom_field_only ) {
+				$t_textsearch_where_clause .=
+				  ' OR ' . $this->sql_like( '{bug_text}.description', $c_search ) .
+				  ' OR ' . $this->sql_like( '{bug_text}.steps_to_reproduce', $c_search ) .
+				  ' OR ' . $this->sql_like( '{bug_text}.additional_information', $c_search ) .
+				  ' OR ' . $this->sql_like( '{bugnote_text}.note', $c_search );
+			}
 
-			if( is_numeric( $t_search_term ) ) {
+
+			if( is_numeric( $t_search_term ) && !$t_summary_only && !$t_custom_field_only ) {
 				# Note: no need to test negative values, '-' sign has been removed
 				if( $t_search_term <= DB_MAX_INT ) {
 					$c_search_int = (int)$t_search_term;
 					$t_textsearch_where_clause .= ' OR {bug}.id = ' . $this->param( $c_search_int );
-					$t_textsearch_where_clause .= ' OR ' . $t_bugnote_table . '.id = ' . $this->param( $c_search_int );
+					#  id search only in bugs, not in bugnotes
+					if ( !$t_id_only ) {
+						$t_textsearch_where_clause .= ' OR ' . $t_bugnote_table . '.id = ' . $this->param( $c_search_int );
+					}
 				}
 			}
 
+			if ( $t_custom_field_only && $t_allow_custom_field_search ) {
+				$t_textsearch_where_clause .= $this->build_custom_field_search( $t_search_term );
+			}
 			$t_textsearch_where_clause .= ' )';
 			$t_first = false;
+			$t_after_or = false;
 		}
-		$t_textsearch_where_clause .= ' )';
+		if ( $t_after_or ) {
+			# avoid SQL error with "XXX OR"
+			$t_textsearch_where_clause .= ' FALSE ';
+		}
+		$t_textsearch_where_clause .= ' ) )';
 
 		# add text query elements to arrays
 		if( !$t_first ) {
