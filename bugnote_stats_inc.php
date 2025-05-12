@@ -85,7 +85,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 # CSRF protection not required here - form does not result in modifications
 ?>
 <div class="col-md-12 col-xs-12 noprint">
-	<a id="bugnotestats"></a>
 	<div class="space-10"></div>
 	<div id="bugnotestats" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 

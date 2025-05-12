@@ -221,7 +221,7 @@ print_manage_menu( 'manage_tags_page.php' );
 <?php if( $t_can_edit ) { ?>
 <div class="space-10"></div>
 	<form id="manage-tags-create-form" method="post" action="tag_create.php">
-	<div class="widget-box widget-color-blue2">
+	<div id="tagcreate" class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-tag', 'ace-icon' ); ?>
@@ -229,7 +229,6 @@ print_manage_menu( 'manage_tags_page.php' );
 			</h4>
 		</div>
 		<div class="widget-body">
-			<a id="tagcreate"></a>
 			<div class="widget-main no-padding">
 		<div class="form-container">
 		<div class="table-responsive">
