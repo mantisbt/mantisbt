@@ -65,25 +65,26 @@ function mention_get_candidates( $p_text ) {
 	static $s_pattern = null;
 	if( $s_pattern === null ) {
 		$t_quoted_tag = preg_quote( mentions_tag() );
-		$s_pattern = '/'
-			# Positive lookbehind ensuring the tag symbol is either at the
-			# start of the string or preceded by a non-word character
-			. '(?:(?<=^|[^\w])'
-			# Negative lookbehind ensuring the tag symbol is not preceded
-			# by another one
-			. '(?<!' . $t_quoted_tag . ')'
-			# Matches the literal tag character that starts our pattern
-			. $t_quoted_tag . ')'
-			# Start with word character, allowing for a-z, A-Z, 0-9, _
-			. '(\w'
-			# Middle chars including @ if followed by word char
-			. '(?:[\w\-\.]|@(?=\w))*'
-			# End with word character
-			. '\w'
-			# Or just a single word char (for single-char usernames)
-			. '|\w)'
-			# Positive lookahead for ending boundary
-			. '(?=\s|[^\w]|$)/';
+        $s_pattern = '/'
+            # Positive lookbehind ensuring the tag symbol is either at the
+            # start of the string or preceded by a non-word character
+            . '(?:(?<=^|[^\w])'
+            # Negative lookbehind ensuring the tag symbol is not preceded
+            # by another one
+            . '(?<!' . $t_quoted_tag . ')'
+            # Matches the literal tag character that starts our pattern
+            . $t_quoted_tag . ')'
+            # Start with word character or plus sign
+            . '([\w\+]'
+            # Middle chars including @, hyphens, dots, and plus signs
+            . '(?:[\w\-\.\+]|@(?=[\w\+]))*'
+            # End with word character or plus sign
+            . '[\w\+]'
+            # Or just a single word char or plus sign (for single-char usernames)
+            . '|[\w\+])'
+            # Positive lookahead for ending boundary
+            # (must be followed by space, non-word/non-plus character, or end of string)
+            . '(?=\s|[^\w\+]|$)/';
 	}
 
 	preg_match_all( $s_pattern, $p_text, $t_mentions );
