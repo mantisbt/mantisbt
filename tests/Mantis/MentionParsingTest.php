@@ -162,6 +162,10 @@ class MentionParsingTest extends MantisCoreBase {
 				"@xxx@example.com.",
 				array('xxx@example.com')
 			),
+			'MentionWithSupportedUsernameCharactersNoSpaces' => array(
+				"@vb_oct+or",
+				array('vb_oct+or')
+			),
 		);
 
 	}
