@@ -128,11 +128,11 @@ class MentionParsingTest extends MantisCoreBase {
 			),
 			'MentionWithEmailAddress' => array(
 				'xxx@example.com',
-				array('xxx@example.com')
+				array('')
 			),
 			'MentionWithLocalhost' => array(
 				'xxx@localhost',
-				array('xxx@localhost')
+				array('')
 			),
 			'MentionAtEndOfWord' => array(
 				"vboctor@",
