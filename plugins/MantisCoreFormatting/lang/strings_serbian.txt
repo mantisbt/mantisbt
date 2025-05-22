@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Kizule
  * @author Milicevic01
  * @author Rancher
  * @author Srdjan m
@@ -46,11 +47,18 @@
 
 $s_plugin_format_title = 'Обликовање за MantisBT';
 $s_plugin_format_description = 'Званични додатак за обраду и обликовање текста.';
-$s_plugin_format_config = 'Подешавање';
+$s_plugin_format_config = 'Конфигурација';
 $s_plugin_format_process_text = 'Обрада текста';
-$s_plugin_format_process_text_warning_notice = 'Не искључујте ако нисте сигурни шта радите. У искљученом стању, могући су међумесни напади (XSS) на мрежном месту.';
+$s_plugin_format_process_text_warning_notice = 'Не искључујте осим ако заиста не знате шта радите. У искљученом стању, могући су напади типа cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'Обрада адреса';
 $s_plugin_format_process_buglinks = 'MantisBT унутрашње везе (Проблеми и коментари)';
+$s_plugin_format_process_buglinks_info = 'Ваша конфигурација дефинише ознаку <em>Проблем</em> као "%s" и ознаку <em>Белешка о проблему</em> као "%s\';
+$s_plugin_format_process_markdown = 'Markdown обрада';
+$s_plugin_format_process_markdown_info = 'Стил са подршком за Markdown, синтакса обликовања текста дизајнирана тако да се може конвертовати у ХТМЛ.';
 $s_plugin_format_enabled = 'Укључено';
 $s_plugin_format_disabled = 'Искључено';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Копирани';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Бројеви редова';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Прикажи бројеве редова.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Прикажи размаке';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Нормализуј размаке';

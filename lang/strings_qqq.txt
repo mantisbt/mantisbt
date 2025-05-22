@@ -52,6 +52,7 @@
  * @author Jeromedl
  * @author Jon Harald Søby
  * @author Kingu
+ * @author Kizule
  * @author Liuxinyu970226
  * @author Lloffiwr
  * @author M42
@@ -402,7 +403,9 @@ $s_filter_resolved = '{{Identical|Resolved}}';
 $s_advanced_filters = '[[File:MantisBT-filter.png|150px|right]]
 Link on bug report filter screen. See screenshot.';
 $s_attachments = '{{Identical|Attachment}}';
-$s_kib = 'IEEE 1541 unit kibibytes (1024 bytes), see https://en.wikipedia.org/wiki/Kibibyte';
+$s_kib = 'IEEE 1541 unit kibibytes (1024 bytes), see https://en.wikipedia.org/wiki/Kibibyte
+
+{{optional}}';
 $s_phpmailer_language = '{{Optional}}';
 $s_sponsorship_process_url = '{{Optional}}';
 $s_changelog = '{{Identical|Change log}}';

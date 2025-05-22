@@ -42,15 +42,20 @@
  * @author Zexmax
  */
 
-$s_plugin_format_title = 'Formatiranje za MantisBT';
+$s_plugin_format_title = 'Oblikovanje za MantisBT';
 $s_plugin_format_description = 'Zvanični dodatak za obradu i oblikovanje teksta.';
 $s_plugin_format_config = 'Konfiguracija';
 $s_plugin_format_process_text = 'Obrada teksta';
-$s_plugin_format_process_text_warning_notice = 'Ne isključujte se osim ako zaista ne znate šta radite. U isključenom stanju, mogući su napadi skriptovanja na više lokacija (XSS).';
-$s_plugin_format_process_urls = 'Obrada URL linka';
-$s_plugin_format_process_buglinks = 'MantisBT interne veze (problemi i beleške)';
-$s_plugin_format_process_buglinks_info = 'Vaša konfiguracija definiše oznaku <em>Problem</em> kao "%s" i oznaku <em>Beleška o problemu</em> kao "%s"';
+$s_plugin_format_process_text_warning_notice = 'Ne isključujte osim ako zaista ne znate šta radite. U isključenom stanju, mogući su napadi tipa cross site scripting (XSS).';
+$s_plugin_format_process_urls = 'Obrada адреса';
+$s_plugin_format_process_buglinks = 'MantisBT unutrašnje veze (problemi i beleške)';
+$s_plugin_format_process_buglinks_info = 'Vaša konfiguracija definiše oznaku <em>Problem</em> kao "%s" i oznaku <em>Beleška o problemu</em> kao "%s\';
 $s_plugin_format_process_markdown = 'Markdown obrada';
 $s_plugin_format_process_markdown_info = 'Stil sa podrškom za Markdovn, sintaksa oblikovanja teksta dizajnirana tako da se može konvertovati u HTML.';
 $s_plugin_format_enabled = 'Uključeno';
 $s_plugin_format_disabled = 'Isključeno';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Kopirani';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Brojevi redova';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Prikaži brojeve redova.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Prikaži razmake';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Normalizuj razmake';
