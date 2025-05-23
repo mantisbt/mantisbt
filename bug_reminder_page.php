@@ -145,7 +145,8 @@ layout_page_begin();
 		</td>
 		<td>
 			<textarea name="bugnote_text" class="form-control <?php echo $t_bugnote_class; ?>"
-					  cols="65" rows="10" maxlength="<?php echo DB_FIELD_SIZE_LONGTEXT ?>"
+					  cols="65" rows="10"
+					  maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
 			></textarea>
 		</td>
 	</tr>

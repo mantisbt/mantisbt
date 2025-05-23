@@ -738,7 +738,7 @@ echo '<tr>';
 echo '<th class="category"><label for="bugnote_text">' . lang_get( 'add_bugnote_title' ) . '</label></th>';
 echo '<td colspan="5"><textarea ', helper_get_tab_index(),
 	' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class,
-	'" cols="80" rows="7" maxlength="' . DB_FIELD_SIZE_LONGTEXT . '">',
+	'" cols="80" rows="7" maxlength="' . config_get_global( 'max_textarea_length' ) . '">',
 	'</textarea></td></tr>';
 
 # Bugnote Private Checkbox (if permitted)

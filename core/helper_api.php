@@ -911,10 +911,11 @@ function helper_get_link_attributes( $p_return_array = true ) {
  *     
  * @param string $p_string Text to check
  *
- * @return bool True if smaller than {@see DB_FIELD_SIZE_LONGTEXT}.
+ * @return bool True if smaller than or equal to the maximum allowed length
+ *              {@see $g_max_textarea_length}.
  */
 function helper_is_longtext_length_valid( string $p_string ): bool {
-	return mb_strlen( $p_string ) <= DB_FIELD_SIZE_LONGTEXT;
+	return mb_strlen( $p_string ) <= config_get_global( 'max_textarea_length' );
 }
 
 /**
@@ -926,10 +927,11 @@ function helper_is_longtext_length_valid( string $p_string ): bool {
  */
 function helper_ensure_longtext_length_valid( string $p_string, string $p_field = '' ): void {
 	if( !helper_is_longtext_length_valid( $p_string ) ) {
+		$t_max_length = config_get_global( 'max_textarea_length' );
 		throw new ClientException(
-			'Long text fields must be shorter than ' . DB_FIELD_SIZE_LONGTEXT . ' characters.',
+			'Long text fields must be shorter than ' . $t_max_length . ' characters.',
 			ERROR_FIELD_TOO_LONG,
-			array( $p_field, DB_FIELD_SIZE_LONGTEXT )
+			array( $p_field, $t_max_length )
 		);
 	}
 }

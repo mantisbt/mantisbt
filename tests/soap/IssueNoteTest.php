@@ -214,7 +214,7 @@ class IssueNoteTest extends SoapBase {
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_note_data = array(
-			'text' => str_repeat( 'x', DB_FIELD_SIZE_LONGTEXT ),
+			'text' => str_repeat( 'x', config_get_global( 'max_textarea_length' ) ),
 			'note_type' => BUGNOTE
 		);
 

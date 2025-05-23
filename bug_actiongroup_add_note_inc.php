@@ -76,7 +76,8 @@ function action_add_note_print_fields() {
 		</th>
 		<td>
 			<textarea class="form-control" name="bugnote_text" id="bugnote_text"
-					  cols="80" rows="10" maxlength="<?php echo DB_FIELD_SIZE_LONGTEXT ?>"
+					  cols="80" rows="10"
+					  maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
 			></textarea>
 		</td>
 	</tr>

@@ -2374,6 +2374,18 @@ $g_html_valid_tags = 'p, li, ul, ol, br, pre, i, b, u, em, strong';
 $g_html_valid_tags_single_line = 'i, b, u, em, strong';
 
 /**
+ * Maximum size for long text fields.
+ *
+ * Applies to: bug description, steps to reproduce, additional information,
+ * bugnotes.
+ *
+ * This reduces the risk of DoS attacks (see #35893).
+ *
+ * @global int $g_max_textarea_length
+ */
+$g_max_textarea_length = 65535;
+
+/**
  * Maximum length of the description in a dropdown menu (for search).
  *
  * Set to 0 to disable truncations.
@@ -5235,6 +5247,7 @@ $g_global_settings = array(
 	'long_process_timeout',
 	'manage_config_cookie',
 	'manual_url',
+	'max_textarea_length',
 	'path',
 	'plugin_path',
 	'plugins_enabled',
