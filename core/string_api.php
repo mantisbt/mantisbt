@@ -966,6 +966,25 @@ function string_truncate( $p_string, $p_length, $p_marker = '') {
 }
 
 /**
+ * Split the string at the marker and rejoin it by wrapping the first part
+ * with another string, or wrap the whole string if there is no marker.
+ *
+ * @param string $p_before The string to insert before.
+ * @param string $p_string The string to be wrapped.
+ * @param string $p_after  The string to insert after.
+ * @param string $p_marker The marker string.
+ *
+ * @return string
+ */
+function string_wrap( string $p_before, string $p_string, string $p_after, string $p_marker ): string {
+	$t_pos = $p_marker ? mb_stripos( $p_string, $p_marker ) : false;
+	return $p_before . (
+		$t_pos === false
+		? $p_string . $p_after
+		: mb_substr( $p_string, 0, $t_pos ) . $p_after . mb_substr( $p_string, $t_pos ) );
+}
+
+/**
  * Replacement for str_pad. $padStr may contain multi-byte characters.
  *
  * @author Oliver Saunders <oliver (a) osinternetservices.com>
