@@ -71,3 +71,5 @@ $s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Показат�
 $s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Показать пробелы';
 $s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Нормализовать пробелы';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Визуализация цветов CSS';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Показывает небольшой цветной квадрат перед определением цвета (например, перед «#000»).';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Предпросмотрщики для некоторых определений CSS';
