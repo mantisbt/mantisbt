@@ -69,7 +69,9 @@ if( db_is_oracle() ) {
 	$t_timestamp = '\'' . installer_db_now() . '\'';
 	$t_blob_default = '';
 }
-
+if( db_is_sqlite3() ) {
+	$t_blob_default = "DEFAULT \" '' \"";
+}
 /**
  * Begin schema definition
  */
@@ -471,7 +473,7 @@ $g_upgrade[60] = array( 'AlterColumnSQL', array( db_get_table( 'bug_history' ), 
 $g_upgrade[61] = array( 'CreateTableSQL', array( db_get_table( 'tag' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
-	name					C(100)	NOTNULL PRIMARY DEFAULT \" '' \",
+	name					C(100)	NOTNULL DEFAULT \" '' \",
 	description				XL		$t_notnull,
 	date_created			T		NOTNULL DEFAULT '" . db_null_date() . "',
 	date_updated			T		NOTNULL DEFAULT '" . db_null_date() . "' ",
@@ -513,7 +515,7 @@ $g_upgrade[67] = array( 'CreateTableSQL', array( db_get_table( 'category' ), "
 	project_id				I		UNSIGNED NOTNULL DEFAULT '0',
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
 	name					C(128)	NOTNULL DEFAULT \" '' \",
-	status					I		UNSIGNED NOTNULL DEFAULT '0' ",
+	status					I		UNSIGNED NOTNULL DEFAULT '1' ",
 	$t_table_options
 	) );
 $g_upgrade[68] = array( 'CreateIndexSQL', array( 'idx_category_project_name', db_get_table( 'category' ), 'project_id, name', array( 'UNIQUE' ) ) );
@@ -849,8 +851,8 @@ $g_upgrade[200] = array('CreateTableSQL', array( db_get_table( 'api_token' ), "
 	user_id					I		NOTNULL DEFAULT '0',
 	name					C(128)	NOTNULL,
 	hash					C(128)	NOTNULL,
-	date_created			I		UNSIGNED NOTNULL DEFAULT '0',
-	date_used				I		UNSIGNED NOTNULL DEFAULT '0'",
+	date_created			I		UNSIGNED NOTNULL DEFAULT '1',
+	date_used				I		UNSIGNED NOTNULL DEFAULT '1'",
 	$t_table_options
 	) );
 $g_upgrade[201] = array( 'CreateIndexSQL', array( 'idx_user_id_name', db_get_table( 'api_token' ), 'user_id, name', array( 'UNIQUE' ) ) );
@@ -876,6 +878,7 @@ $g_upgrade[207] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
 $g_upgrade[208] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
 	email					C(191)	$t_notnull DEFAULT \" '' \"" ) );
 
+# In schema #200, date_created and date_used were initially set to DEFAULT '0'.
 $g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
 	date_created			I		UNSIGNED NOTNULL DEFAULT '1',
@@ -898,6 +901,7 @@ $g_upgrade[211] = array( 'AlterColumnSQL', array( db_get_table( 'email' ), "
 # Release marker: 2.25.0
 
 # New default value for category status, see #31017
+# In schema #67, status was initially set to DEFAULT '0'.
 $g_upgrade[212] = array( 'AlterColumnSQL', array( db_get_table( 'category' ), "
 	status					I		UNSIGNED NOTNULL DEFAULT '1' ") );
 $g_upgrade[213] = array( 'UpdateFunction', 'category_status_default' );
