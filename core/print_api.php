@@ -1234,7 +1234,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 
 	foreach( $t_project_ids as $t_project_id ) {
 		$t_project_name = project_get_field( $t_project_id, 'name' );
-		echo '<strong>', string_display_line( $t_project_name ), '</strong>: ';
+		echo '<strong>', string_attribute( $t_project_name ), '</strong>: ';
 		print_extra_small_button( 'manage_proj_custom_field_remove.php?field_id=' . $c_field_id . '&project_id=' . $t_project_id . '&return=custom_field' . $t_security_token, lang_get( 'remove_link' ) );
 		echo '<br />- ';
 
@@ -1305,9 +1305,9 @@ function print_formatted_priority_string( BugData $p_bug ) {
 	if( $t_priority_threshold >= 0 &&
 		$p_bug->priority >= $t_priority_threshold &&
 		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
-		echo '<span class="bold">' . $t_pri_str . '</span>';
+		echo '<span class="bold">' . string_attribute( $t_pri_str ) . '</span>';
 	} else {
-		echo $t_pri_str;
+		echo string_attribute( $t_pri_str );
 	}
 }
 
@@ -1324,9 +1324,9 @@ function print_formatted_severity_string( BugData $p_bug ) {
 	if( $t_severity_threshold >= 0 &&
 		$p_bug->severity >= $t_severity_threshold &&
 		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
-		echo '<span class="bold">' . $t_sev_str . '</span>';
+		echo '<span class="bold">' . string_attribute( $t_sev_str ) . '</span>';
 	} else {
-		echo $t_sev_str;
+		echo string_attribute( $t_sev_str );
 	}
 }
 
