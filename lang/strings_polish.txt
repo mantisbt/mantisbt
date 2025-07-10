@@ -43,6 +43,7 @@
  * @author BeginaFelicysym
  * @author Chrumps
  * @author Cysioland
+ * @author Dawidg81
  * @author Debeet
  * @author Dzidek
  * @author Expert3222
@@ -501,6 +502,8 @@ $s_unique_queries_executed = '%1$d wykonanych unikalnych zapytań.';
 $s_total_query_execution_time = 'Całkowity czas wykonania zapytania: %1$s sekund';
 $s_page_execution_time = 'Czas generowania strony: %1$s sekund';
 $s_memory_usage = 'Wykorzystanie pamięci: %1$s KiB';
+$s_debug_log = 'Dziennik debugowania';
+$s_debug_log_empty = 'Dziennik jest pusty.';
 $s_log_page_number = 'Numer';
 $s_log_page_time = 'Czas wykonania';
 $s_log_page_caller = 'Dzwoniący';
@@ -668,7 +671,7 @@ $s_plugin = 'Wtyczka';
 $s_plugins_installed = 'Zainstalowane wtyczki';
 $s_plugins_available = 'Dostępne wtyczki';
 $s_plugins_missing = 'Brakujące lub nieprawidłowe wtyczki';
-$s_plugins_missing_description = 'Wtyczki na poniższej liście są zarejestrowane, ale nie znaleziono ich kodu źródłowego ani nie można go było załadować z „ %s ”.<br> Spróbuj je ponownie zainstalować lub usunąć.';
+$s_plugins_missing_description = 'Wtyczki na poniższej liście są zarejestrowane, ale nie znaleziono ich kodu źródłowego lub nie można go było załadować z zainstalowanego „ %s ”, ale nie mogły zostać zainicjalizowane.<br> Spróbuj je ponownie zainstalować lub usunąć.';
 $s_plugin_description = 'Opis';
 $s_plugin_problem_description = 'Opis problemu';
 $s_plugin_author = 'Autor: %1$s';
@@ -694,7 +697,9 @@ $s_plugin_invalid_status_message = 'Następujące wymagane właściwości nie s�
 $s_plugin_missing_description = 'Brak wtyczki';
 $s_plugin_missing_status_message = 'Wtyczka jest zainstalowana w bazie danych Mantis, ale nie można jej załadować.';
 $s_plugin_missing_class_description = 'Brak klasy bazowej wtyczki';
-$s_plugin_missing_class_status_message = 'Znaleziono katalog dla tej wtyczki, ale nie było w nim odpowiadającego kodu wtyczki. Upewnij się, że nazwa katalogu jest taka sama jak nazwa bazowa wtyczki (z uwzględnieniem wielkości liter)';
+$s_plugin_missing_class_status_message = 'Znaleziono katalog dla tej wtyczki, ale nie było w nim odpowiadającego kodu wtyczki. Upewnij się, że: nazwa katalogu jest taka sama jak nazwa bazowa wtyczki (z uwzględnieniem wielkości liter), plik PHP z tą samą nazwą znajduje się w ścieżce katalogu, definiuje Klasę zwaną "%2$s" rozszerzającą MantisPlugin.';
+$s_plugin_missing_event = 'Brakujące wydarzenia';
+$s_plugin_missing_event_status_message = 'Wtyczka próbuje przechwycić niezadeklarowane wydarzenia: %s';
 $s_project_added_msg = 'Projekt został pomyślnie dodany...';
 $s_category_added_msg = 'Kategoria została pomyślnie dodana...';
 $s_category_deleted_msg = 'Kategoria została pomyślnie usunięta...';
@@ -1181,7 +1186,7 @@ $s_tag_update = 'Aktualizuj znacznik %1$s';
 $s_tag_update_return = 'Wróć do tagu';
 $s_tag_update_button = 'Edytuj tag';
 $s_tag_delete_button = 'Usuń tag';
-$s_tag_delete_message = 'Czy jesteś pewien, że chesz usunąć ten tag?';
+$s_tag_delete_message = 'Czy jesteś pewien, że chcesz usunąć znacznik "%1$s"?';
 $s_tag_existing = 'Istniejące tagi';
 $s_tag_none_attached = 'Brak powiązanych tagów.';
 $s_tag_attach = 'Powiąż';
