@@ -40,6 +40,7 @@
  *
  * @author Athena in Wonderland
  * @author Hamilton Abreu
+ * @author Mansil alfalb
  */
 
 $s_plugin_format_title = 'Formatação do MantisBT';
@@ -54,3 +55,6 @@ $s_plugin_format_process_markdown = 'Processamento de Markdown';
 $s_plugin_format_process_markdown_info = 'Estilo com suporte ao Markdown, a sintaxe de formatação de texto projetada para que possa ser convertida em HTML.';
 $s_plugin_format_enabled = 'Ligado';
 $s_plugin_format_disabled = 'Desligado';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Copiar';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Pressione Ctrl+C para copiar';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Mostrar idioma';
