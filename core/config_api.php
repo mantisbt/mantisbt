@@ -454,11 +454,12 @@ function config_can_delete( $p_option ) {
 }
 
 /**
- * delete the configuration entry
+ * Delete a configuration entry.
  *
- * @param string  $p_option  Configuration option.
- * @param integer $p_user    A user identifier.
- * @param integer $p_project A project identifier.
+ * @param string $p_option  Configuration option.
+ * @param int    $p_user    A user identifier.
+ * @param int    $p_project A project identifier.
+ *
  * @return void
  */
 function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
