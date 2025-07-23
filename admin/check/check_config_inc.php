@@ -94,6 +94,21 @@ check_print_test_warn_row( 'Email debugging should be OFF',
 	array( false => 'All notification e-mails will be sent to: ' . $g_debug_email )
 );
 
+# Check for Global configs stored in the database
+global $g_cache_config, $g_global_settings;
+$t_global_configs_in_db = array_intersect( array_keys( $g_cache_config ), $g_global_settings );
+$t_message = 'Make sure the following configuration options are defined as appropriate '
+	. 'in your config_inc.php file, then delete them from the database:<ul>';
+foreach( $t_global_configs_in_db as $t_config ) {
+	$t_message .= '<li>' . $t_config . '</li>';
+}
+$t_message .= '</ul>';
+check_print_test_warn_row( 'Global configuration options should not be set in the database',
+	empty( $t_global_configs_in_db ),
+	array( false => $t_message )
+);
+
+
 check_print_test_row( 'Default move category must exists ("default_category_for_moves")',
 	category_exists( config_get( 'default_category_for_moves' ) ),
 	array( false => 'Issues moved may end up with invalid category id.' )
