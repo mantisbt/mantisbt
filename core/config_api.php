@@ -481,18 +481,16 @@ function config_can_delete( $p_option ) {
 }
 
 /**
- * delete the configuration entry
+ * Delete a configuration entry.
  *
- * @param string  $p_option  Configuration option.
- * @param integer $p_user    A user identifier.
- * @param integer $p_project A project identifier.
+ * @param string $p_option  Configuration option.
+ * @param int    $p_user    A user identifier.
+ * @param int    $p_project A project identifier.
+ *
  * @return void
  */
 function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
-	# bypass table lookup for certain options
-	$t_bypass_lookup = !config_can_set_in_database( $p_option );
-
-	if( ( !$t_bypass_lookup ) && ( true === db_is_connected() ) && ( db_table_exists( db_get_table( 'config' ) ) ) ) {
+	if( db_is_connected() && db_table_exists( db_get_table( 'config' ) ) ) {
 		if( !config_can_delete( $p_option ) ) {
 			return;
 		}
