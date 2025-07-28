@@ -47,6 +47,7 @@
  * @author Sfic
  * @author Shypoetess
  * @author Smtchahal
+ * @author संजीव कुमार
  */
 
 $s_actiongroup_menu_copy = 'प्रतिलिपि';
@@ -1228,7 +1229,7 @@ $MANTIS_ERROR[ERROR_REPORT] = 'आपके प्रतिवेदन मे�
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'कोई फ़ाइल नहीं बताई गई।';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'इस प्रकार की फ़ाइल की अनुमति नहीं है।';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'इस नाम की परियोजना पहले से मौजूद है।';
-$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = '\'%1$s\' के लिए अमान्य मान';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = '"%1$s" के लिए अमान्य मान';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'प्रवेश निषेध।';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'टिप्पणी नहीं मिली.';
 $MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = '"%1$s" ईमेल वाला उपयोगकर्ता नहीं मिला।';
