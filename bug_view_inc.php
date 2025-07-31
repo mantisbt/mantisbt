@@ -114,6 +114,13 @@ $t_issue = $t_result['issue'];
 $t_issue_view = $t_result['issue_view'];
 $t_flags = $t_result['flags'];
 
+header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $t_bug->last_updated ) );
+if( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] )
+	&& ( $t_bug->last_updated <= strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) ) ) {
+	http_response_code( HTTP_STATUS_NOT_MODIFIED );
+	exit;
+}
+
 compress_enable();
 
 if( $t_show_page_header ) {
