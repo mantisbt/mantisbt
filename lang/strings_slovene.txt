@@ -687,6 +687,7 @@ $s_relationship_warning_blocking_bugs_not_resolved = 'Niso vsi potomci te zadeve
 $s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>Pozor:</strong> Vsi potomci te zadeve še niso rešeni ali zaprti.<br />Pred <strong>zaprtjem ali razrešitvijo</strong> starševske zadeve morajo biti vsi potomci te zadeve razrešeni ali zaprti.';
 $s_bug_cloned_to = 'Zadeva klonirana';
 $s_bug_created_from = 'Zadeva ustvarjena iz';
+$s_dependency_graph = 'Graf odvisnosti';
 $s_view_issue = 'Ogled težave';
 $s_show_summary = 'Prikaži povzetek';
 $s_view = 'Ogled';
