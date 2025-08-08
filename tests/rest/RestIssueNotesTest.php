@@ -100,7 +100,30 @@ class RestIssueNotesTest extends RestBase
 	}
 
 	public function testAddNoteWithTimeTracking() {
-		$this->markTestIncomplete( 'Not implemented yet' );
+		$this->skipIfTimeTrackingIsNotEnabled();
+
+		$this->createTestIssue();
+
+		$t_duration = '00:15';
+		$t_payload = $this->generateNoteDataWithTimeTracking( 'Time tracking as HH:MM', $t_duration );
+		$t_response = $this->addNote( $t_payload );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
+			"Creating a note with time tracking should succeed"
+		);
+		$t_note = json_decode( $t_response->getBody() )->note;
+		$this->assertEquals( $t_note->time_tracking->duration, $t_duration,
+			"Created note duration should match payload"
+		);
+
+		$t_payload = $this->generateNoteDataWithTimeTracking( 'Time tracking as integer (minutes)', 90 );
+		$t_response = $this->addNote( $t_payload );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
+			"Creating a note with time tracking should succeed"
+		);
+		$t_note = json_decode( $t_response->getBody() )->note;
+		$this->assertEquals( '01:30', $t_note->time_tracking->duration,
+			"Duration in minutes should be converted to HH:MM"
+		);
 	}
 
 	public function testAddNoteWithAttachment() {
@@ -164,6 +187,20 @@ class RestIssueNotesTest extends RestBase
 		if( $p_text !== null ) {
 			$t_data['text'] = $p_text;
 		}
+		return $t_data;
+	}
+
+	/**
+	 * Generates Bugnote data payload with time tracking.
+	 *
+	 * @param string     $p_text     The text of the note to be included.
+	 * @param string|int $p_duration Time tracking duration.
+	 *
+	 * @return array An associative array containing the Bugnote data.
+	 */
+	private function generateNoteDataWithTimeTracking( string $p_text, $p_duration ): array {
+		$t_data = $this->generateNoteData( $p_text );
+		$t_data['time_tracking']['duration'] = $p_duration;
 		return $t_data;
 	}
 
