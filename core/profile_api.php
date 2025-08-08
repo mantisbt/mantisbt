@@ -174,7 +174,7 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 	}
 
 	# Description length
-	helper_ensure_longtext_length_valid( $p_description, 'description' );
+	helper_ensure_longtext_length_valid( $p_description, lang_get( 'profile_description' ) );
 }
 
 /**

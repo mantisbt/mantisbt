@@ -125,13 +125,13 @@ class IssueAddCommand extends Command {
 				array( 'description' ) );
 		}
 		$t_description = $t_issue['description'];
-		helper_ensure_longtext_length_valid( $t_description, 'description' );
+		helper_ensure_longtext_length_valid( $t_description, lang_get( 'description' ) );
 
 		$t_steps_to_reproduce = $t_issue['steps_to_reproduce'] ?? '';
-		helper_ensure_longtext_length_valid( $t_steps_to_reproduce, 'steps_to_reproduce' );
+		helper_ensure_longtext_length_valid( $t_steps_to_reproduce, lang_get( 'steps_to_reproduce' ) );
 
 		$t_additional_information = $t_issue['additional_information'] ?? '';
-		helper_ensure_longtext_length_valid( $t_additional_information, 'additional_information' );
+		helper_ensure_longtext_length_valid( $t_additional_information, lang_get( 'additional_information' ) );
 
 		if( !isset( $t_issue['project'] ) )  {
 			throw new ClientException(
