@@ -59,7 +59,7 @@ use Mantis\Exceptions\ClientException;
 function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
 	$p_user_id = (int)$p_user_id;
 
-	profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build );
+	profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description );
 
 	# Add profile
 	$t_query = new DbQuery();
@@ -118,7 +118,7 @@ function profile_delete( $p_user_id, $p_profile_id ) {
  * @throws ClientException if user is protected
  */
 function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_build, $p_description ) {
-	profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build );
+	profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description );
 
 	# Update profile
 	$t_query = new DbQuery();
@@ -141,15 +141,16 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 /**
  * Validates that the given profile data is valid, throw errors if not.
  *
- * @param int    $p_user_id  A valid user identifier.
- * @param string $p_platform Value for profile platform.
- * @param string $p_os       Value for profile operating system.
- * @param string $p_os_build Value for profile operation system build.
+ * @param int    $p_user_id     A valid user identifier.
+ * @param string $p_platform    Value for profile platform.
+ * @param string $p_os          Value for profile operating system.
+ * @param string $p_os_build    Value for profile operation system build.
+ * @param string $p_description Value for profile description.
  *
  * @throws ClientException
  * @internal
  */
-function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build ) {
+function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
 	if( ALL_USERS != $p_user_id ) {
 		user_ensure_unprotected( $p_user_id );
 	}
@@ -171,6 +172,9 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 		error_parameters( lang_get( 'version' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
+
+	# Description length
+	helper_ensure_longtext_length_valid( $p_description, 'description' );
 }
 
 /**
