@@ -127,7 +127,35 @@ class RestIssueNotesTest extends RestBase
 	}
 
 	public function testAddNoteWithAttachment() {
-		$this->markTestIncomplete( 'Not implemented yet' );
+		$this->createTestIssue();
+
+		$t_payload = $this->generateNoteData( 'Note with attachments' );
+		$t_payload['files'] = [
+			[
+				'name' => "test.txt",
+				'content' => base64_encode( "Hello World" )
+			],
+			[
+				'name' => "logo.png",
+				'content' => base64_encode(
+					file_get_contents( __DIR__ . "/../../images/mantis_logo.png" )
+				)
+			],
+		];
+		$t_response = $this->addNote( $t_payload );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
+			"Creating a note with attachments should succeed"
+		);
+		$t_note = json_decode( $t_response->getBody() )->note;
+		$this->assertCount( 2, $t_note->attachments,
+			"There should be 2 attachments"
+		);
+		$this->assertStringStartsWith( 'text/plain', $t_note->attachments[0]->content_type,
+			"First attachment's MIME type should be plain text"
+		);
+		$this->assertStringStartsWith( 'image/png', $t_note->attachments[1]->content_type,
+			"Second attachment's MIME type should be png"
+		);
 	}
 
 	public function testDeleteNote() {
