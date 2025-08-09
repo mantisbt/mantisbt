@@ -56,6 +56,9 @@
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 require_once( 'core.php' );
@@ -179,26 +182,44 @@ print_account_menu( 'account_page.php' );
 			?>
 			<tr>
 				<td class="category">
-					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
+					<label for="password-current">
+						<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span>
+						<?php echo lang_get( 'current_password' ) ?>
+					</label>
 				</td>
 				<td>
-					<input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
+					<input id="password-current" name="password_current" type="password" class="input-sm"
+						   size="32" maxlength="<?php echo auth_get_password_max_size(); ?>"
+						   <?php echo $t_required ?>
+					/>
 				</td>
 			</tr>
 			<tr>
 				<td class="category">
-					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'new_password' ) ?>
+					<label for="password">
+						<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span>
+						<?php echo lang_get( 'new_password' ) ?>
+					</label>
 				</td>
 				<td>
-					<input class="input-sm" id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
+					<input id="password" name="password" type="password" class="input-sm"
+						   size="32" maxlength="<?php echo auth_get_password_max_size(); ?>"
+						   <?php echo $t_required ?>
+					/>
 				</td>
 			</tr>
 			<tr>
 				<td class="category">
-					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'confirm_password' ) ?>
+					<label for="password-confirm">
+						<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span>
+						<?php echo lang_get( 'confirm_password' ) ?>
+					</label>
 				</td>
 				<td>
-					<input class="input-sm" id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
+					<input id="password-confirm" name="password_confirm" type="password" class="input-sm"
+						   size="32" maxlength="<?php echo auth_get_password_max_size(); ?>"
+						   <?php echo $t_required ?>
+					/>
 				</td>
 			</tr>
 			<?php
@@ -230,20 +251,20 @@ print_account_menu( 'account_page.php' );
 				</td>
 			</tr>
 			<tr><?php
+				echo '<td class="category">' . lang_get( 'realname' ) . '</td>';
+				echo '<td>';
 				if( $t_ldap && ON == config_get_global( 'use_ldap_realname' ) ) {
 					# With LDAP
-					echo '<td class="category">' . lang_get( 'realname' ) . '</td>';
-					echo '<td>';
 					echo string_display_line( ldap_realname_from_username( $u_username ) );
-					echo '</td>';
 				} else {
 					# Without LDAP
 					$t_show_update_button = true;
-					echo '<td class="category">' . lang_get( 'realname' ) . '</td>';
-					echo '<td>';
-					echo '<input class="input-sm" id="realname" type="text" size="32" maxlength="' . DB_FIELD_SIZE_REALNAME . '" name="realname" value="' . string_attribute( $u_realname ) . '" />';
-					echo '</td>';
-				} ?>
+					echo '<input class="input-sm" id="realname" type="text" size="32" maxlength="'
+						. DB_FIELD_SIZE_REALNAME . '" name="realname" value="'
+						. string_attribute( $u_realname ) . '" />';
+				}
+				echo '</td>';
+				?>
 			</tr>
 			<tr>
 				<td class="category">
