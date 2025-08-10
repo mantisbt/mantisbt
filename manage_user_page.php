@@ -35,6 +35,7 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses string_api.php
+ * @uses tokens_api.php
  * @uses utility_api.php
  */
 
@@ -51,6 +52,7 @@ require_api( 'icon_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
+require_api( 'tokens_api.php' );
 require_api( 'utility_api.php' );
 
 auth_reauthenticate();
@@ -382,6 +384,14 @@ $t_user_count = count( $t_users );
 	$t_duplicate_emails =  config_get_global( 'email_ensure_unique' )
 		? user_get_duplicate_emails()
 		: [];
+
+	# User accounts with an email verification pending (user_id => new email)
+	$t_emails_pending_verification = token_get_by_type( TOKEN_ACCOUNT_CHANGE_EMAIL);
+	$t_emails_pending_verification = array_combine(
+			array_column( $t_emails_pending_verification, 'owner' ),
+			array_column( $t_emails_pending_verification, 'value' )
+		);
+
 	$t_access_level = array();
 	foreach( $t_users as $t_user ) {
 		/**
@@ -426,6 +436,15 @@ $t_user_count = count( $t_users );
 							lang_get( 'email_not_unique' )
 						);
 					}
+
+					# Display warning icon if email is pending verification
+					if( isset( $t_emails_pending_verification[$v_id] ) ) {
+						$t_msg = sprintf( lang_get( 'verify_email_pending' ), $t_emails_pending_verification[$v_id] );
+						print_icon( 'fa-info-circle',
+							'ace-icon bigger-125 blue padding-right-4',
+							string_html_specialchars( $t_msg )
+						);
+					}
 					print_email_link( $v_email, $v_email )
 				?></td>
 				<td><?php echo $t_access_level[$v_access_level] ?></td>
@@ -442,7 +461,7 @@ $t_user_count = count( $t_users );
 				<td><?php echo $v_failed_login_count ?></td><?php } ?>
 			</tr>
 <?php
-	}  # end for
+	}  # end foreach
 ?>
 		</tbody>
 	</table>

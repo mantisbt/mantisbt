@@ -211,6 +211,7 @@ print_manage_menu( 'manage_user_page.php' );
 <?php
 							print_email_input( 'email', $t_user['email'] );
 							print_email_not_unique_warning( $t_user['email'], $t_user_id );
+							print_email_pending_verification_warning( $t_user_id );
 ?>
 						</td>
 <?php

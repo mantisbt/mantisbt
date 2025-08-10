@@ -74,6 +74,7 @@ require_api( 'lang_api.php' );
 require_api( 'ldap_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
+require_api( 'tokens_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
@@ -237,8 +238,11 @@ print_account_menu( 'account_page.php' );
 				} else {
 					# Without LDAP
 					$t_show_update_button = true;
+					echo '<div class="">';
 					print_email_input( 'email', $u_email );
+					echo '</div>';
 					print_email_not_unique_warning( $u_email, $u_id );
+					print_email_pending_verification_warning( $u_id );
 				} ?>
 				</td>
 			</tr>
