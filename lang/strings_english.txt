@@ -280,6 +280,10 @@ $s_reset_request_admin_msg = 'Your password has been reset. Please visit the fol
 
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and e-mail address for your account, we will now have sent a confirmation message to that e-mail address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
+$s_verify_email_msg = 'Someone (presumably you) modified the email address associated with the account mentioned below. The old email address will remain active until you confirm this change.
+
+To validate the new email, please visit the following URL:';
+
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'The following issue requires FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
@@ -656,6 +660,12 @@ $s_lost_password_done_title = 'Password Message Sent';
 $s_lost_password_subject = 'Password Reset';
 $s_lost_password_info = 'To reinstate your lost password, please supply the name and e-mail address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via e-mail that contains a validation code for your account. Please follow this link to change your password.';
 $s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please update your password.';
+
+# verify_email.php
+$s_verify_email_title = 'Verify Email Address';
+$s_verify_email_pending = 'New email address "%1$s" is pending verification.';
+$s_verify_email_warning = 'Your new email address "%1$s" has been verified.';
+$s_verify_email_confirm_msg = 'To validate the change of email address, a confirmation message has been sent to "%1$s". The old address will remain active until the new one has been verified.';
 
 # main_page.php
 $s_open_and_assigned_to_me_label = 'Open and assigned to me:';
@@ -1712,7 +1722,7 @@ $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not m
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The "lost your password" feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information does not match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maximum number of in-progress requests reached. Please contact the system administrator.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot remove or demote the last administrator account. To perform the action you requested, you first need to create another administrator account.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';

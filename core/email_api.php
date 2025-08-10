@@ -670,6 +670,50 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash, $p_reset_by_a
 }
 
 /**
+ * Send confirm_hash URL to let user validate a new email address.
+ *
+ * @param int    $p_user_id        A valid user identifier.
+ * @param string $p_confirm_hash   Confirmation hash.
+ * @param string $p_new_email      The new email address
+ *
+ * @return void
+ * @throws ClientException
+ */
+function email_send_email_verification_url( $p_user_id, $p_confirm_hash, $p_new_email ) {
+	# TODO is this needed ?
+	if( OFF == config_get( 'send_reset_password' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'Password reset email notifications disabled.' );
+		return;
+	}
+
+	lang_push( user_pref_get_language( $p_user_id ) );
+
+	# retrieve the username and email
+	$t_username = user_get_username( $p_user_id );
+	$t_email = user_get_email( $p_user_id );
+
+	$t_subject = '[' . config_get( 'window_title' ) . '] '
+		. lang_get( 'verify_email_title' );
+
+	$t_message = lang_get( 'verify_email_msg' )
+		. "\n\n"
+		. string_get_confirm_hash_url( $p_user_id, $p_confirm_hash, 'verify_email.php' )
+		. "\n\n"
+		. lang_get( 'new_account_username' ) . ' ' . $t_username . "\n"
+		. lang_get( 'new_value' ) . ': ' . $p_new_email . "\n"
+		. lang_get( 'old_value' ) . ': ' . $t_email . "\n"
+		. lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR']
+		. "\n\n"
+		. lang_get( 'new_account_do_not_reply' );
+
+	# Send regardless of mail notification preferences
+	email_store( $t_email, $t_subject, $t_message, null, true );
+	log_event( LOG_EMAIL, 'Email verification message for user @U%d sent to %s', $p_user_id, $p_new_email );
+
+	lang_pop();
+}
+
+/**
  * Notify the selected group a new user has signup.
  *
  * @param string $p_username Username of new user.
