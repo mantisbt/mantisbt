@@ -210,16 +210,7 @@ print_manage_menu( 'manage_user_page.php' );
 						<td>
 <?php
 							print_email_input( 'email', $t_user['email'] );
-							if( config_get_global( 'email_ensure_unique' )
-								&& !user_is_email_unique( $t_user['email'], $t_user_id )
-							) {
-								echo '<span class="padding-8">';
-								print_icon('fa-exclamation-triangle',
-									'ace-icon bigger-125 red  padding-right-4'
-								);
-								echo lang_get( 'email_not_unique' );
-								echo '</span>';
-							}
+							print_email_not_unique_warning( $t_user['email'], $t_user_id );
 ?>
 						</td>
 <?php

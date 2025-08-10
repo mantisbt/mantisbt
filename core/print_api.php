@@ -247,6 +247,27 @@ function print_email_input( $p_field_name, $p_email ) {
 }
 
 /**
+ * Prints a warning message indicating that the email address is not unique.
+ *
+ * Nothing is printed if the email address is unique.
+ *
+ * @param string $p_email   Email address to check
+ * @param int    $p_user_id User Id
+ *
+ * @return void
+ */
+function print_email_not_unique_warning( string $p_email, int $p_user_id ): void {
+	if( config_get_global( 'email_ensure_unique' )
+		&& !user_is_email_unique( $p_email, $p_user_id )
+	) {
+		echo '<div class="padding-8">';
+		print_icon( 'fa-exclamation-triangle', 'ace-icon bigger-125 red  padding-right-4' );
+		echo lang_get( 'email_not_unique' );
+		echo '</div>';
+	}
+}
+
+/**
  * print out an email editing input
  *
  * @param string $p_field_name Name of input tag.
