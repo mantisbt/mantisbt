@@ -347,6 +347,11 @@ class UserUpdateCommand extends Command {
 			$p_user['id'] );
 
 		db_query( $t_query, $t_query_params );
+
+		# If email was changed, clear any pending change email token
+		if( $this->email ) {
+			token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $p_user['id'] );
+		}
 	}
 }
 
