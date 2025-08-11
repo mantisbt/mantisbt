@@ -52,6 +52,7 @@
  * @author SeoJeongHo
  * @author Wisewolf
  * @author Wtspout
+ * @author YeBoy371
  * @author Ykhwong
  * @author 고기랑
  * @author 관인생략
@@ -524,7 +525,7 @@ $s_archives = '보존';
 $s_rss = 'RSS';
 $s_site_information = '사이트 정보';
 $s_mantis_version = 'MantisBT 버전';
-$s_schema_version = '스키마 버전';
+$s_schema_version = '데이터베이스 스키마 버전';
 $s_site_path = '사이트 경로.';
 $s_core_path = '코어 경로';
 $s_plugin_path = '플러그인 경로';
@@ -534,6 +535,7 @@ $s_create_new_account_title = '새 계정 만들기';
 $s_verify_password = '비밀번호 확인';
 $s_enabled = '활성화됨';
 $s_enabled_label = '활성화됨';
+$s_disabled = '비활성화됨';
 $s_protected = '계정 보호';
 $s_protected_label = '보호됨';
 $s_create_user_button = '사용자 생성';
@@ -543,18 +545,18 @@ $s_default_filter = '기본 필터';
 $s_create_filter_link = '고유 링크 만들기';
 $s_create_short_link = '짧은 링크 만들기';
 $s_filter_permalink = '다음은 현재 설정한 필터에 대한 고유 링크입니다:';
-$s_manage_users_link = '사용자 관리';
-$s_manage_projects_link = '프로젝트 관리';
-$s_manage_custom_field_link = '사용자 지정필드 관리';
-$s_manage_global_profiles_link = '전역 QA환경 관리';
-$s_manage_plugin_link = '플러그인 관리';
+$s_manage_users_link = '사용자';
+$s_manage_projects_link = '프로젝트';
+$s_manage_custom_field_link = '사용자 지정 필드';
+$s_manage_global_profiles_link = '전역 QA환경';
+$s_manage_plugin_link = '플러그인';
 $s_permissions_summary_report = '권한 설정 일람';
-$s_manage_config_link = '설정사항 관리';
+$s_manage_config_link = '설정';
 $s_manage_threshold_config = '워크플로우 한계치';
 $s_manage_email_config = '이메일 알림';
 $s_manage_workflow_config = '워크플로우';
 $s_manage_workflow_graph = '워크플로 그래프';
-$s_manage_tags_link = '태그 관리';
+$s_manage_tags_link = '태그';
 $s_create_new_account_link = '새 계정 만들기';
 $s_projects_link = '프로젝트';
 $s_documentation_link = '문서';
@@ -965,15 +967,15 @@ $s_no_users_sponsoring_bug = '이 이슈를 후원하는 사용자가 없습니�
 $s_users_sponsoring_bug = '이 이슈를 후원하는 사용자';
 $s_sponsors_list = '후원자 목록';
 $s_total_sponsorship_amount = '총 후원 = %1$s';
-$s_add_custom_field_button = '새로운 사용자 지정필드';
+$s_add_custom_field_button = '새로운 사용자 지정 필드';
 $s_delete_custom_field_button = '사용자 지정 필드 삭제';
-$s_delete_custom_field_everywhere = '모든 사용자 지정필드 삭제';
+$s_delete_custom_field_everywhere = '모든 사용자 지정 필드 삭제';
 $s_update_custom_field_button = '사용자 지정 필드 갱신';
-$s_add_existing_custom_field = '기존 사용자 지정필드 추가';
+$s_add_existing_custom_field = '기존 사용자 지정 필드 추가';
 $s_edit_custom_field_title = '사용자 지정 필드 편집';
 $s_custom_field = '필드';
 $s_custom_field_label = '필드:';
-$s_custom_fields_setup = '사용자 지정필드';
+$s_custom_fields_setup = '사용자 지정 필드';
 $s_custom_field_name = '이름';
 $s_custom_field_project_count = '프로젝트 수';
 $s_custom_field_type = '형식';
@@ -993,7 +995,7 @@ $s_custom_field_require_report = '이슈 보고할 때 필요함';
 $s_custom_field_require_update = '이슈 갱신할 때 필요함';
 $s_custom_field_require_resolved = '이슈 해결될 때 필요함';
 $s_custom_field_require_closed = '이슈종료 시 필요함';
-$s_link_custom_field_to_project_title = '사용자 지정필드 프로젝트에 연결';
+$s_link_custom_field_to_project_title = '사용자 지정 필드 프로젝트에 연결';
 $s_link_custom_field_to_project_button = '사용자 지정 필드 연결';
 $s_linked_projects_label = '연결된 프로젝트';
 $s_custom_field_sequence = '시퀀스';
@@ -1100,7 +1102,7 @@ $s_automatically_included_in_private_projects = '자동으로 비공개 프로�
 $s_project_documents = '프로젝트 문서';
 $s_view_project_documents = '프로젝트 문서 보기';
 $s_upload_project_documents = '프로젝트 문서 올리기';
-$s_link_custom_fields_to_projects = '프로젝트에 사용자 지정필드 연결하기';
+$s_link_custom_fields_to_projects = '프로젝트에 사용자 지정 필드 연결하기';
 $s_sponsorships = '유료 후원';
 $s_view_sponsorship_details = 'sponsorship 세부내용 보기';
 $s_view_sponsorship_total = '총 sponsorship 보기';
@@ -1289,7 +1291,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '사용자 지정필드를 찾을 
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '중복된 필드 이름입니다.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '적어도 한 프로젝트에서는 여전히 이 필드를 사용하고 있습니다.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '"%1$s" 필드의 값이 잘못되었습니다.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '잘못된 사용자 지정필드 정의';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '잘못된 사용자 지정 필드 정의';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = '잘못된 커스텀 필드 속성(%1$s).';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT] = '"%1$s" 사용자 지정 필드(id %2$s)는 현재 활성화된 프로젝트에 연결되어 있지 않습니다.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 인증 실패';
