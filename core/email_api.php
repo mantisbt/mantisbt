@@ -690,7 +690,7 @@ function email_send_email_verification_url( $p_user_id, $p_confirm_hash, $p_new_
 
 	# retrieve the username and email
 	$t_username = user_get_username( $p_user_id );
-	$t_email = user_get_email( $p_user_id );
+	$t_old_email = user_get_email( $p_user_id );
 
 	$t_subject = '[' . config_get( 'window_title' ) . '] '
 		. lang_get( 'verify_email_title' );
@@ -701,13 +701,13 @@ function email_send_email_verification_url( $p_user_id, $p_confirm_hash, $p_new_
 		. "\n\n"
 		. lang_get( 'new_account_username' ) . ' ' . $t_username . "\n"
 		. lang_get( 'new_value' ) . ': ' . $p_new_email . "\n"
-		. lang_get( 'old_value' ) . ': ' . $t_email . "\n"
+		. lang_get( 'old_value' ) . ': ' . $t_old_email . "\n"
 		. lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR']
 		. "\n\n"
 		. lang_get( 'new_account_do_not_reply' );
 
 	# Send regardless of mail notification preferences
-	email_store( $t_email, $t_subject, $t_message, null, true );
+	email_store( $p_new_email, $t_subject, $t_message, null, true, [$t_old_email] );
 	log_event( LOG_EMAIL, 'Email verification message for user @U%d sent to %s', $p_user_id, $p_new_email );
 
 	lang_pop();
