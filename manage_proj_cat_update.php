@@ -75,7 +75,7 @@ if( mb_strtolower( $f_name ) != mb_strtolower( $t_old_name ) ) {
 	category_ensure_unique( $t_project_id, $f_name );
 }
 
-category_update( $f_category_id, $f_name, $f_assigned_to, $f_status );
+category_update( $f_category_id, $f_name, $f_assigned_to, (int)$f_status );
 
 form_security_purge( 'manage_proj_cat_update' );
 
