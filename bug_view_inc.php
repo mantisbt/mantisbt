@@ -678,7 +678,7 @@ if( $t_flags['relationships_show'] ) {
 
 # User list monitoring the bug
 if( $t_flags['monitor_show'] ) {
-	$t_collapse_block = is_collapsed( 'monitoring' );
+	$t_collapse_block = is_collapsed( 'monitors' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>

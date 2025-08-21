@@ -32,6 +32,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -177,61 +179,64 @@ function is_collapsed( $p_block ) {
 }
 
 /**
- * Cache collapse API data from the database for the current user.
- * If the collapse cookie has been set, grab the changes and re-save
- * the token, or touch it otherwise.
+ * Cache collapse state data for the current user.
+ *
+ * If there is a logged-in user, first retrieve collapse data from the Token.
+ * If the collapse cookie has been set, grab the changes and update the token;
+ * otherwise just touch it.
+ *
+ * For anonymous/no logged-in user, just load data from the cookie; this allows
+ * persisting collapse state for the Anonymous user.
+ *
  * @return void
+ * @throws ClientException
  */
 function collapse_cache_token() {
 	global $g_collapse_cache_token;
-
-	if( !auth_is_user_authenticated() || current_user_is_anonymous() ) {
-		$g_collapse_cache_token = array();
-		return;
-	}
 
 	if( isset( $g_collapse_cache_token ) ) {
 		return;
 	}
 
-	$t_token = token_get_value( TOKEN_COLLAPSE );
+	# Filters section collapsed by default (see #17830)
+	$g_collapse_cache_token = ['filter' => true];
 
-	if( !is_null( $t_token ) ) {
-		$t_data = json_decode( $t_token, true );
-	} else {
-		$t_data = array();
-		$t_data['filter'] = false;
+	# Get collapse data from Token for logged-in user
+	$t_is_logged_in = auth_is_user_authenticated() && !current_user_is_anonymous();
+	if( $t_is_logged_in ) {
+		$t_token = token_get( TOKEN_COLLAPSE );
+		if( $t_token !== null ) {
+			$g_collapse_cache_token = json_decode( $t_token['value'], true );
+		}
 	}
 
-	$g_collapse_cache_token = $t_data;
-
+	# Update cache with data from cookie
 	$t_collapse_cookie = config_get_global( 'collapse_settings_cookie' );
 	$t_cookie = gpc_get_cookie( $t_collapse_cookie, '' );
+	$t_update = false;
 
 	if( false !== $t_cookie && !is_blank( $t_cookie ) ) {
-		$t_update = false;
 		$t_data = explode( '|', $t_cookie );
 
 		foreach( $t_data as $t_pair ) {
 			$t_pair = explode( ':', $t_pair );
 
 			if( false !== $t_pair && count( $t_pair ) == 2 ) {
-				$g_collapse_cache_token[$t_pair[0]] = ( true == $t_pair[1] );
+				$g_collapse_cache_token[$t_pair[0]] = (bool)$t_pair[1];
 				$t_update = true;
 			}
 		}
 
-		if( !$t_update ) {
-			$t_token = token_get( TOKEN_COLLAPSE );
-			$t_update = $t_token !== null;
-		}
-		if( $t_update ) {
-			$t_value = json_encode( $g_collapse_cache_token );
-			token_set( TOKEN_COLLAPSE, $t_value, TOKEN_EXPIRY_COLLAPSE );
-		} elseif( token_exists( $t_token['id'] ) ) {
-			token_touch( $t_token['id'] );
-		}
+		# Update token and clear cookie if logged-in user
+		if( $t_is_logged_in ) {
+			if( $t_update ) {
+				$t_value = json_encode( $g_collapse_cache_token );
+				token_set( TOKEN_COLLAPSE, $t_value, TOKEN_EXPIRY_COLLAPSE );
+			} elseif( $t_token && token_exists( $t_token['id'] ) ) {
+				token_touch( $t_token['id'] );
+			}
 
-		gpc_clear_cookie( $t_collapse_cookie );
+			gpc_clear_cookie( $t_collapse_cookie );
+		}
 	}
 }
