@@ -627,12 +627,11 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	}
 
 	# Default value length is limited by underlying DB field
-	$t_max_length = 255;
-	if( strlen( $v_default_value ) > $t_max_length ) {
+	if( strlen( $v_default_value ) > DB_FIELD_SIZE_CF_DEFAULT_VALUE ) {
 		throw new ClientException(
 			"Default value must be $t_max_length characters or less.",
 			ERROR_FIELD_TOO_LONG,
-			[lang_get( 'custom_field_default_value' ), $t_max_length]
+			[lang_get( 'custom_field_default_value' ), DB_FIELD_SIZE_CF_DEFAULT_VALUE]
 		);
 	}
 
