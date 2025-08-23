@@ -302,7 +302,7 @@ if( $g_global_profiles ) {
 									<textarea  id="description" name="description"
 											   class="form-control"
 											   cols="80" rows="8"
-											   maxlength="<?php echo config_get( 'max_textarea_length' ) ?>"
+											   maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
 									></textarea>
 									</td>
 								</tr>

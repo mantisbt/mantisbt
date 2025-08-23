@@ -160,7 +160,7 @@ if( profile_is_global( $f_profile_id ) ) {
 									<textarea id="description" name="description"
 											  class="form-control"
 											  cols="60" rows="8"
-											  maxlength="<?php echo config_get( 'max_textarea_length' ) ?>"
+											  maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
 									>
 <?php echo string_textarea( $v_description ) ?>
 </textarea>
