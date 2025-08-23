@@ -1244,8 +1244,9 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			# Check the length of the string
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length >= $t_length_min );
 			$t_valid &= ( 0 == $t_length_max ) || ( $t_length <= $t_length_max );
-			$t_valid &= $t_type == CUSTOM_FIELD_TYPE_TEXTAREA
-						&& $t_length <= config_get_global( 'max_textarea_length' );
+			if( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+				$t_valid &= $t_length <= config_get_global( 'max_textarea_length' );
+			}
 			break;
 		case CUSTOM_FIELD_TYPE_NUMERIC:
 			# Empty fields are valid
