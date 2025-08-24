@@ -194,10 +194,7 @@ class UserUpdateCommand extends Command {
 		}
 
 		if( !is_null( $t_new_email ) && $t_new_email !== $t_old_email ) {
-			email_ensure_valid( $t_new_email );
-			email_ensure_not_disposable( $t_new_email );
-			user_ensure_email_unique( $t_new_email, $this->user_id );
-
+			user_ensure_email_valid( $this->user_id, $t_new_email );
 			$this->email = $t_new_email;
 		}
 
