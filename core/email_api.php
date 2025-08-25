@@ -1324,19 +1324,6 @@ function email_store( string $p_recipient, string $p_subject, string $p_message,
 
 	# Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_email_data->metadata['charset'] = 'utf-8';
-
-	$t_hostname = '';
-	if( isset( $_SERVER['SERVER_NAME'] ) ) {
-		$t_hostname = $_SERVER['SERVER_NAME'];
-	} else {
-		$t_address = explode( '@', config_get( 'from_email' ) );
-		if( isset( $t_address[1] ) ) {
-			$t_hostname = $t_address[1];
-		}
-	}
-
-	$t_email_data->metadata['hostname'] = $t_hostname;
-
 	$t_email_id = email_queue_add( $t_email_data );
 
 	# Set the email processing flag for the shutdown function
@@ -1448,7 +1435,21 @@ function email_send( EmailData $p_email_data ) : bool {
 		}
 	}
 
-	$t_msg->hostname = $p_email_data->metadata['hostname'];
+	$t_hostname = $p_email_data->metadata['hostname'] ?? '';
+
+	if( empty( $t_hostname ) ) {
+		if( isset( $_SERVER['SERVER_NAME'] ) ) {
+			$t_hostname = $_SERVER['SERVER_NAME'];
+		} else {
+			$t_address = explode( '@', config_get( 'from_email' ) );
+			if( isset( $t_address[1] ) ) {
+				$t_hostname = $t_address[1];
+			}
+		}
+	}
+
+	$t_msg->hostname = $t_hostname;
+
 	$t_msg->charset = $p_email_data->metadata['charset'];
 
 	# Expected Headers

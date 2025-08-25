@@ -75,7 +75,8 @@ if( $f_mail_test ) {
 
 	$t_email_data = new EmailData;
 	$t_email_data->email = config_get_global( 'webmaster_email' );
-	$t_email_data->subject = 'Testing PHP mail() function';
+	$t_window_title = config_get( 'window_title' );
+	$t_email_data->subject = '[' . $t_window_title . '] Testing Email Notifications';
 	$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
 	$t_email_data->metadata['charset'] = 'utf-8';
 	$t_result = email_send( $t_email_data );
@@ -90,7 +91,7 @@ if( $f_mail_test ) {
 		echo '<div class="alert alert-sm alert-success">';
 		print_icon( 'fa-check', 'ace-icon fa-lg' );
 		echo '<strong>Testing Mail</strong> - ';
-		echo ' mail() send successful.';
+		echo ' email sent successful.';
 		echo '</div>';
 	}
 }
@@ -167,7 +168,7 @@ if( count( $t_ids ) > 0 ) {
 					<a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>
 					if you are using the mail() PHPMailer sending mode.</p>
 				<p>
-					Email Address: <?php echo config_get_global( 'webmaster_email' );?>
+					Email Address (from `$g_webmaster_email`): <?php echo config_get_global( 'webmaster_email' );?>
 				</p>
 				<input type="submit" value="Send Mail" name="mail_test" class="btn btn-primary btn-white btn-round" />
 			</fieldset>
