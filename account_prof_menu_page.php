@@ -143,9 +143,9 @@ if( $g_global_profiles ) {
 				$t_is_default_profile = $t_default_profile == $v_id
 ?>
 							<tr>
-								<td><?php echo string_display_line( $v_platform ); ?></td>
-								<td><?php echo string_display_line( $v_os ); ?></td>
-								<td><?php echo string_display_line( $v_os_build );  ?></td>
+								<td><?php echo string_attribute( $v_platform ); ?></td>
+								<td><?php echo string_attribute( $v_os ); ?></td>
+								<td><?php echo string_attribute( $v_os_build );  ?></td>
 <?php
 				if( !$g_global_profiles ) {
 ?>

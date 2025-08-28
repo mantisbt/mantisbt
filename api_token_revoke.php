@@ -60,7 +60,7 @@ layout_page_begin( 'api_tokens_page.php' );
 
 echo '<div class="col-md-12 col-xs-12">';
 echo '<div class="space-10"></div>';
-echo '<div class="lead">' . sprintf( lang_get( 'api_token_revoked' ), string_display_line( $t_token_name ) ) . '</div>';
+echo '<div class="lead">' . sprintf( lang_get( 'api_token_revoked' ), string_attribute( $t_token_name ) ) . '</div>';
 echo '<div class="space-10"></div>';
 print_link_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
 echo '</div>';

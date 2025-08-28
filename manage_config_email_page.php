@@ -234,7 +234,7 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '  </tr><tr>' . "\n";
 
 	foreach( $t_access_levels as $t_access_level ) {
-		echo '  <th>&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>' . "\n";
+		echo '  <th>&#160;' . string_attribute( MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) ) . '&#160;</th>' . "\n";
 	}
 
 	echo '</tr>' . "\n";
@@ -335,7 +335,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	if( ALL_PROJECTS == $t_project ) {
 		$t_project_title = lang_get( 'config_all_projects' );
 	} else {
-		$t_project_title = sprintf( lang_get( 'config_project' ), string_display_line( project_get_name( $t_project ) ) );
+		$t_project_title = sprintf( lang_get( 'config_project' ), string_attribute( project_get_name( $t_project ) ) );
 	}
 
 	echo '<div class="well">' . "\n";

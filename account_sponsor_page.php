@@ -190,7 +190,7 @@ if( $t_sponsor_count === 0 ) {
 
 		echo '<tr class="' . $t_status_css .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
-		echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
+		echo '<td>' . string_attribute( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
 		echo '<td>' . $t_released_label . '&#160;</td>';
 		echo '<td><span class="issue-status" title="' . $t_resolution . '">' . $t_status . '</span></td>';
 		echo '<td>';
@@ -319,7 +319,7 @@ if( $t_sponsor_count === 0 ) {
 
 		echo '<tr class="' . $t_status_css .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
-		echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
+		echo '<td>' . string_attribute( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
 		echo '<td>' . $t_released_label . '&#160;</td>';
 		echo '<td><a title="' . $t_resolution . '"><span class="underline">' . $t_status . '</span>&#160;</a></td>';
 

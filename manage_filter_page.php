@@ -103,11 +103,11 @@ function table_print_filter_row( $p_filter_id ) {
 		echo '</td>';
 	}
 	# Project
-	echo '<td>' . string_display_line( project_get_name( filter_get_field( $p_filter_id, 'project_id' ) ) ) . '</td>';
+	echo '<td>' . string_attribute( project_get_name( filter_get_field( $p_filter_id, 'project_id' ) ) ) . '</td>';
 	# Public
 	echo '<td class="center">' . trans_bool( filter_get_field( $p_filter_id, 'is_public' ) ) . '</td>';
 	# Owner
-	echo '<td>' . user_get_name( filter_get_field( $p_filter_id, 'user_id' ) ) . '</td>';
+	echo '<td>' . string_attribute( user_get_name( filter_get_field( $p_filter_id, 'user_id' ) ) ) . '</td>';
 	# Actions
 	echo '<td>';
 	echo '<div class="pull-left">';
@@ -152,7 +152,7 @@ function table_print_filters( array $p_filter_array ) {
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
-				<?php echo lang_get('available_filter_for_project') . ': ' . string_display_line( project_get_name( $t_project_id ) ) ?>
+				<?php echo lang_get('available_filter_for_project') . ': ' . string_attribute( project_get_name( $t_project_id ) ) ?>
 			</h4>
 		</div>
 

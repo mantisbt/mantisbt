@@ -105,7 +105,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 			<?php echo lang_get( 'username' ) ?>
 		</th>
 		<td>
-			<?php echo string_display_line( $u_username ) ?>
+			<?php echo string_attribute( $u_username ) ?>
 		</td>
 	</tr>
 	<?php
@@ -115,7 +115,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 					<?php echo lang_get( 'realname' ) ?>
 				</th>
 				<td>
-					<?php echo string_display_line( $u_realname ); ?>
+					<?php echo string_attribute( $u_realname ); ?>
 				</td>
 			</tr>
 	<?php } ?>
@@ -141,7 +141,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 					<?php echo lang_get( 'access_level' ) ?>
 				</th>
 				<td>
-					<?php echo string_display_line( get_enum_element( 'access_levels', $u_access_level ) ); ?>
+					<?php echo string_attribute( get_enum_element( 'access_levels', $u_access_level ) ); ?>
 				</td>
 			</tr>
 			<tr>

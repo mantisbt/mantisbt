@@ -159,7 +159,7 @@ function show_revision( array $p_revision ) {
 	}
 
 	$t_by_string = sprintf( lang_get( 'revision_by' ),
-		string_display_line( date( $s_date_format, $v_timestamp ) ),
+		string_attribute( date( $s_date_format, $v_timestamp ) ),
 		prepare_user_name( $v_user_id )
 	);
 

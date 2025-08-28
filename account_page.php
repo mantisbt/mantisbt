@@ -150,7 +150,7 @@ print_account_menu( 'account_page.php' );
 					<?php echo lang_get( 'username' ) ?>
 				</td>
 				<td>
-					<?php echo string_display_line( $u_username ) ?>
+					<?php echo string_attribute( $u_username ) ?>
 				</td>
 			</tr>
 			<tr>
@@ -170,7 +170,7 @@ print_account_menu( 'account_page.php' );
 					<?php echo lang_get( 'username' ) ?>
 				</td>
 				<td>
-					<?php echo string_display_line( $u_username ) ?>
+					<?php echo string_attribute( $u_username ) ?>
 				</td>
 			</tr>
 			<?php
@@ -211,7 +211,7 @@ print_account_menu( 'account_page.php' );
 				<?php
 				if( $t_ldap && ON == config_get_global( 'use_ldap_email' ) ) {
 					# With LDAP
-					echo string_display_line( $u_email );
+					echo string_attribute( $u_email );
 				} else {
 					# Without LDAP
 					$t_show_update_button = true;
@@ -234,7 +234,7 @@ print_account_menu( 'account_page.php' );
 					# With LDAP
 					echo '<td class="category">' . lang_get( 'realname' ) . '</td>';
 					echo '<td>';
-					echo string_display_line( ldap_realname_from_username( $u_username ) );
+					echo string_attribute( ldap_realname_from_username( $u_username ) );
 					echo '</td>';
 				} else {
 					# Without LDAP

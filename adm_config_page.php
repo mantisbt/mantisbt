@@ -184,7 +184,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 						<?php
 						} else {
 							$t_username = ALL_USERS == $t_option_user_id ? lang_get( 'all_users' ) : user_get_name( $t_option_user_id );
-							echo string_display_line( $t_username );
+							echo string_attribute( $t_username );
 						}
 						?>
 					</td>
@@ -209,7 +209,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 						<input type="hidden" name="original_project_id" value="<?php echo $t_option_project_id; ?>" />
 						<?php
 						} else {
-							echo string_display_line( project_get_name( $t_option_project_id ) );
+							echo string_attribute( project_get_name( $t_option_project_id ) );
 						}
 						?>
 					</td>
@@ -222,7 +222,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 					</td>
 					<td>
 						<?php
-                        $c_option_id = string_display_line( $t_option_id );
+                        $c_option_id = string_attribute( $t_option_id );
 						if( $t_modify ) {
 						?>
 						<input type="text" name="config_option" class="input-sm"
@@ -251,7 +251,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 						</select>
 						<?php
 						} else {
-							echo string_display_line( config_get_type_string( $t_option_type ) );
+							echo string_attribute( config_get_type_string( $t_option_type ) );
 						}
 						?>
 					</td>

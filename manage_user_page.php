@@ -410,14 +410,14 @@ $t_user_count = count( $t_users );
 			/** @noinspection HtmlUnknownTarget */
 			printf( '<a href="%s">%s</a>',
 				'manage_user_edit_page.php?user_id=' . $v_id,
-				string_display_line( $v_username )
+				string_attribute( $v_username )
 			);
 		} else {
-			echo string_display_line( $v_username );
+			echo string_attribute( $v_username );
 		}
 ?>
 				</td>
-				<td><?php echo string_display_line( $v_realname ) ?></td>
+				<td><?php echo string_attribute( $v_realname ) ?></td>
 				<td><?php
 					# Display warning icon if emails should be unique and a duplicate exists
 					if( array_key_exists( strtolower( $v_email ), $t_duplicate_emails ) ) {
@@ -428,7 +428,7 @@ $t_user_count = count( $t_users );
 					}
 					print_email_link( $v_email, $v_email )
 				?></td>
-				<td><?php echo $t_access_level[$v_access_level] ?></td>
+				<td><?php echo string_attribute( $t_access_level[$v_access_level] ); ?></td>
 				<td class="center"><?php echo trans_bool( $v_enabled ) ?></td>
 				<td class="center"><?php
 					if( $v_protected ) {

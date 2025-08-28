@@ -95,7 +95,7 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 		$t_category_name = '';
 	}
 
-	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_display_line( $t_category_name ) . ']</strong> ';
+	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_attribute( $t_category_name ) . ']</strong> ';
 
 	if( !isset( $s_status[$t_bug->status] ) ) {
 		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, $t_current_user, $t_bug->project_id );
@@ -153,7 +153,7 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 		$t_category_name = '';
 	}
 
-	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_display_line( $t_category_name ) . ']</strong> ';
+	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_attribute( $t_category_name ) . ']</strong> ';
 
 	if( !isset( $s_status[$t_bug->status] ) ) {
 		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, $t_current_user, $t_bug->project_id );
@@ -474,7 +474,7 @@ function custom_function_default_print_column_value( $p_column, BugData $p_bug, 
 		} else {
 			printf( $t_column_start, $p_column );
 			if( isset( $p_bug->$p_column ) ) {
-				echo string_display_line( $p_bug->$p_column ) . $t_column_end;
+				echo string_attribute( $p_bug->$p_column ) . $t_column_end;
 			} else {
 				echo '@' . $p_column . '@' . $t_column_end;
 			}

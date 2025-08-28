@@ -89,7 +89,7 @@ foreach( $t_duplicate_emails as &$t_users ) {
 	foreach( $t_users as $t_id => &$t_username ) {
 		$t_username = sprintf( '<a href="%s">%s</a>',
 			$t_user_edit_page . $t_id,
-			string_display_line( $t_username )
+			string_attribute( $t_username )
 		);
 	}
 }

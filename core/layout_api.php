@@ -420,7 +420,7 @@ function layout_navbar() {
 	echo '<div class="navbar-header">';
 	echo '<a href="' . $t_short_path . $t_logo_url . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
-	echo string_display_line( config_get('window_title') );
+	echo string_attribute( config_get('window_title') );
 	echo ' </span>';
 	echo '</a>';
 
@@ -1088,7 +1088,7 @@ function layout_breadcrumbs() {
 			$t_display_username . $t_display_realname . '</a>' . "\n";
 
 		$t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed';
-		echo '  <span class="label hidden-xs label-default ' . $t_label . '">' . $t_access_level . '</span></li>' . "\n";
+		echo '  <span class="label hidden-xs label-default ' . $t_label . '">' . string_attribute( $t_access_level ) . '</span></li>' . "\n";
 	}
 	echo '</ul>' , "\n";
 
