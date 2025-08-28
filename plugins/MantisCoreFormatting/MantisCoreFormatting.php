@@ -96,6 +96,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			'process_text'					=> ON,
 			'process_urls'					=> ON,
 			'process_buglinks'				=> ON,
+			'process_prlinks'				=> OFF,
 			'process_markdown'				=> OFF,
 			'syntax_highlighting'			=> OFF,
 			'syntax_highlighting_theme'		=> 'prism.min.css',
@@ -177,13 +178,14 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 * @return string Formatted text
 	 */
 	function formatted( $p_event, $p_string, $p_multiline = true ) {
-		static $s_text, $s_urls, $s_buglinks, $s_markdown;
+		static $s_text, $s_urls, $s_buglinks, $s_prlinks, $s_markdown;
 
 		$t_string = $p_string;
 
 		if( null === $s_urls ) {
 			$s_urls = plugin_config_get( 'process_urls' );
 			$s_buglinks = plugin_config_get( 'process_buglinks' );
+			$s_prlinks = plugin_config_get( 'process_prlinks' );
 		}
 
 		if( null === $s_markdown ) {
@@ -192,7 +194,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 		# Parse input and return finished HTML markup, no further processing.
 		if( ON == $s_markdown ) {
-			return MantisMarkdown::getInstance( $s_urls, $s_buglinks )->convert( $t_string, $p_multiline );
+			return MantisMarkdown::getInstance( $s_urls, $s_buglinks, $s_prlinks )->convert( $t_string, $p_multiline );
 		}
 
 		if( null === $s_text ) {
@@ -216,6 +218,10 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = $this->processBugAndNoteLinks( $t_string );
 		}
 
+    if ( ON == $s_prlinks ) {
+      $t_string = string_process_pr_link( $t_string );
+    }
+
 		return mention_format_text( $t_string, /* html */ true );
 	}
 
@@ -226,7 +232,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 * @return string Formatted text
 	 */
 	function rss( $p_event, $p_string ) {
-		static $s_text, $s_urls, $s_buglinks;
+		static $s_text, $s_urls, $s_buglinks, $s_prlinks;
 
 		$t_string = $p_string;
 
@@ -234,6 +240,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$s_text = plugin_config_get( 'process_text' );
 			$s_urls = plugin_config_get( 'process_urls' );
 			$s_buglinks = plugin_config_get( 'process_buglinks' );
+			$s_prlinks = plugin_config_get( 'process_prlinks' );
 		}
 
 		if( ON == $s_text ) {
@@ -252,6 +259,10 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_process_bugnote_link( $t_string, true, false, true );
 		}
 
+    if (ON == $s_prlinks ) {
+      $t_string = string_process_pr_link( $t_string );
+    }
+
 		$t_string = mention_format_text( $t_string, /* html */ true );
 
 		return $t_string;
@@ -264,13 +275,14 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 * @return string Formatted text
 	 */
 	function email( $p_event, $p_string ) {
-		static $s_text, $s_buglinks;
+		static $s_text, $s_buglinks, $s_prlinks;
 
 		$t_string = $p_string;
 
 		if( null === $s_text ) {
 			$s_text = plugin_config_get( 'process_text' );
 			$s_buglinks = plugin_config_get( 'process_buglinks' );
+			$s_prlinks = plugin_config_get( 'process_prlinks' );
 		}
 
 		if( ON == $s_text ) {
@@ -281,6 +293,10 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_process_bug_link( $t_string, false );
 			$t_string = string_process_bugnote_link( $t_string, false );
 		}
+
+    if ( ON == $s_prlinks ) {
+      $t_string = string_process_pr_link( $t_string, false );
+    }
 
 		$t_string = mention_format_text( $t_string, /* html */ false );
 
