@@ -66,7 +66,6 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $t_type ) {
-	/** @noinspection PhpIncludeInspection */
 	require_once( config_get_global( 'core_path' ) . 'cfdefs/cfdef_' . $t_type . '.php' );
 }
 unset( $t_type );
@@ -379,11 +378,7 @@ function custom_field_is_linked( $p_field_id, $p_project_id ) {
  * @access public
  */
 function custom_field_exists( $p_field_id ) {
-	if( false == custom_field_cache_row( $p_field_id, false ) ) {
-		return false;
-	} else {
-		return true;
-	}
+	return is_array( custom_field_cache_row( $p_field_id, false ) );
 }
 
 /**
@@ -397,8 +392,8 @@ function custom_field_exists( $p_field_id ) {
  */
 function custom_field_type( $p_field_id ) {
 	$t_field = custom_field_cache_row( $p_field_id, false );
-	if( $t_field == false ) {
-		return - 1;
+	if( $t_field === false ) {
+		return -1;
 	} else {
 		return $t_field['type'];
 	}
@@ -502,6 +497,7 @@ function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id = null
  * @param int $p_user_id    A user identifier.
  *
  * @return bool
+ * @throws ClientException
  *
  * @access public
  */
@@ -518,14 +514,15 @@ function custom_field_has_read_access_by_project_id( $p_field_id, $p_project_id,
 }
 
 /**
- * Return true if the user can modify the value of the field for the given project,
- * false otherwise.
+ * Return true if the user can modify the value of the field for the given
+ * project, false otherwise.
  *
  * @param int $p_field_id   Custom field identifier.
  * @param int $p_project_id A project identifier.
  * @param int $p_user_id    A user identifier.
  *
  * @return bool
+ * @throws ClientException
  *
  * @access public
  */
@@ -872,11 +869,12 @@ function custom_field_get_id_from_name( $p_field_name ) {
 /**
  * Return an array of ids of custom fields bound to the specified project.
  *
- * The ids will be sorted based on the sequence number associated with the binding
+ * The ids will be sorted based on the sequence number associated with the binding.
  *
  * @param int|array $p_project_id A project identifier, or array of project ids
  *
  * @return array Array of custom field ids
+ * @throws ClientException
  *
  * @access public
  */
@@ -1496,8 +1494,8 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 				  		bug_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_field_id, $p_bug_id ) );
 
+	db_param_push();
 	if( $t_row = db_fetch_array( $t_result ) ) {
-		db_param_push();
 		$t_query = 'UPDATE {custom_field_string}
 					  SET ' . $t_value_field . '=' . db_param() . '
 					  WHERE field_id=' . db_param() . ' AND
@@ -1511,7 +1509,6 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 
 		history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row[$t_value_field], $t_type ), $t_value );
 	} else {
-		db_param_push();
 		$t_query = 'INSERT INTO {custom_field_string}
 						( field_id, bug_id, ' . $t_value_field . ' )
 					  VALUES
