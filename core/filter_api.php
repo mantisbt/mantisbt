@@ -217,7 +217,11 @@ function filter_get_url( array $p_custom_filter ) {
 		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_SEVERITY, $p_custom_filter[FILTER_PROPERTY_SEVERITY] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RESOLUTION] ) ) {
+    if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_REPRODUCIBILITY] ) ) {
+        $t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_REPRODUCIBILITY, $p_custom_filter[FILTER_PROPERTY_REPRODUCIBILITY] );
+    }
+
+    if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RESOLUTION] ) ) {
 		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_RESOLUTION, $p_custom_filter[FILTER_PROPERTY_RESOLUTION] );
 	}
 
@@ -720,7 +724,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	$t_array_values_list = array(
 		FILTER_PROPERTY_CATEGORY_ID => 'string',
 		FILTER_PROPERTY_SEVERITY => 'int',
-		FILTER_PROPERTY_STATUS => 'int',
+        FILTER_PROPERTY_REPRODUCIBILITY => 'int',
+        FILTER_PROPERTY_STATUS => 'int',
 		FILTER_PROPERTY_REPORTER_ID => 'int',
 		FILTER_PROPERTY_HANDLER_ID => 'int',
 		FILTER_PROPERTY_NOTE_USER_ID => 'int',
@@ -889,7 +894,8 @@ function filter_get_default_array( $p_view_type = null ) {
 		'_view_type' => $t_view_type,
 		FILTER_PROPERTY_CATEGORY_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_SEVERITY => $t_meta_filter_any_array,
-		FILTER_PROPERTY_STATUS => $t_meta_filter_any_array,
+        FILTER_PROPERTY_REPRODUCIBILITY => $t_meta_filter_any_array,
+        FILTER_PROPERTY_STATUS => $t_meta_filter_any_array,
 		FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
 		FILTER_PROPERTY_REPORTER_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_HANDLER_ID => $t_meta_filter_any_array,
@@ -2036,7 +2042,8 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	$f_os = gpc_get( FILTER_PROPERTY_OS, $t_filter[FILTER_PROPERTY_OS] );
 	$f_os_build = gpc_get( FILTER_PROPERTY_OS_BUILD, $t_filter[FILTER_PROPERTY_OS_BUILD] );
 	$f_show_severity = gpc_get( FILTER_PROPERTY_SEVERITY, $t_filter[FILTER_PROPERTY_SEVERITY] );
-	$f_show_status = gpc_get( FILTER_PROPERTY_STATUS, $t_filter[FILTER_PROPERTY_STATUS] );
+    $f_show_reproducibility = gpc_get( FILTER_PROPERTY_REPRODUCIBILITY, $t_filter[FILTER_PROPERTY_REPRODUCIBILITY] );
+    $f_show_status = gpc_get( FILTER_PROPERTY_STATUS, $t_filter[FILTER_PROPERTY_STATUS] );
 	$f_hide_status = gpc_get( FILTER_PROPERTY_HIDE_STATUS, $t_filter[FILTER_PROPERTY_HIDE_STATUS] );
 	$f_reporter_id = gpc_get( FILTER_PROPERTY_REPORTER_ID, $t_filter[FILTER_PROPERTY_REPORTER_ID] );
 	$f_handler_id = gpc_get( FILTER_PROPERTY_HANDLER_ID, $t_filter[FILTER_PROPERTY_HANDLER_ID] );
@@ -2274,7 +2281,8 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	$t_filter_input['_view_type'] 							= $f_view_type;
 	$t_filter_input[FILTER_PROPERTY_CATEGORY_ID] 			= $f_show_category;
 	$t_filter_input[FILTER_PROPERTY_SEVERITY] 				= $f_show_severity;
-	$t_filter_input[FILTER_PROPERTY_STATUS] 					= $f_show_status;
+    $t_filter_input[FILTER_PROPERTY_REPRODUCIBILITY] 				= $f_show_reproducibility;
+    $t_filter_input[FILTER_PROPERTY_STATUS] 					= $f_show_status;
 	$t_filter_input[FILTER_PROPERTY_ISSUES_PER_PAGE] 		= $f_per_page;
 	$t_filter_input[FILTER_PROPERTY_HIGHLIGHT_CHANGED] 		= $f_highlight_changed;
 	$t_filter_input[FILTER_PROPERTY_REPORTER_ID] 			= $f_reporter_id;
