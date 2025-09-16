@@ -337,6 +337,37 @@ function filter_get_url( array $p_custom_filter ) {
 		}
 	}
 
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] ) ) {
+		$t_query[] = filter_encode_field_and_value(
+			FILTER_PROPERTY_FILTER_BY_DUE_DATE,
+			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] ? 'on' : 'off' );
+
+		# The start and end dates are only applicable if filter by date is set.
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_DUE_START_DAY] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_DUE_START_DAY, $p_custom_filter[FILTER_PROPERTY_DUE_START_DAY] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_DUE_END_DAY] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_DUE_END_DAY, $p_custom_filter[FILTER_PROPERTY_DUE_END_DAY] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_DUE_START_MONTH] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_DUE_START_MONTH, $p_custom_filter[FILTER_PROPERTY_DUE_START_MONTH] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_DUE_END_MONTH] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_DUE_END_MONTH, $p_custom_filter[FILTER_PROPERTY_DUE_END_MONTH] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_DUE_START_YEAR] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_DUE_START_YEAR, $p_custom_filter[FILTER_PROPERTY_DUE_START_YEAR] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_DUE_END_YEAR] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_DUE_END_YEAR, $p_custom_filter[FILTER_PROPERTY_DUE_END_YEAR] );
+		}
+	}
+
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
 		if( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] != -1 ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_RELATIONSHIP_TYPE, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
@@ -927,6 +958,13 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_LAST_UPDATED_END_DAY => date( 'd' ),
 		FILTER_PROPERTY_LAST_UPDATED_START_YEAR => date( 'Y' ),
 		FILTER_PROPERTY_LAST_UPDATED_END_YEAR => date( 'Y' ),
+		FILTER_PROPERTY_FILTER_BY_DUE_DATE => false,
+		FILTER_PROPERTY_DUE_START_MONTH => date( 'm' ),
+		FILTER_PROPERTY_DUE_END_MONTH => date( 'm' ),
+		FILTER_PROPERTY_DUE_START_DAY => 1,
+		FILTER_PROPERTY_DUE_END_DAY => date( 'd' ),
+		FILTER_PROPERTY_DUE_START_YEAR => date( 'Y' ),
+		FILTER_PROPERTY_DUE_END_YEAR => date( 'Y' ),
 		FILTER_PROPERTY_SEARCH => '',
 		FILTER_PROPERTY_VIEW_STATE => META_FILTER_ANY,
 		FILTER_PROPERTY_TAG_STRING => '',
@@ -2121,6 +2159,14 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	$f_last_updated_end_day				= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_DAY, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
 	$f_last_updated_start_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_START_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
 	$f_last_updated_end_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
+	# due date values
+	$f_do_filter_by_due_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DUE_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] );
+	$f_due_start_month			= gpc_get_int( FILTER_PROPERTY_DUE_START_MONTH, $t_filter[FILTER_PROPERTY_DUE_START_MONTH] );
+	$f_due_end_month			= gpc_get_int( FILTER_PROPERTY_DUE_END_MONTH, $t_filter[FILTER_PROPERTY_DUE_END_MONTH] );
+	$f_due_start_day			= gpc_get_int( FILTER_PROPERTY_DUE_START_DAY, $t_filter[FILTER_PROPERTY_DUE_START_DAY] );
+	$f_due_end_day				= gpc_get_int( FILTER_PROPERTY_DUE_END_DAY, $t_filter[FILTER_PROPERTY_DUE_END_DAY] );
+	$f_due_start_year			= gpc_get_int( FILTER_PROPERTY_DUE_START_YEAR, $t_filter[FILTER_PROPERTY_DUE_START_YEAR] );
+	$f_due_end_year			= gpc_get_int( FILTER_PROPERTY_DUE_END_YEAR, $t_filter[FILTER_PROPERTY_DUE_END_YEAR] );
 
 	$f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, $t_filter[FILTER_PROPERTY_SEARCH] );
 	$f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, $t_filter[FILTER_PROPERTY_VIEW_STATE] );
@@ -2297,6 +2343,13 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] 	= $f_last_updated_end_month;
 	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_DAY] 		= $f_last_updated_end_day;
 	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] 		= $f_last_updated_end_year;
+	$t_filter_input[FILTER_PROPERTY_FILTER_BY_DUE_DATE] = $f_do_filter_by_due_date;
+	$t_filter_input[FILTER_PROPERTY_DUE_START_MONTH] 	= $f_due_start_month;
+	$t_filter_input[FILTER_PROPERTY_DUE_START_DAY] 	= $f_due_start_day;
+	$t_filter_input[FILTER_PROPERTY_DUE_START_YEAR] 	= $f_due_start_year;
+	$t_filter_input[FILTER_PROPERTY_DUE_END_MONTH] 	= $f_due_end_month;
+	$t_filter_input[FILTER_PROPERTY_DUE_END_DAY] 		= $f_due_end_day;
+	$t_filter_input[FILTER_PROPERTY_DUE_END_YEAR] 		= $f_due_end_year;
 	$t_filter_input[FILTER_PROPERTY_SEARCH] 					= $f_search;
 	$t_filter_input[FILTER_PROPERTY_HIDE_STATUS] 			= $f_hide_status;
 	$t_filter_input[FILTER_PROPERTY_RESOLUTION] 				= $f_show_resolution;
