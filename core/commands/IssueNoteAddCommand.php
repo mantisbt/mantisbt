@@ -230,7 +230,7 @@ class IssueNoteAddCommand extends Command {
 			$g_project_override = $this->issue->project_id;
 		}
 
-		# We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
+		# We always set the note type to BUGNOTE, and the API will overwrite it with TIME_TRACKING
 		# if time tracking is not 0 and the time tracking feature is enabled.
 		$t_note_id = bugnote_add(
 			$this->issue->id,
