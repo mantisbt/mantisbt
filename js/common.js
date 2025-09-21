@@ -804,6 +804,11 @@ function enableDropzone( classPrefix, autoUpload ) {
 				document.write( response );
 				document.close();
 			});
+			this.on( "complete", function( file ) {
+				// Set progress bar as inactive
+				let progressbar = file.previewElement.querySelector('.progress');
+				progressbar.classList.remove('active');
+			});
 			/**
 			 * 'addedfiles' is undocumented but works similar to 'addedfile'
 			 * It's triggered once after a multiple file addition, and receives
