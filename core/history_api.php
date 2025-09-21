@@ -350,6 +350,8 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
  */
 function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
 	static $s_bug_visible = array();
+	static $s_own_notes = array();
+
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
 
 	while ( $t_row = db_fetch_array( $p_result ) ) {
@@ -407,14 +409,17 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 		}
 
 		# bugnotes
-		if( $t_user_id != $v_user_id ) {
-			# bypass if user originated note
-			if( ( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
+		$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id );
+		$t_can_view_private_notes = access_has_bug_level( $t_private_bugnote_threshold, $v_bug_id, $t_user_id );
+		$t_is_own_note = in_array( $v_old_value, $s_own_notes ) ||  in_array( $v_new_value, $s_own_notes ) ;
+		# bypass if user created the note or is allowed to view private notes
+		if( $t_user_id != $v_user_id && !$t_can_view_private_notes && !$t_is_own_note ) {
+			if( $v_type == BUGNOTE_ADDED || $v_type == BUGNOTE_UPDATED || $v_type == BUGNOTE_DELETED ) {
 				if( !bugnote_exists( $v_old_value ) ) {
 					continue;
 				}
 
-				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) {
 					continue;
 				}
 			}
@@ -424,10 +429,13 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 					continue;
 				}
 
-				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) {
 					continue;
 				}
 			}
+		} elseif( $v_type == BUGNOTE_ADDED ) {
+			# Keep track of the bugnotes created by the user
+			$s_own_notes[(int)$v_old_value] = (int)$v_old_value;
 		}
 
 		# tags
@@ -450,7 +458,7 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 					continue;
 				}
 
-				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( !access_has_bug_level( $t_private_bugnote_threshold, $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
