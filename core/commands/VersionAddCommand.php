@@ -80,8 +80,8 @@ class VersionAddCommand extends Command {
 				array( 'name' ) );
 		}
 
-		$t_timestamp = $this->payload( 'timestamp', '' );
-		$this->timestamp = is_blank( $t_timestamp ) ? null : strtotime( $t_timestamp );
+		$t_date_string = $this->payload( 'timestamp', '' );
+		$this->timestamp = date_string_to_timestamp( $t_date_string );
 	}
 
 	/**
