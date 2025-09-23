@@ -375,6 +375,11 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_new_custom_field_value = gpc_get_custom_field( 'custom_field_' . $t_cf_id, $t_cf_def['type'], '' );
 	$t_old_custom_field_value = custom_field_get_value( $t_cf_id, $f_bug_id );
 
+	# No need to update the field if its value has not changed
+	if( $t_old_custom_field_value === $t_new_custom_field_value ) {
+		continue;
+	}
+
 	# Validate the value of the field against current validation rules.
 	# This may cause an error if validation rules have recently been
 	# modified such that old values that were once OK are now considered
