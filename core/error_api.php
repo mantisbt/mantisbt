@@ -336,6 +336,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 
 				# If HTML error output was disabled, set the HTTP response code and stop
 				if( defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
+					if( DISABLE_INLINE_ERROR_REPORTING == 'text' ) {
+						# Send error message as response body
+						header( 'Content-Type: text/plain' );
+						echo $t_error_description;
+					}
 					http_response_code( error_map_mantis_error_to_http_code( $p_error ) );
 					exit(1);
 				}
