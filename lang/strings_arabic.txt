@@ -48,6 +48,7 @@
  * @author Maroen1990
  * @author Meno25
  * @author Mido
+ * @author Mohammed Qays
  * @author NEHAOUA
  * @author OsamaK
  * @author Tarawneh
@@ -1077,7 +1078,7 @@ $s_relationship_warning_blocking_bugs_not_resolved = 'ليس كل أطفال ه�
 $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>انتباه</b>. ليس كل أطفال هذه القضية تم حلهم أو إغلاقهم.<br />قبل <b>حل/إغلاق</b> قضية أساسية، كل القضايا المرتبطة بأبناء لهذه الواحدة ينبغي أن يتم حلهم أو إغلاقهم.';
 $s_create_child_bug_button = 'استنسخ';
 $s_bug_cloned_to = 'القضية تم تكرارها';
-$s_bug_created_from = 'القضية تم توليدها من';
+$s_bug_created_from = 'المشكلة ناتجة من';
 $s_copy_from_parent = 'أنسخ بيانات ممتدة من مشكلة مشابهة';
 $s_copy_notes_from_parent = 'أنسخ ملاحظات الخلل';
 $s_copy_attachments_from_parent = 'أنسخ المرفقات';
@@ -1280,7 +1281,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'نوع الملف غير مسموح به
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'المجلد غير موجود. من فضلك تحقق من إعدادات المشروع.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'هناك مشروع بهذا الاسم بالفعل.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'حقل ضروري "%1$s" كان فارغا. من فضلك تحقق مرة أخرى من مدخلاتك.';
-$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'قيمة غير صالحة لـ\'%1$s\'';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'قيمة غير صالحة لـ "%1$s"';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'هذا الحساب محمي. أنت غير مسموح لك بعمل العملية المطلوبة حتى يتم رفع حماية الحساب.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'السماح مرفوض.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'رفع الملف فشل. الملف لا يمكن قراءته بواسطة مانتيس بي تي. من فضلك تحقق من إعدادات المشروع.';
@@ -1290,7 +1291,7 @@ $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'محدد مطلوب لهذه الصف�
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'اسم المستخدم هذا يتم استعماله بالفعل. من فضلك عد واختر واحدا آخر.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'هذا البريد الإلكتروني مستخدم بالفعل; الرجاء الرجوع واختيار واحد آخر.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'خيار الضبط "%1$s" لم يتم العثور عليه.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'خيار الضبط "%1$s" لم يمكن ضبطه في قاعدة البيانات. يجب ضبطه في config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'لا يمكن ضبط خيار التكوين " %1$s " في قاعدة البيانات. يجب تعريفه في ملف config_inc.php.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'يتعذر تعيين خيار التكوين "%1$s": %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'السلسلة "%1$s" لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'الملاحظة لم يتم العثور عليها.';
