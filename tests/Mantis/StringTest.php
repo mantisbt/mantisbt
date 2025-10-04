@@ -37,7 +37,7 @@ class StringTest extends MantisCoreBase {
 	/**
 	 * Tests string_sanitize_url()
 	 *
-	 * @dataProvider provider
+	 * @dataProvider providerSanitize
 	 * @param string $p_in  Input.
 	 * @param string $p_out Expected output.
 	 * @return void
@@ -59,7 +59,7 @@ class StringTest extends MantisCoreBase {
 	 * Data provider for string sanitize test
 	 * @return array
 	 */
-	public static function provider() {
+	public static function providerSanitize() {
 		$t_test_strings = array(
 			array( '', 'index.php' ),
 			array( 'abc.php', 'abc.php' ),
@@ -100,5 +100,51 @@ class StringTest extends MantisCoreBase {
 
 		return $t_test_strings;
 	}
+
+
+  /**
+   * @dataProvider providerPrLink
+   */
+  public function testProcessPrLink(
+    string $p_tag,
+    string $p_url,
+    string $p_in,
+    bool $p_with_anchor,
+    string $p_out
+  ): void {
+    config_set( 'pr_link_tag', $p_tag );
+    config_set( 'pr_link_url', $p_url );
+    self::assertSame( $p_out, string_process_pr_link( $p_in, $p_with_anchor ) );
+  }
+
+	/**
+   * Data provider for PR link processing test.
+   *
+	 * @return array
+	 */
+  public function providerPrLink(): array {
+    $t_valid_tag = 'pr:';
+    $t_valid_url = 'https://gitrepository.com/user/repo/pull/{id}/commits';
+    $t_invalid_url_1 = 'ssh://gitrepository.com/user/repo/pull/{id}/commits';
+    $t_invalid_url_2 = 'https://gitrepository.com/user/repo/pull/-id-/commits';
+    $t_input_no_tag = 'See rp:1234 for more info';
+    $t_input_tag = 'See pr:1234 for more info';
+    $t_input_tag_start = 'pr:1234 for more info';
+    $t_processed_url = 'https://gitrepository.com/user/repo/pull/1234/commits';
+    $t_output_no_anchor = 'See ' . $t_processed_url . ' for more info';
+    $t_output_anchor = 'See <a href="' . $t_processed_url . '">pr:1234</a> for more info';
+    $t_output_start = $t_processed_url . ' for more info';
+    return [
+      'Empty tag' => ['', $t_valid_url, $t_input_tag, true, $t_input_tag],
+      'Empty URL' => [$t_valid_tag, '', $t_input_tag, true, $t_input_tag],
+      'Empty input' => [$t_valid_tag, $t_valid_url, '', true, ''],
+      'Invalid URL (wrong protocol)' => [$t_valid_tag, $t_invalid_url_1, $t_input_tag, true, $t_input_tag],
+      'Invalid URL (wrong placeholder)' => [$t_valid_tag, $t_invalid_url_2, $t_input_tag, true, $t_input_tag],
+      'Input without tag' => [$t_valid_tag, $t_valid_url, $t_input_no_tag, true, $t_input_no_tag],
+      'Input with tag (no anchor)' => [$t_valid_tag, $t_valid_url, $t_input_tag, false, $t_output_no_anchor],
+      'Input with tag (anchor)' => [$t_valid_tag, $t_valid_url, $t_input_tag, true, $t_output_anchor],
+      'Input with tag at start' => [$t_valid_tag, $t_valid_url, $t_input_tag_start, false, $t_output_start]
+    ];
+  }
 
 }
