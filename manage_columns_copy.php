@@ -75,6 +75,11 @@ if( $f_manage_page && $t_dst_project_id != ALL_PROJECTS ) {
 	access_ensure_project_level( MANAGER, $t_dst_project_id );
 }
 
+# only MANAGERS can read global defaults of a project
+if( $f_manage_page && $t_src_project_id != ALL_PROJECTS ) {
+	access_ensure_project_level( MANAGER, $t_src_project_id );
+}
+
 # user should only be able to set columns for a project that is accessible.
 if( $t_dst_project_id != ALL_PROJECTS ) {
 	access_ensure_project_level( config_get( 'view_bug_threshold', null, null, $t_dst_project_id ), $t_dst_project_id );
