@@ -288,7 +288,7 @@ class UserUpdateCommand extends Command {
 	 *
 	 * @return array Command response
 	 *
-	 * @throws ClientException
+	 * @throws ClientException|\PHPMailer\PHPMailer\Exception
 	 */
 	protected function process() {
 		$this->update_user( $this->new_user );
@@ -323,10 +323,42 @@ class UserUpdateCommand extends Command {
 	 * authorization, triggering of events, etc.
 	 *
 	 * @param array $p_user User data
+	 *
 	 * @return void
+	 * @throws ClientException
 	 */
 	private function update_user( $p_user ) {
 		$t_user_id = array_shift( $p_user );
+
+		# Email was changed
+		if( $this->email ) {
+			# Change made by user themselves
+			if( auth_get_current_user_id() == $this->user_id )  {
+				if( config_get( 'send_reset_password' ) ) {
+					# Temporarily store the new email address in a token
+					token_set( TOKEN_ACCOUNT_CHANGE_EMAIL,
+						$this->email,
+						TOKEN_EXPIRY_ACCOUNT_ACTIVATION,
+						$t_user_id
+					);
+
+					# Send verification mail
+					$t_confirm_hash = auth_generate_confirm_hash( $this->user_id );
+					token_set( TOKEN_ACCOUNT_ACTIVATION,
+						$t_confirm_hash,
+						TOKEN_EXPIRY_ACCOUNT_ACTIVATION,
+						$t_user_id
+					);
+					email_send_email_verification_url( $this->user_id, $t_confirm_hash, $p_user['email'] );
+
+					# Do not update the user record
+					unset( $p_user['email'] );
+				}
+			} else {
+				# Clear any pending change email token
+				token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $this->user_id );
+			}
+		}
 
 		$t_query = new DbQuery( 'UPDATE {user} SET ' );
 		$t_sql_columns = [];
@@ -338,10 +370,6 @@ class UserUpdateCommand extends Command {
 			. ' WHERE id=' . $t_query->param( $t_user_id )
 		);
 		$t_query->execute();
-
-		# If email was changed, clear any pending change email token
-		if( $this->email ) {
-			token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $t_user_id );
-		}
 	}
 }
+
