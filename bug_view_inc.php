@@ -934,9 +934,10 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	}
 
 	# add summary
-	$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
+	$t_relationship_info_html .= $t_td 
+		. '<span class="padding-right-4">' . string_display_line_links( $t_bug->summary ) . '</span>';
 	if( VS_PRIVATE == $t_bug->view_state ) {
-		$t_relationship_info_html .= icon_get( 'fa-lock', '', lang_get( 'private' ) );
+		$t_relationship_info_html .= icon_get( 'fa-lock', 'ace-icon', lang_get( 'private' ) );
 	}
 
 	# add delete link if bug not read only and user has access level
