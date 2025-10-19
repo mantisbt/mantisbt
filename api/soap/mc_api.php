@@ -21,6 +21,12 @@
  * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
  * @copyright Copyright 2005  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpComposerExtensionStubsInspection
+ * @noinspection PhpMultipleClassesDeclarationsInOneFile
+ * @noinspection PhpIllegalPsrClassPathInspection
+ * @noinspection PhpUnused
+ * @noinspection PhpMissingFieldTypeInspection
  */
 
 /**
@@ -200,8 +206,8 @@ class ApiObjectFactory {
 		$t_object = is_object( $p_object ) ? get_object_vars( $p_object ) : $p_object;
 		if( $p_recursive && is_array( $t_object ) ) {
 			foreach( $t_object as $t_key => $t_value ) {
-				if( is_object( $t_object[$t_key] ) || is_array( $t_object[$t_key] ) ) {
-					$t_object[$t_key] = ApiObjectFactory::objectToArray( $t_object[$t_key], $p_recursive );
+				if( is_object( $t_value ) || is_array( $t_value ) ) {
+					$t_object[$t_key] = ApiObjectFactory::objectToArray( $t_value, $p_recursive );
 				}
 			}
 		}
@@ -466,7 +472,7 @@ function mci_check_login( $p_username, $p_password ) {
 
 	if( api_token_validate( $p_username, $t_password ) ) {
 		# Token is valid, then login the user without worrying about a password.
-		if( auth_attempt_script_login( $p_username, null ) === false ) {
+		if( auth_attempt_script_login( $p_username ) === false ) {
 			return false;
 		}
 	} else {
@@ -474,7 +480,7 @@ function mci_check_login( $p_username, $p_password ) {
 		$t_user_id = auth_user_id_from_cookie( $p_password );
 		if( $t_user_id !== false ) {
 			# Cookie is valid
-			if( auth_attempt_script_login( $p_username, null ) === false ) {
+			if( auth_attempt_script_login( $p_username ) === false ) {
 				return false;
 			}
 		} else {
@@ -854,7 +860,7 @@ function mci_get_version( $p_version, $p_project_id ) {
 	}
 
 	return array(
-		'id' => (int)$t_version_id,
+		'id' => $t_version_id,
 		'name' => $p_version,
 	);
 }
@@ -1210,8 +1216,8 @@ function error_get_stack_trace() {
 		#remove the call to this function from the stack trace
 		foreach( $t_stack as $t_frame ) {
 			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' )
-				. ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' )
-				. ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
+				. ' L' . ( $t_frame['line'] ?? '?' )
+				. ' ' . ( $t_frame['function'] ?? 'UnknownFunction' );
 
 			$t_args = array();
 			if( isset( $t_frame['params'] ) && ( count( $t_frame['params'] ) > 0 ) ) {
@@ -1235,8 +1241,8 @@ function error_get_stack_trace() {
 
 		foreach( $t_stack as $t_frame ) {
 			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' )
-				. ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' )
-				. ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
+				. ' L' . ( $t_frame['line'] ?? '?' )
+				. ' ' . ( $t_frame['function'] ?? 'UnknownFunction' );
 
 			$t_args = array();
 			if( isset( $t_frame['args'] ) ) {
