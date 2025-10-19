@@ -265,7 +265,7 @@ class UserUpdateCommand extends Command {
 		$this->old_user = array(
 			'id' => $this->user_id,
 			'username' => $t_old_username,
-			'real_name' => $t_old_realname,
+			'realname' => $t_old_realname,
 			'email' => $t_old_email,
 			'access_level' => $t_old_access_level,
 			'enabled' => $t_old_enabled,
@@ -275,7 +275,7 @@ class UserUpdateCommand extends Command {
 		$this->new_user = array(
 			'id' => $this->user_id,
 			'username' => $t_new_username ?: $t_old_username,
-			'real_name' => !is_null( $t_new_realname ) ? $t_new_realname : $t_old_realname,
+			'realname' => !is_null( $t_new_realname ) ? $t_new_realname : $t_old_realname,
 			'email' => $t_new_email ?: $t_old_email,
 			'access_level' => $t_new_access_level ?: $t_old_access_level,
 			'enabled' => !is_null( $t_new_enabled ) ? $t_new_enabled : $t_old_enabled,

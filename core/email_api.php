@@ -539,8 +539,8 @@ function email_user_changed( $p_user_id, $p_old_user, $p_new_user ) {
 		$t_changes .= lang_get( 'username_label' ) . ' ' . $p_old_user['username'] . ' => ' . $p_new_user['username'] . "\n";
 	}
 
-	if( strcmp( $p_old_user['real_name'], $p_new_user['real_name'] ) ) {
-		$t_changes .= lang_get( 'realname_label' ) . ' ' . $p_old_user['real_name'] . ' => ' . $p_new_user['real_name'] . "\n";
+	if( strcmp( $p_old_user['realname'], $p_new_user['realname'] ) ) {
+		$t_changes .= lang_get( 'realname_label' ) . ' ' . $p_old_user['realname'] . ' => ' . $p_new_user['realname'] . "\n";
 	}
 
 	if( strcmp( $p_old_user['email'], $p_new_user['email'] ) ) {
