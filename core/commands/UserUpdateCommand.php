@@ -326,29 +326,22 @@ class UserUpdateCommand extends Command {
 	 * @return void
 	 */
 	private function update_user( $p_user ) {
-		db_param_push();
+		$t_user_id = array_shift( $p_user );
 
-		$t_query = 'UPDATE {user}
-			SET username=' . db_param() . ', email=' . db_param() . ',
-				access_level=' . db_param() . ', enabled=' . db_param() . ',
-				protected=' . db_param() . ', realname=' . db_param() . '
-			WHERE id=' . db_param();
-
-		$t_query_params = array(
-			$p_user['username'],
-			$p_user['email'],
-			$p_user['access_level'],
-			$p_user['enabled'],
-			$p_user['protected'],
-			$p_user['real_name'],
-			$p_user['id'] );
-
-		db_query( $t_query, $t_query_params );
+		$t_query = new DbQuery( 'UPDATE {user} SET ' );
+		$t_sql_columns = [];
+		foreach( $p_user as $t_col => $t_value ) {
+			$t_sql_columns[] = $t_col . ' = ' . $t_query->param( $t_value );
+		}
+		$t_query->append_sql(
+			implode( ', ', $t_sql_columns )
+			. ' WHERE id=' . $t_query->param( $t_user_id )
+		);
+		$t_query->execute();
 
 		# If email was changed, clear any pending change email token
 		if( $this->email ) {
-			token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $p_user['id'] );
+			token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $t_user_id );
 		}
 	}
 }
-
