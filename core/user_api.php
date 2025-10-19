@@ -1904,8 +1904,10 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 	# When the password is changed, invalidate the cookie to expire sessions that
 	# may be active on all browsers.
 	$c_cookie_string = auth_generate_unique_cookie_string();
+
 	# Delete token for password activation if there is any
 	token_delete( TOKEN_ACCOUNT_ACTIVATION, $p_user_id );
+	token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $p_user_id );
 
 	$c_password = auth_process_plain_password( $p_password );
 
