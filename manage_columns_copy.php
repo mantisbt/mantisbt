@@ -72,12 +72,14 @@ if( $f_manage_page && $t_dst_project_id == ALL_PROJECTS && !current_user_is_admi
 
 # only MANAGERS can set global defaults.for a project
 if( $f_manage_page && $t_dst_project_id != ALL_PROJECTS ) {
-	access_ensure_project_level( MANAGER, $t_dst_project_id );
+	$t_threshold = config_get( 'manage_project_threshold', null, null, $t_dst_project_id );
+	access_ensure_project_level( $t_threshold, $t_dst_project_id );
 }
 
 # only MANAGERS can read global defaults of a project
 if( $f_manage_page && $t_src_project_id != ALL_PROJECTS ) {
-	access_ensure_project_level( MANAGER, $t_src_project_id );
+	$t_threshold = config_get( 'manage_project_threshold', null, null, $t_src_project_id );
+	access_ensure_project_level( $t_threshold, $t_src_project_id );
 }
 
 # user should only be able to set columns for a project that is accessible.
