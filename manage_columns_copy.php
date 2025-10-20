@@ -32,7 +32,10 @@
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses print_api.php
- */
+ *
+ * @noinspection PhpUnhandledExceptionInspection
+ * @noinspection PhpUndefinedVariableInspection
+*/
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -84,7 +87,8 @@ if( $f_manage_page && $t_src_project_id != ALL_PROJECTS ) {
 
 # user should only be able to set columns for a project that is accessible.
 if( $t_dst_project_id != ALL_PROJECTS ) {
-	access_ensure_project_level( config_get( 'view_bug_threshold', null, null, $t_dst_project_id ), $t_dst_project_id );
+	$t_threshold = config_get( 'view_bug_threshold', null, null, $t_dst_project_id );
+	access_ensure_project_level( $t_threshold, $t_dst_project_id );
 }
 
 # Calculate the user id to set the configuration for.
