@@ -67,9 +67,11 @@ if( ALL_PROJECTS != $t_bottom ) {
 	project_ensure_exists( $t_bottom );
 }
 
-# Set default project
+# Set default project, but only if user has access to it
 if( $f_make_default ) {
-	current_user_set_default_project( $t_top );
+	$t_user_id = auth_get_current_user_id();
+	access_ensure_project_level( VIEWER, $t_top, $t_user_id );
+	user_set_default_project( $t_user_id, $t_top );
 }
 
 helper_set_current_project( $f_project_id );
