@@ -71,6 +71,7 @@ $g_cache_access_matrix_user_ids = array();
  * re-directs to the mainpage.
  *
  * @return void
+ * @throws ClientException
  */
 function access_denied() {
 	if( !auth_is_user_authenticated() ) {
@@ -110,7 +111,8 @@ function access_denied() {
 			layout_admin_page_end();
 		}
 	}
-	exit;
+	http_response_code(HTTP_STATUS_FORBIDDEN);
+	exit(1);
 }
 
 /**
