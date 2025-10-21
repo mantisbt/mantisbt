@@ -37,11 +37,13 @@
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
+ * @uses menu_api.php
  * @uses utility_api.php
  */
 
 
 require_api( 'access_api.php' );
+require_api( 'menu_api.php' );
 require_api( 'utility_api.php' );
 
 
@@ -695,214 +697,25 @@ function layout_navbar_user_avatar( $p_img_class = 'nav' ) {
  */
 function layout_print_sidebar( $p_active_sidebar_page = null ) {
 	if( auth_is_user_authenticated() ) {
-		$t_current_project = helper_get_current_project();
 
-		# Store all items in an array before outputting
-		$t_sidebar_items = array();
-
-		# Plugin / Event added options
-		$t_event_menu_main_front = event_signal( 'EVENT_MENU_MAIN_FRONT' );
-		$t_plugin_menu_items_front = layout_plugin_menu_options_for_sidebar( $t_event_menu_main_front );
-
-		if( is_array( $t_plugin_menu_items_front ) ) {
-			$t_sidebar_items = $t_plugin_menu_items_front;
-		}
-
-		# Main Page
-		if( config_get( 'news_enabled' ) == ON ) {
-			$t_sidebar_items[] = array(
-				'url' => 'main_page.php',
-				'title' => 'main_link',
-				'icon' => 'fa-bullhorn'
-			);
-		}
-
-		# My View
-		$t_sidebar_items[] = array(
-			'url' => 'my_view_page.php',
-			'title' => 'my_view_link',
-			'icon' => 'fa-dashboard'
-		);
-
-		# View Bugs
-		$t_sidebar_items[] = array(
-			'url' => 'view_all_bug_page.php',
-			'title' => 'view_bugs_link',
-			'icon' => 'fa-list-alt'
-		);
-
-		# Report Bugs
-		if( access_has_any_project_level( 'report_bug_threshold' ) ) {
-			$t_sidebar_items[] = array(
-				'url' => string_get_bug_report_url(),
-				'title' => 'report_bug_link',
-				'icon' => 'fa-edit'
-			);
-		}
-
-		# Changelog Page
-		$t_sidebar_items[] = array(
-			'url' => 'changelog_page.php',
-			'title' => 'changelog_link',
-			'icon' => 'fa-retweet',
-			'access_level' => config_get( 'view_changelog_threshold' )
-		);
-
-		# Roadmap Page
-		$t_sidebar_items[] = array(
-			'url' => 'roadmap_page.php',
-			'title' => 'roadmap_link',
-			'icon' => 'fa-road',
-			'access_level' => config_get( 'roadmap_view_threshold' )
-		);
-
-		# Summary Page
-		$t_sidebar_items[] = array(
-			'url' => 'summary_page.php',
-			'title' => 'summary_link',
-			'icon' => 'fa-bar-chart-o',
-			'access_level' => config_get( 'view_summary_threshold' )
-		);
-
-		# Project Documentation Page
-		if( ON == config_get( 'enable_project_documentation' ) ) {
-			$t_sidebar_items[] = array(
-				'url' => 'proj_doc_page.php',
-				'title' => 'docs_link',
-				'icon' => 'fa-book'
-			);
-		}
-
-		# Project Wiki
-		if( ON == config_get_global( 'wiki_enable' )  ) {
-			$t_sidebar_items[] = array(
-				'url' => 'wiki.php?type=project&amp;id=' . $t_current_project,
-				'title' => 'wiki',
-				'icon' => 'fa-book'
-			);
-		}
-
-		# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
-		$t_link = layout_manage_menu_link();
-		if( !is_blank( $t_link ) ) {
-			$t_sidebar_items[] = array(
-				'url' => $t_link,
-				'title' => 'manage_link',
-				'icon' => 'fa-gears',
-			);
-		}
-
-		# Time Tracking / Billing
-		if( config_get( 'time_tracking_enabled' ) && access_has_project_level( config_get( 'time_tracking_reporting_threshold', $t_current_project ) ) ) {
-			$t_sidebar_items[] = array(
-				'url' => 'billing_page.php',
-				'title' => 'time_tracking_billing_link',
-				'icon' => 'fa-clock-o',
-			);
-		}
-
-		# Plugin / Event added options
-		$t_event_menu_main = event_signal( 'EVENT_MENU_MAIN' );
-		$t_plugin_menu_items_back = layout_plugin_menu_options_for_sidebar( $t_event_menu_main );
-
-		if( is_array( $t_plugin_menu_items_back ) ) {
-			$t_sidebar_items = array_merge( $t_sidebar_items, $t_plugin_menu_items_back );
-		}
-
-		# Config based custom options
-		$t_config_menu_items = layout_config_menu_options_for_sidebar();
-
-		if( is_array( $t_config_menu_items ) ) {
-			$t_sidebar_items = array_merge( $t_sidebar_items, $t_config_menu_items );
-		}
-
-		# Allow plugins to alter the sidebar items array
-		$t_modified_sidebar_items = event_signal( 'EVENT_MENU_MAIN_FILTER', array( $t_sidebar_items ) );
-		if( is_array( $t_modified_sidebar_items ) && count( $t_modified_sidebar_items ) > 0 ) {
-			$t_sidebar_items = $t_modified_sidebar_items[0];
-		}
+		$t_sidebar_items = menu_sidebar_options();
 
 		if( count( $t_sidebar_items ) > 0 ) {
 			# Starting sidebar markup
 			layout_sidebar_begin();
 
 			# Output the sidebar items
-			layout_options_for_sidebar( $t_sidebar_items, $p_active_sidebar_page );
+			foreach( $t_sidebar_items as $t_menu_option ) {
+				layout_sidebar_menu(
+					$t_menu_option['url'],
+					$t_menu_option['title'],
+					$t_menu_option['icon'] ?? 'fa-plug',
+					$p_active_sidebar_page );
+			}
 
 			# Ending sidebar markup
 			layout_sidebar_end();
 		}
-	}
-}
-
-/**
- * Process plugin menu options for sidebar
- * @param array $p_plugin_event_response The response from the plugin event signal.
- * @return array containing sidebar items
- */
-function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response ) {
-	$t_menu_options = array();
-
-	foreach( $p_plugin_event_response as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
-
-	return $t_menu_options;
-}
-
-/**
- * Process main menu options from config.
- * @return array containing sidebar items
- */
-function layout_config_menu_options_for_sidebar( ) {
-	$t_menu_options = array();
-	$t_custom_options = config_get( 'main_menu_custom_options' );
-
-	foreach( $t_custom_options as $t_custom_option ) {
-		if( isset( $t_custom_option['url'] ) ) {
-			$t_menu_option = $t_custom_option;
-		} else {
-			# Support < 2.0.0 custom menu options config format
-			$t_menu_option = array();
-			$t_menu_option['title'] = $t_custom_option[0];
-			$t_menu_option['access_level'] = $t_custom_option[1];
-			$t_menu_option['url'] = $t_custom_option[2];
-		}
-
-		$t_menu_options[] = $t_menu_option;
-	}
-
-	return $t_menu_options;
-}
-
-/**
- * Process main menu options
- * @param array $p_menu_options Array of menu options to output.
- * @param string $p_active_sidebar_page The active page on the sidebar.
- * @return void
- */
-function layout_options_for_sidebar( $p_menu_options, $p_active_sidebar_page ) {
-	foreach( $p_menu_options as $t_menu_option ) {
-		$t_icon = isset( $t_menu_option['icon'] ) ? $t_menu_option['icon'] : 'fa-plug';
-		if( !isset( $t_menu_option['url'] ) || !isset( $t_menu_option['title'] ) ) {
-			continue;
-		}
-
-		if( isset( $t_menu_option['access_level'] ) ) {
-			if( !access_has_project_level( $t_menu_option['access_level'] ) ) {
-				continue;
-			}
-		}
-
-		layout_sidebar_menu( $t_menu_option['url'], $t_menu_option['title'], $t_icon, $p_active_sidebar_page );
 	}
 }
 
@@ -918,7 +731,6 @@ function layout_sidebar_begin() {
 
 	echo '<ul class="nav nav-list">';
 }
-
 
 /**
  * Print sidebar menu item
@@ -950,7 +762,6 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 	echo '<b class="arrow"></b>' . "\n";
 	echo '</li>' . "\n";
 }
-
 
 /**
  * Print sidebar closing elements
@@ -1310,39 +1121,6 @@ function layout_login_page_logo() {
 }
 
 /**
- * Returns a single link for the "manage" menu item in sidebar, based on current
- * user permissions, and priority if several subpages are available.
- * If there is not any accesible manage page, returns null.
- * @return string|null	Page name for the manage menu link, or null if unavailable.
- */
-function layout_manage_menu_link() {
-	static $t_link = null;
-	if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
-		$t_link = 'manage_overview_page.php';
-	} else {
-		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-			$t_link = 'manage_user_page.php';
-		} else {
-			if( access_has_any_project_level( 'manage_project_threshold' ) ) {
-				$t_current_project = helper_get_current_project();
-				if( $t_current_project == ALL_PROJECTS ) {
-					$t_link = 'manage_proj_page.php';
-				} else {
-					if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project ) ) {
-						$t_link = 'manage_proj_edit_page.php?project_id=' . $t_current_project;
-					} else {
-						if ( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
-							$t_link = 'manage_custom_field_page.php';
-						}
-					}
-				}
-			}
-		}
-	}
-	return $t_link;
-}
-
-/**
  * Returns true if the projects menu can be shown for current user.
  * In some circumstances, we won't show the menu to simplify the UI.
  * @return boolean	True if the projects menu can be shown.
@@ -1356,7 +1134,7 @@ function layout_navbar_can_show_projects_menu() {
 	# if the user hass access to manage pages, where having ALL_PROJECTS is
 	# needed (#20054)
 	$t_show_project_selector =
-		!is_blank( layout_manage_menu_link() )
+		!is_blank( menu_manage_link() )
 		|| current_user_has_more_than_one_project();
 	return $t_show_project_selector;
 }
