@@ -71,6 +71,7 @@ $g_cache_access_matrix_user_ids = array();
  * re-directs to the mainpage.
  *
  * @return void
+ * @throws ClientException
  */
 function access_denied() {
 	$t_return = '';
@@ -109,7 +110,8 @@ function access_denied() {
 			error_string( ERROR_ACCESS_DENIED ), CONFIRMATION_TYPE_FAILURE );
 		layout_page_end();
 	}
-	exit;
+	http_response_code(HTTP_STATUS_FORBIDDEN);
+	exit(1);
 }
 
 /**
