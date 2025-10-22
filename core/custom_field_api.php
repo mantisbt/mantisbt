@@ -627,11 +627,18 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	}
 
 	# Default value length is limited by underlying DB field
-	if( strlen( $v_default_value ) > DB_FIELD_SIZE_CF_DEFAULT_VALUE ) {
+	# (and max_textarea_length, for textarea fields).
+	if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+		$t_max_textarea_length = config_get_global( 'max_textarea_length' );
+		$t_max_length = min( DB_FIELD_SIZE_CF_DEFAULT_VALUE, $t_max_textarea_length );
+	} else {
+		$t_max_length = DB_FIELD_SIZE_CF_DEFAULT_VALUE;
+	}
+	if( strlen( $v_default_value ) > $t_max_length ) {
 		throw new ClientException(
 			"Default value must be $t_max_length characters or less.",
 			ERROR_FIELD_TOO_LONG,
-			[lang_get( 'custom_field_default_value' ), DB_FIELD_SIZE_CF_DEFAULT_VALUE]
+			[lang_get( 'custom_field_default_value' ), $t_max_length]
 		);
 	}
 
@@ -651,7 +658,6 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 
 	# Ensure max length for textarea fields is not more than allowed
 	if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
-		$t_max_textarea_length = config_get_global( 'max_textarea_length' );
 		if( $v_length_max > $t_max_textarea_length ) {
 			throw new ClientException(
 				'Maximum Length must be ' . $t_max_textarea_length . ' or less.',
