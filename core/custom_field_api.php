@@ -386,7 +386,7 @@ function custom_field_exists( $p_field_id ) {
  *
  * @param int $p_field_id Custom field id.
  *
- * @return int Custom field's type
+ * @return int Custom field's type, -1 if it does not exist.
  *
  * @access public
  */
@@ -592,6 +592,7 @@ function custom_field_create( $p_name ) {
  * @param array $p_def_array Custom field definition.
  *
  * @return bool True on success, false on failure
+ * @throws ClientException
  *
  * @access public
  */
