@@ -5491,6 +5491,7 @@ $g_public_config_names = array(
 	'max_failed_login_count',
 	'max_file_size',
 	'max_lost_password_in_progress_count',
+	'max_textarea_length',
 	'mentions_enabled',
 	'mentions_tag',
 	'min_refresh_delay',
