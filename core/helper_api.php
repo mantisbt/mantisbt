@@ -921,17 +921,18 @@ function helper_is_longtext_length_valid( string $p_string ): bool {
 /**
  * Throws error if a string's length is bigger than the allowed maximum.
  *
- * @param string $p_string Text to check
- * @param 
+ * @param string $p_string Text to check.
+ * @param string $p_field  Field name.
+ *
  * @throws ClientException
  */
-function helper_ensure_longtext_length_valid( string $p_string, string $p_field = '' ): void {
+function helper_ensure_longtext_length_valid( string $p_string, string $p_field ): void {
 	if( !helper_is_longtext_length_valid( $p_string ) ) {
 		$t_max_length = config_get_global( 'max_textarea_length' );
 		throw new ClientException(
-			'Long text fields must be shorter than ' . $t_max_length . ' characters.',
+			'Long text field "' . $p_field . '" must be shorter than ' . $t_max_length . ' characters.',
 			ERROR_FIELD_TOO_LONG,
-			array( $p_field, $t_max_length )
+			array( lang_get( $p_field ), $t_max_length )
 		);
 	}
 }

@@ -497,9 +497,9 @@ class BugData {
 				trigger_error( ERROR_EMPTY_FIELD, ERROR );
 			}
 
-			helper_ensure_longtext_length_valid( $this->description, lang_get( 'description' ) );
-			helper_ensure_longtext_length_valid( $this->steps_to_reproduce, lang_get( 'steps_to_reproduce' ) );
-			helper_ensure_longtext_length_valid( $this->additional_information, lang_get( 'additional_information' ) );
+			helper_ensure_longtext_length_valid( $this->description, 'description' );
+			helper_ensure_longtext_length_valid( $this->steps_to_reproduce, 'steps_to_reproduce' );
+			helper_ensure_longtext_length_valid( $this->additional_information, 'additional_information' );
 		}
 
 		# Make sure a category is set
