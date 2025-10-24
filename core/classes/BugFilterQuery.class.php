@@ -144,7 +144,7 @@ class BugFilterQuery extends DbQuery {
 	 *					current project is used.
 	 * - 'user_id':		(integer) A user id to be used to determine visibility for the filter.
 	 *					By default current user is used.
-	 * - 'use_sticky':	(boolean) Whether to allow returning the bug list sorted so that sticky
+	 * - 'use_sticky':	(bool) Whether to allow returning the bug list sorted so that sticky
 	 *					bugs are placed first in the result order. This is false by default.
 	 *
 	 * @param array $p_filter			Filter array
@@ -176,7 +176,7 @@ class BugFilterQuery extends DbQuery {
 						$this->user_id = (int)$t_value;
 						break;
 					case 'use_sticky':
-						$this->use_sticky = (boolean)$t_value;
+						$this->use_sticky = (bool)$t_value;
 						break;
 				}
 			}

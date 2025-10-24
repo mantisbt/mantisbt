@@ -49,7 +49,7 @@ class ProjectHierarchyUpdateCommand extends Command {
 	 * - subproject_id (integer)
 	 *
 	 * $p_data['payload'] is expected to contain:
-	 * - inherit_parent (boolean)
+	 * - inherit_parent (bool)
 	 *
 	 * @param array $p_data The command data.
 	 */
