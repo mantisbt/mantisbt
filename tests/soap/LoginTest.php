@@ -69,7 +69,7 @@ class LoginTest extends SoapBase {
 		$this->assertEquals( $this->userId, $t_user_data->account_data->id, 'id' );
 		$this->assertEquals( $this->email, $t_user_data->account_data->email, 'email' );
 		$this->assertFalse( empty( $t_user_data->timezone ), 'timezone' );
-		$this->assertEquals( 90, (integer)$t_user_data->access_level, 'access_level' );
+		$this->assertEquals( 90, (int)$t_user_data->access_level, 'access_level' );
 	}
 
 	/**

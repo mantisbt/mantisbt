@@ -799,7 +799,7 @@ function config_get_value_as_string( $p_type, $p_value, $p_for_display = true ) 
 		case CONFIG_TYPE_FLOAT:
 			return (string)(float)$p_value;
 		case CONFIG_TYPE_INT:
-			return (string)(integer)$p_value;
+			return (string)(int)$p_value;
 		case CONFIG_TYPE_STRING:
 			$t_value = string_html_specialchars( config_eval( $p_value ) );
 			if( $p_for_display ) {

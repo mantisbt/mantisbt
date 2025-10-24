@@ -140,9 +140,9 @@ class BugFilterQuery extends DbQuery {
 	 *					QUERY_TYPE_IDS, query to return only matched bug ids, which may not
 	 *						be unique, but may be faster and convenient for use as a subquery.
 	 *					QUERY_TYPE_DISTINCT_IDS, query to return unique matched bug ids .
-	 * - 'project_id':	(integer) A project id to be used, if needed by the filer. By default,
+	 * - 'project_id':	(int) A project id to be used, if needed by the filer. By default,
 	 *					current project is used.
-	 * - 'user_id':		(integer) A user id to be used to determine visibility for the filter.
+	 * - 'user_id':		(int) A user id to be used to determine visibility for the filter.
 	 *					By default current user is used.
 	 * - 'use_sticky':	(bool) Whether to allow returning the bug list sorted so that sticky
 	 *					bugs are placed first in the result order. This is false by default.
