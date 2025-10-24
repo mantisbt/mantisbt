@@ -362,8 +362,8 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 							return $p_array[1] .
 								string_get_bug_view_link(
 									$c_bug_id,
-									(boolean)$p_detail_info,
-									(boolean)$p_fqdn
+									(bool)$p_detail_info,
+									(bool)$p_fqdn
 								);
 						}
 					}
@@ -449,8 +449,8 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 										string_get_bugnote_view_link(
 											$t_bug_id,
 											$c_bugnote_id,
-											(boolean)$p_detail_info,
-											(boolean)$p_fqdn
+											(bool)$p_detail_info,
+											(bool)$p_fqdn
 										);
 								}
 							}
