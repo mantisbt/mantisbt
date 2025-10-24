@@ -1511,7 +1511,7 @@ class BugFilterQuery extends DbQuery {
 							case CUSTOM_FIELD_TYPE_TEXTAREA:
 								$t_filter_array[] = $t_table_name . '.text = ' . $this->param( '' );
 								break;
-							default;
+							default:
 								$t_filter_array[] = $t_table_name . '.value = ' . $this->param( '' );
 						}
 					} else {
