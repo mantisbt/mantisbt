@@ -10,7 +10,7 @@
         "slim/slim": "^3.0",
         "guzzlehttp/guzzle": "^7.5",
         "vboctor/disposable_email_checker": "^3.0",
-        "adodb/adodb-php": "^5.22",
+        "adodb/adodb-php": "dev-hotfix/5.22",
         "phpmailer/phpmailer": "~7.0",
         "erusev/parsedown": "^1.7.4",
         "ezyang/htmlpurifier": "^4.14",
