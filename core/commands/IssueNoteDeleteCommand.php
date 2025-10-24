@@ -52,7 +52,7 @@ class IssueNoteDeleteCommand extends Command {
 	function validate() {
         $this->id = $this->query( 'id' );
 
-        if( (integer)$this->id < 1 ) {
+        if( (int)$this->id < 1 ) {
             throw new ClientException( "'id' must be >= 1", ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
         }
 

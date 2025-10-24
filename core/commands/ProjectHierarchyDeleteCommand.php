@@ -40,8 +40,8 @@ class ProjectHierarchyDeleteCommand extends Command {
 	 * Constructor
 	 *
 	 * $p_data['query'] is expected to contain:
-	 * - project_id (integer)
-	 * - subproject_id (integer)
+	 * - project_id (int)
+	 * - subproject_id (int)
 	 *
 	 * @param array $p_data The command data.
 	 */
