@@ -51,7 +51,7 @@ require_api( 'utility_api.php' );
 require_css( 'login.css' );
 
 
-$f_user_id = gpc_get_string( 'id' );
+$f_user_id = gpc_get_int( 'id' );
 $f_confirm_hash = gpc_get_string( 'confirm_hash' );
 
 # Force logout on the current user if already authenticated
