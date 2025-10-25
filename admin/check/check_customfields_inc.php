@@ -42,6 +42,7 @@ check_print_section_header_row( 'Custom Fields' );
 
 $t_checks = new CustomFieldsChecks();
 $t_checks->register( new CheckDateDefaultWithBrackets );
+$t_checks->register( new CheckTextareaMaxLength );
 $t_checks->execute();
 
 /**
@@ -218,6 +219,45 @@ class CheckDateDefaultWithBrackets extends CustomFieldCheck
 
 	public function getInfoMessage(string $p_name): string {
 		return sprintf( $this->msg_info, $this->results[$p_name][1] );
+	}
+
+}
+
+/**
+ * Checks if Textarea Custom Fields maximum length is bigger than $g_max_textarea_length.
+ */
+class CheckTextareaMaxLength extends CustomFieldCheck
+{
+	protected string $msg_pass = 'Maximum length of Textarea Custom Fields is smaller than $g_max_textarea_length';
+
+	private int $max_textarea_length;
+
+	public function __construct() {
+		parent::__construct();
+		$this->max_textarea_length = config_get( 'max_textarea_length' );
+		$this->msg_fail = 'Maximum length of Textarea Custom Field "%s" is bigger than $g_max_textarea_length'
+			. " ($this->max_textarea_length)";
+	}
+
+	public function test( array $p_cfdef, ?string &$p_result ): bool {
+		/**
+		 * @var string     $v_name
+		 * @var int        $v_type
+		 * @var int        $v_length_max
+		 */
+		extract( $p_cfdef, EXTR_PREFIX_ALL, 'v');
+
+		if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA
+			&& $v_length_max > $this->max_textarea_length
+		) {
+			$p_result = 'xxxx';
+			return false;
+		}
+		return true;
+	}
+
+	public function getFailMessage(string $p_name): string {
+		return sprintf( $this->msg_fail, $p_name );
 	}
 
 }
