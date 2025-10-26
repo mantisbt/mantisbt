@@ -809,13 +809,17 @@ function string_get_bug_report_url() {
 }
 
 /**
- * return the complete URL link to the verify page including the confirmation hash
- * @param integer $p_user_id      A valid user identifier.
- * @param string  $p_confirm_hash The confirmation hash value to include in the link.
+ * Return the complete URL link to the verify page including the confirmation hash.
+ *
+ * @param int    $p_user_id      A valid user identifier.
+ * @param string $p_confirm_hash The confirmation hash value to include in the link.
+ * @param string $p_page         Verify Page (defaults to verify.php)
+ *
  * @return string
  */
-function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	return config_get_global( 'path' ) . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
+function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash, $p_page = 'verify.php' ) {
+	return config_get_global( 'path' ) . $p_page
+		. '?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
 }
 
 /**

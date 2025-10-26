@@ -247,6 +247,46 @@ function print_email_input( $p_field_name, $p_email ) {
 }
 
 /**
+ * Prints a warning message indicating that the email address is not unique.
+ *
+ * Nothing is printed if the email address is unique.
+ *
+ * @param string $p_email   Email address to check
+ * @param int    $p_user_id User Id
+ *
+ * @return void
+ */
+function print_email_not_unique_warning( string $p_email, int $p_user_id ): void {
+	if( config_get_global( 'email_ensure_unique' )
+		&& !user_is_email_unique( $p_email, $p_user_id )
+	) {
+		echo '<div class="padding-8">';
+		print_icon( 'fa-exclamation-triangle', 'ace-icon bigger-125 red  padding-right-4' );
+		echo lang_get( 'email_not_unique' );
+		echo '</div>';
+	}
+}
+
+/**
+ * Prints a warning message if the user's email address is pending validation.
+ *
+ * @param int $p_user_id User Id
+ *
+ * @return void
+ */
+function print_email_pending_verification_warning( int $p_user_id ): void {
+	# Get pending email address from token
+	$t_email_change = token_get_value( TOKEN_ACCOUNT_CHANGE_EMAIL, $p_user_id );
+
+	if( $t_email_change ) {
+		echo '<div class="padding-8">';
+		print_icon('fa-info-circle', 'ace-icon bigger-125 blue padding-right-4' );
+		printf( lang_get( 'verify_email_pending' ), $t_email_change );
+		echo '</div>';
+	}
+}
+
+/**
  * print out an email editing input
  *
  * @param string $p_field_name Name of input tag.

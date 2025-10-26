@@ -1904,8 +1904,10 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 	# When the password is changed, invalidate the cookie to expire sessions that
 	# may be active on all browsers.
 	$c_cookie_string = auth_generate_unique_cookie_string();
+
 	# Delete token for password activation if there is any
 	token_delete( TOKEN_ACCOUNT_ACTIVATION, $p_user_id );
+	token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $p_user_id );
 
 	$c_password = auth_process_plain_password( $p_password );
 
@@ -1919,15 +1921,15 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 }
 
 /**
- * Set the user's email after checking that it is valid.
+ * Validate the user's email address.
  *
  * @param int    $p_user_id A valid user identifier.
  * @param string $p_email   An email address to set.
  *
- * @return bool
- * @throws ClientException
+ * @return void
+ * @throws ClientException If mail is not valid.
  */
-function user_set_email( $p_user_id, $p_email ) {
+function user_ensure_email_valid( $p_user_id, $p_email ) {
 	$p_email = trim( $p_email );
 
 	email_ensure_valid( $p_email );
@@ -1937,8 +1939,20 @@ function user_set_email( $p_user_id, $p_email ) {
 	if( strcasecmp( $t_old_email, $p_email ) != 0 ) {
 		user_ensure_email_unique( $p_email );
 	}
+}
 
-	return user_set_field( $p_user_id, 'email', $p_email );
+/**
+ * Set the user's email after checking that it is valid.
+ *
+ * @param int    $p_user_id A valid user identifier.
+ * @param string $p_email   An email address to set.
+ *
+ * @return void
+ * @throws ClientException
+ */
+function user_set_email( $p_user_id, $p_email ) {
+	user_ensure_email_valid( $p_user_id, $p_email );
+	user_set_field( $p_user_id, 'email', $p_email );
 }
 
 /**
