@@ -38,6 +38,27 @@ require_api( 'utility_api.php' );
 
 check_print_section_header_row( 'PHP' );
 
+# Supported PHP version
+check_print_info_row( "PHP version ", PHP_VERSION . PHP_EXTRA_VERSION );
+
+if( defined( 'PHP_MAX_VERSION' ) ) {
+	$t_max_version = PHP_MAX_VERSION;
+	preg_match( '/\d+\.\d+/', $t_max_version, $t_short_version );
+	# URL to filter by PHP version tag
+	$t_mantis_url = 'https://mantisbt.org/bugs/search.php?project_id=1&tag_string=PHP%20' . $t_short_version[0];
+	$t_info = "MantisBT has known issues with PHP $t_max_version or later, "
+		. "refer to the <a href='$t_mantis_url'>bug tracker</a> for details. "
+		. "Using an earlier PHP version is recommended; continued usage is unsupported !";
+} else {
+	$t_info = '';
+}
+check_print_test_row(
+	"PHP version " . PHP_VERSION . " is supported",
+	!defined( 'PHP_MAX_VERSION' )
+	|| version_compare( PHP_VERSION, PHP_MAX_VERSION, '<' ),
+	[ false => $t_info ]
+);
+
 # $t_extensions_required lists the extensions required to run Mantis in general
 $t_extensions_required = array(
 	'ctype', # required by PHPMailer
