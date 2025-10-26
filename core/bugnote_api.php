@@ -736,7 +736,7 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	if( $t_old_text == $p_bugnote_text ) {
 		return true;
 	}
-	helper_ensure_longtext_length_valid( $t_bugnote_text, 'bugnote' );
+	helper_ensure_longtext_length_valid( $p_bugnote_text, 'bugnote' );
 
 	# MySQL 4-bytes UTF-8 chars workaround #21101
 	$p_bugnote_text = db_mysql_fix_utf8( $p_bugnote_text );
