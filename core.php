@@ -70,10 +70,14 @@ require_once( __DIR__ . '/core/constant_inc.php' );
 
 # Enforce our minimum PHP requirements
 if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
-	echo '<strong>FATAL ERROR: Your version of PHP is too old. '
-		. 'MantisBT requires ' . PHP_MIN_VERSION . ' or newer</strong><br />'
-		. 'Your are running PHP version <em>' . PHP_VERSION . '</em>';
-	die();
+	$C = 'constant';
+	die( <<<MESSAGE
+		<h2>FATAL ERROR: Your version of PHP is too old</h2>
+		<p>MantisBT requires PHP {$C('PHP_MIN_VERSION')} or newer.</p>
+		You are running version <em>{$C('PHP_VERSION')}</em>.
+		Please upgrade to a newer version.
+		MESSAGE
+	);
 }
 if( defined( 'PHP_MAX_VERSION' )
 	&& version_compare( PHP_VERSION, PHP_MAX_VERSION, '>=' )
