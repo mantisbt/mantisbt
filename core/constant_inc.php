@@ -34,9 +34,16 @@ define( 'BAD', 0 );
 define( 'GOOD', 1 );
 define( 'WARN', 2 );
 
-# PHP-related constants
+# PHP version constants. PHP_VERSION:
+# - MUST¹ be >= PHP_MIN_VERSION and < PHP_MAX_VERSION
+# - SHOULD be < PHP_SUPPORTED_VERSION (Later versions have not been tested,
+#   there may be compatibility issues)
+# ¹ Enforced in core.php, MantisBT will halt if condition is not met.
 define( 'PHP_MIN_VERSION', '7.4.0' );
-define( 'PHP_MAX_VERSION', '8.4.0' ); # PHP must be < than this. Comment out if no known restriction.
+define( 'PHP_MAX_VERSION', '8.4.0' ); # Do not define (i.e. comment out) if there are no known restrictions
+define( 'PHP_SUPPORTED_VERSION', '8.4' ); # should be defined as X.Y (not X.Y.Z)
+
+# Other PHP-related constants
 define( 'PHP_CLI', 0 );
 define( 'PHP_CGI', 1 );
 
