@@ -36,6 +36,7 @@ define( 'WARN', 2 );
 
 # PHP-related constants
 define( 'PHP_MIN_VERSION', '7.4.0' );
+define( 'PHP_MAX_VERSION', '8.4.0' ); # PHP must be < than this. Comment out if no known restriction.
 define( 'PHP_CLI', 0 );
 define( 'PHP_CGI', 1 );
 
