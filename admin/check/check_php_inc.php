@@ -58,6 +58,7 @@ if( defined( 'PHP_SUPPORTED_VERSION' ) ) {
 	# URL to report a new issue with some pre-filled fields
 	$t_report_url = 'https://mantisbt.org/bugs/bug_report_page.php?'
 		. http_build_query( [
+			'project_id' => 1,
 			'category_id' => 67, # code cleanup
 			'product_version' => basename( MANTIS_VERSION, '-dev' ),
 			'summary' => "PHP $t_short_version compatibility: ",
