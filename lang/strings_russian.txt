@@ -71,6 +71,7 @@
  * @author Pavel200071
  * @author Redredsonia
  * @author Sabbah
+ * @author SaldırganSincap
  * @author Semen
  * @author Thothsum
  * @author Vlad5250
@@ -681,7 +682,7 @@ $s_plugin = 'Плагин';
 $s_plugins_installed = 'Установленные плагины';
 $s_plugins_available = 'Доступные плагины';
 $s_plugins_missing = 'Отсутствующие или неверные плагины';
-$s_plugins_missing_description = 'Плагины в приведенном ниже списке либо зарегистрированы, но их исходный код не удалось найти в "%s", либо загружены из "%s".</li><li>установлены, но их не удалось инициализировать.</li></ul>Попробуйте переустановить или удалить они.';
+$s_plugins_missing_description = 'Плагины в приведенном ниже списке либо <ul><li>зарегистрированы, но их исходный код не удалось найти в "%s", либо загружены из "%s".</li><li>установлены, но их не удалось инициализировать.</li></ul>Попробуйте переустановить или удалить они.';
 $s_plugin_description = 'Описание';
 $s_plugin_problem_description = 'Описание проблемы';
 $s_plugin_author = 'Автор: %1$s';
