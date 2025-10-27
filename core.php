@@ -73,7 +73,7 @@ if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
 	$C = 'constant';
 	die( <<<MESSAGE
 		<h2>FATAL ERROR: Your version of PHP is too old</h2>
-		<p>MantisBT requires PHP {$C('PHP_MIN_VERSION')} or newer.</p>
+		<p>MantisBT {$C('MANTIS_VERSION')} requires PHP {$C('PHP_MIN_VERSION')} or newer.</p>
 		You are running version <em>{$C('PHP_VERSION')}</em>.
 		Please upgrade to a newer version.
 		MESSAGE
@@ -88,7 +88,7 @@ if( defined( 'PHP_MAX_VERSION' )
 
 	$C = 'constant';
 	die(<<<MESSAGE
-		<h2>FATAL ERROR: MantisBT has known issues with PHP {$C('PHP_MAX_VERSION')} or later</strong></h2>
+		<h2>FATAL ERROR: MantisBT {$C('MANTIS_VERSION')} has known issues with PHP {$C('PHP_MAX_VERSION')} or later</strong></h2>
 		<p>Please refer to the <a href='$t_mantis_url'>bug tracker</a> for details.</p>
 		You are running PHP <em>{$C('PHP_VERSION')}</em>. 
 		Please downgrade to an earlier version.
