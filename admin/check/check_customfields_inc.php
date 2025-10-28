@@ -250,7 +250,7 @@ class CheckTextareaMaxLength extends CustomFieldCheck
 		if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA
 			&& $v_length_max > $this->max_textarea_length
 		) {
-			$p_result = 'xxxx';
+			$p_result = '';
 			return false;
 		}
 		return true;
