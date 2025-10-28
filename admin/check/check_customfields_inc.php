@@ -234,7 +234,7 @@ class CheckTextareaMaxLength extends CustomFieldCheck
 
 	public function __construct() {
 		parent::__construct();
-		$this->max_textarea_length = config_get( 'max_textarea_length' );
+		$this->max_textarea_length = config_get_global( 'max_textarea_length' );
 		$this->msg_fail = 'Maximum length of Textarea Custom Field "%s" is bigger than $g_max_textarea_length'
 			. " ($this->max_textarea_length)";
 	}
