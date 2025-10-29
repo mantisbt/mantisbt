@@ -70,10 +70,30 @@ require_once( __DIR__ . '/core/constant_inc.php' );
 
 # Enforce our minimum PHP requirements
 if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
-	echo '<strong>FATAL ERROR: Your version of PHP is too old. '
-		. 'MantisBT requires ' . PHP_MIN_VERSION . ' or newer</strong><br />'
-		. 'Your are running PHP version <em>' . PHP_VERSION . '</em>';
-	die();
+	$C = 'constant';
+	die( <<<MESSAGE
+		<h2>FATAL ERROR: Your version of PHP is too old</h2>
+		<p>MantisBT {$C('MANTIS_VERSION')} requires PHP {$C('PHP_MIN_VERSION')} or newer.</p>
+		You are running version <em>{$C('PHP_VERSION')}</em>.
+		Please upgrade to a newer version.
+		MESSAGE
+	);
+}
+if( defined( 'PHP_MAX_VERSION' )
+	&& version_compare( PHP_VERSION, PHP_MAX_VERSION, '>=' )
+) {
+	# URL to filter by PHP version tag
+	preg_match( '/\d+\.\d+/', PHP_MAX_VERSION, $t_short_version );
+	$t_mantis_url = 'https://mantisbt.org/bugs/search.php?project_id=1&tag_string=PHP%20' . $t_short_version[0];
+
+	$C = 'constant';
+	die(<<<MESSAGE
+		<h2>FATAL ERROR: MantisBT {$C('MANTIS_VERSION')} has known issues with PHP {$C('PHP_MAX_VERSION')} or later</strong></h2>
+		<p>Please refer to the <a href='$t_mantis_url'>bug tracker</a> for details.</p>
+		You are running PHP <em>{$C('PHP_VERSION')}</em>. 
+		Please downgrade to an earlier version.
+		MESSAGE
+	);
 }
 
 ensure_php_extension_loaded( 'mbstring', 'for Unicode (UTF-8) support' );
