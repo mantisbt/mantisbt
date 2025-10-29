@@ -197,6 +197,11 @@ class CheckDateDefaultWithBrackets extends CustomFieldCheck
 	protected string $msg_fail = "Date Custom Field '%s' specifies its Default Value with deprecated curly brackets format.";
 	protected string $msg_info = "Use the same format, but without the '{}', i.e. '%s'. ";
 
+	/**
+	 * @param array       $p_cfdef
+	 * @param string|null $p_result Default value
+	 * @return bool
+	 */
 	public function test( array $p_cfdef, ?string &$p_result ): bool {
 		/**
 		 * @var int        $v_type
@@ -224,40 +229,56 @@ class CheckDateDefaultWithBrackets extends CustomFieldCheck
 }
 
 /**
- * Checks if Textarea Custom Fields maximum length is bigger than $g_max_textarea_length.
+ * Checks if Textarea Custom Fields maximum length and default value are
+ * bigger than $g_max_textarea_length.
  */
 class CheckTextareaMaxLength extends CustomFieldCheck
 {
-	protected string $msg_pass = 'Maximum length of Textarea Custom Fields is smaller than $g_max_textarea_length';
+	protected string $msg_pass = 'Maximum length and Default value of Textarea Custom Fields '
+		. 'are smaller than $g_max_textarea_length';
 
-	private int $max_textarea_length;
+	protected int $max_textarea_length;
 
 	public function __construct() {
 		parent::__construct();
 		$this->max_textarea_length = config_get_global( 'max_textarea_length' );
-		$this->msg_fail = 'Maximum length of Textarea Custom Field "%s" is bigger than $g_max_textarea_length'
+		$this->msg_fail = 'Textarea Custom Field "%s": %s bigger than $g_max_textarea_length'
 			. " ($this->max_textarea_length)";
 	}
 
+	/**
+	 * @param array       $p_cfdef
+	 * @param string|null $p_result List of fields that are too long.
+	 * @return bool
+	 */
 	public function test( array $p_cfdef, ?string &$p_result ): bool {
 		/**
 		 * @var string     $v_name
 		 * @var int        $v_type
 		 * @var int        $v_length_max
+		 * @var string     $v_default_value
 		 */
 		extract( $p_cfdef, EXTR_PREFIX_ALL, 'v');
 
-		if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA
-			&& $v_length_max > $this->max_textarea_length
-		) {
-			$p_result = '';
-			return false;
+		if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+			$t_fields = [];
+			if( $v_length_max > $this->max_textarea_length ) {
+				$t_fields[] = 'Maximum length';
+			}
+			if( strlen( $v_default_value) > $this->max_textarea_length ) {
+				$t_fields[] = 'Default value';
+			}
+			if( $t_fields ) {
+				$p_result = implode( ' and ', $t_fields )
+					. ( count( $t_fields ) == 1 ? ' is' : ' are' );
+				return false;
+			}
 		}
 		return true;
 	}
 
 	public function getFailMessage(string $p_name): string {
-		return sprintf( $this->msg_fail, $p_name );
+		return sprintf( $this->msg_fail, $p_name, $this->results[$p_name][1] );
 	}
 
 }
