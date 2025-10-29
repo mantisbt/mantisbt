@@ -42,13 +42,6 @@ jobs:
           - 8.0
           - 7.4
         experimental: [false]
-        include:
-          - php: 8.4
-            DB: mysqli
-            experimental: true
-          - php: 8.4
-            DB: pgsql
-            experimental: true
 
     env:
       HOSTNAME: localhost
