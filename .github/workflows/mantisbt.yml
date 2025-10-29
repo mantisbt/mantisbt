@@ -43,7 +43,6 @@ jobs:
           - 8.0
           - 7.4
         experimental: [false]
-        include:
 
     env:
       HOSTNAME: localhost
