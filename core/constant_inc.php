@@ -626,6 +626,7 @@ define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 define( 'DB_FIELD_SIZE_HISTORY_VALUE', 255 );
 define( 'DB_FIELD_SIZE_FILENAME', 250 );
+define( 'DB_FIELD_SIZE_CF_DEFAULT_VALUE', 255 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );

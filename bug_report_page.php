@@ -226,6 +226,7 @@ $t_show_additional_info = in_array( 'additional_info', $t_fields );
 $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level( config_get( 'due_date_update_threshold' ), helper_get_current_project(), auth_get_current_user_id() );
 $t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload();
 $t_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
+$t_max_length = config_get_global( 'max_textarea_length' );
 
 # don't index bug report page
 html_robots_noindex();
@@ -573,7 +574,11 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<?php # Newline after opening textarea tag is intentional, see #25839 ?>
-			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="description" name="description" cols="80" rows="10" required>
+			<textarea id="description" name="description" required
+					  class="form-control" <?php echo helper_get_tab_index() ?>
+					  cols="80" rows="10"
+					  maxlength="<?php echo $t_max_length ?>"
+			>
 <?php echo string_textarea( $f_description ) ?>
 </textarea>
 		</td>
@@ -586,7 +591,11 @@ if( $t_show_attachments ) {
 			</th>
 			<td>
 				<?php # Newline after opening textarea tag is intentional, see #25839 ?>
-				<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="steps_to_reproduce" name="steps_to_reproduce" cols="80" rows="10">
+				<textarea id="steps_to_reproduce" name="steps_to_reproduce"
+						  class="form-control" <?php echo helper_get_tab_index() ?>
+						  cols="80" rows="10"
+						  maxlength="<?php echo $t_max_length ?>"
+				>
 <?php echo string_textarea( $f_steps_to_reproduce ) ?>
 </textarea>
 			</td>
@@ -600,7 +609,11 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<?php # Newline after opening textarea tag is intentional, see #25839 ?>
-			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="additional_info" name="additional_info" cols="80" rows="10">
+			<textarea id="additional_info" name="additional_info"
+					  class="form-control" <?php echo helper_get_tab_index() ?>
+					  cols="80" rows="10"
+					  maxlength="<?php echo $t_max_length ?>"
+			>
 <?php echo string_textarea( $f_additional_info ) ?>
 </textarea>
 		</td>

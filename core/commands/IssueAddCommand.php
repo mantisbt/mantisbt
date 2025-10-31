@@ -116,7 +116,6 @@ class IssueAddCommand extends Command {
 				ERROR_EMPTY_FIELD,
 				array( 'summary' ) );
 		}
-
 		$t_summary = $t_issue['summary'];
 
 		if( !isset( $t_issue['description'] ) || is_blank( $t_issue['description'] ) )  {
@@ -125,8 +124,14 @@ class IssueAddCommand extends Command {
 				ERROR_EMPTY_FIELD,
 				array( 'description' ) );
 		}
-
 		$t_description = $t_issue['description'];
+		helper_ensure_longtext_length_valid( $t_description, 'description' );
+
+		$t_steps_to_reproduce = $t_issue['steps_to_reproduce'] ?? '';
+		helper_ensure_longtext_length_valid( $t_steps_to_reproduce, 'steps_to_reproduce' );
+
+		$t_additional_information = $t_issue['additional_information'] ?? '';
+		helper_ensure_longtext_length_valid( $t_additional_information, 'additional_information' );
 
 		if( !isset( $t_issue['project'] ) )  {
 			throw new ClientException(

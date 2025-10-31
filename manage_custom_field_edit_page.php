@@ -148,8 +148,9 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<div class="textarea">
 				<?php # Newline after opening textarea tag is intentional, see #25839 ?>
 				<textarea id="custom-field-default-value-textarea" name="default_value"
-						  class="form-control" cols="80" rows="10" disabled="disabled">
-<?php echo string_attribute( $t_definition['default_value'] ) ?>
+						  class="form-control" cols="80" rows="10" maxlength="255"
+						  disabled="disabled">
+<?php echo string_textarea( $t_definition['default_value'] ) ?>
 </textarea>
 			</div>
 		</td>

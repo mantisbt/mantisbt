@@ -380,7 +380,11 @@ layout_page_begin();
 					<?php echo lang_get( 'add_bugnote_title' ) ?>
 				</th>
 				<td>
-					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" cols="80" rows="7"></textarea>
+					<textarea name="bugnote_text" id="bugnote_text"
+							  class="<?php echo $t_bugnote_class ?>"
+							  cols="80" rows="7"
+							  maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
+					></textarea>
 				</td>
 			</tr>
 <?php

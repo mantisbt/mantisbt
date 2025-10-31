@@ -267,6 +267,8 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	# Event integration
 	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $p_bugnote_text, $c_bug_id );
 
+	helper_ensure_longtext_length_valid( $t_bugnote_text, 'bugnote' );
+
 	# MySQL 4-bytes UTF-8 chars workaround #21101
 	$t_bugnote_text = db_mysql_fix_utf8( $t_bugnote_text );
 
@@ -734,9 +736,10 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	if( $t_old_text == $p_bugnote_text ) {
 		return true;
 	}
+	helper_ensure_longtext_length_valid( $p_bugnote_text, 'bugnote' );
+
 	# MySQL 4-bytes UTF-8 chars workaround #21101
 	$p_bugnote_text = db_mysql_fix_utf8( $p_bugnote_text );
-
 
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );

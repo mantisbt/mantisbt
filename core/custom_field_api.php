@@ -626,6 +626,22 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
+	# Default value length is limited by underlying DB field
+	# (and max_textarea_length, for textarea fields).
+	if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+		$t_max_textarea_length = config_get_global( 'max_textarea_length' );
+		$t_max_length = min( DB_FIELD_SIZE_CF_DEFAULT_VALUE, $t_max_textarea_length );
+	} else {
+		$t_max_length = DB_FIELD_SIZE_CF_DEFAULT_VALUE;
+	}
+	if( strlen( $v_default_value ) > $t_max_length ) {
+		throw new ClientException(
+			"Default value must be $t_max_length characters or less.",
+			ERROR_FIELD_TOO_LONG,
+			[lang_get( 'custom_field_default_value' ), $t_max_length]
+		);
+	}
+
 	if( $v_access_level_rw < $v_access_level_r ) {
 		error_parameters(
 			lang_get( 'custom_field_access_level_r' ) . ', ' .
@@ -638,6 +654,17 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	) {
 		error_parameters( lang_get( 'custom_field_length_min' ) . ', ' . lang_get( 'custom_field_length_max' ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
+	}
+
+	# Ensure max length for textarea fields is not more than allowed
+	if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+		if( $v_length_max > $t_max_textarea_length ) {
+			throw new ClientException(
+				'Maximum Length must be ' . $t_max_textarea_length . ' or less.',
+				ERROR_FIELD_TOO_LONG,
+				[lang_get( 'custom_field_length_max' ), $t_max_textarea_length]
+			);
+		}
 	}
 
 	if( !custom_field_is_name_unique( $v_name, $p_field_id ) ) {
@@ -1223,6 +1250,9 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			# Check the length of the string
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length >= $t_length_min );
 			$t_valid &= ( 0 == $t_length_max ) || ( $t_length <= $t_length_max );
+			if( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+				$t_valid &= $t_length <= config_get_global( 'max_textarea_length' );
+			}
 			break;
 		case CUSTOM_FIELD_TYPE_NUMERIC:
 			# Empty fields are valid

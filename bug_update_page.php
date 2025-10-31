@@ -95,6 +95,7 @@ $t_fields = columns_filter_disabled( $t_fields );
 $t_bug_id = $f_bug_id;
 
 $t_action_button_position = config_get( 'action_button_position' );
+$t_max_textarea_length = config_get_global( 'max_textarea_length' );
 
 $t_top_buttons_enabled = $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH;
 $t_bottom_buttons_enabled = $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH;
@@ -665,7 +666,9 @@ if( $t_show_description ) {
 	echo '</th>';
 	echo '<td colspan="5">';
 	echo '<textarea class="form-control" required ', helper_get_tab_index(),
-		' cols="80" rows="10" id="description" name="description">', "\n",
+		' cols="80" rows="10"',
+		' maxlength="' . $t_max_textarea_length . '"',
+		' id="description" name="description">', "\n",
 		$t_description_textarea, '</textarea>';
 	echo '</td></tr>';
 }
@@ -676,7 +679,9 @@ if( $t_show_steps_to_reproduce ) {
 	echo '<th class="category"><label for="steps_to_reproduce">' . lang_get( 'steps_to_reproduce' ) . '</label></th>';
 	echo '<td colspan="5">';
 	echo '<textarea class="form-control" ', helper_get_tab_index(),
-		' cols="80" rows="10" id="steps_to_reproduce" name="steps_to_reproduce">', "\n",
+		' cols="80" rows="10"',
+		' maxlength="' . $t_max_textarea_length . '"',
+		' id="steps_to_reproduce" name="steps_to_reproduce">', "\n",
 		$t_steps_to_reproduce_textarea, '</textarea>';
 	echo '</td></tr>';
 }
@@ -687,7 +692,9 @@ if( $t_show_additional_information ) {
 	echo '<th class="category"><label for="additional_information">' . lang_get( 'additional_information' ) . '</label></th>';
 	echo '<td colspan="5">';
 	echo '<textarea class="form-control" ', helper_get_tab_index(),
-		' cols="80" rows="10" id="additional_information" name="additional_information">', "\n",
+		' cols="80" rows="10"',
+		' maxlength="' . $t_max_textarea_length . '"',
+		' id="additional_information" name="additional_information">', "\n",
 		$t_additional_information_textarea, '</textarea>';
 	echo '</td></tr>';
 }
@@ -736,7 +743,12 @@ $t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-c
 
 echo '<tr>';
 echo '<th class="category"><label for="bugnote_text">' . lang_get( 'add_bugnote_title' ) . '</label></th>';
-echo '<td colspan="5"><textarea ', helper_get_tab_index(), ' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class, '" cols="80" rows="7"></textarea></td></tr>';
+echo '<td colspan="5"><textarea ', helper_get_tab_index(),
+	' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class,
+	'" cols="80" rows="7"',
+	' maxlength="' . $t_max_textarea_length . '">',
+	'</textarea></td></tr>';
+
 
 # Bugnote Private Checkbox (if permitted)
 if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id ) ) {
