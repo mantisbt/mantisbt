@@ -239,4 +239,19 @@ class EndOfLifeCheck
 		return true;
 	}
 
+	/**
+	 * List of Products handled by the class.
+	 *
+	 * @return array Product constant name
+	 */
+	public static function getProducts() {
+		$t_reflection = new ReflectionClass( __CLASS__ );
+		return array_filter( $t_reflection->getConstants(),
+			function( $t_constant ) {
+				return substr( $t_constant, 0, 7 ) == 'PRODUCT';
+			},
+			ARRAY_FILTER_USE_KEY
+		);
+	}
+
 }
