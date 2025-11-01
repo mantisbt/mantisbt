@@ -29,6 +29,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\admin\check\EndOfLifeCheck;
+
 if( !defined( 'CHECK_DATABASE_INC_ALLOW' ) ) {
 	return;
 }
