@@ -671,7 +671,7 @@ function helper_duration_to_minutes( $p_hhmm, $p_field = 'hhmm' ) {
 	$t_count = count( $t_a );
 	for( $i = 0;$i < $t_count;$i++ ) {
 		# all time parts should be integers and non-negative.
-		if( !is_numeric( $t_a[$i] ) || ( (integer)$t_a[$i] < 0 ) ) {
+		if( !is_numeric( $t_a[$i] ) || ( (int)$t_a[$i] < 0 ) ) {
 			throw new ClientException(
 				sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
 				ERROR_INVALID_FIELD_VALUE,
@@ -691,16 +691,16 @@ function helper_duration_to_minutes( $p_hhmm, $p_field = 'hhmm' ) {
 
 	switch( $t_count ) {
 		case 1:
-			$t_min = (integer)$t_a[0];
+			$t_min = (int)$t_a[0];
 			break;
 		case 2:
-			$t_min = (integer)$t_a[0] * 60 + (integer)$t_a[1];
+			$t_min = (int)$t_a[0] * 60 + (int)$t_a[1];
 			break;
 		case 3:
 			# if seconds included, approximate it to minutes
-			$t_min = (integer)$t_a[0] * 60 + (integer)$t_a[1];
+			$t_min = (int)$t_a[0] * 60 + (int)$t_a[1];
 
-			if( (integer)$t_a[2] >= 30 ) {
+			if( (int)$t_a[2] >= 30 ) {
 				$t_min++;
 			}
 			break;

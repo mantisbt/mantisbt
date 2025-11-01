@@ -136,19 +136,17 @@ $t_unused_user_count = $t_row['unused_user_count'];
 
 # Manage Form BEGIN
 
-$t_prefix_array = array();
+$t_prefix_array = array_merge( range('A', 'Z'), range('0', '9') );
+$t_prefix_array = array_combine( $t_prefix_array, $t_prefix_array );
+$t_prefix_array = array_merge (
+		[ 'ALL' => lang_get( 'filter_all' ) ],
+		$t_prefix_array,
+		[
+			'UNUSED' => lang_get( 'filter_unused' ),
+			'NEW' => lang_get( 'filter_new' ),
+		]
+	);
 
-$t_prefix_array['ALL'] = lang_get( 'filter_all' );
-
-for( $i = 'A'; $i != 'AA'; $i++ ) {
-	$t_prefix_array[$i] = $i;
-}
-
-for( $i = 0; $i <= 9; $i++ ) {
-	$t_prefix_array[(string)$i] = (string)$i;
-}
-$t_prefix_array['UNUSED'] = lang_get( 'filter_unused' );
-$t_prefix_array['NEW'] = lang_get( 'filter_new' );
 ?>
 
 <div class="col-md-12 col-xs-12">

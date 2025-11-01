@@ -77,7 +77,7 @@ if( $f_show_inline ) {
 $f_file_id = gpc_get_int( 'file_id' );
 $f_type	= gpc_get_string( 'type' );
 
-$c_file_id = (integer)$f_file_id;
+$c_file_id = (int)$f_file_id;
 
 # we handle the case where the file is attached to a bug
 # or attached to a project as a project doc.
