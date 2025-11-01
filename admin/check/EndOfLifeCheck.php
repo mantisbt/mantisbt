@@ -31,7 +31,7 @@ use stdClass;
 class EndOfLifeCheck
 {
 	const URL = 'https://endoflife.date/';
-	const URL_API = self::URL . 'api/';
+	const URL_API = self::URL . 'api/v1/';
 
 	/**
 	 * Product names constants, to pass to the constructor.
@@ -122,7 +122,7 @@ class EndOfLifeCheck
 		$t_client = new Client( $t_options );
 
 		try {
-			$t_response = $t_client->get( $this->product . '/' . $t_version . '.json' );
+			$t_response = $t_client->get( 'products/' . $this->product . '/releases/' . $t_version );
 		}
 		catch( GuzzleException $e ) {
 			throw new Exception( "$this->product version $t_version not found.",
@@ -171,25 +171,26 @@ class EndOfLifeCheck
 	 * @return bool True if end-of-life, False if not.
 	 */
 	public function isEOL( string &$p_message = '' ): bool {
-		if( $this->info->eol === false ) {
+		$t_info = $this->info->result;
+		if( $t_info->isEol === false ) {
 			$p_message = '';
 			return false;
 		}
 
 		$p_message = "Version " . htmlspecialchars( $this->prepareVersion() );
-		if( $this->info->eol === true ) {
-			$p_message .= " has reached end-of-life.";
-			$t_eol = true;
-		}
-		else {
+		if( $t_info->eolFrom ) {
 			$t_today = new DateTimeImmutable();
 			$t_eol_date = DateTimeImmutable::createFromFormat( 'Y-m-d',
-				$this->info->eol
+				$t_info->eol
 			);
 			$t_eol = $t_today > $t_eol_date;
 
-			$p_message = "Support for $p_message " . ( $t_eol ? 'ended'
-					: 'ends' ) . " on {$this->info->eol}.";
+			$p_message = "Support for $p_message "
+				. ( $t_eol ? 'ended' : 'ends' )
+				. " on $t_info->eolFrom.";
+		} else {
+			$p_message .= " has reached end-of-life.";
+			$t_eol = true;
 		}
 
 		if( $t_eol ) {
@@ -207,13 +208,13 @@ class EndOfLifeCheck
 	 * @return bool True if LTS, False if not.
 	 */
 	public function isLTS(): bool {
-		return (bool)$this->info->lts;
+		return (bool)$this->info->result->isLts;
 	}
 
 	/**
 	 * Check whether the Version is the latest available release.
 	 *
-	 * Some Products do not provide latest release information
+	 * Some Products do not provide latest release information.
 	 *
 	 * @param string $p_message Optional. If provided, the function will
 	 *                          provide an informational message about the
@@ -223,14 +224,15 @@ class EndOfLifeCheck
 	 *              available.
 	 */
 	public function isLatest( string &$p_message = '' ) {
-		if( !isset( $this->info->latest ) ) {
+		$t_info = $this->info->result;
+		if( empty( $t_info->latest ) ) {
 			$p_message = "Latest Release information is not available.";
 			return true;
 		}
 
-		if( version_compare( $this->info->latest, $this->version, '>' ) ) {
+		if( version_compare( $t_info->latest->name, $this->version, '>' ) ) {
 			# A newer release is available
-			$p_message = "Version {$this->info->latest} was released on {$this->info->latestReleaseDate}.";
+			$p_message = "Version {$t_info->latest->name} was released on {$t_info->latest->date}.";
 			return false;
 		}
 		$p_message = '';
