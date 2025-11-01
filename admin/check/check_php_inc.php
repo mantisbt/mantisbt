@@ -117,7 +117,7 @@ if( $t_release !== false ) {
 
 	# Is there a newer release available ?
 	check_print_test_warn_row(
-		'Using the latest available PHP bug fix release',
+		'PHP ' . $t_release->getVersion() . ' is the latest available bug fix release',
 		$t_release->isLatest( $t_message ),
 		$t_message
 	);

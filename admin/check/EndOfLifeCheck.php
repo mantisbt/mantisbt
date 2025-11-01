@@ -144,6 +144,15 @@ class EndOfLifeCheck
 	}
 
 	/**
+	 * Get Version number being checked.
+	 *
+	 * @return string
+	 */
+	public function getVersion(): string {
+		return $this->version;
+	}
+
+	/**
 	 * Get Release information.
 	 *
 	 * @return stdClass Release information
