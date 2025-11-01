@@ -55,7 +55,7 @@ class CustomFieldsChecks {
 	/**
 	 * @var array Custom Field definitions.
 	 */
-	private array $definitions;
+	private array $definitions = [];
 
 	/**
 	 * @var CustomFieldCheck[] Registered checks.
