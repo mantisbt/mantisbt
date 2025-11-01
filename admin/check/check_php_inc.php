@@ -31,6 +31,8 @@ if( !defined( 'CHECK_PHP_INC_ALLOW' ) ) {
 	return;
 }
 
+use Mantis\admin\check\EndOfLifeCheck;
+
 # MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
