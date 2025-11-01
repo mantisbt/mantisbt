@@ -68,6 +68,11 @@ function mci_account_get_array_by_id( $p_user_id ) {
 			if( !empty( $t_email ) ) {
 				$t_result['email'] = $t_email;
 			}
+
+			$t_email_pending = token_get_value( TOKEN_ACCOUNT_CHANGE_EMAIL, $p_user_id );
+			if( $t_email_pending !== null ) {
+				$t_result['email_pending'] = $t_email_pending;
+			}
 		}
 	}
 	return $t_result;

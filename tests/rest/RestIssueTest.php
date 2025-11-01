@@ -115,6 +115,34 @@ class RestIssueTest extends RestBase {
 		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
+	public function testCreateIssueWithLongText() {
+		$t_long_text = str_repeat( 'x', config_get_global( 'max_textarea_length' ) );
+
+		$t_fields = [ 'description', 'steps_to_reproduce', 'additional_information' ];
+		foreach( $t_fields as $t_field ) {
+			$t_issue_to_add = $this->getIssueToAdd( $t_field );
+
+			# Maximum length
+			$t_issue_to_add[$t_field] = $t_long_text;
+			$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+			$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
+				"Creating an issue with '$t_field' at maximum size should succeed"
+			);
+			$t_body = json_decode( $t_response->getBody(), true );
+			$t_issue = $t_body['issue'];
+			$this->deleteIssueAfterRun( $t_issue['id'] );
+
+			# Too long
+			$t_issue_to_add[$t_field] .= 'TOO LONG';
+			$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+			$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
+				"Creating an issue with '$t_field' longer than max size should fail"
+			);
+		}
+
+		sleep(20);
+	}
+
 	public function testCreateIssueWithEnumIds() {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['status']['id'] = 50; # assigned

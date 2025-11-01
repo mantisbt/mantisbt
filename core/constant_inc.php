@@ -34,8 +34,16 @@ define( 'BAD', 0 );
 define( 'GOOD', 1 );
 define( 'WARN', 2 );
 
-# PHP-related constants
+# PHP version constants. PHP_VERSION:
+# - MUST¹ be >= PHP_MIN_VERSION and < PHP_MAX_VERSION
+# - SHOULD be < PHP_SUPPORTED_VERSION (Later versions have not been tested,
+#   there may be compatibility issues)
+# ¹ Enforced in core.php, MantisBT will halt if condition is not met.
 define( 'PHP_MIN_VERSION', '7.4.0' );
+define( 'PHP_MAX_VERSION', '8.4.0' ); # Do not define (i.e. comment out) if there are no known restrictions
+define( 'PHP_SUPPORTED_VERSION', '8.4' ); # should be defined as X.Y (not X.Y.Z)
+
+# Other PHP-related constants
 define( 'PHP_CLI', 0 );
 define( 'PHP_CGI', 1 );
 
@@ -535,6 +543,7 @@ define( 'TOKEN_AUTHENTICATED', 4 );
 define( 'TOKEN_COLLAPSE', 5 );
 define( 'TOKEN_ACCOUNT_VERIFY', 6 );
 define( 'TOKEN_ACCOUNT_ACTIVATION', 7 );
+define( 'TOKEN_ACCOUNT_CHANGE_EMAIL', 8 );
 define( 'TOKEN_USER', 1000 );
 
 # Token expiry durations (in seconds)
@@ -617,6 +626,7 @@ define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 define( 'DB_FIELD_SIZE_HISTORY_VALUE', 255 );
 define( 'DB_FIELD_SIZE_FILENAME', 250 );
+define( 'DB_FIELD_SIZE_CF_DEFAULT_VALUE', 255 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );

@@ -833,7 +833,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 	foreach( $t_login_methods as $t_login_method ) {
 		# pass the stored password in as the salt
-		if( auth_process_plain_password( $p_test_password, $t_password, $t_login_method ) == $t_password ) {
+		if( auth_process_plain_password( $p_test_password, $t_password, $t_login_method ) === $t_password ) {
 			# Do not support migration to PLAIN, since this would be a crazy thing to do.
 			# Also if we do, then a user will be able to login by providing the MD5 value
 			# that is copied from the database.  See #8467 for more details.

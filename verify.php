@@ -59,7 +59,7 @@ if( !auth_signup_enabled() &&
 	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
 }
 
-$f_user_id = gpc_get_string( 'id' );
+$f_user_id = gpc_get_int( 'id' );
 $f_confirm_hash = gpc_get_string( 'confirm_hash' );
 
 # force logout on the current user if already authenticated
@@ -70,9 +70,13 @@ if( auth_is_user_authenticated() ) {
 	print_header_redirect( 'verify.php?id=' . $f_user_id . '&confirm_hash=' . $f_confirm_hash );
 }
 
+# Make sure the hash is valid and not meant for an e-mail address validation
 $t_token_confirm_hash = token_get_value( TOKEN_ACCOUNT_ACTIVATION, $f_user_id );
-
-if( $t_token_confirm_hash == null || $f_confirm_hash !== $t_token_confirm_hash ) {
+$t_token_change_email = token_get_value( TOKEN_ACCOUNT_CHANGE_EMAIL, $f_user_id );
+if( $t_token_confirm_hash == null
+	|| $f_confirm_hash !== $t_token_confirm_hash
+	|| $t_token_change_email !== null
+) {
 	trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
 }
 

@@ -939,6 +939,37 @@ function helper_get_link_attributes( $p_return_array = true, $p_is_external_link
 }
 
 /**
+ * Checks that a string's length is within the allowed size.
+ *     
+ * @param string $p_string Text to check
+ *
+ * @return bool True if smaller than or equal to the maximum allowed length
+ *              {@see $g_max_textarea_length}.
+ */
+function helper_is_longtext_length_valid( string $p_string ): bool {
+	return mb_strlen( $p_string ) <= config_get_global( 'max_textarea_length' );
+}
+
+/**
+ * Throws error if a string's length is bigger than the allowed maximum.
+ *
+ * @param string $p_string Text to check.
+ * @param string $p_field  Field name.
+ *
+ * @throws ClientException
+ */
+function helper_ensure_longtext_length_valid( string $p_string, string $p_field ): void {
+	if( !helper_is_longtext_length_valid( $p_string ) ) {
+		$t_max_length = config_get_global( 'max_textarea_length' );
+		throw new ClientException(
+			'Long text field "' . $p_field . '" must be shorter than ' . $t_max_length . ' characters.',
+			ERROR_FIELD_TOO_LONG,
+			array( lang_get( $p_field ), $t_max_length )
+		);
+	}
+}
+
+/**
  * Returns the root domain plus TLD from a URL.
  *
  * Also handles ccTLDs.

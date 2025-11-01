@@ -129,6 +129,36 @@ class IssueAddTest extends SoapBase {
 	}
 
 	/**
+	 * Tests that creating an issue with long text fields bigger than the
+	 * allowed maximum size fails.
+	 *
+	 * @return void
+	 */
+	public function testCreateIssueWithLongText() {
+		$t_long_text = str_repeat( 'x', config_get_global( 'max_textarea_length' ) );
+
+		$t_fields = [ 'description', 'steps_to_reproduce', 'additional_information' ];
+		foreach( $t_fields as $t_field ) {
+			$t_issue_to_add = $this->getIssueToAdd();
+			$t_issue_to_add[$t_field] = $t_long_text;
+
+			# Maximum length
+			$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+			$this->deleteAfterRun( $t_issue_id );
+			$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+			$this->assertEquals( $t_issue_to_add['description'], $t_issue->description );
+
+			# Too long
+			$t_issue_to_add[$t_field] .= ' TOO LONG';
+			$this->expectException( SoapFault::class );
+			$this->expectExceptionMessage( 'Long text fields must be shorter' );
+			$this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );;
+		}
+
+		$this->deleteAfterRun( $t_issue_id );
+	}
+
+	/**
 	 * This issue tests the following:
 	 * 1. Creating an issue with some fields that are typically not used at creation time.
 	 *    For example: projection, eta, resolution, status, fixed_in_version, and target_version.

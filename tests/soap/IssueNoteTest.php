@@ -208,4 +208,27 @@ class IssueNoteTest extends SoapBase {
 		} catch ( SoapFault $e ) {
 		}
 	}
+
+	public function testAddNoteWithTextTooLong() {
+		$t_issue_to_add = $this->getIssueToAdd();
+		$t_issue_id = $this->client->mc_issue_add( $this->userName,
+			$this->password,
+			$t_issue_to_add
+		);
+		$this->deleteAfterRun( $t_issue_id );
+
+		$t_note_data = array(
+			'text' => str_repeat( 'x', config_get_global( 'max_textarea_length' ) ),
+			'note_type' => BUGNOTE
+		);
+
+		# Adding note with maximum length should be OK
+		$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
+
+		$t_note_data['text'] .= ' TOO LONG NOW';
+		$this->expectException( SoapFault::class );
+		$this->expectExceptionMessage( 'Long text fields must be shorter' );
+		$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
+	}
+
 }

@@ -206,6 +206,18 @@ $g_main_menu_custom_options = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_max_textarea_length</term>
+			<listitem>
+				<para>Maximum size for long text fields. Applies to: 
+					bug description, steps to reproduce, additional information,
+					bugnotes.
+				</para>
+				<para>Reduces the risk of Denial-of-Service (DoS) attacks
+					(see Issue <ulink url="https://mantisbt.org/bugs/view.php?id=35893">35893</ulink>).
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_wrap_in_preformatted_text</term>
 			<listitem>
 				<para>This flag controls whether pre-formatted text (delimited by HTML pre tags

@@ -33,10 +33,11 @@ use DateTimeImmutable;
 use DateTimeZone;
 use SoapClient;
 
-$t_root_path = dirname( __DIR__, 2 );
+# Includes
+require_once dirname( __DIR__ ) . '/TestConfig.php';
 
-# MantisBT constants
-require_once ( $t_root_path . '/core/constant_inc.php' );
+# MantisBT Core API
+require_mantis_core();
 
 /**
  * Test cases for SoapEnum class.

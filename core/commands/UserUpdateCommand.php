@@ -194,10 +194,7 @@ class UserUpdateCommand extends Command {
 		}
 
 		if( !is_null( $t_new_email ) && $t_new_email !== $t_old_email ) {
-			email_ensure_valid( $t_new_email );
-			email_ensure_not_disposable( $t_new_email );
-			user_ensure_email_unique( $t_new_email, $this->user_id );
-
+			user_ensure_email_valid( $this->user_id, $t_new_email );
 			$this->email = $t_new_email;
 		}
 
@@ -268,7 +265,7 @@ class UserUpdateCommand extends Command {
 		$this->old_user = array(
 			'id' => $this->user_id,
 			'username' => $t_old_username,
-			'real_name' => $t_old_realname,
+			'realname' => $t_old_realname,
 			'email' => $t_old_email,
 			'access_level' => $t_old_access_level,
 			'enabled' => $t_old_enabled,
@@ -278,7 +275,7 @@ class UserUpdateCommand extends Command {
 		$this->new_user = array(
 			'id' => $this->user_id,
 			'username' => $t_new_username ?: $t_old_username,
-			'real_name' => !is_null( $t_new_realname ) ? $t_new_realname : $t_old_realname,
+			'realname' => !is_null( $t_new_realname ) ? $t_new_realname : $t_old_realname,
 			'email' => $t_new_email ?: $t_old_email,
 			'access_level' => $t_new_access_level ?: $t_old_access_level,
 			'enabled' => !is_null( $t_new_enabled ) ? $t_new_enabled : $t_old_enabled,
@@ -291,7 +288,7 @@ class UserUpdateCommand extends Command {
 	 *
 	 * @return array Command response
 	 *
-	 * @throws ClientException
+	 * @throws ClientException|\PHPMailer\PHPMailer\Exception
 	 */
 	protected function process() {
 		$this->update_user( $this->new_user );
@@ -326,27 +323,53 @@ class UserUpdateCommand extends Command {
 	 * authorization, triggering of events, etc.
 	 *
 	 * @param array $p_user User data
+	 *
 	 * @return void
+	 * @throws ClientException
 	 */
 	private function update_user( $p_user ) {
-		db_param_push();
+		$t_user_id = array_shift( $p_user );
 
-		$t_query = 'UPDATE {user}
-			SET username=' . db_param() . ', email=' . db_param() . ',
-				access_level=' . db_param() . ', enabled=' . db_param() . ',
-				protected=' . db_param() . ', realname=' . db_param() . '
-			WHERE id=' . db_param();
+		# Email was changed
+		if( $this->email ) {
+			# Change made by user themselves
+			if( auth_get_current_user_id() == $this->user_id )  {
+				if( config_get( 'send_reset_password' ) ) {
+					# Temporarily store the new email address in a token
+					token_set( TOKEN_ACCOUNT_CHANGE_EMAIL,
+						$this->email,
+						TOKEN_EXPIRY_ACCOUNT_ACTIVATION,
+						$t_user_id
+					);
 
-		$t_query_params = array(
-			$p_user['username'],
-			$p_user['email'],
-			$p_user['access_level'],
-			$p_user['enabled'],
-			$p_user['protected'],
-			$p_user['real_name'],
-			$p_user['id'] );
+					# Send verification mail
+					$t_confirm_hash = auth_generate_confirm_hash( $this->user_id );
+					token_set( TOKEN_ACCOUNT_ACTIVATION,
+						$t_confirm_hash,
+						TOKEN_EXPIRY_ACCOUNT_ACTIVATION,
+						$t_user_id
+					);
+					email_send_email_verification_url( $this->user_id, $t_confirm_hash, $p_user['email'] );
 
-		db_query( $t_query, $t_query_params );
+					# Do not update the user record
+					unset( $p_user['email'] );
+				}
+			} else {
+				# Clear any pending change email token
+				token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $this->user_id );
+			}
+		}
+
+		$t_query = new DbQuery( 'UPDATE {user} SET ' );
+		$t_sql_columns = [];
+		foreach( $p_user as $t_col => $t_value ) {
+			$t_sql_columns[] = $t_col . ' = ' . $t_query->param( $t_value );
+		}
+		$t_query->append_sql(
+			implode( ', ', $t_sql_columns )
+			. ' WHERE id=' . $t_query->param( $t_user_id )
+		);
+		$t_query->execute();
 	}
 }
 

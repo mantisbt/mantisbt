@@ -96,6 +96,7 @@ if( !user_is_lost_password_request_allowed( $t_user_id ) ) {
 
 $t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
 token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $t_user_id );
+token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $t_user_id );
 email_send_confirm_hash_url( $t_user_id, $t_confirm_hash );
 
 user_increment_lost_password_in_progress_count( $t_user_id );

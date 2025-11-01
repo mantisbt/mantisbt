@@ -241,6 +241,17 @@ abstract class RestBase extends MantisTestCase {
 	}
 
 	/**
+	 * Skip if time tracking is not enabled
+	 * @return void
+	 */
+	protected function skipIfTimeTrackingIsNotEnabled() {
+		$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+		if( !$t_time_tracking_enabled ) {
+			$this->markTestSkipped( 'Time tracking is not enabled' );
+		}
+	}
+
+	/**
 	 * Registers an issue for deletion after the test method has run
 	 *
 	 * @param integer $p_issue_id Issue identifier.
