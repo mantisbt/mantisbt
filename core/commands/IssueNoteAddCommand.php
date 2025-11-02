@@ -55,6 +55,9 @@ use Mantis\Exceptions\ClientException;
  *         "size": 114
  *       }
  *     ]
+ *   },
+ *   "options": {
+ *     "skip_moderation": false
  *   }
  * }
  */
@@ -203,12 +206,14 @@ class IssueNoteAddCommand extends Command {
 				throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
 			}
 
-			# Check if note will be moderated - files not allowed if so
-			$t_will_moderate = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE_CHECK', array( $t_issue_id ) );
-			if( $t_will_moderate ) {
-				throw new ClientException(
-					'Files cannot be attached to notes that require moderation.',
-					ERROR_ACCESS_DENIED );
+			if( !$this->option( 'skip_moderation', false ) ) {
+				# Check if note will be moderated - files not allowed if so
+				$t_will_moderate = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE_CHECK', array( $t_issue_id ) );
+				if( $t_will_moderate ) {
+					throw new ClientException(
+						'Files cannot be attached to notes that require moderation.',
+						ERROR_ACCESS_DENIED );
+				}
 			}
 		}
 
@@ -243,10 +248,13 @@ class IssueNoteAddCommand extends Command {
 		# Pass the entire payload with issue_id added for context
 		$t_note_data = $this->data['payload'];
 		$t_note_data['issue_id'] = $this->issue->id;
-		$t_moderated = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE', array( $t_note_data ) );
-		if( $t_moderated ) {
-			# Plugin handled the note, return special response
-			return array( 'moderated' => true );
+
+		if( !$this->option( 'skip_moderation', false ) ) {
+			$t_moderated = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE', array( $t_note_data ) );
+			if( $t_moderated ) {
+				# Plugin handled the note, return special response
+				return array( 'moderated' => true );
+			}
 		}
 
 		# We always set the note type to BUGNOTE, and the API will overwrite it with TIME_TRACKING

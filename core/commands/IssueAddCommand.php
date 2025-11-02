@@ -54,8 +54,9 @@ use Mantis\Exceptions\ClientException;
  *       "master_issue_id": 1234,
  *       "relationship_type": 1,      # BUG_RELATED
  *       "copy_files": true,
- *       "copy_notes": true,
- *     }
+ *       "copy_notes": true
+ *     },
+ *     "skip_moderation": false
  *   }
  * }
  */
@@ -322,12 +323,14 @@ class IssueAddCommand extends Command {
 					ERROR_ACCESS_DENIED );
 			}
 
-			# Check if issue will be moderated - files not allowed if so
-			$t_will_moderate = event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', array() );
-			if( $t_will_moderate ) {
-				throw new ClientException(
-					'Files cannot be attached to issues that require moderation.',
-					ERROR_ACCESS_DENIED );
+			if( !$this->option( 'skip_moderation', false ) ) {
+				# Check if issue will be moderated - files not allowed if so
+				$t_will_moderate = event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', array() );
+				if( $t_will_moderate ) {
+					throw new ClientException(
+						'Files cannot be attached to issues that require moderation.',
+						ERROR_ACCESS_DENIED );
+				}
 			}
 
 			foreach( $t_issue['files'] as $t_file ) {
@@ -358,12 +361,14 @@ class IssueAddCommand extends Command {
 	protected function process() {
 		$t_issue = $this->payload( 'issue' );
 
-		# Allow plugins to intercept for moderation
-		# If any plugin returns true, it has queued the issue for moderation
-		$t_moderated = event_signal( 'EVENT_REPORT_BUG_MODERATE', array( $t_issue ) );
-		if( $t_moderated ) {
-			# Plugin handled the issue, return special response
-			return array( 'moderated' => true );
+		if( !$this->option( 'skip_moderation', false ) ) {
+			# Allow plugins to intercept for moderation
+			# If any plugin returns true, it has queued the issue for moderation
+			$t_moderated = event_signal( 'EVENT_REPORT_BUG_MODERATE', array( $t_issue ) );
+			if( $t_moderated ) {
+				# Plugin handled the issue, return special response
+				return array( 'moderated' => true );
+			}
 		}
 
 		# Create the bug
