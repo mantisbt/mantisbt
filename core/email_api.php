@@ -708,7 +708,7 @@ function email_send_email_verification_url( $p_user_id, $p_confirm_hash, $p_new_
 		. lang_get( 'new_account_do_not_reply' );
 
 	# Send regardless of mail notification preferences
-	email_store( $p_new_email, $t_subject, $t_message, null, true, [$t_old_email] );
+	email_store( $p_new_email, $t_subject, $t_message, [], true, [$t_old_email] );
 	log_event( LOG_EMAIL, 'Email verification message for user @U%d sent to %s', $p_user_id, $p_new_email );
 
 	lang_pop();
