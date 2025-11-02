@@ -34,6 +34,12 @@ class EndOfLifeCheck
 	const URL_API = self::URL . 'api/v1/';
 
 	/**
+	 * Directory to store dumps of endoflife.date for offline usage.
+	 * @see dumpProductInfo()
+	 */
+	const DATA_DIR = 'eol_data/';
+
+	/**
 	 * Product names constants, to pass to the constructor.
 	 *
 	 * @see https://endoflife.date/api/all.json Full list of supported products.
@@ -240,18 +246,50 @@ class EndOfLifeCheck
 	}
 
 	/**
-	 * List of Products handled by the class.
+	 * Dump endoflife.date information for supported Products for offline usage.
 	 *
-	 * @return array Product constant name
+	 * Data will be stored in JSON format in the {@see self::DATA_DIR} directory
+	 * (one file per Product).
+	 *
+	 * @return void
+	 * @throws Exception
 	 */
-	public static function getProducts() {
+	public static function dumpProductInfo() {
+		# Get list of Products handled by the class
 		$t_reflection = new ReflectionClass( __CLASS__ );
-		return array_filter( $t_reflection->getConstants(),
+		$t_products = array_filter( $t_reflection->getConstants(),
 			function( $t_constant ) {
 				return substr( $t_constant, 0, 7 ) == 'PRODUCT';
 			},
 			ARRAY_FILTER_USE_KEY
 		);
+
+		# Create data directory if necessary
+		if( !file_exists( self::DATA_DIR ) ) {
+			if( !mkdir( self::DATA_DIR ) ) {
+				throw new Exception( "Failed to create directory '" . self::DATA_DIR . "'" );
+			};
+		}
+
+		# Retrieve product info from endoflife.date and save it
+		foreach( $t_products as $t_product ) {
+			$t_options = array(
+				'base_uri' => self::URL_API,
+			);
+			$t_client = new Client( $t_options );
+
+			try {
+				$t_response = $t_client->get( 'products/' . $t_product );
+			}
+			catch( GuzzleException $e ) {
+				throw new Exception( $t_product . " not found.", 0, $e );
+			}
+
+			$t_filename = self::DATA_DIR . $t_product . '.json';
+			if( false === file_put_contents( $t_filename, $t_response->getBody() ) ) {
+				throw new Exception( "Failed to create file '$t_filename'" );
+			}
+		}
 	}
 
 }
