@@ -691,6 +691,7 @@ define( 'DB_MAX_INT', 2147483647 );
 # HTTP Status Codes
 define( 'HTTP_STATUS_SUCCESS', 200 );
 define( 'HTTP_STATUS_CREATED', 201 );
+define( 'HTTP_STATUS_ACCEPTED', 202 );
 define( 'HTTP_STATUS_NO_CONTENT', 204 );
 define( 'HTTP_STATUS_NOT_MODIFIED', 304 );
 define( 'HTTP_STATUS_BAD_REQUEST', 400 );

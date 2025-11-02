@@ -202,6 +202,14 @@ class IssueNoteAddCommand extends Command {
 			if( !file_allow_bug_upload( $this->issue->id, $this->reporterId ) ) {
 				throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
 			}
+
+			# Check if note will be moderated - files not allowed if so
+			$t_will_moderate = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE_CHECK', array( $t_issue_id ) );
+			if( $t_will_moderate ) {
+				throw new ClientException(
+					'Files cannot be attached to notes that require moderation.',
+					ERROR_ACCESS_DENIED );
+			}
 		}
 
 		# Can reporter add time tracking information?
@@ -228,6 +236,17 @@ class IssueNoteAddCommand extends Command {
 			# categories and handlers lists etc.
 			global $g_project_override;
 			$g_project_override = $this->issue->project_id;
+		}
+
+		# Allow plugins to intercept for moderation
+		# If any plugin returns true, it has queued the note for moderation
+		# Pass the entire payload with issue_id added for context
+		$t_note_data = $this->data['payload'];
+		$t_note_data['issue_id'] = $this->issue->id;
+		$t_moderated = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE', array( $t_note_data ) );
+		if( $t_moderated ) {
+			# Plugin handled the note, return special response
+			return array( 'moderated' => true );
 		}
 
 		# We always set the note type to BUGNOTE, and the API will overwrite it with TIME_TRACKING

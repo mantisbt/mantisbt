@@ -322,6 +322,14 @@ class IssueAddCommand extends Command {
 					ERROR_ACCESS_DENIED );
 			}
 
+			# Check if issue will be moderated - files not allowed if so
+			$t_will_moderate = event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', array() );
+			if( $t_will_moderate ) {
+				throw new ClientException(
+					'Files cannot be attached to issues that require moderation.',
+					ERROR_ACCESS_DENIED );
+			}
+
 			foreach( $t_issue['files'] as $t_file ) {
 				$t_name = $t_file['name'];
 				if( strlen( $t_name ) > DB_FIELD_SIZE_FILENAME ) {
@@ -349,6 +357,14 @@ class IssueAddCommand extends Command {
 	 */
 	protected function process() {
 		$t_issue = $this->payload( 'issue' );
+
+		# Allow plugins to intercept for moderation
+		# If any plugin returns true, it has queued the issue for moderation
+		$t_moderated = event_signal( 'EVENT_REPORT_BUG_MODERATE', array( $t_issue ) );
+		if( $t_moderated ) {
+			# Plugin handled the issue, return special response
+			return array( 'moderated' => true );
+		}
 
 		# Create the bug
 		$t_issue_id = $this->issue->create();

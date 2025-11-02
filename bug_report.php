@@ -221,12 +221,12 @@ if( $t_status != 0 ) {
 }
 
 $t_steps_to_reproduce = gpc_get_string( 'steps_to_reproduce', null );
-if( $t_steps_to_reproduce !== null ) {
+if( $t_steps_to_reproduce !== null && !is_blank( $t_steps_to_reproduce ) ) {
 	$t_issue['steps_to_reproduce'] = $t_steps_to_reproduce;
 }
 
 $t_additional_info = gpc_get_string( 'additional_info', null );
-if( $t_additional_info !== null ) {
+if( $t_additional_info !== null && !is_blank( $t_additional_info ) ) {
 	$t_issue['additional_information'] = $t_additional_info;
 }
 
@@ -264,9 +264,20 @@ if( $f_master_bug_id > 0 ) {
 
 $t_command = new IssueAddCommand( $t_data );
 $t_result = $t_command->execute();
-$t_issue_id = (int)$t_result['issue_id'];
 
 form_security_purge( 'bug_report' );
+
+# Check if issue was sent for moderation
+if( isset( $t_result['moderated'] ) && $t_result['moderated'] ) {
+	# Show success page for moderation
+	layout_page_header();
+	layout_page_begin();
+	html_operation_successful( 'view_all_bug_page.php', lang_get( 'issue_submitted_for_moderation' ) );
+	layout_page_end();
+	exit;
+}
+
+$t_issue_id = (int)$t_result['issue_id'];
 
 if( $f_report_stay ) {
 	$t_fields = array(

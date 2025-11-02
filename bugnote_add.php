@@ -67,8 +67,18 @@ $t_data = array(
 );
 
 $t_command = new IssueNoteAddCommand( $t_data );
-$t_command->execute();
+$t_result = $t_command->execute();
 
 form_security_purge( 'bugnote_add' );
+
+# Check if note was sent for moderation
+if( isset( $t_result['moderated'] ) && $t_result['moderated'] ) {
+	# Show success page for moderation
+	layout_page_header();
+	layout_page_begin();
+	html_operation_successful( string_get_bug_view_url( $f_bug_id ), lang_get( 'note_submitted_for_moderation' ) );
+	layout_page_end();
+	exit;
+}
 
 print_header_redirect_view( $f_bug_id );
