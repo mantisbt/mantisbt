@@ -245,12 +245,9 @@ class IssueNoteAddCommand extends Command {
 
 		# Allow plugins to intercept for moderation
 		# If any plugin returns true, it has queued the note for moderation
-		# Pass the entire payload with issue_id added for context
-		$t_note_data = $this->data['payload'];
-		$t_note_data['issue_id'] = $this->issue->id;
-
 		if( !$this->option( 'skip_moderation', false ) ) {
-			$t_moderated = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE', array( $t_note_data ) );
+			$t_note_data = $this->data['payload'];
+			$t_moderated = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE', array( $this->issue->id, $t_note_data ) );
 			if( $t_moderated ) {
 				# Plugin handled the note, return special response
 				return array( 'moderated' => true );

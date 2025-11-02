@@ -507,6 +507,7 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Issue ID to add the note to</para></listitem>
 					<listitem><para>&lt;Array&gt;: Note data array from the request payload (command format)</para></listitem>
 				</itemizedlist>
 
