@@ -504,6 +504,7 @@ $s_lost_password_title = 'بازنشانی رمز عبور';
 $s_lost_password_done_title = 'پیام رمز عبور ارسال شد';
 $s_lost_password_subject = 'بازنشانی رمز عبور';
 $s_lost_password_confirm_hash_OK = 'تأییدیه شما قبول شد. لطفاً رمز عبورتان را به​روز کنید.';
+$s_verify_email_title = 'تأیید نشانی ایمیل';
 $s_open_and_assigned_to_me_label = 'مسائل باز و اختصاص داده شده به من:';
 $s_open_and_reported_to_me_label = 'مسائل باز و گزارش شده توسط من:';
 $s_newer_news_link = 'اخبار جدیدتر';

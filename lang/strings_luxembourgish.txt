@@ -222,6 +222,7 @@ $s_enter_password = 'Passwuert fir \'%s\' aginn';
 $s_select_project_button = 'Projet eraussichen';
 $s_lost_password_title = 'Passwuert zerécksetzen';
 $s_lost_password_subject = 'Passwuert zerécksetzen';
+$s_verify_email_title = 'E-Mail-Adress verifizéieren';
 $s_newer_news_link = 'Méi nei Neiegkeeten';
 $s_older_news_link = 'Méi al Neiegkeeten';
 $s_archives = 'Archiven';

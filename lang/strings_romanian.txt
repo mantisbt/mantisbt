@@ -44,6 +44,7 @@
  * @author KlaudiuMihaila
  * @author Minisarm
  * @author Popetedenis
+ * @author SZ475
  * @author Saturnian
  * @author Stelistcristi
  */
@@ -212,7 +213,7 @@ $s_reset_request_msg = 'Cineva (probabil dumneavoastră) a solicitat o schimbare
 Dacă tu ai cerut această verificare, vizitează adresa următoare pentru a-ți modifica parola:';
 $s_reset_request_in_progress_msg = 'Dacă tu ai furnizat corect numele de user și adresa de e-mail pentru contul tău, vă vom trimite acum un mesaj de confirmare pe acestă adresă de e-mail. Odată ce ați recepționat mesajul, urmărește instrucțiunile trimise pentru a schimba parola contului tău.';
 $s_email_notification_title_for_status_bug_new = 'Următoarea problemă are acum starea NOU (din nou)';
-$s_email_notification_title_for_status_bug_feedback = 'Următoarea problemă necesită o OPINIE din partea dumneavoastră.';
+$s_email_notification_title_for_status_bug_feedback = 'Următoarea problemă necesită FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Următoarea problemă a vost VĂZUTĂ.';
 $s_email_notification_title_for_status_bug_confirmed = 'Următoarea problemă a fost CONFIRMATĂ.';
 $s_email_notification_title_for_status_bug_assigned = 'Următoarea problemă a fost ATRIBUITĂ.';
@@ -279,7 +280,7 @@ $s_current_password = 'Parolă curentă';
 $s_access_level = 'Nivel de acces';
 $s_access_level_label = 'Nivel de acces';
 $s_update_user_button = 'Modifică';
-$s_verify_warning = 'Informațiile contului tău au fost verificate. Mesajul de confirmarea al contului care l-ați primit este acum valid.';
+$s_verify_warning = 'Informațiile contului dumneavoastră au fost verificate.';
 $s_verify_change_password = 'Trebuie să introduceți o parolă aici pentru a vă putea identifica din nou.';
 $s_default_account_preferences_title = 'Preferințe implicite';
 $s_default_project = 'Proiect implicit';
@@ -288,7 +289,7 @@ $s_minutes = 'minute';
 $s_redirect_delay = 'Interval de redirecționare';
 $s_seconds = 'secunde';
 $s_with_minimum_severity = 'Cu severitatea minimă';
-$s_bugnote_order = 'Mod de sortare comentarii';
+$s_bugnote_order = 'Ordinea de sortare a activităților';
 $s_bugnote_order_asc = 'ascendent';
 $s_bugnote_order_desc = 'descendent';
 $s_email_on_new = 'Trimite e-mail la problemă nouă';
@@ -364,7 +365,7 @@ $s_bugnote_add_resolve_button = 'Adaugă comentariu';
 $s_from = 'De la';
 $s_to = 'La';
 $s_sent_you_this_reminder_about = 'ți-a trimis această notificare despre';
-$s_bug_reminder = 'Trimite o notificare';
+$s_bug_reminder = 'Trimiteți o reamintire';
 $s_reminder_sent_to = 'Notificare trimisă către';
 $s_reminder_sent_none = 'Nicio notificare nu a putut fi trimisă';
 $s_reminder_list_truncated = 'lista destinatarilor trunchiată';
@@ -489,18 +490,18 @@ $s_default_filter = 'Filtru implicit';
 $s_create_filter_link = 'Creează Permalink';
 $s_create_short_link = 'Creează Legătură scurtă';
 $s_filter_permalink = 'Următoarea este o legătură permanentă la prezentul filtru configurat:';
-$s_manage_users_link = 'Conturi';
-$s_manage_projects_link = 'Proiectele';
+$s_manage_users_link = 'Utilizatori';
+$s_manage_projects_link = 'Proiecte';
 $s_manage_custom_field_link = 'Câmpuri personalizate';
-$s_manage_global_profiles_link = 'Profile globale';
-$s_manage_plugin_link = 'Configurează plugin-uri';
+$s_manage_global_profiles_link = 'Profiluri globale';
+$s_manage_plugin_link = 'Plugin-uri';
 $s_permissions_summary_report = 'Raport permisiuni';
 $s_manage_config_link = 'Configurație';
 $s_manage_threshold_config = 'Prag flux lucru';
 $s_manage_email_config = 'Notificări e-mail';
 $s_manage_workflow_config = 'Tranziții flux de lucru';
 $s_manage_workflow_graph = 'Graficul fluxului de lucru';
-$s_manage_tags_link = 'Configurează etichete';
+$s_manage_tags_link = 'Etichete';
 $s_create_new_account_link = 'Crează cont';
 $s_projects_link = 'Proiecte';
 $s_documentation_link = 'Documentație';
