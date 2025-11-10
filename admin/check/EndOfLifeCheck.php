@@ -173,15 +173,6 @@ class EndOfLifeCheck
 	}
 
 	/**
-	 * Get Release information.
-	 *
-	 * @return stdClass Release information
-	 */
-	public function getInfo(): stdClass {
-		return $this->info;
-	}
-
-	/**
 	 * Check whether the Version is end-of life.
 	 *
 	 * @param string $p_message Optional. If provided, the function will
