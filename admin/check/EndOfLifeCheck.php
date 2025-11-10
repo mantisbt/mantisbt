@@ -35,7 +35,7 @@ class EndOfLifeCheck
 
 	/**
 	 * Directory to store dumps of endoflife.date for offline usage.
-	 * @see dumpProductInfo()
+	 * @see dumpProductInfo(), getDataDir()
 	 */
 	const DATA_DIR = 'eol_data/';
 
@@ -251,6 +251,15 @@ class EndOfLifeCheck
 	}
 
 	/**
+	 * Get full path to directory where offline data files are stored.
+	 *
+	 * @return string
+	 */
+	public static function getDataDir() {
+		return __DIR__ . '/' . self::DATA_DIR;
+	}
+
+	/**
 	 * Dump endoflife.date information for supported Products for offline usage.
 	 *
 	 * Data will be stored in JSON format in the {@see self::DATA_DIR} directory
@@ -270,10 +279,11 @@ class EndOfLifeCheck
 		);
 
 		# Create data directory if necessary
-		if( !file_exists( self::DATA_DIR ) ) {
-			if( !mkdir( self::DATA_DIR ) ) {
-				throw new Exception( "Failed to create directory '" . self::DATA_DIR . "'" );
-			};
+		$t_dir = self::getDataDir();
+		if( !file_exists( $t_dir ) ) {
+			if( !mkdir( $t_dir ) ) {
+				throw new Exception( "Failed to create directory '$t_dir'" );
+			}
 		}
 
 		# Retrieve product info from endoflife.date and save it
@@ -290,7 +300,7 @@ class EndOfLifeCheck
 				throw new Exception( $t_product . " not found.", 0, $e );
 			}
 
-			$t_filename = self::DATA_DIR . $t_product . '.json';
+			$t_filename = $t_dir . $t_product . '.json';
 			if( false === file_put_contents( $t_filename, $t_response->getBody() ) ) {
 				throw new Exception( "Failed to create file '$t_filename'" );
 			}
