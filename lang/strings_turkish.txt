@@ -66,6 +66,7 @@
  * @author Melissadilara
  * @author MuratTheTurkish
  * @author Rapsar
+ * @author Sakblue
  * @author SaldırganSincap
  * @author Sayginer
  * @author Sezgin İbiş
@@ -542,6 +543,10 @@ $s_lost_password_done_title = 'Parola İletisi Gönderildi';
 $s_lost_password_subject = 'Parola Sıfırlama';
 $s_lost_password_info = 'Şifrenizi hatırlayamıyorsanız, lütfen isminizi ve mail adresinizi girin.<br /><br />Eğer girdiğiniz mail adresi geçerli ise, hesabınıza e-mail yoluyla doğrulama kodu içeren özel bir URL gönderilecektir. Lütfen şifrenizi değiştirmek için bu bağlantıyı takip edin.';
 $s_lost_password_confirm_hash_OK = 'Onay kabul edilmiştir. Lütfen şifrenizi güncelleyin.';
+$s_verify_email_title = 'E-posta Adresini Doğrulayın';
+$s_verify_email_pending = 'Yeni e-posta adresi " %1$s " doğrulanmayı bekliyor.';
+$s_verify_email_warning = 'Yeni e-posta adresiniz " %1$s " doğrulandı.';
+$s_verify_email_confirm_msg = 'E-posta adresinin değiştirilmesini onaylamak için, bir onay mesajı "%1$s" e gönderildi. Eski adres, yeni adres doğrulanana kadar aktif kalacak.';
 $s_open_and_assigned_to_me_label = 'Aç ve bana atandı:';
 $s_open_and_reported_to_me_label = 'Aç ve bana göre rapor:';
 $s_newer_news_link = 'Yeni Haberler';
