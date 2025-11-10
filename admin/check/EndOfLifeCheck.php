@@ -69,6 +69,11 @@ class EndOfLifeCheck
 	protected stdClass $info;
 
 	/**
+	 * @var bool True if EOL data was retrieved from local data file.
+	 */
+	protected bool $local_data = false;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param string $p_product Product to check (use one of the PRODUCT_*
@@ -135,6 +140,7 @@ class EndOfLifeCheck
 		}
 		catch( TransferException $e ) {
 			# Could not connect to endoflife.date - try local data
+			$this->local_data = true;
 			$t_filename = self::getDataDir() . $this->product . '.json';
 
 			$t_json = file_get_contents( $t_filename );
@@ -191,6 +197,26 @@ class EndOfLifeCheck
 				self::DATA_DIR . $t_filename,
 				$t_filename
 			);
+	}
+
+	/**
+	 * Information message to display on Admin Check.
+	 *
+	 * Includes HTML link pointing to the endoflife.date product page {@see getUrl()}
+	 * and a reference to the local JSON data file if the site is not reachable.
+	 *
+	 * @return string
+	 */
+	public function getCheckInfoMessage(): string {
+		/** @noinspection HtmlUnknownTarget */
+		$t_eol_link = sprintf( '<a href="%1$s">%1$s</a>', $this->getUrl() );
+
+		if( $this->local_data ) {
+			$t_source = $this->getLocalFileLink() . " ($t_eol_link was not reachable)";
+		} else {
+			$t_source = $t_eol_link;
+		}
+		return "Release information retrieved from $t_source";
 	}
 
 	/**
