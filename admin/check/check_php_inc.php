@@ -88,12 +88,8 @@ check_print_test_warn_row(
 # Note: no need to check for minimum supported version as core.php will trigger
 # a fatal error if PHP is too old.
 try {
-	/** @noinspection HtmlUnknownTarget */
-	$t_url_link = '<a href="%1$s">%1$s</a>';
-
 	$t_release = new EndOfLifeCheck( EndOfLifeCheck::PRODUCT_PHP, PHP_VERSION );
-	$t_message = 'Release information retrieved from '
-		. sprintf( $t_url_link, $t_release->getUrl() );
+	$t_message = $t_release->getCheckInfoMessage();
 }
 catch( Exception $e ) {
 	$t_message = EndOfLifeCheck::getInfoMessageFromException( $e );

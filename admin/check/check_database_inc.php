@@ -237,12 +237,8 @@ check_print_test_row(
 # Database version End-of-life and Support checks
 # Get info from https://endoflife.date/
 try {
-	/** @noinspection HtmlUnknownTarget */
-	$t_url_link = '<a href="%1$s">%1$s</a>';
-
 	$t_release = new EndOfLifeCheck( $t_eol_db_type, $t_db_version );
-	$t_message = 'Release information retrieved from '
-		. sprintf( $t_url_link, $t_release->getUrl() );
+	$t_message = $t_release->getCheckInfoMessage();
 }
 catch( Exception $e ) {
 	$t_message = EndOfLifeCheck::getInfoMessageFromException( $e );
