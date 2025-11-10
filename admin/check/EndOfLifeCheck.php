@@ -265,10 +265,10 @@ class EndOfLifeCheck
 	 * Data will be stored in JSON format in the {@see self::DATA_DIR} directory
 	 * (one file per Product).
 	 *
-	 * @return void
+	 * @return array List of products [constant => product name]
 	 * @throws Exception
 	 */
-	public static function dumpProductInfo() {
+	public static function dumpProductInfo(): array {
 		# Get list of Products handled by the class
 		$t_reflection = new ReflectionClass( __CLASS__ );
 		$t_products = array_filter( $t_reflection->getConstants(),
@@ -305,6 +305,8 @@ class EndOfLifeCheck
 				throw new Exception( "Failed to create file '$t_filename'" );
 			}
 		}
+
+		return $t_products;
 	}
 
 }
