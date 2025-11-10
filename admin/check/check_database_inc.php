@@ -236,7 +236,6 @@ check_print_test_row(
 
 # Database version End-of-life and Support checks
 # Get info from https://endoflife.date/
-
 try {
 	/** @noinspection HtmlUnknownTarget */
 	$t_url_link = '<a href="%1$s">%1$s</a>';
@@ -246,17 +245,14 @@ try {
 		. sprintf( $t_url_link, $t_release->getUrl() );
 }
 catch( Exception $e ) {
-	$t_message = 'Failed to retrieve release information from '
-		. sprintf( $t_url_link, EndOfLifeCheck::URL ) . ': '
-		. $e->getMessage() . '<br>'
-		. $e->getPrevious()->getMessage();
+	$t_message = EndOfLifeCheck::getInfoMessageFromException( $e );
 	$t_release = false;
 }
 check_print_test_warn_row(
 	'Database End-of-Life support check',
 	$t_release !== false,
 	$t_message
-	);
+);
 
 if( $t_release !== false ) {
 	# Has reached End Of Life ?

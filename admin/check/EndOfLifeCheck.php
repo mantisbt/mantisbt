@@ -150,6 +150,20 @@ class EndOfLifeCheck
 	}
 
 	/**
+	 * Information message to display in case the object could not be constructed.
+	 *
+	 * @param Exception $e
+	 * @return string
+	 */
+	public static function getInfoMessageFromException( Exception $e ): string {
+		/** @noinspection HtmlUnknownTarget */
+		return 'Failed to retrieve release information from '
+			. sprintf( '<a href="%1$s">%1$s</a>', EndOfLifeCheck::URL ) . ': '
+			. $e->getMessage() . '<br>'
+			. $e->getPrevious()->getMessage();
+	}
+
+	/**
 	 * Get Version number being checked.
 	 *
 	 * @return string
