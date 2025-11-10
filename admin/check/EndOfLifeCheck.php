@@ -20,6 +20,8 @@ use DateTimeImmutable;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\TransferException;
+use GuzzleHttp\RequestOptions;
 use ReflectionClass;
 use stdClass;
 
@@ -124,17 +126,46 @@ class EndOfLifeCheck
 
 		$t_options = array(
 			'base_uri' => self::URL_API,
+			RequestOptions::TIMEOUT  => 1.0,
 		);
 		$t_client = new Client( $t_options );
 
 		try {
 			$t_response = $t_client->get( 'products/' . $this->product . '/releases/' . $t_version );
 		}
+		catch( TransferException $e ) {
+			# Could not connect to endoflife.date - try local data
+			$t_filename = self::getDataDir() . $this->product . '.json';
+
+			$t_json = file_get_contents( $t_filename );
+			if( $t_json === false ) {
+				throw new Exception( $this->getLocalFileLink() . " cannot be read.", 0, $e );
+			} else {
+				$t_product_info = json_decode( $t_json );
+
+				# Search for release
+				$t_release = array_filter( $t_product_info->result->releases,
+					function( $t_release ) use ( $t_version ) {
+						return $t_release->name == $t_version;
+					}
+				);
+				if( $t_release ) {
+					$t_release = reset( $t_release );
+					$this->info = new stdClass();
+					$this->info->result = $t_release;
+				} else {
+					# Release not found
+					# Encapsulate new exception so we can display detailed error information later.
+					$t_exception = new Exception(
+						"Release $t_version not found in " . $this->getLocalFileLink() . "."
+					);
+					throw new Exception( '', 0, $t_exception );
+				}
+			}
+			return;
+		}
 		catch( GuzzleException $e ) {
-			throw new Exception( "$this->product version $t_version not found.",
-				0,
-				$e
-			);
+			throw new Exception( "$this->product version $t_version not found.", 0, $e );
 		}
 
 		$this->info = json_decode( $t_response->getBody() );
@@ -147,6 +178,19 @@ class EndOfLifeCheck
 	 */
 	public function getUrl(): string {
 		return self::URL . $this->product;
+	}
+
+	/**
+	 * HTML link to local data file.
+	 * @return string
+	 */
+	protected function getLocalFileLink(): string {
+		$t_filename = $this->product . '.json';
+		/** @noinspection HtmlUnknownTarget */
+		return sprintf( 'Local data file <a href="%s">%s</a>',
+				self::DATA_DIR . $t_filename,
+				$t_filename
+			);
 	}
 
 	/**
