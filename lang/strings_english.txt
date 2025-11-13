@@ -1112,8 +1112,7 @@ $s_assign_to = 'Assign To';
 $s_additional_information = 'Additional Information';
 $s_submit_report_button = 'Submit Issue';
 $s_check_report_more_bugs = 'check to report more issues';
-$s_issue_submitted_for_moderation = 'Your issue has been submitted for moderation and will appear once it is approved.';
-$s_note_submitted_for_moderation = 'Your note has been submitted for moderation and will appear once it is approved.';
+$s_submitted_for_moderation = 'Your action has been submitted for moderation and will appear once it is approved.';
 
 # report_bug_page.php
 $s_report_stay = 'Report Stay';

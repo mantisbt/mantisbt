@@ -272,7 +272,7 @@ if( isset( $t_result['moderated'] ) && $t_result['moderated'] ) {
 	# Show success page for moderation
 	layout_page_header();
 	layout_page_begin();
-	html_operation_successful( 'view_all_bug_page.php', lang_get( 'issue_submitted_for_moderation' ) );
+	html_operation_successful( 'view_all_bug_page.php', lang_get( 'submitted_for_moderation' ) );
 	layout_page_end();
 	exit;
 }

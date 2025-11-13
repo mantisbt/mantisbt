@@ -76,7 +76,7 @@ if( isset( $t_result['moderated'] ) && $t_result['moderated'] ) {
 	# Show success page for moderation
 	layout_page_header();
 	layout_page_begin();
-	html_operation_successful( string_get_bug_view_url( $f_bug_id ), lang_get( 'note_submitted_for_moderation' ) );
+	html_operation_successful( string_get_bug_view_url( $f_bug_id ), lang_get( 'submitted_for_moderation' ) );
 	layout_page_end();
 	exit;
 }
