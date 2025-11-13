@@ -45,13 +45,14 @@
  * @author Nerogaf
  * @author Red Winged Duck
  * @author Renessaince
+ * @author Ucukor
  * @author Wizardist
  * @author Zedlik
  */
 
 $s_actiongroup_menu_copy = 'Капіяваць';
 $s_actiongroup_menu_assign = 'Прызначыць';
-$s_actiongroup_menu_resolve = 'Вырашыць';
+$s_actiongroup_menu_resolve = 'Разьвязаць';
 $s_actiongroup_menu_update_priority = 'Абнавіць прыярытэт';
 $s_actiongroup_menu_update_status = 'Абнавіць статус';
 $s_actiongroup_menu_update_severity = 'Абнавіць сур’ёзнасьць';
@@ -172,7 +173,7 @@ $s_delete_group_bugs_button = 'Выдаліць праблемы';
 $s_move_group_bugs_button = 'Перанесьці праблемы';
 $s_copy_group_bugs_button = 'Скапіяваць праблемы';
 $s_assign_group_bugs_button = 'Прызначыць праблемы';
-$s_resolve_group_bugs_button = 'Вырашыць праблемы';
+$s_resolve_group_bugs_button = 'Разьвязаць праблемы';
 $s_priority_group_bugs_button = 'Абнавіць прыярытэт';
 $s_status_group_bugs_button = 'Абнавіць статус';
 $s_category_group_bugs_button = 'Абнавіць катэгорыю';
@@ -192,7 +193,7 @@ $s_bugnote_title = 'Аўтар камэнтару';
 $s_bugnote_date = 'Дата камэнтара';
 $s_bugnote_description = 'Апісаньне камэнтару';
 $s_error_no_proceed = 'Калі ласка, выкарыстайце кнопку свайго браўзэра «Вярнуцца», каб вярнуцца на папярэднюю старонку. Там, Вы зможаце выправіць любыя праблемы, якія пазначаныя ў гэтым паведамленьні пра памылку, ці выбраць іншае дзеяньне. Таксама, Вы можаце перайсьці ў іншую сэкцыю, націснуўшы адпаведны пункт мэню.';
-$s_login_error = 'Верагодна Ваш рахунак быў заблякаваны, ці ўведзенае імя карыстальніка/пароль няслушныя.';
+$s_login_error = 'Ваш рахунак быў заблякаваны, ці ўведзенае імя карыстальніка/пароль няслушныя.';
 $s_login_cookies_disabled = 'Ваш браўзэр ці ня можа апрацоўваць закладкі (cookie), ці адмаўляецца іх апрацоўваць.';
 $s_logged_in_as = 'Зарэгістраваны як';
 $s_prefix_for_deleted_users = 'карыстальнік';
@@ -396,8 +397,8 @@ $s_max_file_size_info = 'Максымальны памер: %1$s %2$s';
 $s_bug_reopened_msg = 'Праблема адкрытая ізноў…';
 $s_reopen_add_bugnote_title = 'Дадаць прычыны паўторнага адкрыцьця праблемы';
 $s_bugnote_add_reopen_button = 'Дадаць камэнтар і паўторна адкрыць праблему';
-$s_resolved_bug_title = 'Вырашыць праблему';
-$s_resolved_bug_button = 'Вырашыць праблему';
+$s_resolved_bug_title = 'Разьвязаць праблему';
+$s_resolved_bug_button = 'Разьвязаць праблему';
 $s_bug_resolved_msg = 'Праблема была вырашаная. Увядзіце камэнтар ніжэй…';
 $s_resolve_add_bugnote_title = 'Даданьне камэнтара з апісаньнем вырашэньня праблемы';
 $s_bugnote_add_resolve_button = 'Дадаць камэнтар';
@@ -1382,7 +1383,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Поле «%1$s» утрымлівае
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Поле «%1$s» зьмяшчае няслушнае поле «%2$s».';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Зьменная сэсіі «%1$s» ня знойдзеная.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Вашая сэсія стала нядзейнай.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Няслушны ключ бясьпекі. Верагодна, выпадкова, Вы двойчы даслалі форму?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Няслушны ключ бясьпекі. Магчыма, выпадкова, Вы двойчы даслалі форму?';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Дзеля прычынаў бясьпекі MantisBT ня будзе працаваць, калі $g_crypto_master_salt ня вызначаны карэктна ў config_inc.php або яго даўжыня менш за 16 сымбаляў.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Доступ да гэтай старонкі ня можа быць атрыманы праз гэты мэтад.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Няслушнае поле сартаваньня.';
