@@ -167,7 +167,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		$t_to = $t_bugnote_stats_to_y . '-' . $t_bugnote_stats_to_m . '-' . $t_bugnote_stats_to_d;
 		$t_bugnote_stats = billing_get_summaries( $f_project_id, $t_from, $t_to, $f_bugnote_cost, $f_include_subprojects );
 
-		if( is_blank( $f_bugnote_cost ) || ( (double)$f_bugnote_cost == 0 ) ) {
+		if( is_blank( $f_bugnote_cost ) || ( (float)$f_bugnote_cost == 0 ) ) {
 			$t_cost_col = false;
 		}
 
