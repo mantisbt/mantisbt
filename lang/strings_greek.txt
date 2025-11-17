@@ -46,6 +46,7 @@
  * @author FirehawkV17
  * @author Geraki
  * @author Glavkos
+ * @author Jimkats
  * @author Kongr43gpen
  * @author NikosLikomitros
  * @author Nikosgranturismogt
@@ -492,17 +493,17 @@ $s_hide_disabled = 'Απόκρυψη Ανενεργών';
 $s_filter_button = 'Εφαρμογή Φίλτρου';
 $s_create_filter_link = 'Δημιουργία σταθερού συνδέσμου';
 $s_create_short_link = 'Δημιουργία σύντομου συνδέσμου';
-$s_manage_users_link = 'Διαχείριση Χρηστών';
+$s_manage_users_link = 'Χρήστες';
 $s_manage_projects_link = 'Διαχείριση Εφαρμογών';
 $s_manage_custom_field_link = 'Διαχείριση Ειδικών Πεδίων';
 $s_manage_global_profiles_link = 'Διαχείριση Ολικών Προφίλ';
-$s_manage_plugin_link = 'Διαχείριση πρόσθετων';
+$s_manage_plugin_link = 'Πρόσθετα';
 $s_permissions_summary_report = 'Αναφορά Αδειών';
 $s_manage_config_link = 'Διαχείριση Ρυθμίσεων';
 $s_manage_threshold_config = 'Κατώτατο Όριο Ροής Εργασίας';
 $s_manage_email_config = 'Email Ειδοποιήσεις';
 $s_manage_workflow_config = 'Μεταβάσεις Ροής Εργασίας';
-$s_manage_tags_link = 'Διαχείριση ετικετών';
+$s_manage_tags_link = 'Ετικέτες';
 $s_create_new_account_link = 'Δημιουργία νέου λογαριασμού';
 $s_projects_link = 'Εφαρμογές';
 $s_documentation_link = 'Τεκμηρίωση';
@@ -1057,7 +1058,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Αυτός ο τύπος αρχείου 
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Το αποθετήριο δεν υπάρχει. Παρακαλώ επιλέξτε τις ρυθμίσεις εγχειρήματος.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Εγχείρημα με το ίδιο όνομα υπάρχει ήδη';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field \'%1$s\' was empty.  Please recheck your inputs.';
-$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Μη έγκυρη τιμή για το \'%1$s\'';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Μη έγκυρη τιμή για το "%1$s"';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Το όνομα χρήστη είναι ήδη δεσμευμένο. Παρακαλώ επιστρέψτε στην προηγούμενη σελίδα και επιλέξτε κάποιο άλλο.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%1$s\' not found.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%1$s\' can not be set in the database.  It must be set in config_inc.php.';
