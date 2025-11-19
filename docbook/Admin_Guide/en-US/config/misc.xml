@@ -179,6 +179,42 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_pr_link_tag</term>
+			<listitem>
+        <para>If a number follows this tag it will create a link to a
+        merge / pull request on a third-party website. Default is '!'.
+					<itemizedlist>
+						<listitem>
+							<para>'!': a link would be !45</para>
+						</listitem>
+						<listitem>
+							<para>'pr:' a link would be pr:98</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_pr_link_url</term>
+			<listitem>
+        <para>URL template that will be filled with a pull / merge request ID when
+        using "$g_pr_link_tag" above. It must contain the string "{id}" where the actual ID
+        should be inserted. Default is an empty string, which disables the feature.
+          <itemizedlist>
+            <listitem>
+              <para>for Github : https://github.com/user/repository/pull/{id}</para>
+            </listitem>
+            <listitem>
+              <para>for Gitlab : https://gitlab.com/user/repository/-/merge_requests/{id}</para>
+            </listitem>
+            <listitem>
+              <para>for Codeberg : https://codeberg.org/user/repository/pulls/{id}</para>
+            </listitem>
+          </itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_enable_project_documentation</term>
 			<listitem>
 				<para>Specifies whether to enable support for project documents or
