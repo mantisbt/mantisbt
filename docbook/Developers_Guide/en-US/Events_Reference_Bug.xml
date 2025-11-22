@@ -126,6 +126,49 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.bug.action.reportbugmoderatecheck">
+			<title>EVENT_REPORT_BUG_MODERATE_CHECK (First)</title>
+
+			<blockquote>
+				<para>
+					This event checks whether a new issue will require moderation.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array&gt;: Empty array (no parameters)</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Boolean&gt;: Return true if the issue will require moderation, false otherwise</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.reportbugmoderate">
+			<title>EVENT_REPORT_BUG_MODERATE (First)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to intercept submitted issues for moderation.
+					The plugin will queue the issue data for moderation approval.
+					If moderation is required, the issue is not created in the database until
+					it is approved.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array&gt;: Issue data array from the request payload (command format)</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Boolean&gt;: Return true to indicate the issue was queued for moderation (prevents normal creation), false to allow normal processing</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.bug.action.reportbug">
 			<title>EVENT_REPORT_BUG (Execute)</title>
 
@@ -426,6 +469,51 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.noteaction.addmoderatecheck">
+			<title>EVENT_BUGNOTE_ADD_MODERATE_CHECK (First)</title>
+
+			<blockquote>
+				<para>
+					This event checks whether a new issue note will require moderation.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Boolean&gt;: Return true if the issue note will require moderation, false otherwise</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.noteaction.addmoderate">
+			<title>EVENT_BUGNOTE_ADD_MODERATE (First)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to intercept submitted issue notes for moderation.
+					It is triggered before the issue note is saved to the database, allowing the
+					plugin to queue the note data for moderation. If moderation is required, the
+					note is not created in the database until it is approved. The queued data is
+					stored in a separate moderation queue table.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Issue ID to add the note to</para></listitem>
+					<listitem><para>&lt;Array&gt;: Note data array from the request payload (command format)</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Boolean&gt;: Return true to indicate the bugnote was queued for moderation (prevents normal creation), false to allow normal processing</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
