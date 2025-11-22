@@ -41,7 +41,7 @@ define( 'WARN', 2 );
 # ¹ Enforced in core.php, MantisBT will halt if condition is not met.
 define( 'PHP_MIN_VERSION', '7.4.0' );
 //define( 'PHP_MAX_VERSION', '8.4.0' ); # Do not define (i.e. comment out) if there are no known restrictions
-define( 'PHP_SUPPORTED_VERSION', '8.4' ); # should be defined as X.Y (not X.Y.Z)
+define( 'PHP_SUPPORTED_VERSION', '8.5' ); # should be defined as X.Y (not X.Y.Z)
 
 # Other PHP-related constants
 define( 'PHP_CLI', 0 );

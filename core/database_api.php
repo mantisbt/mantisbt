@@ -671,7 +671,7 @@ function db_prepare_int( $p_int ) {
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_prepare_double( $p_double ) {
-	return (double)$p_double;
+	return (float)$p_double;
 }
 
 /**

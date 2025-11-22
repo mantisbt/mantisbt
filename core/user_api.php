@@ -91,9 +91,9 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 		if( !isset( $g_cache_user[$c_user_id] ) ) {
 			if( $p_trigger_errors ) {
 				throw new ClientException(
-					sprintf( "User id '%d' not found.", (integer)$p_user_id ),
+					sprintf( "User id '%d' not found.", (int)$p_user_id ),
 					ERROR_USER_BY_ID_NOT_FOUND,
-					array( (integer)$p_user_id )
+					array( (int)$p_user_id )
 				);
 			}
 
@@ -255,7 +255,7 @@ function user_exists( $p_user_id ) {
  * @throws ClientException if the user does not exist
  */
 function user_ensure_exists( $p_user_id ) {
-	$c_user_id = (integer)$p_user_id;
+	$c_user_id = (int)$p_user_id;
 
 	if( !user_exists( $c_user_id ) ) {
 		throw new ClientException( "User $c_user_id not found", ERROR_USER_BY_ID_NOT_FOUND, array( $c_user_id ) );

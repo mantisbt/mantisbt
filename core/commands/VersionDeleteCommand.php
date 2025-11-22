@@ -39,8 +39,8 @@ class VersionDeleteCommand extends Command {
 
 	/**
 	 * $p_data['query'] is expected to contain:
-	 * - project_id (integer)
-	 * - version_id (integer)
+	 * - project_id (int)
+	 * - version_id (int)
 	 *
 	 * $p_data['payload'] is expected to contain:
 	 * - name (string)
