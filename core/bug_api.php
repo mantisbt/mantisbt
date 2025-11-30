@@ -364,6 +364,7 @@ class BugData {
 			case 'summary':
 				# MySQL 4-bytes UTF-8 chars workaround #21101
 				$p_value = db_mysql_fix_utf8( $p_value );
+				$p_value = mb_substr($p_value, 0, 128);
 				# Fall through
 			case 'build':
 				if ( !$this->loading ) {
@@ -1978,8 +1979,10 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'fixed_in_version':
 		case 'target_version':
 		case 'build':
+            $c_value = $p_value;
+            break;
 		case 'summary':
-			$c_value = $p_value;
+			$c_value = mb_substr($p_value, 0, 128);
 			break;
 
 		# dates
