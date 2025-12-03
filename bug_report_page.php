@@ -226,7 +226,7 @@ $t_show_product_build = $t_show_versions && in_array( 'product_build', $t_fields
 $t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields ) && access_has_project_level( config_get( 'roadmap_update_threshold' ) );
 $t_show_additional_info = in_array( 'additional_info', $t_fields );
 $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level( config_get( 'due_date_update_threshold' ), helper_get_current_project(), auth_get_current_user_id() );
-$t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload();
+$t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload() && !event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', array() );
 $t_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
 $t_max_length = config_get_global( 'max_textarea_length' );
 

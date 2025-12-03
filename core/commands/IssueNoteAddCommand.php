@@ -55,6 +55,9 @@ use Mantis\Exceptions\ClientException;
  *         "size": 114
  *       }
  *     ]
+ *   },
+ *   "options": {
+ *     "skip_moderation": false
  *   }
  * }
  */
@@ -202,6 +205,16 @@ class IssueNoteAddCommand extends Command {
 			if( !file_allow_bug_upload( $this->issue->id, $this->reporterId ) ) {
 				throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
 			}
+
+			if( !$this->option( 'skip_moderation', false ) ) {
+				# Check if note will be moderated - files not allowed if so
+				$t_will_moderate = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE_CHECK', array( $t_issue_id ) );
+				if( $t_will_moderate ) {
+					throw new ClientException(
+						'Files cannot be attached to notes that require moderation.',
+						ERROR_ACCESS_DENIED );
+				}
+			}
 		}
 
 		# Can reporter add time tracking information?
@@ -228,6 +241,17 @@ class IssueNoteAddCommand extends Command {
 			# categories and handlers lists etc.
 			global $g_project_override;
 			$g_project_override = $this->issue->project_id;
+		}
+
+		# Allow plugins to intercept for moderation
+		# If any plugin returns true, it has queued the note for moderation
+		if( !$this->option( 'skip_moderation', false ) ) {
+			$t_note_data = $this->data['payload'];
+			$t_moderated = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE', array( $this->issue->id, $t_note_data ) );
+			if( $t_moderated ) {
+				# Plugin handled the note, return special response
+				return array( 'moderated' => true );
+			}
 		}
 
 		# We always set the note type to BUGNOTE, and the API will overwrite it with TIME_TRACKING
