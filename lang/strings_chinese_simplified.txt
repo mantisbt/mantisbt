@@ -881,6 +881,7 @@ $s_assign_to = '分派给';
 $s_additional_information = '附注';
 $s_submit_report_button = '提交问题';
 $s_check_report_more_bugs = '报告更多的问题';
+$s_submitted_for_moderation = '您的操作已提交审核，核准后即可显示。';
 $s_report_stay = '继续报告';
 $s_selected_project = '选择项目';
 $s_valid_project_msg = '必须选择一个有效的项目';

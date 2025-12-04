@@ -852,6 +852,7 @@ $s_assign_to = 'Додели на';
 $s_additional_information = 'Дополнителни информации';
 $s_submit_report_button = 'Поднеси пријава';
 $s_check_report_more_bugs = 'штиклирајте за да пријавите повеќе проблеми';
+$s_submitted_for_moderation = 'Вашето дејство е поднесено за модерација и ќе се појави откако ќе биде одобрено.';
 $s_report_stay = 'Задршка на пријавата';
 $s_selected_project = 'Одбран проект';
 $s_valid_project_msg = 'Мора да изберете важечки проект.';

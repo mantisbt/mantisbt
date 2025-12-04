@@ -872,6 +872,7 @@ $s_assign_to = '分配給';
 $s_additional_information = '其他資訊';
 $s_submit_report_button = '送出問題';
 $s_check_report_more_bugs = '尚有其他問題需要回報';
+$s_submitted_for_moderation = '您的操作已提交審核，核准後即可呈現。';
 $s_report_stay = '繼續回報';
 $s_selected_project = '已選擇專案';
 $s_valid_project_msg = '你必須選擇一個有效的專案';
