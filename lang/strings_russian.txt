@@ -57,6 +57,7 @@
  * @author Iniquity
  * @author Irus
  * @author KPu3uC B Poccuu
+ * @author Kaganer
  * @author Kareyac
  * @author Kirill
  * @author Lega4
@@ -1339,7 +1340,7 @@ $MANTIS_ERROR[ERROR_USER_CURRENT_PASSWORD_MISMATCH] = 'Текущий парол
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Для %1$s ожидался массив, а получена строка.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Для %1$s ожидалась строка, а получен массив.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Для %1$s ожидается число.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Задача %1$d не найдена.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Задача «%1$d» не найдена.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Фильтр %1$s не найден.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Недопустимый адрес электронной почты.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Не допускается использование одноразовых адресов электронной почты.';
@@ -1377,12 +1378,12 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'В проекте "%2$s" 
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'Операцию невозможно завершить, поскольку категория «%1$s» определена как используемая по умолчанию для перемещений хотя бы в одном проекте или же глобально.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'Категория "%1$s" не может быть удалена, потому что она связана с одним или более вопросами.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Версия с таким названием уже существует.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Версия \'%1$s\' не найдена.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Версия «%1$s» не найдена.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Недопустимое регистрационное имя пользователя. В именах могут содержаться только латинские буквы, цифры, пробелы, дефисы, точки, знаки плюса и подчеркивания.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Настоящее имя пользователя недопустимо.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'У пользователя нет нужного уровня доступа.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Поддержка оплаты не включена.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Оплата %1$d не найдена.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Оплата «%1$d» не найдена.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Сумма оплаты (%1$s) меньше необходимого минимума (%2$s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Уровень доступа ответственного недостаточен для обработки оплачиваемых задач.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Доступ запрещён: для назначения оплачиваемых задач нужен более высокий уровень доступа.';
