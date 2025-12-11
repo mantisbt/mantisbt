@@ -866,6 +866,7 @@ $s_assign_to = 'הוקצה ל־';
 $s_additional_information = 'מידע נוסף';
 $s_submit_report_button = 'שיגור דיווח';
 $s_check_report_more_bugs = 'נא לסמן לדיווח סוגיות נוספות';
+$s_submitted_for_moderation = 'הפעולה שלך נשלחה לתור הפיקוח ותופיע לאחר אישורה.';
 $s_report_stay = 'דווח על הישארות';
 $s_selected_project = 'מיזם שנבחר';
 $s_valid_project_msg = 'נדרש לבחור מיזם תקין.';
