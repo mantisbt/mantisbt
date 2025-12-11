@@ -46,6 +46,11 @@
  *
  * If you need to supply a port to connect to, set hostname as 'localhost:3306'.
  *
+ * For SQLite, you must specify the full path to the database file,
+ * using $g_database_name as the name, i.e. '/var/database/bugtracker.db' for
+ * Linux or 'C:\\database\\bugtracker.db' for Windows.
+ * Do not put the database in the web root directory!
+ *
  * @global string $g_hostname
  */
 $g_hostname = 'localhost';
@@ -89,6 +94,7 @@ $g_database_name = 'bugtracker';
  * PostgreSQL      pgsql         pgsql
  * MS SQL Server   mssqlnative   sqlsrv    experimental
  * Oracle          oci8          oci8      experimental
+ * SQLite 3        sqlite3       sqlite3
  *
  * @global string $g_db_type
  */
