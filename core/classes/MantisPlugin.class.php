@@ -58,40 +58,48 @@ abstract class MantisPlugin {
 	/**
 	 * name - Your plugin's full name. Required value.
 	 */
-	public $name		= null;
+	public $name = null;
+
 	/**
 	 * description - A full description of your plugin.
 	 */
 	public $description	= null;
+
 	/**
 	 * page - The name of a plugin page for further information and administration.
 	 */
-	public $page		= null;
+	public $page = null;
+
 	/**
 	 * version - Your plugin's version string. Required value.
 	 */
-	public $version		= null;
+	public $version = null;
+
 	/**
 	 * requires - An array of key/value pairs of basename/version plugin dependencies.
 	 * Prefixing a version with '<' will allow your plugin to specify a maximum version (non-inclusive) for a dependency.
 	 */
-	public $requires	= null;
+	public $requires = null;
+
 	/**
 	 * An array of key/value pairs of basename/version  plugin dependencies (soft dependency)
 	 */
-	public $uses		= null;
+	public $uses = null;
+
 	/**
 	 * author - Your name, or an array of names.
 	 */
-	public $author		= null;
+	public $author = null;
+
 	/**
 	 * contact - An email address where you can be contacted.
 	 */
-	public $contact		= null;
+	public $contact = null;
+
 	/**
 	 * url - A web address for your plugin.
 	 */
-	public $url			= null;
+	public $url = null;
 
 	/**
 	 * Plugin's validity status
@@ -118,7 +126,9 @@ abstract class MantisPlugin {
 	 * that will be called after all plugins have been initialized.
 	 * @return bool
 	 */
-	public function init() {}
+	public function init() {
+		return true;
+	}
 
 	/**
 	 * This function allows plugins to add new error messages for Mantis usage
