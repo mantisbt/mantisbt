@@ -51,6 +51,11 @@ abstract class MantisPlugin {
 	const STATUS_MISSING_EVENTS = 5;
 
 	/**
+	 * Plugin Basename
+	 */
+	public $basename = null;
+
+	/**
 	 * name - Your plugin's full name. Required value.
 	 */
 	public $name		= null;
@@ -265,11 +270,6 @@ abstract class MantisPlugin {
 	}
 
 	### Core plugin functionality ###
-
-	/**
-	 * Plugin Basename
-	 */
-	public $basename	= null;
 
 	/**
 	 * Constructor
