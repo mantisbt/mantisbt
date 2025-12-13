@@ -644,6 +644,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash, $p_reset_by_a
 	# retrieve the username and email
 	$t_username = user_get_username( $p_user_id );
 	$t_email = user_get_email( $p_user_id );
+	$t_ip_addr = $_SERVER['REMOTE_ADDR'] ?? lang_get( 'unknown' );
 
 	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
 
@@ -655,7 +656,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash, $p_reset_by_a
 	$t_message .= "\n\n"
 		. string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n"
 		. lang_get( 'new_account_username' ) . ' ' . $t_username . "\n"
-		. lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR'] . "\n\n"
+		. lang_get( 'new_account_IP' ) . ' ' . $t_ip_addr . "\n\n"
 		. lang_get( 'new_account_do_not_reply' );
 
 	# Send password reset regardless of mail notification preferences
@@ -692,6 +693,7 @@ function email_send_email_verification_url( $p_user_id, $p_confirm_hash, $p_new_
 	# retrieve the username and email
 	$t_username = user_get_username( $p_user_id );
 	$t_old_email = user_get_email( $p_user_id );
+	$t_ip_addr = $_SERVER['REMOTE_ADDR'] ?? lang_get( 'unknown' );
 
 	$t_subject = '[' . config_get( 'window_title' ) . '] '
 		. lang_get( 'verify_email_title' );
@@ -703,7 +705,7 @@ function email_send_email_verification_url( $p_user_id, $p_confirm_hash, $p_new_
 		. lang_get( 'new_account_username' ) . ' ' . $t_username . "\n"
 		. lang_get( 'new_value' ) . ': ' . $p_new_email . "\n"
 		. lang_get( 'old_value' ) . ': ' . $t_old_email . "\n"
-		. lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR']
+		. lang_get( 'new_account_IP' ) . ' ' . 	$t_ip_addr
 		. "\n\n"
 		. lang_get( 'new_account_do_not_reply' );
 
@@ -736,9 +738,17 @@ function email_notify_new_account( $p_username, $p_email ) {
 		lang_push( user_pref_get_language( $t_user['id'] ) );
 
 		$t_recipient_email = user_get_email( $t_user['id'] );
+		$t_ip_addr = $_SERVER['REMOTE_ADDR'] ?? lang_get( 'unknown' );
+
 		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
 
-		$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n" . lang_get( 'new_account_username' ) . ' ' . $p_username . "\n" . lang_get( 'new_account_email' ) . ' ' . $p_email . "\n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR'] . "\n" . config_get_global( 'path' ) . "\n\n" . lang_get( 'new_account_do_not_reply' );
+		$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n"
+			. lang_get( 'new_account_username' ) . ' ' . $p_username . "\n"
+			. lang_get( 'new_account_email' ) . ' ' . $p_email . "\n"
+			. lang_get( 'new_account_IP' ) . ' ' . $t_ip_addr . "\n"
+			. config_get_global( 'path' )
+			. "\n\n"
+			. lang_get( 'new_account_do_not_reply' );
 
 		if( !is_blank( $t_recipient_email ) ) {
 			email_store( $t_recipient_email, $t_subject, $t_message );
