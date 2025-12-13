@@ -95,7 +95,7 @@ $g_plugin_current = array();
  */
 function plugin_get_current() {
 	global $g_plugin_current;
-	return( isset( $g_plugin_current[0] ) ? $g_plugin_current[0] : null );
+	return( $g_plugin_current[0] ?? null );
 }
 
 /**
@@ -393,10 +393,6 @@ function plugin_config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_
  * @return void
  */
 function plugin_config_defaults( array $p_options ) {
-	if( !is_array( $p_options ) ) {
-		return;
-	}
-
 	$t_basename = plugin_get_current();
 	$t_option_base = 'plugin_' . $t_basename . '_';
 
@@ -500,7 +496,7 @@ function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null 
 		$t_basename = $p_basename;
 	}
 
-	$t_error_code = "plugin_{$t_basename}_{$p_error_name}";
+	$t_error_code = "plugin_{$t_basename}_$p_error_name";
 
 	trigger_error( $t_error_code, $p_error_type );
 }
@@ -708,10 +704,8 @@ function plugin_priority( $p_base_name ) {
  * @return bool True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
-	foreach( plugin_get_force_installed() as $t_basename => $t_priority ) {
-		if( $t_basename == $p_basename ) {
-			return true;
-		}
+	if( array_key_exists( $p_basename, plugin_get_force_installed() ) ) {
+		return true;
 	}
 
 	db_param_push();
@@ -971,7 +965,6 @@ function plugin_include( $p_basename, $p_child = null ) {
 	}
 	$t_included = false;
 	if( is_file( $t_plugin_file ) ) {
-		/** @noinspection PhpIncludeInspection */
 		include_once( $t_plugin_file );
 		$t_included = true;
 	}
@@ -1002,7 +995,6 @@ function plugin_require_api( $p_file, $p_basename = null ) {
 
 	$t_path = config_get_global( 'plugin_path' ) . $t_current . '/';
 
-	/** @noinspection PhpIncludeInspection */
 	require_once( $t_path . $p_file );
 }
 
@@ -1078,8 +1070,10 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 		}
 
 		if( $p_return ) {
+			/** @noinspection PhpUndefinedVariableInspection */
 			return $t_plugin;
 		} else {
+			/** @noinspection PhpUndefinedVariableInspection */
 			$g_plugin_cache[$t_basename] = $t_plugin;
 		}
 	}
@@ -1213,7 +1207,7 @@ function plugin_init( $p_basename ) {
 		$t_plugin_errors = $t_plugin->errors();
 
 		foreach( $t_plugin_errors as $t_error_name => $t_error_string ) {
-			$t_error_code = "plugin_{$p_basename}_{$t_error_name}";
+			$t_error_code = "plugin_{$p_basename}_$t_error_name";
 			$g_lang_strings[$t_lang]['MANTIS_ERROR'][$t_error_code] = $t_error_string;
 		}
 
@@ -1274,8 +1268,8 @@ function plugin_menu_items( $p_event ) {
 	if( $p_event ) {
 		$t_event_items = event_signal( $p_event );
 
-		foreach( $t_event_items as $t_plugin => $t_plugin_items ) {
-			foreach( $t_plugin_items as $t_callback => $t_callback_items ) {
+		foreach( $t_event_items as $t_plugin_items ) {
+			foreach( $t_plugin_items as $t_callback_items ) {
 				if( is_array( $t_callback_items ) ) {
 					$t_items = array_merge( $t_items, $t_callback_items );
 				}
