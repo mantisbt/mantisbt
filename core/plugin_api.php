@@ -79,8 +79,11 @@ $g_plugin_cache_priority = array();
 $g_plugin_cache_protected = array();
 
 /**
- * Current plugin stack
- * @global MantisPlugin[] $g_plugin_current
+ * Current plugin stack.
+ *
+ * Stores the plugin basename.
+ * @see plugin_push_current(), plugin_get_current(), plugin_pop_current()
+ * @global string[] $g_plugin_current
  */
 $g_plugin_current = array();
 
@@ -703,7 +706,7 @@ function plugin_install( MantisPlugin $p_plugin ) {
  * @return boolean True if plugin needs schema upgrades.
  */
 function plugin_needs_upgrade( MantisPlugin $p_plugin ) {
-	plugin_push_current( $p_plugin->name );
+	plugin_push_current( $p_plugin->basename );
 	$t_plugin_schema = $p_plugin->schema();
 	plugin_pop_current();
 	if( is_null( $t_plugin_schema ) ) {
