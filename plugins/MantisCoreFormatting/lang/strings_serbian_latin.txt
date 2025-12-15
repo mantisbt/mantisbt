@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Atrol
  * @author Rancher
  * @author Zexmax
  */
@@ -49,7 +50,7 @@ $s_plugin_format_process_text = 'Obrada teksta';
 $s_plugin_format_process_text_warning_notice = 'Ne isključujte osim ako zaista ne znate šta radite. U isključenom stanju, mogući su napadi tipa cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'Obrada адреса';
 $s_plugin_format_process_buglinks = 'MantisBT unutrašnje veze (problemi i beleške)';
-$s_plugin_format_process_buglinks_info = 'Vaša konfiguracija definiše oznaku <em>Problem</em> kao "%s" i oznaku <em>Beleška o problemu</em> kao "%s\';
+$s_plugin_format_process_buglinks_info = 'Vaša konfiguracija definiše oznaku <em>Problem</em> kao "%s" i oznaku <em>Beleška o problemu</em> kao "%s"';
 $s_plugin_format_process_markdown = 'Markdown obrada';
 $s_plugin_format_process_markdown_info = 'Stil sa podrškom za Markdovn, sintaksa oblikovanja teksta dizajnirana tako da se može konvertovati u HTML.';
 $s_plugin_format_enabled = 'Uključeno';
