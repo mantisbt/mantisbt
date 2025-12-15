@@ -6,5 +6,8 @@ charset = utf-8
 indent_style = tab
 indent_size = 4
 
-[*.php]
+[*.{php,md}]
+end_of_line = lf
+insert_final_newline = false
+trim_trailing_whitespace = false
 max_line_length = 120
