@@ -879,6 +879,7 @@ $s_assign_to = 'Zuordnung an';
 $s_additional_information = 'Zusätzliche Informationen';
 $s_submit_report_button = 'Eintrag absenden';
 $s_check_report_more_bugs = 'auswählen, um weitere Einträge zu erfassen';
+$s_submitted_for_moderation = 'Ihre Aktion wurde zur Überprüfung eingereicht und wird nach Genehmigung angezeigt.';
 $s_report_stay = 'Im Eingabemodus bleiben';
 $s_selected_project = 'Gewähltes Projekt';
 $s_valid_project_msg = 'Es muss ein Projekt ausgewählt werden';
