@@ -23,9 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-# Include PHPUnit dependencies ; ensure compatibility with 3.5 and 3.6
-@include_once 'PHPUnit/Framework.php';
-
 /**
  * Parse file and retrieve distinct T_VARIABLE tokens with 'g_' prefix
  *
@@ -96,7 +93,7 @@ function require_mantis_core() {
 
 
 # Set error reporting to the level to which Zend Framework code must comply.
-error_reporting( E_ALL | E_STRICT );
+error_reporting( E_ALL );
 
 # Determine the root, library, and tests directories of the framework
 # distribution.

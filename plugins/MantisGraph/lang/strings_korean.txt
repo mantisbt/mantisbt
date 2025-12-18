@@ -44,6 +44,7 @@
  * @author Jerrykim306
  * @author SeoJeongHo
  * @author Wisewolf
+ * @author YeBoy371
  * @author Ykhwong
  * @author 아라
  */
@@ -93,3 +94,4 @@ $s_plugin_MantisGraph_graph_topdev = '이슈를 제일 많이 수정한 사람';
 $s_plugin_MantisGraph_graph_opendev = '이슈를 가장 많이 올린 사람';
 $s_plugin_MantisGraph_graph_topreporter_fixed = '수정된 이슈가 많은 보고자';
 $s_plugin_MantisGraph_other_categories = '다른 분류 (%d)';
+$s_plugin_MantisGraph_other_projects = '다른 프로젝트 (%d)';

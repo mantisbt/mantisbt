@@ -14,8 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-require_once( dirname( __DIR__ ) . '/../../tests/TestConfig.php' );
-require_once( dirname( __DIR__ ) . '/core/MantisMarkdown.php' );
+namespace Mantis\plugins\MantisCoreFormatting\tests;
+
+use Generator;
+use MantisMarkdown;
+use PHPUnit\Framework\TestCase;
+use TypeError;
+
+require_once( dirname( __DIR__, 3 ) . '/tests/TestConfig.php' );
 
 # MantisBT Core API
 require_mantis_core();
@@ -30,7 +36,7 @@ require_mantis_core();
  *
  * @covers MantisMarkdown
  */
-class MarkdownTest extends PHPUnit\Framework\TestCase {
+class MarkdownTest extends TestCase {
 
 	private ?MantisMarkdown $parser = null;
 
@@ -267,7 +273,7 @@ EOD;
 		$this->assertSame( '<p>' . $t_sample . '</p>', $this->parser->convert( $t_sample, true ) );
 	}
 
-	public function provideHeaders(): Generator {
+	public static function provideHeaders(): Generator {
 		# Valid headers
 		yield  'valid: # foo' => ['# foo', '<h1>foo</h1>'];
 		yield  'valid: ## foo' => ['## foo', '<h2>foo</h2>'];
@@ -303,7 +309,7 @@ EOD;
 	 * tested by the Parsedown tests. But they ensure that the Parsedown process is
 	 * not affected in any way, no matter what the value of "process_urls" is.
 	 */
-	public function provideEmails(): Generator {
+	public static function provideEmails(): Generator {
 		yield 'process_urls = ON; lorem <user@exmaple.com> ipsum' => [
 			'lorem <user@exmaple.com> ipsum',
 			ON,
@@ -358,7 +364,7 @@ EOD;
 	 * tested by the Parsedown tests. But they ensure that the Parsedown process is
 	 * not affected in any way, no matter what the value of "process_urls" is.
 	 */
-	public function provideUrls(): Generator {
+	public static function provideUrls(): Generator {
 		yield 'process_urls = ON; lorem <https://exmaple.com> ipsum' => [
 			'lorem <https://exmaple.com> ipsum',
 			ON,

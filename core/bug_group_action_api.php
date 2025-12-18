@@ -202,11 +202,13 @@ function bug_group_action_process( $p_action, $p_bug_id ) {
 /**
  * Get a list of bug group actions available to the current user for one or
  * more projects.
+ *
  * @param array $p_project_ids An array containing one or more project IDs.
+ *
  * @return array
  */
-function bug_group_action_get_commands( array $p_project_ids = null ) {
-	if( $p_project_ids === null || count( $p_project_ids ) == 0 ) {
+function bug_group_action_get_commands( array $p_project_ids = [] ) {
+	if( empty( $p_project_ids ) ) {
 		$p_project_ids = array( ALL_PROJECTS );
 	}
 
@@ -235,20 +237,29 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 			$t_commands['ASSIGN'] = lang_get( 'actiongroup_menu_assign' );
 		}
 
+		if( !isset( $t_commands['RESOLVE'] ) && $t_update_bug_status_allowed &&
+			access_has_project_level( access_get_status_threshold( config_get( 'bug_resolved_status_threshold', null, $t_user_id, $t_project_id ), $t_project_id ), $t_project_id ) ) {
+			$t_commands['RESOLVE'] = lang_get( 'actiongroup_menu_resolve' );
+		}
+
 		if( !isset( $t_commands['CLOSE'] ) && $t_update_bug_status_allowed &&
 			( access_has_project_level( access_get_status_threshold( config_get( 'bug_closed_status_threshold', null, $t_user_id, $t_project_id ), $t_project_id ), $t_project_id ) ||
 				access_has_project_level( config_get( 'allow_reporter_close', null, $t_user_id, $t_project_id ), $t_project_id ) ) ) {
 			$t_commands['CLOSE'] = lang_get( 'close' );
 		}
 
-		if( !isset( $t_commands['DELETE'] ) &&
-			access_has_project_level( config_get( 'delete_bug_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
-			$t_commands['DELETE'] = lang_get( 'delete' );
+		if( !isset( $t_commands['UP_STATUS'] ) && $t_update_bug_status_allowed ) {
+			$t_commands['UP_STATUS'] = lang_get( 'actiongroup_menu_update_status' );
 		}
 
-		if( !isset( $t_commands['RESOLVE'] ) && $t_update_bug_status_allowed &&
-			access_has_project_level( access_get_status_threshold( config_get( 'bug_resolved_status_threshold', null, $t_user_id, $t_project_id ), $t_project_id ), $t_project_id ) ) {
-			$t_commands['RESOLVE'] = lang_get( 'actiongroup_menu_resolve' );
+		if( !isset( $t_commands['EXT_ADD_NOTE'] ) &&
+			access_has_project_level( config_get( 'add_bugnote_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
+			$t_commands['EXT_ADD_NOTE'] = lang_get( 'actiongroup_menu_add_note' );
+		}
+
+		if( !isset( $t_commands['EXT_ATTACH_TAGS'] ) &&
+			access_has_project_level( config_get( 'tag_attach_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
+			$t_commands['EXT_ATTACH_TAGS'] = lang_get( 'actiongroup_menu_attach_tags' );
 		}
 
 		if( !isset( $t_commands['SET_STICKY'] ) &&
@@ -264,10 +275,6 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 			$t_commands['EXT_UPDATE_SEVERITY'] = lang_get( 'actiongroup_menu_update_severity' );
 		}
 
-		if( !isset( $t_commands['UP_STATUS'] ) && $t_update_bug_status_allowed ) {
-			$t_commands['UP_STATUS'] = lang_get( 'actiongroup_menu_update_status' );
-		}
-
 		if( !isset( $t_commands['UP_CATEGORY'] ) && $t_update_bug_allowed ) {
 			$t_commands['UP_CATEGORY'] = lang_get( 'actiongroup_menu_update_category' );
 		}
@@ -281,16 +288,6 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 			config_get( 'enable_product_build', null, $t_user_id, $t_project_id ) == ON &&
 			$t_update_bug_allowed ) {
 			$t_commands['EXT_UPDATE_PRODUCT_BUILD'] = lang_get( 'actiongroup_menu_update_product_build' );
-		}
-
-		if( !isset( $t_commands['EXT_ADD_NOTE'] ) &&
-			access_has_project_level( config_get( 'add_bugnote_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
-			$t_commands['EXT_ADD_NOTE'] = lang_get( 'actiongroup_menu_add_note' );
-		}
-
-		if( !isset( $t_commands['EXT_ATTACH_TAGS'] ) &&
-			access_has_project_level( config_get( 'tag_attach_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
-			$t_commands['EXT_ATTACH_TAGS'] = lang_get( 'actiongroup_menu_attach_tags' );
 		}
 
 		if( !isset( $t_commands['UP_DUE_DATE'] ) &&
@@ -324,6 +321,11 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 					$t_commands[$t_command_id] = string_display_line( $t_command_caption );
 				}
 			}
+		}
+
+		if( !isset( $t_commands['DELETE'] ) &&
+			access_has_project_level( config_get( 'delete_bug_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
+			$t_commands['DELETE'] = lang_get( 'delete' );
 		}
 
 	}

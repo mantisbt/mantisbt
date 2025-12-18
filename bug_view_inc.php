@@ -212,23 +212,12 @@ echo '<div class="table-responsive">';
 echo '<table class="table table-bordered table-condensed">';
 
 if( $t_top_buttons_enabled ) {
-	echo '<thead><tr class="bug-nav">';
-	echo '<tr class="top-buttons noprint">';
-	echo '<td colspan="6">';
-	/** @noinspection PhpUnhandledExceptionInspection */
-	bug_view_action_buttons( $f_issue_id, $t_flags );
-	echo '</td>';
-	echo '</tr>';
-	echo '</thead>';
-}
-
-if( $t_bottom_buttons_enabled ) {
-	echo '<tfoot>';
-	echo '<tr class="noprint"><td colspan="6">';
+	echo '<thead>';
+	echo '<tr class="top-buttons noprint"><td colspan="6">';
 	/** @noinspection PhpUnhandledExceptionInspection */
 	bug_view_action_buttons( $f_issue_id, $t_flags );
 	echo '</td></tr>';
-	echo '</tfoot>';
+	echo '</thead>';
 }
 
 echo '<tbody>';
@@ -280,9 +269,7 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 
 	echo '</tr>';
 
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
 #
@@ -558,9 +545,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 
 event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $f_issue_id ) );
 
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 #
 # Bug Details (screen wide fields)
@@ -639,9 +624,7 @@ if( !empty( $t_result['issue']['attachments'] ) ) {
 	echo '</td></tr>';
 }
 
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 # Custom Fields
 if( isset( $t_issue['custom_fields'] ) ) {
@@ -656,12 +639,22 @@ if( isset( $t_issue['custom_fields'] ) ) {
 		echo '</td></tr>';
 	}
 
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
-echo '</tbody></table>';
+echo '</tbody>';
+
+if( $t_bottom_buttons_enabled ) {
+	echo '<tfoot>';
+	echo '<tr class="noprint"><td colspan="6">';
+	/** @noinspection PhpUnhandledExceptionInspection */
+	bug_view_action_buttons( $f_issue_id, $t_flags );
+	echo '</td></tr>';
+	echo '</tfoot>';
+}
+
+echo '</table>';
+
 echo '</div></div></div></div></div>';
 
 # User list sponsoring the bug
@@ -740,7 +733,7 @@ if( $t_flags['monitor_show'] ) {
 			<br /><br />
 			<form method="post" action="bug_monitor_add.php" class="form-inline noprint">
 				<?php echo form_security_field( 'bug_monitor_add' ) ?>
-				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
+				<input type="hidden" name="bug_id" value="<?php echo (int)$f_issue_id; ?>" />
 				<!--suppress HtmlFormInputWithoutLabel -->
 				<input type="text" class="input-sm" id="bug_monitor_list_user_to_add" name="user_to_add" />
 				<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add' ) ?>" />
@@ -941,9 +934,10 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	}
 
 	# add summary
-	$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
+	$t_relationship_info_html .= $t_td 
+		. '<span class="padding-right-4">' . string_display_line_links( $t_bug->summary ) . '</span>';
 	if( VS_PRIVATE == $t_bug->view_state ) {
-		$t_relationship_info_html .= icon_get( 'fa-lock', '', lang_get( 'private' ) );
+		$t_relationship_info_html .= icon_get( 'fa-lock', 'ace-icon', lang_get( 'private' ) );
 	}
 
 	# add delete link if bug not read only and user has access level
@@ -1231,7 +1225,7 @@ function bug_view_button_bug_assign_to( BugData $p_bug ) {
 
 	# allow un-assigning if already assigned.
 	if( $p_bug->handler_id != 0 ) {
-		echo '<option value="0"></option>';
+		echo '<option value="0">&nbsp;</option>';
 	}
 
 	# 0 means currently selected

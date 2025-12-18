@@ -36,6 +36,7 @@
  * @uses Parsedown Library
  */
 
+
 /**
  * A class that overrides default Markdown parsing for Mantis specific scenarios.
  */
@@ -87,6 +88,9 @@ class MantisMarkdown extends Parsedown
 		$this->setSafeMode( true );
 		# Only turn URLs into links if config says so
 		$this->setUrlsLinked( (bool) $this->config_process_urls );
+
+		$this->InlineTypes['@'][] = 'EmailText';
+		$this->inlineMarkerList .= '@';
 	}
 
 	public static function getInstance( ?int $p_process_urls = OFF, ?int $p_process_buglinks = OFF ): self {
@@ -148,14 +152,14 @@ class MantisMarkdown extends Parsedown
 	 */
 	protected function element( array $Element ): string {
 		# Capture the code blocks to prevent them from being processed further.
-		if( $Element['name'] === 'code' ) {
+		if( isset( $Element['name'] ) && $Element['name'] === 'code' ) {
 			$t_hash = $this->hash( $Element['text'] );
 			$this->codeblocks[$t_hash] = $Element['text'];
 			$Element['text'] = $t_hash;
 		}
 
 		# Adding CSS classes to tables.
-		if( $Element['name'] === 'table' ) {
+		if( isset( $Element['name'] ) && $Element['name'] === 'table' ) {
 			$Element['attributes']['class'] = $this->table_class;
 		}
 
@@ -163,17 +167,30 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Convert an email addresses in unmarked text into a link.
+	 * Convert an email addresses into a link.
 	 *
-	 * Unlike unmarked URLs, unmarked email addresses are not
-	 * processed by Parsedown.
+	 * Original Parsedown only converts emails marked with < and >.
+	 *
+	 * @param array Data for the inline element
+	 *
+	 * @return array|void The email element data or nothing
 	 */
-	protected function unmarkedText( $text ): string {
-		if( ON == $this->config_process_urls && false !== strpos( $text, '@' ) ) {
-			$text = string_insert_hrefs( $text );
+	protected function inlineEmailText( $p_excerpt ) {
+		if( ON == $this->config_process_urls
+			&& preg_match( email_regex_simple(), $p_excerpt['context'],
+				$t_matches, PREG_OFFSET_CAPTURE ) ) {
+			return [
+				'extent' => strlen( $t_matches[0][0] ),
+				'position' => $t_matches[0][1],
+				'element' => [
+					'name' => 'a',
+					'text' => $t_matches[0][0],
+					'attributes' => [
+						'href' => 'mailto:' . $t_matches[0][0],
+					],
+				],
+			];
 		}
-
-		return parent::unmarkedText( $text );
 	}
 
 	/**
@@ -248,9 +265,11 @@ class MantisMarkdown extends Parsedown
 	private function processUrl( ?array $Excerpt = null ): ?array
 	{
 		if( isset( $Excerpt['element']['attributes'] ) ) {
+			# Check if link is external
+			$t_is_external_link = helper_is_link_external( $Excerpt['element']['attributes']['href'] );
 			$Excerpt['element']['attributes'] = array_replace(
 				$Excerpt['element']['attributes'],
-				helper_get_link_attributes()
+				helper_get_link_attributes( true, $t_is_external_link )
 			);
 		}
 

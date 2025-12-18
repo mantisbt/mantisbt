@@ -348,7 +348,9 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 		trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
 	}
 
-	project_ensure_name_unique( $p_name );
+	$t_name = trim( $p_name );
+
+	project_ensure_name_unique( $t_name );
 
 	# Project does not exist yet, so we get global config
 	if( DATABASE !== config_get( 'file_upload_method', null, null, ALL_PROJECTS ) ) {
@@ -356,7 +358,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 	}
 
 	$t_param = array(
-		'name' => $p_name,
+		'name' => $t_name,
 		'status' => (int)$p_status,
 		'enabled' => $c_enabled,
 		'view_state' => (int)$p_view_state,
@@ -364,10 +366,12 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 		'description' => $p_description,
 		'inherit_global' => $p_inherit_global,
 	);
+
 	$t_query = new DbQuery( 'INSERT INTO {project}
 		( ' . implode( ', ', array_keys( $t_param ) ) . ' )
 		VALUES :param'
 	);
+
 	$t_query->bind( 'param', $t_param );
 	$t_query->execute();
 
@@ -450,6 +454,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
 	}
 
+	$t_new_name = trim( $p_name );
 	$t_old_name = project_get_field( $p_project_id, 'name' );
 
 	# If project is becoming private, save current user's access level
@@ -463,7 +468,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		$t_manage_project_threshold = config_get( 'manage_project_threshold' );
 	}
 
-	if( strcasecmp( $p_name, $t_old_name ) != 0 ) {
+	if( strcasecmp( $t_new_name, $t_old_name ) != 0 ) {
 		project_ensure_name_unique( $p_name, $p_project_id );
 	}
 
@@ -472,7 +477,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 	}
 
 	$t_param = array(
-		'name' => $p_name,
+		'name' => $t_new_name,
 		'status' => (int)$p_status,
 		'enabled' => $c_enabled,
 		'view_state' => (int)$p_view_state,
@@ -480,6 +485,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		'description' => $p_description,
 		'inherit_global' => $c_inherit_global,
 	);
+
 	$t_columns = '';
 	foreach( array_keys( $t_param ) as $t_col ) {
 		$t_columns .= "\n\t\t$t_col = :$t_col,";
@@ -490,6 +496,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		. rtrim( $t_columns, ',' ) . '
 		WHERE id = :project_id'
 	);
+
 	$t_query->execute( $t_param );
 
 	project_clear_cache( $p_project_id );

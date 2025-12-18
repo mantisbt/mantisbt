@@ -23,8 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-# Includes
-require_once 'MantisCoreBase.php';
+namespace Mantis\tests\Mantis;
 
 /**
  * Mantis string handling test cases
@@ -60,7 +59,7 @@ class StringTest extends MantisCoreBase {
 	 * Data provider for string sanitize test
 	 * @return array
 	 */
-	public function provider() {
+	public static function provider() {
 		$t_test_strings = array(
 			array( '', 'index.php' ),
 			array( 'abc.php', 'abc.php' ),

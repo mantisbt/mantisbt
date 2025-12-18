@@ -5,6 +5,20 @@
 <section id="admin.config.email">
 	<title>Email</title>
 
+	<para>
+		MantisBT sends email notifications to users when certain events occur.
+		This section includes configuration relating to when to trigger email notifications,
+		how to send them, from what addresses to send them, and how to format them.
+	</para>
+
+	<para>
+		The default implementation uses PHPMailer to send emails which is implemented via
+		<literal>core/classes/EmailSenderPhpMailer.class.php</literal>. Such implementation
+		can be overriden by EmailSender plugins, see
+		<ulink url="https://github.com/mantisbt-plugins/TestEmailSender">TestEmailSender</ulink>
+		for an example.
+	</para>
+
 	<variablelist>
 		<varlistentry>
 			<term>$g_webmaster_email</term>
@@ -63,123 +77,157 @@
 		<varlistentry>
 			<term>$g_default_notify_flags</term>
 			<listitem>
-				<para>Associates a default notification flag with each action,
-					to control who should be notified. The default will be used
-					if the action is not defined in <emphasis>$g_notify_flags</emphasis>
-					or if the flag is not included in the specific action definition.
+				<para>Sets the default email notifications values for different 
+					user categories.
 				</para>
-				<para>The list of actions include:
-					<emphasis>new</emphasis>,
-					<emphasis>assigned</emphasis>,
-					<emphasis>resolved</emphasis>,
-					<emphasis>bugnote</emphasis>,
-					<emphasis>reopened</emphasis>,
-					<emphasis>closed</emphasis>,
-					<emphasis>deleted</emphasis>,
-					<emphasis>feedback</emphasis>.
+				<para>In combination with <emphasis>$g_notify_flags</emphasis>, 
+					this config option controls who should get email notifications 
+					on different actions/statuses.
+
+					See <xref linkend="admin.customize.email" />
+					for examples of customizing the notification flags.
 				</para>
-				<para>The default is:
-<programlisting>
-$g_default_notify_flags = array(
-	'reporter'      =&gt; ON,
-	'handler'       =&gt; ON,
-	'monitor'       =&gt; ON,
-	'bugnotes'      =&gt; ON,
-	'category'      =&gt; ON,
-	'explicit'      =&gt; ON,
-	'threshold_min' =&gt; NOBODY,
-	'threshold_max' =&gt; NOBODY
-);
-</programlisting>
-					<emphasis>threshold_min</emphasis> and
-					<emphasis>threshold_max</emphasis> are used to send messages to all
-					members of the project whose status is
+				<para>The user categories are:
 					<itemizedlist>
-						<listitem>
-							<para>greater than or equal to <emphasis>threshold_min</emphasis>, and</para>
+						<listitem><para>
+							<literal>reporter</literal>:
+							the Issue's reporter
+							</para>
 						</listitem>
-						<listitem>
-							<para>less than or equal to <emphasis>threshold_max</emphasis>.</para>
+						<listitem><para>
+							<literal>handler</literal>:
+							the user assigned to the Issue
+							</para>
+						</listitem>
+						<listitem><para>
+							<literal>monitor</literal>:
+							users who are monitoring the Issue
+							</para>
+						</listitem>
+						<listitem><para>
+							<literal>bugnotes</literal>:
+							users who have added a bugnote to the Issue
+							</para>
+						</listitem>
+						<listitem><para>
+							<literal>category</literal>:
+							category owners
+							</para>
+						</listitem>
+						<listitem><para>
+							<literal>explicit</literal>:
+							users who are explicitly specified by the code based on the
+							action (e.g. user added to monitor list).
+							</para>
+						</listitem>
+						<listitem><para>
+							<literal>threshold_min</literal> and
+							<literal>threshold_max</literal> are used to send messages to all
+							members of the project whose access level is
+							<itemizedlist>
+								<listitem>
+									<para>greater than or equal to <emphasis>threshold_min</emphasis>, and</para>
+								</listitem>
+								<listitem>
+									<para>less than or equal to <emphasis>threshold_max</emphasis>.</para>
+								</listitem>
+							</itemizedlist>
+
+							To send notifications to everyone, set
+							<emphasis>threshold_min</emphasis> to ANYBODY and
+							<emphasis>threshold_max</emphasis> to NOBODY.
+							To send to all DEVELOPERS and above, use DEVELOPER and
+							NOBODY respectively.
+						</para>
 						</listitem>
 					</itemizedlist>
-				</para>
-				<para>Sending messages to everyone would set
-					<emphasis>threshold_min</emphasis> to ANYBODY and
-					<emphasis>threshold_max</emphasis> to NOBODY.
-					To send to all DEVELOPERS and above, use DEVELOPER and
-					NOBODY respectively.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_notify_flags</term>
 			<listitem>
-				<para>Defines the specific notification flags when they are
-					different from the defaults defined in
-					<emphasis>$g_default_notify_flags</emphasis>.
+				<para>Sets notifications overrides for specific actions/statuses.
 				</para>
-				<para>For example, the following code overrides the default by
-					disabling notifications to bugnote authors and users
-					monitoring the bug when submitting a new bug:
-<programlisting>
-$g_notify_flags['new'] = array(
-	'bugnotes' =&gt; OFF,
-	'monitor' =&gt; OFF,
-);
-</programlisting>
-				See <xref linkend="admin.customize.email" />
-				for further examples of customizing the notification flags.
+				<para>If a user category is not listed for an action, the default 
+					defined by<emphasis>$g_default_notify_flags</emphasis> is used.
 				</para>
 				<para>Available actions include:
 					<itemizedlist>
 						<listitem>
-							<para><emphasis>new</emphasis>:
-								a new bug has been added
+							<para><literal>new</literal>:
+								a new Issue has been added
 							</para>
 						</listitem>
 						<listitem>
-							<para><emphasis>reopened</emphasis>:
-								the bug has been reopened
+							<para><literal>reopened</literal>:
+								an Issue has been reopened
 							</para>
 						</listitem>
 						<listitem>
-							<para><emphasis>deleted</emphasis>:
-								a bug has been deleted
+							<para><literal>deleted</literal>:
+								an Issue has been deleted
 							</para>
 						</listitem>
 						<listitem>
-							<para><emphasis>owner</emphasis>:
-								the bug has been assigned a new owner
+							<para><literal>owner</literal>:
+								an Issue has been assigned to a new owner
 							</para>
 						</listitem>
 						<listitem>
-							<para><emphasis>bugnote</emphasis>:
+							<para><literal>bugnote</literal>:
 								a bugnote has been added to a bug
 							</para>
 						</listitem>
 						<listitem>
-							<para><emphasis>sponsor</emphasis>:
-								the sponsorship for the bug has changed
+							<para><literal>sponsor</literal>:
+								the sponsorship for the Issue has changed
 								(added, deleted or updated)
 							</para>
 						</listitem>
 						<listitem>
-							<para><emphasis>relation</emphasis>:
-								a relationship for the bug has changed
+							<para><literal>relation</literal>:
+								a relationship for the Issue has changed
 								(added, deleted or updated)
 							</para>
 						</listitem>
 						<listitem>
-							<para><emphasis>monitor</emphasis>:
+							<para><literal>monitor</literal>:
 								a user is added to the monitor list.
 							</para>
 						</listitem>
+						<listitem>
+							<para><emphasis>status</emphasis>:
+								A status code, as defined in
+								<emphasis>$g_status_enum_string</emphasis>,
+								(see <xref linkend="admin.config.misc" />).
+								For example:
+								<emphasis>resolved</emphasis>,
+								<emphasis>closed</emphasis>,
+								<emphasis>feedback</emphasis>.
+								<emphasis>acknowledged</emphasis>,
+								etc.
+
+								<note><para>
+									Spaces in the status code are replaced with
+									underscores ('_') when creating the action.
+								</para>
+								</note>
+							</para>
+						</listitem>
 					</itemizedlist>
-					In addition, an action can match the bug status in
-					<emphasis>$g_status_enum_string</emphasis>. Note that spaces
-					in the string are replaced with underscores ('_') when
-					creating the action. Thus, using the defaults, 'feedback'
-					would be a valid action.
+				</para>
+				<para>For example, the following code overrides the default by
+					disabling notifications to bugnote authors and users
+					monitoring the bug when acknowledging a new bug:
+<programlisting>
+$g_notify_flags['acknowledged'] = array(
+	'bugnotes' =&gt; OFF,
+	'monitor' =&gt; OFF,
+);
+</programlisting>
+					See <xref linkend="admin.customize.email" />
+					for further examples of customizing the notification flags.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -346,6 +394,7 @@ $g_notify_flags['new'] = array(
 		<varlistentry>
 			<term>$g_smtp_host</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>This option specifies the SMTP server to submit messages to.
 					The SMTP server (MTA) then takes on the responsibility of delivering
 					messages to their final destinations.
@@ -371,6 +420,7 @@ $g_notify_flags['new'] = array(
 		<varlistentry>
 			<term>$g_smtp_port</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>The default SMTP port to use.
 					This can be overridden individually for specific hosts.
 					(see $g_smtp_host).
@@ -384,6 +434,7 @@ $g_notify_flags['new'] = array(
 		<varlistentry>
 			<term>$g_smtp_connection_mode</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>Allow secure connection to the SMTP server. Valid values are:
 					<itemizedlist>
 						<listitem><para><emphasis>'' (empty string)</emphasis>:
@@ -398,6 +449,7 @@ $g_notify_flags['new'] = array(
 		<varlistentry>
 			<term>$g_smtp_username</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>SMTP Server Authentication user
 				</para>
 				<para>Allows the use of SMTP Authentication when using a remote SMTP host.
@@ -412,6 +464,7 @@ $g_notify_flags['new'] = array(
 		<varlistentry>
 			<term>$g_smtp_password</term>
 			<listitem>
+				<para>This config option is specific to PhpMailer provider.</para>
 				<para>This is the password that is used in SMTP Authentication.
 					Not used when $g_smtp_username = ''
 				</para>
@@ -538,6 +591,7 @@ $g_notify_flags['new'] = array(
 	<section id="admin.config.email.dkim">
 		<title>DKIM signature</title>
 
+		<para>These config options are specific to PhpMailer provider.</para>
 		<para>In order to setup
 			<ulink url="https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail"
 				>DomainKeys Identified Mail (DKIM) Signatures</ulink>
@@ -647,6 +701,8 @@ $g_notify_flags['new'] = array(
 
 	<section id="admin.config.email.smime">
 		<title>S/MIME signature</title>
+
+		<para>These config options are specific to PhpMailer provider.</para>
 
 		<para>This sections describes the necessary settings to enable
 			<ulink url="https://en.wikipedia.org/wiki/S/MIME">S/MIME</ulink>

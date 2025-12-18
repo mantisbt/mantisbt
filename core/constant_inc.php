@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.27.3' );
+define( 'MANTIS_VERSION', '2.28.0-dev' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -40,8 +40,8 @@ define( 'WARN', 2 );
 #   there may be compatibility issues)
 # ¹ Enforced in core.php, MantisBT will halt if condition is not met.
 define( 'PHP_MIN_VERSION', '7.4.0' );
-define( 'PHP_MAX_VERSION', '8.4.0' ); # Do not define (i.e. comment out) if there are no known restrictions
-define( 'PHP_SUPPORTED_VERSION', '8.4' ); # should be defined as X.Y (not X.Y.Z)
+//define( 'PHP_MAX_VERSION', '8.4.0' ); # Do not define (i.e. comment out) if there are no known restrictions
+define( 'PHP_SUPPORTED_VERSION', '8.5' ); # should be defined as X.Y (not X.Y.Z)
 
 # Other PHP-related constants
 define( 'PHP_CLI', 0 );
@@ -638,6 +638,7 @@ define( 'LINKS_SAME_WINDOW', 1 );
 define( 'LINKS_NEW_WINDOW', 2 );
 define( 'LINKS_NOOPENER', 4 );
 define( 'LINKS_NOREFERRER', 8 );
+define( 'LINKS_NOFOLLOW_EXTERNAL', 16);
 
 # Auth Related Constants
 define( 'API_TOKEN_LENGTH', 32 );
@@ -700,6 +701,7 @@ define( 'DB_MAX_INT', 2147483647 );
 # HTTP Status Codes
 define( 'HTTP_STATUS_SUCCESS', 200 );
 define( 'HTTP_STATUS_CREATED', 201 );
+define( 'HTTP_STATUS_ACCEPTED', 202 );
 define( 'HTTP_STATUS_NO_CONTENT', 204 );
 define( 'HTTP_STATUS_NOT_MODIFIED', 304 );
 define( 'HTTP_STATUS_BAD_REQUEST', 400 );

@@ -18,11 +18,6 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
- * Collapsible element functions
- */
-var g_collapse_clear = 1;
-
 /**
  * MantisBT config options.
  * Initialized in javascript_config.php
@@ -131,49 +126,60 @@ $(document).ready( function() {
 		$('#projects-list .search').focus();
 	});
 
-	$('.widget-box').on('shown.ace.widget' , function(event) {
-		var t_id = $(this).attr('id');
-		var t_cookie = GetCookie( config.collapse_settings_cookie );
-		if ( 1 == g_collapse_clear ) {
-			t_cookie = "";
-			g_collapse_clear = 0;
-		}
-		t_cookie = t_cookie.replace("|" + t_id + ":1", '' );
-		t_cookie = t_cookie + "|" + t_id + ":0";
-		SetCookie( config.collapse_settings_cookie, t_cookie );
-	});
+	$('.widget-box').on('shown.ace.widget', function(event) {
+		SetCookie(config.collapse_settings_cookie, $(this).attr('id'), false);
+	}).on('hidden.ace.widget', function(event) {
+		SetCookie(config.collapse_settings_cookie, $(this).attr('id'), true);
+	}).each( function() {
+		// Restore widget collapse state from cookies
+		var t_collapse = GetCookieId(config.collapse_settings_cookie, $(this).attr('id'));
+		if( t_collapse != -1 && $(this).find('> .widget-header a[data-action=collapse]').length ) {
+			t_collapse = ( t_collapse == '1' );
+			if( t_collapse != $(this).hasClass('collapsed') ) {
 
-	$('.widget-box').on('hidden.ace.widget' , function(event) {
-		var t_id = $(this).attr('id');
-		var t_cookie = GetCookie( config.collapse_settings_cookie );
-		if ( 1 == g_collapse_clear ) {
-			t_cookie = "";
-			g_collapse_clear = 0;
+				var t_icon = $(this).find('> .widget-header a .ace-icon');
+				var t_icon_1 = t_icon.data('icon-hide');
+				if ( !t_icon_1 ) t_icon_1 = 'fa-chevron-up';
+				var t_icon_2 = t_icon.data('icon-show');
+				if ( !t_icon_2 ) t_icon_2 = 'fa-chevron-down';
+
+				if ( t_collapse ) {
+					$(this).addClass('collapsed');
+					t_icon.removeClass(t_icon_1).addClass(t_icon_2);
+				} else {
+					$(this).removeClass('collapsed');
+					t_icon.removeClass(t_icon_2).addClass(t_icon_1);
+				}
+			}
 		}
-		t_cookie = t_cookie.replace( "|" + t_id + ":0", '' );
-		t_cookie = t_cookie + "|" + t_id + ":1";
-		SetCookie( config.collapse_settings_cookie, t_cookie );
 	});
 
 	$('#sidebar-btn.sidebar-toggle').on('click', function (event) {
-		var t_cookie;
 		var t_sidebar = $(this).closest('.sidebar');
-		var t_id = t_sidebar.attr('id');
+		SetCookie(config.collapse_settings_cookie, t_sidebar.attr('id'), !t_sidebar.hasClass("menu-min"));
+	}).each( function() {
+		// Restore sidebar collapse state from cookies
+		var t_sidebar = $(this).closest('.sidebar');
+		var t_collapse = GetCookieId(config.collapse_settings_cookie, t_sidebar.attr('id'));
+		if( t_collapse != -1 ) {
+			t_collapse = ( t_collapse == '1' );
+			if( t_collapse != t_sidebar.hasClass('menu-min') ) {
 
-		if (1 == g_collapse_clear) {
-			t_cookie = "";
-			g_collapse_clear = 0;
-		} else {
-			// Get collapse state and remove the old value
-			t_cookie = GetCookie(config.collapse_settings_cookie);
-			t_cookie = t_cookie.replace(new RegExp('\\|' + t_id + ':.'), '');
-		}
+				var t_icon = $(this).find('> .ace-icon');
+				var t_icon_1 = t_icon.data('icon1');
+				if( !t_icon_1 ) t_icon_1 = 'fa-angle-double-left';
+				var t_icon_2 = t_icon.data('icon2');
+				if( !t_icon_2 ) t_icon_2 = 'fa-angle-double-right';
 
-		// Save the new collapse state
-		var t_value = !t_sidebar.hasClass("menu-min") | 0;
-		t_cookie += '|' + t_id + ':' + t_value;
-
-		SetCookie(config.collapse_settings_cookie, t_cookie);
+				if ( t_collapse ) {
+					t_sidebar.addClass('menu-min');
+					t_icon.removeClass(t_icon_1).addClass(t_icon_2);
+				} else {
+					t_sidebar.removeClass('menu-min');
+					t_icon.removeClass(t_icon_2).addClass(t_icon_1);
+				}
+			}
+		}		
 	});
 
 	$('input[type=text].typeahead').each(function() {
@@ -535,7 +541,7 @@ $(document).ready( function() {
 	});
 
 	$('a.click-url').bind("click", function() {
-		$(this).attr("href", $(this).attr("url"));
+		$(this).attr("href", $(this).data("url"));
 	});
 
 	$('input[name=private].ace').bind("click", function() {
@@ -636,6 +642,21 @@ $(document).ready( function() {
 			.addClass(getColorClassName(me.val()));
 		me.data('prev', me.val());
 	});
+
+	/**
+	 * Adjust footer height based on its content
+	 */
+	var bottom = $('.navbar-fixed-bottom');
+	var bottom_placeholder = $('<div>', {
+		'class': 'col-xs-12',
+		'width': '100%'
+	}).insertBefore(bottom);
+	var footer = $('.footer');
+	var footer_content = $('.footer-content');
+	$(window).on('resize.footer', function() {
+		bottom_placeholder.css('height', parseInt(bottom.height()) + 'px');
+		footer.css('padding-top', parseInt(footer_content.height()) + 'px');
+		}).triggerHandler('resize.footer');
 });
 
 function setBugLabel() {
@@ -681,45 +702,55 @@ function Trim( p_string ) {
  * Cookie functions
  */
 function GetCookie( p_cookie ) {
-	var t_cookies = document.cookie;
-
-	t_cookies = t_cookies.split( ";" );
-
-	var i = 0;
-	while( i < t_cookies.length ) {
-		var t_cookie = t_cookies[ i ];
-
-		t_cookie = t_cookie.split( "=" );
-		if ( Trim( t_cookie[ 0 ] ) == p_cookie ) {
-			return( t_cookie[ 1 ] );
+	var t_cookies = document.cookie.split(';');
+	for( var i in t_cookies ) {
+		var t_cookie = t_cookies[i].split('=');
+		if ( Trim( t_cookie[0] ) == p_cookie ) {
+			return t_cookie[1].split('|');
 		}
-		i++;
 	}
 
 	return -1;
 }
 
-function SetCookie( p_cookie, p_value ) {
+function SetCookie( p_cookie, p_id, p_value ) {
 	var t_expires = new Date();
+	t_expires.setTime(t_expires.getTime() + (365 * 24 * 60 * 60 * 1000));
 
-	t_expires.setTime( t_expires.getTime() + (365 * 24 * 60 * 60 * 1000));
+	var t_new_cookies = new Array();
+	var t_cookies = GetCookie(p_cookie);
+	if( t_cookies != -1 ) {
+		for( var i in t_cookies ) {
+			if ( t_cookies[i].indexOf(p_id + ':') != 0 ) {
+				t_new_cookies.push(t_cookies[i]);
+			}
+		}
+	}
+	t_new_cookies.push(p_id + ':' + (p_value ? '1' : '0'));
 
-	document.cookie = p_cookie + "=" + p_value +
+	document.cookie = p_cookie + "=" + t_new_cookies.join('|') +
 		"; expires=" + t_expires.toUTCString() +
 		( config.cookie_domain ? "; domain=" + config.cookie_domain : '' ) +
 		"; path=" + config.cookie_path +
 		"; samesite=" + config.cookie_samesite;
 }
 
+function GetCookieId( p_cookie, p_id ) {
+	var t_cookies = GetCookie(p_cookie);
+	if( t_cookies != -1 ) {
+		for( var i in t_cookies ) {	
+			if( t_cookies[i].indexOf(p_id + ':') == 0 ) {
+				return t_cookies[i].at(p_id.length + 1);
+			}
+		}
+	}
+
+	return -1;
+}
+
 function ToggleDiv( p_div ) {
 	var t_open_div = '#' + p_div + "_open";
 	var t_closed_div = '#' + p_div + "_closed";
-
-	var t_cookie = GetCookie( config.collapse_settings_cookie );
-	if ( 1 == g_collapse_clear ) {
-		t_cookie = "";
-		g_collapse_clear = 0;
-	}
 	var t_open_display = $(t_open_div).css('display');
 	$(t_open_div).toggle();
 
@@ -727,15 +758,7 @@ function ToggleDiv( p_div ) {
 		$(t_closed_div).toggle();
 	}
 
-	if ( t_open_display == "none" ) {
-		t_cookie = t_cookie.replace( "|" + p_div + ":0", '' );
-		t_cookie = t_cookie + "|" + p_div + ":1";
-	} else {
-		t_cookie = t_cookie.replace( "|" + p_div + ":1", '' );
-		t_cookie = t_cookie + "|" + p_div + ":0";
-	}
-
-	SetCookie( config.collapse_settings_cookie, t_cookie );
+	SetCookie( config.collapse_settings_cookie, p_div, ( t_open_display == "none" )	);
 }
 
 function setDisplay(idTag, state)

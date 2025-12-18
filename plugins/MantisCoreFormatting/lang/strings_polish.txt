@@ -40,6 +40,7 @@
  *
  * @author BeginaFelicysym
  * @author Cysioland
+ * @author Lspychala
  * @author Sp5uhe
  * @author WaldiSt
  * @author Woytecr
@@ -52,7 +53,33 @@ $s_plugin_format_process_text = 'Edycja tekstu';
 $s_plugin_format_process_text_warning_notice = 'Nie wyłączaj, chyba że dobrze wiesz, co robisz. Jeśli wyłączone, możliwe są ataki cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'Przetwarzanie adresu URL';
 $s_plugin_format_process_buglinks = 'Linki wewnętrzne MantisBT (Zgłoszenia i Komentarze do zgłoszeń)';
+$s_plugin_format_process_buglinks_info = 'Twoja konfiguracja definiuje tag <em>problemu</em> jako „ %s ”, a tag <em>notatki problemu</em> jako „ %s ”';
 $s_plugin_format_process_markdown = 'Przetwarzanie Markdown';
 $s_plugin_format_process_markdown_info = 'Stylowanie z obsługą Markdown, składnia formatowania tekstu zaprojektowana tak, aby można było ją przekonwertować na kod HTML.';
 $s_plugin_format_enabled = 'zał.';
 $s_plugin_format_disabled = 'wył.';
+$s_plugin_format_syntax_highlighting = 'Podświetlanie składni dla bloków kodu';
+$s_plugin_format_syntax_highlighting_info = 'Podświetlanie składni działa tylko wtedy, gdy aktywna jest opcja „Przetwarzanie Markdown”.';
+$s_plugin_format_syntax_highlighting_theme = 'Motyw bloków kodu';
+$s_plugin_format_syntax_highlighting_plugins = 'Opcje bloków kodu';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Kopiuj do schowka';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Pokazuje mały przycisk umożliwiający skopiowanie zawartości bloku kodu do schowka.';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Kopiuj';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Skopiowano';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Naciśnij Ctrl+C, aby skopiować';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Pokaż język';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Pokazuje, jaki język zawiera blok kodu.';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Numery linii';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Pokazuje numery wierszy.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Pokaż odstępy';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Wyświetla ukryte znaki (np. w przypadku wcięć).';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Normalizuj odstępy';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Przycina wszystkie początkowe i końcowe odstępy w bloku kodu. Usuwa również dodatkowe wcięcia i końcowe odstępy w każdym wierszu.';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Dopasowane aparaty ortodontyczne';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'Pokazuje parowanie nawiasów po najechaniu myszką. W tym „tęczowe nawiasy klamrowe” (każda para ma swój własny kolor).';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Rozszerzone wyróżnianie różnic (diff)';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'Koloruje tło linii, a nie tekst. Oprócz „diff” możliwe jest kolorowanie specyficzne dla danego języka (np. „diff-javascript”).';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Wizualizuj kolory CSS';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Wyświetla mały kolorowy kwadrat przed definicją koloru (np. przed „#000”).';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Podglądy niektórych definicji CSS';
+$s_plugin_format_syntax_highlighting_plugin_previewers_desc = 'Po najechaniu myszką na definicje „kąta”, „koloru”, „gradientu”, „łagodzenia” lub „czasu” pojawi się podgląd.';

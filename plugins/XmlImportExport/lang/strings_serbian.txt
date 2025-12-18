@@ -38,22 +38,23 @@
  * @ingroup Language
  * @file
  *
+ * @author Kizule
  * @author Obsuser
  * @author Rancher
  * @author Srdjan m
  * @author Srđan
  */
 
-$s_plugin_XmlImportExport_title = 'Проблеми у увозу/извозу';
-$s_plugin_XmlImportExport_description = 'Додаје могућности увоза и извоза у XML.';
+$s_plugin_XmlImportExport_title = 'Увоз/Извоз проблема';
+$s_plugin_XmlImportExport_description = 'Додаје могућности увоза и извоза XML-а у MantisBT.';
 $s_plugin_XmlImportExport_import = 'Увези проблеме';
 $s_plugin_XmlImportExport_export = 'XML извоз';
-$s_plugin_XmlImportExport_config_title = 'XML увозни/извозни приступни нивои конфигурације';
+$s_plugin_XmlImportExport_config_title = 'Конфигурација нивоа приступа за XML увоз/извоз';
 $s_plugin_XmlImportExport_import_threshold = 'Увези проблеме';
 $s_plugin_XmlImportExport_export_threshold = 'Извези проблеме';
 $s_plugin_XmlImportExport_action_update = 'Ажурирај';
-$s_plugin_XmlImportExport_importing_in_project = 'Увожење проблема у пројекат:';
-$s_plugin_XmlImportExport_import_options = 'Поставке увоза';
+$s_plugin_XmlImportExport_importing_in_project = 'Увожење проблема у пројекат: \'%s\'';
+$s_plugin_XmlImportExport_import_options = 'Опције увоза';
 $s_plugin_XmlImportExport_cross_references = 'Упућивања';
 $s_plugin_XmlImportExport_default_strategy = 'Подразумевана стратегија за претварање:';
 $s_plugin_XmlImportExport_renumber = 'Пренумериши';

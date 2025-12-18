@@ -38,6 +38,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -80,11 +82,12 @@ function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p
  * Returns a string representation of the user, together with a link to the issues
  * acted on by the user ( reported, handled or commented on )
  *
- * @param integer $p_user_id A valid user identifier.
+ * @param int   $p_user_id A valid user identifier.
  * @param array $p_filter Filter array.
+ *
  * @return string
  */
-function summary_helper_get_developer_label( $p_user_id, array $p_filter = null ) {
+function summary_helper_get_developer_label( $p_user_id, array $p_filter = [] ) {
 	$t_user = string_display_line( user_get_name( $p_user_id ) );
 
 	$t_link_prefix = summary_get_link_prefix( $p_filter );
@@ -179,15 +182,16 @@ function summary_helper_get_bugratio( $p_bugs_open, $p_bugs_resolved, $p_bugs_cl
 }
 
 /**
- * Used in summary reports - this function prints out the summary for the given enum setting.
- * The enum field name is passed in through $p_enum.
- * A filter can be used to limit the visibility.
+ * Prints out the summary for the given enum setting.
  *
- * @param string $p_enum Enum field name.
- * @param array $p_filter Filter array.
+ * Used in summary reports.
+ *
+ * @param string $p_enum   Enum field name.
+ * @param array  $p_filter Filter array to limit the visibility.
+ *
  * @return void
  */
-function summary_print_by_enum( $p_enum, array $p_filter = null ) {
+function summary_print_by_enum( $p_enum, array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 
 	$t_project_filter = helper_project_specific_where( $t_project_id );
@@ -241,9 +245,9 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 
 	foreach( $t_cache as $t_enum => $t_item) {
 		# Build up the hyperlinks to bug views
-		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
-		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] : 0;
-		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
+		$t_bugs_open = $t_item['open'] ?? 0;
+		$t_bugs_resolved = $t_item['resolved'] ?? 0;
+		$t_bugs_closed = $t_item['closed'] ?? 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
@@ -296,14 +300,16 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 }
 
 /**
- * Print list of open bugs with the highest activity score the score is calculated assigning
- * one "point" for each history event associated with the bug.
- * A filter can be used to limit the visibility.
+ * Print list of open bugs with the highest activity score.
  *
- * @param array $p_filter Filter array.
+ * The score is calculated assigning one "point" for each history event
+ * associated with the bug.
+ *
+ * @param array $p_filter Filter array to limit the visibility.
+ *
  * @return void
  */
-function summary_print_by_activity( array $p_filter = null ) {
+function summary_print_by_activity( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 	$t_specific_where = helper_project_specific_where( $t_project_id );
@@ -361,12 +367,13 @@ function summary_print_by_activity( array $p_filter = null ) {
 
 /**
  * Print list of bugs opened from the longest time.
- * A filter can be used to limit the visibility.
  *
- * @param array $p_filter Filter array.
+ * @param array $p_filter Filter array to limit the visibility.
+ *
  * @return void
+ * @throws ClientException
  */
-function summary_print_by_age( array $p_filter = null ) {
+function summary_print_by_age( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
@@ -412,13 +419,13 @@ function summary_print_by_age( array $p_filter = null ) {
 }
 
 /**
- * print bug counts by assigned to each developer.
- * A filter can be used to limit the visibility.
+ * Print bug counts by assigned to each developer.
  *
- * @param array $p_filter Filter array.
+ * @param array $p_filter Filter array to limit the visibility.
+ *
  * @return void
  */
-function summary_print_by_developer( array $p_filter = null ) {
+function summary_print_by_developer( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 
 	$t_specific_where = helper_project_specific_where( $t_project_id );
@@ -473,12 +480,12 @@ function summary_print_by_developer( array $p_filter = null ) {
 
 /**
  * Print bug counts by reporter id.
- * A filter can be used to limit the visibility.
  *
- * @param array $p_filter Filter array.
+ * @param array $p_filter Filter array to limit the visibility.
+ *
  * @return void
  */
-function summary_print_by_reporter( array $p_filter = null ) {
+function summary_print_by_reporter( array $p_filter = [] ) {
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
@@ -604,12 +611,11 @@ function summary_print_by_reporter( array $p_filter = null ) {
 
 /**
  * Print a bug count per category.
- * A filter can be used to limit the visibility.
  *
- * @param array $p_filter Filter array.
+ * @param array $p_filter Filter array to limit the visibility.
  * @return void
  */
-function summary_print_by_category( array $p_filter = null ) {
+function summary_print_by_category( array $p_filter = [] ) {
 	$t_summary_category_include_project = config_get( 'summary_category_include_project' );
 
 	$t_project_id = helper_get_current_project();
@@ -658,7 +664,7 @@ function summary_print_by_category( array $p_filter = null ) {
 
 		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
-		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_CATEGORY_ID . '=' . urlencode( $t_label );
+		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_CATEGORY_ID . '=' . string_url( $t_label );
 		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 		summary_helper_print_row( string_display_line( $t_label ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
 	}
@@ -666,16 +672,17 @@ function summary_print_by_category( array $p_filter = null ) {
 
 /**
  * Print bug counts by project.
- * A filter can be used to limit the visibility.
+ *
  * @todo check p_cache - static?
  *
- * @param array   $p_projects Array of project id's.
- * @param integer $p_level    Indicates the depth of the project within the sub-project hierarchy.
- * @param array   $p_cache    Summary cache.
- * @param array   $p_filter   Filter array.
+ * @param array $p_projects Array of project id's.
+ * @param int   $p_level    Indicates the depth of the project within the sub-project hierarchy.
+ * @param array $p_cache    Summary cache.
+ * @param array $p_filter   Filter array to limit the visibility.
+ *
  * @return void
  */
-function summary_print_by_project( array $p_projects = array(), int $p_level = 0, array $p_cache = null, array $p_filter = null ) {
+function summary_print_by_project( array $p_projects = [], int $p_level = 0, array $p_cache = [], array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 
 	if( empty( $p_projects ) ) {
@@ -689,7 +696,7 @@ function summary_print_by_project( array $p_projects = array(), int $p_level = 0
 	}
 
 	# Retrieve statistics one time to improve performance.
-	if( null === $p_cache ) {
+	if( empty( $p_cache ) ) {
 		$t_query = new DBQuery();
 		$t_sql = 'SELECT project_id, status, COUNT( status ) AS bugcount FROM {bug}';
 		if( !empty( $p_filter ) ) {
@@ -727,7 +734,7 @@ function summary_print_by_project( array $p_projects = array(), int $p_level = 0
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
 # FILTER_PROPERTY_PROJECT_ID filter by project does not work ??
-#		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . urlencode( $t_project );
+#		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . string_url( $t_project );
 #		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
 		summary_helper_print_row( string_display_line( $t_name ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1]);
@@ -744,13 +751,13 @@ function summary_print_by_project( array $p_projects = array(), int $p_level = 0
 
 /**
  * Print developer / resolution report.
- * A filter can be used to limit the visibility.
  *
  * @param string $p_resolution_enum_string Resolution enumeration string value.
- * @param array $p_filter Filter array.
+ * @param array $p_filter Filter array to limit the visibility.
+ *
  * @return void
  */
-function summary_print_developer_resolution( $p_resolution_enum_string, array $p_filter = null ) {
+function summary_print_developer_resolution( $p_resolution_enum_string, array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 
 	# Get the resolution values to use
@@ -880,13 +887,13 @@ function summary_print_developer_resolution( $p_resolution_enum_string, array $p
 
 /**
  * Print reporter / resolution report.
- * A filter can be used to limit the visibility.
  *
  * @param string $p_resolution_enum_string Resolution enumeration string value.
- * @param array $p_filter Filter array.
+ * @param array $p_filter Filter array to limit the visibility.
+ *
  * @return void
  */
-function summary_print_reporter_resolution( $p_resolution_enum_string, array $p_filter = null ) {
+function summary_print_reporter_resolution( $p_resolution_enum_string, array $p_filter = [] ) {
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
@@ -1019,14 +1026,14 @@ function summary_print_reporter_resolution( $p_resolution_enum_string, array $p_
 
 /**
  * Print reporter effectiveness report.
- * A filter can be used to limit the visibility.
  *
  * @param string $p_severity_enum_string   Severity enumeration string.
  * @param string $p_resolution_enum_string Resolution enumeration string.
- * @param array $p_filter Filter array.
+ * @param array  $p_filter                 Filter array to limit the visibility.
+ *
  * @return void
  */
-function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resolution_enum_string, array $p_filter = null ) {
+function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resolution_enum_string, array $p_filter = [] ) {
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
@@ -1140,13 +1147,13 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 
 /**
  * Calculate time stats for resolved issues.
- * A filter can be used to limit the visibility.
  *
- * @param integer $p_project_id.
- * @param array $p_filter Filter array.
+ * @param int   $p_project_id
+ * @param array $p_filter     Filter array to limit the visibility.
+ *
  * @return array
  */
-function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) {
+function summary_helper_get_time_stats( $p_project_id, array $p_filter = [] ) {
 	$t_specific_where = helper_project_specific_where( $p_project_id );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
@@ -1248,12 +1255,13 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 
 /**
  * Returns a filter to be used in summary pages.
+ *
  * A temporary filter is retrieved if a valid temporary filter key is submitted
  * to the page as request parameter "filter".
  * If no filter key was provided, returns a generic filter that shows all
- * accesible issues by the user.
+ * accessible issues by the user.
  *
- * @return array	Filter array
+ * @return array Filter array
  */
 function summary_get_filter() {
 	$t_filter = null;
@@ -1263,25 +1271,29 @@ function summary_get_filter() {
 	}
 	# if filter parameter doesn't exist or can't be loaded, return a default filter
 	if( null === $t_filter ) {
-			# TODO: for summary, as default, we want to show all status.
-			# Until a better implementation for default/empty filters, we need to adjust here
-			$t_filter = filter_get_default();
-			$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
-			$t_filter['_view_type'] = FILTER_VIEW_TYPE_SIMPLE;
+		# TODO: for summary, as default, we want to show all status.
+		# Until a better implementation for default/empty filters, we need to adjust here
+		$t_filter = filter_get_default();
+		$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+		$t_filter['_view_type'] = FILTER_VIEW_TYPE_SIMPLE;
 	}
 	return $t_filter;
 }
 
 /**
  * Print filter related information for summary page.
+ *
  * If a filter has been applied, display a notice, bug count, link to view issues.
+ *
  * @param array $p_filter Filter array.
+ *
  * @return void
  */
-function summary_print_filter_info( array $p_filter = null ) {
-	if( null === $p_filter ) {
+function summary_print_filter_info( array $p_filter = [] ) {
+	if( empty( $p_filter ) ) {
 		return;
 	}
+
 	# If filter is temporary, then it has been provided explicitly.
 	# When no filter is specified for summary page, we receive a defaulted filter
 	# which don't have any specific id.
@@ -1307,15 +1319,16 @@ function summary_print_filter_info( array $p_filter = null ) {
 }
 
 /**
- * Calculate the number of "open" and "resolve" issues actions in the last X days.
- * This includes each and successive resolution transitions.
- * A filter can be used to limit the visibility.
+ * Calculate the number of "open" and "resolved" issues actions in the last X days.
  *
- * @param array $p_date_array   An array of integers representing days is passed in.
- * @param array $p_filter       Filter array.
- * @return array	Accumulated count for each day range.
+ * This includes each and successive resolution transitions.
+ *
+ * @param array $p_date_array An array of integers representing days is passed in.
+ * @param array $p_filter     Filter array to limit the visibility.
+ *
+ * @return array Accumulated count for each day range.
  */
-function summary_by_dates_bug_count( array $p_date_array, array $p_filter = null ) {
+function summary_by_dates_bug_count( array $p_date_array, array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_specific_where = helper_project_specific_where( $t_project_id );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
@@ -1406,16 +1419,17 @@ function summary_by_dates_bug_count( array $p_date_array, array $p_filter = null
 }
 
 /**
- * This function shows the number of "open" and "resolve" issues actions in the
- * last X days. This includes each issue submission, and it's succesive resolve
+ * Show the number of "open" and "resolved" issues actions in the last X days.
+ *
+ * This includes each issue submission, and its successive resolved
  * and reopen transitions.
- * A filter can be used to limit the visibility.
  *
  * @param array $p_date_array An array of integers representing days is passed in.
- * @param array $p_filter Filter array.
+ * @param array $p_filter     Filter array to limit the visibility.
+ *
  * @return void
  */
-function summary_print_by_date( array $p_date_array, array $p_filter = null ) {
+function summary_print_by_date( array $p_date_array, array $p_filter = [] ) {
 	# clean and sort dates array
 	$t_date_array = array_values( $p_date_array );
 	sort( $t_date_array );
@@ -1476,9 +1490,15 @@ function summary_print_by_date( array $p_date_array, array $p_filter = null ) {
 	}
 }
 
-function summary_get_link_prefix( array $p_filter = null ) {
+/**
+ * Get a temporary filter link.
+ *
+ * @param array $p_filter
+ *
+ * @return string
+ */
+function summary_get_link_prefix( array $p_filter = [] ) {
 	$t_filter_action = filter_is_temporary( $p_filter ) ? FILTER_ACTION_PARSE_ADD : FILTER_ACTION_PARSE_NEW;
 	$t_link_prefix = 'view_all_set.php?type=' . $t_filter_action . '&temporary=y&new=1';
-	$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
-	return $t_link_prefix;
+	return helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
 }

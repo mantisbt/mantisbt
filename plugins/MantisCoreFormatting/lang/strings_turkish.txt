@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Andac
  * @author BaRaN6161 TURK
  * @author Korayal
  */
@@ -54,3 +55,12 @@ $s_plugin_format_process_markdown = 'Markdown İşlemi';
 $s_plugin_format_process_markdown_info = 'Markdown desteği ile stil, metin biçimlendirme sözdizimi, HTML\'ye çevrilebilecek şekilde tasarlanmıştır.';
 $s_plugin_format_enabled = 'Açık';
 $s_plugin_format_disabled = 'Kapalı';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Panoya kopyala';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Kopyala';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Kopyalandı';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Kopyalamak için CTRL+C tuşlarına basın.';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Dili göster';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Kod bloğunun hangi dili içerdiğini gösterir.';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Satır numaraları';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Satır numaralarını gösterir.';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'CSS renklerini görselleştir';

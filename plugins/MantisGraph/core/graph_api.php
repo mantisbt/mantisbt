@@ -210,7 +210,7 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
  *
  * @return array
  */
-function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = array(), array $p_filter = null ) {
+function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = array(), array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
@@ -251,12 +251,12 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
  *
  * @return array An array with keys being status names and values being number of issues with such status.
  */
-function create_bug_status_summary( array $p_filter = null ) {
+function create_bug_status_summary( array $p_filter = [] ) {
 	# When the provided filter is temporary, it's a filter that was explicitly applied to summary pages.
 	# Otherwise, it's a filter created by default by summary api.
 	# In that case, or if no filter has been provided, keep legacy behaviour where we exclude
 	# closed status in this graph
-	if( null === $p_filter || !filter_is_temporary( $p_filter ) ) {
+	if( empty( $p_filter ) || !filter_is_temporary( $p_filter ) ) {
 		$t_status_enum = config_get( 'status_enum_string' );
 		$t_statuses = MantisEnum::getValues( $t_status_enum );
 		$t_closed_threshold = config_get( 'bug_closed_status_threshold' );
@@ -276,13 +276,13 @@ function create_bug_status_summary( array $p_filter = null ) {
 }
 
 /**
- * Create summary for issues resolved by a developer
+ * Create summary for issues resolved by a developer.
  *
- * @param array|null $p_filter Filter array.
+ * @param array $p_filter Filter array.
  *
  * @return array with key being username and value being # of issues fixed.
  */
-function create_developer_resolved_summary( array $p_filter = null ) {
+function create_developer_resolved_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
@@ -328,13 +328,13 @@ function create_developer_resolved_summary( array $p_filter = null ) {
 }
 
 /**
- * Create summary for issues opened by a developer
+ * Create summary for issues opened by a developer.
  *
- * @param array|null $p_filter Filter array.
+ * @param array $p_filter Filter array.
  *
  * @return array with key being username and value being # of issues fixed.
  */
-function create_developer_open_summary( array $p_filter = null ) {
+function create_developer_open_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
@@ -378,13 +378,13 @@ function create_developer_open_summary( array $p_filter = null ) {
 }
 
 /**
- * Create summary table of reporters
+ * Create summary table of reporters.
  *
- * @param array|null $p_filter Filter array.
+ * @param array $p_filter Filter array.
  *
  * @return array
  */
-function create_reporter_summary( array $p_filter = null ) {
+function create_reporter_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
@@ -431,7 +431,7 @@ function create_reporter_summary( array $p_filter = null ) {
  *
  * @return array
  */
-function create_category_summary( array $p_filter = null ) {
+function create_category_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
@@ -473,11 +473,11 @@ function create_category_summary( array $p_filter = null ) {
 /**
  * Generate cumulative graph data by date.
  *
- * @param array|null $p_filter Filter array.
+ * @param array $p_filter Filter array.
  *
- * @return array|null
+ * @return array
  */
-function create_cumulative_bydate( array $p_filter = null ) {
+function create_cumulative_bydate( array $p_filter = [] ) {
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
 	$t_seconds_per_day = SECONDS_PER_DAY;
 
@@ -559,7 +559,7 @@ function create_cumulative_bydate( array $p_filter = null ) {
 	}
 
 	if( !$t_calc_metrics ) {
-		return null;
+		return [];
 	}
 	ksort( $t_calc_metrics );
 
@@ -590,11 +590,11 @@ function graph_date_format( $p_date ) {
 /**
  * Create summary table of projects.
  *
- * @param array|null $p_filter Filter array.
+ * @param array $p_filter Filter array.
  *
  * @return array
  */
-function create_project_summary( array $p_filter = null ) {
+function create_project_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );

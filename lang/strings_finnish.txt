@@ -49,6 +49,7 @@
  * @author Tkh
  * @author Valtlai
  * @author Valtlait
+ * @author Yupik
  */
 
 $s_actiongroup_menu_copy = 'Kopioi';
@@ -372,11 +373,11 @@ $s_bug_deleted_msg = 'Tapahtuma on poistettu...';
 $s_delete_bug_sure_msg = 'Oletko varma, että haluat poistaa tämän tapahtuman?';
 $s_monitor_bug_button = 'Seuraa';
 $s_unmonitor_bug_button = 'Lopeta tapahtuman seuranta';
-$s_upload_file = 'Lähetä tiedosto';
+$s_upload_file = 'Tallenna tiedosto';
 $s_upload_files = 'Lähetä tiedostoja';
 $s_select_file = 'Valitse tiedosto';
 $s_select_files = 'Valitse tiedostot';
-$s_upload_file_button = 'Lähetä tiedosto';
+$s_upload_file_button = 'Tallenna tiedosto';
 $s_upload_files_button = 'Lähetä tiedostoja';
 $s_max_file_size_info = 'Maksimikoko: %1$s %2$s';
 $s_bug_reopened_msg = 'Tapahtuma on uudelleenavattu...';
@@ -457,7 +458,6 @@ $s_last_edited = 'Viimeksi muokattu:';
 $s_hide_content = 'Piilota sisältö';
 $s_show_content = 'Näytä sisältö';
 $s_file_icon_description = '%1$s tiedostokuvake';
-$s_unknown_file_extension = 'tuntematon';
 $s_total_queries_executed = 'Kyselyjä suoritettu yhteensä: %1$d';
 $s_unique_queries_executed = 'Yksilöllisiä kyselyjä suoritettu: %1$d';
 $s_page_execution_time = 'Sivun suoritusaika: %1$s sekuntia';
@@ -689,9 +689,6 @@ $s_reset_password_button = 'Resetoi salasana';
 $s_delete_user_button = 'Poista käyttäjä';
 $s_reset_password_msg = 'Resetoi salasana lähettää vahvistuslinkin osoitteen sähköpostitse.';
 $s_reset_password_msg2 = 'Resetoi salasana asettaa käyttäjälle tyhjän salasanan.';
-$s_show_all_users = 'Kaikki';
-$s_users_unused = 'Ei käytössä';
-$s_users_new = 'Uusi';
 $s_account_reset_msg = 'Vahvistusviesti on lähetetty sähköpostiosoitteeseesi...';
 $s_account_reset_msg2 = 'Käyttäjätunnukselle on asetettu tyhjä salasana...';
 $s_account_unlock_msg = 'Tilin lukitus on poistettu.';
@@ -1065,10 +1062,6 @@ $s_tags = 'Tägit';
 $s_tag_details = 'Tägin tiedot: %1$s';
 $s_tag_id = 'Tägin ID';
 $s_tag_name = 'Nimi';
-$s_tag_creator = 'Luoja';
-$s_tag_created = 'Luontipäivä';
-$s_tag_updated = 'Päivityspäivämäärä';
-$s_tag_description = 'Tägin kuvaus';
 $s_tag_statistics = 'Käyttötilastot';
 $s_tag_update = 'Päivitä tägi: %1$s';
 $s_tag_update_return = 'Takaisin tägiin';
@@ -1090,9 +1083,8 @@ $s_tag_history_detached = 'Tägi irrotettu';
 $s_tag_history_renamed = 'Uudelleennimetty tägi';
 $s_tag_related = 'Sukulaistägit';
 $s_tag_related_issues = 'Jaetut tapahtumat (%1$s)';
-$s_tag_stats_attached = 'Liitetyt tapahtumat: %1$s';
+$s_tag_stats_attached = 'Liitetyt tapahtumat';
 $s_tag_create = 'Luo tägi';
-$s_show_all_tags = 'Kaikki';
 $s_time_tracking_billing_link = 'Ajanseuranta';
 $s_time_tracking = 'Ajanseuranta';
 $s_time_tracking_time_spent = 'Käytetty aika:';
@@ -1273,3 +1265,8 @@ $s_move = 'Siirrä';
 $s_close = 'Sulje';
 $s_add = 'Lisää';
 $s_login = 'Kirjaudu sisään';
+$s_filter_all = 'Kaikki';
+$s_filter_new = 'Uusi';
+$s_filter_unused_tags = 'Ei käytössä';
+$s_filter_unused = 'Ei käytössä';
+$s_unknown = 'tuntematon';

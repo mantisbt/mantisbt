@@ -161,6 +161,7 @@ function html_begin() {
  * @return void
  */
 function html_head_begin() {
+	/** @noinspection HtmlRequiredTitleElement */
 	echo '<head>', "\n";
 }
 
@@ -177,7 +178,7 @@ function html_content_type() {
  * @param string $p_page_title Window title.
  * @return void
  */
-function html_title( $p_page_title = null ) {
+function html_title( $p_page_title = '' ) {
 	$t_page_title = string_html_specialchars( $p_page_title );
 	$t_title = string_html_specialchars( config_get( 'window_title' ) );
 	echo "\t", '<title>';
@@ -227,7 +228,7 @@ function html_css() {
 		if( $t_stylesheet_path == 'status_config.php' ) {
 			$t_stylesheet_path = helper_url_combine(
 				helper_mantis_url( 'css/status_config.php' ),
-				'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+				[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
 			);
 		}
 
@@ -258,7 +259,7 @@ function html_css_link( $p_filename, $p_cache_key = '' ) {
 
 	$t_url = helper_mantis_url( $t_filename );
 	if ( !empty( $p_cache_key ) ) {
-		$t_url = helper_url_combine( $t_url, 'cache_key=' . $p_cache_key );
+		$t_url = helper_url_combine( $t_url, [ 'cache_key' => $p_cache_key ] );
 	}
 
 	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( $t_url, true ), '" />', "\n";
@@ -346,11 +347,11 @@ function html_head_javascript() {
 	# a reload when the content may differ.
 	$t_javascript_translations = helper_url_combine(
 		helper_mantis_url( 'javascript_translations.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'lang' ) )
+		[ 'cache_key' => helper_generate_cache_key( array( 'lang' ) ) ]
 	);
 	$t_javascript_config = helper_url_combine(
 		helper_mantis_url( 'javascript_config.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+		[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
 	);
 	echo "\t" . '<script src="' . $t_javascript_config . '"></script>' . "\n";
 	echo "\t" . '<script src="' . $t_javascript_translations . '"></script>' . "\n";
@@ -384,12 +385,13 @@ function html_head_end() {
 }
 
 /**
- * Prints the logo with an URL link.
+ * Prints the logo with a URL link.
+ *
  * @param string $p_logo Path to the logo image. If not specified, will get it
  *                       from $g_logo_image
  * @return void
  */
-function html_print_logo( $p_logo = null ) {
+function html_print_logo( string $p_logo = '' ) {
 	if( !$p_logo ) {
 		$p_logo = config_get_global( 'logo_image' );
 	}
@@ -399,51 +401,71 @@ function html_print_logo( $p_logo = null ) {
 		$t_show_url = !is_blank( $t_logo_url );
 
 		if( $t_show_url ) {
-			echo '<a id="logo-link" href="', config_get_global( 'logo_url' ), '">';
+			echo '<a class="logo-link" href="', $t_logo_url, '"',
+				helper_get_link_attributes( false, helper_is_link_external( $t_logo_url ) ),
+				'>';
 		}
 		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
-		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="' . helper_mantis_url( $p_logo ) . '" />';
+		echo '<img class="logo-image" alt="', $t_alternate_text,
+			'" title="', $t_alternate_text,
+			'" src="' . helper_mantis_url( $p_logo ) . '">';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
 	}
 }
 
-
-
 /**
  * Print a user-defined banner at the top of the page if there is one.
+ *
+ * @param bool $p_nested Add a div to wrap around the banner
  * @return void
  */
-function html_top_banner() {
+function html_top_banner( bool $p_nested = false ) {
 	$t_page = config_get_global( 'top_include_page' );
-	$t_logo_image = config_get_global( 'logo_image' );
+	
+	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		if( $p_nested ) {
+			echo '<div class="navbar navbar-fixed-top noprint">', "\n";
+		}
+		include( $t_page );
+		if( $p_nested ) {
+			echo '</div>', "\n";
+		}
+	}
+}
+
+/**
+ * Print a user-defined banner at the bottom of the page if there is one.
+ *
+ * @return void
+ */
+function html_bottom_banner() {
+	$t_page = config_get_global( 'bottom_include_page' );
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		echo '<div class="navbar-fixed-bottom noprint">', "\n";
 		include( $t_page );
-	} else if( !is_blank( $t_logo_image ) ) {
-		echo '<div id="banner">';
-		html_print_logo( $t_logo_image );
-		echo '</div>';
+		echo '</div>', "\n";
 	}
-
-	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 }
 
 /**
  * Outputs a message to confirm an operation's result.
- * @param array   $p_buttons     Array of (URL, label) pairs used to generate
- *                               the buttons; if label is null or unspecified,
- *                               the default 'proceed' text will be displayed;
- *                               If the array is empty or not provided, no
- *                               buttons will be printed.
- * @param string  $p_message     Message to display to the user. If none is
- *                               provided, a default message will be printed
- * @param integer $p_type        One of the constants CONFIRMATION_TYPE_SUCCESS,
- *                               CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
+ *
+ * @param array  $p_buttons  Array of (URL, label) pairs used to generate
+ *                           the buttons; if label is null or unspecified,
+ *                           the default 'proceed' text will be displayed;
+ *                           If the array is empty or not provided, no
+ *                           buttons will be printed.
+ * @param string $p_message  Message to display to the user. If none is
+ *                           provided, a default message will be printed
+ * @param int    $p_type     One of the constants CONFIRMATION_TYPE_SUCCESS,
+ *                           CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
+ *
  * @return void
  */
-function html_operation_confirmation( array $p_buttons = null, $p_message = '', $p_type = CONFIRMATION_TYPE_SUCCESS ) {
+function html_operation_confirmation( array $p_buttons = [], string $p_message = '', int $p_type = CONFIRMATION_TYPE_SUCCESS ): void {
 	switch( $p_type ) {
 		case CONFIRMATION_TYPE_FAILURE:
 			$t_alert_css = 'alert-danger';
@@ -479,7 +501,7 @@ function html_operation_confirmation( array $p_buttons = null, $p_message = '', 
 		echo '<div class="btn-group">';
 		foreach( $p_buttons as $t_button ) {
 			$t_url = string_sanitize_url( $t_button[0] );
-			$t_label = isset( $t_button[1] ) ? $t_button[1] : lang_get( 'proceed' );
+			$t_label = $t_button[1] ?? lang_get( 'proceed' );
 
 			print_link_button( $t_url, $t_label );
 		}
@@ -541,7 +563,8 @@ function html_body_end() {
 }
 
 /**
- * Print the closing <html> tag
+ * Print the closing <html> tag.
+ *
  * @return void
  */
 function html_end() {
@@ -679,6 +702,7 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 		echo '<div class="col-md-12 col-xs-12 center">';
 		echo '<div class="btn-group">', "\n";
 
+		/** @noinspection HtmlUnknownTarget */
 		$t_btn_template = '<a class="btn btn-sm btn-primary btn-white %s" href="%s">%s%s</a>' . "\n";
 
 		foreach( $p_menu_items as $t_item ) {
@@ -713,12 +737,15 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 
 /**
  * Print the Summary page's submenu.
+ *
  * The submenu is only printed if there is at least one plugin-defined link, in
  * which case a 'Synthesis' button is added for the summary page itself.
+ *
  * @param string $p_current_page Current page's file name to highlight active menu item
+ *
  * @return void
  */
-function print_summary_submenu( $p_current_page = '' ) {
+function print_summary_submenu( string $p_current_page = '' ): void {
 	# Plugin / Event added options
 	$t_menu_items = plugin_menu_items( 'EVENT_SUBMENU_SUMMARY' );
 
@@ -741,7 +768,7 @@ function print_summary_submenu( $p_current_page = '' ) {
 /**
  * Print the menu for the manage section
  *
- * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @param string $p_page Specifies the current page name so its link can be disabled.
  * @return void
  */
 function print_manage_menu( $p_page = '' ) {
@@ -781,7 +808,7 @@ function print_manage_menu( $p_page = '' ) {
 
 /**
  * Print the menu for the manage configuration section
- * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @param string $p_page Specifies the current page name so its link can be disabled.
  * @return void
  */
 function print_manage_config_menu( $p_page = '' ) {
@@ -821,8 +848,8 @@ function print_manage_config_menu( $p_page = '' ) {
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
 	$t_menu_options = array();
-	foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+	foreach ( $t_event_menu_options as $t_plugin_menu_options ) {
+		foreach ( $t_plugin_menu_options as $t_callback_menu_options ) {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
@@ -856,7 +883,7 @@ function print_manage_config_menu( $p_page = '' ) {
 
 /**
  * Print the menu for the account section
- * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @param string $p_page Specifies the current page name so its link can be disabled.
  * @return void
  */
 function print_account_menu( $p_page = '' ) {
@@ -881,7 +908,7 @@ function print_account_menu( $p_page = '' ) {
 
 /**
  * Print the menu for the documentation section
- * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @param string $p_page Specifies the current page name so its link can be disabled.
  * @return void
  */
 function print_doc_menu( $p_page = '' ) {
@@ -926,13 +953,15 @@ function print_doc_menu( $p_page = '' ) {
 
 /**
  * Print the menu for the summary section.
- * @param string $p_page Specifies the current page name so it's link can be disabled.
- * @param array $p_filter Filter array, the one in use for summary pages.
+ *
+ * @param string     $p_page   Specifies the current page name so its link can be disabled.
+ * @param array|null $p_filter Filter array, the one in use for summary pages.
+ *
  * @return void
  */
-function print_summary_menu( $p_page = '', array $p_filter = null ) {
+function print_summary_menu( $p_page = '', ?array $p_filter = null ): void {
 	$t_link = 'summary_page.php';
-	$t_filter_param = $p_filter ? filter_get_temporary_key_param( $p_filter ) : null;
+	$t_filter_param = $p_filter ? filter_get_temporary_key_param( $p_filter ) : '';
 	if( $t_filter_param ) {
 		$t_link = helper_url_combine( $t_link, $t_filter_param );
 	}
@@ -955,7 +984,7 @@ function print_admin_menu_bar( $p_page ) {
 	# Build array with admin menu items, add Upgrade tab if necessary
 	$t_menu_items['index.php'] = icon_get( 'fa-info-circle', 'blue ace-icon' );
 
-	# At the beginning of admin checks, the DB is not yet loaded so we can't
+	# At the beginning of admin checks the DB is not yet loaded, so we can't
 	# check the schema to inform user that an upgrade is needed
 	if( $p_page == 'check/index.php' ) {
 		# Relative URL up one level to ensure valid links on Admin Checks page
@@ -982,11 +1011,10 @@ function print_admin_menu_bar( $p_page ) {
 
 	foreach( $t_menu_items as $t_menu_page => $t_description ) {
 		$t_class_active = $t_menu_page == $p_page ? ' class="active"' : '';
-		$t_class_green = $t_menu_page == 'install.php' ? 'class="bold green" ' : '';
+		$t_class_green = $t_menu_page == 'install.php' ? ' class="bold green"' : '';
 
 		echo "\t<li$t_class_active>";
-		echo "<a " . $t_class_green
-			. 'href="' . $t_path . $t_menu_page . '">'
+		echo '<a href="' . $t_path . $t_menu_page . '"' . $t_class_green . '>'
 			. $t_description . "</a>";
 		echo '</li>' . "\n";
 	}
@@ -1004,7 +1032,7 @@ function print_admin_menu_bar( $p_page ) {
  */
 function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_method = 'post' ) {
 	$t_form_name = explode( '.php', $p_action, 2 );
-	$p_action = urlencode( $p_action );
+	$p_action = string_url( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
 
 	if( strtolower( $p_method ) == 'get' ) {
@@ -1042,9 +1070,9 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
  * @return string
  *
  * @todo This does not work properly when displaying issues from a project other
- * than then current one, if the other project has custom status or colors.
- * This is due to the dynamic css for color coding (css/status_config.php).
- * Build CSS including project or even user-specific colors ?
+ *       than the current one, if the other project has custom status or colors.
+ *       This is due to the dynamic css for color coding (css/status_config.php).
+ *       Build CSS including project or even user-specific colors ?
  */
 function html_get_status_css_fg( $p_status, $p_user = null, $p_project = null ) {
 	$t_status_enum = config_get( 'status_enum_string', null, $p_user, $p_project );
@@ -1156,7 +1184,8 @@ class TableGridLayout {
 	}
 
 	/**
-	 * Adds a item to the collection
+	 * Adds an item to the collection.
+	 *
 	 * @param TableFieldsItem $p_item An item
 	 */
 	public function add_item( TableFieldsItem $p_item ) {
@@ -1204,27 +1233,21 @@ class TableGridLayout {
 			$p_tr_attr_class = '';
 		}
 		foreach( $t_rows_items as $t_row ) {
-			switch( $this->item_orientation ) {
+			$t_cols_left = $this->cols;
+			echo '<tr' . $p_tr_attr_class . '>';
 
+			switch( $this->item_orientation ) {
 				case self::ORIENTATION_HORIZONTAL:
-					$t_cols_left = $this->cols;
-					echo '<tr' . $p_tr_attr_class . '>';
 					foreach( $t_row as $t_item ) {
 						$this->render_td_item_header( $t_item, 1 );
 						$this->render_td_item_content( $t_item, $t_item->colspan );
 						$t_cols_left -= ( $t_item->colspan + 1 );
 					}
-					if( $t_cols_left > 0 ) {
-						$this->render_td_empty($t_cols_left);
-					}
-					echo '</tr>';
 					break;
 
 				# default is vertical orientation
 				default:
 					# row for headers
-					$t_cols_left = $this->cols;
-					echo '<tr' . $p_tr_attr_class . '>';
 					foreach( $t_row as $t_item ) {
 						$this->render_td_item_header( $t_item, $t_item->colspan );
 						$t_cols_left -= $t_item->colspan;
@@ -1240,20 +1263,20 @@ class TableGridLayout {
 						$this->render_td_item_content( $t_item, $t_item->colspan );
 						$t_cols_left -= $t_item->colspan;
 					}
-					if( $t_cols_left > 0 ) {
-						$this->render_td_empty($t_cols_left);
-					}
-					echo '</tr>';
 			}
+
+			if( $t_cols_left > 0 ) {
+				$this->render_td_empty($t_cols_left);
+			}
+			echo '</tr>';
 		}
 	}
 
 	/**
 	 * Prints HTML code for a spacer row
-	 * @param string $p_class Class of the row ('spacer' by default)
 	 */
-	public function render_spacer( $p_class = 'spacer' ) {
-		echo '<tr class="', $p_class, '"><td colspan="', $this->cols, '"></td></tr>';
+	public function render_spacer() {
+		print_table_spacer( $this->cols );
 	}
 
 	/**

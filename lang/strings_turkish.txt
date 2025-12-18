@@ -39,6 +39,7 @@
  * @file
  *
  * @author Agaafd
+ * @author Andac
  * @author Archaeodontosaurus
  * @author BaRaN6161 TURK
  * @author Burakolik
@@ -59,11 +60,13 @@
  * @author Karduelis
  * @author Khutuck
  * @author Korayal
+ * @author Leo
  * @author McAang
  * @author Meelo
  * @author Melissadilara
  * @author MuratTheTurkish
  * @author Rapsar
+ * @author Sakblue
  * @author SaldırganSincap
  * @author Sayginer
  * @author Sezgin İbiş
@@ -147,6 +150,7 @@ $s_inherit = 'Kategorileri Devral';
 $s_inherit_global = 'Küresel Kategorileri Devral';
 $s_inherit_parent = 'Üst Kategorileri Devral';
 $s_update_subproject_inheritance = 'Altproje Sahiplenmesini Güncelle';
+$s_category_disabled = 'Kategori devre dışı bırakıldı, lütfen başka bir kategori seçin';
 $s_duplicate_of = 'kopyası';
 $s_has_duplicate = 'kopyası var';
 $s_related_to = 'ile ilgili';
@@ -501,13 +505,14 @@ $s_last_edited = 'Son düzenleme:';
 $s_hide_content = 'İçeriği Gizle';
 $s_show_content = 'İçeriği Göster';
 $s_file_icon_description = '%1$s dosya ikonu';
-$s_unknown_file_extension = 'bilinmiyor';
 $s_webmaster_contact_information = 'Yardım için <a href="mailto:%1$s" title="E-posta yoluyla ağ yöneticisiyle iletişime geçin.">yöneticiyle</a> iletişime geçiniz';
 $s_total_queries_executed = 'Toplamda yapılan sorgu sayısı: %1$d';
 $s_unique_queries_executed = 'Yürütülen benzersiz sorgular: %1$d';
 $s_total_query_execution_time = 'Toplam sorgu yürütme süresi: %1$s saniye';
 $s_page_execution_time = 'Sayfa yürütme süresi: %1$s saniye';
 $s_memory_usage = 'Bellek kullanımı: %1$s KiB';
+$s_debug_log = 'Hata Ayıklama Günlüğü';
+$s_debug_log_empty = 'Kayıt boş.';
 $s_log_page_number = 'Sayı';
 $s_log_page_time = 'Yürütme süresi';
 $s_log_page_caller = 'Arayan';
@@ -537,6 +542,10 @@ $s_lost_password_done_title = 'Parola İletisi Gönderildi';
 $s_lost_password_subject = 'Parola Sıfırlama';
 $s_lost_password_info = 'Şifrenizi hatırlayamıyorsanız, lütfen isminizi ve mail adresinizi girin.<br /><br />Eğer girdiğiniz mail adresi geçerli ise, hesabınıza e-mail yoluyla doğrulama kodu içeren özel bir URL gönderilecektir. Lütfen şifrenizi değiştirmek için bu bağlantıyı takip edin.';
 $s_lost_password_confirm_hash_OK = 'Onay kabul edilmiştir. Lütfen şifrenizi güncelleyin.';
+$s_verify_email_title = 'E-posta Adresini Doğrulayın';
+$s_verify_email_pending = 'Yeni e-posta adresi " %1$s " doğrulanmayı bekliyor.';
+$s_verify_email_warning = 'Yeni e-posta adresiniz " %1$s " doğrulandı.';
+$s_verify_email_confirm_msg = 'E-posta adresinin değiştirilmesini onaylamak için, bir onay mesajı "%1$s" e gönderildi. Eski adres, yeni adres doğrulanana kadar aktif kalacak.';
 $s_open_and_assigned_to_me_label = 'Aç ve bana atandı:';
 $s_open_and_reported_to_me_label = 'Aç ve bana göre rapor:';
 $s_newer_news_link = 'Yeni Haberler';
@@ -590,6 +599,7 @@ $s_p = 'k';
 $s_date_created = 'Oluşturduğu Tarih';
 $s_last_visit = 'Son Ziyaret';
 $s_last_visit_label = 'Son Ziyaret:';
+$s_failed_login_count = 'Başarısız Girişler';
 $s_edit_user_link = 'Kullanıcıyı Düzenle';
 $s_search_user_hint = 'Kullanıcı Adı, Gerçek İsim veya E-posta';
 $s_separate_list_items_by = '(liste öğelerini "%1$s" ile ayırın)';
@@ -672,7 +682,7 @@ $s_plugin = 'Eklenti';
 $s_plugins_installed = 'Yüklenen Eklentiler';
 $s_plugins_available = 'Mevcut Eklentiler';
 $s_plugins_missing = 'Eksik veya Geçersiz Eklentiler';
-$s_plugins_missing_description = 'Aşağıdaki listede bulunan Eklentiler kaydedildi, ancak kaynak kodları "%s" içinde bulunamadı veya yüklenemedi. <br> Bunları yeniden yüklemeyi veya kaldırmayı deneyin.';
+$s_plugins_missing_description = 'Aşağıdaki listedeki Eklentiler şunlardır:<ul><li>kayıtlı, ancak kaynak kodları "%s" içinde bulunamadı veya buradan yüklenemedi</li><li>kuruldu, ancak başlatılamadı.</li></ul>Bunları yeniden yüklemeyi veya kaldırmayı deneyin.';
 $s_plugin_description = 'Açıklama';
 $s_plugin_problem_description = 'Program açıklaması';
 $s_plugin_author = 'Yazar: %1$s';
@@ -698,7 +708,8 @@ $s_plugin_invalid_status_message = 'Aşağıdaki gerekli özellikler Eklenti Sı
 $s_plugin_missing_description = 'Eksik Eklenti';
 $s_plugin_missing_status_message = 'Eklenti Mantis veri tabanına kuruldu, ama yüklenemedi.';
 $s_plugin_missing_class_description = 'Eksik Eklenti Temel Sınıfı';
-$s_plugin_missing_class_status_message = 'Bu Eklenti için bir dizin bulundu, ancak içinde uygun bir Eklenti kodu yok. Dizinin adının Eklentinin temel adıyla uygun olduğuna emin olun (büyük küçük harf duyarlı)';
+$s_plugin_missing_class_status_message = 'Bu Eklenti için bir dizin bulundu, ancak içinde karşılık gelen bir Eklenti kodu yok. Şunlardan emin olun: dizinin adı, Eklenti\'nin temel adı olan "%1$s" ile eşleşiyor (büyük/küçük harfe duyarlı), aynı ada sahip bir PHP dosyası dizinde mevcut ve MantisPlugin\'i genişleten "%2$s" adlı bir Sınıf tanımlıyor.';
+$s_plugin_missing_event = 'Eksik Etkinlikler';
 $s_project_added_msg = 'Proje başarıyla eklendi...';
 $s_category_added_msg = 'Kategori başarıyla eklendi...';
 $s_category_deleted_msg = 'Kategori başarıyla silindi...';
@@ -774,9 +785,6 @@ $s_delete_user_button = 'Kullanıcıyı Sil';
 $s_impersonate_user_button = 'Kullanıcıyı Taklit Et';
 $s_reset_password_msg = 'Parolayı Sıfırlamak, onay URL\'sini e-posta yoluyla gönderir.';
 $s_reset_password_msg2 = 'Parolayı Sıfırlamak parolanın boş olmasını sıfırlar.';
-$s_show_all_users = 'Hepsi';
-$s_users_unused = 'Kullanılmamış';
-$s_users_new = 'Yeni';
 $s_email_not_unique = 'E-posta adresi en az bir başka kullanıcı hesabıyla ilişkilidir';
 $s_account_reset_msg = 'Seçilen kullanıcının e-posta adresine bir onay isteği gönderildi. Bunu kullanarak kullanıcı parolayı değiştirebilecektir.';
 $s_account_reset_msg2 = 'Hesap şifresi boş olarak düzenlendi...';
@@ -1181,16 +1189,12 @@ $s_tags = 'Etiketler';
 $s_tag_details = 'Etiket Ayrıntıları: %1$s';
 $s_tag_id = 'Etiket kimliği';
 $s_tag_name = 'İsim';
-$s_tag_creator = 'Oluşturan';
-$s_tag_created = 'Tarih Oluşturuldu';
-$s_tag_updated = 'Son Güncelleme';
-$s_tag_description = 'Etiket Açıklaması';
 $s_tag_statistics = 'Kullanım İstatistikleri';
 $s_tag_update = 'Etiketi Güncelle: %1$s';
 $s_tag_update_return = 'Etikete Geri Dön';
 $s_tag_update_button = 'Etiketi Güncelle';
 $s_tag_delete_button = 'Etiketi Sil';
-$s_tag_delete_message = 'Bu etiketi silmek istediğinizden emin misiniz?';
+$s_tag_delete_message = '"%1$s" etiketini silmek istediğinizden emin misiniz?';
 $s_tag_existing = 'Mevcut etiketler';
 $s_tag_none_attached = 'Hiçbir etiketi yok.';
 $s_tag_attach = 'Ekle';
@@ -1207,9 +1211,8 @@ $s_tag_history_detached = 'Etiket Kaldırıldı';
 $s_tag_history_renamed = 'Etiket Yeniden Adlandırıldı';
 $s_tag_related = 'İlgili Etiketler';
 $s_tag_related_issues = 'Paylaşılan Etiketler (%1$s)';
-$s_tag_stats_attached = 'Sorunlar eklendi: %1$s';
+$s_tag_stats_attached = 'Sorunlar eklendi';
 $s_tag_create = 'Etiket Oluştur';
-$s_show_all_tags = 'Hepsi';
 $s_time_tracking_billing_link = 'Zaman İzleme';
 $s_time_tracking = 'Zaman izleme';
 $s_time_tracking_time_spent = 'Harcanan süre:';
@@ -1280,7 +1283,7 @@ $s_timeline_no_activity = 'Zaman aralığında aktivite yok.';
 $s_timeline_title = 'Zaman çizelgesi';
 $s_timeline_more = 'Daha fazla etkinlik...';
 $s_missing_error_string = 'Eksik Hata Dizesi: %1$s';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Bu işlem sırasında bir hata oluştu. Bu hatayı yerel yöneticinize bildirmek isteyebilirsiniz.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Bu işlem sırasında bir hata oluştu. Bunu yerel yöneticinize bildirmeniz önerilir.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL hatası tespit edildi.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Raporunuzda bir hata tespit edildi.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Dosya adı belirtilmedi.';
@@ -1288,7 +1291,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Bu dosya türüne izin verilmemektedir';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dizin bulunamadı. Lütfen proje ayarlarınızı kontrol ediniz.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Bu isimde bir proje zaten mevcut.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Gerekli olan "%1$s" girdi alanı boş bırakıldı. Lütfen girdilerinizi kontrol ediniz.';
-$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = '\'%1$s\' için geçersiz değer';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = '"%1$s" için geçersiz değer';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu hesap korunuyor. Hesap koruması kaldırılana kadar istenen işlemi gerçekleştirmenize izin verilmiyor.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Erişim Engellendi.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dosya yükleme başarısız oldu. Dosya MantisBT tarafından okunamaz. Proje ayarlarını gözden geçirin.';
@@ -1298,7 +1301,7 @@ $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Bu sayfa için gerekli bir parametre (
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Bu kullanıcı adı zaten kullanılıyor. Lütfen başka bir kullanıcı adı seçiniz.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Bu e-posta zaten kullanılıyor. Lütfen geri dönün ve başka bir tane seçin.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Yapılandırma seçeneği "%1$s" bulunamadı.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Yapılandırma seçeneği "%1$s" veritabanında kurulamaz. config_inc.php dosyası içinde ayarlanması gerekmektedir.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '"%1$s" yapılandırma seçeneği veritabanında ayarlanamaz. config_inc.php dosyasında tanımlanmalıdır.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = '"%1$s" yapılandırma seçeneği ayarlanamıyor: %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Dize "%1$s" bulunamadı.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Not bulunamadı.';
@@ -1358,7 +1361,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Bu isimde bir proje zaten mevcut.';
 $MANTIS_ERROR[ERROR_NO_COPY_ACTION] = 'Hiçbir kopyalama eylemi belirtilmedi.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategori bulunamadı.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = '"%2$s" projesi için "%1$s" kategorisi bulunamadı.';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'Bu kategori, "Taşıma Eylemleri için Varsayılan Kategori" olması nedeniyle silinemez.';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT] = 'İşlem tamamlanamadı, çünkü "%1$s" Kategori\'si en az bir projede veya genel olarak Taşımalar İçin Varsayılan olarak tanımlandı.';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = '"%1$s" kategorisi, bir veya daha fazla sorunla ilişkilendirildiği için silinemiyor.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Bu sürümde bir proje ismi zaten mevcut.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '"%1$s" sürümü bulunamadı.';
@@ -1381,7 +1384,7 @@ $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Onay kodu eşleşmiyor. Lüt
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '"Parolanızı mı kaybettiniz" özelliği kullanılamıyor.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Parolayı sıfırlamak için bir e-posta adresi girmelisiniz.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Verilen bilgiler herhangi bir kayıtlı hesap ile eşleşmiyor!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Onay URL\'si geçersiz ya da zaten daha önce kullanılmış. Lütfen yeniden kaydolun.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Onay URL\'si geçersiz veya zaten daha önce kullanılmış.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'İşlemdeki istekler maksimum sayıya ulaştı. Lütfen sistem yöneticisi ile irtibat kurun.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Son yönetici hesabını silemez ya da yetkilerini düşüremezsiniz. İstediğiniz işlemi gerçekleştirebilmek için, ilk olarak başka bir yönetici hesabı oluşturmanız gerekmektedir.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Sayfa yönlendirme hatası, config_inc.php ya da custom_*.php dosyalarının içindeki PHP bloğunun dışında boşluk olmadığından emin olun (&lt;?php ?&gt;)';
@@ -1420,7 +1423,7 @@ $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Uyarı: Sistem MantisBT hatala
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Veri türü uyumsuzluğu. Daha fazla bilgi için ayrıntılı hata mesajlarını etkinleştirin.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Bu sorun başka bir kullanıcı tarafından güncellendi, lütfen sayıya geri dönün ve değişikliklerinizi tekrar gönderin.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Son %d saniye içinde %d olayının izin verilen etkinlik sınırına ulaştınız; spam’i önlemek için işleminiz engellendi, lütfen daha sonra tekrar deneyin.';
-$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '"%1$s" alanı daha kısa veya %2$d karakter uzunluğunda olmalı.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '"%1$s" Alanı için maksimum uzunluk %2$d karakterdir.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API simgesi "%s" adı zaten kullanılıyor. Lütfen geri dönün ve başka bir tane seçin.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '$g_log_destination "%s" içinde belirtilen dosya yazılabilir değil.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'Eklenilen kullanıcı, bu sorunu gözlemek için yeterli erişim haklarına sahip değildir.';
@@ -1458,3 +1461,8 @@ $s_move = 'Taşı';
 $s_close = 'Kapat';
 $s_add = 'Ekle';
 $s_login = 'Oturum aç';
+$s_filter_all = 'Hepsi';
+$s_filter_new = 'Yeni';
+$s_filter_unused_tags = 'Kullanılmamış';
+$s_filter_unused = 'Kullanılmamış';
+$s_unknown = 'bilinmiyor';

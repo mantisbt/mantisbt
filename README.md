@@ -1,7 +1,7 @@
 Mantis Bug Tracker (MantisBT)
 =============================
 
-[![Build Status](https://img.shields.io/travis/com/mantisbt/mantisbt/master?logo=travis)](https://app.travis-ci.com/mantisbt/mantisbt)
+[![Build Status](https://github.com/mantisbt/mantisbt/actions/workflows/mantisbt.yml/badge.svg?branch=master)](https://github.com/mantisbt/mantisbt/actions/workflows/mantisbt.yml)
 [![Gitter](https://img.shields.io/gitter/room/mantisbt/mantisbt.svg?logo=gitter)](https://gitter.im/mantisbt/mantisbt)
 
 Screenshots
@@ -33,10 +33,10 @@ Installation
 ------------
 
 * Extract the tarball into a location readable by your web server
-* Point your browser to https://path/to/mantisbt/admin/check/index.php to ensure
-  that your webserver is compatible with MantisBT and configured correctly
-* Point your browser to https://path/to/mantisbt/admin/install.php to begin the
-  database installation process
+* Open your browser and navigate to `https://example.com/mantisbt/admin/check/index.php` to verify
+  that your web server is compatible with MantisBT and configured correctly.
+* Open your browser and navigate to `https://example.com/mantisbt/admin/install.php` to start the
+  database installation process.
 * Select the database type and enter the credentials to access the database
 * Click install/upgrade
 * Installation is complete -- you may need to copy the default configuration
@@ -54,9 +54,9 @@ UPGRADING
 * Copy your configuration from the old installation to the new directory,
   including `config_inc.php`, `custom_strings_inc.php`, `custom_relationships_inc.php`,
   `custom_functions_inc.php` and `custom_constants_inc.php` if they exist
-* Point your browser to https://path/to/mantisbt/admin/check/index.php to ensure that
+* Point your browser to `https://example.com/mantisbt/admin/check/index.php` to ensure that
   your webserver is compatible with MantisBT and configured correctly
-* Point your browser to https://path/to/mantisbt/admin/install.php to upgrade
+* Point your browser to `https://example.com/mantisbt/admin/install.php` to upgrade
   the database schema
 * Click install/upgrade
 * Remove the `admin` directory from within the MantisBT installation path. The

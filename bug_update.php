@@ -33,6 +33,7 @@
  * @uses email_api.php
  * @uses error_api.php
  * @uses event_api.php
+ * @uses file_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
@@ -53,6 +54,7 @@ require_api( 'custom_field_api.php' );
 require_api( 'email_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
+require_api( 'file_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
@@ -153,6 +155,7 @@ $t_bug_note = new BugNoteData();
 $t_bug_note->note = gpc_get_string( 'bugnote_text', '' );
 $t_bug_note->view_state = gpc_get_bool( 'private' ) ? VS_PRIVATE : VS_PUBLIC;
 $t_bug_note->time_tracking = gpc_get_string( 'time_tracking', '0:00' );
+$t_bug_note->files = gpc_get_file( 'ufile', array() );
 
 if( $t_existing_bug->last_updated != $t_updated_bug->last_updated ) {
 	trigger_error( ERROR_BUG_CONFLICTING_EDIT, ERROR );
@@ -462,9 +465,26 @@ foreach ( $t_custom_fields_to_set as $t_custom_field_to_set ) {
 }
 
 # Add a bug note if there is one.
-if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0 ) {
+$t_has_bugnote = $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0;
+if( $t_has_bugnote ) {
 	$t_bugnote_id = bugnote_add( $f_bug_id, $t_bug_note->note, $t_bug_note->time_tracking, $t_bug_note->view_state == VS_PRIVATE, 0, '', null, false );
 	bugnote_process_mentions( $f_bug_id, $t_bugnote_id, $t_bug_note->note );
+}
+
+# Add files 
+	/* TODO DaHu: Check if access check is neccessary
+	if( !file_allow_bug_upload( $f_bug_id, $this->reporterId ) ) {
+					throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
+	
+	TODO DaHu2: Check if field validation is neccessary				}
+	*/
+if ( !empty( $t_bug_note->files ) ) {
+	if( !$t_has_bugnote ) {
+		$t_bugnote_id = bugnote_add( $f_bug_id, "", $t_bug_note->time_tracking, $t_bug_note->view_state == VS_PRIVATE, 0, '', null, false );
+	}
+
+	$t_files = helper_array_transpose($t_bug_note->files);
+	file_attach_files( $f_bug_id, $t_files, $t_bugnote_id );
 }
 
 # Add a duplicate relationship if requested.
@@ -481,7 +501,7 @@ if( $t_updated_bug->duplicate_id != 0 ) {
 	bug_monitor_copy( $f_bug_id, $t_updated_bug->duplicate_id );
 }
 
-event_signal( 'EVENT_UPDATE_BUG', array( $t_existing_bug, $t_updated_bug ) );
+event_signal( 'EVENT_UPDATE_BUG', array( $t_existing_bug, $t_updated_bug, $t_file_infos ) );
 
 # Allow a custom function to respond to the modifications made to the bug. Note
 # that custom functions are being deprecated in MantisBT. You should migrate to

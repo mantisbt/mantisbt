@@ -41,6 +41,7 @@
  * @author Athena in Wonderland
  * @author Hamilton Abreu
  * @author Luckas
+ * @author Mansil alfalb
  */
 
 $s_plugin_MantisGraph_title = 'Gráficos Mantis';
@@ -88,3 +89,4 @@ $s_plugin_MantisGraph_graph_topdev = 'Programadores mais ativos por problemas re
 $s_plugin_MantisGraph_graph_opendev = 'Programadores por incidências abertas';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Relatores mais ativos por problemas corrigidos';
 $s_plugin_MantisGraph_other_categories = 'outras categorias (%d)';
+$s_plugin_MantisGraph_other_projects = 'outros projetos (%d)';

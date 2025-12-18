@@ -131,8 +131,8 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 	}
-	$t_val = str_replace( ' ', '', trim( (string)$t_result ) );
-	if( !preg_match( '/^-?([0-9])*$/', $t_val ) ) {
+	$t_val = trim( (string)$t_result );
+	if( !preg_match( '/^-?[0-9]*$/', $t_val ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_NOT_NUMBER, ERROR );
 	}
@@ -206,16 +206,14 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_MULTILIST:
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
-			# ensure that the default is an array, if set
-			if( ( $p_default !== null ) && !is_array( $p_default ) ) {
+			# Ensure that the default is an array
+			if( $p_default === null ) {
+				$p_default = [];
+			} elseif( !is_array( $p_default ) ) {
 				$p_default = array( $p_default );
 			}
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
-			if( is_array( $t_values ) ) {
-				return implode( '|', $t_values );
-			} else {
-				return '';
-			}
+			return implode( '|', $t_values );
 		case CUSTOM_FIELD_TYPE_DATE:
 			$t_day = gpc_get_int( $p_var_name . '_day', 0 );
 			$t_month = gpc_get_int( $p_var_name . '_month', 0 );
@@ -235,14 +233,17 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 }
 
 /**
- * Retrieve a string array GPC variable.  Uses gpc_get().
- * If you pass in *no* default, an error will be triggered if
- * the variable does not exist
+ * Retrieve a string array GPC variable.
+ *
+ * Uses {@see gpc_get()}. If you pass in *no* default, an error will be
+ * triggered if the variable does not exist.
+ *
  * @param string $p_var_name Variable name to retrieve.
  * @param array  $p_default  Default value of the string array if not set.
+ *
  * @return array
  */
-function gpc_get_string_array( $p_var_name, array $p_default = null ) {
+function gpc_get_string_array( string $p_var_name, array $p_default = [] ): array {
 	# Don't pass along a default unless one was given to us
 	# otherwise we prevent an error being triggered
 	$t_args = func_get_args();
@@ -269,14 +270,17 @@ function gpc_get_string_array( $p_var_name, array $p_default = null ) {
 }
 
 /**
- * Retrieve an integer array GPC variable.  Uses gpc_get().
- * If you pass in *no* default, an error will be triggered if
- * the variable does not exist
+ * Retrieve an integer array GPC variable.
+ *
+ * Uses {@see gpc_get()}. If you pass in *no* default, an error will be
+ * triggered if the variable does not exist.
+ *
  * @param string $p_var_name Variable name to retrieve.
  * @param array  $p_default  Default value of the integer array if not set.
+ *
  * @return array
  */
-function gpc_get_int_array( $p_var_name, array $p_default = null ) {
+function gpc_get_int_array( string $p_var_name, array $p_default = [] ): array {
 	# Don't pass along a default unless one was given to us
 	# otherwise we prevent an error being triggered
 	$t_args = func_get_args();
@@ -297,13 +301,17 @@ function gpc_get_int_array( $p_var_name, array $p_default = null ) {
 }
 
 /**
- * Retrieve a boolean array GPC variable.  Uses gpc_get().
- * If you pass in *no* default, an error will be triggered if the variable does not exist.
+ * Retrieve a boolean array GPC variable.
+ *
+ * Uses {@see gpc_get()}. If you pass in *no* default, an error will be
+ * triggered if the variable does not exist.
+ *
  * @param string $p_var_name Variable name to retrieve.
  * @param array  $p_default  Default value of the boolean array if not set.
+ *
  * @return array
  */
-function gpc_get_bool_array( $p_var_name, array $p_default = null ) {
+function gpc_get_bool_array( string $p_var_name, array $p_default = [] ): array {
 	# Don't pass along a default unless one was given to us
 	# otherwise we prevent an error being triggered
 	$t_args = func_get_args();
@@ -343,6 +351,7 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 	}
 
+	/** @noinspection PhpUndefinedVariableInspection */
 	return $t_result;
 }
 
@@ -464,6 +473,7 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 	}
 
+	/** @noinspection PhpUndefinedVariableInspection */
 	return $t_result;
 }
 

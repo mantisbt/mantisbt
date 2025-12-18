@@ -295,10 +295,10 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 		foreach( $t_pairs as $t_key => $t_value ) {
 			if( is_array( $t_value ) ) {
 				foreach( $t_value as $t_value_each ) {
-					$t_clean_pairs[] = rawurlencode( $t_key ) . '[]=' . rawurlencode( $t_value_each );
+					$t_clean_pairs[] = string_url( $t_key ) . '[]=' . string_url( $t_value_each );
 				}
 			} else {
-				$t_clean_pairs[] = rawurlencode( $t_key ) . '=' . rawurlencode( $t_value );
+				$t_clean_pairs[] = string_url( $t_key ) . '=' . string_url( $t_value );
 			}
 		}
 
@@ -310,7 +310,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	# encode link anchor
 	$t_anchor = '';
 	if( isset( $t_matches['anchor'] ) ) {
-		$t_anchor = '#' . rawurlencode( $t_matches['anchor'] );
+		$t_anchor = '#' . string_url( $t_matches['anchor'] );
 	}
 
 	# Return an appropriate re-combined URL string
@@ -362,8 +362,8 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 							return $p_array[1] .
 								string_get_bug_view_link(
 									$c_bug_id,
-									(boolean)$p_detail_info,
-									(boolean)$p_fqdn
+									(bool)$p_detail_info,
+									(bool)$p_fqdn
 								);
 						}
 					}
@@ -449,8 +449,8 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 										string_get_bugnote_view_link(
 											$t_bug_id,
 											$c_bugnote_id,
-											(boolean)$p_detail_info,
-											(boolean)$p_fqdn
+											(bool)$p_detail_info,
+											(bool)$p_fqdn
 										);
 								}
 							}
@@ -524,15 +524,16 @@ function string_insert_hrefs( $p_string ) {
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
 	}
 
-	# Set the link's target and type according to configuration
-	$t_link_attributes = helper_get_link_attributes( false );
-
 	# Find any URL in a string and replace it with a clickable link
 	$p_string = preg_replace_callback(
 		$s_url_regex,
-		function ( $p_match ) use ( $t_link_attributes ) {
-			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			return "<a {$t_url_href}{$t_link_attributes}>{$p_match[1]}</a>";
+		function ( $p_match ) {
+			$t_url = $p_match[1];
+			$t_is_external_link = helper_is_link_external( $t_url );
+			# Set the link's target and type according to configuration
+			$t_link_attributes = helper_get_link_attributes( false, $t_is_external_link );
+			$t_url_href = 'href="' . rtrim( $t_url, '.' ) . '"';
+			return "<a {$t_url_href}{$t_link_attributes}>{$t_url}</a>";
 		},
 		$p_string
 	);
@@ -818,8 +819,10 @@ function string_get_bug_report_url() {
  * @return string
  */
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash, $p_page = 'verify.php' ) {
-	return config_get_global( 'path' ) . $p_page
-		. '?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
+	return helper_url_combine( config_get_global( 'path' ) . $p_page, [
+		'id' => $p_user_id,
+		'confirm_hash' => $p_confirm_hash
+	] );
 }
 
 /**

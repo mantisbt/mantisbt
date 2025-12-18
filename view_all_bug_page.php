@@ -64,9 +64,9 @@ if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) ) && $t_p
 	print_header_redirect( $_SERVER['REQUEST_URI'], true, false, true );
 }
 
-$t_per_page = null;
-$t_bug_count = null;
-$t_page_count = null;
+$t_per_page = 0;
+$t_bug_count = 0;
+$t_page_count = 0;
 
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
 if( $t_rows === false ) {

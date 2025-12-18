@@ -26,8 +26,6 @@
 namespace Mantis\tests\rest;
 
 use Psr\Http\Message\ResponseInterface;
-use RestBase;
-use function PHPUnit\Framework\assertEquals;
 
 require_once 'RestBase.php';
 

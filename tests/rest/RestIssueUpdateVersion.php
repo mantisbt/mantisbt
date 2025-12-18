@@ -1,6 +1,8 @@
 <?php
+namespace Mantis\tests\rest;
 
-use Psr\Http\Message\ResponseInterface;
+use Generator;
+use stdClass;
 
 require_once 'RestIssueTest.php';
 
@@ -14,25 +16,9 @@ class RestIssueUpdateVersion extends RestBase
 	/** @var int Issue id */
 	protected $issue_id;
 
-	/** @var string REST API endpoint for projet version */
-	protected $endpoint_version;
-	protected $endpoint_issue = '/issues/';
-
-	/**
-	 * Checks that response was successful and returns JSON body as object.
-	 *
-	 * @param ResponseInterface $p_response
-	 * @param int               $p_status_code Expected HTTP status code
-	 *
-	 * @return stdClass
-	 */
-	protected function getJson( ResponseInterface $p_response, $p_status_code = HTTP_STATUS_SUCCESS ) {
-		$this->assertEquals( $p_status_code,
-			$p_response->getStatusCode(),
-			"REST API returned unexpected Status Code"
-		);
-		return json_decode( $p_response->getBody(), false );
-	}
+	/** @var string REST API endpoint for project version */
+	protected string $endpoint_version;
+	protected string $endpoint_issue = '/issues/';
 
 	/**
 	 * Get the test Issue's current state.
@@ -143,7 +129,7 @@ class RestIssueUpdateVersion extends RestBase
 	 *
 	 * @return Generator List of test cases
 	 */
-	public function providerUnsetVersionSuccess(): Generator {
+	public static function providerUnsetVersionSuccess(): Generator {
 		yield 'Version with id 0' => [ ['id' => 0], HTTP_STATUS_SUCCESS ];
 
 		# According to @vboctor these test cases should actually fail, but don't...
@@ -174,7 +160,7 @@ class RestIssueUpdateVersion extends RestBase
 	 *    <case> => array( <version payload>, <expected status code> )
 	 *
 	 */
-	public function providerUnsetVersionFailure(): Generator {
+	public static function providerUnsetVersionFailure(): Generator {
 		# This is a dummy test case, to avoid a PHPUnit warning when the
 		# Provider returns nothing.
 		yield 'dummy' => [ ['id' => -1], HTTP_STATUS_BAD_REQUEST ];

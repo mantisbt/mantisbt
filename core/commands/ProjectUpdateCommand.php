@@ -84,10 +84,10 @@ class ProjectUpdateCommand extends Command {
 	 * Constructor
 	 *
 	 * $p_data['query'] is expected to contain:
-	 * - id (integer)
+	 * - id (int)
 	 *
 	 * $p_data['payload'] is expected to a subset of the following fields:
-	 * - id (integer)
+	 * - id (int)
 	 * - name (string)
 	 * - description (string)
 	 * - view_state (int)

@@ -23,8 +23,13 @@
  * @link http://www.mantisbt.org
  */
 
+namespace Mantis\tests\rest;
+
+use Mantis\tests\core\MantisTestCase;
+use Mantis\tests\core\RequestBuilder;
 use GuzzleHttp\Exception\GuzzleException;
-use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
+use stdClass;
 
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
@@ -32,18 +37,13 @@ require_once dirname( __DIR__ ) . '/TestConfig.php';
 # MantisBT Core API
 require_mantis_core();
 
-require_once( __DIR__ . '/../../vendor/autoload.php' );
-require_once ( __DIR__ . '/../../core/constant_inc.php' );
-require_once __DIR__ . '/../core/RequestBuilder.php';
-require_once __DIR__ . '/../core/Faker.php';
-
 /**
  * Base class for REST API test cases
  *
  * @requires extension curl
  * @group REST
  */
-abstract class RestBase extends TestCase {
+abstract class RestBase extends MantisTestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
@@ -200,7 +200,7 @@ abstract class RestBase extends TestCase {
 	 * @return array
 	 */
 	protected function getIssueToAdd( $p_suffix = '' ) {
-		$t_summary = $this->toString();
+		$t_summary = $this->getTestName();
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}
@@ -211,6 +211,23 @@ abstract class RestBase extends TestCase {
 			'category' => array( 'name' => $this->getCategory() )
 		);
 	}
+
+	/**
+	 * Checks that response was successful and returns JSON body as object.
+	 *
+	 * @param ResponseInterface $p_response
+	 * @param int               $p_status_code Expected HTTP status code
+	 *
+	 * @return stdClass
+	 */
+	protected function getJson( ResponseInterface $p_response, $p_status_code = HTTP_STATUS_SUCCESS ) {
+		$this->assertEquals( $p_status_code,
+			$p_response->getStatusCode(),
+			"REST API returned unexpected Status Code"
+		);
+		return json_decode( $p_response->getBody(), false );
+	}
+
 
 	/**
 	 * Marks a test as skipped if there is no configured Anonymous account.

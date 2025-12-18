@@ -62,7 +62,7 @@ require_api( 'lang_api.php' );
 	$t_collapse_block = is_collapsed( 'bugnote_add' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-	$t_allow_file_upload = file_allow_bug_upload( $f_bug_id );
+	$t_allow_file_upload = file_allow_bug_upload( $f_bug_id ) && !event_signal( 'EVENT_BUGNOTE_ADD_MODERATE_CHECK', array( $f_bug_id ) );
 ?>
 <form id="bugnoteadd"
 	method="post"
