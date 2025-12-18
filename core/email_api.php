@@ -2058,6 +2058,8 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 				/* show_time_tracking */ true,  $t_email_separator2, $t_normal_date_format ) . "\n";
 	}
 
+	// TODO DaHu: Add files
+	
 	# format history
 	if( array_key_exists( 'history', $p_visible_bug_data ) ) {
 		$t_message .= lang_get( 'bug_history' ) . " \n";
