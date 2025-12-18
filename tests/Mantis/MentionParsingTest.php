@@ -23,11 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-/**
- * Includes
- */
-require_once 'MantisCoreBase.php';
-require_api( 'mention_api.php' );
+namespace Mantis\tests\Mantis;
 
 /**
  * Test cases for parsing functionality in mention API.
@@ -55,7 +51,7 @@ class MentionParsingTest extends MantisCoreBase {
 	 *   <test case> => array( <string to test>, <list of expected mentions>)
 	 * @return array
 	 */
-	public function provider() {
+	public static function provider() {
 		return array(
 			'NoMention' => array(
 				'some random string.',

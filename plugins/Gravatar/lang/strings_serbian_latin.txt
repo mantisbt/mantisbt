@@ -42,4 +42,4 @@
  */
 
 $s_plugin_Gravatar_title = 'Avatari preko Gravatara';
-$s_plugin_Gravatar_description = 'Dodatak koji prikazuje avatare korisnika na osnovu njihovih e-mail adresa koristeći uslugu avatara.';
+$s_plugin_Gravatar_description = 'Dodatak koji prikazuje avatare korisnika na osnovu njihovih e-adresa koristeći uslugu avatar.';

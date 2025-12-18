@@ -58,14 +58,21 @@ $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
 $f_filter = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_tag_prefix' ) ) );
 $f_page_number = gpc_get_int( 'page_number', 1 );
 
+const TAGS_ALL = 'ALL';
+const TAGS_UNUSED = 'UNUSED';
+
 # Start Index Menu
 $t_prefix_array = array_merge(
-	array( 'ALL' ),
 	range( 'A', 'Z' ),
-	range( '0', '9' )
+	range( '0', '9' ), # With PHP < 8.3, this produces int[], not string[]
+);
+$t_prefix_array = array_merge(
+	[ TAGS_ALL => lang_get( 'filter_all' ) ],
+	array_combine( $t_prefix_array, $t_prefix_array ),
+	[ TAGS_UNUSED => lang_get( 'filter_unused' ) ]
 );
 
-if( $f_filter === 'ALL' ) {
+if( $f_filter === TAGS_ALL || $f_filter === TAGS_UNUSED ) {
 	$t_name_filter = '';
 } else {
 	$t_name_filter = $f_filter;
@@ -76,7 +83,7 @@ $t_per_page = 20;
 $t_offset = (( $f_page_number - 1 ) * $t_per_page );
 
 # Determine number of tags in tag table
-$t_total_tag_count = tag_count( $t_name_filter );
+$t_total_tag_count = tag_count( $t_name_filter, $f_filter == TAGS_UNUSED );
 
 # Number of pages from result
 $t_page_count = ceil( $t_total_tag_count / $t_per_page );
@@ -96,7 +103,11 @@ if( $f_page_number < 1 ) {
 }
 
 # Retrieve Tags from table
-$t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset ) ;
+if( $f_filter == TAGS_UNUSED ) {
+	$t_result = tag_get_unused( $t_name_filter, $t_per_page, $t_offset );
+} else {
+	$t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset );
+}
 
 layout_page_header( lang_get( 'manage_tags_link' ) );
 layout_page_begin( 'manage_overview_page.php' );
@@ -110,11 +121,11 @@ print_manage_menu( 'manage_tags_page.php' );
 		<div class="btn-toolbar inline">
 		<div class="btn-group">
 	<?php
-	foreach ( $t_prefix_array as $t_prefix ) {
-		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'show_all_tags' ) : $t_prefix );
+	foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 		$t_active = (string)$t_prefix == (string)$f_filter ? 'active' : '';
 		echo '<a class="btn btn-xs btn-white btn-primary ' . $t_active .
-		'" href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>' ."\n";
+			'" href="manage_tags_page.php?filter=' . $t_prefix .'">'
+			. $t_caption . '</a>' ."\n";
 	} ?>
 		</div>
 	</div>
@@ -142,14 +153,18 @@ print_manage_menu( 'manage_tags_page.php' );
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
 			<tr>
-				<td><?php echo lang_get( 'tag_name' ) ?></td>
-				<td><?php echo lang_get( 'tag_creator' ) ?></td>
-				<td><?php echo lang_get( 'tag_created' ) ?></td>
-				<td><?php echo lang_get( 'tag_updated' ) ?></td>
+				<th><?php echo lang_get( 'tag_name' ) ?></th>
+				<th><?php echo lang_get( 'tag_stats_attached' ) ?></th>
+				<th><?php echo lang_get( 'owner' ) ?></th>
+				<th><?php echo lang_get( 'date_created' ) ?></th>
+				<th><?php echo lang_get( 'updated' ) ?></th>
+				<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 			</tr>
 		</thead>
 		<tbody>
 <?php
+		$t_security_token = form_security_token( 'tag_delete' );
+
 		# Display all tags
 		while( $t_tag_row = db_fetch_array( $t_result ) ) {
 			$t_tag_name = string_display_line( $t_tag_row['name'] );
@@ -157,13 +172,29 @@ print_manage_menu( 'manage_tags_page.php' );
 ?>
 			<tr>
 			<?php if( $t_can_edit ) { ?>
-				<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td>
+				<td><a href="manage_tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td>
 			<?php } else { ?>
 				<td><?php echo $t_tag_name ?></td>
 			<?php } ?>
+				<td><?php echo (int)$t_tag_row['num'] ?></td>
 				<td><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
+				<td class="center"><?php
+					print_form_button(
+						'tag_update_page.php',
+						lang_get( 'edit' ),
+						[ 'tag_id' => $t_tag_row['id'] ],
+						$t_security_token
+					);
+					print_form_button(
+						'tag_delete.php',
+						lang_get( 'delete' ),
+						[ 'tag_id' => $t_tag_row['id'] ],
+						$t_security_token
+					);
+					?>
+				</td>
 			</tr>
 <?php
 		} # end while loop on tags
@@ -219,7 +250,7 @@ print_manage_menu( 'manage_tags_page.php' );
 			<tr>
 				<td class="category">
 					<label for="tag-description">
-						<?php echo lang_get( 'tag_description' ) ?>
+						<?php echo lang_get( 'description' ) ?>
 					</label>
 				</td>
 				<td>

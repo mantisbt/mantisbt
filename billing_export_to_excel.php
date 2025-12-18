@@ -26,12 +26,14 @@
  * @uses billing_api.php
  * @uses bug_api.php
  * @uses excel_api.php
+ * @uses string_api.php
  */
 
 require_once( 'core.php' );
 require_api( 'billing_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'excel_api.php' );
+require_api( 'string_api.php' );
 
 helper_begin_long_process();
 
@@ -52,7 +54,7 @@ $t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cos
 
 header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
 header( 'Pragma: public' );
-header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '.xml"' ) ;
+header( 'Content-Disposition: attachment; filename="' . string_url( file_clean_name( $t_filename ) ) . '.xml"' ) ;
 
 echo excel_get_header( $t_filename );
 echo excel_get_start_row();

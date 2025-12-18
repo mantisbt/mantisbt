@@ -22,7 +22,9 @@
  * @link      https://mantisbt.org
  */
 
-require_once 'RestBase.php';
+namespace Mantis\tests\rest;
+
+use stdClass;
 
 /**
  * Test fixture for project APIs.
@@ -71,13 +73,22 @@ class RestProjectTest extends RestBase
 	}
 
 	/**
-	 * Creates a test project (including assertion).
+	 * Creates a test project and apply assertions.
 	 *
 	 * @return stdClass Created project data
 	 */
-	protected function createProject() {
+	protected function createProject() : stdClass {
 		$t_data = $this->generateProjectData();
-		$t_response = $this->builder()->post( $this->endpoint, $t_data )->send();
+		return $this->createProjectWithData( $t_data );
+	}
+
+	/**
+	 * Creates a test project with specified data and apply asssertions.
+	 *
+	 * @return stdClass Created project data
+	 */
+	protected function createProjectWithData( array $p_project_data ) : stdClass {
+		$t_response = $this->builder()->post( $this->endpoint, $p_project_data )->send();
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 
 		$t_body = json_decode( $t_response->getBody() );
@@ -103,6 +114,48 @@ class RestProjectTest extends RestBase
 		parent::setUp();
 
 		$this->endpoint = '/projects/';
+	}
+
+	/**
+	 * Testing project creation.
+	 *
+	 * @return void 
+	 */
+	public function testCreateProject() : void {
+		$t_project = $this->createProject();
+		$this->deleteProjectAfterRun( $t_project->id );
+	}
+
+	/**
+	 * Testing project creation with spaces around name.
+	 *
+	 * @return void 
+	 */
+	public function testProjectWithSpacesAroundName() : void {
+		$t_project_data = $this->generateProjectData();
+		$t_name = $t_project_data['name'];
+		$t_name_with_blanks = "\t" . $t_name . "   \n";
+		$t_project_data['name'] = $t_name_with_blanks;
+
+		$t_project = $this->createProjectWithData( $t_project_data );
+		$this->deleteProjectAfterRun( $t_project->id );
+
+		$this->assertEquals( $t_name, $t_project->name, 'Project name should be trimmed' );
+
+		# Update project name with spaces
+		$t_data = ['name' => $t_name_with_blanks];
+		$t_response = $this->builder()->patch( $this->getEndpoint( $t_project->id ), $t_data )->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+			"Update name should succeed similar to creation"
+		);
+
+		$t_response = $this->builder()->get( $this->getEndpoint( $t_project->id ) )->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+			"Project not found"
+		);
+
+		$t_project_info = json_decode( $t_response->getBody() )->projects[0];
+		$this->assertEquals( $t_name, $t_project_info->name, 'Project name should be trimmed' );
 	}
 
 	/**
@@ -223,5 +276,4 @@ class RestProjectTest extends RestBase
 			$this->builder()->delete( $this->getEndpoint( $t_id ) )->send();
 		}
 	}
-
 }

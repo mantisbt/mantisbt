@@ -116,7 +116,7 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 	if( $p_project_id === null ) {
 		$t_project_id = helper_get_current_project();
 	} else {
-		$t_project_id = (integer)$p_project_id;
+		$t_project_id = (int)$p_project_id;
 	}
 
 	$t_user_id = user_get_id_by_name( $t_username );
@@ -165,7 +165,7 @@ function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_rel
 	if( $p_project_id === null ) {
 		$t_project_id = helper_get_current_project();
 	} else {
-		$t_project_id = (integer)$p_project_id;
+		$t_project_id = (int)$p_project_id;
 	}
 
 	if( $p_relative ) {

@@ -39,6 +39,7 @@
  * @file
  *
  * @author FikusModry
+ * @author Jaroslav Cerny
  * @author Luk
  * @author Marek Kriz
  */
@@ -51,7 +52,27 @@ $s_plugin_format_process_text_warning_notice = 'Nevypínejte, aniž opravdu vít
 $s_plugin_format_process_urls = 'Zpracování URL';
 $s_plugin_format_process_buglinks = 'Interní odkazy MantisBT (záznamy a poznámky k záznamům)';
 $s_plugin_format_process_buglinks_info = 'Vaše konfigurace definuje štítek <em>záznamu</em> jako "%s"a štítek <em>poznámky k záznamu</em> jako "%s"';
-$s_plugin_format_process_markdown = 'Markdown zpracovávání';
+$s_plugin_format_process_markdown = 'Zpracování jazyka Markdown';
 $s_plugin_format_process_markdown_info = 'Úprava s podporou značkovacího jazyka Markdown, syntaxe formátování textu navržená tak, aby mohla být převedena na HTML.';
 $s_plugin_format_enabled = 'Zapnuto';
 $s_plugin_format_disabled = 'Vypnuto';
+$s_plugin_format_syntax_highlighting = 'Zvýraznění syntaxe pro bloky kódu';
+$s_plugin_format_syntax_highlighting_info = 'Zvýraznění syntaxe funguje pouze v případě, že je aktivní "Zpracování jazyka Markdown".';
+$s_plugin_format_syntax_highlighting_theme = 'Motiv bloků kódů';
+$s_plugin_format_syntax_highlighting_plugins = 'Možnosti bloků kódu';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Kopírovat do schránky';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Zobrazuje malé tlačítko pro zkopírování obsahu bloku kódu do schránky.';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Kopírovat';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Zkopírováno';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Stiskem CTRL+C zkopírujete';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Zobrazit jazyk';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Zobrazí, jaký jazyk obsahuje blok kódu.';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Čísla řádků';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Zobrazí čísla řádků.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Zobrazit bílé znaky';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Zobrazí skryté znaky (např. pro odsazení).';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Normalizovat bílé znaky';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Ořízne všechny mezery na začátku a na konci bloku kódu. Odstraní také nadbytečné odsazení a koncové mezery na každém řádku.';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Vizualizovat barvy CSS';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Zobrazuje malý barevný čtvereček před definicí barvy (např. před "#000").';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Náhledy pro některé definice CSS';

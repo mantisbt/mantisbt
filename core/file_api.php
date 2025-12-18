@@ -372,7 +372,7 @@ function file_get_icon_url( $p_display_filename ) {
 
 	return array(
 		'url' => $t_file_type_icons[$t_ext],
-		'alt' => $t_ext == '?' ? lang_get( 'unknown_file_extension' ) : $t_ext
+		'alt' => $t_ext == '?' ? lang_get( 'unknown' ) : $t_ext
 	);
 }
 

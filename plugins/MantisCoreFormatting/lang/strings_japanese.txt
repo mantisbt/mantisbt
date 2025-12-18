@@ -41,6 +41,7 @@
  * @author Aotake
  * @author Fryed-peach
  * @author Gulpin
+ * @author Largestone
  * @author Mirinano
  * @author Omotecho
  * @author Shirayuki
@@ -58,3 +59,5 @@ $s_plugin_format_process_markdown = 'Markdown処理';
 $s_plugin_format_process_markdown_info = 'Markdownをサポートし、スタイル付けすることができます。MarkdownはHTMLに変換できるように設計されたテキスト形式です。';
 $s_plugin_format_enabled = 'ON';
 $s_plugin_format_disabled = 'OFF';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'コピー';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ コピー済み';

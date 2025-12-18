@@ -53,7 +53,7 @@ require_api( 'utility_api.php' );
  * @param string $p_canonical_url Canonical URL if necessary: has to be relative to the install path {@see $g_path}.
  * @return void
  */
-function layout_page_header( $p_page_title = null, $p_redirect_url = null, $p_page_id = null, $p_canonical_url = null ) {
+function layout_page_header( $p_page_title = '', $p_redirect_url = null, $p_page_id = null, $p_canonical_url = null ) {
 	layout_page_header_begin( $p_page_title );
 	if( $p_redirect_url !== null ) {
 		html_meta_redirect( $p_redirect_url );
@@ -70,7 +70,7 @@ function layout_page_header( $p_page_title = null, $p_redirect_url = null, $p_pa
  * @param string $p_page_title Page title.
  * @return void
  */
-function layout_page_header_begin( $p_page_title = null ) {
+function layout_page_header_begin( $p_page_title = '' ) {
 	html_begin();
 	html_head_begin();
 	html_content_type();
@@ -152,6 +152,8 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 	current_user_modify_single_project_default();
 
 	layout_navbar();
+	
+	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 
 	layout_main_container_begin();
 
@@ -174,6 +176,9 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 	layout_main_content_row_begin();
 
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
+
+	# Layout is in place, inline warnings can now be displayed without messing it up.
+	error_delay_reporting( false );
 }
 
 /**
@@ -202,13 +207,24 @@ function layout_page_end() {
 }
 
 /**
- * Print common elements for admin pages
+ * Print common elements for admin pages.
+ *
+ * This layout should be kept as simple as possible, and should not
+ * include any access or authentication functions, as it can also be
+ * used to output some authentication-related errors, and lead to the
+ * possible endless redirect loop otherwise.
+ * @see error_handler()
+ *
  * @return void
  */
 function layout_admin_page_begin() {
 	layout_navbar();
 
 	layout_main_container_begin();
+
+	layout_main_content_begin();
+	layout_page_content_begin();
+	layout_main_content_row_begin();
 }
 
 /**
@@ -216,6 +232,10 @@ function layout_admin_page_begin() {
  * @return void
  */
 function layout_admin_page_end() {
+	layout_main_content_row_end();
+	layout_page_content_end();
+	layout_main_content_end();
+
 	layout_footer();
 	layout_scroll_up_button();
 
@@ -259,7 +279,7 @@ function layout_head_css() {
 
 		# theme text fonts
 		$t_font_family =  config_get( 'font_family', null, null, ALL_PROJECTS );
-		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=' . urlencode( $t_font_family ) );
+		html_css_cdn_link( helper_url_combine( 'https://fonts.googleapis.com/css', [ 'family' => $t_font_family ] ) );
 
 		# datetimepicker
 		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css', DATETIME_PICKER_HASH_CSS );
@@ -278,12 +298,11 @@ function layout_head_css() {
 
 	# theme styles
 	html_css_link( 'ace.min.css', $t_cache_key );
-	html_css_link( 'ace-mantis.css', $t_cache_key );
 	html_css_link( 'ace-skins.min.css', $t_cache_key );
-
 	if( layout_is_rtl() ) {
 		html_css_link( 'ace-rtl.min.css', $t_cache_key );
 	}
+	html_css_link( 'ace-mantis.css', $t_cache_key );
 
 	# Set font preference
 	layout_user_font_preference();
@@ -355,6 +374,7 @@ function layout_login_page_begin( $p_page_title = '' ) {
 
 	echo '<body class="login-layout light-login">';
 
+	html_top_banner( true );
 	layout_main_container_begin();
 	layout_main_content_begin();
 	layout_main_content_row_begin();
@@ -367,6 +387,9 @@ function layout_login_page_begin( $p_page_title = '' ) {
 function layout_login_page_end() {
 	layout_main_content_row_end();
 	layout_main_content_end();
+	error_print_delayed();
+	html_bottom_banner();
+	layout_scroll_up_button();
 	layout_main_container_end();
 	layout_body_javascript();
 
@@ -384,6 +407,8 @@ function layout_navbar() {
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
 	echo '<div id="navbar-container" class="navbar-container">';
+
+	html_top_banner();
 
 	echo '<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg hidden-md" data-target="#sidebar">';
 	echo '<span class="sr-only">Toggle sidebar</span>';
@@ -457,14 +482,9 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
 	echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">';
 	if( $p_show_avatar ) {
 		layout_navbar_user_avatar();
-		echo '<span class="user-info">';
-		echo $t_username;
-		echo '</span>';
-		print_icon( 'fa-angle-down', 'ace-icon' );
-	} else {
-		echo '&#160;' . $t_username . '&#160;' . "\n";
-		print_icon( 'fa-angle-down', 'ace-icon bigger-110' );
 	}
+	echo '<span class="user-info">', $t_username, '</span>';
+	print_icon( 'fa-angle-down', 'ace-icon bigger-110' );
 	echo '</a>';
 	echo '<ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">';
 
@@ -917,7 +937,7 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 	}
 
 	# Handle relative / absolute urls
-	if ( stripos( $p_page, 'https:' ) === 0 || stripos( $p_page, 'http:' ) === 0 ) {
+	if( !is_null( parse_url( $p_page, PHP_URL_SCHEME ) ) ) {
 		$t_url = $p_page;
 	} else {
 		$t_url = helper_mantis_url( $p_page );
@@ -1045,12 +1065,10 @@ function layout_breadcrumbs() {
 			$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 		}
 
-		$t_return_page = string_url( $t_return_page );
-
 		echo '  ' . lang_get( 'anonymous' ) . "\n";
 
 		echo '  <div class="btn-group btn-corner">' . "\n";
-		echo '	<a href="' . helper_mantis_url( auth_login_page( 'return=' . $t_return_page ) ) .
+		echo '	<a href="' . helper_mantis_url( auth_login_page( [ 'return' => $t_return_page ] ) ) .
 			'" class="btn btn-primary btn-xs">' . lang_get( 'login' ) . '</a>' . "\n";
 		if( auth_signup_enabled() ) {
 			echo '	<a href="' . helper_mantis_url( 'signup_page.php' ) . '" class="btn btn-primary btn-xs">' .
@@ -1243,6 +1261,8 @@ function layout_footer() {
 		echo '</div>' . "\n";
 	}
 
+	html_bottom_banner();
+
 	layout_footer_end();
 }
 
@@ -1252,7 +1272,6 @@ function layout_footer() {
  */
 function layout_footer_begin() {
 	echo '<div class="clearfix"></div>' . "\n";
-	echo '<div class="space-20"></div>' . "\n";
 	echo '<div class="footer noprint">' . "\n";
 	echo '<div class="footer-inner">' . "\n";
 	echo '<div class="footer-content">' . "\n";

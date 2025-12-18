@@ -727,13 +727,15 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 }
 
 /**
- * prints the profiles given the user id
- * @param integer $p_user_id   A user identifier.
- * @param integer $p_select_id ID to mark as selected; if 0, gets the user's default profile.
- * @param array   $p_profiles  Array of profiles.
+ * Prints the profiles given the user id.
+ *
+ * @param int        $p_user_id   A user identifier.
+ * @param int        $p_select_id ID to mark as selected; if 0, gets the user's default profile.
+ * @param array|null $p_profiles  Array of profiles.
+ *
  * @return void
  */
-function print_profile_option_list( $p_user_id, $p_select_id = 0, array $p_profiles = null ) {
+function print_profile_option_list( $p_user_id, $p_select_id = 0, ?array $p_profiles = null ) {
 	if( 0 == $p_select_id ) {
 		$p_select_id = profile_get_default( $p_user_id );
 	}
@@ -747,12 +749,12 @@ function print_profile_option_list( $p_user_id, $p_select_id = 0, array $p_profi
 
 /**
  * prints the profiles used in a certain project
- * @param integer $p_project_id A project identifier.
- * @param integer $p_select_id  ID to mark as selected; if 0, gets the user's default profile.
- * @param array   $p_profiles   Array of profiles.
+ * @param int        $p_project_id A project identifier.
+ * @param int        $p_select_id  ID to mark as selected; if 0, gets the user's default profile.
+ * @param array|null $p_profiles   Array of profiles.
  * @return void
  */
-function print_profile_option_list_for_project( $p_project_id, $p_select_id = 0, array $p_profiles = null ) {
+function print_profile_option_list_for_project( $p_project_id, $p_select_id = 0, ?array $p_profiles = null ) {
 	if( 0 == $p_select_id ) {
 		$p_select_id = profile_get_default( auth_get_current_user_id() );
 	}
@@ -826,17 +828,15 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 		echo category_full_name( 0, false );
 		echo '</option>', PHP_EOL;
 	} else {
-		if( 0 == $p_category_id ) {
-			if( count( $t_cat_arr ) == 1 ) {
-				$p_category_id = (int) $t_cat_arr[0]['id'];
-			} else {
-				echo '<option value="" disabled hidden';
-				check_selected( $p_category_id, 0 );
-				echo '>';
-				echo string_attribute( lang_get( 'select_option' ) );
-				echo '</option>', PHP_EOL;
-			}
+		if( 0 == $p_category_id && count( $t_cat_arr ) == 1 ) {
+			# Single option are selected by default
+			$p_category_id = (int) $t_cat_arr[0]['id'];
 		}
+		echo '<option value="" disabled hidden';
+		check_selected( $p_category_id, 0 );
+		echo '>';
+		echo string_attribute( lang_get( 'select_option' ) );
+		echo '</option>', PHP_EOL;
 	}
 
 	foreach( $t_cat_arr as $t_category_row ) {
@@ -963,7 +963,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 	}
 
 	if( $p_leading_blank ) {
-		echo '<option value=""></option>';
+		echo '<option value="">&nbsp;</option>';
 	}
 
 	$t_listed = array();
@@ -1209,10 +1209,12 @@ function print_font_option_list( $p_font ) {
 /**
  * Print a dropdown list of all bug actions available to a user for a specified
  * set of projects.
+ *
  * @param array $p_project_ids An array containing one or more project IDs.
+ *
  * @return void
  */
-function print_all_bug_action_option_list( array $p_project_ids = null ) {
+function print_all_bug_action_option_list( array $p_project_ids = [] ) {
 	$t_commands = bug_group_action_get_commands( $p_project_ids );
 	foreach ( $t_commands as $t_action_id => $t_action_label) {
 		echo '<option value="' . $t_action_id . '">' . $t_action_label . '</option>';
@@ -1265,7 +1267,7 @@ function print_project_user_list_option_list2( $p_user_id ) {
  * @return void
  */
 function print_custom_field_projects_list( $p_field_id ) {
-	$c_field_id = (integer)$p_field_id;
+	$c_field_id = (int)$p_field_id;
 	$t_project_ids = custom_field_get_project_ids( $p_field_id );
 
 	$t_security_token = form_security_param( 'manage_proj_custom_field_remove' );
@@ -1406,14 +1408,18 @@ function print_view_bug_sort_link( $p_label, $p_sort_field, $p_sort, $p_dir, $p_
 				# Otherwise always start with ascending
 				$p_dir = 'ASC';
 			}
-			$t_sort_field = rawurlencode( $p_sort_field );
-			$t_print_parameter = ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) ? '&print=1' : '';
-			$t_filter_parameter = filter_is_temporary( $g_filter ) ? filter_get_temporary_key_param( $g_filter ) . '&' : '';
-			$t_url = 'view_all_set.php?' . $t_filter_parameter
-				. 'sort_add=' . $t_sort_field
-				. '&dir_add=' . $p_dir
-				. '&type=' . FILTER_ACTION_PARSE_ADD
-				. $t_print_parameter;
+			$t_params = [
+				'sort_add' => $p_sort_field,
+				'dir_add' => $p_dir,
+				'type' => FILTER_ACTION_PARSE_ADD
+			];
+			if( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) {
+				$t_params['print'] = 1;
+			}
+			$t_url = helper_url_combine( 'view_all_set.php', $t_params );
+			if( filter_is_temporary( $g_filter ) ) {
+				$t_url .= '&' . filter_get_temporary_key_param( $g_filter );
+			}
 			print_link( $t_url, $p_label, false, '', $p_icon );
 			break;
 		default:
@@ -1448,10 +1454,16 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 		$t_dir = 'ASC';
 	}
 
-	$t_field = rawurlencode( $p_field );
 	print_link(
-		$p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive
-		. '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
+		helper_url_combine( $p_page, [
+			'sort' => $p_field,
+			'dir' => $t_dir,
+			'save' => '1',
+			'hideinactive' => $p_hide_inactive,
+			'showdisabled' => $p_show_disabled,
+			'filter' => $p_filter,
+			'search' => $p_search
+		] ),
 		$p_string,
 		false,
 		$p_class
@@ -1480,8 +1492,13 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 		$t_dir = 'ASC';
 	}
 
-	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir, $p_string );
+	print_link(
+		helper_url_combine( $p_page, [
+			'sort' => $p_field,
+			'dir' => $t_dir
+		] ),
+		$p_string
+	);
 }
 
 /**
@@ -1490,7 +1507,7 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
  * If $p_security_token is OFF, the button's form will not contain a security
  * field; this is useful when form does not result in modifications (CSRF is not
  * needed). If otherwise specified (i.e. not null), the parameter must contain
- * a valid security token, previously generated by form_security_token().
+ * a valid security token, previously generated by {@see form_security_token()}.
  * Use this to avoid performance issues when loading pages having many calls to
  * this function, such as adm_config_report.php.
  *
@@ -1507,10 +1524,10 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
  *                                 arg name => value, defaults to null (no args).
  * @param mixed  $p_security_token Optional; null (default), OFF or security token string.
  * @param string $p_class          The CSS class of the button.
- * @see form_security_token()
+ *
  * @return void
  */
-function print_form_button( $p_action_page, $p_label, array $p_args_to_post = null, $p_security_token = null, $p_class = '' ) {
+function print_form_button( $p_action_page, $p_label, array $p_args_to_post = [], $p_security_token = null, $p_class = '' ) {
 	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
 	# instead of via $p_action_page (GET). Then only add the CSRF form token if
 	# arguments are being sent via the POST method.
@@ -2266,7 +2283,7 @@ function print_dropzone_template(){
 	<div id="dropzone-preview-template" class="hidden">
 		<div class="dz-preview dz-file-preview">
 			<div class="dz-filename"><span data-dz-name></span></div>
-			<img data-dz-thumbnail />
+			<img src="data:image/png;base64," alt="" data-dz-thumbnail>
 			<div class="dz-error-message">
 				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle'); ?></span></div>
 				<span data-dz-errormessage></span>
@@ -2285,17 +2302,20 @@ function print_dropzone_template(){
 
 /**
  * Print a button which presents a standalone form.
- * This function remains for compatibility with v1.3
- * @deprecated use print_form_button() instead
+ *
+ * This function remains for compatibility with v1.3.
+ *
  * @param string $p_action_page    The action page.
  * @param string $p_label          The button label.
  * @param array  $p_args_to_post   Associative array of arguments to be posted
  * @param mixed  $p_security_token Optional; null (default), OFF or security token string.
- * @see form_security_token()
- * @see print_form_button()
+ *
  * @return void
+ *
+ * @deprecated 2.0 use {@see print_form_button()} instead
+ * @see form_security_token()
  */
-function print_button( $p_action_page, $p_label, array $p_args_to_post = null, $p_security_token = null ) {
+function print_button( $p_action_page, $p_label, array $p_args_to_post = [], $p_security_token = null ) {
 	error_parameters( __FUNCTION__, 'print_form_button' );
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	print_form_button( $p_action_page, $p_label, $p_args_to_post, $p_security_token );
@@ -2348,3 +2368,14 @@ function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_sele
 <?php
 }
 
+/**
+ * Print table spacer.
+ *
+ * @param integer $p_cols Number of columns in the table
+ * @return void
+ */
+function print_table_spacer( int $p_cols ) {
+	if( $p_cols > 0 ) {
+		echo '<tr class="spacer"><td colspan="', $p_cols, '"></td></tr>';
+	}
+}

@@ -1,0 +1,53 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit https://translatewiki.net  **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Punjabi (ਪੰਜਾਬੀ)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit https://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Cabal
+ */
+
+$s_plugin_XmlImportExport_title = 'ਦਰਾਮਦ/ਬਰਾਮਦ ਦੇ ਮੁੱਦੇ';
+$s_plugin_XmlImportExport_import = 'ਦਰਾਮਦ ਦੇ ਮੁੱਦੇ';
+$s_plugin_XmlImportExport_import_threshold = 'ਦਰਾਮਦ ਦੇ ਮੁੱਦੇ';
+$s_plugin_XmlImportExport_export_threshold = 'ਬਰਾਮਦ ਦੇ ਮੁੱਦੇ';
+$s_plugin_XmlImportExport_action_update = 'ਨਵਿਆਓ';
+$s_plugin_XmlImportExport_importing_in_project = 'ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਮੁੱਦੇ ਦਰਾਮਦ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ: \'%s\'';
+$s_plugin_XmlImportExport_import_options = 'ਦਰਾਮਦ ਚੋਣਾਂ';
+$s_plugin_XmlImportExport_link = 'ਕੜੀ';
+$s_plugin_XmlImportExport_fallback_category = 'ਪਿਛਾਂਹ-ਪਰਤਣ-ਲਈ ਸ਼੍ਰੇਣੀ:';
+$s_plugin_XmlImportExport_keep_same_category = 'ਇੱਕੋ ਸ਼੍ਰੇਣੀ ਰੱਖਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ';

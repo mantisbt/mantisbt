@@ -38,7 +38,7 @@ class VersionAddCommand extends Command {
 
 	/**
 	 * $p_data['query'] is expected to contain:
-	 * - project_id (integer)
+	 * - project_id (int)
 	 *
 	 * $p_data['payload'] is expected to contain:
 	 * - name (string)
@@ -80,8 +80,8 @@ class VersionAddCommand extends Command {
 				array( 'name' ) );
 		}
 
-		$t_timestamp = $this->payload( 'timestamp', '' );
-		$this->timestamp = is_blank( $t_timestamp ) ? null : strtotime( $t_timestamp );
+		$t_date_string = $this->payload( 'timestamp', '' );
+		$this->timestamp = date_string_to_timestamp( $t_date_string );
 	}
 
 	/**

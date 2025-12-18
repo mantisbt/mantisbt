@@ -300,8 +300,8 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
 			<?php print_icon( 'fa-list-alt', 'ace-icon' ); ?>
 <?php
 #-- Box title
-$t_box_url = html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&'
-	. string_build_query( $t_url_link_parameters[$t_box_title] );
+$t_box_url = helper_url_combine( html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ),
+	$t_url_link_parameters[$t_box_title] );
 print_link( $t_box_url, $t_box_title_label, false, 'white' );
 
 # -- Viewing range info

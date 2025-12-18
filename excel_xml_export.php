@@ -33,6 +33,7 @@
  * @uses gpc_api.php
  * @uses helper_api.php
  * @uses print_api.php
+ * @uses string_api.php
  * @uses utility_api.php
  */
 
@@ -50,6 +51,7 @@ require_api( 'filter_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
+require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
 auth_ensure_user_authenticated();
@@ -66,7 +68,7 @@ $t_short_date_format = config_get( 'short_date_format' );
 
 header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
 header( 'Pragma: public' );
-header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_export_title ) ) . '.xml"' ) ;
+header( 'Content-Disposition: attachment; filename="' . string_url( file_clean_name( $t_export_title ) ) . '.xml"' ) ;
 
 echo excel_get_header( $t_export_title );
 echo excel_get_titles_row();

@@ -74,6 +74,10 @@ function url_get( $p_url ) {
 	}
 
 	# Last resort system call
-	$t_url = escapeshellarg( $p_url );
-	return shell_exec( 'curl ' . $t_url );
+	if( function_exists( 'shell_exec' ) ) {
+		$t_url = escapeshellarg( $p_url );
+		return shell_exec( 'curl ' . $t_url );
+	}
+
+	return null;
 }

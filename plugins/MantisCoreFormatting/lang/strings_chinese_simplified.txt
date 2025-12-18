@@ -40,6 +40,7 @@
  *
  * @author Hydra
  * @author Liuxinyu970226
+ * @author 沈澄心
  */
 
 $s_plugin_format_title = 'MantisBT格式化';
@@ -54,3 +55,28 @@ $s_plugin_format_process_markdown = 'Markdown处理';
 $s_plugin_format_process_markdown_info = '通过Markdown支持、文本格式化语法设计样式，这样它可以转换为HTML。';
 $s_plugin_format_enabled = '开';
 $s_plugin_format_disabled = '关';
+$s_plugin_format_syntax_highlighting = '代码块的语法高亮';
+$s_plugin_format_syntax_highlighting_info = '语法高亮仅在“Markdown处理”生效时有效。';
+$s_plugin_format_syntax_highlighting_theme = '代码块主题';
+$s_plugin_format_syntax_highlighting_plugins = '代码块选项';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = '复制到剪贴板';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = '显示一个用于将代码块的内容复制到剪贴板的小按钮。';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = '复制';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ 已复制';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = '按Ctrl+C复制';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = '显示语言';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = '显示代码块包含的语言。';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = '行号';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = '显示行号。';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = '显示空格';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = '显示隐藏字符（例如缩进字符）。';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = '规范化空格';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = '去除代码块的所有前导和尾随空格。它还会删除各行的多余缩进和尾随空格。';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = '配对括号';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = '鼠标悬停时显示括号配对，包括“彩虹括号”（每对括号各有自己的颜色）。';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = '扩展突出显示差异（diff）';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = '为行的背景着色，而不是文本。除了“diff”之外，还可使用特定于语言的着色（例如“diff-javascript”）。';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_name = '可视化CSS颜色';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = '在颜色定义前（例如在“#000”之前）显示一个色彩小方块。';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = '一些CSS定义的预览器';
+$s_plugin_format_syntax_highlighting_plugin_previewers_desc = '当鼠标悬停在“角度”、“颜色”、“渐变”、“缓和”或“时间”定义上时，将出现预览器。';

@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+namespace Mantis\tests\core;
+
 /**
  * A class that supplies fake data.
  */

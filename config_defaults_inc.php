@@ -518,50 +518,19 @@ $g_email_notifications_verbose = OFF;
 /**
  * Sets the default email notifications values for different user categories.
  *
- * In combination with *notify_flags* (see below), this config option controls
+ * In combination with {@see $g_notify_flags}, this config option controls
  * who should get email notifications on different actions/statuses.
  *
  * The user categories are:
- *
- *      'reporter': the reporter of the bug
- *       'handler': the handler of the bug
- *       'monitor': users who are monitoring a bug
- *      'bugnotes': users who have added a bugnote to the bug
- *      'category': category owners
- *      'explicit': users who are explicitly specified by the code based on the
- *                  action (e.g. user added to monitor list).
- * 'threshold_max': all users with access <= max
- * 'threshold_min': ..and with access >= min
- *
- * The second config option (notify_flags) sets overrides for specific
- * actions/statuses. If a user category is not listed for an action, the
- * default from the config option above is used.  The possible actions are:
- *
- *             'new': a new bug has been added
- *           'owner': a bug has been assigned to a new owner
- *        'reopened': a bug has been reopened
- *         'deleted': a bug has been deleted
- *         'updated': a bug has been updated
- *         'bugnote': a bugnote has been added to a bug
- *         'sponsor': sponsorship has changed on this bug
- *        'relation': a relationship has changed on this bug
- *         'monitor': an issue is monitored.
- *        '<status>': eg: 'resolved', 'closed', 'feedback', 'acknowledged', etc.
- *                     this list corresponds to $g_status_enum_string
- *
- * Examples:
- * - If you wanted to have all developers get notified of new bugs you might
- *   add the following lines to your config file:
- *
- *   $g_notify_flags['new']['threshold_min'] = DEVELOPER;
- *   $g_notify_flags['new']['threshold_max'] = DEVELOPER;
- *
- * - You might want to do something similar so all managers are notified when a
- *   bug is closed.
- * - If you did not want reporters to be notified when a bug is closed
- *   (only when it is resolved) you would use:
- *
- *   $g_notify_flags['closed']['reporter'] = OFF;
+ # - `reporter`:      the Issue's reporter
+ * - `handler`:       the user assigned to the Issue
+ * - `monitor`:       users who are monitoring the Issue
+ * - `bugnotes`:      users who have added a bugnote to the Issue
+ * - `category`:      category owners
+ * - `explicit`:      users who are explicitly specified by the code based on the
+ *                    action (e.g. user added to monitor list).
+ * - `threshold_max`: all users with access level <= max
+ * - `threshold_min`: ...and with access level >= min
  *
  * @see $g_notify_flags
  * @global array $g_default_notify_flags
@@ -580,12 +549,40 @@ $g_default_notify_flags = array(
 /**
  * Sets notifications overrides for specific actions/statuses.
  *
- * See above for detailed information. As an example of how to use this config
- * option, the default setting
+ * If a user category is not listed for an action, the default defined by
+ * {@see $g_default_notify_flags} is used.
+ *
+ * Possible actions are:
+ * - `new`:      a new Issue has been added
+ * - `owner`:    an Issue has been assigned to a new owner
+ * - `reopened`: an Issue has been reopened
+ * - `deleted`:  an Issue has been deleted
+ * - `updated`:  an Issue has been updated
+ * - `bugnote`:  a bugnote has been added to an Issue
+ * - `sponsor`:  sponsorship has changed on this Issue
+ * - `relation`: a relationship has changed on this Issue
+ * - `monitor`:  an Issue is monitored.
+ * - `<status>`: A status code, as defined in {@see $g_status_enum_string},
+ *               eg: 'resolved', 'closed', 'feedback', 'acknowledged`, etc.
+ *
+ * Examples:
+ *  - If you wanted to have all developers get notified of new bugs you could
+ *    add the following lines to your config file:
+ *
+ *    $g_notify_flags['new']['threshold_min'] = DEVELOPER;
+ *    $g_notify_flags['new']['threshold_max'] = DEVELOPER;
+ *
+ *  - You might want to do something similar so all managers are notified when a
+ *    bug is closed.
+ *  - If you did not want reporters to be notified when a bug is closed
+ *    (only when it is resolved) you would use:
+ *
+ *    $g_notify_flags['closed']['reporter'] = OFF;
+ *
+ * The default setting
  * - disables bugnotes notifications on new bugs (not needed in this case)
- * - disables all notifications for monitoring event, except explicit
- * example of how to use this config option.
-
+ * - disables all notifications for the monitoring event, except explicit
+ *
  * @see $g_default_notify_flags
  * @global array $g_notify_flags
  */
@@ -695,6 +692,8 @@ $g_show_user_realname_threshold = NOBODY;
 /**
  * Select the method to mail by.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * Possible values are:
  * - PHPMAILER_METHOD_MAIL - PHP mail() function
  * - PHPMAILER_METHOD_SENDMAIL - sendmail
@@ -705,7 +704,9 @@ $g_show_user_realname_threshold = NOBODY;
 $g_phpMailer_method = PHPMAILER_METHOD_MAIL;
 
 /**
- * Remote SMTP Host(s).
+ * Remote SMTP Host(s)
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Either a single hostname or multiple semicolon-delimited hostnames.
  * You can specify for each host a port other than the default, using format:
@@ -722,6 +723,8 @@ $g_smtp_host = 'localhost';
 /**
  * SMTP Server Authentication user.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * NOTE: must be set to '' if the SMTP host does not require authentication.
  *
  * @see $g_smtp_password
@@ -731,6 +734,8 @@ $g_smtp_username = '';
 
 /**
  * SMTP Server Authentication password.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Not used when $g_smtp_username = ''
  *
@@ -742,6 +747,8 @@ $g_smtp_password = '';
 /**
  * Allow secure connection to the SMTP server.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * Valid values are '' (no encryption), 'ssl' or 'tls'
  *
  * @global string $g_smtp_connection_mode
@@ -750,6 +757,8 @@ $g_smtp_connection_mode = '';
 
 /**
  * Default SMTP port.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Typical ports are 25 and 587.
  * This can be overridden individually for specific hosts.
@@ -761,6 +770,8 @@ $g_smtp_port = 25;
 
 /**
  * Enable DomainKeys Identified Mail (DKIM) Signatures (rfc6376).
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * To successfully sign mails you need to enable DKIM and provide at least:
  * - DKIM domain
@@ -780,6 +791,8 @@ $g_email_dkim_enable = OFF;
 /**
  * DomainKeys Identified Mail (DKIM) Signatures domain.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * This is usually the same as the domain of your from email.
  *
  * @see $g_from_email
@@ -790,6 +803,8 @@ $g_email_dkim_domain = 'example.com';
 
 /**
  * DomainKeys Identified Mail (DKIM) Signatures private key path.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Path to the private key. If $g_email_dkim_private_key_string is specified
  * this setting will not be used.
@@ -804,6 +819,8 @@ $g_email_dkim_private_key_file_path = '';
 /**
  * DomainKeys Identified Mail (DKIM) Signatures private key value.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * This string should contain private key for signing. Leave empty
  * string if you wish to load the key from the file defined with
  * $g_email_dkim_private_key_file_path.
@@ -816,6 +833,8 @@ $g_email_dkim_private_key_string = '';
 
 /**
  * DomainKeys Identified Mail (DKIM) Signatures selector.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * DNS selector for the signature (rfc6376)
  * DNS TXT field should have for instance:
@@ -830,6 +849,8 @@ $g_email_dkim_selector = 'mail.example';
 /**
  * DomainKeys Identified Mail (DKIM) Signatures private key password.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * Leave empty string if your private key does not have password.
  *
  * @see $g_email_dkim_enable
@@ -839,6 +860,8 @@ $g_email_dkim_passphrase = '';
 
 /**
  * DomainKeys Identified Mail (DKIM) Signatures identity.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * Identity you are signing the mails with (rfc6376).
  * This is usually the same as your from email.
@@ -852,12 +875,16 @@ $g_email_dkim_identity = 'noreply@example.com';
 /**
  * Enable S/MIME signature.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * @global int $g_email_smime_enable
  */
 $g_email_smime_enable = OFF;
 
 /**
  * Path to the S/MIME certificate.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * The file must contain a PEM-encoded certificate.
  *
@@ -867,6 +894,8 @@ $g_email_smime_cert_file = '';
 
 /**
  * Path to the S/MIME private key file.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * The file must contain a PEM-encoded private key matching the S/MIME certificate.
  *
@@ -879,6 +908,8 @@ $g_email_smime_key_file = '';
 /**
  * Password for the S/MIME private key.
  *
+ * This config option is specific to PhpMailer provider.
+ *
  * Leave blank if the private key is not protected by a passphrase.
  * @see $g_email_smime_key_file
  *
@@ -888,6 +919,8 @@ $g_email_smime_key_password = '';
 
 /**
  * Optional path to S/MIME extra certificates.
+ *
+ * This config option is specific to PhpMailer provider.
  *
  * The file must contain one (or more) PEM-encoded certificates, which will be
  * included in the signature to help the recipient verify the certificate
@@ -2338,18 +2371,22 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
  *
  * The options below can be combined using bitwise operators (not all
  * possible combinations make sense):
- * - OFF                Do not convert URLs or emails
- * - LINKS_SAME_WINDOW  Convert to links that open in the current window (DEFAULT)
- * - LINKS_NEW_WINDOW   Convert to links that open in a new window (overrides LINKS_SAME_WINDOW)
- * - LINKS_NOOPENER     Links have the `noopener` type (DEFAULT)
- *                      {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener}
- * - LINKS_NOREFERRER   Links have the `noreferrer` type, i.e. they omit the *Referer*
- *                      header (implies LINKS_NOOPENER)
- *                      {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer}
+ * - OFF                      Do not convert URLs or emails
+ * - LINKS_SAME_WINDOW        Convert to links that open in the current window (DEFAULT)
+ * - LINKS_NEW_WINDOW         Convert to links that open in a new window (overrides LINKS_SAME_WINDOW)
+ * - LINKS_NOOPENER           Links have the `noopener` type (DEFAULT)
+ *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/noopener}
+ * - LINKS_NOREFERRER         Links have the `noreferrer` type, i.e. they omit the *Referer*
+ *                            header (implies LINKS_NOOPENER)
+ *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/noreferrer}
+ * - LINKS_NOFOLLOW_EXTERNAL  Links to external sites (i.e. having a different root domain)
+ *                            have the `nofollow` type, instructing search engines
+ *                            not to follow these links (DEFAULT)
+ *                            {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#nofollow}
  *
  * @global int $g_html_make_links
  */
-$g_html_make_links = LINKS_SAME_WINDOW | LINKS_NOOPENER;
+$g_html_make_links = LINKS_SAME_WINDOW | LINKS_NOOPENER | LINKS_NOFOLLOW_EXTERNAL;
 
 /**
  * Valid html tags for multi-line fields (e.g. description).
@@ -4164,26 +4201,26 @@ $g_use_persistent_connections = OFF;
 #################
 
 /**
- * Specify your top/bottom include file (logos, banners, etc).
- * 
- * @global string $g_bottom_include_page
- */
-$g_bottom_include_page = '%absolute_path%';
-
-/**
- * Specify your top/bottom include file (logos, banners, etc).
+ * Absolute path to the top include file (logos, banners, etc).
  *
- * If a top file is supplied, the default MantisBT logo at the top will be hidden.
- * For example, you could include a centered title at the top of the page with:
+ * For example, you could include a centered title at the top of the
+ * page with:
  *
- * <div class="center"><span class="pagetitle">TITLE</span></div>
+ * <div class="bg-primary text-center bigger-150">Awesome company</div>
  *
- * The default banner which is removed if you use an include file can be found in html_api.php in
- * the function called html_top_banner.
+ * The element will have a fixed position, so it is desirable to use
+ * a solid background for it.
  *
  * @global string $g_top_include_page
  */
-$g_top_include_page = '%absolute_path%';
+$g_top_include_page = '';
+
+/**
+ * Absolute path to the bottom include file (logos, banners, etc).
+ * 
+ * @global string $g_bottom_include_page
+ */
+$g_bottom_include_page = '';
 
 /**
  * CSS file.
@@ -4526,6 +4563,22 @@ $g_relationship_graph_enable = OFF;
  * @global string $g_graphviz_path
  */
 $g_graphviz_path = '/usr/bin/';
+
+/**
+ * Graphviz output format.
+ *
+ * Can be `svg`, `png` (default) or any other
+ * {@link https://www.graphviz.org/docs/outputs/ supported format}.
+ *
+ * NOTE: svg produces higher quality images compared to png, but it requires
+ * Graphviz >= 2.42.4 due to a
+ * {@link https://gitlab.com/graphviz/graphviz/-/issues/1687 bug in earlier versions}.
+ * The fix will be included in Ubuntu 26.04 LTS; the default can be reconsidered
+ * when it is released.
+ *
+ * @global string $g_graph_format
+ */
+$g_graph_format = 'png';
 
 /**
  * Font name and size, as required by Graphviz.

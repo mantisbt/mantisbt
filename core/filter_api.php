@@ -408,13 +408,13 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_
 		$t_count = count( $p_field_value );
 		if( $t_count > 1 || $p_field_type == FILTER_TYPE_MULTI_STRING || $p_field_type == FILTER_TYPE_MULTI_INT ) {
 			foreach( $p_field_value as $t_value ) {
-				$t_query_array[] = urlencode( $p_field_name . '[]' ) . '=' . urlencode( $t_value );
+				$t_query_array[] = string_url( $p_field_name . '[]' ) . '=' . string_url( $t_value );
 			}
 		} else if( $t_count == 1 ) {
-			$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value[0] );
+			$t_query_array[] = string_url( $p_field_name ) . '=' . string_url( $p_field_value[0] );
 		}
 	} else {
-		$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( (string)$p_field_value );
+		$t_query_array[] = string_url( $p_field_name ) . '=' . string_url( (string)$p_field_value );
 	}
 
 	return implode( '&', $t_query_array );
@@ -1006,10 +1006,12 @@ function filter_get_default_property( $p_filter_property, $p_view_type = null ) 
 }
 
 /**
- *  Get the standard filter that is to be used when no filter was previously saved.
- *  When creating specific filters, this can be used as a basis for the filter, where
- *  specific entries can be overridden.
- * @return mixed
+ * Get the standard filter that is to be used when no filter was previously saved.
+ *
+ * When creating specific filters, this can be used as a basis for the filter, where
+ * specific entries can be overridden.
+ *
+ * @return array
  */
 function filter_get_default() {
 	# Create empty array, validation will fill it with defaults
@@ -1018,13 +1020,16 @@ function filter_get_default() {
 }
 
 /**
- * Deserialize filter string
+ * Deserialize filter string.
+ *
  * Expected strings have this format: "<version>#<json string>" where:
- * - <version> is the versio number of the filter structure used. See constant FILTER_VERSION
+ * - <version> is the version number of the filter structure used. See constant FILTER_VERSION
  * - # is a separator
- * - <json string> is the json encoded filter array.
+ * - <json string> is the JSON-encoded filter array.
+ *
  * @param string $p_serialized_filter Serialized filter string.
- * @return mixed $t_filter array
+ *
+ * @return array|false $t_filter array
  * @see filter_ensure_valid_filter
  */
 function filter_deserialize( $p_serialized_filter ) {
@@ -1032,9 +1037,9 @@ function filter_deserialize( $p_serialized_filter ) {
 		return false;
 	}
 
-	#@TODO cproensa, we could accept a pure json array, without version prefix
-	# in this case, the filter version field inside the array is to be used
-	# and if not present, set the current filter version
+	# @TODO cproensa, we could accept a pure json array, without version prefix.
+	#       In this case, the filter version field inside the array is to be used
+	#       and if not present, set the current filter version
 
 	# check filter version mark
 	$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
@@ -2000,14 +2005,17 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
 }
 
 /**
- * Performs the reading of parameters from get/post.
+ * Read filter parameters from get/post.
+ *
  * If a filter array is passed as parameter, the read parameters will be appended,
- * or everride existing ones.
- * If no filter array is used as parameter, a default one will be used.
- * @param array $p_filter An existing filter array
- * @return array The resulting filter array
+ * or override existing ones.
+ *
+ * @param array|null $p_filter An existing filter array. If null, a default
+ *                             filter will be used.
+ *
+ * @return array The resulting filter array.
  */
-function filter_gpc_get( array $p_filter = null ) {
+function filter_gpc_get( ?array $p_filter = null ): array {
 	# Get or copy the view_type first as it's needed to get proper defaults
 	$f_view_type = gpc_get_string( 'view_type', null );
 	if( null === $f_view_type && is_array( $p_filter ) && isset( $p_filter['_view_type'] ) ) {
@@ -2547,13 +2555,13 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
  * you pass in *no* default then an error will be triggered if the filter
  * cannot be found.
  *
- * @param integer $p_filter_id Filter id.
- * @param array   $p_default   A filter array to return when id is not found.
+ * @param int        $p_filter_id Filter id.
+ * @param array|null $p_default   A filter array to return when id is not found.
  *
- * @return array A filter array
+ * @return array|null A filter array
  * @throws ClientException
  */
-function filter_get( $p_filter_id, array $p_default = null ) {
+function filter_get( int $p_filter_id, ?array $p_default = null ) {
 	# if no default was provided, we will trigger an error if not found
 	$t_trigger_error = func_num_args() == 1;
 

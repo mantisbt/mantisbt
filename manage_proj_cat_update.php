@@ -56,7 +56,8 @@ auth_reauthenticate();
 $f_category_id     = gpc_get_int( 'category_id' );
 $f_name            = trim( gpc_get_string( 'name' ) );
 $f_assigned_to     = gpc_get_int( 'assigned_to', 0 );
-$f_status          = gpc_get_bool( 'status', CATEGORY_STATUS_DISABLED );
+# Underlying DB column is integer, but we use it as bool since we only have 2 states
+$f_status          = (int)gpc_get_bool( 'status', CATEGORY_STATUS_DISABLED );
 
 if( is_blank( $f_name ) ) {
 	error_parameters( 'name' );

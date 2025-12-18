@@ -44,6 +44,7 @@
  * @author Lutece398
  * @author Nitch
  * @author Okras
+ * @author Pavel200071
  * @author Александр Сигачёв
  */
 
@@ -60,13 +61,27 @@ $s_plugin_format_process_markdown_info = 'Синтаксис форматиро�
 $s_plugin_format_enabled = 'Вкл';
 $s_plugin_format_disabled = 'Выкл';
 $s_plugin_format_syntax_highlighting = 'Подсветка синтаксиса для блоков кода';
+$s_plugin_format_syntax_highlighting_info = 'Подсветка синтаксиса работает только в том случае, если активна "Обработка уценки".';
 $s_plugin_format_syntax_highlighting_theme = 'Тема блоков кода';
+$s_plugin_format_syntax_highlighting_plugins = 'Параметры кодовых блоков';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Скопировать в буфер обмена';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Показывает маленькую кнопку для копирования содержимого блока кода в буфер обмена.';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Копировать';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Скопировано';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Нажмите Ctrl+C для копирования';
 $s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Выберите язык';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Показывает, какой язык содержит блок кода.';
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Номера строк';
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Показать номера строк.';
 $s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Показать пробелы';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Отображает скрытые символы (например, для отступов).';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Нормализовать пробелы';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Удаляет все начальные и конечные пробелы в блоке кода. Также удаляются лишние отступы и конечные пробелы в каждой строке.';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Соответствующие фигурные скобки';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'Показывает сочетание скобок при наведении курсора мыши. Включая «радужные скобки» (каждая пара имеет свой собственный цвет).';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Расширенное выделение различий (diff)';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_desc = 'Окрашивает фон строки, а не текст, и в дополнение к «diff» возможна цветовая гамма, зависящая от языка (например, «diff-javascript»).';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'Визуализация цветов CSS';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Показывает небольшой цветной квадрат перед определением цвета (например, перед «#000»).';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Предпросмотрщики для некоторых определений CSS';
+$s_plugin_format_syntax_highlighting_plugin_previewers_desc = 'При наведении курсора мыши на определения «угол», «цвет», «градиент», «смягчение» или «время» появится окно предварительного просмотра.';

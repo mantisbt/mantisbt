@@ -284,7 +284,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 				$t_params = array( $c_project_id );
 			} else {
 				$t_query .= ' WHERE project_id IN (' . implode( ',', $t_projects ) . ')';
-				$t_params = null;
+				$t_params = [];
 			}
 
 			$t_query .= ' ORDER BY announcement DESC, id DESC';

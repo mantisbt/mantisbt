@@ -36,6 +36,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 if( !defined( 'ACCOUNT_PREFS_INC_ALLOW' ) ) {
 	return;
 }
@@ -56,11 +58,14 @@ require_api( 'utility_api.php' );
 /**
  * Display html form to edit account preferences
  *
- * @param integer $p_user_id            A valid user identifier.
- * @param boolean $p_error_if_protected Whether to error if the account is protected.
- * @param boolean $p_accounts_menu      Display account preferences menu.
- * @param string  $p_redirect_url       Redirect URI.
+ * @param int    $p_user_id            A valid user identifier.
+ * @param bool   $p_error_if_protected Whether to error if the account is
+ *                                     protected.
+ * @param bool   $p_accounts_menu      Display account preferences menu.
+ * @param string $p_redirect_url       Redirect URI.
+ *
  * @return void
+ * @throws ClientException
  */
 function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '' ) {
 	if( null === $p_user_id ) {
@@ -117,7 +122,9 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'default_project' ) ?>
+			<label for="default-project-id">
+				<?php echo lang_get( 'default_project' ) ?>
+			</label>
 		</td>
 		<td>
 			<select id="default-project-id" name="default_project" class="input-sm">
@@ -136,18 +143,29 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'refresh_delay' ) ?>
+			<label for="refresh-delay">
+				<?php echo lang_get( 'refresh_delay' ) ?>
+			</label>
 		</td>
 		<td>
-			<input id="refresh-delay" type="text" name="refresh_delay" class="input-sm" size="4" maxlength="4" value="<?php echo $t_pref->refresh_delay ?>" /> <?php echo lang_get( 'minutes' ) ?>
+			<input id="refresh-delay" type="text" name="refresh_delay"
+				   class="input-sm" size="4" maxlength="4"
+				   value="<?php echo $t_pref->refresh_delay ?>"
+			/>
+			<?php echo lang_get( 'minutes' ) ?>
 		</td>
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'redirect_delay' ) ?>
+			<label for="redirect-delay">
+				<?php echo lang_get( 'redirect_delay' ) ?>
+			</label>
 		</td>
 		<td>
-		<input id="redirect-delay" type="text" name="redirect_delay" class="input-sm" size="4" maxlength="3" value="<?php echo $t_pref->redirect_delay ?>" /> <?php echo lang_get( 'seconds' ) ?>
+			<input id="redirect-delay" type="text" name="redirect_delay"
+				   class="input-sm" size="4" maxlength="3"
+				   value="<?php echo $t_pref->redirect_delay ?>" />
+			<?php echo lang_get( 'seconds' ) ?>
 		</td>
 	</tr>
 	<tr>
@@ -156,11 +174,19 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 		</td>
 		<td>
 			<label for="bugnote-order-desc" class="inline padding-right-8">
-				<input type="radio" class="ace input-sm" id="bugnote-order-desc" name="bugnote_order" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> />
+				<input type="radio" class="ace input-sm"
+					   id="bugnote-order-desc" name="bugnote_order"
+					   value="DESC"
+					   <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?>
+				/>
 				<span class="lbl padding-6"><?php echo lang_get( 'bugnote_order_desc' ) ?></span>
 			</label>
 			<label for="bugnote-order-asc" class="inline padding-right-8">
-				<input type="radio" class="ace input-sm" id="bugnote-order-asc" name="bugnote_order" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> />
+				<input type="radio" class="ace input-sm"
+					   id="bugnote-order-asc" name="bugnote_order"
+					   value="ASC"
+					   <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?>
+				/>
 				<span class="lbl padding-6"><?php echo lang_get( 'bugnote_order_asc' ) ?></span>
 			</label>
 		</td>
@@ -321,10 +347,15 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 		</tr>
 		<tr>
 			<td class="category width-30">
-				<?php echo lang_get( 'email_bugnote_limit' ) ?>
+				<label for="email-bugnote-limit">
+					<?php echo lang_get( 'email_bugnote_limit' ) ?>
+				</label>
 			</td>
 			<td>
-				<input id="email-bugnote-limit" type="text" name="email_bugnote_limit" class="input-sm" maxlength="2" size="2" value="<?php echo $t_pref->email_bugnote_limit ?>" />
+				<input id="email-bugnote-limit" type="text" name="email_bugnote_limit"
+					   class="input-sm" maxlength="2" size="2"
+					   value="<?php echo $t_pref->email_bugnote_limit ?>"
+				/>
 			</td>
 		</tr>
 		<tr>
@@ -364,27 +395,33 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 <?php } ?>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'timezone' ) ?>
+			<label for="timezone">
+				<?php echo lang_get( 'timezone' ) ?>
+			</label>
 		</td>
 		<td>
-					<select id="timezone" name="timezone" class="input-sm">
-						<?php print_timezone_option_list( $t_pref->timezone ?  $t_pref->timezone  : config_get_global( 'default_timezone' ) ) ?>
-					</select>
+			<select id="timezone" name="timezone" class="input-sm">
+				<?php print_timezone_option_list( $t_pref->timezone ?: config_get_global( 'default_timezone' ) ) ?>
+			</select>
 		</td>
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'language' ) ?>
+			<label for="language">
+				<?php echo lang_get( 'language' ) ?>
+			</label>
 		</td>
 		<td>
-					<select id="language" name="language" class="input-sm">
-						<?php print_language_option_list( $t_pref->language ) ?>
-					</select>
+			<select id="language" name="language" class="input-sm">
+				<?php print_language_option_list( $t_pref->language ) ?>
+			</select>
 		</td>
 	</tr>
 	<tr>
 		<td class="category">
-			<?php echo lang_get( 'font_family' ) ?>
+			<label for="font_family">
+				<?php echo lang_get( 'font_family' ) ?>
+			</label>
 		</td>
 		<td>
 			<select id="font_family" name="font_family" class="input-sm">

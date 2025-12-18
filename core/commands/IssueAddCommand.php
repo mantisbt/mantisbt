@@ -54,8 +54,9 @@ use Mantis\Exceptions\ClientException;
  *       "master_issue_id": 1234,
  *       "relationship_type": 1,      # BUG_RELATED
  *       "copy_files": true,
- *       "copy_notes": true,
- *     }
+ *       "copy_notes": true
+ *     },
+ *     "skip_moderation": false
  *   }
  * }
  */
@@ -303,22 +304,18 @@ class IssueAddCommand extends Command {
 
 		# if a profile was selected then let's use that information
 		if( $this->issue->profile_id != 0 ) {
-			if( profile_is_global( $this->issue->profile_id ) ) {
-				$t_row = user_get_profile_row( ALL_USERS, $this->issue->profile_id );
-			} else {
-				$t_row = user_get_profile_row( $this->issue->reporter_id, $this->issue->profile_id );
-			}
+			$t_profile = user_get_profile( $this->issue->reporter_id, $this->issue->profile_id );
 
 			if( is_blank( $this->issue->platform ) ) {
-				$this->issue->platform = $t_row['platform'];
+				$this->issue->platform = $t_profile->platform;
 			}
 
 			if( is_blank( $this->issue->os ) ) {
-				$this->issue->os = $t_row['os'];
+				$this->issue->os = $t_profile->os;
 			}
 
 			if( is_blank( $this->issue->os_build ) ) {
-				$this->issue->os_build = $t_row['os_build'];
+				$this->issue->os_build = $t_profile->os_build;
 			}
 		}
 
@@ -329,6 +326,16 @@ class IssueAddCommand extends Command {
 				throw new ClientException(
 					'User not allowed to attach files.',
 					ERROR_ACCESS_DENIED );
+			}
+
+			if( !$this->option( 'skip_moderation', false ) ) {
+				# Check if issue will be moderated - files not allowed if so
+				$t_will_moderate = event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', array() );
+				if( $t_will_moderate ) {
+					throw new ClientException(
+						'Files cannot be attached to issues that require moderation.',
+						ERROR_ACCESS_DENIED );
+				}
 			}
 
 			foreach( $t_issue['files'] as $t_file ) {
@@ -358,6 +365,16 @@ class IssueAddCommand extends Command {
 	 */
 	protected function process() {
 		$t_issue = $this->payload( 'issue' );
+
+		if( !$this->option( 'skip_moderation', false ) ) {
+			# Allow plugins to intercept for moderation
+			# If any plugin returns true, it has queued the issue for moderation
+			$t_moderated = event_signal( 'EVENT_REPORT_BUG_MODERATE', array( $t_issue ) );
+			if( $t_moderated ) {
+				# Plugin handled the issue, return special response
+				return array( 'moderated' => true );
+			}
+		}
 
 		# Create the bug
 		$t_issue_id = $this->issue->create();

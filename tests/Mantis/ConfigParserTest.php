@@ -23,11 +23,10 @@
  * @link http://www.mantisbt.org
  */
 
-/**
- * Includes
- */
-require_once 'MantisCoreBase.php';
+namespace Mantis\tests\Mantis;
 
+use ConfigParser;
+use Exception;
 use PHPUnit\Framework\Constraint\IsType;
 
 
@@ -201,7 +200,7 @@ class ConfigParserTest extends MantisCoreBase {
 	 *   <test case> => array( <string to test>, <expected type> )
 	 * @return array
 	 */
-	public function providerScalarTypes() {
+	public static function providerScalarTypes() {
 		return array(
 			'Integer Zero' => array( '0', IsType::TYPE_INT ),
 			'Integer One' => array( '1', IsType::TYPE_INT ),
@@ -242,7 +241,7 @@ class ConfigParserTest extends MantisCoreBase {
 	 * @return array
 	 * Initialize the array test cases list
 	 */
-	public function providerArrays() {
+	public static function providerArrays() {
 		/**
 		 * Template for new test cases
 		 * ---------------------------

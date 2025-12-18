@@ -40,6 +40,7 @@
  *
  * @author Atrol
  * @author Brettchenweber
+ * @author Justman10000
  * @author Metalhead64
  * @author TomatoCake
  * @author Umherirrender
@@ -73,8 +74,7 @@ $s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Zeilennummern a
 $s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Leerzeichen anzeigen';
 $s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Verborgene Zeichen werden angezeigt (z.&nbsp;B. bei Einrückungen).';
 $s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Leerzeichen bereinigen';
-$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Entfernt Leerzeichen vor und nach einem Code-Block.
-Einrückungen und Leerzeichen werden auch am Ende jeder Zeile entfernt.';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_desc = 'Entfernt Leerzeichen vor und nach einem Code-Block. Einrückungen und Leerzeichen werden auch am Ende jeder Zeile entfernt.';
 $s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Klammerpaarungen hervorheben';
 $s_plugin_format_syntax_highlighting_plugin_match_braces_desc = 'Zeigt bei Klammern die Paarung an, wenn man mit der Maus darüberfährt. Inklusive "rainbow braces" (Paare werden in jeweils gleicher Farbe dargestellt).';
 $s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Erweiterte Hervorhebung von Differenzen (diff)';

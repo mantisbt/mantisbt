@@ -137,6 +137,12 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( access_has_bug_level( config_get( 'move_bug_threshold' ), $t_bug_id ) &&
 				access_has_project_level( config_get( 'report_bug_threshold', null, null, $f_project_id ), $f_project_id ) ) {
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
+
+				# Add bugnote if supplied
+				if( !is_blank( $f_bug_notetext ) ) {
+					$t_bugnote_id = bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+					bugnote_process_mentions( $t_bug_id, $t_bugnote_id, $f_bug_notetext );
+				}
 				bug_move( $t_bug_id, $f_project_id );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
