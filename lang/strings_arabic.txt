@@ -866,6 +866,7 @@ $s_assign_to = 'موكولة إلى';
 $s_additional_information = 'معلومات إضافية';
 $s_submit_report_button = 'إرسال التقرير';
 $s_check_report_more_bugs = 'اختر للإبلاغ عن مزيد من القضايا';
+$s_submitted_for_moderation = 'تم تقديم طلبك للمراجعة وسيظهر بمجرد الموافقة عليه.';
 $s_report_stay = 'التقرير يبقى';
 $s_selected_project = 'المشروع المختار';
 $s_valid_project_msg = 'يجب أن تختار مشروعا صحيحا';
