@@ -69,6 +69,7 @@ $t_file = __FILE__;
 $t_mantis_dir = __DIR__ . DIRECTORY_SEPARATOR;
 $t_show_page_header = false;
 $t_force_readonly = true;
+$t_allow_file_upload = file_allow_bug_upload( $f_bug_id );
 
 if( $t_bug->project_id != helper_get_current_project() ) {
 	# in case the current project is not the same project of the bug we are viewing...
@@ -387,6 +388,34 @@ layout_page_begin();
 					></textarea>
 				</td>
 			</tr>
+<?php
+
+if( $t_allow_file_upload ) {
+		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+		$t_max_file_size = file_get_max_file_size();
+?>
+			<tr id="bugnote-attach-files">
+				<th class="category">
+					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+					<br />
+					<?php print_max_filesize( $t_max_file_size ); ?>
+				</th>
+				<td>
+					<?php print_dropzone_template() ?>
+					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
+						<?php print_icon( 'fa-cloud-upload', 'upload-icon ace-icon blue fa-3x' ); ?>
+						<br>
+						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
+						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
+					</div>
+					<div class="fallback">
+						<input id="ufile[]" name="ufile[]" type="file" size="50" />
+					</div>
+				</td>
+			</tr>
+<?php } ?>
+
 <?php
 	if( config_get( 'time_tracking_enabled' )
 		&& access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id )
