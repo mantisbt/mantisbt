@@ -12,7 +12,7 @@
         "vboctor/disposable_email_checker": "^3.0",
         "adodb/adodb-php": "^5.22",
         "phpmailer/phpmailer": "~7.0",
-        "erusev/parsedown": "^1.7.4",
+        "parsedown/parsedown": "^1.7.5",
         "ezyang/htmlpurifier": "^4.14",
         "dapphp/securimage": "dev-mantis"
     },
