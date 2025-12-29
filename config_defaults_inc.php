@@ -1813,22 +1813,30 @@ $g_default_bug_relationship = BUG_RELATED;
  *
  * The default is 1 which is the "General" category that is created in the
  * default database.
+ *
+ * @global $g_default_category_for_moves
  */
 $g_default_category_for_moves = 1;
 
 /**
+ * Number of Issues to show in the View Bugs page.
  *
  * @global int $g_default_limit_view
  */
 $g_default_limit_view = 50;
 
 /**
+ * Highlight bugs that have changed during the last N hours.
  *
  * @global int $g_default_show_changed
  */
 $g_default_show_changed = 6;
 
 /**
+ * Controls which issues will be displayed in the View Issues page.
+ *
+ * Default value is CLOSED, implying that all issues at "closed" or higher state
+ * will not be shown.
  *
  * @global int $g_hide_status_default
  */
