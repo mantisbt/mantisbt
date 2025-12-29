@@ -1856,9 +1856,14 @@ $g_hide_status_default = CLOSED;
 $g_show_sticky_issues = ON;
 
 /**
- * Minimum delay for automatic page refreshes (in minutes).
+ * Minimum delay between automatic refreshes of the View Issues page (in minutes).
  *
- * Make sure people are not refreshing too often.
+ * Make sure refresh delay in user preferences isn't too short.
+ * If users set their preferences to be lower then it is bumped back up to this
+ * minimum value.
+ *
+ * Make sure people are not refreshing too often to avoid unnecessary load on
+ * the web server.
  *
  * @global int $g_min_refresh_delay
  */
