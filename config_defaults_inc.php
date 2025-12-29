@@ -1835,6 +1835,13 @@ $g_default_show_changed = 6;
 $g_hide_status_default = CLOSED;
 
 /**
+ * Default value for display of Sticky Issues on View Issues page.
+ *
+ * When ON, Sticky Issues are separated from regular ones, and shown grouped
+ * together at the top of the first page in the Issues list.
+ * When OFF, they are treated just like normal Issues.
+ *
+ * This value can be overridden by Filter settings.
  *
  * @global int $g_show_sticky_issues
  */

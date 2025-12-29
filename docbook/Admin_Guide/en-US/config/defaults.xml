@@ -313,7 +313,14 @@
 		<varlistentry>
 			<term>$g_show_sticky_issues</term>
 			<listitem>
-				<para>TODO</para>
+				<para>Default value for display of Sticky Issues on View Issues page.
+				</para>
+				<para>
+					When ON, Sticky Issues are separated from regular ones, and shown grouped
+					together at the top of the first page in the Issues list.
+					When OFF, they are treated just like normal Issues.
+					This value can be overridden by Filter settings.
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

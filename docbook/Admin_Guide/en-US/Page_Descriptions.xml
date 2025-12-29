@@ -171,6 +171,17 @@
                     any additions to the issue by email
                 </para>
             </listitem>
+			<listitem>
+				<para><emphasis>Stick / Unstick</emphasis> -
+					Changes the Issue's <emphasis>sticky</emphasis> status.
+					Sticky Issues are listed at the top of the first page in
+					the Issues list (see <xref linkend="admin.pages.filter" />),
+					unless this has been disabled by filter settings.
+				</para>
+				<para>The sticky status can also be changed using the
+					<emphasis>Set/Unset Sticky</emphasis> group action.
+				</para>
+			</listitem>
             <listitem>
                 <para>Create Clone - create a copy of the current issue. This
                     presents the user with a new issue reporting form with all of the
