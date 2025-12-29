@@ -66,14 +66,14 @@
 				</para>
 			</listitem>
 		</varlistentry>
-        <varlistentry>
-            <term>$g_timeline_view_threshold</term>
-            <listitem>
-                <para>Threshold for viewing timeline information. Use NOBODY to turn it off.
-                    If the timeline is turned off, the other widgets are displayed in a two column view.
-                    The default is VIEWER.
-                </para>
-            </listitem>
+		<varlistentry>
+			<term>$g_timeline_view_threshold</term>
+			<listitem>
+				<para>Threshold for viewing timeline information. Use NOBODY to turn it off.
+					If the timeline is turned off, the other widgets are displayed in a two column view.
+					The default is VIEWER.
+				</para>
+			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_default_reminder_view_status</term>
@@ -155,15 +155,15 @@
 		<varlistentry>
 			<term>$g_default_limit_view</term>
 			<listitem>
-				<para>Number of bugs to show in the View Bugs page. The default
-					value is 50.
+				<para>Number of Issues to show in the View Issues page.
+					The default value is 50.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_default_show_changed</term>
 			<listitem>
-				<para>Highlight bugs that have changed during the last N hours.
+				<para>Highlight Issues that have changed during the last N hours.
 					The default value is 6.
 				</para>
 			</listitem>
@@ -171,8 +171,9 @@
 		<varlistentry>
 			<term>$g_hide_status_default</term>
 			<listitem>
-				<para>Controls which issues will be displayed in the View Issues
-					page. Default value is CLOSED, implying that all issues at &quot;closed&quot;
+				<para>Controls which Issues will be displayed in the View Issues
+					page.
+					Default value is CLOSED, implying that all Issues at &quot;closed&quot;
 					or higher state will not be shown.
 				</para>
 			</listitem>
@@ -195,10 +196,9 @@
 		</varlistentry>
 	</variablelist>
 	<para>
-		These settings are used as the default values for preferences for
-		new users. Each user can override these settings through the user
-		preferences form. Default language is set to default site language
-		($g_default_language).
+		These settings define default values for new users' preferences.
+		Each user can override them through the user preferences form.
+		Default language is set to default site language ($g_default_language).
 	</para>
 	<variablelist>
 		<varlistentry>
@@ -228,7 +228,12 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_default_email_on_new, $g_default_email_on_assigned, $g_default_email_on_feedback, $g_default_email_on_resolved, $g_default_email_on_closed</term>
+			<term>$g_default_email_on_new,
+				$g_default_email_on_assigned,
+				$g_default_email_on_feedback,
+				$g_default_email_on_resolved,
+				$g_default_email_on_closed
+			</term>
 			<listitem>
 				<para>Default user preferences to enable receiving emails when a
 					bug is set to the corresponding status. This option only has an
@@ -270,7 +275,14 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_default_email_on_new_minimum_severity, $g_default_email_on_assigned_minimum_severity, $g_default_email_on_feedback_minimum_severity, $g_default_email_on_resolved_minimum_severity, $g_default_email_on_closed_minimum_severity, $g_default_email_on_reopened_minimum_severity, $g_default_email_on_bugnote_minimum_severity</term>
+			<term>$g_default_email_on_new_minimum_severity,
+				$g_default_email_on_assigned_minimum_severity,
+				$g_default_email_on_feedback_minimum_severity,
+				$g_default_email_on_resolved_minimum_severity,
+				$g_default_email_on_closed_minimum_severity,
+				$g_default_email_on_reopened_minimum_severity,
+				$g_default_email_on_bugnote_minimum_severity
+			</term>
 			<listitem>
 				<para>Default user preferences to enable filtering based on issue
 					severity. These correspond to the email_on_&lt;status&gt; settings.
