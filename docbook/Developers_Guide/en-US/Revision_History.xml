@@ -8,6 +8,20 @@
 	<simpara>
 		<revhistory>
 			<revision>
+				<revnumber>2.28-0</revnumber>
+				<date>Tue Dec 30 2025</date>
+				<author>
+					<firstname>Damien</firstname>
+					<surname>Regad</surname>
+					<email>dregad@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.28.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>2.27-0</revnumber>
 				<date>Sun Sep 29 2024</date>
 				<author>
