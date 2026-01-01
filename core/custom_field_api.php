@@ -1537,8 +1537,9 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 			(int)$p_bug_id,
 		);
 		db_query( $t_query, $t_params );
-
-		history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row[$t_value_field], $t_type ), $t_value );
+		if ( db_affected_rows() ) {
+			history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row[$t_value_field], $t_type ), $t_value );
+		}
 	} else {
 		$t_query = 'INSERT INTO {custom_field_string}
 						( field_id, bug_id, ' . $t_value_field . ' )
