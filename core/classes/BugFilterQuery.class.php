@@ -781,28 +781,68 @@ class BugFilterQuery extends DbQuery {
 	 * @return void
 	 */
 	protected function build_prop_date_due() {
-		if( ( gpc_string_to_bool( $this->filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] ) )
-				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_START_MONTH] )
-				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_START_DAY] )
-				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_START_YEAR] )
-				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_END_MONTH] )
-				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_END_DAY] )
-				&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_END_YEAR] )
+		$t_field = '{bug}.due_date';
+		$t_query = $t_field . ' ';
+		$t_date = new DateTimeImmutable();
+		switch( $this->filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] ) {
+			case DUE_DATE_OVERDUE:
+				$t_query .= ' <= ' . $this->param( $t_date->getTimestamp() )
+					. " AND $t_field <> 1" ;
+				break;
+			case DUE_DATE_TODAY:
+				$t_query .= '< ' . $this->param(
+					$t_date->setTime(0, 0)
+							->modify( '+1 day' )
+							->getTimestamp()
+					)
+					. " AND $t_field <> 1" ;
+				break;
+			case DUE_DATE_NEXT_WEEK:
+				$t_query .= '< ' . $this->param(
+					$t_date->setTime(0, 0)
+							->modify( '+1 week' )
+							->getTimestamp()
+					)
+					. " AND $t_field <> 1" ;
+				break;
+			case DUE_DATE_NEXT_MONTH:
+				$t_query .= '< ' . $this->param(
+					$t_date->setTime(0, 0)
+							->modify( '+1 month' )
+							->getTimestamp()
+					)
+					. " AND $t_field <> 1" ;
+				break;
+			case DUE_DATE_RANGE:
+				if(    is_numeric( $this->filter[FILTER_PROPERTY_DUE_START_YEAR] )
+					&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_START_MONTH] )
+					&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_START_DAY] )
+					&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_END_YEAR] )
+					&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_END_MONTH] )
+					&& is_numeric( $this->filter[FILTER_PROPERTY_DUE_END_DAY] )
 				) {
-			$t_start_string = $this->filter[FILTER_PROPERTY_DUE_START_YEAR]
-					. '-' . $this->filter[FILTER_PROPERTY_DUE_START_MONTH]
-					. '-' . $this->filter[FILTER_PROPERTY_DUE_START_DAY]
-					. ' 00:00:00';
-			$t_end_string = $this->filter[FILTER_PROPERTY_DUE_END_YEAR]
-					. '-' . $this->filter[FILTER_PROPERTY_DUE_END_MONTH]
-					. '-' . $this->filter[FILTER_PROPERTY_DUE_END_DAY]
-					. ' 23:59:59';
-
-			$t_query_due_at = '{bug}.due_date BETWEEN '
-					. $this->param( strtotime( $t_start_string ) ) . ' AND '
-					. $this->param( strtotime( $t_end_string ) ) ;
-			$this->add_fixed_where( $t_query_due_at );
+					$t_date_from = $t_date
+						->setDate( $this->filter[FILTER_PROPERTY_DUE_START_YEAR],
+							$this->filter[FILTER_PROPERTY_DUE_START_MONTH],
+							$this->filter[FILTER_PROPERTY_DUE_START_DAY] )
+						->setTime( 0, 0 );
+					$t_date_to = $t_date
+						->setDate( $this->filter[FILTER_PROPERTY_DUE_END_YEAR],
+							$this->filter[FILTER_PROPERTY_DUE_END_MONTH],
+							$this->filter[FILTER_PROPERTY_DUE_END_DAY] )
+						->setTime( 23, 59, 59 );
+					$t_query.= 'BETWEEN ' . $this->param( $t_date_from->getTimestamp() )
+						. ' AND ' . $this->param( $t_date_to->getTimestamp() );
+				}
+				break;
+			case META_FILTER_NONE:
+				$t_query .= '= ' . $this->param( 1 );
+				break;
+			case META_FILTER_ANY:
+			default:
+				return;
 		}
+		$this->add_fixed_where( $t_query );
 	}
 
 	/**

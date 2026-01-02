@@ -338,9 +338,7 @@ function filter_get_url( array $p_custom_filter ) {
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] ) ) {
-		$t_query[] = filter_encode_field_and_value(
-			FILTER_PROPERTY_FILTER_BY_DUE_DATE,
-			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] ? 'on' : 'off' );
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_FILTER_BY_DUE_DATE, $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] );
 
 		# The start and end dates are only applicable if filter by date is set.
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_DUE_START_DAY] ) ) {
@@ -958,7 +956,7 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_LAST_UPDATED_END_DAY => date( 'd' ),
 		FILTER_PROPERTY_LAST_UPDATED_START_YEAR => date( 'Y' ),
 		FILTER_PROPERTY_LAST_UPDATED_END_YEAR => date( 'Y' ),
-		FILTER_PROPERTY_FILTER_BY_DUE_DATE => false,
+		FILTER_PROPERTY_FILTER_BY_DUE_DATE => META_FILTER_ANY,
 		FILTER_PROPERTY_DUE_START_MONTH => date( 'm' ),
 		FILTER_PROPERTY_DUE_END_MONTH => date( 'm' ),
 		FILTER_PROPERTY_DUE_START_DAY => 1,
@@ -2160,7 +2158,11 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	$f_last_updated_start_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_START_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
 	$f_last_updated_end_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
 	# due date values
-	$f_do_filter_by_due_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DUE_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] );
+	$f_do_filter_by_due_date	= gpc_get_int( FILTER_PROPERTY_FILTER_BY_DUE_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_DUE_DATE] );
+	# Compatibility with original implementation of due date filters (true = range)
+	if( $f_do_filter_by_due_date === (int)true ) {
+		$f_do_filter_by_due_date = DUE_DATE_RANGE;
+	}
 	$f_due_start_month			= gpc_get_int( FILTER_PROPERTY_DUE_START_MONTH, $t_filter[FILTER_PROPERTY_DUE_START_MONTH] );
 	$f_due_end_month			= gpc_get_int( FILTER_PROPERTY_DUE_END_MONTH, $t_filter[FILTER_PROPERTY_DUE_END_MONTH] );
 	$f_due_start_day			= gpc_get_int( FILTER_PROPERTY_DUE_START_DAY, $t_filter[FILTER_PROPERTY_DUE_START_DAY] );
