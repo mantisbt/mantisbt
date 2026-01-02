@@ -1184,7 +1184,7 @@ function print_filter_show_profile( ?array $p_filter = null ) {
 function print_filter_values_per_page( array $p_filter ) {
 	$t_filter = $p_filter;
 	echo ( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0 ) ? lang_get( 'all' ) : string_display_line( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
-	echo '<input type="hidden" name="', FILTER_PROPERTY_ISSUES_PER_PAGE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] ), '" />';
+	print_filter_hidden_input( $p_filter, FILTER_PROPERTY_ISSUES_PER_PAGE );
 }
 
 /**
@@ -1222,7 +1222,7 @@ function print_filter_values_view_state( array $p_filter ) {
 		echo lang_get( 'any' );
 		$t_filter[FILTER_PROPERTY_VIEW_STATE] = META_FILTER_ANY;
 	}
-	echo '<input type="hidden" name="', FILTER_PROPERTY_VIEW_STATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_VIEW_STATE] ), '" />';
+	print_filter_hidden_input( $p_filter, FILTER_PROPERTY_VIEW_STATE );
 }
 
 /**
@@ -1307,11 +1307,7 @@ function print_filter_sticky_issues( ?array $p_filter = null ) {
 function print_filter_values_highlight_changed( array $p_filter ) {
 	$t_filter = $p_filter;
 	echo $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
-		?>
-		<input type="hidden"
-			name="<?php echo FILTER_PROPERTY_HIGHLIGHT_CHANGED; ?>"
-			value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ); ?>">
-		<?php
+	print_filter_hidden_input( $p_filter, FILTER_PROPERTY_HIGHLIGHT_CHANGED );
 }
 
 /**
@@ -1342,13 +1338,13 @@ function print_filter_highlight_changed( ?array $p_filter = null ) {
 function print_filter_values_do_filter_by_date( array $p_filter ) {
 	$t_filter = $p_filter;
 	if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) {
-		echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ), '" />';
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_DATE_SUBMITTED_START_DAY );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_DATE_SUBMITTED_END_DAY );
 
 		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
@@ -1498,13 +1494,13 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, ?array $p_fil
 function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 	$t_filter = $p_filter;
 	if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) {
-		echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ), '" />';
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_LAST_UPDATED_START_YEAR );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_LAST_UPDATED_START_MONTH );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_LAST_UPDATED_START_DAY );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_LAST_UPDATED_END_YEAR );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_LAST_UPDATED_END_MONTH );
+		print_filter_hidden_input( $t_filter, FILTER_PROPERTY_LAST_UPDATED_END_DAY );
 
 		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH], $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY], $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
@@ -1806,8 +1802,8 @@ function print_filter_do_filter_by_due_date( $p_hide_checkbox = false, ?array $p
  */
 function print_filter_values_relationship_type( array $p_filter ) {
 	$t_filter = $p_filter;
-	echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_TYPE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ), '" />';
-	echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ), '" />';
+	print_filter_hidden_input( $t_filter, FILTER_PROPERTY_RELATIONSHIP_TYPE );
+	print_filter_hidden_input( $t_filter, FILTER_PROPERTY_RELATIONSHIP_BUG );
 	$c_rel_type = $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
 	$c_rel_bug = $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
 	if( BUG_REL_ANY == $c_rel_type ) {
@@ -2632,9 +2628,7 @@ function print_filter_values_match_type( array $p_filter ) {
 			echo lang_get( 'filter_match_all' );
 			break;
 	}
-	?>
-		<input type="hidden" name="match_type" value="<?php echo $t_filter[FILTER_PROPERTY_MATCH_TYPE] ?>"/>
-	<?php
+	print_filter_hidden_input( $t_filter, FILTER_PROPERTY_MATCH_TYPE );
 }
 
 /**
@@ -3229,4 +3223,20 @@ function print_filter_search( ?array $p_filter = null ) {
 	}
 	echo '<input type="text" id="filter-search-txt" class="input-sm" size="48" name="', FILTER_PROPERTY_SEARCH, '"
 		placeholder="' . lang_get( 'search' ) . '" value="', string_attribute( $p_filter[FILTER_PROPERTY_SEARCH] ), '" />';
+}
+
+/**
+ * Prints a hidden form input for a filter property.
+ *
+ * @param array  $p_filter
+ * @param string $p_property
+ *
+ * @return void
+ * @internal
+ */
+function print_filter_hidden_input( array $p_filter, string $p_property ) {
+	printf( '<input type="hidden" name="%s" value="%s" />',
+			$p_property,
+			string_attribute( $p_filter[$p_property] )
+	);
 }
