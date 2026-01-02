@@ -1709,7 +1709,7 @@ function print_filter_values_do_filter_by_due_date( array $p_filter ) {
  * @param array $p_filter Filter array
  * @return void
  */
-function print_filter_do_filter_by_due_date( $p_hide_checkbox = false, array $p_filter = null ) {
+function print_filter_do_filter_by_due_date( $p_hide_checkbox = false, ?array $p_filter = null ) {
 	global $g_filter;
 	if( null === $p_filter ) {
 		$p_filter = $g_filter;
