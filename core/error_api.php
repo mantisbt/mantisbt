@@ -606,6 +606,11 @@ function error_print_stack_trace( $p_exception = null ) {
 		echo error_stack_trace_as_string( $p_exception );
 		return;
 	}
+
+	$t_stack = error_stack_trace( $p_exception );
+	if( empty( $t_stack ) ) {
+		return;
+	}
 ?>
 	<h3>Stack trace</h3>
 		<div class="table-responsive">
@@ -620,8 +625,6 @@ function error_print_stack_trace( $p_exception = null ) {
 					<th>Args</th>
 				</tr>
 <?php
-	$t_stack = error_stack_trace( $p_exception );
-
 	foreach( $t_stack as $t_id => $t_frame ) {
 		if( !empty( $t_frame['args'] ) ) {
 			$t_args = array();
