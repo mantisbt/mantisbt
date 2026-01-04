@@ -81,37 +81,54 @@ if( !$g_bypass_error_handler ) {
 $g_exception = null;
 
 /**
- * Unhandled exception handler
+ * Unhandled exception handler.
  *
- * @param MantisException|Exception|Error $p_exception The exception to handle
+ * @param MantisException|Throwable $p_exception The exception to handle.
+ *
  * @return void
  */
-function error_exception_handler( $p_exception ) {
+function error_exception_handler( Throwable $p_exception ) {
+	# @TODO The $g_exception global should no longer be needed. It remains here
+	#       during the transition from trigger_error with E_USER_ERROR.
 	global $g_exception;
-
-	# As per PHP documentation, null may be received to reset handler to default state.
-	if( $p_exception === null ) {
-		$g_exception = null;
-		return;
-	}
-
 	$g_exception = $p_exception;
 
-	if( is_a( $p_exception, 'Mantis\Exceptions\MantisException' ) ) {
+	$t_error = $p_exception->getCode();
+
+	if( $p_exception instanceof MantisException ) {
 		$t_params = $p_exception->getParams();
 		if( !empty( $t_params ) ) {
 			call_user_func_array( 'error_parameters', $t_params );
 		}
 
-
-		trigger_error( $p_exception->getCode(), ERROR );
-
-		# It is not expected to get here, but just in case!
-		return;
+		error_output( $t_error,
+			'APPLICATION ERROR #' . $t_error,
+			error_string( $t_error ),
+			DISPLAY_ERROR_HALT,
+			$p_exception->getFile(),
+			$p_exception->getLine()
+		);
+		exit( $t_error );
 	}
 
 	# trigger a generic error
-	trigger_error( ERROR_PHP, ERROR );
+	$t_error_description = $p_exception->getMessage();
+	error_log( $t_error_description . "\n" . error_stack_trace_as_string() );
+
+	# If show detailed errors is OFF hide PHP exceptions since they sometimes
+	# include file path.
+	if( OFF == config_get_global( 'show_detailed_errors' ) ) {
+		$t_error_description = '';
+	}
+
+	error_output( $t_error,
+		'INTERNAL APPLICATION ERROR',
+		$t_error_description,
+		DISPLAY_ERROR_HALT,
+		$p_exception->getFile(),
+		$p_exception->getLine()
+	);
+	exit( ERROR_PHP );
 }
 
 /**
@@ -226,23 +243,12 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			$t_error_type = 'DEPRECATED';
 			break;
 		case E_USER_ERROR:
-			if( $p_error == ERROR_PHP ) {
-				$t_error_type = 'INTERNAL APPLICATION ERROR';
-
-				global $g_exception;
-				$t_error_description = $g_exception->getMessage();
-				$t_error_to_log = $t_error_description . "\n" . error_stack_trace_as_string();
-				error_log( $t_error_to_log );
-
-				# If show detailed errors is OFF hide PHP exceptions since they sometimes
-				# include file path.
-				if( !$t_show_detailed_errors ) {
-					$t_error_description = '';
-				}
-			} else {
-				$t_error_type = 'APPLICATION ERROR #' . $p_error;
-				$t_error_description = error_string( $p_error );
-			}
+			# Calling trigger_error() for E_USER_ERROR is deprecated in PHP 8.4.
+			# This case only remains for backwards-compatibility, to catch any
+			# legacy trigger_error() call that has not been converted to throw
+			# Exceptions to be handled by error_exception_handler().
+			$t_error_type = 'APPLICATION ERROR #' . $p_error;
+			$t_error_description = error_string( $p_error );
 			break;
 		case E_USER_WARNING:
 			$t_error_type = 'APPLICATION WARNING #' . $p_error;
