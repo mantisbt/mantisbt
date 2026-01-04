@@ -103,6 +103,7 @@ function error_exception_handler( $p_exception ) {
 			call_user_func_array( 'error_parameters', $t_params );
 		}
 
+
 		trigger_error( $p_exception->getCode(), ERROR );
 
 		# It is not expected to get here, but just in case!
@@ -161,28 +162,15 @@ function error_stack_trace( $p_exception = null ) {
  * @uses html_api.php (optional)
  */
 function error_handler( $p_type, $p_error, $p_file, $p_line ) {
-	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
-	global $g_error_send_page_header;
-
 	# check if errors were disabled with @ somewhere in this call chain
 	if( !( error_reporting() & $p_type ) ) {
 		return;
 	}
 
-	$t_lang_pushed = false;
-
-	$t_db_connected = false;
-	if( function_exists( 'db_is_connected' ) ) {
-		if( db_is_connected() ) {
-			$t_db_connected = true;
-		}
-	}
-	$t_html_api = false;
-	if( function_exists( 'html_end' ) ) {
-		$t_html_api = true;
-	}
+	$t_db_connected = function_exists( 'db_is_connected' ) && db_is_connected();
 
 	# flush any language overrides to return to user's natural default
+	$t_lang_pushed = false;
 	if( $t_db_connected ) {
 		lang_push( lang_get_default() );
 		$t_lang_pushed = true;
@@ -190,13 +178,13 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 
 	$t_method_array = config_get_global( 'display_errors' );
 	$t_method = $t_method_array[$p_type] ?? $t_method_array[E_ALL] ?? 'none';
-
-	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
-
 	# Force errors to use HALT method.
+	# @TODO E_USER_ERROR should be removed once the migration to Exceptions is complete
 	if( $p_type == E_USER_ERROR || $p_type == E_ERROR || $p_type == E_RECOVERABLE_ERROR ) {
 		$t_method = DISPLAY_ERROR_HALT;
 	}
+
+	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
 
 	# Special handling for missing language strings, as we do not want to
 	# display information about lang_get() call; instead, we need details
@@ -284,9 +272,41 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			$t_error_description = $p_error . ' (' . $t_error_location . ')';
 	}
 
+	error_output( $p_error, $t_error_type, $t_error_description, $t_method, $p_file, $p_line );
+
+	if( $t_lang_pushed ) {
+		lang_pop();
+	}
+}
+
+/**
+ * Prints the error.
+ *
+ * Depending on context and error type, this can be an HTML error page with or
+ * without details, a banner, or plain-text output (for CLI).
+ *
+ * @param int|string $p_error MantisBT Error number (see ERROR_* constants)
+ *                            or system error message.
+ * @param string $p_error_type        Error type.
+ * @param string $p_error_description Error message.
+ * @param string $t_method Error display method (see DISPLAY_ERROR_* constants).
+ * @param string $p_file Name of file in which the error was raised.
+ * @param int    $p_line Line number the error was raised at.
+ *
+ * @return void
+ *
+ * @throws ClientException
+ */
+function error_output( $p_error, string $p_error_type, string $p_error_description, $t_method, string $p_file, int $p_line ) {
+	global $g_error_send_page_header, $g_error_handled, $g_error_parameters, $g_error_proceed_url;
+
+	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
+	$t_db_connected = function_exists( 'db_is_connected' ) && db_is_connected();
+	$t_html_api = function_exists( 'html_end' );
+
 	if( php_sapi_name() == 'cli' ) {
 		if( DISPLAY_ERROR_NONE != $t_method ) {
-			echo $t_error_type . ': ' . $t_error_description . "\n";
+			echo $p_error_type . ': ' . $p_error_description . "\n";
 
 			if( $t_show_detailed_errors ) {
 				echo "\n";
@@ -297,7 +317,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			exit(1);
 		}
 	} else {
-		$t_error_description = nl2br( $t_error_description );
+		$p_error_description = nl2br( $p_error_description );
 
 		switch( $t_method ) {
 			case DISPLAY_ERROR_HALT:
@@ -311,8 +331,10 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 					$t_old_contents = ob_get_contents();
 					if( !error_handled() ) {
 						# Retrieve the previously output header
-						if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $t_result ) &&
-							isset( $t_result[1] ) && isset( $t_result[1][0] ) ) {
+						if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $t_result )
+							&& isset( $t_result[1] )
+							&& isset( $t_result[1][0] )
+						) {
 							$t_old_headers = $t_result[1][0];
 							unset( $t_old_contents );
 						}
@@ -327,13 +349,12 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 					ob_clean();
 				}
 
-
 				# If HTML error output was disabled, set the HTTP response code and stop
 				if( defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
 					if( DISABLE_INLINE_ERROR_REPORTING == 'text' ) {
 						# Send error message as response body
 						header( 'Content-Type: text/plain' );
-						echo $t_error_description;
+						echo $p_error_description;
 					}
 					http_response_code( error_map_mantis_error_to_http_code( $p_error ) );
 					exit(1);
@@ -352,7 +373,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 							}
 						}
 					} else {
-						layout_page_header( $t_error_type );
+						layout_page_header( $p_error_type );
 					}
 				} else {
 					# Output the previously sent headers, if defined
@@ -367,8 +388,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				echo '<div class="space-20"></div>', "\n";
 				echo '<div class="alert alert-danger">', "\n";
 
-				echo '<p class="bold">' . $t_error_type . '</p>', "\n";
-				echo '<p>', $t_error_description, '</p>', "\n";
+				echo '<p class="bold">' . $p_error_type . '</p>', "\n";
+				echo '<p>', $p_error_description, '</p>', "\n";
 
 				echo '<div class="error-info">';
 				if( null === $g_error_proceed_url ) {
@@ -418,9 +439,9 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				if( !defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
 					global $g_error_delay_reporting;
 					if( $g_error_delay_reporting ) {
-						error_log_delayed( $t_error_type . ': ' . $t_error_description );
+						error_log_delayed( $p_error_type . ': ' . $p_error_description );
 					} else {
-						echo '<div class="alert alert-warning">', $t_error_type, ': ', $t_error_description, '</div>';
+						echo '<div class="alert alert-warning">', $p_error_type, ': ', $p_error_description, '</div>';
 					}
 				}
 				$g_error_handled = true;
@@ -429,10 +450,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			default:
 				# do nothing - note we treat this as we've not handled an error, so any redirects go through.
 		}
-	}
-
-	if( $t_lang_pushed ) {
-		lang_pop();
 	}
 
 	$g_error_parameters = array();
@@ -684,7 +701,6 @@ function error_string( $p_error ) {
 	global $g_error_parameters;
 
 	$t_lang = null;
-	$t_error = '';
 	while( true ) {
 		$t_err_msg = lang_get( 'MANTIS_ERROR', $t_lang );
 		if( array_key_exists( $p_error, $t_err_msg ) ) {
