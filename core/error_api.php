@@ -376,13 +376,13 @@ function error_output( Throwable $p_error ) {
 				echo '<p class="bold">' . $t_error_type . '</p>', "\n";
 				echo '<p>', $t_error_description, '</p>', "\n";
 
-				echo '<div class="error-info">';
+				echo '<p class="error-info">';
 				if( null === $g_error_proceed_url ) {
 					echo lang_get( 'error_no_proceed' );
 				} else {
 					echo '<a href="', $g_error_proceed_url, '">', lang_get( 'proceed' ), '</a>';
 				}
-				echo '</div>', "\n";
+				echo '</p>', "\n";
 
 				if( $t_show_detailed_errors ) {
 					error_print_details( $p_error->getFile(), $p_error->getLine() );
