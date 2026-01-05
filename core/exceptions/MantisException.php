@@ -49,4 +49,15 @@ class MantisException extends \Exception {
 	function getParams() {
 		return $this->params;
 	}
+
+	/**
+	 * MantisBT Error type for display.
+	 *
+	 * @see error_output()
+	 *
+	 * @return string
+	 */
+	public function getErrorType() {
+		return 'APPLICATION ERROR #' . $this->code;
+	}
 }
