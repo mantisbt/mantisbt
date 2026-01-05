@@ -849,6 +849,7 @@ $s_assign_to = 'Assignar a';
 $s_additional_information = 'Information additional';
 $s_submit_report_button = 'Submitter problema';
 $s_check_report_more_bugs = 'marca pro reportar plus problemas';
+$s_submitted_for_moderation = 'Tu action ha essite submittite al moderation e apparera quando illo habera essite approbate.';
 $s_report_stay = 'Continuar a reportar';
 $s_selected_project = 'Projecto seligite';
 $s_valid_project_msg = 'Tu debe seliger un projecto valide.';
