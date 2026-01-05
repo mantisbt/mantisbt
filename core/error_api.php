@@ -31,7 +31,6 @@
  * @uses lang_api.php
  */
 
-use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\ErrorHandlerException;
 use Mantis\Exceptions\MantisException;
 
@@ -121,13 +120,13 @@ function error_exception_handler( Throwable $p_exception ) {
 }
 
 /**
- * Get error stack based on last exception
+ * Get stack trace for the given exception or the last PHP error.
  *
- * @param Exception|null $p_exception The exception to print stack trace for.
- *                                    Null will check last seen exception.
+ * @param Throwable|null $p_exception The exception to print the stack trace for.
+ *                                    Null will get a PHP error's backtrace.
  * @return array The stack trace as an array
  */
-function error_stack_trace( $p_exception = null ) {
+function error_stack_trace( ?Throwable $p_exception = null ) {
 	if( $p_exception === null ) {
 		global $g_exception;
 		$p_exception = $g_exception;
@@ -162,7 +161,6 @@ function error_stack_trace( $p_exception = null ) {
  * @param int        $p_line  Contains the line number the error was raised at, as an integer.
  *
  * @return void
- * @throws ClientException
  *
  * @internal
  * @uses lang_api.php
@@ -266,8 +264,9 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
  * @param MantisException|ErrorHandlerException|Throwable $p_error The Error to display.
  *
  * @return void
- *
- * @throws ClientException
+ * @noinspection PhpDocMissingThrowsInspection ClientException could technically
+ *               be thrown by auth_is_user_authenticated() but this should not
+ *               happen in this context.
  */
 function error_output( Throwable $p_error ) {
 	global $g_error_send_page_header, $g_error_handled, $g_error_parameters, $g_error_proceed_url;
@@ -350,6 +349,7 @@ function error_output( Throwable $p_error ) {
 					if( $t_html_api ) {
 						layout_page_header();
 						if( $p_error->getCode() != ERROR_DB_QUERY_FAILED && $t_db_connected ) {
+							/** @noinspection PhpUnhandledExceptionInspection */
 							if( auth_is_user_authenticated() ) {
 								layout_page_begin();
 							} else {
@@ -402,6 +402,7 @@ function error_output( Throwable $p_error ) {
 
 				if( $t_html_api ) {
 					if( $p_error->getCode() != ERROR_DB_QUERY_FAILED && $t_db_connected ) {
+						/** @noinspection PhpUnhandledExceptionInspection */
 						if( auth_is_user_authenticated() ) {
 							layout_page_end();
 						} else {
