@@ -41,6 +41,7 @@
  * @author Athena in Wonderland
  * @author Hamilton Abreu
  * @author Luckas
+ * @author Mansil alfalb
  * @author MokaAkashiyaPT
  * @author Vitorvicentevalente
  * @author Waldir
@@ -55,7 +56,7 @@ $s_plugin_XmlImportExport_config_title = 'Configuração de níveis de acesso de
 $s_plugin_XmlImportExport_import_threshold = 'Importar incidências';
 $s_plugin_XmlImportExport_export_threshold = 'Exportar incidências';
 $s_plugin_XmlImportExport_action_update = 'Atualizar';
-$s_plugin_XmlImportExport_importing_in_project = 'A importar incidências para o projeto:';
+$s_plugin_XmlImportExport_importing_in_project = 'A importar problemas para o projeto: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Opções de importação';
 $s_plugin_XmlImportExport_cross_references = 'Referências cruzadas';
 $s_plugin_XmlImportExport_default_strategy = 'Estratégia de conversão por omissão:';

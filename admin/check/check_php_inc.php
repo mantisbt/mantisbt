@@ -38,6 +38,50 @@ require_api( 'utility_api.php' );
 
 check_print_section_header_row( 'PHP' );
 
+# Supported PHP version
+check_print_info_row( "PHP version ", PHP_VERSION . PHP_EXTRA_VERSION );
+
+if( defined( 'PHP_SUPPORTED_VERSION' ) ) {
+	# Get 2-digit PHP version (X.Y)
+	preg_match( '/\d+\.\d+/', PHP_SUPPORTED_VERSION, $t_short_version );
+	$t_short_version = $t_short_version[0];
+
+	# URL to filter by PHP version tag
+	# This is not perfect because if the tag does not exist then the filter will
+	# show all issues, but still better than nothing.
+	$t_search_url = 'https://mantisbt.org/bugs/search.php?'
+		. http_build_query( [
+			'project_id' => 1,
+			'tag_string' => 'PHP ' . $t_short_version,
+		] );
+
+	# URL to report a new issue with some pre-filled fields
+	$t_report_url = 'https://mantisbt.org/bugs/bug_report_page.php?'
+		. http_build_query( [
+			'project_id' => 1,
+			'category_id' => 67, # code cleanup
+			'product_version' => basename( MANTIS_VERSION, '-dev' ),
+			'summary' => "PHP $t_short_version compatibility: ",
+		] );
+	$C = 'constant';
+	$t_info = <<<MESSAGE
+		MantisBT {$C('MANTIS_VERSION')} 
+		has not been fully tested with PHP {$C('PHP_SUPPORTED_VERSION')} yet,
+		using an earlier PHP version is recommended.<br>
+		In case of PHP-$t_short_version-related compatibility issues, please 
+		<a href='$t_search_url'>check the Bug Tracker</a> for known problems and 
+		<a href="$t_report_url">report a new Issue</a> if necessary.  
+		MESSAGE;
+} else {
+	$t_info = '';
+}
+check_print_test_warn_row(
+	"PHP version " . PHP_VERSION . " is supported",
+	!defined( 'PHP_SUPPORTED_VERSION' )
+	|| version_compare( PHP_VERSION, PHP_SUPPORTED_VERSION, '<' ),
+	[ false => $t_info ]
+);
+
 # $t_extensions_required lists the extensions required to run Mantis in general
 $t_extensions_required = array(
 	'ctype', # required by PHPMailer

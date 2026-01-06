@@ -52,6 +52,7 @@ $f_obsolete	    = gpc_get_bool( 'obsolete' );
 
 $f_new_version	= trim( $f_new_version );
 $t_version = version_get( $f_version_id );
+$t_timestamp = date_strtotime( $f_date_order );
 
 $t_data = array(
 	'query' => array(
@@ -63,7 +64,7 @@ $t_data = array(
 		'description' => $f_description,
 		'released' => $f_released,
 		'obsolete' => $f_obsolete,
-		'timestamp' => $f_date_order
+		'timestamp' => date_timestamp_to_iso8601( $t_timestamp ),
 	)
 );
 

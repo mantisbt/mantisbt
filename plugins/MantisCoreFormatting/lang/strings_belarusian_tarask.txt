@@ -41,13 +41,14 @@
  * @author EugeneZelenko
  * @author Jim-by
  * @author Red Winged Duck
+ * @author Ucukor
  */
 
 $s_plugin_format_title = 'Фарматаваньне MantisBT';
 $s_plugin_format_description = 'Афіцыйнае дапаўненьне для апрацоўкі і фарматаваньня тэксту.';
 $s_plugin_format_config = 'Канфігурацыя';
 $s_plugin_format_process_text = 'Апрацоўка тэксту';
-$s_plugin_format_process_text_warning_notice = 'Не выключайце, калі Вы сапраўды не ўпэўнены ў тым што Вы робіце. У выключаным стане ўзьнікае верагоднасьць XSS-атакі на сайт.';
+$s_plugin_format_process_text_warning_notice = 'Не выключайце, калі Вы сапраўды не ўпэўнены ў тым што Вы робіце. У выключаным стане ўзьнікае імавернасьць XSS-атакі на сайт.';
 $s_plugin_format_process_urls = 'Апрацоўка URL-адрасоў';
 $s_plugin_format_process_buglinks = 'Унутраныя спасылкі MantisBT (праблемы і камэнтары)';
 $s_plugin_format_process_buglinks_info = 'Вашая канфігурацыя вызначае метку <em>Issue</em> як «%s», а метку <em>Issue Note</em> як «%s»';

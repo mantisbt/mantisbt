@@ -140,11 +140,11 @@ class BugFilterQuery extends DbQuery {
 	 *					QUERY_TYPE_IDS, query to return only matched bug ids, which may not
 	 *						be unique, but may be faster and convenient for use as a subquery.
 	 *					QUERY_TYPE_DISTINCT_IDS, query to return unique matched bug ids .
-	 * - 'project_id':	(integer) A project id to be used, if needed by the filer. By default,
+	 * - 'project_id':	(int) A project id to be used, if needed by the filer. By default,
 	 *					current project is used.
-	 * - 'user_id':		(integer) A user id to be used to determine visibility for the filter.
+	 * - 'user_id':		(int) A user id to be used to determine visibility for the filter.
 	 *					By default current user is used.
-	 * - 'use_sticky':	(boolean) Whether to allow returning the bug list sorted so that sticky
+	 * - 'use_sticky':	(bool) Whether to allow returning the bug list sorted so that sticky
 	 *					bugs are placed first in the result order. This is false by default.
 	 *
 	 * @param array $p_filter			Filter array
@@ -176,7 +176,7 @@ class BugFilterQuery extends DbQuery {
 						$this->user_id = (int)$t_value;
 						break;
 					case 'use_sticky':
-						$this->use_sticky = (boolean)$t_value;
+						$this->use_sticky = (bool)$t_value;
 						break;
 				}
 			}
@@ -240,7 +240,7 @@ class BugFilterQuery extends DbQuery {
 	 * @param integer $p_offset		Offset value
 	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed.
 	 */
-	public function execute( array $p_bind_array = null, $p_limit = null, $p_offset = null ) {
+	public function execute( array $p_bind_array = [], $p_limit = null, $p_offset = null ) {
 		if( $this->needs_rebuild ) {
 			$this->build_query();
 		}
@@ -1511,7 +1511,7 @@ class BugFilterQuery extends DbQuery {
 							case CUSTOM_FIELD_TYPE_TEXTAREA:
 								$t_filter_array[] = $t_table_name . '.text = ' . $this->param( '' );
 								break;
-							default;
+							default:
 								$t_filter_array[] = $t_table_name . '.value = ' . $this->param( '' );
 						}
 					} else {
@@ -1603,11 +1603,13 @@ class BugFilterQuery extends DbQuery {
 	/**
 	 * Translates a sql string created with legacy db_param() syntax, into
 	 * a string with valid parameters and values binded to current query object.
+	 *
 	 * @param string $p_string	Sql string
 	 * @param array $p_params	Array of parameter values
+	 *
 	 * @return string
 	 */
-	protected function helper_convert_legacy_clause( $p_string, array $p_params = null ) {
+	protected function helper_convert_legacy_clause( $p_string, array $p_params = [] ) {
 		if( empty( $p_params ) ) {
 			# shortcut, if there are no parameters, there's no need to translate
 			return $p_string;
@@ -1635,7 +1637,7 @@ class BugFilterQuery extends DbQuery {
 					if( isset( $t_filter_query['join'] ) ) {
 						$this->add_join( $t_filter_query['join'] );
 					}
-					$t_params = null;
+					$t_params = [];
 					if( isset( $t_filter_query['params'] ) && is_array( $t_filter_query['params'] ) ) {
 						$t_params = $t_filter_query['params'];
 					}

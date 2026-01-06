@@ -23,7 +23,11 @@
  * @link http://www.mantisbt.org
  */
 
+namespace Mantis\tests\core;
+
+use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Cookie\CookieJar;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * A builder class for test case requests.
@@ -228,7 +232,7 @@ class RequestBuilder {
 	/**
 	 * Send the request
 	 *
-	 * @return Psr\Http\Message\ResponseInterface The response
+	 * @return ResponseInterface The response
 	 * @noinspection PhpDocMissingThrowsInspection
 	 */
 	public function send() {
@@ -256,7 +260,7 @@ class RequestBuilder {
 
 		$t_url = rtrim( $this->base_url, '/' ) . '/' . ltrim( $this->relative_path, '/' );
 
-		$t_client = new GuzzleHttp\Client( ['cookies' => $this->cookieJar] );
+		$t_client = new GuzzleClient( ['cookies' => $this->cookieJar] );
 		/** @noinspection PhpUnhandledExceptionInspection */
 		return $t_client->request( $this->method, $t_url, $t_options );
 	}

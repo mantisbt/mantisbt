@@ -43,11 +43,11 @@ class ProjectHierarchyAddCommand extends Command {
 	 * Constructor
 	 *
 	 * $p_data['query'] is expected to contain:
-	 * - project_id (integer)
+	 * - project_id (int)
 	 *
 	 * $p_data['payload'] is expected to contain:
 	 * - project (array)
-	 * - inherit_parent (boolean)
+	 * - inherit_parent (bool)
 	 *
 	 * @param array $p_data The command data.
 	 */

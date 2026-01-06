@@ -21,9 +21,13 @@
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpComposerExtensionStubsInspection
  */
 
-require_once 'SoapBase.php';
+namespace Mantis\tests\soap;
+
+use SoapFault;
 
 /**
  * Test fixture for issue creation webservice methods.
@@ -122,6 +126,36 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( $t_issue_to_add['summary'], $t_issue->summary );
 		$this->assertEquals( $t_issue_to_add['description'], $t_issue->description );
 
+	}
+
+	/**
+	 * Tests that creating an issue with long text fields bigger than the
+	 * allowed maximum size fails.
+	 *
+	 * @return void
+	 */
+	public function testCreateIssueWithLongText() {
+		$t_long_text = str_repeat( 'x', config_get_global( 'max_textarea_length' ) );
+
+		$t_fields = [ 'description', 'steps_to_reproduce', 'additional_information' ];
+		foreach( $t_fields as $t_field ) {
+			$t_issue_to_add = $this->getIssueToAdd();
+			$t_issue_to_add[$t_field] = $t_long_text;
+
+			# Maximum length
+			$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+			$this->deleteAfterRun( $t_issue_id );
+			$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+			$this->assertEquals( $t_issue_to_add['description'], $t_issue->description );
+
+			# Too long
+			$t_issue_to_add[$t_field] .= ' TOO LONG';
+			$this->expectException( SoapFault::class );
+			$this->expectExceptionMessageMatches( '/Long text field ".*" must be shorter/' );
+			$this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );;
+		}
+
+		$this->deleteAfterRun( $t_issue_id );
 	}
 
 	/**

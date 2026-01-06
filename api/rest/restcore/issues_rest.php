@@ -179,6 +179,12 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 	$t_data = array( 'payload' => array( 'issue' => $t_issue ) );
 	$t_command = new IssueAddCommand( $t_data );
 	$t_result = $t_command->execute();
+
+	# Check if issue was moderated
+	if( isset( $t_result['moderated'] ) && $t_result['moderated'] ) {
+		return $p_response->withStatus( HTTP_STATUS_ACCEPTED, 'Accepted for moderation' );
+	}
+
 	$t_issue_id = (int)$t_result['issue_id'];
 
 	$t_created_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
@@ -276,6 +282,11 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 
 	$t_command = new IssueNoteAddCommand( $t_data );
 	$t_command_response = $t_command->execute();
+
+	# Check if note was moderated
+	if( isset( $t_command_response['moderated'] ) && $t_command_response['moderated'] ) {
+		return $p_response->withStatus( HTTP_STATUS_ACCEPTED, 'Accepted for moderation' );
+	}
 
 	# TODO: Move construction of response to the command and add options to allow callers to
 	# determine whether the response is needed.  This will need refactoring of APIs that construct

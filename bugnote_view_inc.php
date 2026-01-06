@@ -99,8 +99,6 @@ $t_activities_count = count( $t_activities );
 
 <?php # Bugnotes BEGIN ?>
 <div class="col-md-12 col-xs-12">
-<a id="attachments"></a>
-<a id="bugnotes"></a>
 <div class="space-10"></div>
 
 <?php
@@ -109,6 +107,7 @@ $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 ?>
+<a id="attachments"></a>
 <div id="bugnotes" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
@@ -130,7 +129,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	if( 0 == $t_activities_count ) {
 ?>
 <tr class="bugnotes-empty">
-	<td class="center" colspan="2">
+	<td class="center">
 		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
 	</td>
 </tr>
@@ -154,7 +153,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		}
 ?>
 <tr class="bugnote visible-on-hover-toggle" id="c<?php echo $t_activity['id'] ?>">
-		<td class="category">
+	<td class="category">
 		<div class="pull-left padding-2"><?php print_avatar( $t_activity['user_id'], 'bugnote', 80 ); ?>
 		</div>
 		<div class="pull-left padding-2">
@@ -343,14 +342,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</td>
 </tr>
 <?php
-if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
-	event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_activity['id'], $t_activity['private'] ) );
-}
-?>
-<tr class="spacer">
-	<td colspan="2"></td>
-</tr>
-<?php
+		if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
+			event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_activity['id'], $t_activity['private'] ) );
+		}
+
+		print_table_spacer( 2 );
 	} # end for loop
 
 	event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );

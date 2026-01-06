@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Zazaki (Zazaki)
+/** Dimli (Zazaki)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit https://translatewiki.net
@@ -130,8 +130,8 @@ $s_make_public = 'Şar ke';
 $s_create_new_project_link = 'Proceyo newe vıraze';
 $s_opensearch_id_short = '%s ID';
 $s_opensearch_id_description = '%s: mesela Id heta bıvin';
-$s_opensearch_text_short = '%s Metin';
-$s_opensearch_text_description = '%s: full-metin bıvin';
+$s_opensearch_text_short = '%s Metın';
+$s_opensearch_text_description = '%s: cıgeyrayışê metınê tami';
 $s_select_option = '(Weçine)';
 $s_resolve_bugs_conf_msg = 'Agoznayışanê meselan nışan ke';
 $s_priority_bugs_conf_msg = 'Veroriya meselan nışan kerê';
@@ -230,7 +230,7 @@ $s_select_profile = 'Profili bıweçine';
 $s_add_profile = 'Profil cı ke';
 $s_edit_profile = 'Profili bıvurne';
 $s_update_profile = 'Profili rocane ke';
-$s_delete_profile = 'Profili besterne';
+$s_delete_profile = 'Profili bestere';
 $s_global_profile = 'Profilo Global';
 $s_default_profile = 'Hesabyaye Profile';
 $s_profile_description = 'İzahatê Sistemi';
@@ -291,7 +291,6 @@ $s_add_bugnote_button = 'Note cı ke';
 $s_closed_bug_button = 'Mewzuyi kip ke';
 $s_hide_content = 'Tedeesteyi binımne';
 $s_show_content = 'Tedeesteyi bimocne';
-$s_unknown_file_extension = 'nêzanaye';
 $s_log_page_number = 'Numre';
 $s_log_page_time = 'Demê ramıtışi';
 $s_log_page_caller = 'Veyndoğ';
@@ -367,9 +366,6 @@ $s_name = 'Name';
 $s_update_version_button = 'Versiyoni Anewen ke';
 $s_released = 'Vıradeya';
 $s_reset_password_button = 'Parola newe ke';
-$s_show_all_users = 'Pêro';
-$s_users_unused = 'Nêkaryayo';
-$s_users_new = 'Newe';
 $s_main_link = 'Ser';
 $s_summary_link = 'Xulasa';
 $s_account_link = 'Hesabê mı';
@@ -490,10 +486,6 @@ $s_tags = 'Etiketi';
 $s_tag_details = 'Teferruatê Etiketi: %1$s';
 $s_tag_id = 'Etiket ID';
 $s_tag_name = 'Name';
-$s_tag_creator = 'Vıraştoğ';
-$s_tag_created = 'Demê Vıraziyayışi';
-$s_tag_updated = 'Resnayışo Peyên';
-$s_tag_description = 'Şınasiya etiketi';
 $s_tag_statistics = 'İstatistikê Karkerdışi';
 $s_tag_update = 'Etiketi Anewen ke: %1$s';
 $s_tag_update_return = 'Peyser şo etiket';
@@ -502,7 +494,6 @@ $s_tag_delete_button = 'Etiket Bestere';
 $s_tag_invalid_name = 'Namey etiketi ravêrde niyo';
 $s_tag_create_denied = 'Vıraştışi re icazet nêdeya.';
 $s_tag_create = 'Etiket vıraze';
-$s_show_all_tags = 'Pêro';
 $s_time_tracking_stopwatch_start = 'Serokne';
 $s_time_tracking_stopwatch_stop = 'Bıvındarne';
 $s_time_tracking_stopwatch_reset = 'Raçarne';
@@ -545,3 +536,8 @@ $s_move = 'Bıkırışe';
 $s_close = 'Kip ke';
 $s_add = 'Cı ke';
 $s_login = 'Cıkewtış';
+$s_filter_all = 'Pêro';
+$s_filter_new = 'Newe';
+$s_filter_unused_tags = 'Nêkaryayo';
+$s_filter_unused = 'Nêkaryayo';
+$s_unknown = 'nêzanaye';

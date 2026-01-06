@@ -1,0 +1,1570 @@
+# MantisBT REST API definition
+# Copyright 2024 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+
+openapi: 3.0.3
+info:
+  title: Mantis Bug Tracker REST API
+  version: 2.29.0-dev
+  description: |-
+    REST API calls have to be authenticated by creating an API token for the user doing the calls,
+    and then passing the API token in the 'Authorization' header.  However, for anonymous access,
+    the API key and header are not needed.
+
+    There has been significant improvements and feature additions for REST API in each of the
+    recent releases.  Hence, it is highly recommended to use latest release when leveraging the
+    REST APIs.
+
+    REST API is enabled by default since MantisBT 2.8.0 release.
+  license:
+    name: GPL-2.0-or-later
+  contact:
+    name: MantisBT Team
+    email: mantisbt-dev@lists.sourceforge.net
+    url: https://mantisbt.org
+paths:
+  '/api/rest/filters/{filter_id}':
+    get:
+      summary: Get a filter
+      operationId: FilterGet
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+        - $ref: '#/components/parameters/filter_id'
+  '/api/rest/filters':
+    get:
+      summary: Get all filters
+      operationId: FilterGetAll
+      description: ''
+      tags:
+        - 'Filters'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/config':
+    get:
+      summary: Get Configuration Option
+      operationId: ConfigGet
+      description: ''
+      tags:
+        - 'Configs'
+      parameters:
+        - name: option[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Set Configs
+      operationId: ConfigSet
+      description: ''
+      tags:
+        - 'Configs'
+      requestBody:
+        $ref: '#/components/requestBodies/ConfigSet'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  '/api/rest/users/me':
+    get:
+      summary: Get My User Info
+      operationId: UserGetMe
+      description: ''
+      tags:
+        - 'Users'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/files':
+    post:
+      summary: Add attachments to issue
+      operationId: IssueFilesAdd
+      description: ''
+      tags:
+        - 'Issue Attachments'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/IssueFilesAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      summary: Get issue files
+      operationId: IssueFilesGet
+      description: ''
+      tags:
+        - 'Issue Attachments'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/notes':
+    post:
+      summary: Create an issue note
+      operationId: IssueNotesAdd
+      description: ''
+      tags:
+        - 'Issue Notes'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/IssueNotesAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/notes/{issue_note_id}':
+    delete:
+      summary: Delete an issue note
+      operationId: IssueNotesDelete
+      description: ''
+      tags:
+        - 'Issue Notes'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+        - name: issue_note_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/IssueNotesDelete'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/relationships':
+    post:
+      summary: Add an issue relationship
+      operationId: IssueRelationshipsAdd
+      description: ''
+      tags:
+        - 'Issue Relationships'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/IssueRelationshipsAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/tags':
+    post:
+      summary: Attach a tag to issue
+      operationId: IssueTagsAdd
+      description: ''
+      tags:
+        - 'Issue Tags'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/IssueTagsAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
+    delete:
+      summary: Delete an issue relationship
+      operationId: IssueRelationshipsDelete
+      description: ''
+      tags:
+        - 'Issue Relationships'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+        - name: relationship_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/tags/{tag_id}':
+    delete:
+      summary: Detach a tag from an issue
+      operationId: IssueTagsDelete
+      description: ''
+      tags:
+        - 'Issue Tags'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+        - name: tag_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues':
+    get:
+      summary: Get issues
+      operationId: IssueGetAll
+      description: ''
+      tags:
+        - 'Issues'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+          description: ''
+          required: false
+          example: 1
+        - $ref: '#/components/parameters/filter_id'
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ''
+          required: false
+          example: 1
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: false
+          example: id,summary,description
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      summary: Create an issue
+      operationId: IssueAdd
+      description: |
+        When creating an issue, most of the fields other than `summary`, `description` and `category` are typically optional.
+        It is also worth noting that when passing references to enumerations like `priority` or object references like `handler`,
+        it is sufficient to pass the `id` or `name`.
+      tags:
+        - 'Issues'
+      requestBody:
+        $ref: '#/components/requestBodies/IssueAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}':
+    get:
+      summary: Get an issue
+      operationId: IssueGet
+      description: ''
+      tags:
+        - 'Issues'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: false
+          example: id,summary,description
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update an issue
+      operationId: IssueUpdate
+      description: ''
+      tags:
+        - 'Issues'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/IssueUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/files/{file_id}':
+    get:
+      summary: Get file from issue
+      operationId: IssueFileGet
+      description: ''
+      tags:
+        - 'Issue Attachments'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+        - name: file_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 567
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/issues/{issue_id}/monitors':
+    post:
+      summary: Monitor an issue
+      operationId: IssueMonitor
+      description: ''
+      tags:
+        - 'Issue Monitoring'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/lang':
+    get:
+      summary: Get multiple localized strings
+      operationId: StringGet
+      description: ''
+      tags:
+        - 'Localized Strings'
+      parameters:
+        - name: string[]
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: true
+          example: all_projects
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/pages/issues/view/{issue_id}':
+    get:
+      summary: Get Issue View Page
+      operationId: IssueGetViewPage
+      description: ''
+      tags:
+        - 'Views'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/users/me/token':
+    post:
+      summary: Create token for me
+      operationId: TokenCreateForMe
+      description: ''
+      tags:
+        - 'API Tokens'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/users/{user_id}/token':
+    post:
+      summary: Create token for user
+      operationId: TokenCreateForUser
+      description: ''
+      tags:
+        - 'API Tokens'
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/users/me/token/{id}':
+    delete:
+      summary: Delete token for me
+      operationId: TokenDeleteForMe
+      description: ''
+      tags:
+        - 'API Tokens'
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/TokenDeleteForMe'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/users/{user_id}/token/{id}':
+    delete:
+      summary: Delete token for user
+      operationId: TokenDeleteForUser
+      description: ''
+      tags:
+        - 'API Tokens'
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/projects':
+    post:
+      summary: Create a project
+      operationId: ProjectAdd
+      description: ''
+      tags:
+        - 'Projects'
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      summary: Get all projects
+      operationId: ProjectGetAll
+      description: ''
+      tags:
+        - 'Projects'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}':
+    get:
+      summary: Get a project
+      operationId: ProjectGet
+      description: ''
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update a project
+      operationId: ProjectUpdate
+      description: ''
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/versions/{version_id}':
+    delete:
+      summary: Delete a project version
+      operationId: ProjectVersionsDelete
+      description: ''
+      tags:
+        - 'Project Versions'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: version_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      summary: Get a Project Version
+      operationId: ProjectVersionsGet
+      description: ''
+      tags:
+        - 'Project Versions'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: version_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 18
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update project version
+      operationId: ProjectVersionsUpdate
+      description: ''
+      tags:
+        - 'Project Versions'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: version_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 8
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectVersionsUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/versions':
+    get:
+      summary: Get Project Versions
+      operationId: ProjectVersionsGetAll
+      description: ''
+      tags:
+        - 'Project Versions'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      summary: Create a project version
+      operationId: ProjectVersionsAdd
+      description: ''
+      tags:
+        - 'Project Versions'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectVersionsAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/subprojects':
+    post:
+      summary: Add a sub-project
+      operationId: ProjectSubprojectsAdd
+      description: ''
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectSubprojectsAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
+    patch:
+      summary: Update a subproject
+      operationId: ProjectSubprojectsUpdate
+      description: ''
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: subproject_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: '2'
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectSubprojectsUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/handlers':
+    get:
+      summary: Get Project Users that can be assigned issues
+      operationId: ProjectUsersCanHandleIssues
+      description: ''
+      tags:
+        - 'Project Users'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/users':
+    get:
+      summary: Get Project Users
+      operationId: ProjectUsersGetAll
+      description: ''
+      tags:
+        - 'Project Users'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: access_level
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+          description: ''
+          required: false
+          example: 25
+        - name: include_access_levels
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+          description: ''
+          required: false
+          example: 0
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: Project Add-Update User
+      operationId: ProjectUsersUpsert
+      description: ''
+      tags:
+        - 'Project Users'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectUsersUpsert'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/projects/{project_id}/users/{user_id}':
+    delete:
+      summary: Project Delete User
+      operationId: ProjectUsersDelete
+      description: ''
+      tags:
+        - 'Project Users'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - $ref: '#/components/parameters/user_id'
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectUsersDelete'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/users':
+    post:
+      summary: Create a user
+      operationId: UserAdd
+      description: ''
+      tags:
+        - 'Users'
+      requestBody:
+        $ref: '#/components/requestBodies/UserAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/users/{id}':
+    get:
+      summary: Get User By Id
+      operationId: UserGet
+      description: ''
+      tags:
+        - 'Users'
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 1
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: false
+          example: id,name,real_name,email,access_level
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/users/username/{username}':
+    get:
+      summary: Get User By Username
+      operationId: UserGetByUsername
+      description: ''
+      tags:
+        - 'Users'
+      parameters:
+        - name: username
+          in: path
+          schema:
+            type: string
+          description: ''
+          required: true
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: ''
+          required: false
+          example: id,name,real_name,email
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/users/{user_id}/reset':
+    put:
+      summary: Reset user password
+      operationId: UserResetPassword
+      description: ''
+      tags:
+        - 'Users'
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/api/rest/users/{user_id}':
+    patch:
+      summary: Update User
+      operationId: UserUpdate
+      description: ''
+      tags:
+        - 'Users'
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      requestBody:
+        $ref: '#/components/requestBodies/UserUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+servers:
+  - url: https://mantisbt.org/bugs/
+    description: MantisBT Official Bugtracker
+  - url: '{protocol}://{hostname}:{port}/{basePath}/'
+    description: Your MantisBT instance
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+      hostname:
+        description: The server where MantisBT is installed, including port number if not standard.
+        default: localhost
+      port:
+        default: ''
+      basePath:
+        description: The path where MantisBT is installed, without trailing `/`
+        default: mantisbt
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+  schemas:
+    ObjectRef:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: Some Name
+    ProjectRef:
+      allOf:
+        - $ref: '#/components/schemas/ObjectRef'
+      properties:
+        name:
+          example: MantisBT
+    CategoryRef:
+      allOf:
+        - $ref: '#/components/schemas/ObjectRef'
+      properties:
+        name:
+          example: Authn
+    UserRef:
+      allOf:
+        - $ref: '#/components/schemas/ObjectRef'
+      properties:
+        name:
+          example: John Doe
+        email:
+          type: string
+          example: john@example.com
+    Enum:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+          example: some-name
+        label:
+          type: string
+          example: Localized Name
+    ViewStateEnum:
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+      properties:
+        id:
+          example: 10
+        name:
+          example: public
+        label:
+          example: Public
+    PriorityEnum:
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+      properties:
+        id:
+          example: 40
+        name:
+          example: high
+        label:
+          example: High
+    SeverityEnum:
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+      properties:
+        id:
+          example: 60
+        name:
+          example: major
+        label:
+          example: Major
+    ReproducibilityEnum:
+      allOf:
+        - $ref: '#/components/schemas/Enum'
+      properties:
+        id:
+          example: 10
+        name:
+          example: always
+        label:
+          example: Always
+    AccessLevel:
+      allOf:
+        - $ref: '#/components/schemas/Enum'  
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        real_name:
+          type: string
+        email:
+          type: string
+        access_level:
+          $ref: '#/components/schemas/AccessLevel'
+        enabled:
+          type: boolean
+        protected:
+          type: boolean
+    UserWithId:
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            id:
+              type: number
+    UserWithPassword:
+      allOf:
+        - $ref: '#/components/schemas/User'
+      type: object
+      properties:
+        password:
+          type: string
+    Issue:
+      type: object
+      properties:
+        summary:
+          type: string
+          example: 'This is a summary'
+        description:
+          type: string
+          example: |
+            This is a description.  
+            It can be multiline.
+        steps_to_reproduce:
+          type: string
+          example: |
+            This is steps to reproduce.  
+            It can be multiline.
+        additional_information:
+          type: string
+          example: |
+            This is additional information.  
+            It can be multiline.
+        project:
+          $ref: '#/components/schemas/ProjectRef'
+        category:
+          $ref: '#/components/schemas/CategoryRef'
+        handler:
+          $ref: '#/components/schemas/UserRef'
+        view_state:
+          $ref: '#/components/schemas/ViewStateEnum'
+        priority:
+          $ref: '#/components/schemas/PriorityEnum'
+        severity:
+          $ref: '#/components/schemas/SeverityEnum'
+        reproducibility:
+          $ref: '#/components/schemas/ReproducibilityEnum'
+        sticky:
+          type: boolean
+          description: |
+            sticky issues show at the top of the View Issues page.
+        files:
+          type: array
+          items:
+            type: object
+          properties:
+            name:
+              type: string
+            content:
+              type: string
+        custom_fields:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+              value:
+                type: string
+    IssueNote:
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          $ref: '#/components/schemas/ViewStateEnum'
+        time_tracking:
+          type: object
+          properties:
+            duration:
+              type: string
+        files:
+          type: array
+          items:
+            type: object
+          properties:
+            name:
+              type: string
+            content:
+              type: string
+    ConfigSet:
+      type: object
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+        configs:
+          type: array
+          items:
+            type: object
+            properties:
+              option:
+                type: string
+              value:
+                type: string
+    IssueFilesAdd:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              content:
+                type: string
+    create_an_issue_note_with_time_tracking:
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          type: object
+          properties:
+            name:
+              type: string
+        time_tracking:
+          type: object
+          properties:
+            duration:
+              type: string
+    IssueNotesAdd:
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          type: object
+          properties:
+            name:
+              type: string
+    IssueNotesDelete:
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          type: object
+          properties:
+            name:
+              type: string
+        reporter:
+          type: object
+          properties:
+            name:
+              type: string
+    IssueRelationshipsAdd:
+      type: object
+      properties:
+        issue:
+          type: object
+          properties:
+            id:
+              type: number
+        type:
+          type: object
+          properties:
+            name:
+              type: string
+    IssueTagsAdd:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+    IssueAdd:
+      $ref: '#/components/schemas/Issue'
+    IssueUpdate:
+      type: object
+      properties:
+        summary:
+          type: string
+        priority:
+          type: object
+          properties:
+            name:
+              type: string
+        handler:
+          type: object
+          properties:
+            name:
+              type: string
+        status:
+          type: object
+          properties:
+            name:
+              type: string
+        custom_fields:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: object
+                properties:
+                  name:
+                    type: string
+              value:
+                type: string
+        notes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              reporter:
+                type: object
+                properties:
+                  name:
+                    type: string
+              text:
+                type: string
+              view_state:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  label:
+                    type: string
+    TokenDeleteForMe:
+      type: object
+      properties:
+        x:
+          type: number
+    ProjectAdd:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: object
+          properties:
+            name:
+              type: string
+        description:
+          type: string
+        file_path:
+          type: string
+        view_state:
+          type: object
+          properties:
+            name:
+              type: string
+        enabled:
+          type: boolean
+    ProjectUpdate:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        enabled:
+          type: boolean
+        inherit_global:
+          type: number
+    ProjectVersionsAdd:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        released:
+          type: boolean
+        obsolete:
+          type: boolean
+        timestamp:
+          type: string
+    ProjectVersionsUpdate:
+      type: object
+      properties:
+        obsolete:
+          type: boolean
+    ProjectSubprojectsAdd:
+      type: object
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+        inherit_parent:
+          type: boolean
+    ProjectSubprojectsUpdate:
+      type: object
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+        inherit_parent:
+          type: boolean
+    ProjectUsersUpsert:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            name:
+              type: string
+        access_level:
+          type: object
+          properties:
+            name:
+              type: string
+    ProjectUsersDelete:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            name:
+              type: string
+  requestBodies:
+    ConfigSet:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConfigSet'
+      description: ''
+      required: true
+    IssueFilesAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IssueFilesAdd'
+      description: ''
+      required: true
+    create_an_issue_note_with_time_tracking:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_an_issue_note_with_time_tracking'
+      description: ''
+      required: true
+    IssueNotesAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IssueNotesAdd'
+      description: ''
+      required: true
+    IssueNotesDelete:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IssueNotesDelete'
+      description: ''
+      required: true
+    IssueRelationshipsAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IssueRelationshipsAdd'
+      description: ''
+      required: true
+    IssueTagsAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IssueTagsAdd'
+      description: ''
+      required: true
+    IssueAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IssueAdd'
+      description: ''
+      required: true
+    IssueUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IssueUpdate'
+      description: ''
+      required: true
+    TokenDeleteForMe:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TokenDeleteForMe'
+      description: ''
+      required: true
+    ProjectAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectAdd'
+      description: ''
+      required: true
+    ProjectUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectUpdate'
+      description: ''
+      required: true
+    ProjectVersionsAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectVersionsAdd'
+      description: ''
+      required: true
+    ProjectVersionsUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectVersionsUpdate'
+      description: ''
+      required: true
+    ProjectSubprojectsAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectSubprojectsAdd'
+      description: ''
+      required: true
+    ProjectSubprojectsUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectSubprojectsUpdate'
+      description: ''
+      required: true
+    ProjectUsersUpsert:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectUsersUpsert'
+      description: ''
+      required: true
+    ProjectUsersDelete:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectUsersDelete'
+      description: ''
+      required: true
+    UserAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserWithPassword'
+      description: ''
+      required: true
+    UserUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+      description: ''
+      required: true
+  parameters:
+    issue_id:
+      name: issue_id
+      in: path
+      schema:
+        type: integer
+        minimum: 1
+      description: 'The issue ID'
+      required: true
+      example: 123
+    user_id:
+      name: user_id
+      in: path
+      schema:
+        type: integer
+        minimum: 1
+      description: 'The user ID'
+      example: 5
+      required: true
+    project_id:
+      name: project_id
+      in: path
+      schema:
+        type: integer
+        minimum: 0
+      description: 'The project ID'
+      required: true
+      example: 1
+    filter_id:
+      name: filter_id
+      in: path
+      schema:
+        type: string
+        description: |
+          Following are the built-in filter names:  
+
+          `assigned` - issues assigned to me.  
+          `reported` - issues reported by me.  
+          `monitored` - issues monitored by me.  
+          `unassigned` - unassigned issues.  
+
+          It is possible to also pass in an integer
+          which is the id of a saved filter.
+      required: true
+  responses:
+    BadRequest:
+      description: 'Bad Request'
+    NotFound:
+      description: 'Entity not found'
+    Success:
+      description: 'Success'

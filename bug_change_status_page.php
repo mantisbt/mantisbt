@@ -131,6 +131,9 @@ layout_page_begin();
 	<form id="bug-change-status-form" name="bug_change_status_form" method="post" action="bug_update.php">
 
 	<fieldset>
+		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+		<input type="hidden" name="status" value="<?php echo $f_new_status ?>" />
+		<input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
 
 	<?php echo form_security_field( 'bug_update' ) ?>
 	<div class="widget-box widget-color-blue2">
@@ -146,9 +149,6 @@ layout_page_begin();
 	<div class="table-responsive">
 	<table class="table table-bordered table-condensed table-striped">
 		<thead>
-			<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-			<input type="hidden" name="status" value="<?php echo $f_new_status ?>" />
-			<input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
 			<?php
 				if( $f_new_status >= $t_resolved ) {
 					if( relationship_can_resolve_bug( $f_bug_id ) == false ) {
@@ -222,7 +222,7 @@ layout_page_begin();
 				</th>
 				<td>
 					<select name="handler_id" class="input-sm">
-						<option value="0"></option>
+						<option value="0">&nbsp;</option>
 						<?php print_assign_to_option_list( $t_suggested_handler_id, $t_bug->project_id ) ?>
 					</select>
 				</td>
@@ -380,7 +380,11 @@ layout_page_begin();
 					<?php echo lang_get( 'add_bugnote_title' ) ?>
 				</th>
 				<td>
-					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" cols="80" rows="7"></textarea>
+					<textarea name="bugnote_text" id="bugnote_text"
+							  class="<?php echo $t_bugnote_class ?>"
+							  cols="80" rows="7"
+							  maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
+					></textarea>
 				</td>
 			</tr>
 <?php
@@ -416,9 +420,10 @@ layout_page_begin();
 </div>
 </div>
 </div>
-</div>
+</fieldset>
 </form>
 <div class="space-10"></div>
+</div>
 </div>
 <?php
 define( 'BUG_VIEW_INC_ALLOW', true );

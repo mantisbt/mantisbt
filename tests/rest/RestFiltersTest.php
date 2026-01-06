@@ -22,7 +22,9 @@
  * @link https://mantisbt.org
  */
 
-require_once 'RestBase.php';
+namespace Mantis\tests\rest;
+
+use Mantis\tests\Mantis\MantisCoreBase;
 
 /**
  * Tests for Filters and Issues matching Filter REST API endpoints.
@@ -40,6 +42,12 @@ class RestFiltersTest extends RestBase
 	 * Create test issues for the test
 	 * @return void
 	 */
+	protected function setUp(): void {
+		parent::setUp();
+		# Authentication required for createTestFilter() method, until we have
+		# a REST API endpoint to create filters.
+		MantisCoreBase::login();
+	}
 
 	protected function tearDown(): void {
 		parent::tearDown();
@@ -115,7 +123,7 @@ class RestFiltersTest extends RestBase
 			filter_serialize( $p_filter ),
 			$this->userId,
 			$this->getProjectId(),
-			$this->getTestCaseReference() . ' ' . rand(1, 10000),
+			$this->getTestName() . ' ' . rand(1, 10000),
 			$p_public
 		);
 		$this->filterIdsToDelete[] = $t_filter_id;
@@ -203,7 +211,7 @@ class RestFiltersTest extends RestBase
 	public function testGetIssuesMatchingFilter() {
 		# Create test filter - resolved issues created by this test case
 		$t_filter = filter_get_default();
-		$t_filter[FILTER_PROPERTY_SEARCH] = $this->getTestCaseReference();
+		$t_filter[FILTER_PROPERTY_SEARCH] = $this->getTestName();
 		$t_filter[FILTER_PROPERTY_STATUS] = RESOLVED;
 		$t_filter_id = $this->createTestFilter( $t_filter );
 

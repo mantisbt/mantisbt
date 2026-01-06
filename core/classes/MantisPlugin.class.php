@@ -48,44 +48,58 @@ abstract class MantisPlugin {
 	const STATUS_INCOMPLETE_DEFINITION = 2;
 	const STATUS_MISSING_BASE_CLASS = 3;
 	const STATUS_MISSING_PLUGIN = 4;
+	const STATUS_MISSING_EVENTS = 5;
+
+	/**
+	 * Plugin Basename
+	 */
+	public $basename = null;
 
 	/**
 	 * name - Your plugin's full name. Required value.
 	 */
-	public $name		= null;
+	public $name = null;
+
 	/**
 	 * description - A full description of your plugin.
 	 */
 	public $description	= null;
+
 	/**
 	 * page - The name of a plugin page for further information and administration.
 	 */
-	public $page		= null;
+	public $page = null;
+
 	/**
 	 * version - Your plugin's version string. Required value.
 	 */
-	public $version		= null;
+	public $version = null;
+
 	/**
 	 * requires - An array of key/value pairs of basename/version plugin dependencies.
 	 * Prefixing a version with '<' will allow your plugin to specify a maximum version (non-inclusive) for a dependency.
 	 */
-	public $requires	= null;
+	public $requires = null;
+
 	/**
 	 * An array of key/value pairs of basename/version  plugin dependencies (soft dependency)
 	 */
-	public $uses		= null;
+	public $uses = null;
+
 	/**
 	 * author - Your name, or an array of names.
 	 */
-	public $author		= null;
+	public $author = null;
+
 	/**
 	 * contact - An email address where you can be contacted.
 	 */
-	public $contact		= null;
+	public $contact = null;
+
 	/**
 	 * url - A web address for your plugin.
 	 */
-	public $url			= null;
+	public $url = null;
 
 	/**
 	 * Plugin's validity status
@@ -110,9 +124,11 @@ abstract class MantisPlugin {
 	 * necessary API's, declare or hook events, etc.
 	 * Alternatively, your plugin can hook the EVENT_PLUGIN_INIT event
 	 * that will be called after all plugins have been initialized.
-	 * @return void
+	 * @return bool
 	 */
-	public function init() {}
+	public function init() {
+		return true;
+	}
 
 	/**
 	 * This function allows plugins to add new error messages for Mantis usage
@@ -266,11 +282,6 @@ abstract class MantisPlugin {
 	### Core plugin functionality ###
 
 	/**
-	 * Plugin Basename
-	 */
-	public $basename	= null;
-
-	/**
 	 * Constructor
 	 *
 	 * @param string $p_basename Plugin Basename.
@@ -282,14 +293,17 @@ abstract class MantisPlugin {
 
 	/**
 	 * Initialisation
-	 * @return void
+	 * @return bool
 	 */
 	final public function __init() {
 		plugin_config_defaults( $this->config() );
 		event_declare_many( $this->events() );
-		plugin_event_hook_many( $this->hooks() );
+		if( !plugin_event_hook_many( $this->hooks() ) ) {
+			return false;
+		}
 
-		$this->init();
+		# Backwards-compatibility - return true if no return value
+		return $this->init() ?? true;
 	}
 
 	/**

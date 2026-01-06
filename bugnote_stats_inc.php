@@ -85,7 +85,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 # CSRF protection not required here - form does not result in modifications
 ?>
 <div class="col-md-12 col-xs-12 noprint">
-	<a id="bugnotestats"></a>
 	<div class="space-10"></div>
 	<div id="bugnotestats" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 
@@ -101,8 +100,8 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			</div>
 		</div>
 
-		<form method="post" action="#bugnotestats">
-			<div class="widget-body">
+		<div class="widget-body">
+			<form method="post" action="#bugnotestats">
 				<div class="widget-main">
 					<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 					<?php
@@ -122,8 +121,8 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 					<input name="get_bugnote_stats_button" class="btn btn-primary btn-sm btn-white btn-round"
 						   value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" type="submit">
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 <?php
 	# Print time tracking information if requested
 	if( !is_blank( $f_get_bugnote_stats_button ) ) {

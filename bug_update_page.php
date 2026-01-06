@@ -95,6 +95,7 @@ $t_fields = columns_filter_disabled( $t_fields );
 $t_bug_id = $f_bug_id;
 
 $t_action_button_position = config_get( 'action_button_position' );
+$t_max_textarea_length = config_get_global( 'max_textarea_length' );
 
 $t_top_buttons_enabled = $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH;
 $t_bottom_buttons_enabled = $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH;
@@ -180,8 +181,6 @@ layout_page_begin();
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
-
 <?php
 # Submit Button
 if( $t_top_buttons_enabled ) {
@@ -194,6 +193,7 @@ if( $t_top_buttons_enabled ) {
 <?php
 }
 ?>
+		<table class="table table-bordered table-condensed table-striped">
 			<tbody>
 <?php
 event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $t_bug_id ) );
@@ -204,18 +204,18 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	#
 
 	echo '<tr>';
-	echo '<td width="15%" class="category">', $t_show_id ? lang_get( 'id' ) : '', '</td>';
-	echo '<td width="20%" class="category">', $t_show_project ? lang_get( 'email_project' ) : '', '</td>';
-	echo '<td width="15%" class="category">';
+	echo '<td class="category">', $t_show_id ? lang_get( 'id' ) : '', '</td>';
+	echo '<td class="category">', $t_show_project ? lang_get( 'email_project' ) : '', '</td>';
+	echo '<td class="category">';
 	if( $t_show_category ) {
 		$t_allow_no_category = config_get( 'allow_no_category' );
 		echo $t_allow_no_category ? '' : '<span class="required">*</span> ';
 		echo '<label for="category_id">' . lang_get( 'category' ) . '</label>';
 	}
 	echo '</td>';
-	echo '<td width="20%" class="category">', $t_show_view_state ? '<label for="view_state">' . lang_get( 'view_status' ) . '</label>' : '', '</td>';
-	echo '<td width="15%" class="category">', $t_show_date_submitted ? lang_get( 'date_submitted' ) : '', '</td>';
-	echo '<td width="15%" class="category">', $t_show_last_updated ? lang_get( 'last_update' ) : '', '</td>';
+	echo '<td class="category">', $t_show_view_state ? '<label for="view_state">' . lang_get( 'view_status' ) . '</label>' : '', '</td>';
+	echo '<td class="category">', $t_show_date_submitted ? lang_get( 'date_submitted' ) : '', '</td>';
+	echo '<td class="category">', $t_show_last_updated ? lang_get( 'last_update' ) : '', '</td>';
 	echo '</tr>';
 
 	#
@@ -271,9 +271,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 
 	echo '</tr>';
 
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
 #
@@ -287,21 +285,24 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 
 	if( $t_show_reporter ) {
 		# Reporter
-		echo '<th class="category"><label for="reporter_id">' . lang_get( 'reporter' ) . '</label></th>';
-		echo '<td>';
+		echo '<th class="category">';
+		if( $f_reporter_edit ) echo '<label for="reporter_id">';
+		echo lang_get( 'reporter' );
+		if( $f_reporter_edit ) echo '</label>';
+		echo '</th><td>';
 
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
 		if( access_has_limited_view( $t_bug->project_id ) ) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {
-			if ( $f_reporter_edit ) {
+			if( $f_reporter_edit ) {
 				echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id">';
 				print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id );
 				echo '</select>';
 			} else {
 				echo string_attribute( user_get_name( $t_bug->reporter_id ) );
-				echo ' [<a href="#reporter_edit" class="click-url" url="' . string_get_bug_update_url( $f_bug_id ) . '&amp;reporter_edit=true">' . lang_get( 'edit' ) . '</a>]';
+				echo ' [<a href="#reporter_edit" class="click-url" data-url="' . string_get_bug_update_url( $f_bug_id ) . '&amp;reporter_edit=true">' . lang_get( 'edit' ) . '</a>]';
 			}
 		}
 		echo '</td>';
@@ -316,7 +317,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 
 		if( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
 			echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id" class="input-sm">';
-			echo '<option value="0"></option>';
+			echo '<option value="0">&nbsp;</option>';
 			print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id );
 			echo '</select>';
 		} else {
@@ -638,9 +639,7 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 
 event_signal( 'EVENT_UPDATE_BUG_FORM', array( $t_bug_id ) );
 
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 # Summary
 if( $t_show_summary ) {
@@ -665,7 +664,9 @@ if( $t_show_description ) {
 	echo '</th>';
 	echo '<td colspan="5">';
 	echo '<textarea class="form-control" required ', helper_get_tab_index(),
-		' cols="80" rows="10" id="description" name="description">', "\n",
+		' cols="80" rows="10"',
+		' maxlength="' . $t_max_textarea_length . '"',
+		' id="description" name="description">', "\n",
 		$t_description_textarea, '</textarea>';
 	echo '</td></tr>';
 }
@@ -676,7 +677,9 @@ if( $t_show_steps_to_reproduce ) {
 	echo '<th class="category"><label for="steps_to_reproduce">' . lang_get( 'steps_to_reproduce' ) . '</label></th>';
 	echo '<td colspan="5">';
 	echo '<textarea class="form-control" ', helper_get_tab_index(),
-		' cols="80" rows="10" id="steps_to_reproduce" name="steps_to_reproduce">', "\n",
+		' cols="80" rows="10"',
+		' maxlength="' . $t_max_textarea_length . '"',
+		' id="steps_to_reproduce" name="steps_to_reproduce">', "\n",
 		$t_steps_to_reproduce_textarea, '</textarea>';
 	echo '</td></tr>';
 }
@@ -687,13 +690,14 @@ if( $t_show_additional_information ) {
 	echo '<th class="category"><label for="additional_information">' . lang_get( 'additional_information' ) . '</label></th>';
 	echo '<td colspan="5">';
 	echo '<textarea class="form-control" ', helper_get_tab_index(),
-		' cols="80" rows="10" id="additional_information" name="additional_information">', "\n",
+		' cols="80" rows="10"',
+		' maxlength="' . $t_max_textarea_length . '"',
+		' id="additional_information" name="additional_information">', "\n",
 		$t_additional_information_textarea, '</textarea>';
 	echo '</td></tr>';
 }
 
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+print_table_spacer( 6 );
 
 # Custom Fields
 $t_custom_fields_found = false;
@@ -724,9 +728,7 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 } # foreach( $t_related_custom_field_ids as $t_id )
 
 if( $t_custom_fields_found ) {
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
+	print_table_spacer( 6 );
 }
 
 # Bugnote Text Box
@@ -736,7 +738,12 @@ $t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-c
 
 echo '<tr>';
 echo '<th class="category"><label for="bugnote_text">' . lang_get( 'add_bugnote_title' ) . '</label></th>';
-echo '<td colspan="5"><textarea ', helper_get_tab_index(), ' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class, '" cols="80" rows="7"></textarea></td></tr>';
+echo '<td colspan="5"><textarea ', helper_get_tab_index(),
+	' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class,
+	'" cols="80" rows="7"',
+	' maxlength="' . $t_max_textarea_length . '">',
+	'</textarea></td></tr>';
+
 
 # Bugnote Private Checkbox (if permitted)
 if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id ) ) {
@@ -767,12 +774,13 @@ if( config_get( 'time_tracking_enabled' ) ) {
 }
 
 event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $t_bug_id ) );
-
-echo '</table>';
-echo '</div>';
-echo '</div>';
-echo '</div>';
-
+?>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<?php
 # Submit Button
 if( $t_bottom_buttons_enabled ) {
 ?>

@@ -43,11 +43,11 @@ class VersionGetCommand extends Command {
 
 	/**
 	 * $p_data['query'] is expected to contain:
-	 * - project_id (integer)
-	 * - version_id (integer) - optional
-	 * - obsolete (integer) - optional - 1 to include obsolete versions, 0 to exclude them. default 0.
-	 * - released (integer) - optional - default null
-	 * - inherit (integer) - optional - 1 to include inherited versions, 0 to exclude them. default 0.
+	 * - project_id (int)
+	 * - version_id (int) - optional
+	 * - obsolete (int) - optional - 1 to include obsolete versions, 0 to exclude them. default 0.
+	 * - released (int) - optional - default null
+	 * - inherit (int) - optional - 1 to include inherited versions, 0 to exclude them. default 0.
 	 *
 	 * @param array $p_data The command data.
 	 */

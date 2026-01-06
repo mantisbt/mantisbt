@@ -38,8 +38,8 @@ class VersionUpdateCommand extends Command {
 
 	/**
 	 * $p_data['query'] is expected to contain:
-	 * - project_id (integer)
-	 * - version_id (integer)
+	 * - project_id (int)
+	 * - version_id (int)
 	 *
 	 * $p_data['payload'] is expected to contain:
 	 * - name (string)
@@ -153,10 +153,9 @@ class VersionUpdateCommand extends Command {
 			$t_version->obsolete = $t_obsolete;
 		}
 
-		$t_timestamp = $this->payload( 'timestamp' );
-		if( !is_null( $t_timestamp ) && !is_blank( $t_timestamp ) ) {
-			$t_timestamp = strtotime( $t_timestamp );
-			$t_version->date_order = $t_timestamp;
+		$t_date_string = $this->payload( 'timestamp' );
+		if( !is_blank( $t_date_string ) ) {
+			$t_version->date_order = date_string_to_timestamp( $t_date_string );
 		}
 
 		version_update( $t_version );

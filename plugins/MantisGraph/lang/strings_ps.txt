@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** British English (British English)
+/** Pashto (پښتو)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit https://translatewiki.net
@@ -38,8 +38,20 @@
  * @ingroup Language
  * @file
  *
- * @author Cblair91
+ * @author Ahmed-Najib-Biabani-Ibrahimkhel
+ * @author شاه زمان پټان
  */
 
-$s_plugin_Gravatar_title = 'Avatars via Gravatar';
-$s_plugin_Gravatar_description = 'A plugin that shows user avatars based on their email addresses using avatar service.';
+$s_plugin_MantisGraph_title = 'د مانټېس ګرافونه';
+$s_plugin_MantisGraph_tab_label = 'گراپونه';
+$s_plugin_MantisGraph_status_link = 'د دريځ له مخې';
+$s_plugin_MantisGraph_priority_link = 'د لومړيتوب له مخې';
+$s_plugin_MantisGraph_category_link = 'د وېشنيزې له مخې';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'د لومړيتوب گراپونو له مخې';
+$s_plugin_MantisGraph_graph_reporter_title = 'د راپورگر گراپونو له مخې';
+$s_plugin_MantisGraph_period_this_week = 'دا اوونۍ';
+$s_plugin_MantisGraph_period_last_week = 'تېره اوونۍ';
+$s_plugin_MantisGraph_period_two_weeks = 'تېرې دوه اوونۍ';
+$s_plugin_MantisGraph_period_this_month = 'دا مياشت';
+$s_plugin_MantisGraph_period_last_month = 'تېره مياشت';
+$s_plugin_MantisGraph_period_last_year = 'تېر کال';

@@ -119,7 +119,8 @@ function html_rss_link() {
 	global $g_rss_feed_url;
 
 	if( $g_rss_feed_url !== null ) {
-		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . string_attribute( $g_rss_feed_url ) . '" />' . "\n";
+		echo "\t", '<link rel="alternate" type="application/rss+xml" title="RSS" href="',
+			string_attribute( $g_rss_feed_url ), '">', "\n";
 	}
 }
 
@@ -129,7 +130,7 @@ function html_rss_link() {
  * @return void
  */
 function html_javascript_link( $p_filename ) {
-	echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'js/' . $p_filename ), '"></script>', "\n";
+	echo "\t", '<script src="', helper_mantis_url( 'js/' . $p_filename ), '"></script>', "\n";
 }
 
 /**
@@ -143,7 +144,7 @@ function html_javascript_cdn_link( $p_url, $p_hash = '' ) {
 	if( $p_hash !== '' ) {
 		$t_integrity = 'integrity="' . $p_hash . '" ';
 	}
-	echo "\t", '<script type="text/javascript" src="', $p_url, '" ', $t_integrity, 'crossorigin="anonymous"></script>', "\n";
+	echo "\t", '<script src="', $p_url, '" ', $t_integrity, 'crossorigin="anonymous"></script>', "\n";
 }
 
 /**
@@ -169,7 +170,7 @@ function html_head_begin() {
  * @return void
  */
 function html_content_type() {
-	echo "\t", '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />', "\n";
+	echo "\t", '<meta charset="utf-8">', "\n";
 }
 
 /**
@@ -177,7 +178,7 @@ function html_content_type() {
  * @param string $p_page_title Window title.
  * @return void
  */
-function html_title( $p_page_title = null ) {
+function html_title( $p_page_title = '' ) {
 	$t_page_title = string_html_specialchars( $p_page_title );
 	$t_title = string_html_specialchars( config_get( 'window_title' ) );
 	echo "\t", '<title>';
@@ -227,7 +228,7 @@ function html_css() {
 		if( $t_stylesheet_path == 'status_config.php' ) {
 			$t_stylesheet_path = helper_url_combine(
 				helper_mantis_url( 'css/status_config.php' ),
-				'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+				[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
 			);
 		}
 
@@ -258,7 +259,7 @@ function html_css_link( $p_filename, $p_cache_key = '' ) {
 
 	$t_url = helper_mantis_url( $t_filename );
 	if ( !empty( $p_cache_key ) ) {
-		$t_url = helper_url_combine( $t_url, 'cache_key=' . $p_cache_key );
+		$t_url = helper_url_combine( $t_url, [ 'cache_key' => $p_cache_key ] );
 	}
 
 	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( $t_url, true ), '" />', "\n";
@@ -346,14 +347,14 @@ function html_head_javascript() {
 	# a reload when the content may differ.
 	$t_javascript_translations = helper_url_combine(
 		helper_mantis_url( 'javascript_translations.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'lang' ) )
+		[ 'cache_key' => helper_generate_cache_key( array( 'lang' ) ) ]
 	);
 	$t_javascript_config = helper_url_combine(
 		helper_mantis_url( 'javascript_config.php' ),
-		'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+		[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
 	);
-	echo "\t" . '<script type="text/javascript" src="' . $t_javascript_config . '"></script>' . "\n";
-	echo "\t" . '<script type="text/javascript" src="' . $t_javascript_translations . '"></script>' . "\n";
+	echo "\t" . '<script src="' . $t_javascript_config . '"></script>' . "\n";
+	echo "\t" . '<script src="' . $t_javascript_translations . '"></script>' . "\n";
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		# JQuery
@@ -390,7 +391,7 @@ function html_head_end() {
  *                       from $g_logo_image
  * @return void
  */
-function html_print_logo( $p_logo = null ) {
+function html_print_logo( string $p_logo = '' ) {
 	if( !$p_logo ) {
 		$p_logo = config_get_global( 'logo_image' );
 	}
@@ -400,53 +401,71 @@ function html_print_logo( $p_logo = null ) {
 		$t_show_url = !is_blank( $t_logo_url );
 
 		if( $t_show_url ) {
-			echo '<a id="logo-link" href="', config_get_global( 'logo_url' ), '">';
+			echo '<a class="logo-link" href="', $t_logo_url, '"',
+				helper_get_link_attributes( false, helper_is_link_external( $t_logo_url ) ),
+				'>';
 		}
 		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
-		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="' . helper_mantis_url( $p_logo ) . '" />';
+		echo '<img class="logo-image" alt="', $t_alternate_text,
+			'" title="', $t_alternate_text,
+			'" src="' . helper_mantis_url( $p_logo ) . '">';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
 	}
 }
 
-
-
 /**
  * Print a user-defined banner at the top of the page if there is one.
+ *
+ * @param bool $p_nested Add a div to wrap around the banner
  * @return void
  */
-function html_top_banner() {
+function html_top_banner( bool $p_nested = false ) {
 	$t_page = config_get_global( 'top_include_page' );
-	$t_logo_image = config_get_global( 'logo_image' );
+	
+	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		if( $p_nested ) {
+			echo '<div class="navbar navbar-fixed-top noprint">', "\n";
+		}
+		include( $t_page );
+		if( $p_nested ) {
+			echo '</div>', "\n";
+		}
+	}
+}
+
+/**
+ * Print a user-defined banner at the bottom of the page if there is one.
+ *
+ * @return void
+ */
+function html_bottom_banner() {
+	$t_page = config_get_global( 'bottom_include_page' );
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		echo '<div class="navbar-fixed-bottom noprint">', "\n";
 		include( $t_page );
-	} else if( !is_blank( $t_logo_image ) ) {
-		echo '<div id="banner">';
-		html_print_logo( $t_logo_image );
-		echo '</div>';
+		echo '</div>', "\n";
 	}
-
-	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 }
 
 /**
  * Outputs a message to confirm an operation's result.
  *
- * @param array|null $p_buttons  Array of (URL, label) pairs used to generate
- *                               the buttons; if label is null or unspecified,
- *                               the default 'proceed' text will be displayed;
- *                               If the array is empty or not provided, no
- *                               buttons will be printed.
- * @param string     $p_message  Message to display to the user. If none is
- *                               provided, a default message will be printed
- * @param int        $p_type     One of the constants CONFIRMATION_TYPE_SUCCESS,
- *                               CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
+ * @param array  $p_buttons  Array of (URL, label) pairs used to generate
+ *                           the buttons; if label is null or unspecified,
+ *                           the default 'proceed' text will be displayed;
+ *                           If the array is empty or not provided, no
+ *                           buttons will be printed.
+ * @param string $p_message  Message to display to the user. If none is
+ *                           provided, a default message will be printed
+ * @param int    $p_type     One of the constants CONFIRMATION_TYPE_SUCCESS,
+ *                           CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
  *
  * @return void
  */
-function html_operation_confirmation( array $p_buttons = null, $p_message = '', $p_type = CONFIRMATION_TYPE_SUCCESS ) {
+function html_operation_confirmation( array $p_buttons = [], string $p_message = '', int $p_type = CONFIRMATION_TYPE_SUCCESS ): void {
 	switch( $p_type ) {
 		case CONFIRMATION_TYPE_FAILURE:
 			$t_alert_css = 'alert-danger';
@@ -642,9 +661,8 @@ function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null 
 		$t_url = $t_item['url'];
 		$t_active = $p_current_page && strpos( $t_url, $p_current_page ) !== false ? 'active' : '';
 
-		# Use URL as-is if caller didn't specify it as absolute
-		# This is
-		if( $t_item['absolute'] ?? true ) {
+		# Generate relative URL if caller didn't specify it as absolute
+		if( !($t_item['absolute'] ?? false) ) {
 			$t_url = helper_mantis_url( $t_url );
 		}
 
@@ -719,12 +737,15 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 
 /**
  * Print the Summary page's submenu.
+ *
  * The submenu is only printed if there is at least one plugin-defined link, in
  * which case a 'Synthesis' button is added for the summary page itself.
+ *
  * @param string $p_current_page Current page's file name to highlight active menu item
+ *
  * @return void
  */
-function print_summary_submenu( $p_current_page = '' ) {
+function print_summary_submenu( string $p_current_page = '' ): void {
 	# Plugin / Event added options
 	$t_menu_items = plugin_menu_items( 'EVENT_SUBMENU_SUMMARY' );
 
@@ -938,9 +959,9 @@ function print_doc_menu( $p_page = '' ) {
  *
  * @return void
  */
-function print_summary_menu( $p_page = '', array $p_filter = null ) {
+function print_summary_menu( $p_page = '', ?array $p_filter = null ): void {
 	$t_link = 'summary_page.php';
-	$t_filter_param = $p_filter ? filter_get_temporary_key_param( $p_filter ) : null;
+	$t_filter_param = $p_filter ? filter_get_temporary_key_param( $p_filter ) : '';
 	if( $t_filter_param ) {
 		$t_link = helper_url_combine( $t_link, $t_filter_param );
 	}
@@ -1011,7 +1032,7 @@ function print_admin_menu_bar( $p_page ) {
  */
 function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_method = 'post' ) {
 	$t_form_name = explode( '.php', $p_action, 2 );
-	$p_action = urlencode( $p_action );
+	$p_action = string_url( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
 
 	if( strtolower( $p_method ) == 'get' ) {
@@ -1249,6 +1270,13 @@ class TableGridLayout {
 			}
 			echo '</tr>';
 		}
+	}
+
+	/**
+	 * Prints HTML code for a spacer row
+	 */
+	public function render_spacer() {
+		print_table_spacer( $this->cols );
 	}
 
 	/**

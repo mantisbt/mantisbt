@@ -22,7 +22,7 @@ require_once( $t_soap_dir . 'mc_api.php' );
 /**
  * A command that sets config options.
  * 
- * Only config options that can be overriden in the database can be set via this command.
+ * Only config options that can be overridden in the database can be set via this command.
  */
 class ConfigsSetCommand extends Command {
 	/**
@@ -51,8 +51,9 @@ class ConfigsSetCommand extends Command {
 
 	/**
 	 * Validate the data.
-	 * 
+	 *
 	 * @return void
+	 * @throws ClientException
 	 */
 	function validate() {
 		$t_current_user_id = auth_get_current_user_id();
@@ -89,7 +90,7 @@ class ConfigsSetCommand extends Command {
 		}
 
 		# This check is redundant if command is limited to administrator, but it is
-		# better to have it as a safe guard is non-administrators can change their own
+		# better to have it as a safeguard is non-administrators can change their own
 		# settings later.
 		if( $this->project_id != ALL_PROJECTS &&
 			$this->user_id != ALL_USERS &&
@@ -106,9 +107,10 @@ class ConfigsSetCommand extends Command {
 					'Config option not provided',
 					ERROR_EMPTY_FIELD,
 					array( 'option' ) );
-			};
+			}
 
 			$t_name = $t_config['option'];
+			$t_value = $t_config['value'] ?? null;
 
 			# Silently ignore unknown configs - similar to get configs. This may be useful for
 			# compatibility with different MantisBT versions.
@@ -129,26 +131,24 @@ class ConfigsSetCommand extends Command {
 			}
 
 			# It is not allowed to set configs that are global and don't support db overrides
-			if( !config_can_set_in_database( $t_name ) ) {
+			# Deleting them is OK (we want the admin to be able to remove invalid config)
+			if( !config_can_set_in_database( $t_name ) && $t_value !== null ) {
 				throw new ClientException(
 					sprintf( "Config '%s' is global and cannot be set", $t_name ),
-					ERROR_INVALID_FIELD_VALUE,
+					ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB,
 					array( $t_name ) );
 			}
 
-			if( !isset( $t_config['value'] ) ) {
-				$t_config['value'] = null;
-			}
-
 			if( ConfigsSetCommand::config_is_enum( $t_name ) &&
-			    is_array( $t_config['value'] ) ) {
-				$t_config['value'] = ConfigsSetCommand::array_to_enum_string( $t_name, $t_config['value'] );
+				is_array( $t_value ) ) {
+				$t_value = ConfigsSetCommand::array_to_enum_string( $t_name, $t_value );
 			}
 
+			$t_config['value'] = $t_value;
 			$this->options[] = $t_config;
 		}
 
-		# This mode is only for web UI and it will always have a single config option
+		# This mode is only for web UI, and it will always have a single config option
 		if( MANAGE_CONFIG_ACTION_EDIT === $this->option( 'edit_action', MANAGE_CONFIG_ACTION_CREATE ) ) {
 			$t_original_option = $this->option( 'original_option', '' );
 			$t_original_user_id = (int)$this->option( 'original_user_id', '' );
@@ -172,7 +172,7 @@ class ConfigsSetCommand extends Command {
 	 * @return array Command response
 	 */
 	protected function process() {
-		# The edit case is internal only to web UI and it will always have a single config option
+		# The edit case is internal only to web UI, and it will always have a single config option
 		if( MANAGE_CONFIG_ACTION_EDIT === $this->option( 'edit_action', MANAGE_CONFIG_ACTION_CREATE ) ) {
 			$t_original_option = $this->option( 'original_option' );
 			$t_original_user_id = (int)$this->option( 'original_user_id' );
@@ -188,7 +188,7 @@ class ConfigsSetCommand extends Command {
 			}
 		}
 
-		foreach( $this->options as $t_option ) {			
+		foreach( $this->options as $t_option ) {
 			if( is_null( $t_option['value'] ) ) {
 				config_delete( $t_option['option'], $this->user_id, $this->project_id );
 			} else {
@@ -211,10 +211,12 @@ class ConfigsSetCommand extends Command {
 
 	/**
 	 * Convert an enum array into an enum string representation.
-	 * 
-	 * Input: 
+	 *
+	 * Input:
 	 * - array of enum entries. Each enum entry has an id and name.
 	 * - Note that label (localized name) is not settable and hence not expected.
+	 *
+	 * @throws ClientException
 	 */
 	private static function array_to_enum_string( $p_enum_name, $p_enum_array ) {
 		$t_enum_string = '';

@@ -24,11 +24,13 @@
  * @link http://www.mantisbt.org
  *
  * @uses database_api.php
+ * @uses string_api.php
  *
  * @noinspection PhpUnused
  */
 
 require_api( 'database_api.php' );
+require_api( 'string_api.php' );
 
 /**
  * Legacy pre-1.2 date function used for upgrading from datetime to integer
@@ -823,7 +825,7 @@ function install_print_unserialize_errors_csv( $p_table, $p_data ) {
 
 	# Generate CSV data
 	foreach( $p_data as $t_error ) {
-		fputcsv( $f, $t_error );
+		fputcsv( $f, $t_error, ',', '"', '' );
 	}
 	$t_csv .= stream_get_contents( $f, -1,0 );
 	fclose( $f );
@@ -838,7 +840,7 @@ function install_print_unserialize_errors_csv( $p_table, $p_data ) {
 
 	# CSV download (as data URL)
 ?>
-	<a href="data:text/csv;charset=UTF-8,<?php echo rawurlencode( $t_csv ) ?>"
+	<a href="data:text/csv;charset=UTF-8,<?php echo string_url( $t_csv ) ?>"
 	   download="errors_<?php echo $p_table; ?>.csv"
 	   class="btn btn-primary btn-white btn-round"
 	>

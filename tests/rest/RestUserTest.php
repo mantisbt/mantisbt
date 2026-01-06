@@ -23,7 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
-require_once 'RestBase.php';
+namespace Mantis\tests\rest;
+
+use Mantis\tests\core\Faker;
 
 /**
  * Test fixture for user update webservice methods.
@@ -578,7 +580,7 @@ class RestUserTest extends RestBase {
 	 *
 	 * @return array test cases
 	 */
-	public function providerInvalidUserNames() {
+	public static function providerInvalidUserNames() {
 		return array(
 			'blank_spaces' => array( ' ' ),
 			'blank_tabs' => array( "\t" ),
@@ -592,7 +594,7 @@ class RestUserTest extends RestBase {
 	 *
 	 * @return array test cases
 	 */
-	public function providerValidUserNames() {
+	public static function providerValidUserNames() {
 		return array(
 			'regular' => array( Faker::username() ),
 			'with_spaces_in_middle' => array( "some user" ),

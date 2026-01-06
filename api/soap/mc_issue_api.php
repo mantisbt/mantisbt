@@ -386,14 +386,17 @@ function mci_issue_get_due_date( BugData $p_bug ) {
 /**
  * Sets the supplied array of custom field values to the specified issue id.
  *
- * @param integer $p_issue_id       Issue id to apply custom field values to.
- * @param array   &$p_custom_fields The array of custom field values as described in the webservice complex types.
- * @param boolean $p_log_insert     Create history logs for new values.
- * @return boolean|SoapFault|RestFault true for success, otherwise fault.
+ * @param int         $p_issue_id      Issue id to apply custom field values to.
+ * @param array|null &$p_custom_fields The array of custom field values as described
+ *                                     in the webservice complex types.
+ * @param bool        $p_log_insert    Create history logs for new values.
+ *
+ * @return bool|SoapFault|RestFault true for success, otherwise fault.
+ * @throws ClientException
  */
-function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = null, $p_log_insert = true ) {
+function mci_issue_set_custom_fields( $p_issue_id, ?array &$p_custom_fields, $p_log_insert = true ) {
 	# set custom field values on the submitted issue
-	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
+	if( isset( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
 			$t_custom_field = ApiObjectFactory::objectToArray( $t_custom_field );
 
@@ -1175,7 +1178,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 			$t_view_state = $t_note['view_state'] ?? config_get( 'default_bugnote_view_status' );
 
 			if( isset( $t_note['id'] ) && ( (int)$t_note['id'] > 0 ) ) {
-				$t_bugnote_id = (integer)$t_note['id'];
+				$t_bugnote_id = (int)$t_note['id'];
 
 				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
 
@@ -1352,7 +1355,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	}
 
 	# TODO: Keep the code path below for adding REMINDERs.
-	if( (integer)$p_issue_id < 1 ) {
+	if( (int)$p_issue_id < 1 ) {
 		return ApiObjectFactory::faultBadRequest( 'Invalid issue id \'' . $p_issue_id . '\'' );
 	}
 
@@ -1428,7 +1431,7 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 		return mci_fault_login_failed();
 	}
 
-	if( (integer)$p_issue_note_id < 1 ) {
+	if( (int)$p_issue_note_id < 1 ) {
 		return ApiObjectFactory::faultBadRequest( 'Invalid issue note id \'' . $p_issue_note_id . '\'.' );
 	}
 

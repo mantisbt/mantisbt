@@ -52,6 +52,12 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
+# If we're processing an AJAX call from Dropzone, prevent output of HTML
+# in the content if errors occur, we just want a plain-text error message.
+if( 'XMLHttpRequest' == ( $_SERVER['HTTP_X_REQUESTED_WITH'] ?? '' ) ) {
+	define( 'DISABLE_INLINE_ERROR_REPORTING', 'text' );
+}
+
 form_security_validate( 'bug_report' );
 
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
@@ -215,12 +221,12 @@ if( $t_status != 0 ) {
 }
 
 $t_steps_to_reproduce = gpc_get_string( 'steps_to_reproduce', null );
-if( $t_steps_to_reproduce !== null ) {
+if( $t_steps_to_reproduce !== null && !is_blank( $t_steps_to_reproduce ) ) {
 	$t_issue['steps_to_reproduce'] = $t_steps_to_reproduce;
 }
 
 $t_additional_info = gpc_get_string( 'additional_info', null );
-if( $t_additional_info !== null ) {
+if( $t_additional_info !== null && !is_blank( $t_additional_info ) ) {
 	$t_issue['additional_information'] = $t_additional_info;
 }
 
@@ -258,9 +264,20 @@ if( $f_master_bug_id > 0 ) {
 
 $t_command = new IssueAddCommand( $t_data );
 $t_result = $t_command->execute();
-$t_issue_id = (int)$t_result['issue_id'];
 
 form_security_purge( 'bug_report' );
+
+# Check if issue was sent for moderation
+if( isset( $t_result['moderated'] ) && $t_result['moderated'] ) {
+	# Show success page for moderation
+	layout_page_header();
+	layout_page_begin();
+	html_operation_successful( 'view_all_bug_page.php', lang_get( 'submitted_for_moderation' ) );
+	layout_page_end();
+	exit;
+}
+
+$t_issue_id = (int)$t_result['issue_id'];
 
 if( $f_report_stay ) {
 	$t_fields = array(
@@ -278,7 +295,7 @@ if( $f_report_stay ) {
 	$t_data['product_version'] = $t_issue->version;
 	$t_data['report_stay'] = 1;
 
-	$t_report_more_bugs_url = string_get_bug_report_url() . '?' . http_build_query( $t_data );
+	$t_report_more_bugs_url = helper_url_combine( string_get_bug_report_url(), $t_data );
 
 	print_header_redirect( $t_report_more_bugs_url );
 } else {

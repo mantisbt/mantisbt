@@ -53,3 +53,5 @@ $s_plugin_format_process_markdown = 'Obdelava Markdown';
 $s_plugin_format_process_markdown_info = 'Oblikovanje s podporo za Markdown, skladnja oblikovanja besedila, zasnovana tako, da jo je mogoče pretvoriti v HTML.';
 $s_plugin_format_enabled = 'Vklopljeno';
 $s_plugin_format_disabled = 'Izklopljeno';
+$s_plugin_format_syntax_highlighting = 'Označevanje skladnje za kodne bloke';
+$s_plugin_format_syntax_highlighting_info = 'Označevanje skladnje deluje samo, če je aktivno »Obdelava označevanja«';

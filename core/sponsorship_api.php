@@ -183,7 +183,7 @@ function sponsorship_get_id( $p_bug_id, $p_user_id = null ) {
 		return false;
 	}
 
-	return (integer)$t_row['id'];
+	return (int)$t_row['id'];
 }
 
 /**

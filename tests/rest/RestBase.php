@@ -23,8 +23,13 @@
  * @link http://www.mantisbt.org
  */
 
+namespace Mantis\tests\rest;
+
+use Mantis\tests\core\MantisTestCase;
+use Mantis\tests\core\RequestBuilder;
 use GuzzleHttp\Exception\GuzzleException;
-use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
+use stdClass;
 
 # Includes
 require_once dirname( __DIR__ ) . '/TestConfig.php';
@@ -32,18 +37,13 @@ require_once dirname( __DIR__ ) . '/TestConfig.php';
 # MantisBT Core API
 require_mantis_core();
 
-require_once( __DIR__ . '/../../vendor/autoload.php' );
-require_once ( __DIR__ . '/../../core/constant_inc.php' );
-require_once __DIR__ . '/../core/RequestBuilder.php';
-require_once __DIR__ . '/../core/Faker.php';
-
 /**
  * Base class for REST API test cases
  *
  * @requires extension curl
  * @group REST
  */
-abstract class RestBase extends TestCase {
+abstract class RestBase extends MantisTestCase {
 	/**
 	 * @var string Base path for REST API
 	 */
@@ -190,18 +190,6 @@ abstract class RestBase extends TestCase {
 	}
 
 	/**
-	 * Generate a Test Case reference (TestClass::TestCase).
-	 *
-	 * This can be used to associate the test data (e.g. Issue Summary, Project
-	 * Name, etc.) with a test case.
-	 * 
-	 * @return string
-	 */
-	protected function getTestCaseReference() {
-		return static::class . '::' . $this->getName();
-	}
-
-	/**
 	 * Returns a minimal data structure for tests to create a new Issue.
 	 *
 	 * The Issue Summary is set to TestClass::TestCase with an optional
@@ -212,7 +200,7 @@ abstract class RestBase extends TestCase {
 	 * @return array
 	 */
 	protected function getIssueToAdd( $p_suffix = '' ) {
-		$t_summary = $this->getTestCaseReference();
+		$t_summary = $this->getTestName();
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}
@@ -225,6 +213,23 @@ abstract class RestBase extends TestCase {
 	}
 
 	/**
+	 * Checks that response was successful and returns JSON body as object.
+	 *
+	 * @param ResponseInterface $p_response
+	 * @param int               $p_status_code Expected HTTP status code
+	 *
+	 * @return stdClass
+	 */
+	protected function getJson( ResponseInterface $p_response, $p_status_code = HTTP_STATUS_SUCCESS ) {
+		$this->assertEquals( $p_status_code,
+			$p_response->getStatusCode(),
+			"REST API returned unexpected Status Code"
+		);
+		return json_decode( $p_response->getBody(), false );
+	}
+
+
+	/**
 	 * Marks a test as skipped if there is no configured Anonymous account.
 	 *
 	 * @return void
@@ -232,6 +237,17 @@ abstract class RestBase extends TestCase {
 	protected function skipTestIfAnonymousDisabled(){
 		if( ! auth_anonymous_enabled() ) {
 			$this->markTestSkipped( 'Anonymous access is not enabled' );
+		}
+	}
+
+	/**
+	 * Skip if time tracking is not enabled
+	 * @return void
+	 */
+	protected function skipIfTimeTrackingIsNotEnabled() {
+		$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+		if( !$t_time_tracking_enabled ) {
+			$this->markTestSkipped( 'Time tracking is not enabled' );
 		}
 	}
 

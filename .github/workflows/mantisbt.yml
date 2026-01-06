@@ -1,0 +1,111 @@
+# -----------------------------------------------------------------------------
+# MantisBT GitHub Actions Worflow to run PHPUnit tests
+#
+# Tests will be triggered on
+# - direct pushes to branches (except dependabot)
+# - pull requests
+# -----------------------------------------------------------------------------
+
+name: MantisBT unit tests
+on:
+  push:
+    branches-ignore:
+      - dependabot/**   # Only build dependabot branches on PRs
+    paths-ignore:
+      - docbook/**
+  pull_request:
+    paths-ignore:
+      - docbook/**
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  Tests:
+    name: PHP ${{ matrix.php }} on ${{ matrix.DB }}
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        DB:
+          # Database to test with (= name of the ADOdb driver)
+          - mysqli
+          - pgsql
+        php:
+          - 8.5
+          - 8.4
+          - 8.3
+          - 8.2
+          - 8.1
+          - 8.0
+          - 7.4
+        experimental: [false]
+
+    env:
+      HOSTNAME: localhost
+      PORT: 8080
+      DB_NAME: bugtracker
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_HOST: localhost
+      DB_TYPE: ${{ matrix.DB }}
+
+    steps:
+    - name: Setup PHP
+      # https://setup-php.com/
+      uses: shivammathur/setup-php@2.29.0
+      with:
+        php-version: "${{ matrix.php }}"
+        extensions: mysqli, pgsql, mbstring, json, tokenizer, curl, gd, fileinfo, ldap, soap, zlib
+        tools: phpunit
+        ini-values: |
+          opcache.jit=disable,
+          sendmail_path=${{ github.workspace }}/tests/fakesendmail.sh
+
+    - name: Checkout MantisBT Repository
+      uses: actions/checkout@v4.1.0
+
+    - run: composer install
+
+    - name: Initialize MySQL
+      if: ${{ matrix.DB == 'mysqli' }}
+      run: |
+        sudo systemctl start mysql.service
+        # Using -p for password triggers warnings, but these can be ignored 
+        DB_CMD="mysql -u$DB_USER -p$DB_PASSWORD"
+        $DB_CMD -e "CREATE DATABASE $DB_NAME"
+        # Make the DB execution command available to subsequent steps
+        echo "DB_CMD=$DB_CMD $DB_NAME -e " >> "$GITHUB_ENV"
+
+    - name: Initialize PostgreSQL
+      if: ${{ matrix.DB == 'pgsql' }}
+      run: |
+        sudo systemctl start postgresql.service
+        pg_isready
+        DB_CMD="sudo -u postgres psql"
+        sudo -u postgres createdb $DB_NAME
+        $DB_CMD -c "CREATE USER $DB_USER WITH SUPERUSER CREATEDB CREATEROLE INHERIT LOGIN PASSWORD '$DB_PASSWORD'"
+        $DB_CMD -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER"
+        # Make the DB execution command available to subsequent steps
+        echo "DB_CMD=$DB_CMD $DB_NAME -c " >> "$GITHUB_ENV"
+
+    - name: Start webserver
+      run: |
+        nohup php -S ${{env.HOSTNAME}}:${{env.PORT}} &
+        sleep 1
+        echo "PHP built-in webserver started with PID $!"
+        # Write access to config dir needed for installer to create config_inc.php
+        chmod 777 config/
+
+    - name: Install MantisBT
+      run: ./build/ci_install_mantis.sh
+
+    - name: Post-installation steps
+      run: ./build/ci_post_install.sh
+
+    - name: Run test suite
+      run: vendor/bin/phpunit

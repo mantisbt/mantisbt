@@ -44,6 +44,33 @@ require_api( 'utility_api.php' );
 
 /**
  * Preference Structure Definition
+ *
+ * @property $default_profile
+ * @property $default_project
+ * @property $refresh_delay
+ * @property $redirect_delay
+ * @property $bugnote_order
+ * @property $email_on_new
+ * @property $email_on_assigned
+ * @property $email_on_feedback
+ * @property $email_on_resolved
+ * @property $email_on_closed
+ * @property $email_on_reopened
+ * @property $email_on_bugnote
+ * @property $email_on_status
+ * @property $email_on_priority
+ * @property $email_on_new_min_severity
+ * @property $email_on_assigned_min_severity
+ * @property $email_on_feedback_min_severity
+ * @property $email_on_resolved_min_severity
+ * @property $email_on_closed_min_severity
+ * @property $email_on_reopened_min_severity
+ * @property $email_on_bugnote_min_severity
+ * @property $email_on_status_min_severity
+ * @property $email_on_priority_min_severity
+ * @property $email_bugnote_limit
+ * @property $language
+ * @property $timezone
  */
 class UserPreferences {
 	/**

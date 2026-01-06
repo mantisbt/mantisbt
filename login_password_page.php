@@ -32,6 +32,7 @@
  * @uses current_user_api.php
  * @uses database_api.php
  * @uses gpc_api.php
+ * @uses helper_api.php
  * @uses html_api.php
  * @uses lang_api.php
  * @uses print_api.php
@@ -47,6 +48,7 @@ require_api( 'constant_inc.php' );
 require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
 require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
@@ -73,9 +75,7 @@ if( is_blank( $t_username ) ) {
 		'return' => $f_return,
 	);
 
-	$t_query_text = http_build_query( $t_query_args, '', '&' );
-
-	$t_redirect_url = auth_login_page( $t_query_text );
+	$t_redirect_url = auth_login_page( $t_query_args );
 	print_header_redirect( $t_redirect_url );
 }
 
@@ -103,12 +103,10 @@ if( $t_should_redirect ) {
 		$t_query_args['cookie_error'] = $f_cookie_error;
 	}
 
-	$t_query_text = http_build_query( $t_query_args, '', '&' );
-
 	# Determine the credential page URL based on user id (if it exists) or username
 	$t_redirect_url = $t_user_id !== false
-		? auth_credential_page( $t_query_text, $t_user_id )
-		: auth_credential_page( $t_query_text, NO_USER, $t_username );
+		? auth_credential_page( $t_query_args, $t_user_id )
+		: auth_credential_page( $t_query_args, NO_USER, $t_username );
 	print_header_redirect( $t_redirect_url );
 }
 
@@ -146,11 +144,7 @@ if( $t_session_validation ) {
 	}
 }
 
-# Login page shouldn't be indexed by search engines
-html_robots_noindex();
-
-layout_login_page_begin();
-
+layout_login_page_begin( $t_form_title );
 ?>
 
 <div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
@@ -265,7 +259,11 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.
 			<?php
 			# lost password feature disabled or reset password via email disabled -> stop here!
 			if( $t_show_reset_password ) {
-				echo '<a class="pull-right" href="lost_pwd_page.php?username=', urlencode( $t_username ), '">', lang_get( 'lost_password_link' ), '</a>';
+				echo '<a class="pull-right" href="',
+					helper_url_combine( 'lost_pwd_page.php', [
+						'username' => $t_username
+					] ),
+					'">', lang_get( 'lost_password_link' ), '</a>';
 			}
 			?>
 		</fieldset>

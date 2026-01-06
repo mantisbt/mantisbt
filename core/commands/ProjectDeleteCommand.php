@@ -31,7 +31,7 @@ class ProjectDeleteCommand extends Command {
 	 * Constructor
 	 *
 	 * $p_data['query'] is expected to contain:
-	 * - id (integer)
+	 * - id (int)
 	 *
 	 * @param array $p_data The command data.
 	 */

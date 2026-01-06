@@ -66,7 +66,6 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $t_type ) {
-	/** @noinspection PhpIncludeInspection */
 	require_once( config_get_global( 'core_path' ) . 'cfdefs/cfdef_' . $t_type . '.php' );
 }
 unset( $t_type );
@@ -138,19 +137,18 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 /**
  * Cache custom fields contained within an array of field id's.
  *
- * If ids parameter is omitted, all fields will be cached.
- *
- * @param array|null $p_cf_id_array Array of custom field ids.
+ * @param array $p_cf_id_array Array of custom field ids;
+ *                             if empty, all fields will be cached.
  *
  * @return void
  *
  * @access public
  */
-function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
+function custom_field_cache_array_rows( array $p_cf_id_array = [] ): void {
 	global $g_cache_custom_field, $g_cache_name_to_id_map;
 
 	$c_cf_id_array = array();
-	$t_cache_all = ( null === $p_cf_id_array );
+	$t_cache_all = empty( $p_cf_id_array );
 
 	# cache main data
 	if( $t_cache_all ) {
@@ -380,11 +378,7 @@ function custom_field_is_linked( $p_field_id, $p_project_id ) {
  * @access public
  */
 function custom_field_exists( $p_field_id ) {
-	if( false == custom_field_cache_row( $p_field_id, false ) ) {
-		return false;
-	} else {
-		return true;
-	}
+	return is_array( custom_field_cache_row( $p_field_id, false ) );
 }
 
 /**
@@ -392,14 +386,14 @@ function custom_field_exists( $p_field_id ) {
  *
  * @param int $p_field_id Custom field id.
  *
- * @return int Custom field's type
+ * @return int Custom field's type, -1 if it does not exist.
  *
  * @access public
  */
 function custom_field_type( $p_field_id ) {
 	$t_field = custom_field_cache_row( $p_field_id, false );
-	if( $t_field == false ) {
-		return - 1;
+	if( $t_field === false ) {
+		return -1;
 	} else {
 		return $t_field['type'];
 	}
@@ -503,6 +497,7 @@ function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id = null
  * @param int $p_user_id    A user identifier.
  *
  * @return bool
+ * @throws ClientException
  *
  * @access public
  */
@@ -519,14 +514,15 @@ function custom_field_has_read_access_by_project_id( $p_field_id, $p_project_id,
 }
 
 /**
- * Return true if the user can modify the value of the field for the given project,
- * false otherwise.
+ * Return true if the user can modify the value of the field for the given
+ * project, false otherwise.
  *
  * @param int $p_field_id   Custom field identifier.
  * @param int $p_project_id A project identifier.
  * @param int $p_user_id    A user identifier.
  *
  * @return bool
+ * @throws ClientException
  *
  * @access public
  */
@@ -596,6 +592,7 @@ function custom_field_create( $p_name ) {
  * @param array $p_def_array Custom field definition.
  *
  * @return bool True on success, false on failure
+ * @throws ClientException
  *
  * @access public
  */
@@ -626,6 +623,22 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
+	# Default value length is limited by underlying DB field
+	# (and max_textarea_length, for textarea fields).
+	if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+		$t_max_textarea_length = config_get_global( 'max_textarea_length' );
+		$t_max_length = min( DB_FIELD_SIZE_CF_DEFAULT_VALUE, $t_max_textarea_length );
+	} else {
+		$t_max_length = DB_FIELD_SIZE_CF_DEFAULT_VALUE;
+	}
+	if( strlen( $v_default_value ) > $t_max_length ) {
+		throw new ClientException(
+			"Default value must be $t_max_length characters or less.",
+			ERROR_FIELD_TOO_LONG,
+			[lang_get( 'custom_field_default_value' ), $t_max_length]
+		);
+	}
+
 	if( $v_access_level_rw < $v_access_level_r ) {
 		error_parameters(
 			lang_get( 'custom_field_access_level_r' ) . ', ' .
@@ -638,6 +651,17 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	) {
 		error_parameters( lang_get( 'custom_field_length_min' ) . ', ' . lang_get( 'custom_field_length_max' ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
+	}
+
+	# Ensure max length for textarea fields is not more than allowed
+	if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+		if( $v_length_max > $t_max_textarea_length ) {
+			throw new ClientException(
+				'Maximum Length must be ' . $t_max_textarea_length . ' or less.',
+				ERROR_FIELD_TOO_LONG,
+				[lang_get( 'custom_field_length_max' ), $t_max_textarea_length]
+			);
+		}
 	}
 
 	if( !custom_field_is_name_unique( $v_name, $p_field_id ) ) {
@@ -873,11 +897,12 @@ function custom_field_get_id_from_name( $p_field_name ) {
 /**
  * Return an array of ids of custom fields bound to the specified project.
  *
- * The ids will be sorted based on the sequence number associated with the binding
+ * The ids will be sorted based on the sequence number associated with the binding.
  *
  * @param int|array $p_project_id A project identifier, or array of project ids
  *
  * @return array Array of custom field ids
+ * @throws ClientException
  *
  * @access public
  */
@@ -1223,6 +1248,9 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			# Check the length of the string
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length >= $t_length_min );
 			$t_valid &= ( 0 == $t_length_max ) || ( $t_length <= $t_length_max );
+			if( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+				$t_valid &= $t_length <= config_get_global( 'max_textarea_length' );
+			}
 			break;
 		case CUSTOM_FIELD_TYPE_NUMERIC:
 			# Empty fields are valid
@@ -1497,8 +1525,8 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 				  		bug_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_field_id, $p_bug_id ) );
 
+	db_param_push();
 	if( $t_row = db_fetch_array( $t_result ) ) {
-		db_param_push();
 		$t_query = 'UPDATE {custom_field_string}
 					  SET ' . $t_value_field . '=' . db_param() . '
 					  WHERE field_id=' . db_param() . ' AND
@@ -1512,7 +1540,6 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 
 		history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row[$t_value_field], $t_type ), $t_value );
 	} else {
-		db_param_push();
 		$t_query = 'INSERT INTO {custom_field_string}
 						( field_id, bug_id, ' . $t_value_field . ' )
 					  VALUES

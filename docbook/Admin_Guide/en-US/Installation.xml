@@ -352,8 +352,8 @@
 							<row>
 								<entry morerows='3' valign='middle'>Web Server</entry>
 								<entry>Apache</entry>
-								<entry>2.2.x</entry>
-								<entry>2.4.x</entry>
+								<entry>2.4.13</entry>
+								<entry>latest 2.4.x release</entry>
 								<entry></entry>
 							</row>
 							<row>

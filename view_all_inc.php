@@ -240,7 +240,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 					<div class="form-inline pull-left">
 <?php
 		/**
-		 * Global $g_checkboxes_exist is set in write_bug_rows() via the
+		 * Global $g_checkboxes_exist is set in {@see write_bug_rows()} via the
 		 * print_column_value custom function.
 		 * @noinspection PhpConditionAlreadyCheckedInspection
 		 */
@@ -252,7 +252,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 ?>
 			<!--suppress HtmlFormInputWithoutLabel -->
 			<select name="action" class="input-sm">
-				<?php print_all_bug_action_option_list($t_unique_project_ids) ?>
+				<?php print_all_bug_action_option_list( $t_unique_project_ids ) ?>
 			</select>
 			<input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get('ok'); ?>"/>
 <?php

@@ -116,9 +116,13 @@ if( $t_filter_save ) {
 	if( null !== $t_cookie_string ) {
 		$t_cookie_contents = explode( ':', $t_cookie_string );
 
-		$t_filter_user_value    = $t_cookie_contents[0];
-		$t_filter_project_value = $t_cookie_contents[1];
+		$t_filter_user_value    = (int)$t_cookie_contents[0];
+		$t_filter_project_value = (int)$t_cookie_contents[1];
 		$t_filter_config_value  = check_config_value( $t_cookie_contents[2] );
+
+		if( !user_exists( $t_filter_user_value ) ) {
+			$t_filter_user_value = ALL_USERS;
+		}
 
 		if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
 			$t_filter_project_value = ALL_PROJECTS;
@@ -255,13 +259,13 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 		<thead>
 			<tr>
 				<th>
-					<?php echo lang_get( 'username' ); ?><br />
+					<label for="filter_user_id"><?php echo lang_get( 'username' ); ?></label>
 				</th>
 				<th>
-					<?php echo lang_get( 'project_name' ); ?><br />
+					<label for="filter_project_id"><?php echo lang_get( 'project_name' ); ?></label>
 				</th>
 				<th>
-					<?php echo lang_get( 'configuration_option' ); ?><br />
+					<label for="filter_config_id"><?php echo lang_get( 'configuration_option' ); ?></label>
 				</th>
 			</tr>
 		</thead>
@@ -269,21 +273,21 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 		<tbody>
 			<tr>
 				<td>
-					<select name="filter_user_id" class="input-sm">
+					<select name="filter_user_id" id="filter_user_id" class="input-sm">
 						<?php
 						print_option_list_from_array( $t_users_list, $t_filter_user_value );
 						?>
 					</select>
 				</td>
 				<td>
-					<select name="filter_project_id" class="input-sm">
+					<select name="filter_project_id" id="filter_project_id" class="input-sm">
 						<?php
 						print_option_list_from_array( $t_projects_list, $t_filter_project_value );
 						?>
 					</select>
 				</td>
 				<td>
-					<select name="filter_config_id" class="input-sm">
+					<select name="filter_config_id" id="filter_config_id" class="input-sm">
 						<?php
 						print_option_list_from_array( $t_configs_list, $t_filter_config_value );
 						?>
@@ -316,8 +320,7 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 <div class="space-10"></div>
 
 <!-- CONFIGURATIONS LIST -->
-<a id="database_configuration"></a>
-<div class="widget-box widget-color-blue2">
+<div id="database_configuration" class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 	<?php print_icon( 'fa-database', 'ace-icon' ); ?>
@@ -381,7 +384,7 @@ while( $t_row = $t_config_query->fetch() ) {
 					'config_option' => $v_config_id,
 					'action'        => MANAGE_CONFIG_ACTION_VIEW
 				);
-		$t_url_view = helper_url_combine( 'adm_config_page.php', http_build_query( $t_url_params ) );
+		$t_url_view = helper_url_combine( 'adm_config_page.php', $t_url_params );
 		$t_html_value = '<div class="adm_config_expand" data-config_id="' . $v_config_id . '"'
 				. ' data-project_id="' . $v_project_id . '" data-user_id="' . $v_user_id . '">'
 				. '<span class ="expand_show"><a href="' . $t_url_view . '" class="toggle small">[' . lang_get( 'show_content' ) . ']</a></span>'
@@ -418,7 +421,7 @@ while( $t_row = $t_config_query->fetch() ) {
 
 			# Update button
 			$t_action_params['action'] = MANAGE_CONFIG_ACTION_EDIT;
-			$t_url_edit = helper_url_combine( 'adm_config_page.php', http_build_query( $t_action_params ) );
+			$t_url_edit = helper_url_combine( 'adm_config_page.php', $t_action_params );
 			echo '<div class="pull-left">';
 			print_link_button( $t_url_edit, lang_get( 'edit' ), 'btn-xs' );
 			echo '</div>';
@@ -426,7 +429,7 @@ while( $t_row = $t_config_query->fetch() ) {
 			# Clone button
 			echo '<div class="pull-left">';
 			$t_action_params['action'] = MANAGE_CONFIG_ACTION_CLONE;
-			$t_url_clone = helper_url_combine( 'adm_config_page.php', http_build_query( $t_action_params ) );
+			$t_url_clone = helper_url_combine( 'adm_config_page.php', $t_action_params );
 			print_link_button( $t_url_clone, lang_get( 'create_child_bug_button' ), 'btn-xs' );
 			echo '</div>';
 

@@ -113,10 +113,10 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 <div class="widget-body">
 <div class="widget-main no-padding">
 	<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<table class="table table-bordered table-condensed table-striped">
 			<tr>
 				<td class="category">
 					<label for="project-name">
@@ -217,10 +217,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 </textarea>
 				</td>
 			</tr>
-
 			<?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', array( $f_project_id ) ); ?>
+			</table>
 		</fieldset>
-		</table>
 		</div>
 		</div>
 		</div>
@@ -336,12 +335,12 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 								<thead>
 								<tr>
 									<th><?php echo lang_get( 'name' ) ?></th>
-									<th><?php echo lang_get( 'status' ) ?></th>
-									<th><?php echo lang_get( 'enabled' ) ?></th>
-									<th><?php echo lang_get( 'inherit' ) ?></th>
-									<th><?php echo lang_get( 'view_status' ) ?></th>
+									<th class="center"><?php echo lang_get( 'status' ) ?></th>
+									<th class="center"><?php echo lang_get( 'enabled' ) ?></th>
+									<th class="center"><?php echo lang_get( 'inherit' ) ?></th>
+									<th class="center"><?php echo lang_get( 'view_status' ) ?></th>
 									<th><?php echo lang_get( 'description' ) ?></th>
-									<th colspan="2"><?php echo lang_get( 'actions' ) ?></th>
+									<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 								</tr>
 								</thead>
 
@@ -469,7 +468,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				<th><?php echo lang_get( 'category' ) ?></th>
 				<th class="center"><?php echo lang_get( 'enabled' ) ?></th>
 				<th><?php echo lang_get( 'assign_to' ) ?></th>
-				<th colspan="2" class="center"><?php echo lang_get( 'actions' ) ?></th>
+				<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -616,10 +615,10 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		<thead>
 			<tr>
 				<th><?php echo lang_get( 'version' ) ?></th>
-				<th><?php echo lang_get( 'released' ) ?></th>
-				<th><?php echo lang_get( 'obsolete' ) ?></th>
-				<th><?php echo lang_get( 'timestamp' ) ?></th>
-				<th><?php echo lang_get( 'actions' ) ?></th>
+				<th class="center"><?php echo lang_get( 'released' ) ?></th>
+				<th class="center"><?php echo lang_get( 'obsolete' ) ?></th>
+				<th class="center"><?php echo lang_get( 'timestamp' ) ?></th>
+				<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -881,7 +880,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 								</option>
 								<?php print_project_option_list( null, false, $f_project_id ); ?>
 							</select>
-							<span class=form-inline">
+							<span class="form-inline">
 								<button name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="1">
 									<?php echo lang_get( 'copy_users_from' ) ?>
 								</button>

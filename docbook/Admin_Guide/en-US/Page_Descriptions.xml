@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "https://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
 %BOOK_ENTITIES;
 ]>
@@ -135,84 +135,164 @@
 
     <section id="admin.pages.issueview">
 
-        <title>Issue View page</title>
+        <title>View Issue Details page</title>
 
-
-        <para>Here is the simple listing of the issue report. Most of the
-            fields are self-explanatory. "Assigned To" will contain the
-            developer assigned to handle the issue. Priority is fully functional
-            but currently does nothing of importance. Duplicate ID is used when
-            an issue is a duplicate of another. It links to the duplicate issue
-            which allows users to read up on the original issue report. Below the
-            issue report is a set of buttons that a user can select to work on
-            the issue.
-        </para>
-        <itemizedlist>
-            <listitem>
-                <para>Update Issue - brings up a page to edit all aspects of
-                    the issue
-                </para>
-            </listitem>
-            <listitem>
-                <para>Assign to - in conjunction with the dropdown list next
-                    top the button, this is a shortcut to change the assignment of an
-                    issue
-                </para>
-            </listitem>
-            <listitem>
-                <para>Change Status to - in conjunction with the dropdown list
-                    next top the button, this is a shortcut to change the status of an
-                    issue. Another page (Change Status) will be presented to allow the
-                    user to add notes or change relevant information
-                </para>
-            </listitem>
-            <listitem>
-                <para>Monitor / Unmonitor Issue - allows the user to monitor
-                    any additions to the issue by email
-                </para>
-            </listitem>
-            <listitem>
-                <para>Create Clone - create a copy of the current issue. This
-                    presents the user with a new issue reporting form with all of the
-                    information in the current issue filled in. Upon submission, a new
-                    issue, related to the current issue, will be created.
-                </para>
-            </listitem>
-            <listitem>
-                <para>Reopen Issue - Allows the user to re-open a resolved
-                    issue
-                </para>
-            </listitem>
-            <listitem>
-                <para>Move Issue - allows the user to move the issue to another
-                    project
-                </para>
-            </listitem>
-            <listitem>
-                <para>Delete Issue - Allows the user to delete the issue
-                    permanently. It is recommended against deleting issues unless the
-                    entry is frivolous. Instead issues should be set to resolved and an
-                    appropriate resolution category chosen.
-                </para>
-            </listitem>
-        </itemizedlist>
-        <para>
-            A panel is provided to view and update the sponsorship of an
-            issue.
-        </para>
-        <para>Another panel is provided to view, delete and add
-            relationships for an issue. Issues can have a parent/child
-            relationship, where the user is warned about resolving a parent
-            issue before all of the children are resolved. A peer relationship
-            is also possible.
-        </para>
-        <para>Below this, there may be a form for uploading file
-            attachments. The Administrator needs to configure the bugtracker to
-            handle file uploads. If uploading to disk is selected, each project
-            needs to set its own upload path.  Issue notes are shown at the bottom
-            of the issue report. A panel to add issue notes is also shown.
-        </para>
-    </section>
+        <para>This page displays complete information about an Issue.
+		</para>
+		<para>Most of the fields are self-explanatory.
+			<emphasis>Assigned To</emphasis> indicates the developer handling the Issue.
+			<emphasis>Priority</emphasis> is fully functional but currently does nothing of importance.
+		</para>
+		<para>In the main section's footer, just below the fields list,
+			is a set of action buttons that a user can leverage to work on the Issue.
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para><emphasis>Edit</emphasis> - brings up a page to edit all aspects of the Issue.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Assign to</emphasis> -
+					in conjunction with the dropdown list next
+					to the button, provides a shortcut to change an Issue's
+					assignment.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Change Status to</emphasis> -
+					in conjunction with the dropdown list
+					next to the button, allows changing the status of an Issue.
+					This will redirect another page allowing the user to add
+					notes or change relevant information
+					(see <xref linkend="admin.pages.issuestatus" />).
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Monitor / End Monitoring</emphasis> -
+					allows users to subscribe to an Issue;
+					they will receive email notifications whenever it is updated.
+				</para>
+				<para>Users who reported or are assigned to the issue typically
+					do not need to monitor it to receive the notifications,
+					because they get them by default unless the administrator
+					changed the configuration.
+				</para>
+				<para>When a Reminder is sent to a user, they are added to the
+					monitoring list by default.
+					See <xref linkend="admin.config.reminders" />.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Stick / Unstick</emphasis> -
+					Changes the Issue's <emphasis>sticky</emphasis> status.
+					Sticky Issues are listed at the top of the first page in
+					the Issues list (see <xref linkend="admin.pages.filter" />),
+					unless this has been disabled by filter settings.
+				</para>
+				<para>The sticky status can also be changed using the
+					<emphasis>Set/Unset Sticky</emphasis> group action.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<emphasis>Clone</emphasis> - create a copy of the current Issue.
+					This presents the user with a new Issue reporting form,
+					prefilled with all the information from current Issue.
+					Upon submission, a new Issue will be created,
+					with an optional relationship to the current one.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Reopen Issue</emphasis> -
+					Allows a user having the appropriate access level to re-open
+					a resolved or closed Issue.
+					This will redirect another page allowing the user to add
+					notes to explain the re-opening reason
+					(see <xref linkend="admin.pages.issuestatus" />).
+					The issue will automatically be put into Feedback status.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Close</emphasis> - Changes the Issue's status to Closed.
+				</para>
+				<para>Depending on configuration, authorized users may be able
+					to close issues without having to resolve them first, or may
+					only be allowed to close resolved issues.
+					This will redirect another page allowing the user to add
+					notes or change relevant information
+					(see <xref linkend="admin.pages.issuestatus" />).
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Move Issue</emphasis> -
+					Lets the user move the Issue to another project.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Delete Issue</emphasis> -
+					Allows authorized users (see <literal>$g_delete_bug_threshold</literal>
+					in <xref linkend="admin.config.misc" />)
+					to permanently delete the Issue.
+					A dialog will prompt the user confirm the operation.
+					<note>
+						<!-- TODO: This should be a tip admonition, but that's not properly supported by Publican -->
+						<para>It is generally not recommended to delete issues,
+							unless it is frivolous, test or completely off-topic.
+							Instead, resolve the Issue with an appropriate Resolution code
+							(see <literal>$g_resolution_enum_string</literal> in).
+						</para>
+					</note>
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			If the Sponsorship feature is enabled, a section is will allow
+			viewing and updating it.
+			See <xref linkend="admin.config.sponsorship" />
+		</para>
+		<para>Another section is provided to view, add and delete relationships.
+			The following types are available:
+			<itemizedlist>
+				<listitem>
+					<para><emphasis>related to</emphasis> -
+						horizontal relationship.
+						This is a regular link between two Issues,
+						without any particular meaning.
+					</para>
+				</listitem>
+				<listitem>
+					<para><emphasis>parent / child</emphasis> -
+						hierarchical relationship.
+						The user is warned about resolving a parent Issue
+						before all of its children are resolved.
+					</para>
+				</listitem>
+				<listitem>
+					<para><emphasis>duplicate of / has duplicate</emphasis> -
+						hierarchical relationship.
+						An Issue marked as duplicate of another one is generally
+						resolved with <literal>duplicate</literal> resolution.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<para>Below this, there will be a form allowing to add notes and/or file
+			attachments. Issue notes are shown in a separate section further
+			down the page.
+		</para>
+		<para>If enabled, a Time Tracking section will report the time spent on
+			the Issue.
+		</para>
+		<para>Finally, the History section will show a chronological audit trail
+			of all activity on the Issue.
+		</para>
+		<note>
+			<para>Which Fields, buttons and Sections are displayed depends on
+				system configuration and the user's access level.
+				Additional sections may be inserted by Plugins.
+			</para>
+		</note>
+	</section>
 
     <section id="admin.pages.issuestatus">
         <title>Issue Change Status page</title>
@@ -918,87 +998,6 @@
                 </para>
             </section>
         </section>
-    </section>
-
-    <section id="admin.pages.monitor">
-        <title>Monitor Issue</title>
-
-        <para>The monitor issues feature allows users to subscribe to
-            certain issues and hence get copied on all notification emails that
-            are sent for these issues.
-        </para>
-        <para>Depending on the configuration, sending a
-            reminder to a user about an issue can add this issue to the user's
-            list of monitored issues. Users who reported the issue or are assigned
-            the issue typically don't need to monitor the issue to get the
-            notifications. This is because by default they get notified on
-            changes related to the issue anyway. However, administrators can
-            change the configuration to disable notifications to reporters or
-            handlers in specific scenarios.
-        </para>
-    </section>
-
-    <section id="admin.pages.reopen">
-        <title>Reopen Issue</title>
-
-        <para>Re-open issue button is visible in the issue view pages if the
-            user has the appropriate access level and the issue is
-            resolved/closed. Re-opening a issue will allow users to enter
-            issue notes for the re-opening reason. The issue will automatically be
-            put into the Feedback status.
-        </para>
-    </section>
-
-
-    <section id="admin.pages.delete">
-        <title>Delete Issue</title>
-
-
-        <para>The delete issues button appears on the issue view pages for the
-            users who have the appropriate access level. This allows you to
-            delete an existing issue. This should only be used on frivolous or
-            test issues. A confirmation screen will prompt you if you really want
-            to delete the issue. Updaters, Developers, Managers, and
-            Administrators can remove issues (you can also configure
-            this).
-        </para>
-    </section>
-
-
-    <section id="admin.pages.close">
-        <title>Close Issue</title>
-
-        <para>This is a button that appears on the issue view pages for
-            users that are authorized to close issues. Depending on the
-            configuration, users may be able to close issues without having to
-            resolve them first, or may be able to only close resolved issues.
-            After the button is clicked, the user is redirected to a page where
-            an issue note maybe added.
-        </para>
-    </section>
-
-
-    <section id="admin.pages.assigntome">
-        <title>Assign to Me</title>
-
-        <para>This button appears in the issue view pages in case of users
-            with access level that is equal to handle_bug_threshold or higher.
-            When this button is clicked the issue is assigned to the
-            user.
-        </para>
-    </section>
-
-    <section id="admin.pages.resolve">
-        <title>Resolve Issue</title>
-
-
-        <para>This option on the View Issues page allows you to resolve the
-            issue. It will lead you to a page where you can set the resolution
-            state and a duplicate id (if applicable). After choosing that the
-            user can choose to enter an issue note detailing the reason for the
-            closure. The issue is then set to the Resolved state. The reporter
-            should check off on the issue by using the Close Issue button.
-        </para>
     </section>
 
     <section id="admin.pages.news">

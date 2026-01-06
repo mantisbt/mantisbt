@@ -332,9 +332,16 @@ if( $t_multiple_projects ) {
 
 			switch( $f_action ) {
 				case 'COPY':
+					print_project_option_list( null, false, null, false, true );
+					break;
 				case 'MOVE':
-					print_project_option_list( null /* $p_project_id */, false /* $p_include_all_projects */,
-							null /* $p_filter_project_id */, false /* $p_trace */, true /* $p_can_report_only */ );
+					print_project_option_list(
+						null,
+						false,
+						$t_multiple_projects ? null : $t_project_id,
+						false,
+						true
+					);
 					break;
 				case 'ASSIGN':
 					print_assign_to_option_list( 0, $t_project_id );
@@ -416,7 +423,10 @@ if( $t_multiple_projects ) {
 						<?php echo lang_get( 'add_bugnote_title' ); ?>
 					</th>
 					<td>
-						<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" cols="80" rows="7"></textarea>
+						<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>"
+								  cols="80" rows="7"
+								  maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
+						></textarea>
 					</td>
 				</tr>
 <?php

@@ -62,7 +62,7 @@ require_api( 'lang_api.php' );
 	$t_collapse_block = is_collapsed( 'bugnote_add' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-	$t_allow_file_upload = file_allow_bug_upload( $f_bug_id );
+	$t_allow_file_upload = file_allow_bug_upload( $f_bug_id ) && !event_signal( 'EVENT_BUGNOTE_ADD_MODERATE_CHECK', array( $f_bug_id ) );
 ?>
 <form id="bugnoteadd"
 	method="post"
@@ -116,7 +116,10 @@ require_api( 'lang_api.php' );
 					<?php echo lang_get( 'bugnote' ) ?>
 				</th>
 				<td class="width-85">
-					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" rows="7"></textarea>
+					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>"
+							  rows="7"
+							  maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
+					></textarea>
 				</td>
 			</tr>
 

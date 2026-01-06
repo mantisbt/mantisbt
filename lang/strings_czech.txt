@@ -56,6 +56,7 @@
  * @author Mormegil
  * @author Patriccck
  * @author Patrik L.
+ * @author Polda18
  * @author Quinn
  * @author Rattkin
  * @author Spotter
@@ -747,9 +748,6 @@ $s_delete_user_button = 'Smazat uživatele';
 $s_impersonate_user_button = 'Vydávat se za uživatele';
 $s_reset_password_msg = 'Změna hesla odešle potvrzovací URL elektronickým dopisem.';
 $s_reset_password_msg2 = 'Změna hesla nastaví prázdné heslo.';
-$s_show_all_users = 'všichni';
-$s_users_unused = 'Nepoužité';
-$s_users_new = 'Nové';
 $s_account_reset_msg = 'Potvrzovací dopis byl odeslán na vaši elektronickou adresu...';
 $s_account_reset_msg2 = 'Heslo k účtu bylo nastaveno na prázdné...';
 $s_account_unlock_msg = 'Účet byl odemčen.';
@@ -1149,10 +1147,6 @@ $s_tags = 'Štítky';
 $s_tag_details = 'Detail štítku: %1$s';
 $s_tag_id = 'Název štítku';
 $s_tag_name = 'Název';
-$s_tag_creator = 'Tvůrce';
-$s_tag_created = 'Datum vytvoření';
-$s_tag_updated = 'Poslední změna';
-$s_tag_description = 'Popis štítku';
 $s_tag_statistics = 'Statistiky využití';
 $s_tag_update = 'Upravit štítek: %1$s';
 $s_tag_update_return = 'Zpět na štítek';
@@ -1175,9 +1169,8 @@ $s_tag_history_detached = 'Značka odpojena';
 $s_tag_history_renamed = 'Značka přejmenována';
 $s_tag_related = 'Příbuzné štítky';
 $s_tag_related_issues = 'Sdílené problémy (%1$s)';
-$s_tag_stats_attached = 'Připojené problémy: %1$s';
+$s_tag_stats_attached = 'Připojené problémy';
 $s_tag_create = 'Vytvořit štítek';
-$s_show_all_tags = 'Všechny';
 $s_time_tracking_billing_link = 'Sledování času';
 $s_time_tracking = 'Sledování času';
 $s_time_tracking_time_spent = 'Stráveno času:';
@@ -1343,7 +1336,7 @@ $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Potvrzení se nezdařilo. Pr
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funkce "zapomenuté heslo" není dostupná.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Pro zrušení hesla musíte uvést svůj e-mail.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Zadané informace neodpovídají žádnému z registrovaných účtů!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Potvrzovací URL je chybné nebo bylo již použito. Prosím přihlaste se znovu.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Potvrzovací URL je neplatné nebo již bylo použito.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Dosaženo maximum vnitřních procesů. Obraťte se na správce systému.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Není možné odstranit ani změnit úroveň přístupu jediného administrátora v systému. K provedení této akce je potřeba nejdříve vytvořit jiný administrátorský účet.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Chybné přesměrování stránky, ověřte zda nejsou mezery mimo blok PHP (&lt;?php ?&gt;) v souboru config_inc.php nebo v souborech custom_*.php';
@@ -1382,7 +1375,7 @@ $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Upozornění: systém je nakon
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Neshoda datového typu. Povolte podrobné chybové zprávy pro další informace.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Tento záznam byl upraven jiným uživatelem, prosím, vraťte se k problému a odešlete své změny znovu.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Dosáhli jste limitu povolené aktivity max. %d událostí během posledních %d sekund; vaše akce byla zablokována z důvodu ochrany před spamem, zkuste to prosím znovu později.';
-$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Pole "%1$s" musí být kratší nebo max. %2$d znaků dlouhé.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Maximální délka pole „%1$s“ je %2$d znaků.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token "%s" je již používán. Prosíme, vraťte se zpět a zvolte jiný.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Soubor uvedený v $g_log_destination "%s" se nedá zapsat.';
 $s_dropzone_default_message = 'Přetáhněte, vyberte nebo vložte soubory do přílohy';
@@ -1415,3 +1408,7 @@ $s_move = 'Přesunout';
 $s_close = 'Uzavřít';
 $s_add = 'Přidat';
 $s_login = 'Přihlásit se';
+$s_filter_all = 'všichni';
+$s_filter_new = 'Nové';
+$s_filter_unused_tags = 'Nepoužité';
+$s_filter_unused = 'Nepoužité';

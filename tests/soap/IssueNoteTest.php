@@ -21,9 +21,13 @@
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpComposerExtensionStubsInspection
  */
 
-require_once 'SoapBase.php';
+namespace Mantis\tests\soap;
+
+use SoapFault;
 
 /**
  * Test fixture for issue notes webservice methods.
@@ -204,4 +208,27 @@ class IssueNoteTest extends SoapBase {
 		} catch ( SoapFault $e ) {
 		}
 	}
+
+	public function testAddNoteWithTextTooLong() {
+		$t_issue_to_add = $this->getIssueToAdd();
+		$t_issue_id = $this->client->mc_issue_add( $this->userName,
+			$this->password,
+			$t_issue_to_add
+		);
+		$this->deleteAfterRun( $t_issue_id );
+
+		$t_note_data = array(
+			'text' => str_repeat( 'x', config_get_global( 'max_textarea_length' ) ),
+			'note_type' => BUGNOTE
+		);
+
+		# Adding note with maximum length should be OK
+		$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
+
+		$t_note_data['text'] .= ' TOO LONG NOW';
+		$this->expectException( SoapFault::class );
+		$this->expectExceptionMessageMatches( '/Long text field ".*" must be shorter/' );
+		$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
+	}
+
 }

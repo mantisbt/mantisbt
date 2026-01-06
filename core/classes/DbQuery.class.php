@@ -157,24 +157,18 @@ class DbQuery {
 
 	/**
 	 * Construct a new query object.
+	 *
 	 * Optional parameters are the query string, and an array of values to be
-	 * binded to labeled parameters
-	 * @param string $p_query_string	Query string
-	 * @param array $p_bind_array		Bind values
+	 * bound to labeled parameters.
+	 *
+	 * @param string $p_query_string Query string
+	 * @param array $p_bind_array    Bind values
+	 *
 	 * @return void
 	 */
-	public function __construct( $p_query_string = null, array $p_bind_array = null ) {
-		# Itialization
-		if( null === $p_query_string ) {
-			$this->query_string = '';
-		} else {
-			$this->query_string = $p_query_string;
-		}
-		if( null === $p_bind_array ) {
-			$this->query_bind_array = array();
-		} else {
-			$this->query_bind_array = $p_bind_array;
-		}
+	public function __construct( string $p_query_string = '', array $p_bind_array = [] ) {
+		$this->query_string = $p_query_string;
+		$this->query_bind_array = $p_bind_array;
 	}
 
 	/**
@@ -233,14 +227,17 @@ class DbQuery {
 
 	/**
 	 * Executes the query, performing all preprocess and binding steps.
-	 * A bind array can provided, which will be added to current bindings.
-	 * Limit and offset options can be provided, which will affect only to this execution.
-	 * @param array $p_bind_array	Array for binding values
-	 * @param integer $p_limit		Limit value
-	 * @param integer $p_offset		Offset value
+	 *
+	 * A bind array can be provided, which will be added to current bindings.
+	 * If specified, limit and offset options will affect this execution only.
+	 *
+	 * @param array $p_bind_array Array for binding values
+	 * @param int   $p_limit      Limit value
+	 * @param int   $p_offset     Offset value
+	 *
 	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed.
 	 */
-	public function execute( array $p_bind_array = null, $p_limit = null, $p_offset = null ) {
+	public function execute( array $p_bind_array = [], $p_limit = null, $p_offset = null ) {
 		# For backwards compatibility with legacy code still relying on DB API,
 		# we need to save the parameters count before binding otherwise it will
 		# be reset after query execution, which will cause issues on RDBMS with
@@ -248,7 +245,7 @@ class DbQuery {
 		db_param_push();
 
 		# bind values if provided
-		if( null !== $p_bind_array ) {
+		if( !empty( $p_bind_array ) ) {
 			$this->bind_values( $p_bind_array );
 		}
 
@@ -769,24 +766,22 @@ class DbQuery {
 	}
 
 	/**
-	 * Compatibility method to support execution of legacy query syntax through db_query(...)
-	 * @param string $p_query		Query string
-	 * @param array $p_arr_parms	Values array for parameters
-	 * @param integer $p_limit		Query limit
-	 * @param integer $p_offset		Query offset
-	 * @param boolean $p_pop_param  Set to false to leave the parameters on the stack
-	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed
+	 * Compatibility method to support execution of legacy query syntax through db_query().
+	 *
+	 * @param string $p_query     Query string
+	 * @param array  $p_params    Values array for parameters
+	 * @param int    $p_limit     Query limit
+	 * @param int    $p_offset    Query offset
+	 * @param bool   $p_pop_param Set to false to leave the parameters on the stack
+	 *
+	 * @return IteratorAggregate|false ADOdb result set or false if the query failed
 	 */
-	public static function compat_db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1, $p_pop_param = true ) {
+	public static function compat_db_query( string $p_query, array $p_params = [], int $p_limit = -1, int $p_offset = -1, bool $p_pop_param = true ) {
 		global $g_db_param;
-
-		if( !is_array( $p_arr_parms ) ) {
-			$p_arr_parms = array();
-		}
 
 		$t_query = new DbQuery();
 		$t_query->db_query_string = $p_query;
-		$t_query->db_param_array = $p_arr_parms;
+		$t_query->db_param_array = $p_params;
 
 		$t_query->process_sql_syntax();
 
@@ -798,7 +793,7 @@ class DbQuery {
 		# Restore ADOdb parameter count
 		$g_db_param->pop();
 
-		if( $p_pop_param && !empty( $p_arr_parms ) ) {
+		if( $p_pop_param && !empty( $p_params ) ) {
 			$g_db_param->pop();
 		}
 

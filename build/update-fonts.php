@@ -108,7 +108,7 @@ class FontDownload {
 	 *
 	 * @return array List of font ids.
 	 */
-	static public function getLocalFonts(): array
+	public static function getLocalFonts(): array
 	{
 		$t_fonts = [];
 		foreach( config_get('font_family_choices_local') as $t_font ) {

@@ -48,7 +48,7 @@ $t_mantisgraph->print_submenu();
 
 <?php
 			$t_metrics = create_cumulative_bydate( $t_filter );
-			if ( $t_metrics != null ) {
+			if ( $t_metrics ) {
 				graph_cumulative_bydate( $t_metrics, 2 /*wfactor*/ );
 			}
 ?>

@@ -57,6 +57,12 @@ if( ON == config_get_global( 'show_detailed_errors' ) ) {
 # For debugging purposes, uncomment this line to avoid truncated error messages
 # $t_config['settings']['addContentLengthHeader'] = false;
 
+# Disable E_DEPRECATED warnings for PHP 8.4
+# Necessary to catch errors in method signatures triggered before our custom
+# error handler is in place.
+if( version_compare( PHP_VERSION, '8.4', '>=' ) ) {
+	$t_old_error_reporting = error_reporting( error_reporting() & ~E_DEPRECATED );
+}
 
 if( version_compare( Slim\App::VERSION, '4.0', '<' )
 	&& version_compare( PHP_VERSION, '8.1', '>=' )
@@ -107,6 +113,12 @@ if( version_compare( Slim\App::VERSION, '4.0', '<' )
 				# Passing null to parameter of type ... is deprecated
 				case 'Slim/Http/Request.php':
 				case 'Slim/Http/Uri.php':
+
+				# Implicitly marking parameter ... as nullable is deprecated
+				case 'Slim/DeferredCallable.php':
+				case 'Slim/Router.php':
+				case 'Slim/RouteGroup.php':
+				case 'Slim/Http/Response.php':
 					return true;
 			}
 		}
@@ -183,6 +195,11 @@ try {
 
 	event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $g_app ) ) );
 
+	# Restore error reporting to its original state before executing the request
+	if( isset( $t_old_error_reporting ) ) {
+		error_reporting( $t_old_error_reporting );
+	}
+	
 	$g_app->run();
 }
 catch( Throwable $e ) {

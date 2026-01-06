@@ -23,10 +23,15 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
- * Get username, realname and email from for a given user id
+ * Get username, realname and email from for a given user id.
+ *
  * @param integer $p_user_id A valid user identifier.
+ *
  * @return array
+ * @throws ClientException
  */
 function mci_account_get_array_by_id( $p_user_id ) {
 	$t_result = array();
@@ -63,15 +68,23 @@ function mci_account_get_array_by_id( $p_user_id ) {
 			if( !empty( $t_email ) ) {
 				$t_result['email'] = $t_email;
 			}
+
+			$t_email_pending = token_get_value( TOKEN_ACCOUNT_CHANGE_EMAIL, $p_user_id );
+			if( $t_email_pending !== null ) {
+				$t_result['email_pending'] = $t_email_pending;
+			}
 		}
 	}
 	return $t_result;
 }
 
 /**
- * Get username, realname and email from for a set of given user ids
+ * Get username, realname and email from for a set of given user ids.
+ *
  * @param array $p_user_ids An array of user identifiers.
+ *
  * @return array
+ * @throws ClientException
  */
 function mci_account_get_array_by_ids ( array $p_user_ids ) {
 	$t_result = array();

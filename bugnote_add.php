@@ -35,6 +35,12 @@ require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 
+# If we're processing an AJAX call from Dropzone, prevent output of HTML
+# in the content if errors occur, we just want a plain-text error message.
+if( 'XMLHttpRequest' == ( $_SERVER['HTTP_X_REQUESTED_WITH'] ?? '' ) ) {
+	define( 'DISABLE_INLINE_ERROR_REPORTING', 'text' );
+}
+
 form_security_validate( 'bugnote_add' );
 
 $f_bug_id = gpc_get_int( 'bug_id' );
@@ -61,8 +67,18 @@ $t_data = array(
 );
 
 $t_command = new IssueNoteAddCommand( $t_data );
-$t_command->execute();
+$t_result = $t_command->execute();
 
 form_security_purge( 'bugnote_add' );
+
+# Check if note was sent for moderation
+if( isset( $t_result['moderated'] ) && $t_result['moderated'] ) {
+	# Show success page for moderation
+	layout_page_header();
+	layout_page_begin();
+	html_operation_successful( string_get_bug_view_url( $f_bug_id ), lang_get( 'submitted_for_moderation' ) );
+	layout_page_end();
+	exit;
+}
 
 print_header_redirect_view( $f_bug_id );
