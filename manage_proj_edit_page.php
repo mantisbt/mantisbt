@@ -1086,10 +1086,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	if( !$f_show_global_users ) {
 		print_form_button(
 			"manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true" . $t_show_obsolete_filter,
-			lang_get( 'show_global_users' ),null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
+			lang_get( 'show_global_users' ),[], OFF, 'btn btn-sm btn-primary btn-white btn-round' );
 	} else {
 		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id" . $t_show_obsolete_filter,
-			lang_get( 'hide_global_users' ),null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
+			lang_get( 'hide_global_users' ),[], OFF, 'btn btn-sm btn-primary btn-white btn-round' );
 	}
 	?>
 			</div>
