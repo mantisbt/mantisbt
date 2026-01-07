@@ -83,17 +83,21 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
 /**
- * Print the headers to cause the page to redirect to $p_url
- * If $p_die is true (default), terminate the execution of the script immediately
- * If we have handled any errors on this page return false and don't redirect.
- * $p_sanitize - true/false - true in the case where the URL is extracted from GET/POST or untrusted source.
- * This would be false if the URL is trusted (e.g. read from config_inc.php).
+ * Print the headers to cause the page to redirect to $p_url.
  *
- * @param string  $p_url      The page to redirect: has to be a relative path.
- * @param boolean $p_die      If true, stop the script after redirecting.
- * @param boolean $p_sanitize Apply string_sanitize_url to passed URL.
- * @param boolean $p_absolute Indicate if URL is absolute.
- * @return boolean
+ * If we have handled any errors on this page return false and don't redirect.
+ *
+ * @param string $p_url      The page to redirect to: has to be a relative path.
+ * @param bool $p_die        If true (default), terminate script execution
+ *                           immediately after redirecting.
+ * @param bool   $p_sanitize Apply string_sanitize_url to passed URL.
+ *                           Should be true when the URL is extracted from an
+ *                           untrusted source (e.g. GET/POST),
+ *                           false if coming from code or configuration
+ *                           (e.g. read from config_inc.php).
+ * @param bool   $p_absolute Indicate if URL is absolute.
+ *
+ * @return bool
  */
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
 	if( error_handled() ) {
