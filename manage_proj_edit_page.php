@@ -352,7 +352,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 ?>
 									<tr>
 										<td>
-											<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] . $t_show_obsolete_filter ?>">
+											<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>">
 												<?php echo string_display_line( $t_subproject['name'] ) ?>
 											</a>
 										</td>
@@ -378,7 +378,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 										<td class="center">
 <?php
 				print_link_button(
-					'manage_proj_edit_page.php?project_id=' . $t_subproject['id'] . $t_show_obsolete_filter,
+					'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
 					lang_get( 'edit' ),
 					'btn-xs'
 				);
@@ -575,35 +575,24 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			</button>
 		</fieldset>
 	</form>
-				</div>
-				<div class="pull-right">
-    <form id="manage-project-version-filter" method="post" action="manage_proj_edit_page.php#versions" class="form-inline">
-        <fieldset>
-			<label class="inline">
-				<input type="checkbox" class="ace" name="showobsolete" value="<?php echo ON ?>"
-					<?php check_checked( (int)$f_show_obsolete, ON ); ?> />
-				<span class="lbl padding-6"><?php echo lang_get( 'show_obsolete' ) ?></span>
-			</label>
-            <select name="release_type" class="input-sm" required>
-				<option value=2 selected>
-					<?php echo lang_get( 'show_all_versions' ) ?>
-				</option>
-				<option value=<?php echo (int)VERSION_FUTURE;
-									check_selected( $f_release_type, (int)VERSION_FUTURE ) ?> >
-					<?php echo lang_get( 'not_released' ) ?>
-				</option>
-				<option value=<?php echo (int)VERSION_RELEASED;
-									check_selected( $f_release_type, (int)VERSION_RELEASED ) ?> >
-					<?php echo lang_get( 'released' ) ?>
-				</option>
-            </select>
-			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
-		</fieldset>
-	</form>
-				</div>
+			</div>
+			<div class="pull-right">
+	<?php
+		# Show users with global access button
+		print_form_button(
+			'manage_proj_edit_page.php#versions',
+			lang_get( $f_show_obsolete ? 'hide_obsolete' : 'show_obsolete' ),
+			array(
+				'project_id' => $f_project_id,
+				'show_obsolete' => !$f_show_obsolete
+			),
+			OFF,
+			'btn btn-sm btn-primary btn-white btn-round'
+		);
+	?>
 			</div>
 		</div>
+        </div>
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 	<?php
