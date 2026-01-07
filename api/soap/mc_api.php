@@ -33,9 +33,11 @@
  * Webservice APIs
  *
  * @uses api_token_api.php
+ * @uses date_api.php
  */
 
 require_api( 'api_token_api.php' );
+require_api( 'date_api.php' );
 
 use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\LegacyApiFaultException;
