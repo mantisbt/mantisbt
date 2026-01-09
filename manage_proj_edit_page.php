@@ -76,7 +76,6 @@ auth_reauthenticate();
 $f_project_id = gpc_get_int( 'project_id' );
 $f_show_global_users = gpc_get_bool( 'show_global_users' );
 $f_show_obsolete = gpc_get_bool( 'showobsolete' );
-$f_release_type = gpc_get_int( 'release_type', 2 );
 
 project_ensure_exists( $f_project_id );
 $g_project_override = $f_project_id;
@@ -593,9 +592,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 	<?php
-	$t_versions = version_get_all_rows( $f_project_id,
-					( ( $f_release_type == 2) ? null : $f_release_type ),
-					$f_show_obsolete );
+	$t_versions = version_get_all_rows( $f_project_id, VERSION_ALL, $f_show_obsolete );
 	if( count( $t_versions ) > 0 ) { ?>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed">
