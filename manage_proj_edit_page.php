@@ -78,9 +78,6 @@ $f_show_global_users = gpc_get_bool( 'show_global_users' );
 $f_show_obsolete = gpc_get_bool( 'showobsolete' );
 $f_release_type = gpc_get_int( 'release_type', 2 );
 
-# true = show obsolete versions, anything else = hide them
-$t_show_obsolete_filter = '&showobsolete=' . $f_show_obsolete;
-
 project_ensure_exists( $f_project_id );
 $g_project_override = $f_project_id;
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
