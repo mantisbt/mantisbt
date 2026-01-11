@@ -56,7 +56,6 @@ define( 'DB_MIN_VERSION_PGSQL', '9.2' );     # Earliest supported version as of 
 define( 'DB_MIN_VERSION_ORACLE', '11.2' );
 
 # error types
-define( 'ERROR', E_USER_ERROR );
 define( 'WARNING', E_USER_WARNING );
 define( 'NOTICE', E_USER_NOTICE );
 define( 'DEPRECATED', E_USER_DEPRECATED );
@@ -655,6 +654,7 @@ define( 'FTP', 1 );                                 # DISK
 define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
 define( 'ERROR_USER_NOT_FOUND', 801 );
 define( 'ERROR_USER_REAL_MATCH_USER', 807 );
+define( 'ERROR', E_USER_ERROR );                    # Exceptions / E_USER_ERROR
 
 # JQuery
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'
