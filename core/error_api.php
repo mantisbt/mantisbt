@@ -757,13 +757,20 @@ function error_handled() {
 }
 
 /**
- * Set additional info parameters to be used when displaying the next error.
+ * Set parameters to be used when displaying the next error.
  *
- * This function takes a variable number of parameters.
+ * Some error messages accept placeholders to provide additional information
+ * about the error.
  *
- * When writing internationalized error strings, note that you can change the
- * order of parameters in the string.  See the PHP manual page for the
- * sprintf() function for more details.
+ * When writing internationalized error messages, parameters can be inserted in
+ * any order, through the use of numbered placeholders (e.g. `%1$s`) in the
+ * string; see
+ * {@link https://www.php.net/manual/en/function.sprintf.php PHP manual for sprintf()}.
+ *
+ * This function takes a variable number of parameters. You should be careful
+ * to provide the exact number of parameters expected by the error being thrown.
+ *
+ * @see $g_error_parameters
  *
  * @return void
  *
