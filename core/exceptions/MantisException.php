@@ -29,6 +29,11 @@ class MantisException extends Exception {
 	protected $params;
 
 	/**
+	 * @var string Localized error message with placeholders filled in.
+	 */
+	protected string $localized;
+
+	/**
 	 * Constructor
 	 *
 	 * @param string         $p_message  The internal non-localized error message.
@@ -40,6 +45,8 @@ class MantisException extends Exception {
 	function __construct( $p_message, $p_code, $p_params = array(), ?Throwable $p_previous = null ) {
 		parent::__construct( $p_message, $p_code, $p_previous );
 		$this->params = $p_params;
+
+		$this->localized = error_string( $p_code, $p_params );
 	}
 
 	/**
@@ -60,5 +67,13 @@ class MantisException extends Exception {
 	 */
 	public function getErrorType() {
 		return 'APPLICATION ERROR #' . $this->code;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getLocalizedMessage() {
+		return $this->localized;
 	}
 }
