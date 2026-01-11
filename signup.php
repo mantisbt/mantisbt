@@ -78,7 +78,7 @@ if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 &&
 	# captcha image requires GD library and related option to ON
 	$t_securimage = new Securimage();
 	if( $t_securimage->check( $f_captcha ) == false ) {
-		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
+		throw new ClientException( "XXXX", ERROR_SIGNUP_NOT_MATCHING_CAPTCHA );
 	}
 }
 

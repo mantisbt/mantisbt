@@ -144,7 +144,7 @@ switch( $f_type ) {
 		if( null === $t_setting_arr ) {
 			# couldn't get the filter, if we were trying to use the filter, clear it and reload
 			error_proceed_url( 'view_all_set.php?type=' . FILTER_ACTION_RESET );
-			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+			throw new ClientException( "XXXX", ERROR_FILTER_NOT_FOUND );
 			exit;
 		} else {
 			$t_setting_arr['_source_query_id'] = $f_source_query_id;

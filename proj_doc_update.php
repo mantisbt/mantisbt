@@ -71,7 +71,7 @@ access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_p
 
 if( is_blank( $f_title ) ) {
 	error_parameters( lang_get( 'title' ) );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "XXXX", ERROR_EMPTY_FIELD );
 }
 
 # @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files
@@ -99,7 +99,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 				file_delete_local( $t_disk_file_name );
 			}
 			if( !move_uploaded_file( $f_file['tmp_name'], $t_disk_file_name ) ) {
-				trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+				throw new ClientException( "XXXX", ERROR_FILE_MOVE_FAILED );
 			}
 			chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
@@ -110,7 +110,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 			break;
 		default:
 			# @todo Such errors should be checked in the admin checks
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new ClientException( "XXXX", ERROR_GENERIC );
 	}
 	$t_query = 'UPDATE {project_file}
 		SET title=' . db_param() . ', description=' . db_param() . ', date_added=' . db_param() . ',
@@ -125,7 +125,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 }
 
 if( !$t_result ) {
-	trigger_error( ERROR_GENERIC, ERROR );
+	throw new ClientException( "XXXX", ERROR_GENERIC );
 }
 
 form_security_purge( 'proj_doc_update' );

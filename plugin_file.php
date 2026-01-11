@@ -53,7 +53,7 @@ $t_regex = '/^'
 
 if( !preg_match( $t_regex, $f_file, $t_matches ) ) {
 	error_parameters( $f_file );
-	trigger_error( ERROR_PLUGIN_INVALID_FILE, ERROR );
+	throw new ClientException( "XXXX", ERROR_PLUGIN_INVALID_FILE );
 }
 
 $t_basename = $t_matches[1];

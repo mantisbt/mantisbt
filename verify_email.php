@@ -69,7 +69,7 @@ if( $t_token_confirm_hash === null
 	|| $t_token_change_email === null
 	|| $f_confirm_hash !== $t_token_confirm_hash
 ) {
-	trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
+	throw new ClientException( "XXXX", ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
 }
 
 # Login again as the user

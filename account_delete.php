@@ -46,6 +46,8 @@
  * @uses print_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'form_api.php' );

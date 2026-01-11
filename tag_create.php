@@ -53,7 +53,7 @@ if( !is_null( $f_tag_name ) ) {
 				break;
 			case -2:
 				error_parameters( $t_tag_row['name'] );
-				trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
+				throw new ClientException( "XXXX", ERROR_TAG_NAME_INVALID );
 		}
 	}
 }

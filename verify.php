@@ -56,7 +56,7 @@ require_css( 'login.css' );
 if( !auth_signup_enabled() &&
 	OFF == config_get( 'lost_password_feature' ) &&
 	OFF == config_get( 'send_reset_password' ) ) {
-	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
+	throw new ClientException( "XXXX", ERROR_LOST_PASSWORD_NOT_ENABLED );
 }
 
 $f_user_id = gpc_get_int( 'id' );
@@ -81,7 +81,7 @@ if( $t_token_confirm_hash == null
 	|| $f_confirm_hash !== $t_token_confirm_hash
 	|| $t_token_change_email !== null
 ) {
-	trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
+	throw new ClientException( "XXXX", ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
 }
 
 user_reset_failed_login_count_to_zero( $f_user_id );

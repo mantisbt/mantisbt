@@ -61,7 +61,7 @@ $f_user_id = gpc_get_int( 'id', auth_get_current_user_id() );
 $t_row = user_get_row( $f_user_id );
 if( !$t_row ) {
 	error_parameters( $f_user_id );
-	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+	throw new ClientException( "XXXX", ERROR_USER_BY_ID_NOT_FOUND );
 }
 
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );
