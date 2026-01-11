@@ -281,7 +281,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
  *               happen in this context.
  */
 function error_output( Throwable $p_error ) {
-	global $g_error_send_page_header, $g_error_handled, $g_error_parameters, $g_error_proceed_url;
+	global $g_error_send_page_header, $g_error_handled, $g_error_proceed_url;
 
 	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
 	$t_db_connected = function_exists( 'db_is_connected' ) && db_is_connected();
@@ -299,10 +299,13 @@ function error_output( Throwable $p_error ) {
 	$t_error_type = method_exists( $p_error, 'getErrorType' )
 		? $p_error->getErrorType()
 		: 'INTERNAL APPLICATION ERROR';
+	$t_localized_message = method_exists( $p_error, 'getLocalizedMessage' )
+		? $p_error->getLocalizedMessage()
+		: $p_error->getMessage();
 
 	if( php_sapi_name() == 'cli' ) {
 		if( DISPLAY_ERROR_NONE != $t_method ) {
-			echo $p_error->getErrorType() . ': ' . $p_error->getMessage() . "\n";
+			echo $p_error->getErrorType() . ": $t_localized_message\n";
 
 			if( $t_show_detailed_errors ) {
 				echo "\n";
@@ -313,7 +316,7 @@ function error_output( Throwable $p_error ) {
 			exit(1);
 		}
 	} else {
-		$t_error_description = nl2br( $p_error->getMessage() );
+		$t_error_description = nl2br( $t_localized_message );
 
 		switch( $t_method ) {
 			case DISPLAY_ERROR_HALT:
