@@ -41,6 +41,18 @@ require_api( 'database_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
+/**
+ * Stack containing parameters for error message.
+ *
+ * Populated by calling {@see error_parameters()}, prior to raising an error
+ * with trigger_error. Used in {@see error_string()} to insert parameters in
+ * error message's placeholders.
+ *
+ * Exceptions derived from {@see MantisException} class do not use this, as
+ * the parameters are provided as part of the constructor.
+ *
+ * @global array $g_error_parameters
+ */
 $g_error_parameters = array();
 
 /**
@@ -438,7 +450,6 @@ function error_output( Throwable $p_error ) {
 		}
 	}
 
-	$g_error_parameters = array();
 	$g_error_proceed_url = null;
 }
 
@@ -761,7 +772,7 @@ function error_handled() {
 function error_parameters() {
 	global $g_error_parameters;
 
-	$g_error_parameters = func_get_args();
+	$g_error_parameters = array_merge( func_get_args(), $g_error_parameters );
 }
 
 /**
