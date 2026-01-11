@@ -692,42 +692,57 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 /**
  * Return an error string (in the current language) for the given error.
  *
- * @param int $p_error Error string to localize.
- *
+ * @param int        $p_error  Id of error string to localize.
+ * @param array|null $p_params Error parameters. If null, will retrieve
+ *                             parameters from {@see $g_error_parameters}
  * @return string
  * @access public
  */
-function error_string( $p_error ) {
-	global $g_error_parameters;
-
+function error_string( $p_error, ?array $p_params = null ) {
+	# Retrieve localized error message
 	$t_lang = null;
 	while( true ) {
-		$t_err_msg = lang_get( 'MANTIS_ERROR', $t_lang );
-		if( array_key_exists( $p_error, $t_err_msg ) ) {
-			$t_error = $t_err_msg[$p_error];
+		$t_all_error_messages = lang_get( 'MANTIS_ERROR', $t_lang );
+		if( array_key_exists( $p_error, $t_all_error_messages ) ) {
+			$t_error_message = $t_all_error_messages[$p_error];
 			break;
 		} elseif( is_null( $t_lang ) ) {
-			# Error string not found, fall back to English
+			# Error string not found, fall back to English and try again
 			$t_lang = 'english';
 		} else {
 			# Error string not found
-			$t_error = lang_get( 'missing_error_string' );
+			$t_error_message = lang_get( 'missing_error_string' );
 			# Prepend the error number
-			array_unshift( $g_error_parameters, $p_error );
+			$p_params = [$p_error];
 			break;
 		}
 	}
 
 	# Special handling for generic error type
 	# Append detailed error information if a parameter has been provided.
-	if( $p_error == ERROR_GENERIC && $g_error_parameters ) {
-		$t_error .= PHP_EOL . error_string( ERROR_GENERIC_DETAILS );
-		$g_error_parameters = [];
+	if( $p_error == ERROR_GENERIC ) {
+		$t_error_message .= PHP_EOL . error_string( ERROR_GENERIC_DETAILS, $p_params );
+	}
+
+	# Get number of placeholders in error message
+	$t_count = preg_match_all( '/%(?:\d+\$)?[bcdeEfFgGhHosuxX]/', $t_error_message );
+	if( $t_count > 0 ) {
+		# No arameters were provided, pop them off the global stack
+		if( $p_params === null ) {
+			global $g_error_parameters;
+			$p_params = array_slice( $g_error_parameters, 0, $t_count );
+			array_splice( $g_error_parameters, 0, $t_count );
+		}
+
+		# Pad the parameter array to ensure we don't get errors from vsprintf
+		# in case the caller didn't provide enough for the error string.
+		$p_params = array_pad( $p_params, $t_count, '' );
+	} else {
+		$p_params = [];
 	}
 
 	# Prepare error parameters for display
-	$t_parameters = $g_error_parameters;
-	foreach( $t_parameters as &$t_value ) {
+	foreach( $p_params as &$t_value ) {
 		# Logic copied from string_html_specialchars(), to enable output of
 		# error messages even if core is not fully initialized.
 		# Modified to allow <br> tags
@@ -738,11 +753,7 @@ function error_string( $p_error ) {
 		);
 	}
 
-	# We pad the parameter array to make sure that we don't get errors in
-	# case the caller didn't provide enough for the error string.
-	$t_parameters = array_pad( $t_parameters, 10, '' );
-
-	return vsprintf( $t_error, $t_parameters );
+	return vsprintf( $t_error_message, $p_params );
 }
 
 /**
