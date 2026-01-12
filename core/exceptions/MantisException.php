@@ -23,15 +23,13 @@ use Throwable;
  * A base exception for all Mantis exceptions.
  */
 class MantisException extends Exception {
+
+	use LocalizedErrorMessageTrait;
+
 	/**
 	 * @var array array of parameters for localized exception message.
 	 */
 	protected $params;
-
-	/**
-	 * @var string Localized error message with placeholders filled in.
-	 */
-	protected string $localized;
 
 	/**
 	 * Constructor
@@ -45,8 +43,7 @@ class MantisException extends Exception {
 	function __construct( $p_message, $p_code, $p_params = array(), ?Throwable $p_previous = null ) {
 		parent::__construct( $p_message, $p_code, $p_previous );
 		$this->params = $p_params;
-
-		$this->localized = error_string( $p_code, $p_params );
+		$this->setLocalizedMessage( $p_code, $p_params );
 	}
 
 	/**
@@ -69,11 +66,4 @@ class MantisException extends Exception {
 		return 'APPLICATION ERROR #' . $this->code;
 	}
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function getLocalizedMessage() {
-		return $this->localized;
-	}
 }
