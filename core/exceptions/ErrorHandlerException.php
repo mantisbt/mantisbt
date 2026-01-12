@@ -17,6 +17,7 @@
 namespace Mantis\Exceptions;
 
 use ErrorException;
+use Throwable;
 
 /**
  * Custom Exception Type to handle PHP errors.
@@ -29,6 +30,25 @@ use ErrorException;
  */
 class ErrorHandlerException extends ErrorException
 {
+	use LocalizedErrorMessageTrait;
+
+	/**
+	 * Constructor.
+	 */
+	public function __construct( string     $p_message = '',
+								 int        $p_code = 0,
+								 int        $p_severity = E_ERROR,
+								 ?string    $p_filename = null,
+								 ?int       $p_line = null,
+								 ?Throwable $p_previous = null
+	) {
+		parent::__construct( $p_message, $p_code, $p_severity, $p_filename, $p_line );
+
+		# If it's a user error, localize the error message
+		if( $p_severity & ( E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_USER_DEPRECATED ) ) {
+			$this->setLocalizedMessage( $p_code, null );
+		}
+	}
 
 	/**
 	 * MantisBT Error type for display.
