@@ -40,6 +40,7 @@
  */
 
 use Mantis\classes\MissingHooksPlugin;
+use Mantis\Exceptions\ClientException;
 
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
@@ -483,13 +484,21 @@ function plugin_history_log( $p_bug_id, $p_field_name, $p_old_value, $p_new_valu
 /**
  * Trigger a plugin-specific error with the given name and type.
  *
- * @param string $p_error_name Error name.
- * @param int    $p_error_type Error type.
- * @param string $p_basename   The plugin basename (or current plugin if null).
+ *
+ *
+ * @param string     $p_error_name Error name.
+ * @param int        $p_error_type Error type.
+ * @param string     $p_basename   The plugin basename (or current plugin if null).
+ * @param array|null $p_param      Localized error parameters.
+ *                                 For BC, if null, will retrieve them from
+ *                                 {@see $g_error_parameters} {@see error_parameters()}.
  *
  * @return void
+ * @throws ClientException
+ *
+ * @since 2.29.0 E_USER_ERROR type will throw an exception, added $p_param.
  */
-function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null ) {
+function plugin_error( $p_error_name, $p_error_type = E_USER_ERROR, $p_basename = null, ?array $p_param = null ) {
 	if( is_null( $p_basename ) ) {
 		$t_basename = plugin_get_current();
 	} else {
@@ -497,8 +506,16 @@ function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null 
 	}
 
 	$t_error_code = "plugin_{$t_basename}_$p_error_name";
-
-	trigger_error( $t_error_code, $p_error_type );
+	if( $p_error_type == E_USER_ERROR ) {
+		global $g_error_parameters;
+		if( $p_param === null) {
+			$p_param = $g_error_parameters;
+		}
+		array_unshift( $p_param, $t_error_code );
+		throw new ClientException( $t_error_code, ERROR_PLUGIN_RUNTIME, $p_param );
+	} else {
+		trigger_error( $t_error_code, $p_error_type );
+	}
 }
 
 /**
