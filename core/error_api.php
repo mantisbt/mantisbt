@@ -217,47 +217,33 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 		}
 	}
 
-	# build an appropriate error string
-	$t_error_location = 'in \'' . $p_file .'\' line ' . $p_line;
-	$t_error_description = '\'' . $p_error . '\' ' . $t_error_location;
-
 	# Convert the error to an Exception to handle the output details
 	# and adapt it based on error type.
-	$t_exception = new ErrorHandlerException( $t_error_description, 0, $p_type, $p_file, $p_line );
 	switch( $p_type ) {
-		case E_WARNING:
-		case E_NOTICE:
-		case E_RECOVERABLE_ERROR:
-		case E_DEPRECATED:
-		case E_USER_NOTICE:
-			# No special handling for these error levels
-			break;
+		/** @noinspection PhpMissingBreakStatementInspection */
+		case E_USER_DEPRECATED:
+			# Get details about the error, to facilitate debugging with a more
+			# useful message including filename and line number.
+			error_delay_reporting();
+			# Fall through
 		case E_USER_ERROR:
 			# Calling trigger_error() for E_USER_ERROR is deprecated in PHP 8.4.
 			# This case only remains for backwards-compatibility, to catch any
 			# legacy trigger_error() call that has not been converted to throw
 			# Exceptions to be handled by error_exception_handler().
-			$t_exception->setCode( $p_error );
-			$t_exception->setMessage( error_string( $p_error ) );
-			break;
 		case E_USER_WARNING:
-			$t_exception->setCode( $p_error );
-			$t_exception->setMessage( error_string( $p_error ) . ' (' . $t_error_location . ')' );
+			$t_exception = new ErrorHandlerException( '', $p_error, $p_type, $p_file, $p_line );
 			break;
-		case E_USER_DEPRECATED:
-			# Get details about the error, to facilitate debugging with a more
-			# useful message including filename and line number.
-			$t_stack = error_stack_trace();
-			$t_caller = $t_stack[0];
-			$t_exception->setMessage( error_string( $p_error )
-				. ' (in ' . $t_caller['file']
-				. ' line ' . $t_caller['line'] . ')'
-			);
-			error_delay_reporting();
-			break;
+		case E_WARNING:
+		case E_NOTICE:
+		case E_RECOVERABLE_ERROR:
+		case E_DEPRECATED:
+		case E_USER_NOTICE:
 		default:
-			# shouldn't happen, just display the error just in case
-			$t_exception->setMessage( error_string( $p_error ) . ' (' . $t_error_location . ')' );
+			# No special handling for these error levels
+			# The default case should never happen - keep it around just in case
+			$t_exception = new ErrorHandlerException( $p_error, 0, $p_type, $p_file, $p_line );
+			break;
 	}
 
 	error_output( $t_exception );
@@ -317,6 +303,14 @@ function error_output( Throwable $p_error ) {
 		}
 	} else {
 		$t_error_description = nl2br( $t_localized_message );
+
+		# Append error location (file & line number) to the message when the
+		# error is displayed inline or when not showing detailed errors.
+		if( ( !$t_show_detailed_errors || $t_method == DISPLAY_ERROR_INLINE )
+			&& $p_error instanceof ErrorException
+		) {
+			$t_error_description .= " in '" . $p_error->getFile() ."' line " . $p_error->getLine();
+		}
 
 		switch( $t_method ) {
 			case DISPLAY_ERROR_HALT:
