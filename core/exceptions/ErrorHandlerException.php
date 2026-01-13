@@ -90,26 +90,4 @@ class ErrorHandlerException extends ErrorException
 		}
 	}
 
-	/**
-	 * Set the Exception's Error code.
-	 *
-	 * @param int $p_code
-	 *
-	 * @return void
-	 */
-	public function setCode( int $p_code ) {
-		$this->code = $p_code;
-	}
-
-	/**
-	 * Set the Exception's message.
-	 *
-	 * @param string $p_message
-	 *
-	 * @return void
-	 */
-	public function setMessage( string $p_message ) {
-		$this->message = $p_message;
-	}
-
 }
