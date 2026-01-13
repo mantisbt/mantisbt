@@ -36,6 +36,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -78,7 +80,7 @@ if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 &&
 	# captcha image requires GD library and related option to ON
 	$t_securimage = new Securimage();
 	if( $t_securimage->check( $f_captcha ) == false ) {
-		throw new ClientException( "XXXX", ERROR_SIGNUP_NOT_MATCHING_CAPTCHA );
+		throw new ClientException( "YYYY", ERROR_SIGNUP_NOT_MATCHING_CAPTCHA );
 	}
 }
 

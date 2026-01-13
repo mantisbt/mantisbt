@@ -37,6 +37,8 @@
 # don't auto-login when trying to verify new user
 $g_login_anonymous = false;
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -69,7 +71,7 @@ if( $t_token_confirm_hash === null
 	|| $t_token_change_email === null
 	|| $f_confirm_hash !== $t_token_confirm_hash
 ) {
-	throw new ClientException( "XXXX", ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
+	throw new ClientException( "YYYY", ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
 }
 
 # Login again as the user

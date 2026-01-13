@@ -37,6 +37,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
@@ -71,7 +73,7 @@ access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_p
 
 if( is_blank( $f_title ) ) {
 	error_parameters( lang_get( 'title' ) );
-	throw new ClientException( "XXXX", ERROR_EMPTY_FIELD );
+	throw new ClientException( "YYYY", ERROR_EMPTY_FIELD );
 }
 
 # @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files
@@ -99,7 +101,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 				file_delete_local( $t_disk_file_name );
 			}
 			if( !move_uploaded_file( $f_file['tmp_name'], $t_disk_file_name ) ) {
-				throw new ClientException( "XXXX", ERROR_FILE_MOVE_FAILED );
+				throw new ClientException( "YYYY", ERROR_FILE_MOVE_FAILED );
 			}
 			chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
@@ -110,7 +112,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 			break;
 		default:
 			# @todo Such errors should be checked in the admin checks
-			throw new ClientException( "XXXX", ERROR_GENERIC );
+			throw new ClientException( "YYYY", ERROR_GENERIC );
 	}
 	$t_query = 'UPDATE {project_file}
 		SET title=' . db_param() . ', description=' . db_param() . ', date_added=' . db_param() . ',
@@ -125,7 +127,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 }
 
 if( !$t_result ) {
-	throw new ClientException( "XXXX", ERROR_GENERIC );
+	throw new ClientException( "YYYY", ERROR_GENERIC );
 }
 
 form_security_purge( 'proj_doc_update' );
