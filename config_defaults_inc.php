@@ -4182,6 +4182,13 @@ $g_eta_enum_string = '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60
 $g_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 /**
+ * Due date filter enumeration.
+ *
+ * @global $g_due_date_filter_enum_string
+ */
+$g_due_date_filter_enum_string = '10:range,20:overdue,30:today,40:next week,50:next month';
+
+/**
  * Custom Field types enumeration.
  *
  * @global string $g_custom_field_type_enum_string
