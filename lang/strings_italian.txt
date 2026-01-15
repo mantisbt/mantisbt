@@ -44,6 +44,7 @@
  * @author Alexmar983
  * @author Beta16
  * @author Darth Kule
+ * @author Dream Indigo
  * @author Dregad
  * @author Einreiher
  * @author Filippo
@@ -236,7 +237,7 @@ $s_new_account_do_not_reply = 'NON RISPONDERE A QUESTO MESSAGGIO';
 $s_new_account_email = 'Email:';
 $s_new_account_IP = 'Indirizzo IP:';
 $s_new_account_signup_msg = 'È stato creato il seguente account:';
-$s_reset_request_msg = 'Qualcuno (probabilmente te) ha richiesto di cambiare la password di accesso attraverso una procedura di verifica via email.  Se non sei stato tu a richiederlo, ignora semplicemente questo messaggio.
+$s_reset_request_msg = 'Qualcuno (probabilmente te) ha richiesto di cambiare la password di accesso attraverso una procedura di verifica via email. Se non lo hai richiesto tu, ignora semplicemente questo messaggio.
 
 Se invece hai effettivamente richiesto tu la modifica, visita l\'indirizzo di seguito riportato e potrai cambiare la tua password:';
 $s_reset_request_in_progress_msg = 'Se hai fornito il corretto nome utente e indirizzo email del tuo account, ti verrà inviata una email all\'indirizzo del tuo account con un codice di convalida.  Quando riceverai l\'email, segui le istruzioni in essa riportate.';
@@ -508,7 +509,7 @@ $s_error_database_version_out_of_date_2 = '<strong>Attenzione:</strong> La strut
 $s_error_code_version_out_of_date = ' <strong>Attenzione:</strong> la struttura del database è più recente del programma installato. Per favore, aggiorna la versione del programma.';
 $s_login_page_info = 'Benvenuti nel software di gestione anomalie e progetti.';
 $s_login_title = 'Accedi';
-$s_save_login = 'Mantienimi collegato';
+$s_save_login = 'Mantienimi collegata/o';
 $s_secure_session = 'Sessione sicura';
 $s_secure_session_long = 'Consenti l\'uso della sessione solo da questo indirizzo IP.';
 $s_choose_project = 'Seleziona progetto';
