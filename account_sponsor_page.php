@@ -55,7 +55,12 @@
  * @uses sponsorship_api.php
  * @uses string_api.php
  * @uses version_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -79,7 +84,7 @@ require_api( 'version_api.php' );
 require_css( 'status_config.php' );
 
 if( !config_get( 'enable_sponsorship' ) ) {
-	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
+	throw new ClientException( "Sponsorship disabled", ERROR_SPONSORSHIP_NOT_ENABLED );
 }
 
 # anonymous users are not allowed to sponsor issues

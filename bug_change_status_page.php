@@ -40,7 +40,12 @@
  * @uses relationship_api.php
  * @uses sponsorship_api.php
  * @uses version_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -108,16 +113,16 @@ if( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 	$t_bug_sponsored = config_get( 'enable_sponsorship' )
 		&& sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
 	if( $t_bug_sponsored && !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
-		trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
+		throw new ClientException( "Access denied", ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW );
 	}
 
 	if( $f_handler_id != NO_USER ) {
 		# The new handler is checked at project level
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
-			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
+			throw new ClientException( "Access denied", ERROR_HANDLER_ACCESS_TOO_LOW );
 		}
 		if( $t_bug_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
-			trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
+			throw new ClientException( "Access denied", ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
 		}
 	}
 }
@@ -155,9 +160,11 @@ layout_page_begin();
 		<thead>
 			<?php
 				if( $f_new_status >= $t_resolved ) {
-					if( relationship_can_resolve_bug( $f_bug_id ) == false ) {
+					if( !relationship_can_resolve_bug( $f_bug_id ) ) {
 						if( OFF == config_get( 'allow_parent_of_unresolved_to_close' ) ) {
-							trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
+							throw new ClientException( "Unresolved dependant issues",
+									ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING
+							);
 						}
 						echo '<tr><td colspan="2">' . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . '</td></tr>';
 					}
@@ -174,7 +181,7 @@ layout_page_begin();
 <!-- Resolution -->
 			<tr>
 				<th class="category">
-					<?php echo lang_get( 'resolution' ) ?>
+					<label for="resolution"><?php echo lang_get( 'resolution' ) ?></label>
 				</th>
 				<td>
 					<select name="resolution" class="input-sm">

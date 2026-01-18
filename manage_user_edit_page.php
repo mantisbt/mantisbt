@@ -38,8 +38,11 @@
  * @uses user_api.php
  * @uses utility_api.php
  *
+ * Unhandled exceptions will be caught by the default error handler
  * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -74,8 +77,7 @@ if( is_blank( $f_username ) ) {
 			# If we can't find the user by email, attempt to find by realname.
 			$t_user_id = user_get_id_by_realname( $f_username );
 			if( $t_user_id === false ) {
-				error_parameters( $f_username );
-				trigger_error( ERROR_USER_BY_NAME_NOT_FOUND, ERROR );
+				throw new ClientException( "User not found", ERROR_USER_BY_NAME_NOT_FOUND, [$f_username] );
 			}
 		}
 	}
@@ -83,8 +85,7 @@ if( is_blank( $f_username ) ) {
 
 $t_user = user_get_row( $t_user_id );
 if( !$t_user ) {
-	error_parameters( $t_user_id );
-	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR);
+	throw new ClientException( "User not found", ERROR_USER_BY_ID_NOT_FOUND, [$t_user_id] );
 }
 
 # Ensure that the account to be updated is of equal or lower access to the

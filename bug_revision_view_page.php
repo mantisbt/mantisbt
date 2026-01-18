@@ -38,6 +38,7 @@
  * @uses string_api.php
  * @uses user_api.php
  *
+ * Unhandled exceptions will be caught by the default error handler
  * @noinspection PhpUnhandledExceptionInspection
  */
 
@@ -84,7 +85,7 @@ if( $f_bug_id ) {
 	$t_bug_revisions = bug_revision_like( $f_rev_id );
 
 	if( count( $t_bug_revisions ) < 1 ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new ClientException( "No bug revisions", ERROR_GENERIC );
 	}
 
 	$t_rev = $t_bug_revisions[$f_rev_id];
@@ -94,8 +95,7 @@ if( $f_bug_id ) {
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
 } else {
-	trigger_error( ERROR_GENERIC, ERROR );
-	exit;
+	throw new ClientException( "No identifier provided", ERROR_GENERIC );
 }
 
 # Make sure user is allowed to view revisions
