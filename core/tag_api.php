@@ -240,11 +240,15 @@ function tag_is_unique( $p_name ) {
  * @param string $p_name The tag name to check.
  *
  * @return void
+ * @throws ClientException
  */
 function tag_ensure_unique( $p_name ) {
 	if( !tag_is_unique( $p_name ) ) {
-		error_parameters( $p_name );
-		trigger_error( ERROR_TAG_DUPLICATE, ERROR );
+		throw new ClientException(
+			"Tag '$p_name' already exists",
+			ERROR_TAG_DUPLICATE,
+			[ $p_name ]
+		);
 	}
 }
 
@@ -276,12 +280,16 @@ function tag_name_is_valid( $p_name, array &$p_matches, $p_prefix = '' ) {
  * @param string $p_name The tag name to check.
  *
  * @return void
+ * @throws ClientException
  */
 function tag_ensure_name_is_valid( $p_name ) {
 	$t_matches = array();
 	if( !tag_name_is_valid( $p_name, $t_matches ) ) {
-		error_parameters( $p_name );
-		trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
+		throw new ClientException(
+			"Tag name '$p_name' is invalid",
+			ERROR_TAG_NAME_INVALID,
+			[ $p_name ]
+		);
 	}
 }
 
@@ -705,7 +713,10 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 
 	# Do not allow assigning a tag to a user who is not allowed to create one
 	if( !access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id ) ) {
-		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+		throw new ClientException(
+			"Access denied",
+			ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS
+		);
 	}
 
 	$t_rename = false;
@@ -833,6 +844,7 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
  * @param int $p_bug_id The bug ID to check.
  *
  * @return array Tag attachment row
+ * @throws ClientException
  */
 function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 	global $g_cache_bug_tags;
@@ -844,7 +856,10 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 
 	$t_bug_tags = $g_cache_bug_tags[$c_bug_id] ?? [];
 	if( !$t_bug_tags || !isset( $t_bug_tags[$p_tag_id] ) ) {
-		trigger_error( ERROR_TAG_NOT_ATTACHED, ERROR );
+		throw new ClientException(
+			"Tag $p_tag_id not attached to Issue $p_bug_id",
+			ERROR_TAG_NOT_ATTACHED
+		);
 	}
 	return $t_bug_tags[$p_tag_id];
 }
@@ -918,7 +933,10 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	tag_ensure_exists( $p_tag_id );
 
 	if( tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-		trigger_error( ERROR_TAG_ALREADY_ATTACHED, ERROR );
+		throw new ClientException(
+			"Tag $p_tag_id already attached to Issue $p_bug_id",
+			ERROR_TAG_ALREADY_ATTACHED
+		);
 	}
 
 	if( null == $p_user_id ) {
@@ -964,7 +982,10 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	}
 
 	if( !tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-		trigger_error( ERROR_TAG_NOT_ATTACHED, ERROR );
+		throw new ClientException(
+			"Tag $p_tag_id not attached to Issue $p_bug_id",
+			ERROR_TAG_NOT_ATTACHED
+		);
 	}
 
 	$t_tag_row = tag_bug_get_row( $p_tag_id, $p_bug_id );

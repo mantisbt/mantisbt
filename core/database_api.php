@@ -31,6 +31,8 @@
  * @uses adodb/adodb.inc.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
@@ -129,6 +131,7 @@ $g_db_param = new MantisDbParam();
  * @param string  $p_database_name Database name.
  * @param boolean $p_pconnect      Use a Persistent connection to database.
  * @return boolean indicating if the connection was successful
+ * @throws ClientException
  */
 function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_pconnect = false ) {
 	global $g_db_connected, $g_db, $g_db_functional_type;
@@ -136,13 +139,23 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 	$g_db_functional_type = db_get_type( $t_db_type );
 
 	if( $g_db_functional_type == DB_TYPE_UNDEFINED ) {
-		error_parameters( 0, 'Database type is not supported by MantisBT, check $g_db_type in config_inc.php' );
-		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+		throw new ClientException( "Unsupported DB type",
+			ERROR_DB_CONNECT_FAILED,
+			[
+				0,
+				'Database type is not supported by MantisBT, check $g_db_type in config_inc.php'
+			]
+		);
 	}
 
 	if( !db_check_database_support( $t_db_type ) ) {
-		error_parameters( 0, 'PHP Support for database is not enabled' );
-		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+		throw new ClientException( "PHP module for DB missing",
+			ERROR_DB_CONNECT_FAILED,
+			[
+				0,
+				'PHP Support for database is not enabled'
+			]
+		);
 	}
 
 	if( empty( $p_dsn ) ) {
@@ -166,9 +179,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 			db_query( 'SET NAMES UTF8' );
 		}
 	} else {
-		db_error();
-		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
-		return false;
+		throw new ClientException( "DB Query failed", ERROR_DB_CONNECT_FAILED, db_error_as_array() );
 	}
 
 	$g_db_connected = true;
@@ -279,12 +290,15 @@ function db_is_oracle() {
  * Triggers an error if the identifier is too long
  * @param string $p_identifier Identifier to check.
  * @return void
+ * @throws ClientException If the identifier is too long.
  */
 function db_check_identifier_size( $p_identifier ) {
 	# Oracle does not support long object names (30 chars max)
 	if( db_is_oracle() && 30 < strlen( $p_identifier ) ) {
-		error_parameters( $p_identifier );
-		trigger_error( ERROR_DB_IDENTIFIER_TOO_LONG, ERROR );
+		throw new ClientException( "DB identifier too long",
+			ERROR_DB_IDENTIFIER_TOO_LONG,
+			[ $p_identifier ]
+		);
 	}
 }
 
@@ -822,6 +836,7 @@ function db_time_queries() {
  *                       using the legacy style 'mantis_XXX_table'; in the
  *                       latter case, a deprecation warning will be issued.
  * @return string containing full database table name (with prefix and suffix)
+ * @throws ClientException
  */
 function db_get_table( $p_name ) {
 	if( preg_match( '/^mantis_(.*)_table$/', $p_name, $t_matches ) ) {
@@ -875,6 +890,7 @@ function db_get_table_list() {
  * @param string $p_where  Where clause to identify which record to update
  *                         if null, defaults to the last record inserted in $p_table.
  * @return boolean
+ * @throws ClientException
  */
 function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 	global $g_db, $g_db_log_queries, $g_queries_array;
@@ -917,9 +933,10 @@ function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 	}
 
 	if( !$t_result ) {
-		db_error();
-		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
-		return false;
+		throw new ClientException( "Failed to update BLOM",
+			ERROR_DB_QUERY_FAILED,
+			db_error_as_array()
+		);
 	}
 
 	return $t_result;

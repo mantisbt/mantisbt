@@ -28,6 +28,8 @@
  * @uses database_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 
@@ -47,10 +49,14 @@ $g_cache_project_inheritance = null;
  * @param integer $p_parent_id      Parent project identifier.
  * @param boolean $p_inherit_parent Whether or not the child project inherits from the parent project.
  * @return void
+ * @throws ClientException
  */
 function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = true ) {
 	if( in_array( $p_parent_id, project_hierarchy_get_all_subprojects( $p_child_id ) ) ) {
-		trigger_error( ERROR_PROJECT_RECURSIVE_HIERARCHY, ERROR );
+		throw new ClientException(
+			"Recursive project hierarchy is not supported",
+			ERROR_PROJECT_RECURSIVE_HIERARCHY
+		);
 	}
 
 	db_param_push();

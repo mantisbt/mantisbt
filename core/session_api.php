@@ -37,6 +37,8 @@
  * @noinspection PhpUnused
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
@@ -160,7 +162,7 @@ class MantisPHPSession extends MantisSession {
 	 * @param mixed  $p_default The value to set.
 	 *
 	 * @return string
-	 * @noinspection PhpInconsistentReturnPointsInspection
+	 * @throws ClientException
 	 */
 	function get( $p_name, $p_default = null ) {
 		if( isset( $_SESSION[$this->key][$p_name] ) ) {
@@ -171,8 +173,11 @@ class MantisPHPSession extends MantisSession {
 			return $p_default;
 		}
 
-		error_parameters( $p_name );
-		trigger_error( ERROR_SESSION_VAR_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Session variable '$p_name' not found",
+			ERROR_SESSION_VAR_NOT_FOUND,
+			[ $p_name ]
+		);
 	}
 
 	/**

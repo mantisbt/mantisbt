@@ -28,6 +28,8 @@
  * @uses error_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
@@ -40,11 +42,12 @@ require_api( 'error_api.php' );
  * invalid configuration impacting the security of the MantisBT installation.
  *
  * @return void
+ * @throws ClientException
  */
 function crypto_init() {
 	if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 		if( strlen( config_get_global( 'crypto_master_salt' ) ) < 16 ) {
-			trigger_error( ERROR_CRYPTO_MASTER_SALT_INVALID, ERROR );
+			throw new ClientException( "Invalid Master Salt", ERROR_CRYPTO_MASTER_SALT_INVALID );
 		}
 	}
 }

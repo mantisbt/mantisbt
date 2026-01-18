@@ -35,6 +35,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -55,16 +57,21 @@ require_api( 'utility_api.php' );
  * @param string  $p_headline     News Headline.
  * @param string  $p_body         News Body.
  * @return integer news article id
+ * @throws ClientException
  */
 function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
 	if( is_blank( $p_headline ) ) {
-		error_parameters( lang_get( 'headline' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "News headline cannot be empty",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'headline' ) ]
+		);
 	}
 
 	if( is_blank( $p_body ) ) {
-		error_parameters( lang_get( 'body' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "News body cannot be empty",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'body' ) ]
+		);
 	}
 
 	db_param_push();
@@ -122,16 +129,21 @@ function news_delete_all( $p_project_id ) {
  * @param string  $p_headline     News headline.
  * @param string  $p_body         News body.
  * @return void
+ * @throws ClientException
  */
 function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
 	if( is_blank( $p_headline ) ) {
-		error_parameters( lang_get( 'headline' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "News headline cannot be empty",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'headline' ) ]
+		);
 	}
 
 	if( is_blank( $p_body ) ) {
-		error_parameters( lang_get( 'body' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "News body cannot be empty",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'body' ) ]
+		);
 	}
 
 	# Update entry
@@ -161,7 +173,10 @@ function news_get_row( $p_news_id ) {
 	$t_row = db_fetch_array( $t_result );
 
 	if( !$t_row ) {
-		trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"News item '$p_news_id' not found",
+			ERROR_NEWS_NOT_FOUND
+		);
 	} else {
 		return $t_row;
 	}

@@ -33,6 +33,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -317,6 +319,7 @@ $g_cache_current_user_pref = array();
  * @param integer $p_project_id     A valid project identifier.
  * @param boolean $p_trigger_errors Whether to trigger error on failure.
  * @return boolean|array
+ * @throws ClientException
  */
 function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigger_errors = true ) {
 	global $g_cache_user_pref;
@@ -327,7 +330,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 
 	$t_row = $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id];
 	if( false === $t_row && $p_trigger_errors ) {
-		trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
+		throw new ClientException( "Preferences not found for user $p_user_id", ERROR_USER_PREFS_NOT_FOUND );
 	}
 	return $t_row;
 }

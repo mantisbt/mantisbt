@@ -190,6 +190,7 @@ function summary_helper_get_bugratio( $p_bugs_open, $p_bugs_resolved, $p_bugs_cl
  * @param array  $p_filter Filter array to limit the visibility.
  *
  * @return void
+ * @throws Exception
  */
 function summary_print_by_enum( $p_enum, array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -239,8 +240,8 @@ function summary_print_by_enum( $p_enum, array $p_filter = [] ) {
 			$t_filter_property = FILTER_PROPERTY_PRIORITY;
 			break;
 		default:
-			# Unknown Enum type
-			trigger_error( ERROR_GENERIC, ERROR );
+			$t_message = "Unknown Enum type '$p_enum'";
+			throw new Exception( $t_message, ERROR_GENERIC, [$t_message] );
 	}
 
 	foreach( $t_cache as $t_enum => $t_item) {
