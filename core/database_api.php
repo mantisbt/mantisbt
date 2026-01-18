@@ -610,17 +610,34 @@ function db_error_msg() {
 }
 
 /**
- * send both the error number and error message and query (optional) as parameters for a triggered error
+ * Returns an array with error number, message and query if provided.
+ *
+ * Used when throwing an Exception, to provide the necessary parameters to the
+ * constructor. Replaces {@see db_error()}.
+ *
  * @param string $p_query Query that generated the error.
+ *
+ * @return array
+ */
+function db_error_as_array( $p_query = null ) {
+	$t_array = [ db_error_num(), db_error_msg() ];
+	if( null !== $p_query ) {
+		$t_array[] = $p_query;
+	}
+	return $t_array;
+}
+
+/**
+ * Adds error number, message and query if provided to the error parameter stack.
+ *
+ * @param string $p_query Query that generated the error.
+ *
  * @return void
- * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
+ *
+ * @deprecated 2.29.0 Throw a MantisException and use {@see db_error_array()} instead.
  */
 function db_error( $p_query = null ) {
-	if( null !== $p_query ) {
-		error_parameters( db_error_num(), db_error_msg(), $p_query );
-	} else {
-		error_parameters( db_error_num(), db_error_msg() );
-	}
+	call_user_func_array( 'error_parameters', db_error_as_array( $p_query ) );
 }
 
 /**
