@@ -27,6 +27,7 @@
 
 use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\ServiceException;
+use Mantis\Exceptions\StateException;
 
 /**
  * Read a local file and return its content.
@@ -186,6 +187,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
  * @return string|SoapFault the string contents, or a soap fault
  *
  * @throws ClientException
+ * @throws StateException
  */
 function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	# we handle the case where the file is attached to a bug
@@ -255,6 +257,6 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 		case DATABASE:
 			return $t_content;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new StateException( "Unknown file upload method", ERROR_GENERIC );
 	}
 }
