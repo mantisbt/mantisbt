@@ -750,6 +750,12 @@ function error_string( $p_error, ?array $p_params = null ) {
 		);
 	}
 
+	# Special handling for generic error type
+	# Do not display details if none provided
+	if( $p_error == ERROR_GENERIC_DETAILS && !$p_params[0] ) {
+		return '';
+	}
+
 	return vsprintf( $t_error_message, $p_params );
 }
 
