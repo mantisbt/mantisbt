@@ -28,6 +28,8 @@
  * @noinspection PhpUnitAnnotationToAttributeInspection
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
@@ -298,9 +300,11 @@ class DbQuery {
 		$this->log_query();
 
 		if( !$this->db_result ) {
-			db_error( $this->db_query_string );
-			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 			$this->db_result = false;
+			throw new ClientException( "DB Query failed",
+				ERROR_DB_QUERY_FAILED,
+				db_error_as_array( $this->db_query_string )
+			);
 		}
 		$this->current_row = null;
 		return $this->db_result;
