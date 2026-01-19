@@ -70,6 +70,7 @@
  * @author Ole Yves
  * @author Pacha Tchernof
  * @author Pavel200071
+ * @author Raspopov
  * @author Redredsonia
  * @author Sabbah
  * @author SaldırganSincap
@@ -591,7 +592,7 @@ $s_manage_threshold_config = 'Ограничения процесса';
 $s_manage_email_config = 'Почтовые уведомления';
 $s_manage_workflow_config = 'Переходы состояний процесса';
 $s_manage_workflow_graph = 'Граф рабочего процесса';
-$s_manage_tags_link = 'Теги';
+$s_manage_tags_link = 'Метки';
 $s_create_new_account_link = 'Создать учётную запись';
 $s_projects_link = 'Проекты';
 $s_documentation_link = 'Документация';
@@ -805,7 +806,7 @@ $s_view_bugs_link = 'Список задач';
 $s_report_bug_link = 'Создать задачу';
 $s_changelog_link = 'Журнал';
 $s_roadmap_link = 'План';
-$s_summary_link = 'Тема';
+$s_summary_link = 'Сводка';
 $s_account_link = 'Мой аккаунт';
 $s_users_link = 'Пользователи';
 $s_manage_link = 'Управление';
@@ -886,6 +887,7 @@ $s_assign_to = 'Назначить';
 $s_additional_information = 'Дополнительные сведения';
 $s_submit_report_button = 'Создать задачу';
 $s_check_report_more_bugs = 'отметьте, если собираетесь вводить несколько задач';
+$s_submitted_for_moderation = 'Ваше действие было отправлено на модерацию и появится после утверждения.';
 $s_report_stay = 'Продолжить создание задач';
 $s_selected_project = 'Выбранный проект';
 $s_valid_project_msg = 'Нужно выбрать допустимый проект.';
@@ -905,7 +907,7 @@ $s_site_settings_title = 'Настройки сервера';
 $s_system_info_link = 'Сведения о системе';
 $s_site_settings_link = 'Настройки сервера';
 $s_site_settings_updated_msg = 'Настройки сервера успешно изменены';
-$s_summary_title = 'Тема';
+$s_summary_title = 'Сводка';
 $s_summary_advanced_link = 'Графики';
 $s_by_project = 'По проекту';
 $s_by_status = 'По состоянию';
@@ -1178,10 +1180,10 @@ $s_email_on_sponsorship_changed = 'Извещать при изменении о
 $s_email_on_relationship_changed = 'Извещать при изменении связей';
 $s_email_on_updated = 'Сообщить об обновлении';
 $s_email_on_monitor = 'Электронная почта, когда участник начинает мониторинг';
-$s_view_tags = 'Просмотр тегов, прикрепленных к багу';
-$s_attach_tags = 'Прикрепите теги к багу';
-$s_detach_tags = 'Отключить теги от бага';
-$s_detach_own_tags = 'Отключить теги, прикрепленные одним и тем же участникам';
+$s_view_tags = 'Просмотр меток, прикреплённых к багу';
+$s_attach_tags = 'Прикрепить метки к багу';
+$s_detach_tags = 'Открепить метки от бага';
+$s_detach_own_tags = 'Открепить метки, прикреплённые тем же участником';
 $s_create_new_tags = 'Создать новые метки';
 $s_edit_tags = 'Редактировать имена и описания меток';
 $s_edit_own_tags = 'Редактировать метки, созданные тем же пользователем';
@@ -1201,15 +1203,15 @@ $s_tag_id = 'ID метки';
 $s_tag_name = 'Название';
 $s_tag_statistics = 'Статистика использования';
 $s_tag_update = 'Обновить метку: %1$s';
-$s_tag_update_return = 'Назад';
+$s_tag_update_return = 'Вернуться к метке';
 $s_tag_update_button = 'Изменить метку';
 $s_tag_delete_button = 'Удалить метку';
 $s_tag_delete_message = 'Вы уверены, что хотите удалить метку "%1$s"?';
 $s_tag_existing = '<Метки>';
-$s_tag_none_attached = 'Нет связанных меток.';
+$s_tag_none_attached = 'Нет прикреплённых меток.';
 $s_tag_attach = 'Добавить';
-$s_tag_attach_long = 'Добавить метки';
-$s_tag_attach_failed = 'Невозможно добавить метку.';
+$s_tag_attach_long = 'Прикрепить метки';
+$s_tag_attach_failed = 'Невозможно прикрепить метку.';
 $s_tag_detach = 'Убрать \'%1$s\'';
 $s_tag_separate_by = '(разделять \'%1$s\')';
 $s_tag_invalid_name = 'Недопустимое имя метки.';
