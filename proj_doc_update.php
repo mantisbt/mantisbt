@@ -129,10 +129,6 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 	$t_result = db_query( $t_query, array( $f_title, $f_description, $f_file_id ) );
 }
 
-if( !$t_result ) {
-	trigger_error( ERROR_GENERIC, ERROR );
-}
-
 form_security_purge( 'proj_doc_update' );
 
 print_header_redirect( 'proj_doc_page.php' );
