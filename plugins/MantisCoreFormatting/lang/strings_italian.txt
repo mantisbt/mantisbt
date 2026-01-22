@@ -39,6 +39,7 @@
  * @file
  *
  * @author Beta16
+ * @author Ciampix
  * @author Massimo itaca
  * @author Nemo bis
  */
@@ -55,3 +56,15 @@ $s_plugin_format_process_markdown = 'Elaborazione Markdown';
 $s_plugin_format_process_markdown_info = 'Applicando stili con il supporto Markdown, la sintassi di formattazione del testo è disegnata in modo che possa essere convertita in HTML.';
 $s_plugin_format_enabled = 'Attivo';
 $s_plugin_format_disabled = 'Disattivato';
+$s_plugin_format_syntax_highlighting = 'Evidenziazione della sintassi per i blocchi di codice';
+$s_plugin_format_syntax_highlighting_info = 'L\'evidenziazione della sintassi funziona solo se è attiva l\'"Elaborazione Markdown".';
+$s_plugin_format_syntax_highlighting_theme = 'Tema dei blocchi di codice';
+$s_plugin_format_syntax_highlighting_plugins = 'Opzioni dei blocchi di codice';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Copia negli appunti';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Copia';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Copiato';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Premere Ctrl + C per copiare';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Mostra lingua';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Mostra gli spazi';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_desc = 'Visualizza i caratteri nascosti (ad esempio per le indentazioni).';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Normalizza gli spazi';
