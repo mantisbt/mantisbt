@@ -16,6 +16,7 @@
 
 /**
  * Check Language Files
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -29,6 +30,24 @@ define( 'LANG_LOAD_DISABLED', true );
 $t_mantis_dir = dirname( __DIR__ ) . DIRECTORY_SEPARATOR;
 
 require_once( $t_mantis_dir . 'core.php' );
+
+$t_show_untranslated = gpc_get_bool( 'show_untranslated', false );
+$t_show_translation_errors = gpc_get_bool( 'translation_errors', false );
+
+/**
+ * Returns a URL to implement filtering.
+ *
+ * @param bool $p_show_untranslated       Whether to show untranslated strings.
+ * @param bool $p_show_translation_errors Whether to show translation errors.
+ *
+ * @return string url
+ */
+function mode_url( $p_show_untranslated, $p_show_translation_errors ) {
+	return helper_url_combine( basename( __FILE__ ), [
+		'show_untranslated'  => (int)$p_show_untranslated,
+		'translation_errors' => (int)$p_show_translation_errors,
+	] );
+}
 
 /**
  * Class CheckLangFile.
@@ -62,7 +81,7 @@ class LangCheckFile {
 	protected $group;
 
 	/**
-	 * @var string Language code from $g_language_auto_map
+	 * @var string Language code (translatewiki-compatible)
 	 */
 	protected $lang;
 
@@ -206,7 +225,6 @@ class LangCheckFile {
 	 * depending on overall status (PASS, WARNINGS, ERRORS).
 	 */
 	public function printResults() {
-		flush();
 		echo '<tr><td class="col-xs-4"';
 		if( $this->warnings && $this->errors ) echo ' rowspan="2"';
 		echo '>Testing \'' . basename( $this->file ) . '\'</td>';
@@ -263,44 +281,36 @@ class LangCheckFile {
 		preg_match( '/strings_(.+)\.txt$/', $this->file, $t_matches );
 		$t_lang = $t_matches[1];
 
-		$t_ext_language_auto_map = [
-			'bn'  => 'bengali',
-			'bs'  => 'bosnian',
-			'dsb' => 'lower_sorbian',
-			'hsb' => 'upper_sorbian',
-			'id'  => 'indonesian',
-			'lez' => 'lezgi',
-			'lki' => 'laki',
-			'ml'  => 'malayalam',
-			'mwl' => 'mirandese',
-			'ms'  => 'malay',
-			'pms' => 'piedmontese',
-			'shi' => 'tachelhit',
-			'te'  => 'telugu',
-			'aeb-arab' => 'tunisian_arabic',
-			'zh-hans' => 'zh-cn',
-			'zh-hant' => 'zh-hk',
+		$t_lang_map = [
+			'bengali'             => 'bn',
+			'bosnian'             => 'bs',
+			'chinese_simplified'  => 'zh-hans',  # replaces $g_language_auto_map
+			'chinese_traditional' => 'zh-hant',  # replaces $g_language_auto_map
+			'indonesian'          => 'id',
+			'laki'                => 'lki',
+			'lezgi'               => 'lez',
+			'lower_sorbian'       => 'dsb',
+			'malay'               => 'ms',
+			'malayalam'           => 'ml',
+			'mirandese'           => 'mwl',
+			'piedmontese'         => 'pms',
+			'saraiki'             => 'skr-arab', # replaces $g_language_auto_map
+			'serbian'             => 'sr-ec',    # replaces $g_language_auto_map
+			'skr'                 => 'skr-arab',
+			'sr'                  => 'sr-ec',
+			'tachelhit'           => 'shi',
+			'telugu'              => 'te',
+			'tunisian_arabic'     => 'aeb-arab',
+			'upper_sorbian'       => 'hsb',
+			'zh'                  => 'zh-hans',
+			'zh-cn'               => 'zh-hans',
+			'zh-hk'               => 'zh-hant',
+			'zh-tw'               => 'zh-hant',
 		];
-		$t_ext_language_auto_map = array_replace( $g_language_auto_map, $t_ext_language_auto_map );
-		$this->lang = explode( ',', @array_search( $t_lang, $t_ext_language_auto_map ) );
+		$t_lang_map = array_replace( array_flip( $g_language_auto_map ), $t_lang_map );
+		ksort( $t_lang_map );
+		$this->lang = explode( ',', array_key_exists( $t_lang, $t_lang_map ) ? $t_lang_map[$t_lang] : $t_lang );
 		$this->lang = trim( end( $this->lang ) );
-		switch( $this->lang ) {
-			case 'zh-tw':
-				$this->lang = 'zh-hant';
-				break;
-			case 'zh':
-				$this->lang = 'zh-hans';
-				break;
-			case 'skr':
-				$this->lang = 'skr-arab';
-				break;
-			case 'sr':
-				$this->lang = 'sr-ec';
-				break;
-			case '':
-				$this->lang = $t_lang;
-				break;
-		}
 
 		# Check for matching entries in configuration
 		$t_check = ['g_language_choices_arr', 'g_language_auto_map'];
@@ -333,6 +343,8 @@ class LangCheckFile {
 	 * @return boolean
 	 */
 	protected function checkTokens() {
+		global $t_show_untranslated, $t_show_translation_errors;
+
 		$t_source = file_get_contents( $this->file );
 		try {
 			$t_tokens = token_get_all( $t_source, TOKEN_PARSE );
@@ -531,8 +543,9 @@ class LangCheckFile {
 						}
 
 						# Perform HTML tags validation if the string contains any
-						if( $this::canDoHtmlChecks()
-							&& preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text)
+						if( ( $t_show_translation_errors || $this->is_base_language )
+							&& $this::canDoHtmlChecks()
+							&& preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text )
 						) {
 							/** @noinspection PhpComposerExtensionStubsInspection */
 							$t_dom = new DOMDocument();
@@ -556,14 +569,16 @@ class LangCheckFile {
 							$this->checkInvalidTags( $t_current_var, $t_text, $t_line );
 						}
 
-						# ignoring known safe variables
-						if( !in_array( $t_current_var, $t_safe_variables ) ) {
+						if( ( $t_show_translation_errors || $this->is_base_language )
+							# ignoring known safe variables
+							&& !in_array( $t_current_var, $t_safe_variables )
+						) {
 							# Validate the argument format
 							$t_validate_pattern = '/%(?!(?:\d+\$)?[-+0 ]*(?:\'.)?(?:[1-9]\d*|\*)?(?:\.(?:[1-9]\d*|\*))?[bcdeEfFgGhHosuxX])/';
 							if( preg_match( $t_validate_pattern, str_replace( '%%', '', $t_text ) ) ) {
 								$this->logFail( 'String ' . $this->translatewiki( $t_current_var )
 									. ' contains unknown format specifier(s). ', $t_line, false );
-							} else {
+							} elseif( $t_show_translation_errors ) {
 								# Validate the argument count and type
 								$t_args = [];
 								$t_extract_pattern = '/(%(?:\d+\$)?[-+0 \'#]*(?:\d+|\*)?(?:\.(?:\d+|\*))?[bcdeEfFgGhHosuxX])/';
@@ -579,7 +594,7 @@ class LangCheckFile {
 								} elseif( isset( self::$basevariables[$t_current_var]['arguments'] ) ) {
 									$t_count = count( $t_args );
 									$t_error = ( $t_count != count( self::$basevariables[$t_current_var]['arguments'] ) );
-									if( ! $t_error ){
+									if( !$t_error ){
 										for( $t_index = 0; $t_index < $t_count; ++$t_index ) {
 											if( $t_args[$t_index] !== self::$basevariables[$t_current_var]['arguments'][$t_index] ) {
 												$t_error = true;
@@ -619,15 +634,15 @@ class LangCheckFile {
 		}
 
 		# Report untranslated strings
-		if( !$this->is_base_language && !$t_fatal ) {
+		if( $t_show_untranslated && !$this->is_base_language && !$t_fatal ) {
 			$t_untranslated = 0;
 			foreach( self::$basevariables as $t_name => $t_var ){
 				if( isset( $t_var['translated'] )
 					&& $t_var['translated'] === false
-					&& !in_array( $t_name, $t_optional_variables ) ) {
+					&& !in_array( $t_name, $t_optional_variables )
+				) {
 					if( ++$t_untranslated <= 3 ) {
-						$this->logWarn( 'Untranslated language string '
-							. $this->translatewiki( $t_name ), 0, false );
+						$this->logWarn( 'Untranslated string ' . $this->translatewiki( $t_name ), 0, false );
 					}
 				}
 			}
@@ -698,7 +713,7 @@ lang_push( 'english' );
 
 set_time_limit( 0 );
 
-layout_page_header();
+layout_page_header( 'MantisBT Administration - Test Lang' );
 layout_admin_page_begin();
 print_admin_menu_bar( 'test_langs.php' );
 ?>
@@ -721,6 +736,11 @@ print_admin_menu_bar( 'test_langs.php' );
 		</div>
 
 		<div class="widget-body">
+			<div class="widget-toolbox padding-8 clearfix">
+				Verbosity:
+				<a href="<?php echo mode_url( !$t_show_untranslated, $t_show_translation_errors ) ?>"><?php echo $t_show_untranslated ? 'Hide' : 'Show' ?> untranslated strings</a> |
+				<a href="<?php echo mode_url( $t_show_untranslated, !$t_show_translation_errors ) ?>"><?php echo $t_show_translation_errors ? 'Hide' : 'Show' ?> translation errors</a>
+			</div>
 			<div class="widget-main no-padding table-responsive">
 				<table class="table table-bordered table-condensed test-langs">
 <?php
