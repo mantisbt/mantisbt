@@ -574,15 +574,14 @@ class LangCheckFile {
 							&& !in_array( $t_current_var, $t_safe_variables )
 						) {
 							# Validate the argument format
-							$t_validate_pattern = '/%(?!(?:\d+\$)?[-+0 ]*(?:\'.)?(?:[1-9]\d*|\*)?(?:\.(?:[1-9]\d*|\*))?[bcdeEfFgGhHosuxX])/';
-							if( preg_match( $t_validate_pattern, str_replace( '%%', '', $t_text ) ) ) {
+							$t_arg_pattern = '(?:\d+\$)?[-+0 ]?(?:\'.)?(?:\d+|\*)?(?:\.(?:\d+|\*))?[bcdeEfFgGhHosuxX]';
+							if( preg_match( '/%(?!' . $t_arg_pattern . ')/', str_replace( '%%', '', $t_text ) ) ) {
 								$this->logFail( 'String ' . $this->translatewiki( $t_current_var )
 									. ' contains unknown format specifier(s). ', $t_line, false );
 							} elseif( $t_show_translation_errors ) {
 								# Validate the argument count and type
 								$t_args = [];
-								$t_extract_pattern = '/(%(?:\d+\$)?[-+0 \'#]*(?:\d+|\*)?(?:\.(?:\d+|\*))?[bcdeEfFgGhHosuxX])/';
-								preg_match_all( $t_extract_pattern, $t_text, $t_args );
+								preg_match_all( '/(%' . $t_arg_pattern . ')/', $t_text, $t_args );
 								if( isset( $t_args[1] ) ) {
 									$t_args = $t_args[1];
 									sort( $t_args );
