@@ -531,6 +531,7 @@ class LangCheckFile {
 
 							if( $this->is_base_language ) {
 								self::$basevariables[$t_current_var]['translated'] = false;
+								self::$basevariables[$t_current_var]['text'] = $t_text;
 							} elseif( !isset( self::$basevariables[$t_current_var] ) ) {
 								$this->logWarn( "String '$t_current_var' not defined in English language file" );
 							}
@@ -576,8 +577,11 @@ class LangCheckFile {
 							# Validate the argument format
 							$t_arg_pattern = '(?:\d+\$)?[-+0 ]?(?:\'.)?(?:\d+|\*)?(?:\.(?:\d+|\*))?[bcdeEfFgGhHosuxX]';
 							if( preg_match( '/%(?!' . $t_arg_pattern . ')/', str_replace( '%%', '', $t_text ) ) ) {
-								$this->logFail( 'String ' . $this->translatewiki( $t_current_var )
-									. ' contains unknown format specifier(s). ', $t_line, false );
+								$this->logFail( $this->url( $t_current_var ) . ' contains unknown format specifier(s)'
+									. ( !$this->hasUrl()
+										? ':<ul><li>Text: ' . string_attribute( $t_text ) . '</li></ul>'
+										: '.'
+									  ), $t_line, false );
 							} elseif( $t_show_translation_errors ) {
 								# Validate the argument count and type
 								$t_args = [];
@@ -601,8 +605,14 @@ class LangCheckFile {
 										}
 									}
 									if( $t_error ) {
-										$this->logFail( 'String ' . $this->translatewiki( $t_current_var )
-											. ' contains inconsistent argument(s).', $t_line, false );
+										$this->logFail( $this->url( $t_current_var ) . ' contains inconsistent argument(s)'
+											. ( !$this->hasUrl()
+												? ':<ul><li>English text: '
+													. string_attribute( self::$basevariables[$t_current_var]['text'] )
+													. '</li><li>Translated text: '
+													. string_attribute( $t_text ) . '</li></ul>'
+												: '.'
+											  ), $t_line, false );
 									}
 								}
 							}
@@ -641,7 +651,7 @@ class LangCheckFile {
 					&& !in_array( $t_name, $t_optional_variables )
 				) {
 					if( ++$t_untranslated <= 3 ) {
-						$this->logWarn( 'Untranslated string ' . $this->translatewiki( $t_name ), 0, false );
+						$this->logWarn( 'Untranslated ' . $this->url( $t_name ), 0, false );
 					}
 				}
 			}
@@ -683,26 +693,44 @@ class LangCheckFile {
 		$p_text = preg_replace( '#<br\s*/?>#i', '<br />', $p_text );
 
 		if( $t_pure != $p_text ) {
-			$this->logFail( $this->translatewiki( $p_var )
+			$this->logFail( $this->url( $p_var )
 				. " contains unsupported or invalid tags or attributes.", $p_line, false );
 		}
 	}
 
 	/**
-	 * Returns the direct URL to the variable translation.
+	 * Returns the direct URL to the translation of variables.
 	 *
 	 * @param string $p_var Name of language string variable
 	 *
 	 * @return string
 	 */
-	private function translatewiki( $p_var ) {
-		return '<a href="https://translatewiki.net/w/i.php?'
-			. http_build_query( [
-				'title' => 'Special:Translate',
-				'group' => $this->group,
-				'showMessage' => str_replace( [ '$', '[', ']' ], [ '', '\x5b', '\x5d' ], $p_var ),
-				'language' => $this->lang,
-			] ) . '">' . string_attribute( $p_var ). '</a>';
+	private function url( $p_var ) {
+		return $this->hasUrl()
+			? '<a href="https://translatewiki.net/w/i.php?'
+				. http_build_query( [
+					'title' => 'Special:Translate',
+					'group' => $this->group,
+					'showMessage' => str_replace( [ '$', '[', ']' ], [ '', '\x5b', '\x5d' ], $p_var ),
+					'language' => $this->lang,
+				] ) . '">' . string_attribute( $p_var ). '</a>'
+			: string_attribute( $p_var );
+	}
+
+	/**
+	 * Detects that the translation of variables is performed by an external service.
+	 *
+	 * @return bool
+	 */
+	private function hasUrl() {
+		$t_external_groups = [
+			'out-mantis-core',
+			'out-mantis-plugin-gravatar',
+			'out-mantis-plugin-mantiscoreformatting',
+			'out-mantis-plugin-mantisgraph',
+			'out-mantis-plugin-xmlimportexport',
+		];
+		return in_array( $this->group, $t_external_groups );
 	}
 }
 
