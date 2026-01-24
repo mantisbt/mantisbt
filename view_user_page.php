@@ -177,13 +177,19 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 				</td>
 			</tr>
 			<?php
-				if( OFF != config_get( 'max_failed_login_count' ) ) { ?>
+				$t_failed_login_count = config_get( 'max_failed_login_count' );
+				if( OFF != $t_failed_login_count ) { ?>
 				<tr>
 					<th class="category">
 						<?php echo lang_get( 'failed_login_count' ) ?>
 					</th>
 					<td>
-						<?php echo $u_failed_login_count ?>
+						<?php
+						echo $u_failed_login_count;
+							if( $u_failed_login_count >= $t_failed_login_count ) {
+								echo '&nbsp;&nbsp;' . icon_get( 'lock', 'fa-lg', lang_get( 'locked' ) );
+							}
+						?>
 					</td>
 				</tr>
 			<?php } ?>
