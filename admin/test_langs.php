@@ -61,7 +61,12 @@ class LangCheckFile {
 	 * Comma-delimited list of valid tags and attributes for language strings
 	 * @see http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
 	 */
-	const VALID_TAGS = 'em,strong,i,b,br,p,ul,ol,li,table,tr,td,code,a[href|title],span[class],abbr[title]';
+	const VALID_TAGS = 'em,strong,i,b,br,p,ul,ol,li,table,tr,td,code,a[href|title|target],span[class],abbr[title]';
+
+	/**
+	 * Regular expression pattern to extract argument (without the leading %)
+	 */
+	const ARG_PATTERN = '(?:\d+\$)?[-+0]?(?:\'.)?(?:\d+|\*)?(?:\.(?:\d+|\*))?[bcdeEfFgGhHosuxX]';
 
 	/**
 	 * @var bool True if HTML syntax checks can be performed
@@ -130,6 +135,9 @@ class LangCheckFile {
 		$t_purifier_config = HTMLPurifier_Config::create( [
 			'Cache.DefinitionImpl' => null,
 			'HTML.Allowed' => self::VALID_TAGS,
+			'Attr.AllowedFrameTargets' => [ '_blank' ],
+			'HTML.TargetNoopener' => false,
+			'HTML.TargetNoreferrer' => false,
 		] );
 		$this->purifier = new HTMLPurifier( $t_purifier_config );
 	}
@@ -367,29 +375,6 @@ class LangCheckFile {
 		$t_pass = true;
 		$t_fatal = false;
 
-		# Safe variables are ignored during argument checks
-		$t_safe_variables = [
-			'$s_percentage_fixed',
-			'$s_percentage_errors',
-			'$s_issue_status_percentage',
-		];
-
-		# Optional variables may be omitted in the translation
-		$t_optional_variables = [
-			# known optional variables, marked {{Optional}}
-			'$s_directionality',
-			'$s_p',
-			'$s_priority_abbreviation',
-			'$s_kib',
-			'$s_phpmailer_language',
-			'$s_sponsorship_process_url',
-			'$s_word_separator',
-			'$s_label',
-			# known empty variables
-			'$s_dropzone_fallback_text',
-			'$s_dropzone_remove_file_confirmation',
-		];
-
 		# Reset translation state for a new run
 		if( $this->is_base_language ) {
 			self::resetVars();
@@ -570,54 +555,12 @@ class LangCheckFile {
 							$this->checkInvalidTags( $t_current_var, $t_text, $t_line );
 						}
 
-						if( ( $t_show_translation_errors || $this->is_base_language )
-							# ignoring known safe variables
-							&& !in_array( $t_current_var, $t_safe_variables )
-						) {
-							# Validate the argument format
-							$t_arg_pattern = '(?:\d+\$)?[-+0 ]?(?:\'.)?(?:\d+|\*)?(?:\.(?:\d+|\*))?[bcdeEfFgGhHosuxX]';
-							if( preg_match( '/%(?!' . $t_arg_pattern . ')/', str_replace( '%%', '', $t_text ) ) ) {
-								$this->logFail( $this->url( $t_current_var ) . ' contains unknown format specifier(s)'
-									. ( !$this->hasUrl()
-										? ':<ul><li>Text: ' . string_attribute( $t_text ) . '</li></ul>'
-										: '.'
-									  ), $t_line, false );
-							} elseif( $t_show_translation_errors ) {
-								# Validate the argument count and type
-								$t_args = [];
-								preg_match_all( '/(%' . $t_arg_pattern . ')/', $t_text, $t_args );
-								if( isset( $t_args[1] ) ) {
-									$t_args = $t_args[1];
-									sort( $t_args );
-								} else {
-									$t_args = [];
-								}
-								if( $this->is_base_language ) {
-									self::$basevariables[$t_current_var]['arguments'] = $t_args;
-								} elseif( isset( self::$basevariables[$t_current_var]['arguments'] ) ) {
-									$t_count = count( $t_args );
-									$t_error = ( $t_count != count( self::$basevariables[$t_current_var]['arguments'] ) );
-									if( !$t_error ){
-										for( $t_index = 0; $t_index < $t_count; ++$t_index ) {
-											if( $t_args[$t_index] !== self::$basevariables[$t_current_var]['arguments'][$t_index] ) {
-												$t_error = true;
-											}
-										}
-									}
-									if( $t_error ) {
-										$this->logFail( $this->url( $t_current_var ) . ' contains inconsistent argument(s)'
-											. ( !$this->hasUrl()
-												? ':<ul><li>English text: '
-													. string_attribute( self::$basevariables[$t_current_var]['text'] )
-													. '</li><li>Translated text: '
-													. string_attribute( $t_text ) . '</li></ul>'
-												: '.'
-											  ), $t_line, false );
-									}
-								}
-							}
+						# Perform arguments validation
+						if( $t_show_translation_errors || $this->is_base_language ) {
+							$this->checkInvalidArgs( $t_current_var, $t_text, $t_line );
 						}
 
+						# Mark string as translated
 						if( !$this->is_base_language && isset( self::$basevariables[$t_current_var]['translated'] ) ) {
 							self::$basevariables[$t_current_var]['translated'] = true;
 						}
@@ -644,20 +587,7 @@ class LangCheckFile {
 
 		# Report untranslated strings
 		if( $t_show_untranslated && !$this->is_base_language && !$t_fatal ) {
-			$t_untranslated = 0;
-			foreach( self::$basevariables as $t_name => $t_var ){
-				if( isset( $t_var['translated'] )
-					&& $t_var['translated'] === false
-					&& !in_array( $t_name, $t_optional_variables )
-				) {
-					if( ++$t_untranslated <= 3 ) {
-						$this->logWarn( 'Untranslated ' . $this->url( $t_name ), 0, false );
-					}
-				}
-			}
-			if( ( $t_untranslated -= 3 ) > 0 ) {
-				$this->logWarn( "... and $t_untranslated more." );
-			}
+			$this->checkUntranslated();
 		}
 
 		if( $this->is_base_language ) {
@@ -680,21 +610,144 @@ class LangCheckFile {
 	 * @return void
 	 */
 	private function checkInvalidTags( $p_var, $p_text, $p_line ) {
-		$t_pure = $this->purifier->purify( $p_text );
+		# Remove all arguments since purifier can escape its '%' leading symbols
+		$p_text = preg_replace( '/(%' . self::ARG_PATTERN . ')/', '_', $p_text );
 
-		# Special cases handling
-		# - sprintf variable '%1$s' inside href gets urlencoded
-		if( $p_var == '$s_webmaster_contact_information' ) {
-			$t_pure = str_replace( '%25', '%', $t_pure );
-		}
+		$t_pure = $this->purifier->purify( $p_text );
 
 		# Prepare original language string for comparison with HTML Purifier output
 		# - transform <br> tag with or without trailing '/' into '<br />'
 		$p_text = preg_replace( '#<br\s*/?>#i', '<br />', $p_text );
 
 		if( $t_pure != $p_text ) {
-			$this->logFail( $this->url( $p_var )
-				. " contains unsupported or invalid tags or attributes.", $p_line, false );
+			$this->logFail( $this->url( $p_var ) . ' contains unsupported or invalid tags or attributes'
+				. ( !$this->hasUrl()
+					? ':<ul><li>Text: ' . string_attribute( $p_text ) . '</li></ul>'
+					: '.'
+				  ), $p_line, false );
+		}
+	}
+
+	/**
+	 * Validate argument format specifiers and report errors.
+	 *
+	 * The assumption is that the English strings are free of argument
+	 * format errors and are thus ignored in the translations.
+	 *
+	 * @param string $p_var  Name of language string variable to check
+	 * @param string $p_text Language string
+	 * @param int    $p_line Line number in language file
+	 *
+	 * @return void
+	 */
+	private function checkInvalidArgs( $p_var, $p_text, $p_line ) {
+		$t_base_var = & self::$basevariables[$p_var];
+
+		# Validate the argument format (explicit space padding is not supported)
+		if( preg_match( '/%(?!' . self::ARG_PATTERN . ')/', str_replace( '%%', '', $p_text ) ) ) {
+			if( $this->is_base_language ) {
+				# Skip
+			} elseif( $t_base_var['arguments'] ?? false ) {
+				# Only if any valid argument present in the reference English string
+				$this->logFail( $this->url( $p_var ) . ' contains invalid format argument(s)'
+					. ( !$this->hasUrl()
+						? ':<ul><li>Text: ' . string_attribute( $p_text ) . '</li></ul>'
+						: '.'
+					  ), $p_line, false );
+			}
+			return;
+		}
+
+		# Validate the argument count and type
+		$t_args = [];
+		if( preg_match_all( '/(%' . self::ARG_PATTERN . ')/', $p_text, $t_args ) && isset( $t_args[1] ) ) {
+			$t_args = $t_args[1];
+			sort( $t_args );
+		} else {
+			$t_args = [];
+		}
+		if( $this->is_base_language ) {
+			$t_base_var['arguments'] = $t_args;
+
+			# Validate the argument number and order (repeated placeholders is not supported)
+			if( count( $t_args ) > 1 ) {
+				$t_order = 1;
+				foreach( $t_args as $t_arg ) {
+					$t_arg_order = [];
+					if ( !preg_match( '/%(\d+)\$/', $t_arg, $t_arg_order ) ) {
+						$this->logFail( $this->url( $p_var ) . ' contains unnumbered arguments'
+							. ( !$this->hasUrl()
+								? ':<ul><li>Text: ' . string_attribute( $p_text ) . '</li></ul>'
+								: '.'
+							  ), $p_line, false );
+						return;
+					} elseif( (int)$t_arg_order[1] !== $t_order ) {
+						$this->logFail( $this->url( $p_var ) . ' contains unordered arguments'
+							. ( !$this->hasUrl()
+								? ':<ul><li>Text: ' . string_attribute( $p_text ) . '</li></ul>'
+								: '.'
+							  ), $p_line, false );
+						return;
+					}
+					++$t_order;
+				}
+			}
+		} else {
+			$t_count = count( $t_args );
+			$t_error = ( $t_count != count( $t_base_var['arguments'] ?? [] ) );
+			for( $t_index = 0; !$t_error && $t_index < $t_count; ++$t_index ) {
+				if( $t_args[$t_index] !== $t_base_var['arguments'][$t_index] ) {
+					$t_error = true;
+				}
+			}
+			if( $t_error ) {
+				$this->logFail( $this->url( $p_var ) . ' contains inconsistent argument(s)'
+					. ( !$this->hasUrl()
+						? ':<ul><li>English text: '
+							. string_attribute( $t_base_var['text'] )
+							. '</li><li>Translated text: '
+							. string_attribute( $p_text ) . '</li></ul>'
+						: '.'
+					  ), $p_line, false );
+			}
+		}
+	}
+
+	/**
+	 * Report untranslated strings.
+	 *
+	 * @return void
+	 */
+	private function checkUntranslated() {
+		# Optional variables may be omitted in the translation
+		$t_optional_variables = [
+			# known optional variables, marked {{Optional}}
+			'$s_directionality',
+			'$s_p',
+			'$s_priority_abbreviation',
+			'$s_kib',
+			'$s_phpmailer_language',
+			'$s_sponsorship_process_url',
+			'$s_word_separator',
+			'$s_label',
+			# known empty variables
+			'$s_dropzone_fallback_text',
+			'$s_dropzone_remove_file_confirmation',
+		];
+
+		$t_untranslated = 0;
+		foreach( self::$basevariables as $t_name => $t_var ){
+			if( isset( $t_var['translated'] )
+				&& $t_var['translated'] === false
+				&& !in_array( $t_name, $t_optional_variables )
+			) {
+				if( ++$t_untranslated <= 3 ) {
+					$this->logWarn( 'Untranslated ' . $this->url( $t_name ), 0, false );
+				}
+			}
+		}
+		if( ( $t_untranslated -= 3 ) > 0 ) {
+			$this->logWarn( "... and $t_untranslated more." );
 		}
 	}
 
