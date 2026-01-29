@@ -53,7 +53,7 @@ $t_graph_fontname = config_get( 'relationship_graph_fontname' );
 $t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
 $t_graph_fontpath = get_font_path();
 
-$t_graph_attributes = array();
+$t_graph_attributes = array( 'bgcolor' => 'transparent' );
 
 if( !empty( $t_graph_fontpath ) ) {
 	$t_graph_attributes['fontpath'] = $t_graph_fontpath;
@@ -75,12 +75,18 @@ $t_graph->set_default_edge_attr( array ( 'style' => 'solid',
 foreach ( $t_status_ids as $t_from_id ) {
 	$t_graph->add_node(
 		$t_from_id,
-		[ 'label' => MantisEnum::getLocalizedLabel( $t_status_enum, $t_status_labels, $t_from_id ) ]
+		[ 'label' => MantisEnum::getLocalizedLabel( $t_status_enum, $t_status_labels, $t_from_id ),
+		  'fillcolor' => get_status_color( $t_from_id ), ]
 	);
 
 	foreach ( $t_status_ids as $t_to_id ) {
-		if( workflow_transition_edge_exists( $t_from_id, $t_to_id ) ) {
-			$t_graph->add_edge( $t_from_id, $t_to_id );
+		if( workflow_transition_edge_exists( $t_from_id, $t_to_id )
+			&& !$t_graph->is_edge_present( $t_to_id, $t_from_id ) ) {
+			if( workflow_transition_edge_exists( $t_to_id, $t_from_id ) ) {
+				$t_graph->add_edge( $t_from_id, $t_to_id, [ 'dir' => 'both' ] );
+			} else {
+				$t_graph->add_edge( $t_from_id, $t_to_id );
+			}
 		}
 	}
 }
