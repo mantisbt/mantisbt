@@ -209,6 +209,45 @@ $t_syntax_highlighting_current_theme = plugin_config_get( 'syntax_highlighting_t
 
 <tr>
 	<th class="category">
+		<?php echo lang_get( 'plugin_format_process_prlinks' ) ?>
+		<br>
+		<span class="small"><?php
+			printf( lang_get( 'plugin_format_process_prlinks_info' ),
+				config_get( 'pr_link_tag' ) );
+		?>
+		</span>
+	</th>
+	<td class="center">
+		<label>
+			<input
+				type="radio"
+				name="process_prlinks"
+				value="1"
+				class="ace"
+				<?php check_checked( plugin_config_get( 'process_prlinks' ), ON ) ?>
+			>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_enabled' ) ?>
+			</span>
+		</label>
+	</td>
+	<td class="center">
+		<label>
+			<input
+				type="radio"
+				name="process_prlinks"
+				value="0"
+				class="ace"
+				<?php check_checked( plugin_config_get( 'process_prlinks' ), OFF ) ?>
+			>
+			<span class="lbl padding-6">
+				<?php echo lang_get( 'plugin_format_disabled' ) ?>
+			</span>
+		</label>
+	</td>
+</tr>
+<tr>
+	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_markdown' ) ?>
 		<br>
 		<span class="small">

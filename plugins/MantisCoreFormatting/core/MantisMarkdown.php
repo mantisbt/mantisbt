@@ -62,6 +62,12 @@ class MantisMarkdown extends Parsedown
 	 * Plugin configuration
 	 * The value of the constant "ON" (1) or "OFF" (0).
 	 */
+	private int $config_process_prlinks = OFF;
+
+	/**
+	 * Plugin configuration
+	 * The value of the constant "ON" (1) or "OFF" (0).
+	 */
 	private int $config_process_urls = OFF;
 
 	/**
@@ -71,7 +77,11 @@ class MantisMarkdown extends Parsedown
 	 */
 	private array $codeblocks = [];
 
-	public function __construct( ?int $p_process_urls = OFF, ?int $p_process_buglinks = OFF ) {
+  public function __construct(
+    ?int $p_process_urls = OFF,
+    ?int $p_process_buglinks = OFF,
+    ?int $p_process_prlinks = OFF
+  ) {
 		# Plugin configuration
 		if( in_array( $p_process_urls, [OFF, ON], true ) ) {
 			$this->config_process_urls = $p_process_urls;
@@ -79,6 +89,10 @@ class MantisMarkdown extends Parsedown
 
 		if( in_array( $p_process_buglinks, [OFF, ON], true ) ) {
 			$this->config_process_buglinks = $p_process_buglinks;
+		}
+
+		if( in_array( $p_process_prlinks, [OFF, ON], true ) ) {
+			$this->config_process_prlinks = $p_process_prlinks;
 		}
 
 		# Parser configuration
@@ -93,9 +107,17 @@ class MantisMarkdown extends Parsedown
 		$this->inlineMarkerList .= '@';
 	}
 
-	public static function getInstance( ?int $p_process_urls = OFF, ?int $p_process_buglinks = OFF ): self {
+  public static function getInstance(
+    ?int $p_process_urls = OFF,
+    ?int $p_process_buglinks = OFF,
+    ?int $p_process_prlinks = OFF
+  ): self {
 		if ( null === static::$instance ) {
-			static::$instance = new MantisMarkdown( $p_process_urls, $p_process_buglinks );
+      static::$instance = new MantisMarkdown(
+        $p_process_urls,
+        $p_process_buglinks,
+        $p_process_prlinks
+      );
 		}
 
 		return static::$instance;
@@ -136,6 +158,14 @@ class MantisMarkdown extends Parsedown
 	public function getConfigProcessBugLinks(): int {
 		return $this->config_process_buglinks;
 	}
+
+	/**
+	 * @return int Value of constant "ON" (1) or "OFF" (0)
+	 */
+	public function getConfigProcessPrLinks(): int {
+		return $this->config_process_prlinks;
+	}
+
 
 	/**
 	 * @return array<string, string>
@@ -198,7 +228,7 @@ class MantisMarkdown extends Parsedown
 	 * as Parsedown does not follow the specifications.
 	 *
 	 * @see https://spec.commonmark.org/0.31.2/#example-62
-	 * @see https://parsedown.org/demo
+   * @see https://parsedown.org/demo
 	 *
 	 * @param array $Line Data for the block element
 	 * @return array|void Only return data for the header element if it matches
@@ -294,6 +324,10 @@ class MantisMarkdown extends Parsedown
 			$t_markup = string_process_bugnote_link( $t_markup );
 			$t_markup = string_process_bug_link( $t_markup );
 		}
+
+    if ( ON == $this->config_process_prlinks ) {
+      $t_markup = string_process_pr_link( $t_markup );
+    }
 
 		$t_markup = string_restore_valid_html_tags( $t_markup );
 
