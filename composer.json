@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "ext-zip": "*",
-        "phpunit/phpunit": "^9.6.11 || ^10.5 || ^11.5"
+        "phpunit/phpunit": "^9.6.34 || ^10.5.63 || ^11.5.50"
     },
     "autoload": {
         "psr-4": {
