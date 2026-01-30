@@ -46,9 +46,17 @@ form_security_validate( 'manage_user_update' );
 auth_reauthenticate();
 
 $f_user_id = gpc_get_int( 'user_id' );
+if( gpc_isset( 'unlock' ) ) {
+	$f_action = UserResetPasswordCommand::UNLOCK;
+} else {
+	$f_action = UserResetPasswordCommand::RESET;
+}
 
 $t_data = array(
-	'query' => array( 'id' => $f_user_id )
+	'query' => array(
+		'id' => $f_user_id,
+		'action' => $f_action
+	)
 );
 
 $t_command = new UserResetPasswordCommand( $t_data );
@@ -64,7 +72,7 @@ layout_page_header( null, $t_redirect_url );
 layout_page_begin( 'manage_overview_page.php' );
 
 switch( $t_result['action'] ) {
-	case UserResetPasswordCommand::RESULT_RESET:
+	case UserResetPasswordCommand::RESET:
 		if(    ( ON == config_get( 'send_reset_password' ) )
 			&& ( ON == config_get( 'enable_email_notification' ) )
 		) {
@@ -75,8 +83,11 @@ switch( $t_result['action'] ) {
 			html_operation_successful( $t_redirect_url, lang_get( 'account_reset_msg2' ) );
 		}
 		break;
-	case UserResetPasswordCommand::RESULT_UNLOCK:
+	case UserResetPasswordCommand::UNLOCK:
 		html_operation_successful( $t_redirect_url, lang_get( 'account_unlock_msg' ) );
+		break;
+	case UserResetPasswordCommand::CLEAR:
+		html_operation_successful( $t_redirect_url, lang_get( 'clear_failed_logins_msg' ) );
 		break;
 }
 

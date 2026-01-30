@@ -732,6 +732,7 @@ $s_date_created = 'Date Created';
 $s_last_visit = 'Last Visit';
 $s_last_visit_label = 'Last Visit:';
 $s_failed_login_count = 'Failed Logins';
+$s_locked = 'Account Locked';
 $s_edit_user_link = 'Edit User';
 $s_search_user_hint = 'Username, Real Name or E-mail';
 
@@ -973,6 +974,7 @@ $s_confirm_account_pruning = 'Are you sure you want to delete old accounts that 
 # manage_user_page.php
 $s_edit_user_title = 'Edit User';
 $s_account_unlock_button = 'Unlock Account';
+$s_clear_failed_logins = 'Clear Failed logins';
 $s_reset_password_button = 'Reset Password';
 $s_delete_user_button = 'Delete User';
 $s_impersonate_user_button = 'Impersonate User';
@@ -984,6 +986,7 @@ $s_email_not_unique = 'Email address is associated with at least one other user 
 $s_account_reset_msg = 'A confirmation request has been sent to the selected user\'s e-mail address. Using this, the user will be able to change their password.';
 $s_account_reset_msg2 = 'Account password has been set to blank...';
 $s_account_unlock_msg = 'The account has been unlocked.';
+$s_clear_failed_logins_msg = 'Failed Logins count has been reset.';
 
 # manage_user_update.php
 $s_manage_user_updated_msg = 'Account successfully updated...';

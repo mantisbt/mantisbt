@@ -98,7 +98,6 @@ $t_reset = $t_user['id'] != auth_get_current_user_id()
 	&& auth_can_set_password( $t_user['id'] )
 	&& user_is_enabled( $t_user['id'] )
 	&& !user_is_protected( $t_user['id'] );
-$t_unlock = !user_is_login_request_allowed( $t_user['id'] );
 $t_delete = !( user_is_administrator( $t_user_id )
 	&& user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1
 );
@@ -271,6 +270,24 @@ print_manage_menu( 'manage_user_page.php' );
 						</td>
 					</tr>
 
+					<!-- Failed Login count / locked account -->
+					<tr>
+						<td class="category">
+							<?php echo lang_get( 'failed_login_count' ) ?>
+						</td>
+						<td>
+<?php
+							$t_max_failed = config_get( 'max_failed_login_count' );
+							$t_failed_login_count = (int)$t_user['failed_login_count'];
+							$t_is_locked =  $t_failed_login_count >= $t_max_failed;
+							echo $t_failed_login_count;
+							if( OFF != $t_max_failed && $t_is_locked) {
+								echo '&nbsp;&nbsp;' . icon_get( 'lock', 'fa-lg', lang_get( 'locked' ) );
+							}
+?>
+						</td>
+					</tr>
+
 					<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
 				</table>
 			</div>
@@ -292,6 +309,7 @@ print_manage_menu( 'manage_user_page.php' );
 					<?php echo lang_get( 'notify_user' ) ?>
 				</span>
 			</label>
+
 <?php } ?>
 			<div class="btn-group pull-right">
 <?php
@@ -312,13 +330,24 @@ print_manage_menu( 'manage_user_page.php' );
 <?php
 	}
 
-	# Reset/Unlock Button
-	if( $t_reset || $t_unlock ) {
+	# Reset Password Button
+	if( $t_reset ) {
 ?>
-				<button formaction="manage_user_reset.php"
+				<button name="reset" formaction="manage_user_reset.php"
 						title="<?php echo $t_reset_password_msg ?>"
 						class="btn btn-primary btn-white btn-round">
-					<?php echo lang_get( $t_reset ? 'reset_password_button' : 'account_unlock_button' ) ?>
+					<?php echo lang_get( 'reset_password_button' ) ?>
+				</button>
+<?php
+	}
+
+	# Unlock account button
+	if( $t_failed_login_count > 0 ) {
+		$t_btn_label = $t_is_locked ? 'account_unlock_button' : 'clear_failed_logins';
+?>
+				<button name="unlock" formaction="manage_user_reset.php"
+						class="btn btn-primary btn-white btn-round">
+					<?php echo lang_get( $t_btn_label ); ?>
 				</button>
 <?php
 	}
