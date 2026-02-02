@@ -904,10 +904,6 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
 function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false, $p_bugnote_id = 0 ) {
 	$t_file_info = array();
 
-	if( !isset( $p_file['error'] ) ) {
-		$p_file['error'] = UPLOAD_ERR_OK;
-	}
-
 	if( !isset( $p_file['browser_upload'] ) ) {
 		$p_file['browser_upload'] = true;
 	}
@@ -927,23 +923,8 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	}
 
 	file_ensure_uploaded( $p_file );
+
 	$t_file_name = $p_file['name'];
-
-	if( strlen( $t_file_name ) > DB_FIELD_SIZE_FILENAME ) {
-		throw new ClientException(
-			sprintf( "Filename '%s' is too long", $t_file_name ),
-			ERROR_FILE_NAME_TOO_LONG,
-			array( $t_file_name )
-		);
-	}
-
-	if( !file_type_check( $t_file_name ) ) {
-		throw new ClientException(
-			sprintf( "File '%s' type not allowed", $t_file_name ),
-			ERROR_FILE_NOT_ALLOWED
-		);
-	}
-
 	$t_org_filename = $t_file_name;
 	$t_suffix_id = 1;
 
@@ -960,23 +941,8 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	}
 
 	$t_file_info['name'] = $t_file_name;
-	antispam_check();
-
 	$t_file_size = filesize( $t_tmp_file );
-	if( 0 == $t_file_size ) {
-		throw new ClientException(
-			sprintf( "File '%s' not uploaded", $t_file_name ),
-			ERROR_FILE_NO_UPLOAD_FAILURE );
-	}
-
 	$t_file_info['size'] = $t_file_size;
-
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-	if( $t_file_size > $t_max_file_size ) {
-		throw new ClientException(
-			sprintf( "File '%s' too big", $t_file_name ),
-			ERROR_FILE_TOO_BIG );
-	}
 
 	if( 'bug' == $p_table ) {
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -1205,28 +1171,78 @@ function file_ensure_valid_upload_path( $p_upload_path ) {
  * @throws ClientException
  */
 function file_ensure_uploaded( array $p_file ) {
-	switch( $p_file['error'] ) {
-		case UPLOAD_ERR_INI_SIZE:
-		case UPLOAD_ERR_FORM_SIZE:
-			throw new ClientException(
-				sprintf( "File '%s' too big", $p_file['name'] ),
-				ERROR_FILE_TOO_BIG );
 
-		case UPLOAD_ERR_PARTIAL:
-		case UPLOAD_ERR_NO_FILE:
-			throw new ClientException(
-				sprintf( "File '%s' upload failure", $p_file['name'] ),
-				ERROR_FILE_NO_UPLOAD_FAILURE );
-	}
+	antispam_check();
 
-	if( ( '' == $p_file['tmp_name'] ) || ( '' == $p_file['name'] ) ) {
+	$t_file_name = $p_file['name'] ?? null;
+
+	if( empty( $t_file_name ) ) {
 		throw new ClientException(
-			'File name or path is empty',
+			'File name is empty',
 			ERROR_FILE_NO_UPLOAD_FAILURE );
 	}
 
-	if( !is_readable( $p_file['tmp_name'] ) ) {
-		throw new ClientException( 'File is not readable', ERROR_UPLOAD_FAILURE );
+	if( isset( $p_file['error'] ) ) {
+		switch( $p_file['error'] ) {
+			case UPLOAD_ERR_OK:
+				break;
+
+			case UPLOAD_ERR_INI_SIZE:
+			case UPLOAD_ERR_FORM_SIZE:
+				throw new ClientException(
+					"File '$t_file_name' too big",
+					ERROR_FILE_TOO_BIG );
+
+			case UPLOAD_ERR_PARTIAL:
+			case UPLOAD_ERR_NO_FILE:
+			default:
+				throw new ClientException(
+					"File '$t_file_name' upload failure",
+					ERROR_FILE_NO_UPLOAD_FAILURE );
+		}
+	}
+
+	if( strlen( $t_file_name ) > DB_FIELD_SIZE_FILENAME ) {
+		throw new ClientException(
+			"Filename '$t_file_name' is too long",
+			ERROR_FILE_NAME_TOO_LONG,
+			[ $t_file_name ]
+		);
+	}
+
+	if( !file_type_check( $t_file_name ) ) {
+		throw new ClientException(
+			"File '$t_file_name' type not allowed",
+			ERROR_FILE_NOT_ALLOWED
+		);
+	}
+
+	$t_tmp_file = $p_file['tmp_name'] ?? null;
+
+	if( empty( $t_tmp_file ) ) {
+		throw new ClientException(
+			'File path is empty',
+			ERROR_FILE_NO_UPLOAD_FAILURE );
+	}
+
+	if( !is_readable( $t_tmp_file ) ) {
+		throw new ClientException(
+			'File is not readable',
+			ERROR_UPLOAD_FAILURE );
+	}
+
+	$t_file_size = filesize( $t_tmp_file );
+
+	if( 0 == $t_file_size ) {
+		throw new ClientException(
+			"File '$t_file_name' not uploaded",
+			ERROR_FILE_NO_UPLOAD_FAILURE );
+	}
+
+	if( $t_file_size > file_get_max_file_size() ) {
+		throw new ClientException(
+			"File '$t_file_name' too big",
+			ERROR_FILE_TOO_BIG );
 	}
 }
 
