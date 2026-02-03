@@ -15,7 +15,7 @@ The version and status of each is summarized below:
 
 | library / plugin            | version | status      |
 |-----------------------------|---------|-------------|
-| jquery                      | 2.2.4   | unpatched   |
+| jquery                      | 3.7.1   | unpatched   |
 | bootstrap                   | 3.3.6   | unpatched   |
 | fontawesome                 | 4.7.0   | unpatched   |
 | ace-admin theme             | 1.4.0   | customized  |
