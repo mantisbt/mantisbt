@@ -19,7 +19,7 @@
  *
  * @package    Tests
  * @subpackage AntispamAPI
- * @copyright  Copyright 2023  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright  Copyright 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link       http://www.mantisbt.org
  *
  * @noinspection PhpIllegalPsrClassPathInspection

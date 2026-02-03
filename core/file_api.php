@@ -1221,13 +1221,13 @@ function file_ensure_uploaded( array $p_file ) {
 
 	if( empty( $t_tmp_file ) ) {
 		throw new ClientException(
-			'File path is empty',
+			"File '$t_file_name' path is empty",
 			ERROR_FILE_NO_UPLOAD_FAILURE );
 	}
 
 	if( !is_readable( $t_tmp_file ) ) {
 		throw new ClientException(
-			'File is not readable',
+			"File '$t_file_name' is not readable",
 			ERROR_UPLOAD_FAILURE );
 	}
 
