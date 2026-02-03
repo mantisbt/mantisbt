@@ -1522,7 +1522,9 @@ function print_column_summary( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	}
 	
 	$t_bug_url = string_get_bug_view_url( $p_bug->id );
-	echo '<td class="column-summary"><a href="' . $t_bug_url . '">' . $t_summary . '</a></td>';
+	echo '<td class="column-summary">',
+		string_wrap( '<a href="' . $t_bug_url . '">', $t_summary, '</a>', '<a ' ),
+		'</td>';
 }
 
 /**
