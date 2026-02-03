@@ -656,8 +656,8 @@ define( 'ERROR_USER_REAL_MATCH_USER', 807 );
 
 # JQuery
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'
-define( 'JQUERY_VERSION', '2.2.4' );
-define( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' );
+define( 'JQUERY_VERSION', '3.7.1' );
+define( 'JQUERY_HASH', 'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=' );
 
 # Bootstrap & FontAwesome
 define( 'BOOTSTRAP_VERSION', '3.4.1' );
