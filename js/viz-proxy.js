@@ -21,7 +21,7 @@ $(function() {
 	async function render() {
 		const src_script = $(current_script);
 		const id = $('#' + src_script.data('id'));
-		if(!id.size()) throw new Error('Missing placeholder tag for SVG');
+		if(!id.length) throw new Error('Missing placeholder tag for SVG');
 		const source = src_script.data('source');
 		if(!source) throw new Error('Missing source data for SVG');
 		const instance = await Viz.instance(); // Viz.js library object
