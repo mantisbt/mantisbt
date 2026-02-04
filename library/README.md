@@ -20,7 +20,7 @@ The version and status of each is summarized below:
 | fontawesome                 | 4.7.0   | unpatched   |
 | ace-admin theme             | 1.4.0   | customized  |
 | moment.js                   | 2.29.4  | unpatched   |
-| bootstrap-datetimepicker    | 4.17.47 | unpatched   |
+| bootstrap-datetimepicker    | 4.17.49 | unpatched   |
 | dropzone.js                 | 5.5.0   | unpatched   |
 | chart.js                    | 3.9.1   | unpatched   |
 | chartjs-plugin-colorschemes | 0.5.4   | unpatched   |
