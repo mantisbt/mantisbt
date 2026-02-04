@@ -402,6 +402,12 @@ $(document).ready( function() {
 	});
 
 	$('input[type=text].datetimepicker').each(function(index, element) {
+		// Ensure the parent has relative positioning for the datetimepicker widget
+		var $parent = $(this).parent();
+		if ($parent.css('position') === 'static') {
+			$parent.css('position', 'relative');
+		}
+
 		$(this).datetimepicker({
 			locale: $(this).data('picker-locale'),
 			format: $(this).data('picker-format'),
