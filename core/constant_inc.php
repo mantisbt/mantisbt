@@ -669,9 +669,9 @@ define( 'FONT_AWESOME_HASH', 'sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFl
 # Moment & DateTimePicker
 define( 'MOMENT_VERSION', '2.29.4' );
 define( 'MOMENT_HASH', 'sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==' );
-define( 'DATETIME_PICKER_VERSION', '4.17.47' );
-define( 'DATETIME_PICKER_HASH_JS', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=' );
-define( 'DATETIME_PICKER_HASH_CSS', 'sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=' );
+define( 'DATETIME_PICKER_VERSION', '4.17.49' );
+define( 'DATETIME_PICKER_HASH_JS', 'sha256-dYxUtecag9x4IaB2vUNM34sEso6rWTgEche5J6ahwEQ=' );
+define( 'DATETIME_PICKER_HASH_CSS', 'sha256-9FNpuXEYWYfrusiXLO73oIURKAOVzqzkn69cVqgKMRY=' );
 
 # Tyeahead JS
 define( 'TYPEAHEAD_VERSION', '1.3.4' );
