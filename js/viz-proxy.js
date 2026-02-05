@@ -20,13 +20,35 @@ const current_script = document.currentScript;
 $(function() {
 	async function render() {
 		const src_script = $(current_script);
-		const id = $('#' + src_script.data('id'));
+		const id_data = src_script.data('id');
+		if(!id_data) throw new Error('Missing "id" data for SVG');
+		const id = $('#' + id_data);
 		if(!id.length) throw new Error('Missing placeholder tag for SVG');
-		const source = src_script.data('source');
-		if(!source) throw new Error('Missing source data for SVG');
+		const source_data = src_script.data('source');
+		if(!source_data) throw new Error('Missing "source" data for SVG');
+
 		const instance = await Viz.instance(); // Viz.js library object
-		const svg = await instance.renderSVGElement(source);
+		const svg = await instance.renderSVGElement(source_data);
 		id.append(svg);
+
+		id.append($('<a class="btn-hover"><i class="fa fa-download"></i></a>').on('click', function() {
+			const serializer = new XMLSerializer();
+			let svg_str = serializer.serializeToString(svg);
+			if(!svg_str.startsWith('<?xml')) {
+				svg_str = '<?xml version="1.0" encoding="utf-8"?>\n' + svg_str;
+			}
+			const url = URL.createObjectURL(new Blob([svg_str], { type: 'image/svg+xml;charset=utf-8' }));
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'image.svg';
+			a.target = '_blank';
+			document.body.appendChild(a);
+			a.click();
+			setTimeout(() => {
+				document.body.removeChild(a);
+				URL.revokeObjectURL(url);
+			}, 1000);
+		}));
 	}
 	render().catch(err => console.error(err));
 });

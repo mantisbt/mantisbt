@@ -274,7 +274,7 @@ class Graph {
 
 		# Include Viz.js proxy
 		echo "\t", '<script src="', helper_mantis_url( 'js/viz-proxy.js' ),
-			'" integrity="sha384-jowRf5rHm+ZoV2hZjZMmN9e7qWKee8iM1biY85ud2FeNK7xwUN3FLmB7HgSr1U+z',
+			'" integrity="sha384-H/zty1fUwbry1pDZ9ug5UmMKBhwOu/FBMLUdVkGMv9Z+vCwLqcIrn3Tog/YUtwrL',
 			'" data-id="', $p_id, '" data-source="', string_attribute( $t_source ), '" async></script>', PHP_EOL;
 	}
 	
