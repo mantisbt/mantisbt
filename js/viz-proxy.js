@@ -15,17 +15,19 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-'use strict';
+/* jshint esversion: 8 */
+/* globals Viz, $ */
 const current_script = document.currentScript;
 $(function() {
+	'use strict';
 	async function render() {
 		const src_script = $(current_script);
 		const id_data = src_script.data('id');
-		if(!id_data) throw new Error('Missing "id" data for SVG');
+		if(!id_data) { throw new Error('Missing "id" data for SVG'); }
 		const id = $('#' + id_data);
-		if(!id.length) throw new Error('Missing placeholder tag for SVG');
+		if(!id.length) { throw new Error('Missing placeholder tag for SVG'); }
 		const source_data = src_script.data('source');
-		if(!source_data) throw new Error('Missing "source" data for SVG');
+		if(!source_data) { throw new Error('Missing "source" data for SVG'); }
 
 		const instance = await Viz.instance(); // Viz.js library object
 		const svg = await instance.renderSVGElement(source_data);
