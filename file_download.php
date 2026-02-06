@@ -147,9 +147,12 @@ if( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
 }
 
 http_security_headers();
+http_caching_headers();
 
-header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
-header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
+header( 'No-Vary-Search: params=("show_inline" "file_show_inline_token")' );
+if( !http_if_modified_since( $v_date_added ) ) {
+	exit;
+}
 
 $t_upload_method = config_get( 'file_upload_method' );
 $t_filename = file_get_display_name( $v_filename );
