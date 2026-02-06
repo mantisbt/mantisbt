@@ -552,25 +552,24 @@ if( 2 == $t_install_state ) {
 <?php
 		$t_warning = '';
 		$t_error = '';
-		switch( $f_db_type ) {
-			case 'mysqli':
-				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MYSQL, '<' ) ) {
-					$t_error = 'MySQL ' . DB_MIN_VERSION_MYSQL . ' or later is required for installation';
-				}
-				break;
-			case 'mssqlnative':
-				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MSSQL, '<' ) ) {
-					$t_error = 'SQL Server (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation';
-				}
-				break;
-			case 'pgsql':
-			default:
-				break;
-		}
-
 		if( is_null( $t_version_info ) ) {
-			$t_warning = "Unable to determine '$f_db_type' version. ($t_error).";
-			$t_error = '';
+			$t_warning = "Unable to determine '$f_db_type' version.";
+		} else {
+			switch( $f_db_type ) {
+				case 'mysqli':
+					if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MYSQL, '<' ) ) {
+						$t_error = 'MySQL ' . DB_MIN_VERSION_MYSQL . ' or later is required for installation';
+					}
+					break;
+				case 'mssqlnative':
+					if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MSSQL, '<' ) ) {
+						$t_error = 'SQL Server (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation';
+					}
+					break;
+				case 'pgsql':
+				default:
+					break;
+			}
 		}
 		print_test_result(
 			( '' == $t_error ) && ( '' == $t_warning ),
