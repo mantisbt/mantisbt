@@ -57,7 +57,8 @@ use Mantis\Exceptions\ClientException;
  *     ]
  *   },
  *   "options": {
- *     "skip_moderation": false
+ *     "skip_moderation": false,
+ *     "mute": false
  *   }
  * }
  */
@@ -106,15 +107,6 @@ class IssueNoteAddCommand extends Command {
 	 * The reporter id for the note.
 	 */
 	private $reporterId = 0;
-
-	/**
-	 * Constructor
-	 *
-	 * @param array $p_data The command data.
-	 */
-	function __construct( array $p_data ) {
-		parent::__construct( $p_data );
-	}
 
 	/**
 	 * Validate the data.
@@ -299,7 +291,9 @@ class IssueNoteAddCommand extends Command {
 
 		# Send email explicitly from here to have file support, this will move into the API once we have
 		# proper bugnote files support in db schema and object model.
-		email_bugnote_add( $t_note_id, $t_file_infos, /* user_exclude_ids */ $t_user_ids_that_got_mention_notifications );
+		if( !$this->option( 'mute', false ) ) {
+			email_bugnote_add( $t_note_id, $t_file_infos, /* user_exclude_ids */ $t_user_ids_that_got_mention_notifications );
+		}
 
 		# Event integration
 		event_signal( 'EVENT_BUGNOTE_ADD', array( $this->issue->id, $t_note_id, $t_file_infos ) );
