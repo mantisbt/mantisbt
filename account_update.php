@@ -118,10 +118,6 @@ $f_password_current = gpc_get_string( 'password_current', '' );
 $f_password        	= gpc_get_string( 'password', '' );
 $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
-$t_update_email = false;
-$t_update_password = false;
-$t_update_realname = false;
-
 # Do not allow blank passwords in account verification/reset
 if( $t_account_verification && is_blank( $f_password ) ) {
 	# log out of the temporary login used by verification
@@ -131,29 +127,8 @@ if( $t_account_verification && is_blank( $f_password ) ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
-$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
-
-# Update email (but only if LDAP isn't being used)
-# Do not update email for a user verification
-if( !$t_account_verification
-	&& !( $t_ldap && config_get_global( 'use_ldap_email' ) )
-) {
-	$f_email = trim( $f_email );
-	if( !is_blank( $f_email ) && $f_email != user_get_email( $t_user_id ) ) {
-		$t_update_email = true;
-	}
-}
-
-# Update real name (but only if LDAP isn't being used)
-if( !( $t_ldap && config_get_global( 'use_ldap_realname' ) ) ) {
-	# strip extra spaces from real name
-	$t_realname = string_normalize( $f_realname );
-	if( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
-		$t_update_realname = true;
-	}
-}
-
-# Update password if the two match and are not empty
+# Validate password if provided
+$t_update_password = false;
 if( !is_blank( $f_password ) ) {
 	if( $f_password != $f_password_confirm ) {
 		if( $t_account_verification ) {
@@ -173,28 +148,42 @@ if( !is_blank( $f_password ) ) {
 	}
 }
 
-# For security, email is only updated after the user has confirmed that they
-# own the new address by clicking a verification link sent to them.
+# Determine if email change will require showing a verification confirmation
 $t_show_confirmation_message = false;
-if( $t_update_email ) {
-	# Allow direct update if sending of reset email is disabled
-	if( !config_get( 'send_reset_password' ) ) {
-		user_set_email( $t_user_id, $f_email );
-	} else {
-		user_ensure_email_valid( $t_user_id, $f_email );
-
-		# Temporarily store the new email address in a token
-		token_set( TOKEN_ACCOUNT_CHANGE_EMAIL, $f_email, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $t_user_id );
-
-		# Send verification mail
-		$t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
-		token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $t_user_id );
-		email_send_email_verification_url( $t_user_id, $t_confirm_hash, $f_email );
-
-		$t_show_confirmation_message = true;
-	}
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
+$f_email = trim( $f_email );
+if( !$t_account_verification
+	&& !( $t_ldap && config_get_global( 'use_ldap_email' ) )
+	&& !is_blank( $f_email )
+	&& $f_email != user_get_email( $t_user_id )
+	&& config_get( 'send_reset_password' )
+) {
+	$t_show_confirmation_message = true;
 }
 
+# Use UserUpdateCommand for email and realname changes
+$t_user_payload = array(
+	'real_name' => $f_realname,
+);
+
+# Do not update email for account verification
+if( !$t_account_verification ) {
+	$t_user_payload['email'] = $f_email;
+}
+
+$t_data = array(
+	'query' => array(
+		'user_id' => $t_user_id
+	),
+	'payload' => array(
+		'user' => $t_user_payload,
+	)
+);
+
+$t_command = new UserUpdateCommand( $t_data );
+$t_command->execute();
+
+# Update password (not handled by UserUpdateCommand)
 if( $t_update_password ) {
 	user_set_password( $t_user_id, $f_password );
 
@@ -202,11 +191,6 @@ if( $t_update_password ) {
 	if( $t_account_verification ) {
 		token_delete( TOKEN_ACCOUNT_VERIFY, $t_user_id );
 	}
-}
-
-if( $t_update_realname ) {
-	/** @noinspection PhpUndefinedVariableInspection */
-	user_set_realname( $t_user_id, $t_realname );
 }
 
 form_security_purge( 'account_update' );
