@@ -276,7 +276,7 @@ class UserUpdateCommand extends Command {
 			'id' => $this->user_id,
 			'username' => $t_new_username ?: $t_old_username,
 			'realname' => !is_null( $t_new_realname ) ? $t_new_realname : $t_old_realname,
-			'email' => $t_new_email ?: $t_old_email,
+			'email' => !is_null( $t_new_email ) ? $t_new_email : $t_old_email,
 			'access_level' => $t_new_access_level ?: $t_old_access_level,
 			'enabled' => !is_null( $t_new_enabled ) ? $t_new_enabled : $t_old_enabled,
 			'protected' => !is_null( $t_new_protected ) ? $t_new_protected : $t_old_protected
@@ -331,10 +331,10 @@ class UserUpdateCommand extends Command {
 		$t_user_id = array_shift( $p_user );
 
 		# Email was changed
-		if( $this->email ) {
+		if( !is_null( $this->email ) ) {
 			# Change made by user themselves
 			if( auth_get_current_user_id() == $this->user_id )  {
-				if( config_get( 'send_reset_password' ) ) {
+				if( $this->email && config_get( 'send_reset_password' ) ) {
 					# Temporarily store the new email address in a token
 					token_set( TOKEN_ACCOUNT_CHANGE_EMAIL,
 						$this->email,
