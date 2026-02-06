@@ -269,12 +269,11 @@ class Graph {
 		if( config_get_global( 'cdn_enabled' ) == ON ) {
 			html_javascript_cdn_link( 'https://cdn.jsdelivr.net/npm/@viz-js/viz@' . VIZJS_VERSION . '/dist/viz-global.min.js', VIZJS_HASH );
 		} else {
-			html_javascript_cdn_link( helper_mantis_url( 'js/viz-global.min.js' ), VIZJS_HASH );
+			html_javascript_link( 'viz-global.min.js' );
 		}
 
 		# Include Viz.js proxy
 		echo "\t", '<script src="', helper_mantis_url( 'js/viz-proxy.js' ),
-			'" integrity="sha384-H/zty1fUwbry1pDZ9ug5UmMKBhwOu/FBMLUdVkGMv9Z+vCwLqcIrn3Tog/YUtwrL',
 			'" data-id="', $p_id, '" data-source="', string_attribute( $t_source ), '" async></script>', PHP_EOL;
 	}
 	
