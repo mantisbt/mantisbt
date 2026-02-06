@@ -307,6 +307,136 @@ class RestUserTest extends RestBase {
 	}
 
 	/**
+	 * Test that an admin can clear another user's email even when allow_blank_email is OFF.
+	 *
+	 * Administrators are always allowed to set blank emails regardless of the
+	 * allow_blank_email config, as they may need to manage accounts that should
+	 * never receive email notifications (e.g. anonymous account).
+	 */
+	public function testAdminUpdateUserEmailToEmptyBlankEmailNotAllowed() {
+		$t_user_to_create = array(
+			'name' => Faker::username(),
+			'email' => Faker::email(),
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(), 'create_user' );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_user_id = $t_body['user']['id'];
+
+		# Explicitly set allow_blank_email to OFF
+		$t_old_value = config_get( 'allow_blank_email' );
+		config_set( 'allow_blank_email', OFF );
+
+		try {
+			$t_user_update = array(
+				'user' => array(
+					'email' => '',
+				)
+			);
+
+			# Request as admin (no impersonation) - should succeed due to admin exemption
+			$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
+			$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+				'admin clearing email with allow_blank_email=OFF should succeed' );
+
+			$t_body = json_decode( $t_response->getBody(), true );
+			$t_user = $t_body['user'];
+			$this->assertArrayNotHasKey( 'email', $t_user, 'email cleared' );
+		} finally {
+			config_set( 'allow_blank_email', $t_old_value );
+		}
+	}
+
+	/**
+	 * Test that a non-admin user cannot clear their email when allow_blank_email is OFF.
+	 *
+	 * When $g_allow_blank_email = OFF, non-admin users should not be able to set an
+	 * empty email address. The validation in email_is_valid() only allows blank emails
+	 * when allow_blank_email is ON or the current user is an administrator.
+	 */
+	public function testUpdateOwnEmailToEmptyBlankEmailNotAllowed() {
+		$t_username = Faker::username();
+		$t_user_to_create = array(
+			'name' => $t_username,
+			'email' => Faker::email(),
+			'access_level' => array( 'name' => 'reporter' ),
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(), 'create_user' );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_user_id = $t_body['user']['id'];
+
+		# Ensure allow_blank_email is OFF (default)
+		$t_old_value = config_get( 'allow_blank_email' );
+		config_set( 'allow_blank_email', OFF );
+
+		try {
+			$t_user_update = array(
+				'user' => array(
+					'email' => '',
+				)
+			);
+
+			# Impersonate reporter user to act as a non-admin
+			$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )
+				->impersonate( $t_username )->send();
+			$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
+				'non-admin clearing email with allow_blank_email=OFF should fail' );
+		} finally {
+			config_set( 'allow_blank_email', $t_old_value );
+		}
+	}
+
+	/**
+	 * Test that a non-admin user can clear their email when allow_blank_email is ON.
+	 */
+	public function testUpdateOwnEmailToEmptyBlankEmailAllowed() {
+		$t_username = Faker::username();
+		$t_user_to_create = array(
+			'name' => $t_username,
+			'email' => Faker::email(),
+			'access_level' => array( 'name' => 'reporter' ),
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(), 'create_user' );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_user_id = $t_body['user']['id'];
+
+		# Enable allow_blank_email
+		$t_old_value = config_get( 'allow_blank_email' );
+		config_set( 'allow_blank_email', ON );
+
+		try {
+			$t_user_update = array(
+				'user' => array(
+					'email' => '',
+				)
+			);
+
+			# Impersonate reporter user to act as a non-admin
+			$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )
+				->impersonate( $t_username )->send();
+			$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
+				'non-admin clearing email with allow_blank_email=ON should succeed' );
+
+			$t_body = json_decode( $t_response->getBody(), true );
+			$t_user = $t_body['user'];
+			$this->assertArrayNotHasKey( 'email', $t_user, 'email cleared' );
+		} finally {
+			config_set( 'allow_blank_email', $t_old_value );
+		}
+	}
+
+	/**
 	 * Test that real_name is preserved when not included in the update request
 	 */
 	public function testUpdateUserPreservesRealNameWhenNotProvided() {
