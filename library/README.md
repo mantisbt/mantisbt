@@ -15,12 +15,12 @@ The version and status of each is summarized below:
 
 | library / plugin            | version | status      |
 |-----------------------------|---------|-------------|
-| jquery                      | 2.2.4   | unpatched   |
+| jquery                      | 3.7.1   | unpatched   |
 | bootstrap                   | 3.3.6   | unpatched   |
 | fontawesome                 | 4.7.0   | unpatched   |
 | ace-admin theme             | 1.4.0   | customized  |
 | moment.js                   | 2.29.4  | unpatched   |
-| bootstrap-datetimepicker    | 4.17.47 | unpatched   |
+| bootstrap-datetimepicker    | 4.17.49 | unpatched   |
 | dropzone.js                 | 5.5.0   | unpatched   |
 | chart.js                    | 3.9.1   | unpatched   |
 | chartjs-plugin-colorschemes | 0.5.4   | unpatched   |
