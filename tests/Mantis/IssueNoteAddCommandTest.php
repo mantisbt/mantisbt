@@ -34,13 +34,13 @@ class IssueNoteAddCommandTest extends MantisCoreBase {
 	/**
 	 * @var int Test issue id
 	 */
-	private static $issueId;
+	private $issueId;
 
 	/**
 	 * Create a test issue to add notes to.
 	 */
-	public static function setUpBeforeClass(): void {
-		parent::setUpBeforeClass();
+	protected function setUp(): void {
+		parent::setUp();
 		self::login();
 
 		$t_issue_data = new \BugData();
@@ -49,14 +49,14 @@ class IssueNoteAddCommandTest extends MantisCoreBase {
 		$t_issue_data->description = 'Test issue for IssueNoteAddCommand tests';
 		$t_issue_data->category_id = 1;
 
-		self::$issueId = $t_issue_data->create();
+		$this->issueId = $t_issue_data->create();
 	}
 
 	/**
 	 * Clean up test issue.
 	 */
-	public static function tearDownAfterClass(): void {
-		bug_delete( self::$issueId );
+	protected function tearDown(): void {
+		bug_delete( $this->issueId );
 	}
 
 	/**
@@ -152,7 +152,7 @@ class IssueNoteAddCommandTest extends MantisCoreBase {
 	 */
 	private function buildCommandData( $p_text, array $p_options = array() ) {
 		$t_data = array(
-			'query' => array( 'issue_id' => self::$issueId ),
+			'query' => array( 'issue_id' => $this->issueId ),
 			'payload' => array( 'text' => $p_text ),
 		);
 
