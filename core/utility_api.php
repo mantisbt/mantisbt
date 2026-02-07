@@ -266,9 +266,12 @@ function getClassProperties( $p_classname, $p_type = 'public', $p_return_object 
 }
 
 /**
- * return string of system font path
+ * Return path to system fonts location.
+ *
+ * @return string
+ *
+ * @deprecated 2.28.1 See PHPDoc for {@see $g_system_font_folder}.
  * @access public
- * @return string representing system path to font location
  */
 function get_font_path() {
 	$t_font_path = config_get_global( 'system_font_folder' );

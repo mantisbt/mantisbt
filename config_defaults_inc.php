@@ -407,6 +407,12 @@ $g_signup_use_captcha = ON;
  * Absolute path (with trailing slash!) to the folder containing the TrueType
  * Font files used for the Relationship and Workflow Graphs.
  *
+ *
+ * @deprecated 2.28.1 (#36855).
+ *  Recent versions of GraphViz determine the system's fonts location using
+ *  {@see https://www.freedesktop.org/wiki/Software/fontconfig/ fontconfig};
+ *  this setting does not seem to have any effect anymore.
+ *
  * @global string $g_system_font_folder
  */
 $g_system_font_folder = '';
