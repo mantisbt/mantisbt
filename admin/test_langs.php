@@ -796,7 +796,7 @@ lang_push( 'english' );
 
 set_time_limit( 0 );
 
-layout_page_header( 'MantisBT Administration - Test Lang' );
+layout_page_header( 'MantisBT Administration - Test Language Strings' );
 layout_admin_page_begin();
 print_admin_menu_bar( 'test_langs.php' );
 ?>
