@@ -196,12 +196,16 @@ function html_title( $p_page_title = '' ) {
 
 /**
  * Require a CSS file to be in html page headers
- * @param string $p_stylesheet_path Path to CSS style sheet.
+ * @param string|array $p_stylesheet_path Path to CSS style sheet or array of link tag attributes.
  * @return void
  */
 function require_css( $p_stylesheet_path ) {
 	global $g_stylesheets_included;
-	$g_stylesheets_included[$p_stylesheet_path] = $p_stylesheet_path;
+	if( is_array( $p_stylesheet_path ) ) {
+		$g_stylesheets_included[$p_stylesheet_path['src']] = $p_stylesheet_path;
+	} else {
+		$g_stylesheets_included[$p_stylesheet_path] = $p_stylesheet_path;
+	}
 }
 
 /**
@@ -232,7 +236,11 @@ function html_css() {
 			);
 		}
 
-		html_css_link( $t_stylesheet_path );
+		if( is_array( $t_stylesheet_path ) ) {
+			html_css_cdn_link( $t_stylesheet_path['src'], $t_stylesheet_path['integrity'] );
+		} else {
+			html_css_link( $t_stylesheet_path );
+		}
 	}
 
 	# dropzone css
@@ -328,12 +336,16 @@ function html_meta_canonical( $p_url ) {
 
 /**
  * Require a javascript file to be in html page headers
- * @param string $p_script_path Path to javascript file.
+ * @param string|array $p_script_path Path to javascript file or array of script tag attributes.
  * @return void
  */
 function require_js( $p_script_path ) {
 	global $g_scripts_included;
-	$g_scripts_included[$p_script_path] = $p_script_path;
+	if( is_array( $p_script_path ) ) {
+		$g_scripts_included[$p_script_path['src']] = $p_script_path;
+	} else {
+		$g_scripts_included[$p_script_path] = $p_script_path;
+	}
 }
 
 /**
@@ -371,8 +383,13 @@ function html_head_javascript() {
 	}
 
 	html_javascript_link( 'common.js' );
+
 	foreach ( $g_scripts_included as $t_script_path ) {
-		html_javascript_link( $t_script_path );
+		if( is_array( $t_script_path ) ) {
+			html_javascript_cdn_link( $t_script_path['src'], $t_script_path['integrity'] );
+		} else {
+			html_javascript_link( $t_script_path );
+		}
 	}
 }
 
