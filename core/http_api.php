@@ -32,10 +32,54 @@ require_api( 'config_api.php' );
 require_api( 'string_api.php' );
 
 /**
+ * Set a content expire time of +10 days by default if caching is enabled.
+ */
+$g_http_max_age = SECONDS_PER_DAY * 10;
+
+/**
  * The Content-Security-Policy settings array.  Use http_csp_add() to update it.
  * @var array
  */
 $g_csp = array();
+
+/**
+ * Set the expiration time based on the last modification time.
+ * @param int $p_timestamp Last modification time.
+ * @return void
+ */
+function http_set_expiration( int $p_timestamp ) {
+	global $g_http_max_age;
+
+	$t_elapsed = time() - $p_timestamp;
+	if( $t_elapsed < SECONDS_PER_DAY ) {
+		$g_http_max_age = min( $g_http_max_age, 600 );				# +10 min
+	} elseif( $t_elapsed < SECONDS_PER_DAY * 3 ) {
+		$g_http_max_age = min( $g_http_max_age, 3600 );				# +hour
+	} elseif( $t_elapsed < SECONDS_PER_DAY * 30 ) {
+		$g_http_max_age = min( $g_http_max_age, SECONDS_PER_DAY );	# +day
+	}
+
+	# Refresh headers
+	http_caching_headers();
+}
+
+/**
+ * Print the "Last-Modified:" header, check the "If-Modified-Since" request header,
+ * and return a "304 Not Modified" response if necessary.
+ * @param int $p_timestamp Last modification time.
+ * @return bool True if the content was modified or if no "If-Modified-Since" header was detected.
+ */
+function http_if_modified_since( int $p_timestamp ) {
+	if( !headers_sent() ) {
+		header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $p_timestamp ) );
+		if( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] )
+			&& ( $p_timestamp <= strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) ) ) {
+			http_response_code( HTTP_STATUS_NOT_MODIFIED );
+			return false;
+		}
+	}
+	return true;
+}
 
 /**
  * Check to see if the client is using Microsoft Internet Explorer so we can
@@ -109,6 +153,8 @@ function http_content_disposition_header( $p_filename, $p_inline = false ) {
  * @return void
  */
 function http_caching_headers( $p_allow_caching = null ) {
+	global $g_http_max_age;
+
 	if( headers_sent() ) {
 		return;
 	}
@@ -121,16 +167,14 @@ function http_caching_headers( $p_allow_caching = null ) {
 
 	if( $t_allow_caching ) {
 		if( is_browser_internet_explorer() ) {
-			header( 'Cache-Control: private, proxy-revalidate' );
+			header( "Cache-Control: private, max-age=$g_http_max_age, proxy-revalidate" );
 		} else {
-			header( 'Cache-Control: private, must-revalidate' );
+			header( "Cache-Control: private, max-age=$g_http_max_age, must-revalidate" );
 		}
-		# set an expire time to +10 days
-		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time()+864000 ) );
+		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() + $g_http_max_age ) );
 	} else {
 		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
-		header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 	}
 }
 
