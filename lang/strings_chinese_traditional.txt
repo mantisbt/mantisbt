@@ -214,7 +214,6 @@ $s_prefix_for_deleted_users = '使用者';
 $s_administrator = '系統管理員';
 $s_myself = '自己';
 $s_default_access_level = '預設存取階層';
-$s_issue_status_percentage = '問題狀態百分比';
 $s_access_levels_enum_string = '10:檢視者,25:回報人,40:更新者,55:開發者,70:專案管理者,90:系統管理者';
 $s_no_access = '無法存取';
 $s_project_status_enum_string = '10:開發中,30:已發佈,50:穩定,70:停止維護';

@@ -228,7 +228,6 @@ $s_prefix_for_deleted_users = 'utilisateur';
 $s_administrator = 'administrateur';
 $s_myself = 'Moi-même';
 $s_default_access_level = 'Niveau d’accès par défaut';
-$s_issue_status_percentage = 'Pourcentage des statuts d’anomalie';
 $s_access_levels_enum_string = '10:invité,25:rapporteur,40:testeur,55:développeur,70:gestionnaire,90:administrateur';
 $s_no_access = 'inaccessible';
 $s_project_status_enum_string = '10:développement,30:livré,50:stable,70:obsolète';

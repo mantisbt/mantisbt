@@ -176,7 +176,6 @@ $s_prefix_for_deleted_users = 'مستخدم';
 $s_administrator = 'إداري';
 $s_myself = 'أنا';
 $s_default_access_level = 'مستوى الدخول الافتراضي';
-$s_issue_status_percentage = 'النسبه المئويه لحاله القضية';
 $s_access_levels_enum_string = '10:مشاهد,25:مبلغ,40:محدث,55:مطور,70:مدير,90:إداري';
 $s_project_status_enum_string = '10:تطوير,30:إصدار,50:مستقر,70:قديم';
 $s_project_view_state_enum_string = '10:علني,50:خاص';

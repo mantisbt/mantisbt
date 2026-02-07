@@ -217,7 +217,6 @@ $s_prefix_for_deleted_users = 'użytkownik';
 $s_administrator = 'administrator';
 $s_myself = 'Ja';
 $s_default_access_level = 'Domyślny poziom dostępu';
-$s_issue_status_percentage = 'Status procentowy zgłoszenia';
 $s_access_levels_enum_string = '10:obserwator,25:zgłaszający,40:aktualizujący,55:wykonawca,70:zarządca,90:administrator';
 $s_no_access = 'brak dostępu';
 $s_project_status_enum_string = '10:tworzony,30:ukończony,50:stabilny,70:zarzucony';

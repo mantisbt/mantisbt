@@ -193,7 +193,6 @@ $s_prefix_for_deleted_users = 'usator';
 $s_administrator = 'administrator';
 $s_myself = 'Me';
 $s_default_access_level = 'Nivello de accesso predefinite';
-$s_issue_status_percentage = 'Percentage de stato de problema';
 $s_access_levels_enum_string = '10:spectator,25:reportator,40:actualisator,55:disveloppator,70:gerente,90:administrator';
 $s_no_access = 'sin accesso';
 $s_project_status_enum_string = '10:disveloppamento,30:publication,50:stabile,70:obsolete';

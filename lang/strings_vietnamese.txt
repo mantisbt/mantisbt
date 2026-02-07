@@ -204,7 +204,6 @@ $s_prefix_for_deleted_users = 'người dùng';
 $s_administrator = 'người quản trị';
 $s_myself = 'Bản thân mình';
 $s_default_access_level = 'Mức độ truy cập mặc định';
-$s_issue_status_percentage = 'Tỷ lệ trạng thái issue';
 $s_access_levels_enum_string = '10:người xem, 25:người báo cáo, 40:người cập nhật, 55:người phát triển, 70:người quản lý, 90:người quản trị';
 $s_no_access = 'không truy cập';
 $s_project_status_enum_string = '10: phát triển, 30: phát hành, 50: ổn định, 70: lỗi thời';

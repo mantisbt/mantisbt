@@ -214,7 +214,6 @@ $s_prefix_for_deleted_users = 'ユーザー';
 $s_administrator = '管理者';
 $s_myself = '自身';
 $s_default_access_level = '既定のアクセスレベル';
-$s_issue_status_percentage = '課題ごとのステータスの割合';
 $s_access_levels_enum_string = '10:参照,25:報告者,40:編集者,55:開発者,70:マネージャー,90:管理者';
 $s_no_access = 'アクセスなし';
 $s_project_status_enum_string = '10:開発,30:リリース,50:安定,70:廃止';

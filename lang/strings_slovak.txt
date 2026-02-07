@@ -204,7 +204,6 @@ $s_prefix_for_deleted_users = 'užívateľ';
 $s_administrator = 'administrátor';
 $s_myself = 'Ja sám';
 $s_default_access_level = 'Štandardné prístupové práva';
-$s_issue_status_percentage = 'Percentuálny Stav Problému';
 $s_access_levels_enum_string = '10:recenzent,25:reportér,40:aktualizátor,55:vývojár,70:vedúci,90:administrátor';
 $s_no_access = 'žiaden prístup';
 $s_project_status_enum_string = '10:vývoj,30:verzia,50:stabilná,70:nepoužívaná';

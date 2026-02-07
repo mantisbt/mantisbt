@@ -205,7 +205,6 @@ $s_prefix_for_deleted_users = 'корисник';
 $s_administrator = 'администратор';
 $s_myself = 'Ја';
 $s_default_access_level = 'Подразумевани степен приступа';
-$s_issue_status_percentage = 'Стање проблема (%)';
 $s_access_levels_enum_string = '10:посматрач,25:известилац,40:дограђивач,55:програмер,70:руководилац,90:администратор';
 $s_no_access = 'нема приступ';
 $s_project_status_enum_string = '10:у развоју,30:издато,50:стабилно,70:застарело';

@@ -195,7 +195,6 @@ $s_prefix_for_deleted_users = 'käyttäjä';
 $s_administrator = 'pääkäyttäjä';
 $s_myself = 'Minä';
 $s_default_access_level = 'Oletuskäyttäjätaso';
-$s_issue_status_percentage = 'Tapahtuman tilan prosenttiosuus';
 $s_access_levels_enum_string = '10:seuraaja,25:raportoija,40:päivittäjä,55:kehittäjä,70:ylläpitäjä,90:pääkäyttäjä';
 $s_no_access = 'ei pääsyä';
 $s_project_status_enum_string = '10:kehitysversio,30:julkaisuversio,50:vakaa versio,70:vanhentunut versio';

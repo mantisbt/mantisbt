@@ -222,7 +222,6 @@ $s_prefix_for_deleted_users = 'Benutzer';
 $s_administrator = 'Administrator';
 $s_myself = 'Ich selbst';
 $s_default_access_level = 'Standard Zugangsrecht';
-$s_issue_status_percentage = 'Eintragsstatus in Prozent';
 $s_access_levels_enum_string = '10:Betrachter,25:Reporter,40:Tester,55:Entwickler,70:Manager,90:Administrator';
 $s_no_access = 'kein Zugriff';
 $s_project_status_enum_string = '10:Entwicklung,30:Freigabe,50:stabil,70:veraltet';

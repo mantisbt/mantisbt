@@ -209,7 +209,6 @@ $s_prefix_for_deleted_users = 'משתמש';
 $s_administrator = 'מנהל המערכת';
 $s_myself = 'עצמי';
 $s_default_access_level = 'הרשאת ברירת מחדל';
-$s_issue_status_percentage = 'אחוזי מצב סוגיה';
 $s_access_levels_enum_string = '10:צופה,25:מדווח,40:מעדכן,55:מפתח,70:מנהל,90:מנהל מערכת';
 $s_no_access = 'אין גישה';
 $s_project_status_enum_string = '10:פיתוח,30:השקה,50:יציב,70:לא בשימוש';

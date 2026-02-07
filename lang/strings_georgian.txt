@@ -169,7 +169,6 @@ $s_prefix_for_deleted_users = 'მომხმარებელი';
 $s_administrator = 'ადმინისტრატორი';
 $s_myself = 'მე თვითონ';
 $s_default_access_level = 'სტანდარტული დაშვების დონე';
-$s_issue_status_percentage = 'მოთხოვნის სტატუსის პროცენტი';
 $s_access_levels_enum_string = '10:მნახველი,25:რეპორტერი,40:გამნახლებელი,55:დეველოპერი,70:მენეჯერი,90:ადმინისტრატორი';
 $s_no_access = 'დაშვება არ არის';
 $s_project_status_enum_string = '10:დეველოპმეტი,30:რელიზი,50:სტაბილური,70:მოძველებული';

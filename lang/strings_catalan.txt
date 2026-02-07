@@ -208,7 +208,6 @@ $s_prefix_for_deleted_users = 'usuari';
 $s_administrator = 'administrador';
 $s_myself = 'jo mateix';
 $s_default_access_level = 'Nivell d\'accés per defecte';
-$s_issue_status_percentage = 'Percentatge de incidències per estat';
 $s_access_levels_enum_string = '10:espectador,25:informador,40:actualitzador,55:desenvolupador,70:gestor,90:administrador';
 $s_no_access = 'Cap accés';
 $s_project_status_enum_string = '10:en desenvolupament,30:lliurament,50:estable,70:obsolet';

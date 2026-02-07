@@ -197,7 +197,6 @@ $s_prefix_for_deleted_users = 'implijer';
 $s_administrator = 'merour';
 $s_myself = 'Me ma-unan';
 $s_default_access_level = 'Live moned dre ziouer';
-$s_issue_status_percentage = 'Dregantad statud draen';
 $s_access_levels_enum_string = '10:gweler,25:titourer,40:amprouer,55:diorroer,70:merour,90:melestrour';
 $s_no_access = 'na c\'haller ket diraez';
 $s_project_status_enum_string = '10:diorroadur,30:embann,50:stabil,70:diamzeret';

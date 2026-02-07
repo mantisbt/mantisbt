@@ -207,7 +207,6 @@ $s_prefix_for_deleted_users = '사용자';
 $s_administrator = '관리자';
 $s_myself = '나';
 $s_default_access_level = '기본 접근 권한';
-$s_issue_status_percentage = '이슈 상태 백분율';
 $s_access_levels_enum_string = '10:보기가능,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
 $s_project_status_enum_string = '10:개발버전,30:릴리스버전,50:안정버전,70:구버전';
 $s_project_view_state_enum_string = '10:공개,50:비공개';
