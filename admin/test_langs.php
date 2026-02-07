@@ -754,12 +754,15 @@ class LangCheckFile {
 	/**
 	 * Returns the direct URL to the translation of variables.
 	 *
+	 * Variable is returned as-is for English (base language) or if translations
+	 * are not managed externally (see {@see hasUrl()}).
+	 *
 	 * @param string $p_var Name of language string variable
 	 *
 	 * @return string
 	 */
 	private function url( $p_var ) {
-		return $this->hasUrl()
+		return !$this->is_base_language && $this->hasUrl()
 			? '<a href="https://translatewiki.net/w/i.php?'
 				. http_build_query( [
 					'title' => 'Special:Translate',
