@@ -1274,6 +1274,9 @@ $g_window_title = 'MantisBT';
  * resulting text is 16 characters or less, to be compliant with the limit for
  * the ShortName element as defined in the OpenSearch specification.
  *
+ * To disable the use of OpenSearch tags across the site, simply set the
+ * title prefix to empty string.
+ *
  * @link https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md
  * @see $g_window_title
  * @global string $g_search_title
