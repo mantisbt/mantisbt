@@ -227,7 +227,6 @@ $s_prefix_for_deleted_users = 'kullanıcı';
 $s_administrator = 'yönetici';
 $s_myself = 'Kendim';
 $s_default_access_level = 'Varsayılan erişim seviyesi';
-$s_issue_status_percentage = 'Sorun Durum Yüzdesi';
 $s_access_levels_enum_string = '10:izleyici,25:bildirici,40:güncelleyici,55:geliştirici,70:menajer,90:yönetici';
 $s_no_access = 'erişim yok';
 $s_project_status_enum_string = '10:geliştirme,30:sürüm,50:tutarlı,70:eski';

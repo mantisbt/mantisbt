@@ -197,7 +197,6 @@ $s_prefix_for_deleted_users = 'lankide';
 $s_administrator = 'administratzaile';
 $s_myself = 'Ni neu';
 $s_default_access_level = 'Lehenetsitako sarbide maila';
-$s_issue_status_percentage = 'Arazo Egoera Portzentaila';
 $s_access_levels_enum_string = '10:ikuslea,25:informatzailea,40:eguneratzailea,55:garatzailea,70:kudeatzailea,90:administratzailea';
 $s_no_access = 'sarbide barik';
 $s_project_status_enum_string = '10:garapena,30:kaleratua,50:egonkorra,70:zaharkitua';

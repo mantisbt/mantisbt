@@ -202,7 +202,6 @@ $s_prefix_for_deleted_users = 'felhasználó';
 $s_administrator = 'rendszergazda';
 $s_myself = 'Saját magam';
 $s_default_access_level = 'Alapértelmezett hozzáférési szint';
-$s_issue_status_percentage = 'Ügyek állapota százalékban';
 $s_access_levels_enum_string = '10:néző,25:bejelentő,40:frissítő,55:fejlesztő,70:menedzser,90:adminisztrátor';
 $s_no_access = 'nincs hozzáférés';
 $s_project_status_enum_string = '10:fejlesztői,30:kiadás,50:stabil,70:elavult';

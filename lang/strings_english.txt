@@ -244,7 +244,6 @@ $s_administrator = 'administrator';
 $s_myself = 'Myself';
 $s_default_access_level = 'Default access level';
 
-$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
@@ -1759,7 +1758,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Deprecated functionality: "%1$s", 
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Warning: The system is configured to display MantisBT errors (E_USER_ERROR) inline. Program execution will continue; this may lead to system/data integrity issues.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Data Type mismatch. Enable detailed error messages for further information.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by another user, please return to the issue and submit your changes again.';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %1$d events within the last %$2d seconds; your action has been blocked to avoid spam, please try again later.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Maximum length for Field "%1$s" is %2$d characters.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'The file specified in $g_log_destination "%s" is not writable.';

@@ -160,7 +160,6 @@ $s_prefix_for_deleted_users = 'استہمال کرنے والہ';
 $s_administrator = 'منتظم';
 $s_myself = 'میرے طور پر';
 $s_default_access_level = 'یہ استہمال ھونے والہ لیول ڈیفالٹ ھے';
-$s_issue_status_percentage = 'ایشوذ کے مقام کی فی صد';
 $s_access_levels_enum_string = '10:دیکھنے والے,25:    رپورٹ کرنے وال     ,40:نیا بنا نے والہ  ,55:بنا نے  والہ,70:مینجر,90:انتظا میہ';
 $s_project_status_enum_string = '10:فروغ,30:رھای,50:مضبوط,70:منسوخ';
 $s_project_view_state_enum_string = '10: آزاد,50:غیر آزاد';

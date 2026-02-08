@@ -200,7 +200,6 @@ $s_prefix_for_deleted_users = 'usuario';
 $s_administrator = 'administrador';
 $s_myself = 'Eu';
 $s_default_access_level = 'Nivel de acceso por defecto';
-$s_issue_status_percentage = 'Porcentaxe do estado do problema';
 $s_access_levels_enum_string = '10:lector,25:informador,40:actualizador,55:desenvolvedor,70:xestor,90:administrador';
 $s_no_access = 'sen acceso';
 $s_project_status_enum_string = '10:desenvolvemento,30:publicación,50:estable,70:obsoleto';

@@ -209,7 +209,6 @@ $s_prefix_for_deleted_users = 'gebruiker';
 $s_administrator = 'beheerder';
 $s_myself = 'Ikzelf';
 $s_default_access_level = 'Standaard toegangsniveau';
-$s_issue_status_percentage = 'Statuspercentage melding';
 $s_access_levels_enum_string = '10:gast,25:aanmelder,40:behandelaar,55:ontwikkelaar,70:manager,90:beheerder';
 $s_no_access = 'geen toegang';
 $s_project_status_enum_string = '10:ontwikkeling,30:release,50:stabiel,70:oud';

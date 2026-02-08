@@ -1002,7 +1002,7 @@ function print_admin_menu_bar( $p_page ) {
 	$t_menu_items += array(
 		'check/index.php' => 'Check Installation',
 		'system_utils.php' => 'System Utilities',
-		'test_langs.php' => 'Test Lang',
+		'test_langs.php' => 'Test Language Strings',
 		'email_queue.php' => 'Email Queue',
 	);
 

@@ -213,7 +213,6 @@ $s_prefix_for_deleted_users = 'користувач';
 $s_administrator = 'Адміністратор';
 $s_myself = 'Мені';
 $s_default_access_level = 'Початкові привілеї доступу';
-$s_issue_status_percentage = 'Співвідношення проблем';
 $s_access_levels_enum_string = '10:Спостерігач,25:Репортер,40:Редактор,55:Розробник,70:Керівник,90:Адміністратор';
 $s_no_access = 'немає доступу';
 $s_project_status_enum_string = '10:розробка,30:реліз,50:стабільний,70:застарілий';

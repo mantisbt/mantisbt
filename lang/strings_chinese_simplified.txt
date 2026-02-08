@@ -224,7 +224,6 @@ $s_prefix_for_deleted_users = '用户';
 $s_administrator = '管理员';
 $s_myself = '自身';
 $s_default_access_level = '默认级别';
-$s_issue_status_percentage = '问题状态百分比';
 $s_access_levels_enum_string = '10:观察者,25:报告者,40:升级者,55:开发人员,70:经理,90:管理员';
 $s_no_access = '无访问';
 $s_project_status_enum_string = '10:开发中,30:已发布,50:稳定,70:停止维护';

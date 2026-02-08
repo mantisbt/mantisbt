@@ -193,7 +193,6 @@ $s_prefix_for_deleted_users = 'usuariu';
 $s_administrator = 'alministrador';
 $s_myself = 'Yo mesmu';
 $s_default_access_level = 'Nivel d\'accesu predetermináu';
-$s_issue_status_percentage = 'Porcentaxe d\'incidencies por estáu';
 $s_access_levels_enum_string = '10:llector,25:informador,40:actualizador,55:desendolcador,70:xestor,90:alministrador';
 $s_no_access = 'ensin accesu';
 $s_project_status_enum_string = '10:desendolcu,30:publicación,50:estable,70:anticuáu';

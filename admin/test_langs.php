@@ -16,6 +16,7 @@
 
 /**
  * Check Language Files
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -25,9 +26,28 @@
 define( 'PLUGINS_DISABLED', true );
 define( 'LANG_LOAD_DISABLED', true );
 
-$t_mantis_dir = dirname( __DIR__ ) . '/';
+# Use DIRECTORY_SEPARATOR to ensure a consistent display of the directory on Windows
+$t_mantis_dir = dirname( __DIR__ ) . DIRECTORY_SEPARATOR;
 
 require_once( $t_mantis_dir . 'core.php' );
+
+$t_show_untranslated = gpc_get_bool( 'show_untranslated', false );
+$t_show_translation_errors = gpc_get_bool( 'translation_errors', false );
+
+/**
+ * Returns a URL to implement filtering.
+ *
+ * @param bool $p_show_untranslated       Whether to show untranslated strings.
+ * @param bool $p_show_translation_errors Whether to show translation errors.
+ *
+ * @return string url
+ */
+function mode_url( $p_show_untranslated, $p_show_translation_errors ) {
+	return helper_url_combine( basename( __FILE__ ), [
+		'show_untranslated'  => (int)$p_show_untranslated,
+		'translation_errors' => (int)$p_show_translation_errors,
+	] );
+}
 
 /**
  * Class CheckLangFile.
@@ -41,7 +61,12 @@ class LangCheckFile {
 	 * Comma-delimited list of valid tags and attributes for language strings
 	 * @see http://htmlpurifier.org/live/configdoc/plain.html#HTML.Allowed
 	 */
-	const VALID_TAGS = 'em,strong,i,b,br,p,ul,ol,li,table,tr,td,code,a[href|title],span[class],abbr[title]';
+	const VALID_TAGS = 'em,strong,i,b,br,p,ul,ol,li,table,tr,td,code,a[href|title|target],span[class],abbr[title]';
+
+	/**
+	 * Regular expression pattern to extract argument (without the leading %)
+	 */
+	const ARG_PATTERN = '(?:\d+\$)?[-+0]?(?:\'.)?(?:\d+|\*)?(?:\.(?:\d+|\*))?[bcdeEfFgGhHosuxX]';
 
 	/**
 	 * @var bool True if HTML syntax checks can be performed
@@ -54,6 +79,16 @@ class LangCheckFile {
 	 * @var string Full path to to the language file
 	 */
 	protected $file;
+
+	/**
+	 * @var string Group of translations
+	 */
+	protected $group;
+
+	/**
+	 * @var string Language code (translatewiki-compatible)
+	 */
+	protected $lang;
 
 	/**
 	 * @var bool True if file is base language (i.e. English)
@@ -77,13 +112,20 @@ class LangCheckFile {
 	protected $purifier;
 
 	/**
+	 * @var array Array of base variables loaded first from the reference English file.
+	 */
+	protected static $basevariables = [];
+
+	/**
 	 * CheckLangFile constructor.
 	 *
-	 * @param string $p_path Path to language files
-	 * @param string $p_file Language file name
+	 * @param string $p_path  Path to language files
+	 * @param string $p_file  Language file name
+	 * @param string $p_group Group of translations
 	 */
-	public function __construct( $p_path, $p_file ) {
+	public function __construct( $p_path, $p_file, $p_group ) {
 		$this->file = $p_path . $p_file;
+		$this->group = $p_group;
 		$this->is_base_language = ( $p_file == self::BASE );
 
 		# Initialize HTML Purifier object
@@ -93,6 +135,9 @@ class LangCheckFile {
 		$t_purifier_config = HTMLPurifier_Config::create( [
 			'Cache.DefinitionImpl' => null,
 			'HTML.Allowed' => self::VALID_TAGS,
+			'Attr.AllowedFrameTargets' => [ '_blank' ],
+			'HTML.TargetNoopener' => false,
+			'HTML.TargetNoreferrer' => false,
 		] );
 		$this->purifier = new HTMLPurifier( $t_purifier_config );
 	}
@@ -100,25 +145,33 @@ class LangCheckFile {
 	/**
 	 * Log an error.
 	 *
-	 * @param string $p_message
+	 * @param string $p_message Log message
+	 * @param int    $p_line    Line number (0 - without number)
+	 * @param bool   $p_encode  Encode HTML
+	 *
+	 * @return void
 	 */
-	protected function logFail( $p_message, $p_line = 0 ) {
+	protected function logFail( $p_message, $p_line = 0, $p_encode = true ) {
 		if( $p_line ) {
 			$p_message = "Line $p_line: $p_message";
 		}
-		$this->errors[] = $p_message;
+		$this->errors[] = $p_encode ? string_attribute( $p_message ) : $p_message;
 	}
 
 	/**
 	 * Log a warning.
 	 *
-	 * @param string $p_message
+	 * @param string $p_message Log message
+	 * @param int    $p_line    Line number (0 - without number)
+	 * @param bool   $p_encode  Encode HTML
+	 *
+	 * @return void
 	 */
-	protected function logWarn( $p_message, $p_line = 0  ) {
+	protected function logWarn( $p_message, $p_line = 0, $p_encode = true ) {
 		if( $p_line ) {
 			$p_message = "Line $p_line: $p_message";
 		}
-		$this->warnings[] = $p_message;
+		$this->warnings[] = $p_encode ? string_attribute( $p_message ) : $p_message;
 	}
 
 	/**
@@ -163,6 +216,15 @@ class LangCheckFile {
 	}
 
 	/**
+	 * Get error count.
+	 *
+	 * @return int Error count
+	 */
+	public function countErrors() {
+		return count( $this->errors );
+	}
+
+	/**
 	 * Print check results.
 	 *
 	 * Prints a table row with 2 cells, the first contains the name of the file
@@ -171,38 +233,30 @@ class LangCheckFile {
 	 * depending on overall status (PASS, WARNINGS, ERRORS).
 	 */
 	public function printResults() {
-		flush();
-		echo "<tr><td>Testing '" . basename( $this->file ) . "'</td>";
-
-		$t_messages = '';
+		echo '<tr><td class="col-xs-4"';
+		if( $this->warnings && $this->errors ) echo ' rowspan="2"';
+		echo '>Testing \'' . basename( $this->file ) . '\'</td>';
 
 		if( $this->warnings ) {
-			$t_class = 'alert-warning';
-			$t_warnings = '';
+			echo '<td class="alert-warning">WARNINGS<ul>';
 			foreach( $this->warnings as $t_msg ) {
-				$t_warnings .= '<li>' . string_attribute( $t_msg ) . '</li>';
+				echo '<li>' . $t_msg . '</li>';
 			}
-			$t_messages = sprintf( 'WARNINGS<ul>%s</ul>', $t_warnings );
+			echo '</ul></td></tr>' . PHP_EOL;
 		}
 
 		if( $this->errors ) {
-			$t_class = 'alert-danger';
-			$t_errors = '';
+			if( $this->warnings ) echo '<tr>';
+			echo '<td class="alert-danger">ERRORS<ul>';
 			foreach( $this->errors as $t_msg ) {
-				$t_errors .= '<li>' . string_attribute( $t_msg ) . '</li>';
+				echo '<li>' . $t_msg . '</li>';
 			}
-			$t_messages = sprintf( 'ERRORS<ul>%s</ul>', $t_errors )
-				. $t_messages;
+			echo '</ul></td></tr>' . PHP_EOL;
 		}
 
-		if( !$t_messages ) {
-			$t_class = 'alert-success';
-			$t_messages = 'PASS';
+		if( !$this->warnings && !$this->errors ) {
+			echo '<td class="alert-success">PASS</td></tr>' . PHP_EOL;
 		}
-
-		/** @noinspection PhpUndefinedVariableInspection */
-		printf( '<td class="%s">%s</td>', $t_class, $t_messages );
-		echo '</tr>' . PHP_EOL;
 	}
 
 	/**
@@ -235,6 +289,37 @@ class LangCheckFile {
 		preg_match( '/strings_(.+)\.txt$/', $this->file, $t_matches );
 		$t_lang = $t_matches[1];
 
+		$t_lang_map = [
+			'bengali'             => 'bn',
+			'bosnian'             => 'bs',
+			'chinese_simplified'  => 'zh-hans',  # replaces $g_language_auto_map
+			'chinese_traditional' => 'zh-hant',  # replaces $g_language_auto_map
+			'indonesian'          => 'id',
+			'laki'                => 'lki',
+			'lezgi'               => 'lez',
+			'lower_sorbian'       => 'dsb',
+			'malay'               => 'ms',
+			'malayalam'           => 'ml',
+			'mirandese'           => 'mwl',
+			'piedmontese'         => 'pms',
+			'saraiki'             => 'skr-arab', # replaces $g_language_auto_map
+			'serbian'             => 'sr-ec',    # replaces $g_language_auto_map
+			'skr'                 => 'skr-arab',
+			'sr'                  => 'sr-ec',
+			'tachelhit'           => 'shi',
+			'telugu'              => 'te',
+			'tunisian_arabic'     => 'aeb-arab',
+			'upper_sorbian'       => 'hsb',
+			'zh'                  => 'zh-hans',
+			'zh-cn'               => 'zh-hans',
+			'zh-hk'               => 'zh-hant',
+			'zh-tw'               => 'zh-hant',
+		];
+		$t_lang_map = array_replace( array_flip( $g_language_auto_map ), $t_lang_map );
+		ksort( $t_lang_map );
+		$this->lang = explode( ',', array_key_exists( $t_lang, $t_lang_map ) ? $t_lang_map[$t_lang] : $t_lang );
+		$this->lang = trim( end( $this->lang ) );
+
 		# Check for matching entries in configuration
 		$t_check = ['g_language_choices_arr', 'g_language_auto_map'];
 		foreach( $t_check as $t_key => $t_config ) {
@@ -252,11 +337,22 @@ class LangCheckFile {
 	}
 
 	/**
+	 * Reset translation state before new English reference file loading.
+	 *
+	 * @return void
+	 */
+	 public static function resetVars() {
+		self::$basevariables = [];
+	}
+
+	/**
 	 * Check Language File Tokens
 	 *
 	 * @return boolean
 	 */
 	protected function checkTokens() {
+		global $t_show_untranslated, $t_show_translation_errors;
+
 		$t_source = file_get_contents( $this->file );
 		try {
 			$t_tokens = token_get_all( $t_source, TOKEN_PARSE );
@@ -267,7 +363,6 @@ class LangCheckFile {
 
 		$t_line = 0;
 		$t_variables = array();
-		static $s_basevariables;
 		$t_current_var = null;
 		$t_last_token = 0;
 		$t_set_variable = false;
@@ -279,6 +374,17 @@ class LangCheckFile {
 		$t_setting_variable = false;
 		$t_pass = true;
 		$t_fatal = false;
+
+		# Reset translation state for a new run
+		if( $this->is_base_language ) {
+			self::resetVars();
+		} else {
+			foreach( self::$basevariables as & $t_var ) {
+				if( isset( $t_var['translated'] ) ) {
+					$t_var['translated'] = false;
+				}
+			}
+		}
 
 		foreach( $t_tokens as $t_token ) {
 			$t_last_token2 = 0;
@@ -374,7 +480,7 @@ class LangCheckFile {
 						break;
 					case T_STRING:
 						if( $t_variable_array ) {
-							$t_current_var .= $t_text;
+							$t_current_var .= '[' . $t_text . ']';
 							if( !defined( $t_text ) ) {
 								$this->logFail( "undefined constant: '$t_text'", $t_line );
 							}
@@ -409,8 +515,9 @@ class LangCheckFile {
 							}
 
 							if( $this->is_base_language ) {
-								$s_basevariables[$t_current_var] = true;
-							} elseif( !isset( $s_basevariables[$t_current_var] ) ) {
+								self::$basevariables[$t_current_var]['translated'] = false;
+								self::$basevariables[$t_current_var]['text'] = $t_text;
+							} elseif( !isset( self::$basevariables[$t_current_var] ) ) {
 								$this->logWarn( "String '$t_current_var' not defined in English language file" );
 							}
 
@@ -422,8 +529,9 @@ class LangCheckFile {
 						}
 
 						# Perform HTML tags validation if the string contains any
-						if( $this::canDoHtmlChecks()
-							&& preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text)
+						if( ( $t_show_translation_errors || $this->is_base_language )
+							&& $this::canDoHtmlChecks()
+							&& preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text )
 						) {
 							/** @noinspection PhpComposerExtensionStubsInspection */
 							$t_dom = new DOMDocument();
@@ -447,6 +555,16 @@ class LangCheckFile {
 							$this->checkInvalidTags( $t_current_var, $t_text, $t_line );
 						}
 
+						# Perform arguments validation
+						if( $t_show_translation_errors || $this->is_base_language ) {
+							$this->checkInvalidArgs( $t_current_var, $t_text, $t_line );
+						}
+
+						# Mark string as translated
+						if( !$this->is_base_language && isset( self::$basevariables[$t_current_var]['translated'] ) ) {
+							self::$basevariables[$t_current_var]['translated'] = true;
+						}
+
 						$t_current_var = null;
 						$t_need_end_variable = true;
 						break;
@@ -467,6 +585,15 @@ class LangCheckFile {
 			}
 		}
 
+		# Report untranslated strings
+		if( $t_show_untranslated && !$this->is_base_language && !$t_fatal ) {
+			$this->checkUntranslated();
+		}
+
+		if( $this->is_base_language ) {
+			ksort( self::$basevariables );
+		}
+
 		return $t_pass;
 	}
 
@@ -483,23 +610,184 @@ class LangCheckFile {
 	 * @return void
 	 */
 	private function checkInvalidTags( $p_var, $p_text, $p_line ) {
-		$t_pure = $this->purifier->purify( $p_text );
+		# Remove all arguments since purifier can escape its '%' leading symbols
+		$p_text = preg_replace( '/(%' . self::ARG_PATTERN . ')/', '_', $p_text );
 
-		# Special cases handling
-		# - sprintf variable '%1$s' inside href gets urlencoded
-		if( $p_var == '$s_webmaster_contact_information' ) {
-			$t_pure = str_replace( '%25', '%', $t_pure );
-		}
+		$t_pure = $this->purifier->purify( $p_text );
 
 		# Prepare original language string for comparison with HTML Purifier output
 		# - transform <br> tag with or without trailing '/' into '<br />'
 		$p_text = preg_replace( '#<br\s*/?>#i', '<br />', $p_text );
 
 		if( $t_pure != $p_text ) {
-			$this->logFail( "$p_var contains unsupported or invalid tags or attributes.", $p_line );
+			$this->logFail( $this->url( $p_var ) . ' contains unsupported or invalid tags or attributes'
+				. ( !$this->hasUrl()
+					? ':<ul><li>Text: ' . string_attribute( $p_text ) . '</li></ul>'
+					: '.'
+				  ), $p_line, false );
 		}
 	}
 
+	/**
+	 * Validate argument format specifiers and report errors.
+	 *
+	 * The assumption is that the English strings are free of argument
+	 * format errors and are thus ignored in the translations.
+	 *
+	 * @param string $p_var  Name of language string variable to check
+	 * @param string $p_text Language string
+	 * @param int    $p_line Line number in language file
+	 *
+	 * @return void
+	 */
+	private function checkInvalidArgs( $p_var, $p_text, $p_line ) {
+		$t_base_var = & self::$basevariables[$p_var];
+
+		# Validate the argument format (explicit space padding is not supported)
+		if( preg_match( '/%(?!' . self::ARG_PATTERN . ')/', str_replace( '%%', '', $p_text ) ) ) {
+			if( $this->is_base_language ) {
+				# Skip
+			} elseif( $t_base_var['arguments'] ?? false ) {
+				# Only if any valid argument present in the reference English string
+				$this->logFail( $this->url( $p_var ) . ' contains invalid format argument(s)'
+					. ( !$this->hasUrl()
+						? ':<ul><li>Text: ' . string_attribute( $p_text ) . '</li></ul>'
+						: '.'
+					  ), $p_line, false );
+			}
+			return;
+		}
+
+		# Validate the argument count and type
+		$t_args = [];
+		if( preg_match_all( '/(%' . self::ARG_PATTERN . ')/', $p_text, $t_args ) && isset( $t_args[1] ) ) {
+			$t_args = $t_args[1];
+			sort( $t_args );
+		} else {
+			$t_args = [];
+		}
+		if( $this->is_base_language ) {
+			$t_base_var['arguments'] = $t_args;
+
+			# Validate the argument number and order (repeated placeholders is not supported)
+			if( count( $t_args ) > 1 ) {
+				$t_order = 1;
+				foreach( $t_args as $t_arg ) {
+					$t_arg_order = [];
+					if ( !preg_match( '/%(\d+)\$/', $t_arg, $t_arg_order ) ) {
+						$this->logFail( $this->url( $p_var ) . ' contains unnumbered arguments'
+							. ( !$this->hasUrl()
+								? ':<ul><li>Text: ' . string_attribute( $p_text ) . '</li></ul>'
+								: '.'
+							  ), $p_line, false );
+						return;
+					} elseif( (int)$t_arg_order[1] !== $t_order ) {
+						$this->logFail( $this->url( $p_var ) . ' contains unordered arguments'
+							. ( !$this->hasUrl()
+								? ':<ul><li>Text: ' . string_attribute( $p_text ) . '</li></ul>'
+								: '.'
+							  ), $p_line, false );
+						return;
+					}
+					++$t_order;
+				}
+			}
+		} else {
+			$t_count = count( $t_args );
+			$t_error = ( $t_count != count( $t_base_var['arguments'] ?? [] ) );
+			for( $t_index = 0; !$t_error && $t_index < $t_count; ++$t_index ) {
+				if( $t_args[$t_index] !== $t_base_var['arguments'][$t_index] ) {
+					$t_error = true;
+				}
+			}
+			if( $t_error ) {
+				$this->logFail( $this->url( $p_var ) . ' contains inconsistent argument(s)'
+					. ( !$this->hasUrl()
+						? ':<ul><li>English text: '
+							. string_attribute( $t_base_var['text'] )
+							. '</li><li>Translated text: '
+							. string_attribute( $p_text ) . '</li></ul>'
+						: '.'
+					  ), $p_line, false );
+			}
+		}
+	}
+
+	/**
+	 * Report untranslated strings.
+	 *
+	 * @return void
+	 */
+	private function checkUntranslated() {
+		# Optional variables may be omitted in the translation
+		$t_optional_variables = [
+			# known optional variables, marked {{Optional}}
+			'$s_directionality',
+			'$s_p',
+			'$s_priority_abbreviation',
+			'$s_kib',
+			'$s_phpmailer_language',
+			'$s_sponsorship_process_url',
+			'$s_word_separator',
+			'$s_label',
+			# known empty variables
+			'$s_dropzone_fallback_text',
+			'$s_dropzone_remove_file_confirmation',
+		];
+
+		$t_untranslated = 0;
+		foreach( self::$basevariables as $t_name => $t_var ){
+			if( isset( $t_var['translated'] )
+				&& $t_var['translated'] === false
+				&& !in_array( $t_name, $t_optional_variables )
+			) {
+				if( ++$t_untranslated <= 3 ) {
+					$this->logWarn( 'Untranslated ' . $this->url( $t_name ), 0, false );
+				}
+			}
+		}
+		if( ( $t_untranslated -= 3 ) > 0 ) {
+			$this->logWarn( "... and $t_untranslated more." );
+		}
+	}
+
+	/**
+	 * Returns the direct URL to the translation of variables.
+	 *
+	 * Variable is returned as-is for English (base language) or if translations
+	 * are not managed externally (see {@see hasUrl()}).
+	 *
+	 * @param string $p_var Name of language string variable
+	 *
+	 * @return string
+	 */
+	private function url( $p_var ) {
+		return !$this->is_base_language && $this->hasUrl()
+			? '<a href="https://translatewiki.net/w/i.php?'
+				. http_build_query( [
+					'title' => 'Special:Translate',
+					'group' => $this->group,
+					'showMessage' => str_replace( [ '$', '[', ']' ], [ '', '\x5b', '\x5d' ], $p_var ),
+					'language' => $this->lang,
+				] ) . '">' . string_attribute( $p_var ). '</a>'
+			: string_attribute( $p_var );
+	}
+
+	/**
+	 * Detects that the translation of variables is performed by an external service.
+	 *
+	 * @return bool
+	 */
+	private function hasUrl() {
+		$t_external_groups = [
+			'out-mantis-core',
+			'out-mantis-plugin-gravatar',
+			'out-mantis-plugin-mantiscoreformatting',
+			'out-mantis-plugin-mantisgraph',
+			'out-mantis-plugin-xmlimportexport',
+		];
+		return in_array( $this->group, $t_external_groups );
+	}
 }
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
@@ -508,12 +796,12 @@ lang_push( 'english' );
 
 set_time_limit( 0 );
 
-layout_page_header();
+layout_page_header( 'MantisBT Administration - Test Language Strings' );
 layout_admin_page_begin();
 print_admin_menu_bar( 'test_langs.php' );
 ?>
 
-<div class="page-content col-md-12 col-xs-12">
+<div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 
 	<!-- CORE LANGUAGE FILES -->
@@ -531,6 +819,11 @@ print_admin_menu_bar( 'test_langs.php' );
 		</div>
 
 		<div class="widget-body">
+			<div class="widget-toolbox padding-8 clearfix">
+				Verbosity:
+				<a href="<?php echo mode_url( !$t_show_untranslated, $t_show_translation_errors ) ?>"><?php echo $t_show_untranslated ? 'Hide' : 'Show' ?> untranslated strings</a> |
+				<a href="<?php echo mode_url( $t_show_untranslated, !$t_show_translation_errors ) ?>"><?php echo $t_show_translation_errors ? 'Hide' : 'Show' ?> translation errors</a>
+			</div>
 			<div class="widget-main no-padding table-responsive">
 				<table class="table table-bordered table-condensed test-langs">
 <?php
@@ -550,7 +843,7 @@ if( !LangCheckFile::canDoHtmlChecks() ) {
 <?php
 }
 
-checklangdir( $t_mantis_dir );
+checklangdir( $t_mantis_dir, 'out-mantis-core' );
 ?>
 				</table>
 			</div>
@@ -618,7 +911,7 @@ function checkplugins() {
 		echo '<tr id="plugin-' . $t_plugin . '"><th colspan="2">';
 		echo "Checking language files for plugin <em>$t_plugin</em>";
 		echo '</th></tr>';
-		checklangdir( $t_path );
+		checklangdir( $t_path, 'out-mantis-plugin-' . strtolower( $t_plugin ) );
 	}
 }
 
@@ -681,12 +974,14 @@ function get_lang_files( $p_path ) {
 /**
  * Check directory of language files
  *
- * @param string $p_path Path to language files.
+ * @param string $p_path  Path to language files.
+ * @param string $p_group Group of translations
  *
  * @return void
  */
-function checklangdir( $p_path ) {
-	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . '/lang/';
+function checklangdir( $p_path, $p_group ) {
+	# Use DIRECTORY_SEPARATOR to ensure a consistent display of the directory on Windows
+	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 	echo PHP_EOL . '<tr><td>';
 	echo "Retrieving language files from '$t_path'";
 	echo '</td>';
@@ -708,23 +1003,38 @@ function checklangdir( $p_path ) {
 
 	echo '</tr>' . PHP_EOL;
 
+	LangCheckFile::resetVars();
+
 	# Check reference English language file
 	$t_key = array_search( LangCheckFile::BASE, $t_lang_files );
 	if( $t_key === false ) {
-		print_fail( "File not found" );
+		echo '<tr><td></td>';
+		print_fail( "Reference English file not found" );
+		echo '</tr>' . PHP_EOL;
 	} else {
-		$t_file = new LangCheckFile( $t_path, LangCheckFile::BASE );
+		$t_file = new LangCheckFile( $t_path, LangCheckFile::BASE, $p_group );
 		# No point testing other languages if English fails
 		if( !$t_file->checkAndPrint() ) {
+			echo '<tr><td></td>';
+			print_fail( 'Total error(s): '. $t_file->countErrors() );
+			echo '</tr>' . PHP_EOL;
 			return;
 		}
 		unset( $t_lang_files[$t_key] );
 	}
 
 	# Check foreign language files
+	$t_errors = 0;
 	foreach( $t_lang_files as $t_lang ) {
-		$t_file = new LangCheckFile( $t_path, $t_lang );
+		$t_file = new LangCheckFile( $t_path, $t_lang, $p_group );
 		$t_file->checkAndPrint();
+		$t_errors += $t_file->countErrors();
+	}
+
+	if( $t_errors ) {
+		echo '<tr><td></td>';
+		print_fail( 'Total error(s): ' . $t_errors );
+		echo '</tr>' . PHP_EOL;
 	}
 }
 

@@ -213,7 +213,6 @@ $s_prefix_for_deleted_users = 'کاربر';
 $s_administrator = 'مدیریت';
 $s_myself = 'خودم';
 $s_default_access_level = 'سطح دسترسی پیش فرض';
-$s_issue_status_percentage = 'درصد وضعیت مسئله';
 $s_access_levels_enum_string = '10:مشاهده‌گر,25:گزارش دهنده,40:بروزرسان,55:توسعه دهنده,70:مدیر,90:مدیریت';
 $s_no_access = 'دسترسی نیست';
 $s_project_status_enum_string = '10:در حال توسعه،30:انتشار،50:پایدار،70:منسوخ';

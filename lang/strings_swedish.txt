@@ -210,7 +210,6 @@ $s_prefix_for_deleted_users = 'användare';
 $s_administrator = 'administratör';
 $s_myself = 'Mig själv';
 $s_default_access_level = 'Förvald åtkomstnivå';
-$s_issue_status_percentage = 'Ärendestatus i procent';
 $s_access_levels_enum_string = '10:läsare,25:rapporterare,40:uppdaterare,55:utvecklare,70:projektledare,90:administratör';
 $s_no_access = 'ingen åtkomst';
 $s_project_status_enum_string = '10:utveckling,30:release,50:stabil,70:inaktuell';

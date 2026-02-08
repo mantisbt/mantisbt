@@ -197,7 +197,6 @@ $s_prefix_for_deleted_users = 'naudotojas';
 $s_administrator = 'administratorius';
 $s_myself = 'Aš pats';
 $s_default_access_level = 'Numatytasis prieigos lygis';
-$s_issue_status_percentage = 'Klaidos pagal būseną procentais';
 $s_access_levels_enum_string = '10:stebėtojas,25:pranešėjas,40:atnaujintojas,55:sprendėjas,70:vadovas,90:administratorius';
 $s_no_access = 'Neturite prieigos';
 $s_project_status_enum_string = '10:kuriamas,30:išleistas,50:stabilus,70:pasenęs';

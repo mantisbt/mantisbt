@@ -232,7 +232,6 @@ $s_prefix_for_deleted_users = 'пользователь';
 $s_administrator = 'администратор';
 $s_myself = 'Я';
 $s_default_access_level = 'Уровень доступа по умолчанию';
-$s_issue_status_percentage = 'Соотношение задач';
 $s_access_levels_enum_string = '10:наблюдатель,25:автор,40:редактор,55:разработчик,70:руководитель,90:администратор';
 $s_no_access = 'нет доступа';
 $s_project_status_enum_string = '10:в разработке,30:выпущен,50:стабильный,70:устарел';

@@ -186,7 +186,6 @@ $s_prefix_for_deleted_users = 'utilizator';
 $s_administrator = 'administrator';
 $s_myself = 'Eu însumi';
 $s_default_access_level = 'Nivel de acces implicit';
-$s_issue_status_percentage = 'Procent stare problemă';
 $s_access_levels_enum_string = '10:spectator,25:raportor,40:editor,55:dezvoltator,70:manager,90:administrator';
 $s_project_status_enum_string = '10:dezvoltare,30:release,50:stabilă,70:perimată';
 $s_project_view_state_enum_string = '10:public,50:privat';
