@@ -646,7 +646,18 @@ class LangCheckFile {
 		# Validate the argument format (explicit space padding is not supported)
 		if( preg_match( '/%(?!' . self::ARG_PATTERN . ')/', str_replace( '%%', '', $p_text ) ) ) {
 			if( $this->is_base_language ) {
-				# Skip
+				# Run the string through sprintf and report any errors
+				set_error_handler( 'error_convert_to_exception' );
+				try {
+					/** @noinspection PhpExpressionResultUnusedInspection */
+					vsprintf( $p_text, array_pad([], 10, 0) );
+				} catch ( Throwable $e ) {
+					$this->logFail( $this->url( $p_var )
+						. " printf format string is not valid: " . $e->getMessage(),
+						$p_line, false
+					);
+				}
+				restore_error_handler();
 			} elseif( $t_base_var['arguments'] ?? false ) {
 				# Only if any valid argument present in the reference English string
 				$this->logFail( $this->url( $p_var ) . ' contains invalid format argument(s)'
