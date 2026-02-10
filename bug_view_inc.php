@@ -38,7 +38,6 @@
  * @uses gpc_api.php
  * @uses helper_api.php
  * @uses html_api.php
- * @uses http_api.php
  * @uses lang_api.php
  * @uses prepare_api.php
  * @uses print_api.php
@@ -79,7 +78,6 @@ require_api( 'event_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
-require_api( 'http_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'prepare_api.php' );
 require_api( 'print_api.php' );
@@ -104,11 +102,6 @@ $f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 # compat variables for included pages
 $f_bug_id = $f_issue_id;
 $t_bug = bug_get( $f_bug_id, true );
-
-http_set_expiration( $t_bug->last_updated );
-if( !http_if_modified_since( $t_bug->last_updated ) ) {
-	exit;
-}
 
 $t_data = array(
 	'query' => array( 'id' => $f_issue_id ),

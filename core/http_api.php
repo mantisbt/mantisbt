@@ -43,27 +43,6 @@ $g_http_max_age = SECONDS_PER_DAY * 10;
 $g_csp = array();
 
 /**
- * Set the expiration time based on the last modification time.
- * @param int $p_timestamp Last modification time.
- * @return void
- */
-function http_set_expiration( int $p_timestamp ) {
-	global $g_http_max_age;
-
-	$t_elapsed = time() - $p_timestamp;
-	if( $t_elapsed < SECONDS_PER_DAY ) {
-		$g_http_max_age = min( $g_http_max_age, 600 );				# +10 min
-	} elseif( $t_elapsed < SECONDS_PER_DAY * 3 ) {
-		$g_http_max_age = min( $g_http_max_age, 3600 );				# +hour
-	} elseif( $t_elapsed < SECONDS_PER_DAY * 30 ) {
-		$g_http_max_age = min( $g_http_max_age, SECONDS_PER_DAY );	# +day
-	}
-
-	# Refresh headers
-	http_caching_headers();
-}
-
-/**
  * Print the "Last-Modified:" header, check the "If-Modified-Since" request header,
  * and return a "304 Not Modified" response if necessary.
  * @param int $p_timestamp Last modification time.
@@ -171,11 +150,11 @@ function http_caching_headers( $p_allow_caching = null ) {
 		} else {
 			header( "Cache-Control: private, max-age=$g_http_max_age, must-revalidate" );
 		}
-		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() + $g_http_max_age ) );
 	} else {
 		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 	}
+
+	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 }
 
 /**
