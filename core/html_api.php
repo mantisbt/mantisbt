@@ -370,13 +370,13 @@ function html_head_javascript() {
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		# JQuery
-		require_js( [ 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', JQUERY_HASH ] );
+		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', JQUERY_HASH );
 
 		# Dropzone
 		require_js( [ 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH ] );
 	} else {
 		# JQuery
-		require_js( 'jquery-' . JQUERY_VERSION . '.min.js' );
+		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
 
 		# Dropzone
 		require_js( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
