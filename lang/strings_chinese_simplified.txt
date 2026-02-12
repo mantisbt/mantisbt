@@ -45,6 +45,7 @@
  * @author Fengchao
  * @author Fwolf
  * @author Gaoxuewei
+ * @author Gsdn
  * @author GuoPC
  * @author Hydra
  * @author Hzy980512
@@ -1430,7 +1431,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = '弃用功能：“%1$s”，应使
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = '警告：系统配置为内联显示MantisBT错误（E_USER_ERROR）。程序将继续执行；这将导致系统/数据完整性问题。';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = '数据类型不匹配。启用详细错误消息以获取更多信息。';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = '此问题被另一用户更新，请返回问题并再次提交您的更改。';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已经达到了可允许的活动极限 - %d 次事件，%d 秒内；您的行为已经被阻止以防止垃圾信息，请稍候再试。';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已达到在 %2$d 秒内允许 %1$d 次事件的使用限制；您的行为已经被阻止以防止垃圾信息，请稍候再试。';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '字段“%1$s”的最大长度为%2$d个字符。';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API令牌名称“%s”已被使用。请返回并选择另一个。';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '无法写入$g_log_destination的指定文件"%s"';

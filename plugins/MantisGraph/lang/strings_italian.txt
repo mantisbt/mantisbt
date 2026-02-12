@@ -39,6 +39,7 @@
  * @file
  *
  * @author Beta16
+ * @author Ciampix
  * @author Massimo itaca
  * @author Nemo bis
  * @author Ontsed
@@ -60,6 +61,7 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Per grafici di priorità';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Per grafici di gravità';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Per grafici di categoria';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Per grafici di risoluzione';
+$s_plugin_MantisGraph_graph_project_title = 'Per grafici di progetto';
 $s_plugin_MantisGraph_graph_developer_title = 'Grafico per sviluppatore';
 $s_plugin_MantisGraph_graph_reporter_title = 'Grafico per segnalatore';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Anomalie aperte, risolte e restanti';
@@ -85,3 +87,4 @@ $s_plugin_MantisGraph_graph_topdev = 'Migliori sviluppatori per problemi risolti
 $s_plugin_MantisGraph_graph_opendev = 'Sviluppatori per problemi aperti';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Migliori segnalatori per problemi risolti';
 $s_plugin_MantisGraph_other_categories = 'altre categorie (%d)';
+$s_plugin_MantisGraph_other_projects = 'altri progetti ( %d )';
