@@ -153,8 +153,8 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 		'date_added'  => db_now(),
 		'user_id'     => (int)$p_user_id,
 	);
-	# Oracle has to update BLOBs separately
-	if( !db_is_oracle() ) {
+	# Update BLOBs separately
+	if( !db_uses_blob() ) {
 		$t_param['content'] = $c_content;
 	}
 	$t_query_param = db_param();
@@ -171,7 +171,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	# get attachment id
 	$t_attachment_id = db_insert_id( $t_file_table );
 
-	if( db_is_oracle() ) {
+	if( db_uses_blob() ) {
 		db_update_blob( $t_file_table, 'content', $c_content, "diskfile='$t_unique_name'" );
 	}
 
