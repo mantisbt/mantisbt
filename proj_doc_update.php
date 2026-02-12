@@ -80,10 +80,6 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 	file_ensure_uploaded( $f_file );
 
 	$t_file_name = $f_file['name'];
-	if( strlen( $t_file_name ) > DB_FIELD_SIZE_FILENAME ) {
-		error_parameters( $t_file_name );
-		trigger_error( ERROR_FILE_NAME_TOO_LONG, ERROR );
-	}
 
 	$t_project_id = helper_get_current_project();
 
@@ -93,10 +89,6 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 
 	# prepare variables for insertion
 	$t_file_size = filesize( $f_file['tmp_name'] );
-	$t_max_file_size = file_get_max_file_size();
-	if( $t_file_size > $t_max_file_size ) {
-		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-	}
 
 	$t_method = config_get( 'file_upload_method' );
 	switch( $t_method ) {
