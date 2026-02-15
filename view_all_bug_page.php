@@ -61,7 +61,7 @@ if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) ) && $t_p
 	helper_set_current_project( $t_project_id );
 	# Reloading the page is required so that the project browser
 	# reflects the new current project
-	print_header_redirect( $_SERVER['REQUEST_URI'], true, false, true );
+	print_header_redirect( $_SERVER['REQUEST_URI'], false, true );
 }
 
 $t_per_page = 0;

@@ -88,4 +88,4 @@ user_pref_reset( $f_user_id, ALL_PROJECTS );
 
 form_security_purge( 'account_prefs_reset' );
 
-print_header_redirect( $f_redirect_url, true, true );
+print_header_redirect( $f_redirect_url, true );

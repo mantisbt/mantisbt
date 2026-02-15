@@ -1111,20 +1111,20 @@ function auth_reauthentication_expiry() {
  * or if logged in anonymously, this function will always "authenticate" the
  * user (do nothing).
  *
- * @return boolean
+ * @return void
  * @access public
  * @throws ClientException
  */
 function auth_reauthenticate() {
 	$t_login_method = config_get_global( 'login_method' );
 	if( !auth_reauthentication_enabled() || BASIC_AUTH == $t_login_method || HTTP_AUTH == $t_login_method ) {
-		return true;
+		return;
 	}
 
 	$t_auth_token = token_get( TOKEN_AUTHENTICATED );
 	if( null != $t_auth_token ) {
 		token_touch( $t_auth_token['id'], auth_reauthentication_expiry() );
-		return true;
+		return;
 	} else {
 		$t_anon_account = auth_anonymous_account();
 		$t_anon_allowed = auth_anonymous_enabled();
@@ -1134,7 +1134,7 @@ function auth_reauthenticate() {
 
 		# check for anonymous login
 		if( ON == $t_anon_allowed && $t_anon_account == $t_username ) {
-			return true;
+			return;
 		}
 
 		$t_query_params = [
@@ -1144,7 +1144,7 @@ function auth_reauthenticate() {
 		];
 
 		# redirect to login page
-		return print_header_redirect( auth_credential_page( $t_query_params ) );
+		print_header_redirect( auth_credential_page( $t_query_params ) );
 	}
 }
 
