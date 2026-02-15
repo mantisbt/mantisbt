@@ -53,4 +53,4 @@ if( $f_type == 'project' ) {
 	$t_url = wiki_link_bug( $f_id );
 }
 
-print_header_redirect( $t_url, true, false, true );
+print_header_redirect( $t_url, false, true );
