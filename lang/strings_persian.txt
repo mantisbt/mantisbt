@@ -51,6 +51,7 @@
  * @author Ebraminio
  * @author FarsiNevis
  * @author Hosseinblue
+ * @author Huji
  * @author Jeeputer
  * @author LordProfo
  * @author Mjbmr
@@ -456,7 +457,7 @@ $s_profile = 'نمایه';
 $s_updating_bug_simple_title = 'روزآمدسازی اطلاعات مسئله';
 $s_view_revisions = 'نمایشِ بازبینی​ها';
 $s_view_num_revisions = 'نمایش %1$d بازبینی​';
-$s_revision = 'بازبینی';
+$s_revision = 'نسخه';
 $s_revision_by = '%1$s همراه %2$s';
 $s_all_revisions = 'همهٔ نسخه‌ها';
 $s_back_to_issue = 'بازگشت به مسئله';
