@@ -414,7 +414,11 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 		$t_is_own_note = in_array( $v_old_value, $s_own_notes ) ||  in_array( $v_new_value, $s_own_notes ) ;
 		# bypass if user created the note or is allowed to view private notes
 		if( $t_user_id != $v_user_id && !$t_can_view_private_notes && !$t_is_own_note ) {
-			if( $v_type == BUGNOTE_ADDED || $v_type == BUGNOTE_UPDATED || $v_type == BUGNOTE_DELETED ) {
+			if( $v_type == BUGNOTE_ADDED
+				|| $v_type == BUGNOTE_UPDATED
+				|| $v_type == BUGNOTE_DELETED
+				|| $v_type == BUGNOTE_MOVED_TO
+				|| $v_type == BUGNOTE_MOVED_FROM ) {
 				if( !bugnote_exists( $v_old_value ) ) {
 					continue;
 				}
@@ -732,6 +736,12 @@ function history_get_type_name( $p_type ) {
 		case BUGNOTE_REVISION_DROPPED:
 			$t_type_name = 'note-revision-deleted';
 			break;
+		case BUGNOTE_MOVED_TO:
+			$t_type_name = 'note-moved-to';
+			break;
+		case BUGNOTE_MOVED_FROM:
+			$t_type_name = 'note-moved-from';
+			break;
 		default:
 			$t_type_name = '';
 			break;
@@ -864,6 +874,18 @@ function history_localize_item( $p_bug_id, $p_field_name, $p_type, $p_old_value,
 				break;
 			case BUGNOTE_DELETED:
 				$t_note = lang_get( 'bugnote_deleted' ) . ': ' . $p_old_value;
+				break;
+			case BUGNOTE_MOVED_TO:
+				$t_note = lang_get( 'bugnote_deleted' ) . ': ' . $p_old_value;
+				$t_change = '<a href="' . string_get_bugnote_view_url( $p_new_value, 0 + $p_old_value ) . '">'
+					. sprintf( lang_get( 'bugnote_moved_to' ), bug_format_id( $p_new_value ) ) . '</a>';
+				$t_raw = false;
+				break;
+			case BUGNOTE_MOVED_FROM:
+				$t_note = lang_get( 'bugnote_added' ) . ': ' . $p_old_value;
+				$t_change = '<a href="' . string_get_bugnote_view_url( $p_new_value, 0 + $p_old_value ) . '">'
+					. sprintf( lang_get( 'bugnote_moved_from' ), bug_format_id( $p_new_value ) ) . '</a>';
+				$t_raw = false;
 				break;
 			case DESCRIPTION_UPDATED:
 			case STEP_TO_REPRODUCE_UPDATED:
