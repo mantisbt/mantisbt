@@ -48,6 +48,7 @@
  * @author LNDDYL
  * @author Lionpancake
  * @author Liuxinyu970226
+ * @author LowensteinYang
  * @author Macofe
  * @author Mark85296341
  * @author Oapbtommy
@@ -1420,7 +1421,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = '已停用的功能："%1$s"，請�
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = '警告：系統已設定為顯示　MantisBT 錯誤 (E_USER_ERROR) 於畫面，程式將會繼續執行，這可能導致系統/資料不一致的問題。';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = '資料型態不相符。請開啟詳細錯誤訊息以取得進一步的資訊。';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = '此問題已經由其他使用者更新，請返回問題並重新送出您的變更。';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已達到在 %$2d 秒內允許 %1$d 次事件的使用限制；為避免垃圾訊息產生已阻擋您的行為，請稍後再重試。';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已在過去 %2$d 秒內達到了可允許的 %1$d 次事件的使用限制；為避免垃圾訊息產生已阻擋您的行為，請稍後再重試。';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '欄位「%1$s」最大長度為 %2$d 字元。';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API 權杖名稱「%s」已被使用。請返回重新選擇。';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '在 $g_log_destination「%s」指定的檔案不可寫入。';
