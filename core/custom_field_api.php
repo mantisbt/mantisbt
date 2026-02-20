@@ -86,8 +86,12 @@ function custom_field_allow_manage_display( $p_type, $p_display ) {
 	return false;
 }
 
-# Is all custom field definitions cached?
+/**
+ * Flag indicating that caching of all custom fields is complete.
+ * @global bool $g_cache_custom_field_all
+ */
 $g_cache_custom_field_all = false;
+
 # cache of custom field definitions, indexed by field id: array( id => array of properties )
 $g_cache_custom_field = array();
 # cache of all custom fields, array of ids
