@@ -1861,9 +1861,7 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 					$t_stats[$c_bug_id]['last_submitted_bugnote'] = $t_query_row['id'];
 				}
 				$g_cache_bug[$c_bug_id]['_stats'] = $t_stats[$c_bug_id];
-				if( isset( $t_id_array[$c_bug_id] ) ) {
-					unset( $t_id_array[$c_bug_id] );
-				}
+				unset( $t_id_array[$c_bug_id] );
 			}
 			$t_counter++;
 		}

@@ -158,9 +158,7 @@ function file_bug_attachment_count_cache( array $p_bug_ids ) {
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_bug_id = (int)$t_row['bug_id'];
 		$g_cache_file_count[$c_bug_id] = (int)$t_row['attachments'];
-		if( isset( $t_ids_to_search[$c_bug_id] ) ) {
-			unset( $t_ids_to_search[$c_bug_id] );
-		}
+		unset( $t_ids_to_search[$c_bug_id] );
 	}
 
 	# set bugs without result to 0

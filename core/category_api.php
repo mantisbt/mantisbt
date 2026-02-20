@@ -620,9 +620,7 @@ function category_cache_array_rows( array $p_cat_id_array ) {
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_cat_id = (int)$t_row['id'];
 		$g_category_cache[$c_cat_id] = $t_row;
-		if( isset( $t_cat_id_array[$c_cat_id] ) ) {
-			unset( $t_cat_id_array[$c_cat_id] );
-		}
+		unset( $t_cat_id_array[$c_cat_id] );
 	}
 
 	# set the remaining ids as not found
