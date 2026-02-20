@@ -891,6 +891,12 @@
   <part name="tag_id" type="xsd:integer" /></message>
 <message name="mc_tag_deleteResponse">
   <part name="return" type="xsd:boolean" /></message>
+<message name="mc_user_token_createRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="token_name" type="xsd:string" /></message>
+<message name="mc_user_token_createResponse">
+  <part name="return" type="xsd:string" /></message>
 <portType name="MantisConnectPortType">
   <operation name="mc_version">
     <input message="tns:mc_versionRequest"/>
@@ -1250,6 +1256,11 @@
     <documentation>Deletes a tag.</documentation>
     <input message="tns:mc_tag_deleteRequest"/>
     <output message="tns:mc_tag_deleteResponse"/>
+  </operation>
+  <operation name="mc_user_token_create">
+    <documentation>Creates a user token.</documentation>
+    <input message="tns:mc_user_token_createRequest"/>
+    <output message="tns:mc_user_token_createResponse"/>
   </operation>
 </portType>
 <binding name="MantisConnectBinding" type="tns:MantisConnectPortType">
@@ -1611,6 +1622,11 @@
   </operation>
   <operation name="mc_tag_delete">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_tag_delete" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_user_token_create">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_user_token_create" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>
