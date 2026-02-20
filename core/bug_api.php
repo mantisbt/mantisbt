@@ -1781,14 +1781,24 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
  * @access public
  */
 function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
-	if( empty( $p_bugs_id ) ) {
-		return array();
-	}
+	global $g_cache_bug;
+
+	$t_stats = array();
 
 	$t_id_array = array();
 	foreach( $p_bugs_id as $t_id ) {
-		$t_id_array[$t_id] = (int)$t_id;
+		$c_id = (int)$t_id;
+		if( isset( $g_cache_bug[$c_id]['_stats'] ) ) {
+			$t_stats[$c_id] = $g_cache_bug[$c_id]['_stats'];
+		} else {
+			$t_id_array[$c_id] = $c_id;
+		}
 	}
+
+	if ( empty( $t_id_array ) ) {
+		return $t_stats;
+	}
+
 	if( db_is_mssql() ) {
 		# MSSQL is limited to 2100 parameters per query, see #24393
 		$t_chunks = array_chunk( $t_id_array, 2100, true );
@@ -1808,7 +1818,6 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 	$t_query->sql( sprintf( $t_sql, $t_query->sql_in( 'n.bug_id', 'bug_ids' ) ) );
 
 	$t_counter = 0;
-	$t_stats = array();
 	foreach( $t_chunks as $t_chunk_ids ) {
 		$t_current_project_id = null;
 		$t_current_bug_id = null;
@@ -1851,6 +1860,7 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 					$t_last_submit_date = $t_query_row['date_submitted'];
 					$t_stats[$c_bug_id]['last_submitted_bugnote'] = $t_query_row['id'];
 				}
+				$g_cache_bug[$c_bug_id]['_stats'] = $t_stats[$c_bug_id];
 				if( isset( $t_id_array[$c_bug_id] ) ) {
 					unset( $t_id_array[$c_bug_id] );
 				}
@@ -1862,6 +1872,7 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 	# The remaining bug ids, are those without visible notes. Save false as cached value
 	foreach( $t_id_array as $t_id ) {
 		$t_stats[$t_id] = false;
+		$g_cache_bug[$t_id]['_stats'] = false;
 	}
 	return $t_stats;
 }

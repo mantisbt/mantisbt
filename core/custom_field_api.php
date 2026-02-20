@@ -86,6 +86,8 @@ function custom_field_allow_manage_display( $p_type, $p_display ) {
 	return false;
 }
 
+# Is all custom field definitions cached?
+$g_cache_custom_field_all = false;
 # cache of custom field definitions, indexed by field id: array( id => array of properties )
 $g_cache_custom_field = array();
 # cache of all custom fields, array of ids
@@ -145,13 +147,19 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
  * @access public
  */
 function custom_field_cache_array_rows( array $p_cf_id_array = [] ): void {
-	global $g_cache_custom_field, $g_cache_name_to_id_map;
+	global $g_cache_custom_field_all, $g_cache_custom_field, $g_cache_name_to_id_map;
+
+	if( $g_cache_custom_field_all ) {
+		return;
+	}
 
 	$c_cf_id_array = array();
 	$t_cache_all = empty( $p_cf_id_array );
 
 	# cache main data
 	if( $t_cache_all ) {
+		$g_cache_custom_field_all = true;
+
 		$t_query = 'SELECT * FROM {custom_field}';
 		$t_result = db_query( $t_query );
 	} else {
