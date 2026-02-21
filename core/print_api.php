@@ -316,7 +316,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	}
 
 	if( $p_project_id === ALL_PROJECTS ) {
-		$t_projects = user_get_accessible_projects( $t_current_user );
+		$t_projects = user_get_all_accessible_projects( $t_current_user );
 
 		# Get list of users having access level for all accessible projects
 		$t_users = array();
