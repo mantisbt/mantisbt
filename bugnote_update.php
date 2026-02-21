@@ -94,6 +94,11 @@ if( $f_dest_bug_id && $f_dest_bug_id != $t_bug_id ) {
 	# Check add access for the destination bug
 	access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $f_dest_bug_id );
 
+	# Can reporter add private notes?
+	if( bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PRIVATE ) {
+		access_ensure_bug_level( config_get( 'set_view_status_threshold' ), $f_dest_bug_id );
+	}
+
 	# Check delete access for the source bug
 	access_ensure_bugnote_level( config_get( $t_is_reporter
 		? 'bugnote_user_delete_threshold'
