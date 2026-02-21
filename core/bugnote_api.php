@@ -915,3 +915,40 @@ function bugnote_clear_bug_cache( $p_bug_id = null ) {
 
 	return true;
 }
+
+/**
+ * Move the bug note to a different bug.
+ *
+ * @param int    $p_bugnote_id   A bugnote identifier.
+ * @param int    $p_dest_bug_id  A destination bug identifier.
+ *
+ * @return bool
+ */
+function bugnote_move( $p_bugnote_id, $p_dest_bug_id ) {
+	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
+
+	# Re-Link the bugnote
+	db_param_push();
+	$t_query = 'UPDATE {bugnote} SET bug_id=' . db_param() . ' WHERE bug_id=' . db_param() . ' AND id=' . db_param();
+	db_query( $t_query, [ $p_dest_bug_id, $t_bug_id, $p_bugnote_id ] );
+
+	# Re-Link the bugnote files
+	db_param_push();
+	$t_query = 'UPDATE {bug_file} SET bug_id=' . db_param() . ' WHERE bug_id=' . db_param() . ' AND bugnote_id=' . db_param();
+	db_query( $t_query, [ $p_dest_bug_id, $t_bug_id, $p_bugnote_id ] );
+
+	# Re-Link the bugnote revisions
+	db_param_push();
+	$t_query = 'UPDATE {bug_revision} SET bug_id=' . db_param() . ' WHERE bug_id=' . db_param() . ' AND bugnote_id=' . db_param();
+	db_query( $t_query, [ $p_dest_bug_id, $t_bug_id, $p_bugnote_id ] );
+
+	# Update the source bug
+	bug_update_date( $t_bug_id );
+	history_log_event_special( $t_bug_id, BUGNOTE_MOVED_TO, bugnote_format_id( $p_bugnote_id ), $p_dest_bug_id );
+
+	# Update the destination bug
+	bug_update_date( $p_dest_bug_id );
+	history_log_event_special( $p_dest_bug_id, BUGNOTE_MOVED_FROM, bugnote_format_id( $p_bugnote_id ), $t_bug_id );
+
+	return true;
+}

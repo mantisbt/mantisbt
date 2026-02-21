@@ -57,10 +57,11 @@ form_security_validate( 'bugnote_update' );
 $f_bugnote_id	 = gpc_get_int( 'bugnote_id' );
 $f_bugnote_text	 = gpc_get_string( 'bugnote_text', '' );
 $f_time_tracking = gpc_get_string( 'time_tracking', '0:00' );
+$f_dest_bug_id	 = gpc_get_int( 'dest_bug_id', null );
 
 # Check if the current user is allowed to edit the bugnote
 $t_user_id = auth_get_current_user_id();
-$t_reporter_id = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
+$t_is_reporter = bugnote_is_user_reporter( $f_bugnote_id, $t_user_id );
 $t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 $t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 
@@ -68,11 +69,9 @@ if( helper_get_current_project() != $t_project_id ) {
 	$g_project_override = $t_project_id;
 }
 
-if( $t_user_id == $t_reporter_id ) {
-	access_ensure_bugnote_level( config_get( 'bugnote_user_edit_threshold' ), $f_bugnote_id );
-} else {
-	access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
-}
+access_ensure_bugnote_level( config_get( $t_is_reporter
+	? 'bugnote_user_edit_threshold'
+	: 'update_bugnote_threshold' ), $f_bugnote_id );
 
 # Check if the bug is readonly
 if( bug_is_readonly( $t_bug_id ) ) {
@@ -84,6 +83,32 @@ $f_bugnote_text = trim( $f_bugnote_text );
 
 bugnote_set_text( $f_bugnote_id, $f_bugnote_text );
 bugnote_set_time_tracking( $f_bugnote_id, $f_time_tracking );
+
+if( $f_dest_bug_id && $f_dest_bug_id != $t_bug_id ) {
+
+	if( bug_is_readonly( $f_dest_bug_id ) ) {
+		error_parameters( $f_dest_bug_id );
+		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	}
+
+	# Check add access for the destination bug
+	access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $f_dest_bug_id );
+
+	# Can reporter add private notes?
+	if( bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PRIVATE ) {
+		access_ensure_bug_level( config_get( 'set_view_status_threshold' ), $f_dest_bug_id );
+	}
+
+	# Check delete access for the source bug
+	access_ensure_bugnote_level( config_get( $t_is_reporter
+		? 'bugnote_user_delete_threshold'
+		: 'delete_bugnote_threshold' ), $f_bugnote_id );
+
+	# Move the note from the source bug to the destination bug
+	if( bugnote_move( $f_bugnote_id, $f_dest_bug_id ) ) {
+		$t_bug_id = $f_dest_bug_id;
+	}
+}
 
 # Plugin integration
 event_signal( 'EVENT_BUGNOTE_EDIT', array( $t_bug_id, $f_bugnote_id ) );
