@@ -64,7 +64,8 @@ use Mantis\Exceptions\ClientException;
 # If id does not exists, a value of 'false' is stored
 $g_cache_user = array();
 
-$g_user_accessible_subprojects_cache = null;
+$g_user_all_accessible_subprojects_cache = array();
+$g_user_accessible_subprojects_cache = array();
 
 /**
  * Cache a user row if necessary and return the cached copy.
@@ -106,11 +107,11 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 
 /**
  * Loads user rows in cache for a set of User ID's.
- * 
+ *
  * Store false if the user does not exists
- * 
+ *
  * @param array $p_user_id_array An array of user identifiers.
- *                               
+ *
  * @return void
  */
 function user_cache_array_rows( array $p_user_id_array ) {
@@ -151,7 +152,7 @@ function user_cache_array_rows( array $p_user_id_array ) {
 
 /**
  * Cache a user row.
- * 
+ *
  * @param array $p_user_database_result A user row to cache.
  *
  * @return void
@@ -465,7 +466,7 @@ function user_ensure_name_valid( $p_username ) {
 
 /**
  * Check whether user is monitoring bug.
- * 
+ *
  * @param int $p_user_id A valid user identifier.
  * @param int $p_bug_id  A valid bug identifier.
  *
@@ -1258,7 +1259,7 @@ function user_get_expanded_name_from_row( array $p_user_row ) {
 
 /**
  * Get name used for sorting.
- * 
+ *
  * @param array $p_user_row The user row with 'realname' and 'username' fields
  *
  * @return string name for sorting
@@ -1384,8 +1385,8 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled = false ) {
 	global $g_user_accessible_subprojects_cache;
 
-	if( null !== $g_user_accessible_subprojects_cache && auth_get_current_user_id() == $p_user_id && !$p_show_disabled ) {
-		return $g_user_accessible_subprojects_cache[$p_project_id] ?? array();
+	if ( isset( $g_user_accessible_subprojects_cache[$p_user_id] ) && false == $p_show_disabled ) {
+		return $g_user_accessible_subprojects_cache[$p_user_id][$p_project_id] ?? array();
 	}
 
 	db_param_push();
@@ -1433,14 +1434,11 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 		$t_projects[(int)$t_row['parent_id']][] = (int)$t_row['id'];
 	}
 
-	if( auth_get_current_user_id() == $p_user_id ) {
-		$g_user_accessible_subprojects_cache = $t_projects;
-	}
-
 	if( !isset( $t_projects[(int)$p_project_id] ) ) {
 		$t_projects[(int)$p_project_id] = array();
 	}
 
+	$g_user_accessible_subprojects_cache[$p_user_id] = $t_projects;
 	return $t_projects[(int)$p_project_id];
 }
 
@@ -1453,6 +1451,12 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
  * @return array List of Project Ids
  */
 function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
+	global $g_user_all_accessible_subprojects_cache;
+
+	if ( isset( $g_user_all_accessible_subprojects_cache[$p_user_id][$p_project_id] ) ) {
+		return $g_user_all_accessible_subprojects_cache[$p_user_id][$p_project_id];
+	}
+
 	# @todo (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
 	# affects how news and some summaries are generated
 	$t_todo = user_get_accessible_subprojects( $p_user_id, $p_project_id );
@@ -1466,6 +1470,7 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 		}
 	}
 
+	$g_user_all_accessible_subprojects_cache[$p_user_id][$p_project_id] = $t_subprojects;
 	return $t_subprojects;
 }
 
