@@ -150,10 +150,9 @@ if( !is_blank( $f_password ) ) {
 
 # Determine if email change will require showing a verification confirmation
 $t_show_confirmation_message = false;
-$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 $f_email = trim( $f_email );
 if( !$t_account_verification
-	&& !( $t_ldap && config_get_global( 'use_ldap_email' ) )
+	&& !( ON == config_get_global( 'use_ldap_email' ) )
 	&& !is_blank( $f_email )
 	&& $f_email != user_get_email( $t_user_id )
 	&& config_get( 'send_reset_password' )

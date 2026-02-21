@@ -81,6 +81,7 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/uploads.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/html.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/auth.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/ldap.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/status.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/filters.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/misc.xml" />
