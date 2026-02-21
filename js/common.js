@@ -402,6 +402,12 @@ $(document).ready( function() {
 	});
 
 	$('input[type=text].datetimepicker').each(function(index, element) {
+		// Ensure the parent has relative positioning for the datetimepicker widget
+		var $parent = $(this).parent();
+		if ($parent.css('position') === 'static') {
+			$parent.css('position', 'relative');
+		}
+
 		$(this).datetimepicker({
 			locale: $(this).data('picker-locale'),
 			format: $(this).data('picker-format'),
@@ -428,7 +434,7 @@ $(document).ready( function() {
 		var zoneObj = enableDropzone( classPrefix, autoUpload );
 		if( zoneObj ) {
 			/* Attach image paste handler to report-bug & add-note forms */
-			$( '#bugnoteadd, #report_bug_form' ).bind( 'paste', function( event ) {
+			$( '#bugnoteadd, #report_bug_form' ).on( 'paste', function( event ) {
 				var items = ( event.clipboardData || event.originalEvent.clipboardData ).items;
 				for( index in items ) {
 					var item = items[index];
@@ -540,11 +546,11 @@ $(document).ready( function() {
 		$(this).val(0);
 	});
 
-	$('a.click-url').bind("click", function() {
+	$('a.click-url').on("click", function() {
 		$(this).attr("href", $(this).data("url"));
 	});
 
-	$('input[name=private].ace').bind("click", function() {
+	$('input[name=private].ace').on("click", function() {
 		if ($(this).is(":checked")){
 			$('textarea[name=bugnote_text]').addClass("bugnote-private");
 		} else {
