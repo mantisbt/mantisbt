@@ -618,6 +618,61 @@ function print_filter_show_severity( ?array $p_filter = null ) {
 }
 
 /**
+ * Print the current value of this filter field, as visible string, and as a hidden form input.
+ * @param array $p_filter	Filter array
+ * @return void
+ */
+function print_filter_values_show_reproducibility( array $p_filter ) {
+    $t_filter = $p_filter;
+    $t_output = '';
+    $t_any_found = false;
+    if( count( $t_filter[FILTER_PROPERTY_REPRODUCIBILITY] ) == 0 ) {
+        echo lang_get( 'any' );
+    } else {
+        $t_first_flag = true;
+        foreach( $t_filter[FILTER_PROPERTY_REPRODUCIBILITY] as $t_current ) {
+            echo '<input type="hidden" name="', FILTER_PROPERTY_REPRODUCIBILITY, '[]" value="', string_attribute( $t_current ), '" />';
+            $t_this_string = '';
+            if( filter_field_is_any( $t_current ) ) {
+                $t_any_found = true;
+            } else {
+                $t_this_string = get_enum_element( 'reproducibility', $t_current );
+            }
+            if( $t_first_flag != true ) {
+                $t_output = $t_output . '<br />';
+            } else {
+                $t_first_flag = false;
+            }
+            $t_output = $t_output . string_display_line( $t_this_string );
+        }
+        if( true == $t_any_found ) {
+            echo lang_get( 'any' );
+        } else {
+            echo $t_output;
+        }
+    }
+}
+
+/**
+ * print the reproducibility field
+ * @global array $g_filter
+ * @param array|null $p_filter Filter array
+ * @return void
+ */
+function print_filter_show_reproducibility( ?array $p_filter = null ) {
+    global $g_filter;
+    if( null === $p_filter ) {
+        $p_filter = $g_filter;
+    }
+    ?><!-- Reproducibility -->
+    <select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_REPRODUCIBILITY;?>[]">
+        <option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_REPRODUCIBILITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+        <?php print_enum_string_option_list( 'reproducibility', $p_filter[FILTER_PROPERTY_REPRODUCIBILITY] )?>
+    </select>
+    <?php
+}
+
+/**
  * Print the filter field's current value as a visible string and a hidden form input.
  *
  * @param array $p_filter Filter array
@@ -2693,7 +2748,14 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			null /* class */,
 			'show_severity_filter_target' /* content id */
 			));
-	$t_row1->add_item( new TableFieldsItem(
+    $t_row1->add_item( new TableFieldsItem(
+        $get_field_header( 'show_reproducibility_filter', lang_get( 'reproducibility' ) ),
+        filter_form_get_input( $t_filter, 'show_reproducibility', $t_show_inputs ),
+        1 /* colspan */,
+        null /* class */,
+        'show_reproducibility_filter_target' /* content id */
+    ));
+    $t_row1->add_item( new TableFieldsItem(
 			$get_field_header( 'view_state_filter', lang_get( 'view_status' ) ),
 			filter_form_get_input( $t_filter, 'view_state', $t_show_inputs ),
 			1 /* colspan */,
