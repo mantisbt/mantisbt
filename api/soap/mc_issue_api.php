@@ -1225,9 +1225,46 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		mci_tag_set_for_issue( $p_issue_id, $p_issue['tags'], $t_user_id );
 	}
 
+	$t_validation_message = mc_issue_validation( $t_bug_data, /* update extended */ true );
+	if ( $t_validation_message !== false ) {
+		return ApiObjectFactory::faultBadRequest( $t_validation_message );
+	}
+
 	# submit the issue
 	log_event( LOG_WEBSERVICE, 'updating issue \'' . $p_issue_id . '\'' );
 	return $t_bug_data->update( /* update extended */ true, /* bypass email */ false );
+}
+
+/**
+ * Validation error handler, simply throw Exception to manage in mc_issue_validation.
+ *
+ * @param integer $p_type    Contains the level of the error raised, as an integer.
+ * @param string  $p_error   Contains the error message, as a string.
+ * @param string  $p_file    Contains the filename that the error was raised in, as a string.
+ * @param integer $p_line    Contains the line number the error was raised at, as an integer.
+ * @return void
+ */
+function mc_issue_validation_error_handler( $p_type, $p_error, $p_file, $p_line ) {
+	throw new Exception( error_string( $p_error ) );
+}
+
+/**
+ * Validate the issue data.
+ *
+ * @param BugData $p_issue Issue to validate.
+ * @param bool $p_update_extended Whether to validate extended fields.
+ * @return string|false The validation error message.
+ */
+function mc_issue_validation( $p_issue, $p_update_extended = true ) {
+	set_error_handler( 'mc_issue_validation_error_handler' );
+	try {
+		$p_issue->validate( $p_update_extended );
+		return false;
+	} catch ( Exception $e ) {
+		return $e->getMessage();
+	} finally {
+		restore_error_handler();
+	}
 }
 
 /**

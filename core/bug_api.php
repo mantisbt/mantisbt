@@ -513,6 +513,14 @@ class BugData {
 			category_ensure_exists( $this->category_id );
 		}
 
+		if ( is_blank( $this->fixed_in_version ) && config_get( 'bug_fixed_in_version_required', null, null, $this->project_id ) != OFF ) {
+			$t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $this->project_id );
+			if ( $this->status >= $t_resolved && helper_call_custom_function( 'changelog_include_issue', array( $this->id ) ) ) {
+				error_parameters( lang_get( 'fixed_in_version' ) );
+				trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			}
+		}
+
 		if( !is_blank( $this->duplicate_id ) && ( $this->duplicate_id != 0 ) && ( $this->id == $this->duplicate_id ) ) {
 			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 			# never returns
