@@ -549,30 +549,51 @@ function layout_navbar_button_bar() {
 		return;
 	}
 
+	$t_navbar_items = array();
+
 	$t_show_report_bug_button = access_has_any_project_level( 'report_bug_threshold' ) &&
 		!is_page_name( string_get_bug_page( "report" ) ) &&
 		!is_page_name( string_get_bug_page( "update" ) );
 	$t_show_invite_user_button = access_has_global_level( config_get( 'manage_user_threshold' ) );
 
-	if( !$t_show_report_bug_button && !$t_show_invite_user_button ) {
+	if( $t_show_report_bug_button )  {
+		$t_navbar_items[] = [
+			'url' => string_get_bug_report_url(),
+			'icon' => 'fa-edit',
+			'label' => lang_get( 'report_bug_link' )
+		];
+	}
+
+	if( $t_show_invite_user_button ) {
+		$t_navbar_items[] = [
+			'url' => 'manage_user_create_page.php',
+			'icon' => 'fa-user-plus',
+			'label' => lang_get( 'invite_users' )
+		];
+	}
+
+	$t_modified_navbar_items = event_signal( 'EVENT_LAYOUT_NAVBAR_BUTTONS_FILTER', array( $t_navbar_items ) );
+	if( is_array( $t_modified_navbar_items ) && count( $t_modified_navbar_items ) > 0 ) {
+		$t_navbar_items = $t_modified_navbar_items[0];
+	}
+
+	if( empty( $t_navbar_items ) ) {
 		return;
 	}
 
 	echo '<li class="hidden-sm hidden-xs">';
 	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
 
-	if( $t_show_report_bug_button )  {
-		$t_bug_url = string_get_bug_report_url();
-		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
-		print_icon( 'fa-edit');
-		echo ' ' . lang_get( 'report_bug_link' );
-		echo '</a>';
-	}
-
-	if( $t_show_invite_user_button ) {
-		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
-		print_icon( 'fa-user-plus' );
-		echo ' ' . lang_get( 'invite_users' );
+	foreach( $t_navbar_items as $t_navbar_item ) {
+		echo '<a class="btn btn-primary btn-sm" href="' . $t_navbar_item['url'] . '"';
+		if (!empty( $t_navbar_item['title'] )) {
+			echo ' title="' . string_html_specialchars( $t_navbar_item['title'] ) . '"';
+		}
+		echo '>';
+		print_icon( $t_navbar_item['icon'] );
+		if (!empty( $t_navbar_item['label'] )) {
+			echo ' ' . string_html_specialchars( $t_navbar_item['label'] );
+		}
 		echo '</a>';
 	}
 
