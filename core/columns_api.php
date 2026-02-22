@@ -1518,7 +1518,7 @@ function print_column_summary( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
 		$t_summary = string_attribute( $p_bug->summary );
 	} else {
-		$t_summary = string_display_line_links( $p_bug->summary );
+		$t_summary = string_display_line_without_links( $p_bug->summary );
 	}
 	
 	$t_bug_url = string_get_bug_view_url( $p_bug->id );
