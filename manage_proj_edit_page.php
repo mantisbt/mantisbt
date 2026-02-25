@@ -75,7 +75,7 @@ auth_reauthenticate();
 
 $f_project_id = gpc_get_int( 'project_id' );
 $f_show_global_users = gpc_get_bool( 'show_global_users' );
-$f_show_obsolete = gpc_get_bool( 'showobsolete' );
+$f_show_obsolete = gpc_get_bool( 'show_obsolete' );
 
 project_ensure_exists( $f_project_id );
 $g_project_override = $f_project_id;
