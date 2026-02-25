@@ -951,6 +951,8 @@ $s_released = 'Released';
 $s_not_released = 'Not Yet Released';
 $s_scheduled_release = 'Scheduled For Release';
 $s_obsolete = 'Obsolete';
+$s_show_obsolete = 'Show Obsolete';
+$s_hide_obsolete = 'Hide Obsolete';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Version has been successfully updated...';

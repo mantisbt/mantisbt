@@ -75,6 +75,7 @@ auth_reauthenticate();
 
 $f_project_id = gpc_get_int( 'project_id' );
 $f_show_global_users = gpc_get_bool( 'show_global_users' );
+$f_show_obsolete = gpc_get_bool( 'show_obsolete' );
 
 project_ensure_exists( $f_project_id );
 $g_project_override = $f_project_id;
@@ -551,6 +552,8 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			</h4>
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
+			<div id="manage-project-version-div" class="form-container">
+				<div class="pull-left">
 	<form id="manage-project-version-copy-form" method="post" action="manage_proj_ver_copy.php" class="form-inline">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_ver_copy' ) ?>
@@ -568,11 +571,28 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			</button>
 		</fieldset>
 	</form>
-	</div>
+			</div>
+			<div class="pull-right">
+	<?php
+		# Show users with global access button
+		print_form_button(
+			'manage_proj_edit_page.php#versions',
+			lang_get( $f_show_obsolete ? 'hide_obsolete' : 'show_obsolete' ),
+			array(
+				'project_id' => $f_project_id,
+				'show_obsolete' => !$f_show_obsolete
+			),
+			OFF,
+			'btn btn-sm btn-primary btn-white btn-round'
+		);
+	?>
+			</div>
+		</div>
+        </div>
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 	<?php
-	$t_versions = version_get_all_rows( $f_project_id, VERSION_ALL, true );
+	$t_versions = version_get_all_rows( $f_project_id, VERSION_ALL, $f_show_obsolete );
 	if( count( $t_versions ) > 0 ) { ?>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed">
