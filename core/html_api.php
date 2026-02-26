@@ -196,12 +196,16 @@ function html_title( $p_page_title = '' ) {
 
 /**
  * Require a CSS file to be in html page headers
- * @param string $p_stylesheet_path Path to CSS style sheet.
+ * @param string|array $p_stylesheet_path Path to local CSS style sheet or an ['URL','integrity'] array, 'integrity' is optional.
  * @return void
  */
 function require_css( $p_stylesheet_path ) {
 	global $g_stylesheets_included;
-	$g_stylesheets_included[$p_stylesheet_path] = $p_stylesheet_path;
+	if( is_array( $p_stylesheet_path ) ) {
+		$g_stylesheets_included[$p_stylesheet_path[0]] = $p_stylesheet_path;
+	} else {
+		$g_stylesheets_included[$p_stylesheet_path] = $p_stylesheet_path;
+	}
 }
 
 /**
@@ -220,6 +224,13 @@ function html_css() {
 		html_css_link( config_get_global( 'css_rtl_include_file' ), $t_cache_key );
 	}
 
+	# dropzone css
+	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		require_css( [ 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css' ] );
+	} else {
+		require_css( 'dropzone-' . DROPZONE_VERSION . '.min.css' );
+	}
+
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
 		# status_config.php is a special css file, dynamically generated.
 		# Add a hash to the query string to differentiate content based on its
@@ -232,14 +243,11 @@ function html_css() {
 			);
 		}
 
-		html_css_link( $t_stylesheet_path );
-	}
-
-	# dropzone css
-	if ( config_get_global( 'cdn_enabled' ) == ON ) {
-		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css' );
-	} else {
-		html_css_link( 'dropzone-' . DROPZONE_VERSION . '.min.css' );
+		if( is_array( $t_stylesheet_path ) ) {
+			html_css_cdn_link( $t_stylesheet_path[0], $t_stylesheet_path[1] ?? '' );
+		} else {
+			html_css_link( $t_stylesheet_path );
+		}
 	}
 }
 
@@ -262,7 +270,7 @@ function html_css_link( $p_filename, $p_cache_key = '' ) {
 		$t_url = helper_url_combine( $t_url, [ 'cache_key' => $p_cache_key ] );
 	}
 
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( $t_url, true ), '" />', "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( $t_url, true ), '">', "\n";
 }
 
 /**
@@ -276,7 +284,7 @@ function html_css_cdn_link( $p_url, $p_hash = '' ) {
 	if( $p_hash !== '' ) {
 		$t_integrity = 'integrity="' . $p_hash . '" ';
 	}
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', $p_url, '" ', $t_integrity, ' crossorigin="anonymous" />', "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', $p_url, '" ', $t_integrity, 'crossorigin="anonymous">', "\n";
 }
 
 /**
@@ -328,12 +336,16 @@ function html_meta_canonical( $p_url ) {
 
 /**
  * Require a javascript file to be in html page headers
- * @param string $p_script_path Path to javascript file.
+ * @param string|array $p_script_path Path to local javascript file or an ['URL','integrity'] array, 'integrity' is optional.
  * @return void
  */
 function require_js( $p_script_path ) {
 	global $g_scripts_included;
-	$g_scripts_included[$p_script_path] = $p_script_path;
+	if( is_array( $p_script_path ) ) {
+		$g_scripts_included[$p_script_path[0]] = $p_script_path;
+	} else {
+		$g_scripts_included[$p_script_path] = $p_script_path;
+	}
 }
 
 /**
@@ -361,18 +373,23 @@ function html_head_javascript() {
 		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', JQUERY_HASH );
 
 		# Dropzone
-		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH );
+		require_js( [ 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH ] );
 	} else {
 		# JQuery
 		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
 
 		# Dropzone
-		html_javascript_link( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
+		require_js( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
 	}
 
-	html_javascript_link( 'common.js' );
+	require_js( 'common.js' );
+
 	foreach ( $g_scripts_included as $t_script_path ) {
-		html_javascript_link( $t_script_path );
+		if( is_array( $t_script_path ) ) {
+			html_javascript_cdn_link( $t_script_path[0], $t_script_path[1] ?? '' );
+		} else {
+			html_javascript_link( $t_script_path );
+		}
 	}
 }
 
