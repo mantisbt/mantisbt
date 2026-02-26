@@ -653,6 +653,20 @@ function user_create( $p_username, $p_password, $p_email = '',
 		$p_access_level = config_get( 'default_new_account_access_level' );
 	}
 
+	if( ON == config_get_global( 'use_ldap_realname' ) ) {
+		$t_realname = ldap_realname_from_username( $p_username );
+		if( !empty( $t_realname ) ) {
+			$p_realname = $t_realname;
+		}
+	}
+
+	if( ON == config_get_global( 'use_ldap_email' ) ) {
+		$t_email = ldap_email_from_username( $p_username );
+		if( !empty( $t_email ) ) {
+			$p_email = $t_email;
+		}
+	}
+
 	$t_password = auth_process_plain_password( $p_password );
 
 	$c_enabled = (bool)$p_enabled;
