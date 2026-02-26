@@ -452,7 +452,10 @@ class BugFilterQuery extends DbQuery {
 				case FILTER_PROPERTY_SEVERITY:
 					$this->build_prop_severity();
 					break;
-				case FILTER_PROPERTY_RESOLUTION:
+                case FILTER_PROPERTY_REPRODUCIBILITY:
+                    $this->build_prop_reproducibility();
+                    break;
+                case FILTER_PROPERTY_RESOLUTION:
 					$this->build_prop_resolution();
 					break;
 				case FILTER_PROPERTY_PRIORITY:
@@ -903,7 +906,19 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
-	/**
+    /**
+     * Build the query parts for the filter property "reproducibility"
+     * @return void
+     */
+    protected function build_prop_reproducibility() {
+        if( filter_field_is_any( $this->filter[FILTER_PROPERTY_REPRODUCIBILITY] ) ) {
+            return;
+        }
+        $t_query = $this->sql_in( '{bug}.reproducibility', $this->filter[FILTER_PROPERTY_REPRODUCIBILITY] );
+        $this->add_where( $t_query );
+    }
+
+    /**
 	 * Build the query parts for the filter property "resolution"
 	 * @return void
 	 */
