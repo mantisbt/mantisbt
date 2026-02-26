@@ -228,6 +228,7 @@ function http_security_headers() {
 		http_csp_add( 'style-src', "'self'" );
 		http_csp_add( 'style-src', "'unsafe-inline'" );
 		http_csp_add( 'script-src', "'self'" );
+		http_csp_add( 'script-src', "'wasm-unsafe-eval'" ); # for Viz.js WebAssembly
 		http_csp_add( 'img-src', "'self'" );
 		http_csp_add( 'img-src', "data:" );
 

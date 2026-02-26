@@ -153,7 +153,7 @@ layout_page_begin();
 			</div>
 
 			<!-- Graph -->
-			<div class="center padding-8">
+			<div class="center padding-8" id="relationship_graph"></div>
 <?php
 	if( $t_graph_relation ) {
 		$t_graph = relgraph_generate_rel_graph( $f_bug_id, $f_show_summary );
@@ -161,17 +161,8 @@ layout_page_begin();
 		$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal, $f_show_summary );
 	}
 
-	$t_map_name = 'relationship_graph_map';
-	relgraph_output_map( $t_graph, $t_map_name );
-
-	$t_graph_src = "bug_relationship_graph_img.php?bug_id=$f_bug_id&graph=$t_graph_type&orientation=$t_graph_orientation&summary=$f_show_summary";
+	$t_graph->output_html( 'relationship_graph' );
 ?>
-				<img src="<?php echo $t_graph_src ?>"
-					 usemap="#<?php echo $t_map_name ?>"
-					 alt="<?php echo $t_title ?>"
-				/>
-			</div>
-
 			<!-- Legend -->
 			<div class="center widget-toolbox">
 <?php

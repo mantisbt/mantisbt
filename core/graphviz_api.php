@@ -58,31 +58,6 @@ class Graph {
 	const TOOL_CIRCO = 'circo';
 
 	/**
-	 * Constant(s) defining the output formats supported by dot and neato.
-	 */
-	const GRAPHVIZ_ATTRIBUTED_DOT = 0;
-	const GRAPHVIZ_PS = 1;
-	const GRAPHVIZ_HPGL = 2;
-	const GRAPHVIZ_PCL = 3;
-	const GRAPHVIZ_MIF = 4;
-	const GRAPHVIZ_PLAIN = 6;
-	const GRAPHVIZ_PLAIN_EXT = 7;
-	const GRAPHVIZ_GIF = 11;
-	const GRAPHVIZ_JPEG = 12;
-	const GRAPHVIZ_PNG = 13;
-	const GRAPHVIZ_WBMP = 14;
-	const GRAPHVIZ_XBM = 15;
-	const GRAPHVIZ_ISMAP = 16;
-	const GRAPHVIZ_IMAP = 17;
-	const GRAPHVIZ_CMAP = 18;
-	const GRAPHVIZ_CMAPX = 19;
-	const GRAPHVIZ_VRML = 20;
-	const GRAPHVIZ_SVG = 25;
-	const GRAPHVIZ_SVGZ = 26;
-	const GRAPHVIZ_CANONICAL_DOT = 27;
-	const GRAPHVIZ_PDF = 28;
-
-	/**
 	 * @var string Name
 	 */
 	protected $name = 'G';
@@ -122,101 +97,26 @@ class Graph {
 	 * @see https://graphviz.org/docs/outputs/
 	 */
 	protected $formats = array(
-		'dot' => array(
-			'binary' => false,
-			'type' => self::GRAPHVIZ_ATTRIBUTED_DOT,
-			'mime' => 'text/x-graphviz',
-		),
-		'ps' => array(
-			'binary' => false,
-			'type' => self::GRAPHVIZ_PS,
-			'mime' => 'application/postscript',
-		),
-		'hpgl' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_HPGL,
-			'mime' => 'application/vnd.hp-HPGL',
-		),
-		'pcl' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_PCL,
-			'mime' => 'application/vnd.hp-PCL',
-		),
-		'mif' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_MIF,
-			'mime' => 'application/vnd.mif',
-		),
-		'gif' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_GIF,
-			'mime' => 'image/gif',
-		),
-		'jpg' => array(
-			'binary' => false,
-			'type' => self::GRAPHVIZ_JPEG,
-			'mime' => 'image/jpeg',
-		),
-		'jpeg' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_JPEG,
-			'mime' => 'image/jpeg',
-		),
-		'png' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_PNG,
-			'mime' => 'image/png',
-		),
-		'wbmp' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_WBMP,
-			'mime' => 'image/vnd.wap.wbmp',
-		),
-		'xbm' => array(
-			'binary' => false,
-			'type' => self::GRAPHVIZ_XBM,
-			'mime' => 'image/x-xbitmap',
-		),
-		'ismap' => array(
-			'binary' => false,
-			'type' => self::GRAPHVIZ_ISMAP,
-			'mime' => 'text/plain',
-		),
-		'imap' => array(
-			'binary' => false,
-			'type' => self::GRAPHVIZ_IMAP,
-			'mime' => 'application/x-httpd-imap',
-		),
-		'cmap' => array(
-			'binary' => false,
-			'type' => self::GRAPHVIZ_CMAP,
-			'mime' => 'text/html',
-		),
-		'cmapx' => array(
-			'binary' => false,
-			'type' => self::GRAPHVIZ_CMAPX,
-			'mime' => 'application/xhtml+xml',
-		),
-		'vrml' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_VRML,
-			'mime' => 'x-world/x-vrml',
-		),
-		'svg' => array(
-			'binary' => false,
-			'type' => self::GRAPHVIZ_SVG,
-			'mime' => 'image/svg+xml',
-		),
-		'svgz' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_SVGZ,
-			'mime' => 'image/svg+xml',
-		),
-		'pdf' => array(
-			'binary' => true,
-			'type' => self::GRAPHVIZ_PDF,
-			'mime' => 'application/pdf',
-		),
+		'dot'	=> 'text/x-graphviz',
+		'ps'	=> 'application/postscript',
+		'hpgl'	=> 'application/vnd.hp-HPGL',
+		'pcl'	=> 'application/vnd.hp-PCL',
+		'mif'	=> 'application/vnd.mif',
+		'gif'	=> 'image/gif',
+		'jpg'	=> 'image/jpeg',
+		'jpeg'	=> 'image/jpeg',
+		'png'	=> 'image/png',
+		'wbmp'	=> 'image/vnd.wap.wbmp',
+		'xbm'	=> 'image/x-xbitmap',
+		'ismap'	=> 'text/plain',
+		'imap'	=> 'application/x-httpd-imap',
+		'cmap'	=> 'text/html',
+		'cmapx'	=> 'application/xhtml+xml',
+		'vrml'	=> 'x-world/x-vrml',
+		'svg'	=> 'image/svg+xml',
+		'svgz'	=> 'image/svg+xml',
+		'pdf'	=> 'application/pdf',
+		'webp'	=> 'image/webp',
 	);
 
 	/**
@@ -234,10 +134,6 @@ class Graph {
 		$this->set_attributes( $p_attributes );
 
 		$this->graphviz_tool = $p_tool;
-
-		if( is_windows_server() ) {
-			$this->graphviz_tool .= '.exe';
-		}
 	}
 
 	/**
@@ -352,7 +248,35 @@ class Graph {
 
 		echo "}\n";
 	}
+	
+	/**
+	 * Outputs a script that adds an inline SVG image to a specified HTML element.
+	 *
+	 * @param string $p_id The ID of the HTML element to append to.
+	 *
+	 * @return void
+	 */
+	public function output_html( string $p_id ) {
+		
+		$this->attributes += [ 'layout' => $this->graphviz_tool ];
+		
+		# Retrieve the source document into a buffer
+		ob_start();
+		$this->generate();
+		$t_source = ob_get_clean();
 
+		# Include Viz.js
+		if( config_get_global( 'cdn_enabled' ) == ON ) {
+			html_javascript_cdn_link( 'https://cdn.jsdelivr.net/npm/@viz-js/viz@' . VIZJS_VERSION . '/dist/viz-global.min.js', VIZJS_HASH );
+		} else {
+			html_javascript_link( 'viz-global.min.js' );
+		}
+
+		# Include Viz.js proxy
+		echo "\t", '<script src="', helper_mantis_url( 'js/viz-proxy.js' ),
+			'" data-id="', $p_id, '" data-source="', string_attribute( $t_source ), '" async></script>', PHP_EOL;
+	}
+	
 	/**
 	 * Outputs a graph image or map in the specified format.
 	 *
@@ -375,47 +299,36 @@ class Graph {
 			trigger_error( ERROR_GRAPH_TOOL_NOT_FOUND, ERROR );
 		}
 
-		# Retrieve the source dot document into a buffer
+		# Retrieve the source document into a buffer
 		ob_start();
 		$this->generate();
-		$t_dot_source = ob_get_clean();
+		$t_source = ob_get_clean();
 
-		# Start dot process
+		# Start tool process
 		$t_command = escapeshellarg( $t_tool_path ) . ' -T' . $p_format;
 		$t_stderr = tempnam( sys_get_temp_dir(), 'graphviz' );
 		$t_descriptors = array(
-			0 => array( 'pipe', 'r', ),
-			1 => array( 'pipe', 'w', ),
+			0 => array( 'pipe', 'r', ),	# stdin
+			1 => array( 'pipe', 'w', ),	# stdout
 			# Writing to file instead of pipe to avoid locking issues
-			2 => array( 'file', $t_stderr, 'w', ),
+			2 => array( 'file', $t_stderr, 'w', ),	# stderr
 		);
 
 		$t_pipes = array();
-		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes,
+		$t_process = @proc_open( $t_command, $t_descriptors, $t_pipes,
 			null, null, [ 'bypass_shell' => true ] );
 
 		if( !is_resource( $t_process ) ) {
-			# proc_open failed
-			trigger_error( ERROR_GENERIC, ERROR );
+			error_parameters( $t_tool_path );
+			trigger_error( ERROR_GRAPH_TOOL_NOT_FOUND, ERROR );
 		}
 
-		# Check for output in stderr
-		# Wait a bit to ensure the file has been written before attempting to read it
-		usleep( 5000 );
-		$t_error = file_get_contents( $t_stderr );
-		unlink( $t_stderr );
-		if( $t_error ) {
-			error_parameters( $t_error );
-			trigger_error( ERROR_GENERIC, ERROR );
-		}
-
-		# Filter the generated document through dot
-		fwrite( $t_pipes[0], $t_dot_source );
+		# Filter the generated document through
+		stream_set_blocking( $t_pipes[0], false );
+		fwrite( $t_pipes[0], $t_source );
 		fclose( $t_pipes[0] );
 
 		if( $p_headers ) {
-			header( 'Content-Type: ' . $this->formats[$p_format]['mime'] );
-
 			# Use an output buffer to retrieve the size for Content-Length
 			ob_start();
 		}
@@ -424,14 +337,31 @@ class Graph {
 		while( !feof( $t_pipes[1] ) ) {
 			echo fgets( $t_pipes[1], 1024 );
 		}
+		fclose( $t_pipes[1] );
 
 		if( $p_headers ) {
-			header( 'Content-Length: ' . ob_get_length() );
-			ob_end_flush();
+			$t_length = ob_get_length();
+			if( $t_length ) {
+				header( 'Content-Type: ' . $this->formats[$p_format] );
+				header( 'Content-Length: ' . $t_length );
+				ob_end_flush();
+			} else {
+				# No output - error suspected
+				ob_end_clean();
+			}
 		}
 
-		fclose( $t_pipes[1] );
-		proc_close( $t_process );
+		# Check for output in stderr
+		# Wait a bit to ensure the file has been written before attempting to read it
+		usleep( 5000 );
+		$t_error = file_get_contents( $t_stderr );
+		unlink( $t_stderr );
+
+		$t_exit = proc_close( $t_process );
+		if( $t_error || $t_exit ) {
+			error_parameters( $t_error ?: "Exit code: $t_exit" );
+			trigger_error( ERROR_GENERIC, $t_exit ? ERROR : WARNING );
+		}
 	}
 
 	/**
@@ -521,7 +451,7 @@ class Graph {
 	 * @return string
 	 */
 	protected function tool_path() {
-		return self::graphviz_path() . $this->graphviz_tool;
+		return self::graphviz_path() . $this->graphviz_tool . ( is_windows_server() ? '.exe' : '' );
 	}
 }
 
@@ -538,7 +468,7 @@ class Digraph extends Graph {
 	 * @param array  $p_attributes Attributes.
 	 * @param string $p_tool       Graphviz tool.
 	 */
-	function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = 'dot' ) {
+	function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = Graph::TOOL_DOT ) {
 		parent::__construct( $p_name, $p_attributes, $p_tool );
 	}
 
