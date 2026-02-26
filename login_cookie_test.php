@@ -54,4 +54,4 @@ if( auth_is_user_authenticated() ) {
 	$t_redirect_url = auth_login_page( 'cookie_error=1' );
 }
 
-print_header_redirect( $t_redirect_url, true, true );
+print_header_redirect( $t_redirect_url, true );

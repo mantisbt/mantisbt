@@ -37,4 +37,4 @@ $t_logout_redirect = auth_logout_redirect_page();
 
 auth_logout();
 
-print_header_redirect( $t_logout_redirect, true, false );
+print_header_redirect( $t_logout_redirect );

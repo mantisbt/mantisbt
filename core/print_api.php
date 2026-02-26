@@ -83,13 +83,10 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
 /**
- * Print the headers to cause the page to redirect to $p_url.
- *
- * If we have handled any errors on this page return false and don't redirect.
+ * Print the headers to cause the page to redirect to $p_url and
+ * terminate script execution immediately after the redirect.
  *
  * @param string $p_url      The page to redirect to: has to be a relative path.
- * @param bool $p_die        If true (default), terminate script execution
- *                           immediately after redirecting.
  * @param bool   $p_sanitize Apply string_sanitize_url to passed URL.
  *                           Should be true when the URL is extracted from an
  *                           untrusted source (e.g. GET/POST),
@@ -97,18 +94,18 @@ require_api( 'version_api.php' );
  *                           (e.g. read from config_inc.php).
  * @param bool   $p_absolute Indicate if URL is absolute.
  *
- * @return bool
+ * @return void
  */
-function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
+function print_header_redirect( $p_url, $p_sanitize = false, $p_absolute = false ) {
 	if( error_handled() ) {
 		# Display a basic "proceed" page to show any pending errors, regardless
 		# of $g_stop_on_errors setting which is actually handled in
 		# html_meta_redirect(), called by layout_page_header().
-		layout_page_header( null, $p_url );
+		layout_page_header( '', $p_url );
 		layout_page_begin();
 		html_operation_successful( $p_url );
 		layout_page_end();
-		return false;
+		die;
 	}
 
 	# validate the url as part of this site before continuing
@@ -134,16 +131,9 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		header( 'Location: ' . $t_url );
 	} else {
 		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
-		return false;
 	}
 
-	if( $p_die ) {
-		die;
-
-		# additional output can cause problems so let's just stop output here
-	}
-
-	return true;
+	die;
 }
 
 /**
