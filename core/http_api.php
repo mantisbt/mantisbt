@@ -157,11 +157,6 @@ function http_content_headers() {
 function http_csp_add( $p_type, $p_value ) {
 	global $g_csp;
 
-	if ( $g_csp === null ) {
-		# Development error, headers already emitted.
-		trigger_error( ERROR_GENERIC, ERROR );
-	}
-
 	if ( isset( $g_csp[$p_type] ) ) {
 		if ( !in_array( $p_value, $g_csp[$p_type] ) ) {
 			$g_csp[$p_type][] = $p_value;
@@ -177,11 +172,6 @@ function http_csp_add( $p_type, $p_value ) {
  */
 function http_csp_value() {
 	global $g_csp;
-
-	if ( $g_csp === null ) {
-		# Development error, headers already emitted.
-		trigger_error( ERROR_GENERIC, ERROR );
-	}
 
 	$t_csp_value = '';
 
@@ -208,10 +198,9 @@ function http_csp_value() {
  * @return void
  */
 function http_csp_emit_header() {
-	header( 'Content-Security-Policy: ' . http_csp_value() );
-
-	global $g_csp;
-	$g_csp = null;
+	if( !headers_sent() ) {
+		header( 'Content-Security-Policy: ' . http_csp_value() );
+	}
 }
 
 /**
