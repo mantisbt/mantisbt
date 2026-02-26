@@ -207,6 +207,10 @@ class IssueNoteAddCommand extends Command {
 						ERROR_ACCESS_DENIED );
 				}
 			}
+
+			foreach( $this->files as $t_file ) {
+				file_ensure_uploaded( $t_file );
+			}
 		}
 
 		# Can reporter add time tracking information?
