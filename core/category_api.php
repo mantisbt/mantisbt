@@ -598,26 +598,34 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
  */
 function category_cache_array_rows( array $p_cat_id_array ) {
 	global $g_category_cache;
-	$c_cat_id_array = array();
+	$t_cat_id_array = array();
 
 	foreach( $p_cat_id_array as $t_cat_id ) {
-		if( !isset( $g_category_cache[(int)$t_cat_id] ) ) {
-			$c_cat_id_array[] = (int)$t_cat_id;
+		$c_cat_id = (int)$t_cat_id;
+		if( !isset( $g_category_cache[$c_cat_id] ) ) {
+			$t_cat_id_array[$c_cat_id] = $c_cat_id;
 		}
 	}
 
-	if( empty( $c_cat_id_array ) ) {
+	if( empty( $t_cat_id_array ) ) {
 		return;
 	}
 
 	$t_query = 'SELECT c.*, p.name AS project_name FROM {category} c
 				LEFT JOIN {project} p
 					ON c.project_id=p.id
-				WHERE c.id IN (' . implode( ',', $c_cat_id_array ) . ')';
+				WHERE c.id IN (' . implode( ',', $t_cat_id_array ) . ')';
 	$t_result = db_query( $t_query );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_category_cache[(int)$t_row['id']] = $t_row;
+		$c_cat_id = (int)$t_row['id'];
+		$g_category_cache[$c_cat_id] = $t_row;
+		unset( $t_cat_id_array[$c_cat_id] );
+	}
+
+	# set the remaining ids as not found
+	foreach( $t_cat_id_array as $t_cat_id ) {
+		$g_category_cache[$t_cat_id] = false;
 	}
 }
 
