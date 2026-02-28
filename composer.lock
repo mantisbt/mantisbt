@@ -4,28 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ce8da92fc76c77225b6b57a00976359",
+    "content-hash": "3a4f78615c2ad42af5bbaf606d986798",
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "v5.22.11",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
-                "reference": "a741375176f48b084ca9a110c112323fc7101b75"
+                "reference": "f391fb97f3cb6620d918cda5fb2c5262e548f07a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/a741375176f48b084ca9a110c112323fc7101b75",
-                "reference": "a741375176f48b084ca9a110c112323fc7101b75",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/f391fb97f3cb6620d918cda5fb2c5262e548f07a",
+                "reference": "f391fb97f3cb6620d918cda5fb2c5262e548f07a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.5"
+                "phpunit/phpunit": "^9.5"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -79,7 +80,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-11-22T15:37:23+00:00"
+            "time": "2026-02-25T23:47:20+00:00"
         },
         {
             "name": "dapphp/securimage",
@@ -3019,6 +3020,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "adodb/adodb-php": 20,
         "dapphp/securimage": 20
     },
     "prefer-stable": false,

@@ -157,6 +157,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 		$g_db = ADONewConnection( $p_dsn );
 		$t_result = $g_db->IsConnected();
 	}
+	$g_db->SetFetchMode( ADODB_FETCH_ASSOC );
 
 	if( $t_result ) {
 		# For MySQL, the charset for the connection needs to be specified.
@@ -209,6 +210,9 @@ function db_check_database_support( $p_db_type ) {
 		case 'odbc_mssql':
 			$t_support = function_exists( 'odbc_connect' );
 			break;
+		case 'sqlite3':
+			$t_support = extension_loaded( 'sqlite3' );
+			break;
 		default:
 			$t_support = false;
 	}
@@ -231,6 +235,8 @@ function db_get_type( $p_driver_type ) {
 			return DB_TYPE_MSSQL;
 		case 'oci8':
 			return DB_TYPE_ORACLE;
+		case 'sqlite3':
+			return DB_TYPE_SQLITE3;
 		default:
 			return DB_TYPE_UNDEFINED;
 	}
@@ -270,6 +276,23 @@ function db_is_mssql() {
 function db_is_oracle() {
 	global $g_db_functional_type;
 	return( DB_TYPE_ORACLE == $g_db_functional_type );
+}
+
+/**
+ * Checks if the database driver is SQLite 3 (sqlite3)
+ * @return boolean true if sqlite3
+ */
+function db_is_sqlite3() {
+	global $g_db_functional_type;
+	return( DB_TYPE_SQLITE3 == $g_db_functional_type );
+}
+
+/**
+ * Checks if the database driver requires special BLOB handling
+ * @return boolean true if the BLOBs need to be handled by db_update_blob()
+ */
+function db_uses_blob() {
+	return db_is_oracle() || db_is_sqlite3();
 }
 
 /**
@@ -842,8 +865,8 @@ function db_get_table_list() {
 /**
  * Updates a BLOB column
  *
- * This function is only needed for oci8; it will do nothing and return
- * false if used with another RDBMS.
+ * This function is only needed for databases that require separate BLOB
+ * handling, such as oci8 or sqlite3.
  *
  * @param string $p_table  Table name.
  * @param string $p_column The BLOB column to update.
@@ -854,10 +877,6 @@ function db_get_table_list() {
  */
 function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 	global $g_db, $g_db_log_queries, $g_queries_array;
-
-	if( !db_is_oracle() ) {
-		return false;
-	}
 
 	if( null == $p_where ) {
 		$p_where = 'id=' . db_insert_id( $p_table );
