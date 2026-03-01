@@ -473,6 +473,16 @@ $(document).ready( function() {
 				.prop('disabled', !$(this).prop('checked'));
 	});
 
+	/* Handle due date filter field */
+	$(document).on('change', '.js_switch_due_date_inputs_trigger', function() {
+		// Hardcoded 10 from $g_due_date_enum_string "range" value
+		let filter_by_range = $(this).val() === '10';
+		$(this).closest('table')
+				.find('select')
+                .not('.js_switch_due_date_inputs_trigger')
+				.prop('disabled', !filter_by_range);
+	});
+
 	/* Handle custom field of date type */
 	$(document).on('change', 'select[name^=custom_field_][name$=_control]', function() {
 		var table = $(this).closest('table');
