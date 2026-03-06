@@ -47,6 +47,7 @@
  * @uses wiki_api.php
  *
  * @noinspection PhpIncludeInspection
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 /**
@@ -283,6 +284,7 @@ function require_api( $p_api_name ) {
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$s_api_included[$p_api_name] = 1;
 	}
 }
@@ -311,6 +313,7 @@ function require_lib( $p_library_name ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}
 
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$s_libraries_included[$p_library_name] = 1;
 	}
 }
@@ -461,7 +464,6 @@ function autoload_mantis( $p_class ) {
 
 	if( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );
-		return;
 	}
 }
 
