@@ -71,13 +71,13 @@ require_once( __DIR__ . '/core/constant_inc.php' );
 # Enforce our minimum PHP requirements
 if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
 	$C = 'constant';
-	die( <<<MESSAGE
+	$t_message = <<<MESSAGE
 		<h2>FATAL ERROR: Your version of PHP is too old</h2>
 		<p>MantisBT {$C('MANTIS_VERSION')} requires PHP {$C('PHP_MIN_VERSION')} or newer.</p>
 		You are running version <em>{$C('PHP_VERSION')}</em>.
 		Please upgrade to a newer version.
-		MESSAGE
-	);
+		MESSAGE;
+	fatal_error( $t_message );
 }
 if( defined( 'PHP_MAX_VERSION' )
 	&& version_compare( PHP_VERSION, PHP_MAX_VERSION, '>=' )
@@ -87,13 +87,13 @@ if( defined( 'PHP_MAX_VERSION' )
 	$t_mantis_url = 'https://mantisbt.org/bugs/search.php?project_id=1&tag_string=PHP%20' . $t_short_version[0];
 
 	$C = 'constant';
-	die(<<<MESSAGE
+	$t_message = <<<MESSAGE
 		<h2>FATAL ERROR: MantisBT {$C('MANTIS_VERSION')} has known issues with PHP {$C('PHP_MAX_VERSION')} or later</strong></h2>
 		<p>Please refer to the <a href='$t_mantis_url'>bug tracker</a> for details.</p>
 		You are running PHP <em>{$C('PHP_VERSION')}</em>. 
 		Please downgrade to an earlier version.
-		MESSAGE
-	);
+		MESSAGE;
+	fatal_error( $t_message );
 }
 
 ensure_php_extension_loaded( 'mbstring', 'for Unicode (UTF-8) support' );
@@ -158,8 +158,9 @@ compress_start_handler();
 # they can complete installation and configuration of MantisBT
 if( false === $t_config_inc_found ) {
 	if( php_sapi_name() == 'cli' ) {
-		echo 'Error: ' . $g_config_path . "config_inc.php file not found; ensure MantisBT is properly setup.\n";
-		exit( 1 );
+		fatal_error( 'Error: ' . $g_config_path
+			. "config_inc.php file not found; ensure MantisBT is properly setup.\n"
+		);
 	}
 
 	# Do not load Core for dynamic javascript files when MantisBT is not installed
@@ -302,8 +303,7 @@ function require_lib( $p_library_name ) {
 		if( file_exists( $t_library_file_path ) ) {
 			require_once( $t_library_file_path );
 		} else {
-			echo 'External library \'' . $t_library_file_path . '\' not found.';
-			exit;
+			fatal_error( 'External library \'' . $t_library_file_path . '\' not found.' );
 		}
 
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
@@ -486,4 +486,24 @@ function ensure_php_extension_loaded( $p_extension, $p_reason_message ) {
 		"https://www.php.net/manual/en/$p_extension.installation.php"
 	);
 	die;
+}
+
+/**
+ * Aborts core initialization.
+ *
+ * Exits with HTTP status code 500 or 1 if run from CLI.
+ *
+ * @param string $p_message HTML error message to display (tags will be stripped
+ *                          if running from CLI).
+ *
+ * @return void
+ */
+function fatal_error( string $p_message ): void {
+	if( php_sapi_name() == 'cli' ) {
+		echo strip_tags( $p_message );
+		exit( 1 );
+	} else {
+		http_response_code( HTTP_STATUS_INTERNAL_SERVER_ERROR );
+		exit( $p_message );
+	}
 }
