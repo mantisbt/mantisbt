@@ -259,7 +259,7 @@ $g_notify_flags['acknowledged'] = array(
 					Regardless of how this option is set, validation is
 					never performed when using LDAP email
 					(i.e. when $g_use_ldap_email = ON,
-					see <xref linkend="admin.config.auth.ldap" />),
+					see <xref linkend="admin.config.ldap" />),
 					as we assume that it is handled by the directory.
 				</para></note>
 			</listitem>

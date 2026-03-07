@@ -142,9 +142,6 @@ class UserUpdateCommand extends Command {
 			$this->protected = $t_new_protected;
 		}
 
-		# LDAP
-		$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
-
 		# Username
 		if( isset( $t_user['name'] ) ) {
 			$t_user['username'] = $t_user['name'];
@@ -169,7 +166,7 @@ class UserUpdateCommand extends Command {
 		}
 
 		# ... if realname should be set by LDAP, then fetch it.
-		if( $t_ldap && config_get_global( 'use_ldap_realname' ) ) {
+		if( ON == config_get_global( 'use_ldap_realname' ) ) {
 			$t_username = $t_new_username ?: $t_old_username;
 			$t_realname = ldap_realname_from_username( $t_username );
 			if( !is_null( $t_realname ) && $t_realname !== $t_new_username ) {
@@ -186,7 +183,7 @@ class UserUpdateCommand extends Command {
 		$t_new_email = isset( $t_user['email'] ) ? trim( $t_user['email'] ) : null;
 
 		# ... if email should be set by LDAP, then fetch it.
-		if( $t_ldap && config_get_global( 'use_ldap_email' ) ) {
+		if( ON == config_get_global( 'use_ldap_email' ) ) {
 			$t_email = ldap_email( $this->user_id );
 			if( !is_null( $t_email ) && $t_email !== $t_old_email ) {
 				$t_new_email = $t_email;
