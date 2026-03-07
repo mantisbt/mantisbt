@@ -151,14 +151,12 @@ if( $f_master_bug_id > 0 ) {
 		helper_set_current_project( $t_project_id );
 		# Reloading the page is required so that the project browser
 		# reflects the new current project
-		print_header_redirect( $_SERVER['REQUEST_URI'], true, false, true );
+		print_header_redirect( $_SERVER['REQUEST_URI'], false, true );
 	}
 
 	# New issues cannot be reported for the 'All Project' selection
 	if( ALL_PROJECTS == $t_current_project ) {
-		if( !print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' ) ) {
-			die;
-		}
+		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
 	}
 
 	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
