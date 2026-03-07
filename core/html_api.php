@@ -196,7 +196,9 @@ function html_title( $p_page_title = '' ) {
 
 /**
  * Require a CSS file to be in html page headers
- * @param string|array $p_stylesheet_path Path to local CSS style sheet or an ['URL','integrity'] array, 'integrity' is optional.
+ * @param string|array $p_stylesheet_path Path to local CSS style sheet or
+ *                                        an ['URL','integrity'] array,
+ *                                        'integrity' is optional.
  * @return void
  */
 function require_css( $p_stylesheet_path ) {
@@ -336,7 +338,9 @@ function html_meta_canonical( $p_url ) {
 
 /**
  * Require a javascript file to be in html page headers
- * @param string|array $p_script_path Path to local javascript file or an ['URL','integrity'] array, 'integrity' is optional.
+ * @param string|array $p_script_path Path to local javascript file or
+ *                                    an ['URL','integrity'] array,
+ *                                    'integrity' is optional.
  * @return void
  */
 function require_js( $p_script_path ) {
