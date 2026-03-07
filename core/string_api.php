@@ -659,7 +659,6 @@ function string_get_bug_page( $p_action ) {
  */
 function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = false ) {
 	$t_bug_id = (int)$p_bug_id;
-	$t_bug_link_tag = string_html_specialchars( config_get( 'bug_link_tag' ) );
 
 	if( bug_exists( $t_bug_id ) ) {
 		$t_link = '<a href="';
@@ -680,9 +679,9 @@ function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = f
 				$t_link .= ' class="resolved"';
 			}
 		}
-		$t_link .= '>' . $t_bug_link_tag . bug_format_id( $t_bug_id ) . '</a>';
+		$t_link .= '>' . bug_format_id( $t_bug_id ) . '</a>';
 	} else {
-		$t_link = '<span class="resolved">' . $t_bug_link_tag . bug_format_id( $t_bug_id ) . '</span>';
+		$t_link = '<span class="resolved">' . bug_format_id( $t_bug_id ) . '</span>';
 	}
 
 	return $t_link;
@@ -699,8 +698,6 @@ function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = f
 function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info = true, $p_fqdn = false ) {
 	$t_bug_id = (int)$p_bug_id;
 	$t_bugnote_id = (int)$p_bugnote_id;
-	$t_bug_link_tag = string_html_specialchars( config_get( 'bug_link_tag' ) );
-	$t_bugnote_link_tag = string_html_specialchars( config_get( 'bugnote_link_tag' ) );
 
 	if( bug_exists( $t_bug_id ) && bugnote_exists( $t_bugnote_id ) ) {
 		$t_link = '<a href="';
@@ -721,11 +718,10 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info 
 			$t_link .= ' class="resolved"';
 		}
 
-		$t_link .= '>' . $t_bug_link_tag . bug_format_id( $t_bug_id )
-			. ':' . $t_bugnote_link_tag . bugnote_format_id( $t_bugnote_id ) . '</a>';
+		$t_link .= '>' . bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $t_bugnote_id ) . '</a>';
 	} else {
 		$t_link = string_get_bug_view_link( $t_bug_id, $t_bugnote_id, $p_detail_info, $p_fqdn )
-			. ':<span class="resolved">' . $t_bugnote_link_tag . bugnote_format_id( $t_bugnote_id ) . '</span>';
+			. ':<span class="resolved">' . bugnote_format_id( $t_bugnote_id ) . '</span>';
 	}
 
 	return $t_link;
