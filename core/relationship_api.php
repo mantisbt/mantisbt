@@ -134,6 +134,18 @@ class BugRelationshipData {
 	public $type;
 }
 
+/**
+ * Cache of all relationships with the given bug as source indexed by bug id.
+ * @global array $g_cache_relationships_src
+ */
+$g_cache_relationships_src = [];
+
+/**
+ * Cache of all relationships with the given bug as destination indexed by bug id.
+ * @global array $g_cache_relationships_dest 
+ */
+$g_cache_relationships_dest = [];
+
 $g_relationships = array();
 $g_relationships[BUG_DEPENDANT] = array(
 	'#forward' => true,
@@ -475,6 +487,13 @@ function relationship_get( $p_relationship_id ) {
  * @throws ClientException if the bug does not exist.
  */
 function relationship_get_all_src( $p_src_bug_id ) {
+	global $g_cache_relationships_src;
+	
+	$c_src_bug_id = (int)$p_src_bug_id;
+	if( isset( $g_cache_relationships_src[$c_src_bug_id] ) ) {
+		return $g_cache_relationships_src[$c_src_bug_id];
+	}
+
 	db_param_push();
 	$t_query = 'SELECT {bug_relationship}.id, {bug_relationship}.relationship_type,
 				{bug_relationship}.source_bug_id, {bug_relationship}.destination_bug_id,
@@ -483,9 +502,9 @@ function relationship_get_all_src( $p_src_bug_id ) {
 				INNER JOIN {bug} ON {bug_relationship}.destination_bug_id = {bug}.id
 				WHERE source_bug_id=' . db_param() . '
 				ORDER BY relationship_type, {bug_relationship}.id';
-	$t_result = db_query( $t_query, array( $p_src_bug_id ) );
+	$t_result = db_query( $t_query, array( $c_src_bug_id ) );
 
-	$t_src_project_id = bug_get_field( $p_src_bug_id, 'project_id' );
+	$t_src_project_id = bug_get_field( $c_src_bug_id, 'project_id' );
 
 	$t_bug_relationship_data = array();
 	$t_bug_array = array();
@@ -506,6 +525,8 @@ function relationship_get_all_src( $p_src_bug_id ) {
 	if( !empty( $t_bug_array ) ) {
 		bug_cache_array_rows( $t_bug_array );
 	}
+	
+	$g_cache_relationships_src[$c_src_bug_id] = $t_bug_relationship_data;
 
 	return $t_bug_relationship_data;
 }
@@ -519,6 +540,13 @@ function relationship_get_all_src( $p_src_bug_id ) {
  * @throws ClientException if the bug does not exist.
  */
 function relationship_get_all_dest( $p_dest_bug_id ) {
+	global $g_cache_relationships_dest;
+	
+	$c_dest_bug_id = (int)$p_dest_bug_id;
+	if( isset( $g_cache_relationships_dest[$c_dest_bug_id] ) ) {
+		return $g_cache_relationships_dest[$c_dest_bug_id];
+	}
+
 	db_param_push();
 	$t_query = 'SELECT {bug_relationship}.id, {bug_relationship}.relationship_type,
 				{bug_relationship}.source_bug_id, {bug_relationship}.destination_bug_id,
@@ -527,9 +555,9 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 				INNER JOIN {bug} ON {bug_relationship}.source_bug_id = {bug}.id
 				WHERE destination_bug_id=' . db_param() . '
 				ORDER BY relationship_type, {bug_relationship}.id';
-	$t_result = db_query( $t_query, array( (int)$p_dest_bug_id ) );
+	$t_result = db_query( $t_query, array( $c_dest_bug_id ) );
 
-	$t_dest_project_id = bug_get_field( $p_dest_bug_id, 'project_id' );
+	$t_dest_project_id = bug_get_field( $c_dest_bug_id, 'project_id' );
 
 	$t_bug_relationship_data = array();
 	$t_bug_array = array();
@@ -550,6 +578,8 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 	if( !empty( $t_bug_array ) ) {
 		bug_cache_array_rows( $t_bug_array );
 	}
+
+	$g_cache_relationships_dest[$c_dest_bug_id] = $t_bug_relationship_data;
 	return $t_bug_relationship_data;
 }
 
