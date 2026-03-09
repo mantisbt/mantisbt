@@ -31,12 +31,29 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
+ * @uses config_api.php
  * @uses constant_inc.php
+ * @uses html_api.php
+ * @uses http_api.php
  * @uses utility_api.php
  */
 
+require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'html_api.php' );
+require_api( 'http_api.php' );
 require_api( 'utility_api.php' );
+
+# Enable Viz.js WebAssembly and re-emit CSP headers
+http_csp_add( 'script-src', "'wasm-unsafe-eval'" );
+http_csp_emit_header();
+
+# Include Viz.js
+if( config_get_global( 'cdn_enabled' ) == ON ) {
+	require_js( [ 'https://cdn.jsdelivr.net/npm/@viz-js/viz@' . VIZJS_VERSION . '/dist/viz-global.min.js', VIZJS_HASH ] );
+} else {
+	require_js( 'viz-global.min.js' );
+}
 
 /**
  * Base class for graph creation and manipulation.
@@ -264,13 +281,6 @@ class Graph {
 		ob_start();
 		$this->generate();
 		$t_source = ob_get_clean();
-
-		# Include Viz.js
-		if( config_get_global( 'cdn_enabled' ) == ON ) {
-			html_javascript_cdn_link( 'https://cdn.jsdelivr.net/npm/@viz-js/viz@' . VIZJS_VERSION . '/dist/viz-global.min.js', VIZJS_HASH );
-		} else {
-			html_javascript_link( 'viz-global.min.js' );
-		}
 
 		# Include Viz.js proxy
 		echo "\t", '<script src="', helper_mantis_url( 'js/viz-proxy.js' ),
