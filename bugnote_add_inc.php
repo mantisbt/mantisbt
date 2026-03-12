@@ -30,7 +30,6 @@
  * @uses event_api.php
  * @uses form_api.php
  * @uses helper_api.php
- * @uses html_api.php
  * @uses lang_api.php
  */
 
@@ -46,7 +45,6 @@ require_api( 'constant_inc.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'helper_api.php' );
-require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
 ?>
@@ -147,26 +145,15 @@ require_api( 'lang_api.php' );
 
 	if( $t_allow_file_upload ) {
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
-		$t_max_file_size = file_get_max_file_size();
 ?>
 			<tr id="bugnote-attach-files">
 				<th class="category">
 					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
 					<br />
-					<?php print_max_filesize( $t_max_file_size ); ?>
+					<?php print_max_filesize( file_get_max_file_size() ) ?>
 				</th>
 				<td>
-					<?php print_dropzone_template() ?>
-					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
-						<?php print_icon( 'fa-cloud-upload', 'upload-icon ace-icon blue fa-3x' ); ?>
-						<br>
-						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
-						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
-					</div>
-					<div class="fallback">
-						<input id="ufile[]" name="ufile[]" type="file" size="50" />
-					</div>
+					<?php dropzone_print() ?>
 				</td>
 			</tr>
 <?php
