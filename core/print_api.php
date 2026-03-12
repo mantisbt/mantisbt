@@ -2240,7 +2240,7 @@ function print_max_filesize( $p_size, $p_divider = 1024, $p_unit = 'kib' ) {
 /**
  * Populate form element with dropzone data attributes
  * @return void
- * @deprecated dropzone_print_form_data() should be used in preference to this function
+ * @deprecated 2.29.0 dropzone_print_form_data() should be used in preference to this function
  */
 function print_dropzone_form_data() {
 	error_parameters( __FUNCTION__, 'dropzone_print_form_data' );
@@ -2252,7 +2252,7 @@ function print_dropzone_form_data() {
  * Populate a hidden div where its inner html will be used as preview template
  * for dropzone attached files
  * @return void
- * @deprecated dropzone_print_template() should be used in preference to this function
+ * @deprecated 2.29.0 dropzone_print_template() should be used in preference to this function
  */
 function print_dropzone_template(){
 	error_parameters( __FUNCTION__, 'dropzone_print_template' );
