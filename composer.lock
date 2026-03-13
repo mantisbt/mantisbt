@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ce8da92fc76c77225b6b57a00976359",
+    "content-hash": "e279eb94efb327c423ac546389c93298",
     "packages": [
         {
             "name": "adodb/adodb-php",
@@ -568,24 +568,24 @@
         },
         {
             "name": "parsedown/parsedown",
-            "version": "1.7.5",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parsedown/parsedown.git",
-                "reference": "6ca5690b0282544416897376abe056601847ddb3"
+                "reference": "96baaad00f71ba04d76e45b4620f54d3beabd6f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parsedown/parsedown/zipball/6ca5690b0282544416897376abe056601847ddb3",
-                "reference": "6ca5690b0282544416897376abe056601847ddb3",
+                "url": "https://api.github.com/repos/parsedown/parsedown/zipball/96baaad00f71ba04d76e45b4620f54d3beabd6f7",
+                "reference": "96baaad00f71ba04d76e45b4620f54d3beabd6f7",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": ">=5.3.0"
+                "php": ">=7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8|^5.7|^6.5|^7.5|^8.5|^9.6"
+                "phpunit/phpunit": "^7.5|^8.5|^9.6"
             },
             "type": "library",
             "autoload": {
@@ -601,31 +601,20 @@
                 {
                     "name": "Emanuil Rusev",
                     "email": "hello@erusev.com",
-                    "homepage": "https://erusev.com"
-                },
-                {
-                    "name": "Aidan Woods",
-                    "email": "aidantwoods@gmail.com",
-                    "homepage": "https://aidanwoods.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Damien Regad",
-                    "email": "dregad@mantisbt.org",
-                    "role": "Fork Maintainer"
+                    "homepage": "http://erusev.com"
                 }
             ],
             "description": "Parser for Markdown.",
-            "homepage": "https://parsedown.org",
+            "homepage": "http://parsedown.org",
             "keywords": [
                 "markdown",
                 "parser"
             ],
             "support": {
                 "issues": "https://github.com/parsedown/parsedown/issues",
-                "source": "https://github.com/parsedown/parsedown/tree/1.7.5"
+                "source": "https://github.com/parsedown/parsedown/tree/1.8.0"
             },
-            "time": "2025-11-29T19:20:59+00:00"
+            "time": "2026-02-16T11:41:01+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -3035,5 +3024,5 @@
     "platform-overrides": {
         "php": "7.4.33"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
