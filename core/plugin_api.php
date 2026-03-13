@@ -290,11 +290,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	}
 
 	$t_mtime = @filemtime( $t_file_path );
-	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $t_mtime ) );
-	if( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] )
-		&& ( $t_mtime <= strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) ) ) {
-		http_response_code( HTTP_STATUS_NOT_MODIFIED );
-	} else {
+	if( http_if_modified_since( $t_mtime ) ) {
 		readfile( $t_file_path );
 	}
 }
