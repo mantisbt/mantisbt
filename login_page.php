@@ -140,7 +140,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	$t_admin_dir = __DIR__ . '/admin';
 	$t_admin_dir_is_accessible = @is_readable( $t_admin_dir );
 	if( $t_admin_dir_is_accessible ) {
-		$t_warnings[] = lang_get( 'warning_admin_directory_present' );
+		$t_warnings[] = [ lang_get( 'warning_admin_directory_present' ), 'warning_admin_directory_present' ];
 	}
 
 	# Generate a warning if default user administrator/root is valid.
@@ -253,7 +253,11 @@ if( count( $t_warnings ) > 0 ) {
 	echo '<div class="space-10"></div>';
 	echo '<div class="alert alert-warning">';
 	foreach( $t_warnings AS $t_warning ) {
-		echo '<p>' . $t_warning . '</p>';
+		if( is_array( $t_warning ) ) {
+			echo '<p id="' . $t_warning[1] . '">' . $t_warning[0] . '</p>';
+		} else {
+			echo '<p>' . $t_warning . '</p>';
+		}
 	}
 	echo '</div>';
 }

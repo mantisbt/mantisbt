@@ -657,6 +657,27 @@ $(document).ready( function() {
 		bottom_placeholder.css('height', parseInt(bottom.height()) + 'px');
 		footer.css('padding-top', parseInt(footer_content.height()) + 'px');
 		}).triggerHandler('resize.footer');
+
+	/**
+	 * Admin directory on-line check (login_page.php)
+	 */
+	$('#warning_admin_directory_present').each(function() {
+		var spinner = $('<i class="fa fa-spin fa-spinner margin-left-8"></i>');
+		$(this).append(spinner);
+		fetch(config['short_path'] + 'admin/', { credentials: 'omit' })
+			.then(response => {
+				spinner.remove();
+				return response.text();
+			})
+			.then(data => {
+				if( !data.includes('MantisBT Administration') ) {
+					$(this).remove();
+				}
+			})
+			.catch(error => {
+				spinner.remove();
+			});
+	});
 });
 
 function setBugLabel() {
