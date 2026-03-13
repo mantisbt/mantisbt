@@ -142,16 +142,13 @@ class UserUpdateCommand extends Command {
 			$this->protected = $t_new_protected;
 		}
 
-		# LDAP
-		$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
-
 		# Username
 		if( isset( $t_user['name'] ) ) {
 			$t_user['username'] = $t_user['name'];
 		}
 
 		$t_old_username = user_get_username( $this->user_id );
-		$t_new_username = isset( $t_user['username' ] ) ? trim( $t_user['username']) : null;
+		$t_new_username = isset( $t_user['username'] ) ? trim( $t_user['username'] ) : null;
 
 		if( !is_null( $t_new_username ) && $t_new_username !== $t_old_username ) {
 			user_ensure_name_unique( $t_new_username, $this->user_id );
@@ -161,19 +158,17 @@ class UserUpdateCommand extends Command {
 		}
 
 		# Real Name
-		$t_old_realname = user_get_realname( $this->user_id );
-		$t_new_realname = $t_user['real_name'] ?? null;
-
-		if( $t_new_realname ) {
-			$t_new_realname = string_normalize( $t_new_realname );
-		}
+		$t_old_realname = user_get_field( $this->user_id, 'realname' );
+		$t_new_realname = isset( $t_user['real_name'] ) ? string_normalize( $t_user['real_name'] ) : null;
 
 		# ... if realname should be set by LDAP, then fetch it.
-		if( $t_ldap && config_get_global( 'use_ldap_realname' ) ) {
+		if( ON == config_get_global( 'use_ldap_realname' ) ) {
 			$t_username = $t_new_username ?: $t_old_username;
 			$t_realname = ldap_realname_from_username( $t_username );
-			if( !is_null( $t_realname ) && $t_realname !== $t_new_username ) {
+			if( !empty( $t_realname ) ) {
 				$t_new_realname = $t_realname;
+			} elseif( empty( $t_new_realname ) ) {
+				$t_new_realname = null;
 			}
 		}
 
@@ -186,10 +181,13 @@ class UserUpdateCommand extends Command {
 		$t_new_email = isset( $t_user['email'] ) ? trim( $t_user['email'] ) : null;
 
 		# ... if email should be set by LDAP, then fetch it.
-		if( $t_ldap && config_get_global( 'use_ldap_email' ) ) {
-			$t_email = ldap_email( $this->user_id );
-			if( !is_null( $t_email ) && $t_email !== $t_old_email ) {
+		if( ON == config_get_global( 'use_ldap_email' ) ) {
+			$t_username = $t_new_username ?: $t_old_username;
+			$t_email = ldap_email_from_username( $t_username );
+			if( !empty( $t_email ) ) {
 				$t_new_email = $t_email;
+			} elseif( empty( $t_new_email ) ) {
+				$t_new_email = null;
 			}
 		}
 
