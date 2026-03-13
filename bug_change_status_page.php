@@ -29,6 +29,7 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses date_api.php
+ * @uses datetimepicker_api.php
  * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
@@ -49,6 +50,7 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'date_api.php' );
+require_api( 'datetimepicker_api.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -240,14 +242,10 @@ layout_page_begin();
 	<!-- Due date -->
 	<tr>
 		<th class="category">
-			<?php echo lang_get( 'due_date' ) ?>
+			<label for="due_date"><?php echo lang_get( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="16"
-				data-picker-locale="<?php lang_get_current_datetime_locale() ?>"
-				data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
-				<?php helper_get_tab_index() ?> value="<?php echo $t_date_to_display ?>" />
-			<?php print_icon( 'fa-calendar', 'fa-xlg datetimepicker' ); ?>
+			<?php datetimepicker_print( $t_date_to_display, 'due_date' ) ?>
 		</td>
 	</tr>
 
