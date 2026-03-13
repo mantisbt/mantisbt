@@ -32,6 +32,7 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses date_api.php
+ * @uses datetimepicker_api.ph
  * @uses dropzone_api.php
  * @uses error_api.php
  * @uses event_api.php
@@ -60,6 +61,7 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'date_api.php' );
+require_api( 'datetimepicker_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
@@ -369,11 +371,7 @@ if( $t_show_attachments ) {
 			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" ' .
-				'data-picker-locale="' . lang_get_current_datetime_locale() .
-				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
-				'size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
-			<?php print_icon( 'fa-calendar', 'fa-xlg datetimepicker' ); ?>
+			<?php datetimepicker_print( $t_date_to_display, 'due_date' ) ?>
 		</td>
 	</tr>
 <?php } ?>
