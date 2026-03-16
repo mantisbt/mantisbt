@@ -1254,7 +1254,7 @@ $s_timeline_issue_unassigned = '<span class="username">%1$s</span> зьняў з
 $s_timeline_no_activity = 'Няма актыўнасьці ў гэты прамежак часу.';
 $s_timeline_title = 'Храналёгія';
 $s_timeline_more = 'Больш падзеяў…';
-$s_missing_error_string = 'Адсутнічае радок памылкі: %1$s';
+$s_missing_error_string = 'Брак радку памылкі: %1$s';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Пад час дзеяньня адбылася памылка. Вы можаце паведаміць пра гэта Вашаму лякальнаму адміністратару.';
 $MANTIS_ERROR[ERROR_GENERIC_DETAILS] = 'Падрабязнасьці памылкі: %s';
 $MANTIS_ERROR[ERROR_SQL] = 'Выяўленая памылка SQL.';
