@@ -685,6 +685,10 @@ define( 'LISTJS_HASH', 'sha512-93wYgwrIFL+b+P3RvYxi/WUFRXXUDSLCT2JQk9zhVGXuS2mHl
 define( 'DROPZONE_VERSION', '5.5.0' );
 define( 'DROPZONE_HASH', 'sha384-TBYvJK9bRa7Ii3OZh+eaXb5r98Ad36+kotsxTD3tIEa9vgJOQ0lRMfZtWAJxPq4P' );
 
+# Viz JS
+define( 'VIZJS_VERSION', '3.24.0' );
+define( 'VIZJS_HASH', 'sha384-of2vw0aGAnSBLnUInjAU1buIwY5P2wtGPJZMvVzK54TlhRcLWlJ6eTmep7ayi0IV' );
+
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 
