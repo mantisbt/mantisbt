@@ -495,7 +495,7 @@ function create_cumulative_bydate( array $p_filter = [] ) {
 	$t_query = new DBQuery();
 	$t_sql = <<< SQL
 		SELECT
-			CAST(date_submitted / $t_seconds_per_day AS INTEGER) date_index,
+			ROUND(date_submitted / $t_seconds_per_day - 0.5, 0) date_index,
 			COUNT(*) num
 		FROM {bug}
 		WHERE $t_specific_where
@@ -524,7 +524,7 @@ function create_cumulative_bydate( array $p_filter = [] ) {
 	$t_query = new DBQuery();
 	$t_sql = <<< SQL
 		SELECT
-			CAST(COALESCE(max_date_modified, last_updated) / $t_seconds_per_day AS INTEGER) date_index,
+			ROUND(COALESCE(max_date_modified, last_updated) / $t_seconds_per_day - 0.5, 0) date_index,
 			COUNT(*) num
 		FROM {bug}
 		LEFT JOIN(
