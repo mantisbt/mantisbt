@@ -449,13 +449,13 @@ function mci_is_mantis_offline() {
 /**
  * Handle a soap API login.
  *
- * @param string $p_username Login username.
- * @param string $p_password Login password.
+ * @param string|null $p_username Login username.
+ * @param string|null $p_password Login password.
  *
  * @return int|false return user_id if successful, otherwise false.
  * @throws ClientException
  */
-function mci_check_login( $p_username, $p_password ) {
+function mci_check_login( ?string $p_username, ?string $p_password ) {
 	static $s_already_called = false;
 
 	if( $s_already_called === true ) {
@@ -468,11 +468,13 @@ function mci_check_login( $p_username, $p_password ) {
 		return false;
 	}
 
+	$p_username ??= '';
+
 	# Must not pass in null password, otherwise, authentication will be by-passed
 	# by auth_attempt_script_login().
-	$t_password = ( $p_password === null ) ? '' : $p_password;
+	$p_password ??= '';
 
-	if( api_token_validate( $p_username, $t_password ) ) {
+	if( api_token_validate( $p_username, $p_password ) ) {
 		# Token is valid, then login the user without worrying about a password.
 		if( auth_attempt_script_login( $p_username ) === false ) {
 			return false;
@@ -487,7 +489,7 @@ function mci_check_login( $p_username, $p_password ) {
 			}
 		} else {
 			# Use regular passwords
-			if( auth_attempt_script_login( $p_username, $t_password ) === false ) {
+			if( auth_attempt_script_login( $p_username, $p_password ) === false ) {
 				return false;
 			}
 		}
