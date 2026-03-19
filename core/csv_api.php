@@ -121,19 +121,22 @@ function csv_escape_string( $p_string ) {
 	$p_string = (string)$p_string;
 	if( config_get( 'csv_injection_protection' ) ) {
 		# Prevent CSV injection by escaping text that could be interpreted as a formula
-		if( $p_string && strpos( '=-+@', $p_string[0] ) !== false ) {
-			# Prefixing with a tab rather than single quote, as Excel does not show
-			# the tab visually in the cell.
-			$p_string = "\t" . $p_string;
+		# per https://owasp.org/www-community/attacks/CSV_Injection
+		&& $p_string && strpos( '=-+@', $p_string[0] ) !== false
+	) {
+		# Prefixing with a tab rather than single quote, as Excel does not show
+		# the tab visually in the cell.
+		$p_string = "\t" . $p_string;
+		$t_must_escape = true;
+	} else {
+		$t_must_escape = false;
+		$t_escaped = str_split( '"' . csv_get_separator() . csv_get_newline() );
+		while( ( $t_char = current( $t_escaped ) ) !== false && !$t_must_escape ) {
+			$t_must_escape = strpos( $p_string, $t_char ) !== false;
+			next( $t_escaped );
 		}
 	}
 
-	$t_escaped = str_split( '"' . csv_get_separator() . csv_get_newline() );
-	$t_must_escape = false;
-	while( ( $t_char = current( $t_escaped ) ) !== false && !$t_must_escape ) {
-		$t_must_escape = strpos( $p_string, $t_char ) !== false;
-		next( $t_escaped );
-	}
 	if( $t_must_escape ) {
 		$p_string = '"' . str_replace( '"', '""', $p_string ) . '"';
 	}
