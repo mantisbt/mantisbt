@@ -32,6 +32,7 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses date_api.php
+ * @uses dropzone_api.php
  * @uses error_api.php
  * @uses event_api.php
  * @uses file_api.php
@@ -59,6 +60,7 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'date_api.php' );
+require_api( 'dropzone_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
@@ -687,28 +689,16 @@ if( $t_show_attachments ) {
 <?php
 	# File Upload (if enabled)
 	if( $t_show_attachments ) {
-		$t_max_file_size = file_get_max_file_size();
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
 	<tr>
 		<th class="category">
 			<label for="ufile[]"><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?></label>
 			<br />
-			<?php print_max_filesize( $t_max_file_size ); ?>
+			<?php print_max_filesize( file_get_max_file_size() ) ?>
 		</th>
 		<td>
-			<?php print_dropzone_template() ?>
-			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-			<div class="dropzone center" <?php print_dropzone_form_data() ?>>
-				<?php print_icon( 'fa-cloud-upload', 'upload-icon ace-icon blue fa-3x' ); ?>
-				<br>
-				<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
-				<div id="dropzone-previews-box" class="dropzone-previews dz-max-files-reached"></div>
-			</div>
-			<div class="fallback">
-				<div class="dz-message" data-dz-message></div>
-				<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="60" />
-			</div>
+			<?php dropzone_print() ?>
 		</td>
 	</tr>
 

@@ -226,13 +226,6 @@ function html_css() {
 		html_css_link( config_get_global( 'css_rtl_include_file' ), $t_cache_key );
 	}
 
-	# dropzone css
-	if ( config_get_global( 'cdn_enabled' ) == ON ) {
-		require_css( [ 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css' ] );
-	} else {
-		require_css( 'dropzone-' . DROPZONE_VERSION . '.min.css' );
-	}
-
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
 		# status_config.php is a special css file, dynamically generated.
 		# Add a hash to the query string to differentiate content based on its
@@ -375,15 +368,9 @@ function html_head_javascript() {
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		# JQuery
 		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', JQUERY_HASH );
-
-		# Dropzone
-		require_js( [ 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH ] );
 	} else {
 		# JQuery
 		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
-
-		# Dropzone
-		require_js( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
 	}
 
 	require_js( 'common.js' );
