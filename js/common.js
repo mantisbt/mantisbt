@@ -333,95 +333,6 @@ $(document).ready( function() {
 		jcontainer.data('checkbox-range-last-clicked', this);
 	});
 
-	var stopwatch = {
-		timerID: 0,
-		startTime: null,
-		zeroTime: moment('0', 's'),
-		tick: function() {
-			var elapsedDiff = moment().diff(this.startTime),
-				elapsedTime = this.zeroTime.clone().add(elapsedDiff);
-
-			$('input[type=text].stopwatch_time').val(elapsedTime.format('HH:mm:ss'));
-		},
-		reset: function() {
-			this.stop();
-			$('input[type=text].stopwatch_time').val('');
-		},
-		start: function() {
-			var self = this,
-				timeFormat = '',
-				stoppedTime = $('input[type=text].stopwatch_time').val();
-
-			this.stop();
-
-			if (stoppedTime) {
-				switch (stoppedTime.split(':').length) {
-					case 1:
-						timeFormat = 'ss';
-						break;
-
-					case 2:
-						timeFormat = 'mm:ss';
-						break;
-
-					default:
-						timeFormat = 'HH:mm:ss';
-				}
-
-				this.startTime = moment().add(this.zeroTime.clone().diff(moment(stoppedTime, timeFormat)));
-			} else {
-				this.startTime = moment();
-			}
-
-			this.timerID = window.setInterval(function() {
-				self.tick();
-			}, 1000);
-
-			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_stop']);
-		},
-		stop: function() {
-			if (this.timerID) {
-				window.clearInterval(this.timerID);
-				this.timerID = 0;
-			}
-
-			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_start']);
-		}
-	};
-
-	$('input[type=button].stopwatch_toggle').click(function() {
-		if (!stopwatch.timerID) {
-			stopwatch.start();
-		} else {
-			stopwatch.stop();
-		}
-	});
-
-	$('input[type=button].stopwatch_reset').click(function() {
-		stopwatch.reset();
-	});
-
-	$('input[type=text].datetimepicker').each(function(index, element) {
-		$(this).datetimepicker({
-			locale: $(this).data('picker-locale'),
-			format: $(this).data('picker-format'),
-			useCurrent: false,
-			icons: {
-				time: 'fa fa-clock-o',
-				date: 'fa fa-calendar',
-				up: 'fa fa-chevron-up',
-				down: 'fa fa-chevron-down',
-				previous: 'fa fa-chevron-left',
-				next: 'fa fa-chevron-right',
-				today: 'fa fa-arrows ',
-				clear: 'fa fa-trash',
-				close: 'fa fa-times'
-			}
-		}).next().on(ace.click_event, function() {
-			$(this).prev().focus();
-		});
-	});
-
 	$( 'form .dropzone' ).each(function(){
 		var classPrefix = 'dropzone';
 		var autoUpload = $(this).hasClass('auto-dropzone');
@@ -509,18 +420,6 @@ $(document).ready( function() {
 				$(table).find("select[name*=_end_month]").prop('disabled', true);
 				$(table).find("select[name*=_end_day]").prop('disabled', true);
 				break;
-		}
-	});
-
-	/* For Period.php bundled with the core MantisGraph plugin */
-	$('#dates > input[type=image].datetime').hide();
-	$('#period_menu > select#interval').change(function() {
-		if ($(this).val() == 10) {
-			$('#dates > input[type=text].datetime').prop('disabled', false);
-			$('#dates > input[type=image].datetime').show();
-		} else {
-			$('#dates > input[type=text].datetime').prop('disabled', true);
-			$('#dates > input[type=image].datetime').hide();
 		}
 	});
 

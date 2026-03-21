@@ -30,6 +30,7 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses custom_field_api.php
+ * @uses datetimepicker_api.php
  * @uses error_api.php
  * @uses event_api.php
  * @uses form_api.php
@@ -54,6 +55,7 @@ require_api( 'columns_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
+require_api( 'datetimepicker_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
@@ -346,10 +348,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 			if( !date_is_null( $t_bug->due_date ) ) {
 				$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 			}
-			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
-				'data-picker-locale="' . lang_get_current_datetime_locale() .  '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
-				'maxlength="16" value="' . $t_date_to_display . '" />';
-			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
+			datetimepicker_print( $t_date_to_display, 'due_date' );
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $t_bug->due_date );
