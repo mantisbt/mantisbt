@@ -119,7 +119,7 @@ function csv_get_default_filename() {
  */
 function csv_escape_string( $p_string ) {
 	$p_string = (string)$p_string;
-	if( config_get( 'csv_injection_protection' ) ) {
+	if( config_get( 'csv_injection_protection' )
 		# Prevent CSV injection by escaping text that could be interpreted as a formula
 		# per https://owasp.org/www-community/attacks/CSV_Injection
 		&& $p_string && strpos( '=-+@', $p_string[0] ) !== false
