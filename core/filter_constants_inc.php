@@ -61,6 +61,7 @@ define( 'FILTER_PROPERTY_MONITOR_USER_ID', 'monitor_user_id' ); # user_monitor
 # bug fields
 define( 'FILTER_PROPERTY_CATEGORY_ID', 'category_id' ); #show_category
 define( 'FILTER_PROPERTY_SEVERITY', 'severity' ); #show_severity
+define( 'FILTER_PROPERTY_REPRODUCIBILITY', 'reproducibility' ); #show_reproducibility
 define( 'FILTER_PROPERTY_STATUS', 'status' ); #show_status
 define( 'FILTER_PROPERTY_PRIORITY', 'priority' ); #show_priority
 define( 'FILTER_PROPERTY_REPORTER_ID', 'reporter_id' );
