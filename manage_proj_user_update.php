@@ -57,7 +57,7 @@ project_ensure_exists( $f_project_id );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 access_ensure_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
-# If the form was managed by javascript, we recive relevant data in a json array
+# If the form was managed by javascript, we receive relevant data in a json array
 # so we can ignore the standard inputs
 $f_form_json_updates = gpc_get_string( 'json_submit', null );
 if( $f_form_json_updates ) {
@@ -114,7 +114,7 @@ foreach( $f_form_updated_acls as $t_id => $t_value ) {
 	}
 
 	if( $t_value > $t_current_user_access_level ) {
-		# can't assign a higer level that the one current use has
+		# can't assign a higher level that the one current use has
 		continue;
 	}
 	if( !in_array( $t_value, $t_enum_values ) ) {
