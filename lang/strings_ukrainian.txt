@@ -44,6 +44,7 @@
  * @author Caden99
  * @author Choomaq
  * @author DDPAT
+ * @author Dars
  * @author Dovsienko
  * @author Green Zero
  * @author Gzhegozh
@@ -137,6 +138,7 @@ $s_inherit = 'Успадкувати категорії';
 $s_inherit_global = 'Успадкувати глобальні категорії';
 $s_inherit_parent = 'Успадковувати батьківські категорії';
 $s_update_subproject_inheritance = 'Оновити успадкування підпроєкту';
+$s_category_disabled = 'Категорію було вимкнено, будь ласка, виберіть іншу';
 $s_duplicate_of = 'дублікат проблеми';
 $s_has_duplicate = 'має дублікат';
 $s_related_to = 'пов\'язана з';
