@@ -1781,6 +1781,20 @@ function filter_db_delete_current_filters() {
 }
 
 /**
+ * Delete all filters owned by the specified user.
+ *
+ * This function is called when a user is deleted to clean up orphaned filters.
+ *
+ * @param int $p_user_id A valid user identifier.
+ * @return void
+ */
+function filter_db_delete_user_filters( $p_user_id ) {
+	db_param_push();
+	$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param();
+	db_query( $t_query, array( (int)$p_user_id ) );
+}
+
+/**
  * Returns stored filters based on a combination of linked project, owner user and public status.
  * Any parameter can be defaulted to null, to get all results for that field
  * @param integer $p_project_id		Project id linked to the filter
