@@ -14,13 +14,16 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'config_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'user_api.php' );
 
-use Mantis\Exceptions\ClientException;
+$t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
+require_once( $t_soap_dir . 'mc_api.php' );
 
 /**
  * A command that remove user's access to a project. If user id 0 is specified, then all users will be
