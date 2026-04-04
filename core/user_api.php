@@ -815,6 +815,9 @@ function user_delete( $p_user_id ) {
 	# Revoke all API tokens
 	api_token_revoke_all( $p_user_id );
 
+	# Remove user-owned filters
+	filter_db_delete_user_filters( $p_user_id );
+
 	# Remove account
 	db_param_push();
 	$t_query = 'DELETE FROM {user} WHERE id=' . db_param();
