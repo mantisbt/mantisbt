@@ -62,6 +62,10 @@ if( !auth_signup_enabled() &&
 $f_user_id = gpc_get_int( 'id' );
 $f_confirm_hash = gpc_get_string( 'confirm_hash' );
 
+# Make sure the user exists and extract information
+$t_row = user_get_row( $f_user_id );
+extract( $t_row, EXTR_PREFIX_ALL, 'u' );
+
 # force logout on the current user if already authenticated
 if( auth_is_user_authenticated() ) {
 	auth_logout();
@@ -84,15 +88,9 @@ user_reset_failed_login_count_to_zero( $f_user_id );
 user_reset_lost_password_in_progress_count_to_zero( $f_user_id );
 
 # fake login so the user can set their password
-auth_attempt_script_login( user_get_username( $f_user_id ) );
+auth_attempt_script_login( $u_username );
 
 user_increment_login_count( $f_user_id );
-
-# extracts the user information
-# and prefixes it with u_
-$t_row = user_get_row( $f_user_id );
-
-extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_can_change_password = auth_can_set_password( $f_user_id );
 
