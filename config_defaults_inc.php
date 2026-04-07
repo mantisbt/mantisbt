@@ -46,6 +46,11 @@
  *
  * If you need to supply a port to connect to, set hostname as 'localhost:3306'.
  *
+ * For SQLite, you must specify the full path to the database file,
+ * using $g_database_name as the name, i.e. '/var/database/bugtracker.db' for
+ * Linux or 'C:\\database\\bugtracker.db' for Windows.
+ * Do not put the database in the web root directory!
+ *
  * @global string $g_hostname
  */
 $g_hostname = 'localhost';
@@ -89,10 +94,27 @@ $g_database_name = 'bugtracker';
  * PostgreSQL      pgsql         pgsql
  * MS SQL Server   mssqlnative   sqlsrv    experimental
  * Oracle          oci8          oci8      experimental
+ * SQLite 3        sqlite3       sqlite3
  *
  * @global string $g_db_type
  */
 $g_db_type = 'mysqli';
+
+/**
+ * Database connection setup query string.
+ *
+ * This is the first SQL query called when a database connection is established.
+ * Set this to an empty string to disable the query.
+ *
+ * For MySQL, the empty string is assumed to be `SET NAMES UTF8` for compatibility reasons.
+ * The installer also sets it to this value.
+ * @see db_connect()
+ *
+ * For SQLite, the installer sets a bunch of optimization PRAGMAs.
+ *
+ * @global string $g_db_setup
+ */
+$g_db_setup = '';
 
 /**
  * Adodb Data Source Name.
@@ -5271,6 +5293,7 @@ $g_global_settings = array(
 	'db_table_prefix',
 	'db_table_suffix',
 	'db_type',
+	'db_setup',
 	'db_username',
 	'debug_email',
 	'default_home_page',
