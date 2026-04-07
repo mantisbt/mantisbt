@@ -40,6 +40,7 @@ const MANTIS_MAINTENANCE_MODE = true;
 require_once( dirname( __DIR__ ) . '/core.php' );
 require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
+require_api( 'database_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
 
 $g_failed = false;
@@ -275,6 +276,22 @@ if( CONFIGURED_PASSWORD == $f_admin_password ) {
 $f_log_queries    = gpc_get_bool( 'log_queries', false );
 $f_db_exists      = gpc_get_bool( 'db_exists', false );
 
+$f_db_setup       = config_get_global( 'db_setup', '' );
+if( empty( $f_db_setup ) ) {
+	if( $f_db_type == 'mysqli' ) {
+		$f_db_setup =
+			  'SET NAMES UTF8';				# charset for the connection
+	}
+	elseif( $f_db_type == 'sqlite3' ) {
+		$f_db_setup =
+			  'PRAGMA journal_mode=WAL;'	# concurrent readers + writers
+			. 'PRAGMA synchronous=NORMAL;'	# performance, safe with WAL
+			. 'PRAGMA busy_timeout=10000;'	# 10s retry on locked DB
+			. 'PRAGMA foreign_keys=ON;'		# enforce referential integrity
+			. 'PRAGMA cache_size=-8000';	# 8 MB page cache
+	}
+}
+
 if( $t_config_exists ) {
 	if( 0 == $t_install_state ) {
 		print_test( 'Config File Exists - Upgrade', true );
@@ -289,6 +306,10 @@ if( $t_config_exists ) {
 		if( $f_db_type == 'oci8' ) {
 			$t_db_conn_exists = $t_db_conn_exists || ( $f_database_name == '' && $f_db_username !== '' && $f_hostname !== '' );
 		}
+		# SQLite only needs hostname (= path to db file)
+		elseif( $f_db_type == 'sqlite3' ) {
+			$t_db_conn_exists = $f_hostname !== '';
+		}
 		print_test( 'Checking Database connection settings exist',
 			$t_db_conn_exists,
 			true,
@@ -297,11 +318,16 @@ if( $t_config_exists ) {
 		print_db_support_tests( $f_db_type );
 	}
 
-	/** @var ADOConnection $g_db */
-	$g_db = ADONewConnection( $f_db_type );
-	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
-	if( $g_db->IsConnected() ) {
-		$g_db_connected = true;
+	try {
+		/** @var ADOConnection $g_db */
+		$g_db = ADONewConnection( $f_db_type );
+		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+		if( $g_db->IsConnected() ) {
+			$g_db_connected = true;
+		}
+	}
+	catch( Error $e ) {
+		print_test( 'Retrieving Database Version', false, true, string_attribute( $e->getMessage() ) );
 	}
 
 	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS);
@@ -404,9 +430,9 @@ if( 2 == $t_install_state ) {
 	);
 
 	print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' );
-	print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' );
-	print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' );
-	print_test( 'Setting Database Name', '' !== $f_database_name || $f_db_type == 'oci8', true, 'database name is blank' );
+	print_test( 'Setting Database Username', '' !== $f_db_username || $f_db_type == 'sqlite3', true, 'database username is blank' );
+	print_test( 'Setting Database Password', '' !== $f_db_password || $f_db_type == 'sqlite3', false, 'database password is blank' );
+	print_test( 'Setting Database Name', '' !== $f_database_name || $f_db_type == 'oci8' || $f_db_type == 'sqlite3', true, 'database name is blank' );
 
 ?>
 <tr>
@@ -414,7 +440,7 @@ if( 2 == $t_install_state ) {
 		Setting Admin Username
 	</td>
 	<?php
-		if( '' !== $f_admin_username ) {
+		if( '' !== $f_admin_username || $f_db_type == 'sqlite3' ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result( BAD, false, 'admin user name is blank, using database user instead' );
@@ -427,7 +453,7 @@ if( 2 == $t_install_state ) {
 		Setting Admin Password
 	</td>
 	<?php
-		if( '' !== $f_admin_password ) {
+		if( '' !== $f_admin_password || $f_db_type == 'sqlite3' ) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD, false, 'admin user password is blank, using database user password instead' );
@@ -447,30 +473,35 @@ if( 2 == $t_install_state ) {
 	</td>
 	<?php
 		$t_db_open = false;
-	$g_db = ADONewConnection( $f_db_type );
-	$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
-
-	if( $t_result ) {
-		# due to a bug in ADODB, this call prompts warnings, hence the @
-		# the check only works on mysql if the database is open
-		$t_version_info = @$g_db->ServerInfo();
-
-		# check if db exists for the admin
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
-		if( $t_result ) {
-			$t_db_open = true;
-			$f_db_exists = true;
+		$g_db = ADONewConnection( $f_db_type );
+		try {
+			$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 		}
+		catch( Exception $e ) {
+			$t_result = false;
+			$t_error = $e->getMessage();
+		}
+		if( $t_result ) {
+			# due to a bug in ADODB, this call prompts warnings, hence the @
+			# the check only works on mysql if the database is open
+			$t_version_info = @$g_db->ServerInfo();
 
-		print_test_result( GOOD );
-	} else {
-		print_test_result(
-			BAD,
-			true,
-			'Does administrative user have access to the database? ( ' . string_attribute( db_error_msg() ) . ' )'
-		);
-		$t_version_info = null;
-	}
+			# check if db exists for the admin
+			$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+			if( $t_result ) {
+				$t_db_open = true;
+				$f_db_exists = true;
+			}
+
+			print_test_result( GOOD );
+		} else {
+			print_test_result(
+				BAD,
+				true,
+				'Does administrative user have access to the database? ( ' . string_attribute( $t_error ?? db_error_msg() ) . ' )'
+			);
+			$t_version_info = null;
+		}
 	?>
 </tr>
 <tr>
@@ -544,8 +575,8 @@ if( 2 == $t_install_state ) {
 		Checking Database Server Version
 <?php
 		if( isset( $t_version_info['description'] ) ) {
-			echo '<br /> Running ' . string_attribute( $f_db_type )
-				. ' version ' . nl2br( $t_version_info['description'] );
+			echo '<br /> Running ' . string_attribute( $t_version_info['description'] )
+				. ' version ' . nl2br( $t_version_info['version'] );
 		}
 ?>
 	</td>
@@ -903,6 +934,10 @@ if( 3 == $t_install_state ) {
 			$g_db = ADONewConnection( $f_db_type );
 			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 
+			if( !empty( $f_db_setup ) ) {	
+				$g_db->execute( $f_db_setup );
+			}
+
 			/** @var ADODB_DataDict $t_dict */
 			$t_dict = NewDataDictionary( $g_db );
 
@@ -973,6 +1008,7 @@ if( 3 == $t_install_state ) {
 		# fake out database access routines used by config_get
 		config_set_global( 'db_type', $f_db_type );
 		$g_db_functional_type = db_get_type( $f_db_type );
+		config_set_global( 'db_setup', $f_db_setup );
 
 		# Initialize table prefixes as specified by user
 		config_set_global( 'db_table_prefix', $f_db_table_prefix );
@@ -1010,14 +1046,11 @@ if( 3 == $t_install_state ) {
 			echo "-- " . date("c") . PHP_EOL . PHP_EOL;
 		}
 
-		# Make sure we do the upgrades using UTF-8 if needed
-		if( $f_db_type === 'mysqli' ) {
-			$sql = 'SET NAMES UTF8';
+		if( !empty( $f_db_setup ) ) {	
 			if( $f_log_queries ) {
-				echo $sql . ';' . PHP_EOL . PHP_EOL;
-			} else {
-				$g_db->execute( $sql );
+				echo $f_db_setup . ';' . PHP_EOL . PHP_EOL;
 			}
+			$g_db->execute( $f_db_setup );
 		}
 
 		/** @var ADODB_DataDict $t_dict */
@@ -1369,14 +1402,18 @@ if( 5 == $t_install_state ) {
 <?php
 	# Generating the config_inc.php file
 
-	$t_config = '<?php' . PHP_EOL
-		. '$g_hostname               = \'' . addslashes( $f_hostname ) . '\';' . PHP_EOL
-		. '$g_db_type                = \'' . addslashes( $f_db_type ) . '\';' . PHP_EOL
-		. '$g_database_name          = \'' . addslashes( $f_database_name ) . '\';' . PHP_EOL
-		. '$g_db_username            = \'' . addslashes( $f_db_username ) . '\';' . PHP_EOL
-		. '$g_db_password            = \'' . addslashes( $f_db_password ) . '\';' . PHP_EOL;
-
-	$t_config .= PHP_EOL;
+	$t_config		 = '<?php' . PHP_EOL;
+	$t_config		.= '$g_hostname               = \'' . addslashes( $f_hostname ) . '\';' . PHP_EOL;
+	$t_config		.= '$g_db_type                = \'' . addslashes( $f_db_type ) . '\';' . PHP_EOL;
+	if( !empty( $f_db_setup ) ) {
+		$t_config	.= '$g_db_setup               = \'' . addslashes( $f_db_setup ) . '\';' . PHP_EOL;
+	}
+	if( $f_db_type !== 'sqlite3' ) {
+		$t_config	.= '$g_database_name          = \'' . addslashes( $f_database_name ) . '\';' . PHP_EOL;
+		$t_config	.= '$g_db_username            = \'' . addslashes( $f_db_username ) . '\';' . PHP_EOL;
+		$t_config	.= '$g_db_password            = \'' . addslashes( $f_db_password ) . '\';' . PHP_EOL;
+	}
+	$t_config		.= PHP_EOL;
 
 	# Add lines for table prefix/suffix if different from default
 	$t_insert_line = false;
@@ -1423,6 +1460,7 @@ if( 5 == $t_install_state ) {
 		# already exists, see if the information is the same
 		if( ( $f_hostname != config_get_global( 'hostname', '' ) ) ||
 			( $f_db_type != config_get_global( 'db_type', '' ) ) ||
+			( $f_db_setup != config_get_global( 'db_setup', '' ) ) ||
 			( $f_database_name != config_get_global( 'database_name', '' ) ) ||
 			( $f_db_username != config_get_global( 'db_username', '' ) ) ||
 			( $f_db_password != config_get_global( 'db_password', '' ) ) ) {

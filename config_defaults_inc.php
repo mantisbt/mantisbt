@@ -101,6 +101,22 @@ $g_database_name = 'bugtracker';
 $g_db_type = 'mysqli';
 
 /**
+ * Database connection setup query string.
+ *
+ * This is the first SQL query called when a database connection is established.
+ * Set this to an empty string to disable the query.
+ *
+ * For MySQL, the empty string is assumed to be `SET NAMES UTF8` for compatibility reasons.
+ * The installer also sets it to this value.
+ * @see db_connect()
+ *
+ * For SQLite, the installer sets a bunch of optimization PRAGMAs.
+ *
+ * @global string $g_db_setup
+ */
+$g_db_setup = '';
+
+/**
  * Adodb Data Source Name.
  *
  * This is an EXPERIMENTAL field.
@@ -5268,6 +5284,7 @@ $g_global_settings = array(
 	'db_table_prefix',
 	'db_table_suffix',
 	'db_type',
+	'db_setup',
 	'db_username',
 	'debug_email',
 	'default_home_page',

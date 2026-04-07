@@ -134,6 +134,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 	global $g_db_connected, $g_db, $g_db_functional_type;
 	$t_db_type = config_get_global( 'db_type' );
 	$g_db_functional_type = db_get_type( $t_db_type );
+	$t_db_setup = config_get_global( 'db_setup' );
 
 	if( $g_db_functional_type == DB_TYPE_UNDEFINED ) {
 		error_parameters( 0, 'Database type is not supported by MantisBT, check $g_db_type in config_inc.php' );
@@ -160,8 +161,11 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 	$g_db->SetFetchMode( ADODB_FETCH_ASSOC );
 
 	if( $t_result ) {
+		if( !empty( $t_db_setup ) ) {
+			db_query( $t_db_setup );
+		}
 		# For MySQL, the charset for the connection needs to be specified.
-		if( db_is_mysql() ) {
+		elseif( db_is_mysql() ) {
 			# @todo Is there a way to translate any charset name to MySQL format? e.g. remote the dashes?
 			# @todo Is this needed for other databases?
 			db_query( 'SET NAMES UTF8' );
