@@ -37,12 +37,6 @@ require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
 require_api( 'http_api.php' );
 
-# Determines (once-off) whether the client is accessing this script via a
-# secure connection. If they are, we want to use the Secure cookie flag to
-# prevent the cookie from being transmitted to other domains.
-# @global boolean $g_cookie_secure_flag_enabled
-$g_cookie_secure_flag_enabled = http_is_protocol_https();
-
 /**
  * Retrieve a GPC variable.
  * If the variable is not set, the default is returned.
