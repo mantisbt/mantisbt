@@ -113,8 +113,6 @@ class MantisPHPSession extends MantisSession {
 	 * @param integer $p_session_id The session id.
 	 */
 	function __construct( $p_session_id = null ) {
-		global $g_cookie_secure_flag_enabled;
-
 		$this->key = hash( 'whirlpool',
 			$this::SESSION_KEY_PREFIX . config_get_global( 'crypto_master_salt' )
 		);
@@ -135,7 +133,7 @@ class MantisPHPSession extends MantisSession {
 			'path' => $t_path,
 			'domain' => $t_domain,
 			'samesite' => $t_samesite,
-			'secure' => $g_cookie_secure_flag_enabled,
+			'secure' => http_is_protocol_https(),
 			'httponly' => true,
 		);
 		session_set_cookie_params( $t_options );
