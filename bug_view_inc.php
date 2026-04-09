@@ -34,6 +34,7 @@
  * @uses current_user_api.php
  * @uses custom_field_api.php
  * @uses date_api.php
+ * @uses datetimepicker_api.php
  * @uses event_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
@@ -102,6 +103,13 @@ $f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 # compat variables for included pages
 $f_bug_id = $f_issue_id;
 $t_bug = bug_get( $f_bug_id, true );
+
+# Used in bugnote_add_inc.php
+if( !$t_force_readonly ) {
+	if( config_get( 'time_tracking_enabled' ) && config_get( 'time_tracking_stopwatch' ) ) {
+		require_api( 'datetimepicker_api.php' );
+	}
+}
 
 $t_data = array(
 	'query' => array( 'id' => $f_issue_id ),
