@@ -177,6 +177,16 @@ function string_display_line_links( $p_string ) {
 }
 
 /**
+ * Prepare a single-line string for display in HTML, like the string_display_line_links()
+ * function does, but exclude any anchor tags to ensure that it can safely be used as a link.
+ * @param string $p_string String to be processed.
+ * @return string
+ */
+function string_display_line_without_links( $p_string ) {
+	return preg_replace( '/<a\s[^>]*>|<\/a>/is', '', string_display_line_links( $p_string ) );
+}
+
+/**
  * Prepare a string for display in rss
  * @param string $p_string String to be processed.
  * @return string
