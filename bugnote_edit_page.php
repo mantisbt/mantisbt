@@ -80,13 +80,11 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 
 # Check if the current user is allowed to edit the bugnote
 $t_user_id = auth_get_current_user_id();
-$t_reporter_id = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
+$t_is_reporter = bugnote_is_user_reporter( $f_bugnote_id, $t_user_id );
 
-if( $t_user_id == $t_reporter_id ) {
-	access_ensure_bugnote_level( config_get( 'bugnote_user_edit_threshold' ), $f_bugnote_id );
-} else {
-	access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
-}
+access_ensure_bugnote_level( config_get( $t_is_reporter
+	? 'bugnote_user_edit_threshold'
+	: 'update_bugnote_threshold' ), $f_bugnote_id );
 
 # Check if the bug is readonly
 if( bug_is_readonly( $t_bug_id ) ) {
@@ -94,11 +92,17 @@ if( bug_is_readonly( $t_bug_id ) ) {
 	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
+$t_has_time_tracking = config_get( 'time_tracking_enabled' )
+	&& access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id );
+
+$t_has_move = access_has_bugnote_level( config_get( $t_is_reporter
+	? 'bugnote_user_delete_threshold'
+	: 'delete_bugnote_threshold' ), $f_bugnote_id );
+
 $t_bugnote_text = string_textarea( bugnote_get_text( $f_bugnote_id ) );
 
 # No need to gather the extra information if not used
-if( config_get( 'time_tracking_enabled' ) &&
-	access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
+if( $t_has_time_tracking ) {
 	$t_time_tracking = bugnote_get_field( $f_bugnote_id, 'time_tracking' );
 	$t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
 }
@@ -113,53 +117,57 @@ layout_page_begin();
 $t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC ? '' : 'bugnote-private';
 ?>
 <div class="col-md-12 col-xs-12">
-
 <form method="post" action="bugnote_update.php">
 <?php echo form_security_field( 'bugnote_update' ) ?>
-<input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
+
+<input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>">
 <div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-			<?php print_icon( 'fa-comment', 'ace-icon' ); ?>
-		<?php echo lang_get( 'edit_bugnote_title' ) ?>
-	</h4>
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<?php print_icon( 'fa-comment', 'ace-icon' ); echo lang_get( 'edit_bugnote_title' ) ?>
+
+		</h4>
 	</div>
 	<div class="widget-body">
 		<div class="widget-main no-padding">
-<div class="table-responsive">
-<table class="table table-bordered table-condensed table-striped">
-<tr>
-	<td colspan="2">
-		<textarea id="bugnote_text" name="bugnote_text" class="form-control <?php echo $t_bugnote_class; ?>"
-				  cols="80" rows="10"
-				  maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
-		><?php echo $t_bugnote_text ?></textarea>
-	</td>
-</tr>
-<?php if( config_get( 'time_tracking_enabled' ) ) { ?>
-<?php if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) { ?>
-<tr>
-	<td class="center" colspan="2">
-		<strong><?php echo lang_get( 'time_tracking' ) ?> (HH:MM)</strong><br />
-		<input type="text" name="time_tracking" class="input-sm" size="5" value="<?php echo $t_time_tracking ?>" />
-	</td>
-</tr>
-<?php } ?>
-<?php } ?>
-
+			<div class="table-responsive">
+				<table class="table table-bordered table-condensed table-striped">
+					<tr>
+						<td>
+							<textarea id="bugnote_text" name="bugnote_text" class="form-control <?php echo $t_bugnote_class; ?>"
+								cols="80" rows="10"
+								maxlength="<?php echo config_get_global( 'max_textarea_length' ) ?>"
+							><?php echo $t_bugnote_text ?></textarea>
+						</td>
+					</tr>
 <?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', array( $t_bug_id, $f_bugnote_id ) ); ?>
-
-</table>
-	</div>
-	</div>
+				</table>
+			</div>
+		</div>
 		<div class="widget-toolbox padding-8 clearfix">
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_information_button' ) ?>" />
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_information_button' ) ?>"> 
 			<?php print_link_button( $t_redirect_url, lang_get( 'go_back' ) ) ?>
+
+<?php if( $t_has_time_tracking ) { ?>
+			<div class="btn-group padding-left-8">
+				<?php print_icon( 'fa-clock-o', 'ace-icon' ) ?>
+
+				<label for="time_tracking" class="inline"><?php echo lang_get( 'time_tracking' ) ?> (HH:MM)</label>
+				<input type="text" id="time_tracking" name="time_tracking" class="input-sm" size="5" value="<?php echo $t_time_tracking ?>">
+			</div>
+<?php } ?>
+<?php if ( $t_has_move ) { ?>
+			<div class="btn-group pull-right padding-left-8">
+				<?php print_icon( 'fa-exchange', 'ace-icon' ) ?>
+
+				<label for="dest_bug_id" class="inline"><?php echo lang_get( 'bugnote_move' ) ?></label>
+				<input type="text" id="dest_bug_id" name="dest_bug_id" class="input-sm" value="<?php echo bug_format_id( $t_bug_id ) ?>">
+			</div>
+<?php } ?>
 		</div>
 	</div>
 </div>
 </form>
 </div>
-
 <?php
 layout_page_end();
