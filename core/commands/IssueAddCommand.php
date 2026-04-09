@@ -338,18 +338,11 @@ class IssueAddCommand extends Command {
 				}
 			}
 
-			foreach( $t_issue['files'] as $t_file ) {
-				$t_name = $t_file['name'];
-				if( strlen( $t_name ) > DB_FIELD_SIZE_FILENAME ) {
-					throw new ClientException(
-						"File name too long '$t_name'",
-						ERROR_FILE_NAME_TOO_LONG,
-						array( $t_name )
-					);
-				}
-			}
-
 			$this->files = $t_issue['files'];
+
+			foreach( $this->files as $t_file ) {
+				file_ensure_uploaded( $t_file );
+			}
 		}
 
 		# Trigger extensibility events to pre-process data before creating issue
