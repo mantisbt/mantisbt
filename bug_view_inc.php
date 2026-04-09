@@ -75,7 +75,6 @@ require_api( 'constant_inc.php' );
 require_api( 'current_user_api.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'date_api.php' );
-require_api( 'dropzone_api.php' );
 require_api( 'event_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
@@ -104,6 +103,13 @@ $f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 # compat variables for included pages
 $f_bug_id = $f_issue_id;
 $t_bug = bug_get( $f_bug_id, true );
+
+# Used in bugnote_add_inc.php
+if( !$t_force_readonly ) {
+	if( file_allow_bug_upload( $f_bug_id ) ) {
+		require_api( 'dropzone_api.php' );
+	}
+}
 
 $t_data = array(
 	'query' => array( 'id' => $f_issue_id ),
