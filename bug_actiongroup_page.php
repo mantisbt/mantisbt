@@ -50,7 +50,6 @@ require_api( 'bug_group_action_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
-require_api( 'datetimepicker_api.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -247,6 +246,7 @@ switch( $f_action ) {
 		$t_question_title		= lang_get( 'due_date_bugs_conf_msg' );
 		$t_button_title			= lang_get( 'due_date_group_bugs_button' );
 		$t_form					= 'due_date';
+		require_api( 'datetimepicker_api.php' );
 		break;
 	case 'CUSTOM' :
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );

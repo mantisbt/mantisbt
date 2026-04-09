@@ -34,6 +34,7 @@
  * @uses current_user_api.php
  * @uses custom_field_api.php
  * @uses date_api.php
+ * @uses datetimepicker_api.php
  * @uses dropzone_api.php
  * @uses event_api.php
  * @uses gpc_api.php
@@ -106,6 +107,9 @@ $t_bug = bug_get( $f_bug_id, true );
 
 # Used in bugnote_add_inc.php
 if( !$t_force_readonly ) {
+	if( config_get( 'time_tracking_enabled' ) && config_get( 'time_tracking_stopwatch' ) ) {
+		require_api( 'datetimepicker_api.php' );
+	}
 	if( file_allow_bug_upload( $f_bug_id ) ) {
 		require_api( 'dropzone_api.php' );
 	}

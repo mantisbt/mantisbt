@@ -50,7 +50,6 @@ require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
 require_api( 'date_api.php' );
-require_api( 'datetimepicker_api.php' );
 require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -98,6 +97,9 @@ if( $f_new_status == $t_reopen && $f_change_type == BUG_UPDATE_TYPE_REOPEN ) {
 }
 
 $t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
+if( $t_can_update_due_date ) {
+	require_api( 'datetimepicker_api.php' );
+}
 
 # get new issue handler if set, otherwise default to original handler
 $f_handler_id = gpc_get_int( 'handler_id', $t_bug->handler_id );
