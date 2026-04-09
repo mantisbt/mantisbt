@@ -23,11 +23,9 @@
  * @link http://www.mantisbt.org
  *
  * @uses core.php
- * @uses dropzone_api.php
  */
 
 require_once( 'core.php' );
-require_api( 'dropzone_api.php' );
 
 $t_file = __FILE__;
 $t_mantis_dir = __DIR__ . DIRECTORY_SEPARATOR;

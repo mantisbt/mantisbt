@@ -20,6 +20,9 @@
 
 /* jshint esversion: 8 */
 /* globals Dropzone, $ */
+
+Dropzone.autoDiscover = false;
+
 $(function() {
 	'use strict';
 
@@ -40,7 +43,6 @@ $(function() {
 	});
 
 	// Dropzone handler
-	Dropzone.autoDiscover = false;
 	function enableDropzone( classPrefix, autoUpload ) {
 		var zone_class =  '.' + classPrefix;
 		var zone = $( zone_class );
