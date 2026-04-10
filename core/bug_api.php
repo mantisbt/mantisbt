@@ -490,6 +490,14 @@ class BugData {
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
+		if( mb_strlen( $this->summary ) > DB_FIELD_SIZE_BUG_SUMMARY ) {
+			throw new ClientException(
+				'Field "summary" exceeds maximum length ' . DB_FIELD_SIZE_BUG_SUMMARY . '.',
+				ERROR_FIELD_TOO_LONG,
+				array( lang_get( 'summary' ), DB_FIELD_SIZE_BUG_SUMMARY )
+			);
+		}
+
 		if( $p_update_extended ) {
 			# Description field cannot be empty
 			if( is_blank( $this->description ) ) {
