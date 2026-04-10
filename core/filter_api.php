@@ -1781,17 +1781,24 @@ function filter_db_delete_current_filters() {
 }
 
 /**
- * Delete all filters owned by the specified user.
+ * Delete filters owned by the specified user.
  *
  * This function is called when a user is deleted to clean up orphaned filters.
+ * By default, shared (public) filters are preserved since they may be used by other users.
  *
- * @param int $p_user_id A valid user identifier.
+ * @param int  $p_user_id       A valid user identifier.
+ * @param bool $p_delete_shared Whether to also delete shared (public) filters. Default false.
  * @return void
  */
-function filter_db_delete_user_filters( $p_user_id ) {
+function filter_db_delete_user_filters( $p_user_id, $p_delete_shared = false ) {
 	db_param_push();
-	$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param();
-	db_query( $t_query, array( (int)$p_user_id ) );
+	if( $p_delete_shared ) {
+		$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param();
+		db_query( $t_query, array( (int)$p_user_id ) );
+	} else {
+		$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param() . ' AND is_public=' . db_param();
+		db_query( $t_query, array( (int)$p_user_id, false ) );
+	}
 }
 
 /**
