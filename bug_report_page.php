@@ -32,6 +32,7 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses date_api.php
+ * @uses datetimepicker_api.ph
  * @uses dropzone_api.php
  * @uses error_api.php
  * @uses event_api.php
@@ -225,6 +226,9 @@ $t_show_product_build = $t_show_versions && in_array( 'product_build', $t_fields
 $t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields ) && access_has_project_level( config_get( 'roadmap_update_threshold' ) );
 $t_show_additional_info = in_array( 'additional_info', $t_fields );
 $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level( config_get( 'due_date_update_threshold' ), helper_get_current_project(), auth_get_current_user_id() );
+if( $t_show_due_date ) {
+	require_api( 'datetimepicker_api.php' );
+}
 $t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload() && !event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', array() );
 if( $t_show_attachments ) {
 	require_api( 'dropzone_api.php' );
@@ -369,11 +373,7 @@ if( $t_show_attachments ) {
 			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" ' .
-				'data-picker-locale="' . lang_get_current_datetime_locale() .
-				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
-				'size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
-			<?php print_icon( 'fa-calendar', 'fa-xlg datetimepicker' ); ?>
+			<?php datetimepicker_print( $t_date_to_display, 'due_date' ) ?>
 		</td>
 	</tr>
 <?php } ?>

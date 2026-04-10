@@ -29,6 +29,7 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses date_api.php
+ * @uses datetimepicker_api.php
  * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
@@ -96,6 +97,9 @@ if( $f_new_status == $t_reopen && $f_change_type == BUG_UPDATE_TYPE_REOPEN ) {
 }
 
 $t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
+if( $t_can_update_due_date ) {
+	require_api( 'datetimepicker_api.php' );
+}
 
 # get new issue handler if set, otherwise default to original handler
 $f_handler_id = gpc_get_int( 'handler_id', $t_bug->handler_id );
@@ -240,14 +244,10 @@ layout_page_begin();
 	<!-- Due date -->
 	<tr>
 		<th class="category">
-			<?php echo lang_get( 'due_date' ) ?>
+			<label for="due_date"><?php echo lang_get( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="16"
-				data-picker-locale="<?php lang_get_current_datetime_locale() ?>"
-				data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
-				<?php helper_get_tab_index() ?> value="<?php echo $t_date_to_display ?>" />
-			<?php print_icon( 'fa-calendar', 'fa-xlg datetimepicker' ); ?>
+			<?php datetimepicker_print( $t_date_to_display, 'due_date' ) ?>
 		</td>
 	</tr>
 

@@ -283,18 +283,12 @@ function layout_head_css() {
 		# theme text fonts
 		$t_font_family =  config_get( 'font_family', null, null, ALL_PROJECTS );
 		html_css_cdn_link( helper_url_combine( 'https://fonts.googleapis.com/css', [ 'family' => $t_font_family ] ) );
-
-		# datetimepicker
-		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css', DATETIME_PICKER_HASH_CSS );
 	} else {
 		html_css_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.css' );
 		html_css_link( 'font-awesome-' . FONT_AWESOME_VERSION . '.min.css' );
 
 		# theme text fonts
 		html_css_link( 'fonts.css', $t_cache_key );
-
-		# datetimepicker
-		html_css_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
 	}
 
 	# page specific plugin styles
@@ -332,10 +326,6 @@ function layout_body_javascript() {
 		# bootstrap
 		html_javascript_cdn_link( 'https://stackpath.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/js/bootstrap.min.js', BOOTSTRAP_HASH_JS );
 
-		# moment & datetimepicker
-		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH );
-		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH_JS );
-
 		# typeahead.js
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/' . TYPEAHEAD_VERSION . '/typeahead.jquery.min.js', TYPEAHEAD_HASH );
 
@@ -344,10 +334,6 @@ function layout_body_javascript() {
 	} else {
 		# bootstrap
 		html_javascript_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.js' );
-
-		# moment & datetimepicker
-		html_javascript_link( 'moment-with-locales-' . MOMENT_VERSION . '.min.js' );
-		html_javascript_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.js' );
 
 		# typeahead.js
 		html_javascript_link( 'typeahead.jquery-' . TYPEAHEAD_VERSION . '.min.js' );
