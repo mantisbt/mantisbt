@@ -865,3 +865,23 @@ function install_category_status_default() {
 
 	return $t_update_query->execute() ? 2 : 1;
 }
+
+/**
+ * Delete orphaned private filters owned by users that no longer exist.
+ *
+ * Prior to the fix for #37004, deleting a user did not clean up their filters.
+ * This migration removes private filters whose owner no longer exists in the
+ * user table. Shared (public) filters are preserved since they may be used by
+ * other users.
+ *
+ * @return integer 2 on success, 1 on failure.
+ */
+function install_delete_orphaned_private_filters() {
+	$t_query = new DbQuery(
+		'DELETE FROM {filters}'
+		. ' WHERE is_public = ' . db_prepare_bool( false )
+		. ' AND user_id NOT IN (SELECT id FROM {user})'
+	);
+
+	return $t_query->execute() ? 2 : 1;
+}
