@@ -159,6 +159,24 @@ class IssueAddTest extends SoapBase {
 	}
 
 	/**
+	 * Tests that creating an issue with a summary longer than the DB field size
+	 * fails with a field-too-long error.
+	 *
+	 * @return void
+	 */
+	public function testCreateIssueWithTooLongSummary() {
+		$t_issue_to_add = $this->getIssueToAdd();
+		$t_issue_to_add['summary'] = str_repeat( 'x', DB_FIELD_SIZE_BUG_SUMMARY + 1 );
+
+		$this->expectException( SoapFault::class );
+		$this->expectExceptionMessageMatches(
+			'/Field "summary" exceeds maximum length ' . DB_FIELD_SIZE_BUG_SUMMARY . '\./'
+		);
+
+		$this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+	}
+
+	/**
 	 * This issue tests the following:
 	 * 1. Creating an issue with some fields that are typically not used at creation time.
 	 *    For example: projection, eta, resolution, status, fixed_in_version, and target_version.

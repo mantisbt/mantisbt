@@ -25,6 +25,7 @@
 
 namespace Mantis\tests\soap;
 
+use SoapFault;
 use stdClass;
 
 /**
@@ -162,6 +163,29 @@ class IssueUpdateTest extends SoapBase {
 
 		$this->assertEquals( 10, $t_issue->resolution->id );
 		$this->assertEquals( 'open', $t_issue->resolution->name );
+	}
+
+	/**
+	 * Tests that updating an issue with a summary longer than the DB field size
+	 * fails with a field-too-long error.
+	 *
+	 * @return void
+	 */
+	public function testUpdateIssueWithTooLongSummary() {
+		$t_issue_to_add = $this->getIssueToAdd();
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+
+		$this->deleteAfterRun( $t_issue_id );
+
+		$t_issue_to_update = $this->getIssueToAdd();
+		$t_issue_to_update['summary'] = str_repeat( 'x', DB_FIELD_SIZE_BUG_SUMMARY + 1 );
+
+		$this->expectException( SoapFault::class );
+		$this->expectExceptionMessageMatches(
+			'/Field "summary" exceeds maximum length ' . DB_FIELD_SIZE_BUG_SUMMARY . '\./'
+		);
+
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_to_update );
 	}
 
 	/**

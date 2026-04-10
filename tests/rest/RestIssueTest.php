@@ -143,6 +143,28 @@ class RestIssueTest extends RestBase {
 		sleep(20);
 	}
 
+	/**
+	 * Tests that creating an issue with a summary longer than the DB field size
+	 * fails with a field-too-long error.
+	 *
+	 * @return void
+	 */
+	public function testCreateIssueWithTooLongSummary() {
+		$t_issue_to_add = $this->getIssueToAdd( 'summary-too-long' );
+		$t_issue_to_add['summary'] = str_repeat( 'x', DB_FIELD_SIZE_BUG_SUMMARY + 1 );
+
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->assertEquals( ERROR_FIELD_TOO_LONG, $t_body['code'] ?? null );
+		$this->assertStringContainsString(
+			(string)DB_FIELD_SIZE_BUG_SUMMARY,
+			$t_body['localized'] ?? ''
+		);
+	}
+
 	public function testCreateIssueWithEnumIds() {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['status']['id'] = 50; # assigned
