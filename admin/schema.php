@@ -904,6 +904,11 @@ $g_upgrade[213] = array( 'UpdateFunction', 'category_status_default' );
 
 # Release marker: 2.27.0
 
+# Release marker: 2.28.0
+
+# Delete orphaned private filters owned by users that no longer exist
+$g_upgrade[214] = array( 'UpdateFunction', 'delete_orphaned_private_filters' );
+
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
 #
