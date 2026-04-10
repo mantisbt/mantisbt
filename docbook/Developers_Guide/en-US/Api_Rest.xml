@@ -14,6 +14,127 @@
 		<literal>https://server.com/mantis/api/rest/</literal>.
 	</para>
 
+	<section id="restapi.auth">
+		<title>Authentication</title>
+
+		<para>
+			REST API calls can be authenticated using one of the following methods:
+		</para>
+
+		<variablelist>
+			<varlistentry>
+				<term>API Token</term>
+				<listitem>
+					<para>
+						The primary authentication method. Create an API token for your user
+						account and pass it in the <literal>Authorization</literal> HTTP request
+						header.  API token authentication is required when using impersonation.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Anonymous</term>
+				<listitem>
+					<para>
+						When anonymous access is enabled and an anonymous account is configured,
+						the API can be accessed without authentication for read-only operations.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Cookie (Web UI)</term>
+				<listitem>
+					<para>
+						Used internally by the MantisBT Web UI when JavaScript calls the API on
+						behalf of an already authenticated user session.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+
+	<section id="restapi.impersonation">
+		<title>Impersonation</title>
+
+		<para>
+			Users with sufficient access (controlled by the
+			<literal>$g_impersonate_user_threshold</literal> configuration option, default:
+			ADMINISTRATOR) can make REST API calls on behalf of another user.  Typical use
+			cases include:
+		</para>
+
+		<itemizedlist>
+			<listitem><para>Reproducing an issue as reported by a specific user</para></listitem>
+			<listitem><para>Testing a user's access to projects, issues, and fields</para></listitem>
+			<listitem><para>Performing operations on behalf of a service account</para></listitem>
+		</itemizedlist>
+
+		<para>
+			To impersonate a user, include the <literal>X-Mantis-Username</literal> HTTP
+			request header with the username of the target user.  The following constraints
+			apply:
+		</para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+					The caller must authenticate with an API token (the
+					<literal>Authorization</literal> header).  Impersonation is not available
+					with cookie or anonymous authentication.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					The caller must have the access level defined by
+					<literal>$g_impersonate_user_threshold</literal>.
+				</para>
+			</listitem>
+			<listitem>
+				<para>A user cannot impersonate themselves.</para>
+			</listitem>
+			<listitem>
+				<para>
+					A user cannot impersonate another user whose access level is higher than
+					their own.
+				</para>
+			</listitem>
+			<listitem>
+				<para>The target user must be a valid, enabled user.</para>
+			</listitem>
+		</itemizedlist>
+
+		<section id="restapi.impersonation.response_headers">
+			<title>Response Headers</title>
+
+			<para>
+				Every REST API response includes the following informational headers:
+			</para>
+
+			<variablelist>
+				<varlistentry>
+					<term><literal>X-Mantis-Username</literal></term>
+					<listitem>
+						<para>
+							The username under which the request was executed.  When
+							impersonation is active, this reflects the impersonated user's
+							username rather than the caller's.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>X-Mantis-LoginMethod</literal></term>
+					<listitem>
+						<para>
+							The authentication method used for the request.  Possible values
+							are <literal>api-token</literal>, <literal>cookie</literal>, and
+							<literal>anonymous</literal>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+	</section>
+
 	<section id="restapi.postman">
 		<title>Postman</title>
 
