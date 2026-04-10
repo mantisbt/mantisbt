@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout MantisBT Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install Publican toolchain
         run: sudo apt-get install publican
