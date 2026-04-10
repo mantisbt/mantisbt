@@ -102,6 +102,7 @@ $(function() {
 			locale: $(this).data('picker-locale'),
 			format: $(this).data('picker-format'),
 			useCurrent: false,
+			showTodayButton: true,
 			icons: {
 				time: 'fa fa-clock-o',
 				date: 'fa fa-calendar',
