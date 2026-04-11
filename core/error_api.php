@@ -223,12 +223,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	$t_error_location = 'in \'' . $p_file .'\' line ' . $p_line;
 	$t_error_description = '\'' . $p_error . '\' ' . $t_error_location;
 
-	# PHP 8.4 compatibility, deprecation of E_STRICT constant
-	# Treat such errors as E_NOTICE
-	if( PHP_VERSION_ID < 80000 && $p_type == E_STRICT ) {
-		$p_type = E_NOTICE;
-	}
-
 	switch( $p_type ) {
 		case E_WARNING:
 			$t_error_type = 'SYSTEM WARNING';
