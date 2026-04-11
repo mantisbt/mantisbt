@@ -159,14 +159,23 @@ class IssueAddTest extends SoapBase {
 	}
 
 	/**
-	 * Tests that creating an issue with a summary longer than the DB field size
-	 * fails with a field-too-long error.
+	 * Tests that summary length validation counts characters, not bytes.
+	 * A 128-character multibyte string should succeed even though it
+	 * exceeds 128 bytes, while 129 characters should fail.
 	 *
 	 * @return void
 	 */
 	public function testCreateIssueWithTooLongSummary() {
+		# 128 multi-byte characters = 384 bytes in UTF-8, but only 128 characters
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['summary'] = str_repeat( 'x', DB_FIELD_SIZE_BUG_SUMMARY + 1 );
+		$t_issue_to_add['summary'] = str_repeat( "\xE4\xB8\x96", DB_FIELD_SIZE_BUG_SUMMARY );
+
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+		$this->assertGreaterThan( 0, $t_issue_id );
+		$this->deleteAfterRun( $t_issue_id );
+
+		# 129 multi-byte characters should fail
+		$t_issue_to_add['summary'] = str_repeat( "\xE4\xB8\x96", DB_FIELD_SIZE_BUG_SUMMARY + 1 );
 
 		$this->expectException( SoapFault::class );
 		$this->expectExceptionMessageMatches(
