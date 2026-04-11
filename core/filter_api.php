@@ -1781,6 +1781,27 @@ function filter_db_delete_current_filters() {
 }
 
 /**
+ * Delete filters owned by the specified user.
+ *
+ * This function is called when a user is deleted to clean up orphaned filters.
+ * By default, shared (public) filters are preserved since they may be used by other users.
+ *
+ * @param int  $p_user_id       A valid user identifier.
+ * @param bool $p_delete_shared Whether to also delete shared (public) filters. Default false.
+ * @return void
+ */
+function filter_db_delete_user_filters( $p_user_id, $p_delete_shared = false ) {
+	db_param_push();
+	if( $p_delete_shared ) {
+		$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param();
+		db_query( $t_query, array( (int)$p_user_id ) );
+	} else {
+		$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param() . ' AND is_public=' . db_param();
+		db_query( $t_query, array( (int)$p_user_id, false ) );
+	}
+}
+
+/**
  * Returns stored filters based on a combination of linked project, owner user and public status.
  * Any parameter can be defaulted to null, to get all results for that field
  * @param integer $p_project_id		Project id linked to the filter
