@@ -214,15 +214,42 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Add link attributes to element data.
+	 * Add link attributes to element data, with BBCode list item protection.
 	 *
 	 * - [link](http://example.com)
+	 *
+	 * Overrides parent to protect the BBCode list item marker [*] from being
+	 * consumed by Parsedown's emphasis engine.
+	 *
+	 * When Parsedown's inline scanner encounters "[", it calls inlineLink.
+	 * For "[*]", the link parse fails (no URL after "]"), and Parsedown
+	 * backtracks to re-scan from the bare "*". That "*" becomes an open
+	 * emphasis delimiter, and Parsedown pairs it with the "*" from the NEXT
+	 * list item's "[*]", creating an <em> span that crosses the item boundary:
+	 *
+	 *   [*]**item 1**   ->   [<em>]<strong>item 1</strong>
+	 *   [*]**item 2**   ->   [</em>]<strong>item 2</strong>
+	 *
+	 * This override short-circuits inlineLink for "[*]" by returning it as a
+	 * literal 3-character markup token. The "extent => 3" tells Parsedown to
+	 * advance past all three characters "[*]", so the emphasis engine never
+	 * sees the "*".
 	 *
 	 * @param array $Excerpt Element data
 	 * @return array|null Element data or nothing
 	 */
 	protected function inlineLink( $Excerpt ): ?array
 	{
+		# BBCode list item marker [*] must be passed through as literal text.
+		# Without this, Parsedown's link parser fails on [*] (no URL follows),
+		# then re-parses the bare *, which the emphasis engine pairs with the *
+		# from the next [*] item, producing [<em>]item1[</em>]item2.
+		if( substr( $Excerpt['text'], 0, 3 ) === '[*]' ) {
+			return [
+				'extent' => 3,
+				'markup' => '[*]',
+			];
+		}
 		return $this->processUrl( parent::inlineLink( $Excerpt ) );
 	}
 
