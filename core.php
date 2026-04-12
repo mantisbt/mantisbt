@@ -279,13 +279,13 @@ function require_api( $p_api_name ) {
 	static $s_api_included;
 	global $g_core_path;
 	if( !isset( $s_api_included[$p_api_name] ) ) {
+		/** @noinspection PhpUnusedLocalVariableInspection */
+		$s_api_included[$p_api_name] = 1;
 		require_once( $g_core_path . $p_api_name );
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0, 'p_api_name' => 0, 's_api_included' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}
-		/** @noinspection PhpUnusedLocalVariableInspection */
-		$s_api_included[$p_api_name] = 1;
 	}
 }
 
