@@ -450,11 +450,16 @@ return array(
 			<blockquote>
 				<para>
 					This event allows plugins to output HTML code from inside the
-					<literal>&lt;head&gt;</literal> tag, for use with CSS, Javascript, RSS,
-					or any other similar resources.  Note that this event is signaled
-					after all other CSS and Javascript resources are linked by MantisBT.
+					<literal>&lt;head&gt;</literal> tag, for use with CSS, JavaScript, RSS,
+					or any other similar resources.
 				</para>
-
+				<para>Note that this event is signaled after all other CSS and JavaScript resources
+					are linked by MantisBT.
+				</para>
+				<para>Alternatively, consider using the <function>require_css()</function> and
+					<function>require_js()</function> functions within the EVENT_CORE_HEADERS
+					event to load CSS and JavaScript resources early and efficiently.
+				</para>
 				<itemizedlist>
 					<title>Return Value</title>
 					<listitem><para>&lt;String&gt;: HTML code to output.</para></listitem>

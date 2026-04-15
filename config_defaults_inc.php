@@ -46,9 +46,8 @@
  *
  * If you need to supply a port to connect to, set hostname as 'localhost:3306'.
  *
- * For SQLite, you must specify the full path to the database file,
- * using $g_database_name as the name, i.e. '/var/database/bugtracker.db' for
- * Linux or 'C:\\database\\bugtracker.db' for Windows.
+ * For SQLite, you must specify the full path to the database file i.e.
+ * '/var/database/bugtracker.db' for Linux or 'C:/database/bugtracker.db' for Windows.
  * Do not put the database in the web root directory!
  *
  * @global string $g_hostname
@@ -428,6 +427,12 @@ $g_signup_use_captcha = ON;
  *
  * Absolute path (with trailing slash!) to the folder containing the TrueType
  * Font files used for the Relationship and Workflow Graphs.
+ *
+ *
+ * @deprecated 2.28.1 (#36855).
+ *  Recent versions of GraphViz determine the system's fonts location using
+ *  {@see https://www.freedesktop.org/wiki/Software/fontconfig/ fontconfig};
+ *  this setting does not seem to have any effect anymore.
  *
  * @global string $g_system_font_folder
  */
@@ -1289,6 +1294,9 @@ $g_window_title = 'MantisBT';
  * so that when inserted into the 'opensearch_XXX_short' language string, the
  * resulting text is 16 characters or less, to be compliant with the limit for
  * the ShortName element as defined in the OpenSearch specification.
+ *
+ * To disable the use of OpenSearch tags across the site, simply set the
+ * title prefix to empty string.
  *
  * @link https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md
  * @see $g_window_title

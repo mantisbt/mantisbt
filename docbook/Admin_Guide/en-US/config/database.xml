@@ -21,6 +21,22 @@
 						default value is localhost. For MySql, this should be hostname or
 						hostname:port (e.g. localhost:3306).
 					</para>
+					<para>For SQLite, this should be the full path to the database file, i.e.
+						'/var/database/bugtracker.db' for Linux or 'C:/database/bugtracker.db' for Windows.
+						Do not put the database in the web root directory!
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_db_setup</term>
+				<listitem>
+					<para>Database connection setup query string. This is the first SQL query called when a database
+						connection is established. Set this to an empty string to disable the query.
+					</para>
+					<para>For MySQL, the empty string is assumed to be `SET NAMES UTF8` for compatibility reasons.
+						The installer also sets it to this value.
+					</para>
+					<para>For SQLite, the installer sets a bunch of optimization PRAGMAs.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
