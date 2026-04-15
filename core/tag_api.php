@@ -842,7 +842,7 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 		tag_cache_bug_tag_rows( array( $c_bug_id ) );
 	}
 
-	$t_bug_tags = $g_cache_bug_tags[$c_bug_id];
+	$t_bug_tags = $g_cache_bug_tags[$c_bug_id] ?? [];
 	if( !$t_bug_tags || !isset( $t_bug_tags[$p_tag_id] ) ) {
 		trigger_error( ERROR_TAG_NOT_ATTACHED, ERROR );
 	}
@@ -864,7 +864,7 @@ function tag_bug_get_attached( $p_bug_id ) {
 		tag_cache_bug_tag_rows( array( $c_bug_id ) );
 	}
 
-	$t_bug_tags = $g_cache_bug_tags[$c_bug_id];
+	$t_bug_tags = $g_cache_bug_tags[$c_bug_id] ?? [];
 	if( !$t_bug_tags ) {
 		return array();
 	}
