@@ -93,6 +93,13 @@ function layout_page_header_begin( $p_page_title = '' ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
 
+	if( auth_anonymous_enabled() ) {
+		echo "\t",
+			'<link rel="sitemap" type="application/xml" title="Sitemap" ',
+			'href="', $t_path, 'sitemap.php', '">',
+			"\n";
+	}
+
 	# Advertise the availability of the browser search plug-ins.
 	$t_title = htmlspecialchars( config_get( 'search_title' ) );
 	if( !is_blank( $t_title ) ) {
