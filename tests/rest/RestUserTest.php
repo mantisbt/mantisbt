@@ -823,21 +823,36 @@ class RestUserTest extends RestBase {
 	}
 
 	/**
-	 * Test deleting the current logged in user.
+	 * Test that a non-admin user cannot delete their own account when
+	 * allow_account_delete is OFF and they lack manage_user_threshold access.
 	 */
 	public function testDeleteCurrentUser() {
-		$t_response = $this->builder()->get( '/users/me' )->send();
-		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
-		$t_user = json_decode( $t_response->getBody(), true );
-		$t_user_id = $t_user['id'];
+		$t_username = Faker::username();
+		$t_user_to_create = array(
+			'name' => $t_username,
+			'access_level' => array( 'name' => 'reporter' ),
+		);
 
-		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
-		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
+
+		$t_old_value = config_get( 'allow_account_delete' );
+		config_set( 'allow_account_delete', OFF );
+
+		try {
+			$t_response = $this->builder()->delete( '/users/' . $t_user_id )
+				->impersonate( $t_username )->send();
+			$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
+		} finally {
+			config_set( 'allow_account_delete', $t_old_value );
+		}
 	}
 
 	/**
-	 * Test attempt to delete self.
-	 * 
+	 * Test that an administrator can delete their own account even when
+	 * allow_account_delete is OFF, because they have manage_user_threshold access.
+	 *
 	 * @return void
 	 */
 	public function testDeleteCurrentUserWithImpersonation() {
@@ -851,23 +866,70 @@ class RestUserTest extends RestBase {
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 
-		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->impersonate( $t_username )->send();
-		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
+		$t_old_value = config_get( 'allow_account_delete' );
+		config_set( 'allow_account_delete', OFF );
+
+		try {
+			$t_response = $this->builder()->delete( '/users/' . $t_user_id )
+				->impersonate( $t_username )->send();
+			$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
+		} finally {
+			config_set( 'allow_account_delete', $t_old_value );
+		}
 	}
 
 	/**
-	 * Test deleting the current logged in user (anonymous).
+	 * Test that a non-admin user can delete their own account when
+	 * allow_account_delete is ON.
 	 */
-	public function testDeleteCurrentUserAnonymous() {
-		$t_response = $this->builder()->get( '/users/me' )->send();
-		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
-		$t_user = json_decode( $t_response->getBody(), true );
-		$t_user_id = $t_user['id'];
+	public function testDeleteCurrentUserAllowAccountDeleteOn() {
+		$t_username = Faker::username();
+		$t_user_to_create = array(
+			'name' => $t_username,
+			'access_level' => array( 'name' => 'reporter' ),
+		);
 
-		# if anonymous login enabled, this will not give 401
-		# TODO: adapt / test with different settings for anonymous login
-		$t_response = $this->builder()->delete( '/users/' . $t_user_id )->send();
-		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
+
+		$t_old_value = config_get( 'allow_account_delete' );
+		config_set( 'allow_account_delete', ON );
+
+		try {
+			$t_response = $this->builder()->delete( '/users/' . $t_user_id )
+				->impersonate( $t_username )->send();
+			$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode() );
+		} finally {
+			config_set( 'allow_account_delete', $t_old_value );
+		}
+	}
+
+	/**
+	 * Test that a protected user cannot delete their own account.
+	 */
+	public function testDeleteSelfProtectedUser() {
+		$t_username = Faker::username();
+		$t_user_to_create = array(
+			'name' => $t_username,
+			'access_level' => array( 'name' => 'reporter' ),
+			'protected' => true,
+		);
+
+		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
+		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
+
+		$t_old_value = config_get( 'allow_account_delete' );
+		config_set( 'allow_account_delete', ON );
+
+		try {
+			$t_response = $this->builder()->delete( '/users/' . $t_user_id )
+				->impersonate( $t_username )->send();
+			$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
+		} finally {
+			config_set( 'allow_account_delete', $t_old_value );
+		}
 	}
 
 	/**
