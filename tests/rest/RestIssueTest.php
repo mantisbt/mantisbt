@@ -143,6 +143,35 @@ class RestIssueTest extends RestBase {
 		sleep(20);
 	}
 
+	/**
+	 * Tests that summary length validation counts characters, not bytes.
+	 * A 128-character multibyte string should succeed even though it
+	 * exceeds 128 bytes, while 129 characters should fail.
+	 *
+	 * @return void
+	 */
+	public function testCreateIssueWithTooLongSummary() {
+		# 128 CJK characters = 384 bytes in UTF-8, but only 128 characters
+		$t_issue_to_add = $this->getIssueToAdd( 'summary-multibyte' );
+		$t_issue_to_add['summary'] = str_repeat( "\xE4\xB8\x96", DB_FIELD_SIZE_BUG_SUMMARY );
+
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
+			'Creating an issue with exactly ' . DB_FIELD_SIZE_BUG_SUMMARY . ' multibyte characters should succeed'
+		);
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->deleteIssueAfterRun( $t_body['issue']['id'] );
+
+		# 129 CJK characters should fail
+		$t_issue_to_add['summary'] = str_repeat( "\xE4\xB8\x96", DB_FIELD_SIZE_BUG_SUMMARY + 1 );
+
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
+			'Creating an issue with ' . ( DB_FIELD_SIZE_BUG_SUMMARY + 1 ) . ' multibyte characters should fail'
+		);
+	}
+
 	public function testCreateIssueWithEnumIds() {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['status']['id'] = 50; # assigned
