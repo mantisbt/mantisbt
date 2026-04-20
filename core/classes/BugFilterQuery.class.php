@@ -124,6 +124,7 @@ class BugFilterQuery extends DbQuery {
 	protected $rt_table_alias_cf; # keep track of the custom field table joins, to reuse them in order by, or serach matching.
 	protected $rt_table_alias_bugnote = null; # keep track of the bugnote table joins.
 	protected $needs_rebuild; # flag to force a rebuild of the final sql when additions are made after the object is first created.
+	protected $needs_distinct; # flag set when the select needs to use the DISTINCT clause.
 
 	/**
 	 * Constructor.
@@ -185,6 +186,7 @@ class BugFilterQuery extends DbQuery {
 		}
 		$this->query_type = $t_query_type;
 		$this->needs_rebuild = true;
+		$this->needs_distinct = false;
 
 		# The query string must be built here to have a valid DbQuery object ready for use
 		$this->build_main();
@@ -292,9 +294,10 @@ class BugFilterQuery extends DbQuery {
 	 * @param string $p_string
 	 * @return void
 	 */
-	public function add_join( $p_string ) {
+	public function add_join( $p_string, $p_needs_distinct = true ) {
 		$this->parts_join[] = $p_string;
 		$this->needs_rebuild = true;
+		$this->needs_distinct |= $p_needs_distinct;
 	}
 
 	/**
@@ -355,7 +358,8 @@ class BugFilterQuery extends DbQuery {
 			$this->build_order_by();
 			$this->unique_query_parts();
 		}
-		$t_select_string = 'SELECT DISTINCT ' . implode( ', ', $this->parts_select );
+		$t_distinct = $this->needs_distinct ? 'DISTINCT ' : '';
+		$t_select_string = 'SELECT ' . $t_distinct . implode( ', ', $this->parts_select );
 		$t_order_string = ' ORDER BY ' . implode( ', ', $this->parts_order );
 		return $t_select_string . $this->helper_string_query_inner() . $t_order_string;
 	}
@@ -365,7 +369,8 @@ class BugFilterQuery extends DbQuery {
 	 * @return string	The constructed query string
 	 */
 	protected function string_query_count() {
-		$t_select_string = 'SELECT COUNT( DISTINCT {bug}.id )';
+		$t_distinct = $this->needs_distinct ? 'DISTINCT ' : '';
+		$t_select_string = 'SELECT COUNT( ' . $t_distinct . '{bug}.id )';
 		return $t_select_string . $this->helper_string_query_inner();
 	}
 
@@ -512,7 +517,7 @@ class BugFilterQuery extends DbQuery {
 	 * @return void
 	 */
 	protected function build_projects() {
-		$this->add_join( 'JOIN {project} ON {project}.id = {bug}.project_id' );
+		$this->add_join( 'JOIN {project} ON {project}.id = {bug}.project_id', false );
 		$this->add_fixed_where( '{project}.enabled = ' . $this->param( true ) );
 
 		$t_user_id = $this->user_id;
@@ -887,7 +892,7 @@ class BugFilterQuery extends DbQuery {
 		}
 		$t_where = '(' . implode( ' OR ', $t_query_or ) . ')';
 		log_event( LOG_FILTERING, 'category query = ' . $t_where );
-		$this->add_join( $t_join );
+		$this->add_join( $t_join, false );
 		$this->add_where( $t_where );
 	}
 
@@ -1664,7 +1669,7 @@ class BugFilterQuery extends DbQuery {
 
 			case 'category_id':
 				# This join will be reduced as unique, if category search is active
-				$this->add_join( 'LEFT JOIN {category} ON {bug}.category_id = {category}.id' );
+				$this->add_join( 'LEFT JOIN {category} ON {bug}.category_id = {category}.id', false );
 				$this->add_select( '{category}.name' );
 				return '{category}.name';
 				break;
@@ -1680,7 +1685,7 @@ class BugFilterQuery extends DbQuery {
 				$t_table_alias = $p_prop . '_sort_table';
 				$t_join = 'LEFT JOIN {user} ' . $t_table_alias
 						. ' ON {bug}.' . $p_prop . ' = ' . $t_table_alias . '.id';
-				$this->add_join( $t_join );
+				$this->add_join( $t_join, false );
 				$t_col_alias = $p_prop . '_sort_alias';
 
 				# sorting by username: coalesce( username, $prefix_for_deleted || id )
