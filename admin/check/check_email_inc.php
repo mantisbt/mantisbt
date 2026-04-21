@@ -95,7 +95,7 @@ foreach( $t_duplicate_emails as &$t_users ) {
 }
 
 if( OFF == config_get_global( 'allow_blank_email' ) ) {
-	$t_users_without_email = $t_duplicate_emails[null] ?? [];
+	$t_users_without_email = $t_duplicate_emails[''] ?? [];
 	check_print_test_row(
 		'All users must have an e-mail address',
 		empty( $t_users_without_email ),

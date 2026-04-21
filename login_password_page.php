@@ -126,7 +126,7 @@ $t_form_title = $f_reauthenticate ? lang_get( 'reauthenticate_title' ) : lang_ge
 if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthenticate) {
 	# If return URL is specified redirect to it; otherwise use default page
 	if( !is_blank( $f_return ) ) {
-		print_header_redirect( $f_return, false, false, true );
+		print_header_redirect( $f_return, false, true );
 	} else {
 		print_header_redirect( config_get_global( 'default_home_page' ) );
 	}

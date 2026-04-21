@@ -64,9 +64,7 @@ if( version_compare( PHP_VERSION, '8.4', '>=' ) ) {
 	$t_old_error_reporting = error_reporting( error_reporting() & ~E_DEPRECATED );
 }
 
-if( version_compare( Slim\App::VERSION, '4.0', '<' )
-	&& version_compare( PHP_VERSION, '8.1', '>=' )
-) {
+if( version_compare( Slim\App::VERSION, '4.0', '<' ) ) {
 	/**
 	 * Error Handler to process Slim 3.x deprecated warnings on PHP 8.1+.
 	 *

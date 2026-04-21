@@ -220,7 +220,6 @@ $s_prefix_for_deleted_users = 'usuário';
 $s_administrator = 'administrador';
 $s_myself = 'Eu mesmo';
 $s_default_access_level = 'Nível de acesso padrão';
-$s_issue_status_percentage = 'Porcentagem dos Status das Tarefas';
 $s_access_levels_enum_string = '10:visualizador,25:relator,40:atualizador,55:desenvolvedor,70:gerente,90:administrador';
 $s_no_access = 'sem acesso';
 $s_project_status_enum_string = '10:desenvolvimento,30:release,50:estável,70:obsoleto';

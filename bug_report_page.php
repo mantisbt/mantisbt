@@ -32,6 +32,8 @@
  * @uses constant_inc.php
  * @uses custom_field_api.php
  * @uses date_api.php
+ * @uses datetimepicker_api.ph
+ * @uses dropzone_api.php
  * @uses error_api.php
  * @uses event_api.php
  * @uses file_api.php
@@ -151,14 +153,12 @@ if( $f_master_bug_id > 0 ) {
 		helper_set_current_project( $t_project_id );
 		# Reloading the page is required so that the project browser
 		# reflects the new current project
-		print_header_redirect( $_SERVER['REQUEST_URI'], true, false, true );
+		print_header_redirect( $_SERVER['REQUEST_URI'], false, true );
 	}
 
 	# New issues cannot be reported for the 'All Project' selection
 	if( ALL_PROJECTS == $t_current_project ) {
-		if( !print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' ) ) {
-			die;
-		}
+		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
 	}
 
 	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
@@ -226,7 +226,13 @@ $t_show_product_build = $t_show_versions && in_array( 'product_build', $t_fields
 $t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields ) && access_has_project_level( config_get( 'roadmap_update_threshold' ) );
 $t_show_additional_info = in_array( 'additional_info', $t_fields );
 $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level( config_get( 'due_date_update_threshold' ), helper_get_current_project(), auth_get_current_user_id() );
+if( $t_show_due_date ) {
+	require_api( 'datetimepicker_api.php' );
+}
 $t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload() && !event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', array() );
+if( $t_show_attachments ) {
+	require_api( 'dropzone_api.php' );
+}
 $t_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
 $t_max_length = config_get_global( 'max_textarea_length' );
 
@@ -367,11 +373,7 @@ if( $t_show_attachments ) {
 			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" ' .
-				'data-picker-locale="' . lang_get_current_datetime_locale() .
-				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
-				'size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
-			<?php print_icon( 'fa-calendar', 'fa-xlg datetimepicker' ); ?>
+			<?php datetimepicker_print( $t_date_to_display, 'due_date' ) ?>
 		</td>
 	</tr>
 <?php } ?>
@@ -689,28 +691,16 @@ if( $t_show_attachments ) {
 <?php
 	# File Upload (if enabled)
 	if( $t_show_attachments ) {
-		$t_max_file_size = file_get_max_file_size();
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
 	<tr>
 		<th class="category">
 			<label for="ufile[]"><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?></label>
 			<br />
-			<?php print_max_filesize( $t_max_file_size ); ?>
+			<?php print_max_filesize( file_get_max_file_size() ) ?>
 		</th>
 		<td>
-			<?php print_dropzone_template() ?>
-			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-			<div class="dropzone center" <?php print_dropzone_form_data() ?>>
-				<?php print_icon( 'fa-cloud-upload', 'upload-icon ace-icon blue fa-3x' ); ?>
-				<br>
-				<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
-				<div id="dropzone-previews-box" class="dropzone-previews dz-max-files-reached"></div>
-			</div>
-			<div class="fallback">
-				<div class="dz-message" data-dz-message></div>
-				<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="60" />
-			</div>
+			<?php dropzone_print() ?>
 		</td>
 	</tr>
 

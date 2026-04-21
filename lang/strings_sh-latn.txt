@@ -189,7 +189,6 @@ $s_prefix_for_deleted_users = 'korisnik';
 $s_administrator = 'administrator';
 $s_myself = 'Ja';
 $s_default_access_level = 'Podrazumevani stepen pristupa';
-$s_issue_status_percentage = 'Stanje problema (%)';
 $s_access_levels_enum_string = '10:posmatrač,25:izvjestilac,40:dograđivač,55:programer,70:rukovodilac,90:administrator';
 $s_no_access = 'nema pristupa';
 $s_project_status_enum_string = '10:u razvoju,30:izdan,50:stabilan,70:zastario';

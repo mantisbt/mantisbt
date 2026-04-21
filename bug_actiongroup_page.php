@@ -30,6 +30,7 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses custom_field_api.php
+ * @uses datetimepicker_api.php
  * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
@@ -245,6 +246,7 @@ switch( $f_action ) {
 		$t_question_title		= lang_get( 'due_date_bugs_conf_msg' );
 		$t_button_title			= lang_get( 'due_date_group_bugs_button' );
 		$t_form					= 'due_date';
+		require_api( 'datetimepicker_api.php' );
 		break;
 	case 'CUSTOM' :
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
@@ -321,12 +323,7 @@ if( $t_multiple_projects ) {
 					$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 				}
 			}
-
-			echo '<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="16" ' .
-				'data-picker-locale="' . lang_get_current_datetime_locale() .
-				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '"' .
-				'" value="' . $t_date_to_display . '" />';
-			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
+			datetimepicker_print( $t_date_to_display, 'due_date' );
 		} else {
 			echo '<select name="' . $t_form . '" class="input-sm" required>';
 

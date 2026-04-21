@@ -42,8 +42,6 @@ jobs:
           - 8.3
           - 8.2
           - 8.1
-          - 8.0
-          - 7.4
         experimental: [false]
 
     env:
@@ -58,7 +56,7 @@ jobs:
     steps:
     - name: Setup PHP
       # https://setup-php.com/
-      uses: shivammathur/setup-php@2.29.0
+      uses: shivammathur/setup-php@v2
       with:
         php-version: "${{ matrix.php }}"
         extensions: sqlite3, mysqli, pgsql, mbstring, json, tokenizer, curl, gd, fileinfo, ldap, soap, zlib
@@ -68,7 +66,7 @@ jobs:
           sendmail_path=${{ github.workspace }}/tests/fakesendmail.sh
 
     - name: Checkout MantisBT Repository
-      uses: actions/checkout@v4.1.0
+      uses: actions/checkout@v6
 
     - run: composer install
 

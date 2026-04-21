@@ -56,3 +56,4 @@ $s_plugin_format_process_markdown = 'Апрацоўка Markdown';
 $s_plugin_format_process_markdown_info = 'Стылі з падтрымкай Markdown, сынтаксыс фарматаваньня тэксту створаны так, каб ён мог быць канвэртаваны ў HTML.';
 $s_plugin_format_enabled = 'Уключанае';
 $s_plugin_format_disabled = 'Выключанае';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Капіяваць';

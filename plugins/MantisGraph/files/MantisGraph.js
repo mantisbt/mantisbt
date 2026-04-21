@@ -1,10 +1,19 @@
 /* jshint esversion: 6, -W097, -W031 */
 /* globals Chart */
-"use strict";
-
 $(function() {
+	"use strict";
+
     // Default color scheme
     Chart.defaults.plugins.colorschemes.scheme = 'tableau.Classic20';
+
+	// Period selector, created by Period::period_selector() in Period.php
+	const period_selector = $('#period_menu > select#interval');
+	const dates_picker = $('#dates input[type=text].datetimepicker');
+	const period_selector_update = function() {
+		dates_picker.prop('disabled', period_selector.val() != 10);
+	};
+	period_selector.change( period_selector_update );
+	period_selector_update();
 
     // Bar charts
     $("canvas[id*='barchart']").each( function() {

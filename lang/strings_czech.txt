@@ -213,7 +213,6 @@ $s_prefix_for_deleted_users = 'uživatel';
 $s_administrator = 'správce';
 $s_myself = 'Já sám';
 $s_default_access_level = 'Výchozí přístupová práva';
-$s_issue_status_percentage = 'Stav záznamu v procentech';
 $s_access_levels_enum_string = '10:pozorovatel,25:reportér,40:úpravář,55:vývojář,70:vedoucí,90:správce';
 $s_no_access = 'žádný přístup';
 $s_project_status_enum_string = '10:vývoj,30:verze,50:stabilní,70:zastaralý';

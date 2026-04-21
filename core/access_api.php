@@ -84,7 +84,7 @@ function access_denied() {
 	}
 
 	if( !auth_is_user_authenticated() ) {
-		print_header_redirect( helper_mantis_url( auth_login_page( $t_return ) ), true, false, true );
+		print_header_redirect( helper_mantis_url( auth_login_page( $t_return ) ), false, true );
 	} else {
 		$t_buttons = [];
 		

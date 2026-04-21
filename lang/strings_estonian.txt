@@ -177,7 +177,6 @@ $s_prefix_for_deleted_users = 'kasutaja';
 $s_administrator = 'administraator';
 $s_myself = 'Minule';
 $s_default_access_level = 'Vaikimisi ligipääsuõigused';
-$s_issue_status_percentage = 'Kande staatus protsentides';
 $s_access_levels_enum_string = '10:vaatleja,25:teataja,40:uuendaja,55:arendaja,70:mänedzher,90:administraator';
 $s_project_status_enum_string = '10:arendus,30:väljalase,50:stabiilne,70:aegunud';
 $s_project_view_state_enum_string = '10:avalik,50:privaatne';

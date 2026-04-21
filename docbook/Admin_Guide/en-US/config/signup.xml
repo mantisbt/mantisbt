@@ -69,7 +69,14 @@
 			<listitem>
 				<para>Absolute path (with trailing slash!) to folder which contains your
  					TrueType-Font files used for the Relationship Graphs,
- 					and the Workflow Graphs.</para>
+ 					and the Workflow Graphs.
+				</para>
+				<note>
+					<para>This setting is obsolete, recent versions of
+						<ulink url="https://www.graphviz.org">GraphViz</ulink>
+						use the system's fonts.
+					</para>
+				</note>
 			</listitem>
 		</varlistentry>
 

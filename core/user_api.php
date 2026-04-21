@@ -88,7 +88,7 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 		user_cache_array_rows( array( $c_user_id ) );
 
 		/** @noinspection PhpConditionAlreadyCheckedInspection */
-		if( !isset( $g_cache_user[$c_user_id] ) ) {
+		if( empty( $g_cache_user[$c_user_id] ) ) {
 			if( $p_trigger_errors ) {
 				throw new ClientException(
 					sprintf( "User id '%d' not found.", (int)$p_user_id ),
@@ -814,6 +814,9 @@ function user_delete( $p_user_id ) {
 
 	# Revoke all API tokens
 	api_token_revoke_all( $p_user_id );
+
+	# Remove user-owned filters
+	filter_db_delete_user_filters( $p_user_id );
 
 	# Remove account
 	db_param_push();

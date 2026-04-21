@@ -24,10 +24,13 @@
  * @uses Period.php
  * @uses access_api.php
  * @uses config_api.php
+ * @uses datetimepicker_api.php
  * @uses gpc_api.php
  * @uses html_api.php
  * @uses plugin_api.php
  */
+
+require_api( 'datetimepicker_api.php' );
 
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 

@@ -193,6 +193,7 @@ $t_mime_force_inline = array(
 	'image/jpeg',
 	'image/png',
 	'image/tiff',
+	'image/webp',
 );
 $t_mime_force_attachment = array(
 	'application/x-shockwave-flash',

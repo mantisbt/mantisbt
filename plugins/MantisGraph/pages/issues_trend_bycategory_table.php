@@ -71,7 +71,7 @@ $t_marker[$t_ptr] = time();
 $t_data[$t_ptr] = array();
 foreach ( $t_rows as $t_row ) {
 	# the following function can treat the resolved parameter as an array to match
-	$t_cat = category_get_name( $t_row->category_id );
+	$t_cat = category_exists( $t_row->category_id ) ? category_get_name( $t_row->category_id ) : '';
 	if( $t_cat == '' ) {
 		$t_cat = 'none';
 	}

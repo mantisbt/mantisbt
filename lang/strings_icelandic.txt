@@ -193,7 +193,6 @@ $s_prefix_for_deleted_users = 'notandi';
 $s_administrator = 'umsjónarmaður';
 $s_myself = 'Ég sjálfur';
 $s_default_access_level = 'Sjálfgefið aðgangsstig';
-$s_issue_status_percentage = 'Prósentustaða aðgerða';
 $s_access_levels_enum_string = '10:skoðandi,25:skýrslugjafi,40:uppfærslumaður,55:úrlausnaraðili,70:stjórnandi,90:umsjónarmaður';
 $s_no_access = 'enginn aðgangur';
 $s_project_status_enum_string = '10:þróun,30:útgáfa,50:stöðugur,70:úreltur';

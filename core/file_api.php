@@ -129,14 +129,16 @@ function file_get_display_name( $p_filename ) {
 function file_bug_attachment_count_cache( array $p_bug_ids ) {
 	global $g_cache_file_count;
 
-	if( empty( $p_bug_ids ) ) {
-		return;
-	}
-
 	$t_ids_to_search = array();
 	foreach( $p_bug_ids as $t_id ) {
 		$c_id = (int)$t_id;
-		$t_ids_to_search[$c_id] = $c_id;
+		if( !isset( $g_cache_file_count[$c_id] ) ) {
+			$t_ids_to_search[$c_id] = $c_id;
+		}
+	}
+	
+	if( empty( $t_ids_to_search ) ) {
+		return;
 	}
 
 	db_param_push();

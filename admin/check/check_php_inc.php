@@ -46,6 +46,15 @@ if( defined( 'PHP_SUPPORTED_VERSION' ) ) {
 	preg_match( '/\d+\.\d+/', PHP_SUPPORTED_VERSION, $t_short_version );
 	$t_short_version = $t_short_version[0];
 
+	# Adjust check for supported versions including a patch component
+	$t_supported_php_version = PHP_SUPPORTED_VERSION;
+	if( PHP_SUPPORTED_VERSION == $t_short_version ) {
+		$t_supported_php_version .= '.999';
+		$t_supported_msg = "has not been fully tested with PHP ". PHP_SUPPORTED_VERSION . " yet,";
+	} else {
+		$t_supported_msg = "has only been fully tested up to PHP $t_supported_php_version,";
+	}
+
 	# URL to filter by PHP version tag
 	# This is not perfect because if the tag does not exist then the filter will
 	# show all issues, but still better than nothing.
@@ -66,19 +75,20 @@ if( defined( 'PHP_SUPPORTED_VERSION' ) ) {
 	$C = 'constant';
 	$t_info = <<<MESSAGE
 		MantisBT {$C('MANTIS_VERSION')} 
-		has not been fully tested with PHP {$C('PHP_SUPPORTED_VERSION')} yet,
+		$t_supported_msg
 		using an earlier PHP version is recommended.<br>
 		In case of PHP-$t_short_version-related compatibility issues, please 
 		<a href='$t_search_url'>check the Bug Tracker</a> for known problems and 
 		<a href="$t_report_url">report a new Issue</a> if necessary.  
 		MESSAGE;
 } else {
-	$t_info = '';
+	$t_supported_php_version = false;
+	$t_info = 'Supported version is not specified.';
 }
 check_print_test_warn_row(
 	"PHP version " . PHP_VERSION . " is supported",
-	!defined( 'PHP_SUPPORTED_VERSION' )
-	|| version_compare( PHP_VERSION, PHP_SUPPORTED_VERSION, '<' ),
+	$t_supported_php_version
+	&& version_compare( PHP_VERSION, $t_supported_php_version, '<' ),
 	[ false => $t_info ]
 );
 

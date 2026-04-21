@@ -200,7 +200,6 @@ $s_prefix_for_deleted_users = 'bruger';
 $s_administrator = 'administrator';
 $s_myself = 'Mig selv';
 $s_default_access_level = 'Standardadgangsniveau';
-$s_issue_status_percentage = 'Rapport status i procent';
 $s_access_levels_enum_string = '10:observatør,25:rapportør,40:opdatering,55:udvikler,70:leder,90:administrator';
 $s_no_access = 'ingen adgang';
 $s_project_status_enum_string = '10:udvikling,30:udgivelse,50:stabil,70:forældet';

@@ -47,6 +47,6 @@ $s_plugin_format_config = 'Konfiguracija';
 $s_plugin_format_process_text = 'Tekstowe předźěłowanje';
 $s_plugin_format_process_text_warning_notice = 'Njewupiń, chibazo woprawdźe wěš, štož činiš. We wupinjenym stawje su nadpady cross site scripting (XSS) móžne.';
 $s_plugin_format_process_urls = 'Předźěłowanje URL';
-$s_plugin_format_process_buglinks = 'Wotkazy MantisBT (Problem/Problemowa zdźělenka)';
+$s_plugin_format_process_buglinks = 'Interne wotkazy MantisBT (problemy a problemowe zdźělenki)';
 $s_plugin_format_enabled = 'Zapinjeny';
 $s_plugin_format_disabled = 'Wupinjeny';

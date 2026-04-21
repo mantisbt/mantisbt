@@ -83,13 +83,10 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
 /**
- * Print the headers to cause the page to redirect to $p_url.
- *
- * If we have handled any errors on this page return false and don't redirect.
+ * Print the headers to cause the page to redirect to $p_url and
+ * terminate script execution immediately after the redirect.
  *
  * @param string $p_url      The page to redirect to: has to be a relative path.
- * @param bool $p_die        If true (default), terminate script execution
- *                           immediately after redirecting.
  * @param bool   $p_sanitize Apply string_sanitize_url to passed URL.
  *                           Should be true when the URL is extracted from an
  *                           untrusted source (e.g. GET/POST),
@@ -97,18 +94,18 @@ require_api( 'version_api.php' );
  *                           (e.g. read from config_inc.php).
  * @param bool   $p_absolute Indicate if URL is absolute.
  *
- * @return bool
+ * @return void
  */
-function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
+function print_header_redirect( $p_url, $p_sanitize = false, $p_absolute = false ) {
 	if( error_handled() ) {
 		# Display a basic "proceed" page to show any pending errors, regardless
 		# of $g_stop_on_errors setting which is actually handled in
 		# html_meta_redirect(), called by layout_page_header().
-		layout_page_header( null, $p_url );
+		layout_page_header( '', $p_url );
 		layout_page_begin();
 		html_operation_successful( $p_url );
 		layout_page_end();
-		return false;
+		die;
 	}
 
 	# validate the url as part of this site before continuing
@@ -134,16 +131,9 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		header( 'Location: ' . $t_url );
 	} else {
 		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
-		return false;
 	}
 
-	if( $p_die ) {
-		die;
-
-		# additional output can cause problems so let's just stop output here
-	}
-
-	return true;
+	die;
 }
 
 /**
@@ -2250,58 +2240,24 @@ function print_max_filesize( $p_size, $p_divider = 1024, $p_unit = 'kib' ) {
 /**
  * Populate form element with dropzone data attributes
  * @return void
+ * @deprecated 2.29.0 dropzone_print_form_data() should be used in preference to this function
  */
 function print_dropzone_form_data() {
-	//$t_max_file_size = ceil( file_get_max_file_size() / ( 1024*1024 ) );
-	echo 'data-force-fallback="' . ( config_get( 'dropzone_enabled' ) ? 'false' : 'true' ) . '"' . "\n";
-	echo "\t" . 'data-max-filesize-bytes="'. file_get_max_file_size() . '"' . "\n";
-	echo "\t" . 'data-max-filename-length="'. DB_FIELD_SIZE_FILENAME . '"' . "\n";
-	$t_allowed_files = config_get( 'allowed_files' );
-	if ( !empty ( $t_allowed_files ) ) {
-		$t_allowed_files = '.' . implode ( ',.', explode ( ',', $t_allowed_files ) );
-	}
-	echo "\t" . 'data-accepted-files="' . $t_allowed_files . '"' . "\n";
-	echo "\t" . 'data-default-message="' . htmlspecialchars( lang_get( 'dropzone_default_message' ) ) . '"' . "\n";
-	echo "\t" . 'data-fallback-message="' . htmlspecialchars( lang_get( 'dropzone_fallback_message' ) ) . '"' . "\n";
-	echo "\t" . 'data-fallback-text="' . htmlspecialchars( lang_get( 'dropzone_fallback_text' ) ) . '"' . "\n";
-	echo "\t" . 'data-file-too-big="' . htmlspecialchars( lang_get( 'dropzone_file_too_big' ) ) . '"' . "\n";
-	echo "\t" . 'data-invalid-file-type="' . htmlspecialchars( lang_get( 'dropzone_invalid_file_type' ) ) . '"' . "\n";
-	echo "\t" . 'data-response-error="' . htmlspecialchars( lang_get( 'dropzone_response_error' ) ) . '"' . "\n";
-	echo "\t" . 'data-cancel-upload="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload' ) ) . '"' . "\n";
-	echo "\t" . 'data-cancel-upload-confirmation="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload_confirmation' ) ) . '"' . "\n";
-	echo "\t" . 'data-remove-file=""' . "\n";
-	echo "\t" . 'data-remove-file-confirmation="' . htmlspecialchars( lang_get( 'dropzone_remove_file_confirmation' ) ) . '"' . "\n";
-	echo "\t" . 'data-max-files-exceeded="' . htmlspecialchars( lang_get( 'dropzone_max_files_exceeded' ) ) . '"' . "\n";
-	echo "\t" . 'data-dropzone-not-supported="' . htmlspecialchars( lang_get( 'dropzone_not_supported' ) ) . '"';
-	echo "\t" . 'data-dropzone_multiple_files_too_big="' . htmlspecialchars( lang_get( 'dropzone_multiple_files_too_big' ) ) . '"';
-	echo "\t" . 'data-dropzone_multiple_filenames_too_long="' . htmlspecialchars( lang_get( 'dropzone_multiple_filenames_too_long' ) ) . '"';
+	error_parameters( __FUNCTION__, 'dropzone_print_form_data' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	dropzone_print_form_data();
 }
 
 /**
  * Populate a hidden div where its inner html will be used as preview template
  * for dropzone attached files
  * @return void
+ * @deprecated 2.29.0 dropzone_print_template() should be used in preference to this function
  */
 function print_dropzone_template(){
-	?>
-	<div id="dropzone-preview-template" class="hidden">
-		<div class="dz-preview dz-file-preview">
-			<div class="dz-filename"><span data-dz-name></span></div>
-			<img src="data:image/png;base64," alt="" data-dz-thumbnail>
-			<div class="dz-error-message">
-				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle'); ?></span></div>
-				<span data-dz-errormessage></span>
-			</div>
-			<div class="dz-size" data-dz-size></div>
-			<div class="progress progress-small progress-striped active">
-				<div class="progress-bar progress-bar-success" data-dz-uploadprogress></div>
-			</div>
-			<a class="btn btn-primary btn-white btn-round btn-xs" data-dz-remove>
-				<?php echo lang_get( 'dropzone_remove_file' ); ?>
-			</a>
-		</div>
-	</div>
-	<?php
+	error_parameters( __FUNCTION__, 'dropzone_print_template' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	dropzone_print_template();
 }
 
 /**

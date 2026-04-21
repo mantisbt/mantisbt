@@ -170,7 +170,6 @@ $s_prefix_for_deleted_users = 'Metmaacher';
 $s_administrator = 'Administrator';
 $s_myself = 'Esch sellver';
 $s_default_access_level = 'Et jewööhnlejje Nivoh';
-$s_issue_status_percentage = 'Dä Aanjelääjeheit iere Shtattuß en Prozänt';
 $s_access_levels_enum_string = '10:Bedraachter,25:Bereeschter,40:Änderer/Prööfer,55:Äntweckler,70:Verwallder,90:Administrator';
 $s_no_access = 'keine Zohjang';
 $s_project_status_enum_string = '10:Äntwecklong,30:Frejejovve,50:Stabiel,70:Övverhollt';

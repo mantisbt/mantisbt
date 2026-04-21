@@ -198,7 +198,6 @@ $s_prefix_for_deleted_users = 'प्रयोक्ता';
 $s_administrator = 'प्रशासक';
 $s_myself = 'स्वयं';
 $s_default_access_level = 'स्वतः प्रवेश स्तर';
-$s_issue_status_percentage = 'कार्यबिन्दुओं की स्थिति का प्रतिशत';
 $s_access_levels_enum_string = '10:पाठक,25:प्रतिवेदक,40:परिवर्जक,55:विकासकर्ता,70:प्रबंधक,90:प्रशासक';
 $s_no_access = 'प्रवेश निषेध';
 $s_project_status_enum_string = '10:विकास,30:प्रकाशित,50:स्थिर,70:अप्रचलित';

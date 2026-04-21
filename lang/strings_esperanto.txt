@@ -163,7 +163,6 @@ $s_prefix_for_deleted_users = 'uzanto';
 $s_administrator = 'administranto';
 $s_myself = 'Mi mem';
 $s_default_access_level = 'Implicita atingonivelo';
-$s_issue_status_percentage = 'Procento de Problemaj Statoj';
 $s_access_levels_enum_string = '10:vidanto,25:raportanto,40:ĝisdatiganto,55:evoluiganto,70:mastrumanto,90:administranto';
 $s_no_access = 'neniu aliro';
 $s_project_status_enum_string = '10:evoluigata,30:eldonita,50:stabila,70:malnoviĝinta';

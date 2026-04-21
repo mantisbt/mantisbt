@@ -57,8 +57,7 @@ if( count( current_user_get_accessible_projects() ) == 1 ) {
 			helper_url_combine( 'set_project.php', [
 				'project_id' => $t_project_id,
 				'ref' => $f_ref
-			] ),
-			true
+			] )
 		);
 		# print_header_redirect terminates script execution
 	}

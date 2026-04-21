@@ -178,7 +178,6 @@ $s_prefix_for_deleted_users = 'tagagamit';
 $s_administrator = 'tagapangasiwa';
 $s_myself = 'Sarili ko';
 $s_default_access_level = 'Likas na nakatakdang antas ng pagpunta/akseso';
-$s_issue_status_percentage = 'Kabahagdanan ng Kalagayan ng Labas';
 $s_access_levels_enum_string = '10:tagatanaw,25:tagapag-ulat,40:tagasapanahon,55:tagapagunlad,70:tagapamahala,90:tagapangasiwa';
 $s_project_status_enum_string = '10:pag-unlad,30:labas,50:matatag,70:lipas na';
 $s_project_view_state_enum_string = '10:pangmadla/publiko,50:pansarili/pribado';

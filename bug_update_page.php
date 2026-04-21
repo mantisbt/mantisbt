@@ -30,6 +30,7 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses custom_field_api.php
+ * @uses datetimepicker_api.php
  * @uses error_api.php
  * @uses event_api.php
  * @uses form_api.php
@@ -127,6 +128,10 @@ $t_product_build_attribute = $t_show_product_build ? string_attribute( $t_bug->b
 $t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields ) && access_has_bug_level( config_get( 'roadmap_update_threshold' ), $t_bug_id );
 $t_show_fixed_in_version = $t_show_versions && in_array( 'fixed_in_version', $t_fields );
 $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_bug_id );
+$t_can_update_due_date = $t_show_due_date && access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id );
+if( $t_can_update_due_date ) {
+	require_api( 'datetimepicker_api.php' );
+}
 $t_show_summary = in_array( 'summary', $t_fields );
 $t_summary_attribute = $t_show_summary ? string_attribute( $t_bug->summary ) : '';
 $t_show_description = in_array( 'description', $t_fields );
@@ -340,16 +345,13 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 			echo '<td class="due-', $t_level, '">';
 		}
 
-		if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id ) ) {
+		if( $t_can_update_due_date ) {
 			$t_date_to_display = '';
 
 			if( !date_is_null( $t_bug->due_date ) ) {
 				$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 			}
-			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
-				'data-picker-locale="' . lang_get_current_datetime_locale() .  '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
-				'maxlength="16" value="' . $t_date_to_display . '" />';
-			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
+			datetimepicker_print( $t_date_to_display, 'due_date' );
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $t_bug->due_date );

@@ -15,6 +15,27 @@ info:
     REST APIs.
 
     REST API is enabled by default since MantisBT 2.8.0 release.
+
+    ## Impersonation
+
+    Users with the access level defined by `$g_impersonate_user_threshold` (default: ADMINISTRATOR)
+    can execute REST API calls on behalf of another user by adding the `X-Mantis-Username` request
+    header containing the target username.  Impersonation requires API token authentication;
+    it is not available with cookie or anonymous access.
+
+    Constraints:
+    - The caller must authenticate with an API token.
+    - The caller must have at least the `$g_impersonate_user_threshold` access level.
+    - A user cannot impersonate themselves.
+    - A user cannot impersonate a user with a higher access level than their own.
+    - The target user must be a valid, enabled user.
+
+    ## Response Headers
+
+    Every API response includes the following informational headers:
+    - `X-Mantis-Username` – The username under which the request was executed (the impersonated
+      user's name when impersonation is active).
+    - `X-Mantis-LoginMethod` – The authentication method used: `api-token`, `cookie`, or `anonymous`.
   license:
     name: GPL-2.0-or-later
   contact:
@@ -934,6 +955,23 @@ components:
       type: apiKey
       in: header
       name: Authorization
+  headers:
+    X-Mantis-Username:
+      description: |-
+        The username under which the request was executed.
+        When impersonation is active, this reflects the impersonated user's username.
+      schema:
+        type: string
+    X-Mantis-LoginMethod:
+      description: |-
+        The authentication method used for the request.
+        Possible values: `api-token`, `cookie`, `anonymous`.
+      schema:
+        type: string
+        enum:
+          - api-token
+          - cookie
+          - anonymous
   schemas:
     ObjectRef:
       type: object
@@ -1518,6 +1556,22 @@ components:
       description: ''
       required: true
   parameters:
+    X-Mantis-Username:
+      name: X-Mantis-Username
+      in: header
+      required: false
+      schema:
+        type: string
+      description: |-
+        Username to impersonate. When set, the request is executed on behalf of the specified
+        user rather than the authenticated caller.
+
+        Requirements:
+        - Caller must authenticate with an API token (the `Authorization` header).
+        - Caller must have at least the `$g_impersonate_user_threshold` access level (default: ADMINISTRATOR).
+        - Cannot impersonate self.
+        - Cannot impersonate a user with a higher access level than the caller's own.
+        - Target user must be a valid, enabled user.
     issue_id:
       name: issue_id
       in: path
@@ -1568,3 +1622,8 @@ components:
       description: 'Entity not found'
     Success:
       description: 'Success'
+      headers:
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'

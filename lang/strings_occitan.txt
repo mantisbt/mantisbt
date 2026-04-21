@@ -183,7 +183,6 @@ $s_prefix_for_deleted_users = 'utilizaire';
 $s_administrator = 'administrator';
 $s_myself = 'Ieu';
 $s_default_access_level = 'Nivèl d\'accès per defaut';
-$s_issue_status_percentage = 'Percentatge d\'estatut de bug';
 $s_access_levels_enum_string = '10:convidat,25:raportaire,40:testaire,55:desvolopaire,70:gestionari,90:administrator';
 $s_project_status_enum_string = '10:desvolopament,30:liurat,50:estable,70:obsolèt';
 $s_project_view_state_enum_string = '10:public,50:privat';

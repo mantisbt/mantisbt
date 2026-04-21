@@ -86,7 +86,7 @@ $t_form_title = lang_get( 'login_title' );
 if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 	# If return URL is specified redirect to it; otherwise use default page
 	if( !is_blank( $f_return ) ) {
-		print_header_redirect( $f_return, false, false, true );
+		print_header_redirect( $f_return, false, true );
 	} else {
 		print_header_redirect( config_get_global( 'default_home_page' ) );
 	}

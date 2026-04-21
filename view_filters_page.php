@@ -63,10 +63,6 @@ auth_ensure_user_authenticated();
 
 compress_enable();
 
-layout_page_header();
-
-layout_page_begin();
-
 $f_filter_id = gpc_get( 'filter_id', null );
 if( null === $f_filter_id ) {
 	$t_filter = current_user_get_bug_filter();
@@ -93,6 +89,8 @@ $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
 $t_filter['_view_type'] = $f_view_type;
 $t_filter = filter_ensure_valid_filter( $t_filter );
 
+layout_page_header();
+layout_page_begin();
 ?>
 <div class="space-10"></div>
 <div class="col-md-12 col-xs-12">

@@ -40,6 +40,7 @@
  *
  * @author Dirruw'o
  * @author Kirill
+ * @author Köpleres
  * @author Lega4
  * @author Lutece398
  * @author Nitch
@@ -55,7 +56,7 @@ $s_plugin_format_process_text = 'Обработка текста';
 $s_plugin_format_process_text_warning_notice = 'Не выключайте, если не уверены в том, что делаете. В выключенном состоянии возможна XSS атака на сайт.';
 $s_plugin_format_process_urls = 'Обработка URL';
 $s_plugin_format_process_buglinks = 'Внутренние ссылки MantisBT (задачи/комментарии)';
-$s_plugin_format_process_buglinks_info = 'Ваша конфигурация определяет тег <em>Issue</em> как «%s», а тег <em>Issue Note</em> — как «%s»';
+$s_plugin_format_process_buglinks_info = 'Ваша конфигурация определяет тег <em>Issue</em> как «%1$s», а тег <em>Issue Note</em> — как «%2$s»';
 $s_plugin_format_process_markdown = 'Обработка Markdown';
 $s_plugin_format_process_markdown_info = 'Синтаксис форматирования с поддержкой Markdown разработан таким образом, что текст может быть преобразован в HTML.';
 $s_plugin_format_enabled = 'Вкл';

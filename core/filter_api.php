@@ -117,6 +117,12 @@ $g_cache_filter_db_rows = array();
 $g_cache_filter_subquery = array();
 
 /**
+ * Cache of current filter for given project and user.
+ * @global array $g_filter_project_current_cache
+ */
+$g_cache_filter_project_current = array();
+
+/**
  * Initialize the filter API with the current filter.
  * @param array $p_filter The filter to set as the current filter.
  */
@@ -1660,6 +1666,8 @@ function filter_db_get_filter_string( $p_filter_id, $p_user_id = null ) {
  * @return integer|null
  */
 function filter_db_get_project_current( $p_project_id = null, $p_user_id = null ) {
+	global $g_cache_filter_project_current;
+
 	if( null === $p_project_id ) {
 		$c_project_id = helper_get_current_project();
 	} else {
@@ -1669,6 +1677,12 @@ function filter_db_get_project_current( $p_project_id = null, $p_user_id = null 
 		$c_user_id = auth_get_current_user_id();
 	} else {
 		$c_user_id = (int)$p_user_id;
+	}
+	
+	if( isset( $g_cache_filter_project_current[$c_project_id][$c_user_id] ) ) {
+		return ( $g_cache_filter_project_current[$c_project_id][$c_user_id] === false )
+			? null
+			: $g_cache_filter_project_current[$c_project_id][$c_user_id];
 	}
 
 	# we store current filters for each project with a special project index
@@ -1680,9 +1694,11 @@ function filter_db_get_project_current( $p_project_id = null, $p_user_id = null 
 	$t_result = db_query( $t_query, array( $c_user_id, $t_filter_project_id, '' ) );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
+		$g_cache_filter_project_current[$c_project_id][$c_user_id] = $t_row['id'];
 		return $t_row['id'];
 	}
 
+	$g_cache_filter_project_current[$c_project_id][$c_user_id] = false;
 	return null;
 }
 
@@ -1762,6 +1778,27 @@ function filter_db_delete_current_filters() {
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE project_id<=' . db_param() . ' AND name=' . db_param();
 	db_query( $t_query, array( $t_all_id, '' ) );
+}
+
+/**
+ * Delete filters owned by the specified user.
+ *
+ * This function is called when a user is deleted to clean up orphaned filters.
+ * By default, shared (public) filters are preserved since they may be used by other users.
+ *
+ * @param int  $p_user_id       A valid user identifier.
+ * @param bool $p_delete_shared Whether to also delete shared (public) filters. Default false.
+ * @return void
+ */
+function filter_db_delete_user_filters( $p_user_id, $p_delete_shared = false ) {
+	db_param_push();
+	if( $p_delete_shared ) {
+		$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param();
+		db_query( $t_query, array( (int)$p_user_id ) );
+	} else {
+		$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param() . ' AND is_public=' . db_param();
+		db_query( $t_query, array( (int)$p_user_id, false ) );
+	}
 }
 
 /**

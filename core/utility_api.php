@@ -266,33 +266,36 @@ function getClassProperties( $p_classname, $p_type = 'public', $p_return_object 
 }
 
 /**
- * return string of system font path
+ * Return path to system fonts location.
+ *
+ * @return string
+ *
+ * @deprecated 2.28.1 See PHPDoc for {@see $g_system_font_folder}.
  * @access public
- * @return string representing system path to font location
  */
 function get_font_path() {
-		$t_font_path = config_get_global( 'system_font_folder' );
-		if( $t_font_path == '' ) {
-			if( is_windows_server() ) {
-				$t_system_root = $_SERVER['SystemRoot'];
-				if( empty( $t_system_root ) ) {
-					return '';
-				} else {
-					$t_font_path = $t_system_root . '/fonts/';
-				}
-			} else {
-				if( file_exists( '/usr/share/fonts/corefonts/' ) ) {
-					$t_font_path = '/usr/share/fonts/corefonts/';
-				} else if( file_exists( '/usr/share/fonts/truetype/msttcorefonts/' ) ) {
-					$t_font_path = '/usr/share/fonts/truetype/msttcorefonts/';
-				} else if( file_exists( '/usr/share/fonts/msttcorefonts/' ) ) {
-					$t_font_path = '/usr/share/fonts/msttcorefonts/';
-				} else {
-					$t_font_path = '/usr/share/fonts/truetype/';
+	$t_font_path = config_get_global( 'system_font_folder' );
+	if( !$t_font_path ) {
+		if( is_windows_server() ) {
+			$t_system_root = $_SERVER['SystemRoot'] ?? '';
+			if( $t_system_root ) {
+				return $t_system_root . DIRECTORY_SEPARATOR . 'Fonts' . DIRECTORY_SEPARATOR;
+			}
+		} else {
+			$t_font_dirs = [
+				'/usr/share/fonts/corefonts/',
+				'/usr/share/fonts/truetype/msttcorefonts/',
+				'/usr/share/fonts/msttcorefonts/',
+				'/usr/share/fonts/truetype/',
+			];
+			foreach( $t_font_dirs as $t_font_dir ) {
+				if( file_exists( $t_font_dir ) ) {
+					return $t_font_dir;
 				}
 			}
 		}
-		return $t_font_path;
+	}
+	return $t_font_path;
 }
 
 /**
