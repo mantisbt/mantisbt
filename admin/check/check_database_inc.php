@@ -207,6 +207,8 @@ if( db_is_mysql() ) {
 	$t_db_min_version = DB_MIN_VERSION_MSSQL;
 } elseif( db_is_oracle() ) {
 	$t_db_min_version = DB_MIN_VERSION_ORACLE;
+} elseif( db_is_sqlite3() ) {
+	$t_db_min_version = DB_MIN_VERSION_SQLITE3;
 } else {
 	$t_db_min_version = 0;
 }
@@ -491,4 +493,45 @@ if( db_is_mysql() ) {
 			}
 		}
 	}
+}
+
+if( db_is_sqlite3() ) {
+	check_print_info_row(
+		'Database file size',
+		check_format_number( @filesize( $t_database_hostname ) )
+	);
+
+	$t_result = db_query( 'PRAGMA compile_options' );
+	$t_icu = false;
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		if( $t_row['compile_options'] === 'ENABLE_ICU' ) {
+			$t_icu = true;
+		}
+	}
+	check_print_test_warn_row(
+		'Database International Components for Unicode (ICU) extension is available',
+		$t_icu,
+		[ false => 'The operations are case insensitive for ASCII symbols only. '
+			. 'Use a different version of SQLite compiled with the SQLITE_ENABLE_ICU option.' ]
+	);
+
+	$t_collation = db_result( db_query( 'PRAGMA encoding' ) );
+	check_print_test_row(
+		'Database default collation is UTF-8',
+		( $t_collation === 'UTF-8' ),
+		[ false => 'Database is using ' . htmlentities( $t_collation )
+			. ' collation where UTF-8 collation is required.' ]
+	);
+
+	$t_result = db_query( 'PRAGMA integrity_check' );
+	$t_integrity_errors = '';
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_integrity_errors .= ( $t_integrity_errors ? '<br>' : '' )
+			. htmlentities( $t_row['integrity_check'] );
+	}
+	check_print_test_row(
+		'Database integrity',
+		( $t_integrity_errors === 'ok' ),
+		'Integrity check result: ' . $t_integrity_errors
+	);
 }

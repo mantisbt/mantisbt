@@ -4,28 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58c47f2804ded0de0c3ea691b7e93b25",
+    "content-hash": "e77820692c4fa59873e3adf0c5e995ca",
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "v5.22.11",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
-                "reference": "a741375176f48b084ca9a110c112323fc7101b75"
+                "reference": "0e1ac40dd292620c8450411d832429b81e4d21d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/a741375176f48b084ca9a110c112323fc7101b75",
-                "reference": "a741375176f48b084ca9a110c112323fc7101b75",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/0e1ac40dd292620c8450411d832429b81e4d21d0",
+                "reference": "0e1ac40dd292620c8450411d832429b81e4d21d0",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.5"
+                "phpunit/phpunit": "^9.5"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -79,7 +80,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-11-22T15:37:23+00:00"
+            "time": "2026-04-03T18:08:30+00:00"
         },
         {
             "name": "dapphp/securimage",
@@ -569,24 +570,24 @@
         },
         {
             "name": "parsedown/parsedown",
-            "version": "1.7.5",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parsedown/parsedown.git",
-                "reference": "6ca5690b0282544416897376abe056601847ddb3"
+                "reference": "96baaad00f71ba04d76e45b4620f54d3beabd6f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parsedown/parsedown/zipball/6ca5690b0282544416897376abe056601847ddb3",
-                "reference": "6ca5690b0282544416897376abe056601847ddb3",
+                "url": "https://api.github.com/repos/parsedown/parsedown/zipball/96baaad00f71ba04d76e45b4620f54d3beabd6f7",
+                "reference": "96baaad00f71ba04d76e45b4620f54d3beabd6f7",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": ">=5.3.0"
+                "php": ">=7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8|^5.7|^6.5|^7.5|^8.5|^9.6"
+                "phpunit/phpunit": "^7.5|^8.5|^9.6"
             },
             "type": "library",
             "autoload": {
@@ -602,31 +603,20 @@
                 {
                     "name": "Emanuil Rusev",
                     "email": "hello@erusev.com",
-                    "homepage": "https://erusev.com"
-                },
-                {
-                    "name": "Aidan Woods",
-                    "email": "aidantwoods@gmail.com",
-                    "homepage": "https://aidanwoods.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Damien Regad",
-                    "email": "dregad@mantisbt.org",
-                    "role": "Fork Maintainer"
+                    "homepage": "http://erusev.com"
                 }
             ],
             "description": "Parser for Markdown.",
-            "homepage": "https://parsedown.org",
+            "homepage": "http://parsedown.org",
             "keywords": [
                 "markdown",
                 "parser"
             ],
             "support": {
                 "issues": "https://github.com/parsedown/parsedown/issues",
-                "source": "https://github.com/parsedown/parsedown/tree/1.7.5"
+                "source": "https://github.com/parsedown/parsedown/tree/1.8.0"
             },
-            "time": "2025-11-29T19:20:59+00:00"
+            "time": "2026-02-16T11:41:01+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -2892,6 +2882,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "adodb/adodb-php": 20,
         "dapphp/securimage": 20
     },
     "prefer-stable": false,

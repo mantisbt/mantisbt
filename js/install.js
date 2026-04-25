@@ -88,6 +88,8 @@ var inputs = $('input.reset').each(function () {
 	}
 });
 
+var db_type;
+
 /**
  * On Change event for database type selection list
  * Preset prefix, plugin prefix and suffix fields when changing db type
@@ -117,6 +119,25 @@ $('#db_type')
 		);
 
 		update_sample_table_names();
+
+		if ($(this).val() === 'sqlite3') {			
+			$('label[for=hostname]').html('Full path to the database file');
+			$('input#hostname').val('/var/database/'+$('input#database_name').val()+'.db');
+			$('input#db_username').closest('tr').hide();
+			$('input#db_password').closest('tr').hide();
+			$('input#database_name').closest('tr').hide();
+			$('input#admin_username').closest('tr').hide();
+			$('input#admin_password').closest('tr').hide();
+		} else if(db_type === 'sqlite3') {
+			$('label[for=hostname]').html('Hostname (for Database Server)');
+			$('input#hostname').val('localhost');
+			$('input#db_username').closest('tr').show();
+			$('input#db_password').closest('tr').show();
+			$('input#database_name').closest('tr').show();
+			$('input#admin_username').closest('tr').show();
+			$('input#admin_password').closest('tr').show();
+		}
+		db_type = $(this).val();
 	})
 	.trigger('change');
 

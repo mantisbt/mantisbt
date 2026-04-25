@@ -96,7 +96,7 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 					$c_content = db_prepare_binary_string( fread( fopen( $t_filename, 'rb' ), $t_row['filesize'] ) );
 
 					# write file to db
-					if( db_is_oracle() ) {
+					if( db_uses_blob() ) {
 						db_update_blob( $t_file_table, 'content', $c_content, "id=" . (int)$t_row['id'] );
 						$t_query = "UPDATE $t_file_table SET folder='' WHERE id = " . db_param();
 						$t_result2 = db_query( $t_query, array( (int)$t_row['id'] ) );
