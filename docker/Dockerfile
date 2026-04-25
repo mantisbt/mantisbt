@@ -24,4 +24,6 @@ RUN docker-php-ext-configure gd --with-jpeg --with-freetype \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+RUN git config --system --add safe.directory /srv
+
 WORKDIR /srv
