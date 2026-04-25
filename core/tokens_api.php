@@ -35,6 +35,12 @@ require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 
+/**
+ * Cache of tokens stored as database query result rows indexed by type and owner.
+ * @global array $g_cache_token
+ */
+$g_cache_token = [];
+
 # Set up global for token_purge_expired_once()
 $g_tokens_purged = false;
 
@@ -44,9 +50,21 @@ $g_tokens_purged = false;
  * @return boolean True if token exists
  */
 function token_exists( $p_token_id ) {
+	global $g_cache_token;
+
+	$c_token_id = (int)$p_token_id;
+
+	foreach( $g_cache_token as $t_cache_type ) {
+		foreach( $t_cache_type as $t_cache_owner ) {
+			if( isset( $t_cache_owner['id'] ) && $t_cache_owner['id'] == $c_token_id ) {
+				return true;
+			}
+		}
+	}
+
 	db_param_push();
 	$t_query = 'SELECT id FROM {tokens} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_token_id ), 1 );
+	$t_result = db_query( $t_query, array( $c_token_id ), 1 );
 
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
@@ -75,10 +93,18 @@ function token_ensure_exists( $p_token_id ) {
  * @return array|null Token row
  */
 function token_get( $p_type, $p_user_id = null ) {
+	global $g_cache_token;
+	
 	token_purge_expired_once();
 
 	$c_type = (int)$p_type;
 	$c_user_id = (int)( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
+
+	if( isset( $g_cache_token[$c_type][$c_user_id] ) ) {
+		return $g_cache_token[$c_type][$c_user_id]
+			? $g_cache_token[$c_type][$c_user_id]
+			: null;
+	}
 
 	db_param_push();
 	$t_query = 'SELECT * FROM {tokens} WHERE type=' . db_param() . ' AND owner=' . db_param();
@@ -86,9 +112,11 @@ function token_get( $p_type, $p_user_id = null ) {
 
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
+		$g_cache_token[$c_type][$c_user_id] = $t_row;
 		return $t_row;
 	}
 
+	$g_cache_token[$c_type][$c_user_id] = false;
 	return null;
 }
 
@@ -148,12 +176,26 @@ function token_set( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = nu
  * @return void
  */
 function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
-	token_ensure_exists( $p_token_id );
+	global $g_cache_token;
 
+	$c_token_id = (int)$p_token_id;
 	$c_token_expiry = time() + $p_expiry;
+
+	token_ensure_exists( $c_token_id  );
+
+	foreach( $g_cache_token as & $t_cache_type ) {
+		foreach( $t_cache_type as & $t_cache_owner ) {
+			if( isset( $t_cache_owner['id'] ) && $t_cache_owner['id'] == $c_token_id ) {
+				$t_cache_owner['expiry'] = $c_token_expiry;
+			}
+			unset( $t_cache_owner );
+		}
+		unset( $t_cache_type );
+	}
+
 	db_param_push();
 	$t_query = 'UPDATE {tokens} SET expiry=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( $c_token_expiry, $p_token_id ) );
+	db_query( $t_query, array( $c_token_expiry, $c_token_id ) );
 }
 
 /**
@@ -163,15 +205,20 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
  * @return void
  */
 function token_delete( $p_type, $p_user_id = null ) {
+	global $g_cache_token;
+
+	$c_type = (int)$p_type;
 	if( $p_user_id == null ) {
 		$c_user_id = auth_get_current_user_id();
 	} else {
 		$c_user_id = (int)$p_user_id;
 	}
 
+	unset( $g_cache_token[$c_type][$c_user_id] );
+
 	db_param_push();
 	$t_query = 'DELETE FROM {tokens} WHERE type=' . db_param() . ' AND owner=' . db_param();
-	db_query( $t_query, array( $p_type, $c_user_id ) );
+	db_query( $t_query, array( $c_type, $c_user_id ) );
 }
 
 /**
@@ -180,10 +227,17 @@ function token_delete( $p_type, $p_user_id = null ) {
  * @return void
  */
 function token_delete_by_owner( $p_user_id = null ) {
+	global $g_cache_token;
+
 	if( $p_user_id == null ) {
 		$c_user_id = auth_get_current_user_id();
 	} else {
 		$c_user_id = (int)$p_user_id;
+	}
+
+	foreach( $g_cache_token as & $t_cache_type ) {
+		unset( $t_cache_type[$c_user_id] );
+		unset( $t_cache_type );
 	}
 
 	db_param_push();
@@ -200,6 +254,8 @@ function token_delete_by_owner( $p_user_id = null ) {
  * @return int Token ID
  */
 function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
+	global $g_cache_token;
+
 	if( $p_user_id == null ) {
 		$c_user_id = auth_get_current_user_id();
 	} else {
@@ -209,6 +265,8 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
 	$c_type = (int)$p_type;
 	$c_timestamp = db_now();
 	$c_expiry = time() + $p_expiry;
+
+	$g_cache_token = [];
 
 	db_param_push();
 	$t_query = 'INSERT INTO {tokens}
@@ -226,15 +284,30 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
  * @return boolean always true.
  */
 function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
-	token_ensure_exists( $p_token_id );
+	global $g_cache_token;
+
 	$c_token_id = (int)$p_token_id;
+	$c_value = (string)$p_value;
 	$c_expiry = time() + $p_expiry;
+
+	token_ensure_exists( $c_token_id );
+
+	foreach( $g_cache_token as & $t_cache_type ) {
+		foreach( $t_cache_type as & $t_cache_owner ) {
+			if( isset( $t_cache_owner['id'] ) && $t_cache_owner['id'] == $c_token_id ) {
+				$t_cache_owner['value'] = $c_value;
+				$t_cache_owner['expiry'] = $c_expiry;
+			}
+			unset( $t_cache_owner );
+		}
+		unset( $t_cache_type );
+	}
 
 	db_param_push();
 	$t_query = 'UPDATE {tokens}
 					SET value=' . db_param() . ', expiry=' . db_param() . '
 					WHERE id=' . db_param();
-	db_query( $t_query, array( (string)$p_value, $c_expiry, $c_token_id ) );
+	db_query( $t_query, array( $c_value, $c_expiry, $c_token_id ) );
 
 	return true;
 }
@@ -245,9 +318,15 @@ function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
  * @return boolean always true.
  */
 function token_delete_by_type( $p_token_type ) {
+	global $g_cache_token;
+
+	$c_token_type = (int)$p_token_type;
+
+	unset( $g_cache_token[$c_token_type] );
+
 	db_param_push();
 	$t_query = 'DELETE FROM {tokens} WHERE type=' . db_param();
-	db_query( $t_query, array( $p_token_type ) );
+	db_query( $t_query, array( $c_token_type ) );
 
 	return true;
 }
@@ -258,7 +337,9 @@ function token_delete_by_type( $p_token_type ) {
  * @return boolean always true.
  */
 function token_purge_expired( $p_token_type = null ) {
-	global $g_tokens_purged;
+	global $g_tokens_purged, $g_cache_token;
+
+	$g_cache_token = [];
 
 	db_param_push();
 	$t_query = 'DELETE FROM {tokens} WHERE ' . db_param() . ' > expiry';
