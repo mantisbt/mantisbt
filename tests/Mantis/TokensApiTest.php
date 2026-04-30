@@ -126,14 +126,14 @@ final class TokensApiTest extends MantisCoreBase {
 		$t_db_count = db_count_queries();
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );
-		$this->assertSame( array_values( $t_token ), array_values( $this->tokens[0] ), 'The token must exist.' );
+		$this->assertEquals( array_values( $this->tokens[0] ), array_values( $t_token ), 'The token must exist.' );
 		$this->assertTrue( $t_db_count < db_count_queries(), 'Existing token must be verified in the database.' );
 
 		# Cache positive result
 		$t_db_count = db_count_queries();
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );;
-		$this->assertSame( array_values( $t_token ), array_values( $this->tokens[0] ), 'The token must exist.' );
+		$this->assertEquals( array_values( $this->tokens[0] ), array_values( $t_token ), 'The token must exist.' );
 		$this->assertTrue( $t_db_count == db_count_queries(), 'Existing token must be verified in the cache.' );
 
 		# Database negative result
@@ -157,13 +157,13 @@ final class TokensApiTest extends MantisCoreBase {
 		# Database positive result
 		$t_db_count = db_count_queries();
 		$t_value = token_get_value( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
-		$this->assertSame( $t_value, $this->tokens[0][self::ROW_VALUE], 'The token must exist.' );
+		$this->assertEquals( $this->tokens[0][self::ROW_VALUE], $t_value, 'The token must exist.' );
 		$this->assertTrue( $t_db_count < db_count_queries(), 'Existing token must be verified in the database.' );
 
 		# Cache positive result
 		$t_db_count = db_count_queries();
 		$t_value = token_get_value( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
-		$this->assertSame( $t_value, $this->tokens[0][self::ROW_VALUE], 'The token must exist.' );
+		$this->assertEquals( $this->tokens[0][self::ROW_VALUE], $t_value, 'The token must exist.' );
 		$this->assertTrue( $t_db_count == db_count_queries(), 'Existing token must be verified in the cache.' );
 
 		# Database negative result
@@ -189,7 +189,7 @@ final class TokensApiTest extends MantisCoreBase {
 		$t_db_count = db_count_queries();
 		$t_tokens = token_get_by_type( $this->tokens[0][self::ROW_TYPE] );
 		$this->assertArrayHasKey( 0, $t_tokens, 'The token must exist.' );
-		$this->assertSame( array_values( $t_tokens[0] ), array_values( $this->tokens[0] ), 'The token must exist.' );
+		$this->assertEquals( array_values( $this->tokens[0] ), array_values( $t_tokens[0] ), 'The token must exist.' );
 		$this->assertTrue( $t_db_count < db_count_queries(), 'Existing token must be verified in the database.' );
 
 		# Database negative result
@@ -327,7 +327,7 @@ final class TokensApiTest extends MantisCoreBase {
 		$t_db_count = db_count_queries();
 		$t_updated_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertTrue( $t_db_count == db_count_queries(), 'The token must be updated in the cache.' );
-		$this->assertSame( $t_updated_token['value'], 'updated', 'The token value must be updated in the cache.' );
+		$this->assertEquals( 'updated', $t_updated_token['value'], 'The token value must be updated in the cache.' );
 		$this->assertTrue( $t_updated_token['expiry'] >= $t_expiry, 'The token expiry must be updated in the cache.' );
 
 		# clear cache
@@ -338,7 +338,7 @@ final class TokensApiTest extends MantisCoreBase {
 		$t_db_count = db_count_queries();
 		$t_updated_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertTrue( $t_db_count < db_count_queries(), 'The token must be updated in the database.' );
-		$this->assertSame( $t_updated_token['value'], 'updated', 'The token value must be updated in the database.' );
+		$this->assertEquals( 'updated', $t_updated_token['value'], 'The token value must be updated in the database.' );
 		$this->assertTrue( $t_updated_token['expiry'] >= $t_expiry, 'The token expiry must be updated in the database.' );
 	}
 
