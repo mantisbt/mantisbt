@@ -35,6 +35,8 @@ require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Cache of tokens stored as database query result rows indexed by type and owner.
  * @global array $g_cache_token
@@ -76,14 +78,14 @@ function token_exists( $p_token_id ) {
 /**
  * Make sure a token exists.
  * @param integer $p_token_id A token identifier.
- * @return boolean True if token exists
+ * @return void
+ *
+ * @throws ClientException
  */
 function token_ensure_exists( $p_token_id ) {
 	if( !token_exists( $p_token_id ) ) {
-		trigger_error( ERROR_TOKEN_NOT_FOUND, ERROR );
+		throw new ClientException( "Token could not be found: '$p_token_id'", ERROR_TOKEN_NOT_FOUND );
 	}
-
-	return true;
 }
 
 /**
@@ -98,12 +100,10 @@ function token_get( $p_type, $p_user_id = null ) {
 	token_purge_expired_once();
 
 	$c_type = (int)$p_type;
-	$c_user_id = (int)( $p_user_id == null ? auth_get_current_user_id() : $p_user_id );
+	$c_user_id = (int)( is_null( $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
 	if( isset( $g_cache_token[$c_type][$c_user_id] ) ) {
-		return $g_cache_token[$c_type][$c_user_id]
-			? $g_cache_token[$c_type][$c_user_id]
-			: null;
+		return $g_cache_token[$c_type][$c_user_id] ?: null;
 	}
 
 	db_param_push();
@@ -144,7 +144,7 @@ function token_get_by_type( int $p_type ) {
 function token_get_value( $p_type, $p_user_id = null ) {
 	$t_token = token_get( $p_type, $p_user_id );
 
-	if( null !== $t_token ) {
+	if( !is_null( $t_token ) ) {
 		return $t_token['value'];
 	}
 
@@ -161,7 +161,7 @@ function token_get_value( $p_type, $p_user_id = null ) {
  */
 function token_set( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
 	$t_token = token_get( $p_type, $p_user_id );
-	if( $t_token === null ) {
+	if( is_null( $t_token ) ) {
 		return token_create( $p_type, $p_value, $p_expiry, $p_user_id );
 	}
 
@@ -174,6 +174,8 @@ function token_set( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = nu
  * @param integer $p_token_id A token identifier.
  * @param integer $p_expiry   Token expiration in seconds.
  * @return void
+ *
+ * @throws ClientException
  */
 function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 	global $g_cache_token;
@@ -188,10 +190,10 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 			if( isset( $t_cache_owner['id'] ) && $t_cache_owner['id'] == $c_token_id ) {
 				$t_cache_owner['expiry'] = $c_token_expiry;
 			}
-			unset( $t_cache_owner );
 		}
-		unset( $t_cache_type );
+		unset( $t_cache_owner );
 	}
+	unset( $t_cache_type );
 
 	db_param_push();
 	$t_query = 'UPDATE {tokens} SET expiry=' . db_param() . ' WHERE id=' . db_param();
@@ -208,11 +210,7 @@ function token_delete( $p_type, $p_user_id = null ) {
 	global $g_cache_token;
 
 	$c_type = (int)$p_type;
-	if( $p_user_id == null ) {
-		$c_user_id = auth_get_current_user_id();
-	} else {
-		$c_user_id = (int)$p_user_id;
-	}
+	$c_user_id = (int)( is_null( $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
 	unset( $g_cache_token[$c_type][$c_user_id] );
 
@@ -229,16 +227,12 @@ function token_delete( $p_type, $p_user_id = null ) {
 function token_delete_by_owner( $p_user_id = null ) {
 	global $g_cache_token;
 
-	if( $p_user_id == null ) {
-		$c_user_id = auth_get_current_user_id();
-	} else {
-		$c_user_id = (int)$p_user_id;
-	}
+	$c_user_id = (int)( is_null( $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
 	foreach( $g_cache_token as & $t_cache_type ) {
 		unset( $t_cache_type[$c_user_id] );
-		unset( $t_cache_type );
 	}
+	unset( $t_cache_type );
 
 	db_param_push();
 	$t_query = 'DELETE FROM {tokens} WHERE owner=' . db_param();
@@ -256,11 +250,7 @@ function token_delete_by_owner( $p_user_id = null ) {
 function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
 	global $g_cache_token;
 
-	if( $p_user_id == null ) {
-		$c_user_id = auth_get_current_user_id();
-	} else {
-		$c_user_id = (int)$p_user_id;
-	}
+	$c_user_id = (int)( is_null( $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
 	$c_type = (int)$p_type;
 	$c_timestamp = db_now();
@@ -282,6 +272,8 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
  * @param string  $p_value    The new token value.
  * @param integer $p_expiry   Token expiration in seconds.
  * @return boolean always true.
+ *
+ * @throws ClientException
  */
 function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 	global $g_cache_token;
@@ -298,10 +290,10 @@ function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 				$t_cache_owner['value'] = $c_value;
 				$t_cache_owner['expiry'] = $c_expiry;
 			}
-			unset( $t_cache_owner );
 		}
-		unset( $t_cache_type );
+		unset( $t_cache_owner );
 	}
+	unset( $t_cache_type );
 
 	db_param_push();
 	$t_query = 'UPDATE {tokens}
