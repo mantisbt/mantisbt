@@ -71,7 +71,7 @@ final class TokensApiTest extends MantisCoreBase {
 			db_query( 'INSERT INTO {tokens} ( owner, type, value, timestamp, expiry ) VALUES ( '
 				. db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )'
 				, $t_token );
-			$t_token = array_merge( [ db_insert_id( 'tokens' ) ], $t_token );
+			$t_token = array_merge( [ db_insert_id( db_get_table( 'tokens' ) ) ], $t_token );
 		}
 		unset( $t_token );
 	}
