@@ -1,0 +1,39 @@
+# Scenario: Create Test For New Controller
+
+## Scope
+
+Use this when adding tests for a newly introduced controller/endpoint handler.
+
+## Primary Locations
+
+- `tests/` (select suite closest to controller stack)
+- Controller route/handler file (for behavior contract)
+- Command/helper code invoked by the controller (for expected side effects)
+
+## Common Questions To Ask First
+
+1. What exact controller behavior is the contract (status, payload shape, side effects)?
+2. Which test suite should host this test (REST/API/integration/unit)?
+3. What auth/permission level is required for this endpoint?
+4. What are required query/path/body fields, and which are optional?
+5. Which response codes must be validated for happy path and failures?
+6. Do conditional request semantics apply (`If-Match`, `If-None-Match`, ETag)?
+7. Are there boundary constraints (empty payload, invalid id, overlong text, bad enum)?
+8. Are files/attachments involved (base64 payload conversion)?
+9. Which events/notifications/DB-visible side effects should be asserted?
+10. What fixtures are required to keep test deterministic and isolated?
+
+## Test Authoring Checklist
+
+1. Start with one happy-path test proving the intended behavior.
+2. Add mandatory negative cases: invalid input, unauthorized access, missing required fields.
+3. Assert HTTP status, response structure, and key field values (not only status).
+4. Validate security-sensitive behaviors (access checks, private data leakage prevention).
+5. Keep setup explicit and deterministic; avoid hidden coupling with unrelated fixtures.
+6. Add regression tests for tricky edge cases discovered during implementation.
+
+## Guardrails
+
+- Do not stop at positive-only tests.
+- Keep tests close to observable controller behavior; avoid over-mocking core logic.
+- If expected behavior is unclear, ask for acceptance criteria before writing large test sets.

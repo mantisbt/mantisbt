@@ -1,0 +1,52 @@
+---
+description: Scenario playbooks for common implementation tasks
+alwaysApply: true
+---
+
+# Cursor Adapter: scenarios/create-new-endpoint.md
+
+Source: `scenarios/create-new-endpoint.md`
+
+## Activation
+
+Use this rule only when the current user request clearly matches this scenario. If it does not match, ignore this rule for the current task.
+
+# Scenario: Create New Endpoint (REST)
+
+## Scope
+
+Use this when adding a new public REST endpoint under `api/rest/restcore`.
+
+## Primary Locations
+
+- `api/rest/restcore/*_rest.php` (route group + handler function)
+- `core/commands/*Command.php` (business logic via command pattern)
+- Existing API helpers in `core/` and `api/soap/` bridge functions (`mci_*`, `mc_*`) where relevant
+
+## Common Questions To Ask First
+
+1. Which resource group should own this endpoint (`issues`, `projects`, `users`, etc.)?
+2. Is this endpoint public REST, or should it be private under `/internal`?
+3. Which HTTP method and status codes are expected (`200`, `201`, `204`, `400`, `404`, `412`)?
+4. What is required in `query` vs `payload`?
+5. Which command should execute the behavior, and does one already exist?
+6. What access threshold must be enforced (global/project-level)?
+7. Should ETag or conditional request handling be supported (`If-Match`, `If-None-Match`)?
+8. Do we need response expansion/full object return or only ids?
+9. Are file uploads/base64 payloads involved (`files_base64_to_temp`)?
+10. What negative scenarios must be tested (missing fields, invalid ids, access denied)?
+
+## Implementation Pattern
+
+1. Register routes in the relevant group in `api/rest/restcore/*_rest.php` (keep both with and without trailing slash when existing style does).
+2. Add handler function `rest_<resource>_<action>(Request, Response, args)`.
+3. Build `$t_data` with `query`, `payload`, and/or `options`.
+4. Instantiate and execute command: `new XxxCommand( $t_data )->execute()`.
+5. Return explicit HTTP status and JSON body consistent with neighboring endpoints.
+6. Reuse existing parsing and validation helpers instead of inline ad-hoc validation.
+
+## Guardrails
+
+- Do not add new SOAP endpoints.
+- Keep REST handlers thin; put validation/business logic into commands.
+- Avoid direct DB queries in REST handlers unless this is already the established pattern for that area.

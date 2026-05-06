@@ -1,0 +1,10 @@
+---
+description: Report MD rules used after each reply
+alwaysApply: true
+---
+
+# Report Used MD Rules
+
+After each assistant reply, include a concise follow-up line listing every `.md` rule file that was used to generate that response.
+
+If no `.md` rule files were used, explicitly state: `Used .md rules: none`.

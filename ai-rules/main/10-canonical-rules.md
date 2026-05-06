@@ -1,0 +1,73 @@
+# Canonical AI Rules (Skeleton)
+
+## Purpose
+
+This document defines tool-agnostic AI engineering rules for this repository.
+Cursor rules and any other AI tool instructions should be derived from this file.
+
+## Rule Priority
+
+1. Security and data safety
+2. Architectural boundaries
+3. Correctness and tests
+4. Maintainability and conventions
+
+## Global Rules (Always Apply)
+
+### Safety
+
+- Do not expose credentials, tokens, or private user data.
+- Do not run destructive operations without explicit approval.
+- Prefer minimal, reversible changes.
+
+### Working Tree Hygiene
+
+- Never revert unrelated local changes.
+- Do not modify generated/vendor files unless explicitly requested.
+- Keep scope aligned with the current request.
+
+### Delivery Expectations
+
+- Explain what changed and why.
+- Reference modified file paths.
+- Provide verification steps (tests/checks run or still required).
+
+## Stack-Scoped Rules (Pattern-Based)
+
+### PHP Application (`**/*.php`)
+
+- Follow existing procedural and API style used in this codebase.
+- Reuse core APIs from `core/` rather than duplicating logic.
+- Preserve backward compatibility unless explicitly approved.
+
+### Frontend Assets (`js/**`, `css/**`)
+
+- Prefer existing patterns and utilities in repository assets.
+- Keep UI changes accessible and consistent with current behavior.
+
+### Tests (`tests/**`)
+
+- Add or update tests close to changed behavior.
+- Keep fixtures deterministic.
+
+### Plugins (`plugins/**`)
+
+- Avoid coupling plugin-specific logic into core.
+- Respect extension boundaries and hooks.
+
+## Rule Template For New Entries
+
+Use this format for each new rule:
+
+- Name:
+- Scope: Global | Pattern-based
+- Applies to:
+- Required behavior:
+- Anti-patterns:
+- Validation:
+
+## Open Questions
+
+- Which directories should be treated as strict no-edit areas by default?
+- What compatibility guarantees are required for plugin APIs?
+- Which checks are mandatory before merge in this project?
