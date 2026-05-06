@@ -1,0 +1,42 @@
+# Main Entities And Terms (Skeleton)
+
+## Purpose
+
+Defines shared vocabulary for architecture and implementation discussions.
+
+## Domain Entities
+
+- Issue (Bug) - Primary tracked work item with status, priority, reporter, and assignee.
+- Project - Top-level container for issues, users, versions, and categories.
+- User - Authenticated actor with permissions, preferences, and assignments.
+- Issue Note - Comment or update attached to an issue timeline.
+- Category - Classification label for grouping project issues.
+- Tag - Cross-cutting label applied to issues.
+- Version - Planned/fixed-in release marker for issues.
+- Relationship - Link between issues (duplicate, related, parent/child, etc.).
+- Attachment - File linked to issues or notes.
+
+## Access And Governance Terms
+
+- Role/Access Level - Permission tier controlling available operations.
+- Workflow - Allowed status transitions and related business rules.
+- Visibility - Public/private scope constraints for issues and notes.
+- Notification - Event-based messages for issue lifecycle changes.
+
+## Integration Terms
+
+- REST API - HTTP interface for programmatic access.
+- SOAP API - Legacy service interface used by existing integrations.
+- Plugin Hook - Extension point for custom behavior without core modification.
+
+## Development Terms
+
+- Entry Point Script - Root-level endpoint script handling a user action/page.
+- Core API - Internal function set in `core/` used across modules.
+- Fixture - Deterministic test setup data.
+- Migration/Upgrade Step - Schema or compatibility evolution step across versions.
+
+## Open Questions
+
+- Should "Issue" and "Bug" be treated as strict synonyms in docs/rules?
+- Which terms require exact naming in commit messages and PR descriptions?

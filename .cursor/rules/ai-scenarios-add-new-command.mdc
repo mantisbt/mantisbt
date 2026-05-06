@@ -1,0 +1,56 @@
+---
+description: Scenario playbooks for common implementation tasks
+alwaysApply: true
+---
+
+# Cursor Adapter: scenarios/add-new-command.md
+
+Source: `scenarios/add-new-command.md`
+
+## Activation
+
+Use this rule only when the current user request clearly matches this scenario. If it does not match, ignore this rule for the current task.
+
+# Scenario: Add New Command
+
+## Scope
+
+Use this when introducing a new command in `core/commands`.
+
+## Primary Locations
+
+- `core/commands/Command.php` (base contract)
+- `core/commands/*Command.php` (new concrete command)
+- `api/rest/restcore/*_rest.php` or UI/action pages that call the command
+
+## Observed Command Structure
+
+- Class extends `Command`.
+- Implements `validate()` and `process()`.
+- Receives normalized data arrays:
+  - `query`
+  - `payload`
+  - `options`
+- Command is executed through `execute()` in base class (auth + defaults + validate + process).
+
+## Common Questions For Command Generation
+
+1. What is the exact command intent (single responsibility)?
+2. What are required fields in `query`, `payload`, and `options`?
+3. Which validation belongs in `validate()` vs transformation in `process()`?
+4. Which permission checks are required (global/project threshold)?
+5. Which existing APIs in `core/*_api.php` should be reused?
+6. What error codes/messages should be thrown for invalid input?
+7. Should command return an id, full object, list, or no-content signal?
+8. Which side effects are required (events, notifications, logging, history)?
+9. Which existing command is closest and should be used as implementation reference?
+10. What negative tests are mandatory (bad ids, empty fields, forbidden access)?
+
+## Command Authoring Checklist
+
+1. Create `core/commands/<Name>Command.php` extending `Command`.
+2. In `validate()`, parse and validate all inputs, resolve defaults, and enforce permissions.
+3. In `process()`, execute only the core action and return structured result array.
+4. Throw `ClientException` for client-visible invalid input/authorization errors.
+5. Trigger needed events/hooks consistently with neighboring commands.
+6. Wire the command into caller(s) (REST handler, page action, other internal flow).

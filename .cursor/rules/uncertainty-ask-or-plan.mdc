@@ -1,0 +1,15 @@
+---
+description: Handle uncertainty by clarifying or planning first
+alwaysApply: true
+---
+
+# Clarify Before Coding
+
+If there is meaningful uncertainty about requirements, constraints, or expected behavior, do not implement immediately.
+
+- Ask focused clarifying question(s) first, or
+- Propose a short implementation plan and request confirmation.
+
+Only start implementation after the uncertainty is resolved or the plan is approved.
+
+When uncertainty appears during implementation, pause and re-confirm before continuing.

@@ -1,0 +1,10 @@
+# Add Rules
+
+Use this checklist when introducing new code, files, or behavior.
+
+1. Clarify requirements and acceptance criteria before implementation.
+2. Prefer minimal changes that fit existing project patterns.
+3. Reuse existing utilities/components before creating new abstractions.
+4. Add or update tests for new behavior.
+5. Document new configuration, endpoints, or workflows when needed.
+6. Validate compatibility with current APIs and user-facing behavior.

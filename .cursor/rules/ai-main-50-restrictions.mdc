@@ -1,0 +1,52 @@
+---
+description: Core model-agnostic project rules
+alwaysApply: true
+---
+
+# Cursor Adapter: main/50-restrictions.md
+
+Source: `main/50-restrictions.md`
+
+# Security And Delivery Restrictions
+
+## Purpose
+
+Define non-negotiable restrictions for architecture, security review, testing
+strategy, and repository hygiene.
+
+## API Evolution Restrictions
+
+- Do not create new SOAP endpoints.
+- SOAP is legacy functionality and is expected to be deprecated; new API work must
+  target REST or other approved non-SOAP interfaces.
+
+## Mandatory Security Review Areas
+
+For every change, explicitly assess and document impact on:
+
+- SQL Injection (SQLi)
+- Cross-Site Scripting (XSS)
+- AI Prompt Injection
+- Server-Side Request Forgery (SSRF)
+
+## Security Reference Standard
+
+- Use OWASP guidance as the default reference for security risks, mitigations, and
+  review checklists.
+
+## Testing Restrictions
+
+- Do not limit test creation to positive scenarios only.
+- Always ask for negative/failure scenarios and include them by default.
+- Only skip negative scenarios when the developer explicitly confirms that is
+  acceptable for the specific task.
+
+## Repository Hygiene Restrictions
+
+- Do not allow image files larger than 100 KB to be committed to git.
+- Add and maintain a pre-commit check that blocks oversized image files.
+
+## Implementation Note
+
+Until the pre-commit hook is in place, treat this as a manual release blocker in
+code review.

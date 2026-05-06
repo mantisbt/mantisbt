@@ -1,0 +1,19 @@
+---
+description: Action-specific add/remove/refactor rules
+alwaysApply: true
+---
+
+# Cursor Adapter: actions/refactor.md
+
+Source: `actions/refactor.md`
+
+# Refactor Rules
+
+Use this checklist for structural changes that should preserve behavior.
+
+1. Define what behavior must remain unchanged before refactoring.
+2. Make incremental, reviewable steps instead of one large rewrite.
+3. Preserve public interfaces unless change is explicitly requested.
+4. Keep or increase test coverage around touched behavior.
+5. Run targeted validation after each significant refactor step.
+6. Stop and clarify if uncertainty appears about expected behavior.
