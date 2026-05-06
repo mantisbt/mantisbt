@@ -2305,9 +2305,6 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 	# log new monitoring action
 	history_log_event_special( $c_bug_id, BUG_MONITOR, $c_user_id );
 
-	# updated the last_updated date
-	bug_update_date( $p_bug_id );
-
 	email_monitor_added( $p_bug_id, $p_user_id );
 
 	return true;
@@ -2396,9 +2393,6 @@ function bug_unmonitor( $p_bug_id, $p_user_id ) {
 
 	# log new un-monitor action
 	history_log_event_special( $p_bug_id, BUG_UNMONITOR, (int)$p_user_id );
-
-	# updated the last_updated date
-	bug_update_date( $p_bug_id );
 
 	return true;
 }
