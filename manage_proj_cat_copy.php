@@ -72,7 +72,7 @@ foreach ( $t_rows as $t_row ) {
 	$t_name = $t_row['name'];
 
 	if( category_is_unique( $t_dst_project_id, $t_name ) ) {
-		category_add( $t_dst_project_id, $t_name );
+		category_add( $t_dst_project_id, $t_name, $t_row['description'] );
 	}
 }
 

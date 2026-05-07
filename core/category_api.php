@@ -176,12 +176,13 @@ function category_ensure_can_remove( $p_category_id ) {
 
 /**
  * Add a new category to the project
- * @param integer $p_project_id Project identifier.
- * @param string  $p_name       Category Name.
+ * @param integer $p_project_id  Project identifier.
+ * @param string  $p_name        Category Name.
+ * @param string  $p_description Category description.
  * @return integer Category ID
  * @access public
  */
-function category_add( $p_project_id, $p_name ) {
+function category_add( $p_project_id, $p_name, $p_description = '' ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -190,9 +191,9 @@ function category_add( $p_project_id, $p_name ) {
 	category_ensure_unique( $p_project_id, $p_name );
 
 	db_param_push();
-	$t_query = 'INSERT INTO {category} ( project_id, name )
-				  VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $p_project_id, $p_name ) );
+	$t_query = 'INSERT INTO {category} ( project_id, name, description )
+				  VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param(). ' )';
+	db_query( $t_query, array( $p_project_id, $p_name, $p_description ) );
 
 	# db_query() errors on failure so:
 	return db_insert_id( db_get_table( 'category' ) );
@@ -201,16 +202,18 @@ function category_add( $p_project_id, $p_name ) {
 /**
  * Update the name and user associated with the category.
  *
- * @param int      $p_category_id Category identifier.
- * @param string   $p_name        Category Name.
- * @param int      $p_assigned_to User ID that category is assigned to.
- * @param int|null $p_status      Optional category status (see CATEGORY_STATUS_* constants)
- *                                or null to leave status unchanged.
+ * @param int         $p_category_id Category identifier.
+ * @param string      $p_name        Category Name.
+ * @param int         $p_assigned_to User ID that category is assigned to.
+ * @param int|null    $p_status      Optional category status (see CATEGORY_STATUS_* constants)
+ *                                   or null to leave status unchanged.
+ * @param string|null $p_description Optional category description
+ *                                   or null to leave it unchanged.
  *
  * @return void
  * @access public
  */
-function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = null ) {
+function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = null, $p_description = null ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -232,24 +235,18 @@ function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = n
 		}
 	}
 
-	# Disabling category is not authorized if it is used as default
-	$t_default_category_id = config_get_global( 'default_category_for_moves', null );
-	if( $p_category_id == $t_default_category_id
-		|| config_is_defined( 'default_category_for_moves', $p_category_id )
-	) {
-		error_parameters( $t_old_category['name'] );
-		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
-	}
-
 	# Keep existing status
 	if( $p_status === null ) {
 		$p_status = $t_old_category['status'];
+	} elseif( !$p_status ) {
+		# Disabling category is not authorized if it is used as default
+		category_ensure_can_remove( $p_category_id );
 	}
 
 	db_param_push();
-	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . ', status=' . db_param() .'
+	$t_query = 'UPDATE {category} SET name=' . db_param() . ', description=' . db_param() . ', user_id=' . db_param() . ', status=' . db_param() .'
 				  WHERE id=' . db_param();
-	db_query( $t_query, array( $p_name, $p_assigned_to , $p_status, $p_category_id ) );
+	db_query( $t_query, array( $p_name, $p_description ?? $t_old_category['description'], $p_assigned_to , $p_status, $p_category_id ) );
 
 	# Add bug history entries if we update the category's name
 	if( $t_old_category['name'] != $p_name ) {

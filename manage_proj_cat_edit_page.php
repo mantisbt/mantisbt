@@ -73,6 +73,10 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 	<div class="space-10"></div>
 	<div id="manage-proj-category-update-div" class="form-container">
 	<form id="manage-proj-category-update-form" method="post" action="manage_proj_cat_update.php">
+	<fieldset>
+	<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
+
+	<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>">
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
@@ -84,42 +88,44 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
-		<fieldset>
-			<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
-			<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'category' ) ?>
+					<label for="proj-category-name"><?php echo lang_get( 'category' ) ?></label>
 				</td>
 				<td>
-					<input type="text" id="proj-category-name" name="name" class="input-sm" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" />
+					<input <?php echo helper_get_tab_index() ?> type="text" id="proj-category-name" name="name" class="input-sm" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>">
 				</td>
 			</tr>
 			<tr>
 				<td class="category">
-					<label for="category-status">
-						<?php echo lang_get( 'enabled' ) ?>
-					</label>
+					<label for="proj-category-description"><?php echo lang_get( 'description' ) ?></label>
 				</td>
 				<td>
-					<input type="checkbox" id="proj-category-status" name="status" class="ace"
-						<?php check_checked( $t_status, CATEGORY_STATUS_ENABLED ); ?>
-					/>
+					<textarea <?php echo helper_get_tab_index() ?> class="form-control" id="proj-category-description" name="description" cols="70" rows="5"><?php echo string_textarea( $t_row['description'] ) ?></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="category">
+					<label for="proj-category-status"><?php echo lang_get( 'enabled' ) ?></label>
+				</td>
+				<td>
+					<input <?php echo helper_get_tab_index() ?> type="checkbox" id="proj-category-status" name="status" class="ace"
+						<?php check_checked( $t_status, CATEGORY_STATUS_ENABLED ); ?>>
 					<span class="lbl"></span>
 				</td>
 			</tr>
 			<tr>
 				<td class="category">
-					<?php echo lang_get( 'assigned_to' ) ?>
+					<label for="proj-category-assigned-to"><?php echo lang_get( 'assigned_to' ) ?></label>
 				</td>
 				<td>
-					<select id="proj-category-assigned-to" name="assigned_to" class="input-sm">
-						<option value="0"></option>
+					<select <?php echo helper_get_tab_index() ?> id="proj-category-assigned-to" name="assigned_to" class="input-sm">
+						<option value="0">&nbsp;</option>
 						<?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
+
 					</select>
 				</td>
 			</tr>
-		</fieldset>
 		</table>
 		</div>
 		</div>
@@ -130,6 +136,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 			</button>
 		</div>
 	</div>
+	</fieldset>
 	</form>
 	</div>
 </div>
