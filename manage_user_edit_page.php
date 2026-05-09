@@ -92,6 +92,7 @@ if( !$t_user ) {
 access_ensure_global_level( $t_user['access_level'] );
 
 $t_ldap = ( LDAP == config_get_global( 'login_method' ) );
+$t_date_format = config_get( 'normal_date_format' );
 
 # User action buttons: RESET/UNLOCK, IMPERSONATE and DELETE
 $t_reset = $t_user['id'] != auth_get_current_user_id()
@@ -267,6 +268,26 @@ print_manage_menu( 'manage_user_page.php' );
 								/>
 								<span class="lbl"></span>
 							</label>
+						</td>
+					</tr>
+
+					<!-- Date Created -->
+					<tr>
+						<td class="category">
+							<?php echo lang_get( 'date_created' ) ?>
+						</td>
+						<td>
+							<?php echo date( $t_date_format, $t_user['date_created'] ); ?>
+						</td>
+					</tr>
+
+					<!-- Last Visit -->
+					<tr>
+						<td class="category">
+							<?php echo lang_get( 'last_visit' ) ?>
+						</td>
+						<td>
+							<?php echo date( $t_date_format, $t_user['last_visit'] ); ?>
 						</td>
 					</tr>
 
