@@ -877,7 +877,7 @@ if( 3 == $t_install_state ) {
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="table-responsive">
-<table class="table table-bordered table-condensed" style="table-layout:fixed">
+<table class="table table-bordered table-condensed">
 <?php if( !$f_log_queries ) {?>
 <tr>
 	<td>

@@ -88,12 +88,12 @@ if( $t_plugins->countInstalled() ) {
 							<table class="table table-striped table-bordered table-condensed table-hover">
 
 								<colgroup>
-									<col style="width:20%" />
-									<col style="width:35%" />
-									<col style="width:20%" />
-									<col style="width:7%" />
-									<col style="width:8%" />
-									<col style="width:10%" />
+									<col class="col-md-3">
+									<col>
+									<col class="col-md-2">
+									<col class="col-md-1">
+									<col class="col-md-1">
+									<col class="col-md-1">
 								</colgroup>
 
 								<thead>
@@ -101,9 +101,9 @@ if( $t_plugins->countInstalled() ) {
 										<th><?php echo lang_get( 'plugin' ) ?></th>
 										<th><?php echo lang_get( 'plugin_description' ) ?></th>
 										<th><?php echo lang_get( 'plugin_depends' ) ?></th>
-										<th><?php echo lang_get( 'plugin_priority' ) ?></th>
-										<th><?php echo lang_get( 'plugin_protected' ) ?></th>
-										<th><?php echo lang_get( 'plugin_actions' ) ?></th>
+										<th class="center"><?php echo lang_get( 'plugin_priority' ) ?></th>
+										<th class="center"><?php echo lang_get( 'plugin_protected' ) ?></th>
+										<th class="center"><?php echo lang_get( 'plugin_actions' ) ?></th>
 									</tr>
 								</thead>
 
@@ -114,7 +114,7 @@ if( $t_plugins->countInstalled() ) {
 					</div>
 
 					<div class="widget-toolbox padding-8 clearfix">
-						<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'update' ) ?>"/>
+						<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'update' ) ?>">
 					</div>
 				</fieldset>
 			</div>
@@ -150,15 +150,15 @@ if( $t_plugins->countInvalid() ) {
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<colgroup>
+							<col class="col-md-3">
 							<col>
-							<col>
-							<col style="width:10%">
+							<col class="col-md-1">
 						</colgroup>
 						<thead>
 						<tr>
 							<th><?php echo lang_get( 'plugin' ) ?></th>
 							<th><?php echo lang_get( 'plugin_problem_description' ) ?></th>
-							<th><?php echo lang_get( 'plugin_actions' ) ?></th>
+							<th class="center"><?php echo lang_get( 'plugin_actions' ) ?></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -192,10 +192,10 @@ if( $t_plugins->countAvailable() ) {
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered table-condensed table-hover">
 					<colgroup>
-						<col style="width:25%" />
-						<col style="width:45%" />
-						<col style="width:20%" />
-						<col style="width:10%" />
+						<col class="col-md-3">
+						<col>
+						<col class="col-md-2">
+						<col class="col-md-1">
 					</colgroup>
 
 					<thead>
@@ -203,7 +203,7 @@ if( $t_plugins->countAvailable() ) {
 							<th><?php echo lang_get( 'plugin' ) ?></th>
 							<th><?php echo lang_get( 'plugin_description' ) ?></th>
 							<th><?php echo lang_get( 'plugin_depends' ) ?></th>
-							<th><?php echo lang_get( 'plugin_actions' ) ?></th>
+							<th class="center"><?php echo lang_get( 'plugin_actions' ) ?></th>
 						</tr>
 					</thead>
 
@@ -528,8 +528,6 @@ class InstalledPlugin extends AvailablePlugin {
 		if( $this->basename == 'MantisCore' ) {
 			echo "<td>&nbsp;</td>\n<td>&nbsp;</td>\n";
 		} else {
-			echo '<input type="hidden" name="change_', $this->basename, '" value="1"/>';
-
 			# Priority
 			echo '<td class="center">',
 				'<select name="priority_' . $this->basename . '" class="input-sm">';
@@ -538,10 +536,11 @@ class InstalledPlugin extends AvailablePlugin {
 
 			# Protected
 			echo '<td class="center">';
+			echo '<input type="hidden" name="change_', $this->basename, '" value="1">';
 			echo '<label>',
 				'<input type="checkbox" class="ace" name="protected_' . $this->basename . '"';
 			check_checked( $this->protected );
-			echo ' />',
+			echo '>',
 				'<span class="lbl"></span>',
 				'</label>';
 			echo '</td>', "\n";
