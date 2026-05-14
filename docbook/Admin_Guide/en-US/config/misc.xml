@@ -615,6 +615,19 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_due_date_filter_enum_string</term>
+			<listitem>
+				<para>Defines the available options to filter Issues by Due Date.
+					In addition to the expected date <emphasis>range</emphasis>,
+					the following "pseudo-dates" can be used:
+					<emphasis>overdue</emphasis>,
+					<emphasis>today</emphasis>,
+					<emphasis>next week</emphasis>,
+					<emphasis>next month</emphasis>.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_custom_field_type_enum_string</term>
 			<listitem>
 				<para>TODO</para>

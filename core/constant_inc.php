@@ -137,6 +137,13 @@ define( 'ETA_UNDER_ONE_WEEK', 40 );
 define( 'ETA_UNDER_ONE_MONTH', 50 );
 define( 'ETA_OVER_ONE_MONTH', 60 );
 
+# Due Date Filters
+define( 'DUE_DATE_RANGE', 10 );
+define( 'DUE_DATE_OVERDUE', 20 );
+define( 'DUE_DATE_TODAY', 30 );
+define( 'DUE_DATE_NEXT_WEEK', 40 );
+define( 'DUE_DATE_NEXT_MONTH', 50 );
+
 # Category status
 define( 'CATEGORY_STATUS_DISABLED', 0 );
 define( 'CATEGORY_STATUS_ENABLED', 1 );

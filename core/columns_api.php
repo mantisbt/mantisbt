@@ -1678,24 +1678,29 @@ function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	if( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) &&
 		!date_is_null( $p_bug->due_date )
 	) {
-		$t_level = bug_overdue_level( $p_bug->id );
-		if( $t_level === 0 ) {
-			$t_icon = 'fa-times-circle-o';
-			$t_overdue_text_hover = sprintf(
-				lang_get( 'overdue_since' ),
-				date( config_get( 'short_date_format' ), $p_bug->due_date )
-			);
+		if( bug_is_resolved( $p_bug->id ) ) {
+			$t_icon = 'fa-check-circle';
+			$t_overdue_text_hover = lang_get( 'resolved' );
 		} else {
-			$t_icon = $t_level === false ? 'fa-info-circle' : 'fa-warning';
-
-			$t_duration = $p_bug->due_date - db_now();
-			if( $t_duration <= SECONDS_PER_DAY ) {
-				$t_overdue_text_hover = lang_get( 'overdue_one_day' );
-			} else {
+			$t_level = bug_overdue_level( $p_bug->id );
+			if( $t_level === 0 ) {
+				$t_icon = 'fa-times-circle-o';
 				$t_overdue_text_hover = sprintf(
-					lang_get( 'overdue_days' ),
-					ceil( $t_duration / SECONDS_PER_DAY )
+					lang_get( 'overdue_since' ),
+					date( config_get( 'short_date_format' ), $p_bug->due_date )
 				);
+			} else {
+				$t_icon = $t_level === false ? 'fa-info-circle' : 'fa-warning';
+
+				$t_duration = $p_bug->due_date - db_now();
+				if( $t_duration <= SECONDS_PER_DAY ) {
+					$t_overdue_text_hover = lang_get( 'overdue_one_day' );
+				} else {
+					$t_overdue_text_hover = sprintf(
+						lang_get( 'overdue_days' ),
+						ceil( $t_duration / SECONDS_PER_DAY )
+					);
+				}
 			}
 		}
 		print_icon( $t_icon, '', string_display_line( $t_overdue_text_hover ) );
