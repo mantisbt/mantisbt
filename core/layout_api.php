@@ -302,14 +302,14 @@ function layout_head_css() {
 	html_css_link( 'ace-mantis.css', $t_cache_key );
 
 	$t_font_family = config_get( 'font_family', null, null, ALL_PROJECTS );
-	html_css_link( 'mantis.php', helper_generate_cache_key( [ 'user' ], $t_font_family ) );
+	html_css_link( 'status_config.php', helper_generate_cache_key( [ 'user' ], $t_font_family ) );
 }
 
 /**
  * Print user font preference
  * @return void
  *
- * @deprecated Use css/mantis.php instead.
+ * @deprecated 2.29.0 Use css/status_config.php instead.
  */
 function layout_user_font_preference() {
 }
