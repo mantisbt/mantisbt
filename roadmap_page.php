@@ -143,7 +143,7 @@ class RoadmapProgress {
 		echo '<div class="col-md-7 col-xs-12 no-padding">';
 		echo '<div class="progress progress-large progress-striped" data-percent="'
 			. $this->percentage() . '" >';
-		echo '<div class="progress-bar progress-bar-success" style="width:'
+		echo '<div class="progress-bar progress-bar-success" data-dynamic-width="'
 			. $this->percentage() . '"></div>';
 		echo '</div></div>';
 		echo '<div class="clearfix"></div>';

@@ -175,7 +175,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	if( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
 		if( $t_count_exported > 0 ) {
 			if( $f_type_page == 'html' ) {
-				echo '<div class="clearfix" style="page-break-before: always">&nbsp;</div>';
+				echo '<div class="clearfix page-break">&nbsp;</div>';
 			} else {
 				echo '<br clear=all style="mso-special-character: line-break; page-break-before: always">&nbsp;';
 			}
