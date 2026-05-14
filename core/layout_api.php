@@ -312,6 +312,8 @@ function layout_head_css() {
  * @deprecated 2.29.0 Use css/status_config.php instead.
  */
 function layout_user_font_preference() {
+	error_parameters( __FUNCTION__ . '()', 'css/status_config.php' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 }
 
 /**
