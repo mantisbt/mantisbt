@@ -57,13 +57,19 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_css( 'login.css' );
 
-form_security_validate( 'login' );
+# auth_reauthenticate() redirects here via GET (no POST body, no CSRF token),
+# bypassing login_page.php which normally generates the token. Skip validation
+# for that path; the token rendered in the form still protects the subsequent
+# password submission via login.php.
+$f_reauthenticate        = gpc_get_bool( 'reauthenticate', false );
+if( !$f_reauthenticate ) {
+	form_security_validate( 'login' );
+}
 
 $f_error                 = gpc_get_bool( 'error' );
 $f_cookie_error          = gpc_get_bool( 'cookie_error' );
 $f_return                = string_sanitize_url( gpc_get_string( 'return', '' ) );
 $f_username              = trim( gpc_get_string( 'username', '' ) );
-$f_reauthenticate        = gpc_get_bool( 'reauthenticate', false );
 $f_perm_login            = gpc_get_bool( 'perm_login', false );
 $f_secure_session        = gpc_get_bool( 'secure_session', false );
 $f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', null );
