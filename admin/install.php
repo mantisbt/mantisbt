@@ -284,9 +284,9 @@ if( empty( $f_db_setup ) ) {
 	}
 	elseif( $f_db_type == 'sqlite3' ) {
 		$f_db_setup =
-			  'PRAGMA journal_mode=WAL;'	# concurrent readers + writers
+			  'PRAGMA busy_timeout=10000;'	# 10s retry on locked DB
+			. 'PRAGMA journal_mode=WAL;'	# concurrent readers + writers
 			. 'PRAGMA synchronous=NORMAL;'	# performance, safe with WAL
-			. 'PRAGMA busy_timeout=10000;'	# 10s retry on locked DB
 			. 'PRAGMA foreign_keys=ON;'		# enforce referential integrity
 			. 'PRAGMA cache_size=-8000';	# 8 MB page cache
 	}
