@@ -52,6 +52,13 @@ $t_params = [
 	'perm_login' => false
 ];
 
+# Anonymous login redirects straight to login.php, bypassing login_page.php
+# where the CSRF token is normally generated. Generate the token here (which
+# also seeds it into the session) and pass it in the URL so login.php's
+# form_security_validate( 'login' ) succeeds. The browser preserves PHPSESSID
+# across the redirect, so $_SESSION (where the nonce is stored) is shared.
+$t_params['login_token'] = form_security_token( 'login' );
+
 if( !is_blank( $f_return ) ) {
 	$t_params['return'] = $f_return;
 }

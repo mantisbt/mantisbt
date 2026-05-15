@@ -52,6 +52,7 @@ require_api( 'crypto_api.php' );
 require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
+require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
@@ -1142,6 +1143,14 @@ function auth_reauthenticate() {
 			'username' => $t_username,
 			'return' => $_SERVER['REQUEST_URI'],
 		];
+
+		# This redirect reaches the credentials page via GET, never passing
+		# through login_page.php where the CSRF token is normally generated.
+		# Without it the subsequent form_security_validate( 'login' ) fails
+		# with ERROR #2800, blocking re-authentication from every manage_*
+		# page. Generate the token here (which also seeds it into the session)
+		# and carry it in the URL so the validation succeeds.
+		$t_query_params['login_token'] = form_security_token( 'login' );
 
 		# redirect to login page
 		return print_header_redirect( auth_credential_page( $t_query_params ) );
