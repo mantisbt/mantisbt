@@ -268,7 +268,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	$t_path = rtrim( config_get_global( 'path' ), '/' );
 	$t_short_path = rtrim( config_get_global( 'short_path' ), '/' );
 
-	$t_pattern = '(?:/*(?P<script>[^\?#]*))(?:\?(?P<query>[^#]*))?(?:#(?P<anchor>[^#]*))?';
+	$t_pattern = '(?:(?P<script>[^\?#]*))(?:\?(?P<query>[^#]*))?(?:#(?P<anchor>[^#]*))?';
 
 	# Break the given URL into pieces for path, script, query, and anchor
 	$t_type = 0;

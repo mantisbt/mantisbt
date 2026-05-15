@@ -79,6 +79,8 @@ class StringTest extends MantisCoreBase {
 			array( 'login_page.php?return=http://google.com/', 'index.php'),
 			array( 'javascript:alert(1);', 'index.php'),
 			array( '\/csrf-22702', '%5C/csrf-22702' ),
+			array( '/abc.php', '/abc.php' ),
+			array( '/a/b/c/abc.php', '/a/b/c/abc.php' ),
 		);
 
 		# @FIXME
