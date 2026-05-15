@@ -662,16 +662,31 @@ $(document).ready( function() {
 	 * Admin directory on-line check (login_page.php)
 	 */
 	$('#warning_admin_directory_present').each(function() {
+		function isDenied(response) {
+			return ( response.status >= 400 && response.status < 500 ) ||
+				   ( response.status == 200 && response.redirected === true && response.url.includes('/login_page.php?') );
+		}
 		var spinner = $('<i class="fa fa-spin fa-spinner margin-left-8"></i>');
 		$(this).append(spinner);
-		fetch(config['short_path'] + 'admin/', { credentials: 'omit' })
+		fetch(config['short_path'] + 'admin/install.php', { credentials: 'omit' })
 			.then(response => {
-				spinner.remove();
-				return response.text();
-			})
-			.then(data => {
-				if( !data.includes('MantisBT Administration') ) {
-					$(this).remove();
+				if( isDenied(response) ) {
+					fetch(config['short_path'] + 'admin/check/', { credentials: 'omit' })
+						.then(response => {
+							spinner.remove();
+							if( isDenied(response) ) {
+								if( $(this).parent().children().length === 1 ) {
+									$(this).parent().remove();
+								} else {
+									$(this).remove();
+								}
+							}
+						})
+						.catch(error => {
+							spinner.remove();
+						});
+				} else {
+					spinner.remove();
 				}
 			})
 			.catch(error => {
