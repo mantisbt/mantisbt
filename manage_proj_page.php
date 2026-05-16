@@ -259,7 +259,7 @@ print_manage_menu( 'manage_proj_page.php' );
 ?>
 			<tr>
 				<td><?php echo string_attribute( category_full_name( $t_id, false ) )  ?></td>
-				<td><?php echo string_display_line( $t_category['description'] )  ?></td>
+				<td><?php echo string_attribute( $t_category['description'] )  ?></td>
 				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<?php if( $t_can_update_global_cat ) { ?>

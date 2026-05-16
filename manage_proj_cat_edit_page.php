@@ -101,7 +101,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 					<label for="proj-category-description"><?php echo lang_get( 'description' ) ?></label>
 				</td>
 				<td>
-					<textarea <?php echo helper_get_tab_index() ?> class="form-control" id="proj-category-description" name="description" cols="70" rows="5"><?php echo string_textarea( $t_row['description'] ) ?></textarea>
+					<input <?php echo helper_get_tab_index() ?> type="text" id="proj-category-description" name="description" class="input-sm" size="64" maxlength="256" value="<?php echo string_attribute( $t_row['description'] ) ?>">
 				</td>
 			</tr>
 			<tr>
