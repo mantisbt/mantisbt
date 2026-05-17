@@ -25,7 +25,11 @@
  * @uses authentication_api.php
  * @uses gpc_api.php
  * @uses print_api.php
+ *
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
@@ -34,7 +38,14 @@ require_api( 'print_api.php' );
 
 auth_ensure_user_authenticated();
 
-# Determine which view page to redirect back to.
-$f_bug_id		= gpc_get_int( 'bug_id' );
+# Retrieve the bug id to jump to as a string
+$f_search_string = gpc_get_string( 'bug_id' );
 
-print_header_redirect_view( $f_bug_id );
+# Validate input, ignoring whitespace and leading bug link tag (#).
+$t_bug_link_tag = config_get( 'bug_link_tag' );
+if( !preg_match( "/^$t_bug_link_tag?([0-9]+)$/", trim( $f_search_string ), $t_matches ) ) {
+	throw new ClientException( 'Invalid bug id', ERROR_INVALID_FIELD_VALUE, ['bug_id'] );
+}
+$t_bug_id = $t_matches[1];
+
+print_header_redirect_view( $t_bug_id );
