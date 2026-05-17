@@ -1103,18 +1103,30 @@ function layout_breadcrumbs() {
 		}
 	}
 
-	# Bug Jump form
+	layout_bug_jump_form();
+
+	echo '</div>';
+	echo PHP_EOL;
+}
+
+/**
+ * Prints the form allowing to jump to the given bug ID..
+ *
+ * @return void
+ */
+function layout_bug_jump_form(): void {
 	# CSRF protection not required here - form does not result in modifications
 	echo '<div id="nav-search" class="nav-search">';
-	echo '<form class="form-search" method="post" action="' . helper_mantis_url( 'jump_to_bug.php' ) . '">';
+	printf( '<form class="form-search" method="post" action="%s">',
+		helper_mantis_url( 'jump_to_bug.php' )
+	);
 	echo '<span class="input-icon">';
-	echo '<input type="text" name="bug_id" autocomplete="off" class="nav-search-input" placeholder="' . lang_get( 'issue_id' ) . '">';
+	printf( '<input type="text" name="bug_id" autocomplete="off" class="nav-search-input" placeholder="%s">',
+		lang_get( 'issue_id' )
+	);
 	print_icon( 'fa-search', 'ace-icon nav-search-icon' );
 	echo '</span>';
 	echo '</form>';
-	echo '</div>';
-	echo PHP_EOL;
-
 	echo '</div>';
 	echo PHP_EOL;
 }
