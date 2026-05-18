@@ -268,14 +268,14 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	$t_path = rtrim( config_get_global( 'path' ), '/' );
 	$t_short_path = rtrim( config_get_global( 'short_path' ), '/' );
 
-	$t_pattern = '(?:(?P<script>[^\?#]*))(?:\?(?P<query>[^#]*))?(?:#(?P<anchor>[^#]*))?';
+	$t_pattern = '(?:/*(?P<script>[^\?#]*))(?:\?(?P<query>[^#]*))?(?:#(?P<anchor>[^#]*))?';
 
 	# Break the given URL into pieces for path, script, query, and anchor
 	$t_type = 0;
 	if( preg_match( '@^(?P<path>' . preg_quote( $t_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches ) ) {
 		$t_type = 1;
 	} else if( !empty( $t_short_path )
-			&& preg_match( '@^(?P<path>' . preg_quote( $t_short_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches )
+			&& preg_match( '@^/*(?P<path>' . preg_quote( $t_short_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches )
 	) {
 		$t_type = 2;
 	} else if( preg_match( '@^(?P<path>)' . $t_pattern . '$@', $t_url, $t_matches ) ) {
@@ -284,7 +284,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 
 	# Check for URL's pointing to other domains
 	if( 0 == $t_type || empty( $t_matches['script'] ) ||
-		3 == $t_type && preg_match( '@(?:[^:]*)?:/*@', $t_url ) > 0 ) {
+		2 <= $t_type && preg_match( '@(?:[^:]*)?:/*@', $t_url ) > 0 ) {
 
 		return ( $p_return_absolute ? $t_path . '/' : '' ) . 'index.php';
 	}
@@ -324,10 +324,13 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	}
 
 	# Return an appropriate re-combined URL string
+	$t_result = ( str_starts_with( $p_url, '/' ) ? '/' : '' ) . $t_script . $t_query . $t_anchor;
 	if( $p_return_absolute ) {
-		return $t_path . '/' . $t_script . $t_query . $t_anchor;
+		return $t_path . '/' . ltrim( $t_result, '/' );
+	} elseif( !empty( $t_script_path ) ) {
+		return $t_script_path . '/' . ltrim( $t_result, '/' );
 	} else {
-		return ( !empty( $t_script_path ) ? $t_script_path . '/' : '' ) . $t_script . $t_query . $t_anchor;
+		return $t_result;
 	}
 }
 
