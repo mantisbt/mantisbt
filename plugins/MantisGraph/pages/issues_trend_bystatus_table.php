@@ -141,7 +141,6 @@ $t_label_strings = explode( '/', mb_substr( $t_label_string, 1, strlen( $t_label
 
 # add headers for table
 $t_date_format = config_get( 'normal_date_format' );
-echo '<div class="space-10"></div>';
 echo '<div class="table-responsive">';
 echo '<table class="table table-striped table-bordered table-condensed"><tr>';
 echo '<th>' . plugin_lang_get( 'bucket' ) . '</th>';

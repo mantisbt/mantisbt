@@ -184,7 +184,6 @@ for( $i=0; $i<$t_count_cat; $i++ ) {
 sort( $t_category );
 
 $t_date_format = config_get( 'normal_date_format' );
-echo '<div class="space-10"></div>';
 echo '<div class="table-responsive">';
 echo '<table class="table table-striped table-bordered table-condensed"><tr>';
 echo '<th>' . plugin_lang_get( 'bucket' ) . '</th>';
