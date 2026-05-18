@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -513,7 +513,7 @@ $s_select_project_button = 'Выбраць праект';
 $s_lost_password_title = 'Ачыстка паролю';
 $s_lost_password_done_title = 'Паведамленьне з паролем дасланае';
 $s_lost_password_subject = 'Ачыстка паролю';
-$s_lost_password_info = 'Для аднаўленьня страчанага пароля, калі ласка, падайце назву і адрас электроннай пошты рахунку.<br /><br />Калі зьвесткі адпавядаюць існуючаму рахунку, Вам будзе дасланы электронны ліст са спэцыяльнай URL-спасылкай на старонку з кодам пацьверджаньня Вашага рахунку. Калі ласка, перайдзіце па гэтай спасылцы, каб зьмяніць пароль.';
+$s_lost_password_info = 'Для аднаўленьня страчанага пароля, калі ласка, падайце назву і адрас электроннай пошты рахунку.<br /><br />Калі зьвесткі адпавядаюць існаму рахунку, Вам будзе дасланы электронны ліст са спэцыяльнай URL-спасылкай на старонку з кодам пацьверджаньня Вашага рахунку. Калі ласка, перайдзіце па гэтай спасылцы, каб зьмяніць пароль.';
 $s_lost_password_confirm_hash_OK = 'Вашае пацьверджаньне было прынятае. Калі ласка, абнавіце Ваш пароль.';
 $s_verify_email_title = 'Спраўдзіць адрас электроннай пошты';
 $s_open_and_assigned_to_me_label = 'Адкрытыя і прызначаныя мне:';
@@ -982,7 +982,7 @@ $s_add_custom_field_button = 'Стварыць нестандартнае пол
 $s_delete_custom_field_button = 'Выдаліць нестандартнае поле';
 $s_delete_custom_field_everywhere = 'Выдаліць нестандартнае поле паўсюды';
 $s_update_custom_field_button = 'Абнавіць нестандартнае поле';
-$s_add_existing_custom_field = 'Дадаць гэтае існуючае нестандартнае поле';
+$s_add_existing_custom_field = 'Дадаць гэтае існае нестандартнае поле';
 $s_edit_custom_field_title = 'Рэдагаваць нестандартнае поле';
 $s_custom_field = 'Поле';
 $s_custom_field_label = 'Поле:';
@@ -1167,7 +1167,7 @@ $s_tag_update_return = 'Вярнуцца да тэґа';
 $s_tag_update_button = 'Абнавіць тэґ';
 $s_tag_delete_button = 'Выдаліць тэґ';
 $s_tag_delete_message = 'Вы ўпэўнены, што жадаеце выдаліць тэґ „%1$s“?';
-$s_tag_existing = 'Існуючыя тэґі';
+$s_tag_existing = 'Існыя тэґі';
 $s_tag_none_attached = 'Няма далучаных тэґаў.';
 $s_tag_attach = 'Далучыць';
 $s_tag_attach_long = 'Далучыць тэґі';

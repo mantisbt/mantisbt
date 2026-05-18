@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -551,9 +551,9 @@ $s_manage_global_profiles_link = '전역 QA환경';
 $s_manage_plugin_link = '플러그인';
 $s_permissions_summary_report = '권한 설정 일람';
 $s_manage_config_link = '설정';
-$s_manage_threshold_config = '워크플로우 한계치';
+$s_manage_threshold_config = '워크플로 한계치';
 $s_manage_email_config = '이메일 알림';
-$s_manage_workflow_config = '워크플로우';
+$s_manage_workflow_config = '워크플로';
 $s_manage_workflow_graph = '워크플로 그래프';
 $s_manage_tags_link = '태그';
 $s_create_new_account_link = '새 계정 만들기';
@@ -592,12 +592,12 @@ $s_revert_to_all_project = '프로젝트 전용 설정 삭제';
 $s_non_existent = '존재하지 않음';
 $s_current_status = '현재 상태';
 $s_next_status = '다음상태';
-$s_workflow = '워크플로우';
+$s_workflow = '워크플로';
 $s_workflow_thresholds = '워크프로우에 영향을 끼치는 한계치';
 $s_threshold = '한계치';
 $s_status_level = '상태';
 $s_alter_level = '누가 이 값을 변경할 수 있습니까?';
-$s_validation = '워크플로우 유효성 검사';
+$s_validation = '워크플로 유효성 검사';
 $s_comment = '유효성 검사 주석';
 $s_superfluous = '상태로부터 자신에 대한 Arc가 암묵적으로 설정되어 있으므로, 명시적으로 지정할 필요가 없습니다.';
 $s_unreachable = '이 상태로 이슈를 이동시킬 수 없습니다.';
@@ -608,7 +608,7 @@ $s_desc_bug_submit_status = '새로운 이슈가 설정되어 있는 상태';
 $s_desc_bug_reopen_status = '재발생된 이슈가 설정되어 있는 상태';
 $s_desc_bug_resolved_status_threshold = '이슈가 해결된 것으로 간주되는 상태';
 $s_desc_bug_closed_status_threshold = '이슈가 종료된 것으로 간주되는 상태';
-$s_workflow_change_access_label = '워크플로우를 변경할 수 있는 사람:';
+$s_workflow_change_access_label = '워크플로를 변경할 수 있는 사람:';
 $s_access_change_access_label = '접근 레벨을 변경할 수 있는 사람:';
 $s_default_not_in_flow = '%1$s의 기본 상태를 다음 %2$s의 상태에 선택하지 않았습니다. 무시됩니다.';
 $s_allowed_access_levels = '권한이 있는 모든 사용자에게 허용됨';
