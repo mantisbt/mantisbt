@@ -327,6 +327,7 @@ class Period {
 		);
 
 		$t_dropdown = get_dropdown( $t_periods, $p_control_name, $this->type, false, false, true );
+		$t_label = plugin_lang_get( 'period' );
 		$t_formatted_start = $this->get_start_formatted();
 		$t_formatted_end = $this->get_end_formatted();
 		$t_date_input_pattern = '<span class="inline"><label for="%1$s" class="padding-right-4">%2$s</label>%3$s</span>';
@@ -342,11 +343,11 @@ class Period {
 		);
 
 		return <<< HTML
-			<div id="period_menu">
+			<div id="period_menu" class="pull-left padding-right-8">
+				<label for="$p_control_name">$t_label</label>
 				$t_dropdown
 			</div>
-			<br>
-			<div id="dates">
+			<div id="dates" class="pull-left">
 				<div class="pull-left padding-right-8">$t_from_date</div>
 				<div class="pull-left">$t_to_date</div>
 			</div>
