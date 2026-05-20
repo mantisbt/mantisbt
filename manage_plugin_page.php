@@ -440,44 +440,56 @@ class AvailablePlugin extends PluginForDisplay {
 
 		# Dependencies
 		if( is_array( $p_plugin->requires ) && !empty( $p_plugin->requires ) ) {
+			$t_deps_types[0] = $p_plugin->requires;
+			$t_deps_names[0] = lang_get( 'required' );
+		}
+		if( is_array( $p_plugin->uses ) && !empty( $p_plugin->uses ) ) {
+			$t_deps_types[1] = $p_plugin->uses;
+		}
+		if( !empty( $t_deps_types ) ) {
 			$t_all_plugins = plugin_find_all();
-			foreach( $p_plugin->requires as $t_required_basename => $t_version ) {
-				$this->can_install = false;
+			foreach( $t_deps_types as $t_deps_index => $t_deps_type ) {
+				foreach( $t_deps_type as $t_required_basename => $t_version ) {
+					$this->can_install = false;
 
-				switch( plugin_dependency( $t_required_basename, $t_version ) ) {
-					case 1:
-						$t_upgrade_needed = plugin_is_registered( $t_required_basename )
-							&& plugin_needs_upgrade( plugin_get( $t_required_basename ) );
-						if( $t_upgrade_needed ) {
-							$t_class = 'dependency_upgrade';
-							$t_tooltip = lang_get( 'plugin_key_upgrade' );
-						} else {
-							$t_class = 'dependency_met';
-							$t_tooltip = lang_get( 'plugin_key_met' );
-							$this->can_install = true;
-						}
-						break;
-					case -1:
-						$t_class = 'dependency_dated';
-						$t_tooltip = lang_get( 'plugin_key_dated' );
-						break;
-					case 0:
-					default:
-						$t_class = 'dependency_unmet';
-						$t_tooltip = lang_get( 'plugin_key_unmet' );
-						break;
+					switch( plugin_dependency( $t_required_basename, $t_version ) ) {
+						case 1:
+							$t_upgrade_needed = plugin_is_registered( $t_required_basename )
+								&& plugin_needs_upgrade( plugin_get( $t_required_basename ) );
+							if( $t_upgrade_needed ) {
+								$t_class = 'dependency_upgrade';
+								$t_tooltip = lang_get( 'plugin_key_upgrade' );
+							} else {
+								$t_class = 'dependency_met';
+								$t_tooltip = lang_get( 'plugin_key_met' );
+								$this->can_install = true;
+							}
+							break;
+						case -1:
+							$t_class = 'dependency_dated';
+							$t_tooltip = lang_get( 'plugin_key_dated' );
+							break;
+						case 0:
+						default:
+							$t_class = 'dependency_unmet';
+							$t_tooltip = lang_get( 'plugin_key_unmet' );
+							break;
+					}
+
+					$t_dependency_name = array_key_exists( $t_required_basename, $t_all_plugins )
+						? $t_all_plugins[$t_required_basename]->name
+						: $t_required_basename;
+					$t_dependency_name .= ' ' . $t_version;
+					if( !empty( $t_deps_names[ $t_deps_index ] ) ) {
+						$t_dependency_name .= ' (' . $t_deps_names[ $t_deps_index ] . ')';
+					}
+
+					$this->dependencies[] = sprintf( '<span class="%s" title="%s">%s</span>',
+						$t_class,
+						$t_tooltip,
+						string_attribute( $t_dependency_name )
+					);
 				}
-
-				$t_dependency_name = array_key_exists( $t_required_basename, $t_all_plugins )
-					? $t_all_plugins[$t_required_basename]->name
-					: $t_required_basename;
-				$t_dependency_name .= ' ' . $t_version;
-
-				$this->dependencies[] = sprintf( '<span class="%s" title="%s">%s</span>',
-					$t_class,
-					$t_tooltip,
-					string_attribute( $t_dependency_name )
-				);
 			}
 		} else {
 			$this->dependencies[] = '<span class="dependency_met">'
