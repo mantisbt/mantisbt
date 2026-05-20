@@ -646,16 +646,23 @@ define( 'LINKS_NOFOLLOW_EXTERNAL', 16);
 define( 'API_TOKEN_LENGTH', 32 );
 
 # Obsolete / deprecated constants
-# Defined below for backwards-compatibility purposes -- Do not use them
-#        Constant                                   # Replaced by
-define( 'UNABLE_TO_DUPLICATE', 40 );                # UNABLE_TO_REPRODUCE
-define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
-define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
-define( 'FTP', 1 );                                 # DISK
-define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
+# Kept for backwards-compatibility purposes -- Do not use them
+/** @deprecated 1.3.0 Use UNABLE_TO_REPRODUCE instead. */
+define( 'UNABLE_TO_DUPLICATE', 40 );
+/** @deprecated 1.3.0 Should no longer be used (no replacement). */
+define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 );
+/** @deprecated 1.3.0 Use LOG_WEBSERVICE instead. */
+define( 'LOG_SOAP', 64 );
+/** @deprecated 1.3.0 Attachment storage on FTP is no longer supported, use DISK. */
+define( 'FTP', 1 );
+/** @deprecated 1.3.0 Attachment storage on FTP is no longer supported, use DISK. */
+define( 'ERROR_FTP_CONNECT_ERROR', 16 );
+/** @deprecated 2.11.0 Should no longer be used (no replacement). */
 define( 'ERROR_USER_NOT_FOUND', 801 );
+/** @deprecated 2.16.0 Should no longer be used (no replacement). */
 define( 'ERROR_USER_REAL_MATCH_USER', 807 );
-define( 'ERROR', E_USER_ERROR );                    # Exceptions / E_USER_ERROR
+/** @deprecated 2.29.0 Throw an Exception or use E_USER_ERROR instead. */
+define( 'ERROR', E_USER_ERROR );
 
 # JQuery
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'
