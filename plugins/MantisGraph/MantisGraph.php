@@ -119,7 +119,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 	function hooks() {
 		$t_hooks = array(
 			'EVENT_REST_API_ROUTES' => 'routes',
-			'EVENT_LAYOUT_RESOURCES' => 'resources',
 			'EVENT_CORE_HEADERS' => 'csp_headers',
 			'EVENT_MENU_SUMMARY' => 'summary_menu',
 			'EVENT_MENU_FILTER' => 'graph_filter_menu'
@@ -162,6 +161,9 @@ class MantisGraphPlugin extends MantisPlugin  {
 		if( config_get_global( 'cdn_enabled' ) == ON ) {
 			http_csp_add( 'script-src', self::CHARTJS_CDN );
 		}
+		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
+			$this->include_chartjs();
+		}
 	}
 
 	/**
@@ -191,35 +193,19 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 			# Chart.js library
 			$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
-			html_javascript_cdn_link( $t_link . 'chart.min.js', self::CHARTJS_HASH );
+			require_js( [ $t_link . 'chart.min.js', self::CHARTJS_HASH ] );
 
 			# Chart.js color schemes plugin
 			$t_link = sprintf( $t_cdn_url, 'hw-chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
-			html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
+			require_js( [ $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH ] );
 		} else {
-			$t_scripts = array(
-				'chart-' . self::CHARTJS_VERSION . '.min.js',
-				'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js',
-			);
-			foreach( $t_scripts as $t_script ) {
-				printf( "\t<script type=\"text/javascript\" src=\"%s\"></script>\n",
-					plugin_file( $t_script, false, $this->basename )
-				);
-			}
+			# Chart.js library
+			require_js( [ plugin_file( 'chart-' . self::CHARTJS_VERSION . '.min.js', false, $this->basename ) ] );
+			
+			# Chart.js color schemes plugin
+			require_js( [ plugin_file( 'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js', false, $this->basename ) ] );
 		}
-	}
-
-	/**
-	 * Include javascript files for chart.js
-	 * @return void
-	 */
-	function resources() {
-		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
-			$this->include_chartjs();
-			printf( "\t<script src=\"%s\"></script>\n",
-				plugin_file( 'MantisGraph.js' )
-			);
-		}
+		require_js( [ plugin_file( 'MantisGraph.js', false, $this->basename ) ] );
 	}
 
 	/**
