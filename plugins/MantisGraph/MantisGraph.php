@@ -65,7 +65,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = array(
-			'MantisCore' => '2.25.0',
+			'MantisCore' => '2.29',
 		);
 
 		$this->author = 'MantisBT Team';
@@ -119,7 +119,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	function hooks() {
 		$t_hooks = array(
 			'EVENT_REST_API_ROUTES' => 'routes',
-			'EVENT_CORE_HEADERS' => 'csp_headers',
+			'EVENT_CORE_HEADERS' => 'core_headers',
 			'EVENT_MENU_SUMMARY' => 'summary_menu',
 			'EVENT_MENU_FILTER' => 'graph_filter_menu'
 		);
@@ -154,13 +154,11 @@ class MantisGraphPlugin extends MantisPlugin  {
 	}
 
 	/**
-	 * Add Content-Security-Policy directives that are needed to load scripts for CDN.
+	 * Make sure that Chart.js and its plugins are included on the plugins' own pages.
+	 *
 	 * @return void
 	 */
-	function csp_headers() {
-		if( config_get_global( 'cdn_enabled' ) == ON ) {
-			http_csp_add( 'script-src', self::CHARTJS_CDN );
-		}
+	function core_headers() {
 		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
 			$this->include_chartjs();
 		}
@@ -180,16 +178,20 @@ class MantisGraphPlugin extends MantisPlugin  {
 	}
 
 	/**
-	 * Include Chart.js and plugins.
+	 * Include Chart.js and its plugins, configure CSP.
 	 *
 	 * This function can be called by other plugins that may need to use
-	 * Chart.js.
+	 * Chart.js. It must be called early; the suggested call location is
+	 * the EVENT_CORE_HEADERS handler.
 	 *
 	 * @return void
 	 */
 	function include_chartjs() {
 		if( config_get_global( 'cdn_enabled' ) == ON ) {
 			$t_cdn_url = self::CHARTJS_CDN . '/npm/%s@%s/dist/';
+
+			# Add Content-Security-Policy directives that are needed to load scripts for CDN
+			http_csp_add( 'script-src', self::CHARTJS_CDN );
 
 			# Chart.js library
 			$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
