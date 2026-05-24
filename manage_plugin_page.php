@@ -445,7 +445,7 @@ class AvailablePlugin extends PluginForDisplay {
 		}
 		if( is_array( $p_plugin->uses ) && !empty( $p_plugin->uses ) ) {
 			$t_deps_types[] = $p_plugin->uses;
-			$t_deps_names[] = '<span class="label label-light arrowed">'
+			$t_deps_names[] = '<span class="label label-light arrowed multiline">'
 				. lang_get( 'optional' ) . '</span>';
 		}
 		if( !empty( $t_deps_types ) ) {
