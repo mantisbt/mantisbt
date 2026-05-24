@@ -440,11 +440,13 @@ class AvailablePlugin extends PluginForDisplay {
 
 		# Dependencies
 		if( is_array( $p_plugin->requires ) && !empty( $p_plugin->requires ) ) {
-			$t_deps_types[0] = $p_plugin->requires;
-			$t_deps_names[0] = lang_get( 'required' );
+			$t_deps_types[] = $p_plugin->requires;
+			$t_deps_names[] = '';
 		}
 		if( is_array( $p_plugin->uses ) && !empty( $p_plugin->uses ) ) {
-			$t_deps_types[1] = $p_plugin->uses;
+			$t_deps_types[] = $p_plugin->uses;
+			$t_deps_names[] = '<span class="label label-light arrowed">'
+				. lang_get( 'optional' ) . '</span>';
 		}
 		if( !empty( $t_deps_types ) ) {
 			$t_all_plugins = plugin_find_all();
@@ -480,14 +482,12 @@ class AvailablePlugin extends PluginForDisplay {
 						? $t_all_plugins[$t_required_basename]->name
 						: $t_required_basename;
 					$t_dependency_name .= ' ' . $t_version;
-					if( !empty( $t_deps_names[ $t_deps_index ] ) ) {
-						$t_dependency_name .= ' (' . $t_deps_names[ $t_deps_index ] . ')';
-					}
 
-					$this->dependencies[] = sprintf( '<span class="%s" title="%s">%s</span>',
+					$this->dependencies[] = sprintf( '<span class="%s" title="%s">%s</span> %s',
 						$t_class,
 						$t_tooltip,
-						string_attribute( $t_dependency_name )
+						string_attribute( $t_dependency_name ),
+						$t_deps_names[ $t_deps_index ]
 					);
 				}
 			}
@@ -505,7 +505,7 @@ class AvailablePlugin extends PluginForDisplay {
 		parent::renderColumns();
 
 		# Dependencies
-		echo '<td>', implode( '<br>', $this->dependencies ), '</td>', "\n";
+		echo '<td class="nowrap">', implode( '<br>', $this->dependencies ), '</td>', "\n";
 
 		# Actions
 		# Only displayed if current object is of AvailablePlugin class
