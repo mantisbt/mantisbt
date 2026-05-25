@@ -113,10 +113,6 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 
 	switch( $t_method ) {
 		case DISK:
-			if( !file_exists( $t_file_path ) || !is_dir( $t_file_path ) || !is_writable( $t_file_path ) || !is_readable( $t_file_path ) ) {
-				return ApiObjectFactory::faultServerError( "Upload folder doesn't exist." );
-			}
-
 			file_ensure_valid_upload_path( $t_file_path );
 
 			if( !file_exists( $t_disk_file_name ) ) {
