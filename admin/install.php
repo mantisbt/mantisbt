@@ -767,7 +767,8 @@ if( !$g_database_upgrade ) {
 		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix reset" %2$s value="%3$s">',
 			$t_key,
 			$t_key == 'db_table_plugin_prefix' ? 'required' : '',
-			${'f_' . $t_key} // The actual value of the corresponding form variable
+			// The actual value of the corresponding form variable
+			string_html_specialchars( ${'f_' . $t_key} )
 		);
 		echo "\n&nbsp;";
 		printf( '<button id="%s" type="button" class="btn btn-sm btn-primary btn-white btn-round reset">%s</button>',
