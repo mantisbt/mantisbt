@@ -439,6 +439,7 @@ class AvailablePlugin extends PluginForDisplay {
 			. '<span class="small">' . $t_author . $t_url . '</span>';
 
 		# Dependencies
+        $this->can_install = true;
 		if( is_array( $p_plugin->requires ) && !empty( $p_plugin->requires ) ) {
 			$t_deps_types[] = $p_plugin->requires;
 			$t_deps_names[] = '';
@@ -452,8 +453,6 @@ class AvailablePlugin extends PluginForDisplay {
 			$t_all_plugins = plugin_find_all();
 			foreach( $t_deps_types as $t_deps_index => $t_deps_type ) {
 				foreach( $t_deps_type as $t_required_basename => $t_version ) {
-					$this->can_install = false;
-
 					switch( plugin_dependency( $t_required_basename, $t_version ) ) {
 						case 1:
 							$t_upgrade_needed = plugin_is_registered( $t_required_basename )
@@ -461,20 +460,28 @@ class AvailablePlugin extends PluginForDisplay {
 							if( $t_upgrade_needed ) {
 								$t_class = 'dependency_upgrade';
 								$t_tooltip = lang_get( 'plugin_key_upgrade' );
+								if( !$t_deps_index ) {
+									$this->can_install = false;
+								}
 							} else {
 								$t_class = 'dependency_met';
 								$t_tooltip = lang_get( 'plugin_key_met' );
-								$this->can_install = true;
 							}
 							break;
 						case -1:
 							$t_class = 'dependency_dated';
 							$t_tooltip = lang_get( 'plugin_key_dated' );
+							if( !$t_deps_index ) {
+								$this->can_install = false;
+							}
 							break;
 						case 0:
 						default:
 							$t_class = 'dependency_unmet';
 							$t_tooltip = lang_get( 'plugin_key_unmet' );
+							if( !$t_deps_index ) {
+								$this->can_install = false;
+							}
 							break;
 					}
 
@@ -495,7 +502,6 @@ class AvailablePlugin extends PluginForDisplay {
 			$this->dependencies[] = '<span class="dependency_met">'
 				. lang_get( 'plugin_no_depends' )
 				. '</span>';
-            $this->can_install = true;
 		}
 
 		$this->upgrade_needed = plugin_needs_upgrade( $p_plugin );
