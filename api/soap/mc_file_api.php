@@ -55,18 +55,19 @@ function mci_file_write_local( $p_diskfile, $p_content ) {
 /**
  * Add a file.
  *
- * @param int     $p_id        File id.
- * @param string  $p_name      File name.
- * @param string  $p_content   File content to write.
- * @param string  $p_file_type File type.
- * @param string  $p_table     Database table name.
- * @param string  $p_title     Title.
- * @param string  $p_desc      Description.
- * @param null    $p_user_id   User id.
+ * @param int      $p_id        File id.
+ * @param string   $p_name      File name.
+ * @param string   $p_content   File content to write.
+ * @param string   $p_file_type File type.
+ * @param string   $p_table     Database table name.
+ * @param string   $p_title     Title.
+ * @param string   $p_desc      Description.
+ * @param int|null $p_user_id   User id.
  *
  * @return int|RestFault|SoapFault Attachment id or fault
  * @throws ClientException
  * @throws ServiceException
+ * @throws Exception
  */
 function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_title = '', $p_desc = '', $p_user_id = null ) {
 	if( !file_type_check( $p_name ) ) {
