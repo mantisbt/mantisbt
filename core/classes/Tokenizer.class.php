@@ -48,17 +48,13 @@ class Tokenizer
 	 */
 	public function __construct( $p_code )
 	{
-		# Check syntax to make sure we get valid PHP code
-		# prepend 'return' statement to ensure the code is not actually executed
-		$t_code = 'return; ' . $p_code . ';';
+		# Use TOKEN_PARSE flag to check syntax, making sure we got valid PHP code
 		try {
-			eval( $t_code );
+			$t_tokens = token_get_all( "<?php $p_code;", TOKEN_PARSE );
 		}
 		catch( ParseError $e ) {
 			throw new Exception( $e->getMessage() );
 		}
-
-		$t_tokens = token_get_all( '<?php ' . $p_code );
 
 		# Strip whitespace
 		$t_tokens = array_filter( $t_tokens,
