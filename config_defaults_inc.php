@@ -1088,6 +1088,7 @@ $g_language_choices_arr = array(
 	'saraiki',
 	'serbian',
 	'serbian_latin',
+	'serbo-croatian_latin',
 	'slovak',
 	'slovene',
 	'spanish',
@@ -1161,6 +1162,7 @@ $g_language_auto_map = array(
 	'ksh' => 'ripoarisch',
 	'ro-mo, ro' => 'romanian',
 	'ru-mo, ru-ru, ru-ua, ru' => 'russian',
+	'sh-latn, sh' => 'serbo-croatian_latin',
 	'skr' => 'saraiki', # skr does not actually exist as a browser language code
 	'sr' => 'serbian',
 	'sr-latn' => 'serbian_latin',
