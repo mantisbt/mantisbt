@@ -159,6 +159,13 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return void
 	 */
 	function core_headers() {
+		# TODO: Move the http_csp_add() call to the include_chartjs() below
+		# once other plugins that use this plugin have moved their include_chartjs()
+		# calls to the EVENT_CORE_HEADERS handler or earlier.
+		if( config_get_global( 'cdn_enabled' ) == ON ) {
+			# Add Content-Security-Policy directives that are needed to load scripts for CDN
+			http_csp_add( 'script-src', self::CHARTJS_CDN );
+		}
 		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
 			$this->include_chartjs();
 		}
@@ -190,9 +197,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 		if( config_get_global( 'cdn_enabled' ) == ON ) {
 			$t_cdn_url = self::CHARTJS_CDN . '/npm/%s@%s/dist/';
 
-			# Add Content-Security-Policy directives that are needed to load scripts for CDN
-			http_csp_add( 'script-src', self::CHARTJS_CDN );
-
 			# Chart.js library
 			$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
 			require_js( [ $t_link . 'chart.min.js', self::CHARTJS_HASH ] );
@@ -202,12 +206,12 @@ class MantisGraphPlugin extends MantisPlugin  {
 			require_js( [ $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH ] );
 		} else {
 			# Chart.js library
-			require_js( [ plugin_file( 'chart-' . self::CHARTJS_VERSION . '.min.js', false, $this->basename ) ] );
+			require_js( plugin_file( 'chart-' . self::CHARTJS_VERSION . '.min.js', false, $this->basename ) );
 			
 			# Chart.js color schemes plugin
-			require_js( [ plugin_file( 'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js', false, $this->basename ) ] );
+			require_js( plugin_file( 'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js', false, $this->basename ) );
 		}
-		require_js( [ plugin_file( 'MantisGraph.js', false, $this->basename ) ] );
+		require_js( plugin_file( 'MantisGraph.js', false, $this->basename ) );
 	}
 
 	/**
