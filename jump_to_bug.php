@@ -41,9 +41,8 @@ auth_ensure_user_authenticated();
 # Retrieve the bug id to jump to as a string
 $f_search_string = gpc_get_string( 'bug_id' );
 
-# Validate input, ignoring whitespace and leading bug link tag (#).
-$t_bug_link_tag = config_get( 'bug_link_tag' );
-if( !preg_match( "/^$t_bug_link_tag?([0-9]+)$/", trim( $f_search_string ), $t_matches ) ) {
+# Use the first group of consecutive numbers as bug id, ignore the rest.
+if( !preg_match( "/([0-9]+)/", $f_search_string, $t_matches ) ) {
 	throw new ClientException( 'Invalid bug id', ERROR_INVALID_FIELD_VALUE, ['bug_id'] );
 }
 $t_bug_id = $t_matches[1];
