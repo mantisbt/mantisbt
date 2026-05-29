@@ -1084,17 +1084,26 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		$t_old_status = $t_bug_data->status;
 		$t_new_status = mci_get_status_id( $p_issue['status'] );
 
-		# Check if we are resolving (or closing) the issue
-		$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
-		$t_resolving = $t_old_status < $t_resolved_status && $t_new_status >= $t_resolved_status;
+		if( $t_old_status != $t_new_status ) {
+			# Make sure user is authorized to change status
+			$t_update_status_threshold = config_get( 'update_bug_status_threshold', $t_bug_data->project_id, $t_user_id );
+			if( !access_has_project_level( $t_update_status_threshold, $t_bug_data->project_id, $t_user_id ) ){
+				return mci_fault_access_denied( $t_user_id , "Not allowed to change Issue status" );
+			}
 
-		if( $t_resolving &&
-			!relationship_can_resolve_bug( $p_issue_id ) &&
-			OFF == config_get( 'allow_parent_of_unresolved_to_close' )
-		) {
-			return ApiObjectFactory::faultBadRequest( 'Unresolved child issues.' );
+			# Check if we are resolving (or closing) the issue
+			$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
+			$t_resolving = $t_old_status < $t_resolved_status && $t_new_status >= $t_resolved_status;
+
+			if( $t_resolving &&
+				!relationship_can_resolve_bug( $p_issue_id ) &&
+				OFF == config_get( 'allow_parent_of_unresolved_to_close' )
+			) {
+				return ApiObjectFactory::faultBadRequest( 'Unresolved child issues.' );
+			}
+			$t_bug_data->status = $t_new_status;
+
 		}
-		$t_bug_data->status = $t_new_status;
 	}
 	if( isset( $p_issue['reproducibility'] ) ) {
 		$t_bug_data->reproducibility = mci_get_reproducibility_id( $p_issue['reproducibility'] );
