@@ -21,6 +21,8 @@
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpUndefinedMethodInspection Ignoring mc_* methods
  */
 
 namespace Mantis\tests\soap;
@@ -40,6 +42,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 2. Ability to retrieve the issue just added.
 	 * 3. Ability to modify the summary of the retrieved issue and update it in MantisBT.
 	 * 4. Ability to delete the issue.
+	 *
 	 * @return void
 	 */
 	public function testUpdateSummaryBasedOnPreviousGet() {
@@ -106,6 +109,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 1. Ability to create an issue with only the mandatory parameters.
 	 * 2. Ability to update the summary of the issue while only supplying the mandatory fields.
 	 * 3. Ability to delete the issue.
+	 *
 	 * @return void
 	 */
 	public function testUpdateSummaryBasedOnMandatoryFields() {
@@ -225,12 +229,13 @@ class IssueUpdateTest extends SoapBase {
 	 * 4. Updating the issue to add a handler
 	 * 5. Verifying that the correct handler is passed
 	 * 6. Deleting the issue
+	 *
 	 * @return void
 	 */
 	public function testUpdateIssueWithHandler() {
 		$t_admin_users = $this->client->mc_project_get_users( $this->userName, $this->password, $this->getProjectId(), 90 );
 
-		$this->assertTrue( count( $t_admin_users ) >= 1, 'count(adminUsers) >= 1' );
+		$this->assertNotEmpty( $t_admin_users, 'count(adminUsers) >= 1' );
 
 		$t_issue_to_add = $this->getIssueToAdd();
 
@@ -259,7 +264,9 @@ class IssueUpdateTest extends SoapBase {
 	 * 3. Updating the issue with a new date
 	 * 4. Re-retrieving the issue
 	 * 5. Validating the value of the due date
+	 *
 	 * @return void
+	 * @throws \DateMalformedStringException|\Exception
 	 */
 	public function testUpdateIssueDueDate() {
 		$this->skipIfDueDateIsNotEnabled();
@@ -289,6 +296,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 2. Updating the issue to unset the category
 	 * 3. Retrieving the issue
 	 * 4. Verifying that the category is empty.
+	 *
 	 * @return void
 	 */
 	public function testUpdateBugWithNoCategory() {
@@ -316,6 +324,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 2. Updating the issue with a time tracking note
 	 * 3. Verifying that the time tracking note on the issue is preseved
 	 * 4. Deleting the issue.
+	 *
 	 * @return void
 	 */
 	public function testUpdateWithTimeTrackingNote() {
@@ -340,7 +349,7 @@ class IssueUpdateTest extends SoapBase {
 
 		$t_issue_with_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( 1, count( $t_issue_with_note->notes ) );
+		$this->assertCount( 1, $t_issue_with_note->notes );
 
 		$this->assertEquals( 30, $t_issue_with_note->notes[0]->time_tracking );
 	}
@@ -383,6 +392,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 3. Getting the issue
 	 * 4. Verifying that the rare field values are preserved
 	 * 5. Deleting the issue.
+	 *
 	 * @return void
 	 */
 	public function testUpdateWithRareFields() {
@@ -418,7 +428,8 @@ class IssueUpdateTest extends SoapBase {
 	}
 
 	/**
-	 * Tests for updating Tags on issues
+	 * Tests for updating Tags on issues.
+	 *
 	 * @return void
 	 */
 	public function testUpdateWithTagOperations() {
@@ -449,29 +460,30 @@ class IssueUpdateTest extends SoapBase {
 		$t_issue->tags = array ( $t_tag1, $t_tag2 );
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		self::assertEquals( 2, count( $t_issue->tags ) );
+		$this->assertCount( 2, $t_issue->tags );
 
 		# update from 2 to 1 tags -> test partially detaching tags
 		$t_issue->tags = array ( $t_tag1 );
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		self::assertEquals( 1, count( $t_issue->tags ) );
+		$this->assertCount( 1, $t_issue->tags );
 
 		# update from 1 to 2 tags -> test partially attaching tags
 		$t_issue->tags = array ( $t_tag1, $t_tag2 );
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		self::assertEquals( 2, count( $t_issue->tags ) );
+		$this->assertCount( 2, $t_issue->tags );
 
 		# update from 2 to 0 tags -> test detaching tags
 		$t_issue->tags = array();
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		self::assertEquals( 0, count( $t_issue->tags ) );
+		$this->assertCount( 0, $t_issue->tags );
 	}
 
 	/**
-	 * Tests for updating Monitors on issues
+	 * Tests for updating Monitors on issues.
+	 *
 	 * @return void
 	 */
 	public function testUpdateWithMonitors() {
@@ -482,25 +494,25 @@ class IssueUpdateTest extends SoapBase {
 
 		# fresh issue -> no monitors exist
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		self::assertEquals( 0, count( $t_issue->monitors ) );
+		$this->assertCount( 0, $t_issue->monitors );
 
 		# update with this user as monitor -> should be added
 		$t_issue->monitors = array ( array ( 'id' => $this->userId));
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		self::assertEquals( 1, count( $t_issue->monitors ) );
-		self::assertEquals( $this->userId, $t_issue->monitors[0]->id );
+		$this->assertCount( 1, $t_issue->monitors );
+		$this->assertEquals( $this->userId, $t_issue->monitors[0]->id );
 
 		# update with same monitor list -> should be preserved
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		self::assertEquals( 1, count( $t_issue->monitors ) );
-		self::assertEquals( $this->userId, $t_issue->monitors[0]->id );
+		$this->assertCount( 1, $t_issue->monitors );
+		$this->assertEquals( $this->userId, $t_issue->monitors[0]->id );
 
 		# update with empty monitor list -> should be removed
 		$t_issue->monitors = array();
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		self::assertEquals( 0, count( $t_issue->monitors ) );
+		$this->assertCount( 0, $t_issue->monitors );
 	}
 }
