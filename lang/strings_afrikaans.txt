@@ -112,7 +112,6 @@ $s_category_group_bugs_button = 'Wysig kategorie';
 $s_view_status_group_bugs_button = 'Wysig sigbaarheid';
 $s_update_severity_title = 'Opdateer impak';
 $s_update_severity_button = 'Opdateer Impak';
-$s_printing_options_link = 'Drukopsies';
 $s_bugnote_date = 'Datum van opmerking';
 $s_bugnote_description = 'Beskrywing';
 $s_logged_in_as = 'Aangeteken as';
