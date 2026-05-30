@@ -1244,12 +1244,18 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 				}
 			} else {
-				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-
-				$t_note_type = isset( $t_note['note_type'] ) ? (int)$t_note['note_type'] : BUGNOTE;
-				$t_note_attr = isset( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
-
-				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_user_id, false );
+				$t_payload = [
+					'text' => $t_note['text'],
+					'reporter' => [ 'id' => $t_user_id ],
+					'view_state' => $t_note['view_state'] ?? null,
+					'time_tracking' => $t_note['time_tracking'] ?? null,
+				];
+				$t_command = new IssueNoteAddCommand( [
+					'query' => [ 'issue_id' => $p_issue_id ],
+					'payload' => $t_payload,
+					'options' => [ 'mute' => true ],
+				] );
+				$t_command->execute();
 			}
 		}
 
