@@ -1248,7 +1248,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 					'text' => $t_note['text'],
 					'reporter' => [ 'id' => $t_user_id ],
 					'view_state' => $t_note['view_state'] ?? null,
-					'time_tracking' => $t_note['time_tracking'] ?? null,
+					'time_tracking' => isset( $t_note['time_tracking'] )
+						? [ 'duration' => $t_note['time_tracking'] ]
+						: null,
 				];
 				$t_command = new IssueNoteAddCommand( [
 					'query' => [ 'issue_id' => $p_issue_id ],
