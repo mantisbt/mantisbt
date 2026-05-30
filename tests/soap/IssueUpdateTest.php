@@ -199,7 +199,11 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 1, count( $t_issue_with_noteAfterUpdate->notes ) );
 
 		$t_issue_with_one_new_note = $t_issue_with_noteAfterUpdate;
-		$t_issue_with_one_new_note->notes[] = array( 'text' => 'second note', 'note_type' => 2, 'note_attr' => 'attr_value' );
+		$t_issue_with_one_new_note->notes[] = array(
+			'text' => 'second note',
+			'note_type' => TIME_TRACKING,
+			'time_tracking' => 60
+		);
 
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_with_one_new_note );
 
@@ -211,7 +215,7 @@ class IssueUpdateTest extends SoapBase {
 
 		$this->assertEquals( 'second note', $t_new_note->text );
 		$this->assertEquals( 2, $t_new_note->note_type );
-		$this->assertEquals( 'attr_value', $t_new_note->note_attr );
+		$this->assertEquals( 60, $t_new_note->time_tracking );
 	}
 
 	/**
