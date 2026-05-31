@@ -5792,10 +5792,10 @@ $g_webservice_admin_access_level_threshold = MANAGER;
  * Minimum project access level required to be able to specify a reporter name when
  * adding an issue.
  *
- * Otherwise, the current user is used as the reporter.  Users who don't have
- * this access level can always do another step to modify the issue and specify
- * a different name, but in this case it will be logged in the history who
- * originally reported the issue.
+ * Otherwise, the reporter will be set to the current user. Users who do not
+ * have this access level can always update the issue in a second step to
+ * specify a different reporter, but in this case user who the originally
+ * reported the issue will be recorded in the history.
  *
  * @global int $g_webservice_specify_reporter_on_add_access_level_threshold
  */

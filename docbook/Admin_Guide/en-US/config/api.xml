@@ -51,7 +51,15 @@
 			<term>$g_webservice_specify_reporter_on_add_access_level_threshold</term>
 			<listitem>
 				<para>Minimum project access level required for caller to be able to
-				specify reporter when adding issues or issue notes. Defaults to DEVELOPER.</para>
+					specify a reporter when adding issues or issue notes.
+				</para>
+				<para>Otherwise, the reporter will be the current user.
+					Users who do not have this access level can always update
+					the issue in a second step to specify a different reporter,
+					but in this case user who the originally reported the issue
+					will be recorded in the history.
+				</para>
+				<para>Defaults to DEVELOPER.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
