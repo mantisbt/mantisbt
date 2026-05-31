@@ -309,10 +309,10 @@ function get_font_path() {
  *
  * @throws ErrorException
  */
-function safe_unserialize( $p_string ) {
+function safe_unserialize( $p_string, array $p_options = [] ) {
 	set_error_handler( 'error_convert_to_exception' );
 	try {
-		$t_data = unserialize( $p_string );
+		$t_data = unserialize( $p_string, $p_options );
 	}
 	catch( ErrorException $e ) {
 		restore_error_handler();
