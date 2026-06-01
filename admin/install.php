@@ -327,15 +327,7 @@ if( 0 == $t_install_state ) {
 		true,
 		'Please install or enable the PHP mbstring extension'
 	);
-?>
-<!-- Check Safe Mode -->
-<?php
-print_test( 'Checking if safe mode is enabled for install script',
-	!ini_get( 'SAFE_MODE' ),
-	true,
-	'Disable safe_mode in php.ini before proceeding' ) ?>
 
-<?php
 	# Check for custom config files in obsolete locations
 	$t_config_files = array(
 		'config_inc.php' => 'move',
