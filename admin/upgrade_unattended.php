@@ -113,6 +113,10 @@ $t_last_id = count( $g_upgrade ) - 1;
 $i = $t_last_update + 1;
 $t_count_done = 0;
 
+echo "Current schema version: $t_last_update\n";
+echo "Target schema version:  $t_last_id\n";
+echo "\n";
+
 while( ( $i <= $t_last_id ) && !$g_failed ) {
 	if ( $g_upgrade[$i] === null ) {
 		$i++;
