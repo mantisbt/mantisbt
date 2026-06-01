@@ -66,7 +66,9 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 			$t_message = 'POSSIBLE PROBLEM';
 		}
 		if( $p_message ) {
-			$t_message .= '<br>' . string_html_specialchars( $p_message );
+			$t_message .= '<br>'
+				# Restore <br> tags
+				. str_replace( '&lt;br&gt;', '<br>', string_html_specialchars( $p_message ) );
 		}
 	} else {
 		$t_class = 'success';
@@ -1230,7 +1232,7 @@ if( 3 == $t_install_state ) {
 					if( $t_sql ) {
 						foreach( $t_sqlarray as $t_single_sql ) {
 							if( !empty( $t_single_sql ) ) {
-								$t_all_sql .= $t_single_sql . '<br />';
+								$t_all_sql .= $t_single_sql . '<br>';
 							}
 						}
 					}
