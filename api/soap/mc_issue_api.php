@@ -984,7 +984,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		return ApiObjectFactory::faultForbidden( 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
-	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	$t_bug_data = bug_get( $p_issue_id, true );
+	$t_project_id = $t_bug_data->project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
@@ -1004,10 +1005,12 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 			return ApiObjectFactory::faultNotFound( 'Project \'' . $t_project_id . '\' does not exist.' );
 		}
 	}
-	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : $t_user_id ;
-	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
-	$t_summary = $p_issue['summary'] ?? '';
-	$t_description = $p_issue['description'] ?? '';
+
+	# If unspecified in the payload, default to the Issue's current data
+	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : $t_bug_data->reporter_id;
+	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : $t_bug_data->handler_id;
+	$t_summary = $p_issue['summary'] ?? $t_bug_data->summary;
+	$t_description = $p_issue['description'] ?? $t_bug_data->description;
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
 		return mci_fault_access_denied( $t_user_id, 'Not enough rights to update issues' );
@@ -1048,7 +1051,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	# fields which we expect to always be set
-	$t_bug_data = bug_get( $p_issue_id, true );
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
 
