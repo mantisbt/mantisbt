@@ -30,7 +30,7 @@ set_time_limit( 0 );
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
 require_once( dirname( __DIR__ ) . '/core.php' );
-require_api( 'crypto_api.php' );
+
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
 $g_failed = false;
