@@ -301,8 +301,7 @@ function check_disabled( $p_val = true ) {
 function helper_begin_long_process( $p_ignore_abort = false ) {
 	$t_timeout = config_get_global( 'long_process_timeout' );
 
-	# silent errors or warnings reported when safe_mode is ON.
-	@set_time_limit( $t_timeout );
+	set_time_limit( $t_timeout );
 
 	ignore_user_abort( $p_ignore_abort );
 	return $t_timeout;
