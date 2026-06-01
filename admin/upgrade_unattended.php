@@ -15,11 +15,12 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file handles unattended upgrades of Mantis
+ * This file handles unattended upgrades of Mantis.
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
+ * @copyright Copyright 2002 - 2026 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link https://mantisbt.org
  */
 
 set_time_limit( 0 );
@@ -47,10 +48,10 @@ header( 'X-Content-Type-Options: nosniff' );
 /**
  * Print the result of an upgrade step.
  *
- * @param integer $p_result    GOOD or BAD.
- * @param boolean $p_hard_fail If result is BAD, sets the global failure flag.
- * @param string  $p_message   The message describing the upgrade step.
- * @access private
+ * @param int    $p_result    GOOD or BAD.
+ * @param bool   $p_hard_fail If result is BAD, sets the global failure flag.
+ * @param string $p_message   The message describing the upgrade step.
+ *
  * @return void
  */
 function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
