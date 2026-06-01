@@ -89,6 +89,8 @@ $t_db_password = config_get_global( 'db_password' );
 $t_database_name = config_get_global( 'database_name' );
 
 # Attempt to connect
+echo "Connecting to database... ";
+$t_save = error_reporting( error_reporting() & ~E_USER_ERROR );
 $t_result = @db_connect( $t_dsn, $t_hostname, $t_db_username, $t_db_password, $t_database_name );
 if( false == $t_result ) {
 	echo "Opening connection to database "
@@ -96,24 +98,15 @@ if( false == $t_result ) {
 		. db_error_msg() . "\n";
 	exit( 1 );
 }
+error_reporting( $t_save );
+echo "OK\n";
 
 # install the tables
-$GLOBALS['g_db_type'] = $t_db_type; # database_api references this
 require_once( __DIR__ . '/schema.php' );
-$g_db = ADONewConnection( $t_db_type );
+global $g_db, $g_upgrade;
 
 echo "\nPost 1.0 schema changes\n";
-echo 'Connecting to database... ';
-$t_result = @$g_db->Connect( $t_hostname, $t_db_username, $t_db_password, $t_database_name );
 
-if( false == $t_result ) {
-	echo 'Failed.' . "\n";
-	exit( 1 );
-}
-
-echo 'OK' . "\n";
-
-$g_db_connected = true; # fake out database access routines used by config_get
 $t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 $t_last_id = count( $g_upgrade ) - 1;
 $i = $t_last_update + 1;
