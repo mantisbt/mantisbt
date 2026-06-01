@@ -73,21 +73,22 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	echo "\n";
 }
 
-$t_result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ),
-	config_get_global( 'db_username' ), config_get_global( 'db_password' ),
-	config_get_global( 'database_name' ) );
-
-if( false == $t_result ) {
-	echo 'Opening connection to database ' .
-		config_get_global( 'database_name' ) .
-		' on host ' . config_get_global( 'hostname' ) .
-		' with username ' . config_get_global( 'db_username' ) .
-		' failed: ' . db_error_msg() . "\n";
-	exit( 1 );
-}
-
 # read control variables with defaults
 $t_db_type = config_get_global( 'db_type' );
+$t_dsn = config_get_global( 'dsn', false );
+$t_hostname = config_get_global( 'hostname' );
+$t_db_username = config_get_global( 'db_username' );
+$t_db_password = config_get_global( 'db_password' );
+$t_database_name = config_get_global( 'database_name' );
+
+$t_result = @db_connect( $t_dsn, $t_hostname, $t_db_username, $t_db_password, $t_database_name );
+
+if( false == $t_result ) {
+	echo "Opening connection to database "
+		. "'$t_database_name' on host '$t_hostname' with username '$t_db_username' failed: "
+		. db_error_msg() . "\n";
+	exit( 1 );
+}
 
 # install the tables
 if( !preg_match( '/^[a-zA-Z0-9_]+$/', $t_db_type ) ||
@@ -102,7 +103,7 @@ $g_db = ADONewConnection( $t_db_type );
 
 echo "\nPost 1.0 schema changes\n";
 echo 'Connecting to database... ';
-$t_result = @$g_db->Connect( config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
+$t_result = @$g_db->Connect( $t_hostname, $t_db_username, $t_db_password, $t_database_name );
 
 if( false == $t_result ) {
 	echo 'Failed.' . "\n";
