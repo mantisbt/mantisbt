@@ -21,6 +21,8 @@
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002 - 2026 MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link https://mantisbt.org
+ *
+ * @noinspection PhpUnused
  */
 
 set_time_limit( 0 );
@@ -28,8 +30,7 @@ set_time_limit( 0 );
 # Load the MantisDB core in maintenance mode. This mode will assume that
 # config_inc.php hasn't been specified. Thus the database will not be opened
 # and plugins will not be loaded.
-define( 'MANTIS_MAINTENANCE_MODE', true );
-
+const MANTIS_MAINTENANCE_MODE = true;
 require_once( dirname( __DIR__ ) . '/core.php' );
 
 $g_error_send_page_header = false; # suppress page headers in the error handler
@@ -93,7 +94,7 @@ $t_database_name = config_get_global( 'database_name' );
 echo "Connecting to database... ";
 $t_save = error_reporting( error_reporting() & ~E_USER_ERROR );
 $t_result = @db_connect( $t_dsn, $t_hostname, $t_db_username, $t_db_password, $t_database_name );
-if( false == $t_result ) {
+if( !$t_result ) {
 	echo "FAILED\n";
 	echo "Error opening connection to database "
 		. "'$t_database_name' on host '$t_hostname' with username '$t_db_username':\n"
@@ -119,7 +120,7 @@ echo "Current schema version: $t_last_update\n";
 echo "Target schema version:  $t_last_id\n";
 echo "\n";
 
-while( ( $i <= $t_last_id ) && !$g_failed ) {
+while( $i <= $t_last_id && !$g_failed ) {
 	if ( $g_upgrade[$i] === null ) {
 		$i++;
 		$t_count_done++;
@@ -192,7 +193,7 @@ if( $t_count_done ) {
 }
 echo "$t_count_done schema upgrades executed.\n";
 
-if( false == $g_failed ) {
+if( !$g_failed ) {
 	echo 'Done.' . "\n";
 	exit( 0 );
 }
