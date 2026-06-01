@@ -40,6 +40,7 @@
  *
  * @author Andac
  * @author BaRaN6161 TURK
+ * @author HakanIST
  * @author Korayal
  */
 
@@ -58,6 +59,7 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Öncelikli Grafiklere Göre';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Önem Grafiklere Göre';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Kategori Grafiklerine Göre';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Çözünürlük Grafiklere Göre';
+$s_plugin_MantisGraph_graph_project_title = 'Proje Grafiklerine Göre';
 $s_plugin_MantisGraph_graph_developer_title = 'Geliştirici Grafiklere Göre';
 $s_plugin_MantisGraph_graph_reporter_title = 'Raporcu Grafiklere Göre';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Açılan, Çözülen ve Kalan Sorunlar';
