@@ -112,6 +112,7 @@ $t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 $t_last_id = count( $g_upgrade ) - 1;
 $i = $t_last_update + 1;
 $t_count_done = 0;
+$t_dict = NewDataDictionary( $g_db );
 
 echo "Current schema version: $t_last_update\n";
 echo "Target schema version:  $t_last_id\n";
@@ -124,7 +125,6 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 		continue;
 	}
 
-	$t_dict = NewDataDictionary( $g_db );
 	$t_sql = true;
 	$t_target = $g_upgrade[$i][1][0];
 
