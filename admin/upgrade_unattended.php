@@ -93,8 +93,9 @@ echo "Connecting to database... ";
 $t_save = error_reporting( error_reporting() & ~E_USER_ERROR );
 $t_result = @db_connect( $t_dsn, $t_hostname, $t_db_username, $t_db_password, $t_database_name );
 if( false == $t_result ) {
-	echo "Opening connection to database "
-		. "'$t_database_name' on host '$t_hostname' with username '$t_db_username' failed: "
+	echo "FAILED\n";
+	echo "Error opening connection to database "
+		. "'$t_database_name' on host '$t_hostname' with username '$t_db_username':\n"
 		. db_error_msg() . "\n";
 	exit( 1 );
 }
@@ -181,7 +182,10 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 	$t_count_done++;
 }
 
-echo $t_count_done . ' schema upgrades executed.' . "\n";
+if( $t_count_done ) {
+	echo "\n";
+}
+echo "$t_count_done schema upgrades executed.\n";
 
 if( false == $g_failed ) {
 	echo 'Done.' . "\n";
