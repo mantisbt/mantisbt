@@ -72,6 +72,15 @@ $g_cache_bugnotes_by_bug_id = array();
 $g_cache_bugnotes_by_id = array();
 
 /**
+ * Base query to retrieve bugnote data; append WHERE, ORDER BY, etc. as needed.
+ */
+const SQL_SELECT_BUGNOTES = <<<SQL
+	SELECT b.*, t.note
+	FROM {bugnote} b
+	LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
+	SQL;
+
+/**
  * Bugnote Data Structure Definition
  */
 class BugnoteData {
@@ -154,12 +163,9 @@ function bugnote_exists( $p_bugnote_id ) {
 		return false;
 	}
 
-	db_param_push();
-	$t_query = 'SELECT b.*, t.note
-				FROM {bugnote} b
-				LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
-				WHERE b.id = ' . db_param();
-	$t_result = db_query( $t_query, array( $c_bugnote_id ) );
+	$t_query = new DbQuery( SQL_SELECT_BUGNOTES );
+	$t_query->append_sql( ' WHERE b.id=' . $t_query->param( $c_bugnote_id ) );
+	$t_result = $t_query->execute();
 	$t_row = db_fetch_array( $t_result );
 
 	if( $t_row === false ) {
@@ -631,35 +637,33 @@ function bugnote_row_to_object( array $p_row ) {
  *
  * @access public
  */
-function bugnote_get_all_bugnotes( $p_bug_id ) {
+function bugnote_get_all_bugnotes( int $p_bug_id ): array {
 	global $g_cache_bugnotes_by_bug_id;
 
 	# the cache should be aware of the sorting order
-	if( !isset( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] ) ) {
+	if( !isset( $g_cache_bugnotes_by_bug_id[$p_bug_id] ) ) {
 		# Now sorting by submit date and id (#11742). The date_submitted
 		# column is currently not indexed, but that does not seem to affect
 		# performance in a measurable way
-		db_param_push();
-		$t_query = 'SELECT b.*, t.note
-			          	FROM      {bugnote} b
-			          	LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
-						WHERE b.bug_id=' . db_param() . '
-						ORDER BY b.date_submitted ASC, b.id ASC';
+		$t_query = new DbQuery( SQL_SELECT_BUGNOTES );
+		$t_query->append_sql(
+			' WHERE b.bug_id=' . $t_query->param( $p_bug_id )
+			. ' ORDER BY b.date_submitted ASC, b.id ASC'
+		);
+		$t_result = $t_query->execute();
+
+		# Build bugnotes array
 		$t_bugnotes = array();
-
-		# BUILD bugnotes array
-		$t_result = db_query( $t_query, array( $p_bug_id ) );
-
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_bugnote = bugnote_row_to_object( $t_row );
 			$t_bugnotes[] = $t_bugnote;
 			bugnote_cache( $t_bugnote );
 		}
 
-		$g_cache_bugnotes_by_bug_id[(int)$p_bug_id] = $t_bugnotes;
+		$g_cache_bugnotes_by_bug_id[$p_bug_id] = $t_bugnotes;
 	}
 
-	return $g_cache_bugnotes_by_bug_id[(int)$p_bug_id];
+	return $g_cache_bugnotes_by_bug_id[$p_bug_id];
 }
 
 /**
