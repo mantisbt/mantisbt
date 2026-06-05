@@ -1738,6 +1738,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Upgrading the plugin schema failed
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'The "%1$s" plugin needs to be upgraded before you can access this page.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'The format of the specified plugin page "%1$s" is invalid. It must match "Plugin[/path/to]/page".';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'The format of the specified plugin file "%1$s" is invalid. It must match "Plugin[/path/to]/file[.ext]".';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = 'Plugin entity "%s" not found';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'There was an unknown error "%1$s" during execution of the "%2$s" plugin.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field "%1$s" contains duplicate column "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%1$s" contains invalid field "%2$s".';

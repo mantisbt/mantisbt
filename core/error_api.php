@@ -870,6 +870,7 @@ function error_map_mantis_error_to_http_code( $p_error ) {
 		case ERROR_TAG_NOT_FOUND:
 		case ERROR_TOKEN_NOT_FOUND:
 		case ERROR_USER_TOKEN_NOT_FOUND:
+		case ERROR_PLUGIN_ENTITY_NOT_FOUND:
 			return HTTP_STATUS_NOT_FOUND;
 
 		case ERROR_ACCESS_DENIED:
