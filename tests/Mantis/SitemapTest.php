@@ -97,6 +97,9 @@ final class SitemapTest extends MantisCoreBase {
 
 		# Anonymous login
 		self::login( true );
+	
+		global $g_project_override;
+		$g_project_override = ALL_PROJECTS;
 
 		# Permit all
 		self::$news_enabled = config_get( 'news_enabled' );
@@ -169,6 +172,9 @@ final class SitemapTest extends MantisCoreBase {
 
 	public static function tearDownAfterClass(): void {
 		parent::tearDownAfterClass();
+
+		global $g_project_override;
+		$g_project_override = null;
 
 		global $g_plugin_cache;
 		unset( $g_plugin_cache['SitemapPlugin'] );
