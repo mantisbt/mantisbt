@@ -471,25 +471,30 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php
 			$t_attachments = file_get_visible_attachments( $t_id );
 			$t_first_attachment = true;
-			$t_path = config_get_global( 'path' );
+			$t_path = string_html_specialchars( config_get_global( 'path' ) );
 
 			foreach ( $t_attachments as $t_attachment  ) {
 				if( $t_first_attachment ) {
 					$t_first_attachment = false;
 				} else {
-					echo '<br />';
+					echo '<br>';
 				}
 
-				$c_filename = string_display_line( $t_attachment['display_name'] );
-				$c_download_url = htmlspecialchars( $t_attachment['download_url'] );
-				$c_filesize = number_format( $t_attachment['size'] );
-				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
-				echo $c_filename . ' (' . $c_filesize . ' ' . lang_get( 'bytes' )
-					. ') <span class="italic-small">' . $c_date_added . '</span><br />'
-					. string_display_line_links( $t_path . $c_download_url );
+				$c_download_url = string_html_specialchars( $t_attachment['download_url'] );
+
+				printf( '%s (%s) <span class="italic-small">%s</span><br>%s',
+					string_html_specialchars( $t_attachment['display_name'] ),
+					number_format( $t_attachment['size'] ) . ' ' . lang_get( 'bytes' ),
+					date( $t_date_format, $t_attachment['date_added'] ),
+					$t_path . $c_download_url
+				);
 
 				if( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
-					echo '<br /><img src="', $c_download_url, '" alt="', $t_attachment['alt'], '" /><br />';
+					/** @noinspection HtmlUnknownTarget */
+					printf( '<br><img src="%s" alt="%s" /><br>',
+						$c_download_url,
+						string_html_specialchars( $t_attachment['alt'] )
+					);
 				}
 			}
 		?>
