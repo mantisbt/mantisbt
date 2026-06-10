@@ -24,25 +24,35 @@
  * @uses access_api.php
  * @uses authentication_api.php
  * @uses config_api.php
+ * @uses current_user_api.php
  * @uses database_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
  * @uses helper_api.php
  * @uses layout_api.php
+ * @uses news_api.php
+ * @uses string_api.php
+ * @uses user_api.php
  */
 
 # Prevent output of HTML in the content if errors occur
-define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+if( !defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
+	define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+}
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
+require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
 require_api( 'helper_api.php' );
 require_api( 'layout_api.php' );
+require_api( 'news_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
 
 # Maximum number of URLs
 $t_max_urls = 50000;
@@ -50,7 +60,7 @@ $t_max_urls = 50000;
 if( !layout_sitemap_enabled() ) {
 	# Disabled
 	http_response_code( HTTP_STATUS_NOT_FOUND );
-	exit;
+	return;
 }
 	
 # Force anonymous user
@@ -82,29 +92,40 @@ $t_urls = array_filter( array_unique( $t_urls ), function($p_url) {
 	return !helper_is_link_external( $p_url );
 } );
 
-# Issues links
+# News
+if( news_is_enabled() ) {
+	$t_news = news_get_rows( ALL_PROJECTS );
+	foreach( $t_news as $t_item ) {
+		if( !news_is_private( $t_item['id'] ) ) {
+			$t_mtime = max( $t_mtime, $t_item['last_modified'] );
+			$t_urls[] = [
+				'loc' => $t_path . 'news_view_page.php?news_id=' . $t_item['id'],
+				'lastmod' => $t_item['last_modified'],
+			];
+		}
+	}
+}
+
+# Issues
 if( access_has_global_level( config_get( 'view_bug_threshold' ), $t_anonymous_user_id )
 	&& access_has_global_level( config_get( 'limit_view_unless_threshold' ), $t_anonymous_user_id ) ) {
 	$t_filter = filter_ensure_valid_filter( [
 		FILTER_PROPERTY_VIEW_STATE => VS_PUBLIC,
 		FILTER_PROPERTY_STATUS => META_FILTER_ANY,
 		FILTER_PROPERTY_HIDE_STATUS => META_FILTER_NONE,
+		FILTER_PROPERTY_SORT_FIELD_NAME => 'id',
+		FILTER_PROPERTY_SORT_DIRECTION => 'ASC',
 	] );
 	$t_filter_query = new BugFilterQuery( $t_filter );
 	$t_filter_query->set_limit( $t_max_urls - count( $t_urls ) );
 	$t_result = $t_filter_query->execute();
-	$t_issues = [];
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_mtime = max( $t_mtime, $t_row['last_updated'] );
-		$t_issues[] = [
+		$t_urls[] = [
 			'loc' => $t_path . string_get_bug_view_url( $t_row['id'] ),
 			'lastmod' => $t_row['last_updated'],
 		];
 	}
-	usort( $t_issues, function( $t_a, $t_b ) {
-		return strcmp( $t_a['loc'], $t_b['loc'] );
-	} );
-	$t_urls = array_merge( $t_urls, $t_issues );
 }
 
 if( !$t_mtime ) {
@@ -120,15 +141,17 @@ if( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] )
 	&& ( $t_mtime <= strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) ) ) {
 	# Not modified
 	http_response_code( HTTP_STATUS_NOT_MODIFIED );
-	exit;
+	return;
 }
+
+http_response_code( HTTP_STATUS_SUCCESS );
 
 # Print sitemap
 echo '<?xml version="1.0" encoding="UTF-8"?>', "\n",
 	'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', "\n";
 foreach( $t_urls as $t_item ) {
 	echo '<url>', "\n",
-		'<loc>', htmlspecialchars( $t_item['loc'] ?? $t_item, ENT_XML1 | ENT_QUOTES ), '</loc>', "\n",
+		'<loc>', string_html_specialchars( $t_item['loc'] ?? $t_item ), '</loc>', "\n",
 		'<lastmod>', gmdate( 'Y-m-d', $t_item['lastmod'] ?? $t_mtime ), '</lastmod>', "\n",
 		'</url>', "\n";
 }

@@ -23,12 +23,14 @@
  * @link https://www.mantisbt.org
  */
 
-namespace Mantis\tests\Mantis;
+use Mantis\tests\Mantis\MantisCoreBase;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * "Plugin" to test some hooks
  */
-class SitemapPlugin {
+final class SitemapPlugin {
 	/**
 	 * EVENT_MENU_MAIN_FRONT hook
 	 *
@@ -43,7 +45,7 @@ class SitemapPlugin {
 			],
 		];
 	}
-	
+
 	/**
 	 * EVENT_MENU_MAIN hook
 	 *
@@ -65,39 +67,33 @@ class SitemapPlugin {
  */
 final class SitemapTest extends MantisCoreBase {
 
-	private const MAX_ISSUES = 100;
+	private const MAX_ISSUES = 50;
+	private const MAX_NEWS = 50;
 
 	private static $libxml_use_errors;
-	private static $path;
-	private static $short_path;
 	private static $news_enabled;
 	private static $report_bug_threshold;
 	private static $view_changelog_threshold;
 	private static $roadmap_view_threshold;
 	private static $view_summary_threshold;
 	private static $enable_project_documentation;
-	private static $wiki_enable;
 	private static $manage_project_threshold;
 	private static $time_tracking_enabled;
 	private static $time_tracking_reporting_threshold;
 	private static $main_menu_custom_options;
 	private static $antispam_max_event_count;
-	private static $test_urls = [];
+	private static $sidebar_urls = [];
 	private static $issues = [];
+	private static $news = [];
 
 	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
 
 		self::$libxml_use_errors = libxml_use_internal_errors( true );
 
-		self::$path = config_get_global( 'path' );
-		self::$short_path = config_get_global( 'short_path' );
-		config_set_global( 'short_path', '/' );
-		config_set_global( 'path', 'http://localhost/' );
-
 		# Anonymous login
 		self::login( true );
-	
+
 		global $g_project_override;
 		$g_project_override = ALL_PROJECTS;
 
@@ -114,8 +110,6 @@ final class SitemapTest extends MantisCoreBase {
 		config_set( 'view_summary_threshold', ANYBODY );
 		self::$enable_project_documentation = config_get( 'enable_project_documentation' );
 		config_set( 'enable_project_documentation', ON );
-		self::$wiki_enable = config_get_global( 'wiki_enable' );
-		config_set_global( 'wiki_enable', ON );
 		self::$manage_project_threshold = config_get( 'manage_project_threshold' );
 		config_set( 'manage_project_threshold', ANYBODY );
 		self::$time_tracking_enabled = config_get( 'time_tracking_enabled' );
@@ -138,7 +132,7 @@ final class SitemapTest extends MantisCoreBase {
 		event_hook( 'EVENT_MENU_MAIN_FRONT', 'hookEVENT_MENU_MAIN_FRONT', 'SitemapPlugin' );
 		event_hook( 'EVENT_MENU_MAIN', 'hookEVENT_MENU_MAIN', 'SitemapPlugin' );
 
-		self::$test_urls = [
+		self::$sidebar_urls = [
 			'main_page.php',					# if news_enabled = ON
 			'my_view_page.php',					# always
 			'view_all_bug_page.php',			# always
@@ -147,11 +141,9 @@ final class SitemapTest extends MantisCoreBase {
 			'roadmap_page.php',					# if roadmap_view_threshold
 			'summary_page.php',					# if view_summary_threshold
 			'proj_doc_page.php',				# if enable_project_documentation = ON
-			'wiki.php?type=project&amp;id=0',	# if wiki_enable = ON
+			'wiki.php?',						# if wiki_enable = ON + wiki_engine
 			layout_manage_menu_link(),			# if manage_project_threshold
 			'billing_page.php',					# if time_tracking_enabled = ON + time_tracking_reporting_threshold
-			'EVENT_MENU_MAIN_FRONT.php',		# by SitemapPlugin::hookEVENT_MENU_MAIN_FRONT
-			'EVENT_MENU_MAIN.php',				# by SitemapPlugin::hookEVENT_MENU_MAIN
 			'main_menu_custom_options.php',		# by main_menu_custom_options
 		];
 
@@ -161,12 +153,16 @@ final class SitemapTest extends MantisCoreBase {
 
 		# Create test issues
 		for( $t_index = 0; $t_index < self::MAX_ISSUES; ++ $t_index ) {
-			$t_issue_data = new \BugData();
+			$t_issue_data = new BugData();
 			$t_issue_data->project_id = 1;
 			$t_issue_data->summary = 'Test issue ' . $t_index;
 			$t_issue_data->description = 'Test issue for Sitemap tests';
-			$t_issue_data->category_id = 1;
 			self::$issues [] = $t_issue_data->create();
+		}
+		
+		# Create test news
+		for( $t_index = 0; $t_index < self::MAX_NEWS; ++ $t_index ) {
+			self::$news [] = news_create( ALL_PROJECTS, 0, VS_PUBLIC, 0, 'Test news ' . $t_index, 'Test news for Sitemap tests' );
 		}
 	}
 
@@ -176,26 +172,31 @@ final class SitemapTest extends MantisCoreBase {
 		global $g_project_override;
 		$g_project_override = null;
 
+		# un-Hack plugin items
 		global $g_plugin_cache;
 		unset( $g_plugin_cache['SitemapPlugin'] );
 		global $g_event_cache;
 		unset( $g_event_cache['EVENT_MENU_MAIN_FRONT']['callbacks']['SitemapPlugin'] );
 		unset( $g_event_cache['EVENT_MENU_MAIN']['callbacks']['SitemapPlugin'] );
 
+		# Clear test news
+		foreach( self::$news as $t_news ) {
+			news_delete( $t_news );
+		}
+		self::$news = [];
+
+		# Clear test issues
 		foreach( self::$issues as $t_issue ) {
 			bug_delete( $t_issue );
 		}
 		self::$issues = [];
 
-		config_set_global( 'path', self::$path );
-		config_set_global( 'short_path', self::$short_path );
 		config_set( 'news_enabled', self::$news_enabled );
 		config_set( 'report_bug_threshold', self::$report_bug_threshold );
 		config_set( 'view_changelog_threshold', self::$view_changelog_threshold );
 		config_set( 'roadmap_view_threshold', self::$roadmap_view_threshold );
 		config_set( 'view_summary_threshold', self::$view_summary_threshold );
 		config_set( 'enable_project_documentation', self::$enable_project_documentation );
-		config_set_global( 'wiki_enable', self::$wiki_enable );
 		config_set( 'manage_project_threshold', self::$manage_project_threshold );
 		config_set( 'time_tracking_enabled', self::$time_tracking_enabled );
 		config_set( 'time_tracking_reporting_threshold', self::$time_tracking_reporting_threshold );
@@ -207,36 +208,33 @@ final class SitemapTest extends MantisCoreBase {
 	}
 
 	/**
-	 * Tests layout_get_sidebar_items()
+	 * Generate Sitemap
 	 *
-	 * @return void
+	 * @param array $p_headers Optional HTTP headers
+	 * @return Response HTTP response
 	 */
-	public function testGetSidebarItems(): void {
-		# Get Sidebar
-		$t_sidebar_items = layout_get_sidebar_items();
-
-		# Check URLs
-		foreach( self::$test_urls as $t_url ) {
-			$this->assertCount( 1, array_filter( $t_sidebar_items,
-				fn( $p_item ) => str_starts_with( $p_item['url'] ?? '', $t_url ) ), "Missed Sidebar URL: '$t_url'"
-			);
-		}
+	private function get_sitemap( array $p_headers = [] ): Response {
+		return ( new Client( [
+			'allow_redirects' => false,
+			'http_errors' => false,
+			'headers' => $p_headers,
+		] ) )->get( config_get_global( 'path' ). 'sitemap.php' );
 	}
 
 	/**
-	 * Tests Sitemap generation
+	 * Get Sitemap URLs
 	 *
-	 * @return void
+	 * @param Response $p_response HTTP response
+	 * @return array Sitemap URLs
 	 */
-	public function testGenerateSitemap(): void {
-		# Generate Sitemap
-		ob_start();
-		require_once( dirname( dirname( __DIR__ )  ) . '/sitemap.php' );
-		$t_sitemap = ob_get_contents();
-		ob_end_clean();
+	private function parse_sitemap_urls( Response $p_response ): array {
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $p_response->getStatusCode(), 'The wrong HTTP response' );
+
+		$t_sitemap = $p_response->getBody()->getContents();
+		$this->assertNotEmpty( $t_sitemap, 'Empty HTTP response' );
 
 		# Check Sitemap XML format
-		$t_xml = new \DOMDocument();
+		$t_xml = new DOMDocument();
 		$t_xml->loadXML( $t_sitemap );
 		$t_errors = libxml_get_errors();
 		$this->assertEmpty( $t_errors, 'XML parsing errors: ' . implode( "\n",
@@ -255,19 +253,144 @@ final class SitemapTest extends MantisCoreBase {
 		);
 
 		# Extract URLs
-		$t_xpath = new \DOMXPath( $t_xml );
+		$t_xpath = new DOMXPath( $t_xml );
 		$t_xpath->registerNamespace( 's', 'http://www.sitemaps.org/schemas/sitemap/0.9' );
-		$t_locs = array_map( fn( $p_node ) => trim( $p_node->nodeValue ),
+		return array_map( fn( $p_node ) => trim( $p_node->nodeValue ),
 			iterator_to_array( $t_xpath->query('//s:url/s:loc') )
 		);
-		$this->assertCount( count( self::$issues ) + count( layout_get_sidebar_items() ), $t_locs, 'The wrong number of URLs' );
+	}
+
+	/**
+	 * Tests layout_get_sidebar_items()
+	 *
+	 * @return void
+	 */
+	public function testGetSidebarItems(): void {
+		$t_sidebar_items = layout_get_sidebar_items();
+
+		# Include "plugin" items
+		$t_urls = self::$sidebar_urls;
+		$t_urls [] = 'EVENT_MENU_MAIN_FRONT.php';
+		$t_urls [] = 'EVENT_MENU_MAIN.php';
+
+		# Check URLs
+		foreach( $t_urls as $t_url ) {
+			$this->assertCount( 1, array_filter( $t_sidebar_items,
+				fn( $p_item ) => str_starts_with( $p_item['url'] ?? '', $t_url ) ), "Missed Sidebar URL: '$t_url'"
+			);
+		}
+	}
+
+	/**
+	 * Tests Sitemap generation
+	 *
+	 * @return void
+	 */
+	public function testSitemap(): void {
+		$t_sitemap = $this->get_sitemap();
+		$t_urls = $this->parse_sitemap_urls( $t_sitemap );
 
 		# Check URLs
 		$t_path = config_get_global( 'path' );
-		$t_default_home_page = config_get_global( 'default_home_page' );
-		$this->assertContains( $t_path . $t_default_home_page, $t_locs, "Missed Home URL: '$t_default_home_page'" );
-		foreach( self::$test_urls as $t_url ) {
-			$this->assertContains( $t_path . $t_url, $t_locs , "Missed Sidebar URL: '$t_url'" );
+		$t_home_page = $t_path . config_get_global( 'default_home_page' );
+		$this->assertContains( $t_home_page, $t_urls, "Missed Home URL: '$t_home_page'" );
+		foreach( self::$sidebar_urls as $t_test_url ) {
+			$t_url = $t_path . $t_test_url;
+			$this->assertCount( 1, array_filter( $t_urls,
+				fn( $p_item ) => str_starts_with( $p_item, $t_url ) ), "Missed Sidebar URL: '$t_url'"
+			);
+		}
+		foreach( self::$issues as $t_issue ) {
+			$t_url = $t_path . string_get_bug_view_url( $t_issue );
+			$this->assertContains( $t_url, $t_urls, "Missed Issue URL: '$t_url'" );
+		}
+		foreach( self::$news as $t_news ) {
+			$t_url = $t_path . 'news_view_page.php?news_id=' . $t_news;
+			$this->assertContains( $t_url, $t_urls, "Missed News URL: '$t_url'" );
+		}
+	}
+
+	/**
+	 * Tests unmodified Sitemap
+	 *
+	 * @return void
+	 */
+	public function testSitemapIfModifiedSince(): void {
+		$t_sitemap = $this->get_sitemap( [ 'If-Modified-Since' => gmdate( 'D, d M Y H:i:s \G\M\T', time() ) ] );
+
+		$this->assertEquals( HTTP_STATUS_NOT_MODIFIED, $t_sitemap->getStatusCode(), 'The wrong HTTP response' );
+		$this->assertEmpty( $t_sitemap->getBody()->getContents() );
+	}
+
+	/**
+	 * Tests Sitemap with a disabled anonymous user
+	 *
+	 * @return void
+	 */
+	public function testSitemapWithDisabledAnonymousUser(): void {
+		$t_anonymous = user_get_id_by_name( auth_anonymous_account() );
+		user_set_fields( $t_anonymous, [ 'enabled' => false, 'protected' => true ] );
+		$t_sitemap = $this->get_sitemap();
+		user_set_fields( $t_anonymous, [ 'enabled' => true, 'protected' => true ] );
+
+		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_sitemap->getStatusCode(), 'The wrong HTTP response' );
+		$this->assertEmpty( $t_sitemap->getBody()->getContents() );
+	}
+
+	/**
+	 * Tests Sitemap with denied view_bug_threshold
+	 *
+	 * @return void
+	 */
+	public function testSitemapWithViewIssuesThreshold(): void {
+		config_set( 'view_bug_threshold', NOBODY );
+		$t_sitemap = $this->get_sitemap();
+		config_set( 'view_bug_threshold', ANYBODY );
+
+		# Check URLs
+		$t_urls = $this->parse_sitemap_urls( $t_sitemap );
+		$t_path = config_get_global( 'path' );
+		foreach( self::$issues as $t_issue ) {
+			$t_url = $t_path . string_get_bug_view_url( $t_issue );
+			$this->assertNotContains( $t_url, $t_urls, "Extra Issue URL: '$t_url'" );
+		}
+	}
+
+	/**
+	 * Tests Sitemap with denied limit_view_unless_threshold
+	 *
+	 * @return void
+	 */
+	public function testSitemapWithLimitViewUnlessThreshold(): void {
+		config_set( 'limit_view_unless_threshold', NOBODY );
+		$t_sitemap = $this->get_sitemap();
+		config_set( 'limit_view_unless_threshold', ANYBODY );
+
+		# Check URLs
+		$t_urls = $this->parse_sitemap_urls( $t_sitemap );
+		$t_path = config_get_global( 'path' );
+		foreach( self::$issues as $t_issue ) {
+			$t_url = $t_path . string_get_bug_view_url( $t_issue );
+			$this->assertNotContains( $t_url, $t_urls, "Extra Issue URL: '$t_url'" );
+		}
+	}
+
+	/**
+	 * Tests Sitemap with disabled news
+	 *
+	 * @return void
+	 */
+	public function testSitemapWithDisabledNews(): void {
+		config_set( 'news_enabled', OFF );
+		$t_sitemap = $this->get_sitemap();
+		config_set( 'news_enabled', ON );
+
+		# Check URLs
+		$t_urls = $this->parse_sitemap_urls( $t_sitemap );
+		$t_path = config_get_global( 'path' );
+		foreach( self::$news as $t_news ) {
+			$t_url = $t_path . 'news_view_page.php?news_id=' . $t_news;
+			$this->assertNotContains( $t_url, $t_urls, "Extra News URL: '$t_url'" );
 		}
 	}
 }
