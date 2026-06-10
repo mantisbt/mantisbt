@@ -203,18 +203,21 @@ function news_get_rows( $p_project_id, $p_global = true ) {
 		$t_projects[] = ALL_PROJECTS;
 	}
 
+	db_param_push();
+
 	$t_query = 'SELECT * FROM {news}';
 
 	if( 1 == count( $t_projects ) ) {
-		$c_project_id = $t_projects[0];
-		$t_query .= ' WHERE project_id=\'$c_project_id\'';
+		$t_params = array( $t_projects[0] );
+		$t_query .= ' WHERE project_id=' . db_param();
 	} else {
+		$t_params = [];
 		$t_query .= ' WHERE project_id IN (' . implode( ',', $t_projects ) . ')';
 	}
 
 	$t_query .= ' ORDER BY date_posted DESC';
 
-	$t_result = db_query( $t_query, array() );
+	$t_result = db_query( $t_query, $t_params );
 
 	$t_rows = array();
 
