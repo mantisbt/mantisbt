@@ -228,9 +228,8 @@ final class SitemapTest extends MantisCoreBase {
 	 * @return array Sitemap URLs
 	 */
 	private function parse_sitemap_urls( Response $p_response ): array {
-		$this->assertEquals( HTTP_STATUS_SUCCESS, $p_response->getStatusCode(), 'The wrong HTTP response' );
-
 		$t_sitemap = $p_response->getBody()->getContents();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $p_response->getStatusCode(), "The wrong HTTP response. Response body:\n$t_sitemap" );
 		$this->assertNotEmpty( $t_sitemap, 'Empty HTTP response' );
 
 		# Check Sitemap XML format
