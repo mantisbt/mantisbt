@@ -46,10 +46,10 @@
  * @author Ата
  */
 
-$s_plugin_MantisGraph_title = 'Mantis графіки';
-$s_plugin_MantisGraph_description = 'Офіційний модуль для графіків.';
+$s_plugin_MantisGraph_title = 'Mantis діаграми';
+$s_plugin_MantisGraph_description = 'Офіційний модуль для діаграм.';
 $s_plugin_MantisGraph_config = 'Налаштування';
-$s_plugin_MantisGraph_tab_label = 'Графіки';
+$s_plugin_MantisGraph_tab_label = 'Діаграми';
 $s_plugin_MantisGraph_status_link = 'За статусом';
 $s_plugin_MantisGraph_priority_link = 'За пріоритетом';
 $s_plugin_MantisGraph_severity_link = 'За серйозністю';
@@ -61,6 +61,7 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Діаграми за пріо
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Діаграми за серйозністю';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Діаграми за категорією';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Діаграми за рішенням';
+$s_plugin_MantisGraph_graph_project_title = 'Діаграми за проєктами';
 $s_plugin_MantisGraph_graph_developer_title = 'Діаграми за розробниками';
 $s_plugin_MantisGraph_graph_reporter_title = 'Діаграми за доповідачами';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Відкриті, вирішені й ті, що залишилися проблеми';
@@ -81,8 +82,9 @@ $s_plugin_MantisGraph_period_last_quarter = 'Минулого кварталу';
 $s_plugin_MantisGraph_period_year_to_date = 'Рік до дати';
 $s_plugin_MantisGraph_period_select = 'Довільні дати';
 $s_plugin_MantisGraph_period_last_year = 'Минулого року';
-$s_plugin_MantisGraph_graph_page = 'Графік історії проблем';
+$s_plugin_MantisGraph_graph_page = 'Діаграма історії проблем';
 $s_plugin_MantisGraph_graph_topdev = 'Найкращі розробники за кількістю виправлених проблем';
 $s_plugin_MantisGraph_graph_opendev = 'Розробники за відкритими проблемами';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Найкращі доповідачі за виправленими проблемами';
 $s_plugin_MantisGraph_other_categories = 'інші категорії (%d)';
+$s_plugin_MantisGraph_other_projects = 'інші проєкти (%d)';
