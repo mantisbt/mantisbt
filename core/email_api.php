@@ -1419,7 +1419,7 @@ function email_send_all( $p_delete_on_failure = false ) : void {
 		# check if email was not found.  This can happen if another request picks up the email first and sends it.
 		if( $t_email_data === false ) {
 			$t_email_sent = true;
-			log_event( LOG_EMAIL_VERBOSE, 'Message $t_id has already been sent' );
+			log_event( LOG_EMAIL_VERBOSE, 'Message ' . $t_id . ' has already been sent' );
 		} else {
 			log_event( LOG_EMAIL_VERBOSE, 'Sending message ' . $t_id );
 			$t_email_sent = email_send( $t_email_data );
