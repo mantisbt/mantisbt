@@ -23,44 +23,13 @@
  * @link https://www.mantisbt.org
  */
 
-use Mantis\tests\Mantis\MantisCoreBase;
+namespace Mantis\tests\Mantis;
+
+use BugData;
+use DOMDocument;
+use DOMXPath;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-
-/**
- * "Plugin" to test some hooks
- */
-final class SitemapPlugin {
-	/**
-	 * EVENT_MENU_MAIN_FRONT hook
-	 *
-	 * @return array Menu items
-	 */
-	public static function hookEVENT_MENU_MAIN_FRONT(): array {
-		return [
-			[
-				'url' => 'EVENT_MENU_MAIN_FRONT.php',
-				'title' => 'main_link',
-				'icon' => 'fa-bullhorn',
-			],
-		];
-	}
-
-	/**
-	 * EVENT_MENU_MAIN hook
-	 *
-	 * @return array Menu items
-	 */
-	public static function hookEVENT_MENU_MAIN(): array {
-		return [
-			[
-				'url' => 'EVENT_MENU_MAIN.php',
-				'title' => 'main_link',
-				'icon' => 'fa-bullhorn',
-			],
-		];
-	}
-}
 
 /**
  * PHPUnit tests for Sitemap
@@ -128,7 +97,35 @@ final class SitemapTest extends MantisCoreBase {
 
 		# Hack plugin items
 		global $g_plugin_cache;
-		$g_plugin_cache['SitemapPlugin'] = new SitemapPlugin;
+		$g_plugin_cache['SitemapPlugin'] = new class {
+			/**
+			 * EVENT_MENU_MAIN_FRONT hook
+			 * @return array Menu items
+			 */
+			public static function hookEVENT_MENU_MAIN_FRONT(): array {
+				return [
+					[
+						'url' => 'EVENT_MENU_MAIN_FRONT.php',
+						'title' => 'main_link',
+						'icon' => 'fa-bullhorn',
+					],
+				];
+			}
+
+			/**
+			 * EVENT_MENU_MAIN hook
+			 * @return array Menu items
+			 */
+			public static function hookEVENT_MENU_MAIN(): array {
+				return [
+					[
+						'url' => 'EVENT_MENU_MAIN.php',
+						'title' => 'main_link',
+						'icon' => 'fa-bullhorn',
+					],
+				];
+			}
+		};
 		event_hook( 'EVENT_MENU_MAIN_FRONT', 'hookEVENT_MENU_MAIN_FRONT', 'SitemapPlugin' );
 		event_hook( 'EVENT_MENU_MAIN', 'hookEVENT_MENU_MAIN', 'SitemapPlugin' );
 
