@@ -494,7 +494,7 @@ function install_stored_filter_migrate() {
 				case 'v7':
 				case 'v8':
 					try {
-						$t_filter_arr = safe_unserialize( $t_setting_arr[1] );
+						$t_filter_arr = safe_unserialize( $t_setting_arr[1], [ 'allowed_classes' => false ] );
 					}
 					catch( ErrorException $e ) {
 						$t_error = $e->getMessage();
@@ -704,7 +704,7 @@ function install_check_config_serialization() {
 		}
 
 		try {
-			$t_config = safe_unserialize( $t_value );
+			$t_config = safe_unserialize( $t_value, [ 'allowed_classes' => false ] );
 		}
 		catch( ErrorException $e ) {
 			$t_row['error'] = $e->getMessage();
@@ -749,7 +749,7 @@ function install_check_token_serialization() {
 		}
 
 		try {
-			$t_token = safe_unserialize( $t_value );
+			$t_token = safe_unserialize( $t_value, [ 'allowed_classes' => false ] );
 		}
 		catch( ErrorException $e ) {
 			$t_row['error'] = $e->getMessage();

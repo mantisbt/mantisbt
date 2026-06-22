@@ -1061,7 +1061,7 @@ function filter_deserialize( $p_serialized_filter ) {
 		return false;
 	} elseif( in_array( $t_version_string, array( 'v5', 'v6', 'v7', 'v8' ) ) ) {
 		# filters from v5 onwards should cope with changing filter indices dynamically
-		$t_filter_array = unserialize( $t_setting_arr[1] );
+		$t_filter_array = unserialize( $t_setting_arr[1], ['allowed_classes' => false] );
 	} else {
 		# filters from v9 onwards are stored as json
 		$t_filter_array = json_decode( $t_setting_arr[1], /* assoc array */ true );

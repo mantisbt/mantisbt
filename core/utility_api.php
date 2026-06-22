@@ -304,15 +304,18 @@ function get_font_path() {
  * When given invalid data, unserialize() throws a PHP notice; this function
  * relies on a custom error handler to throw an Exception instead.
  *
- * @param string $p_string The serialized string.
+ * @param string $p_string  The serialized string.
+ * @param array  $p_options Options passed to unserialize(); use
+ *                          ['allowed_classes' => false] to prevent object
+ *                          instantiation (recommended for untrusted data).
  * @return mixed The converted value
  *
  * @throws ErrorException
  */
-function safe_unserialize( $p_string ) {
+function safe_unserialize( $p_string, array $p_options = [] ) {
 	set_error_handler( 'error_convert_to_exception' );
 	try {
-		$t_data = unserialize( $p_string );
+		$t_data = unserialize( $p_string, $p_options );
 	}
 	catch( ErrorException $e ) {
 		restore_error_handler();
