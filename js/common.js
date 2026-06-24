@@ -54,21 +54,20 @@ $(document).ready( function() {
 	});
 
 	/**
-	 * Add descriptive text next to the <select> tag for the user-selected
+	 * Add descriptive popover to the <select> tag for the user-selected
 	 * <option> element that has a title attribute.
 	 */
 	$('select:has(option[title])').on('change', function() {
 		var id = $(this).attr('id');
-		var title = $(this).find('option:selected').attr('title');
-		var hint = $('#' + id + '_hint');
-		if( title ) {
-			if( !hint.length ) {
-				$(this).after($('<span>', { class: 'small padding-8 blue', id: id + '_hint', text: title }));
-			} else {
-				hint.text( title );
-			}
+		var content = $(this).find('option:selected').attr('title');
+		if( content ) {
+			$(this).attr('data-placement', 'bottom');
+			$(this).attr('data-trigger', 'focus');
+			$(this).attr('data-content', content);
+			$(this).popover('show');
 		} else {
-			hint.remove();
+			$(this).popover('hide');
+			$(this).removeAttr('data-content');
 		}
 	});
 
