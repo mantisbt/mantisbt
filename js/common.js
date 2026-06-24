@@ -54,21 +54,17 @@ $(document).ready( function() {
 	});
 
 	/**
-	 * Add descriptive popover to the <select> tag for the user-selected
+	 * Add descriptive tooltip to the <select> tag for the user-selected
 	 * <option> element that has a title attribute.
 	 */
-	$('select:has(option[title])').on('change', function() {
-		var id = $(this).attr('id');
-		var content = $(this).find('option:selected').attr('title');
-		if( content ) {
-			$(this).attr('data-placement', 'bottom');
-			$(this).attr('data-trigger', 'focus');
-			$(this).attr('data-content', content);
-			$(this).popover('show');
-		} else {
-			$(this).popover('hide');
-			$(this).removeAttr('data-content');
+	$('select:has(option[title])').tooltip({
+		placement: 'bottom',
+		trigger: 'hover focus',
+		title: function() {
+			return $(this).find('option:selected').attr('title');
 		}
+	}).on('change', function() {
+		$(this).tooltip($(this).find('option:selected').attr('title') ? 'show' : 'hide');
 	});
 
 	/**
