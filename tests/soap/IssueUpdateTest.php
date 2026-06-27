@@ -198,10 +198,12 @@ class IssueUpdateTest extends SoapBase {
 
 		$this->assertCount( 1, $t_updated_issue->notes, "Note has not been duplicated" );
 
-		# Add a second note
+		# Add a second note with time tracking
 		$t_issue_with_one_new_note = $t_updated_issue;
 		$t_issue_with_one_new_note->notes[] = array(
 			'text' => 'second note',
+			'note_type' => TIME_TRACKING,
+			'time_tracking' => 60
 		);
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_with_one_new_note );
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
@@ -209,6 +211,8 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertCount( 2, $t_updated_issue->notes, "New note has been added" );
 		$t_new_note = $t_updated_issue->notes[1];
 		$this->assertEquals( 'second note', $t_new_note->text );
+		$this->assertEquals( TIME_TRACKING, $t_new_note->note_type );
+		$this->assertEquals( 60, $t_new_note->time_tracking );
 
 		# Add a 3rd note without reposting the first two
 		$t_issue_with_one_new_note->notes = [ [
