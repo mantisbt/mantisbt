@@ -483,7 +483,10 @@ function mci_check_login( ?string $p_username, ?string $p_password ) {
 		# User cookie
 		$t_user_id = auth_user_id_from_cookie( $p_password );
 		if( $t_user_id !== false ) {
-			# Cookie is valid
+			# Cookie is valid - does it belong to the user trying to log in ?
+			if( 0 != strcasecmp( user_get_username( $t_user_id ), $p_username ) ) {
+				return false;
+			}
 			if( auth_attempt_script_login( $p_username ) === false ) {
 				return false;
 			}
