@@ -123,11 +123,11 @@ class MentionParsingTest extends MantisCoreBase {
 			),
 			'MentionWithEmailAddress' => array(
 				'xxx@example.com',
-				array()
+				array('')
 			),
 			'MentionWithLocalhost' => array(
 				'xxx@localhost',
-				array()
+				array('')
 			),
 			'MentionAtEndOfWord' => array(
 				"vboctor@",
@@ -139,11 +139,27 @@ class MentionParsingTest extends MantisCoreBase {
 			),
 			'MentionUsernameThatIsAnEmailAddress' => array(
 				"@vboctor@example.com",
-				array()
+				array('vboctor@example.com')
 			),
 			'MentionUsernameThatIsLocalhost' => array(
 				"@vboctor@localhost",
-				array()
+				array('vboctor@localhost')
+			),
+			'MentionUsernameThatIsAnEmailAddressWithInvalidChars' => array(
+				"@vboctor@example.com/path",
+				array('vboctor@example.com')
+			),
+			'MentionUsernameThatIsLocalhostWithInvalidChars' => array(
+				"@vboctor@localhost/smth",
+				array('vboctor@localhost')
+			),
+			'MentionWithEmailAddressAndPunctuation' => array(
+				"@xxx@example.com.",
+				array('xxx@example.com')
+			),
+			'MentionWithSupportedUsernameCharactersNoSpaces' => array(
+				"@vb_oct+or",
+				array('vb_oct+or')
 			),
 		);
 
