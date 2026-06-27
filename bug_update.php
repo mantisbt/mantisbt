@@ -42,6 +42,8 @@
  * @uses relationship_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -325,6 +327,19 @@ if( $t_existing_bug->resolution != $t_updated_bug->resolution && (
 	);
 	trigger_error( ERROR_INVALID_RESOLUTION, ERROR );
 }
+
+# If version is unreleased, ensure user is allowed to change it.
+if( $t_existing_bug->version != $t_updated_bug->version
+	&& !version_is_released( version_get_id( $t_updated_bug->version ) )
+	&& !access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) )
+) {
+	throw new ClientException(
+		'User not allowed to assign unreleased versions',
+		ERROR_INVALID_FIELD_VALUE,
+		['version']
+	);
+}
+
 
 # Ensure that the user has permission to change the target version of the issue.
 if( $t_existing_bug->target_version !== $t_updated_bug->target_version ) {

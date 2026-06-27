@@ -156,6 +156,15 @@ class VersionData {
 			}
 		}
 	}
+
+	/**
+	 * Returns True if version is released.
+	 *
+	 * @return bool
+	 */
+	public function is_released() {
+		return $this->released == VERSION_RELEASED;
+	}
 }
 
 /**
@@ -757,4 +766,17 @@ function version_should_show_product_version( $p_project_ids ) {
 	}
 
 	return false;
+}
+
+/**
+ * Return true if the specified version is released.
+ *
+ * @param int $p_version_id
+ *
+ * @return bool
+ * @throws ClientException
+ */
+function version_is_released( int $p_version_id ): bool {
+	$t_version = version_get( $p_version_id );
+	return $t_version->is_released();
 }

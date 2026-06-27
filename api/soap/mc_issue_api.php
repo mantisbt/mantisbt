@@ -1156,7 +1156,21 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		/** @noinspection PhpUnhandledExceptionInspection */
 		return $p_version_id == 0 ? '' : version_get_field( $p_version_id, 'version' );
 	};
-	$t_bug_data->version = $fn_set_version_field( $t_version_id );
+
+	# Make sure user is allowed
+	$t_product_version = $fn_set_version_field( $t_version_id );
+	if( $t_version_id != 0
+		&& $t_bug_data->version != $t_product_version
+		&& !version_is_released( $t_version_id )
+		&& !access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) )
+	) {
+		throw new ClientException(
+			'User not allowed to assign unreleased versions',
+			ERROR_INVALID_FIELD_VALUE,
+			['version']
+		);
+	}
+	$t_bug_data->version = $t_product_version;
 	$t_bug_data->fixed_in_version = $fn_set_version_field( $t_fixed_in_version_id );
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
 		$t_bug_data->target_version = $fn_set_version_field( $t_target_version_id );
