@@ -603,7 +603,7 @@ function bugnote_row_to_object( array $p_row ) {
 	$t_bugnote->id = $p_row['id'];
 	$t_bugnote->bug_id = (int)$p_row['bug_id'];
 	$t_bugnote->bugnote_text_id = (int)$p_row['bugnote_text_id'];
-	$t_bugnote->note = $p_row['note'];
+	$t_bugnote->note = (string)$p_row['note'];
 	$t_bugnote->view_state = (int)$p_row['view_state'];
 	$t_bugnote->reporter_id = (int)$p_row['reporter_id'];
 	$t_bugnote->date_submitted = (int)$p_row['date_submitted'];
