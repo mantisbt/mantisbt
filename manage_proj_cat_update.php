@@ -55,6 +55,7 @@ auth_reauthenticate();
 
 $f_category_id     = gpc_get_int( 'category_id' );
 $f_name            = trim( gpc_get_string( 'name' ) );
+$f_description     = gpc_get_string( 'description' );
 $f_assigned_to     = gpc_get_int( 'assigned_to', 0 );
 # Underlying DB column is integer, but we use it as bool since we only have 2 states
 $f_status          = (int)gpc_get_bool( 'status', CATEGORY_STATUS_DISABLED );
@@ -75,7 +76,7 @@ if( mb_strtolower( $f_name ) != mb_strtolower( $t_old_name ) ) {
 	category_ensure_unique( $t_project_id, $f_name );
 }
 
-category_update( $f_category_id, $f_name, $f_assigned_to, (int)$f_status );
+category_update( $f_category_id, $f_name, $f_assigned_to, (int)$f_status, $f_description );
 
 form_security_purge( 'manage_proj_cat_update' );
 

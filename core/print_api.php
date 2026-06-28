@@ -846,7 +846,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 		echo '<option value="' . $t_category_id . '"';
 		check_selected( $p_category_id, $t_category_id );
 		check_disabled( $t_disabled );
-		echo '>';
+		echo ' title="' . string_attribute( $t_category_row['description'] ) . '">';
 		echo string_attribute( $t_category_name ), '</option>', PHP_EOL;
 	}
 }

@@ -244,6 +244,7 @@ print_manage_menu( 'manage_proj_page.php' );
 		<thead>
 			<tr>
 				<th><?php echo lang_get( 'category' ) ?></th>
+				<th><?php echo lang_get( 'description' ) ?></th>
 				<th class="center"><?php echo lang_get( 'enabled' ) ?></th>
 				<th><?php echo lang_get( 'assign_to' ) ?></th>
 				<?php if( $t_can_update_global_cat ) { ?>
@@ -258,6 +259,7 @@ print_manage_menu( 'manage_proj_page.php' );
 ?>
 			<tr>
 				<td><?php echo string_attribute( category_full_name( $t_id, false ) )  ?></td>
+				<td><?php echo string_attribute( $t_category['description'] )  ?></td>
 				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<?php if( $t_can_update_global_cat ) { ?>

@@ -909,6 +909,9 @@ $g_upgrade[213] = array( 'UpdateFunction', 'category_status_default' );
 # Delete orphaned private filters owned by users that no longer exist
 $g_upgrade[214] = array( 'UpdateFunction', 'delete_orphaned_private_filters' );
 
+$g_upgrade[215] = array( 'AddColumnSQL', array( db_get_table( 'category' ), "
+	description				XL	$t_notnull DEFAULT ( '' )" ) );
+
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
 #

@@ -54,6 +54,20 @@ $(document).ready( function() {
 	});
 
 	/**
+	 * Add descriptive tooltip to the <select> tag for the user-selected
+	 * <option> element that has a title attribute.
+	 */
+	$('select:has(option[title])').tooltip({
+		placement: 'bottom',
+		trigger: 'hover focus',
+		title: function() {
+			return $(this).find('option:selected').attr('title');
+		}
+	}).on('change', function() {
+		$(this).tooltip($(this).find('option:selected').attr('title') ? 'show' : 'hide');
+	});
+
+	/**
 	 * Manage the navbar project menu initializacion and events
 	 * for focus and key presses.
 	 */

@@ -461,6 +461,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		<thead>
 			<tr>
 				<th><?php echo lang_get( 'category' ) ?></th>
+				<th><?php echo lang_get( 'description' ) ?></th>
 				<th class="center"><?php echo lang_get( 'enabled' ) ?></th>
 				<th><?php echo lang_get( 'assign_to' ) ?></th>
 				<th class="center"><?php echo lang_get( 'actions' ) ?></th>
@@ -475,6 +476,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 ?>
 			<tr>
 				<td><?php echo string_attribute( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
+				<td><?php echo string_attribute( $t_category['description'] )  ?></td>
 				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<td class="center">
