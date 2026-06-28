@@ -78,7 +78,7 @@ function mention_get_candidates( $p_text ) {
 			# Lookforward to ensure next char is not a valid mention char or
 			# the end of the string, or the mention tag
 			. '(?=[^\w@]|$)'
-			. '(?!$t_quoted_tag)'
+			. '(?!' . $t_quoted_tag . ')'
 			. '/';
 	}
 
