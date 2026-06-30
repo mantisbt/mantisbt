@@ -248,17 +248,17 @@ class ListPluginsForDisplay {
 	/**
 	 * @var AvailablePlugin[] List of available plugins (i.e. valid and not installed)
 	 */
-	protected $available = array();
+	protected array $available = array();
 
 	/**
 	 * @var InstalledPlugin[] List of installed (registered) plugins
 	 */
-	protected $installed = array();
+	protected array $installed = array();
 
 	/**
 	 * @var InvalidPluginForDisplay[] List of invalid plugins
 	 */
-	protected $invalid = array();
+	protected array $invalid = array();
 
 	/**
 	 * PluginsListForDisplay constructor.
@@ -333,18 +333,18 @@ class ListPluginsForDisplay {
 }
 
 abstract class PluginForDisplay {
-	protected $basename = '';
-	protected $name = '';
-	protected $description = '';
-	protected $page = '';
+	protected string $basename = '';
+	protected string $name = '';
+	protected string $description = '';
+	protected string $page = '';
 
 	public function __construct( MantisPlugin $p_plugin ) {
-		$this->basename = $p_plugin->basename;
-		$this->name = $p_plugin->name;
+		$this->basename = (string)$p_plugin->basename;
+		$this->name = (string)$p_plugin->name;
 		if( $p_plugin->version ) {
 			$this->name .= ' ' . $p_plugin->version;
 		}
-		$this->page = $p_plugin->page;
+		$this->page = (string)$p_plugin->page;
 	}
 
 	public function render() {
@@ -364,7 +364,10 @@ abstract class PluginForDisplay {
 }
 
 class InvalidPluginForDisplay extends PluginForDisplay {
-	protected $can_remove = false;
+	/**
+	 * @var bool True if plugin can be removed.
+	 */
+	protected bool $can_remove = false;
 
 	public function __construct( MantisPlugin $p_plugin ) {
 		parent::__construct( $p_plugin );
@@ -399,9 +402,20 @@ class InvalidPluginForDisplay extends PluginForDisplay {
 }
 
 class AvailablePlugin extends PluginForDisplay {
-	protected $dependencies = array();
-	protected $upgrade_needed = false;
-	protected $can_install = true;
+	/**
+	 * @var string[] HTML-formatted list of dependencies for display.
+	 */
+	protected array $dependencies;
+
+	/**
+	 * @var bool True if plugin needs to be upgraded.
+	 */
+	protected bool $upgrade_needed = false;
+
+	/**
+	 * @var bool True if plugin can be installed.
+	 */
+	protected bool $can_install = true;
 
 	public function __construct( MantisPlugin $p_plugin ) {
 		parent::__construct( $p_plugin );
@@ -542,8 +556,8 @@ class AvailablePlugin extends PluginForDisplay {
 }
 
 class InstalledPlugin extends AvailablePlugin {
-	protected $priority;
-	protected $protected;
+	protected int $priority;
+	protected bool $protected;
 
 	public function __construct( MantisPlugin $p_plugin ) {
 		parent::__construct( $p_plugin );
