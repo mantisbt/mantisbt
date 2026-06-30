@@ -33,6 +33,10 @@
  * @uses print_api.php
  * @uses string_api.php
  * @uses utility_api.php
+ *
+ * @noinspection PhpIllegalPsrClassPathInspection
+ * @noinspection PhpMultipleClassesDeclarationsInOneFile
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 require_once( 'core.php' );
@@ -378,6 +382,10 @@ class InvalidPluginForDisplay extends PluginForDisplay {
 			$this->description .= '<br><span class="small">' . $p_plugin->status_message . '</span>';
 		}
 
+		/**
+		 * We actually get an {@see InvalidPlugin} object here.
+		 * @noinspection PhpPossiblePolymorphicInvocationInspection
+		 */
 		$this->can_remove = $p_plugin->removable;
 	}
 
