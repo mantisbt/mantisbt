@@ -84,7 +84,6 @@ $s_make_private = 'Privatükön';
 $s_make_public = 'Notidükön';
 $s_create_new_project_link = 'Jafön Proyegi Nulik';
 $s_select_option = '(välön)';
-$s_printing_preferences_title = 'Välön felis ad dabükön';
 $s_bugnote_date = 'Noetadät';
 $s_bugnote_description = 'Noetabepenam';
 $s_login_error = 'Kal olik binon ba negebovik u peblokon, u ba gebananem e/u letavöd fa ol pepenöls no verätons.';

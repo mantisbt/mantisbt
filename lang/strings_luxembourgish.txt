@@ -111,7 +111,6 @@ $s_move_group_bugs_button = 'Problemer réckelen';
 $s_priority_group_bugs_button = 'Prioritéit aktualiséieren';
 $s_status_group_bugs_button = 'Zoustand aktualiséieren';
 $s_category_group_bugs_button = 'Kategorie aktualiséieren';
-$s_printing_options_link = 'Dréckoptiounen';
 $s_bugnote_date = 'DAtum vun der Notiz';
 $s_bugnote_description = 'Beschreiwung vun der Notiz';
 $s_logged_in_as = 'Ageloggt als';

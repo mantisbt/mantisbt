@@ -128,7 +128,6 @@ $s_delete_group_bugs_button = 'Slett saker';
 $s_move_group_bugs_button = 'Flytt saker';
 $s_copy_group_bugs_button = 'Kopier saker';
 $s_assign_group_bugs_button = 'Tildel saker';
-$s_printing_options_link = 'Val for utskrift';
 $s_logged_in_as = 'Innlogga som';
 $s_prefix_for_deleted_users = 'brukar';
 $s_administrator = 'administrator';

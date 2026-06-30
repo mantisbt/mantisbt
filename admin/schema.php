@@ -909,6 +909,9 @@ $g_upgrade[213] = array( 'UpdateFunction', 'category_status_default' );
 # Delete orphaned private filters owned by users that no longer exist
 $g_upgrade[214] = array( 'UpdateFunction', 'delete_orphaned_private_filters' );
 
+# Delete table print preferences table (unused since 2009)
+$g_upgrade[215] = array( 'DropTableSQL', array( db_get_table( 'user_print_pref' ) ) );
+
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
 #

@@ -222,10 +222,6 @@ $s_update_severity_button = 'Update Severity';
 # print_all_bug_page.php : display selected issues
 $s_hide_button = 'Display selected only';
 
-# print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Choose fields to print';
-$s_printing_options_link = 'Printing Options';
-
 # word and excel export
 $s_bugnote_title = 'Note handler';
 $s_bugnote_date = 'Date of note';

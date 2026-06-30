@@ -155,7 +155,6 @@ $s_product_version_group_bugs_button = 'Ĝisdatigi Produktan Version';
 $s_update_severity_title = 'Ĝisdatigi Severecon';
 $s_update_severity_msg = 'Elekti severecon de problemo';
 $s_update_severity_button = 'Ĝisdatigi Severecon';
-$s_printing_options_link = 'Opcioj pri Presado';
 $s_bugnote_date = 'Dato de noto';
 $s_bugnote_description = 'Priskribo de noto';
 $s_logged_in_as = 'Elsalutinta kiel';
