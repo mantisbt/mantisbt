@@ -401,7 +401,7 @@ class InvalidPluginForDisplay extends PluginForDisplay {
 class AvailablePlugin extends PluginForDisplay {
 	protected $dependencies = array();
 	protected $upgrade_needed = false;
-	protected $can_install = false;
+	protected $can_install = true;
 
 	public function __construct( MantisPlugin $p_plugin ) {
 		parent::__construct( $p_plugin );
@@ -439,72 +439,84 @@ class AvailablePlugin extends PluginForDisplay {
 			. '<span class="small">' . $t_author . $t_url . '</span>';
 
 		# Dependencies
-        $this->can_install = true;
-		if( is_array( $p_plugin->requires ) && !empty( $p_plugin->requires ) ) {
-			$t_deps_types[] = $p_plugin->requires;
-			$t_deps_names[] = '';
-		}
-		if( is_array( $p_plugin->uses ) && !empty( $p_plugin->uses ) ) {
-			$t_deps_types[] = $p_plugin->uses;
-			$t_deps_names[] = '<span class="label label-light arrowed multiline">'
-				. lang_get( 'optional' ) . '</span>';
-		}
-		if( !empty( $t_deps_types ) ) {
-			$t_all_plugins = plugin_find_all();
-			foreach( $t_deps_types as $t_deps_index => $t_deps_type ) {
-				foreach( $t_deps_type as $t_required_basename => $t_version ) {
-					switch( plugin_dependency( $t_required_basename, $t_version ) ) {
-						case 1:
-							$t_upgrade_needed = plugin_is_registered( $t_required_basename )
-								&& plugin_needs_upgrade( plugin_get( $t_required_basename ) );
-							if( $t_upgrade_needed ) {
-								$t_class = 'dependency_upgrade';
-								$t_tooltip = lang_get( 'plugin_key_upgrade' );
-								if( !$t_deps_index ) {
-									$this->can_install = false;
-								}
-							} else {
-								$t_class = 'dependency_met';
-								$t_tooltip = lang_get( 'plugin_key_met' );
-							}
-							break;
-						case -1:
-							$t_class = 'dependency_dated';
-							$t_tooltip = lang_get( 'plugin_key_dated' );
-							if( !$t_deps_index ) {
-								$this->can_install = false;
-							}
-							break;
-						case 0:
-						default:
-							$t_class = 'dependency_unmet';
-							$t_tooltip = lang_get( 'plugin_key_unmet' );
-							if( !$t_deps_index ) {
-								$this->can_install = false;
-							}
-							break;
-					}
-
-					$t_dependency_name = array_key_exists( $t_required_basename, $t_all_plugins )
-						? $t_all_plugins[$t_required_basename]->name
-						: $t_required_basename;
-					$t_dependency_name .= ' ' . $t_version;
-
-					$this->dependencies[] = sprintf( '<span class="%s" title="%s">%s</span> %s',
-						$t_class,
-						$t_tooltip,
-						string_attribute( $t_dependency_name ),
-						$t_deps_names[ $t_deps_index ]
-					);
-				}
-			}
-		} else {
+		$this->checkDependencies( $p_plugin->requires, true );
+		$this->checkDependencies( $p_plugin->uses, false );
+		if( empty( $this->dependencies) ) {
 			$this->dependencies[] = '<span class="dependency_met">'
 				. lang_get( 'plugin_no_depends' )
 				. '</span>';
 		}
 
 		$this->upgrade_needed = plugin_needs_upgrade( $p_plugin );
+	}
+
+	/**
+	 * Checks whether plugin dependencies are met.
+	 *
+	 * Adds formatted HTML entries to $this->dependencies reflecting the
+	 * dependency's status.
+	 *
+	 * @param array|null $p_dependencies List of plugin dependencies to check
+	 *                                   (basename => version).
+	 * @param bool       $p_required     True for required, False for optional.
+	 *
+	 * @return void
+	 */
+	private function checkDependencies( ?array $p_dependencies, bool $p_required ) {
+		if( empty( $p_dependencies ) ) {
+			return;
+		}
+
+		foreach( $p_dependencies as $t_required_basename => $t_version ) {
+			switch( plugin_dependency( $t_required_basename, $t_version ) ) {
+				case 1:
+					$t_upgrade_needed = plugin_is_registered( $t_required_basename )
+						&& plugin_needs_upgrade( plugin_get( $t_required_basename ) );
+					if( $t_upgrade_needed ) {
+						$t_class = 'dependency_upgrade';
+						$t_tooltip = lang_get( 'plugin_key_upgrade' );
+						if( $p_required ) {
+							$this->can_install = false;
+						}
+					} else {
+						$t_class = 'dependency_met';
+						$t_tooltip = lang_get( 'plugin_key_met' );
+					}
+					break;
+				case -1:
+					$t_class = 'dependency_dated';
+					$t_tooltip = lang_get( 'plugin_key_dated' );
+					if( $p_required ) {
+						$this->can_install = false;
+					}
+					break;
+				case 0:
+				default:
+					$t_class = 'dependency_unmet';
+					$t_tooltip = lang_get( 'plugin_key_unmet' );
+					if( $p_required ) {
+						$this->can_install = false;
+					}
+					break;
+			}
+
+			$t_all_plugins = plugin_find_all();
+			$t_dependency_name = array_key_exists( $t_required_basename, $t_all_plugins )
+				? $t_all_plugins[$t_required_basename]->name
+				: $t_required_basename;
+			$t_dependency_name .= ' ' . $t_version;
+
+			$t_optional_dependency_tag = $p_required
+				? ''
+				: ' <span class="label label-light arrowed multiline">' . lang_get( 'optional' ) . '</span>';
+
+			$this->dependencies[] = sprintf( '<span class="%s" title="%s">%s</span>%s',
+				$t_class,
+				$t_tooltip,
+				string_html_specialchars( $t_dependency_name ),
+				$t_optional_dependency_tag
+			);
+		}
 	}
 
 	protected function renderColumns() {
