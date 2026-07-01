@@ -194,3 +194,7 @@ table.filters td.category {
 #log-event-list .duplicate-query {
     color: #E2755F;
 }
+
+.page-break {
+	page-break-before: always;
+}

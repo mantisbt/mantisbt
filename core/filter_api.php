@@ -1344,7 +1344,7 @@ function filter_draw_selection_area() {
 					<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 				</a>
 			</div>
-			<div id="filter-bar-queries" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
+			<div id="filter-bar-queries" class="widget-toolbar no-border<?php echo $t_collapse_block ? '' : ' hide' ?>">
 				<div class="widget-menu margin-left-8">
 				<?php
 				if( $t_is_temporary && $t_can_persist ) {
