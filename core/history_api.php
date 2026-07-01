@@ -228,6 +228,8 @@ function history_query_result( array $p_query_options ) {
 	} else {
 		$t_history_order = config_get( 'history_order' );
 	}
+	# Sanitize value to prevent SQL injection
+	$t_history_order = $t_history_order === 'DESC' ? 'DESC' : 'ASC';
 
 	$t_query = new DbQuery();
 	$t_where = array();

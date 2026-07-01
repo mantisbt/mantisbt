@@ -984,7 +984,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		return ApiObjectFactory::faultForbidden( 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
-	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	$t_bug_data = bug_get( $p_issue_id, true );
+	$t_project_id = $t_bug_data->project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
@@ -1004,10 +1005,12 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 			return ApiObjectFactory::faultNotFound( 'Project \'' . $t_project_id . '\' does not exist.' );
 		}
 	}
-	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : $t_user_id ;
-	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
-	$t_summary = $p_issue['summary'] ?? '';
-	$t_description = $p_issue['description'] ?? '';
+
+	# If unspecified in the payload, default to the Issue's current data
+	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : $t_bug_data->reporter_id;
+	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : $t_bug_data->handler_id;
+	$t_summary = $p_issue['summary'] ?? $t_bug_data->summary;
+	$t_description = $p_issue['description'] ?? $t_bug_data->description;
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
 		return mci_fault_access_denied( $t_user_id, 'Not enough rights to update issues' );
@@ -1048,7 +1051,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	# fields which we expect to always be set
-	$t_bug_data = bug_get( $p_issue_id, true );
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
 
@@ -1084,17 +1086,26 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		$t_old_status = $t_bug_data->status;
 		$t_new_status = mci_get_status_id( $p_issue['status'] );
 
-		# Check if we are resolving (or closing) the issue
-		$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
-		$t_resolving = $t_old_status < $t_resolved_status && $t_new_status >= $t_resolved_status;
+		if( $t_old_status != $t_new_status ) {
+			# Make sure user is authorized to change status
+			$t_update_status_threshold = config_get( 'update_bug_status_threshold', $t_bug_data->project_id, $t_user_id );
+			if( !access_has_project_level( $t_update_status_threshold, $t_bug_data->project_id, $t_user_id ) ){
+				return mci_fault_access_denied( $t_user_id , "Not allowed to change Issue status" );
+			}
 
-		if( $t_resolving &&
-			!relationship_can_resolve_bug( $p_issue_id ) &&
-			OFF == config_get( 'allow_parent_of_unresolved_to_close' )
-		) {
-			return ApiObjectFactory::faultBadRequest( 'Unresolved child issues.' );
+			# Check if we are resolving (or closing) the issue
+			$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
+			$t_resolving = $t_old_status < $t_resolved_status && $t_new_status >= $t_resolved_status;
+
+			if( $t_resolving &&
+				!relationship_can_resolve_bug( $p_issue_id ) &&
+				OFF == config_get( 'allow_parent_of_unresolved_to_close' )
+			) {
+				return ApiObjectFactory::faultBadRequest( 'Unresolved child issues.' );
+			}
+			$t_bug_data->status = $t_new_status;
+
 		}
-		$t_bug_data->status = $t_new_status;
 	}
 	if( isset( $p_issue['reproducibility'] ) ) {
 		$t_bug_data->reproducibility = mci_get_reproducibility_id( $p_issue['reproducibility'] );
@@ -1145,7 +1156,21 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		/** @noinspection PhpUnhandledExceptionInspection */
 		return $p_version_id == 0 ? '' : version_get_field( $p_version_id, 'version' );
 	};
-	$t_bug_data->version = $fn_set_version_field( $t_version_id );
+
+	# Make sure user is allowed
+	$t_product_version = $fn_set_version_field( $t_version_id );
+	if( $t_version_id != 0
+		&& $t_bug_data->version != $t_product_version
+		&& !version_is_released( $t_version_id )
+		&& !access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) )
+	) {
+		throw new ClientException(
+			'User not allowed to assign unreleased versions',
+			ERROR_INVALID_FIELD_VALUE,
+			['version']
+		);
+	}
+	$t_bug_data->version = $t_product_version;
 	$t_bug_data->fixed_in_version = $fn_set_version_field( $t_fixed_in_version_id );
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
 		$t_bug_data->target_version = $fn_set_version_field( $t_target_version_id );
@@ -1218,12 +1243,20 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 				}
 			} else {
-				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-
-				$t_note_type = isset( $t_note['note_type'] ) ? (int)$t_note['note_type'] : BUGNOTE;
-				$t_note_attr = isset( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
-
-				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_user_id, false );
+				$t_payload = [
+					'text' => $t_note['text'],
+					'reporter' => [ 'id' => $t_user_id ],
+					'view_state' => $t_note['view_state'] ?? null,
+					'time_tracking' => isset( $t_note['time_tracking'] )
+						? [ 'duration' => $t_note['time_tracking'] ]
+						: null,
+				];
+				$t_command = new IssueNoteAddCommand( [
+					'query' => [ 'issue_id' => $p_issue_id ],
+					'payload' => $t_payload,
+					'options' => [ 'mute' => true ],
+				] );
+				$t_command->execute();
 			}
 		}
 

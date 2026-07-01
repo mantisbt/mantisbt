@@ -101,6 +101,7 @@ class ConfigParserTest extends MantisCoreBase {
 	 * Test failure if we get extra tokens when the parser is set to error
 	 *
 	 * @throws Exception
+	 * @noinspection PhpRedundantOptionalArgumentInspection
 	 */
 	public function testExtraTokensError() {
 		$this->expectException(Exception::class);
@@ -121,10 +122,12 @@ class ConfigParserTest extends MantisCoreBase {
 	public function testExtraTokensIgnore() {
 		$t_parser = new ConfigParser( '1; 2' );
 		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
+		/** @noinspection PhpParamsInspection */
 		$this->assertEquals( 1, $t_result);
 
 		$t_parser = new ConfigParser( 'array(); 2' );
 		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
+		/** @noinspection PhpParamsInspection */
 		$this->assertEquals( array(), $t_result);
 	}
 
@@ -183,15 +186,6 @@ class ConfigParserTest extends MantisCoreBase {
 			. ">>>------------------------\n"
 			. $p_text . "\n"
 			. "<<<------------------------\n";
-	}
-
-	/**
-	 * Adds a new test case to the list
-	 *
-	 * @param string $p_string
-	 */
-	private function addArrayCase( $p_string ) {
-		$this->cases_array[] = $p_string;
 	}
 
 	/**
@@ -262,15 +256,13 @@ EOT
 			'SimpleArray formatted whitespace' => array( "array ( 1, 2, 3 )" ),
 			'SimpleArray no whitespace' => array( "array(1,2,3)" ),
 			'SimpleArray arbitrary whitespace' => array( "  array(\n1,\t2  ,    3 )\r  " ),
-			'SimpleArray mixed types, quotes' => array(
-<<<'EOT'
-array( 1, 'a', "b" )
-EOT
+			'SimpleArray mixed types, quotes' => array( <<<'EOT'
+				array( 1, 'a', "b" )
+				EOT
 			),
-			'SimpleArray nested quotes' => array(
-<<<'EOT'
-array( '"a""b"""', "'a''b'''" )
-EOT
+			'SimpleArray nested quotes' => array( <<<'EOT'
+				array( '"a""b"""', "'a''b'''" )
+				EOT
 		),
 
 			/**
@@ -285,12 +277,11 @@ EOT
 			# mixed associative, overwriting implicit keys
 			'AssocArray mixed, overwritten implicit keys' => array( "array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )" ),
 
-			'AssocArray mixed' => array(
-<<<'EOT'
-array(
-	array ( 1, 'a', 3 => 1, 4 => 'b', 'x' => 'y' )
-)
-EOT
+			'AssocArray mixed' => array( <<<'EOT'
+				array(
+					array ( 1, 'a', 3 => 1, 4 => 'b', 'x' => 'y' )
+				)
+				EOT
 			),
 
 			/**
@@ -301,13 +292,12 @@ EOT
 			'Constants as array values' => array( "array( DEVELOPER, MANAGER )" ),
 
 				# e.g. status_enum_workflow
-			'Constants as array keys' => array(
-<<<'EOT'
-array (
-  NEW_ => '20:feedback,30:acknowledged',
-  ACKNOWLEDGED => '40:confirmed',
-)
-EOT
+			'Constants as array keys' => array( <<<'EOT'
+				array (
+				  NEW_ => '20:feedback,30:acknowledged',
+				  ACKNOWLEDGED => '40:confirmed',
+				)
+				EOT
 			),
 
 			# e.g. set_status_threshold
@@ -316,96 +306,89 @@ EOT
 			/**
 			 * Multidimensional arrays
 			 */
-			'Multidimentional array' => array(
-				<<<'EOT'
-array(
-	1 => array( 1, 2 => array() ),
-	array( 'a', 'b', array(3, 4, ) ),
-	'c' => array( 'd', 5 => 'e' ),
-)
-EOT
+			'Multidimensional array' => array( <<<'EOT'
+				array(
+					1 => array( 1, 2 => array() ),
+					array( 'a', 'b', array(3, 4, ) ),
+					'c' => array( 'd', 5 => 'e' ),
+				)
+				EOT
 			),
 
-			'Multidimentional, notify_flags sample' => array(
-<<<'EOT'
-array(
-	'updated' => array (
-		'reporter' => ON,
-		'handler' => ON,
-		'monitor' => ON,
-		'bugnotes' => OFF,
-		'threshold_min' => DEVELOPER,
-		'threshold_max' => MANAGER,
-	),
-	'owner' => array (
-		'reporter' => 1,
-		'handler' => 1,
-		'monitor' => 1,
-		'bugnotes' => 1,
-		'threshold_min' => 55,
-	),
-	'reopened' => array (
-		'reporter' => 1,
-		'handler' => 1,
-		'monitor' => 1,
-		'bugnotes' => 1,
-		'threshold_max' => ANYBODY,
-	),
-)
-EOT
+			'Multidimensional, notify_flags sample' => array( <<<'EOT'
+				array(
+					'updated' => array (
+						'reporter' => ON,
+						'handler' => ON,
+						'monitor' => ON,
+						'bugnotes' => OFF,
+						'threshold_min' => DEVELOPER,
+						'threshold_max' => MANAGER,
+					),
+					'owner' => array (
+						'reporter' => 1,
+						'handler' => 1,
+						'monitor' => 1,
+						'bugnotes' => 1,
+						'threshold_min' => 55,
+					),
+					'reopened' => array (
+						'reporter' => 1,
+						'handler' => 1,
+						'monitor' => 1,
+						'bugnotes' => 1,
+						'threshold_max' => ANYBODY,
+					),
+				)
+				EOT
 			),
 
 			/**
 			 * Test cases for specific issues reported on the bugtracker
 			 */
-			'Issue #0020787' => array(
-<<<'EOT'
-array (
-	'additional_info',
-	'attachments',
-	'category_id',
-	'date_submitted',
-	'description',
-	'due_date',
-)
-EOT
+			'Issue #0020787' => array( <<<'EOT'
+				array (
+					'additional_info',
+					'attachments',
+					'category_id',
+					'date_submitted',
+					'description',
+					'due_date',
+				)
+				EOT
 			),
 
-			'Issue #0020812' => array(
-<<<'EOT'
-array (
-	0 =>
-	array (
-		0 => 1,
-		1 => 2,
-		2 => 3,
-	),
-)
-EOT
+			'Issue #0020812' => array( <<<'EOT'
+				array (
+					0 =>
+					array (
+						0 => 1,
+						1 => 2,
+						2 => 3,
+					),
+				)
+				EOT
 			),
 
-			'Issue #0020813' => array(
-<<<'EOT'
-array(
- 0 => "aa'aa",
- 1 => "bb\"bb"
-)
-EOT
+			'Issue #0020813' => array( <<<'EOT'
+				array(
+				 0 => "aa'aa",
+				 1 => "bb\"bb"
+				)
+				EOT
 			),
 
-			'Issue #0020850' => array(
-<<<'EOT'
-			array ( 0 => '""a"' )
-EOT
+			'Issue #0020850' => array( <<<'EOT'
+				array ( 0 => '""a"' )
+				EOT
 			),
 
-			'Issue #0020851' => array(
-<<<'EOT'
-array (
-	'a' => 'x1',
-	'x2',
-)
-EOT
+			'Issue #0020851' => array( <<<'EOT'
+				array (
+					'a' => 'x1',
+					'x2',
+				)
+				EOT
 			),
 		);
 	}

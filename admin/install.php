@@ -48,30 +48,33 @@ $g_database_upgrade = false;
 /**
  * Print Test result
  *
- * @param integer $p_result    Result - BAD|GOOD.
- * @param boolean $p_hard_fail Fail installation or soft warning.
- * @param string  $p_message   Message to display to user.
+ * @param int    $p_result    Result - BAD|GOOD.
+ * @param bool   $p_hard_fail Fail installation or soft warning.
+ * @param string $p_message   Message to display to user.
+ *
  * @return void
  */
 function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	global $g_failed;
-	echo '<td ';
 	if( BAD == $p_result ) {
 		if( $p_hard_fail ) {
 			$g_failed = true;
-			echo 'class="danger">BAD';
+			$t_class = 'danger';
+			$t_message = 'BAD';
 		} else {
-			echo 'class="warning">POSSIBLE PROBLEM';
+			$t_class = 'warning';
+			$t_message = 'POSSIBLE PROBLEM';
 		}
-		if( '' != $p_message ) {
-			echo '<br />' . $p_message;
+		if( $p_message ) {
+			$t_message .= '<br>'
+				# Restore <br> tags
+				. str_replace( '&lt;br&gt;', '<br>', string_html_specialchars( $p_message ) );
 		}
+	} else {
+		$t_class = 'success';
+		$t_message = 'GOOD';
 	}
-
-	if( GOOD == $p_result ) {
-		echo 'class="success">GOOD';
-	}
-	echo '</td>';
+	printf( '<td class="%s">%s</td>', $t_class, $t_message );
 }
 
 /**
@@ -757,7 +760,8 @@ if( !$g_database_upgrade ) {
 		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix reset" %2$s value="%3$s">',
 			$t_key,
 			$t_key == 'db_table_plugin_prefix' ? 'required' : '',
-			${'f_' . $t_key} // The actual value of the corresponding form variable
+			// The actual value of the corresponding form variable
+			string_html_specialchars( ${'f_' . $t_key} )
 		);
 		echo "\n&nbsp;";
 		printf( '<button id="%s" type="button" class="btn btn-sm btn-primary btn-white btn-round reset">%s</button>',
@@ -1219,7 +1223,7 @@ if( 3 == $t_install_state ) {
 					if( $t_sql ) {
 						foreach( $t_sqlarray as $t_single_sql ) {
 							if( !empty( $t_single_sql ) ) {
-								$t_all_sql .= $t_single_sql . '<br />';
+								$t_all_sql .= $t_single_sql . '<br>';
 							}
 						}
 					}
