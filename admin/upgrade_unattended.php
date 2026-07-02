@@ -189,14 +189,14 @@ while( $i <= $t_last_id && !$g_failed ) {
 }
 
 if( $t_count_done ) {
-	echo "\n";
-}
-echo "$t_count_done schema upgrades executed.\n";
+	echo "\n$t_count_done schema upgrades executed.\n";
 
-if( !$g_failed ) {
-	echo 'Done.' . "\n";
-	exit( 0 );
-}
+	if( $g_failed ) {
+		echo "Failed.\n";
+		exit( 1 );
+	}
 
-echo "Failed.\n";
-exit( 1 );
+	echo "Done.\n";
+} else {
+	echo "Nothing to do.\n";
+}
