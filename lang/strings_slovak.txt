@@ -1458,3 +1458,4 @@ $s_filter_new = 'Nové';
 $s_filter_unused_tags = 'Nepoužité';
 $s_filter_unused = 'Nepoužité';
 $s_unknown = 'neznáme';
+$s_optional = 'Voliteľné';

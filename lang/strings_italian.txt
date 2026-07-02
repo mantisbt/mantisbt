@@ -1466,3 +1466,4 @@ $s_filter_new = 'Nuovo';
 $s_filter_unused_tags = 'Non usato';
 $s_filter_unused = 'Non usato';
 $s_unknown = 'sconosciuto';
+$s_optional = 'Facoltativo';
