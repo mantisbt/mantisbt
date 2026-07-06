@@ -1,5 +1,9 @@
+# MantisBT dependabot configuration
+
 version: 2
 updates:
+
+# Check for Composer updates every day
 - package-ecosystem: composer
   directory: "/"
   schedule:
@@ -9,3 +13,9 @@ updates:
   - dependency-name: erusev/parsedown
     versions:
     - ">= 1.7.2.a, < 1.7.3"
+
+# Check for GitHub Actions updates every month
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: monthly
