@@ -153,7 +153,7 @@ function email_queue_row_to_object( $p_row ) {
 	}
 
 	$t_row = $p_row;
-	$t_row['metadata'] = unserialize( $t_row['metadata'] );
+	$t_row['metadata'] = unserialize( $t_row['metadata'], ['allowed_classes' => false] );
 
 	$t_email_data = new EmailData;
 
