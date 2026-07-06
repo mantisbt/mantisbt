@@ -72,7 +72,7 @@ jobs:
           sendmail_path=${{ github.workspace }}/tests/fakesendmail.sh
 
     - name: Checkout MantisBT Repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - run: composer install
 
