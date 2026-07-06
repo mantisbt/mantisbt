@@ -49,6 +49,7 @@
  * @author Tkh
  * @author Valtlai
  * @author Valtlait
+ * @author Wikipeedikko
  * @author Yupik
  */
 
@@ -1267,3 +1268,4 @@ $s_filter_new = 'Uusi';
 $s_filter_unused_tags = 'Ei käytössä';
 $s_filter_unused = 'Ei käytössä';
 $s_unknown = 'tuntematon';
+$s_optional = 'Valinnainen';

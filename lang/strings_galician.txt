@@ -1450,3 +1450,4 @@ $s_filter_new = 'Novo';
 $s_filter_unused_tags = 'Sen uso';
 $s_filter_unused = 'Sen uso';
 $s_unknown = 'descoñecida';
+$s_optional = 'Opcional';

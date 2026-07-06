@@ -1462,3 +1462,4 @@ $s_filter_new = 'Nieuw';
 $s_filter_unused_tags = 'Ongebruikt';
 $s_filter_unused = 'Ongebruikt';
 $s_unknown = 'onbekend';
+$s_optional = 'Optioneel';

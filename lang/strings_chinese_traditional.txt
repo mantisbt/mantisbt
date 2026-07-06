@@ -1464,3 +1464,4 @@ $s_filter_new = '新增';
 $s_filter_unused_tags = '未使用';
 $s_filter_unused = '未使用';
 $s_unknown = '未知';
+$s_optional = '可選';
