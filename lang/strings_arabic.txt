@@ -1462,3 +1462,4 @@ $s_filter_new = 'جديد';
 $s_filter_unused_tags = 'غير مستخدم';
 $s_filter_unused = 'غير مستخدم';
 $s_unknown = 'غير معروف';
+$s_optional = 'خياري';
