@@ -79,6 +79,7 @@ def main():
         usage()
         sys.exit(2)
 
+    # noinspection PyUnboundLocalVariable
     if len(args) < 2:
         usage()
         sys.exit(1)
@@ -86,6 +87,7 @@ def main():
     delete = False
     types = {MAKE: "html pdf", PUBLICAN: "html,pdf"}
 
+    # noinspection PyUnboundLocalVariable
     for opt, val in opts:
         if opt in ("-h", "--help"):
             usage()

@@ -81,6 +81,7 @@ def main():
     fresh_clone = False
     delete_clone = False
 
+    # noinspection PyUnboundLocalVariable
     for opt, val in opts:
         if opt in ("-h", "--help"):
             usage()
@@ -107,6 +108,7 @@ def main():
         elif opt in ("-s", "--suffix"):
             version_suffix = val
 
+    # noinspection PyUnboundLocalVariable
     if len(args) < 1:
         usage()
         sys.exit(1)

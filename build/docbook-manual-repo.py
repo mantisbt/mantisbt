@@ -83,6 +83,7 @@ def main():
     force = False
     pass_opts = ""
 
+    # noinspection PyUnboundLocalVariable
     for opt, val in opts:
         if opt in ("-h", "--help"):
             usage()
@@ -112,6 +113,7 @@ def main():
         elif opt == "--release":
             pass_opts += " --release"
 
+    # noinspection PyUnboundLocalVariable
     if len(args) < 2:
         usage()
         sys.exit(1)
