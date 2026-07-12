@@ -64,12 +64,12 @@ def run_publican(args):
 
     try:
         print("Running", " ".join(cmd))
-        ret = subprocess.run(cmd, capture_output=True, check=True)
-        print(ret.stdout.decode().strip())
+        ret = subprocess.run(cmd, text=True, capture_output=True, check=True)
+        print(ret.stdout.strip())
         print()
     except subprocess.CalledProcessError as e:
+        print(e.stdout.strip())
         print("ERROR:", e)
-        print(e.stderr.decode().strip())
         sys.exit(1)
 
 
