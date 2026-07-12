@@ -236,13 +236,14 @@ def main():
     # Build documentation for release
     if build_docbook:
         print("Building docbook manuals...\n")
-        subprocess.call(
-            manualscript + " --release {} {}".format(
-                path.join(mantis_path, "docbook"),
-                path.join(release_dir, "doc")
-            ),
-            shell=True
-        )
+        try:
+            cmd = [manualscript,
+                   "--release",
+                   path.join(mantis_path, "docbook"),
+                   path.join(release_dir, "doc")]
+            subprocess.run(cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            sys.exit(1)
 
     # Create tarballs and sign them
     print("Creating release tarballs...")

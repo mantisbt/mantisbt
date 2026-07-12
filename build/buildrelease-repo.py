@@ -73,7 +73,7 @@ def main():
         usage()
         sys.exit(2)
 
-    pass_opts = ""
+    pass_opts = []
     refs = []
     all_branches = False
     version_suffix = ""
@@ -97,10 +97,9 @@ def main():
             all_branches = True
 
         elif opt in ("-c", "--clean"):
-            pass_opts += " -c"
-
+            pass_opts.append("-c")
         elif opt in ("-d", "--docbook"):
-            pass_opts += " -d"
+            pass_opts.append("-d")
 
         elif opt in ("-a", "--auto-suffix"):
             auto_suffix = True
@@ -187,13 +186,13 @@ def main():
             commit_hash = f"{ref}-{commit_hash}"
 
         if auto_suffix and version_suffix:
-            suffix = "--suffix {}-{}".format(version_suffix, commit_hash)
+            suffix = [f"--suffix {version_suffix}-{commit_hash}"]
         elif auto_suffix:
-            suffix = "--suffix " + commit_hash
+            suffix = ["--suffix " + commit_hash]
         elif version_suffix:
-            suffix = "--suffix " + version_suffix
+            suffix = ["--suffix " + version_suffix]
         else:
-            suffix = ""
+            suffix = []
 
         # Absolute path to buildrelease.py in the target repository, with a
         # fallback to the directory of the currently executing script
@@ -204,8 +203,12 @@ def main():
             print(f"Using '{buildscript}' instead.")
 
         # Start building
-        os.system("{} {} {} {} {}".format(buildscript, pass_opts, suffix,
-                                          release_path, repo_path))
+        try:
+            cmd = [buildscript] + pass_opts + suffix + [release_path, repo_path]
+            subprocess.run(cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e)
+            sys.exit(1)
 
     # Cleanup temporary repo if needed
     if delete_clone:
