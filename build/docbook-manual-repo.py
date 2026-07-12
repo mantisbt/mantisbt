@@ -7,6 +7,7 @@ import getopt
 import os
 from os import path
 import re
+import subprocess
 import sys
 import time
 
@@ -67,7 +68,7 @@ def git_current_branch():
 
 
 def git_checkout(branch):
-    os.system('git checkout -f {} >/dev/null'.format(branch))
+    subprocess.run(['git', 'checkout', '-f', branch], stdout=subprocess.DEVNULL, check=True)
 
 
 def main():
@@ -81,7 +82,7 @@ def main():
     refs = None
     current = False
     force = False
-    pass_opts = ""
+    pass_opts = []
 
     # noinspection PyUnboundLocalVariable
     for opt, val in opts:
@@ -99,19 +100,16 @@ def main():
             force = True
 
         elif opt in ("-d", "--delete"):
-            pass_opts += " -d"
+            pass_opts.append("-d")
 
         elif opt in ("-a", "--all"):
-            pass_opts += " -a"
-
+            pass_opts.append("-a")
         elif opt == "--html":
-            pass_opts += " --html"
-
+            pass_opts.append("--html")
         elif opt == "--pdf":
-            pass_opts += " --pdf"
-
+            pass_opts.append("--pdf")
         elif opt == "--release":
-            pass_opts += " --release"
+            pass_opts.append("--release")
 
     # noinspection PyUnboundLocalVariable
     if len(args) < 2:
@@ -129,8 +127,8 @@ def main():
         # Update repo from default remote
         print(f"Updating repository in '{repo}' from default remote")
         os.chdir(repo)
-        os.system('git fetch')
-        os.system('git remote prune origin')
+        subprocess.run(['git', 'fetch'], check=True)
+        subprocess.run(['git', 'remote', 'prune', 'origin'], check=True)
 
     if not current and refs is None:
         # List refs from remote branches and tags
@@ -171,19 +169,17 @@ def main():
             f.close()
 
         if lastchange > lastbuild or force or current:
-            buildcommand = '{} {} {} {} {}'.format(
-                manualscript,
-                pass_opts,
-                path.abspath('docbook'),
-                manualpath, ' '.join(languages)
-            )
-            print("Calling: " + buildcommand)
-            if os.system(buildcommand):
-                print('here')
+            buildcommand = [manualscript] + pass_opts + [path.abspath('docbook'), manualpath] + languages
+            print("Calling: " + " ".join(buildcommand))
+            try:
+                subprocess.run(buildcommand, check=True)
 
-            f = open(buildfile, 'w')
-            f.write(str(lastchange))
-            f.close()
+                f = open(buildfile, 'w')
+                f.write(str(lastchange))
+                f.close()
+            except subprocess.CalledProcessError as e:
+                print(f"ERROR: failed to build the documentation for '{ref}'")
+
         else:
             # Get last build's timestamp from buildfile's modified time
             mtime = float(os.path.getmtime(buildfile))

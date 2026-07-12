@@ -138,13 +138,15 @@ def main():
 
     # Update the repository
     if not fresh_clone:
-        os.system('git fetch')
+        print(f"Updating repository at '{repo_path}'")
+        subprocess.run(['git', 'fetch'], check=True)
 
     # Consolidate refs/branches
     if all_branches:
-        os.system('git remote prune origin')
-        cmd = 'git for-each-ref --format="%(refname:short)" refs/remotes'
-        refs.extend(os.popen(cmd).read().split())
+        subprocess.run(['git', 'remote', 'prune', 'origin'], check=True)
+        result = subprocess.run(['git', 'for-each-ref', '--format=%(refname:short)', 'refs/remotes'],
+                                check=True, text=True, capture_output=True)
+        refs.extend(result.stdout.split())
 
     if len(refs) < 1:
         refs.append(os.popen('git log --pretty="format:%h" -n1').read())
@@ -160,9 +162,10 @@ def main():
     refnameregex = re.compile('(?:[a-zA-Z0-9-.]+/)?(.*)')
 
     for ref in refs:
-        print("\nChecking out '{}'".format(ref))
-        os.system("git checkout -f -q {}".format(ref))
-        os.system("git log -n1 --pretty='HEAD is now at %h... %s'")
+        print(f"\nChecking out '{ref}'")
+        subprocess.run(['git', 'checkout', '-f', '-q', ref], check=True)
+        subprocess.run(['git', 'log', '-n1', '--pretty="HEAD is now at %h... %s"'],
+                       check=True)
         print()
 
         # Composer
@@ -186,11 +189,11 @@ def main():
             commit_hash = f"{ref}-{commit_hash}"
 
         if auto_suffix and version_suffix:
-            suffix = [f"--suffix {version_suffix}-{commit_hash}"]
+            suffix = [f"--suffix={version_suffix}-{commit_hash}"]
         elif auto_suffix:
-            suffix = ["--suffix " + commit_hash]
+            suffix = ["--suffix=" + commit_hash]
         elif version_suffix:
-            suffix = ["--suffix " + version_suffix]
+            suffix = ["--suffix=" + version_suffix]
         else:
             suffix = []
 
@@ -205,6 +208,7 @@ def main():
         # Start building
         try:
             cmd = [buildscript] + pass_opts + suffix + [release_path, repo_path]
+            print("Running:", " ".join(cmd))
             subprocess.run(cmd, check=True)
         except subprocess.CalledProcessError as e:
             print(e)
