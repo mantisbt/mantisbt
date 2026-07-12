@@ -54,6 +54,12 @@ The following options are passed on to '{build_script_name}':
 # end usage()
 
 
+def get_head_commit_sha():
+    result = subprocess.run(['git', 'log', '--pretty=format:%h', '-n1'],
+                            check=True, text=True, capture_output=True)
+    return result.stdout
+
+
 def ignore(ref):
     """
     Decide which refs to ignore based on regexen listed in 'ignorelist'.
@@ -148,8 +154,8 @@ def main():
                                 check=True, text=True, capture_output=True)
         refs.extend(result.stdout.split())
 
-    if len(refs) < 1:
-        refs.append(os.popen('git log --pretty="format:%h" -n1').read())
+    if not refs:
+        refs.append(get_head_commit_sha())
 
     refs = [ref for ref in refs if not ignore(ref)]
 
@@ -183,7 +189,7 @@ def main():
         subprocess.call('git submodule foreach git checkout -- .', shell=True)
 
         # Handle suffix/auto-suffix generation
-        commit_hash = os.popen('git log --pretty="format:%h" -n1').read()
+        commit_hash = get_head_commit_sha()
         if commit_hash != ref:
             ref = refnameregex.search(ref).group(1)
             commit_hash = f"{ref}-{commit_hash}"

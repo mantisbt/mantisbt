@@ -63,8 +63,16 @@ def git_current_branch():
     Returns the current git branch's name or the current commit SHA
     if we are in detached HEAD state
     """
-    gitcmd = 'git symbolic-ref --quiet --short HEAD || git rev-parse HEAD'
-    return os.popen(gitcmd).read().rstrip()
+    try:
+        # Try to get branch name
+        result = subprocess.run(['git', 'symbolic-ref', '--quiet', '--short', 'HEAD'],
+                                capture_output=True, text=True, check=True)
+    except subprocess.CalledProcessError:
+        # Detached HEAD - fall back to the commit hash
+        result = subprocess.run(['git', 'rev-parse', 'HEAD'],
+                                capture_output=True, text=True, check=True)
+
+    return result.stdout.rstrip()
 
 
 def git_checkout(branch):
@@ -131,10 +139,14 @@ def main():
         subprocess.run(['git', 'remote', 'prune', 'origin'], check=True)
 
     if not current and refs is None:
-        # List refs from remote branches and tags
-        cmd = 'git for-each-ref --format="%(refname:short)" refs/remotes'
-        branches = os.popen(cmd).read().split()
-        tags = os.popen('git tag -l').read().split()
+        # List remote branches
+        result = subprocess.run(['git', 'for-each-ref', '--format=%(refname:short)', 'refs/remotes'],
+                                capture_output=True, text=True, check=True)
+        branches = result.stdout.split()
+
+        # List tags
+        result = subprocess.run(['git', 'tag', '-l'], capture_output=True, text=True, check=True)
+        tags = result.stdout.split()
 
         # Filter refs using ignore()
         refs = [ref for ref in branches + tags if not ignore(ref)]
@@ -158,8 +170,9 @@ def main():
             git_checkout(ref)
 
         # Get timestamp of last change to docbook sources from git
-        lastchange = int(
-            os.popen('git log --pretty="format:%ct" -n1 -- docbook').read())
+        result = subprocess.run(['git', 'log', '--pretty=format:%ct', '-n1', '--', 'docbook'],
+                                capture_output=True, text=True, check=True)
+        lastchange = int(result.stdout)
 
         buildfile = path.join(manualpath, '.build')
         lastbuild = 0
