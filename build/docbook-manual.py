@@ -29,8 +29,8 @@ long_options = [
 
 
 def usage():
-    print('''Usage: {} /path/to/mantisbt/docbook /path/to/install \
-[<lang> ...]
+    print(f'''Usage: {path.basename(__file__)} \
+/path/to/mantisbt/docbook /path/to/install [<lang> ...]
     Options:  -h | --help           Print this usage message
               -d | --delete         Delete install directory before building
                    --epub           Build EPUB manual
@@ -40,7 +40,7 @@ def usage():
                    --release        Build single file types used for
                                     release tarballs
               -a | --all            Build all manual types
-'''.format(path.basename(__file__)))
+''')
 # end usage()
 
 
@@ -202,7 +202,7 @@ def main():
             print()
 
             run_publican('clean')
-            print("{} Build complete\n".format(directory))
+            print(f"{directory} Build complete\n")
             buildcount += len(langs)
         else:
             # Build docbook with MAKE
@@ -232,7 +232,7 @@ def main():
 
     # end docbook build loop
 
-    print("Done - {} docbooks built.\n".format(buildcount))
+    print(f"Done - {buildcount} docbooks built.\n")
 
 # end main()
 

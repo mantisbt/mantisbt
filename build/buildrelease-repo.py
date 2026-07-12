@@ -31,10 +31,10 @@ long_options = ["help", "fresh", "ref=", "branches", "auto-suffix", "clean",
 
 
 def usage():
-    print('''Builds one or more releases (zip/tarball) for the specified
+    print(f'''Builds one or more releases (zip/tarball) for the specified
 references or for all branches.
 
-Usage: {0} [options] /path/for/tarballs [/path/to/repo]
+Usage: {path.basename(__file__)} [options] /path/for/tarballs [/path/to/repo]
 
 Options:
     -h | --help                  Show this usage message
@@ -46,11 +46,11 @@ Options:
     -a | --auto-suffix           Automatically append the HEAD commit's sha1
                                  to the version suffix
 
-The following options are passed on to '{1}':
+The following options are passed on to '{build_script_name}':
     -c | --clean                 Remove build directories when completed
     -d | --docbook               Build the docbook manuals
     -s | --suffix <suffix>       Include version suffix in config files
-'''.format(path.basename(__file__), build_script_name))
+''')
 # end usage()
 
 
@@ -126,8 +126,7 @@ def main():
                 os.mkdir(release_path)
             repo_path = tempfile.mkdtemp(dir=release_path, prefix="mantisbt-", suffix=".git")
             delete_clone = True
-        ret = subprocess.call('git clone {} {}'.format(clone_url, repo_path),
-                              shell=True)
+        ret = subprocess.call(f'git clone {clone_url} {repo_path}', shell=True)
         if ret != 0:
             print("ERROR: clone failed")
             sys.exit(1)
@@ -183,7 +182,7 @@ def main():
         commit_hash = os.popen('git log --pretty="format:%h" -n1').read()
         if commit_hash != ref:
             ref = refnameregex.search(ref).group(1)
-            commit_hash = "{}-{}".format(ref, commit_hash)
+            commit_hash = f"{ref}-{commit_hash}"
 
         if auto_suffix and version_suffix:
             suffix = "--suffix {}-{}".format(version_suffix, commit_hash)
@@ -199,9 +198,8 @@ def main():
         buildscript = path.join(repo_path, 'build', build_script_name)
         if not path.exists(buildscript):
             buildscript = path.join(script_dir, build_script_name)
-            print("Build script ({file}) not found in {ref}"
-                  .format(file=build_script_name, ref=ref))
-            print("Using '{}' instead.".format(buildscript))
+            print(f"Build script ({build_script_name}) not found in {ref}")
+            print(f"Using '{buildscript}' instead.")
 
         # Start building
         os.system("{} {} {} {} {}".format(buildscript, pass_opts, suffix,
