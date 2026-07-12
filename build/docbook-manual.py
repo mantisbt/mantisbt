@@ -175,15 +175,15 @@ def main():
 
             # Copy HTML manuals with rsync
             source = path.join(builddir, 'html*')
-            if len(glob.glob(source)) > 0:
-                rsync = "rsync -a --delete {} {}".format(
-                    source, installdir
-                )
-                print(rsync)
-                ret = subprocess.call(rsync, shell=True)
-                if ret != 0:
-                    print('ERROR: rsync call failed with exit code '
-                          .format(ret))
+            glob_source = glob.glob(source)
+            if glob_source:
+                try:
+                    rsync = ['rsync', '-a', '--delete'] + glob_source + [installdir]
+                    print(" ".join(rsync))
+                    subprocess.run(rsync, check=True)
+                except subprocess.CalledProcessError as e:
+                    print("ERROR:", e)
+                    sys.exit(1)
 
             # Copy single file manuals (PDF, TXT and EPUB)
             for filetype in ['epub', 'pdf', 'txt']:

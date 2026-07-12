@@ -133,8 +133,9 @@ def main():
                 os.mkdir(release_path)
             repo_path = tempfile.mkdtemp(dir=release_path, prefix="mantisbt-", suffix=".git")
             delete_clone = True
-        ret = subprocess.call(f'git clone {clone_url} {repo_path}', shell=True)
-        if ret != 0:
+        try:
+            subprocess.run(['git', 'clone', clone_url, repo_path], check=True)
+        except subprocess.CalledProcessError:
             print("ERROR: clone failed")
             sys.exit(1)
 
@@ -177,16 +178,18 @@ def main():
         # Composer
         if path.isfile('composer.json'):
             print("Installing Composer packages")
-            if subprocess.call(
-                    'composer install --no-plugins --no-scripts --no-dev --no-progress',
-                    shell=True):
-                continue
+            composer = ['composer', 'install', '--no-plugins', '--no-scripts', '--no-dev', '--no-progress']
+            try:
+                subprocess.run(composer, check=True)
+            except subprocess.CalledProcessError as e:
+                print("ERROR:", e)
+                sys.exit(1)
             print()
 
         # Update and reset submodules
         print("Updating submodules")
-        subprocess.call('git submodule update --init', shell=True)
-        subprocess.call('git submodule foreach git checkout -- .', shell=True)
+        subprocess.run(['git', 'submodule', 'update', '--init'], check=True)
+        subprocess.run(['git', 'submodule', 'foreach', 'git', 'checkout', '--', '.'], check=True)
 
         # Handle suffix/auto-suffix generation
         commit_hash = get_head_commit_sha()

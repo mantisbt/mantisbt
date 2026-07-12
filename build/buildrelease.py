@@ -86,7 +86,7 @@ def gpg_sign_tarball(filename):
                             '--passphrase-file=' + passphrase]
 
     try:
-        subprocess.check_call(gpgsign)
+        subprocess.run(gpgsign, check=True)
     except subprocess.CalledProcessError:
         # Remove batch-specific options for warning display
         gpgsign[3:len(gpgsign) - 1] = []
@@ -215,8 +215,8 @@ def main():
     fp.close()
 
     # Copy the files from the source repo, then delete temp file
-    rsync = f"rsync -rltD --exclude-from={fp.name} {mantis_path}/ {release_dir}"
-    subprocess.check_call(rsync, shell=True)
+    rsync = ['rsync', '-rltD', f'--exclude-from={fp.name}', mantis_path + '/', release_dir]
+    subprocess.run(rsync, check=True)
 
     os.unlink(fp.name)
     print("  Copy complete.\n")
@@ -224,14 +224,10 @@ def main():
     # Apply version suffix
     if version_suffix:
         print("Applying version suffix...")
-        sed_cmd = fr"s/(g_version_suffix\s*=\s*)'.*'/\\1'{version_suffix}'/"
-        subprocess.call(
-            'sed -r -i.bak "{}" {}'.format(
-                sed_cmd,
-                path.join(release_dir, "config_defaults_inc.php")
-            ),
-            shell=True
-        )
+        sed_cmd = ['sed', '-r', '-i.bak',
+                   fr"s/(g_version_suffix\s*=\s*)'.*'/\1'{version_suffix}'/",
+                   path.join(release_dir, "config_defaults_inc.php")]
+        subprocess.run(sed_cmd, check=True)
 
     # Build documentation for release
     if build_docbook:
@@ -255,14 +251,11 @@ def main():
         print("  " + tarball)
 
         if ext == "tar.gz":
-            tar_cmd = "tar -czf"
-        elif ext == "zip":
-            tar_cmd = "zip -rq"
+            tar_cmd = ['tar', '-czf']
         else:
-            tar_cmd = ""
-        tar_cmd += " {} {}"
-
-        subprocess.call(tar_cmd.format(tarball, release_name), shell=True)
+            tar_cmd = ['zip', '-rq']
+        tar_cmd.extend([tarball, release_name])
+        subprocess.run(tar_cmd, check=True)
 
         print("    Signing the tarball")
         gpg_sign_tarball(tarball)
