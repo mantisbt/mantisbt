@@ -52,7 +52,10 @@ def run_publican(args):
     :param args: Publican Command and arguments (as a list)
     :return:
     """
-    publican = shutil.which('publican')
+    publican = shutil.which(PUBLICAN)
+    if publican is None:
+        print(f"ERROR: {PUBLICAN} executable not found.")
+        sys.exit(1)
     cmd = [publican]
     if type(args) is list:
         cmd.extend(args)
@@ -65,10 +68,9 @@ def run_publican(args):
         print(ret.stdout.decode().strip())
         print()
     except subprocess.CalledProcessError as e:
-        print(e.output.decode().strip())
         print("ERROR:", e)
-        exit(1)
-
+        print(e.stderr.decode().strip())
+        sys.exit(1)
 
 
 def main():
