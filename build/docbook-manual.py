@@ -29,8 +29,8 @@ long_options = [
 
 
 def usage():
-    print('''Usage: {} /path/to/mantisbt/docbook /path/to/install \
-[<lang> ...]
+    print(f'''Usage: {path.basename(__file__)} \
+/path/to/mantisbt/docbook /path/to/install [<lang> ...]
     Options:  -h | --help           Print this usage message
               -d | --delete         Delete install directory before building
                    --epub           Build EPUB manual
@@ -40,7 +40,7 @@ def usage():
                    --release        Build single file types used for
                                     release tarballs
               -a | --all            Build all manual types
-'''.format(path.basename(__file__)))
+''')
 # end usage()
 
 
@@ -52,7 +52,10 @@ def run_publican(args):
     :param args: Publican Command and arguments (as a list)
     :return:
     """
-    publican = shutil.which('publican')
+    publican = shutil.which(PUBLICAN)
+    if publican is None:
+        print(f"ERROR: {PUBLICAN} executable not found.")
+        sys.exit(1)
     cmd = [publican]
     if type(args) is list:
         cmd.extend(args)
@@ -61,14 +64,13 @@ def run_publican(args):
 
     try:
         print("Running", " ".join(cmd))
-        ret = subprocess.run(cmd, capture_output=True, check=True)
-        print(ret.stdout.decode().strip())
+        ret = subprocess.run(cmd, text=True, capture_output=True, check=True)
+        print(ret.stdout.strip())
         print()
     except subprocess.CalledProcessError as e:
-        print(e.output.decode().strip())
+        print(e.stdout.strip())
         print("ERROR:", e)
-        exit(1)
-
+        sys.exit(1)
 
 
 def main():
@@ -79,13 +81,15 @@ def main():
         usage()
         sys.exit(2)
 
+    # noinspection PyUnboundLocalVariable
     if len(args) < 2:
         usage()
         sys.exit(1)
 
     delete = False
-    types = {MAKE: "html pdf", PUBLICAN: "html,pdf"}
+    types = "html,pdf"
 
+    # noinspection PyUnboundLocalVariable
     for opt, val in opts:
         if opt in ("-h", "--help"):
             usage()
@@ -94,29 +98,19 @@ def main():
         elif opt in ("-d", "--delete"):
             delete = True
 
+        # Output formats
         elif opt in ("-a", "--all"):
-            types[MAKE] = "html html_onefile html.tar.gz text pdf"
-            types[PUBLICAN] = "html,html-desktop,txt,pdf,epub"
-
+            types = "html,html-desktop,txt,pdf,epub"
         elif opt == "--epub":
-            types[MAKE] = "epub"
-            types[PUBLICAN] = "epub"
-
+            types = "epub"
         elif opt == "--html":
-            types[MAKE] = "html html_onefile html.tar.gz"
-            types[PUBLICAN] = "html,html-desktop"
-
+            types = "html,html-desktop"
         elif opt == "--pdf":
-            types[MAKE] = "pdf"
-            types[PUBLICAN] = types[MAKE]
-
+            types = "pdf"
         elif opt == "--txt":
-            types[MAKE] = "text"
-            types[PUBLICAN] = "txt"
-
+            types = "txt"
         elif opt == "--release":
-            types[MAKE] = "html_onefile pdf text"
-            types[PUBLICAN] = "html-desktop,pdf,txt"
+            types = "html-desktop,pdf,txt"
 
     docroot = path.abspath(args[0])
     installroot = args[1]
@@ -155,84 +149,61 @@ def main():
             if langs.count('tmp'):
                 langs.remove('tmp')
 
-        if path.exists('publican.cfg'):
-            # Build docbook with PUBLICAN
+        # Build docbook with PUBLICAN
+        if not path.exists('publican.cfg'):
+            print("ERROR: publican.cfg not found")
+            exit(1)
 
-            print("Building manual in '{}'\n".format(builddir))
-            run_publican('clean')
-            run_publican(['build',
-                          '--formats=' + types[PUBLICAN],
-                          '--langs=' + ','.join(langs)])
+        print(f"Building manual in '{builddir}'\n")
+        run_publican('clean')
+        run_publican(['build',
+                      '--formats=' + types,
+                      '--langs=' + ','.join(langs)])
 
-            print("Copying generated manuals to '{}'".format(installroot))
-            for lang in langs:
-                builddir = path.join('tmp', lang)
-                installdir = path.join(installroot, lang, directory)
+        print(f"Copying generated manuals to '{installroot}'")
+        for lang in langs:
+            builddir = path.join('tmp', lang)
+            installdir = path.join(installroot, lang, directory)
 
-                # Create target directory tree
+            # Create target directory tree
+            try:
+                os.makedirs(installdir)
+            except OSError as e:
+                # Ignore file exists error
+                if e.errno != errno.EEXIST:
+                    raise
+
+            # Copy HTML manuals with rsync
+            source = path.join(builddir, 'html*')
+            glob_source = glob.glob(source)
+            if glob_source:
                 try:
-                    os.makedirs(installdir)
-                except OSError as e:
-                    # Ignore file exists error
-                    if e.errno != errno.EEXIST:
-                        raise
+                    rsync = ['rsync', '-a', '--delete'] + glob_source + [installdir]
+                    print(" ".join(rsync))
+                    subprocess.run(rsync, check=True)
+                except subprocess.CalledProcessError as e:
+                    print("ERROR:", e)
+                    sys.exit(1)
 
-                # Copy HTML manuals with rsync
-                source = path.join(builddir, 'html*')
-                if len(glob.glob(source)) > 0:
-                    rsync = "rsync -a --delete {} {}".format(
-                        source, installdir
-                    )
-                    print(rsync)
-                    ret = subprocess.call(rsync, shell=True)
-                    if ret != 0:
-                        print('ERROR: rsync call failed with exit code '
-                              .format(ret))
-
-                # Copy single file manuals (PDF, TXT and EPUB)
-                for filetype in ['epub', 'pdf', 'txt']:
-                    if filetype == 'epub':
-                        source = path.join(builddir, '*.epub')
-                    else:
-                        source = path.join(builddir, filetype, '*' + filetype)
-                    dest = path.join(installdir, directory + '.' + filetype)
-                    for sourcefile in glob.glob(source):
-                        print("Copying '{}' to '{}'".format(sourcefile, dest))
-                        shutil.copy2(sourcefile, dest)
+            # Copy single file manuals (PDF, TXT and EPUB)
+            for filetype in ['epub', 'pdf', 'txt']:
+                if filetype == 'epub':
+                    source = path.join(builddir, '*.epub')
+                else:
+                    source = path.join(builddir, filetype, '*' + filetype)
+                dest = path.join(installdir, directory + '.' + filetype)
+                for sourcefile in glob.glob(source):
+                    print(f"Copying '{sourcefile}' to '{dest}'")
+                    shutil.copy2(sourcefile, dest)
             print()
 
             run_publican('clean')
-            print("{} Build complete\n".format(directory))
+            print(f"{directory} Build complete\n")
             buildcount += len(langs)
-        else:
-            # Build docbook with MAKE
-
-            for lang in langs:
-                if not path.isdir(path.join(builddir, lang)):
-                    print("WARNING: Unknown language '{}' in '{}'"
-                          .format(lang, builddir))
-                    continue
-
-                builddir = path.join(builddir, lang)
-                installdir = path.join(installroot, lang)
-                os.chdir(builddir)
-
-                if not path.exists('Makefile'):
-                    continue
-
-                print("Building manual in '%s'\n".format(builddir))
-                os.system(
-                    'make clean {} 2>&1 && '
-                    'make INSTALL_DIR={} install 2>&1'
-                    .format(types[MAKE], installdir)
-                )
-                os.system('make clean 2>&1')
-                print("\nBuild complete\n")
-                buildcount += 1
 
     # end docbook build loop
 
-    print("Done - {} docbooks built.\n".format(buildcount))
+    print(f"Done - {buildcount} docbooks built.\n")
 
 # end main()
 
