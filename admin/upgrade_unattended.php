@@ -15,11 +15,14 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file handles unattended upgrades of Mantis
+ * This file handles unattended upgrades of Mantis.
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
+ * @copyright Copyright 2002 - 2026 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link https://mantisbt.org
+ *
+ * @noinspection PhpUnused
  */
 
 set_time_limit( 0 );
@@ -27,10 +30,9 @@ set_time_limit( 0 );
 # Load the MantisDB core in maintenance mode. This mode will assume that
 # config_inc.php hasn't been specified. Thus the database will not be opened
 # and plugins will not be loaded.
-define( 'MANTIS_MAINTENANCE_MODE', true );
-
+const MANTIS_MAINTENANCE_MODE = true;
 require_once( dirname( __DIR__ ) . '/core.php' );
-require_api( 'crypto_api.php' );
+
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
 $g_failed = false;
@@ -47,10 +49,10 @@ header( 'X-Content-Type-Options: nosniff' );
 /**
  * Print the result of an upgrade step.
  *
- * @param integer $p_result    GOOD or BAD.
- * @param boolean $p_hard_fail If result is BAD, sets the global failure flag.
- * @param string  $p_message   The message describing the upgrade step.
- * @access private
+ * @param int    $p_result    GOOD or BAD.
+ * @param bool   $p_hard_fail If result is BAD, sets the global failure flag.
+ * @param string $p_message   The message describing the upgrade step.
+ *
  * @return void
  */
 function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
@@ -73,58 +75,58 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	echo "\n";
 }
 
-$t_result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ),
-	config_get_global( 'db_username' ), config_get_global( 'db_password' ),
-	config_get_global( 'database_name' ) );
 
-if( false == $t_result ) {
-	echo 'Opening connection to database ' .
-		config_get_global( 'database_name' ) .
-		' on host ' . config_get_global( 'hostname' ) .
-		' with username ' . config_get_global( 'db_username' ) .
-		' failed: ' . db_error_msg() . "\n";
+# Check database type before attempting to connect
+$t_db_type = config_get_global( 'db_type' );
+if( db_get_type( $t_db_type ) == DB_TYPE_UNDEFINED ) {
+	echo "Invalid db type '$t_db_type'.\n";
 	exit( 1 );
 }
 
 # read control variables with defaults
-$t_db_type = config_get_global( 'db_type' );
+$t_dsn = config_get_global( 'dsn', false );
+$t_hostname = config_get_global( 'hostname' );
+$t_db_username = config_get_global( 'db_username' );
+$t_db_password = config_get_global( 'db_password' );
+$t_database_name = config_get_global( 'database_name' );
 
-# install the tables
-if( !preg_match( '/^[a-zA-Z0-9_]+$/', $t_db_type ) ||
-	!file_exists( dirname( __DIR__ ) . '/vendor/adodb/adodb-php/drivers/adodb-' . $t_db_type . '.inc.php' ) ) {
-	echo 'Invalid db type ' . htmlspecialchars( $t_db_type ) . '.';
-	exit;
-}
-
-$GLOBALS['g_db_type'] = $t_db_type; # database_api references this
-require_once( __DIR__ . '/schema.php' );
-$g_db = ADONewConnection( $t_db_type );
-
-echo "\nPost 1.0 schema changes\n";
-echo 'Connecting to database... ';
-$t_result = @$g_db->Connect( config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
-
-if( false == $t_result ) {
-	echo 'Failed.' . "\n";
+# Attempt to connect
+echo "Connecting to database... ";
+$t_save = error_reporting( error_reporting() & ~E_USER_ERROR );
+$t_result = @db_connect( $t_dsn, $t_hostname, $t_db_username, $t_db_password, $t_database_name );
+if( !$t_result ) {
+	echo "FAILED\n";
+	echo "Error opening connection to database "
+		. "'$t_database_name' on host '$t_hostname' with username '$t_db_username':\n"
+		. db_error_msg() . "\n";
 	exit( 1 );
 }
+error_reporting( $t_save );
+echo "OK\n";
 
-echo 'OK' . "\n";
+# install the tables
+require_once( __DIR__ . '/schema.php' );
+global $g_db, $g_upgrade;
 
-$g_db_connected = true; # fake out database access routines used by config_get
+echo "\nPost 1.0 schema changes\n";
+
 $t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 $t_last_id = count( $g_upgrade ) - 1;
 $i = $t_last_update + 1;
 $t_count_done = 0;
+$t_dict = NewDataDictionary( $g_db );
 
-while( ( $i <= $t_last_id ) && !$g_failed ) {
+echo "Current schema version: $t_last_update\n";
+echo "Target schema version:  $t_last_id\n";
+echo "\n";
+
+while( $i <= $t_last_id && !$g_failed ) {
 	if ( $g_upgrade[$i] === null ) {
 		$i++;
 		$t_count_done++;
 		continue;
 	}
 
-	$t_dict = NewDataDictionary( $g_db );
 	$t_sql = true;
 	$t_target = $g_upgrade[$i][1][0];
 
@@ -186,12 +188,15 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 	$t_count_done++;
 }
 
-echo $t_count_done . ' schema upgrades executed.' . "\n";
+if( $t_count_done ) {
+	echo "\n$t_count_done schema upgrades executed.\n";
 
-if( false == $g_failed ) {
-	echo 'Done.' . "\n";
-	exit( 0 );
+	if( $g_failed ) {
+		echo "Failed.\n";
+		exit( 1 );
+	}
+
+	echo "Done.\n";
+} else {
+	echo "Nothing to do.\n";
 }
-
-echo "Failed.\n";
-exit( 1 );
