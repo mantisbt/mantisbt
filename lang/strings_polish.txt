@@ -53,6 +53,7 @@
  * @author Mansoft
  * @author Mazab IZW
  * @author MojaEdukacja
+ * @author PanWor
  * @author Py64
  * @author Rail
  * @author Rambro
@@ -232,7 +233,7 @@ $s_new_account_subject = 'Rejestracja konta';
 $s_new_account_greeting = 'Dziękujemy za rejestrację. Twoje konto nazwa się „%1$s”. Aby zakończyć rejestrację, odwiedź podany adres URL (upewnij się, że jest wprowadzony w jednej linii) i ustaw swoje hasło dostępu:';
 $s_new_account_greeting_admincreated = 'Użytkownik %1$s stworzył dla Ciebie konto „%2$s”. W celu zakończenia rejestracji, odwiedź następujący adres URL (sprawdź, czy cały adres jest wpisany w jednej linii) i ustaw własne hasło dostępu:';
 $s_new_account_username = 'Nazwa użytkownika:';
-$s_new_account_message = 'Jeśli to nie twoje zgłoszenie, zignoruj tę wiadomość. Nic się nie stanie.';
+$s_new_account_message = 'Jeśli to nie Twoje zgłoszenie, zignoruj tę wiadomość. Nic się nie stanie.';
 $s_new_account_do_not_reply = 'Nie odpowiadaj na tą wiadomość';
 $s_new_account_email = 'Email:';
 $s_new_account_IP = 'Zdalny adres IP:';
