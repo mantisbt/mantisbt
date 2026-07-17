@@ -116,7 +116,7 @@ def main():
     installroot = args[1]
     languages = []
 
-    if len(sys.argv) > 2:
+    if len(args) > 2:
         languages = args[2:]
 
     os.chdir(docroot)
@@ -140,7 +140,7 @@ def main():
         os.chdir(builddir)
 
         # Languages to process
-        if len(languages) > 0:
+        if languages:
             langs = languages
         else:
             langs = next(os.walk(builddir))[1]
@@ -156,9 +156,10 @@ def main():
 
         print(f"Building manual in '{builddir}'\n")
         run_publican('clean')
-        run_publican(['build',
-                      '--formats=' + types,
-                      '--langs=' + ','.join(langs)])
+        cmd = ['build', '--formats=' + types]
+        if langs:
+            cmd.append('--langs=' + ','.join(langs))
+        run_publican(cmd)
 
         print(f"Copying generated manuals to '{installroot}'")
         for lang in langs:
