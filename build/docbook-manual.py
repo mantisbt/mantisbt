@@ -68,7 +68,7 @@ def run_publican(args):
         print(ret.stdout.strip())
         print()
     except subprocess.CalledProcessError as e:
-        print(e.stdout.strip())
+        print(e.stderr.strip() if e.stderr else e.stdout.strip())
         print("ERROR:", e)
         sys.exit(1)
 
