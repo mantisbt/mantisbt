@@ -116,7 +116,7 @@ def main():
     languages = []
 
     if len(args) > 2:
-        languages = args[2:]
+        languages.extend([lang for lang in args[2:] if lang])
 
     os.chdir(docroot)
 
