@@ -11,7 +11,6 @@ import sys
 
 
 # Constants
-MAKE = 'make'
 PUBLICAN = 'publican'
 
 # Script options
