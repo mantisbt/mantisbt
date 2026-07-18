@@ -1951,11 +1951,12 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 	}
 	$t_required = $p_required ? ' required' : '';
 	/** @noinspection HtmlUnknownAttribute */
-	$t_info = sprintf( '<select class="input-sm" name="%1$s" id="%1$s"%2$s%3$s%4$s>',
+	$t_info = sprintf( '<select class="input-sm" name="%1$s" id="%1$s"%2$s%3$s%4$s data-arbitrary-dates="%5$s">',
 		$p_control_name,
 		$t_required,
 		$t_multiple,
-		$t_size
+		$t_size,
+		Period::PERIOD_ARBITRARY_DATES
 	);
 	if( $p_add_any ) {
 		array_unshift( $p_control_array, [ META_FILTER_ANY => '[' . lang_get( 'any' ) . ']' ] );

@@ -141,7 +141,8 @@ $(function() {
     period_selector
         .on('change', function() {
             // Enable inputs and show icon for arbitrary dates, otherwise disable & hide
-            let enabled = $(this).val() === "10";
+            let arbitrary_dates = $(this).data('arbitrary-dates')
+            let enabled = Number($(this).val()) === arbitrary_dates;
             $('#dates input.datetimepicker').prop('disabled', !enabled);
             $('#dates i.datetimepicker').toggle(enabled);
         })
