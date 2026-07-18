@@ -132,4 +132,15 @@ $(function() {
             }
         });
     });
+
+    /**
+     * Activate/deactivate start/end dates inputs with datetimepicker.
+     *
+     * See Period::period_selector() method.
+     */
+    period_selector
+        .on('change', function() {
+            $('#dates input.datetimepicker').prop('disabled', $(this).val() !== '10');
+        })
+        .trigger('change');
 });

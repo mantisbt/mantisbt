@@ -286,19 +286,33 @@ class Period {
 			6 => plugin_lang_get( 'period_last_year' ),
 			10 => plugin_lang_get( 'period_select' ),
 		);
+
 		$t_default = gpc_get_int( $p_control_name, 0 );
+		$t_dropdown = get_dropdown( $t_periods, $p_control_name, $t_default );
 		$t_formatted_start = $this->get_start_formatted();
 		$t_formatted_end = $this->get_end_formatted();
-		$t_ret = '<div id="period_menu">';
-		$t_ret .= get_dropdown( $t_periods, $p_control_name, $t_default, false, false );
-		$t_ret .= "</div> <br />\n";
-		$t_ret .= "<div id=\"dates\">\n";
-		$t_ret .= '<span class="inline"><label for="start_date" class="padding-4">' . lang_get( 'from_date' ) . '</label> '
-			. datetimepicker_get_field( $t_formatted_start, 'start_date', 'Y-MM-DD' ) . "</span>\n";
-		$t_ret .= '<span class="inline"><label for="end_date" class="padding-4">' . lang_get( 'to_date' ) . '</label> '
-			. datetimepicker_get_field( $t_formatted_end, 'end_date', 'Y-MM-DD' ) . "</span>\n";
-		$t_ret .= "</div>\n";
-		return $t_ret;
+		$t_date_input_pattern = '<span class="inline"><label for="%1$s" class="padding-right-4">%2$s</label>%3$s</span>';
+		$t_from_date = sprintf( $t_date_input_pattern, 
+			'start_date',
+			lang_get( 'from_date' ),
+			datetimepicker_get_field( $t_formatted_start, 'start_date' )
+		);
+		$t_to_date = sprintf( $t_date_input_pattern,
+			'end_date',
+			lang_get( 'to_date' ),
+			datetimepicker_get_field( $t_formatted_end, 'end_date' )
+		);
+
+		return <<< HTML
+			<div id="period_menu">
+				$t_dropdown
+			</div>
+			<br>
+			<div id="dates">
+				<div class="pull-left padding-right-8">$t_from_date</div>
+				<div class="pull-left">$t_to_date</div>
+			</div>
+		HTML;
 	}
 
 	/**
