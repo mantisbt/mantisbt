@@ -68,26 +68,7 @@ $f_sort = gpc_get_string( 'sort', 'submit' );
 $f_username = gpc_get_string( 'username', null );
 $f_key = gpc_get_string( 'key', null );
 
-# make sure RSS syndication is enabled.
-if( OFF == config_get( 'rss_enabled' ) ) {
-	access_denied();
-}
-
-# authenticate the user
-if( $f_username !== null ) {
-	if( !rss_login( $f_username, $f_key ) ) {
-		access_denied();
-	}
-} else {
-	if( !auth_anonymous_enabled() ) {
-		access_denied();
-	}
-}
-
-# Make sure that the current user has access to the selected project (if not ALL PROJECTS).
-if( $f_project_id != ALL_PROJECTS ) {
-	access_ensure_project_level( config_get( 'view_bug_threshold', null, null, $f_project_id ), $f_project_id );
-}
+rss_initialize( $f_username, $f_key, $f_project_id );
 
 if( $f_sort === 'update' ) {
 	$c_sort_field = 'last_updated';

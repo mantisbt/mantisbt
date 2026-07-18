@@ -33,6 +33,8 @@
  * @uses user_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -40,6 +42,44 @@ require_api( 'crypto_api.php' );
 require_api( 'current_user_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'user_api.php' );
+
+
+/**
+ * Initialize RSS.
+ *
+ * Ensure the feature is enabled, authenticate the user and verify that they
+ * have access to the selected project.
+ *
+ * @param string|null $p_username
+ * @param string|null $p_key
+ * @param int         $p_project_id
+ * @return void
+ *
+ * @throws ClientException
+ */
+function rss_initialize( ?string $p_username, ?string $p_key, int $p_project_id ): void {
+	# Make sure RSS syndication is enabled.
+	if( OFF == config_get( 'rss_enabled' ) ) {
+		access_denied();
+	}
+
+	# Authenticate the user
+	if( $p_username !== null ) {
+		if( !rss_login( $p_username, $p_key ) ) {
+			access_denied();
+		}
+	} elseif( !auth_anonymous_enabled() ) {
+		access_denied();
+	}
+
+	# Ensure the user has access to the selected project (if not ALL PROJECTS).
+	if( $p_project_id != ALL_PROJECTS ) {
+		access_ensure_project_level(
+			config_get( 'view_bug_threshold', null, null, $p_project_id ),
+			$p_project_id
+		);
+	}
+}
 
 /**
  * Calculates a key to be used for RSS authentication based on user name,
