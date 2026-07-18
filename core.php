@@ -359,9 +359,9 @@ function set_default_path() {
 		return false;
 	}
 
-	$t_message = 'Please set it manually in ' . $g_config_path . 'config_inc.php' . PHP_EOL;
+	# $_SERVER['SCRIPT_NAME'], does not contain an URL when running from CLI
+	# Do not set $g_path in this case.
 	if(php_sapi_name() == 'cli') {
-		echo 'WARNING: cannot initialize $g_path from CLI. ' . $t_message;
 		return false;
 	}
 
@@ -415,7 +415,9 @@ function set_default_path() {
 		$t_path = rtrim( $t_path, '/\\' ) . '/';
 
 		if( strpos( $t_path, '&#' ) ) {
-			echo 'Can not safely determine $g_path.' . $t_message;
+			echo 'Can not safely determine $g_path.'
+				. "Please set it manually in $g_config_path config_inc.php"
+				. PHP_EOL;
 			die;
 		}
 	} else {
