@@ -1,0 +1,1 @@
+Adapt build script to generate up-to-date offline EOL data
