@@ -1129,22 +1129,24 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
 }
 
 /**
- * Get set of bug rows from given filter
- * @todo Had to make all these parameters required because we can't use call-time pass by reference anymore.
- * I really preferred not having to pass all the params in if you didn't want to, but I wanted to get
- * rid of the errors for now.  If we can think of a better way later (maybe return an object) that would be great.
+ * Get set of bug rows from given filter.
  *
- * @param integer &$p_page_number  Page number of the page you want to see (set to the actual page on return).
- * @param integer &$p_per_page     The number of bugs to see per page (set to actual on return)
+ * @todo Had to make all these parameters required because we can't use call-time pass by reference anymore.
+ *   I really preferred not having to pass all the params in if you didn't want to, but I wanted to get
+ *   rid of the errors for now.  If we can think of a better way later (maybe return an object) that would be great.
+ *
+ * @param int   &$p_page_number  Page number of the page you want to see (set to the actual page on return).
+ * @param int   &$p_per_page     The number of bugs to see per page (set to actual on return)
  *                                 -1   indicates you want to see all bugs
  *                                 null indicates you want to use the value specified in the filter.
- * @param integer &$p_page_count   You don't need to give a value here, the number of pages will be stored here on return.
- * @param integer &$p_bug_count    You don't need to give a value here, the number of bugs will be stored here on return.
- * @param mixed   $p_custom_filter Custom Filter to use.
- * @param integer $p_project_id    Project id to use in filtering.
- * @param integer $p_user_id       User id to use as current user when filtering.
- * @param boolean $p_show_sticky   True/false - get sticky issues only.
- * @return boolean|array
+ * @param int   &$p_page_count   You don't need to give a value here, the number of pages will be stored here on return.
+ * @param int   &$p_bug_count    You don't need to give a value here, the number of bugs will be stored here on return.
+ * @param mixed $p_custom_filter Custom Filter to use.
+ * @param int   $p_project_id    Project id to use in filtering.
+ * @param int   $p_user_id       User id to use as current user when filtering.
+ * @param bool  $p_show_sticky   True/false - get sticky issues only.
+ *
+ * @return array
  */
 function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
 	# assigning to $p_* for this function writes the values back in case the caller wants to know
