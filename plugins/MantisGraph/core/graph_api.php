@@ -24,6 +24,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Converts an html color (e.g. #fcbdbd) to rgba.
  *
@@ -209,6 +211,7 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
  * @param array  $p_filter        Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = array(), array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -219,7 +222,7 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
 	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
 
 	if( !db_field_exists( $p_enum, db_get_table( 'bug' ) ) ) {
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
+		throw new ClientException( "Database field '$p_enum' not found", ERROR_DB_FIELD_NOT_FOUND );
 	}
 
 	$t_query = new DBQuery();
