@@ -170,8 +170,17 @@ if( $f_filter_id == 0 ) {
 	}
 }
 
-$t_issues = filter_get_bug_rows( $t_page_number, $t_issues_per_page, $t_page_count, $t_issues_count,
-								 $t_custom_filter, $t_project_id, $t_user_id, $t_show_sticky );
+$t_issues = filter_get_bug_rows(
+	$t_page_number,
+	$t_issues_per_page,
+	$t_page_count,
+	$t_issues_count,
+	$t_custom_filter,
+	$t_project_id,
+	$t_user_id,
+	$t_show_sticky,
+	false
+);
 $t_issues_count = count( $t_issues );
 
 # Loop through results
@@ -222,4 +231,3 @@ for( $i = 0; $i < $t_issues_count; $i++ ) {
 $t_version = '2.0';
 
 $t_rssfile->outputRSS( $t_version );
-
