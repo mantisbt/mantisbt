@@ -1145,10 +1145,11 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
  * @param int   $p_project_id    Project id to use in filtering.
  * @param int   $p_user_id       User id to use as current user when filtering.
  * @param bool  $p_show_sticky   True/false - get sticky issues only.
+ * @param bool  $p_visible_only  If true (default), only allow sorting on visible columns.
  *
  * @return array
  */
-function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
+function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null, $p_visible_only = true ) {
 	# assigning to $p_* for this function writes the values back in case the caller wants to know
 
 	if( $p_custom_filter === null ) {
@@ -1164,7 +1165,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				'query_type' => BugFilterQuery::QUERY_TYPE_LIST,
 				'project_id' => $p_project_id,
 				'user_id' => $p_user_id,
-				'use_sticky' => $p_show_sticky
+				'use_sticky' => $p_show_sticky,
+				'visible_only' => $p_visible_only,
 				)
 			);
 	$p_bug_count = $t_filter_query->get_bug_count();
@@ -2380,41 +2382,58 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 }
 
 /**
- * Returns the sort columns from a filter, with only those columns that are visible
- * according to $p_columns_target user's configuration, and valid for sorting.
- * Returns an array consisting of two respective properties of column names, and
- * sort direction, each one already exploded into an array.
- * Note: Filter array must be a valid filter
- * @param array $p_filter Original filter array.
- * @param integer $p_columns_target Target view for the columns.
- * @return array Array of filtered columns and order
+ * Returns the visible sort columns from a filter.
+ *
+ * Only those columns that are visible according to $p_columns_target user's
+ * configuration, and valid for sorting are returned.
+ *
+ * @param array $p_filter         Valid filter array.
+ * @param int   $p_columns_target Target view for the columns.
+ *
+ * @return array Visible sort columns and directions, each one exploded into an array.
  */
 function filter_get_visible_sort_properties_array( array $p_filter, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	# get visible columns
-	$t_visible_columns = helper_get_columns_to_view( $p_columns_target );
-	# filter out those that are not sortable
-	$t_visible_columns = array_filter( $t_visible_columns, 'column_is_sortable' );
+	return filter_get_sort_properties_array( $p_filter, true, $p_columns_target );
+}
 
-	# Special handling for overdue column, which is equivalent to sorting by due_date
-	if( in_array( 'overdue', $t_visible_columns ) & !in_array( 'due_date', $t_visible_columns ) ) {
-		$t_visible_columns[] = 'due_date';
-	}
-
+/**
+ * Returns the sort columns from a filter.
+ *
+ * @param array $p_filter         Valid filter array.
+ * @param bool  $p_visible_only   True to only return visible columns.
+ * @param int   $p_columns_target Target view for the columns.
+ *
+ * @return array Sort columns and directions, each one exploded into an array.
+ */
+function filter_get_sort_properties_array( array $p_filter, bool $p_visible_only = true, int $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ): array {
 	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
-	$t_sort_array = array();
-	$t_dir_array = array();
-	$t_count = count( $t_sort_fields );
-	for( $i = 0; $i < $t_count; $i++ ) {
-		$c_sort = $t_sort_fields[$i];
-		if( in_array( $c_sort, $t_visible_columns ) ) {
-			$t_sort_array[] = $t_sort_fields[$i];
-			$t_dir_array[] = $t_dir_fields[$i];
+
+	if( $p_visible_only ) {
+		# get visible columns
+		$t_visible_columns = helper_get_columns_to_view( $p_columns_target );
+
+		# filter out those that are not sortable
+		$t_visible_columns = array_filter( $t_visible_columns, 'column_is_sortable' );
+
+		# Special handling for overdue column, which is equivalent to sorting by due_date
+		if( in_array( 'overdue', $t_visible_columns ) & !in_array( 'due_date', $t_visible_columns ) ) {
+			$t_visible_columns[] = 'due_date';
 		}
+
+		# Only keep visible columns
+		foreach( $t_sort_fields as $t_key => $t_field ) {
+			if( !in_array( $t_field, $t_visible_columns ) ) {
+				unset( $t_sort_fields[$t_key], $t_dir_fields[$t_key] );
+			}
+		}
+		$t_sort_fields = array_values( $t_sort_fields );
+		$t_dir_fields = array_values( $t_dir_fields );
 	}
+
 	return array(
-		FILTER_PROPERTY_SORT_FIELD_NAME => $t_sort_array,
-		FILTER_PROPERTY_SORT_DIRECTION => $t_dir_array
+		FILTER_PROPERTY_SORT_FIELD_NAME => $t_sort_fields,
+		FILTER_PROPERTY_SORT_DIRECTION => $t_dir_fields,
 	);
 }
 
