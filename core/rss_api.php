@@ -33,6 +33,8 @@
  * @uses user_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -41,12 +43,55 @@ require_api( 'current_user_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'user_api.php' );
 
+
 /**
- * Calculates a key to be used for RSS authentication based on user name,
- * cookie and password. If the user changes their user name or password, this
- * RSS authentication key will become invalidated.
- * @param integer $p_user_id User ID for the user which the key is being calculated for.
- * @return string RSS authentication key (384bit) encoded according to the base64 with URI safe alphabet approach described in RFC4648.
+ * Initialize RSS.
+ *
+ * Ensure the feature is enabled, authenticate the user and verify that they
+ * have access to the selected project.
+ *
+ * @param string|null $p_username
+ * @param string|null $p_key
+ * @param int         $p_project_id
+ * @return void
+ *
+ * @throws ClientException
+ */
+function rss_initialize( ?string $p_username, ?string $p_key, int $p_project_id ): void {
+	# Make sure RSS syndication is enabled.
+	if( OFF == config_get( 'rss_enabled' ) ) {
+		access_denied();
+	}
+
+	# Authenticate the user
+	if( $p_username !== null ) {
+		if( !rss_login( $p_username, $p_key ) ) {
+			access_denied();
+		}
+	} elseif( !auth_anonymous_enabled() ) {
+		access_denied();
+	}
+
+	# Ensure the user has access to the selected project (if not ALL PROJECTS).
+	if( $p_project_id != ALL_PROJECTS ) {
+		access_ensure_project_level(
+			config_get( 'view_bug_threshold', null, null, $p_project_id ),
+			$p_project_id
+		);
+	}
+}
+
+/**
+ * Calculates a key to be used for RSS authentication.
+ *
+ * Key is based on username, cookie and password. If the user changes their
+ * username or password, this RSS authentication key will become invalid.
+ *
+ * @param int $p_user_id User ID for the user which the key is being calculated for.
+ *
+ * @return string RSS authentication key (384bit) encoded according to the
+ *                base64 with URI safe alphabet approach described in RFC4648.
+ * @throws ClientException
  */
 function rss_calculate_key( $p_user_id = null ) {
 	if( $p_user_id === null ) {
@@ -63,17 +108,19 @@ function rss_calculate_key( $p_user_id = null ) {
 	# Note: We truncate the last 8 bits from the hash output so that base64
 	# encoding can be performed without any trailing padding.
 	$t_key_base64_encoded = base64_encode( substr( $t_key_raw, 0, 63 ) );
-	$t_key = strtr( $t_key_base64_encoded, '+/', '-_' );
 
-	return $t_key;
+	return strtr( $t_key_base64_encoded, '+/', '-_' );
 }
 
 /**
- * Given the user name and the rss key, this method attempts to login the user.  If successful, it
- * return true, otherwise, returns false.
- * @param string $p_username A user name to attempt to login as.
+ * Attempts to login the user.
+ *
+ * @param string $p_username A username to attempt to login as.
  * @param string $p_key      The RSS key to use for the given user.
- * @return boolean
+ *
+ * @return bool True if login was successful.
+ *
+ * @throws ClientException
  */
 function rss_login( $p_username, $p_key ) {
 	if( ( $p_username === null ) || ( $p_key === null ) ) {
@@ -99,12 +146,15 @@ function rss_login( $p_username, $p_key ) {
 }
 
 /**
- * return RSS issues feed URL
- * @param integer $p_project_id The project identifier to retrieve the news feed URL for.
- * @param string  $p_username   The user name accessing the news feed.
- * @param integer $p_filter_id  The filter identifier to generate a URL for.
- * @param boolean $p_relative   Whether to return relative links.
+ * Return RSS issues feed URL.
+ *
+ * @param int    $p_project_id The project id to retrieve the news feed URL for.
+ * @param string $p_username   The username accessing the news feed.
+ * @param int    $p_filter_id  The filter identifier to generate a URL for.
+ * @param bool   $p_relative   Whether to return relative links.
+ *
  * @return string
+ * @throws ClientException
  */
 function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_filter_id = null, $p_relative = true ) {
 	if( $p_username === null ) {
@@ -149,11 +199,14 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 }
 
 /**
- * return RSS news feed URL
- * @param integer $p_project_id The project identifier to retrieve the news feed URL for.
- * @param string  $p_username   The user name accessing the news feed.
- * @param boolean $p_relative   Whether to return relative links.
+ * Return RSS news feed URL.
+ *
+ * @param int    $p_project_id The project id to retrieve the news feed URL for.
+ * @param string $p_username   The user name accessing the news feed.
+ * @param bool   $p_relative   Whether to return relative links.
+ *
  * @return string
+ * @throws ClientException
  */
 function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_relative = true ) {
 	if( $p_username === null ) {

@@ -107,6 +107,7 @@ class BugFilterQuery extends DbQuery {
 	public $project_id;
 	public $user_id;
 	public $use_sticky;
+	public bool $visible_only;
 
 	# internal storage for intermediate data
 	protected $query_type;
@@ -146,9 +147,12 @@ class BugFilterQuery extends DbQuery {
 	 *					By default current user is used.
 	 * - 'use_sticky':	(bool) Whether to allow returning the bug list sorted so that sticky
 	 *					bugs are placed first in the result order. This is false by default.
+	 * - 'visible_only':(bool) If true, only visible columns can be used as sort criteria,
+	 *                  others are ignored.
 	 *
 	 * @param array $p_filter			Filter array
 	 * @param array|integer $p_config	Options array, or single query type identifier
+	 *
 	 * @return void
 	 */
 	public function __construct( $p_filter, $p_config = self::QUERY_TYPE_LIST ) {
@@ -158,6 +162,7 @@ class BugFilterQuery extends DbQuery {
 		$this->use_sticky = false;
 		$this->project_id = helper_get_current_project();
 		$this->user_id = auth_get_current_user_id();
+		$this->visible_only = true;
 
 		# $p_config can be an array or an integer
 		if( is_array( $p_config ) ) {
@@ -177,6 +182,9 @@ class BugFilterQuery extends DbQuery {
 						break;
 					case 'use_sticky':
 						$this->use_sticky = (bool)$t_value;
+						break;
+					case 'visible_only':
+						$this->visible_only = (bool)$t_value;
 						break;
 				}
 			}
@@ -1726,10 +1734,8 @@ class BugFilterQuery extends DbQuery {
 	 */
 	protected function build_order_by() {
 
-		# Get only the visible, and sortable, column properties
-		# @TODO cproensa: this defaults to COLUMNS_TARGET_VIEW_PAGE
-		# are we sure that filters are only used with the column set for view page?
-		$t_sort_properties = filter_get_visible_sort_properties_array( $this->filter );
+		# Get the sort column properties
+		$t_sort_properties = filter_get_sort_properties_array( $this->filter, $this->visible_only );
 		$t_sort_fields = $t_sort_properties[FILTER_PROPERTY_SORT_FIELD_NAME];
 		$t_dir_fields = $t_sort_properties[FILTER_PROPERTY_SORT_DIRECTION];
 
