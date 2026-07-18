@@ -42,6 +42,8 @@
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
+ *
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 # Prevent output of HTML in the content if errors occur
@@ -106,7 +108,8 @@ $t_description = $t_title;
 # in minutes (only rss 2.0)
 $t_cache = '10';
 
-$t_rssfile = new RSSBuilder(	$t_encoding, $t_about, $t_title, $t_description, $t_image_link, $t_category, $t_cache );
+/** @noinspection PhpUndefinedClassInspection */
+$t_rssfile = new RSSBuilder( $t_encoding, $t_about, $t_title, $t_description, $t_image_link, $t_category, $t_cache );
 
 # person, an organization, or a service
 $t_publisher = '';
