@@ -800,45 +800,48 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 			plugin_pop_current();
 			return false;
 		}
-		$t_status = false;
 
-		switch( $t_schema[$i][0] ) {
-			case 'InsertData':
-				$t_sqlarray = array(
-					'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-				);
-				break;
+		# No-op upgrade step
+		if( $t_schema[$i] === null ) {
+			$t_status = 2;
+			$t_sqlarray = [];
+		} else {
+			$t_status = false;
+			$t_operation = $t_schema[$i][0];
+			$t_target = $t_schema[$i][1][0];
 
-			case 'UpdateSQL':
-				$t_sqlarray = array(
-					'UPDATE ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-				);
-				break;
+			switch( $t_operation ) {
+				case 'InsertData':
+					$t_sqlarray = array(
+						'INSERT INTO ' . $t_target . $t_schema[$i][1][1],
+					);
+					break;
 
-			case 'UpdateFunction':
-				$t_sqlarray = false;
-				if( isset( $t_schema[$i][2] ) ) {
-					$t_status = call_user_func( 'install_' . $t_schema[$i][1], $t_schema[$i][2] );
-				} else {
-					$t_status = call_user_func( 'install_' . $t_schema[$i][1] );
-				}
-				break;
+				case 'UpdateSQL':
+					$t_sqlarray = array(
+						'UPDATE ' . $t_target . $t_schema[$i][1][1],
+					);
+					break;
 
-			case null:
-				# No-op upgrade step
-				$t_sqlarray = false;
-				$t_status = 2;
-				break;
+				case 'UpdateFunction':
+					$t_sqlarray = false;
+					if( isset( $t_schema[$i][2] ) ) {
+						$t_status = call_user_func( 'install_' . $t_schema[$i][1], $t_schema[$i][2] );
+					} else {
+						$t_status = call_user_func( 'install_' . $t_schema[$i][1] );
+					}
+					break;
 
-			default:
-				$t_sqlarray = call_user_func_array(
-					array( $t_dict, $t_schema[$i][0] ),
-					$t_schema[$i][1]
-				);
-		}
+				default:
+					$t_sqlarray = call_user_func_array(
+						array( $t_dict, $t_operation ),
+						$t_schema[$i][1]
+					);
+			}
 
-		if( $t_sqlarray ) {
-			$t_status = $t_dict->ExecuteSQLArray( $t_sqlarray );
+			if( $t_sqlarray ) {
+				$t_status = $t_dict->ExecuteSQLArray( $t_sqlarray );
+			}
 		}
 
 		if( 2 == $t_status ) {
