@@ -2198,14 +2198,11 @@ function print_bug_attachment_preview_audio_video( array $p_attachment, $p_file_
 function print_timezone_option_list( $p_timezone ) {
 	$t_identifiers = timezone_identifiers_list( DateTimeZone::ALL );
 
+	$t_locations_list = [];
 	foreach( $t_identifiers as $t_identifier ) {
 		$t_zone = explode( '/', $t_identifier, 2 );
-		if( isset( $t_zone[1] ) ) {
-			$t_id = $t_zone[1];
-		} else {
-			$t_id = $t_identifier;
-		}
-		$t_locations[$t_zone[0]][$t_identifier] = array(
+		$t_id = $t_zone[1] ?? $t_identifier;
+		$t_locations_list[$t_zone[0]][$t_identifier] = array(
 			str_replace( '_', ' ', $t_id ),
 			$t_identifier
 		);
