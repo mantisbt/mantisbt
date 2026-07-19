@@ -478,7 +478,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 			user_set_fields( $t_user_id, $t_fields_to_update );
 		}
-		log_event( LOG_LDAP, 'User \'' . $p_username . '\' authenticated' );
+		log_event( LOG_LDAP, "User '$p_username' authenticated" );
 	} else {
 		log_event( LOG_LDAP, 'Authentication failed' );
 	}
@@ -533,7 +533,7 @@ function ldap_simulation_get_user( $p_username ) {
 		return $t_user;
 	}
 
-	log_event( LOG_LDAP, 'user \'' . $p_username . '\' not found.' );
+	log_event( LOG_LDAP, "user '$p_username' not found." );
 	return null;
 }
 
@@ -548,11 +548,13 @@ function ldap_simulation_get_user( $p_username ) {
 function ldap_simulation_email_from_username( $p_username ) {
 	$t_user = ldap_simulation_get_user( $p_username );
 	if( $t_user === null ) {
-		log_event( LOG_LDAP, 'user \'' . $p_username . '\' not found.' );
+		log_event( LOG_LDAP, "user '$p_username' not found." );
 		return '';
 	}
 
-	log_event( LOG_LDAP, 'user \'' . $p_username . '\' has email \'' . $t_user['email'] .'\'.' );
+	log_event( LOG_LDAP,
+		"user '$p_username' has email '{$t_user['email']}'."
+	);
 	return $t_user['email'];
 }
 
@@ -567,11 +569,15 @@ function ldap_simulation_email_from_username( $p_username ) {
 function ldap_simulation_realname_from_username( $p_username ) {
 	$t_user = ldap_simulation_get_user( $p_username );
 	if( $t_user === null ) {
-		log_event( LOG_LDAP, 'ldap_simulatiom_realname_from_username: user \'' . $p_username . '\' not found.' );
+		log_event( LOG_LDAP,
+			"ldap_simulatiom_realname_from_username: user '$p_username' not found."
+		);
 		return '';
 	}
 
-	log_event( LOG_LDAP, 'ldap_simulatiom_realname_from_username: user \'' . $p_username . '\' has real name \'' . $t_user['realname'] . '\'.' );
+	log_event( LOG_LDAP,
+		"ldap_simulatiom_realname_from_username: user '$p_username' has real name '{$t_user['realname']}'."
+	);
 	return $t_user['realname'];
 }
 
@@ -589,15 +595,17 @@ function ldap_simulation_authenticate_by_username( $p_username, $p_password ) {
 
 	$t_user = ldap_simulation_get_user( $c_username );
 	if( $t_user === null ) {
-		log_event( LOG_LDAP, 'user \'' . $p_username . '\' not found.' );
+		log_event( LOG_LDAP, "user '$p_username' not found." );
 		return false;
 	}
 
 	if( $t_user['password'] != $p_password ) {
-		log_event( LOG_LDAP, 'expected password \'' . $t_user['password'] . '\' and got \'' . $p_password . '\'.' );
+		log_event( LOG_LDAP,
+			"expected password '{$t_user['password']}' and got '$p_password'."
+		);
 		return false;
 	}
 
-	log_event( LOG_LDAP, 'authentication successful for user \'' . $p_username . '\'.' );
+	log_event( LOG_LDAP, "authentication successful for user '$p_username'." );
 	return true;
 }
