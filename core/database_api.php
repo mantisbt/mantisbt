@@ -49,8 +49,10 @@ $g_db = false;
 # @global array $g_queries_array
 $g_queries_array = array();
 
-# Stores whether a database connection was successfully opened.
-# @global bool $g_db_connected
+/**
+ * Stores whether a database connection was successfully opened.
+ * @global bool $g_db_connected
+ */
 $g_db_connected = false;
 
 # Store whether to log queries ( used for show_queries_count/query list)
@@ -124,13 +126,15 @@ $g_db_param = new MantisDbParam();
 
 /**
  * Open a connection to the database.
- * @param string  $p_dsn           Database connection string ( specified instead of other params).
- * @param string  $p_hostname      Database server hostname.
- * @param string  $p_username      Database server username.
- * @param string  $p_password      Database server password.
- * @param string  $p_database_name Database name.
- * @param boolean $p_pconnect      Use a Persistent connection to database.
- * @return boolean indicating if the connection was successful
+ *
+ * @param string $p_dsn           Database connection string (specified instead of other params).
+ * @param string $p_hostname      Database server hostname.
+ * @param string $p_username      Database server username.
+ * @param string $p_password      Database server password.
+ * @param string $p_database_name Database name.
+ * @param bool   $p_pconnect      Use a Persistent connection to database.
+ *
+ * @return bool True if the connection was successful.
  * @throws ClientException
  */
 function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_pconnect = false ) {
@@ -190,9 +194,9 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 /**
  * Returns whether a connection to the database exists.
  *
- * @global bool $g_db_connected stores database connection state
+ * @see $g_db_connected
  *
- * @return bool indicating if the a database connection has been made
+ * @return bool True if the database is connected.
  */
 function db_is_connected() {
 	global $g_db_connected;
@@ -286,9 +290,10 @@ function db_is_oracle() {
 }
 
 /**
- * Validates that the given identifier's length is OK for the database platform
- * Triggers an error if the identifier is too long
+ * Validates that the given identifier's length is OK for the database platform.
+ *
  * @param string $p_identifier Identifier to check.
+ *
  * @return void
  * @throws ClientException If the identifier is too long.
  */
@@ -835,6 +840,7 @@ function db_time_queries() {
  * @param string $p_name Can either be specified as 'XXX' (e.g. 'bug'), or
  *                       using the legacy style 'mantis_XXX_table'; in the
  *                       latter case, a deprecation warning will be issued.
+ *
  * @return string containing full database table name (with prefix and suffix)
  * @throws ClientException
  */
@@ -887,9 +893,9 @@ function db_get_table_list() {
  * @param string $p_table  Table name.
  * @param string $p_column The BLOB column to update.
  * @param string $p_val    Data to store into the BLOB.
- * @param string $p_where  Where clause to identify which record to update
- *                         if null, defaults to the last record inserted in $p_table.
- * @return boolean
+ * @param string $p_where  Where clause to identify which record to update.
+ *                         If null, defaults to the last record inserted in $p_table.
+ * @return bool
  * @throws ClientException
  */
 function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {

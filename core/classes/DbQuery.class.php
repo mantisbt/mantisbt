@@ -267,10 +267,11 @@ class DbQuery {
 	 *
 	 * At this point all preprocessing and value binding has been performed.
 	 *
-	 * @param int $p_limit	Limit value
-	 * @param int $p_offset	Offset value
+	 * @param int $p_limit  Limit value
+	 * @param int $p_offset Offset value
 	 *
 	 * @return ADORecordSet|bool ADOdb result set or false if the query failed.
+	 * @throws ClientException
 	 */
 	protected function db_execute( $p_limit = null, $p_offset = null ) {
 		global $g_db;

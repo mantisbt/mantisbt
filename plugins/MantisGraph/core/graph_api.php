@@ -252,7 +252,9 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
  *
  * @param array $p_filter Filter array.
  *
- * @return array An array with keys being status names and values being number of issues with such status.
+ * @return array An array with keys being status names and values being number
+ *               of issues with such status.
+ * @throws ClientException
  */
 function create_bug_status_summary( array $p_filter = [] ) {
 	# When the provided filter is temporary, it's a filter that was explicitly applied to summary pages.
@@ -386,6 +388,7 @@ function create_developer_open_summary( array $p_filter = [] ) {
  * @param array $p_filter Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_reporter_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -433,6 +436,7 @@ function create_reporter_summary( array $p_filter = [] ) {
  * @param array $p_filter Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_category_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -479,6 +483,7 @@ function create_category_summary( array $p_filter = [] ) {
  * @param array $p_filter Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_cumulative_bydate( array $p_filter = [] ) {
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
@@ -596,6 +601,7 @@ function graph_date_format( $p_date ) {
  * @param array $p_filter Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_project_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();

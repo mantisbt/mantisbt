@@ -141,10 +141,13 @@ function form_security_param( $p_form_name, $p_security_token = null ) {
 
 /**
  * Validate the security token for the given form name based on tokens
- * stored in the user's session.  While checking stored tokens, any that
- * are more than 3 days old will be purged.
+ * stored in the user's session.
+ *
+ * >While checking stored tokens, any that are more than 3 days old will be purged.
+ *
  * @param string $p_form_name Form name.
- * @return boolean Form is valid.
+ *
+ * @return bool True if Form is valid.
  * @throws ClientException
  */
 function form_security_validate( $p_form_name ) {

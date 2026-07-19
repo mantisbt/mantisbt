@@ -2108,8 +2108,10 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 
 /**
  * Prints the preview of a text file attachment.
- * @param array $p_attachment An attachment array from within the array returned by
- *              the file_get_visible_attachments() function.
+ *
+ * @param array $p_attachment An attachment array from within the array returned
+ *                            by the file_get_visible_attachments() function.
+ *
  * @return void
  * @throws StateException
  */

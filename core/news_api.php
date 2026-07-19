@@ -48,15 +48,16 @@ require_api( 'lang_api.php' );
 require_api( 'utility_api.php' );
 
 /**
- * Add a news item
+ * Add a news item.
  *
- * @param integer $p_project_id   A project identifier.
- * @param integer $p_poster_id    The user id of poster.
- * @param integer $p_view_state   View state.
- * @param boolean $p_announcement Whether article is an announcement.
- * @param string  $p_headline     News Headline.
- * @param string  $p_body         News Body.
- * @return integer news article id
+ * @param int    $p_project_id   A project identifier.
+ * @param int    $p_poster_id    The user id of poster.
+ * @param int    $p_view_state   View state.
+ * @param bool   $p_announcement Whether article is an announcement.
+ * @param string $p_headline     News Headline.
+ * @param string $p_body         News Body.
+ *
+ * @return int    news article id
  * @throws ClientException
  */
 function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
@@ -96,9 +97,10 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 }
 
 /**
- * Delete the news entry
+ * Delete the news entry.
  *
- * @param integer $p_news_id A news article identifier.
+ * @param int $p_news_id A news article identifier.
+ *
  * @return void
  */
 function news_delete( $p_news_id ) {
@@ -108,9 +110,10 @@ function news_delete( $p_news_id ) {
 }
 
 /**
- * Delete the news entry
+ * Delete the news entry.
  *
- * @param integer $p_project_id A project identifier.
+ * @param int $p_project_id A project identifier.
+ *
  * @return void
  */
 function news_delete_all( $p_project_id ) {
@@ -120,14 +123,15 @@ function news_delete_all( $p_project_id ) {
 }
 
 /**
- * Update news item
+ * Update news item.
  *
- * @param integer $p_news_id      A news article identifier.
- * @param integer $p_project_id   A project identifier.
- * @param integer $p_view_state   View state.
- * @param boolean $p_announcement Whether article is an announcement.
- * @param string  $p_headline     News headline.
- * @param string  $p_body         News body.
+ * @param int    $p_news_id      A news article identifier.
+ * @param int    $p_project_id   A project identifier.
+ * @param int    $p_view_state   View state.
+ * @param bool   $p_announcement Whether article is an announcement.
+ * @param string $p_headline     News headline.
+ * @param string $p_body         News body.
+ *
  * @return void
  * @throws ClientException
  */
@@ -160,10 +164,12 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 }
 
 /**
- * Selects the news item associated with the specified id
+ * Selects the news item associated with the specified id.
  *
- * @param integer $p_news_id A news article identifier.
+ * @param int $p_news_id A news article identifier.
+ *
  * @return array news article
+ * @throws ClientException
  */
 function news_get_row( $p_news_id ) {
 	db_param_push();
@@ -183,10 +189,11 @@ function news_get_row( $p_news_id ) {
 }
 
 /**
- * get news count (selected project plus site wide posts)
+ * Get news count (selected project plus site wide posts).
  *
- * @param integer $p_project_id A project identifier.
- * @param boolean $p_global     Whether this is site wide news i.e. ALL_PROJECTS.
+ * @param int  $p_project_id A project identifier.
+ * @param bool $p_global     Whether this is site wide news i.e. ALL_PROJECTS.
+ *
  * @return int news count
  */
 function news_get_count( $p_project_id, $p_global = true ) {
@@ -204,11 +211,12 @@ function news_get_count( $p_project_id, $p_global = true ) {
 }
 
 /**
- * get news items (selected project plus site wide posts)
+ * Get news items (selected project plus site wide posts).
  *
- * @param integer $p_project_id A project identifier.
- * @param boolean $p_global     Whether this is site wide news i.e. ALL_PROJECTS.
- * @return array Array of news articles
+ * @param int  $p_project_id A project identifier.
+ * @param bool $p_global     Whether this is site wide news i.e. ALL_PROJECTS.
+ *
+ * @return array Array of news articles.
  */
 function news_get_rows( $p_project_id, $p_global = true ) {
 	$t_projects = current_user_get_all_accessible_subprojects( $p_project_id );
@@ -244,11 +252,13 @@ function news_get_rows( $p_project_id, $p_global = true ) {
 }
 
 /**
- * Get field from news item
+ * Get field from news item.
  *
- * @param integer $p_news_id    A news article identifier.
- * @param string  $p_field_name The field name to retrieve.
+ * @param int    $p_news_id    A news article identifier.
+ * @param string $p_field_name The field name to retrieve.
+ *
  * @return mixed
+ * @throws ClientException
  */
 function news_get_field( $p_news_id, $p_field_name ) {
 	$t_row = news_get_row( $p_news_id );
@@ -256,10 +266,12 @@ function news_get_field( $p_news_id, $p_field_name ) {
 }
 
 /**
- * Check if the specified news item is private
+ * Check if the specified news item is private.
  *
- * @param integer $p_news_id A news article identifier.
- * @return boolean
+ * @param int $p_news_id A news article identifier.
+ *
+ * @return bool
+ * @throws ClientException
  */
 function news_is_private( $p_news_id ) {
 	return( news_get_field( $p_news_id, 'view_state' ) == VS_PRIVATE );
@@ -269,8 +281,9 @@ function news_is_private( $p_news_id ) {
  * Gets a limited set of news rows to be viewed on one page based on the criteria
  * defined in the configuration file.
  *
- * @param integer $p_offset     Offset.
- * @param integer $p_project_id A project identifier.
+ * @param int $p_offset     Offset.
+ * @param int $p_project_id A project identifier.
+ *
  * @return array
  */
 function news_get_limited_rows( $p_offset, $p_project_id = null ) {
@@ -341,16 +354,20 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 
 /**
  * Checks if the news feature is enabled or not.
- * true: enabled, otherwise false.
- * @return boolean
+ *
+ * @return bool True if enabled, false otherwise.
  */
 function news_is_enabled() {
 	return config_get( 'news_enabled' ) == ON;
 }
 
 /**
- * Ensures that the news feature is enabled, otherwise generates an access denied error.
+ * Ensures that the news feature is enabled.
+ *
+ * Throws an access denied error if not.
+ *
  * @return void
+ * @throws ClientException
  */
 function news_ensure_enabled() {
 	if( !news_is_enabled() ) {

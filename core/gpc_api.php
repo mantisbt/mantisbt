@@ -49,6 +49,7 @@ require_api( 'http_api.php' );
  *
  * @param string $p_var_name Variable name.
  * @param mixed  $p_default  Default value.
+ *
  * @return null|string
  * @throws ClientException
  */
@@ -89,8 +90,10 @@ function gpc_isset( $p_var_name ) {
  * Retrieve a string GPC variable. Uses gpc_get().
  * If you pass in *no* default, an error will be triggered if
  * the variable does not exist
+ *
  * @param string $p_var_name Variable name to retrieve.
  * @param string $p_default  Default value of the string if not set(optional).
+ *
  * @return string|null
  * @throws ClientException
  */
@@ -116,12 +119,16 @@ function gpc_get_string( $p_var_name, $p_default = null ) {
 }
 
 /**
- * Retrieve an integer GPC variable. Uses gpc_get().
+ * Retrieve an integer GPC variable.
+ *
  * If you pass in *no* default, an error will be triggered if
  * the variable does not exist
- * @param string  $p_var_name Variable name to retrieve.
- * @param integer $p_default  Default integer value if not set (optional).
- * @return integer|null
+ *
+ * @param string $p_var_name Variable name to retrieve.
+ * @param int    $p_default  Default integer value if not set (optional).
+ *
+ * @return int|null
+ * @throws ClientException
  */
 function gpc_get_int( $p_var_name, $p_default = null ) {
 	# Don't pass along a default unless one was given to us
@@ -150,10 +157,14 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 
 /**
  * Retrieve a boolean GPC variable. Uses gpc_get().
- *  If you pass in *no* default, false will be used
- * @param string  $p_var_name Variable name to retrieve.
- * @param boolean $p_default  Default boolean value if not set (optional).
- * @return boolean|null
+ *
+ * If you pass in *no* default, false will be used
+ *
+ * @param string $p_var_name Variable name to retrieve.
+ * @param bool   $p_default  Default boolean value if not set (optional).
+ *
+ * @return bool|null
+ * @throws ClientException
  */
 function gpc_get_bool( $p_var_name, $p_default = false ) {
 	$t_result = gpc_get( $p_var_name, $p_default );
@@ -356,11 +367,15 @@ function gpc_get_bool_array( string $p_var_name, array $p_default = [] ): array 
 }
 
 /**
- * Retrieve a cookie variable
+ * Retrieve a cookie variable.
+ *
  * You may pass in any variable as a default (including null) but if
- * you pass in *no* default then an error will be triggered if the cookie cannot be found
+ * you pass in *no* default then an error will be triggered if the cookie
+ * cannot be found,
+ *
  * @param string $p_var_name Variable name to retrieve.
  * @param string $p_default  Default value if not set.
+ *
  * @return string
  * @throws ClientException
  */
@@ -477,12 +492,15 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null, $p_samesit
 }
 
 /**
- * Retrieve a file variable
+ * Retrieve a file variable.
+ *
  * You may pass in any variable as a default (including null) but if
  * you pass in *no* default then an error will be triggered if the file
- * cannot be found
+ * cannot be found.
+ *
  * @param string $p_var_name Variable name.
  * @param mixed  $p_default  Default value.
+ *
  * @return mixed
  * @throws ClientException
  */

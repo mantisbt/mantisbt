@@ -48,8 +48,10 @@ require_api( 'utility_api.php' );
 $g_cache_ldap_data = array();
 
 /**
- * Logs the most recent LDAP error
- * @param resource $p_ds LDAP resource identifier returned by ldap_connect.
+ * Logs the most recent LDAP error.
+ *
+ * @param LDAP\Connection $p_ds LDAP connection as returned by ldap_connect.
+ *
  * @return void
  */
 function ldap_log_error( $p_ds ) {
@@ -57,10 +59,12 @@ function ldap_log_error( $p_ds ) {
 }
 
 /**
- * Connect and bind to the LDAP directory
+ * Connect and bind to the LDAP directory.
+ *
  * @param string $p_binddn   DN to use for LDAP bind.
  * @param string $p_password Password to use for LDAP bind.
- * @return resource|false
+ *
+ * @return LDAP\Connection
  * @throws ClientException
  */
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
@@ -163,8 +167,10 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 }
 
 /**
- * returns an email address from LDAP, given a userid
- * @param integer $p_user_id A valid user identifier.
+ * Returns an email address from LDAP, given a user id.
+ *
+ * @param int $p_user_id A valid user identifier.
+ *
  * @return string
  * @throws ClientException
  */
@@ -173,9 +179,11 @@ function ldap_email( $p_user_id ) {
 }
 
 /**
- * Return an email address from LDAP, given a username
+ * Return an email address from LDAP, given a username.
+ *
  * @param string $p_username The username of a user to lookup.
- * @return string
+ *
+ * @return string Email address.
  * @throws ClientException
  */
 function ldap_email_from_username( $p_username ) {
@@ -193,8 +201,9 @@ function ldap_email_from_username( $p_username ) {
 /**
  * Gets a user's real name (common name) given the id.
  *
- * @param integer $p_user_id The user id.
- * @return string real name.
+ * @param int $p_user_id The user id.
+ *
+ * @return string Real name.
  * @throws ClientException
  */
 function ldap_realname( $p_user_id ) {
@@ -202,8 +211,10 @@ function ldap_realname( $p_user_id ) {
 }
 
 /**
- * Gets a user real name given their user name.
- * @param string $p_username The user's name.
+ * Gets a user's real name given their username.
+ *
+ * @param string $p_username The username.
+ *
  * @return string The user's real name.
  * @throws ClientException
  */
@@ -331,12 +342,12 @@ function ldap_cache_user_data( $p_username ) {
 }
 
 /**
- * Gets the value of a specific LDAP field given the user name.
+ * Gets the value of a specific LDAP field given the username.
  *
  * Values are retrieved from the LDAP cache.
  * {@see ldap_cache_user_data()} for the list of valid field names.
  *
- * @param string $p_username The user name.
+ * @param string $p_username The username.
  * @param string $p_field    The LDAP field name.
  *
  * @return string The field value or null if not found.
@@ -354,11 +365,12 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 }
 
 /**
- * Attempt to authenticate the user against the LDAP directory
- * return true on successful authentication, false otherwise
- * @param integer $p_user_id  A valid user identifier.
- * @param string  $p_password A password to test against the user user.
- * @return boolean
+ * Attempt to authenticate the user against the LDAP directory.
+ *
+ * @param int    $p_user_id  A valid user identifier.
+ * @param string $p_password A password to test against the user.
+ *
+ * @return bool True for successful authentication, false otherwise.
  * @throws ClientException
  */
 function ldap_authenticate( $p_user_id, $p_password ) {
@@ -377,8 +389,9 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 /**
  * Authenticates a user via LDAP given the username and password.
  *
- * @param string $p_username The user name.
+ * @param string $p_username The username.
  * @param string $p_password The password.
+ *
  * @return true: authenticated, false: failed to authenticate.
  *
  * @throws ClientException
@@ -486,8 +499,9 @@ function ldap_simulation_is_enabled() {
 /**
  * Gets a user from LDAP simulation mode given the username.
  *
- * @param string $p_username The user name.
- * @return array|null An associate array with user information or null if not found.
+ * @param string $p_username The username.
+ *
+ * @return array|null An associative array with user information or null if not found.
  * @throws ClientException
  */
 function ldap_simulation_get_user( $p_username ) {
@@ -526,7 +540,8 @@ function ldap_simulation_get_user( $p_username ) {
 /**
  * Given a username, gets the email address or empty address if user is not found.
  *
- * @param string $p_username The user name.
+ * @param string $p_username The username.
+ *
  * @return string The email address or blank if user is not found.
  * @throws ClientException
  */
@@ -542,9 +557,10 @@ function ldap_simulation_email_from_username( $p_username ) {
 }
 
 /**
- * Given a username, this methods gets the realname or empty string if not found.
+ * Given a username, this method gets the realname or empty string if not found.
  *
  * @param string $p_username The username.
+ *
  * @return string The real name or an empty string if not found.
  * @throws ClientException
  */
@@ -564,7 +580,8 @@ function ldap_simulatiom_realname_from_username( $p_username ) {
  *
  * @param string $p_username The username.
  * @param string $p_password The password.
- * @return boolean true for authenticated, false otherwise.
+ *
+ * @return bool True for authenticated, false otherwise.
  * @throws ClientException
  */
 function ldap_simulation_authenticate_by_username( $p_username, $p_password ) {

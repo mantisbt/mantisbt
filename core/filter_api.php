@@ -2757,16 +2757,18 @@ function filter_update_source_properties( array $p_filter ) {
 }
 
 /**
- * Returns a filter which is stored in session data, indexed by the provided key.
+ * Returns a filter which is stored in session data.
+ *
  * A default value can be provided to be used when the key doesn't exists
  *
- *  You may pass in any array as a default (including null) but if
- *  you pass in *no* default then an error will be triggered if the key
- *  cannot be found
+ * You may pass in any array as a default (including null) but if
+ * you pass in *no* default then an error will be triggered if the key
+ * cannot be found.
  *
- * @param string $p_filter_key  Key to look up for in session data
- * @param mixed $p_default		A default value to return if key not found
- * @return array	A filter array.
+ * @param string $p_filter_key Key to look up in session data.
+ * @param mixed  $p_default    A default value to return if key not found.
+ *
+ * @return array A filter array.
  * @throws ClientException
  */
 function filter_temporary_get( $p_filter_key, $p_default = null ) {

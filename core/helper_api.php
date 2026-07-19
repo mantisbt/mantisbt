@@ -180,14 +180,19 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
 }
 
 /**
- * Compares the 2 specified variables, returns true if equal, false if not.
- * With strict type checking, will trigger an error if the types of the compared
- * variables don't match.
- * This helper function is used by {@link check_checked()} and {@link check_selected()}
- * @param mixed   $p_var1   The variable to compare.
- * @param mixed   $p_var2   The second variable to compare.
- * @param boolean $p_strict Set to true for strict type checking, false for loose.
- * @return boolean
+ * Compares the 2 specified variables.
+ *
+ * With strict type checking, will throw an Exception if the types of the
+ * compared variables do not match.
+ *
+ * This helper function is used by {@link check_checked()} and
+ * {@link check_selected()}.
+ *
+ * @param mixed $p_var1   The variable to compare.
+ * @param mixed $p_var2   The second variable to compare.
+ * @param bool  $p_strict Set to true for strict type checking, false for loose.
+ *
+ * @return bool True if variables are equal, false if not.
  * @throws ClientException
  */
 function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
@@ -765,17 +770,21 @@ function helper_url_combine( string $p_page, $p_query_string ): string {
 }
 
 /**
- * Generate a hash to be used with dynamically generated content that is expected
- * to be cached by the browser. This hash can be used to differentiate the generated
- * content when it may be different based on some runtime attributes like: current user,
- * project or language.
- * An optional custom string can be provided to be added to the hash, for additional
- * differentiating criteria, but this string must be already prepared by the caller.
+ * Generate a hash to be used with dynamically generated content that is
+ * expected to be cached by the browser.
  *
- * @param array $p_runtime_attrs    Array of attributes to be calculated from current session.
- *                                  possible values: 'user', 'project', 'lang'
- * @param string $p_custom_string   Additional string provided by the caller
- * @return string                   A hashed md5 string
+ * This hash can be used to differentiate the generated content when it may be
+ * different based on some runtime attributes like: current user, project or
+ * language. An optional custom string can be provided to be added to the hash,
+ * for additional differentiating criteria, but this string must be already
+ * prepared by the caller.
+ *
+ * @param array  $p_runtime_attrs   Array of attributes to be calculated from
+ *                                  current session.
+ *                                  Possible values: 'user', 'project', 'lang'.
+ * @param string $p_custom_string   Additional string provided by the caller.
+ *
+ * @return string                   A hashed md5 string.
  * @throws Exception
  */
 function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_string = '' ) {

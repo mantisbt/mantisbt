@@ -65,7 +65,9 @@ use Mantis\Exceptions\ServiceException;
 
 /**
  * Checks if there are no projects defined.
- * @return boolean true if there are no projects defined, false otherwise.
+ *
+ * @return bool True if there are no projects defined, false otherwise.
+ *
  * @access public
  */
 function project_table_empty() {
@@ -86,13 +88,15 @@ function project_table_empty() {
 }
 
 /**
- * Cache a project row if necessary and return the cached copy
- *  If the second parameter is true (default), trigger an error
- *  if the project can't be found.  If the second parameter is
- *  false, return false if the project can't be found.
- * @param integer $p_project_id     A project identifier.
- * @param boolean $p_trigger_errors Whether to trigger errors.
- * @return array|boolean
+ * Cache a project row if necessary and return the cached copy.
+ *
+ * If $p_trigger_errors is true (default), trigger an error if the project
+ * can't be found; otherwise return false.
+ *
+ * @param int  $p_project_id     A project identifier.
+ * @param bool $p_trigger_errors Whether to trigger errors.
+ *
+ * @return array|false
  * @throws ClientException
  */
 function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
@@ -129,8 +133,10 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 }
 
 /**
- * Cache project data for array of project ids
+ * Cache project data for array of project ids.
+ *
  * @param array $p_project_id_array An array of project identifiers.
+ *
  * @return void
  */
 function project_cache_array_rows( array $p_project_id_array ) {
@@ -170,7 +176,8 @@ function project_cache_array_rows( array $p_project_id_array ) {
 }
 
 /**
- * Cache all project rows and return an array of them
+ * Cache all project rows and return an array of them.
+ *
  * @return array
  */
 function project_cache_all() {
@@ -191,8 +198,10 @@ function project_cache_all() {
 }
 
 /**
- * Clear the project cache (or just the given id if specified)
- * @param integer $p_project_id A project identifier.
+ * Clear the project cache (or just the given id if specified).
+ *
+ * @param int $p_project_id A project identifier.
+ *
  * @return void
  */
 function project_clear_cache( $p_project_id = null ) {
@@ -211,22 +220,27 @@ function project_clear_cache( $p_project_id = null ) {
 
 /**
  * Check if project is enabled.
- * @param integer $p_project_id The project id.
- * @return boolean
+ *
+ * @param int $p_project_id The project id.
+ *
+ * @return bool
+ * @throws ClientException
  */
 function project_enabled( $p_project_id ) {
 	return project_get_field( $p_project_id, 'enabled' ) ? true : false;
 }
 
 /**
- * check to see if project exists by id
- * return true if it does, false otherwise
- * @param integer $p_project_id A project identifier.
- * @return boolean
+ * Check to see if project exists by id
+ *
+ * @param int $p_project_id A project identifier.
+ *
+ * @return bool True if project exists, false otherwise.
+ * @throws ClientException
  */
 function project_exists( $p_project_id ) {
-	# we're making use of the caching function here.  If we succeed in caching the project then it exists and is
-	# now cached for use by later function calls.  If we can't cache it we return false.
+	# If we succeed in caching the project then it exists and is now cached for
+	# use by later function calls.  If we can't cache it we return false.
 	if( false == project_cache_row( $p_project_id, false ) ) {
 		return false;
 	} else {
@@ -239,7 +253,7 @@ function project_exists( $p_project_id ) {
  *
  * Errors if it does not exist, otherwise let execution continue undisturbed.
  *
- * @param integer $p_project_id A project identifier.
+ * @param int $p_project_id A project identifier.
  *
  * @return void
  * @throws ClientException if project does not exist
@@ -254,11 +268,13 @@ function project_ensure_exists( $p_project_id ) {
 }
 
 /**
- * check to see if project exists by name
- * @param string  $p_name       The project name.
- * @param integer $p_exclude_id Optional project id to exclude from the check,
- *                              to allow uniqueness check when updating.
- * @return boolean
+ * Check to see if project exists by name.
+ *
+ * @param string $p_name       The project name.
+ * @param int    $p_exclude_id Optional project id to exclude from the check,
+ *                             to allow uniqueness check when updating.
+ *
+ * @return bool
  */
 function project_is_name_unique( $p_name, $p_exclude_id = null ) {
 	$t_query = new DbQuery();
@@ -272,12 +288,11 @@ function project_is_name_unique( $p_name, $p_exclude_id = null ) {
 }
 
 /**
- * check to see if project exists by id
- * if it doesn't exist then error
- * otherwise let execution continue undisturbed
- * @param string  $p_name       The project name.
- * @param integer $p_exclude_id Optional project id to exclude from the check,
- *                              to allow uniqueness check when updating.
+ * Check to see if project exists.
+ *
+ * @param string $p_name       The project name.
+ * @param int    $p_exclude_id Optional project id to exclude from the check,
+ *                             to allow uniqueness check when updating.
  * @return void
  * @throws ClientException if the project exists.
  */
@@ -291,11 +306,12 @@ function project_ensure_name_unique( $p_name, $p_exclude_id = null ) {
 }
 
 /**
- * check to see if the user/project combo already exists
- * returns true is duplicate is found, otherwise false
- * @param integer $p_project_id A project identifier.
- * @param integer $p_user_id    A user id identifier.
- * @return boolean
+ * Check to see if the user/project combo already exists.
+ *
+ * @param int $p_project_id A project identifier.
+ * @param int $p_user_id    A user id identifier.
+ *
+ * @return bool True if duplicate is found, false otherwise.
  */
 function project_includes_user( $p_project_id, $p_user_id ) {
 	$t_query = new DbQuery();
@@ -309,10 +325,15 @@ function project_includes_user( $p_project_id, $p_user_id ) {
 }
 
 /**
- * Make sure that the project file path is valid: add trailing slash and
- * set it to blank if equal to default path
+ * Make sure that the project file path is valid.
+ *
+ * Add trailing slash and set it to blank if equal to default path.
+ *
  * @param string $p_file_path A file path.
+ *
  * @return string
+ * @throws ServiceException
+ *
  * @access public
  */
 function validate_project_file_path( $p_file_path ) {
@@ -333,19 +354,23 @@ function validate_project_file_path( $p_file_path ) {
 	return $p_file_path;
 }
 
-
-
 /**
- * Create a new project
- * @param string  $p_name           The name of the project being created.
- * @param string  $p_description    A description for the project.
- * @param integer $p_status         The status of the project.
- * @param integer $p_view_state     The view state of the project - public or private.
- * @param string  $p_file_path      The attachment file path for the project, if not storing in the database.
- * @param boolean $p_enabled        Whether the project is enabled.
- * @param boolean $p_inherit_global Whether the project inherits global categories.
- * @return integer
+ * Create a new project.
+ *
+ * @param string $p_name           The name of the project being created.
+ * @param string $p_description    A description for the project.
+ * @param int    $p_status         The status of the project.
+ * @param int    $p_view_state     The view state of the project - public or
+ *                                 private.
+ * @param string $p_file_path      The attachment file path for the project, if
+ *                                 not storing in the database.
+ * @param bool   $p_enabled        Whether the project is enabled.
+ * @param bool   $p_inherit_global Whether the project inherits global
+ *                                 categories.
+ *
+ * @return int
  * @throws ClientException
+ * @throws ServiceException
  */
 function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_PUBLIC, $p_file_path = '', $p_enabled = true, $p_inherit_global = true ) {
 	$c_enabled = (bool)$p_enabled;
@@ -388,8 +413,10 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 }
 
 /**
- * Delete a project
- * @param integer $p_project_id A project identifier.
+ * Delete a project.
+ *
+ * @param int $p_project_id A project identifier.
+ *
  * @return void
  */
 function project_delete( $p_project_id ) {
@@ -442,17 +469,20 @@ function project_delete( $p_project_id ) {
 }
 
 /**
- * Update a project
- * @param integer $p_project_id     The project identifier being updated.
- * @param string  $p_name           The project name.
- * @param string  $p_description    A description of the project.
- * @param integer $p_status         The current status of the project.
- * @param integer $p_view_state     The view state of the project - public or private.
- * @param string  $p_file_path      The attachment file path for the project, if not storing in the database.
- * @param boolean $p_enabled        Whether the project is enabled.
- * @param boolean $p_inherit_global Whether the project inherits global categories.
+ * Update a project.
+ *
+ * @param int    $p_project_id     The project identifier being updated.
+ * @param string $p_name           The project name.
+ * @param string $p_description    A description of the project.
+ * @param int    $p_status         The current status of the project.
+ * @param int    $p_view_state     The view state of the project - public or private.
+ * @param string $p_file_path      The attachment file path for the project, if not storing in the database.
+ * @param bool   $p_enabled        Whether the project is enabled.
+ * @param bool   $p_inherit_global Whether the project inherits global categories.
+ *
  * @return void
  * @throws ClientException
+ * @throws ServiceException
  */
 function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_view_state, $p_file_path, $p_enabled, $p_inherit_global ) {
 	$p_project_id = (int)$p_project_id;
@@ -546,17 +576,21 @@ function project_get_id_by_name( $p_project_name, $p_default = ALL_PROJECTS ) {
 }
 
 /**
- * Return the row describing the given project
- * @param integer $p_project_id     A project identifier.
- * @param boolean $p_trigger_errors Whether to trigger errors.
+ * Return the row describing the given project.
+ *
+ * @param int  $p_project_id     A project identifier.
+ * @param bool $p_trigger_errors Whether to trigger errors.
+ *
  * @return array
+ * @throws ClientException
  */
 function project_get_row( $p_project_id, $p_trigger_errors = true ) {
 	return project_cache_row( $p_project_id, $p_trigger_errors );
 }
 
 /**
- * Return all rows describing all projects
+ * Return all rows describing all projects.
+ *
  * @return array
  */
 function project_get_all_rows() {
@@ -564,11 +598,14 @@ function project_get_all_rows() {
 }
 
 /**
- * Return the specified field of the specified project
- * @param integer $p_project_id     A project identifier.
- * @param string  $p_field_name     The field name to retrieve.
- * @param boolean $p_trigger_errors Whether to trigger errors.
+ * Return the specified field of the specified project.
+ *
+ * @param int    $p_project_id     A project identifier.
+ * @param string $p_field_name     The field name to retrieve.
+ * @param bool   $p_trigger_errors Whether to trigger errors.
+ *
  * @return string
+ * @throws ClientException
  */
 function project_get_field( $p_project_id, $p_field_name, $p_trigger_errors = true ) {
 	$t_row = project_get_row( $p_project_id, $p_trigger_errors );
@@ -584,11 +621,15 @@ function project_get_field( $p_project_id, $p_field_name, $p_trigger_errors = tr
 }
 
 /**
- * Return the name of the project
- * Handles ALL_PROJECTS by returning the internationalized string for All Projects
- * @param integer $p_project_id     A project identifier.
- * @param boolean $p_trigger_errors Whether to trigger errors.
+ * Return the name of the project.
+ *
+ * Handles ALL_PROJECTS by returning the localized string for All Projects.
+ *
+ * @param int  $p_project_id     A project identifier.
+ * @param bool $p_trigger_errors Whether to trigger errors.
+ *
  * @return string
+ * @throws ClientException
  */
 function project_get_name( $p_project_id, $p_trigger_errors = true ) {
 	if( ALL_PROJECTS == $p_project_id ) {
@@ -600,12 +641,15 @@ function project_get_name( $p_project_id, $p_trigger_errors = true ) {
 
 /**
  * Return the user's local (overridden) access level on the project or false
- *  if the user is not listed on the project
- * @param integer $p_project_id A project identifier.
- * @param integer $p_user_id    A user identifier.
- * @return integer
- * @deprecated     access_get_local_level() should be used in preference to this function
- *                 This function has been deprecated in version 2.6
+ * if the user is not listed on the project.
+ *
+ * @param int $p_project_id A project identifier.
+ * @param int $p_user_id    A user identifier.
+ *
+ * @return int
+ *
+ * @deprecated 2.6.0 access_get_local_level() should be used in preference to this function
+ * @noinspection PhpUnused
  */
 function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
 	error_parameters( __FUNCTION__ . '()', 'access_get_local_level()' );
@@ -614,9 +658,11 @@ function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
 }
 
 /**
- * return the descriptor holding all the info from the project user list
- * for the specified project
- * @param integer $p_project_id A project identifier.
+ * Return the descriptor holding all the info from the project user list
+ * for the specified project.
+ *
+ * @param int $p_project_id A project identifier.
+ *
  * @return array
  */
 function project_get_local_user_rows( $p_project_id ) {
@@ -629,16 +675,21 @@ function project_get_local_user_rows( $p_project_id ) {
 }
 
 /**
- * Return an array of info about users who have access to the the given project
- * For each user we have 'id', 'username', and 'access_level' (overall access level)
- * If the second parameter is given, return only users with an access level
- * higher than the given value.
- * if the first parameter is given as 'ALL_PROJECTS', return the global access level (without
- * any reference to the specific project
- * @param integer $p_project_id           A project identifier.
- * @param integer $p_access_level         Access level.
- * @param boolean $p_include_global_users Whether to include global users.
- * @return array List of users, array key is user ID
+ * Return an array of info about users who have access to the given project.
+ *
+ * For each user we have 'id', 'username', and 'access_level' (overall access
+ * level).
+ *
+ * If $p_access_level is given, only return users with an access level higher
+ * than the specified value; if $p_project_id is 'ALL_PROJECTS', return the
+ * global access level (without any reference to the specific project).
+ *
+ * @param int  $p_project_id           A project identifier.
+ * @param int  $p_access_level         Access level.
+ * @param bool $p_include_global_users True to include global users.
+ *
+ * @return array List of users, array key is user ID.
+ * @throws ClientException
  */
 function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_level = ANYBODY, $p_include_global_users = true ) {
 	$c_project_id = (int)$p_project_id;
@@ -746,10 +797,12 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 }
 
 /**
- * Returns the upload path for the specified project, empty string if
- * file_upload_method is DATABASE
- * @param integer $p_project_id A project identifier.
- * @return string upload path
+ * Returns the upload path for the specified project.
+ *
+ * @param int $p_project_id A project identifier.
+ *
+ * @return string upload path, empty string if file_upload_method is DATABASE.
+ * @throws ClientException
  */
 function project_get_upload_path( $p_project_id ) {
 	if( DATABASE == config_get( 'file_upload_method', null, ALL_USERS, $p_project_id ) ) {
@@ -770,10 +823,13 @@ function project_get_upload_path( $p_project_id ) {
 
 /**
  * Add user with the specified access level to a project.
- * @param integer $p_project_id   A project identifier.
- * @param integer $p_user_id      A valid user id identifier.
- * @param integer $p_access_level The access level to add the user with.
+ *
+ * @param int $p_project_id   A project identifier.
+ * @param int $p_user_id      A valid user id identifier.
+ * @param int $p_access_level The access level to add the user with.
+ *
  * @return void
+ * @throws ClientException
  */
 function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
 	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
@@ -781,10 +837,13 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
 
 /**
  * Update user with the specified access level to a project.
- * @param integer $p_project_id   A project identifier.
- * @param integer $p_user_id      A user identifier.
- * @param integer $p_access_level Access level to set.
+ *
+ * @param int $p_project_id   A project identifier.
+ * @param int $p_user_id      A user identifier.
+ * @param int $p_access_level Access level to set.
+ *
  * @return void
+ * @throws ClientException
  */
 function project_update_user_access( $p_project_id, $p_user_id, $p_access_level ) {
 	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
@@ -792,25 +851,35 @@ function project_update_user_access( $p_project_id, $p_user_id, $p_access_level 
 
 /**
  * Update or add user with the specified access level to a project.
- * This function involves one more database query than project_update_user_acces() or project_add_user().
- * @param integer $p_project_id   A project identifier.
- * @param integer $p_user_id      A user identifier.
- * @param integer $p_access_level Project Access level to grant the user.
+ *
+ * This function involves one more database query than project_update_user_access()
+ * or project_add_user().
+ *
+ * @param int $p_project_id   A project identifier.
+ * @param int $p_user_id      A user identifier.
+ * @param int $p_access_level Project Access level to grant the user.
+ *
  * @return void
+ * @throws ClientException
+ *
+ * @noinspection PhpUnused
  */
 function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
 	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
 }
 
 /**
- * Add or modify multiple users associated to a project with a specific access level.
- * $p_changes is an array of access levels indexed by user_id, such as:
- *   array ( user1 => access_level, user2 => access_level, ... )
- * This function will manage inserts and updates as needed.
+ * Add or modify multiple users associated to a project with a specific access
+ * level.
  *
- * @param integer $p_project_id   A project identifier.
- * @param array $p_changes        An array of modifications.
+ * Inserts and updates are managed as needed.
+ *
+ * @param int   $p_project_id A project identifier.
+ * @param array $p_changes    An array of access levels indexed by user_id, like:
+ *                            [ user1 => access_level, user2 => access_level, ... ].
+ *
  * @return void
+ * @throws ClientException
  */
 function project_add_users( $p_project_id, array $p_changes ) {
 	# normalize input
@@ -872,8 +941,10 @@ function project_add_users( $p_project_id, array $p_changes ) {
 
 /**
  * Remove user from project.
- * @param integer $p_project_id A project identifier.
- * @param integer $p_user_id    A user identifier.
+ *
+ * @param int $p_project_id A project identifier.
+ * @param int $p_user_id    A user identifier.
+ *
  * @return void
  */
 function project_remove_user( $p_project_id, $p_user_id ) {
@@ -886,8 +957,9 @@ function project_remove_user( $p_project_id, $p_user_id ) {
  * The user's default_project preference will be set to ALL_PROJECTS if they
  * no longer have access to the project.
 
- * @param integer $p_project_id  A project identifier.
+ * @param int   $p_project_id  A project identifier.
  * @param array $p_user_ids      Array of user identifiers.
+ *
  * @return void
  */
 function project_remove_users( $p_project_id, array $p_user_ids ) {
@@ -926,8 +998,9 @@ function project_remove_users( $p_project_id, array $p_user_ids ) {
  * The user's default_project preference will be set to ALL_PROJECTS if they
  * no longer have access to the project.
  *
- * @param integer $p_project_id         A project identifier.
- * @param integer $p_access_level_limit Access level limit (null = no limit).
+ * @param int $p_project_id         A project identifier.
+ * @param int $p_access_level_limit Access level limit (null = no limit).
+ *
  * @return void
  */
 function project_remove_all_users( $p_project_id, $p_access_level_limit = null ) {
@@ -942,8 +1015,10 @@ function project_remove_all_users( $p_project_id, $p_access_level_limit = null )
 }
 
 /**
- * Delete all files associated with a project
- * @param integer $p_project_id A project identifier.
+ * Delete all files associated with a project.
+ *
+ * @param int $p_project_id A project identifier.
+ *
  * @return void
  */
 function project_delete_all_files( $p_project_id ) {
@@ -958,13 +1033,14 @@ function project_delete_all_files( $p_project_id ) {
  * - projects list in navbar {@see layout_navbar_projects_menu()}
  * - project menu bar {@see print_project_menu_bar()}
  *
- * @param integer $p_project_id Project Id to display
- * @param bool    $p_active     True if it's the currently active project
- * @param string  $p_class      CSS classes to apply
- * @param array   $p_parents    Array of parent projects (empty if top-level)
- * @param string  $p_indent     String to use to indent the subprojects
+ * @param int    $p_project_id Project Id to display
+ * @param bool   $p_active     True if it's the currently active project
+ * @param string $p_class      CSS classes to apply
+ * @param array  $p_parents    Array of parent projects (empty if top-level)
+ * @param string $p_indent     String to use to indent the subprojects
  *
  * @return string Fully formatted HTML link to the project
+ * @throws ClientException
  */
 function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '', array $p_parents = array(), $p_indent = '' ) {
 	if( $p_parents ) {

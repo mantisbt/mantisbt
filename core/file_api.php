@@ -1316,8 +1316,8 @@ function file_get_mime_type_for_content( $p_content ) {
 /**
  * Get file content.
  *
- * @param int $p_file_id File identifier.
- * @param string  $p_type    File type (either 'bug' or 'doc').
+ * @param int    $p_file_id File identifier.
+ * @param string $p_type    File type (either 'bug' or 'doc').
  *
  * @return array|bool array containing file type and content or false on
  *                    failure to retrieve file

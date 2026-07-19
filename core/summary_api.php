@@ -309,6 +309,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = [] ) {
  * @param array $p_filter Filter array to limit the visibility.
  *
  * @return void
+ * @throws ClientException
  */
 function summary_print_by_activity( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -614,7 +615,9 @@ function summary_print_by_reporter( array $p_filter = [] ) {
  * Print a bug count per category.
  *
  * @param array $p_filter Filter array to limit the visibility.
+ *
  * @return void
+ * @throws ClientException
  */
 function summary_print_by_category( array $p_filter = [] ) {
 	$t_summary_category_include_project = config_get( 'summary_category_include_project' );
@@ -682,6 +685,7 @@ function summary_print_by_category( array $p_filter = [] ) {
  * @param array $p_filter   Filter array to limit the visibility.
  *
  * @return void
+ * @throws ClientException
  */
 function summary_print_by_project( array $p_projects = [], int $p_level = 0, array $p_cache = [], array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -1263,6 +1267,7 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = [] ) {
  * accessible issues by the user.
  *
  * @return array Filter array
+ * @throws ClientException
  */
 function summary_get_filter() {
 	$t_filter = null;

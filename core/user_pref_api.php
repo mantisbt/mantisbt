@@ -248,9 +248,10 @@ class UserPreferences {
 	);
 
 	/**
-	 * Constructor
-	 * @param integer $p_user_id    A valid user identifier.
-	 * @param integer $p_project_id A valid project identifier.
+	 * Constructor.
+	 *
+	 * @param int $p_user_id    A valid user identifier.
+	 * @param int $p_project_id A valid project identifier.
 	 */
 	function __construct( $p_user_id, $p_project_id ) {
 		$this->default_profile = 0;
@@ -261,9 +262,11 @@ class UserPreferences {
 	}
 
 	/**
-	 * Overloaded function
+	 * Overloaded function.
+	 *
 	 * @param string $p_name  The Property name to set.
 	 * @param string $p_value A value to set the property to.
+	 *
 	 * @return void
 	 * @access private
 	 */
@@ -278,10 +281,12 @@ class UserPreferences {
 	}
 
 	/**
-	 * Overloaded function
+	 * Overloaded function.
+	 *
 	 * @param string $p_string Property name.
-	 * @access private
+	 *
 	 * @return mixed
+	 * @access private
 	 */
 	public function __get( $p_string ) {
 		if( is_null( $this->$p_string ) ) {
@@ -296,8 +301,10 @@ class UserPreferences {
 	}
 
 	/**
-	 * Public Get() function
+	 * Public Get() function.
+	 *
 	 * @param string $p_string Property to get.
+	 *
 	 * @return mixed
 	 */
 	function Get( $p_string ) {
@@ -313,12 +320,15 @@ $g_cache_current_user_pref = array();
 
 /**
  * Cache a user preferences row if necessary and return the cached copy.
+ *
  * If preferences can't be found, will trigger an error if $p_trigger_errors is
  * true (default), or return false otherwise
- * @param integer $p_user_id        A valid user identifier.
- * @param integer $p_project_id     A valid project identifier.
- * @param boolean $p_trigger_errors Whether to trigger error on failure.
- * @return boolean|array
+ *
+ * @param int  $p_user_id        A valid user identifier.
+ * @param int  $p_project_id     A valid project identifier.
+ * @param bool $p_trigger_errors Whether to trigger error on failure.
+ *
+ * @return array|false
  * @throws ClientException
  */
 function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigger_errors = true ) {
@@ -336,9 +346,11 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 }
 
 /**
- * Cache user preferences for a set of users
- * @param array   $p_user_id_array An array of valid user identifiers.
- * @param integer $p_project_id    A valid project identifier.
+ * Cache user preferences for a set of users.
+ *
+ * @param array $p_user_id_array An array of valid user identifiers.
+ * @param int   $p_project_id    A valid project identifier.
+ *
  * @return void
  */
 function user_pref_cache_array_rows( array $p_user_id_array, $p_project_id = ALL_PROJECTS ) {
@@ -382,10 +394,12 @@ function user_pref_cache_array_rows( array $p_user_id_array, $p_project_id = ALL
 }
 
 /**
- * Clear the user preferences cache (or just the given id if specified)
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
- * @return boolean
+ * Clear the user preferences cache (or just the given id if specified).
+ *
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
+ * @return bool
  */
 function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 	global $g_cache_user_pref;
@@ -402,11 +416,13 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 }
 
 /**
- * return true if the user has preferences assigned for the given project,
- * false otherwise
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
- * @return boolean
+ * Check if user has preferences assigned for the given project.
+ *
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
+ * @return bool True if preferences exist, false otherwise.
+ * @throws ClientException
  */
 function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	if( false === user_pref_cache_row( $p_user_id, $p_project_id, false ) ) {
@@ -417,8 +433,12 @@ function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 }
 
 /**
- * Backwards compatibility wrapper for user_pref_db_insert()
- * @deprecated	Use user_pref_db_insert()
+ * Backwards compatibility wrapper for user_pref_db_insert().
+ *
+ * @throws ClientException
+ *
+ * @deprecated 2.20.0 Use {@see user_pref_db_insert()}
+ * @noinspection PhpUnused
  */
 function user_pref_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
 	user_ensure_unprotected( $p_user_id );
@@ -426,11 +446,13 @@ function user_pref_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs )
 }
 
 /**
- * perform an insert of a preference object into the DB
- * @param integer         $p_user_id    A valid user identifier.
- * @param integer         $p_project_id A valid project identifier.
+ * perform an insert of a preference object into the DB.
+ *
+ * @param int             $p_user_id    A valid user identifier.
+ * @param int             $p_project_id A valid project identifier.
  * @param UserPreferences $p_prefs      A UserPrefences Object.
- * @return boolean
+ *
+ * @return bool
  */
 function user_pref_db_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
 	static $s_vars;
@@ -457,8 +479,12 @@ function user_pref_db_insert( $p_user_id, $p_project_id, UserPreferences $p_pref
 }
 
 /**
- * Backwards compatibility wrapper for user_pref_db_update()
- * @deprecated	Use user_pref_db_update()
+ * Backwards compatibility wrapper for user_pref_db_update().
+ *
+ * @throws ClientException
+ *
+ * @deprecated   2.20.0 Use {@see user_pref_db_update()}
+ * @noinspection PhpUnused
  */
 function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
 	user_ensure_unprotected( $p_user_id );
@@ -467,10 +493,12 @@ function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs )
 }
 
 /**
- * perform an update of a preference object into the DB
- * @param integer         $p_user_id    A valid user identifier.
- * @param integer         $p_project_id A valid project identifier.
+ * Perform an update of a preference object into the DB.
+ *
+ * @param int             $p_user_id    A valid user identifier.
+ * @param int             $p_project_id A valid project identifier.
  * @param UserPreferences $p_prefs      A UserPrefences Object.
+ *
  * @return void
  */
 function user_pref_db_update( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
@@ -496,8 +524,12 @@ function user_pref_db_update( $p_user_id, $p_project_id, UserPreferences $p_pref
 }
 
 /**
- * Backwards compatibility wrapper for user_pref_db_delete()
- * @deprecated	Use user_pref_db_delete()
+ * Backwards compatibility wrapper for user_pref_db_delete().
+ *
+ * @throws ClientException
+ *
+ * @deprecated 2.20.0 Use {@see user_pref_db_delete()}
+ * @noinspection PhpUnused
  */
 function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	user_ensure_unprotected( $p_user_id );
@@ -506,10 +538,11 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 }
 
 /**
- * delete a preferences row
- * returns true if the preferences were successfully deleted
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
+ * Delete a preferences row.
+ *
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return void
  */
 function user_pref_db_delete( $p_user_id, $p_project_id ) {
@@ -522,8 +555,12 @@ function user_pref_db_delete( $p_user_id, $p_project_id ) {
 }
 
 /**
- * Backwards compatibility wrapper for user_pref_db_delete_user()
- * @deprecated	Use user_pref_db_delete_user()
+ * Backwards compatibility wrapper for user_pref_db_delete_user().
+ *
+ * @throws ClientException
+ *
+ * @deprecated 2.20.0 Use {@see user_pref_db_delete_user()}
+ * @noinspection PhpUnused
  */
 function user_pref_delete_all( $p_user_id ) {
 	user_ensure_unprotected( $p_user_id );
@@ -532,13 +569,14 @@ function user_pref_delete_all( $p_user_id ) {
 }
 
 /**
- * delete all preferences for a user in all projects
- * returns true if the prefs were successfully deleted
+ * Delete all preferences for a user in all projects.
  *
  * It is far more efficient to delete them all in one query than to
- *  call user_pref_delete() for each one and the code is short so that's
- *  what we do
- * @param integer $p_user_id A valid user identifier.
+ * call user_pref_delete() for each one and the code is short so that's
+ * what we do.
+ *
+ * @param int $p_user_id A valid user identifier.
+ *
  * @return void
  */
 function user_pref_db_delete_user( $p_user_id ) {
@@ -550,8 +588,8 @@ function user_pref_db_delete_user( $p_user_id ) {
 /**
  * Sets project default to ALL_PROJECTS.
  *
- * @param integer $p_project_id A valid project identifier.
- * @param array   $p_users      A list of users (empty = all users).
+ * @param int   $p_project_id A valid project identifier.
+ * @param array $p_users      A list of users (empty = all users).
  *
  * @return void
  */
@@ -575,10 +613,11 @@ function user_pref_clear_project_default( $p_project_id, array $p_users = array(
  * default but who are no longer authorized to access it, need to have their
  * now-invalid preference updated.
  *
- * @param integer $p_project_id A valid project identifier.
- * @param array   $p_users      A list of users (empty = all users).
+ * @param int   $p_project_id A valid project identifier.
+ * @param array $p_users      A list of users (empty = all users).
  *
  * @return void
+ * @throws ClientException
  */
 function user_pref_clear_invalid_project_default( $p_project_id, array $p_users = array() ) {
 	# Get all users having the project as default
@@ -607,12 +646,15 @@ function user_pref_clear_invalid_project_default( $p_project_id, array $p_users 
 }
 
 /**
- * delete all preferences for a project for all users (part of deleting the project)
- * returns true if the prefs were successfully deleted
+ * Delete all preferences for a project for all users.
  *
- * It is far more efficient to delete them all in one query than to
- * call user_pref_delete() for each one and the code is short so that's what we do
- * @param integer $p_project_id A valid project identifier.
+ * Part of deleting the project.
+ *
+ * It is far more efficient to delete them all in one query than to call
+ * user_pref_delete() for each one and the code is short so that's what we do.
+ *
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return void
  */
 function user_pref_db_delete_project( $p_project_id ) {
@@ -622,10 +664,13 @@ function user_pref_db_delete_project( $p_project_id ) {
 }
 
 /**
- * return the user's preferences in a UserPreferences object
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
+ * Return the user's preferences in a UserPreferences object
+ *
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return UserPreferences
+ * @throws ClientException
  */
 function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	static $s_vars;
@@ -676,13 +721,17 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 }
 
 /**
- * Return the specified preference field for the user id
- * If the preference can't be found try to return a defined default
- * If that fails, trigger a WARNING and return ''
- * @param integer $p_user_id    A valid user identifier.
- * @param string  $p_pref_name  A valid user preference name.
- * @param integer $p_project_id A valid project identifier.
+ * Return the specified preference field for the user id.
+ *
+ * If the preference can't be found, try to return a defined default and if
+ * that fails, trigger a WARNING and return ''
+ *
+ * @param int    $p_user_id    A valid user identifier.
+ * @param string $p_pref_name  A valid user preference name.
+ * @param int    $p_project_id A valid project identifier.
+ *
  * @return string
+ * @throws ClientException
  */
 function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJECTS ) {
 	static $s_vars;
@@ -704,10 +753,13 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
 }
 
 /**
- * returns user language
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
+ * Returns user language.
+ *
+ * @param int $p_user_id    A valid user identifier.
+ * @param int $p_project_id A valid project identifier.
+ *
  * @return string language name or null if invalid language specified
+ * @throws ClientException
  */
 function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
@@ -721,18 +773,24 @@ function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 }
 
 /**
- * Set a user preference
+ * Set a user preference.
  *
- * By getting the preferences for the project first we deal fairly well with defaults. If there are currently no
- * preferences for that project, the ALL_PROJECTS preferences will be returned so we end up storing a new set of
- * preferences for the given project based on the preferences for ALL_PROJECTS.  If there isn't even an entry for
- * ALL_PROJECTS, we'd get returned a default UserPreferences object to modify.
- * @param integer $p_user_id    A valid user identifier.
- * @param string  $p_pref_name  The name of the preference value to set.
- * @param string  $p_pref_value A preference value to set.
- * @param integer $p_project_id A valid project identifier.
- * @param boolean $p_check_protected	Whether to perform a check to not allow modify protected users
- * @return boolean
+ * By getting the preferences for the project first we deal fairly well with
+ * defaults. If there are currently no preferences for that project, the
+ * ALL_PROJECTS preferences will be returned so we end up storing a new set of
+ * preferences for the given project based on the preferences for ALL_PROJECTS.
+ * If there isn't even an entry for ALL_PROJECTS, we'd get returned a default
+ * UserPreferences object to modify.
+ *
+ * @param int    $p_user_id         A valid user identifier.
+ * @param string $p_pref_name       The name of the preference to set.
+ * @param string $p_pref_value      Value to set.
+ * @param int    $p_project_id      A valid project identifier.
+ * @param bool   $p_check_protected If True, check to prevent modification of
+ *                                  protected user accounts
+ *
+ * @return bool
+ * @throws ClientException
  */
 function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS, $p_check_protected = true ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
@@ -746,13 +804,19 @@ function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project
 }
 
 /**
- * Set the user's preferences for the project from the given preferences object
- * Do the work by calling update or insert as appropriate
- * @param integer         $p_user_id    A valid user identifier.
- * @param UserPreferences $p_prefs      A UserPreferences object containing settings to set.
- * @param integer         $p_project_id A valid project identifier.
- * @param boolean         $p_check_protected	Whether to perform a check to not allow modify protected users
+ * Set the user's preferences for the project from the given preferences object.
+ *
+ * Do the work by calling update or insert as appropriate.
+ *
+ * @param int             $p_user_id         A valid user identifier.
+ * @param UserPreferences $p_prefs           A UserPreferences object
+ *                                           containing settings to set.
+ * @param int             $p_project_id      A valid project identifier.
+ * @param bool            $p_check_protected If True, check to prevent modification
+ *                                           of protected user accounts
+ *
  * @return void
+ * @throws ClientException
  */
 function user_pref_set( $p_user_id, UserPreferences $p_prefs, $p_project_id = ALL_PROJECTS, $p_check_protected = true ) {
 	if( $p_check_protected ) {
@@ -767,11 +831,15 @@ function user_pref_set( $p_user_id, UserPreferences $p_prefs, $p_project_id = AL
 }
 
 /**
- * Delete the user's preferences row for the given project
- * @param integer         $p_user_id    A valid user identifier.
- * @param integer         $p_project_id A valid project identifier.
- * @param boolean         $p_check_protected	Whether to perform a check to not allow modify protected users
+ * Delete the user's preferences row for the given project.
+ *
+ * @param int  $p_user_id         A valid user identifier.
+ * @param int  $p_project_id      A valid project identifier.
+ * @param bool $p_check_protected If True, check to prevent modification
+ *                                of protected user accounts
+ *
  * @return void
+ * @throws ClientException
  */
 function user_pref_reset( $p_user_id, $p_project_id = ALL_PROJECTS, $p_check_protected = true ) {
 	if( $p_check_protected ) {

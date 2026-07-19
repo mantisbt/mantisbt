@@ -317,6 +317,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
  * @param string $p_basename Plugin basename (defaults to current plugin).
  *
  * @return string Full table name
+ * @throws ClientException
  */
 function plugin_table( $p_name, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
@@ -573,6 +574,7 @@ function plugin_event_hook_many( array $p_hooks ) {
  * @param string $p_child Child plugin basename.
  *
  * @return MantisPlugin
+ * @throws ClientException
  */
 function plugin_child( $p_child ) {
 	$t_base_name = plugin_get_current();
@@ -745,6 +747,7 @@ function plugin_is_installed( $p_basename ) {
  * @param MantisPlugin $p_plugin Plugin basename.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_install( MantisPlugin $p_plugin ) {
 	if( plugin_is_installed( $p_plugin->basename ) ) {
@@ -803,6 +806,7 @@ function plugin_needs_upgrade( MantisPlugin $p_plugin ) {
  * @param MantisPlugin $p_plugin Plugin basename.
  *
  * @return bool|null True if upgrade completed, null if problem
+ * @throws ClientException
  */
 function plugin_upgrade( MantisPlugin $p_plugin ) {
 	if( !plugin_is_installed( $p_plugin->basename ) ) {
@@ -901,6 +905,7 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
  * @param MantisPlugin $p_plugin Plugin basename.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_uninstall( MantisPlugin $p_plugin ) {
 	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
@@ -932,6 +937,7 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
  * (or one of its child classes) allowing special handling by the caller.
  *
  * @return MantisPlugin[] List of found plugins, with basename as key.
+ * @throws ClientException
  */
 function plugin_find_all() {
 	static $s_plugins;
@@ -1119,6 +1125,7 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
  * This includes the MantisCore pseudo-plugin.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_register_installed() {
 	global $g_plugin_cache_priority, $g_plugin_cache_protected;
@@ -1155,6 +1162,7 @@ function plugin_register_installed() {
  * Post-signals EVENT_PLUGIN_INIT.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_init_installed() {
 	if( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( db_get_table( 'plugin' ) ) ) {
@@ -1267,6 +1275,8 @@ function plugin_init( $p_basename ) {
  * @param string|array $p_msg       Log message - either a string, or an array
  *                                  structured as (string,execution time).
  * @param string        $p_basename Plugin's basename (defaults to current plugin)
+ *
+ * @noinspection PhpUnused
  */
 function plugin_log_event( $p_msg, $p_basename = null ) {
 	$t_current_plugin = plugin_get_current();

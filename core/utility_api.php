@@ -43,11 +43,13 @@ require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
 
 /**
- * converts a 1 value to X
- * converts a 0 value to a space
- * @param integer $p_num A numeric to translate as a boolean for display.
+ * Prepares a boolean value to display
+ *
+ * Converts a 1 value to a check mark, 0 to a space.
+ *
+ * @param int $p_num A numeric to translate as a boolean for display.
+ *
  * @return string X or space
- * @access public
  */
 function trans_bool( $p_num ) {
 	if( 0 == $p_num ) {
@@ -58,21 +60,22 @@ function trans_bool( $p_num ) {
 }
 
 /**
- * Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present
+ * Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present.
+ *
  * @param string $p_path A string representing a file system path.
+ *
  * @return string
- * @access public
  */
 function terminate_directory_path( $p_path ) {
 	return rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
 }
 
 /**
- * Return true if the parameter is an empty string or a string
- * containing only whitespace, false otherwise
+ * Check if string is empty or contains only whitespace.
+ *
  * @param string $p_var String to test whether it is blank.
- * @return boolean
- * @access public
+ *
+ * @return bool
  */
 function is_blank( $p_var ) {
 	$p_var = trim( (string)$p_var );
@@ -84,10 +87,11 @@ function is_blank( $p_var ) {
 }
 
 /**
- * Get the named php ini variable but return it as a boolean
+ * Get the named php ini variable but return it as a boolean.
+ *
  * @param string $p_name A php.ini variable to evaluate.
- * @return boolean
- * @access public
+ *
+ * @return bool
  */
 function ini_get_bool( $p_name ) {
 	$t_result = ini_get( $p_name );
@@ -112,13 +116,15 @@ function ini_get_bool( $p_name ) {
 }
 
 /**
- * Get the named php.ini variable but return it as a number after converting
- * the giga (g/G), mega (m/M) and kilo (k/K) postfixes. These postfixes do not
- * adhere to IEEE 1541 in that k=1024, not k=1000. For more information see
- * http://www.php.net/manual/en/faq.using.php#faq.using.shorthandbytes
+ * Get the named php.ini variable as an integer.
+ *
+ * Figa (g/G), mega (m/M) and kilo (k/K) postfixes are converted to units.
+ * These postfixes do not adhere to IEEE 1541 in that k=1024, not k=1000.
+ * @see https://www.php.net/manual/en/faq.using.php#faq.using.shorthandbytes
+ *
  * @param string $p_name Name of the configuration option to read.
- * @return int Integer value of the configuration option.
- * @access public
+ *
+ * @return int Value of the configuration option.
  */
 function ini_get_number( $p_name ) {
 	$t_value = ini_get( $p_name );
@@ -144,13 +150,14 @@ function ini_get_number( $p_name ) {
 }
 
 /**
- * Sort a multi-dimensional array by one of its keys
- * @param array   $p_array     Array to sort.
- * @param string  $p_key       Array key to sort array on.
- * @param integer $p_direction Sort direction.
+ * Sort a multi-dimensional array by one of its keys.
+ *
+ * @param array  $p_array     Array to sort.
+ * @param string $p_key       Array key to sort array on.
+ * @param int    $p_direction Sort direction.
+ *
  * @return array sorted array
  * @throws ClientException
- * @access public
  */
 function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 	if( DESCENDING == $p_direction ) {
@@ -183,10 +190,11 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 }
 
 /**
- * Return GD version
- * It doesn't use gd_info() so it works with PHP < 4.3.0 as well
+ * Return GD version.
+ *
+ * It doesn't use gd_info() so it works with PHP < 4.3.0 as well.
+ *
  * @return int represents gd version
- * @access public
  */
 function get_gd_version() {
 	$t_GDfuncList = get_extension_funcs( 'gd' );
@@ -202,10 +210,11 @@ function get_gd_version() {
 }
 
 /**
- * return true or false if string matches current page name
+ * Check if the given string matches current page name.
+ *
  * @param string $p_string To test against the php script name.
- * @return boolean
- * @access public
+ *
+ * @return bool True if it matches.
  */
 function is_page_name( $p_string ) {
 	return isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], $p_string ) );
@@ -215,7 +224,6 @@ function is_page_name( $p_string ) {
  * Return true if the host operating system is Windows, false otherwise.
  *
  * @return bool
- * @access public
  */
 function is_windows_server() {
 	if( defined( 'PHP_WINDOWS_VERSION_MAJOR' ) ) {
@@ -225,13 +233,15 @@ function is_windows_server() {
 }
 
 /**
- * return array of class properties (via reflection api)
- * @param string  $p_classname      Class name.
- * @param string  $p_type           Property type - public/private/protected/static.
- * @param boolean $p_return_object  Whether to return array of property objects.
- * @param boolean $p_include_parent Whether to include properties of parent classes.
+ * Return array of class properties (via reflection api).
+ *
+ * @param string $p_classname      Class name.
+ * @param string $p_type           Property type - public/private/protected/static.
+ * @param bool   $p_return_object  Whether to return array of property objects.
+ * @param bool   $p_include_parent Whether to include properties of parent classes.
+ *
  * @return array
- * @access public
+ * @throws ReflectionException
  */
 function getClassProperties( $p_classname, $p_type = 'public', $p_return_object = false, $p_include_parent = false ) {
 	$t_ref = new ReflectionClass( $p_classname );
@@ -274,7 +284,6 @@ function getClassProperties( $p_classname, $p_type = 'public', $p_return_object 
  * @return string
  *
  * @deprecated 2.28.1 See PHPDoc for {@see $g_system_font_folder}.
- * @access public
  */
 function get_font_path() {
 	$t_font_path = config_get_global( 'system_font_folder' );
@@ -314,7 +323,10 @@ function get_font_path() {
  * @return mixed The converted value
  *
  * @throws ErrorException
- */
+ *
+ * @noinspection PhpDocRedundantThrowsInspection
+ * @noinspection PhpRedundantCatchClauseInspection
+*/
 function safe_unserialize( $p_string, array $p_options = [] ) {
 	set_error_handler( 'error_convert_to_exception' );
 	try {

@@ -99,9 +99,11 @@ function email_queue_prepare_db( EmailData $p_email_data ) {
 }
 
 /**
- * Add to email queue
+ * Add to email queue.
+ *
  * @param EmailData $p_email_data Email Data structure.
- * @return integer
+ *
+ * @return int
  * @throws ClientException
  */
 function email_queue_add( EmailData $p_email_data ) {

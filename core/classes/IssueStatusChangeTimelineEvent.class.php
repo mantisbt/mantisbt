@@ -43,11 +43,13 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	const REOPENED = 3;
 
 	/**
-	 * @param integer $p_timestamp  Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id    A user identifier.
-	 * @param integer $p_issue_id   A issue identifier.
-	 * @param integer $p_old_status Old status value of issue.
-	 * @param integer $p_new_status New status value of issue.
+	 * Constructor.
+	 *
+	 * @param int $p_timestamp  Timestamp representing the time the event occurred.
+	 * @param int $p_user_id    A user identifier.
+	 * @param int $p_issue_id   A issue identifier.
+	 * @param int $p_old_status Old status value of issue.
+	 * @param int $p_new_status New status value of issue.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_old_status, $p_new_status ) {
 		parent::__construct( $p_timestamp, $p_user_id );
@@ -59,7 +61,8 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	}
 
 	/**
-	 * Return the type of status change
+	 * Return the type of status change.
+	 *
 	 * @return int One of the status change constants defined above
 	 */
 	private function change_type() {
@@ -79,15 +82,18 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 
 	/**
 	 * Whether to skip this timeline event.
+	 *
 	 * This normally implements access checks for the event.
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	public function skip() {
 		return $this->type == IssueStatusChangeTimelineEvent::IGNORED;
 	}
 
 	/**
-	 * Returns html string to display
+	 * Returns html string to display.
+	 *
 	 * @return string
 	 * @throws Exception
 	 */
