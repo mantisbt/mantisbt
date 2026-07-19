@@ -194,7 +194,7 @@ echo '<div class="space-10"></div>';
 echo '<div class="table-responsive">';
 echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
 foreach ( $t_category as $t_cat ) {
-	echo '<th>'.$t_cat.'</th>';
+	echo '<th>' . string_attribute( $t_cat ) .'</th>';
 }
 echo '</tr>';
 for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
