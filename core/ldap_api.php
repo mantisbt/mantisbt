@@ -220,7 +220,7 @@ function ldap_realname( $p_user_id ) {
  */
 function ldap_realname_from_username( $p_username ) {
 	if( ldap_simulation_is_enabled() ) {
-		$t_realname = ldap_simulatiom_realname_from_username( $p_username );
+		$t_realname = ldap_simulation_realname_from_username( $p_username );
 	} else {
 		$t_ldap_realname_field = config_get_global( 'ldap_realname_field' );
 		$t_realname = (string)ldap_get_field_from_username( $p_username, $t_ldap_realname_field );
@@ -564,7 +564,7 @@ function ldap_simulation_email_from_username( $p_username ) {
  * @return string The real name or an empty string if not found.
  * @throws ClientException
  */
-function ldap_simulatiom_realname_from_username( $p_username ) {
+function ldap_simulation_realname_from_username( $p_username ) {
 	$t_user = ldap_simulation_get_user( $p_username );
 	if( $t_user === null ) {
 		log_event( LOG_LDAP, 'ldap_simulatiom_realname_from_username: user \'' . $p_username . '\' not found.' );
