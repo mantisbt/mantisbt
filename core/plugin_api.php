@@ -328,7 +328,7 @@ function plugin_table( $p_name, $p_basename = null ) {
 
 	# Determine plugin table prefix including trailing '_'
 	$t_prefix = trim( config_get_global( 'db_table_plugin_prefix' ) );
-	if( !empty( $t_prefix ) && '_' != substr( $t_prefix, -1 ) ) {
+	if( !empty( $t_prefix ) && !str_ends_with( $t_prefix, '_' ) ) {
 		$t_prefix .= '_';
 	}
 
@@ -654,7 +654,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 		# designed for a new major Mantis release to force authors to review
 		# their code, adapt it if necessary, and release a new version of the
 		# plugin with updated dependencies.
-		if( $p_base_name == 'MantisCore' && strpos( $p_required, '<' ) === false ) {
+		if( $p_base_name == 'MantisCore' && !str_contains( $p_required, '<' ) ) {
 			$t_version_core = mb_substr( $t_plugin_version, 0, strpos( $t_plugin_version, '.' ) );
 			$t_is_current_core_supported = false;
 			foreach( $t_required_array as $t_version_required ) {
