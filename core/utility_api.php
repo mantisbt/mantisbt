@@ -192,21 +192,14 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 /**
  * Return GD version.
  *
- * It doesn't use gd_info() so it works with PHP < 4.3.0 as well.
- *
- * @return int represents gd version
+ * @return string|false Gd version, false if extension is not available.
  */
 function get_gd_version() {
-	$t_GDfuncList = get_extension_funcs( 'gd' );
-	if( !is_array( $t_GDfuncList ) ) {
-		return 0;
-	} else {
-		if( in_array( 'imagegd2', $t_GDfuncList ) ) {
-			return 2;
-		} else {
-			return 1;
-		}
+ 	if( extension_loaded( 'gd' ) ) {
+		$t_info = gd_info();
+		return $t_info['GD Version'];
 	}
+	return false;
 }
 
 /**

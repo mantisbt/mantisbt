@@ -78,8 +78,10 @@ if( !auth_signup_enabled() ) {
 	print_header_redirect( auth_login_page() );
 }
 
-if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 &&
-	helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+if( ON == config_get( 'signup_use_captcha' )
+	&& get_gd_version()
+	&& helper_call_custom_function( 'auth_can_change_password', array() )
+) {
 	# captcha image requires GD library and related option to ON
 	$t_securimage = new Securimage();
 	if( !$t_securimage->check( $f_captcha ) ) {
