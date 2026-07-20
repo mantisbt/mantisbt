@@ -585,17 +585,6 @@ function create_cumulative_bydate( array $p_filter = [] ) {
 }
 
 /**
- * Get formatted date string
- *
- * @param integer $p_date Date.
- *
- * @return string
- */
-function graph_date_format( $p_date ) {
-	return date( config_get( 'short_date_format' ), $p_date );
-}
-
-/**
  * Create summary table of projects.
  *
  * @param array $p_filter Filter array.
