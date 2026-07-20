@@ -1397,6 +1397,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Aktualizácia schémy pluginu zlyh
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Aby ste sa mohli dostať na "%1$s" musíte aktualizovať jeden z vašich zásuvných modulov.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'Formát zadanej stránky zásuvného modulu %1$s je neplatný. Musí sa zhodovať s "Zásuvný modul[/cesta/k]/stránka".';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Formát zadaného súboru zásuvného modulu %1$s je neplatný. Musí sa zhodovať s "Zásuvný modul[/cesta/k]/súbor[.ext]".';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = 'Entita pluginu „%s“ sa nenašla';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Pri prevádzke pluginu "%2$s" sa vyskytla neznáma chyba "%1$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole \'%1$s\' obsahuje duplicitný stĺpec \'%2$s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole "%1$s" obsahuje neplatné pole "%2$s".';

@@ -1389,6 +1389,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Fallou a actualización do esquema
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Cómpre actualizar o complemento "%1$s" antes de poder acceder a esta páxina.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'O formato da páxina de plugin "%1$s" non é válido. Debe respectar o formato "Plugin[/path/to]/page".';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'O formato de ficheiro especificado para o plugin "%1$s" non é válido. Debe respectar o formato "Plugin[/path/to]/file[.ext]".';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = 'Non se atopou a entidade do complemento "%s"';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Houbo un erro descoñecido "%1$s" durante a execución do complemento "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'O campo "%1$s" contén a columna duplicada "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'O campo "%1$s" contén o campo inválido "%2$s".';

@@ -1413,6 +1413,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = '升级插件方案失败于块 #%1
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '在连接此页面之前“%1$s”插件需要更新。';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = '指定的插件页面“%1$s”格式无效。它必须匹配“Plugin[/path/to]/page”。';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = '指定的插件文件“%1$s”格式无效。它必须匹配“Plugin[/path/to]/file[.ext]”。';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = '未找到插件实体“%s”';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '在执行插件"%2$s"过程中出现未知错误"%1$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '字段 "%1$s" 包含重复字段 "%2$s"。';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '字段 "%1$s" 包含无效字段 "%2$s"。';
