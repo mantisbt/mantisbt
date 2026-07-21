@@ -278,7 +278,8 @@ class IssueAddCommand extends Command {
 
 		$t_version_id = isset( $t_issue['version'] ) ? mci_get_version_id( $t_issue['version'], $t_project_id, 'version' ) : 0;
 		if( $t_version_id != 0 ) {
-			if( !access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
+			if( !version_is_released( $t_version_id )
+				&& !access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
 				throw new ClientException(
 					'User not allowed to assign unreleased versions',
 					ERROR_INVALID_FIELD_VALUE,
