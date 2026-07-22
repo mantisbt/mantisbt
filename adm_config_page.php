@@ -178,7 +178,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Username -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'username' ) ?>
+						<label for="config-user-id"><?php echo lang_get( 'username' ) ?></label>
 					</td>
 					<td>
 						<?php
@@ -204,7 +204,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Project -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'project_name' ) ?>
+						<label for="config-project-id"><?php echo lang_get( 'project_name' ) ?></label>
 					</td>
 					<td>
 						<?php
@@ -229,14 +229,14 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Config option name -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'configuration_option' ) ?>
+						<label for="config_option"><?php echo lang_get( 'configuration_option' ) ?></label>
 					</td>
 					<td>
 						<?php
                         $c_option_id = string_attribute( $t_option_id );
 						if( $t_modify ) {
 						?>
-						<input type="text" name="config_option" class="input-sm"
+						<input type="text" id="config_option" name="config_option" class="input-sm"
 							   value="<?php echo $c_option_id ?>"
 							   size="64" maxlength="64" />
 						<input type="hidden" name="original_config_option" value="<?php echo $c_option_id; ?>" />
@@ -251,7 +251,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Option type -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'configuration_option_type' ) ?>
+						<label for="config-type"><?php echo lang_get( 'configuration_option_type' ) ?></label>
 					</td>
 					<td>
 						<?php
@@ -271,18 +271,18 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Option Value -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'configuration_option_value' ) ?>
+						<label for="value"><?php echo lang_get( 'configuration_option_value' ) ?></label>
 					</td>
 					<td>
 						<?php
 						if( $t_modify ) {
 						?>
-						<textarea class="form-control" name="value" cols="80" rows="10"><?php
+						<textarea class="form-control" id="value" name="value" cols="80" rows="10"><?php
 							echo config_get_value_as_string( $t_option_type, $t_option_value, false );
 							?></textarea>
 						<?php
 						} else {
-							echo config_get_value_as_string( $t_option_type, $t_option_value, true );
+							echo config_get_value_as_string( $t_option_type, $t_option_value );
 						}
 						?>
 					</td>

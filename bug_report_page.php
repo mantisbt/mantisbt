@@ -394,6 +394,7 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<?php if( $t_has_profiles ) { ?>
+				<!--suppress HtmlFormInputWithoutLabel -->
 				<select <?php echo helper_get_tab_index() ?> id="profile_id" name="profile_id" class="input-sm">
 					<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
 				</select>

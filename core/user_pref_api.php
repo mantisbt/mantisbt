@@ -271,11 +271,8 @@ class UserPreferences {
 	 * @access private
 	 */
 	public function __set( $p_name, $p_value ) {
-		switch( $p_name ) {
-			case 'timezone':
-				if( $p_value == '' ) {
-					$p_value = null;
-				}
+		if( $p_name == 'timezone' && $p_value == '' ) {
+			$p_value = null;
 		}
 		$this->$p_name = $p_value;
 	}
@@ -425,11 +422,7 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
  * @throws ClientException
  */
 function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	if( false === user_pref_cache_row( $p_user_id, $p_project_id, false ) ) {
-		return false;
-	} else {
-		return true;
-	}
+	return false !== user_pref_cache_row( $p_user_id, $p_project_id, false );
 }
 
 /**
@@ -467,7 +460,7 @@ function user_pref_db_insert( $p_user_id, $p_project_id, UserPreferences $p_pref
 	$t_values[] = $c_user_id;
 	$t_values[] = $c_project_id;
 	foreach( $s_vars as $t_var => $t_val ) {
-		array_push( $t_values, $p_prefs->Get( $t_var ) );
+		$t_values[] = $p_prefs->Get( $t_var );
 	}
 
 	$t_columns = 'user_id, project_id, ' . implode( ', ', array_keys( $s_vars ) );
@@ -509,6 +502,7 @@ function user_pref_db_update( $p_user_id, $p_project_id, UserPreferences $p_pref
 	}
 
 	$t_pairs = array();
+	$t_param = array();
 	foreach( $s_vars as $t_var => $t_val ) {
 		$t_pairs[] = "$t_var = :$t_var";
 		$t_param[$t_var] = $p_prefs->$t_var;

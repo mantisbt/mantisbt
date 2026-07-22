@@ -490,7 +490,6 @@ foreach( $t_project_ids as $t_project_id ) {
 			if( $t_cycle || !in_array( $t_issue_parent, $t_issue_ids ) ) {
 				$l = array_search( $t_issue_parent, $t_issue_set_ids );
 				if( $l !== false ) {
-					/** @noinspection PhpStatementHasEmptyBodyInspection */
 					for( $m = $l+1; $m < count( $t_issue_set_ids ) && $t_issue_set_levels[$m] > $t_issue_set_levels[$l]; $m++ ) {
 						#do nothing
 					}

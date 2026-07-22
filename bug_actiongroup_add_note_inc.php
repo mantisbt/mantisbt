@@ -74,7 +74,7 @@ function action_add_note_print_fields() {
 ?>
 	<tr>
 		<th class="category">
-			<?php echo lang_get( 'add_bugnote_title' ); ?>
+			<label for="bugnote_text"><?php echo lang_get( 'add_bugnote_title' ); ?></label>
 		</th>
 		<td>
 			<textarea class="form-control" name="bugnote_text" id="bugnote_text"
@@ -87,13 +87,13 @@ function action_add_note_print_fields() {
 	<!-- View Status -->
 	<tr>
 		<th class="category">
-			<?php echo lang_get( 'view_status' ) ?>
+			<label for="view_state"><?php echo lang_get( 'view_status' ) ?></label>
 		</th>
 		<td>
 <?php
 	$t_default_state = config_get( 'default_bugnote_view_status' );
 	if( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) { ?>
-				<select name="view_state" class="input-sm">
+				<select id="view_state" name="view_state" class="input-sm">
 					<?php print_enum_string_option_list( 'view_state', $t_default_state ) ?>
 				</select>
 <?php

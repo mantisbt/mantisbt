@@ -364,11 +364,11 @@ if( $t_multiple_projects ) {
 					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
 					break;
 				case 'UP_TARGET_VERSION':
-					print_version_option_list( '', $t_projects, VERSION_FUTURE, true );
+					print_version_option_list( '', $t_projects, VERSION_FUTURE );
 					break;
 				case 'UP_PRODUCT_VERSION':
 				case 'UP_FIXED_IN_VERSION':
-					print_version_option_list( '', $t_projects, VERSION_ALL, true );
+					print_version_option_list( '', $t_projects );
 					break;
 			}
 
@@ -388,10 +388,10 @@ if( $t_multiple_projects ) {
 ?>
 				<tr>
 					<th class="category">
-						<?php echo $t_question_title2 ?>
+						<label for="<?php echo $t_form2 ?>"><?php echo $t_question_title2 ?></label>
 					</th>
 					<td>
-						<select name="<?php echo $t_form2 ?>" class="input-sm">
+						<select id="<?php echo $t_form2 ?>" name="<?php echo $t_form2 ?>" class="input-sm">
 							<?php print_version_option_list( '', null, VERSION_ALL );?>
 						</select>
 					</td>
@@ -422,7 +422,7 @@ if( $t_multiple_projects ) {
 ?>
 				<tr>
 					<th class="category">
-						<?php echo lang_get( 'add_bugnote_title' ); ?>
+						<label for="bugnote_text"><?php echo lang_get( 'add_bugnote_title' ); ?></label>
 					</th>
 					<td>
 						<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>"
@@ -442,8 +442,9 @@ if( $t_multiple_projects ) {
 <?php
 			if( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
 ?>
-						<input type="checkbox" class="ace" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-						<label class="lbl padding-6"><?php echo lang_get( 'private' ); ?></label>
+						<input type="checkbox" class="ace" id="view_status" name="private"
+								<?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+						<label for="view_status" class="lbl padding-6"><?php echo lang_get( 'private' ); ?></label>
 <?php
 			} else {
 				echo get_enum_element( 'view_state', $t_default_bugnote_view_status );

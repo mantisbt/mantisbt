@@ -31,12 +31,12 @@ class UserTokenCreateCommand extends Command {
 	/**
 	 * @var integer The user id.
 	 */
-	private $user_id;
+	private int $user_id;
 
 	/**
 	 * @var string The token name.
 	 */
-	private $name;
+	private string $name;
 
 	/**
 	 * Constructor
@@ -49,6 +49,8 @@ class UserTokenCreateCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 *
+	 * @throws ClientException
 	 */
 	function validate() {
 		// acting user id
@@ -88,7 +90,7 @@ class UserTokenCreateCommand extends Command {
 			}
 		}
 
-		// Check if it possible to create tokens for target user - e.g. user is not protected.
+		// Check if it is possible to create tokens for target user - e.g. user is not protected.
 		if( !api_token_can_create( $this->user_id )) {
 			throw new ClientException(
 				'Create API tokens not allowed for target user',
@@ -106,8 +108,9 @@ class UserTokenCreateCommand extends Command {
 				$this->name = sprintf(
 					"%s created on %s",
 					$t_current_user_name,
-					date( $t_date_format ) );
-				
+					date( $t_date_format )
+				);
+
 				if( $t_count > 1 ) {
 					$this->name .= ' ' . $t_count;
 				}
@@ -119,17 +122,19 @@ class UserTokenCreateCommand extends Command {
 		}
 	}
 
-	// process the command
+	/**
+	 * Process the Command.
+	 *
+	 * @throws ClientException
+	 */
 	function process() {
 		$t_token_result = api_token_create( $this->name, $this->user_id, /* return_id */ true );
 
-		$t_result = array(
+		return array(
 			'id' => $t_token_result['id'],
 			'name' => $this->name,
 			'token' => $t_token_result['token'],
 			'user' => mci_account_get_array_by_id( $this->user_id )
 		);
-
-		return $t_result;
 	}
 }

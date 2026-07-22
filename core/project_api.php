@@ -210,12 +210,11 @@ function project_clear_cache( $p_project_id = null ) {
 	if( null === $p_project_id ) {
 		$g_cache_project = array();
 		$g_cache_project_missing = array();
-		$g_cache_project_all = false;
 	} else {
 		unset( $g_cache_project[(int)$p_project_id] );
 		unset( $g_cache_project_missing[(int)$p_project_id] );
-		$g_cache_project_all = false;
 	}
+	$g_cache_project_all = false;
 }
 
 /**
@@ -227,7 +226,7 @@ function project_clear_cache( $p_project_id = null ) {
  * @throws ClientException
  */
 function project_enabled( $p_project_id ) {
-	return project_get_field( $p_project_id, 'enabled' ) ? true : false;
+	return (bool)project_get_field( $p_project_id, 'enabled' );
 }
 
 /**
@@ -241,11 +240,7 @@ function project_enabled( $p_project_id ) {
 function project_exists( $p_project_id ) {
 	# If we succeed in caching the project then it exists and is now cached for
 	# use by later function calls.  If we can't cache it we return false.
-	if( false == project_cache_row( $p_project_id, false ) ) {
-		return false;
-	} else {
-		return true;
-	}
+	return (bool)project_cache_row( $p_project_id, false );
 }
 
 /**
@@ -1058,6 +1053,7 @@ function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '',
 		$p_class .= ' active';
 	}
 
+	/** @noinspection HtmlUnknownTarget */
 	return sprintf('<a class="%s" href="%s">%s</a>', $p_class, $t_url, $t_label );
 }
 
@@ -1074,5 +1070,5 @@ function project_get_bug_count( $p_project_id ) {
 		. $t_query->param( $p_project_id )
 	);
 	$t_query->execute();
-	return $t_query->value();
+	return (int)$t_query->value();
 }
