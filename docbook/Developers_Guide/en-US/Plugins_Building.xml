@@ -717,8 +717,10 @@ if( $f_reset ) {
 } elseif( $f_foo_or_bar == 'foo' || $f_foo_or_bar == 'bar' ) {
     plugin_config_set( ExamplePlugin::CONFIG_FOO_OR_BAR, $f_foo_or_bar );
 } else {
-    error_parameters( ExamplePlugin::CONFIG_FOO_OR_BAR, string_attribute( $f_foo_or_bar ) );
-    trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+    throw new ClientException( "Invalid config",
+        ERROR_CONFIG_OPT_INVALID,
+        [ string_attribute( $f_foo_or_bar ) ]
+    );
 }
 
 print_header_redirect( plugin_page( 'config', true ) );
