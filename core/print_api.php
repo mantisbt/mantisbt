@@ -2129,23 +2129,12 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
  * @return void
  */
 function print_bug_attachment_preview_image( array $p_attachment ) {
-	$t_preview_style = 'border: 0;';
-	$t_max_width = config_get( 'preview_max_width' );
-	if( $t_max_width > 0 ) {
-		$t_preview_style .= ' max-width:' . $t_max_width . 'px;';
-	}
-
-	$t_max_height = config_get( 'preview_max_height' );
-	if( $t_max_height > 0 ) {
-		$t_preview_style .= ' max-height:' . $t_max_height . 'px;';
-	}
-
 	$t_title = file_get_field( $p_attachment['id'], 'title' );
 	$t_image_url = $p_attachment['download_url'] . '&show_inline=1' . form_security_param( 'file_show_inline' );
 
 	echo "\n<div class=\"bug-attachment-preview-image\">";
 	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '"' . print_attachment_link_target() . '>';
-	echo '<img src="' . string_attribute( $t_image_url ) . '" alt="' . string_attribute( $t_title ) . '" loading="lazy" style="' . string_attribute( $t_preview_style ) . '" />';
+	echo '<img src="' . string_attribute( $t_image_url ) . '" alt="' . string_attribute( $t_title ) . '" loading="lazy">';
 	echo '</a></div>';
 }
 
