@@ -632,15 +632,22 @@ echo $t_new_string;
 				will declare an option "foo_or_bar", with a default value of "foo":
 			</para>
 
+			<para>
+				It is recommended to declare configuration options as constants
+				in the Plugin's class, and use them instead of hardcoded strings
+				throughout the code.
+			</para>
+
 			<programlisting><filename>Example/Example.php</filename>
 
 &lt;?php
 class ExamplePlugin extends MantisPlugin {
+    const CONFIG_FOO_OR_BAR = 'foo_or_bar';
     ...
 
     function config() {
         return array(
-            'foo_or_bar' => 'foo',
+            ExamplePlugin::CONFIG_FOO_OR_BAR => 'foo',
         );
     }
 }
@@ -673,7 +680,7 @@ class ExamplePlugin extends MantisPlugin {
 			<programlisting><filename>Example/pages/config.php</filename>
 <![CDATA[
 <?php
-$t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
+$t_foo_or_bar = plugin_config_get( ExamplePlugin::CONFIG_FOO_OR_BAR );
 ?>
 
 <form action="<?php echo plugin_page( 'config_update' )?>" method="post">
@@ -695,6 +702,9 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 			<programlisting><filename>Example/pages/config_update.php</filename>
 <![CDATA[
 <?php
+
+use Mantis\Exceptions\ClientException;
+
 form_security_validate( 'plugin_Example_config_update' );
 
 $f_foo_or_bar = gpc_get_string( 'foo_or_bar' );
@@ -703,11 +713,11 @@ $f_reset = gpc_get_bool( 'reset', false );
 form_security_purge( 'plugin_Example_config_update' );
 
 if( $f_reset ) {
-    plugin_config_delete( 'foo_or_bar' );
+    plugin_config_delete( ExamplePlugin::CONFIG_FOO_OR_BAR );
 } elseif( $f_foo_or_bar == 'foo' || $f_foo_or_bar == 'bar' ) {
-    plugin_config_set( 'foo_or_bar', $f_foo_or_bar );
+    plugin_config_set( ExamplePlugin::CONFIG_FOO_OR_BAR, $f_foo_or_bar );
 } else {
-    error_parameters( 'foo_or_bar', string_attribute( $f_foo_or_bar ) );
+    error_parameters( ExamplePlugin::CONFIG_FOO_OR_BAR, string_attribute( $f_foo_or_bar ) );
     trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
 }
 
@@ -807,13 +817,13 @@ layout_page_begin();
 layout_page_header( plugin_lang_get( 'title' ) );
 layout_page_begin();
 
-$t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
+$t_foo_or_bar = plugin_config_get( 'ExamplePlugin::CONFIG_FOO_OR_BAR );
 ?>
 
 <form action="<?php echo plugin_page( 'config_update' )?>" method="post">
     <?php echo form_security_field( 'plugin_Example_config_update' ) ?>
     <label>
-        <?php echo plugin_lang_get( 'foo_or_bar' ) ?>
+        <?php echo plugin_lang_get( ExamplePlugin::CONFIG_FOO_OR_BAR ) ?>
         <input name="foo_or_bar" value="<?php echo string_attribute( $t_foo_or_bar ) ?>" />
     </label>
     <br>
@@ -851,7 +861,7 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 layout_page_header( plugin_lang_get( 'title' ) );
 layout_page_begin();
 
-$t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
+$t_foo_or_bar = plugin_config_get( ExamplePlugin::CONFIG_FOO_OR_BAR );
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -878,7 +888,7 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
                         <tr>
                             <th class="category">
                                 <label for="foo_or_bar">
-                                    <?php echo plugin_lang_get( 'foo_or_bar' ) ?>
+                                    <?php echo plugin_lang_get( ExamplePlugin::CONFIG_FOO_OR_BAR ) ?>
                                 </label>
                             </th>
                             <td>
