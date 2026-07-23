@@ -671,28 +671,30 @@ function string_get_bug_page( $p_action ) {
  * @return string
  */
 function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = false ) {
-	if( bug_exists( $p_bug_id ) ) {
+	$t_bug_id = (int)$p_bug_id;
+
+	if( bug_exists( $t_bug_id ) ) {
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
 			$t_link .= config_get_global( 'path' );
 		} else {
 			$t_link .= config_get_global( 'short_path' );
 		}
-		$t_link .= string_get_bug_view_url( $p_bug_id ) . '"';
+		$t_link .= string_get_bug_view_url( $t_bug_id ) . '"';
 		if( $p_detail_info ) {
-			$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-			$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ), $t_project_id ) );
+			$t_summary = string_attribute( bug_get_field( $t_bug_id, 'summary' ) );
+			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+			$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug_id, 'status' ), $t_project_id ) );
 			$t_link .= ' title="[' . $t_status . '] ' . $t_summary . '"';
 
-			$t_resolved = bug_get_field( $p_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold', null, null, $t_project_id );
+			$t_resolved = bug_get_field( $t_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold', null, null, $t_project_id );
 			if( $t_resolved ) {
 				$t_link .= ' class="resolved"';
 			}
 		}
-		$t_link .= '>' . bug_format_id( $p_bug_id ) . '</a>';
+		$t_link .= '>' . bug_format_id( $t_bug_id ) . '</a>';
 	} else {
-		$t_link = bug_format_id( $p_bug_id );
+		$t_link = '<span class="resolved">' . bug_format_id( $t_bug_id ) . '</span>';
 	}
 
 	return $t_link;
@@ -708,8 +710,9 @@ function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = f
  */
 function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info = true, $p_fqdn = false ) {
 	$t_bug_id = (int)$p_bug_id;
+	$t_bugnote_id = (int)$p_bugnote_id;
 
-	if( bug_exists( $t_bug_id ) && bugnote_exists( $p_bugnote_id ) ) {
+	if( bug_exists( $t_bug_id ) && bugnote_exists( $t_bugnote_id ) ) {
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
 			$t_link .= config_get_global( 'path' );
@@ -717,10 +720,10 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info 
 			$t_link .= config_get_global( 'short_path' );
 		}
 
-		$t_link .= string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) . '"';
+		$t_link .= string_get_bugnote_view_url( $t_bug_id, $t_bugnote_id ) . '"';
 		if( $p_detail_info ) {
-			$t_reporter = string_attribute( user_get_name( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) ) );
-			$t_update_date = string_attribute( date( config_get( 'normal_date_format' ), ( bugnote_get_field( $p_bugnote_id, 'last_modified' ) ) ) );
+			$t_reporter = string_attribute( user_get_name( bugnote_get_field( $t_bugnote_id, 'reporter_id' ) ) );
+			$t_update_date = string_attribute( date( config_get( 'normal_date_format' ), ( bugnote_get_field( $t_bugnote_id, 'last_modified' ) ) ) );
 			$t_link .= ' title="' . bug_format_id( $t_bug_id ) . ': [' . $t_update_date . '] ' . $t_reporter . '"';
 		}
 
@@ -728,9 +731,10 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info 
 			$t_link .= ' class="resolved"';
 		}
 
-		$t_link .= '>' . bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id ) . '</a>';
+		$t_link .= '>' . bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $t_bugnote_id ) . '</a>';
 	} else {
-		$t_link = bug_format_id( $t_bug_id ) . ':' . bugnote_format_id( $p_bugnote_id );
+		$t_link = string_get_bug_view_link( $t_bug_id, $t_bugnote_id, $p_detail_info, $p_fqdn )
+			. ':<span class="resolved">' . bugnote_format_id( $t_bugnote_id ) . '</span>';
 	}
 
 	return $t_link;
@@ -742,7 +746,7 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info 
  * @return string
  */
 function string_get_bug_view_url( $p_bug_id ) {
-	return 'view.php?id=' . $p_bug_id;
+	return 'view.php?id=' . (int)$p_bug_id;
 }
 
 /**
@@ -752,7 +756,7 @@ function string_get_bug_view_url( $p_bug_id ) {
  * @return string
  */
 function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
-	return 'view.php?id=' . $p_bug_id . '#c' . $p_bugnote_id;
+	return string_get_bug_view_url( $p_bug_id ) . '#c' . (int)$p_bugnote_id;
 }
 
 /**
@@ -765,7 +769,7 @@ function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
  * @return string
  */
 function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id ) {
-	return config_get_global( 'path' ) . string_get_bug_view_url( $p_bug_id ) . '#c' . $p_bugnote_id;
+	return config_get_global( 'path' ) . string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id );
 }
 
 /**
