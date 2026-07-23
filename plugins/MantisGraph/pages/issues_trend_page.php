@@ -35,14 +35,13 @@ require_api( 'datetimepicker_api.php' );
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 $f_interval = gpc_get_int( 'interval', 0 );
-$t_today = date( 'Y-m-d' );
+//$t_today = date( 'Y-m-d' );
 $f_type = gpc_get_int( 'graph_type', 0 );
 $f_show_as_table = gpc_get_bool( 'show_table', false );
 
 layout_page_header_begin( plugin_lang_get( 'graph_page' ) );
-$t_path = config_get_global( 'path' );
+//$t_path = config_get_global( 'path' );
 layout_page_header_end();
-
 layout_page_begin();
 
 $t_period = new Period();
@@ -52,42 +51,73 @@ $t_types = array(
 				2 => plugin_lang_get( 'category_link' ),
 		   );
 ?>
+
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
-	<form id="graph_form" method="post" action="<?php echo plugin_page( 'issues_trend_page.php' ); ?>" class="form-inline">
-		<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-blue2">
+
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-filter"></i>
+				<?php echo plugin_lang_get( 'issue_trends_link' ); ?>
+			</h4>
+		</div>
+
 		<div class="widget-body">
-		<div class="widget-main no-padding">
-			<div class="table-responsive">
-			<table class="table table-condensed">
-				<tr>
-					<td class="center">
-					<div class="form-group">
-						<?php echo get_dropdown( $t_types, 'graph_type', $f_type ); ?>
+			<div class="widget-main no-padding">
+				<form id="graph_form" method="post" action="<?php echo plugin_page( 'issues_trend_page.php' ); ?>" class="form-inline">
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-condensed">
+							<tr>
+								<td class="width-20">
+									<div>
+										<?php echo get_dropdown( $t_types, 'graph_type', $f_type ); ?>
+									</div>
+								</td>
+								<td>
+									<div>
+										<?php echo $t_period->period_selector( 'interval' ); ?>
+									</div>
+								</td>
+								<td class="align-right">
+									<div class="form-group">
+										<input name="show" type="submit"
+											   class="btn btn-sm btn-primary btn-white btn-round"
+											   value="<?php echo lang_get( 'proceed' ); ?>"/>
+									</div>
+								</td>
+							</tr>
+						</table>
 					</div>
-					</td>
-					<td class="center">
-					<div class="form-group">
-						<?php echo $t_period->period_selector( 'interval' ); ?>
-					</div>
-					</td>
-					<td class="center">
-					<div class="form-group">
-						<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" name="show" value="<?php echo lang_get( 'proceed' ); ?>"/>
-					</div>
-					</td>
-				</tr>
-			</table>
+				</form>
 			</div>
 		</div>
+	</div>
+
+	<div class="space-10"></div>
+
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-table"></i>
+				<?php echo plugin_lang_get( 'data' ); ?>
+			</h4>
 		</div>
-		</div>
-	</form>
+
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+
 <?php
+# @TODO: The old bug_graph_page.php had an option to display the issue trend as
+#   a graph in addition to the data table. This has been removed for some
+#   undocumented reason by PR https://github.com/mantisbt/mantisbt/pull/810
+#   (commit f17daf67b6afdf0a4fa3abbbf60d90c259703bf2) and should be restored.
+
 # build the graphs if both an interval and graph type are selected
 if( ( 0 != $f_type ) && ( $f_interval > 0 ) ) {
-	$f_start = $t_period->get_start_formatted();
-	$f_end = $t_period->get_end_formatted();
+//	$f_start = $t_period->get_start_formatted();
+//	$f_end = $t_period->get_end_formatted();
 
 	switch( $f_type ) {
 		case 1:
@@ -107,6 +137,10 @@ if( ( 0 != $f_type ) && ( $f_interval > 0 ) ) {
 }
 ?>
 
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <?php
 layout_page_end();

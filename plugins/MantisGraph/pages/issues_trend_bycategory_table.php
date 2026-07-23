@@ -27,27 +27,17 @@ access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 $t_interval = new Period();
 $t_interval->set_period_from_selector( 'interval' );
+$t_incr = $t_interval->get_bucket_size();
 
-$t_interval_days = $t_interval->get_elapsed_days();
-if( $t_interval_days <= 14 ) {
-	$t_incr = 60 * 60; # less than 14 days, use hourly
-} else if( $t_interval_days <= 92 ) {
-	$t_incr = 24 * 60 * 60; # less than three month, use daily
-} else {
-	$t_incr = 7 * 24 * 60 * 60; # otherwise weekly
-}
-
-$f_page_number = 1;
-
+$t_page_number = 1;
 $t_per_page = -1;
-$t_bug_count = null;
+$t_bug_count = 0;
 $t_page_count = 0;
-
 $t_filter = current_user_get_bug_filter();
 $t_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
 $t_filter[FILTER_PROPERTY_STATUS] = array(META_FILTER_ANY);
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
-$t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
+$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
 if( count( $t_rows ) == 0 ) {
 	# no data to graph
 	exit();
@@ -71,10 +61,9 @@ $t_marker[$t_ptr] = time();
 $t_data[$t_ptr] = array();
 foreach ( $t_rows as $t_row ) {
 	# the following function can treat the resolved parameter as an array to match
-	$t_cat = category_exists( $t_row->category_id ) ? category_get_name( $t_row->category_id ) : '';
-	if( $t_cat == '' ) {
-		$t_cat = 'none';
-	}
+	$t_cat = !category_exists( $t_row->category_id )
+		? lang_get( 'no_category' )
+		: category_get_name( $t_row->category_id );
 	if( !access_compare_level( $t_row->status, $t_resolved ) ) {
 		if( in_array( $t_cat, $t_category ) ) {
 			$t_data[$t_ptr][$t_cat] ++;
@@ -99,7 +88,11 @@ $t_select = 'SELECT bug_id, type, field_name, old_value, new_value, date_modifie
 $t_result = db_query( $t_select, array( $t_start ) );
 $t_row = db_fetch_array( $t_result );
 
-for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
+$t_now = $t_interval->get_latest_bucket( $t_incr );
+$t_marker[$t_ptr++] = $t_now;
+$t_data[$t_ptr] = $t_data[0];
+for( $t_now -= $t_incr; $t_now > $t_start; $t_now -= $t_incr ) {
+	$t_marker[$t_ptr] = $t_now;
 	# walk through the data points and use the data retrieved to update counts
 	while( ( $t_row !== false ) && ( $t_row['date_modified'] >= $t_now ) ) {
 		switch( $t_row['type'] ) {
@@ -162,13 +155,14 @@ for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 	}
 
 	if( $t_now <= $t_end ) {
-		$t_marker[$t_ptr] = $t_now;
 		$t_ptr++;
 		foreach ( $t_category as $t_cat ) {
 			$t_data[$t_ptr][$t_cat] = $t_data[$t_ptr-1][$t_cat];
 		}
 	}
 }
+$t_marker[$t_ptr] = $t_now;
+
 $t_bin_count = $t_ptr;
 # drop any categories that have no counts
 # These arise when bugs are opened and closed within the data intervals
@@ -189,18 +183,24 @@ for( $i=0; $i<$t_count_cat; $i++ ) {
 # sort and display the results
 sort( $t_category );
 
-$t_date_format = config_get( 'short_date_format' );
-echo '<div class="space-10"></div>';
+$t_date_format = config_get( 'normal_date_format' );
 echo '<div class="table-responsive">';
-echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
+echo '<table class="table table-striped table-bordered table-condensed"><tr>';
+echo '<th>' . plugin_lang_get( 'bucket' ) . '</th>';
+echo '<th>' . plugin_lang_get( 'date' ) . '</th>';
+
 foreach ( $t_category as $t_cat ) {
 	echo '<th>' . string_attribute( $t_cat ) .'</th>';
 }
 echo '</tr>';
-for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
-	echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
+
+for( $t_ptr = 0; $t_ptr <= $t_bin_count; $t_ptr++ ) {
+	$t = $t_bin_count - $t_ptr;
+	echo '<tr>';
+	echo '<td>' . $t_ptr . '</td>';
+	echo '<td>' . date( $t_date_format, $t_marker[$t] ) . '</td>';
 	foreach ( $t_category as $t_cat ) {
-		echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
+		echo '<td>' . ( $t_data[$t][$t_cat] ?? 0 ) . '</td>';
 	}
 	echo '</tr>';
 }
