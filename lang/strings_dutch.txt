@@ -1401,6 +1401,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Het bijwerken van het uitbreidings
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'De plugin "%1$s" moet bijgewerkt worden voordat u deze pagina kunt openen.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'De opmaak van de opgegeven pluginpagina "%1$s" is incorrect. Deze moet voldoen aan "Plugin[/pad/naar]/pagina".';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'De opmaak van het opgegeven pluginbestand "%1$s" is incorrect. Deze moet voldoen aan "Plugin[/pad/naar]/bestand[.ext]".';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = 'Plugin-entiteit "%s" niet gevonden';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Er is een onbekende fout opgetreden ("%1$s") bij het uitvoeren van de uitbreiding "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Het veld "%1$s" bevat een dubbele kolom "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Het veld "%1$s" bevat een ongeldig veld "%2$s".';

@@ -105,6 +105,7 @@ $s_opensearch_id_short = '%s ID';
 $s_opensearch_text_short = '%s Text';
 $s_opensearch_text_description = '%s: am kompletten Text sichen';
 $s_select_option = '(eraussichen)';
+$s_bug_actiongroup_access = 'Dir hutt net déi néideg Rechter, fir dës Aktioun duerchzeféieren.';
 $s_target_version_bugs_conf_msg = 'Zilversioun aktualiséieren op';
 $s_delete_group_bugs_button = 'Problemer läschen';
 $s_move_group_bugs_button = 'Problemer réckelen';
