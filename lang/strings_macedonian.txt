@@ -1384,6 +1384,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Надградувањето на 
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'За да пристапите на страницата, ќе треба прво да го надградите приклучокот „%1$s“.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'Форматот на укажаната приклучочна страница „%1$s“ е неважечка. Мора да се совпаѓа со „Plugin[/path/to]/page“.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Форматот на укажаната приклучочна податотека „%1$s“ е неважечка. Мора да се совпаѓа со „Plugin[/path/to]/file[.ext]“.';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = 'Не е пронајдена приклучочката единица „%s“';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'За време на извршувањето на приклучокот „%2$s“ се појави непозната грешка „%1$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Полето „%1$s“ го содржи дуплираниот столб „%2$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Полето „%1$s“ содржи неважечко поле „%2$s“.';

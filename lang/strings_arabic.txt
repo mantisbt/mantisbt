@@ -1401,6 +1401,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ترقية سكيما الإضاف
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'البرنامج المساعد "%1$s" بحاجة إلى التحديث قبل أن يمكنك دخول هذه الصفحة.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'شكل صفحة البرنامج المساعد المحددة "%1$s" غير صالح; يجب أن تطابق "Plugin[/path/to]/page".';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'شكل صفحة البرنامج المساعد المحددة "%1$s" غير صالح; يجب أن تطابق "Plugin[/path/to]/file[.ext]".';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = 'لم يتم العثور على كيان المكون الإضافي " %s ".';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'كان هناك خطأ غير معروف "%1$s" خلال تنفيذ الإضافة "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'الحقل "%1$s" يحتوي على العامود المكرر "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'الحقل "%1$s" يحتوي على الحقل غير الصحيح "%2$s".';
