@@ -253,7 +253,8 @@
     "Authorization": {
       "type": "apiKey",
       "name": "Authorization",
-      "in": "header"
+      "in": "header",
+      "description": "The user's API token, sent with the RFC 6750 bearer scheme (`Bearer <token>`). The bare form (`<token>`) is also accepted for backwards compatibility."
     }
   },
   "definitions": {

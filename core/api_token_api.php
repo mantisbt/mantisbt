@@ -138,6 +138,30 @@ function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
 }
 
 /**
+ * Extract the API token from an Authorization header value.
+ *
+ * The token is expected in the RFC 6750 form 'Authorization: Bearer <token>', so
+ * the case-insensitive 'Bearer ' prefix is stripped here.  The bare form
+ * 'Authorization: <token>' is still supported for backwards compatibility with
+ * older clients.  Any other scheme (e.g. 'Basic ...') is returned as-is and
+ * won't match a token.
+ *
+ * @param string $p_credentials The Authorization header value.
+ * @return string The token, trimmed and without the 'Bearer ' prefix.
+ * @access public
+ */
+function api_token_parse_credentials( $p_credentials ) {
+	$t_credentials = trim( (string)$p_credentials );
+
+	# [ \t] not \s: RFC 7230 allows only SP or HTAB after a scheme.
+	if( preg_match( '/^Bearer[ \t]+(.*)$/i', $t_credentials, $t_matches ) ) {
+		return trim( $t_matches[1] );
+	}
+
+	return $t_credentials;
+}
+
+/**
  * Get user information given an API token.
  *
  * @param string $p_token The plain token.
