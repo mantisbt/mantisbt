@@ -51,6 +51,7 @@ $s_plugin_MantisGraph_resolution_link = 'No Léisung';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Grafiken no Status';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Grafiken no Prioritéit';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Grafiken no Kategorie';
+$s_plugin_MantisGraph_by_priority_mix = 'No Prioritéit a Status';
 $s_plugin_MantisGraph_legend_still_open = 'Nach op';
 $s_plugin_MantisGraph_legend_resolved = 'Geléist';
 $s_plugin_MantisGraph_period_none = 'Keen';
