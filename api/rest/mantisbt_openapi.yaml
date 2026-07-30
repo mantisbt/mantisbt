@@ -10,6 +10,11 @@ info:
     and then passing the API token in the 'Authorization' header.  However, for anonymous access,
     the API key and header are not needed.
 
+    The token is passed using the standard RFC 6750 bearer scheme
+    (`Authorization: Bearer <token>`); the scheme name is matched case-insensitively.
+    For backwards compatibility, the bare form (`Authorization: <token>`) is also
+    still accepted.
+
     There has been significant improvements and feature additions for REST API in each of the
     recent releases.  Hence, it is highly recommended to use latest release when leveraging the
     REST APIs.
@@ -955,6 +960,9 @@ components:
       type: apiKey
       in: header
       name: Authorization
+      description: |-
+        The user's API token, sent with the RFC 6750 bearer scheme (`Bearer <token>`).
+        The bare form (`<token>`) is also accepted for backwards compatibility.
   headers:
     X-Mantis-Username:
       description: |-

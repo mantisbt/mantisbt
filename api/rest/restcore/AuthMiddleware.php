@@ -40,7 +40,11 @@ class AuthMiddleware {
 			$t_authorization_headers = explode(', ', $t_authorization_header);
 
 			# Search for the token among the different authorization headers.
-			foreach( $t_authorization_headers as $t_api_token ) {
+			foreach( $t_authorization_headers as $t_credentials ) {
+				# The RFC 6750 'Bearer <token>' form is the expected one; the bare
+				# token is still accepted for backwards compatibility.  Credentials
+				# using any other scheme are left as-is and simply won't match a token.
+				$t_api_token = api_token_parse_credentials( $t_credentials );
 				$t_user_id = api_token_get_user( $t_api_token );
 				if( $t_user_id !== false ) {
 					# Valid token found
