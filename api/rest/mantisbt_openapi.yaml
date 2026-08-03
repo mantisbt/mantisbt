@@ -957,9 +957,8 @@ servers:
 components:
   securitySchemes:
     api_key:
-      type: apiKey
-      in: header
-      name: Authorization
+      type: http
+      scheme: bearer
       description: |-
         The user's API token, sent with the RFC 6750 bearer scheme (`Bearer <token>`).
         The bare form (`<token>`) is also accepted for backwards compatibility.

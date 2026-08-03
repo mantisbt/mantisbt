@@ -89,16 +89,32 @@ class RestAuthHeaderTest extends RestBase {
 
 	/**
 	 * A bearer-prefixed token must still be found when the Authorization
-	 * header carries multiple comma separated credentials.
+	 * header carries multiple comma separated credentials, whether or not the
+	 * comma is followed by a space (RFC 7230 allows optional whitespace).
+	 *
+	 * @dataProvider providerMultipleCredentials
+	 * @param string $p_separator The separator placed between the two credentials.
 	 * @return void
 	 */
-	public function testBearerTokenAmongMultipleCredentials() {
+	public function testBearerTokenAmongMultipleCredentials( $p_separator ) {
 		$t_response = $this->builder()
-			->token( 'Basic dXNlcjpwYXNz, Bearer ' . $this->token )
+			->token( 'Basic dXNlcjpwYXNz' . $p_separator . 'Bearer ' . $this->token )
 			->get( self::ENDPOINT, 'page_size=1' )
 			->send();
 
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+	}
+
+	/**
+	 * Credential separators that must all be tolerated.
+	 * @return array
+	 */
+	public function providerMultipleCredentials() {
+		return array(
+			'comma space' => array( ', ' ),
+			'comma only' => array( ',' ),
+			'comma multiple spaces' => array( ',   ' ),
+		);
 	}
 
 	/**
@@ -129,6 +145,30 @@ class RestAuthHeaderTest extends RestBase {
 		$this->assertEquals( $t_bare->getStatusCode(), $t_bearer->getStatusCode() );
 		$this->assertEquals( $t_bare->getReasonPhrase(), $t_bearer->getReasonPhrase() );
 		$this->assertEquals( (string)$t_bare->getBody(), (string)$t_bearer->getBody() );
+	}
+
+	/**
+	 * A 401 response for a request that lacks valid credentials must advertise
+	 * the bearer scheme via a 'WWW-Authenticate: Bearer' header, as required for
+	 * a 401 response by RFC 7235.
+	 *
+	 * The 401 is only produced when anonymous access is unavailable, so the test
+	 * is skipped when the instance under test allows anonymous access.
+	 *
+	 * @return void
+	 */
+	public function testUnauthorizedResponseAdvertisesBearerScheme() {
+		if( auth_anonymous_enabled() ) {
+			$this->markTestSkipped( 'Anonymous access is enabled; no 401 is produced' );
+		}
+
+		$t_response = $this->builder()
+			->anonymous()
+			->get( self::ENDPOINT, 'page_size=1' )
+			->send();
+
+		$this->assertEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
+		$this->assertEquals( 'Bearer', $t_response->getHeaderLine( 'WWW-Authenticate' ) );
 	}
 
 	/**
