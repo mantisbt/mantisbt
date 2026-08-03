@@ -44,6 +44,7 @@
  * @author Dregad
  * @author Glanthor Reviol
  * @author Hanna Tardos
+ * @author Koko1998
  * @author Leiric
  * @author MeskoBalazs
  * @author Misibacsi
@@ -1403,7 +1404,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Elavult funkcionalitás: „%1$s�
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Figyelmeztetés: A rendszer úgy van beállítva, hogy soron belül jelenítse meg a MantisBT hibákat (E_USER_ERROR). A program végrehajtása folytatódik; ez rendszer- és adatintegritási problémákhoz vezethet.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Eltérő adattípusok. További információkért engedélyezze a részletes hibaüzeneteket.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Az ügyet egy másik felhasználó frissítette, térjen vissza az ügyhöz, és küldje be újra a változtatásait.';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Elérte a megengedett tevékenységkorlátot (%d esemény) a legutóbbi %d másodpercben; a műveletei blokkolásra kerültek a kéretlen tevékenységek elkerülése miatt, próbálja újra később.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Elérte a megengedett tevékenységkorlátot (%1$d esemény) a legutóbbi %2$d másodpercben; a műveletei blokkolásra kerültek a kéretlen tevékenységek elkerülése miatt, próbálja újra később.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'A(z) „%1$s” mező legfeljebb %2$d karakteres lehet.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'A(z) „%s” API token neve már használatban van. Lépjen vissza, és válasszon egy másikat.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'A(z) $g_log_destination helyen megadott „%s” nem írható.';
