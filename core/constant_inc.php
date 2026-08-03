@@ -725,6 +725,7 @@ define( 'HEADER_VERSION', 'X-Mantis-Version' );
 define( 'HEADER_IF_MATCH', 'If-Match' );
 define( 'HEADER_IF_NONE_MATCH', 'If-None-Match' );
 define( 'HEADER_ETAG', 'ETag' );
+define( 'HEADER_WWW_AUTHENTICATE', 'WWW-Authenticate' );
 
 # LOGIN METHODS
 define( 'LOGIN_METHOD_COOKIE', 'cookie' );

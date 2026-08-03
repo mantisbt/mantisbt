@@ -28,7 +28,18 @@
 					<para>
 						The primary authentication method. Create an API token for your user
 						account and pass it in the <literal>Authorization</literal> HTTP request
-						header.  API token authentication is required when using impersonation.
+						header using the RFC 6750 bearer scheme
+						(<literal>Authorization: Bearer &lt;token&gt;</literal>).  The bare token
+						form (<literal>Authorization: &lt;token&gt;</literal>) is also accepted for
+						backwards compatibility.  API token authentication is required when using
+						impersonation.
+					</para>
+					<para>
+						When a request requires authentication but none is provided (and
+						anonymous access is not available), the API responds with
+						<literal>401 Unauthorized</literal> and a
+						<literal>WWW-Authenticate: Bearer</literal> header advertising the
+						expected scheme.
 					</para>
 				</listitem>
 			</varlistentry>

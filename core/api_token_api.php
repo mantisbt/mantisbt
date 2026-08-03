@@ -153,8 +153,8 @@ function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
 function api_token_parse_credentials( $p_credentials ) {
 	$t_credentials = trim( (string)$p_credentials );
 
-	# [ \t] not \s: RFC 7230 allows only SP or HTAB after a scheme.
-	if( preg_match( '/^Bearer[ \t]+(.*)$/i', $t_credentials, $t_matches ) ) {
+	# Space only (not \s or tab): RFC 6750 allows just SP after the scheme.
+	if( preg_match( '/^Bearer +(.*)$/i', $t_credentials, $t_matches ) ) {
 		return trim( $t_matches[1] );
 	}
 

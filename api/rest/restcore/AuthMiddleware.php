@@ -36,8 +36,9 @@ class AuthMiddleware {
 		if( !empty( $t_authorization_header ) ) {
 			# TODO: add an index on the token hash for the method below
 
-			# Manage multiple authorization header (ex: Basic + token)
-			$t_authorization_headers = explode(', ', $t_authorization_header);
+			# Split comma separated credentials (ex: Basic + Bearer);
+			# api_token_parse_credentials() trims each entry.
+			$t_authorization_headers = explode( ',', $t_authorization_header );
 
 			# Search for the token among the different authorization headers.
 			foreach( $t_authorization_headers as $t_credentials ) {
@@ -68,7 +69,10 @@ class AuthMiddleware {
 				$t_password = '';
 				$t_login_method = LOGIN_METHOD_ANONYMOUS;
 				if( !auth_anonymous_enabled() || empty( $t_username ) ) {
-					return $response->withStatus( HTTP_STATUS_UNAUTHORIZED, 'Valid API token required' );
+					# RFC 7235 requires a 401 to advertise the auth scheme.
+					return $response
+						->withHeader( HEADER_WWW_AUTHENTICATE, 'Bearer' )
+						->withStatus( HTTP_STATUS_UNAUTHORIZED, 'Valid API token required' );
 				}
 			}
 		}
