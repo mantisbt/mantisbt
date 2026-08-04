@@ -54,7 +54,7 @@ Options:
     -h | --help               Show this usage message
 
     -c | --clean              Remove build directory when completed
-    -d | --docbook            Build and include the docbook manuals
+    -d | --docbook            Build and include DocBook manuals and REST API documentation
     -v | --version <version>  Override version name detection
     -s | --suffix <suffix>    Include version suffix in config file
 ''')
@@ -116,6 +116,33 @@ def generate_checksum(filename):
         checksum = checksums[method].hexdigest()
         f.write(f"{checksum} *{filename}\n")
     f.close()
+
+
+def generate_api_docs(mantis_path, release_dir):
+    """Generate static REST API documentation for inclusion in a release."""
+    npm = shutil.which('npm')
+    if npm is None:
+        print("ERROR: npm executable not found; it is required to build REST API documentation.")
+        sys.exit(1)
+
+    print("Generating REST API documentation...\n")
+    try:
+        subprocess.run([npm, 'ci'], cwd=mantis_path, check=True)
+
+        with tempfile.TemporaryDirectory() as api_build_dir:
+            subprocess.run(
+                [npm, 'run', 'api:docs', '--', '--output', api_build_dir],
+                cwd=mantis_path,
+                check=True,
+            )
+            source_dir = path.join(api_build_dir, 'docs')
+            destination_dir = path.join(release_dir, 'doc', 'en-US', 'rest-api')
+            shutil.copytree(source_dir, destination_dir)
+    except subprocess.CalledProcessError as e:
+        print("ERROR: failed to generate REST API documentation:", e)
+        sys.exit(1)
+
+    print(f"REST API documentation copied to '{destination_dir}'\n")
 
 
 def remove_build_dir(release_dir):
@@ -241,6 +268,8 @@ def main():
             subprocess.run(cmd, check=True)
         except subprocess.CalledProcessError as e:
             sys.exit(1)
+
+        generate_api_docs(mantis_path, release_dir)
 
     # Create tarballs and sign them
     print("Creating release tarballs...")
