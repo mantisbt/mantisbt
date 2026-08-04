@@ -13,6 +13,20 @@
 		<literal>https://server.com/mantis/api/soap/mantisconnect.php</literal>.
 	</para>
 
+	<para>
+		The WSDL for a running MantisBT instance is available at
+		<literal>https://server.com/mantis/api/soap/mantisconnect.php?wsdl</literal>.
+		Use this instance-specific WSDL when generating client stubs, as MantisBT adjusts the
+		service address to match its configured installation URL.
+	</para>
+
+	<para>
+		Release archives include a static reference at
+		<literal>doc/en-US/soap-api/index.html</literal> and the corresponding WSDL at
+		<literal>doc/en-US/soap-api/mantisconnect.wsdl</literal>. The reference is generated
+		from the same WSDL that defines the SOAP service.
+	</para>
+
 	<section id="soapapi.java">
 		<title>Java integration</title>
 

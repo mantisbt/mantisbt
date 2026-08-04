@@ -54,7 +54,7 @@ Options:
     -h | --help               Show this usage message
 
     -c | --clean              Remove build directory when completed
-    -d | --docbook            Build and include DocBook manuals and REST API documentation
+    -d | --docbook            Build and include DocBook manuals, REST API, and SOAP API documentation
     -v | --version <version>  Override version name detection
     -s | --suffix <suffix>    Include version suffix in config file
 ''')
@@ -143,6 +143,33 @@ def generate_api_docs(mantis_path, release_dir):
         sys.exit(1)
 
     print(f"REST API documentation copied to '{destination_dir}'\n")
+
+
+def generate_soap_docs(mantis_path, release_dir):
+    """Generate static SOAP API documentation and bundle its WSDL contract."""
+    xsltproc = shutil.which('xsltproc')
+    if xsltproc is None:
+        print("ERROR: xsltproc executable not found; it is required to build SOAP API documentation.")
+        sys.exit(1)
+
+    wsdl_file = path.join(mantis_path, 'api', 'soap', 'mantisconnect.wsdl')
+    stylesheet_file = path.join(mantis_path, 'api', 'soap', 'wsdl-viewer.xsl')
+    destination_dir = path.join(release_dir, 'doc', 'en-US', 'soap-api')
+
+    print("Generating SOAP API documentation...\n")
+    try:
+        os.makedirs(destination_dir)
+        subprocess.run(
+            [xsltproc, '--nonet', '--output', path.join(destination_dir, 'index.html'), stylesheet_file, wsdl_file],
+            check=True,
+        )
+        shutil.copy2(wsdl_file, destination_dir)
+        shutil.copy2(stylesheet_file, destination_dir)
+    except (OSError, subprocess.CalledProcessError) as e:
+        print("ERROR: failed to generate SOAP API documentation:", e)
+        sys.exit(1)
+
+    print(f"SOAP API documentation copied to '{destination_dir}'\n")
 
 
 def remove_build_dir(release_dir):
@@ -270,6 +297,7 @@ def main():
             sys.exit(1)
 
         generate_api_docs(mantis_path, release_dir)
+        generate_soap_docs(mantis_path, release_dir)
 
     # Create tarballs and sign them
     print("Creating release tarballs...")
