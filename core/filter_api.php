@@ -1872,39 +1872,48 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 	}
 
 	# If the user doesn't have access rights to stored queries, just return
-	if( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
-		return array();
+	if( ALL_PROJECTS == $t_project_id ) {
+		# For ALL_PROJECTS, check access in any accessible project
+		$t_accessible_project_ids = access_project_array_filter( 'stored_query_use_threshold', null, $t_user_id );
+		if( empty( $t_accessible_project_ids ) ) {
+			return array();
+		}
+		$t_accessible_project_ids = array_map( 'intval', $t_accessible_project_ids );
+	} else {
+		# For a specific project, check its threshold
+		$t_stored_query_use_threshold = config_get( 'stored_query_use_threshold', null, NO_USER, $t_project_id );
+		if( !access_has_project_level( $t_stored_query_use_threshold, $t_project_id ) ) {
+			return array();
+		}
+		# set the array of ids here to the specific project
+		$t_accessible_project_ids = [ (int)$t_project_id ];
 	}
 
 	# Get the list of available queries. By sorting such that public queries are
 	# first, we can override any query that has the same name as a private query
 	# with that private one
+	if( $p_filter_by_project ) {
+		# Use the canonical list from above and always include global (0)
+		$t_projects = array_merge( $t_accessible_project_ids, [ ALL_PROJECTS ] );
+	} else {
+		# Ignore the given project and use all user-accessible projects + global (0)
+		$t_projects = user_get_all_accessible_projects( $t_user_id );
+		$t_projects[] = ALL_PROJECTS;
+	}
+
+	# Normalize: ints, unique, reindex (and ensure there is at least ALL_PROJECTS)
+	$t_projects = array_values( array_unique( array_map( 'intval', $t_projects ) ) );
+
 	db_param_push();
 
-	if( $p_filter_by_project ) {
-		$t_query = 'SELECT * FROM {filters}
-			WHERE (project_id = ' . db_param() . '
-				OR project_id = 0)
-			AND name != \'\'
-			AND (is_public = ' . db_param() . '
-				OR user_id = ' . db_param() . ')
-			ORDER BY is_public DESC, name ASC';
+	$t_query = 'SELECT * FROM {filters}
+		WHERE project_id IN (' . implode( ',', $t_projects ) . ')
+		AND name != \'\'
+		AND (is_public = ' . db_param() . ' OR user_id = ' . db_param() . ')
+		ORDER BY is_public DESC, name ASC';
 
-		$t_result = db_query( $t_query, array( $t_project_id, true, $t_user_id ) );
-	} else {
-		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
-		$t_project_ids[] = ALL_PROJECTS;
+	$t_result = db_query( $t_query, array( true, $t_user_id ) );
 
-		$t_query = 'SELECT * FROM {filters}
-			WHERE project_id in (' . implode( ',', $t_project_ids ) . ')
-			AND name != \'\'
-			AND (is_public = ' . db_param() . '
-				OR user_id = ' . db_param() . ')
-			ORDER BY is_public DESC, name ASC';
-
-		$t_result = db_query( $t_query, array( true, $t_user_id ) );
-	}
-	
 	$t_filters = array();
 
 	# first build the id=>name array
