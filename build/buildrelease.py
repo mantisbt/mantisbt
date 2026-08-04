@@ -25,6 +25,7 @@ exclude_list = (
     ".imgbotconfig",
     ".travis.yml",
     "build/",
+    "api/rest/generated/",
     "composer.json",
     "composer.lock",
     # User custom files

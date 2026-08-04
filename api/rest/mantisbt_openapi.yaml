@@ -43,6 +43,7 @@ info:
     - `X-Mantis-LoginMethod` – The authentication method used: `api-token`, `cookie`, or `anonymous`.
   license:
     name: GPL-2.0-or-later
+    url: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
   contact:
     name: MantisBT Team
     email: mantisbt-dev@lists.sourceforge.net
@@ -297,7 +298,7 @@ paths:
           description: ''
           required: false
           example: 1
-        - $ref: '#/components/parameters/filter_id'
+        - $ref: '#/components/parameters/issues_filter_id'
         - name: page_size
           in: query
           schema:
@@ -732,7 +733,7 @@ paths:
             type: integer
           description: ''
           required: true
-          example: '2'
+          example: 2
       requestBody:
         $ref: '#/components/requestBodies/ProjectSubprojectsUpdate'
       responses:
@@ -873,6 +874,23 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update User
+      operationId: UserUpdate
+      description: ''
+      tags:
+        - 'Users'
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        $ref: '#/components/requestBodies/UserUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/users/username/{username}':
     get:
       summary: Get User By Username
@@ -917,28 +935,10 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users/{user_id}':
-    patch:
-      summary: Update User
-      operationId: UserUpdate
-      description: ''
-      tags:
-        - 'Users'
-      parameters:
-        - $ref: '#/components/parameters/user_id'
-      requestBody:
-        $ref: '#/components/requestBodies/UserUpdate'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
 servers:
-  - url: https://mantisbt.org/bugs/
+  - url: https://mantisbt.org/bugs
     description: MantisBT Official Bugtracker
-  - url: '{protocol}://{hostname}:{port}/{basePath}/'
+  - url: '{protocol}://{hostname}:{port}/{basePath}'
     description: Your MantisBT instance
     variables:
       protocol:
@@ -954,6 +954,8 @@ servers:
       basePath:
         description: The path where MantisBT is installed, without trailing `/`
         default: mantisbt
+security:
+  - api_key: []
 components:
   securitySchemes:
     api_key:
@@ -994,18 +996,21 @@ components:
         - $ref: '#/components/schemas/ObjectRef'
       properties:
         name:
+          type: string
           example: MantisBT
     CategoryRef:
       allOf:
         - $ref: '#/components/schemas/ObjectRef'
       properties:
         name:
+          type: string
           example: Authn
     UserRef:
       allOf:
         - $ref: '#/components/schemas/ObjectRef'
       properties:
         name:
+          type: string
           example: John Doe
         email:
           type: string
@@ -1026,40 +1031,52 @@ components:
         - $ref: '#/components/schemas/Enum'
       properties:
         id:
+          type: number
           example: 10
         name:
+          type: string
           example: public
         label:
+          type: string
           example: Public
     PriorityEnum:
       allOf:
         - $ref: '#/components/schemas/Enum'
       properties:
         id:
+          type: number
           example: 40
         name:
+          type: string
           example: high
         label:
+          type: string
           example: High
     SeverityEnum:
       allOf:
         - $ref: '#/components/schemas/Enum'
       properties:
         id:
+          type: number
           example: 60
         name:
+          type: string
           example: major
         label:
+          type: string
           example: Major
     ReproducibilityEnum:
       allOf:
         - $ref: '#/components/schemas/Enum'
       properties:
         id:
+          type: number
           example: 10
         name:
+          type: string
           example: always
         label:
+          type: string
           example: Always
     AccessLevel:
       allOf:
@@ -1136,11 +1153,11 @@ components:
           type: array
           items:
             type: object
-          properties:
-            name:
-              type: string
-            content:
-              type: string
+            properties:
+              name:
+                type: string
+              content:
+                type: string
         custom_fields:
           type: array
           items:
@@ -1171,11 +1188,11 @@ components:
           type: array
           items:
             type: object
-          properties:
-            name:
-              type: string
-            content:
-              type: string
+            properties:
+              name:
+                type: string
+              content:
+                type: string
     ConfigSet:
       type: object
       properties:
@@ -1597,6 +1614,15 @@ components:
       description: 'The user ID'
       example: 5
       required: true
+    id:
+      name: id
+      in: path
+      schema:
+        type: integer
+        minimum: 1
+      description: 'The user ID'
+      example: 5
+      required: true
     project_id:
       name: project_id
       in: path
@@ -1622,6 +1648,14 @@ components:
           It is possible to also pass in an integer
           which is the id of a saved filter.
       required: true
+    issues_filter_id:
+      name: filter_id
+      in: query
+      schema:
+        type: string
+        description: |
+          A built-in filter name or the ID of a saved filter.
+      required: false
   responses:
     BadRequest:
       description: 'Bad Request'

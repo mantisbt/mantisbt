@@ -13,8 +13,9 @@
 	</para>
 	<para>
 		The REST API is enabled by default.
-		A Swagger sandbox and documentation for REST API is available at <literal>/api/rest/swagger/</literal> below
-		the MantisBT root.
+		Its OpenAPI definition is distributed with MantisBT at <literal>api/rest/mantisbt_openapi.yaml</literal>.
+		Developers can generate static REST API documentation and a Postman collection from that definition with
+		<literal>npm run api:generate</literal>; see the Developer's Guide for the workflow.
 	</para>
 
 	<para>The following options are used to control the behaviour of the MantisBT SOAP API:</para>

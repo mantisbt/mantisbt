@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "api:validate": "redocly lint api/rest/mantisbt_openapi.yaml",
+    "api:generate": "node tools/openapi/generate.mjs",
+    "api:postman": "node tools/openapi/generate.mjs --postman",
+    "api:docs": "node tools/openapi/generate.mjs --docs"
+  },
+  "devDependencies": {
+    "@redocly/cli": "2.43.2",
+    "openapi-to-postmanv2": "6.3.2",
+    "yaml": "2.9.0"
+  }
+}
