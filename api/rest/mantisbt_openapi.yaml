@@ -21,6 +21,50 @@ info:
 
     REST API is enabled by default since MantisBT 2.8.0 release.
 
+    ## Getting started
+
+    All paths in this document are relative to the MantisBT installation. For example, an
+    installation at `https://mantis.example.com` serves this API at
+    `https://mantis.example.com/api/rest`. Use the non-trailing-slash form shown in
+    this document. Requests and responses use JSON unless an endpoint explicitly documents a
+    different format.
+
+    Create an API token in MantisBT, then send the token value directly in the `Authorization`
+    header. Do not prefix the token with `Bearer`:
+
+    ```http
+    Authorization: <api-token>
+    Content-Type: application/json
+    ```
+
+    Browser requests authenticated with a MantisBT session cookie are also supported. When
+    anonymous access is enabled, read operations may be available without either credential;
+    permissions still apply in every case.
+
+    ## Common request conventions
+
+    Object references generally accept an `id` or `name`, allowing clients to use stable numeric
+    identifiers while still supporting readable payloads. List endpoints that expose `page` and
+    `page_size` use one-based page numbers. The `select` query parameter accepts a comma-separated
+    list of fields, which is useful for reducing response size when only a subset is required.
+
+    File uploads are JSON payloads: each entry in `files` has a filename in `name` and base64-encoded
+    data in `content`.
+
+    ## Conditional issue updates
+
+    Issue reads return an `ETag`. Send it in `If-Match` on issue updates or deletes to prevent
+    overwriting a newer version; a stale value produces `412 Precondition Failed` and returns the
+    current `ETag`. Send the same value in `If-None-Match` on a read to receive `304 Not Modified`
+    when the issue has not changed.
+
+    ## Errors and response headers
+
+    Successful responses identify the effective user and authentication method in
+    `X-Mantis-Username` and `X-Mantis-LoginMethod`; `X-Mantis-Version` reports the running
+    MantisBT version. A `204` response intentionally has no response body. Errors use the HTTP
+    status code and may include JSON fields such as `message`, `code`, and `localized`.
+
     ## Impersonation
 
     Users with the access level defined by `$g_impersonate_user_threshold` (default: ADMINISTRATOR)
@@ -328,7 +372,10 @@ paths:
     get:
       summary: Get issues
       operationId: IssueGetAll
-      description: ''
+      description: |-
+        Returns issues visible to the effective user. Use `project_id` to scope the search and
+        `filter_id` for a built-in or saved filter. Results are paginated; omit `select` to use
+        the default issue fields.
       tags:
         - 'Issues'
       parameters:
@@ -391,7 +438,9 @@ paths:
     get:
       summary: Get an issue
       operationId: IssueGet
-      description: ''
+      description: |-
+        Returns one visible issue. The response includes an `ETag`; use it with `If-Match` when
+        subsequently updating or deleting the issue.
       tags:
         - 'Issues'
       parameters:
@@ -403,9 +452,12 @@ paths:
           description: ''
           required: false
           example: id,summary,description
+        - $ref: '#/components/parameters/If-None-Match'
       responses:
         '200':
           $ref: '#/components/responses/Success'
+        '304':
+          $ref: '#/components/responses/NotModified'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -413,11 +465,14 @@ paths:
     patch:
       summary: Update an issue
       operationId: IssueUpdate
-      description: ''
+      description: |-
+        Applies the supplied fields to an existing issue. For optimistic concurrency, first read
+        the issue and send its `ETag` in `If-Match`. A mismatch returns `412 Precondition Failed`.
       tags:
         - 'Issues'
       parameters:
         - $ref: '#/components/parameters/issue_id'
+        - $ref: '#/components/parameters/If-Match'
       requestBody:
         $ref: '#/components/requestBodies/IssueUpdate'
       responses:
@@ -427,14 +482,19 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
     delete:
       summary: Delete an issue
       operationId: IssueDelete
-      description: ''
+      description: |-
+        Deletes an issue. Supply the current `ETag` in `If-Match` to ensure that the issue was
+        not changed after it was read.
       tags:
         - 'Issues'
       parameters:
         - $ref: '#/components/parameters/issue_id'
+        - $ref: '#/components/parameters/If-Match'
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
@@ -442,6 +502,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
   '/api/rest/issues/{issue_id}/files/{file_id}':
     get:
       summary: Get file from issue
@@ -525,7 +587,9 @@ paths:
     post:
       summary: Create token for me
       operationId: TokenCreateForMe
-      description: ''
+      description: |-
+        Creates a token for the authenticated user. Store the returned token securely: it is the
+        credential sent in the `Authorization` header for subsequent API calls.
       tags:
         - 'API Tokens'
       requestBody:
@@ -541,7 +605,9 @@ paths:
     post:
       summary: Create token for user
       operationId: TokenCreateForUser
-      description: ''
+      description: |-
+        Creates a token for another user. This requires permission to impersonate that user and
+        cannot target a user with a higher access level than the caller.
       tags:
         - 'API Tokens'
       parameters:
@@ -1122,6 +1188,10 @@ components:
           - api-token
           - cookie
           - anonymous
+    X-Mantis-Version:
+      description: Version of the MantisBT instance that processed the request.
+      schema:
+        type: string
   schemas:
     ObjectRef:
       type: object
@@ -1658,6 +1728,20 @@ components:
       description: ''
       required: true
   parameters:
+    If-Match:
+      name: If-Match
+      in: header
+      required: false
+      schema:
+        type: string
+      description: ETag returned by a prior issue read. The operation fails with 412 if it no longer matches.
+    If-None-Match:
+      name: If-None-Match
+      in: header
+      required: false
+      schema:
+        type: string
+      description: ETag returned by a prior issue read. A matching value returns 304 without a response body.
     issue_id:
       name: issue_id
       in: path
@@ -1728,6 +1812,8 @@ components:
           $ref: '#/components/headers/X-Mantis-Username'
         X-Mantis-LoginMethod:
           $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
     BadRequest:
       description: 'Bad Request'
     NotFound:
@@ -1739,6 +1825,22 @@ components:
           $ref: '#/components/headers/X-Mantis-Username'
         X-Mantis-LoginMethod:
           $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
+    NotModified:
+      description: 'The requested issue has not changed since the supplied ETag.'
+      headers:
+        ETag:
+          description: Current entity tag for the requested issue.
+          schema:
+            type: string
+    PreconditionFailed:
+      description: 'The supplied If-Match value does not match the current issue ETag.'
+      headers:
+        ETag:
+          description: Current entity tag for the requested issue.
+          schema:
+            type: string
     Success:
       description: 'Success'
       headers:
@@ -1746,3 +1848,5 @@ components:
           $ref: '#/components/headers/X-Mantis-Username'
         X-Mantis-LoginMethod:
           $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
