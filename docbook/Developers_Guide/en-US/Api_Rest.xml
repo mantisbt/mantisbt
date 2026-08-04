@@ -171,6 +171,12 @@
 		</para>
 
 		<para>
+			Release builds created with <literal>build/buildrelease.py --docbook</literal> generate
+			the same static site and include it at <literal>doc/en-US/rest-api/index.html</literal>,
+			alongside the Administrator's and Developer's Guides.
+		</para>
+
+		<para>
 			Import the generated collection together with the retained environment template at
 			<literal>api/rest/env.postman_environment.json</literal>. The collection uses its
 			<literal>{{url}}</literal> and <literal>{{token}}</literal> variables, which the
