@@ -65,6 +65,21 @@ paths:
           $ref: '#/components/responses/NotFound'
       parameters:
         - $ref: '#/components/parameters/filter_id'
+    delete:
+      summary: Delete a filter
+      operationId: FilterDelete
+      description: ''
+      tags:
+        - 'Filters'
+      parameters:
+        - $ref: '#/components/parameters/filter_id'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/filters':
     get:
       summary: Get all filters
@@ -72,6 +87,13 @@ paths:
       description: ''
       tags:
         - 'Filters'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: Return filters available in the specified project.
+          required: false
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -93,6 +115,18 @@ paths:
             type: string
           description: ''
           required: true
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -120,6 +154,14 @@ paths:
       description: ''
       tags:
         - 'Users'
+      parameters:
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: Comma-separated list of user fields to return.
+          required: false
+          example: id,name,real_name,email,access_level
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -139,8 +181,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueFilesAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -172,8 +214,10 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueNotesAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
+        '202':
+          $ref: '#/components/responses/Accepted'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -193,8 +237,6 @@ paths:
             type: integer
           description: ''
           required: true
-      requestBody:
-        $ref: '#/components/requestBodies/IssueNotesDelete'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -214,8 +256,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueRelationshipsAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -232,8 +274,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueTagsAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -339,8 +381,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -385,6 +427,21 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete an issue
+      operationId: IssueDelete
+      description: ''
+      tags:
+        - 'Issues'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{issue_id}/files/{file_id}':
     get:
       summary: Get file from issue
@@ -417,9 +474,11 @@ paths:
         - 'Issue Monitoring'
       parameters:
         - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/IssueMonitor'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -469,9 +528,11 @@ paths:
       description: ''
       tags:
         - 'API Tokens'
+      requestBody:
+        $ref: '#/components/requestBodies/TokenCreate'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -485,9 +546,11 @@ paths:
         - 'API Tokens'
       parameters:
         - $ref: '#/components/parameters/user_id'
+      requestBody:
+        $ref: '#/components/requestBodies/TokenCreate'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -506,11 +569,9 @@ paths:
             type: integer
           description: ''
           required: true
-      requestBody:
-        $ref: '#/components/requestBodies/TokenDeleteForMe'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -531,8 +592,8 @@ paths:
           description: ''
           required: true
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -547,8 +608,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ProjectAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -599,6 +660,21 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete a project
+      operationId: ProjectDelete
+      description: ''
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}/versions/{version_id}':
     delete:
       summary: Delete a project version
@@ -615,8 +691,8 @@ paths:
           description: ''
           required: true
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -694,8 +770,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ProjectVersionsAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -712,8 +788,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ProjectSubprojectsAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -737,8 +813,30 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ProjectSubprojectsUpdate'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete a subproject relationship
+      operationId: ProjectSubprojectsDelete
+      description: ''
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: subproject_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 2
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -786,6 +884,19 @@ paths:
           description: ''
           required: false
           example: 0
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ''
+          required: false
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -804,8 +915,25 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ProjectUsersUpsert'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      summary: Add or update a project user
+      operationId: ProjectUsersAdd
+      description: ''
+      tags:
+        - 'Project Users'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectUsersUpsert'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -820,11 +948,9 @@ paths:
       parameters:
         - $ref: '#/components/parameters/project_id'
         - $ref: '#/components/parameters/user_id'
-      requestBody:
-        $ref: '#/components/requestBodies/ProjectUsersDelete'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -839,8 +965,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/UserAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -891,6 +1017,21 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete a user
+      operationId: UserDelete
+      description: ''
+      tags:
+        - 'Users'
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/users/username/{username}':
     get:
       summary: Get User By Username
@@ -929,8 +1070,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/user_id'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -1096,13 +1237,6 @@ components:
           type: boolean
         protected:
           type: boolean
-    UserWithId:
-      allOf:
-        - $ref: '#/components/schemas/User'
-        - type: object
-          properties:
-            id:
-              type: number
     UserWithPassword:
       allOf:
         - $ref: '#/components/schemas/User'
@@ -1222,41 +1356,6 @@ components:
                 type: string
               content:
                 type: string
-    create_an_issue_note_with_time_tracking:
-      type: object
-      properties:
-        text:
-          type: string
-        view_state:
-          type: object
-          properties:
-            name:
-              type: string
-        time_tracking:
-          type: object
-          properties:
-            duration:
-              type: string
-    IssueNotesAdd:
-      type: object
-      properties:
-        text:
-          type: string
-        view_state:
-          type: object
-          properties:
-            name:
-              type: string
-    IssueNotesDelete:
-      type: object
-      properties:
-        text:
-          type: string
-        view_state:
-          type: object
-          properties:
-            name:
-              type: string
         reporter:
           type: object
           properties:
@@ -1342,11 +1441,6 @@ components:
                     type: string
                   label:
                     type: string
-    TokenDeleteForMe:
-      type: object
-      properties:
-        x:
-          type: number
     ProjectAdd:
       type: object
       properties:
@@ -1430,14 +1524,6 @@ components:
           properties:
             name:
               type: string
-    ProjectUsersDelete:
-      type: object
-      properties:
-        user:
-          type: object
-          properties:
-            name:
-              type: string
   requestBodies:
     ConfigSet:
       content:
@@ -1453,25 +1539,31 @@ components:
             $ref: '#/components/schemas/IssueFilesAdd'
       description: ''
       required: true
-    create_an_issue_note_with_time_tracking:
+    IssueMonitor:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/create_an_issue_note_with_time_tracking'
-      description: ''
-      required: true
+            type: object
+            properties:
+              users:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserRef'
+      description: Users to add as monitors. Omit the body to monitor the authenticated user.
+    TokenCreate:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+      description: Optional token name. The server generates a unique name when omitted.
     IssueNotesAdd:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/IssueNotesAdd'
-      description: ''
-      required: true
-    IssueNotesDelete:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IssueNotesDelete'
+            $ref: '#/components/schemas/IssueNote'
       description: ''
       required: true
     IssueRelationshipsAdd:
@@ -1500,13 +1592,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/IssueUpdate'
-      description: ''
-      required: true
-    TokenDeleteForMe:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TokenDeleteForMe'
       description: ''
       required: true
     ProjectAdd:
@@ -1558,13 +1643,6 @@ components:
             $ref: '#/components/schemas/ProjectUsersUpsert'
       description: ''
       required: true
-    ProjectUsersDelete:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectUsersDelete'
-      description: ''
-      required: true
     UserAdd:
       content:
         application/json:
@@ -1580,22 +1658,6 @@ components:
       description: ''
       required: true
   parameters:
-    X-Mantis-Username:
-      name: X-Mantis-Username
-      in: header
-      required: false
-      schema:
-        type: string
-      description: |-
-        Username to impersonate. When set, the request is executed on behalf of the specified
-        user rather than the authenticated caller.
-
-        Requirements:
-        - Caller must authenticate with an API token (the `Authorization` header).
-        - Caller must have at least the `$g_impersonate_user_threshold` access level (default: ADMINISTRATOR).
-        - Cannot impersonate self.
-        - Cannot impersonate a user with a higher access level than the caller's own.
-        - Target user must be a valid, enabled user.
     issue_id:
       name: issue_id
       in: path
@@ -1657,10 +1719,26 @@ components:
           A built-in filter name or the ID of a saved filter.
       required: false
   responses:
+    Accepted:
+      description: 'Request accepted for moderation'
+    Created:
+      description: 'Resource created successfully'
+      headers:
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
     BadRequest:
       description: 'Bad Request'
     NotFound:
       description: 'Entity not found'
+    NoContent:
+      description: 'Operation completed successfully with no response body'
+      headers:
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
     Success:
       description: 'Success'
       headers:
