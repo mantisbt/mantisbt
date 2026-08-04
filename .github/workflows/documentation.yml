@@ -14,6 +14,8 @@ on:
       - redocly.yaml
       - package.json
       - package-lock.json
+      - api/soap/mantisconnect.wsdl
+      - api/soap/wsdl-viewer.xsl
       - "docbook/*/en-US/**"
       - "docbook/*/publican.cfg"
   pull_request:
@@ -24,6 +26,8 @@ on:
       - redocly.yaml
       - package.json
       - package-lock.json
+      - api/soap/mantisconnect.wsdl
+      - api/soap/wsdl-viewer.xsl
       - "docbook/*/en-US/**"
       - "docbook/*/publican.cfg"
 
@@ -44,7 +48,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Install Publican toolchain
-        run: sudo apt-get install publican
+        run: sudo apt-get install publican xsltproc
 
       - name: Install OpenAPI toolchain
         run: npm ci
@@ -55,6 +59,14 @@ jobs:
       - name: Generate REST API content
         run: npm run api:generate -- --output "$RUNNER_TEMP/rest-api-generated"
 
+      - name: Generate SOAP API content
+        run: |
+          mkdir -p "$RUNNER_TEMP/soap-api"
+          xsltproc --nonet --output "$RUNNER_TEMP/soap-api/index.html" api/soap/wsdl-viewer.xsl api/soap/mantisconnect.wsdl
+          cp api/soap/mantisconnect.wsdl "$RUNNER_TEMP/soap-api/"
+          cp api/soap/wsdl-viewer.xsl "$RUNNER_TEMP/soap-api/"
+          test -s "$RUNNER_TEMP/soap-api/index.html"
+
       - name: Upload generated REST API content
         uses: actions/upload-artifact@v4
         with:
@@ -62,6 +74,7 @@ jobs:
           path: |
             ${{ runner.temp }}/rest-api-generated/mantisbt.postman_collection.json
             ${{ runner.temp }}/rest-api-generated/docs/
+            ${{ runner.temp }}/soap-api/
 
       - name: Build Docbooks
         run: |
