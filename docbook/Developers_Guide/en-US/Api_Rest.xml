@@ -158,27 +158,23 @@
 		</para>
 
 		<para>
-			Once Postman is installed, you should be able to bootstrap it with the
-			MantisBT API collection via the MantisBT API documentation posted on Postman.
-
-			<ulink url="https://documenter.getpostman.com/view/29959/7Lt6zkP">Download Collection</ulink>.
+			The OpenAPI definition at <literal>api/rest/mantisbt_openapi.yaml</literal> is the
+			only REST API contract. Contributors edit this file when adding or changing REST
+			endpoints; the Postman collection and static documentation are generated from it.
 		</para>
 
 		<para>
-			The MantisBT API Postman collection is also distributed with MantisBT in the
-			`api/rest/api.postman_collection.json`. The Postman environment template is also
-			available at `api/rest/env.postman_environment.json`.
+			Install the pinned generation tools with <literal>npm ci</literal>, then run
+			<literal>npm run api:generate</literal>. This creates the collection at
+			<literal>api/rest/generated/mantisbt.postman_collection.json</literal> and a static
+			documentation site at <literal>api/rest/generated/docs/index.html</literal>.
 		</para>
-	</section>
-
-	<section id="restapi.export">
-		<title>Exporting Postman Collection</title>
 
 		<para>
-			The bundled Postman collection can be updated by clicking on the "..." next
-			to "Mantis Bug Tracker REST API" and choosing "Export...". Then select
-			"Collection v2.1" and click "Export" and select `api/rest/api.postman_collection.json`.
-			Then follow the standard pull request and checkin process.
+			Import the generated collection together with the retained environment template at
+			<literal>api/rest/env.postman_environment.json</literal>. The collection uses its
+			<literal>{{url}}</literal> and <literal>{{token}}</literal> variables, which the
+			environment supplies for a local MantisBT installation and user API token.
 		</para>
 	</section>
 </chapter>

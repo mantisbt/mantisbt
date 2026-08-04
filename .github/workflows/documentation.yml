@@ -1,7 +1,7 @@
 # -----------------------------------------------------------------------------
 # MantisBT GitHub Actions Worflow to build Documentation
 #
-# Will only run if DocBook files have been changed.
+# Runs when documentation or its OpenAPI source changes.
 # -----------------------------------------------------------------------------
 
 name: MantisBT Documentation
@@ -9,11 +9,21 @@ on:
   push:
     paths:
       - .github/workflows/documentation.yml
+      - api/rest/mantisbt_openapi.yaml
+      - tools/openapi/**
+      - redocly.yaml
+      - package.json
+      - package-lock.json
       - "docbook/*/en-US/**"
       - "docbook/*/publican.cfg"
   pull_request:
     paths:
       - .github/workflows/documentation.yml
+      - api/rest/mantisbt_openapi.yaml
+      - tools/openapi/**
+      - redocly.yaml
+      - package.json
+      - package-lock.json
       - "docbook/*/en-US/**"
       - "docbook/*/publican.cfg"
 
@@ -35,6 +45,23 @@ jobs:
 
       - name: Install Publican toolchain
         run: sudo apt-get install publican
+
+      - name: Install OpenAPI toolchain
+        run: npm ci
+
+      - name: Validate OpenAPI definition
+        run: npm run api:validate
+
+      - name: Generate REST API content
+        run: npm run api:generate -- --output "$RUNNER_TEMP/rest-api-generated"
+
+      - name: Upload generated REST API content
+        uses: actions/upload-artifact@v4
+        with:
+          name: rest-api-generated-content
+          path: |
+            ${{ runner.temp }}/rest-api-generated/mantisbt.postman_collection.json
+            ${{ runner.temp }}/rest-api-generated/docs/
 
       - name: Build Docbooks
         run: |
