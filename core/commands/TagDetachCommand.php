@@ -63,6 +63,10 @@ class TagDetachCommand extends Command {
 		$this->tag_id = $this->query( 'tag_id' );
 		$this->user_id = auth_get_current_user_id();
 
+		if( !access_has_bug_level( config_get( 'tag_detach_threshold' ), $this->issue_id, $this->user_id ) ) {
+			throw new ClientException( 'Access denied to detach tags', ERROR_ACCESS_DENIED );
+		}
+
 		if( !is_numeric( $this->tag_id ) ) {
 			throw new ClientException(
 				sprintf( "Invalid tag id '%s'", $this->tag_id ),
