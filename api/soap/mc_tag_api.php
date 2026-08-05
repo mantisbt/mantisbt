@@ -201,16 +201,28 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 	}
 
 	foreach( $t_tag_ids_to_detach as $t_tag_id ) {
-		if( access_has_bug_level( config_get( 'tag_detach_threshold' ), $p_issue_id, $p_user_id ) ) {
-			log_event( LOG_WEBSERVICE, 'detaching tag id \'' . $t_tag_id . '\' from issue \'' . $p_issue_id . '\'' );
-			tag_bug_detach( $t_tag_id, $p_issue_id );
-		}
+		log_event( LOG_WEBSERVICE, 'detaching tag id \'' . $t_tag_id . '\' from issue \'' . $p_issue_id . '\'' );
+		$t_data = array(
+			'query' => array(
+				'issue_id' => $p_issue_id,
+				'tag_id' => $t_tag_id
+			)
+		);
+
+		$t_command = new TagDetachCommand( $t_data );
+		$t_command->execute();
 	}
 
 	foreach ( $t_tag_ids_to_attach as $t_tag_id ) {
-		if( access_has_bug_level( config_get( 'tag_attach_threshold' ), $p_issue_id, $p_user_id ) ) {
-			log_event( LOG_WEBSERVICE, 'attaching tag id \'' . $t_tag_id . '\' to issue \'' . $p_issue_id . '\'' );
-			tag_bug_attach( $t_tag_id, $p_issue_id );
-		}
+		log_event( LOG_WEBSERVICE, 'attaching tag id \'' . $t_tag_id . '\' to issue \'' . $p_issue_id . '\'' );
+		$t_data = array(
+			'query' => array( 'issue_id' => $p_issue_id ),
+			'payload' => array(
+				'tags' => array( array( 'id' => $t_tag_id ) )
+			)
+		);
+
+		$t_command = new TagAttachCommand( $t_data );
+		$t_command->execute();
 	}
 }
