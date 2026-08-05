@@ -69,7 +69,25 @@ if( $f_copy_from ) {
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_dst_project_id );
 access_ensure_project_level( config_get( 'project_user_threshold' ), $t_dst_project_id );
 
-project_copy_users( $t_dst_project_id, $t_src_project_id, access_get_project_level( $t_dst_project_id ) );
+$t_access_level_limit = access_get_project_level( $t_dst_project_id );
+$t_rows = project_get_local_user_rows( $t_src_project_id );
+foreach( $t_rows as $t_row ) {
+	$t_access_level = $t_row['access_level'];
+	if( $t_access_level > $t_access_level_limit ) {
+		$t_access_level = $t_access_level_limit;
+	}
+
+	$t_data = array(
+		'payload' => array(
+			'project' => array( 'id' => $t_dst_project_id ),
+			'user' => array( 'id' => $t_row['user_id'] ),
+			'access_level' => array( 'id' => $t_access_level )
+		)
+	);
+
+	$t_command = new ProjectUsersAddCommand( $t_data );
+	$t_command->execute();
+}
 
 form_security_purge( 'manage_proj_user_copy' );
 
