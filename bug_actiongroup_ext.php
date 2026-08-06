@@ -99,7 +99,7 @@ foreach( $t_projects_bugs as $t_project_id => $t_bugs ) {
 	$g_project_override = $t_project_id;
 	foreach( $t_bugs as $t_bug_id ) {
 		$t_fail_reason = bug_group_action_validate( $f_action, $t_bug_id );
-		if( $t_fail_reason !== null ) {
+		if( !$t_fail_reason || is_array($t_fail_reason) ) {
 			$t_failed_ids[$t_bug_id] = $t_fail_reason;
 		}
 		if( !isset( $t_failed_ids[$t_bug_id] ) ) {
