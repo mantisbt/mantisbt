@@ -11,6 +11,7 @@ on:
       - .github/workflows/documentation.yml
       - api/rest/mantisbt_openapi.yaml
       - tools/openapi/**
+      - tools/scalar/**
       - redocly.yaml
       - package.json
       - package-lock.json
@@ -23,6 +24,7 @@ on:
       - .github/workflows/documentation.yml
       - api/rest/mantisbt_openapi.yaml
       - tools/openapi/**
+      - tools/scalar/**
       - redocly.yaml
       - package.json
       - package-lock.json

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import Converter from 'openapi-to-postmanv2';
@@ -10,6 +10,11 @@ const repositoryRoot = resolve(import.meta.dirname, '../..');
 const source = resolve(repositoryRoot, 'api/rest/mantisbt_openapi.yaml');
 const defaultOutput = resolve(repositoryRoot, 'api/rest/generated');
 const brunoToolsDirectory = resolve(repositoryRoot, 'tools/bruno');
+const scalarToolsDirectory = resolve(repositoryRoot, 'tools/scalar');
+const scalarBrowserDirectory = resolve(
+  scalarToolsDirectory,
+  'node_modules/@scalar/api-reference/dist/browser',
+);
 
 function usage() {
   console.error('Usage: node tools/openapi/generate.mjs [--postman|--bruno|--docs] [--output DIRECTORY]');
@@ -101,6 +106,35 @@ function configureCollection(collection, openapi) {
   collection.item.forEach(updateRequest);
 }
 
+async function generateScalarDocs(output, openapi) {
+  const docsOutput = resolve(output, 'docs');
+  const specification = JSON.stringify(openapi).replaceAll('</', '<\\/');
+
+  run('npm', ['ci', '--prefix', scalarToolsDirectory]);
+  await rm(docsOutput, { recursive: true, force: true });
+  await mkdir(docsOutput, { recursive: true });
+  await cp(scalarBrowserDirectory, resolve(docsOutput, 'scalar'), { recursive: true });
+  await writeFile(resolve(docsOutput, 'index.html'), `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MantisBT REST API</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="./scalar/standalone.js"></script>
+    <script>
+      Scalar.createApiReference('#app', {
+        content: ${specification},
+        theme: 'default',
+      });
+    </script>
+  </body>
+</html>
+`);
+}
+
 const args = process.argv.slice(2);
 let output = defaultOutput;
 let postmanOnly = false;
@@ -138,10 +172,7 @@ try {
   }
 
   if (!postmanOnly && !brunoOnly) {
-    const docsOutput = resolve(output, 'docs/index.html');
-    await mkdir(dirname(docsOutput), { recursive: true });
-    await rm(docsOutput, { force: true });
-    run('redocly', ['build-docs', source, '--output', docsOutput]);
+    await generateScalarDocs(output, openapi);
   }
 
   if (!postmanOnly && !docsOnly) {
