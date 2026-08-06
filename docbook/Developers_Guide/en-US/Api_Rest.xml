@@ -172,8 +172,10 @@
 
 		<para>
 			Release builds created with <literal>build/buildrelease.py --docbook</literal> generate
-			the same static site and include it at <literal>doc/en-US/rest-api/index.html</literal>,
-			alongside the Administrator's and Developer's Guides.
+			the same static site and include it at <literal>doc/en-US/rest-api/index.html</literal>.
+			They also publish the Postman collection at
+			<literal>doc/en-US/rest-api/mantisbt.postman_collection.json</literal>, alongside
+			the Administrator's and Developer's Guides.
 		</para>
 
 		<para>

@@ -57,7 +57,9 @@ jobs:
         run: npm run api:validate
 
       - name: Generate REST API content
-        run: npm run api:generate -- --output "$RUNNER_TEMP/rest-api-generated"
+        run: |
+          npm run api:generate -- --output "$RUNNER_TEMP/rest-api-generated"
+          test -s "$RUNNER_TEMP/rest-api-generated/mantisbt.postman_collection.json"
 
       - name: Generate SOAP API content
         run: |
