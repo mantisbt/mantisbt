@@ -167,7 +167,8 @@
 			Install the pinned generation tools with <literal>npm ci</literal>, then run
 			<literal>npm run api:generate</literal>. This creates the collection at
 			<literal>api/rest/generated/mantisbt.postman_collection.json</literal> and a static
-			documentation site at <literal>api/rest/generated/docs/index.html</literal>.
+			documentation site at <literal>api/rest/generated/docs/index.html</literal>, as well
+			as a Bruno collection at <literal>api/rest/generated/bruno/</literal>.
 		</para>
 
 		<para>
@@ -175,7 +176,8 @@
 			the same static site and include it at <literal>doc/en-US/rest-api/index.html</literal>.
 			They also publish the Postman collection at
 			<literal>doc/en-US/rest-api/mantisbt.postman_collection.json</literal>, alongside
-			the Administrator's and Developer's Guides.
+			the Bruno collection at <literal>doc/en-US/rest-api/bruno/</literal>, the
+			Administrator's Guide, and the Developer's Guide.
 		</para>
 
 		<para>
@@ -183,6 +185,28 @@
 			<literal>api/rest/env.postman_environment.json</literal>. The collection uses its
 			<literal>{{url}}</literal> and <literal>{{token}}</literal> variables, which the
 			environment supplies for a local MantisBT installation and user API token.
+		</para>
+	</section>
+
+	<section id="restapi.bruno">
+		<title>Bruno</title>
+
+		<para>
+			<ulink url="https://www.usebruno.com/">Bruno</ulink> is an open-source API
+			client that stores collections as files. The generated collection uses Bruno's
+			native classic <literal>.bru</literal> format and is created from the OpenAPI
+			definition with <literal>npm run api:bruno</literal> at
+			<literal>api/rest/generated/bruno/</literal>.
+			The command installs Bruno's separately pinned toolchain from
+			<literal>tools/bruno/</literal> when needed.
+		</para>
+
+		<para>
+			To use it, open the <literal>bruno</literal> directory from a release archive
+			in Bruno as a collection. Select its <literal>Your MantisBT instance</literal>
+			environment and set the <literal>protocol</literal>, <literal>hostname</literal>,
+			<literal>port</literal>, <literal>basePath</literal>, and <literal>token</literal>
+			variables for the target installation and user API token.
 		</para>
 	</section>
 </chapter>

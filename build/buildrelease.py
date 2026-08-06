@@ -131,7 +131,7 @@ def generate_api_docs(mantis_path, release_dir):
 
         with tempfile.TemporaryDirectory() as api_build_dir:
             subprocess.run(
-                [npm, 'run', 'api:docs', '--', '--output', api_build_dir],
+                [npm, 'run', 'api:generate', '--', '--output', api_build_dir],
                 cwd=mantis_path,
                 check=True,
             )
@@ -141,6 +141,10 @@ def generate_api_docs(mantis_path, release_dir):
             shutil.copy2(
                 path.join(api_build_dir, 'mantisbt.postman_collection.json'),
                 destination_dir,
+            )
+            shutil.copytree(
+                path.join(api_build_dir, 'bruno'),
+                path.join(destination_dir, 'bruno'),
             )
     except subprocess.CalledProcessError as e:
         print("ERROR: failed to generate REST API documentation:", e)
