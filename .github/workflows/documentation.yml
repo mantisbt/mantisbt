@@ -60,6 +60,7 @@ jobs:
         run: |
           npm run api:generate -- --output "$RUNNER_TEMP/rest-api-generated"
           test -s "$RUNNER_TEMP/rest-api-generated/mantisbt.postman_collection.json"
+          test -s "$RUNNER_TEMP/rest-api-generated/bruno/collection.bru"
 
       - name: Generate SOAP API content
         run: |
@@ -75,6 +76,7 @@ jobs:
           name: rest-api-generated-content
           path: |
             ${{ runner.temp }}/rest-api-generated/mantisbt.postman_collection.json
+            ${{ runner.temp }}/rest-api-generated/bruno/
             ${{ runner.temp }}/rest-api-generated/docs/
             ${{ runner.temp }}/soap-api/
 
