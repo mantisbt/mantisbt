@@ -138,6 +138,10 @@ def generate_api_docs(mantis_path, release_dir):
             source_dir = path.join(api_build_dir, 'docs')
             destination_dir = path.join(release_dir, 'doc', 'en-US', 'rest-api')
             shutil.copytree(source_dir, destination_dir)
+            shutil.copy2(
+                path.join(api_build_dir, 'mantisbt.postman_collection.json'),
+                destination_dir,
+            )
     except subprocess.CalledProcessError as e:
         print("ERROR: failed to generate REST API documentation:", e)
         sys.exit(1)
