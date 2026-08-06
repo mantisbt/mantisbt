@@ -167,7 +167,7 @@
 			Install the pinned generation tools with <literal>npm ci</literal>, then run
 			<literal>npm run api:generate</literal>. This creates the collection at
 			<literal>api/rest/generated/mantisbt.postman_collection.json</literal> and a static
-			documentation site at <literal>api/rest/generated/docs/index.html</literal>, as well
+			Scalar documentation site at <literal>api/rest/generated/docs/index.html</literal>, as well
 			as a Bruno collection at <literal>api/rest/generated/bruno/</literal>.
 		</para>
 
