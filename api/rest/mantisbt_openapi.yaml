@@ -226,7 +226,7 @@ paths:
         $ref: '#/components/requestBodies/IssueFilesAdd'
       responses:
         '201':
-          $ref: '#/components/responses/Created'
+          $ref: '#/components/responses/CreatedNoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -543,7 +543,11 @@ paths:
           example: 567
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          description: File returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileCollection'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -1433,6 +1437,116 @@ components:
                 type: string
               content:
                 type: string
+    IssueCollection:
+      type: object
+      required: [issues]
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+    IssueResponse:
+      type: object
+      required: [issue]
+      properties:
+        issue:
+          $ref: '#/components/schemas/Issue'
+    IssueNoteCollection:
+      type: object
+      required: [notes]
+      properties:
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssueNote'
+    IssueNoteResponse:
+      type: object
+      properties:
+        note:
+          $ref: '#/components/schemas/IssueNote'
+        issue:
+          $ref: '#/components/schemas/Issue'
+    File:
+      type: object
+      properties:
+        id:
+          type: integer
+        reporter:
+          $ref: '#/components/schemas/UserRef'
+        created_at:
+          type: string
+          format: date-time
+        filename:
+          type: string
+        size:
+          type: integer
+        content_type:
+          type: string
+        content:
+          type: string
+          description: Base64-encoded file content.
+          format: byte
+    FileCollection:
+      type: object
+      required: [files]
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    UserCollection:
+      type: object
+      required: [users]
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    UserResponse:
+      type: object
+      required: [user]
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      additionalProperties: true
+    ProjectCollection:
+      type: object
+      required: [projects]
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    ProjectResponse:
+      type: object
+      required: [project]
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+    VersionResponse:
+      type: object
+      properties:
+        version:
+          type: object
+          additionalProperties: true
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        name:
+          type: string
+      additionalProperties: true
+    GenericResponse:
+      type: object
+      additionalProperties: true
     ConfigSet:
       type: object
       properties:
@@ -1834,6 +1948,27 @@ components:
       description: 'Request accepted for moderation'
     Created:
       description: 'Resource created successfully'
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/IssueResponse'
+              - $ref: '#/components/schemas/IssueCollection'
+              - $ref: '#/components/schemas/IssueNoteResponse'
+              - $ref: '#/components/schemas/UserResponse'
+              - $ref: '#/components/schemas/ProjectResponse'
+              - $ref: '#/components/schemas/VersionResponse'
+              - $ref: '#/components/schemas/TokenResponse'
+              - $ref: '#/components/schemas/GenericResponse'
+      headers:
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
+    CreatedNoContent:
+      description: 'Resource created successfully with no response body'
       headers:
         X-Mantis-Username:
           $ref: '#/components/headers/X-Mantis-Username'
@@ -1870,6 +2005,22 @@ components:
             type: string
     Success:
       description: 'Success'
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/IssueCollection'
+              - $ref: '#/components/schemas/IssueResponse'
+              - $ref: '#/components/schemas/IssueNoteCollection'
+              - $ref: '#/components/schemas/IssueNoteResponse'
+              - $ref: '#/components/schemas/FileCollection'
+              - $ref: '#/components/schemas/UserCollection'
+              - $ref: '#/components/schemas/UserResponse'
+              - $ref: '#/components/schemas/ProjectCollection'
+              - $ref: '#/components/schemas/ProjectResponse'
+              - $ref: '#/components/schemas/VersionResponse'
+              - $ref: '#/components/schemas/TokenResponse'
+              - $ref: '#/components/schemas/GenericResponse'
       headers:
         X-Mantis-Username:
           $ref: '#/components/headers/X-Mantis-Username'
