@@ -241,7 +241,11 @@ paths:
         - $ref: '#/components/parameters/issue_id'
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          description: Issue files returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileCollection'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
