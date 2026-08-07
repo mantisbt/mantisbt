@@ -434,6 +434,27 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete issues
+      operationId: IssueDeleteAll
+      description: Deletes the issues selected by the request's issue parameters.
+      tags:
+        - 'Issues'
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ID of the issue to delete.
+          required: true
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{issue_id}':
     get:
       summary: Get an issue
@@ -553,7 +574,7 @@ paths:
       tags:
         - 'Localized Strings'
       parameters:
-        - name: string[]
+        - name: string
           in: query
           schema:
             type: string
@@ -1022,6 +1043,27 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/users':
+    get:
+      summary: Get users
+      operationId: UserGetAll
+      description: Returns users visible to the effective user.
+      tags:
+        - 'Users'
+      parameters:
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: Comma-separated list of user fields to return.
+          required: false
+          example: id,name,real_name,email,access_level
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
     post:
       summary: Create a user
       operationId: UserAdd
@@ -1037,7 +1079,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users/{id}':
+  '/api/rest/users/{user_id}':
     get:
       summary: Get User By Id
       operationId: UserGet
@@ -1045,13 +1087,7 @@ paths:
       tags:
         - 'Users'
       parameters:
-        - name: id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/user_id'
         - name: select
           in: query
           schema:
@@ -1073,7 +1109,7 @@ paths:
       tags:
         - 'Users'
       parameters:
-        - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/user_id'
       requestBody:
         $ref: '#/components/requestBodies/UserUpdate'
       responses:
@@ -1090,7 +1126,7 @@ paths:
       tags:
         - 'Users'
       parameters:
-        - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/user_id'
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
@@ -1753,15 +1789,6 @@ components:
       example: 123
     user_id:
       name: user_id
-      in: path
-      schema:
-        type: integer
-        minimum: 1
-      description: 'The user ID'
-      example: 5
-      required: true
-    id:
-      name: id
       in: path
       schema:
         type: integer
