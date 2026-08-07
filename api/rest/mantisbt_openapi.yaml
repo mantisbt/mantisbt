@@ -188,7 +188,7 @@ paths:
         $ref: '#/components/requestBodies/ConfigSet'
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
   '/api/rest/users/me':
