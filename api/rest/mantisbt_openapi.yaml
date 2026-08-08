@@ -494,7 +494,8 @@ paths:
       description: |-
         Returns issues visible to the effective user. Use `project_id` to scope the search and
         `filter_id` for a built-in or saved filter. Results are paginated; omit `select` to use
-        the default issue fields.
+        the default issue fields. The response includes an `ETag`; send it in `If-None-Match`
+        to receive `304 Not Modified` when the result has not changed.
       tags:
         - 'Issues'
       parameters:
