@@ -1737,6 +1737,8 @@ components:
     User:
       type: object
       properties:
+        id:
+          type: integer
         name:
           type: string
         real_name:
@@ -1749,6 +1751,13 @@ components:
           type: boolean
         protected:
           type: boolean
+        language:
+          type: string
+        timezone:
+          type: string
+        created_at:
+          type: string
+          format: date-time
     UserWithPassword:
       allOf:
         - $ref: '#/components/schemas/User'
@@ -1917,6 +1926,32 @@ components:
           type: integer
         name:
           type: string
+        status:
+          $ref: '#/components/schemas/Enum'
+        description:
+          type: string
+        enabled:
+          type: boolean
+        view_state:
+          $ref: '#/components/schemas/ViewStateEnum'
+        inherit_global:
+          type: boolean
+        access_level:
+          $ref: '#/components/schemas/AccessLevel'
+        custom_fields:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        versions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        categories:
+          type: array
+          items:
+            type: string
       additionalProperties: true
     ProjectCollection:
       type: object
