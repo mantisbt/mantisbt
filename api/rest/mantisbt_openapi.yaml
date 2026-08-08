@@ -94,6 +94,8 @@ info:
     url: https://mantisbt.org
 paths:
   '/api/rest/filters/{filter_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get a filter
       operationId: FilterGet
@@ -125,6 +127,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/filters':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get all filters
       operationId: FilterGetAll
@@ -146,6 +150,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/config':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Configuration Option
       operationId: ConfigGet
@@ -192,6 +198,8 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
   '/api/rest/users/me':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get My User Info
       operationId: UserGetMe
@@ -214,6 +222,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{id}/files':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Add attachments to issue
       operationId: IssueFilesAdd
@@ -251,6 +261,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{id}/notes':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Create an issue note
       operationId: IssueNotesAdd
@@ -271,6 +283,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{id}/notes/{note_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete an issue note
       operationId: IssueNotesDelete
@@ -293,6 +307,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{id}/relationships':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Add an issue relationship
       operationId: IssueRelationshipsAdd
@@ -311,6 +327,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{id}/tags':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Attach a tag to issue
       operationId: IssueTagsAdd
@@ -329,6 +347,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{id}/relationships/{relationship_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete an issue relationship
       operationId: IssueRelationshipsDelete
@@ -351,6 +371,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{id}/tags/{tag_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Detach a tag from an issue
       operationId: IssueTagsDelete
@@ -373,6 +395,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get issues
       operationId: IssueGetAll
@@ -461,6 +485,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get an issue
       operationId: IssueGet
@@ -531,6 +557,8 @@ paths:
         '412':
           $ref: '#/components/responses/PreconditionFailed'
   '/api/rest/issues/{id}/files/{file_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get file from issue
       operationId: IssueFileGet
@@ -558,6 +586,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/issues/{id}/monitors':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Monitor an issue
       operationId: IssueMonitor
@@ -576,6 +606,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/lang':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get multiple localized strings
       operationId: StringGet
@@ -598,6 +630,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/pages/issues/view/{id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Issue View Page
       operationId: IssueGetViewPage
@@ -614,6 +648,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/users/me/token':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Create token for me
       operationId: TokenCreateForMe
@@ -632,6 +668,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/users/{user_id}/token':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Create token for user
       operationId: TokenCreateForUser
@@ -652,6 +690,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/users/me/token/{token_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete token for me
       operationId: TokenDeleteForMe
@@ -673,6 +713,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/users/{user_id}/token/{token_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete token for user
       operationId: TokenDeleteForUser
@@ -695,6 +737,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/projects':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Create a project
       operationId: ProjectAdd
@@ -724,6 +768,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get a project
       operationId: ProjectGet
@@ -772,6 +818,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}/versions/{version_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete a project version
       operationId: ProjectVersionsDelete
@@ -840,6 +888,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}/versions':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Project Versions
       operationId: ProjectVersionsGetAll
@@ -873,6 +923,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}/subprojects':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Add a sub-project
       operationId: ProjectSubprojectsAdd
@@ -891,6 +943,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     patch:
       summary: Update a subproject
       operationId: ProjectSubprojectsUpdate
@@ -938,6 +992,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}/handlers':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Project Users that can be assigned issues
       operationId: ProjectUsersCanHandleIssues
@@ -954,6 +1010,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}/users':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Project Users
       operationId: ProjectUsersGetAll
@@ -1035,6 +1093,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/projects/{project_id}/users/{user_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Project Delete User
       operationId: ProjectUsersDelete
@@ -1052,6 +1112,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/users':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get users
       operationId: UserGetAll
@@ -1089,6 +1151,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/users/{user_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get User By Id
       operationId: UserGet
@@ -1144,6 +1208,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/users/username/{username}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get User By Username
       operationId: UserGetByUsername
@@ -1172,6 +1238,8 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   '/api/rest/users/{user_id}/reset':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     put:
       summary: Reset user password
       operationId: UserResetPassword
@@ -1901,6 +1969,13 @@ components:
       schema:
         type: string
       description: ETag returned by a prior issue read. A matching value returns 304 without a response body.
+    X-Mantis-Username:
+      name: X-Mantis-Username
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Username to impersonate for this request. Requires an authorized API token.
     issue_id:
       name: id
       in: path
