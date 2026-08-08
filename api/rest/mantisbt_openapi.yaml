@@ -213,7 +213,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/files':
+  '/api/rest/issues/{id}/files':
     post:
       summary: Add attachments to issue
       operationId: IssueFilesAdd
@@ -250,7 +250,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/notes':
+  '/api/rest/issues/{id}/notes':
     post:
       summary: Create an issue note
       operationId: IssueNotesAdd
@@ -270,7 +270,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/notes/{issue_note_id}':
+  '/api/rest/issues/{id}/notes/{note_id}':
     delete:
       summary: Delete an issue note
       operationId: IssueNotesDelete
@@ -279,7 +279,7 @@ paths:
         - 'Issue Notes'
       parameters:
         - $ref: '#/components/parameters/issue_id'
-        - name: issue_note_id
+        - name: note_id
           in: path
           schema:
             type: integer
@@ -292,7 +292,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/relationships':
+  '/api/rest/issues/{id}/relationships':
     post:
       summary: Add an issue relationship
       operationId: IssueRelationshipsAdd
@@ -310,7 +310,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/tags':
+  '/api/rest/issues/{id}/tags':
     post:
       summary: Attach a tag to issue
       operationId: IssueTagsAdd
@@ -328,7 +328,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
+  '/api/rest/issues/{id}/relationships/{relationship_id}':
     delete:
       summary: Delete an issue relationship
       operationId: IssueRelationshipsDelete
@@ -350,7 +350,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/tags/{tag_id}':
+  '/api/rest/issues/{id}/tags/{tag_id}':
     delete:
       summary: Detach a tag from an issue
       operationId: IssueTagsDelete
@@ -459,7 +459,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}':
+  '/api/rest/issues/{id}':
     get:
       summary: Get an issue
       operationId: IssueGet
@@ -529,7 +529,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
-  '/api/rest/issues/{issue_id}/files/{file_id}':
+  '/api/rest/issues/{id}/files/{file_id}':
     get:
       summary: Get file from issue
       operationId: IssueFileGet
@@ -556,7 +556,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/monitors':
+  '/api/rest/issues/{id}/monitors':
     post:
       summary: Monitor an issue
       operationId: IssueMonitor
@@ -596,7 +596,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/pages/issues/view/{issue_id}':
+  '/api/rest/pages/issues/view/{id}':
     get:
       summary: Get Issue View Page
       operationId: IssueGetViewPage
@@ -650,7 +650,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users/me/token/{id}':
+  '/api/rest/users/me/token/{token_id}':
     delete:
       summary: Delete token for me
       operationId: TokenDeleteForMe
@@ -658,7 +658,7 @@ paths:
       tags:
         - 'API Tokens'
       parameters:
-        - name: id
+        - name: token_id
           in: path
           schema:
             type: integer
@@ -671,7 +671,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users/{user_id}/token/{id}':
+  '/api/rest/users/{user_id}/token/{token_id}':
     delete:
       summary: Delete token for user
       operationId: TokenDeleteForUser
@@ -680,7 +680,7 @@ paths:
         - 'API Tokens'
       parameters:
         - $ref: '#/components/parameters/user_id'
-        - name: id
+        - name: token_id
           in: path
           schema:
             type: integer
@@ -1241,7 +1241,7 @@ components:
       type: object
       properties:
         id:
-          type: number
+          type: integer
           example: 1
         name:
           type: string
@@ -1897,7 +1897,7 @@ components:
         type: string
       description: ETag returned by a prior issue read. A matching value returns 304 without a response body.
     issue_id:
-      name: issue_id
+      name: id
       in: path
       schema:
         type: integer
