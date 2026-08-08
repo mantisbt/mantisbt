@@ -1686,8 +1686,22 @@ components:
     IssueUpdate:
       type: object
       properties:
+        id:
+          type: integer
+        project:
+          $ref: '#/components/schemas/ProjectRef'
+        reporter:
+          $ref: '#/components/schemas/UserRef'
         summary:
           type: string
+        description:
+          type: string
+        steps_to_reproduce:
+          type: string
+        additional_information:
+          type: string
+        category:
+          $ref: '#/components/schemas/CategoryRef'
         priority:
           type: object
           properties:
@@ -1703,6 +1717,94 @@ components:
           properties:
             name:
               type: string
+        severity:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        reproducibility:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        resolution:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        projection:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        eta:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        view_state:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        version:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        fixed_in_version:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        target_version:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        sticky:
+          type: boolean
+        due_date:
+          type: string
+          format: date
+        date_submitted:
+          type: string
+          format: date-time
+        date_updated:
+          type: string
+          format: date-time
+        profile_id:
+          type: integer
+        os:
+          type: string
+        os_build:
+          type: string
+        build:
+          type: string
+        platform:
+          type: string
+        monitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
         custom_fields:
           type: array
           items:
@@ -1763,13 +1865,31 @@ components:
       type: object
       properties:
         id:
-          type: number
+          type: integer
         name:
           type: string
+        description:
+          type: string
+        status:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        view_state:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
         enabled:
           type: boolean
         inherit_global:
-          type: number
+          type: integer
+        file_path:
+          type: string
     ProjectVersionsAdd:
       type: object
       properties:
@@ -1786,8 +1906,17 @@ components:
     ProjectVersionsUpdate:
       type: object
       properties:
+        name:
+          type: string
+        description:
+          type: string
+        released:
+          type: boolean
         obsolete:
           type: boolean
+        timestamp:
+          type: string
+          format: date-time
     ProjectSubprojectsAdd:
       type: object
       properties:
