@@ -2143,17 +2143,6 @@ components:
                 type: string
         language:
           type: string
-    Error:
-      type: object
-      description: Standard MantisBT error response.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-        localized:
-          type: boolean
-      additionalProperties: true
     ConfigSet:
       type: object
       properties:
