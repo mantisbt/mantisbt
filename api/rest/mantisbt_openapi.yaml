@@ -2047,6 +2047,35 @@ components:
     GenericResponse:
       type: object
       additionalProperties: true
+    ConfigResponse:
+      type: object
+      required: [configs]
+      properties:
+        configs:
+          type: array
+          items:
+            type: object
+            required: [option, value]
+            properties:
+              option:
+                type: string
+              value: {}
+    LocalizedStringsResponse:
+      type: object
+      required: [strings, language]
+      properties:
+        strings:
+          type: array
+          items:
+            type: object
+            required: [name, localized]
+            properties:
+              name:
+                type: string
+              localized:
+                type: string
+        language:
+          type: string
     Error:
       type: object
       description: Standard MantisBT error response.
@@ -2636,6 +2665,8 @@ components:
               - $ref: '#/components/schemas/ProjectResponse'
               - $ref: '#/components/schemas/VersionResponse'
               - $ref: '#/components/schemas/TokenResponse'
+              - $ref: '#/components/schemas/ConfigResponse'
+              - $ref: '#/components/schemas/LocalizedStringsResponse'
               - $ref: '#/components/schemas/GenericResponse'
       headers:
         X-Mantis-Username:
@@ -2697,6 +2728,8 @@ components:
               - $ref: '#/components/schemas/ProjectResponse'
               - $ref: '#/components/schemas/VersionResponse'
               - $ref: '#/components/schemas/TokenResponse'
+              - $ref: '#/components/schemas/ConfigResponse'
+              - $ref: '#/components/schemas/LocalizedStringsResponse'
               - $ref: '#/components/schemas/GenericResponse'
       headers:
         ETag:
