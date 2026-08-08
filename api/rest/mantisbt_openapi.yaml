@@ -413,6 +413,7 @@ paths:
           description: ''
           required: false
           example: id,summary,description
+        - $ref: '#/components/parameters/If-None-Match'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -522,7 +523,7 @@ paths:
         - $ref: '#/components/parameters/If-Match'
       responses:
         '204':
-          $ref: '#/components/responses/NoContent'
+          $ref: '#/components/responses/NoContentWithETag'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -1216,6 +1217,10 @@ components:
         The user's API token, sent with the RFC 6750 bearer scheme (`Bearer <token>`).
         The bare form (`<token>`) is also accepted for backwards compatibility.
   headers:
+    ETag:
+      description: Current entity tag for the issue representation.
+      schema:
+        type: string
     X-Mantis-Username:
       description: |-
         The username under which the request was executed.
@@ -2026,6 +2031,19 @@ components:
               - $ref: '#/components/schemas/TokenResponse'
               - $ref: '#/components/schemas/GenericResponse'
       headers:
+        ETag:
+          $ref: '#/components/headers/ETag'
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
+    NoContentWithETag:
+      description: 'Operation completed successfully with no response body'
+      headers:
+        ETag:
+          $ref: '#/components/headers/ETag'
         X-Mantis-Username:
           $ref: '#/components/headers/X-Mantis-Username'
         X-Mantis-LoginMethod:
