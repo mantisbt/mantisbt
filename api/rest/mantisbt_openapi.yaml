@@ -966,7 +966,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  '/api/rest/projects/{project_id}':
+  '/api/rest/projects/{id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
     get:
@@ -1034,7 +1034,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  '/api/rest/projects/{project_id}/versions/{version_id}':
+  '/api/rest/projects/{id}/versions/{version_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
@@ -1122,7 +1122,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  '/api/rest/projects/{project_id}/versions':
+  '/api/rest/projects/{id}/versions':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
     get:
@@ -1169,7 +1169,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  '/api/rest/projects/{project_id}/subprojects':
+  '/api/rest/projects/{id}/subprojects':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
     post:
@@ -1195,7 +1195,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
+  '/api/rest/projects/{id}/subprojects/{subproject_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
     patch:
@@ -1256,7 +1256,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  '/api/rest/projects/{project_id}/handlers':
+  '/api/rest/projects/{id}/handlers':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
     get:
@@ -1280,7 +1280,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  '/api/rest/projects/{project_id}/users':
+  '/api/rest/projects/{id}/users':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
     get:
@@ -1381,7 +1381,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  '/api/rest/projects/{project_id}/users/{user_id}':
+  '/api/rest/projects/{id}/users/{user_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
@@ -2645,7 +2645,7 @@ components:
       example: 5
       required: true
     project_id:
-      name: project_id
+      name: id
       in: path
       schema:
         type: integer
