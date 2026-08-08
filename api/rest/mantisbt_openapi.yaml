@@ -298,6 +298,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FileCollection'
+          headers:
+            X-Mantis-Username:
+              $ref: '#/components/headers/X-Mantis-Username'
+            X-Mantis-LoginMethod:
+              $ref: '#/components/headers/X-Mantis-LoginMethod'
+            X-Mantis-Version:
+              $ref: '#/components/headers/X-Mantis-Version'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -703,6 +710,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FileCollection'
+          headers:
+            X-Mantis-Username:
+              $ref: '#/components/headers/X-Mantis-Username'
+            X-Mantis-LoginMethod:
+              $ref: '#/components/headers/X-Mantis-LoginMethod'
+            X-Mantis-Version:
+              $ref: '#/components/headers/X-Mantis-Version'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -2581,6 +2595,13 @@ components:
   responses:
     Accepted:
       description: 'Request accepted for moderation'
+      headers:
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
     Unauthorized:
       description: Authentication is required or the supplied API token is invalid.
       headers:
