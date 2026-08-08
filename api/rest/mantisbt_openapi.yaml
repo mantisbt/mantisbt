@@ -1893,6 +1893,10 @@ components:
                 type: string
               content:
                 type: string
+    IssueNotesAdd:
+      allOf:
+        - $ref: '#/components/schemas/IssueNote'
+      description: Fields accepted when creating an issue note, including attachments and time tracking.
     IssueCollection:
       type: object
       required: [issues]
@@ -2405,7 +2409,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/IssueNote'
+            $ref: '#/components/schemas/IssueNotesAdd'
       description: ''
       required: true
     IssueRelationshipsAdd:
