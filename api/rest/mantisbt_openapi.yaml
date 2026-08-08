@@ -1957,8 +1957,26 @@ components:
               content:
                 type: string
     IssueNotesAdd:
-      allOf:
-        - $ref: '#/components/schemas/IssueNote'
+      type: object
+      properties:
+        text:
+          type: string
+        view_state:
+          $ref: '#/components/schemas/ViewStateEnum'
+        time_tracking:
+          type: object
+          properties:
+            duration:
+              type: string
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              content:
+                type: string
       description: Fields accepted when creating an issue note, including attachments and time tracking.
     IssueCollection:
       type: object
