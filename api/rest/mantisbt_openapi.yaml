@@ -1855,6 +1855,34 @@ components:
           type: string
         profile_id:
           type: integer
+        profile:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        relationships:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        tags:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        history:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
         notes:
           type: array
           items:
@@ -1889,10 +1917,28 @@ components:
     IssueNote:
       type: object
       properties:
+        id:
+          type: integer
         text:
           type: string
+        reporter:
+          $ref: '#/components/schemas/UserRef'
         view_state:
           $ref: '#/components/schemas/ViewStateEnum'
+        type:
+          type: string
+        attr:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
         time_tracking:
           type: object
           properties:
