@@ -109,6 +109,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
       parameters:
         - $ref: '#/components/parameters/filter_id'
     delete:
@@ -126,6 +132,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/filters':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -149,6 +161,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/config':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -184,6 +202,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     patch:
       summary: Set Configs
       operationId: ConfigSet
@@ -197,6 +221,12 @@ paths:
           $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/me':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -221,6 +251,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/files':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -241,6 +277,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     get:
       summary: Get issue files
       operationId: IssueFilesGet
@@ -260,6 +302,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/notes':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -282,6 +330,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/notes/{note_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -306,6 +360,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/relationships':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -326,6 +386,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/tags':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -346,6 +412,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/relationships/{relationship_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -370,6 +442,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/tags/{tag_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -394,6 +472,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -445,6 +529,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     post:
       summary: Create an issue
       operationId: IssueAdd
@@ -463,6 +553,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     delete:
       summary: Delete issues
       operationId: IssueDeleteAll
@@ -484,6 +580,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -514,6 +616,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     patch:
       summary: Update an issue
       operationId: IssueUpdate
@@ -536,6 +644,12 @@ paths:
           $ref: '#/components/responses/NotFound'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     delete:
       summary: Delete an issue
       operationId: IssueDelete
@@ -556,6 +670,12 @@ paths:
           $ref: '#/components/responses/NotFound'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/files/{file_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -585,6 +705,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/monitors':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -605,6 +731,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/lang':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -629,6 +761,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/pages/issues/view/{id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -647,6 +785,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/me/token':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -667,6 +811,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/{user_id}/token':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -689,6 +839,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/me/token/{token_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -712,6 +868,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/{user_id}/token/{token_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -736,6 +898,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -754,6 +922,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     get:
       summary: Get all projects
       operationId: ProjectGetAll
@@ -767,6 +941,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects/{project_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -785,6 +965,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     patch:
       summary: Update a project
       operationId: ProjectUpdate
@@ -802,6 +988,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     delete:
       summary: Delete a project
       operationId: ProjectDelete
@@ -817,6 +1009,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects/{project_id}/versions/{version_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -841,6 +1039,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     get:
       summary: Get a Project Version
       operationId: ProjectVersionsGet
@@ -863,6 +1067,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     patch:
       summary: Update project version
       operationId: ProjectVersionsUpdate
@@ -887,6 +1097,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects/{project_id}/versions':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -905,6 +1121,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     post:
       summary: Create a project version
       operationId: ProjectVersionsAdd
@@ -922,6 +1144,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects/{project_id}/subprojects':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -942,6 +1170,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -969,6 +1203,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     delete:
       summary: Delete a subproject relationship
       operationId: ProjectSubprojectsDelete
@@ -991,6 +1231,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects/{project_id}/handlers':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -1009,6 +1255,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects/{project_id}/users':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -1058,6 +1310,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     put:
       summary: Project Add-Update User
       operationId: ProjectUsersUpsert
@@ -1075,6 +1333,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     post:
       summary: Add or update a project user
       operationId: ProjectUsersAdd
@@ -1092,6 +1356,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects/{project_id}/users/{user_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -1111,6 +1381,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -1135,6 +1411,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     post:
       summary: Create a user
       operationId: UserAdd
@@ -1150,6 +1432,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/{user_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -1175,6 +1463,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     patch:
       summary: Update User
       operationId: UserUpdate
@@ -1192,6 +1486,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     delete:
       summary: Delete a user
       operationId: UserDelete
@@ -1207,6 +1507,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/username/{username}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -1237,6 +1543,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/{user_id}/reset':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -1255,6 +1567,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
 servers:
   - url: https://mantisbt.org/bugs
     description: MantisBT Official Bugtracker
@@ -1289,6 +1607,11 @@ components:
       description: Current entity tag for the issue representation.
       schema:
         type: string
+    WWW-Authenticate:
+      description: Authentication challenge indicating that a bearer API token is accepted.
+      schema:
+        type: string
+        example: Bearer
     X-Mantis-Username:
       description: |-
         The username under which the request was executed.
@@ -1623,6 +1946,17 @@ components:
       additionalProperties: true
     GenericResponse:
       type: object
+      additionalProperties: true
+    Error:
+      type: object
+      description: Standard MantisBT error response.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+        localized:
+          type: boolean
       additionalProperties: true
     ConfigSet:
       type: object
@@ -2159,6 +2493,27 @@ components:
   responses:
     Accepted:
       description: 'Request accepted for moderation'
+    Unauthorized:
+      description: Authentication is required or the supplied API token is invalid.
+      headers:
+        WWW-Authenticate:
+          $ref: '#/components/headers/WWW-Authenticate'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The authenticated user is not authorized for this operation, impersonation, or API access level.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServiceUnavailable:
+      description: MantisBT is in offline mode and cannot process API requests.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Created:
       description: 'Resource created successfully'
       content:
