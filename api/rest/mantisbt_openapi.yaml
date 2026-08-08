@@ -1768,6 +1768,8 @@ components:
     Issue:
       type: object
       properties:
+        id:
+          type: integer
         summary:
           type: string
           example: 'This is a summary'
@@ -1792,6 +1794,16 @@ components:
           $ref: '#/components/schemas/CategoryRef'
         handler:
           $ref: '#/components/schemas/UserRef'
+        reporter:
+          $ref: '#/components/schemas/UserRef'
+        status:
+          $ref: '#/components/schemas/Enum'
+        resolution:
+          $ref: '#/components/schemas/Enum'
+        projection:
+          $ref: '#/components/schemas/Enum'
+        eta:
+          $ref: '#/components/schemas/Enum'
         view_state:
           $ref: '#/components/schemas/ViewStateEnum'
         priority:
@@ -1800,10 +1812,43 @@ components:
           $ref: '#/components/schemas/SeverityEnum'
         reproducibility:
           $ref: '#/components/schemas/ReproducibilityEnum'
+        version:
+          $ref: '#/components/schemas/ProjectRef'
+        fixed_in_version:
+          $ref: '#/components/schemas/ProjectRef'
+        target_version:
+          $ref: '#/components/schemas/ProjectRef'
         sticky:
           type: boolean
           description: |
             sticky issues show at the top of the View Issues page.
+        due_date:
+          type: string
+          format: date
+        date_submitted:
+          type: string
+          format: date-time
+        date_updated:
+          type: string
+          format: date-time
+        os:
+          type: string
+        os_build:
+          type: string
+        build:
+          type: string
+        platform:
+          type: string
+        profile_id:
+          type: integer
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssueNote'
+        monitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
         files:
           type: array
           items:
