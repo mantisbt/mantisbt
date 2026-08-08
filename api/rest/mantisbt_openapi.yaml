@@ -2396,6 +2396,7 @@ components:
                 items:
                   $ref: '#/components/schemas/UserRef'
       description: Users to add as monitors. Omit the body to monitor the authenticated user.
+      required: false
     TokenCreate:
       content:
         application/json:
@@ -2405,6 +2406,7 @@ components:
               name:
                 type: string
       description: Optional token name. The server generates a unique name when omitted.
+      required: false
     IssueNotesAdd:
       content:
         application/json:
