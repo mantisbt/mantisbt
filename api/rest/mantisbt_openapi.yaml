@@ -2703,22 +2703,10 @@ components:
       headers:
         WWW-Authenticate:
           $ref: '#/components/headers/WWW-Authenticate'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Forbidden:
       description: The authenticated user is not authorized for this operation, impersonation, or API access level.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     ServiceUnavailable:
       description: MantisBT is in offline mode and cannot process API requests.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Created:
       description: 'Resource created successfully'
       content:
