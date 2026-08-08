@@ -532,6 +532,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Success'
+        '304':
+          $ref: '#/components/responses/NotModified'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
