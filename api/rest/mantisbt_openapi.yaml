@@ -1568,7 +1568,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
-  '/api/rest/users/{user_id}/reset':
+  '/api/rest/users/{id}/reset':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
     put:
@@ -1578,7 +1578,13 @@ paths:
       tags:
         - 'Users'
       parameters:
-        - $ref: '#/components/parameters/user_id'
+        - name: id
+          in: path
+          schema:
+            type: integer
+            minimum: 1
+          description: The user ID.
+          required: true
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
