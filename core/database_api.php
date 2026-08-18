@@ -1228,7 +1228,7 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 					$t_replace = 'NULL';
 				} else if( is_string( $t_value ) ) {
 					$t_replace = "'" . $t_value . "'";
-				} else if( is_integer( $t_value ) || is_float( $t_value ) ) {
+				} else if( is_int( $t_value ) || is_float( $t_value ) ) {
 					$t_replace = (float)$t_value;
 				} else if( is_bool( $t_value ) ) {
 					# use the actual literal from db driver
