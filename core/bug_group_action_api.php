@@ -173,13 +173,15 @@ function bug_group_action_print_title( $p_action ) {
 }
 
 /**
- * Validates the combination of an action and a bug.  This ends up calling
- * action_<action>_validate() from bug_actiongroup_<action>_inc.php
+ * Validates the combination of an action and a bug.
  *
- * @param string  $p_action The custom action name without the "EXT_" prefix.
- * @param integer $p_bug_id The id of the bug to validate the action on.
+ * This calls action_<action>_validate() from bug_actiongroup_<action>_inc.php
  *
- * @return boolean|array true if action can be applied or array of ( bug_id => reason for failure to validate )
+ * @param string $p_action The custom action name without the "EXT_" prefix.
+ * @param int    $p_bug_id The id of the bug to validate the action on.
+ *
+ * @return null|string null if the action can be applied or a string with the
+ *                     reason for the validation failure.
  */
 function bug_group_action_validate( $p_action, $p_bug_id ) {
 	$t_function_name = 'action_' . $p_action . '_validate';
