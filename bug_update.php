@@ -328,8 +328,9 @@ if( $t_existing_bug->resolution != $t_updated_bug->resolution && (
 	trigger_error( ERROR_INVALID_RESOLUTION, ERROR );
 }
 
-# If version is unreleased, ensure user is allowed to change it.
-if( $t_existing_bug->version != $t_updated_bug->version
+# If version is set and unreleased, ensure user is allowed to change it.
+if( $t_updated_bug->version
+	&& $t_existing_bug->version != $t_updated_bug->version
 	&& !version_is_released( version_get_id( $t_updated_bug->version ) )
 	&& !access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) )
 ) {
