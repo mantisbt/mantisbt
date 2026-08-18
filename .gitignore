@@ -47,6 +47,7 @@ library/disposable
 library/parsedown
 library/phpmailer
 library/securimage
+api/rest/swagger/
 api/rest/generated/
 /node_modules/
 
