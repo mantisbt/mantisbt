@@ -688,6 +688,41 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/move':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
+      - $ref: '#/components/parameters/issue_id'
+    post:
+      summary: Move an issue
+      operationId: IssueMove
+      description: Moves an issue to another project and optionally adds a note.
+      tags:
+        - 'Issues'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [project]
+              properties:
+                project:
+                  $ref: '#/components/schemas/ObjectRef'
+                note:
+                  $ref: '#/components/schemas/IssueNotesAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/files/{file_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
