@@ -477,7 +477,7 @@ function rest_issue_move( Request $p_request, Response $p_response, array $p_arg
 		$t_payload['note']['files'] = files_base64_to_temp( $t_payload['note']['files'] );
 	}
 
-	$t_command = new MoveIssueCommand( array(
+	$t_command = new IssueMoveCommand( array(
 		'query' => array( 'issue_id' => $p_args['id'] ),
 		'payload' => $t_payload,
 	) );

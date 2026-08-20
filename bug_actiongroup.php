@@ -144,7 +144,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 						'note' => array( 'text' => $f_bug_notetext, 'view_state' => array( 'id' => $f_bug_noteprivate ? VS_PRIVATE : VS_PUBLIC ) ),
 					),
 				);
-				( new MoveIssueCommand( $t_data ) )->execute();
+				( new IssueMoveCommand( $t_data ) )->execute();
 			} catch( ClientException $e ) {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
