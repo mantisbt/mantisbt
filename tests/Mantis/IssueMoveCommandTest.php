@@ -5,9 +5,9 @@ namespace Mantis\tests\Mantis;
 use Mantis\Exceptions\ClientException;
 
 /**
- * Tests for MoveIssueCommand.
+ * Tests for IssueMoveCommand.
  */
-class MoveIssueCommandTest extends MantisCoreBase {
+class IssueMoveCommandTest extends MantisCoreBase {
 	private $issue_id;
 	private $source_category_id;
 	private $target_project_id;
@@ -24,7 +24,7 @@ class MoveIssueCommandTest extends MantisCoreBase {
 
 		$this->target_project_id = project_create(
 			__CLASS__ . ' ' . rand( 1, 1000000 ),
-			'Test project for MoveIssueCommand.',
+			'Test project for IssueMoveCommand.',
 			STATUS_RELEASED
 		);
 		$this->source_category_id = category_add( 1, __CLASS__ . ' ' . rand( 1, 1000000 ) );
@@ -35,7 +35,7 @@ class MoveIssueCommandTest extends MantisCoreBase {
 		$t_issue->project_id = 1;
 		$t_issue->category_id = $this->source_category_id;
 		$t_issue->summary = __CLASS__ . ': issue ' . rand( 1, 1000000 );
-		$t_issue->description = 'Issue used by MoveIssueCommand tests.';
+		$t_issue->description = 'Issue used by IssueMoveCommand tests.';
 		$this->issue_id = $t_issue->create();
 	}
 
@@ -63,7 +63,7 @@ class MoveIssueCommandTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testMoveIssueByProjectIdAndAddNote(): void {
-		$t_result = ( new \MoveIssueCommand( array(
+		$t_result = ( new \IssueMoveCommand( array(
 			'query' => array( 'issue_id' => $this->issue_id ),
 			'payload' => array(
 				'project' => array( 'id' => $this->target_project_id ),
@@ -83,7 +83,7 @@ class MoveIssueCommandTest extends MantisCoreBase {
 	 */
 	public function testMoveIssueByTrimmedProjectName(): void {
 		$t_project_name = project_get_name( $this->target_project_id );
-		( new \MoveIssueCommand( array(
+		( new \IssueMoveCommand( array(
 			'query' => array( 'issue_id' => $this->issue_id ),
 			'payload' => array( 'project' => array( 'name' => '  ' . $t_project_name . '  ' ) ),
 		) ) )->execute();
@@ -127,7 +127,7 @@ class MoveIssueCommandTest extends MantisCoreBase {
 		$this->expectException( ClientException::class );
 		$this->expectExceptionMessage( 'already associated' );
 
-		( new \MoveIssueCommand( array(
+		( new \IssueMoveCommand( array(
 			'query' => array( 'issue_id' => $this->issue_id ),
 			'payload' => array( 'project' => array( 'id' => 1 ) ),
 		) ) )->execute();
@@ -228,7 +228,7 @@ class MoveIssueCommandTest extends MantisCoreBase {
 	 */
 	public function testMoveIssueAddsNoteAttachment(): void {
 		$t_file_path = tempnam( sys_get_temp_dir(), 'move-issue-' );
-		file_put_contents( $t_file_path, 'MoveIssueCommand attachment test.' );
+		file_put_contents( $t_file_path, 'IssueMoveCommand attachment test.' );
 
 		try {
 			$this->moveIssueToTarget( array(
@@ -267,7 +267,7 @@ class MoveIssueCommandTest extends MantisCoreBase {
 			$t_payload['note'] = $p_note;
 		}
 
-		return ( new \MoveIssueCommand( array(
+		return ( new \IssueMoveCommand( array(
 			'query' => array( 'issue_id' => $this->issue_id ),
 			'payload' => $t_payload,
 		) ) )->execute();

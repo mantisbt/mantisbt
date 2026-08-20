@@ -32,7 +32,7 @@ use Mantis\Exceptions\ClientException;
  * - payload.project: project object reference (id or name)
  * - payload.note: optional IssueNoteAddCommand payload
  */
-class MoveIssueCommand extends Command {
+class IssueMoveCommand extends Command {
 	/**
 	 * The issue being moved.
 	 *
