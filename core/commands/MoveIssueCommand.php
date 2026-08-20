@@ -129,11 +129,17 @@ class MoveIssueCommand extends Command {
 		helper_call_custom_function( 'issue_update_notify', array( $this->issue_id ) );
 
 		if( !empty( $this->note ) && ( !is_blank( $this->note['text'] ?? '' ) || !empty( $this->note['time_tracking'] ) ) ) {
-			( new IssueNoteAddCommand( array(
+			$t_note_result = ( new IssueNoteAddCommand( array(
 				'query' => array( 'issue_id' => $this->issue_id ),
 				'payload' => $this->note,
 			) ) )->execute();
+
+			$t_note_id = (int)( $t_note_result['id'] ?? 0 );
+		} else {
+			$t_note_id = 0;
 		}
+
+		event_signal( 'EVENT_MOVE_BUG', array( $this->issue_id, $this->source_project_id, $this->target_project_id, $t_note_id ) );
 
 		return array( 'issue_id' => $this->issue_id, 'project_id' => $this->target_project_id );
 	}
