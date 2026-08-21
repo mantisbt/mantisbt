@@ -1,6 +1,6 @@
 {
   "private": true,
   "devDependencies": {
-    "@scalar/api-reference": "1.64.0"
+    "@scalar/api-reference": "^1.64.0"
   }
 }
