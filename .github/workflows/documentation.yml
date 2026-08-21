@@ -73,7 +73,7 @@ jobs:
           test -s "$RUNNER_TEMP/soap-api/index.html"
 
       - name: Upload generated REST API content
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: rest-api-generated-content
           path: |
