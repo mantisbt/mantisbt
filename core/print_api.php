@@ -1930,34 +1930,46 @@ function print_recently_visited() {
 
 /**
  * print a drop down box from input array
+ *
  * @param array        $p_control_array Array of elements in drop down list (name, description).
  * @param string       $p_control_name  Name attribute of <select> box.
  * @param string|array $p_match	        Either a string or an array of selected values.
  * @param boolean      $p_add_any       Whether to display an '[any]' option in the drop down.
  * @param boolean      $p_multiple      Whether drop down list allows multiple values to be selected.
+ * @param boolean      $p_required      Whether user must select a value from the list
+ *                                      (the first item's key in $p_control_array must be empty string)
+ *
  * @return string
  */
-function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $p_add_any = false, $p_multiple = false ) {
+function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $p_add_any = false, $p_multiple = false, $p_required = false ) {
 	if( $p_multiple ) {
 		$t_size = ' size="5"';
-		$t_multiple = ' multiple="multiple"';
+		$t_multiple = ' multiple';
 	} else {
 		$t_size = '';
 		$t_multiple = '';
 	}
-	$t_info = sprintf( '<select class="input-sm" %s name="%s" id="%s"%s>', $t_multiple, $p_control_name, $p_control_name, $t_size );
+	$t_required = $p_required ? ' required' : '';
+	/** @noinspection HtmlUnknownAttribute */
+	$t_info = sprintf( '<select class="input-sm" name="%1$s" id="%1$s"%2$s%3$s%4$s data-arbitrary-dates="%5$s">',
+		$p_control_name,
+		$t_required,
+		$t_multiple,
+		$t_size,
+		Period::PERIOD_ARBITRARY_DATES
+	);
 	if( $p_add_any ) {
-		array_unshift( $p_control_array, [ META_FILTER_ANY => '[any]' ] );
+		array_unshift( $p_control_array, [ META_FILTER_ANY => '[' . lang_get( 'any' ) . ']' ] );
 	}
 	foreach ( $p_control_array as $t_name => $t_desc ) {
 		$t_sel = '';
 		if( is_array( $p_match ) ) {
 			if( in_array( $t_name, array_values( $p_match ) ) || in_array( $t_desc, array_values( $p_match ) ) ) {
-				$t_sel = ' selected="selected"';
+				$t_sel = ' selected';
 			}
 		} else {
 			if( ( $t_name === $p_match ) || ( $t_desc === $p_match ) ) {
-				$t_sel = ' selected="selected"';
+				$t_sel = ' selected';
 			}
 		}
 		$t_info .= sprintf( '<option%s value="%s">%s</option>', $t_sel, $t_name, $t_desc );
