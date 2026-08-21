@@ -14,6 +14,13 @@ updates:
     versions:
     - ">= 1.7.2.a, < 1.7.3"
 
+  # Check for npm updates
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 10
+
 # Check for GitHub Actions updates every month
 - package-ecosystem: github-actions
   directory: "/"
