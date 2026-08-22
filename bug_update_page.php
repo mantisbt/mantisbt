@@ -70,8 +70,6 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'version_api.php' );
 
-require_css( 'status_config.php' );
-
 $f_bug_id = gpc_get_int( 'bug_id' );
 $f_reporter_edit = gpc_get_bool( 'reporter_edit' );
 

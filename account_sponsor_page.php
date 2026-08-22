@@ -76,8 +76,6 @@ require_api( 'sponsorship_api.php' );
 require_api( 'string_api.php' );
 require_api( 'version_api.php' );
 
-require_css( 'status_config.php' );
-
 if( !config_get( 'enable_sponsorship' ) ) {
 	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
 }
@@ -99,14 +97,19 @@ $t_project = helper_get_current_project();
 print_account_menu( 'account_sponsor_page.php' );
 
 ?>
-<br />
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="bold">
-		<?php echo lang_get( 'my_sponsorship' ) ?>
-	</td>
-</tr>
-</table>
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+
+<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<?php print_icon( 'fa-money', 'ace-icon' ); ?>
+			<?php echo lang_get( 'my_sponsorship' ) ?>
+		</h4>
+	</div>
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
 <?php
 # get issues user has sponsored
 $t_user = auth_get_current_user_id();
@@ -131,24 +134,23 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 
 $t_sponsor_count = count( $t_sponsors );
 if( $t_sponsor_count === 0 ) {
-	echo '<p>' . lang_get( 'no_own_sponsored' ) . '</p>';
+	echo '<div class="well">' . lang_get( 'no_own_sponsored' ) . '</div>';
 } else {
 ?>
 
 <!-- # Edit own sponsorship Form BEGIN -->
-<br />
 <div>
-<table class="width100" cellspacing="1">
+<table class="table table-bordered table-condensed">
 	<colgroup>
-		<col style="width:10%" />
-		<col style="width:8%" />
-		<col style="width:7%" />
-		<col style="width:10%" />
-		<col style="width:10%" />
-		<col style="width:30%" />
-		<col style="width:8%" />
-		<col style="width:7%" />
-		<col style="width:10%" />
+		<col class="col-md-1">
+		<col class="col-md-1">
+		<col class="col-md-1">
+		<col class="col-md-1">
+		<col>
+		<col class="col-md-1">
+		<col class="col-md-1">
+		<col class="col-md-1">
+		<col class="col-md-1">
 	</colgroup>
 	<!-- Headings -->
 	<tr>
@@ -157,15 +159,14 @@ if( $t_sponsor_count === 0 ) {
 		</td>
 	</tr>
 	<tr>
-		<td class="form-title"><?php echo lang_get( 'email_bug' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'email_project' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'fixed_in_version' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'email_status' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'email_handler' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'email_summary' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'amount' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'status' ) ?></td>
-		<td class="form-title">&#160;</td>
+		<th class="small-caption category"><?php echo lang_get( 'email_bug' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'email_project' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'fixed_in_version' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'email_status' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'email_summary' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'email_handler' ) ?></th>
+		<th class="small-caption category center"><?php echo lang_get( 'amount' ) ?></th>
+		<th class="small-caption category center" colspan="2"><?php echo lang_get( 'status' ) ?></th>
 	</tr>
 <?php
 	$t_total_owing = 0;
@@ -193,9 +194,6 @@ if( $t_sponsor_count === 0 ) {
 		echo '<td>' . string_attribute( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
 		echo '<td>' . $t_released_label . '&#160;</td>';
 		echo '<td><span class="issue-status" title="' . $t_resolution . '">' . $t_status . '</span></td>';
-		echo '<td>';
-		print_user( $t_bug->handler_id );
-		echo '</td>';
 
 		# summary
 		echo '<td>' . string_display_line( $t_bug->summary );
@@ -204,9 +202,12 @@ if( $t_sponsor_count === 0 ) {
 			print_icon( 'fa-lock', '', lang_get( 'private' ) );
 		}
 		echo '</td>';
+		echo '<td>';
+		print_user( $t_bug->handler_id );
+		echo '</td>';
 
 		# describe sponsorship amount
-		echo '<td class="pull-right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
+		echo '<td class="center">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
 		echo '<td>' . get_enum_element( 'sponsorship', $t_sponsor->paid ) . '</td>';
 
 		if( SPONSORSHIP_PAID == $t_sponsor->paid ) {
@@ -229,13 +230,13 @@ if( $t_sponsor_count === 0 ) {
 <tr>
 	<td colspan="5"></td>
 	<td><?php echo lang_get( 'total_owing' ) ?></td>
-	<td class="pull-right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
+	<td class="center"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
 	<td colspan="2"></td>
 </tr>
 <tr>
 	<td colspan="5"></td>
 	<td><?php echo lang_get( 'total_paid' ) ?></td>
-	<td class="pull-right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
+	<td class="center"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
 	<td colspan="2"></td>
 </tr>
 </table>
@@ -258,25 +259,24 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 
 $t_sponsor_count = count( $t_sponsors );
 if( $t_sponsor_count === 0 ) {
-	echo '<p>' . lang_get( 'no_sponsored' ) . '</p>';
+	echo '<div class="well">' . lang_get( 'no_sponsored' ) . '</div>';
 } else {
 ?>
 
 <!-- # Edit sponsorship Form BEGIN -->
-<br />
 <div>
 <form method="post" action="account_sponsor_update.php">
 <?php echo form_security_field( 'account_sponsor_update' ) ?>
-<table class="width100" cellspacing="1">
+<table class="table table-bordered table-condensed">
 	<colgroup>
-		<col style="width:10%" />
-		<col style="width:8%" />
-		<col style="width:7%" />
-		<col style="width:10%" />
-		<col style="width:35%" />
-		<col style="width:10%" />
-		<col style="width:10%" />
-		<col style="width:10%" />
+		<col class="col-md-1">
+		<col class="col-md-1">
+		<col class="col-md-1">
+		<col class="col-md-1">
+		<col>
+		<col class="col-md-1">
+		<col class="col-md-1">
+		<col class="col-md-2">
 	</colgroup>
 	<!-- Headings -->
 	<tr>
@@ -285,14 +285,14 @@ if( $t_sponsor_count === 0 ) {
 		</td>
 	</tr>
 	<tr>
-		<td class="form-title"><?php echo lang_get( 'email_bug' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'email_project' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'fixed_in_version' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'email_status' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'email_summary' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'sponsor' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'amount' ) ?></td>
-		<td class="form-title"><?php echo lang_get( 'status' ) ?></td>
+		<th class="small-caption category"><?php echo lang_get( 'email_bug' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'email_project' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'fixed_in_version' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'email_status' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'email_summary' ) ?></th>
+		<th class="small-caption category"><?php echo lang_get( 'sponsor' ) ?></th>
+		<th class="small-caption category center"><?php echo lang_get( 'amount' ) ?></th>
+		<th class="small-caption category center"><?php echo lang_get( 'status' ) ?></th>
 	</tr>
 <?php
 	$t_bug_list = array();
@@ -334,8 +334,8 @@ if( $t_sponsor_count === 0 ) {
 		echo '<td>';
 		print_user( $t_sponsor->user_id );
 		echo '</td>';
-		echo '<td>' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
-		echo '<td><select class="input-sm" name="sponsor_' . $t_row['bug'] . '_' . $t_sponsor->id . '">';
+		echo '<td class="center">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
+		echo '<td class="center"><select class="input-sm" name="sponsor_' . $t_sponsor_row['bug'] . '_' . $t_sponsor->id . '">';
 		print_enum_string_option_list( 'sponsorship', $t_sponsor->paid );
 		echo '</select></td>';
 
@@ -353,22 +353,22 @@ if( $t_sponsor_count === 0 ) {
 <tr>
 	<td colspan="5"></td>
 	<td><?php echo lang_get( 'total_owing' ) ?></td>
-	<td class="pull-right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
+	<td class="center"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
 	<td></td>
 </tr>
 <tr>
 	<td colspan="5"></td>
 	<td><?php echo lang_get( 'total_paid' ) ?></td>
-	<td class="pull-right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
+	<td class="center"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
 	<td></td>
 </tr>
 	<!-- BUTTONS -->
 	<tr>
-		<td colspan="5">&#160;</td>
+		<td colspan="7">&#160;</td>
 		<!-- Update Button -->
-		<td colspan="3">
-			<input type="hidden" name="buglist" value="<?php echo $t_hidden_bug_list ?>" />
-			<input type="submit" class="button" value="<?php echo lang_get( 'update_sponsorship_button' ) ?>" />
+		<td class="center">
+			<input type="hidden" name="buglist" value="<?php echo $t_hidden_bug_list ?>">
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'update_sponsorship_button' ) ?>">
 		</td>
 	</tr>
 </table>
@@ -376,13 +376,18 @@ if( $t_sponsor_count === 0 ) {
 </div>
 <?php } # end sponsored issues ?>
 
-<br />
-<div>
+<div class="widget-toolbox padding-8 clearfix">
 <?php
 html_button( 'account_sponsor_page.php',
 	lang_get( ( $t_show_all ? 'sponsor_hide' : 'sponsor_show' ) ),
 	array( 'show_all' => ( $t_show_all ? 0 : 1 ) ) );
 ?>
+</div>
+
+</div>
+</div>
+</div>
+</div>
 </div>
 
 <?php
