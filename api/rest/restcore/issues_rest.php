@@ -77,6 +77,8 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->get( '/{id}/files', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}/', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}', 'rest_issue_files_get' );
+	$g_app->delete( '/{id}/files/{file_id}/', 'rest_issue_file_delete' );
+	$g_app->delete( '/{id}/files/{file_id}', 'rest_issue_file_delete' );
 });
 
 /**
@@ -578,6 +580,33 @@ function rest_issue_files_get( Request $p_request, Response $p_response, array $
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->
 		withJson( array( 'files' => $t_files ) );
+}
+
+/**
+ * Delete a file associated with an issue.
+ *
+ * @param Request  $p_request The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args Route arguments.
+ *
+ * @return Response The augmented response.
+ * @throws ClientException
+ */
+function rest_issue_file_delete( Request $p_request, Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'];
+	$t_file_id = $p_args['file_id'];
+
+	$t_command = new IssueFileDeleteCommand( array(
+		'query' => array(
+			'issue_id' => $t_issue_id,
+			'file_id' => $t_file_id,
+		)
+	) );
+	$t_command->execute();
+
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )
+		->withJson( array( 'issue' => $t_issue ) );
 }
 
 /**
