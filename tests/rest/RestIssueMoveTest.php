@@ -46,7 +46,7 @@ class RestIssueMoveTest extends RestBase {
 		$this->target_project_id = project_create(
 			__CLASS__ . ' ' . rand( 1, 1000000 ),
 			'Test project for the issue move REST API.',
-			STATUS_RELEASED
+			30 # release
 		);
 
 		$t_response = $this->builder()->post( '/issues', $this->getIssueToAdd() )->send();
@@ -83,5 +83,31 @@ class RestIssueMoveTest extends RestBase {
 
 		$this->assertSame( $this->issue_id, (int)$t_issue->id );
 		$this->assertSame( $this->target_project_id, (int)$t_issue->project->id );
+	}
+
+	/**
+	 * Moves an issue and adds a private note through the REST API.
+	 *
+	 * @return void
+	 */
+	public function testMoveIssueWithPrivateNote(): void {
+		$t_response = $this->builder()->post(
+			'/issues/' . $this->issue_id . '/move',
+			array(
+				'project' => array( 'id' => $this->target_project_id ),
+				'note' => array(
+					'text' => 'Private REST move note.',
+					'view_state' => array( 'id' => VS_PRIVATE ),
+				),
+			)
+		)->send();
+
+		$t_issue = $this->getJson( $t_response, HTTP_STATUS_SUCCESS )->issue;
+		$t_note_id = bugnote_get_latest_id( $this->issue_id );
+
+		$this->assertSame( $this->issue_id, (int)$t_issue->id );
+		$this->assertSame( $this->target_project_id, (int)$t_issue->project->id );
+		$this->assertSame( VS_PRIVATE, (int)bugnote_get_field( $t_note_id, 'view_state' ) );
+		$this->assertSame( 'Private REST move note.', bugnote_get_text( $t_note_id ) );
 	}
 }

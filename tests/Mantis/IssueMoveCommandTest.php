@@ -43,7 +43,7 @@ class IssueMoveCommandTest extends MantisCoreBase {
 		$this->target_project_id = project_create(
 			__CLASS__ . ' ' . rand( 1, 1000000 ),
 			'Test project for IssueMoveCommand.',
-			STATUS_RELEASED
+			30 # release
 		);
 		$this->source_category_id = category_add( 1, __CLASS__ . ' ' . rand( 1, 1000000 ) );
 		$t_category_name = category_get_field( $this->source_category_id, 'name' );
@@ -91,7 +91,9 @@ class IssueMoveCommandTest extends MantisCoreBase {
 
 		$this->assertSame( $this->target_project_id, $t_result['project_id'] );
 		$this->assertSame( $this->target_project_id, (int)bug_get_field( $this->issue_id, 'project_id' ) );
-		$this->assertStringContainsString( 'Moved by command.', bugnote_get_text( bugnote_get_latest_id( $this->issue_id ) ) );
+		$t_note_id = bugnote_get_latest_id( $this->issue_id );
+		$this->assertStringContainsString( 'Moved by command.', bugnote_get_text( $t_note_id ) );
+		$this->assertMoveHistory( $t_note_id );
 	}
 
 	/**
@@ -237,6 +239,7 @@ class IssueMoveCommandTest extends MantisCoreBase {
 
 		$t_note_id = bugnote_get_latest_id( $this->issue_id );
 		$this->assertSame( VS_PRIVATE, (int)bugnote_get_field( $t_note_id, 'view_state' ) );
+		$this->assertMoveHistory( $t_note_id );
 	}
 
 	/**
@@ -289,5 +292,33 @@ class IssueMoveCommandTest extends MantisCoreBase {
 			'query' => array( 'issue_id' => $this->issue_id ),
 			'payload' => $t_payload,
 		) ) )->execute();
+	}
+
+	/**
+	 * Verifies the history entries created by a move with a note.
+	 *
+	 * @param int $p_note_id Added note identifier.
+	 * @return void
+	 */
+	private function assertMoveHistory( int $p_note_id ): void {
+		$t_history = history_get_raw_events_array( $this->issue_id );
+		$t_project_history = array_values( array_filter(
+			$t_history,
+			function( $p_event ) {
+				return $p_event['field'] === 'project_id';
+			}
+		) );
+		$this->assertCount( 1, $t_project_history );
+		$this->assertSame( 1, (int)$t_project_history[0]['old_value'] );
+		$this->assertSame( $this->target_project_id, (int)$t_project_history[0]['new_value'] );
+
+		$t_note_history = array_values( array_filter(
+			$t_history,
+			function( $p_event ) {
+				return (int)$p_event['type'] === BUGNOTE_ADDED;
+			}
+		) );
+		$this->assertCount( 1, $t_note_history );
+		$this->assertSame( bugnote_format_id( $p_note_id ), $t_note_history[0]['old_value'] );
 	}
 }
