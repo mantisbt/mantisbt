@@ -63,12 +63,6 @@ if( $f_copy_from ) {
 	trigger_error( ERROR_NO_COPY_ACTION, ERROR );
 }
 
-# We should check both since we are in the project section and an
-#  admin might raise the first threshold and not realize they need
-#  to raise the second
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_dst_project_id );
-access_ensure_project_level( config_get( 'project_user_threshold' ), $t_dst_project_id );
-
 $t_access_level_limit = access_get_project_level( $t_dst_project_id );
 $t_rows = project_get_local_user_rows( $t_src_project_id );
 foreach( $t_rows as $t_row ) {
