@@ -474,7 +474,7 @@ function auth_auto_create_user( $p_username, $p_password ) {
 
 	if( $t_auto_create ) {
 		# attempt to create the user
-		$t_cookie_string = user_create( $p_username, md5( $p_password ) );
+		$t_cookie_string = user_create( $p_username, auth_generate_no_login_password() );
 		if( $t_cookie_string === false ) {
 			# it didn't work
 			return false;
@@ -916,6 +916,30 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
  */
 function auth_generate_random_password() {
 	return crypto_generate_uri_safe_nonce( 16 );
+}
+
+/**
+ * Generate a random string to use when we should not store the actual password.
+ * When relying on an external authentication system (e.g. LDAP), we should not
+ * store the user's password for security reasons. To avoid creating another
+ * security hole by populating the password field with a known value, we use a
+ * random string that can be identified as a 'no-login' password by its prefix.
+ * @return string Random password, prefixed by '!'
+ * @access public
+ */
+function auth_generate_no_login_password() {
+	return '!' . crypto_generate_strong_random_string( 31 );
+}
+
+/**
+ * Determine whether the given string is a 'no-login' password.
+ * @see auth_generate_no_login_password()
+ * @param string
+ * @return boolean true if the string is a 'no-login' password, false otherwise
+ * @access public
+ */
+function auth_is_no_login_password( $p_password ) {
+	return $p_password != '' && $p_password[0] == '!';
 }
 
 /**
