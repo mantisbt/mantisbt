@@ -351,7 +351,7 @@ class BugData {
 				if( !$this->loading && $this->$p_name != $p_value ) {
 					# Only set target_version if user has access to do so
 					if( !access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
-						trigger_error( ERROR_ACCESS_DENIED, ERROR );
+						throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
 					}
 				}
 				break;
@@ -486,8 +486,10 @@ class BugData {
 	public function validate( $p_update_extended = true ) {
 		# Summary cannot be blank
 		if( is_blank( $this->summary ) ) {
-			error_parameters( lang_get( 'summary' ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			throw new ClientException( "Summary cannot be empty",
+				ERROR_EMPTY_FIELD,
+				[ lang_get( 'summary' ) ]
+			);
 		}
 
 		if( mb_strlen( $this->summary ) > DB_FIELD_SIZE_BUG_SUMMARY ) {
@@ -501,8 +503,10 @@ class BugData {
 		if( $p_update_extended ) {
 			# Description field cannot be empty
 			if( is_blank( $this->description ) ) {
-				error_parameters( lang_get( 'description' ) );
-				trigger_error( ERROR_EMPTY_FIELD, ERROR );
+				throw new ClientException( "Description cannot be empty",
+					ERROR_EMPTY_FIELD,
+					[ lang_get( 'description' ) ]
+				);
 			}
 
 			helper_ensure_longtext_length_valid( $this->description, 'description' );
@@ -512,8 +516,10 @@ class BugData {
 
 		# Make sure a category is set
 		if( 0 == $this->category_id && !config_get( 'allow_no_category' ) ) {
-			error_parameters( lang_get( 'category' ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			throw new ClientException( "Category cannot be empty",
+				ERROR_EMPTY_FIELD,
+				[ lang_get( 'category' ) ]
+			);
 		}
 
 		# Ensure that category id is a valid category
@@ -522,7 +528,7 @@ class BugData {
 		}
 
 		if( !is_blank( $this->duplicate_id ) && ( $this->duplicate_id != 0 ) && ( $this->id == $this->duplicate_id ) ) {
-			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
+			throw new ClientException( "Issue can't duplicate itself", ERROR_BUG_DUPLICATE_SELF );
 			# never returns
 		}
 	}
@@ -2004,7 +2010,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'date_submitted':
 		case 'due_date':
 			if( !is_numeric( $p_value ) ) {
-				trigger_error( ERROR_GENERIC, ERROR );
+				throw new ClientException( "Invalid date", ERROR_GPC_NOT_NUMBER, [$p_field_name] );
 			}
 			$c_value = $p_value;
 			break;
@@ -2070,10 +2076,10 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		# The new handler is checked at project level
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $p_user_id ) ) {
-			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
+			throw new ClientException( "Access denied", ERROR_HANDLER_ACCESS_TOO_LOW );
 		}
 		if( $t_bug_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ), $t_project_id, $p_user_id ) ) {
-			trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
+			throw new ClientException( "Access denied", ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
 		}
 	}
 
@@ -2178,7 +2184,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
 		if( $p_bug_id == $p_duplicate_id ) {
-			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
+			throw new ClientException( "Issue can't duplicate itself", ERROR_BUG_DUPLICATE_SELF );
 
 			# never returns
 		}

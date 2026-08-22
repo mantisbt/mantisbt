@@ -34,6 +34,7 @@
  * @uses http_api.php
  * @uses utility_api.php
  *
+ * Unhandled exceptions will be caught by the default error handler
  * @noinspection PhpUnhandledExceptionInspection
  * @noinspection PhpUnused
  */
@@ -44,6 +45,8 @@ const DISABLE_INLINE_ERROR_REPORTING = true;
 # Suppress headers as we will send our own later
 $g_bypass_headers = true;
 const COMPRESSION_DISABLED = true;
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -74,7 +77,7 @@ if( $f_show_inline ) {
 	# makes the assumption that they've been sent already).
 	if( !@form_security_validate( 'file_show_inline' ) ) {
 		http_all_headers();
-		trigger_error( ERROR_FORM_TOKEN_INVALID, ERROR );
+		throw new ClientException( "Invalid token", ERROR_FORM_TOKEN_INVALID );
 	}
 }
 
@@ -99,9 +102,10 @@ switch( $f_type ) {
 $t_result = db_query( $t_query, array( $c_file_id ) );
 $t_row = db_fetch_array( $t_result );
 if( false === $t_row ) {
-	# Attachment not found
-	error_parameters( $c_file_id );
-	trigger_error( ERROR_FILE_NOT_FOUND, ERROR );
+	throw new ClientException( "Attachment not found",
+		ERROR_FILE_NOT_FOUND,
+		[ $c_file_id ]
+	);
 }
 /**
  * @var int    $v_bug_id
@@ -174,8 +178,7 @@ switch( $t_upload_method ) {
 		$t_file_info_type = file_get_mime_type_for_content( $v_content );
 		break;
 	default:
-		trigger_error( ERROR_GENERIC, ERROR );
-
+		throw new ClientException( "Unknown upload method", ERROR_GENERIC );
 }
 
 if( $t_file_info_type !== false ) {

@@ -32,6 +32,8 @@
  * @uses http_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
@@ -48,6 +50,7 @@ require_api( 'http_api.php' );
  * @param string $p_var_name Variable name.
  * @param mixed  $p_default  Default value.
  * @return null|string
+ * @throws ClientException
  */
 function gpc_get( $p_var_name, $p_default = null ) {
 	if( isset( $_POST[$p_var_name] ) ) {
@@ -58,9 +61,10 @@ function gpc_get( $p_var_name, $p_default = null ) {
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
 	} else {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
-		$t_result = null;
+		throw new ClientException( "Required parameter '$p_var_name' missing",
+			ERROR_GPC_VAR_NOT_FOUND,
+			[ $p_var_name ]
+		);
 	}
 
 	return $t_result;
@@ -88,6 +92,7 @@ function gpc_isset( $p_var_name ) {
  * @param string $p_var_name Variable name to retrieve.
  * @param string $p_default  Default value of the string if not set(optional).
  * @return string|null
+ * @throws ClientException
  */
 function gpc_get_string( $p_var_name, $p_default = null ) {
 	# Don't pass along a default unless one was given to us
@@ -96,8 +101,11 @@ function gpc_get_string( $p_var_name, $p_default = null ) {
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	if( is_array( $t_result ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
+		throw new ClientException(
+			"String expected for '$p_var_name', got array",
+			ERROR_GPC_ARRAY_UNEXPECTED,
+			[ $p_var_name ]
+		);
 	}
 
 	if( $t_result === null ) {
@@ -122,13 +130,19 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	if( is_array( $t_result ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
+		throw new ClientException(
+			"Integer expected for '$p_var_name', got array",
+			ERROR_GPC_ARRAY_UNEXPECTED,
+			[ $p_var_name ]
+		);
 	}
 	$t_val = trim( (string)$t_result );
 	if( !preg_match( '/^-?[0-9]*$/', $t_val ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_NOT_NUMBER, ERROR );
+		throw new ClientException(
+			"Integer expected for '$p_var_name'",
+			ERROR_GPC_NOT_NUMBER,
+			[ $p_var_name ]
+		);
 	}
 
 	return (int)$t_val;
@@ -148,8 +162,11 @@ function gpc_get_bool( $p_var_name, $p_default = false ) {
 		return (bool)$p_default;
 	} else {
 		if( is_array( $t_result ) ) {
-			error_parameters( $p_var_name );
-			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
+			throw new ClientException(
+				"Boolean expected for '$p_var_name', got array",
+				ERROR_GPC_ARRAY_UNEXPECTED,
+				[ $p_var_name ]
+			);
 		}
 
 		return gpc_string_to_bool( $t_result );
@@ -236,6 +253,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
  * @param array  $p_default  Default value of the string array if not set.
  *
  * @return array
+ * @throws ClientException
  */
 function gpc_get_string_array( string $p_var_name, array $p_default = [] ): array {
 	# Don't pass along a default unless one was given to us
@@ -245,8 +263,11 @@ function gpc_get_string_array( string $p_var_name, array $p_default = [] ): arra
 
 	# If the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
+		throw new ClientException(
+			"Array expected for '$p_var_name'",
+			ERROR_GPC_ARRAY_EXPECTED,
+			[ $p_var_name ]
+		);
 	}
 
 	if( !is_array( $t_result ) ) {
@@ -273,6 +294,7 @@ function gpc_get_string_array( string $p_var_name, array $p_default = [] ): arra
  * @param array  $p_default  Default value of the integer array if not set.
  *
  * @return array
+ * @throws ClientException
  */
 function gpc_get_int_array( string $p_var_name, array $p_default = [] ): array {
 	# Don't pass along a default unless one was given to us
@@ -282,8 +304,11 @@ function gpc_get_int_array( string $p_var_name, array $p_default = [] ): array {
 
 	# If the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
+		throw new ClientException(
+			"Array expected for '$p_var_name'",
+			ERROR_GPC_ARRAY_EXPECTED,
+			[ $p_var_name ]
+		);
 	}
 	if( is_array( $t_result ) ) {
 		foreach( $t_result as $t_key => $t_value ) {
@@ -304,6 +329,7 @@ function gpc_get_int_array( string $p_var_name, array $p_default = [] ): array {
  * @param array  $p_default  Default value of the boolean array if not set.
  *
  * @return array
+ * @throws ClientException
  */
 function gpc_get_bool_array( string $p_var_name, array $p_default = [] ): array {
 	# Don't pass along a default unless one was given to us
@@ -313,8 +339,11 @@ function gpc_get_bool_array( string $p_var_name, array $p_default = [] ): array 
 
 	# If the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
+		throw new ClientException(
+			"Array expected for '$p_var_name'",
+			ERROR_GPC_ARRAY_EXPECTED,
+			[ $p_var_name ]
+		);
 	}
 
 	if( is_array( $t_result ) ) {
@@ -333,6 +362,7 @@ function gpc_get_bool_array( string $p_var_name, array $p_default = [] ): array 
  * @param string $p_var_name Variable name to retrieve.
  * @param string $p_default  Default value if not set.
  * @return string
+ * @throws ClientException
  */
 function gpc_get_cookie( $p_var_name, $p_default = null ) {
 	if( isset( $_COOKIE[$p_var_name] ) ) {
@@ -341,11 +371,13 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
 	} else {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Required parameter '$p_var_name' not found",
+			ERROR_GPC_VAR_NOT_FOUND,
+			[ $p_var_name ]
+		);
 	}
 
-	/** @noinspection PhpUndefinedVariableInspection */
 	return $t_result;
 }
 
@@ -452,6 +484,7 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null, $p_samesit
  * @param string $p_var_name Variable name.
  * @param mixed  $p_default  Default value.
  * @return mixed
+ * @throws ClientException
  */
 function gpc_get_file( $p_var_name, $p_default = null ) {
 	if( isset( $_FILES[$p_var_name] ) ) {
@@ -461,11 +494,13 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
 	} else {
-		error_parameters( $p_var_name );
-		trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Required parameter '$p_var_name' not found",
+			ERROR_GPC_VAR_NOT_FOUND,
+			[ $p_var_name ]
+		);
 	}
 
-	/** @noinspection PhpUndefinedVariableInspection */
 	return $t_result;
 }
 

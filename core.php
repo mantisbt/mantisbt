@@ -455,7 +455,7 @@ function autoload_mantis( $p_class ) {
 	}
 
 	# Exceptions
-	if( substr( $p_class, -9 ) === 'Exception' ) {
+	if( substr( $p_class, -9 ) === 'Exception' || substr( $p_class, -5 ) === 'Trait' ) {
 		$t_require_path = $g_core_path . 'exceptions/' . $p_class . '.php';
 		if( file_exists( $t_require_path ) ) {
 			require_once( $t_require_path );

@@ -32,6 +32,8 @@ header( 'Content-type: ' );
 
 const DISABLE_INLINE_ERROR_REPORTING = true;
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -53,7 +55,7 @@ $t_regex = '/^'
 
 if( !preg_match( $t_regex, $f_file, $t_matches ) ) {
 	error_parameters( $f_file );
-	trigger_error( ERROR_PLUGIN_INVALID_FILE, ERROR );
+	throw new ClientException( "YYYY", ERROR_PLUGIN_INVALID_FILE );
 }
 
 $t_basename = $t_matches[1];

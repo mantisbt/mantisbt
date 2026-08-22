@@ -37,6 +37,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -61,7 +63,7 @@ $f_user_id = gpc_get_int( 'id', auth_get_current_user_id() );
 $t_row = user_get_row( $f_user_id );
 if( !$t_row ) {
 	error_parameters( $f_user_id );
-	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+	throw new ClientException( "YYYY", ERROR_USER_BY_ID_NOT_FOUND );
 }
 
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );

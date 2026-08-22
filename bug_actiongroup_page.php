@@ -40,7 +40,12 @@
  * @uses string_api.php
  * @uses utility_api.php
  * @uses version_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -258,7 +263,7 @@ switch( $f_action ) {
 		$t_event_params['custom_field_id'] = $t_custom_field_id;
 		break;
 	default:
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new ClientException( "Unknown Group action", ERROR_GENERIC );
 }
 $t_event_params['has_bugnote'] = $t_bugnote;
 

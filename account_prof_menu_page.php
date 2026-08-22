@@ -36,7 +36,12 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses profile_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -51,7 +56,7 @@ require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
 if( !config_get( 'enable_profiles' ) ) {
-	trigger_error( ERROR_ACCESS_DENIED, ERROR );
+	throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
 }
 
 if( isset( $g_global_profiles ) ) {

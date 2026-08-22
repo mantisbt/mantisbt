@@ -34,7 +34,12 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -60,8 +65,10 @@ $f_assigned_to     = gpc_get_int( 'assigned_to', 0 );
 $f_status          = (int)gpc_get_bool( 'status', CATEGORY_STATUS_DISABLED );
 
 if( is_blank( $f_name ) ) {
-	error_parameters( 'name' );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Category name is required",
+		ERROR_EMPTY_FIELD,
+		[ 'name' ]
+	);
 }
 
 $t_row = category_get_row( $f_category_id );

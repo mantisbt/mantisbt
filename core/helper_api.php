@@ -188,13 +188,19 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
  * @param mixed   $p_var2   The second variable to compare.
  * @param boolean $p_strict Set to true for strict type checking, false for loose.
  * @return boolean
+ * @throws ClientException
  */
 function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
 	if( $p_strict ) {
-		if( gettype( $p_var1 ) !== gettype( $p_var2 ) ) {
+		$t_type1 = gettype( $p_var1 );
+		$t_type2 = gettype( $p_var2 );
+		if( $t_type1 !== $t_type2 ) {
 			# Reaching this point is a a sign that you need to check the types
 			# of the parameters passed to this function. They should match.
-			trigger_error( ERROR_TYPE_MISMATCH, ERROR );
+			throw new ClientException(
+				"Type mismatch: var1 ($t_type1) vs var2 ($t_type2)",
+				ERROR_TYPE_MISMATCH
+			);
 		}
 
 		# We need to be careful when comparing an array of
@@ -770,6 +776,7 @@ function helper_url_combine( string $p_page, $p_query_string ): string {
  *                                  possible values: 'user', 'project', 'lang'
  * @param string $p_custom_string   Additional string provided by the caller
  * @return string                   A hashed md5 string
+ * @throws Exception
  */
 function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_string = '' ) {
 	# always add core version, to force reload of resources after an upgrade.
@@ -787,7 +794,7 @@ function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_strin
 				$t_key .= '+L' . lang_get_current();
 				break;
 			default:
-				trigger_error( ERROR_GENERIC, ERROR );
+				throw new Exception( "Invalid cache key type '$t_attr'" );
 		}
 	}
 	return md5( $t_key );

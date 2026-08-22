@@ -43,6 +43,8 @@
  * @uses string_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
@@ -459,10 +461,13 @@ function column_get_title( $p_column ) {
 /**
  * Checks an array of columns for duplicate or invalid fields.
  *
- * @param string $p_field_name          The logic name of the array being validated.  Used when triggering errors.
+ * @param string $p_field_name          The logical name of the array being validated.
+ *                                      Used when triggering errors.
  * @param array  $p_columns_to_validate The array of columns to validate.
  * @param array  $p_columns_all         The list of all valid columns.
- * @return boolean
+ *
+ * @return bool
+ * @throws ClientException
  * @access public
  */
 function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, array $p_columns_all ) {
@@ -471,9 +476,11 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
 	# Check for invalid fields
 	foreach( $p_columns_to_validate as $t_column ) {
 		if( !in_array( mb_strtolower( $t_column ), $t_columns_all_lower ) ) {
-			error_parameters( $p_field_name, $t_column );
-			trigger_error( ERROR_COLUMNS_INVALID, ERROR );
-			return false;
+			$t_localized_field = lang_get( $p_field_name . '_columns_title' );
+			throw new ClientException( "Invalid column",
+				ERROR_COLUMNS_INVALID,
+				[ $t_localized_field, $t_column ]
+			);
 		}
 	}
 
@@ -482,8 +489,11 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
 	foreach( $p_columns_to_validate as $t_column ) {
 		$t_column_lower = mb_strtolower( $t_column );
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
-			error_parameters( $p_field_name, $t_column );
-			trigger_error( ERROR_COLUMNS_DUPLICATE, ERROR );
+			$t_localized_field = lang_get( $p_field_name . '_columns_title' );
+			throw new ClientException( "Duplicate column",
+				ERROR_COLUMNS_DUPLICATE,
+				[ $t_localized_field, $t_column ]
+			);
 		} else {
 			$t_columns_no_duplicates[] = $t_column_lower;
 		}

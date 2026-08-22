@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * XmlImportExportPlugin Class
  */
@@ -89,16 +91,21 @@ class XmlImportExportPlugin extends MantisPlugin {
 	}
 
 	/**
-	 * Plugin Installation
-	 * @return boolean
+	 * Plugin Installation.
+	 *
+	 * @return bool
+	 * @throws ClientException
 	 */
 	function install() {
 		$t_result = extension_loaded( 'xmlreader' ) && extension_loaded( 'xmlwriter' );
 		if( !$t_result ) {
 			# @todo returning false should trigger some error reporting, needs rethinking error_api
-			error_parameters( plugin_lang_get( 'error_no_xml' ) );
-			trigger_error( ERROR_PLUGIN_INSTALL_FAILED, ERROR );
+			throw new ClientException(
+				"xmlreader and/or xmlwriter extensions missing",
+				ERROR_PLUGIN_INSTALL_FAILED,
+				[ plugin_lang_get( 'error_no_xml' ) ]
+			);
 		}
-		return $t_result;
+		return true;
 	}
 }

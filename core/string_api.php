@@ -645,10 +645,13 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 }
 
 /**
- * return the name of a bug page
- * $p_action should be something like 'view', 'update', or 'report'
- * @param string  $p_action  A valid action being performed - currently one of view, update or report.
+ * Return the name of a bug page.
+ *
+ * @param string $p_action A valid action being performed - currently one of
+ *                         'view', 'update' or 'report'.
+ *
  * @return string
+ * @throws Exception
  */
 function string_get_bug_page( $p_action ) {
 	switch( $p_action ) {
@@ -660,7 +663,7 @@ function string_get_bug_page( $p_action ) {
 			return 'bug_report_page.php';
 	}
 
-	trigger_error( ERROR_GENERIC, ERROR );
+	throw new Exception( __FUNCTION__ . ": Invalid action '$p_action'" );
 }
 
 /**
@@ -984,14 +987,17 @@ function string_truncate( $p_string, $p_length, $p_marker = '') {
 /**
  * Replacement for str_pad. $padStr may contain multi-byte characters.
  *
- * @author Oliver Saunders <oliver (a) osinternetservices.com>
  * @param string $input
- * @param int $length
+ * @param int    $length
  * @param string $padStr
- * @param int $type ( same constants as str_pad )
+ * @param int    $type ( same constants as str_pad )
+ *
  * @return string
- * @see http://www.php.net/str_pad
- * @see utf8_substr
+ * @throws Exception
+ *
+ * @see    http://www.php.net/str_pad
+ * @see    utf8_substr
+ * @author Oliver Saunders <oliver (a) osinternetservices.com>
  */
 function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
 
@@ -1026,7 +1032,7 @@ function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
         return $paddingLeft . $input . $paddingRight;
     }
 
-    trigger_error('utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR);
+	throw new Exception( __FUNCTION__ . ": Unknown padding type ($type)" );
 }
 
 /**

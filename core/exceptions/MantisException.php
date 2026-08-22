@@ -16,29 +16,34 @@
 
 namespace Mantis\Exceptions;
 
+use Exception;
 use Throwable;
 
 /**
  * A base exception for all Mantis exceptions.
  */
-class MantisException extends \Exception {
+class MantisException extends Exception {
+
+	use LocalizedErrorMessageTrait;
+
 	/**
 	 * @var array array of parameters for localized exception message.
 	 */
 	protected $params;
 
-    /**
-     * Constructor
-     *
-     * @param string $p_message The internal non-localized error message.
-     * @param integer $p_code The Mantis error code.
-     * @param array $p_params Localized error message parameters.
-     * @param Throwable $p_previous The inner exception.
-     * @return void
-     */
+	/**
+	 * Constructor
+	 *
+	 * @param string         $p_message  The internal non-localized error message.
+	 * @param int            $p_code     The Mantis error code.
+	 * @param array          $p_params   Localized error message parameters
+	 *                                   {@see error_parameters()}.
+	 * @param Throwable|null $p_previous The inner exception.
+	 */
 	function __construct( $p_message, $p_code, $p_params = array(), ?Throwable $p_previous = null ) {
 		parent::__construct( $p_message, $p_code, $p_previous );
 		$this->params = $p_params;
+		$this->setLocalizedMessage( $p_code, $p_params );
 	}
 
 	/**
@@ -49,4 +54,16 @@ class MantisException extends \Exception {
 	function getParams() {
 		return $this->params;
 	}
+
+	/**
+	 * MantisBT Error type for display.
+	 *
+	 * @see error_output()
+	 *
+	 * @return string
+	 */
+	public function getErrorType() {
+		return 'APPLICATION ERROR #' . $this->code;
+	}
+
 }

@@ -29,6 +29,8 @@
  * @uses tag_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'error_api.php' );
@@ -53,7 +55,7 @@ if( !is_null( $f_tag_name ) ) {
 				break;
 			case -2:
 				error_parameters( $t_tag_row['name'] );
-				trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
+				throw new ClientException( "YYYY", ERROR_TAG_NAME_INVALID );
 		}
 	}
 }

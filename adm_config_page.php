@@ -34,7 +34,12 @@
  * @uses print_api
  * @uses string_api
  * @uses user_api
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -78,8 +83,10 @@ $t_edit_action = in_array( $f_edit_action, $t_valid_actions )
 
 # if not creating a new option, the option name is required
 if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action && null == $f_edit_option ) {
-	error_parameters( 'config_option' );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Option name is required",
+		ERROR_EMPTY_FIELD,
+		[ 'config_option' ]
+	);
 }
 
 # see if the user can modify configuration options
@@ -106,8 +113,10 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 
 	if( !$t_config_row ) {
 		# this error will be triggered if the exact config combination does not exist in database
-		error_parameters( $f_edit_option );
-		trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
+		throw new ClientException( "Config option not found",
+				ERROR_CONFIG_OPT_NOT_FOUND,
+				[ $f_edit_option ]
+		);
 	}
 	$t_option_user_id = (int)$t_config_row['user_id'];
 	$t_option_project_id = (int)$t_config_row['project_id'];
@@ -128,8 +137,10 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 		# make sure that configuration option specified is a valid one.
 		$t_not_found_value = '***CONFIG OPTION NOT FOUND***';
 		if( config_get( $t_option_id, $t_not_found_value ) === $t_not_found_value ) {
-			error_parameters( $t_option_id );
-			trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
+			throw new ClientException( "Config option not found",
+				ERROR_CONFIG_OPT_NOT_FOUND,
+				[ $t_option_id ]
+			);
 		}
 	}
 }

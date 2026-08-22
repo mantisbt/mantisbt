@@ -16,22 +16,36 @@
 
 namespace Mantis\Exceptions;
 
-use Throwable;
-
 /**
- * An exception that is triggered due to a Mantis error.
+ * Error message localization Trait.
  */
-class ServiceException extends MantisException {
+trait LocalizedErrorMessageTrait
+{
 	/**
-	 * Constructor
-	 *
-	 * @param string         $p_message  The internal non-localized error message.
-	 * @param int            $p_code     The Mantis error code.
-	 * @param array          $p_params   Localized error message parameters
-	 *                                   {@see error_parameters()}.
-	 * @param Throwable|null $p_previous The inner exception.
+	 * @var string Localized error message with placeholders filled in.
 	 */
-	function __construct( $p_message, $p_code, $p_params = array(), ?Throwable $p_previous = null ) {
-		parent::__construct( $p_message, $p_code, $p_params, $p_previous );
+	protected string $localized;
+
+	/**
+	 * Set the Localized Error message including placeholder replacement.
+	 *
+	 * @param int        $p_code   MantisBT Error code.
+	 * @param array|null $p_params Error parameters.
+	 * @return void
+	 */
+	public function setLocalizedMessage( int $p_code, ?array $p_params ) {
+		$this->localized = error_string( $p_code, $p_params );
 	}
+
+	/**
+	 * Get the Localized Error message.
+	 *
+	 * If not set, fallback to the Exception message.
+	 *
+	 * @return string
+	 */
+	public function getLocalizedMessage() {
+		return $this->localized ?? $this->getMessage();
+	}
+
 }

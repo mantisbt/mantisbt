@@ -56,7 +56,6 @@ define( 'DB_MIN_VERSION_PGSQL', '9.2' );     # Earliest supported version as of 
 define( 'DB_MIN_VERSION_ORACLE', '11.2' );
 
 # error types
-define( 'ERROR', E_USER_ERROR );
 define( 'WARNING', E_USER_WARNING );
 define( 'NOTICE', E_USER_NOTICE );
 define( 'DEPRECATED', E_USER_DEPRECATED );
@@ -439,6 +438,7 @@ define( 'ERROR_PLUGIN_INVALID_FILE', 2508 );
 define( 'ERROR_PLUGIN_FILE_NOT_FOUND', 2509 );
 define( 'ERROR_PLUGIN_CLASS_NOT_FOUND', 2510 );
 define( 'ERROR_PLUGIN_ENTITY_NOT_FOUND', 2511 );
+define( 'ERROR_PLUGIN_RUNTIME', 2512 );
 define( 'ERROR_PLUGIN_GENERIC', 2599 );
 
 # ERROR_COLUMNS_*
@@ -646,15 +646,23 @@ define( 'LINKS_NOFOLLOW_EXTERNAL', 16);
 define( 'API_TOKEN_LENGTH', 32 );
 
 # Obsolete / deprecated constants
-# Defined below for backwards-compatibility purposes -- Do not use them
-#        Constant                                   # Replaced by
-define( 'UNABLE_TO_DUPLICATE', 40 );                # UNABLE_TO_REPRODUCE
-define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
-define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
-define( 'FTP', 1 );                                 # DISK
-define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
+# Kept for backwards-compatibility purposes -- Do not use them
+/** @deprecated 1.3.0 Use UNABLE_TO_REPRODUCE instead. */
+define( 'UNABLE_TO_DUPLICATE', 40 );
+/** @deprecated 1.3.0 Should no longer be used (no replacement). */
+define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 );
+/** @deprecated 1.3.0 Use LOG_WEBSERVICE instead. */
+define( 'LOG_SOAP', 64 );
+/** @deprecated 1.3.0 Attachment storage on FTP is no longer supported, use DISK. */
+define( 'FTP', 1 );
+/** @deprecated 1.3.0 Attachment storage on FTP is no longer supported, use DISK. */
+define( 'ERROR_FTP_CONNECT_ERROR', 16 );
+/** @deprecated 2.11.0 Should no longer be used (no replacement). */
 define( 'ERROR_USER_NOT_FOUND', 801 );
+/** @deprecated 2.16.0 Should no longer be used (no replacement). */
 define( 'ERROR_USER_REAL_MATCH_USER', 807 );
+/** @deprecated 2.29.0 Throw an Exception or use E_USER_ERROR instead. */
+define( 'ERROR', E_USER_ERROR );
 
 # JQuery
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'

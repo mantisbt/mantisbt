@@ -114,15 +114,8 @@ class UserTokenCreateCommand extends Command {
 
 				$t_count++;
 			} while ( !api_token_name_is_unique( $this->name, $this->user_id ) );
-		}
-
-		// make sure token name is unique
-		if( !api_token_name_is_unique( $this->name, $this->user_id ) ) {
-			throw new ClientException(
-				'Token name is not unique',
-				ERROR_INVALID_FIELD_VALUE,
-				array( $this->name )
-			);
+		} else {
+			api_token_name_ensure_unique( $this->name, $this->user_id );
 		}
 	}
 

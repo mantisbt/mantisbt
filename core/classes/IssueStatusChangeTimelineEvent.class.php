@@ -89,6 +89,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	/**
 	 * Returns html string to display
 	 * @return string
+	 * @throws Exception
 	 */
 	public function html() {
 		switch( $this->type ) {
@@ -119,9 +120,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 			case IssueStatusChangeTimelineEvent::IGNORED:
 				return '';
 			default:
-				# Unknown status change type
-				trigger_error( ERROR_GENERIC, ERROR );
-				return '';
+				throw new Exception( "Unknown Timeline status change type" );
 		}
         
 		$t_html .= '<div class="action">' . $t_string . '</div>';

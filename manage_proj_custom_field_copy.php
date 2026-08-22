@@ -31,7 +31,12 @@
  * @uses gpc_api.php
  * @uses print_api.php
  * @uses project_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -62,7 +67,7 @@ if( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	trigger_error( ERROR_NO_COPY_ACTION, ERROR );
+	throw new ClientException( "Copy action to/from is required", ERROR_NO_COPY_ACTION );
 }
 
 project_copy_custom_fields( $t_dst_project_id, $t_src_project_id );
