@@ -62,8 +62,12 @@ class TagDetachCommand extends Command {
 		$this->issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
 		$this->tag_id = $this->query( 'tag_id' );
 		$this->user_id = auth_get_current_user_id();
+		bug_ensure_exists( $this->issue_id );
 
-		if( !access_has_bug_level( config_get( 'tag_detach_threshold' ), $this->issue_id, $this->user_id ) ) {
+		$t_project_id = bug_get_field( $this->issue_id, 'project_id' );
+		$t_tag_detach_threshold = config_get( 'tag_detach_threshold', null, null, $t_project_id );
+
+		if( !access_has_bug_level( $t_tag_detach_threshold, $this->issue_id, $this->user_id ) ) {
 			throw new ClientException( 'Access denied to detach tags', ERROR_ACCESS_DENIED );
 		}
 
