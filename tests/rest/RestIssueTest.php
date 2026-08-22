@@ -172,6 +172,42 @@ class RestIssueTest extends RestBase {
 		);
 	}
 
+	/**
+	 * Summary is a single-line field and must reject line breaks.
+	 *
+	 * @return void
+	 */
+	public function testSummaryCannotContainLineBreaks() {
+		$t_issue_to_add = $this->getIssueToAdd( 'summary-newline' );
+		$t_issue_to_add['summary'] .= "\nsecond line";
+
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
+			'Creating an issue with a multiline summary should fail'
+		);
+	}
+
+	/**
+	 * Summary is a single-line field and must reject line breaks on update.
+	 *
+	 * @return void
+	 */
+	public function testUpdateIssueWithSummaryContainingLineBreaks() {
+		$t_issue_to_add = $this->getIssueToAdd( 'summary-update-newline' );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
+		$t_issue_id = json_decode( $t_response->getBody(), true )['issue']['id'];
+		$this->deleteIssueAfterRun( $t_issue_id );
+
+		$t_response = $this->builder()->patch(
+			'/issues/' . $t_issue_id,
+			array( 'summary' => $t_issue_to_add['summary'] . "\rsecond line" )
+		)->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
+			'Updating an issue with a multiline summary should fail'
+		);
+	}
+
 	public function testCreateIssueWithEnumIds() {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_to_add['status']['id'] = 50; # assigned

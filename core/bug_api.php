@@ -490,6 +490,14 @@ class BugData {
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
+		if( preg_match( '/[\r\n]/', $this->summary ) ) {
+			throw new ClientException(
+				'Field "summary" cannot contain line breaks.',
+				ERROR_INVALID_FIELD_VALUE,
+				array( lang_get( 'summary' ) )
+			);
+		}
+
 		if( mb_strlen( $this->summary ) > DB_FIELD_SIZE_BUG_SUMMARY ) {
 			throw new ClientException(
 				'Field "summary" exceeds maximum length ' . DB_FIELD_SIZE_BUG_SUMMARY . '.',
