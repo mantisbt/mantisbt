@@ -79,23 +79,39 @@ foreach ( $t_rows as $t_row ) {
 	$t_dst_version_id = version_get_id( $t_row['version'], $t_dst_project_id );
 	if( $t_dst_version_id === false ) {
 		# Version does not exist in target project
-		version_add(
-			$t_dst_project_id,
-			$t_row['version'],
-			$t_row['released'],
-			$t_row['description'],
-			$t_row['date_order']
+		$t_data = array(
+			'query' => array( 'project_id' => $t_dst_project_id ),
+			'payload' => array(
+				'name' => $t_row['version'],
+				'description' => $t_row['description'],
+				'released' => (bool)$t_row['released'],
+				'timestamp' => date_timestamp_to_iso8601( $t_row['date_order'] )
+			)
 		);
+
+		$t_command = new VersionAddCommand( $t_data );
+		$t_command->execute();
 	} else {
 		# Update existing version
 		# Since we're ignoring obsolete versions, those marked as such in the
 		# source project after an earlier copy operation will not be updated
 		# in the target project.
-		$t_version_data = new VersionData( $t_row );
-		$t_version_data->id = $t_dst_version_id;
-		$t_version_data->project_id = $t_dst_project_id;
+		$t_data = array(
+			'query' => array(
+				'project_id' => $t_dst_project_id,
+				'version_id' => $t_dst_version_id
+			),
+			'payload' => array(
+				'name' => $t_row['version'],
+				'description' => $t_row['description'],
+				'released' => (bool)$t_row['released'],
+				'obsolete' => (bool)$t_row['obsolete'],
+				'timestamp' => date_timestamp_to_iso8601( $t_row['date_order'] )
+			)
+		);
 
-		version_update( $t_version_data );
+		$t_command = new VersionUpdateCommand( $t_data );
+		$t_command->execute();
 	}
 }
 
