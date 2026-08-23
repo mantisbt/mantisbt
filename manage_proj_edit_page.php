@@ -453,7 +453,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		<div class="widget-body">
 			<div class="widget-main no-padding">
 <?php
-	$t_categories = category_get_all_rows( $f_project_id );
+	$t_categories = ( new CategoryGetCommand( array(
+		'query' => array( 'project_id' => $f_project_id ),
+	) ) )->execute()['categories'];
 	if( count( $t_categories ) > 0 ) {
 ?>
 	<div class="table-responsive">
@@ -471,12 +473,15 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		$t_security_token = form_security_token( 'manage_proj_cat_delete' );
 		foreach ( $t_categories as $t_category ) {
 			$t_id = $t_category['id'];
-			$t_inherited = ( $t_category['project_id'] != $f_project_id );
+			$t_inherited = ( $t_category['project']['id'] != $f_project_id );
+			$t_handler_id = isset( $t_category['default_handler'] )
+				? $t_category['default_handler']['id']
+				: NO_USER;
 ?>
 			<tr>
 				<td><?php echo string_attribute( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
-				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
-				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
+				<td class="center"><?php echo trans_bool( $t_category['enabled'] ) ?></td>
+				<td><?php echo prepare_user_name( $t_handler_id ) ?></td>
 				<td class="center">
 					<div class="inline">
 <?php
