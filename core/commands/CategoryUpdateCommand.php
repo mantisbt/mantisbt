@@ -39,8 +39,9 @@ class CategoryUpdateCommand extends Command {
 	 *                         access is denied.
 	 */
 	function validate() {
-		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
-		if( !project_exists( $this->project_id ) ) {
+		$t_project_id = $this->query( 'project_id' );
+		$this->project_id = $t_project_id == ALL_PROJECTS ? ALL_PROJECTS : helper_parse_id( $t_project_id, 'project_id' );
+		if( $this->project_id != ALL_PROJECTS && !project_exists( $this->project_id ) ) {
 			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, array( $this->project_id ) );
 		}
 		helper_set_current_project( $this->project_id );
@@ -76,12 +77,11 @@ class CategoryUpdateCommand extends Command {
 	protected function process() {
 		$t_name = trim( (string)$this->payload( 'name', $this->old_category['name'] ) );
 		$t_assigned_to = (int)$this->payload( 'assigned_to', $this->old_category['user_id'] );
-		$t_status = $this->payload( 'status' );
-		if( $t_status === null && $this->payload( 'enabled' ) !== null ) {
-			$t_status = $this->payload( 'enabled' ) ? CATEGORY_STATUS_ENABLED : CATEGORY_STATUS_DISABLED;
-		}
+		$t_status = $this->payload( 'enabled' ) === null
+			? (int)$this->old_category['status']
+			: ( $this->payload( 'enabled' ) ? CATEGORY_STATUS_ENABLED : CATEGORY_STATUS_DISABLED );
 
-		category_update( $this->category_id, $t_name, $t_assigned_to, $t_status === null ? (int)$this->old_category['status'] : (int)$t_status );
+		category_update( $this->category_id, $t_name, $t_assigned_to, $t_status );
 
 		category_cache_flush( $this->project_id );
 

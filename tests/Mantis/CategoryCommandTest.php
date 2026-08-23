@@ -31,6 +31,26 @@ use Mantis\Exceptions\ClientException;
  */
 class CategoryCommandTest extends MantisCoreBase {
 	/**
+	 * Test that a category can be added to the global project.
+	 *
+	 * @return void
+	 */
+	public function testCanAddGlobalCategory() {
+		self::login();
+		$t_command = new \CategoryAddCommand( array(
+			'query' => array( 'project_id' => ALL_PROJECTS ),
+			'payload' => array( 'name' => 'command global category ' . rand( 1, 1000000 ) ),
+		) );
+		$t_category = $t_command->execute()['category'];
+
+		try {
+			$this->assertEquals( ALL_PROJECTS, $t_category['project']['id'] );
+		} finally {
+			category_remove( $t_category['id'] );
+		}
+	}
+
+	/**
 	 * Test that disabled users cannot be assigned when adding or updating.
 	 *
 	 * @return void
