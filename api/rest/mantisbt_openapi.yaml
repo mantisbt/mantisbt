@@ -730,6 +730,34 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      summary: Delete an attachment from an issue
+      operationId: IssueFileDelete
+      description: Deletes an attachment when the authenticated user has permission to do so.
+      tags:
+        - 'Issue Attachments'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+        - name: file_id
+          in: path
+          schema:
+            type: integer
+          description: ID of the attachment to delete.
+          required: true
+          example: 567
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues/{id}/monitors':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
