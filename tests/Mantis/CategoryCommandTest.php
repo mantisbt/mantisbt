@@ -31,6 +31,81 @@ use Mantis\Exceptions\ClientException;
  */
 class CategoryCommandTest extends MantisCoreBase {
 	/**
+	 * Test that a disabled category handler is not auto-assigned to new issues.
+	 *
+	 * @return void
+	 */
+	public function testDisabledCategoryHandlerIsNotAutoAssigned() {
+		self::login();
+		$t_handle_bug_threshold = config_get( 'handle_bug_threshold', null, null, 1 );
+		$t_username = 'category_disabled_handler_' . rand( 1, 1000000 );
+		user_create( $t_username, 'password', $t_username . '@localhost.localdomain', $t_handle_bug_threshold, false, true );
+		$t_user_id = user_get_id_by_name( $t_username );
+		$t_category_id = category_add( 1, 'disabled handler category ' . rand( 1, 1000000 ) );
+		category_update( $t_category_id, category_get_name( $t_category_id ), $t_user_id );
+		user_set_field( $t_user_id, 'enabled', false );
+
+		try {
+			$t_issue_id = $this->createIssueWithCategory( $t_category_id );
+			$this->assertEquals( NO_USER, bug_get_field( $t_issue_id, 'handler_id' ) );
+		} finally {
+			if( isset( $t_issue_id ) ) {
+				bug_delete( $t_issue_id );
+			}
+			category_remove( $t_category_id );
+			user_delete( $t_user_id );
+		}
+	}
+
+	/**
+	 * Test that a category handler without project access is not auto-assigned.
+	 *
+	 * @return void
+	 */
+	public function testCategoryHandlerWithoutAccessIsNotAutoAssigned() {
+		self::login();
+		$t_handle_bug_threshold = config_get( 'handle_bug_threshold', null, null, 1 );
+		if( $t_handle_bug_threshold <= ANYBODY ) {
+			$this->markTestSkipped( 'The handler threshold cannot be lowered in this test configuration.' );
+		}
+
+		$t_username = 'category_inaccessible_handler_' . rand( 1, 1000000 );
+		user_create( $t_username, 'password', $t_username . '@localhost.localdomain', $t_handle_bug_threshold, false, true );
+		$t_user_id = user_get_id_by_name( $t_username );
+		$t_category_id = category_add( 1, 'inaccessible handler category ' . rand( 1, 1000000 ) );
+		category_update( $t_category_id, category_get_name( $t_category_id ), $t_user_id );
+		user_set_field( $t_user_id, 'access_level', $t_handle_bug_threshold - 1 );
+
+		try {
+			$t_issue_id = $this->createIssueWithCategory( $t_category_id );
+			$this->assertEquals( NO_USER, bug_get_field( $t_issue_id, 'handler_id' ) );
+		} finally {
+			if( isset( $t_issue_id ) ) {
+				bug_delete( $t_issue_id );
+			}
+			category_remove( $t_category_id );
+			user_delete( $t_user_id );
+		}
+	}
+
+	/**
+	 * Create an issue with no explicit handler in the specified category.
+	 *
+	 * @param int $p_category_id Category identifier.
+	 *
+	 * @return int Issue identifier.
+	 */
+	private function createIssueWithCategory( $p_category_id ) {
+		$t_issue = new \BugData();
+		$t_issue->project_id = 1;
+		$t_issue->reporter_id = auth_get_current_user_id();
+		$t_issue->summary = __CLASS__ . ': test issue ' . rand( 1, 1000000 );
+		$t_issue->description = 'Test issue for category handler assignment.';
+		$t_issue->category_id = $p_category_id;
+
+		return $t_issue->create();
+	}
+	/**
 	 * Test that a category can be added to the global project.
 	 *
 	 * @return void
