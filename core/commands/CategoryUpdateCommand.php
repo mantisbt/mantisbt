@@ -66,7 +66,12 @@ class CategoryUpdateCommand extends Command {
 			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, array( 'name' ) );
 		}
 
-		category_validate_assigned_to( $this->payload( 'assigned_to', $this->old_category['user_id'] ), $this->project_id, true );
+		$t_assigned_to = $this->payload( 'assigned_to' );
+		if( $t_assigned_to !== null
+			&& ( !is_numeric( $t_assigned_to ) || (int)$t_assigned_to !== (int)$this->old_category['user_id'] )
+		) {
+			category_validate_assigned_to( $t_assigned_to, $this->project_id, true );
+		}
 	}
 
 	/**

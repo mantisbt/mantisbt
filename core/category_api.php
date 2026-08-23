@@ -275,7 +275,9 @@ function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = n
 	$t_old_category = category_get_row( $p_category_id );
 	$t_project_id = (int)$t_old_category['project_id'];
 
-	category_validate_assigned_to( $p_assigned_to, $t_project_id );
+	if( !is_numeric( $p_assigned_to ) || (int)$p_assigned_to !== (int)$t_old_category['user_id'] ) {
+		category_validate_assigned_to( $p_assigned_to, $t_project_id );
+	}
 
 	# Disabling category is not authorized if it is used as default
 	$t_default_category_id = config_get_global( 'default_category_for_moves', null );
