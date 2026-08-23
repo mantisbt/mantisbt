@@ -18,6 +18,9 @@ require_api( 'category_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'helper_api.php' );
 
+global $g_absolute_path;
+require_once( $g_absolute_path . 'api/soap/mc_core.php' );
+
 use Mantis\Exceptions\ClientException;
 
 /**
@@ -30,6 +33,8 @@ class CategoryUpdateCommand extends Command {
 	private $category_id;
 	/** @var array */
 	private $old_category;
+	/** @var int */
+	private $handler_id;
 
 	/**
 	 * Validate the project, category, and update authorization.
@@ -66,11 +71,14 @@ class CategoryUpdateCommand extends Command {
 			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, [ 'name' ] );
 		}
 
-		$t_assigned_to = $this->payload( 'assigned_to' );
-		if( $t_assigned_to !== null
-			&& ( !is_numeric( $t_assigned_to ) || (int)$t_assigned_to !== (int)$this->old_category['user_id'] )
-		) {
-			category_validate_assigned_to( $t_assigned_to, $this->project_id, true );
+		if( array_key_exists( 'handler', $this->data['payload'] ) ) {
+			$t_handler = $this->payload( 'handler' );
+			$this->handler_id = $t_handler === null ? NO_USER : mci_get_user_id( $t_handler, null );
+			if( (int)$this->handler_id !== (int)$this->old_category['user_id'] ) {
+				category_validate_assigned_to( $this->handler_id, $this->project_id, true );
+			}
+		} else {
+			$this->handler_id = (int)$this->old_category['user_id'];
 		}
 	}
 
@@ -81,14 +89,13 @@ class CategoryUpdateCommand extends Command {
 	 */
 	protected function process() {
 		$t_name = trim( (string)$this->payload( 'name', $this->old_category['name'] ) );
-		$t_assigned_to = (int)$this->payload( 'assigned_to', $this->old_category['user_id'] );
 		$t_enabled = $this->payload( 'enabled' );
 		if( $t_enabled === null ) {
 			$t_enabled = category_is_enabled( $this->category_id );
 		}
 
 		$t_status = category_enabled_to_status( $t_enabled );
-		category_update( $this->category_id, $t_name, $t_assigned_to, $t_status );
+		category_update( $this->category_id, $t_name, $this->handler_id, $t_status );
 
 		category_cache_flush( $this->project_id );
 

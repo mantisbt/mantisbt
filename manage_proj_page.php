@@ -259,8 +259,8 @@ print_manage_menu( 'manage_proj_page.php' );
 <?php
 			foreach( $t_categories as $t_category ) {
 				$t_id = $t_category['id'];
-				$t_handler_id = isset( $t_category['default_handler'] )
-					? $t_category['default_handler']['id']
+				$t_handler_id = isset( $t_category['handler'] )
+					? $t_category['handler']['id']
 					: NO_USER;
 ?>
 			<tr>

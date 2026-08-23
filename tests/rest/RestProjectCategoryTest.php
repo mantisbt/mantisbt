@@ -115,27 +115,65 @@ class RestProjectCategoryTest extends RestBase {
 	}
 
 	/**
-	 * Test category assigned user and status fields through add and update.
+	 * Test that category handlers are hidden without manage project access.
 	 *
 	 * @return void
 	 */
-	public function testProjectCategoryAssignedAndStatusFields() {
+	public function testProjectCategoryHandlerRequiresManageAccess() {
+		$t_category = $this->createCategory( [
+			'name' => 'REST hidden handler category ' . rand( 1, 1000000 ),
+			'handler' => [ 'id' => $this->userId ],
+		] );
+		$t_project_id = $this->getProjectId();
+		$t_had_database_value = config_is_set_in_database( 'manage_project_threshold', ALL_USERS, $t_project_id );
+		$t_old_value = config_get( 'manage_project_threshold', null, ALL_USERS, $t_project_id );
+		config_set( 'manage_project_threshold', NOBODY, ALL_USERS, $t_project_id );
+
+		try {
+			$t_response = $this->builder()->get( $this->base_url . $t_category['id'] )->send();
+			$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+			$t_category = json_decode( $t_response->getBody(), true )['categories'][0];
+			$this->assertArrayNotHasKey( 'handler', $t_category );
+		} finally {
+			if( $t_had_database_value ) {
+				config_set( 'manage_project_threshold', $t_old_value, ALL_USERS, $t_project_id );
+			} else {
+				config_delete( 'manage_project_threshold', ALL_USERS, $t_project_id );
+			}
+			$this->deleteCategory( $t_category['id'] );
+		}
+	}
+
+	/**
+	 * Test category handler and enabled fields through add and update.
+	 *
+	 * @return void
+	 */
+	public function testProjectCategoryHandlerAndEnabledFields() {
 		$t_category = $this->createCategory( [
 			'name' => 'REST assigned category ' . rand( 1, 1000000 ),
-			'assigned_to' => $this->userId,
+			'handler' => [ 'id' => $this->userId ],
 			'enabled' => false,
 		] );
 		$this->assertFalse( $t_category['enabled'] );
 		$this->assertArrayNotHasKey( 'status', $t_category );
-		$this->assertEquals( $this->userId, $t_category['default_handler']['id'] );
+		$this->assertEquals( $this->userId, $t_category['handler']['id'] );
 
-		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'enabled' => true ] )->send();
+		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [
+			'handler' => [ 'name' => $this->userName ],
+			'enabled' => true,
+		] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_category = json_decode( $t_response->getBody(), true )['category'];
 		$this->assertTrue( $t_category['enabled'] );
 		$this->assertArrayNotHasKey( 'status', $t_category );
 		$this->assertEquals( $this->getProjectId(), $t_category['project']['id'] );
-		$this->assertEquals( $this->userId, $t_category['default_handler']['id'] );
+		$this->assertEquals( $this->userId, $t_category['handler']['id'] );
+
+		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'handler' => null ] )->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+		$t_category = json_decode( $t_response->getBody(), true )['category'];
+		$this->assertArrayNotHasKey( 'handler', $t_category );
 
 		$this->deleteCategory( $t_category['id'] );
 	}
@@ -171,15 +209,15 @@ class RestProjectCategoryTest extends RestBase {
 	 *
 	 * @return void
 	 */
-	public function testProjectCategoryAssignedToMustExist() {
+	public function testProjectCategoryHandlerMustExist() {
 		$t_response = $this->builder()->post( $this->base_url, [
 			'name' => 'REST invalid handler ' . rand( 1, 1000000 ),
-			'assigned_to' => 1000000,
+			'handler' => [ 'id' => 1000000 ],
 		] )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 
 		$t_category = $this->createCategory( [ 'name' => 'REST update handler ' . rand( 1, 1000000 ) ] );
-		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'assigned_to' => 1000000 ] )->send();
+		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'handler' => [ 'id' => 1000000 ] ] )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 
 		$this->deleteCategory( $t_category['id'] );

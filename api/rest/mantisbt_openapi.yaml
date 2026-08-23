@@ -2228,6 +2228,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Project'
+    ProjectCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        project:
+          $ref: '#/components/schemas/ProjectRef'
+        handler:
+          $ref: '#/components/schemas/UserRef'
+        enabled:
+          type: boolean
+    ProjectCategoryCollection:
+      type: object
+      required: [categories]
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectCategory'
+    ProjectCategoryResponse:
+      type: object
+      required: [category]
+      properties:
+        category:
+          $ref: '#/components/schemas/ProjectCategory'
     ProjectResponse:
       type: object
       required: [project]
@@ -2579,8 +2606,8 @@ components:
       properties:
         name:
           type: string
-        assigned_to:
-          type: integer
+        handler:
+          $ref: '#/components/schemas/UserRef'
         enabled:
           type: boolean
     ProjectCategoriesUpdate:
@@ -2588,8 +2615,8 @@ components:
       properties:
         name:
           type: string
-        assigned_to:
-          type: integer
+        handler:
+          $ref: '#/components/schemas/UserRef'
         enabled:
           type: boolean
     ProjectSubprojectsAdd:
@@ -2875,6 +2902,8 @@ components:
               - $ref: '#/components/schemas/IssueNoteResponse'
               - $ref: '#/components/schemas/UserResponse'
               - $ref: '#/components/schemas/ProjectResponse'
+              - $ref: '#/components/schemas/ProjectCategoryResponse'
+              - $ref: '#/components/schemas/ProjectCategoryCollection'
               - $ref: '#/components/schemas/VersionResponse'
               - $ref: '#/components/schemas/TokenResponse'
               - $ref: '#/components/schemas/ConfigResponse'
@@ -2938,6 +2967,8 @@ components:
               - $ref: '#/components/schemas/UserResponse'
               - $ref: '#/components/schemas/ProjectCollection'
               - $ref: '#/components/schemas/ProjectResponse'
+              - $ref: '#/components/schemas/ProjectCategoryResponse'
+              - $ref: '#/components/schemas/ProjectCategoryCollection'
               - $ref: '#/components/schemas/VersionResponse'
               - $ref: '#/components/schemas/TokenResponse'
               - $ref: '#/components/schemas/ConfigResponse'

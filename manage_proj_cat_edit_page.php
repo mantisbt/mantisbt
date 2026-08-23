@@ -63,8 +63,8 @@ $t_data = [
 $t_command = new CategoryGetCommand( $t_data );
 $t_result = $t_command->execute();
 $t_category = $t_result['categories'][0];
-$t_assigned_to = isset( $t_category['default_handler'] )
-	? (int)$t_category['default_handler']['id']
+$t_handler_id = isset( $t_category['handler'] )
+	? (int)$t_category['handler']['id']
 	: NO_USER;
 $t_project_id = (int)$t_category['project']['id'];
 $t_name = $t_category['name'];
@@ -125,7 +125,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 				<td>
 					<select id="proj-category-assigned-to" name="assigned_to" class="input-sm">
 						<option value="0"></option>
-						<?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
+						<?php print_assign_to_option_list( $t_handler_id, $t_project_id ) ?>
 					</select>
 				</td>
 			</tr>

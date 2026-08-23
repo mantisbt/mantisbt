@@ -18,6 +18,9 @@ require_api( 'category_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'helper_api.php' );
 
+global $g_absolute_path;
+require_once( $g_absolute_path . 'api/soap/mc_core.php' );
+
 use Mantis\Exceptions\ClientException;
 
 /**
@@ -28,6 +31,8 @@ class CategoryAddCommand extends Command {
 	private $project_id;
 	/** @var string */
 	private $name;
+	/** @var int */
+	private $handler_id;
 
 	/**
 	 * Validate the project and category name.
@@ -59,7 +64,9 @@ class CategoryAddCommand extends Command {
 			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, [ 'name' ] );
 		}
 
-		category_validate_assigned_to( $this->payload( 'assigned_to', NO_USER ), $this->project_id, true );
+		$t_handler = $this->payload( 'handler' );
+		$this->handler_id = $t_handler === null ? NO_USER : mci_get_user_id( $t_handler, null );
+		category_validate_assigned_to( $this->handler_id, $this->project_id, true );
 	}
 
 	/**
@@ -70,11 +77,10 @@ class CategoryAddCommand extends Command {
 	protected function process() {
 		$t_id = category_add( $this->project_id, $this->name );
 		category_cache_flush( $this->project_id );
-		$t_assigned_to = (int)$this->payload( 'assigned_to', NO_USER );
 		$t_enabled = (bool)$this->payload( 'enabled', true );
 
-		if( $t_assigned_to !== NO_USER || !$t_enabled ) {
-			category_update( $t_id, $this->name, $t_assigned_to, category_enabled_to_status( $t_enabled ) );
+		if( $this->handler_id !== NO_USER || !$t_enabled ) {
+			category_update( $t_id, $this->name, $this->handler_id, category_enabled_to_status( $t_enabled ) );
 		}
 
 		$t_data = [ 'query' => [ 'project_id' => $this->project_id, 'category_id' => $t_id ] ];
