@@ -68,14 +68,18 @@ $t_row = category_get_row( $f_category_id );
 $t_old_name = $t_row['name'];
 $t_project_id = $t_row['project_id'];
 
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
-
-# check for duplicate
-if( mb_strtolower( $f_name ) != mb_strtolower( $t_old_name ) ) {
-	category_ensure_unique( $t_project_id, $f_name );
-}
-
-category_update( $f_category_id, $f_name, $f_assigned_to, (int)$f_status );
+$t_command = new CategoryUpdateCommand( array(
+	'query' => array(
+		'project_id' => $t_project_id,
+		'category_id' => $f_category_id,
+	),
+	'payload' => array(
+		'name' => $f_name,
+		'assigned_to' => $f_assigned_to,
+		'status' => (int)$f_status,
+	),
+) );
+$t_command->execute();
 
 form_security_purge( 'manage_proj_cat_update' );
 

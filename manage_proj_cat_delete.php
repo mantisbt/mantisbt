@@ -62,19 +62,19 @@ $t_row = category_get_row( $f_category_id );
 $t_name = category_full_name( $f_category_id );
 $t_project_id = $t_row['project_id'];
 
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
-
-# Protect the 'default category for moves' from deletion
-category_ensure_can_remove( $f_category_id );
-
-# Protect the category from deletion which is associted with an issue.
-category_ensure_can_delete( $f_category_id );
+$t_command = new CategoryDeleteCommand( array(
+	'query' => array(
+		'project_id' => $t_project_id,
+		'category_id' => $f_category_id,
+	),
+) );
+$t_command->validate();
 
 # Confirm with the user
 helper_ensure_confirmed( sprintf( lang_get( 'category_delete_confirm_msg' ), string_attribute( $t_name ) ),
 	lang_get( 'delete_category_button' ) );
 
-category_remove( $f_category_id );
+$t_command->process();
 
 form_security_purge( 'manage_proj_cat_delete' );
 
