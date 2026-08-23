@@ -109,7 +109,7 @@ class CategoryCommandTest extends MantisCoreBase {
 				'query' => [ 'project_id' => 1, 'category_id' => $t_disabled_category_id ],
 				'payload' => [
 					'name' => 'disabled stale category updated',
-					'assigned_to' => $t_user_id,
+					'handler' => [ 'id' => $t_user_id ],
 				],
 			];
 			$t_command = new \CategoryUpdateCommand( $t_data );
@@ -133,14 +133,14 @@ class CategoryCommandTest extends MantisCoreBase {
 				'query' => [ 'project_id' => 1, 'category_id' => $t_deleted_category_id ],
 				'payload' => [
 					'name' => 'deleted stale category updated',
-					'assigned_to' => $t_deleted_user_id,
+					'handler' => [ 'id' => $t_deleted_user_id ],
 				],
 			];
 			$t_command = new \CategoryUpdateCommand( $t_data );
 			$t_result = $t_command->execute();
 			$t_category = $t_result['category'];
 			$this->assertEquals( 'deleted stale category updated', $t_category['name'] );
-			$this->assertEquals( $t_deleted_user_id, $t_category['default_handler']['id'] );
+			$this->assertEquals( $t_deleted_user_id, $t_category['handler']['id'] );
 		} finally {
 			category_remove( $t_deleted_category_id );
 		}
@@ -202,7 +202,7 @@ class CategoryCommandTest extends MantisCoreBase {
 				'query' => [ 'project_id' => 1 ],
 				'payload' => [
 					'name' => 'command disabled handler ' . rand( 1, 1000000 ),
-					'assigned_to' => $t_user_id,
+					'handler' => [ 'id' => $t_user_id ],
 				],
 			];
 			$t_command = new \CategoryAddCommand( $t_data );
@@ -210,7 +210,7 @@ class CategoryCommandTest extends MantisCoreBase {
 
 			$t_data = [
 				'query' => [ 'project_id' => 1, 'category_id' => $t_category_id ],
-				'payload' => [ 'assigned_to' => $t_user_id ],
+				'payload' => [ 'handler' => [ 'id' => $t_user_id ] ],
 			];
 			$t_command = new \CategoryUpdateCommand( $t_data );
 			$this->assertAssignedUserRejected( $t_command );

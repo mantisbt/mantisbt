@@ -55,7 +55,7 @@ auth_reauthenticate();
 
 $f_category_id     = gpc_get_int( 'category_id' );
 $f_name            = trim( gpc_get_string( 'name' ) );
-$f_assigned_to     = gpc_get_int( 'assigned_to', 0 );
+$f_handler_id      = gpc_get_int( 'assigned_to', 0 );
 $f_enabled         = gpc_get_bool( 'enabled' );
 
 if( is_blank( $f_name ) ) {
@@ -74,7 +74,7 @@ $t_data = [
 	],
 	'payload' => [
 		'name' => $f_name,
-		'assigned_to' => $f_assigned_to,
+		'handler' => $f_handler_id == NO_USER ? null : [ 'id' => $f_handler_id ],
 		'enabled' => $f_enabled,
 	],
 ];

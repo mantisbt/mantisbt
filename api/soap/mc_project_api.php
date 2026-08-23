@@ -365,7 +365,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 		],
 		'payload' => [
 			'name' => $p_category_name_new,
-			'assigned_to' => (int)$p_assigned_to,
+			'handler' => (int)$p_assigned_to === NO_USER ? null : [ 'id' => (int)$p_assigned_to ],
 		],
 	];
 	$t_command = new CategoryUpdateCommand( $t_data );
@@ -869,6 +869,13 @@ function mci_project_categories( $p_project_id ) {
 	$t_data = [ 'query' => [ 'project_id' => $p_project_id ] ];
 	$t_command = new CategoryGetCommand( $t_data );
 	$t_result = $t_command->execute();
+	foreach( $t_result['categories'] as &$t_category ) {
+		if( isset( $t_category['handler'] ) ) {
+			$t_category['default_handler'] = $t_category['handler'];
+			unset( $t_category['handler'] );
+		}
+	}
+	unset( $t_category );
 
 	return $t_result['categories'];
 }

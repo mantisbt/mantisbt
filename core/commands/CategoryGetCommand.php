@@ -98,7 +98,7 @@ class CategoryGetCommand extends Command {
 		);
 
 		if( (int)$p_row['user_id'] !== NO_USER && access_has_project_level( $t_manage_project_threshold, $p_row['project_id'] ) ) {
-			$t_category['default_handler'] = user_exists( (int)$p_row['user_id'] )
+			$t_category['handler'] = user_exists( (int)$p_row['user_id'] )
 				? mci_account_get_array_by_id( (int)$p_row['user_id'] )
 				: [ 'id' => (int)$p_row['user_id'] ];
 		}
