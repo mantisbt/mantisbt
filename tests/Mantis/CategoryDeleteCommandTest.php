@@ -41,10 +41,11 @@ class CategoryDeleteCommandTest extends MantisCoreBase {
 		config_set( 'default_category_for_moves', $t_category_id, ALL_USERS, ALL_PROJECTS );
 
 		try {
-			$t_command = new \CategoryDeleteCommand( array( 'query' => array(
+			$t_data = [ 'query' => [
 				'project_id' => 1,
 				'category_id' => $t_category_id,
-			) ) );
+			] ];
+			$t_command = new \CategoryDeleteCommand( $t_data );
 		set_error_handler( function( $p_severity, $p_message, $p_file, $p_line ) {
 			throw new \ErrorException( $p_message, 0, $p_severity, $p_file, $p_line );
 		} );

@@ -835,14 +835,12 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 
 	foreach( $t_cat_arr as $t_category_row ) {
 		$t_category_id = (int)$t_category_row['id'];
-		$t_disabled = $t_category_row['status'] == CATEGORY_STATUS_DISABLED;
+		$t_disabled = !category_is_enabled( $t_category_id );
 		$t_category_name = category_full_name(
 			$t_category_id,
 			$t_category_row['project_id'] != $t_project_id
 		);
-		if( $t_disabled ) {
-//			$t_category_name .= ' [' . lang_get( 'disabled' ) . ']';
-		}
+
 		echo '<option value="' . $t_category_id . '"';
 		check_selected( $p_category_id, $t_category_id );
 		check_disabled( $t_disabled );

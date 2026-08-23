@@ -236,9 +236,11 @@ print_manage_menu( 'manage_proj_page.php' );
 		<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
 <?php
-		$t_categories = ( new CategoryGetCommand( array(
-			'query' => array( 'project_id' => ALL_PROJECTS ),
-		) ) )->execute()['categories'];
+		$t_data = [ 'query' => [ 'project_id' => ALL_PROJECTS ] ];
+		$t_command = new CategoryGetCommand( $t_data );
+		$t_result = $t_command->execute();
+
+		$t_categories = $t_result['categories'];
 		$t_can_update_global_cat = access_has_global_level( config_get( 'manage_site_threshold' ) );
 
 		if( count( $t_categories ) > 0 ) {

@@ -74,10 +74,11 @@ foreach ( $t_rows as $t_row ) {
 	$t_name = $t_row['name'];
 
 	if( category_is_unique( $t_dst_project_id, $t_name ) ) {
-		$t_command = new CategoryAddCommand( array(
-			'query' => array( 'project_id' => $t_dst_project_id ),
-			'payload' => array( 'name' => $t_name ),
-		) );
+		$t_data = [
+			'query' => [ 'project_id' => $t_dst_project_id ],
+			'payload' => [ 'name' => $t_name ],
+		];
+		$t_command = new CategoryAddCommand( $t_data );
 		$t_command->execute();
 	}
 }

@@ -56,8 +56,7 @@ auth_reauthenticate();
 $f_category_id     = gpc_get_int( 'category_id' );
 $f_name            = trim( gpc_get_string( 'name' ) );
 $f_assigned_to     = gpc_get_int( 'assigned_to', 0 );
-# Underlying DB column is integer, but we use it as bool since we only have 2 states
-$f_status          = (int)gpc_get_bool( 'status', CATEGORY_STATUS_DISABLED );
+$f_enabled         = gpc_get_bool( 'enabled' );
 
 if( is_blank( $f_name ) ) {
 	error_parameters( 'name' );
@@ -68,17 +67,18 @@ $t_row = category_get_row( $f_category_id );
 $t_old_name = $t_row['name'];
 $t_project_id = $t_row['project_id'];
 
-$t_command = new CategoryUpdateCommand( array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'project_id' => $t_project_id,
 		'category_id' => $f_category_id,
-	),
-	'payload' => array(
+	],
+	'payload' => [
 		'name' => $f_name,
 		'assigned_to' => $f_assigned_to,
-		'enabled' => (int)$f_status === CATEGORY_STATUS_ENABLED,
-	),
-) );
+		'enabled' => $f_enabled,
+	],
+];
+$t_command = new CategoryUpdateCommand( $t_data );
 $t_command->execute();
 
 form_security_purge( 'manage_proj_cat_update' );
