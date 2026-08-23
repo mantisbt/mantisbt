@@ -89,6 +89,60 @@ class CategoryCommandTest extends MantisCoreBase {
 	}
 
 	/**
+	 * Test that updating other fields does not revalidate an unchanged handler.
+	 *
+	 * @return void
+	 */
+	public function testUpdateAllowsUnchangedInvalidHandler() {
+		self::login();
+		$t_handle_bug_threshold = config_get( 'handle_bug_threshold', null, null, 1 );
+		$t_username = 'category_stale_handler_' . rand( 1, 1000000 );
+		user_create( $t_username, 'password', $t_username . '@localhost.localdomain', $t_handle_bug_threshold, false, true );
+		$t_user_id = user_get_id_by_name( $t_username );
+		$t_disabled_category_id = category_add( 1, 'disabled stale category ' . rand( 1, 1000000 ) );
+		category_update( $t_disabled_category_id, category_get_name( $t_disabled_category_id ), $t_user_id );
+		category_cache_flush( 1 );
+		user_set_field( $t_user_id, 'enabled', false );
+
+		try {
+			$t_command = new \CategoryUpdateCommand( array(
+				'query' => array( 'project_id' => 1, 'category_id' => $t_disabled_category_id ),
+				'payload' => array(
+					'name' => 'disabled stale category updated',
+					'assigned_to' => $t_user_id,
+				),
+			) );
+			$this->assertEquals( 'disabled stale category updated', $t_command->execute()['category']['name'] );
+		} finally {
+			category_remove( $t_disabled_category_id );
+			user_delete( $t_user_id );
+		}
+
+		$t_deleted_username = 'category_deleted_handler_' . rand( 1, 1000000 );
+		user_create( $t_deleted_username, 'password', $t_deleted_username . '@localhost.localdomain', $t_handle_bug_threshold, false, true );
+		$t_deleted_user_id = user_get_id_by_name( $t_deleted_username );
+		$t_deleted_category_id = category_add( 1, 'deleted stale category ' . rand( 1, 1000000 ) );
+		category_update( $t_deleted_category_id, category_get_name( $t_deleted_category_id ), $t_deleted_user_id );
+		category_cache_flush( 1 );
+		user_delete( $t_deleted_user_id );
+
+		try {
+			$t_command = new \CategoryUpdateCommand( array(
+				'query' => array( 'project_id' => 1, 'category_id' => $t_deleted_category_id ),
+				'payload' => array(
+					'name' => 'deleted stale category updated',
+					'assigned_to' => $t_deleted_user_id,
+				),
+			) );
+			$t_category = $t_command->execute()['category'];
+			$this->assertEquals( 'deleted stale category updated', $t_category['name'] );
+			$this->assertEquals( $t_deleted_user_id, $t_category['default_handler']['id'] );
+		} finally {
+			category_remove( $t_deleted_category_id );
+		}
+	}
+
+	/**
 	 * Create an issue with no explicit handler in the specified category.
 	 *
 	 * @param int $p_category_id Category identifier.
