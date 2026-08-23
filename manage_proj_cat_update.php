@@ -76,7 +76,7 @@ $t_command = new CategoryUpdateCommand( array(
 	'payload' => array(
 		'name' => $f_name,
 		'assigned_to' => $f_assigned_to,
-		'status' => (int)$f_status,
+		'enabled' => (int)$f_status === CATEGORY_STATUS_ENABLED,
 	),
 ) );
 $t_command->execute();

@@ -2518,9 +2518,6 @@ components:
           type: string
         assigned_to:
           type: integer
-        status:
-          type: integer
-          enum: [0, 1]
         enabled:
           type: boolean
     ProjectCategoriesUpdate:
@@ -2530,9 +2527,6 @@ components:
           type: string
         assigned_to:
           type: integer
-        status:
-          type: integer
-          enum: [0, 1]
         enabled:
           type: boolean
     ProjectSubprojectsAdd:

@@ -78,7 +78,8 @@ class RestProjectCategoryTest extends RestBase {
 		$t_category = $this->createCategory( [ 'name' => $t_name ] );
 		$this->assertEquals( $t_name, $t_category['name'] );
 		$this->assertEquals( $this->getProjectId(), $t_category['project']['id'] );
-		$this->assertEquals( CATEGORY_STATUS_ENABLED, $t_category['status'] );
+		$this->assertTrue( $t_category['enabled'] );
+		$this->assertArrayNotHasKey( 'status', $t_category );
 
 		$t_id = $t_category['id'];
 		$t_response = $this->builder()->get( $this->base_url . $t_id )->send();
@@ -86,7 +87,8 @@ class RestProjectCategoryTest extends RestBase {
 		$t_category = json_decode( $t_response->getBody(), true )['categories'][0];
 		$this->assertEquals( $t_id, $t_category['id'] );
 		$this->assertEquals( $this->getProjectId(), $t_category['project']['id'] );
-		$this->assertEquals( CATEGORY_STATUS_ENABLED, $t_category['status'] );
+		$this->assertTrue( $t_category['enabled'] );
+		$this->assertArrayNotHasKey( 'status', $t_category );
 
 		$t_response = $this->builder()->patch( $this->base_url . $t_id, [ 'name' => $t_name . ' updated' ] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
@@ -121,17 +123,45 @@ class RestProjectCategoryTest extends RestBase {
 		$t_category = $this->createCategory( [
 			'name' => 'REST assigned category ' . rand( 1, 1000000 ),
 			'assigned_to' => $this->userId,
-			'status' => CATEGORY_STATUS_DISABLED,
+			'enabled' => false,
 		] );
-		$this->assertEquals( CATEGORY_STATUS_DISABLED, $t_category['status'] );
+		$this->assertFalse( $t_category['enabled'] );
+		$this->assertArrayNotHasKey( 'status', $t_category );
 		$this->assertEquals( $this->userId, $t_category['default_handler']['id'] );
 
 		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'enabled' => true ] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_category = json_decode( $t_response->getBody(), true )['category'];
-		$this->assertEquals( CATEGORY_STATUS_ENABLED, $t_category['status'] );
+		$this->assertTrue( $t_category['enabled'] );
+		$this->assertArrayNotHasKey( 'status', $t_category );
 		$this->assertEquals( $this->getProjectId(), $t_category['project']['id'] );
 		$this->assertEquals( $this->userId, $t_category['default_handler']['id'] );
+
+		$this->deleteCategory( $t_category['id'] );
+	}
+
+	/**
+	 * Test that the REST API ignores the SOAP-only status field.
+	 *
+	 * @return void
+	 */
+	public function testProjectCategoryStatusFieldIsNotSupported() {
+		$t_response = $this->builder()->post( $this->base_url, [
+			'name' => 'REST status category ' . rand( 1, 1000000 ),
+			'status' => CATEGORY_STATUS_DISABLED,
+		] )->send();
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
+		$t_category = json_decode( $t_response->getBody(), true )['category'];
+		$this->assertTrue( $t_category['enabled'] );
+		$this->assertArrayNotHasKey( 'status', $t_category );
+		$this->deleteCategory( $t_category['id'] );
+
+		$t_category = $this->createCategory( [ 'name' => 'REST status update category ' . rand( 1, 1000000 ) ] );
+		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'status' => CATEGORY_STATUS_DISABLED ] )->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+		$t_updated_category = json_decode( $t_response->getBody(), true )['category'];
+		$this->assertTrue( $t_updated_category['enabled'] );
+		$this->assertArrayNotHasKey( 'status', $t_updated_category );
 
 		$this->deleteCategory( $t_category['id'] );
 	}

@@ -268,7 +268,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	$t_categories = $t_command->execute()['categories'];
 	$t_result = array();
 	foreach( $t_categories as $t_category ) {
-		if( (int)$t_category['status'] === CATEGORY_STATUS_ENABLED ) {
+		if( $t_category['enabled'] ) {
 			$t_result[] = $t_category['name'];
 		}
 	}

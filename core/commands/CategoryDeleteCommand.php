@@ -37,8 +37,9 @@ class CategoryDeleteCommand extends Command {
 	 *                         is denied, or the category cannot be deleted.
 	 */
 	public function validate() {
-		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
-		if( !project_exists( $this->project_id ) ) {
+		$t_project_id = $this->query( 'project_id' );
+		$this->project_id = $t_project_id == ALL_PROJECTS ? ALL_PROJECTS : helper_parse_id( $t_project_id, 'project_id' );
+		if( $this->project_id != ALL_PROJECTS && !project_exists( $this->project_id ) ) {
 			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, array( $this->project_id ) );
 		}
 		helper_set_current_project( $this->project_id );
