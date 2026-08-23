@@ -1,0 +1,91 @@
+<?php
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+require_api( 'category_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'helper_api.php' );
+
+use Mantis\Exceptions\ClientException;
+
+/**
+ * A command that updates a project category.
+ */
+class CategoryUpdateCommand extends Command {
+	/** @var int */
+	private $project_id;
+	/** @var int */
+	private $category_id;
+	/** @var array */
+	private $old_category;
+
+	/**
+	 * Validate the project, category, and update authorization.
+	 *
+	 * @return void
+	 * @throws ClientException If the project or category is unavailable, or
+	 *                         access is denied.
+	 */
+	function validate() {
+		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
+		if( !project_exists( $this->project_id ) ) {
+			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, array( $this->project_id ) );
+		}
+		helper_set_current_project( $this->project_id );
+
+		$t_manage_project_threshold = config_get( 'manage_project_threshold' );
+		if( !access_has_project_level( $t_manage_project_threshold, $this->project_id ) ) {
+			throw new ClientException( 'Access denied to update categories', ERROR_ACCESS_DENIED );
+		}
+
+		$this->category_id = helper_parse_id( $this->query( 'category_id' ), 'category_id' );
+		if( !category_exists( $this->category_id ) || (int)category_get_field( $this->category_id, 'project_id' ) !== $this->project_id ) {
+			throw new ClientException( "Category '$this->category_id' not found", ERROR_CATEGORY_NOT_FOUND, array( $this->category_id ) );
+		}
+
+		$this->old_category = category_get_row( $this->category_id );
+		$t_name = trim( (string)$this->payload( 'name', $this->old_category['name'] ) );
+		if( is_blank( $t_name ) ) {
+			throw new ClientException( 'Category name can\'t be empty', ERROR_EMPTY_FIELD, array( 'name' ) );
+		}
+
+		if( strcasecmp( $t_name, $this->old_category['name'] ) !== 0 && !category_is_unique( $this->project_id, $t_name ) ) {
+			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, array( 'name' ) );
+		}
+
+		category_validate_assigned_to( $this->payload( 'assigned_to', $this->old_category['user_id'] ), $this->project_id, true );
+	}
+
+	/**
+	 * Apply the category update and return its API representation.
+	 *
+	 * @return array The updated category response.
+	 */
+	protected function process() {
+		$t_name = trim( (string)$this->payload( 'name', $this->old_category['name'] ) );
+		$t_assigned_to = (int)$this->payload( 'assigned_to', $this->old_category['user_id'] );
+		$t_status = $this->payload( 'status' );
+		if( $t_status === null && $this->payload( 'enabled' ) !== null ) {
+			$t_status = $this->payload( 'enabled' ) ? CATEGORY_STATUS_ENABLED : CATEGORY_STATUS_DISABLED;
+		}
+
+		category_update( $this->category_id, $t_name, $t_assigned_to, $t_status === null ? (int)$this->old_category['status'] : (int)$t_status );
+
+		category_cache_flush( $this->project_id );
+
+		$t_result = new CategoryGetCommand( array( 'query' => array( 'project_id' => $this->project_id, 'category_id' => $this->category_id ) ) );
+		return array( 'category' => $t_result->execute()['categories'][0] );
+	}
+}
