@@ -409,11 +409,14 @@ function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_category_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = array( 'query' => array(
+	$t_data = [ 'query' => [
 		'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ),
 		'category_id' => $p_args['category_id'] ?? $p_request->getParam( 'category_id' ),
-	) );
-	$t_result = ( new CategoryGetCommand( $t_data ) )->execute();
+	] ];
+
+	$t_command = new CategoryGetCommand( $t_data );
+	$t_result = $t_command->execute();
+
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
 
@@ -426,11 +429,14 @@ function rest_project_category_get( \Slim\Http\Request $p_request, \Slim\Http\Re
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_category_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = array(
-		'query' => array( 'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ) ),
+	$t_data = [
+		'query' => [ 'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ) ],
 		'payload' => $p_request->getParsedBody(),
-	);
-	$t_result = ( new CategoryAddCommand( $t_data ) )->execute();
+	];
+
+	$t_command = new CategoryAddCommand( $t_data );
+	$t_result = $t_command->execute();
+
 	return $p_response->withStatus( HTTP_STATUS_CREATED )->withJson( $t_result );
 }
 
@@ -443,14 +449,17 @@ function rest_project_category_add( \Slim\Http\Request $p_request, \Slim\Http\Re
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_category_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ),
 			'category_id' => $p_args['category_id'] ?? $p_request->getParam( 'category_id' ),
-		),
+		],
 		'payload' => $p_request->getParsedBody(),
-	);
-	$t_result = ( new CategoryUpdateCommand( $t_data ) )->execute();
+	];
+
+	$t_command = new CategoryUpdateCommand( $t_data );
+	$t_result = $t_command->execute();
+
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
 
@@ -463,11 +472,14 @@ function rest_project_category_update( \Slim\Http\Request $p_request, \Slim\Http
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_category_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = array( 'query' => array(
+	$t_data = [ 'query' => [
 		'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ),
 		'category_id' => $p_args['category_id'] ?? $p_request->getParam( 'category_id' ),
-	) );
-	( new CategoryDeleteCommand( $t_data ) )->execute();
+	] ];
+
+	$t_command = new CategoryDeleteCommand( $t_data );
+	$t_command->execute();
+
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
 

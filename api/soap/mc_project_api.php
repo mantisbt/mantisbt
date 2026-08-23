@@ -264,9 +264,12 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 		return mci_fault_login_failed();
 	}
 
-	$t_command = new CategoryGetCommand( array( 'query' => array( 'project_id' => $p_project_id ) ) );
-	$t_categories = $t_command->execute()['categories'];
-	$t_result = array();
+	$t_data = [ 'query' => [ 'project_id' => $p_project_id ] ];
+	$t_command = new CategoryGetCommand( $t_data );
+	$t_result = $t_command->execute();
+
+	$t_categories = $t_result['categories'];
+	$t_result = [];
 	foreach( $t_categories as $t_category ) {
 		if( $t_category['enabled'] ) {
 			$t_result[] = $t_category['name'];
@@ -290,11 +293,14 @@ function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_ca
 		return mci_fault_login_failed();
 	}
 
-	$t_command = new CategoryAddCommand( array(
-		'query' => array( 'project_id' => $p_project_id ),
-		'payload' => array( 'name' => $p_category_name ),
-	) );
-	return $t_command->execute()['category']['id'];
+	$t_data = [
+		'query' => [ 'project_id' => $p_project_id ],
+		'payload' => [ 'name' => $p_category_name ],
+	];
+	$t_command = new CategoryAddCommand( $t_data );
+	$t_result = $t_command->execute();
+
+	return $t_result['category']['id'];
 }
 
 /**
@@ -312,17 +318,19 @@ function mc_project_delete_category( $p_username, $p_password, $p_project_id, $p
 		return mci_fault_login_failed();
 	}
 
-	$t_command = new CategoryDeleteCommand( array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $p_project_id,
 			'category_name' => $p_category_name,
-		),
-		'options' => array(
+		],
+		'options' => [
 			'allow_reassign' => true,
 			'new_category_id' => config_get( 'default_category_for_moves' ),
-		),
-	) );
+		],
+	];
+	$t_command = new CategoryDeleteCommand( $t_data );
 	$t_command->execute();
+
 	return true;
 }
 
@@ -350,17 +358,19 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 	}
 
 	$t_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
-	$t_command = new CategoryUpdateCommand( array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $p_project_id,
 			'category_id' => $t_category_id,
-		),
-		'payload' => array(
+		],
+		'payload' => [
 			'name' => $p_category_name_new,
 			'assigned_to' => (int)$p_assigned_to,
-		),
-	) );
+		],
+	];
+	$t_command = new CategoryUpdateCommand( $t_data );
 	$t_command->execute();
+
 	return true;
 }
 
@@ -856,30 +866,11 @@ function mci_project_versions( $p_project_id ) {
  * @return array The array of categories with their info.
  */
 function mci_project_categories( $p_project_id ) {
-	$t_categories = category_get_all_rows( $p_project_id );
-	$t_results = array();
+	$t_data = [ 'query' => [ 'project_id' => $p_project_id ] ];
+	$t_command = new CategoryGetCommand( $t_data );
+	$t_result = $t_command->execute();
 
-	foreach( $t_categories as $t_category ) {
-		$t_project_id = (int)$t_category['project_id'];
-		$t_result = array(
-			'id' => (int)$t_category['id'],
-			'name' => $t_category['name'],
-			'project' => array( 'id' => $t_project_id, 'name' => $t_category['project_name'] ),
-			'status' => $t_category['status'],
-		);
-
-		# Do access check here to take into consideration the project id that the
-		# category is associated with in case of inherited categories.
-		$t_default_handler_id = (int)$t_category['user_id'];
-		if( $t_default_handler_id != 0 &&
-		    access_has_project_level( config_get( 'manage_project_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_result['default_handler'] = mci_account_get_array_by_id( $t_default_handler_id );
-		}
-
-		$t_results[] = $t_result;
-	}
-
-	return $t_results;
+	return $t_result['categories'];
 }
 
 /**

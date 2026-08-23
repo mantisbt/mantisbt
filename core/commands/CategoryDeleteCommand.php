@@ -40,7 +40,7 @@ class CategoryDeleteCommand extends Command {
 		$t_project_id = $this->query( 'project_id' );
 		$this->project_id = $t_project_id == ALL_PROJECTS ? ALL_PROJECTS : helper_parse_id( $t_project_id, 'project_id' );
 		if( $this->project_id != ALL_PROJECTS && !project_exists( $this->project_id ) ) {
-			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, array( $this->project_id ) );
+			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, [ $this->project_id ] );
 		}
 		helper_set_current_project( $this->project_id );
 
@@ -56,7 +56,7 @@ class CategoryDeleteCommand extends Command {
 
 		$this->category_id = helper_parse_id( $this->category_id, 'category_id' );
 		if( !category_exists( $this->category_id ) || (int)category_get_field( $this->category_id, 'project_id' ) !== $this->project_id ) {
-			throw new ClientException( "Category '$this->category_id' not found", ERROR_CATEGORY_NOT_FOUND, array( $this->category_id ) );
+			throw new ClientException( "Category '$this->category_id' not found", ERROR_CATEGORY_NOT_FOUND, [ $this->category_id ] );
 		}
 
 		category_ensure_can_remove( $this->category_id );
@@ -73,6 +73,6 @@ class CategoryDeleteCommand extends Command {
 	public function process() {
 		category_remove( $this->category_id, $this->option( 'new_category_id', 0 ) );
 		category_cache_flush( $this->project_id );
-		return array();
+		return [];
 	}
 }

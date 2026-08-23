@@ -62,12 +62,13 @@ $t_row = category_get_row( $f_category_id );
 $t_name = category_full_name( $f_category_id );
 $t_project_id = $t_row['project_id'];
 
-$t_command = new CategoryDeleteCommand( array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'project_id' => $t_project_id,
 		'category_id' => $f_category_id,
-	),
-) );
+	],
+];
+$t_command = new CategoryDeleteCommand( $t_data );
 $t_command->validate();
 
 # Confirm with the user

@@ -42,7 +42,7 @@ class CategoryUpdateCommand extends Command {
 		$t_project_id = $this->query( 'project_id' );
 		$this->project_id = $t_project_id == ALL_PROJECTS ? ALL_PROJECTS : helper_parse_id( $t_project_id, 'project_id' );
 		if( $this->project_id != ALL_PROJECTS && !project_exists( $this->project_id ) ) {
-			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, array( $this->project_id ) );
+			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, [ $this->project_id ] );
 		}
 		helper_set_current_project( $this->project_id );
 
@@ -53,17 +53,17 @@ class CategoryUpdateCommand extends Command {
 
 		$this->category_id = helper_parse_id( $this->query( 'category_id' ), 'category_id' );
 		if( !category_exists( $this->category_id ) || (int)category_get_field( $this->category_id, 'project_id' ) !== $this->project_id ) {
-			throw new ClientException( "Category '$this->category_id' not found", ERROR_CATEGORY_NOT_FOUND, array( $this->category_id ) );
+			throw new ClientException( "Category '$this->category_id' not found", ERROR_CATEGORY_NOT_FOUND, [ $this->category_id ] );
 		}
 
 		$this->old_category = category_get_row( $this->category_id );
 		$t_name = trim( (string)$this->payload( 'name', $this->old_category['name'] ) );
 		if( is_blank( $t_name ) ) {
-			throw new ClientException( 'Category name can\'t be empty', ERROR_EMPTY_FIELD, array( 'name' ) );
+			throw new ClientException( 'Category name can\'t be empty', ERROR_EMPTY_FIELD, [ 'name' ] );
 		}
 
 		if( strcasecmp( $t_name, $this->old_category['name'] ) !== 0 && !category_is_unique( $this->project_id, $t_name ) ) {
-			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, array( 'name' ) );
+			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, [ 'name' ] );
 		}
 
 		$t_assigned_to = $this->payload( 'assigned_to' );
@@ -82,15 +82,19 @@ class CategoryUpdateCommand extends Command {
 	protected function process() {
 		$t_name = trim( (string)$this->payload( 'name', $this->old_category['name'] ) );
 		$t_assigned_to = (int)$this->payload( 'assigned_to', $this->old_category['user_id'] );
-		$t_status = $this->payload( 'enabled' ) === null
-			? (int)$this->old_category['status']
-			: ( $this->payload( 'enabled' ) ? CATEGORY_STATUS_ENABLED : CATEGORY_STATUS_DISABLED );
+		$t_enabled = $this->payload( 'enabled' );
+		if( $t_enabled === null ) {
+			$t_enabled = category_is_enabled( $this->category_id );
+		}
 
+		$t_status = category_enabled_to_status( $t_enabled );
 		category_update( $this->category_id, $t_name, $t_assigned_to, $t_status );
 
 		category_cache_flush( $this->project_id );
 
-		$t_result = new CategoryGetCommand( array( 'query' => array( 'project_id' => $this->project_id, 'category_id' => $this->category_id ) ) );
-		return array( 'category' => $t_result->execute()['categories'][0] );
+		$t_data = [ 'query' => [ 'project_id' => $this->project_id, 'category_id' => $this->category_id ] ];
+		$t_command = new CategoryGetCommand( $t_data );
+		$t_result = $t_command->execute();
+		return [ 'category' => $t_result['categories'][0] ];
 	}
 }

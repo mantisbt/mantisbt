@@ -54,18 +54,21 @@ auth_reauthenticate();
 $f_category_id = gpc_get_int( 'category_id' );
 $f_project_id  = gpc_get_int( 'project_id' );
 
-$t_category = ( new CategoryGetCommand( array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'project_id' => $f_project_id,
 		'category_id' => $f_category_id,
-	),
-) ) )->execute()['categories'][0];
+	],
+];
+$t_command = new CategoryGetCommand( $t_data );
+$t_result = $t_command->execute();
+$t_category = $t_result['categories'][0];
 $t_assigned_to = isset( $t_category['default_handler'] )
 	? (int)$t_category['default_handler']['id']
 	: NO_USER;
 $t_project_id = (int)$t_category['project']['id'];
 $t_name = $t_category['name'];
-$t_status = $t_category['enabled'] ? CATEGORY_STATUS_ENABLED : CATEGORY_STATUS_DISABLED;
+$t_enabled = $t_category['enabled'];
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
 
@@ -109,8 +112,8 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 					</label>
 				</td>
 				<td>
-					<input type="checkbox" id="proj-category-status" name="status" class="ace"
-						<?php check_checked( $t_status, CATEGORY_STATUS_ENABLED ); ?>
+					<input type="checkbox" id="proj-category-enabled" name="enabled" class="ace"
+						<?php check_checked( $t_enabled, true ); ?>
 					/>
 					<span class="lbl"></span>
 				</td>

@@ -161,7 +161,7 @@ function category_validate_assigned_to( $p_assigned_to, $p_project_id, $p_throw_
 	}
 
 	if( $p_throw_exception ) {
-		throw new ClientException( $t_error_message, $t_error_code, array( $p_assigned_to ) );
+		throw new ClientException( $t_error_message, $t_error_code, [ $p_assigned_to ] );
 	}
 
 	error_parameters( $p_assigned_to );
@@ -488,7 +488,7 @@ function category_cache_flush( $p_project_id = null ) {
 	global $g_category_cache, $g_cache_category_project;
 
 	if( $p_project_id === null ) {
-		$g_category_cache = array();
+		$g_category_cache = [];
 		$g_cache_category_project = null;
 		return;
 	}
@@ -829,5 +829,25 @@ function category_ensure_can_delete( $p_category_id ) {
  */
 function category_is_enabled( $p_category_id ) {
 	return $p_category_id == 0
-		|| category_get_field( $p_category_id, 'status' ) == CATEGORY_STATUS_ENABLED;
+		|| category_status_to_enabled( category_get_field( $p_category_id, 'status' ) );
+}
+
+/**
+ * Convert a category enabled flag to its database status value.
+ *
+ * @param bool $p_enabled Whether the category is enabled.
+ * @return int The category status value.
+ */
+function category_enabled_to_status( $p_enabled ) {
+	return $p_enabled ? CATEGORY_STATUS_ENABLED : CATEGORY_STATUS_DISABLED;
+}
+
+/**
+ * Convert a category database status value to an enabled flag.
+ *
+ * @param int $p_status The category status value.
+ * @return bool Whether the category is enabled.
+ */
+function category_status_to_enabled( $p_status ) {
+	return (int)$p_status === CATEGORY_STATUS_ENABLED;
 }

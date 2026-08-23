@@ -453,9 +453,11 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		<div class="widget-body">
 			<div class="widget-main no-padding">
 <?php
-	$t_categories = ( new CategoryGetCommand( array(
-		'query' => array( 'project_id' => $f_project_id ),
-	) ) )->execute()['categories'];
+	$t_data = [ 'query' => [ 'project_id' => $f_project_id ] ];
+	$t_command = new CategoryGetCommand( $t_data );
+	$t_result = $t_command->execute();
+	$t_categories = $t_result['categories'];
+
 	if( count( $t_categories ) > 0 ) {
 ?>
 	<div class="table-responsive">

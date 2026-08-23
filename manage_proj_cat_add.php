@@ -76,11 +76,13 @@ foreach( $t_names as $t_name ) {
 
 	$t_name = trim( $t_name );
 	if( category_is_unique( $f_project_id, $t_name ) ) {
-		$t_command = new CategoryAddCommand( array(
-			'query' => array( 'project_id' => $f_project_id ),
-			'payload' => array( 'name' => $t_name ),
-		) );
-		$t_id = $t_command->execute()['category']['id'];
+		$t_data = [
+			'query' => [ 'project_id' => $f_project_id ],
+			'payload' => [ 'name' => $t_name ],
+		];
+		$t_command = new CategoryAddCommand( $t_data );
+		$t_result = $t_command->execute();
+		$t_id = $t_result['category']['id'];
 	} else if( 1 == $t_category_count ) {
 		# We only error out on duplicates when a single value was
 		#  given.  If multiple values were given, we just add the

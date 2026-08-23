@@ -41,7 +41,7 @@ class CategoryAddCommand extends Command {
 		$this->project_id = $t_project_id == ALL_PROJECTS ? ALL_PROJECTS : helper_parse_id( $t_project_id, 'project_id' );
 
 		if( $this->project_id != ALL_PROJECTS && !project_exists( $this->project_id ) ) {
-			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, array( $this->project_id ) );
+			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, [ $this->project_id ] );
 		}
 		helper_set_current_project( $this->project_id );
 
@@ -52,11 +52,11 @@ class CategoryAddCommand extends Command {
 
 		$this->name = trim( (string)$this->payload( 'name', '' ) );
 		if( is_blank( $this->name ) ) {
-			throw new ClientException( 'Category name can\'t be empty', ERROR_EMPTY_FIELD, array( 'name' ) );
+			throw new ClientException( 'Category name can\'t be empty', ERROR_EMPTY_FIELD, [ 'name' ] );
 		}
 
 		if( !category_is_unique( $this->project_id, $this->name ) ) {
-			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, array( 'name' ) );
+			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, [ 'name' ] );
 		}
 
 		category_validate_assigned_to( $this->payload( 'assigned_to', NO_USER ), $this->project_id, true );
@@ -71,15 +71,16 @@ class CategoryAddCommand extends Command {
 		$t_id = category_add( $this->project_id, $this->name );
 		category_cache_flush( $this->project_id );
 		$t_assigned_to = (int)$this->payload( 'assigned_to', NO_USER );
-		$t_status = $this->payload( 'enabled' ) === null
-			? CATEGORY_STATUS_ENABLED
-			: ( $this->payload( 'enabled' ) ? CATEGORY_STATUS_ENABLED : CATEGORY_STATUS_DISABLED );
+		$t_enabled = (bool)$this->payload( 'enabled', true );
 
-		if( $t_assigned_to !== NO_USER || $t_status !== null ) {
-			category_update( $t_id, $this->name, $t_assigned_to, $t_status === null ? CATEGORY_STATUS_ENABLED : (int)$t_status );
+		if( $t_assigned_to !== NO_USER || !$t_enabled ) {
+			category_update( $t_id, $this->name, $t_assigned_to, category_enabled_to_status( $t_enabled ) );
 		}
 
-		$t_result = new CategoryGetCommand( array( 'query' => array( 'project_id' => $this->project_id, 'category_id' => $t_id ) ) );
-		return array( 'category' => $t_result->execute()['categories'][0] );
+		$t_data = [ 'query' => [ 'project_id' => $this->project_id, 'category_id' => $t_id ] ];
+		$t_command = new CategoryGetCommand( $t_data );
+		$t_result = $t_command->execute();
+
+		return [ 'category' => $t_result['categories'][0] ];
 	}
 }
