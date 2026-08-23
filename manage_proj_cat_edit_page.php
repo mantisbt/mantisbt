@@ -54,11 +54,18 @@ auth_reauthenticate();
 $f_category_id = gpc_get_int( 'category_id' );
 $f_project_id  = gpc_get_int( 'project_id' );
 
-$t_row = category_get_row( $f_category_id );
-$t_assigned_to = (int)$t_row['user_id'];
-$t_project_id = (int)$t_row['project_id'];
-$t_name = $t_row['name'];
-$t_status = (int)$t_row['status'];
+$t_category = ( new CategoryGetCommand( array(
+	'query' => array(
+		'project_id' => $f_project_id,
+		'category_id' => $f_category_id,
+	),
+) ) )->execute()['categories'][0];
+$t_assigned_to = isset( $t_category['default_handler'] )
+	? (int)$t_category['default_handler']['id']
+	: NO_USER;
+$t_project_id = (int)$t_category['project']['id'];
+$t_name = $t_category['name'];
+$t_status = $t_category['enabled'] ? CATEGORY_STATUS_ENABLED : CATEGORY_STATUS_DISABLED;
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
 
