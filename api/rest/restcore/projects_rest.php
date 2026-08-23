@@ -55,6 +55,18 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->delete( '/{id}/versions/{version_id}', 'rest_project_version_delete' );
 	$g_app->delete( '/{id}/versions/{version_id}/', 'rest_project_version_delete' );	
 
+	# Project categories
+	$g_app->get( '/{id}/categories', 'rest_project_category_get' );
+	$g_app->get( '/{id}/categories/', 'rest_project_category_get' );
+	$g_app->get( '/{id}/categories/{category_id}', 'rest_project_category_get' );
+	$g_app->get( '/{id}/categories/{category_id}/', 'rest_project_category_get' );
+	$g_app->post( '/{id}/categories', 'rest_project_category_add' );
+	$g_app->post( '/{id}/categories/', 'rest_project_category_add' );
+	$g_app->patch( '/{id}/categories/{category_id}', 'rest_project_category_update' );
+	$g_app->patch( '/{id}/categories/{category_id}/', 'rest_project_category_update' );
+	$g_app->delete( '/{id}/categories/{category_id}', 'rest_project_category_delete' );
+	$g_app->delete( '/{id}/categories/{category_id}/', 'rest_project_category_delete' );
+
 	# Project hierarchy (subprojects)
 	$g_app->post( '/{id}/subprojects', 'rest_project_hierarchy_add' );
 	$g_app->post( '/{id}/subprojects/', 'rest_project_hierarchy_add' );
@@ -386,6 +398,77 @@ function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\
 	$t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version deleted" );
+}
+
+/**
+ * Get one or more categories for a project.
+ *
+ * @param \Slim\Http\Request $p_request The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Route arguments.
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_category_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_data = array( 'query' => array(
+		'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ),
+		'category_id' => $p_args['category_id'] ?? $p_request->getParam( 'category_id' ),
+	) );
+	$t_result = ( new CategoryGetCommand( $t_data ) )->execute();
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+}
+
+/**
+ * Add a category to a project.
+ *
+ * @param \Slim\Http\Request $p_request The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Route arguments.
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_category_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_data = array(
+		'query' => array( 'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ) ),
+		'payload' => $p_request->getParsedBody(),
+	);
+	$t_result = ( new CategoryAddCommand( $t_data ) )->execute();
+	return $p_response->withStatus( HTTP_STATUS_CREATED )->withJson( $t_result );
+}
+
+/**
+ * Update a project category.
+ *
+ * @param \Slim\Http\Request $p_request The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Route arguments.
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_category_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_data = array(
+		'query' => array(
+			'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ),
+			'category_id' => $p_args['category_id'] ?? $p_request->getParam( 'category_id' ),
+		),
+		'payload' => $p_request->getParsedBody(),
+	);
+	$t_result = ( new CategoryUpdateCommand( $t_data ) )->execute();
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+}
+
+/**
+ * Delete a project category.
+ *
+ * @param \Slim\Http\Request $p_request The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Route arguments.
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_category_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_data = array( 'query' => array(
+		'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ),
+		'category_id' => $p_args['category_id'] ?? $p_request->getParam( 'category_id' ),
+	) );
+	( new CategoryDeleteCommand( $t_data ) )->execute();
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
 
 /**
