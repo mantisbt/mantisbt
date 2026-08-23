@@ -1034,6 +1034,74 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '503':
           $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}/categories/{category_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
+      - $ref: '#/components/parameters/project_id'
+      - name: category_id
+        in: path
+        schema:
+          type: integer
+          minimum: 1
+        required: true
+    get:
+      summary: Get a project category
+      operationId: ProjectCategoriesGet
+      tags: ['Project Categories']
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    patch:
+      summary: Update a project category
+      operationId: ProjectCategoriesUpdate
+      tags: ['Project Categories']
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectCategoriesUpdate'
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    delete:
+      summary: Delete a project category
+      operationId: ProjectCategoriesDelete
+      tags: ['Project Categories']
+      responses:
+        '204': { $ref: '#/components/responses/NoContent' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  '/api/rest/projects/{id}/categories':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
+      - $ref: '#/components/parameters/project_id'
+    get:
+      summary: Get project categories
+      operationId: ProjectCategoriesGetAll
+      tags: ['Project Categories']
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    post:
+      summary: Create a project category
+      operationId: ProjectCategoriesAdd
+      tags: ['Project Categories']
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectCategoriesAdd'
+      responses:
+        '201': { $ref: '#/components/responses/Created' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
   '/api/rest/projects/{id}/versions/{version_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
@@ -2442,6 +2510,31 @@ components:
         timestamp:
           type: string
           format: date-time
+    ProjectCategoriesAdd:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        assigned_to:
+          type: integer
+        status:
+          type: integer
+          enum: [0, 1]
+        enabled:
+          type: boolean
+    ProjectCategoriesUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        assigned_to:
+          type: integer
+        status:
+          type: integer
+          enum: [0, 1]
+        enabled:
+          type: boolean
     ProjectSubprojectsAdd:
       type: object
       properties:
@@ -2574,6 +2667,18 @@ components:
           schema:
             $ref: '#/components/schemas/ProjectVersionsUpdate'
       description: ''
+      required: true
+    ProjectCategoriesAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectCategoriesAdd'
+      required: true
+    ProjectCategoriesUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectCategoriesUpdate'
       required: true
     ProjectSubprojectsAdd:
       content:
