@@ -34,6 +34,11 @@ use Psr\Http\Message\ResponseInterface;
  * @group REST
  */
 class RestIssueTest extends RestBase {
+	/** @var mixed Saved status workflow configuration, or false if unset. */
+	private $savedStatusWorkflow = null;
+
+	/** @var bool Whether the status workflow configuration was saved. */
+	private bool $statusWorkflowSaved = false;
 
 	/**
 	 * @var array $versions
@@ -113,6 +118,39 @@ class RestIssueTest extends RestBase {
 		$this->assertTrue( isset( $t_issue['updated_at'] ), 'updated at' );
 
 		$this->deleteIssueAfterRun( $t_issue['id'] );
+	}
+
+	/**
+	 * Verify that REST issue updates enforce configured workflow transitions.
+	 *
+	 * @return void
+	 */
+	public function testUpdateIssueStatusEnforcesWorkflow() {
+		$this->savedStatusWorkflow = $this->setConfig( 'status_enum_workflow', array(
+			NEW_ => FEEDBACK . ':feedback',
+		) );
+		$this->statusWorkflowSaved = true;
+
+		$t_response = $this->builder()->post( '/issues', $this->getIssueToAdd() )->send();
+		$t_issue = $this->getJson( $t_response, HTTP_STATUS_CREATED )->issue;
+		$this->deleteIssueAfterRun( $t_issue->id );
+
+		$t_response = $this->builder()->patch( '/issues/' . $t_issue->id, array(
+			'status' => array( 'id' => ACKNOWLEDGED ),
+		) )->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
+		$t_error = json_decode( $t_response->getBody(), true );
+		$this->assertStringContainsString( 'Status transition', $t_error['message'] );
+
+		$t_response = $this->builder()->get( '/issues/' . $t_issue->id )->send();
+		$t_issue = $this->getJson( $t_response )->issues[0];
+		$this->assertEquals( NEW_, $t_issue->status->id );
+
+		$t_response = $this->builder()->patch( '/issues/' . $t_issue->id, array(
+			'status' => array( 'id' => FEEDBACK ),
+		) )->send();
+		$t_issue = $this->getJson( $t_response )->issues[0];
+		$this->assertEquals( FEEDBACK, $t_issue->status->id );
 	}
 
 	public function testCreateIssueWithLongText() {
@@ -644,6 +682,10 @@ class RestIssueTest extends RestBase {
 
 	public function tearDown(): void {
 		parent::tearDown();
+
+		if( $this->statusWorkflowSaved ) {
+			$this->restoreConfig( 'status_enum_workflow', $this->savedStatusWorkflow );
+		}
 
 		# Delete tag if it exists
 		# TODO: replace internal calls by GET /tag request when implemented (see #32863)

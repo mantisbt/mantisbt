@@ -38,6 +38,29 @@ use stdClass;
  */
 class IssueUpdateTest extends SoapBase {
 	/**
+	 * @var mixed Saved status workflow configuration, or false if unset.
+	 */
+	private $savedStatusWorkflow = null;
+
+	/**
+	 * @var bool Whether the status workflow configuration was saved.
+	 */
+	private bool $statusWorkflowSaved = false;
+
+	/**
+	 * Restore the status workflow configuration after each test.
+	 *
+	 * @return void
+	 */
+	protected function tearDown(): void {
+		if( $this->statusWorkflowSaved ) {
+			$this->restoreConfig( 'status_enum_workflow', $this->savedStatusWorkflow );
+		}
+
+		parent::tearDown();
+	}
+
+	/**
 	 * A test case that tests the following:
 	 * 1. Ability to create an issue with only the mandatory parameters.
 	 * 2. Ability to retrieve the issue just added.
@@ -551,5 +574,45 @@ class IssueUpdateTest extends SoapBase {
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertCount( 0, $t_issue->monitors );
+	}
+
+	/**
+	 * Verify that SOAP issue updates enforce configured workflow transitions.
+	 *
+	 * @return void
+	 */
+	public function testUpdateStatusEnforcesWorkflow() {
+		$this->savedStatusWorkflow = $this->setConfig( 'status_enum_workflow', array(
+			NEW_ => FEEDBACK . ':feedback',
+		) );
+		$this->statusWorkflowSaved = true;
+
+		$t_issue_id = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$this->getIssueToAdd()
+		);
+		$this->deleteAfterRun( $t_issue_id );
+
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$t_issue->status = array( 'id' => ACKNOWLEDGED );
+
+		try {
+			$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
+			$this->fail( 'Disallowed status transition should fail.' );
+		} catch( SoapFault $e ) {
+			$this->assertStringContainsString(
+				"Status transition from 'new' (10) to 'acknowledged' (30) is not allowed.",
+				$e->getMessage()
+			);
+		}
+
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->assertEquals( NEW_, $t_issue->status->id );
+
+		$t_issue->status = array( 'id' => FEEDBACK );
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->assertEquals( FEEDBACK, $t_issue->status->id );
 	}
 }

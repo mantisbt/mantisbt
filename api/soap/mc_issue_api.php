@@ -1103,8 +1103,17 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 			) {
 				return ApiObjectFactory::faultBadRequest( 'Unresolved child issues.' );
 			}
-			$t_bug_data->status = $t_new_status;
 
+			if( !bug_check_workflow( $t_old_status, $t_new_status ) ) {
+				$t_old_status_name = get_enum_element( 'status', $t_old_status );
+				$t_new_status_name = get_enum_element( 'status', $t_new_status );
+				return ApiObjectFactory::faultBadRequest(
+					"Status transition from '$t_old_status_name' ($t_old_status) to " .
+					"'$t_new_status_name' ($t_new_status) is not allowed."
+				);
+			}
+
+			$t_bug_data->status = $t_new_status;
 		}
 	}
 	if( isset( $p_issue['reproducibility'] ) ) {
