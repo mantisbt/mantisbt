@@ -193,6 +193,13 @@ class EmailSenderPhpMailer extends EmailSender {
 		$p_mail->clearAttachments();
 		$p_mail->clearReplyTos();
 		$p_mail->clearCustomHeaders();
+
+		# Only notifications for newly submitted issues set a Message-ID (see
+		# email_bug_info_to_one_user()). As the PHPMailer object is reused, the
+		# value would otherwise be inherited by every subsequent message, so
+		# unrelated issues end up sharing a Message-ID. An empty value makes
+		# PHPMailer generate a unique one per message.
+		$p_mail->MessageID = '';
 	}
 }
 
