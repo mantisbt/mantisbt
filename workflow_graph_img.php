@@ -26,6 +26,7 @@
  * @uses authentication_api.php
  * @uses compress_api.php
  * @uses config_api.php
+ * @uses graphviz_api.php
  * @uses relationship_graph_api.php
  * @uses workflow_api.php
  */
