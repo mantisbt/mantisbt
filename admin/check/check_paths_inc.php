@@ -57,12 +57,16 @@ $t_path_config_names = array(
 	'library_path',
 	'config_path',
 	'language_path',
-	'graphviz_path',
 );
 
 # Handle file upload default path only if attachments stored on disk
 if( DISK == config_get_global( 'file_upload_method' ) ) {
 	$t_path_config_names[] = 'absolute_path_default_upload_folder';
+}
+
+# Only check GraphViz path if feature is enabled
+if( config_get_global( 'relationship_graph_enable' ) ) {
+	$t_path_config_names[] = 'graphviz_path';
 }
 
 # Build paths for all configs
