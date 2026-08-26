@@ -77,6 +77,8 @@ foreach( $t_path_config_names as $t_path_config_name ) {
 	$t_new_path['real_path'] = realpath( $t_new_path['config_value'] );
 	$t_paths[$t_path_config_name] = $t_new_path;
 }
+# Flush any unhandled errors caused by calling realpath() with open_basedir restriction in place
+check_print_error_rows();
 
 # Trailing directory separator
 foreach( $t_paths as $t_path_config_name => $t_path ) {
