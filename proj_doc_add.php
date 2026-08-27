@@ -38,6 +38,8 @@
  * @noinspection PhpUnhandledExceptionInspection
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
@@ -65,8 +67,10 @@ $f_description = gpc_get_string( 'description' );
 $f_file = gpc_get_file( 'file' );
 
 if( is_blank( $f_title ) ) {
-	error_parameters( lang_get( 'title' ) );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Title is required",
+		ERROR_EMPTY_FIELD,
+		[ lang_get( 'title' ) ]
+	);
 }
 
 file_add( 0, $f_file, 'project', $f_title, $f_description );

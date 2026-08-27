@@ -41,6 +41,9 @@
  * @uses string_api.php
  * @uses utility_api.php
  * @uses version_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 require_once( 'core.php' );
@@ -333,7 +336,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'CUSTOM':
 			if( 0 === $f_custom_field_id ) {
-				trigger_error( ERROR_GENERIC, ERROR );
+				throw new ClientException( "Invalid custom field Id", ERROR_GENERIC );
 			}
 
 			# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
@@ -345,7 +348,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			break;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new ClientException( "Unknown Group action", ERROR_GENERIC );
 	}
 
 	# Bug Action Event

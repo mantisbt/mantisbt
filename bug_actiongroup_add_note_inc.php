@@ -34,6 +34,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 if( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
@@ -110,15 +112,20 @@ function action_add_note_print_fields() {
 /**
  * Validates the action on the specified bug id.
  *
- * @param integer $p_bug_id A bug identifier.
- * @return string|null On failure: the reason why the action could not be validated. On success: null.
+ * @param int $p_bug_id A bug identifier.
+ *
+ * @return string|null On failure: the reason why the action could not be
+ *                     validated. On success: null.
+ * @throws ClientException
  */
 function action_add_note_validate( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );
 
 	if( is_blank( $f_bugnote_text ) ) {
-		error_parameters( lang_get( 'bugnote' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Bugnote text cannot be empty" ,
+			ERROR_EMPTY_FIELD, 
+			[lang_get( 'bugnote' )]
+		);
 	}
 
 	$t_add_bugnote_threshold = config_get( 'add_bugnote_threshold' );
@@ -138,8 +145,11 @@ function action_add_note_validate( $p_bug_id ) {
 /**
  * Executes the custom action on the specified bug id.
  *
- * @param integer $p_bug_id The bug id to execute the custom action on.
- * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
+ * @param int $p_bug_id The bug id to execute the custom action on.
+ *
+ * @return null Previous validation ensures that this function doesn't fail.
+ *              Therefore we can always return null to indicate no errors occurred.
+ * @throws ClientException
  */
 function action_add_note_process( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );

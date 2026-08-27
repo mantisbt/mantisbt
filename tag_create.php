@@ -27,7 +27,12 @@
  * @uses gpc_api.php
  * @uses print_api.php
  * @uses tag_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
@@ -52,8 +57,10 @@ if( !is_null( $f_tag_name ) ) {
 				tag_create( $t_tag_row['name'], $t_tag_user, $f_tag_description );
 				break;
 			case -2:
-				error_parameters( $t_tag_row['name'] );
-				trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
+				throw new ClientException( "Invalid tag name '{$t_tag_row['name']}'",
+					ERROR_TAG_NAME_INVALID,
+					[ $t_tag_row['name'] ]
+				);
 		}
 	}
 }

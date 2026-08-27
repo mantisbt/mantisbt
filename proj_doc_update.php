@@ -35,7 +35,11 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses utility_api.php
+ *
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -70,8 +74,10 @@ $t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 if( is_blank( $f_title ) ) {
-	error_parameters( lang_get( 'title' ) );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Title is required",
+		ERROR_EMPTY_FIELD,
+		[ lang_get( 'title' ) ]
+	);
 }
 
 # @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files
@@ -99,7 +105,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 				file_delete_local( $t_disk_file_name );
 			}
 			if( !move_uploaded_file( $f_file['tmp_name'], $t_disk_file_name ) ) {
-				trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+				throw new ClientException( "File could not be moved", ERROR_FILE_MOVE_FAILED );
 			}
 			chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
@@ -109,8 +115,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 			$c_content = db_prepare_binary_string( fread( fopen( $f_file['tmp_name'], 'rb' ), $f_file['size'] ) );
 			break;
 		default:
-			# @todo Such errors should be checked in the admin checks
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new ClientException( "Invalid file upload method '$t_method'", ERROR_GENERIC );
 	}
 	$t_query = 'UPDATE {project_file}
 		SET title=' . db_param() . ', description=' . db_param() . ', date_added=' . db_param() . ',

@@ -34,7 +34,12 @@
  * @uses print_api.php
  * @uses string_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -63,7 +68,7 @@ $f_protected       = gpc_get_bool( 'protected' );
 $f_enabled         = gpc_get_bool( 'enabled' );
 
 if( $f_password != $f_password_verify ) {
-	trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
+	throw new ClientException( "Password does not match", ERROR_USER_CREATE_PASSWORD_MISMATCH );
 }
 
 # Password won't be sent by email. It is entered by the admin
