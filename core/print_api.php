@@ -94,9 +94,11 @@ require_api( 'version_api.php' );
  *                           (e.g. read from config_inc.php).
  * @param bool   $p_absolute Indicate if URL is absolute.
  *
- * @return void
+ * @return never
+ * @throws ClientException
  */
-function print_header_redirect( $p_url, $p_sanitize = false, $p_absolute = false ) {
+
+function print_header_redirect( $p_url, $p_sanitize = false, $p_absolute = false ): never {
 	if( error_handled() ) {
 		# Display a basic "proceed" page to show any pending errors, regardless
 		# of $g_stop_on_errors setting which is actually handled in
