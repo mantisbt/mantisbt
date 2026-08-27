@@ -242,7 +242,7 @@ $s_reset_request_msg = 'Ktoś (prawdopodobnie Ty) zażądał zmiany hasła przez
 
 Jeśli prosiłeś o to, odwiedź poniższy adres aby zmienić hasło:';
 $s_reset_request_admin_msg = 'Twoje hasło zostało zresetowane. Odwiedź następujący adres URL, aby ustawić nowy:';
-$s_reset_request_in_progress_msg = 'Jeśli nazwa użytkownika i adres email dla twojego konta są prawidłowe to prześlemy teraz wiadomość potwierdzającą na podany adres. Gdy otrzymasz wiadomość, postępuj zgodnie z podanymi w niej instrukcjami i zmień hasło.';
+$s_reset_request_in_progress_msg = 'Jeśli nazwa użytkownika i adres e-mail dla Twojego konta są prawidłowe, to prześlemy teraz wiadomość potwierdzającą na podany adres. Gdy otrzymasz wiadomość, postępuj zgodnie z podanymi w niej instrukcjami i zmień hasło.';
 $s_email_notification_title_for_status_bug_new = 'Następujące zgłoszenie ma ustawiony status NOWY (ponownie)';
 $s_email_notification_title_for_status_bug_feedback = 'Następujące zgłoszenie wymaga OBSŁUGI.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Następujące zgłoszenie zostało ZATWIERDZONE.';
@@ -419,7 +419,7 @@ $s_resolve_add_bugnote_title = 'Dodawanie komentarza z wyjaśnieniem rozwiązani
 $s_bugnote_add_resolve_button = 'Dodaj komentarz';
 $s_from = 'Od';
 $s_to = 'Do';
-$s_sent_you_this_reminder_about = 'wysłał ci przypomnienie o';
+$s_sent_you_this_reminder_about = 'wysłał(a) Ci przypomnienie o';
 $s_bug_reminder = 'Wyślij przypomnienie';
 $s_reminder_sent_to = 'Przypomnienie wysłano do';
 $s_reminder_sent_none = 'Przypomnienia nie mogły zostać wysłane';
@@ -527,7 +527,7 @@ $s_select_project_button = 'Wybierz projekt';
 $s_lost_password_title = 'Resetowanie hasła';
 $s_lost_password_done_title = 'Wiadomość o haśle wysłana';
 $s_lost_password_subject = 'Resetowanie hasła';
-$s_lost_password_info = 'Aby zmienić zapomniane hasło, proszę podać nazwe użytkownika i adres email dla konta.<br /><br />Jeśli podane dane odpowiadają poprawnemu kontu, otrzymasz w wiadomości email specjalny adres URL zawierający kod weryfikujący dla twojego konta. Proszę otworzyć podany adres aby zmienić hasło.';
+$s_lost_password_info = 'Aby zmienić zapomniane hasło, podaj nazwę użytkownika i adres e-mail dla Twojego konta.<br /><br />Jeśli podane dane odpowiadają poprawnemu kontu, otrzymasz w wiadomości e-mail specjalny adres URL zawierający kod weryfikujący dla Twojego konta. Kliknij ten link, aby zmienić hasło.';
 $s_lost_password_confirm_hash_OK = 'Twoje potwierdzenie zostało zaakceptowane. Proszę zmienić hasło.';
 $s_open_and_assigned_to_me_label = 'Otwarte i przypisane do mnie:';
 $s_open_and_reported_to_me_label = 'Otwarte i zgłoszone przeze mnie:';
