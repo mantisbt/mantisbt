@@ -53,7 +53,6 @@ $t_redirect_url = 'manage_filter_page.php';
 
 if( !filter_db_can_delete_filter( $f_filter_id ) ) {
 	print_header_redirect( $t_redirect_url );
-	exit;
 }
 
 helper_ensure_confirmed(

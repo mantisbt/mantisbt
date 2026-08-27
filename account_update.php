@@ -109,7 +109,6 @@ if( $f_verify_email ) {
 	token_delete( TOKEN_ACCOUNT_CHANGE_EMAIL, $t_user_id );
 	form_security_purge( 'account_update' );
 	print_header_redirect( 'account_page.php' );
-	exit();
 }
 
 $f_email           	= gpc_get_string( 'email', '' );

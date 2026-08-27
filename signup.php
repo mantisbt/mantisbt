@@ -70,7 +70,6 @@ if( auth_is_user_authenticated() ) {
 # Check to see if signup is allowed
 if( !auth_signup_enabled() ) {
 	print_header_redirect( auth_login_page() );
-	exit;
 }
 
 if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 &&

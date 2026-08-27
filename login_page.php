@@ -105,7 +105,6 @@ if( auth_automatic_logon_bypass_form() ) {
 	}
 
 	print_header_redirect( $t_uri );
-	exit;
 }
 
 layout_login_page_begin( $t_form_title );
