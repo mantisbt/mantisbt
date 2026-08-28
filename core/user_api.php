@@ -2029,7 +2029,6 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		$t_email = user_get_field( $p_user_id, 'email' );
 		if( is_blank( $t_email ) ) {
-			trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
 			throw new ClientException(
 				sprintf( "User id '%d' does not have an e-mail address.", (int)$p_user_id ),
 				ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED,

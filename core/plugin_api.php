@@ -145,6 +145,7 @@ function plugin_get_force_installed() {
  * @param string|null $p_basename Plugin base name (defaults to current plugin).
  *
  * @return MantisPlugin Plugin Object
+ * @throws ClientException
  */
 function plugin_get( $p_basename = null ) {
 	global $g_plugin_cache;
@@ -156,8 +157,11 @@ function plugin_get( $p_basename = null ) {
 	}
 
 	if( !plugin_is_registered( $t_current ) ) {
-		error_parameters( $t_current );
-		trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
+		throw new ClientException(
+			"Plugin '$t_current' not registered",
+			ERROR_PLUGIN_NOT_REGISTERED,
+			[ $t_current ]
+		);
 	}
 
 	return $g_plugin_cache[$t_current];
@@ -254,6 +258,7 @@ function plugin_file( $p_file, $p_redirect = false, $p_base_name = null ) {
  * @param string $p_basename Plugin basename.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
 	global $g_plugin_mime_types;
@@ -266,8 +271,11 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 
 	$t_file_path = plugin_file_path( $p_filename, $t_current );
 	if( false === $t_file_path ) {
-		error_parameters( $t_current, $p_filename );
-		trigger_error( ERROR_PLUGIN_FILE_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Plugin file '$p_filename' not found",
+			ERROR_PLUGIN_FILE_NOT_FOUND,
+			[$t_current, $p_filename]
+		);
 	}
 
 	$t_content_type = '';
@@ -864,13 +872,15 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 		if( 2 == $t_status ) {
 			plugin_config_set( 'schema', $i );
 		} else {
-			error_parameters( 
-				$i, 
-				$g_db->ErrorMsg(), 
-				implode( '<br>', $t_sqlarray ) 
+			throw new ClientException(
+				"Plugin upgrade failed at step $i",
+				ERROR_PLUGIN_UPGRADE_FAILED,
+				[
+					$i,
+					$g_db->ErrorMsg(),
+					implode( '<br>', $t_sqlarray ),
+				]
 			);
-			trigger_error( ERROR_PLUGIN_UPGRADE_FAILED, ERROR );
-			return null;
 		}
 
 		$i++;
@@ -1045,6 +1055,7 @@ function plugin_is_registered( $p_basename ) {
  * @param string $p_child    Child filename.
  *
  * @return MantisPlugin
+ * @throws ClientException
  */
 function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 	global $g_plugin_cache;
@@ -1085,15 +1096,16 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 				"Plugin '$t_basename' is invalid ('$t_classname' class is not defined)"
 			);
 		} else {
-			error_parameters( $t_basename, $t_classname );
-			trigger_error( ERROR_PLUGIN_CLASS_NOT_FOUND, ERROR );
+			throw new ClientException(
+				"Plugin Class '$t_classname' not defined in '$t_basename'",
+				ERROR_PLUGIN_CLASS_NOT_FOUND,
+				[ $t_basename, $t_classname ]
+			);
 		}
 
 		if( $p_return ) {
-			/** @noinspection PhpUndefinedVariableInspection */
 			return $t_plugin;
 		} else {
-			/** @noinspection PhpUndefinedVariableInspection */
 			$g_plugin_cache[$t_basename] = $t_plugin;
 		}
 	}

@@ -35,6 +35,9 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\StateException;
+
 require_api( 'constant_inc.php' );
 require_api( 'utility_api.php' );
 
@@ -360,19 +363,23 @@ class Graph {
 	 * @param boolean $p_headers Whether to sent http headers.
 	 *
 	 * @return void
+	 * @throws StateException
+	 * @throws Exception
 	 */
 	public function output( $p_format = 'dot', $p_headers = false ) {
 		# Check if it is a recognized format.
 		if( !isset( $this->formats[$p_format] ) ) {
-			error_parameters( "Invalid Graph format '$p_format'." );
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new Exception( "Invalid Graph format '$p_format'." );
 		}
 
 		# Graphviz tool missing or not executable
 		$t_tool_path = $this->tool_path();
 		if( !is_executable( $t_tool_path ) ) {
-			error_parameters( $t_tool_path );
-			trigger_error( ERROR_GRAPH_TOOL_NOT_FOUND, ERROR );
+			throw new StateException(
+				"Graphviz tool '$t_tool_path' not found or not executable.",
+				ERROR_GRAPH_TOOL_NOT_FOUND,
+				[ $t_tool_path ]
+			);
 		}
 
 		# Retrieve the source dot document into a buffer
@@ -396,7 +403,11 @@ class Graph {
 
 		if( !is_resource( $t_process ) ) {
 			# proc_open failed
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new StateException(
+				"Graphviz tool '$t_tool_path' execution failed.",
+				ERROR_GRAPH_TOOL_NOT_FOUND,
+				[ $t_tool_path ]
+			);
 		}
 
 		# Check for output in stderr
@@ -405,8 +416,11 @@ class Graph {
 		$t_error = file_get_contents( $t_stderr );
 		unlink( $t_stderr );
 		if( $t_error ) {
-			error_parameters( $t_error );
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new StateException(
+				"Errors during Graphviz execution: $t_error.",
+				ERROR_GENERIC,
+				[ $t_error ]
+			);
 		}
 
 		# Filter the generated document through dot

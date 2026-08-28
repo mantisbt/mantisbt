@@ -26,6 +26,8 @@
  * @uses crypto_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'crypto_api.php' );
 
 /**
@@ -57,22 +59,30 @@ function api_token_get( $p_token_id ) {
 /**
  * Create an API token
  *
- * @param string $p_token_name The name (description) identifying what the token is going to be used for.
- * @param integer $p_user_id The user id.
- * @param bool $p_return_id if true, returns an associate array with id and token.
+ * @param string  $p_token_name The name (description) identifying what the
+ *                              token is going to be used for.
+ * @param integer $p_user_id    The user id.
+ * @param bool    $p_return_id  if true, returns an associate array with id and
+ *                              token.
+ *
  * @return string|array The plain token or array of id and token.
+ * @throws ClientException
  * @access public
  */
 function api_token_create( $p_token_name, $p_user_id, $p_return_id = false ) {
 	if( is_blank( $p_token_name ) ) {
-		error_parameters( lang_get( 'api_token_name' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Token name cannot be empty",
+			ERROR_EMPTY_FIELD,
+			[lang_get( 'api_token_name' )]
+		);
 	}
 
 	$t_token_name = trim( $p_token_name );
 	if( mb_strlen( $t_token_name ) > DB_FIELD_SIZE_API_TOKEN_NAME ) {
-		error_parameters( lang_get( 'api_token_name' ), DB_FIELD_SIZE_API_TOKEN_NAME );
-		trigger_error( ERROR_FIELD_TOO_LONG, ERROR );
+		throw new ClientException( "Token name too long",
+			ERROR_FIELD_TOO_LONG,
+			[lang_get( 'api_token_name' ), DB_FIELD_SIZE_API_TOKEN_NAME]
+		);
 	}
 
 	api_token_name_ensure_unique( $t_token_name, $p_user_id );
@@ -124,16 +134,21 @@ function api_token_name_is_unique( $p_token_name, $p_user_id ) {
 }
 
 /**
- * Ensure that the specified token name is unique to the user, otherwise,
- * prompt the user with an error.
+ * Ensure that the specified token name is unique to the user.
+ *
+ * If not, an error is thrown.
  *
  * @param string $p_token_name The token name.
- * @param string $p_user_id The user id.
+ * @param string $p_user_id    The user id.
+ *
+ * @throws ClientException
  */
 function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
 	if ( !api_token_name_is_unique( $p_token_name, $p_user_id ) ) {
-		error_parameters( $p_token_name );
-		trigger_error( ERROR_API_TOKEN_NAME_NOT_UNIQUE, ERROR );
+		throw new ClientException( 'Token name is not unique',
+			ERROR_API_TOKEN_NAME_NOT_UNIQUE,
+			[$p_token_name]
+		);
 	}
 }
 

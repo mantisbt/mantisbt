@@ -53,6 +53,9 @@
  * @uses version_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\StateException;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_group_action_api.php' );
@@ -132,7 +135,7 @@ function print_header_redirect( $p_url, $p_sanitize = false, $p_absolute = false
 		header( 'Content-Type: text/html; charset=utf-8' );
 		header( 'Location: ' . $t_url );
 	} else {
-		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
+		throw new ClientException( "Page redirection error", ERROR_PAGE_REDIRECTION );
 	}
 
 	die;
@@ -2108,6 +2111,7 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
  * @param array $p_attachment An attachment array from within the array returned by
  *              the file_get_visible_attachments() function.
  * @return void
+ * @throws StateException
  */
 function print_bug_attachment_preview_text( array $p_attachment ) {
 	if( !$p_attachment['exists'] ) {
@@ -2128,7 +2132,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 			$t_content = $t_row['content'];
 			break;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new StateException( "Unknown file upload method", ERROR_GENERIC );
 	}
 	echo htmlspecialchars( $t_content, ENT_SUBSTITUTE, 'UTF-8' );
 	echo '</pre>';

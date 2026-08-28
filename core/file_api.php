@@ -54,6 +54,7 @@ require_api( 'utility_api.php' );
 
 use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\ServiceException;
+use Mantis\Exceptions\StateException;
 
 $g_cache_file_count = array();
 
@@ -235,7 +236,7 @@ function file_bug_has_attachments( $p_bug_id ) {
  * @param int|null $p_bugnote_id       If specified, will check at bugnote level
  *
  * @return bool
- * @throws ClientException
+ * @throws Exception
  *
  * @internal Should not be used outside of File API.
  */
@@ -255,8 +256,7 @@ function file_can_view_or_download( $p_action, $p_bug_id, $p_uploader_user_id, $
 			$t_threshold_own = 'allow_download_own_attachments';
 			break;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
-			return false;
+			throw new Exception( __FUNCTION__ . "() - Unknown action: $p_action" );
 	}
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -698,11 +698,16 @@ function file_delete_local( $p_filename ) {
  * @param string $p_table      Database table name.
  *
  * @return string
+ * @throws ClientException
  */
 function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 	$t_bug_file_table = db_get_table( $p_table . '_file' );
 	if( !db_field_exists( $p_field_name, $t_bug_file_table ) ) {
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Field '$p_field_name' does not exist",
+			ERROR_DB_FIELD_NOT_FOUND,
+			[ $p_field_name ]
+		);
 	}
 
 	db_param_push();
@@ -1316,7 +1321,7 @@ function file_get_mime_type_for_content( $p_content ) {
  *
  * @return array|bool array containing file type and content or false on
  *                    failure to retrieve file
- * @throws ClientException
+ * @throws StateException
  */
 function file_get_content( $p_file_id, $p_type = 'bug' ) {
 	# we handle the case where the file is attached to a bug
@@ -1367,7 +1372,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 
 			return array( 'type' => $t_content_type, 'content' => $t_row['content'] );
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new StateException( "Unknown file upload method", ERROR_GENERIC );
 	}
 	return false;
 }
@@ -1433,7 +1438,10 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 			chmod( $t_disk_file_name_from, 0775 );
 			if( !rename( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
 				if( !copy( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
-					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+					throw new ServiceException(
+						"Unable to move file to '$t_disk_file_name_to'",
+						ERROR_FILE_MOVE_FAILED
+					);
 				}
 				file_delete_local( $t_disk_file_name_from );
 			}
@@ -1445,7 +1453,10 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 				false
 			);
 		} else {
-			trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+			throw new ClientException(
+				"File '$t_disk_file_name_to' already exists",
+				ERROR_FILE_DUPLICATE
+			);
 		}
 	}
 	db_param_pop();

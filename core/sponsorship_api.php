@@ -33,6 +33,8 @@
  * @uses history_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
@@ -99,9 +101,12 @@ $g_cache_sponsorships = array();
  * If the second parameter is true (default), trigger an error
  * if the sponsorship can't be found.  If the second parameter is
  * false, return false if the sponsorship can't be found.
- * @param integer $p_sponsorship_id The sponsorship identifier to retrieve and cache.
- * @param boolean $p_trigger_errors Whether to trigger an error if the identifier is not found.
+ * @param integer $p_sponsorship_id The sponsorship identifier to retrieve and
+ *                                  cache.
+ * @param boolean $p_trigger_errors Whether to trigger an error if the
+ *                                  identifier is not found.
  * @return array|boolean
+ * @throws ClientException
  */
 function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 	global $g_cache_sponsorships;
@@ -122,8 +127,11 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 		$g_cache_sponsorships[$c_sponsorship_id] = false;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_sponsorship_id );
-			trigger_error( ERROR_SPONSORSHIP_NOT_FOUND, ERROR );
+			throw new ClientException(
+				"Sponsorship #$p_sponsorship_id not found",
+				ERROR_SPONSORSHIP_NOT_FOUND,
+				[ $p_sponsorship_id ]
+			);
 		} else {
 			return false;
 		}
@@ -294,16 +302,20 @@ function sponsorship_update_bug( $p_bug_id ) {
 
 /**
  * if sponsorship contains a non-zero id, then update the corresponding record.
- * if sponsorship contains a zero id, search for bug_id/user_id, if found, then update the entry
- * otherwise add a new entry
+ * if sponsorship contains a zero id, search for bug_id/user_id, if found, then
+ * update the entry otherwise add a new entry
  * @param SponsorshipData $p_sponsorship The sponsorship data object to set.
  * @return integer
+ * @throws ClientException
  */
 function sponsorship_set( SponsorshipData $p_sponsorship ) {
 	$t_min_sponsorship = config_get( 'minimum_sponsorship_amount' );
 	if( $p_sponsorship->amount < $t_min_sponsorship ) {
-		error_parameters( $p_sponsorship->amount, $t_min_sponsorship );
-		trigger_error( ERROR_SPONSORSHIP_AMOUNT_TOO_LOW, ERROR );
+		throw new ClientException(
+			"Minimum sponsorship amount is $t_min_sponsorship",
+			ERROR_SPONSORSHIP_NOT_FOUND,
+			[ $p_sponsorship->amount, $t_min_sponsorship ]
+		);
 	}
 
 	# if id == 0, check if the specified user is already sponsoring the bug, if so, overwrite
