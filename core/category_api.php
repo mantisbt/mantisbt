@@ -118,56 +118,46 @@ function category_ensure_exists_in_project( $p_category_id, $p_project_id ) {
  * Validate a category's assigned user.
  *
  * The user must exist, be enabled, and have the project access level required
- * to handle issues. Core callers use the traditional error mechanism, while
- * command callers can request a ClientException.
+ * to handle issues.
  *
  * @param int  $p_assigned_to     User identifier, or NO_USER.
  * @param int  $p_project_id      Project identifier.
- * @param bool $p_throw_exception Whether to throw a ClientException.
  *
  * @return void
- * @throws ClientException If requested and validation fails.
+ * @throws ClientException If validation fails.
  */
-function category_validate_assigned_to( $p_assigned_to, $p_project_id, $p_throw_exception = false ) {
-	$t_assigned_to = $p_assigned_to;
-	$t_error_code = null;
-	$t_error_message = null;
-
-	if( !is_numeric( $t_assigned_to ) || (int)$t_assigned_to < NO_USER ) {
-		$t_error_code = ERROR_INVALID_FIELD_VALUE;
-		$t_error_message = "'assigned_to' must be a valid user identifier";
+function category_validate_assigned_to( $p_assigned_to, $p_project_id ) {
+	if( !is_numeric( $p_assigned_to ) || (int)$p_assigned_to < NO_USER ) {
+		throw new ClientException( "'assigned_to' must be a valid user identifier",
+			ERROR_INVALID_FIELD_VALUE,
+			[ $p_assigned_to ]
+		);
 	} else {
-		$t_assigned_to = (int)$t_assigned_to;
+		$t_assigned_to = (int)$p_assigned_to;
 		if( $t_assigned_to === NO_USER ) {
 			return;
 		}
 
 		if( !user_exists( $t_assigned_to ) ) {
-			$t_error_code = ERROR_USER_BY_ID_NOT_FOUND;
-			$t_error_message = sprintf( "User '%d' not found.", $t_assigned_to );
+			throw new ClientException( "User '$t_assigned_to' not found.",
+				ERROR_USER_BY_ID_NOT_FOUND,
+				[ $t_assigned_to ]
+			);
 		} elseif( !user_is_enabled( $t_assigned_to ) ) {
-			$t_error_code = ERROR_ACCESS_DENIED;
-			$t_error_message = sprintf( "User '%d' is disabled and can't be assigned issues.", $t_assigned_to );
-		} elseif( !access_has_project_level(
-			config_get( 'handle_bug_threshold', null, null, $p_project_id ),
-			$p_project_id,
-			$t_assigned_to
-		) ) {
-			$t_error_code = $p_throw_exception ? ERROR_ACCESS_DENIED : ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS;
-			$t_error_message = sprintf( "User '%d' can't be assigned issues.", $t_assigned_to );
+			throw new ClientException( "User '$t_assigned_to' is disabled and can't be assigned issues.",
+				ERROR_ACCESS_DENIED,
+				[ $t_assigned_to ]
+			);
+		} else {
+			$t_handle_bug_threshold = config_get( 'handle_bug_threshold', null, null, $p_project_id );
+			if( !access_has_project_level( $t_handle_bug_threshold, $p_project_id, $t_assigned_to ) ) {
+				throw new ClientException( "User '$t_assigned_to' can't be assigned issues.",
+					ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS,
+					[ $t_assigned_to ]
+				);
+			}
 		}
 	}
-
-	if( $t_error_code === null ) {
-		return;
-	}
-
-	if( $p_throw_exception ) {
-		throw new ClientException( $t_error_message, $t_error_code, [ $p_assigned_to ] );
-	}
-
-	error_parameters( $p_assigned_to );
-	trigger_error( $t_error_code, ERROR );
 }
 
 /**
