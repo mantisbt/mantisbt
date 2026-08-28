@@ -236,7 +236,11 @@ print_manage_menu( 'manage_proj_page.php' );
 		<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
 <?php
-		$t_categories = category_get_all_rows( ALL_PROJECTS );
+		$t_data = [ 'query' => [ 'project_id' => ALL_PROJECTS ] ];
+		$t_command = new CategoryGetCommand( $t_data );
+		$t_result = $t_command->execute();
+
+		$t_categories = $t_result['categories'];
 		$t_can_update_global_cat = access_has_global_level( config_get( 'manage_site_threshold' ) );
 
 		if( count( $t_categories ) > 0 ) {
@@ -255,11 +259,14 @@ print_manage_menu( 'manage_proj_page.php' );
 <?php
 			foreach( $t_categories as $t_category ) {
 				$t_id = $t_category['id'];
+				$t_handler_id = isset( $t_category['handler'] )
+					? $t_category['handler']['id']
+					: NO_USER;
 ?>
 			<tr>
 				<td><?php echo string_attribute( category_full_name( $t_id, false ) )  ?></td>
-				<td class="center"><?php echo trans_bool( $t_category['status'] ) ?></td>
-				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
+				<td class="center"><?php echo trans_bool( $t_category['enabled'] ) ?></td>
+				<td><?php echo prepare_user_name( $t_handler_id ) ?></td>
 				<?php if( $t_can_update_global_cat ) { ?>
 				<td class="center">
 					<div class="btn-group inline">

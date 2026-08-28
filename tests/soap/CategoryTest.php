@@ -35,7 +35,7 @@ class CategoryTest extends SoapBase {
 	/**
 	 * @var array Category names to delete at end of test run
 	 */
-	private $categoryNamesToDelete = array();
+	private $categoryNamesToDelete = [];
 
 	/**
 	 * A test case that tests the following:
@@ -78,7 +78,7 @@ class CategoryTest extends SoapBase {
 			$t_category_new_name,
 			'' );
 
-		$this->categoryNamesToDelete = array( $t_category_new_name );
+		$this->categoryNamesToDelete = [ $t_category_new_name ];
 
 		$t_category_list = $this->client->mc_project_get_categories(
 			$this->userName,
@@ -94,7 +94,7 @@ class CategoryTest extends SoapBase {
 			$t_project_id,
 			$t_category_new_name );
 
-		$this->categoryNamesToDelete = array();
+		$this->categoryNamesToDelete = [];
 
 		$t_category_list = $this->client->mc_project_get_categories(
 			$this->userName,
@@ -102,6 +102,32 @@ class CategoryTest extends SoapBase {
 			$t_project_id );
 
 		$this->assertNotContains( $t_category_new_name, $t_category_list );
+	}
+
+	/**
+	 * Test deleting a category reassigns issues to the configured category.
+	 *
+	 * @return void
+	 */
+	public function testDeleteCategoryReassignsIssues() {
+		$t_project_id = $this->getProjectId();
+		$t_target_id = config_get( 'default_category_for_moves' );
+		if( $t_target_id <= 0 || !category_exists( $t_target_id ) || (int)category_get_field( $t_target_id, 'project_id' ) !== $t_project_id ) {
+			$this->markTestSkipped( 'The configured default category does not exist in the test project.' );
+		}
+
+		$t_target_name = category_get_name( $t_target_id );
+		$t_source_name = 'soaptest_source_' . date( 'Ymd_His' );
+		$this->client->mc_project_add_category( $this->userName, $this->password, $t_project_id, $t_source_name );
+		$this->categoryNamesToDelete[] = $t_source_name;
+		$t_issue = $this->getIssueToAdd();
+		$t_issue['category'] = $t_source_name;
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue );
+		$this->deleteAfterRun( $t_issue_id );
+
+		$this->assertEquals( 1, $this->client->mc_project_delete_category( $this->userName, $this->password, $t_project_id, $t_source_name ) );
+		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->assertEquals( $t_target_name, $t_updated_issue->category );
 	}
 
 	/**

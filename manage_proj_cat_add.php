@@ -57,8 +57,6 @@ $f_project_id	= gpc_get_int( 'project_id' );
 $f_name			= gpc_get_string( 'name' );
 $f_add_and_edit	= gpc_get_bool( 'add_and_edit_category' );
 
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
-
 if( is_blank( $f_name ) ) {
 	error_parameters( lang_get( 'category' ) );
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -78,7 +76,13 @@ foreach( $t_names as $t_name ) {
 
 	$t_name = trim( $t_name );
 	if( category_is_unique( $f_project_id, $t_name ) ) {
-		$t_id = category_add( $f_project_id, $t_name );
+		$t_data = [
+			'query' => [ 'project_id' => $f_project_id ],
+			'payload' => [ 'name' => $t_name ],
+		];
+		$t_command = new CategoryAddCommand( $t_data );
+		$t_result = $t_command->execute();
+		$t_id = $t_result['category']['id'];
 	} else if( 1 == $t_category_count ) {
 		# We only error out on duplicates when a single value was
 		#  given.  If multiple values were given, we just add the

@@ -260,15 +260,20 @@ function mci_project_initial_checks( $p_username, $p_password, $p_project_id, $p
  * @return array|RestFault|SoapFault An array of category names
  */
 function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
-	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, true );
-	if( $t_result !== true ) {
-		return $t_result;
+	if( mci_check_login( $p_username, $p_password ) === false ) {
+		return mci_fault_login_failed();
 	}
 
-	$t_result = array();
-	$t_cat_array = category_get_all_rows( $p_project_id, null, false, true );
-	foreach( $t_cat_array as $t_category_row ) {
-		$t_result[] = $t_category_row['name'];
+	$t_data = [ 'query' => [ 'project_id' => $p_project_id ] ];
+	$t_command = new CategoryGetCommand( $t_data );
+	$t_result = $t_command->execute();
+
+	$t_categories = $t_result['categories'];
+	$t_result = [];
+	foreach( $t_categories as $t_category ) {
+		if( $t_category['enabled'] ) {
+			$t_result[] = $t_category['name'];
+		}
 	}
 	return $t_result;
 }
@@ -284,12 +289,18 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
  * @return int|RestFault|SoapFault Id of the new category
  */
 function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_category_name ) {
-	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, false );
-	if( $t_result !== true ) {
-		return $t_result;
+	if( mci_check_login( $p_username, $p_password ) === false ) {
+		return mci_fault_login_failed();
 	}
 
-	return category_add( $p_project_id, $p_category_name );
+	$t_data = [
+		'query' => [ 'project_id' => $p_project_id ],
+		'payload' => [ 'name' => $p_category_name ],
+	];
+	$t_command = new CategoryAddCommand( $t_data );
+	$t_result = $t_command->execute();
+
+	return $t_result['category']['id'];
 }
 
 /**
@@ -303,24 +314,23 @@ function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_ca
  * @return bool|RestFault|SoapFault True or false depending on the success of the delete action.
  */
 function mc_project_delete_category( $p_username, $p_password, $p_project_id, $p_category_name ) {
-	$t_result = mci_project_initial_checks( $p_username, $p_password, $p_project_id, false );
-	if( $t_result !== true ) {
-		return $t_result;
+	if( mci_check_login( $p_username, $p_password ) === false ) {
+		return mci_fault_login_failed();
 	}
 
-	# find the id of the category
-	$p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
+	$t_data = [
+		'query' => [
+			'project_id' => $p_project_id,
+			'category_name' => $p_category_name,
+		],
+		'options' => [
+			'allow_reassign' => true,
+			'new_category_id' => config_get( 'default_category_for_moves' ),
+		],
+	];
+	$t_command = new CategoryDeleteCommand( $t_data );
+	$t_command->execute();
 
-	if( !category_can_remove( $p_category_id ) ) {
-		return ApiObjectFactory::fault(
-			'Client',
-			"'$p_category_name' is used as default category for moves and can't be deleted.",
-			HTTP_STATUS_FORBIDDEN
-		);
-	}
-
-	# delete the category and link all the issues to the default category
-	category_remove( $p_category_id, config_get( 'default_category_for_moves' ) );
 	return true;
 }
 
@@ -337,7 +347,6 @@ function mc_project_delete_category( $p_username, $p_password, $p_project_id, $p
  * @return bool|RestFault|SoapFault True or false depending on the success of the update action
  */
 function mc_project_rename_category_by_name( $p_username, $p_password, $p_project_id, $p_category_name, $p_category_name_new, $p_assigned_to ) {
-	global $g_project_override;
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( null === $p_assigned_to ) {
@@ -348,21 +357,20 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 		return mci_fault_access_denied();
 	}
 
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
+	$t_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
+	$t_data = [
+		'query' => [
+			'project_id' => $p_project_id,
+			'category_id' => $t_category_id,
+		],
+		'payload' => [
+			'name' => $p_category_name_new,
+			'handler' => (int)$p_assigned_to === NO_USER ? null : [ 'id' => (int)$p_assigned_to ],
+		],
+	];
+	$t_command = new CategoryUpdateCommand( $t_data );
+	$t_command->execute();
 
-	$g_project_override = $p_project_id;
-
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-		return mci_fault_access_denied();
-	}
-
-	# find the id of the category
-	$p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
-
-	# update the category
-	category_update( $p_category_id, $p_category_name_new, $p_assigned_to );
 	return true;
 }
 
@@ -858,30 +866,18 @@ function mci_project_versions( $p_project_id ) {
  * @return array The array of categories with their info.
  */
 function mci_project_categories( $p_project_id ) {
-	$t_categories = category_get_all_rows( $p_project_id );
-	$t_results = array();
-
-	foreach( $t_categories as $t_category ) {
-		$t_project_id = (int)$t_category['project_id'];
-		$t_result = array(
-			'id' => (int)$t_category['id'],
-			'name' => $t_category['name'],
-			'project' => array( 'id' => $t_project_id, 'name' => $t_category['project_name'] ),
-			'status' => $t_category['status'],
-		);
-
-		# Do access check here to take into consideration the project id that the
-		# category is associated with in case of inherited categories.
-		$t_default_handler_id = (int)$t_category['user_id'];
-		if( $t_default_handler_id != 0 &&
-		    access_has_project_level( config_get( 'manage_project_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			$t_result['default_handler'] = mci_account_get_array_by_id( $t_default_handler_id );
+	$t_data = [ 'query' => [ 'project_id' => $p_project_id ] ];
+	$t_command = new CategoryGetCommand( $t_data );
+	$t_result = $t_command->execute();
+	foreach( $t_result['categories'] as &$t_category ) {
+		if( isset( $t_category['handler'] ) ) {
+			$t_category['default_handler'] = $t_category['handler'];
+			unset( $t_category['handler'] );
 		}
-
-		$t_results[] = $t_result;
 	}
+	unset( $t_category );
 
-	return $t_results;
+	return $t_result['categories'];
 }
 
 /**

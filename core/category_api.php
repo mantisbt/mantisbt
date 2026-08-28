@@ -113,6 +113,62 @@ function category_ensure_exists_in_project( $p_category_id, $p_project_id ) {
 }
 
 /**
+ * Validate a category's assigned user.
+ *
+ * The user must exist, be enabled, and have the project access level required
+ * to handle issues. Core callers use the traditional error mechanism, while
+ * command callers can request a ClientException.
+ *
+ * @param int  $p_assigned_to     User identifier, or NO_USER.
+ * @param int  $p_project_id      Project identifier.
+ * @param bool $p_throw_exception Whether to throw a ClientException.
+ *
+ * @return void
+ * @throws ClientException If requested and validation fails.
+ */
+function category_validate_assigned_to( $p_assigned_to, $p_project_id, $p_throw_exception = false ) {
+	$t_assigned_to = $p_assigned_to;
+	$t_error_code = null;
+	$t_error_message = null;
+
+	if( !is_numeric( $t_assigned_to ) || (int)$t_assigned_to < NO_USER ) {
+		$t_error_code = ERROR_INVALID_FIELD_VALUE;
+		$t_error_message = "'assigned_to' must be a valid user identifier";
+	} else {
+		$t_assigned_to = (int)$t_assigned_to;
+		if( $t_assigned_to === NO_USER ) {
+			return;
+		}
+
+		if( !user_exists( $t_assigned_to ) ) {
+			$t_error_code = ERROR_USER_BY_ID_NOT_FOUND;
+			$t_error_message = sprintf( "User '%d' not found.", $t_assigned_to );
+		} elseif( !user_is_enabled( $t_assigned_to ) ) {
+			$t_error_code = ERROR_ACCESS_DENIED;
+			$t_error_message = sprintf( "User '%d' is disabled and can't be assigned issues.", $t_assigned_to );
+		} elseif( !access_has_project_level(
+			config_get( 'handle_bug_threshold', null, null, $p_project_id ),
+			$p_project_id,
+			$t_assigned_to
+		) ) {
+			$t_error_code = $p_throw_exception ? ERROR_ACCESS_DENIED : ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS;
+			$t_error_message = sprintf( "User '%d' can't be assigned issues.", $t_assigned_to );
+		}
+	}
+
+	if( $t_error_code === null ) {
+		return;
+	}
+
+	if( $p_throw_exception ) {
+		throw new ClientException( $t_error_message, $t_error_code, [ $p_assigned_to ] );
+	}
+
+	error_parameters( $p_assigned_to );
+	trigger_error( $t_error_code, ERROR );
+}
+
+/**
  * Check whether the category is unique within a project
  * @param integer $p_project_id A project identifier.
  * @param string  $p_name       Project name.
@@ -219,17 +275,8 @@ function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = n
 	$t_old_category = category_get_row( $p_category_id );
 	$t_project_id = (int)$t_old_category['project_id'];
 
-	# Ensure target user exists and is allowed to handle bugs
-	if( $p_assigned_to != NO_USER ) {
-		if( user_exists( $p_assigned_to ) ) {
-			$t_handle_bugs = config_get( 'handle_bug_threshold' );
-			if( !access_has_project_level( $t_handle_bugs, $t_project_id, $p_assigned_to ) ) {
-				trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
-			}
-		} else {
-			error_parameters( $p_assigned_to );
-			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
-		}
+	if( !is_numeric( $p_assigned_to ) || (int)$p_assigned_to !== (int)$t_old_category['user_id'] ) {
+		category_validate_assigned_to( $p_assigned_to, $t_project_id );
 	}
 
 	# Disabling category is not authorized if it is used as default
@@ -428,6 +475,40 @@ function category_sort_rows_by_project( $p_category1, ?array $p_category2 = null
 $g_cache_category_project = null;
 
 /**
+ * Flush cached category data.
+ *
+ * If a project is specified, only category data cached for that project is
+ * invalidated. If no project is specified, all category caches are flushed.
+ *
+ * @param int|null $p_project_id Project identifier, or null for all projects.
+ *
+ * @return void
+ */
+function category_cache_flush( $p_project_id = null ) {
+	global $g_category_cache, $g_cache_category_project;
+
+	if( $p_project_id === null ) {
+		$g_category_cache = [];
+		$g_cache_category_project = null;
+		return;
+	}
+
+	$p_project_id = (int)$p_project_id;
+	if( isset( $g_cache_category_project[$p_project_id] ) ) {
+		foreach( $g_cache_category_project[$p_project_id] as $t_category_id ) {
+			unset( $g_category_cache[(int)$t_category_id] );
+		}
+		unset( $g_cache_category_project[$p_project_id] );
+	}
+
+	foreach( $g_category_cache as $t_category_id => $t_category_row ) {
+		if( isset( $t_category_row['project_id'] ) && (int)$t_category_row['project_id'] === $p_project_id ) {
+			unset( $g_category_cache[$t_category_id] );
+		}
+	}
+}
+
+/**
  * Cache categories from multiple projects
  * @param array $p_project_id_array Array of project identifiers.
  * @return void
@@ -551,7 +632,7 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 		$t_inherit = false;
 	} else {
 		if( $p_inherit === null ) {
-			$t_inherit = config_get( 'subprojects_inherit_categories' );
+			$t_inherit = config_get( 'subprojects_inherit_categories', null, null, $p_project_id );
 		} else {
 			$t_inherit = $p_inherit;
 		}
@@ -748,5 +829,25 @@ function category_ensure_can_delete( $p_category_id ) {
  */
 function category_is_enabled( $p_category_id ) {
 	return $p_category_id == 0
-		|| category_get_field( $p_category_id, 'status' ) == CATEGORY_STATUS_ENABLED;
+		|| category_status_to_enabled( category_get_field( $p_category_id, 'status' ) );
+}
+
+/**
+ * Convert a category enabled flag to its database status value.
+ *
+ * @param bool $p_enabled Whether the category is enabled.
+ * @return int The category status value.
+ */
+function category_enabled_to_status( $p_enabled ) {
+	return $p_enabled ? CATEGORY_STATUS_ENABLED : CATEGORY_STATUS_DISABLED;
+}
+
+/**
+ * Convert a category database status value to an enabled flag.
+ *
+ * @param int $p_status The category status value.
+ * @return bool Whether the category is enabled.
+ */
+function category_status_to_enabled( $p_status ) {
+	return (int)$p_status === CATEGORY_STATUS_ENABLED;
 }
