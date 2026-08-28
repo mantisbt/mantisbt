@@ -57,12 +57,16 @@ $t_path_config_names = array(
 	'library_path',
 	'config_path',
 	'language_path',
-	'graphviz_path',
 );
 
 # Handle file upload default path only if attachments stored on disk
 if( DISK == config_get_global( 'file_upload_method' ) ) {
 	$t_path_config_names[] = 'absolute_path_default_upload_folder';
+}
+
+# Only check GraphViz path if feature is enabled
+if( config_get_global( 'relationship_graph_enable' ) ) {
+	$t_path_config_names[] = 'graphviz_path';
 }
 
 # Build paths for all configs
@@ -73,6 +77,8 @@ foreach( $t_path_config_names as $t_path_config_name ) {
 	$t_new_path['real_path'] = realpath( $t_new_path['config_value'] );
 	$t_paths[$t_path_config_name] = $t_new_path;
 }
+# Flush any unhandled errors caused by calling realpath() with open_basedir restriction in place
+check_print_error_rows();
 
 # Trailing directory separator
 foreach( $t_paths as $t_path_config_name => $t_path ) {
