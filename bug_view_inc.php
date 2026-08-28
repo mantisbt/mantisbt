@@ -1151,7 +1151,7 @@ function bug_view_button_bug_change_status( BugData $p_bug ) {
 		foreach( $t_enum_list as $t_key => $t_val ) {
 			echo '<option value="' . $t_key . '" ';
 			check_selected( $t_key, $t_default );
-			echo '>' . $t_val . '</option>';
+			echo '>' . string_attribute( $t_val ) . '</option>';
 		}
 		echo '</select>';
 
