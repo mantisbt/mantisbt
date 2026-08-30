@@ -333,15 +333,19 @@ function custom_field_clear_cache_values( $p_bug_id = null ) {
  * @access public
  */
 function custom_field_clear_cache( $p_field_id = null ) {
-	global $g_cache_custom_field, $g_cached_custom_field_lists;
+	global $g_cache_custom_field_all, $g_cache_custom_field, $g_cache_cf_list, $g_cache_name_to_id_map, $g_cache_cf_linked;
 
-	$g_cached_custom_field_lists = null;
+	$g_cache_custom_field_all = false;
+	$g_cache_cf_list = null;
+	$g_cache_name_to_id_map = [];
+	$g_cache_cf_linked = [];
 
 	if( null === $p_field_id ) {
-		$g_cache_custom_field = array();
+		$g_cache_custom_field = [];
 	} else {
-		if( isset( $g_cache_custom_field[$p_field_id] ) ) {
-			unset( $g_cache_custom_field[$p_field_id] );
+		$c_field_id = (int)$p_field_id;
+		if( isset( $g_cache_custom_field[$c_field_id] ) ) {
+			unset( $g_cache_custom_field[$c_field_id] );
 		}
 	}
 }
@@ -594,7 +598,10 @@ function custom_field_create( $p_name ) {
 				  VALUES ( ' . db_param() . ',' . db_param() . ')';
 	db_query( $t_query, array( $c_name, '' ) );
 
-	return db_insert_id( db_get_table( 'custom_field' ) );
+	$t_field_id = db_insert_id( db_get_table( 'custom_field' ) );
+	custom_field_clear_cache( $t_field_id );
+
+	return $t_field_id;
 }
 
 /**
@@ -782,6 +789,7 @@ function custom_field_link( $p_field_id, $p_project_id ) {
 	$t_query = 'INSERT INTO {custom_field_project} ( field_id, project_id )
 				  VALUES ( ' . db_param() . ', ' . db_param() . ')';
 	db_query( $t_query, array( $p_field_id, $p_project_id ) );
+	custom_field_clear_cache( $p_field_id );
 
 	return true;
 }
@@ -805,6 +813,7 @@ function custom_field_unlink( $p_field_id, $p_project_id ) {
 	$t_query = 'DELETE FROM {custom_field_project}
 				  WHERE field_id = ' . db_param() . ' AND project_id = ' . db_param();
 	db_query( $t_query, array( $p_field_id, $p_project_id ) );
+	custom_field_clear_cache( $p_field_id );
 }
 
 /**
@@ -852,6 +861,7 @@ function custom_field_unlink_all( $p_project_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {custom_field_project} WHERE project_id=' . db_param();
 	db_query( $t_query, array( $p_project_id ) );
+	custom_field_clear_cache();
 }
 
 /**

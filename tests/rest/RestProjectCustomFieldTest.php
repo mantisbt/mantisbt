@@ -42,7 +42,8 @@ class RestProjectCustomFieldTest extends RestBase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->field_id = custom_field_create( 'REST test custom field ' . rand( 1, 1000000 ) );
+		$t_field_name = 'REST test custom field ' . rand( 1, 1000000 );
+		$this->field_id = custom_field_create( $t_field_name );
 		custom_field_update( $this->field_id, [
 			'name' => custom_field_get_field( $this->field_id, 'name' ),
 			'type' => CUSTOM_FIELD_TYPE_STRING,
@@ -52,6 +53,86 @@ class RestProjectCustomFieldTest extends RestBase {
 			'length_min' => 0,
 			'length_max' => 0,
 		] );
+	}
+
+	/**
+	 * Test that creating a custom field invalidates the definition cache.
+	 *
+	 * @return void
+	 */
+	public function testCreateCustomFieldClearsCache(): void {
+		$t_field_name = 'REST cache test custom field ' . rand( 1, 1000000 );
+		custom_field_get_ids();
+		$t_field_id = custom_field_create( $t_field_name );
+
+		try {
+			$this->assertSame( $t_field_name, custom_field_get_field( $t_field_id, 'name' ) );
+			$this->assertEquals( $t_field_id, custom_field_get_id_from_name( $t_field_name ) );
+			$this->assertContains( $t_field_id, custom_field_get_ids() );
+		} finally {
+			custom_field_destroy( $t_field_id );
+		}
+	}
+
+	/**
+	 * Test that updating a custom field invalidates its cached definition.
+	 *
+	 * @return void
+	 */
+	public function testUpdateCustomFieldClearsCache(): void {
+		$t_old_name = custom_field_get_field( $this->field_id, 'name' );
+		$t_new_name = 'REST updated custom field ' . rand( 1, 1000000 );
+		custom_field_get_ids();
+		custom_field_get_id_from_name( $t_old_name );
+
+		custom_field_update( $this->field_id, [ 'name' => $t_new_name ] );
+
+		$this->assertSame( $t_new_name, custom_field_get_field( $this->field_id, 'name' ) );
+		$this->assertFalse( custom_field_get_id_from_name( $t_old_name ) );
+		$this->assertEquals( $this->field_id, custom_field_get_id_from_name( $t_new_name ) );
+	}
+
+	/**
+	 * Test that deleting a custom field invalidates its cached definition.
+	 *
+	 * @return void
+	 */
+	public function testDestroyCustomFieldClearsCache(): void {
+		$t_field_name = custom_field_get_field( $this->field_id, 'name' );
+		custom_field_get_ids();
+		custom_field_get_id_from_name( $t_field_name );
+
+		custom_field_destroy( $this->field_id );
+		$t_field_id = $this->field_id;
+		$this->field_id = 0;
+
+		$this->assertNotContains( $t_field_id, custom_field_get_ids() );
+		$this->assertFalse( custom_field_cache_row( $t_field_id, false ) );
+		$this->assertFalse( custom_field_get_id_from_name( $t_field_name ) );
+	}
+
+	/**
+	 * Test that linking and unlinking a custom field clears link caches.
+	 *
+	 * @return void
+	 */
+	public function testLinkAndUnlinkCustomFieldClearsCache(): void {
+		$t_project_id = $this->getProjectId();
+		$this->assertFalse( custom_field_is_linked( $this->field_id, $t_project_id ) );
+		$this->assertNotContains( $this->field_id, custom_field_get_linked_ids( $t_project_id ) );
+		$this->assertNotContains( $t_project_id, custom_field_get_project_ids( $this->field_id ) );
+
+		custom_field_link( $this->field_id, $t_project_id );
+
+		$this->assertTrue( custom_field_is_linked( $this->field_id, $t_project_id ) );
+		$this->assertContains( $this->field_id, custom_field_get_linked_ids( $t_project_id ) );
+		$this->assertContains( $t_project_id, custom_field_get_project_ids( $this->field_id ) );
+
+		custom_field_unlink( $this->field_id, $t_project_id );
+
+		$this->assertFalse( custom_field_is_linked( $this->field_id, $t_project_id ) );
+		$this->assertNotContains( $this->field_id, custom_field_get_linked_ids( $t_project_id ) );
+		$this->assertNotContains( $t_project_id, custom_field_get_project_ids( $this->field_id ) );
 	}
 
 	/**
@@ -77,11 +158,17 @@ class RestProjectCustomFieldTest extends RestBase {
 	 * @return void
 	 */
 	public function testLinkCustomFieldWithSequence(): void {
+		$this->assertFalse( custom_field_is_linked( $this->field_id, $this->getProjectId() ) );
+		$this->assertNotContains( $this->field_id, custom_field_get_linked_ids( $this->getProjectId() ) );
+		$this->assertNotContains( $this->getProjectId(), custom_field_get_project_ids( $this->field_id ) );
 		$t_endpoint = '/projects/' . $this->getProjectId() . '/fields/' . $this->field_id;
 
 		$t_response = $this->builder()->post( $t_endpoint, [ 'sequence' => 37 ] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+		custom_field_clear_cache( $this->field_id );
 		$this->assertTrue( custom_field_is_linked( $this->field_id, $this->getProjectId() ) );
+		$this->assertContains( $this->field_id, custom_field_get_linked_ids( $this->getProjectId() ) );
+		$this->assertContains( $this->getProjectId(), custom_field_get_project_ids( $this->field_id ) );
 		$this->assertEquals( 37, custom_field_get_sequence( $this->field_id, $this->getProjectId() ) );
 
 		$t_response = $this->builder()->post( $t_endpoint, [ 'sequence' => 42 ] )->send();
@@ -104,6 +191,7 @@ class RestProjectCustomFieldTest extends RestBase {
 		$t_response = $this->builder()->post( $t_endpoint, [] )->send();
 
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+		custom_field_clear_cache( $this->field_id );
 		$this->assertEquals( $t_highest_sequence + 10, custom_field_get_sequence( $this->field_id, $this->getProjectId() ) );
 	}
 
@@ -114,11 +202,20 @@ class RestProjectCustomFieldTest extends RestBase {
 	 */
 	public function testUnlinkCustomField(): void {
 		$t_endpoint = '/projects/' . $this->getProjectId() . '/fields/' . $this->field_id;
+		$this->assertNotContains( $this->field_id, custom_field_get_linked_ids( $this->getProjectId() ) );
+		$this->assertNotContains( $this->getProjectId(), custom_field_get_project_ids( $this->field_id ) );
 		$t_response = $this->builder()->post( $t_endpoint, [] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+		custom_field_clear_cache( $this->field_id );
+		$this->assertTrue( custom_field_is_linked( $this->field_id, $this->getProjectId() ) );
+		$this->assertContains( $this->field_id, custom_field_get_linked_ids( $this->getProjectId() ) );
+		$this->assertContains( $this->getProjectId(), custom_field_get_project_ids( $this->field_id ) );
 
 		$t_response = $this->builder()->delete( $t_endpoint )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+		custom_field_clear_cache( $this->field_id );
 		$this->assertFalse( custom_field_is_linked( $this->field_id, $this->getProjectId() ) );
+		$this->assertNotContains( $this->field_id, custom_field_get_linked_ids( $this->getProjectId() ) );
+		$this->assertNotContains( $this->getProjectId(), custom_field_get_project_ids( $this->field_id ) );
 	}
 }
