@@ -513,23 +513,6 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 }
 
 /**
- * Copy custom fields
- * @param integer $p_destination_id The destination project identifier.
- * @param integer $p_source_id      The source project identifier.
- * @return void
- */
-function project_copy_custom_fields( $p_destination_id, $p_source_id ) {
-	$t_custom_field_ids = custom_field_get_linked_ids( $p_source_id );
-	foreach( $t_custom_field_ids as $t_custom_field_id ) {
-		if( !custom_field_is_linked( $t_custom_field_id, $p_destination_id ) ) {
-			custom_field_link( $t_custom_field_id, $p_destination_id );
-			$t_sequence = custom_field_get_sequence( $t_custom_field_id, $p_source_id );
-			custom_field_set_sequence( $t_custom_field_id, $p_destination_id, $t_sequence );
-		}
-	}
-}
-
-/**
  * Get the id of the project with the specified name
  * @param string $p_project_name Project name to retrieve.
  * @param integer|boolean $p_default The default value or false if the default should not be applied.
