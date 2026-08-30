@@ -125,7 +125,7 @@ class CategoryTest extends SoapBase {
 		$t_target_name = category_get_name( $t_default_category_id );
 		$t_source_name = 'soaptest_source_' . date( 'Ymd_His' );
 		$this->client->mc_project_add_category( $this->userName, $this->password, $t_project_id, $t_source_name );
-		$this->categoryNamesToDelete[] = $t_source_name;
+		# No need to add the category to categoryNamesToDelete since we'll delete it as part of the test.
 		$t_issue = $this->getIssueToAdd();
 		$t_issue['category'] = $t_source_name;
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue );
