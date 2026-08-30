@@ -84,7 +84,10 @@ class RestUserTest extends RestBase {
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
-		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
+		$this->assertEquals( HTTP_STATUS_CREATED,
+			$t_response->getStatusCode(),
+			$t_response->getReasonPhrase()
+		);
 
 		$t_body = json_decode( $t_response->getBody(), true );
 		$this->assertTrue( isset( $t_body['user'] ) );
