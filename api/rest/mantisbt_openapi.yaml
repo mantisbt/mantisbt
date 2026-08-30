@@ -1165,6 +1165,69 @@ paths:
         '404': { $ref: '#/components/responses/NotFound' }
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
+  '/api/rest/projects/{id}/fields/{field_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
+    post:
+      summary: Link a custom field to a project
+      operationId: ProjectFieldLink
+      description: Links the custom field to the project. The optional sequence controls its order.
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: field_id
+          in: path
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sequence:
+                  type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      summary: Unlink a custom field from a project
+      operationId: ProjectFieldUnlink
+      description: Removes the custom field link from the project without deleting its values.
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: field_id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects/{id}/versions/{version_id}':
     parameters:
       - $ref: '#/components/parameters/X-Mantis-Username'
