@@ -8,6 +8,7 @@
     bootstrap="tests/bootstrap.php"
     colors="true"
     displayDetailsOnAllIssues="true"
+    failOnAllIssues="true"
     >
 
     <testsuites>
