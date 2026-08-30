@@ -4,6 +4,7 @@
 <phpunit
     bootstrap="tests/bootstrap.php"
     colors="true"
+    displayDetailsOnAllIssues="true"
     >
 
     <testsuites>
