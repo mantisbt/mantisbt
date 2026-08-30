@@ -77,7 +77,7 @@ class RestAuthHeaderTest extends RestBase {
 	 * Bearer scheme spellings that must all be accepted.
 	 * @return array
 	 */
-	public function providerBearerPrefixes() {
+	public static function providerBearerPrefixes() {
 		return array(
 			'Bearer' => array( 'Bearer ' ),
 			'bearer lowercase' => array( 'bearer ' ),
@@ -109,7 +109,7 @@ class RestAuthHeaderTest extends RestBase {
 	 * Credential separators that must all be tolerated.
 	 * @return array
 	 */
-	public function providerMultipleCredentials() {
+	public static function providerMultipleCredentials() {
 		return array(
 			'comma space' => array( ', ' ),
 			'comma only' => array( ',' ),

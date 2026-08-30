@@ -66,7 +66,7 @@ class ApiTokenApiTest extends MantisCoreBase {
 	 *
 	 * @return array [ credentials, expected ]
 	 */
-	public function providerParseCredentials() {
+	public static function providerParseCredentials() {
 		$t_token = self::SAMPLE_TOKEN;
 
 		return array(
