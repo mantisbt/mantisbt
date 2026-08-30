@@ -244,14 +244,30 @@ class RestProjectCategoryTest extends RestBase {
 	 * @return void
 	 */
 	public function testProjectCategoryCannotDeleteDefault() {
-		$t_category_id = config_get( 'default_category_for_moves' );
-		if( $t_category_id <= 0 || !category_exists( $t_category_id ) || (int)category_get_field( $t_category_id, 'project_id' ) !== $this->getProjectId() ) {
+		$t_default_category_id = config_get( 'default_category_for_moves' );
+		if( category_exists( $t_default_category_id ) ) {
+			$t_default_category_project = (int)category_get_field( $t_default_category_id, 'project_id' );
+			$t_skip = $t_default_category_project !== ALL_PROJECTS && $t_default_category_project !== $this->getProjectId();
+		} else {
+			$t_skip = true;
+		}
+		if( $t_skip ) {
 			$this->markTestSkipped( 'The configured default category does not exist in the test project.' );
 		}
-		$this->assertEquals( $this->getProjectId(), category_get_field( $t_category_id, 'project_id' ) );
 
-		$t_response = $this->builder()->delete( $this->base_url . $t_category_id )->send();
-		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
+		# Check varies depending on whether category is global or project-specific
+		/** @noinspection PhpUndefinedVariableInspection */
+		if( ALL_PROJECTS == $t_default_category_project ) {
+			$t_endpoint = '/projects/0/categories/';
+			# category_ensure_can_remove() triggers ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT which maps to 500
+			$t_expected = HTTP_STATUS_INTERNAL_SERVER_ERROR;
+		} else {
+			$t_endpoint = $this->base_url;
+			$t_expected = HTTP_STATUS_BAD_REQUEST;
+		}
+
+		$t_response = $this->builder()->delete( $t_endpoint . $t_default_category_id )->send();
+		$this->assertEquals( $t_expected, $t_response->getStatusCode() );
 	}
 
 	/**

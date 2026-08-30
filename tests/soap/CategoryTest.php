@@ -111,12 +111,18 @@ class CategoryTest extends SoapBase {
 	 */
 	public function testDeleteCategoryReassignsIssues() {
 		$t_project_id = $this->getProjectId();
-		$t_target_id = config_get( 'default_category_for_moves' );
-		if( $t_target_id <= 0 || !category_exists( $t_target_id ) || (int)category_get_field( $t_target_id, 'project_id' ) !== $t_project_id ) {
+		$t_default_category_id = config_get( 'default_category_for_moves' );
+		if( category_exists( $t_default_category_id ) ) {
+			$t_default_category_project = (int)category_get_field( $t_default_category_id, 'project_id' );
+			$t_skip = $t_default_category_project !== ALL_PROJECTS && $t_default_category_project !== $t_project_id;
+		} else {
+			$t_skip = true;
+		}
+		if( $t_skip ) {
 			$this->markTestSkipped( 'The configured default category does not exist in the test project.' );
 		}
 
-		$t_target_name = category_get_name( $t_target_id );
+		$t_target_name = category_get_name( $t_default_category_id );
 		$t_source_name = 'soaptest_source_' . date( 'Ymd_His' );
 		$this->client->mc_project_add_category( $this->userName, $this->password, $t_project_id, $t_source_name );
 		$this->categoryNamesToDelete[] = $t_source_name;
