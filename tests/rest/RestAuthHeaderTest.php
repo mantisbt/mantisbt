@@ -77,7 +77,7 @@ class RestAuthHeaderTest extends RestBase {
 	 * Bearer scheme spellings that must all be accepted.
 	 * @return array
 	 */
-	public function providerBearerPrefixes() {
+	public static function providerBearerPrefixes() {
 		return array(
 			'Bearer' => array( 'Bearer ' ),
 			'bearer lowercase' => array( 'bearer ' ),
@@ -109,7 +109,7 @@ class RestAuthHeaderTest extends RestBase {
 	 * Credential separators that must all be tolerated.
 	 * @return array
 	 */
-	public function providerMultipleCredentials() {
+	public static function providerMultipleCredentials() {
 		return array(
 			'comma space' => array( ', ' ),
 			'comma only' => array( ',' ),
@@ -148,27 +148,34 @@ class RestAuthHeaderTest extends RestBase {
 	}
 
 	/**
-	 * A 401 response for a request that lacks valid credentials must advertise
-	 * the bearer scheme via a 'WWW-Authenticate: Bearer' header, as required for
-	 * a 401 response by RFC 7235.
+	 * A request carrying no credentials at all must behave according to the
+	 * instance's anonymous access configuration.
 	 *
-	 * The 401 is only produced when anonymous access is unavailable, so the test
-	 * is skipped when the instance under test allows anonymous access.
+	 * - {@see $g_allow_anonymous_login} ON: the request is served as the
+	 *   anonymous user, so no 401 is produced and no challenge is issued.
+	 * - {@see $g_allow_anonymous_login} OFF: a 401 is produced, and RFC 7235
+	 *   requires it to advertise the accepted scheme via 'WWW-Authenticate'.
+	 *
+	 * Both scenarios are asserted, so the test is meaningful whichever way the
+	 * instance under test is configured.
 	 *
 	 * @return void
 	 */
-	public function testUnauthorizedResponseAdvertisesBearerScheme() {
-		if( auth_anonymous_enabled() ) {
-			$this->markTestSkipped( 'Anonymous access is enabled; no 401 is produced' );
-		}
-
+	public function testAnonymousRequestHonoursAnonymousLoginConfig() {
 		$t_response = $this->builder()
 			->anonymous()
 			->get( self::ENDPOINT, 'page_size=1' )
 			->send();
 
-		$this->assertEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
-		$this->assertEquals( 'Bearer', $t_response->getHeaderLine( 'WWW-Authenticate' ) );
+		if( auth_anonymous_enabled() ) {
+			# The anonymous account may still lack access to the endpoint, which
+			# is a 403; the point is that no authentication challenge is issued.
+			$this->assertNotEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
+			$this->assertEmpty( $t_response->getHeaderLine( 'WWW-Authenticate' ) );
+		} else {
+			$this->assertEquals( HTTP_STATUS_UNAUTHORIZED, $t_response->getStatusCode() );
+			$this->assertEquals( 'Bearer', $t_response->getHeaderLine( 'WWW-Authenticate' ) );
+		}
 	}
 
 	/**
