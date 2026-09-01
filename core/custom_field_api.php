@@ -127,8 +127,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 		custom_field_cache_array_rows( array( $c_field_id ) );
 	}
 
-	# the cached index exist, even when not found
-	$t_cf_row = $g_cache_custom_field[$c_field_id];
+	$t_cf_row = $g_cache_custom_field[$c_field_id] ?? false;
 	if( !$t_cf_row ) {
 		if( $p_trigger_errors ) {
 			error_parameters( 'Custom ' . $p_field_id );
