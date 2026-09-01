@@ -27,10 +27,10 @@
  * @uses authentication_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses custom_field_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses print_api.php
- * @uses project_api.php
  */
 
 require_once( 'core.php' );
@@ -38,10 +38,10 @@ require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'custom_field_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
-require_api( 'project_api.php' );
 
 form_security_validate( 'manage_proj_custom_field_copy' );
 
@@ -51,9 +51,6 @@ $f_project_id		= gpc_get_int( 'project_id' );
 $f_other_project_id	= gpc_get_int( 'other_project_id' );
 $f_copy_from		= gpc_get_bool( 'copy_from' );
 $f_copy_to			= gpc_get_bool( 'copy_to' );
-
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_other_project_id );
 
 if( $f_copy_from ) {
 	$t_src_project_id = $f_other_project_id;
@@ -65,7 +62,22 @@ if( $f_copy_from ) {
 	trigger_error( ERROR_NO_COPY_ACTION, ERROR );
 }
 
-project_copy_custom_fields( $t_dst_project_id, $t_src_project_id );
+# The link command validates access to the destination project. The source
+# project is read directly here, so its access must still be checked.
+access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_src_project_id );
+
+foreach( custom_field_get_linked_ids( $t_src_project_id ) as $t_custom_field_id ) {
+	$t_command = new ProjectFieldLinkCommand( [
+		'query' => [
+			'field_id' => $t_custom_field_id,
+			'project_id' => $t_dst_project_id,
+		],
+		'payload' => [
+			'sequence' => custom_field_get_sequence( $t_custom_field_id, $t_src_project_id ),
+		],
+	] );
+	$t_command->execute();
+}
 
 form_security_purge( 'manage_proj_custom_field_copy' );
 

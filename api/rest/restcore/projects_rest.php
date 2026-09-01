@@ -43,6 +43,10 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->delete( '/{id}', 'rest_project_delete' );
 	$g_app->delete( '/{id}/', 'rest_project_delete' );
 
+	# Project custom fields
+	$g_app->post( '/{id}/fields/{field_id}', 'rest_project_field_link' );
+	$g_app->delete( '/{id}/fields/{field_id}', 'rest_project_field_unlink' );
+
 	# Project versions
 	$g_app->get( '/{id}/versions', 'rest_project_version_get' );
 	$g_app->get( '/{id}/versions/', 'rest_project_version_get' );
@@ -674,4 +678,49 @@ function rest_project_delete( \Slim\Http\Request $p_request, \Slim\Http\Response
 	$t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Project with id $t_project_id deleted." );
+}
+
+/**
+ * Link a custom field to a project.
+ *
+ * @param \Slim\Http\Request  $p_request  The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array               $p_args     Route arguments.
+ *
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_field_link( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_data = array(
+		'query' => array(
+			'project_id' => $p_args['id'],
+			'field_id' => $p_args['field_id'],
+		),
+		'payload' => $p_request->getParsedBody(),
+	);
+
+	$t_command = new ProjectFieldLinkCommand( $t_data );
+	$t_result = $t_command->execute();
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+}
+
+/**
+ * Unlink a custom field from a project.
+ *
+ * @param \Slim\Http\Request  $p_request  The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array               $p_args     Route arguments.
+ *
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_field_unlink( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_data = array(
+		'query' => array(
+			'project_id' => $p_args['id'],
+			'field_id' => $p_args['field_id'],
+		),
+	);
+
+	$t_command = new ProjectFieldUnlinkCommand( $t_data );
+	$t_command->execute();
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS );
 }
