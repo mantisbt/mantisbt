@@ -80,12 +80,16 @@ class RestProjectCustomFieldTest extends RestBase {
 	 * @return void
 	 */
 	public function testUpdateCustomFieldClearsCache(): void {
-		$t_old_name = custom_field_get_field( $this->field_id, 'name' );
-		$t_new_name = 'REST updated custom field ' . rand( 1, 1000000 );
+		$t_cfdef = custom_field_get_definition( $this->field_id );
+		$t_old_name = $t_cfdef['name'];
+		$t_new_name = $t_old_name . ' UPDATED';
+		/** @noinspection PhpAutovivificationOnFalseValuesInspection We just created it, the CF def can't be false */
+		$t_cfdef['name'] = $t_new_name;
+
 		custom_field_get_ids();
 		custom_field_get_id_from_name( $t_old_name );
 
-		custom_field_update( $this->field_id, [ 'name' => $t_new_name ] );
+		custom_field_update( $this->field_id, $t_cfdef );
 
 		$this->assertSame( $t_new_name, custom_field_get_field( $this->field_id, 'name' ) );
 		$this->assertFalse( custom_field_get_id_from_name( $t_old_name ) );
