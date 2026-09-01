@@ -8,7 +8,7 @@
     "api:docs": "node tools/openapi/generate.mjs --docs"
   },
   "devDependencies": {
-    "@redocly/cli": "^2.46.1",
+    "@redocly/cli": "^2.49.0",
     "openapi-to-postmanv2": "^6.3.3",
     "yaml": "^2.9.0"
   }
