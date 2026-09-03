@@ -734,6 +734,8 @@ define( 'HEADER_IF_MATCH', 'If-Match' );
 define( 'HEADER_IF_NONE_MATCH', 'If-None-Match' );
 define( 'HEADER_ETAG', 'ETag' );
 define( 'HEADER_WWW_AUTHENTICATE', 'WWW-Authenticate' );
+define( 'HEADER_DEPRECATION', 'Deprecation' );
+define( 'HEADER_LINK', 'Link' );
 
 # LOGIN METHODS
 define( 'LOGIN_METHOD_COOKIE', 'cookie' );
