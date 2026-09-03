@@ -45,6 +45,8 @@
  * @uses version_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -290,8 +292,10 @@ if( is_blank( $f_project ) ) {
 	$f_project_id = project_get_id_by_name( $f_project );
 
 	if( $f_project_id === 0 ) {
-		error_parameters( $f_project );
-		trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
+		throw new ClientException( "Project '$f_project' not found",
+			ERROR_PROJECT_NOT_FOUND,
+			[ $f_project ]
+		);
 	}
 }
 
@@ -321,8 +325,10 @@ if( is_blank( $f_version ) ) {
 	$f_version_id = version_get_id( $f_version, $t_project_id );
 
 	if( $f_version_id === false ) {
-		error_parameters( $f_version );
-		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+		throw new ClientException( "Version '$f_version' not found",
+			ERROR_VERSION_NOT_FOUND,
+			[ $f_version ]
+		);
 	}
 }
 

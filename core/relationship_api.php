@@ -230,11 +230,13 @@ function relationship_type_ensure_valid( $p_relationship_type ) {
  * @param int $p_relationship_type A Relationship type.
  *
  * @return int Complementary type
+ * @throws ClientException
  */
 function relationship_get_complementary_type( $p_relationship_type ) {
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_relationship_type] ) ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		$t_message = "Unknown relationship type '$p_relationship_type'";
+		throw new ClientException( $t_message, ERROR_GENERIC, [$t_message] );
 	}
 	return $g_relationships[$p_relationship_type]['#complementary'];
 }
@@ -252,6 +254,7 @@ function relationship_get_complementary_type( $p_relationship_type ) {
  * @param int $p_relationship_type
  *
  * @return array Prepared data for database insert/update query
+ * @throws ClientException
  * @internal
  */
 function relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
@@ -283,6 +286,7 @@ function relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_
  * @param bool $p_email_for_source  Should an email be triggered for source issue?
  *
  * @return int The new bug relationship id.
+ * @throws ClientException
  */
 function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	db_param_push();
@@ -316,6 +320,7 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, 
  * @param bool $p_email_for_source  Should an email be triggered for source issue?
  *
  * @return void
+ * @throws ClientException
  */
 function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	db_param_push();
@@ -346,6 +351,7 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
  * @param bool $p_email_for_source  Should an email be triggered for source issue?
  *
  * @return int The new bug relationship id.
+ * @throws ClientException
  */
 function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	# Check if there is other relationship between the bugs.
@@ -643,11 +649,11 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
  * @param int $p_rel_type    Relationship Type.
  *
  * @return int 0 if the relationship is not found,
- *             -1 if the relationship is found and it's of the same type $p_rel_type, or
- *             Id if the relationship is found and it's of a different type
+ *             -1 if the relationship is found and it's of the same type
+ *             $p_rel_type, or Id if the relationship is found and it's of a
+ *             different type
  *             (this means it can be replaced with the new type $p_rel_type)
- *
- * @noinspection PhpDocMissingThrowsInspection
+ * @throws ClientException
  */
 function relationship_same_type_exists( $p_src_bug_id, $p_dest_bug_id, $p_rel_type ) {
 	# Check if there is already a relationship set between them

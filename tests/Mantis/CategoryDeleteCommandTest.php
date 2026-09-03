@@ -24,6 +24,8 @@
 
 namespace Mantis\tests\Mantis;
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Test fixture for project category deletion.
  */
@@ -32,6 +34,7 @@ class CategoryDeleteCommandTest extends MantisCoreBase {
 	 * Test that the configured default category cannot be deleted.
 	 *
 	 * @return void
+	 * @throws ClientException
 	 */
 	public function testCannotDeleteDefaultCategory() {
 		self::login();
@@ -46,17 +49,11 @@ class CategoryDeleteCommandTest extends MantisCoreBase {
 				'category_id' => $t_category_id,
 			] ];
 			$t_command = new \CategoryDeleteCommand( $t_data );
-		set_error_handler( function( $p_severity, $p_message, $p_file, $p_line ) {
-			throw new \ErrorException( $p_message, 0, $p_severity, $p_file, $p_line );
-		} );
-		try {
+			$this->expectException( ClientException::class );
+			$this->expectExceptionCode( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT );
 			$t_command->execute();
-			$this->fail( 'Deleting the default category should fail.' );
-		} catch( \ErrorException $e ) {
-		} finally {
-			restore_error_handler();
-		}
-		$this->assertTrue( category_exists( $t_category_id ) );
+
+			$this->assertTrue( category_exists( $t_category_id ) );
 		} finally {
 			if( $t_had_database_value ) {
 				config_set( 'default_category_for_moves', $t_old_value, ALL_USERS, ALL_PROJECTS );

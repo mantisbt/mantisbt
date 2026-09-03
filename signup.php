@@ -16,6 +16,7 @@
 
 /**
  * Sign Up
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -34,7 +35,12 @@
  * @uses print_api.php
  * @uses user_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
@@ -76,8 +82,8 @@ if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 &&
 	helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 	# captcha image requires GD library and related option to ON
 	$t_securimage = new Securimage();
-	if( $t_securimage->check( $f_captcha ) == false ) {
-		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
+	if( !$t_securimage->check( $f_captcha ) ) {
+		throw new ClientException( "Captcha validation failure", ERROR_SIGNUP_NOT_MATCHING_CAPTCHA );
 	}
 }
 

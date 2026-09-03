@@ -61,6 +61,7 @@ $g_cache_project_missing = array();
 $g_cache_project_all = false;
 
 use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\ServiceException;
 
 /**
  * Checks if there are no projects defined.
@@ -278,10 +279,14 @@ function project_is_name_unique( $p_name, $p_exclude_id = null ) {
  * @param integer $p_exclude_id Optional project id to exclude from the check,
  *                              to allow uniqueness check when updating.
  * @return void
+ * @throws ClientException if the project exists.
  */
 function project_ensure_name_unique( $p_name, $p_exclude_id = null ) {
 	if( !project_is_name_unique( $p_name, $p_exclude_id ) ) {
-		trigger_error( ERROR_PROJECT_NAME_NOT_UNIQUE, ERROR );
+		throw new ClientException(
+			"A Project named '$p_name' already exists",
+			ERROR_PROJECT_NAME_NOT_UNIQUE
+		);
 	}
 }
 
@@ -340,12 +345,15 @@ function validate_project_file_path( $p_file_path ) {
  * @param boolean $p_enabled        Whether the project is enabled.
  * @param boolean $p_inherit_global Whether the project inherits global categories.
  * @return integer
+ * @throws ClientException
  */
 function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_PUBLIC, $p_file_path = '', $p_enabled = true, $p_inherit_global = true ) {
 	$c_enabled = (bool)$p_enabled;
 
 	if( is_blank( $p_name ) ) {
-		trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
+		throw new ClientException( "Invalid project name, cannot be blank",
+			ERROR_PROJECT_NAME_INVALID
+		);
 	}
 
 	$t_name = trim( $p_name );
@@ -444,6 +452,7 @@ function project_delete( $p_project_id ) {
  * @param boolean $p_enabled        Whether the project is enabled.
  * @param boolean $p_inherit_global Whether the project inherits global categories.
  * @return void
+ * @throws ClientException
  */
 function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_view_state, $p_file_path, $p_enabled, $p_inherit_global ) {
 	$p_project_id = (int)$p_project_id;
@@ -451,7 +460,9 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 	$c_inherit_global = (bool)$p_inherit_global;
 
 	if( is_blank( $p_name ) ) {
-		trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
+		throw new ClientException( "Invalid project name, cannot be blank",
+			ERROR_PROJECT_NAME_INVALID
+		);
 	}
 
 	$t_new_name = trim( $p_name );

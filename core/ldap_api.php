@@ -33,6 +33,8 @@
  * @noinspection PhpComposerExtensionStubsInspection
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'logging_api.php' );
@@ -59,6 +61,7 @@ function ldap_log_error( $p_ds ) {
  * @param string $p_binddn   DN to use for LDAP bind.
  * @param string $p_password Password to use for LDAP bind.
  * @return resource|false
+ * @throws ClientException
  */
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	$t_ldap_server = config_get_global( 'ldap_server' );
@@ -67,9 +70,10 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	$t_ds = @ldap_connect( $t_ldap_server );
 	if( $t_ds === false ) {
 		log_event( LOG_LDAP, 'LDAP server URI syntax check failed, make sure its in URI form' );
-		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
-		# Return required as function may be called with error suppressed
-		return false;
+		throw new ClientException(
+			"LDAP Server Connection Failed",
+			ERROR_LDAP_SERVER_CONNECT_FAILED
+		);
 	}
 
 	log_event( LOG_LDAP, 'LDAP server URI syntax check succeeded' );
@@ -107,10 +111,10 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
 			log_event( LOG_LDAP, "Error: Failed to set minimum TLS version on LDAP server" );
-			trigger_error( ERROR_LDAP_UNABLE_TO_SET_MIN_TLS, ERROR );
-
-			# Return required as function may be called with error suppressed
-			return false;
+			throw new ClientException(
+				"LDAP: unable to set TLS version",
+				ERROR_LDAP_UNABLE_TO_SET_MIN_TLS
+			);
 		}
 	}
 
@@ -121,10 +125,10 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
 			log_event( LOG_LDAP, "Error: Cannot initiate StartTLS on LDAP server" );
-			trigger_error( ERROR_LDAP_UNABLE_TO_STARTTLS, ERROR );
-
-			# Return required as function may be called with error suppressed
-			return false;
+			throw new ClientException(
+				"LDAP: unable o initiate StartTLS",
+				ERROR_LDAP_UNABLE_TO_STARTTLS
+			);
 		}
 	}
 	
@@ -147,7 +151,10 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	if( !$t_br ) {
 		ldap_log_error( $t_ds );
 		log_event( LOG_LDAP, 'Bind to ldap server failed' );
-		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
+		throw new ClientException(
+			"LDAP: server binding failed",
+			ERROR_LDAP_SERVER_CONNECT_FAILED
+		);
 	} else {
 		log_event( LOG_LDAP, 'Bind to ldap server successful' );
 	}
@@ -159,6 +166,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
  * returns an email address from LDAP, given a userid
  * @param integer $p_user_id A valid user identifier.
  * @return string
+ * @throws ClientException
  */
 function ldap_email( $p_user_id ) {
 	return ldap_email_from_username( user_get_username( $p_user_id ) );
@@ -168,6 +176,7 @@ function ldap_email( $p_user_id ) {
  * Return an email address from LDAP, given a username
  * @param string $p_username The username of a user to lookup.
  * @return string
+ * @throws ClientException
  */
 function ldap_email_from_username( $p_username ) {
 	if( ldap_simulation_is_enabled() ) {
@@ -186,6 +195,7 @@ function ldap_email_from_username( $p_username ) {
  *
  * @param integer $p_user_id The user id.
  * @return string real name.
+ * @throws ClientException
  */
 function ldap_realname( $p_user_id ) {
 	return ldap_realname_from_username( user_get_username( $p_user_id ) );
@@ -195,6 +205,7 @@ function ldap_realname( $p_user_id ) {
  * Gets a user real name given their user name.
  * @param string $p_username The user's name.
  * @return string The user's real name.
+ * @throws ClientException
  */
 function ldap_realname_from_username( $p_username ) {
 	if( ldap_simulation_is_enabled() ) {
@@ -243,8 +254,10 @@ function ldap_cache_user_data( $p_username ) {
 	# Bind and connect.
 	# We suppress errors, because failing to connect is not blocking in this
 	# context, it just means we won't be able to retrieve user data from LDAP.
-	$t_ds = @ldap_connect_bind();
-	if( $t_ds === false ) {
+	try {
+		$t_ds = ldap_connect_bind();
+	}
+	catch( ClientException ) {
 		log_event( LOG_LDAP, "ERROR: could not bind to LDAP server" );
 		return false;
 	}
@@ -346,6 +359,7 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
  * @param integer $p_user_id  A valid user identifier.
  * @param string  $p_password A password to test against the user user.
  * @return boolean
+ * @throws ClientException
  */
 function ldap_authenticate( $p_user_id, $p_password ) {
 	# if password is empty and ldap allows anonymous login, then
@@ -367,7 +381,7 @@ function ldap_authenticate( $p_user_id, $p_password ) {
  * @param string $p_password The password.
  * @return true: authenticated, false: failed to authenticate.
  *
- * @noinspection PhpDocMissingThrowsInspection
+ * @throws ClientException
  */
 function ldap_authenticate_by_username( $p_username, $p_password ) {
 	if( ldap_simulation_is_enabled() ) {
@@ -398,14 +412,14 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
 			log_event( LOG_LDAP, "Search '$t_search_filter' failed" );
-			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
+			throw new ClientException( "LDAP Authentication Failed", ERROR_LDAP_AUTH_FAILED );
 		}
 
 		$t_info = @ldap_get_entries( $t_ds, $t_sr );
 		if( $t_info === false ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
-			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
+			throw new ClientException( "LDAP Authentication Failed", ERROR_LDAP_AUTH_FAILED );
 		}
 
 		$t_authenticated = false;
@@ -474,13 +488,17 @@ function ldap_simulation_is_enabled() {
  *
  * @param string $p_username The user name.
  * @return array|null An associate array with user information or null if not found.
+ * @throws ClientException
  */
 function ldap_simulation_get_user( $p_username ) {
 	$t_filename = config_get_global( 'ldap_simulation_file_path' );
 	$t_lines = file( $t_filename );
 	if( $t_lines === false ) {
 		log_event( LOG_LDAP, 'could not read simulation data from ' . $t_filename );
-		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
+		throw new ClientException(
+			"LDAP: could not read simulation data",
+			ERROR_LDAP_SERVER_CONNECT_FAILED
+		);
 	}
 
 	foreach ( $t_lines as $t_line ) {
@@ -510,6 +528,7 @@ function ldap_simulation_get_user( $p_username ) {
  *
  * @param string $p_username The user name.
  * @return string The email address or blank if user is not found.
+ * @throws ClientException
  */
 function ldap_simulation_email_from_username( $p_username ) {
 	$t_user = ldap_simulation_get_user( $p_username );
@@ -527,6 +546,7 @@ function ldap_simulation_email_from_username( $p_username ) {
  *
  * @param string $p_username The username.
  * @return string The real name or an empty string if not found.
+ * @throws ClientException
  */
 function ldap_simulatiom_realname_from_username( $p_username ) {
 	$t_user = ldap_simulation_get_user( $p_username );
@@ -545,6 +565,7 @@ function ldap_simulatiom_realname_from_username( $p_username ) {
  * @param string $p_username The username.
  * @param string $p_password The password.
  * @return boolean true for authenticated, false otherwise.
+ * @throws ClientException
  */
 function ldap_simulation_authenticate_by_username( $p_username, $p_password ) {
 	$c_username = ldap_escape_string( $p_username );

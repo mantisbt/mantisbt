@@ -66,13 +66,15 @@ function category_exists( $p_category_id ) {
 /**
  * Trigger an error if category does not exist globally.
  *
- * @param integer $p_category_id A Category identifier.
+ * @param int $p_category_id A Category identifier.
+ *
  * @return void
+ * @throws ClientException
  * @access public
  */
 function category_ensure_exists( $p_category_id ) {
 	if( !category_exists( $p_category_id ) ) {
-		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+		throw new ClientException( "Category not found", ERROR_CATEGORY_NOT_FOUND );
 	}
 }
 
@@ -116,56 +118,46 @@ function category_ensure_exists_in_project( $p_category_id, $p_project_id ) {
  * Validate a category's assigned user.
  *
  * The user must exist, be enabled, and have the project access level required
- * to handle issues. Core callers use the traditional error mechanism, while
- * command callers can request a ClientException.
+ * to handle issues.
  *
  * @param int  $p_assigned_to     User identifier, or NO_USER.
  * @param int  $p_project_id      Project identifier.
- * @param bool $p_throw_exception Whether to throw a ClientException.
  *
  * @return void
- * @throws ClientException If requested and validation fails.
+ * @throws ClientException If validation fails.
  */
-function category_validate_assigned_to( $p_assigned_to, $p_project_id, $p_throw_exception = false ) {
-	$t_assigned_to = $p_assigned_to;
-	$t_error_code = null;
-	$t_error_message = null;
-
-	if( !is_numeric( $t_assigned_to ) || (int)$t_assigned_to < NO_USER ) {
-		$t_error_code = ERROR_INVALID_FIELD_VALUE;
-		$t_error_message = "'assigned_to' must be a valid user identifier";
+function category_validate_assigned_to( $p_assigned_to, $p_project_id ) {
+	if( !is_numeric( $p_assigned_to ) || (int)$p_assigned_to < NO_USER ) {
+		throw new ClientException( "'assigned_to' must be a valid user identifier",
+			ERROR_INVALID_FIELD_VALUE,
+			[ $p_assigned_to ]
+		);
 	} else {
-		$t_assigned_to = (int)$t_assigned_to;
+		$t_assigned_to = (int)$p_assigned_to;
 		if( $t_assigned_to === NO_USER ) {
 			return;
 		}
 
 		if( !user_exists( $t_assigned_to ) ) {
-			$t_error_code = ERROR_USER_BY_ID_NOT_FOUND;
-			$t_error_message = sprintf( "User '%d' not found.", $t_assigned_to );
+			throw new ClientException( "User '$t_assigned_to' not found.",
+				ERROR_USER_BY_ID_NOT_FOUND,
+				[ $t_assigned_to ]
+			);
 		} elseif( !user_is_enabled( $t_assigned_to ) ) {
-			$t_error_code = ERROR_ACCESS_DENIED;
-			$t_error_message = sprintf( "User '%d' is disabled and can't be assigned issues.", $t_assigned_to );
-		} elseif( !access_has_project_level(
-			config_get( 'handle_bug_threshold', null, null, $p_project_id ),
-			$p_project_id,
-			$t_assigned_to
-		) ) {
-			$t_error_code = $p_throw_exception ? ERROR_ACCESS_DENIED : ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS;
-			$t_error_message = sprintf( "User '%d' can't be assigned issues.", $t_assigned_to );
+			throw new ClientException( "User '$t_assigned_to' is disabled and can't be assigned issues.",
+				ERROR_ACCESS_DENIED,
+				[ $t_assigned_to ]
+			);
+		} else {
+			$t_handle_bug_threshold = config_get( 'handle_bug_threshold', null, null, $p_project_id );
+			if( !access_has_project_level( $t_handle_bug_threshold, $p_project_id, $t_assigned_to ) ) {
+				throw new ClientException( "User '$t_assigned_to' can't be assigned issues.",
+					ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS,
+					[ $t_assigned_to ]
+				);
+			}
 		}
 	}
-
-	if( $t_error_code === null ) {
-		return;
-	}
-
-	if( $p_throw_exception ) {
-		throw new ClientException( $t_error_message, $t_error_code, [ $p_assigned_to ] );
-	}
-
-	error_parameters( $p_assigned_to );
-	trigger_error( $t_error_code, ERROR );
 }
 
 /**
@@ -189,16 +181,20 @@ function category_is_unique( $p_project_id, $p_name ) {
 }
 
 /**
- * Check whether the category is unique within a project
- * Trigger an error if it is not
- * @param integer $p_project_id Project identifier.
- * @param string  $p_name       Category Name.
+ * Check whether the category is unique within a project.
+ *
+ * Trigger an error if it is not.
+ *
+ * @param int    $p_project_id Project identifier.
+ * @param string $p_name       Category Name.
+ *
  * @return void
+ * @throws ClientException
  * @access public
  */
 function category_ensure_unique( $p_project_id, $p_name ) {
 	if( !category_is_unique( $p_project_id, $p_name ) ) {
-		trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
+		throw new ClientException( "Category already exists", ERROR_CATEGORY_DUPLICATE );
 	}
 }
 
@@ -219,28 +215,38 @@ function category_can_remove( $p_category_id ) {
 
 /**
  * Trigger an error if the category cannot be deleted.
- * @param integer $p_category_id Category identifier.
+ *
+ * @param int $p_category_id Category identifier
+ *                           .
  * @return void
+ * @throws ClientException
  * @access public
  */
 function category_ensure_can_remove( $p_category_id ) {
 	if( !category_can_remove( $p_category_id ) ) {
-		error_parameters( category_get_name( $p_category_id) );
-		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
+		throw new ClientException( "Cannot update default Category",
+			ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT,
+			[ category_get_name( $p_category_id ) ]
+		);
 	}
 }
 
 /**
- * Add a new category to the project
- * @param integer $p_project_id Project identifier.
- * @param string  $p_name       Category Name.
- * @return integer Category ID
+ * Add a new category to the project.
+ *
+ * @param int    $p_project_id Project identifier.
+ * @param string $p_name       Category Name.
+ *
+ * @return int Category ID
+ * @throws ClientException
  * @access public
  */
 function category_add( $p_project_id, $p_name ) {
 	if( is_blank( $p_name ) ) {
-		error_parameters( lang_get( 'category' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Category name cannot be empty",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'category' ) ]
+		);
 	}
 
 	category_ensure_unique( $p_project_id, $p_name );
@@ -264,12 +270,15 @@ function category_add( $p_project_id, $p_name ) {
  *                                or null to leave status unchanged.
  *
  * @return void
+ * @throws ClientException
  * @access public
  */
 function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = null ) {
 	if( is_blank( $p_name ) ) {
-		error_parameters( lang_get( 'category' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Category name cannot be empty",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'category' ) ]
+		);
 	}
 
 	$t_old_category = category_get_row( $p_category_id );
@@ -284,8 +293,10 @@ function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = n
 	if( $p_category_id == $t_default_category_id
 		|| config_is_defined( 'default_category_for_moves', $p_category_id )
 	) {
-		error_parameters( $t_old_category['name'] );
-		trigger_error( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT, ERROR );
+		throw new ClientException( "Cannot update default Category",
+			ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT,
+			[ $t_old_category['name'] ]
+		);
 	}
 
 	# Keep existing status
@@ -405,10 +416,13 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 }
 
 /**
- * Return the definition row for the category
- * @param integer $p_category_id Category identifier.
- * @param boolean $p_error_if_not_exists true: error if not exists, otherwise return false.
+ * Return the definition row for the category.
+ *
+ * @param int  $p_category_id         Category identifier.
+ * @param bool $p_error_if_not_exists true: error if not exists, otherwise return false.
+ *
  * @return array|false An array containing category details.
+ * @throws ClientException
  * @access public
  */
 function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
@@ -426,7 +440,7 @@ function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
 		if( $p_error_if_not_exists ) {
-			trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+			throw new ClientException( "Category not found", ERROR_CATEGORY_NOT_FOUND );
 		} else {
 			return false;
 		}
@@ -736,12 +750,16 @@ function category_get_name( $p_category_id ) {
 
 /**
  * Given a category name and project, this function returns the category id.
+ *
  * An error will be triggered if the specified project does not have a
  * category with that name.
- * @param string  $p_category_name  Category name to retrieve.
- * @param integer $p_project_id     A project identifier.
- * @param boolean $p_trigger_errors Whether to trigger error on failure.
- * @return boolean
+ *
+ * @param string $p_category_name  Category name to retrieve.
+ * @param int    $p_project_id     A project identifier.
+ * @param bool   $p_trigger_errors Whether to trigger error on failure.
+ *
+ * @return bool
+ * @throws ClientException
  * @access public
  */
 function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
@@ -753,8 +771,10 @@ function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_er
 	$t_id = db_result( $t_result );
 	if( $t_id === false ) {
 		if( $p_trigger_errors ) {
-			error_parameters( $p_category_name, $t_project_name );
-			trigger_error( ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT, ERROR );
+			throw new ClientException( "Category not found",
+				ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT,
+				[ $p_category_name, $t_project_name ]
+			);
 		} else {
 			return false;
 		}
@@ -806,15 +826,19 @@ function category_can_delete( $p_category_id ) {
 
 /**
  * Ensure category can be deleted, otherwise raise an error.
+ *
  * @param string $p_category_id Category identifier.
+ *
  * @return void
+ * @throws ClientException
  * @access public
  */
 function category_ensure_can_delete( $p_category_id ) {
 	if( !category_can_delete( $p_category_id ) ) {
-		$t_category_name = category_get_name( $p_category_id );
-		error_parameters( $t_category_name );
-		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES, ERROR );
+		throw new ClientException( "Cannot delete category with Issues",
+			ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES,
+			[ category_get_name( $p_category_id ) ]
+		);
 	}
 }
 

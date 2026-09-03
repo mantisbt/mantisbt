@@ -294,20 +294,26 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 
 	# platform cannot be blank
 	if( is_blank( $p_platform ) ) {
-		error_parameters( lang_get( 'platform' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "platform is required",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'platform' ) ]
+		);
 	}
 
 	# os cannot be blank
 	if( is_blank( $p_os ) ) {
-		error_parameters( lang_get( 'os' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "os is required",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'os' ) ]
+		);
 	}
 
 	# os_build cannot be blank
 	if( is_blank( $p_os_build ) ) {
-		error_parameters( lang_get( 'version' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "version is required",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'version' ) ]
+		);
 	}
 
 	# Description length
@@ -391,6 +397,7 @@ function profile_get_all_for_user( $p_user_id ) {
  * @param int    $p_user_id A valid user identifier.
  *
  * @return array
+ * @throws Exception
  */
 function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 	$c_user_id = ( $p_user_id === null ) ? auth_get_current_user_id() : $p_user_id;
@@ -405,11 +412,10 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 			$c_field = $p_field;
 			break;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new Exception( "Unknown profile field '$p_field'" );
 	}
 
 	$t_query = new DbQuery();
-	/** @noinspection PhpUndefinedVariableInspection */
 	$t_query->sql( "SELECT DISTINCT $c_field 
 		FROM {user_profile}
 		WHERE user_id=:user_id OR user_id=" . ALL_USERS . "

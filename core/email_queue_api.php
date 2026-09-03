@@ -30,6 +30,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
@@ -100,6 +102,7 @@ function email_queue_prepare_db( EmailData $p_email_data ) {
  * Add to email queue
  * @param EmailData $p_email_data Email Data structure.
  * @return integer
+ * @throws ClientException
  */
 function email_queue_add( EmailData $p_email_data ) {
 	$t_email_data = email_queue_prepare_db( $p_email_data );
@@ -107,19 +110,19 @@ function email_queue_add( EmailData $p_email_data ) {
 	# email cannot be blank
 	if( is_blank( $t_email_data->email ) ) {
 		error_parameters( lang_get( 'email' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Email must not be empty", ERROR_EMPTY_FIELD );
 	}
 
 	# subject cannot be blank
 	if( is_blank( $t_email_data->subject ) ) {
 		error_parameters( lang_get( 'subject' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Subject must not be empty", ERROR_EMPTY_FIELD );
 	}
 
 	# body cannot be blank
 	if( is_blank( $t_email_data->body ) ) {
 		error_parameters( lang_get( 'body' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Email body must not be empty", ERROR_EMPTY_FIELD );
 	}
 
 	$c_email = $t_email_data->email;

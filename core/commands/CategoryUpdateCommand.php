@@ -75,7 +75,7 @@ class CategoryUpdateCommand extends Command {
 			$t_handler = $this->payload( 'handler' );
 			$this->handler_id = $t_handler === null ? NO_USER : mci_get_user_id( $t_handler, null );
 			if( (int)$this->handler_id !== (int)$this->old_category['user_id'] ) {
-				category_validate_assigned_to( $this->handler_id, $this->project_id, true );
+				category_validate_assigned_to( $this->handler_id, $this->project_id );
 			}
 		} else {
 			$this->handler_id = (int)$this->old_category['user_id'];

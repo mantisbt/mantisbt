@@ -40,6 +40,9 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses relationship_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 use Mantis\Exceptions\ClientException;
@@ -66,10 +69,11 @@ require_api( 'relationship_api.php' );
 /**
  * Retrieves a version from form data and ensures it is valid.
  *
- * @param BugData $p_bug  Reference issue
- * @param string $p_field Field name (used for GPC var and BugData property)
+ * @param BugData $p_bug   Reference issue
+ * @param string  $p_field Field name (used for GPC var and BugData property)
  *
  * @return string|null
+ * @throws ClientException
  */
 function get_valid_version( BugData $p_bug, $p_field ) {
 	$t_reference_version = $p_bug->$p_field;
@@ -78,8 +82,10 @@ function get_valid_version( BugData $p_bug, $p_field ) {
 		&& $t_version != $t_reference_version
 		&& version_get_id( $t_version, $p_bug->project_id ) === false
 	) {
-		error_parameters( $t_version );
-		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+		throw new ClientException( "Version not found",
+			ERROR_VERSION_NOT_FOUND,
+			[ $t_version ]
+		);
 	}
 	return $t_version;
 }
@@ -133,7 +139,7 @@ if( $t_reporter_id != $t_existing_bug->reporter_id ) {
 		$t_reporter_id
 	);
 	if( !$t_can_report ) {
-		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+		throw new ClientException( "Access denied", ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
 	}
 }
 $t_updated_bug->reporter_id = $t_reporter_id;
@@ -157,7 +163,7 @@ $t_bug_note->view_state = gpc_get_bool( 'private' ) ? VS_PRIVATE : VS_PUBLIC;
 $t_bug_note->time_tracking = gpc_get_string( 'time_tracking', '0:00' );
 
 if( $t_existing_bug->last_updated != $t_updated_bug->last_updated ) {
-	trigger_error( ERROR_BUG_CONFLICTING_EDIT, ERROR );
+	throw new ClientException( "Issue updated by another user", ERROR_BUG_CONFLICTING_EDIT );
 }
 
 # Determine whether the new status will reopen, resolve or close the issue.
@@ -222,24 +228,29 @@ if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 		# permission to update read-only bugs.
 		if( bug_is_readonly( $f_bug_id ) ) {
 			error_parameters( $f_bug_id );
-			trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+			throw new ClientException( "Issue is read-only", ERROR_BUG_READ_ONLY_ACTION_DENIED );
 		}
 	}
 }
 
 # If resolving or closing, ensure that all dependent issues have been resolved
 # unless config option enables closing parents with open children.
-if( ( $t_resolve_issue || $t_close_issue ) &&
-	!relationship_can_resolve_bug( $f_bug_id ) &&
-	OFF == config_get( 'allow_parent_of_unresolved_to_close' ) ) {
-	trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
+if( ( $t_resolve_issue || $t_close_issue )
+	&& !relationship_can_resolve_bug( $f_bug_id )
+	&& OFF == config_get( 'allow_parent_of_unresolved_to_close' )
+) {
+	throw new ClientException( "Issue has unresolved child issues",
+		ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING
+	);
 }
 
 # Validate any change to the status of the issue.
 if( $t_existing_bug->status != $t_updated_bug->status ) {
 	if( !bug_check_workflow( $t_existing_bug->status, $t_updated_bug->status ) ) {
-		error_parameters( lang_get( 'status' ) );
-		trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
+		throw new ClientException( "Invalid status",
+			ERROR_CUSTOM_FIELD_INVALID_VALUE,
+			[ lang_get( 'status' ) ]
+		);
 	}
 	if( !access_has_bug_level( access_get_status_threshold( $t_updated_bug->status, $t_updated_bug->project_id ), $f_bug_id ) ) {
 		# The reporter may be allowed to close or reopen the issue regardless.
@@ -258,7 +269,7 @@ if( $t_existing_bug->status != $t_updated_bug->status ) {
 			$t_can_bypass_status_access_thresholds = true;
 		}
 		if( !$t_can_bypass_status_access_thresholds ) {
-			trigger_error( ERROR_ACCESS_DENIED, ERROR );
+			throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
 		}
 	}
 	if( $t_reopen_issue ) {
@@ -274,14 +285,14 @@ if( $t_existing_bug->handler_id != $t_updated_bug->handler_id ) {
 		&& sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
 	access_ensure_bug_level( config_get( 'update_bug_assign_threshold' ), $f_bug_id );
 	if( $t_issue_is_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ),  $t_updated_bug->project_id, $t_updated_bug->handler_id ) ) {
-		trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
+		throw new ClientException( "Access denied", ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
 	}
 	if( $t_updated_bug->handler_id != NO_USER ) {
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ),  $t_updated_bug->project_id, $t_updated_bug->handler_id ) ) {
-			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
+			throw new ClientException( "Access denied", ERROR_HANDLER_ACCESS_TOO_LOW );
 		}
 		if( $t_issue_is_sponsored && !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
-			trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
+			throw new ClientException( "Access denied", ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW );
 		}
 	}
 }
@@ -291,8 +302,10 @@ if( $t_existing_bug->category_id != $t_updated_bug->category_id ) {
 	if( $t_updated_bug->category_id == 0 &&
 		!config_get( 'allow_no_category' )
 	) {
-		error_parameters( lang_get( 'category' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Category is mandatory",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'category' ) ]
+		);
 	}
 
 	# Make sure the category belongs to the given project's hierarchy
@@ -321,11 +334,13 @@ if( $t_existing_bug->resolution != $t_updated_bug->resolution && (
 	   && $t_updated_bug->status >= $t_resolved_status
 	   )
 ) ) {
-	error_parameters(
-		get_enum_element( 'resolution', $t_updated_bug->resolution ),
-		get_enum_element( 'status', $t_updated_bug->status )
+	throw new ClientException( "Invalid resolution",
+		ERROR_INVALID_RESOLUTION,
+		[
+			get_enum_element( 'resolution', $t_updated_bug->resolution ),
+			get_enum_element( 'status', $t_updated_bug->status )
+		]
 	);
-	trigger_error( ERROR_INVALID_RESOLUTION, ERROR );
 }
 
 # If version is set and unreleased, ensure user is allowed to change it.
@@ -374,8 +389,10 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 			custom_field_has_write_access( $t_cf_id, $f_bug_id ) ) {
 			# A value for the custom field was expected however
 			# no value was given by the user.
-			error_parameters( lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			throw new ClientException( "Custom field is required",
+				ERROR_EMPTY_FIELD,
+				[ lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) ) ]
+			);
 		}
 	}
 
@@ -385,7 +402,7 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	}
 
 	if( !custom_field_has_write_access( $t_cf_id, $f_bug_id ) ) {
-		trigger_error( ERROR_ACCESS_DENIED, ERROR );
+		throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
 	}
 
 	$t_new_custom_field_value = gpc_get_custom_field( 'custom_field_' . $t_cf_id, $t_cf_def['type'], '' );
@@ -396,8 +413,10 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	# modified such that old values that were once OK are now considered
 	# invalid.
 	if( !custom_field_validate( $t_cf_id, $t_new_custom_field_value ) ) {
-		error_parameters( lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) ) );
-		trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
+		throw new ClientException( "Invalid custom field value",
+			ERROR_CUSTOM_FIELD_INVALID_VALUE,
+			[ lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) ) ]
+		);
 	}
 
 	# Remember the new custom field values so we can set them when updating
@@ -409,13 +428,13 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 # Perform validation of the duplicate ID of the bug.
 if( $t_updated_bug->duplicate_id != 0 ) {
 	if( $t_updated_bug->duplicate_id == $f_bug_id ) {
-		trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
+		throw new ClientException( "Issue can't duplicate itself", ERROR_BUG_DUPLICATE_SELF );
 	}
 
 	bug_ensure_exists( $t_updated_bug->duplicate_id );
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $t_updated_bug->duplicate_id ) ) {
-		trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
+		throw new ClientException( "Access denied", ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW );
 	}
 }
 
@@ -428,8 +447,10 @@ if( $t_bug_note->note ||
 	if( !$t_bug_note->note &&
 		!config_get( 'time_tracking_without_note' )
 	) {
-		error_parameters( lang_get( 'bugnote' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Bugnote is required",
+			ERROR_EMPTY_FIELD,
+			[ lang_get( 'bugnote' ) ]
+		);
 	}
 	if( $t_bug_note->view_state != config_get( 'default_bugnote_view_status' ) ) {
 		access_ensure_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id );

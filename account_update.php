@@ -44,6 +44,8 @@
  * @noinspection PhpUnhandledExceptionInspection
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -81,13 +83,13 @@ if( $t_account_verification ) {
 		|| $f_confirm_hash !== $t_token_confirm_hash
 		|| $f_verify_email && $t_new_email === null
 	) {
-		trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
+		throw new ClientException( "Invalid password hash", ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
 	}
 
 	# Make sure the token is not expired (except for email validation)
 	if( !$f_verify_email &&
 		null === token_get_value( TOKEN_ACCOUNT_VERIFY, $t_verify_user_id ) ) {
-		trigger_error( ERROR_SESSION_NOT_VALID, ERROR );
+		throw new ClientException( "Expired token", ERROR_SESSION_NOT_VALID );
 	}
 
 	# set a temporary cookie so the login information is passed between pages.
@@ -122,8 +124,10 @@ if( $t_account_verification && is_blank( $f_password ) ) {
 	# log out of the temporary login used by verification
 	auth_clear_cookies();
 	auth_logout();
-	error_parameters( lang_get( 'password' ) );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Password is required",
+		ERROR_EMPTY_FIELD,
+		[ lang_get( 'password' ) ]
+	);
 }
 
 # Validate password if provided
@@ -135,10 +139,10 @@ if( !is_blank( $f_password ) ) {
 			auth_clear_cookies();
 			auth_logout();
 		}
-		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
+		throw new ClientException( "Password does not match", ERROR_USER_CREATE_PASSWORD_MISMATCH );
 	} else {
 		if( !$t_account_verification && !auth_does_password_match( $t_user_id, $f_password_current ) ) {
-			trigger_error( ERROR_USER_CURRENT_PASSWORD_MISMATCH, ERROR );
+			throw new ClientException( "Incorrect password", ERROR_USER_CURRENT_PASSWORD_MISMATCH );
 		}
 
 		if( !auth_does_password_match( $t_user_id, $f_password ) ) {

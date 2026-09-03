@@ -23,6 +23,8 @@
  */
 
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'bug_api.php' );
 require_api( 'user_api.php' );
 require_once( 'Interface.php' );
@@ -71,6 +73,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 	 * Read stream until current item finishes, processing the data found
 	 * @param XMLreader $t_reader XMLReader being processed.
 	 * @return void
+	 * @throws ClientException
 	 */
 	public function process( XMLreader $t_reader ) {
 		# print "\nImportIssue process()\n";
@@ -248,8 +251,11 @@ class ImportXml_Issue implements ImportXml_Interface {
 				if( custom_field_ensure_exists( $t_custom_field_id ) && custom_field_is_linked( $t_custom_field_id, $t_project_id ) ) {
 					custom_field_set_value( $t_custom_field->id, $this->new_id_, $t_custom_field->value );
 				} else {
-					error_parameters( $t_custom_field->name, $t_custom_field_id );
-					trigger_error( ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT, ERROR );
+					throw new ClientException(
+						"Custom field not linked",
+						ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT,
+						[ $t_custom_field->name, $t_custom_field_id ]
+					);
 				}
 			}
 		}

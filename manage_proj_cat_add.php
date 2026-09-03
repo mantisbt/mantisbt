@@ -34,7 +34,12 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -58,8 +63,10 @@ $f_name			= gpc_get_string( 'name' );
 $f_add_and_edit	= gpc_get_bool( 'add_and_edit_category' );
 
 if( is_blank( $f_name ) ) {
-	error_parameters( lang_get( 'category' ) );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Category is required",
+		ERROR_EMPTY_FIELD,
+		[ lang_get( 'category' ) ]
+	);
 }
 
 $t_names = explode( '|', $f_name );
@@ -84,12 +91,10 @@ foreach( $t_names as $t_name ) {
 		$t_result = $t_command->execute();
 		$t_id = $t_result['category']['id'];
 	} else if( 1 == $t_category_count ) {
-		# We only error out on duplicates when a single value was
-		#  given.  If multiple values were given, we just add the
-		#  ones we can.  The others already exist so it isn't really
-		#  an error.
-
-		trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
+		# We only error out on duplicates when a single value was given.
+		# If multiple values are provided, we just add the ones we can; the
+		# others already exist so it isn't really an error.
+		throw new ClientException( "Duplicate category", ERROR_CATEGORY_DUPLICATE );
 	}
 }
 

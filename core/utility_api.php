@@ -36,6 +36,8 @@
  * @uses error_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'error_api.php' );
@@ -147,6 +149,7 @@ function ini_get_number( $p_name ) {
  * @param string  $p_key       Array key to sort array on.
  * @param integer $p_direction Sort direction.
  * @return array sorted array
+ * @throws ClientException
  * @access public
  */
 function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
@@ -161,8 +164,8 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 		return $p_array;
 	}
 	if( !is_array( current( $p_array ) ) ) {
-		error_parameters( 'tried to multisort an invalid multi-dimensional array' );
-		trigger_error( ERROR_GENERIC, ERROR );
+		$t_message = "Tried to sort an invalid multidimensional array";
+		throw new ClientException( $t_message, ERROR_GENERIC, [ $t_message ] );
 	}
 
 	# Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
@@ -174,7 +177,7 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 			}
 		);
 	} else {
-		trigger_error( ERROR_INVALID_SORT_FIELD, ERROR );
+		throw new ClientException( "Invalid sort field", ERROR_INVALID_SORT_FIELD );
 	}
 	return $p_array;
 }

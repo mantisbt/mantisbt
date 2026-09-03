@@ -35,6 +35,8 @@
  * @uses user_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -61,11 +63,6 @@ $t_query = 'SELECT id FROM {user}
 		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND ' .
 		'( protected = 0 ) AND ' . db_helper_compare_time( db_param(), '>', 'date_created', $t_days_old );
 $t_result = db_query( $t_query, array( db_now() ) );
-
-if( !$t_result ) {
-	trigger_error( ERROR_GENERIC, ERROR );
-}
-
 $t_count = db_num_rows( $t_result );
 
 if( $t_count > 0 ) {

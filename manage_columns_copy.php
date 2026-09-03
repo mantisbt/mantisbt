@@ -37,6 +37,8 @@
  * @noinspection PhpUndefinedVariableInspection
 */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -65,7 +67,7 @@ if( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	trigger_error( ERROR_GENERIC, ERROR );
+	throw new ClientException( "Project to copy to/from is required", ERROR_NO_COPY_ACTION );
 }
 
 # only admins can set global defaults.for ALL_PROJECT

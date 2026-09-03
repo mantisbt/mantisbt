@@ -66,7 +66,7 @@ class CategoryAddCommand extends Command {
 
 		$t_handler = $this->payload( 'handler' );
 		$this->handler_id = $t_handler === null ? NO_USER : mci_get_user_id( $t_handler, null );
-		category_validate_assigned_to( $this->handler_id, $this->project_id, true );
+		category_validate_assigned_to( $this->handler_id, $this->project_id );
 	}
 
 	/**

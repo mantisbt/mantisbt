@@ -16,6 +16,7 @@
 
 /**
  * Loads plugin files
+ *
  * @package MantisBT
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
@@ -25,12 +26,16 @@
  * @uses constant_inc.php
  * @uses gpc_api.php
  * @uses plugin_api.php
+ *
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 $g_bypass_headers = true;
 header( 'Content-type: ' );
 
 const DISABLE_INLINE_ERROR_REPORTING = true;
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'config_api.php' );
@@ -52,8 +57,10 @@ $t_regex = '/^'
 	. ')$/';
 
 if( !preg_match( $t_regex, $f_file, $t_matches ) ) {
-	error_parameters( $f_file );
-	trigger_error( ERROR_PLUGIN_INVALID_FILE, ERROR );
+	throw new ClientException( "Invalid Plugin file '$f_file'",
+		ERROR_PLUGIN_INVALID_FILE,
+		[ $f_file ]
+	);
 }
 
 $t_basename = $t_matches[1];

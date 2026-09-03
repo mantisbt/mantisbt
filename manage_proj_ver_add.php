@@ -35,7 +35,12 @@
  * @uses print_api.php
  * @uses utility_api.php
  * @uses version_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -90,8 +95,10 @@ foreach ( $t_versions as $t_version ) {
 form_security_purge( 'manage_proj_ver_add' );
 
 if( $t_version_id == 0 ) {
-	error_parameters( lang_get( 'version' ) );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Version is required",
+		ERROR_EMPTY_FIELD,
+		[ lang_get( 'version' ) ]
+	);
 }
 
 if( $f_add_and_edit ) {

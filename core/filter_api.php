@@ -2767,6 +2767,7 @@ function filter_update_source_properties( array $p_filter ) {
  * @param string $p_filter_key  Key to look up for in session data
  * @param mixed $p_default		A default value to return if key not found
  * @return array	A filter array.
+ * @throws ClientException
  */
 function filter_temporary_get( $p_filter_key, $p_default = null ) {
 	# if no default was provided, we will trigger an error if not found
@@ -2781,8 +2782,10 @@ function filter_temporary_get( $p_filter_key, $p_default = null ) {
 		return filter_ensure_valid_filter( $t_filter );
 	} else {
 		if( $t_trigger_error ) {
-			error_parameters( $p_filter_key );
-			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+			throw new ClientException( "Filter '$p_filter_key' not found",
+				ERROR_FILTER_NOT_FOUND,
+				[ $p_filter_key ]
+			);
 		} else {
 			return $p_default;
 		}

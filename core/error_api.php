@@ -31,7 +31,7 @@
  * @uses lang_api.php
  */
 
-use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\ErrorHandlerException;
 use Mantis\Exceptions\MantisException;
 
 require_api( 'compress_api.php' );
@@ -41,6 +41,18 @@ require_api( 'database_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
+/**
+ * Stack containing parameters for error message.
+ *
+ * Populated by calling {@see error_parameters()}, prior to raising an error
+ * with trigger_error. Used in {@see error_string()} to insert parameters in
+ * error message's placeholders.
+ *
+ * Exceptions derived from {@see MantisException} class do not use this, as
+ * the parameters are provided as part of the constructor.
+ *
+ * @global array $g_error_parameters
+ */
 $g_error_parameters = array();
 
 /**
@@ -81,46 +93,52 @@ if( !$g_bypass_error_handler ) {
 $g_exception = null;
 
 /**
- * Unhandled exception handler
+ * Unhandled exception handler.
  *
- * @param MantisException|Exception|Error $p_exception The exception to handle
+ * @param MantisException|Throwable $p_exception The exception to handle.
+ *
  * @return void
  */
-function error_exception_handler( $p_exception ) {
+function error_exception_handler( Throwable $p_exception ) {
+	# @TODO The $g_exception global should no longer be needed. It remains here
+	#       during the transition from trigger_error with E_USER_ERROR.
 	global $g_exception;
-
-	# As per PHP documentation, null may be received to reset handler to default state.
-	if( $p_exception === null ) {
-		$g_exception = null;
-		return;
-	}
-
 	$g_exception = $p_exception;
 
-	if( is_a( $p_exception, 'Mantis\Exceptions\MantisException' ) ) {
+	$t_error = $p_exception->getCode();
+
+	if( $p_exception instanceof MantisException ) {
 		$t_params = $p_exception->getParams();
 		if( !empty( $t_params ) ) {
 			call_user_func_array( 'error_parameters', $t_params );
 		}
 
-		trigger_error( $p_exception->getCode(), ERROR );
-
-		# It is not expected to get here, but just in case!
-		return;
+		error_output( $p_exception );
+		exit( $t_error );
 	}
 
 	# trigger a generic error
-	trigger_error( ERROR_PHP, ERROR );
+	$t_error_description = $p_exception->getMessage();
+	error_log( $t_error_description . "\n" . error_stack_trace_as_string() );
+
+	# If show detailed errors is OFF hide PHP exceptions since they sometimes
+	# include file path.
+	if( OFF == config_get_global( 'show_detailed_errors' ) ) {
+		$t_error_description = '';
+	}
+
+	error_output( $p_exception );
+	exit( ERROR_PHP );
 }
 
 /**
- * Get error stack based on last exception
+ * Get stack trace for the given exception or the last PHP error.
  *
- * @param Exception|null $p_exception The exception to print stack trace for.
- *                                    Null will check last seen exception.
+ * @param Throwable|null $p_exception The exception to print the stack trace for.
+ *                                    Null will get a PHP error's backtrace.
  * @return array The stack trace as an array
  */
-function error_stack_trace( $p_exception = null ) {
+function error_stack_trace( ?Throwable $p_exception = null ) {
 	if( $p_exception === null ) {
 		global $g_exception;
 		$p_exception = $g_exception;
@@ -133,6 +151,10 @@ function error_stack_trace( $p_exception = null ) {
 		$t_stack = array_slice( debug_backtrace(), 3 );
 	} else {
 		$t_stack = $p_exception->getTrace();
+		if( $p_exception instanceof ErrorHandlerException ) {
+			# Remove the error handler from the stack trace
+			array_shift( $t_stack );
+		}
 	}
 
 	return $t_stack;
@@ -151,7 +173,6 @@ function error_stack_trace( $p_exception = null ) {
  * @param int        $p_line  Contains the line number the error was raised at, as an integer.
  *
  * @return void
- * @throws ClientException
  *
  * @internal
  * @uses lang_api.php
@@ -161,41 +182,18 @@ function error_stack_trace( $p_exception = null ) {
  * @uses html_api.php (optional)
  */
 function error_handler( $p_type, $p_error, $p_file, $p_line ) {
-	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
-	global $g_error_send_page_header;
-
 	# check if errors were disabled with @ somewhere in this call chain
 	if( !( error_reporting() & $p_type ) ) {
 		return;
 	}
 
-	$t_lang_pushed = false;
-
-	$t_db_connected = false;
-	if( function_exists( 'db_is_connected' ) ) {
-		if( db_is_connected() ) {
-			$t_db_connected = true;
-		}
-	}
-	$t_html_api = false;
-	if( function_exists( 'html_end' ) ) {
-		$t_html_api = true;
-	}
+	$t_db_connected = function_exists( 'db_is_connected' ) && db_is_connected();
 
 	# flush any language overrides to return to user's natural default
+	$t_lang_pushed = false;
 	if( $t_db_connected ) {
 		lang_push( lang_get_default() );
 		$t_lang_pushed = true;
-	}
-
-	$t_method_array = config_get_global( 'display_errors' );
-	$t_method = $t_method_array[$p_type] ?? $t_method_array[E_ALL] ?? 'none';
-
-	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
-
-	# Force errors to use HALT method.
-	if( $p_type == E_USER_ERROR || $p_type == E_ERROR || $p_type == E_RECOVERABLE_ERROR ) {
-		$t_method = DISPLAY_ERROR_HALT;
 	}
 
 	# Special handling for missing language strings, as we do not want to
@@ -219,85 +217,100 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 		}
 	}
 
-	# build an appropriate error string
-	$t_error_location = 'in \'' . $p_file .'\' line ' . $p_line;
-	$t_error_description = '\'' . $p_error . '\' ' . $t_error_location;
-
+	# Convert the error to an Exception to handle the output details
+	# and adapt it based on error type.
 	switch( $p_type ) {
-		case E_WARNING:
-			$t_error_type = 'SYSTEM WARNING';
-			break;
-		case E_NOTICE:
-			$t_error_type = 'SYSTEM NOTICE';
-			break;
-		case E_RECOVERABLE_ERROR:
-			# This should generally be considered fatal (like E_ERROR)
-			$t_error_type = 'SYSTEM ERROR';
-			break;
-		case E_DEPRECATED:
-			$t_error_type = 'DEPRECATED';
-			break;
-		case E_USER_ERROR:
-			if( $p_error == ERROR_PHP ) {
-				$t_error_type = 'INTERNAL APPLICATION ERROR';
-
-				global $g_exception;
-				$t_error_description = $g_exception->getMessage();
-				$t_error_to_log = $t_error_description . "\n" . error_stack_trace_as_string();
-				error_log( $t_error_to_log );
-
-				# If show detailed errors is OFF hide PHP exceptions since they sometimes
-				# include file path.
-				if( !$t_show_detailed_errors ) {
-					$t_error_description = '';
-				}
-			} else {
-				$t_error_type = 'APPLICATION ERROR #' . $p_error;
-				$t_error_description = error_string( $p_error );
-			}
-			break;
-		case E_USER_WARNING:
-			$t_error_type = 'APPLICATION WARNING #' . $p_error;
-			$t_error_description = error_string( $p_error ) . ' (' . $t_error_location . ')';
-			break;
-		case E_USER_NOTICE:
-			# used for debugging
-			$t_error_type = 'DEBUG';
-			break;
+		/** @noinspection PhpMissingBreakStatementInspection */
 		case E_USER_DEPRECATED:
 			# Get details about the error, to facilitate debugging with a more
 			# useful message including filename and line number.
-			$t_stack = error_stack_trace();
-			$t_caller = $t_stack[0];
-
-			$t_error_type = 'WARNING';
-			$t_error_description =  error_string( $p_error )
-				. ' (in ' . $t_caller['file']
-				. ' line ' . $t_caller['line'] . ')';
-
 			error_delay_reporting();
+			# Fall through
+		case E_USER_ERROR:
+			# Calling trigger_error() for E_USER_ERROR is deprecated in PHP 8.4.
+			# This case only remains for backwards-compatibility, to catch any
+			# legacy trigger_error() call that has not been converted to throw
+			# Exceptions to be handled by error_exception_handler().
+		case E_USER_WARNING:
+			$t_exception = new ErrorHandlerException( '', $p_error, $p_type, $p_file, $p_line );
 			break;
+		case E_WARNING:
+		case E_NOTICE:
+		case E_RECOVERABLE_ERROR:
+		case E_DEPRECATED:
+		case E_USER_NOTICE:
 		default:
-			# shouldn't happen, just display the error just in case
-			$t_error_type = 'UNHANDLED ERROR TYPE (' .
-				'<a href="https://www.php.net/errorfunc.constants">' . $p_type. '</a>)';
-			$t_error_description = $p_error . ' (' . $t_error_location . ')';
+			# No special handling for these error levels
+			# The default case should never happen - keep it around just in case
+			$t_exception = new ErrorHandlerException( $p_error, 0, $p_type, $p_file, $p_line );
+			break;
 	}
+
+	error_output( $t_exception );
+
+	if( $t_lang_pushed ) {
+		lang_pop();
+	}
+}
+
+/**
+ * Prints the error.
+ *
+ * Depending on context and error type, this can be an HTML error page with or
+ * without details, a banner, or plain-text output (for CLI).
+ *
+ * @param MantisException|ErrorHandlerException|Throwable $p_error The Error to display.
+ *
+ * @return void
+ * @noinspection PhpDocMissingThrowsInspection ClientException could technically
+ *               be thrown by auth_is_user_authenticated() but this should not
+ *               happen in this context.
+ */
+function error_output( Throwable $p_error ) {
+	global $g_error_send_page_header, $g_error_handled, $g_error_proceed_url;
+
+	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
+	$t_db_connected = function_exists( 'db_is_connected' ) && db_is_connected();
+	$t_html_api = function_exists( 'html_end' );
+
+	# Determine display method, forcing errors to HALT.
+	$t_display_error_methods = config_get_global( 'display_errors' );
+	$t_type = method_exists( $p_error, 'getSeverity' ) ? $p_error->getSeverity() : E_ERROR;
+	$t_method = $t_display_error_methods[$t_type] ?? $t_display_error_methods[E_ALL] ?? DISPLAY_ERROR_NONE;
+	# @TODO E_USER_ERROR should be removed once the migration to Exceptions is complete
+	if( $t_type == E_USER_ERROR || $t_type == E_ERROR || $t_type == E_RECOVERABLE_ERROR ) {
+		$t_method = DISPLAY_ERROR_HALT;
+	}
+
+	$t_error_type = method_exists( $p_error, 'getErrorType' )
+		? $p_error->getErrorType()
+		: 'INTERNAL APPLICATION ERROR';
+	$t_localized_message = method_exists( $p_error, 'getLocalizedMessage' )
+		? $p_error->getLocalizedMessage()
+		: $p_error->getMessage();
 
 	if( php_sapi_name() == 'cli' ) {
 		if( DISPLAY_ERROR_NONE != $t_method ) {
-			echo $t_error_type . ': ' . $t_error_description . "\n";
+			echo $p_error->getErrorType() . ": $t_localized_message\n";
 
 			if( $t_show_detailed_errors ) {
 				echo "\n";
-				error_print_stack_trace();
+				error_print_stack_trace( $p_error );
 			}
 		}
 		if( DISPLAY_ERROR_HALT == $t_method ) {
 			exit(1);
 		}
 	} else {
-		$t_error_description = nl2br( $t_error_description );
+		$t_error_description = nl2br( $t_localized_message );
+
+		# Append error location (file & line number) to the message when the
+		# error is displayed inline or when not showing detailed errors.
+		if( ( !$t_show_detailed_errors || $t_method == DISPLAY_ERROR_INLINE )
+			&& $p_error instanceof ErrorException
+		) {
+			$t_error_description .= " in '" . $p_error->getFile() ."' line " . $p_error->getLine();
+		}
 
 		switch( $t_method ) {
 			case DISPLAY_ERROR_HALT:
@@ -311,8 +324,10 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 					$t_old_contents = ob_get_contents();
 					if( !error_handled() ) {
 						# Retrieve the previously output header
-						if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $t_result ) &&
-							isset( $t_result[1] ) && isset( $t_result[1][0] ) ) {
+						if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $t_result )
+							&& isset( $t_result[1] )
+							&& isset( $t_result[1][0] )
+						) {
 							$t_old_headers = $t_result[1][0];
 							unset( $t_old_contents );
 						}
@@ -327,7 +342,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 					ob_clean();
 				}
 
-
 				# If HTML error output was disabled, set the HTTP response code and stop
 				if( defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
 					if( DISABLE_INLINE_ERROR_REPORTING == 'text' ) {
@@ -335,15 +349,16 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 						header( 'Content-Type: text/plain' );
 						echo $t_error_description;
 					}
-					http_response_code( error_map_mantis_error_to_http_code( $p_error ) );
-					exit(1);
+					http_response_code( error_map_mantis_error_to_http_code( $p_error->getCode() ) );
+					exit( $p_error->getCode() );
 				}
 
 				# don't send the page header information if it has already been sent
 				if( $g_error_send_page_header ) {
 					if( $t_html_api ) {
 						layout_page_header();
-						if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected ) {
+						if( $p_error->getCode() != ERROR_DB_QUERY_FAILED && $t_db_connected ) {
+							/** @noinspection PhpUnhandledExceptionInspection */
 							if( auth_is_user_authenticated() ) {
 								layout_page_begin();
 							} else {
@@ -370,17 +385,17 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				echo '<p class="bold">' . $t_error_type . '</p>', "\n";
 				echo '<p>', $t_error_description, '</p>', "\n";
 
-				echo '<div class="error-info">';
+				echo '<p class="error-info">';
 				if( null === $g_error_proceed_url ) {
 					echo lang_get( 'error_no_proceed' );
 				} else {
 					echo '<a href="', $g_error_proceed_url, '">', lang_get( 'proceed' ), '</a>';
 				}
-				echo '</div>', "\n";
+				echo '</p>', "\n";
 
 				if( $t_show_detailed_errors ) {
-					error_print_details( $p_file, $p_line );
-					error_print_stack_trace();
+					error_print_details( $p_error->getFile(), $p_error->getLine() );
+					error_print_stack_trace( $p_error );
 				}
 				echo '</div></div>';
 
@@ -395,7 +410,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				}
 
 				if( $t_html_api ) {
-					if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected ) {
+					if( $p_error->getCode() != ERROR_DB_QUERY_FAILED && $t_db_connected ) {
+						/** @noinspection PhpUnhandledExceptionInspection */
 						if( auth_is_user_authenticated() ) {
 							layout_page_end();
 						} else {
@@ -411,7 +427,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				}
 
 				# Return proper HTTP status code for error
-				http_response_code( error_map_mantis_error_to_http_code( $p_error ) );
+				http_response_code( error_map_mantis_error_to_http_code( $p_error->getCode() ) );
 				exit(1);
 
 			case DISPLAY_ERROR_INLINE:
@@ -431,11 +447,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 		}
 	}
 
-	if( $t_lang_pushed ) {
-		lang_pop();
-	}
-
-	$g_error_parameters = array();
 	$g_error_proceed_url = null;
 }
 
@@ -589,6 +600,11 @@ function error_print_stack_trace( $p_exception = null ) {
 		echo error_stack_trace_as_string( $p_exception );
 		return;
 	}
+
+	$t_stack = error_stack_trace( $p_exception );
+	if( empty( $t_stack ) ) {
+		return;
+	}
 ?>
 	<h3>Stack trace</h3>
 		<div class="table-responsive">
@@ -603,8 +619,6 @@ function error_print_stack_trace( $p_exception = null ) {
 					<th>Args</th>
 				</tr>
 <?php
-	$t_stack = error_stack_trace( $p_exception );
-
 	foreach( $t_stack as $t_id => $t_frame ) {
 		if( !empty( $t_frame['args'] ) ) {
 			$t_args = array();
@@ -675,43 +689,57 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 /**
  * Return an error string (in the current language) for the given error.
  *
- * @param int $p_error Error string to localize.
- *
+ * @param int        $p_error  Id of error string to localize.
+ * @param array|null $p_params Error parameters. If null, will retrieve
+ *                             parameters from {@see $g_error_parameters}
  * @return string
  * @access public
  */
-function error_string( $p_error ) {
-	global $g_error_parameters;
-
+function error_string( $p_error, ?array $p_params = null ) {
+	# Retrieve localized error message
 	$t_lang = null;
-	$t_error = '';
 	while( true ) {
-		$t_err_msg = lang_get( 'MANTIS_ERROR', $t_lang );
-		if( array_key_exists( $p_error, $t_err_msg ) ) {
-			$t_error = $t_err_msg[$p_error];
+		$t_all_error_messages = lang_get( 'MANTIS_ERROR', $t_lang );
+		if( array_key_exists( $p_error, $t_all_error_messages ) ) {
+			$t_error_message = $t_all_error_messages[$p_error];
 			break;
 		} elseif( is_null( $t_lang ) ) {
-			# Error string not found, fall back to English
+			# Error string not found, fall back to English and try again
 			$t_lang = 'english';
 		} else {
 			# Error string not found
-			$t_error = lang_get( 'missing_error_string' );
+			$t_error_message = lang_get( 'missing_error_string' );
 			# Prepend the error number
-			array_unshift( $g_error_parameters, $p_error );
+			$p_params = [$p_error];
 			break;
 		}
 	}
 
 	# Special handling for generic error type
 	# Append detailed error information if a parameter has been provided.
-	if( $p_error == ERROR_GENERIC && $g_error_parameters ) {
-		$t_error .= PHP_EOL . error_string( ERROR_GENERIC_DETAILS );
-		$g_error_parameters = [];
+	if( $p_error == ERROR_GENERIC ) {
+		$t_error_message .= PHP_EOL . error_string( ERROR_GENERIC_DETAILS, $p_params );
+	}
+
+	# Get number of placeholders in error message
+	$t_count = preg_match_all( '/%(?:\d+\$)?[bcdeEfFgGhHosuxX]/', $t_error_message );
+	if( $t_count > 0 ) {
+		# No arameters were provided, pop them off the global stack
+		if( $p_params === null ) {
+			global $g_error_parameters;
+			$p_params = array_slice( $g_error_parameters, 0, $t_count );
+			array_splice( $g_error_parameters, 0, $t_count );
+		}
+
+		# Pad the parameter array to ensure we don't get errors from vsprintf
+		# in case the caller didn't provide enough for the error string.
+		$p_params = array_pad( $p_params, $t_count, '' );
+	} else {
+		$p_params = [];
 	}
 
 	# Prepare error parameters for display
-	$t_parameters = $g_error_parameters;
-	foreach( $t_parameters as &$t_value ) {
+	foreach( $p_params as &$t_value ) {
 		# Logic copied from string_html_specialchars(), to enable output of
 		# error messages even if core is not fully initialized.
 		# Modified to allow <br> tags
@@ -722,11 +750,13 @@ function error_string( $p_error ) {
 		);
 	}
 
-	# We pad the parameter array to make sure that we don't get errors in
-	# case the caller didn't provide enough for the error string.
-	$t_parameters = array_pad( $t_parameters, 10, '' );
+	# Special handling for generic error type
+	# Do not display details if none provided
+	if( $p_error == ERROR_GENERIC_DETAILS && !$p_params[0] ) {
+		return '';
+	}
 
-	return vsprintf( $t_error, $t_parameters );
+	return vsprintf( $t_error_message, $p_params );
 }
 
 /**
@@ -741,13 +771,20 @@ function error_handled() {
 }
 
 /**
- * Set additional info parameters to be used when displaying the next error.
+ * Set parameters to be used when displaying the next error.
  *
- * This function takes a variable number of parameters.
+ * Some error messages accept placeholders to provide additional information
+ * about the error.
  *
- * When writing internationalized error strings, note that you can change the
- * order of parameters in the string.  See the PHP manual page for the
- * sprintf() function for more details.
+ * When writing internationalized error messages, parameters can be inserted in
+ * any order, through the use of numbered placeholders (e.g. `%1$s`) in the
+ * string; see
+ * {@link https://www.php.net/manual/en/function.sprintf.php PHP manual for sprintf()}.
+ *
+ * This function takes a variable number of parameters. You should be careful
+ * to provide the exact number of parameters expected by the error being thrown.
+ *
+ * @see $g_error_parameters
  *
  * @return void
  *
@@ -756,7 +793,7 @@ function error_handled() {
 function error_parameters() {
 	global $g_error_parameters;
 
-	$g_error_parameters = func_get_args();
+	$g_error_parameters = array_merge( func_get_args(), $g_error_parameters );
 }
 
 /**
