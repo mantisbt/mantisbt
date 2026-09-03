@@ -149,7 +149,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 						$this->old_id_ = $t_reader->value;
 						break;
 
-					case 'project';
+					case 'project':
 						# ignore original value, use current project
 						$this->newbug_->project_id = $t_project_id;
 						break;
