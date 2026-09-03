@@ -12,8 +12,9 @@ info:
 
     The token is passed using the standard RFC 6750 bearer scheme
     (`Authorization: Bearer <token>`); the scheme name is matched case-insensitively.
-    For backwards compatibility, the bare form (`Authorization: <token>`) is also
-    still accepted.
+    For backwards compatibility, the legacy, bare form (`Authorization: <token>`) is 
+    still accepted, but this usage is deprecated and will be removed in a future
+    release.
 
     There has been significant improvements and feature additions for REST API in each of the
     recent releases.  Hence, it is highly recommended to use latest release when leveraging the
@@ -30,10 +31,10 @@ info:
     different format.
 
     Create an API token in MantisBT, then send the token value directly in the `Authorization`
-    header. Do not prefix the token with `Bearer`:
+    header:
 
     ```http
-    Authorization: <api-token>
+    Authorization: Bearer <api-token>
     Content-Type: application/json
     ```
 
@@ -1820,7 +1821,9 @@ components:
       scheme: bearer
       description: |-
         The user's API token, sent with the RFC 6750 bearer scheme (`Bearer <token>`).
-        The bare form (`<token>`) is also accepted for backwards compatibility.
+        
+        The legacy bare form (`<token>`) is still accepted for backwards compatibility,
+        but this usage is deprecated and will be removed in a future release.
   headers:
     ETag:
       description: Entity tag for the response representation, when conditional requests are supported.
