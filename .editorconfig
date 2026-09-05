@@ -1,0 +1,13 @@
+# Prevents other .editorconfig files higher in the folder hierarchy to interfere
+root = true
+
+[*.{php,js,css}]
+charset = utf-8
+indent_style = tab
+indent_size = 4
+
+[*.{php,md}]
+end_of_line = lf
+insert_final_newline = false
+trim_trailing_whitespace = false
+max_line_length = 120
