@@ -697,7 +697,7 @@ function file_delete_local( $p_filename ) {
  * @param string $p_field_name Database field name to retrieve.
  * @param string $p_table      Database table name.
  *
- * @return string
+ * @return mixed Field value or false if file record not found.
  * @throws ClientException
  */
 function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
