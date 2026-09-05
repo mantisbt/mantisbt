@@ -54,6 +54,11 @@ class RestAuthHeaderTest extends RestBase {
 			->send();
 
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+
+		# Deprecation header must be present
+		$this->assertTrue( $t_response->hasHeader( HEADER_DEPRECATION ),
+			"API Token Auth without Bearer scheme is deprecated"
+		);
 	}
 
 	/**
