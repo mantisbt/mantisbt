@@ -85,11 +85,21 @@ class IssueFileDeleteCommand extends Command {
 
 		$t_file_owner_id = file_get_field( $this->file_id, 'user_id' );
 		$t_user_id = auth_get_current_user_id();
-		$t_is_owner = $t_file_owner_id == $t_user_id;
-		if( !$t_is_owner || !config_get( 'allow_delete_own_attachments' ) ) {
-			if( !access_has_bug_level( config_get( 'delete_attachments_threshold' ), $this->issue_id, $t_user_id ) ) {
-				throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
-			}
+		$t_current_user_is_file_owner = $t_file_owner_id == $t_user_id;
+		$t_can_delete_own_attachments = config_get( 'allow_delete_own_attachments' );
+		$t_can_delete_any_attachment = access_has_bug_level(
+			config_get( 'delete_attachments_threshold' ),
+			$this->issue_id, $t_user_id
+		);
+
+		# User must have access to the Issue and be allowed to delete the attachment
+		if( !( access_has_bug_level( config_get( 'view_bug_threshold' ), $this->issue_id, $t_user_id )
+				&& ( $t_can_delete_any_attachment
+					|| $t_can_delete_own_attachments && $t_current_user_is_file_owner
+				)
+			)
+		) {
+			throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
 		}
 	}
 
@@ -97,6 +107,7 @@ class IssueFileDeleteCommand extends Command {
 	 * Delete the attachment and return its issue id.
 	 *
 	 * @return array
+	 * @throws ClientException
 	 */
 	protected function process() {
 		file_delete( $this->file_id, 'bug' );
