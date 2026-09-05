@@ -68,14 +68,23 @@ $g_cache_access_matrix_project_ids = array();
 $g_cache_access_matrix_user_ids = array();
 
 /**
- * Function to be called when a user is attempting to access a page that
- * he/she is not authorized to.  This outputs an access denied message then
- * re-directs to the main page.
+ * Display an access denied error message.
+ *
+ * After display, it will set the response code to 403 and redirect to the
+ * default home page. When running from CLI, just exit with code 1.
+ *
+ * Call this function when a user is attempting to access a page or perform an
+ * action they are not authorized to,
  *
  * @return void
  * @throws ClientException
  */
 function access_denied() {
+	if( php_sapi_name() == 'cli' ) {
+		echo error_string( ERROR_ACCESS_DENIED );
+		exit(1);
+	}
+
 	$t_return = '';
 	if( basename( $_SERVER['SCRIPT_NAME'] ) != auth_login_page() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
