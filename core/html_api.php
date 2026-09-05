@@ -227,17 +227,6 @@ function html_css() {
 	}
 
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
-		# status_config.php is a special css file, dynamically generated.
-		# Add a hash to the query string to differentiate content based on its
-		# relevant properties. This allows a browser to cache them separately and force
-		# a reload when the content may differ.
-		if( $t_stylesheet_path == 'status_config.php' ) {
-			$t_stylesheet_path = helper_url_combine(
-				helper_mantis_url( 'css/status_config.php' ),
-				[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
-			);
-		}
-
 		if( is_array( $t_stylesheet_path ) ) {
 			html_css_cdn_link( $t_stylesheet_path[0], $t_stylesheet_path[1] ?? '' );
 		} else {

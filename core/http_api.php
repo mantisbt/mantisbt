@@ -213,7 +213,6 @@ function http_security_headers() {
 		http_csp_add( 'default-src', "'self'" );
 		http_csp_add( 'frame-ancestors', "'none'" );
 		http_csp_add( 'style-src', "'self'" );
-		http_csp_add( 'style-src', "'unsafe-inline'" );
 		http_csp_add( 'script-src', "'self'" );
 		http_csp_add( 'img-src', "'self'" );
 		http_csp_add( 'img-src', "data:" );
