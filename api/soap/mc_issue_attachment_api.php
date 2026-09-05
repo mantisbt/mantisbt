@@ -99,13 +99,11 @@ function mc_issue_attachment_delete( $p_username, $p_password, $p_issue_attachme
 		return mci_fault_login_failed();
 	}
 
-	$t_file = file_get_field( $p_issue_attachment_id, 'bug_id' );
-	$t_command = new IssueFileDeleteCommand( array(
-		'query' => array(
-			'issue_id' => $t_file,
+	$t_command = new IssueFileDeleteCommand( [
+		'query' => [
 			'file_id' => $p_issue_attachment_id,
-		)
-	) );
+		]
+	] );
 	$t_command->execute();
 
 	return true;

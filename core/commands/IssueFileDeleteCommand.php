@@ -25,6 +25,12 @@ use Mantis\Exceptions\ClientException;
 
 /**
  * A command that deletes an issue attachment.
+ *
+ * Payload:
+ * - query:
+ *   - issue_id: issue identifier (optional); if not given, will be retrieved
+ *               from the file record.
+ *   - file_id: attachment identifier (must belong to issue_id if provided)
  */
 class IssueFileDeleteCommand extends Command {
 	/** @var int */
@@ -39,15 +45,24 @@ class IssueFileDeleteCommand extends Command {
 	 * @throws ClientException
 	 */
 	function validate() {
-		$this->issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
+		$this->file_id = helper_parse_id( $this->query( 'file_id' ), 'file_id' );
+		$t_file_issue_id = file_get_field( $this->file_id, 'bug_id' );
+
+		$t_issue_id = (string)$this->query( 'issue_id' );
+		if( is_blank( $t_issue_id ) ) {
+			# Issue id was not specified, retrieve it from the file
+			if( $t_file_issue_id === false ) {
+				throw new ClientException( "Attachment '$this->file_id' not found",
+					ERROR_FILE_NOT_FOUND,
+					[ $this->file_id ]
+				);
+			}
+			$this->issue_id = (int)$t_file_issue_id;
+		} else {
+			$this->issue_id = helper_parse_issue_id( $t_issue_id );
+		}
 		bug_ensure_exists( $this->issue_id );
 
-		$this->file_id = (int)$this->query( 'file_id' );
-		if( $this->file_id < 1 ) {
-			throw new ClientException( "'file_id' must be >= 1", ERROR_INVALID_FIELD_VALUE, array( 'file_id' ) );
-		}
-
-		$t_file_issue_id = file_get_field( $this->file_id, 'bug_id' );
 		# A missing attachment and an attachment belonging to another issue are
 		# handled identically to avoid exposing whether a file id exists.
 		if( (int)$t_file_issue_id !== $this->issue_id ) {

@@ -45,16 +45,13 @@ form_security_validate( 'bug_file_delete' );
 
 $f_file_id = gpc_get_int( 'file_id' );
 
-$t_bug_id = file_get_field( $f_file_id, 'bug_id' );
-
 helper_ensure_confirmed( lang_get( 'delete_attachment_sure_msg' ), lang_get( 'delete' ) );
 
-$t_command = new IssueFileDeleteCommand( array(
-	'query' => array(
-		'issue_id' => $t_bug_id,
+$t_command = new IssueFileDeleteCommand( [
+	'query' => [
 		'file_id' => $f_file_id,
-	)
-) );
+	]
+] );
 $t_result = $t_command->execute();
 
 form_security_purge( 'bug_file_delete' );
