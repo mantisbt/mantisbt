@@ -254,6 +254,10 @@ switch( $f_action ) {
 		require_api( 'datetimepicker_api.php' );
 		break;
 	case 'CUSTOM' :
+		/** @noinspection PhpUndefinedVariableInspection */
+		if( !custom_field_has_write_access_to_project( $t_custom_field_id, $t_project_id ) ) {
+			throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
+		}
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ),
 			string_attribute( lang_get_defaulted( $t_custom_field_def['name'] ) )

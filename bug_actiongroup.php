@@ -338,7 +338,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( 0 === $f_custom_field_id ) {
 				throw new ClientException( "Invalid custom field Id", ERROR_CUSTOM_FIELD_NOT_FOUND );
 			}
-
+			if( !custom_field_has_write_access_to_project( $f_custom_field_id, $t_bug->project_id ) ) {
+				throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
+			}
 			# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 			$t_form_var = 'custom_field_' . $f_custom_field_id;
 			$t_custom_field_value = gpc_get_custom_field( $t_form_var, $t_custom_field_def['type'], null );
