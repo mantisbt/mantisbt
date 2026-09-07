@@ -45,8 +45,6 @@ use Mantis\Exceptions\StateException;
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
-use Mantis\Exceptions\ClientException;
-
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
