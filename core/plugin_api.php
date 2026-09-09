@@ -456,6 +456,9 @@ function plugin_lang_get_defaulted( $p_name, $p_default = null, $p_basename = nu
 	if( !is_null( $p_basename ) ) {
 		plugin_push_current( $p_basename );
 	}
+	if( is_null( $p_default ) ) {
+		$p_default = $p_name;
+	}
 	$t_basename = plugin_get_current();
 	$t_name = 'plugin_' . $t_basename . '_' . $p_name;
 	$t_string = lang_get_defaulted( $t_name, $p_default );
