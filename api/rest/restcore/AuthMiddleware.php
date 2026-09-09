@@ -52,6 +52,14 @@ class AuthMiddleware {
 					$t_username = user_get_username( $t_user_id );
 					$t_password = $t_api_token;
 					$t_login_method = LOGIN_METHOD_API_TOKEN;
+
+					# Send Deprecated header if token was passed without bearer scheme
+					if( $t_api_token === $t_credentials ) {
+						$t_doc_link = 'https://mantisbt.org/docs/master/en-US/Developers_Guide/html-desktop/#restapi.auth';
+						$response = $response
+							->withHeader( HEADER_DEPRECATION, '@1788480117')
+							->withAddedHeader( HEADER_LINK, '<' . $t_doc_link. '>; rel="deprecation"');
+					}
 					break;
 				}
 			}
