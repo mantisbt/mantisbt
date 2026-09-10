@@ -29,6 +29,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\admin\check\EndOfLifeCheck;
+
 if( !defined( 'CHECK_DATABASE_INC_ALLOW' ) ) {
 	return;
 }
@@ -57,7 +59,7 @@ if( isset( $ADODB_vers ) ) {
 
 	# Making sure we're not using the ADOdb extension (see #14552)
 	check_print_test_row(
-		'Checking use of the <a href="http://adodb.sourceforge.net/#extension">ADOdb extension</a>',
+		'Making sure the legacy ADOdb extension is not being used',
 		!extension_loaded( 'ADOdb' ),
 		'The ADOdb extension is not supported and must be disabled'
 	);
@@ -80,16 +82,22 @@ check_print_info_row(
 
 $t_database_type = config_get_global( 'db_type' );
 check_print_info_row(
-	'Database type',
+	'Database type (ADOdb driver)',
 	htmlentities( $t_database_type )
 );
 
+
+$t_db_support = db_check_database_support( $t_database_type );
 check_print_test_row(
 	'Database type is supported by the version of PHP installed on this server',
-	db_check_database_support( $t_database_type ),
+	$t_db_support,
 	array( false => 'The current database type is set to ' . htmlentities( $t_database_type )
 		. '. The version of PHP installed on this server does not have support for this database type.' )
 );
+if( !$t_db_support ) {
+	# Can't continue the checks without PHP support
+	return;
+}
 
 if( db_is_mysql() ) {
 	check_print_test_warn_row(
@@ -183,230 +191,90 @@ if( !db_is_connected() ) {
 global $g_db;
 $t_database_server_info = $g_db->ServerInfo();
 $t_db_version = $t_database_server_info['version'];
-preg_match( '/^([0-9]+)\.[0-9+]/', $t_db_version, $t_matches );
-$t_db_major_version = $t_matches[0];
 
 # MantisBT minimum version
 check_print_info_row(
 	'Database server version',
-	htmlentities( $t_db_version )
+	htmlentities( $t_db_version ),
+	htmlentities( $t_database_server_info['description'] )
 );
 
-if( db_is_mysql() ) {
-	$t_db_min_version = DB_MIN_VERSION_MYSQL;
-} elseif( db_is_pgsql() ) {
-	$t_db_min_version = DB_MIN_VERSION_PGSQL;
+global $g_db_functional_type;
+switch( $g_db_functional_type ) {
+	case DB_TYPE_MYSQL:
+		$t_eol_db_type = stripos( $t_database_server_info['description'], 'MariaDB' )
+			? EndOfLifeCheck::PRODUCT_MARIADB
+			: EndOfLifeCheck::PRODUCT_MYSQL;
+		$t_db_min_version = DB_MIN_VERSION_MYSQL;
 
-	# Starting with PostgreSQL 10, a major version is indicated by increasing
-	# the first part of the version;  before that a major version was indicated
-	# by increasing either the first or second part of the version number.
-	if( version_compare( $t_db_version, '10', '>=' ) ) {
-		$t_db_major_version = $t_matches[1];
-	}
-} elseif( db_is_mssql() ) {
-	$t_db_min_version = DB_MIN_VERSION_MSSQL;
-} elseif( db_is_oracle() ) {
-	$t_db_min_version = DB_MIN_VERSION_ORACLE;
-} else {
-	$t_db_min_version = 0;
+		check_print_info_row(
+			'Database server type',
+			$t_eol_db_type
+		);
+		break;
+	case DB_TYPE_PGSQL:
+		$t_eol_db_type = EndOfLifeCheck::PRODUCT_POSTGRESQL;
+		$t_db_min_version = DB_MIN_VERSION_PGSQL;
+		break;
+	case DB_TYPE_MSSQL:
+		$t_eol_db_type = EndOfLifeCheck::PRODUCT_SQLSERVER;
+		$t_db_min_version = DB_MIN_VERSION_MSSQL;
+		break;
+	case DB_TYPE_ORACLE:
+		$t_eol_db_type = EndOfLifeCheck::PRODUCT_ORACLE;
+		$t_db_min_version = DB_MIN_VERSION_ORACLE;
+		break;
+	default:
+		$t_eol_db_type = '';
+		$t_db_min_version = 0;
 }
 check_print_test_row(
 	'Minimum database version required for MantisBT',
 	version_compare( $t_db_version, $t_db_min_version, '>=' ),
-	array(
-		true => 'You are using version ' . htmlentities( $t_db_version ) . '.',
-		false => 'The database version you are using is ' . htmlentities( $t_db_version )
-			. '. The minimum requirement for MantisBT on your database platform is ' . $t_db_min_version . '.'
-	)
+	"The minimum requirement for your database platform is $t_db_min_version."
 );
 
-$t_date_format = config_get( 'short_date_format' );
+# Database version End-of-life and Support checks
+# Get info from https://endoflife.date/
+try {
+	$t_release = new EndOfLifeCheck( $t_eol_db_type, $t_db_version );
+	$t_message = $t_release->getCheckInfoMessage();
+}
+catch( Exception $e ) {
+	$t_message = EndOfLifeCheck::getInfoMessageFromException( $e );
+	$t_release = false;
+}
+check_print_test_warn_row(
+	'Database End-of-Life support check',
+	$t_release !== false,
+	$t_message
+);
 
-# MySQL support checking
-if( db_is_mysql() ) {
-	# The list below was built based on information found in the FAQ [1]
-	# [1]: https://dev.mysql.com/doc/refman/8.4/en/faqs-general.html
-	# @TODO consider using https://endoflife.date/mysql to retrieve this data
-	$t_versions = array(
-		# Series => Type, Version when GA status was achieved, GA date
-		'5.0' => array( 'GA', '5.0.15', '2005-10-19' ),
-		'5.1' => array( 'GA', '5.1.30', '2008-11-14' ),
-		'5.4' => array( 'Discontinued' ),
-		'5.5' => array( 'GA', '5.5.8', '2010-12-03' ),
-		'5.6' => array( 'GA', '5.6.10', '2013-02-05' ),
-		'5.7' => array( 'GA', '5.7.9', '2015-10-21' ),
-		'6.0' => array( 'Discontinued' ),
-		'8.0' => array( 'GA', '8.0.11', '2018-04-19' ),
-		'8.1' => array( 'Innovation', '8.1.0', '2023-07-18' ),
-		'8.2' => array( 'Innovation', '8.2.0', '2023-10-25' ),
-		'8.3' => array( 'Innovation', '8.3.0', '2024-01-16' ),
-		'8.4' => array( 'LTS', '8.4.0', '2024-04-30' ),
-		'9.0' => array( 'Innovation', '9.0.0', '2024-06-07' ),
-		'9.1' => array( 'Innovation', '9.1.0', '2024-09-24' ),
+if( $t_release !== false ) {
+	# Has reached End Of Life ?
+	check_print_test_warn_row(
+		'Database version is supported',
+		!$t_release->isEOL( $t_message ),
+		$t_message
 	);
 
-	$t_support_url = 'https://www.mysql.com/support/supportedplatforms/';
-	$t_supported_release = '<a href="' . $t_support_url . '">supported release</a>';
-
-	# Is it a GA or LTS release
-	$t_mysql_ga_release = false;
-	$t_date_end_active_support = $t_date_end_of_life = null;
-	if( !array_key_exists( $t_db_major_version, $t_versions ) ) {
-		$t_param = [
-			'category_id' => 12, # db mysql
-			'product_version' => MANTIS_VERSION,
-			'reproducibility' => 10, # always
-			'priority' => 20, # low
-			'summary' => "MySQL version $t_db_major_version is not defined in Admin Checks",
-			'description' => "Please add the missing version to " . basename( __FILE__ ) . ".",
-		];
-		$t_report_bug_url = helper_url_combine( 'https://mantisbt.org/bugs/bug_report_page.php', $t_param );
+	# Is it an LTS release ?
+	# Note: only report this for RDBMS have a concept of LTS releases.
+	if( db_is_mysql() || db_is_oracle() ) {
 		check_print_test_warn_row(
-			'MySQL Lifecycle and Release Support data availability',
-			false,
-			array(
-				false => 'Release information for MySQL ' . $t_db_major_version
-					. ' series is not available, unable to perform the lifecycle checks.'
-					. ' Please <a href="' . $t_report_bug_url . '">report the issue</a>.'
-			) );
-	} else {
-		$t_version = $t_versions[$t_db_major_version];
-		$t_version_type = $t_version[0];
-		$t_mysql_ga_release = version_compare( $t_db_version, $t_version[1], '>=' );
-		if( in_array( $t_version_type, ['GA', 'LTS'] )) {
-			# Support end-dates as per https://www.mysql.com/support/
-			/** @noinspection PhpUnhandledExceptionInspection */
-			$t_date_ga = new DateTimeImmutable( $t_version[2] );
-			$t_date_end_active_support = $t_date_ga->add( new DateInterval( 'P5Y' ) )
-												   ->modify( 'last day of this month' );
-			$t_date_end_of_life = $t_date_ga->add( new DateInterval( 'P8Y' ) )
-											->modify( 'last day of this month' );
-		} elseif( 'Innovation' === $t_version_type ) {
-			# Innovation releases are supported until the next one comes out.
-			# If not defined, we default to 3 months as Oracle aims for quarterly releases.
-
-			# Get the next version
-			# Skip the first entries (Innovation versions started with MySQL 8.1)
-			$t_innovation_versions = array_slice( $t_versions, 8 );
-			foreach( $t_innovation_versions as $t_key => $t_unused ) {
-				$t_next_version = next( $t_innovation_versions );
-				if( $t_key == $t_db_major_version) {
-					break;
-				}
-			}
-
-			/** @noinspection PhpUndefinedVariableInspection */
-			if( $t_next_version !== false ) {
-				/** @noinspection PhpUnhandledExceptionInspection */
-				$t_date_end_of_life = new DateTimeImmutable( $t_next_version[2] );
-			} else {
-				/** @noinspection PhpUnhandledExceptionInspection */
-				$t_date_ga = new DateTimeImmutable( $t_version[2] );
-				$t_date_end_of_life = $t_date_ga->add( new DateInterval( 'P3M' ) )
-												->modify( 'last day of this month' );
-			}
-			$t_date_end_active_support = $t_date_end_of_life;
-		}
-
-		check_print_test_row(
-			'MySQL version is a General Availability (GA) release',
-			$t_mysql_ga_release,
-			array(
-				false => "MySQL $t_db_version is a development or pre-GA release, which "
-					. ( $t_version_type == 'Discontinued' ? 'has been discontinued and ' : '' )
-					. "is not recommended for Production use. You should upgrade to a $t_supported_release."
-			)
+			'Database version is a Long-Term Support (LTS) release',
+			$t_release->isLTS(),
+			[false => "Non-LTS releases are not recommended for Production use."
+			]
 		);
-
-		# Has not reached End Of Life
-		$t_end_of_life = $t_date_end_of_life > date_create_immutable();
-		$t_eol_date_formatted = $t_date_end_of_life ? $t_date_end_of_life->format( $t_date_format ) : 'N/A (Discontinued release)';
-		check_print_test_warn_row(
-			'MySQL version is supported',
-			$t_end_of_life,
-			array(
-				true => 'Support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_eol_date_formatted,
-				false => 'Support for MySQL ' . htmlspecialchars( $t_db_version )
-					. " ended on $t_eol_date_formatted. You should upgrade to a $t_supported_release,"
-					. ' as bugs and security flaws discovered in this version will not be fixed.'
-			)
-		);
-
-		if( $t_end_of_life && $t_date_end_active_support < $t_date_end_of_life ) {
-			# Within active support period
-			$t_eas_date_formatted = $t_date_end_active_support->format( $t_date_format );
-			check_print_test_warn_row(
-				'MySQL version is within the active support period',
-				$t_date_end_active_support > date_create_immutable(),
-				array(
-					true => 'Active support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_eas_date_formatted,
-					false => 'Active support for MySQL ' . htmlspecialchars( $t_db_version )
-						. ' ended on ' . $t_eas_date_formatted
-						. '. The release is in its Extended support period, which will end on ' . $t_eol_date_formatted
-						. ". You should upgrade to an actively $t_supported_release,"
-						. '  to benefit from bug fixes and security patches.'
-				) );
-		}
 	}
-} else if( db_is_pgsql() ) {
-	# PostgreSQL support checking
 
-	# Version support information
-	$t_versions = array(
-		# Version => Final release (EOL) date
-		'17'  => '2029-11-08',
-		'16'  => '2028-11-09',
-		'15'  => '2027-11-11',
-		'14'  => '2026-11-12',
-		'13'  => '2025-11-13',
-		'12'  => '2024-11-14',
-		'11'  => '2023-11-09',
-		'10'  => '2022-11-10',
-		'9.6' => '2021-11-11',
-		'9.5' => '2021-02-11',
-		'9.4' => '2020-02-13',
-		'9.3' => '2018-11-08',
-		'9.2' => '2017-11-09',
-		'9.1' => '2016-10-27',
-		'9.0' => '2015-10-15',
+	# Is there a newer release available ?
+	check_print_test_warn_row(
+		'Database is the latest available maintenance release',
+		$t_release->isLatest( $t_message ),
+		$t_message
 	);
-	$t_support_url = 'https://www.postgresql.org/support/versioning/';
-
-	# Determine EOL date
-	if( array_key_exists( $t_db_major_version, $t_versions ) ) {
-		$t_date_eol = $t_versions[$t_db_major_version];
-	} else {
-		$t_version = key( $t_versions );
-		if( version_compare( $t_db_major_version, $t_version, '>' ) ) {
-			# Major version is higher than the most recent in array - assume we're supported
-			$t_date_eol = new DateTime;
-			$t_date_eol = $t_date_eol->add( new DateInterval( 'P1Y' ) )->format( $t_date_format );
-			$t_assume = array( 'more recent', $t_version, 'supported' );
-		} else {
-			# Assume EOL
-			$t_date_eol = null;
-			end( $t_versions );
-			$t_assume = array( 'older', key( $t_versions ), 'at end of life' );
-		}
-
-		check_print_test_warn_row(
-			'PostgreSQL version support information availability',
-			false,
-			array(
-				false => 'Release information for version ' . $t_db_major_version . ' is not available. '
-					. vsprintf( 'Since it is %s than %s, we assume it is %s. ', $t_assume )
-					. 'Please refer to the <a href="' . $t_support_url
-					. '">PostgreSQL Versioning Policy</a> to make sure.'
-			) );
-	}
-
-	check_print_test_row(
-		'Version of PostgreSQL is <a href="' . $t_support_url . '">supported</a>',
-		date_create( $t_date_eol ) > date_create( 'now' ),
-		array(
-			false => 'PostgreSQL version ' . htmlentities( $t_db_version )
-				. ' is no longer supported and should not be used, as security flaws discovered in this version will not be fixed.'
-		) );
 }
 
 $t_table_prefix = config_get_global( 'db_table_prefix' );
