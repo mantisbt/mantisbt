@@ -143,7 +143,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 	$i++;
 	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 	$t_download_url = "file_download.php?file_id=$v_id&amp;type=doc";
-	$t_filesize = number_format( $v_filesize ) . ' ' . lang_get( 'bytes' );
+	$t_filesize = get_size_info( $v_filesize );
 	$t_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
 ?>
 <tr>
