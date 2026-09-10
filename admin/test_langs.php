@@ -787,6 +787,10 @@ class LangCheckFile {
 	/**
 	 * Detects that the translation of variables is performed by an external service.
 	 *
+	 * The list of externally-translated plugins is currently hardcoded, but if
+	 * necessary it could be built dynamically using the
+	 * {@see https://translatewiki.net/wiki/Special:ApiSandbox#action=query&format=json&meta=messagegroups&formatversion=2&mgfilter=&mgformat=tree&mgroot=out-mantis-0-all TranslateWiki.net API}.
+	 *
 	 * @return bool
 	 */
 	private function hasUrl() {
