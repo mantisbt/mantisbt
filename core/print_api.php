@@ -2090,7 +2090,7 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 			echo '</a>';
 		}
 
-		echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
+		echo lang_get( 'word_separator' ) . '(' . get_size_info_span( $p_attachment['size'] ) . ')';
 		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', array( $p_attachment ) );
 	} else {
 		print_file_icon( $p_attachment['display_name'] );
@@ -2220,13 +2220,116 @@ function print_timezone_option_list( $p_timezone ) {
 }
 
 /**
- * Return file size information
- * @param integer $p_size File size.
- * @param string  $p_unit File size unit.
+ * Return formatted file / memory size information.
+ *
+ * If $p_unit is null, the mot appropriate unit will be picked depending on the
+ * scale of $p_size, which will be divided as appropriate, for a "human-friendly"
+ * display.
+ *
+ * Note: since we're using IEEE 1541 binary units, bytes are divided by 1024,
+ * not 1000 (see #27700).
+ * For example: 12'345 bytes => 12.1 KiB, 987'654 bytes => 0.9 MiB.
+ *
+ * @param int         $p_size File or memory size, in bytes.
+ * @param string|null $p_unit Optional unit language string (bytes, KiB, MiB, GiB),
+ *                            or null for automatic selection based on file size.
+ *
+ * @return string[] 0-based array containing formatted file size and unit.
+ *                  If unit > bytes, array index keys 2 & 3 will hold the
+ *                  formatted size in bytes and localized unit.
+ * @throws UnexpectedValueException Invalid file size unit.
+ */
+function get_size_info_array( int $p_size, ?string $p_unit = null ):array {
+	$t_units = ['bytes', 'kib', 'mib', 'gib'];
+	$t_size = $p_size;
+	if( $p_unit ) {
+		$t_index = array_search( $p_unit, $t_units );
+		if( $t_index === false ) {
+			throw new UnexpectedValueException( "Invalid file size unit '$p_unit'");
+		} elseif( $t_index > 0 ) {
+			$t_size /= pow( 1024, $t_index );
+		}
+	} else {
+		# No unit specified, determine which one to use
+		for( $i = 0; $t_size >= 1024 * 0.9 && $i < count( $t_units ) - 1; $i++ ) {
+			$t_size /= 1024;
+		}
+		$p_unit = $t_units[$i];
+	}
+
+	# Array format gives the caller flexibility to use the result as appropriate
+	# (compatibility with print_max_filesize() / max_file_size_info string which
+	# contains 2 placeholders).
+	$t_bytes = number_format( $p_size );
+	$t_unit = lang_get( $p_unit );
+	if( $p_unit == 'bytes' ) {
+		$t_return = [ $t_bytes, $t_unit ];
+	} else {
+		$t_return = [ number_format( $t_size, 1 ), $t_unit, $t_bytes, lang_get( 'bytes') ];
+	}
+	return $t_return;
+}
+
+/**
+ * Return formatted file / memory size information.
+ *
+ * A proxy for {@see get_size_info_array()}, returning a string instead.
+ * Size in bytes (array keys 2 & 3) are ignored.
+ *
+ * @param int         $p_size      File or memory size, in bytes.
+ * @param string|null $p_unit      Optional unit language string (bytes, KiB, MiB,GiB),
+ *                                 or null for automatic selection based on file size.
+ * @param string      $p_separator Inserted between size and unit in the return value,
+ *                                 defaults space.
+ *
  * @return string
  */
-function get_filesize_info( $p_size, $p_unit ) {
-	return sprintf( lang_get( 'max_file_size_info' ), number_format( $p_size ), $p_unit );
+function get_size_info( int $p_size, ?string $p_unit = null, string $p_separator = ' ' ):string {
+	$t_info = get_size_info_array( $p_size, $p_unit );
+	return $t_info[0] . $p_separator . $t_info[1];
+}
+
+/**
+ * Return file / memory size information as a formatted `<span>`.
+ *
+ * A proxy for {@see get_size_info_array()}, returning a span instead.
+ * The span's title attribute will contain the size in bytes, if the main unit
+ * is larger.
+ *
+ * @param int         $p_size      File or memory size, in bytes.
+ * @param string|null $p_unit      Optional unit language string (bytes, KiB, MiB,GiB),
+ *                                 or null for automatic selection based on file size.
+ * @param string      $p_separator Inserted between size and unit in the return value,
+ *                                 defaults to non-breaking space.
+ * @param string      $p_class     Optional class to apply to the span.
+ *
+ * @return string
+ */
+function get_size_info_span( int     $p_size,
+							 ?string $p_unit = null,
+							 string  $p_separator = '&nbsp;',
+							 ?string $p_format = null,
+							 string  $p_class = ''
+): string {
+	$t_size_info = get_size_info_array( $p_size, $p_unit );
+
+	$t_base_format = '%1$s' . $p_separator . '%2$s';
+	if( $p_format === null ) {
+		$p_format = $t_base_format;
+	}
+
+	if( $p_class ) {
+		$p_class = ' class="' . $p_class . '"';
+	}
+
+	# Only print title with value in bytes if we are displaying another unit
+	if( count( $t_size_info ) > 2 ) {
+		$t_title = ' title="' . str_replace( [1, 2], [3, 4], $t_base_format ) . '"';
+	} else {
+		$t_title = '';
+	}
+
+	return vsprintf( '<span' . $p_class . $t_title . '>%1$s' . $p_separator . '%2$s</span>', $t_size_info );
 }
 
 /**
@@ -2243,15 +2346,15 @@ function print_attachment_link_target() {
 /**
  * Print maximum file size information.
  *
- * @param integer $p_size    Size in bytes.
- * @param integer $p_divider Optional divider, defaults to 1024.
- * @param string  $p_unit    Optional language string of unit, defaults to KiB.
+ * @param int         $p_size  Size in bytes.
+ * @param string|null $p_unit  Optional unit language string (bytes, KiB, MiB, GiB)
+ *                             or null to use "human-readable" format, i.e. picking
+ *                             the most appropriate unit for the given size.
+ *
  * @return void
  */
-function print_max_filesize( $p_size, $p_divider = 1024, $p_unit = 'kib' ) {
-	echo '<span class="small" title="' . get_filesize_info( $p_size, lang_get( 'bytes' ) ) . '">';
-	echo get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
-	echo '</span>';
+function print_max_filesize( int $p_size, ?string $p_unit = null ):void {
+	echo get_size_info_span( $p_size, $p_unit, '&nbsp;', lang_get( 'max_file_size_info' ), 'small' );
 }
 
 /**
