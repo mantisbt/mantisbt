@@ -2090,7 +2090,7 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 			echo '</a>';
 		}
 
-		echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
+		echo lang_get( 'word_separator' ) . '(' . get_size_info( $p_attachment['size'] ) . ')';
 		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', array( $p_attachment ) );
 	} else {
 		print_file_icon( $p_attachment['display_name'] );
