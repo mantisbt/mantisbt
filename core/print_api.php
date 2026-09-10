@@ -2208,7 +2208,7 @@ function print_timezone_option_list( $p_timezone ) {
 		);
 	}
 
-	foreach( $t_locations as $t_continent => $t_locations ) {
+	foreach( $t_locations_list as $t_continent => $t_locations ) {
 		echo "\t" . '<optgroup label="' . $t_continent . '">' . "\n";
 		foreach ( $t_locations as $t_location ) {
 			echo "\t\t" . '<option value="' . $t_location[1] . '"';
