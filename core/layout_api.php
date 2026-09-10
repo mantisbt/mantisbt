@@ -301,21 +301,19 @@ function layout_head_css() {
 	}
 	html_css_link( 'ace-mantis.css', $t_cache_key );
 
-	# Set font preference
-	layout_user_font_preference();
+	$t_font_family = config_get( 'font_family', null, null, ALL_PROJECTS );
+	html_css_link( 'status_config.php', helper_generate_cache_key( [ 'user' ], $t_font_family ) );
 }
 
 /**
  * Print user font preference
  * @return void
+ *
+ * @deprecated 2.29.0 Use css/status_config.php instead.
  */
 function layout_user_font_preference() {
-	$t_font_family = config_get( 'font_family', null, null, ALL_PROJECTS );
-	$t_font_family = string_html_specialchars( $t_font_family );
-	echo '<style>', "\n";
-	echo  '* { font-family: "' . $t_font_family . '"; } ', "\n";
-	echo  'h1, h2, h3, h4, h5 { font-family: "' . $t_font_family . '"; } ', "\n";
-	echo '</style>', "\n";
+	error_parameters( __FUNCTION__ . '()', 'css/status_config.php' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 }
 
 /**

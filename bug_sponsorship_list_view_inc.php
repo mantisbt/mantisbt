@@ -171,7 +171,7 @@ if( $t_show_sponsorships ) {
 			}
 
 			if( $t_total_sponsorship > 0 ) {
-				echo ' <span style="font-weight: normal;">(';
+				echo ' <span>(';
 				echo sprintf( lang_get( 'total_sponsorship_amount' ),
 				sponsorship_format_amount( $t_total_sponsorship ) );
 				echo ')</span>';

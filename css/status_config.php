@@ -19,10 +19,11 @@
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses config_api.php
+ * @uses http_api.php
  */
 
 # Prevent output of HTML in the content if errors occur
@@ -30,6 +31,7 @@ define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
 @require_once( dirname( __DIR__ ) . '/core.php' );
 require_api( 'config_api.php' );
+require_api( 'http_api.php' );
 
 /**
  * Send correct MIME Content-Type header for css content.
@@ -37,8 +39,7 @@ require_api( 'config_api.php' );
 header( 'Content-Type: text/css; charset=UTF-8' );
 
 /**
- * Don't let Internet Explorer second-guess our content-type, as per
- * http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
+ * Disable MIME type sniffing for security reasons.
  */
 header( 'X-Content-Type-Options: nosniff' );
 
@@ -61,6 +62,20 @@ if( gpc_isset( 'cache_key' ) ) {
 $t_status_string = config_get( 'status_enum_string' );
 $t_statuses = MantisEnum::getAssocArrayIndexedByValues( $t_status_string );
 $t_colors = config_get( 'status_colors' );
+$t_font_family = config_get( 'font_family', null, null, ALL_PROJECTS );
+$t_max_width = config_get( 'preview_max_width' );
+$t_max_height = config_get( 'preview_max_height' );
+
+echo '*, h1, h2, h3, h4, h5, h6 { font-family: "' . @htmlspecialchars( $t_font_family, ENT_COMPAT, 'utf-8' ) . '"; }
+.bug-attachment-preview-image img {	border: 0; ';
+if( $t_max_width  > 0 ) {
+	echo 'max-width: ' . $t_max_width . 'px; ';
+}
+if( $t_max_height > 0 ) {
+	echo 'max-height: ' . $t_max_height . 'px; ';
+}
+echo '}
+';
 
 foreach( $t_statuses as $t_id => $t_label ) {
 	# Status color class

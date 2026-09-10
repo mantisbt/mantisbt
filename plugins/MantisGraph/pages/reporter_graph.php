@@ -38,7 +38,7 @@ $t_mantisgraph->print_submenu();
 
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-blue2 clearfix">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-bar-chart-o', 'ace-icon' ); ?>
@@ -46,17 +46,21 @@ $t_mantisgraph->print_submenu();
 			</h4>
 		</div>
 
-		<div class="col-md-12 col-xs-12" style="padding: 20px;">
+		<div class="col-md-12 col-xs-12 no-padding">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-bar-chart', 'ace-icon' ); ?>
 					<?php echo plugin_lang_get('graph_topreporter_fixed') ?>
 				</h4>
 			</div>
+			<div class="widget-body">
+				<div class="widget-main">
 <?php
 			$t_metrics = create_reporter_summary( $t_filter );
 			graph_bar( $t_metrics, 2 /*wfactor*/ );
 ?>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
