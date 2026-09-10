@@ -2220,13 +2220,41 @@ function print_timezone_option_list( $p_timezone ) {
 }
 
 /**
- * Return file size information
- * @param integer $p_size File size.
- * @param string  $p_unit File size unit.
- * @return string
+ * Return formatted file size information.
+ *
+ * If $p_unit is null, the mot appropriate unit will be picked depending on the
+ * scale of $p_size, which will be divided as appropriate, for a "human-friendly"
+ * display.
+ *
+ * Note: since we're using IEEE 1541 binary units, bytes are divided by 1024,
+ * not 1000 (see #27700).
+ * For example: 12'345 bytes => 12.1 KiB, 987'654 bytes => 0.9 MiB.
+ *
+ * @param int         $p_size File size.
+ * @param string|null $p_unit Optional unit language string (bytes, KiB, MiB, GiB),
+ *                            or null for automatic selection based on file size.
+ *
+ * @return string[] Formatted file size and unit.
+ * @throws UnexpectedValueException Invalid file size unit.
  */
-function get_filesize_info( $p_size, $p_unit ) {
-	return sprintf( lang_get( 'max_file_size_info' ), number_format( $p_size ), $p_unit );
+function get_filesize_info( int $p_size, ?string $p_unit = null ):array {
+	$t_units = ['bytes', 'kib', 'mib', 'gib'];
+	if( $p_unit ) {
+		if( !in_array( strtolower( $p_unit ), $t_units ) ) {
+			throw new UnexpectedValueException( "Invalid file size unit '$p_unit'");
+		}
+	} else {
+		# No unit specified, determine which one to use
+		for( $i = 0; $p_size >= 1024 * 0.9 && $i < count( $t_units ) - 1; $i++ ) {
+			$p_size /= 1024;
+		}
+		$p_unit = $t_units[$i];
+	}
+
+	# Array format gives the caller flexibility to use the result as appropriate
+	# (compatibility with print_max_filesize() / max_file_size_info string which
+	# contains 2 placeholders).
+	return [ number_format( $p_size, $p_unit == 'bytes' ? 0 : 1 ), lang_get( $p_unit ) ];
 }
 
 /**
@@ -2243,14 +2271,18 @@ function print_attachment_link_target() {
 /**
  * Print maximum file size information.
  *
- * @param integer $p_size    Size in bytes.
- * @param integer $p_divider Optional divider, defaults to 1024.
- * @param string  $p_unit    Optional language string of unit, defaults to KiB.
+ * @param int         $p_size  Size in bytes.
+ * @param string|null $p_unit  Optional unit language string (bytes, KiB, MiB, GiB)
+ *                             or null to use "human-readable" format, i.e. picking
+ *                             the most appropriate unit for the given size.
+ *
  * @return void
  */
-function print_max_filesize( $p_size, $p_divider = 1024, $p_unit = 'kib' ) {
-	echo '<span class="small" title="' . get_filesize_info( $p_size, lang_get( 'bytes' ) ) . '">';
-	echo get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
+function print_max_filesize( int $p_size, ?string $p_unit = null ):void {
+	printf('<span class="small" title="%s">',
+		implode( "&nbsp;", get_filesize_info( $p_size, 'bytes' ) )
+	);
+	vprintf( lang_get( 'max_file_size_info' ), get_filesize_info( $p_size, $p_unit ) );
 	echo '</span>';
 }
 
