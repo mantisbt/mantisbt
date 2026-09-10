@@ -2220,7 +2220,7 @@ function print_timezone_option_list( $p_timezone ) {
 }
 
 /**
- * Return formatted file size information.
+ * Return formatted file / memory size information.
  *
  * If $p_unit is null, the mot appropriate unit will be picked depending on the
  * scale of $p_size, which will be divided as appropriate, for a "human-friendly"
@@ -2230,14 +2230,14 @@ function print_timezone_option_list( $p_timezone ) {
  * not 1000 (see #27700).
  * For example: 12'345 bytes => 12.1 KiB, 987'654 bytes => 0.9 MiB.
  *
- * @param int         $p_size File size.
+ * @param int         $p_size File or memory size, must be in bytes if $p_unit = null.
  * @param string|null $p_unit Optional unit language string (bytes, KiB, MiB, GiB),
  *                            or null for automatic selection based on file size.
  *
  * @return string[] Formatted file size and unit.
  * @throws UnexpectedValueException Invalid file size unit.
  */
-function get_filesize_info( int $p_size, ?string $p_unit = null ):array {
+function get_size_info_array( int $p_size, ?string $p_unit = null ):array {
 	$t_units = ['bytes', 'kib', 'mib', 'gib'];
 	if( $p_unit ) {
 		if( !in_array( strtolower( $p_unit ), $t_units ) ) {
@@ -2255,6 +2255,25 @@ function get_filesize_info( int $p_size, ?string $p_unit = null ):array {
 	# (compatibility with print_max_filesize() / max_file_size_info string which
 	# contains 2 placeholders).
 	return [ number_format( $p_size, $p_unit == 'bytes' ? 0 : 1 ), lang_get( $p_unit ) ];
+}
+
+/**
+ * Return formatted file / memory size information.
+ *
+ * A proxy for {@see get_size_info_array()}, returning a string instead.
+ * Size in bytes (array keys 2 & 3) are ignored.
+ *
+ * @param int         $p_size      File or memory size, in bytes.
+ * @param string|null $p_unit      Optional unit language string (bytes, KiB, MiB,GiB),
+ *                                 or null for automatic selection based on file size.
+ * @param string      $p_separator Inserted between size and unit in the return value,
+ *                                 defaults space.
+ *
+ * @return string
+ */
+function get_size_info( int $p_size, ?string $p_unit = null, string $p_separator = ' ' ):string {
+	$t_info = get_size_info_array( $p_size, $p_unit );
+	return $t_info[0] . $p_separator . $t_info[1];
 }
 
 /**
@@ -2279,10 +2298,8 @@ function print_attachment_link_target() {
  * @return void
  */
 function print_max_filesize( int $p_size, ?string $p_unit = null ):void {
-	printf('<span class="small" title="%s">',
-		implode( "&nbsp;", get_filesize_info( $p_size, 'bytes' ) )
-	);
-	vprintf( lang_get( 'max_file_size_info' ), get_filesize_info( $p_size, $p_unit ) );
+	printf('<span class="small" title="%s">', get_size_info( $p_size, 'bytes' ) );
+	vprintf( lang_get( 'max_file_size_info' ), get_size_info_array( $p_size, $p_unit ) );
 	echo '</span>';
 }
 
