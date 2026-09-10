@@ -58,16 +58,16 @@ check_print_test_row(
 
 check_print_info_row(
 	'Maximum file upload size (per file)',
-	get_size_info( config_get_global( 'max_file_size' ) )
+	get_size_info_span( config_get_global( 'max_file_size' ) )
 );
 
 check_print_test_row(
 	'max_file_size MantisBT option is less than or equal to the upload_max_filesize directive in php.ini',
 	config_get_global( 'max_file_size' ) <= ini_get_number( 'upload_max_filesize' ),
 	array( false => 'max_file_size is currently '
-		. get_size_info( config_get_global( 'max_file_size' ) )
+		. get_size_info_span( config_get_global( 'max_file_size' ) )
 		. ' which is greater than the limit of '
-		. get_size_info( ini_get_number( 'upload_max_filesize' ) )
+		. get_size_info_span( ini_get_number( 'upload_max_filesize' ) )
 		. ' imposed by the php.ini directive upload_max_filesize.' )
 );
 
