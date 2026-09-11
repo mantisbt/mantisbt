@@ -46,11 +46,12 @@ require_api( 'current_user_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
+current_user_ensure_unprotected();
+auth_reauthenticate();
+
 layout_page_header( lang_get( 'manage_columns_config' ) );
 
 layout_page_begin();
-
-current_user_ensure_unprotected();
 
 # Define constant that will be checked by the include page.
 define( 'ACCOUNT_COLUMNS', true );

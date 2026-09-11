@@ -41,6 +41,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
 
+auth_reauthenticate();
 access_ensure_project_level( config_get( 'manage_configuration_threshold' ) );
 
 layout_page_header( lang_get( 'permissions_summary_report' ) );

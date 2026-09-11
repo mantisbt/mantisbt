@@ -69,6 +69,12 @@ function rest_internal_config_display( \Slim\Http\Request $p_request, \Slim\Http
 	$t_user_id = $p_request->getParam( 'user_id' );
 	$t_project_id = $p_request->getParam( 'project_id' );
 
+	# If user needs to reauthenticate, don't fetch data and return message
+	if( null === token_get( TOKEN_AUTHENTICATED ) ) {
+		return $p_response->withStatus( HTTP_STATUS_SUCCESS )
+			->write( lang_get( 'reauthenticate_message' ) );
+	}
+
 	if( !access_has_global_level( config_get( 'view_configuration_threshold' ), auth_get_current_user_id() ) ) {
 		return $p_response->withStatus( HTTP_STATUS_FORBIDDEN );
 	}

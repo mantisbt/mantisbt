@@ -59,14 +59,15 @@ if( !config_get( 'enable_profiles' ) ) {
 	throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
 }
 
-if( isset( $g_global_profiles ) ) {
-	$g_global_profiles = true;
-} else {
+# This script manages user-specific profiles by default. To work with global profiles,
+# manage_prof_menu_page.php sets $g_global_profiles = true before including this file.
+if( !isset( $g_global_profiles ) ) {
 	$g_global_profiles = false;
 }
 
 auth_ensure_user_authenticated();
 current_user_ensure_unprotected();
+auth_reauthenticate();
 
 $t_manage_global_profile_threshold = config_get( 'manage_global_profile_threshold' );
 $t_can_manage_global_profile = access_has_global_level( $t_manage_global_profile_threshold );

@@ -165,7 +165,10 @@ if( $f_error || $f_cookie_error || $f_reauthenticate ) {
 	echo '<div class="alert alert-danger">';
 
 	if( $f_reauthenticate ) {
-		echo '<p>' . lang_get( 'reauthenticate_message' ) . '</p>';
+		echo '<p>'
+			. lang_get( 'reauthenticate_session_expired' ) . ' '
+			. lang_get( 'reauthenticate_message' )
+			. '</p>';
 	}
 
 	# Only echo error message if error variable is set
