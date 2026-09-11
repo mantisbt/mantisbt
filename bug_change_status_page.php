@@ -116,7 +116,7 @@ if( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 		throw new ClientException( "Access denied", ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW );
 	}
 
-	if( $f_handler_id != NO_USER ) {
+	if( $f_handler_id != NO_USER && $f_handler_id != $t_bug->handler_id ) {
 		# The new handler is checked at project level
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
 			throw new ClientException( "Access denied", ERROR_HANDLER_ACCESS_TOO_LOW );
