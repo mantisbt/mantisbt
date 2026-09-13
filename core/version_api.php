@@ -395,6 +395,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	db_query( $t_query, array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
 	$t_version_id = db_insert_id( db_get_table( 'project_version' ) );
+	version_cache_clear();
 
 	event_signal( 'EVENT_MANAGE_VERSION_CREATE', array( $t_version_id ) );
 
@@ -441,6 +442,7 @@ function version_update( VersionData $p_version_info ) {
 					obsolete=' . db_param() . '
 				  WHERE id=' . db_param();
 	db_query( $t_query, array( $c_version_name, $c_description, $c_released, $c_date_order, $c_obsolete, $c_version_id ) );
+	version_cache_clear();
 
 	if( $c_version_name != $c_old_version_name ) {
 		$t_project_list = array( $c_project_id );
@@ -518,7 +520,6 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	$t_query = 'UPDATE {bug} SET version=' . db_param() . '
 				  WHERE project_id IN ( ' . $t_project_list . ' ) AND version=' . db_param();
 	db_query( $t_query, array( $p_new_version, $t_old_version ) );
-
 	db_param_push();
 	$t_query = 'UPDATE {bug} SET fixed_in_version=' . db_param() . '
 				  WHERE ( project_id IN ( ' . $t_project_list . ' ) ) AND ( fixed_in_version=' . db_param() . ')';
@@ -528,6 +529,7 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	$t_query = 'UPDATE {bug} SET target_version=' . db_param() . '
 				  WHERE ( project_id IN ( ' . $t_project_list . ' ) ) AND ( target_version=' . db_param() . ')';
 	db_query( $t_query, array( $p_new_version, $t_old_version ) );
+	version_cache_clear();
 }
 
 /**
@@ -551,6 +553,7 @@ function version_remove_all( $p_project_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {project_version} WHERE project_id=' . db_param();
 	db_query( $t_query, array( $c_project_id ) );
+	version_cache_clear();
 }
 
 /**
