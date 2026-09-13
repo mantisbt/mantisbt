@@ -66,6 +66,24 @@ $g_cache_tags = array();
 $g_cache_bug_tags = array();
 
 /**
+ * Clear the tag definition cache (or just the given id if specified).
+ *
+ * @global array $g_cache_tags
+ * @param int|null $p_tag_id Tag id, or null to clear all tag cache entries.
+ *
+ * @return void
+ */
+function tag_clear_cache( $p_tag_id = null ) {
+	global $g_cache_tags;
+
+	if( null === $p_tag_id ) {
+		$g_cache_tags = array();
+	} else {
+		unset( $g_cache_tags[(int)$p_tag_id] );
+	}
+}
+
+/**
  * Loads into cache a set of tag definitions from tag table.
  *
  * Non existent ids are cached as 'false'.
@@ -673,8 +691,10 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 				VALUES
 				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 	db_query( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
+	$t_tag_id = db_insert_id( db_get_table( 'tag' ) );
+	tag_clear_cache( $t_tag_id );
 
-	return db_insert_id( db_get_table( 'tag' ) );
+	return $t_tag_id;
 }
 
 /**
@@ -744,6 +764,8 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 		}
 	}
 
+	tag_clear_cache( $p_tag_id );
+
 	return true;
 }
 
@@ -768,6 +790,7 @@ function tag_delete( $p_tag_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {tag} WHERE id=' . db_param();
 	db_query( $t_query, array( $p_tag_id ) );
+	tag_clear_cache( $p_tag_id );
 
 	return true;
 }
