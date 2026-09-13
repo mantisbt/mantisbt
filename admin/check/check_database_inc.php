@@ -29,6 +29,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 if( !defined( 'CHECK_DATABASE_INC_ALLOW' ) ) {
 	return;
 }
@@ -169,17 +171,21 @@ check_print_info_row(
 	htmlentities( $t_database_name )
 );
 
-db_connect( $t_database_dsn, $t_database_hostname, $t_database_username, $t_database_password, $t_database_name );
+try {
+	db_connect( $t_database_dsn, $t_database_hostname, $t_database_username, $t_database_password, $t_database_name );
+} catch( ClientException ) {
+	# Ignore DB Connection failure, it is handled below
+}
 check_print_test_row(
 	'Can open connection to database <em>' . htmlentities( $t_database_name )
 	. '</em> on host <em>' . htmlentities( $t_database_hostname )
 	. '</em> with username <em>' . htmlentities( $t_database_username ) . '</em>',
 	db_is_connected()
 );
-
 if( !db_is_connected() ) {
 	return;
 }
+
 global $g_db;
 $t_database_server_info = $g_db->ServerInfo();
 $t_db_version = $t_database_server_info['version'];
