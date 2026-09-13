@@ -2329,7 +2329,7 @@ function get_size_info_span( int     $p_size,
 		$t_title = '';
 	}
 
-	return vsprintf( '<span' . $p_class . $t_title . '>%1$s' . $p_separator . '%2$s</span>', $t_size_info );
+	return vsprintf( "<span{$p_class}{$t_title}>{$p_format}</span>", $t_size_info );
 }
 
 /**
