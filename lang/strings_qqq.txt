@@ -403,7 +403,13 @@ $s_filter_resolved = '{{Identical|Resolved}}';
 $s_advanced_filters = '[[File:MantisBT-filter.png|150px|right]]
 Link on bug report filter screen. See screenshot.';
 $s_attachments = '{{Identical|Attachment}}';
-$s_kib = 'IEEE 1541 unit kibibytes (1024 bytes), see https://en.wikipedia.org/wiki/Kibibyte
+$s_kib = 'IEEE 1541 unit kibibytes (1024 bytes), see https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
+
+{{optional}}';
+$s_mib = 'IEEE 1541 unit mebibyte (1024^2 bytes), see https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
+
+{{optional}}';
+$s_gib = 'IEEE 1541 unit gibibytes (1024^3 bytes), see https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
 
 {{optional}}';
 $s_phpmailer_language = '{{Optional}}';
