@@ -47,6 +47,7 @@
  * @author SZ475
  * @author Saturnian
  * @author Stelistcristi
+ * @author Vellion Eagle
  */
 
 $s_actiongroup_menu_copy = 'Copiază';
@@ -474,13 +475,13 @@ $s_core_path = 'Calea de bază';
 $s_plugin_path = 'Calea Plugin-ului';
 $s_created_user_part1 = 'Utilizator creat';
 $s_created_user_part2 = 'cu nivel de acces ca și';
-$s_create_new_account_title = 'Crează un cont nou';
+$s_create_new_account_title = 'Creează un cont nou';
 $s_verify_password = 'Verifică parola';
 $s_enabled = 'Activat';
 $s_enabled_label = 'Activat';
 $s_protected = 'Protejat';
 $s_protected_label = 'Protejat';
-$s_create_user_button = 'Crează cont';
+$s_create_user_button = 'Creează cont';
 $s_hide_disabled = 'Ascunde cele dezactivate';
 $s_filter_button = 'Filtru';
 $s_default_filter = 'Filtru implicit';
@@ -499,7 +500,7 @@ $s_manage_email_config = 'Notificări e-mail';
 $s_manage_workflow_config = 'Tranziții flux de lucru';
 $s_manage_workflow_graph = 'Graficul fluxului de lucru';
 $s_manage_tags_link = 'Etichete';
-$s_create_new_account_link = 'Crează cont';
+$s_create_new_account_link = 'Creează cont';
 $s_projects_link = 'Proiecte';
 $s_documentation_link = 'Documentație';
 $s_new_accounts_title = 'Conturi noi';
@@ -967,7 +968,7 @@ $s_filters = 'Filtre';
 $s_save_filters = 'Salvează filtrele';
 $s_save_filters_as_shared = 'Salvează filtrele ca și partajate';
 $s_use_saved_filters = 'Utilizează filtrele salvate';
-$s_create_project = 'Crează proiect';
+$s_create_project = 'Creează proiect';
 $s_delete_project = 'Șterge proiect';
 $s_manage_project = 'Gestionează proiect';
 $s_manage_user_access_to_project = 'Gestionează accesul utilizatorilor la un proiect';
