@@ -403,6 +403,8 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 	$t_query->bind( 'param', $t_param );
 	$t_query->execute();
 
+	project_clear_cache();
+
 	# return the id of the new project
 	return db_insert_id( db_get_table( 'project' ) );
 }
@@ -460,7 +462,7 @@ function project_delete( $p_project_id ) {
 
 	config_set_cache( 'enable_email_notification', $t_email_notifications, CONFIG_TYPE_INT );
 
-	project_clear_cache( $p_project_id );
+	project_clear_cache();
 }
 
 /**

@@ -189,8 +189,6 @@ class ProjectUpdateCommand extends Command {
 			$this->inherit_global
 		);
 
-		project_clear_cache( $this->id );
-
 		event_signal( 'EVENT_MANAGE_PROJECT_UPDATE', array( $this->id ) );
 
 		$t_result = array();
