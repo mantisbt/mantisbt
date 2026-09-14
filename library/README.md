@@ -29,15 +29,17 @@ The version and status of each is summarized below:
 
 **Notes**
 
-1. Next patches applied to rssbuilder:
+1. Patches applied to rssbuilder:
    - removed `__autoload` function
    - fixed SYSTEM NOTICE 'Only variables should be passed by reference' (#25213)
    - fixed TypeError when creating empty feed on PHP 8 (#33634)
    - fixed deprecated PHP 8 warnings about dynamic properties and changed return types,
-     removed trailing ?> (#35312)
-2. Next patch applied to list.js:
+     removed trailing `?>` (#35312)
+2. Patches applied to list.js:
    - fixed scrolling regression in navigation buttons (#30494), 
      patch submitted upstream https://github.com/javve/list.js/pull/750
+   - fixed search not working with special characters (#37374),
+     patch from https://github.com/javve/list.js/pull/721
 
 
 ## Upstream projects
