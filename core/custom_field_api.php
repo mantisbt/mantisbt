@@ -94,6 +94,8 @@ $g_cache_cf_list = null;
 $g_cache_cf_linked = array();
 # cache of mapping of custom field names to field id: array( 'name' => id )
 $g_cache_name_to_id_map = array();
+# whether $g_cache_name_to_id_map has been fully populated with all custom fields
+$g_cache_name_to_id_map_complete = false;
 
 # Values are indexed by [ bug_id, field_id ]
 # a non existent value will have a cached value of null
@@ -145,7 +147,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
  * @access public
  */
 function custom_field_cache_array_rows( array $p_cf_id_array = [] ): void {
-	global $g_cache_custom_field, $g_cache_name_to_id_map;
+	global $g_cache_custom_field, $g_cache_name_to_id_map, $g_cache_name_to_id_map_complete;
 
 	$c_cf_id_array = array();
 	$t_cache_all = empty( $p_cf_id_array );
@@ -184,6 +186,10 @@ function custom_field_cache_array_rows( array $p_cf_id_array = [] ): void {
 		$g_cache_name_to_id_map[$c_name] = $c_id;
 		$g_cache_custom_field[$c_id]['linked_projects'] = array();
 		unset( $t_ids_not_found[$c_id] );
+	}
+
+	if( $t_cache_all ) {
+		$g_cache_name_to_id_map_complete = true;
 	}
 
 	# cache linked projects
@@ -873,7 +879,7 @@ function custom_field_delete_all_values( $p_bug_id ) {
  * @access public
  */
 function custom_field_get_id_from_name( $p_field_name ) {
-	global $g_cache_name_to_id_map;
+	global $g_cache_name_to_id_map, $g_cache_name_to_id_map_complete;
 
 	if( is_blank( $p_field_name ) ) {
 		return false;
@@ -881,13 +887,17 @@ function custom_field_get_id_from_name( $p_field_name ) {
 
 	$p_field_name = mb_strtolower($p_field_name);
 	if( !isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
-		# Build cache of lowercase custom fields names to id
-		if( !$g_cache_name_to_id_map ) {
+		# Build cache of lowercase custom fields names to id, unless it has
+		# already been fully populated (which may have happened via a
+		# partial cache load for specific field ids, so an empty lookup
+		# here does not necessarily mean the full map was ever built)
+		if( !$g_cache_name_to_id_map_complete ) {
 			$t_query = new DbQuery( "SELECT id, name FROM {custom_field}" );
 			foreach( $t_query->fetch_all() as $t_row ) {
 				$t_name = mb_strtolower($t_row['name']);
 				$g_cache_name_to_id_map[$t_name] = $t_row['id'];
 			}
+			$g_cache_name_to_id_map_complete = true;
 		}
 	}
 
