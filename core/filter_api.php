@@ -314,6 +314,19 @@ function filter_get_url( array $p_custom_filter ) {
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, $p_custom_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
 		}
+
+		# Relative descriptors, so a sliding window survives the permalink. Their
+		# presence is what says the field is in relative mode; search.php reads them
+		# directly, and no separate flag is emitted for it to ignore.
+		if( !empty( $p_custom_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] )
+				|| !empty( $p_custom_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] ) ) {
+			$t_query = array_merge( $t_query, filter_encode_relative_descriptor(
+				FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE,
+				isset( $p_custom_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] ) ? $p_custom_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] : null ) );
+			$t_query = array_merge( $t_query, filter_encode_relative_descriptor(
+				FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE,
+				isset( $p_custom_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] ) ? $p_custom_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] : null ) );
+		}
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) ) {
@@ -344,6 +357,17 @@ function filter_get_url( array $p_custom_filter ) {
 
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ) ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_LAST_UPDATED_END_YEAR, $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
+		}
+
+		# Relative descriptors; see the date submitted block above.
+		if( !empty( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] )
+				|| !empty( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] ) ) {
+			$t_query = array_merge( $t_query, filter_encode_relative_descriptor(
+				FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE,
+				isset( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] ) ? $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] : null ) );
+			$t_query = array_merge( $t_query, filter_encode_relative_descriptor(
+				FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE,
+				isset( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] ) ? $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] : null ) );
 		}
 	}
 
@@ -381,7 +405,25 @@ function filter_get_url( array $p_custom_filter ) {
 
 	if( isset( $p_custom_filter['custom_fields'] ) ) {
 		foreach( $p_custom_filter['custom_fields'] as $t_custom_field_id => $t_custom_field_values ) {
-			if( !filter_field_is_any( $t_custom_field_values ) ) {
+			$t_relative = isset( $p_custom_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE][$t_custom_field_id] )
+				? $p_custom_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE][$t_custom_field_id]
+				: null;
+			$t_has_relative = is_array( $t_relative )
+				&& ( !empty( $t_relative['start'] ) || !empty( $t_relative['end'] ) );
+
+			if( $t_has_relative ) {
+				# Encode operator + relative descriptors so a date custom field
+				# round-trips in relative mode (read back via the _control/_relative gpc path).
+				$t_query[] = filter_encode_field_and_value( 'custom_field_' . $t_custom_field_id . '_control',
+					isset( $t_custom_field_values[0] ) ? $t_custom_field_values[0] : CUSTOM_FIELD_DATE_ANY );
+				$t_query[] = filter_encode_field_and_value( 'custom_field_' . $t_custom_field_id . '_relative', 'on' );
+				$t_query = array_merge( $t_query, filter_encode_relative_descriptor(
+					'custom_field_' . $t_custom_field_id . '_start_relative',
+					isset( $t_relative['start'] ) ? $t_relative['start'] : null ) );
+				$t_query = array_merge( $t_query, filter_encode_relative_descriptor(
+					'custom_field_' . $t_custom_field_id . '_end_relative',
+					isset( $t_relative['end'] ) ? $t_relative['end'] : null ) );
+			} elseif( !filter_field_is_any( $t_custom_field_values ) ) {
 				$t_query[] = filter_encode_field_and_value( 'custom_field_' . $t_custom_field_id, $t_custom_field_values );
 			}
 		}
@@ -428,6 +470,26 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_
 	}
 
 	return implode( '&', $t_query_array );
+}
+
+/**
+ * Encode a relative date descriptor as a list of "name=value" URL parameters,
+ * one per descriptor part (anchor/sign/num/unit), matching the form-field names
+ * the gpc reader expects. Returns an empty array for an absent descriptor.
+ *
+ * @param string     $p_prefix     Field-name prefix for this endpoint.
+ * @param array|null $p_descriptor Relative date descriptor, or null.
+ * @return array List of encoded "name=value" strings.
+ */
+function filter_encode_relative_descriptor( $p_prefix, $p_descriptor ) {
+	if( empty( $p_descriptor ) || !is_array( $p_descriptor ) ) {
+		return array();
+	}
+	$t_encoded = array();
+	foreach( filter_relative_descriptor_to_parts( $p_descriptor ) as $t_key => $t_value ) {
+		$t_encoded[] = filter_encode_field_and_value( $p_prefix . '_' . $t_key, $t_value );
+	}
+	return $t_encoded;
 }
 
 /**
@@ -612,18 +674,303 @@ function filter_version_upgrade( array $p_filter ) {
 }
 
 /**
+ * The anchors a relative date descriptor may name, each with the period it names
+ * and the date() format that derives its boundary from a date within that period.
+ *
+ * The unit is the period an offset moves when it is expressed in the anchor's own
+ * terms, and it is what separates an offset that moves the period from one that
+ * moves the date. See filter_relative_descriptor_to_date().
+ *
+ * @return array Anchor name => array( unit, format ).
+ */
+function filter_relative_date_anchors() {
+	return array(
+		'today' => array( 'unit' => 'day', 'format' => 'Y-m-d' ),
+		'start_of_month' => array( 'unit' => 'month', 'format' => 'Y-m-01' ),
+		'end_of_month' => array( 'unit' => 'month', 'format' => 'Y-m-t' ),
+		'start_of_year' => array( 'unit' => 'year', 'format' => 'Y-01-01' ),
+		'end_of_year' => array( 'unit' => 'year', 'format' => 'Y-12-31' ),
+	);
+}
+
+/**
+ * The units a relative date descriptor's offset may be expressed in, each with
+ * the code the form fields and permalink parameters spell it as.
+ *
+ * @return array Unit name => form-field code.
+ */
+function filter_relative_date_units() {
+	return array( 'day' => 'd', 'week' => 'w', 'month' => 'm', 'year' => 'y' );
+}
+
+/**
+ * Move a date by a signed number of days, weeks, months or years.
+ *
+ * PHP's own month and year steps overflow when the day does not exist in the
+ * month they land on: a month before 2026-03-31 is 2026-03-03, three days later
+ * and in the month it started from. Stepping from the first of the month and then
+ * clamping the day to one the target month has keeps the result where it was
+ * asked for.
+ *
+ * @param int    $p_timestamp Timestamp to move from.
+ * @param int    $p_offset    Signed number of units to move.
+ * @param string $p_unit      One of day|week|month|year.
+ * @return int Resulting timestamp, at midnight.
+ */
+function filter_relative_date_shift( $p_timestamp, $p_offset, $p_unit ) {
+	$t_step = sprintf( '%+d %s', $p_offset, $p_unit );
+
+	# Days and weeks are a fixed number of days, so they cannot land on a day the
+	# month they arrive in does not have.
+	if( 'day' === $p_unit || 'week' === $p_unit ) {
+		return strtotime( $t_step, $p_timestamp );
+	}
+
+	$t_first = strtotime( date( 'Y-m-01', $p_timestamp ) . ' 00:00:00' );
+	$t_target = strtotime( $t_step, $t_first );
+	$t_day = min( (int)date( 'j', $p_timestamp ), (int)date( 't', $t_target ) );
+
+	return mktime( 0, 0, 0, (int)date( 'n', $t_target ), $t_day, (int)date( 'Y', $t_target ) );
+}
+
+/**
+ * Reduce a stored relative date descriptor to a valid one, substituting the
+ * default for any part that is missing or unrecognised and clamping the offset.
+ *
+ * Every part is checked here, not only where descriptors are read from a form:
+ * this is the boundary a stored filter crosses. An unrecognised unit or an
+ * absurd offset would make strtotime() return false, which date() reads as
+ * 1970-01-01 - an endpoint that silently matches everything. Callers that report
+ * a descriptor outwards use this too, so what they publish is the descriptor
+ * that was actually applied rather than the raw stored value.
+ *
+ * @param array $p_descriptor Relative date descriptor, possibly incomplete.
+ * @return array Descriptor with valid anchor, offset and unit.
+ */
+function filter_relative_descriptor_normalize( array $p_descriptor ) {
+	$t_anchors = filter_relative_date_anchors();
+	$t_units = filter_relative_date_units();
+
+	$t_offset = isset( $p_descriptor['offset'] ) ? (int)$p_descriptor['offset'] : 0;
+
+	return array(
+		'anchor' => isset( $p_descriptor['anchor'] ) && isset( $t_anchors[$p_descriptor['anchor']] )
+			? $p_descriptor['anchor']
+			: 'today',
+		'offset' => max( -FILTER_RELATIVE_DATE_MAX_OFFSET,
+			min( FILTER_RELATIVE_DATE_MAX_OFFSET, $t_offset ) ),
+		'unit' => isset( $p_descriptor['unit'] ) && isset( $t_units[$p_descriptor['unit']] )
+			? $p_descriptor['unit']
+			: 'day',
+	);
+}
+
+/**
+ * Resolve a relative date descriptor to a Unix timestamp (midnight) as of now.
+ * A descriptor is a structured expression such as "today - 7 days":
+ *   array( 'anchor' => 'today', 'offset' => -7, 'unit' => 'day' )
+ * Offset is signed, 0 meaning the anchor itself; unit is day|week|month|year.
+ * The anchors are listed in filter_relative_date_anchors().
+ *
+ * An offset in the anchor's own unit moves the *period* and the boundary is
+ * re-taken: "end of month - 1 month" is the end of last month, whatever length
+ * either month is. An offset in any other unit moves the *date*: "end of month
+ * - 10 days" is ten days before this month ends.
+ *
+ * Offsetting the boundary date in every case would be wrong: 2026-04-30 minus a
+ * month is 2026-03-30, not the 31st the anchor asks for.
+ *
+ * @param array $p_descriptor Relative date descriptor.
+ * @return int Unix timestamp at midnight of the resolved date.
+ */
+function filter_relative_descriptor_to_date( array $p_descriptor ) {
+	$t_descriptor = filter_relative_descriptor_normalize( $p_descriptor );
+	$t_anchor = $t_descriptor['anchor'];
+	$t_unit = $t_descriptor['unit'];
+	$t_offset = $t_descriptor['offset'];
+
+	$t_anchors = filter_relative_date_anchors();
+	$t_now = time();
+	$t_format = $t_anchors[$t_anchor]['format'];
+
+	if( 0 === $t_offset ) {
+		return strtotime( date( $t_format, $t_now ) . ' 00:00:00' );
+	}
+
+	if( $t_unit === $t_anchors[$t_anchor]['unit'] ) {
+		# Move the period, then take its boundary.
+		return strtotime(
+			date( $t_format, filter_relative_date_shift( $t_now, $t_offset, $t_unit ) ) . ' 00:00:00' );
+	}
+
+	# Move the boundary date itself.
+	return filter_relative_date_shift(
+		strtotime( date( $t_format, $t_now ) . ' 00:00:00' ), $t_offset, $t_unit );
+}
+
+/**
+ * The relative date descriptor a date field's endpoint falls back to when none
+ * has been chosen: the last seven days, ending today.
+ *
+ * Which endpoint is being defaulted is taken from the form-field name prefix,
+ * every one of which ends in "start_relative" or "end_relative" - the same
+ * convention filter_gpc_get_relative_descriptor() reads back.
+ *
+ * @param string $p_name_prefix Form-field name prefix for the endpoint.
+ * @return array Relative date descriptor.
+ */
+function filter_relative_descriptor_default( $p_name_prefix ) {
+	return array(
+		'anchor' => 'today',
+		'offset' => str_ends_with( $p_name_prefix, 'end_relative' ) ? 0 : -7,
+		'unit' => 'day',
+	);
+}
+
+/**
+ * Fill in the relative date descriptors a date field in relative mode is
+ * missing, so that every endpoint it uses carries one.
+ *
+ * The endpoints of a date field share a single mode, and filter_serialize()
+ * rejects a field that pairs a relative endpoint with a fixed one. The form
+ * submits every endpoint it enables, but a truncated or hand-edited permalink
+ * need not, and the rest of this reader answers malformed input by substituting
+ * the value the form would have sent rather than by failing. So does this: an
+ * endpoint the field uses but the request left out takes the default the form
+ * renders for it.
+ *
+ * Which endpoints a field uses is not always both. A custom date field's control
+ * decides: only "between" uses two, the single-sided controls use one, and "any"
+ * and "none" use neither - and a field that uses neither has nothing relative to
+ * store at all.
+ *
+ * @param array $p_endpoints Descriptor (or null) per endpoint the field uses,
+ *                           keyed by that endpoint's form-field name prefix.
+ * @return array The same array, with every missing descriptor defaulted.
+ */
+function filter_relative_descriptors_fill( array $p_endpoints ) {
+	foreach( $p_endpoints as $t_prefix => $t_descriptor ) {
+		if( empty( $t_descriptor ) ) {
+			$p_endpoints[$t_prefix] = filter_relative_descriptor_default( $t_prefix );
+		}
+	}
+
+	return $p_endpoints;
+}
+
+/**
+ * Decompose a relative date descriptor into the individual form-field values
+ * used by the UI inputs and permalink parameters (anchor, sign, num, unit).
+ * This is the inverse of filter_gpc_get_relative_descriptor().
+ *
+ * @param array $p_descriptor Relative date descriptor.
+ * @return array Associative array with keys anchor, sign, num, unit.
+ */
+function filter_relative_descriptor_to_parts( array $p_descriptor ) {
+	$t_offset = isset( $p_descriptor['offset'] ) ? (int)$p_descriptor['offset'] : 0;
+	$t_unit = isset( $p_descriptor['unit'] ) ? $p_descriptor['unit'] : 'day';
+	$t_unit_map = filter_relative_date_units();
+
+	return array(
+		'anchor' => isset( $p_descriptor['anchor'] ) ? $p_descriptor['anchor'] : 'today',
+		'sign' => $t_offset < 0 ? '-' : '+',
+		'num' => abs( $t_offset ),
+		'unit' => isset( $t_unit_map[$t_unit] ) ? $t_unit_map[$t_unit] : 'd',
+	);
+}
+
+/**
+ * Resolve a built-in date filter's submitted state into an "is it filtering"
+ * flag and a "is it relative" flag.
+ *
+ * The form submits two controls: the "<field>" checkbox saying whether the field
+ * filters at all, and a "<field>_type" select holding FILTER_DATE_TYPE_FIXED or
+ * _RELATIVE. A collapsed filter field emits hidden inputs that spell the mode as
+ * a "<field>_relative" boolean instead, so both spellings are accepted and the
+ * select wins where present.
+ *
+ * @param string  $p_field            Filter property naming the field's active flag.
+ * @param mixed   $p_default_active   Active flag of the filter being edited.
+ * @param boolean $p_default_relative Relative mode of the filter being edited.
+ * @return array Two-element array: array( active, relative ).
+ */
+function filter_gpc_get_date_type( $p_field, $p_default_active, $p_default_relative ) {
+	# Whether the field filters at all is the checkbox, which every rendered form
+	# submits (paired with a hidden input, so "off" is posted too). An unexpanded
+	# field in a dynamic filter form submits neither, and falls back to the value
+	# already in the filter.
+	$t_active = gpc_get_bool( $p_field, $p_default_active );
+
+	$t_type = gpc_get_string( $p_field . '_type', null );
+	if( null !== $t_type ) {
+		return array( $t_active, FILTER_DATE_TYPE_RELATIVE === $t_type );
+	}
+
+	return array( $t_active, gpc_get_bool( $p_field . '_relative', $p_default_relative ) );
+}
+
+/**
+ * Read a relative date descriptor from submitted parameters for one date
+ * endpoint. Its inputs are "<prefix>_anchor", "<prefix>_sign", "<prefix>_num"
+ * and "<prefix>_unit" (see print_filter_relative_date_inputs()). A missing
+ * anchor parameter means the endpoint is not being submitted in relative mode
+ * and $p_default is returned; passing the stored descriptor as $p_default gives
+ * merge semantics, where an absent submission preserves it rather than clearing
+ * it.
+ *
+ * The anchor and unit are whitelisted and the offset magnitude is clamped to
+ * FILTER_RELATIVE_DATE_MAX_OFFSET, so a hand-edited URL cannot inject a value
+ * the form could not have produced.
+ *
+ * @param string     $p_prefix  Form-field name prefix for the endpoint.
+ * @param array|null $p_default Value to return when no anchor is submitted.
+ * @return array|null Relative date descriptor, or $p_default if absent.
+ */
+function filter_gpc_get_relative_descriptor( $p_prefix, $p_default = null ) {
+	$t_anchor = gpc_get_string( $p_prefix . '_anchor', null );
+	if( null === $t_anchor ) {
+		return $p_default;
+	}
+
+	if( !isset( filter_relative_date_anchors()[$t_anchor] ) ) {
+		$t_anchor = 'today';
+	}
+
+	$t_sign = gpc_get_string( $p_prefix . '_sign', '-' );
+	$t_num = gpc_get_int( $p_prefix . '_num', 0 );
+	$t_unit_code = gpc_get_string( $p_prefix . '_unit', 'd' );
+
+	$t_unit_map = array_flip( filter_relative_date_units() );
+	$t_unit = isset( $t_unit_map[$t_unit_code] ) ? $t_unit_map[$t_unit_code] : 'day';
+
+	# The magnitude is clamped to the bound the form input advertises, so a
+	# hand-edited URL cannot resolve to a year outside the range the fixed date
+	# selects can express.
+	$t_offset = ( '+' === $t_sign ? 1 : -1 ) * min( abs( $t_num ), FILTER_RELATIVE_DATE_MAX_OFFSET );
+
+	return array(
+		'anchor' => $t_anchor,
+		'offset' => $t_offset,
+		'unit' => $t_unit,
+	);
+}
+
+/**
  * Read a date custom field's submitted filter values.
  *
- * The inputs are "custom_field_<id>_control" (the date control) plus either an
- * explicit start/end timestamp or the individual date parts. Both land in the
- * same three stored slots - control, start timestamp, end timestamp - with the
- * per-operator boundary math applied by filter_custom_field_date_endpoints().
+ * The inputs are "custom_field_<id>_control" (the date control) plus, by mode,
+ * either the fixed date parts or the relative descriptor inputs per endpoint.
+ * Both modes land in the same three stored slots - control, start timestamp, end
+ * timestamp - via filter_custom_field_date_endpoints(). In relative mode those
+ * timestamps are only a snapshot taken now; the descriptors come back alongside
+ * them so the caller can store them and let filter_resolve_relative_dates()
+ * recompute the window at query time.
  *
  * Callers are expected to have established the field is submitted at all, by
  * testing gpc_isset() on its "_control" input.
  *
  * @param integer $p_cfid Custom field id.
- * @return array Three-element array: array( control, start, end ).
+ * @return array Two-element array: array( array( control, start, end ), descriptors or null ).
  */
 function filter_gpc_get_custom_field_date( $p_cfid ) {
 	$t_values = array();
@@ -631,6 +978,41 @@ function filter_gpc_get_custom_field_date( $p_cfid ) {
 	# Get date control property
 	$t_control = gpc_get_int( 'custom_field_' . $p_cfid . '_control', null );
 	$t_values[0] = $t_control;
+
+	if( gpc_get_bool( 'custom_field_' . $p_cfid . '_relative', false ) ) {
+		# Relative mode: capture descriptor(s) and write a resolved-as-of-now
+		# snapshot into [1]/[2] via the shared boundary helper. The field is
+		# treated as wholly relative (both endpoints), so both slots are
+		# recomputed together — the operator couples them.
+		$t_start_desc = filter_gpc_get_relative_descriptor( 'custom_field_' . $p_cfid . '_start_relative' );
+		$t_end_desc = filter_gpc_get_relative_descriptor( 'custom_field_' . $p_cfid . '_end_relative' );
+
+		# The date control decides which endpoints are in play, and only those are
+		# given a descriptor: an unused endpoint's inputs are rendered disabled
+		# and so are absent by design, not by truncation.
+		$t_sources = filter_custom_field_date_endpoint_sources( $t_control );
+		$t_endpoints = array();
+		if( in_array( 'start', $t_sources, true ) ) {
+			$t_endpoints['custom_field_' . $p_cfid . '_start_relative'] = $t_start_desc;
+		}
+		if( in_array( 'end', $t_sources, true ) ) {
+			$t_endpoints['custom_field_' . $p_cfid . '_end_relative'] = $t_end_desc;
+		}
+		$t_endpoints = filter_relative_descriptors_fill( $t_endpoints );
+		$t_start_desc = $t_endpoints['custom_field_' . $p_cfid . '_start_relative'] ?? null;
+		$t_end_desc = $t_endpoints['custom_field_' . $p_cfid . '_end_relative'] ?? null;
+
+		# "Any" and "none" use neither endpoint, so nothing relative is left to
+		# store. The field renders as fixed next time, so read it as fixed now.
+		if( null !== $t_start_desc || null !== $t_end_desc ) {
+			$t_today = strtotime( 'today' );
+			$t_start_date = ( null !== $t_start_desc ) ? filter_relative_descriptor_to_date( $t_start_desc ) : $t_today;
+			$t_end_date = ( null !== $t_end_desc ) ? filter_relative_descriptor_to_date( $t_end_desc ) : $t_today;
+			list( $t_values[1], $t_values[2] ) = filter_custom_field_date_endpoints( $t_control, $t_start_date, $t_end_date );
+
+			return array( $t_values, array( 'start' => $t_start_desc, 'end' => $t_end_desc ) );
+		}
+	}
 
 	# Get start date. An explicit timestamp input wins; otherwise derive
 	# from the individual date parts.
@@ -668,14 +1050,15 @@ function filter_gpc_get_custom_field_date( $p_cfid ) {
 	$t_values[1] = $t_start;
 	$t_values[2] = $t_end;
 
-	return $t_values;
+	return array( $t_values, null );
 }
 
 /**
  * Compute the start/end timestamp pair stored for a custom date field, given a
  * date control and the resolved start/end dates (both midnight Unix
- * timestamps). This is the per-operator boundary math used by the input-capture path
- * in filter_gpc_get(), factored out so that it has a single home.
+ * timestamps). This is the per-operator boundary math shared by the absolute
+ * input-capture path (filter_gpc_get()) and the relative resolve path
+ * (filter_resolve_relative_dates()), so both produce identical timestamps.
  *
  * @param int $p_control    A CUSTOM_FIELD_DATE_* date control.
  * @param int $p_start_date Resolved start date (midnight timestamp).
@@ -726,6 +1109,207 @@ function filter_custom_field_date_endpoints( $p_control, $p_start_date, $p_end_d
 	}
 
 	return array( $t_start, $t_end );
+}
+
+/**
+ * Report which of a custom date field's two relative descriptors produced each
+ * of its two stored timestamps, for a given date control.
+ *
+ * filter_custom_field_date_endpoints() does not fill the pair by position: "on
+ * or before" derives the end timestamp from the start date, "on" derives both
+ * from it, and the open-ended ones fill one slot with a sentinel that no
+ * date produced at all. Callers that need to relate a stored timestamp back to
+ * the descriptor behind it therefore cannot assume slot 1 came from 'start' and
+ * slot 2 from 'end'.
+ *
+ * @param int $p_control A CUSTOM_FIELD_DATE_* date control.
+ * @return array Two-element array holding 'start', 'end' or null for the start
+ *               and end timestamps respectively.
+ */
+function filter_custom_field_date_endpoint_sources( $p_control ) {
+	switch( $p_control ) {
+		case CUSTOM_FIELD_DATE_BETWEEN:
+			return array( 'start', 'end' );
+		case CUSTOM_FIELD_DATE_ON:
+			return array( 'start', 'start' );
+		case CUSTOM_FIELD_DATE_ONORBEFORE:
+		case CUSTOM_FIELD_DATE_BEFORE:
+			return array( null, 'start' );
+		case CUSTOM_FIELD_DATE_AFTER:
+		case CUSTOM_FIELD_DATE_ONORAFTER:
+			return array( 'start', null );
+	}
+
+	# CUSTOM_FIELD_DATE_ANY and _NONE ignore both dates.
+	return array( null, null );
+}
+
+/**
+ * Resolve a filter's relative date descriptors into the legacy date slots the
+ * query builder reads, as of now. The single place relative becomes concrete: it
+ * runs in the BugFilterQuery constructor on the query's own copy, so the saved
+ * filter keeps its descriptors and the window keeps sliding.
+ *
+ * Built-in date fields resolve each endpoint independently into its
+ * year/month/day triple, so one endpoint can be relative while the other stays
+ * absolute. A custom date field's control couples its two timestamps, so both
+ * are recomputed together via filter_custom_field_date_endpoints().
+ *
+ * Filters without descriptors are returned unchanged.
+ *
+ * @param array $p_filter Filter array.
+ * @return array Filter array with relative descriptors resolved into date slots.
+ */
+function filter_resolve_relative_dates( array $p_filter ) {
+	# Built-in date fields: (relative-property, [year, month, day]) triples
+	$t_builtin_endpoints = array(
+		array(
+			FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE,
+			FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR,
+			FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH,
+			FILTER_PROPERTY_DATE_SUBMITTED_START_DAY,
+		),
+		array(
+			FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE,
+			FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR,
+			FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH,
+			FILTER_PROPERTY_DATE_SUBMITTED_END_DAY,
+		),
+		array(
+			FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE,
+			FILTER_PROPERTY_LAST_UPDATED_START_YEAR,
+			FILTER_PROPERTY_LAST_UPDATED_START_MONTH,
+			FILTER_PROPERTY_LAST_UPDATED_START_DAY,
+		),
+		array(
+			FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE,
+			FILTER_PROPERTY_LAST_UPDATED_END_YEAR,
+			FILTER_PROPERTY_LAST_UPDATED_END_MONTH,
+			FILTER_PROPERTY_LAST_UPDATED_END_DAY,
+		),
+	);
+	foreach( $t_builtin_endpoints as $t_endpoint ) {
+		list( $t_rel_prop, $t_year_prop, $t_month_prop, $t_day_prop ) = $t_endpoint;
+		if( empty( $p_filter[$t_rel_prop] ) || !is_array( $p_filter[$t_rel_prop] ) ) {
+			continue;
+		}
+		$t_ts = filter_relative_descriptor_to_date( $p_filter[$t_rel_prop] );
+		$p_filter[$t_year_prop] = (int)date( 'Y', $t_ts );
+		$p_filter[$t_month_prop] = (int)date( 'n', $t_ts );
+		$p_filter[$t_day_prop] = (int)date( 'j', $t_ts );
+	}
+
+	# Custom date fields: a field in relative mode has both boundary timestamps
+	# recomputed from its resolved start/end dates via the shared helper.
+	if( !empty( $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] )
+			&& is_array( $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] ) ) {
+		foreach( $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] as $t_cfid => $t_relative ) {
+			if( !isset( $p_filter['custom_fields'][$t_cfid][0] ) || !is_array( $t_relative ) ) {
+				continue;
+			}
+			$t_start_desc = isset( $t_relative['start'] ) ? $t_relative['start'] : null;
+			$t_end_desc = isset( $t_relative['end'] ) ? $t_relative['end'] : null;
+			if( empty( $t_start_desc ) && empty( $t_end_desc ) ) {
+				continue;
+			}
+
+			$t_control = (int)$p_filter['custom_fields'][$t_cfid][0];
+			$t_today = strtotime( 'today' );
+			$t_start_date = !empty( $t_start_desc ) ? filter_relative_descriptor_to_date( $t_start_desc ) : $t_today;
+			$t_end_date = !empty( $t_end_desc ) ? filter_relative_descriptor_to_date( $t_end_desc ) : $t_today;
+
+			list( $t_start, $t_end ) = filter_custom_field_date_endpoints( $t_control, $t_start_date, $t_end_date );
+			$p_filter['custom_fields'][$t_cfid][1] = $t_start;
+			$p_filter['custom_fields'][$t_cfid][2] = $t_end;
+		}
+	}
+
+	return $p_filter;
+}
+
+/**
+ * Reject a filter that mixes relative and fixed dates within a single date field.
+ *
+ * The storage model holds a descriptor per endpoint, so a filter can technically
+ * pair a fixed start with a relative end. The form cannot present that - a date
+ * field has one fixed/relative mode, and only that mode's inputs are shown - so
+ * the combination is rejected where filters are persisted.
+ *
+ * The check is called from filter_serialize() so every write path inherits it:
+ * the filter form, stored and edited queries, and the current-filter row all go
+ * through filter_serialize().
+ *
+ * A field is inconsistent when one active endpoint carries a descriptor and
+ * another does not. Which endpoints are active differs by field:
+ * - Built-in date fields always filter on a range, so both are active.
+ * - Custom date fields take theirs from the date control: only
+ *   CUSTOM_FIELD_DATE_BETWEEN uses both, the single-sided controls use the start
+ *   alone (so can never be mixed), and _ANY / _NONE use neither.
+ *
+ * @param array $p_filter A filter array.
+ * @return void
+ * @throws ClientException If a date field mixes relative and fixed endpoints.
+ */
+function filter_ensure_consistent_relative_mode( array $p_filter ) {
+	$t_builtin_fields = array(
+		FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED => array(
+			'label' => 'use_date_filters',
+			'start' => FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE,
+			'end' => FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE,
+		),
+		FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE => array(
+			'label' => 'use_last_updated_date_filters',
+			'start' => FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE,
+			'end' => FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE,
+		),
+	);
+
+	foreach( $t_builtin_fields as $t_field => $t_def ) {
+		$t_has_start = !empty( $p_filter[$t_def['start']] );
+		$t_has_end = !empty( $p_filter[$t_def['end']] );
+		if( $t_has_start !== $t_has_end ) {
+			throw new ClientException(
+				"Filter field '$t_field' mixes relative and fixed dates; both endpoints must use the same mode",
+				ERROR_FILTER_RELATIVE_DATE_MODE_MIXED,
+				array( lang_get( $t_def['label'] ) )
+			);
+		}
+	}
+
+	if( empty( $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] )
+			|| !is_array( $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] ) ) {
+		return;
+	}
+
+	foreach( $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] as $t_cfid => $t_relative ) {
+		if( !is_array( $t_relative ) ) {
+			continue;
+		}
+
+		# Only the "between" operator makes both endpoints active; every other
+		# operator either uses the start alone or no date at all, and so cannot
+		# pair a relative endpoint with a fixed one.
+		$t_control = isset( $p_filter['custom_fields'][$t_cfid][0] )
+			? (int)$p_filter['custom_fields'][$t_cfid][0]
+			: CUSTOM_FIELD_DATE_ANY;
+		if( CUSTOM_FIELD_DATE_BETWEEN !== $t_control ) {
+			continue;
+		}
+
+		$t_has_start = !empty( $t_relative['start'] );
+		$t_has_end = !empty( $t_relative['end'] );
+		if( $t_has_start !== $t_has_end ) {
+			# Name the field if it still exists; a filter can outlive the custom
+			# field it references, and that is not the error to report here.
+			$t_def = custom_field_cache_row( $t_cfid, /* trigger_errors */ false );
+			$t_name = ( $t_def && isset( $t_def['name'] ) ) ? $t_def['name'] : $t_cfid;
+			throw new ClientException(
+				"Custom field '$t_cfid' mixes relative and fixed dates; both endpoints must use the same mode",
+				ERROR_FILTER_RELATIVE_DATE_MODE_MIXED,
+				array( $t_name )
+			);
+		}
+	}
 }
 
 /**
@@ -1056,6 +1640,11 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_LAST_UPDATED_END_DAY => date( 'd' ),
 		FILTER_PROPERTY_LAST_UPDATED_START_YEAR => date( 'Y' ),
 		FILTER_PROPERTY_LAST_UPDATED_END_YEAR => date( 'Y' ),
+		# Relative date descriptors default to null (no descriptor = absolute mode)
+		FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE => null,
+		FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE => null,
+		FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE => null,
+		FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE => null,
 		FILTER_PROPERTY_SEARCH => '',
 		FILTER_PROPERTY_VIEW_STATE => META_FILTER_ANY,
 		FILTER_PROPERTY_TAG_STRING => '',
@@ -1101,6 +1690,9 @@ function filter_get_default_array( $p_view_type = null ) {
 		}
 	}
 	$t_filter['custom_fields'] = $f_custom_fields_data;
+	# Relative date descriptors for custom date fields, keyed by custom field id.
+	# Empty by default; an entry is added only when a field is put in relative mode.
+	$t_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] = array();
 
 	$t_cache_default_array[$p_view_type] = $t_filter;
 	return $t_filter;
@@ -1198,11 +1790,17 @@ function filter_deserialize( $p_serialized_filter ) {
 
 /**
  * Creates a serialized filter with the correct format
+ *
+ * Every path that persists a filter serializes it here, so this is where the
+ * relative/fixed date consistency rule is enforced for all of them.
+ *
  * @param array $p_filter_array Filter array to be serialized
  * @return string Serialized filter string
+ * @throws ClientException If a date field mixes relative and fixed endpoints.
  */
 function filter_serialize( $p_filter_array ) {
 	$t_cookie_version = FILTER_VERSION;
+	filter_ensure_consistent_relative_mode( $p_filter_array );
 	$p_filter_array = filter_clean_runtime_properties( $p_filter_array );
 	$t_settings_serialized = json_encode( $p_filter_array );
 	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
@@ -2280,21 +2878,83 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 
 	# date values
 	# creation date
-	$f_do_filter_by_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED, $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] );
 	$f_start_month			= gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] );
 	$f_end_month			= gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] );
 	$f_start_day			= gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
 	$f_end_day				= gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
 	$f_start_year			= gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
 	$f_end_year				= gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
+	# creation date relative descriptors (relative mode). When on, the descriptors
+	# drive the filter and a resolved-as-of-now snapshot is written into the y/m/d
+	# slots so un-migrated readers still see a valid (frozen) date.
+	$f_start_relative = null;
+	$f_end_relative = null;
+	$t_existing_start_rel = isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] ) ? $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] : null;
+	$t_existing_end_rel = isset( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] ) ? $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] : null;
+	list( $f_do_filter_by_date, $t_date_relative_mode ) = filter_gpc_get_date_type(
+		FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED,
+		$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED],
+		!empty( $t_existing_start_rel ) || !empty( $t_existing_end_rel ) );
+	if( $t_date_relative_mode ) {
+		$f_start_relative = filter_gpc_get_relative_descriptor( FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE, $t_existing_start_rel );
+		$f_end_relative = filter_gpc_get_relative_descriptor( FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE, $t_existing_end_rel );
+		# A built-in date field always filters on a range, so both endpoints are
+		# in play whenever the mode is relative.
+		$t_endpoints = filter_relative_descriptors_fill( array(
+			FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE => $f_start_relative,
+			FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE => $f_end_relative ) );
+		$f_start_relative = $t_endpoints[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE];
+		$f_end_relative = $t_endpoints[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE];
+		if( null !== $f_start_relative ) {
+			$t_ts = filter_relative_descriptor_to_date( $f_start_relative );
+			$f_start_year = (int)date( 'Y', $t_ts );
+			$f_start_month = (int)date( 'n', $t_ts );
+			$f_start_day = (int)date( 'j', $t_ts );
+		}
+		if( null !== $f_end_relative ) {
+			$t_ts = filter_relative_descriptor_to_date( $f_end_relative );
+			$f_end_year = (int)date( 'Y', $t_ts );
+			$f_end_month = (int)date( 'n', $t_ts );
+			$f_end_day = (int)date( 'j', $t_ts );
+		}
+	}
 	# last_updated date values
-	$f_do_filter_by_last_updated_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] );
 	$f_last_updated_start_month			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_START_MONTH, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
 	$f_last_updated_end_month			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_MONTH, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] );
 	$f_last_updated_start_day			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_START_DAY, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
 	$f_last_updated_end_day				= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_DAY, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
 	$f_last_updated_start_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_START_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
 	$f_last_updated_end_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
+	# last_updated relative descriptors (relative mode)
+	$f_last_updated_start_relative = null;
+	$f_last_updated_end_relative = null;
+	$t_existing_lu_start_rel = isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] ) ? $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] : null;
+	$t_existing_lu_end_rel = isset( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] ) ? $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] : null;
+	list( $f_do_filter_by_last_updated_date, $t_lu_relative_mode ) = filter_gpc_get_date_type(
+		FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE,
+		$t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE],
+		!empty( $t_existing_lu_start_rel ) || !empty( $t_existing_lu_end_rel ) );
+	if( $t_lu_relative_mode ) {
+		$f_last_updated_start_relative = filter_gpc_get_relative_descriptor( FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE, $t_existing_lu_start_rel );
+		$f_last_updated_end_relative = filter_gpc_get_relative_descriptor( FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE, $t_existing_lu_end_rel );
+		$t_endpoints = filter_relative_descriptors_fill( array(
+			FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE => $f_last_updated_start_relative,
+			FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE => $f_last_updated_end_relative ) );
+		$f_last_updated_start_relative = $t_endpoints[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE];
+		$f_last_updated_end_relative = $t_endpoints[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE];
+		if( null !== $f_last_updated_start_relative ) {
+			$t_ts = filter_relative_descriptor_to_date( $f_last_updated_start_relative );
+			$f_last_updated_start_year = (int)date( 'Y', $t_ts );
+			$f_last_updated_start_month = (int)date( 'n', $t_ts );
+			$f_last_updated_start_day = (int)date( 'j', $t_ts );
+		}
+		if( null !== $f_last_updated_end_relative ) {
+			$t_ts = filter_relative_descriptor_to_date( $f_last_updated_end_relative );
+			$f_last_updated_end_year = (int)date( 'Y', $t_ts );
+			$f_last_updated_end_month = (int)date( 'n', $t_ts );
+			$f_last_updated_end_day = (int)date( 'j', $t_ts );
+		}
+	}
 
 	$f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, $t_filter[FILTER_PROPERTY_SEARCH] );
 	$f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, $t_filter[FILTER_PROPERTY_VIEW_STATE] );
@@ -2333,6 +2993,9 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	# custom field updates
 	$t_custom_fields 		= custom_field_get_ids(); # @todo (thraxisp) This should really be the linked ids, but we don't know the project
 	$f_custom_fields_data 	= $t_filter['custom_fields'];
+	$f_custom_fields_relative = ( isset( $t_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] ) && is_array( $t_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] ) )
+		? $t_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE]
+		: array();
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE ) {
@@ -2342,7 +3005,14 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 					continue;
 				}
 
-				$f_custom_fields_data[$t_cfid] = filter_gpc_get_custom_field_date( $t_cfid );
+				list( $t_values, $t_relative ) = filter_gpc_get_custom_field_date( $t_cfid );
+				$f_custom_fields_data[$t_cfid] = $t_values;
+				if( null === $t_relative ) {
+					# Absolute mode: clear any stored relative descriptor for this field
+					unset( $f_custom_fields_relative[$t_cfid] );
+				} else {
+					$f_custom_fields_relative[$t_cfid] = $t_relative;
+				}
 
 			} else {
 
@@ -2393,6 +3063,10 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] 	= $f_last_updated_end_month;
 	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_DAY] 		= $f_last_updated_end_day;
 	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] 		= $f_last_updated_end_year;
+	$t_filter_input[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] = $f_start_relative;
+	$t_filter_input[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] = $f_end_relative;
+	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] = $f_last_updated_start_relative;
+	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] = $f_last_updated_end_relative;
 	$t_filter_input[FILTER_PROPERTY_SEARCH] 					= $f_search;
 	$t_filter_input[FILTER_PROPERTY_HIDE_STATUS] 			= $f_hide_status;
 	$t_filter_input[FILTER_PROPERTY_RESOLUTION] 				= $f_show_resolution;
@@ -2404,6 +3078,7 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	$t_filter_input[FILTER_PROPERTY_MONITOR_USER_ID] 		= $f_user_monitor;
 	$t_filter_input[FILTER_PROPERTY_VIEW_STATE] 				= $f_view_state;
 	$t_filter_input['custom_fields'] 						= $f_custom_fields_data;
+	$t_filter_input[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] 	= $f_custom_fields_relative;
 	$t_filter_input[FILTER_PROPERTY_STICKY] 					= $f_sticky_issues;
 	$t_filter_input[FILTER_PROPERTY_RELATIONSHIP_TYPE] 		= $f_relationship_type;
 	$t_filter_input[FILTER_PROPERTY_RELATIONSHIP_BUG] 		= $f_relationship_bug;
