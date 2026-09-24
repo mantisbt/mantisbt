@@ -108,7 +108,6 @@ class VersionAddCommand extends Command {
 			$this->timestamp,
 			$t_obsolete );
 
-		version_cache_clear_row( $t_version_id );
 		$t_version = version_get( $t_version_id );
 		$t_result = array( 'version' => VersionGetCommand::VersionToArray( $t_version ) );
 
