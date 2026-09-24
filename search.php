@@ -26,6 +26,7 @@
  * @uses authentication_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses custom_field_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
  * @uses gpc_api.php
@@ -37,6 +38,7 @@ require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'custom_field_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
@@ -118,6 +120,37 @@ $t_my_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] = gpc_get_int( FILTER_PROPE
 $t_my_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] = gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_DAY, META_FILTER_ANY );
 $t_my_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] = gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_YEAR, META_FILTER_ANY );
 
+# Relative date descriptors, as encoded by filter_get_url(). An endpoint that
+# carries one keeps sliding: filter_resolve_relative_dates() recomputes it at
+# query time, and the absolute parts read above are only the snapshot taken when
+# the link was built.
+$t_my_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] =
+	filter_gpc_get_relative_descriptor( FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE );
+$t_my_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] =
+	filter_gpc_get_relative_descriptor( FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE );
+$t_my_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] =
+	filter_gpc_get_relative_descriptor( FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE );
+$t_my_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] =
+	filter_gpc_get_relative_descriptor( FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE );
+
+# Both endpoints of a built-in date field are in play, so a link that carries one
+# of them and not the other is completed from the defaults rather than left as a
+# field that mixes a relative endpoint with a fixed one.
+foreach( array(
+		array( FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE, FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE ),
+		array( FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE, FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE ),
+	) as $t_pair ) {
+	if( empty( $t_my_filter[$t_pair[0]] ) && empty( $t_my_filter[$t_pair[1]] ) ) {
+		continue;
+	}
+
+	foreach( filter_relative_descriptors_fill(
+			array( $t_pair[0] => $t_my_filter[$t_pair[0]], $t_pair[1] => $t_my_filter[$t_pair[1]] )
+		) as $t_property => $t_descriptor ) {
+		$t_my_filter[$t_property] = $t_descriptor;
+	}
+}
+
 $t_my_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_TYPE, -1 );
 $t_my_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, 0 );
 
@@ -138,11 +171,33 @@ $t_custom_fields = array();
 foreach( $_GET as $t_var_name => $t_var_value ) {
 	if( strpos( $t_var_name, 'custom_field_' ) === 0 ) {
 		$t_custom_field_id = mb_substr( $t_var_name, 13 );
-		$t_custom_fields[$t_custom_field_id] = $t_var_value;
+		# Only the plain "custom_field_<id>" form carries a value. A date custom
+		# field spells its filter out in suffixed parameters instead (_control,
+		# _relative, the descriptor parts); those are read below, and keying the
+		# filter on them would leave entries no custom field id matches.
+		if( ctype_digit( $t_custom_field_id ) ) {
+			$t_custom_fields[$t_custom_field_id] = $t_var_value;
+		}
 	}
 }
 
 $t_my_filter['custom_fields'] = $t_custom_fields;
+
+# Date custom fields, which encode the operator and either fixed dates or
+# relative descriptors in suffixed parameters. Read through the same helper the
+# filter form uses, so a permalink round-trips whichever mode it was built in.
+foreach( custom_field_get_ids() as $t_cfid ) {
+	if( custom_field_type( $t_cfid ) != CUSTOM_FIELD_TYPE_DATE
+		|| !gpc_isset( 'custom_field_' . $t_cfid . '_control' ) ) {
+		continue;
+	}
+
+	list( $t_values, $t_relative ) = filter_gpc_get_custom_field_date( $t_cfid );
+	$t_my_filter['custom_fields'][$t_cfid] = $t_values;
+	if( null !== $t_relative ) {
+		$t_my_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE][$t_cfid] = $t_relative;
+	}
+}
 
 # Handle class-based filters defined by plugins
 $t_plugin_filters = filter_get_plugin_filters();
@@ -171,6 +226,12 @@ foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 $t_my_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
 
 $t_setting_arr = filter_ensure_valid_filter( $t_my_filter );
+
+# A temporary filter is not serialized, so it does not pass the mode check that
+# every persisted filter does. A hand-edited URL is the one way to reach here
+# with a date field half relative and half fixed, which is a filter the form
+# cannot render - reject it as the client error it is rather than show it.
+filter_ensure_consistent_relative_mode( $t_setting_arr );
 
 # set the filter for use, for current user
 # Note: This will overwrite the filter in use/default for current project and user.

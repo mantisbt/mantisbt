@@ -49,6 +49,31 @@ define( 'FILTER_PROPERTY_LAST_UPDATED_END_MONTH', 'last_updated_end_month' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_END_YEAR', 'last_updated_end_year' );
 define( 'FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE', 'filter_by_last_updated_date' ); #do_filter_by_last_updated_date
 
+# Relative date descriptors. When set for an endpoint, they override that
+# endpoint's absolute year/month/day (or custom-field timestamp) slots by being
+# resolved to a concrete date right before the query runs (see
+# filter_resolve_relative_dates()). Presence of a descriptor encodes "relative
+# mode" for that endpoint; there is no separate boolean flag.
+define( 'FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE', 'start_relative' );
+define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE', 'end_relative' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE', 'last_updated_start_relative' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE', 'last_updated_end_relative' );
+define( 'FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE', 'custom_fields_relative' );
+
+# Values of the built-in date filters' "<field>_type" form select, which picks
+# the kind of bounds only - whether the field is filtering at all is the
+# separate FILTER_PROPERTY_FILTER_BY_* checkbox. Form-level encoding only: the
+# filter stores the mode as the presence of a relative descriptor, so nothing
+# downstream of filter_gpc_get() sees these.
+define( 'FILTER_DATE_TYPE_FIXED', 'fixed' );
+define( 'FILTER_DATE_TYPE_RELATIVE', 'relative' );
+
+# Largest offset magnitude a relative date descriptor may carry, shared by the
+# form input's "max" attribute and the server-side clamp in
+# filter_gpc_get_relative_descriptor(). Bounds a hand-edited URL to a date range
+# the year selects can still express.
+define( 'FILTER_RELATIVE_DATE_MAX_OFFSET', 999 );
+
 define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
 define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
 define( 'FILTER_PROPERTY_TAG_STRING', 'tag_string' );

@@ -29,6 +29,7 @@ require_once( $t_soap_dir . 'mc_enum_api.php' );
 require_once( $t_soap_dir . 'mc_project_api.php' );
 
 require_api( 'custom_field_api.php' );
+require_api( 'filter_api.php' );
 
 /**
  * FilterConverter class
@@ -90,7 +91,11 @@ class FilterConverter {
 	 * @return array The converted criteria.
 	 */
 	private function filterCriteriaToJson( $p_criteria, $p_project_id ) {
-		$t_criteria = $p_criteria;
+		# Relative date descriptors are resolved up front so the dates reported are
+		# the window as it stands now, not the snapshot the y/m/d slots were left
+		# holding by whatever last wrote the filter. The descriptors themselves are
+		# internal storage and are dropped below, alongside the fields they feed.
+		$t_criteria = filter_resolve_relative_dates( $p_criteria );
 	
 		$this->renameField( $t_criteria, FILTER_PROPERTY_HANDLER_ID, 'handler' );
 		$this->renameField( $t_criteria, FILTER_PROPERTY_REPORTER_ID, 'reporter' );
@@ -261,6 +266,15 @@ class FilterConverter {
 	 * @return void
 	 */
 	private function convertCustomFieldsArrayToJson( &$p_criteria ) {
+		# The descriptors have already been resolved into the timestamps below by
+		# filterCriteriaToJson(); they are read here only to publish each relative
+		# bound alongside the timestamp it resolved to, and the internal property
+		# itself never reaches the payload.
+		$t_relative = isset( $p_criteria[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] )
+			? $p_criteria[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE]
+			: array();
+		unset( $p_criteria[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE] );
+
 		$t_field = 'custom_fields';
 		if( isset( $p_criteria[$t_field] ) ) {
 			$t_result = array();
@@ -282,6 +296,10 @@ class FilterConverter {
 					$t_cf = array(
 						'field' => array( 'id' => (int) $t_cf_id, 'name' => $t_def['name'] ),
 						'value' => $t_values );
+				}
+
+				if( !empty( $t_values ) && isset( $t_relative[$t_cf_id] ) ) {
+					$t_cf['value'] = $this->customFieldDateBoundsToJson( $t_values, $t_relative[$t_cf_id] );
 				}
 
 				if( !empty( $t_values ) ) {
@@ -657,7 +675,11 @@ class FilterConverter {
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
 			
-				$p_criteria['created_at'] = array( 'from' => $t_start_date, 'to' => $t_end_date );
+				$p_criteria['created_at'] = array(
+					'from' => $this->dateBoundToJson( $t_start_date,
+						$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] ?? null ),
+					'to' => $this->dateBoundToJson( $t_end_date,
+						$p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] ?? null ) );
 				$this->removeDateSubmitted( $p_criteria );
 		}
 
@@ -672,9 +694,97 @@ class FilterConverter {
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_MONTH],
 				$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
 			
-			$p_criteria['updated_at'] = array( 'from' => $t_start_date, 'to' => $t_end_date );
+			$p_criteria['updated_at'] = array(
+				'from' => $this->dateBoundToJson( $t_start_date,
+					$p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] ?? null ),
+				'to' => $this->dateBoundToJson( $t_end_date,
+					$p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] ?? null ) );
 			$this->remoteDateLastUpdated( $p_criteria );
 		}
+	}
+
+	/**
+	 * Render one endpoint of a date range.
+	 *
+	 * A fixed endpoint is the date itself, "2026-09-01". A relative one is the
+	 * descriptor that produced it, carrying the resolved date alongside:
+	 *
+	 *   { "anchor": "today", "offset": -7, "unit": "day", "date": "2026-09-01" }
+	 *
+	 * The two forms are exclusive on purpose. Publishing both would let a client
+	 * read only the date and write back a filter that has silently become fixed;
+	 * as it is, a client that does not know descriptors sees an object where it
+	 * expected a string and fails visibly. Only relative filters are affected - a
+	 * fixed one renders exactly as before.
+	 *
+	 * The descriptor is authoritative; "date" is derived from it as of this
+	 * request, so a client can show the window without redoing the arithmetic.
+	 *
+	 * @param string     $p_date       Resolved date, YYYY-MM-DD.
+	 * @param array|null $p_descriptor Relative date descriptor, or null if fixed.
+	 * @return string|array The endpoint in API format.
+	 */
+	private function dateBoundToJson( $p_date, $p_descriptor ) {
+		if( empty( $p_descriptor ) || !is_array( $p_descriptor ) ) {
+			return $p_date;
+		}
+
+		# Normalized, so what is published is the descriptor that was actually
+		# applied rather than whatever the stored value happened to say.
+		$t_descriptor = filter_relative_descriptor_normalize( $p_descriptor );
+		$t_descriptor['date'] = $p_date;
+
+		return $t_descriptor;
+	}
+
+	/**
+	 * Render a date custom field's stored value with each relative bound replaced
+	 * by the descriptor that produced it.
+	 *
+	 * The value stays the triple it has always been, and a fixed bound stays the
+	 * plain timestamp. A relative one carries the timestamp it resolved to:
+	 *
+	 *   [
+	 *    2,
+	 *    { "anchor": "start_of_month", "offset": -1, "unit": "month", "timestamp": 1785542400 },
+	 *    { "anchor": "today", "offset": 0, "unit": "day", "timestamp": 1788911998 }
+	 *   ]
+	 *
+	 * The resolved value is a timestamp, not a date string, so a bound reads the
+	 * same whichever form it takes. dateBoundToJson()'s reasoning about the forms
+	 * being exclusive applies here unchanged.
+	 *
+	 * Which descriptor produced which timestamp depends on the date control, so
+	 * the mapping comes from filter_custom_field_date_endpoint_sources() rather
+	 * than by position. A slot the control fills with an open-ended sentinel has
+	 * no descriptor behind it and is left alone.
+	 *
+	 * @param array $p_values      Stored triple, array( date control, start timestamp, end timestamp ).
+	 * @param array $p_descriptors array( 'start' => descriptor or null, 'end' => descriptor or null ),
+	 *                             as stored for this field under custom_fields_relative.
+	 * @return array The triple, with relative bounds rendered as descriptors.
+	 */
+	private function customFieldDateBoundsToJson( array $p_values, array $p_descriptors ) {
+		if( count( $p_values ) != 3 ) {
+			return $p_values;
+		}
+
+		$t_sources = filter_custom_field_date_endpoint_sources( $p_values[0] );
+
+		foreach( array( 1, 2 ) as $t_slot ) {
+			$t_source = $t_sources[$t_slot - 1];
+			if( null === $t_source || empty( $p_descriptors[$t_source] ) ) {
+				continue;
+			}
+
+			# Normalized, so what is published is the descriptor that was actually
+			# applied rather than whatever the stored value happened to say.
+			$t_descriptor = filter_relative_descriptor_normalize( $p_descriptors[$t_source] );
+			$t_descriptor['timestamp'] = $p_values[$t_slot];
+			$p_values[$t_slot] = $t_descriptor;
+		}
+
+		return $p_values;
 	}
 
 	/**
@@ -685,6 +795,8 @@ class FilterConverter {
 	 */
 	private function removeDateSubmitted( &$p_criteria ) {
 		unset( $p_criteria[FILTER_PROPERTY_FILTER_BY_DATE] );
+		unset( $p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] );
+		unset( $p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] );
 		unset( $p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
 		unset( $p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] );
 		unset( $p_criteria[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
@@ -701,6 +813,8 @@ class FilterConverter {
 	 */
 	private function remoteDateLastUpdated( &$p_criteria ) {
 		unset( $p_criteria[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] );
+		unset( $p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] );
+		unset( $p_criteria[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] );
 		unset( $p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
 		unset( $p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
 		unset( $p_criteria[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
