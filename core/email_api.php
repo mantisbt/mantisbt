@@ -459,6 +459,13 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		# Exclude users who have this notification type turned off
 		if( $t_pref_field ) {
 			$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
+			$t_plugin_notify = event_signal( 'EVENT_NOTIFY_USER_PREF', array( $t_notify, $t_pref_field, $t_id, $p_bug_id, $p_notify_type ) );
+
+			if ( is_array ( $t_plugin_notify ) ) {
+				$t_notify = $t_plugin_notify[0];
+				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, user @U%d, pref %s value from plugin = %d', $p_bug_id, $t_id, $t_pref_field, $t_notify );
+			}
+
 			if( OFF == $t_notify ) {
 				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (pref %s off)', $p_bug_id, $t_id, $t_pref_field );
 				continue;

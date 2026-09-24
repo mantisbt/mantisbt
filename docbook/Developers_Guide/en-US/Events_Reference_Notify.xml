@@ -79,6 +79,38 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.notify.user.pref">
+			<title>EVENT_NOTIFY_USER_PREF (Chain)</title>
+
+			<blockquote>
+				<para>
+					This event allows a plugin to selectively overwrite notification
+					settings for recipients of certain notifications. It is signalled
+					for every user in the final recipient list, including recipients
+					added by the event NOTIFY_USER_INCLUDE as described above.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;String&gt;: "1" if user has that notification enabled, "0" otherwise</para></listitem>
+					<listitem><para>&lt;String&gt;: Field in the user_pref table corresponding to that notification setting</para></listitem>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;String&gt;: Notification type</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>
+					&lt;Array&gt;: Array with all the parameters in the same order as they were received.
+					The first element of the returned array will be used to overwrite the value set
+					in the user preferences for that particular notification. A value equals to the OFF
+					constant is interpreted as a disabled notification.
+					</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 	</section>
 
 </section>
