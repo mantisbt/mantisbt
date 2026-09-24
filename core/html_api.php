@@ -130,7 +130,14 @@ function html_rss_link() {
  * @return void
  */
 function html_javascript_link( $p_filename ) {
-	echo "\t", '<script src="', helper_mantis_url( 'js/' . $p_filename ), '"></script>', "\n";
+	$t_filename = $p_filename;
+
+	# If no path is specified, look for JavaScript files in default directory
+	if( $t_filename == basename( $t_filename ) ) {
+		$t_filename = 'js/' . $p_filename;
+	}
+
+	echo "\t", '<script src="', helper_mantis_url( $t_filename ), '"></script>', "\n";
 }
 
 /**
@@ -199,34 +206,30 @@ function html_title( $p_page_title = '' ) {
  * @param string|array $p_stylesheet_path Path to local CSS style sheet or
  *                                        an ['URL','integrity'] array,
  *                                        'integrity' is optional.
+ * @param bool         $p_prepend         Move the path to the top.
  * @return void
  */
-function require_css( $p_stylesheet_path ) {
+function require_css( $p_stylesheet_path, bool $p_prepend = false ) {
 	global $g_stylesheets_included;
-	if( is_array( $p_stylesheet_path ) ) {
-		$g_stylesheets_included[$p_stylesheet_path[0]] = $p_stylesheet_path;
-	} else {
-		$g_stylesheets_included[$p_stylesheet_path] = $p_stylesheet_path;
+	$t_stylesheet_index = is_array( $p_stylesheet_path ) ? $p_stylesheet_path[0] : $p_stylesheet_path;
+	if( !isset( $g_stylesheets_included[$t_stylesheet_index] ) ) {
+		if( $p_prepend ) {
+			$g_stylesheets_included = array_merge( [ $t_stylesheet_index => $p_stylesheet_path ], $g_stylesheets_included );
+		} else {
+			$g_stylesheets_included[$t_stylesheet_index] = $p_stylesheet_path;
+		}
 	}
 }
 
 /**
- * Print the link to include the CSS file
+ * Publish the links to CSS files requested by the require_css() function.
+ * @see require_css()
  * @return void
  */
 function html_css() {
 	global $g_stylesheets_included;
 
-	$t_cache_key = helper_generate_cache_key();
-
-	html_css_link( config_get_global( 'css_include_file' ), $t_cache_key );
-
-	# Add right-to-left css if needed
-	if( lang_get( 'directionality' ) == 'rtl' ) {
-		html_css_link( config_get_global( 'css_rtl_include_file' ), $t_cache_key );
-	}
-
-	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
+	foreach( $g_stylesheets_included as $t_stylesheet_index => $t_stylesheet_path ) {
 		# status_config.php is a special css file, dynamically generated.
 		# Add a hash to the query string to differentiate content based on its
 		# relevant properties. This allows a browser to cache them separately and force
@@ -238,10 +241,13 @@ function html_css() {
 			);
 		}
 
-		if( is_array( $t_stylesheet_path ) ) {
-			html_css_cdn_link( $t_stylesheet_path[0], $t_stylesheet_path[1] ?? '' );
-		} else {
-			html_css_link( $t_stylesheet_path );
+		if( $t_stylesheet_path ) {
+			if( is_array( $t_stylesheet_path ) ) {
+				html_css_cdn_link( $t_stylesheet_path[0], $t_stylesheet_path[1] ?? '' );
+			} else {
+				html_css_link( $t_stylesheet_path );
+			}
+			$g_stylesheets_included[$t_stylesheet_index] = false;
 		}
 	}
 }
@@ -334,19 +340,24 @@ function html_meta_canonical( $p_url ) {
  * @param string|array $p_script_path Path to local javascript file or
  *                                    an ['URL','integrity'] array,
  *                                    'integrity' is optional.
+ * @param bool         $p_prepend     Move the path to the top.
  * @return void
  */
-function require_js( $p_script_path ) {
+function require_js( $p_script_path, bool $p_prepend = false ) {
 	global $g_scripts_included;
-	if( is_array( $p_script_path ) ) {
-		$g_scripts_included[$p_script_path[0]] = $p_script_path;
-	} else {
-		$g_scripts_included[$p_script_path] = $p_script_path;
+	$t_script_index = is_array( $p_script_path ) ? $p_script_path[0] : $p_script_path;
+	if( !isset( $g_scripts_included[$t_script_index] ) ) {
+		if( $p_prepend ) {
+			$g_scripts_included = array_merge( [ $t_script_index => $p_script_path ], $g_scripts_included );
+		} else {
+			$g_scripts_included[$t_script_index] = $p_script_path;
+		}
 	}
 }
 
 /**
- * Javascript...
+ * Publish the links to JavaScript scripts requested by the require_js() function.
+ * @see require_js()
  * @return void
  */
 function html_head_javascript() {
@@ -362,24 +373,27 @@ function html_head_javascript() {
 		helper_mantis_url( 'javascript_config.php' ),
 		[ 'cache_key' => helper_generate_cache_key( array( 'user' ) ) ]
 	);
-	echo "\t" . '<script src="' . $t_javascript_config . '"></script>' . "\n";
-	echo "\t" . '<script src="' . $t_javascript_translations . '"></script>' . "\n";
+	require_js( $t_javascript_config, true );
+	require_js( $t_javascript_translations, true );
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		# JQuery
-		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', JQUERY_HASH );
+		require_js( [ 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', JQUERY_HASH ], true );
 	} else {
 		# JQuery
-		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
+		require_js( 'jquery-' . JQUERY_VERSION . '.min.js', true );
 	}
 
 	require_js( 'common.js' );
 
-	foreach ( $g_scripts_included as $t_script_path ) {
-		if( is_array( $t_script_path ) ) {
-			html_javascript_cdn_link( $t_script_path[0], $t_script_path[1] ?? '' );
-		} else {
-			html_javascript_link( $t_script_path );
+	foreach ( $g_scripts_included as $t_script_index => $t_script_path ) {
+		if( $t_script_path ) {
+			if( is_array( $t_script_path ) ) {
+				html_javascript_cdn_link( $t_script_path[0], $t_script_path[1] ?? '' );
+			} else {
+				html_javascript_link( $t_script_path );
+			}
+			$g_scripts_included[$t_script_index] = false;
 		}
 	}
 }
