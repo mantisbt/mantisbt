@@ -1219,8 +1219,7 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 			$t_message .= lang_get( 'bugnote_attached_files' ) . "\n";
 
 			foreach( $p_files as $t_file ) {
-				$t_message .= '- ' . $t_file['name'] . ' (' . number_format( $t_file['size'] ) .
-					' ' . lang_get( 'bytes' ) . ")\n";
+				$t_message .= '- ' . $t_file['name'] . ' (' . get_size_info( $t_file['size'] ) . ")\n";
 			}
 
 			$t_message .= $t_separator . "\n";
