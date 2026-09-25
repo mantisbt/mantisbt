@@ -50,10 +50,15 @@
 			</para>
 
 			<para>
-				Every plugin must be contained in a single directory, named
-				to match the plugin's basename, as well as contain at least
-				a single PHP file, also named to match the basename, as such:
+				Every plugin must be contained in a single directory, named to
+				match the plugin's basename. It must hold a PHP file with
+				the plugin's code, also named after the basename, like so:
 			</para>
+
+			<programlisting>
+Example/
+	Example.php
+			</programlisting>
 
 			<para>
 				Note that for plugins that require a database schema to operate,
@@ -67,25 +72,23 @@
 				<literal>mantis_plugin_Example_foo_table</literal>.
 			</para>
 
-			<programlisting>
-Example/
-	Example.php
-			</programlisting>
-
 			<warning>
 				<para>
-					Depending on case sensitivity of the underlying file system,
-					these names must <emphasis>exactly match</emphasis> the plugin's
-					base name, i.e. <literal>example</literal> will not work.
+					These names must <emphasis>exactly match</emphasis> the
+					plugin's base name.
+					If the underlying file system is case-sensitive,
+					<literal>example</literal> will not work.
 				</para>
 			</warning>
 
-
 			<para>
-				This top-level PHP file must then contain a concrete class deriving from
-				the <classname>MantisPlugin</classname> class, which must be named in the
-				form of <classname>%Basename%Plugin</classname>, which for our purpose
-				becomes <classname>ExamplePlugin</classname>.
+				The PHP file (<literal>Example.php</literal> in our case)
+				must contain a concrete class deriving from the
+				<classname>MantisPlugin</classname> base class; its name must be
+				the plugin's basename with the <literal>Plugin</literal> suffix
+				appended to it.
+				For our purposes, the class' name will therefore be
+				<classname>ExamplePlugin</classname>.
 			</para>
 
 			<para>
@@ -754,7 +757,7 @@ print_header_redirect( plugin_page( 'config', true ) );
 			<title>Language and Localization</title>
 
 			<para>
-				MantisBT has a very advanced set of localization tools, which allow all parts of of
+				MantisBT has a very advanced set of localization tools, which allow all parts of
 				the application to be localized to the user's preferred language.  This feature has
 				been extended for use by plugins as well, so that a plugin can be localized in much
 				the same method as used for the core system.  Localizing a plugin involves creating
