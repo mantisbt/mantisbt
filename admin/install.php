@@ -757,11 +757,12 @@ if( !$g_database_upgrade ) {
 		echo "\t</td>\n\t<td>\n\t\t";
 		$t_required = $t_key == 'db_table_plugin_prefix' ? 'required' : '';
 		/** @noinspection HtmlUnknownAttribute */
-		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix reset" %2$s value="%3$s">',
+		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix reset" %2$s value="%3$s" data-defval="%4$s">',
 			$t_key,
 			$t_key == 'db_table_plugin_prefix' ? 'required' : '',
 			// The actual value of the corresponding form variable
-			string_html_specialchars( ${'f_' . $t_key} )
+			string_html_specialchars( ${'f_' . $t_key} ),
+			string_html_specialchars( $t_value )
 		);
 		echo "\n&nbsp;";
 		printf( '<button id="%s" type="button" class="btn btn-sm btn-primary btn-white btn-round reset">%s</button>',

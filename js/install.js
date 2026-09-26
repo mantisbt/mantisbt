@@ -75,12 +75,8 @@ var reset_buttons = $('button.reset').each( function () {
 });
 
 /**
- * Initialize all input's default values and disable the reset buttons
+ * Disable the reset buttons as needed based on current vs default values
  */
-$('input.table-prefix').each(function () {
-	var input = new PrefixInput(this.id);
-	input.setDefault(input.getValue());
-});
 var inputs = $('input.reset').each(function () {
 	var input = new PrefixInput(this.id);
 	if (input.isValueDefault()) {
