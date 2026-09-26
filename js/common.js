@@ -20,13 +20,18 @@
 
 /**
  * MantisBT config options.
- * Initialized in javascript_config.php
+ *
+ * This global variable is normally initialized in javascript_config.php, but
+ * in case that script did not run (which can happen at install time) we define
+ * it as an empty array to prevent errors from showing in the console.
+ *
  * @property {string} config.collapse_settings_cookie
  * @property {string} config.cookie_path
  * @property {string} config.cookie_domain
  * @property {string} config.cookie_samesite
  */
 /* global config */
+window.config = window.config || [];
 
 // global code to determine how to set visibility
 var a = navigator.userAgent.indexOf("MSIE");
