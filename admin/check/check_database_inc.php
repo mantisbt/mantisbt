@@ -163,19 +163,13 @@ check_print_info_row(
 	htmlentities( $t_database_username )
 );
 
-$t_database_password = config_get_global( 'db_password' );
-
 $t_database_name = config_get_global( 'database_name' );
 check_print_info_row(
 	'Database name',
 	htmlentities( $t_database_name )
 );
 
-try {
-	db_connect( $t_database_dsn, $t_database_hostname, $t_database_username, $t_database_password, $t_database_name );
-} catch( ClientException ) {
-	# Ignore DB Connection failure, it is handled below
-}
+# We already called db_connect() in index.php - just report the status here.
 check_print_test_row(
 	'Can open connection to database <em>' . htmlentities( $t_database_name )
 	. '</em> on host <em>' . htmlentities( $t_database_hostname )
