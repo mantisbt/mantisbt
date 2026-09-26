@@ -45,6 +45,10 @@ define( 'COMPRESSION_DISABLED', true );
 
 require_once( dirname( __DIR__, 2 ) . '/core.php' );
 
+/**
+ * @global $g_failed_test
+ * @global $g_passed_test_with_warnings
+ */
 require_once( 'check_api.php' );
 
 require_api( 'gpc_api.php' );
@@ -91,6 +95,7 @@ function mode_url( $p_all, $p_errors ) {
 	] );
 }
 
+/** @noinspection HtmlUnknownTarget */
 $t_link = '<a href="%s">%s %s</a>';
 $t_show_all_mode_link = sprintf( $t_link,
 	mode_url( !$g_show_all, $g_show_errors ),
@@ -238,7 +243,7 @@ if( !$g_failed_test ) {
 <div class="alert alert-danger" id="notice-delete-admin">
 	For security reasons, you should delete (or at least restrict access to) the
 	<em>admin</em> directory.
-	Refer to the <a href="http://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.install.postcommon">
+	Refer to the <a href="https://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.install.postcommon">
 		MantisBT Admin Guide</a>
 	for further details.
 </div>
