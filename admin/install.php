@@ -610,7 +610,7 @@ if( 1 == $t_install_state ) {
 		<h4 class="widget-title lighter">
 			<?php echo
 				( $g_database_upgrade ? 'Upgrade Options' : 'Installation Options' ),
-				( $g_failed ? ': Checks Failed ' : '' )
+				( $g_failed ? ': Checks Failed - fix problems and try again' : '' )
 			?>
 		</h4>
 </div>
@@ -646,7 +646,7 @@ if( !$g_database_upgrade ) {
 ?>
 		</div>
 
-		<select id="db_type" name="db_type" class="input-sm">
+		<select id="db_type" name="db_type">
 <?php
 			# Build selection list of available DB types
 			$t_db_list = array(
