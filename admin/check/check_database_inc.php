@@ -29,6 +29,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 if( !defined( 'CHECK_DATABASE_INC_ALLOW' ) ) {
 	return;
 }
@@ -57,7 +59,7 @@ if( isset( $ADODB_vers ) ) {
 
 	# Making sure we're not using the ADOdb extension (see #14552)
 	check_print_test_row(
-		'Checking use of the <a href="http://adodb.sourceforge.net/#extension">ADOdb extension</a>',
+		'Checking use of the <a href="https://web.archive.org/web/20130424074513/http://adodb.sourceforge.net/#extension">ADOdb extension</a>',
 		!extension_loaded( 'ADOdb' ),
 		'The ADOdb extension is not supported and must be disabled'
 	);
@@ -161,25 +163,23 @@ check_print_info_row(
 	htmlentities( $t_database_username )
 );
 
-$t_database_password = config_get_global( 'db_password' );
-
 $t_database_name = config_get_global( 'database_name' );
 check_print_info_row(
 	'Database name',
 	htmlentities( $t_database_name )
 );
 
-db_connect( $t_database_dsn, $t_database_hostname, $t_database_username, $t_database_password, $t_database_name );
+# We already called db_connect() in index.php - just report the status here.
 check_print_test_row(
 	'Can open connection to database <em>' . htmlentities( $t_database_name )
 	. '</em> on host <em>' . htmlentities( $t_database_hostname )
 	. '</em> with username <em>' . htmlentities( $t_database_username ) . '</em>',
 	db_is_connected()
 );
-
 if( !db_is_connected() ) {
 	return;
 }
+
 global $g_db;
 $t_database_server_info = $g_db->ServerInfo();
 $t_db_version = $t_database_server_info['version'];

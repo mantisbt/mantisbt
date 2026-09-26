@@ -31,6 +31,8 @@
  * @uses html_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 # Load the MantisDB core in maintenance mode. This mode will assume that
 # config_inc.php hasn't been specified. Thus the database will not be opened
 # and plugins will not be loaded.
@@ -43,12 +45,29 @@ define( 'COMPRESSION_DISABLED', true );
 
 require_once( dirname( __DIR__, 2 ) . '/core.php' );
 
+/**
+ * @global $g_failed_test
+ * @global $g_passed_test_with_warnings
+ */
 require_once( 'check_api.php' );
 
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'http_api.php' );
+
+# Try to establish database connection as core.php does
+try {
+	global $g_use_persistent_connections, $g_dsn, $g_hostname, $g_db_username, $g_db_password, $g_database_name;
+	db_connect( $g_dsn, $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_use_persistent_connections == ON );
+
+	# We're connected, so we can check that the user is allowed to run admin checks
+	access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
+} catch ( ClientException ) {
+	# DB Connection failed, impossible to check user access. We let the checks run
+	# despite not knowing who the user is, assuming they are the admin, trying
+	# to troubleshoot the system.
+}
 
 # Initialise a special error handler for use with check.php so that errors are
 # not treated as being fatal. Instead, integrate error handling inline with the
@@ -76,6 +95,7 @@ function mode_url( $p_all, $p_errors ) {
 	] );
 }
 
+/** @noinspection HtmlUnknownTarget */
 $t_link = '<a href="%s">%s %s</a>';
 $t_show_all_mode_link = sprintf( $t_link,
 	mode_url( !$g_show_all, $g_show_errors ),
@@ -223,7 +243,7 @@ if( !$g_failed_test ) {
 <div class="alert alert-danger" id="notice-delete-admin">
 	For security reasons, you should delete (or at least restrict access to) the
 	<em>admin</em> directory.
-	Refer to the <a href="http://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.install.postcommon">
+	Refer to the <a href="https://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.install.postcommon">
 		MantisBT Admin Guide</a>
 	for further details.
 </div>
