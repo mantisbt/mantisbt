@@ -52,6 +52,40 @@ class AttachmentStorageTest extends MantisCoreBase {
 	private $temp_dirs = array();
 
 	/**
+	 * @var int Saved configuration, restored during teardown.
+	 */
+	private static $depth;
+
+	/**
+	 * @var int Saved configuration, restored during teardown.
+	 */
+	private static $width;
+
+	/**
+	 * Saves the configuration the tests overwrite.
+	 *
+	 * @return void
+	 */
+	public static function setUpBeforeClass(): void {
+		parent::setUpBeforeClass();
+
+		self::$depth = config_get_global( 'file_upload_subdirectory_depth' );
+		self::$width = config_get_global( 'file_upload_subdirectory_width' );
+	}
+
+	/**
+	 * Restores the saved configuration.
+	 *
+	 * @return void
+	 */
+	public static function tearDownAfterClass(): void {
+		config_set_global( 'file_upload_subdirectory_depth', self::$depth );
+		config_set_global( 'file_upload_subdirectory_width', self::$width );
+
+		parent::tearDownAfterClass();
+	}
+
+	/**
 	 * Creates a project with its own attachment path, and an issue in it.
 	 *
 	 * @return void
@@ -64,6 +98,10 @@ class AttachmentStorageTest extends MantisCoreBase {
 		}
 
 		self::login();
+
+		# Default to the flat layout; cases that need subdirectories opt in.
+		config_set_global( 'file_upload_subdirectory_depth', 0 );
+		config_set_global( 'file_upload_subdirectory_width', 2 );
 
 		$this->project_id = project_create(
 			__CLASS__ . ' ' . rand( 1, 1000000 ),
@@ -94,14 +132,32 @@ class AttachmentStorageTest extends MantisCoreBase {
 			project_delete( $this->project_id );
 		}
 		foreach( $this->temp_dirs as $t_dir ) {
-			if( is_dir( $t_dir ) ) {
-				array_map( 'unlink', glob( $t_dir . '*' ) ?: array() );
-				rmdir( $t_dir );
-			}
+			$this->removeTree( $t_dir );
 		}
 		$this->temp_dirs = array();
 
 		parent::tearDown();
+	}
+
+	/**
+	 * Removes a directory and everything below it.
+	 *
+	 * @param string $p_dir Directory to remove.
+	 *
+	 * @return void
+	 */
+	private function removeTree( string $p_dir ): void {
+		if( !is_dir( $p_dir ) ) {
+			return;
+		}
+		foreach( glob( rtrim( $p_dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . '*' ) ?: array() as $t_entry ) {
+			if( is_dir( $t_entry ) ) {
+				$this->removeTree( $t_entry );
+			} else {
+				unlink( $t_entry );
+			}
+		}
+		rmdir( $p_dir );
 	}
 
 	/**
@@ -233,6 +289,65 @@ class AttachmentStorageTest extends MantisCoreBase {
 			$t_file,
 			'Attachment was orphaned on disk after the project path changed'
 		);
+	}
+
+	/**
+	 * With subdirectories enabled, uploads land under one and remain fully
+	 * usable: the folder column records the subdirectory, and reading and
+	 * deleting both follow it.
+	 *
+	 * @group FileApi
+	 * @return void
+	 */
+	public function testUploadUsesSubdirectoryWhenEnabled(): void {
+		config_set_global( 'file_upload_subdirectory_depth', 1 );
+		config_set_global( 'file_upload_subdirectory_width', 2 );
+
+		$t_row = $this->addAttachment();
+		$t_upload = project_get_field( $this->project_id, 'file_path' );
+		$t_expected = $t_upload . substr( $t_row['diskfile'], 0, 2 ) . DIRECTORY_SEPARATOR;
+
+		$this->assertSame( $t_expected, $t_row['folder'] );
+		$this->assertFileExists( $t_row['folder'] . $t_row['diskfile'] );
+		$this->assertFileDoesNotExist( $t_upload . $t_row['diskfile'] );
+
+		$t_content = file_get_content( (int)$t_row['id'] );
+		$this->assertIsArray( $t_content );
+		$this->assertSame( 'attachment payload', $t_content['content'] );
+
+		file_delete( (int)$t_row['id'] );
+		$this->assertFileDoesNotExist( $t_row['folder'] . $t_row['diskfile'] );
+	}
+
+	/**
+	 * Attachments written before subdirectories were enabled keep working,
+	 * because each one records where it actually is.
+	 *
+	 * @group FileApi
+	 * @return void
+	 */
+	public function testExistingFlatAttachmentsSurviveEnablingSubdirectories(): void {
+		config_set_global( 'file_upload_subdirectory_depth', 0 );
+		$t_flat = $this->addAttachment();
+		$t_flat_file = $t_flat['folder'] . $t_flat['diskfile'];
+
+		config_set_global( 'file_upload_subdirectory_depth', 1 );
+		config_set_global( 'file_upload_subdirectory_width', 2 );
+		$t_nested = $this->addAttachment();
+
+		# The two are stored differently and both resolve.
+		$this->assertNotSame( $t_flat['folder'], $t_nested['folder'] );
+		$this->assertFileExists( $t_flat_file );
+		$this->assertFileExists( $t_nested['folder'] . $t_nested['diskfile'] );
+
+		$t_content = file_get_content( (int)$t_flat['id'] );
+		$this->assertIsArray( $t_content, 'Pre-existing attachment became unreadable' );
+		$this->assertSame( 'attachment payload', $t_content['content'] );
+
+		bug_delete( $this->issue_id );
+		$this->issue_id = 0;
+		$this->assertFileDoesNotExist( $t_flat_file );
+		$this->assertFileDoesNotExist( $t_nested['folder'] . $t_nested['diskfile'] );
 	}
 
 	/**

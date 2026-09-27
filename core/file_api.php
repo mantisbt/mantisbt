@@ -867,6 +867,92 @@ function file_generate_unique_name( $p_filepath ) {
 }
 
 /**
+ * Builds the subdirectory an attachment is stored under, relative to the
+ * upload directory.
+ *
+ * Attachments are spread over subdirectories named after the leading
+ * characters of the disk file name, so that installations with very large
+ * numbers of attachments do not end up with a single enormous directory.
+ * Deriving the subdirectory from the name itself rather than from a separate
+ * hash keeps the mapping reversible: a file can be located from its name alone
+ * without consulting the database.
+ *
+ * Returns an empty string when subdirectories are disabled, or when the name
+ * is too short to satisfy the configured depth. Only the leading run of
+ * hexadecimal characters is used: names are normally 32 character hashes, but
+ * an installation may hold other formats, such as UUIDs imported from another
+ * tracker, and the separators in those must not end up in directory names.
+ *
+ * @param string $p_filename The disk file name.
+ *
+ * @return string The relative subdirectory, with a trailing directory
+ *                separator, or an empty string.
+ */
+function file_subdirectory_path( $p_filename ) {
+	$t_depth = (int)config_get_global( 'file_upload_subdirectory_depth' );
+	$t_width = (int)config_get_global( 'file_upload_subdirectory_width' );
+
+	if( $t_depth < 1 || $t_width < 1 ) {
+		return '';
+	}
+
+	if( !preg_match( '/^[0-9a-fA-F]+/', $p_filename, $t_matches ) ) {
+		return '';
+	}
+	$t_usable = $t_matches[0];
+
+	if( strlen( $t_usable ) < $t_depth * $t_width ) {
+		return '';
+	}
+
+	$t_path = '';
+	for( $i = 0; $i < $t_depth; $i++ ) {
+		$t_path .= substr( $t_usable, $i * $t_width, $t_width ) . DIRECTORY_SEPARATOR;
+	}
+
+	return $t_path;
+}
+
+/**
+ * Determines the directory an attachment should be written to, creating it if
+ * necessary.
+ *
+ * New subdirectories inherit the upload directory's permissions, so that a
+ * setup granting access to, say, a backup account keeps working below it.
+ *
+ * @param string $p_upload_path The project's upload path, with a trailing
+ *                              directory separator.
+ * @param string $p_filename    The disk file name.
+ *
+ * @return string The directory to write to, with a trailing directory separator.
+ *
+ * @throws ServiceException
+ */
+function file_ensure_upload_subdirectory( $p_upload_path, $p_filename ) {
+	$t_subdirectory = file_subdirectory_path( $p_filename );
+	if( $t_subdirectory === '' ) {
+		return $p_upload_path;
+	}
+
+	$t_path = $p_upload_path . $t_subdirectory;
+	if( !is_dir( $t_path ) ) {
+		$t_mode = @fileperms( $p_upload_path );
+		$t_mode = ( $t_mode === false ) ? 0700 : ( $t_mode & 0777 );
+
+		# Concurrent uploads race to create the same subdirectory, so a failure
+		# only matters if the directory still is not there afterwards.
+		if( !@mkdir( $t_path, $t_mode, true ) && !is_dir( $t_path ) ) {
+			throw new ServiceException(
+				"Unable to create upload directory '$t_path'",
+				ERROR_FILE_INVALID_UPLOAD_PATH
+			);
+		}
+	}
+
+	return $t_path;
+}
+
+/**
  * Validates that the given disk file name identifier is unique.
  *
  * Checking both in the DB tables (bug and project) and on disk.
@@ -1024,6 +1110,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	switch( $t_method ) {
 		case DISK:
 			file_ensure_valid_upload_path( $t_file_path );
+			$t_file_path = file_ensure_upload_subdirectory( $t_file_path, $t_unique_name );
 
 			$t_disk_file_name = $t_file_path . $t_unique_name;
 			if( !file_exists( $t_disk_file_name ) ) {
