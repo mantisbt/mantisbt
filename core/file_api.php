@@ -487,11 +487,35 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
  */
 function file_get_disk_path( array $p_file_row, $p_project_id ) {
 	$t_diskfile = $p_file_row['diskfile'];
+	$t_basename = basename( $t_diskfile );
 
 	if( !empty( $p_file_row['folder'] ) ) {
-		$t_path = $p_file_row['folder'] . basename( $t_diskfile );
+		$t_path = $p_file_row['folder'] . $t_basename;
 		if( file_exists( $t_path ) ) {
 			return $t_path;
+		}
+	}
+
+	# A reorganisation interrupted between moving a file and recording its new
+	# location leaves it in the subdirectory the configured layout calls for,
+	# while folder still names the old one. Look there before giving up, so
+	# that an interrupted run does not make attachments unreachable.
+	$t_subdirectory = file_subdirectory_path( $t_basename );
+	if( $t_subdirectory !== '' ) {
+		$t_upload_paths = array();
+		if( $p_project_id != ALL_PROJECTS ) {
+			$t_upload_paths[] = project_get_field( $p_project_id, 'file_path' );
+		}
+		$t_upload_paths[] = config_get_global( 'absolute_path_default_upload_folder' );
+
+		foreach( $t_upload_paths as $t_upload_path ) {
+			if( is_blank( $t_upload_path ) ) {
+				continue;
+			}
+			$t_path = file_path_combine( $t_upload_path, $t_subdirectory . $t_basename );
+			if( file_exists( $t_path ) ) {
+				return $t_path;
+			}
 		}
 	}
 

@@ -217,10 +217,26 @@ class AttachmentStorageTest extends MantisCoreBase {
 			)
 		);
 
-		$t_query = new \DbQuery(
-			'SELECT * FROM {bug_file} WHERE bug_id = :bug_id ORDER BY id DESC'
-		);
-		$t_query->bind( 'bug_id', $this->issue_id );
+		return $this->attachmentRow();
+	}
+
+	/**
+	 * Reads back an attachment row.
+	 *
+	 * @param int $p_file_id Attachment to read, or 0 for the most recent.
+	 *
+	 * @return array The {bug_file} row.
+	 */
+	private function attachmentRow( int $p_file_id = 0 ): array {
+		if( $p_file_id ) {
+			$t_query = new \DbQuery( 'SELECT * FROM {bug_file} WHERE id = :id' );
+			$t_query->bind( 'id', $p_file_id );
+		} else {
+			$t_query = new \DbQuery(
+				'SELECT * FROM {bug_file} WHERE bug_id = :bug_id ORDER BY id DESC'
+			);
+			$t_query->bind( 'bug_id', $this->issue_id );
+		}
 		$t_query->execute();
 
 		return $t_query->fetch();
@@ -348,6 +364,135 @@ class AttachmentStorageTest extends MantisCoreBase {
 		$this->issue_id = 0;
 		$this->assertFileDoesNotExist( $t_flat_file );
 		$this->assertFileDoesNotExist( $t_nested['folder'] . $t_nested['diskfile'] );
+	}
+
+	/**
+	 * Runs admin/reorganize_attachments.php against the current configuration.
+	 *
+	 * @param string ...$p_args Extra command line arguments.
+	 *
+	 * @return array{0:int,1:string} Exit status and combined output.
+	 */
+	private function runReorganize( string ...$p_args ): array {
+		# The layout the test set at runtime is not in config_inc.php, so hand
+		# it to the child process. core.php has to be loaded first: it pulls in
+		# config_defaults_inc.php, which would otherwise overwrite the values.
+		$t_root = dirname( __DIR__, 2 );
+		$t_script = sprintf(
+			'require %s; $g_file_upload_subdirectory_depth = %d;'
+				. ' $g_file_upload_subdirectory_width = %d; $argv = %s; require %s;',
+			var_export( $t_root . '/core.php', true ),
+			(int)config_get_global( 'file_upload_subdirectory_depth' ),
+			(int)config_get_global( 'file_upload_subdirectory_width' ),
+			var_export(
+				array_merge( array( 'reorganize_attachments.php' ), $p_args ),
+				true
+			),
+			var_export( $t_root . '/admin/reorganize_attachments.php', true )
+		);
+
+		$t_cmd = sprintf(
+			'%s -r %s 2>&1',
+			escapeshellarg( PHP_BINARY ),
+			escapeshellarg( $t_script )
+		);
+
+		exec( $t_cmd, $t_output, $t_status );
+
+		return array( $t_status, implode( "\n", $t_output ) );
+	}
+
+	/**
+	 * The migration moves existing flat attachments into subdirectories, and
+	 * back out again, keeping the folder column in step.
+	 *
+	 * @group FileApi
+	 * @return void
+	 */
+	public function testReorganizeMovesAttachmentsBothWays(): void {
+		config_set_global( 'file_upload_subdirectory_depth', 0 );
+		$t_row = $this->addAttachment();
+		$t_upload = project_get_field( $this->project_id, 'file_path' );
+		$this->assertFileExists( $t_upload . $t_row['diskfile'] );
+
+		# Flat -> nested.
+		config_set_global( 'file_upload_subdirectory_depth', 1 );
+		config_set_global( 'file_upload_subdirectory_width', 2 );
+		list( $t_status, $t_output ) = $this->runReorganize();
+		$this->assertSame( 0, $t_status, $t_output );
+
+		$t_nested_dir = $t_upload . substr( $t_row['diskfile'], 0, 2 ) . DIRECTORY_SEPARATOR;
+		$this->assertFileExists( $t_nested_dir . $t_row['diskfile'] );
+		$this->assertFileDoesNotExist( $t_upload . $t_row['diskfile'] );
+		$this->assertSame( $t_nested_dir, $this->attachmentRow( (int)$t_row['id'] )['folder'] );
+
+		# Re-running is a no-op.
+		list( $t_status, $t_output ) = $this->runReorganize();
+		$this->assertSame( 0, $t_status, $t_output );
+		$this->assertStringContainsString( 'moved 0', $t_output );
+		$this->assertFileExists( $t_nested_dir . $t_row['diskfile'] );
+
+		# Nested -> flat.
+		config_set_global( 'file_upload_subdirectory_depth', 0 );
+		list( $t_status, $t_output ) = $this->runReorganize();
+		$this->assertSame( 0, $t_status, $t_output );
+
+		$this->assertFileExists( $t_upload . $t_row['diskfile'] );
+		$this->assertFileDoesNotExist( $t_nested_dir . $t_row['diskfile'] );
+		$this->assertSame( $t_upload, $this->attachmentRow( (int)$t_row['id'] )['folder'] );
+	}
+
+	/**
+	 * A dry run reports what it would do without touching anything.
+	 *
+	 * @group FileApi
+	 * @return void
+	 */
+	public function testReorganizeDryRunChangesNothing(): void {
+		config_set_global( 'file_upload_subdirectory_depth', 0 );
+		$t_row = $this->addAttachment();
+		$t_upload = project_get_field( $this->project_id, 'file_path' );
+
+		config_set_global( 'file_upload_subdirectory_depth', 1 );
+		config_set_global( 'file_upload_subdirectory_width', 2 );
+		list( $t_status, $t_output ) = $this->runReorganize( '--dry-run' );
+
+		$this->assertSame( 0, $t_status, $t_output );
+		$this->assertStringContainsString( 'would move', $t_output );
+		$this->assertFileExists( $t_upload . $t_row['diskfile'] );
+		$this->assertSame( $t_upload, $this->attachmentRow( (int)$t_row['id'] )['folder'] );
+	}
+
+	/**
+	 * A run interrupted between moving a file and recording its new location
+	 * is recoverable: the attachment still resolves, and a second run repairs
+	 * the folder column.
+	 *
+	 * @group FileApi
+	 * @return void
+	 */
+	public function testReorganizeRecoversFromInterruption(): void {
+		config_set_global( 'file_upload_subdirectory_depth', 0 );
+		$t_row = $this->addAttachment();
+		$t_upload = project_get_field( $this->project_id, 'file_path' );
+
+		# Simulate a crash after rename() but before the UPDATE: the file is
+		# in its new home while the database still points at the old one.
+		config_set_global( 'file_upload_subdirectory_depth', 1 );
+		config_set_global( 'file_upload_subdirectory_width', 2 );
+		$t_nested_dir = $t_upload . substr( $t_row['diskfile'], 0, 2 ) . DIRECTORY_SEPARATOR;
+		mkdir( $t_nested_dir, 0777, true );
+		rename( $t_upload . $t_row['diskfile'], $t_nested_dir . $t_row['diskfile'] );
+
+		# The attachment is still readable despite the stale folder value.
+		$t_content = file_get_content( (int)$t_row['id'] );
+		$this->assertIsArray( $t_content, 'Attachment unreadable after interruption' );
+
+		list( $t_status, $t_output ) = $this->runReorganize();
+		$this->assertSame( 0, $t_status, $t_output );
+
+		$this->assertSame( $t_nested_dir, $this->attachmentRow( (int)$t_row['id'] )['folder'] );
+		$this->assertFileExists( $t_nested_dir . $t_row['diskfile'] );
 	}
 
 	/**
