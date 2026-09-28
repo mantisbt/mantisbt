@@ -45,4 +45,4 @@
  */
 
 $s_plugin_Gravatar_title = 'Avatars via Gravatar';
-$s_plugin_Gravatar_description = 'Een plugin die gebruikers hun avatars laat zien gebaseerd op hun e-mailadres bij de avatar dienst.';
+$s_plugin_Gravatar_description = 'Een plug-in die gebruikers hun profielafbeelding laat zien gebaseerd op hun e-mailadres bij de profielafbeeldingendienst.';
