@@ -52,7 +52,7 @@ jobs:
       - name: Install Publican toolchain
         run: |
           sudo apt-get update
-          sudo apt-get install publican xsltproc
+          sudo apt-get install --no-install-recommends publican xsltproc
 
       - name: Install OpenAPI toolchain
         run: npm ci
