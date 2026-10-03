@@ -469,6 +469,36 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 }
 
 /**
+ * Determines the full path to an attachment held on disk.
+ *
+ * The `folder` column records where the file was actually written, which is
+ * not necessarily where the current configuration would put it: a project's
+ * file path can be changed at any time and existing attachments are not moved.
+ * When `folder` is set and the file is there, it wins; otherwise we fall back
+ * to deriving the path from configuration, which also covers rows predating
+ * the `folder` column and files that have been relocated by hand.
+ *
+ * @param array $p_file_row    A {bug_file} or {project_file} row. The
+ *                             `diskfile` column is required, `folder` is used
+ *                             when present.
+ * @param int   $p_project_id  The project the attachment belongs to.
+ *
+ * @return string The full path to the attachment.
+ */
+function file_get_disk_path( array $p_file_row, $p_project_id ) {
+	$t_diskfile = $p_file_row['diskfile'];
+
+	if( !empty( $p_file_row['folder'] ) ) {
+		$t_path = $p_file_row['folder'] . basename( $t_diskfile );
+		if( file_exists( $t_path ) ) {
+			return $t_path;
+		}
+	}
+
+	return file_normalize_attachment_path( $t_diskfile, $p_project_id );
+}
+
+/**
  * Gets an array of attachments that are visible to the currently logged in user.
  *
  * Each element of the array contains the following:
@@ -514,7 +544,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_id = (int)$t_row['id'];
 		$t_filename = $t_row['filename'];
 		$t_filesize = (int)$t_row['filesize'];
-		$t_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
+		$t_diskfile = file_get_disk_path( $t_row, bug_get_field( $p_bug_id, 'project_id' ) );
 		$t_date_added = $t_row['date_added'];
 
 		$t_attachment = array();
@@ -580,7 +610,7 @@ function file_delete_attachments( $p_bug_id ) {
 
 	# Delete files from disk
 	db_param_push();
-	$t_query = 'SELECT diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param();
+	$t_query = 'SELECT folder, diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_bug_id ) );
 
 	$t_file_count = db_num_rows( $t_result );
@@ -592,7 +622,7 @@ function file_delete_attachments( $p_bug_id ) {
 		for( $i = 0; $i < $t_file_count; $i++ ) {
 			$t_row = db_fetch_array( $t_result );
 
-			$t_local_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
+			$t_local_diskfile = file_get_disk_path( $t_row, bug_get_field( $p_bug_id, 'project_id' ) );
 			file_delete_local( $t_local_diskfile );
 		}
 	}
@@ -657,7 +687,7 @@ function file_delete_project_files( $p_project_id ) {
 	if( DISK == $t_method ) {
 		# Delete files from disk
 		db_param_push();
-		$t_query = 'SELECT diskfile, filename FROM {project_file} WHERE project_id=' . db_param();
+		$t_query = 'SELECT folder, diskfile, filename FROM {project_file} WHERE project_id=' . db_param();
 		$t_result = db_query( $t_query, array( (int)$p_project_id ) );
 
 		$t_file_count = db_num_rows( $t_result );
@@ -665,7 +695,7 @@ function file_delete_project_files( $p_project_id ) {
 		for( $i = 0;$i < $t_file_count;$i++ ) {
 			$t_row = db_fetch_array( $t_result );
 
-			$t_local_diskfile = file_normalize_attachment_path( $t_row['diskfile'], $p_project_id );
+			$t_local_diskfile = file_get_disk_path( $t_row, $p_project_id );
 			file_delete_local( $t_local_diskfile );
 		}
 	}
@@ -734,6 +764,7 @@ function file_delete( $p_file_id, $p_table = 'bug', $p_bugnote_id = 0 ) {
 	$c_file_id = (int)$p_file_id;
 	$t_filename = file_get_field( $p_file_id, 'filename', $p_table );
 	$t_diskfile = file_get_field( $p_file_id, 'diskfile', $p_table );
+	$t_folder = file_get_field( $p_file_id, 'folder', $p_table );
 
 	if( $p_table == 'bug' ) {
 		$t_bug_id = file_get_field( $p_file_id, 'bug_id', $p_table );
@@ -743,7 +774,10 @@ function file_delete( $p_file_id, $p_table = 'bug', $p_bugnote_id = 0 ) {
 	}
 
 	if( DISK == $t_upload_method ) {
-		$t_local_disk_file = file_normalize_attachment_path( $t_diskfile, $t_project_id );
+		$t_local_disk_file = file_get_disk_path(
+			array( 'folder' => $t_folder, 'diskfile' => $t_diskfile ),
+			$t_project_id
+		);
 		if( file_exists( $t_local_disk_file ) ) {
 			file_delete_local( $t_local_disk_file );
 		}
@@ -1351,7 +1385,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 
 	switch( config_get( 'file_upload_method' ) ) {
 		case DISK:
-			$t_local_disk_file = file_normalize_attachment_path( $t_row['diskfile'], $t_project_id );
+			$t_local_disk_file = file_get_disk_path( $t_row, $t_project_id );
 
 			if( file_exists( $t_local_disk_file ) ) {
 				$t_file_info_type = file_get_mime_type( $t_local_disk_file );
@@ -1488,7 +1522,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 		# prepare the new diskfile name and then copy the file
 		$t_source_file = $t_bug_file['folder'] . $t_bug_file['diskfile'];
 		if( ( config_get( 'file_upload_method' ) == DISK ) ) {
-			$t_source_file = file_normalize_attachment_path( $t_source_file, $t_project_id );
+			$t_source_file = file_get_disk_path( $t_bug_file, $t_project_id );
 			$t_file_path = dirname( $t_source_file ) . DIRECTORY_SEPARATOR;
 		} else {
 			$t_file_path = $t_bug_file['folder'];
