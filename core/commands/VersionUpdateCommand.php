@@ -162,7 +162,6 @@ class VersionUpdateCommand extends Command {
 
 		event_signal( 'EVENT_MANAGE_VERSION_UPDATE', array( $this->version_id ) );
 
-		version_cache_clear_row( $this->version_id );
 		$t_version = version_get( $this->version_id );
 		$t_result = array( 'version' => VersionGetCommand::VersionToArray( $t_version ) );
 

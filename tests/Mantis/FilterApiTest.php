@@ -76,6 +76,8 @@ class FilterApiTest extends MantisCoreBase {
 		foreach( $this->filterIdsToDelete as $t_filter_id ) {
 			filter_db_delete_filter( $t_filter_id );
 		}
+
+		parent::tearDown();
 	}
 
 	/**
@@ -232,6 +234,52 @@ class FilterApiTest extends MantisCoreBase {
 			'Private filter should be deleted' );
 		$this->assertArrayNotHasKey( $t_shared_id, $t_filters,
 			'Shared filter should be deleted when $p_delete_shared is true' );
+
+		user_delete( $t_user_id );
+	}
+
+	/**
+	 * Test that creating, updating, and deleting a current filter clears both
+	 * the row cache and the per-project current filter cache.
+	 *
+	 * @return void
+	 */
+	public function testCurrentFilterCacheInvalidation() {
+		$t_user_id = $this->createTestUser();
+
+		filter_clear_cache();
+
+		$t_before_queries = db_count_queries();
+		$this->assertNull( filter_db_get_project_current( self::$projectId, $t_user_id ) );
+		$this->assertGreaterThan( $t_before_queries, db_count_queries(), 'Initial current filter lookup should hit the database.' );
+
+		$t_first_filter = filter_create_any();
+		$t_filter_id = filter_set_project_filter( $t_first_filter, self::$projectId, $t_user_id );
+
+		$t_after_create_queries = db_count_queries();
+		$this->assertSame( $t_filter_id, filter_db_get_project_current( self::$projectId, $t_user_id ) );
+		$this->assertGreaterThan( $t_after_create_queries, db_count_queries(), 'Creating a current filter should invalidate the current filter cache.' );
+
+		$t_first_filter_row = filter_get_row( $t_filter_id );
+		$this->assertSame( filter_serialize( $t_first_filter ), $t_first_filter_row['filter_string'] );
+
+		$t_second_filter = filter_create_assigned_to_unresolved( self::$projectId, $t_user_id );
+		$t_updated_filter_id = filter_set_project_filter( $t_second_filter, self::$projectId, $t_user_id );
+
+		$t_after_update_queries = db_count_queries();
+		$this->assertSame( $t_filter_id, $t_updated_filter_id );
+		$this->assertSame( filter_serialize( $t_second_filter ), filter_get_row( $t_filter_id )['filter_string'] );
+		$this->assertGreaterThan( $t_after_update_queries, db_count_queries(), 'Updating a current filter should invalidate the cached filter row.' );
+
+		filter_db_delete_user_filters( $t_user_id );
+
+		$t_after_delete_queries = db_count_queries();
+		$this->assertNull( filter_db_get_project_current( self::$projectId, $t_user_id ) );
+		$this->assertGreaterThan( $t_after_delete_queries, db_count_queries(), 'Deleting a current filter should invalidate the current filter cache.' );
+
+		$t_after_current_lookup_queries = db_count_queries();
+		$this->assertFalse( filter_get_row( $t_filter_id ) );
+		$this->assertGreaterThan( $t_after_current_lookup_queries, db_count_queries(), 'Deleting a current filter should invalidate the cached filter row.' );
 
 		user_delete( $t_user_id );
 	}
