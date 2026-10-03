@@ -1,0 +1,68 @@
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "${CADDY_HTTP_PORT:-80}:80"
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./:/srv:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - php
+      - mailpit
+
+  php:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./:/srv
+      - ./docker/config_inc.php:/srv/config/config_inc.php:ro
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/zz-mantis.ini:ro
+    environment:
+      MANTIS_DB_HOST: mysql
+      MANTIS_DB_NAME: ${MYSQL_DATABASE:-bugtracker}
+      MANTIS_DB_USER: ${MYSQL_USER:-mantis}
+      MANTIS_DB_PASSWORD: ${MYSQL_PASSWORD:-mantis}
+      MANTIS_SMTP_HOST: mailpit
+      MANTIS_SMTP_PORT: "1025"
+      MANTIS_CRYPTO_SALT: ${MANTIS_CRYPTO_SALT:-dev-only-change-me-1234567890abcdef}
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    command: --default-authentication-plugin=caching_sha2_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-bugtracker}
+      MYSQL_USER: ${MYSQL_USER:-mantis}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mantis}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"
+
+volumes:
+  mysql_data:
+  caddy_data:
+  caddy_config:
