@@ -116,6 +116,8 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	switch( $t_method ) {
 		case DISK:
 			file_ensure_valid_upload_path( $t_file_path );
+			$t_file_path = file_ensure_upload_subdirectory( $t_file_path, $t_unique_name );
+			$t_disk_file_name = $t_file_path . $t_unique_name;
 
 			if( !file_exists( $t_disk_file_name ) ) {
 				mci_file_write_local( $t_disk_file_name, $p_content );
@@ -222,7 +224,7 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 		$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 	}
 
-	$t_diskfile = file_normalize_attachment_path( $t_row['diskfile'], $t_project_id );
+	$t_diskfile = file_get_disk_path( $t_row, $t_project_id );
 	$t_content = $t_row['content'];
 
 	# Check access rights
