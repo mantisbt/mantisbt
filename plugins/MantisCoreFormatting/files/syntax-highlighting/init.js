@@ -7,14 +7,15 @@
 		.split(',')
 		.filter((plugin) => plugin !== '')
 		.map((plugin) => plugin.trim());
-	const cdn = script.getAttribute('data-cdn');
+	const cdn = parseInt(script.getAttribute('data-cdn')) === 1;
+	const version = script.getAttribute('data-version');
 	const theme = script.getAttribute('data-theme');
 	const i18n = JSON.parse(
 		script.getAttribute('data-i18n')
 	) ?? {};
 	const head = document.getElementsByTagName('head')[0];
-	const resourceUrl = 1 === parseInt(cdn)
-		? 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0'
+	const resourceUrl = cdn
+		? 'https://cdnjs.cloudflare.com/ajax/libs/prism/' + version
 		: document.currentScript.src.replace('/init.js', '')
 	;
 

@@ -25,6 +25,14 @@ require_once( 'core/MantisMarkdown.php' );
  * Mantis Core Formatting plugin
  */
 class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
+
+	/**
+	 * PrismJS
+	 * @see https://prismjs.com/ Home page
+	 * @see https://cdnjs.com/libraries/prism/ CDN
+	 */
+	const PRISMJS_VERSION = '1.30.0';
+
 	/**
 	 * A method that populates the plugin information and minimum requirements.
 	 * @return void
@@ -69,6 +77,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 				$t_plugins = plugin_config_get( 'syntax_highlighting_plugins' );
 				echo '<script
 					id="mantis-core-formatting-syntax-highlighting-init"
+					data-version="' . self::PRISMJS_VERSION . '"
 					data-cdn="' . config_get( 'cdn_enabled' ) . '"
 					data-theme="' . plugin_config_get( 'syntax_highlighting_theme' ) . '"
 					data-plugins="' . implode( ',', array_map(
