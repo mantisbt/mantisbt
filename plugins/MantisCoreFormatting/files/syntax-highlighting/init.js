@@ -14,7 +14,7 @@
 	) ?? {};
 	const head = document.getElementsByTagName('head')[0];
 	const resourceUrl = 1 === parseInt(cdn)
-		? 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0'
+		? 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0'
 		: document.currentScript.src.replace('/init.js', '')
 	;
 
