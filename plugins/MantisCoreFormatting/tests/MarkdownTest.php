@@ -165,7 +165,7 @@ class MarkdownTest extends TestCase {
 	/**
 	 * Inline code is replaced by its hash value.
 	 */
-	public function testInlineCodeIsReplacedByIsHashValue(): void {
+	public function testInlineCodeIsReplacedByItsHashValue(): void {
 		$t_code = 'const foo = "bar"';
 		$t_hash = $this->parser->hash( $t_code );
 		$t_markdown = 'lorem `' . $t_code . '` ipsum';
