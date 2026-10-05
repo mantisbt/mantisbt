@@ -19,7 +19,8 @@ namespace Mantis\plugins\MantisCoreFormatting\tests;
 use Generator;
 use MantisMarkdown;
 use PHPUnit\Framework\TestCase;
-use TypeError;
+use function config_get;
+use function config_set;
 
 require_once( dirname( __DIR__, 3 ) . '/tests/TestConfig.php' );
 
@@ -40,8 +41,28 @@ class MarkdownTest extends TestCase {
 
 	private ?MantisMarkdown $parser = null;
 
+	private static int $configHtmlMakeLinks = 0;
+
 	protected function setUp(): void {
 		$this->parser = new MantisMarkdown( ON, ON );
+	}
+
+	/**
+	 * Store config "html_make_links" and set it to a fixed value to test link
+	 * processing regardless of the configured attributes.
+	 *
+	 * @see testProcessUrls
+	 */
+	static function setUpBeforeClass(): void {
+		self::$configHtmlMakeLinks = config_get( 'html_make_links' );
+		config_set( 'html_make_links', 0 );
+	}
+
+	/**
+	 * Restore config "html_make_links"
+	 */
+	static function tearDownAfterClass(): void {
+		config_set( 'html_make_links', self::$configHtmlMakeLinks );
 	}
 
 	/**
@@ -128,27 +149,17 @@ class MarkdownTest extends TestCase {
 	/**
 	 * The configuration of `process_urls` should only affect "unmarked" URLs.
 	 *
-	 * This tests for the presence of the string `<a href=…` to avoid conflicts
-	 * with the attributes of the link.
-	 *
 	 * URLs noted within Markdown tags, should always be converted to links.
 	 *
 	 * - "<https://example.com>" - always converted to a link.
 	 * - "[Text](https://example.com)" - always converted to a link.
 	 * - "https://example.com" - only converted to a link if "process_urls = ON".
 	 *
-	 * @todo take care of input of HTML links.
-	 *
 	 * @dataProvider provideUrls
 	 */
-	public function testProcessUrls( string $p_sample, int $p_config, string $p_needle, bool $p_contains ): void {
+	public function testProcessUrls( string $p_sample, int $p_config, string $p_expected ): void {
 		$t_parser = new MantisMarkdown( $p_config );
-
-		if( $p_contains ) {
-			$this->assertStringContainsString( $p_needle, $t_parser->text( $p_sample ) );
-		} else {
-			$this->assertStringNotContainsString( $p_needle, $t_parser->text( $p_sample ) );
-		}
+		$this->assertSame( $p_expected, $t_parser->line( $p_sample ) );
 	}
 
 	/**
@@ -368,85 +379,85 @@ EOD;
 		yield 'process_urls = ON; lorem <https://exmaple.com> ipsum' => [
 			'lorem <https://exmaple.com> ipsum',
 			ON,
-			'<a href="https://exmaple.com"',
-			true
+			'lorem <a href="https://exmaple.com">https://exmaple.com</a> ipsum',
 		];
 
 		yield 'process_urls = ON; <https://exmaple.com>' => [
 			'<https://exmaple.com>',
 			ON,
-			'<a href="https://exmaple.com"',
-			true
+			'<a href="https://exmaple.com">https://exmaple.com</a>',
 		];
 
 		yield 'process_urls = OFF; lorem <https://exmaple.com> ipsum' => [
 			'lorem <https://exmaple.com> ipsum',
 			OFF,
-			'<a href="https://exmaple.com"',
-			true
+			'lorem <a href="https://exmaple.com">https://exmaple.com</a> ipsum',
 		];
 
 		yield 'process_urls = OFF; <https://exmaple.com>' => [
 			'<https://exmaple.com>',
 			OFF,
-			'<a href="https://exmaple.com"',
-			true
+			'<a href="https://exmaple.com">https://exmaple.com</a>',
 		];
 
 		yield 'process_urls = ON; lorem [link](https://exmaple.com) ipsum' => [
 			'lorem [link](https://exmaple.com) ipsum',
 			ON,
-			'<a href="https://exmaple.com"',
-			true
+			'lorem <a href="https://exmaple.com">link</a> ipsum',
 		];
 
 		yield 'process_urls = ON; [link](https://exmaple.com)' => [
 			'[link](https://exmaple.com)',
 			ON,
-			'<a href="https://exmaple.com"',
-			true
+			'<a href="https://exmaple.com">link</a>',
 		];
 
 		yield 'process_urls = OFF; lorem [link](https://exmaple.com) ipsum' => [
 			'lorem [link](https://exmaple.com) ipsum',
 			OFF,
-			'<a href="https://exmaple.com"',
-			true
+			'lorem <a href="https://exmaple.com">link</a> ipsum',
 		];
 
 		yield 'process_urls = OFF; [link](https://exmaple.com)' => [
 			'[link](https://exmaple.com)',
 			OFF,
-			'<a href="https://exmaple.com"',
-			true
+			'<a href="https://exmaple.com">link</a>',
 		];
 
 		yield 'process_urls = ON; lorem https://exmaple.com ipsum' => [
 			'lorem https://exmaple.com ipsum',
 			ON,
-			'<a href="https://exmaple.com"',
-			true
+			'lorem <a href="https://exmaple.com">https://exmaple.com</a> ipsum',
 		];
 
 		yield 'process_urls = ON; https://exmaple.com' => [
 			'https://exmaple.com',
 			ON,
-			'<a href="https://exmaple.com"',
-			true
+			'<a href="https://exmaple.com">https://exmaple.com</a>',
 		];
 
 		yield 'process_urls = OFF; lorem https://exmaple.com ipsum' => [
 			'lorem https://exmaple.com ipsum',
 			OFF,
-			'<a href="https://exmaple.com"',
-			false
+			'lorem https://exmaple.com ipsum',
 		];
 
 		yield 'process_urls = OFF; https://exmaple.com' => [
 			'https://exmaple.com',
 			OFF,
-			'<a href="https://exmaple.com"',
-			false
+			'https://exmaple.com'
+		];
+
+		yield 'process_urls = ON; Markup <a href="https://example.com">link</a>' => [
+			'<a href="https://example.com">link</a>',
+			ON,
+			'&lt;a href=&quot;<a href="https://example.com">https://example.com</a>&quot;&gt;link&lt;/a&gt;',
+		];
+
+		yield 'process_urls = OFF; Markup <a href="https://example.com">link</a>' => [
+			'<a href="https://example.com">link</a>',
+			OFF,
+			'&lt;a href=&quot;https://example.com&quot;&gt;link&lt;/a&gt;',
 		];
 	}
 }
