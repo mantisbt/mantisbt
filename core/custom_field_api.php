@@ -181,7 +181,7 @@ function custom_field_cache_array_rows( array $p_cf_id_array = [] ): void {
 		db_param_push();
 		$t_params = array();
 		$t_in_clause_dbparams = array();
-		foreach( $c_cf_id_array as $t_id) {
+		foreach( $c_cf_id_array as $t_id ) {
 			$t_in_clause_dbparams[] = db_param();
 			$t_params[] = $t_id;
 		}
@@ -193,7 +193,7 @@ function custom_field_cache_array_rows( array $p_cf_id_array = [] ): void {
 	$t_ids_not_found = $c_cf_id_array;
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_id = (int)$t_row['id'];
-		$c_name = mb_strtolower($t_row['name']);
+		$c_name = mb_strtolower( $t_row['name'] );
 		$g_cache_custom_field[$c_id] = $t_row;
 		$g_cache_name_to_id_map[$c_name] = $c_id;
 		$g_cache_custom_field[$c_id]['linked_projects'] = array();
@@ -215,7 +215,7 @@ function custom_field_cache_array_rows( array $p_cf_id_array = [] ): void {
 	}
 
 	# set the remaining ids as not found
-	foreach( $t_ids_not_found as $t_id) {
+	foreach( $t_ids_not_found as $t_id ) {
 		$g_cache_custom_field[$t_id] = false;
 	}
 }
@@ -459,7 +459,7 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 	if( $p_custom_field_id !== null ) {
 		$t_query .= ' AND (id <> ' . db_param() . ')';
 	}
-	$t_result = db_query( $t_query, ( ($p_custom_field_id !== null) ? array( $p_name, $p_custom_field_id ) : array( $p_name ) ) );
+	$t_result = db_query( $t_query, ( ( $p_custom_field_id !== null ) ? array( $p_name, $p_custom_field_id ) : array( $p_name ) ) );
 	$t_count = db_result( $t_result );
 
 	if( $t_count > 0 ) {
@@ -636,7 +636,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	 * @var int        $v_length_min
 	 * @var int        $v_length_max
 	 */
-	extract( $p_def_array, EXTR_PREFIX_ALL, 'v');
+	extract( $p_def_array, EXTR_PREFIX_ALL, 'v' );
 
 	if( is_blank( $v_name ) ) {
 		throw new ClientException( "Custom field name cannot be empty",
@@ -699,7 +699,6 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 		throw new ClientException( "Custom field name not unique", ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE );
 	}
 
-
 	# Validate default date format
 	if( $v_type == CUSTOM_FIELD_TYPE_DATE && $v_default_value && !is_numeric( $v_default_value ) ) {
 		# Allow legacy "{xxx}" format for dynamic dates
@@ -745,7 +744,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 			case 'access_level_rw':
 			case 'length_min':
 			case 'length_max':
-				$t_update .= $t_field  . '=' . db_param() . ', ';
+				$t_update .= $t_field . '=' . db_param() . ', ';
 				$t_params[] = (int)$t_value;
 				break;
 			case 'filter_by':
@@ -852,7 +851,7 @@ function custom_field_destroy( $p_field_id ) {
 
 	# delete the definition
 	db_param_push();
-	$t_query = 'DELETE FROM {custom_field} WHERE id=' .  db_param();
+	$t_query = 'DELETE FROM {custom_field} WHERE id=' . db_param();
 	db_query( $t_query, array( $p_field_id ) );
 
 	custom_field_clear_cache( $p_field_id );
@@ -915,13 +914,13 @@ function custom_field_get_id_from_name( $p_field_name ) {
 		return false;
 	}
 
-	$p_field_name = mb_strtolower($p_field_name);
+	$p_field_name = mb_strtolower( $p_field_name );
 	if( !isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
 		# Build cache of lowercase custom fields names to id
 		if( !$g_cache_name_to_id_map ) {
 			$t_query = new DbQuery( "SELECT id, name FROM {custom_field}" );
 			foreach( $t_query->fetch_all() as $t_row ) {
-				$t_name = mb_strtolower($t_row['name']);
+				$t_name = mb_strtolower( $t_row['name'] );
 				$g_cache_name_to_id_map[$t_name] = $t_row['id'];
 			}
 		}
@@ -970,7 +969,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 		}
 	}
 
-	if( !empty( $t_uncached_projects) ) {
+	if( !empty( $t_uncached_projects ) ) {
 		db_param_push();
 		$t_params = array();
 		$t_project_clause = 'IN (';
@@ -1197,7 +1196,7 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 					ON s.field_id = p.field_id AND s.bug_id = ' . db_param() . '
 			WHERE p.project_id = ' . db_param() . '
 			ORDER BY p.sequence ASC, f.name ASC';
-		$t_result = db_query( $t_query, array( $p_bug_id, $c_project_id) );
+		$t_result = db_query( $t_query, array( $p_bug_id, $c_project_id ) );
 
 		$t_custom_fields = array();
 
@@ -1685,7 +1684,7 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
  * @return string The CSS identifier
  */
 function custom_field_css_name( $p_custom_field_name ) {
-    return 'custom-' . preg_replace( '/[^a-zA-Z0-9_-]+/', '-', $p_custom_field_name );
+	return 'custom-' . preg_replace( '/[^a-zA-Z0-9_-]+/', '-', $p_custom_field_name );
 }
 
 /**

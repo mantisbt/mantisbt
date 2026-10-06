@@ -87,7 +87,7 @@ if( lang_language_exists( $f_lang ) ) {
 }
 
 $f_font = gpc_get_string( 'font_family' );
-if( !in_array( $f_font, helper_get_font_list())) {
+if( !in_array( $f_font, helper_get_font_list() ) ) {
 	# This should not happen unless the form submission was tempered with
 	throw new ClientException( "Invalid font", ERROR_INVALID_FIELD_VALUE, ['font_family'] );
 }
@@ -126,7 +126,7 @@ if( config_get( $t_email_full_config_option, /* default */ null, $f_user_id, ALL
 
 # make sure the delay isn't too low
 if( ( config_get( 'min_refresh_delay' ) > $t_prefs->refresh_delay )&&
-	( $t_prefs->refresh_delay != 0 )) {
+	( $t_prefs->refresh_delay != 0 ) ) {
 	$t_prefs->refresh_delay = config_get( 'min_refresh_delay' );
 }
 

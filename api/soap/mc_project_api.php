@@ -700,7 +700,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 		# Produce an error if the field is required but wasn't posted
 		if( $t_def['require_report'] ) {
 			if( !isset( $t_custom_field_values[$t_name] ) ||
-			    is_blank( $t_custom_field_values[$t_name] ) ) {
+				is_blank( $t_custom_field_values[$t_name] ) ) {
 				throw new ClientException(
 					"Mandatory field '$t_name' is missing.",
 					ERROR_EMPTY_FIELD,
@@ -710,7 +710,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 		}
 
 		if( isset( $t_custom_field_values[$t_name] ) &&
-		    !custom_field_validate( $t_custom_field_id, $t_custom_field_values[$t_name] ) ) {
+			!custom_field_validate( $t_custom_field_id, $t_custom_field_values[$t_name] ) ) {
 			throw new ClientException(
 				"Invalid custom field '$t_name' value.",
 				ERROR_CUSTOM_FIELD_INVALID_VALUE,
@@ -1035,7 +1035,6 @@ function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name 
 
 	return project_get_id_by_name( $p_project_name );
 }
-
 
 ### MantisConnect Administrative Webservices ###
 

@@ -135,7 +135,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 			);
 		}
 	}
-	
+
 	# If no Bind DN and Password is set, attempt to login as the configured
 	# Bind DN.
 	if( is_blank( $p_binddn ) && is_blank( $p_password ) ) {
@@ -238,7 +238,7 @@ function ldap_escape_string( $p_string ) {
 	$t_find = array( '\\', '*', '(', ')', '/', "\x00" );
 	$t_replace = array( '\5c', '\2a', '\28', '\29', '\2f', '\00' );
 
-    return str_replace( $t_find, $t_replace, $p_string );
+	return str_replace( $t_find, $t_replace, $p_string );
 }
 
 /**
@@ -461,12 +461,12 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 	# from LDAP.  This will allow us to use the local data after login without
 	# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
 	if( $t_authenticated ) {
-        /** @noinspection PhpUnhandledExceptionInspection */
-        $t_user_id = user_get_id_by_name( $p_username );
+		/** @noinspection PhpUnhandledExceptionInspection */
+		$t_user_id = user_get_id_by_name( $p_username );
 
 		if( false !== $t_user_id ) {
 
-			$t_fields_to_update = array('password' => md5( $p_password ));
+			$t_fields_to_update = array( 'password' => md5( $p_password ) );
 
 			if( ON == config_get_global( 'use_ldap_realname' ) ) {
 				$t_fields_to_update['realname'] = ldap_realname_from_username( $p_username );

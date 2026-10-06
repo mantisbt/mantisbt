@@ -108,7 +108,6 @@ check_print_test_warn_row( 'Global configuration options should not be set in th
 	array( false => $t_message )
 );
 
-
 check_print_test_row( 'Default move category must exists ("default_category_for_moves")',
 	category_exists( config_get( 'default_category_for_moves' ) ),
 	array( false => 'Issues moved may end up with invalid category id.' )
@@ -126,7 +125,7 @@ foreach( $t_field_options as $t_field_option ) {
 		$t_field_option . ' configuration option does not contain "os_version"',
 		!in_array ( 'os_version', $t_fields ),
 		array( false => 'You need to replace "os_version" by "os_build" for the ' . $t_field_option . ' configuration option '
-			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=26840">#26840</a>).')
+			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=26840">#26840</a>).' )
 	);
 }
 

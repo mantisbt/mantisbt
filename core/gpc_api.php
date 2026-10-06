@@ -273,7 +273,7 @@ function gpc_get_string_array( string $p_var_name, array $p_default = [] ): arra
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	# If the result isn't the default we were given or an array, error
-	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
+	if( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		throw new ClientException(
 			"Array expected for '$p_var_name'",
 			ERROR_GPC_ARRAY_EXPECTED,
@@ -314,7 +314,7 @@ function gpc_get_int_array( string $p_var_name, array $p_default = [] ): array {
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	# If the result isn't the default we were given or an array, error
-	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
+	if( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		throw new ClientException(
 			"Array expected for '$p_var_name'",
 			ERROR_GPC_ARRAY_EXPECTED,
@@ -349,7 +349,7 @@ function gpc_get_bool_array( string $p_var_name, array $p_default = [] ): array 
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	# If the result isn't the default we were given or an array, error
-	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
+	if( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		throw new ClientException(
 			"Array expected for '$p_var_name'",
 			ERROR_GPC_ARRAY_EXPECTED,

@@ -129,7 +129,7 @@ print_manage_menu( 'manage_user_page.php' );
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-user', 'ace-icon' ); ?>
-				<?php echo lang_get('edit_user_title') ?>
+				<?php echo lang_get( 'edit_user_title' ) ?>
 			</h4>
 		</div>
 
@@ -302,7 +302,7 @@ print_manage_menu( 'manage_user_page.php' );
 							$t_failed_login_count = (int)$t_user['failed_login_count'];
 							$t_is_locked =  $t_failed_login_count >= $t_max_failed;
 							echo $t_failed_login_count;
-							if( OFF != $t_max_failed && $t_is_locked) {
+							if( OFF != $t_max_failed && $t_is_locked ) {
 								echo '&nbsp;&nbsp;' . icon_get( 'lock', 'fa-lg', lang_get( 'locked' ) );
 							}
 ?>

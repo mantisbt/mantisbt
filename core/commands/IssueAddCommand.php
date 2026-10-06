@@ -520,7 +520,7 @@ class IssueAddCommand extends Command {
 			}
 		} elseif( isset( $p_tag['name'] ) ) {
 			$t_matches = array();
-			if( !tag_name_is_valid( $p_tag['name'], $t_matches )) {
+			if( !tag_name_is_valid( $p_tag['name'], $t_matches ) ) {
 				throw new ClientException(
 					"Tag name '{$p_tag['name']}' is not valid.",
 					ERROR_TAG_NAME_INVALID,

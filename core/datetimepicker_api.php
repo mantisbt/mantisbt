@@ -59,7 +59,7 @@ require_js( 'datetimepicker-proxy.js' );
  * @param string $p_format Time format, by default, the value from the $g_datetime_picker_format is used.
  * @return string Element to output.
  */
-function datetimepicker_get_field(string $p_date, string $p_id, string $p_format = '') {
+function datetimepicker_get_field( string $p_date, string $p_id, string $p_format = '' ) {
 	return '<input type="text" id="' . $p_id . '" name="' . $p_id . '"'
 		. ' class="datetimepicker input-sm" size="20" maxlength="20"'
 		. ' data-picker-locale="' . string_html_specialchars( lang_get_current_datetime_locale() ) . '"'
@@ -76,6 +76,6 @@ function datetimepicker_get_field(string $p_date, string $p_id, string $p_format
  * @param string $p_format Time format, by default, the value from the $g_datetime_picker_format is used.
  * @return void
  */
-function datetimepicker_print(string $p_date, string $p_id, string $p_format = '') {
+function datetimepicker_print( string $p_date, string $p_id, string $p_format = '' ) {
 	echo datetimepicker_get_field( $p_date, $p_id, $p_format );
 }

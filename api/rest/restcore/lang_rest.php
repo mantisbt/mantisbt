@@ -22,10 +22,10 @@
  * @link http://www.mantisbt.org
  */
 
-$g_app->group('/lang', function() use ( $g_app ) {
+$g_app->group( '/lang', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_lang_get' );
 	$g_app->get( '/', 'rest_lang_get' );
-});
+} );
 
 /**
  * A method that does the work to handle getting a set of localized strings via REST API.

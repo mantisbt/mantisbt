@@ -22,7 +22,6 @@
  * @subpackage classes
  */
 
-
 /**
  * Tokenizer class
  *
@@ -92,7 +91,7 @@ class Tokenizer
 	 */
 	public function get_string() {
 		$t_code = '';
-		foreach ($this->tokens as $t_token) {
+		foreach ( $this->tokens as $t_token ) {
 			$t_code .= is_array( $t_token ) ? $t_token[1] : $t_token;
 		}
 		return $t_code;

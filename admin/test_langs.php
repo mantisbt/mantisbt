@@ -331,7 +331,7 @@ class LangCheckFile {
 		# Report errors
 		if( $t_check ) {
 			$this->logWarn( "'$t_lang' language is not defined in "
-				. implode(', ', $t_check )
+				. implode( ', ', $t_check )
 			);
 		}
 	}
@@ -400,14 +400,14 @@ class LangCheckFile {
 						break;
 					case '[':
 						if( $t_last_token != T_VARIABLE ) {
-							$this->logFail( "Unexpected opening square bracket '['", $t_line);
+							$this->logFail( "Unexpected opening square bracket '['", $t_line );
 							$t_pass = false;
 						}
 						$t_variable_array = true;
 						break;
 					case ']':
 						if( !$t_expect_end_array ) {
-							$this->logFail( "Unexpected closing square bracket ']'", $t_line);
+							$this->logFail( "Unexpected closing square bracket ']'", $t_line );
 							$t_pass = false;
 						}
 						$t_expect_end_array = false;
@@ -650,7 +650,7 @@ class LangCheckFile {
 				set_error_handler( 'error_convert_to_exception' );
 				try {
 					/** @noinspection PhpExpressionResultUnusedInspection */
-					vsprintf( $p_text, array_pad([], 10, 0) );
+					vsprintf( $p_text, array_pad( [], 10, 0 ) );
 				} catch ( Throwable $e ) {
 					$this->logFail( $this->url( $p_var )
 						. " printf format string is not valid: " . $e->getMessage(),
@@ -780,7 +780,7 @@ class LangCheckFile {
 					'group' => $this->group,
 					'showMessage' => str_replace( [ '$', '[', ']' ], [ '', '\x5b', '\x5d' ], $p_var ),
 					'language' => $this->lang,
-				] ) . '">' . string_attribute( $p_var ). '</a>'
+				] ) . '">' . string_attribute( $p_var ) . '</a>'
 			: string_attribute( $p_var );
 	}
 
@@ -828,7 +828,7 @@ print_admin_menu_bar( 'test_langs.php' );
 			</h4>
 			<div class="widget-toolbar no-border hidden-xs">
 				<div class="widget-menu">
-					<?php print_extra_small_button( '#plugins', 'Scroll down to Plugins'); ?>
+					<?php print_extra_small_button( '#plugins', 'Scroll down to Plugins' ); ?>
 				</div>
 			</div>
 		</div>
@@ -876,7 +876,7 @@ checklangdir( $t_mantis_dir, 'out-mantis-core' );
 			</h4>
 			<div class="widget-toolbar no-border hidden-xs">
 				<div class="widget-menu">
-					<?php print_extra_small_button( '#', 'Scroll back to top'); ?>
+					<?php print_extra_small_button( '#', 'Scroll back to top' ); ?>
 				</div>
 			</div>
 		</div>
@@ -895,7 +895,6 @@ checkplugins();
 
 <?php
 layout_admin_page_end();
-
 
 /**
  * Check plugin language files
@@ -1031,7 +1030,7 @@ function checklangdir( $p_path, $p_group ) {
 		# No point testing other languages if English fails
 		if( !$t_file->checkAndPrint() ) {
 			echo '<tr><td></td>';
-			print_fail( 'Total error(s): '. $t_file->countErrors() );
+			print_fail( 'Total error(s): ' . $t_file->countErrors() );
 			echo '</tr>' . PHP_EOL;
 			return;
 		}

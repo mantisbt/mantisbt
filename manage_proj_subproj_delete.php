@@ -50,7 +50,6 @@ auth_reauthenticate();
 $f_project_id    = gpc_get_int( 'project_id' );
 $f_subproject_id = gpc_get_int( 'subproject_id' );
 
-
 $t_data = array(
 	'query' => array(
 		'project_id' => (int)$f_project_id,

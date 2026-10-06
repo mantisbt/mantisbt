@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare( strict_types=1 );
 # MantisBT - A PHP based bugtracking system
 
 # MantisBT is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ final class TokensApiTest extends MantisCoreBase {
 
 	protected const UNKNOWN = -1; # a guaranteed unknown value for an owner, type, or id.
 	protected const KNOWN_OWNER = 1234;
-	
+
 	protected const ROW_ID = 0;
 	protected const ROW_OWNER = 1;
 	protected const ROW_TYPE = 2;
@@ -88,7 +88,7 @@ final class TokensApiTest extends MantisCoreBase {
 
 		foreach( $this->tokens as $t_token ) {
 			db_param_push();
-			db_query( 'DELETE FROM {tokens} WHERE id = '. db_param(), [ $t_token[self::ROW_ID] ] );
+			db_query( 'DELETE FROM {tokens} WHERE id = ' . db_param(), [ $t_token[self::ROW_ID] ] );
 		}
 	}
 
@@ -271,7 +271,7 @@ final class TokensApiTest extends MantisCoreBase {
 	public function testTokenDelete(): void {
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );
-		
+
 		token_delete( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 
 		$t_db_count = db_count_queries();
@@ -287,7 +287,7 @@ final class TokensApiTest extends MantisCoreBase {
 	public function testTokenDeleteByOwner(): void {
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );
-		
+
 		token_delete_by_owner( $this->tokens[0][self::ROW_OWNER] );
 
 		$t_db_count = db_count_queries();
@@ -303,7 +303,7 @@ final class TokensApiTest extends MantisCoreBase {
 	public function testTokenDeleteByType(): void {
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );
-		
+
 		token_delete_by_type( $this->tokens[0][self::ROW_TYPE] );
 
 		$t_db_count = db_count_queries();

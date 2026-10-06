@@ -299,7 +299,7 @@ function error_output( Throwable $p_error ) {
 			}
 		}
 		if( DISPLAY_ERROR_HALT == $t_method ) {
-			exit(1);
+			exit( 1 );
 		}
 	} else {
 		$t_error_description = nl2br( $t_localized_message );
@@ -309,7 +309,7 @@ function error_output( Throwable $p_error ) {
 		if( ( !$t_show_detailed_errors || $t_method == DISPLAY_ERROR_INLINE )
 			&& $p_error instanceof ErrorException
 		) {
-			$t_error_description .= " in '" . $p_error->getFile() ."' line " . $p_error->getLine();
+			$t_error_description .= " in '" . $p_error->getFile() . "' line " . $p_error->getLine();
 		}
 
 		switch( $t_method ) {
@@ -428,7 +428,7 @@ function error_output( Throwable $p_error ) {
 
 				# Return proper HTTP status code for error
 				http_response_code( error_map_mantis_error_to_http_code( $p_error->getCode() ) );
-				exit(1);
+				exit( 1 );
 
 			case DISPLAY_ERROR_INLINE:
 				if( !defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
@@ -449,7 +449,6 @@ function error_output( Throwable $p_error ) {
 
 	$g_error_proceed_url = null;
 }
-
 
 /**
  * Error handler to convert PHP errors to Exceptions.
@@ -481,7 +480,7 @@ function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
  *
  * @return void
  */
-function error_delay_reporting( bool $p_delay = true) {
+function error_delay_reporting( bool $p_delay = true ) {
 	global $g_error_delay_reporting;
 	$g_error_delay_reporting = $p_delay;
 }
@@ -554,7 +553,6 @@ function error_print_details( $p_file, $p_line ) {
 <?php
 }
 
-
 /**
  * Get the stack trace as a string that can be logged or echoed to CLI output.
  *
@@ -626,7 +624,7 @@ function error_print_stack_trace( $p_exception = null ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
 		} else {
-			$t_args = array('-');
+			$t_args = array( '-' );
 		}
 
 		printf(
@@ -810,7 +808,6 @@ function error_proceed_url( $p_url ) {
 
 	$g_error_proceed_url = $p_url;
 }
-
 
 /**
  * Maps MantisBT errors to the appropriate HTTP status code.

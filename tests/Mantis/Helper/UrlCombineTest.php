@@ -23,7 +23,7 @@
  * @link       https://www.mantisbt.org
  */
 
-declare(strict_types=1);
+declare( strict_types=1 );
 
 namespace Mantis\tests\Mantis\Helper;
 
@@ -47,7 +47,7 @@ final class UrlCombineTest extends MantisCoreBase {
 	 * @dataProvider providerUrlCombine
 	 */
 	public function testUrlCombine( $p_page, $p_query_string, $p_expected ): void {
-		if( is_subclass_of( $p_expected, '\Throwable' ) ) { 
+		if( is_subclass_of( $p_expected, '\Throwable' ) ) {
 			$this->expectException( $p_expected );
 			helper_url_combine( $p_page, $p_query_string );
 		} else {

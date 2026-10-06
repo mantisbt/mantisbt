@@ -29,7 +29,6 @@ use ConfigParser;
 use Exception;
 use PHPUnit\Framework\Constraint\IsType;
 
-
 /**
  * Test cases for config API parser
  *
@@ -89,12 +88,12 @@ class ConfigParserTest extends MantisCoreBase {
 		# Check that the parsed array matches the model array
 		$t_parser = new ConfigParser( $p_string );
 		$t_parsed_1 = $t_parser->parse();
-		$this->assertEquals(  $t_reference_result, $t_parsed_1, $this->errorMessage( $p_string )  );
+		$this->assertEquals( $t_reference_result, $t_parsed_1, $this->errorMessage( $p_string ) );
 
 		# Export converted array and parse again: result should match the model
 		$t_parser = new ConfigParser( var_export( $t_parsed_1 , true ) );
 		$t_parsed_2 = $t_parser->parse();
-		$this->assertEquals(  $t_reference_result, $t_parsed_2, $this->errorMessage( $p_string )  );
+		$this->assertEquals( $t_reference_result, $t_parsed_2, $this->errorMessage( $p_string ) );
 	}
 
 	/**
@@ -104,8 +103,8 @@ class ConfigParserTest extends MantisCoreBase {
 	 * @noinspection PhpRedundantOptionalArgumentInspection
 	 */
 	public function testExtraTokensError() {
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessageMatches('/^Extra tokens found/');
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessageMatches( '/^Extra tokens found/' );
 
 		$t_parser = new ConfigParser( '1; 2' );
 		$t_parser->parse( ConfigParser::EXTRA_TOKENS_ERROR );
@@ -123,12 +122,12 @@ class ConfigParserTest extends MantisCoreBase {
 		$t_parser = new ConfigParser( '1; 2' );
 		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
 		/** @noinspection PhpParamsInspection */
-		$this->assertEquals( 1, $t_result);
+		$this->assertEquals( 1, $t_result );
 
 		$t_parser = new ConfigParser( 'array(); 2' );
 		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
 		/** @noinspection PhpParamsInspection */
-		$this->assertEquals( array(), $t_result);
+		$this->assertEquals( array(), $t_result );
 	}
 
 	/**
@@ -137,8 +136,8 @@ class ConfigParserTest extends MantisCoreBase {
 	 * @throws Exception
 	 */
 	public function testSyntaxError() {
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessageMatches( '/^syntax error/');
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessageMatches( '/^syntax error/' );
 
 		$t_parser = new ConfigParser( 'array(' );
 		$t_parser->parse();
@@ -150,8 +149,8 @@ class ConfigParserTest extends MantisCoreBase {
 	 * @throws Exception
 	 */
 	public function testInvalidTokensError() {
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessageMatches('/^Unexpected token/');
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessageMatches( '/^Unexpected token/' );
 
 		$t_parser = new ConfigParser( 'echo 1;' );
 		$t_parser->parse();
@@ -163,13 +162,13 @@ class ConfigParserTest extends MantisCoreBase {
 	 * @throws Exception
 	 */
 	public function testUnknownConstantError() {
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessageMatches('/^Unknown string literal/');
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessageMatches( '/^Unknown string literal/' );
 
 		# Make sure we have a string that is not a defined constant
 		$t_constant = 'UNDEFINED_CONSTANT';
-		while( defined($t_constant) ) {
-			$t_constant .= '_' . rand(0, 9999);
+		while( defined( $t_constant ) ) {
+			$t_constant .= '_' . rand( 0, 9999 );
 		}
 		$t_parser = new ConfigParser( $t_constant );
 		$t_parser->parse();
@@ -201,7 +200,7 @@ class ConfigParserTest extends MantisCoreBase {
 			'Integer with whitespace' => array( " 1\n", IsType::TYPE_INT ),
 			'Integer negative' => array( '-1', IsType::TYPE_INT ),
 			'Integer positive' => array( '+1', IsType::TYPE_INT ),
-	
+
 			'Float' => array( '1.1', IsType::TYPE_FLOAT ),
 			'Float negative' => array( '-1.1', IsType::TYPE_FLOAT ),
 			'Float positive' => array( '+1.1', IsType::TYPE_FLOAT ),
@@ -212,11 +211,11 @@ class ConfigParserTest extends MantisCoreBase {
 			'String whitespace' => array( '" "', IsType::TYPE_STRING ),
 			'String number double-quote' => array( '"1"', IsType::TYPE_STRING ),
 			'String number single-quote' => array( "'1'", IsType::TYPE_STRING ),
-	
+
 			'Built-in string literal null' => array( 'null', IsType::TYPE_NULL ),
 			'Built-in string literal false' => array( 'false', IsType::TYPE_BOOL ),
 			'Built-in string literal true' => array( 'true', IsType::TYPE_BOOL ),
-	
+
 			'Constant = null' => array( 'VERSION_ALL', IsType::TYPE_NULL ),
 			'Constant = false' => array( 'VERSION_FUTURE', IsType::TYPE_BOOL ),
 			'Constant = true' => array( 'VERSION_RELEASED', IsType::TYPE_BOOL ),
@@ -242,7 +241,7 @@ class ConfigParserTest extends MantisCoreBase {
 		'case description' => array(
 <<<'EOT'
 EOT
- 		),
+		),
 		 * ---------------------------
  */
 

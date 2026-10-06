@@ -40,10 +40,8 @@
  * @uses utility_api.php
  */
 
-
 require_api( 'access_api.php' );
 require_api( 'utility_api.php' );
-
 
 /**
  * Print the page header section
@@ -119,7 +117,7 @@ function layout_page_header_begin( $p_page_title = '' ) {
  *
  * @return void
  */
-function layout_page_header_end( $p_page_id = null) {
+function layout_page_header_end( $p_page_id = null ) {
 	global $g_error_send_page_header;
 
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
@@ -155,7 +153,7 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 	current_user_modify_single_project_default();
 
 	layout_navbar();
-	
+
 	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 
 	layout_main_container_begin();
@@ -246,7 +244,7 @@ function layout_admin_page_end() {
 	layout_body_javascript();
 
 	html_body_end();
-    html_end();
+	html_end();
 }
 
 /**
@@ -347,7 +345,6 @@ function layout_body_javascript() {
 	html_javascript_link( 'ace.min.js' );
 }
 
-
 /**
  * Print opening markup for login/signup/register pages
  * @param string $p_page_title page title
@@ -356,9 +353,9 @@ function layout_body_javascript() {
 function layout_login_page_begin( $p_page_title = '' ) {
 	# Login page shouldn't be indexed by search engines
 	html_robots_noindex();
-	
+
 	layout_page_header_begin( $p_page_title );
-	
+
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
 	html_head_end();
 
@@ -392,8 +389,8 @@ function layout_login_page_end() {
  * @return void
  */
 function layout_navbar() {
-	$t_logo_url = config_get_global('logo_url');
-	$t_short_path = config_get_global('short_path');
+	$t_logo_url = config_get_global( 'logo_url' );
+	$t_short_path = config_get_global( 'short_path' );
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
 	echo '<div id="navbar-container" class="navbar-container">';
@@ -410,14 +407,14 @@ function layout_navbar() {
 	echo '<div class="navbar-header">';
 	echo '<a href="' . $t_short_path . $t_logo_url . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
-	echo string_attribute( config_get('window_title') );
+	echo string_attribute( config_get( 'window_title' ) );
 	echo ' </span>';
 	echo '</a>';
 
-	$t_toggle_class = (OFF == config_get('show_avatar') ? 'navbar-toggle' : 'navbar-toggle-img');
+	$t_toggle_class = ( OFF == config_get( 'show_avatar' ) ? 'navbar-toggle' : 'navbar-toggle-img' );
 	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
 	echo '<span class="sr-only">Toggle user menu</span>';
-	if (auth_is_user_authenticated()) {
+	if ( auth_is_user_authenticated() ) {
 		layout_navbar_user_avatar();
 	}
 	echo '</button>';
@@ -426,7 +423,7 @@ function layout_navbar() {
 
 	echo '<div class="navbar-buttons navbar-header navbar-collapse collapse">';
 	echo '<ul class="nav ace-nav">';
-	if (auth_is_user_authenticated()) {
+	if ( auth_is_user_authenticated() ) {
 		# shortcuts button bar
 		layout_navbar_button_bar();
 		# projects dropdown menu
@@ -496,7 +493,6 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
 	echo '</li>';
 }
 
-
 /**
  * Print navbar projects menu at the top right of the page
  * @return void
@@ -551,7 +547,7 @@ function layout_navbar_button_bar() {
 	if( $t_show_report_bug_button )  {
 		$t_bug_url = string_get_bug_report_url();
 		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
-		print_icon( 'fa-edit');
+		print_icon( 'fa-edit' );
 		echo ' ' . lang_get( 'report_bug_link' );
 		echo '</a>';
 	}
@@ -646,7 +642,6 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 	}
 }
-
 
 /**
  * Print user avatar in the navbar
@@ -764,7 +759,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Project Wiki
-		if( ON == config_get_global( 'wiki_enable' )  ) {
+		if( ON == config_get_global( 'wiki_enable' ) ) {
 			$t_sidebar_items[] = array(
 				'url' => 'wiki.php?type=project&amp;id=' . $t_current_project,
 				'title' => 'wiki',
@@ -852,7 +847,7 @@ function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response ) {
  * Process main menu options from config.
  * @return array containing sidebar items
  */
-function layout_config_menu_options_for_sidebar( ) {
+function layout_config_menu_options_for_sidebar() {
 	$t_menu_options = array();
 	$t_custom_options = config_get( 'main_menu_custom_options' );
 
@@ -909,7 +904,6 @@ function layout_sidebar_begin() {
 	echo '<ul class="nav nav-list">';
 }
 
-
 /**
  * Print sidebar menu item
  * @param string $p_page page name
@@ -940,7 +934,6 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 	echo '<b class="arrow"></b>' . "\n";
 	echo '</li>' . "\n";
 }
-
 
 /**
  * Print sidebar closing elements
@@ -1051,7 +1044,7 @@ function layout_breadcrumbs() {
 	print_icon( 'fa-user', 'home-icon active' );
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
-		if( isset( $_SERVER['QUERY_STRING'] ) && !is_blank( $_SERVER['QUERY_STRING'] )) {
+		if( isset( $_SERVER['QUERY_STRING'] ) && !is_blank( $_SERVER['QUERY_STRING'] ) ) {
 			$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 		}
 
@@ -1181,14 +1174,13 @@ function layout_footer() {
 	echo '</address>' . "\n";
 	echo '</div>' . "\n";
 
-
 	# We don't have a button anymore, so for now we will only show the resized
 	# version of the logo when not on login page.
 	if( !is_page_name( 'login_page' ) ) {
 		echo '<div class="col-md-6 col-xs-12">' . "\n";
 		echo '<div class="pull-right" id="powered-by-mantisbt-logo">' . "\n";
 		$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
-		echo '<a href="https://www.mantisbt.org" '.
+		echo '<a href="https://www.mantisbt.org" ' .
 			'title="Mantis Bug Tracker: a free and open source web based bug tracking system.">' .
 			'<img src="' . $t_mantisbt_logo_url . '" width="102" height="35" ' .
 			'alt="Powered by Mantis Bug Tracker: a free and open source web based bug tracking system." />' .
@@ -1295,7 +1287,7 @@ function layout_footer_end() {
  */
 function layout_scroll_up_button() {
 	echo '<a class="btn-scroll-up btn btn-sm btn-inverse display" id="btn-scroll-up" href="#">' . "\n";
-	print_icon( 'fa-angle-double-up', 'ace-icon icon-only bigger-110');
+	print_icon( 'fa-angle-double-up', 'ace-icon icon-only bigger-110' );
 	echo "\n" . '</a>' . "\n";
 }
 

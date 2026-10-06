@@ -55,9 +55,8 @@ class PluginTest extends MantisCoreBase {
 	 * Tests setup.
 	 */
 	protected function setUp(): void {
-		plugin_register(self::MANTISCORE);
+		plugin_register( self::MANTISCORE );
 	}
-
 
 	/**
 	 * Tests plugin_dependency() for MantisCore.

@@ -74,8 +74,8 @@ if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
 	$C = 'constant';
 	$t_message = <<<MESSAGE
 		<h2>FATAL ERROR: Your version of PHP is too old</h2>
-		<p>MantisBT {$C('MANTIS_VERSION')} requires PHP {$C('PHP_MIN_VERSION')} or newer.</p>
-		You are running version <em>{$C('PHP_VERSION')}</em>.
+		<p>MantisBT {$C( 'MANTIS_VERSION' )} requires PHP {$C( 'PHP_MIN_VERSION' )} or newer.</p>
+		You are running version <em>{$C( 'PHP_VERSION' )}</em>.
 		Please upgrade to a newer version.
 		MESSAGE;
 	fatal_error( $t_message );
@@ -89,9 +89,9 @@ if( defined( 'PHP_MAX_VERSION' )
 
 	$C = 'constant';
 	$t_message = <<<MESSAGE
-		<h2>FATAL ERROR: MantisBT {$C('MANTIS_VERSION')} has known issues with PHP {$C('PHP_MAX_VERSION')} or later</strong></h2>
+		<h2>FATAL ERROR: MantisBT {$C( 'MANTIS_VERSION' )} has known issues with PHP {$C( 'PHP_MAX_VERSION' )} or later</strong></h2>
 		<p>Please refer to the <a href='$t_mantis_url'>bug tracker</a> for details.</p>
-		You are running PHP <em>{$C('PHP_VERSION')}</em>. 
+		You are running PHP <em>{$C( 'PHP_VERSION' )}</em>. 
 		Please downgrade to an earlier version.
 		MESSAGE;
 	fatal_error( $t_message );
@@ -361,7 +361,7 @@ function set_default_path() {
 
 	# $_SERVER['SCRIPT_NAME'], does not contain an URL when running from CLI
 	# Do not set $g_path in this case.
-	if(php_sapi_name() == 'cli') {
+	if( php_sapi_name() == 'cli' ) {
 		return false;
 	}
 
@@ -374,7 +374,7 @@ function set_default_path() {
 		if( isset( $_SERVER['SERVER_PORT'] ) ) {
 			$t_port = ':' . $_SERVER['SERVER_PORT'];
 			if( ( ':80' == $t_port && 'http' == $t_protocol )
-				|| ( ':443' == $t_port && 'https' == $t_protocol )) {
+				|| ( ':443' == $t_port && 'https' == $t_protocol ) ) {
 				$t_port = '';
 			}
 		} else {

@@ -48,14 +48,14 @@ class RestIssueUpdateCategory extends RestBase
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$this->issue_id = $this->getJson( $t_response, HTTP_STATUS_CREATED )->issue->id;
-		$this->deleteIssueAfterRun($this->issue_id	);
+		$this->deleteIssueAfterRun( $this->issue_id );
 	}
 
 	public function tearDown(): void {
 		parent::tearDown();
 
 		# Restore config if it has been changed
-		if( $this->save_config !== null) {
+		if( $this->save_config !== null ) {
 			$this->restoreConfig( self::CFG_ALLOW_NO_CAT, $this->save_config );
 		}
 	}
@@ -95,7 +95,7 @@ class RestIssueUpdateCategory extends RestBase
 	 * @param int      $p_status_code Expected status code.
 	 * @param int|null $p_expected_id Expected category id after update (null == unchanged).
 	 */
-	public function testUpdateIssueCategory1( $p_category, int $p_status_code, int $p_expected_id = null) {
+	public function testUpdateIssueCategory1( $p_category, int $p_status_code, int $p_expected_id = null ) {
 		$t_response = $this->updateCategory( $this->issue_id, $p_category );
 		$t_json = $this->getJson( $t_response, $p_status_code );
 		if( $t_response->getStatusCode() == HTTP_STATUS_SUCCESS ) {
@@ -140,7 +140,7 @@ class RestIssueUpdateCategory extends RestBase
 	public function testUpdateIssueCategory2() {
 		# Create a category for the tests
 		# Use Core API as we don't yet have a REST API endpoint for that (#32470)
-		$t_category_id = category_add($this->getProjectId(), $this->getUniqueCategoryName() );
+		$t_category_id = category_add( $this->getProjectId(), $this->getUniqueCategoryName() );
 		$t_category_name = category_get_name( $t_category_id );
 
 		# If payload is scalar then it is expected to be a category name, so passing the id should fail
@@ -172,7 +172,7 @@ class RestIssueUpdateCategory extends RestBase
 		# Test with mandatory category
 		$this->save_config = $this->setConfig( self::CFG_ALLOW_NO_CAT, OFF );
 
-		# Status code 
+		# Status code
 		if( $p_category === null
 			|| is_array( $p_category ) && (
 				array_key_exists( 'id', $p_category ) && $p_category['id'] === null

@@ -395,7 +395,7 @@ function sponsorship_delete_all( $p_bug_id ) {
 	$t_query = 'DELETE FROM {sponsorship} WHERE bug_id=' . db_param();
 	db_query( $t_query, array( (int)$p_bug_id ) );
 
-	sponsorship_clear_cache( );
+	sponsorship_clear_cache();
 }
 
 /**

@@ -137,7 +137,7 @@ function file_bug_attachment_count_cache( array $p_bug_ids ) {
 			$t_ids_to_search[$c_id] = $c_id;
 		}
 	}
-	
+
 	if( empty( $t_ids_to_search ) ) {
 		return;
 	}
@@ -459,9 +459,9 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 
 	# if diskfile doesn't include a path, then use the expected filename.
 	if( ( strstr( $p_diskfile, DIRECTORY_SEPARATOR ) === false ||
-	       strstr( $p_diskfile, '\\' ) === false ) &&
-	     !is_blank( $t_expected_file_path ) ) {
-	    return $t_expected_file_path;
+		   strstr( $p_diskfile, '\\' ) === false ) &&
+		 !is_blank( $t_expected_file_path ) ) {
+		return $t_expected_file_path;
 	}
 
 	# otherwise return as is.
@@ -855,7 +855,7 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 			UNION
 			SELECT diskfile FROM {project_file} WHERE diskfile=' . db_param() . '
 			) f';
-	$t_result = db_query( $t_query, array( $c_name, $c_name) );
+	$t_result = db_query( $t_query, array( $c_name, $c_name ) );
 	$t_count = db_result( $t_result );
 
 	return ( $t_count == 0 ) && !file_exists( $c_name );

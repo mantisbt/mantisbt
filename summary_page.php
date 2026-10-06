@@ -86,7 +86,7 @@ print_summary_submenu();
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<?php print_icon( 'fa-bar-chart-o', 'ace-icon' ); ?>
-		<?php echo lang_get('summary_title') ?>
+		<?php echo lang_get( 'summary_title' ) ?>
 	</h4>
 </div>
 

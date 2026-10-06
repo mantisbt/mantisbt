@@ -821,7 +821,6 @@ $g_email_dkim_domain = 'example.com';
  */
 $g_email_dkim_private_key_file_path = '';
 
-
 /**
  * DomainKeys Identified Mail (DKIM) Signatures private key value.
  *
@@ -958,14 +957,14 @@ $g_email_send_using_cronjob = OFF;
  *
  * @global string $g_email_separator1
  */
-$g_email_separator1 = str_pad('', 70, '=');
+$g_email_separator1 = str_pad( '', 70, '=' );
 
 /**
  * Email separator and padding.
  *
  * @global string $g_email_separator2
  */
-$g_email_separator2 = str_pad('', 70, '-');
+$g_email_separator2 = str_pad( '', 70, '-' );
 
 /**
  * Email separator and padding.
@@ -1624,7 +1623,6 @@ $g_complete_date_format = 'Y-m-d H:i T';
  */
 $g_datetime_picker_format = 'Y-MM-DD HH:mm';
 
-
 ##############################
 # MantisBT TimeZone Settings #
 ##############################
@@ -2030,7 +2028,7 @@ $g_reporter_summary_limit = 10;
  *
  * @global array $g_date_partitions
  */
-$g_date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365);
+$g_date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365 );
 
 /**
  * Shows project '[project] category' when 'All Projects' is selected.
@@ -2504,7 +2502,6 @@ $g_reauthentication = ON;
  * @global int $g_reauthentication_expiry
  */
 $g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
-
 
 /**
  * Specifies the LDAP or Active Directory server(s) to connect to.
@@ -4544,7 +4541,6 @@ $g_my_view_boxes = array(
 	'my_comments'   => '0'
 );
 
-
 #############
 # RSS Feeds #
 #############
@@ -4557,7 +4553,6 @@ $g_my_view_boxes = array(
  * @global int $g_rss_enabled
  */
 $g_rss_enabled = ON;
-
 
 #####################
 # Bug Relationships #

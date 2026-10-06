@@ -55,7 +55,6 @@ class UserApiTest extends MantisCoreBase {
 		user_delete( self::$user_id );
 	}
 
-
 	/**
 	 * Tests user_is_email_unique()
 	 *
@@ -92,7 +91,7 @@ class UserApiTest extends MantisCoreBase {
 			"Existing email, other user"
 				=> array( self::TEST_EMAIL, 1, false ),
 			"Existing email with different case"
-				=> array( ucfirst(self::TEST_EMAIL), null, false ),
+				=> array( ucfirst( self::TEST_EMAIL ), null, false ),
 			"Email matching SQL LIKE pattern"
 				=> array( "$t_user_sql_like_pattern@$t_domain", null, true ),
 			"Non-existing email"

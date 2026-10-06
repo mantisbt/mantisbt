@@ -60,7 +60,7 @@ print_manage_menu( 'manage_overview_page.php' );
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-info', 'ace-icon' ); ?>
-			<?php echo lang_get('site_information') ?>
+			<?php echo lang_get( 'site_information' ) ?>
 		</h4>
 	</div>
 	<div class="widget-body">
@@ -85,7 +85,7 @@ print_manage_menu( 'manage_overview_page.php' );
 			<td><?php echo phpversion() ?></td>
 		</tr>
 		<tr>
- 			<th class="category"><?php echo lang_get( 'os_information' ) ?></th>
+			 <th class="category"><?php echo lang_get( 'os_information' ) ?></th>
 			<td><?php echo php_uname() ?></td>
 		</tr>
 		<tr>

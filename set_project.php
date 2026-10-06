@@ -89,7 +89,7 @@ if( !is_blank( $c_ref ) ) {
 		$t_param = $t_matches[3];
 
 		switch( $t_referrer_page ) {
-			case 'view_all_bug_page.php':		
+			case 'view_all_bug_page.php':
 				$t_source_filter_id = filter_db_get_project_current( $t_bottom );
 				$t_redirect_url = helper_url_combine( 'view_all_set.php',
 					( $t_source_filter_id !== null )

@@ -356,7 +356,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	$project_name = project_get_field( $t_bug->project_id, 'name' );
 
 	if( VS_PRIVATE == $t_bug->view_state ) {
-	    $t_bug_class = 'my-buglist-private';
+		$t_bug_class = 'my-buglist-private';
 	} else {
 		$t_bug_class = '';
 	}
@@ -378,7 +378,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 			echo ' ';
 
 			$t_can_update = !bug_is_readonly( $t_bug->id ) &&
-				access_has_bug_level( config_get( 'update_bug_threshold', null, $t_current_user_id, $t_bug->project_id  ), $t_bug->id );
+				access_has_bug_level( config_get( 'update_bug_threshold', null, $t_current_user_id, $t_bug->project_id ), $t_bug->id );
 			if( $t_can_update ) {
 				echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '">';
 				print_icon( 'fa-pencil', 'bigger-130 padding-2 grey', lang_get( 'edit' ) );

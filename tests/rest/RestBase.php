@@ -228,7 +228,6 @@ abstract class RestBase extends MantisTestCase {
 		return json_decode( $p_response->getBody(), false );
 	}
 
-
 	/**
 	 * Marks a test as skipped if there is no configured Anonymous account.
 	 *

@@ -56,7 +56,7 @@ class AttachmentTest extends SoapBase {
 
 		$t_attachment_contents = 'Attachment contents.';
 
-		$t_issue_id = $this->client->mc_issue_add(	$this->userName, $this->password, $t_issue_to_add );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
 		$this->deleteAfterRun( $t_issue_id );
 
@@ -78,7 +78,6 @@ class AttachmentTest extends SoapBase {
 			html_entity_decode( $t_issue->attachments[0]->download_url ) );
 		$this->assertEquals( $this->userId, $t_issue->attachments[0]->user_id );
 	}
-
 
 	/**
 	 * A test case that tests the following:

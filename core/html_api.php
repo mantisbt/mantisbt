@@ -431,7 +431,7 @@ function html_print_logo( string $p_logo = '' ) {
  */
 function html_top_banner( bool $p_nested = false ) {
 	$t_page = config_get_global( 'top_include_page' );
-	
+
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 		if( $p_nested ) {
 			echo '<div class="navbar navbar-fixed-top noprint">', "\n";
@@ -501,7 +501,7 @@ function html_operation_confirmation( array $p_buttons = [], string $p_message =
 	} else {
 		$t_message = $p_message;
 	}
-	echo '<p class="bold bigger-110">' . $t_message  . '</p>';
+	echo '<p class="bold bigger-110">' . $t_message . '</p>';
 
 	# Print buttons
 	if( !empty( $p_buttons ) ) {
@@ -641,7 +641,7 @@ function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id,
 		print_subproject_menu_bar(
 			$p_current_project_id,
 			$t_subproject_id,
-			array_merge( $p_parents, array( $t_subproject_id) )
+			array_merge( $p_parents, array( $t_subproject_id ) )
 		);
 	}
 }
@@ -670,11 +670,11 @@ function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null 
 		$t_active = $p_current_page && strpos( $t_url, $p_current_page ) !== false ? 'active' : '';
 
 		# Generate relative URL if caller didn't specify it as absolute
-		if( !($t_item['absolute'] ?? false) ) {
+		if( !( $t_item['absolute'] ?? false ) ) {
 			$t_url = helper_mantis_url( $t_url );
 		}
 
-		echo '<li class="' . $t_active .  '"><a href="'. $t_url .'">';
+		echo '<li class="' . $t_active . '"><a href="' . $t_url . '">';
 		if( $t_item['label'] == '' ) {
 			print_icon( 'fa-info-circle', 'blue ace-icon' );
 		} else {
@@ -827,31 +827,31 @@ function print_manage_config_menu( $p_page = '' ) {
 	$t_pages = array();
 
 	$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
-	                                                'label' => 'permissions_summary_report' );
+													'label' => 'permissions_summary_report' );
 
 	if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
 		$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php',
-		                                           'label' => 'configuration_report' );
+												   'label' => 'configuration_report' );
 	}
 
 	$t_pages['manage_config_work_threshold_page.php'] = array( 'url'   => 'manage_config_work_threshold_page.php',
-	                                                           'label' => 'manage_threshold_config' );
+															   'label' => 'manage_threshold_config' );
 
 	$t_pages['manage_config_workflow_page.php'] = array( 'url'   => 'manage_config_workflow_page.php',
-	                                                     'label' => 'manage_workflow_config' );
+														 'label' => 'manage_workflow_config' );
 
 	if( config_get( 'relationship_graph_enable' ) ) {
 		$t_pages['manage_config_workflow_graph_page.php'] = array( 'url'   => 'manage_config_workflow_graph_page.php',
-		                                                           'label' => 'manage_workflow_graph' );
+																   'label' => 'manage_workflow_graph' );
 	}
 
 	if( config_get( 'enable_email_notification' ) == ON ) {
 		$t_pages['manage_config_email_page.php'] = array( 'url'   => 'manage_config_email_page.php',
-		                                                  'label' => 'manage_email_config' );
+														  'label' => 'manage_email_config' );
 	}
 
 	$t_pages['manage_config_columns_page.php'] = array( 'url'   => 'manage_config_columns_page.php',
-	                                                    'label' => 'manage_columns_config' );
+														'label' => 'manage_columns_config' );
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
@@ -875,7 +875,7 @@ function print_manage_config_menu( $p_page = '' ) {
 
 	foreach ( $t_pages as $t_page ) {
 		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
-		echo '<a class="btn btn-sm btn-white btn-primary ' . $t_active . '" href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
+		echo '<a class="btn btn-sm btn-white btn-primary ' . $t_active . '" href="' . helper_mantis_url( $t_page['url'] ) . '">' . "\n";
 		echo lang_get_defaulted( $t_page['label'] );
 		echo '</a>' . "\n";
 	}
@@ -1274,7 +1274,7 @@ class TableGridLayout {
 			}
 
 			if( $t_cols_left > 0 ) {
-				$this->render_td_empty($t_cols_left);
+				$this->render_td_empty( $t_cols_left );
 			}
 			echo '</tr>';
 		}
@@ -1293,7 +1293,7 @@ class TableGridLayout {
 	 */
 	protected function render_td_empty( $p_colspan ) {
 		echo '<td';
-		if( $p_colspan > 1) {
+		if( $p_colspan > 1 ) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
 		echo '>';
@@ -1320,7 +1320,7 @@ class TableGridLayout {
 		if( $p_item->attr_class ) {
 			echo 'class="' . $p_item->attr_class . '"';
 		}
-		if( $p_colspan > 1) {
+		if( $p_colspan > 1 ) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
 		if( $p_item->header_attr_id ) {
@@ -1337,12 +1337,12 @@ class TableGridLayout {
 	 * @param TableFieldsItem $p_item Item to display
 	 * @param integer $p_colspan Colspan attribute for cell
 	 */
-	protected function render_td_item_content( TableFieldsItem $p_item, $p_colspan  ) {
+	protected function render_td_item_content( TableFieldsItem $p_item, $p_colspan ) {
 		echo '<td';
 		if( $p_item->attr_class ) {
 			echo 'class="' . $p_item->attr_class . '"';
 		}
-		if( $p_colspan > 1) {
+		if( $p_colspan > 1 ) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
 		if( $p_item->content_attr_id ) {

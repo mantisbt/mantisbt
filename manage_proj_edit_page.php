@@ -101,7 +101,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 	<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
-	<?php echo lang_get('edit_project_title') ?>
+	<?php echo lang_get( 'edit_project_title' ) ?>
 </h4>
 </div>
 
@@ -173,7 +173,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</td>
 				<td>
 					<select id="project-view-state" name="view_state" class="input-sm">
-						<?php print_enum_string_option_list( 'project_view_state', (int)$t_row['view_state']) ?>
+						<?php print_enum_string_option_list( 'project_view_state', (int)$t_row['view_state'] ) ?>
 					</select>
 				</td>
 			</tr>
@@ -617,7 +617,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<?php
 					$t_version_id = version_get_id( $t_name, $f_project_id );
 					if( !$t_inherited ) {
-						$t_param = array( 'version_id' => $t_version_id);
+						$t_param = array( 'version_id' => $t_version_id );
 						print_form_button(
 							'manage_proj_ver_edit_page.php',
 							lang_get( 'edit' ),
@@ -962,7 +962,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 			$t_email = user_get_email( $t_user['id'] );
 			$t_can_manage_this_user = $t_can_manage_users
 					&& access_has_project_level( $t_user['access_level'], $f_project_id )
-					&& ( !$f_show_global_users || isset( $t_local_users[$t_user['id']]) );
+					&& ( !$f_show_global_users || isset( $t_local_users[$t_user['id']] ) );
 ?>
 		<tr>
 			<td class="key-name" data-sortvalue="<?php echo string_attribute( $t_username ) ?>">
@@ -1035,12 +1035,12 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 							<div class="form-inline pull-right">
 								<?php echo form_security_field( 'manage_proj_user_remove' ) ?>
 								<button name="btn-remove-all"
-									    class="btn btn-primary btn-white btn-round"
-									    formaction="manage_proj_user_remove.php">
+										class="btn btn-primary btn-white btn-round"
+										formaction="manage_proj_user_remove.php">
 									<?php echo lang_get( 'remove_all_link' ) ?>
 								</button>
 								<button name="btn-undo-remove-all" class="hidden btn btn-primary btn-white btn-round">
-									<?php echo lang_get( 'undo' ). ': ', lang_get( 'remove_all_link' ) ?>
+									<?php echo lang_get( 'undo' ) . ': ', lang_get( 'remove_all_link' ) ?>
 								</button>
 							</div>
 						</div>
@@ -1075,7 +1075,7 @@ if( count( $t_users ) > 0 ) { ?>
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
-        <fieldset>
+		<fieldset>
 		<table class="table table-bordered table-condensed table-striped">
 			<?php echo form_security_field( 'manage_proj_user_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
@@ -1116,7 +1116,7 @@ if( count( $t_users ) > 0 ) { ?>
 				</td>
 			</tr>
 		</table>
-        </fieldset>
+		</fieldset>
 		</div>
 		</div>
 		</div>

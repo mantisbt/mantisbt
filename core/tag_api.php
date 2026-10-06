@@ -80,7 +80,7 @@ function tag_cache_rows( array $p_tag_ids ) {
 
 	$t_ids_to_search = array();
 	foreach( $p_tag_ids as $t_id ) {
-		if( !isset( $g_cache_tags[(int)$t_id]) ) {
+		if( !isset( $g_cache_tags[(int)$t_id] ) ) {
 			$t_ids_to_search[(int)$t_id] = (int)$t_id;
 		}
 	}
@@ -124,7 +124,7 @@ function tag_cache_bug_tag_rows( array $p_bug_ids ) {
 
 	$t_ids_to_search = array();
 	foreach( $p_bug_ids as $t_id ) {
-		if( !isset( $g_cache_bug_tags[(int)$t_id]) ) {
+		if( !isset( $g_cache_bug_tags[(int)$t_id] ) ) {
 			$t_ids_to_search[] = (int)$t_id;
 		}
 	}
@@ -886,7 +886,7 @@ function tag_bug_get_attached( $p_bug_id ) {
 
 	$t_tag_info_rows = array();
 	foreach( $t_bug_tags as $t_row ) {
-		$t_tag_data = tag_get($t_row['tag_id']);
+		$t_tag_data = tag_get( $t_row['tag_id'] );
 		$t_tag_data['user_attached'] = $t_row['user_id'];
 		$t_tag_data['date_attached'] = $t_row['date_attached'];
 		$t_tag_info_rows[] = $t_tag_data;

@@ -601,7 +601,7 @@ class BugData {
 		}
 
 		# Check if bug was pre-assigned or auto-assigned.
-		$t_status = bug_get_status_for_assign( NO_USER, $this->handler_id, $this->status);
+		$t_status = bug_get_status_for_assign( NO_USER, $this->handler_id, $this->status );
 
 		# Insert the rest of the data
 		db_param_push();
@@ -647,7 +647,7 @@ class BugData {
 
 		$t_mentioned_user_ids = mention_get_users( $this->summary );
 		$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
-		
+
 		$t_mentioned_user_ids = mention_get_users( $this->description );
 		$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
 
@@ -891,7 +891,7 @@ function bug_cache_database_result( array $p_bug_database_result, $p_stats = nul
 	global $g_cache_bug;
 
 	if( isset( $g_cache_bug[(int)$p_bug_database_result['id']] ) ) {
-		if( !is_null($p_stats) ) {
+		if( !is_null( $p_stats ) ) {
 			# force store the bugnote statistics
 			return bug_add_to_cache( $p_bug_database_result, $p_stats );
 		} else {
@@ -1446,7 +1446,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	# Copy attachments
 	if( $p_copy_attachments ) {
-	    file_copy_attachments( $t_bug_id, $t_new_bug_id );
+		file_copy_attachments( $t_bug_id, $t_new_bug_id );
 	}
 
 	# Copy users monitoring bug
@@ -2452,7 +2452,7 @@ function bug_get_status_for_assign( $p_current_handler, $p_new_handler, $p_curre
 	if( config_get( 'auto_set_status_to_assigned' ) ) {
 		$t_assigned_status = config_get( 'bug_assigned_status' );
 
-		if(		$p_current_handler == NO_USER &&
+		if( $p_current_handler == NO_USER &&
 				$p_new_handler != NO_USER &&
 				$p_new_status == $p_current_status &&
 				$p_new_status < $t_assigned_status &&

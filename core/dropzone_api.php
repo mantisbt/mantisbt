@@ -58,8 +58,8 @@ require_js( 'dropzone-proxy.js' );
  */
 function dropzone_print_form_data() {
 	echo 'data-force-fallback="' . ( config_get( 'dropzone_enabled' ) ? 'false' : 'true' ) . '"' . "\n";
-	echo "\t" . 'data-max-filesize-bytes="'. file_get_max_file_size() . '"' . "\n";
-	echo "\t" . 'data-max-filename-length="'. DB_FIELD_SIZE_FILENAME . '"' . "\n";
+	echo "\t" . 'data-max-filesize-bytes="' . file_get_max_file_size() . '"' . "\n";
+	echo "\t" . 'data-max-filename-length="' . DB_FIELD_SIZE_FILENAME . '"' . "\n";
 	$t_allowed_files = config_get( 'allowed_files' );
 	if ( !empty ( $t_allowed_files ) ) {
 		$t_allowed_files = '.' . implode ( ',.', explode ( ',', $t_allowed_files ) );
@@ -93,7 +93,7 @@ function dropzone_print_template() {
 			<div class="dz-filename"><span data-dz-name></span></div>
 			<img src="data:image/png;base64," alt="" data-dz-thumbnail>
 			<div class="dz-error-message">
-				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle') ?></span></div>
+				<div class="dz-error-mark"><span><?php print_icon( 'fa-times-circle' ) ?></span></div>
 				<span data-dz-errormessage></span>
 			</div>
 			<div class="dz-size" data-dz-size></div>

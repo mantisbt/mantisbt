@@ -65,7 +65,6 @@ function date_get_null() {
 	return 1;
 }
 
-
 /**
  * Converts a datetime string to a Unix timestamp.
  *
@@ -111,7 +110,6 @@ function date_timestamp_to_iso8601( ?int $p_timestamp ): ?string {
 
 	return date( 'c', (int)$p_timestamp );
 }
-
 
 /**
  * Gets Unix timestamp from a date string.

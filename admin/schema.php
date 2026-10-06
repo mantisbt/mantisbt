@@ -507,7 +507,6 @@ $g_upgrade[66] = ( isset( $f_db_type ) && ( $f_db_type == 'mysqli' ) )
 	: array( 'AlterColumnSQL', array( db_get_table( 'custom_field' ), "
 		possible_values		X		NOTNULL DEFAULT \" '' \" " ) );
 
-
 $g_upgrade[67] = array( 'CreateTableSQL', array( db_get_table( 'category' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	project_id				I		UNSIGNED NOTNULL DEFAULT '0',
@@ -844,7 +843,7 @@ $g_upgrade[199] = null;
 # ----------------------------------------------------------------------------
 # Schema version: 200
 #
-$g_upgrade[200] = array('CreateTableSQL', array( db_get_table( 'api_token' ), "
+$g_upgrade[200] = array( 'CreateTableSQL', array( db_get_table( 'api_token' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	user_id					I		NOTNULL DEFAULT '0',
 	name					C(128)	NOTNULL,
@@ -899,7 +898,7 @@ $g_upgrade[211] = array( 'AlterColumnSQL', array( db_get_table( 'email' ), "
 
 # New default value for category status, see #31017
 $g_upgrade[212] = array( 'AlterColumnSQL', array( db_get_table( 'category' ), "
-	status					I		UNSIGNED NOTNULL DEFAULT '1' ") );
+	status					I		UNSIGNED NOTNULL DEFAULT '1' " ) );
 $g_upgrade[213] = array( 'UpdateFunction', 'category_status_default' );
 
 # Release marker: 2.27.0

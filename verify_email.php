@@ -52,7 +52,6 @@ require_api( 'tokens_api.php' );
 require_api( 'utility_api.php' );
 require_css( 'login.css' );
 
-
 $f_user_id = gpc_get_int( 'id' );
 $f_confirm_hash = gpc_get_string( 'confirm_hash' );
 

@@ -76,7 +76,6 @@ foreach( $t_valid_actions as $t_action ) {
 	$t_thresholds_max[$t_action] = ANYBODY;
 }
 
-
 # parse flags and thresholds
 foreach( $f_flags as $t_flag_value ) {
 	list( $t_action, $t_flag ) = explode( ':', $t_flag_value );

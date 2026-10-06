@@ -42,7 +42,6 @@ layout_page_begin( 'manage_overview_page.php' );
 print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'manage_config_columns_page.php' );
 
-
 # Define constant that will be checked by the include page.
 define( 'MANAGE_COLUMNS', true );
 

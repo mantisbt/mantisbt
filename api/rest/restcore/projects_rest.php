@@ -29,7 +29,7 @@ use Mantis\Exceptions\ClientException;
 /**
  * @var \Slim\App $g_app
  */
-$g_app->group('/projects', function() use ( $g_app ) {
+$g_app->group( '/projects', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_projects_get' );
 	$g_app->get( '/', 'rest_projects_get' );
 	$g_app->get( '/{id}', 'rest_projects_get' );
@@ -57,7 +57,7 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->patch( '/{id}/versions/{version_id}', 'rest_project_version_update' );
 	$g_app->patch( '/{id}/versions/{version_id}/', 'rest_project_version_update' );
 	$g_app->delete( '/{id}/versions/{version_id}', 'rest_project_version_delete' );
-	$g_app->delete( '/{id}/versions/{version_id}/', 'rest_project_version_delete' );	
+	$g_app->delete( '/{id}/versions/{version_id}/', 'rest_project_version_delete' );
 
 	# Project categories
 	$g_app->get( '/{id}/categories', 'rest_project_category_get' );
@@ -85,11 +85,11 @@ $g_app->group('/projects', function() use ( $g_app ) {
 		$g_app->put( '[/]', 'rest_project_user_add' );
 		$g_app->get( '[/]', 'rest_project_users' );
 		$g_app->delete( '/{user_id}[/]', 'rest_project_user_delete' );
-	});
+	} );
 
 	# Project Users that can handle issues
 	$g_app->get( '/{id}/handlers', 'rest_project_handlers' );
-});
+} );
 
 /**
  * A helper function to get project users with the specified access level or above.
@@ -149,7 +149,7 @@ function rest_project_users( \Slim\Http\Request $p_request, \Slim\Http\Response 
  * @param array $p_args Arguments
  * @return \Slim\Http\Response The augmented response.
  */
-function rest_project_handlers(\Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+function rest_project_handlers( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = (int)$p_args['id'];
 	$t_access_level = config_get( 'handle_bug_threshold', null, null, $t_project_id );
 	return project_users( $p_request, $p_response, $p_args, $t_access_level );
@@ -169,7 +169,7 @@ function rest_project_user_add( \Slim\Http\Request $p_request, \Slim\Http\Respon
 
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
 	$t_payload['project'] = array( 'id' => $t_project_id );
@@ -241,7 +241,7 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	if( $t_project_id != ALL_PROJECTS ) {
 		$t_message = "Project '$t_project_id' doesn't exist";
 
-		if (!project_exists( $t_project_id ) ) {
+		if ( !project_exists( $t_project_id ) ) {
 			return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
 		}
 
@@ -512,7 +512,7 @@ function rest_project_hierarchy_add( \Slim\Http\Request $p_request, \Slim\Http\R
 	$t_command = new ProjectHierarchyAddCommand( $t_data );
 	$t_command->execute();
 	$t_subproject_id = mci_get_project_id( $t_data['payload'][ 'project'], false );
-	
+
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
 		"Subproject '$t_subproject_id' added to project '$t_project_id'" );
 }
@@ -538,7 +538,7 @@ function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Htt
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_subproject_update = $p_request->getParsedBody();	
+	$t_subproject_update = $p_request->getParsedBody();
 
 	$t_data = array(
 		'query' => array(
@@ -546,7 +546,6 @@ function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Htt
 			'subproject_id' => $t_subproject_id
 		),
 		'payload' => $t_subproject_update
-
 	);
 
 	$t_command = new ProjectHierarchyUpdateCommand( $t_data );
@@ -604,7 +603,7 @@ function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Htt
 function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
 	$t_data = array(
@@ -641,7 +640,7 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
 	$t_data = array(

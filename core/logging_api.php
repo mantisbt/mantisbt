@@ -140,7 +140,7 @@ function log_event( $p_level, $p_msg ) {
 			break;
 		case 'page':
 			global $g_log_events;
-			$g_log_events[] = array( time(), $p_level, $t_event, $t_caller);
+			$g_log_events[] = array( time(), $p_level, $t_event, $t_caller );
 			break;
 		default:
 			# use default PHP error log settings
@@ -170,7 +170,6 @@ function log_print_to_page() {
 	if( $g_email_shutdown_processing ) {
 		email_send_all();
 	}
-
 
 	$t_total_event_count = count( $g_log_events ?? [] );
 	$t_total_query_execution_time = 0;
@@ -273,7 +272,7 @@ function log_print_to_page() {
 		];
 		foreach( $t_statistics as $t_stat => $t_value ) {
 			if( $t_value ) {
-				printf($t_print_row_format,
+				printf( $t_print_row_format,
 				'small',
 					$g_log_levels[LOG_DATABASE],
 					'',
@@ -388,7 +387,7 @@ function log_get_caller( $p_level = null ) {
 	}
 
 	# At this point, first step in the cleaned backtrace is the one we want to show
-	$t_step = reset( $t_backtrace);
+	$t_step = reset( $t_backtrace );
 	$t_step_key = key( $t_backtrace );
 	$t_caller_file = basename( $t_step['file'] );
 	$t_caller_line = $t_step['line'];

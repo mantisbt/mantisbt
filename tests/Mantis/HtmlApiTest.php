@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare( strict_types=1 );
 # MantisBT - A PHP based bugtracking system
 
 # MantisBT is free software: you can redistribute it and/or modify
@@ -41,7 +41,7 @@ final class HtmlApiTest extends MantisCoreBase {
 	public static function tearDownAfterClass(): void {
 		config_set_global( 'short_path', self::$short_path );
 	}
-	
+
 	/**
 	 * Tests print_menu()
 	 *
@@ -52,7 +52,7 @@ final class HtmlApiTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testPrintMenu( $p_menu_items, $p_current_page, $p_expected ): void {
-		if( is_subclass_of( $p_expected, '\Throwable' ) ) { 
+		if( is_subclass_of( $p_expected, '\Throwable' ) ) {
 			$this->expectException( $p_expected );
 		} else {
 			$this->expectOutputString( $p_expected );

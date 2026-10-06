@@ -40,7 +40,7 @@ check_print_section_header_row( 'Plugins' );
 
 # Initialize
 $t_plugins = plugin_find_all();
-ksort($t_plugins);
+ksort( $t_plugins );
 plugin_init_installed();
 $t_installed_plugins = array_filter(
 	$t_plugins,

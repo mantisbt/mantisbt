@@ -346,7 +346,7 @@ class BugFilterQuery extends DbQuery {
 	protected function helper_string_query_inner() {
 		$t_from_string = ' FROM ' . implode( ', ', $this->parts_from );
 		$t_join_string = count( $this->parts_join ) > 0 ? ' ' . implode( ' ', $this->parts_join ) : '';
-		$t_where_string = ' WHERE '. implode( ' AND ', $this->fixed_where );
+		$t_where_string = ' WHERE ' . implode( ' AND ', $this->fixed_where );
 		if( count( $this->parts_where ) > 0 ) {
 			$t_where_string .= ' AND ( ';
 			$t_where_string .= implode( $this->filter_operator, $this->parts_where );
@@ -503,7 +503,7 @@ class BugFilterQuery extends DbQuery {
 		}
 
 		if( isset( $this->filter[FILTER_PROPERTY_HIDE_STATUS] )
-				|| isset( $this->filter[FILTER_PROPERTY_STATUS] )) {
+				|| isset( $this->filter[FILTER_PROPERTY_STATUS] ) ) {
 			$this->build_prop_status();
 		}
 
@@ -1418,7 +1418,7 @@ class BugFilterQuery extends DbQuery {
 			$t_tag_alias = 'bug_tag_alias_nev';
 			$t_tag_ids = $this->helper_array_map_int( array_column( $t_tags_never, 'id' ) );
 			$t_join_exc = 'LEFT JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
-				. ' AND ' . $this->sql_in(  $t_tag_alias . '.tag_id', $t_tag_ids )
+				. ' AND ' . $this->sql_in( $t_tag_alias . '.tag_id', $t_tag_ids )
 				. $t_tag_projects_clause;
 			$this->add_join( $t_join_exc );
 			$t_where[] = $t_tag_alias . '.tag_id IS NULL';
@@ -1481,7 +1481,7 @@ class BugFilterQuery extends DbQuery {
 			$t_field_info = custom_field_cache_row( $t_cfid, true );
 			if( !$t_field_info['filter_by'] ) {
 				# skip this custom field if it shouldn't be filterable
-				log_event( LOG_FILTERING, 'filter custom fields, field_id=' . $t_cfid . ' is not valid for filtering');
+				log_event( LOG_FILTERING, 'filter custom fields, field_id=' . $t_cfid . ' is not valid for filtering' );
 				continue;
 			}
 
@@ -1838,7 +1838,7 @@ class BugFilterQuery extends DbQuery {
 					$this->add_order( 'due_date_sort_null ASC' );
 				}
 				# main sort clause for due date
-				$this->add_order( $t_sort_col . ' ' .$c_dir );
+				$this->add_order( $t_sort_col . ' ' . $c_dir );
 			}
 		}
 

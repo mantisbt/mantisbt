@@ -71,7 +71,6 @@ $g_soap_api_to_filter_names = array(
 	'tag_select' => FILTER_PROPERTY_TAG_SELECT,
 );
 
-
 /**
  * Get all user defined issue filters for the given project.
  *
@@ -103,7 +102,7 @@ function mc_filter_get( $p_username, $p_password, $p_project_id, $p_filter_id = 
 			continue;
 		}
 
-		if( ApiObjectFactory::$soap ) {	
+		if( ApiObjectFactory::$soap ) {
 			$t_filter = array();
 			$t_filter['id'] = (int)$t_filter_row['id'];
 			$t_filter['name'] = $t_filter_row['name'];
@@ -204,7 +203,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 
 	# TODO: we should have a better way to do this.
 	global $g_project_override;
-	$g_project_override = $p_project_id;	
+	$g_project_override = $p_project_id;
 
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
 	$t_page_count = 0;
@@ -358,19 +357,19 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 	}
 
 	// date fields
-	if( isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] ) 
+	if( isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] )
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] )
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] )
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] )
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] )
 		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ) ) {
 		$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
 	}
-	if( isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] ) 
-		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] ) 
+	if( isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] )
+		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] )
+		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] )
+		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] )
+		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] )
 		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ) ) {
 		$t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = 'on';
 }
@@ -401,7 +400,7 @@ function mc_filter_search_issue_headers( $p_username, $p_password, $p_filter_sea
 		return mci_fault_login_failed();
 	}
 
-	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page );
 
 	$t_result = array();
 	foreach( $t_rows as $t_issue_data ) {
@@ -429,7 +428,7 @@ function mc_filter_search_issues( $p_username, $p_password, $p_filter_search, $p
 		return mci_fault_login_failed();
 	}
 
-	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page );
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
@@ -459,7 +458,7 @@ function mc_filter_search_issue_ids( $p_username, $p_password, $p_filter_search,
 		return mci_fault_login_failed();
 	}
 
-	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page );
 
 	$t_result = array();
 	foreach( $t_rows as $t_issue_data ) {

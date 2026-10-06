@@ -1017,7 +1017,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_params = [] ) {
 	#   Using a counter for "CAST" appearances to allow nesting: CAST(CAST(x AS y) AS z)
 
 	# split the string by the relevant delimiters. The delimiters will be part of the split array
-	$t_parts = preg_split("/(')|( AS )|(CAST\s*\()/mi", $p_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+	$t_parts = preg_split( "/(')|( AS )|(CAST\s*\()/mi", $p_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE );
 	$t_is_literal = false;
 	$t_cast = 0;
 	$t_query = '';
@@ -1141,7 +1141,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_params = [] ) {
 				$t_bind_num = $t_matches['bind_name'];
 
 				$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
-				$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name']. $t_matches['after_var'];
+				$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name'] . $t_matches['after_var'];
 
 				if( $p_params[$t_bind_num] === '' ) {
 					for( $n = $t_bind_num + 1; $n < count( $p_params ); $n++ ) {

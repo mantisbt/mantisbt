@@ -132,7 +132,7 @@ class GetLinkAttributesTest extends MantisCoreBase
 			true,
 		];
 
-		$t_path = config_get_global('path' );
+		$t_path = config_get_global( 'path' );
 		yield 'Mantis URL' => [
 			$t_path,
 			false,
@@ -161,7 +161,7 @@ class GetLinkAttributesTest extends MantisCoreBase
 		$this->assertSame( $p_internal, helper_get_link_attributes() );
 
 		# Test internal links
-		$this->assertSame( $p_external, helper_get_link_attributes(true, true) );
+		$this->assertSame( $p_external, helper_get_link_attributes( true, true ) );
 
 		$this->restoreConfig( self::CFG_MAKE_LINKS, $t_old );
 	}

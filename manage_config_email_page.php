@@ -146,7 +146,7 @@ function show_notify_flag( $p_action, $p_flag ) {
 	if( $g_can_change_flags || $g_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_flag;
 		$t_set = $t_flag ? 'checked="checked"' : '';
-		return '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name. '" ' . $t_set . ' /><span class="lbl"></span></label>';
+		return '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' /><span class="lbl"></span></label>';
 	} else {
 		return $t_flag ? icon_get( 'fa-check', 'fa-lg blue' ) : '&#160;';
 	}
@@ -253,7 +253,7 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
 	echo '<tr><td>' . string_attribute( $p_caption ) . '</td>' . "\n";
-	echo '  <td' . color_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' ) . '</td>' . "\n";
 	echo '  <td' . color_notify_flag( $p_message_type, 'handler' ) . '>' . show_notify_flag( $p_message_type, 'handler' ) . '</td>' . "\n";
 	echo '  <td' . color_notify_flag( $p_message_type, 'monitor' ) . '>' . show_notify_flag( $p_message_type, 'monitor' ) . '</td>' . "\n";
 	echo '  <td' . color_notify_flag( $p_message_type, 'bugnotes' ) . '>' . show_notify_flag( $p_message_type, 'bugnotes' ) . '</td>' . "\n";
@@ -275,7 +275,6 @@ function get_section_end_for_email() {
 	echo '</div></div></div> ' . "\n";
 	echo '<div class="space-10"></div>';
 }
-
 
 layout_page_header( lang_get( 'manage_email_config' ) );
 
@@ -348,7 +347,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	}
 	echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 	echo '</div>' . "\n";
-	
+
 	get_section_begin_for_email( lang_get( 'email_notification' ) );
 #		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'
 	get_capability_row_for_email( lang_get( 'email_on_updated' ), 'updated' );

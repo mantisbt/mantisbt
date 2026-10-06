@@ -307,7 +307,7 @@ if( $t_config_exists ) {
 		$g_db_connected = true;
 	}
 
-	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS);
+	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
@@ -493,7 +493,7 @@ if( 2 == $t_install_state ) {
 				$t_page_contents = url_get( $f_path );
 				if( !$t_page_contents ) {
 					$t_url_check = "Can't retrieve web page at '$f_path'.";
-				} elseif( false === strpos( $t_page_contents, 'MantisBT') ) {
+				} elseif( false === strpos( $t_page_contents, 'MantisBT' ) ) {
 					$t_url_check = "Web page at '$f_path' does not appear to be a MantisBT site.";
 				}
 				if( $t_url_check ) {
@@ -577,7 +577,7 @@ if( 2 == $t_install_state ) {
 <?php
 	} # end if db open
 	} # end if failed DB checks
-	
+
 	if( !$g_failed ) {
 		$t_install_state++;
 	} else {
@@ -770,7 +770,7 @@ if( !$g_database_upgrade ) {
 		);
 		echo "\n&nbsp;";
 		if( $t_key != 'db_table_suffix' ) {
-			$t_id_sample = $t_key. '_sample';
+			$t_id_sample = $t_key . '_sample';
 			echo '<label for="' . $t_id_sample . '">Sample table name:</label>';
 			echo "\n", '<input id="' . $t_id_sample . '" type="text" size="40" disabled>';
 		} else {
@@ -993,8 +993,8 @@ if( 3 == $t_install_state ) {
 			echo '</div>';
 
 			echo '<pre>';
-			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script". PHP_EOL;
-			echo "-- " . date("c") . PHP_EOL . PHP_EOL;
+			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script" . PHP_EOL;
+			echo "-- " . date( "c" ) . PHP_EOL . PHP_EOL;
 		}
 
 		# Make sure we do the upgrades using UTF-8 if needed
@@ -1227,7 +1227,7 @@ if( 3 == $t_install_state ) {
 							}
 						}
 					}
-					print_test_result( BAD, true, $t_all_sql  . $g_db->ErrorMsg() );
+					print_test_result( BAD, true, $t_all_sql . $g_db->ErrorMsg() );
 				}
 				echo '</tr>';
 			}
@@ -1349,10 +1349,10 @@ if( 5 == $t_install_state ) {
 ?>
 
 <tr>
-    <td>
-        <?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
-        Configuration File (config/config_inc.php)<br />
-    </td>
+	<td>
+		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
+		Configuration File (config/config_inc.php)<br />
+	</td>
 <?php
 	# Generating the config_inc.php file
 
@@ -1381,7 +1381,7 @@ if( 5 == $t_install_state ) {
 	$t_config .=
 		  '$g_default_timezone       = \'' . addslashes( $f_timezone ) . '\';' . PHP_EOL
 		. PHP_EOL
-		. (!$t_crypto_master_salt ? "# The installer could not generate the Master Salt; please set it manually.\n" : '')
+		. ( !$t_crypto_master_salt ? "# The installer could not generate the Master Salt; please set it manually.\n" : '' )
 		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
 
 	if( $f_path ) {

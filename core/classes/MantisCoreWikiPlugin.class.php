@@ -88,7 +88,7 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 	 * @return string
 	 */
 	function link_bug( $p_event, $p_bug_id ) {
-		return $this->base_url( bug_get_field( $p_bug_id, 'project_id' ) ) .  'issue:' . (int)$p_bug_id;
+		return $this->base_url( bug_get_field( $p_bug_id, 'project_id' ) ) . 'issue:' . (int)$p_bug_id;
 	}
 
 	/**
@@ -375,7 +375,7 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 	 * @return string
 	 */
 	function link_bug( $p_event, $p_bug_id ) {
-		return $this->base_url( bug_get_field( $p_bug_id, 'project_id' ) ) .  (int)$p_bug_id;
+		return $this->base_url( bug_get_field( $p_bug_id, 'project_id' ) ) . (int)$p_bug_id;
 	}
 
 	/**

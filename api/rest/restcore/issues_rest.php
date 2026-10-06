@@ -32,7 +32,7 @@ use Slim\Http\Response;
 /**
  * @var \Slim\App $g_app
  */
-$g_app->group('/issues', function() use ( $g_app ) {
+$g_app->group( '/issues', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_issue_get' );
 	$g_app->get( '/', 'rest_issue_get' );
 	$g_app->get( '/{id}', 'rest_issue_get' );
@@ -81,7 +81,7 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->get( '/{id}/files/{file_id}', 'rest_issue_files_get' );
 	$g_app->delete( '/{id}/files/{file_id}/', 'rest_issue_file_delete' );
 	$g_app->delete( '/{id}/files/{file_id}', 'rest_issue_file_delete' );
-});
+} );
 
 /**
  * A method that does the work to handle getting an issue via REST API.
@@ -120,7 +120,7 @@ function rest_issue_get( Request $p_request, Response $p_response, array $p_args
 		$t_project_id = (int)$p_request->getParam( 'project_id', ALL_PROJECTS );
 		if( $t_project_id != ALL_PROJECTS ) {
 			$t_message = "Project '$t_project_id' doesn't exist";
-			if (!project_exists( $t_project_id ) ) {
+			if ( !project_exists( $t_project_id ) ) {
 				return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
 			}
 
@@ -175,7 +175,7 @@ function rest_issue_get( Request $p_request, Response $p_response, array $p_args
 function rest_issue_add( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue = $p_request->getParsedBody();
 	if( !$t_issue ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
 	if( isset( $t_issue['files'] ) ) {
@@ -438,7 +438,7 @@ function rest_issue_update( Request $p_request, Response $p_response, array $p_a
 	# Construct full issue from issue from db + patched info
 	$t_issue_patch = $p_request->getParsedBody();
 	if( !$t_issue_patch ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 	if( isset( $t_issue_patch['id'] ) && $t_issue_patch['id'] != $t_issue_id ) {
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Issue id mismatch' );
@@ -508,7 +508,7 @@ function rest_issue_monitor_add( Request $p_request, Response $p_response, array
 	$t_command = new MonitorAddCommand( $t_data );
 	$t_command->execute();
 
-	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Users are now monitoring issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );
@@ -534,7 +534,7 @@ function rest_issue_tag_attach( Request $p_request, Response $p_response, array 
 	$t_command = new TagAttachCommand( $t_data );
 	$t_command->execute();
 
-	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Tag attached to issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );
@@ -563,7 +563,7 @@ function rest_issue_tag_detach( Request $p_request, Response $p_response, array 
 	$t_command = new TagDetachCommand( $t_data );
 	$t_command->execute();
 
-	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Tag detached from issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );

@@ -118,7 +118,7 @@ print_doc_menu( 'proj_doc_page.php' );
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<?php print_icon( 'fa-file', 'ace-icon' ); ?>
-		<?php echo lang_get('project_documentation_title') ?>
+		<?php echo lang_get( 'project_documentation_title' ) ?>
 	</h4>
 </div>
 
@@ -155,7 +155,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 			/** @noinspection HtmlUnknownTarget */
 			printf( '<a href="%s">%s</a> (%s)',
 				$t_download_url,
-                    string_attribute( $v_title ),
+					string_attribute( $v_title ),
 				$t_filesize
 			);
 		?>

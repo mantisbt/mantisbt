@@ -50,7 +50,7 @@ if( defined( 'PHP_SUPPORTED_VERSION' ) ) {
 	$t_supported_php_version = PHP_SUPPORTED_VERSION;
 	if( PHP_SUPPORTED_VERSION == $t_short_version ) {
 		$t_supported_php_version .= '.999';
-		$t_supported_msg = "has not been fully tested with PHP ". PHP_SUPPORTED_VERSION . " yet,";
+		$t_supported_msg = "has not been fully tested with PHP " . PHP_SUPPORTED_VERSION . " yet,";
 	} else {
 		$t_supported_msg = "has only been fully tested up to PHP $t_supported_php_version,";
 	}
@@ -74,7 +74,7 @@ if( defined( 'PHP_SUPPORTED_VERSION' ) ) {
 		] );
 	$C = 'constant';
 	$t_info = <<<MESSAGE
-		MantisBT {$C('MANTIS_VERSION')} 
+		MantisBT {$C( 'MANTIS_VERSION' )} 
 		$t_supported_msg
 		using an earlier PHP version is recommended.<br>
 		In case of PHP-$t_short_version-related compatibility issues, please 

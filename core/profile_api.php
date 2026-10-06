@@ -161,7 +161,7 @@ class ProfileData {
 		$t_user_id = $p_user_id === null ? auth_get_current_user_id() : $p_user_id;
 
 		# Global profile ?
-		if( $this->is_global()) {
+		if( $this->is_global() ) {
 			return access_has_global_level( config_get( 'manage_global_profile_threshold' ) );
 		}
 

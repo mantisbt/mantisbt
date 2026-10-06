@@ -279,7 +279,7 @@ function print_email_pending_verification_warning( int $p_user_id ): void {
 
 	if( $t_email_change ) {
 		echo '<div class="padding-8">';
-		print_icon('fa-info-circle', 'ace-icon bigger-125 blue padding-right-4' );
+		print_icon( 'fa-info-circle', 'ace-icon bigger-125 blue padding-right-4' );
 		printf( lang_get( 'verify_email_pending' ), $t_email_change );
 		echo '</div>';
 	}
@@ -497,7 +497,7 @@ function print_news_item_option_list() {
 				ORDER BY date_posted DESC';
 	}
 
-	$t_result = db_query( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
+	$t_result = db_query( $t_query, ( $t_global == true ? array() : array( $t_project_id ) ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_headline = string_display_line( $t_row['headline'] );
@@ -813,8 +813,8 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 
 	# Add the current category if it is not in the list
 	if( $p_category_id != 0
-        && !in_array( $p_category_id, array_column( $t_cat_arr, 'id' ) )
-    ) {
+		&& !in_array( $p_category_id, array_column( $t_cat_arr, 'id' ) )
+	) {
 		$t_category_row = category_get_row( $p_category_id );
 		$t_category_row['project_name'] = project_get_name( $t_category_row['project_id'] );
 		$t_cat_arr[] = $t_category_row;
@@ -1215,7 +1215,7 @@ function print_font_option_list( $p_font ) {
  */
 function print_all_bug_action_option_list( array $p_project_ids = [] ) {
 	$t_commands = bug_group_action_get_commands( $p_project_ids );
-	foreach ( $t_commands as $t_action_id => $t_action_label) {
+	foreach ( $t_commands as $t_action_id => $t_action_label ) {
 		echo '<option value="' . $t_action_id . '">' . $t_action_label . '</option>';
 	}
 }
@@ -1365,7 +1365,7 @@ function print_formatted_severity_string( BugData $p_bug ) {
 		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
 		echo '<span class="bold">' . string_attribute( $t_sev_str ) . '</span>';
 	} else {
-		echo string_attribute( $t_sev_str);
+		echo string_attribute( $t_sev_str );
 	}
 }
 
@@ -1551,7 +1551,7 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = []
 		print_hidden_inputs( $p_args_to_post );
 	}
 
-	if( $p_class == '') {
+	if( $p_class == '' ) {
 		$p_class = 'btn btn-primary btn-xs btn-white btn-round';
 	}
 	echo '<button type="submit" class="' . $p_class . '">' . $p_label . '</button>';
@@ -1742,7 +1742,6 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	if( $t_first_page > 1 ) {
 		print( '<li class="pull-right"><a> ... </a></li>' );
 	}
-
 
 	# First and previous links
 	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_key );
@@ -2001,12 +2000,12 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 	if( $p_attachment['preview'] || $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
-		$g_collapse_cache_token[$t_collapse_id] = 
+		$g_collapse_cache_token[$t_collapse_id] =
 			$p_attachment['type'] == 'image' ||
 			$p_attachment['type'] == 'audio' ||
 			$p_attachment['type'] == 'video';
 
-		collapse_open( $t_collapse_id, '');
+		collapse_open( $t_collapse_id, '' );
 	}
 
 	print_bug_attachment_header( $p_attachment, $p_security_token );
@@ -2040,17 +2039,17 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 		if( $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
 			echo lang_get( 'word_separator' );
 			collapse_icon( $t_collapse_id );
-	
+
 			print_bug_attachment_preview_audio_video(
 				$p_attachment,
 				$p_attachment['file_type'],
 				$p_attachment['preview'] );
-	
+
 			collapse_closed( $t_collapse_id );
 			print_bug_attachment_header( $p_attachment, $p_security_token );
 			echo lang_get( 'word_separator' );
 			collapse_icon( $t_collapse_id );
-			collapse_end( $t_collapse_id );	
+			collapse_end( $t_collapse_id );
 		} else {
 			echo '<br />';
 		}
@@ -2185,7 +2184,7 @@ function print_bug_attachment_preview_audio_video( array $p_attachment, $p_file_
 	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '"' . print_attachment_link_target() . '>';
 	echo '<' . $t_type . ' controls="controls"' . $t_preload . '>';
 	echo '<source src="' . string_attribute( $t_file_url ) . '" type="' . string_attribute( $p_file_type ) . '">';
-  	echo lang_get( 'browser_does_not_support_' . $t_type );
+	echo lang_get( 'browser_does_not_support_' . $t_type );
 	echo '</' . $t_type . '>';
 	echo "</a></div>";
 }

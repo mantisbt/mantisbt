@@ -846,7 +846,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 			if( $t_login_method != $t_configured_login_method
 				|| ( CRYPT == $t_configured_login_method
 					&& mb_substr( $t_password, 0, 2 ) == mb_substr( $p_test_password, 0, 2 )
-				) 
+				)
 			) {
 				user_set_password( $p_user_id, $p_test_password, true );
 			}

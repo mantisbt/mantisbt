@@ -43,7 +43,6 @@ function print_config_value( $p_config_key ) {
 # See http://www.rfc-editor.org/rfc/rfc4329.txt for details on why application/javascript is the correct MIME type.
 header( 'Content-Type: application/javascript; charset=UTF-8' );
 
-
 # Don't let Internet Explorer second-guess our content-type, as per
 # http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
 header( 'X-Content-Type-Options: nosniff' );

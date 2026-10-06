@@ -494,7 +494,7 @@ function relationship_get( $p_relationship_id ) {
  */
 function relationship_get_all_src( $p_src_bug_id ) {
 	global $g_cache_relationships_src;
-	
+
 	$c_src_bug_id = (int)$p_src_bug_id;
 	if( isset( $g_cache_relationships_src[$c_src_bug_id] ) ) {
 		return $g_cache_relationships_src[$c_src_bug_id];
@@ -531,7 +531,7 @@ function relationship_get_all_src( $p_src_bug_id ) {
 	if( !empty( $t_bug_array ) ) {
 		bug_cache_array_rows( $t_bug_array );
 	}
-	
+
 	$g_cache_relationships_src[$c_src_bug_id] = $t_bug_relationship_data;
 
 	return $t_bug_relationship_data;
@@ -547,7 +547,7 @@ function relationship_get_all_src( $p_src_bug_id ) {
  */
 function relationship_get_all_dest( $p_dest_bug_id ) {
 	global $g_cache_relationships_dest;
-	
+
 	$c_dest_bug_id = (int)$p_dest_bug_id;
 	if( isset( $g_cache_relationships_dest[$c_dest_bug_id] ) ) {
 		return $g_cache_relationships_dest[$c_dest_bug_id];

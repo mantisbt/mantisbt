@@ -146,7 +146,7 @@ layout_page_begin();
 					echo '</select></td>';
 				} else { ?>
 					<td class="category"><?php echo lang_get( 'owner' ); ?></td>
-					<td><?php echo string_attribute( user_get_name($t_tag_row['user_id']) ); ?></td><?php
+					<td><?php echo string_attribute( user_get_name( $t_tag_row['user_id'] ) ); ?></td><?php
 				} ?>
 			</tr>
 			<tr>
@@ -169,7 +169,7 @@ layout_page_begin();
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
 			<button class="btn btn-primary btn-white btn-round"
-			        <?php echo helper_get_tab_index() ?>>
+					<?php echo helper_get_tab_index() ?>>
 				<?php echo lang_get( 'tag_update_button' ) ?>
 			</button>
 		</div>

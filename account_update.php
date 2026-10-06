@@ -205,7 +205,6 @@ if( $t_show_confirmation_message ) {
 		"account_page.php",
 		'<p class="bold bigger-110">' . lang_get( 'operation_successful' ) . '</p><br>'
 		. sprintf( lang_get( 'verify_email_confirm_msg' ), $f_email
-
 		)
 	);
 	layout_page_end();

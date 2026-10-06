@@ -14,7 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * RSS API
  *
@@ -42,7 +41,6 @@ require_api( 'crypto_api.php' );
 require_api( 'current_user_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'user_api.php' );
-
 
 /**
  * Initialize RSS.

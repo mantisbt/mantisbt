@@ -42,13 +42,11 @@ require_api( 'gpc_api.php' );
 require_api( 'tokens_api.php' );
 require_api( 'utility_api.php' );
 
-
 # @global string $g_current_collapse_section
 $g_current_collapse_section = null;
 
 # @global bool $g_open_collapse_section
 $g_open_collapse_section = false;
-
 
 # @global string $g_collapse_cache_token
 $g_collapse_cache_token = null;
@@ -140,11 +138,11 @@ function collapse_icon( $p_name ) {
 	} else {
 		$t_icon = 'fa-chevron-down';
 		$t_alt = '+';
-		$t_id = $p_name. '_closed_link';
+		$t_id = $p_name . '_closed_link';
 	}
 
 	echo '&nbsp;&nbsp;<a id="', $t_id, '" class="collapse-link noprint">';
-	print_icon( $t_icon, 'bigger-120', $t_alt);
+	print_icon( $t_icon, 'bigger-120', $t_alt );
 	echo '</a>';
 }
 

@@ -53,10 +53,10 @@ abstract class MantisTestCase extends TestCase {
 	 * @noinspection PhpUndefinedMethodInspection
 	 */
 	function getTestName(): string {
-		$t_class_name = (new ReflectionClass($this))->getShortName();
+		$t_class_name = ( new ReflectionClass( $this ) )->getShortName();
 
 		# getName() method was renamed in PHPUnit 10.2 (commit d0dbaafb)
-		if( version_compare( PHPUnitVersion::id(), '10.2', '<' )) {
+		if( version_compare( PHPUnitVersion::id(), '10.2', '<' ) ) {
 			$t_test_method = $this->getName();
 		} else {
 			$t_test_method = $this->name();

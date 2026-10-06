@@ -91,7 +91,6 @@ function require_mantis_core() {
 	restore_error_handler();
 }
 
-
 # Set error reporting to the level to which Zend Framework code must comply.
 error_reporting( E_ALL );
 
@@ -102,7 +101,6 @@ $g_mantisCore = $g_mantisRoot . '/core';
 $g_mantisLibrary = $g_mantisRoot . '/library';
 $g_mantisClasses = $g_mantisRoot . '/core/classes';
 $g_mantisTests = $g_mantisRoot . '/tests';
-
 
 # Prepend the application/ and tests/ directories to the include_path.
 $g_path = array(
@@ -115,4 +113,4 @@ $g_path = array(
 set_include_path( implode( PATH_SEPARATOR, $g_path ) );
 
 # Unset global variables that are no longer needed.
-unset($g_mantisRoot, $g_mantisLibrary, $g_mantisTests, $g_path);
+unset( $g_mantisRoot, $g_mantisLibrary, $g_mantisTests, $g_path );

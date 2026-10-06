@@ -225,25 +225,25 @@ class UserPreferences {
 	'redirect_delay' => array( 'default_redirect_delay', 'int' ),
 	'bugnote_order' => array( 'default_bugnote_order', 'string' ),
 	'email_on_new' => array( 'default_email_on_new', 'int' ),
-	'email_on_assigned' => array(  'default_email_on_assigned', 'int' ),
-	'email_on_feedback' => array(  'default_email_on_feedback', 'int' ),
-	'email_on_resolved' => array(  'default_email_on_resolved', 'int' ),
-	'email_on_closed' => array(  'default_email_on_closed', 'int' ),
-	'email_on_reopened' => array(  'default_email_on_reopened', 'int' ),
-	'email_on_bugnote' => array(  'default_email_on_bugnote', 'int' ),
-	'email_on_status' => array(  'default_email_on_status', 'int' ),
-	'email_on_priority' => array(  'default_email_on_priority', 'int' ),
-	'email_on_new_min_severity' => array(  'default_email_on_new_minimum_severity', 'int' ),
-	'email_on_assigned_min_severity' => array(  'default_email_on_assigned_minimum_severity', 'int' ),
-	'email_on_feedback_min_severity' => array(  'default_email_on_feedback_minimum_severity', 'int' ),
-	'email_on_resolved_min_severity' => array(  'default_email_on_resolved_minimum_severity', 'int' ),
-	'email_on_closed_min_severity' => array(  'default_email_on_closed_minimum_severity', 'int' ),
-	'email_on_reopened_min_severity' => array(  'default_email_on_reopened_minimum_severity', 'int' ),
-	'email_on_bugnote_min_severity' => array(  'default_email_on_bugnote_minimum_severity', 'int' ),
-	'email_on_status_min_severity' => array(  'default_email_on_status_minimum_severity', 'int' ),
-	'email_on_priority_min_severity' => array(  'default_email_on_priority_minimum_severity', 'int' ),
-	'email_bugnote_limit' => array(  'default_email_bugnote_limit', 'int' ),
-	'language' => array(  'default_language', 'string' ),
+	'email_on_assigned' => array( 'default_email_on_assigned', 'int' ),
+	'email_on_feedback' => array( 'default_email_on_feedback', 'int' ),
+	'email_on_resolved' => array( 'default_email_on_resolved', 'int' ),
+	'email_on_closed' => array( 'default_email_on_closed', 'int' ),
+	'email_on_reopened' => array( 'default_email_on_reopened', 'int' ),
+	'email_on_bugnote' => array( 'default_email_on_bugnote', 'int' ),
+	'email_on_status' => array( 'default_email_on_status', 'int' ),
+	'email_on_priority' => array( 'default_email_on_priority', 'int' ),
+	'email_on_new_min_severity' => array( 'default_email_on_new_minimum_severity', 'int' ),
+	'email_on_assigned_min_severity' => array( 'default_email_on_assigned_minimum_severity', 'int' ),
+	'email_on_feedback_min_severity' => array( 'default_email_on_feedback_minimum_severity', 'int' ),
+	'email_on_resolved_min_severity' => array( 'default_email_on_resolved_minimum_severity', 'int' ),
+	'email_on_closed_min_severity' => array( 'default_email_on_closed_minimum_severity', 'int' ),
+	'email_on_reopened_min_severity' => array( 'default_email_on_reopened_minimum_severity', 'int' ),
+	'email_on_bugnote_min_severity' => array( 'default_email_on_bugnote_minimum_severity', 'int' ),
+	'email_on_status_min_severity' => array( 'default_email_on_status_minimum_severity', 'int' ),
+	'email_on_priority_min_severity' => array( 'default_email_on_priority_minimum_severity', 'int' ),
+	'email_bugnote_limit' => array( 'default_email_bugnote_limit', 'int' ),
+	'language' => array( 'default_language', 'string' ),
 	'timezone' => array( 'default_timezone', 'string' ),
 	);
 
@@ -291,7 +291,7 @@ class UserPreferences {
 		}
 		switch( self::$_default_mapping[$p_string][1] ) {
 			case 'int':
-				return (int)($this->$p_string);
+				return (int)( $this->$p_string );
 			default:
 				return $this->$p_string;
 		}
@@ -481,7 +481,7 @@ function user_pref_db_insert( $p_user_id, $p_project_id, UserPreferences $p_pref
  */
 function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
 	user_ensure_unprotected( $p_user_id );
-	user_pref_db_update($p_user_id, $p_project_id, $p_prefs );
+	user_pref_db_update( $p_user_id, $p_project_id, $p_prefs );
 	user_pref_clear_cache( $p_user_id, $p_project_id );
 }
 

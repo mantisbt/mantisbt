@@ -278,9 +278,9 @@ if( null == $f_project_to_move ) {
 } else {
 
 	$t_moved = array();
-	
+
 	foreach( $f_project_to_move as $t_project_to_move ) {
-		
+
 		$t_array = explode( ':', $t_project_to_move );
 
 		if( isset( $t_array[1] ) ) {
@@ -296,7 +296,7 @@ if( null == $f_project_to_move ) {
 			}
 		}
 	}
-	
+
 	# Display results
 	if( empty( $t_moved ) ) {
 		echo '<div class="alert alert-danger">';
@@ -316,7 +316,7 @@ if( null == $f_project_to_move ) {
 				$t_row['rows'],
 				( 0 == $t_row['failed']
 					? 'moved successfully'
-					: 'to move, ' . $t_row['failed'] . ' failures')
+					: 'to move, ' . $t_row['failed'] . ' failures' )
 			);
 			echo '</h4>';
 			echo '</div>';

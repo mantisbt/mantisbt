@@ -50,10 +50,10 @@ class PrepareTest extends MantisCoreBase {
 	 */
 	public static function providerMailTo() {
 		$t_test_data = array(
-			'Basic' => array( array( self::EMAIL, ''), 'mailto:' . self::EMAIL ),
-			'Subject' => array( array( self::EMAIL, 'subject'), 'mailto:' . self::EMAIL . '?subject=subject' ),
-			'SubjectWithSpace' => array( array( self::EMAIL, 'message subject'), 'mailto:' . self::EMAIL . '?subject=message%20subject' ),
-			'SubjectWithQuestionAmp' => array( array( self::EMAIL, 'message?subject&matter'), 'mailto:' . self::EMAIL . '?subject=message%3Fsubject%26matter' ),
+			'Basic' => array( array( self::EMAIL, '' ), 'mailto:' . self::EMAIL ),
+			'Subject' => array( array( self::EMAIL, 'subject' ), 'mailto:' . self::EMAIL . '?subject=subject' ),
+			'SubjectWithSpace' => array( array( self::EMAIL, 'message subject' ), 'mailto:' . self::EMAIL . '?subject=message%20subject' ),
+			'SubjectWithQuestionAmp' => array( array( self::EMAIL, 'message?subject&matter' ), 'mailto:' . self::EMAIL . '?subject=message%3Fsubject%26matter' ),
 		);
 
 		return $t_test_data;

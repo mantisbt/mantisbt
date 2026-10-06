@@ -618,7 +618,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 		}
 	}
 
-	return (count( $t_relationships ) == 0 ? null : $t_relationships );
+	return ( count( $t_relationships ) == 0 ? null : $t_relationships );
 }
 
 /**
@@ -674,7 +674,7 @@ function mci_issue_note_data_as_array( $p_bugnote_row ) {
 				unset( $t_bugnote['time_tracking'] );
 			} else {
 				$t_bugnote['time_tracking'] = array( 'duration' => db_minutes_to_hhmm( $t_bugnote['time_tracking'] ) );
-			}	
+			}
 		}
 
 		$t_bugnote['created_at'] = $t_created_at;
@@ -1229,7 +1229,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 					$t_bugnote_changed = false;
 
-					if( isset( $t_note['text']) && $t_bugnote->note !== $t_note['text'] ) {
+					if( isset( $t_note['text'] ) && $t_bugnote->note !== $t_note['text'] ) {
 						bugnote_set_text( $t_bugnote_id, $t_note['text'] );
 						$t_bugnote_changed = true;
 					}
@@ -1239,7 +1239,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 						$t_bugnote_changed = true;
 					}
 
-					if( isset( $t_note['time_tracking']) && $t_note['time_tracking'] != $t_bugnote->time_tracking ) {
+					if( isset( $t_note['time_tracking'] ) && $t_note['time_tracking'] != $t_bugnote->time_tracking ) {
 						bugnote_set_time_tracking( $t_bugnote_id, mci_get_time_tracking_from_note( $p_issue_id, $t_note ) );
 						$t_bugnote_changed = true;
 					}
@@ -1713,7 +1713,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
 		}
 
 		# null it out, so it doesn't get used by mistake
-		$p_fields = null;	
+		$p_fields = null;
 	}
 
 	$t_issue = array();
@@ -1769,7 +1769,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
 	if( $t_fields === null || isset( $t_fields['handler'] ) ) {
 		if( !empty( $p_issue_data->handler_id ) &&
 			access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $t_id, $p_user_id ) ) {
-			$t_issue['handler'] = mci_account_get_array_by_id($p_issue_data->handler_id);
+			$t_issue['handler'] = mci_account_get_array_by_id( $p_issue_data->handler_id );
 		}
 	}
 
@@ -1862,8 +1862,8 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang, $p
 	} else {
 		if( $t_fields === null || isset( $t_fields['profile'] ) ) {
 			if( config_get( 'enable_profiles' ) != OFF ) {
-				if ((int)$p_issue_data->profile_id != 0) {
-					$t_issue['profile'] = mci_profile_as_array_by_id($p_issue_data->profile_id);
+				if ( (int)$p_issue_data->profile_id != 0 ) {
+					$t_issue['profile'] = mci_profile_as_array_by_id( $p_issue_data->profile_id );
 				}
 			}
 		}
@@ -1998,21 +1998,21 @@ function mci_issue_data_as_header_array( BugData $p_issue_data ) {
  */
 function mci_check_access_to_bug( $p_user_id, $p_bug_id ) {
 
-    if( !bug_exists( $p_bug_id ) ) {
-        return false;
-    }
+	if( !bug_exists( $p_bug_id ) ) {
+		return false;
+	}
 
-    $t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-    $g_project_override = $t_project_id;
-    if( !mci_has_readonly_access( $p_user_id, $t_project_id ) ) {
-        return false;
-    }
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	$g_project_override = $t_project_id;
+	if( !mci_has_readonly_access( $p_user_id, $t_project_id ) ) {
+		return false;
+	}
 
-    if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_bug_id, $p_user_id ) ) {
-        return false;
-    }
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_bug_id, $p_user_id ) ) {
+		return false;
+	}
 
-    return true;
+	return true;
 }
 
 /**
@@ -2024,26 +2024,26 @@ function mci_check_access_to_bug( $p_user_id, $p_bug_id ) {
  * @return array that represents an IssueDataArray structure
  */
 function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
-    $t_user_id = mci_check_login( $p_username, $p_password );
-    if( $t_user_id === false ) {
-        return mci_fault_login_failed();
-    }
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_fault_login_failed();
+	}
 
-    $t_lang = mci_get_user_lang( $t_user_id );
+	$t_lang = mci_get_user_lang( $t_user_id );
 
-    $t_result = array();
-    foreach( $p_issue_ids as $t_id ) {
-        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false ) {
+	$t_result = array();
+	foreach( $p_issue_ids as $t_id ) {
+		if( mci_check_access_to_bug( $t_user_id, $t_id ) === false ) {
 			continue;
 		}
 
-        log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
+		log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
-        $t_issue_data = bug_get( $t_id, true );
-        $t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
-    }
+		$t_issue_data = bug_get( $t_id, true );
+		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
+	}
 
-    return $t_result;
+	return $t_result;
 }
 
 /**
@@ -2055,24 +2055,24 @@ function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
  * @return array that represents an IssueHeaderDataArray structure
  */
 function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
-    $t_user_id = mci_check_login( $p_username, $p_password );
-    if( $t_user_id === false ) {
-        return mci_fault_login_failed();
-    }
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_fault_login_failed();
+	}
 
-    $t_result = array();
-    foreach( $p_issue_ids as $t_id ) {
+	$t_result = array();
+	foreach( $p_issue_ids as $t_id ) {
 
-        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
-            continue;
+		if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
+			continue;
 
-        log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
+		log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
-        $t_issue_data = bug_get( $t_id, true );
-        $t_result[] = mci_issue_data_as_header_array( $t_issue_data );
-    }
+		$t_issue_data = bug_get( $t_id, true );
+		$t_result[] = mci_issue_data_as_header_array( $t_issue_data );
+	}
 
-    return $t_result;
+	return $t_result;
 }
 
 /**

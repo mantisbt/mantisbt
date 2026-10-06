@@ -83,7 +83,6 @@ function config_get_access_parent( $p_project, $p_option ) {
 	}
 }
 
-
 $t_can_change_level = min( config_get_access( 'status_enum_workflow' ), config_get_access( 'report_bug_threshold' ), config_get_access( 'set_status_threshold' )
 		, config_get_access( 'bug_submit_status' ), config_get_access( 'bug_resolved_status_threshold' ), config_get_access( 'bug_reopen_status' ) );
 access_ensure_project_level( $t_can_change_level );
@@ -141,7 +140,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 			$t_first = false;
 		} else {
 			# error default state isn't in the matrix
-			echo '<p>' . sprintf( lang_get( 'default_not_in_flow' ), get_enum_element( 'status', $t_default ), get_enum_element( 'status', $t_state ) )  . '</p>';
+			echo '<p>' . sprintf( lang_get( 'default_not_in_flow' ), get_enum_element( 'status', $t_default ), get_enum_element( 'status', $t_state ) ) . '</p>';
 			$t_first = true;
 		}
 		if( isset( $t_matrix[$t_state] ) ) {

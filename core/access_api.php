@@ -82,7 +82,7 @@ $g_cache_access_matrix_user_ids = array();
 function access_denied() {
 	if( php_sapi_name() == 'cli' ) {
 		echo error_string( ERROR_ACCESS_DENIED );
-		exit(1);
+		exit( 1 );
 	}
 
 	$t_return = '';
@@ -121,8 +121,8 @@ function access_denied() {
 			error_string( ERROR_ACCESS_DENIED ), CONFIRMATION_TYPE_FAILURE );
 		layout_page_end();
 	}
-	http_response_code(HTTP_STATUS_FORBIDDEN);
-	exit(1);
+	http_response_code( HTTP_STATUS_FORBIDDEN );
+	exit( 1 );
 }
 
 /**

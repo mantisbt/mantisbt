@@ -364,7 +364,6 @@ class FilterTest extends SoapBase {
 			"Created issue has the expected number of Bugnotes" );
 	}
 
-
 	/**
 	 * A test case that tests the following:
 	 * 1. Retrieving all the project's issues
@@ -733,7 +732,7 @@ class FilterTest extends SoapBase {
 		$this->assertCount( 1, $t_search_result_ids );
 
 		$this->assertCount( 1, $t_search_result_issues );
-		$this->assertEquals( VS_PUBLIC, $t_search_result_issues[0]->view_state->id);
+		$this->assertEquals( VS_PUBLIC, $t_search_result_issues[0]->view_state->id );
 		$this->assertEquals( $this->getCategory(), $t_search_result_issues[0]->category );
 		$this->assertEquals( BLOCK, $t_search_result_issues[0]->severity->id );
 

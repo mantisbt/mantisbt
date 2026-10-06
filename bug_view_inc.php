@@ -208,11 +208,11 @@ if( $t_bugslist ) {
 	$t_index = array_search( $f_issue_id, $t_bugslist );
 	if( false !== $t_index ) {
 		if( isset( $t_bugslist[$t_index-1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+			print_small_button( 'view.php?id=' . $t_bugslist[$t_index-1], '&lt;&lt;' );
 		}
 
 		if( isset( $t_bugslist[$t_index+1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
+			print_small_button( 'view.php?id=' . $t_bugslist[$t_index+1], '&gt;&gt;' );
 		}
 	}
 }
@@ -235,7 +235,7 @@ if( $t_top_buttons_enabled ) {
 echo '<tbody>';
 
 if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show'] ||
-    $t_flags['view_state_show'] || $t_flags['created_at_show'] || $t_flags['updated_at_show']
+	$t_flags['view_state_show'] || $t_flags['created_at_show'] || $t_flags['updated_at_show']
 ) {
 
 	# Labels
@@ -450,7 +450,7 @@ if( $t_flags['projection_show'] || $t_flags['eta_show'] ) {
 
 if( ( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is_blank( $t_issue['platform'] ) ) ||
 	( $t_flags['profiles_os_show'] && isset( $t_issue['os'] ) && !is_blank( $t_issue['os'] ) ) ||
-    ( $t_flags['profiles_os_build_show'] && isset( $t_issue['os_build'] ) && !is_blank( $t_issue['os_build'] ) ) ) {
+	( $t_flags['profiles_os_build_show'] && isset( $t_issue['os_build'] ) && !is_blank( $t_issue['os_build'] ) ) ) {
 	$t_spacer = 0;
 
 	echo '<tr>';
@@ -491,7 +491,7 @@ if( ( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is
 #
 
 if( ( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) ) ||
-    ( $t_flags['versions_product_build_show'] && isset( $t_issue['build'] ) ) ) {
+	( $t_flags['versions_product_build_show'] && isset( $t_issue['build'] ) ) ) {
 	$t_spacer = 2;
 
 	echo '<tr>';
@@ -523,7 +523,7 @@ if( ( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) 
 #
 
 if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_version'] ) ) ||
-    ( $t_flags['versions_fixed_in_version_show'] && isset( $t_issue['fixed_in_version'] ) ) ) {
+	( $t_flags['versions_fixed_in_version_show'] && isset( $t_issue['fixed_in_version'] ) ) ) {
 	$t_spacer = 2;
 
 	echo '<tr>';
@@ -732,14 +732,14 @@ if( $t_flags['monitor_show'] ) {
 						echo ' <a class="btn btn-xs btn-primary btn-white btn-round" '
 							. 'href="' . helper_mantis_url( 'bug_monitor_delete.php' )
 							. '?bug_id=' . $f_issue_id . '&amp;user_id=' . $t_monitor_user['id']
-							. htmlspecialchars(form_security_param( 'bug_monitor_delete' ))
+							. htmlspecialchars( form_security_param( 'bug_monitor_delete' ) )
 							. '">'
 							. icon_get( 'fa-times' )
 							. '</a>';
 					}
 				 }
 			}
-	
+
 			if( $t_flags['monitor_can_add'] ) {
 	?>
 			<br /><br />
@@ -946,7 +946,7 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 	}
 
 	# add summary
-	$t_relationship_info_html .= $t_td 
+	$t_relationship_info_html .= $t_td
 		. '<span class="padding-right-4">' . string_display_line_links( $t_bug->summary ) . '</span>';
 	if( VS_PRIVATE == $t_bug->view_state ) {
 		$t_relationship_info_html .= icon_get( 'fa-lock', 'ace-icon', lang_get( 'private' ) );
@@ -1128,7 +1128,7 @@ function bug_view_button_bug_change_status( BugData $p_bug ) {
 		# Add close if user is bug's reporter, still has rights to report issues
 		# (to prevent users downgraded to viewers from updating issues) and
 		# reporters are allowed to close their own issues
-		(  bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
+		( bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
 		&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id )
 		&& ON == config_get( 'allow_reporter_close' )
 		),

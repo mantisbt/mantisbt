@@ -98,7 +98,6 @@ use Mantis\Exceptions\ClientException;
  */
 $g_filter = null;
 
-
 # ==========================================================================
 # CACHING
 # ==========================================================================
@@ -506,8 +505,8 @@ function filter_field_is_myself( $p_field_value ) {
  * @return integer
  */
 function filter_per_page( array $p_filter, $p_count, $p_per_page ) {
-	$p_per_page = (( null == $p_per_page ) ? (int)$p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] : $p_per_page );
-	$p_per_page = (( 0 == $p_per_page || -1 == $p_per_page ) ? $p_count : $p_per_page );
+	$p_per_page = ( ( null == $p_per_page ) ? (int)$p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] : $p_per_page );
+	$p_per_page = ( ( 0 == $p_per_page || -1 == $p_per_page ) ? $p_count : $p_per_page );
 
 	return (int)abs( $p_per_page );
 }
@@ -552,7 +551,7 @@ function filter_valid_page_number( $p_page_number, $p_page_count ) {
  * @return integer
  */
 function filter_offset( $p_page_number, $p_per_page ) {
-	return(( (int)$p_page_number -1 ) * (int)$p_per_page );
+	return( ( (int)$p_page_number -1 ) * (int)$p_per_page );
 }
 
 /**
@@ -766,7 +765,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	$t_custom_fields = custom_field_get_ids();
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
-			if( isset( $p_filter_arr['custom_fields'][$t_cfid]) ) {
+			if( isset( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
 				if( !is_array( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
 					$p_filter_arr['custom_fields'][$t_cfid] = array(
 						$p_filter_arr['custom_fields'][$t_cfid],
@@ -1103,7 +1102,7 @@ function filter_get_row( $p_filter_id ) {
 	global $g_cache_filter_db_rows;
 
 	if( !isset( $g_cache_filter_db_rows[$p_filter_id] ) ) {
-		filter_cache_rows( array($p_filter_id) );
+		filter_cache_rows( array( $p_filter_id ) );
 	}
 
 	$t_row = $g_cache_filter_db_rows[$p_filter_id];
@@ -1296,14 +1295,14 @@ function filter_draw_selection_area() {
 
 			<div class="widget-toolbar">
 				<?php
-					$t_view_filters = config_get('view_filters');
+					$t_view_filters = config_get( 'view_filters' );
 
 					if( ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) ||
 						access_has_project_level( config_get( 'create_permalink_threshold' ) ) ||
 						count( $t_stored_queries_arr ) > 0 ) { ?>
 					<div class="widget-menu">
 						<a href="#" data-action="settings" data-toggle="dropdown">
-							<?php print_icon( 'fa-bars', 'ace-icon bigger-125'); ?>
+							<?php print_icon( 'fa-bars', 'ace-icon bigger-125' ); ?>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<?php
@@ -1688,7 +1687,7 @@ function filter_db_get_project_current( $p_project_id = null, $p_user_id = null 
 	} else {
 		$c_user_id = (int)$p_user_id;
 	}
-	
+
 	if( isset( $g_cache_filter_project_current[$c_project_id][$c_user_id] ) ) {
 		return ( $g_cache_filter_project_current[$c_project_id][$c_user_id] === false )
 			? null
@@ -1752,7 +1751,7 @@ function filter_db_can_delete_filter( $p_filter_id, $p_user_id = null ) {
 	$t_filter_row = filter_get_row( $c_filter_id );
 	if( $t_filter_row
 		&& $t_filter_row['user_id'] == $t_user_id
-		&& $t_filter_row['project_id'] >= 0	) {
+		&& $t_filter_row['project_id'] >= 0 ) {
 		return true;
 	} else {
 		return false;
@@ -1971,7 +1970,7 @@ function filter_create_recently_modified( $p_days, $p_filter = null ) {
 	}
 	$c_days = (int)$p_days;
 	$p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = true;
-	$t_date = new DateTime('today');
+	$t_date = new DateTime( 'today' );
 	$p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] = $t_date->format( 'j' );
 	$p_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] = $t_date->format( 'n' );
 	$p_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] = $t_date->format( 'Y' );
@@ -2200,7 +2199,7 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 				break;
 
 			case FILTER_TYPE_BOOLEAN:
-				$t_filter_input[$t_field_name] = gpc_get_bool( $t_field_name, $t_filter[$t_field_name]);
+				$t_filter_input[$t_field_name] = gpc_get_bool( $t_field_name, $t_filter[$t_field_name] );
 				break;
 
 			case FILTER_TYPE_MULTI_STRING:
@@ -2553,7 +2552,7 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 	} else {
 		log_event( LOG_FILTERING, 'Advanced Filter' );
 		$t_project_ids = $p_filter[FILTER_PROPERTY_PROJECT_ID];
-		$t_include_sub_projects = (( count( $t_project_ids ) == 1 ) && ( ( $t_project_ids[0] == META_FILTER_CURRENT ) || ( $t_project_ids[0] == ALL_PROJECTS ) ) );
+		$t_include_sub_projects = ( ( count( $t_project_ids ) == 1 ) && ( ( $t_project_ids[0] == META_FILTER_CURRENT ) || ( $t_project_ids[0] == ALL_PROJECTS ) ) );
 	}
 
 	log_event( LOG_FILTERING, 'project_ids = @P' . implode( ', @P', $t_project_ids ) );

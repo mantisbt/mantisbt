@@ -131,7 +131,7 @@ $t_show_remember_me = !$f_reauthenticate && auth_allow_perm_login( $t_user_id, $
 $t_form_title = $f_reauthenticate ? lang_get( 'reauthenticate_title' ) : lang_get( 'login_title' );
 
 # If user is already authenticated and not anonymous
-if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthenticate) {
+if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthenticate ) {
 	# If return URL is specified redirect to it; otherwise use default page
 	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, true );
@@ -181,7 +181,7 @@ if( $f_error || $f_cookie_error || $f_reauthenticate ) {
 }
 
 $t_upgrade_required = false;
-if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.' ) ) {
+if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ . '/admin/.' ) ) {
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
 	$t_db_version = config_get( 'database_version', 0, ALL_USERS, ALL_PROJECTS );
@@ -223,7 +223,6 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.
 			if( $t_upgrade_required ) {
 				echo '<input type="hidden" name="install" value="true" />';
 			}
-
 
 			echo sprintf( lang_get( 'enter_password' ), string_html_specialchars( $t_username ) );
 

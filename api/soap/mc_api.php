@@ -228,7 +228,7 @@ class ApiObjectFactory {
 		$t_string_value = self::datetimeString( $p_value );
 
 		if( ApiObjectFactory::$soap ) {
-			return new SoapVar($t_string_value, XSD_DATETIME, 'xsd:dateTime');
+			return new SoapVar( $t_string_value, XSD_DATETIME, 'xsd:dateTime' );
 		}
 
 		return $t_string_value;
@@ -268,11 +268,11 @@ class ApiObjectFactory {
 			return false;
 		}
 
-		if( ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'SoapFault') {
+		if( ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'SoapFault' ) {
 			return true;
 		}
 
-		if( !ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'RestFault') {
+		if( !ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'RestFault' ) {
 			return true;
 		}
 
@@ -641,7 +641,7 @@ function mci_profile_as_array_by_id( $p_profile_id ) {
 
 	try {
 		$t_profile = new ProfileData( $t_profile_id );
-	} catch (ClientException $e) {
+	} catch ( ClientException $e ) {
 		return null;
 	}
 
@@ -924,7 +924,6 @@ function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version
 	return $t_version_id;
 }
 
-
 /**
  * Returns the category name, possibly null if no category is assigned.
  *
@@ -1107,7 +1106,7 @@ function mc_error_exception_handler( $p_exception ) {
 		$t_log = true;
 	} else {
 		$t_cause = 'Server';
-		$t_message = 'Internal Service Error';		
+		$t_message = 'Internal Service Error';
 		$t_log = true;
 	}
 
@@ -1287,10 +1286,10 @@ function mci_fault_login_failed() {
  * @param string  $p_detail  The optional details to append to the error message.
  * @return RestFault|SoapFault
  */
-function mci_fault_access_denied($p_user_id = 0, $p_detail = '' ) {
+function mci_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
 	if( $p_user_id ) {
 		$t_user_name = user_get_name( $p_user_id );
-		$t_reason = 'Access denied for user '. $t_user_name . '.';
+		$t_reason = 'Access denied for user ' . $t_user_name . '.';
 	} else {
 		$t_reason = 'Access denied';
 	}

@@ -100,7 +100,7 @@ if( config_get( 'relationship_graph_enable' ) ) {
 		}
 	}
 	check_print_test_row(
-		"Graphviz tools (" .implode( ', ', $t_tools )
+		"Graphviz tools (" . implode( ', ', $t_tools )
 		. ") are required to display relationship graphs",
 		empty( $t_unavailable ),
 		[ false => implode( ', ', $t_unavailable )

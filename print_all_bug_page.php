@@ -182,7 +182,7 @@ if( filter_is_temporary( $t_filter ) ) {
 <table id="buglist" class="table table-striped table-bordered table-condensed no-margin">
 <thead>
 <tr>
-    <td class="bold bigger-110" colspan="<?php echo $t_num_of_columns ?>">
+	<td class="bold bigger-110" colspan="<?php echo $t_num_of_columns ?>">
 		<?php
 			echo lang_get( 'viewing_bugs_title' );
 
@@ -228,10 +228,10 @@ if( filter_is_temporary( $t_filter ) ) {
 	print_table_spacer( $t_num_of_columns );
 ?>
 <tr class="noprint">
-    <td colspan="<?php echo $t_num_of_columns ?>">
-        <input type="hidden" name="show_flag" value="1" />
-        <input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
-    </td>
+	<td colspan="<?php echo $t_num_of_columns ?>">
+		<input type="hidden" name="show_flag" value="1" />
+		<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
+	</td>
 </tr>
 </table>
 </form>

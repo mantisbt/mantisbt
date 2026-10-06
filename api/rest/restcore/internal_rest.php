@@ -27,10 +27,10 @@ require_api( 'helper_api.php' );
 /**
  * WARNING: All APIs under the internal route are considered private and can break anytime.
  */
-$g_app->group('/internal', function() use ( $g_app ) {
+$g_app->group( '/internal', function() use ( $g_app ) {
 	$g_app->any( '/autocomplete', 'rest_internal_autocomplete' );
 	$g_app->any( '/config_display', 'rest_internal_config_display' );
-});
+} );
 
 /**
  * A method that gets the auto-complete result for given field and prefix.

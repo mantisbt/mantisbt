@@ -75,7 +75,6 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	echo "\n";
 }
 
-
 # Check database type before attempting to connect
 $t_db_type = config_get_global( 'db_type' );
 if( db_get_type( $t_db_type ) == DB_TYPE_UNDEFINED ) {

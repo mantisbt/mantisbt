@@ -136,7 +136,7 @@ class SoapBase extends MantisTestCase {
 
 		# Set Xdebug session cookie
 		if( !empty( $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION'] ) ) {
-			$this->client->__setCookie('XDEBUG_SESSION', $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION']);
+			$this->client->__setCookie( 'XDEBUG_SESSION', $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION'] );
 		}
 
 		$this->mantisPath = substr( $t_wsdl, 0, -strlen( 'api/soap/mantisconnect.php?wsdl' ) );
@@ -264,7 +264,7 @@ class SoapBase extends MantisTestCase {
 	protected function skipIfDueDateIsNotEnabled() {
 		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_view_threshold' ) > 90  ||
 			 $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_update_threshold' ) > 90 ) {
-			 	$this->markTestSkipped( 'Due date thresholds are too high.' );
+				$this->markTestSkipped( 'Due date thresholds are too high.' );
 			 }
 	}
 

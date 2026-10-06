@@ -91,7 +91,6 @@ class VersionTest extends SoapBase {
 		$this->assertEquals( false, $t_version->obsolete );
 	}
 
-
 	/**
 	 * Tests updating a version
 	 * @return void

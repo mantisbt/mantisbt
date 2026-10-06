@@ -65,7 +65,7 @@ $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
 if( $f_action != 'add' ) {
 	$f_profile_id = gpc_get_int( 'profile_id' );
-	if( $f_action != 'change_default' ) {	
+	if( $f_action != 'change_default' ) {
 		$t_profile = new ProfileData( $f_profile_id );
 		$t_profile->ensure_can_update();
 

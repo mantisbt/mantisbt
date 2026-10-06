@@ -122,7 +122,7 @@ class ImportXML {
 	  */
 	public function __construct( $p_filename, $p_strategy, $p_fallback, $p_keep_category, $p_default_category ) {
 		$this->source_ = new SourceData;
-		$this->reader_ = new XMLReader( );
+		$this->reader_ = new XMLReader();
 		$this->itemsMap_ = new ImportXml_Mapper;
 		$this->strategy_ = $p_strategy;
 		$this->fallback_ = $p_fallback;
@@ -138,7 +138,7 @@ class ImportXML {
 	 */
 	public function import() {
 		# Read the <mantis> element and it's attributes
-		while( $this->reader_->read( ) && $this->reader_->name == 'mantis' ) {
+		while( $this->reader_->read() && $this->reader_->name == 'mantis' ) {
 			$this->source_->version = $this->reader_->getAttribute( 'version' );
 			$this->source_->urlbase = $this->reader_->getAttribute( 'urlbase' );
 			$this->source_->issuelink = $this->reader_->getAttribute( 'issuelink' );
@@ -149,7 +149,7 @@ class ImportXML {
 		echo 'Importing file, please wait...';
 
 		# loop through the elements
-		while( $this->reader_->read( ) ) {
+		while( $this->reader_->read() ) {
 			switch( $this->reader_->nodeType ) {
 				case XMLReader::ELEMENT:
 

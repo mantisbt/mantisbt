@@ -60,7 +60,6 @@ class RestFiltersTest extends RestBase
 		}
 	}
 
-
 	/**
 	 * Generate the API base URL get Issues matching filter.
 	 *
@@ -91,7 +90,7 @@ class RestFiltersTest extends RestBase
 	 *
 	 * @return array
 	 */
-	private function getFilters( ?int $p_filter_id = null) {
+	private function getFilters( ?int $p_filter_id = null ) {
 		$t_endpoint = $this->getFilterURL( $p_filter_id );
 		$t_response = $this->builder()->get( $t_endpoint )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
@@ -123,7 +122,7 @@ class RestFiltersTest extends RestBase
 			filter_serialize( $p_filter ),
 			$this->userId,
 			$this->getProjectId(),
-			$this->getTestName() . ' ' . rand(1, 10000),
+			$this->getTestName() . ' ' . rand( 1, 10000 ),
 			$p_public
 		);
 		$this->filterIdsToDelete[] = $t_filter_id;
@@ -221,7 +220,7 @@ class RestFiltersTest extends RestBase
 			"Retrieve issues matching test filter"
 		);
 		$t_body = json_decode( $t_response->getBody(), true );
-		$this->assertArrayHasKey('issues', $t_body, "Response includes issues key" );
+		$this->assertArrayHasKey( 'issues', $t_body, "Response includes issues key" );
 		$this->assertIsArray( $t_body['issues'], "Issues key is an array" );
 		$this->assertEmpty( $t_body['issues'], "Test filter should return no issues" );
 
@@ -261,6 +260,5 @@ class RestFiltersTest extends RestBase
 		);
 
 	}
-
 
 }

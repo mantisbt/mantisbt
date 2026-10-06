@@ -31,7 +31,7 @@ namespace Mantis\tests\Mantis;
  * @subpackage Mention
  */
 final class MentionParsingCustomTest extends MentionParsingTest {
-	
+
 	private static $mentions_tag;
 
 	public static function setUpBeforeClass(): void {

@@ -106,7 +106,7 @@ if( false !== $t_content ) {
 } else if( 'custom_field' == mb_substr( $f_filter_target, 0, 12 ) ) {
 	# Check existence of custom field id, and if the user has access to read and filter by
 	$t_custom_id = mb_substr( $f_filter_target, 13, -7 );
-	if( !is_numeric( $t_custom_id) ) {
+	if( !is_numeric( $t_custom_id ) ) {
 		throw new ClientException( "Invalid custom field id", ERROR_CUSTOM_FIELD_NOT_FOUND );
 	}
 	$t_cfdef = custom_field_get_definition( $t_custom_id );

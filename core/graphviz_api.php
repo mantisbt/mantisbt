@@ -471,7 +471,7 @@ class Graph {
 				if( $t_name == 'label' && $t_value != strip_tags( $t_value ) ) {
 					// It's an HTML-like label
 					// @see https://graphviz.org/doc/info/shapes.html#html
-					$t_value = '<' . $t_value. '>';
+					$t_value = '<' . $t_value . '>';
 				} else {
 					$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
 				}
@@ -538,7 +538,6 @@ class Graph {
 		return self::graphviz_path() . $this->graphviz_tool;
 	}
 }
-
 
 /**
  * Directed graph creation and manipulation.

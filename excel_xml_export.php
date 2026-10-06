@@ -77,7 +77,6 @@ $f_bug_arr = explode( ',', $f_export );
 
 $t_columns = excel_get_columns();
 
-
 # Get current filter
 $t_filter = filter_get_bug_rows_filter();
 

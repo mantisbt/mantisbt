@@ -721,7 +721,7 @@ function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target
  * @access public
  */
 function print_column_title_tags( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-tags">' . lang_get('tags') . '</th>';
+	echo '<th class="column-tags">' . lang_get( 'tags' ) . '</th>';
 }
 
 /**
@@ -1530,7 +1530,7 @@ function print_column_summary( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	} else {
 		$t_summary = string_display_line_without_links( $p_bug->summary );
 	}
-	
+
 	$t_bug_url = string_get_bug_view_url( $p_bug->id );
 	echo '<td class="column-summary"><a href="' . $t_bug_url . '">' . $t_summary . '</a></td>';
 }

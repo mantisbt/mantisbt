@@ -119,7 +119,7 @@ class ProjectUsersGetCommand extends Command {
 				ERROR_PROJECT_NOT_FOUND,
 				array( $this->project_id ) );
 		}
-		
+
 		if( $this->page < 1 ) {
 			$this->page = 1;
 		}
@@ -166,7 +166,7 @@ class ProjectUsersGetCommand extends Command {
 			if( $this->include_access_levels ) {
 				$t_access_level = (int)$t_users[$i]['access_level'];
 				$t_user['access_level'] =
-					mci_enum_get_array_by_id( $t_access_level, 'access_levels', $t_lang );	
+					mci_enum_get_array_by_id( $t_access_level, 'access_levels', $t_lang );
 			}
 
 			$t_users_result[] = $t_user;

@@ -414,7 +414,6 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 30, $t_issue_with_note->notes[0]->time_tracking );
 	}
 
-
 	/**
 	 * Adding REMINDER notes is not supported.
 	 *
@@ -557,7 +556,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertCount( 0, $t_issue->monitors );
 
 		# update with this user as monitor -> should be added
-		$t_issue->monitors = array ( array ( 'id' => $this->userId));
+		$t_issue->monitors = array ( array ( 'id' => $this->userId ) );
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertCount( 1, $t_issue->monitors );

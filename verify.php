@@ -53,7 +53,6 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_css( 'login.css' );
 
-
 # check if at least one way to get here is enabled
 if( !auth_signup_enabled() &&
 	OFF == config_get( 'lost_password_feature' ) &&

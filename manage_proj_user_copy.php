@@ -89,4 +89,4 @@ foreach( $t_rows as $t_row ) {
 
 form_security_purge( 'manage_proj_user_copy' );
 
-print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . "#project-users");
+print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . "#project-users" );

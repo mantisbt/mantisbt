@@ -30,7 +30,6 @@ use Generator;
 use Mantis\Exceptions\ClientException;
 use Mantis\tests\Mantis\MantisCoreBase;
 
-
 /**
  * Test for helper_api::helper_array_transpose
  *

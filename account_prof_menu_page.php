@@ -212,7 +212,6 @@ if( $g_global_profiles ) {
 					echo '</div>';
 				}
 
-
 				echo '<div class="pull-left">';
 				echo '</div>';
 ?>
@@ -321,7 +320,7 @@ if( $g_global_profiles ) {
 					* <?php echo lang_get( 'required' ); ?>
 				</span>
 					<button class="btn btn-primary btn-white btn-round">
-						<?php echo lang_get('add_profile'); ?>
+						<?php echo lang_get( 'add_profile' ); ?>
 					</button>
 				</div>
 			</div>

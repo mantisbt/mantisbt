@@ -292,7 +292,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 		}
 	}
 	echo "\t" . '<td class="center ' . $t_color . '">' . $t_value . '</td>' . "\n\t"
-		. '<td class="left" colspan="' . ( count( $g_access_levels ) - 1 ). '"></td>';
+		. '<td class="left" colspan="' . ( count( $g_access_levels ) - 1 ) . '"></td>';
 
 	print_who_can_change( $p_threshold, $t_can_change );
 
@@ -349,7 +349,6 @@ function get_section_end() {
 	echo '<div class="space-10"></div>';
 }
 
-
 echo '<br />' . "\n";
 
 if( ALL_PROJECTS == $g_project_id ) {
@@ -363,7 +362,7 @@ echo '<div class="well">' . "\n";
 echo '<p class="bold">' . icon_get( 'fa-info-circle' ) . " $t_project_title</p>\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $g_project_id ) {
-	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="color-project">' . lang_get( 'colour_project' ) . '</span><br />';
 }
 echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 echo '</div>' . "\n";
@@ -460,7 +459,6 @@ get_capability_row( lang_get( 'send_reminders' ), 'bug_reminder_threshold' );
 get_capability_row( lang_get( 'receive_reminders' ), 'reminder_receive_threshold' );
 get_section_end();
 
-
 if( $t_show_submit ) {
 	echo '<input type="submit" class="btn btn-primary btn-white btn-round" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
 }
@@ -472,7 +470,7 @@ if( $t_show_submit && ( 0 < count( $g_overrides ) ) ) {
 	echo form_security_field( 'manage_config_revert' );
 	echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '"></input>';
 	echo '<input name="project" type="hidden" value="' . $g_project_id . '"></input>';
-	echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'"></input>';
+	echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) . '"></input>';
 	echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="';
 	if( ALL_PROJECTS == $g_project_id ) {
 		echo lang_get( 'revert_to_system' );

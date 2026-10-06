@@ -55,7 +55,6 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-
 # Delete the users who have never logged in and are older than 1 week
 $t_days_old = (int)7 * SECONDS_PER_DAY;
 

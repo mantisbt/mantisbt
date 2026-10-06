@@ -104,7 +104,7 @@ $t_action_label = lang_get( 'set_configuration_option_action_' . $t_edit_action 
 if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 	# retrieve existing config data from database for this option
 	$t_query = new DbQuery( 'SELECT * FROM {config} WHERE config_id = :config AND user_id = :user AND project_id = :project' );
-	$t_query->bind_values(  array(
+	$t_query->bind_values( array(
 			'config' => $f_edit_option,
 			'user' => $f_edit_user_id,
 			'project' => $f_edit_project_id
@@ -233,7 +233,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 					</td>
 					<td>
 						<?php
-                        $c_option_id = string_attribute( $t_option_id );
+						$c_option_id = string_attribute( $t_option_id );
 						if( $t_modify ) {
 						?>
 						<input type="text" id="config_option" name="config_option" class="input-sm"

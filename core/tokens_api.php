@@ -96,7 +96,7 @@ function token_ensure_exists( $p_token_id ) {
  */
 function token_get( $p_type, $p_user_id = null ) {
 	global $g_cache_token;
-	
+
 	token_purge_expired_once();
 
 	$c_type = (int)$p_type;
@@ -183,7 +183,7 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 	$c_token_id = (int)$p_token_id;
 	$c_token_expiry = time() + $p_expiry;
 
-	token_ensure_exists( $c_token_id  );
+	token_ensure_exists( $c_token_id );
 
 	foreach( $g_cache_token as & $t_cache_type ) {
 		foreach( $t_cache_type as & $t_cache_owner ) {

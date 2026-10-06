@@ -86,4 +86,4 @@ foreach( custom_field_get_linked_ids( $t_src_project_id ) as $t_custom_field_id 
 
 form_security_purge( 'manage_proj_custom_field_copy' );
 
-print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#customfields');
+print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#customfields' );

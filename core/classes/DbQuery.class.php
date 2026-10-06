@@ -35,7 +35,6 @@ require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 require_api( 'logging_api.php' );
 
-
 /**
  * Database Query abstraction class.
  *
@@ -157,7 +156,6 @@ class DbQuery {
 
 	protected static $oracle_in_limit = 1000; # this could be a constant
 
-
 	/**
 	 * Construct a new query object.
 	 *
@@ -257,7 +255,7 @@ class DbQuery {
 		$this->process_bind_params();
 		$this->process_sql_syntax();
 
-		$t_result = $this->db_execute($p_limit, $p_offset);
+		$t_result = $this->db_execute( $p_limit, $p_offset );
 		db_param_pop();
 		return $t_result;
 	}
@@ -408,7 +406,7 @@ class DbQuery {
 	 * @param integer $p_counter_start
 	 * @return integer	Number of parameters created
 	 */
-	protected function process_bind_params( $p_counter_start = 0) {
+	protected function process_bind_params( $p_counter_start = 0 ) {
 		global $g_db;
 
 		# shortcut, if no values are binded, skip parameter replacement
@@ -588,7 +586,7 @@ class DbQuery {
 		$t_query = $this->db_query_string;
 
 		# split the string by the relevant delimiters. The delimiters will be part of the split array
-		$t_parts = preg_split("/(')|( AS )|(CAST\s*\()/mi", $t_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+		$t_parts = preg_split( "/(')|( AS )|(CAST\s*\()/mi", $t_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE );
 		$t_is_literal = false;
 		$t_cast = 0;
 		$t_new_query = '';
@@ -720,7 +718,7 @@ class DbQuery {
 					$t_bind_num = $t_matches['bind_name'];
 
 					$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
-					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name']. $t_matches['after_var'];
+					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name'] . $t_matches['after_var'];
 
 					if( $this->db_param_array[$t_bind_num] === '' ) {
 						unset( $this->db_param_array[$t_bind_num] );
@@ -856,7 +854,7 @@ class DbQuery {
 	 * @param integer|string $p_index_or_name	Column name or numeric index
 	 * @return string|boolean	Value, or false if end of result or index is not valid
 	 */
-	public function value( $p_index_or_name = 0) {
+	public function value( $p_index_or_name = 0 ) {
 		if( !$this->current_row ) {
 			$this->fetch();
 		}
@@ -883,7 +881,7 @@ class DbQuery {
 	 * Alias for value()
 	 * @param integer|string $p_index_or_name	Column name or numeric index
 	 */
-	public function field( $p_index_or_name = 0) {
+	public function field( $p_index_or_name = 0 ) {
 		return $this->value( $p_index_or_name );
 	}
 

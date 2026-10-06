@@ -110,7 +110,6 @@ if( $t_bugnote_id ) {
 	access_denied();
 }
 
-
 /**
  * Show Bug revision.
  *

@@ -57,8 +57,8 @@ class AuthMiddleware {
 					if( $t_api_token === $t_credentials ) {
 						$t_doc_link = 'https://mantisbt.org/docs/master/en-US/Developers_Guide/html-desktop/#restapi.auth';
 						$response = $response
-							->withHeader( HEADER_DEPRECATION, '@1788480117')
-							->withAddedHeader( HEADER_LINK, '<' . $t_doc_link. '>; rel="deprecation"');
+							->withHeader( HEADER_DEPRECATION, '@1788480117' )
+							->withAddedHeader( HEADER_LINK, '<' . $t_doc_link . '>; rel="deprecation"' );
 					}
 					break;
 				}

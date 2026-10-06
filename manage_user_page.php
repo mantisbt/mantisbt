@@ -65,7 +65,7 @@ $t_lock_image = icon_get( 'fa-lock', 'fa-lg', lang_get( 'locked' ) );
 
 $f_save = gpc_get_bool( 'save' );
 $f_filter = gpc_get_string( 'filter', 'ALL' );
-$f_search = gpc_get_string( 'search', '');
+$f_search = gpc_get_string( 'search', '' );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
 if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
@@ -108,7 +108,7 @@ $t_show_disabled_filter = '&amp;showdisabled=' . $c_show_disabled;
 
 # set cookie values for hide inactive, sort by, dir and show disabled
 if( $f_save ) {
-	$t_manage_string = $c_hide_inactive.':'.$c_sort.':'.$c_dir.':'.$c_show_disabled;
+	$t_manage_string = $c_hide_inactive . ':' . $c_sort . ':' . $c_dir . ':' . $c_show_disabled;
 	gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
 }
 
@@ -137,7 +137,7 @@ $t_unused_user_count = $t_row['unused_user_count'];
 
 # Manage Form BEGIN
 
-$t_prefix_array = array_merge( range('A', 'Z'), range('0', '9') );
+$t_prefix_array = array_merge( range( 'A', 'Z' ), range( '0', '9' ) );
 $t_prefix_array = array_combine( $t_prefix_array, $t_prefix_array );
 $t_prefix_array = array_merge (
 		[ 'ALL' => lang_get( 'filter_all' ) ],
@@ -274,7 +274,6 @@ if( $f_page_number < 1 ) {
 	$f_page_number = 1;
 }
 
-
 $t_query = 'SELECT * FROM {user} WHERE ' . $t_where . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
 $t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
 
@@ -289,7 +288,7 @@ $t_user_count = count( $t_users );
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 	<?php print_icon( 'fa-users', 'ace-icon' ); ?>
-	<?php echo lang_get('manage_accounts_title') ?>
+	<?php echo lang_get( 'manage_accounts_title' ) ?>
 	<span class="badge"><?php echo $t_total_user_count ?></span>
 </h4>
 </div>
@@ -305,11 +304,11 @@ $t_user_count = count( $t_users );
 		</div>
 		<?php if( $f_filter === 'UNUSED' ) { ?>
 		<div class="pull-left">
-			<?php print_form_button('manage_user_prune.php',
-				lang_get('prune_accounts'),
+			<?php print_form_button( 'manage_user_prune.php',
+				lang_get( 'prune_accounts' ),
 				[],
 				null,
-				'btn btn-primary btn-sm btn-white btn-round')
+				'btn btn-primary btn-sm btn-white btn-round' )
 			?>
 		</div>
 		<?php } ?>
@@ -387,7 +386,7 @@ $t_user_count = count( $t_users );
 		: [];
 
 	# User accounts with an email verification pending (user_id => new email)
-	$t_emails_pending_verification = token_get_by_type( TOKEN_ACCOUNT_CHANGE_EMAIL);
+	$t_emails_pending_verification = token_get_by_type( TOKEN_ACCOUNT_CHANGE_EMAIL );
 	$t_emails_pending_verification = array_combine(
 			array_column( $t_emails_pending_verification, 'owner' ),
 			array_column( $t_emails_pending_verification, 'value' )

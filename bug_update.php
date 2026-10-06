@@ -322,15 +322,15 @@ if( $t_existing_bug->category_id != $t_updated_bug->category_id ) {
 # Refer to #15653 for further details (particularly note 37180)
 $t_resolution_fixed_threshold = config_get( 'bug_resolution_fixed_threshold' );
 if( $t_existing_bug->resolution != $t_updated_bug->resolution && (
-	   (  $t_updated_bug->resolution >= $t_resolution_fixed_threshold
+	   ( $t_updated_bug->resolution >= $t_resolution_fixed_threshold
 	   && $t_updated_bug->resolution != $t_reopen_resolution
 	   && $t_updated_bug->status < $t_resolved_status
 	   )
-	|| (  $t_updated_bug->resolution == $t_reopen_resolution
-	   && (  $t_existing_bug->status < $t_resolved_status
+	|| ( $t_updated_bug->resolution == $t_reopen_resolution
+	   && ( $t_existing_bug->status < $t_resolved_status
 		  || $t_updated_bug->status >= $t_resolved_status
 	   ) )
-	|| (  $t_updated_bug->resolution < $t_resolution_fixed_threshold
+	|| ( $t_updated_bug->resolution < $t_resolution_fixed_threshold
 	   && $t_updated_bug->status >= $t_resolved_status
 	   )
 ) ) {
@@ -355,7 +355,6 @@ if( $t_updated_bug->version
 		['version']
 	);
 }
-
 
 # Ensure that the user has permission to change the target version of the issue.
 if( $t_existing_bug->target_version !== $t_updated_bug->target_version ) {

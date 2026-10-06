@@ -14,7 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Plugin API
  *
@@ -87,7 +86,6 @@ $g_plugin_cache_protected = array();
  * @global string[] $g_plugin_current
  */
 $g_plugin_current = array();
-
 
 /**
  * Get the currently executing plugin's basename.
@@ -517,7 +515,7 @@ function plugin_error( $p_error_name, $p_error_type = E_USER_ERROR, $p_basename 
 	$t_error_code = "plugin_{$t_basename}_$p_error_name";
 	if( $p_error_type == E_USER_ERROR ) {
 		global $g_error_parameters;
-		if( $p_param === null) {
+		if( $p_param === null ) {
 			$p_param = $g_error_parameters;
 		}
 		array_unshift( $p_param, $t_error_code );
@@ -944,7 +942,7 @@ function plugin_find_all() {
 	if( !is_null( $s_plugins ) ) {
 		return $s_plugins;
 	}
-	
+
 	$t_plugin_path = config_get_global( 'plugin_path' );
 	$s_plugins = array(
 		'MantisCore' => new MantisCorePlugin( 'MantisCore' ),
@@ -1073,7 +1071,7 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 		# Include the plugin script if the class is not already declared.
 		if( !class_exists( $t_classname ) ) {
 			if( !plugin_include( $p_basename, $p_child ) ) {
-				log_event( LOG_PLUGIN, "Source code for Plugin '$t_basename' not found");
+				log_event( LOG_PLUGIN, "Source code for Plugin '$t_basename' not found" );
 				return new MissingClassPlugin( $t_basename );
 			}
 		}
@@ -1288,10 +1286,10 @@ function plugin_log_event( $p_msg, $p_basename = null ) {
 
 	if( $t_basename != $t_current_plugin ) {
 		plugin_push_current( $t_basename );
-		log_event( LOG_PLUGIN, $p_msg);
+		log_event( LOG_PLUGIN, $p_msg );
 		plugin_pop_current();
 	} else {
-		log_event( LOG_PLUGIN, $p_msg);
+		log_event( LOG_PLUGIN, $p_msg );
 	}
 }
 

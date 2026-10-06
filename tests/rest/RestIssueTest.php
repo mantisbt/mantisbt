@@ -64,7 +64,6 @@ class RestIssueTest extends RestBase {
 		}
 	}
 
-
 	public function testCreateIssueWithMinimalFields() {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
@@ -75,7 +74,7 @@ class RestIssueTest extends RestBase {
 		# file_put_contents( '/tmp/response.txt', var_export( $t_body, true ) );
 
 		$this->assertTrue( isset( $t_issue['id'] ), 'id set' );
-		$this->assertTrue( is_numeric($t_issue['id'] ), 'id is numeric' );
+		$this->assertTrue( is_numeric( $t_issue['id'] ), 'id is numeric' );
 		$this->assertEquals( $t_issue_to_add['summary'], $t_issue['summary'], 'summary' );
 		$this->assertEquals( $t_issue_to_add['description'], $t_issue['description'], 'description' );
 		$this->assertEquals( $t_issue_to_add['category']['name'], $t_issue['category']['name'], 'category name' );
@@ -178,7 +177,7 @@ class RestIssueTest extends RestBase {
 			);
 		}
 
-		sleep(20);
+		sleep( 20 );
 	}
 
 	/**
@@ -263,7 +262,7 @@ class RestIssueTest extends RestBase {
 		$t_issue = $t_body['issue'];
 
 		$this->assertTrue( isset( $t_issue['id'] ) );
-		$this->assertTrue( is_numeric($t_issue['id'] ) );
+		$this->assertTrue( is_numeric( $t_issue['id'] ) );
 
 		# Verify Status
 		$this->assertEquals( 50, $t_issue['status']['id'] );

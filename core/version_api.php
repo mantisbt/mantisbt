@@ -272,7 +272,7 @@ function version_cache_array_rows( array $p_project_ids ) {
 			$g_cache_versions_project[$c_project_id] = array();
 		}
 		$g_cache_versions_project[$c_project_id][] = $c_version_id;
-        unset( $t_ids_to_fetch[$c_project_id] );
+		unset( $t_ids_to_fetch[$c_project_id] );
 	}
 	foreach( $t_ids_to_fetch as $t_id_not_found ) {
 		$g_cache_versions_project[$t_id_not_found] = false;
@@ -466,17 +466,17 @@ function version_update( VersionData $p_version_info ) {
 
 		db_param_push();
 		$t_query = 'UPDATE {bug_history}
-			SET old_value='.db_param().'
+			SET old_value=' . db_param() . '
 			WHERE field_name IN (\'version\',\'fixed_in_version\',\'target_version\')
-				AND old_value='.db_param().'
+				AND old_value=' . db_param() . '
 				AND bug_id IN (SELECT id FROM {bug} WHERE project_id IN ( ' . $t_project_list . ' ))';
 		db_query( $t_query, array( $c_version_name, $c_old_version_name ) );
 
 		db_param_push();
 		$t_query = 'UPDATE {bug_history}
-			SET new_value='.db_param().'
+			SET new_value=' . db_param() . '
 			WHERE field_name IN (\'version\',\'fixed_in_version\',\'target_version\')
-				AND new_value='.db_param().'
+				AND new_value=' . db_param() . '
 				AND bug_id IN (SELECT id FROM {bug} WHERE project_id IN ( ' . $t_project_list . ' ))';
 		db_query( $t_query, array( $c_version_name, $c_old_version_name ) );
 
@@ -601,7 +601,7 @@ function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete =
 	version_cache_array_rows( $t_project_list );
 	$t_versions = array();
 	foreach( $t_project_list as $t_project_id ) {
-		if( !empty( $g_cache_versions_project[$t_project_id]) ) {
+		if( !empty( $g_cache_versions_project[$t_project_id] ) ) {
 			foreach( $g_cache_versions_project[$t_project_id] as $t_id ) {
 				/** @noinspection PhpUnhandledExceptionInspection */
 				$t_version_row = version_cache_row( $t_id );

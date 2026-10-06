@@ -73,7 +73,7 @@ layout_page_begin( 'manage_overview_page.php' );
 
 switch( $t_result['action'] ) {
 	case UserResetPasswordCommand::RESET:
-		if(    ( ON == config_get( 'send_reset_password' ) )
+		if( ( ON == config_get( 'send_reset_password' ) )
 			&& ( ON == config_get( 'enable_email_notification' ) )
 		) {
 			# Password reset confirmation sent by email

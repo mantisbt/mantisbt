@@ -85,7 +85,7 @@ class UserGetCommand extends Command {
 
 			$this->target_user_id = $t_user_id;
 		}
-		
+
 		if ( is_null( $this->target_user_id ) ) {
 			$t_user_id = $this->query( 'user_id' );
 			if( !is_null( $t_user_id ) && !is_blank( $t_user_id ) ) {
@@ -93,7 +93,7 @@ class UserGetCommand extends Command {
 					throw new ClientException(
 						'User not found',
 						ERROR_USER_BY_ID_NOT_FOUND,
-						array( $t_user_id ) );	
+						array( $t_user_id ) );
 				}
 
 				$this->target_user_id = (int)$t_user_id;

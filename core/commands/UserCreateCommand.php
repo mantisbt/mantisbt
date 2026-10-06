@@ -120,7 +120,7 @@ class UserCreateCommand extends Command {
 		# Password
 		$this->password = $this->payload( 'password', '' );
 		if( ( ON == config_get( 'send_reset_password' ) ) &&
-		    ( ON == config_get( 'enable_email_notification' ) ) ) {
+			( ON == config_get( 'enable_email_notification' ) ) ) {
 			# Check code will be sent to the user directly via email. Dummy password set to random
 			# Create random password
 			$this->password = auth_generate_random_password();
