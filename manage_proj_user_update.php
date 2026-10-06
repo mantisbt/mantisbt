@@ -186,7 +186,7 @@ if( !$f_confirmed ) {
 	# Table for users to be deleted
 	if( !empty( $t_users_to_delete ) ) {
 		# prepare usernames to sort the results
-		$t_usernames_val = Array();
+		$t_usernames_val = array();
 		foreach( $t_users_to_delete as $t_id ) {
 			$t_usernames_val[] = user_get_name( $t_id );
 		}
@@ -235,7 +235,7 @@ if( !$f_confirmed ) {
 	# Table for users to be modified
 	if( !empty( $t_users_to_update ) ) {
 		# prepare usernames to sort the results
-		$t_usernames_val = Array();
+		$t_usernames_val = array();
 		foreach( $t_users_to_update as $t_id => $t_val ) {
 			$t_usernames_val[] = user_get_name( $t_id );
 		}
