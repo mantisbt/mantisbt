@@ -1360,4 +1360,3 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 
 	echo '</div>';
 }
-

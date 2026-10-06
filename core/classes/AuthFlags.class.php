@@ -398,4 +398,3 @@ class AuthFlags {
 		return $this->reauthentication_expiry;
 	}
 }
-

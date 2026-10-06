@@ -371,4 +371,3 @@ class UserUpdateCommand extends Command {
 		$t_query->execute();
 	}
 }
-

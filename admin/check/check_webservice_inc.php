@@ -42,4 +42,3 @@ check_print_test_warn_row(
 	extension_loaded( 'soap' ),
 	array( false => 'Enable the PHP SOAP extension.' )
 );
-

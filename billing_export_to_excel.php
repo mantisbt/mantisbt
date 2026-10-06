@@ -94,4 +94,3 @@ foreach( $t_billing_rows as $t_billing ) {
 }
 
 echo excel_get_footer();
-

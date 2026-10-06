@@ -63,4 +63,3 @@ abstract class MantisWikiPlugin extends MantisPlugin {
 	 */
 	abstract function link_project( $p_event, $p_project_id );
 }
-

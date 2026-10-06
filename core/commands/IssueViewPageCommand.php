@@ -296,4 +296,3 @@ class IssueViewPageCommand extends Command {
 			'flags' => $t_flags );
 	}
 }
-

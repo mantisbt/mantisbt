@@ -170,4 +170,3 @@ class ConfigsGetCommand extends Command {
 		return $t_enum_array;
 	}
 }
-

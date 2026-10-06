@@ -109,4 +109,3 @@ abstract class MantisCoreBase extends MantisTestCase {
 	}
 
 }
-

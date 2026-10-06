@@ -343,4 +343,3 @@ class IssueNoteAddCommand extends Command {
 		}
 	}
 }
-

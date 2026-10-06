@@ -55,4 +55,3 @@ bug_revision_drop( $f_revision_id );
 form_security_purge( 'bug_revision_drop' );
 
 print_header_redirect_view( $t_revision['bug_id'] );
-

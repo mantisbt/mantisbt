@@ -67,4 +67,3 @@ class LocalizedStringsGetCommand extends Command {
 		);
 	}
 }
-

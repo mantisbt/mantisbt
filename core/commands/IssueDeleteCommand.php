@@ -78,4 +78,3 @@ class IssueDeleteCommand extends Command {
 		return [];
 	}
 }
-

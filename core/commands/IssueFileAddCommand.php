@@ -195,4 +195,3 @@ class IssueFileAddCommand extends Command
 		}
 	}
 }
-

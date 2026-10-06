@@ -1386,4 +1386,3 @@ class TableFieldsItem {
 		$this->header_attr_id = $p_header_id;
 	}
 }
-

@@ -342,4 +342,3 @@ function bug_revision_like( $p_rev_id ) {
 
 	return $t_revisions;
 }
-

@@ -94,4 +94,3 @@ class UserDeleteCommand extends Command {
 		return array();
 	}
 }
-

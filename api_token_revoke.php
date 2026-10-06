@@ -66,4 +66,3 @@ print_link_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
 echo '</div>';
 
 layout_page_end();
-
