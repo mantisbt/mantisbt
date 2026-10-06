@@ -1,0 +1,29 @@
+name: MantisBT coding style
+
+on: [ push, pull_request ]
+
+jobs:
+  check:
+    name: Check coding style
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v7
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v6
+        with:
+            path: /tmp/composer-cache
+            key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          args: '--ignore-platform-reqs --optimize-autoloader'
+          working_dir: 'tools/ecs'
+          php_version: 8.5
+          php_extensions: zip gd
+
+      - name: Check coding style
+        run: composer cs:check
