@@ -28,7 +28,7 @@ return ECSConfig::configure()
 		__DIR__ . '/rules/quotes.php',
 		__DIR__ . '/rules/casing.php',
 		__DIR__ . '/rules/cast.php',
-		//		__DIR__ . '/rules/comments.php',
+		__DIR__ . '/rules/comments.php',
 		__DIR__ . '/rules/alias.php',
 		__DIR__ . '/rules/braces.php',
 		__DIR__ . '/rules/control-structures-parentheses.php',

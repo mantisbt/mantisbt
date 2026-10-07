@@ -916,9 +916,9 @@ class BugFilterQuery extends DbQuery {
 	}
 
   /**
-	 * Build the query parts for the filter property "reproducibility"
-	 * @return void
-	 */
+   * Build the query parts for the filter property "reproducibility"
+   * @return void
+   */
 	protected function build_prop_reproducibility() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_REPRODUCIBILITY] ) ) {
 			return;

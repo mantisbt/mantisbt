@@ -35,7 +35,7 @@
  *
  * @noinspection PhpUnhandledExceptionInspection
  * @noinspection PhpUndefinedVariableInspection
-*/
+ */
 
 use Mantis\Exceptions\ClientException;
 

@@ -23,22 +23,22 @@
  */
 interface ImportXml_Interface {
 	/**
-	  * Read stream until current item finishes, processing the data found
-	  *
-	  * @param XMLreader $p_reader XML Reader.
-	  * @return void
-	  */
+	 * Read stream until current item finishes, processing the data found
+	 *
+	 * @param XMLreader $p_reader XML Reader.
+	 * @return void
+	 */
 	public function process( XMLreader $p_reader );
 
 	/**
-	  * Update the old_id => new_id conversion map
-	  *
-	  * This function works on a Mapper object, storing the
-	  * type/old_id/new_id triplet for later use.
-	  * Import Classes for items not needing this info can use an empty implementation
-	  *
-	  * @param ImportXml_Mapper $p_mapper XML Mapper.
-	  * @return void
-	  */
+	 * Update the old_id => new_id conversion map
+	 *
+	 * This function works on a Mapper object, storing the
+	 * type/old_id/new_id triplet for later use.
+	 * Import Classes for items not needing this info can use an empty implementation
+	 *
+	 * @param ImportXml_Mapper $p_mapper XML Mapper.
+	 * @return void
+	 */
 	public function update_map( ImportXml_Mapper $p_mapper );
 }

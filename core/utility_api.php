@@ -315,7 +315,7 @@ function get_font_path() {
  *
  * @noinspection PhpDocRedundantThrowsInspection
  * @noinspection PhpRedundantCatchClauseInspection
-*/
+ */
 function safe_unserialize( $p_string, array $p_options = [] ) {
 	set_error_handler( 'error_convert_to_exception' );
 	try {

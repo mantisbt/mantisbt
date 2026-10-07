@@ -1036,7 +1036,7 @@ function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name 
 	return project_get_id_by_name( $p_project_name );
 }
 
-### MantisConnect Administrative Webservices ###
+# ## MantisConnect Administrative Webservices ###
 
 /**
  * Add a new project.

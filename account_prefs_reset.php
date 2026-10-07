@@ -58,11 +58,11 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 
-#============ Parameters ============
+# ============ Parameters ============
 $f_user_id = gpc_get_int( 'user_id' );
 $f_redirect_url	= string_sanitize_url( gpc_get_string( 'redirect_url', 'account_prefs_page.php' ) );
 
-#============ Permissions ============
+# ============ Permissions ============
 form_security_validate( 'account_prefs_reset' );
 
 auth_ensure_user_authenticated();

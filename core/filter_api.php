@@ -820,7 +820,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] = META_FILTER_NONE;
 	}
 
-	#If view_type is simple, resolve conflicts between show_status and hide_status
+	# If view_type is simple, resolve conflicts between show_status and hide_status
 	if( $p_filter_arr['_view_type'] == FILTER_VIEW_TYPE_SIMPLE
 			&& !filter_field_is_none( $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] ) ) {
 		# get array of hidden status ids

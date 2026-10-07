@@ -382,10 +382,10 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
  * access checks.
  *
  * @param int|array|string $p_access_level Parameter representing access level threshold, may be:
-*                                           - integer: for a simple threshold
-*                                           - array: for an array threshold
-*                                           - string: for a threshold option which will be evaluated
-*                                             for each project context
+ *                                           - integer: for a simple threshold
+ *                                           - array: for an array threshold
+ *                                           - string: for a threshold option which will be evaluated
+ *                                             for each project context
  * @param array|null       $p_project_ids  Array of project ids to check access against, default to null
  *                                         to use all user accessible projects
  * @param int|null         $p_user_id      User id, defaults to null to use current user.

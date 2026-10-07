@@ -77,7 +77,7 @@ class ConfigParserTest extends MantisCoreBase {
 	/**
 	 * Test various types of arrays
 	 * @dataProvider providerArrays
-
+	 *
 	 * @param string $p_string Representation of array (e.g. output of var_export)
 	 *
 	 * @throws Exception
@@ -238,12 +238,12 @@ class ConfigParserTest extends MantisCoreBase {
 		/**
 		 * Template for new test cases
 		 * ---------------------------
-		'case description' => array(
-<<<'EOT'
-EOT
-		),
+		 * 'case description' => array(
+		 * <<<'EOT'
+		 * EOT
+		 * ),
 		 * ---------------------------
- */
+		 */
 
 		return [
 			/**

@@ -19,10 +19,10 @@
  */
 
 /**
-  * Mapper class
-  *
-  * it will store the ( type, old, new ) triplet for later retrieval
-  */
+ * Mapper class
+ *
+ * it will store the ( type, old, new ) triplet for later retrieval
+ */
 class ImportXml_Mapper {
 	/**
 	 * Issues
