@@ -121,7 +121,7 @@ class GetLinkAttributesTest extends MantisCoreBase {
 	 * @dataProvider providerLinks
 	 */
 	public function testLinkIsExternal( string $p_url, bool $p_external ): void {
-		$this->assertEquals( $p_external, helper_is_link_external( $p_url ), "URL is external" );
+		$this->assertEquals( $p_external, helper_is_link_external( $p_url ), 'URL is external' );
 	}
 
 	public static function providerLinks(): Generator {

@@ -105,7 +105,7 @@ class ProjectUsersAddCommand extends Command {
 		$t_actor_id = auth_get_current_user_id();
 		# Do not allow adding a user with an access level higher than the actor's
 		if( $this->access_level > access_get_project_level( $this->project_id, $t_actor_id ) ) {
-			throw new ClientException( "Access level cannot be higher than your own", ERROR_ACCESS_DENIED );
+			throw new ClientException( 'Access level cannot be higher than your own', ERROR_ACCESS_DENIED );
 		}
 
 		# We should check both since we are in the project section and an
@@ -121,7 +121,7 @@ class ProjectUsersAddCommand extends Command {
 				$this->project_id );
 
 		if( !$t_access_check ) {
-			throw new ClientException( "Access Denied", ERROR_ACCESS_DENIED );
+			throw new ClientException( 'Access Denied', ERROR_ACCESS_DENIED );
 		}
 	}
 

@@ -107,7 +107,7 @@ function bug_revision_get( $p_revision_id ) {
 
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
-		throw new ClientException( "Revision not found", ERROR_BUG_REVISION_NOT_FOUND );
+		throw new ClientException( 'Revision not found', ERROR_BUG_REVISION_NOT_FOUND );
 	}
 
 	return $t_row;
@@ -309,7 +309,7 @@ function bug_revision_like( $p_rev_id ) {
 	$t_row = db_fetch_array( $t_result );
 
 	if( !$t_row ) {
-		throw new ClientException( "Revision not found", ERROR_BUG_REVISION_NOT_FOUND );
+		throw new ClientException( 'Revision not found', ERROR_BUG_REVISION_NOT_FOUND );
 	}
 
 	$t_bug_id = $t_row['bug_id'];

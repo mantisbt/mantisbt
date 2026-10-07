@@ -113,16 +113,16 @@ if( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 	$t_bug_sponsored = config_get( 'enable_sponsorship' )
 		&& sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
 	if( $t_bug_sponsored && !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
-		throw new ClientException( "Access denied", ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW );
+		throw new ClientException( 'Access denied', ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW );
 	}
 
 	if( $f_handler_id != NO_USER ) {
 		# The new handler is checked at project level
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
-			throw new ClientException( "Access denied", ERROR_HANDLER_ACCESS_TOO_LOW );
+			throw new ClientException( 'Access denied', ERROR_HANDLER_ACCESS_TOO_LOW );
 		}
 		if( $t_bug_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
-			throw new ClientException( "Access denied", ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
+			throw new ClientException( 'Access denied', ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
 		}
 	}
 }
@@ -162,7 +162,7 @@ layout_page_begin();
 				if( $f_new_status >= $t_resolved ) {
 					if( !relationship_can_resolve_bug( $f_bug_id ) ) {
 						if( OFF == config_get( 'allow_parent_of_unresolved_to_close' ) ) {
-							throw new ClientException( "Unresolved dependant issues",
+							throw new ClientException( 'Unresolved dependant issues',
 									ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING
 							);
 						}

@@ -85,7 +85,7 @@ if( $f_master_bug_id > 0 ) {
 	access_ensure_bug_level( config_get( 'view_bug_threshold' ), $f_master_bug_id );
 
 	if( bug_is_readonly( $f_master_bug_id ) ) {
-		throw new ClientException( "Bug is read-only",
+		throw new ClientException( 'Bug is read-only',
 			ERROR_BUG_READ_ONLY_ACTION_DENIED,
 			[$f_master_bug_id]
 		);

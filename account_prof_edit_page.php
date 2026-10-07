@@ -55,7 +55,7 @@ require_api( 'profile_api.php' );
 require_api( 'string_api.php' );
 
 if( !config_get( 'enable_profiles' ) ) {
-	throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
+	throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
 }
 
 auth_ensure_user_authenticated();

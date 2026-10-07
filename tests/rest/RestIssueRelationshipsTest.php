@@ -114,36 +114,36 @@ class RestIssueRelationshipsTest extends RestBase {
 
 	public function testIssueRelationships() {
 		$this->assertEmpty( $this->getIssueRelationships( $this->tgt_id ),
-			"No prior relationships exist"
+			'No prior relationships exist'
 		);
 
 		# Regular relationship
 		$t_data = $this->createRelationshipData();
 		$t_response = $this->builder()->post( $this->getBaseURL(), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Create regular relationship"
+			'Create regular relationship'
 		);
 		$t_target_rel = $this->getIssueRelationships( $this->tgt_id );
 		$this->assertEquals( 'related-to', $t_target_rel[0]['type']['name'],
-			"Relationship type in target issue matches"
+			'Relationship type in target issue matches'
 		);
 		$this->assertEquals( $this->src_id, $t_target_rel[0]['issue']['id'],
-			"Related Issue in target matches"
+			'Related Issue in target matches'
 		);
 
 		# Parent-child relationship
 		$t_data = $this->createRelationshipData( BUG_DEPENDANT );
 		$t_response = $this->builder()->post( $this->getBaseURL(), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Update to a parent-child relationship, by id"
+			'Update to a parent-child relationship, by id'
 		);
 		$t_source_rel = $this->getIssueRelationships( $this->src_id );
 		$this->assertEquals( 'parent-of', $t_source_rel[0]['type']['name'],
-			"Relationship type name in source issue matches id"
+			'Relationship type name in source issue matches id'
 		);
 		$t_target_rel = $this->getIssueRelationships( $this->tgt_id );
 		$this->assertEquals( 'child-of', $t_target_rel[0]['type']['name'],
-			"Relationship type in target issue matches complement"
+			'Relationship type in target issue matches complement'
 		);
 	}
 
@@ -151,25 +151,25 @@ class RestIssueRelationshipsTest extends RestBase {
 		$t_data = $this->createRelationshipData();
 		$t_response = $this->builder()->post( $this->getBaseURL( 9999999 ), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Create relationship for non-existing issue"
+			'Create relationship for non-existing issue'
 		);
 
 		$t_data['issue']['id'] = $this->src_id;
 		$t_response = $this->builder()->post( $this->getBaseURL(), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Issue cannot be related to itself"
+			'Issue cannot be related to itself'
 		);
 
 		$t_data = $this->createRelationshipData( 'xxxxx' );
 		$t_response = $this->builder()->post( $this->getBaseURL(), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Create invalid relationship type by name"
+			'Create invalid relationship type by name'
 		);
 
 		$t_data = $this->createRelationshipData( 99 );
 		$t_response = $this->builder()->post( $this->getBaseURL(), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Create invalid relationship type by id"
+			'Create invalid relationship type by id'
 		);
 	}
 
@@ -178,7 +178,7 @@ class RestIssueRelationshipsTest extends RestBase {
 		$t_data = $this->createRelationshipData();
 		$t_response = $this->builder()->post( $this->getBaseURL(), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Create relationship for deletion"
+			'Create relationship for deletion'
 		);
 		$t_source_rel = $this->getIssueRelationships( $this->src_id );
 		$t_rel_id = $t_source_rel[0]['id'];
@@ -196,20 +196,20 @@ class RestIssueRelationshipsTest extends RestBase {
 			->delete( $this->getBaseURL( $t_unrelated_issue_id, $t_rel_id ) )
 			->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Delete an existing relationship from unrelated, existing issue"
+			'Delete an existing relationship from unrelated, existing issue'
 		);
 
 		# Delete relationship
 		$t_endpoint = $this->getBaseURL( null, $t_rel_id );
 		$t_response = $this->builder()->delete( $t_endpoint )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Delete existing relationship"
+			'Delete existing relationship'
 		);
 
 		# Delete non-existing relationship
 		$t_response = $this->builder()->delete( $t_endpoint )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Delete non-existing relationship"
+			'Delete non-existing relationship'
 		);
 	}
 
@@ -224,26 +224,26 @@ class RestIssueRelationshipsTest extends RestBase {
 		$t_data = $this->createRelationshipData( BUG_DEPENDANT );
 		$t_response = $this->builder()->post( $this->getBaseURL(), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Create parent-child relationship"
+			'Create parent-child relationship'
 		);
 
 		# Attempt to resolve the parent issue should fail
 		$t_data = ['status' => ['id' => RESOLVED]];
 		$t_response = $this->builder()->patch( '/issues/' . $this->src_id, $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Resolve parent issue with unresolved children"
+			'Resolve parent issue with unresolved children'
 		);
 
 		# Resolve the child issue
 		$t_response = $this->builder()->patch( '/issues/' . $this->tgt_id, $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Resolving child issue"
+			'Resolving child issue'
 		);
 
 		# Resolving the parent should work now
 		$t_response = $this->builder()->patch( '/issues/' . $this->src_id, $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Resolve parent issue with resolved children"
+			'Resolve parent issue with resolved children'
 		);
 	}
 

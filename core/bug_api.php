@@ -351,7 +351,7 @@ class BugData {
 				if( !$this->loading && $this->$p_name != $p_value ) {
 					# Only set target_version if user has access to do so
 					if( !access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
-						throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
+						throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
 					}
 				}
 				break;
@@ -486,7 +486,7 @@ class BugData {
 	public function validate( $p_update_extended = true ) {
 		# Summary cannot be blank
 		if( is_blank( $this->summary ) ) {
-			throw new ClientException( "Summary cannot be empty",
+			throw new ClientException( 'Summary cannot be empty',
 				ERROR_EMPTY_FIELD,
 				[lang_get( 'summary' )]
 			);
@@ -511,7 +511,7 @@ class BugData {
 		if( $p_update_extended ) {
 			# Description field cannot be empty
 			if( is_blank( $this->description ) ) {
-				throw new ClientException( "Description cannot be empty",
+				throw new ClientException( 'Description cannot be empty',
 					ERROR_EMPTY_FIELD,
 					[lang_get( 'description' )]
 				);
@@ -524,7 +524,7 @@ class BugData {
 
 		# Make sure a category is set
 		if( 0 == $this->category_id && !config_get( 'allow_no_category' ) ) {
-			throw new ClientException( "Category cannot be empty",
+			throw new ClientException( 'Category cannot be empty',
 				ERROR_EMPTY_FIELD,
 				[lang_get( 'category' )]
 			);
@@ -2022,7 +2022,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'date_submitted':
 		case 'due_date':
 			if( !is_numeric( $p_value ) ) {
-				throw new ClientException( "Invalid date", ERROR_GPC_NOT_NUMBER, [$p_field_name] );
+				throw new ClientException( 'Invalid date', ERROR_GPC_NOT_NUMBER, [$p_field_name] );
 			}
 			$c_value = $p_value;
 			break;
@@ -2088,10 +2088,10 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		# The new handler is checked at project level
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $p_user_id ) ) {
-			throw new ClientException( "Access denied", ERROR_HANDLER_ACCESS_TOO_LOW );
+			throw new ClientException( 'Access denied', ERROR_HANDLER_ACCESS_TOO_LOW );
 		}
 		if( $t_bug_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ), $t_project_id, $p_user_id ) ) {
-			throw new ClientException( "Access denied", ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
+			throw new ClientException( 'Access denied', ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
 		}
 	}
 

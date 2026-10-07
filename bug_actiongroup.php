@@ -336,7 +336,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'CUSTOM':
 			if( 0 === $f_custom_field_id ) {
-				throw new ClientException( "Invalid custom field Id", ERROR_GENERIC );
+				throw new ClientException( 'Invalid custom field Id', ERROR_GENERIC );
 			}
 
 			# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
@@ -348,7 +348,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			helper_call_custom_function( 'issue_update_notify', [$t_bug_id] );
 			break;
 		default:
-			throw new ClientException( "Unknown Group action", ERROR_GENERIC );
+			throw new ClientException( 'Unknown Group action', ERROR_GENERIC );
 	}
 
 	# Bug Action Event

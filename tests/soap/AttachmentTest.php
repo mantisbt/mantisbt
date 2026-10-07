@@ -163,7 +163,7 @@ class AttachmentTest extends SoapBase {
 		# Find the attachment we just uploaded in the list
 		$t_key = array_search( $t_attachment_id, array_column( $t_attachments, 'id' ) );
 
-		$this->assertNotFalse( $t_key, "Test attachment not found" );
+		$this->assertNotFalse( $t_key, 'Test attachment not found' );
 		$t_attachment = $t_attachments[$t_key];
 
 		$this->assertEquals( $this->userId, $t_attachment->user_id, "Attachment's User Id should match current user" );

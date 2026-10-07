@@ -167,7 +167,7 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 		return $p_array;
 	}
 	if( !is_array( current( $p_array ) ) ) {
-		$t_message = "Tried to sort an invalid multidimensional array";
+		$t_message = 'Tried to sort an invalid multidimensional array';
 		throw new ClientException( $t_message, ERROR_GENERIC, [$t_message] );
 	}
 
@@ -180,7 +180,7 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 			}
 		);
 	} else {
-		throw new ClientException( "Invalid sort field", ERROR_INVALID_SORT_FIELD );
+		throw new ClientException( 'Invalid sort field', ERROR_INVALID_SORT_FIELD );
 	}
 	return $p_array;
 }

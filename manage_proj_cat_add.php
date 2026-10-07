@@ -63,7 +63,7 @@ $f_name			= gpc_get_string( 'name' );
 $f_add_and_edit	= gpc_get_bool( 'add_and_edit_category' );
 
 if( is_blank( $f_name ) ) {
-	throw new ClientException( "Category is required",
+	throw new ClientException( 'Category is required',
 		ERROR_EMPTY_FIELD,
 		[lang_get( 'category' )]
 	);
@@ -94,7 +94,7 @@ foreach( $t_names as $t_name ) {
 		# We only error out on duplicates when a single value was given.
 		# If multiple values are provided, we just add the ones we can; the
 		# others already exist so it isn't really an error.
-		throw new ClientException( "Duplicate category", ERROR_CATEGORY_DUPLICATE );
+		throw new ClientException( 'Duplicate category', ERROR_CATEGORY_DUPLICATE );
 	}
 }
 

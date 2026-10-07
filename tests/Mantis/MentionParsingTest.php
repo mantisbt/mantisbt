@@ -133,19 +133,19 @@ class MentionParsingTest extends MantisCoreBase {
 				[]
 			],
 			'MentionAtEndOfWord' => [
-				"{tag}vboctor{tag}",
+				'{tag}vboctor{tag}',
 				[]
 			],
 			'MentionWithInvalidChars' => [
-				"{tag}vboctor%%%%%",
+				'{tag}vboctor%%%%%',
 				['vboctor']
 			],
 			'MentionUsernameThatIsAnEmailAddress' => [
-				"{tag}vboctor@example.com",
+				'{tag}vboctor@example.com',
 				[]
 			],
 			'MentionUsernameThatIsLocalhost' => [
-				"{tag}vboctor@localhost",
+				'{tag}vboctor@localhost',
 				[]
 			],
 		];

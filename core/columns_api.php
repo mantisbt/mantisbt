@@ -477,7 +477,7 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
 	foreach( $p_columns_to_validate as $t_column ) {
 		if( !in_array( mb_strtolower( $t_column ), $t_columns_all_lower ) ) {
 			$t_localized_field = lang_get( $p_field_name . '_columns_title' );
-			throw new ClientException( "Invalid column",
+			throw new ClientException( 'Invalid column',
 				ERROR_COLUMNS_INVALID,
 				[$t_localized_field, $t_column]
 			);
@@ -490,7 +490,7 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
 		$t_column_lower = mb_strtolower( $t_column );
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
 			$t_localized_field = lang_get( $p_field_name . '_columns_title' );
-			throw new ClientException( "Duplicate column",
+			throw new ClientException( 'Duplicate column',
 				ERROR_COLUMNS_DUPLICATE,
 				[$t_localized_field, $t_column]
 			);
@@ -1666,7 +1666,7 @@ function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARG
 		$t_css = '';
 		$t_value = '&#160;';
 	} else {
-		$t_css = " due-" . bug_overdue_level( $p_bug->id );
+		$t_css = ' due-' . bug_overdue_level( $p_bug->id );
 		$t_value = string_attribute( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 	}
 

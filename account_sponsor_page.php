@@ -84,7 +84,7 @@ require_api( 'version_api.php' );
 require_css( 'status_config.php' );
 
 if( !config_get( 'enable_sponsorship' ) ) {
-	throw new ClientException( "Sponsorship disabled", ERROR_SPONSORSHIP_NOT_ENABLED );
+	throw new ClientException( 'Sponsorship disabled', ERROR_SPONSORSHIP_NOT_ENABLED );
 }
 
 # anonymous users are not allowed to sponsor issues

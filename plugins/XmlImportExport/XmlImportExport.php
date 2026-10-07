@@ -36,7 +36,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 	function register() {
 		$this->name = plugin_lang_get( 'title' );
 		$this->description = plugin_lang_get( 'description' );
-		$this->page = "config_page";
+		$this->page = 'config_page';
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = [
@@ -54,8 +54,8 @@ class XmlImportExportPlugin extends MantisPlugin {
 	 */
 	public function config() {
 		return [
-			"import_threshold" => ADMINISTRATOR,
-			"export_threshold" => DEVELOPER,
+			'import_threshold' => ADMINISTRATOR,
+			'export_threshold' => DEVELOPER,
 		];
 	}
 
@@ -101,7 +101,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 		if( !$t_result ) {
 			# @todo returning false should trigger some error reporting, needs rethinking error_api
 			throw new ClientException(
-				"xmlreader and/or xmlwriter extensions missing",
+				'xmlreader and/or xmlwriter extensions missing',
 				ERROR_PLUGIN_INSTALL_FAILED,
 				[plugin_lang_get( 'error_no_xml' )]
 			);

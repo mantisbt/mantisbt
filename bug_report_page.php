@@ -90,7 +90,7 @@ if( $f_master_bug_id > 0 ) {
 
 	# master bug is not read-only...
 	if( bug_is_readonly( $f_master_bug_id ) ) {
-		throw new ClientException( "Bug is read-only",
+		throw new ClientException( 'Bug is read-only',
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
 				[$f_master_bug_id] );
 	}
@@ -647,7 +647,7 @@ if( $t_show_attachments ) {
 					# pre-fill tag string when cloning from master bug
 					$t_tags = [];
 					foreach( tag_bug_get_attached( $f_master_bug_id ) as $t_tag ) {
-						$t_tags[] = $t_tag["name"];
+						$t_tags[] = $t_tag['name'];
 					}
 					$t_tag_string = implode(
 						config_get( 'tag_separator' ), $t_tags
@@ -744,7 +744,7 @@ if( $t_show_attachments ) {
 			<?php echo lang_get( 'relationship_with_parent' ) ?>
 		</th>
 		<td>
-			<?php print_relationship_list_box( config_get( 'default_bug_relationship_clone' ), "rel_type", false, true ) ?>
+			<?php print_relationship_list_box( config_get( 'default_bug_relationship_clone' ), 'rel_type', false, true ) ?>
 			<?php echo '<strong>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</strong>' ?>
 		</td>
 	</tr>

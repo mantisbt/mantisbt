@@ -229,6 +229,6 @@ class ConfigParser {
 		}
 
 		# Anything else
-		throw new Exception( "Unexpected value" . $this->tokens->value() );
+		throw new Exception( 'Unexpected value' . $this->tokens->value() );
 	}
 }

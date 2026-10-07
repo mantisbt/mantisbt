@@ -143,7 +143,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 	$g_db_functional_type = db_get_type( $t_db_type );
 
 	if( $g_db_functional_type == DB_TYPE_UNDEFINED ) {
-		throw new ClientException( "Unsupported DB type",
+		throw new ClientException( 'Unsupported DB type',
 			ERROR_DB_CONNECT_FAILED,
 			[
 				0,
@@ -153,7 +153,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 	}
 
 	if( !db_check_database_support( $t_db_type ) ) {
-		throw new ClientException( "PHP module for DB missing",
+		throw new ClientException( 'PHP module for DB missing',
 			ERROR_DB_CONNECT_FAILED,
 			[
 				0,
@@ -183,7 +183,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 			db_query( 'SET NAMES UTF8' );
 		}
 	} else {
-		throw new ClientException( "DB Query failed", ERROR_DB_CONNECT_FAILED, db_error_as_array() );
+		throw new ClientException( 'DB Query failed', ERROR_DB_CONNECT_FAILED, db_error_as_array() );
 	}
 
 	$g_db_connected = true;
@@ -300,7 +300,7 @@ function db_is_oracle() {
 function db_check_identifier_size( $p_identifier ) {
 	# Oracle does not support long object names (30 chars max)
 	if( db_is_oracle() && 30 < strlen( $p_identifier ) ) {
-		throw new ClientException( "DB identifier too long",
+		throw new ClientException( 'DB identifier too long',
 			ERROR_DB_IDENTIFIER_TOO_LONG,
 			[$p_identifier]
 		);
@@ -939,7 +939,7 @@ function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 	}
 
 	if( !$t_result ) {
-		throw new ClientException( "Failed to update BLOM",
+		throw new ClientException( 'Failed to update BLOM',
 			ERROR_DB_QUERY_FAILED,
 			db_error_as_array()
 		);

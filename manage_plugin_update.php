@@ -70,7 +70,7 @@ foreach( $t_query->fetch_all() as $t_row ) {
 
 	$f_priority = gpc_get_int( 'priority_' . $t_basename, 3 );
 	if( $f_priority < PLUGIN_PRIORITY_LOW || $f_priority > PLUGIN_PRIORITY_HIGH ) {
-		throw new ClientException( "Invalid Priority", ERROR_INVALID_FIELD_VALUE,['priority_' . $t_basename] );
+		throw new ClientException( 'Invalid Priority', ERROR_INVALID_FIELD_VALUE,['priority_' . $t_basename] );
 	}
 
 	$f_protected = gpc_get_bool( 'protected_' . $t_basename, 0 );

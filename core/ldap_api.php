@@ -75,7 +75,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	if( $t_ds === false ) {
 		log_event( LOG_LDAP, 'LDAP server URI syntax check failed, make sure its in URI form' );
 		throw new ClientException(
-			"LDAP Server Connection Failed",
+			'LDAP Server Connection Failed',
 			ERROR_LDAP_SERVER_CONNECT_FAILED
 		);
 	}
@@ -84,7 +84,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 
 	$t_network_timeout = config_get_global( 'ldap_network_timeout' );
 	if( $t_network_timeout > 0 ) {
-		log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
+		log_event( LOG_LDAP, 'Setting LDAP network timeout to ' . $t_network_timeout );
 		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
@@ -114,9 +114,9 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_X_TLS_PROTOCOL_MIN, $t_tls_protocol_min );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
-			log_event( LOG_LDAP, "Error: Failed to set minimum TLS version on LDAP server" );
+			log_event( LOG_LDAP, 'Error: Failed to set minimum TLS version on LDAP server' );
 			throw new ClientException(
-				"LDAP: unable to set TLS version",
+				'LDAP: unable to set TLS version',
 				ERROR_LDAP_UNABLE_TO_SET_MIN_TLS
 			);
 		}
@@ -128,9 +128,9 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		$t_result = @ldap_start_tls( $t_ds );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
-			log_event( LOG_LDAP, "Error: Cannot initiate StartTLS on LDAP server" );
+			log_event( LOG_LDAP, 'Error: Cannot initiate StartTLS on LDAP server' );
 			throw new ClientException(
-				"LDAP: unable o initiate StartTLS",
+				'LDAP: unable o initiate StartTLS',
 				ERROR_LDAP_UNABLE_TO_STARTTLS
 			);
 		}
@@ -156,7 +156,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		ldap_log_error( $t_ds );
 		log_event( LOG_LDAP, 'Bind to ldap server failed' );
 		throw new ClientException(
-			"LDAP: server binding failed",
+			'LDAP: server binding failed',
 			ERROR_LDAP_SERVER_CONNECT_FAILED
 		);
 	} else {
@@ -268,7 +268,7 @@ function ldap_cache_user_data( $p_username ) {
 	try {
 		$t_ds = ldap_connect_bind();
 	} catch( ClientException ) {
-		log_event( LOG_LDAP, "ERROR: could not bind to LDAP server" );
+		log_event( LOG_LDAP, 'ERROR: could not bind to LDAP server' );
 		return false;
 	}
 
@@ -424,14 +424,14 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
 			log_event( LOG_LDAP, "Search '$t_search_filter' failed" );
-			throw new ClientException( "LDAP Authentication Failed", ERROR_LDAP_AUTH_FAILED );
+			throw new ClientException( 'LDAP Authentication Failed', ERROR_LDAP_AUTH_FAILED );
 		}
 
 		$t_info = @ldap_get_entries( $t_ds, $t_sr );
 		if( $t_info === false ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
-			throw new ClientException( "LDAP Authentication Failed", ERROR_LDAP_AUTH_FAILED );
+			throw new ClientException( 'LDAP Authentication Failed', ERROR_LDAP_AUTH_FAILED );
 		}
 
 		$t_authenticated = false;
@@ -509,7 +509,7 @@ function ldap_simulation_get_user( $p_username ) {
 	if( $t_lines === false ) {
 		log_event( LOG_LDAP, 'could not read simulation data from ' . $t_filename );
 		throw new ClientException(
-			"LDAP: could not read simulation data",
+			'LDAP: could not read simulation data',
 			ERROR_LDAP_SERVER_CONNECT_FAILED
 		);
 	}

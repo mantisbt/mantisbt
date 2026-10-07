@@ -68,7 +68,7 @@ class UserTokenDeleteCommand extends Command {
 		// ensure target user is not protected
 		if( user_is_protected( $this->user_id ) ) {
 			throw new ClientException(
-				"User is protected",
+				'User is protected',
 				ERROR_PROTECTED_ACCOUNT
 			);
 		}

@@ -131,7 +131,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 	$t_cf_row = $g_cache_custom_field[$c_field_id] ?? false;
 	if( !$t_cf_row ) {
 		if( $p_trigger_errors ) {
-			throw new ClientException( "Custom field not found",
+			throw new ClientException( 'Custom field not found',
 				ERROR_CUSTOM_FIELD_NOT_FOUND,
 				['Custom ' . $p_field_id]
 			);
@@ -432,7 +432,7 @@ function custom_field_type( $p_field_id ) {
  */
 function custom_field_ensure_exists( $p_field_id ) {
 	if( !custom_field_exists( $p_field_id ) ) {
-		throw new ClientException( "Custom field not found",
+		throw new ClientException( 'Custom field not found',
 			ERROR_CUSTOM_FIELD_NOT_FOUND,
 			['Custom ' . $p_field_id]
 		);
@@ -481,7 +481,7 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
  */
 function custom_field_ensure_name_unique( $p_name ) {
 	if( !custom_field_is_name_unique( $p_name ) ) {
-		throw new ClientException( "Custom field name not unique", ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE );
+		throw new ClientException( 'Custom field name not unique', ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE );
 	}
 	return true;
 }
@@ -596,7 +596,7 @@ function custom_field_create( $p_name ) {
 	$c_name = trim( $p_name );
 
 	if( is_blank( $c_name ) ) {
-		throw new ClientException( "Custom field name cannot be empty",
+		throw new ClientException( 'Custom field name cannot be empty',
 			ERROR_EMPTY_FIELD,
 			['name ']
 		);
@@ -639,14 +639,14 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	extract( $p_def_array, EXTR_PREFIX_ALL, 'v' );
 
 	if( is_blank( $v_name ) ) {
-		throw new ClientException( "Custom field name cannot be empty",
+		throw new ClientException( 'Custom field name cannot be empty',
 			ERROR_EMPTY_FIELD,
 			['name ']
 		);
 	} elseif( mb_strpos( $v_name, ',' ) ) {
 		# Commas are not allowed in CF name, it causes issues with columns
 		# selection (see #26665)
-		throw new ClientException( "Custom field name is not valid",
+		throw new ClientException( 'Custom field name is not valid',
 			ERROR_CUSTOM_FIELD_NAME_INVALID,
 			[$v_name]
 		);
@@ -669,7 +669,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	}
 
 	if( $v_access_level_rw < $v_access_level_r ) {
-		throw new ClientException( "Invalid Custom field property",
+		throw new ClientException( 'Invalid Custom field property',
 			ERROR_CUSTOM_FIELD_INVALID_PROPERTY,
 			[lang_get( 'custom_field_access_level_r' ) . ', ' . lang_get( 'custom_field_access_level_rw' )]
 		);
@@ -678,7 +678,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	if( $v_length_min < 0
 		|| ( $v_length_max != 0 && $v_length_min > $v_length_max )
 	) {
-		throw new ClientException( "Invalid Custom field property",
+		throw new ClientException( 'Invalid Custom field property',
 			ERROR_CUSTOM_FIELD_INVALID_PROPERTY,
 			[lang_get( 'custom_field_length_min' ) . ', ' . lang_get( 'custom_field_length_max' )]
 		);
@@ -696,7 +696,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	}
 
 	if( !custom_field_is_name_unique( $v_name, $p_field_id ) ) {
-		throw new ClientException( "Custom field name not unique", ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE );
+		throw new ClientException( 'Custom field name not unique', ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE );
 	}
 
 	# Validate default date format
@@ -713,7 +713,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 		try {
 			new DateTimeImmutable( $v_default_value );
 		} catch( Exception $e ) {
-			throw new ClientException( "Invalid Custom field default value",
+			throw new ClientException( 'Invalid Custom field default value',
 				ERROR_CUSTOM_FIELD_INVALID_PROPERTY,
 				[lang_get( 'custom_field_default_value' )]
 			);
@@ -917,7 +917,7 @@ function custom_field_get_id_from_name( $p_field_name ) {
 	if( !isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
 		# Build cache of lowercase custom fields names to id
 		if( !$g_cache_name_to_id_map ) {
-			$t_query = new DbQuery( "SELECT id, name FROM {custom_field}" );
+			$t_query = new DbQuery( 'SELECT id, name FROM {custom_field}' );
 			foreach( $t_query->fetch_all() as $t_row ) {
 				$t_name = mb_strtolower( $t_row['name'] );
 				$g_cache_name_to_id_map[$t_name] = $t_row['id'];
@@ -1665,7 +1665,7 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
 			$t_custom_field_value, $p_required ? ' required ' : '' );
 		print_hidden_input( custom_field_presence_field_name( $p_field_def['id'] ), '1' );
 	} else {
-		throw new ClientException( "Invalid Custom field definition",
+		throw new ClientException( 'Invalid Custom field definition',
 			ERROR_CUSTOM_FIELD_INVALID_DEFINITION
 		);
 	}

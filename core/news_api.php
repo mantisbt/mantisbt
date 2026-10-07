@@ -61,14 +61,14 @@ require_api( 'utility_api.php' );
  */
 function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
 	if( is_blank( $p_headline ) ) {
-		throw new ClientException( "News headline cannot be empty",
+		throw new ClientException( 'News headline cannot be empty',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'headline' )]
 		);
 	}
 
 	if( is_blank( $p_body ) ) {
-		throw new ClientException( "News body cannot be empty",
+		throw new ClientException( 'News body cannot be empty',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'body' )]
 		);
@@ -136,14 +136,14 @@ function news_delete_all( $p_project_id ) {
  */
 function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
 	if( is_blank( $p_headline ) ) {
-		throw new ClientException( "News headline cannot be empty",
+		throw new ClientException( 'News headline cannot be empty',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'headline' )]
 		);
 	}
 
 	if( is_blank( $p_body ) ) {
-		throw new ClientException( "News body cannot be empty",
+		throw new ClientException( 'News body cannot be empty',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'body' )]
 		);

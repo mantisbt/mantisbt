@@ -77,7 +77,7 @@ if( $f_show_inline ) {
 	# makes the assumption that they've been sent already).
 	if( !@form_security_validate( 'file_show_inline' ) ) {
 		http_all_headers();
-		throw new ClientException( "Invalid token", ERROR_FORM_TOKEN_INVALID );
+		throw new ClientException( 'Invalid token', ERROR_FORM_TOKEN_INVALID );
 	}
 }
 
@@ -102,7 +102,7 @@ switch( $f_type ) {
 $t_result = db_query( $t_query, [$c_file_id] );
 $t_row = db_fetch_array( $t_result );
 if( false === $t_row ) {
-	throw new ClientException( "Attachment not found",
+	throw new ClientException( 'Attachment not found',
 		ERROR_FILE_NOT_FOUND,
 		[$c_file_id]
 	);
@@ -178,7 +178,7 @@ switch( $t_upload_method ) {
 		$t_file_info_type = file_get_mime_type_for_content( $v_content );
 		break;
 	default:
-		throw new ClientException( "Unknown upload method", ERROR_GENERIC );
+		throw new ClientException( 'Unknown upload method', ERROR_GENERIC );
 }
 
 if( $t_file_info_type !== false ) {

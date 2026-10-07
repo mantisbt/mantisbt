@@ -257,6 +257,6 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 		case DATABASE:
 			return $t_content;
 		default:
-			throw new StateException( "Unknown file upload method", ERROR_GENERIC );
+			throw new StateException( 'Unknown file upload method', ERROR_GENERIC );
 	}
 }

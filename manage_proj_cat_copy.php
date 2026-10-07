@@ -65,7 +65,7 @@ if( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	throw new ClientException( "Copy action to/from is required", ERROR_NO_COPY_ACTION );
+	throw new ClientException( 'Copy action to/from is required', ERROR_NO_COPY_ACTION );
 }
 
 # The add command checks the destination. Preserve the previous requirement

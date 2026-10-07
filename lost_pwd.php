@@ -63,7 +63,7 @@ form_security_validate( 'lost_pwd' );
 if( OFF == config_get( 'lost_password_feature' ) ||
 	OFF == config_get( 'send_reset_password' ) ||
 	OFF == config_get( 'enable_email_notification' ) ) {
-	throw new ClientException( "Lost password feature is disabled", ERROR_LOST_PASSWORD_NOT_ENABLED );
+	throw new ClientException( 'Lost password feature is disabled', ERROR_LOST_PASSWORD_NOT_ENABLED );
 }
 
 # force logout on the current user if already authenticated
@@ -82,21 +82,21 @@ $t_result = db_query( $t_query, [$f_username, $f_email, true] );
 $t_row = db_fetch_array( $t_result );
 
 if( !$t_row ) {
-	throw new ClientException( "User not found or disabled", ERROR_LOST_PASSWORD_NOT_MATCHING_DATA );
+	throw new ClientException( 'User not found or disabled', ERROR_LOST_PASSWORD_NOT_MATCHING_DATA );
 }
 
 if( is_blank( $f_email ) ) {
-	throw new ClientException( "Missing email", ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED );
+	throw new ClientException( 'Missing email', ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED );
 }
 
 $t_user_id = $t_row['id'];
 
 if( user_is_protected( $t_user_id ) ) {
-	throw new ClientException( "Protected user account", ERROR_PROTECTED_ACCOUNT );
+	throw new ClientException( 'Protected user account', ERROR_PROTECTED_ACCOUNT );
 }
 
 if( !user_is_lost_password_request_allowed( $t_user_id ) ) {
-	throw new ClientException( "Maximum attempts", ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED );
+	throw new ClientException( 'Maximum attempts', ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED );
 }
 
 $t_confirm_hash = auth_generate_confirm_hash( $t_user_id );

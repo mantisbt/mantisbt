@@ -42,7 +42,7 @@ require_api( 'bugnote_api.php' );
  */
 function billing_ensure_reporting_access( $p_project_id = null, $p_user_id = null ) {
 	if( config_get( 'time_tracking_enabled' ) == OFF ) {
-		throw new ClientException( "Time tracking disabled", ERROR_ACCESS_DENIED );
+		throw new ClientException( 'Time tracking disabled', ERROR_ACCESS_DENIED );
 	}
 
 	access_ensure_project_level( config_get( 'time_tracking_reporting_threshold' ), $p_project_id, $p_user_id );
@@ -66,7 +66,7 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 
 	if( $c_to === false || $c_from === false ) {
 		$t_invalid = "$p_from - $p_to";
-		throw new ClientException( "Invalid date", ERROR_GENERIC, [$t_invalid] );
+		throw new ClientException( 'Invalid date', ERROR_GENERIC, [$t_invalid] );
 	}
 
 	db_param_push();

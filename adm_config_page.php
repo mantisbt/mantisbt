@@ -83,7 +83,7 @@ $t_edit_action = in_array( $f_edit_action, $t_valid_actions )
 
 # if not creating a new option, the option name is required
 if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action && null == $f_edit_option ) {
-	throw new ClientException( "Option name is required",
+	throw new ClientException( 'Option name is required',
 		ERROR_EMPTY_FIELD,
 		['config_option']
 	);
@@ -113,7 +113,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 
 	if( !$t_config_row ) {
 		# this error will be triggered if the exact config combination does not exist in database
-		throw new ClientException( "Config option not found",
+		throw new ClientException( 'Config option not found',
 				ERROR_CONFIG_OPT_NOT_FOUND,
 				[$f_edit_option]
 		);
@@ -137,7 +137,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 		# make sure that configuration option specified is a valid one.
 		$t_not_found_value = '***CONFIG OPTION NOT FOUND***';
 		if( config_get( $t_option_id, $t_not_found_value ) === $t_not_found_value ) {
-			throw new ClientException( "Config option not found",
+			throw new ClientException( 'Config option not found',
 				ERROR_CONFIG_OPT_NOT_FOUND,
 				[$t_option_id]
 			);

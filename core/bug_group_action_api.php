@@ -57,12 +57,12 @@ function bug_group_action_init( $p_action ) {
 	if( !isset( $t_valid_actions[$t_action] ) &&
 		!isset( $t_valid_actions['EXT_' . $t_action] )
 		) {
-		throw new ClientException( "Invalid Group action", ERROR_GENERIC );
+		throw new ClientException( 'Invalid Group action', ERROR_GENERIC );
 	}
 
 	$t_include_file = config_get_global( 'absolute_path' ) . 'bug_actiongroup_' . $p_action . '_inc.php';
 	if( !file_exists( $t_include_file ) ) {
-		throw new ClientException( "Missing Group action script", ERROR_GENERIC, [$t_include_file] );
+		throw new ClientException( 'Missing Group action script', ERROR_GENERIC, [$t_include_file] );
 	} else {
 		require_once $t_include_file;
 	}
@@ -115,7 +115,7 @@ function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
  * @return void
  */
 function bug_group_action_print_results( array $p_failed_ids ) {
-	$t_format = "<tr>"
+	$t_format = '<tr>'
 		. "\n\t" . '<td width="50%%">%s' . lang_get( 'word_separator' ) . '%s</td>'
 		. "\n\t" . '<td>%s</td>'
 		. "\n</tr>\n";

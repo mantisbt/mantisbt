@@ -89,7 +89,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 }
 
 if( bug_is_readonly( $f_bug_id ) ) {
-	throw new ClientException( "Issue is read-only",
+	throw new ClientException( 'Issue is read-only',
 		ERROR_BUG_READ_ONLY_ACTION_DENIED,
 		[$f_bug_id]
 	);
@@ -251,7 +251,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 				'fa-status-box bigger-125 red',
 				lang_get( 'category_disabled' )
 			);
-			echo "&nbsp;";
+			echo '&nbsp;';
 		}
 		echo '<select ' . helper_get_tab_index()
 			. ( $t_allow_no_category ? '' : ' required' )

@@ -67,7 +67,7 @@ $f_description = gpc_get_string( 'description' );
 $f_file = gpc_get_file( 'file' );
 
 if( is_blank( $f_title ) ) {
-	throw new ClientException( "Title is required",
+	throw new ClientException( 'Title is required',
 		ERROR_EMPTY_FIELD,
 		[lang_get( 'title' )]
 	);

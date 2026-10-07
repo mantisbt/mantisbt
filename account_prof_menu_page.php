@@ -56,7 +56,7 @@ require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
 if( !config_get( 'enable_profiles' ) ) {
-	throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
+	throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
 }
 
 if( isset( $g_global_profiles ) ) {
@@ -173,7 +173,7 @@ if( $g_global_profiles ) {
 				# Common POST parameters for action buttons
 				$t_param = [
 					'profile_id' => $v_id,
-					'redirect' => basename( $_SERVER["SCRIPT_FILENAME"] ),
+					'redirect' => basename( $_SERVER['SCRIPT_FILENAME'] ),
 				];
 
 				# Print the Edit and Delete buttons for local profiles, or

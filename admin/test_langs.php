@@ -419,7 +419,7 @@ class LangCheckFile {
 						break;
 					case ';':
 						if( !$t_need_end_variable ) {
-							$this->logFail( "Unexpected semicolon", $t_line );
+							$this->logFail( 'Unexpected semicolon', $t_line );
 							$t_pass = false;
 						}
 						$t_need_end_variable = false;
@@ -428,7 +428,7 @@ class LangCheckFile {
 						if( $t_last_token == T_CONSTANT_ENCAPSED_STRING ) {
 							$t_two_part_string = true;
 						} else {
-							$this->logFail( "String concatenation found at unexpected location", $t_line );
+							$this->logFail( 'String concatenation found at unexpected location', $t_line );
 							$t_pass = false;
 						}
 						break;
@@ -457,7 +457,7 @@ class LangCheckFile {
 						$t_expect_end_array = true;
 						continue;
 					}
-					$this->logFail( "Unexpected " . token_name( $t_id ) . " token '$t_text'", $t_line );
+					$this->logFail( 'Unexpected ' . token_name( $t_id ) . " token '$t_text'", $t_line );
 					$t_pass = false;
 				}
 
@@ -471,7 +471,7 @@ class LangCheckFile {
 						break;
 					case T_VARIABLE:
 						if( $t_expect_double_quote ) {
-							$this->logFail( "Unexpected " . token_name( $t_id ) . " token '$t_text'", $t_line );
+							$this->logFail( 'Unexpected ' . token_name( $t_id ) . " token '$t_text'", $t_line );
 							break;
 						}
 						if( $t_set_variable && $t_current_var != null ) {
@@ -489,7 +489,7 @@ class LangCheckFile {
 								$this->logFail( "undefined constant: '$t_text'", $t_line );
 							}
 						} else {
-							$this->logFail( "T_STRING token found at unexpected location", $t_line );
+							$this->logFail( 'T_STRING token found at unexpected location', $t_line );
 							$t_pass = false;
 						}
 						if( strpos( $t_current_var, "\n" ) !== false ) {
@@ -502,7 +502,7 @@ class LangCheckFile {
 						break;
 					case T_CONSTANT_ENCAPSED_STRING:
 						if( $t_text[0] != '\'' ) {
-							$this->logWarn( "Language strings should be single-quoted", $t_line );
+							$this->logWarn( 'Language strings should be single-quoted', $t_line );
 						}
 						if( $t_variable_array ) {
 							$t_current_var .= $t_text;
@@ -572,7 +572,7 @@ class LangCheckFile {
 						$t_need_end_variable = true;
 						break;
 					default:
-						$this->logFail( "Unexpected " . token_name( $t_id ) . " token '$t_text'", $t_line );
+						$this->logFail( 'Unexpected ' . token_name( $t_id ) . " token '$t_text'", $t_line );
 						$t_pass = false;
 						break;
 				}
@@ -656,7 +656,7 @@ class LangCheckFile {
 					vsprintf( $p_text, array_pad( [], 10, 0 ) );
 				} catch ( Throwable $e ) {
 					$this->logFail( $this->url( $p_var )
-						. " printf format string is not valid: " . $e->getMessage(),
+						. ' printf format string is not valid: ' . $e->getMessage(),
 						$p_line, false
 					);
 				}
@@ -915,7 +915,7 @@ function checkplugins() {
 			$t_toc .= '<li><a href="#plugin-' . $t_plugin . '">' . $t_plugin . '</a></li>';
 		}
 		$t_toc .= '</ol>';
-		print_info( count( $t_plugins ) . " Plugins found" . $t_toc );
+		print_info( count( $t_plugins ) . ' Plugins found' . $t_toc );
 	} catch( UnexpectedValueException $e ) {
 		print_fail( $e->getMessage() );
 		echo '</tr>' . PHP_EOL;
@@ -1004,13 +1004,13 @@ function checklangdir( $p_path, $p_group ) {
 	echo '</td>';
 
 	if( !is_dir( $t_path ) ) {
-		print_info( "Directory does not exist" );
+		print_info( 'Directory does not exist' );
 		echo '</tr>' . PHP_EOL;
 		return;
 	} else {
 		try {
 			$t_lang_files = get_lang_files( $t_path );
-			print_info( count( $t_lang_files ) . " files found" );
+			print_info( count( $t_lang_files ) . ' files found' );
 		} catch( UnexpectedValueException $e ) {
 			print_fail( $e->getMessage() );
 			echo '</tr>' . PHP_EOL;
@@ -1026,7 +1026,7 @@ function checklangdir( $p_path, $p_group ) {
 	$t_key = array_search( LangCheckFile::BASE, $t_lang_files );
 	if( $t_key === false ) {
 		echo '<tr><td></td>';
-		print_fail( "Reference English file not found" );
+		print_fail( 'Reference English file not found' );
 		echo '</tr>' . PHP_EOL;
 	} else {
 		$t_file = new LangCheckFile( $t_path, LangCheckFile::BASE, $p_group );

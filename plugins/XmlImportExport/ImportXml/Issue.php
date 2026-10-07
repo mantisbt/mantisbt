@@ -251,7 +251,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 					custom_field_set_value( $t_custom_field->id, $this->new_id_, $t_custom_field->value );
 				} else {
 					throw new ClientException(
-						"Custom field not linked",
+						'Custom field not linked',
 						ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT,
 						[$t_custom_field->name, $t_custom_field_id]
 					);

@@ -74,7 +74,7 @@ $t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 if( is_blank( $f_title ) ) {
-	throw new ClientException( "Title is required",
+	throw new ClientException( 'Title is required',
 		ERROR_EMPTY_FIELD,
 		[lang_get( 'title' )]
 	);
@@ -105,7 +105,7 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 				file_delete_local( $t_disk_file_name );
 			}
 			if( !move_uploaded_file( $f_file['tmp_name'], $t_disk_file_name ) ) {
-				throw new ClientException( "File could not be moved", ERROR_FILE_MOVE_FAILED );
+				throw new ClientException( 'File could not be moved', ERROR_FILE_MOVE_FAILED );
 			}
 			chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 

@@ -246,13 +246,13 @@ class IssueUpdateTest extends SoapBase {
 		$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 		$t_issue_with_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertCount( 1, $t_issue_with_note->notes, "Issue has one note" );
+		$this->assertCount( 1, $t_issue_with_note->notes, 'Issue has one note' );
 
 		# Update the issue just retrieved without changing it
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_with_note );
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertCount( 1, $t_updated_issue->notes, "Note has not been duplicated" );
+		$this->assertCount( 1, $t_updated_issue->notes, 'Note has not been duplicated' );
 
 		# Add a second note with time tracking
 		$t_issue_with_one_new_note = $t_updated_issue;
@@ -264,7 +264,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_with_one_new_note );
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertCount( 2, $t_updated_issue->notes, "New note has been added" );
+		$this->assertCount( 2, $t_updated_issue->notes, 'New note has been added' );
 		$t_new_note = $t_updated_issue->notes[1];
 		$this->assertEquals( 'second note', $t_new_note->text );
 		$this->assertEquals( TIME_TRACKING, $t_new_note->note_type );
@@ -276,7 +276,7 @@ class IssueUpdateTest extends SoapBase {
 		]];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_with_one_new_note );
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		$this->assertCount( 3, $t_updated_issue->notes, "A new note has been added" );
+		$this->assertCount( 3, $t_updated_issue->notes, 'A new note has been added' );
 		$t_new_note = $t_updated_issue->notes[2];
 		$this->assertEquals( 'third note', $t_new_note->text );
 	}
@@ -438,10 +438,10 @@ class IssueUpdateTest extends SoapBase {
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertCount( 1, $t_updated_issue->notes, "A new note has been added" );
+		$this->assertCount( 1, $t_updated_issue->notes, 'A new note has been added' );
 		$t_new_note = $t_updated_issue->notes[0];
-		$this->assertEquals( BUGNOTE, $t_new_note->note_type, "Note created as BUGNOTE, not REMINDER" );
-		$this->assertNotEquals( '|1|', $t_new_note->note_attr, "Note attributes were not set" );
+		$this->assertEquals( BUGNOTE, $t_new_note->note_type, 'Note created as BUGNOTE, not REMINDER' );
+		$this->assertNotEquals( '|1|', $t_new_note->note_attr, 'Note attributes were not set' );
 	}
 
 	/**

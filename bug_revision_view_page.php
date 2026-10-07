@@ -85,7 +85,7 @@ if( $f_bug_id ) {
 	$t_bug_revisions = bug_revision_like( $f_rev_id );
 
 	if( count( $t_bug_revisions ) < 1 ) {
-		throw new ClientException( "No bug revisions", ERROR_GENERIC );
+		throw new ClientException( 'No bug revisions', ERROR_GENERIC );
 	}
 
 	$t_rev = $t_bug_revisions[$f_rev_id];
@@ -95,7 +95,7 @@ if( $f_bug_id ) {
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
 } else {
-	throw new ClientException( "No identifier provided", ERROR_GENERIC );
+	throw new ClientException( 'No identifier provided', ERROR_GENERIC );
 }
 
 # Make sure user is allowed to view revisions

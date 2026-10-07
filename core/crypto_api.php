@@ -47,7 +47,7 @@ require_api( 'error_api.php' );
 function crypto_init() {
 	if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 		if( strlen( config_get_global( 'crypto_master_salt' ) ) < 16 ) {
-			throw new ClientException( "Invalid Master Salt", ERROR_CRYPTO_MASTER_SALT_INVALID );
+			throw new ClientException( 'Invalid Master Salt', ERROR_CRYPTO_MASTER_SALT_INVALID );
 		}
 	}
 }

@@ -98,7 +98,7 @@ class RestIssueUpdateCategory extends RestBase {
 		$t_response = $this->updateCategory( $this->issue_id, $p_category );
 		$t_json = $this->getJson( $t_response, $p_status_code );
 		if( $t_response->getStatusCode() == HTTP_STATUS_SUCCESS ) {
-			$this->assertEquals( $p_expected_id, $t_json->issues[0]->category->id, "Updated category id does not match expected" );
+			$this->assertEquals( $p_expected_id, $t_json->issues[0]->category->id, 'Updated category id does not match expected' );
 		}
 	}
 
@@ -154,7 +154,7 @@ class RestIssueUpdateCategory extends RestBase {
 		foreach( $t_cases as $t_category ) {
 			$t_response = $this->updateCategory( $this->issue_id, $t_category );
 			$t_json = $this->getJson( $t_response );
-			$this->assertEquals( $t_category_id, $t_json->issues[0]->category->id, "Updated category matches" );
+			$this->assertEquals( $t_category_id, $t_json->issues[0]->category->id, 'Updated category matches' );
 		}
 
 		category_remove( $t_category_id );
@@ -185,7 +185,7 @@ class RestIssueUpdateCategory extends RestBase {
 		$t_response = $this->updateCategory( $this->issue_id, $p_category );
 		$this->assertEquals( $t_expected,
 			$t_response->getStatusCode(),
-			"REST API returned unexpected Status Code"
+			'REST API returned unexpected Status Code'
 		);
 
 		# Allowing empty category

@@ -39,7 +39,7 @@ require_api( 'utility_api.php' );
 check_print_section_header_row( 'PHP' );
 
 # Supported PHP version
-check_print_info_row( "PHP version ", PHP_VERSION . PHP_EXTRA_VERSION );
+check_print_info_row( 'PHP version ', PHP_VERSION . PHP_EXTRA_VERSION );
 
 if( defined( 'PHP_SUPPORTED_VERSION' ) ) {
 	# Get 2-digit PHP version (X.Y)
@@ -50,7 +50,7 @@ if( defined( 'PHP_SUPPORTED_VERSION' ) ) {
 	$t_supported_php_version = PHP_SUPPORTED_VERSION;
 	if( PHP_SUPPORTED_VERSION == $t_short_version ) {
 		$t_supported_php_version .= '.999';
-		$t_supported_msg = "has not been fully tested with PHP " . PHP_SUPPORTED_VERSION . " yet,";
+		$t_supported_msg = 'has not been fully tested with PHP ' . PHP_SUPPORTED_VERSION . ' yet,';
 	} else {
 		$t_supported_msg = "has only been fully tested up to PHP $t_supported_php_version,";
 	}
@@ -86,7 +86,7 @@ if( defined( 'PHP_SUPPORTED_VERSION' ) ) {
 	$t_info = 'Supported version is not specified.';
 }
 check_print_test_warn_row(
-	"PHP version " . PHP_VERSION . " is supported",
+	'PHP version ' . PHP_VERSION . ' is supported',
 	$t_supported_php_version
 	&& version_compare( PHP_VERSION, $t_supported_php_version, '<' ),
 	[false => $t_info]

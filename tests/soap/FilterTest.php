@@ -186,7 +186,7 @@ class FilterTest extends SoapBase {
 		$this->assertContains(
 			$t_issue_id,
 			array_column( $t_issues_after, 'id' ),
-			"Added Issue Id exists in filtered list"
+			'Added Issue Id exists in filtered list'
 		);
 	}
 
@@ -206,7 +206,7 @@ class FilterTest extends SoapBase {
 
 		$this->assertCount( count( $t_issues_before ) + 1,
 			$t_issues_after,
-			"Number of monitored issues increased by 1"
+			'Number of monitored issues increased by 1'
 		);
 	}
 
@@ -226,7 +226,7 @@ class FilterTest extends SoapBase {
 
 		$this->assertCount( count( $t_issues_before ),
 			$t_issues_after,
-			"Number of monitored issues did not change"
+			'Number of monitored issues did not change'
 		);
 	}
 
@@ -252,12 +252,12 @@ class FilterTest extends SoapBase {
 
 		$this->assertCount( count( $t_issues_before ) + 1,
 			$t_issues_after,
-			"Number of monitored issues increased by 1"
+			'Number of monitored issues increased by 1'
 		);
 		$this->assertContains(
 			$t_issue_id,
 			array_column( $t_issues_after, 'id' ),
-			"Added Issue Id exists in filtered list"
+			'Added Issue Id exists in filtered list'
 		);
 	}
 
@@ -297,7 +297,7 @@ class FilterTest extends SoapBase {
 		$this->assertContains(
 			$t_issue_id,
 			array_column( $t_issues_after, 'id' ),
-			"Added Issue Id exists in filtered list"
+			'Added Issue Id exists in filtered list'
 		);
 	}
 
@@ -321,12 +321,12 @@ class FilterTest extends SoapBase {
 
 		$this->assertCount( count( $t_issues_before ) + 1,
 			$t_issues_after,
-			"Number of issues increased by 1"
+			'Number of issues increased by 1'
 		);
 		$this->assertContains(
 			$t_issue_id,
 			array_column( $t_issues_after, 'id' ),
-			"Added Issue Id exists in filtered list"
+			'Added Issue Id exists in filtered list'
 		);
 	}
 
@@ -361,7 +361,7 @@ class FilterTest extends SoapBase {
 
 		$this->assertEquals( $t_note_count,
 			$t_project_issues[0]->notes_count,
-			"Created issue has the expected number of Bugnotes" );
+			'Created issue has the expected number of Bugnotes' );
 	}
 
 	/**
@@ -386,7 +386,7 @@ class FilterTest extends SoapBase {
 
 		$this->assertCount( count( $t_issues_before ) + 1,
 			$t_issues_after,
-			"Number of Closed Issues increased by 1"
+			'Number of Closed Issues increased by 1'
 		);
 	}
 
@@ -413,7 +413,7 @@ class FilterTest extends SoapBase {
 
 		$this->assertEquals( $t_issue_id,
 			$t_project_issues[0]->id,
-			"Added Issue exists in filtered list"
+			'Added Issue exists in filtered list'
 		);
 	}
 
@@ -514,7 +514,7 @@ class FilterTest extends SoapBase {
 		);
 		$this->assertEquals( $t_issue_id,
 			$t_issues_after[0]->id,
-			"Added Issue exists in filtered list"
+			'Added Issue exists in filtered list'
 		);
 	}
 
@@ -533,11 +533,11 @@ class FilterTest extends SoapBase {
 
 		$this->assertCount( count( $t_issues_before ) + 1,
 			$t_issues_after,
-			"Number of issues increased by 1"
+			'Number of issues increased by 1'
 		);
 		$this->assertEquals( $t_issue_id,
 			$t_issues_after[0]->id,
-			"Added Issue exists in filtered list"
+			'Added Issue exists in filtered list'
 		);
 	}
 
@@ -662,8 +662,8 @@ class FilterTest extends SoapBase {
 	 */
 	private function skipIfTooManyIssues( $p_issues ) {
 		if( $this->maxIssues <= count( $p_issues ) ) {
-			$this->markTestSkipped( "Skipping - database contains more than "
-				. $this->maxIssues . " Issues"
+			$this->markTestSkipped( 'Skipping - database contains more than '
+				. $this->maxIssues . ' Issues'
 			);
 		}
 	}

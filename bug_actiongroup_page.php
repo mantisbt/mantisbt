@@ -263,7 +263,7 @@ switch( $f_action ) {
 		$t_event_params['custom_field_id'] = $t_custom_field_id;
 		break;
 	default:
-		throw new ClientException( "Unknown Group action", ERROR_GENERIC );
+		throw new ClientException( 'Unknown Group action', ERROR_GENERIC );
 }
 $t_event_params['has_bugnote'] = $t_bugnote;
 

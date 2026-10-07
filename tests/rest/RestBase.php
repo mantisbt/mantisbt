@@ -223,7 +223,7 @@ abstract class RestBase extends MantisTestCase {
 	protected function getJson( ResponseInterface $p_response, $p_status_code = HTTP_STATUS_SUCCESS ) {
 		$this->assertEquals( $p_status_code,
 			$p_response->getStatusCode(),
-			"REST API returned unexpected Status Code"
+			'REST API returned unexpected Status Code'
 		);
 		return json_decode( $p_response->getBody(), false );
 	}

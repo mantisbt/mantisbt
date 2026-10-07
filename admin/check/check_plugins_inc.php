@@ -50,7 +50,7 @@ $t_manage_plugins_link = '<a href="' . helper_mantis_url( 'manage_plugin_page.ph
 
 # Info row - plugins count
 check_print_info_row(
-	"Checking all available and installed plugins",
+	'Checking all available and installed plugins',
 	count( $t_plugins ) . ' plugins, '
 	. count( $t_installed_plugins ) . ' installed'
 );
@@ -61,9 +61,9 @@ foreach( $t_installed_plugins as $t_basename => $t_plugin ) {
 		"Installed Plugin '$t_basename'' is operational",
 		plugin_is_loaded( $t_basename ),
 		[
-			false => "Plugin could not be loaded; check "
+			false => 'Plugin could not be loaded; check '
 				. sprintf( $t_manage_plugins_link, '#installed', 'Manage Plugins page' )
-				. " to ensure its dependencies are met or if it needs to be upgraded."
+				. ' to ensure its dependencies are met or if it needs to be upgraded.'
 		]
 	);
 }
@@ -104,7 +104,7 @@ foreach( $t_invalid_plugins as $t_plugin ) {
 				false,
 				[
 					false => sprintf( $t_manage_plugins_link, '#invalid', 'Remove the Plugin' )
-						. " or reinstall its source code."
+						. ' or reinstall its source code.'
 				]
 			);
 			break;

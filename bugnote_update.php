@@ -81,7 +81,7 @@ if( $t_user_id == $t_reporter_id ) {
 
 # Check if the bug is readonly
 if( bug_is_readonly( $t_bug_id ) ) {
-	throw new ClientException( "Issue is read-only",
+	throw new ClientException( 'Issue is read-only',
 		ERROR_BUG_READ_ONLY_ACTION_DENIED,
 		[$t_bug_id]
 	);

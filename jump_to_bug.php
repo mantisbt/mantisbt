@@ -42,7 +42,7 @@ auth_ensure_user_authenticated();
 $f_search_string = gpc_get_string( 'bug_id' );
 
 # Use the first group of consecutive numbers as bug id, ignore the rest.
-if( !preg_match( "/([0-9]+)/", $f_search_string, $t_matches ) ) {
+if( !preg_match( '/([0-9]+)/', $f_search_string, $t_matches ) ) {
 	throw new ClientException( 'Invalid bug id', ERROR_INVALID_FIELD_VALUE, ['bug_id'] );
 }
 $t_bug_id = $t_matches[1];

@@ -64,7 +64,7 @@ $f_handler_id      = gpc_get_int( 'assigned_to', 0 );
 $f_enabled         = gpc_get_bool( 'enabled' );
 
 if( is_blank( $f_name ) ) {
-	throw new ClientException( "Category name is required",
+	throw new ClientException( 'Category name is required',
 		ERROR_EMPTY_FIELD,
 		['name']
 	);

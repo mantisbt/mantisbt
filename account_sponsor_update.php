@@ -55,7 +55,7 @@ require_api( 'print_api.php' );
 require_api( 'sponsorship_api.php' );
 
 if( !config_get( 'enable_sponsorship' ) ) {
-	throw new ClientException( "Sponsorship disabled", ERROR_SPONSORSHIP_NOT_ENABLED );
+	throw new ClientException( 'Sponsorship disabled', ERROR_SPONSORSHIP_NOT_ENABLED );
 }
 
 form_security_validate( 'account_sponsor_update' );

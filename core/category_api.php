@@ -74,7 +74,7 @@ function category_exists( $p_category_id ) {
  */
 function category_ensure_exists( $p_category_id ) {
 	if( !category_exists( $p_category_id ) ) {
-		throw new ClientException( "Category not found", ERROR_CATEGORY_NOT_FOUND );
+		throw new ClientException( 'Category not found', ERROR_CATEGORY_NOT_FOUND );
 	}
 }
 
@@ -194,7 +194,7 @@ function category_is_unique( $p_project_id, $p_name ) {
  */
 function category_ensure_unique( $p_project_id, $p_name ) {
 	if( !category_is_unique( $p_project_id, $p_name ) ) {
-		throw new ClientException( "Category already exists", ERROR_CATEGORY_DUPLICATE );
+		throw new ClientException( 'Category already exists', ERROR_CATEGORY_DUPLICATE );
 	}
 }
 
@@ -224,7 +224,7 @@ function category_can_remove( $p_category_id ) {
  */
 function category_ensure_can_remove( $p_category_id ) {
 	if( !category_can_remove( $p_category_id ) ) {
-		throw new ClientException( "Cannot update default Category",
+		throw new ClientException( 'Cannot update default Category',
 			ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT,
 			[category_get_name( $p_category_id )]
 		);
@@ -243,7 +243,7 @@ function category_ensure_can_remove( $p_category_id ) {
  */
 function category_add( $p_project_id, $p_name ) {
 	if( is_blank( $p_name ) ) {
-		throw new ClientException( "Category name cannot be empty",
+		throw new ClientException( 'Category name cannot be empty',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'category' )]
 		);
@@ -275,7 +275,7 @@ function category_add( $p_project_id, $p_name ) {
  */
 function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = null ) {
 	if( is_blank( $p_name ) ) {
-		throw new ClientException( "Category name cannot be empty",
+		throw new ClientException( 'Category name cannot be empty',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'category' )]
 		);
@@ -293,7 +293,7 @@ function category_update( $p_category_id, $p_name, $p_assigned_to, $p_status = n
 	if( $p_category_id == $t_default_category_id
 		|| config_is_defined( 'default_category_for_moves', $p_category_id )
 	) {
-		throw new ClientException( "Cannot update default Category",
+		throw new ClientException( 'Cannot update default Category',
 			ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT,
 			[$t_old_category['name']]
 		);
@@ -440,7 +440,7 @@ function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
 		if( $p_error_if_not_exists ) {
-			throw new ClientException( "Category not found", ERROR_CATEGORY_NOT_FOUND );
+			throw new ClientException( 'Category not found', ERROR_CATEGORY_NOT_FOUND );
 		} else {
 			return false;
 		}
@@ -771,7 +771,7 @@ function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_er
 	$t_id = db_result( $t_result );
 	if( $t_id === false ) {
 		if( $p_trigger_errors ) {
-			throw new ClientException( "Category not found",
+			throw new ClientException( 'Category not found',
 				ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT,
 				[$p_category_name, $t_project_name]
 			);
@@ -835,7 +835,7 @@ function category_can_delete( $p_category_id ) {
  */
 function category_ensure_can_delete( $p_category_id ) {
 	if( !category_can_delete( $p_category_id ) ) {
-		throw new ClientException( "Cannot delete category with Issues",
+		throw new ClientException( 'Cannot delete category with Issues',
 			ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES,
 			[category_get_name( $p_category_id )]
 		);

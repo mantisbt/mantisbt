@@ -159,7 +159,7 @@ function form_security_validate( $p_form_name ) {
 
 	# Short-circuit if we don't have any tokens for the given form name
 	if( !isset( $t_tokens[$p_form_name] ) || !is_array( $t_tokens[$p_form_name] ) || count( $t_tokens[$p_form_name] ) < 1 ) {
-		throw new ClientException( "Invalid form security token",
+		throw new ClientException( 'Invalid form security token',
 			ERROR_FORM_TOKEN_INVALID
 		);
 	}
@@ -170,7 +170,7 @@ function form_security_validate( $p_form_name ) {
 
 	# No form input
 	if( '' == $t_input ) {
-		throw new ClientException( "Invalid form security token",
+		throw new ClientException( 'Invalid form security token',
 			ERROR_FORM_TOKEN_INVALID
 		);
 	}
@@ -184,7 +184,7 @@ function form_security_validate( $p_form_name ) {
 	}
 
 	# Token does not exist
-	throw new ClientException( "Invalid form security token",
+	throw new ClientException( 'Invalid form security token',
 		ERROR_FORM_TOKEN_INVALID
 	);
 }

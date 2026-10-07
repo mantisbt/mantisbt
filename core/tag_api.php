@@ -530,7 +530,7 @@ function tag_count( $p_name_filter, $p_unused = false ) {
 	}
 	if( $p_unused ) {
 		$t_where .= $t_where ? ' AND ': ' WHERE ';
-		$t_where .= "bt.tag_id IS NULL";
+		$t_where .= 'bt.tag_id IS NULL';
 	}
 
 	$t_query = 'SELECT count(DISTINCT t.id) FROM {tag} t LEFT JOIN {bug_tag} bt ON bt.tag_id = t.id' . $t_where;
@@ -714,7 +714,7 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	# Do not allow assigning a tag to a user who is not allowed to create one
 	if( !access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id ) ) {
 		throw new ClientException(
-			"Access denied",
+			'Access denied',
 			ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS
 		);
 	}

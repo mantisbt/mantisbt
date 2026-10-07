@@ -71,7 +71,7 @@ layout_page_begin( 'manage_filter_edit_page.php' );
 
 $f_filter_id = gpc_get_int( 'filter_id', null );
 if( null === $f_filter_id ) {
-	throw new ClientException( "Filter Id is required",
+	throw new ClientException( 'Filter Id is required',
 		ERROR_EMPTY_FIELD,
 		['filter_id']
 	);

@@ -51,7 +51,7 @@ require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
 if( !config_get( 'enable_profiles' ) ) {
-	throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
+	throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
 }
 
 $t_form_name = 'account_prof_update';

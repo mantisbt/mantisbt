@@ -71,7 +71,7 @@ function api_token_get( $p_token_id ) {
  */
 function api_token_create( $p_token_name, $p_user_id, $p_return_id = false ) {
 	if( is_blank( $p_token_name ) ) {
-		throw new ClientException( "Token name cannot be empty",
+		throw new ClientException( 'Token name cannot be empty',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'api_token_name' )]
 		);
@@ -79,7 +79,7 @@ function api_token_create( $p_token_name, $p_user_id, $p_return_id = false ) {
 
 	$t_token_name = trim( $p_token_name );
 	if( mb_strlen( $t_token_name ) > DB_FIELD_SIZE_API_TOKEN_NAME ) {
-		throw new ClientException( "Token name too long",
+		throw new ClientException( 'Token name too long',
 			ERROR_FIELD_TOO_LONG,
 			[lang_get( 'api_token_name' ), DB_FIELD_SIZE_API_TOKEN_NAME]
 		);

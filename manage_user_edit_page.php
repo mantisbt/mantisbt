@@ -77,7 +77,7 @@ if( is_blank( $f_username ) ) {
 			# If we can't find the user by email, attempt to find by realname.
 			$t_user_id = user_get_id_by_realname( $f_username );
 			if( $t_user_id === false ) {
-				throw new ClientException( "User not found", ERROR_USER_BY_NAME_NOT_FOUND, [$f_username] );
+				throw new ClientException( 'User not found', ERROR_USER_BY_NAME_NOT_FOUND, [$f_username] );
 			}
 		}
 	}
@@ -85,7 +85,7 @@ if( is_blank( $f_username ) ) {
 
 $t_user = user_get_row( $t_user_id );
 if( !$t_user ) {
-	throw new ClientException( "User not found", ERROR_USER_BY_ID_NOT_FOUND, [$t_user_id] );
+	throw new ClientException( 'User not found', ERROR_USER_BY_ID_NOT_FOUND, [$t_user_id] );
 }
 
 # Ensure that the account to be updated is of equal or lower access to the
@@ -337,7 +337,7 @@ print_manage_menu( 'manage_user_page.php' );
 	# Information button
 	print_link_button( 'view_user_page.php?id=' . $t_user['id'],
 		lang_get( 'view_account_title' ),
-		"btn btn-primary btn-white btn-round pull-left"
+		'btn btn-primary btn-white btn-round pull-left'
 	);
 
 	# Impersonate Button

@@ -258,7 +258,7 @@ if( db_is_mysql() ) {
 			'reproducibility' => 10, # always
 			'priority' => 20, # low
 			'summary' => "MySQL version $t_db_major_version is not defined in Admin Checks",
-			'description' => "Please add the missing version to " . basename( __FILE__ ) . ".",
+			'description' => 'Please add the missing version to ' . basename( __FILE__ ) . '.',
 		];
 		$t_report_bug_url = helper_url_combine( 'https://mantisbt.org/bugs/bug_report_page.php', $t_param );
 		check_print_test_warn_row(

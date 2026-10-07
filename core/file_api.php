@@ -1372,7 +1372,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 
 			return ['type' => $t_content_type, 'content' => $t_row['content']];
 		default:
-			throw new StateException( "Unknown file upload method", ERROR_GENERIC );
+			throw new StateException( 'Unknown file upload method', ERROR_GENERIC );
 	}
 	return false;
 }

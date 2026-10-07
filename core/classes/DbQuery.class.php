@@ -300,7 +300,7 @@ class DbQuery {
 
 		if( !$this->db_result ) {
 			$this->db_result = false;
-			throw new ClientException( "DB Query failed",
+			throw new ClientException( 'DB Query failed',
 				ERROR_DB_QUERY_FAILED,
 				db_error_as_array( $this->db_query_string )
 			);

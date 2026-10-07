@@ -55,7 +55,7 @@ $g_cache_project_inheritance = null;
 function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = true ) {
 	if( in_array( $p_parent_id, project_hierarchy_get_all_subprojects( $p_child_id ) ) ) {
 		throw new ClientException(
-			"Recursive project hierarchy is not supported",
+			'Recursive project hierarchy is not supported',
 			ERROR_PROJECT_RECURSIVE_HIERARCHY
 		);
 	}

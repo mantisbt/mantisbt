@@ -63,7 +63,7 @@ tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
 $t_redirect_page = parse_url(
-	basename( $_SERVER["HTTP_REFERER"] ?? 'tag_view_page.php' ),
+	basename( $_SERVER['HTTP_REFERER'] ?? 'tag_view_page.php' ),
 	PHP_URL_PATH
 );
 

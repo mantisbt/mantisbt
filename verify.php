@@ -58,7 +58,7 @@ if( !auth_signup_enabled() &&
 	OFF == config_get( 'lost_password_feature' ) &&
 	OFF == config_get( 'send_reset_password' )
 ) {
-	throw new ClientException( "Lost password feature is disabled", ERROR_LOST_PASSWORD_NOT_ENABLED );
+	throw new ClientException( 'Lost password feature is disabled', ERROR_LOST_PASSWORD_NOT_ENABLED );
 }
 
 $f_user_id = gpc_get_int( 'id' );
@@ -83,7 +83,7 @@ if( $t_token_confirm_hash == null
 	|| $f_confirm_hash !== $t_token_confirm_hash
 	|| $t_token_change_email !== null
 ) {
-	throw new ClientException( "Invalid confirmation hash", ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
+	throw new ClientException( 'Invalid confirmation hash', ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
 }
 
 user_reset_failed_login_count_to_zero( $f_user_id );

@@ -1023,7 +1023,7 @@ function print_admin_menu_bar( $p_page ) {
 
 		echo "\t<li$t_class_active>";
 		echo '<a href="' . $t_path . $t_menu_page . '"' . $t_class_green . '>'
-			. $t_description . "</a>";
+			. $t_description . '</a>';
 		echo '</li>' . "\n";
 	}
 

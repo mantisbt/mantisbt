@@ -687,7 +687,7 @@ function bugnote_get( $p_bugnote_id ) {
 	}
 
 	# if we reached here something is wrong, trigger an error.
-	throw new ClientException( "Bugnote not found", ERROR_BUGNOTE_NOT_FOUND );
+	throw new ClientException( 'Bugnote not found', ERROR_BUGNOTE_NOT_FOUND );
 }
 
 /**

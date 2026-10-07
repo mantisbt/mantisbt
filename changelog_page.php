@@ -198,7 +198,7 @@ if( is_blank( $f_project ) ) {
 	$f_project_id = project_get_id_by_name( $f_project );
 
 	if( $f_project_id === 0 ) {
-		throw new ClientException( "Project not found",
+		throw new ClientException( 'Project not found',
 			ERROR_PROJECT_NOT_FOUND,
 			[$f_project]
 		);
@@ -230,7 +230,7 @@ if( is_blank( $f_version ) ) {
 	$f_version_id = version_get_id( $f_version, $t_project_id );
 
 	if( $f_version_id === false ) {
-		throw new ClientException( "Version not found",
+		throw new ClientException( 'Version not found',
 			ERROR_VERSION_NOT_FOUND,
 			[$f_version]
 		);

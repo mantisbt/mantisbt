@@ -90,12 +90,12 @@ $t_db_password = config_get_global( 'db_password' );
 $t_database_name = config_get_global( 'database_name' );
 
 # Attempt to connect
-echo "Connecting to database... ";
+echo 'Connecting to database... ';
 $t_save = error_reporting( error_reporting() & ~E_USER_ERROR );
 $t_result = @db_connect( $t_dsn, $t_hostname, $t_db_username, $t_db_password, $t_database_name );
 if( !$t_result ) {
 	echo "FAILED\n";
-	echo "Error opening connection to database "
+	echo 'Error opening connection to database '
 		. "'$t_database_name' on host '$t_hostname' with username '$t_db_username':\n"
 		. db_error_msg() . "\n";
 	exit( 1 );

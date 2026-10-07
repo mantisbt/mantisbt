@@ -76,7 +76,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 
 if( bug_is_readonly( $f_bug_id ) ) {
 	error_parameters( $f_bug_id );
-	throw new ClientException( "Issue is read-only", ERROR_BUG_READ_ONLY_ACTION_DENIED );
+	throw new ClientException( 'Issue is read-only', ERROR_BUG_READ_ONLY_ACTION_DENIED );
 }
 
 # Abort if user is not authorized to send reminders
@@ -86,7 +86,7 @@ access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 $t_receive_reminder = config_get( 'reminder_receive_threshold' );
 foreach( $f_to as $t_recipient ) {
 	if( !access_has_bug_level( $t_receive_reminder, $f_bug_id, $t_recipient ) ) {
-		throw new ClientException( "Access denied", ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
+		throw new ClientException( 'Access denied', ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
 	}
 }
 

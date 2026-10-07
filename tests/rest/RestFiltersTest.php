@@ -97,8 +97,8 @@ class RestFiltersTest extends RestBase {
 		);
 
 		$t_body = json_decode( $t_response->getBody(), true );
-		$this->assertArrayHasKey( 'filters', $t_body, "Response includes filters data" );
-		$this->assertIsArray( $t_body['filters'], "Filters data should be an array" );
+		$this->assertArrayHasKey( 'filters', $t_body, 'Response includes filters data' );
+		$this->assertIsArray( $t_body['filters'], 'Filters data should be an array' );
 
 		return $t_body['filters'];
 	}
@@ -144,7 +144,7 @@ class RestFiltersTest extends RestBase {
 
 		$t_filters = $this->getFilters();
 		$this->assertEquals( 2, count( $t_filters ) - $t_count_filters,
-			"Number of filters expected to be 2"
+			'Number of filters expected to be 2'
 		);
 	}
 
@@ -169,7 +169,7 @@ class RestFiltersTest extends RestBase {
 		$t_endpoint = $this->getFilterURL( self::INVALID_FILTER_ID );
 		$t_response = $this->builder()->get( $t_endpoint )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Retrieve invalid filter"
+			'Retrieve invalid filter'
 		);
 	}
 
@@ -186,13 +186,13 @@ class RestFiltersTest extends RestBase {
 		$t_endpoint = $this->getFilterURL( $t_filter_id );
 		$t_response = $this->builder()->delete( $t_endpoint )->send();
 		$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode(),
-			"Deleting filter"
+			'Deleting filter'
 		);
 
 		# Try to delete the filter again, should fail
 		$t_response = $this->builder()->delete( $t_endpoint )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Deleting non-existing filter"
+			'Deleting non-existing filter'
 		);
 	}
 
@@ -216,12 +216,12 @@ class RestFiltersTest extends RestBase {
 		# Get issues matching test filter - at this point there should be none
 		$t_response = $this->builder()->get( $this->getIssueFilterURL( $t_filter_id ) )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Retrieve issues matching test filter"
+			'Retrieve issues matching test filter'
 		);
 		$t_body = json_decode( $t_response->getBody(), true );
-		$this->assertArrayHasKey( 'issues', $t_body, "Response includes issues key" );
-		$this->assertIsArray( $t_body['issues'], "Issues key is an array" );
-		$this->assertEmpty( $t_body['issues'], "Test filter should return no issues" );
+		$this->assertArrayHasKey( 'issues', $t_body, 'Response includes issues key' );
+		$this->assertIsArray( $t_body['issues'], 'Issues key is an array' );
+		$this->assertEmpty( $t_body['issues'], 'Test filter should return no issues' );
 
 		# Create 2 test issues, 1 new and 1 resolved
 		$t_issue_to_add = $this->getIssueToAdd();
@@ -240,10 +240,10 @@ class RestFiltersTest extends RestBase {
 		# Get issues matching test filter again
 		$t_response = $this->builder()->get( $this->getIssueFilterURL( $t_filter_id ) )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Retrieve issues matching test filter"
+			'Retrieve issues matching test filter'
 		);
 		$t_body = json_decode( $t_response->getBody(), true );
-		$this->assertCount( 1, $t_body['issues'], "Counting issues matching test filter" );
+		$this->assertCount( 1, $t_body['issues'], 'Counting issues matching test filter' );
 	}
 
 	/**
@@ -255,7 +255,7 @@ class RestFiltersTest extends RestBase {
 		$t_endpoint = $this->getIssueFilterURL( self::INVALID_FILTER_ID );
 		$t_response = $this->builder()->get( $t_endpoint )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Retrieve issues matching invalid filter"
+			'Retrieve issues matching invalid filter'
 		);
 
 	}

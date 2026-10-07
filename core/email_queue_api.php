@@ -112,19 +112,19 @@ function email_queue_add( EmailData $p_email_data ) {
 	# email cannot be blank
 	if( is_blank( $t_email_data->email ) ) {
 		error_parameters( lang_get( 'email' ) );
-		throw new ClientException( "Email must not be empty", ERROR_EMPTY_FIELD );
+		throw new ClientException( 'Email must not be empty', ERROR_EMPTY_FIELD );
 	}
 
 	# subject cannot be blank
 	if( is_blank( $t_email_data->subject ) ) {
 		error_parameters( lang_get( 'subject' ) );
-		throw new ClientException( "Subject must not be empty", ERROR_EMPTY_FIELD );
+		throw new ClientException( 'Subject must not be empty', ERROR_EMPTY_FIELD );
 	}
 
 	# body cannot be blank
 	if( is_blank( $t_email_data->body ) ) {
 		error_parameters( lang_get( 'body' ) );
-		throw new ClientException( "Email body must not be empty", ERROR_EMPTY_FIELD );
+		throw new ClientException( 'Email body must not be empty', ERROR_EMPTY_FIELD );
 	}
 
 	$c_email = $t_email_data->email;

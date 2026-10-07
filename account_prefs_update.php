@@ -89,7 +89,7 @@ if( lang_language_exists( $f_lang ) ) {
 $f_font = gpc_get_string( 'font_family' );
 if( !in_array( $f_font, helper_get_font_list() ) ) {
 	# This should not happen unless the form submission was tempered with
-	throw new ClientException( "Invalid font", ERROR_INVALID_FIELD_VALUE, ['font_family'] );
+	throw new ClientException( 'Invalid font', ERROR_INVALID_FIELD_VALUE, ['font_family'] );
 }
 if( config_get( 'font_family', null, $f_user_id, ALL_PROJECTS ) != $f_font ) {
 	config_set( 'font_family', $f_font, $f_user_id, ALL_PROJECTS );

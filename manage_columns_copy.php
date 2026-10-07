@@ -67,7 +67,7 @@ if( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	throw new ClientException( "Project to copy to/from is required", ERROR_NO_COPY_ACTION );
+	throw new ClientException( 'Project to copy to/from is required', ERROR_NO_COPY_ACTION );
 }
 
 # only admins can set global defaults.for ALL_PROJECT

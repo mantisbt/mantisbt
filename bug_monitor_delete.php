@@ -68,7 +68,7 @@ if( $f_user_id === NO_USER ) {
 }
 
 if( user_is_anonymous( $t_user_id ) ) {
-	throw new ClientException( "User account is protected", ERROR_PROTECTED_ACCOUNT );
+	throw new ClientException( 'User account is protected', ERROR_PROTECTED_ACCOUNT );
 }
 
 bug_ensure_exists( $f_bug_id );

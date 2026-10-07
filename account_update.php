@@ -83,13 +83,13 @@ if( $t_account_verification ) {
 		|| $f_confirm_hash !== $t_token_confirm_hash
 		|| $f_verify_email && $t_new_email === null
 	) {
-		throw new ClientException( "Invalid password hash", ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
+		throw new ClientException( 'Invalid password hash', ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
 	}
 
 	# Make sure the token is not expired (except for email validation)
 	if( !$f_verify_email &&
 		null === token_get_value( TOKEN_ACCOUNT_VERIFY, $t_verify_user_id ) ) {
-		throw new ClientException( "Expired token", ERROR_SESSION_NOT_VALID );
+		throw new ClientException( 'Expired token', ERROR_SESSION_NOT_VALID );
 	}
 
 	# set a temporary cookie so the login information is passed between pages.
@@ -124,7 +124,7 @@ if( $t_account_verification && is_blank( $f_password ) ) {
 	# log out of the temporary login used by verification
 	auth_clear_cookies();
 	auth_logout();
-	throw new ClientException( "Password is required",
+	throw new ClientException( 'Password is required',
 		ERROR_EMPTY_FIELD,
 		[lang_get( 'password' )]
 	);
@@ -139,10 +139,10 @@ if( !is_blank( $f_password ) ) {
 			auth_clear_cookies();
 			auth_logout();
 		}
-		throw new ClientException( "Password does not match", ERROR_USER_CREATE_PASSWORD_MISMATCH );
+		throw new ClientException( 'Password does not match', ERROR_USER_CREATE_PASSWORD_MISMATCH );
 	} else {
 		if( !$t_account_verification && !auth_does_password_match( $t_user_id, $f_password_current ) ) {
-			throw new ClientException( "Incorrect password", ERROR_USER_CURRENT_PASSWORD_MISMATCH );
+			throw new ClientException( 'Incorrect password', ERROR_USER_CURRENT_PASSWORD_MISMATCH );
 		}
 
 		if( !auth_does_password_match( $t_user_id, $f_password ) ) {
@@ -202,7 +202,7 @@ if( $t_show_confirmation_message ) {
 	layout_page_header();
 	layout_page_begin();
 	html_operation_successful(
-		"account_page.php",
+		'account_page.php',
 		'<p class="bold bigger-110">' . lang_get( 'operation_successful' ) . '</p><br>'
 		. sprintf( lang_get( 'verify_email_confirm_msg' ), $f_email
 		)

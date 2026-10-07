@@ -126,7 +126,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 			case IssueStatusChangeTimelineEvent::IGNORED:
 				return '';
 			default:
-				throw new Exception( "Unknown Timeline status change type" );
+				throw new Exception( 'Unknown Timeline status change type' );
 		}
 
 		$t_html .= '<div class="action">' . $t_string . '</div>';

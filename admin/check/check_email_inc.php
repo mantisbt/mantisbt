@@ -99,7 +99,7 @@ if( OFF == config_get_global( 'allow_blank_email' ) ) {
 	check_print_test_row(
 		'All users must have an e-mail address',
 		empty( $t_users_without_email ),
-		count( $t_users_without_email ) . " users without e-mail address found: "
+		count( $t_users_without_email ) . ' users without e-mail address found: '
 		. implode( ', ', $t_users_without_email ),
 	);
 }

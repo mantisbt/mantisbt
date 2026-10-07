@@ -122,7 +122,7 @@ function action_add_note_validate( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );
 
 	if( is_blank( $f_bugnote_text ) ) {
-		throw new ClientException( "Bugnote text cannot be empty" ,
+		throw new ClientException( 'Bugnote text cannot be empty' ,
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'bugnote' )]
 		);

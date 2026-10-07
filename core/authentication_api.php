@@ -103,7 +103,7 @@ function auth_flags( $p_user_id = null, $p_username = '' ) {
 	}
 
 	if( !$t_user_id && is_blank( $p_username ) ) {
-		throw new ClientException( "User is not in DB, username must be supplied", ERROR_GENERIC );
+		throw new ClientException( 'User is not in DB, username must be supplied', ERROR_GENERIC );
 	}
 
 	if( $t_user_id ) {

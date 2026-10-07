@@ -68,7 +68,7 @@ $f_protected       = gpc_get_bool( 'protected' );
 $f_enabled         = gpc_get_bool( 'enabled' );
 
 if( $f_password != $f_password_verify ) {
-	throw new ClientException( "Password does not match", ERROR_USER_CREATE_PASSWORD_MISMATCH );
+	throw new ClientException( 'Password does not match', ERROR_USER_CREATE_PASSWORD_MISMATCH );
 }
 
 # Password won't be sent by email. It is entered by the admin

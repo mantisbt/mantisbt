@@ -44,7 +44,7 @@ $t_shortname_id = sprintf( lang_get( 'opensearch_id_short' ), $t_prefix );
 $t_shortname_length = max( strlen( $t_shortname_text ), strlen( $t_shortname_id ) );
 
 check_print_test_warn_row(
-	"Browser Search engine names must be 16 chars or less",
+	'Browser Search engine names must be 16 chars or less',
 	$t_shortname_length <= 16,
 	[false => 'Either shorten the "search_title" configuration option to '
 		. 'a maximum  of ' . ( 16 - $t_shortname_length + strlen( $t_prefix ) )
@@ -100,8 +100,8 @@ if( config_get( 'relationship_graph_enable' ) ) {
 		}
 	}
 	check_print_test_row(
-		"Graphviz tools (" . implode( ', ', $t_tools )
-		. ") are required to display relationship graphs",
+		'Graphviz tools (' . implode( ', ', $t_tools )
+		. ') are required to display relationship graphs',
 		empty( $t_unavailable ),
 		[false => implode( ', ', $t_unavailable )
 			. " not found in $t_graphviz_path or not executable. "
@@ -116,7 +116,7 @@ if( config_get( 'relationship_graph_enable' ) ) {
 		$t_tool_min_version = '2.42.4';
 		if( version_compare( $t_tool_version, $t_tool_min_version ) >= 0 ) {
 			check_print_test_warn_row(
-				"Graph output format must be preferably set to SVG",
+				'Graph output format must be preferably set to SVG',
 				( $t_graph_format == 'svg' ),
 				[false => "graph_format MantisBT option is not 'svg', "
 					. "supported since Graphviz $t_tool_min_version"
@@ -124,7 +124,7 @@ if( config_get( 'relationship_graph_enable' ) ) {
 			);
 		} else {
 			check_print_test_row(
-				"Graph output format must be supported by Graphviz",
+				'Graph output format must be supported by Graphviz',
 				( $t_graph_format != 'svg' ),
 				[false  => "graph_format MantisBT option is 'svg', "
 					. "it requires Graphviz $t_tool_min_version or newer"

@@ -294,7 +294,7 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 
 	# platform cannot be blank
 	if( is_blank( $p_platform ) ) {
-		throw new ClientException( "platform is required",
+		throw new ClientException( 'platform is required',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'platform' )]
 		);
@@ -302,7 +302,7 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 
 	# os cannot be blank
 	if( is_blank( $p_os ) ) {
-		throw new ClientException( "os is required",
+		throw new ClientException( 'os is required',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'os' )]
 		);
@@ -310,7 +310,7 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 
 	# os_build cannot be blank
 	if( is_blank( $p_os_build ) ) {
-		throw new ClientException( "version is required",
+		throw new ClientException( 'version is required',
 			ERROR_EMPTY_FIELD,
 			[lang_get( 'version' )]
 		);
