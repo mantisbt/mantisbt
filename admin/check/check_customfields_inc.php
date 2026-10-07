@@ -190,8 +190,7 @@ abstract class CustomFieldCheck {
 /**
  * Checks for usage of curly brackets in Date Custom Fields default value.
  */
-class CheckDateDefaultWithBrackets extends CustomFieldCheck
-{
+class CheckDateDefaultWithBrackets extends CustomFieldCheck {
 	protected string $msg_pass = 'Deprecated usage of curly brackets in Date Custom Fields default value';
 	protected string $msg_fail = "Date Custom Field '%s' specifies its Default Value with deprecated curly brackets format.";
 	protected string $msg_info = "Use the same format, but without the '{}', i.e. '%s'. ";
@@ -231,8 +230,7 @@ class CheckDateDefaultWithBrackets extends CustomFieldCheck
  * Checks if Textarea Custom Fields maximum length and default value are
  * bigger than $g_max_textarea_length.
  */
-class CheckTextareaMaxLength extends CustomFieldCheck
-{
+class CheckTextareaMaxLength extends CustomFieldCheck {
 	protected string $msg_pass = 'Maximum length and Default value of Textarea Custom Fields '
 		. 'are smaller than $g_max_textarea_length';
 

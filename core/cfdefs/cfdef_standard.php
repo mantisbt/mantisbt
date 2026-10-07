@@ -316,8 +316,7 @@ function cfdef_prepare_date_default( $p_value ) {
 	# Check default date format and calculate actual date
 	try {
 		$t_date = new DateTimeImmutable( $t_value );
-	}
-	catch( Exception $e ) {
+	} catch( Exception $e ) {
 		return 0;
 	}
 

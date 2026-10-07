@@ -95,8 +95,7 @@ if( $t_type != CONFIG_TYPE_STRING ) {
 				$t_value = (float)$t_value;
 				break;
 		}
-	}
-	catch ( Exception $e ) {
+	} catch ( Exception $e ) {
 		throw new ClientException( "Syntax error",
 			ERROR_CONFIG_OPT_BAD_SYNTAX,
 			[$f_config_option, $e->getMessage()]

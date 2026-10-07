@@ -54,8 +54,7 @@ use Mantis\Exceptions\ServiceException;
  *  }
  * ```
  */
-class IssueFileAddCommand extends Command
-{
+class IssueFileAddCommand extends Command {
 	/**
 	 * The issue to add the note to.
 	 *

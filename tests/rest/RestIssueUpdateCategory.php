@@ -27,8 +27,7 @@ namespace Mantis\tests\rest;
 
 use Psr\Http\Message\ResponseInterface;
 
-class RestIssueUpdateCategory extends RestBase
-{
+class RestIssueUpdateCategory extends RestBase {
 	const CFG_ALLOW_NO_CAT = 'allow_no_category';
 
 	/**

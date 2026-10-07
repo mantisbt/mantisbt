@@ -267,8 +267,7 @@ function ldap_cache_user_data( $p_username ) {
 	# context, it just means we won't be able to retrieve user data from LDAP.
 	try {
 		$t_ds = ldap_connect_bind();
-	}
-	catch( ClientException ) {
+	} catch( ClientException ) {
 		log_event( LOG_LDAP, "ERROR: could not bind to LDAP server" );
 		return false;
 	}

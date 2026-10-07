@@ -135,7 +135,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 		$t_field = $t_history_row['field'];
 		if( !is_blank( $t_field ) ) {
 			# map field names to external names
-			switch( $t_field )  {
+			switch( $t_field ) {
 				case 'reporter_id':
 					$t_field = 'reporter';
 					break;
@@ -1087,7 +1087,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		if( $t_old_status != $t_new_status ) {
 			# Make sure user is authorized to change status
 			$t_update_status_threshold = config_get( 'update_bug_status_threshold', $t_bug_data->project_id, $t_user_id );
-			if( !access_has_project_level( $t_update_status_threshold, $t_bug_data->project_id, $t_user_id ) ){
+			if( !access_has_project_level( $t_update_status_threshold, $t_bug_data->project_id, $t_user_id ) ) {
 				return mci_fault_access_denied( $t_user_id , "Not allowed to change Issue status" );
 			}
 
@@ -2063,8 +2063,9 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
 	$t_result = [];
 	foreach( $p_issue_ids as $t_id ) {
 
-		if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
+		if( mci_check_access_to_bug( $t_user_id, $t_id ) === false ) {
 			continue;
+		}
 
 		log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 

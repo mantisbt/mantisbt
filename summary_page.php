@@ -165,7 +165,7 @@ print_summary_submenu();
 		<tr>
 			<td><?php echo lang_get( 'longest_open_bug' ) ?></td>
 			<td class="align-right"><?php
-				if( $t_time_stats['bug_id'] > 0 )  {
+				if( $t_time_stats['bug_id'] > 0 ) {
 					print_bug_link( $t_time_stats['bug_id'] );
 				}
 			?></td>

@@ -187,7 +187,7 @@ class ProjectTest extends SoapBase {
 	protected function tearDown(): void {
 		parent::tearDown();
 
-		foreach( $this->projectIdToDelete as $t_project_id )  {
+		foreach( $this->projectIdToDelete as $t_project_id ) {
 			$this->client->mc_project_delete( $this->userName, $this->password, $t_project_id );
 		}
 	}

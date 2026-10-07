@@ -36,8 +36,7 @@ class LocalizedStringsGetCommand extends Command {
 	/**
 	 * Validate the data.
 	 */
-	function validate() {
-	}
+	function validate() {}
 
 	/**
 	 * Process the command.

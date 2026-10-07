@@ -95,7 +95,7 @@ $t_refresh_delay = current_user_get_pref( 'refresh_delay' );
 if( $t_refresh_delay > 0 ) {
 	$t_query = '?';
 
-	if( $f_page_number > 1 )  {
+	if( $f_page_number > 1 ) {
 		$t_query .= 'page_number=' . $f_page_number . '&';
 	}
 

@@ -210,8 +210,7 @@ function custom_function_default_format_issue_summary( $p_issue_id, $p_context =
  * @param string  $p_bugnote_text   Bugnote text.
  * @return void
  */
-function custom_function_default_issue_update_validate( $p_issue_id, BugData $p_new_issue_data, $p_bugnote_text ) {
-}
+function custom_function_default_issue_update_validate( $p_issue_id, BugData $p_new_issue_data, $p_bugnote_text ) {}
 
 /**
  * Hook to notify after an issue has been updated.
@@ -220,8 +219,7 @@ function custom_function_default_issue_update_validate( $p_issue_id, BugData $p_
  * @param integer $p_issue_id The issue number that can be used to get the existing state.
  * @return void
  */
-function custom_function_default_issue_update_notify( $p_issue_id ) {
-}
+function custom_function_default_issue_update_notify( $p_issue_id ) {}
 
 /**
  * Hook to validate field settings before creating an issue
@@ -231,8 +229,7 @@ function custom_function_default_issue_update_notify( $p_issue_id ) {
  * @param BugData $p_new_issue_data Object (BugData) with the appropriate fields updated.
  * @return void
  */
-function custom_function_default_issue_create_validate( BugData $p_new_issue_data ) {
-}
+function custom_function_default_issue_create_validate( BugData $p_new_issue_data ) {}
 
 /**
  * Hook to notify after aa issue has been created.
@@ -241,8 +238,7 @@ function custom_function_default_issue_create_validate( BugData $p_new_issue_dat
  * @param integer $p_issue_id The issue number that can be used to get the existing state.
  * @return void
  */
-function custom_function_default_issue_create_notify( $p_issue_id ) {
-}
+function custom_function_default_issue_create_notify( $p_issue_id ) {}
 
 /**
  * Hook to validate field settings before deleting an issue.
@@ -252,8 +248,7 @@ function custom_function_default_issue_create_notify( $p_issue_id ) {
  * @param integer $p_issue_id The issue number that can be used to get the existing state.
  * @return void
  */
-function custom_function_default_issue_delete_validate( $p_issue_id ) {
-}
+function custom_function_default_issue_delete_validate( $p_issue_id ) {}
 
 /**
  * Hook to notify after an issue has been deleted.
@@ -264,8 +259,7 @@ function custom_function_default_issue_delete_validate( $p_issue_id ) {
  * @param integer $p_issue_id The issue number that can be used to get the existing state before it is deleted.
  * @return void
  */
-function custom_function_default_issue_delete_notify( $p_issue_id ) {
-}
+function custom_function_default_issue_delete_notify( $p_issue_id ) {}
 
 /**
  * Hook for authentication
@@ -574,5 +568,4 @@ function custom_function_default_enum_categories() {
  * @param integer $p_bug_id A bug identifier.
  * @return void
  */
-function custom_function_default_print_bug_view_page_custom_buttons( $p_bug_id ) {
-}
+function custom_function_default_print_bug_view_page_custom_buttons( $p_bug_id ) {}

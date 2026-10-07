@@ -276,8 +276,7 @@ abstract class MantisPlugin {
 	 * data, or be able to re-install the plugin later.
 	 * @return void
 	 */
-	public function uninstall() {
-	}
+	public function uninstall() {}
 
 	### Core plugin functionality ###
 

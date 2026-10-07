@@ -6,8 +6,7 @@ use stdClass;
 
 require_once 'RestIssueTest.php';
 
-class RestIssueUpdateVersion extends RestBase
-{
+class RestIssueUpdateVersion extends RestBase {
 	const VERSION_FIELDS = ['version', 'target_version', 'fixed_in_version'];
 
 	/** @var int Version id */

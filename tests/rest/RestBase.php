@@ -233,7 +233,7 @@ abstract class RestBase extends MantisTestCase {
 	 *
 	 * @return void
 	 */
-	protected function skipTestIfAnonymousDisabled(){
+	protected function skipTestIfAnonymousDisabled() {
 		if( ! auth_anonymous_enabled() ) {
 			$this->markTestSkipped( 'Anonymous access is not enabled' );
 		}

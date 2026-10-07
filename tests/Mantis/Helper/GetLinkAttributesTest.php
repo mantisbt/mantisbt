@@ -35,8 +35,7 @@ use Mantis\tests\Mantis\MantisCoreBase;
  * @see helper_get_link_attributes()
  * @see helper_is_link_external()
  */
-class GetLinkAttributesTest extends MantisCoreBase
-{
+class GetLinkAttributesTest extends MantisCoreBase {
 	const CFG_MAKE_LINKS = 'html_make_links';
 
 	/**
@@ -121,8 +120,7 @@ class GetLinkAttributesTest extends MantisCoreBase
 	 *
 	 * @dataProvider providerLinks
 	 */
-	public function testLinkIsExternal( string $p_url, bool $p_external ): void
-	{
+	public function testLinkIsExternal( string $p_url, bool $p_external ): void {
 		$this->assertEquals( $p_external, helper_is_link_external( $p_url ), "URL is external" );
 	}
 
@@ -153,8 +151,7 @@ class GetLinkAttributesTest extends MantisCoreBase
 	 *
 	 * @dataProvider providerNoFollow
 	 */
-	public function testNoFollow( int $p_value, array $p_internal, array $p_external ): void
-	{
+	public function testNoFollow( int $p_value, array $p_internal, array $p_external ): void {
 		$t_old = $this->setConfig( self::CFG_MAKE_LINKS, $p_value );
 
 		# Test internal links

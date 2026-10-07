@@ -269,8 +269,7 @@ function config_is_set_in_database( $p_option, $p_user = null, $p_project = null
 	$t_users = [ALL_USERS];
 	if( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 		$t_users[] = auth_get_current_user_id();
-	}
-	else {
+	} else {
 		if( !in_array( $p_user, $t_users ) ) {
 			$t_users[] = $p_user;
 		}
@@ -284,8 +283,7 @@ function config_is_set_in_database( $p_option, $p_user = null, $p_project = null
 		if( ALL_PROJECTS <> $t_selected_project ) {
 			$t_projects[] = $t_selected_project;
 		}
-	}
-	else {
+	} else {
 		if( !in_array( $p_project, $t_projects ) ) {
 			$t_projects[] = $p_project;
 		}

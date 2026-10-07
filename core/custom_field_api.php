@@ -712,8 +712,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 		# Check default date format and calculate actual date
 		try {
 			new DateTimeImmutable( $v_default_value );
-		}
-		catch( Exception $e ) {
+		} catch( Exception $e ) {
 			throw new ClientException( "Invalid Custom field default value",
 				ERROR_CUSTOM_FIELD_INVALID_PROPERTY,
 				[lang_get( 'custom_field_default_value' )]

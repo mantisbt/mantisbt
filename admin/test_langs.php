@@ -234,7 +234,9 @@ class LangCheckFile {
 	 */
 	public function printResults() {
 		echo '<tr><td class="col-xs-4"';
-		if( $this->warnings && $this->errors ) echo ' rowspan="2"';
+		if( $this->warnings && $this->errors ) {
+		echo ' rowspan="2"';
+		}
 		echo '>Testing \'' . basename( $this->file ) . '\'</td>';
 
 		if( $this->warnings ) {
@@ -246,7 +248,9 @@ class LangCheckFile {
 		}
 
 		if( $this->errors ) {
-			if( $this->warnings ) echo '<tr>';
+			if( $this->warnings ) {
+			echo '<tr>';
+			}
 			echo '<td class="alert-danger">ERRORS<ul>';
 			foreach( $this->errors as $t_msg ) {
 				echo '<li>' . $t_msg . '</li>';
@@ -546,8 +550,7 @@ class LangCheckFile {
 							try {
 								/** @noinspection PhpComposerExtensionStubsInspection */
 								$t_dom->loadHTML( $t_text, LIBXML_HTML_NOIMPLIED );
-							}
-							catch( Exception $e ) {
+							} catch( Exception $e ) {
 								$this->logWarn( $e->getMessage() . " for string $t_current_var", $t_line );
 							}
 							restore_error_handler();
@@ -747,7 +750,7 @@ class LangCheckFile {
 		];
 
 		$t_untranslated = 0;
-		foreach( self::$basevariables as $t_name => $t_var ){
+		foreach( self::$basevariables as $t_name => $t_var ) {
 			if( isset( $t_var['translated'] )
 				&& $t_var['translated'] === false
 				&& !in_array( $t_name, $t_optional_variables )

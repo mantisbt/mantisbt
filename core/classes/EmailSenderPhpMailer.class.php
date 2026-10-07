@@ -145,8 +145,7 @@ class EmailSenderPhpMailer extends EmailSender {
 			foreach( $p_message->to as $t_recipient ) {
 				$t_mail->addAddress( $t_recipient );
 			}
-		}
-		catch ( phpmailerException $e ) {
+		} catch ( phpmailerException $e ) {
 			log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
 			self::reset( $t_mail );
 			return false;

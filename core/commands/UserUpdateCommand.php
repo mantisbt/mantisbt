@@ -332,7 +332,7 @@ class UserUpdateCommand extends Command {
 		# Email was changed
 		if( !is_null( $this->email ) ) {
 			# Change made by user themselves
-			if( auth_get_current_user_id() == $this->user_id )  {
+			if( auth_get_current_user_id() == $this->user_id ) {
 				if( $this->email && config_get( 'send_reset_password' ) ) {
 					# Temporarily store the new email address in a token
 					token_set( TOKEN_ACCOUNT_CHANGE_EMAIL,

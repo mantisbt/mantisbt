@@ -1772,8 +1772,7 @@ function print_email_link( $p_email, $p_text ) {
  *                                  icon, otherwise display a plain-text link.
  * @return void
  */
-function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id, $p_show_as_button = true )
-{
+function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id, $p_show_as_button = true ) {
 	global $g_project_override;
 	$t_bug = bug_get( $p_bug_id, true );
 
@@ -2270,7 +2269,7 @@ function print_dropzone_form_data() {
  * @return void
  * @deprecated 2.29.0 dropzone_print_template() should be used in preference to this function
  */
-function print_dropzone_template(){
+function print_dropzone_template() {
 	error_parameters( __FUNCTION__, 'dropzone_print_template' );
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	dropzone_print_template();

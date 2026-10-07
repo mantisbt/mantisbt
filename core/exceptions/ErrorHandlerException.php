@@ -28,8 +28,7 @@ use Throwable;
  *
  * @internal
  */
-class ErrorHandlerException extends ErrorException
-{
+class ErrorHandlerException extends ErrorException {
 	use LocalizedErrorMessageTrait;
 
 	/**

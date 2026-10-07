@@ -84,8 +84,7 @@ function date_string_to_timestamp( string $p_date_string ): ?int {
 
 	try {
 		$t_dt = new DateTimeImmutable( $p_date_string );
-	}
-	catch( Exception $e ) {
+	} catch( Exception $e ) {
 		throw new ClientException(
 			"Invalid date format '$p_date_string'",
 			ERROR_INVALID_DATE_FORMAT,

@@ -31,8 +31,7 @@ use Mantis\tests\Mantis\MantisCoreBase;
  *
  * @group REST
  */
-class RestFiltersTest extends RestBase
-{
+class RestFiltersTest extends RestBase {
 	const INVALID_FILTER_ID = -9999;
 
 	/** @var array List of filters to delete to delete in tearDown() */

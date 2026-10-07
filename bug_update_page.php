@@ -298,9 +298,13 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 	if( $t_show_reporter ) {
 		# Reporter
 		echo '<th class="category">';
-		if( $f_reporter_edit ) echo '<label for="reporter_id">';
+		if( $f_reporter_edit ) {
+		echo '<label for="reporter_id">';
+		}
 		echo lang_get( 'reporter' );
-		if( $f_reporter_edit ) echo '</label>';
+		if( $f_reporter_edit ) {
+		echo '</label>';
+		}
 		echo '</th><td>';
 
 		# Do not allow the bug's reporter to edit the Reporter field

@@ -33,8 +33,7 @@ use stdClass;
  *
  * @group REST
  */
-class RestProjectTest extends RestBase
-{
+class RestProjectTest extends RestBase {
 	/**
 	 * @var string API Endpoint, should start with a '/'.
 	 */
