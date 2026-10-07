@@ -23,6 +23,7 @@ return ECSConfig::configure()
 	->withSets( [
 		__DIR__ . '/rules/basic.php',
 		__DIR__ . '/rules/whitepaces.php',
+		__DIR__ . '/rules/functions.php',
 		__DIR__ . '/rules/array.php',
 		__DIR__ . '/rules/quotes.php',
 		__DIR__ . '/rules/casing.php',

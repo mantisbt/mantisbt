@@ -61,8 +61,8 @@ function dropzone_print_form_data() {
 	echo "\t" . 'data-max-filesize-bytes="' . file_get_max_file_size() . '"' . "\n";
 	echo "\t" . 'data-max-filename-length="' . DB_FIELD_SIZE_FILENAME . '"' . "\n";
 	$t_allowed_files = config_get( 'allowed_files' );
-	if ( !empty ( $t_allowed_files ) ) {
-		$t_allowed_files = '.' . implode ( ',.', explode ( ',', $t_allowed_files ) );
+	if ( !empty( $t_allowed_files ) ) {
+		$t_allowed_files = '.' . implode( ',.', explode( ',', $t_allowed_files ) );
 	}
 	echo "\t" . 'data-accepted-files="' . $t_allowed_files . '"' . "\n";
 	echo "\t" . 'data-default-message="' . string_html_specialchars( lang_get( 'dropzone_default_message' ) ) . '"' . "\n";

@@ -139,7 +139,7 @@ $t_unused_user_count = $t_row['unused_user_count'];
 
 $t_prefix_array = array_merge( range( 'A', 'Z' ), range( '0', '9' ) );
 $t_prefix_array = array_combine( $t_prefix_array, $t_prefix_array );
-$t_prefix_array = array_merge (
+$t_prefix_array = array_merge(
 		['ALL' => lang_get( 'filter_all' )],
 		$t_prefix_array,
 		[
@@ -335,7 +335,7 @@ $t_user_count = count( $t_users );
 			</label>
 			<label for="search">
 				<input id="search" type="text" size="45" name="search" class="input-sm"
-					   value="<?php echo string_attribute ( $f_search );?>"
+					   value="<?php echo string_attribute( $f_search );?>"
 					   placeholder="<?php echo lang_get( 'search_user_hint' ) ?>"
 				/>
 				</label>

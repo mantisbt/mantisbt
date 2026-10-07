@@ -95,7 +95,7 @@ print_manage_menu( 'manage_proj_page.php' );
 	<div class="widget-toolbox padding-8 clearfix">
 		<?php
 		# Check the user's global access level before allowing project creation
-		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+		if( access_has_global_level( config_get( 'create_project_threshold' ) ) ) {
 			print_form_button(
 				'manage_proj_create_page.php',
 				lang_get( 'create_new_project_link' ),
