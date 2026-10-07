@@ -32,7 +32,7 @@ return ECSConfig::configure()
 		__DIR__ . '/rules/braces.php',
 		__DIR__ . '/rules/control-structures-parentheses.php',
 		__DIR__ . '/rules/control-structures.php',
-		//		__DIR__ . '/rules/echo.php',
+		__DIR__ . '/rules/echo.php',
 		__DIR__ . '/rules/semicolon.php',
 		//		__DIR__ . '/rules/imports.php',
 	] )
