@@ -77,14 +77,14 @@ $t_query_arr = filter_db_get_available_queries();
 # same as the one we're about the try and save
 foreach( $t_query_arr as $t_id => $t_name ) {
 	if( filter_db_get_filter_string( $t_id ) == $t_query_to_store ) {
-		print lang_get( 'query_exists' ) . ' (' . $t_name . ')<br />';
+		echo lang_get( 'query_exists' ) . ' (' . $t_name . ')<br />';
 	}
 }
 
 # Check for an error
 $t_error_msg = strip_tags( gpc_get_string( 'error_msg', '' ) );
 if( $t_error_msg != null ) {
-	print '<br />' . $t_error_msg . '<br /><br />';
+	echo '<br />' . $t_error_msg . '<br /><br />';
 }
 ?>
 <div class="widget-body">
@@ -105,7 +105,7 @@ if( access_has_project_level( config_get( 'stored_query_create_shared_threshold'
 	<div class="checkbox">
 		<label>
 			<input type="checkbox" class="ace" name="is_public" value="on" />
-			<span class="lbl padding-6"><?php print lang_get( 'make_public' ); ?></span>
+			<span class="lbl padding-6"><?php echo lang_get( 'make_public' ); ?></span>
 		</label>
 	</div>
 	&#160;&#160;&#160;&#160;
@@ -114,12 +114,12 @@ if( access_has_project_level( config_get( 'stored_query_create_shared_threshold'
 <div class="checkbox">
 	<label>
 		<input type="checkbox" class="ace" name="all_projects" value="on" <?php check_checked( ALL_PROJECTS == helper_get_current_project() ) ?> />
-		<span class="lbl padding-6"><?php print lang_get( 'all_projects' ); ?></span>
+		<span class="lbl padding-6"><?php echo lang_get( 'all_projects' ); ?></span>
 	</label>
 </div>
 
 <div class="space-10"></div>
-	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'save_query' ); ?>" />
+	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'save_query' ); ?>" />
 </form>
 <div class="space-10"></div>
 <form action="view_all_bug_page.php">
@@ -128,7 +128,7 @@ if( filter_is_temporary( $t_filter ) ) {
 	echo '<input type="hidden" name="filter" value="' . filter_get_temporary_key( $t_filter ) . '" />';
 }
 ?>
-<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'go_back' ); ?>" />
+<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'go_back' ); ?>" />
 </form>
 </div>
 </div>
