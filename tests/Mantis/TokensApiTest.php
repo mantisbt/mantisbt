@@ -133,7 +133,7 @@ final class TokensApiTest extends MantisCoreBase {
 		# Cache positive result
 		$t_db_count = db_count_queries();
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
-		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );;
+		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );
 		$this->assertEquals( array_values( $this->tokens[0] ), array_values( $t_token ), 'The token must exist.' );
 		$this->assertTrue( $t_db_count == db_count_queries(), 'Existing token must be verified in the cache.' );
 
