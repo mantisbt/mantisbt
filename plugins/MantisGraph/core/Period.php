@@ -1,5 +1,6 @@
 <?php
-/**
+
+/*
  * MantisBT - A PHP based bugtracking system
  *
  * MantisBT is free software: you can redistribute it and/or modify
@@ -13,9 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @copyright Copyright 2002, 2024  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * along with MantisBT.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /**
@@ -331,7 +330,7 @@ class Period {
 		$t_formatted_start = $this->get_start_formatted();
 		$t_formatted_end = $this->get_end_formatted();
 		$t_date_input_pattern = '<span class="inline"><label for="%1$s" class="padding-right-4">%2$s</label>%3$s</span>';
-		$t_from_date = sprintf( $t_date_input_pattern, 
+		$t_from_date = sprintf( $t_date_input_pattern,
 			'start_date',
 			lang_get( 'from_date' ),
 			datetimepicker_get_field( $t_formatted_start, 'start_date' )

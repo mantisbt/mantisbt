@@ -1,5 +1,6 @@
 <?php
-/**
+
+/*
  * MantisBT - A PHP based bugtracking system
  *
  * MantisBT is free software: you can redistribute it and/or modify
@@ -13,11 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- * @package MantisBT
+ * along with MantisBT.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /**

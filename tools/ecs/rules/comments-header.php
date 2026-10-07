@@ -17,7 +17,6 @@ declare ( strict_types=1 );
  *
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <https://www.gnu.org/licenses/>.
- *
  */
 
 namespace ECSPrefix202609;

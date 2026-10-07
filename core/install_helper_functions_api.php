@@ -1,18 +1,21 @@
 <?php
-# MantisBT - A PHP based bugtracking system
 
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+/*
+ * MantisBT - A PHP based bugtracking system
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 /**
  * Install Helper Functions API
@@ -150,7 +153,7 @@ function pgsql_get_column_type( $p_table, $p_column ) {
 	# Generate SQL to check columns against schema
 	$t_sql = 'SELECT data_type
 		FROM information_schema.columns
-		WHERE table_catalog = $1 
+		WHERE table_catalog = $1
 		AND table_name = $2
 		AND column_name = $3';
 	$t_param = [
@@ -374,7 +377,7 @@ function install_correct_multiselect_custom_fields_db_format() {
 
 	# Ensure multilist and checkbox custom field values have a vertical pipe |
 	# as a prefix and suffix.
-	$t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value 
+	$t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value
 		FROM {custom_field_string} v
 		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
@@ -392,7 +395,7 @@ function install_correct_multiselect_custom_fields_db_format() {
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
-	$t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value 
+	$t_query = new DbQuery( 'SELECT v.field_id, v.bug_id, v.value
 		FROM {custom_field_string} v
 		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
