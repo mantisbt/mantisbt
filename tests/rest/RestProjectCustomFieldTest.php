@@ -167,7 +167,7 @@ class RestProjectCustomFieldTest extends RestBase {
 		$this->assertNotContains( $this->getProjectId(), custom_field_get_project_ids( $this->field_id ) );
 		$t_endpoint = '/projects/' . $this->getProjectId() . '/fields/' . $this->field_id;
 
-		$t_response = $this->builder()->post( $t_endpoint, [ 'sequence' => 37 ] )->send();
+		$t_response = $this->builder()->post( $t_endpoint, ['sequence' => 37] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		custom_field_clear_cache( $this->field_id );
 		$this->assertTrue( custom_field_is_linked( $this->field_id, $this->getProjectId() ) );
@@ -175,7 +175,7 @@ class RestProjectCustomFieldTest extends RestBase {
 		$this->assertContains( $this->getProjectId(), custom_field_get_project_ids( $this->field_id ) );
 		$this->assertEquals( 37, custom_field_get_sequence( $this->field_id, $this->getProjectId() ) );
 
-		$t_response = $this->builder()->post( $t_endpoint, [ 'sequence' => 42 ] )->send();
+		$t_response = $this->builder()->post( $t_endpoint, ['sequence' => 42] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$this->assertEquals( 42, custom_field_get_sequence( $this->field_id, $this->getProjectId() ) );
 	}

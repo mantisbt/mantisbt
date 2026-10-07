@@ -62,9 +62,9 @@ helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
 
 $t_user_id = auth_get_current_user_id();
 
-$t_data = array(
-	'query' => array( 'id' => $t_user_id )
-);
+$t_data = [
+	'query' => ['id' => $t_user_id]
+];
 
 $t_command = new UserDeleteCommand( $t_data );
 $t_command->execute();

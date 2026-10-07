@@ -38,7 +38,7 @@ require_api( 'constant_inc.php' );
 require_api( 'event_api.php' );
 require_api( 'utility_api.php' );
 
-$g_log_levels = array(
+$g_log_levels = [
 	LOG_EMAIL => 'MAIL',
 	LOG_EMAIL_RECIPIENT => 'RECIPIENT',
 	LOG_EMAIL_VERBOSE => 'MAIL_VERBOSE',
@@ -48,7 +48,7 @@ $g_log_levels = array(
 	LOG_DATABASE => 'DB',
 	LOG_WEBSERVICE => 'WEBSERVICE',
 	LOG_PLUGIN => 'PLUGIN',
-);
+];
 
 /**
  * Log an event.
@@ -78,7 +78,7 @@ function log_event( $p_level, $p_msg ) {
 			array_shift( $t_args ); # skip message
 			$p_msg = vsprintf( $p_msg, $t_args );
 		}
-		$t_event = array( $p_msg, 0 );
+		$t_event = [$p_msg, 0];
 		$t_msg = $p_msg;
 	}
 
@@ -94,7 +94,7 @@ function log_event( $p_level, $p_msg ) {
 	if( !$s_event_log_called && function_exists( 'event_signal' ) ) {
 		$t_plugin_event = '[' . $t_level . '] ' . $t_msg;
 		$s_event_log_called = true;
-		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
+		event_signal( 'EVENT_LOG', [$t_plugin_event] );
 		$s_event_log_called = false;
 	}
 
@@ -140,7 +140,7 @@ function log_event( $p_level, $p_msg ) {
 			break;
 		case 'page':
 			global $g_log_events;
-			$g_log_events[] = array( time(), $p_level, $t_event, $t_caller );
+			$g_log_events[] = [time(), $p_level, $t_event, $t_caller];
 			break;
 		default:
 			# use default PHP error log settings
@@ -173,7 +173,7 @@ function log_print_to_page() {
 
 	$t_total_event_count = count( $g_log_events ?? [] );
 	$t_total_query_execution_time = 0;
-	$t_unique_queries = array();
+	$t_unique_queries = [];
 	$t_total_queries_count = 0;
 
 	$t_icon = icon_get( 'fa-flag-o', 'ace-icon' );

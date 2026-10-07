@@ -75,13 +75,13 @@ foreach( $t_rows as $t_row ) {
 		$t_access_level = $t_access_level_limit;
 	}
 
-	$t_data = array(
-		'payload' => array(
-			'project' => array( 'id' => $t_dst_project_id ),
-			'user' => array( 'id' => $t_row['user_id'] ),
-			'access_level' => array( 'id' => $t_access_level )
-		)
-	);
+	$t_data = [
+		'payload' => [
+			'project' => ['id' => $t_dst_project_id],
+			'user' => ['id' => $t_row['user_id']],
+			'access_level' => ['id' => $t_access_level]
+		]
+	];
 
 	$t_command = new ProjectUsersAddCommand( $t_data );
 	$t_command->execute();

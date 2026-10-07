@@ -43,7 +43,7 @@ class CategoryGetCommand extends Command {
 		$t_project_id = $this->query( 'project_id' );
 		$this->project_id = $t_project_id == ALL_PROJECTS ? ALL_PROJECTS : helper_parse_id( $t_project_id, 'project_id' );
 		if( $this->project_id != ALL_PROJECTS && !project_exists( $this->project_id ) ) {
-			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, [ $this->project_id ] );
+			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, [$this->project_id] );
 		}
 		helper_set_current_project( $this->project_id );
 
@@ -55,7 +55,7 @@ class CategoryGetCommand extends Command {
 		if( $this->category_id !== null ) {
 			$this->category_id = helper_parse_id( $this->category_id, 'category_id' );
 			if( !category_exists_in_project( $this->category_id, $this->project_id ) ) {
-				throw new ClientException( "Category '$this->category_id' not found", ERROR_CATEGORY_NOT_FOUND, [ $this->category_id ] );
+				throw new ClientException( "Category '$this->category_id' not found", ERROR_CATEGORY_NOT_FOUND, [$this->category_id] );
 			}
 		}
 	}
@@ -73,7 +73,7 @@ class CategoryGetCommand extends Command {
 			} );
 		}
 
-		return [ 'categories' => array_map( 'CategoryGetCommand::CategoryRowToArray', array_values( $t_rows ) ) ];
+		return ['categories' => array_map( 'CategoryGetCommand::CategoryRowToArray', array_values( $t_rows ) )];
 	}
 
 	/**
@@ -86,7 +86,7 @@ class CategoryGetCommand extends Command {
 		$t_category = [
 			'id' => (int)$p_row['id'],
 			'name' => $p_row['name'],
-			'project' => [ 'id' => (int)$p_row['project_id'], 'name' => $p_row['project_name'] ],
+			'project' => ['id' => (int)$p_row['project_id'], 'name' => $p_row['project_name']],
 			'enabled' => category_is_enabled( $p_row['id'] ),
 		];
 
@@ -100,7 +100,7 @@ class CategoryGetCommand extends Command {
 		if( (int)$p_row['user_id'] !== NO_USER && access_has_project_level( $t_manage_project_threshold, $p_row['project_id'] ) ) {
 			$t_category['handler'] = user_exists( (int)$p_row['user_id'] )
 				? mci_account_get_array_by_id( (int)$p_row['user_id'] )
-				: [ 'id' => (int)$p_row['user_id'] ];
+				: ['id' => (int)$p_row['user_id']];
 		}
 
 		return $t_category;

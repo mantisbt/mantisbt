@@ -97,7 +97,7 @@ if( $t_user_id == $t_reporter_id ) {
 if( bug_is_readonly( $t_bug_id ) ) {
 	throw new ClientException( "Issue is read-only",
 		ERROR_BUG_READ_ONLY_ACTION_DENIED,
-		[ $t_bug_id ]
+		[$t_bug_id]
 	);
 }
 
@@ -154,7 +154,7 @@ $t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC
 <?php } ?>
 <?php } ?>
 
-<?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', array( $t_bug_id, $f_bugnote_id ) ); ?>
+<?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', [$t_bug_id, $f_bugnote_id] ); ?>
 
 </table>
 	</div>

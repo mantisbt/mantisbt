@@ -81,7 +81,7 @@ class ArrayTransposeTest extends MantisCoreBase {
 		];
 
 		yield 'Bidimensional array with numeric indices' => [
-			[10 => [100 => 'a' ], 20 => [100 => 'b']],
+			[10 => [100 => 'a'], 20 => [100 => 'b']],
 			[100 => [10 => 'a', 20 => 'b']]
 		];
 
@@ -99,7 +99,7 @@ class ArrayTransposeTest extends MantisCoreBase {
 		];
 
 		yield 'Bidimensional associative array' => [
-			['a' => ['k1' => 1, 'k2' => 2], 'b' => ['k1' => 3,'k2' => 4]],
+			['a' => ['k1' => 1, 'k2' => 2], 'b' => ['k1' => 3, 'k2' => 4]],
 			['k1' => ['a' => 1, 'b' => 3], 'k2' => ['a' => 2, 'b' => 4]]
 		];
 

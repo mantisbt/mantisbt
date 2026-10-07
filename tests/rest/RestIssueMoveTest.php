@@ -76,7 +76,7 @@ class RestIssueMoveTest extends RestBase {
 	public function testMoveIssue(): void {
 		$t_response = $this->builder()->post(
 			'/issues/' . $this->issue_id . '/move',
-			array( 'project' => array( 'id' => $this->target_project_id ) )
+			['project' => ['id' => $this->target_project_id]]
 		)->send();
 
 		$t_issue = $this->getJson( $t_response, HTTP_STATUS_SUCCESS )->issue;
@@ -93,13 +93,13 @@ class RestIssueMoveTest extends RestBase {
 	public function testMoveIssueWithPrivateNote(): void {
 		$t_response = $this->builder()->post(
 			'/issues/' . $this->issue_id . '/move',
-			array(
-				'project' => array( 'id' => $this->target_project_id ),
-				'note' => array(
+			[
+				'project' => ['id' => $this->target_project_id],
+				'note' => [
 					'text' => 'Private REST move note.',
-					'view_state' => array( 'id' => VS_PRIVATE ),
-				),
-			)
+					'view_state' => ['id' => VS_PRIVATE],
+				],
+			]
 		)->send();
 
 		$t_issue = $this->getJson( $t_response, HTTP_STATUS_SUCCESS )->issue;

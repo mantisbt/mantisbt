@@ -283,10 +283,10 @@ function require_api( $p_api_name ) {
 		$s_api_included[$p_api_name] = 1;
 		require_once $g_core_path . $p_api_name;
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, [
-				't_new_globals' => 0,
-				'p_api_name' => 0,
-				's_api_included' => 0
-			] );
+			't_new_globals' => 0,
+			'p_api_name' => 0,
+			's_api_included' => 0
+		] );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}
@@ -312,11 +312,11 @@ function require_lib( $p_library_name ) {
 			fatal_error( 'External library \'' . $t_library_file_path . '\' not found.' );
 		}
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, [
-				't_new_globals' => 0,
-				't_library_file_path' => 0,
-				'p_library_name' => 0,
-				's_libraries_included' => 0
-			] );
+			't_new_globals' => 0,
+			't_library_file_path' => 0,
+			'p_library_name' => 0,
+			's_libraries_included' => 0
+		] );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}

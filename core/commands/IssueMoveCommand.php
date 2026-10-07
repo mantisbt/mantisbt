@@ -59,7 +59,7 @@ class IssueMoveCommand extends Command {
 	 *
 	 * @var array
 	 */
-	private $note = array();
+	private $note = [];
 
 	/**
 	 * Validates the issue, destination project, permissions, and note payload.
@@ -77,7 +77,7 @@ class IssueMoveCommand extends Command {
 
 		$this->source_project_id = (int)bug_get_field( $this->issue_id, 'project_id' );
 		$this->target_project_id = $this->get_target_project_id( $this->payload( 'project' ) );
-		$this->note = $this->payload( 'note', array() );
+		$this->note = $this->payload( 'note', [] );
 
 		global $g_project_override;
 		$g_project_override = $this->source_project_id;
@@ -88,7 +88,7 @@ class IssueMoveCommand extends Command {
 			throw new ClientException(
 				'The issue is already associated with the specified project.',
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'project' ) );
+				['project'] );
 		}
 
 		$t_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $this->source_project_id );
@@ -108,7 +108,7 @@ class IssueMoveCommand extends Command {
 
 		if( !empty( $this->note ) ) {
 			if( !is_array( $this->note ) ) {
-				throw new ClientException( 'The note field must be an object.', ERROR_INVALID_FIELD_VALUE, array( 'note' ) );
+				throw new ClientException( 'The note field must be an object.', ERROR_INVALID_FIELD_VALUE, ['note'] );
 			}
 
 		}
@@ -125,23 +125,23 @@ class IssueMoveCommand extends Command {
 		bug_clear_cache_all( $this->issue_id );
 
 		$t_updated_issue = bug_get( $this->issue_id, true );
-		event_signal( 'EVENT_UPDATE_BUG', array( $t_existing_issue, $t_updated_issue ) );
-		helper_call_custom_function( 'issue_update_notify', array( $this->issue_id ) );
+		event_signal( 'EVENT_UPDATE_BUG', [$t_existing_issue, $t_updated_issue] );
+		helper_call_custom_function( 'issue_update_notify', [$this->issue_id] );
 
 		if( !empty( $this->note ) && ( !is_blank( $this->note['text'] ?? '' ) || !empty( $this->note['time_tracking'] ) ) ) {
-			$t_note_result = ( new IssueNoteAddCommand( array(
-				'query' => array( 'issue_id' => $this->issue_id ),
+			$t_note_result = ( new IssueNoteAddCommand( [
+				'query' => ['issue_id' => $this->issue_id],
 				'payload' => $this->note,
-			) ) )->execute();
+			] ) )->execute();
 
 			$t_note_id = (int)( $t_note_result['id'] ?? 0 );
 		} else {
 			$t_note_id = 0;
 		}
 
-		event_signal( 'EVENT_MOVE_BUG', array( $this->issue_id, $this->source_project_id, $this->target_project_id, $t_note_id ) );
+		event_signal( 'EVENT_MOVE_BUG', [$this->issue_id, $this->source_project_id, $this->target_project_id, $t_note_id] );
 
-		return array( 'issue_id' => $this->issue_id, 'project_id' => $this->target_project_id );
+		return ['issue_id' => $this->issue_id, 'project_id' => $this->target_project_id];
 	}
 
 	/**
@@ -157,17 +157,17 @@ class IssueMoveCommand extends Command {
 		}
 
 		if( !is_array( $p_project ) || ( !isset( $p_project['id'] ) && !isset( $p_project['name'] ) ) ) {
-			throw new ClientException( 'The project field is required. Please provide either id or name.', ERROR_EMPTY_FIELD, array( 'project' ) );
+			throw new ClientException( 'The project field is required. Please provide either id or name.', ERROR_EMPTY_FIELD, ['project'] );
 		}
 
 		if( isset( $p_project['id'] ) && (int)$p_project['id'] > 0 ) {
 			$t_project_id = (int)$p_project['id'];
 
 			if( !project_exists( $t_project_id ) ) {
-				throw new ClientException( "Project '$t_project_id' does not exist.", ERROR_PROJECT_NOT_FOUND, array( $t_project_id ) );
+				throw new ClientException( "Project '$t_project_id' does not exist.", ERROR_PROJECT_NOT_FOUND, [$t_project_id] );
 			}
 			if( !project_enabled( $t_project_id ) ) {
-				throw new ClientException( "Project '$t_project_id' is disabled.", ERROR_ACCESS_DENIED, array( $t_project_id ) );
+				throw new ClientException( "Project '$t_project_id' is disabled.", ERROR_ACCESS_DENIED, [$t_project_id] );
 			}
 
 			return $t_project_id;

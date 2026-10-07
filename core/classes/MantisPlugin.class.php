@@ -136,7 +136,7 @@ abstract class MantisPlugin {
 	 * @return array The error_name=>error_message list to add
 	 */
 	public function errors() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -144,7 +144,7 @@ abstract class MantisPlugin {
 	 * @return array
 	 */
 	public function config() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -175,7 +175,7 @@ abstract class MantisPlugin {
 	 * @return array
 	 */
 	public function events() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -211,7 +211,7 @@ abstract class MantisPlugin {
 	 * @return array
 	 */
 	public function hooks() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -240,7 +240,7 @@ abstract class MantisPlugin {
 	 * @return array
 	 */
 	public function schema() {
-		return array();
+		return [];
 	}
 
 	/**

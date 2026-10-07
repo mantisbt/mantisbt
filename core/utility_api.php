@@ -168,7 +168,7 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 	}
 	if( !is_array( current( $p_array ) ) ) {
 		$t_message = "Tried to sort an invalid multidimensional array";
-		throw new ClientException( $t_message, ERROR_GENERIC, [ $t_message ] );
+		throw new ClientException( $t_message, ERROR_GENERIC, [$t_message] );
 	}
 
 	# Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
@@ -235,7 +235,7 @@ function is_windows_server() {
 function getClassProperties( $p_classname, $p_type = 'public', $p_return_object = false, $p_include_parent = false ) {
 	$t_ref = new ReflectionClass( $p_classname );
 	$t_props = $t_ref->getProperties();
-	$t_props_arr = array();
+	$t_props_arr = [];
 	foreach( $t_props as $t_prop ){
 		$t_name = $t_prop->getName();
 		if( $t_prop->isPublic() and ( stripos( $p_type, 'public' ) === false ) ) {

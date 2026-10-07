@@ -135,7 +135,7 @@ class LangCheckFile {
 		$t_purifier_config = HTMLPurifier_Config::create( [
 			'Cache.DefinitionImpl' => null,
 			'HTML.Allowed' => self::VALID_TAGS,
-			'Attr.AllowedFrameTargets' => [ '_blank' ],
+			'Attr.AllowedFrameTargets' => ['_blank'],
 			'HTML.TargetNoopener' => false,
 			'HTML.TargetNoreferrer' => false,
 		] );
@@ -362,7 +362,7 @@ class LangCheckFile {
 		}
 
 		$t_line = 0;
-		$t_variables = array();
+		$t_variables = [];
 		$t_current_var = null;
 		$t_last_token = 0;
 		$t_set_variable = false;
@@ -778,7 +778,7 @@ class LangCheckFile {
 				. http_build_query( [
 					'title' => 'Special:Translate',
 					'group' => $this->group,
-					'showMessage' => str_replace( [ '$', '[', ']' ], [ '', '\x5b', '\x5d' ], $p_var ),
+					'showMessage' => str_replace( ['$', '[', ']'], ['', '\x5b', '\x5d'], $p_var ),
 					'language' => $this->lang,
 				] ) . '">' . string_attribute( $p_var ) . '</a>'
 			: string_attribute( $p_var );

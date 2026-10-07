@@ -123,7 +123,7 @@ print_manage_menu( 'manage_user_page.php' );
 $t_days_old = 7 * SECONDS_PER_DAY;
 $t_query = 'SELECT COUNT(*) AS new_user_count FROM {user}
 	WHERE ' . db_helper_compare_time( db_param(), '<=', 'date_created', $t_days_old );
-$t_result = db_query( $t_query, array( db_now() ) );
+$t_result = db_query( $t_query, [db_now()] );
 $t_row = db_fetch_array( $t_result );
 $t_new_user_count = $t_row['new_user_count'];
 
@@ -140,7 +140,7 @@ $t_unused_user_count = $t_row['unused_user_count'];
 $t_prefix_array = array_merge( range( 'A', 'Z' ), range( '0', '9' ) );
 $t_prefix_array = array_combine( $t_prefix_array, $t_prefix_array );
 $t_prefix_array = array_merge (
-		[ 'ALL' => lang_get( 'filter_all' ) ],
+		['ALL' => lang_get( 'filter_all' )],
 		$t_prefix_array,
 		[
 			'UNUSED' => lang_get( 'filter_unused' ),
@@ -182,7 +182,7 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 <div class="space-10"></div>
 
 <?php
-$t_where_params = array();
+$t_where_params = [];
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
 } else if( $f_filter === 'UNUSED' ) {
@@ -200,7 +200,7 @@ if( $f_search !== '' ) {
 	preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $f_search, $t_matches, PREG_SET_ORDER );
 
 	# organize terms without quoting, paying attention to negation
-	$t_search_terms = array();
+	$t_search_terms = [];
 	foreach( $t_matches as $t_match ) {
 		$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
 	}
@@ -277,7 +277,7 @@ if( $f_page_number < 1 ) {
 $t_query = 'SELECT * FROM {user} WHERE ' . $t_where . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
 $t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
 
-$t_users = array();
+$t_users = [];
 while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_users[] = $t_row;
 }
@@ -357,10 +357,10 @@ $t_user_count = count( $t_users );
 	$t_max_failed = config_get( 'max_failed_login_count' );
 
 	# Print column headers with sort links
-	$t_columns = array(
+	$t_columns = [
 		'username', 'realname', 'email', 'access_level',
 		'enabled', 'protected', 'date_created', 'last_visit'
-	);
+	];
 	if( OFF != $t_max_failed ) {
 		# Insert failed_login_count column after "protected"
 		array_splice( $t_columns, 6, 0, ['failed_login_count'] );
@@ -392,7 +392,7 @@ $t_user_count = count( $t_users );
 			array_column( $t_emails_pending_verification, 'value' )
 		);
 
-	$t_access_level = array();
+	$t_access_level = [];
 	foreach( $t_users as $t_user ) {
 		/**
 		 * @var int $v_id

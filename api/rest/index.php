@@ -48,18 +48,18 @@ require_once $t_restcore_dir . 'VersionMiddleware.php';
 ApiObjectFactory::$soap = false;
 
 # Show SLIM detailed errors according to Mantis settings
-$t_config = array();
+$t_config = [];
 
 if( ON == config_get_global( 'show_detailed_errors' ) ) {
-	$t_config['settings'] = array( 'displayErrorDetails' => true );
+	$t_config['settings'] = ['displayErrorDetails' => true];
 }
 
 $t_container = new Container( $t_config );
 $t_container['errorHandler'] = function( $p_container ) {
 	return function( $p_request, $p_response, $p_exception ) use ( $p_container ) {
-		$t_data = array(
+		$t_data = [
 			'message' => $p_exception->getMessage(),
-		);
+		];
 
 		if( is_a( $p_exception, 'Mantis\Exceptions\MantisException' ) ) {
 			global $g_error_parameters;
@@ -106,6 +106,6 @@ require_once $t_restcore_dir . 'projects_rest.php';
 require_once $t_restcore_dir . 'users_rest.php';
 require_once $t_restcore_dir . 'pages_rest.php';
 
-event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $g_app ) ) );
+event_signal( 'EVENT_REST_API_ROUTES', [['app' => $g_app]] );
 
 $g_app->run();

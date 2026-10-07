@@ -92,7 +92,7 @@ if( $f_master_bug_id > 0 ) {
 	if( bug_is_readonly( $f_master_bug_id ) ) {
 		throw new ClientException( "Bug is read-only",
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				[ $f_master_bug_id ] );
+				[$f_master_bug_id] );
 	}
 
 	# User can view the master bug
@@ -235,7 +235,7 @@ $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level
 if( $t_show_due_date ) {
 	require_api( 'datetimepicker_api.php' );
 }
-$t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload() && !event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', array() );
+$t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload() && !event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', [] );
 if( $t_show_attachments ) {
 	require_api( 'dropzone_api.php' );
 }
@@ -275,7 +275,7 @@ if( $t_show_attachments ) {
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
 <?php
-	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id ) );
+	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', [$t_project_id] );
 
 	if( $t_show_category ) {
 		$t_allow_no_category = config_get( 'allow_no_category' );
@@ -574,7 +574,7 @@ if( $t_show_attachments ) {
 		</td>
 	</tr>
 <?php } ?>
-<?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id ) ) ?>
+<?php event_signal( 'EVENT_REPORT_BUG_FORM', [$t_project_id] ) ?>
 	<tr>
 		<th class="category">
 			<span class="required">*</span>

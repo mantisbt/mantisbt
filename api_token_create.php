@@ -39,14 +39,14 @@ auth_reauthenticate();
 $f_token_name = gpc_get_string( 'token_name' );
 $t_user_id = auth_get_current_user_id();
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'user_id' => $t_user_id,
-	),
-	'payload' => array(
+	],
+	'payload' => [
 		'name' => $f_token_name,
-	),
-);
+	],
+];
 
 $t_command = new UserTokenCreateCommand( $t_data );
 $t_result = $t_command->execute();

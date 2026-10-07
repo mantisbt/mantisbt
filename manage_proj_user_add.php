@@ -40,24 +40,24 @@ form_security_validate( 'manage_proj_user_add' );
 auth_reauthenticate();
 
 $f_project_id	= gpc_get_int( 'project_id' );
-$f_user_id		= gpc_get_int_array( 'user_id', array() );
+$f_user_id		= gpc_get_int_array( 'user_id', [] );
 $f_access_level	= gpc_get_int( 'access_level' );
 
 # Add user(s) to the specified project
 foreach( $f_user_id as $t_user_id ) {
-	$t_data = array(
-		'payload' => array(
-			'project' => array(
+	$t_data = [
+		'payload' => [
+			'project' => [
 				'id' => $f_project_id
-			),
-			'user' => array(
+			],
+			'user' => [
 				'id' => $t_user_id
-			),
-			'access_level' => array(
+			],
+			'access_level' => [
 				'id' => $f_access_level
-			)
-		)
-	);
+			]
+		]
+	];
 
 	$t_command = new ProjectUsersAddCommand( $t_data );
 	$t_command->execute();

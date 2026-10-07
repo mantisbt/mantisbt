@@ -78,14 +78,14 @@ foreach ( $t_versions as $t_version ) {
 		continue;
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => (int)$f_project_id
-		),
-		'payload' => array(
+		],
+		'payload' => [
 			'name' => $t_version
-		)
-	);
+		]
+	];
 
 	$t_command = new VersionAddCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -97,7 +97,7 @@ form_security_purge( 'manage_proj_ver_add' );
 if( $t_version_id == 0 ) {
 	throw new ClientException( "Version is required",
 		ERROR_EMPTY_FIELD,
-		[ lang_get( 'version' ) ]
+		[lang_get( 'version' )]
 	);
 }
 

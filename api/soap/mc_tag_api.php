@@ -48,7 +48,7 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page )
 		$p_per_page = 1;
 	}
 
-	$t_results = array();
+	$t_results = [];
 	$t_total_results = tag_count( '' );
 	$t_tags = tag_get_all( '', $p_per_page, $p_per_page *  ( $p_page_number - 1 ) );
 
@@ -64,10 +64,10 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page )
 		'/' . $t_total_results . ' tags (page #' . $p_page_number . ')'
 	);
 
-	return array(
+	return [
 		'results' => $t_results,
 		'total_results' => $t_total_results
-	);
+	];
 }
 
 /**
@@ -89,7 +89,7 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_valid_matches = array();
+	$t_valid_matches = [];
 
 	$p_tag = ApiObjectFactory::objectToArray( $p_tag );
 
@@ -145,12 +145,12 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
  * @return void|RestFault|SoapFault
  */
 function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
-	$t_tag_ids_to_attach = array();
-	$t_tag_ids_to_detach = array();
+	$t_tag_ids_to_attach = [];
+	$t_tag_ids_to_detach = [];
 
-	$t_submitted_tag_ids = array();
+	$t_submitted_tag_ids = [];
 	$t_attached_tags = tag_bug_get_attached( $p_issue_id );
-	$t_attached_tag_ids = array();
+	$t_attached_tag_ids = [];
 	foreach( $t_attached_tags as $t_attached_tag ) {
 		$t_attached_tag_ids[] = $t_attached_tag['id'];
 	}
@@ -202,12 +202,12 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 
 	foreach( $t_tag_ids_to_detach as $t_tag_id ) {
 		log_event( LOG_WEBSERVICE, 'detaching tag id \'' . $t_tag_id . '\' from issue \'' . $p_issue_id . '\'' );
-		$t_data = array(
-			'query' => array(
+		$t_data = [
+			'query' => [
 				'issue_id' => $p_issue_id,
 				'tag_id' => $t_tag_id
-			)
-		);
+			]
+		];
 
 		$t_command = new TagDetachCommand( $t_data );
 		$t_command->execute();
@@ -215,12 +215,12 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 
 	foreach ( $t_tag_ids_to_attach as $t_tag_id ) {
 		log_event( LOG_WEBSERVICE, 'attaching tag id \'' . $t_tag_id . '\' to issue \'' . $p_issue_id . '\'' );
-		$t_data = array(
-			'query' => array( 'issue_id' => $p_issue_id ),
-			'payload' => array(
-				'tags' => array( array( 'id' => $t_tag_id ) )
-			)
-		);
+		$t_data = [
+			'query' => ['issue_id' => $p_issue_id],
+			'payload' => [
+				'tags' => [['id' => $t_tag_id]]
+			]
+		];
 
 		$t_command = new TagAttachCommand( $t_data );
 		$t_command->execute();

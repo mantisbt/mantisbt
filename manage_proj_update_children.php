@@ -51,15 +51,15 @@ $t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true
 foreach ( $t_subproject_ids as $t_subproject_id ) {
 	$f_inherit_child = gpc_get_bool( 'inherit_child_' . $t_subproject_id, false );
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => (int)$f_project_id,
 			'subproject_id' => (int)$t_subproject_id
-		),
-		'payload' => array(
+		],
+		'payload' => [
 			'inherit_parent' => (bool)$f_inherit_child
-		)
-	);
+		]
+	];
 
 	$t_command = new ProjectHierarchyUpdateCommand( $t_data );
 	$t_command->execute();

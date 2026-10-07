@@ -101,7 +101,7 @@ if( auth_automatic_logon_bypass_form() ) {
 	}
 
 	if( !is_blank( $f_return ) ) {
-		$t_uri = helper_url_combine( $t_uri, [ 'return' => $f_return ] );
+		$t_uri = helper_url_combine( $t_uri, ['return' => $f_return] );
 	}
 
 	print_header_redirect( $t_uri );
@@ -131,7 +131,7 @@ if( $f_error || $f_cookie_error ) {
 	echo '</div>';
 }
 
-$t_warnings = array();
+$t_warnings = [];
 $t_upgrade_required = false;
 
 if( config_get_global( 'admin_checks' ) == ON ) {

@@ -40,7 +40,7 @@ class FilterApiTest extends MantisCoreBase {
 	/**
 	 * @var array List of filter ids to delete in tearDown().
 	 */
-	private $filterIdsToDelete = array();
+	private $filterIdsToDelete = [];
 
 	/**
 	 * Test class setup - login and initialize project id.

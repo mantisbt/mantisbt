@@ -85,11 +85,11 @@ class MentionTest extends SoapBase {
 
 		$this->deleteAfterRun( $t_issue_id );
 
-		$t_note_data = array(
+		$t_note_data = [
 			'text' => 'first note @administrator',
 			'note_type' => 2,
 			'note_attr' => 'attr_value'
-		);
+		];
 
 		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 		$t_issue_with_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );

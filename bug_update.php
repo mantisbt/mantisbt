@@ -84,7 +84,7 @@ function get_valid_version( BugData $p_bug, $p_field ) {
 	) {
 		throw new ClientException( "Version not found",
 			ERROR_VERSION_NOT_FOUND,
-			[ $t_version ]
+			[$t_version]
 		);
 	}
 	return $t_version;
@@ -249,7 +249,7 @@ if( $t_existing_bug->status != $t_updated_bug->status ) {
 	if( !bug_check_workflow( $t_existing_bug->status, $t_updated_bug->status ) ) {
 		throw new ClientException( "Invalid status",
 			ERROR_CUSTOM_FIELD_INVALID_VALUE,
-			[ lang_get( 'status' ) ]
+			[lang_get( 'status' )]
 		);
 	}
 	if( !access_has_bug_level( access_get_status_threshold( $t_updated_bug->status, $t_updated_bug->project_id ), $f_bug_id ) ) {
@@ -304,7 +304,7 @@ if( $t_existing_bug->category_id != $t_updated_bug->category_id ) {
 	) {
 		throw new ClientException( "Category is mandatory",
 			ERROR_EMPTY_FIELD,
-			[ lang_get( 'category' ) ]
+			[lang_get( 'category' )]
 		);
 	}
 
@@ -377,7 +377,7 @@ if( $t_close_issue ) {
 }
 
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_existing_bug->project_id );
-$t_custom_fields_to_set = array();
+$t_custom_fields_to_set = [];
 foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_cf_def = custom_field_get_definition( $t_cf_id );
 
@@ -390,7 +390,7 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 			# no value was given by the user.
 			throw new ClientException( "Custom field is required",
 				ERROR_EMPTY_FIELD,
-				[ lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) ) ]
+				[lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) )]
 			);
 		}
 	}
@@ -414,14 +414,14 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	if( !custom_field_validate( $t_cf_id, $t_new_custom_field_value ) ) {
 		throw new ClientException( "Invalid custom field value",
 			ERROR_CUSTOM_FIELD_INVALID_VALUE,
-			[ lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) ) ]
+			[lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) )]
 		);
 	}
 
 	# Remember the new custom field values so we can set them when updating
 	# the bug (done after all data passed to this update page has been
 	# validated).
-	$t_custom_fields_to_set[] = array( 'id' => $t_cf_id, 'value' => $t_new_custom_field_value );
+	$t_custom_fields_to_set[] = ['id' => $t_cf_id, 'value' => $t_new_custom_field_value];
 }
 
 # Perform validation of the duplicate ID of the bug.
@@ -448,7 +448,7 @@ if( $t_bug_note->note ||
 	) {
 		throw new ClientException( "Bugnote is required",
 			ERROR_EMPTY_FIELD,
-			[ lang_get( 'bugnote' ) ]
+			[lang_get( 'bugnote' )]
 		);
 	}
 	if( $t_bug_note->view_state != config_get( 'default_bugnote_view_status' ) ) {
@@ -481,7 +481,7 @@ $t_updated_bug->status = bug_get_status_for_assign( $t_existing_bug->handler_id,
 # Allow a custom function to validate the proposed bug updates. Note that
 # custom functions are being deprecated in MantisBT. You should migrate to
 # the new plugin system instead.
-helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_updated_bug, $t_bug_note->note ) );
+helper_call_custom_function( 'issue_update_validate', [$f_bug_id, $t_updated_bug, $t_bug_note->note] );
 
 # Allow plugins to validate/modify the update prior to it being committed.
 $t_updated_bug = event_signal( 'EVENT_UPDATE_BUG_DATA', $t_updated_bug, $t_existing_bug );
@@ -517,12 +517,12 @@ if( $t_updated_bug->duplicate_id != 0 ) {
 	bug_monitor_copy( $f_bug_id, $t_updated_bug->duplicate_id );
 }
 
-event_signal( 'EVENT_UPDATE_BUG', array( $t_existing_bug, $t_updated_bug ) );
+event_signal( 'EVENT_UPDATE_BUG', [$t_existing_bug, $t_updated_bug] );
 
 # Allow a custom function to respond to the modifications made to the bug. Note
 # that custom functions are being deprecated in MantisBT. You should migrate to
 # the new plugin system instead.
-helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
+helper_call_custom_function( 'issue_update_notify', [$f_bug_id] );
 
 # Send a notification of changes via email.
 if( $t_resolve_issue ) {

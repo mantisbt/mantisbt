@@ -113,15 +113,15 @@ function project_users( \Slim\Http\Request $p_request, \Slim\Http\Response $p_re
 		$t_access_level = (int)$p_access_level;
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'id'        => $t_project_id,
 			'page_size' => $t_page_size,
 			'page'      => $t_page,
 			'access_level' => $t_access_level,
 			'include_access_levels' => $t_include_access_levels
-		)
-	);
+		]
+	];
 
 	$t_command = new ProjectUsersGetCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -172,11 +172,11 @@ function rest_project_user_add( \Slim\Http\Request $p_request, \Slim\Http\Respon
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
-	$t_payload['project'] = array( 'id' => $t_project_id );
+	$t_payload['project'] = ['id' => $t_project_id];
 
-	$t_data = array(
+	$t_data = [
 		'payload' => $t_payload
-	);
+	];
 
 	$t_command = new ProjectUsersAddCommand( $t_data );
 	$t_command->execute();
@@ -202,17 +202,17 @@ function rest_project_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Res
 	# that can cast to 0.
 	$t_user = $p_args['user_id'];
 	if( !is_numeric( $t_user ) ) {
-		throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'user_id' ) );
+		throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, ['user_id'] );
 	}
 
 	$t_user_id = (int)$t_user;
 
-	$t_data = array(
-		'payload' => array(
-			'project' => array( 'id' => $t_project_id ),
-			'user' => array( 'id' => $t_user_id )
-		)
-	);
+	$t_data = [
+		'payload' => [
+			'project' => ['id' => $t_project_id],
+			'user' => ['id' => $t_user_id]
+		]
+	];
 
 	$t_command = new ProjectUsersDeleteCommand( $t_data );
 	$t_command->execute();
@@ -253,13 +253,13 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	$t_lang = mci_get_user_lang( $t_user_id );
 
 	$t_project_ids = user_get_all_accessible_projects( $t_user_id, $t_project_id );
-	$t_projects = array();
+	$t_projects = [];
 
 	foreach( $t_project_ids as $t_project_id ) {
 		$t_project = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
 		$t_subproject_ids = user_get_accessible_subprojects( $t_user_id, $t_project_id );
 		if( !empty( $t_subproject_ids ) ) {
-			$t_subprojects = array();
+			$t_subprojects = [];
 			foreach( $t_subproject_ids as $t_subproject_id ) {
 				$t_subprojects[] = mci_project_as_array_by_id( $t_subproject_id );
 			}
@@ -270,7 +270,7 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		$t_projects[] = $t_project;
 	}
 
-	$t_result = array( 'projects' => $t_projects );
+	$t_result = ['projects' => $t_projects];
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
@@ -292,12 +292,12 @@ function rest_project_version_get( \Slim\Http\Request $p_request, \Slim\Http\Res
 
 	$t_version_id = $p_args['version_id'] ?? $p_request->getParam( 'version_id' );
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id,
 			'version_id' => $t_version_id
-		)
-	);
+		]
+	];
 
 	$t_command = new VersionGetCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -324,12 +324,12 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
 
 	$t_version_to_add = $p_request->getParsedBody();
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id
-		),
+		],
 		'payload' => $t_version_to_add
-	);
+	];
 
 	$t_command = new VersionAddCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -358,13 +358,13 @@ function rest_project_version_update( \Slim\Http\Request $p_request, \Slim\Http\
 	$t_version_id = $p_args['version_id'] ?? $p_request->getParam( 'version_id' );
 	$t_version_to_update = $p_request->getParsedBody();
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id,
 			'version_id' => $t_version_id
-		),
+		],
 		'payload' => $t_version_to_update
-	);
+	];
 
 	$t_command = new VersionUpdateCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -391,12 +391,12 @@ function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\
 
 	$t_version_id = $p_args['version_id'] ?? $p_request->getParam( 'version_id' );
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id,
 			'version_id' => $t_version_id,
-		)
-	);
+		]
+	];
 
 	$t_command = new VersionDeleteCommand( $t_data );
 	$t_command->execute();
@@ -413,10 +413,10 @@ function rest_project_version_delete( \Slim\Http\Request $p_request, \Slim\Http\
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_category_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = [ 'query' => [
+	$t_data = ['query' => [
 		'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ),
 		'category_id' => $p_args['category_id'] ?? $p_request->getParam( 'category_id' ),
-	] ];
+	]];
 
 	$t_command = new CategoryGetCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -434,7 +434,7 @@ function rest_project_category_get( \Slim\Http\Request $p_request, \Slim\Http\Re
  */
 function rest_project_category_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_data = [
-		'query' => [ 'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ) ],
+		'query' => ['project_id' => $p_args['id'] ?? $p_request->getParam( 'id' )],
 		'payload' => $p_request->getParsedBody(),
 	];
 
@@ -476,10 +476,10 @@ function rest_project_category_update( \Slim\Http\Request $p_request, \Slim\Http
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_category_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = [ 'query' => [
+	$t_data = ['query' => [
 		'project_id' => $p_args['id'] ?? $p_request->getParam( 'id' ),
 		'category_id' => $p_args['category_id'] ?? $p_request->getParam( 'category_id' ),
-	] ];
+	]];
 
 	$t_command = new CategoryDeleteCommand( $t_data );
 	$t_command->execute();
@@ -502,12 +502,12 @@ function rest_project_hierarchy_add( \Slim\Http\Request $p_request, \Slim\Http\R
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id
-		),
+		],
 		'payload' => $p_request->getParsedBody()
-	);
+	];
 
 	$t_command = new ProjectHierarchyAddCommand( $t_data );
 	$t_command->execute();
@@ -540,13 +540,13 @@ function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Htt
 
 	$t_subproject_update = $p_request->getParsedBody();
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id,
 			'subproject_id' => $t_subproject_id
-		),
+		],
 		'payload' => $t_subproject_update
-	);
+	];
 
 	$t_command = new ProjectHierarchyUpdateCommand( $t_data );
 	$t_command->execute();
@@ -575,12 +575,12 @@ function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Htt
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id,
 			'subproject_id' => $t_subproject_id
-		)
-	);
+		]
+	];
 
 	$t_command = new ProjectHierarchyDeleteCommand( $t_data );
 	$t_command->execute();
@@ -606,19 +606,19 @@ function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
-	$t_data = array(
+	$t_data = [
 		'payload' => $t_payload,
-		'options' => array(
+		'options' => [
 			'return_project' => true
-		)
-	);
+		]
+	];
 
 	$t_command = new ProjectAddCommand( $t_data );
 	$t_result = $t_command->execute();
 	$t_project_id = $t_result['project']['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Project created with id $t_project_id" )->
-		withJson( array( 'project' => $t_result['project'] ) );
+		withJson( ['project' => $t_result['project']] );
 }
 
 /**
@@ -643,22 +643,22 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format" );
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'id' => $t_project_id
-		),
+		],
 		'payload' => $t_payload,
-		'options' => array(
+		'options' => [
 			'return_project' => true
-		)
-	);
+		]
+	];
 
 	$t_command = new ProjectUpdateCommand( $t_data );
 	$t_result = $t_command->execute();
 	$t_project_id = $t_result['project']['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id Updated" )
-		->withJson( array( 'project' => $t_result['project'] ) );
+		->withJson( ['project' => $t_result['project']] );
 }
 
 /**
@@ -672,7 +672,7 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 function rest_project_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
-	$t_data = array( 'query' => array( 'id' => $t_project_id ) );
+	$t_data = ['query' => ['id' => $t_project_id]];
 	$t_command = new ProjectDeleteCommand( $t_data );
 	$t_command->execute();
 
@@ -689,13 +689,13 @@ function rest_project_delete( \Slim\Http\Request $p_request, \Slim\Http\Response
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_field_link( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $p_args['id'],
 			'field_id' => $p_args['field_id'],
-		),
+		],
 		'payload' => $p_request->getParsedBody(),
-	);
+	];
 
 	$t_command = new ProjectFieldLinkCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -712,12 +712,12 @@ function rest_project_field_link( \Slim\Http\Request $p_request, \Slim\Http\Resp
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_project_field_unlink( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $p_args['id'],
 			'field_id' => $p_args['field_id'],
-		),
-	);
+		],
+	];
 
 	$t_command = new ProjectFieldUnlinkCommand( $t_data );
 	$t_command->execute();

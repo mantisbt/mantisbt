@@ -314,7 +314,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$t_projects = user_get_accessible_projects( $t_current_user );
 
 		# Get list of users having access level for all accessible projects
-		$t_users = array();
+		$t_users = [];
 		foreach( $t_projects as $t_project_id ) {
 			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
 			# Do a 'smart' merge of the project's user list, into an
@@ -341,17 +341,17 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		if( $t_row === false ) {
 			# User doesn't exist - create a dummy record for display purposes
 			$t_name = user_get_name( $p_user_id );
-			$t_row = array(
+			$t_row = [
 				'id' => $p_user_id,
 				'username' => $t_name,
 				'realname' => $t_name,
-			);
+			];
 		}
 		$t_users[$p_user_id] = $t_row;
 	}
 
-	$t_display = array();
-	$t_sort = array();
+	$t_display = [];
+	$t_sort = [];
 
 	foreach( $t_users as $t_key => $t_user ) {
 		$t_display[] = user_get_expanded_name_from_row( $t_user );
@@ -497,7 +497,7 @@ function print_news_item_option_list() {
 				ORDER BY date_posted DESC';
 	}
 
-	$t_result = db_query( $t_query, ( $t_global == true ? array() : array( $t_project_id ) ) );
+	$t_result = db_query( $t_query, ( $t_global == true ? [] : [$t_project_id] ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_headline = string_display_line( $t_row['headline'] );
@@ -505,7 +505,7 @@ function print_news_item_option_list() {
 		$t_view_state = $t_row['view_state'];
 		$t_id = $t_row['id'];
 
-		$t_notes = array();
+		$t_notes = [];
 		$t_note_string = '';
 
 		if( 1 == $t_announcement ) {
@@ -690,7 +690,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
  * @param array   $p_parents           Array of parent projects.
  * @return void
  */
-function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
+function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = [] ) {
 	if ( config_get_global( 'subprojects_enabled' ) == OFF ) {
 		return;
 	}
@@ -941,7 +941,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 	if( null === $p_project_ids ) {
 		$p_project_ids = helper_get_current_project();
 	}
-	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : [$p_project_ids];
 
 	$t_versions = version_get_all_rows( $t_project_ids, $p_released, true );
 
@@ -963,7 +963,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 		echo '<option value="">&nbsp;</option>';
 	}
 
-	$t_listed = array();
+	$t_listed = [];
 	$t_max_length = config_get( 'max_dropdown_length' );
 
 	$t_show_project_name = count( $t_project_ids ) > 1;
@@ -996,7 +996,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
  * @return void
  */
 function print_build_option_list( $p_build = '' ) {
-	$t_overall_build_arr = array();
+	$t_overall_build_arr = [];
 
 	$t_project_id = helper_get_current_project();
 
@@ -1076,10 +1076,10 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 		} else {
 			# workflow was not set for this status, this shouldn't happen
 			# caller should be able to handle empty list
-			$t_enum_values = array();
+			$t_enum_values = [];
 		}
 	}
-	$t_enum_list = array();
+	$t_enum_list = [];
 
 	foreach ( $t_enum_values as $t_enum_value ) {
 		if( ( $p_show_current || $p_current_value != $t_enum_value )
@@ -1248,7 +1248,7 @@ function print_project_user_list_option_list2( $p_user_id ) {
 				WHERE p.enabled = ' . db_param() . ' AND
 					u.user_id IS NULL
 				ORDER BY p.name';
-	$t_result = db_query( $t_query, array( (int)$p_user_id, true ) );
+	$t_result = db_query( $t_query, [(int)$p_user_id, true] );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_project_name = string_attribute( $t_row['name'] );
 		$t_user_id = $t_row['id'];
@@ -1682,7 +1682,7 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
  * @return void
  */
 function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_key = null ) {
-	$t_items = array();
+	$t_items = [];
 
 	# @TODO cproensa
 	# passing the temporary filter id to build ad-hoc url parameter is weak
@@ -1961,7 +1961,7 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 		Period::PERIOD_ARBITRARY_DATES
 	);
 	if( $p_add_any ) {
-		array_unshift( $p_control_array, [ META_FILTER_ANY => '[' . lang_get( 'any' ) . ']' ] );
+		array_unshift( $p_control_array, [META_FILTER_ANY => '[' . lang_get( 'any' ) . ']'] );
 	}
 	foreach ( $p_control_array as $t_name => $t_desc ) {
 		$t_sel = '';
@@ -2090,7 +2090,7 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 		}
 
 		echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
-		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', array( $p_attachment ) );
+		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', [$p_attachment] );
 	} else {
 		print_file_icon( $p_attachment['display_name'] );
 		echo lang_get( 'word_separator' ) . '<s>' . string_attribute( $p_attachment['display_name'] ) . '</s>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
@@ -2128,7 +2128,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 		case DATABASE:
 			db_param_push();
 			$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
-			$t_result = db_query( $t_query, array( (int)$p_attachment['id'] ) );
+			$t_result = db_query( $t_query, [(int)$p_attachment['id']] );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
 			break;
@@ -2201,10 +2201,10 @@ function print_timezone_option_list( $p_timezone ) {
 	foreach( $t_identifiers as $t_identifier ) {
 		$t_zone = explode( '/', $t_identifier, 2 );
 		$t_id = $t_zone[1] ?? $t_identifier;
-		$t_locations_list[$t_zone[0]][$t_identifier] = array(
+		$t_locations_list[$t_zone[0]][$t_identifier] = [
 			str_replace( '_', ' ', $t_id ),
 			$t_identifier
-		);
+		];
 	}
 
 	foreach( $t_locations_list as $t_continent => $t_locations ) {

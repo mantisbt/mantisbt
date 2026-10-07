@@ -42,9 +42,9 @@ require_api( 'history_api.php' );
  * @return array
  */
 function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter = null, $p_user_id = null ) {
-	$t_timeline_events = array();
+	$t_timeline_events = [];
 
-	$t_query_options = array();
+	$t_query_options = [];
 	$t_query_options['start_time'] = $p_start_time;
 	$t_query_options['end_time'] = $p_end_time;
 	$t_query_options['order'] = 'DESC';

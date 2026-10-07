@@ -36,7 +36,7 @@ class RestFiltersTest extends RestBase
 	const INVALID_FILTER_ID = -9999;
 
 	/** @var array List of filters to delete to delete in tearDown() */
-	protected $filterIdsToDelete = array();
+	protected $filterIdsToDelete = [];
 
 	/**
 	 * Create test issues for the test

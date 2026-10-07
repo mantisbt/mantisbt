@@ -44,8 +44,8 @@ require_api( 'string_api.php' );
 
 # Include Dropzone.js
 if( config_get_global( 'cdn_enabled' ) == ON ) {
-	require_css( [ 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css' ] );
-	require_js( [ 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH ] );
+	require_css( ['https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css'] );
+	require_js( ['https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH] );
 } else {
 	require_css( 'dropzone-' . DROPZONE_VERSION . '.min.css' );
 	require_js( 'dropzone-' . DROPZONE_VERSION . '.min.js' );

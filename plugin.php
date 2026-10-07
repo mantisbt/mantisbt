@@ -44,7 +44,7 @@ $f_page = gpc_get_string( 'page' );
 if( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*)/', $f_page, $t_matches ) ) {
 	throw new ClientException( "Invalid Plugin page '$f_page'",
 		ERROR_PLUGIN_INVALID_PAGE,
-		[ $f_page ]
+		[$f_page]
 	);
 }
 
@@ -56,7 +56,7 @@ $t_plugin = plugin_get( $t_basename );
 if( plugin_needs_upgrade( $t_plugin ) ) {
 	throw new ClientException( "Plugin '$t_basename' must be upgraded",
 		ERROR_PLUGIN_UPGRADE_NEEDED,
-		[ $t_basename ]
+		[$t_basename]
 	);
 }
 
@@ -64,7 +64,7 @@ if( plugin_needs_upgrade( $t_plugin ) ) {
 if( !plugin_is_loaded( $t_basename ) ) {
 	throw new ClientException( "Plugin '$t_basename' is not loaded",
 		ERROR_PLUGIN_NOT_LOADED,
-		[ $t_basename ]
+		[$t_basename]
 	);
 }
 
@@ -73,7 +73,7 @@ $t_page = $t_plugin_path . $t_basename . '/pages/' . $t_action . '.php';
 if( !is_file( $t_page ) ) {
 	throw new ClientException( "Page '$t_action' does not exist in Plugin '$t_basename'",
 		ERROR_PLUGIN_PAGE_NOT_FOUND,
-		[ $t_basename, $t_action ]
+		[$t_basename, $t_action]
 	);
 }
 

@@ -46,7 +46,7 @@ class CategoryAddCommand extends Command {
 		$this->project_id = $t_project_id == ALL_PROJECTS ? ALL_PROJECTS : helper_parse_id( $t_project_id, 'project_id' );
 
 		if( $this->project_id != ALL_PROJECTS && !project_exists( $this->project_id ) ) {
-			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, [ $this->project_id ] );
+			throw new ClientException( "Project '$this->project_id' not found", ERROR_PROJECT_NOT_FOUND, [$this->project_id] );
 		}
 		helper_set_current_project( $this->project_id );
 
@@ -57,11 +57,11 @@ class CategoryAddCommand extends Command {
 
 		$this->name = trim( (string)$this->payload( 'name', '' ) );
 		if( is_blank( $this->name ) ) {
-			throw new ClientException( 'Category name can\'t be empty', ERROR_EMPTY_FIELD, [ 'name' ] );
+			throw new ClientException( 'Category name can\'t be empty', ERROR_EMPTY_FIELD, ['name'] );
 		}
 
 		if( !category_is_unique( $this->project_id, $this->name ) ) {
-			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, [ 'name' ] );
+			throw new ClientException( 'Category name is not unique', ERROR_CATEGORY_DUPLICATE, ['name'] );
 		}
 
 		$t_handler = $this->payload( 'handler' );
@@ -83,10 +83,10 @@ class CategoryAddCommand extends Command {
 			category_update( $t_id, $this->name, $this->handler_id, category_enabled_to_status( $t_enabled ) );
 		}
 
-		$t_data = [ 'query' => [ 'project_id' => $this->project_id, 'category_id' => $t_id ] ];
+		$t_data = ['query' => ['project_id' => $this->project_id, 'category_id' => $t_id]];
 		$t_command = new CategoryGetCommand( $t_data );
 		$t_result = $t_command->execute();
 
-		return [ 'category' => $t_result['categories'][0] ];
+		return ['category' => $t_result['categories'][0]];
 	}
 }

@@ -37,13 +37,13 @@ form_security_validate( 'manage_filter_edit_update' );
 
 auth_ensure_user_authenticated();
 
-$t_errors = array();
+$t_errors = [];
 
 $f_filter_id = gpc_get_int( 'filter_id', null );
 if( null === $f_filter_id ) {
 	throw new ClientException( "Filter Id is required",
 		ERROR_EMPTY_FIELD,
-		[ 'filter_id' ]
+		['filter_id']
 	);
 }
 

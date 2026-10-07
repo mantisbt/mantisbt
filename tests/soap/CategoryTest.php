@@ -78,7 +78,7 @@ class CategoryTest extends SoapBase {
 			$t_category_new_name,
 			'' );
 
-		$this->categoryNamesToDelete = [ $t_category_new_name ];
+		$this->categoryNamesToDelete = [$t_category_new_name];
 
 		$t_category_list = $this->client->mc_project_get_categories(
 			$this->userName,

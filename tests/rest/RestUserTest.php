@@ -61,9 +61,9 @@ class RestUserTest extends RestBase {
 	public function testCreateUserAnonymous() {
 		$this->skipTestIfAnonymousDisabled();
 
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->anonymous()->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -78,9 +78,9 @@ class RestUserTest extends RestBase {
 	 * @param string $p_username
 	 */
 	public function testCreateUserMinimal( $p_username ) {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $p_username
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -109,15 +109,15 @@ class RestUserTest extends RestBase {
 	 * Test the use of POST /users to create users with all supported fields
 	 */
 	public function testCreateUserFull() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username(),
 			'real_name' => Faker::realname(),
 			'email' => Faker::email(),
 			'password' => Faker::password(),
-			'access_level' => array( "name" => "developer" ),
+			'access_level' => ["name" => "developer"],
 			'protected' => false,
 			'enabled' => false,
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -143,9 +143,9 @@ class RestUserTest extends RestBase {
 	 * Test creating users with duplicate usernames
 	 */
 	public function testCreateUserDuplicateUsername() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -159,9 +159,9 @@ class RestUserTest extends RestBase {
 	 * Test updating user
 	 */
 	public function testUpdateUser() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -171,18 +171,18 @@ class RestUserTest extends RestBase {
 		$this->assertTrue( isset( $t_body['user'] ) );
 		$t_user_id = $t_body['user']['id'];
 
-		$t_updated_user = array(
+		$t_updated_user = [
 			'name' => Faker::username(),
 			'email' => Faker::email(),
 			'real_name' => Faker::realname(),
-			'access_level' => array( 'name' => 'manager' ),
+			'access_level' => ['name' => 'manager'],
 			'enabled' => false,
 			'protected' => false
-		);
+		];
 
-		$t_user_update = array(
+		$t_user_update = [
 			'user' => $t_updated_user
-		);
+		];
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
@@ -201,11 +201,11 @@ class RestUserTest extends RestBase {
 	 * Test updating user real_name and email to new values
 	 */
 	public function testUpdateUserRealNameAndEmail() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username(),
 			'real_name' => Faker::realname(),
 			'email' => Faker::email(),
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -217,12 +217,12 @@ class RestUserTest extends RestBase {
 		$t_new_realname = Faker::realname();
 		$t_new_email = Faker::email();
 
-		$t_user_update = array(
-			'user' => array(
+		$t_user_update = [
+			'user' => [
 				'real_name' => $t_new_realname,
 				'email' => $t_new_email,
-			)
-		);
+			]
+		];
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(), 'update_user' );
@@ -237,10 +237,10 @@ class RestUserTest extends RestBase {
 	 * Test updating user real_name to empty value
 	 */
 	public function testUpdateUserRealNameToEmpty() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username(),
 			'real_name' => Faker::realname(),
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -256,11 +256,11 @@ class RestUserTest extends RestBase {
 			'real_name set on created user'
 		);
 
-		$t_user_update = array(
-			'user' => array(
+		$t_user_update = [
+			'user' => [
 				'real_name' => '',
-			)
-		);
+			]
+		];
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(), 'update_user' );
@@ -275,10 +275,10 @@ class RestUserTest extends RestBase {
 	 * Test updating user email to empty value
 	 */
 	public function testUpdateUserEmailToEmpty() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username(),
 			'email' => Faker::email(),
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -294,11 +294,11 @@ class RestUserTest extends RestBase {
 			'email set on created user'
 		);
 
-		$t_user_update = array(
-			'user' => array(
+		$t_user_update = [
+			'user' => [
 				'email' => '',
-			)
-		);
+			]
+		];
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(), 'update_user' );
@@ -317,10 +317,10 @@ class RestUserTest extends RestBase {
 	 * never receive email notifications (e.g. anonymous account).
 	 */
 	public function testAdminUpdateUserEmailToEmptyBlankEmailNotAllowed() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username(),
 			'email' => Faker::email(),
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -334,11 +334,11 @@ class RestUserTest extends RestBase {
 		config_set( 'allow_blank_email', OFF );
 
 		try {
-			$t_user_update = array(
-				'user' => array(
+			$t_user_update = [
+				'user' => [
 					'email' => '',
-				)
-			);
+				]
+			];
 
 			# Request as admin (no impersonation) - should succeed due to admin exemption
 			$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
@@ -362,11 +362,11 @@ class RestUserTest extends RestBase {
 	 */
 	public function testUpdateOwnEmailToEmptyBlankEmailNotAllowed() {
 		$t_username = Faker::username();
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username,
 			'email' => Faker::email(),
-			'access_level' => array( 'name' => 'reporter' ),
-		);
+			'access_level' => ['name' => 'reporter'],
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -380,11 +380,11 @@ class RestUserTest extends RestBase {
 		config_set( 'allow_blank_email', OFF );
 
 		try {
-			$t_user_update = array(
-				'user' => array(
+			$t_user_update = [
+				'user' => [
 					'email' => '',
-				)
-			);
+				]
+			];
 
 			# Impersonate reporter user to act as a non-admin
 			$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )
@@ -401,11 +401,11 @@ class RestUserTest extends RestBase {
 	 */
 	public function testUpdateOwnEmailToEmptyBlankEmailAllowed() {
 		$t_username = Faker::username();
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username,
 			'email' => Faker::email(),
-			'access_level' => array( 'name' => 'reporter' ),
-		);
+			'access_level' => ['name' => 'reporter'],
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -419,11 +419,11 @@ class RestUserTest extends RestBase {
 		config_set( 'allow_blank_email', ON );
 
 		try {
-			$t_user_update = array(
-				'user' => array(
+			$t_user_update = [
+				'user' => [
 					'email' => '',
-				)
-			);
+				]
+			];
 
 			# Impersonate reporter user to act as a non-admin
 			$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )
@@ -444,10 +444,10 @@ class RestUserTest extends RestBase {
 	 */
 	public function testUpdateUserPreservesRealNameWhenNotProvided() {
 		$t_realname = Faker::realname();
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username(),
 			'real_name' => $t_realname,
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -458,11 +458,11 @@ class RestUserTest extends RestBase {
 		$this->assertEquals( $t_realname, $t_body['user']['real_name'], 'real_name set on created user' );
 
 		# Update only enabled flag, real_name is not in the request
-		$t_user_update = array(
-			'user' => array(
+		$t_user_update = [
+			'user' => [
 				'enabled' => true,
-			)
-		);
+			]
+		];
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(), 'update_user' );
@@ -477,10 +477,10 @@ class RestUserTest extends RestBase {
 	 */
 	public function testUpdateUserPreservesEmailWhenNotProvided() {
 		$t_email = Faker::email();
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username(),
 			'email' => $t_email,
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -491,11 +491,11 @@ class RestUserTest extends RestBase {
 		$this->assertEquals( $t_email, $t_body['user']['email'], 'email set on created user' );
 
 		# Update only enabled flag, email is not in the request
-		$t_user_update = array(
-			'user' => array(
+		$t_user_update = [
+			'user' => [
 				'enabled' => true,
-			)
-		);
+			]
+		];
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(), 'update_user' );
@@ -512,17 +512,17 @@ class RestUserTest extends RestBase {
 		$t_username_1 = Faker::username();
 		$t_username_2 = Faker::username();
 
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username_1
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(), 'create_user' );
 
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username_2
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -532,13 +532,13 @@ class RestUserTest extends RestBase {
 		$this->assertTrue( isset( $t_body['user'] ) );
 		$t_user_id = $t_body['user']['id'];
 
-		$t_updated_user = array(
+		$t_updated_user = [
 			'name' => $t_username_1
-		);
+		];
 
-		$t_user_update = array(
+		$t_user_update = [
 			'user' => $t_updated_user
-		);
+		];
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
@@ -550,9 +550,9 @@ class RestUserTest extends RestBase {
 	 * @dataProvider providerInvalidUserNames
 	 */
 	public function testUpdateUserInvalidName( $p_username ) {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -562,13 +562,13 @@ class RestUserTest extends RestBase {
 		$this->assertTrue( isset( $t_body['user'] ) );
 		$t_user_id = $t_body['user']['id'];
 
-		$t_updated_user = array(
+		$t_updated_user = [
 			'name' => $p_username
-		);
+		];
 
-		$t_user_update = array(
+		$t_user_update = [
 			'user' => $t_updated_user
-		);
+		];
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
@@ -580,9 +580,9 @@ class RestUserTest extends RestBase {
 	public function testUpdateUserAnonymous() {
 		$this->skipTestIfAnonymousDisabled();
 
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -592,13 +592,13 @@ class RestUserTest extends RestBase {
 		$this->assertTrue( isset( $t_body['user'] ) );
 		$t_user_id = $t_body['user']['id'];
 
-		$t_updated_user = array(
+		$t_updated_user = [
 			'name' => Faker::username()
-		);
+		];
 
-		$t_user_update = array(
+		$t_user_update = [
 			'user' => $t_updated_user
-		);
+		];
 
 		$t_response = $this->builder()->patch( '/users/' . $t_user_id, $t_user_update )->anonymous()->send();
 		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
@@ -608,9 +608,9 @@ class RestUserTest extends RestBase {
 	 * Test getting an existing user by id.
 	 */
 	public function testGetUserById() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -637,11 +637,11 @@ class RestUserTest extends RestBase {
 	 * Test getting an existing user by username.
 	 */
 	public function testGetUserByUsername() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username(),
 			'email' => Faker::email(),
 			'real_name' => Faker::realname(),
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -664,9 +664,9 @@ class RestUserTest extends RestBase {
 	 * Test getting an existing user by id.
 	 */
 	public function testGetUserByIdSelect() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -701,9 +701,9 @@ class RestUserTest extends RestBase {
 	public function testGetUserByIdAnonymous() {
 		$this->skipTestIfAnonymousDisabled();
 
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -761,9 +761,9 @@ class RestUserTest extends RestBase {
 	 * Test delete an existing user by id.
 	 */
 	public function testDeleteUserById() {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -791,9 +791,9 @@ class RestUserTest extends RestBase {
 	public function testDeleteUserByIdAnonymous() {
 		$this->skipTestIfAnonymousDisabled();
 
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => Faker::username()
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -831,10 +831,10 @@ class RestUserTest extends RestBase {
 	 */
 	public function testDeleteCurrentUser() {
 		$t_username = Faker::username();
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => array( 'name' => 'reporter' ),
-		);
+			'access_level' => ['name' => 'reporter'],
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -860,10 +860,10 @@ class RestUserTest extends RestBase {
 	 */
 	public function testDeleteCurrentUserWithImpersonation() {
 		$t_username = Faker::username();
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => array( 'name' => 'administrator' )
-		);
+			'access_level' => ['name' => 'administrator']
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -887,10 +887,10 @@ class RestUserTest extends RestBase {
 	 */
 	public function testDeleteCurrentUserAllowAccountDeleteOn() {
 		$t_username = Faker::username();
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => array( 'name' => 'reporter' ),
-		);
+			'access_level' => ['name' => 'reporter'],
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -913,11 +913,11 @@ class RestUserTest extends RestBase {
 	 */
 	public function testDeleteSelfProtectedUser() {
 		$t_username = Faker::username();
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $t_username,
-			'access_level' => array( 'name' => 'reporter' ),
+			'access_level' => ['name' => 'reporter'],
 			'protected' => true,
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$t_user_id = $this->deleteAfterRunUserIfCreated( $t_response );
@@ -939,9 +939,9 @@ class RestUserTest extends RestBase {
 	 * @dataProvider providerInvalidUserNames
 	 */
 	public function testCreateUserInvalidUsername( $p_username ) {
-		$t_user_to_create = array(
+		$t_user_to_create = [
 			'name' => $p_username
-		);
+		];
 
 		$t_response = $this->builder()->post( '/users', $t_user_to_create )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
@@ -954,12 +954,12 @@ class RestUserTest extends RestBase {
 	 * @return array test cases
 	 */
 	public static function providerInvalidUserNames() {
-		return array(
-			'blank_spaces' => array( ' ' ),
-			'blank_tabs' => array( "\t" ),
-			'empty' => array( '' ),
-			'too_long' => array( Faker::randStr( 500 ) )
-		);
+		return [
+			'blank_spaces' => [' '],
+			'blank_tabs' => ["\t"],
+			'empty' => [''],
+			'too_long' => [Faker::randStr( 500 )]
+		];
 	}
 
 	/**
@@ -968,13 +968,13 @@ class RestUserTest extends RestBase {
 	 * @return array test cases
 	 */
 	public static function providerValidUserNames() {
-		return array(
-			'regular' => array( Faker::username() ),
-			'with_spaces_in_middle' => array( "some user" ),
-			'email' => array( 'vboctor@somedomain.com' ),
-			'dot' => array( 'victor.boctor' ),
-			'underscore' => array( 'victor_boctor' ),
-		);
+		return [
+			'regular' => [Faker::username()],
+			'with_spaces_in_middle' => ["some user"],
+			'email' => ['vboctor@somedomain.com'],
+			'dot' => ['victor.boctor'],
+			'underscore' => ['victor_boctor'],
+		];
 	}
 
 }

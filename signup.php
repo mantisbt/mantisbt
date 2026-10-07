@@ -80,7 +80,7 @@ if( !auth_signup_enabled() ) {
 
 if( ON == config_get( 'signup_use_captcha' )
 	&& get_gd_version()
-	&& helper_call_custom_function( 'auth_can_change_password', array() )
+	&& helper_call_custom_function( 'auth_can_change_password', [] )
 ) {
 	# captcha image requires GD library and related option to ON
 	$t_securimage = new Securimage();

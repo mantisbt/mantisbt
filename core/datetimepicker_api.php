@@ -42,9 +42,9 @@ require_api( 'string_api.php' );
 
 # Include Moment.js and Bootstrap DateTimePicker.js
 if( config_get_global( 'cdn_enabled' ) == ON ) {
-	require_css( [ 'https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css', DATETIME_PICKER_HASH_CSS ] );
-	require_js( [ 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH ] );
-	require_js( [ 'https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH_JS ] );
+	require_css( ['https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css', DATETIME_PICKER_HASH_CSS] );
+	require_js( ['https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH] );
+	require_js( ['https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH_JS] );
 } else {
 	require_css( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
 	require_js( 'moment-with-locales-' . MOMENT_VERSION . '.min.js' );

@@ -95,37 +95,37 @@ class FileApiTest extends MantisCoreBase {
 
 		return [
 			'Error type'
-				=> [ null, \TypeError::class ],
+				=> [null, \TypeError::class],
 			'No "name" key'
-				=> [ [], 'name is empty' ],
+				=> [[], 'name is empty'],
 			'Empty "name" key'
-				=> [ [ 'name' => '' ], 'name is empty' ],
+				=> [['name' => ''], 'name is empty'],
 			'UPLOAD_ERR_INI_SIZE'
-				=> [ [ 'name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_INI_SIZE ], 'too big' ],
+				=> [['name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_INI_SIZE], 'too big'],
 			'UPLOAD_ERR_FORM_SIZE'
-				=> [ [ 'name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_FORM_SIZE ], 'too big' ],
+				=> [['name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_FORM_SIZE], 'too big'],
 			'UPLOAD_ERR_PARTIAL'
-				=> [ [ 'name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_PARTIAL ], 'upload failure' ],
+				=> [['name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_PARTIAL], 'upload failure'],
 			'UPLOAD_ERR_NO_FILE'
-				=> [ [ 'name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_NO_FILE ], 'upload failure' ],
+				=> [['name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_NO_FILE], 'upload failure'],
 			'UPLOAD_ERR_CANT_WRITE'
-				=> [ [ 'name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_CANT_WRITE ], 'upload failure' ],
+				=> [['name' => 'mantis_logo.png', 'error' => UPLOAD_ERR_CANT_WRITE], 'upload failure'],
 			'Too long name'
-				=> [ [ 'name' => str_pad( '', DB_FIELD_SIZE_FILENAME + 1 ) ], 'is too long' ],
+				=> [['name' => str_pad( '', DB_FIELD_SIZE_FILENAME + 1 )], 'is too long'],
 			'Invalid type'
-				=> [ [ 'name' => 'mantis_logo.svg' ], 'type not allowed' ],
+				=> [['name' => 'mantis_logo.svg'], 'type not allowed'],
 			'No "tmp_name" key'
-				=> [ [ 'name' => 'mantis_logo.png' ], 'path is empty' ],
+				=> [['name' => 'mantis_logo.png'], 'path is empty'],
 			'Empty "tmp_name" key'
-				=> [ [ 'name' => 'mantis_logo.png', 'tmp_name' => '' ], 'path is empty' ],
+				=> [['name' => 'mantis_logo.png', 'tmp_name' => ''], 'path is empty'],
 			'Missed file'
-				=> [ [ 'name' => 'mantis_logo.png', 'tmp_name' => 'foo' ], 'is not readable' ],
+				=> [['name' => 'mantis_logo.png', 'tmp_name' => 'foo'], 'is not readable'],
 			'Zero size file'
-				=> [ [ 'name' => 'mantis_logo.png', 'tmp_name' => self::$zero_name ], 'not uploaded' ],
+				=> [['name' => 'mantis_logo.png', 'tmp_name' => self::$zero_name], 'not uploaded'],
 			'Big size file'
-				=> [ [ 'name' => 'mantis_logo.png', 'tmp_name' => self::$big_name ], 'too big' ],
+				=> [['name' => 'mantis_logo.png', 'tmp_name' => self::$big_name], 'too big'],
 			'Good file'
-				=> [ [ 'name' => 'mantis_logo.png', 'tmp_name' => self::$tmp_name, 'error' => UPLOAD_ERR_OK ], null ],
+				=> [['name' => 'mantis_logo.png', 'tmp_name' => self::$tmp_name, 'error' => UPLOAD_ERR_OK], null],
 		];
 	}
 }

@@ -111,7 +111,7 @@ function rest_issue_get( Request $p_request, Response $p_response, array $p_args
 		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id, $t_select );
 		ApiObjectFactory::throwIfFault( $t_issue );
 
-		$t_result = array( 'issues' => array( $t_issue ) );
+		$t_result = ['issues' => [$t_issue]];
 	} else {
 		$t_page_number = $p_request->getParam( 'page', 1 );
 		$t_page_size = $p_request->getParam( 'page_size', 50 );
@@ -142,7 +142,7 @@ function rest_issue_get( Request $p_request, Response $p_response, array $p_args
 				'', '', $t_project_id, FILTER_STANDARD_ANY, $t_page_number, $t_page_size, $t_select );
 		}
 
-		$t_result = array( 'issues' => $t_issues );
+		$t_result = ['issues' => $t_issues];
 	}
 
 	$t_etag = mc_issue_hash( $t_issue_id, $t_result );
@@ -182,7 +182,7 @@ function rest_issue_add( Request $p_request, Response $p_response, array $p_args
 		$t_issue['files'] = files_base64_to_temp( $t_issue['files'] );
 	}
 
-	$t_data = array( 'payload' => array( 'issue' => $t_issue ) );
+	$t_data = ['payload' => ['issue' => $t_issue]];
 	$t_command = new IssueAddCommand( $t_data );
 	$t_result = $t_command->execute();
 
@@ -196,7 +196,7 @@ function rest_issue_add( Request $p_request, Response $p_response, array $p_args
 	$t_created_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Issue Created with id $t_issue_id" )->
-		withJson( array( 'issue' => $t_created_issue ) );
+		withJson( ['issue' => $t_created_issue] );
 }
 
 /**
@@ -217,7 +217,7 @@ function rest_issue_delete( Request $p_request, Response $p_response, array $p_a
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	ApiObjectFactory::throwIfFault( $t_issue );
 
-	$t_etag = mc_issue_hash( $t_issue_id, array( 'issues' => array( $t_issue ) ) );
+	$t_etag = mc_issue_hash( $t_issue_id, ['issues' => [$t_issue]] );
 
 	if( $p_request->hasHeader( HEADER_IF_MATCH ) ) {
 		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_MATCH );
@@ -227,7 +227,7 @@ function rest_issue_delete( Request $p_request, Response $p_response, array $p_a
 		}
 	}
 
-	$t_data = array( 'query' => array( 'id' => $t_issue_id ) );
+	$t_data = ['query' => ['id' => $t_issue_id]];
 	$t_command = new IssueDeleteCommand( $t_data );
 	$t_command->execute();
 
@@ -249,10 +249,10 @@ function rest_issue_delete( Request $p_request, Response $p_response, array $p_a
 function rest_issue_file_add( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
-	$t_data = array(
-		'query' => array( 'issue_id' => $t_issue_id ),
+	$t_data = [
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
-	);
+	];
 
 	if( isset( $t_data['payload']['files'] ) ) {
 		$t_data['payload']['files'] = files_base64_to_temp( $t_data['payload']['files'] );
@@ -278,10 +278,10 @@ function rest_issue_file_add( Request $p_request, Response $p_response, array $p
 function rest_issue_note_add( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
-	$t_data = array(
-		'query' => array( 'issue_id' => $t_issue_id ),
+	$t_data = [
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
-	);
+	];
 
 	if( isset( $t_data['payload']['files'] ) ) {
 		$t_data['payload']['files'] = files_base64_to_temp( $t_data['payload']['files'] );
@@ -311,7 +311,7 @@ function rest_issue_note_add( Request $p_request, Response $p_response, array $p
 
 	return $p_response
 		->withStatus( HTTP_STATUS_CREATED, "Issue Note Created with id $t_issue_id" )
-		->withJson( array( 'note' => $t_note, 'issue' => $t_issue ) );
+		->withJson( ['note' => $t_note, 'issue' => $t_issue] );
 }
 
 /**
@@ -328,18 +328,18 @@ function rest_issue_note_delete( Request $p_request, Response $p_response, array
 	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	$t_issue_note_id = $p_args['note_id'] ?? $p_request->getParam( 'note_id' );
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'id' => $t_issue_note_id,
-			'issue_id' => $t_issue_id )
-	);
+			'issue_id' => $t_issue_id]
+	];
 
 	$t_command = new IssueNoteDeleteCommand( $t_data );
 	$t_command->execute();
 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue Note Deleted' )->
-		withJson( array( 'issue' => $t_issue ) );
+		withJson( ['issue' => $t_issue] );
 }
 
 /**
@@ -355,10 +355,10 @@ function rest_issue_note_delete( Request $p_request, Response $p_response, array
 function rest_issue_relationship_add( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'];
 
-	$t_data = array(
-		'query' => array( 'issue_id' => $t_issue_id ),
+	$t_data = [
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
-	);
+	];
 
 	$t_command = new IssueRelationshipAddCommand( $t_data );
 	$t_command_response = $t_command->execute();
@@ -370,7 +370,7 @@ function rest_issue_relationship_add( Request $p_request, Response $p_response, 
 	return $p_response->withStatus(
 		HTTP_STATUS_CREATED,
 		"Issue relationship created with id $t_relationship_id" )->
-			withJson( array( 'issue' => $t_issue ) );
+			withJson( ['issue' => $t_issue] );
 }
 
 /**
@@ -389,18 +389,18 @@ function rest_issue_relationship_delete( Request $p_request, Response $p_respons
 	$t_issue_id = $p_args['id'];
 	$t_relationship_id = $p_args['relationship_id'];
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'relationship_id' => $t_relationship_id,
-			'issue_id' => $t_issue_id )
-	);
+			'issue_id' => $t_issue_id]
+	];
 
 	$t_command = new IssueRelationshipDeleteCommand( $t_data );
 	$t_command->execute();
 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue relationship deleted' )->
-		withJson( array( 'issue' => $t_issue ) );
+		withJson( ['issue' => $t_issue] );
 }
 
 /**
@@ -425,7 +425,7 @@ function rest_issue_update( Request $p_request, Response $p_response, array $p_a
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	ApiObjectFactory::throwIfFault( $t_issue );
 
-	$t_etag = mc_issue_hash( $t_issue_id, array( 'issues' => array( $t_issue ) ) );
+	$t_etag = mc_issue_hash( $t_issue_id, ['issues' => [$t_issue]] );
 
 	if( $p_request->hasHeader( HEADER_IF_MATCH ) ) {
 		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_MATCH );
@@ -451,7 +451,7 @@ function rest_issue_update( Request $p_request, Response $p_response, array $p_a
 	ApiObjectFactory::throwIfFault( $t_result );
 
 	$t_updated_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
-	$t_result = array( 'issues' => array( $t_updated_issue ) );
+	$t_result = ['issues' => [$t_updated_issue]];
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Issue with id $t_issue_id Updated" )
 		->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, $t_result ) )
@@ -477,15 +477,15 @@ function rest_issue_move( Request $p_request, Response $p_response, array $p_arg
 		$t_payload['note']['files'] = files_base64_to_temp( $t_payload['note']['files'] );
 	}
 
-	$t_command = new IssueMoveCommand( array(
-		'query' => array( 'issue_id' => $p_args['id'] ),
+	$t_command = new IssueMoveCommand( [
+		'query' => ['issue_id' => $p_args['id']],
 		'payload' => $t_payload,
-	) );
+	] );
 
 	$t_result = $t_command->execute();
 	$t_issue = mc_issue_get( '', '', $t_result['issue_id'] );
 
-	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue moved' )->withJson( array( 'issue' => $t_issue ) );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue moved' )->withJson( ['issue' => $t_issue] );
 }
 
 /**
@@ -500,10 +500,10 @@ function rest_issue_move( Request $p_request, Response $p_response, array $p_arg
  */
 function rest_issue_monitor_add( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
-	$t_data = array(
-		'query' => array( 'issue_id' => $t_issue_id ),
+	$t_data = [
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
-	);
+	];
 
 	$t_command = new MonitorAddCommand( $t_data );
 	$t_command->execute();
@@ -511,7 +511,7 @@ function rest_issue_monitor_add( Request $p_request, Response $p_response, array
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Users are now monitoring issue $t_issue_id" )->
-		withJson( array( 'issues' => array( $t_issue ) ) );
+		withJson( ['issues' => [$t_issue]] );
 }
 
 /**
@@ -526,10 +526,10 @@ function rest_issue_monitor_add( Request $p_request, Response $p_response, array
  */
 function rest_issue_tag_attach( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'];
-	$t_data = array(
-		'query' => array( 'issue_id' => $t_issue_id ),
+	$t_data = [
+		'query' => ['issue_id' => $t_issue_id],
 		'payload' => $p_request->getParsedBody(),
-	);
+	];
 
 	$t_command = new TagAttachCommand( $t_data );
 	$t_command->execute();
@@ -537,7 +537,7 @@ function rest_issue_tag_attach( Request $p_request, Response $p_response, array 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Tag attached to issue $t_issue_id" )->
-		withJson( array( 'issues' => array( $t_issue ) ) );
+		withJson( ['issues' => [$t_issue]] );
 }
 
 /**
@@ -556,9 +556,9 @@ function rest_issue_tag_detach( Request $p_request, Response $p_response, array 
 	$t_issue_id = $p_args['id'];
 	$t_tag_id = $p_args['tag_id'];
 
-	$t_data = array(
-		'query' => array( 'issue_id' => $t_issue_id, 'tag_id' => $t_tag_id )
-	);
+	$t_data = [
+		'query' => ['issue_id' => $t_issue_id, 'tag_id' => $t_tag_id]
+	];
 
 	$t_command = new TagDetachCommand( $t_data );
 	$t_command->execute();
@@ -566,7 +566,7 @@ function rest_issue_tag_detach( Request $p_request, Response $p_response, array 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Tag detached from issue $t_issue_id" )->
-		withJson( array( 'issues' => array( $t_issue ) ) );
+		withJson( ['issues' => [$t_issue]] );
 }
 
 /**
@@ -585,22 +585,22 @@ function rest_issue_files_get( Request $p_request, Response $p_response, array $
 	$t_issue_id = $p_args['id'];
 	$t_file_id = $p_args['file_id'] ?? null;
 
-	$t_data = array(
-		'query' => array( 'issue_id' => $t_issue_id, 'file_id' => $t_file_id )
-	);
+	$t_data = [
+		'query' => ['issue_id' => $t_issue_id, 'file_id' => $t_file_id]
+	];
 
 	$t_command = new IssueFileGetCommand( $t_data );
 	$t_internal_files = $t_command->execute();
 
-	$t_files = array();
+	$t_files = [];
 	foreach( $t_internal_files as $t_internal_file ) {
-		$t_file = array(
+		$t_file = [
 			'id' => (int)$t_internal_file['id'],
 			'reporter' => mci_account_get_array_by_id( $t_internal_file['user_id'] ),
 			'created_at' => ApiObjectFactory::datetimeString( $t_internal_file['date_added'] ),
 			'filename' => $t_internal_file['display_name'],
 			'size' => (int)$t_internal_file['size'],
-		);
+		];
 
 		if( $t_internal_file['exists'] ) {
 			$t_file['content_type'] = $t_internal_file['content_type'];
@@ -611,7 +611,7 @@ function rest_issue_files_get( Request $p_request, Response $p_response, array $
 	}
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->
-		withJson( array( 'files' => $t_files ) );
+		withJson( ['files' => $t_files] );
 }
 
 /**
@@ -628,17 +628,17 @@ function rest_issue_file_delete( Request $p_request, Response $p_response, array
 	$t_issue_id = $p_args['id'];
 	$t_file_id = $p_args['file_id'];
 
-	$t_command = new IssueFileDeleteCommand( array(
-		'query' => array(
+	$t_command = new IssueFileDeleteCommand( [
+		'query' => [
 			'issue_id' => $t_issue_id,
 			'file_id' => $t_file_id,
-		)
-	) );
+		]
+	] );
 	$t_command->execute();
 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )
-		->withJson( array( 'issue' => $t_issue ) );
+		->withJson( ['issue' => $t_issue] );
 }
 
 /**
@@ -650,7 +650,7 @@ function rest_issue_file_delete( Request $p_request, Response $p_response, array
  * @throws ClientException
  */
 function files_base64_to_temp( $p_files ) {
-	$t_files = array();
+	$t_files = [];
 
 	if( isset( $p_files ) && is_array( $p_files ) ) {
 		foreach( $p_files as $t_file ) {
@@ -658,7 +658,7 @@ function files_base64_to_temp( $p_files ) {
 				throw new ClientException(
 					'File content not set',
 					ERROR_INVALID_FIELD_VALUE,
-					array( 'files' ) );
+					['files'] );
 			}
 
 			$t_raw_content = base64_decode( $t_file['content'] );

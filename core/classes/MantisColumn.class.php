@@ -51,7 +51,7 @@ abstract class MantisColumn {
 	 * @return array Keyed-array with query elements; see developer guide
 	 */
 	public function sortquery( $p_direction ) {
-		return array();
+		return [];
 	}
 
 	/**

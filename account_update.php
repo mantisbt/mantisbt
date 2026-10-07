@@ -126,7 +126,7 @@ if( $t_account_verification && is_blank( $f_password ) ) {
 	auth_logout();
 	throw new ClientException( "Password is required",
 		ERROR_EMPTY_FIELD,
-		[ lang_get( 'password' ) ]
+		[lang_get( 'password' )]
 	);
 }
 
@@ -164,23 +164,23 @@ if( !$t_account_verification
 }
 
 # Use UserUpdateCommand for email and realname changes
-$t_user_payload = array(
+$t_user_payload = [
 	'real_name' => $f_realname,
-);
+];
 
 # Do not update email for account verification
 if( !$t_account_verification ) {
 	$t_user_payload['email'] = $f_email;
 }
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'user_id' => $t_user_id
-	),
-	'payload' => array(
+	],
+	'payload' => [
 		'user' => $t_user_payload,
-	)
-);
+	]
+];
 
 $t_command = new UserUpdateCommand( $t_data );
 $t_command->execute();

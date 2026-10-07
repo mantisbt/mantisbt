@@ -106,10 +106,10 @@ class CategoryCommandTest extends MantisCoreBase {
 
 		try {
 			$t_data = [
-				'query' => [ 'project_id' => 1, 'category_id' => $t_disabled_category_id ],
+				'query' => ['project_id' => 1, 'category_id' => $t_disabled_category_id],
 				'payload' => [
 					'name' => 'disabled stale category updated',
-					'handler' => [ 'id' => $t_user_id ],
+					'handler' => ['id' => $t_user_id],
 				],
 			];
 			$t_command = new \CategoryUpdateCommand( $t_data );
@@ -130,10 +130,10 @@ class CategoryCommandTest extends MantisCoreBase {
 
 		try {
 			$t_data = [
-				'query' => [ 'project_id' => 1, 'category_id' => $t_deleted_category_id ],
+				'query' => ['project_id' => 1, 'category_id' => $t_deleted_category_id],
 				'payload' => [
 					'name' => 'deleted stale category updated',
-					'handler' => [ 'id' => $t_deleted_user_id ],
+					'handler' => ['id' => $t_deleted_user_id],
 				],
 			];
 			$t_command = new \CategoryUpdateCommand( $t_data );
@@ -171,8 +171,8 @@ class CategoryCommandTest extends MantisCoreBase {
 	public function testCanAddGlobalCategory() {
 		self::login();
 		$t_data = [
-			'query' => [ 'project_id' => ALL_PROJECTS ],
-			'payload' => [ 'name' => 'command global category ' . rand( 1, 1000000 ) ],
+			'query' => ['project_id' => ALL_PROJECTS],
+			'payload' => ['name' => 'command global category ' . rand( 1, 1000000 )],
 		];
 		$t_command = new \CategoryAddCommand( $t_data );
 		$t_result = $t_command->execute();
@@ -199,18 +199,18 @@ class CategoryCommandTest extends MantisCoreBase {
 
 		try {
 			$t_data = [
-				'query' => [ 'project_id' => 1 ],
+				'query' => ['project_id' => 1],
 				'payload' => [
 					'name' => 'command disabled handler ' . rand( 1, 1000000 ),
-					'handler' => [ 'id' => $t_user_id ],
+					'handler' => ['id' => $t_user_id],
 				],
 			];
 			$t_command = new \CategoryAddCommand( $t_data );
 			$this->assertAssignedUserRejected( $t_command );
 
 			$t_data = [
-				'query' => [ 'project_id' => 1, 'category_id' => $t_category_id ],
-				'payload' => [ 'handler' => [ 'id' => $t_user_id ] ],
+				'query' => ['project_id' => 1, 'category_id' => $t_category_id],
+				'payload' => ['handler' => ['id' => $t_user_id]],
 			];
 			$t_command = new \CategoryUpdateCommand( $t_data );
 			$this->assertAssignedUserRejected( $t_command );

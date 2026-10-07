@@ -93,16 +93,16 @@ if( !is_blank( $c_ref ) ) {
 				$t_source_filter_id = filter_db_get_project_current( $t_bottom );
 				$t_redirect_url = helper_url_combine( 'view_all_set.php',
 					( $t_source_filter_id !== null )
-						? [ 'type' => FILTER_ACTION_LOAD,
-							'source_query_id' => $t_source_filter_id ]
-						: [ 'type' => FILTER_ACTION_GENERALIZE ] );
+						? ['type' => FILTER_ACTION_LOAD,
+							'source_query_id' => $t_source_filter_id]
+						: ['type' => FILTER_ACTION_GENERALIZE] );
 				break;
 
 			case 'manage_proj_edit_page.php':
 			case 'manage_proj_page.php':
 				$t_redirect_url = ( ALL_PROJECTS != $t_bottom )
 					? helper_url_combine( 'manage_proj_edit_page.php',
-						[ 'project_id' => $t_bottom ] )
+						['project_id' => $t_bottom] )
 					: 'manage_proj_page.php';
 				break;
 

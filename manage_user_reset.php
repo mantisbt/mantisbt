@@ -52,12 +52,12 @@ if( gpc_isset( 'unlock' ) ) {
 	$f_action = UserResetPasswordCommand::RESET;
 }
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'id' => $f_user_id,
 		'action' => $f_action
-	)
-);
+	]
+];
 
 $t_command = new UserResetPasswordCommand( $t_data );
 # The case of trying to reset a protected account now causes the Command to

@@ -66,7 +66,7 @@ function token_exists( $p_token_id ) {
 
 	db_param_push();
 	$t_query = 'SELECT id FROM {tokens} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $c_token_id ), 1 );
+	$t_result = db_query( $t_query, [$c_token_id], 1 );
 
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
@@ -108,7 +108,7 @@ function token_get( $p_type, $p_user_id = null ) {
 
 	db_param_push();
 	$t_query = 'SELECT * FROM {tokens} WHERE type=' . db_param() . ' AND owner=' . db_param();
-	$t_result = db_query( $t_query, array( $c_type, $c_user_id ) );
+	$t_result = db_query( $t_query, [$c_type, $c_user_id] );
 
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
@@ -197,7 +197,7 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 
 	db_param_push();
 	$t_query = 'UPDATE {tokens} SET expiry=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( $c_token_expiry, $c_token_id ) );
+	db_query( $t_query, [$c_token_expiry, $c_token_id] );
 }
 
 /**
@@ -216,7 +216,7 @@ function token_delete( $p_type, $p_user_id = null ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {tokens} WHERE type=' . db_param() . ' AND owner=' . db_param();
-	db_query( $t_query, array( $c_type, $c_user_id ) );
+	db_query( $t_query, [$c_type, $c_user_id] );
 }
 
 /**
@@ -236,7 +236,7 @@ function token_delete_by_owner( $p_user_id = null ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {tokens} WHERE owner=' . db_param();
-	db_query( $t_query, array( $c_user_id ) );
+	db_query( $t_query, [$c_user_id] );
 }
 
 /**
@@ -262,7 +262,7 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
 	$t_query = 'INSERT INTO {tokens}
 					( type, value, timestamp, expiry, owner )
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $c_type, (string)$p_value, $c_timestamp, $c_expiry, $c_user_id ) );
+	db_query( $t_query, [$c_type, (string)$p_value, $c_timestamp, $c_expiry, $c_user_id] );
 	return db_insert_id( db_get_table( 'tokens' ) );
 }
 
@@ -299,7 +299,7 @@ function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 	$t_query = 'UPDATE {tokens}
 					SET value=' . db_param() . ', expiry=' . db_param() . '
 					WHERE id=' . db_param();
-	db_query( $t_query, array( $c_value, $c_expiry, $c_token_id ) );
+	db_query( $t_query, [$c_value, $c_expiry, $c_token_id] );
 
 	return true;
 }
@@ -318,7 +318,7 @@ function token_delete_by_type( $p_token_type ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {tokens} WHERE type=' . db_param();
-	db_query( $t_query, array( $c_token_type ) );
+	db_query( $t_query, [$c_token_type] );
 
 	return true;
 }
@@ -337,9 +337,9 @@ function token_purge_expired( $p_token_type = null ) {
 	$t_query = 'DELETE FROM {tokens} WHERE ' . db_param() . ' > expiry';
 	if( !is_null( $p_token_type ) ) {
 		$t_query .= ' AND type=' . db_param();
-		db_query( $t_query, array( db_now(), (int)$p_token_type ) );
+		db_query( $t_query, [db_now(), (int)$p_token_type] );
 	} else {
-		db_query( $t_query, array( db_now() ) );
+		db_query( $t_query, [db_now()] );
 	}
 
 	$g_tokens_purged = true;

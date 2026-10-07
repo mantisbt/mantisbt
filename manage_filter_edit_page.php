@@ -73,7 +73,7 @@ $f_filter_id = gpc_get_int( 'filter_id', null );
 if( null === $f_filter_id ) {
 	throw new ClientException( "Filter Id is required",
 		ERROR_EMPTY_FIELD,
-		[ 'filter_id' ]
+		['filter_id']
 	);
 }
 

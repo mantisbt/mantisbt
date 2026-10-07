@@ -23,18 +23,18 @@ return ECSConfig::configure()
 	->withSets( [
 		__DIR__ . '/rules/basic.php',
 		__DIR__ . '/rules/whitepaces.php',
-//		__DIR__ . '/rules/array.php',
-//		__DIR__ . '/rules/quotes.php',
+		__DIR__ . '/rules/array.php',
+		//		__DIR__ . '/rules/quotes.php',
 		__DIR__ . '/rules/casing.php',
 		__DIR__ . '/rules/cast.php',
-//		__DIR__ . '/rules/comments.php',
+		//		__DIR__ . '/rules/comments.php',
 		__DIR__ . '/rules/alias.php',
-//		__DIR__ . '/rules/braces.php',
+		//		__DIR__ . '/rules/braces.php',
 		__DIR__ . '/rules/control-structures-parentheses.php',
-//		__DIR__ . '/rules/control-structures.php',
-//		__DIR__ . '/rules/echo.php',
+		//		__DIR__ . '/rules/control-structures.php',
+		//		__DIR__ . '/rules/echo.php',
 		__DIR__ . '/rules/semicolon.php',
-//		__DIR__ . '/rules/imports.php',
+		//		__DIR__ . '/rules/imports.php',
 	] )
 	// @todo go with psr12 and adjust the mantis specials?
 	//	->withPreparedSets(

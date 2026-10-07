@@ -82,7 +82,7 @@ class RequestBuilder {
 		$this->method = 'GET';
 		$this->relative_path = '';
 		$this->body = '';
-		$this->headers = array();
+		$this->headers = [];
 
 		# Set Xdebug session cookie
 		if( $p_xdebug ) {
@@ -236,9 +236,9 @@ class RequestBuilder {
 	 * @noinspection PhpDocMissingThrowsInspection
 	 */
 	public function send() {
-		$t_headers = array(
+		$t_headers = [
 			'User-Agent' => 'MantisTests'
-		);
+		];
 
 		if( !empty( $this->token ) ) {
 			$t_headers['Authorization'] = $this->token;
@@ -248,11 +248,11 @@ class RequestBuilder {
 			$t_headers[$t_key] = $t_value;
 		}
 
-		$t_options = array(
+		$t_options = [
 			'allow_redirects' => false,
 			'http_errors' => false,
 			'headers' => $t_headers
-		);
+		];
 
 		if( !empty( $this->body ) ) {
 			$t_options['json'] = $this->body;

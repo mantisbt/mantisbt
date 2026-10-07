@@ -45,7 +45,7 @@ require_api( 'utility_api.php' );
  * LDAP attributes cache, indexed by username
  * @see ldap_cache_user_data()
  */
-$g_cache_ldap_data = array();
+$g_cache_ldap_data = [];
 
 /**
  * Logs the most recent LDAP error.
@@ -235,8 +235,8 @@ function ldap_realname_from_username( $p_username ) {
  * @return string The escaped string.
  */
 function ldap_escape_string( $p_string ) {
-	$t_find = array( '\\', '*', '(', ')', '/', "\x00" );
-	$t_replace = array( '\5c', '\2a', '\28', '\29', '\2f', '\00' );
+	$t_find = ['\\', '*', '(', ')', '/', "\x00"];
+	$t_replace = ['\5c', '\2a', '\28', '\29', '\2f', '\00'];
 
 	return str_replace( $t_find, $t_replace, $p_string );
 }
@@ -280,12 +280,12 @@ function ldap_cache_user_data( $p_username ) {
 
 	$t_search_filter = '(&' . $t_ldap_organization
 		. '(' . $t_ldap_uid_field . '=' . ldap_escape_string( $p_username ) . '))';
-	$t_search_attrs = array(
+	$t_search_attrs = [
 		config_get_global( 'ldap_email_field' ),
 		config_get_global( 'ldap_realname_field' )
-	);
+	];
 
-	$t_extra_attrs = event_signal( 'EVENT_LDAP_CACHE_ATTRS', array( $p_username ) );
+	$t_extra_attrs = event_signal( 'EVENT_LDAP_CACHE_ATTRS', [$p_username] );
 	foreach( $t_extra_attrs as $t_plugin => $t_callback ) {
 		foreach( $t_callback as $t_attr ) {
 			if( is_array( $t_attr ) ) {
@@ -317,7 +317,7 @@ function ldap_cache_user_data( $p_username ) {
 		return false;
 	}
 
-	$t_data = array();
+	$t_data = [];
 	foreach( $t_search_attrs as $t_attr ) {
 		# Suppress error to avoid Warning in case an invalid attribute was specified
 		$t_value = @ldap_get_values( $t_ds, $t_entry, $t_attr );
@@ -408,10 +408,10 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 		$t_ldap_uid_field = config_get_global( 'ldap_uid_field', 'uid' );
 		$t_search_filter = '(&' . $t_ldap_organization . '(' . $t_ldap_uid_field . '=' . $c_username . '))';
-		$t_search_attrs = array(
+		$t_search_attrs = [
 			$t_ldap_uid_field,
 			'dn',
-		);
+		];
 
 		# Bind and connect.
 		# No need to check for failures, as ldap_connect_bind() throws errors.
@@ -466,7 +466,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 		if( false !== $t_user_id ) {
 
-			$t_fields_to_update = array( 'password' => md5( $p_password ) );
+			$t_fields_to_update = ['password' => md5( $p_password )];
 
 			if( ON == config_get_global( 'use_ldap_realname' ) ) {
 				$t_fields_to_update['realname'] = ldap_realname_from_username( $p_username );
@@ -523,7 +523,7 @@ function ldap_simulation_get_user( $p_username ) {
 			continue;
 		}
 
-		$t_user = array();
+		$t_user = [];
 
 		$t_user['username'] = $t_row[0];
 		$t_user['realname'] = $t_row[1];

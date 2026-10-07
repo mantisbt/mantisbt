@@ -61,14 +61,14 @@ $t_query_redirect_url = 'query_store_page.php';
 # We can't have a blank name
 if( is_blank( $f_query_name ) ) {
 	$t_query_redirect_url = helper_url_combine( $t_query_redirect_url,
-		[ 'error_msg' => lang_get( 'query_blank_name' ) ] );
+		['error_msg' => lang_get( 'query_blank_name' )] );
 	print_header_redirect( $t_query_redirect_url );
 }
 
 # mantis_filters_table.name has a length of 64. Not allowing longer.
 if( !filter_name_valid_length( $f_query_name ) ) {
 	$t_query_redirect_url = helper_url_combine( $t_query_redirect_url,
-		[ 'error_msg' => lang_get( 'query_name_too_long' ) ] );
+		['error_msg' => lang_get( 'query_name_too_long' )] );
 	print_header_redirect( $t_query_redirect_url );
 }
 
@@ -78,7 +78,7 @@ $t_query_arr = filter_db_get_available_queries();
 foreach( $t_query_arr as $t_id => $t_name )	{
 	if( $f_query_name == $t_name ) {
 		$t_query_redirect_url = helper_url_combine( $t_query_redirect_url,
-			[ 'error_msg' => lang_get( 'query_dupe_name' ) ] );
+			['error_msg' => lang_get( 'query_dupe_name' )] );
 		print_header_redirect( $t_query_redirect_url );
 	}
 }
@@ -113,15 +113,15 @@ form_security_purge( 'query_store' );
 
 if( $t_new_row_id == -1 ) {
 	$t_query_redirect_url = helper_url_combine( $t_query_redirect_url,
-		[ 'error_msg' => lang_get( 'query_store_error' ) ] );
+		['error_msg' => lang_get( 'query_store_error' )] );
 	print_header_redirect( $t_query_redirect_url );
 } else {
 	# Build a redirect to view_all_set to load the filter that was saved.
 	# This will make the filter name appear as selected in the filter selection box.
-	$t_params = array(
+	$t_params = [
 		'type' => 3,
 		'source_query_id' => $t_new_row_id
-	);
+	];
 	if( filter_is_temporary( $t_filter ) ) {
 		$t_params['filter'] = filter_get_temporary_key( $t_filter );
 	}

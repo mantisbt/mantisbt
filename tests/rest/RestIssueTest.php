@@ -125,18 +125,18 @@ class RestIssueTest extends RestBase {
 	 * @return void
 	 */
 	public function testUpdateIssueStatusEnforcesWorkflow() {
-		$this->savedStatusWorkflow = $this->setConfig( 'status_enum_workflow', array(
+		$this->savedStatusWorkflow = $this->setConfig( 'status_enum_workflow', [
 			NEW_ => FEEDBACK . ':feedback',
-		) );
+		] );
 		$this->statusWorkflowSaved = true;
 
 		$t_response = $this->builder()->post( '/issues', $this->getIssueToAdd() )->send();
 		$t_issue = $this->getJson( $t_response, HTTP_STATUS_CREATED )->issue;
 		$this->deleteIssueAfterRun( $t_issue->id );
 
-		$t_response = $this->builder()->patch( '/issues/' . $t_issue->id, array(
-			'status' => array( 'id' => ACKNOWLEDGED ),
-		) )->send();
+		$t_response = $this->builder()->patch( '/issues/' . $t_issue->id, [
+			'status' => ['id' => ACKNOWLEDGED],
+		] )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 		$t_error = json_decode( $t_response->getBody(), true );
 		$this->assertStringContainsString( 'Status transition', $t_error['message'] );
@@ -145,9 +145,9 @@ class RestIssueTest extends RestBase {
 		$t_issue = $this->getJson( $t_response )->issues[0];
 		$this->assertEquals( NEW_, $t_issue->status->id );
 
-		$t_response = $this->builder()->patch( '/issues/' . $t_issue->id, array(
-			'status' => array( 'id' => FEEDBACK ),
-		) )->send();
+		$t_response = $this->builder()->patch( '/issues/' . $t_issue->id, [
+			'status' => ['id' => FEEDBACK],
+		] )->send();
 		$t_issue = $this->getJson( $t_response )->issues[0];
 		$this->assertEquals( FEEDBACK, $t_issue->status->id );
 	}
@@ -155,7 +155,7 @@ class RestIssueTest extends RestBase {
 	public function testCreateIssueWithLongText() {
 		$t_long_text = str_repeat( 'x', config_get_global( 'max_textarea_length' ) );
 
-		$t_fields = [ 'description', 'steps_to_reproduce', 'additional_information' ];
+		$t_fields = ['description', 'steps_to_reproduce', 'additional_information'];
 		foreach( $t_fields as $t_field ) {
 			$t_issue_to_add = $this->getIssueToAdd( $t_field );
 
@@ -238,7 +238,7 @@ class RestIssueTest extends RestBase {
 
 		$t_response = $this->builder()->patch(
 			'/issues/' . $t_issue_id,
-			array( 'summary' => $t_issue_to_add['summary'] . "\rsecond line" )
+			['summary' => $t_issue_to_add['summary'] . "\rsecond line"]
 		)->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
 			'Updating an issue with a multiline summary should fail'
@@ -336,7 +336,7 @@ class RestIssueTest extends RestBase {
 		$t_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
+		$t_issue_to_add['version'] = ['name' => $t_version_name];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -362,7 +362,7 @@ class RestIssueTest extends RestBase {
 		$t_version_id = $this->versions[0]['id'];
 
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
+		$t_issue_to_add['version'] = ['id' => $t_version_id];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -390,7 +390,7 @@ class RestIssueTest extends RestBase {
 		$t_correct_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'id' => $t_version_id, 'name' => $t_wrong_version_name );
+		$t_issue_to_add['version'] = ['id' => $t_version_id, 'name' => $t_wrong_version_name];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -414,7 +414,7 @@ class RestIssueTest extends RestBase {
 		# Test case assumes webservice_error_when_version_not_found = ON.
 		$t_version_id = 10000;
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
+		$t_issue_to_add['version'] = ['id' => $t_version_id];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -425,7 +425,7 @@ class RestIssueTest extends RestBase {
 		# Test case assumes webservice_error_when_version_not_found = ON.
 		$t_version_name = 'VersionNotFound';
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
+		$t_issue_to_add['version'] = ['name' => $t_version_name];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 
@@ -448,7 +448,7 @@ class RestIssueTest extends RestBase {
 	 */
 	public function testCreateIssueWithTagNotExisting() {
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
+		$t_issue_to_add['tags'] = [['name' => $this->tag_name]];
 
 		# Change threshold to disable tag creation
 		$t_threshold = config_set( 'tag_create_threshold', NOBODY );
@@ -472,7 +472,7 @@ class RestIssueTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 
 		# Tag by name
-		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
+		$t_issue_to_add['tags'] = [['name' => $this->tag_name]];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
@@ -482,7 +482,7 @@ class RestIssueTest extends RestBase {
 		# Tag by id
 		# TODO: replace internal call by GET /tag request when implemented (see #32863)
 		$t_tag = tag_get_by_name( $this->tag_name );
-		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag['id'] ) );
+		$t_issue_to_add['tags'] = [['id' => $t_tag['id']]];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$t_issue_id = $this->assertIssueCreatedWithTag( $t_response );
@@ -519,7 +519,7 @@ class RestIssueTest extends RestBase {
 	 */
 	public function testCreateIssueWithTagInvalid( $p_tag, $p_status_code ) {
 		$t_issue_to_add = $this->getIssueToAdd();
-		$t_issue_to_add['tags'] = array( $p_tag );
+		$t_issue_to_add['tags'] = [$p_tag];
 
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$this->assertEquals( $p_status_code, $t_response->getStatusCode() );
@@ -537,27 +537,27 @@ class RestIssueTest extends RestBase {
 	 *
 	 */
 	public static function providerTagsInvalid() {
-		return array(
-			'EmptyTagElement' => array(
-				array(),
+		return [
+			'EmptyTagElement' => [
+				[],
 				HTTP_STATUS_BAD_REQUEST
-			),
+			],
 
-			'NotATagElement' => array(
-				array( 'what' => 'ever' ),
+			'NotATagElement' => [
+				['what' => 'ever'],
 				HTTP_STATUS_BAD_REQUEST
-			),
+			],
 
-			'InvalidTagId' => array(
-				array( 'id' => -1 ),
+			'InvalidTagId' => [
+				['id' => -1],
 				HTTP_STATUS_NOT_FOUND
-			),
+			],
 
-			'EmptyTagName' => array(
-				array( 'name' => '' ),
+			'EmptyTagName' => [
+				['name' => ''],
 				HTTP_STATUS_BAD_REQUEST
-			),
-		);
+			],
+		];
 	}
 
 	public function testTagAttachDetach() {
@@ -742,7 +742,7 @@ class RestIssueTest extends RestBase {
 	private function getTagData(): array {
 		return [
 			'tags' => [
-				[ 'name' => $this->tag_name ],
+				['name' => $this->tag_name],
 			]
 		];
 	}

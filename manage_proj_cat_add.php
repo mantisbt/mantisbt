@@ -65,7 +65,7 @@ $f_add_and_edit	= gpc_get_bool( 'add_and_edit_category' );
 if( is_blank( $f_name ) ) {
 	throw new ClientException( "Category is required",
 		ERROR_EMPTY_FIELD,
-		[ lang_get( 'category' ) ]
+		[lang_get( 'category' )]
 	);
 }
 
@@ -84,8 +84,8 @@ foreach( $t_names as $t_name ) {
 	$t_name = trim( $t_name );
 	if( category_is_unique( $f_project_id, $t_name ) ) {
 		$t_data = [
-			'query' => [ 'project_id' => $f_project_id ],
-			'payload' => [ 'name' => $t_name ],
+			'query' => ['project_id' => $f_project_id],
+			'payload' => ['name' => $t_name],
 		];
 		$t_command = new CategoryAddCommand( $t_data );
 		$t_result = $t_command->execute();

@@ -126,7 +126,7 @@ class RestIssueUpdateCategory extends RestBase
 
 			# By Name
 			[['name' => ''], HTTP_STATUS_NOT_FOUND],
-			[['name' => 'General' ], HTTP_STATUS_SUCCESS, 1],
+			[['name' => 'General'], HTTP_STATUS_SUCCESS, 1],
 			[['name' => 'Non-existing category'], HTTP_STATUS_NOT_FOUND],
 		];
 	}

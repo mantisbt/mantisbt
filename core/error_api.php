@@ -53,7 +53,7 @@ require_api( 'lang_api.php' );
  *
  * @global array $g_error_parameters
  */
-$g_error_parameters = array();
+$g_error_parameters = [];
 
 /**
  * Determine if inline warnings should be printed immediately (true)
@@ -71,7 +71,7 @@ $g_error_delay_reporting = true;
  * List of delayed error messages to be printed at page bottom.
  * @global array $g_errors_delayed
  */
-$g_errors_delayed = array();
+$g_errors_delayed = [];
 
 $g_error_handled = false;
 $g_error_proceed_url = null;
@@ -519,7 +519,7 @@ function error_print_delayed() {
 		}
 		echo "\n" . '</div>';
 
-		$g_errors_delayed = array();
+		$g_errors_delayed = [];
 	}
 
 	# Make sure any subsequent inline errors are displayed
@@ -572,7 +572,7 @@ function error_stack_trace_as_string( $p_exception = null ) {
 			( $t_frame['type'] ?? '-' ) . ' - ' .
 			( $t_frame['function'] ?? '-' );
 
-		$t_args = array();
+		$t_args = [];
 		if( !empty( $t_frame['args'] ) ) {
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
@@ -619,12 +619,12 @@ function error_print_stack_trace( $p_exception = null ) {
 <?php
 	foreach( $t_stack as $t_id => $t_frame ) {
 		if( !empty( $t_frame['args'] ) ) {
-			$t_args = array();
+			$t_args = [];
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
 		} else {
-			$t_args = array( '-' );
+			$t_args = ['-'];
 		}
 
 		printf(
@@ -657,7 +657,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 	}
 
 	if( is_array( $p_param ) ) {
-		$t_results = array();
+		$t_results = [];
 
 		foreach( $p_param as $t_key => $t_value ) {
 			$t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
@@ -665,7 +665,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 
 		return '<array> { ' . implode( ', ', $t_results ) . ' }';
 	} else if( is_object( $p_param ) ) {
-		$t_results = array();
+		$t_results = [];
 
 		$t_class_name = get_class( $p_param );
 		$t_inst_vars = get_object_vars( $p_param );
@@ -742,8 +742,8 @@ function error_string( $p_error, ?array $p_params = null ) {
 		# error messages even if core is not fully initialized.
 		# Modified to allow <br> tags
 		$t_value = preg_replace(
-			[ '/&amp;(#[0-9]+|[a-z]+);/i', '|&lt;(br)\s*/?&gt;|i' ],
-			[ '&$1;', '<&$1>' ],
+			['/&amp;(#[0-9]+|[a-z]+);/i', '|&lt;(br)\s*/?&gt;|i'],
+			['&$1;', '<&$1>'],
 			@htmlspecialchars( $t_value, ENT_COMPAT, 'UTF-8' )
 		);
 	}

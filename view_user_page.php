@@ -67,7 +67,7 @@ $t_row = user_get_row( $f_user_id );
 if( !$t_row ) {
 	throw new ClientException( "User '$f_user_id' not found",
 		ERROR_USER_BY_ID_NOT_FOUND,
-		[ $f_user_id ]
+		[$f_user_id]
 	);
 }
 
@@ -233,8 +233,8 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 <?php
 if( $t_timeline_view_threshold_access ) {
 	# Build a filter to show all bugs in current projects
-	$g_timeline_filter = array();
-	$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+	$g_timeline_filter = [];
+	$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = [META_FILTER_NONE];
 	$g_timeline_filter = filter_ensure_valid_filter( $g_timeline_filter );
 	$g_timeline_user = $f_user_id;
 	?>

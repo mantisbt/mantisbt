@@ -56,8 +56,8 @@ require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
-$g_cache_project = array();
-$g_cache_project_missing = array();
+$g_cache_project = [];
+$g_cache_project_missing = [];
 $g_cache_project_all = false;
 
 use Mantis\Exceptions\ClientException;
@@ -121,7 +121,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 		$g_cache_project_missing[$c_project_id] = true;
 
 		if( $p_trigger_errors ) {
-			throw new ClientException( "Project #$p_project_id not found", ERROR_PROJECT_NOT_FOUND, array( $p_project_id ) );
+			throw new ClientException( "Project #$p_project_id not found", ERROR_PROJECT_NOT_FOUND, [$p_project_id] );
 		}
 
 		return false;
@@ -141,7 +141,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 function project_cache_array_rows( array $p_project_id_array ) {
 	global $g_cache_project, $g_cache_project_missing;
 
-	$c_project_id_array = array();
+	$c_project_id_array = [];
 	foreach( $p_project_id_array as $t_project_id ) {
 		$c_id = (int)$t_project_id;
 		if( !isset( $g_cache_project[$c_id] ) && !isset( $g_cache_project_missing[$c_id] ) ) {
@@ -160,7 +160,7 @@ function project_cache_array_rows( array $p_project_id_array ) {
 	);
 	$t_query->execute();
 
-	$t_projects_found = array();
+	$t_projects_found = [];
 	while( $t_row = $t_query->fetch() ) {
 		$t_id = (int)$t_row['id'];
 		$g_cache_project[$t_id] = $t_row;
@@ -207,8 +207,8 @@ function project_clear_cache( $p_project_id = null ) {
 	global $g_cache_project, $g_cache_project_missing, $g_cache_project_all;
 
 	if( null === $p_project_id ) {
-		$g_cache_project = array();
-		$g_cache_project_missing = array();
+		$g_cache_project = [];
+		$g_cache_project_missing = [];
 	} else {
 		unset( $g_cache_project[(int)$p_project_id] );
 		unset( $g_cache_project_missing[(int)$p_project_id] );
@@ -257,7 +257,7 @@ function project_ensure_exists( $p_project_id ) {
 		throw new ClientException(
 			"Project $p_project_id not found",
 			ERROR_PROJECT_NOT_FOUND,
-			array( $p_project_id ) );
+			[$p_project_id] );
 	}
 }
 
@@ -384,7 +384,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 		$p_file_path = validate_project_file_path( $p_file_path );
 	}
 
-	$t_param = array(
+	$t_param = [
 		'name' => $t_name,
 		'status' => (int)$p_status,
 		'enabled' => $c_enabled,
@@ -392,7 +392,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 		'file_path' => $p_file_path,
 		'description' => $p_description,
 		'inherit_global' => $p_inherit_global,
-	);
+	];
 
 	$t_query = new DbQuery( 'INSERT INTO {project}
 		( ' . implode( ', ', array_keys( $t_param ) ) . ' )
@@ -511,7 +511,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		$p_file_path = validate_project_file_path( $p_file_path );
 	}
 
-	$t_param = array(
+	$t_param = [
 		'name' => $t_new_name,
 		'status' => (int)$p_status,
 		'enabled' => $c_enabled,
@@ -519,7 +519,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		'file_path' => $p_file_path,
 		'description' => $p_description,
 		'inherit_global' => $c_inherit_global,
-	);
+	];
 
 	$t_columns = '';
 	foreach( array_keys( $t_param ) as $t_col ) {
@@ -690,11 +690,11 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 
 	# Optimization when access_level is NOBODY
 	if( NOBODY == $p_access_level ) {
-		return array();
+		return [];
 	}
 
 	$t_on = ON;
-	$t_users = array();
+	$t_users = [];
 
 	$t_global_access_level = $p_access_level;
 	if( $c_project_id != ALL_PROJECTS && $p_include_global_users ) {
@@ -712,7 +712,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 					$t_global_access_level = array_intersect( $p_access_level, $t_private_project_threshold );
 				} else {
 					# private threshold is an array, but request is a number, use values in threshold higher than request
-					$t_global_access_level = array();
+					$t_global_access_level = [];
 					foreach( $t_private_project_threshold as $t_threshold ) {
 						if( $p_access_level <= $t_threshold ) {
 							$t_global_access_level[] = $t_threshold;
@@ -722,7 +722,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 			} else {
 				if( is_array( $p_access_level ) ) {
 					# private threshold is a number, but request is an array, use values in request higher than threshold
-					$t_global_access_level = array();
+					$t_global_access_level = [];
 					foreach( $p_access_level as $t_threshold ) {
 						if( $t_threshold >= $t_private_project_threshold ) {
 							$t_global_access_level[] = $t_threshold;
@@ -826,7 +826,7 @@ function project_get_upload_path( $p_project_id ) {
  * @throws ClientException
  */
 function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
-	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
+	project_add_users( $p_project_id, [$p_user_id => $p_access_level] );
 }
 
 /**
@@ -840,7 +840,7 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
  * @throws ClientException
  */
 function project_update_user_access( $p_project_id, $p_user_id, $p_access_level ) {
-	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
+	project_add_users( $p_project_id, [$p_user_id => $p_access_level] );
 }
 
 /**
@@ -859,7 +859,7 @@ function project_update_user_access( $p_project_id, $p_user_id, $p_access_level 
  * @noinspection PhpUnused
  */
 function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
-	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
+	project_add_users( $p_project_id, [$p_user_id => $p_access_level] );
 }
 
 /**
@@ -877,7 +877,7 @@ function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
  */
 function project_add_users( $p_project_id, array $p_changes ) {
 	# normalize input
-	$t_changes = array();
+	$t_changes = [];
 	foreach( $p_changes as $t_id => $t_value ) {
 		if( DEFAULT_ACCESS_LEVEL == $t_value ) {
 			$t_changes[(int)$t_id] = user_get_access_level( $t_id );
@@ -905,16 +905,16 @@ function project_add_users( $p_project_id, array $p_changes ) {
 			WHERE user_id = :user_id AND project_id = :project_id'
 		);
 		foreach( $t_updating as $t_id ) {
-			$t_params = array(
+			$t_params = [
 				'project_id' => $t_project_id,
 				'user_id' => (int)$t_id,
 				'new_value' => $t_changes[$t_id]
-			);
+			];
 			$t_update->execute( $t_params );
 			unset( $t_changes[$t_id] );
 
 			# Trigger event for user access modification on project
-			event_signal( 'EVENT_MANAGE_PROJECT_USER_UPDATE', array( 'user_id' => $t_id, 'project_id' => $p_project_id ) );
+			event_signal( 'EVENT_MANAGE_PROJECT_USER_UPDATE', ['user_id' => $t_id, 'project_id' => $p_project_id] );
 		}
 	}
 	# remaining items are for insert
@@ -924,11 +924,11 @@ function project_add_users( $p_project_id, array $p_changes ) {
 			VALUES :params'
 		);
 		foreach( $t_changes as $t_id => $t_value ) {
-			$t_insert->bind( 'params', array( $t_project_id, $t_id, $t_value ) );
+			$t_insert->bind( 'params', [$t_project_id, $t_id, $t_value] );
 			$t_insert->execute();
 
 			# Trigger event for user added on project
-			event_signal( 'EVENT_MANAGE_PROJECT_USER_CREATE', array( 'user_id' => $t_id, 'project_id' => $p_project_id ) );
+			event_signal( 'EVENT_MANAGE_PROJECT_USER_CREATE', ['user_id' => $t_id, 'project_id' => $p_project_id] );
 		}
 	}
 }
@@ -942,7 +942,7 @@ function project_add_users( $p_project_id, array $p_changes ) {
  * @return void
  */
 function project_remove_user( $p_project_id, $p_user_id ) {
-	project_remove_users( $p_project_id, array( $p_user_id ) );
+	project_remove_users( $p_project_id, [$p_user_id] );
 }
 
 /**
@@ -958,7 +958,7 @@ function project_remove_user( $p_project_id, $p_user_id ) {
  */
 function project_remove_users( $p_project_id, array $p_user_ids ) {
 	# normalize input
-	$t_user_ids = array();
+	$t_user_ids = [];
 	foreach( $p_user_ids as $t_id ) {
 		$t_user_ids[] = (int)$t_id;
 	}
@@ -968,7 +968,7 @@ function project_remove_users( $p_project_id, array $p_user_ids ) {
 
 	# Trigger event for each user deleted from project
 	foreach( $p_user_ids as $t_id ) {
-		event_signal( 'EVENT_MANAGE_PROJECT_USER_DELETE', array( 'user_id' => $t_id, 'project_id' => $p_project_id ) );
+		event_signal( 'EVENT_MANAGE_PROJECT_USER_DELETE', ['user_id' => $t_id, 'project_id' => $p_project_id] );
 	}
 
 	# Remove users from the project
@@ -1036,7 +1036,7 @@ function project_delete_all_files( $p_project_id ) {
  * @return string Fully formatted HTML link to the project
  * @throws ClientException
  */
-function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '', array $p_parents = array(), $p_indent = '' ) {
+function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '', array $p_parents = [], $p_indent = '' ) {
 	if( $p_parents ) {
 		$t_full_id = implode( ";", $p_parents ) . ';' . $p_project_id;
 		$t_indent = str_repeat( $p_indent, count( $p_parents ) ) . '&nbsp;';

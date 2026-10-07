@@ -72,7 +72,7 @@ class RestIssueEtagTest extends RestBase {
 	private function updateIssue( $p_summary ): ResponseInterface {
 		return $this->builder()->patch(
 			'/issues/' . $this->issue_id,
-			array( 'summary' => $p_summary )
+			['summary' => $p_summary]
 		)->send();
 	}
 
@@ -119,7 +119,7 @@ class RestIssueEtagTest extends RestBase {
 
 		$t_response = $this->builder()
 			->addHeader( 'If-Match', $t_etag )
-			->patch( '/issues/' . $this->issue_id, array( 'summary' => $t_summary ) )
+			->patch( '/issues/' . $this->issue_id, ['summary' => $t_summary] )
 			->send();
 
 		$t_result = $this->getJson( $t_response );
@@ -141,7 +141,7 @@ class RestIssueEtagTest extends RestBase {
 
 		$t_response = $this->builder()
 			->addHeader( 'If-Match', $t_stale_etag )
-			->patch( '/issues/' . $this->issue_id, array( 'summary' => $this->getTestName() . ' stale' ) )
+			->patch( '/issues/' . $this->issue_id, ['summary' => $this->getTestName() . ' stale'] )
 			->send();
 
 		$this->assertSame( HTTP_STATUS_PRECONDITION_FAILED, $t_response->getStatusCode() );

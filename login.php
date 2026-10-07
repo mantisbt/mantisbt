@@ -76,13 +76,13 @@ if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 		$t_return = 'account_page.php';
 	}
 
-	$t_redirect_url = helper_url_combine( 'login_cookie_test.php', [ 'return' => $t_return ] );
+	$t_redirect_url = helper_url_combine( 'login_cookie_test.php', ['return' => $t_return] );
 } else {
-	$t_query_args = array(
+	$t_query_args = [
 		'error' => 1,
 		'username' => $f_username,
 		'return' => $t_return,
-	);
+	];
 
 	if( $f_reauthenticate ) {
 		$t_query_args['reauthenticate'] = 1;

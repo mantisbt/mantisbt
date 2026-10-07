@@ -73,7 +73,7 @@ class AntispamApiTest extends MantisCoreBase {
 	public static function provider_file_ensure_uploaded(): array {
 		return [
 			'SPAM'
-				=> [ [], 'rate limit' ],
+				=> [[], 'rate limit'],
 		];
 	}
 }

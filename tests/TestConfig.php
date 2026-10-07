@@ -39,7 +39,7 @@ function parse_config_global_vars( $p_file, array &$p_var_list ) {
 	$t_tokens = token_get_all( $t_contents );
 
 	if( !is_array( $p_var_list ) ) {
-		$p_var_list = array();
+		$p_var_list = [];
 	}
 
 	# Store all distinct T_VARIABLE tokens with 'g_' prefix
@@ -68,7 +68,7 @@ function parse_config_global_vars( $p_file, array &$p_var_list ) {
  * @return void
  */
 function require_mantis_core() {
-	$t_var_list = array();
+	$t_var_list = [];
 	parse_config_global_vars( 'config_defaults_inc.php', $t_var_list );
 	parse_config_global_vars( 'config/config_inc.php', $t_var_list );
 
@@ -103,13 +103,13 @@ $g_mantisClasses = $g_mantisRoot . '/core/classes';
 $g_mantisTests = $g_mantisRoot . '/tests';
 
 # Prepend the application/ and tests/ directories to the include_path.
-$g_path = array(
+$g_path = [
 	$g_mantisRoot,
 	$g_mantisCore,
 	$g_mantisLibrary,
 	$g_mantisClasses,
 	get_include_path()
-);
+];
 set_include_path( implode( PATH_SEPARATOR, $g_path ) );
 
 # Unset global variables that are no longer needed.

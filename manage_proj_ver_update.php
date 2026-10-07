@@ -54,19 +54,19 @@ $f_new_version	= trim( $f_new_version );
 $t_version = version_get( $f_version_id );
 $t_timestamp = date_strtotime( $f_date_order );
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'project_id' => $t_version->project_id,
 		'version_id' => $f_version_id
-	),
-	'payload' => array(
+	],
+	'payload' => [
 		'name' => $f_new_version,
 		'description' => $f_description,
 		'released' => $f_released,
 		'obsolete' => $f_obsolete,
 		'timestamp' => date_timestamp_to_iso8601( $t_timestamp ),
-	)
-);
+	]
+];
 
 $t_command = new VersionUpdateCommand( $t_data );
 $t_command->execute();

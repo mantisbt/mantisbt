@@ -44,10 +44,10 @@ class CategoryDeleteCommandTest extends MantisCoreBase {
 		config_set( 'default_category_for_moves', $t_category_id, ALL_USERS, ALL_PROJECTS );
 
 		try {
-			$t_data = [ 'query' => [
+			$t_data = ['query' => [
 				'project_id' => 1,
 				'category_id' => $t_category_id,
-			] ];
+			]];
 			$t_command = new \CategoryDeleteCommand( $t_data );
 			$this->expectException( ClientException::class );
 			$this->expectExceptionCode( ERROR_CATEGORY_CANNOT_UPDATE_DEFAULT );

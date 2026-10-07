@@ -252,17 +252,17 @@ class ListPluginsForDisplay {
 	/**
 	 * @var AvailablePlugin[] List of available plugins (i.e. valid and not installed)
 	 */
-	protected array $available = array();
+	protected array $available = [];
 
 	/**
 	 * @var InstalledPlugin[] List of installed (registered) plugins
 	 */
-	protected array $installed = array();
+	protected array $installed = [];
 
 	/**
 	 * @var InvalidPluginForDisplay[] List of invalid plugins
 	 */
-	protected array $invalid = array();
+	protected array $invalid = [];
 
 	/**
 	 * PluginsListForDisplay constructor.

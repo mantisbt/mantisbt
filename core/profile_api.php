@@ -110,7 +110,7 @@ class ProfileData {
 			throw new ClientException(
 				"Profile #$p_profile_id not found",
 				ERROR_USER_PROFILE_NOT_FOUND,
-				array( $p_profile_id )
+				[$p_profile_id]
 			);
 		}
 
@@ -296,7 +296,7 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 	if( is_blank( $p_platform ) ) {
 		throw new ClientException( "platform is required",
 			ERROR_EMPTY_FIELD,
-			[ lang_get( 'platform' ) ]
+			[lang_get( 'platform' )]
 		);
 	}
 
@@ -304,7 +304,7 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 	if( is_blank( $p_os ) ) {
 		throw new ClientException( "os is required",
 			ERROR_EMPTY_FIELD,
-			[ lang_get( 'os' ) ]
+			[lang_get( 'os' )]
 		);
 	}
 
@@ -312,7 +312,7 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 	if( is_blank( $p_os_build ) ) {
 		throw new ClientException( "version is required",
 			ERROR_EMPTY_FIELD,
-			[ lang_get( 'version' ) ]
+			[lang_get( 'version' )]
 		);
 	}
 

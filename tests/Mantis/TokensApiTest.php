@@ -61,9 +61,9 @@ final class TokensApiTest extends MantisCoreBase {
 		# The order of the array keys must match the order of the rows in the database schema
 		$t_now = db_now();
 		$this->tokens = [
-			[ self::KNOWN_OWNER, TOKEN_USER, 'normal_user',  $t_now, $t_now + TOKEN_EXPIRY ],
-			[ self::KNOWN_OWNER, TOKEN_FILTER, 'expired_filter', $t_now, $t_now - 1 ],
-			[ self::KNOWN_OWNER, TOKEN_UNKNOWN, 'expired_unknown', $t_now, $t_now - 1 ],
+			[self::KNOWN_OWNER, TOKEN_USER, 'normal_user',  $t_now, $t_now + TOKEN_EXPIRY],
+			[self::KNOWN_OWNER, TOKEN_FILTER, 'expired_filter', $t_now, $t_now - 1],
+			[self::KNOWN_OWNER, TOKEN_UNKNOWN, 'expired_unknown', $t_now, $t_now - 1],
 		];
 
 		# Insert test tokens
@@ -72,7 +72,7 @@ final class TokensApiTest extends MantisCoreBase {
 			db_query( 'INSERT INTO {tokens} ( owner, type, value, timestamp, expiry ) VALUES ( '
 				. db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )'
 				, $t_token );
-			$t_token = array_merge( [ db_insert_id( db_get_table( 'tokens' ) ) ], $t_token );
+			$t_token = array_merge( [db_insert_id( db_get_table( 'tokens' ) )], $t_token );
 		}
 		unset( $t_token );
 	}
@@ -88,7 +88,7 @@ final class TokensApiTest extends MantisCoreBase {
 
 		foreach( $this->tokens as $t_token ) {
 			db_param_push();
-			db_query( 'DELETE FROM {tokens} WHERE id = ' . db_param(), [ $t_token[self::ROW_ID] ] );
+			db_query( 'DELETE FROM {tokens} WHERE id = ' . db_param(), [$t_token[self::ROW_ID]] );
 		}
 	}
 
@@ -409,7 +409,7 @@ final class TokensApiTest extends MantisCoreBase {
 		$this->assertEquals( $t_token['value'], 'created', 'The created token value must be set.' );
 
 		# Cleanup
-		$this->tokens []= [ $t_id ];
+		$this->tokens []= [$t_id];
 	}
 
 	/**
@@ -448,6 +448,6 @@ final class TokensApiTest extends MantisCoreBase {
 		$this->assertEquals( $t_token['value'], 'set', 'The created token value must be set.' );
 
 		# Cleanup
-		$this->tokens []= [ $t_id ];
+		$this->tokens []= [$t_id];
 	}
 }

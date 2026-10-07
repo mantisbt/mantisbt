@@ -63,9 +63,9 @@ class GravatarPlugin extends MantisPlugin {
 		$this->page = '';
 
 		$this->version = MANTIS_VERSION;
-		$this->requires = array(
+		$this->requires = [
 			'MantisCore' => '2.0.0',
-		);
+		];
 
 		$this->author = 'Victor Boctor';
 		$this->contact = 'vboctor@mantisbt.org';
@@ -77,7 +77,7 @@ class GravatarPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function config() {
-		return array(
+		return [
 			/**
 			 * The rating of the avatar to show: 'G', 'PG', 'R', 'X'
 			 * @link https://en.gravatar.com/site/implement/images/
@@ -93,17 +93,17 @@ class GravatarPlugin extends MantisPlugin {
 			 *   "http:/path/to/unknown.jpg" or "%path%images/avatar.png")
 			 */
 			'default_avatar' => self::GRAVATAR_DEFAULT_IDENTICON
-		);
+		];
 	}
 
 	/**
 	 * Register event hooks for plugin.
 	 */
 	function hooks() {
-		return array(
+		return [
 			'EVENT_USER_AVATAR' => 'user_get_avatar',
 			'EVENT_CORE_HEADERS' => 'csp_headers',
-		);
+		];
 	}
 
 	/**
@@ -145,11 +145,11 @@ class GravatarPlugin extends MantisPlugin {
 		$t_avatar_url = self::GRAVATAR_URL .
 			'avatar/' . $t_email_hash . '?' .
 			http_build_query(
-				array(
+				[
 					'd' => $t_default_avatar,
 					'r' => $t_rating,
 					's' => $p_size,
-				)
+				]
 			);
 
 		$t_avatar = new Avatar();

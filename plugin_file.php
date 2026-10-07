@@ -59,7 +59,7 @@ $t_regex = '/^'
 if( !preg_match( $t_regex, $f_file, $t_matches ) ) {
 	throw new ClientException( "Invalid Plugin file '$f_file'",
 		ERROR_PLUGIN_INVALID_FILE,
-		[ $f_file ]
+		[$f_file]
 	);
 }
 

@@ -62,20 +62,20 @@ final class UrlCombineTest extends MantisCoreBase {
 	 */
 	public static function providerUrlCombine(): array {
 		return [
-			'Error parameter (null)' => [ null, null, \TypeError::class ],
-			'Error parameter (array)' => [ [], null, \TypeError::class ],
-			'Empty parameter (null)' => [ '', null, '' ],
-			'Empty parameter (string)' => [ '', '', '' ],
-			'Empty parameter (array)' => [ '', [], '' ],
-			'String parameter (page only)' => [ 'page', '', 'page' ],
-			'String parameter (query only)' => [ '', 'query', '?query' ],
-			'String parameter (page? only)' => [ 'page?', '', 'page?' ],
-			'String parameter (page + query)' => [ 'page', 'query', 'page?query' ],
-			'String parameter (page? + query)' => [ 'page?', 'query', 'page?query' ],
-			'String parameter (full)' => [ 'page?query1', 'query2', 'page?query1&query2' ],
-			'Array parameter (empty)' => [ 'page', [], 'page' ],
-			'Array parameter (full)' => [ 'page', [ 'query1' => 'value1', 'query2' => 'value2', ], 'page?query1=value1&query2=value2' ],
-			'Array parameter (urlencode)' => [ 'page', [ '<query~> &?=' => '<value~> &?=' ], 'page?%3Cquery~%3E%20%26%3F%3D=%3Cvalue~%3E%20%26%3F%3D' ],
+			'Error parameter (null)' => [null, null, \TypeError::class],
+			'Error parameter (array)' => [[], null, \TypeError::class],
+			'Empty parameter (null)' => ['', null, ''],
+			'Empty parameter (string)' => ['', '', ''],
+			'Empty parameter (array)' => ['', [], ''],
+			'String parameter (page only)' => ['page', '', 'page'],
+			'String parameter (query only)' => ['', 'query', '?query'],
+			'String parameter (page? only)' => ['page?', '', 'page?'],
+			'String parameter (page + query)' => ['page', 'query', 'page?query'],
+			'String parameter (page? + query)' => ['page?', 'query', 'page?query'],
+			'String parameter (full)' => ['page?query1', 'query2', 'page?query1&query2'],
+			'Array parameter (empty)' => ['page', [], 'page'],
+			'Array parameter (full)' => ['page', ['query1' => 'value1', 'query2' => 'value2', ], 'page?query1=value1&query2=value2'],
+			'Array parameter (urlencode)' => ['page', ['<query~> &?=' => '<value~> &?='], 'page?%3Cquery~%3E%20%26%3F%3D=%3Cvalue~%3E%20%26%3F%3D'],
 		];
 	}
 }

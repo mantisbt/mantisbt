@@ -541,7 +541,7 @@ $g_email_notifications_verbose = OFF;
  * @see $g_notify_flags
  * @global array $g_default_notify_flags
  */
-$g_default_notify_flags = array(
+$g_default_notify_flags = [
 	'reporter'      => ON,
 	'handler'       => ON,
 	'monitor'       => ON,
@@ -550,7 +550,7 @@ $g_default_notify_flags = array(
 	'explicit'      => ON,
 	'threshold_min' => NOBODY,
 	'threshold_max' => NOBODY
-);
+];
 
 /**
  * Sets notifications overrides for specific actions/statuses.
@@ -592,11 +592,11 @@ $g_default_notify_flags = array(
  * @see $g_default_notify_flags
  * @global array $g_notify_flags
  */
-$g_notify_flags = array(
-	'new' => array(
+$g_notify_flags = [
+	'new' => [
 		'bugnotes'      => OFF,
-	),
-	'monitor' => array(
+	],
+	'monitor' => [
 		'reporter'      => OFF,
 		'handler'       => OFF,
 		'monitor'       => OFF,
@@ -604,8 +604,8 @@ $g_notify_flags = array(
 		'explicit'      => ON,
 		'threshold_min' => NOBODY,
 		'threshold_max' => NOBODY,
-	),
-);
+	],
+];
 
 /**
  * Whether user's should receive emails for their own actions.
@@ -678,7 +678,7 @@ $g_allow_blank_email = OFF;
  *
  * @global array $g_limit_email_domains
  */
-$g_limit_email_domains = array();
+$g_limit_email_domains = [];
 
 /**
  * This specifies the access level that is needed to get the mailto: links.
@@ -1035,7 +1035,7 @@ $g_default_language = 'auto';
  *
  * @global array $g_language_choices_arr
  */
-$g_language_choices_arr = array(
+$g_language_choices_arr = [
 	'auto',
 	'afrikaans',
 	'amharic',
@@ -1100,7 +1100,7 @@ $g_language_choices_arr = array(
 	'vietnamese',
 	'volapuk',
 	'zazaki',
-);
+];
 
 /**
  * Browser language mapping for 'auto' language selection.
@@ -1113,7 +1113,7 @@ $g_language_choices_arr = array(
  * @see lang_get_current_datetime_locale()
  * @global array $g_language_auto_map
  */
-$g_language_auto_map = array(
+$g_language_auto_map = [
 	'af' => 'afrikaans',
 	'am' => 'amharic',
 	'ar' => 'arabic',
@@ -1177,7 +1177,7 @@ $g_language_auto_map = array(
 	'vi' => 'vietnamese',
 	'vo' => 'volapuk',
 	'diq' => 'zazaki',
-);
+];
 
 /**
  * Fallback for automatic language selection.
@@ -1210,7 +1210,7 @@ $g_font_family = 'Open Sans';
  *
  * @global array $g_font_family_choices
  */
-$g_font_family_choices = array(
+$g_font_family_choices = [
 	'Amiko',
 	'Architects Daughter',
 	'Archivo Narrow',
@@ -1241,7 +1241,7 @@ $g_font_family_choices = array(
 	'Secular One',
 	'Ubuntu',
 	'Vollkorn'
-);
+];
 
 /**
  * List of fonts that are installed as part of MantisBT.
@@ -1250,11 +1250,11 @@ $g_font_family_choices = array(
  *
  * @global array $g_font_family_choices_local
  */
-$g_font_family_choices_local = array(
+$g_font_family_choices_local = [
 	'Montserrat',
 	'Open Sans',
 	'Poppins'
-);
+];
 
 #############################
 # MantisBT Display Settings #
@@ -1401,10 +1401,10 @@ $g_severity_significant_threshold = MAJOR;
  *
  * @global array $g_view_issues_page_columns
  */
-$g_view_issues_page_columns = array(
+$g_view_issues_page_columns = [
 	'selection', 'edit', 'priority', 'id', 'bugnotes_count', 'attachment_count',
 	'category_id', 'severity', 'status', 'last_updated', 'summary',
-);
+];
 
 /**
  * The default columns to be included in the Print Issues Page.
@@ -1413,10 +1413,10 @@ $g_view_issues_page_columns = array(
  *
  * @global array $g_print_issues_page_columns
  */
-$g_print_issues_page_columns = array(
+$g_print_issues_page_columns = [
 	'selection', 'priority', 'id', 'bugnotes_count', 'attachment_count',
 	'category_id', 'severity', 'status', 'last_updated', 'summary',
-);
+];
 
 /**
  * The default columns to be included in the CSV export.
@@ -1425,12 +1425,12 @@ $g_print_issues_page_columns = array(
  *
  * @global array $g_csv_columns
  */
-$g_csv_columns = array(
+$g_csv_columns = [
 	'id', 'project_id', 'reporter_id', 'handler_id', 'priority',
 	'severity', 'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
 	'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version'
-);
+];
 
 /**
  * The default columns to be included in the Excel export.
@@ -1439,12 +1439,12 @@ $g_csv_columns = array(
  *
  * @global array $g_excel_columns
  */
-$g_excel_columns = array(
+$g_excel_columns = [
 	'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity',
 	'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
 	'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version'
-);
+];
 
 /**
  * Show projects when in All Projects mode.
@@ -2028,7 +2028,7 @@ $g_reporter_summary_limit = 10;
  *
  * @global array $g_date_partitions
  */
-$g_date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365 );
+$g_date_partitions = [1, 2, 3, 7, 30, 60, 90, 180, 365];
 
 /**
  * Shows project '[project] category' when 'All Projects' is selected.
@@ -2055,7 +2055,7 @@ $g_view_summary_threshold = MANAGER;
  *
  * @global array $g_severity_multipliers
  */
-$g_severity_multipliers = array(
+$g_severity_multipliers = [
 	FEATURE => 1,
 	TRIVIAL => 2,
 	TEXT    => 3,
@@ -2064,7 +2064,7 @@ $g_severity_multipliers = array(
 	MAJOR   => 8,
 	CRASH   => 8,
 	BLOCK   => 10
-);
+];
 
 /**
  * Resolution multipliers used to determine reporters effectiveness.
@@ -2077,14 +2077,14 @@ $g_severity_multipliers = array(
  *
  * @global array $g_resolution_multipliers
  */
-$g_resolution_multipliers = array(
+$g_resolution_multipliers = [
 	UNABLE_TO_REPRODUCE => 2,
 	NOT_FIXABLE         => 1,
 	DUPLICATE           => 3,
 	NOT_A_BUG           => 5,
 	SUSPENDED           => 1,
 	WONT_FIX            => 1
-);
+];
 
 #############################
 # MantisBT Bugnote Settings #
@@ -2848,7 +2848,7 @@ $g_auto_set_status_to_assigned = ON;
  *
  * @global array $g_status_enum_workflow
  */
-$g_status_enum_workflow = array();
+$g_status_enum_workflow = [];
 
 ############################
 # Bug Attachments Settings #
@@ -2881,18 +2881,18 @@ $g_preview_attachments_inline_max_size = 256 * 1024;
  *
  * @global array $g_preview_text_extensions
  */
-$g_preview_text_extensions = array(
+$g_preview_text_extensions = [
 	'', 'txt', 'diff', 'patch'
-);
+];
 
 /**
  * Extensions for images that can be expanded inline.
  *
  * @global array $g_preview_image_extensions
  */
-$g_preview_image_extensions = array(
+$g_preview_image_extensions = [
 	'bmp', 'png', 'gif', 'jpg', 'jpeg'
-);
+];
 
 /**
  * Specifies the maximum width for the auto-preview feature.
@@ -3043,7 +3043,7 @@ $g_enable_product_build = OFF;
  *
  * @global array $g_bug_report_page_fields
  */
-$g_bug_report_page_fields = array(
+$g_bug_report_page_fields = [
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -3061,7 +3061,7 @@ $g_bug_report_page_fields = array(
 	'tags',
 	'target_version',
 	'view_state',
-);
+];
 
 /**
  * An array of optional fields to show on the bug view page.
@@ -3106,7 +3106,7 @@ $g_bug_report_page_fields = array(
  *
  * @global array $g_bug_view_page_fields
  */
-$g_bug_view_page_fields = array(
+$g_bug_view_page_fields = [
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -3136,7 +3136,7 @@ $g_bug_view_page_fields = array(
 	'tags',
 	'target_version',
 	'view_state',
-);
+];
 
 /**
  * An array of optional fields to show on the bug update page.
@@ -3179,7 +3179,7 @@ $g_bug_view_page_fields = array(
  *
  * @global array $g_bug_update_page_fields
  */
-$g_bug_update_page_fields = array(
+$g_bug_update_page_fields = [
 	'additional_info',
 	'category_id',
 	'date_submitted',
@@ -3207,7 +3207,7 @@ $g_bug_update_page_fields = array(
 	'summary',
 	'target_version',
 	'view_state',
-);
+];
 
 ##########################
 # MantisBT Misc Settings #
@@ -3630,7 +3630,7 @@ $g_set_bug_sticky_threshold = MANAGER;
  * );
  * @global array $g_set_status_threshold
  */
-$g_set_status_threshold = array( NEW_ => REPORTER );
+$g_set_status_threshold = [NEW_ => REPORTER];
 
 /**
  * Threshold at which a user can edit his/her own bugnotes.
@@ -3895,7 +3895,7 @@ $g_set_configuration_threshold = ADMINISTRATOR;
  *
  * @global array $g_status_colors
  */
-$g_status_colors = array(
+$g_status_colors = [
 	'new'          => '#fcbdbd', # red    (scarlet red #ef2929)
 	'feedback'     => '#e3b7eb', # purple (plum        #75507b)
 	'acknowledged' => '#ffcd85', # orange (orango      #f57900)
@@ -3903,7 +3903,7 @@ $g_status_colors = array(
 	'assigned'     => '#c2dfff', # blue   (sky blue    #729fcf)
 	'resolved'     => '#d2f5b0', # green  (chameleon   #8ae234)
 	'closed'       => '#c9ccc4'  # grey   (aluminum    #babdb6)
-);
+];
 
 /**
  * The padding level when displaying bug ids.
@@ -4316,7 +4316,7 @@ $g_logout_redirect_page = AUTH_PAGE_USERNAME;
  *
  * @global array $g_custom_headers
  */
-$g_custom_headers = array();
+$g_custom_headers = [];
 
 /**
  * Browser Caching Control.
@@ -4390,7 +4390,7 @@ $g_custom_field_edit_after_create = ON;
  *
  * @global array $g_main_menu_custom_options
  */
-$g_main_menu_custom_options = array();
+$g_main_menu_custom_options = [];
 
 #########
 # Icons #
@@ -4406,7 +4406,7 @@ $g_main_menu_custom_options = array();
  *
  * @global array $g_file_type_icons
  */
-$g_file_type_icons = array(
+$g_file_type_icons = [
 	''      => 'fa-file-text-o',
 	'7z'    => 'fa-file-archive-o',
 	'ace'   => 'fa-file-archive-o',
@@ -4466,7 +4466,7 @@ $g_file_type_icons = array(
 	'vsw'   => 'fa-file-o',
 	'vsx'   => 'fa-file-o',
 	'?'     => 'fa-file-o'
-);
+];
 
 /**
  * Content Types overrides.
@@ -4475,7 +4475,7 @@ $g_file_type_icons = array(
  *
  * @global array $g_file_download_content_type_overrides
  */
-$g_file_download_content_type_overrides = array(
+$g_file_download_content_type_overrides = [
 	'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 	'dotx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
 	'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -4483,7 +4483,7 @@ $g_file_download_content_type_overrides = array(
 	'potx' => 'application/vnd.openxmlformats-officedocument.presentationml.template',
 	'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 	'xltx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.template'
-);
+];
 
 /**
  * Icon associative arrays.
@@ -4492,24 +4492,24 @@ $g_file_download_content_type_overrides = array(
  *
  * @global array $g_status_icon_arr
  */
-$g_status_icon_arr = array(
+$g_status_icon_arr = [
 	NONE      => '',
 	LOW       => 'fa-chevron-down fa-lg green',
 	NORMAL    => 'fa-minus fa-lg orange2',
 	HIGH      => 'fa-chevron-up fa-lg red',
 	URGENT    => 'fa-arrow-up fa-lg red',
 	IMMEDIATE => 'fa-exclamation-triangle fa-lg red'
-);
+];
 
 /**
  * Sort direction to icon mapping.
  *
  * @global array $g_sort_icon_arr
  */
-$g_sort_icon_arr = array(
+$g_sort_icon_arr = [
 	ASCENDING  => 'fa-caret-up',
 	DESCENDING => 'fa-caret-down'
-);
+];
 
 ####################
 # My View Settings #
@@ -4529,7 +4529,7 @@ $g_my_view_bug_count = 10;
  *
  * @global array $g_my_view_boxes
  */
-$g_my_view_boxes = array(
+$g_my_view_boxes = [
 	'assigned'      => '1',
 	'unassigned'    => '2',
 	'reported'      => '3',
@@ -4539,7 +4539,7 @@ $g_my_view_boxes = array(
 	'feedback'      => '0',
 	'verify'        => '0',
 	'my_comments'   => '0'
-);
+];
 
 #############
 # RSS Feeds #
@@ -4706,7 +4706,7 @@ $g_forward_year_count = 4;
  *
  * @global array $g_custom_group_actions
  */
-$g_custom_group_actions = array();
+$g_custom_group_actions = [];
 
 ####################
 # Wiki Integration #
@@ -4950,7 +4950,7 @@ $g_manage_plugin_threshold = ADMINISTRATOR;
  *
  * @global array $g_plugin_mime_types
  */
-$g_plugin_mime_types = array(
+$g_plugin_mime_types = [
 	'css' => 'text/css',
 	'js'  => 'application/javascript',
 	'gif' => 'image/gif',
@@ -4959,7 +4959,7 @@ $g_plugin_mime_types = array(
 	'jpeg' => 'image/jpeg',
 	'svg' => 'image/svg+xml',
 	'webp' => 'image/webp'
-);
+];
 
 /**
  * Force installation and protection of certain plugins.
@@ -4979,7 +4979,7 @@ $g_plugin_mime_types = array(
  *
  * @global $g_plugins_force_installed
  */
-$g_plugins_force_installed = array();
+$g_plugins_force_installed = [];
 
 ############
 # Due Date #
@@ -5031,10 +5031,10 @@ $g_due_date_default = '';
  *
  * @global  array $g_due_date_warning_levels
  */
-$g_due_date_warning_levels = array(
+$g_due_date_warning_levels = [
 	0,
 	7 * SECONDS_PER_DAY,
-);
+];
 
 ################
 # Sub-projects #
@@ -5134,7 +5134,7 @@ $g_show_queries_count = OFF;
  *
  * @global array $g_display_errors
  */
-$g_display_errors = array();
+$g_display_errors = [];
 
 # Add developers defaults when server is localhost
 # Note: intentionally not using SERVER_ADDR as it's not guaranteed to exist
@@ -5237,7 +5237,7 @@ $g_show_log_threshold = ADMINISTRATOR;
  *
  * @global array $g_global_settings
  */
-$g_global_settings = array(
+$g_global_settings = [
 	'absolute_path',
 	'absolute_path_default_upload_folder',
 	'admin_checks',
@@ -5354,7 +5354,7 @@ $g_global_settings = array(
 	'wiki_engine',
 	'wiki_engine_url',
 	'wiki_root_namespace',
-);
+];
 
 /**
  * List of config options available via SOAP API.
@@ -5364,7 +5364,7 @@ $g_global_settings = array(
  *
  * @global array $g_public_config_names
  */
-$g_public_config_names = array(
+$g_public_config_names = [
 	'access_levels_enum_string',
 	'action_button_position',
 	'add_bugnote_threshold',
@@ -5745,7 +5745,7 @@ $g_public_config_names = array(
 	'wiki_root_namespace',
 	'window_title',
 	'wrap_in_preformatted_text'
-);
+];
 
 ############################
 # Webservice Configuration #

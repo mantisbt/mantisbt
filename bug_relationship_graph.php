@@ -175,11 +175,11 @@ layout_page_begin();
 			<!-- Legend -->
 			<div class="center widget-toolbox">
 <?php
-	$t_legend = array(
+	$t_legend = [
 		'related_to' => 'rel_related.png',
 		'blocks' => 'rel_dependant.png',
 		'duplicate_of' => 'rel_duplicate.png',
-	);
+	];
 	foreach( $t_legend as $t_key => $t_image ) {
 		$t_string = lang_get( $t_key );
 ?>

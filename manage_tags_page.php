@@ -67,9 +67,9 @@ $t_prefix_array = array_merge(
 	range( '0', '9' ), # With PHP < 8.3, this produces int[], not string[]
 );
 $t_prefix_array = array_merge(
-	[ TAGS_ALL => lang_get( 'filter_all' ) ],
+	[TAGS_ALL => lang_get( 'filter_all' )],
 	array_combine( $t_prefix_array, $t_prefix_array ),
-	[ TAGS_UNUSED => lang_get( 'filter_unused' ) ]
+	[TAGS_UNUSED => lang_get( 'filter_unused' )]
 );
 
 if( $f_filter === TAGS_ALL || $f_filter === TAGS_UNUSED ) {
@@ -184,13 +184,13 @@ print_manage_menu( 'manage_tags_page.php' );
 					print_form_button(
 						'tag_update_page.php',
 						lang_get( 'edit' ),
-						[ 'tag_id' => $t_tag_row['id'] ],
+						['tag_id' => $t_tag_row['id']],
 						$t_security_token
 					);
 					print_form_button(
 						'tag_delete.php',
 						lang_get( 'delete' ),
-						[ 'tag_id' => $t_tag_row['id'] ],
+						['tag_id' => $t_tag_row['id']],
 						$t_security_token
 					);
 					?>

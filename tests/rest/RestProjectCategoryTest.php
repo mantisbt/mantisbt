@@ -75,7 +75,7 @@ class RestProjectCategoryTest extends RestBase {
 	 */
 	public function testProjectCategoryCrud() {
 		$t_name = 'REST category ' . rand( 1, 1000000 );
-		$t_category = $this->createCategory( [ 'name' => $t_name ] );
+		$t_category = $this->createCategory( ['name' => $t_name] );
 		$this->assertEquals( $t_name, $t_category['name'] );
 		$this->assertEquals( $this->getProjectId(), $t_category['project']['id'] );
 		$this->assertTrue( $t_category['enabled'] );
@@ -90,7 +90,7 @@ class RestProjectCategoryTest extends RestBase {
 		$this->assertTrue( $t_category['enabled'] );
 		$this->assertArrayNotHasKey( 'status', $t_category );
 
-		$t_response = $this->builder()->patch( $this->base_url . $t_id, [ 'name' => $t_name . ' updated' ] )->send();
+		$t_response = $this->builder()->patch( $this->base_url . $t_id, ['name' => $t_name . ' updated'] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$this->assertEquals( $t_name . ' updated', json_decode( $t_response->getBody(), true )['category']['name'] );
 
@@ -104,7 +104,7 @@ class RestProjectCategoryTest extends RestBase {
 	 * @return void
 	 */
 	public function testProjectCategoryList() {
-		$t_category = $this->createCategory( [ 'name' => 'REST listed category ' . rand( 1, 1000000 ) ] );
+		$t_category = $this->createCategory( ['name' => 'REST listed category ' . rand( 1, 1000000 )] );
 
 		$t_response = $this->builder()->get( $this->base_url )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
@@ -122,7 +122,7 @@ class RestProjectCategoryTest extends RestBase {
 	public function testProjectCategoryHandlerRequiresManageAccess() {
 		$t_category = $this->createCategory( [
 			'name' => 'REST hidden handler category ' . rand( 1, 1000000 ),
-			'handler' => [ 'id' => $this->userId ],
+			'handler' => ['id' => $this->userId],
 		] );
 		$t_project_id = $this->getProjectId();
 		$t_had_database_value = config_is_set_in_database( 'manage_project_threshold', ALL_USERS, $t_project_id );
@@ -152,7 +152,7 @@ class RestProjectCategoryTest extends RestBase {
 	public function testProjectCategoryHandlerAndEnabledFields() {
 		$t_category = $this->createCategory( [
 			'name' => 'REST assigned category ' . rand( 1, 1000000 ),
-			'handler' => [ 'id' => $this->userId ],
+			'handler' => ['id' => $this->userId],
 			'enabled' => false,
 		] );
 		$this->assertFalse( $t_category['enabled'] );
@@ -160,7 +160,7 @@ class RestProjectCategoryTest extends RestBase {
 		$this->assertEquals( $this->userId, $t_category['handler']['id'] );
 
 		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [
-			'handler' => [ 'name' => $this->userName ],
+			'handler' => ['name' => $this->userName],
 			'enabled' => true,
 		] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
@@ -170,7 +170,7 @@ class RestProjectCategoryTest extends RestBase {
 		$this->assertEquals( $this->getProjectId(), $t_category['project']['id'] );
 		$this->assertEquals( $this->userId, $t_category['handler']['id'] );
 
-		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'handler' => null ] )->send();
+		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], ['handler' => null] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_category = json_decode( $t_response->getBody(), true )['category'];
 		$this->assertArrayNotHasKey( 'handler', $t_category );
@@ -194,8 +194,8 @@ class RestProjectCategoryTest extends RestBase {
 		$this->assertArrayNotHasKey( 'status', $t_category );
 		$this->deleteCategory( $t_category['id'] );
 
-		$t_category = $this->createCategory( [ 'name' => 'REST status update category ' . rand( 1, 1000000 ) ] );
-		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'status' => CATEGORY_STATUS_DISABLED ] )->send();
+		$t_category = $this->createCategory( ['name' => 'REST status update category ' . rand( 1, 1000000 )] );
+		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], ['status' => CATEGORY_STATUS_DISABLED] )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
 		$t_updated_category = json_decode( $t_response->getBody(), true )['category'];
 		$this->assertTrue( $t_updated_category['enabled'] );
@@ -212,12 +212,12 @@ class RestProjectCategoryTest extends RestBase {
 	public function testProjectCategoryHandlerMustExist() {
 		$t_response = $this->builder()->post( $this->base_url, [
 			'name' => 'REST invalid handler ' . rand( 1, 1000000 ),
-			'handler' => [ 'id' => 1000000 ],
+			'handler' => ['id' => 1000000],
 		] )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 
-		$t_category = $this->createCategory( [ 'name' => 'REST update handler ' . rand( 1, 1000000 ) ] );
-		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'handler' => [ 'id' => 1000000 ] ] )->send();
+		$t_category = $this->createCategory( ['name' => 'REST update handler ' . rand( 1, 1000000 )] );
+		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], ['handler' => ['id' => 1000000]] )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode() );
 
 		$this->deleteCategory( $t_category['id'] );
@@ -230,9 +230,9 @@ class RestProjectCategoryTest extends RestBase {
 	 */
 	public function testProjectCategoryDuplicateName() {
 		$t_name = 'REST duplicate category ' . rand( 1, 1000000 );
-		$t_category = $this->createCategory( [ 'name' => $t_name ] );
+		$t_category = $this->createCategory( ['name' => $t_name] );
 
-		$t_response = $this->builder()->post( $this->base_url, [ 'name' => $t_name ] )->send();
+		$t_response = $this->builder()->post( $this->base_url, ['name' => $t_name] )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
 
 		$this->deleteCategory( $t_category['id'] );
@@ -277,9 +277,9 @@ class RestProjectCategoryTest extends RestBase {
 	 */
 	public function testProjectCategoryAnonymousAccess() {
 		$this->skipTestIfAnonymousDisabled();
-		$t_category = $this->createCategory( [ 'name' => 'REST anonymous category ' . rand( 1, 1000000 ) ] );
+		$t_category = $this->createCategory( ['name' => 'REST anonymous category ' . rand( 1, 1000000 )] );
 
-		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], [ 'name' => 'should fail' ] )->anonymous()->send();
+		$t_response = $this->builder()->patch( $this->base_url . $t_category['id'], ['name' => 'should fail'] )->anonymous()->send();
 		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );
 		$t_response = $this->builder()->delete( $this->base_url . $t_category['id'] )->anonymous()->send();
 		$this->assertEquals( HTTP_STATUS_FORBIDDEN, $t_response->getStatusCode() );

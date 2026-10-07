@@ -117,15 +117,15 @@ function auth_flags( $p_user_id = null, $p_username = '' ) {
 		$t_email = '';
 	}
 
-	$t_event_arguments = array(
+	$t_event_arguments = [
 		'user_id' => $t_user_id,
 		'username' => $t_username,
 		'email' => $t_email,
-	);
+	];
 
-	static $s_flags_cache = array();
+	static $s_flags_cache = [];
 	if( !isset( $s_flags_cache[$t_user_id] ) ) {
-		$t_flags = event_signal( 'EVENT_AUTH_USER_FLAGS', array( $t_event_arguments ) );
+		$t_flags = event_signal( 'EVENT_AUTH_USER_FLAGS', [$t_event_arguments] );
 
 		# Don't cache in case of user not in db.
 		if( $t_user_id ) {
@@ -296,7 +296,7 @@ function auth_can_set_password( $p_user_id = null ) {
 		return false;
 	}
 
-	return helper_call_custom_function( 'auth_can_change_password', array() );
+	return helper_call_custom_function( 'auth_can_change_password', [] );
 }
 
 /**
@@ -344,7 +344,7 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 			}
 			$p_return_page = $_SERVER['REQUEST_URI'];
 		}
-		print_header_redirect( auth_login_page( [ 'return' => $p_return_page ] ) );
+		print_header_redirect( auth_login_page( ['return' => $p_return_page] ) );
 	}
 }
 
@@ -823,12 +823,12 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 	}
 
 	$t_password = user_get_field( $p_user_id, 'password' );
-	$t_login_methods = array(
+	$t_login_methods = [
 		MD5,
 		CRYPT,
 		PLAIN,
 		BASIC_AUTH,
-	);
+	];
 
 	foreach( $t_login_methods as $t_login_method ) {
 		# pass the stored password in as the salt

@@ -65,7 +65,7 @@ $g_project_id = helper_get_current_project();
 $t_show_submit = false;
 
 $g_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access_levels_enum_string' ) );
-$g_overrides = array();
+$g_overrides = [];
 
 /**
  * Set overrides
@@ -186,7 +186,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 
 	$t_file = config_get_global( $p_threshold );
 	if( !is_array( $t_file ) ) {
-		$t_file_exp = array();
+		$t_file_exp = [];
 		foreach( $g_access_levels as $t_access_level => $t_label ) {
 			if( $t_access_level >= $t_file ) {
 				$t_file_exp[] = $t_access_level;
@@ -198,7 +198,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 
 	$t_global = config_get( $p_threshold, null, ALL_USERS, ALL_PROJECTS );
 	if( !is_array( $t_global ) ) {
-		$t_global_exp = array();
+		$t_global_exp = [];
 		foreach( $g_access_levels as $t_access_level => $t_label ) {
 			if( $t_access_level >= $t_global ) {
 				$t_global_exp[] = $t_access_level;
@@ -210,7 +210,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 
 	$t_project = config_get( $p_threshold );
 	if( !is_array( $t_project ) ) {
-		$t_project_exp = array();
+		$t_project_exp = [];
 		foreach( $g_access_levels as $t_access_level => $t_label ) {
 			if( $t_access_level >= $t_project ) {
 				$t_project_exp[] = $t_access_level;

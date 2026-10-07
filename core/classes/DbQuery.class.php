@@ -93,7 +93,7 @@ class DbQuery {
 	 * Array of values binded to anonymous parameters, indexed by numerical index.
 	 * @var array
 	 */
-	protected $query_autobind_array = array();
+	protected $query_autobind_array = [];
 
 	/**
 	 * Counter for assigning numerical indexes to anonymous parameters.
@@ -152,7 +152,7 @@ class DbQuery {
 	 * Array to manage late binding for IN constructs
 	 * @var array
 	 */
-	protected $late_binding_in_clause = array();
+	protected $late_binding_in_clause = [];
 
 	protected static $oracle_in_limit = 1000; # this could be a constant
 
@@ -317,12 +317,12 @@ class DbQuery {
 		global $g_db_log_queries, $g_queries_array;
 		if( ON == $g_db_log_queries ) {
 			$t_query_text = db_format_query_log_msg( $this->db_query_string, $this->db_param_array );
-			log_event( LOG_DATABASE, array( $t_query_text, $this->db_query_time ) );
+			log_event( LOG_DATABASE, [$t_query_text, $this->db_query_time] );
 		} else {
 			# If not logging the queries the actual text is not needed
 			$t_query_text = '';
 		}
-		array_push( $g_queries_array, array( $t_query_text, $this->db_query_time ) );
+		array_push( $g_queries_array, [$t_query_text, $this->db_query_time] );
 	}
 
 	/**
@@ -380,7 +380,7 @@ class DbQuery {
 		}
 
 		$this->db_query_string = strtr( $this->db_query_string,
-			array( '{' => $s_prefix, '}' => $s_suffix )
+			['{' => $s_prefix, '}' => $s_suffix]
 			);
 
 		# check parameters for special treatment of boolean types
@@ -412,13 +412,13 @@ class DbQuery {
 		# shortcut, if no values are binded, skip parameter replacement
 		if( empty( $this->query_autobind_array ) && empty( $this->query_bind_array ) ) {
 			$this->db_query_string = $this->query_string;
-			$this->db_param_array = array();
+			$this->db_param_array = [];
 		}
 
 		$t_query_string = $this->expanded_query_string;
 
 		$t_new_query = '';
-		$t_new_binds = array();
+		$t_new_binds = [];
 		$t_par_index = $p_counter_start;
 		$t_par_count = 0;
 		$t_parts = preg_split( '/(:[a-z0-9_]+)|(\$[0-9]+)/mi', $t_query_string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE );
@@ -439,7 +439,7 @@ class DbQuery {
 				}
 
 				if( is_array( $t_value ) ) {
-					$t_params_for_array = array();
+					$t_params_for_array = [];
 					foreach( $t_value as $t_array_item ) {
 						$t_params_for_array[] = $g_db->Param( $t_par_index );
 						$t_new_binds[$t_par_index] = $t_array_item;
@@ -485,7 +485,7 @@ class DbQuery {
 	 * @return string
 	 */
 	protected function helper_in_oracle_fix( $p_alias, array $p_values ) {
-		$t_in_tuples = array();
+		$t_in_tuples = [];
 		foreach( $p_values as $t_value ) {
 			$t_in_tuples[] = '(1,' . $this->param( $t_value ) . ')';
 		}
@@ -567,7 +567,7 @@ class DbQuery {
 			# is a label
 			# create placeholder for late binding
 			$t_new_index = count( $this->late_binding_in_clause );
-			$this->late_binding_in_clause[$t_new_index] = array();
+			$this->late_binding_in_clause[$t_new_index] = [];
 			$this->late_binding_in_clause[$t_new_index]['alias'] = $p_alias;
 			$this->late_binding_in_clause[$t_new_index]['label'] = $p_label_or_values;
 			$t_sql = '$in' . $t_new_index;
@@ -835,7 +835,7 @@ class DbQuery {
 		if( !$this->db_result ) {
 			return false;
 		}
-		$t_all_rows = array();
+		$t_all_rows = [];
 		while( $t_row = db_fetch_array( $this->db_result ) ) {
 			$t_all_rows[] = $t_row;
 		}

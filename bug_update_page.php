@@ -91,7 +91,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 if( bug_is_readonly( $f_bug_id ) ) {
 	throw new ClientException( "Issue is read-only",
 		ERROR_BUG_READ_ONLY_ACTION_DENIED,
-		[ $f_bug_id ]
+		[$f_bug_id]
 	);
 }
 
@@ -208,7 +208,7 @@ if( $t_top_buttons_enabled ) {
 		<table class="table table-bordered table-condensed table-striped">
 			<tbody>
 <?php
-event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $t_bug_id ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', [$t_bug_id] );
 
 if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $t_show_date_submitted | $t_show_last_updated ) {
 	#
@@ -646,7 +646,7 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 	echo '</tr>';
 }
 
-event_signal( 'EVENT_UPDATE_BUG_FORM', array( $t_bug_id ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM', [$t_bug_id] );
 
 print_table_spacer( 6 );
 
@@ -781,7 +781,7 @@ if( config_get( 'time_tracking_enabled' ) ) {
 	}
 }
 
-event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $t_bug_id ) );
+event_signal( 'EVENT_BUGNOTE_ADD_FORM', [$t_bug_id] );
 ?>
 </tbody>
 </table>

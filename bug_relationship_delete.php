@@ -43,12 +43,12 @@ form_security_validate( 'bug_relationship_delete' );
 $f_rel_id = gpc_get_int( 'rel_id' );
 $f_bug_id = gpc_get_int( 'bug_id' );
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'issue_id' => $f_bug_id,
 		'relationship_id' => $f_rel_id
-	)
-);
+	]
+];
 
 helper_ensure_confirmed( lang_get( 'delete_relationship_sure_msg' ), lang_get( 'delete' ) );
 

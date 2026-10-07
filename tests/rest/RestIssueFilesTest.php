@@ -156,10 +156,10 @@ class RestIssueFilesTest extends RestBase {
 	private function addFileAs( $p_issue_id, $p_username = null ) {
 		$t_builder = $this->builder()->post(
 			'/issues/' . $p_issue_id . '/files',
-			array( 'files' => array( array(
+			['files' => [[
 				'name' => 'delete-test.txt',
 				'content' => base64_encode( 'attachment to delete' ),
-			) ) )
+			]]]
 		);
 		if( $p_username !== null ) {
 			$t_builder->impersonate( $p_username );
@@ -196,11 +196,11 @@ class RestIssueFilesTest extends RestBase {
 	 * @return array User data.
 	 */
 	private function createReporter() {
-		$t_response = $this->builder()->post( '/users', array(
+		$t_response = $this->builder()->post( '/users', [
 			'name' => Faker::username(),
-			'access_level' => array( 'name' => 'reporter' ),
+			'access_level' => ['name' => 'reporter'],
 			'enabled' => true,
-		) )->send();
+		] )->send();
 		$this->deleteAfterRunUserIfCreated( $t_response );
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
 		return json_decode( $t_response->getBody(), true )['user'];

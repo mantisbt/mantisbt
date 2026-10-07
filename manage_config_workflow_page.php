@@ -68,7 +68,7 @@ $g_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 $g_can_change_workflow = ( $g_access >= config_get_access( 'status_enum_workflow' ) );
 $g_can_change_flags = $g_can_change_workflow;
-$g_overrides = array();
+$g_overrides = [];
 
 /**
  * Set overrides

@@ -146,7 +146,7 @@ abstract class CustomFieldCheck {
 	 */
 	public function execute( array $p_cfdef ) {
 		if( !$this->test( $p_cfdef, $t_result ) ) {
-			$this->results[$p_cfdef['name']] = array( $p_cfdef['id'], $t_result );
+			$this->results[$p_cfdef['name']] = [$p_cfdef['id'], $t_result];
 		}
 	}
 
