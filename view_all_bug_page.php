@@ -36,7 +36,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
 require_api( 'config_api.php' );
@@ -109,6 +109,6 @@ layout_page_header_end();
 layout_page_begin( __FILE__ );
 
 define( 'VIEW_ALL_INC_ALLOW', true );
-include( __DIR__ . '/view_all_inc.php' );
+include __DIR__ . '/view_all_inc.php';
 
 layout_page_end();

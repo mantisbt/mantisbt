@@ -1674,7 +1674,7 @@ function user_get_profile( $p_user_id, $p_profile_id ) {
 function user_is_login_request_allowed( $p_user_id ) {
 	$t_max_failed_login_count = config_get( 'max_failed_login_count' );
 	$t_failed_login_count = user_get_field( $p_user_id, 'failed_login_count' );
-	return( $t_failed_login_count < $t_max_failed_login_count || OFF == $t_max_failed_login_count );
+	return $t_failed_login_count < $t_max_failed_login_count || OFF == $t_max_failed_login_count ;
 }
 
 /**
@@ -1691,7 +1691,7 @@ function user_is_lost_password_request_allowed( $p_user_id ) {
 	}
 	$t_max_lost_password_in_progress_count = config_get( 'max_lost_password_in_progress_count' );
 	$t_lost_password_in_progress_count = user_get_field( $p_user_id, 'lost_password_request_count' );
-	return( $t_lost_password_in_progress_count < $t_max_lost_password_in_progress_count || OFF == $t_max_lost_password_in_progress_count );
+	return $t_lost_password_in_progress_count < $t_max_lost_password_in_progress_count || OFF == $t_max_lost_password_in_progress_count ;
 }
 
 /**

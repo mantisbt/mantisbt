@@ -36,7 +36,7 @@
  * @uses relationship_graph_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -205,4 +205,4 @@ $t_mantis_dir = __DIR__ . DIRECTORY_SEPARATOR;
 $t_file = __FILE__;
 
 define( 'BUG_VIEW_INC_ALLOW', true );
-include( __DIR__ . '/bug_view_inc.php' );
+include __DIR__ . '/bug_view_inc.php';

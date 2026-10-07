@@ -1223,7 +1223,7 @@ function bug_is_readonly( $p_bug_id ) {
  */
 function bug_is_resolved( $p_bug_id ) {
 	$t_bug = bug_get( $p_bug_id );
-	return( $t_bug->status >= config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id ) );
+	return $t_bug->status >= config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id ) ;
 }
 
 /**
@@ -1238,7 +1238,7 @@ function bug_is_resolved( $p_bug_id ) {
  */
 function bug_is_closed( $p_bug_id ) {
 	$t_bug = bug_get( $p_bug_id );
-	return( $t_bug->status >= config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id ) );
+	return $t_bug->status >= config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id ) ;
 }
 
 /**

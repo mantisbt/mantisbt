@@ -1283,5 +1283,5 @@ function auth_http_is_logout_pending() {
 	$t_cookie_name = config_get_global( 'logout_cookie' );
 	$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
-	return( $t_cookie > '' );
+	return $t_cookie > '' ;
 }

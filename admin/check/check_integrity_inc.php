@@ -31,15 +31,15 @@ if( !defined( 'CHECK_INTEGRITY_INC_ALLOW' ) ) {
 }
 
 # MantisBT Check API
-require_once( 'check_api.php' );
+require_once 'check_api.php';
 require_api( 'config_api.php' );
 
 $t_this_directory = __DIR__ . DIRECTORY_SEPARATOR;
 if( file_exists( $t_this_directory . 'integrity_release_blobs.php' ) ) {
-	require_once( $t_this_directory . 'integrity_release_blobs.php' );
+	require_once $t_this_directory . 'integrity_release_blobs.php';
 }
 if( file_exists( $t_this_directory . 'integrity_commit_blobs.php' ) ) {
-	require_once( $t_this_directory . 'integrity_commit_blobs.php' );
+	require_once $t_this_directory . 'integrity_commit_blobs.php';
 }
 
 /**

@@ -494,7 +494,7 @@ function filter_field_is_none( $p_field_value ) {
  * @return boolean true for "MYSELF" values and false for others.
  */
 function filter_field_is_myself( $p_field_value ) {
-	return( META_FILTER_MYSELF == $p_field_value ? true : false );
+	return META_FILTER_MYSELF == $p_field_value ? true : false ;
 }
 
 /**
@@ -551,7 +551,7 @@ function filter_valid_page_number( $p_page_number, $p_page_count ) {
  * @return integer
  */
 function filter_offset( $p_page_number, $p_per_page ) {
-	return( ( (int)$p_page_number -1 ) * (int)$p_per_page );
+	return ( (int)$p_page_number -1 ) * (int)$p_per_page ;
 }
 
 /**

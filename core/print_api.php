@@ -1704,7 +1704,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 	$t_page_links = 10;
 
-	echo( '<ul class="pagination small no-margin"> ' );
+	echo '<ul class="pagination small no-margin"> ' ;
 
 	# Next and Last links
 	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_key );
@@ -1724,7 +1724,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	$t_last_page = min( $t_last_page, $p_end );
 
 	if( $t_last_page < $p_end ) {
-		echo( '<li class="pull-right"><a> ... </a></li>' );
+		echo '<li class="pull-right"><a> ... </a></li>' ;
 	}
 
 	for( $i = $t_last_page;$i >= $t_first_page;$i-- ) {
@@ -1740,14 +1740,14 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	echo implode( '&#160;', $t_items );
 
 	if( $t_first_page > 1 ) {
-		echo( '<li class="pull-right"><a> ... </a></li>' );
+		echo '<li class="pull-right"><a> ... </a></li>' ;
 	}
 
 	# First and previous links
 	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_key );
 	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_key );
 
-	echo( ' </ul>' );
+	echo ' </ul>' ;
 }
 
 /**
@@ -2326,18 +2326,18 @@ function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_sele
 	?>
 <select class="<?php echo $p_input_css ?>" name="<?php echo $p_select_name?>">
 <?php if( $p_include_any ) {?>
-<option value="<?php echo BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
+<option value="<?php echo BUG_REL_ANY ?>" <?php echo $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' ?>>[<?php echo lang_get( 'any' )?>]</option>
 <?php
 	}
 
 	if( $p_include_none ) {?>
-<option value="<?php echo BUG_REL_NONE ?>" <?php echo( $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'none' )?>]</option>
+<option value="<?php echo BUG_REL_NONE ?>" <?php echo $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' ?>>[<?php echo lang_get( 'none' )?>]</option>
 <?php
 	}
 
 	foreach( $g_relationships as $t_type => $t_relationship ) {
 		?>
-<option value="<?php echo $t_type?>"<?php echo( $p_default_rel_type == $t_type ? ' selected="selected"' : '' )?>><?php echo lang_get( $t_relationship['#description'] )?></option>
+<option value="<?php echo $t_type?>"<?php echo $p_default_rel_type == $t_type ? ' selected="selected"' : '' ?>><?php echo lang_get( $t_relationship['#description'] )?></option>
 <?php
 	}?>
 </select>

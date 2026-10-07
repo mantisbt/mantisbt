@@ -23,7 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( __DIR__ . '/mc_core.php' );
+require_once __DIR__ . '/mc_core.php';
 
 use Mantis\Exceptions\ClientException;
 
@@ -618,7 +618,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 		}
 	}
 
-	return ( count( $t_relationships ) == 0 ? null : $t_relationships );
+	return  count( $t_relationships ) == 0 ? null : $t_relationships ;
 }
 
 /**

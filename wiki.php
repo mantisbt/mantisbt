@@ -30,7 +30,7 @@
  * @uses wiki_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'bug_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );

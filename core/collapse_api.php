@@ -184,7 +184,7 @@ function is_collapsed( $p_block ) {
 		return false;
 	}
 
-	return( true == $g_collapse_cache_token[$p_block] );
+	return true == $g_collapse_cache_token[$p_block] ;
 }
 
 /**

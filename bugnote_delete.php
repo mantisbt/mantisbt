@@ -30,7 +30,7 @@
  * @uses string_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );

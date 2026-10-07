@@ -29,7 +29,7 @@ define( 'LANG_LOAD_DISABLED', true );
 # Use DIRECTORY_SEPARATOR to ensure a consistent display of the directory on Windows
 $t_mantis_dir = dirname( __DIR__ ) . DIRECTORY_SEPARATOR;
 
-require_once( $t_mantis_dir . 'core.php' );
+require_once $t_mantis_dir . 'core.php';
 
 $t_show_untranslated = gpc_get_bool( 'show_untranslated', false );
 $t_show_translation_errors = gpc_get_bool( 'translation_errors', false );

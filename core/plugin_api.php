@@ -94,7 +94,7 @@ $g_plugin_current = array();
  */
 function plugin_get_current() {
 	global $g_plugin_current;
-	return( $g_plugin_current[0] ?? null );
+	return $g_plugin_current[0] ?? null ;
 }
 
 /**
@@ -116,7 +116,7 @@ function plugin_push_current( $p_base_name ) {
  */
 function plugin_pop_current() {
 	global $g_plugin_current;
-	return( isset( $g_plugin_current[0] ) ? array_shift( $g_plugin_current ) : null );
+	return isset( $g_plugin_current[0] ) ? array_shift( $g_plugin_current ) : null ;
 }
 
 /**
@@ -224,7 +224,7 @@ function plugin_file_path( $p_filename = '', $p_base_name = '' ) {
 	}
 	$t_file_path .= $p_filename;
 
-	return( is_file( $t_file_path ) ? $t_file_path : false );
+	return is_file( $t_file_path ) ? $t_file_path : false ;
 }
 
 /**
@@ -596,7 +596,7 @@ function plugin_child( $p_child ) {
 function plugin_is_loaded( $p_base_name ) {
 	global $g_plugin_cache_init;
 
-	return ( isset( $g_plugin_cache_init[$p_base_name] ) && $g_plugin_cache_init[$p_base_name] );
+	return  isset( $g_plugin_cache_init[$p_base_name] ) && $g_plugin_cache_init[$p_base_name] ;
 }
 
 /**
@@ -736,7 +736,7 @@ function plugin_is_installed( $p_basename ) {
 	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {plugin} WHERE basename=' . db_param();
 	$t_result = db_query( $t_query, array( $p_basename ) );
-	return( 0 < db_result( $t_result ) );
+	return 0 < db_result( $t_result ) ;
 }
 
 /**
@@ -792,7 +792,7 @@ function plugin_needs_upgrade( MantisPlugin $p_plugin ) {
 	$t_config_option = 'plugin_' . $p_plugin->basename . '_schema';
 	$t_plugin_schema_version = config_get( $t_config_option, -1, ALL_USERS, ALL_PROJECTS );
 
-	return( $t_plugin_schema_version < count( $t_plugin_schema ) - 1 );
+	return $t_plugin_schema_version < count( $t_plugin_schema ) - 1 ;
 }
 
 /**
@@ -999,7 +999,7 @@ function plugin_include( $p_basename, $p_child = null ) {
 	}
 	$t_included = false;
 	if( is_file( $t_plugin_file ) ) {
-		include_once( $t_plugin_file );
+		include_once $t_plugin_file;
 		$t_included = true;
 	}
 
@@ -1029,7 +1029,7 @@ function plugin_require_api( $p_file, $p_basename = null ) {
 
 	$t_path = config_get_global( 'plugin_path' ) . $t_current . '/';
 
-	require_once( $t_path . $p_file );
+	require_once $t_path . $p_file;
 }
 
 /**

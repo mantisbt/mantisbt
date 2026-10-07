@@ -37,7 +37,7 @@ set_time_limit( 0 );
 # and plugins will not be loaded.
 const MANTIS_MAINTENANCE_MODE = true;
 
-require_once( dirname( __DIR__ ) . '/core.php' );
+require_once dirname( __DIR__ ) . '/core.php';
 require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
@@ -830,7 +830,7 @@ if( !$g_database_upgrade ) {
 		<label for="log_queries">Print SQL Queries instead of Writing to the Database</label>
 	</td>
 	<td>
-		<input id="log_queries" name="log_queries" type="checkbox" class="ace" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
+		<input id="log_queries" name="log_queries" type="checkbox" class="ace" value="1" <?php echo $f_log_queries ? 'checked="checked"' : '' ?>>
 		<span class="lbl"></span>
 	</td>
 </tr>
@@ -838,9 +838,9 @@ if( !$g_database_upgrade ) {
 <!-- Submit button -->
 <tr>
 	<td>
-		<?php echo ( $g_failed
+		<?php echo  $g_failed
 			? 'Please correct failed checks and try again'
-			: 'Attempt Installation' );
+			: 'Attempt Installation' ;
 		?>
 	</td>
 	<td>
@@ -968,7 +968,7 @@ if( 3 == $t_install_state ) {
 		config_set_global( 'db_table_plugin_prefix', $f_db_table_plugin_prefix );
 		config_set_global( 'db_table_suffix', $f_db_table_suffix );
 		# database_api references this
-		require_once( __DIR__ . '/schema.php' );
+		require_once __DIR__ . '/schema.php';
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 		if( !$f_log_queries ) {
@@ -1350,7 +1350,7 @@ if( 5 == $t_install_state ) {
 
 <tr>
 	<td>
-		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
+		<?php echo  $t_config_exists ? 'Updating' : 'Creating' ; ?>
 		Configuration File (config/config_inc.php)<br />
 	</td>
 <?php
@@ -1666,8 +1666,8 @@ if( $g_failed && $t_install_state != 1 ) {
 				? CONFIGURED_PASSWORD
 				: string_attribute( $f_admin_password );
 		?>">
-		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>">
-		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>">
+		<input name="log_queries" type="hidden" value="<?php echo $f_log_queries ? 1 : 0 ?>">
+		<input name="db_exists" type="hidden" value="<?php echo $f_db_exists ? 1 : 0 ?>">
 		<input name="retry" type="submit" class="btn btn-primary btn-white btn-round" value="Retry">
 </form>
 	</td>

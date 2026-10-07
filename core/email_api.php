@@ -76,8 +76,8 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-require_once( __DIR__ . '/classes/EmailMessage.class.php' );
-require_once( __DIR__ . '/classes/EmailSender.class.php' );
+require_once __DIR__ . '/classes/EmailMessage.class.php';
+require_once __DIR__ . '/classes/EmailSender.class.php';
 
 # PHPMailer is needed for email address validation independent of the provider used
 # to send the emails.

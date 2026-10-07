@@ -259,7 +259,7 @@ function db_get_type( $p_driver_type ) {
  */
 function db_is_mysql() {
 	global $g_db_functional_type;
-	return( DB_TYPE_MYSQL == $g_db_functional_type );
+	return DB_TYPE_MYSQL == $g_db_functional_type ;
 }
 
 /**
@@ -268,7 +268,7 @@ function db_is_mysql() {
  */
 function db_is_pgsql() {
 	global $g_db_functional_type;
-	return( DB_TYPE_PGSQL == $g_db_functional_type );
+	return DB_TYPE_PGSQL == $g_db_functional_type ;
 }
 
 /**
@@ -277,7 +277,7 @@ function db_is_pgsql() {
  */
 function db_is_mssql() {
 	global $g_db_functional_type;
-	return( DB_TYPE_MSSQL == $g_db_functional_type );
+	return DB_TYPE_MSSQL == $g_db_functional_type ;
 }
 
 /**
@@ -286,7 +286,7 @@ function db_is_mssql() {
  */
 function db_is_oracle() {
 	global $g_db_functional_type;
-	return( DB_TYPE_ORACLE == $g_db_functional_type );
+	return DB_TYPE_ORACLE == $g_db_functional_type ;
 }
 
 /**

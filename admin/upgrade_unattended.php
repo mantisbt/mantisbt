@@ -31,7 +31,7 @@ set_time_limit( 0 );
 # config_inc.php hasn't been specified. Thus the database will not be opened
 # and plugins will not be loaded.
 const MANTIS_MAINTENANCE_MODE = true;
-require_once( dirname( __DIR__ ) . '/core.php' );
+require_once dirname( __DIR__ ) . '/core.php';
 
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
@@ -104,7 +104,7 @@ error_reporting( $t_save );
 echo "OK\n";
 
 # install the tables
-require_once( __DIR__ . '/schema.php' );
+require_once __DIR__ . '/schema.php';
 global $g_db, $g_upgrade;
 
 echo "\nPost 1.0 schema changes\n";

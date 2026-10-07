@@ -22,7 +22,7 @@ use Mantis\Exceptions\ClientException;
 
 global $g_absolute_path;
 $t_soap_dir = $g_absolute_path . 'api/soap/';
-require_once( $t_soap_dir . 'mc_api.php' );
+require_once $t_soap_dir . 'mc_api.php';
 
 /**
  * A command that gets project versions.

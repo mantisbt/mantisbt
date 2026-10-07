@@ -672,7 +672,7 @@ echo '</div></div></div></div></div>';
 # User list sponsoring the bug
 if( $t_flags['sponsorships_show'] ) {
 	define( 'BUG_SPONSORSHIP_LIST_VIEW_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
+	include $t_mantis_dir . 'bug_sponsorship_list_view_inc.php';
 }
 
 # Bug Relationships
@@ -765,20 +765,20 @@ if( $t_flags['monitor_show'] ) {
 # Bugnotes and "Add Note" box
 if( 'ASC' == current_user_get_pref( 'bugnote_order' ) ) {
 	define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bugnote_view_inc.php' );
+	include $t_mantis_dir . 'bugnote_view_inc.php';
 
 	if( !$t_force_readonly ) {
 		define( 'BUGNOTE_ADD_INC_ALLOW', true );
-		include( $t_mantis_dir . 'bugnote_add_inc.php' );
+		include $t_mantis_dir . 'bugnote_add_inc.php';
 	}
 } else {
 	if( !$t_force_readonly ) {
 		define( 'BUGNOTE_ADD_INC_ALLOW', true );
-		include( $t_mantis_dir . 'bugnote_add_inc.php' );
+		include $t_mantis_dir . 'bugnote_add_inc.php';
 	}
 
 	define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bugnote_view_inc.php' );
+	include $t_mantis_dir . 'bugnote_view_inc.php';
 }
 
 # Allow plugins to display stuff after notes
@@ -788,7 +788,7 @@ event_signal( 'EVENT_VIEW_BUG_EXTRA', array( $f_issue_id ) );
 if( config_get( 'time_tracking_enabled' ) &&
 	access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_issue_id ) ) {
 	define( 'BUGNOTE_STATS_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bugnote_stats_inc.php' );
+	include $t_mantis_dir . 'bugnote_stats_inc.php';
 }
 
 # History
@@ -851,7 +851,7 @@ if( $t_flags['history_show'] && $f_history ) {
 					<?php echo string_attribute( $t_item['note'] ) ?>
 				</td>
 				<td class="small-caption">
-					<?php echo ( $t_item['raw'] ? string_display_line_links( $t_item['change'] ) : $t_item['change'] ) ?>
+					<?php echo  $t_item['raw'] ? string_display_line_links( $t_item['change'] ) : $t_item['change']  ?>
 				</td>
 			</tr>
 <?php

@@ -30,7 +30,7 @@ use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\ServiceException;
 use Mantis\Exceptions\StateException;
 
-require_once( __DIR__ . '/mc_core.php' );
+require_once __DIR__ . '/mc_core.php';
 
 /**
  * Get the issue attachment with the specified id.

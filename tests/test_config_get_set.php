@@ -27,7 +27,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( 'test.php' );
+require_once 'test.php';
 
 $t_config = 'main_menu_custom_options';
 $t_test = config_get( $t_config );

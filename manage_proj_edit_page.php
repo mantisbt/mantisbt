@@ -47,7 +47,7 @@
  * @uses version_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -360,7 +360,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 										<td class="center">
 											<label>
 												<input type="checkbox" class="ace" name="inherit_child_<?php echo $t_subproject_id ?>"
-													<?php echo ( $t_inherit_parent ? 'checked="checked"' : '' ) ?>  />
+													<?php echo  $t_inherit_parent ? 'checked="checked"' : ''  ?>  />
 												<span class="lbl"></span>
 											</label>
 										</td>

@@ -765,7 +765,7 @@ function error_string( $p_error, ?array $p_params = null ) {
 function error_handled() {
 	global $g_error_handled;
 
-	return( true == $g_error_handled );
+	return true == $g_error_handled ;
 }
 
 /**

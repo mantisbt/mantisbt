@@ -261,7 +261,7 @@ function news_get_rows( $p_project_id, $p_global = true ) {
  */
 function news_get_field( $p_news_id, $p_field_name ) {
 	$t_row = news_get_row( $p_news_id );
-	return( $t_row[$p_field_name] );
+	return $t_row[$p_field_name] ;
 }
 
 /**
@@ -273,7 +273,7 @@ function news_get_field( $p_news_id, $p_field_name ) {
  * @throws ClientException
  */
 function news_is_private( $p_news_id ) {
-	return( news_get_field( $p_news_id, 'view_state' ) == VS_PRIVATE );
+	return news_get_field( $p_news_id, 'view_state' ) == VS_PRIVATE ;
 }
 
 /**

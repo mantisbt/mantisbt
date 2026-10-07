@@ -180,7 +180,7 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 		$t_history[$k]['username'] = $v_username;
 	}
 
-	return( $t_history );
+	return $t_history ;
 }
 
 /**

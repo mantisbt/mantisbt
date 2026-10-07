@@ -46,7 +46,7 @@
  * @noinspection PhpUnhandledExceptionInspection
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -83,7 +83,7 @@ $t_custom_group_actions = config_get( 'custom_group_actions' );
 
 foreach( $t_custom_group_actions as $t_custom_group_action ) {
 	if( $f_action == $t_custom_group_action['action'] ) {
-		require_once( $t_custom_group_action['action_page'] );
+		require_once $t_custom_group_action['action_page'];
 		exit;
 	}
 }

@@ -436,7 +436,7 @@ function html_top_banner( bool $p_nested = false ) {
 		if( $p_nested ) {
 			echo '<div class="navbar navbar-fixed-top noprint">', "\n";
 		}
-		include( $t_page );
+		include $t_page;
 		if( $p_nested ) {
 			echo '</div>', "\n";
 		}
@@ -453,7 +453,7 @@ function html_bottom_banner() {
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 		echo '<div class="navbar-fixed-bottom noprint">', "\n";
-		include( $t_page );
+		include $t_page;
 		echo '</div>', "\n";
 	}
 }
@@ -999,7 +999,7 @@ function print_admin_menu_bar( $p_page ) {
 		$t_path = '../';
 	} else {
 		global $g_absolute_path, $g_upgrade;
-		require_once( $g_absolute_path . 'admin/schema.php' );
+		require_once $g_absolute_path . 'admin/schema.php';
 		if( count( $g_upgrade ) - 1 != config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS ) ) {
 			$t_menu_items['install.php'] = 'Upgrade your installation';
 		}

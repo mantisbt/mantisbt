@@ -41,7 +41,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -190,7 +190,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ . '/admin/
 	}
 
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
-	require_once( 'admin/schema.php' );
+	require_once 'admin/schema.php';
 	$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
 	if( ( 0 < $t_db_version ) &&
@@ -243,7 +243,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ . '/admin/
 			<?php if( $t_show_remember_me ) { ?>
 				<div class="clearfix">
 					<label for="remember-login" class="inline">
-						<input id="remember-login" type="checkbox" name="perm_login" class="ace" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?> />
+						<input id="remember-login" type="checkbox" name="perm_login" class="ace" <?php echo  $f_perm_login ? 'checked="checked" ' : ''  ?> />
 						<span class="lbl padding-6"><?php echo lang_get( 'save_login' ) ?></span>
 					</label>
 				</div>
@@ -251,7 +251,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ . '/admin/
 			<?php if( $t_session_validation ) { ?>
 				<div class="clearfix">
 					<label for="secure-session" class="inline">
-						<input id="secure-session" type="checkbox" name="secure_session" class="ace" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?> />
+						<input id="secure-session" type="checkbox" name="secure_session" class="ace" <?php echo  $t_default_secure_session ? 'checked="checked" ' : ''  ?> />
 						<span class="lbl padding-6"><?php echo lang_get( 'secure_session_long' ) ?></span>
 					</label>
 				</div>

@@ -41,7 +41,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
@@ -194,4 +194,4 @@ $t_mantis_dir = __DIR__ . DIRECTORY_SEPARATOR;
 $t_file = __FILE__;
 
 define( 'BUG_VIEW_INC_ALLOW', true );
-include( $t_mantis_dir . 'bug_view_inc.php' );
+include $t_mantis_dir . 'bug_view_inc.php';

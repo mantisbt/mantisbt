@@ -44,7 +44,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'bugnote_api.php' );

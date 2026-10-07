@@ -41,7 +41,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -151,7 +151,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 	<div class="space-10"></div>
 
 	<div id="config-edit-div">
-		<form id="config_set_form" method="post" action="<?php echo ( $t_modify? 'adm_config_set.php' : '' ) ?>">
+		<form id="config_set_form" method="post" action="<?php echo  $t_modify? 'adm_config_set.php' : ''  ?>">
 
 			<!-- Title -->
 			<div class="widget-box widget-color-blue2">

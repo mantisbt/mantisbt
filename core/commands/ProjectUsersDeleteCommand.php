@@ -23,7 +23,7 @@ require_api( 'helper_api.php' );
 require_api( 'user_api.php' );
 
 $t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
-require_once( $t_soap_dir . 'mc_api.php' );
+require_once $t_soap_dir . 'mc_api.php';
 
 /**
  * A command that remove user's access to a project. If user id 0 is specified, then all users will be

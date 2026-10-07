@@ -31,7 +31,7 @@ if( !defined( 'CHECK_DISPLAY_INC_ALLOW' ) ) {
 }
 
 # MantisBT Check API
-require_once( 'check_api.php' );
+require_once 'check_api.php';
 require_api( 'config_api.php' );
 require_api( 'graphviz_api.php' );
 

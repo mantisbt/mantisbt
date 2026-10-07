@@ -208,9 +208,9 @@ function access_cache_matrix_user( $p_user_id ) {
  */
 function access_compare_level( $p_user_access_level, $p_threshold = NOBODY ) {
 	if( is_array( $p_threshold ) ) {
-		return( in_array( $p_user_access_level, $p_threshold ) );
+		return in_array( $p_user_access_level, $p_threshold ) ;
 	} else {
-		return( $p_user_access_level >= $p_threshold );
+		return $p_user_access_level >= $p_threshold ;
 	}
 }
 
@@ -937,7 +937,7 @@ function access_threshold_min_level( $p_threshold ) {
 			return NOBODY;
 		} else {
 			sort( $p_threshold );
-			return( reset( $p_threshold ) );
+			return reset( $p_threshold ) ;
 		}
 	} else {
 		return $p_threshold;

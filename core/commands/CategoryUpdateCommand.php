@@ -19,7 +19,7 @@ require_api( 'constant_inc.php' );
 require_api( 'helper_api.php' );
 
 global $g_absolute_path;
-require_once( $g_absolute_path . 'api/soap/mc_core.php' );
+require_once $g_absolute_path . 'api/soap/mc_core.php';
 
 use Mantis\Exceptions\ClientException;
 

@@ -22,7 +22,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( __DIR__, 2 ) . '/soap/mc_filter_api.php' );
+require_once dirname( __DIR__, 2 ) . '/soap/mc_filter_api.php';
 
 use Mantis\Exceptions\ClientException;
 use Slim\Http\Request as SlimRequest;

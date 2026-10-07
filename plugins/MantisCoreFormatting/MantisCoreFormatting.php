@@ -19,7 +19,7 @@
  */
 
 require_api( 'mention_api.php' );
-require_once( 'core/MantisMarkdown.php' );
+require_once 'core/MantisMarkdown.php';
 
 /**
  * Mantis Core Formatting plugin

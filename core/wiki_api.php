@@ -59,7 +59,7 @@ function wiki_init() {
 	}
 
 	# handle legacy style wiki integration
-	require_once( config_get_global( 'class_path' ) . 'MantisCoreWikiPlugin.class.php' );
+	require_once config_get_global( 'class_path' ) . 'MantisCoreWikiPlugin.class.php';
 	switch( $t_wiki_engine ) {
 		case 'dokuwiki':
 			plugin_child( 'MantisCoreDokuwiki' );

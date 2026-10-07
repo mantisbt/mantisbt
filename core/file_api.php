@@ -886,7 +886,7 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
 	$t_result = db_query( $t_query, $t_param );
 	$t_count = db_result( $t_result );
 
-	return ( $t_count == 0 );
+	return  $t_count == 0 ;
 }
 
 /**
@@ -1109,7 +1109,7 @@ function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
 	}
-	return( file_is_uploading_enabled() && ( access_has_project_level( config_get( 'upload_project_file_threshold' ), $p_project_id, $p_user_id ) ) );
+	return file_is_uploading_enabled() && ( access_has_project_level( config_get( 'upload_project_file_threshold' ), $p_project_id, $p_user_id ) ) ;
 }
 
 /**

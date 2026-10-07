@@ -1317,7 +1317,7 @@ function print_filter_view_state( ?array $p_filter = null ) {
 function print_filter_values_sticky_issues( array $p_filter ) {
 	$t_filter = $p_filter;
 	$t_sticky_filter_state = gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] );
-	echo( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
+	echo $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) ;
 	?>
 	<input type="hidden" name="<?php
 		echo FILTER_PROPERTY_STICKY; ?>" value="<?php

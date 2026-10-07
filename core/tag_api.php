@@ -192,7 +192,7 @@ function tag_clear_cache_bug_tags( $p_bug_id = null ) {
  * @return bool True if tag exists
  */
 function tag_exists( $p_tag_id ) {
-	return ( tag_get( $p_tag_id ) !== false );
+	return  tag_get( $p_tag_id ) !== false ;
 }
 
 /**
@@ -834,7 +834,7 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
 	db_param_push();
 	$t_query = 'SELECT bug_id FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_tag_id, $p_bug_id ) );
-	return( db_result( $t_result ) !== false );
+	return db_result( $t_result ) !== false ;
 }
 
 /**
@@ -1106,7 +1106,7 @@ function tag_display_attached( $p_bug_id ) {
 	} else {
 		$i = 0;
 		foreach( $t_tag_rows as $t_tag ) {
-			echo( $i > 0 ? config_get( 'tag_separator' ) . ' ' : '' );
+			echo $i > 0 ? config_get( 'tag_separator' ) . ' ' : '' ;
 			tag_display_link( $t_tag, $p_bug_id );
 			$i++;
 		}

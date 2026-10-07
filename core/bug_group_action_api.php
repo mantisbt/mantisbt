@@ -64,7 +64,7 @@ function bug_group_action_init( $p_action ) {
 	if( !file_exists( $t_include_file ) ) {
 		throw new ClientException( "Missing Group action script", ERROR_GENERIC, [$t_include_file] );
 	} else {
-		require_once( $t_include_file );
+		require_once $t_include_file;
 	}
 }
 

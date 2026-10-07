@@ -30,7 +30,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'filter_api.php' );
 
 form_security_validate( 'manage_filter_edit_update' );

@@ -66,7 +66,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 
 foreach( $g_custom_field_types as $t_type ) {
-	require_once( config_get_global( 'core_path' ) . 'cfdefs/cfdef_' . $t_type . '.php' );
+	require_once config_get_global( 'core_path' ) . 'cfdefs/cfdef_' . $t_type . '.php';
 }
 unset( $t_type );
 
@@ -578,7 +578,7 @@ function custom_field_has_write_access_to_project( $p_field_id, $p_project_id, $
  */
 function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id = null ) {
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-	return( custom_field_has_write_access_to_project( $p_field_id, $t_project_id, $p_user_id ) );
+	return custom_field_has_write_access_to_project( $p_field_id, $t_project_id, $p_user_id ) ;
 }
 
 /**
