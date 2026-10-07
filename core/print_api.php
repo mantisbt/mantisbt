@@ -829,7 +829,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 	} else {
 		if( 0 == $p_category_id && count( $t_cat_arr ) == 1 ) {
 			# Single option are selected by default
-			$p_category_id = (int) $t_cat_arr[0]['id'];
+			$p_category_id = (int)$t_cat_arr[0]['id'];
 		}
 		echo '<option value="" disabled hidden';
 		check_selected( $p_category_id, 0 );

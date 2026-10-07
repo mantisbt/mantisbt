@@ -226,7 +226,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 					return array( 'id' => (int)$p_value );
 				case BUGNOTE_UPDATED:
 					if( !$p_new_value ) {
-						return array( 'id' => (int) $p_value );
+						return array( 'id' => (int)$p_value );
 					}
 
 					return '';

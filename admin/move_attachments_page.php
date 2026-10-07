@@ -70,7 +70,7 @@ function get_attachment_stats( $p_file_type, $p_in_db ) {
 	$t_stats = array();
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_project_id = (int) $t_row['id'];
+		$t_project_id = (int)$t_row['id'];
 		$t_stats[$t_project_id] = $t_row['stats'];
 	}
 	return $t_stats;

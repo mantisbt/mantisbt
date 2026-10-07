@@ -86,7 +86,7 @@ class MantisMarkdown extends Parsedown
 		# XSS protection
 		$this->setSafeMode( true );
 		# Only turn URLs into links if config says so
-		$this->setUrlsLinked( (bool) $this->config_process_urls );
+		$this->setUrlsLinked( (bool)$this->config_process_urls );
 
 		$this->InlineTypes['@'][] = 'EmailText';
 		$this->inlineMarkerList .= '@';
