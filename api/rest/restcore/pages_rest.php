@@ -22,8 +22,6 @@
  * @link http://www.mantisbt.org
  */
 
-use Mantis\Exceptions\ClientException;
-
 $g_app->group( '/pages', function() use ( $g_app ) {
 	$g_app->get( '/issues/view/{id}/', 'rest_pages_issue_view' );
 	$g_app->get( '/issues/view/{id}', 'rest_pages_issue_view' );

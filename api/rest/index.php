@@ -23,7 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-use Mantis\Exceptions\StateException;
 use Slim\App;
 use Slim\Container;
 

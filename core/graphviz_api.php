@@ -35,7 +35,6 @@
  * @uses utility_api.php
  */
 
-use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\StateException;
 
 require_api( 'constant_inc.php' );

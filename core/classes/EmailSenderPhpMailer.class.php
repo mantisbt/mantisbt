@@ -14,8 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as phpmailerException;
+use PHPMailer\PHPMailer\PHPMailer;
 
 /** @global PHPMailer $g_phpMailer Reusable PHPMailer object */
 $g_phpMailer = null;

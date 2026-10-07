@@ -81,9 +81,8 @@ require_once __DIR__ . '/classes/EmailSender.class.php';
 
 # PHPMailer is needed for email address validation independent of the provider used
 # to send the emails.
-use PHPMailer\PHPMailer\PHPMailer;
-
 use Mantis\Exceptions\ClientException;
+use PHPMailer\PHPMailer\PHPMailer;
 use VBoctor\Email\DisposableEmailChecker;
 
 /**

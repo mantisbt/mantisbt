@@ -28,9 +28,9 @@
 
 namespace Mantis\tests\soap;
 
-use Mantis\tests\core\MantisTestCase;
 use DateTimeImmutable;
 use DateTimeZone;
+use Mantis\tests\core\MantisTestCase;
 use SoapClient;
 
 # Includes

@@ -28,8 +28,6 @@ declare( strict_types=1 );
 
 namespace Mantis\tests\Mantis;
 
-use Mantis\Exceptions\ClientException;
-
 /**
  * PHPUnit tests for File API
  */

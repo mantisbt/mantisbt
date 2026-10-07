@@ -25,9 +25,9 @@
 
 namespace Mantis\tests\rest;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Mantis\tests\core\MantisTestCase;
 use Mantis\tests\core\RequestBuilder;
-use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
 
