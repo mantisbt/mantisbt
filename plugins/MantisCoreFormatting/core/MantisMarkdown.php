@@ -253,7 +253,7 @@ class MantisMarkdown extends Parsedown
 	 */
 	protected function inlineUrl( $Excerpt ): ?array
 	{
-		if( $this->urlsLinked !== true or ! isset($Excerpt['text'][2]) or $Excerpt['text'][2] !== '/' ) {
+		if( $this->urlsLinked !== true or ! isset( $Excerpt['text'][2] ) or $Excerpt['text'][2] !== '/' ) {
 			return null;
 		}
 
@@ -261,8 +261,8 @@ class MantisMarkdown extends Parsedown
 			'/\bhttps?:[\/]{2}[^\s"<]+\b\/*/ui',
 			$Excerpt['context'],
 			$matches,
-			PREG_OFFSET_CAPTURE)
-		) {
+			PREG_OFFSET_CAPTURE
+		) ) {
 			$url = $matches[0][0];
 
 			$Inline = array(
