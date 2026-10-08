@@ -245,12 +245,42 @@ class MantisMarkdown extends Parsedown
 	 *
 	 * - Not marked URLs. "https://example.com"
 	 *
+	 * The method is being overridden to fix a bug in the regex.
+	 * @see https://mantisbt.org/bugs/view.php?id=34389
+	 *
 	 * @param array $Excerpt Element data
 	 * @return array|null Element data or nothing
 	 */
 	protected function inlineUrl( $Excerpt ): ?array
 	{
-		return $this->processUrl( parent::inlineUrl( $Excerpt ) );
+		if( $this->urlsLinked !== true or ! isset( $Excerpt['text'][2] ) or $Excerpt['text'][2] !== '/' ) {
+			return null;
+		}
+
+		if( preg_match(
+			'/\bhttps?:[\/]{2}[^\s"<]+\b\/*/ui',
+			$Excerpt['context'],
+			$matches,
+			PREG_OFFSET_CAPTURE
+		) ) {
+			$url = $matches[0][0];
+
+			$Inline = array(
+				'extent' => strlen($matches[0][0]),
+				'position' => $matches[0][1],
+				'element' => array(
+					'name' => 'a',
+					'text' => $url,
+					'attributes' => array(
+						'href' => $url,
+					),
+				),
+			);
+
+			return $this->processUrl( $Inline );
+		}
+
+		return null;
 	}
 
 	/**
