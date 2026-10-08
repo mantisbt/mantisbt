@@ -46,6 +46,7 @@
  * @author Can
  * @author DDPAT
  * @author Dregad
+ * @author Efygz
  * @author Emperyan
  * @author Erdemaslancan
  * @author GolyatGeri
@@ -885,6 +886,7 @@ $s_assign_to = 'Ata';
 $s_additional_information = 'Ek Bilgi';
 $s_submit_report_button = 'Sorun Bildir';
 $s_check_report_more_bugs = 'daha fazla sorun bildirmek için kontrol et';
+$s_submitted_for_moderation = 'Eyleminiz onay için gönderildi ve onaylandıktan sonra görünecektir.';
 $s_report_stay = 'Bildirmeye Devam';
 $s_selected_project = 'Seçilen Proje';
 $s_valid_project_msg = 'Geçerli bir proje seçmelisiniz';
@@ -1066,6 +1068,7 @@ $s_bytes = 'baytlar';
 $s_kib = 'KiB';
 $s_attachment_missing = 'Eki eksik';
 $s_attachment_count = 'Ek sayısı';
+$s_bugnotes_count = 'Sorun Notu sayısı';
 $s_view_attachments_for_issue = '#%2$d sorunu için %1$d eklentiyi görüntüle';
 $s_warning_update_custom_field_type = '<strong>Uyarı:</strong> "%1$s" özel alanı zaten depolanmış değerlere sahip. Alan türünün değiştirilmesi, mevcut değerler alanın yeni türüyle tutarlı değilse, hatalara ve beklenmeyen davranışlara neden olabilir. Devam etmek için aşağıdaki düğmeye tıklayın';
 $s_phpmailer_language = 'tr';
@@ -1257,6 +1260,7 @@ $s_database_information = 'MantisBT Veritabanı Bilgisi';
 $s_path_information = 'MantisBT Yolu Bilgileri';
 $s_mantisbt_database_statistics = 'MantisBT Veritabanı İstatistikleri';
 $s_php_version = 'PHP Sürümü';
+$s_os_information = 'İşletim Sistemi Bilgisi';
 $s_adodb_version = 'ADOdb Sürüm';
 $s_database_driver = 'Veritabanı Sürücüsü';
 $s_database_version_description = 'Veritabanı Sürümü, Tanımı';
@@ -1291,6 +1295,7 @@ $s_timeline_title = 'Zaman çizelgesi';
 $s_timeline_more = 'Daha fazla etkinlik...';
 $s_missing_error_string = 'Eksik Hata Dizesi: %1$s';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Bu işlem sırasında bir hata oluştu. Bunu yerel yöneticinize bildirmeniz önerilir.';
+$MANTIS_ERROR[ERROR_GENERIC_DETAILS] = 'Hata ayrıntıları: %s';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL hatası tespit edildi.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Raporunuzda bir hata tespit edildi.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Dosya adı belirtilmedi.';
@@ -1413,6 +1418,8 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Eklenti şemasının yükseltilmes
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '"%1$s" eklentisi bu sayfaya erişebilmek için önce yükseltilmeleri gerekiyor.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = '"%1$s" belirtilen eklenti sayfasının formatı geçersiz. "Plugin[/path/to]/page" ile eşleşmelidir.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Belirtilen eklenti dosyasının "%1$s" biçimi geçersiz. "Plugin[/path/to]/file[.ext]" ile eşleşmelidir.';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = 'Eklenti varlığı "%s" bulunamadı.';
+$MANTIS_ERROR[ERROR_PLUGIN_RUNTIME] = '" %1$s " eklentisinin yürütülmesi sırasında aşağıdaki hata oluştu.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '"%2$s" çalıştırılması sonucu bilinmeyen bir %1$s hatası oluştu.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '"%1$s" alanı birden fazla "%2$s" sütunu içeriyor.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '"%1$s" alanı geçersiz geçersiz "%2$s" alanı içeriyor.';
@@ -1473,3 +1480,4 @@ $s_filter_new = 'Yeni';
 $s_filter_unused_tags = 'Kullanılmamış';
 $s_filter_unused = 'Kullanılmamış';
 $s_unknown = 'bilinmiyor';
+$s_optional = 'İsteğe bağlı';
