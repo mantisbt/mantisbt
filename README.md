@@ -45,6 +45,95 @@ Installation
   scripts within this directory should not be accessible on a live MantisBT
   site or on any installation that is accessible via the Internet.
 
+Docker development setup
+------------------------
+
+A `docker-compose.yml` is bundled for spinning up a local dev stack — no PHP,
+MySQL or web server needed on the host.
+
+### Architecture
+
+```
+                   :80
+   browser ──▶ ┌────────┐  fastcgi:9000  ┌─────┐    mysqli    ┌───────┐
+              │  caddy  │ ─────────────▶ │ php │ ───────────▶ │ mysql │
+              └────────┘                  └─────┘              └───────┘
+                  │                          │ smtp:1025
+                  │ host=mailpit.localhost   ▼
+                  └────────────────────▶ ┌─────────┐
+                                          │ mailpit │
+                                          └─────────┘
+```
+
+| Service | Image                | Role                                     | Host port |
+|---------|----------------------|------------------------------------------|-----------|
+| caddy   | `caddy:2-alpine`     | Reverse proxy, static files, FastCGI     | `80`      |
+| php     | built from `docker/` | PHP 8.3-FPM (mysqli, gd, zip, intl, …)   | —         |
+| mysql   | `mysql:8.0`          | Database                                 | `3306`    |
+| mailpit | `axllent/mailpit`    | SMTP catcher + web UI                    | via caddy |
+
+Caddy routes by hostname:
+
+- `localhost` / `mantis.localhost` / `127.0.0.1` → MantisBT
+- `mailpit.localhost` → Mailpit web UI
+
+The PHP container reads its DB and SMTP coordinates from environment
+variables. `docker/config_inc.php` is mounted read-only at
+`/srv/config/config_inc.php`, overriding anything in the bind-mounted source
+tree without interfering with Mantis's regular `config/` workflow (still
+gitignored).
+
+### Layout
+
+```
+docker/
+├── Dockerfile          # PHP 8.3-FPM + extensions + composer
+├── Caddyfile           # vhosts, REST-API rewrite, deny /vendor /core /library /lang
+├── config_inc.php      # env-driven Mantis config (mounted read-only)
+└── php.ini             # dev overrides (visible errors, opcache revalidate=0)
+docker-compose.yml
+.env.example            # copy to .env and edit
+```
+
+### First run
+
+```sh
+cp .env.example .env
+docker compose up -d --build
+docker compose exec php composer install
+docker compose exec php php admin/upgrade_unattended.php
+```
+
+Then open:
+
+- http://localhost/ — MantisBT (default admin `administrator` / `root` —
+  change on first login)
+- http://mailpit.localhost/ — captured outbound mail
+- MySQL on `localhost:3306` (creds from `.env`)
+
+### Day-to-day
+
+```sh
+docker compose up -d                 # start
+docker compose down                  # stop (data preserved in named volumes)
+docker compose down -v               # nuke volumes for a clean slate
+docker compose logs -f php           # tail PHP-FPM logs
+docker compose exec php bash         # shell inside the PHP container
+docker compose exec mysql mysql -umantis -pmantis bugtracker
+```
+
+Source is bind-mounted, so host-side edits are picked up immediately —
+opcache is configured to revalidate on every request in dev mode.
+
+### REST API
+
+Caddy rewrites `/api/rest/*` to `/api/rest/index.php`, mirroring
+`api/rest/.htaccess`. Generate a token via *My Account → API Tokens*, then:
+
+```sh
+curl -H "Authorization: <token>" http://localhost/api/rest/users/me
+```
+
 UPGRADING
 ---------
 
