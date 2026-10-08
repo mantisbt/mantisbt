@@ -110,6 +110,7 @@ if( false === $t_row ) {
 /**
  * @var int    $v_bug_id
  * @var int    $v_project_id
+ * @var string $v_folder
  * @var string $v_diskfile
  * @var string $v_filename
  * @var int    $v_filesize
@@ -169,7 +170,7 @@ $t_file_info_type = false;
 
 switch( $t_upload_method ) {
 	case DISK:
-		$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
+		$t_local_disk_file = file_get_disk_path( $t_row, $t_project_id );
 		if( file_exists( $t_local_disk_file ) ) {
 			$t_file_info_type = file_get_mime_type( $t_local_disk_file );
 		}
