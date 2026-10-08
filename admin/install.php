@@ -1299,7 +1299,7 @@ if( 4 == $t_install_state ) {
 <?php
 	# must post <input name="install" type="hidden" value="5">
 	# rather than the following line
-*/
+ */
 	$t_install_state++;
 }  # end install_state == 4
 

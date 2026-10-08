@@ -39,16 +39,6 @@ return ECSConfig::configure()
 		SingleLineCommentSpacingFixer::class,
 
 		/**
-		 * Comment: Align multiline comment
-		 *
-		 * Each line of multi-line DocComments must have an asterisk
-		 * [PSR-5] and must be aligned with the first one.
-		 *
-		 * @see https://cs.symfony.com/doc/rules/phpdoc/align_multiline_comment.html
-		 */
-		AlignMultilineCommentFixer::class,
-
-		/**
 		 * Comment: No empty comment
 		 *
 		 * @see https://cs.symfony.com/doc/rules/comment/no_empty_comment.html
@@ -65,5 +55,19 @@ return ECSConfig::configure()
 		 * @see https://cs.symfony.com/doc/rules/comment/multiline_comment_opening_closing.html
 		 */
 		MultilineCommentOpeningClosingFixer::class,
+	] )
+
+	/**
+	 * Comment: Align multiline comment
+	 *
+	 * Each line of multi-line DocComments must have an asterisk
+	 * [PSR-5] and must be aligned with the first one.
+	 *
+	 * @see https://cs.symfony.com/doc/rules/phpdoc/align_multiline_comment.html
+	 */
+	->withConfiguredRule( AlignMultilineCommentFixer::class, [
+		// 'comment_type' => 'phpdocs_only',
+		// 'comment_type' => 'phpdocs_like',
+		'comment_type' => 'all_multiline',
 	] )
 ;
