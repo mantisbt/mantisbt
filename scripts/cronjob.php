@@ -1,5 +1,6 @@
 #!/usr/bin/php -q
 <?php
+
 /*
  * MantisBT - A PHP based bugtracking system
  *
