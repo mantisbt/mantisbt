@@ -32,6 +32,7 @@ return ECSConfig::configure()
 		'plugins/MantisCoreFormatting',
 		'plugins/Gravatar',
 		'plugins/XmlImportExport',
+		'plugins/MantisGraph',
 		'scripts',
 		'tests',
 	] )
