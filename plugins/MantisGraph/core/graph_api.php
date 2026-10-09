@@ -83,8 +83,8 @@ function graph_colors_to_rgbas( array $p_colors, $p_alpha ) {
  *
  * @return array An array similar to the status_colors config ordered by status enum codes.
  */
-function graph_status_colors_to_colors( $p_metrics = array() ) {
-	$t_colors = array();
+function graph_status_colors_to_colors( $p_metrics = [] ) {
+	$t_colors = [];
 	# The metrics contain localized status, so we need an extra lookup
 	# to retrieve the id before we can get the color code
 	$t_status_lookup = MantisEnum::getAssocArrayIndexedByLabels( lang_get( 'status_enum_string' ) );
@@ -216,12 +216,12 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
  * @return array
  * @throws ClientException
  */
-function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = array(), array $p_filter = [] ) {
+function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = [], array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_metrics = array();
+	$t_metrics = [];
 	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
 
 	if( !db_field_exists( $p_enum, db_get_table( 'bug' ) ) ) {
@@ -269,7 +269,7 @@ function create_bug_status_summary( array $p_filter = [] ) {
 		$t_statuses = MantisEnum::getValues( $t_status_enum );
 		$t_closed_threshold = config_get( 'bug_closed_status_threshold' );
 
-		$t_closed_statuses = array();
+		$t_closed_statuses = [];
 		foreach( $t_statuses as $t_status_code ) {
 			if( $t_status_code >= $t_closed_threshold ) {
 				$t_closed_statuses[] = $t_status_code;
@@ -277,7 +277,7 @@ function create_bug_status_summary( array $p_filter = [] ) {
 		}
 	} else {
 		# when explicitly using a filter, do not exclude any status, to match the expected filter results
-		$t_closed_statuses = array();
+		$t_closed_statuses = [];
 	}
 
 	return create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status', $t_closed_statuses, $p_filter );
@@ -298,7 +298,7 @@ function create_developer_summary( $p_type, array $p_filter = [] ) {
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 	$t_resolved_status_threshold = (int)config_get( 'bug_resolved_status_threshold' );
 
-	$t_query = new DBQuery(<<<SQL
+	$t_query = new DBQuery( <<<SQL
 		SELECT handler_id, count(*) as count FROM {bug}
 		WHERE $t_specific_where
 		AND handler_id <> :nouser
@@ -307,10 +307,10 @@ function create_developer_summary( $p_type, array $p_filter = [] ) {
 
 	switch( $p_type ) {
 		case 'open':
-			$t_query->append_sql( "AND status < :status_resolved" );
+			$t_query->append_sql( 'AND status < :status_resolved' );
 			break;
 		case 'resolved':
-			$t_query->append_sql(<<<SQL
+			$t_query->append_sql( <<<SQL
 				AND status >= :status_resolved
 				AND resolution = :resolution_fixed
 				SQL
@@ -331,15 +331,15 @@ function create_developer_summary( $p_type, array $p_filter = [] ) {
 	$t_query->append_sql( ' GROUP BY handler_id ORDER BY count DESC' );
 	$t_query->set_limit( 20 );
 
-	$t_handler_array = array();
-	$t_handler_ids = array();
+	$t_handler_array = [];
+	$t_handler_ids = [];
 	while( $t_row = $t_query->fetch() ) {
 		$t_handler_array[$t_row['handler_id']] = (int)$t_row['count'];
 		$t_handler_ids[] = $t_row['handler_id'];
 	}
 
 	if( count( $t_handler_array ) == 0 ) {
-		return array();
+		return [];
 	}
 
 	user_cache_array_rows( $t_handler_ids );
@@ -379,15 +379,15 @@ function create_reporter_summary( array $p_filter = [] ) {
 	$t_query->bind( 'resolution_fixed', FIXED );
 	$t_query->set_limit( 25 );
 
-	$t_reporter_arr = array();
-	$t_reporters = array();
+	$t_reporter_arr = [];
+	$t_reporters = [];
 	while( $t_row = $t_query->fetch() ) {
 		$t_reporter_arr[$t_row['reporter_id']] = (int)$t_row['count'];
 		$t_reporters[] = $t_row['reporter_id'];
 	}
 
 	if( count( $t_reporter_arr ) == 0 ) {
-		return array();
+		return [];
 	}
 
 	user_cache_array_rows( $t_reporters );
@@ -420,7 +420,7 @@ function create_category_summary( array $p_filter = [] ) {
 	$t_query_cat->sql( $t_sql );
 	$t_query_cat->bind( 'all_projects', ALL_PROJECTS );
 
-	$t_metrics = array();
+	$t_metrics = [];
 	$t_query_cnt = new DBQuery();
 	$t_query_cnt->sql( 'SELECT COUNT(*) FROM {bug} WHERE category_id = :cat_id AND ' . $t_specific_where );
 	if( !empty( $p_filter ) ) {
@@ -466,8 +466,8 @@ function create_cumulative_bydate( array $p_filter = [] ) {
 
 	# For this metric to make sense, we need to remove the filter properties related to status
 	if( $p_filter ) {
-		$p_filter[FILTER_PROPERTY_STATUS] = array( META_FILTER_ANY );
-		$p_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+		$p_filter[FILTER_PROPERTY_STATUS] = [META_FILTER_ANY];
+		$p_filter[FILTER_PROPERTY_HIDE_STATUS] = [META_FILTER_NONE];
 	}
 
 	# Get all the submitted dates
@@ -487,10 +487,10 @@ function create_cumulative_bydate( array $p_filter = [] ) {
 	$t_sql .= ' GROUP BY date_index';
 	$t_query->sql( $t_sql );
 
-	$t_calc_metrics = array();
+	$t_calc_metrics = [];
 	while( $t_row = $t_query->fetch() ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-		$t_calc_metrics[$v_date_index] = [ $v_num, 0, 0 ];
+		$t_calc_metrics[$v_date_index] = [$v_num, 0, 0];
 	}
 
 	# Get a count of resolved issues.
@@ -522,18 +522,18 @@ function create_cumulative_bydate( array $p_filter = [] ) {
 	}
 	$t_sql .= ' GROUP BY date_index';
 	$t_query->sql( $t_sql );
-	$t_query->bind( array(
+	$t_query->bind( [
 		'int_resolved' => (int)$t_res_val,
 		'str_resolved' => (string)$t_res_val,
 		'field_name' => 'status',
-	) );
+	] );
 
 	while( $t_row = $t_query->fetch() ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 		if( isset( $t_calc_metrics[$v_date_index] ) ) {
 			$t_calc_metrics[$v_date_index][1] = $v_num;
 		} else {
-			$t_calc_metrics[$v_date_index] = [ 0, $v_num, 0 ];
+			$t_calc_metrics[$v_date_index] = [0, $v_num, 0];
 		}
 	}
 
@@ -573,7 +573,7 @@ function create_project_summary( array $p_filter = [] ) {
 	$t_query_cat->sql( $t_sql );
 	$t_query_cat->bind( 'all_projects', ALL_PROJECTS );
 
-	$t_metrics = array();
+	$t_metrics = [];
 	$t_query_cnt = new DBQuery();
 	$t_query_cnt->sql( 'SELECT COUNT(*) FROM {bug} WHERE project_id = :proj_id AND ' . $t_specific_where );
 	if( !empty( $p_filter ) ) {
