@@ -32,6 +32,7 @@ return ECSConfig::configure()
 		'plugins/MantisCoreFormatting',
 		'plugins/Gravatar',
 		'plugins/XmlImportExport',
+		'scripts',
 		'tests',
 	] )
 	// include *.php files in the root directory
