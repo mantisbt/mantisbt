@@ -55,100 +55,100 @@ class MentionParsingTest extends MantisCoreBase {
 	 * @return array
 	 */
 	public static function provider() {
-		return array(
-			'NoMention' => array(
+		return [
+			'NoMention' => [
 				'some random string.',
-				array()
-			),
-			'NoMentionWithAtSign' => array(
+				[]
+			],
+			'NoMentionWithAtSign' => [
 				'some random string with {tag} sign.',
-				array()
-			),
-			'NoMentionWithMultipleAtSigns' => array(
+				[]
+			],
+			'NoMentionWithMultipleAtSigns' => [
 				'some random string with {tag}{tag}vboctor sign.',
-				array()
-			),
-			'JustMention' => array(
+				[]
+			],
+			'JustMention' => [
 				'{tag}vboctor',
-				array( 'vboctor' )
-			),
-			'WithDotInMiddle' => array(
+				['vboctor']
+			],
+			'WithDotInMiddle' => [
 				'{tag}victor.boctor',
-				array( 'victor.boctor' )
-			),
-			'WithDotAtEnd' => array(
+				['victor.boctor']
+			],
+			'WithDotAtEnd' => [
 				'{tag}vboctor.',
-				array( 'vboctor' )
-			),
-			'MentionWithUnderscore' => array(
+				['vboctor']
+			],
+			'MentionWithUnderscore' => [
 				'{tag}victor_boctor',
-				array( 'victor_boctor' )
-			),
-			'MentionAtStart' => array(
+				['victor_boctor']
+			],
+			'MentionAtStart' => [
 				'{tag}vboctor will check',
-				array( 'vboctor' )
-			),
-			'MentionAtEnd' => array(
+				['vboctor']
+			],
+			'MentionAtEnd' => [
 				'Please assign to {tag}vboctor',
-				array( 'vboctor' )
-			),
-			'MentionAtEndWithFullstop' => array(
+				['vboctor']
+			],
+			'MentionAtEndWithFullstop' => [
 				'Please assign to {tag}vboctor.',
-				array( 'vboctor' )
-			),
-			'MentionSeparatedWithColon' => array(
+				['vboctor']
+			],
+			'MentionSeparatedWithColon' => [
 				'{tag}vboctor: please check.',
-				array( 'vboctor' )
-			),
-			'MentionSeparatedWithSemiColon' => array(
+				['vboctor']
+			],
+			'MentionSeparatedWithSemiColon' => [
 				'{tag}vboctor; please check.',
-				array( 'vboctor' )
-			),
-			'MentionWithMultiple' => array(
+				['vboctor']
+			],
+			'MentionWithMultiple' => [
 				'Please check with {tag}vboctor and {tag}someone.',
-				array( 'vboctor', 'someone' )
-			),
-			'MentionWithDuplicates' => array(
+				['vboctor', 'someone']
+			],
+			'MentionWithDuplicates' => [
 				'Please check with {tag}vboctor and {tag}vboctor.',
-				array( 'vboctor' )
-			),
-			'MentionWithMultipleSlashSeparated' => array(
+				['vboctor']
+			],
+			'MentionWithMultipleSlashSeparated' => [
 				'{tag}vboctor/{tag}someone, please check.',
-				array( 'vboctor', 'someone' )
-			),
-			'MentionWithMultipleNewLineSeparated' => array(
+				['vboctor', 'someone']
+			],
+			'MentionWithMultipleNewLineSeparated' => [
 				"Check with:\n{tag}vboctor\n{tag}someone.",
-				array( 'vboctor', 'someone' )
-			),
-			'MentionNl2br' => array(
-				string_nl2br( "Check with {tag}vboctor\n" ) ,
-				array( 'vboctor' )
-			),
-			'MentionWithEmailAddress' => array(
+				['vboctor', 'someone']
+			],
+			'MentionNl2br' => [
+				string_nl2br( "Check with {tag}vboctor\n" ),
+				['vboctor']
+			],
+			'MentionWithEmailAddress' => [
 				'xxx{tag}example.com',
-				array()
-			),
-			'MentionWithLocalhost' => array(
+				[]
+			],
+			'MentionWithLocalhost' => [
 				'xxx{tag}localhost',
-				array()
-			),
-			'MentionAtEndOfWord' => array(
-				"{tag}vboctor{tag}",
-				array()
-			),
-			'MentionWithInvalidChars' => array(
-				"{tag}vboctor%%%%%",
-				array( 'vboctor' )
-			),
-			'MentionUsernameThatIsAnEmailAddress' => array(
-				"{tag}vboctor@example.com",
-				array()
-			),
-			'MentionUsernameThatIsLocalhost' => array(
-				"{tag}vboctor@localhost",
-				array()
-			),
-		);
+				[]
+			],
+			'MentionAtEndOfWord' => [
+				'{tag}vboctor{tag}',
+				[]
+			],
+			'MentionWithInvalidChars' => [
+				'{tag}vboctor%%%%%',
+				['vboctor']
+			],
+			'MentionUsernameThatIsAnEmailAddress' => [
+				'{tag}vboctor@example.com',
+				[]
+			],
+			'MentionUsernameThatIsLocalhost' => [
+				'{tag}vboctor@localhost',
+				[]
+			],
+		];
 
 	}
 }

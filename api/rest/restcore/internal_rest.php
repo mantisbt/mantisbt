@@ -27,10 +27,10 @@ require_api( 'helper_api.php' );
 /**
  * WARNING: All APIs under the internal route are considered private and can break anytime.
  */
-$g_app->group('/internal', function() use ( $g_app ) {
+$g_app->group( '/internal', function() use ( $g_app ) {
 	$g_app->any( '/autocomplete', 'rest_internal_autocomplete' );
 	$g_app->any( '/config_display', 'rest_internal_config_display' );
-});
+} );
 
 /**
  * A method that gets the auto-complete result for given field and prefix.
@@ -73,17 +73,17 @@ function rest_internal_config_display( \Slim\Http\Request $p_request, \Slim\Http
 		return $p_response->withStatus( HTTP_STATUS_FORBIDDEN );
 	}
 	if( null === $t_user_id || null === $t_project_id || null === $t_config_id ) {
-		$t_message = "Missing parameters";
+		$t_message = 'Missing parameters';
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
 	$t_sql = 'SELECT config_id, user_id, project_id, type, value, access_reqd FROM {config}'
 			. ' WHERE user_id = :user_id AND project_id = :project_id AND config_id = :config_id';
-	$t_params = array(
+	$t_params = [
 		'user_id' => $t_user_id,
 		'project_id' => $t_project_id,
 		'config_id' => $t_config_id
-		);
+	];
 	$t_query = new DbQuery( $t_sql, $t_params );
 	$t_row = $t_query->fetch();
 

@@ -30,7 +30,7 @@
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'config_api.php' );
 require_api( 'gpc_api.php' );
 
@@ -55,9 +55,9 @@ header( 'Content-Type: application/opensearchdescription+xml' );
 echo '<?xml version="1.0" encoding="UTF-8" ?>' . PHP_EOL;
 ?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
-                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-	<ShortName><?php echo htmlspecialchars( $t_shortname, ENT_XML1 | ENT_QUOTES); ?></ShortName>
-	<Description><?php echo htmlspecialchars( $t_description, ENT_XML1 | ENT_QUOTES); ?></Description>
+					   xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+	<ShortName><?php echo htmlspecialchars( $t_shortname, ENT_XML1 | ENT_QUOTES ); ?></ShortName>
+	<Description><?php echo htmlspecialchars( $t_description, ENT_XML1 | ENT_QUOTES ); ?></Description>
 	<InputEncoding>UTF-8</InputEncoding>
 	<Image width="16" height="16" type="image/x-icon"><?php echo $t_icon; ?></Image>
 	<Url type="text/html" method="GET" template="<?php echo $t_url; ?>"></Url>';

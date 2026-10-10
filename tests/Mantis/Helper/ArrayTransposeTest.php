@@ -30,7 +30,6 @@ use Generator;
 use Mantis\Exceptions\ClientException;
 use Mantis\tests\Mantis\MantisCoreBase;
 
-
 /**
  * Test for helper_api::helper_array_transpose
  *
@@ -74,15 +73,14 @@ class ArrayTransposeTest extends MantisCoreBase {
 	 * helper_array_transpose() should successfully transpose <test matrix>
 	 * into <expected transposition>.
 	 */
-	public static function providerArrayTransposeValid(): Generator
-	{
+	public static function providerArrayTransposeValid(): Generator {
 		yield 'Bidimensional simple array' => [
 			[['a'], ['b']],
 			[['a', 'b']]
 		];
 
 		yield 'Bidimensional array with numeric indices' => [
-			[10 => [100 => 'a' ], 20 => [100 => 'b']],
+			[10 => [100 => 'a'], 20 => [100 => 'b']],
 			[100 => [10 => 'a', 20 => 'b']]
 		];
 
@@ -100,7 +98,7 @@ class ArrayTransposeTest extends MantisCoreBase {
 		];
 
 		yield 'Bidimensional associative array' => [
-			['a' => ['k1' => 1, 'k2' => 2], 'b' => ['k1' => 3,'k2' => 4]],
+			['a' => ['k1' => 1, 'k2' => 2], 'b' => ['k1' => 3, 'k2' => 4]],
 			['k1' => ['a' => 1, 'b' => 3], 'k2' => ['a' => 2, 'b' => 4]]
 		];
 

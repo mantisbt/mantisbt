@@ -59,7 +59,7 @@ function mentions_tag() {
  */
 function mention_get_candidates( $p_text ) {
 	if( is_blank( $p_text ) ) {
-		return array();
+		return [];
 	}
 
 	static $s_pattern = null;
@@ -97,15 +97,15 @@ function mention_get_candidates( $p_text ) {
  */
 function mention_get_users( $p_text ) {
 	if ( !mention_enabled() ) {
-		return array();
+		return [];
 	}
 
 	$t_matches = mention_get_candidates( $p_text );
-	if( empty( $t_matches )) {
-		return array();
+	if( empty( $t_matches ) ) {
+		return [];
 	}
 
-	$t_mentioned_users = array();
+	$t_mentioned_users = [];
 
 	foreach( $t_matches as $t_candidate ) {
 		if( $t_user_id = user_get_id_by_name( $t_candidate ) ) {
@@ -147,9 +147,9 @@ function mention_format_text( $p_text, $p_html = true ) {
 	}
 
 	$t_mentions_tag = mentions_tag();
-	$t_formatted_mentions = array();
+	$t_formatted_mentions = [];
 
-	foreach( $t_mentioned_users as $t_username => $t_user_id  ) {
+	foreach( $t_mentioned_users as $t_username => $t_user_id ) {
 		$t_mention = $t_mentions_tag . $t_username;
 		$t_mention_formatted = $t_mention;
 
@@ -184,4 +184,3 @@ function mention_format_text( $p_text, $p_html = true ) {
 
 	return $t_text;
 }
-

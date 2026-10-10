@@ -22,4 +22,4 @@
  */
 
 const MANAGE_TAG_VIEW_PAGE = true;
-include( 'tag_view_page.php' );
+include 'tag_view_page.php';

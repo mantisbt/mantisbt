@@ -64,7 +64,7 @@ function gpc_get( $p_var_name, $p_default = null ) {
 	} else {
 		throw new ClientException( "Required parameter '$p_var_name' missing",
 			ERROR_GPC_VAR_NOT_FOUND,
-			[ $p_var_name ]
+			[$p_var_name]
 		);
 	}
 
@@ -107,7 +107,7 @@ function gpc_get_string( $p_var_name, $p_default = null ) {
 		throw new ClientException(
 			"String expected for '$p_var_name', got array",
 			ERROR_GPC_ARRAY_UNEXPECTED,
-			[ $p_var_name ]
+			[$p_var_name]
 		);
 	}
 
@@ -140,7 +140,7 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 		throw new ClientException(
 			"Integer expected for '$p_var_name', got array",
 			ERROR_GPC_ARRAY_UNEXPECTED,
-			[ $p_var_name ]
+			[$p_var_name]
 		);
 	}
 	$t_val = trim( (string)$t_result );
@@ -148,7 +148,7 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 		throw new ClientException(
 			"Integer expected for '$p_var_name'",
 			ERROR_GPC_NOT_NUMBER,
-			[ $p_var_name ]
+			[$p_var_name]
 		);
 	}
 
@@ -176,7 +176,7 @@ function gpc_get_bool( $p_var_name, $p_default = false ) {
 			throw new ClientException(
 				"Boolean expected for '$p_var_name', got array",
 				ERROR_GPC_ARRAY_UNEXPECTED,
-				[ $p_var_name ]
+				[$p_var_name]
 			);
 		}
 
@@ -232,7 +232,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			if( $p_default === null ) {
 				$p_default = [];
 			} elseif( !is_array( $p_default ) ) {
-				$p_default = array( $p_default );
+				$p_default = [$p_default];
 			}
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
 			return implode( '|', $t_values );
@@ -273,18 +273,18 @@ function gpc_get_string_array( string $p_var_name, array $p_default = [] ): arra
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	# If the result isn't the default we were given or an array, error
-	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
+	if( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		throw new ClientException(
 			"Array expected for '$p_var_name'",
 			ERROR_GPC_ARRAY_EXPECTED,
-			[ $p_var_name ]
+			[$p_var_name]
 		);
 	}
 
 	if( !is_array( $t_result ) ) {
 		return $t_result;
 	}
-	$t_array = array();
+	$t_array = [];
 	foreach( $t_result as $t_key => $t_value ) {
 		if( $t_value === null ) {
 			$t_array[$t_key] = null;
@@ -314,11 +314,11 @@ function gpc_get_int_array( string $p_var_name, array $p_default = [] ): array {
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	# If the result isn't the default we were given or an array, error
-	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
+	if( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		throw new ClientException(
 			"Array expected for '$p_var_name'",
 			ERROR_GPC_ARRAY_EXPECTED,
-			[ $p_var_name ]
+			[$p_var_name]
 		);
 	}
 	if( is_array( $t_result ) ) {
@@ -349,11 +349,11 @@ function gpc_get_bool_array( string $p_var_name, array $p_default = [] ): array 
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	# If the result isn't the default we were given or an array, error
-	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
+	if( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		throw new ClientException(
 			"Array expected for '$p_var_name'",
 			ERROR_GPC_ARRAY_EXPECTED,
-			[ $p_var_name ]
+			[$p_var_name]
 		);
 	}
 
@@ -389,7 +389,7 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
 		throw new ClientException(
 			"Required parameter '$p_var_name' not found",
 			ERROR_GPC_VAR_NOT_FOUND,
-			[ $p_var_name ]
+			[$p_var_name]
 		);
 	}
 
@@ -439,14 +439,14 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 		$p_samesite = config_get_global( 'cookie_samesite' );
 	}
 
-	$t_options = array(
+	$t_options = [
 		'expires' => $p_expire,
 		'path' => $p_path,
 		'domain' => $p_domain,
 		'samesite' => $p_samesite,
 		'secure' => http_is_protocol_https(),
 		'httponly' => $p_httponly,
-	);
+	];
 	return setcookie( $p_name, $p_value, $t_options );
 }
 
@@ -479,12 +479,12 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null, $p_samesit
 		# Cookie “<PREFIX>_collapse_settings” has been rejected because it is already expired.
 		# apparently this is due to bug https://bugzilla.mozilla.org/show_bug.cgi?id=1676651
 
-		$t_options = array(
+		$t_options = [
 			'expires' => 1,
 			'path' => $p_path,
 			'domain' => $p_domain,
 			'samesite' => $p_samesite,
-		);
+		];
 		return setcookie( $p_name, '', $t_options );
 	} else {
 		return false;
@@ -515,7 +515,7 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
 		throw new ClientException(
 			"Required parameter '$p_var_name' not found",
 			ERROR_GPC_VAR_NOT_FOUND,
-			[ $p_var_name ]
+			[$p_var_name]
 		);
 	}
 
@@ -530,15 +530,15 @@ function gpc_get_file( $p_var_name, $p_default = null ) {
  */
 function gpc_make_array( $p_var_name ) {
 	if( isset( $_POST[$p_var_name] ) && !is_array( $_POST[$p_var_name] ) ) {
-		$_POST[$p_var_name] = array(
+		$_POST[$p_var_name] = [
 			$_POST[$p_var_name],
-		);
+		];
 	}
 
 	if( isset( $_GET[$p_var_name] ) && !is_array( $_GET[$p_var_name] ) ) {
-		$_GET[$p_var_name] = array(
+		$_GET[$p_var_name] = [
 			$_GET[$p_var_name],
-		);
+		];
 	}
 }
 

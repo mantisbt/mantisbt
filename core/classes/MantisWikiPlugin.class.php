@@ -32,11 +32,11 @@ abstract class MantisWikiPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function hooks() {
-		return array(
+		return [
 			'EVENT_WIKI_INIT' => 'wiki_init',
 			'EVENT_WIKI_LINK_BUG' => 'link_bug',
 			'EVENT_WIKI_LINK_PROJECT' => 'link_project',
-		);
+		];
 	}
 
 	/**
@@ -63,4 +63,3 @@ abstract class MantisWikiPlugin extends MantisPlugin {
 	 */
 	abstract function link_project( $p_event, $p_project_id );
 }
-

@@ -77,7 +77,7 @@ class UserResetPasswordCommand extends Command {
 		# Make sure the account exists
 		$t_user = user_get_row( $this->user_id_reset );
 		if( $t_user === false ) {
-			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
+			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, ['id'] );
 		}
 
 		# Remaining checks only apply when resetting password
@@ -125,7 +125,7 @@ class UserResetPasswordCommand extends Command {
 			&& auth_can_set_password( $this->user_id_reset )
 			&& user_reset_password( $this->user_id_reset )
 		) {
-			return array( 'action' => self::RESET );
+			return ['action' => self::RESET];
 		}
 
 		# Password can't be changed, unlock the account
@@ -136,6 +136,6 @@ class UserResetPasswordCommand extends Command {
 			$t_action = self::UNLOCK;
 		}
 		user_reset_failed_login_count_to_zero( $this->user_id_reset );
-		return array( 'action' => $t_action );
+		return ['action' => $t_action];
 	}
 }

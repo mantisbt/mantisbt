@@ -35,7 +35,7 @@
  * @uses project_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -53,11 +53,11 @@ auth_reauthenticate();
 
 $f_project_id = gpc_get_int( 'project_id' );
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'id' => $f_project_id
-	)
-);
+	]
+];
 
 $t_command = new ProjectDeleteCommand( $t_data );
 $t_command->validate();

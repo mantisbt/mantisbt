@@ -33,7 +33,7 @@
  * @uses lang_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -60,7 +60,7 @@ print_manage_menu( 'manage_overview_page.php' );
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-info', 'ace-icon' ); ?>
-			<?php echo lang_get('site_information') ?>
+			<?php echo lang_get( 'site_information' ) ?>
 		</h4>
 	</div>
 	<div class="widget-body">
@@ -85,7 +85,7 @@ print_manage_menu( 'manage_overview_page.php' );
 			<td><?php echo phpversion() ?></td>
 		</tr>
 		<tr>
- 			<th class="category"><?php echo lang_get( 'os_information' ) ?></th>
+			 <th class="category"><?php echo lang_get( 'os_information' ) ?></th>
 			<td><?php echo php_uname() ?></td>
 		</tr>
 		<tr>
@@ -117,7 +117,7 @@ print_manage_menu( 'manage_overview_page.php' );
 		print_table_spacer( 2 );
 	}
 
-	event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) )
+	event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', [$t_is_admin] )
 	?>
 	</table>
 	</div>
@@ -127,4 +127,3 @@ print_manage_menu( 'manage_overview_page.php' );
 </div>
 <?php
 layout_page_end();
-

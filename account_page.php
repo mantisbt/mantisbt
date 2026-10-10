@@ -61,7 +61,7 @@
  * @noinspection PhpUnhandledExceptionInspection
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'api_token_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -78,7 +78,7 @@ require_api( 'tokens_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-#============ Permissions ============
+# ============ Permissions ============
 auth_ensure_user_authenticated();
 
 auth_reauthenticate();
@@ -177,8 +177,8 @@ print_account_menu( 'account_page.php' );
 				</td>
 			</tr>
 			<?php
-			    $t_required = $t_force_pw_reset ? 'required' : '';
-			    $t_class = $t_force_pw_reset ? 'class="required"' : '';
+				$t_required = $t_force_pw_reset ? 'required' : '';
+				$t_class = $t_force_pw_reset ? 'class="required"' : '';
 			?>
 			<tr>
 				<td class="category">
@@ -283,7 +283,7 @@ print_account_menu( 'account_page.php' );
 	</div>
 	<?php if( $t_show_update_button ) { ?>
 		<div class="widget-toolbox padding-8 clearfix">
-			<?php if ($t_force_pw_reset) { ?>
+			<?php if ( $t_force_pw_reset ) { ?>
 				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
 			<?php } ?>
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_user_button' ) ?>" />

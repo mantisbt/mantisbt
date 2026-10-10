@@ -47,7 +47,7 @@ require_api( 'error_api.php' );
 function crypto_init() {
 	if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 		if( strlen( config_get_global( 'crypto_master_salt' ) ) < 16 ) {
-			throw new ClientException( "Invalid Master Salt", ERROR_CRYPTO_MASTER_SALT_INVALID );
+			throw new ClientException( 'Invalid Master Salt', ERROR_CRYPTO_MASTER_SALT_INVALID );
 		}
 	}
 }
@@ -124,7 +124,7 @@ function crypto_generate_strong_random_string( $p_bytes ) {
  */
 function crypto_generate_uri_safe_nonce( $p_minimum_length ) {
 	$t_length_mod4 = $p_minimum_length % 4;
-	$t_adjusted_length = $p_minimum_length + 4 - ($t_length_mod4 ?: 4);
+	$t_adjusted_length = $p_minimum_length + 4 - ( $t_length_mod4 ?: 4 );
 	$t_raw_bytes_required = ( $t_adjusted_length / 4 ) * 3;
 	$t_base64_encoded = base64_encode( random_bytes( $t_raw_bytes_required ) );
 

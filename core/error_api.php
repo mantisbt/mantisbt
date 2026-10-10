@@ -53,7 +53,7 @@ require_api( 'lang_api.php' );
  *
  * @global array $g_error_parameters
  */
-$g_error_parameters = array();
+$g_error_parameters = [];
 
 /**
  * Determine if inline warnings should be printed immediately (true)
@@ -71,7 +71,7 @@ $g_error_delay_reporting = true;
  * List of delayed error messages to be printed at page bottom.
  * @global array $g_errors_delayed
  */
-$g_errors_delayed = array();
+$g_errors_delayed = [];
 
 $g_error_handled = false;
 $g_error_proceed_url = null;
@@ -299,7 +299,7 @@ function error_output( Throwable $p_error ) {
 			}
 		}
 		if( DISPLAY_ERROR_HALT == $t_method ) {
-			exit(1);
+			exit( 1 );
 		}
 	} else {
 		$t_error_description = nl2br( $t_localized_message );
@@ -309,7 +309,7 @@ function error_output( Throwable $p_error ) {
 		if( ( !$t_show_detailed_errors || $t_method == DISPLAY_ERROR_INLINE )
 			&& $p_error instanceof ErrorException
 		) {
-			$t_error_description .= " in '" . $p_error->getFile() ."' line " . $p_error->getLine();
+			$t_error_description .= " in '" . $p_error->getFile() . "' line " . $p_error->getLine();
 		}
 
 		switch( $t_method ) {
@@ -428,7 +428,7 @@ function error_output( Throwable $p_error ) {
 
 				# Return proper HTTP status code for error
 				http_response_code( error_map_mantis_error_to_http_code( $p_error->getCode() ) );
-				exit(1);
+				exit( 1 );
 
 			case DISPLAY_ERROR_INLINE:
 				if( !defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
@@ -449,7 +449,6 @@ function error_output( Throwable $p_error ) {
 
 	$g_error_proceed_url = null;
 }
-
 
 /**
  * Error handler to convert PHP errors to Exceptions.
@@ -481,7 +480,7 @@ function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
  *
  * @return void
  */
-function error_delay_reporting( bool $p_delay = true) {
+function error_delay_reporting( bool $p_delay = true ) {
 	global $g_error_delay_reporting;
 	$g_error_delay_reporting = $p_delay;
 }
@@ -520,7 +519,7 @@ function error_print_delayed() {
 		}
 		echo "\n" . '</div>';
 
-		$g_errors_delayed = array();
+		$g_errors_delayed = [];
 	}
 
 	# Make sure any subsequent inline errors are displayed
@@ -554,7 +553,6 @@ function error_print_details( $p_file, $p_line ) {
 <?php
 }
 
-
 /**
  * Get the stack trace as a string that can be logged or echoed to CLI output.
  *
@@ -574,7 +572,7 @@ function error_stack_trace_as_string( $p_exception = null ) {
 			( $t_frame['type'] ?? '-' ) . ' - ' .
 			( $t_frame['function'] ?? '-' );
 
-		$t_args = array();
+		$t_args = [];
 		if( !empty( $t_frame['args'] ) ) {
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
@@ -621,12 +619,12 @@ function error_print_stack_trace( $p_exception = null ) {
 <?php
 	foreach( $t_stack as $t_id => $t_frame ) {
 		if( !empty( $t_frame['args'] ) ) {
-			$t_args = array();
+			$t_args = [];
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
 		} else {
-			$t_args = array('-');
+			$t_args = ['-'];
 		}
 
 		printf(
@@ -659,7 +657,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 	}
 
 	if( is_array( $p_param ) ) {
-		$t_results = array();
+		$t_results = [];
 
 		foreach( $p_param as $t_key => $t_value ) {
 			$t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
@@ -667,7 +665,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 
 		return '<array> { ' . implode( ', ', $t_results ) . ' }';
 	} else if( is_object( $p_param ) ) {
-		$t_results = array();
+		$t_results = [];
 
 		$t_class_name = get_class( $p_param );
 		$t_inst_vars = get_object_vars( $p_param );
@@ -744,8 +742,8 @@ function error_string( $p_error, ?array $p_params = null ) {
 		# error messages even if core is not fully initialized.
 		# Modified to allow <br> tags
 		$t_value = preg_replace(
-			[ '/&amp;(#[0-9]+|[a-z]+);/i', '|&lt;(br)\s*/?&gt;|i' ],
-			[ '&$1;', '<&$1>' ],
+			['/&amp;(#[0-9]+|[a-z]+);/i', '|&lt;(br)\s*/?&gt;|i'],
+			['&$1;', '<&$1>'],
 			@htmlspecialchars( $t_value, ENT_COMPAT, 'UTF-8' )
 		);
 	}
@@ -767,7 +765,7 @@ function error_string( $p_error, ?array $p_params = null ) {
 function error_handled() {
 	global $g_error_handled;
 
-	return( true == $g_error_handled );
+	return true == $g_error_handled ;
 }
 
 /**
@@ -810,7 +808,6 @@ function error_proceed_url( $p_url ) {
 
 	$g_error_proceed_url = $p_url;
 }
-
 
 /**
  * Maps MantisBT errors to the appropriate HTTP status code.

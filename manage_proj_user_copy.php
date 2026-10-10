@@ -38,7 +38,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -64,7 +64,7 @@ if( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	throw new ClientException( "Copy action to/from is required", ERROR_NO_COPY_ACTION );
+	throw new ClientException( 'Copy action to/from is required', ERROR_NO_COPY_ACTION );
 }
 
 $t_access_level_limit = access_get_project_level( $t_dst_project_id );
@@ -75,13 +75,13 @@ foreach( $t_rows as $t_row ) {
 		$t_access_level = $t_access_level_limit;
 	}
 
-	$t_data = array(
-		'payload' => array(
-			'project' => array( 'id' => $t_dst_project_id ),
-			'user' => array( 'id' => $t_row['user_id'] ),
-			'access_level' => array( 'id' => $t_access_level )
-		)
-	);
+	$t_data = [
+		'payload' => [
+			'project' => ['id' => $t_dst_project_id],
+			'user' => ['id' => $t_row['user_id']],
+			'access_level' => ['id' => $t_access_level]
+		]
+	];
 
 	$t_command = new ProjectUsersAddCommand( $t_data );
 	$t_command->execute();
@@ -89,4 +89,4 @@ foreach( $t_rows as $t_row ) {
 
 form_security_purge( 'manage_proj_user_copy' );
 
-print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . "#project-users");
+print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#project-users' );

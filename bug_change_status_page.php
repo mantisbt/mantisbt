@@ -47,7 +47,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -113,16 +113,16 @@ if( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 	$t_bug_sponsored = config_get( 'enable_sponsorship' )
 		&& sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
 	if( $t_bug_sponsored && !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
-		throw new ClientException( "Access denied", ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW );
+		throw new ClientException( 'Access denied', ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW );
 	}
 
 	if( $f_handler_id != NO_USER ) {
 		# The new handler is checked at project level
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
-			throw new ClientException( "Access denied", ERROR_HANDLER_ACCESS_TOO_LOW );
+			throw new ClientException( 'Access denied', ERROR_HANDLER_ACCESS_TOO_LOW );
 		}
 		if( $t_bug_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
-			throw new ClientException( "Access denied", ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
+			throw new ClientException( 'Access denied', ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
 		}
 	}
 }
@@ -162,7 +162,7 @@ layout_page_begin();
 				if( $f_new_status >= $t_resolved ) {
 					if( !relationship_can_resolve_bug( $f_bug_id ) ) {
 						if( OFF == config_get( 'allow_parent_of_unresolved_to_close' ) ) {
-							throw new ClientException( "Unresolved dependant issues",
+							throw new ClientException( 'Unresolved dependant issues',
 									ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING
 							);
 						}
@@ -288,10 +288,10 @@ layout_page_begin();
 		$t_show_custom_field = $t_require;
 
 		if( !$t_show_custom_field ) {
-			if( in_array( $t_custom_status_label, array( 'resolved', 'closed' ) ) && $t_display ) {
+			if( in_array( $t_custom_status_label, ['resolved', 'closed'] ) && $t_display ) {
 				$t_show_custom_field = true;
 			} else {
-				$t_plugin_Event_result = event_signal( 'EVENT_UPDATE_BUG_SHOW_CUSTOM_FIELD', array( $t_bug, $t_id ) );
+				$t_plugin_Event_result = event_signal( 'EVENT_UPDATE_BUG_SHOW_CUSTOM_FIELD', [$t_bug, $t_id] );
 				foreach( $t_plugin_Event_result as $t_event_result ) {
 					if( in_array( true, $t_event_result ) ) {
 						$t_show_custom_field = true;
@@ -347,7 +347,7 @@ layout_page_begin();
 		}
 	}
 
-	event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', array( $f_bug_id, $f_new_status ) );
+	event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', [$f_bug_id, $f_new_status] );
 
 	if( $f_change_type == BUG_UPDATE_TYPE_REOPEN ) {
 ?>
@@ -413,7 +413,7 @@ layout_page_begin();
 <?php
 	}
 
-	event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
+	event_signal( 'EVENT_BUGNOTE_ADD_FORM', [$f_bug_id] );
 ?>
 
 </tbody>
@@ -435,4 +435,4 @@ layout_page_begin();
 </div>
 <?php
 define( 'BUG_VIEW_INC_ALLOW', true );
-include( __DIR__ . '/bug_view_inc.php' );
+include __DIR__ . '/bug_view_inc.php';

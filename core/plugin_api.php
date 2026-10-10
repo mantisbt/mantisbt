@@ -14,7 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Plugin API
  *
@@ -58,26 +57,26 @@ require_api( 'logging_api.php' );
  * Installed Plugins cache
  * @global MantisPlugin[] $g_plugin_cache Basename is used as key.
  */
-$g_plugin_cache = array();
+$g_plugin_cache = [];
 
 /**
  * Initialized Plugins cache
  * @global bool[] $g_plugin_cache True if plugin is loaded; Basename is used as key.
  * @see plugin_is_loaded()
  */
-$g_plugin_cache_init = array();
+$g_plugin_cache_init = [];
 
 /**
  * Plugins priority cache
  * @global int[] $g_plugin_cache_priority Basename is used as key.
  */
-$g_plugin_cache_priority = array();
+$g_plugin_cache_priority = [];
 
 /**
  * Plugins protected status cache
  * @global bool[] $g_plugin_cache_protected Basename is used as key.
  */
-$g_plugin_cache_protected = array();
+$g_plugin_cache_protected = [];
 
 /**
  * Current plugin stack.
@@ -86,8 +85,7 @@ $g_plugin_cache_protected = array();
  * @see plugin_push_current(), plugin_get_current(), plugin_pop_current()
  * @global string[] $g_plugin_current
  */
-$g_plugin_current = array();
-
+$g_plugin_current = [];
 
 /**
  * Get the currently executing plugin's basename.
@@ -96,7 +94,7 @@ $g_plugin_current = array();
  */
 function plugin_get_current() {
 	global $g_plugin_current;
-	return( $g_plugin_current[0] ?? null );
+	return $g_plugin_current[0] ?? null ;
 }
 
 /**
@@ -118,7 +116,7 @@ function plugin_push_current( $p_base_name ) {
  */
 function plugin_pop_current() {
 	global $g_plugin_current;
-	return( isset( $g_plugin_current[0] ) ? array_shift( $g_plugin_current ) : null );
+	return isset( $g_plugin_current[0] ) ? array_shift( $g_plugin_current ) : null ;
 }
 
 /**
@@ -160,7 +158,7 @@ function plugin_get( $p_basename = null ) {
 		throw new ClientException(
 			"Plugin '$t_current' not registered",
 			ERROR_PLUGIN_NOT_REGISTERED,
-			[ $t_current ]
+			[$t_current]
 		);
 	}
 
@@ -226,7 +224,7 @@ function plugin_file_path( $p_filename = '', $p_base_name = '' ) {
 	}
 	$t_file_path .= $p_filename;
 
-	return( is_file( $t_file_path ) ? $t_file_path : false );
+	return is_file( $t_file_path ) ? $t_file_path : false ;
 }
 
 /**
@@ -517,7 +515,7 @@ function plugin_error( $p_error_name, $p_error_type = E_USER_ERROR, $p_basename 
 	$t_error_code = "plugin_{$t_basename}_$p_error_name";
 	if( $p_error_type == E_USER_ERROR ) {
 		global $g_error_parameters;
-		if( $p_param === null) {
+		if( $p_param === null ) {
 			$p_param = $g_error_parameters;
 		}
 		array_unshift( $p_param, $t_error_code );
@@ -556,7 +554,7 @@ function plugin_event_hook_many( array $p_hooks ) {
 	$t_return = true;
 	foreach( $p_hooks as $t_event => $t_callbacks ) {
 		if( !is_array( $t_callbacks ) ) {
-			$t_callbacks = array( $t_callbacks );
+			$t_callbacks = [$t_callbacks];
 		}
 		foreach( $t_callbacks as $t_callback ) {
 			if( !event_hook( $t_event, $t_callback, $t_basename ) ) {
@@ -598,7 +596,7 @@ function plugin_child( $p_child ) {
 function plugin_is_loaded( $p_base_name ) {
 	global $g_plugin_cache_init;
 
-	return ( isset( $g_plugin_cache_init[$p_base_name] ) && $g_plugin_cache_init[$p_base_name] );
+	return  isset( $g_plugin_cache_init[$p_base_name] ) && $g_plugin_cache_init[$p_base_name] ;
 }
 
 /**
@@ -737,8 +735,8 @@ function plugin_is_installed( $p_basename ) {
 
 	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {plugin} WHERE basename=' . db_param();
-	$t_result = db_query( $t_query, array( $p_basename ) );
-	return( 0 < db_result( $t_result ) );
+	$t_result = db_query( $t_query, [$p_basename] );
+	return 0 < db_result( $t_result ) ;
 }
 
 /**
@@ -765,7 +763,7 @@ function plugin_install( MantisPlugin $p_plugin ) {
 	db_param_push();
 	$t_query = 'INSERT INTO {plugin} ( basename, enabled )
 				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $p_plugin->basename, true ) );
+	db_query( $t_query, [$p_plugin->basename, true] );
 
 	if( false === ( plugin_config_get( 'schema', false ) ) ) {
 		plugin_config_set( 'schema', -1 );
@@ -794,7 +792,7 @@ function plugin_needs_upgrade( MantisPlugin $p_plugin ) {
 	$t_config_option = 'plugin_' . $p_plugin->basename . '_schema';
 	$t_plugin_schema_version = config_get( $t_config_option, -1, ALL_USERS, ALL_PROJECTS );
 
-	return( $t_plugin_schema_version < count( $t_plugin_schema ) - 1 );
+	return $t_plugin_schema_version < count( $t_plugin_schema ) - 1 ;
 }
 
 /**
@@ -841,15 +839,15 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 
 			switch( $t_operation ) {
 				case 'InsertData':
-					$t_sqlarray = array(
+					$t_sqlarray = [
 						'INSERT INTO ' . $t_target . $t_schema[$i][1][1],
-					);
+					];
 					break;
 
 				case 'UpdateSQL':
-					$t_sqlarray = array(
+					$t_sqlarray = [
 						'UPDATE ' . $t_target . $t_schema[$i][1][1],
-					);
+					];
 					break;
 
 				case 'UpdateFunction':
@@ -863,7 +861,7 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 
 				default:
 					$t_sqlarray = call_user_func_array(
-						array( $t_dict, $t_operation ),
+						[$t_dict, $t_operation],
 						$t_schema[$i][1]
 					);
 			}
@@ -918,7 +916,7 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
 
 	db_param_push();
 	$t_query = 'DELETE FROM {plugin} WHERE basename=' . db_param();
-	db_query( $t_query, array( $p_plugin->basename ) );
+	db_query( $t_query, [$p_plugin->basename] );
 
 	plugin_push_current( $p_plugin->basename );
 
@@ -944,15 +942,15 @@ function plugin_find_all() {
 	if( !is_null( $s_plugins ) ) {
 		return $s_plugins;
 	}
-	
+
 	$t_plugin_path = config_get_global( 'plugin_path' );
-	$s_plugins = array(
+	$s_plugins = [
 		'MantisCore' => new MantisCorePlugin( 'MantisCore' ),
-	);
+	];
 
 	# Get list of installed plugins
 	$t_query = new DbQuery( 'SELECT basename FROM {plugin}' );
-	$t_installed_plugins = array();
+	$t_installed_plugins = [];
 	while( $t_query->fetch() ) {
 		$t_installed_plugins[] = $t_query->value();
 	}
@@ -1001,7 +999,7 @@ function plugin_include( $p_basename, $p_child = null ) {
 	}
 	$t_included = false;
 	if( is_file( $t_plugin_file ) ) {
-		include_once( $t_plugin_file );
+		include_once $t_plugin_file;
 		$t_included = true;
 	}
 
@@ -1031,7 +1029,7 @@ function plugin_require_api( $p_file, $p_basename = null ) {
 
 	$t_path = config_get_global( 'plugin_path' ) . $t_current . '/';
 
-	require_once( $t_path . $p_file );
+	require_once $t_path . $p_file;
 }
 
 /**
@@ -1073,7 +1071,7 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 		# Include the plugin script if the class is not already declared.
 		if( !class_exists( $t_classname ) ) {
 			if( !plugin_include( $p_basename, $p_child ) ) {
-				log_event( LOG_PLUGIN, "Source code for Plugin '$t_basename' not found");
+				log_event( LOG_PLUGIN, "Source code for Plugin '$t_basename' not found" );
 				return new MissingClassPlugin( $t_basename );
 			}
 		}
@@ -1105,7 +1103,7 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 			throw new ClientException(
 				"Plugin Class '$t_classname' not defined in '$t_basename'",
 				ERROR_PLUGIN_CLASS_NOT_FOUND,
-				[ $t_basename, $t_classname ]
+				[$t_basename, $t_classname]
 			);
 		}
 
@@ -1170,11 +1168,11 @@ function plugin_init_installed() {
 	}
 
 	global $g_plugin_cache, $g_plugin_current, $g_plugin_cache_priority, $g_plugin_cache_protected, $g_plugin_cache_init;
-	$g_plugin_cache = array();
-	$g_plugin_current = array();
-	$g_plugin_cache_init = array();
-	$g_plugin_cache_priority = array();
-	$g_plugin_cache_protected = array();
+	$g_plugin_cache = [];
+	$g_plugin_current = [];
+	$g_plugin_cache_init = [];
+	$g_plugin_cache_priority = [];
+	$g_plugin_cache_protected = [];
 
 	plugin_register_installed();
 
@@ -1182,7 +1180,7 @@ function plugin_init_installed() {
 
 	do {
 		$t_continue = false;
-		$t_plugins_retry = array();
+		$t_plugins_retry = [];
 
 		foreach( $t_plugins as $t_basename ) {
 			if( plugin_init( $t_basename ) ) {
@@ -1288,10 +1286,10 @@ function plugin_log_event( $p_msg, $p_basename = null ) {
 
 	if( $t_basename != $t_current_plugin ) {
 		plugin_push_current( $t_basename );
-		log_event( LOG_PLUGIN, $p_msg);
+		log_event( LOG_PLUGIN, $p_msg );
 		plugin_pop_current();
 	} else {
-		log_event( LOG_PLUGIN, $p_msg);
+		log_event( LOG_PLUGIN, $p_msg );
 	}
 }
 
@@ -1305,7 +1303,7 @@ function plugin_log_event( $p_msg, $p_basename = null ) {
  * @return array
  */
 function plugin_menu_items( $p_event ) {
-	$t_items = array();
+	$t_items = [];
 
 	if( $p_event ) {
 		$t_event_items = event_signal( $p_event );
@@ -1314,8 +1312,7 @@ function plugin_menu_items( $p_event ) {
 			foreach( $t_plugin_items as $t_callback_items ) {
 				if( is_array( $t_callback_items ) ) {
 					$t_items = array_merge( $t_items, $t_callback_items );
-				}
-				else {
+				} else {
 					if( $t_callback_items !== null ) {
 						$t_items[] = $t_callback_items;
 					}

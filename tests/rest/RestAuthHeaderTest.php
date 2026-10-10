@@ -57,7 +57,7 @@ class RestAuthHeaderTest extends RestBase {
 
 		# Deprecation header must be present
 		$this->assertTrue( $t_response->hasHeader( HEADER_DEPRECATION ),
-			"API Token Auth without Bearer scheme is deprecated"
+			'API Token Auth without Bearer scheme is deprecated'
 		);
 	}
 
@@ -83,13 +83,13 @@ class RestAuthHeaderTest extends RestBase {
 	 * @return array
 	 */
 	public static function providerBearerPrefixes() {
-		return array(
-			'Bearer' => array( 'Bearer ' ),
-			'bearer lowercase' => array( 'bearer ' ),
-			'BEARER uppercase' => array( 'BEARER ' ),
-			'BeArEr mixed case' => array( 'BeArEr ' ),
-			'extra spaces' => array( 'Bearer    ' ),
-		);
+		return [
+			'Bearer' => ['Bearer '],
+			'bearer lowercase' => ['bearer '],
+			'BEARER uppercase' => ['BEARER '],
+			'BeArEr mixed case' => ['BeArEr '],
+			'extra spaces' => ['Bearer    '],
+		];
 	}
 
 	/**
@@ -115,11 +115,11 @@ class RestAuthHeaderTest extends RestBase {
 	 * @return array
 	 */
 	public static function providerMultipleCredentials() {
-		return array(
-			'comma space' => array( ', ' ),
-			'comma only' => array( ',' ),
-			'comma multiple spaces' => array( ',   ' ),
-		);
+		return [
+			'comma space' => [', '],
+			'comma only' => [','],
+			'comma multiple spaces' => [',   '],
+		];
 	}
 
 	/**

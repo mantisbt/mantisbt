@@ -95,7 +95,7 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 		$p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter,
 		$p_project_id, $t_user_id, true );
 
-	$t_result = array();
+	$t_result = [];
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if( $t_orig_page_number > $p_page_number ) {
@@ -144,7 +144,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, null, $p_project_id );
 
-	$t_result = array();
+	$t_result = [];
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if( $t_orig_page_number > $p_page_number ) {
@@ -179,7 +179,7 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
-	$t_result = array();
+	$t_result = [];
 	foreach( user_get_accessible_projects( $t_user_id ) as $t_project_id ) {
 		$t_result[] = mci_project_get_row( $t_project_id, $t_user_id, $t_lang );
 	}
@@ -200,7 +200,7 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
 function mci_project_get_row( $p_project_id, $p_user_id, $p_lang ) {
 	$t_project = project_cache_row( $p_project_id );
 
-	return array(
+	return [
 		'id' => $p_project_id,
 		'name' => $t_project['name'],
 		'status' => mci_enum_get_array_by_id( $t_project['status'], 'project_status', $p_lang ),
@@ -210,7 +210,7 @@ function mci_project_get_row( $p_project_id, $p_user_id, $p_lang ) {
 		'file_path' => array_key_exists( 'file_path', $t_project ) ? $t_project['file_path'] : '',
 		'description' => array_key_exists( 'description', $t_project ) ? $t_project['description'] : '',
 		'subprojects' => mci_user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_lang ),
-	);
+	];
 }
 
 /**
@@ -264,7 +264,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 		return mci_fault_login_failed();
 	}
 
-	$t_data = [ 'query' => [ 'project_id' => $p_project_id ] ];
+	$t_data = ['query' => ['project_id' => $p_project_id]];
 	$t_command = new CategoryGetCommand( $t_data );
 	$t_result = $t_command->execute();
 
@@ -294,8 +294,8 @@ function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_ca
 	}
 
 	$t_data = [
-		'query' => [ 'project_id' => $p_project_id ],
-		'payload' => [ 'name' => $p_category_name ],
+		'query' => ['project_id' => $p_project_id],
+		'payload' => ['name' => $p_category_name],
 	];
 	$t_command = new CategoryAddCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -365,7 +365,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 		],
 		'payload' => [
 			'name' => $p_category_name_new,
-			'handler' => (int)$p_assigned_to === NO_USER ? null : [ 'id' => (int)$p_assigned_to ],
+			'handler' => (int)$p_assigned_to === NO_USER ? null : ['id' => (int)$p_assigned_to],
 		],
 	];
 	$t_command = new CategoryUpdateCommand( $t_data );
@@ -390,7 +390,7 @@ function mci_project_get_versions( $p_username, $p_password, $p_project_id, $p_r
 		return $t_result;
 	}
 
-	$t_result = array();
+	$t_result = [];
 	foreach( version_get_all_rows( $p_project_id, $p_released ) as $t_version ) {
 		$t_result[] = mci_project_version_as_array( $t_version );
 	}
@@ -463,18 +463,18 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id,
-		),
-		'payload' => array(
+		],
+		'payload' => [
 			'name' => $p_version['name'],
 			'description' => $p_version['description'],
 			'released' => $p_version['released'],
 			'obsolete' => $p_version['obsolete'] ?? false,
 			'timestamp' => $p_version['date_order']
-		)
-	);
+		]
+	];
 
 	$t_command = new VersionAddCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -530,19 +530,19 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id,
 			'version_id' => $p_version_id
-		),
-		'payload' => array(
+		],
+		'payload' => [
 			'name' => $t_name,
 			'description' => $t_description,
 			'released' => $t_released,
 			'obsolete' => $t_obsolete,
 			'timestamp' => $t_date_order
-		)
-	);
+		]
+	];
 
 	$t_command = new VersionUpdateCommand( $t_data );
 	$t_command->execute();
@@ -581,12 +581,12 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'project_id' => $t_project_id,
 			'version_id' => $p_version_id
-		)
-	);
+		]
+	];
 
 	$t_command = new VersionDeleteCommand( $t_data );
 	$t_command->execute();
@@ -632,13 +632,13 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) {
 	# Load custom field definitions for the specified project
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $p_project_id );
-	$t_custom_field_defs = array();
+	$t_custom_field_defs = [];
 	foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		$t_def = custom_field_get_definition( $t_custom_field_id );
 		$t_custom_field_defs[$t_custom_field_id] = $t_def;
 	}
 
-	$t_custom_field_values = array();
+	$t_custom_field_values = [];
 	if( isset( $p_custom_fields ) ) {
 		if( !is_array( $p_custom_fields ) ) {
 			throw new ClientException(
@@ -653,7 +653,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 				throw new ClientException(
 					'Custom field has no value specified.',
 					ERROR_EMPTY_FIELD,
-					array( "custom_field['value']" )
+					["custom_field['value']"]
 				);
 			}
 
@@ -661,7 +661,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 				throw new ClientException(
 					'Custom field with no specified id or name.',
 					ERROR_EMPTY_FIELD,
-					array( "custom_field['field']" )
+					["custom_field['field']"]
 				);
 			}
 
@@ -700,21 +700,21 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 		# Produce an error if the field is required but wasn't posted
 		if( $t_def['require_report'] ) {
 			if( !isset( $t_custom_field_values[$t_name] ) ||
-			    is_blank( $t_custom_field_values[$t_name] ) ) {
+				is_blank( $t_custom_field_values[$t_name] ) ) {
 				throw new ClientException(
 					"Mandatory field '$t_name' is missing.",
 					ERROR_EMPTY_FIELD,
-					array( $t_name )
+					[$t_name]
 				);
 			}
 		}
 
 		if( isset( $t_custom_field_values[$t_name] ) &&
-		    !custom_field_validate( $t_custom_field_id, $t_custom_field_values[$t_name] ) ) {
+			!custom_field_validate( $t_custom_field_id, $t_custom_field_values[$t_name] ) ) {
 			throw new ClientException(
 				"Invalid custom field '$t_name' value.",
 				ERROR_CUSTOM_FIELD_INVALID_VALUE,
-				array( $t_name )
+				[$t_name]
 			);
 		}
 	}
@@ -736,7 +736,7 @@ function mci_project_get_custom_fields( $p_project_id ) {
 
 	$g_project_override = $p_project_id;
 
-	$t_result = array();
+	$t_result = [];
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $p_project_id );
 	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
@@ -744,13 +744,13 @@ function mci_project_get_custom_fields( $p_project_id ) {
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
 		if( access_has_project_level( $t_def['access_level_r'], $p_project_id ) ) {
-			$t_custom_field = array();
+			$t_custom_field = [];
 
 			if( ApiObjectFactory::$soap ) {
-				$t_custom_field['field'] = array(
+				$t_custom_field['field'] = [
 					'id' => $t_def['id'],
 					'name' => $t_def['name'],
-				);
+				];
 			} else {
 				$t_custom_field['id'] = (int)$t_def['id'];
 				$t_custom_field['name'] = $t_def['name'];
@@ -840,17 +840,17 @@ function mci_project_versions( $p_project_id ) {
 	# use VERSION_ALL, true as the fastest way (no additional where clause in query)
 	# to get all released / non-released and obsolete / non-obsolete versions
 	$t_versions = version_get_all_rows( $p_project_id, VERSION_ALL, true );
-	$t_results = array();
+	$t_results = [];
 
 	foreach( $t_versions as $t_version ) {
-		$t_result = array(
+		$t_result = [
 			'id' => (int)$t_version['id'],
 			'name' => $t_version['version'],
 			'description' => $t_version['description'],
 			'released' => (bool)$t_version['released'],
 			'obsolete' => (bool)$t_version['obsolete'],
 			'timestamp' => ApiObjectFactory::datetime( $t_version['date_order'] ),
-		);
+		];
 
 		$t_results[] = $t_result;
 	}
@@ -866,7 +866,7 @@ function mci_project_versions( $p_project_id ) {
  * @return array The array of categories with their info.
  */
 function mci_project_categories( $p_project_id ) {
-	$t_data = [ 'query' => [ 'project_id' => $p_project_id ] ];
+	$t_data = ['query' => ['project_id' => $p_project_id]];
 	$t_command = new CategoryGetCommand( $t_data );
 	$t_result = $t_command->execute();
 	foreach( $t_result['categories'] as &$t_category ) {
@@ -920,9 +920,9 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		$t_projects = user_get_accessible_projects( $t_user_id );
 	} else {
 		# Select the specific project
-		$t_projects = array(
+		$t_projects = [
 			$p_project_id,
-		);
+		];
 	}
 
 	$t_projects[] = ALL_PROJECTS; # add ALL_PROJECTS to the list of projects to fetch
@@ -950,14 +950,14 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		( ut.access_level = ' . db_param() . ' ) )
 		ORDER BY pt.name ASC, pft.title ASC';
 
-	$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, VS_PUBLIC, $t_user_id, $t_admin ) );
+	$t_result = db_query( $t_query, [$t_user_id, $t_user_id, VS_PUBLIC, $t_user_id, $t_admin] );
 	$t_num_files = db_num_rows( $t_result );
 
-	$t_attachments = array();
+	$t_attachments = [];
 	for( $i = 0; $i < $t_num_files; $i++ ) {
 		$t_row = db_fetch_array( $t_result );
 
-		$t_attachment = array();
+		$t_attachment = [];
 		$t_attachment['id'] = $t_row['id'];
 		$t_attachment['filename'] = $t_row['filename'];
 		$t_attachment['title'] = $t_row['title'];
@@ -1012,7 +1012,7 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
  * @return array an array containing the id and the name of the project.
  */
 function mci_project_as_array_by_id( $p_project_id ) {
-	$t_result = array();
+	$t_result = [];
 	$t_result['id'] = (int)$p_project_id;
 	$t_result['name'] = project_get_name( $p_project_id );
 	return $t_result;
@@ -1036,8 +1036,7 @@ function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name 
 	return project_get_id_by_name( $p_project_name );
 }
 
-
-### MantisConnect Administrative Webservices ###
+# ## MantisConnect Administrative Webservices ###
 
 /**
  * Add a new project.
@@ -1061,7 +1060,7 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 
 	$p_project = ApiObjectFactory::objectToArray( $p_project );
 
-	$t_project_data = array();
+	$t_project_data = [];
 
 	if( isset( $p_project['name'] ) ) {
 		$t_project_data['name'] = $p_project['name'];
@@ -1091,7 +1090,7 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 		$t_project_data['inherit_global'] = $p_project['inherit_global'];
 	}
 
-	$t_data = array( 'payload' => $t_project_data );
+	$t_data = ['payload' => $t_project_data];
 
 	$t_command = new ProjectAddCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -1119,7 +1118,7 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 
 	$p_project = ApiObjectFactory::objectToArray( $p_project );
 
-	$t_project_data = array();
+	$t_project_data = [];
 
 	if( isset( $p_project['name'] ) ) {
 		$t_project_data['name'] = $p_project['name'];
@@ -1149,12 +1148,12 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 		$t_project_data['inherit_global'] = $p_project['inherit_global'];
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'id' => $p_project_id,
-		),
+		],
 		'payload' => $t_project_data,
-	);
+	];
 
 	$t_command = new ProjectUpdateCommand( $t_data );
 	$t_command->execute();
@@ -1178,11 +1177,11 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 		return mci_fault_login_failed();
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'id' => (int)$p_project_id,
-		),
-	);
+		],
+	];
 
 	$t_command = new ProjectDeleteCommand( $t_data );
 	$t_command->execute();
@@ -1223,7 +1222,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 	$t_bug_count = 0;
 
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, null, $p_project_id );
-	$t_result = array();
+	$t_result = [];
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if( $t_orig_page_number > $p_page_number ) {
@@ -1255,15 +1254,15 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 		return mci_fault_login_failed();
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'id' => $p_project_id,
 			'page' => 1,
 			'page_size' => 0,
 			'access_level' => $p_access,
 			'include_access_levels' => 0
-		)
-	);
+		]
+	];
 
 	$t_command = new ProjectUsersGetCommand( $t_data );
 	$t_result = $t_command->execute();

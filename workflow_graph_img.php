@@ -31,7 +31,7 @@
  * @uses workflow_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
 require_api( 'config_api.php' );
@@ -54,7 +54,7 @@ $t_graph_fontname = config_get( 'relationship_graph_fontname' );
 $t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
 $t_graph_fontpath = get_font_path();
 
-$t_graph_attributes = array( 'bgcolor' => 'transparent' );
+$t_graph_attributes = ['bgcolor' => 'transparent'];
 
 if( !empty( $t_graph_fontpath ) ) {
 	$t_graph_attributes['fontpath'] = $t_graph_fontpath;
@@ -62,29 +62,29 @@ if( !empty( $t_graph_fontpath ) ) {
 
 $t_graph = new Graph( 'workflow', $t_graph_attributes, Graph::TOOL_CIRCO );
 
-$t_graph->set_default_node_attr( array ( 'fontname' => $t_graph_fontname,
-										 'fontsize' => $t_graph_fontsize,
-										 'shape'    => 'record',
-										 'style'    => 'filled',
-										 'height'   => '0.2',
-										 'width'    => '0.4' ) );
+$t_graph->set_default_node_attr( ['fontname' => $t_graph_fontname,
+	'fontsize' => $t_graph_fontsize,
+	'shape'    => 'record',
+	'style'    => 'filled',
+	'height'   => '0.2',
+	'width'    => '0.4'] );
 
-$t_graph->set_default_edge_attr( array ( 'style' => 'solid',
-										 'color' => '#0000C0',
-										 'dir'   => 'forward' ) );
+$t_graph->set_default_edge_attr( ['style' => 'solid',
+	'color' => '#0000C0',
+	'dir'   => 'forward'] );
 
 foreach ( $t_status_ids as $t_from_id ) {
 	$t_graph->add_node(
 		$t_from_id,
-		[ 'label' => MantisEnum::getLocalizedLabel( $t_status_enum, $t_status_labels, $t_from_id ),
-		  'fillcolor' => get_status_color( $t_from_id ), ]
+		['label' => MantisEnum::getLocalizedLabel( $t_status_enum, $t_status_labels, $t_from_id ),
+			'fillcolor' => get_status_color( $t_from_id ), ]
 	);
 
 	foreach ( $t_status_ids as $t_to_id ) {
 		if( workflow_transition_edge_exists( $t_from_id, $t_to_id )
 			&& !$t_graph->is_edge_present( $t_to_id, $t_from_id ) ) {
 			if( workflow_transition_edge_exists( $t_to_id, $t_from_id ) ) {
-				$t_graph->add_edge( $t_from_id, $t_to_id, [ 'dir' => 'both' ] );
+				$t_graph->add_edge( $t_from_id, $t_to_id, ['dir' => 'both'] );
 			} else {
 				$t_graph->add_edge( $t_from_id, $t_to_id );
 			}

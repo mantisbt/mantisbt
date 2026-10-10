@@ -45,7 +45,7 @@ class UserDeleteCommand extends Command {
 	function validate() {
 		$this->user_id_to_delete = (int)$this->query( 'id', null );
 		if( $this->user_id_to_delete <= 0 ) {
-			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
+			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, ['id'] );
 		}
 
 		user_ensure_exists( $this->user_id_to_delete );
@@ -91,7 +91,6 @@ class UserDeleteCommand extends Command {
 	 */
 	protected function process() {
 		user_delete( $this->user_id_to_delete );
-		return array();
+		return [];
 	}
 }
-

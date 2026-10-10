@@ -18,7 +18,7 @@ use Mantis\Exceptions\ClientException;
 
 global $g_absolute_path;
 $t_soap_dir = $g_absolute_path . 'api/soap/';
-require_once( $t_soap_dir . 'mc_api.php' );
+require_once $t_soap_dir . 'mc_api.php';
 
 /**
  * A command that sets config options.
@@ -77,7 +77,7 @@ class ConfigsSetCommand extends Command {
 		}
 
 		// parse project id from payload, if not provided default to ALL_PROJECTS
-		if( isset( $t_payload['project'] ) )  {
+		if( isset( $t_payload['project'] ) ) {
 			$this->project_id = mci_get_project_id( $t_payload['project'] );
 		} else {
 			$this->project_id = ALL_PROJECTS;
@@ -87,7 +87,7 @@ class ConfigsSetCommand extends Command {
 			throw new ClientException(
 				"Project doesn't exist",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[$this->project_id] );
 		}
 
 		# This check is redundant if command is limited to administrator, but it is
@@ -103,11 +103,11 @@ class ConfigsSetCommand extends Command {
 
 		$t_set_of_configs = $this->payload( 'configs' );
 		foreach( $t_set_of_configs as $t_config ) {
-			if( !isset( $t_config['option'] ) || is_blank( $t_config['option']) ) {
+			if( !isset( $t_config['option'] ) || is_blank( $t_config['option'] ) ) {
 				throw new ClientException(
 					'Config option not provided',
 					ERROR_EMPTY_FIELD,
-					array( 'option' ) );
+					['option'] );
 			}
 
 			$t_name = $t_config['option'];
@@ -137,7 +137,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					sprintf( "Config '%s' is global and cannot be set", $t_name ),
 					ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB,
-					array( $t_name ) );
+					[$t_name] );
 			}
 
 			if( ConfigsSetCommand::config_is_enum( $t_name ) &&
@@ -162,7 +162,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					'Invalid parameters for edit action',
 					ERROR_INVALID_FIELD_VALUE,
-					array( 'edit_action' ) );
+					['edit_action'] );
 			}
 		}
 	}
@@ -227,7 +227,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					sprintf( "Enum '%s' missing 'id' or 'name' field for an entry", $p_enum_name ),
 					ERROR_INVALID_FIELD_VALUE,
-					array( $p_enum_name )
+					[$p_enum_name]
 				);
 			}
 
@@ -235,7 +235,7 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					sprintf( "Enum '%s' has 'id' that is not numeric", $p_enum_name ),
 					ERROR_INVALID_FIELD_VALUE,
-					array( $p_enum_name )
+					[$p_enum_name]
 				);
 			}
 
@@ -243,15 +243,15 @@ class ConfigsSetCommand extends Command {
 				throw new ClientException(
 					sprintf( "Enum '%s' has 'label' property which is not supported", $p_enum_name ),
 					ERROR_INVALID_FIELD_VALUE,
-					array( $p_enum_name )
+					[$p_enum_name]
 				);
 			}
 
-			if( !preg_match('/^[a-zA-Z0-9_-]+$/', $t_entry['name'] ) ) {
+			if( !preg_match( '/^[a-zA-Z0-9_-]+$/', $t_entry['name'] ) ) {
 				throw new ClientException(
 					sprintf( "Enum '%s' has invalid enum entry name '%s'.", $p_enum_name, $t_entry['name'] ),
 					ERROR_INVALID_FIELD_VALUE,
-					array( $p_enum_name )
+					[$p_enum_name]
 				);
 			}
 

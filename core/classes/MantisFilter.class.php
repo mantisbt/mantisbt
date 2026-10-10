@@ -90,7 +90,6 @@ abstract class MantisFilter {
 	 * @return array Filter options keyed by value=>display
 	 */
 	public function options() {
-		return array();
+		return [];
 	}
 }
-

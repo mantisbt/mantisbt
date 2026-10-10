@@ -34,13 +34,13 @@ use Mantis\Exceptions\ClientException;
  * @throws ClientException
  */
 function mci_account_get_array_by_id( $p_user_id ) {
-	$t_result = array();
+	$t_result = [];
 	$t_result['id'] = (int)$p_user_id;
 
 	if( user_exists( $p_user_id ) ) {
 
 		$t_current_user_id = auth_get_current_user_id();
-		$t_access_level = user_get_field ( $t_current_user_id, 'access_level' );
+		$t_access_level = user_get_field( $t_current_user_id, 'access_level' );
 		$t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
 			access_has_global_level( $t_access_level );
 
@@ -87,7 +87,7 @@ function mci_account_get_array_by_id( $p_user_id ) {
  * @throws ClientException
  */
 function mci_account_get_array_by_ids ( array $p_user_ids ) {
-	$t_result = array();
+	$t_result = [];
 
 	foreach ( $p_user_ids as $t_user_id ) {
 		$t_result[] = mci_account_get_array_by_id( $t_user_id );

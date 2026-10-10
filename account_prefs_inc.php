@@ -80,7 +80,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 	# protected account check
 	if( user_is_protected( $p_user_id ) ) {
 		if( $p_error_if_protected ) {
-			throw new ClientException( "Protected account", ERROR_PROTECTED_ACCOUNT );
+			throw new ClientException( 'Protected account', ERROR_PROTECTED_ACCOUNT );
 		} else {
 			return;
 		}
@@ -429,7 +429,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</select>
 		</td>
 	</tr>
-	<?php event_signal( 'EVENT_ACCOUNT_PREF_UPDATE_FORM', array( $p_user_id ) ); ?>
+	<?php event_signal( 'EVENT_ACCOUNT_PREF_UPDATE_FORM', [$p_user_id] ); ?>
 	</table>
 						</div>
 					</fieldset>
@@ -446,7 +446,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 	print_form_button(
 		'account_prefs_reset.php',
 		lang_get( 'reset_prefs_button' ),
-		array( 'user_id' => $p_user_id, 'redirect_url' => $t_redirect_url ),
+		['user_id' => $p_user_id, 'redirect_url' => $t_redirect_url],
 		null,
 		'btn btn-primary btn-white btn-round'
 	);

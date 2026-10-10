@@ -54,7 +54,7 @@ class IssueFileDeleteCommand extends Command {
 			if( $t_file_issue_id === false ) {
 				throw new ClientException( "Attachment '$this->file_id' not found",
 					ERROR_FILE_NOT_FOUND,
-					[ $this->file_id ]
+					[$this->file_id]
 				);
 			}
 			$this->issue_id = (int)$t_file_issue_id;
@@ -66,7 +66,7 @@ class IssueFileDeleteCommand extends Command {
 		# A missing attachment and an attachment belonging to another issue are
 		# handled identically to avoid exposing whether a file id exists.
 		if( (int)$t_file_issue_id !== $this->issue_id ) {
-			throw new ClientException( 'Attachment does not belong to issue', ERROR_INVALID_FIELD_VALUE, array( 'file_id' ) );
+			throw new ClientException( 'Attachment does not belong to issue', ERROR_INVALID_FIELD_VALUE, ['file_id'] );
 		}
 
 		$t_project_id = (int)bug_get_field( $this->issue_id, 'project_id' );
@@ -79,7 +79,7 @@ class IssueFileDeleteCommand extends Command {
 			throw new ClientException(
 				sprintf( "Issue '%d' is read-only.", $this->issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				array( $this->issue_id )
+				[$this->issue_id]
 			);
 		}
 
@@ -100,6 +100,6 @@ class IssueFileDeleteCommand extends Command {
 	 */
 	protected function process() {
 		file_delete( $this->file_id, 'bug' );
-		return array( 'issue_id' => $this->issue_id );
+		return ['issue_id' => $this->issue_id];
 	}
 }

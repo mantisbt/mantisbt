@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare( strict_types=1 );
 # MantisBT - A PHP based bugtracking system
 
 # MantisBT is free software: you can redistribute it and/or modify
@@ -40,7 +41,7 @@ final class HtmlApiTest extends MantisCoreBase {
 	public static function tearDownAfterClass(): void {
 		config_set_global( 'short_path', self::$short_path );
 	}
-	
+
 	/**
 	 * Tests print_menu()
 	 *
@@ -51,7 +52,7 @@ final class HtmlApiTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testPrintMenu( $p_menu_items, $p_current_page, $p_expected ): void {
-		if( is_subclass_of( $p_expected, '\Throwable' ) ) { 
+		if( is_subclass_of( $p_expected, '\Throwable' ) ) {
 			$this->expectException( $p_expected );
 		} else {
 			$this->expectOutputString( $p_expected );
@@ -83,35 +84,35 @@ final class HtmlApiTest extends MantisCoreBase {
 				$t_begin . $t_end
 			],
 			[
-				[ '' => [ 'url' => '', 'label' => '' ]  ],
+				['' => ['url' => '', 'label' => '']],
 				'',
 				$t_begin . '<li class=""><a href="">' . $t_no_label . '</a></li>' . "\n" . $t_end
 			],
 			# 'Absolute' parameter tests
 			[
-				[ '' => [ 'url' => 'test.php', 'label' => '', 'absolute' ]  ],
+				['' => ['url' => 'test.php', 'label' => '', 'absolute']],
 				'',
 				$t_begin . '<li class=""><a href="/test_dir/test.php">' . $t_no_label . '</a></li>' . "\n" . $t_end
 			],
 			[
-				[ '' => [ 'url' => 'test.php', 'label' => '', 'absolute' => false ]  ],
+				['' => ['url' => 'test.php', 'label' => '', 'absolute' => false]],
 				'',
 				$t_begin . '<li class=""><a href="/test_dir/test.php">' . $t_no_label . '</a></li>' . "\n" . $t_end
 			],
 			[
-				[ '' => [ 'url' => 'test.php', 'label' => '', 'absolute' => true ]  ],
+				['' => ['url' => 'test.php', 'label' => '', 'absolute' => true]],
 				'',
 				$t_begin . '<li class=""><a href="test.php">' . $t_no_label . '</a></li>' . "\n" . $t_end
 			],
 			# Current page test
 			[
-				[ '' => [ 'url' => 'test.php', 'label' => '' ]  ],
+				['' => ['url' => 'test.php', 'label' => '']],
 				'test.php',
 				$t_begin . '<li class="active"><a href="/test_dir/test.php">' . $t_no_label . '</a></li>' . "\n" . $t_end
 			],
 			# 'Label' test
 			[
-				[ '' => [ 'url' => '', 'label' => 'add_file' ] ],
+				['' => ['url' => '', 'label' => 'add_file']],
 				'',
 				$t_begin . '<li class=""><a href="">' . lang_get_defaulted( 'add_file' ) . '</a></li>' . "\n" . $t_end
 			],

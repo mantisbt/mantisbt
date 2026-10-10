@@ -29,9 +29,9 @@
 /**
  * requires url_api
  */
-require_once( 'url_api.php' );
-require_once( 'database_api.php' );
-require_once( 'lang_api.php' );
+require_once 'url_api.php';
+require_once 'database_api.php';
+require_once 'lang_api.php';
 
 /**
  * Get a chunk of JSON from a given URL.
@@ -98,20 +98,20 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			$t_error_description = $p_error;
 			break;
 		default:
-			#shouldn't happen, just display the error just in case
+			# shouldn't happen, just display the error just in case
 			$t_error_type = '';
 			$t_error_description = $p_error;
 	}
 
-	json_output_raw( array(
+	json_output_raw( [
 		'status' => 'ERROR',
-		'error' => array(
+		'error' => [
 			'code' => $t_error_code,
 			'type' => $t_error_type,
 			'message' => $t_error_description
-		),
+		],
 		'contents' => $t_error_description
-	) );
+	] );
 }
 /**
  * Outputs the specified contents inside a json response with OK status
@@ -121,10 +121,10 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line ) {
  * @return void
  */
 function json_output_response ( $p_contents = '' ) {
-	json_output_raw( array(
+	json_output_raw( [
 		'status' => 'OK',
 		'contents' => $p_contents
-	) );
+	] );
 }
 
 /**

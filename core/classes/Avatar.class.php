@@ -34,79 +34,77 @@ require_api( 'user_api.php' );
 /**
  * A class that represents information about a user's avatar.
  */
-class Avatar
-{
-    public $image = null;
-    public $link = null;
-    public $text = null;
+class Avatar {
+	public $image = null;
+	public $link = null;
+	public $text = null;
 
-    /**
-     * Gets the avatar information for the user.  The avatars are provided by
-     * plugins that can integrate with a variety of services like gravatar.com,
-     * LDAP, Social Identities, etc.
-     *
-     * If logged in user doesn't have access to view avatars or no avatar is found,
-     * then a default avatar will be used.
-     *
-     * Note that the provided user id may no longer has a corresponding user in the
-     * system, if the user was deleted.
-     *
-     * @param integer $p_user_id  The user id.
-     * @param integer $p_size     The desired width/height of the avatar.
-     *
-     * @return Avatar The Avatar instance.
-     */
-    public static function get( $p_user_id, $p_size = 80 ) {
-        $t_enabled = config_get( 'show_avatar' ) !== OFF;
-        $t_avatar = null;
+	/**
+	 * Gets the avatar information for the user.  The avatars are provided by
+	 * plugins that can integrate with a variety of services like gravatar.com,
+	 * LDAP, Social Identities, etc.
+	 *
+	 * If logged in user doesn't have access to view avatars or no avatar is found,
+	 * then a default avatar will be used.
+	 *
+	 * Note that the provided user id may no longer has a corresponding user in the
+	 * system, if the user was deleted.
+	 *
+	 * @param integer $p_user_id  The user id.
+	 * @param integer $p_size     The desired width/height of the avatar.
+	 *
+	 * @return Avatar The Avatar instance.
+	 */
+	public static function get( $p_user_id, $p_size = 80 ) {
+		$t_enabled = config_get( 'show_avatar' ) !== OFF;
+		$t_avatar = null;
 
-        if ( $t_enabled ) {
+		if ( $t_enabled ) {
 			$t_user_exists = user_exists( $p_user_id );
-            if ( $t_user_exists &&
-                 access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
-                $t_avatar = event_signal(
-                    'EVENT_USER_AVATAR',
-                    array( $p_user_id, $p_size ) );
-            }
+			if ( $t_user_exists &&
+				 access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
+				$t_avatar = event_signal(
+					'EVENT_USER_AVATAR',
+					[$p_user_id, $p_size] );
+			}
 
-            if( $t_avatar === null ) {
-                $t_avatar = new Avatar();
-            }
+			if( $t_avatar === null ) {
+				$t_avatar = new Avatar();
+			}
 
-            $t_avatar->normalize( $p_user_id, $t_user_exists );
-        }
+			$t_avatar->normalize( $p_user_id, $t_user_exists );
+		}
 
-        return $t_avatar;
-    }
+		return $t_avatar;
+	}
 
-    /**
-     * A method that is called on the Avatar object after it is populated by
-     * the plugins to make sure that all fields are validated correctly,
-     * missing values are defaulted, and match the expectations of the MantisBT
-     * core.
-     *
-     * @param integer $p_user_id  The user id.
+	/**
+	 * A method that is called on the Avatar object after it is populated by
+	 * the plugins to make sure that all fields are validated correctly,
+	 * missing values are defaulted, and match the expectations of the MantisBT
+	 * core.
+	 *
+	 * @param integer $p_user_id  The user id.
 	 * @param bool    $p_user_exists Whether the user exists.
-     *
-     * @return void
-     */
-    private function normalize( $p_user_id, $p_user_exists ) {
-        if( $this->image === null) {
-            $this->image = config_get_global( 'path' ) . 'images/avatar.png';
-        }
+	 *
+	 * @return void
+	 */
+	private function normalize( $p_user_id, $p_user_exists ) {
+		if( $this->image === null ) {
+			$this->image = config_get_global( 'path' ) . 'images/avatar.png';
+		}
 
-        if( $this->link === null ) {
-            if ( $p_user_exists ) {
-                $this->link = config_get_global( 'path' ) .
-                    'view_user_page.php?id=' . $p_user_id;
-            } else {
-                $this->link = '';
-            }
-        }
+		if( $this->link === null ) {
+			if ( $p_user_exists ) {
+				$this->link = config_get_global( 'path' ) .
+					'view_user_page.php?id=' . $p_user_id;
+			} else {
+				$this->link = '';
+			}
+		}
 
-        if( $this->text === null ) {
-            $this->text = $p_user_exists ? user_get_name( $p_user_id ) : '';
-        }
-    }
+		if( $this->text === null ) {
+			$this->text = $p_user_exists ? user_get_name( $p_user_id ) : '';
+		}
+	}
 }
-

@@ -52,7 +52,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -89,9 +89,9 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 }
 
 if( bug_is_readonly( $f_bug_id ) ) {
-	throw new ClientException( "Issue is read-only",
+	throw new ClientException( 'Issue is read-only',
 		ERROR_BUG_READ_ONLY_ACTION_DENIED,
-		[ $f_bug_id ]
+		[$f_bug_id]
 	);
 }
 
@@ -176,7 +176,7 @@ layout_page_begin();
 	<form id="update_bug_form" method="post" action="bug_update.php">
 		<?php echo form_security_field( 'bug_update' ); ?>
 		<input type="hidden" name="bug_id" value="<?php echo $t_bug_id ?>" />
-        <input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
+		<input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
 
 		<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
@@ -208,7 +208,7 @@ if( $t_top_buttons_enabled ) {
 		<table class="table table-bordered table-condensed table-striped">
 			<tbody>
 <?php
-event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $t_bug_id ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', [$t_bug_id] );
 
 if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $t_show_date_submitted | $t_show_last_updated ) {
 	#
@@ -246,12 +246,12 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<td>';
 
 	if( $t_show_category ) {
-        if( !category_is_enabled( $t_bug->category_id ) ) {
+		if( !category_is_enabled( $t_bug->category_id ) ) {
 			print_icon( 'warning',
 				'fa-status-box bigger-125 red',
 				lang_get( 'category_disabled' )
 			);
-			echo "&nbsp;";
+			echo '&nbsp;';
 		}
 		echo '<select ' . helper_get_tab_index()
 			. ( $t_allow_no_category ? '' : ' required' )
@@ -298,9 +298,13 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 	if( $t_show_reporter ) {
 		# Reporter
 		echo '<th class="category">';
-		if( $f_reporter_edit ) echo '<label for="reporter_id">';
+		if( $f_reporter_edit ) {
+		echo '<label for="reporter_id">';
+		}
 		echo lang_get( 'reporter' );
-		if( $f_reporter_edit ) echo '</label>';
+		if( $f_reporter_edit ) {
+		echo '</label>';
+		}
 		echo '</th><td>';
 
 		# Do not allow the bug's reporter to edit the Reporter field
@@ -646,7 +650,7 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 	echo '</tr>';
 }
 
-event_signal( 'EVENT_UPDATE_BUG_FORM', array( $t_bug_id ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM', [$t_bug_id] );
 
 print_table_spacer( 6 );
 
@@ -753,7 +757,6 @@ echo '<td colspan="5"><textarea ', helper_get_tab_index(),
 	' maxlength="' . $t_max_textarea_length . '">',
 	'</textarea></td></tr>';
 
-
 # Bugnote Private Checkbox (if permitted)
 if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id ) ) {
 	echo '<tr>';
@@ -782,7 +785,7 @@ if( config_get( 'time_tracking_enabled' ) ) {
 	}
 }
 
-event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $t_bug_id ) );
+event_signal( 'EVENT_BUGNOTE_ADD_FORM', [$t_bug_id] );
 ?>
 </tbody>
 </table>
@@ -809,7 +812,7 @@ if( $t_bottom_buttons_enabled ) {
 
 <?php
 define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-include( __DIR__ . '/bugnote_view_inc.php' );
+include __DIR__ . '/bugnote_view_inc.php';
 layout_page_end();
 
 last_visited_issue( $t_bug_id );

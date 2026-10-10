@@ -58,7 +58,7 @@ class ProjectDeleteCommand extends Command {
 			throw new ClientException(
 				"Project '$this->id' not found",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->id ) );
+				[$this->id] );
 		}
 	}
 
@@ -71,7 +71,7 @@ class ProjectDeleteCommand extends Command {
 		global $g_project_override;
 		$g_project_override = $this->id;
 
-		event_signal( 'EVENT_MANAGE_PROJECT_DELETE', array( $this->id ) );
+		event_signal( 'EVENT_MANAGE_PROJECT_DELETE', [$this->id] );
 
 		project_delete( $this->id );
 		return [];

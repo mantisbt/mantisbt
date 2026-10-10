@@ -44,7 +44,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -78,7 +78,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 }
 
 if( config_get( 'enable_sponsorship' ) == OFF ) {
-	throw new ClientException( "Sponsorship disabled", ERROR_SPONSORSHIP_NOT_ENABLED );
+	throw new ClientException( 'Sponsorship disabled', ERROR_SPONSORSHIP_NOT_ENABLED );
 }
 
 access_ensure_bug_level( config_get( 'sponsor_threshold' ), $f_bug_id );
@@ -97,7 +97,7 @@ if( $f_amount == 0 ) {
 	# add sponsorship
 	$t_user = auth_get_current_user_id();
 	if( is_blank( user_get_email( $t_user ) ) ) {
-		throw new ClientException( "Sponsor account has no email", ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL );
+		throw new ClientException( 'Sponsor account has no email', ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL );
 	} else {
 		$t_sponsorship = new SponsorshipData;
 		$t_sponsorship->bug_id = $f_bug_id;

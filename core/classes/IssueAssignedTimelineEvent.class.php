@@ -56,7 +56,7 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 			$t_html = $this->html_start( 'fa-hand-o-right' );
 			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), prepare_user_name( $this->handler_id ) );
 		} else {
-            $t_html = $this->html_start( 'fa-flag-o' );
+			$t_html = $this->html_start( 'fa-flag-o' );
 			$t_string = sprintf( lang_get( 'timeline_issue_unassigned' ), prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		}
 

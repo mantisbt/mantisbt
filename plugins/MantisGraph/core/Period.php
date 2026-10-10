@@ -96,10 +96,10 @@ class Period {
 	 * @return void
 	 */
 	function a_week( DateTimeImmutable $p_when, int $p_weeks = 1 ) {
-		$this->start = $p_when->modify('monday this week');
+		$this->start = $p_when->modify( 'monday this week' );
 		$t_week = $p_weeks == 1 ? 'this' : $p_weeks - 1;
-		$t_end = $this->eod( $p_when->modify("sunday $t_week week") );
-		$this->end = min( $t_end, new DateTimeImmutable());
+		$t_end = $this->eod( $p_when->modify( "sunday $t_week week" ) );
+		$this->end = min( $t_end, new DateTimeImmutable() );
 	}
 
 	/**
@@ -120,7 +120,7 @@ class Period {
 	 */
 	function last_week( int $p_weeks = 1 ) {
 		$t_date = new DateTimeImmutable();
-		$this->a_week( $t_date->modify("-1 week"), $p_weeks );
+		$this->a_week( $t_date->modify( '-1 week' ), $p_weeks );
 	}
 
 	/**
@@ -141,13 +141,13 @@ class Period {
 	 * @return void
 	 */
 	function a_month( DateTimeImmutable $p_when ) {
-		$this->start = $this->bod( $p_when->modify('first day of this month') );
-		$this->end = $this->eod( $p_when->modify('last day of this month') );
+		$this->start = $this->bod( $p_when->modify( 'first day of this month' ) );
+		$this->end = $this->eod( $p_when->modify( 'last day of this month' ) );
 	}
 
 	/**
- 	 * Set dates for this month.
- 	 *
+	 * Set dates for this month.
+	 *
 	 * @return void
 	 */
 	function this_month() {
@@ -161,7 +161,7 @@ class Period {
 	 */
 	function last_month() {
 		$t_date = new DateTimeImmutable();
-		$this->a_month( $t_date->modify( "-1 month" ) );
+		$this->a_month( $t_date->modify( '-1 month' ) );
 	}
 
 	/**
@@ -183,10 +183,10 @@ class Period {
 	 */
 	function a_quarter( DateTimeImmutable $p_when ) {
 		# Get first month of quarter
-		$t_month = intdiv( $p_when->format('m') - 1, 3 ) * 3 + 1;
-		$t_year = $p_when->format('Y');
+		$t_month = intdiv( $p_when->format( 'm' ) - 1, 3 ) * 3 + 1;
+		$t_year = $p_when->format( 'Y' );
 
-		$this->start = $this->bod()->setDate( $t_year, $t_month, 1);
+		$this->start = $this->bod()->setDate( $t_year, $t_month, 1 );
 		$this->end = $this->eod( $this->start->modify( 'last day of second month' ) );
 	}
 
@@ -227,8 +227,8 @@ class Period {
 	 * @return void
 	 */
 	function a_year( DateTimeImmutable $p_when ) {
-		$this->start = $this->bod( $p_when->modify('first day of january') );
-		$this->end = $this->eod( $p_when->modify('last day of december') );
+		$this->start = $this->bod( $p_when->modify( 'first day of january' ) );
+		$this->end = $this->eod( $p_when->modify( 'last day of december' ) );
 	}
 
 	/**
@@ -257,7 +257,7 @@ class Period {
 	 */
 	function last_year() {
 		$t_date = new DateTimeImmutable();
-		$this->a_year( $t_date->modify( "-1 year" ) );
+		$this->a_year( $t_date->modify( '-1 year' ) );
 	}
 
 	/**
@@ -312,7 +312,7 @@ class Period {
 	 * @return string
 	 */
 	function period_selector( string $p_control_name ): string {
-		$t_periods = array(
+		$t_periods = [
 			self::PERIOD_NONE => plugin_lang_get( 'period_none' ),
 			self::PERIOD_WEEK_TO_DATE => plugin_lang_get( 'period_this_week' ),
 			self::PERIOD_WEEK_PREVIOUS => plugin_lang_get( 'period_last_week' ),
@@ -324,14 +324,14 @@ class Period {
 			self::PERIOD_YEAR_TO_DATE => plugin_lang_get( 'period_year_to_date' ),
 			self::PERIOD_YEAR_PREVIOUS => plugin_lang_get( 'period_last_year' ),
 			self::PERIOD_ARBITRARY_DATES => plugin_lang_get( 'period_select' ),
-		);
+		];
 
 		$t_dropdown = get_dropdown( $t_periods, $p_control_name, $this->type, false, false, true );
 		$t_label = plugin_lang_get( 'period' );
 		$t_formatted_start = $this->get_start_formatted();
 		$t_formatted_end = $this->get_end_formatted();
 		$t_date_input_pattern = '<span class="inline"><label for="%1$s" class="padding-right-4">%2$s</label>%3$s</span>';
-		$t_from_date = sprintf( $t_date_input_pattern, 
+		$t_from_date = sprintf( $t_date_input_pattern,
 			'start_date',
 			lang_get( 'from_date' ),
 			datetimepicker_get_field( $t_formatted_start, 'start_date' )
@@ -502,7 +502,7 @@ class Period {
 	 *
 	 * @return DateTimeImmutable
 	 */
-	private function eod( ?DateTimeImmutable $p_date = null): DateTimeImmutable {
+	private function eod( ?DateTimeImmutable $p_date = null ): DateTimeImmutable {
 		if( $p_date === null ) {
 			return new DateTimeImmutable();
 		}

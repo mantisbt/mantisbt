@@ -32,7 +32,7 @@
  * @uses string_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -49,7 +49,6 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'adm_permissions_report.php' );
-
 
 /**
  * return html for start of administration report section

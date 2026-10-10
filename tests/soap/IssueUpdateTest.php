@@ -240,43 +240,43 @@ class IssueUpdateTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 		$this->deleteAfterRun( $t_issue_id );
-		$t_note_data = array(
+		$t_note_data = [
 			'text' => 'first note',
-		);
+		];
 		$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 		$t_issue_with_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertCount( 1, $t_issue_with_note->notes, "Issue has one note" );
+		$this->assertCount( 1, $t_issue_with_note->notes, 'Issue has one note' );
 
 		# Update the issue just retrieved without changing it
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_with_note );
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertCount( 1, $t_updated_issue->notes, "Note has not been duplicated" );
+		$this->assertCount( 1, $t_updated_issue->notes, 'Note has not been duplicated' );
 
 		# Add a second note with time tracking
 		$t_issue_with_one_new_note = $t_updated_issue;
-		$t_issue_with_one_new_note->notes[] = array(
+		$t_issue_with_one_new_note->notes[] = [
 			'text' => 'second note',
 			'note_type' => TIME_TRACKING,
 			'time_tracking' => 60
-		);
+		];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_with_one_new_note );
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertCount( 2, $t_updated_issue->notes, "New note has been added" );
+		$this->assertCount( 2, $t_updated_issue->notes, 'New note has been added' );
 		$t_new_note = $t_updated_issue->notes[1];
 		$this->assertEquals( 'second note', $t_new_note->text );
 		$this->assertEquals( TIME_TRACKING, $t_new_note->note_type );
 		$this->assertEquals( 60, $t_new_note->time_tracking );
 
 		# Add a 3rd note without reposting the first two
-		$t_issue_with_one_new_note->notes = [ [
+		$t_issue_with_one_new_note->notes = [[
 			'text' => 'third note'
-		] ];
+		]];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_with_one_new_note );
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		$this->assertCount( 3, $t_updated_issue->notes, "A new note has been added" );
+		$this->assertCount( 3, $t_updated_issue->notes, 'A new note has been added' );
 		$t_new_note = $t_updated_issue->notes[2];
 		$this->assertEquals( 'third note', $t_new_note->text );
 	}
@@ -369,7 +369,7 @@ class IssueUpdateTest extends SoapBase {
 
 		$t_issue_to_update = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		unset ( $t_issue_to_update->category );
+		unset( $t_issue_to_update->category );
 
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_to_update );
 
@@ -398,12 +398,12 @@ class IssueUpdateTest extends SoapBase {
 
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$t_issue->notes = array(
-			array (
+		$t_issue->notes = [
+			[
 				'text' => 'first note',
 				'time_tracking' => '30'
-			)
-		);
+			]
+		];
 
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 
@@ -413,7 +413,6 @@ class IssueUpdateTest extends SoapBase {
 
 		$this->assertEquals( 30, $t_issue_with_note->notes[0]->time_tracking );
 	}
-
 
 	/**
 	 * Adding REMINDER notes is not supported.
@@ -429,20 +428,20 @@ class IssueUpdateTest extends SoapBase {
 
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$t_issue->notes = array(
-			array (
+		$t_issue->notes = [
+			[
 				'text' => 'first note',
 				'note_type' => REMINDER,
 				'note_attr' => '|1|',
-			)
-		);
+			]
+		];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertCount( 1, $t_updated_issue->notes, "A new note has been added" );
+		$this->assertCount( 1, $t_updated_issue->notes, 'A new note has been added' );
 		$t_new_note = $t_updated_issue->notes[0];
-		$this->assertEquals( BUGNOTE, $t_new_note->note_type, "Note created as BUGNOTE, not REMINDER" );
-		$this->assertNotEquals( '|1|', $t_new_note->note_attr, "Note attributes were not set" );
+		$this->assertEquals( BUGNOTE, $t_new_note->note_type, 'Note created as BUGNOTE, not REMINDER' );
+		$this->assertNotEquals( '|1|', $t_new_note->note_attr, 'Note attributes were not set' );
 	}
 
 	/**
@@ -494,14 +493,14 @@ class IssueUpdateTest extends SoapBase {
 	 */
 	public function testUpdateWithTagOperations() {
 		# initialise tags
-		$t_tag_id1 = $this->client->mc_tag_add( $this->userName, $this->password, array(
+		$t_tag_id1 = $this->client->mc_tag_add( $this->userName, $this->password, [
 			'name' => 'IssueUpdateTest.testUpdateWithTagAdditions'
-		) );
+		] );
 		$this->deleteTagAfterRun( $t_tag_id1 );
 
-		$t_tag_id2 = $this->client->mc_tag_add( $this->userName, $this->password, array(
+		$t_tag_id2 = $this->client->mc_tag_add( $this->userName, $this->password, [
 			'name' => 'IssueUpdateTest.testUpdateWithTagAdditions2'
-		) );
+		] );
 		$this->deleteTagAfterRun( $t_tag_id2 );
 
 		$t_tag1 = new stdClass();
@@ -517,25 +516,25 @@ class IssueUpdateTest extends SoapBase {
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# update from 0 to 2 tags -> test attaching tags
-		$t_issue->tags = array ( $t_tag1, $t_tag2 );
+		$t_issue->tags =  [$t_tag1, $t_tag2];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertCount( 2, $t_issue->tags );
 
 		# update from 2 to 1 tags -> test partially detaching tags
-		$t_issue->tags = array ( $t_tag1 );
+		$t_issue->tags =  [$t_tag1];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertCount( 1, $t_issue->tags );
 
 		# update from 1 to 2 tags -> test partially attaching tags
-		$t_issue->tags = array ( $t_tag1, $t_tag2 );
+		$t_issue->tags =  [$t_tag1, $t_tag2];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertCount( 2, $t_issue->tags );
 
 		# update from 2 to 0 tags -> test detaching tags
-		$t_issue->tags = array();
+		$t_issue->tags = [];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertCount( 0, $t_issue->tags );
@@ -557,7 +556,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertCount( 0, $t_issue->monitors );
 
 		# update with this user as monitor -> should be added
-		$t_issue->monitors = array ( array ( 'id' => $this->userId));
+		$t_issue->monitors =  [['id' => $this->userId]];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertCount( 1, $t_issue->monitors );
@@ -570,7 +569,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( $this->userId, $t_issue->monitors[0]->id );
 
 		# update with empty monitor list -> should be removed
-		$t_issue->monitors = array();
+		$t_issue->monitors = [];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertCount( 0, $t_issue->monitors );
@@ -582,9 +581,9 @@ class IssueUpdateTest extends SoapBase {
 	 * @return void
 	 */
 	public function testUpdateStatusEnforcesWorkflow() {
-		$this->savedStatusWorkflow = $this->setConfig( 'status_enum_workflow', array(
+		$this->savedStatusWorkflow = $this->setConfig( 'status_enum_workflow', [
 			NEW_ => FEEDBACK . ':feedback',
-		) );
+		] );
 		$this->statusWorkflowSaved = true;
 
 		$t_issue_id = $this->client->mc_issue_add(
@@ -595,7 +594,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->deleteAfterRun( $t_issue_id );
 
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
-		$t_issue->status = array( 'id' => ACKNOWLEDGED );
+		$t_issue->status = ['id' => ACKNOWLEDGED];
 
 		try {
 			$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
@@ -610,7 +609,7 @@ class IssueUpdateTest extends SoapBase {
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertEquals( NEW_, $t_issue->status->id );
 
-		$t_issue->status = array( 'id' => FEEDBACK );
+		$t_issue->status = ['id' => FEEDBACK];
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertEquals( FEEDBACK, $t_issue->status->id );

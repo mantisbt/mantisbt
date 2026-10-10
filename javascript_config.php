@@ -27,7 +27,7 @@
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'config_api.php' );
 
 /**
@@ -42,7 +42,6 @@ function print_config_value( $p_config_key ) {
 # Send correct MIME Content-Type header for JavaScript content.
 # See http://www.rfc-editor.org/rfc/rfc4329.txt for details on why application/javascript is the correct MIME type.
 header( 'Content-Type: application/javascript; charset=UTF-8' );
-
 
 # Don't let Internet Explorer second-guess our content-type, as per
 # http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx

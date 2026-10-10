@@ -96,7 +96,7 @@ class UserCreateCommand extends Command {
 		$this->access_level = access_parse_array(
 			$this->payload(
 				'access_level',
-				array( 'id' => config_get_global( 'default_new_account_access_level' ) ) ) );
+				['id' => config_get_global( 'default_new_account_access_level' )] ) );
 
 		# Don't allow the creation of accounts with access levels higher than that of
 		# the user creating the account.
@@ -120,7 +120,7 @@ class UserCreateCommand extends Command {
 		# Password
 		$this->password = $this->payload( 'password', '' );
 		if( ( ON == config_get( 'send_reset_password' ) ) &&
-		    ( ON == config_get( 'enable_email_notification' ) ) ) {
+			( ON == config_get( 'enable_email_notification' ) ) ) {
 			# Check code will be sent to the user directly via email. Dummy password set to random
 			# Create random password
 			$this->password = auth_generate_random_password();
@@ -154,7 +154,6 @@ class UserCreateCommand extends Command {
 		# set language back to user language
 		lang_pop();
 
-		return array( 'id' => user_get_id_by_name( $this->username ) );
+		return ['id' => user_get_id_by_name( $this->username )];
 	}
 }
-

@@ -41,7 +41,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -63,9 +63,9 @@ $f_name			= gpc_get_string( 'name' );
 $f_add_and_edit	= gpc_get_bool( 'add_and_edit_category' );
 
 if( is_blank( $f_name ) ) {
-	throw new ClientException( "Category is required",
+	throw new ClientException( 'Category is required',
 		ERROR_EMPTY_FIELD,
-		[ lang_get( 'category' ) ]
+		[lang_get( 'category' )]
 	);
 }
 
@@ -84,8 +84,8 @@ foreach( $t_names as $t_name ) {
 	$t_name = trim( $t_name );
 	if( category_is_unique( $f_project_id, $t_name ) ) {
 		$t_data = [
-			'query' => [ 'project_id' => $f_project_id ],
-			'payload' => [ 'name' => $t_name ],
+			'query' => ['project_id' => $f_project_id],
+			'payload' => ['name' => $t_name],
 		];
 		$t_command = new CategoryAddCommand( $t_data );
 		$t_result = $t_command->execute();
@@ -94,7 +94,7 @@ foreach( $t_names as $t_name ) {
 		# We only error out on duplicates when a single value was given.
 		# If multiple values are provided, we just add the ones we can; the
 		# others already exist so it isn't really an error.
-		throw new ClientException( "Duplicate category", ERROR_CATEGORY_DUPLICATE );
+		throw new ClientException( 'Duplicate category', ERROR_CATEGORY_DUPLICATE );
 	}
 }
 

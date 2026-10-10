@@ -19,6 +19,9 @@ plugins/*
 !plugins/XmlImportExport
 !plugins/Gravatar
 
+# tools
+tools/ecs/vendor
+
 # IDE/Editor temporary files
 *~
 *.swp

@@ -69,41 +69,41 @@ class ApiTokenApiTest extends MantisCoreBase {
 	public static function providerParseCredentials() {
 		$t_token = self::SAMPLE_TOKEN;
 
-		return array(
+		return [
 			# The bare token form remains supported, unchanged.
-			'bare token' => array( $t_token, $t_token ),
+			'bare token' => [$t_token, $t_token],
 
 			# RFC 6750 bearer form, with case-insensitive scheme matching.
-			'Bearer' => array( 'Bearer ' . $t_token, $t_token ),
-			'bearer lowercase' => array( 'bearer ' . $t_token, $t_token ),
-			'BEARER uppercase' => array( 'BEARER ' . $t_token, $t_token ),
-			'BeArEr mixed case' => array( 'BeArEr ' . $t_token, $t_token ),
+			'Bearer' => ['Bearer ' . $t_token, $t_token],
+			'bearer lowercase' => ['bearer ' . $t_token, $t_token],
+			'BEARER uppercase' => ['BEARER ' . $t_token, $t_token],
+			'BeArEr mixed case' => ['BeArEr ' . $t_token, $t_token],
 
 			# Multiple spaces after the scheme are tolerated, as is surrounding
 			# whitespace around the whole header value.
-			'extra spaces after scheme' => array( 'Bearer    ' . $t_token, $t_token ),
-			'surrounding whitespace, bearer' => array( '  Bearer ' . $t_token . '  ', $t_token ),
-			'surrounding whitespace, bare' => array( '  ' . $t_token . '  ', $t_token ),
+			'extra spaces after scheme' => ['Bearer    ' . $t_token, $t_token],
+			'surrounding whitespace, bearer' => ['  Bearer ' . $t_token . '  ', $t_token],
+			'surrounding whitespace, bare' => ['  ' . $t_token . '  ', $t_token],
 
 			# RFC 6750 defines the separator as 1*SP, so a HTAB is not a valid
 			# scheme separator: the value is passed through as-is rather than
 			# being treated as a bearer token.
-			'tab after scheme is not a separator' => array( "Bearer\t" . $t_token, "Bearer\t" . $t_token ),
+			'tab after scheme is not a separator' => ["Bearer\t" . $t_token, "Bearer\t" . $t_token],
 
 			# Other schemes are left untouched, so they keep failing token
 			# validation exactly as they did before.
-			'basic scheme' => array( 'Basic dXNlcjpwYXNz', 'Basic dXNlcjpwYXNz' ),
+			'basic scheme' => ['Basic dXNlcjpwYXNz', 'Basic dXNlcjpwYXNz'],
 
 			# Degenerate inputs must not produce a token-shaped result.
-			'empty' => array( '', '' ),
-			'whitespace only' => array( "  \t ", '' ),
-			'scheme without token' => array( 'Bearer', 'Bearer' ),
-			'scheme with trailing space only' => array( 'Bearer ', 'Bearer' ),
+			'empty' => ['', ''],
+			'whitespace only' => ["  \t ", ''],
+			'scheme without token' => ['Bearer', 'Bearer'],
+			'scheme with trailing space only' => ['Bearer ', 'Bearer'],
 
 			# 'Bearer' without a separating space is not a scheme, so the value
 			# is passed through as-is rather than silently truncated.
-			'no separator after scheme' => array( 'Bearer' . $t_token, 'Bearer' . $t_token ),
-		);
+			'no separator after scheme' => ['Bearer' . $t_token, 'Bearer' . $t_token],
+		];
 	}
 
 	/**

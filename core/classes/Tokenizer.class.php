@@ -22,7 +22,6 @@
  * @subpackage classes
  */
 
-
 /**
  * Tokenizer class
  *
@@ -32,8 +31,7 @@
  * @package MantisBT
  * @subpackage classes
  */
-class Tokenizer
-{
+class Tokenizer {
 	/**
 	 * @var array $tokens
 	 */
@@ -46,13 +44,11 @@ class Tokenizer
 	 * @param string $p_code PHP code to tokenize
 	 * @throws Exception if given code is not valid
 	 */
-	public function __construct( $p_code )
-	{
+	public function __construct( $p_code ) {
 		# Use TOKEN_PARSE flag to check syntax, making sure we got valid PHP code
 		try {
 			$t_tokens = token_get_all( "<?php $p_code;", TOKEN_PARSE );
-		}
-		catch( ParseError $e ) {
+		} catch( ParseError $e ) {
 			throw new Exception( $e->getMessage() );
 		}
 
@@ -92,7 +88,7 @@ class Tokenizer
 	 */
 	public function get_string() {
 		$t_code = '';
-		foreach ($this->tokens as $t_token) {
+		foreach ( $this->tokens as $t_token ) {
 			$t_code .= is_array( $t_token ) ? $t_token[1] : $t_token;
 		}
 		return $t_code;

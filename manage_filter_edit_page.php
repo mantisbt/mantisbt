@@ -45,7 +45,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
@@ -65,15 +65,15 @@ require_api( 'version_api.php' );
 
 auth_ensure_user_authenticated();
 
-layout_page_header( lang_get('manage_filter_edit_page_title' ) );
+layout_page_header( lang_get( 'manage_filter_edit_page_title' ) );
 
 layout_page_begin( 'manage_filter_edit_page.php' );
 
 $f_filter_id = gpc_get_int( 'filter_id', null );
 if( null === $f_filter_id ) {
-	throw new ClientException( "Filter Id is required",
+	throw new ClientException( 'Filter Id is required',
 		ERROR_EMPTY_FIELD,
-		[ 'filter_id' ]
+		['filter_id']
 	);
 }
 
@@ -104,7 +104,7 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
-				<?php echo lang_get('edit_filter') ?>
+				<?php echo lang_get( 'edit_filter' ) ?>
 			</h4>
 
 			<div class="widget-toolbar">

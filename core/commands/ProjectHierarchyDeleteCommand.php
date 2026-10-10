@@ -64,16 +64,15 @@ class ProjectHierarchyDeleteCommand extends Command {
 			throw new ClientException(
 				"Project '$this->project_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->project_id ) );
+				[$this->project_id] );
 		}
-
 
 		$this->subproject_id = helper_parse_id( $this->query( 'subproject_id' ), 'subproject_id' );
 		if( !project_exists( $this->subproject_id ) ) {
 			throw new ClientException(
 				"Project '$this->subproject_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
-				array( $this->subproject_id ) );
+				[$this->subproject_id] );
 		}
 
 		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $this->project_id ) ||
@@ -87,7 +86,7 @@ class ProjectHierarchyDeleteCommand extends Command {
 			throw new ClientException(
 				"Project '$this->subproject_id' is not a subproject of '$this->project_id'",
 				ERROR_PROJECT_SUBPROJECT_NOT_FOUND,
-				array( $this->subproject_id, $this->project_id ) );
+				[$this->subproject_id, $this->project_id] );
 		}
 	}
 
@@ -107,7 +106,6 @@ class ProjectHierarchyDeleteCommand extends Command {
 
 		project_hierarchy_remove( $this->subproject_id, $this->project_id );
 
-		return array();
+		return [];
 	}
 }
-

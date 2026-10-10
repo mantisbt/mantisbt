@@ -39,7 +39,7 @@ $g_login_anonymous = false;
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -51,7 +51,6 @@ require_api( 'user_api.php' );
 require_api( 'tokens_api.php' );
 require_api( 'utility_api.php' );
 require_css( 'login.css' );
-
 
 $f_user_id = gpc_get_int( 'id' );
 $f_confirm_hash = gpc_get_string( 'confirm_hash' );
@@ -71,7 +70,7 @@ if( $t_token_confirm_hash === null
 	|| $t_token_change_email === null
 	|| $f_confirm_hash !== $t_token_confirm_hash
 ) {
-	throw new ClientException( "Invalid confirmation hash", ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
+	throw new ClientException( 'Invalid confirmation hash', ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
 }
 
 # Login again as the user

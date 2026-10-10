@@ -42,7 +42,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -81,9 +81,9 @@ if( $t_user_id == $t_reporter_id ) {
 
 # Check if the bug is readonly
 if( bug_is_readonly( $t_bug_id ) ) {
-	throw new ClientException( "Issue is read-only",
+	throw new ClientException( 'Issue is read-only',
 		ERROR_BUG_READ_ONLY_ACTION_DENIED,
-		[ $t_bug_id ]
+		[$t_bug_id]
 	);
 }
 
@@ -93,7 +93,7 @@ bugnote_set_text( $f_bugnote_id, $f_bugnote_text );
 bugnote_set_time_tracking( $f_bugnote_id, $f_time_tracking );
 
 # Plugin integration
-event_signal( 'EVENT_BUGNOTE_EDIT', array( $t_bug_id, $f_bugnote_id ) );
+event_signal( 'EVENT_BUGNOTE_EDIT', [$t_bug_id, $f_bugnote_id] );
 
 form_security_purge( 'bugnote_update' );
 

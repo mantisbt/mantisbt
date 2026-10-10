@@ -37,8 +37,7 @@ require_once 'RestBase.php';
  * @requires extension curl
  * @group    REST
  */
-class RestIssueNotesTest extends RestBase
-{
+class RestIssueNotesTest extends RestBase {
 	/**
 	 * @var int $issueId;
 	 */
@@ -57,30 +56,30 @@ class RestIssueNotesTest extends RestBase
 		# Plain bug note
 		$t_response = $this->addNote( $this->generateNoteData( 'Test Note' ) );
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Creating a note should succeed"
+			'Creating a note should succeed'
 		);
 
 		# Maximum length
 		$t_long_text = str_repeat( 'x', config_get_global( 'max_textarea_length' ) );
 		$t_response = $this->addNote( $this->generateNoteData( $t_long_text ) );
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-		"Creating a note with maximum size should succeed"
+		'Creating a note with maximum size should succeed'
 		);
 
 		# Too long
 		$t_response = $this->addNote( $this->generateNoteData( $t_long_text . ' TOO LONG' ) );
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Creating a note longer than max size should fail"
+			'Creating a note longer than max size should fail'
 		);
 
 		# Empty note text and payload
 		$t_response = $this->addNote( [] );
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Creating a note with an empty payload should fail"
+			'Creating a note with an empty payload should fail'
 		);
 		$t_response = $this->addNote( $this->generateNoteData( '' ) );
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Creating a empty note should fail"
+			'Creating a empty note should fail'
 		);
 	}
 
@@ -93,7 +92,7 @@ class RestIssueNotesTest extends RestBase
 		$this->issueId = 99999999;
 		$t_response = $this->addNote( $this->generateNoteData( 'Test Note' ) );
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Creating a note on missing issue should fail"
+			'Creating a note on missing issue should fail'
 		);
 	}
 
@@ -106,21 +105,21 @@ class RestIssueNotesTest extends RestBase
 		$t_payload = $this->generateNoteDataWithTimeTracking( 'Time tracking as HH:MM', $t_duration );
 		$t_response = $this->addNote( $t_payload );
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Creating a note with time tracking should succeed"
+			'Creating a note with time tracking should succeed'
 		);
 		$t_note = json_decode( $t_response->getBody() )->note;
 		$this->assertEquals( $t_note->time_tracking->duration, $t_duration,
-			"Created note duration should match payload"
+			'Created note duration should match payload'
 		);
 
 		$t_payload = $this->generateNoteDataWithTimeTracking( 'Time tracking as integer (minutes)', 90 );
 		$t_response = $this->addNote( $t_payload );
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Creating a note with time tracking should succeed"
+			'Creating a note with time tracking should succeed'
 		);
 		$t_note = json_decode( $t_response->getBody() )->note;
 		$this->assertEquals( '01:30', $t_note->time_tracking->duration,
-			"Duration in minutes should be converted to HH:MM"
+			'Duration in minutes should be converted to HH:MM'
 		);
 	}
 
@@ -130,23 +129,23 @@ class RestIssueNotesTest extends RestBase
 		$t_payload = $this->generateNoteData( 'Note with attachments' );
 		$t_payload['files'] = [
 			[
-				'name' => "test.txt",
-				'content' => base64_encode( "Hello World" )
+				'name' => 'test.txt',
+				'content' => base64_encode( 'Hello World' )
 			],
 			[
-				'name' => "logo.png",
+				'name' => 'logo.png',
 				'content' => base64_encode(
-					file_get_contents( __DIR__ . "/../../images/mantis_logo.png" )
+					file_get_contents( __DIR__ . '/../../images/mantis_logo.png' )
 				)
 			],
 		];
 		$t_response = $this->addNote( $t_payload );
 		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
-			"Creating a note with attachments should succeed"
+			'Creating a note with attachments should succeed'
 		);
 		$t_note = json_decode( $t_response->getBody() )->note;
 		$this->assertCount( 2, $t_note->attachments,
-			"There should be 2 attachments"
+			'There should be 2 attachments'
 		);
 		$this->assertStringStartsWith( 'text/plain', $t_note->attachments[0]->content_type,
 			"First attachment's MIME type should be plain text"
@@ -171,7 +170,7 @@ class RestIssueNotesTest extends RestBase
 		$t_issue = json_decode( $t_response->getBody() );
 		$this->assertCount( $t_notes_count - 1,
 			$t_issue->issue->notes ?? [],
-			"There should be one less note than before"
+			'There should be one less note than before'
 		);
 	}
 

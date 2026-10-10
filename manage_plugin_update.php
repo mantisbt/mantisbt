@@ -39,7 +39,7 @@ define( 'PLUGINS_DISABLED', true );
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -63,17 +63,17 @@ $t_query = new DbQuery( 'SELECT basename FROM {plugin}' );
 foreach( $t_query->fetch_all() as $t_row ) {
 	$t_basename = $t_row['basename'];
 
-	$f_change = gpc_get_bool( 'change_'.$t_basename, 0 );
+	$f_change = gpc_get_bool( 'change_' . $t_basename, 0 );
 	if( !$f_change ) {
 		continue;
 	}
 
-	$f_priority = gpc_get_int( 'priority_'.$t_basename, 3 );
+	$f_priority = gpc_get_int( 'priority_' . $t_basename, 3 );
 	if( $f_priority < PLUGIN_PRIORITY_LOW || $f_priority > PLUGIN_PRIORITY_HIGH ) {
-		throw new ClientException( "Invalid Priority", ERROR_INVALID_FIELD_VALUE,['priority_' . $t_basename] );
+		throw new ClientException( 'Invalid Priority', ERROR_INVALID_FIELD_VALUE,['priority_' . $t_basename] );
 	}
 
-	$f_protected = gpc_get_bool( 'protected_'.$t_basename, 0 );
+	$f_protected = gpc_get_bool( 'protected_' . $t_basename, 0 );
 
 	$t_update_query->bind( 'basename', $t_basename );
 	$t_update_query->bind( 'priority', $f_priority );

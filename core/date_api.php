@@ -44,7 +44,7 @@ require_api( 'lang_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-$g_cache_timezone = array();
+$g_cache_timezone = [];
 
 /**
  * checks if date is null
@@ -65,7 +65,6 @@ function date_get_null() {
 	return 1;
 }
 
-
 /**
  * Converts a datetime string to a Unix timestamp.
  *
@@ -85,12 +84,11 @@ function date_string_to_timestamp( string $p_date_string ): ?int {
 
 	try {
 		$t_dt = new DateTimeImmutable( $p_date_string );
-	}
-	catch( Exception $e ) {
+	} catch( Exception $e ) {
 		throw new ClientException(
 			"Invalid date format '$p_date_string'",
 			ERROR_INVALID_DATE_FORMAT,
-			array( $p_date_string ),
+			[$p_date_string],
 			$e
 		);
 	}
@@ -111,7 +109,6 @@ function date_timestamp_to_iso8601( ?int $p_timestamp ): ?string {
 
 	return date( 'c', (int)$p_timestamp );
 }
-
 
 /**
  * Gets Unix timestamp from a date string.
@@ -308,7 +305,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 	if( $p_date != 0 ) {
 		$t_date = preg_split( '/-/', date( 'Y-m-d', $p_date ), -1, PREG_SPLIT_NO_EMPTY );
 	} else {
-		$t_date = array( 0, 0, 0, );
+		$t_date = [0, 0, 0, ];
 	}
 
 	$t_name = string_html_specialchars( $p_name );

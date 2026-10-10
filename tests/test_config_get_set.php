@@ -27,7 +27,7 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( 'test.php' );
+require_once 'test.php';
 
 $t_config = 'main_menu_custom_options';
 $t_test = config_get( $t_config );
@@ -47,14 +47,14 @@ config_set_global( $t_config, $t_test );
 $t_test = config_get_global( $t_config );
 print_r( $t_test );
 
-$g_test_config = array();
+$g_test_config = [];
 $t_config = 'test_config';
 $t_test = config_get( $t_config );
 print_r( $t_config );
 print_r( $t_test );
-echo ' ' . (isset( $t_test[0] ) ? 'set' : 'not set' ) . ' ' . count( $t_test ) . ' ';
+echo ' ' . ( isset( $t_test[0] ) ? 'set' : 'not set' ) . ' ' . count( $t_test ) . ' ';
 $t_test[0] = 20;
 config_set( $t_config, $t_test );
 $t_test = config_get( $t_config );
 print_r( $t_test );
-echo ' ' . (isset( $t_test[0] ) ? 'set' : 'not set' ) . ' ' . count( $t_test ) . ' ';
+echo ' ' . ( isset( $t_test[0] ) ? 'set' : 'not set' ) . ' ' . count( $t_test ) . ' ';

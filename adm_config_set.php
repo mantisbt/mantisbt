@@ -39,7 +39,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
@@ -95,33 +95,32 @@ if( $t_type != CONFIG_TYPE_STRING ) {
 				$t_value = (float)$t_value;
 				break;
 		}
-	}
-	catch (Exception $e) {
-		throw new ClientException( "Syntax error",
+	} catch ( Exception $e ) {
+		throw new ClientException( 'Syntax error',
 			ERROR_CONFIG_OPT_BAD_SYNTAX,
-			[ $f_config_option, $e->getMessage() ]
+			[$f_config_option, $e->getMessage()]
 		);
 	}
 }
 
-$t_data = array(
-	'payload' => array(
-		'user' => array( 'id' => $f_user_id ),
-		'project' => array( 'id' => $f_project_id ),
-		'configs' => array(
-			array(
+$t_data = [
+	'payload' => [
+		'user' => ['id' => $f_user_id],
+		'project' => ['id' => $f_project_id],
+		'configs' => [
+			[
 				'option' => $f_config_option,
 				'value' => $t_value,
-			)
-		)
-	),
-	'options' => array(
+			]
+		]
+	],
+	'options' => [
 		'edit_action' => $f_edit_action,
 		'original_user_id' => $f_original_user_id,
 		'original_project_id' => $f_original_project_id,
 		'original_option' => $f_original_config_option,
-	)
-);
+	]
+];
 
 $t_command = new ConfigsSetCommand( $t_data );
 $t_command->execute();

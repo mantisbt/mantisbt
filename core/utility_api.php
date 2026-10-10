@@ -167,8 +167,8 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 		return $p_array;
 	}
 	if( !is_array( current( $p_array ) ) ) {
-		$t_message = "Tried to sort an invalid multidimensional array";
-		throw new ClientException( $t_message, ERROR_GENERIC, [ $t_message ] );
+		$t_message = 'Tried to sort an invalid multidimensional array';
+		throw new ClientException( $t_message, ERROR_GENERIC, [$t_message] );
 	}
 
 	# Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
@@ -180,7 +180,7 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 			}
 		);
 	} else {
-		throw new ClientException( "Invalid sort field", ERROR_INVALID_SORT_FIELD );
+		throw new ClientException( 'Invalid sort field', ERROR_INVALID_SORT_FIELD );
 	}
 	return $p_array;
 }
@@ -191,7 +191,7 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
  * @return string|false Gd version, false if extension is not available.
  */
 function get_gd_version() {
- 	if( extension_loaded( 'gd' ) ) {
+	if( extension_loaded( 'gd' ) ) {
 		$t_info = gd_info();
 		return $t_info['GD Version'];
 	}
@@ -235,19 +235,19 @@ function is_windows_server() {
 function getClassProperties( $p_classname, $p_type = 'public', $p_return_object = false, $p_include_parent = false ) {
 	$t_ref = new ReflectionClass( $p_classname );
 	$t_props = $t_ref->getProperties();
-	$t_props_arr = array();
-	foreach( $t_props as $t_prop ){
+	$t_props_arr = [];
+	foreach( $t_props as $t_prop ) {
 		$t_name = $t_prop->getName();
-		if( $t_prop->isPublic() and (stripos( $p_type, 'public' ) === false) ) {
+		if( $t_prop->isPublic() and ( stripos( $p_type, 'public' ) === false ) ) {
 			continue;
 		}
-		if( $t_prop->isPrivate() and (stripos( $p_type, 'private' ) === false) ) {
+		if( $t_prop->isPrivate() and ( stripos( $p_type, 'private' ) === false ) ) {
 			continue;
 		}
-		if( $t_prop->isProtected() and (stripos( $p_type, 'protected' ) === false) ) {
+		if( $t_prop->isProtected() and ( stripos( $p_type, 'protected' ) === false ) ) {
 			continue;
 		}
-		if( $t_prop->isStatic() and (stripos( $p_type, 'static' ) === false) ) {
+		if( $t_prop->isStatic() and ( stripos( $p_type, 'static' ) === false ) ) {
 			continue;
 		}
 		if( $p_return_object ) {
@@ -315,13 +315,12 @@ function get_font_path() {
  *
  * @noinspection PhpDocRedundantThrowsInspection
  * @noinspection PhpRedundantCatchClauseInspection
-*/
+ */
 function safe_unserialize( $p_string, array $p_options = [] ) {
 	set_error_handler( 'error_convert_to_exception' );
 	try {
 		$t_data = unserialize( $p_string, $p_options );
-	}
-	catch( ErrorException $e ) {
+	} catch( ErrorException $e ) {
 		restore_error_handler();
 		throw $e;
 	}

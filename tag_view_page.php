@@ -37,7 +37,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
@@ -90,9 +90,9 @@ if( $t_manage_tags ) {
 <div class="widget-main no-padding">
 	<div class="widget-toolbox padding-8 clearfix">
 		<?php print_link_button( helper_url_combine( 'search.php', [
-			'tag_string' => $t_tag_row['name'] ] ),
+			'tag_string' => $t_tag_row['name']] ),
 			sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ),
-			'btn-sm pull-right'); ?>
+			'btn-sm pull-right' ); ?>
 	</div>
 	<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
@@ -119,7 +119,7 @@ if( $t_manage_tags ) {
 		<td class="category">
 			<?php echo lang_get( 'owner' ) ?>
 		</td>
-		<td><?php echo string_attribute( user_get_name($t_tag_row['user_id']) ) ?></td>
+		<td><?php echo string_attribute( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
 	</tr>
 	<tr>
 		<td class="category">
@@ -150,7 +150,7 @@ if( $t_manage_tags ) {
 			$t_description = string_attribute( $t_tag['description'] );
 			$t_count = $t_tag['count'];
 			$t_link = string_html_specialchars( helper_url_combine( 'search.php', [
-				'tag_string' => ( '+' . $t_tag_row['name'] . config_get( 'tag_separator' ) . '+' . $t_name ) ] ) );
+				'tag_string' => ( '+' . $t_tag_row['name'] . config_get( 'tag_separator' ) . '+' . $t_name )] ) );
 			$t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] );
 ?>
 				<div class="col-md-3 col-xs-6 no-padding">
@@ -189,7 +189,7 @@ if( $t_manage_tags ) {
 		if( $t_can_edit ) {
 			print_form_button( 'tag_delete.php',
 				lang_get( 'tag_delete_button' ),
-				[ 'tag_id' => $f_tag_id ],
+				['tag_id' => $f_tag_id],
 				null,
 				'btn btn-primary btn-white btn-round'
 			);

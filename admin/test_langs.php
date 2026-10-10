@@ -29,7 +29,7 @@ define( 'LANG_LOAD_DISABLED', true );
 # Use DIRECTORY_SEPARATOR to ensure a consistent display of the directory on Windows
 $t_mantis_dir = dirname( __DIR__ ) . DIRECTORY_SEPARATOR;
 
-require_once( $t_mantis_dir . 'core.php' );
+require_once $t_mantis_dir . 'core.php';
 
 $t_show_untranslated = gpc_get_bool( 'show_untranslated', false );
 $t_show_translation_errors = gpc_get_bool( 'translation_errors', false );
@@ -135,7 +135,7 @@ class LangCheckFile {
 		$t_purifier_config = HTMLPurifier_Config::create( [
 			'Cache.DefinitionImpl' => null,
 			'HTML.Allowed' => self::VALID_TAGS,
-			'Attr.AllowedFrameTargets' => [ '_blank' ],
+			'Attr.AllowedFrameTargets' => ['_blank'],
 			'HTML.TargetNoopener' => false,
 			'HTML.TargetNoreferrer' => false,
 		] );
@@ -234,7 +234,9 @@ class LangCheckFile {
 	 */
 	public function printResults() {
 		echo '<tr><td class="col-xs-4"';
-		if( $this->warnings && $this->errors ) echo ' rowspan="2"';
+		if( $this->warnings && $this->errors ) {
+		echo ' rowspan="2"';
+		}
 		echo '>Testing \'' . basename( $this->file ) . '\'</td>';
 
 		if( $this->warnings ) {
@@ -246,7 +248,9 @@ class LangCheckFile {
 		}
 
 		if( $this->errors ) {
-			if( $this->warnings ) echo '<tr>';
+			if( $this->warnings ) {
+			echo '<tr>';
+			}
 			echo '<td class="alert-danger">ERRORS<ul>';
 			foreach( $this->errors as $t_msg ) {
 				echo '<li>' . $t_msg . '</li>';
@@ -331,7 +335,7 @@ class LangCheckFile {
 		# Report errors
 		if( $t_check ) {
 			$this->logWarn( "'$t_lang' language is not defined in "
-				. implode(', ', $t_check )
+				. implode( ', ', $t_check )
 			);
 		}
 	}
@@ -362,7 +366,7 @@ class LangCheckFile {
 		}
 
 		$t_line = 0;
-		$t_variables = array();
+		$t_variables = [];
 		$t_current_var = null;
 		$t_last_token = 0;
 		$t_set_variable = false;
@@ -391,7 +395,7 @@ class LangCheckFile {
 			if( is_string( $t_token ) ) {
 				switch( $t_token ) {
 					case '=':
-						#
+
 						if( $t_last_token != T_VARIABLE ) {
 							$this->logFail( "'=' sign without variable", $t_line );
 							$t_pass = false;
@@ -400,14 +404,14 @@ class LangCheckFile {
 						break;
 					case '[':
 						if( $t_last_token != T_VARIABLE ) {
-							$this->logFail( "Unexpected opening square bracket '['", $t_line);
+							$this->logFail( "Unexpected opening square bracket '['", $t_line );
 							$t_pass = false;
 						}
 						$t_variable_array = true;
 						break;
 					case ']':
 						if( !$t_expect_end_array ) {
-							$this->logFail( "Unexpected closing square bracket ']'", $t_line);
+							$this->logFail( "Unexpected closing square bracket ']'", $t_line );
 							$t_pass = false;
 						}
 						$t_expect_end_array = false;
@@ -415,7 +419,7 @@ class LangCheckFile {
 						break;
 					case ';':
 						if( !$t_need_end_variable ) {
-							$this->logFail( "Unexpected semicolon", $t_line );
+							$this->logFail( 'Unexpected semicolon', $t_line );
 							$t_pass = false;
 						}
 						$t_need_end_variable = false;
@@ -424,7 +428,7 @@ class LangCheckFile {
 						if( $t_last_token == T_CONSTANT_ENCAPSED_STRING ) {
 							$t_two_part_string = true;
 						} else {
-							$this->logFail( "String concatenation found at unexpected location", $t_line );
+							$this->logFail( 'String concatenation found at unexpected location', $t_line );
 							$t_pass = false;
 						}
 						break;
@@ -453,7 +457,7 @@ class LangCheckFile {
 						$t_expect_end_array = true;
 						continue;
 					}
-					$this->logFail( "Unexpected " . token_name( $t_id ) . " token '$t_text'", $t_line );
+					$this->logFail( 'Unexpected ' . token_name( $t_id ) . " token '$t_text'", $t_line );
 					$t_pass = false;
 				}
 
@@ -467,7 +471,7 @@ class LangCheckFile {
 						break;
 					case T_VARIABLE:
 						if( $t_expect_double_quote ) {
-							$this->logFail( "Unexpected " . token_name( $t_id ) . " token '$t_text'", $t_line );
+							$this->logFail( 'Unexpected ' . token_name( $t_id ) . " token '$t_text'", $t_line );
 							break;
 						}
 						if( $t_set_variable && $t_current_var != null ) {
@@ -485,7 +489,7 @@ class LangCheckFile {
 								$this->logFail( "undefined constant: '$t_text'", $t_line );
 							}
 						} else {
-							$this->logFail( "T_STRING token found at unexpected location", $t_line );
+							$this->logFail( 'T_STRING token found at unexpected location', $t_line );
 							$t_pass = false;
 						}
 						if( strpos( $t_current_var, "\n" ) !== false ) {
@@ -498,7 +502,7 @@ class LangCheckFile {
 						break;
 					case T_CONSTANT_ENCAPSED_STRING:
 						if( $t_text[0] != '\'' ) {
-							$this->logWarn( "Language strings should be single-quoted", $t_line );
+							$this->logWarn( 'Language strings should be single-quoted', $t_line );
 						}
 						if( $t_variable_array ) {
 							$t_current_var .= $t_text;
@@ -546,8 +550,7 @@ class LangCheckFile {
 							try {
 								/** @noinspection PhpComposerExtensionStubsInspection */
 								$t_dom->loadHTML( $t_text, LIBXML_HTML_NOIMPLIED );
-							}
-							catch( Exception $e ) {
+							} catch( Exception $e ) {
 								$this->logWarn( $e->getMessage() . " for string $t_current_var", $t_line );
 							}
 							restore_error_handler();
@@ -569,7 +572,7 @@ class LangCheckFile {
 						$t_need_end_variable = true;
 						break;
 					default:
-						$this->logFail( "Unexpected " . token_name( $t_id ) . " token '$t_text'", $t_line );
+						$this->logFail( 'Unexpected ' . token_name( $t_id ) . " token '$t_text'", $t_line );
 						$t_pass = false;
 						break;
 				}
@@ -650,10 +653,10 @@ class LangCheckFile {
 				set_error_handler( 'error_convert_to_exception' );
 				try {
 					/** @noinspection PhpExpressionResultUnusedInspection */
-					vsprintf( $p_text, array_pad([], 10, 0) );
+					vsprintf( $p_text, array_pad( [], 10, 0 ) );
 				} catch ( Throwable $e ) {
 					$this->logFail( $this->url( $p_var )
-						. " printf format string is not valid: " . $e->getMessage(),
+						. ' printf format string is not valid: ' . $e->getMessage(),
 						$p_line, false
 					);
 				}
@@ -747,7 +750,7 @@ class LangCheckFile {
 		];
 
 		$t_untranslated = 0;
-		foreach( self::$basevariables as $t_name => $t_var ){
+		foreach( self::$basevariables as $t_name => $t_var ) {
 			if( isset( $t_var['translated'] )
 				&& $t_var['translated'] === false
 				&& !in_array( $t_name, $t_optional_variables )
@@ -778,9 +781,9 @@ class LangCheckFile {
 				. http_build_query( [
 					'title' => 'Special:Translate',
 					'group' => $this->group,
-					'showMessage' => str_replace( [ '$', '[', ']' ], [ '', '\x5b', '\x5d' ], $p_var ),
+					'showMessage' => str_replace( ['$', '[', ']'], ['', '\x5b', '\x5d'], $p_var ),
 					'language' => $this->lang,
-				] ) . '">' . string_attribute( $p_var ). '</a>'
+				] ) . '">' . string_attribute( $p_var ) . '</a>'
 			: string_attribute( $p_var );
 	}
 
@@ -828,7 +831,7 @@ print_admin_menu_bar( 'test_langs.php' );
 			</h4>
 			<div class="widget-toolbar no-border hidden-xs">
 				<div class="widget-menu">
-					<?php print_extra_small_button( '#plugins', 'Scroll down to Plugins'); ?>
+					<?php print_extra_small_button( '#plugins', 'Scroll down to Plugins' ); ?>
 				</div>
 			</div>
 		</div>
@@ -876,7 +879,7 @@ checklangdir( $t_mantis_dir, 'out-mantis-core' );
 			</h4>
 			<div class="widget-toolbar no-border hidden-xs">
 				<div class="widget-menu">
-					<?php print_extra_small_button( '#', 'Scroll back to top'); ?>
+					<?php print_extra_small_button( '#', 'Scroll back to top' ); ?>
 				</div>
 			</div>
 		</div>
@@ -896,7 +899,6 @@ checkplugins();
 <?php
 layout_admin_page_end();
 
-
 /**
  * Check plugin language files
  */
@@ -913,7 +915,7 @@ function checkplugins() {
 			$t_toc .= '<li><a href="#plugin-' . $t_plugin . '">' . $t_plugin . '</a></li>';
 		}
 		$t_toc .= '</ol>';
-		print_info( count( $t_plugins ) . " Plugins found" . $t_toc );
+		print_info( count( $t_plugins ) . ' Plugins found' . $t_toc );
 	} catch( UnexpectedValueException $e ) {
 		print_fail( $e->getMessage() );
 		echo '</tr>' . PHP_EOL;
@@ -1002,13 +1004,13 @@ function checklangdir( $p_path, $p_group ) {
 	echo '</td>';
 
 	if( !is_dir( $t_path ) ) {
-		print_info( "Directory does not exist" );
+		print_info( 'Directory does not exist' );
 		echo '</tr>' . PHP_EOL;
 		return;
 	} else {
 		try {
 			$t_lang_files = get_lang_files( $t_path );
-			print_info( count( $t_lang_files ) . " files found" );
+			print_info( count( $t_lang_files ) . ' files found' );
 		} catch( UnexpectedValueException $e ) {
 			print_fail( $e->getMessage() );
 			echo '</tr>' . PHP_EOL;
@@ -1024,14 +1026,14 @@ function checklangdir( $p_path, $p_group ) {
 	$t_key = array_search( LangCheckFile::BASE, $t_lang_files );
 	if( $t_key === false ) {
 		echo '<tr><td></td>';
-		print_fail( "Reference English file not found" );
+		print_fail( 'Reference English file not found' );
 		echo '</tr>' . PHP_EOL;
 	} else {
 		$t_file = new LangCheckFile( $t_path, LangCheckFile::BASE, $p_group );
 		# No point testing other languages if English fails
 		if( !$t_file->checkAndPrint() ) {
 			echo '<tr><td></td>';
-			print_fail( 'Total error(s): '. $t_file->countErrors() );
+			print_fail( 'Total error(s): ' . $t_file->countErrors() );
 			echo '</tr>' . PHP_EOL;
 			return;
 		}

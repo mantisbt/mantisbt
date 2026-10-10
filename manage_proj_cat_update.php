@@ -41,7 +41,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -64,9 +64,9 @@ $f_handler_id      = gpc_get_int( 'assigned_to', 0 );
 $f_enabled         = gpc_get_bool( 'enabled' );
 
 if( is_blank( $f_name ) ) {
-	throw new ClientException( "Category name is required",
+	throw new ClientException( 'Category name is required',
 		ERROR_EMPTY_FIELD,
-		[ 'name' ]
+		['name']
 	);
 }
 
@@ -81,7 +81,7 @@ $t_data = [
 	],
 	'payload' => [
 		'name' => $f_name,
-		'handler' => $f_handler_id == NO_USER ? null : [ 'id' => $f_handler_id ],
+		'handler' => $f_handler_id == NO_USER ? null : ['id' => $f_handler_id],
 		'enabled' => $f_enabled,
 	],
 ];

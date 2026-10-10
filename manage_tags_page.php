@@ -36,7 +36,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'compress_api.php' );
 require_api( 'config_api.php' );
@@ -67,9 +67,9 @@ $t_prefix_array = array_merge(
 	range( '0', '9' ), # With PHP < 8.3, this produces int[], not string[]
 );
 $t_prefix_array = array_merge(
-	[ TAGS_ALL => lang_get( 'filter_all' ) ],
+	[TAGS_ALL => lang_get( 'filter_all' )],
 	array_combine( $t_prefix_array, $t_prefix_array ),
-	[ TAGS_UNUSED => lang_get( 'filter_unused' ) ]
+	[TAGS_UNUSED => lang_get( 'filter_unused' )]
 );
 
 if( $f_filter === TAGS_ALL || $f_filter === TAGS_UNUSED ) {
@@ -80,7 +80,7 @@ if( $f_filter === TAGS_ALL || $f_filter === TAGS_UNUSED ) {
 
 # Set the number of Tags per page.
 $t_per_page = 20;
-$t_offset = (( $f_page_number - 1 ) * $t_per_page );
+$t_offset = ( ( $f_page_number - 1 ) * $t_per_page );
 
 # Determine number of tags in tag table
 $t_total_tag_count = tag_count( $t_name_filter, $f_filter == TAGS_UNUSED );
@@ -124,8 +124,8 @@ print_manage_menu( 'manage_tags_page.php' );
 	foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 		$t_active = (string)$t_prefix == (string)$f_filter ? 'active' : '';
 		echo '<a class="btn btn-xs btn-white btn-primary ' . $t_active .
-			'" href="manage_tags_page.php?filter=' . $t_prefix .'">'
-			. $t_caption . '</a>' ."\n";
+			'" href="manage_tags_page.php?filter=' . $t_prefix . '">'
+			. $t_caption . '</a>' . "\n";
 	} ?>
 		</div>
 	</div>
@@ -137,15 +137,15 @@ print_manage_menu( 'manage_tags_page.php' );
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-tags', 'ace-icon' ); ?>
-			<?php echo lang_get('manage_tags_link') ?>
+			<?php echo lang_get( 'manage_tags_link' ) ?>
 			<span class="badge"><?php echo $t_total_tag_count ?></span>
 		</h4>
 	</div>
 
 	<div class="widget-body">
-		<?php if ($t_can_edit) { ?>
+		<?php if ( $t_can_edit ) { ?>
 			<div class="widget-toolbox padding-8 clearfix">
-				<?php print_small_button( '#tagcreate', lang_get('tag_create') ) ?>
+				<?php print_small_button( '#tagcreate', lang_get( 'tag_create' ) ) ?>
 			</div>
 		<?php } ?>
 	<div class="widget-main no-padding">
@@ -184,13 +184,13 @@ print_manage_menu( 'manage_tags_page.php' );
 					print_form_button(
 						'tag_update_page.php',
 						lang_get( 'edit' ),
-						[ 'tag_id' => $t_tag_row['id'] ],
+						['tag_id' => $t_tag_row['id']],
 						$t_security_token
 					);
 					print_form_button(
 						'tag_delete.php',
 						lang_get( 'delete' ),
-						[ 'tag_id' => $t_tag_row['id'] ],
+						['tag_id' => $t_tag_row['id']],
 						$t_security_token
 					);
 					?>
@@ -225,7 +225,7 @@ print_manage_menu( 'manage_tags_page.php' );
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-tag', 'ace-icon' ); ?>
-				<?php echo lang_get('tag_create') ?>
+				<?php echo lang_get( 'tag_create' ) ?>
 			</h4>
 		</div>
 		<div class="widget-body">
@@ -265,7 +265,7 @@ print_manage_menu( 'manage_tags_page.php' );
 			<div class="widget-toolbox padding-8 clearfix">
 				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
 				<input type="submit" name="config_set" class="btn btn-primary btn-sm btn-white btn-round"
-					   value="<?php echo lang_get('tag_create') ?>"/>
+					   value="<?php echo lang_get( 'tag_create' ) ?>"/>
 			</div>
 		</div>
 	</div>

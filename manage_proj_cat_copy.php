@@ -38,7 +38,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -65,7 +65,7 @@ if( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	throw new ClientException( "Copy action to/from is required", ERROR_NO_COPY_ACTION );
+	throw new ClientException( 'Copy action to/from is required', ERROR_NO_COPY_ACTION );
 }
 
 # The add command checks the destination. Preserve the previous requirement
@@ -80,8 +80,8 @@ foreach ( $t_rows as $t_row ) {
 
 	if( category_is_unique( $t_dst_project_id, $t_name ) ) {
 		$t_data = [
-			'query' => [ 'project_id' => $t_dst_project_id ],
-			'payload' => [ 'name' => $t_name ],
+			'query' => ['project_id' => $t_dst_project_id],
+			'payload' => ['name' => $t_name],
 		];
 		$t_command = new CategoryAddCommand( $t_data );
 		$t_command->execute();

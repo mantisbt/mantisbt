@@ -56,7 +56,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -90,9 +90,9 @@ if( $f_master_bug_id > 0 ) {
 
 	# master bug is not read-only...
 	if( bug_is_readonly( $f_master_bug_id ) ) {
-		throw new ClientException( "Bug is read-only",
+		throw new ClientException( 'Bug is read-only',
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				[ $f_master_bug_id ] );
+				[$f_master_bug_id] );
 	}
 
 	# User can view the master bug
@@ -100,7 +100,7 @@ if( $f_master_bug_id > 0 ) {
 
 	$t_bug = bug_get( $f_master_bug_id, true );
 
-	#@@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
+	# @@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
 	#       what the current project is set to.
 	if( $t_bug->project_id != helper_get_current_project() ) {
 		# in case the current project is not the same project of the bug we are viewing...
@@ -235,7 +235,7 @@ $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level
 if( $t_show_due_date ) {
 	require_api( 'datetimepicker_api.php' );
 }
-$t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload() && !event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', array() );
+$t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload() && !event_signal( 'EVENT_REPORT_BUG_MODERATE_CHECK', [] );
 if( $t_show_attachments ) {
 	require_api( 'dropzone_api.php' );
 }
@@ -275,7 +275,7 @@ if( $t_show_attachments ) {
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
 <?php
-	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id ) );
+	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', [$t_project_id] );
 
 	if( $t_show_category ) {
 		$t_allow_no_category = config_get( 'allow_no_category' );
@@ -574,7 +574,7 @@ if( $t_show_attachments ) {
 		</td>
 	</tr>
 <?php } ?>
-<?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id ) ) ?>
+<?php event_signal( 'EVENT_REPORT_BUG_FORM', [$t_project_id] ) ?>
 	<tr>
 		<th class="category">
 			<span class="required">*</span>
@@ -647,7 +647,7 @@ if( $t_show_attachments ) {
 					# pre-fill tag string when cloning from master bug
 					$t_tags = [];
 					foreach( tag_bug_get_attached( $f_master_bug_id ) as $t_tag ) {
-						$t_tags[] = $t_tag["name"];
+						$t_tags[] = $t_tag['name'];
 					}
 					$t_tag_string = implode(
 						config_get( 'tag_separator' ), $t_tags
@@ -668,7 +668,7 @@ if( $t_show_attachments ) {
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if( ( $t_def['display_report'] || $t_def['require_report']) && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
+		if( ( $t_def['display_report'] || $t_def['require_report'] ) && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
 			$t_custom_fields_found = true;
 
 			if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) {
@@ -684,7 +684,9 @@ if( $t_show_attachments ) {
 				<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>">
 					<?php echo string_attribute( lang_get_defaulted( $t_def['name'] ) ) ?>
 				</label>
-			<?php } else { echo string_attribute( lang_get_defaulted( $t_def['name'] ) ); } ?>
+			<?php } else {
+			echo string_attribute( lang_get_defaulted( $t_def['name'] ) );
+			} ?>
 		</th>
 		<td>
 			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id, $t_def['require_report'] ) ?>
@@ -742,7 +744,7 @@ if( $t_show_attachments ) {
 			<?php echo lang_get( 'relationship_with_parent' ) ?>
 		</th>
 		<td>
-			<?php print_relationship_list_box( config_get( 'default_bug_relationship_clone' ), "rel_type", false, true ) ?>
+			<?php print_relationship_list_box( config_get( 'default_bug_relationship_clone' ), 'rel_type', false, true ) ?>
 			<?php echo '<strong>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</strong>' ?>
 		</td>
 	</tr>

@@ -35,21 +35,21 @@ require_api( 'datetimepicker_api.php' );
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 $f_interval = gpc_get_int( 'interval', 0 );
-//$t_today = date( 'Y-m-d' );
+// $t_today = date( 'Y-m-d' );
 $f_type = gpc_get_int( 'graph_type', 0 );
 $f_show_as_table = gpc_get_bool( 'show_table', false );
 
 layout_page_header_begin( plugin_lang_get( 'graph_page' ) );
-//$t_path = config_get_global( 'path' );
+// $t_path = config_get_global( 'path' );
 layout_page_header_end();
 layout_page_begin();
 
 $t_period = new Period();
 $t_period->set_period_from_selector( 'interval' );
-$t_types = array(
-				1 => plugin_lang_get( 'status_link' ),
-				2 => plugin_lang_get( 'category_link' ),
-		   );
+$t_types = [
+	1 => plugin_lang_get( 'status_link' ),
+	2 => plugin_lang_get( 'category_link' ),
+];
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -132,7 +132,7 @@ if( ( 0 != $f_type ) && ( $f_interval > 0 ) ) {
 	}
 
 	if( !is_blank( $t_page_to_include ) ) {
-		include( config_get_global( 'plugin_path' ) . plugin_get_current() . '/pages/' . $t_page_to_include );
+		include config_get_global( 'plugin_path' ) . plugin_get_current() . '/pages/' . $t_page_to_include;
 	}
 }
 ?>

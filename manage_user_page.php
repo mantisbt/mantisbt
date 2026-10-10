@@ -39,7 +39,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -65,7 +65,7 @@ $t_lock_image = icon_get( 'fa-lock', 'fa-lg', lang_get( 'locked' ) );
 
 $f_save = gpc_get_bool( 'save' );
 $f_filter = gpc_get_string( 'filter', 'ALL' );
-$f_search = gpc_get_string( 'search', '');
+$f_search = gpc_get_string( 'search', '' );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
 if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
@@ -108,7 +108,7 @@ $t_show_disabled_filter = '&amp;showdisabled=' . $c_show_disabled;
 
 # set cookie values for hide inactive, sort by, dir and show disabled
 if( $f_save ) {
-	$t_manage_string = $c_hide_inactive.':'.$c_sort.':'.$c_dir.':'.$c_show_disabled;
+	$t_manage_string = $c_hide_inactive . ':' . $c_sort . ':' . $c_dir . ':' . $c_show_disabled;
 	gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
 }
 
@@ -123,7 +123,7 @@ print_manage_menu( 'manage_user_page.php' );
 $t_days_old = 7 * SECONDS_PER_DAY;
 $t_query = 'SELECT COUNT(*) AS new_user_count FROM {user}
 	WHERE ' . db_helper_compare_time( db_param(), '<=', 'date_created', $t_days_old );
-$t_result = db_query( $t_query, array( db_now() ) );
+$t_result = db_query( $t_query, [db_now()] );
 $t_row = db_fetch_array( $t_result );
 $t_new_user_count = $t_row['new_user_count'];
 
@@ -137,10 +137,10 @@ $t_unused_user_count = $t_row['unused_user_count'];
 
 # Manage Form BEGIN
 
-$t_prefix_array = array_merge( range('A', 'Z'), range('0', '9') );
+$t_prefix_array = array_merge( range( 'A', 'Z' ), range( '0', '9' ) );
 $t_prefix_array = array_combine( $t_prefix_array, $t_prefix_array );
-$t_prefix_array = array_merge (
-		[ 'ALL' => lang_get( 'filter_all' ) ],
+$t_prefix_array = array_merge(
+		['ALL' => lang_get( 'filter_all' )],
 		$t_prefix_array,
 		[
 			'UNUSED' => lang_get( 'filter_unused' ),
@@ -182,7 +182,7 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 <div class="space-10"></div>
 
 <?php
-$t_where_params = array();
+$t_where_params = [];
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
 } else if( $f_filter === 'UNUSED' ) {
@@ -200,7 +200,7 @@ if( $f_search !== '' ) {
 	preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $f_search, $t_matches, PREG_SET_ORDER );
 
 	# organize terms without quoting, paying attention to negation
-	$t_search_terms = array();
+	$t_search_terms = [];
 	foreach( $t_matches as $t_match ) {
 		$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
 	}
@@ -274,11 +274,10 @@ if( $f_page_number < 1 ) {
 	$f_page_number = 1;
 }
 
-
 $t_query = 'SELECT * FROM {user} WHERE ' . $t_where . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
 $t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
 
-$t_users = array();
+$t_users = [];
 while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_users[] = $t_row;
 }
@@ -289,7 +288,7 @@ $t_user_count = count( $t_users );
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 	<?php print_icon( 'fa-users', 'ace-icon' ); ?>
-	<?php echo lang_get('manage_accounts_title') ?>
+	<?php echo lang_get( 'manage_accounts_title' ) ?>
 	<span class="badge"><?php echo $t_total_user_count ?></span>
 </h4>
 </div>
@@ -305,11 +304,11 @@ $t_user_count = count( $t_users );
 		</div>
 		<?php if( $f_filter === 'UNUSED' ) { ?>
 		<div class="pull-left">
-			<?php print_form_button('manage_user_prune.php',
-				lang_get('prune_accounts'),
+			<?php print_form_button( 'manage_user_prune.php',
+				lang_get( 'prune_accounts' ),
 				[],
 				null,
-				'btn btn-primary btn-sm btn-white btn-round')
+				'btn btn-primary btn-sm btn-white btn-round' )
 			?>
 		</div>
 		<?php } ?>
@@ -336,7 +335,7 @@ $t_user_count = count( $t_users );
 			</label>
 			<label for="search">
 				<input id="search" type="text" size="45" name="search" class="input-sm"
-					   value="<?php echo string_attribute ( $f_search );?>"
+					   value="<?php echo string_attribute( $f_search );?>"
 					   placeholder="<?php echo lang_get( 'search_user_hint' ) ?>"
 				/>
 				</label>
@@ -358,10 +357,10 @@ $t_user_count = count( $t_users );
 	$t_max_failed = config_get( 'max_failed_login_count' );
 
 	# Print column headers with sort links
-	$t_columns = array(
+	$t_columns = [
 		'username', 'realname', 'email', 'access_level',
 		'enabled', 'protected', 'date_created', 'last_visit'
-	);
+	];
 	if( OFF != $t_max_failed ) {
 		# Insert failed_login_count column after "protected"
 		array_splice( $t_columns, 6, 0, ['failed_login_count'] );
@@ -387,13 +386,13 @@ $t_user_count = count( $t_users );
 		: [];
 
 	# User accounts with an email verification pending (user_id => new email)
-	$t_emails_pending_verification = token_get_by_type( TOKEN_ACCOUNT_CHANGE_EMAIL);
+	$t_emails_pending_verification = token_get_by_type( TOKEN_ACCOUNT_CHANGE_EMAIL );
 	$t_emails_pending_verification = array_combine(
 			array_column( $t_emails_pending_verification, 'owner' ),
 			array_column( $t_emails_pending_verification, 'value' )
 		);
 
-	$t_access_level = array();
+	$t_access_level = [];
 	foreach( $t_users as $t_user ) {
 		/**
 		 * @var int $v_id

@@ -31,7 +31,7 @@ if( !defined( 'CHECK_DISPLAY_INC_ALLOW' ) ) {
 }
 
 # MantisBT Check API
-require_once( 'check_api.php' );
+require_once 'check_api.php';
 require_api( 'config_api.php' );
 require_api( 'graphviz_api.php' );
 
@@ -44,27 +44,27 @@ $t_shortname_id = sprintf( lang_get( 'opensearch_id_short' ), $t_prefix );
 $t_shortname_length = max( strlen( $t_shortname_text ), strlen( $t_shortname_id ) );
 
 check_print_test_warn_row(
-	"Browser Search engine names must be 16 chars or less",
+	'Browser Search engine names must be 16 chars or less',
 	$t_shortname_length <= 16,
-	array( false => 'Either shorten the "search_title" configuration option to '
+	[false => 'Either shorten the "search_title" configuration option to '
 		. 'a maximum  of ' . ( 16 - $t_shortname_length + strlen( $t_prefix ) )
 		. ' characters, or alter the "opensearch_XXX_short" language strings '
 		. 'as appropriate to meet the '
 		. '<a href="https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md">'
 		. 'OpenSearch 1.1</a> specification for the ShortName element.'
-	)
+	]
 );
 
 check_print_test_row(
 	'bug_link_tag is not blank/null',
 	config_get_global( 'bug_link_tag' ),
-	array( false => 'The value of the bug_link_tag option cannot be blank/null.' )
+	[false => 'The value of the bug_link_tag option cannot be blank/null.']
 );
 
 check_print_test_row(
 	'bugnote_link_tag is not blank/null',
 	config_get_global( 'bugnote_link_tag' ),
-	array( false => 'The value of the bugnote_link_tag option cannot be blank/null.' )
+	[false => 'The value of the bugnote_link_tag option cannot be blank/null.']
 );
 
 # Graphviz library
@@ -91,8 +91,8 @@ if( config_get( 'relationship_graph_enable' ) ) {
 			$t_unavailable[] = $t_tool;
 		} elseif( !$t_tool_version ) {
 			$t_tool_proc = @proc_open( escapeshellarg( $t_tool_path ) . ' -V',
-				[ [ 'pipe', 'r' ], [ 'pipe', 'w' ], [ 'pipe', 'w' ] ],
-				$t_tool_pipes, null, null, [ 'bypass_shell' => true ] );
+				[['pipe', 'r'], ['pipe', 'w'], ['pipe', 'w']],
+				$t_tool_pipes, null, null, ['bypass_shell' => true] );
 			if( $t_tool_proc && preg_match( '/([\d\.]+)/',
 				stream_get_contents( $t_tool_pipes[2] ), $t_tool_matches ) ) {
 				$t_tool_version = $t_tool_matches[1] ;
@@ -100,10 +100,10 @@ if( config_get( 'relationship_graph_enable' ) ) {
 		}
 	}
 	check_print_test_row(
-		"Graphviz tools (" .implode( ', ', $t_tools )
-		. ") are required to display relationship graphs",
+		'Graphviz tools (' . implode( ', ', $t_tools )
+		. ') are required to display relationship graphs',
 		empty( $t_unavailable ),
-		[ false => implode( ', ', $t_unavailable )
+		[false => implode( ', ', $t_unavailable )
 			. " not found in $t_graphviz_path or not executable. "
 		]
 	);
@@ -116,17 +116,17 @@ if( config_get( 'relationship_graph_enable' ) ) {
 		$t_tool_min_version = '2.42.4';
 		if( version_compare( $t_tool_version, $t_tool_min_version ) >= 0 ) {
 			check_print_test_warn_row(
-				"Graph output format must be preferably set to SVG",
+				'Graph output format must be preferably set to SVG',
 				( $t_graph_format == 'svg' ),
-				[ false => "graph_format MantisBT option is not 'svg', "
+				[false => "graph_format MantisBT option is not 'svg', "
 					. "supported since Graphviz $t_tool_min_version"
 				]
 			);
 		} else {
 			check_print_test_row(
-				"Graph output format must be supported by Graphviz",
+				'Graph output format must be supported by Graphviz',
 				( $t_graph_format != 'svg' ),
-				[ false  => "graph_format MantisBT option is 'svg', "
+				[false  => "graph_format MantisBT option is 'svg', "
 					. "it requires Graphviz $t_tool_min_version or newer"
 				]
 			);

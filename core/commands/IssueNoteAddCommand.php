@@ -89,7 +89,7 @@ class IssueNoteAddCommand extends Command {
 	/**
 	 * The files to attach with the note.
 	 */
-	private $files = array();
+	private $files = [];
 
 	/**
 	 * Private note?
@@ -126,7 +126,7 @@ class IssueNoteAddCommand extends Command {
 				throw new ClientException(
 					sprintf( "Invalid value '%s' for 'type'.", $t_type ),
 					ERROR_INVALID_FIELD_VALUE,
-					array( 'type' )
+					['type']
 				);
 		}
 
@@ -137,7 +137,7 @@ class IssueNoteAddCommand extends Command {
 			throw new ClientException(
 				sprintf( "Issue '%d' is read-only.", $t_issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				array( $t_issue_id ) );
+				[$t_issue_id] );
 		}
 
 		$this->parseViewState();
@@ -155,9 +155,9 @@ class IssueNoteAddCommand extends Command {
 
 		$this->text = trim( $this->payload( 'text', '' ) );
 		if( empty( $this->text ) &&
-		    $t_time_tracking_mins == 0 && 
-		    count( $this->files ) == 0 ) {
-			throw new ClientException( 'Issue note not specified.', ERROR_EMPTY_FIELD, array( lang_get( 'bugnote' ) ) );
+			$t_time_tracking_mins == 0 &&
+			count( $this->files ) == 0 ) {
+			throw new ClientException( 'Issue note not specified.', ERROR_EMPTY_FIELD, [lang_get( 'bugnote' )] );
 		}
 
 		$this->user_id = auth_get_current_user_id();
@@ -200,7 +200,7 @@ class IssueNoteAddCommand extends Command {
 
 			if( !$this->option( 'skip_moderation', false ) ) {
 				# Check if note will be moderated - files not allowed if so
-				$t_will_moderate = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE_CHECK', array( $t_issue_id ) );
+				$t_will_moderate = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE_CHECK', [$t_issue_id] );
 				if( $t_will_moderate ) {
 					throw new ClientException(
 						'Files cannot be attached to notes that require moderation.',
@@ -243,10 +243,10 @@ class IssueNoteAddCommand extends Command {
 		# If any plugin returns true, it has queued the note for moderation
 		if( !$this->option( 'skip_moderation', false ) ) {
 			$t_note_data = $this->data['payload'];
-			$t_moderated = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE', array( $this->issue->id, $t_note_data ) );
+			$t_moderated = event_signal( 'EVENT_BUGNOTE_ADD_MODERATE', [$this->issue->id, $t_note_data] );
 			if( $t_moderated ) {
 				# Plugin handled the note, return special response
-				return array( 'moderated' => true );
+				return ['moderated' => true];
 			}
 		}
 
@@ -268,7 +268,7 @@ class IssueNoteAddCommand extends Command {
 			/* trigger_event */ false );
 
 		if( !$t_note_id ) {
-			throw new ClientException( "Unable to add note", ERROR_GENERIC );
+			throw new ClientException( 'Unable to add note', ERROR_GENERIC );
 		}
 
 		# Handle the file upload
@@ -300,9 +300,9 @@ class IssueNoteAddCommand extends Command {
 		}
 
 		# Event integration
-		event_signal( 'EVENT_BUGNOTE_ADD', array( $this->issue->id, $t_note_id, $t_file_infos ) );
+		event_signal( 'EVENT_BUGNOTE_ADD', [$this->issue->id, $t_note_id, $t_file_infos] );
 
-		return array( 'id' => $t_note_id );
+		return ['id' => $t_note_id];
 	}
 
 	/**
@@ -325,22 +325,21 @@ class IssueNoteAddCommand extends Command {
 	 * @return void
 	 */
 	private function parseFiles() {
-		$this->files = $this->payload( 'files', array() );
+		$this->files = $this->payload( 'files', [] );
 		if( !is_array( $this->files ) ) {
-			$this->files = array();
+			$this->files = [];
 		}
 
-		$t_files_required_fields = array( 'name', 'tmp_name' );
+		$t_files_required_fields = ['name', 'tmp_name'];
 		foreach( $this->files as $t_file ) {
 			foreach( $t_files_required_fields as $t_field ) {
 				if( !isset( $t_file[$t_field] ) ) {
 					throw new ClientException(
 						sprintf( "File field '%s' is missing.", $t_field ),
 						ERROR_EMPTY_FIELD,
-						array( $t_field ) );
+						[$t_field] );
 				}
 			}
 		}
 	}
 }
-

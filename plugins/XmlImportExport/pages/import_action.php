@@ -23,11 +23,11 @@
  */
 
 $t_plugin_path = config_get_global( 'plugin_path' );
-require_once( $t_plugin_path . 'XmlImportExport/ImportXml.php' );
+require_once $t_plugin_path . 'XmlImportExport/ImportXml.php';
 
 form_security_validate( 'plugin_xml_import_action' );
 
-auth_reauthenticate( );
+auth_reauthenticate();
 
 $f_file = gpc_get_file( 'file', -1 );
 $f_strategy = gpc_get_string( 'strategy' );
@@ -55,7 +55,7 @@ print_manage_menu( 'manage_import_issues_page.php' );
 <pre>
 
 <?php
-$t_importer->import( );
+$t_importer->import();
 ?>
 
 </pre>

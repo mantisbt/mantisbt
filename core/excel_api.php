@@ -57,13 +57,13 @@ require_api( 'user_api.php' );
  * @param array  $p_styles          An optional array of ExcelStyle entries . Parent entries must be placed before child entries.
  * @return string the header Xml.
  */
-function excel_get_header( $p_worksheet_title, array $p_styles = array() ) {
+function excel_get_header( $p_worksheet_title, array $p_styles = [] ) {
 	$p_worksheet_title = preg_replace( '/[\/:*?"<>|]/', '', $p_worksheet_title );
 	return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><?mso-application progid=\"Excel.Sheet\"?>
  <Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"
  xmlns:x=\"urn:schemas-microsoft-com:office:excel\"
  xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\"
- xmlns:html=\"http://www.w3.org/TR/REC-html40\">\n ". excel_get_styles( $p_styles ). '<Worksheet ss:Name="' . string_url( $p_worksheet_title ) . "\">\n<Table>\n<Column ss:Index=\"1\" ss:AutoFitWidth=\"0\" ss:Width=\"110\"/>\n";
+ xmlns:html=\"http://www.w3.org/TR/REC-html40\">\n " . excel_get_styles( $p_styles ) . '<Worksheet ss:Name="' . string_url( $p_worksheet_title ) . "\">\n<Table>\n<Column ss:Index=\"1\" ss:AutoFitWidth=\"0\" ss:Width=\"110\"/>\n";
 }
 
 /**
@@ -191,9 +191,9 @@ function excel_prepare_number( $p_value ) {
  *                             values for the <tt>Cell</tt> object.
  * @return string
  */
-function excel_get_cell( $p_value, $p_type, array $p_attributes = array() ) {
+function excel_get_cell( $p_value, $p_type, array $p_attributes = [] ) {
 	if ( !is_int( $p_value ) ) {
-		$t_value = str_replace( array( '&', "\n", '<', '>' ), array( '&amp;', '&#10;', '&lt;', '&gt;' ), $p_value );
+		$t_value = str_replace( ['&', "\n", '<', '>'], ['&amp;', '&#10;', '&lt;', '&gt;'], $p_value );
 	} else {
 		$t_value = $p_value;
 	}
@@ -201,7 +201,7 @@ function excel_get_cell( $p_value, $p_type, array $p_attributes = array() ) {
 	$t_ret = '<Cell ';
 
 	foreach ( $p_attributes as $t_attribute_name => $t_attribute_value ) {
-		$t_ret .= $t_attribute_name. '="' . $t_attribute_value . '" ';
+		$t_ret .= $t_attribute_name . '="' . $t_attribute_value . '" ';
 	}
 
 	$t_ret .= '>';
@@ -668,7 +668,7 @@ class ExcelStyle {
 	 * @return void
 	 */
 	function setBackgroundColor( $p_color, $p_pattern = 'Solid' ) {
-		if( ! isset ( $this->interior ) ) {
+		if( ! isset( $this->interior ) ) {
 			$this->interior = new Interior();
 		}
 
@@ -763,9 +763,9 @@ class ExcelStyle {
 	 * @return string
 	 */
 	function asXml() {
-		$t_xml = '<ss:Style ss:ID="' . $this->id.'" ss:Name="'.$this->id.'" ';
+		$t_xml = '<ss:Style ss:ID="' . $this->id . '" ss:Name="' . $this->id . '" ';
 		if( $this->parent_id != '' ) {
-			$t_xml .= 'ss:Parent="' . $this->parent_id .'" ';
+			$t_xml .= 'ss:Parent="' . $this->parent_id . '" ';
 		}
 		$t_xml .= '>';
 		if( $this->interior ) {
@@ -780,7 +780,7 @@ class ExcelStyle {
 		if( $this->alignment ) {
 			$t_xml .= $this->alignment->asXml();
 		}
-		$t_xml .= '</ss:Style>'."\n";
+		$t_xml .= '</ss:Style>' . "\n";
 
 		return $t_xml;
 	}
@@ -808,7 +808,7 @@ class Interior {
 		$t_xml = '<ss:Interior ';
 
 		if( $this->color ) {
-		   $t_xml .= 'ss:Color="' . $this->color .'" ss:Pattern="'. $this->pattern . '" ';
+		   $t_xml .= 'ss:Color="' . $this->color . '" ss:Pattern="' . $this->pattern . '" ';
 		}
 
 		$t_xml .= '/>';
@@ -849,19 +849,19 @@ class Font {
 		$t_xml = '<ss:Font ';
 
 		if( $this->bold ) {
-			$t_xml .= 'ss:Bold="' . $this->bold .'" ';
+			$t_xml .= 'ss:Bold="' . $this->bold . '" ';
 		}
 
 		if( $this->color ) {
-			$t_xml .= 'ss:Color="' . $this->color .'" ';
+			$t_xml .= 'ss:Color="' . $this->color . '" ';
 		}
 
 		if( $this->fontName ) {
-			$t_xml .= 'ss:FontName="' . $this->fontName .'" ';
+			$t_xml .= 'ss:FontName="' . $this->fontName . '" ';
 		}
 
 		if( $this->italic ) {
-			$t_xml .= 'ss:Italic="' . $this->italic .'" ';
+			$t_xml .= 'ss:Italic="' . $this->italic . '" ';
 		}
 
 		$t_xml .= '/>';
@@ -877,7 +877,7 @@ class Border {
 	/**
 	 * Border Positions
 	 */
-	private $positions = array('Left', 'Top', 'Right', 'Bottom');
+	private $positions = ['Left', 'Top', 'Right', 'Bottom'];
 
 	/**
 	 * Color
@@ -902,18 +902,18 @@ class Border {
 		$t_xml = '<ss:Borders>';
 
 		foreach ( $this->positions as $p_position ) {
-			$t_xml.= '<ss:Border ss:Position="' . $p_position .'" ';
+			$t_xml.= '<ss:Border ss:Position="' . $p_position . '" ';
 
 			if( $this->lineStyle ) {
-				$t_xml .= 'ss:LineStyle="' . $this->lineStyle .'" ';
+				$t_xml .= 'ss:LineStyle="' . $this->lineStyle . '" ';
 			}
 
 			if( $this->color ) {
-				$t_xml .= 'ss:Color="' . $this->color .'" ';
+				$t_xml .= 'ss:Color="' . $this->color . '" ';
 			}
 
 			if( $this->weight ) {
-				$t_xml .= 'ss:Weight="' . $this->weight .'" ';
+				$t_xml .= 'ss:Weight="' . $this->weight . '" ';
 			}
 
 			$t_xml.= '/>';
@@ -952,15 +952,15 @@ class Alignment {
 		$t_xml = '<ss:Alignment ';
 
 		if( $this->wrapText ) {
-			$t_xml .= 'ss:WrapText="' . $this->wrapText.'" ';
+			$t_xml .= 'ss:WrapText="' . $this->wrapText . '" ';
 		}
 
 		if( $this->horizontal ) {
-			$t_xml .= 'ss:Horizontal="' . $this->horizontal.'" ';
+			$t_xml .= 'ss:Horizontal="' . $this->horizontal . '" ';
 		}
 
 		if( $this->vertical ) {
-			$t_xml .= 'ss:Vertical="' . $this->vertical.'" ';
+			$t_xml .= 'ss:Vertical="' . $this->vertical . '" ';
 		}
 
 		$t_xml .= '/>';

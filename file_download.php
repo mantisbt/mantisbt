@@ -48,7 +48,7 @@ const COMPRESSION_DISABLED = true;
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -77,7 +77,7 @@ if( $f_show_inline ) {
 	# makes the assumption that they've been sent already).
 	if( !@form_security_validate( 'file_show_inline' ) ) {
 		http_all_headers();
-		throw new ClientException( "Invalid token", ERROR_FORM_TOKEN_INVALID );
+		throw new ClientException( 'Invalid token', ERROR_FORM_TOKEN_INVALID );
 	}
 }
 
@@ -99,12 +99,12 @@ switch( $f_type ) {
 	default:
 		access_denied();
 }
-$t_result = db_query( $t_query, array( $c_file_id ) );
+$t_result = db_query( $t_query, [$c_file_id] );
 $t_row = db_fetch_array( $t_result );
 if( false === $t_row ) {
-	throw new ClientException( "Attachment not found",
+	throw new ClientException( 'Attachment not found',
 		ERROR_FILE_NOT_FOUND,
-		[ $c_file_id ]
+		[$c_file_id]
 	);
 }
 /**
@@ -178,7 +178,7 @@ switch( $t_upload_method ) {
 		$t_file_info_type = file_get_mime_type_for_content( $v_content );
 		break;
 	default:
-		throw new ClientException( "Unknown upload method", ERROR_GENERIC );
+		throw new ClientException( 'Unknown upload method', ERROR_GENERIC );
 }
 
 if( $t_file_info_type !== false ) {
@@ -192,7 +192,7 @@ if( $t_content_type_override ) {
 # Decide what should open inline in the browser vs. download as attachment
 # https://www.thoughtco.com/mime-types-by-content-type-3469108
 $t_show_inline = $f_show_inline;
-$t_mime_force_inline = array(
+$t_mime_force_inline = [
 	'application/pdf',
 	'image/bmp',
 	'image/gif',
@@ -200,13 +200,13 @@ $t_mime_force_inline = array(
 	'image/png',
 	'image/tiff',
 	'image/webp',
-);
-$t_mime_force_attachment = array(
+];
+$t_mime_force_attachment = [
 	'application/x-shockwave-flash',
 	'application/javascript',
 	'image/svg+xml', # SVG could contain CSS or scripting, see #30384
 	'text/html',
-);
+];
 
 # extract mime type from content type
 $t_mime_type = explode( ';', $t_content_type, 2 );

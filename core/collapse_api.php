@@ -42,13 +42,11 @@ require_api( 'gpc_api.php' );
 require_api( 'tokens_api.php' );
 require_api( 'utility_api.php' );
 
-
 # @global string $g_current_collapse_section
 $g_current_collapse_section = null;
 
 # @global bool $g_open_collapse_section
 $g_open_collapse_section = false;
-
 
 # @global string $g_collapse_cache_token
 $g_collapse_cache_token = null;
@@ -73,7 +71,7 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 
 	# make sure no other collapse section is started
 	if( $g_current_collapse_section !== null ) {
-		throw new ClientException( "Another collapse section has already been started", ERROR_GENERIC );
+		throw new ClientException( 'Another collapse section has already been started', ERROR_GENERIC );
 	}
 
 	if( $t_display ) {
@@ -110,7 +108,7 @@ function collapse_closed( $p_name, $p_section = '', $p_css_class = '' ) {
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
-		throw new ClientException( "Collapse section mismatch", ERROR_GENERIC );
+		throw new ClientException( 'Collapse section mismatch', ERROR_GENERIC );
 	}
 
 	echo '</div>';
@@ -140,11 +138,11 @@ function collapse_icon( $p_name ) {
 	} else {
 		$t_icon = 'fa-chevron-down';
 		$t_alt = '+';
-		$t_id = $p_name. '_closed_link';
+		$t_id = $p_name . '_closed_link';
 	}
 
 	echo '&nbsp;&nbsp;<a id="', $t_id, '" class="collapse-link noprint">';
-	print_icon( $t_icon, 'bigger-120', $t_alt);
+	print_icon( $t_icon, 'bigger-120', $t_alt );
 	echo '</a>';
 }
 
@@ -165,7 +163,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
-		throw new ClientException( "Collapse section mismatch", ERROR_GENERIC );
+		throw new ClientException( 'Collapse section mismatch', ERROR_GENERIC );
 	}
 
 	echo '</div>';
@@ -186,7 +184,7 @@ function is_collapsed( $p_block ) {
 		return false;
 	}
 
-	return( true == $g_collapse_cache_token[$p_block] );
+	return true == $g_collapse_cache_token[$p_block] ;
 }
 
 /**

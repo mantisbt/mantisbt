@@ -34,8 +34,7 @@ use MantisPlugin;
  *
  * For Plugin API internal use only.
  */
-class MissingHooksPlugin extends InvalidPlugin
-{
+class MissingHooksPlugin extends InvalidPlugin {
 
 	function register() {
 		$this->name = $this->basename;

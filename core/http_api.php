@@ -33,7 +33,7 @@ require_api( 'config_api.php' );
  * The Content-Security-Policy settings array.  Use http_csp_add() to update it.
  * @var array
  */
-$g_csp = array();
+$g_csp = [];
 
 /**
  * Check to see if the client is using Microsoft Internet Explorer so we can
@@ -160,7 +160,7 @@ function http_csp_add( $p_type, $p_value ) {
 			$g_csp[$p_type][] = $p_value;
 		}
 	} else {
-		$g_csp[$p_type] = array( $p_value );
+		$g_csp[$p_type] = [$p_value];
 	}
 }
 
@@ -216,7 +216,7 @@ function http_security_headers() {
 		http_csp_add( 'style-src', "'unsafe-inline'" );
 		http_csp_add( 'script-src', "'self'" );
 		http_csp_add( 'img-src', "'self'" );
-		http_csp_add( 'img-src', "data:" );
+		http_csp_add( 'img-src', 'data:' );
 
 		# White list the CDN urls (if enabled)
 		if ( config_get_global( 'cdn_enabled' ) == ON ) {
@@ -280,7 +280,7 @@ function http_build_url( array $p_url ) {
 	return
 		  ( isset( $p_url['scheme'] )   ? $p_url['scheme'] . '://' : '' )
 		. ( isset( $p_url['user'] )
-			? $p_url['user'] . ( isset( $p_url['pass'] ) ? ':' . $p_url['pass'] : '' ) .'@'
+			? $p_url['user'] . ( isset( $p_url['pass'] ) ? ':' . $p_url['pass'] : '' ) . '@'
 			: ''
 		  )
 		. ( isset( $p_url['host'] )     ? $p_url['host'] : '' )

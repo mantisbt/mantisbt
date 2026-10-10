@@ -32,9 +32,9 @@
  * @link http://www.mantisbt.org
  */
 
-##############################
+# #############################
 # MantisBT Database Settings #
-##############################
+# #############################
 
 /**
  * Database Server host name.
@@ -152,9 +152,9 @@ $g_db_table_suffix = '_table';
  */
 $g_db_table_plugin_prefix = 'plugin';
 
-####################
+# ###################
 # Folder Locations #
-####################
+# ###################
 
 /**
  * Path to root MantisBT folder.
@@ -231,9 +231,9 @@ if( $t_local_config && is_dir( $t_local_config ) ) {
 
 unset( $t_local_config );
 
-##########################
+# #########################
 # MantisBT Path Settings #
-##########################
+# #########################
 
 /**
  * Full URL to your installation as seen from the web browser.
@@ -275,9 +275,9 @@ $g_short_path = '';
  */
 $g_manual_url = 'doc/en-US/Admin_Guide/html-desktop/';
 
-##############
+# #############
 # Web Server #
-##############
+# #############
 
 /**
  * Session save path.
@@ -310,9 +310,9 @@ $g_session_validation = ON;
  */
 $g_form_security_validation = ON;
 
-#############################
+# ############################
 # Security and Cryptography #
-#############################
+# ############################
 
 /**
  * Master salt value used for cryptographic hashing throughout MantisBT.
@@ -346,9 +346,9 @@ $g_form_security_validation = ON;
  */
 $g_crypto_master_salt = '';
 
-############################
+# ###########################
 # Signup and Lost Password #
-############################
+# ###########################
 
 /**
  * Allow users to signup for their own accounts.
@@ -434,9 +434,9 @@ $g_lost_password_feature = ON;
  */
 $g_max_lost_password_in_progress_count = 3;
 
-#############
+# ############
 # Anti-Spam #
-#############
+# ############
 
 /**
  * Max number of events to allow for users with default access level.
@@ -457,9 +457,9 @@ $g_antispam_max_event_count = 10;
  */
 $g_antispam_time_window_in_seconds = 3600;
 
-###########################
+# ##########################
 # MantisBT Email Settings #
-###########################
+# ##########################
 
 /**
  * Webmaster's email address.
@@ -528,7 +528,7 @@ $g_email_notifications_verbose = OFF;
  * who should get email notifications on different actions/statuses.
  *
  * The user categories are:
- # - `reporter`:      the Issue's reporter
+ * # - `reporter`:      the Issue's reporter
  * - `handler`:       the user assigned to the Issue
  * - `monitor`:       users who are monitoring the Issue
  * - `bugnotes`:      users who have added a bugnote to the Issue
@@ -541,7 +541,7 @@ $g_email_notifications_verbose = OFF;
  * @see $g_notify_flags
  * @global array $g_default_notify_flags
  */
-$g_default_notify_flags = array(
+$g_default_notify_flags = [
 	'reporter'      => ON,
 	'handler'       => ON,
 	'monitor'       => ON,
@@ -550,7 +550,7 @@ $g_default_notify_flags = array(
 	'explicit'      => ON,
 	'threshold_min' => NOBODY,
 	'threshold_max' => NOBODY
-);
+];
 
 /**
  * Sets notifications overrides for specific actions/statuses.
@@ -592,11 +592,11 @@ $g_default_notify_flags = array(
  * @see $g_default_notify_flags
  * @global array $g_notify_flags
  */
-$g_notify_flags = array(
-	'new' => array(
+$g_notify_flags = [
+	'new' => [
 		'bugnotes'      => OFF,
-	),
-	'monitor' => array(
+	],
+	'monitor' => [
 		'reporter'      => OFF,
 		'handler'       => OFF,
 		'monitor'       => OFF,
@@ -604,8 +604,8 @@ $g_notify_flags = array(
 		'explicit'      => ON,
 		'threshold_min' => NOBODY,
 		'threshold_max' => NOBODY,
-	),
-);
+	],
+];
 
 /**
  * Whether user's should receive emails for their own actions.
@@ -678,7 +678,7 @@ $g_allow_blank_email = OFF;
  *
  * @global array $g_limit_email_domains
  */
-$g_limit_email_domains = array();
+$g_limit_email_domains = [];
 
 /**
  * This specifies the access level that is needed to get the mailto: links.
@@ -821,7 +821,6 @@ $g_email_dkim_domain = 'example.com';
  */
 $g_email_dkim_private_key_file_path = '';
 
-
 /**
  * DomainKeys Identified Mail (DKIM) Signatures private key value.
  *
@@ -958,14 +957,14 @@ $g_email_send_using_cronjob = OFF;
  *
  * @global string $g_email_separator1
  */
-$g_email_separator1 = str_pad('', 70, '=');
+$g_email_separator1 = str_pad( '', 70, '=' );
 
 /**
  * Email separator and padding.
  *
  * @global string $g_email_separator2
  */
-$g_email_separator2 = str_pad('', 70, '-');
+$g_email_separator2 = str_pad( '', 70, '-' );
 
 /**
  * Email separator and padding.
@@ -981,9 +980,9 @@ $g_email_padding_length = 28;
  */
 $g_email_retry_in_days = 7;
 
-###########################
+# ##########################
 # MantisBT Version String #
-###########################
+# ##########################
 
 /**
  * Display MantisBT Version number to users in the page footer.
@@ -1017,9 +1016,9 @@ $g_version_suffix = '';
  */
 $g_copyright_statement = '';
 
-##############################
+# #############################
 # MantisBT Language Settings #
-##############################
+# #############################
 
 /**
  * Default language for MantisBT user interface.
@@ -1036,7 +1035,7 @@ $g_default_language = 'auto';
  *
  * @global array $g_language_choices_arr
  */
-$g_language_choices_arr = array(
+$g_language_choices_arr = [
 	'auto',
 	'afrikaans',
 	'amharic',
@@ -1101,7 +1100,7 @@ $g_language_choices_arr = array(
 	'vietnamese',
 	'volapuk',
 	'zazaki',
-);
+];
 
 /**
  * Browser language mapping for 'auto' language selection.
@@ -1114,7 +1113,7 @@ $g_language_choices_arr = array(
  * @see lang_get_current_datetime_locale()
  * @global array $g_language_auto_map
  */
-$g_language_auto_map = array(
+$g_language_auto_map = [
 	'af' => 'afrikaans',
 	'am' => 'amharic',
 	'ar' => 'arabic',
@@ -1178,7 +1177,7 @@ $g_language_auto_map = array(
 	'vi' => 'vietnamese',
 	'vo' => 'volapuk',
 	'diq' => 'zazaki',
-);
+];
 
 /**
  * Fallback for automatic language selection.
@@ -1187,9 +1186,9 @@ $g_language_auto_map = array(
  */
 $g_fallback_language = 'english';
 
-##########################
+# #########################
 # MantisBT Font Settings #
-##########################
+# #########################
 
 /**
  * Name of font family to use.
@@ -1211,7 +1210,7 @@ $g_font_family = 'Open Sans';
  *
  * @global array $g_font_family_choices
  */
-$g_font_family_choices = array(
+$g_font_family_choices = [
 	'Amiko',
 	'Architects Daughter',
 	'Archivo Narrow',
@@ -1242,7 +1241,7 @@ $g_font_family_choices = array(
 	'Secular One',
 	'Ubuntu',
 	'Vollkorn'
-);
+];
 
 /**
  * List of fonts that are installed as part of MantisBT.
@@ -1251,15 +1250,15 @@ $g_font_family_choices = array(
  *
  * @global array $g_font_family_choices_local
  */
-$g_font_family_choices_local = array(
+$g_font_family_choices_local = [
 	'Montserrat',
 	'Open Sans',
 	'Poppins'
-);
+];
 
-#############################
+# ############################
 # MantisBT Display Settings #
-#############################
+# ############################
 
 /**
  * Browser window title.
@@ -1402,10 +1401,10 @@ $g_severity_significant_threshold = MAJOR;
  *
  * @global array $g_view_issues_page_columns
  */
-$g_view_issues_page_columns = array(
+$g_view_issues_page_columns = [
 	'selection', 'edit', 'priority', 'id', 'bugnotes_count', 'attachment_count',
 	'category_id', 'severity', 'status', 'last_updated', 'summary',
-);
+];
 
 /**
  * The default columns to be included in the Print Issues Page.
@@ -1414,10 +1413,10 @@ $g_view_issues_page_columns = array(
  *
  * @global array $g_print_issues_page_columns
  */
-$g_print_issues_page_columns = array(
+$g_print_issues_page_columns = [
 	'selection', 'priority', 'id', 'bugnotes_count', 'attachment_count',
 	'category_id', 'severity', 'status', 'last_updated', 'summary',
-);
+];
 
 /**
  * The default columns to be included in the CSV export.
@@ -1426,12 +1425,12 @@ $g_print_issues_page_columns = array(
  *
  * @global array $g_csv_columns
  */
-$g_csv_columns = array(
+$g_csv_columns = [
 	'id', 'project_id', 'reporter_id', 'handler_id', 'priority',
 	'severity', 'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
 	'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version'
-);
+];
 
 /**
  * The default columns to be included in the Excel export.
@@ -1440,12 +1439,12 @@ $g_csv_columns = array(
  *
  * @global array $g_excel_columns
  */
-$g_excel_columns = array(
+$g_excel_columns = [
 	'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity',
 	'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
 	'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version'
-);
+];
 
 /**
  * Show projects when in All Projects mode.
@@ -1541,9 +1540,9 @@ $g_show_changelog_dates = ON;
  */
 $g_show_roadmap_dates = ON;
 
-##########################
+# #########################
 # MantisBT Time Settings #
-##########################
+# #########################
 
 /**
  * Time for long lived cookie to live in seconds.
@@ -1579,9 +1578,9 @@ $g_allow_permanent_cookie = ON;
  */
 $g_long_process_timeout = 0;
 
-##########################
+# #########################
 # MantisBT Date Settings #
-##########################
+# #########################
 
 /**
  * Date format strings defaults to ISO 8601 formatting.
@@ -1624,10 +1623,9 @@ $g_complete_date_format = 'Y-m-d H:i T';
  */
 $g_datetime_picker_format = 'Y-MM-DD HH:mm';
 
-
-##############################
+# #############################
 # MantisBT TimeZone Settings #
-##############################
+# #############################
 
 /**
  * Default timezone to use in MantisBT.
@@ -1647,9 +1645,9 @@ $g_datetime_picker_format = 'Y-MM-DD HH:mm';
  */
 $g_default_timezone = '';
 
-##########################
+# #########################
 # MantisBT News Settings #
-##########################
+# #########################
 
 /**
  * Indicates whether the news feature should be enabled or disabled.
@@ -1698,9 +1696,9 @@ $g_news_view_limit_days = 30;
  */
 $g_private_news_threshold = DEVELOPER;
 
-################################
+# ###############################
 # MantisBT Default Preferences #
-################################
+# ###############################
 
 /**
  * Default access level assigned to new accounts when signing up.
@@ -2010,9 +2008,9 @@ $g_default_email_on_priority_minimum_severity = OFF;
  */
 $g_default_email_bugnote_limit = 0;
 
-#############################
+# ############################
 # MantisBT Summary Settings #
-#############################
+# ############################
 
 /**
  * How many reporters to show.
@@ -2030,7 +2028,7 @@ $g_reporter_summary_limit = 10;
  *
  * @global array $g_date_partitions
  */
-$g_date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365);
+$g_date_partitions = [1, 2, 3, 7, 30, 60, 90, 180, 365];
 
 /**
  * Shows project '[project] category' when 'All Projects' is selected.
@@ -2057,7 +2055,7 @@ $g_view_summary_threshold = MANAGER;
  *
  * @global array $g_severity_multipliers
  */
-$g_severity_multipliers = array(
+$g_severity_multipliers = [
 	FEATURE => 1,
 	TRIVIAL => 2,
 	TEXT    => 3,
@@ -2066,7 +2064,7 @@ $g_severity_multipliers = array(
 	MAJOR   => 8,
 	CRASH   => 8,
 	BLOCK   => 10
-);
+];
 
 /**
  * Resolution multipliers used to determine reporters effectiveness.
@@ -2079,18 +2077,18 @@ $g_severity_multipliers = array(
  *
  * @global array $g_resolution_multipliers
  */
-$g_resolution_multipliers = array(
+$g_resolution_multipliers = [
 	UNABLE_TO_REPRODUCE => 2,
 	NOT_FIXABLE         => 1,
 	DUPLICATE           => 3,
 	NOT_A_BUG           => 5,
 	SUSPENDED           => 1,
 	WONT_FIX            => 1
-);
+];
 
-#############################
+# ############################
 # MantisBT Bugnote Settings #
-#############################
+# ############################
 
 /**
  * Bugnote ordering.
@@ -2101,9 +2099,9 @@ $g_resolution_multipliers = array(
  */
 $g_bugnote_order = 'DESC';
 
-#################################
+# ################################
 # MantisBT Bug History Settings #
-#################################
+# ################################
 
 /**
  * Bug history visible by default when you view a bug.
@@ -2123,9 +2121,9 @@ $g_history_default_visible = ON;
  */
 $g_history_order = 'ASC';
 
-##########################################
+# #########################################
 # MantisBT Reminder and Mention Settings #
-##########################################
+# #########################################
 
 /**
  * Store reminders as bugnotes.
@@ -2177,9 +2175,9 @@ $g_mentions_enabled = ON;
  */
 $g_mentions_tag = '@';
 
-#################################
+# ################################
 # MantisBT Sponsorship Settings #
-#################################
+# ################################
 
 /**
  * Whether to enable/disable the whole issue sponsorship feature.
@@ -2244,9 +2242,9 @@ $g_assign_sponsored_bugs_threshold = MANAGER;
  */
 $g_minimum_sponsorship_amount = 5;
 
-#################################
+# ################################
 # MantisBT File Upload Settings #
-#################################
+# ################################
 
 /**
  * Allow File uploads.
@@ -2389,9 +2387,9 @@ $g_file_download_xsendfile_enabled = OFF;
  */
 $g_file_download_xsendfile_header_name = 'X-Sendfile';
 
-##########################
+# #########################
 # MantisBT HTML Settings #
-##########################
+# #########################
 
 /**
  * Convert URLs and e-mail addresses to html links.
@@ -2474,9 +2472,9 @@ $g_max_dropdown_length = 40;
  */
 $g_wrap_in_preformatted_text = ON;
 
-#############################################
+# ############################################
 # MantisBT Authentication and LDAP Settings #
-#############################################
+# ############################################
 
 /**
  * Login authentication method.
@@ -2504,7 +2502,6 @@ $g_reauthentication = ON;
  * @global int $g_reauthentication_expiry
  */
 $g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
-
 
 /**
  * Specifies the LDAP or Active Directory server(s) to connect to.
@@ -2704,9 +2701,9 @@ $g_use_ldap_email = OFF;
  */
 $g_ldap_simulation_file_path = '';
 
-###################
+# ##################
 # Status Settings #
-###################
+# ##################
 
 /**
  * Status to assign to the bug when submitted.
@@ -2851,11 +2848,11 @@ $g_auto_set_status_to_assigned = ON;
  *
  * @global array $g_status_enum_workflow
  */
-$g_status_enum_workflow = array();
+$g_status_enum_workflow = [];
 
-############################
+# ###########################
 # Bug Attachments Settings #
-############################
+# ###########################
 
 /**
  * Specify the filename of the magic database file.
@@ -2884,18 +2881,18 @@ $g_preview_attachments_inline_max_size = 256 * 1024;
  *
  * @global array $g_preview_text_extensions
  */
-$g_preview_text_extensions = array(
+$g_preview_text_extensions = [
 	'', 'txt', 'diff', 'patch'
-);
+];
 
 /**
  * Extensions for images that can be expanded inline.
  *
  * @global array $g_preview_image_extensions
  */
-$g_preview_image_extensions = array(
+$g_preview_image_extensions = [
 	'bmp', 'png', 'gif', 'jpg', 'jpeg'
-);
+];
 
 /**
  * Specifies the maximum width for the auto-preview feature.
@@ -2978,9 +2975,9 @@ $g_allow_delete_own_attachments = OFF;
  */
 $g_attachments_to_new_tab = OFF;
 
-####################
+# ###################
 # Field Visibility #
-####################
+# ###################
 
 /**
  * Enable or disable usage of the ETA field.
@@ -3046,7 +3043,7 @@ $g_enable_product_build = OFF;
  *
  * @global array $g_bug_report_page_fields
  */
-$g_bug_report_page_fields = array(
+$g_bug_report_page_fields = [
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -3064,7 +3061,7 @@ $g_bug_report_page_fields = array(
 	'tags',
 	'target_version',
 	'view_state',
-);
+];
 
 /**
  * An array of optional fields to show on the bug view page.
@@ -3109,7 +3106,7 @@ $g_bug_report_page_fields = array(
  *
  * @global array $g_bug_view_page_fields
  */
-$g_bug_view_page_fields = array(
+$g_bug_view_page_fields = [
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -3139,7 +3136,7 @@ $g_bug_view_page_fields = array(
 	'tags',
 	'target_version',
 	'view_state',
-);
+];
 
 /**
  * An array of optional fields to show on the bug update page.
@@ -3182,7 +3179,7 @@ $g_bug_view_page_fields = array(
  *
  * @global array $g_bug_update_page_fields
  */
-$g_bug_update_page_fields = array(
+$g_bug_update_page_fields = [
 	'additional_info',
 	'category_id',
 	'date_submitted',
@@ -3210,11 +3207,11 @@ $g_bug_update_page_fields = array(
 	'summary',
 	'target_version',
 	'view_state',
-);
+];
 
-##########################
+# #########################
 # MantisBT Misc Settings #
-##########################
+# #########################
 
 /**
  * Access level needed to report a bug.
@@ -3633,7 +3630,7 @@ $g_set_bug_sticky_threshold = MANAGER;
  * );
  * @global array $g_set_status_threshold
  */
-$g_set_status_threshold = array( NEW_ => REPORTER );
+$g_set_status_threshold = [NEW_ => REPORTER];
 
 /**
  * Threshold at which a user can edit his/her own bugnotes.
@@ -3889,16 +3886,16 @@ $g_view_configuration_threshold = ADMINISTRATOR;
  */
 $g_set_configuration_threshold = ADMINISTRATOR;
 
-####################################
+# ###################################
 # MantisBT Look and Feel Variables #
-####################################
+# ###################################
 
 /**
  * Status color codes, using the Tango color palette.
  *
  * @global array $g_status_colors
  */
-$g_status_colors = array(
+$g_status_colors = [
 	'new'          => '#fcbdbd', # red    (scarlet red #ef2929)
 	'feedback'     => '#e3b7eb', # purple (plum        #75507b)
 	'acknowledged' => '#ffcd85', # orange (orango      #f57900)
@@ -3906,7 +3903,7 @@ $g_status_colors = array(
 	'assigned'     => '#c2dfff', # blue   (sky blue    #729fcf)
 	'resolved'     => '#d2f5b0', # green  (chameleon   #8ae234)
 	'closed'       => '#c9ccc4'  # grey   (aluminum    #babdb6)
-);
+];
 
 /**
  * The padding level when displaying bug ids.
@@ -3926,9 +3923,9 @@ $g_display_bug_padding = 7;
  */
 $g_display_bugnote_padding = 7;
 
-#############################
+# ############################
 # MantisBT Cookie Variables #
-#############################
+# ############################
 
 /**
  * Specifies the path under which a cookie is visible.
@@ -4032,9 +4029,9 @@ $g_logout_cookie = '%cookie_prefix%_LOGOUT_COOKIE';
  */
 $g_bug_list_cookie = '%cookie_prefix%_BUG_LIST_COOKIE';
 
-#############################
+# ############################
 # MantisBT Filter Variables #
-#############################
+# ############################
 
 /**
  * Show custom fields in the filter dialog and use these in filtering.
@@ -4096,9 +4093,9 @@ $g_create_permalink_threshold = DEVELOPER;
  */
 $g_create_short_url = 'https://tinyurl.com/create.php?url=%s';
 
-#########################
+# ########################
 # MantisBT Enum Strings #
-#########################
+# ########################
 
 /**
  * Access levels enumeration.
@@ -4199,9 +4196,9 @@ $g_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
  */
 $g_custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:checkbox,6:list,7:multiselection list,8:date,9:radio,10:textarea';
 
-###############################
+# ##############################
 # MantisBT Speed Optimisation #
-###############################
+# ##############################
 
 /**
  * Use compression of generated html if browser supports it.
@@ -4227,9 +4224,9 @@ $g_compress_html = ON;
  */
 $g_use_persistent_connections = OFF;
 
-#################
+# ################
 # Include files #
-#################
+# ################
 
 /**
  * Absolute path to the top include file (logos, banners, etc).
@@ -4280,9 +4277,9 @@ $g_css_rtl_include_file = 'rtl.css';
  */
 $g_cdn_enabled = OFF;
 
-################
+# ###############
 # Redirections #
-################
+# ###############
 
 /**
  * Default page after Login or Set Project.
@@ -4298,9 +4295,9 @@ $g_default_home_page = 'my_view_page.php';
  */
 $g_logout_redirect_page = AUTH_PAGE_USERNAME;
 
-###########
+# ##########
 # Headers #
-###########
+# ##########
 
 /**
  * An array of custom headers to be sent with each page.
@@ -4319,7 +4316,7 @@ $g_logout_redirect_page = AUTH_PAGE_USERNAME;
  *
  * @global array $g_custom_headers
  */
-$g_custom_headers = array();
+$g_custom_headers = [];
 
 /**
  * Browser Caching Control.
@@ -4333,9 +4330,9 @@ $g_custom_headers = array();
  */
 $g_allow_browser_cache = OFF;
 
-#################
+# ################
 # Custom Fields #
-#################
+# ################
 
 /**
  * Threshold needed to manage custom fields.
@@ -4358,9 +4355,9 @@ $g_custom_field_link_threshold = MANAGER;
  */
 $g_custom_field_edit_after_create = ON;
 
-################
+# ###############
 # Custom Menus #
-################
+# ###############
 
 /**
  * Add custom options to the main menu.
@@ -4393,11 +4390,11 @@ $g_custom_field_edit_after_create = ON;
  *
  * @global array $g_main_menu_custom_options
  */
-$g_main_menu_custom_options = array();
+$g_main_menu_custom_options = [];
 
-#########
+# ########
 # Icons #
-#########
+# ########
 
 /**
  * Maps a file extension to a file type icon.
@@ -4409,7 +4406,7 @@ $g_main_menu_custom_options = array();
  *
  * @global array $g_file_type_icons
  */
-$g_file_type_icons = array(
+$g_file_type_icons = [
 	''      => 'fa-file-text-o',
 	'7z'    => 'fa-file-archive-o',
 	'ace'   => 'fa-file-archive-o',
@@ -4469,7 +4466,7 @@ $g_file_type_icons = array(
 	'vsw'   => 'fa-file-o',
 	'vsx'   => 'fa-file-o',
 	'?'     => 'fa-file-o'
-);
+];
 
 /**
  * Content Types overrides.
@@ -4478,7 +4475,7 @@ $g_file_type_icons = array(
  *
  * @global array $g_file_download_content_type_overrides
  */
-$g_file_download_content_type_overrides = array(
+$g_file_download_content_type_overrides = [
 	'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 	'dotx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
 	'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -4486,7 +4483,7 @@ $g_file_download_content_type_overrides = array(
 	'potx' => 'application/vnd.openxmlformats-officedocument.presentationml.template',
 	'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 	'xltx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.template'
-);
+];
 
 /**
  * Icon associative arrays.
@@ -4495,28 +4492,28 @@ $g_file_download_content_type_overrides = array(
  *
  * @global array $g_status_icon_arr
  */
-$g_status_icon_arr = array(
+$g_status_icon_arr = [
 	NONE      => '',
 	LOW       => 'fa-chevron-down fa-lg green',
 	NORMAL    => 'fa-minus fa-lg orange2',
 	HIGH      => 'fa-chevron-up fa-lg red',
 	URGENT    => 'fa-arrow-up fa-lg red',
 	IMMEDIATE => 'fa-exclamation-triangle fa-lg red'
-);
+];
 
 /**
  * Sort direction to icon mapping.
  *
  * @global array $g_sort_icon_arr
  */
-$g_sort_icon_arr = array(
+$g_sort_icon_arr = [
 	ASCENDING  => 'fa-caret-up',
 	DESCENDING => 'fa-caret-down'
-);
+];
 
-####################
+# ###################
 # My View Settings #
-####################
+# ###################
 
 /**
  * Number of bugs shown in each box.
@@ -4532,7 +4529,7 @@ $g_my_view_bug_count = 10;
  *
  * @global array $g_my_view_boxes
  */
-$g_my_view_boxes = array(
+$g_my_view_boxes = [
 	'assigned'      => '1',
 	'unassigned'    => '2',
 	'reported'      => '3',
@@ -4542,12 +4539,11 @@ $g_my_view_boxes = array(
 	'feedback'      => '0',
 	'verify'        => '0',
 	'my_comments'   => '0'
-);
+];
 
-
-#############
+# ############
 # RSS Feeds #
-#############
+# ############
 
 /**
  * This flag enables or disables RSS syndication.
@@ -4558,10 +4554,9 @@ $g_my_view_boxes = array(
  */
 $g_rss_enabled = ON;
 
-
-#####################
+# ####################
 # Bug Relationships #
-#####################
+# ####################
 
 /**
  * Enable relationship graphs support.
@@ -4711,11 +4706,11 @@ $g_forward_year_count = 4;
  *
  * @global array $g_custom_group_actions
  */
-$g_custom_group_actions = array();
+$g_custom_group_actions = [];
 
-####################
+# ###################
 # Wiki Integration #
-####################
+# ###################
 
 /**
  * Wiki Integration Enabled.
@@ -4757,9 +4752,9 @@ $g_wiki_root_namespace = 'mantis';
  */
 $g_wiki_engine_url = '';
 
-####################
+# ###################
 # Recently Visited #
-####################
+# ###################
 
 /**
  * This controls whether to show the most recently visited issues by the current user or not.
@@ -4771,9 +4766,9 @@ $g_wiki_engine_url = '';
  */
 $g_recently_visited_count = 5;
 
-###############
+# ##############
 # Bug Tagging #
-###############
+# ##############
 
 /**
  * String that will separate tags as entered for input.
@@ -4830,9 +4825,9 @@ $g_tag_edit_threshold = DEVELOPER;
  */
 $g_tag_edit_own_threshold = REPORTER;
 
-#################
+# ################
 # Time tracking #
-#################
+# ################
 
 /**
  * Turn on Time Tracking accounting.
@@ -4890,9 +4885,9 @@ $g_time_tracking_without_note = ON;
  */
 $g_time_tracking_billing_rate = 0;
 
-############################
+# ###########################
 # Profile Related Settings #
-############################
+# ###########################
 
 /**
  * Enable Profiles.
@@ -4924,9 +4919,9 @@ $g_manage_global_profile_threshold = MANAGER;
  */
 $g_allow_freetext_in_profile_fields = ON;
 
-#################
+# ################
 # Plugin System #
-#################
+# ################
 
 /**
  * Enable/disable plugins.
@@ -4955,7 +4950,7 @@ $g_manage_plugin_threshold = ADMINISTRATOR;
  *
  * @global array $g_plugin_mime_types
  */
-$g_plugin_mime_types = array(
+$g_plugin_mime_types = [
 	'css' => 'text/css',
 	'js'  => 'application/javascript',
 	'gif' => 'image/gif',
@@ -4964,7 +4959,7 @@ $g_plugin_mime_types = array(
 	'jpeg' => 'image/jpeg',
 	'svg' => 'image/svg+xml',
 	'webp' => 'image/webp'
-);
+];
 
 /**
  * Force installation and protection of certain plugins.
@@ -4984,11 +4979,11 @@ $g_plugin_mime_types = array(
  *
  * @global $g_plugins_force_installed
  */
-$g_plugins_force_installed = array();
+$g_plugins_force_installed = [];
 
-############
+# ###########
 # Due Date #
-############
+# ###########
 
 /**
  * Threshold to update due date submitted.
@@ -5036,14 +5031,14 @@ $g_due_date_default = '';
  *
  * @global  array $g_due_date_warning_levels
  */
-$g_due_date_warning_levels = array(
+$g_due_date_warning_levels = [
 	0,
 	7 * SECONDS_PER_DAY,
-);
+];
 
-################
+# ###############
 # Sub-projects #
-################
+# ###############
 
 /**
  * Whether sub-projects feature should be enabled.
@@ -5069,9 +5064,9 @@ $g_subprojects_inherit_categories = ON;
  */
 $g_subprojects_inherit_versions = ON;
 
-#########################################
+# ########################################
 # System Logging and Debugging Settings #
-#########################################
+# ########################################
 
 /**
  * Time page loads.
@@ -5139,7 +5134,7 @@ $g_show_queries_count = OFF;
  *
  * @global array $g_display_errors
  */
-$g_display_errors = array();
+$g_display_errors = [];
 
 # Add developers defaults when server is localhost
 # Note: intentionally not using SERVER_ADDR as it's not guaranteed to exist
@@ -5221,7 +5216,7 @@ $g_log_destination = '';
 /**
  * Indicates the access level required for a user to see the log output.
  *
-	 * This is only used when {@see $g_log_destination} is 'page'.
+ * This is only used when {@see $g_log_destination} is 'page'.
  *
  * Note that this threshold is compared against the user's global access level,
  * rather than the one from the currently active project.
@@ -5230,9 +5225,9 @@ $g_log_destination = '';
  */
 $g_show_log_threshold = ADMINISTRATOR;
 
-##########################
+# #########################
 # Configuration Settings #
-##########################
+# #########################
 
 /**
  * The following list of variables should never be in the database.
@@ -5242,7 +5237,7 @@ $g_show_log_threshold = ADMINISTRATOR;
  *
  * @global array $g_global_settings
  */
-$g_global_settings = array(
+$g_global_settings = [
 	'absolute_path',
 	'absolute_path_default_upload_folder',
 	'admin_checks',
@@ -5359,7 +5354,7 @@ $g_global_settings = array(
 	'wiki_engine',
 	'wiki_engine_url',
 	'wiki_root_namespace',
-);
+];
 
 /**
  * List of config options available via SOAP API.
@@ -5369,7 +5364,7 @@ $g_global_settings = array(
  *
  * @global array $g_public_config_names
  */
-$g_public_config_names = array(
+$g_public_config_names = [
 	'access_levels_enum_string',
 	'action_button_position',
 	'add_bugnote_threshold',
@@ -5750,11 +5745,11 @@ $g_public_config_names = array(
 	'wiki_root_namespace',
 	'window_title',
 	'wrap_in_preformatted_text'
-);
+];
 
-############################
+# ###########################
 # Webservice Configuration #
-############################
+# ###########################
 
 /**
  * Whether the REST API is enabled or not.
@@ -5883,9 +5878,9 @@ $g_webservice_error_when_version_not_found = ON;
  */
 $g_webservice_version_when_not_found = '';
 
-####################
+# ###################
 # Issue Activities #
-####################
+# ###################
 
 /**
  * Combine activities that were submitted together in one entry.

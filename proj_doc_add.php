@@ -40,7 +40,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -67,9 +67,9 @@ $f_description = gpc_get_string( 'description' );
 $f_file = gpc_get_file( 'file' );
 
 if( is_blank( $f_title ) ) {
-	throw new ClientException( "Title is required",
+	throw new ClientException( 'Title is required',
 		ERROR_EMPTY_FIELD,
-		[ lang_get( 'title' ) ]
+		[lang_get( 'title' )]
 	);
 }
 

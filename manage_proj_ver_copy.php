@@ -40,7 +40,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -74,7 +74,7 @@ if( $f_copy_from ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
-	throw new ClientException( "Copy action to/from is required", ERROR_NO_COPY_ACTION );
+	throw new ClientException( 'Copy action to/from is required', ERROR_NO_COPY_ACTION );
 }
 
 # Get all active versions (i.e. exclude obsolete ones)
@@ -84,15 +84,15 @@ foreach ( $t_rows as $t_row ) {
 	$t_dst_version_id = version_get_id( $t_row['version'], $t_dst_project_id );
 	if( $t_dst_version_id === false ) {
 		# Version does not exist in target project
-		$t_data = array(
-			'query' => array( 'project_id' => $t_dst_project_id ),
-			'payload' => array(
+		$t_data = [
+			'query' => ['project_id' => $t_dst_project_id],
+			'payload' => [
 				'name' => $t_row['version'],
 				'description' => $t_row['description'],
 				'released' => (bool)$t_row['released'],
 				'timestamp' => date_timestamp_to_iso8601( $t_row['date_order'] )
-			)
-		);
+			]
+		];
 
 		$t_command = new VersionAddCommand( $t_data );
 		$t_command->execute();
@@ -101,19 +101,19 @@ foreach ( $t_rows as $t_row ) {
 		# Since we're ignoring obsolete versions, those marked as such in the
 		# source project after an earlier copy operation will not be updated
 		# in the target project.
-		$t_data = array(
-			'query' => array(
+		$t_data = [
+			'query' => [
 				'project_id' => $t_dst_project_id,
 				'version_id' => $t_dst_version_id
-			),
-			'payload' => array(
+			],
+			'payload' => [
 				'name' => $t_row['version'],
 				'description' => $t_row['description'],
 				'released' => (bool)$t_row['released'],
 				'obsolete' => (bool)$t_row['obsolete'],
 				'timestamp' => date_timestamp_to_iso8601( $t_row['date_order'] )
-			)
-		);
+			]
+		];
 
 		$t_command = new VersionUpdateCommand( $t_data );
 		$t_command->execute();
@@ -122,4 +122,4 @@ foreach ( $t_rows as $t_row ) {
 
 form_security_purge( 'manage_proj_ver_copy' );
 
-print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#versions');
+print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#versions' );

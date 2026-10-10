@@ -45,7 +45,7 @@ require_api( 'utility_api.php' );
  * LDAP attributes cache, indexed by username
  * @see ldap_cache_user_data()
  */
-$g_cache_ldap_data = array();
+$g_cache_ldap_data = [];
 
 /**
  * Logs the most recent LDAP error.
@@ -75,7 +75,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	if( $t_ds === false ) {
 		log_event( LOG_LDAP, 'LDAP server URI syntax check failed, make sure its in URI form' );
 		throw new ClientException(
-			"LDAP Server Connection Failed",
+			'LDAP Server Connection Failed',
 			ERROR_LDAP_SERVER_CONNECT_FAILED
 		);
 	}
@@ -84,7 +84,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 
 	$t_network_timeout = config_get_global( 'ldap_network_timeout' );
 	if( $t_network_timeout > 0 ) {
-		log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
+		log_event( LOG_LDAP, 'Setting LDAP network timeout to ' . $t_network_timeout );
 		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
@@ -114,9 +114,9 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_X_TLS_PROTOCOL_MIN, $t_tls_protocol_min );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
-			log_event( LOG_LDAP, "Error: Failed to set minimum TLS version on LDAP server" );
+			log_event( LOG_LDAP, 'Error: Failed to set minimum TLS version on LDAP server' );
 			throw new ClientException(
-				"LDAP: unable to set TLS version",
+				'LDAP: unable to set TLS version',
 				ERROR_LDAP_UNABLE_TO_SET_MIN_TLS
 			);
 		}
@@ -128,14 +128,14 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		$t_result = @ldap_start_tls( $t_ds );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
-			log_event( LOG_LDAP, "Error: Cannot initiate StartTLS on LDAP server" );
+			log_event( LOG_LDAP, 'Error: Cannot initiate StartTLS on LDAP server' );
 			throw new ClientException(
-				"LDAP: unable o initiate StartTLS",
+				'LDAP: unable o initiate StartTLS',
 				ERROR_LDAP_UNABLE_TO_STARTTLS
 			);
 		}
 	}
-	
+
 	# If no Bind DN and Password is set, attempt to login as the configured
 	# Bind DN.
 	if( is_blank( $p_binddn ) && is_blank( $p_password ) ) {
@@ -156,7 +156,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		ldap_log_error( $t_ds );
 		log_event( LOG_LDAP, 'Bind to ldap server failed' );
 		throw new ClientException(
-			"LDAP: server binding failed",
+			'LDAP: server binding failed',
 			ERROR_LDAP_SERVER_CONNECT_FAILED
 		);
 	} else {
@@ -235,10 +235,10 @@ function ldap_realname_from_username( $p_username ) {
  * @return string The escaped string.
  */
 function ldap_escape_string( $p_string ) {
-	$t_find = array( '\\', '*', '(', ')', '/', "\x00" );
-	$t_replace = array( '\5c', '\2a', '\28', '\29', '\2f', '\00' );
+	$t_find = ['\\', '*', '(', ')', '/', "\x00"];
+	$t_replace = ['\5c', '\2a', '\28', '\29', '\2f', '\00'];
 
-    return str_replace( $t_find, $t_replace, $p_string );
+	return str_replace( $t_find, $t_replace, $p_string );
 }
 
 /**
@@ -267,9 +267,8 @@ function ldap_cache_user_data( $p_username ) {
 	# context, it just means we won't be able to retrieve user data from LDAP.
 	try {
 		$t_ds = ldap_connect_bind();
-	}
-	catch( ClientException ) {
-		log_event( LOG_LDAP, "ERROR: could not bind to LDAP server" );
+	} catch( ClientException ) {
+		log_event( LOG_LDAP, 'ERROR: could not bind to LDAP server' );
 		return false;
 	}
 
@@ -280,12 +279,12 @@ function ldap_cache_user_data( $p_username ) {
 
 	$t_search_filter = '(&' . $t_ldap_organization
 		. '(' . $t_ldap_uid_field . '=' . ldap_escape_string( $p_username ) . '))';
-	$t_search_attrs = array(
+	$t_search_attrs = [
 		config_get_global( 'ldap_email_field' ),
 		config_get_global( 'ldap_realname_field' )
-	);
+	];
 
-	$t_extra_attrs = event_signal( 'EVENT_LDAP_CACHE_ATTRS', array( $p_username ) );
+	$t_extra_attrs = event_signal( 'EVENT_LDAP_CACHE_ATTRS', [$p_username] );
 	foreach( $t_extra_attrs as $t_plugin => $t_callback ) {
 		foreach( $t_callback as $t_attr ) {
 			if( is_array( $t_attr ) ) {
@@ -317,7 +316,7 @@ function ldap_cache_user_data( $p_username ) {
 		return false;
 	}
 
-	$t_data = array();
+	$t_data = [];
 	foreach( $t_search_attrs as $t_attr ) {
 		# Suppress error to avoid Warning in case an invalid attribute was specified
 		$t_value = @ldap_get_values( $t_ds, $t_entry, $t_attr );
@@ -408,10 +407,10 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 		$t_ldap_uid_field = config_get_global( 'ldap_uid_field', 'uid' );
 		$t_search_filter = '(&' . $t_ldap_organization . '(' . $t_ldap_uid_field . '=' . $c_username . '))';
-		$t_search_attrs = array(
+		$t_search_attrs = [
 			$t_ldap_uid_field,
 			'dn',
-		);
+		];
 
 		# Bind and connect.
 		# No need to check for failures, as ldap_connect_bind() throws errors.
@@ -425,14 +424,14 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
 			log_event( LOG_LDAP, "Search '$t_search_filter' failed" );
-			throw new ClientException( "LDAP Authentication Failed", ERROR_LDAP_AUTH_FAILED );
+			throw new ClientException( 'LDAP Authentication Failed', ERROR_LDAP_AUTH_FAILED );
 		}
 
 		$t_info = @ldap_get_entries( $t_ds, $t_sr );
 		if( $t_info === false ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
-			throw new ClientException( "LDAP Authentication Failed", ERROR_LDAP_AUTH_FAILED );
+			throw new ClientException( 'LDAP Authentication Failed', ERROR_LDAP_AUTH_FAILED );
 		}
 
 		$t_authenticated = false;
@@ -461,12 +460,12 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 	# from LDAP.  This will allow us to use the local data after login without
 	# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
 	if( $t_authenticated ) {
-        /** @noinspection PhpUnhandledExceptionInspection */
-        $t_user_id = user_get_id_by_name( $p_username );
+		/** @noinspection PhpUnhandledExceptionInspection */
+		$t_user_id = user_get_id_by_name( $p_username );
 
 		if( false !== $t_user_id ) {
 
-			$t_fields_to_update = array('password' => md5( $p_password ));
+			$t_fields_to_update = ['password' => md5( $p_password )];
 
 			if( ON == config_get_global( 'use_ldap_realname' ) ) {
 				$t_fields_to_update['realname'] = ldap_realname_from_username( $p_username );
@@ -510,7 +509,7 @@ function ldap_simulation_get_user( $p_username ) {
 	if( $t_lines === false ) {
 		log_event( LOG_LDAP, 'could not read simulation data from ' . $t_filename );
 		throw new ClientException(
-			"LDAP: could not read simulation data",
+			'LDAP: could not read simulation data',
 			ERROR_LDAP_SERVER_CONNECT_FAILED
 		);
 	}
@@ -523,7 +522,7 @@ function ldap_simulation_get_user( $p_username ) {
 			continue;
 		}
 
-		$t_user = array();
+		$t_user = [];
 
 		$t_user['username'] = $t_row[0];
 		$t_user['realname'] = $t_row[1];

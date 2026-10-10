@@ -23,4 +23,4 @@
  */
 
 $g_global_profiles = true;
-include( 'account_prof_menu_page.php' );
+include 'account_prof_menu_page.php';

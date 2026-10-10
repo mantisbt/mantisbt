@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare( strict_types=1 );
 # MantisBT - A PHP based bugtracking system
 
 # MantisBT is free software: you can redistribute it and/or modify
@@ -26,8 +27,6 @@
  */
 
 namespace Mantis\tests\Mantis;
-
-use Mantis\Exceptions\ClientException;
 
 /**
  * PHPUnit tests for Antispam API
@@ -72,7 +71,7 @@ class AntispamApiTest extends MantisCoreBase {
 	public static function provider_file_ensure_uploaded(): array {
 		return [
 			'SPAM'
-				=> [ [], 'rate limit' ],
+				=> [[], 'rate limit'],
 		];
 	}
 }

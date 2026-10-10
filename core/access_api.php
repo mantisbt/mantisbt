@@ -59,13 +59,13 @@ require_api( 'user_api.php' );
 use Mantis\Exceptions\ClientException;
 
 # @global array $g_cache_access_matrix
-$g_cache_access_matrix = array();
+$g_cache_access_matrix = [];
 
 # @global array $g_cache_access_matrix_project_ids
-$g_cache_access_matrix_project_ids = array();
+$g_cache_access_matrix_project_ids = [];
 
 # @global array $g_cache_access_matrix_user_ids
-$g_cache_access_matrix_user_ids = array();
+$g_cache_access_matrix_user_ids = [];
 
 /**
  * Display an access denied error message.
@@ -82,7 +82,7 @@ $g_cache_access_matrix_user_ids = array();
 function access_denied() {
 	if( php_sapi_name() == 'cli' ) {
 		echo error_string( ERROR_ACCESS_DENIED );
-		exit(1);
+		exit( 1 );
 	}
 
 	$t_return = '';
@@ -91,7 +91,7 @@ function access_denied() {
 		if( isset( $_SERVER['QUERY_STRING'] ) && !is_blank( $_SERVER['QUERY_STRING'] ) ) {
 			$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 		}
-		$t_return = [ 'return' => string_sanitize_url( $t_return_page ) ];
+		$t_return = ['return' => string_sanitize_url( $t_return_page )];
 	}
 
 	if( !auth_is_user_authenticated() ) {
@@ -121,8 +121,8 @@ function access_denied() {
 			error_string( ERROR_ACCESS_DENIED ), CONFIRMATION_TYPE_FAILURE );
 		layout_page_end();
 	}
-	http_response_code(HTTP_STATUS_FORBIDDEN);
-	exit(1);
+	http_response_code( HTTP_STATUS_FORBIDDEN );
+	exit( 1 );
 }
 
 /**
@@ -137,13 +137,13 @@ function access_cache_matrix_project( $p_project_id ) {
 	global $g_cache_access_matrix, $g_cache_access_matrix_project_ids;
 
 	if( ALL_PROJECTS == (int)$p_project_id ) {
-		return array();
+		return [];
 	}
 
 	if( !in_array( (int)$p_project_id, $g_cache_access_matrix_project_ids ) ) {
 		db_param_push();
 		$t_query = 'SELECT user_id, access_level FROM {project_user_list} WHERE project_id=' . db_param();
-		$t_result = db_query( $t_query, array( (int)$p_project_id ) );
+		$t_result = db_query( $t_query, [(int)$p_project_id] );
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$g_cache_access_matrix[(int)$t_row['user_id']][(int)$p_project_id] = (int)$t_row['access_level'];
 		}
@@ -151,7 +151,7 @@ function access_cache_matrix_project( $p_project_id ) {
 		$g_cache_access_matrix_project_ids[] = (int)$p_project_id;
 	}
 
-	$t_results = array();
+	$t_results = [];
 
 	foreach( $g_cache_access_matrix as $t_user ) {
 		if( isset( $t_user[(int)$p_project_id] ) ) {
@@ -176,10 +176,10 @@ function access_cache_matrix_user( $p_user_id ) {
 	if( !in_array( (int)$p_user_id, $g_cache_access_matrix_user_ids ) ) {
 		db_param_push();
 		$t_query = 'SELECT project_id, access_level FROM {project_user_list} WHERE user_id=' . db_param();
-		$t_result = db_query( $t_query, array( (int)$p_user_id ) );
+		$t_result = db_query( $t_query, [(int)$p_user_id] );
 
 		# make sure we always have an array to return
-		$g_cache_access_matrix[(int)$p_user_id] = array();
+		$g_cache_access_matrix[(int)$p_user_id] = [];
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$g_cache_access_matrix[(int)$p_user_id][(int)$t_row['project_id']] = (int)$t_row['access_level'];
@@ -208,9 +208,9 @@ function access_cache_matrix_user( $p_user_id ) {
  */
 function access_compare_level( $p_user_access_level, $p_threshold = NOBODY ) {
 	if( is_array( $p_threshold ) ) {
-		return( in_array( $p_user_access_level, $p_threshold ) );
+		return in_array( $p_user_access_level, $p_threshold ) ;
 	} else {
-		return( $p_user_access_level >= $p_threshold );
+		return $p_user_access_level >= $p_threshold ;
 	}
 }
 
@@ -382,10 +382,10 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
  * access checks.
  *
  * @param int|array|string $p_access_level Parameter representing access level threshold, may be:
-*                                           - integer: for a simple threshold
-*                                           - array: for an array threshold
-*                                           - string: for a threshold option which will be evaluated
-*                                             for each project context
+ *                                           - integer: for a simple threshold
+ *                                           - array: for an array threshold
+ *                                           - string: for a threshold option which will be evaluated
+ *                                             for each project context
  * @param array|null       $p_project_ids  Array of project ids to check access against, default to null
  *                                         to use all user accessible projects
  * @param int|null         $p_user_id      User id, defaults to null to use current user.
@@ -397,7 +397,7 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
 function access_project_array_filter( $p_access_level, ?array $p_project_ids = null, ?int $p_user_id = null, int $p_limit = 0 ): array {
 	# Short circuit the check in this case
 	if( NOBODY == $p_access_level ) {
-		return array();
+		return [];
 	}
 
 	if( null === $p_user_id ) {
@@ -421,7 +421,7 @@ function access_project_array_filter( $p_access_level, ?array $p_project_ids = n
 	project_cache_array_rows( $p_project_ids );
 
 	$t_check_level = $p_access_level;
-	$t_filtered_projects = array();
+	$t_filtered_projects = [];
 	foreach( $p_project_ids as $t_project_id ) {
 		# If a config string is provided, evaluate for each project
 		if( $t_is_config_string ) {
@@ -581,7 +581,7 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	# Check the requested access level, shortcut to fail if not satisfied
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
-	if( !access_compare_level( $t_access_level, $p_access_level ) ){
+	if( !access_compare_level( $t_access_level, $p_access_level ) ) {
 		return false;
 	}
 
@@ -626,7 +626,7 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
  * @throws ClientException
  */
 function access_has_bug_level_filter( $p_access_level, $p_bug_id, $p_user_ids ) {
-	$t_users_ids_with_access = array();
+	$t_users_ids_with_access = [];
 	foreach( $p_user_ids as $t_user_id ) {
 		if( access_has_bug_level( $p_access_level, $p_bug_id, $t_user_id ) ) {
 			$t_users_ids_with_access[] = $t_user_id;
@@ -702,7 +702,7 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
  * @throws ClientException
  */
 function access_has_bugnote_level_filter( $p_access_level, $p_bugnote_id, $p_user_ids ) {
-	$t_users_ids_with_access = array();
+	$t_users_ids_with_access = [];
 	foreach( $p_user_ids as $t_user_id ) {
 		if( access_has_bugnote_level( $p_access_level, $p_bugnote_id, $t_user_id ) ) {
 			$t_users_ids_with_access[] = $t_user_id;
@@ -937,7 +937,7 @@ function access_threshold_min_level( $p_threshold ) {
 			return NOBODY;
 		} else {
 			sort( $p_threshold );
-			return( reset( $p_threshold ) );
+			return reset( $p_threshold ) ;
 		}
 	} else {
 		return $p_threshold;
@@ -997,7 +997,7 @@ function access_parse_array( array $p_access ) {
 		throw new ClientException(
 			'Invalid access level',
 			ERROR_INVALID_FIELD_VALUE,
-			array( 'access_level' ) );
+			['access_level'] );
 	}
 
 	return $t_access_level;
@@ -1030,7 +1030,7 @@ function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
 		# the reporting threshold configuration.
 		# To improve performance, esp. when processing for several projects, we
 		# build a static array holding that threshold for each project
-		static $s_thresholds = array();
+		static $s_thresholds = [];
 		if( !isset( $s_thresholds[$t_project_id] ) ) {
 			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_project_id );
 			if( empty( $t_report_bug_threshold ) ) {

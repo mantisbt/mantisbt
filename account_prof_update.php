@@ -39,7 +39,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -51,7 +51,7 @@ require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
 if( !config_get( 'enable_profiles' ) ) {
-	throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
+	throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
 }
 
 $t_form_name = 'account_prof_update';
@@ -65,7 +65,7 @@ $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
 if( $f_action != 'add' ) {
 	$f_profile_id = gpc_get_int( 'profile_id' );
-	if( $f_action != 'change_default' ) {	
+	if( $f_action != 'change_default' ) {
 		$t_profile = new ProfileData( $f_profile_id );
 		$t_profile->ensure_can_update();
 

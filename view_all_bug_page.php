@@ -36,7 +36,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
 require_api( 'config_api.php' );
@@ -73,9 +73,9 @@ if( $t_rows === false ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
-$t_bugslist = array();
-$t_unique_user_ids = array();
-$t_unique_project_ids = array();
+$t_bugslist = [];
+$t_unique_user_ids = [];
+$t_unique_project_ids = [];
 $t_row_count = count( $t_rows );
 for( $i=0; $i < $t_row_count; $i++ ) {
 	array_push( $t_bugslist, $t_rows[$i]->id );
@@ -95,7 +95,7 @@ $t_refresh_delay = current_user_get_pref( 'refresh_delay' );
 if( $t_refresh_delay > 0 ) {
 	$t_query = '?';
 
-	if( $f_page_number > 1 )  {
+	if( $f_page_number > 1 ) {
 		$t_query .= 'page_number=' . $f_page_number . '&';
 	}
 
@@ -109,6 +109,6 @@ layout_page_header_end();
 layout_page_begin( __FILE__ );
 
 define( 'VIEW_ALL_INC_ALLOW', true );
-include( __DIR__ . '/view_all_inc.php' );
+include __DIR__ . '/view_all_inc.php';
 
 layout_page_end();

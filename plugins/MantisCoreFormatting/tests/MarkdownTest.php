@@ -19,9 +19,8 @@ namespace Mantis\plugins\MantisCoreFormatting\tests;
 use Generator;
 use MantisMarkdown;
 use PHPUnit\Framework\TestCase;
-use TypeError;
 
-require_once( dirname( __DIR__, 3 ) . '/tests/TestConfig.php' );
+require_once dirname( __DIR__, 3 ) . '/tests/TestConfig.php';
 
 # MantisBT Core API
 require_mantis_core();

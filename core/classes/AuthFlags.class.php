@@ -128,8 +128,7 @@ class AuthFlags {
 	/**
 	 * AuthFlags constructor.
 	 */
-	function __construct() {
-	}
+	function __construct() {}
 
 	/**
 	 * Sets the message to display to user when they can't manage their password within MantisBT.
@@ -398,4 +397,3 @@ class AuthFlags {
 		return $this->reauthentication_expiry;
 	}
 }
-

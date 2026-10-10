@@ -41,7 +41,7 @@
  * @uses utility_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -78,10 +78,10 @@ $f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) 
 $t_username = auth_prepare_username( $f_username );
 
 if( is_blank( $t_username ) ) {
-	$t_query_args = array(
+	$t_query_args = [
 		'error' => 1,
 		'return' => $f_return,
-	);
+	];
 
 	$t_redirect_url = auth_login_page( $t_query_args );
 	print_header_redirect( $t_redirect_url );
@@ -97,11 +97,11 @@ $t_should_redirect = AUTH_PAGE_CREDENTIAL != ( $t_user_id !== false
 		? auth_credential_page( '', $t_user_id )
 		: auth_credential_page( '', NO_USER, $t_username ) );
 if( $t_should_redirect ) {
-	$t_query_args = array(
+	$t_query_args = [
 		'username' => $t_username,
 		'cookie_error' => $f_cookie_error,
 		'reauthenticate' => $f_reauthenticate,
-	);
+	];
 
 	if( !is_blank( $f_error ) ) {
 		$t_query_args['error'] = $f_error;
@@ -131,7 +131,7 @@ $t_show_remember_me = !$f_reauthenticate && auth_allow_perm_login( $t_user_id, $
 $t_form_title = $f_reauthenticate ? lang_get( 'reauthenticate_title' ) : lang_get( 'login_title' );
 
 # If user is already authenticated and not anonymous
-if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthenticate) {
+if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthenticate ) {
 	# If return URL is specified redirect to it; otherwise use default page
 	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, true );
@@ -181,7 +181,7 @@ if( $f_error || $f_cookie_error || $f_reauthenticate ) {
 }
 
 $t_upgrade_required = false;
-if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.' ) ) {
+if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ . '/admin/.' ) ) {
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
 	$t_db_version = config_get( 'database_version', 0, ALL_USERS, ALL_PROJECTS );
@@ -190,7 +190,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.
 	}
 
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
-	require_once( 'admin/schema.php' );
+	require_once 'admin/schema.php';
 	$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
 	if( ( 0 < $t_db_version ) &&
@@ -224,7 +224,6 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.
 				echo '<input type="hidden" name="install" value="true" />';
 			}
 
-
 			echo sprintf( lang_get( 'enter_password' ), string_html_specialchars( $t_username ) );
 
 			# Generating CSRF token to reduce risk of a vulnerability escalating its impact
@@ -244,7 +243,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.
 			<?php if( $t_show_remember_me ) { ?>
 				<div class="clearfix">
 					<label for="remember-login" class="inline">
-						<input id="remember-login" type="checkbox" name="perm_login" class="ace" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?> />
+						<input id="remember-login" type="checkbox" name="perm_login" class="ace" <?php echo  $f_perm_login ? 'checked="checked" ' : ''  ?> />
 						<span class="lbl padding-6"><?php echo lang_get( 'save_login' ) ?></span>
 					</label>
 				</div>
@@ -252,7 +251,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( __DIR__ .'/admin/.
 			<?php if( $t_session_validation ) { ?>
 				<div class="clearfix">
 					<label for="secure-session" class="inline">
-						<input id="secure-session" type="checkbox" name="secure_session" class="ace" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?> />
+						<input id="secure-session" type="checkbox" name="secure_session" class="ace" <?php echo  $t_default_secure_session ? 'checked="checked" ' : ''  ?> />
 						<span class="lbl padding-6"><?php echo lang_get( 'secure_session_long' ) ?></span>
 					</label>
 				</div>

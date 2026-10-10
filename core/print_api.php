@@ -135,7 +135,7 @@ function print_header_redirect( $p_url, $p_sanitize = false, $p_absolute = false
 		header( 'Content-Type: text/html; charset=utf-8' );
 		header( 'Location: ' . $t_url );
 	} else {
-		throw new ClientException( "Page redirection error", ERROR_PAGE_REDIRECTION );
+		throw new ClientException( 'Page redirection error', ERROR_PAGE_REDIRECTION );
 	}
 
 	die;
@@ -279,7 +279,7 @@ function print_email_pending_verification_warning( int $p_user_id ): void {
 
 	if( $t_email_change ) {
 		echo '<div class="padding-8">';
-		print_icon('fa-info-circle', 'ace-icon bigger-125 blue padding-right-4' );
+		print_icon( 'fa-info-circle', 'ace-icon bigger-125 blue padding-right-4' );
 		printf( lang_get( 'verify_email_pending' ), $t_email_change );
 		echo '</div>';
 	}
@@ -314,7 +314,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$t_projects = user_get_accessible_projects( $t_current_user );
 
 		# Get list of users having access level for all accessible projects
-		$t_users = array();
+		$t_users = [];
 		foreach( $t_projects as $t_project_id ) {
 			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
 			# Do a 'smart' merge of the project's user list, into an
@@ -341,17 +341,17 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		if( $t_row === false ) {
 			# User doesn't exist - create a dummy record for display purposes
 			$t_name = user_get_name( $p_user_id );
-			$t_row = array(
+			$t_row = [
 				'id' => $p_user_id,
 				'username' => $t_name,
 				'realname' => $t_name,
-			);
+			];
 		}
 		$t_users[$p_user_id] = $t_row;
 	}
 
-	$t_display = array();
-	$t_sort = array();
+	$t_display = [];
+	$t_sort = [];
 
 	foreach( $t_users as $t_key => $t_user ) {
 		$t_display[] = user_get_expanded_name_from_row( $t_user );
@@ -497,7 +497,7 @@ function print_news_item_option_list() {
 				ORDER BY date_posted DESC';
 	}
 
-	$t_result = db_query( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
+	$t_result = db_query( $t_query, ( $t_global == true ? [] : [$t_project_id] ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_headline = string_display_line( $t_row['headline'] );
@@ -505,7 +505,7 @@ function print_news_item_option_list() {
 		$t_view_state = $t_row['view_state'];
 		$t_id = $t_row['id'];
 
-		$t_notes = array();
+		$t_notes = [];
 		$t_note_string = '';
 
 		if( 1 == $t_announcement ) {
@@ -690,7 +690,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
  * @param array   $p_parents           Array of parent projects.
  * @return void
  */
-function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
+function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = [] ) {
 	if ( config_get_global( 'subprojects_enabled' ) == OFF ) {
 		return;
 	}
@@ -813,8 +813,8 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 
 	# Add the current category if it is not in the list
 	if( $p_category_id != 0
-        && !in_array( $p_category_id, array_column( $t_cat_arr, 'id' ) )
-    ) {
+		&& !in_array( $p_category_id, array_column( $t_cat_arr, 'id' ) )
+	) {
 		$t_category_row = category_get_row( $p_category_id );
 		$t_category_row['project_name'] = project_get_name( $t_category_row['project_id'] );
 		$t_cat_arr[] = $t_category_row;
@@ -829,7 +829,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 	} else {
 		if( 0 == $p_category_id && count( $t_cat_arr ) == 1 ) {
 			# Single option are selected by default
-			$p_category_id = (int) $t_cat_arr[0]['id'];
+			$p_category_id = (int)$t_cat_arr[0]['id'];
 		}
 		echo '<option value="" disabled hidden';
 		check_selected( $p_category_id, 0 );
@@ -941,7 +941,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 	if( null === $p_project_ids ) {
 		$p_project_ids = helper_get_current_project();
 	}
-	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : [$p_project_ids];
 
 	$t_versions = version_get_all_rows( $t_project_ids, $p_released, true );
 
@@ -963,7 +963,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 		echo '<option value="">&nbsp;</option>';
 	}
 
-	$t_listed = array();
+	$t_listed = [];
 	$t_max_length = config_get( 'max_dropdown_length' );
 
 	$t_show_project_name = count( $t_project_ids ) > 1;
@@ -996,7 +996,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
  * @return void
  */
 function print_build_option_list( $p_build = '' ) {
-	$t_overall_build_arr = array();
+	$t_overall_build_arr = [];
 
 	$t_project_id = helper_get_current_project();
 
@@ -1076,10 +1076,10 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 		} else {
 			# workflow was not set for this status, this shouldn't happen
 			# caller should be able to handle empty list
-			$t_enum_values = array();
+			$t_enum_values = [];
 		}
 	}
-	$t_enum_list = array();
+	$t_enum_list = [];
 
 	foreach ( $t_enum_values as $t_enum_value ) {
 		if( ( $p_show_current || $p_current_value != $t_enum_value )
@@ -1215,7 +1215,7 @@ function print_font_option_list( $p_font ) {
  */
 function print_all_bug_action_option_list( array $p_project_ids = [] ) {
 	$t_commands = bug_group_action_get_commands( $p_project_ids );
-	foreach ( $t_commands as $t_action_id => $t_action_label) {
+	foreach ( $t_commands as $t_action_id => $t_action_label ) {
 		echo '<option value="' . $t_action_id . '">' . $t_action_label . '</option>';
 	}
 }
@@ -1248,7 +1248,7 @@ function print_project_user_list_option_list2( $p_user_id ) {
 				WHERE p.enabled = ' . db_param() . ' AND
 					u.user_id IS NULL
 				ORDER BY p.name';
-	$t_result = db_query( $t_query, array( (int)$p_user_id, true ) );
+	$t_result = db_query( $t_query, [(int)$p_user_id, true] );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_project_name = string_attribute( $t_row['name'] );
 		$t_user_id = $t_row['id'];
@@ -1365,7 +1365,7 @@ function print_formatted_severity_string( BugData $p_bug ) {
 		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
 		echo '<span class="bold">' . string_attribute( $t_sev_str ) . '</span>';
 	} else {
-		echo string_attribute( $t_sev_str);
+		echo string_attribute( $t_sev_str );
 	}
 }
 
@@ -1551,7 +1551,7 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = []
 		print_hidden_inputs( $p_args_to_post );
 	}
 
-	if( $p_class == '') {
+	if( $p_class == '' ) {
 		$p_class = 'btn btn-primary btn-xs btn-white btn-round';
 	}
 	echo '<button type="submit" class="' . $p_class . '">' . $p_label . '</button>';
@@ -1682,7 +1682,7 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
  * @return void
  */
 function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_key = null ) {
-	$t_items = array();
+	$t_items = [];
 
 	# @TODO cproensa
 	# passing the temporary filter id to build ad-hoc url parameter is weak
@@ -1704,7 +1704,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 	$t_page_links = 10;
 
-	print( '<ul class="pagination small no-margin"> ' );
+	echo '<ul class="pagination small no-margin"> ' ;
 
 	# Next and Last links
 	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_key );
@@ -1724,7 +1724,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	$t_last_page = min( $t_last_page, $p_end );
 
 	if( $t_last_page < $p_end ) {
-		print( '<li class="pull-right"><a> ... </a></li>' );
+		echo '<li class="pull-right"><a> ... </a></li>' ;
 	}
 
 	for( $i = $t_last_page;$i >= $t_first_page;$i-- ) {
@@ -1740,15 +1740,14 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	echo implode( '&#160;', $t_items );
 
 	if( $t_first_page > 1 ) {
-		print( '<li class="pull-right"><a> ... </a></li>' );
+		echo '<li class="pull-right"><a> ... </a></li>' ;
 	}
-
 
 	# First and previous links
 	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_key );
 	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_key );
 
-	print( ' </ul>' );
+	echo ' </ul>' ;
 }
 
 /**
@@ -1773,8 +1772,7 @@ function print_email_link( $p_email, $p_text ) {
  *                                  icon, otherwise display a plain-text link.
  * @return void
  */
-function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id, $p_show_as_button = true )
-{
+function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id, $p_show_as_button = true ) {
 	global $g_project_override;
 	$t_bug = bug_get( $p_bug_id, true );
 
@@ -1962,7 +1960,7 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 		Period::PERIOD_ARBITRARY_DATES
 	);
 	if( $p_add_any ) {
-		array_unshift( $p_control_array, [ META_FILTER_ANY => '[' . lang_get( 'any' ) . ']' ] );
+		array_unshift( $p_control_array, [META_FILTER_ANY => '[' . lang_get( 'any' ) . ']'] );
 	}
 	foreach ( $p_control_array as $t_name => $t_desc ) {
 		$t_sel = '';
@@ -2001,12 +1999,12 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 	if( $p_attachment['preview'] || $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
-		$g_collapse_cache_token[$t_collapse_id] = 
+		$g_collapse_cache_token[$t_collapse_id] =
 			$p_attachment['type'] == 'image' ||
 			$p_attachment['type'] == 'audio' ||
 			$p_attachment['type'] == 'video';
 
-		collapse_open( $t_collapse_id, '');
+		collapse_open( $t_collapse_id, '' );
 	}
 
 	print_bug_attachment_header( $p_attachment, $p_security_token );
@@ -2040,17 +2038,17 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 		if( $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
 			echo lang_get( 'word_separator' );
 			collapse_icon( $t_collapse_id );
-	
+
 			print_bug_attachment_preview_audio_video(
 				$p_attachment,
 				$p_attachment['file_type'],
 				$p_attachment['preview'] );
-	
+
 			collapse_closed( $t_collapse_id );
 			print_bug_attachment_header( $p_attachment, $p_security_token );
 			echo lang_get( 'word_separator' );
 			collapse_icon( $t_collapse_id );
-			collapse_end( $t_collapse_id );	
+			collapse_end( $t_collapse_id );
 		} else {
 			echo '<br />';
 		}
@@ -2091,7 +2089,7 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 		}
 
 		echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
-		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', array( $p_attachment ) );
+		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', [$p_attachment] );
 	} else {
 		print_file_icon( $p_attachment['display_name'] );
 		echo lang_get( 'word_separator' ) . '<s>' . string_attribute( $p_attachment['display_name'] ) . '</s>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
@@ -2129,12 +2127,12 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 		case DATABASE:
 			db_param_push();
 			$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
-			$t_result = db_query( $t_query, array( (int)$p_attachment['id'] ) );
+			$t_result = db_query( $t_query, [(int)$p_attachment['id']] );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
 			break;
 		default:
-			throw new StateException( "Unknown file upload method", ERROR_GENERIC );
+			throw new StateException( 'Unknown file upload method', ERROR_GENERIC );
 	}
 	echo htmlspecialchars( $t_content, ENT_SUBSTITUTE, 'UTF-8' );
 	echo '</pre>';
@@ -2181,13 +2179,13 @@ function print_bug_attachment_preview_audio_video( array $p_attachment, $p_file_
 
 	$t_type = $p_attachment['type'];
 
-	echo "\n<div class=\"bug-attachment-preview-" . $t_type . "\">";
+	echo "\n<div class=\"bug-attachment-preview-" . $t_type . '">';
 	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '"' . print_attachment_link_target() . '>';
 	echo '<' . $t_type . ' controls="controls"' . $t_preload . '>';
 	echo '<source src="' . string_attribute( $t_file_url ) . '" type="' . string_attribute( $p_file_type ) . '">';
-  	echo lang_get( 'browser_does_not_support_' . $t_type );
+	echo lang_get( 'browser_does_not_support_' . $t_type );
 	echo '</' . $t_type . '>';
-	echo "</a></div>";
+	echo '</a></div>';
 }
 
 /**
@@ -2202,10 +2200,10 @@ function print_timezone_option_list( $p_timezone ) {
 	foreach( $t_identifiers as $t_identifier ) {
 		$t_zone = explode( '/', $t_identifier, 2 );
 		$t_id = $t_zone[1] ?? $t_identifier;
-		$t_locations_list[$t_zone[0]][$t_identifier] = array(
+		$t_locations_list[$t_zone[0]][$t_identifier] = [
 			str_replace( '_', ' ', $t_id ),
 			$t_identifier
-		);
+		];
 	}
 
 	foreach( $t_locations_list as $t_continent => $t_locations ) {
@@ -2271,7 +2269,7 @@ function print_dropzone_form_data() {
  * @return void
  * @deprecated 2.29.0 dropzone_print_template() should be used in preference to this function
  */
-function print_dropzone_template(){
+function print_dropzone_template() {
 	error_parameters( __FUNCTION__, 'dropzone_print_template' );
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	dropzone_print_template();
@@ -2322,23 +2320,23 @@ function print_option_list_from_array( array $p_array, $p_filter_value ) {
  * @param string  $p_input_css        CSS classes to use with input fields
  * @return void
  */
-function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = 'rel_type', $p_include_any = false, $p_include_none = false, $p_input_css = "input-sm" ) {
+function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = 'rel_type', $p_include_any = false, $p_include_none = false, $p_input_css = 'input-sm' ) {
 	global $g_relationships;
 	?>
 <select class="<?php echo $p_input_css ?>" name="<?php echo $p_select_name?>">
 <?php if( $p_include_any ) {?>
-<option value="<?php echo BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
+<option value="<?php echo BUG_REL_ANY ?>" <?php echo $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' ?>>[<?php echo lang_get( 'any' )?>]</option>
 <?php
 	}
 
 	if( $p_include_none ) {?>
-<option value="<?php echo BUG_REL_NONE ?>" <?php echo( $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'none' )?>]</option>
+<option value="<?php echo BUG_REL_NONE ?>" <?php echo $p_default_rel_type == BUG_REL_NONE ? ' selected="selected"' : '' ?>>[<?php echo lang_get( 'none' )?>]</option>
 <?php
 	}
 
 	foreach( $g_relationships as $t_type => $t_relationship ) {
 		?>
-<option value="<?php echo $t_type?>"<?php echo( $p_default_rel_type == $t_type ? ' selected="selected"' : '' )?>><?php echo lang_get( $t_relationship['#description'] )?></option>
+<option value="<?php echo $t_type?>"<?php echo $p_default_rel_type == $t_type ? ' selected="selected"' : '' ?>><?php echo lang_get( $t_relationship['#description'] )?></option>
 <?php
 	}?>
 </select>

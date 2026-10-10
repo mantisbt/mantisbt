@@ -35,9 +35,7 @@
  * @uses user_api.php
  */
 
-use Mantis\Exceptions\ClientException;
-
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -55,14 +53,13 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-
 # Delete the users who have never logged in and are older than 1 week
 $t_days_old = (int)7 * SECONDS_PER_DAY;
 
 $t_query = 'SELECT id FROM {user}
 		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND ' .
 		'( protected = 0 ) AND ' . db_helper_compare_time( db_param(), '>', 'date_created', $t_days_old );
-$t_result = db_query( $t_query, array( db_now() ) );
+$t_result = db_query( $t_query, [db_now()] );
 $t_count = db_num_rows( $t_result );
 
 if( $t_count > 0 ) {
@@ -72,9 +69,9 @@ if( $t_count > 0 ) {
 
 for( $i=0; $i < $t_count; $i++ ) {
 	$t_row = db_fetch_array( $t_result );
-	$t_data = array(
-		'query' => array( 'id' => $t_row['id'] )
-	);
+	$t_data = [
+		'query' => ['id' => $t_row['id']]
+	];
 
 	$t_command = new UserDeleteCommand( $t_data );
 	$t_command->execute();

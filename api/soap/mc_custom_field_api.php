@@ -35,7 +35,7 @@
 function mci_get_custom_field_id_from_objectref( stdClass $p_object_ref ) {
 	$p_object_ref = ApiObjectFactory::objectToArray( $p_object_ref );
 
-	if( isset( $p_object_ref['id'] ) && (int) $p_object_ref['id'] != 0 ) {
+	if( isset( $p_object_ref['id'] ) && (int)$p_object_ref['id'] != 0 ) {
 		$t_id = (int)$p_object_ref['id'];
 	} else {
 		if( isset( $p_object_ref['name'] ) && !is_blank( $p_object_ref['name'] ) ) {

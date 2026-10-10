@@ -25,9 +25,9 @@
 
 namespace Mantis\tests\rest;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Mantis\tests\core\MantisTestCase;
 use Mantis\tests\core\RequestBuilder;
-use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
 
@@ -87,17 +87,17 @@ abstract class RestBase extends MantisTestCase {
 	/**
 	 * @var array Array of Issue IDs to delete
 	 */
-	private $issueIdsToDelete = array();
+	private $issueIdsToDelete = [];
 
 	/**
 	 * @var array Array of version IDs to delete
 	 */
-	private $versionIdsToDelete = array();
+	private $versionIdsToDelete = [];
 
 	/**
 	 * @var array List of user ids to delete in tearDown()
 	 */
-	private $usersToDelete = array();
+	private $usersToDelete = [];
 	/**
 	 * setUp
 	 * @return void
@@ -204,12 +204,12 @@ abstract class RestBase extends MantisTestCase {
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}
-		return array(
+		return [
 			'summary' => $t_summary . ': test issue ' . rand( 1, 1000000 ),
 			'description' => 'description of test issue.',
-			'project' => array( 'id' => $this->getProjectId() ),
-			'category' => array( 'name' => $this->getCategory() )
-		);
+			'project' => ['id' => $this->getProjectId()],
+			'category' => ['name' => $this->getCategory()]
+		];
 	}
 
 	/**
@@ -223,18 +223,17 @@ abstract class RestBase extends MantisTestCase {
 	protected function getJson( ResponseInterface $p_response, $p_status_code = HTTP_STATUS_SUCCESS ) {
 		$this->assertEquals( $p_status_code,
 			$p_response->getStatusCode(),
-			"REST API returned unexpected Status Code"
+			'REST API returned unexpected Status Code'
 		);
 		return json_decode( $p_response->getBody(), false );
 	}
-
 
 	/**
 	 * Marks a test as skipped if there is no configured Anonymous account.
 	 *
 	 * @return void
 	 */
-	protected function skipTestIfAnonymousDisabled(){
+	protected function skipTestIfAnonymousDisabled() {
 		if( ! auth_anonymous_enabled() ) {
 			$this->markTestSkipped( 'Anonymous access is not enabled' );
 		}
@@ -272,7 +271,7 @@ abstract class RestBase extends MantisTestCase {
 			$p_project_id = $this->getProjectId();
 		}
 
-		$this->versionIdsToDelete[] = array( $p_project_id, $p_version_id );
+		$this->versionIdsToDelete[] = [$p_project_id, $p_version_id];
 	}
 
 	/**

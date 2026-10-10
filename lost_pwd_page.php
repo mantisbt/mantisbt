@@ -35,7 +35,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'form_api.php' );
@@ -50,7 +50,7 @@ if( LDAP == config_get_global( 'login_method' ) ||
 	OFF == config_get( 'lost_password_feature' ) ||
 	OFF == config_get( 'send_reset_password' )  ||
 	OFF == config_get( 'enable_email_notification' ) ) {
-	throw new ClientException( "Lost password disabled", ERROR_LOST_PASSWORD_NOT_ENABLED );
+	throw new ClientException( 'Lost password disabled', ERROR_LOST_PASSWORD_NOT_ENABLED );
 }
 
 $f_username = gpc_get_string( 'username', '' );
@@ -94,8 +94,8 @@ layout_login_page_begin( $t_form_title );
 				<span class="block input-icon input-icon-right">
 					<input id="username" name="username" type="text"
 						placeholder="<?php echo lang_get( 'username' ) ?>"
-                        value="<?php echo string_html_specialchars( $t_username ) ?>"
-                        size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control <?php echo $t_username_field_autofocus ?>">
+						value="<?php echo string_html_specialchars( $t_username ) ?>"
+						size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control <?php echo $t_username_field_autofocus ?>">
 					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				</span>
 				</label>

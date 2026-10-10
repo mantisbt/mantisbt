@@ -44,7 +44,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -77,7 +77,7 @@ if( is_blank( $f_username ) ) {
 			# If we can't find the user by email, attempt to find by realname.
 			$t_user_id = user_get_id_by_realname( $f_username );
 			if( $t_user_id === false ) {
-				throw new ClientException( "User not found", ERROR_USER_BY_NAME_NOT_FOUND, [$f_username] );
+				throw new ClientException( 'User not found', ERROR_USER_BY_NAME_NOT_FOUND, [$f_username] );
 			}
 		}
 	}
@@ -85,7 +85,7 @@ if( is_blank( $f_username ) ) {
 
 $t_user = user_get_row( $t_user_id );
 if( !$t_user ) {
-	throw new ClientException( "User not found", ERROR_USER_BY_ID_NOT_FOUND, [$t_user_id] );
+	throw new ClientException( 'User not found', ERROR_USER_BY_ID_NOT_FOUND, [$t_user_id] );
 }
 
 # Ensure that the account to be updated is of equal or lower access to the
@@ -129,7 +129,7 @@ print_manage_menu( 'manage_user_page.php' );
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<?php print_icon( 'fa-user', 'ace-icon' ); ?>
-				<?php echo lang_get('edit_user_title') ?>
+				<?php echo lang_get( 'edit_user_title' ) ?>
 			</h4>
 		</div>
 
@@ -302,14 +302,14 @@ print_manage_menu( 'manage_user_page.php' );
 							$t_failed_login_count = (int)$t_user['failed_login_count'];
 							$t_is_locked =  $t_failed_login_count >= $t_max_failed;
 							echo $t_failed_login_count;
-							if( OFF != $t_max_failed && $t_is_locked) {
+							if( OFF != $t_max_failed && $t_is_locked ) {
 								echo '&nbsp;&nbsp;' . icon_get( 'lock', 'fa-lg', lang_get( 'locked' ) );
 							}
 ?>
 						</td>
 					</tr>
 
-					<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
+					<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', [$t_user['id']] ); ?>
 				</table>
 			</div>
 		</div>
@@ -337,7 +337,7 @@ print_manage_menu( 'manage_user_page.php' );
 	# Information button
 	print_link_button( 'view_user_page.php?id=' . $t_user['id'],
 		lang_get( 'view_account_title' ),
-		"btn btn-primary btn-white btn-round pull-left"
+		'btn btn-primary btn-white btn-round pull-left'
 	);
 
 	# Impersonate Button
@@ -389,7 +389,7 @@ print_manage_menu( 'manage_user_page.php' );
 </form>
 </div>
 
-<?php event_signal( 'EVENT_MANAGE_USER_PAGE', array( $t_user_id ) ); ?>
+<?php event_signal( 'EVENT_MANAGE_USER_PAGE', [$t_user_id] ); ?>
 
 <?php
 # Project access sections are only shown if the current user's permissions
@@ -550,7 +550,7 @@ if( access_has_global_level( config_get( 'manage_user_threshold' ) )
 <!-- ACCOUNT PREFERENCES -->
 <?php
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
-include( __DIR__ . '/account_prefs_inc.php' );
+include __DIR__ . '/account_prefs_inc.php';
 edit_account_prefs(
 	$t_user['id'],
 	false,

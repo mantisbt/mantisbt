@@ -40,7 +40,7 @@ class MantisException extends Exception {
 	 *                                   {@see error_parameters()}.
 	 * @param Throwable|null $p_previous The inner exception.
 	 */
-	function __construct( $p_message, $p_code, $p_params = array(), ?Throwable $p_previous = null ) {
+	function __construct( $p_message, $p_code, $p_params = [], ?Throwable $p_previous = null ) {
 		parent::__construct( $p_message, $p_code, $p_previous );
 		$this->params = $p_params;
 		$this->setLocalizedMessage( $p_code, $p_params );

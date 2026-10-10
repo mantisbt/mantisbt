@@ -43,7 +43,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -56,7 +56,7 @@ require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
 if( !config_get( 'enable_profiles' ) ) {
-	throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
+	throw new ClientException( 'Access denied', ERROR_ACCESS_DENIED );
 }
 
 if( isset( $g_global_profiles ) ) {
@@ -171,10 +171,10 @@ if( $g_global_profiles ) {
 									<div class="btn-group inline">
 <?php
 				# Common POST parameters for action buttons
-				$t_param = array(
+				$t_param = [
 					'profile_id' => $v_id,
-					'redirect' => basename( $_SERVER["SCRIPT_FILENAME"] ),
-				);
+					'redirect' => basename( $_SERVER['SCRIPT_FILENAME'] ),
+				];
 
 				# Print the Edit and Delete buttons for local profiles, or
 				# if user can manage global ones.
@@ -191,7 +191,7 @@ if( $g_global_profiles ) {
 					print_form_button(
 						'account_prof_update.php',
 						lang_get( 'delete' ),
-						array_merge( $t_param, array( 'action' => 'delete' ) ),
+						array_merge( $t_param, ['action' => 'delete'] ),
 						$t_security_token
 					);
 					echo '</div>';
@@ -206,12 +206,11 @@ if( $g_global_profiles ) {
 					print_form_button(
 						'account_prof_update.php',
 						lang_get( $t_is_default_profile ? 'clear_default' : 'make_default' ),
-						array_merge( $t_param, array( 'action' => 'change_default' ) ),
+						array_merge( $t_param, ['action' => 'change_default'] ),
 						$t_security_token
 					);
 					echo '</div>';
 				}
-
 
 				echo '<div class="pull-left">';
 				echo '</div>';
@@ -321,7 +320,7 @@ if( $g_global_profiles ) {
 					* <?php echo lang_get( 'required' ); ?>
 				</span>
 					<button class="btn btn-primary btn-white btn-round">
-						<?php echo lang_get('add_profile'); ?>
+						<?php echo lang_get( 'add_profile' ); ?>
 					</button>
 				</div>
 			</div>

@@ -78,7 +78,7 @@ class CategoryTest extends SoapBase {
 			$t_category_new_name,
 			'' );
 
-		$this->categoryNamesToDelete = [ $t_category_new_name ];
+		$this->categoryNamesToDelete = [$t_category_new_name];
 
 		$t_category_list = $this->client->mc_project_get_categories(
 			$this->userName,
@@ -143,7 +143,7 @@ class CategoryTest extends SoapBase {
 	protected function tearDown(): void {
 		parent::tearDown();
 
-		foreach( $this->categoryNamesToDelete as $t_category_name )  {
+		foreach( $this->categoryNamesToDelete as $t_category_name ) {
 			$this->client->mc_project_delete_category(
 				$this->userName,
 				$this->password,

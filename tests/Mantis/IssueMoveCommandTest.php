@@ -81,13 +81,13 @@ class IssueMoveCommandTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testMoveIssueByProjectIdAndAddNote(): void {
-		$t_result = ( new \IssueMoveCommand( array(
-			'query' => array( 'issue_id' => $this->issue_id ),
-			'payload' => array(
-				'project' => array( 'id' => $this->target_project_id ),
-				'note' => array( 'text' => 'Moved by command.' ),
-			),
-		) ) )->execute();
+		$t_result = ( new \IssueMoveCommand( [
+			'query' => ['issue_id' => $this->issue_id],
+			'payload' => [
+				'project' => ['id' => $this->target_project_id],
+				'note' => ['text' => 'Moved by command.'],
+			],
+		] ) )->execute();
 
 		$this->assertSame( $this->target_project_id, $t_result['project_id'] );
 		$this->assertSame( $this->target_project_id, (int)bug_get_field( $this->issue_id, 'project_id' ) );
@@ -103,10 +103,10 @@ class IssueMoveCommandTest extends MantisCoreBase {
 	 */
 	public function testMoveIssueByTrimmedProjectName(): void {
 		$t_project_name = project_get_name( $this->target_project_id );
-		( new \IssueMoveCommand( array(
-			'query' => array( 'issue_id' => $this->issue_id ),
-			'payload' => array( 'project' => array( 'name' => '  ' . $t_project_name . '  ' ) ),
-		) ) )->execute();
+		( new \IssueMoveCommand( [
+			'query' => ['issue_id' => $this->issue_id],
+			'payload' => ['project' => ['name' => '  ' . $t_project_name . '  ']],
+		] ) )->execute();
 
 		$this->assertSame( $this->target_project_id, (int)bug_get_field( $this->issue_id, 'project_id' ) );
 	}
@@ -147,10 +147,10 @@ class IssueMoveCommandTest extends MantisCoreBase {
 		$this->expectException( ClientException::class );
 		$this->expectExceptionMessage( 'already associated' );
 
-		( new \IssueMoveCommand( array(
-			'query' => array( 'issue_id' => $this->issue_id ),
-			'payload' => array( 'project' => array( 'id' => 1 ) ),
-		) ) )->execute();
+		( new \IssueMoveCommand( [
+			'query' => ['issue_id' => $this->issue_id],
+			'payload' => ['project' => ['id' => 1]],
+		] ) )->execute();
 	}
 
 	/**
@@ -235,7 +235,7 @@ class IssueMoveCommandTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testMoveIssueAddsPrivateNote(): void {
-		$this->moveIssueToTarget( array( 'text' => 'Private move note.', 'view_state' => array( 'id' => VS_PRIVATE ) ) );
+		$this->moveIssueToTarget( ['text' => 'Private move note.', 'view_state' => ['id' => VS_PRIVATE]] );
 
 		$t_note_id = bugnote_get_latest_id( $this->issue_id );
 		$this->assertSame( VS_PRIVATE, (int)bugnote_get_field( $t_note_id, 'view_state' ) );
@@ -252,16 +252,16 @@ class IssueMoveCommandTest extends MantisCoreBase {
 		file_put_contents( $t_file_path, 'IssueMoveCommand attachment test.' );
 
 		try {
-			$this->moveIssueToTarget( array(
+			$this->moveIssueToTarget( [
 				'text' => 'Move note with attachment.',
-				'files' => array( array(
+				'files' => [[
 					'name' => 'move-issue.txt',
 					'tmp_name' => $t_file_path,
 					'type' => 'text/plain',
 					'error' => UPLOAD_ERR_OK,
 					'size' => filesize( $t_file_path ),
-				) ),
-			) );
+				]],
+			] );
 
 			$t_note_id = bugnote_get_latest_id( $this->issue_id );
 			$t_note_attachments = array_filter(
@@ -282,16 +282,16 @@ class IssueMoveCommandTest extends MantisCoreBase {
 	 * @param array $p_note Optional note payload.
 	 * @return array Command result.
 	 */
-	private function moveIssueToTarget( array $p_note = array() ): array {
-		$t_payload = array( 'project' => array( 'id' => $this->target_project_id ) );
+	private function moveIssueToTarget( array $p_note = [] ): array {
+		$t_payload = ['project' => ['id' => $this->target_project_id]];
 		if( !empty( $p_note ) ) {
 			$t_payload['note'] = $p_note;
 		}
 
-		return ( new \IssueMoveCommand( array(
-			'query' => array( 'issue_id' => $this->issue_id ),
+		return ( new \IssueMoveCommand( [
+			'query' => ['issue_id' => $this->issue_id],
 			'payload' => $t_payload,
-		) ) )->execute();
+		] ) )->execute();
 	}
 
 	/**

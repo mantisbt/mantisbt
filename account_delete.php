@@ -46,7 +46,7 @@
  * @uses print_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'form_api.php' );
 require_api( 'helper_api.php' );
@@ -62,9 +62,9 @@ helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
 
 $t_user_id = auth_get_current_user_id();
 
-$t_data = array(
-	'query' => array( 'id' => $t_user_id )
-);
+$t_data = [
+	'query' => ['id' => $t_user_id]
+];
 
 $t_command = new UserDeleteCommand( $t_data );
 $t_command->execute();
@@ -82,7 +82,7 @@ layout_page_begin();
 	<div class="space-10"></div>
 <?php
 echo lang_get( 'account_removed_msg' ) . '<br />';
-print_link_button( config_get_global( 'logout_redirect_page' ), lang_get( 'proceed' ));
+print_link_button( config_get_global( 'logout_redirect_page' ), lang_get( 'proceed' ) );
 ?>
 </div>
 

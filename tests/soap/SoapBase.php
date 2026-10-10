@@ -28,9 +28,9 @@
 
 namespace Mantis\tests\soap;
 
-use Mantis\tests\core\MantisTestCase;
 use DateTimeImmutable;
 use DateTimeZone;
+use Mantis\tests\core\MantisTestCase;
 use SoapClient;
 
 # Includes
@@ -93,17 +93,17 @@ class SoapBase extends MantisTestCase {
 	/**
 	 * @var array Array of Issue IDs to delete
 	 */
-	private   $issueIdsToDelete = array();
+	private   $issueIdsToDelete = [];
 
 	/**
 	 * @var array Array of Version IDs to delete
 	 */
-	private   $versionIdsToDelete = array();
+	private   $versionIdsToDelete = [];
 
 	/**
 	 * @var array Array of Tag IDs to delete
 	 */
-	private   $tagIdsToDelete = array();
+	private   $tagIdsToDelete = [];
 
 	/**
 	 * @var array Soap Client Options Array
@@ -124,11 +124,11 @@ class SoapBase extends MantisTestCase {
 			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file"
 		);
 
-		$this->defaultSoapClientOptions = array(
+		$this->defaultSoapClientOptions = [
 			'trace'      => true,
 			'exceptions' => true,
 			'cache_wsdl' => WSDL_CACHE_NONE,
-		);
+		];
 
 		$this->client = new SoapClient( $t_wsdl,
 			array_merge( $this->defaultSoapClientOptions, $this->extraSoapClientFlags() )
@@ -136,7 +136,7 @@ class SoapBase extends MantisTestCase {
 
 		# Set Xdebug session cookie
 		if( !empty( $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION'] ) ) {
-			$this->client->__setCookie('XDEBUG_SESSION', $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION']);
+			$this->client->__setCookie( 'XDEBUG_SESSION', $GLOBALS['MANTIS_TESTSUITE_XDEBUG_SESSION'] );
 		}
 
 		$this->mantisPath = substr( $t_wsdl, 0, -strlen( 'api/soap/mantisconnect.php?wsdl' ) );
@@ -153,7 +153,7 @@ class SoapBase extends MantisTestCase {
 	 * @return array an array of extra options to be passed to the SoapClient constructor
 	 */
 	protected function extraSoapClientFlags() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -219,12 +219,12 @@ class SoapBase extends MantisTestCase {
 		if( $p_suffix ) {
 			$t_summary .= '-' . $p_suffix;
 		}
-		return array(
+		return [
 			'summary' => $t_summary . ': test issue ' . rand( 1, 1000000 ),
 			'description' => 'description of test issue.',
-			'project' => array( 'id' => $this->getProjectId() ),
+			'project' => ['id' => $this->getProjectId()],
 			'category' => $this->getCategory()
-		);
+		];
 	}
 
 	/**
@@ -264,7 +264,7 @@ class SoapBase extends MantisTestCase {
 	protected function skipIfDueDateIsNotEnabled() {
 		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_view_threshold' ) > 90  ||
 			 $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_update_threshold' ) > 90 ) {
-			 	$this->markTestSkipped( 'Due date thresholds are too high.' );
+				$this->markTestSkipped( 'Due date thresholds are too high.' );
 			 }
 	}
 

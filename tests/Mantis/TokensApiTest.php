@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare( strict_types=1 );
 # MantisBT - A PHP based bugtracking system
 
 # MantisBT is free software: you can redistribute it and/or modify
@@ -35,7 +36,7 @@ final class TokensApiTest extends MantisCoreBase {
 
 	protected const UNKNOWN = -1; # a guaranteed unknown value for an owner, type, or id.
 	protected const KNOWN_OWNER = 1234;
-	
+
 	protected const ROW_ID = 0;
 	protected const ROW_OWNER = 1;
 	protected const ROW_TYPE = 2;
@@ -60,9 +61,9 @@ final class TokensApiTest extends MantisCoreBase {
 		# The order of the array keys must match the order of the rows in the database schema
 		$t_now = db_now();
 		$this->tokens = [
-			[ self::KNOWN_OWNER, TOKEN_USER, 'normal_user',  $t_now, $t_now + TOKEN_EXPIRY ],
-			[ self::KNOWN_OWNER, TOKEN_FILTER, 'expired_filter', $t_now, $t_now - 1 ],
-			[ self::KNOWN_OWNER, TOKEN_UNKNOWN, 'expired_unknown', $t_now, $t_now - 1 ],
+			[self::KNOWN_OWNER, TOKEN_USER, 'normal_user',  $t_now, $t_now + TOKEN_EXPIRY],
+			[self::KNOWN_OWNER, TOKEN_FILTER, 'expired_filter', $t_now, $t_now - 1],
+			[self::KNOWN_OWNER, TOKEN_UNKNOWN, 'expired_unknown', $t_now, $t_now - 1],
 		];
 
 		# Insert test tokens
@@ -71,7 +72,7 @@ final class TokensApiTest extends MantisCoreBase {
 			db_query( 'INSERT INTO {tokens} ( owner, type, value, timestamp, expiry ) VALUES ( '
 				. db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )'
 				, $t_token );
-			$t_token = array_merge( [ db_insert_id( db_get_table( 'tokens' ) ) ], $t_token );
+			$t_token = array_merge( [db_insert_id( db_get_table( 'tokens' ) )], $t_token );
 		}
 		unset( $t_token );
 	}
@@ -87,7 +88,7 @@ final class TokensApiTest extends MantisCoreBase {
 
 		foreach( $this->tokens as $t_token ) {
 			db_param_push();
-			db_query( 'DELETE FROM {tokens} WHERE id = '. db_param(), [ $t_token[self::ROW_ID] ] );
+			db_query( 'DELETE FROM {tokens} WHERE id = ' . db_param(), [$t_token[self::ROW_ID]] );
 		}
 	}
 
@@ -132,7 +133,7 @@ final class TokensApiTest extends MantisCoreBase {
 		# Cache positive result
 		$t_db_count = db_count_queries();
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
-		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );;
+		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );
 		$this->assertEquals( array_values( $this->tokens[0] ), array_values( $t_token ), 'The token must exist.' );
 		$this->assertTrue( $t_db_count == db_count_queries(), 'Existing token must be verified in the cache.' );
 
@@ -270,7 +271,7 @@ final class TokensApiTest extends MantisCoreBase {
 	public function testTokenDelete(): void {
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );
-		
+
 		token_delete( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 
 		$t_db_count = db_count_queries();
@@ -286,7 +287,7 @@ final class TokensApiTest extends MantisCoreBase {
 	public function testTokenDeleteByOwner(): void {
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );
-		
+
 		token_delete_by_owner( $this->tokens[0][self::ROW_OWNER] );
 
 		$t_db_count = db_count_queries();
@@ -302,7 +303,7 @@ final class TokensApiTest extends MantisCoreBase {
 	public function testTokenDeleteByType(): void {
 		$t_token = token_get( $this->tokens[0][self::ROW_TYPE], $this->tokens[0][self::ROW_OWNER] );
 		$this->assertArrayHasKey( 'id', $t_token, 'The token must exist.' );
-		
+
 		token_delete_by_type( $this->tokens[0][self::ROW_TYPE] );
 
 		$t_db_count = db_count_queries();
@@ -408,7 +409,7 @@ final class TokensApiTest extends MantisCoreBase {
 		$this->assertEquals( $t_token['value'], 'created', 'The created token value must be set.' );
 
 		# Cleanup
-		$this->tokens []= [ $t_id ];
+		$this->tokens []= [$t_id];
 	}
 
 	/**
@@ -447,6 +448,6 @@ final class TokensApiTest extends MantisCoreBase {
 		$this->assertEquals( $t_token['value'], 'set', 'The created token value must be set.' );
 
 		# Cleanup
-		$this->tokens []= [ $t_id ];
+		$this->tokens []= [$t_id];
 	}
 }

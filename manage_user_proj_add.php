@@ -32,7 +32,7 @@
  * @uses project_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -47,7 +47,7 @@ auth_reauthenticate();
 
 $f_user_id		= gpc_get_int( 'user_id' );
 $f_access_level	= gpc_get_int( 'access_level' );
-$f_project_id	= gpc_get_int_array( 'project_id', array() );
+$f_project_id	= gpc_get_int_array( 'project_id', [] );
 $t_manage_user_threshold = config_get( 'manage_user_threshold' );
 
 user_ensure_exists( $f_user_id );
@@ -55,13 +55,13 @@ user_ensure_exists( $f_user_id );
 foreach ( $f_project_id as $t_proj_id ) {
 	if( access_has_project_level( $t_manage_user_threshold, $t_proj_id ) &&
 		access_has_project_level( $f_access_level, $t_proj_id ) ) {
-		$t_data = array(
-			'payload' => array(
-				'project' => array( 'id' => $t_proj_id ),
-				'user' => array( 'id' => $f_user_id ),
-				'access_level' => array( 'id' => $f_access_level )
-			)
-		);
+		$t_data = [
+			'payload' => [
+				'project' => ['id' => $t_proj_id],
+				'user' => ['id' => $f_user_id],
+				'access_level' => ['id' => $f_access_level]
+			]
+		];
 
 		$t_command = new ProjectUsersAddCommand( $t_data );
 		$t_command->execute();

@@ -110,7 +110,7 @@ class ProfileData {
 			throw new ClientException(
 				"Profile #$p_profile_id not found",
 				ERROR_USER_PROFILE_NOT_FOUND,
-				array( $p_profile_id )
+				[$p_profile_id]
 			);
 		}
 
@@ -161,7 +161,7 @@ class ProfileData {
 		$t_user_id = $p_user_id === null ? auth_get_current_user_id() : $p_user_id;
 
 		# Global profile ?
-		if( $this->is_global()) {
+		if( $this->is_global() ) {
 			return access_has_global_level( config_get( 'manage_global_profile_threshold' ) );
 		}
 
@@ -294,25 +294,25 @@ function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_b
 
 	# platform cannot be blank
 	if( is_blank( $p_platform ) ) {
-		throw new ClientException( "platform is required",
+		throw new ClientException( 'platform is required',
 			ERROR_EMPTY_FIELD,
-			[ lang_get( 'platform' ) ]
+			[lang_get( 'platform' )]
 		);
 	}
 
 	# os cannot be blank
 	if( is_blank( $p_os ) ) {
-		throw new ClientException( "os is required",
+		throw new ClientException( 'os is required',
 			ERROR_EMPTY_FIELD,
-			[ lang_get( 'os' ) ]
+			[lang_get( 'os' )]
 		);
 	}
 
 	# os_build cannot be blank
 	if( is_blank( $p_os_build ) ) {
-		throw new ClientException( "version is required",
+		throw new ClientException( 'version is required',
 			ERROR_EMPTY_FIELD,
-			[ lang_get( 'version' ) ]
+			[lang_get( 'version' )]
 		);
 	}
 

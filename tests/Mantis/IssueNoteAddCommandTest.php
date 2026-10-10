@@ -70,7 +70,7 @@ class IssueNoteAddCommandTest extends MantisCoreBase {
 		try {
 			$t_email_count_before = count( email_queue_get_ids() );
 
-			$t_data = $this->buildCommandData( 'Note with mute=true', array( 'mute' => true ) );
+			$t_data = $this->buildCommandData( 'Note with mute=true', ['mute' => true] );
 			$t_command = new \IssueNoteAddCommand( $t_data );
 			$t_result = $t_command->execute();
 
@@ -98,7 +98,7 @@ class IssueNoteAddCommandTest extends MantisCoreBase {
 		try {
 			$t_email_count_before = count( email_queue_get_ids() );
 
-			$t_data = $this->buildCommandData( 'Note with mute=false', array( 'mute' => false ) );
+			$t_data = $this->buildCommandData( 'Note with mute=false', ['mute' => false] );
 			$t_command = new \IssueNoteAddCommand( $t_data );
 			$t_result = $t_command->execute();
 
@@ -150,11 +150,11 @@ class IssueNoteAddCommandTest extends MantisCoreBase {
 	 * @param array  $p_options Command options (e.g., mute).
 	 * @return array Command data array.
 	 */
-	private function buildCommandData( $p_text, array $p_options = array() ) {
-		$t_data = array(
-			'query' => array( 'issue_id' => $this->issueId ),
-			'payload' => array( 'text' => $p_text ),
-		);
+	private function buildCommandData( $p_text, array $p_options = [] ) {
+		$t_data = [
+			'query' => ['issue_id' => $this->issueId],
+			'payload' => ['text' => $p_text],
+		];
 
 		if( !empty( $p_options ) ) {
 			$t_data['options'] = $p_options;

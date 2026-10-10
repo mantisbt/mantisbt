@@ -41,7 +41,7 @@
  * @uses version_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
@@ -102,8 +102,8 @@ layout_page_begin();
 	<input type="hidden" name="view_type" value="<?php echo $t_filter['_view_type']; ?>" />
 	<?php
 		if( $f_for_screen == false ) {
-			print '<input type="hidden" name="print" value="1" />';
-			print '<input type="hidden" name="offset" value="0" />';
+			echo '<input type="hidden" name="print" value="1" />';
+			echo '<input type="hidden" name="offset" value="0" />';
 		}
 	?>
 
@@ -111,7 +111,7 @@ layout_page_begin();
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
-					<?php echo lang_get('filters') ?>
+					<?php echo lang_get( 'filters' ) ?>
 				</h4>
 
 				<div class="widget-toolbar">

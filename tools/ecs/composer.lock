@@ -1,0 +1,66 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "ba5389063973d23375e09abc99e75e7b",
+    "packages": [
+        {
+            "name": "symplify/easy-coding-standard",
+            "version": "13.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ecsphp/ecs.git",
+                "reference": "f672131b66a8482d8b68d9331c9a76fad2e9b424"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ecsphp/ecs/zipball/f672131b66a8482d8b68d9331c9a76fad2e9b424",
+                "reference": "f672131b66a8482d8b68d9331c9a76fad2e9b424",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "conflict": {
+                "friendsofphp/php-cs-fixer": "<3.95.20",
+                "phpcsstandards/php_codesniffer": "<4.0.4",
+                "symplify/coding-standard": "<13.0"
+            },
+            "bin": [
+                "bin/ecs"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer",
+            "keywords": [
+                "Code style",
+                "automation",
+                "fixer",
+                "static analysis"
+            ],
+            "support": {
+                "source": "https://github.com/ecsphp/ecs/tree/13.3.1"
+            },
+            "time": "2026-09-07T06:47:35+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
+}

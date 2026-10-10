@@ -32,7 +32,7 @@
  * @uses lang_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -52,12 +52,12 @@ if( gpc_isset( 'unlock' ) ) {
 	$f_action = UserResetPasswordCommand::RESET;
 }
 
-$t_data = array(
-	'query' => array(
+$t_data = [
+	'query' => [
 		'id' => $f_user_id,
 		'action' => $f_action
-	)
-);
+	]
+];
 
 $t_command = new UserResetPasswordCommand( $t_data );
 # The case of trying to reset a protected account now causes the Command to
@@ -73,7 +73,7 @@ layout_page_begin( 'manage_overview_page.php' );
 
 switch( $t_result['action'] ) {
 	case UserResetPasswordCommand::RESET:
-		if(    ( ON == config_get( 'send_reset_password' ) )
+		if( ( ON == config_get( 'send_reset_password' ) )
 			&& ( ON == config_get( 'enable_email_notification' ) )
 		) {
 			# Password reset confirmation sent by email

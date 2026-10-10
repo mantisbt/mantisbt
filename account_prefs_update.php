@@ -38,7 +38,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -87,9 +87,9 @@ if( lang_language_exists( $f_lang ) ) {
 }
 
 $f_font = gpc_get_string( 'font_family' );
-if( !in_array( $f_font, helper_get_font_list())) {
+if( !in_array( $f_font, helper_get_font_list() ) ) {
 	# This should not happen unless the form submission was tempered with
-	throw new ClientException( "Invalid font", ERROR_INVALID_FIELD_VALUE, ['font_family'] );
+	throw new ClientException( 'Invalid font', ERROR_INVALID_FIELD_VALUE, ['font_family'] );
 }
 if( config_get( 'font_family', null, $f_user_id, ALL_PROJECTS ) != $f_font ) {
 	config_set( 'font_family', $f_font, $f_user_id, ALL_PROJECTS );
@@ -126,7 +126,7 @@ if( config_get( $t_email_full_config_option, /* default */ null, $f_user_id, ALL
 
 # make sure the delay isn't too low
 if( ( config_get( 'min_refresh_delay' ) > $t_prefs->refresh_delay )&&
-	( $t_prefs->refresh_delay != 0 )) {
+	( $t_prefs->refresh_delay != 0 ) ) {
 	$t_prefs->refresh_delay = config_get( 'min_refresh_delay' );
 }
 
@@ -139,11 +139,10 @@ if( in_array( $f_timezone, timezone_identifiers_list() ) ) {
 	}
 }
 
-event_signal( 'EVENT_ACCOUNT_PREF_UPDATE', array( $f_user_id ) );
+event_signal( 'EVENT_ACCOUNT_PREF_UPDATE', [$f_user_id] );
 
 user_pref_set( $f_user_id, $t_prefs, ALL_PROJECTS );
 
 form_security_purge( 'account_prefs_update' );
 
 print_header_redirect( $f_redirect_url );
-

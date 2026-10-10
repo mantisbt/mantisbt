@@ -27,8 +27,7 @@ namespace Mantis\tests\rest;
 
 use Psr\Http\Message\ResponseInterface;
 
-class RestIssueUpdateCategory extends RestBase
-{
+class RestIssueUpdateCategory extends RestBase {
 	const CFG_ALLOW_NO_CAT = 'allow_no_category';
 
 	/**
@@ -48,14 +47,14 @@ class RestIssueUpdateCategory extends RestBase
 		$t_issue_to_add = $this->getIssueToAdd();
 		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
 		$this->issue_id = $this->getJson( $t_response, HTTP_STATUS_CREATED )->issue->id;
-		$this->deleteIssueAfterRun($this->issue_id	);
+		$this->deleteIssueAfterRun( $this->issue_id );
 	}
 
 	public function tearDown(): void {
 		parent::tearDown();
 
 		# Restore config if it has been changed
-		if( $this->save_config !== null) {
+		if( $this->save_config !== null ) {
 			$this->restoreConfig( self::CFG_ALLOW_NO_CAT, $this->save_config );
 		}
 	}
@@ -95,11 +94,11 @@ class RestIssueUpdateCategory extends RestBase
 	 * @param int      $p_status_code Expected status code.
 	 * @param int|null $p_expected_id Expected category id after update (null == unchanged).
 	 */
-	public function testUpdateIssueCategory1( $p_category, int $p_status_code, int $p_expected_id = null) {
+	public function testUpdateIssueCategory1( $p_category, int $p_status_code, int $p_expected_id = null ) {
 		$t_response = $this->updateCategory( $this->issue_id, $p_category );
 		$t_json = $this->getJson( $t_response, $p_status_code );
 		if( $t_response->getStatusCode() == HTTP_STATUS_SUCCESS ) {
-			$this->assertEquals( $p_expected_id, $t_json->issues[0]->category->id, "Updated category id does not match expected" );
+			$this->assertEquals( $p_expected_id, $t_json->issues[0]->category->id, 'Updated category id does not match expected' );
 		}
 	}
 
@@ -126,7 +125,7 @@ class RestIssueUpdateCategory extends RestBase
 
 			# By Name
 			[['name' => ''], HTTP_STATUS_NOT_FOUND],
-			[['name' => 'General' ], HTTP_STATUS_SUCCESS, 1],
+			[['name' => 'General'], HTTP_STATUS_SUCCESS, 1],
 			[['name' => 'Non-existing category'], HTTP_STATUS_NOT_FOUND],
 		];
 	}
@@ -140,7 +139,7 @@ class RestIssueUpdateCategory extends RestBase
 	public function testUpdateIssueCategory2() {
 		# Create a category for the tests
 		# Use Core API as we don't yet have a REST API endpoint for that (#32470)
-		$t_category_id = category_add($this->getProjectId(), $this->getUniqueCategoryName() );
+		$t_category_id = category_add( $this->getProjectId(), $this->getUniqueCategoryName() );
 		$t_category_name = category_get_name( $t_category_id );
 
 		# If payload is scalar then it is expected to be a category name, so passing the id should fail
@@ -155,7 +154,7 @@ class RestIssueUpdateCategory extends RestBase
 		foreach( $t_cases as $t_category ) {
 			$t_response = $this->updateCategory( $this->issue_id, $t_category );
 			$t_json = $this->getJson( $t_response );
-			$this->assertEquals( $t_category_id, $t_json->issues[0]->category->id, "Updated category matches" );
+			$this->assertEquals( $t_category_id, $t_json->issues[0]->category->id, 'Updated category matches' );
 		}
 
 		category_remove( $t_category_id );
@@ -172,7 +171,7 @@ class RestIssueUpdateCategory extends RestBase
 		# Test with mandatory category
 		$this->save_config = $this->setConfig( self::CFG_ALLOW_NO_CAT, OFF );
 
-		# Status code 
+		# Status code
 		if( $p_category === null
 			|| is_array( $p_category ) && (
 				array_key_exists( 'id', $p_category ) && $p_category['id'] === null
@@ -186,7 +185,7 @@ class RestIssueUpdateCategory extends RestBase
 		$t_response = $this->updateCategory( $this->issue_id, $p_category );
 		$this->assertEquals( $t_expected,
 			$t_response->getStatusCode(),
-			"REST API returned unexpected Status Code"
+			'REST API returned unexpected Status Code'
 		);
 
 		# Allowing empty category

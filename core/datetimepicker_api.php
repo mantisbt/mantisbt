@@ -42,9 +42,9 @@ require_api( 'string_api.php' );
 
 # Include Moment.js and Bootstrap DateTimePicker.js
 if( config_get_global( 'cdn_enabled' ) == ON ) {
-	require_css( [ 'https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css', DATETIME_PICKER_HASH_CSS ] );
-	require_js( [ 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH ] );
-	require_js( [ 'https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH_JS ] );
+	require_css( ['https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css', DATETIME_PICKER_HASH_CSS] );
+	require_js( ['https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH] );
+	require_js( ['https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH_JS] );
 } else {
 	require_css( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
 	require_js( 'moment-with-locales-' . MOMENT_VERSION . '.min.js' );
@@ -59,7 +59,7 @@ require_js( 'datetimepicker-proxy.js' );
  * @param string $p_format Time format, by default, the value from the $g_datetime_picker_format is used.
  * @return string Element to output.
  */
-function datetimepicker_get_field(string $p_date, string $p_id, string $p_format = '') {
+function datetimepicker_get_field( string $p_date, string $p_id, string $p_format = '' ) {
 	return '<input type="text" id="' . $p_id . '" name="' . $p_id . '"'
 		. ' class="datetimepicker input-sm" size="20" maxlength="20"'
 		. ' data-picker-locale="' . string_html_specialchars( lang_get_current_datetime_locale() ) . '"'
@@ -76,6 +76,6 @@ function datetimepicker_get_field(string $p_date, string $p_id, string $p_format
  * @param string $p_format Time format, by default, the value from the $g_datetime_picker_format is used.
  * @return void
  */
-function datetimepicker_print(string $p_date, string $p_id, string $p_format = '') {
+function datetimepicker_print( string $p_date, string $p_id, string $p_format = '' ) {
 	echo datetimepicker_get_field( $p_date, $p_id, $p_format );
 }

@@ -42,7 +42,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -80,12 +80,12 @@ if( !auth_signup_enabled() ) {
 
 if( ON == config_get( 'signup_use_captcha' )
 	&& get_gd_version()
-	&& helper_call_custom_function( 'auth_can_change_password', array() )
+	&& helper_call_custom_function( 'auth_can_change_password', [] )
 ) {
 	# captcha image requires GD library and related option to ON
 	$t_securimage = new Securimage();
 	if( !$t_securimage->check( $f_captcha ) ) {
-		throw new ClientException( "Captcha validation failure", ERROR_SIGNUP_NOT_MATCHING_CAPTCHA );
+		throw new ClientException( 'Captcha validation failure', ERROR_SIGNUP_NOT_MATCHING_CAPTCHA );
 	}
 }
 

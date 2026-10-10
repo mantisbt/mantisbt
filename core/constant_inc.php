@@ -40,7 +40,7 @@ define( 'WARN', 2 );
 #   there may be compatibility issues)
 # ¹ Enforced in core.php, MantisBT will halt if condition is not met.
 define( 'PHP_MIN_VERSION', '8.1.0' );
-//define( 'PHP_MAX_VERSION', '8.4.0' ); # Do not define (i.e. comment out) if there are no known restrictions
+// define( 'PHP_MAX_VERSION', '8.4.0' ); # Do not define (i.e. comment out) if there are no known restrictions
 define( 'PHP_SUPPORTED_VERSION', '8.5' ); # should be defined as X.Y (not X.Y.Z)
 
 # Other PHP-related constants
@@ -640,7 +640,7 @@ define( 'LINKS_SAME_WINDOW', 1 );
 define( 'LINKS_NEW_WINDOW', 2 );
 define( 'LINKS_NOOPENER', 4 );
 define( 'LINKS_NOREFERRER', 8 );
-define( 'LINKS_NOFOLLOW_EXTERNAL', 16);
+define( 'LINKS_NOFOLLOW_EXTERNAL', 16 );
 
 # Auth Related Constants
 define( 'API_TOKEN_LENGTH', 32 );

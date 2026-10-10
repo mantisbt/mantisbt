@@ -60,22 +60,22 @@
  *   parameter 'mbadmin=1' to the URL.
  */
 if( file_exists( 'mantis_offline.php' ) && !isset( $_GET['mbadmin'] ) ) {
-	include( 'mantis_offline.php' );
+	include 'mantis_offline.php';
 	exit;
 }
 
 $g_request_time = microtime( true );
 
 # Load supplied constants
-require_once( __DIR__ . '/core/constant_inc.php' );
+require_once __DIR__ . '/core/constant_inc.php';
 
 # Enforce our minimum PHP requirements
 if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
 	$C = 'constant';
 	$t_message = <<<MESSAGE
 		<h2>FATAL ERROR: Your version of PHP is too old</h2>
-		<p>MantisBT {$C('MANTIS_VERSION')} requires PHP {$C('PHP_MIN_VERSION')} or newer.</p>
-		You are running version <em>{$C('PHP_VERSION')}</em>.
+		<p>MantisBT {$C( 'MANTIS_VERSION' )} requires PHP {$C( 'PHP_MIN_VERSION' )} or newer.</p>
+		You are running version <em>{$C( 'PHP_VERSION' )}</em>.
 		Please upgrade to a newer version.
 		MESSAGE;
 	fatal_error( $t_message );
@@ -89,9 +89,9 @@ if( defined( 'PHP_MAX_VERSION' )
 
 	$C = 'constant';
 	$t_message = <<<MESSAGE
-		<h2>FATAL ERROR: MantisBT {$C('MANTIS_VERSION')} has known issues with PHP {$C('PHP_MAX_VERSION')} or later</strong></h2>
+		<h2>FATAL ERROR: MantisBT {$C( 'MANTIS_VERSION' )} has known issues with PHP {$C( 'PHP_MAX_VERSION' )} or later</strong></h2>
 		<p>Please refer to the <a href='$t_mantis_url'>bug tracker</a> for details.</p>
-		You are running PHP <em>{$C('PHP_VERSION')}</em>. 
+		You are running PHP <em>{$C( 'PHP_VERSION' )}</em>. 
 		Please downgrade to an earlier version.
 		MESSAGE;
 	fatal_error( $t_message );
@@ -107,21 +107,21 @@ if( php_sapi_name() != 'cli' ) {
 }
 
 # Load Composer autoloader
-require_once( __DIR__ . '/vendor/autoload.php' );
+require_once __DIR__ . '/vendor/autoload.php';
 
 # Include default configuration settings
-require_once( __DIR__ . '/config_defaults_inc.php' );
+require_once __DIR__ . '/config_defaults_inc.php';
 
 # Load user-defined constants (if required)
 global $g_config_path;
 if( file_exists( $g_config_path . 'custom_constants_inc.php' ) ) {
-	require_once( $g_config_path . 'custom_constants_inc.php' );
+	require_once $g_config_path . 'custom_constants_inc.php';
 }
 
 # config_inc may not be present if this is a new install
 $t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
 if( $t_config_inc_found ) {
-	require_once( $g_config_path . 'config_inc.php' );
+	require_once $g_config_path . 'config_inc.php';
 }
 
 # Set global path variables
@@ -255,7 +255,7 @@ if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 require_api( 'custom_function_api.php' );
 
 if( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
-	require_once( $g_config_path . 'custom_functions_inc.php' );
+	require_once $g_config_path . 'custom_functions_inc.php';
 }
 
 # Set HTTP response headers
@@ -281,12 +281,12 @@ function require_api( $p_api_name ) {
 	if( !isset( $s_api_included[$p_api_name] ) ) {
 		/** @noinspection PhpUnusedLocalVariableInspection */
 		$s_api_included[$p_api_name] = 1;
-		require_once( $g_core_path . $p_api_name );
+		require_once $g_core_path . $p_api_name;
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, [
-				't_new_globals' => 0,
-				'p_api_name' => 0,
-				's_api_included' => 0
-			] );
+			't_new_globals' => 0,
+			'p_api_name' => 0,
+			's_api_included' => 0
+		] );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}
@@ -307,16 +307,16 @@ function require_lib( $p_library_name ) {
 		$s_libraries_included[$p_library_name] = 1;
 		$t_library_file_path = $g_library_path . $p_library_name;
 		if( file_exists( $t_library_file_path ) ) {
-			require_once( $t_library_file_path );
+			require_once $t_library_file_path;
 		} else {
 			fatal_error( 'External library \'' . $t_library_file_path . '\' not found.' );
 		}
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, [
-				't_new_globals' => 0,
-				't_library_file_path' => 0,
-				'p_library_name' => 0,
-				's_libraries_included' => 0
-			] );
+			't_new_globals' => 0,
+			't_library_file_path' => 0,
+			'p_library_name' => 0,
+			's_libraries_included' => 0
+		] );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}
@@ -361,7 +361,7 @@ function set_default_path() {
 
 	# $_SERVER['SCRIPT_NAME'], does not contain an URL when running from CLI
 	# Do not set $g_path in this case.
-	if(php_sapi_name() == 'cli') {
+	if( php_sapi_name() == 'cli' ) {
 		return false;
 	}
 
@@ -374,7 +374,7 @@ function set_default_path() {
 		if( isset( $_SERVER['SERVER_PORT'] ) ) {
 			$t_port = ':' . $_SERVER['SERVER_PORT'];
 			if( ( ':80' == $t_port && 'http' == $t_protocol )
-				|| ( ':443' == $t_port && 'https' == $t_protocol )) {
+				|| ( ':443' == $t_port && 'https' == $t_protocol ) ) {
 				$t_port = '';
 			}
 		} else {
@@ -449,7 +449,7 @@ function autoload_mantis( $p_class ) {
 	if( substr( $p_class, -7 ) === 'Command' ) {
 		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
 		if( file_exists( $t_require_path ) ) {
-			require_once( $t_require_path );
+			require_once $t_require_path;
 			return;
 		}
 	}
@@ -458,7 +458,7 @@ function autoload_mantis( $p_class ) {
 	if( substr( $p_class, -9 ) === 'Exception' || substr( $p_class, -5 ) === 'Trait' ) {
 		$t_require_path = $g_core_path . 'exceptions/' . $p_class . '.php';
 		if( file_exists( $t_require_path ) ) {
-			require_once( $t_require_path );
+			require_once $t_require_path;
 			return;
 		}
 	}
@@ -469,14 +469,14 @@ function autoload_mantis( $p_class ) {
 	$t_require_path = $g_class_path . $p_class . '.class.php';
 
 	if( file_exists( $t_require_path ) ) {
-		require_once( $t_require_path );
+		require_once $t_require_path;
 		return;
 	}
 
 	$t_require_path = $g_library_path . 'rssbuilder/class.' . $p_class . '.inc.php';
 
 	if( file_exists( $t_require_path ) ) {
-		require_once( $t_require_path );
+		require_once $t_require_path;
 	}
 }
 

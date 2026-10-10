@@ -33,8 +33,7 @@ use stdClass;
  *
  * @group REST
  */
-class RestProjectTest extends RestBase
-{
+class RestProjectTest extends RestBase {
 	/**
 	 * @var string API Endpoint, should start with a '/'.
 	 */
@@ -146,12 +145,12 @@ class RestProjectTest extends RestBase
 		$t_data = ['name' => $t_name_with_blanks];
 		$t_response = $this->builder()->patch( $this->getEndpoint( $t_project->id ), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Update name should succeed similar to creation"
+			'Update name should succeed similar to creation'
 		);
 
 		$t_response = $this->builder()->get( $this->getEndpoint( $t_project->id ) )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Project not found"
+			'Project not found'
 		);
 
 		$t_project_info = json_decode( $t_response->getBody() )->projects[0];
@@ -167,7 +166,7 @@ class RestProjectTest extends RestBase
 		# Get the default project
 		$t_response = $this->builder()->get( $this->getEndpoint( $this->getProjectId() ) )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Project not found"
+			'Project not found'
 		);
 
 		# Get all projects
@@ -175,11 +174,11 @@ class RestProjectTest extends RestBase
 		$this->deleteProjectAfterRun( $t_project->id );
 		$t_response = $this->builder()->get( $this->getEndpoint() )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Failed to retrieve all projects"
+			'Failed to retrieve all projects'
 		);
 		$t_projects = json_decode( $t_response->getBody() )->projects;
-		$this->assertGreaterThanOrEqual(2, count( $t_projects ),
-			"Expected to retrieve at least 2 projects"
+		$this->assertGreaterThanOrEqual( 2, count( $t_projects ),
+			'Expected to retrieve at least 2 projects'
 		);
 
 		# Non-existing project
@@ -189,7 +188,7 @@ class RestProjectTest extends RestBase
 		}
 		$t_response = $this->builder()->get( $this->getEndpoint( $t_project_id ) )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Found a non-existing project !"
+			'Found a non-existing project !'
 		);
 	}
 
@@ -205,7 +204,7 @@ class RestProjectTest extends RestBase
 		# Project with same name
 		$t_response = $this->builder()->post( $this->endpoint, (array)$t_project )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Project with same name already exists"
+			'Project with same name already exists'
 		);
 
 		# Project without name
@@ -217,13 +216,13 @@ class RestProjectTest extends RestBase
 		# Delete project
 		$t_response = $this->builder()->delete( $this->getEndpoint( $t_project_id ) )->send();
 		$this->assertEquals( HTTP_STATUS_NO_CONTENT, $t_response->getStatusCode(),
-			"Project was not deleted"
+			'Project was not deleted'
 		);
 
 		# Try to delete it again (i.e. non-existing project)
 		$t_response = $this->builder()->delete( $this->getEndpoint( $t_project_id ) )->send();
 		$this->assertEquals( HTTP_STATUS_NOT_FOUND, $t_response->getStatusCode(),
-			"Deleting non-existing project should fail"
+			'Deleting non-existing project should fail'
 		);
 	}
 
@@ -238,25 +237,25 @@ class RestProjectTest extends RestBase
 
 		# Updating description
 		$t_data = [
-			'description' => "Updated project description " . rand( 1, 100000 )
+			'description' => 'Updated project description ' . rand( 1, 100000 )
 		];
 		$t_response = $this->builder()->patch( $this->getEndpoint( $t_project->id ), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode(),
-			"Failed updating project"
+			'Failed updating project'
 		);
 
 		# Changing project ID
 		$t_data = ['id' => $t_project->id + 1];
 		$t_response = $this->builder()->patch( $this->getEndpoint( $t_project->id ), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Changing project Id should not be allowed"
+			'Changing project Id should not be allowed'
 		);
 
 		# Empty project name
 		$t_data = ['name' => ''];
 		$t_response = $this->builder()->patch( $this->getEndpoint( $t_project->id ), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Empty project name should not be allowed"
+			'Empty project name should not be allowed'
 		);
 
 		# Existing project name
@@ -265,7 +264,7 @@ class RestProjectTest extends RestBase
 		$t_data = ['name' => $t_existing_project->name];
 		$t_response = $this->builder()->patch( $this->getEndpoint( $t_project->id ), $t_data )->send();
 		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
-			"Using same name as existing project should not be allowed"
+			'Using same name as existing project should not be allowed'
 		);
 	}
 

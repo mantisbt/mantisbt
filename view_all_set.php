@@ -43,7 +43,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -124,7 +124,7 @@ switch( $f_type ) {
 	# Apply a new empty filter
 	case FILTER_ACTION_RESET:
 		log_event( LOG_FILTERING, 'view_all_set.php: New filter' );
-		$t_setting_arr = array();
+		$t_setting_arr = [];
 		break;
 
 	# Read new filter parameters. (filter_gpc_get reads a new set of parameters)
@@ -151,7 +151,7 @@ switch( $f_type ) {
 			error_proceed_url( 'view_all_set.php?type=' . FILTER_ACTION_RESET );
 			throw new ClientException( "Filter '$f_source_query_id' not found",
 				ERROR_FILTER_NOT_FOUND,
-				[ $f_source_query_id ]
+				[$f_source_query_id]
 			);
 		} else {
 			$t_setting_arr['_source_query_id'] = $f_source_query_id;
@@ -162,24 +162,24 @@ switch( $f_type ) {
 	case FILTER_ACTION_GENERALIZE:
 		log_event( LOG_FILTERING, 'view_all_set.php: Generalise the filter' );
 
-		$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID]			= array( META_FILTER_ANY );
-		$t_setting_arr[FILTER_PROPERTY_REPORTER_ID] 		= array( META_FILTER_ANY );
-		$t_setting_arr[FILTER_PROPERTY_HANDLER_ID] 			= array( META_FILTER_ANY );
-		$t_setting_arr[FILTER_PROPERTY_BUILD] 				= array( META_FILTER_ANY );
-		$t_setting_arr[FILTER_PROPERTY_VERSION] 			= array( META_FILTER_ANY );
-		$t_setting_arr[FILTER_PROPERTY_PRIORITY]			= array( META_FILTER_ANY );
-		$t_setting_arr[FILTER_PROPERTY_FIXED_IN_VERSION]	= array( META_FILTER_ANY );
-		$t_setting_arr[FILTER_PROPERTY_TARGET_VERSION]		= array( META_FILTER_ANY );
-		$t_setting_arr[FILTER_PROPERTY_MONITOR_USER_ID] 	= array( META_FILTER_ANY );
-		$t_setting_arr[FILTER_PROPERTY_NOTE_USER_ID]  		= array( META_FILTER_ANY );
+		$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID]			= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_REPORTER_ID] 		= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_HANDLER_ID] 			= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_BUILD] 				= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_VERSION] 			= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_PRIORITY]			= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_FIXED_IN_VERSION]	= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_TARGET_VERSION]		= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_MONITOR_USER_ID] 	= [META_FILTER_ANY];
+		$t_setting_arr[FILTER_PROPERTY_NOTE_USER_ID]  		= [META_FILTER_ANY];
 		$t_setting_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] = -1;
 		$t_setting_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] 	= 0;
 
 		$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
-		$t_custom_fields_data 	= array();
+		$t_custom_fields_data 	= [];
 		if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 			foreach( $t_custom_fields as $t_cfid ) {
-				$t_custom_fields_data[$t_cfid] =  array( META_FILTER_ANY );
+				$t_custom_fields_data[$t_cfid] =  [META_FILTER_ANY];
 			}
 		}
 		$t_setting_arr['custom_fields'] = $t_custom_fields_data;

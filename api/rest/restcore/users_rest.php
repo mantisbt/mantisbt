@@ -27,7 +27,7 @@
 /**
  * @var \Slim\App $g_app
  */
-$g_app->group('/users', function() use ( $g_app ) {
+$g_app->group( '/users', function() use ( $g_app ) {
 	# These 4 cases are just to avoid html errors in case of incomplete urls
 	$g_app->get( '', 'rest_user_get' );
 	$g_app->get( '/', 'rest_user_get' );
@@ -58,7 +58,7 @@ $g_app->group('/users', function() use ( $g_app ) {
 	$g_app->delete( '/{id}/', 'rest_user_delete' );
 
 	$g_app->put( '/{id}/reset', 'rest_user_reset_password' );
-});
+} );
 
 /**
  * A method that does the work to get information about current logged in user.
@@ -85,15 +85,15 @@ function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 		$t_select = explode( ',', $t_select );
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'user_id' => auth_get_current_user_id(),
 			'select' => $t_select
-		),
-		'options' => array(
+		],
+		'options' => [
 			'return_as_users' => false
-		)
-	);
+		]
+	];
 
 	$t_command = new UserGetCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -111,7 +111,7 @@ function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_query = array();
+	$t_query = [];
 
 	$t_user_id = isset( $p_args['user_id'] ) ? $p_args['user_id'] : null;
 	if( !is_null( $t_user_id ) ) {
@@ -129,12 +129,12 @@ function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_re
 		$t_query['select'] = $t_select;
 	}
 
-	$t_data = array(
+	$t_data = [
 		'query' => $t_query,
-		'options' => array(
+		'options' => [
 			'return_as_users' => true
-		)
-	);
+		]
+	];
 
 	$t_command = new UserGetCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -156,16 +156,16 @@ function rest_user_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_re
 function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
 	}
 
-	$t_data = array( 'payload' => $t_payload );
+	$t_data = ['payload' => $t_payload];
 	$t_command = new UserCreateCommand( $t_data );
 	$t_result = $t_command->execute();
 	$t_user_id = $t_result['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "User created with id $t_user_id" )->
-		withJson( array( 'user' => mci_user_get( $t_user_id ) ) );
+		withJson( ['user' => mci_user_get( $t_user_id )] );
 }
 
 /**
@@ -180,7 +180,7 @@ function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @noinspection PhpUnusedParameterInspection
  */
 function rest_user_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_query = array();
+	$t_query = [];
 
 	$t_user_id = isset( $p_args['id'] ) ? $p_args['id'] : null;
 	if( !is_null( $t_user_id ) ) {
@@ -189,13 +189,13 @@ function rest_user_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
 	}
 
-	$t_data = array(
+	$t_data = [
 		'query' => $t_query,
 		'payload' => $t_payload
-	);
+	];
 
 	$t_command = new UserUpdateCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -251,20 +251,20 @@ function execute_create_token_command( \Slim\Http\Request $p_request, \Slim\Http
 	// if body is empty or {} it will fail, this is acceptable for this API.
 	$t_payload = $p_request->getParsedBody();
 	if( !$t_payload ) {
-		$t_payload = array();
+		$t_payload = [];
 	}
 
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'user_id' => (int)$p_user_id
-		),
+		],
 		'payload' => $t_payload
-	);
+	];
 
 	$t_command = new UserTokenCreateCommand( $t_data );
 	$t_result = $t_command->execute();
 
-	return $p_response->withStatus( HTTP_STATUS_CREATED, "User token created" )->
+	return $p_response->withStatus( HTTP_STATUS_CREATED, 'User token created' )->
 		withJson( $t_result );
 }
 
@@ -312,17 +312,17 @@ function rest_user_delete_token_for_current_user( \Slim\Http\Request $p_request,
  * @return \Slim\Http\Response The augmented response.
  */
 function execute_delete_token_command( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, $p_user_id, $p_token_id ) {
-	$t_data = array(
-		'query' => array(
+	$t_data = [
+		'query' => [
 			'id' => $p_token_id,
 			'user_id' => (int)$p_user_id
-		)
-	);
+		]
+	];
 
 	$t_command = new UserTokenDeleteCommand( $t_data );
 	$t_command->execute();
 
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "User token deleted" );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, 'User token deleted' );
 }
 
 /**
@@ -339,9 +339,9 @@ function execute_delete_token_command( \Slim\Http\Request $p_request, \Slim\Http
 function rest_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_user_id = $p_args['id'];
 
-	$t_data = array(
-		'query' => array( 'id' => $t_user_id )
-	);
+	$t_data = [
+		'query' => ['id' => $t_user_id]
+	];
 
 	$t_command = new UserDeleteCommand( $t_data );
 	$t_command->execute();
@@ -363,9 +363,9 @@ function rest_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 function rest_user_reset_password( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_user_id = $p_args['id'];
 
-	$t_data = array(
-		'query' => array( 'id' => $t_user_id )
-	);
+	$t_data = [
+		'query' => ['id' => $t_user_id]
+	];
 
 	$t_command = new UserResetPasswordCommand( $t_data );
 	$t_command->execute();

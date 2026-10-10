@@ -37,7 +37,7 @@ const DISABLE_INLINE_ERROR_REPORTING = true;
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
@@ -51,7 +51,7 @@ $t_regex = '/^'
 	# File must start with plugin name, ending with /
 	. '([a-zA-Z0-9_-]+)\/'
 	# Path must not start with a '.' to avoid arbitrary includes higher in the file system
-	. '('. '(?:(?:[a-zA-Z0-9_-][.a-zA-Z0-9_-]*\/)*)'
+	. '(' . '(?:(?:[a-zA-Z0-9_-][.a-zA-Z0-9_-]*\/)*)'
 	# Same goes for filename
 	. '(?:[a-zA-Z0-9_-][.a-zA-Z0-9_-]*)'
 	. ')$/';
@@ -59,7 +59,7 @@ $t_regex = '/^'
 if( !preg_match( $t_regex, $f_file, $t_matches ) ) {
 	throw new ClientException( "Invalid Plugin file '$f_file'",
 		ERROR_PLUGIN_INVALID_FILE,
-		[ $f_file ]
+		[$f_file]
 	);
 }
 

@@ -14,13 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as phpmailerException;
+use PHPMailer\PHPMailer\PHPMailer;
 
 /** @global PHPMailer $g_phpMailer Reusable PHPMailer object */
 $g_phpMailer = null;
 
-require_once( __DIR__ . '/EmailSender.class.php' );
+require_once __DIR__ . '/EmailSender.class.php';
 
 /**
  * An implementation that sends out emails using PhpMailer library.
@@ -145,8 +145,7 @@ class EmailSenderPhpMailer extends EmailSender {
 			foreach( $p_message->to as $t_recipient ) {
 				$t_mail->addAddress( $t_recipient );
 			}
-		}
-		catch ( phpmailerException $e ) {
+		} catch ( phpmailerException $e ) {
 			log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
 			self::reset( $t_mail );
 			return false;

@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 require_api( 'email_queue_api.php' );
-require_once( __DIR__ . '/EmailMessage.class.php' );
+require_once __DIR__ . '/EmailMessage.class.php';
 
 /**
  * The base class for email sender implementations.

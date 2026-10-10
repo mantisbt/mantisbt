@@ -37,7 +37,7 @@
  * @uses user_api.php
  */
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -86,7 +86,7 @@ print_summary_submenu();
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<?php print_icon( 'fa-bar-chart-o', 'ace-icon' ); ?>
-		<?php echo lang_get('summary_title') ?>
+		<?php echo lang_get( 'summary_title' ) ?>
 	</h4>
 </div>
 
@@ -165,7 +165,7 @@ print_summary_submenu();
 		<tr>
 			<td><?php echo lang_get( 'longest_open_bug' ) ?></td>
 			<td class="align-right"><?php
-				if( $t_time_stats['bug_id'] > 0 )  {
+				if( $t_time_stats['bug_id'] > 0 ) {
 					print_bug_link( $t_time_stats['bug_id'] );
 				}
 			?></td>

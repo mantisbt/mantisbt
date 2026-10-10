@@ -34,7 +34,7 @@ if( !defined( 'CHECK_CUSTOMFIELDS_INC_ALLOW' ) ) {
 }
 
 # MantisBT Check API
-require_once( 'check_api.php' );
+require_once 'check_api.php';
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 
@@ -61,7 +61,6 @@ class CustomFieldsChecks {
 	 * @var CustomFieldCheck[] Registered checks.
 	 */
 	private array $checks = [];
-
 
 	public function __construct() {
 		foreach( custom_field_get_ids() as $t_id ) {
@@ -125,7 +124,7 @@ abstract class CustomFieldCheck {
 
 	public function __construct() {
 		$t_cf_edit_page = helper_mantis_url( 'manage_custom_field_edit_page.php' );
-		$this->msg_edit_cf_link = '<a href="' . $t_cf_edit_page	.'?field_id=%d">Edit the Custom Field</a>';
+		$this->msg_edit_cf_link = '<a href="' . $t_cf_edit_page . '?field_id=%d">Edit the Custom Field</a>';
 	}
 
 	/**
@@ -147,7 +146,7 @@ abstract class CustomFieldCheck {
 	 */
 	public function execute( array $p_cfdef ) {
 		if( !$this->test( $p_cfdef, $t_result ) ) {
-			$this->results[$p_cfdef['name']] = array( $p_cfdef['id'], $t_result );
+			$this->results[$p_cfdef['name']] = [$p_cfdef['id'], $t_result];
 		}
 	}
 
@@ -174,15 +173,15 @@ abstract class CustomFieldCheck {
 		return $this->msg_pass;
 	}
 
-	public function getFailMessage(string $p_name): string {
+	public function getFailMessage( string $p_name ): string {
 		return $this->msg_fail;
 	}
 
-	public function getInfoMessage(string $p_name): string {
+	public function getInfoMessage( string $p_name ): string {
 		return $this->msg_info;
 	}
 
-	public function getEditLink(string $p_name): string {
+	public function getEditLink( string $p_name ): string {
 		return sprintf( $this->msg_edit_cf_link, $this->results[$p_name][0] );
 	}
 
@@ -191,8 +190,7 @@ abstract class CustomFieldCheck {
 /**
  * Checks for usage of curly brackets in Date Custom Fields default value.
  */
-class CheckDateDefaultWithBrackets extends CustomFieldCheck
-{
+class CheckDateDefaultWithBrackets extends CustomFieldCheck {
 	protected string $msg_pass = 'Deprecated usage of curly brackets in Date Custom Fields default value';
 	protected string $msg_fail = "Date Custom Field '%s' specifies its Default Value with deprecated curly brackets format.";
 	protected string $msg_info = "Use the same format, but without the '{}', i.e. '%s'. ";
@@ -207,7 +205,7 @@ class CheckDateDefaultWithBrackets extends CustomFieldCheck
 		 * @var int        $v_type
 		 * @var string|int $v_default_value
 		 */
-		extract( $p_cfdef, EXTR_PREFIX_ALL, 'v');
+		extract( $p_cfdef, EXTR_PREFIX_ALL, 'v' );
 
 		if( $v_type == CUSTOM_FIELD_TYPE_DATE
 			&& preg_match( '/^{(.*)}$/', $v_default_value, $t_matches )
@@ -218,11 +216,11 @@ class CheckDateDefaultWithBrackets extends CustomFieldCheck
 		return true;
 	}
 
-	public function getFailMessage(string $p_name): string {
+	public function getFailMessage( string $p_name ): string {
 		return sprintf( $this->msg_fail, $p_name );
 	}
 
-	public function getInfoMessage(string $p_name): string {
+	public function getInfoMessage( string $p_name ): string {
 		return sprintf( $this->msg_info, $this->results[$p_name][1] );
 	}
 
@@ -232,8 +230,7 @@ class CheckDateDefaultWithBrackets extends CustomFieldCheck
  * Checks if Textarea Custom Fields maximum length and default value are
  * bigger than $g_max_textarea_length.
  */
-class CheckTextareaMaxLength extends CustomFieldCheck
-{
+class CheckTextareaMaxLength extends CustomFieldCheck {
 	protected string $msg_pass = 'Maximum length and Default value of Textarea Custom Fields '
 		. 'are smaller than $g_max_textarea_length';
 
@@ -258,14 +255,14 @@ class CheckTextareaMaxLength extends CustomFieldCheck
 		 * @var int        $v_length_max
 		 * @var string     $v_default_value
 		 */
-		extract( $p_cfdef, EXTR_PREFIX_ALL, 'v');
+		extract( $p_cfdef, EXTR_PREFIX_ALL, 'v' );
 
 		if( $v_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
 			$t_fields = [];
 			if( $v_length_max > $this->max_textarea_length ) {
 				$t_fields[] = 'Maximum length';
 			}
-			if( strlen( $v_default_value) > $this->max_textarea_length ) {
+			if( strlen( $v_default_value ) > $this->max_textarea_length ) {
 				$t_fields[] = 'Default value';
 			}
 			if( $t_fields ) {
@@ -277,7 +274,7 @@ class CheckTextareaMaxLength extends CustomFieldCheck
 		return true;
 	}
 
-	public function getFailMessage(string $p_name): string {
+	public function getFailMessage( string $p_name ): string {
 		return sprintf( $this->msg_fail, $p_name, $this->results[$p_name][1] );
 	}
 

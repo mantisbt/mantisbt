@@ -41,7 +41,7 @@
 
 use Mantis\Exceptions\ClientException;
 
-require_once( 'core.php' );
+require_once 'core.php';
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -71,21 +71,21 @@ $f_edit_option          = gpc_get_string( 'config_option', null );
 $f_edit_action          = gpc_get_string( 'action', MANAGE_CONFIG_ACTION_VIEW );
 
 # Ensure we exclusively use one of the defined, valid actions (XSS protection)
-$t_valid_actions = array(
+$t_valid_actions = [
 	MANAGE_CONFIG_ACTION_CREATE,
 	MANAGE_CONFIG_ACTION_CLONE,
 	MANAGE_CONFIG_ACTION_EDIT,
 	MANAGE_CONFIG_ACTION_VIEW
-);
+];
 $t_edit_action = in_array( $f_edit_action, $t_valid_actions )
 	? $f_edit_action
 	: MANAGE_CONFIG_ACTION_CREATE;
 
 # if not creating a new option, the option name is required
 if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action && null == $f_edit_option ) {
-	throw new ClientException( "Option name is required",
+	throw new ClientException( 'Option name is required',
 		ERROR_EMPTY_FIELD,
-		[ 'config_option' ]
+		['config_option']
 	);
 }
 
@@ -104,18 +104,18 @@ $t_action_label = lang_get( 'set_configuration_option_action_' . $t_edit_action 
 if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 	# retrieve existing config data from database for this option
 	$t_query = new DbQuery( 'SELECT * FROM {config} WHERE config_id = :config AND user_id = :user AND project_id = :project' );
-	$t_query->bind_values(  array(
-			'config' => $f_edit_option,
-			'user' => $f_edit_user_id,
-			'project' => $f_edit_project_id
-		) );
+	$t_query->bind_values( [
+		'config' => $f_edit_option,
+		'user' => $f_edit_user_id,
+		'project' => $f_edit_project_id
+	] );
 	$t_config_row = $t_query->fetch();
 
 	if( !$t_config_row ) {
 		# this error will be triggered if the exact config combination does not exist in database
-		throw new ClientException( "Config option not found",
+		throw new ClientException( 'Config option not found',
 				ERROR_CONFIG_OPT_NOT_FOUND,
-				[ $f_edit_option ]
+				[$f_edit_option]
 		);
 	}
 	$t_option_user_id = (int)$t_config_row['user_id'];
@@ -137,9 +137,9 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 		# make sure that configuration option specified is a valid one.
 		$t_not_found_value = '***CONFIG OPTION NOT FOUND***';
 		if( config_get( $t_option_id, $t_not_found_value ) === $t_not_found_value ) {
-			throw new ClientException( "Config option not found",
+			throw new ClientException( 'Config option not found',
 				ERROR_CONFIG_OPT_NOT_FOUND,
-				[ $t_option_id ]
+				[$t_option_id]
 			);
 		}
 	}
@@ -151,7 +151,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 	<div class="space-10"></div>
 
 	<div id="config-edit-div">
-		<form id="config_set_form" method="post" action="<?php echo ( $t_modify? 'adm_config_set.php' : '' ) ?>">
+		<form id="config_set_form" method="post" action="<?php echo  $t_modify? 'adm_config_set.php' : ''  ?>">
 
 			<!-- Title -->
 			<div class="widget-box widget-color-blue2">
@@ -233,7 +233,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 					</td>
 					<td>
 						<?php
-                        $c_option_id = string_attribute( $t_option_id );
+						$c_option_id = string_attribute( $t_option_id );
 						if( $t_modify ) {
 						?>
 						<input type="text" id="config_option" name="config_option" class="input-sm"

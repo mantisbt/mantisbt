@@ -31,39 +31,39 @@ print_manage_menu( 'manage_plugin_page.php' );
 <table class="table table-bordered table-condensed table-striped">
 
 	<!-- Import Access Level  -->
-    <tr>
-        <td class="category">
-            <?php echo plugin_lang_get( 'import_threshold' ) ?>
-        </td>
-        <td>
-            <select id="import_threshold" name="import_threshold" class="input-sm"><?php
-                print_enum_string_option_list(
-                    'access_levels',
-                    plugin_config_get( 'import_threshold' )
-                );
-                ?></select>
-        </td>
-    </tr>
+	<tr>
+		<td class="category">
+			<?php echo plugin_lang_get( 'import_threshold' ) ?>
+		</td>
+		<td>
+			<select id="import_threshold" name="import_threshold" class="input-sm"><?php
+				print_enum_string_option_list(
+					'access_levels',
+					plugin_config_get( 'import_threshold' )
+				);
+				?></select>
+		</td>
+	</tr>
 	<!-- Export Access Level  -->
-    <tr>
-        <td class="category">
-            <?php echo plugin_lang_get( 'export_threshold' ) ?>
-        </td>
-        <td>
-            <select id="export_threshold" name="export_threshold" class="input-sm"><?php
-                print_enum_string_option_list(
-                    'access_levels',
-                    plugin_config_get( 'export_threshold' )
-                );
-                ?></select>
-        </td>
-    </tr>
+	<tr>
+		<td class="category">
+			<?php echo plugin_lang_get( 'export_threshold' ) ?>
+		</td>
+		<td>
+			<select id="export_threshold" name="export_threshold" class="input-sm"><?php
+				print_enum_string_option_list(
+					'access_levels',
+					plugin_config_get( 'export_threshold' )
+				);
+				?></select>
+		</td>
+	</tr>
 
 </table>
 </div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
-    <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo plugin_lang_get( 'action_update' ) ?>" />
+	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo plugin_lang_get( 'action_update' ) ?>" />
 </div>
 </div>
 </div>

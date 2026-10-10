@@ -40,7 +40,7 @@ class AttachmentTest extends SoapBase {
 	/**
 	 * @var array project attachments to delete after tests
 	 */
-	private $projectAttachmentsToDelete = array();
+	private $projectAttachmentsToDelete = [];
 
 	/**
 	 * A test case that tests the following:
@@ -56,7 +56,7 @@ class AttachmentTest extends SoapBase {
 
 		$t_attachment_contents = 'Attachment contents.';
 
-		$t_issue_id = $this->client->mc_issue_add(	$this->userName, $this->password, $t_issue_to_add );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
 		$this->deleteAfterRun( $t_issue_id );
 
@@ -78,7 +78,6 @@ class AttachmentTest extends SoapBase {
 			html_entity_decode( $t_issue->attachments[0]->download_url ) );
 		$this->assertEquals( $this->userId, $t_issue->attachments[0]->user_id );
 	}
-
 
 	/**
 	 * A test case that tests the following:
@@ -164,7 +163,7 @@ class AttachmentTest extends SoapBase {
 		# Find the attachment we just uploaded in the list
 		$t_key = array_search( $t_attachment_id, array_column( $t_attachments, 'id' ) );
 
-		$this->assertNotFalse( $t_key, "Test attachment not found" );
+		$this->assertNotFalse( $t_key, 'Test attachment not found' );
 		$t_attachment = $t_attachments[$t_key];
 
 		$this->assertEquals( $this->userId, $t_attachment->user_id, "Attachment's User Id should match current user" );

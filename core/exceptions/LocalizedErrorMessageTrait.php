@@ -19,8 +19,7 @@ namespace Mantis\Exceptions;
 /**
  * Error message localization Trait.
  */
-trait LocalizedErrorMessageTrait
-{
+trait LocalizedErrorMessageTrait {
 	/**
 	 * @var string Localized error message with placeholders filled in.
 	 */

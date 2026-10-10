@@ -31,7 +31,7 @@ set_time_limit( 0 );
 # config_inc.php hasn't been specified. Thus the database will not be opened
 # and plugins will not be loaded.
 const MANTIS_MAINTENANCE_MODE = true;
-require_once( dirname( __DIR__ ) . '/core.php' );
+require_once dirname( __DIR__ ) . '/core.php';
 
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
@@ -75,7 +75,6 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	echo "\n";
 }
 
-
 # Check database type before attempting to connect
 $t_db_type = config_get_global( 'db_type' );
 if( db_get_type( $t_db_type ) == DB_TYPE_UNDEFINED ) {
@@ -91,12 +90,12 @@ $t_db_password = config_get_global( 'db_password' );
 $t_database_name = config_get_global( 'database_name' );
 
 # Attempt to connect
-echo "Connecting to database... ";
+echo 'Connecting to database... ';
 $t_save = error_reporting( error_reporting() & ~E_USER_ERROR );
 $t_result = @db_connect( $t_dsn, $t_hostname, $t_db_username, $t_db_password, $t_database_name );
 if( !$t_result ) {
 	echo "FAILED\n";
-	echo "Error opening connection to database "
+	echo 'Error opening connection to database '
 		. "'$t_database_name' on host '$t_hostname' with username '$t_db_username':\n"
 		. db_error_msg() . "\n";
 	exit( 1 );
@@ -105,7 +104,7 @@ error_reporting( $t_save );
 echo "OK\n";
 
 # install the tables
-require_once( __DIR__ . '/schema.php' );
+require_once __DIR__ . '/schema.php';
 global $g_db, $g_upgrade;
 
 echo "\nPost 1.0 schema changes\n";
@@ -133,15 +132,15 @@ while( $i <= $t_last_id && !$g_failed ) {
 	if( $g_upgrade[$i][0] == 'InsertData' ) {
 		$t_sqlarray = call_user_func_array( $g_upgrade[$i][0], $g_upgrade[$i][1] );
 	} else if( $g_upgrade[$i][0] == 'UpdateSQL' ) {
-		$t_sqlarray = array(
+		$t_sqlarray = [
 			$g_upgrade[$i][1],
-		);
+		];
 
 		$t_target = $g_upgrade[$i][1];
 	} else if( $g_upgrade[$i][0] == 'UpdateFunction' ) {
-		$t_sqlarray = array(
+		$t_sqlarray = [
 			$g_upgrade[$i][1],
-		);
+		];
 
 		if( isset( $g_upgrade[$i][2] ) ) {
 			$t_sqlarray[] = $g_upgrade[$i][2];
@@ -153,12 +152,12 @@ while( $i <= $t_last_id && !$g_failed ) {
 		# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
 		if( isset( $g_upgrade[$i][2] ) ) {
 			if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
-				$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
+				$t_sqlarray = call_user_func_array( [$t_dict, $g_upgrade[$i][0]], $g_upgrade[$i][1] );
 			} else {
-				$t_sqlarray = array();
+				$t_sqlarray = [];
 			}
 		} else {
-			$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
+			$t_sqlarray = call_user_func_array( [$t_dict, $g_upgrade[$i][0]], $g_upgrade[$i][1] );
 		}
 	}
 

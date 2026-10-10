@@ -44,8 +44,8 @@ require_api( 'string_api.php' );
 
 # Include Dropzone.js
 if( config_get_global( 'cdn_enabled' ) == ON ) {
-	require_css( [ 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css' ] );
-	require_js( [ 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH ] );
+	require_css( ['https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css'] );
+	require_js( ['https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH] );
 } else {
 	require_css( 'dropzone-' . DROPZONE_VERSION . '.min.css' );
 	require_js( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
@@ -58,11 +58,11 @@ require_js( 'dropzone-proxy.js' );
  */
 function dropzone_print_form_data() {
 	echo 'data-force-fallback="' . ( config_get( 'dropzone_enabled' ) ? 'false' : 'true' ) . '"' . "\n";
-	echo "\t" . 'data-max-filesize-bytes="'. file_get_max_file_size() . '"' . "\n";
-	echo "\t" . 'data-max-filename-length="'. DB_FIELD_SIZE_FILENAME . '"' . "\n";
+	echo "\t" . 'data-max-filesize-bytes="' . file_get_max_file_size() . '"' . "\n";
+	echo "\t" . 'data-max-filename-length="' . DB_FIELD_SIZE_FILENAME . '"' . "\n";
 	$t_allowed_files = config_get( 'allowed_files' );
-	if ( !empty ( $t_allowed_files ) ) {
-		$t_allowed_files = '.' . implode ( ',.', explode ( ',', $t_allowed_files ) );
+	if ( !empty( $t_allowed_files ) ) {
+		$t_allowed_files = '.' . implode( ',.', explode( ',', $t_allowed_files ) );
 	}
 	echo "\t" . 'data-accepted-files="' . $t_allowed_files . '"' . "\n";
 	echo "\t" . 'data-default-message="' . string_html_specialchars( lang_get( 'dropzone_default_message' ) ) . '"' . "\n";
@@ -93,7 +93,7 @@ function dropzone_print_template() {
 			<div class="dz-filename"><span data-dz-name></span></div>
 			<img src="data:image/png;base64," alt="" data-dz-thumbnail>
 			<div class="dz-error-message">
-				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle') ?></span></div>
+				<div class="dz-error-mark"><span><?php print_icon( 'fa-times-circle' ) ?></span></div>
 				<span data-dz-errormessage></span>
 			</div>
 			<div class="dz-size" data-dz-size></div>

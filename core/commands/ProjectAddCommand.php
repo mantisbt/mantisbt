@@ -18,8 +18,8 @@ require_api( 'project_api.php' );
 
 global $g_absolute_path;
 $t_soap_dir = $g_absolute_path . 'api/soap/';
-require_once( $t_soap_dir . 'mc_api.php' );
-require_once( $t_soap_dir . 'mc_enum_api.php' );
+require_once $t_soap_dir . 'mc_api.php';
+require_once $t_soap_dir . 'mc_enum_api.php';
 
 use Mantis\Exceptions\ClientException;
 
@@ -95,7 +95,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Project name cannot be empty',
 				ERROR_EMPTY_FIELD,
-				array( 'name' )
+				['name']
 			);
 		}
 
@@ -113,7 +113,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Project name is not unique',
 				ERROR_PROJECT_NAME_NOT_UNIQUE,
-				array( 'name' )
+				['name']
 			);
 		}
 
@@ -122,7 +122,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Invalid project status',
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'status' )
+				['status']
 			);
 		}
 
@@ -130,7 +130,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Invalid project inherit global',
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'inherit_global' )
+				['inherit_global']
 			);
 		}
 
@@ -138,7 +138,7 @@ class ProjectAddCommand extends Command {
 			throw new ClientException(
 				'Invalid project enabled',
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'enabled' )
+				['enabled']
 			);
 		}
 	}
@@ -175,10 +175,10 @@ class ProjectAddCommand extends Command {
 		global $g_project_override;
 		$g_project_override = $t_project_id;
 
-		event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
+		event_signal( 'EVENT_MANAGE_PROJECT_CREATE', [$t_project_id] );
 
-		$t_result = array();
-		if( $this->option('return_project', false ) ) {
+		$t_result = [];
+		if( $this->option( 'return_project', false ) ) {
 			$t_lang = mci_get_user_lang( $t_user_id );
 			$t_result['project'] = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
 		} else {

@@ -35,7 +35,6 @@
  * @uses utility_api.php
  */
 
-use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\StateException;
 
 require_api( 'constant_inc.php' );
@@ -93,7 +92,7 @@ class Graph {
 	/**
 	 * @var array Attributes
 	 */
-	protected $attributes = array();
+	protected $attributes = [];
 
 	/**
 	 * @var array Default node attributes
@@ -108,12 +107,12 @@ class Graph {
 	/**
 	 * @var array Nodes
 	 */
-	protected $nodes = array();
+	protected $nodes = [];
 
 	/**
 	 * @var array Edges
 	 */
-	protected $edges = array();
+	protected $edges = [];
 
 	/**
 	 * @var string Graphviz tool
@@ -124,103 +123,103 @@ class Graph {
 	 * Graphviz output formats
 	 * @see https://graphviz.org/docs/outputs/
 	 */
-	protected $formats = array(
-		'dot' => array(
+	protected $formats = [
+		'dot' => [
 			'binary' => false,
 			'type' => self::GRAPHVIZ_ATTRIBUTED_DOT,
 			'mime' => 'text/x-graphviz',
-		),
-		'ps' => array(
+		],
+		'ps' => [
 			'binary' => false,
 			'type' => self::GRAPHVIZ_PS,
 			'mime' => 'application/postscript',
-		),
-		'hpgl' => array(
+		],
+		'hpgl' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_HPGL,
 			'mime' => 'application/vnd.hp-HPGL',
-		),
-		'pcl' => array(
+		],
+		'pcl' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_PCL,
 			'mime' => 'application/vnd.hp-PCL',
-		),
-		'mif' => array(
+		],
+		'mif' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_MIF,
 			'mime' => 'application/vnd.mif',
-		),
-		'gif' => array(
+		],
+		'gif' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_GIF,
 			'mime' => 'image/gif',
-		),
-		'jpg' => array(
+		],
+		'jpg' => [
 			'binary' => false,
 			'type' => self::GRAPHVIZ_JPEG,
 			'mime' => 'image/jpeg',
-		),
-		'jpeg' => array(
+		],
+		'jpeg' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_JPEG,
 			'mime' => 'image/jpeg',
-		),
-		'png' => array(
+		],
+		'png' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_PNG,
 			'mime' => 'image/png',
-		),
-		'wbmp' => array(
+		],
+		'wbmp' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_WBMP,
 			'mime' => 'image/vnd.wap.wbmp',
-		),
-		'xbm' => array(
+		],
+		'xbm' => [
 			'binary' => false,
 			'type' => self::GRAPHVIZ_XBM,
 			'mime' => 'image/x-xbitmap',
-		),
-		'ismap' => array(
+		],
+		'ismap' => [
 			'binary' => false,
 			'type' => self::GRAPHVIZ_ISMAP,
 			'mime' => 'text/plain',
-		),
-		'imap' => array(
+		],
+		'imap' => [
 			'binary' => false,
 			'type' => self::GRAPHVIZ_IMAP,
 			'mime' => 'application/x-httpd-imap',
-		),
-		'cmap' => array(
+		],
+		'cmap' => [
 			'binary' => false,
 			'type' => self::GRAPHVIZ_CMAP,
 			'mime' => 'text/html',
-		),
-		'cmapx' => array(
+		],
+		'cmapx' => [
 			'binary' => false,
 			'type' => self::GRAPHVIZ_CMAPX,
 			'mime' => 'application/xhtml+xml',
-		),
-		'vrml' => array(
+		],
+		'vrml' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_VRML,
 			'mime' => 'x-world/x-vrml',
-		),
-		'svg' => array(
+		],
+		'svg' => [
 			'binary' => false,
 			'type' => self::GRAPHVIZ_SVG,
 			'mime' => 'image/svg+xml',
-		),
-		'svgz' => array(
+		],
+		'svgz' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_SVGZ,
 			'mime' => 'image/svg+xml',
-		),
-		'pdf' => array(
+		],
+		'pdf' => [
 			'binary' => true,
 			'type' => self::GRAPHVIZ_PDF,
 			'mime' => 'application/pdf',
-		),
-	);
+		],
+	];
 
 	/**
 	 * Constructor for Graph objects.
@@ -229,7 +228,7 @@ class Graph {
 	 * @param array  $p_attributes Attributes
 	 * @param string $p_tool       Graph generation tool (one of the TOOL_* constants)
 	 */
-	public function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = Graph::TOOL_NEATO ) {
+	public function __construct( $p_name = 'G', array $p_attributes = [], $p_tool = Graph::TOOL_NEATO ) {
 		if( is_string( $p_name ) ) {
 			$this->name = $p_name;
 		}
@@ -284,7 +283,7 @@ class Graph {
 	 *
 	 * @return void
 	 */
-	public function add_node( $p_name, array $p_attributes = array() ) {
+	public function add_node( $p_name, array $p_attributes = [] ) {
 		if( is_array( $p_attributes ) ) {
 			$this->nodes[$p_name] = $p_attributes;
 		}
@@ -299,13 +298,13 @@ class Graph {
 	 *
 	 * @return void
 	 */
-	public function add_edge( $p_src, $p_dst, array $p_attributes = array() ) {
+	public function add_edge( $p_src, $p_dst, array $p_attributes = [] ) {
 		if( is_array( $p_attributes ) ) {
-			$this->edges[] = array(
+			$this->edges[] = [
 				'src' => $p_src,
 				'dst' => $p_dst,
 				'attributes' => $p_attributes,
-			);
+			];
 		}
 	}
 
@@ -378,7 +377,7 @@ class Graph {
 			throw new StateException(
 				"Graphviz tool '$t_tool_path' not found or not executable.",
 				ERROR_GRAPH_TOOL_NOT_FOUND,
-				[ $t_tool_path ]
+				[$t_tool_path]
 			);
 		}
 
@@ -390,23 +389,23 @@ class Graph {
 		# Start dot process
 		$t_command = escapeshellarg( $t_tool_path ) . ' -T' . $p_format;
 		$t_stderr = tempnam( sys_get_temp_dir(), 'graphviz' );
-		$t_descriptors = array(
-			0 => array( 'pipe', 'r', ),
-			1 => array( 'pipe', 'w', ),
+		$t_descriptors = [
+			0 => ['pipe', 'r', ],
+			1 => ['pipe', 'w', ],
 			# Writing to file instead of pipe to avoid locking issues
-			2 => array( 'file', $t_stderr, 'w', ),
-		);
+			2 => ['file', $t_stderr, 'w', ],
+		];
 
-		$t_pipes = array();
+		$t_pipes = [];
 		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes,
-			null, null, [ 'bypass_shell' => true ] );
+			null, null, ['bypass_shell' => true] );
 
 		if( !is_resource( $t_process ) ) {
 			# proc_open failed
 			throw new StateException(
 				"Graphviz tool '$t_tool_path' execution failed.",
 				ERROR_GRAPH_TOOL_NOT_FOUND,
-				[ $t_tool_path ]
+				[$t_tool_path]
 			);
 		}
 
@@ -419,7 +418,7 @@ class Graph {
 			throw new StateException(
 				"Errors during Graphviz execution: $t_error.",
 				ERROR_GENERIC,
-				[ $t_error ]
+				[$t_error]
 			);
 		}
 
@@ -460,7 +459,7 @@ class Graph {
 			return '';
 		}
 
-		$t_result = array();
+		$t_result = [];
 
 		foreach( $p_attributes as $t_name => $t_value ) {
 			if( !preg_match( '/[a-zA-Z]+/', $t_name ) ) {
@@ -471,7 +470,7 @@ class Graph {
 				if( $t_name == 'label' && $t_value != strip_tags( $t_value ) ) {
 					// It's an HTML-like label
 					// @see https://graphviz.org/doc/info/shapes.html#html
-					$t_value = '<' . $t_value. '>';
+					$t_value = '<' . $t_value . '>';
 				} else {
 					$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
 				}
@@ -539,7 +538,6 @@ class Graph {
 	}
 }
 
-
 /**
  * Directed graph creation and manipulation.
  */
@@ -552,7 +550,7 @@ class Digraph extends Graph {
 	 * @param array  $p_attributes Attributes.
 	 * @param string $p_tool       Graphviz tool.
 	 */
-	function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = 'dot' ) {
+	function __construct( $p_name = 'G', array $p_attributes = [], $p_tool = 'dot' ) {
 		parent::__construct( $p_name, $p_attributes, $p_tool );
 	}
 

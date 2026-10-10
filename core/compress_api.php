@@ -80,7 +80,7 @@ function compress_handler_is_enabled() {
 	}
 
 	# if php.ini does not already use ob_gzhandler by default, return true.
-	return ( 'ob_gzhandler' != ini_get( 'output_handler' ) );
+	return  'ob_gzhandler' != ini_get( 'output_handler' ) ;
 }
 
 /**
