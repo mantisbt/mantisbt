@@ -1,5 +1,4 @@
 <?php
-
 declare( strict_types=1 );
 # MantisBT - A PHP based bugtracking system
 

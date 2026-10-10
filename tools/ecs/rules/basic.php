@@ -5,7 +5,6 @@ declare ( strict_types=1 );
 namespace ECSPrefix202609;
 
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
-use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\LinebreakAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpTag\NoClosingTagFixer;
@@ -54,32 +53,8 @@ return ECSConfig::configure()
 		 * Ensure there is no code on the same line as the PHP open tag.
 		 *
 		 * @see https://cs.symfony.com/doc/rules/php_tag/linebreak_after_opening_tag.html
-		 *
-		 * @todo BlankLineAfterOpeningTagFixer or LinebreakAfterOpeningTagFixer
 		 */
-		// LinebreakAfterOpeningTagFixer::class,
-
-		/**
-		 * PHP tag: Blank line after opening tag
-		 *
-		 * Ensure there is no code on the same line as the PHP open tag,
-		 * and it is followed by a blank line.
-		 *
-		 * 	<input>
-		 * 	<?php $a = 1;
-		 * 	</input>
-		 *
-		 * 	<output>
-		 * 	<?php
-		 *
-		 * 	$a = 1;
-		 * 	</output>
-		 *
-		 * @see https://cs.symfony.com/doc/rules/php_tag/blank_line_after_opening_tag.html
-		 *
-		 * @todo BlankLineAfterOpeningTagFixer or LinebreakAfterOpeningTagFixer
-		 */
-		BlankLineAfterOpeningTagFixer::class,
+		LinebreakAfterOpeningTagFixer::class,
 
 		/**
 		 * PHP tag: No closing tag
