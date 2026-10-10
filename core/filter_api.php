@@ -1538,12 +1538,20 @@ function filter_cache_rows( array $p_filter_ids ) {
  * @return boolean
  */
 function filter_clear_cache( $p_filter_id = null ) {
-	global $g_cache_filter_db_rows;
+	global $g_cache_filter_db_rows, $g_cache_filter_project_current;
 
 	if( null === $p_filter_id ) {
 		$g_cache_filter_db_rows = array();
+		$g_cache_filter_project_current = array();
 	} else {
 		unset( $g_cache_filter_db_rows[(int)$p_filter_id] );
+		foreach( $g_cache_filter_project_current as $t_project_id => $t_user_filters ) {
+			foreach( $t_user_filters as $t_user_id => $t_current_filter_id ) {
+				if( $t_current_filter_id === (int)$p_filter_id ) {
+					unset( $g_cache_filter_project_current[$t_project_id][$t_user_id] );
+				}
+			}
+		}
 	}
 
 	return true;
@@ -1579,6 +1587,12 @@ function filter_db_update_filter( $p_filter_id, $p_filter_string, $p_project_id 
 	$t_query .= ' WHERE id=' . db_param();
 	$t_params[] = (int)$p_filter_id;
 	db_query( $t_query, $t_params );
+	if( null !== $p_project_id || null !== $p_name ) {
+		# The filter may have become (or ceased to be) a current filter.
+		filter_clear_cache();
+	} else {
+		filter_clear_cache( $p_filter_id );
+	}
 }
 
 /**
@@ -1602,6 +1616,7 @@ function filter_db_create_filter( $p_filter_string, $p_user_id, $p_project_id, $
 			. ' VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	$t_params = array( $c_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string );
 	db_query( $t_query, $t_params );
+	filter_clear_cache();
 
 	return db_insert_id( db_get_table( 'filters' ) );
 }
@@ -1704,8 +1719,9 @@ function filter_db_get_project_current( $p_project_id = null, $p_user_id = null 
 	$t_result = db_query( $t_query, array( $c_user_id, $t_filter_project_id, '' ) );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_filter_project_current[$c_project_id][$c_user_id] = $t_row['id'];
-		return $t_row['id'];
+		$t_filter_id = (int)$t_row['id'];
+		$g_cache_filter_project_current[$c_project_id][$c_user_id] = $t_filter_id;
+		return $t_filter_id;
 	}
 
 	$g_cache_filter_project_current[$c_project_id][$c_user_id] = false;
@@ -1774,6 +1790,7 @@ function filter_db_delete_filter( $p_filter_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 	db_query( $t_query, array( $c_filter_id ) );
+	filter_clear_cache( $c_filter_id );
 
 	return true;
 }
@@ -1788,6 +1805,7 @@ function filter_db_delete_current_filters() {
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE project_id<=' . db_param() . ' AND name=' . db_param();
 	db_query( $t_query, array( $t_all_id, '' ) );
+	filter_clear_cache();
 }
 
 /**
@@ -1809,6 +1827,7 @@ function filter_db_delete_user_filters( $p_user_id, $p_delete_shared = false ) {
 		$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param() . ' AND is_public=' . db_param();
 		db_query( $t_query, array( (int)$p_user_id, false ) );
 	}
+	filter_clear_cache();
 }
 
 /**
