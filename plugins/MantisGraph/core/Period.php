@@ -331,7 +331,7 @@ class Period {
 		$t_formatted_start = $this->get_start_formatted();
 		$t_formatted_end = $this->get_end_formatted();
 		$t_date_input_pattern = '<span class="inline"><label for="%1$s" class="padding-right-4">%2$s</label>%3$s</span>';
-		$t_from_date = sprintf( $t_date_input_pattern, 
+		$t_from_date = sprintf( $t_date_input_pattern,
 			'start_date',
 			lang_get( 'from_date' ),
 			datetimepicker_get_field( $t_formatted_start, 'start_date' )
