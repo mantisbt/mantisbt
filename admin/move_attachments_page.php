@@ -1,21 +1,18 @@
 <?php
+# MantisBT - a php based bugtracking system
 
-/*
- * MantisBT - A PHP based bugtracking system
- *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <https://www.gnu.org/licenses/>.
- */
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This upgrade moves attachments from the database to the disk
@@ -135,7 +132,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 			<th class="center">To Database</th>
 		</tr>
 	</thead>
-
+	
 <?php
 	echo '<tbody>';
 	# Printing rows of projects with attachments to move
@@ -203,7 +200,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 	echo '</tbody>';
 	echo form_security_field( 'move_attachments_project_select' );
 ?>
-
+	
 </table>
 <div class="widget-toolbox padding-8 clearfix">
 	<input name="type" type="hidden" value="<?php echo string_attribute( $f_file_type ); ?>" />

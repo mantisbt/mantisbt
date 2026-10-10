@@ -1,21 +1,18 @@
 <?php
+# MantisBT - A PHP based bugtracking system
 
-/*
- * MantisBT - A PHP based bugtracking system
- *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <https://www.gnu.org/licenses/>.
- */
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Summary API
@@ -139,15 +136,15 @@ function summary_helper_build_bugcount( &$p_cache, $p_key, $p_status, $p_bugcoun
 		}
 	}
 }
-/**
+/** 
  * Build bug links for 'open', 'resolved' and 'closed' issue counts
- *
+ * 
  * @param string $p_bug_link            The base bug link.
  * @param string &$p_bugs_open          The open bugs count, return open bugs link.
  * @param string &$p_bugs_resolved      The resolved bugs count, return resolved bugs link.
  * @param string &$p_bugs_closed        The closed bugs count, return closed bugs link.
  * @param string &$p_bugs_total         The total bugs count, return total bugs link.
- * @return void
+ * @return void 
  */
 function summary_helper_build_buglinks( $p_bug_link, &$p_bugs_open, &$p_bugs_resolved, &$p_bugs_closed, &$p_bugs_total ) {
 	$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
@@ -168,7 +165,7 @@ function summary_helper_build_buglinks( $p_bug_link, &$p_bugs_open, &$p_bugs_res
 }
 
 /**
- * Calculate bug ratio
+ * Calculate bug ratio 
  * @param integer $p_bugs_open            The open bugs count.
  * @param integer $p_bugs_resolved        The resolved bugs count.
  * @param integer $p_bugs_closed          The closed bugs count.
