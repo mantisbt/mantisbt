@@ -171,7 +171,7 @@ class MantisMarkdown extends Parsedown
 	 *
 	 * Original Parsedown only converts emails marked with < and >.
 	 *
-	 * @param array Data for the inline element
+	 * @param array $p_excerpt Data for the inline element
 	 *
 	 * @return array|void The email element data or nothing
 	 */
