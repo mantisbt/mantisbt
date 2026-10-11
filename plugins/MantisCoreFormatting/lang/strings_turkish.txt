@@ -40,6 +40,7 @@
  *
  * @author Andac
  * @author BaRaN6161 TURK
+ * @author Efygz
  * @author Korayal
  */
 
@@ -51,11 +52,16 @@ $s_plugin_format_process_text_warning_notice = 'Ne yaptığınızı gerçekten b
 $s_plugin_format_process_urls = 'URL İşleme';
 $s_plugin_format_process_buglinks = 'MantisBT iç bağlantıları (Sorunlar ve Sayı Notları)';
 $s_plugin_format_process_buglinks_info = 'Yapılandırmanız, <em>Sayı</em> etiketini "%s" ve <em>Sorun Notu</em> etiketini "%s" olarak tanımlar.';
-$s_plugin_format_process_markdown = 'Markdown İşlemi';
+$s_plugin_format_process_markdown = 'Markdown İşleme';
 $s_plugin_format_process_markdown_info = 'Markdown desteği ile stil, metin biçimlendirme sözdizimi, HTML\'ye çevrilebilecek şekilde tasarlanmıştır.';
 $s_plugin_format_enabled = 'Açık';
 $s_plugin_format_disabled = 'Kapalı';
+$s_plugin_format_syntax_highlighting = 'Kod blokları için sözdizim (syntax) vurgulama';
+$s_plugin_format_syntax_highlighting_info = 'Sözdizimi vurgulaması yalnızca "Markdown işleme" etkin olduğunda çalışır.';
+$s_plugin_format_syntax_highlighting_theme = 'Kod blokları için tema';
+$s_plugin_format_syntax_highlighting_plugins = 'Kod blokları için ayarlar';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Panoya kopyala';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_desc = 'Kod bloğunun içeriğini panoya kopyalamak için küçük bir düğme gösterir.';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Kopyala';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Kopyalandı';
 $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Kopyalamak için CTRL+C tuşlarına basın.';
@@ -63,4 +69,10 @@ $s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Dili göster';
 $s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Kod bloğunun hangi dili içerdiğini gösterir.';
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Satır numaraları';
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Satır numaralarını gösterir.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Boşlukları göster';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Boşlukları normalleştir';
+$s_plugin_format_syntax_highlighting_plugin_match_braces_name = 'Eşleşen sütunlar';
+$s_plugin_format_syntax_highlighting_plugin_diff_highlight_name = 'Farklılıkların (diff) genişletilmiş olarak vurgulanması';
 $s_plugin_format_syntax_highlighting_plugin_inline_color_name = 'CSS renklerini görselleştir';
+$s_plugin_format_syntax_highlighting_plugin_inline_color_desc = 'Renk tanımının önünde küçük, renkli bir kare gösterir (örneğin "#000" öncesinde).';
+$s_plugin_format_syntax_highlighting_plugin_previewers_name = 'Bazı CSS tanımları için önizleme araçları';
