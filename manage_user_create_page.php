@@ -100,7 +100,9 @@ print_manage_menu( 'manage_user_create_page.php' );
 				</td>
 			</tr><?php
 			}
-			if( OFF == config_get( 'send_reset_password' ) )  { ?>
+			if( LDAP != config_get_global( 'login_method' )
+				&& OFF == config_get( 'send_reset_password' )
+			) { ?>
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'password' ) ?>
