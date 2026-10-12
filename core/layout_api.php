@@ -93,6 +93,13 @@ function layout_page_header_begin( $p_page_title = '' ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
 
+	if( layout_sitemap_enabled() ) {
+		echo "\t",
+			'<link rel="sitemap" type="application/xml" title="Sitemap" ',
+			'href="', $t_path, 'sitemap.php', '">',
+			"\n";
+	}
+
 	# Advertise the availability of the browser search plug-ins.
 	$t_title = htmlspecialchars( config_get( 'search_title' ) );
 	if( !is_blank( $t_title ) ) {
@@ -256,6 +263,18 @@ function layout_admin_page_end() {
 function layout_is_rtl() {
 	if( lang_get( 'directionality' ) == 'rtl' ) {
 		return true;
+	}
+	return false;
+}
+
+/**
+ * Check if Sitemap enabled
+ * @return bool
+ */
+function layout_sitemap_enabled() {
+	if( auth_anonymous_enabled() ) {
+		$t_anonymous_user_id = user_get_id_by_name( auth_anonymous_account() );
+		return $t_anonymous_user_id && user_is_enabled( $t_anonymous_user_id );
 	}
 	return false;
 }
@@ -679,11 +698,11 @@ function layout_navbar_user_avatar( $p_img_class = 'nav' ) {
 }
 
 /**
- * Print sidebar
- * @param string $p_active_sidebar_page page where the displayed page lives under
- * @return void
+ * Get accessible sidebar items
+ *
+ * @return array containing sidebar items
  */
-function layout_print_sidebar( $p_active_sidebar_page = null ) {
+function layout_get_sidebar_items() {
 	if( auth_is_user_authenticated() ) {
 		$t_current_project = helper_get_current_project();
 
@@ -722,13 +741,12 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		);
 
 		# Report Bugs
-		if( access_has_any_project_level( 'report_bug_threshold' ) ) {
-			$t_sidebar_items[] = array(
-				'url' => string_get_bug_report_url(),
-				'title' => 'report_bug_link',
-				'icon' => 'fa-edit'
-			);
-		}
+		$t_sidebar_items[] = array(
+			'url' => string_get_bug_report_url(),
+			'title' => 'report_bug_link',
+			'icon' => 'fa-edit',
+			'access_level_any' => config_get( 'report_bug_threshold' ),
+		);
 
 		# Changelog Page
 		$t_sidebar_items[] = array(
@@ -783,11 +801,12 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Time Tracking / Billing
-		if( config_get( 'time_tracking_enabled' ) && access_has_project_level( config_get( 'time_tracking_reporting_threshold', $t_current_project ) ) ) {
+		if( ON == config_get( 'time_tracking_enabled' ) ) {
 			$t_sidebar_items[] = array(
 				'url' => 'billing_page.php',
 				'title' => 'time_tracking_billing_link',
 				'icon' => 'fa-clock-o',
+				'access_level' => config_get( 'time_tracking_reporting_threshold' ),
 			);
 		}
 
@@ -812,16 +831,38 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 			$t_sidebar_items = $t_modified_sidebar_items[0];
 		}
 
-		if( count( $t_sidebar_items ) > 0 ) {
-			# Starting sidebar markup
-			layout_sidebar_begin();
+		# Filter out inaccessible items
+		return array_filter( $t_sidebar_items, function( $p_item ) {
+			return isset( $p_item['url'] )
+				&& isset( $p_item['title'] )
+				&& ( !isset( $p_item['access_level'] )
+					|| access_has_project_level( $p_item['access_level'] ) )
+				&& ( !isset( $p_item['access_level_any'] )
+					|| access_has_any_project_level( $p_item['access_level_any'] ) );
+		} );
+	}
+	return [];
+}
 
-			# Output the sidebar items
-			layout_options_for_sidebar( $t_sidebar_items, $p_active_sidebar_page );
+/**
+ * Print sidebar
+ * @param string $p_active_sidebar_page page where the displayed page lives under
+ * @return void
+ */
+function layout_print_sidebar( $p_active_sidebar_page = null ) {
 
-			# Ending sidebar markup
-			layout_sidebar_end();
-		}
+	# Store all items in an array before outputting
+	$t_sidebar_items = layout_get_sidebar_items();
+
+	if( count( $t_sidebar_items ) > 0 ) {
+		# Starting sidebar markup
+		layout_sidebar_begin();
+
+		# Output the sidebar items
+		layout_options_for_sidebar( $t_sidebar_items, $p_active_sidebar_page );
+
+		# Ending sidebar markup
+		layout_sidebar_end();
 	}
 }
 
@@ -881,18 +922,11 @@ function layout_config_menu_options_for_sidebar( ) {
  */
 function layout_options_for_sidebar( $p_menu_options, $p_active_sidebar_page ) {
 	foreach( $p_menu_options as $t_menu_option ) {
-		$t_icon = isset( $t_menu_option['icon'] ) ? $t_menu_option['icon'] : 'fa-plug';
-		if( !isset( $t_menu_option['url'] ) || !isset( $t_menu_option['title'] ) ) {
-			continue;
-		}
-
-		if( isset( $t_menu_option['access_level'] ) ) {
-			if( !access_has_project_level( $t_menu_option['access_level'] ) ) {
-				continue;
-			}
-		}
-
-		layout_sidebar_menu( $t_menu_option['url'], $t_menu_option['title'], $t_icon, $p_active_sidebar_page );
+		layout_sidebar_menu(
+			$t_menu_option['url'],
+			$t_menu_option['title'],
+			$t_menu_option['icon'] ?? 'fa-plug',
+			$p_active_sidebar_page );
 	}
 }
 
