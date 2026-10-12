@@ -158,7 +158,10 @@ class BugFilterQuery extends DbQuery {
 	public function __construct( $p_filter, $p_config = self::QUERY_TYPE_LIST ) {
 		# defaults
 		$t_query_type = self::QUERY_TYPE_LIST;
-		$this->filter = $p_filter;
+		# Resolve any relative date descriptors into concrete date slots as of now,
+		# so the window slides on each run. Operates on this query's own copy; the
+		# saved filter keeps its descriptors.
+		$this->filter = filter_resolve_relative_dates( $p_filter );
 		$this->use_sticky = false;
 		$this->project_id = helper_get_current_project();
 		$this->user_id = auth_get_current_user_id();

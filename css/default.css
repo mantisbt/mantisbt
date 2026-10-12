@@ -66,7 +66,8 @@ tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%
 	white-space: nowrap;
 }
 
-.issue-status
+.issue-status,
+.relative-date
 {
 	border-bottom: 1px dotted black;
 }
