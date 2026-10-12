@@ -23,6 +23,14 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_bug_fixed_in_version_required</term>
+			<listitem>
+				<para>Allow to mark field 'fixed_in_version' as required in bug resolution.
+					Default value is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_bug_reopen_status</term>
 			<listitem>
 				<para>Status to assign to the bug when reopened. Default value is
