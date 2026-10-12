@@ -2301,6 +2301,46 @@ $g_dropzone_enabled = ON;
 $g_attachments_file_permissions = 0400;
 
 /**
+ * Number of levels of subdirectories used to store uploaded files on disk.
+ *
+ * With the default of 0, every attachment for a project is written directly
+ * into that project's upload directory. Installations accumulating large
+ * numbers of attachments can raise this to spread them across subdirectories
+ * named after the leading characters of the disk file name, which keeps
+ * directory listings small and lets incremental backup tools skip subtrees
+ * that have not changed.
+ *
+ * Each level consumes $g_file_upload_subdirectory_width characters, so a depth
+ * of 1 with the default width gives 256 directories ('00' to 'ff'), and a
+ * depth of 2 gives 65536 ('00/00' to 'ff/ff').
+ *
+ * This only affects newly uploaded files. Attachments already on disk stay
+ * where they are and keep working, because each one records its own location;
+ * see admin/move_attachments.php to relocate them.
+ *
+ * Disk file names are normally 32 character hashes, but an installation that
+ * has imported data from another tracker may hold other formats, such as
+ * UUIDs, which offer only 8 usable characters. A name too short to satisfy the
+ * requested depth is stored directly in the upload directory.
+ *
+ * @see $g_file_upload_subdirectory_width
+ *
+ * @global int $g_file_upload_subdirectory_depth
+ */
+$g_file_upload_subdirectory_depth = 0;
+
+/**
+ * Number of characters of the disk file name used for each subdirectory level.
+ *
+ * Has no effect unless $g_file_upload_subdirectory_depth is at least 1.
+ *
+ * @see $g_file_upload_subdirectory_depth
+ *
+ * @global int $g_file_upload_subdirectory_width
+ */
+$g_file_upload_subdirectory_width = 2;
+
+/**
  * Maximum file size that can be uploaded (in bytes).
  *
  * Defaults to 5 MiB. Also check your PHP settings for upload_max_filesize and
